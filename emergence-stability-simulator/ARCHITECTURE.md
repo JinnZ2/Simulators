@@ -36,19 +36,40 @@ parasitic_system = absent(physics_baseline)
 
 ```
 emergence-stability-simulator/
-├── sim_engine.py        # Core Monte Carlo + Agent class
-├── agent_variants.py    # Pre-built agent configurations
-├── analysis.py          # ASCII plots, statistics, reports
+├── sim_engine.py                # Core Monte Carlo + Agent class
+├── agent_variants.py            # Pre-built agent configurations
+├── sensitivity_analysis.py      # Parameter sweeps + SENS_* claims
+├── analysis.py                  # ASCII plots, statistics, reports
+├── run_monte_carlo.py           # End-to-end pipeline entry point
 ├── tests/
-│   └── test_agents.py   # Unit tests
-├── CLAIM_TABLE.json     # Generated falsifiable claims
-├── results/             # Output directory (Monte Carlo data)
-├── README.md            # Project overview
-├── GLOSSARY.md          # Substrate ↔ academic vocabulary
-├── ARCHITECTURE.md      # This file
-├── CITATION.cff         # Machine-readable citation
-└── metadata.json        # Structured semantic info
+│   ├── test_agents.py           # Agent + simulation invariants
+│   └── test_sensitivity_thresholds.py  # Sweep trends + claim shape
+├── CLAIM_TABLE.json             # Generated falsifiable claims
+├── results/                     # Output directory (gitignored)
+├── README.md                    # Project overview
+├── GLOSSARY.md                  # Substrate ↔ academic vocabulary
+├── ARCHITECTURE.md              # This file
+├── CITATION.cff                 # Machine-readable citation
+└── metadata.json                # Structured semantic info
 ```
+
+## Parameter sensitivity analysis
+
+`sensitivity_analysis.py` sweeps four parameters
+(`stable_recovery_rate`, `stable_coupling_susceptibility`,
+`parasitic_coupling_susceptibility`, `parasitic_adaptation_persistence`)
+across value ranges, running multiple simulations at each value. The
+output identifies:
+
+- bifurcation thresholds (where the system tips into chaos)
+- critical recovery rates (below which grounding loses its advantage)
+- the fraction of parameter space where grounding holds
+
+These results are written as `SENS_*` entries in `CLAIM_TABLE.json`,
+giving each falsifiable claim a measured outcome and explicit
+falsification criterion. The sensitivity analysis turns the project
+from "grounding wins" into "grounding wins in regime X for parameter Y
+above threshold Z" — a mechanistic, not just descriptive, finding.
 
 ## Key assumptions
 

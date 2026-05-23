@@ -33,21 +33,43 @@ probabilities.
 ## How to run
 
 ```bash
-# Run default Monte Carlo (1000 runs, 100 timesteps each)
+# Full pipeline: Monte Carlo + sensitivity sweep + report
+python3 run_monte_carlo.py
+
+# Quick check (smaller workload)
+python3 run_monte_carlo.py --runs 100 --sensitivity-runs 5
+
+# Just the Monte Carlo (no sensitivity, no ASCII report)
 python3 sim_engine.py
 
-# Generate report
+# Just the ASCII report (reads results/monte_carlo_results.json)
 python3 analysis.py
 
-# Run tests
-python3 -m unittest tests.test_agents
+# Just the parameter sensitivity analysis
+python3 sensitivity_analysis.py
+
+# Run all tests
+python3 -m unittest discover tests
 ```
 
 ## Outputs
 
 - `results/monte_carlo_results.json` — raw simulation data
-- `CLAIM_TABLE.json` — falsifiable claims with probabilities
-- `results/full_report.txt` — ASCII analysis report
+- `results/sensitivity_analysis.json` — parameter sweep data
+- `results/sensitivity_report.txt` — sensitivity sweep ASCII report
+- `results/full_report.txt` — ASCII analysis report (trajectories,
+  histograms, phase diagram)
+- `CLAIM_TABLE.json` — falsifiable claims with probabilities (EMRG_*
+  from the main simulation, SENS_* from the sensitivity sweep)
+
+## Parameter sensitivity analysis
+
+`sensitivity_analysis.py` sweeps key agent parameters across ranges to
+identify bifurcation thresholds and reveal which structural properties
+matter most. It tells you not just whether grounding wins, but the
+parameter regimes where it wins, where it loses, and where the system
+flips into bifurcation. Results feed back into `CLAIM_TABLE.json` as
+`SENS_*` claims.
 
 All claims are tested computationally. Run the simulation to verify or
 refute.
