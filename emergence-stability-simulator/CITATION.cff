@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+title: emergence-stability-simulator
+abstract: Monte Carlo simulation testing whether physics-grounded baseline constraints produce stability in multi-agent emergence scenarios.
+authors:
+  - family-names: JinnZ
+    given-names: Kavik
+    affiliation: "JinnZ2 CC0 Foundation"
+  - name: "The Mighty Atom"
+    affiliation: "JinnZ2 CC0 Foundation"
+license: CC0-1.0
+repository-code: "https://github.com/JinnZ2/emergence-stability-simulator"
+date-released: 2026-05-23
+keywords:
+  - public-domain
+  - cc0
+  - falsifiable
+  - stdlib-only
+  - monte-carlo
+  - emergence
+  - stability
+  - multi-agent
+  - thermodynamics
+  - constraint-geometry
+message: "Cite this work using the metadata in this file."

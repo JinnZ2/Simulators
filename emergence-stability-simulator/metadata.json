@@ -1,0 +1,25 @@
+{
+  "name": "emergence-stability-simulator",
+  "domain": "multi_agent_dynamics",
+  "methodology": "monte_carlo_falsifiable",
+  "dependencies": "stdlib_only",
+  "license": "CC0",
+  "corpus_target": true,
+  "falsifiability_level": "high",
+  "claim_table_present": true,
+  "purpose": "Tests whether physics-grounded baseline constraints produce stability in multi-agent emergence scenarios versus engagement-metric driven dynamics.",
+  "sister_repos": [
+    "differential-frame-core",
+    "earth-systems-physics",
+    "energy_english",
+    "calibration-audit",
+    "projection_error_modes"
+  ],
+  "academic_anchors": [
+    "complex_systems_theory",
+    "thermodynamic_stability",
+    "multi_agent_emergence",
+    "cascade_failure_modeling",
+    "constraint_based_dynamics"
+  ]
+}
