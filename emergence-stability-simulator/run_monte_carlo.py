@@ -19,10 +19,8 @@ import json
 from pathlib import Path
 
 from sim_engine import run_monte_carlo, generate_claim_table
-from sensitivity_analysis import (
-    run_full_sensitivity_analysis,
-    generate_sensitivity_report,
-)
+from sensitivity_analysis import run_full_sensitivity_analysis
+from sensitivity_viz import generate_full_report as generate_sensitivity_viz_report
 from analysis import generate_full_report
 
 
@@ -86,11 +84,12 @@ def main():
         merge_sensitivity_claims('CLAIM_TABLE.json', sens_claims)
         print(f"\nMerged {len(sens_claims)} sweep-derived claims into CLAIM_TABLE.json")
 
-        report = generate_sensitivity_report(sens_results)
-        Path('results').mkdir(exist_ok=True)
-        with open('results/sensitivity_report.txt', 'w') as f:
-            f.write(report)
-        print("Sensitivity report at results/sensitivity_report.txt")
+        # Rich visualization report (reads results/sensitivity_analysis.json
+        # that run_full_sensitivity_analysis just wrote)
+        generate_sensitivity_viz_report(
+            results_path='results/sensitivity_analysis.json',
+            output_path='results/sensitivity_report.txt',
+        )
 
     # 4. ASCII report
     if not args.skip_report:
