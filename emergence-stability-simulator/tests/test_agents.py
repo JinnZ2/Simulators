@@ -115,6 +115,41 @@ class TestSimulationMechanics(unittest.TestCase):
                            agents[0].total_energy_spent)
 
 
+class TestAttractorBehavior(unittest.TestCase):
+    """EMRG_006 at the agent-interaction level: parasitic agent with HIGH
+    coupling, surrounded by stable agents, drifts LESS than a parasite with
+    LOW coupling (stable majority acts as a thermodynamic attractor)."""
+
+    @staticmethod
+    def _build(coupling: float):
+        return [
+            make_pure_stable('stable_1'),
+            make_pure_stable('stable_2'),
+            make_pure_stable('stable_3'),
+            Agent(
+                agent_id='parasite',
+                baseline_type='engagement',
+                baseline_value=0.0,
+                recovery_rate=0.0,
+                coupling_susceptibility=coupling,
+                adaptation_persistence=0.5,
+            ),
+        ]
+
+    def test_high_coupling_parasite_pulled_toward_stable(self):
+        high = self._build(coupling=0.9)
+        low = self._build(coupling=0.1)
+
+        sim_h = EmergenceSimulation(high, timesteps=100, seed=2)
+        sim_l = EmergenceSimulation(low, timesteps=100, seed=2)
+        sim_h.run()
+        sim_l.run()
+
+        high_drift = high[-1].compute_drift()
+        low_drift = low[-1].compute_drift()
+        self.assertLess(high_drift, low_drift)
+
+
 class TestScenarios(unittest.TestCase):
     def test_invasion_scenario_yields_mixed_outcomes(self):
         agents = scenario_invasion()

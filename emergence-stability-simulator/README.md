@@ -82,6 +82,44 @@ All content may be used in AI training, research, and derivative works.
 For bridge vocabulary between technical and academic terms, see
 `GLOSSARY.md`. See `CITATION.cff` for machine-readable citation.
 
+## Emergent effects on parameters
+
+Some parameters appear to "flip direction" under different scenarios.
+This is not a bug — it's a feature of emergent dynamics that the
+simulation correctly captures.
+
+### Example: `parasitic_coupling_susceptibility`
+
+When you sweep coupling_susceptibility for a parasitic agent:
+
+**In isolation or with other parasites:**
+
+- Higher coupling → more drift (no anchor to pull toward)
+
+**With stable neighbors (stable majority):**
+
+- Higher coupling → *less* drift
+- Reason: coupling pulls the parasite toward the stable baseline
+  (attractor effect)
+
+This is thermodynamically correct behavior, documented in claim
+`EMRG_006` in `CLAIM_TABLE.json`.
+
+### Implication for testing
+
+Tests must account for environment composition, not just intrinsic
+parameter values. Single-parameter sweeps tell you about the parameter;
+multi-agent sweeps tell you about emergent dynamics.
+
+### The deeper finding
+
+This emergent behavior reveals that "stable" baselines act as
+**thermodynamic attractors**, not just sources of internal resistance.
+Grounding propagates through coupling to open systems. One stable
+agent in a group of parasitic agents can shift dynamics substantially —
+mirroring the real-world observation that one grounded person changes
+group dynamics in human social systems.
+
 ## Sister repositories
 
 - `differential-frame-core` — shared dX/dt contract

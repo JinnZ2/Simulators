@@ -1,0 +1,26 @@
+{
+  "name": "research-stability-audit",
+  "domain": "research_methodology",
+  "methodology": "falsifiable_audit_framework",
+  "dependencies": "stdlib_only",
+  "license": "CC0",
+  "corpus_target": true,
+  "falsifiability_level": "high",
+  "claim_table_present": true,
+  "purpose": "Framework for testing claims about research stability and AI model degradation through falsifiable, measurable hypotheses with bifurcation and cascade-risk scoring.",
+  "sister_repos": [
+    "emergence-stability-simulator",
+    "differential-frame-core",
+    "earth-systems-physics",
+    "energy_english",
+    "calibration-audit",
+    "projection_error_modes"
+  ],
+  "academic_anchors": [
+    "reproducibility_crisis",
+    "concept_drift",
+    "scientometrics",
+    "research_integrity",
+    "complex_systems_theory"
+  ]
+}

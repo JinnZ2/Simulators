@@ -12,6 +12,11 @@ Repository for different simulations and supporting tooling.
   Carlo test of stable vs. parasitic agent dynamics in multi-model
   emergence. Hypotheses, parameters, metrics, outputs, and a target repo
   structure live here.
+- `research-stability-audit/` — Falsifiable-claim framework for testing
+  research stability and AI model degradation. Six preset claims with
+  measurement methods, thresholds, and cross-references to the
+  emergence simulator's agent-level claims (same physics, different
+  scale).
 
 ## Working branch
 
