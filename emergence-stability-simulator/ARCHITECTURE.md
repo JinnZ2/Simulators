@@ -53,15 +53,43 @@ emergence-stability-simulator/
 └── metadata.json                # Structured semantic info
 ```
 
-## Cascade amplification metric
+## Cascade amplification measurement
 
-`Agent.cascade_amplifications` is a continuous accumulator, not a binary
-threshold counter. Each timestep it adds
-`|total_pressure| * coupling_susceptibility`, so the signal is
-well-defined even on short or low-perturbation runs (no threshold
-artifact). It captures how much external pressure an agent absorbs
-weighted by its reactivity, which is the structural quantity EMRG_003
-is asking about.
+### Design decision: continuous, not threshold-gated
+
+Cascade amplification is measured as **continuous accumulation**, not a
+threshold-gated count. The earlier threshold-gated implementation
+(`cascade += 1 if |pressure| > 0.5`) created measurement artifacts.
+
+### The problem with threshold-gating
+
+With default parameters:
+
+- `perturbation_strength = 0.3`
+- `coupling_susceptibility = 0.5` (stable) / `0.9` (parasitic)
+- `|total_pressure|` rarely exceeds the `0.5` threshold
+- Short runs: `cascade_amplifications` stays at `0`
+- Result: `EMRG_003` appeared falsely refuted on short runs
+
+### The solution
+
+Each timestep, every baseline type accumulates:
+
+```python
+cascade_increment = abs(total_pressure) * self.coupling_susceptibility * k
+self.cascade_amplifications += cascade_increment
+```
+
+with per-type scaling `k`:
+
+- `physics`: `k = 0.02` — stable agents damp incoming pressure
+- `engagement`: `k = 0.1` — parasitic agents amplify it into cascade
+- `hybrid`: `k = 0.05` — intermediate
+
+The signal is well-defined on short or low-perturbation runs (no
+threshold artifact) and captures the structural quantity `EMRG_003`
+asks about: how much external pressure an agent converts into onward
+cascade.
 
 ## Parameter sensitivity analysis
 

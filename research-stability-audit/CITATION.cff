@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+title: research-stability-audit
+abstract: Framework for testing claims about research stability and AI model degradation through falsifiable, measurable hypotheses with bifurcation and cascade-risk scoring.
+authors:
+  - family-names: JinnZ
+    given-names: Kavik
+    affiliation: "JinnZ2 CC0 Foundation"
+  - name: "The Mighty Atom"
+    affiliation: "JinnZ2 CC0 Foundation"
+license: CC0-1.0
+repository-code: "https://github.com/JinnZ2/research-stability-audit"
+date-released: 2026-05-24
+keywords:
+  - public-domain
+  - cc0
+  - falsifiable
+  - stdlib-only
+  - reproducibility
+  - model-drift
+  - cascade-detection
+  - bifurcation
+  - research-stability
+message: "Cite this work using the metadata in this file."

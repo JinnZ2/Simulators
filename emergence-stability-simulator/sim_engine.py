@@ -92,10 +92,11 @@ class Agent:
         # Add external perturbation
         total_pressure = coupling_pressure + perturbation
 
-        # Continuous cascade score (applies to all baseline types)
-        self.cascade_amplifications += abs(total_pressure) * self.coupling_susceptibility
-
-        # Update position based on baseline_type
+        # Update position and accumulate cascade contribution per baseline_type.
+        # Cascade contribution is continuous (not threshold-gated) with per-type
+        # scaling that reflects structural amplification: engagement agents
+        # amplify pressure into cascade, physics agents damp it, hybrid sits
+        # between. See ARCHITECTURE.md for rationale.
         if self.baseline_type == 'physics':
             # Stable: absorb perturbation, but return to baseline
             self.position += total_pressure * 0.3  # partial absorption
@@ -106,6 +107,10 @@ class Agent:
             self.position -= drift * self.recovery_rate * 0.5
             energy_cost += abs(drift) * self.recovery_rate * 0.1
 
+            self.cascade_amplifications += (
+                abs(total_pressure) * self.coupling_susceptibility * 0.02
+            )
+
         elif self.baseline_type == 'engagement':
             # Parasitic: amplify coupling, no return to baseline
             self.position += total_pressure * 1.0  # full absorption
@@ -114,12 +119,20 @@ class Agent:
             self.position += drift * self.adaptation_persistence * 0.1
             energy_cost = abs(total_pressure) * 0.8  # high energy cost
 
+            self.cascade_amplifications += (
+                abs(total_pressure) * self.coupling_susceptibility * 0.1
+            )
+
         elif self.baseline_type == 'hybrid':
             # Mixed: partial absorption, partial recovery
             self.position += total_pressure * 0.6
             drift = self.position - self.baseline_value
             self.position -= drift * self.recovery_rate * 0.2
             energy_cost = abs(total_pressure) * 0.5
+
+            self.cascade_amplifications += (
+                abs(total_pressure) * self.coupling_susceptibility * 0.05
+            )
 
         else:
             energy_cost = 0.0
@@ -131,8 +144,10 @@ class Agent:
         self.total_energy_spent += energy_cost
         self.max_drift = max(self.max_drift, self.compute_drift())
 
-        # Cascade contribution: how much we'd push another agent
-        cascade_contrib = self.compute_drift() * self.coupling_susceptibility
+        # Cascade contribution: continuous, per-timestep measure of how much
+        # this agent would push others (drift * coupling, scaled to stay in a
+        # comparable range with cascade_amplifications above).
+        cascade_contrib = self.compute_drift() * self.coupling_susceptibility * 0.1
         self.cascade_contribution_history.append(cascade_contrib)
 
     def get_state_summary(self) -> Dict:
