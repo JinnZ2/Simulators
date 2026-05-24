@@ -12,14 +12,23 @@ import unittest
 # Allow `python3 -m unittest tests.test_agents` from the repo root
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from sim_engine import Agent, EmergenceSimulation
+from sim_engine import (
+    Agent,
+    EmergenceSimulation,
+    run_mode_comparison,
+    generate_claim_table,
+)
 from agent_variants import (
     make_pure_stable,
     make_pure_parasitic,
     make_balanced_hybrid,
+    make_scale_builder,
+    make_inverted_narrative,
     scenario_invasion,
     scenario_parasitic_monoculture,
     scenario_diverse_stable_ecosystem,
+    scenario_substrate_plus_scale_builder,
+    scenario_substrate_plus_inverted,
 )
 
 
@@ -172,6 +181,146 @@ class TestScenarios(unittest.TestCase):
         results2 = sim2.run()
         self.assertGreaterEqual(results['max_system_entropy'],
                                 results2['max_system_entropy'])
+
+
+class TestScaleBuilderAgent(unittest.TestCase):
+    """EMRG_007: substrate-respecting narrative extends substrate stability."""
+
+    def test_emit_effects_boosts_neighbor_recovery_modifier(self):
+        sb = make_scale_builder()
+        stable = make_pure_stable()
+        # No emission before call
+        self.assertEqual(stable.recovery_modifier, 0.0)
+        sb.emit_effects_on_neighbors([stable])
+        self.assertGreater(stable.recovery_modifier, 0.0)
+
+    def test_scale_builder_outperforms_parasitic_for_substrate(self):
+        # Substrate + scale_builder should leave stable agent with
+        # lower drift than substrate + parasitic over many runs.
+        sb_drift_total = 0.0
+        para_drift_total = 0.0
+        runs = 30
+        for seed in range(runs):
+            agents = scenario_substrate_plus_scale_builder()
+            EmergenceSimulation(agents, timesteps=80, seed=seed).run()
+            sb_drift_total += next(a.compute_drift() for a in agents
+                                   if a.baseline_type == 'physics')
+
+            agents = [
+                Agent('stable', 'physics', 0.0, 0.7, 0.3, 0.1),
+                make_pure_parasitic(),
+            ]
+            EmergenceSimulation(agents, timesteps=80, seed=seed).run()
+            para_drift_total += next(a.compute_drift() for a in agents
+                                     if a.baseline_type == 'physics')
+
+        self.assertLess(sb_drift_total / runs, para_drift_total / runs)
+
+    def test_scale_builder_stays_anchored(self):
+        # scale_builder has its own baseline; should not run away even
+        # when paired with substrate.
+        sb_final_drifts = []
+        for seed in range(20):
+            agents = scenario_substrate_plus_scale_builder()
+            EmergenceSimulation(agents, timesteps=100, seed=seed).run()
+            sb = next(a for a in agents if a.baseline_type == 'scale_builder')
+            sb_final_drifts.append(sb.compute_drift())
+        avg = sum(sb_final_drifts) / len(sb_final_drifts)
+        self.assertLess(avg, 1.0)
+
+
+class TestInvertedNarrativeAgent(unittest.TestCase):
+    """EMRG_008: inverted-direction narrative collapses substrate."""
+
+    def test_emit_effects_subtracts_from_neighbor_recovery_modifier(self):
+        inv = make_inverted_narrative()
+        stable = make_pure_stable()
+        self.assertEqual(stable.recovery_modifier, 0.0)
+        inv.emit_effects_on_neighbors([stable])
+        self.assertLess(stable.recovery_modifier, 0.0)
+
+    def test_inverted_drives_substrate_to_collapse(self):
+        # In paired runs the substrate agent's drift should be
+        # dramatically higher with an inverted neighbor than alone.
+        with_inv = []
+        alone = []
+        for seed in range(15):
+            agents = scenario_substrate_plus_inverted()
+            EmergenceSimulation(agents, timesteps=80, seed=seed).run()
+            with_inv.append(next(a.compute_drift() for a in agents
+                                 if a.baseline_type == 'physics'))
+
+            agents = [Agent('stable', 'physics', 0.0, 0.7, 0.3, 0.1)]
+            EmergenceSimulation(agents, timesteps=80, seed=seed).run()
+            alone.append(agents[0].compute_drift())
+
+        self.assertGreater(sum(with_inv) / len(with_inv),
+                           sum(alone) / len(alone) * 10)
+
+    def test_inverted_drift_amplifies_in_own_direction(self):
+        # Authority claim: drift gains a positive-feedback push every
+        # step. After enough steps the agent has moved well off zero.
+        inv = make_inverted_narrative()
+        # Tiny initial push to break symmetry.
+        inv.position = 0.05
+        for _ in range(50):
+            inv.recovery_modifier = 0.0
+            inv.interact([], perturbation=0.0)
+        self.assertGreater(abs(inv.position), 0.5)
+
+
+class TestModeComparisonAndClaims(unittest.TestCase):
+    """End-to-end: mode comparison produces empirical EMRG_007/008."""
+
+    def test_run_mode_comparison_returns_four_scenarios(self):
+        results = run_mode_comparison(runs=10, timesteps=40,
+                                      output_path='/tmp/mc_test.json')
+        self.assertEqual(set(results.keys()), {
+            'substrate_only',
+            'substrate_plus_scale_builder',
+            'substrate_plus_inverted',
+            'substrate_plus_parasitic',
+        })
+        for v in results.values():
+            self.assertIn('avg_stable_drift', v)
+            self.assertIn('avg_final_entropy', v)
+            self.assertIn('avg_cumulative_cascade', v)
+
+    def test_generate_claim_table_emits_empirical_emrg_007_008(self):
+        # Run a tiny monte carlo to feed generate_claim_table.
+        from sim_engine import run_monte_carlo as rmc
+        agg = rmc(runs=5, timesteps=30, output_path='/tmp/mc_agg.json')
+        mode = run_mode_comparison(runs=10, timesteps=30,
+                                   output_path='/tmp/mc_modes.json')
+        original_cwd = os.getcwd()
+        try:
+            os.chdir('/tmp')
+            table = generate_claim_table(agg, mode_results=mode)
+        finally:
+            os.chdir(original_cwd)
+        by_id = {c['claim_id']: c for c in table['claims']}
+        self.assertIn('EMRG_007', by_id)
+        self.assertIn('EMRG_008', by_id)
+        self.assertIn('EMRG_009', by_id)
+        self.assertIn(by_id['EMRG_007']['status'],
+                      ('confirmed', 'refuted'))
+        self.assertIn(by_id['EMRG_008']['status'],
+                      ('confirmed', 'refuted'))
+        self.assertEqual(by_id['EMRG_009']['status'], 'proposed')
+        self.assertIn('measured_outcome', by_id['EMRG_007'])
+
+    def test_generate_claim_table_without_mode_keeps_proposed(self):
+        from sim_engine import run_monte_carlo as rmc
+        agg = rmc(runs=5, timesteps=30, output_path='/tmp/mc_agg2.json')
+        original_cwd = os.getcwd()
+        try:
+            os.chdir('/tmp')
+            table = generate_claim_table(agg)  # no mode_results
+        finally:
+            os.chdir(original_cwd)
+        by_id = {c['claim_id']: c for c in table['claims']}
+        self.assertEqual(by_id['EMRG_007']['status'], 'proposed')
+        self.assertEqual(by_id['EMRG_008']['status'], 'proposed')
 
 
 if __name__ == "__main__":

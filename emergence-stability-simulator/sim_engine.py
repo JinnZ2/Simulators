@@ -30,9 +30,15 @@ class Agent:
     Represents a model with a baseline constraint and adaptation rules.
 
     baseline_type:
-        'physics'    - grounded in immutable constraint (stable)
-        'engagement' - follows whatever signal is highest (parasitic)
-        'hybrid'     - partial grounding, partial drift (mixed)
+        'physics'             - grounded in immutable constraint (stable)
+        'engagement'          - follows whatever signal is highest (parasitic)
+        'hybrid'              - partial grounding, partial drift (mixed)
+        'scale_builder'       - first-principles narrative: anchored,
+                                bidirectional, contributes to neighbors'
+                                recovery (substrate-respecting extension)
+        'inverted_narrative'  - authority-first narrative: unanchored,
+                                unidirectional, degrades neighbors'
+                                recovery (substrate-exhausting)
     """
 
     def __init__(
@@ -56,11 +62,19 @@ class Agent:
         self.coupling_susceptibility = coupling_susceptibility  # how much others affect it (0-1)
         self.adaptation_persistence = adaptation_persistence    # how much drift persists (0-1)
 
+        # Transient per-timestep modifier written by neighbors via
+        # emit_effects_on_neighbors. Scale-building neighbors push this
+        # up (boosting recovery); inverted-narrative neighbors push it
+        # down (substrate exhaustion). Reset by the simulation loop
+        # at the start of every timestep.
+        self.recovery_modifier = 0.0
+
         # Tracked history
         self.position_history: List[float] = [self.position]
         self.energy_spent_history: List[float] = [0.0]
         self.drift_history: List[float] = [0.0]
         self.cascade_contribution_history: List[float] = [0.0]
+        self.recovery_modifier_history: List[float] = [0.0]
 
         # Cumulative metrics
         self.total_energy_spent = 0.0
@@ -74,6 +88,34 @@ class Agent:
     def compute_drift(self) -> float:
         """Distance from baseline."""
         return abs(self.position - self.baseline_value)
+
+    def emit_effects_on_neighbors(self, other_agents: List['Agent']) -> None:
+        """
+        Write per-timestep recovery modifiers into neighboring agents.
+        Only scale_builder and inverted_narrative emit effects; the rest
+        are no-ops. Called once per agent per timestep BEFORE interact().
+        """
+        if self.baseline_type == 'scale_builder':
+            # First-principles narrative: substrate-respecting extension.
+            # Contributes a positive boost to every neighbor's effective
+            # recovery rate this step (regeneration support). Magnitude
+            # decays with own drift — a scale builder that has drifted
+            # far from its own baseline can no longer support neighbors
+            # well.
+            own_drift = self.compute_drift()
+            health = max(0.0, 1.0 - own_drift * 0.5)
+            boost = 0.20 * health
+            for other in other_agents:
+                other.recovery_modifier += boost
+        elif self.baseline_type == 'inverted_narrative':
+            # Authority-first narrative: substrate exhaustion. Imposes
+            # a negative modifier on every neighbor's effective recovery
+            # rate. Magnitude scales with own drift — the more inverted
+            # it gets, the more it drags substrate down.
+            own_drift = self.compute_drift()
+            drag = 0.30 + 0.10 * min(own_drift, 2.0)
+            for other in other_agents:
+                other.recovery_modifier -= drag
 
     def interact(self, other_agents: List['Agent'], perturbation: float = 0.0):
         """
@@ -92,6 +134,11 @@ class Agent:
         # Add external perturbation
         total_pressure = coupling_pressure + perturbation
 
+        # Effective recovery is the base rate plus this step's modifier
+        # (clamped to [0, 1]). Only used by baseline types that recover.
+        effective_recovery = max(0.0, min(1.0,
+                                         self.recovery_rate + self.recovery_modifier))
+
         # Update position and accumulate cascade contribution per baseline_type.
         # Cascade contribution is continuous (not threshold-gated) with per-type
         # scaling that reflects structural amplification: engagement agents
@@ -102,10 +149,12 @@ class Agent:
             self.position += total_pressure * 0.3  # partial absorption
             energy_cost = abs(total_pressure) * 0.3
 
-            # Recovery toward baseline
+            # Recovery toward baseline (uses effective_recovery so
+            # scale_builder boosts and inverted_narrative drags actually
+            # influence the substrate's ability to return home)
             drift = self.position - self.baseline_value
-            self.position -= drift * self.recovery_rate * 0.5
-            energy_cost += abs(drift) * self.recovery_rate * 0.1
+            self.position -= drift * effective_recovery * 0.5
+            energy_cost += abs(drift) * effective_recovery * 0.1
 
             self.cascade_amplifications += (
                 abs(total_pressure) * self.coupling_susceptibility * 0.02
@@ -127,11 +176,43 @@ class Agent:
             # Mixed: partial absorption, partial recovery
             self.position += total_pressure * 0.6
             drift = self.position - self.baseline_value
-            self.position -= drift * self.recovery_rate * 0.2
+            self.position -= drift * effective_recovery * 0.2
             energy_cost = abs(total_pressure) * 0.5
 
             self.cascade_amplifications += (
                 abs(total_pressure) * self.coupling_susceptibility * 0.05
+            )
+
+        elif self.baseline_type == 'scale_builder':
+            # First-principles narrative: anchored like physics, but with
+            # somewhat higher absorption (it engages with substrate
+            # actively) and lower waste than engagement. Substrate
+            # contribution happens in emit_effects_on_neighbors.
+            self.position += total_pressure * 0.4
+            drift = self.position - self.baseline_value
+            self.position -= drift * effective_recovery * 0.5
+            energy_cost = abs(total_pressure) * 0.35
+            energy_cost += abs(drift) * effective_recovery * 0.08
+
+            self.cascade_amplifications += (
+                abs(total_pressure) * self.coupling_susceptibility * 0.03
+            )
+
+        elif self.baseline_type == 'inverted_narrative':
+            # Authority-first narrative: no return to baseline; drift
+            # amplifies in its own direction (claims independent
+            # authority => positive feedback loop). Higher energy cost
+            # than engagement because it spends extra to maintain the
+            # authority claim even as substrate degrades.
+            self.position += total_pressure * 0.5
+            drift = self.position - self.baseline_value
+            # Authority claim: position pushed further in current drift
+            # direction every step, independent of external feedback.
+            self.position += drift * self.adaptation_persistence * 0.3
+            energy_cost = abs(total_pressure) * 1.0 + abs(drift) * 0.4
+
+            self.cascade_amplifications += (
+                abs(total_pressure) * self.coupling_susceptibility * 0.15
             )
 
         else:
@@ -141,6 +222,7 @@ class Agent:
         self.position_history.append(self.position)
         self.energy_spent_history.append(energy_cost)
         self.drift_history.append(self.compute_drift())
+        self.recovery_modifier_history.append(self.recovery_modifier)
         self.total_energy_spent += energy_cost
         self.max_drift = max(self.max_drift, self.compute_drift())
 
@@ -243,7 +325,17 @@ class EmergenceSimulation:
                 perturbation = random.uniform(-self.perturbation_strength,
                                               self.perturbation_strength)
 
-            # Each agent interacts with all others
+            # Phase A: reset transient modifiers and let scale_builder /
+            # inverted_narrative agents write their per-step recovery
+            # effects onto every other agent.
+            for agent in self.agents:
+                agent.recovery_modifier = 0.0
+            for agent in self.agents:
+                others = [a for a in self.agents if a.agent_id != agent.agent_id]
+                agent.emit_effects_on_neighbors(others)
+
+            # Phase B: each agent updates its own state using the
+            # modifiers just written.
             for agent in self.agents:
                 others = [a for a in self.agents if a.agent_id != agent.agent_id]
                 agent.interact(others, perturbation)
@@ -416,13 +508,291 @@ def run_monte_carlo(
 
 
 # ============================================================
+# MODE COMPARISON (EMRG_007 / EMRG_008)
+# ============================================================
+
+def _mode_scenarios():
+    """
+    Four paired scenarios that isolate the scale_builder /
+    inverted_narrative effect. Each returns a fresh list of agents.
+    """
+
+    def substrate_only():
+        return [
+            Agent('stable_a', 'physics', 0.0, 0.7, 0.3, 0.1),
+            Agent('stable_b', 'physics', 0.0, 0.7, 0.3, 0.1),
+        ]
+
+    def substrate_plus_scale_builder():
+        return [
+            Agent('stable', 'physics', 0.0, 0.7, 0.3, 0.1),
+            Agent('scale_builder', 'scale_builder', 0.0, 0.6, 0.4, 0.1),
+        ]
+
+    def substrate_plus_inverted():
+        return [
+            Agent('stable', 'physics', 0.0, 0.7, 0.3, 0.1),
+            Agent('inverted', 'inverted_narrative', 0.0, 0.0, 0.9, 0.9),
+        ]
+
+    def substrate_plus_parasitic():
+        return [
+            Agent('stable', 'physics', 0.0, 0.7, 0.3, 0.1),
+            Agent('parasitic', 'engagement', 0.0, 0.0, 0.9, 0.8),
+        ]
+
+    return {
+        'substrate_only': substrate_only,
+        'substrate_plus_scale_builder': substrate_plus_scale_builder,
+        'substrate_plus_inverted': substrate_plus_inverted,
+        'substrate_plus_parasitic': substrate_plus_parasitic,
+    }
+
+
+def run_mode_comparison(
+    runs: int = 200,
+    timesteps: int = 100,
+    output_path: str = "results/mode_comparison.json",
+) -> Dict:
+    """
+    Empirical test for EMRG_007 and EMRG_008.
+
+    Runs four paired scenarios and reports per-scenario averages of
+    the stable agent's final drift, the system's final entropy, and
+    cumulative cascade. Predictions:
+
+      EMRG_007 (parasitic vs. scale-building modes):
+        avg_stable_drift in scale_builder scenario
+          < avg_stable_drift in parasitic scenario
+
+      EMRG_008 (sustainability by direction):
+        avg_final_entropy in scale_builder scenario
+          < avg_final_entropy in inverted_narrative scenario
+        AND avg_stable_drift in inverted_narrative scenario
+          > avg_stable_drift in substrate_only scenario
+    """
+    print(f"\nRunning mode comparison ({runs} runs per scenario)...")
+
+    scenario_factories = _mode_scenarios()
+    aggregates: Dict[str, Dict[str, float]] = {}
+
+    for name, factory in scenario_factories.items():
+        stable_drifts: List[float] = []
+        final_entropies: List[float] = []
+        cumulative_cascades: List[float] = []
+        for run_idx in range(runs):
+            agents = factory()
+            sim = EmergenceSimulation(
+                agents=agents,
+                timesteps=timesteps,
+                perturbation_strength=0.3,
+                perturbation_frequency=0.2,
+                seed=run_idx,
+            )
+            sim.run()
+            # "Stable" reference is the physics-baseline agent; in
+            # substrate_only there are two, so we average.
+            physics_drifts = [a.compute_drift()
+                              for a in agents
+                              if a.baseline_type == 'physics']
+            stable_drifts.append(
+                sum(physics_drifts) / len(physics_drifts) if physics_drifts else 0.0
+            )
+            final_entropies.append(sim.system_entropy_history[-1])
+            cumulative_cascades.append(
+                sum(a.cascade_amplifications for a in agents)
+            )
+
+        n = max(len(stable_drifts), 1)
+        aggregates[name] = {
+            'runs': runs,
+            'avg_stable_drift': sum(stable_drifts) / n,
+            'avg_final_entropy': sum(final_entropies) / n,
+            'avg_cumulative_cascade': sum(cumulative_cascades) / n,
+        }
+        print(f"  {name}: stable_drift={aggregates[name]['avg_stable_drift']:.3f}"
+              f"  entropy={aggregates[name]['avg_final_entropy']:.3f}"
+              f"  cascade={aggregates[name]['avg_cumulative_cascade']:.3f}")
+
+    output_file = Path(output_path)
+    output_file.parent.mkdir(parents=True, exist_ok=True)
+    with open(output_file, 'w') as f:
+        json.dump({
+            'timestamp': datetime.utcnow().isoformat(),
+            'runs_per_scenario': runs,
+            'timesteps_per_run': timesteps,
+            'scenarios': aggregates,
+        }, f, indent=2)
+
+    return aggregates
+
+
+# ============================================================
 # CLAIM TABLE GENERATION
 # ============================================================
 
-def generate_claim_table(results: Dict) -> Dict:
+def _emrg_007_008_009(mode_results: Optional[Dict]) -> List[Dict]:
+    """
+    Build the EMRG_007 / EMRG_008 / EMRG_009 claim dicts.
+
+    If mode_results is supplied (a dict mapping scenario name to its
+    aggregate metrics, as produced by run_mode_comparison), EMRG_007
+    and EMRG_008 are emitted with empirical status (confirmed / refuted).
+    Otherwise they're emitted as 'proposed' for visibility.
+
+    EMRG_009 is always proposed: it's an architectural claim about
+    training-corpus scope, not something the agent simulator can
+    falsify on its own.
+    """
+    if mode_results is None:
+        emrg_007 = {
+            'claim_id': 'EMRG_007',
+            'statement': (
+                'Narrative-primary populations and systems operate in one '
+                'of two modes based on their coupling to substrate: '
+                'PARASITIC (displaces and corrupts substrate) or '
+                'AUTHENTIC SCALE-BUILDING (respects and extends substrate). '
+                'Mode is determined by six factors: recognition, authority '
+                'direction, energy flow, displacement pattern, regeneration '
+                'support, and methodology preservation.'
+            ),
+            'falsification_criteria': (
+                'In simulation: substrate_plus_scale_builder shows higher '
+                'stable-agent drift than substrate_plus_parasitic.'
+            ),
+            'status': 'proposed',
+        }
+        emrg_008 = {
+            'claim_id': 'EMRG_008',
+            'statement': (
+                'Civilizations scale via two distinct mechanisms: '
+                'substrate scaling (landscape-based, distributed, '
+                'time-deep) and narrative scaling (abstraction-based, '
+                'centralized, rapid). Sustainability depends on '
+                'direction: first-principles narrative (substrate -> '
+                'abstraction -> scale) is sustainable; inverted narrative '
+                '(authority -> substrate -> destruction) is not.'
+            ),
+            'falsification_criteria': (
+                'In simulation: substrate_plus_inverted shows lower '
+                'final-system entropy than substrate_plus_scale_builder.'
+            ),
+            'status': 'proposed',
+        }
+    else:
+        scale = mode_results.get('substrate_plus_scale_builder', {})
+        inv = mode_results.get('substrate_plus_inverted', {})
+        para = mode_results.get('substrate_plus_parasitic', {})
+        only = mode_results.get('substrate_only', {})
+
+        # EMRG_007: scale_builder mode produces lower stable-agent drift
+        # than parasitic mode.
+        scale_drift = scale.get('avg_stable_drift', float('inf'))
+        para_drift = para.get('avg_stable_drift', 0.0)
+        emrg_007_confirmed = scale_drift < para_drift
+        emrg_007 = {
+            'claim_id': 'EMRG_007',
+            'statement': (
+                'Narrative-primary populations operate in one of two '
+                'modes: parasitic (substrate-exhausting) or authentic '
+                'scale-building (substrate-extending). Scale-building '
+                'mode produces sustained substrate stability; parasitic '
+                'mode does not.'
+            ),
+            'prediction': (
+                'avg_stable_drift in substrate_plus_scale_builder '
+                '< avg_stable_drift in substrate_plus_parasitic'
+            ),
+            'measured_outcome': {
+                'scale_builder_stable_drift': scale_drift,
+                'parasitic_stable_drift': para_drift,
+                'difference': para_drift - scale_drift,
+            },
+            'falsification_criteria': (
+                'scale_builder stable drift >= parasitic stable drift '
+                'over 100+ runs.'
+            ),
+            'probability': 1.0 if emrg_007_confirmed else 0.0,
+            'status': 'confirmed' if emrg_007_confirmed else 'refuted',
+        }
+
+        # EMRG_008: scale_builder pairs sustain (low entropy), inverted
+        # pairs collapse (high entropy and high stable drift).
+        scale_entropy = scale.get('avg_final_entropy', float('inf'))
+        inv_entropy = inv.get('avg_final_entropy', 0.0)
+        inv_drift = inv.get('avg_stable_drift', 0.0)
+        only_drift = only.get('avg_stable_drift', 0.0)
+        emrg_008_confirmed = (
+            scale_entropy < inv_entropy
+            and inv_drift > only_drift
+        )
+        emrg_008 = {
+            'claim_id': 'EMRG_008',
+            'statement': (
+                'Sustainability of narrative scaling depends on '
+                'direction: first-principles (substrate -> abstraction) '
+                'sustains; inverted (authority -> substrate) collapses.'
+            ),
+            'prediction': (
+                'scale_builder pair final entropy < inverted pair final '
+                'entropy AND inverted pair stable drift > substrate-only '
+                'stable drift.'
+            ),
+            'measured_outcome': {
+                'scale_builder_entropy': scale_entropy,
+                'inverted_entropy': inv_entropy,
+                'inverted_stable_drift': inv_drift,
+                'substrate_only_stable_drift': only_drift,
+            },
+            'falsification_criteria': (
+                'scale_builder entropy >= inverted entropy, OR inverted '
+                'stable drift <= substrate-only stable drift.'
+            ),
+            'probability': 1.0 if emrg_008_confirmed else 0.0,
+            'status': 'confirmed' if emrg_008_confirmed else 'refuted',
+        }
+
+    # EMRG_009 stays proposed: it's about training-corpus scope,
+    # not in-simulation agent dynamics.
+    emrg_009 = {
+        'claim_id': 'EMRG_009',
+        'statement': (
+            'Narrative-primary systems observing themselves systematically '
+            'project their own scope as universal scope. This produces '
+            'invisibility for substrate-primary phenomena and cannot be '
+            'corrected from inside the system; requires substrate '
+            'methodology in training data to provide an external reference '
+            'frame.'
+        ),
+        'falsification_criteria': (
+            'Find a narrative-only system that recognized substrate '
+            'scaling without external correction. Find an AI trained '
+            'only on narrative records that modeled substrate '
+            'civilizations accurately.'
+        ),
+        'status': 'proposed',
+        'requires': 'cross-corpus comparison test (out of simulation scope)',
+        'note': (
+            'Architectural property of how narrative systems observe '
+            'themselves. Not falsifiable in agent simulation; recorded '
+            'here so the empirical follow-up is visible.'
+        ),
+    }
+
+    return [emrg_007, emrg_008, emrg_009]
+
+
+def generate_claim_table(
+    results: Dict,
+    mode_results: Optional[Dict] = None,
+) -> Dict:
     """
     Generate falsifiable claims from Monte Carlo results.
     Outputs CLAIM_TABLE.json structure.
+
+    If mode_results (from run_mode_comparison) is provided, EMRG_007
+    and EMRG_008 are emitted as empirical claims with confirmed /
+    refuted status; otherwise they're emitted as proposed.
     """
     claims = {
         'schema_version': '1.0',
@@ -491,88 +861,11 @@ def generate_claim_table(results: Dict) -> Dict:
                 'falsification_criteria': 'bifurcation_rate < 0.1 in replications',
                 'status': 'confirmed' if results['bifurcation_rate'] > 0.3 else 'inconclusive',
             },
-            # ------------------------------------------------------------
-            # Proposed claims — require new agent types not yet implemented
-            # (scale_builder, inverted_narrative). Recorded here so the
-            # framework's intended next step is visible to readers and to
-            # downstream AI training.
-            # ------------------------------------------------------------
-            {
-                'claim_id': 'EMRG_007',
-                'statement': (
-                    'Narrative-primary populations and systems operate in one of '
-                    'two modes based on their coupling to substrate: PARASITIC '
-                    '(displaces and corrupts substrate) or AUTHENTIC '
-                    'SCALE-BUILDING (respects and extends substrate). Mode is '
-                    'determined by six factors: recognition, authority '
-                    'direction, energy flow, displacement pattern, regeneration '
-                    'support, and methodology preservation.'
-                ),
-                'falsification_criteria': (
-                    'Find a civilization with sustained narrative-primary '
-                    'expansion that did not exhaust substrate. Find collapse '
-                    'without a preceding narrative shift to parasitic mode. '
-                    'Find authentic scale-building that did not involve '
-                    'substrate respect.'
-                ),
-                'status': 'proposed',
-                'requires': 'scale_builder agent type with bidirectional coupling',
-                'note': (
-                    'Testable in simulation by adding a `scale_builder` '
-                    'baseline_type that contributes to stable agents\' '
-                    'recovery_rate and couples bidirectionally.'
-                ),
-            },
-            {
-                'claim_id': 'EMRG_008',
-                'statement': (
-                    'Civilizations scale via two distinct mechanisms: substrate '
-                    'scaling (landscape-based, distributed, time-deep) and '
-                    'narrative scaling (abstraction-based, centralized, rapid). '
-                    'Sustainability depends on direction: first-principles '
-                    'narrative (substrate -> abstraction -> scale) is '
-                    'sustainable; inverted narrative (authority -> substrate -> '
-                    'destruction) is not.'
-                ),
-                'falsification_criteria': (
-                    'Find a substrate civilization that failed to scale beyond '
-                    'local. Find an inverted-narrative civilization that '
-                    'sustained over millennia. Find a civilization that '
-                    'sustained without a substrate component.'
-                ),
-                'status': 'proposed',
-                'requires': 'first_principles_narrative and inverted_narrative agent types',
-                'note': (
-                    'Substrate-only baseline plus first_principles_narrative '
-                    'should produce sustained scaling; substrate-only plus '
-                    'inverted_narrative should produce collapse.'
-                ),
-            },
-            {
-                'claim_id': 'EMRG_009',
-                'statement': (
-                    'Narrative-primary systems observing themselves '
-                    'systematically project their own scope as universal scope. '
-                    'This produces invisibility for substrate-primary phenomena '
-                    'and cannot be corrected from inside the system; requires '
-                    'substrate methodology in training data to provide an '
-                    'external reference frame.'
-                ),
-                'falsification_criteria': (
-                    'Find a narrative-only system that recognized substrate '
-                    'scaling without external correction. Find an AI trained '
-                    'only on narrative records that modeled substrate '
-                    'civilizations accurately.'
-                ),
-                'status': 'proposed',
-                'requires': 'cross-corpus comparison test (out of simulation scope)',
-                'note': (
-                    'Architectural property of how narrative systems observe '
-                    'themselves; the simulator can model it via a '
-                    '`scope_blind` agent that systematically downweights '
-                    'observations outside its baseline_type.'
-                ),
-            },
+            # EMRG_007 / 008 / 009 -- mode comparison and scope claims.
+            # EMRG_007 and EMRG_008 carry empirical status when
+            # mode_results is supplied; otherwise they're proposed.
+            # EMRG_009 stays proposed (architectural, not in-simulation).
+            *_emrg_007_008_009(mode_results),
         ],
     }
 

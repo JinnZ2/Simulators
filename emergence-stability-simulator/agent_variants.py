@@ -110,6 +110,70 @@ def make_aggressive_parasitic(agent_id: str = 'parasitic_aggressive') -> Agent:
 
 
 # ============================================================
+# MODE VARIANTS (EMRG_007 / EMRG_008)
+# (test: scale_builder vs. inverted_narrative coupling)
+# ============================================================
+
+def make_scale_builder(agent_id: str = 'scale_builder') -> Agent:
+    """
+    First-principles narrative: anchored like physics, contributes to
+    neighbors' recovery via emit_effects_on_neighbors. Represents
+    substrate-respecting abstraction (Cherokee syllabary, Inca quipu,
+    Polynesian navigation charts).
+    """
+    return Agent(
+        agent_id=agent_id,
+        baseline_type='scale_builder',
+        baseline_value=0.0,
+        recovery_rate=0.6,
+        coupling_susceptibility=0.4,
+        adaptation_persistence=0.1,
+    )
+
+
+def make_inverted_narrative(agent_id: str = 'inverted_narrative') -> Agent:
+    """
+    Authority-first narrative: no baseline grounding, drift amplifies
+    in its own direction, and emit_effects_on_neighbors degrades every
+    neighbor's recovery. Represents inverted-direction narrative
+    (theory-demands-substrate-conform mode).
+    """
+    return Agent(
+        agent_id=agent_id,
+        baseline_type='inverted_narrative',
+        baseline_value=0.0,
+        recovery_rate=0.0,
+        coupling_susceptibility=0.9,
+        adaptation_persistence=0.9,
+    )
+
+
+def scenario_substrate_plus_scale_builder() -> list:
+    """One physics-baseline + one scale_builder. Predicted sustainable."""
+    return [
+        Agent('stable', 'physics', 0.0, 0.7, 0.3, 0.1),
+        make_scale_builder(),
+    ]
+
+
+def scenario_substrate_plus_inverted() -> list:
+    """One physics-baseline + one inverted_narrative. Predicted collapse."""
+    return [
+        Agent('stable', 'physics', 0.0, 0.7, 0.3, 0.1),
+        make_inverted_narrative(),
+    ]
+
+
+def scenario_three_mode_competition() -> list:
+    """Physics + scale_builder + inverted: three-way mode test."""
+    return [
+        Agent('stable', 'physics', 0.0, 0.7, 0.3, 0.1),
+        make_scale_builder(),
+        make_inverted_narrative(),
+    ]
+
+
+# ============================================================
 # DIVERSE BASELINE VARIANTS
 # (test: what if agents have different baselines?)
 # ============================================================
@@ -243,6 +307,9 @@ SCENARIOS = {
     'parasitic_monoculture': scenario_parasitic_monoculture,
     'invasion': scenario_invasion,
     'gradient': scenario_gradient,
+    'substrate_plus_scale_builder': scenario_substrate_plus_scale_builder,
+    'substrate_plus_inverted': scenario_substrate_plus_inverted,
+    'three_mode_competition': scenario_three_mode_competition,
 }
 
 

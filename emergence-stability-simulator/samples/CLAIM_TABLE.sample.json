@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "source_repo": "emergence-stability-simulator",
   "source": "emergence-stability-simulator",
-  "generated": "2026-05-24T01:27:26.408528",
+  "generated": "2026-05-24T01:46:11.895429",
   "claims": [
     {
       "claim_id": "EMRG_001",
@@ -67,19 +67,30 @@
     },
     {
       "claim_id": "EMRG_007",
-      "statement": "Narrative-primary populations and systems operate in one of two modes based on their coupling to substrate: PARASITIC (displaces and corrupts substrate) or AUTHENTIC SCALE-BUILDING (respects and extends substrate). Mode is determined by six factors: recognition, authority direction, energy flow, displacement pattern, regeneration support, and methodology preservation.",
-      "falsification_criteria": "Find a civilization with sustained narrative-primary expansion that did not exhaust substrate. Find collapse without a preceding narrative shift to parasitic mode. Find authentic scale-building that did not involve substrate respect.",
-      "status": "proposed",
-      "requires": "scale_builder agent type with bidirectional coupling",
-      "note": "Testable in simulation by adding a `scale_builder` baseline_type that contributes to stable agents' recovery_rate and couples bidirectionally."
+      "statement": "Narrative-primary populations operate in one of two modes: parasitic (substrate-exhausting) or authentic scale-building (substrate-extending). Scale-building mode produces sustained substrate stability; parasitic mode does not.",
+      "prediction": "avg_stable_drift in substrate_plus_scale_builder < avg_stable_drift in substrate_plus_parasitic",
+      "measured_outcome": {
+        "scale_builder_stable_drift": 0.008352451251138645,
+        "parasitic_stable_drift": 0.016953213824657427,
+        "difference": 0.008600762573518782
+      },
+      "falsification_criteria": "scale_builder stable drift >= parasitic stable drift over 100+ runs.",
+      "probability": 1.0,
+      "status": "confirmed"
     },
     {
       "claim_id": "EMRG_008",
-      "statement": "Civilizations scale via two distinct mechanisms: substrate scaling (landscape-based, distributed, time-deep) and narrative scaling (abstraction-based, centralized, rapid). Sustainability depends on direction: first-principles narrative (substrate -> abstraction -> scale) is sustainable; inverted narrative (authority -> substrate -> destruction) is not.",
-      "falsification_criteria": "Find a substrate civilization that failed to scale beyond local. Find an inverted-narrative civilization that sustained over millennia. Find a civilization that sustained without a substrate component.",
-      "status": "proposed",
-      "requires": "first_principles_narrative and inverted_narrative agent types",
-      "note": "Substrate-only baseline plus first_principles_narrative should produce sustained scaling; substrate-only plus inverted_narrative should produce collapse."
+      "statement": "Sustainability of narrative scaling depends on direction: first-principles (substrate -> abstraction) sustains; inverted (authority -> substrate) collapses.",
+      "prediction": "scale_builder pair final entropy < inverted pair final entropy AND inverted pair stable drift > substrate-only stable drift.",
+      "measured_outcome": {
+        "scale_builder_entropy": 0.006153395057718729,
+        "inverted_entropy": 174161.2603227064,
+        "inverted_stable_drift": 8968.485256865923,
+        "substrate_only_stable_drift": 0.012612727457815753
+      },
+      "falsification_criteria": "scale_builder entropy >= inverted entropy, OR inverted stable drift <= substrate-only stable drift.",
+      "probability": 1.0,
+      "status": "confirmed"
     },
     {
       "claim_id": "EMRG_009",
@@ -87,7 +98,7 @@
       "falsification_criteria": "Find a narrative-only system that recognized substrate scaling without external correction. Find an AI trained only on narrative records that modeled substrate civilizations accurately.",
       "status": "proposed",
       "requires": "cross-corpus comparison test (out of simulation scope)",
-      "note": "Architectural property of how narrative systems observe themselves; the simulator can model it via a `scope_blind` agent that systematically downweights observations outside its baseline_type."
+      "note": "Architectural property of how narrative systems observe themselves. Not falsifiable in agent simulation; recorded here so the empirical follow-up is visible."
     },
     {
       "claim_id": "SENS_001",

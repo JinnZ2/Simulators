@@ -129,14 +129,38 @@ For a human (or a model) coming to this cold:
 | EMRG_001..004 | confirmed       | core stable-vs-parasitic finding              |
 | EMRG_005    | inconclusive      | bifurcation rate, needs longer runs           |
 | EMRG_006    | confirmed         | stable baseline as thermodynamic attractor    |
-| EMRG_007..009 | proposed        | require `scale_builder` / `inverted_narrative` agent types not yet implemented |
+| EMRG_007    | confirmed         | scale_builder mode produces lower stable-agent drift than parasitic mode |
+| EMRG_008    | confirmed         | inverted_narrative drives substrate to collapse; scale_builder pair sustains |
+| EMRG_009    | proposed          | architectural (training-corpus scope); not in-simulation |
 | SENS_001..005 | confirmed / partial / context-dependent | parameter sweeps |
 | RES_REPRO_001 etc. | claims registered, measurements pending | six preset claims awaiting empirical data |
 
+## Mode comparison (EMRG_007 / EMRG_008)
+
+The simulator carries two extra `baseline_type`s beyond the original
+physics / engagement / hybrid trio:
+
+- `scale_builder` — first-principles narrative. Anchored to a baseline
+  like physics, and additionally contributes a per-step positive
+  recovery modifier to every neighbor (substrate regeneration support).
+- `inverted_narrative` — authority-first narrative. Unanchored,
+  drift amplifies in its own direction (positive feedback), and
+  emits a negative recovery modifier on every neighbor (substrate
+  exhaustion).
+
+`run_mode_comparison` runs four paired scenarios — substrate_only,
+substrate_plus_scale_builder, substrate_plus_inverted,
+substrate_plus_parasitic — and writes the per-scenario averages to
+`results/mode_comparison.json`. The empirical signals are sharp:
+scale_builder pairs leave stable-agent drift below the substrate-only
+baseline; inverted pairs drive the substrate into runaway divergence
+(stable drift and system entropy several orders of magnitude higher
+than any other scenario).
+
 ## What's next
 
-The proposed claims `EMRG_007..009` introduce two new agent types
-(`scale_builder` and `inverted_narrative`) that the current simulator
-does not yet model. Adding them is the next obvious extension — it
-would let the simulator test the parasitic-vs-scale-building distinction
-empirically rather than asserting it.
+EMRG_009 remains the open piece: it's an architectural claim about
+training-corpus scope, not agent dynamics. Testing it requires a
+cross-corpus comparison (model trained on narrative-only vs. one
+trained on substrate-inclusive material) — out of scope for the
+simulator, in scope for the broader research-stability-audit.

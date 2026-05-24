@@ -1,0 +1,31 @@
+{
+  "timestamp": "2026-05-24T01:46:11.895286",
+  "runs_per_scenario": 60,
+  "timesteps_per_run": 80,
+  "scenarios": {
+    "substrate_only": {
+      "runs": 60,
+      "avg_stable_drift": 0.012612727457815753,
+      "avg_final_entropy": 2.649088603227733e-05,
+      "avg_cumulative_cascade": 0.02978884512985786
+    },
+    "substrate_plus_scale_builder": {
+      "runs": 60,
+      "avg_stable_drift": 0.008352451251138645,
+      "avg_final_entropy": 0.006153395057718729,
+      "avg_cumulative_cascade": 0.045246199405642014
+    },
+    "substrate_plus_inverted": {
+      "runs": 60,
+      "avg_stable_drift": 8968.485256865923,
+      "avg_final_entropy": 174161.2603227064,
+      "avg_cumulative_cascade": 19904.9174311901
+    },
+    "substrate_plus_parasitic": {
+      "runs": 60,
+      "avg_stable_drift": 0.016953213824657427,
+      "avg_final_entropy": 0.20131262629831748,
+      "avg_cumulative_cascade": 0.3983235236039965
+    }
+  }
+}

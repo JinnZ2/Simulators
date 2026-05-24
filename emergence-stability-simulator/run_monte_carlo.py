@@ -4,9 +4,10 @@ run_monte_carlo.py
 
 Main entry point. Runs the full pipeline:
   1. Monte Carlo simulation (sim_engine.run_monte_carlo)
-  2. Parameter sensitivity analysis (sensitivity_analysis)
-  3. Merge sensitivity claims into CLAIM_TABLE.json
-  4. Generate ASCII analysis report (analysis.generate_full_report)
+  2. Mode comparison for EMRG_007 / EMRG_008 (sim_engine.run_mode_comparison)
+  3. Generate falsifiable claims into CLAIM_TABLE.json
+  4. Parameter sensitivity analysis + merge SENS_* claims
+  5. Generate ASCII analysis reports (analysis + sensitivity_viz)
 
 CLI flags allow shrinking the workload for quick checks.
 
@@ -18,7 +19,11 @@ import argparse
 import json
 from pathlib import Path
 
-from sim_engine import run_monte_carlo, generate_claim_table
+from sim_engine import (
+    generate_claim_table,
+    run_mode_comparison,
+    run_monte_carlo,
+)
 from sensitivity_analysis import run_full_sensitivity_analysis
 from sensitivity_viz import generate_full_report as generate_sensitivity_viz_report
 from analysis import generate_full_report
@@ -66,8 +71,12 @@ def main():
                         help='Timesteps per run (default 100)')
     parser.add_argument('--sensitivity-runs', type=int, default=15,
                         help='Runs per parameter value in sensitivity sweep')
+    parser.add_argument('--mode-runs', type=int, default=200,
+                        help='Runs per scenario in mode comparison (EMRG_007/008)')
     parser.add_argument('--skip-sensitivity', action='store_true',
                         help='Skip parameter sensitivity analysis')
+    parser.add_argument('--skip-mode-comparison', action='store_true',
+                        help='Skip mode comparison (EMRG_007/008 stays proposed)')
     parser.add_argument('--skip-report', action='store_true',
                         help='Skip ASCII analysis report generation')
     args = parser.parse_args()
@@ -79,10 +88,18 @@ def main():
     # 1. Monte Carlo
     aggregate = run_monte_carlo(runs=args.runs, timesteps=args.timesteps)
 
-    # 2. Falsifiable claims (writes CLAIM_TABLE.json)
-    generate_claim_table(aggregate)
+    # 2. Mode comparison (EMRG_007 / EMRG_008)
+    mode_results = None
+    if not args.skip_mode_comparison:
+        mode_results = run_mode_comparison(
+            runs=args.mode_runs,
+            timesteps=args.timesteps,
+        )
 
-    # 3. Sensitivity analysis + merge sweep-derived claims + text report
+    # 3. Falsifiable claims (writes CLAIM_TABLE.json)
+    generate_claim_table(aggregate, mode_results=mode_results)
+
+    # 4. Sensitivity analysis + merge sweep-derived claims + text report
     if not args.skip_sensitivity:
         sens_results = run_full_sensitivity_analysis(
             runs_per_value=args.sensitivity_runs,
@@ -99,7 +116,7 @@ def main():
             output_path='results/sensitivity_report.txt',
         )
 
-    # 4. ASCII report
+    # 5. ASCII report
     if not args.skip_report:
         generate_full_report()
         print("\nFull ASCII report at results/full_report.txt")
