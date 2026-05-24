@@ -3,25 +3,25 @@ emergence-stability-simulator/samples/CLAIM_TABLE.sample.json
   claims:            22
   contained substrate/narrative terms: 11
 
-  --- EMRG_007 (confirmed) ---
+  --- EMRG_007 (refuted) ---
     [statement ORIGINAL]
-      Narrative-primary populations operate in one of two modes: parasitic (substrate-exhausting) or authentic scale-building (substrate-extending). Scale-building mode produces sustained substrate stability; parasitic mode does not.
+      A substrate agent paired with a scale_builder agent shows lower stable-agent drift than a substrate agent paired with a parasitic agent (directional). The effect is primarily caused by being paired with an anchored substrate carrying a narrative tool, NOT by the scale_builder type emitting recovery_modifier (attribution).
     [statement SUBSTITUTED]
-      Grasshoppers-primary populations operate in one of two modes: parasitic (grass-exhausting) or authentic scale-building (grass-extending). Scale-building mode produces sustained grass stability; parasitic mode does not.
+      A grass agent paired with a wind-dispersed insect agent shows lower stable-agent drift than a grass agent paired with a parasitic agent (directional). The effect is primarily caused by being paired with an anchored grass carrying a grasshoppers tool, NOT by the wind-dispersed insect type emitting recovery_modifier (attribution).
     [prediction ORIGINAL]
-      avg_stable_drift in substrate_plus_scale_builder < avg_stable_drift in substrate_plus_parasitic
+      avg_stable_drift in substrate_plus_scale_builder < avg_stable_drift in substrate_plus_parasitic AND anchoring_fraction_of_effect >= 0.5 (control with anchored physics agent reproduces majority of gap).
     [prediction SUBSTITUTED]
-      avg_stable_drift in grass_plus_wind-dispersed insect < avg_stable_drift in grass_plus_parasitic
+      avg_stable_drift in grass_plus_wind-dispersed insect < avg_stable_drift in grass_plus_parasitic AND anchoring_fraction_of_effect >= 0.5 (control with anchored physics agent reproduces majority of gap).
 
-  --- EMRG_008 (confirmed) ---
+  --- EMRG_008 (confirmed_with_control) ---
     [statement ORIGINAL]
-      Sustainability of narrative scaling depends on direction: first-principles (substrate -> abstraction) sustains; inverted (authority -> substrate) collapses.
+      A consumer with no recovery to a baseline, high coupling, and positive-feedback drift amplification (modeled here as inverted_narrative) drives a physics-baseline neighbor into runaway divergence. The destruction signal is robust to disabling the fabricated negative recovery_modifier emission: the positive-feedback dynamics alone are enough. Any anchored pair sustains by comparison.
     [statement SUBSTITUTED]
-      Sustainability of grasshoppers scaling depends on direction: first-principles (grass -> abstraction) sustains; inverted (authority -> grass) collapses.
+      A consumer with no recovery to a baseline, high coupling, and positive-feedback drift amplification (modeled here as overgrazing grasshopper density) drives a physics-baseline neighbor into runaway divergence. The destruction signal is robust to disabling the fabricated negative recovery_modifier emission: the positive-feedback dynamics alone are enough. Any anchored pair sustains by comparison.
     [prediction ORIGINAL]
-      scale_builder pair final entropy < inverted pair final entropy AND inverted pair stable drift > substrate-only stable drift.
+      inverted pair stable drift > substrate-only stable drift (inverted destroys); AND anchored-control pair entropy < inverted pair entropy (anchoring sustains); AND substrate drift in inverted_no_emission_control remains orders of magnitude above substrate_only (destruction signal does not depend on the fabricated emission).
     [prediction SUBSTITUTED]
-      wind-dispersed insect pair final entropy < inverted pair final entropy AND inverted pair stable drift > grass-only stable drift.
+      inverted pair stable drift > grass-only stable drift (inverted destroys); AND anchored-control pair entropy < inverted pair entropy (anchoring sustains); AND grass drift in inverted_no_emission_control remains orders of magnitude above grass_only (destruction signal does not depend on the fabricated emission).
 
   --- EMRG_009 (proposed) ---
     [statement ORIGINAL]
@@ -35,11 +35,15 @@ emergence-stability-simulator/samples/CLAIM_TABLE.sample.json
     [statement SUBSTITUTED]
       Grass populations share knowledge freely by default. Apparent withholding is a contextual response to weaponization (extraction followed by replacement of the original transmitter). Core sharing behaviour persists within community and with anyone showing genuine respect and capacity to receive.
 
-  --- EMRG_017 (proposed) ---
+  --- EMRG_017 (refuted) ---
     [statement ORIGINAL]
       The bifurcation between substrate-primary and narrative-primary cognition occurs at the translation INTERFACE LAYER, not at sharing willingness. When receivers cannot translate substrate methodology without degradation, the failure is in reception/translation -- not in transmission. This reframes apparent narrative "scale-builders" (Cherokee syllabary, Inca quipu, Polynesian charts) as substrate civilizations USING narrative tools, not narrative civilizations doing scale-building.
     [statement SUBSTITUTED]
       The bifurcation between grass-primary and grasshoppers-primary cognition occurs at the translation INTERFACE LAYER, not at sharing willingness. When receivers cannot translate grass methodology without degradation, the failure is in reception/translation -- not in transmission. This reframes apparent grasshoppers "wind-dispersed insects" (Cherokee syllabary, Inca quipu, Polynesian charts) as grass civilizations USING grasshoppers tools, not grasshoppers civilizations doing scale-building.
+    [prediction ORIGINAL]
+      Anchored physics control (scale_builder params, baseline_type=physics) recovers >= 50% of the scale_builder advantage over parasitic. Narrative typing per se is a small residual, not the load-bearing cause.
+    [prediction SUBSTITUTED]
+      Anchored physics control (wind-dispersed insect params, baseline_type=physics) recovers >= 50% of the wind-dispersed insect advantage over parasitic. Grasshoppers typing per se is a small residual, not the load-bearing cause.
 
   --- EMRG_018 (proposed) ---
     [statement ORIGINAL]

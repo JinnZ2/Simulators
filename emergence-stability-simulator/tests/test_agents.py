@@ -273,13 +273,15 @@ class TestInvertedNarrativeAgent(unittest.TestCase):
 class TestModeComparisonAndClaims(unittest.TestCase):
     """End-to-end: mode comparison produces empirical EMRG_007/008."""
 
-    def test_run_mode_comparison_returns_four_scenarios(self):
+    def test_run_mode_comparison_returns_all_scenarios_including_controls(self):
         results = run_mode_comparison(runs=10, timesteps=40,
                                       output_path='/tmp/mc_test.json')
         self.assertEqual(set(results.keys()), {
             'substrate_only',
             'substrate_plus_scale_builder',
+            'substrate_plus_anchored_physics_control',
             'substrate_plus_inverted',
+            'substrate_plus_inverted_no_emission_control',
             'substrate_plus_parasitic',
         })
         for v in results.values():
@@ -303,10 +305,16 @@ class TestModeComparisonAndClaims(unittest.TestCase):
         self.assertIn('EMRG_007', by_id)
         self.assertIn('EMRG_008', by_id)
         self.assertIn('EMRG_009', by_id)
+        # EMRG_007 has a two-part prediction (directional + attribution).
+        # The attribution prediction empirically fails at small samples
+        # too, so the status here may be refuted; either way the
+        # measured_outcome must record both halves.
         self.assertIn(by_id['EMRG_007']['status'],
-                      ('confirmed', 'refuted'))
+                      ('confirmed_with_control', 'refuted'))
+        self.assertIn('attribution_prediction_holds',
+                      by_id['EMRG_007']['measured_outcome'])
         self.assertIn(by_id['EMRG_008']['status'],
-                      ('confirmed', 'refuted'))
+                      ('confirmed_with_control', 'refuted'))
         self.assertEqual(by_id['EMRG_009']['status'], 'proposed')
         self.assertIn('measured_outcome', by_id['EMRG_007'])
 
@@ -323,6 +331,66 @@ class TestModeComparisonAndClaims(unittest.TestCase):
         self.assertEqual(by_id['EMRG_007']['status'], 'proposed')
         self.assertEqual(by_id['EMRG_008']['status'], 'proposed')
         self.assertEqual(by_id['EMRG_010']['status'], 'proposed')
+        self.assertEqual(by_id['EMRG_017']['status'], 'proposed')
+
+
+class TestControlScenarios(unittest.TestCase):
+    """The EMRG_017 control scenarios isolate fabricated-mechanism contribution."""
+
+    def test_narrative_emission_disabled_makes_emit_a_noop(self):
+        # When narrative_emission_disabled is True, a scale_builder's
+        # emit_effects_on_neighbors must leave its neighbor untouched.
+        sb = Agent('sb', 'scale_builder', 0.0, 0.6, 0.4, 0.1)
+        sb.narrative_emission_disabled = True
+        neighbor = Agent('n', 'physics', 0.0, 0.8, 0.3, 0.1)
+        self.assertEqual(neighbor.recovery_modifier, 0.0)
+        sb.emit_effects_on_neighbors([neighbor])
+        self.assertEqual(neighbor.recovery_modifier, 0.0)
+
+    def test_anchored_physics_control_is_in_mode_results(self):
+        results = run_mode_comparison(runs=10, timesteps=40,
+                                      output_path='/tmp/mc_anchored.json')
+        self.assertIn('substrate_plus_anchored_physics_control', results)
+        # The anchored control should be near substrate_only, not
+        # near parasitic. (Loose check; small sample.)
+        ctrl = results['substrate_plus_anchored_physics_control']
+        para = results['substrate_plus_parasitic']
+        self.assertLess(ctrl['avg_final_entropy'],
+                        para['avg_final_entropy'])
+
+    def test_inverted_no_emission_control_still_destroys_substrate(self):
+        # EMRG_008's destruction signal is intrinsic to the no-recovery
+        # + positive-feedback structure; disabling the fabricated
+        # emission should not bring substrate drift back near the
+        # substrate_only baseline. Threshold is intentionally loose
+        # (>= 10x baseline) so the test is robust at small sample
+        # sizes; the production claim threshold is 100x in
+        # sim_engine._emrg_007_008_009.
+        results = run_mode_comparison(runs=20, timesteps=80,
+                                      output_path='/tmp/mc_noemit.json')
+        only_drift = results['substrate_only']['avg_stable_drift']
+        no_emit_drift = results[
+            'substrate_plus_inverted_no_emission_control']['avg_stable_drift']
+        self.assertGreater(no_emit_drift, max(only_drift * 10.0, 1.0))
+
+    def test_emrg_017_carries_empirical_status_with_control(self):
+        from sim_engine import run_monte_carlo as rmc
+        agg = rmc(runs=5, timesteps=30, output_path='/tmp/mc_agg3.json')
+        mode = run_mode_comparison(runs=10, timesteps=30,
+                                   output_path='/tmp/mc_mode3.json')
+        original_cwd = os.getcwd()
+        try:
+            os.chdir('/tmp')
+            table = generate_claim_table(agg, mode_results=mode)
+        finally:
+            os.chdir(original_cwd)
+        e17 = next(c for c in table['claims']
+                   if c['claim_id'] == 'EMRG_017')
+        # Status must be empirical (one of confirmed/refuted), and
+        # the measured_outcome must include the anchoring fraction.
+        self.assertIn(e17['status'], ('confirmed', 'refuted'))
+        self.assertIn('anchoring_fraction_of_effect',
+                      e17['measured_outcome'])
 
 
 class TestRealityPerturbation(unittest.TestCase):

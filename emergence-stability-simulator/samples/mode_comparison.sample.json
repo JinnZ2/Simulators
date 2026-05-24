@@ -1,31 +1,43 @@
 {
-  "timestamp": "2026-05-24T03:10:13.885029",
-  "runs_per_scenario": 60,
+  "timestamp": "2026-05-24T03:38:43.707673",
+  "runs_per_scenario": 100,
   "timesteps_per_run": 80,
   "scenarios": {
     "substrate_only": {
-      "runs": 60,
-      "avg_stable_drift": 0.012612727457815753,
-      "avg_final_entropy": 2.649088603227733e-05,
-      "avg_cumulative_cascade": 0.02978884512985786
+      "runs": 100,
+      "avg_stable_drift": 0.013571552070035894,
+      "avg_final_entropy": 2.888055860384351e-05,
+      "avg_cumulative_cascade": 0.03010255197859771
     },
     "substrate_plus_scale_builder": {
-      "runs": 60,
-      "avg_stable_drift": 0.008352451251138645,
-      "avg_final_entropy": 0.006153395057718729,
-      "avg_cumulative_cascade": 0.045246199405642014
+      "runs": 100,
+      "avg_stable_drift": 0.009430586983391278,
+      "avg_final_entropy": 0.006140013411162707,
+      "avg_cumulative_cascade": 0.04572564595858057
+    },
+    "substrate_plus_anchored_physics_control": {
+      "runs": 100,
+      "avg_stable_drift": 0.015045947331901526,
+      "avg_final_entropy": 0.0014607495230779918,
+      "avg_cumulative_cascade": 0.03528113366036996
     },
     "substrate_plus_inverted": {
-      "runs": 60,
-      "avg_stable_drift": 8968.485256865923,
-      "avg_final_entropy": 174161.2603227064,
-      "avg_cumulative_cascade": 19904.9174311901
+      "runs": 100,
+      "avg_stable_drift": 8729.044222610637,
+      "avg_final_entropy": 169511.6901451779,
+      "avg_cumulative_cascade": 19373.537131892244
+    },
+    "substrate_plus_inverted_no_emission_control": {
+      "runs": 100,
+      "avg_stable_drift": 3282.2242160351507,
+      "avg_final_entropy": 158097.28527103804,
+      "avg_cumulative_cascade": 18215.632211015207
     },
     "substrate_plus_parasitic": {
-      "runs": 60,
-      "avg_stable_drift": 0.016953213824657427,
-      "avg_final_entropy": 0.20131262629831748,
-      "avg_cumulative_cascade": 0.3983235236039965
+      "runs": 100,
+      "avg_stable_drift": 0.017385200422254363,
+      "avg_final_entropy": 0.2041287786499224,
+      "avg_cumulative_cascade": 0.40345645620364756
     }
   }
 }

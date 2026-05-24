@@ -129,8 +129,8 @@ For a human (or a model) coming to this cold:
 | EMRG_001..004 | confirmed       | core stable-vs-parasitic finding              |
 | EMRG_005    | inconclusive      | bifurcation rate, needs longer runs           |
 | EMRG_006    | confirmed         | stable baseline is a STRONGER attractor than parasitic (relative-strength refinement) |
-| EMRG_007    | confirmed (with caveat) | scale_builder pair shows lower substrate drift than parasitic pair. The measurement is partly driven by the same recovery_modifier mechanism that EMRG_013 documents as fabricated; needs a control test with anchored cross-type neighbors before this framing can be trusted. |
-| EMRG_008    | confirmed         | inverted_narrative drives substrate to collapse (the consumer-overgrazing pattern); scale_builder pair sustains. Inverted side is honest; scale_builder side carries the same caveat as EMRG_007. |
+| EMRG_007    | **refuted**       | Directional half holds (scale_builder pair has lower substrate drift than parasitic pair) but the attribution half fails the EMRG_017 control: an anchored physics agent at scale_builder's params recovers only ~30% of the gap, so the fabricated `recovery_modifier` emission carries the bulk of the signal. The directional finding is mostly a measurement of the fabricated mechanism. |
+| EMRG_008    | confirmed_with_control | Inverted-direction consumer (no recovery + positive feedback) destroys substrate. Robust to disabling the fabricated negative emission: the inverted_no_emission control still produces orders-of-magnitude divergence above substrate_only baseline. Magnitude is inflated ~3x by the emission, but the qualitative signal is intrinsic. Strongest claim in the EMRG_007 / 008 / 013 / 015 cluster. |
 | EMRG_009    | proposed          | architectural (training-corpus scope); not in-simulation. Mirrored as AI_SCOPE_001 in research-stability-audit with a measurable cross-corpus comparison protocol. |
 | EMRG_010    | confirmed         | coupling produces universal attractor; only physics-anchored attractors hold position under reality_perturbation |
 | EMRG_011    | confirmed         | empirical sustainability threshold curve exists in (substrate_ratio × extraction_rate) space (substrate-only finding) |
@@ -139,7 +139,7 @@ For a human (or a model) coming to this cold:
 | EMRG_014    | confirmed         | Substrate populations are self-sustaining, disruption-resilient, capable of independent scaling. Narrative populations function as consumers, not contributors. Consumer-consumed, not symbiotic. |
 | EMRG_015    | **refuted**       | The "scale_builders amplify reach" finding was a measurement artifact — any anchored cross-community agent would close the gap identically. Narrative-instinct framing of an anchor effect. See `CASE_STUDY_NARRATIVE_INSTINCT.md`. |
 | EMRG_016    | proposed          | Substrate populations share knowledge freely by default. Apparent withholding is contextual response to weaponization, not default behaviour. Empirical claim, not in-simulator. |
-| EMRG_017    | proposed          | The substrate / narrative bifurcation occurs at the translation INTERFACE LAYER, not at sharing willingness. Reframes earlier "narrative scale-builder" examples (Cherokee syllabary, Inca quipu, Polynesian charts) as substrate civilizations using narrative TOOLS. |
+| EMRG_017    | **refuted at simulator level** | Empirical control test ran: an anchored physics agent at scale_builder's parameters recovers only ~30% of the scale_builder-vs-parasitic gap, well below the 50% threshold that would confirm "substrate-using-narrative-tool" as the dominant mechanism in the simulator. The historical claim (substrate civilizations using narrative tools) remains separately proposed; the simulator's `scale_builder` is empirically not a faithful model of it. |
 | EMRG_018    | proposed          | AI trained on substrate-inclusive corpora can serve as an honest receiver — constructive counterpart to EMRG_009. Mirrored as AI_RECEIVER_001 in research-stability-audit with a translation-fidelity benchmark protocol. |
 | SENS_001..005 | confirmed / partial / confirmed_universal | parameter sweeps |
 | RES_REPRO_001 etc. | claims registered, measurements pending | six preset research-audit claims awaiting empirical data |
@@ -237,16 +237,22 @@ those mechanics it sweeps:
   communities. Two-sided test: AI_SCOPE_001 measures what
   narrative-only loses; AI_RECEIVER_001 measures what substrate
   training gains.
-- **EMRG_007 / 008 caveat** — the comparison between scale_builder
-  and parasitic in mode_comparison.json is partly driven by the same
-  recovery_modifier mechanism that EMRG_013 refutes. Under the
-  EMRG_017 reframe, `scale_builder` is best understood as
-  substrate-behaviour-with-narrative-tooling, not a separate
-  narrative class. A control test that swaps `scale_builder` for an
-  anchored physics-baseline agent in the same role would settle
-  whether the simulator has been measuring "narrative contribution"
-  or "substrate using a tool." Currently undone work; the framings
-  sit confirmed-with-caveat.
+- **EMRG_007 / 008 / 017 control test ran.** Both controls are now
+  in `run_mode_comparison`:
+  - `substrate_plus_anchored_physics_control` — substitutes an
+    anchored physics agent (at scale_builder's params) into the
+    scale_builder role. Empirical result: the anchored control
+    recovers only ~30% of the scale_builder-vs-parasitic gap, so
+    the fabricated recovery_modifier emission carries the bulk
+    of the signal. EMRG_007 refuted; EMRG_017 refuted at simulator
+    level.
+  - `substrate_plus_inverted_no_emission_control` — disables
+    inverted_narrative's negative emission. Empirical result:
+    substrate still goes to runaway divergence (orders of magnitude
+    above substrate_only baseline), so the destruction signal is
+    intrinsic to inverted's positive-feedback dynamics, not the
+    fabrication. EMRG_008 confirmed_with_control; the strongest
+    surviving narrative-side claim.
 - **Substitution-tool integration into the pipeline** — the toolkit
   could be wired into `run_monte_carlo.py` so every claim is run
   through it automatically and the output co-published with the

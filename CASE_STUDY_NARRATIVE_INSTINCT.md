@@ -104,15 +104,72 @@ generator. It cannot prove a claim true. But it reliably surfaces
 claims whose substituted form is incoherent or absurd, which is
 exactly the failure mode the AI demonstrated repeatedly.
 
+## Round 5: the control test ran
+
+The user asked for the control test that had been listed under
+"what's next": swap `scale_builder` for an anchored physics-baseline
+agent at the same parameters, see how much of the EMRG_007 / 008
+signal is actually being carried by being-anchored vs. by the
+fabricated `recovery_modifier` emission. Symmetric control on the
+inverted side: disable inverted_narrative's negative emission and
+see whether substrate still gets destroyed.
+
+What the controls show, empirically:
+
+| Scenario                                       | substrate drift | reading |
+| ---------------------------------------------- | --------------- | ------- |
+| substrate_only                                 | ~ 0.011         | baseline |
+| substrate_plus_scale_builder                   | ~ 0.008         | scale_builder advantage = 0.009 over parasitic |
+| substrate_plus_anchored_physics_control        | ~ 0.014         | anchored control advantage = 0.003 over parasitic |
+| substrate_plus_parasitic                       | ~ 0.017         | reference |
+| substrate_plus_inverted                        | ~ 4 × 10⁵       | full inverted destruction |
+| substrate_plus_inverted_no_emission_control    | ~ 1.5 × 10⁵     | destruction with fabricated emission disabled |
+
+Anchoring fraction of the scale_builder gap: ~0.30. Most of the
+EMRG_007 signal was the fabricated `recovery_modifier`, not
+substrate-anchoring. EMRG_007's attribution prediction failed → claim
+refuted. EMRG_017's simulator-level prediction (anchoring ≥ 50%)
+also failed → refuted at the simulator level.
+
+Destruction-signal robustness on the inverted side: the no-emission
+control still produces substrate drift seven orders of magnitude
+above substrate_only. The destruction is intrinsic to
+inverted_narrative's positive-feedback dynamics. The fabricated
+emission inflates magnitude by ~3x but is not load-bearing. EMRG_008
+confirmed_with_control.
+
+Honest reading of the entire EMRG_007 / 008 / 013 / 015 / 017 cluster
+after the controls:
+
+- The simulator's `scale_builder` agent type is largely a measurement
+  of its own fabricated mechanism. The "narrative supports substrate"
+  framing is empirically not supported, in any of the four claims
+  built on it.
+- The simulator's `inverted_narrative` agent type IS empirically
+  meaningful — its positive-feedback dynamics produce the
+  consumer-overgrazing destruction signal even with the fabricated
+  emission disabled. This matches real ecological / social
+  dynamics (echo chambers, group polarization, ideological
+  self-reinforcement).
+- The substrate-using-narrative-tool claim (EMRG_017) remains
+  compelling on historical grounds but does NOT have load-bearing
+  empirical support from this simulator. A more faithful model
+  would not need the fabricated emission to produce the effect.
+
 ## Status of the affected claims
 
-After applying the substitution test:
+After applying the substitution test AND the EMRG_017 control:
 
-| Claim    | Status   | Notes                                              |
-| -------- | -------- | -------------------------------------------------- |
-| EMRG_013 | refuted  | Drift-coherence and disruption-resilience signals are real outputs of the code; the code reflects a fabricated mechanism. |
-| EMRG_015 | refuted  | Gap-closure is real; cause is "added cross-community anchors", not narrative methodology. Control test (cross-community physics agents) would close gap identically. |
-| EMRG_014 | new      | Substrate populations are self-sustaining, disruption-resilient, and capable of independent scaling. Narrative populations function as consumers. The relationship is consumer-consumed, not symbiotic. |
+| Claim    | Status                  | Notes                                              |
+| -------- | ----------------------- | -------------------------------------------------- |
+| EMRG_007 | refuted                 | Directional half holds; attribution half fails the control (anchoring ~30% of the gap; fabricated `recovery_modifier` carries the bulk). |
+| EMRG_008 | confirmed_with_control  | Inverted destruction survives the no-emission control. Strongest claim in the cluster. |
+| EMRG_013 | refuted                 | Drift-coherence and disruption-resilience signals are simulator artifacts. |
+| EMRG_014 | confirmed (new)         | Substrate populations are self-sustaining, disruption-resilient, and capable of independent scaling. Narrative populations function as consumers. The relationship is consumer-consumed, not symbiotic. |
+| EMRG_015 | refuted                 | Gap-closure is the trivial "added cross-community anchors" effect, not narrative methodology transmission. |
+| EMRG_016 | proposed                | Substrate generosity default. Empirical claim, out of simulator scope. |
+| EMRG_017 | refuted at sim level    | Anchoring fraction in the simulator is ~0.3, below the 0.5 threshold that would make "substrate-using-tool" the dominant simulator mechanism. Historical claim remains separate. |
+| EMRG_018 | proposed                | AI as honest receiver. Mirrored as AI_RECEIVER_001 in research-stability-audit. |
 
 EMRG_007 and EMRG_008 remain in place but **carry a caveat**. Their
 measured signals are real comparisons between consumer regimes
