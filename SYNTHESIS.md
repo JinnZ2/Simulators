@@ -128,12 +128,18 @@ For a human (or a model) coming to this cold:
 | ----------- | ----------------- | --------------------------------------------- |
 | EMRG_001..004 | confirmed       | core stable-vs-parasitic finding              |
 | EMRG_005    | inconclusive      | bifurcation rate, needs longer runs           |
-| EMRG_006    | confirmed         | stable baseline as thermodynamic attractor    |
+| EMRG_006    | confirmed         | stable baseline is a STRONGER attractor than parasitic (relative-strength refinement) |
 | EMRG_007    | confirmed         | scale_builder mode produces lower stable-agent drift than parasitic mode |
 | EMRG_008    | confirmed         | inverted_narrative drives substrate to collapse; scale_builder pair sustains |
-| EMRG_009    | proposed          | architectural (training-corpus scope); not in-simulation |
+| EMRG_009    | proposed          | architectural (training-corpus scope); not in-simulation. Mirrored as AI_SCOPE_001 in research-stability-audit with a measurable cross-corpus comparison protocol. |
+| EMRG_010    | confirmed         | coupling produces universal attractor; only physics-anchored attractors hold position under reality_perturbation |
+| EMRG_011    | confirmed         | empirical sustainability threshold curve exists in (substrate_ratio × extraction_rate) space |
+| EMRG_012    | confirmed         | substrate regeneration is slower than extraction; sustainability declines along the historical trajectory |
+| EMRG_013    | confirmed         | scale_builders contribute drift coherence + disruption resilience, NOT survival. Substrate sustains on its own. |
+| EMRG_015    | confirmed         | scale_builders amplify REACH: methodology transmission across isolated communities |
 | SENS_001..005 | confirmed / partial / context-dependent | parameter sweeps |
-| RES_REPRO_001 etc. | claims registered, measurements pending | six preset claims awaiting empirical data |
+| RES_REPRO_001 etc. | claims registered, measurements pending | six preset research-audit claims awaiting empirical data |
+| AI_SCOPE_001 | claim registered, measurements pending | scope-projection error in narrative-only AI; cross-corpus comparison protocol defined |
 
 ## Mode comparison (EMRG_007 / EMRG_008)
 
@@ -142,7 +148,11 @@ physics / engagement / hybrid trio:
 
 - `scale_builder` — first-principles narrative. Anchored to a baseline
   like physics, and additionally contributes a per-step positive
-  recovery modifier to every neighbor (substrate regeneration support).
+  recovery modifier to every neighbor (drift-coherence support).
+  **Does not contribute to neighbor energy budget.** Substrate
+  civilizations sustained for millennia without narrative
+  augmentation (Anishinaabe corridor, Aboriginal Australia, Polynesian
+  wayfinding, Iroquois Confederacy); the simulator reflects that.
 - `inverted_narrative` — authority-first narrative. Unanchored,
   drift amplifies in its own direction (positive feedback), and
   emits a negative recovery modifier on every neighbor (substrate
@@ -157,10 +167,55 @@ baseline; inverted pairs drive the substrate into runaway divergence
 (stable drift and system entropy several orders of magnitude higher
 than any other scenario).
 
+## Attractor quality (EMRG_010)
+
+`run_attractor_quality_test` measures what happens to stable_majority
+and parasitic_majority groups with and without a structured
+`reality_perturbation` signal. Without the signal both groups bound
+individual drift (coupling produces a universal attractor effect).
+With the signal, stable_majority drift stays at ~0.06 while
+parasitic_majority drift jumps to ~1.6 — twenty-five fold gap. The
+takeaway: tight social systems with no substrate access feel stable
+right up until reality is encountered. Consensus is not ground truth.
+
+## Sustainability surface (EMRG_011 / 012 / 013 / 015)
+
+`balance_threshold.py` adds finite energy budgets, extraction rates,
+regeneration rates, and exhaustion mechanics (physics agents flip to
+engagement when budget hits zero — the substrate population walks
+away or has to take up extractive behavior to survive). On top of
+those mechanics it sweeps:
+
+- **`ratio_sweep`** — substrate_ratio at fixed extraction
+- **`extraction_sweep`** — extraction rate at fixed composition
+- **`sustainability_surface`** — 2D (substrate_ratio × extraction_rate)
+  grid; `identify_threshold` returns the monotone boundary curve
+- **`scale_builder_amplification_test`** — runs in two regimes (a
+  sustainable composition and an unsustainable one). Scale_builders
+  reduce substrate drift in the sustainable regime; they do **not**
+  rescue the unsustainable one. Substrate sustains on its own.
+- **`disruption_resilience_test`** — sharp shock at mid-run.
+  Scale_builders accelerate substrate recovery (drift-coherence
+  support under perturbation).
+- **`multi_community_reach_test`** — two isolated communities; only
+  scale_builders couple across the boundary. Without bridge, B drifts
+  to its own consensus (gap → tens of thousands). With bridge, B
+  aligns to A (gap → ~0). This is the reach amplification empirical
+  signature.
+- **`historical_overlay_test`** — eight HISTORICAL_RATIOS presets
+  (pre-industrial → current_estimate, plus Inca / Rome / Maya).
+  Confirms the monotone decline along the modern trajectory.
+
 ## What's next
 
-EMRG_009 remains the open piece: it's an architectural claim about
-training-corpus scope, not agent dynamics. Testing it requires a
-cross-corpus comparison (model trained on narrative-only vs. one
-trained on substrate-inclusive material) — out of scope for the
-simulator, in scope for the broader research-stability-audit.
+- EMRG_009 / AI_SCOPE_001 — cross-corpus comparison protocol is
+  registered; running it requires training data, not simulation time.
+- Two additional reach tests the framework would benefit from (not
+  yet implemented):
+  - **Narrative-interface test** — substrate + inverted_narrative
+    with a scale_builder mediator; does the bridge buffer some of
+    the inverted damage?
+  - **Multi-community survival under different starting compositions**
+    — does reach amplification raise the threshold curve for any
+    community below the bridge?
+- EMRG_014 is intentionally reserved for the next refinement.

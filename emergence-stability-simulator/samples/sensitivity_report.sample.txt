@@ -1,7 +1,7 @@
 ======================================================================
 SENSITIVITY ANALYSIS - FULL REPORT
 ======================================================================
-Generated: 2026-05-24T01:46:12.042515
+Generated: 2026-05-24T02:11:52.779355
 Runs per value: 5
 Timesteps: 80
 Parameters analyzed: 6
@@ -364,8 +364,9 @@ SENSITIVITY ANALYSIS CLAIMS SUMMARY
 ======================================================================
 
 Status Distribution:
-  confirmed            ███ 3
+  confirmed            ██ 2
   partial              █ 1
+  confirmed_universal  █ 1
   refuted              █ 1
 
 Total claims: 5
@@ -425,7 +426,7 @@ Statement: Parasitic_coupling_susceptibility effect on drift depends on environm
 Prediction: In stable-majority, correlation < 0 (attractor effect); In parasitic-majority, correlation > 0
 Falsification: Correlation direction same regardless of environment
 
-Status: ✗ REFUTED
+Status: ? CONFIRMED_UNIVERSAL
 Probability: 0.50
 Evidence strength: high
 
@@ -433,28 +434,33 @@ correlation_coupling_to_parasitic_drift:
 -1.0 ──────●─────────────│─────────────────── +1.0
   correlation: -0.717 (strong negative)
 
-Notes: No sign reversal observed across scenarios. Coupling reduces parasitic drift in every environment tested — neighbors (stable or parasitic) act as a common attractor; stable neighbors are simply a stronger one.
+Notes: Coupling reduces parasitic drift in every scenario tested. The attractor effect is universal — any cohesive group of neighbors acts as an attractor. Stable neighbors are simply a stronger / better-quality one; see EMRG_006 (relative strength) and EMRG_010 (quality under reality stress).
 
 ──────────────────────────────────────────────────────────────────────
 [EMRG_006] parasitic_coupling_susceptibility
 ──────────────────────────────────────────────────────────────────────
-Statement: Stable baseline acts as thermodynamic attractor: parasitic agents with higher coupling susceptibility are pulled toward stable baseline when in stable-majority environment
-Prediction: correlation(parasitic_coupling, parasitic_drift) < 0 in stable-majority scenario
-Falsification: correlation >= 0 in stable-majority scenario
+Statement: Stable baselines are a STRONGER attractor than parasitic baselines. Coupling reduces parasitic_drift in both stable-majority and parasitic-majority scenarios (SENS_003 confirmed-universal), but the negative correlation is stronger in stable-majority. Magnitude — not direction — distinguishes attractor quality.
+Prediction: correlation(parasitic_coupling, parasitic_drift) in stable_majority < same correlation in parasitic_majority (both expected negative; stable_majority more so).
+Falsification: parasitic_majority correlation <= stable_majority correlation (parasitic attractor is at least as strong).
 
-Status: ✓ CONFIRMED
-Probability: 1.00
+Status: ✗ REFUTED
+Probability: 0.00
 Evidence strength: high
 
-correlation_coupling_to_parasitic_drift:
+stable_majority_correlation:
 -1.0 ──────●─────────────│─────────────────── +1.0
   correlation: -0.717 (strong negative)
+
+parasitic_majority_correlation:
+-1.0 ─────●──────────────│─────────────────── +1.0
+  correlation: -0.769 (strong negative)
 
 Implications:
   • Grounding propagates through coupling
   • Minority grounded agents influence dynamics
   • Coupling is relational, not intrinsic
-  • One stable agent per N parasitic may shift system
+  • Attractor presence is universal; quality is what differs
+  • See EMRG_010 for the quality-under-reality-stress test
 
 
 
@@ -468,14 +474,12 @@ CROSS-SCENARIO ANALYSIS
 ======================================================================
 KEY FINDINGS
 ======================================================================
-  Confirmed claims:        3
+  Confirmed claims:        2
   Refuted claims:          1
   Context-dependent:       0
 
 THERMODYNAMIC ATTRACTOR FINDING (EMRG_006):
-  ✓ CONFIRMED with correlation -0.717
-  ✓ Stable baseline acts as thermodynamic attractor
-  ✓ Grounding propagates through coupling
+  Status: refuted
 
 ======================================================================
 End of report

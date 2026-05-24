@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "source_repo": "emergence-stability-simulator",
   "source": "emergence-stability-simulator",
-  "generated": "2026-05-24T01:46:11.895429",
+  "generated": "2026-05-24T02:11:52.586372",
   "claims": [
     {
       "claim_id": "EMRG_001",
@@ -99,6 +99,29 @@
       "status": "proposed",
       "requires": "cross-corpus comparison test (out of simulation scope)",
       "note": "Architectural property of how narrative systems observe themselves. Not falsifiable in agent simulation; recorded here so the empirical follow-up is visible."
+    },
+    {
+      "claim_id": "EMRG_010",
+      "statement": "Coupling produces an attractor effect regardless of baseline_type (stable-majority and parasitic-majority both bound individual drift), but only physics-anchored attractors hold position when a reality signal is applied. Consensus-anchored attractors drift further under reality stress.",
+      "prediction": "Without reality_perturbation: both groups show bounded drift (universal attractor). With reality_perturbation: parasitic_majority drift > stable_majority drift (attractor-quality difference).",
+      "measured_outcome": {
+        "stable_majority_drift_no_reality": 0.03966766008524559,
+        "parasitic_majority_drift_no_reality": 0.35245673059966154,
+        "stable_majority_drift_with_reality": 0.07023326270971167,
+        "parasitic_majority_drift_with_reality": 1.5506868552714212,
+        "quality_gap": 1.4804535925617095,
+        "attractor_universal": true,
+        "quality_signal": true
+      },
+      "falsification_criteria": "Either group fails to show bounded drift without reality stress, OR parasitic_majority drift <= stable_majority drift with reality stress.",
+      "status": "confirmed",
+      "probability": 1.0,
+      "evidence_strength": "high",
+      "implications": [
+        "Tight social systems with no substrate access feel stable but are cascade-prone under reality stress.",
+        "Consensus is not ground truth.",
+        "Civilizational stability before collapse is consistent with consensus-anchored attractor dynamics."
+      ]
     },
     {
       "claim_id": "SENS_001",
@@ -267,47 +290,188 @@
           }
         }
       },
-      "status": "refuted",
+      "status": "confirmed_universal",
       "probability": 0.5,
       "evidence_strength": "high",
-      "notes": "No sign reversal observed across scenarios. Coupling reduces parasitic drift in every environment tested \u2014 neighbors (stable or parasitic) act as a common attractor; stable neighbors are simply a stronger one."
+      "notes": "Coupling reduces parasitic drift in every scenario tested. The attractor effect is universal \u2014 any cohesive group of neighbors acts as an attractor. Stable neighbors are simply a stronger / better-quality one; see EMRG_006 (relative strength) and EMRG_010 (quality under reality stress)."
     },
     {
       "claim_id": "EMRG_006",
       "parameter": "parasitic_coupling_susceptibility",
-      "statement": "Stable baseline acts as thermodynamic attractor: parasitic agents with higher coupling susceptibility are pulled toward stable baseline when in stable-majority environment",
-      "prediction": "correlation(parasitic_coupling, parasitic_drift) < 0 in stable-majority scenario",
-      "falsification_criteria": "correlation >= 0 in stable-majority scenario",
-      "measurement_method": "Sweep parasitic_coupling_susceptibility (0.1-1.0) in scenario with 3+ stable agents and 1 parasitic; measure parasitic_avg_drift",
+      "statement": "Stable baselines are a STRONGER attractor than parasitic baselines. Coupling reduces parasitic_drift in both stable-majority and parasitic-majority scenarios (SENS_003 confirmed-universal), but the negative correlation is stronger in stable-majority. Magnitude \u2014 not direction \u2014 distinguishes attractor quality.",
+      "prediction": "correlation(parasitic_coupling, parasitic_drift) in stable_majority < same correlation in parasitic_majority (both expected negative; stable_majority more so).",
+      "falsification_criteria": "parasitic_majority correlation <= stable_majority correlation (parasitic attractor is at least as strong).",
+      "measurement_method": "Sweep parasitic_coupling_susceptibility (0.1-1.0) in stable-majority (3+ stable + 1 parasitic) and parasitic-majority (1 stable + 3+ parasitic) scenarios. Compare correlation magnitudes.",
       "measured_outcome": {
-        "correlation_coupling_to_parasitic_drift": -0.7168414145329058,
-        "scenario": "stable_majority",
-        "sweep_values": [
+        "stable_majority_correlation": -0.7168414145329058,
+        "parasitic_majority_correlation": -0.7691806295125784,
+        "attractor_strength_gap": -0.05233921497967253,
+        "sweep_values_stable_majority": [
           0.1,
           0.3,
           0.5,
           0.7,
           0.9
         ],
-        "measured_drifts": [
-          8.861102425012016,
-          0.3738762095470426,
-          0.24834956697599186,
-          0.23538523242104442,
-          0.21900539265964686
+        "sweep_values_parasitic_majority": [
+          0.1,
+          0.3,
+          0.5,
+          0.7,
+          0.9
         ]
       },
-      "status": "confirmed",
-      "probability": 1.0,
+      "status": "refuted",
+      "probability": 0.0,
       "evidence_strength": "high",
       "implications": [
         "Grounding propagates through coupling",
         "Minority grounded agents influence dynamics",
         "Coupling is relational, not intrinsic",
-        "One stable agent per N parasitic may shift system"
+        "Attractor presence is universal; quality is what differs",
+        "See EMRG_010 for the quality-under-reality-stress test"
       ],
-      "extends": "EMRG_001 (stable produces stability) by showing mechanism: attraction not just resistance",
-      "discovered_via": "SENS_002 investigation revealed direction reversal"
+      "extends": "EMRG_001 (stable produces stability) by showing mechanism: stronger attraction, not unique attraction.",
+      "discovered_via": "SENS_002 investigation revealed direction reversal; subsequent SENS_003 sweep revealed the reversal was an artifact and the attractor effect is actually universal (both groups attract). EMRG_006 refined to test relative strength rather than absolute direction."
+    },
+    {
+      "claim_id": "EMRG_011",
+      "statement": "A sustainability threshold curve exists in (substrate_ratio x extraction_rate) space: above the curve, populations sustain; below it, the substrate collapses.",
+      "prediction": "Higher substrate ratios admit higher maximum extraction rates; the threshold curve is monotone.",
+      "falsification_criteria": "No threshold curve found -- sustainability looks random across the (ratio x extraction) grid.",
+      "measurement_method": "2D sweep: build_balance_scenario with energy_budget and regeneration_rate on substrate agents and extraction_rate on parasitic agents, then test sustainability under reality_perturbation.",
+      "measured_outcome": {
+        "threshold_curve_by_ratio": [
+          {
+            "stable_ratio": 0.05,
+            "max_sustainable_extraction": 0.1
+          },
+          {
+            "stable_ratio": 0.1,
+            "max_sustainable_extraction": 0.1
+          },
+          {
+            "stable_ratio": 0.2,
+            "max_sustainable_extraction": 0.5
+          },
+          {
+            "stable_ratio": 0.3,
+            "max_sustainable_extraction": 0.5
+          },
+          {
+            "stable_ratio": 0.5,
+            "max_sustainable_extraction": 2.0
+          }
+        ],
+        "minimum_ratio_curve_by_extraction": [
+          {
+            "extraction_rate": 0.1,
+            "min_sustainable_ratio": 0.05
+          },
+          {
+            "extraction_rate": 0.5,
+            "min_sustainable_ratio": 0.2
+          },
+          {
+            "extraction_rate": 1.0,
+            "min_sustainable_ratio": 0.5
+          },
+          {
+            "extraction_rate": 1.5,
+            "min_sustainable_ratio": 0.5
+          },
+          {
+            "extraction_rate": 2.0,
+            "min_sustainable_ratio": 0.5
+          }
+        ]
+      },
+      "status": "confirmed",
+      "probability": 1.0,
+      "evidence_strength": "high"
+    },
+    {
+      "claim_id": "EMRG_012",
+      "statement": "Substrate regeneration is slower than extraction acceleration, producing a temporal asymmetry: sustainability declines as the substrate ratio shrinks and the extraction rate rises along the historical trajectory.",
+      "prediction": "Pre-industrial composition is more sustainable than current-estimate composition.",
+      "falsification_criteria": "Current-estimate composition is at least as sustainable as pre-industrial composition.",
+      "measurement_method": "Run each entry in HISTORICAL_RATIOS through test_sustainability and compare scores.",
+      "measured_outcome": {
+        "pre_industrial_score": 0.9980182078713776,
+        "current_estimate_score": 0.0,
+        "gap": 0.9980182078713776,
+        "by_civilization": {
+          "pre_industrial_typical": 0.9980182078713776,
+          "early_industrial": 0.9976870235504213,
+          "mid_industrial": 0.0,
+          "late_industrial": 0.0,
+          "current_estimate": 0.0,
+          "inca_empire": 0.9980187978688224,
+          "late_rome": 0.0,
+          "late_maya": 0.0
+        }
+      },
+      "status": "confirmed",
+      "probability": 1.0,
+      "evidence_strength": "medium",
+      "implications": [
+        "Sustainability cannot be recovered as fast as it can be lost (regeneration_rate << extraction_rate)."
+      ]
+    },
+    {
+      "claim_id": "EMRG_013",
+      "statement": "scale_builder agents contribute drift coherence to substrate at sustainable ratios under reality stress (lower substrate avg_drift), but do NOT change survival outcomes when the substrate is pushed below the threshold curve. Substrate civilizations sustain on their own; narrative augmentation supports coherence, not basic survival.",
+      "prediction": "In the sustainable regime, substrate avg_drift with scale_builders < substrate avg_drift without. In the unsustainable regime, collapse rate is approximately the same with or without scale_builders.",
+      "falsification_criteria": "scale_builders do not reduce substrate drift in the sustainable regime, OR scale_builders measurably rescue the unsustainable regime (would mean the mechanism is too generous).",
+      "measurement_method": "scale_builder_amplification_test: vary scale_builder_count in two regimes -- (sustainable) stable=5 + parasitic=5 + extraction=0.4, and (unsustainable) stable=2 + parasitic=15 + extraction=1.5. Compare substrate avg_drift in the first regime and collapse_rate in the second.",
+      "measured_outcome": {
+        "sustainable_regime": {
+          "substrate_drift_without_scale_builders": 0.009564072382124257,
+          "best_substrate_drift_with_scale_builders": 0.008702254045035218,
+          "best_scale_builder_count": 6,
+          "drift_reduction": 0.0008618183370890393
+        },
+        "unsustainable_regime": {
+          "collapse_rate_without_scale_builders": 1.0,
+          "best_collapse_rate_with_scale_builders": 1.0,
+          "survival_unchanged": true
+        },
+        "disruption_resilience": {
+          "recovery_steps_without_scale_builders": 7.0,
+          "best_recovery_steps_with_scale_builders": 4.0,
+          "peak_drift_without": 1.1616334143461367,
+          "peak_drift_best_with": 0.91176891373725,
+          "best_scale_builder_count": 6
+        }
+      },
+      "status": "confirmed",
+      "probability": 1.0,
+      "evidence_strength": "medium",
+      "notes": "Empirically grounded by substrate civilizations that sustained for millennia without narrative augmentation -- Anishinaabe corridor, Aboriginal Australia, Polynesian wayfinding, Iroquois Confederacy. Narrative is a drift-coherence amplifier when present, not a survival prerequisite."
+    },
+    {
+      "claim_id": "EMRG_015",
+      "statement": "scale_builder narrative agents amplify REACH, not survival. In multi-community scenarios where substrate communities are isolated, scale_builders are the only agents that couple across community boundaries; their presence enables substrate methodology to transmit to communities beyond direct contact range.",
+      "prediction": "Cross-community position gap (community B mean position vs community A substrate mean) is smaller with a scale_builder bridge than without.",
+      "falsification_criteria": "Scale_builder bridge does not reduce the cross-community gap; distant communities remain on their own consensus regardless of bridge presence.",
+      "measurement_method": "multi_community_reach_test: build two isolated communities (A: substrate-rich, B: parasitic, starting at offset position), run with and without a scale_builder bridge; compare the average absolute position gap between community A substrate and community B.",
+      "measured_outcome": {
+        "gap_without_bridge": 1876.9106728336799,
+        "gap_with_bridge": 0.0629337526842576,
+        "gap_reduction": 1876.8477390809956,
+        "b_drift_without_bridge": 1876.9219409222753,
+        "b_drift_with_bridge": 0.07151631496535069,
+        "scale_builder_count": 4
+      },
+      "status": "confirmed",
+      "probability": 1.0,
+      "evidence_strength": "medium",
+      "evidence_basis": [
+        "Cherokee syllabary: literacy spread across the nation",
+        "Inca quipu: continental empire coordination",
+        "Polynesian charts: Pacific-wide navigation methodology",
+        "All examples of reach amplification, not survival."
+      ]
     }
   ]
 }

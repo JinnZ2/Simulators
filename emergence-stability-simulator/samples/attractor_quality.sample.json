@@ -1,0 +1,29 @@
+{
+  "timestamp": "2026-05-24T02:11:52.586173",
+  "runs_per_scenario": 60,
+  "timesteps_per_run": 80,
+  "reality_perturbation_strength": 0.4,
+  "reality_perturbation_frequency": 0.3,
+  "scenarios": {
+    "stable_majority_no_reality": {
+      "avg_individual_drift": 0.03966766008524559,
+      "avg_final_entropy": 0.048774717578673035,
+      "runs": 60
+    },
+    "stable_majority_reality": {
+      "avg_individual_drift": 0.07023326270971167,
+      "avg_final_entropy": 0.09221303216919849,
+      "runs": 60
+    },
+    "parasitic_majority_no_reality": {
+      "avg_individual_drift": 0.35245673059966154,
+      "avg_final_entropy": 0.1909162095480011,
+      "runs": 60
+    },
+    "parasitic_majority_reality": {
+      "avg_individual_drift": 1.5506868552714212,
+      "avg_final_entropy": 0.8626939096476346,
+      "runs": 60
+    }
+  }
+}

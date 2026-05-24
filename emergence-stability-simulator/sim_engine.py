@@ -49,9 +49,19 @@ class Agent:
         recovery_rate: float = 1.0,
         coupling_susceptibility: float = 0.5,
         adaptation_persistence: float = 0.0,
+        energy_budget: float = float('inf'),
+        extraction_rate: float = 0.0,
+        regeneration_rate: float = 0.0,
     ):
         self.agent_id = agent_id
         self.baseline_type = baseline_type
+        # Frozen snapshot of the type at construction. Used by
+        # detect_collapse so scale_builder agents (which also carry a
+        # finite budget in balance scenarios but never exhaust) don't
+        # mask physics-agent exhaustion. Also used when a physics
+        # agent flips to engagement at exhaustion -- we still want
+        # downstream code to know it WAS substrate.
+        self.initial_baseline_type = baseline_type
         self.baseline_value = baseline_value
 
         # State variable: current position relative to baseline
@@ -69,12 +79,25 @@ class Agent:
         # at the start of every timestep.
         self.recovery_modifier = 0.0
 
+        # Sustainability parameters (used by balance_threshold.py).
+        # Defaults give every existing agent infinite budget, no
+        # extraction, no regeneration -- so older code is unaffected.
+        # Finite energy_budget + non-zero rates opt into the
+        # extraction/exhaustion mechanics.
+        self.energy_budget = energy_budget
+        self.initial_energy_budget = energy_budget
+        self.extraction_rate = extraction_rate
+        self.regeneration_rate = regeneration_rate
+        self.exhausted = False
+        self.exhaustion_timestep: Optional[int] = None
+
         # Tracked history
         self.position_history: List[float] = [self.position]
         self.energy_spent_history: List[float] = [0.0]
         self.drift_history: List[float] = [0.0]
         self.cascade_contribution_history: List[float] = [0.0]
         self.recovery_modifier_history: List[float] = [0.0]
+        self.energy_budget_history: List[float] = [self.energy_budget]
 
         # Cumulative metrics
         self.total_energy_spent = 0.0
@@ -84,10 +107,90 @@ class Agent:
         # weighted by how reactive it is. Replaces a binary threshold counter so
         # short / low-perturbation runs still produce a meaningful signal.
         self.cascade_amplifications = 0.0
+        self.total_extracted_from = 0.0
+        self.total_extracted_by = 0.0
 
     def compute_drift(self) -> float:
         """Distance from baseline."""
         return abs(self.position - self.baseline_value)
+
+    def _has_finite_budget(self) -> bool:
+        return self.energy_budget != float('inf')
+
+    def _mark_exhausted(self) -> None:
+        """
+        Mark the agent as exhausted. If it was a physics-baseline
+        substrate agent, flip it to engagement (substrate population
+        walks away or has to take up extractive behavior to survive).
+        """
+        if self.exhausted:
+            return
+        self.exhausted = True
+        self.exhaustion_timestep = len(self.position_history)
+        if self.baseline_type == 'physics':
+            self.baseline_type = 'engagement'
+            self.recovery_rate = 0.0
+            self.adaptation_persistence = 0.8
+
+    def regenerate(self) -> None:
+        """
+        Replenish energy budget by regeneration_rate (capped at the
+        initial value). Called once per timestep by the simulation
+        loop. No-op for agents without a regeneration rate or with
+        infinite budget.
+        """
+        if not self._has_finite_budget() or self.regeneration_rate <= 0.0:
+            return
+        if self.exhausted:
+            return
+        self.energy_budget = min(
+            self.initial_energy_budget,
+            self.energy_budget + self.regeneration_rate,
+        )
+
+    def receive_extraction(self, amount: float) -> float:
+        """
+        Have `amount` energy extracted from this agent's budget.
+        Returns the actual amount extracted (bounded by current
+        budget). Marks the agent exhausted if budget hits zero.
+        """
+        if not self._has_finite_budget() or self.exhausted or amount <= 0.0:
+            return 0.0
+        actual = min(amount, self.energy_budget)
+        self.energy_budget -= actual
+        self.total_extracted_from += actual
+        if self.energy_budget <= 0.0:
+            self.energy_budget = 0.0
+            self._mark_exhausted()
+        return actual
+
+    def extract_from(self, target: 'Agent', amount: float) -> float:
+        """
+        Extract `amount` from `target`'s budget. Returns the actual
+        amount extracted, which is bookkept on both agents.
+        """
+        if target is self or target.exhausted or amount <= 0.0:
+            return 0.0
+        actual = target.receive_extraction(amount)
+        self.total_extracted_by += actual
+        return actual
+
+    def contribute_to_neighbor_budget(self, target: 'Agent',
+                                      amount: float) -> float:
+        """
+        Add `amount` to a neighbor's energy budget (clamped to its
+        initial value). Used by scale_builder agents to model
+        substrate-regeneration support beyond just recovery_modifier.
+        Returns the actual amount transferred.
+        """
+        if amount <= 0.0 or target is self or target.exhausted:
+            return 0.0
+        if not target._has_finite_budget():
+            return 0.0
+        before = target.energy_budget
+        target.energy_budget = min(target.initial_energy_budget,
+                                   target.energy_budget + amount)
+        return target.energy_budget - before
 
     def emit_effects_on_neighbors(self, other_agents: List['Agent']) -> None:
         """
@@ -98,10 +201,19 @@ class Agent:
         if self.baseline_type == 'scale_builder':
             # First-principles narrative: substrate-respecting extension.
             # Contributes a positive boost to every neighbor's effective
-            # recovery rate this step (regeneration support). Magnitude
-            # decays with own drift — a scale builder that has drifted
-            # far from its own baseline can no longer support neighbors
-            # well.
+            # recovery rate this step (drift-coherence support).
+            # Magnitude decays with own drift — a scale builder that
+            # has drifted far from its own baseline can no longer
+            # support neighbors well.
+            #
+            # NOTE: scale_builder does NOT contribute to neighbor
+            # energy_budget. Substrate civilizations (Anishinaabe
+            # corridor, Aboriginal Australia, Polynesian wayfinding,
+            # Iroquois Confederacy) sustained for millennia without
+            # narrative augmentation. Narrative does not save
+            # substrate from extraction; it supports drift coherence
+            # under perturbation. See EMRG_013 for the measurable
+            # version of that distinction.
             own_drift = self.compute_drift()
             health = max(0.0, 1.0 - own_drift * 0.5)
             boost = 0.20 * health
@@ -248,11 +360,20 @@ class Agent:
         else:
             energy_cost = 0.0
 
+        # Energy budget bookkeeping. Only active when budget is finite,
+        # so existing infinite-budget scenarios behave identically.
+        if self._has_finite_budget() and not self.exhausted:
+            self.energy_budget = max(0.0,
+                                     self.energy_budget - energy_cost * 0.5)
+            if self.energy_budget <= 0.0:
+                self._mark_exhausted()
+
         # Record state
         self.position_history.append(self.position)
         self.energy_spent_history.append(energy_cost)
         self.drift_history.append(self.compute_drift())
         self.recovery_modifier_history.append(self.recovery_modifier)
+        self.energy_budget_history.append(self.energy_budget)
         self.total_energy_spent += energy_cost
         self.max_drift = max(self.max_drift, self.compute_drift())
 
@@ -264,6 +385,11 @@ class Agent:
 
     def get_state_summary(self) -> Dict:
         """Return current state metrics."""
+        budget = self.energy_budget
+        if budget == float('inf'):
+            budget_out: Optional[float] = None
+        else:
+            budget_out = budget
         return {
             'agent_id': self.agent_id,
             'baseline_type': self.baseline_type,
@@ -274,6 +400,11 @@ class Agent:
             'cascade_amplifications': self.cascade_amplifications,
             'avg_drift': sum(self.drift_history) / len(self.drift_history),
             'returned_to_baseline': self.compute_drift() < 0.1,
+            'energy_remaining': budget_out,
+            'exhausted': self.exhausted,
+            'exhaustion_timestep': self.exhaustion_timestep,
+            'total_extracted_from': self.total_extracted_from,
+            'total_extracted_by': self.total_extracted_by,
         }
 
 
@@ -312,8 +443,10 @@ class EmergenceSimulation:
         # System-level metrics
         self.system_entropy_history: List[float] = []
         self.coupling_strength_history: List[float] = []
+        self.exhausted_count_history: List[int] = []
         self.bifurcation_detected: bool = False
         self.bifurcation_timestep: Optional[int] = None
+        self.collapse_timestep: Optional[int] = None
 
     def compute_system_entropy(self) -> float:
         """
@@ -352,6 +485,46 @@ class EmergenceSimulation:
         # Bifurcation = sustained high entropy
         return all(e > 1.0 for e in recent_entropy)
 
+    def apply_extraction(self) -> None:
+        """
+        Each non-exhausted agent with extraction_rate > 0 extracts from
+        a physics-baseline neighbor (highest energy budget first). This
+        is the substrate-exhaustion mechanism used by balance_threshold.
+        No-op when nobody has a non-zero extraction_rate.
+        """
+        targets = [a for a in self.agents
+                   if a.baseline_type == 'physics' and not a.exhausted
+                   and a._has_finite_budget()]
+        extractors = [a for a in self.agents
+                      if a.extraction_rate > 0.0 and not a.exhausted]
+        if not targets or not extractors:
+            return
+        for extractor in extractors:
+            available = [t for t in targets
+                         if not t.exhausted and t.energy_budget > 0.0]
+            if not available:
+                return
+            target = max(available, key=lambda a: a.energy_budget)
+            extractor.extract_from(target, extractor.extraction_rate)
+
+    def count_exhausted(self) -> int:
+        return sum(1 for a in self.agents if a.exhausted)
+
+    def detect_collapse(self) -> bool:
+        """
+        System has collapsed when every physics-baseline substrate
+        agent (started with a finite budget) is exhausted. Filtered
+        on initial_baseline_type so that scale_builder agents -- which
+        also have finite budgets in balance scenarios but don't
+        exhaust -- cannot mask physics-agent collapse.
+        """
+        substrate = [a for a in self.agents
+                     if a.initial_baseline_type == 'physics'
+                     and a.initial_energy_budget != float('inf')]
+        if not substrate:
+            return False
+        return all(a.exhausted for a in substrate)
+
     def run(self) -> Dict:
         """Run full simulation."""
         for t in range(self.timesteps):
@@ -370,6 +543,11 @@ class EmergenceSimulation:
                     and random.random() < self.reality_perturbation_frequency):
                 reality_pert = self.reality_perturbation_strength
 
+            # Phase 0: extraction (parasitic agents extract from
+            # physics neighbors; substrate exhaustion mechanism).
+            # No-op when nobody has extraction_rate > 0.
+            self.apply_extraction()
+
             # Phase A: reset transient modifiers and let scale_builder /
             # inverted_narrative agents write their per-step recovery
             # effects onto every other agent.
@@ -386,14 +564,24 @@ class EmergenceSimulation:
                 agent.interact(others, perturbation,
                                reality_perturbation=reality_pert)
 
+            # Phase C: substrate regeneration. No-op for agents
+            # without regeneration_rate.
+            for agent in self.agents:
+                agent.regenerate()
+
             # Record system metrics
             self.system_entropy_history.append(self.compute_system_entropy())
             self.coupling_strength_history.append(self.compute_coupling_strength())
+            self.exhausted_count_history.append(self.count_exhausted())
 
             # Detect bifurcation
             if not self.bifurcation_detected and self.detect_bifurcation():
                 self.bifurcation_detected = True
                 self.bifurcation_timestep = t
+
+            # Detect collapse (substrate exhaustion)
+            if self.collapse_timestep is None and self.detect_collapse():
+                self.collapse_timestep = t
 
         return self.get_results()
 
@@ -411,6 +599,8 @@ class EmergenceSimulation:
             ),
             'bifurcation_detected': self.bifurcation_detected,
             'bifurcation_timestep': self.bifurcation_timestep,
+            'collapse_timestep': self.collapse_timestep,
+            'final_exhausted_count': self.count_exhausted(),
         }
 
 
