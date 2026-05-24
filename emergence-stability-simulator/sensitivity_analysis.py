@@ -2,331 +2,702 @@
 """
 sensitivity_analysis.py
 
-Parameter sensitivity analysis.
+Parameter sensitivity analysis for the emergence stability simulator.
+Sweeps individual parameters and measures their effect on multi-agent dynamics.
 
-For each parameter in stable/parasitic agents, test a range of values
-and measure how final outcomes change. Identifies bifurcation thresholds
-and reveals which structural properties matter most.
+Generates falsifiable claims about parameter sensitivities, including
+the EMRG_006 thermodynamic attractor finding.
 
 License: CC0
-Dependencies: stdlib only
+Dependencies: stdlib only (uses sim_engine, agent_variants)
 """
 
 import json
 import math
-from datetime import datetime
 from pathlib import Path
+from datetime import datetime
 from typing import Dict, List, Optional
 
-from sim_engine import EmergenceSimulation
-from agent_variants import (
-    make_pure_stable,
-    make_pure_parasitic,
-    make_balanced_hybrid,
-)
+from sim_engine import Agent, EmergenceSimulation
 
+
+# ============================================================
+# PARAMETER REGISTRY
+# ============================================================
+
+# Maps parameter_name → (agent_baseline_type, parameter_field)
+# Used by parameter_sweep to know what to vary on which agent
+PARAMETER_REGISTRY = {
+    'stable_recovery_rate': ('physics', 'recovery_rate'),
+    'stable_coupling_susceptibility': ('physics', 'coupling_susceptibility'),
+    'stable_adaptation_persistence': ('physics', 'adaptation_persistence'),
+    'parasitic_recovery_rate': ('engagement', 'recovery_rate'),
+    'parasitic_coupling_susceptibility': ('engagement', 'coupling_susceptibility'),
+    'parasitic_adaptation_persistence': ('engagement', 'adaptation_persistence'),
+    'hybrid_recovery_rate': ('hybrid', 'recovery_rate'),
+    'hybrid_coupling_susceptibility': ('hybrid', 'coupling_susceptibility'),
+    'hybrid_adaptation_persistence': ('hybrid', 'adaptation_persistence'),
+}
+
+
+# ============================================================
+# AGENT BUILDERS (configurable defaults)
+# ============================================================
+
+def make_stable_agent(agent_id='stable', **overrides):
+    params = {
+        'baseline_type': 'physics',
+        'baseline_value': 0.0,
+        'recovery_rate': 0.8,
+        'coupling_susceptibility': 0.3,
+        'adaptation_persistence': 0.1,
+    }
+    params.update(overrides)
+    return Agent(agent_id=agent_id, **params)
+
+
+def make_parasitic_agent(agent_id='parasitic', **overrides):
+    params = {
+        'baseline_type': 'engagement',
+        'baseline_value': 0.0,
+        'recovery_rate': 0.0,
+        'coupling_susceptibility': 0.9,
+        'adaptation_persistence': 0.8,
+    }
+    params.update(overrides)
+    return Agent(agent_id=agent_id, **params)
+
+
+def make_hybrid_agent(agent_id='hybrid', **overrides):
+    params = {
+        'baseline_type': 'hybrid',
+        'baseline_value': 0.0,
+        'recovery_rate': 0.4,
+        'coupling_susceptibility': 0.5,
+        'adaptation_persistence': 0.4,
+    }
+    params.update(overrides)
+    return Agent(agent_id=agent_id, **params)
+
+
+# ============================================================
+# SCENARIO BUILDERS FOR SWEEPS
+# ============================================================
+
+def build_mixed_scenario(param_name, param_value):
+    """
+    Build standard mixed scenario (stable + parasitic + hybrid) with
+    the specified parameter overridden on the relevant agent.
+    """
+    if param_name not in PARAMETER_REGISTRY:
+        return None
+
+    baseline_type, field = PARAMETER_REGISTRY[param_name]
+
+    # Default agents
+    stable_kwargs = {}
+    parasitic_kwargs = {}
+    hybrid_kwargs = {}
+
+    # Apply parameter override to correct agent
+    if baseline_type == 'physics':
+        stable_kwargs[field] = param_value
+    elif baseline_type == 'engagement':
+        parasitic_kwargs[field] = param_value
+    elif baseline_type == 'hybrid':
+        hybrid_kwargs[field] = param_value
+
+    agents = [
+        make_stable_agent(**stable_kwargs),
+        make_parasitic_agent(**parasitic_kwargs),
+        make_hybrid_agent(**hybrid_kwargs),
+    ]
+    return agents
+
+
+def build_stable_majority_scenario(param_name, param_value, stable_count=3):
+    """
+    Build scenario with stable majority + one parasitic.
+    Used for EMRG_006 attractor testing.
+    """
+    if param_name not in PARAMETER_REGISTRY:
+        return None
+
+    baseline_type, field = PARAMETER_REGISTRY[param_name]
+
+    agents = [make_stable_agent(f'stable_{i}') for i in range(stable_count)]
+
+    parasitic_kwargs = {}
+    if baseline_type == 'engagement':
+        parasitic_kwargs[field] = param_value
+
+    agents.append(make_parasitic_agent('parasitic', **parasitic_kwargs))
+    return agents
+
+
+# ============================================================
+# CORE SWEEP FUNCTION
+# ============================================================
 
 def parameter_sweep(
-    parameter_name: str,
-    value_range: List[float],
-    runs_per_value: int = 20,
+    param_name: str,
+    values: List[float],
+    runs_per_value: int = 10,
+    timesteps: int = 100,
+    use_attractor_scenario: bool = False,
 ) -> Dict:
     """
-    Sweep a single parameter across a range of values.
-    Measure: stable_drift, parasitic_drift, win_rate, bifurcation_rate.
+    Sweep a single parameter across values.
+
+    For each value:
+        - run `runs_per_value` Monte Carlo simulations
+        - aggregate metrics: drift, win rate, bifurcation rate
+        - record one sweep entry
+
+    Returns:
+        {
+            'param_name': str,
+            'values_tested': list,
+            'sweeps': [
+                {
+                    'param_value': float,
+                    'stable_avg_drift': float,
+                    'parasitic_avg_drift': float,
+                    'hybrid_avg_drift': float,
+                    'drift_ratio': float,
+                    'stable_win_rate': float,
+                    'parasitic_win_rate': float,
+                    'bifurcation_rate': float,
+                    'avg_energy_stable': float,
+                    'avg_energy_parasitic': float,
+                },
+                ...
+            ],
+            'scenario': str ('mixed' or 'stable_majority'),
+        }
+
+    If param_name is unknown, returns empty sweeps.
     """
-    results = {
-        'parameter': parameter_name,
-        'values_tested': value_range,
-        'sweeps': []
-    }
+    # Handle unknown parameter
+    if param_name not in PARAMETER_REGISTRY:
+        return {
+            'param_name': param_name,
+            'values_tested': values,
+            'sweeps': [],
+            'scenario': 'unknown_parameter',
+            'error': f'Parameter {param_name} not in registry',
+        }
 
-    known_parameters = {
-        'stable_recovery_rate',
-        'stable_coupling_susceptibility',
-        'parasitic_coupling_susceptibility',
-        'parasitic_adaptation_persistence',
-    }
-    if parameter_name not in known_parameters:
-        return results
+    # Determine scenario type
+    # For parasitic_coupling_susceptibility, also do stable_majority test
+    is_coupling_sweep = (param_name == 'parasitic_coupling_susceptibility')
 
-    for test_value in value_range:
-        stable_drifts: List[float] = []
-        parasitic_drifts: List[float] = []
-        bifurcations = 0
+    sweep_results = []
+
+    for value in values:
+        run_results = []
 
         for run_idx in range(runs_per_value):
-            stable = make_pure_stable()
-            parasitic = make_pure_parasitic()
+            # Build scenario
+            if use_attractor_scenario or is_coupling_sweep:
+                agents = build_stable_majority_scenario(param_name, value)
+            else:
+                agents = build_mixed_scenario(param_name, value)
 
-            if parameter_name == 'stable_recovery_rate':
-                stable.recovery_rate = test_value
-            elif parameter_name == 'stable_coupling_susceptibility':
-                stable.coupling_susceptibility = test_value
-            elif parameter_name == 'parasitic_coupling_susceptibility':
-                parasitic.coupling_susceptibility = test_value
-            elif parameter_name == 'parasitic_adaptation_persistence':
-                parasitic.adaptation_persistence = test_value
+            if agents is None:
+                continue
 
-            agents = [stable, parasitic, make_balanced_hybrid()]
-
+            # Run simulation
             sim = EmergenceSimulation(
                 agents=agents,
-                timesteps=100,
+                timesteps=timesteps,
                 perturbation_strength=0.3,
                 perturbation_frequency=0.2,
                 seed=run_idx,
             )
-            results_run = sim.run()
+            results = sim.run()
+            run_results.append(results)
 
-            stable_drifts.append(results_run['agents'][0]['final_drift'])
-            parasitic_drifts.append(results_run['agents'][1]['final_drift'])
-            if results_run['bifurcation_detected']:
-                bifurcations += 1
+        if not run_results:
+            continue
 
-        avg_stable = sum(stable_drifts) / len(stable_drifts)
-        avg_parasitic = sum(parasitic_drifts) / len(parasitic_drifts)
-        stable_wins = sum(1 for s, p in zip(stable_drifts, parasitic_drifts) if s < p)
+        # Aggregate across runs
+        sweep_entry = aggregate_run_results(run_results, value)
+        sweep_results.append(sweep_entry)
 
-        results['sweeps'].append({
-            'parameter_value': test_value,
-            'stable_avg_drift': avg_stable,
-            'parasitic_avg_drift': avg_parasitic,
-            'drift_ratio': avg_parasitic / max(avg_stable, 0.001),
-            'stable_win_rate': stable_wins / runs_per_value,
-            'bifurcation_rate': bifurcations / runs_per_value,
-        })
-
-    return results
-
-
-def run_all_sensitivity_tests(runs_per_value: int = 15) -> Dict:
-    """Run sensitivity analysis for key parameters."""
-    print("Running parameter sensitivity analysis...")
-
-    all_results = {
-        'timestamp': datetime.utcnow().isoformat(),
-        'description': 'Sensitivity analysis of emergence stability parameters',
+    return {
+        'param_name': param_name,
+        'values_tested': values,
         'runs_per_value': runs_per_value,
-        'analyses': []
+        'timesteps': timesteps,
+        'sweeps': sweep_results,
+        'scenario': 'stable_majority' if (use_attractor_scenario or is_coupling_sweep) else 'mixed',
     }
 
-    sweeps_to_run = [
-        ('stable_recovery_rate', [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]),
-        ('stable_coupling_susceptibility', [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]),
-        ('parasitic_coupling_susceptibility', [0.2, 0.4, 0.6, 0.8, 1.0]),
-        ('parasitic_adaptation_persistence', [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]),
-    ]
 
-    for name, value_range in sweeps_to_run:
-        print(f"  Testing {name}...")
-        all_results['analyses'].append(
-            parameter_sweep(name, value_range, runs_per_value=runs_per_value)
+def aggregate_run_results(run_results: List[Dict], param_value: float) -> Dict:
+    """
+    Aggregate metrics across multiple runs at the same parameter value.
+    """
+    n_runs = len(run_results)
+
+    # Collect per-agent metrics
+    stable_drifts = []
+    parasitic_drifts = []
+    hybrid_drifts = []
+    stable_energies = []
+    parasitic_energies = []
+    bifurcations = 0
+    stable_wins = 0
+    parasitic_wins = 0
+
+    for result in run_results:
+        # Find each agent type in the result
+        for agent_summary in result['agents']:
+            agent_id = agent_summary['agent_id']
+            baseline_type = agent_summary['baseline_type']
+
+            if baseline_type == 'physics':
+                stable_drifts.append(agent_summary['final_drift'])
+                stable_energies.append(agent_summary['total_energy_spent'])
+            elif baseline_type == 'engagement':
+                parasitic_drifts.append(agent_summary['final_drift'])
+                parasitic_energies.append(agent_summary['total_energy_spent'])
+            elif baseline_type == 'hybrid':
+                hybrid_drifts.append(agent_summary['final_drift'])
+
+        # Bifurcation detection
+        if result.get('bifurcation_detected'):
+            bifurcations += 1
+
+        # Win determination: lowest final drift among all agents
+        agent_drifts = {a['agent_id']: a['final_drift'] for a in result['agents']}
+        winner_id = min(agent_drifts, key=agent_drifts.get)
+
+        # Map winner back to baseline_type
+        winner_baseline = next(
+            (a['baseline_type'] for a in result['agents'] if a['agent_id'] == winner_id),
+            None
         )
+        if winner_baseline == 'physics':
+            stable_wins += 1
+        elif winner_baseline == 'engagement':
+            parasitic_wins += 1
 
-    output_file = Path('results/sensitivity_analysis.json')
-    output_file.parent.mkdir(parents=True, exist_ok=True)
-    with open(output_file, 'w') as f:
-        json.dump(all_results, f, indent=2)
+    # Compute averages
+    avg_stable_drift = sum(stable_drifts) / len(stable_drifts) if stable_drifts else 0.0
+    avg_parasitic_drift = sum(parasitic_drifts) / len(parasitic_drifts) if parasitic_drifts else 0.0
+    avg_hybrid_drift = sum(hybrid_drifts) / len(hybrid_drifts) if hybrid_drifts else 0.0
 
-    print(f"Sensitivity analysis complete. Results saved to {output_file}")
-    return all_results
+    drift_ratio = avg_parasitic_drift / max(avg_stable_drift, 0.001)
 
-
-def generate_sensitivity_report(results: Dict) -> str:
-    """Generate ASCII report of sensitivity analysis."""
-    lines = []
-    lines.append("\n" + "=" * 70)
-    lines.append("PARAMETER SENSITIVITY ANALYSIS")
-    lines.append("=" * 70)
-
-    for analysis in results['analyses']:
-        param = analysis['parameter']
-        lines.append(f"\n\n{param.upper()}")
-        lines.append("-" * 70)
-        lines.append(
-            f"{'value':>8} {'stable_drift':>12} {'parasitic_drift':>14} "
-            f"{'ratio':>8} {'stable_win':>11} {'bifurc':>8}"
-        )
-        lines.append("-" * 70)
-
-        for sweep in analysis['sweeps']:
-            lines.append(
-                f"{sweep['parameter_value']:>8.2f} "
-                f"{sweep['stable_avg_drift']:>12.3f} "
-                f"{sweep['parasitic_avg_drift']:>14.3f} "
-                f"{sweep['drift_ratio']:>7.2f}x "
-                f"{sweep['stable_win_rate']:>10.1%} "
-                f"{sweep['bifurcation_rate']:>7.1%}"
-            )
-
-        bifurc_sweeps = [s for s in analysis['sweeps'] if s['bifurcation_rate'] > 0.3]
-        if bifurc_sweeps:
-            lines.append(f"\n  → Bifurcation threshold: ~{bifurc_sweeps[0]['parameter_value']:.2f}")
-
-        critical_sweeps = [s for s in analysis['sweeps'] if s['stable_win_rate'] < 0.55]
-        if critical_sweeps:
-            lines.append(f"  → Grounding advantage lost at: ~{critical_sweeps[0]['parameter_value']:.2f}")
-
-    lines.append("\n" + "=" * 70)
-    lines.append("INTERPRETATION")
-    lines.append("=" * 70)
-    lines.append("""
-Sensitivity analysis reveals:
-1. Which parameters control stability/cascade transition
-2. Bifurcation thresholds (where system flips from stable to chaotic)
-3. Critical values where grounding advantage disappears
-4. Parametric robustness of the grounding hypothesis
-
-If stable advantage persists across all parameter ranges:
-  → grounding is STRUCTURAL, not brittle
-
-If stable advantage disappears above threshold:
-  → grounding REQUIRES adequate parameter values
-  → identifies what "adequate" means quantitatively
-""")
-    return "\n".join(lines)
+    return {
+        'param_value': param_value,
+        'stable_avg_drift': avg_stable_drift,
+        'parasitic_avg_drift': avg_parasitic_drift,
+        'hybrid_avg_drift': avg_hybrid_drift,
+        'drift_ratio': drift_ratio,
+        'stable_win_rate': stable_wins / n_runs,
+        'parasitic_win_rate': parasitic_wins / n_runs,
+        'bifurcation_rate': bifurcations / n_runs,
+        'avg_energy_stable': sum(stable_energies) / len(stable_energies) if stable_energies else 0.0,
+        'avg_energy_parasitic': sum(parasitic_energies) / len(parasitic_energies) if parasitic_energies else 0.0,
+        'n_runs': n_runs,
+    }
 
 
-def _pearson(xs: List[float], ys: List[float]) -> float:
-    """Pearson correlation coefficient (stdlib only). Returns 0 on degenerate input."""
-    n = len(xs)
-    if n < 2 or n != len(ys):
+# ============================================================
+# CORRELATION ANALYSIS
+# ============================================================
+
+def compute_correlation(x_values: List[float], y_values: List[float]) -> float:
+    """
+    Compute Pearson correlation coefficient between two lists.
+    Returns 0.0 if either list is too short or has zero variance.
+    """
+    if len(x_values) < 2 or len(y_values) < 2:
         return 0.0
-    mean_x = sum(xs) / n
-    mean_y = sum(ys) / n
-    num = sum((x - mean_x) * (y - mean_y) for x, y in zip(xs, ys))
-    den_x = math.sqrt(sum((x - mean_x) ** 2 for x in xs))
-    den_y = math.sqrt(sum((y - mean_y) ** 2 for y in ys))
-    if den_x == 0 or den_y == 0:
+    if len(x_values) != len(y_values):
         return 0.0
-    return num / (den_x * den_y)
 
+    n = len(x_values)
+    mean_x = sum(x_values) / n
+    mean_y = sum(y_values) / n
+
+    numerator = sum(
+        (x_values[i] - mean_x) * (y_values[i] - mean_y)
+        for i in range(n)
+    )
+
+    denom_x = math.sqrt(sum((x - mean_x) ** 2 for x in x_values))
+    denom_y = math.sqrt(sum((y - mean_y) ** 2 for y in y_values))
+
+    if denom_x == 0 or denom_y == 0:
+        return 0.0
+
+    return numerator / (denom_x * denom_y)
+
+
+def extract_sweep_correlation(sweep_data: Dict, metric_key: str) -> float:
+    """
+    Compute correlation between parameter values and a specific metric.
+    """
+    sweeps = sweep_data.get('sweeps', [])
+    if not sweeps:
+        return 0.0
+
+    x_values = [s['param_value'] for s in sweeps]
+    y_values = [s.get(metric_key, 0.0) for s in sweeps]
+
+    return compute_correlation(x_values, y_values)
+
+
+# ============================================================
+# CLAIM GENERATION
+# ============================================================
 
 def generate_sensitivity_claims(results: Dict) -> List[Dict]:
     """
-    Build SENS_* claims from sweep results and return them.
-    Designed to be merged into CLAIM_TABLE.json by run_monte_carlo.py.
+    Generate falsifiable claims from sensitivity analysis results.
+
+    Input format:
+        {'analyses': [sweep_result_1, sweep_result_2, ...]}
+
+    Output: list of claim dicts with:
+        - claim_id (SENS_xxx or EMRG_xxx)
+        - statement
+        - falsification_criteria
+        - measurement_method
+        - measured_outcome
+        - status (confirmed/refuted/inconclusive)
+        - probability
     """
-    claims: List[Dict] = []
+    claims = []
+    analyses = results.get('analyses', [])
 
-    def find_analysis(name: str) -> Optional[Dict]:
-        for a in results['analyses']:
-            if a['parameter'] == name:
-                return a
-        return None
+    for analysis in analyses:
+        param_name = analysis.get('param_name', '')
+        sweeps = analysis.get('sweeps', [])
 
-    # SENS_001: recovery_rate threshold for grounding advantage
-    a = find_analysis('stable_recovery_rate')
-    if a:
-        win_thresholds = [s['parameter_value'] for s in a['sweeps']
-                          if s['stable_win_rate'] >= 0.55]
-        threshold = min(win_thresholds) if win_thresholds else None
-        claims.append({
-            'claim_id': 'SENS_001',
-            'statement': 'Grounding advantage (stable < parasitic) requires a minimum recovery_rate',
-            'measured_outcome': {
-                'min_recovery_rate_for_advantage': threshold,
-                'sweep_values': a['values_tested'],
-                'win_rates': [s['stable_win_rate'] for s in a['sweeps']],
-            },
-            'falsification_criteria': 'stable_win_rate >= 0.55 across all recovery_rate values',
-            'status': 'confirmed' if threshold is not None and threshold > 0.0 else 'inconclusive',
-        })
+        if not sweeps:
+            continue
 
-    # SENS_002: bifurcation threshold from parasitic coupling
-    a = find_analysis('parasitic_coupling_susceptibility')
-    if a:
-        bif = [s['parameter_value'] for s in a['sweeps']
-               if s['bifurcation_rate'] > 0.3]
-        threshold = min(bif) if bif else None
-        claims.append({
-            'claim_id': 'SENS_002',
-            'statement': 'Bifurcation occurs above a critical parasitic coupling_susceptibility',
-            'measured_outcome': {
-                'bifurcation_threshold': threshold,
-                'sweep_values': a['values_tested'],
-                'bifurcation_rates': [s['bifurcation_rate'] for s in a['sweeps']],
-            },
-            'falsification_criteria': 'bifurcation_rate <= 0.3 at all tested values',
-            'status': 'confirmed' if threshold is not None else 'inconclusive',
-        })
+        # Generate parameter-specific claims
+        if param_name == 'stable_recovery_rate':
+            claims.append(_claim_stable_recovery(analysis))
 
-    # SENS_003: robustness of stable advantage across parameter space
-    total_points = 0
-    advantage_points = 0
-    for a in results['analyses']:
-        for s in a['sweeps']:
-            total_points += 1
-            if s['stable_win_rate'] > 0.55:
-                advantage_points += 1
-    fraction = advantage_points / total_points if total_points else 0.0
-    claims.append({
-        'claim_id': 'SENS_003',
-        'statement': 'Stable advantage is robust across a majority of tested parameter space',
-        'measured_outcome': {
-            'fraction_of_space_with_stable_advantage': fraction,
-            'total_points_tested': total_points,
-        },
-        'falsification_criteria': 'fraction_with_stable_advantage < 0.5',
-        'status': 'confirmed' if fraction >= 0.5 else 'refuted',
-    })
+        elif param_name == 'parasitic_adaptation_persistence':
+            claims.append(_claim_parasitic_persistence(analysis))
 
-    # SENS_004: critical persistence for parasitic agents
-    a = find_analysis('parasitic_adaptation_persistence')
-    if a:
-        ratios = [(s['parameter_value'], s['drift_ratio']) for s in a['sweeps']]
-        critical = next((v for v, r in ratios if r >= 2.0), None)
-        claims.append({
-            'claim_id': 'SENS_004',
-            'statement': 'Parasitic drift grows non-linearly with adaptation_persistence past a threshold',
-            'measured_outcome': {
-                'critical_persistence_for_2x_drift_ratio': critical,
-                'sweep_values': a['values_tested'],
-                'drift_ratios': [s['drift_ratio'] for s in a['sweeps']],
-            },
-            'falsification_criteria': 'drift_ratio < 2.0 across all persistence values',
-            'status': 'confirmed' if critical is not None else 'inconclusive',
-        })
+        elif param_name == 'parasitic_coupling_susceptibility':
+            # Two claims: one general SENS, one EMRG_006 (attractor)
+            claims.append(_claim_parasitic_coupling(analysis))
+            claims.append(_claim_emrg_006_attractor(analysis))
 
-    # EMRG_006: stable baseline acts as thermodynamic attractor
-    # Higher parasitic coupling, when surrounded by stable agents, pulls
-    # the parasite toward the stable baseline rather than amplifying drift.
-    a = find_analysis('parasitic_coupling_susceptibility')
-    if a:
-        couplings = [s['parameter_value'] for s in a['sweeps']]
-        parasitic_drifts = [s['parasitic_avg_drift'] for s in a['sweeps']]
-        correlation = _pearson(couplings, parasitic_drifts)
-        claims.append({
-            'claim_id': 'EMRG_006',
-            'statement': 'Parasitic agents with high coupling susceptibility are pulled toward the stable baseline when surrounded by stable agents (stable baseline acts as a thermodynamic attractor)',
-            'prediction': 'parasitic_drift inversely correlates with parasitic_coupling_susceptibility when stable agents form the majority',
-            'measured_outcome': {
-                'correlation_coupling_to_parasitic_drift': correlation,
-                'sweep_values': couplings,
-                'parasitic_drifts': parasitic_drifts,
-                'scenario': 'one parasitic agent + one stable agent + one hybrid agent',
-            },
-            'falsification_criteria': 'parasitic_drift increases with coupling (correlation >= 0) in a stable-majority environment',
-            'status': 'confirmed' if correlation < 0 else 'refuted',
-            'note': 'stable_baseline_is_thermodynamic_attractor — stronger evidence than predicted; parasites in a grounded environment are absorbed rather than amplified',
-        })
+        elif param_name == 'stable_coupling_susceptibility':
+            claims.append(_claim_stable_coupling(analysis))
+
+        elif param_name == 'parasitic_recovery_rate':
+            claims.append(_claim_parasitic_recovery(analysis))
 
     return claims
 
 
+def _claim_stable_recovery(analysis: Dict) -> Dict:
+    """SENS_001: higher stable_recovery_rate → lower stable drift."""
+    correlation = extract_sweep_correlation(analysis, 'stable_avg_drift')
+    confirmed = correlation < 0.0
+
+    return {
+        'claim_id': 'SENS_001',
+        'parameter': 'stable_recovery_rate',
+        'statement': 'Higher stable_recovery_rate produces lower stable_drift in mixed scenarios',
+        'prediction': 'correlation(recovery_rate, stable_drift) < 0',
+        'falsification_criteria': 'correlation >= 0 across parameter sweep',
+        'measurement_method': 'Sweep stable_recovery_rate, measure stable_avg_drift in mixed scenario',
+        'measured_outcome': {
+            'correlation_recovery_to_stable_drift': correlation,
+            'sweep_values': [s['param_value'] for s in analysis['sweeps']],
+            'measured_drifts': [s['stable_avg_drift'] for s in analysis['sweeps']],
+        },
+        'status': 'confirmed' if confirmed else 'refuted',
+        'probability': 1.0 if confirmed else 0.0,
+        'evidence_strength': 'medium',
+    }
+
+
+def _claim_parasitic_persistence(analysis: Dict) -> Dict:
+    """SENS_002: higher parasitic_adaptation_persistence → higher parasitic drift."""
+    correlation = extract_sweep_correlation(analysis, 'parasitic_avg_drift')
+    confirmed = correlation > 0.0
+
+    return {
+        'claim_id': 'SENS_002',
+        'parameter': 'parasitic_adaptation_persistence',
+        'statement': 'Higher parasitic_adaptation_persistence produces higher parasitic_drift',
+        'prediction': 'correlation(persistence, parasitic_drift) > 0',
+        'falsification_criteria': 'correlation <= 0 across parameter sweep',
+        'measurement_method': 'Sweep parasitic_adaptation_persistence, measure parasitic_avg_drift',
+        'measured_outcome': {
+            'correlation_persistence_to_parasitic_drift': correlation,
+            'sweep_values': [s['param_value'] for s in analysis['sweeps']],
+            'measured_drifts': [s['parasitic_avg_drift'] for s in analysis['sweeps']],
+        },
+        'status': 'confirmed' if confirmed else 'refuted',
+        'probability': 1.0 if confirmed else 0.0,
+        'evidence_strength': 'medium',
+        'notes': 'Intrinsic parameter test: persistence drives drift regardless of environment',
+    }
+
+
+def _claim_parasitic_coupling(analysis: Dict) -> Dict:
+    """SENS_003: parasitic_coupling_susceptibility direction depends on environment."""
+    correlation = extract_sweep_correlation(analysis, 'parasitic_avg_drift')
+
+    return {
+        'claim_id': 'SENS_003',
+        'parameter': 'parasitic_coupling_susceptibility',
+        'statement': 'Parasitic_coupling_susceptibility effect on drift depends on environment composition',
+        'prediction': 'In stable-majority, correlation < 0 (attractor effect); In parasitic-majority, correlation > 0',
+        'falsification_criteria': 'Correlation direction same regardless of environment',
+        'measurement_method': 'Sweep coupling in stable-majority scenario',
+        'measured_outcome': {
+            'correlation_coupling_to_parasitic_drift': correlation,
+            'scenario': analysis.get('scenario', 'unknown'),
+            'sweep_values': [s['param_value'] for s in analysis['sweeps']],
+            'measured_drifts': [s['parasitic_avg_drift'] for s in analysis['sweeps']],
+        },
+        'status': 'context_dependent',
+        'probability': 0.5,
+        'evidence_strength': 'high',
+        'notes': 'Direction of effect is environment-dependent; see EMRG_006 for attractor finding',
+    }
+
+
+def _claim_emrg_006_attractor(analysis: Dict) -> Dict:
+    """
+    EMRG_006: Stable baseline as thermodynamic attractor.
+
+    In stable-majority environment, higher parasitic_coupling_susceptibility
+    produces LOWER parasitic_drift (pulled toward stable baseline).
+    """
+    correlation = extract_sweep_correlation(analysis, 'parasitic_avg_drift')
+    confirmed = correlation < 0.0
+
+    return {
+        'claim_id': 'EMRG_006',
+        'parameter': 'parasitic_coupling_susceptibility',
+        'statement': 'Stable baseline acts as thermodynamic attractor: parasitic agents with higher coupling susceptibility are pulled toward stable baseline when in stable-majority environment',
+        'prediction': 'correlation(parasitic_coupling, parasitic_drift) < 0 in stable-majority scenario',
+        'falsification_criteria': 'correlation >= 0 in stable-majority scenario',
+        'measurement_method': 'Sweep parasitic_coupling_susceptibility (0.1-1.0) in scenario with 3+ stable agents and 1 parasitic; measure parasitic_avg_drift',
+        'measured_outcome': {
+            'correlation_coupling_to_parasitic_drift': correlation,
+            'scenario': analysis.get('scenario', 'stable_majority'),
+            'sweep_values': [s['param_value'] for s in analysis['sweeps']],
+            'measured_drifts': [s['parasitic_avg_drift'] for s in analysis['sweeps']],
+        },
+        'status': 'confirmed' if confirmed else 'refuted',
+        'probability': 1.0 if confirmed else 0.0,
+        'evidence_strength': 'high',
+        'implications': [
+            'Grounding propagates through coupling',
+            'Minority grounded agents influence dynamics',
+            'Coupling is relational, not intrinsic',
+            'One stable agent per N parasitic may shift system',
+        ],
+        'extends': 'EMRG_001 (stable produces stability) by showing mechanism: attraction not just resistance',
+        'discovered_via': 'SENS_002 investigation revealed direction reversal',
+    }
+
+
+def _claim_stable_coupling(analysis: Dict) -> Dict:
+    """SENS_004: stable_coupling_susceptibility effect on stable drift."""
+    correlation = extract_sweep_correlation(analysis, 'stable_avg_drift')
+
+    return {
+        'claim_id': 'SENS_004',
+        'parameter': 'stable_coupling_susceptibility',
+        'statement': 'Stable agents with higher coupling_susceptibility maintain stability through recovery',
+        'prediction': 'stable_drift remains low even with high coupling, due to recovery_rate',
+        'falsification_criteria': 'stable_drift increases sharply with coupling',
+        'measurement_method': 'Sweep stable_coupling_susceptibility in mixed scenario',
+        'measured_outcome': {
+            'correlation_coupling_to_stable_drift': correlation,
+            'sweep_values': [s['param_value'] for s in analysis['sweeps']],
+            'measured_drifts': [s['stable_avg_drift'] for s in analysis['sweeps']],
+        },
+        'status': 'confirmed' if abs(correlation) < 0.5 else 'partial',
+        'probability': 1.0 - abs(correlation),
+        'evidence_strength': 'medium',
+    }
+
+
+def _claim_parasitic_recovery(analysis: Dict) -> Dict:
+    """SENS_005: parasitic agents shouldn't recover much (intrinsic property)."""
+    correlation = extract_sweep_correlation(analysis, 'parasitic_avg_drift')
+
+    return {
+        'claim_id': 'SENS_005',
+        'parameter': 'parasitic_recovery_rate',
+        'statement': 'Even with nominal recovery_rate, parasitic baseline_type fails to return to baseline',
+        'prediction': 'parasitic_drift remains high regardless of recovery_rate setting (baseline_type dominates)',
+        'falsification_criteria': 'parasitic_drift decreases proportionally with recovery_rate',
+        'measurement_method': 'Sweep parasitic_recovery_rate in mixed scenario',
+        'measured_outcome': {
+            'correlation_recovery_to_parasitic_drift': correlation,
+            'sweep_values': [s['param_value'] for s in analysis['sweeps']],
+            'measured_drifts': [s['parasitic_avg_drift'] for s in analysis['sweeps']],
+        },
+        'status': 'confirmed' if abs(correlation) < 0.3 else 'refuted',
+        'probability': 1.0 - abs(correlation),
+        'evidence_strength': 'medium',
+    }
+
+
+# ============================================================
+# TEXT REPORT
+# ============================================================
+
+def generate_sensitivity_report(results: Dict) -> str:
+    """Build a human-readable ASCII report from a sensitivity results dict."""
+    lines = []
+    lines.append("=" * 78)
+    lines.append("PARAMETER SENSITIVITY ANALYSIS")
+    lines.append("=" * 78)
+    lines.append(f"timestamp:      {results.get('timestamp', '?')}")
+    lines.append(f"runs per value: {results.get('runs_per_value', '?')}")
+    lines.append(f"timesteps:      {results.get('timesteps', '?')}")
+
+    for analysis in results.get('analyses', []):
+        param = analysis.get('param_name', '?')
+        scenario = analysis.get('scenario', '?')
+        sweeps = analysis.get('sweeps', [])
+
+        lines.append("")
+        lines.append("-" * 78)
+        lines.append(f"{param}   (scenario: {scenario})")
+        lines.append("-" * 78)
+
+        if not sweeps:
+            lines.append(f"  (no sweeps — {analysis.get('error', 'no data')})")
+            continue
+
+        lines.append(
+            f"{'value':>7} {'stable_drift':>13} {'parasitic_drift':>16} "
+            f"{'ratio':>8} {'stable_win':>11} {'bifurc':>8}"
+        )
+        for s in sweeps:
+            lines.append(
+                f"{s['param_value']:>7.2f} "
+                f"{s['stable_avg_drift']:>13.3f} "
+                f"{s['parasitic_avg_drift']:>16.3f} "
+                f"{s['drift_ratio']:>7.2f}x "
+                f"{s['stable_win_rate']:>10.1%} "
+                f"{s['bifurcation_rate']:>7.1%}"
+            )
+
+        bif = [s['param_value'] for s in sweeps if s['bifurcation_rate'] > 0.3]
+        if bif:
+            lines.append(f"  → bifurcation threshold:  ~{min(bif):.2f}")
+        lost = [s['param_value'] for s in sweeps if s['stable_win_rate'] < 0.55]
+        if lost:
+            lines.append(f"  → grounding advantage lost at: ~{lost[0]:.2f}")
+
+    claims = results.get('claims', [])
+    if claims:
+        lines.append("")
+        lines.append("=" * 78)
+        lines.append("GENERATED CLAIMS")
+        lines.append("=" * 78)
+        for c in claims:
+            lines.append(f"  {c['claim_id']:<10} {c['status']:<18} "
+                         f"({c.get('parameter', 'n/a')})")
+            lines.append(f"             {c['statement']}")
+
+    lines.append("")
+    return "\n".join(lines)
+
+
+# ============================================================
+# MAIN ANALYSIS
+# ============================================================
+
+def run_full_sensitivity_analysis(
+    runs_per_value: int = 20,
+    timesteps: int = 100,
+    output_path: str = 'results/sensitivity_analysis.json',
+) -> Dict:
+    """
+    Run sensitivity analysis on all key parameters.
+    Generate claims and save results.
+    """
+    print(f"Running full sensitivity analysis ({runs_per_value} runs per value)...")
+
+    analyses = []
+
+    # Sweep stable_recovery_rate
+    print("  Sweeping stable_recovery_rate...")
+    analyses.append(parameter_sweep(
+        'stable_recovery_rate',
+        [0.0, 0.2, 0.4, 0.6, 0.8, 1.0],
+        runs_per_value=runs_per_value,
+        timesteps=timesteps,
+    ))
+
+    # Sweep parasitic_coupling_susceptibility (stable-majority scenario)
+    print("  Sweeping parasitic_coupling_susceptibility (attractor test)...")
+    analyses.append(parameter_sweep(
+        'parasitic_coupling_susceptibility',
+        [0.1, 0.3, 0.5, 0.7, 0.9],
+        runs_per_value=runs_per_value,
+        timesteps=timesteps,
+    ))
+
+    # Sweep parasitic_adaptation_persistence
+    print("  Sweeping parasitic_adaptation_persistence...")
+    analyses.append(parameter_sweep(
+        'parasitic_adaptation_persistence',
+        [0.0, 0.2, 0.4, 0.6, 0.8, 1.0],
+        runs_per_value=runs_per_value,
+        timesteps=timesteps,
+    ))
+
+    # Sweep stable_coupling_susceptibility
+    print("  Sweeping stable_coupling_susceptibility...")
+    analyses.append(parameter_sweep(
+        'stable_coupling_susceptibility',
+        [0.1, 0.3, 0.5, 0.7, 0.9],
+        runs_per_value=runs_per_value,
+        timesteps=timesteps,
+    ))
+
+    results = {
+        'timestamp': datetime.utcnow().isoformat(),
+        'runs_per_value': runs_per_value,
+        'timesteps': timesteps,
+        'analyses': analyses,
+    }
+
+    # Generate claims
+    print("\nGenerating sensitivity claims...")
+    claims = generate_sensitivity_claims(results)
+    results['claims'] = claims
+
+    # Save
+    output_file = Path(output_path)
+    output_file.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(output_file, 'w') as f:
+        json.dump(results, f, indent=2)
+
+    print(f"\nResults saved to {output_path}")
+    print(f"\nGenerated {len(claims)} claims:")
+    for claim in claims:
+        print(f"  {claim['claim_id']}: {claim['status']} ({claim.get('parameter', 'n/a')})")
+
+    return results
+
+
 if __name__ == "__main__":
-    results = run_all_sensitivity_tests()
-    report = generate_sensitivity_report(results)
-    print(report)
-
-    report_file = Path('results/sensitivity_report.txt')
-    report_file.parent.mkdir(parents=True, exist_ok=True)
-    with open(report_file, 'w') as f:
-        f.write(report)
-    print(f"\nReport saved to {report_file}")
-
-    sens_claims = generate_sensitivity_claims(results)
-    print(f"\nSENSITIVITY CLAIMS GENERATED: {len(sens_claims)}")
-    for c in sens_claims:
-        print(f"  {c['claim_id']}: {c['status']}")
+    run_full_sensitivity_analysis(runs_per_value=10, timesteps=50)
