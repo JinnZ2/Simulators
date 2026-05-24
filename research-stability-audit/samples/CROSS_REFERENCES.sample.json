@@ -29,6 +29,12 @@
         "EMRG_006"
       ],
       "principle": "Methodology-explicit research is the field-level analog of the physics baseline. The same falsifiability that lets the simulator damp cascade lets a corpus damp narrative drift."
+    },
+    "AI_SCOPE_001": {
+      "maps_to": [
+        "EMRG_009"
+      ],
+      "principle": "Scope-projection error is an architectural property of any system whose only reference frame is internal. The simulator cannot falsify it from inside (any agent it adds is still inside the simulator); the research-audit can, by comparing two trained models with and without substrate-inclusive corpora on a substrate-recognition benchmark."
     }
   }
 }

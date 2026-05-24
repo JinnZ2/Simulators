@@ -117,10 +117,31 @@ class Agent:
             for other in other_agents:
                 other.recovery_modifier -= drag
 
-    def interact(self, other_agents: List['Agent'], perturbation: float = 0.0):
+    def interact(
+        self,
+        other_agents: List['Agent'],
+        perturbation: float = 0.0,
+        reality_perturbation: float = 0.0,
+    ):
         """
         Receive influence from other agents and external perturbation.
         Update position based on baseline_type behavior.
+
+        reality_perturbation is a structured physics-constraint signal
+        (vs. random `perturbation`). It is applied with sign and
+        magnitude that depend on baseline_type:
+
+          - physics / scale_builder: pulled toward the signal (they
+            can align with reality)
+          - engagement / inverted_narrative: pushed away from it (they
+            optimize a different metric; the signal looks like
+            interference)
+          - hybrid: partial alignment
+
+        This is the empirical hook for EMRG_010 (attractor quality):
+        coupling reduces individual drift in any cohesive group, but
+        only physics-anchored attractors hold position when the signal
+        is structured to reflect ground truth.
         """
         # Compute coupling pressure from other agents
         coupling_pressure = 0.0
@@ -130,6 +151,15 @@ class Agent:
             # Influence proportional to other's drift and our susceptibility
             influence = (other.position - self.position) * self.coupling_susceptibility * 0.1
             coupling_pressure += influence
+
+        # Reality perturbation: physics-aligned signal with per-type sign
+        if reality_perturbation != 0.0:
+            if self.baseline_type in ('physics', 'scale_builder'):
+                coupling_pressure += reality_perturbation * 0.5
+            elif self.baseline_type in ('engagement', 'inverted_narrative'):
+                coupling_pressure -= reality_perturbation * 0.3
+            elif self.baseline_type == 'hybrid':
+                coupling_pressure += reality_perturbation * 0.2
 
         # Add external perturbation
         total_pressure = coupling_pressure + perturbation
@@ -263,6 +293,8 @@ class EmergenceSimulation:
         timesteps: int = 100,
         perturbation_strength: float = 0.3,
         perturbation_frequency: float = 0.2,
+        reality_perturbation_strength: float = 0.0,
+        reality_perturbation_frequency: float = 0.0,
         seed: Optional[int] = None,
     ):
         if seed is not None:
@@ -272,6 +304,10 @@ class EmergenceSimulation:
         self.timesteps = timesteps
         self.perturbation_strength = perturbation_strength
         self.perturbation_frequency = perturbation_frequency
+        # Reality perturbation: structured physics-constraint signal,
+        # used by EMRG_010 to distinguish attractor quality.
+        self.reality_perturbation_strength = reality_perturbation_strength
+        self.reality_perturbation_frequency = reality_perturbation_frequency
 
         # System-level metrics
         self.system_entropy_history: List[float] = []
@@ -325,6 +361,15 @@ class EmergenceSimulation:
                 perturbation = random.uniform(-self.perturbation_strength,
                                               self.perturbation_strength)
 
+            # Reality perturbation: structured signal, applied at its
+            # own frequency. When it fires, every agent in this step
+            # sees the same signed signal (representing a single
+            # external physics constraint).
+            reality_pert = 0.0
+            if (self.reality_perturbation_strength != 0.0
+                    and random.random() < self.reality_perturbation_frequency):
+                reality_pert = self.reality_perturbation_strength
+
             # Phase A: reset transient modifiers and let scale_builder /
             # inverted_narrative agents write their per-step recovery
             # effects onto every other agent.
@@ -338,7 +383,8 @@ class EmergenceSimulation:
             # modifiers just written.
             for agent in self.agents:
                 others = [a for a in self.agents if a.agent_id != agent.agent_id]
-                agent.interact(others, perturbation)
+                agent.interact(others, perturbation,
+                               reality_perturbation=reality_pert)
 
             # Record system metrics
             self.system_entropy_history.append(self.compute_system_entropy())
@@ -628,8 +674,202 @@ def run_mode_comparison(
 
 
 # ============================================================
+# ATTRACTOR QUALITY (EMRG_010)
+# ============================================================
+
+def run_attractor_quality_test(
+    runs: int = 100,
+    timesteps: int = 100,
+    reality_perturbation_strength: float = 0.4,
+    reality_perturbation_frequency: float = 0.3,
+    output_path: str = "results/attractor_quality.json",
+) -> Dict:
+    """
+    Test EMRG_010: coupling produces an attractor effect in any group
+    (stable-majority OR parasitic-majority), but only physics-anchored
+    attractors hold position when reality_perturbation is applied.
+
+    Runs four scenarios:
+      A. stable_majority,    perturbation only (no reality signal)
+      B. stable_majority,    perturbation + reality signal
+      C. parasitic_majority, perturbation only
+      D. parasitic_majority, perturbation + reality signal
+
+    EMRG_010 predicts:
+      - A and C both show low individual drift (coupling attractor
+        effect is universal).
+      - Under reality stress, B's avg drift << D's avg drift (the
+        stable-majority's attractor is anchored to truth; the
+        parasitic-majority's is anchored to consensus illusion).
+    """
+    print(f"\nRunning attractor quality test ({runs} runs per scenario)...")
+
+    def stable_majority():
+        return [
+            Agent(f'stable_{i}', 'physics', 0.0, 0.8, 0.3, 0.1)
+            for i in range(3)
+        ] + [Agent('parasitic', 'engagement', 0.0, 0.0, 0.9, 0.8)]
+
+    def parasitic_majority():
+        return [
+            Agent(f'parasitic_{i}', 'engagement', 0.0, 0.0, 0.9, 0.8)
+            for i in range(3)
+        ] + [Agent('stable', 'physics', 0.0, 0.8, 0.3, 0.1)]
+
+    scenarios = {
+        'stable_majority_no_reality':       (stable_majority,    0.0, 0.0),
+        'stable_majority_reality':          (stable_majority,
+                                             reality_perturbation_strength,
+                                             reality_perturbation_frequency),
+        'parasitic_majority_no_reality':    (parasitic_majority, 0.0, 0.0),
+        'parasitic_majority_reality':       (parasitic_majority,
+                                             reality_perturbation_strength,
+                                             reality_perturbation_frequency),
+    }
+
+    aggregates: Dict[str, Dict[str, float]] = {}
+    for name, (factory, rps, rpf) in scenarios.items():
+        all_drifts: List[float] = []
+        entropies: List[float] = []
+        for run_idx in range(runs):
+            agents = factory()
+            sim = EmergenceSimulation(
+                agents=agents,
+                timesteps=timesteps,
+                perturbation_strength=0.3,
+                perturbation_frequency=0.2,
+                reality_perturbation_strength=rps,
+                reality_perturbation_frequency=rpf,
+                seed=run_idx,
+            )
+            sim.run()
+            run_drifts = [a.compute_drift() for a in agents]
+            all_drifts.append(sum(run_drifts) / len(run_drifts))
+            entropies.append(sim.system_entropy_history[-1])
+
+        n = max(len(all_drifts), 1)
+        aggregates[name] = {
+            'avg_individual_drift': sum(all_drifts) / n,
+            'avg_final_entropy': sum(entropies) / n,
+            'runs': runs,
+        }
+        print(f"  {name}: drift={aggregates[name]['avg_individual_drift']:.4f}"
+              f"  entropy={aggregates[name]['avg_final_entropy']:.4f}")
+
+    output_file = Path(output_path)
+    output_file.parent.mkdir(parents=True, exist_ok=True)
+    with open(output_file, 'w') as f:
+        json.dump({
+            'timestamp': datetime.utcnow().isoformat(),
+            'runs_per_scenario': runs,
+            'timesteps_per_run': timesteps,
+            'reality_perturbation_strength': reality_perturbation_strength,
+            'reality_perturbation_frequency': reality_perturbation_frequency,
+            'scenarios': aggregates,
+        }, f, indent=2)
+
+    return aggregates
+
+
+# ============================================================
 # CLAIM TABLE GENERATION
 # ============================================================
+
+def _emrg_010(attractor_results: Optional[Dict]) -> Dict:
+    """
+    EMRG_010 -- attractor quality distinction. Coupling reduces
+    individual drift in any cohesive group; only physics-anchored
+    attractors hold position under reality stress.
+
+    If attractor_results is None (no reality test was run), the
+    claim is emitted as 'proposed'.
+    """
+    if attractor_results is None:
+        return {
+            'claim_id': 'EMRG_010',
+            'statement': (
+                'Coupling creates attractor effects regardless of '
+                'baseline_type, but attractor QUALITY differs. '
+                'Physics-anchored attractors produce drift toward '
+                'ground truth; consensus-anchored attractors produce '
+                'drift toward group illusion. Both produce low '
+                'individual drift through coupling, but only '
+                'physics-anchored attractors hold position when '
+                'reality is encountered.'
+            ),
+            'falsification_criteria': (
+                'In simulation: under reality_perturbation, '
+                'parasitic_majority avg drift <= stable_majority '
+                'avg drift.'
+            ),
+            'status': 'proposed',
+            'requires': ('run_attractor_quality_test with '
+                         'reality_perturbation_strength > 0'),
+        }
+
+    sm_no = attractor_results.get('stable_majority_no_reality', {})
+    sm = attractor_results.get('stable_majority_reality', {})
+    pm_no = attractor_results.get('parasitic_majority_no_reality', {})
+    pm = attractor_results.get('parasitic_majority_reality', {})
+
+    sm_drift_no = sm_no.get('avg_individual_drift', 0.0)
+    sm_drift = sm.get('avg_individual_drift', 0.0)
+    pm_drift_no = pm_no.get('avg_individual_drift', 0.0)
+    pm_drift = pm.get('avg_individual_drift', 0.0)
+
+    # Attractor effect universal: both groups show bounded drift
+    # without reality stress. (Bounded relative to inverted-narrative
+    # runaway; both should be small.)
+    attractor_universal = sm_drift_no < 2.0 and pm_drift_no < 2.0
+
+    # Quality difference: under reality stress, parasitic-majority
+    # drift exceeds stable-majority drift.
+    quality_signal = pm_drift > sm_drift
+
+    confirmed = attractor_universal and quality_signal
+
+    return {
+        'claim_id': 'EMRG_010',
+        'statement': (
+            'Coupling produces an attractor effect regardless of '
+            'baseline_type (stable-majority and parasitic-majority '
+            'both bound individual drift), but only physics-anchored '
+            'attractors hold position when a reality signal is '
+            'applied. Consensus-anchored attractors drift further '
+            'under reality stress.'
+        ),
+        'prediction': (
+            'Without reality_perturbation: both groups show bounded '
+            'drift (universal attractor). With reality_perturbation: '
+            'parasitic_majority drift > stable_majority drift '
+            '(attractor-quality difference).'
+        ),
+        'measured_outcome': {
+            'stable_majority_drift_no_reality': sm_drift_no,
+            'parasitic_majority_drift_no_reality': pm_drift_no,
+            'stable_majority_drift_with_reality': sm_drift,
+            'parasitic_majority_drift_with_reality': pm_drift,
+            'quality_gap': pm_drift - sm_drift,
+            'attractor_universal': attractor_universal,
+            'quality_signal': quality_signal,
+        },
+        'falsification_criteria': (
+            'Either group fails to show bounded drift without reality '
+            'stress, OR parasitic_majority drift <= stable_majority '
+            'drift with reality stress.'
+        ),
+        'status': 'confirmed' if confirmed else 'refuted',
+        'probability': 1.0 if confirmed else 0.0,
+        'evidence_strength': 'high',
+        'implications': [
+            'Tight social systems with no substrate access feel '
+            'stable but are cascade-prone under reality stress.',
+            'Consensus is not ground truth.',
+            'Civilizational stability before collapse is consistent '
+            'with consensus-anchored attractor dynamics.',
+        ],
+    }
+
 
 def _emrg_007_008_009(mode_results: Optional[Dict]) -> List[Dict]:
     """
@@ -785,6 +1025,7 @@ def _emrg_007_008_009(mode_results: Optional[Dict]) -> List[Dict]:
 def generate_claim_table(
     results: Dict,
     mode_results: Optional[Dict] = None,
+    attractor_results: Optional[Dict] = None,
 ) -> Dict:
     """
     Generate falsifiable claims from Monte Carlo results.
@@ -793,6 +1034,9 @@ def generate_claim_table(
     If mode_results (from run_mode_comparison) is provided, EMRG_007
     and EMRG_008 are emitted as empirical claims with confirmed /
     refuted status; otherwise they're emitted as proposed.
+
+    If attractor_results (from run_attractor_quality_test) is provided,
+    EMRG_010 is emitted as empirical; otherwise as proposed.
     """
     claims = {
         'schema_version': '1.0',
@@ -866,6 +1110,9 @@ def generate_claim_table(
             # mode_results is supplied; otherwise they're proposed.
             # EMRG_009 stays proposed (architectural, not in-simulation).
             *_emrg_007_008_009(mode_results),
+            # EMRG_010 -- attractor quality distinction. Carries
+            # empirical status when attractor_results is supplied.
+            _emrg_010(attractor_results),
         ],
     }
 

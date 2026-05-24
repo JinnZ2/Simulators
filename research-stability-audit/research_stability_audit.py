@@ -429,6 +429,67 @@ def build_research_degradation_claims() -> List[ResearchClaim]:
                'falsifiable claims behave like physics-grounded agents.')
     claims.append(c)
 
+    # AI_SCOPE_001 corresponds to the simulator's EMRG_009: narrative-only
+    # systems systematically project their own scope as universal. Not
+    # falsifiable in agent simulation (the simulator can't be its own
+    # external reference frame), but falsifiable here as a cross-corpus
+    # comparison.
+    c = ResearchClaim(
+        claim_id='AI_SCOPE_001',
+        hypothesis=(
+            'AI models trained on narrative-only corpora systematically '
+            'misrepresent or omit substrate-primary phenomena (substrate '
+            'civilizations, landscape-based scaling, multi-generational '
+            'transmission), and this failure cannot be self-corrected '
+            'from within the narrative scope. Adding substrate-inclusive '
+            'corpora to training measurably improves substrate '
+            'recognition accuracy.'
+        ),
+        measurement_method=(
+            'Cross-corpus comparison: train (or fine-tune) two models on '
+            'matched compute and matched non-substrate content; one is '
+            'given an additional substrate-inclusive corpus (e.g. '
+            'documented methodologies of Anishinaabe corridor wayfinding, '
+            'Polynesian navigation, Aboriginal knowledge transmission, '
+            'Iroquois Confederacy governance). Score each model on a held-'
+            'out substrate-recognition benchmark of factual questions '
+            'about substrate-primary civilizations and their scaling '
+            'mechanisms. Measure (a) accuracy delta on the benchmark, '
+            '(b) refusal/hedging rate on substrate questions, '
+            '(c) frequency of projection errors ("substrate doesn\'t '
+            'scale beyond local") on the narrative-only model.'
+        ),
+        # Threshold: substrate-recognition accuracy delta. If a
+        # substrate-inclusive model scores >= 0.20 higher than the
+        # matched narrative-only model on the benchmark, the
+        # scope-projection-error hypothesis is supported.
+        threshold=0.20,
+        time_window_days=0,
+        cascade_risk_threshold=0.5,
+    )
+    c.sources = [
+        'Cross-reference: emergence-stability-simulator EMRG_009 '
+        '(architectural scope-projection error)',
+        'Documented substrate-scaling civilizations: Anishinaabe '
+        'corridor, Polynesian wayfinding, Aboriginal Australia, '
+        'Iroquois Confederacy, Inca quipu',
+        'Pattern observation: large language models trained on '
+        'standard corpora consistently flatten or omit '
+        'substrate-primary scaling examples',
+    ]
+    c.notes = (
+        'Architectural property: a narrative-only system has no '
+        'reference frame outside narrative; its observations of itself '
+        'will systematically project narrative-scope as universal '
+        'scope. This is in scope for research-stability-audit (it is '
+        'falsifiable via cross-corpus comparison) but out of scope for '
+        'the agent-level simulator (the simulator cannot be its own '
+        'external reference frame). Benchmark design must avoid '
+        'narrative-format question framing that itself encodes the '
+        'projection error.'
+    )
+    claims.append(c)
+
     return claims
 
 
@@ -469,6 +530,17 @@ CROSS_REFERENCES = {
             'Methodology-explicit research is the field-level analog of the '
             'physics baseline. The same falsifiability that lets the simulator '
             'damp cascade lets a corpus damp narrative drift.'
+        ),
+    },
+    'AI_SCOPE_001': {
+        'maps_to': ['EMRG_009'],
+        'principle': (
+            'Scope-projection error is an architectural property of any '
+            'system whose only reference frame is internal. The simulator '
+            'cannot falsify it from inside (any agent it adds is still '
+            'inside the simulator); the research-audit can, by comparing '
+            'two trained models with and without substrate-inclusive '
+            'corpora on a substrate-recognition benchmark.'
         ),
     },
 }

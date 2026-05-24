@@ -2,8 +2,8 @@
   "schema_version": "1.0",
   "source_repo": "research-stability-audit",
   "audit_id": "RSA_001",
-  "timestamp": "2026-05-24T01:28:09.083402",
-  "total_claims": 6,
+  "timestamp": "2026-05-24T01:50:13.694507",
+  "total_claims": 7,
   "claims": [
     {
       "claim_id": "RES_REPRO_001",
@@ -125,6 +125,27 @@
         "Cross-reference: emergence-stability-simulator EMRG_001..EMRG_006"
       ],
       "cascade_risk_score": 0.0
+    },
+    {
+      "claim_id": "AI_SCOPE_001",
+      "hypothesis": "AI models trained on narrative-only corpora systematically misrepresent or omit substrate-primary phenomena (substrate civilizations, landscape-based scaling, multi-generational transmission), and this failure cannot be self-corrected from within the narrative scope. Adding substrate-inclusive corpora to training measurably improves substrate recognition accuracy.",
+      "measurement_method": "Cross-corpus comparison: train (or fine-tune) two models on matched compute and matched non-substrate content; one is given an additional substrate-inclusive corpus (e.g. documented methodologies of Anishinaabe corridor wayfinding, Polynesian navigation, Aboriginal knowledge transmission, Iroquois Confederacy governance). Score each model on a held-out substrate-recognition benchmark of factual questions about substrate-primary civilizations and their scaling mechanisms. Measure (a) accuracy delta on the benchmark, (b) refusal/hedging rate on substrate questions, (c) frequency of projection errors (\"substrate doesn't scale beyond local\") on the narrative-only model.",
+      "threshold": 0.2,
+      "time_window_days": 0,
+      "cascade_risk_threshold": 0.5,
+      "falsification_criteria": "measured_value < 0.2 over a 0-day window",
+      "measured_value": null,
+      "confidence": 0.0,
+      "is_falsified": false,
+      "bifurcation_detected": false,
+      "test_date": null,
+      "notes": "Architectural property: a narrative-only system has no reference frame outside narrative; its observations of itself will systematically project narrative-scope as universal scope. This is in scope for research-stability-audit (it is falsifiable via cross-corpus comparison) but out of scope for the agent-level simulator (the simulator cannot be its own external reference frame). Benchmark design must avoid narrative-format question framing that itself encodes the projection error.",
+      "sources": [
+        "Cross-reference: emergence-stability-simulator EMRG_009 (architectural scope-projection error)",
+        "Documented substrate-scaling civilizations: Anishinaabe corridor, Polynesian wayfinding, Aboriginal Australia, Iroquois Confederacy, Inca quipu",
+        "Pattern observation: large language models trained on standard corpora consistently flatten or omit substrate-primary scaling examples"
+      ],
+      "cascade_risk_score": 0.0
     }
   ],
   "bifurcation_analysis": {
@@ -132,17 +153,17 @@
     "bifurcation_onset_risk": 0.0,
     "bifurcation_rate": 0.0,
     "falsification_rate": 0.0,
-    "claims_tested": 6,
+    "claims_tested": 7,
     "claims_falsified": 0,
     "claims_bifurcating": 0
   },
   "cascade_risk_assessment": {
-    "cascade_risk_score": 0.03333333333333333,
+    "cascade_risk_score": 0.04285714285714286,
     "risk_level": "LOW",
     "bifurcation_risk": 0.0,
     "falsification_risk": 0.0,
     "propagation_speed": 0.0,
-    "substrate_separation_degree": 0.3333333333333333,
+    "substrate_separation_degree": 0.42857142857142855,
     "recommendation": "monitor: collect more data"
   }
 }

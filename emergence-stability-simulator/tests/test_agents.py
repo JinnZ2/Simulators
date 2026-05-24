@@ -15,6 +15,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 from sim_engine import (
     Agent,
     EmergenceSimulation,
+    run_attractor_quality_test,
     run_mode_comparison,
     generate_claim_table,
 )
@@ -321,6 +322,82 @@ class TestModeComparisonAndClaims(unittest.TestCase):
         by_id = {c['claim_id']: c for c in table['claims']}
         self.assertEqual(by_id['EMRG_007']['status'], 'proposed')
         self.assertEqual(by_id['EMRG_008']['status'], 'proposed')
+        self.assertEqual(by_id['EMRG_010']['status'], 'proposed')
+
+
+class TestRealityPerturbation(unittest.TestCase):
+    """reality_perturbation is the empirical hook for EMRG_010."""
+
+    def test_physics_agent_pulled_toward_reality_signal(self):
+        # A lone physics agent that sees a strong positive reality
+        # signal should drift toward it.
+        a = Agent('s', 'physics', 0.0, 0.8, 0.3, 0.1)
+        for _ in range(20):
+            a.recovery_modifier = 0.0
+            a.interact([], perturbation=0.0, reality_perturbation=0.5)
+        self.assertGreater(a.position, 0.0)
+
+    def test_engagement_agent_pushed_away_from_reality_signal(self):
+        # A lone engagement agent should drift in the OPPOSITE
+        # direction of a positive reality signal.
+        a = Agent('p', 'engagement', 0.0, 0.0, 0.9, 0.8)
+        for _ in range(20):
+            a.recovery_modifier = 0.0
+            a.interact([], perturbation=0.0, reality_perturbation=0.5)
+        self.assertLess(a.position, 0.0)
+
+    def test_zero_reality_perturbation_is_a_no_op(self):
+        # With reality_perturbation=0.0 the new code path must not
+        # change anything vs. the legacy two-argument call.
+        a1 = Agent('a1', 'physics', 0.0, 0.8, 0.3, 0.1)
+        a2 = Agent('a2', 'physics', 0.0, 0.8, 0.3, 0.1)
+        for _ in range(15):
+            a1.recovery_modifier = 0.0
+            a2.recovery_modifier = 0.0
+            a1.interact([], perturbation=0.3)
+            a2.interact([], perturbation=0.3, reality_perturbation=0.0)
+        self.assertAlmostEqual(a1.position, a2.position, places=10)
+
+
+class TestAttractorQuality(unittest.TestCase):
+    """EMRG_010: coupling produces universal attractor; only physics holds under reality stress."""
+
+    def test_run_attractor_quality_test_returns_four_scenarios(self):
+        r = run_attractor_quality_test(runs=8, timesteps=40,
+                                       output_path='/tmp/aq_test.json')
+        self.assertEqual(set(r.keys()), {
+            'stable_majority_no_reality',
+            'stable_majority_reality',
+            'parasitic_majority_no_reality',
+            'parasitic_majority_reality',
+        })
+
+    def test_quality_gap_emerges_under_reality_stress(self):
+        # Predictions: WITH reality, parasitic_majority drift exceeds
+        # stable_majority drift. (Universal-attractor side is verified
+        # implicitly by run_attractor_quality_test's bounded output.)
+        r = run_attractor_quality_test(runs=20, timesteps=60,
+                                       output_path='/tmp/aq_test2.json')
+        self.assertGreater(
+            r['parasitic_majority_reality']['avg_individual_drift'],
+            r['stable_majority_reality']['avg_individual_drift'],
+        )
+
+    def test_generate_claim_table_emits_empirical_emrg_010(self):
+        from sim_engine import run_monte_carlo as rmc
+        agg = rmc(runs=5, timesteps=30, output_path='/tmp/mc_agg3.json')
+        attr = run_attractor_quality_test(runs=10, timesteps=30,
+                                          output_path='/tmp/aq_test3.json')
+        original_cwd = os.getcwd()
+        try:
+            os.chdir('/tmp')
+            table = generate_claim_table(agg, attractor_results=attr)
+        finally:
+            os.chdir(original_cwd)
+        e10 = next(c for c in table['claims'] if c['claim_id'] == 'EMRG_010')
+        self.assertIn(e10['status'], ('confirmed', 'refuted'))
+        self.assertIn('measured_outcome', e10)
+        self.assertIn('quality_gap', e10['measured_outcome'])
 
 
 if __name__ == "__main__":
