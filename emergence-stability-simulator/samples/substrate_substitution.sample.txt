@@ -1,0 +1,76 @@
+
+emergence-stability-simulator/samples/CLAIM_TABLE.sample.json
+  claims:            19
+  contained substrate/narrative terms: 8
+
+  --- EMRG_007 (confirmed) ---
+    [statement ORIGINAL]
+      Narrative-primary populations operate in one of two modes: parasitic (substrate-exhausting) or authentic scale-building (substrate-extending). Scale-building mode produces sustained substrate stability; parasitic mode does not.
+    [statement SUBSTITUTED]
+      Grasshoppers-primary populations operate in one of two modes: parasitic (grass-exhausting) or authentic scale-building (grass-extending). Scale-building mode produces sustained grass stability; parasitic mode does not.
+    [prediction ORIGINAL]
+      avg_stable_drift in substrate_plus_scale_builder < avg_stable_drift in substrate_plus_parasitic
+    [prediction SUBSTITUTED]
+      avg_stable_drift in grass_plus_wind-dispersed insect < avg_stable_drift in grass_plus_parasitic
+
+  --- EMRG_008 (confirmed) ---
+    [statement ORIGINAL]
+      Sustainability of narrative scaling depends on direction: first-principles (substrate -> abstraction) sustains; inverted (authority -> substrate) collapses.
+    [statement SUBSTITUTED]
+      Sustainability of grasshoppers scaling depends on direction: first-principles (grass -> abstraction) sustains; inverted (authority -> grass) collapses.
+    [prediction ORIGINAL]
+      scale_builder pair final entropy < inverted pair final entropy AND inverted pair stable drift > substrate-only stable drift.
+    [prediction SUBSTITUTED]
+      wind-dispersed insect pair final entropy < inverted pair final entropy AND inverted pair stable drift > grass-only stable drift.
+
+  --- EMRG_009 (proposed) ---
+    [statement ORIGINAL]
+      Narrative-primary systems observing themselves systematically project their own scope as universal scope. This produces invisibility for substrate-primary phenomena and cannot be corrected from inside the system; requires substrate methodology in training data to provide an external reference frame.
+    [statement SUBSTITUTED]
+      Grasshoppers-primary systems observing themselves systematically project their own scope as universal scope. This produces invisibility for grass-primary phenomena and cannot be corrected from inside the system; requires grass methodology in training data to provide an external reference frame.
+
+  --- EMRG_011 (confirmed) ---
+    [statement ORIGINAL]
+      A sustainability threshold curve exists in (substrate_ratio x extraction_rate) space: above the curve, populations sustain; below it, the substrate collapses.
+    [statement SUBSTITUTED]
+      A sustainability threshold curve exists in (grass_ratio x extraction_rate) space: above the curve, populations sustain; below it, the grass collapses.
+    [prediction ORIGINAL]
+      Higher substrate ratios admit higher maximum extraction rates; the threshold curve is monotone.
+    [prediction SUBSTITUTED]
+      Higher grass ratios admit higher maximum extraction rates; the threshold curve is monotone.
+
+  --- EMRG_012 (confirmed) ---
+    [statement ORIGINAL]
+      Substrate regeneration is slower than extraction acceleration, producing a temporal asymmetry: sustainability declines as the substrate ratio shrinks and the extraction rate rises along the historical trajectory.
+    [statement SUBSTITUTED]
+      Grass regeneration is slower than extraction acceleration, producing a temporal asymmetry: sustainability declines as the grass ratio shrinks and the extraction rate rises along the historical trajectory.
+
+  --- EMRG_013 (refuted) ---
+    [statement ORIGINAL]
+      scale_builder agents contribute drift coherence and disruption resilience to substrate. (NOT EMPIRICALLY SUPPORTED. See refutation note.)
+    [statement SUBSTITUTED]
+      wind-dispersed insect agents contribute drift coherence and disruption resilience to grass. (NOT EMPIRICALLY SUPPORTED. See refutation note.)
+    [prediction ORIGINAL]
+      sustainable_regime drift with scale_builders < drift without; disruption-test recovery faster with scale_builders.
+    [prediction SUBSTITUTED]
+      sustainable_regime drift with wind-dispersed insects < drift without; disruption-test recovery faster with wind-dispersed insects.
+
+  --- EMRG_015 (refuted) ---
+    [statement ORIGINAL]
+      scale_builder narrative agents amplify substrate methodology REACH across isolated communities. (NOT EMPIRICALLY SUPPORTED. See refutation note.)
+    [statement SUBSTITUTED]
+      wind-dispersed insect grasshoppers agents amplify grass methodology REACH across isolated communities. (NOT EMPIRICALLY SUPPORTED. See refutation note.)
+    [prediction ORIGINAL]
+      cross-community position gap with scale_builder bridge << gap without bridge.
+    [prediction SUBSTITUTED]
+      cross-community position gap with wind-dispersed insect bridge << gap without bridge.
+
+  --- EMRG_014 (confirmed) ---
+    [statement ORIGINAL]
+      Substrate populations are self-sustaining, disruption-resilient, and capable of independent scaling. Narrative populations function as consumers, not contributors. The relationship is consumer-consumed, not symbiotic. Every in-simulator claim that narrative ADDS something to substrate has failed empirical testing once the test was held to a substrate substitution check.
+    [statement SUBSTITUTED]
+      Grass populations are self-sustaining, disruption-resilient, and capable of independent scaling. Grasshoppers populations function as consumers, not contributors. The relationship is consumer-consumed, not symbiotic. Every in-simulator claim that grasshoppers ADDS something to grass has failed empirical testing once the test was held to a grass substitution check.
+    [prediction ORIGINAL]
+      All claims of the form "narrative contributes X to substrate" should fail the substrate substitution test (tools/substrate_substitution.py).
+    [prediction SUBSTITUTED]
+      All claims of the form "grasshoppers contributes X to grass" should fail the grass substitution test (tools/grass_substitution.py).

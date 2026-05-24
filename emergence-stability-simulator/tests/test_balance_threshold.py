@@ -216,9 +216,13 @@ class TestScaleBuilderAmplification(unittest.TestCase):
         self.assertEqual(len(r['sustainable_regime']['results']), 2)
         self.assertEqual(len(r['unsustainable_regime']['results']), 2)
 
-    def test_scale_builders_reduce_drift_at_sustainable_ratios(self):
-        # The honest empirical question: does narrative augmentation
-        # reduce drift when substrate already sustains on its own?
+    def test_scale_builder_recovery_modifier_artifact_appears_in_sustainable_regime(self):
+        # Mechanical assertion: the scale_builder's recovery_modifier
+        # mechanism IS in the simulator and produces lower drift when
+        # invoked. Kept as a regression check on the code's behavior.
+        # NOT a finding -- EMRG_013 documents this as a fabricated
+        # mechanism with no empirical basis. See
+        # CASE_STUDY_NARRATIVE_INSTINCT.md.
         r = scale_builder_amplification_test(
             scale_builder_counts=[0, 5], runs_per_test=4, timesteps=80)
         sust = r['sustainable_regime']['results']
@@ -229,7 +233,8 @@ class TestScaleBuilderAmplification(unittest.TestCase):
 
     def test_scale_builders_do_not_save_unsustainable_scenarios(self):
         # Substrate sustains on its own at adequate ratios; narrative
-        # does NOT rescue substrate pushed below the threshold.
+        # does NOT rescue substrate pushed below the threshold. This
+        # is the corroborating measurement for EMRG_014.
         r = scale_builder_amplification_test(
             scale_builder_counts=[0, 5], runs_per_test=3, timesteps=80)
         unsust = r['unsustainable_regime']['results']
@@ -241,7 +246,12 @@ class TestScaleBuilderAmplification(unittest.TestCase):
 
 
 class TestDisruptionResilience(unittest.TestCase):
-    def test_scale_builders_accelerate_recovery_from_shock(self):
+    def test_recovery_modifier_artifact_speeds_post_shock_recovery(self):
+        # Mechanical assertion only: the fabricated recovery_modifier
+        # mechanism makes the post-shock recovery look faster. Kept as
+        # a regression check on the code; documented in EMRG_013 as
+        # a simulator artifact, not an empirical finding. See
+        # CASE_STUDY_NARRATIVE_INSTINCT.md.
         r = disruption_resilience_test(
             scale_builder_counts=[0, 5], runs_per_test=4, timesteps=120,
             disruption_timestep=40, disruption_magnitude=2.0,
@@ -250,18 +260,23 @@ class TestDisruptionResilience(unittest.TestCase):
                      if x['scale_builder_count'] == 0)
         with_sb = next(x for x in r['results']
                        if x['scale_builder_count'] == 5)
-        # Faster recovery -- fewer timesteps -- with scale_builders.
         self.assertLessEqual(with_sb['avg_timesteps_to_recover'],
                              no_sb['avg_timesteps_to_recover'])
 
 
 class TestMultiCommunityReach(unittest.TestCase):
-    """EMRG_015: scale_builders amplify reach, not survival."""
+    """
+    Mechanical regression tests for multi_community_reach_test.
+    These assert what the code does, not what is empirically true.
+    EMRG_015 is REFUTED: the gap-closure signal is real output but
+    its cause is "added cross-community anchors at position 0", not
+    narrative methodology transmission. Any anchored cross-community
+    agent would produce the same result.
+    """
 
     def test_without_bridge_communities_diverge(self):
         r = multi_community_reach_test(runs_per_arm=4, timesteps=80,
                                        scale_builder_count=4)
-        # Community B drifts on its own consensus when isolated.
         self.assertGreater(r['without_bridge']['avg_cross_community_gap'],
                            r['with_bridge']['avg_cross_community_gap'])
 
@@ -270,18 +285,19 @@ class TestMultiCommunityReach(unittest.TestCase):
                                        scale_builder_count=4)
         self.assertLess(r['with_bridge']['avg_cross_community_gap'], 5.0)
 
-    def test_emrg_015_emitted_and_confirmed(self):
+    def test_emrg_015_emitted_as_refuted(self):
         r = multi_community_reach_test(runs_per_arm=3, timesteps=80,
                                        scale_builder_count=4)
         claims = generate_balance_claims({'multi_community_reach': r})
         e15 = next((c for c in claims if c['claim_id'] == 'EMRG_015'),
                    None)
         self.assertIsNotNone(e15)
-        self.assertEqual(e15['status'], 'confirmed')
+        self.assertEqual(e15['status'], 'refuted')
+        self.assertEqual(e15['refutation_basis'], 'measurement_artifact')
         outcome = e15['measured_outcome']
         self.assertIn('gap_without_bridge', outcome)
         self.assertIn('gap_with_bridge', outcome)
-        self.assertGreater(outcome['gap_reduction'], 0.0)
+        self.assertIn('CASE_STUDY_NARRATIVE_INSTINCT.md', e15['see_also'])
 
 
 class TestHistoricalOverlay(unittest.TestCase):
@@ -316,12 +332,43 @@ class TestClaimGeneration(unittest.TestCase):
         ids = {c['claim_id'] for c in claims}
         self.assertIn('EMRG_012', ids)
 
-    def test_emrg_013_emitted_when_scale_builder_present(self):
+    def test_emrg_013_emitted_as_refuted(self):
+        # EMRG_013 is hard-coded refuted: the drift-reduction and
+        # disruption-resilience signals are artifacts of the
+        # scale_builder.emit_effects_on_neighbors mechanism, not
+        # empirical findings. See CASE_STUDY_NARRATIVE_INSTINCT.md.
         sb = scale_builder_amplification_test(
             scale_builder_counts=[0, 3], runs_per_test=2, timesteps=40)
         claims = generate_balance_claims({'scale_builder_amplification': sb})
-        ids = {c['claim_id'] for c in claims}
-        self.assertIn('EMRG_013', ids)
+        e13 = next((c for c in claims if c['claim_id'] == 'EMRG_013'),
+                   None)
+        self.assertIsNotNone(e13)
+        self.assertEqual(e13['status'], 'refuted')
+        self.assertEqual(e13['refutation_basis'], 'fabricated_mechanism')
+        self.assertIn('EMRG_014', e13['see_also'])
+
+    def test_emrg_014_synthesizes_substrate_self_sufficiency(self):
+        # EMRG_014 is confirmed when substrate-only sustains at high
+        # ratios AND both EMRG_013 / EMRG_015 land refuted.
+        surface = sustainability_surface(
+            ratios=[0.1, 0.5], extraction_rates=[0.2, 1.0],
+            runs_per_cell=2, total_population=10, timesteps=40,
+        )
+        sb = scale_builder_amplification_test(
+            scale_builder_counts=[0, 3], runs_per_test=2, timesteps=40)
+        reach = multi_community_reach_test(runs_per_arm=2, timesteps=40,
+                                           scale_builder_count=3)
+        claims = generate_balance_claims({
+            'sustainability_surface': surface,
+            'scale_builder_amplification': sb,
+            'multi_community_reach': reach,
+        })
+        e14 = next((c for c in claims if c['claim_id'] == 'EMRG_014'),
+                   None)
+        self.assertIsNotNone(e14)
+        outcome = e14['measured_outcome']
+        self.assertEqual(outcome['emrg_013_status'], 'refuted')
+        self.assertEqual(outcome['emrg_015_status'], 'refuted')
 
     def test_no_claims_when_no_inputs(self):
         self.assertEqual(generate_balance_claims({}), [])
@@ -347,9 +394,16 @@ class TestFullBalanceAnalysis(unittest.TestCase):
             self.assertIn('claims', data)
             self.assertIn('sustainability_surface', data)
             ids = {c['claim_id'] for c in results['claims']}
-            # All four balance claims should be present in a full run.
+            # All five balance claims should be present in a full run:
+            # EMRG_011 / 012 confirmed (substrate-only findings),
+            # EMRG_013 / 015 refuted (narrative-instinct artifacts),
+            # EMRG_014 synthesizing the substrate self-sufficiency
+            # finding.
             self.assertEqual(
-                ids, {'EMRG_011', 'EMRG_012', 'EMRG_013', 'EMRG_015'})
+                ids,
+                {'EMRG_011', 'EMRG_012', 'EMRG_013',
+                 'EMRG_014', 'EMRG_015'},
+            )
 
 
 if __name__ == '__main__':

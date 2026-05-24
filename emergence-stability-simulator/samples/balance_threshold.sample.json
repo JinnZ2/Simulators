@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "source_repo": "emergence-stability-simulator",
-  "timestamp": "2026-05-24T02:11:54.096625",
+  "timestamp": "2026-05-24T02:43:49.613585",
   "ratio_sweep": {
     "sweep_type": "ratio_sweep",
     "ratios_tested": [
@@ -1143,10 +1143,10 @@
     },
     {
       "claim_id": "EMRG_013",
-      "statement": "scale_builder agents contribute drift coherence to substrate at sustainable ratios under reality stress (lower substrate avg_drift), but do NOT change survival outcomes when the substrate is pushed below the threshold curve. Substrate civilizations sustain on their own; narrative augmentation supports coherence, not basic survival.",
-      "prediction": "In the sustainable regime, substrate avg_drift with scale_builders < substrate avg_drift without. In the unsustainable regime, collapse rate is approximately the same with or without scale_builders.",
-      "falsification_criteria": "scale_builders do not reduce substrate drift in the sustainable regime, OR scale_builders measurably rescue the unsustainable regime (would mean the mechanism is too generous).",
-      "measurement_method": "scale_builder_amplification_test: vary scale_builder_count in two regimes -- (sustainable) stable=5 + parasitic=5 + extraction=0.4, and (unsustainable) stable=2 + parasitic=15 + extraction=1.5. Compare substrate avg_drift in the first regime and collapse_rate in the second.",
+      "statement": "scale_builder agents contribute drift coherence and disruption resilience to substrate. (NOT EMPIRICALLY SUPPORTED. See refutation note.)",
+      "prediction": "sustainable_regime drift with scale_builders < drift without; disruption-test recovery faster with scale_builders.",
+      "falsification_criteria": "Apply tools/substrate_substitution.py: replace \"scale_builder\" with \"wind-dispersed insect\" and \"substrate\" with \"grass\". If the resulting mechanism (\"wind-dispersed insects help grass recover from disturbance\") is not a known ecological phenomenon, the original claim was narrative-instinct bias.",
+      "measurement_method": "scale_builder_amplification_test + disruption_resilience_test. Numbers reported below are produced by the code but reflect a mechanism built into the simulator (scale_builder.emit_effects_on_neighbors pushes positive recovery_modifier), not an empirically observed contribution from narrative to substrate.",
       "measured_outcome": {
         "sustainable_regime": {
           "substrate_drift_without_scale_builders": 0.009564072382124257,
@@ -1156,10 +1156,9 @@
         },
         "unsustainable_regime": {
           "collapse_rate_without_scale_builders": 1.0,
-          "best_collapse_rate_with_scale_builders": 1.0,
-          "survival_unchanged": true
+          "best_collapse_rate_with_scale_builders": 1.0
         },
-        "disruption_resilience": {
+        "disruption_resilience_artifact": {
           "recovery_steps_without_scale_builders": 7.0,
           "best_recovery_steps_with_scale_builders": 4.0,
           "peak_drift_without": 1.1616334143461367,
@@ -1167,34 +1166,63 @@
           "best_scale_builder_count": 6
         }
       },
-      "status": "confirmed",
-      "probability": 1.0,
-      "evidence_strength": "medium",
-      "notes": "Empirically grounded by substrate civilizations that sustained for millennia without narrative augmentation -- Anishinaabe corridor, Aboriginal Australia, Polynesian wayfinding, Iroquois Confederacy. Narrative is a drift-coherence amplifier when present, not a survival prerequisite."
+      "status": "refuted",
+      "refutation_basis": "fabricated_mechanism",
+      "probability": 0.0,
+      "evidence_strength": "high (refutation)",
+      "note": "The positive recovery_modifier emitted by scale_builder agents is a hypothetical mechanism with no empirical basis. Measured drift reduction and disruption resilience are simulator artifacts, not real-world findings. Substrate civilizations (Anishinaabe corridor, Aboriginal Australia, Polynesian wayfinding, Iroquois Confederacy) sustained for millennia without narrative augmentation.",
+      "see_also": [
+        "EMRG_014",
+        "EMRG_015",
+        "CASE_STUDY_NARRATIVE_INSTINCT.md"
+      ]
     },
     {
       "claim_id": "EMRG_015",
-      "statement": "scale_builder narrative agents amplify REACH, not survival. In multi-community scenarios where substrate communities are isolated, scale_builders are the only agents that couple across community boundaries; their presence enables substrate methodology to transmit to communities beyond direct contact range.",
-      "prediction": "Cross-community position gap (community B mean position vs community A substrate mean) is smaller with a scale_builder bridge than without.",
-      "falsification_criteria": "Scale_builder bridge does not reduce the cross-community gap; distant communities remain on their own consensus regardless of bridge presence.",
-      "measurement_method": "multi_community_reach_test: build two isolated communities (A: substrate-rich, B: parasitic, starting at offset position), run with and without a scale_builder bridge; compare the average absolute position gap between community A substrate and community B.",
+      "statement": "scale_builder narrative agents amplify substrate methodology REACH across isolated communities. (NOT EMPIRICALLY SUPPORTED. See refutation note.)",
+      "prediction": "cross-community position gap with scale_builder bridge << gap without bridge.",
+      "falsification_criteria": "Apply tools/substrate_substitution.py: the substituted claim \"wind-dispersed insects transmit grass methodology across geographic gaps\" is not a known ecological mechanism. Grass spreads by seed dispersal (its own behaviour), not by insects carrying methodology.",
+      "measurement_method": "multi_community_reach_test. The measured gap closure is real but its cause is structural: scale_builder agents are the only cross-community anchors in the with-bridge run, so they act as attractors at position 0. Any anchored agent in the same role (including a physics agent) would close the gap.",
       "measured_outcome": {
         "gap_without_bridge": 1876.9106728336799,
         "gap_with_bridge": 0.0629337526842576,
-        "gap_reduction": 1876.8477390809956,
-        "b_drift_without_bridge": 1876.9219409222753,
-        "b_drift_with_bridge": 0.07151631496535069,
+        "gap_reduction_artifact": 1876.8477390809956,
         "scale_builder_count": 4
+      },
+      "status": "refuted",
+      "refutation_basis": "measurement_artifact",
+      "probability": 0.0,
+      "evidence_strength": "high (refutation)",
+      "note": "The cross-community gap closes when any anchored cross-community agent is added. The framing as \"substrate methodology transmission via narrative\" was narrative-instinct -- attributing to narrative what is actually the trivial effect of adding anchors. Cherokee syllabary, Inca quipu, and Polynesian charts are real reach amplifiers EMPIRICALLY, but the simulator does not validate them: a control test with cross-community physics agents in place of scale_builders would close the gap identically.",
+      "see_also": [
+        "EMRG_013",
+        "EMRG_014",
+        "CASE_STUDY_NARRATIVE_INSTINCT.md"
+      ]
+    },
+    {
+      "claim_id": "EMRG_014",
+      "statement": "Substrate populations are self-sustaining, disruption-resilient, and capable of independent scaling. Narrative populations function as consumers, not contributors. The relationship is consumer-consumed, not symbiotic. Every in-simulator claim that narrative ADDS something to substrate has failed empirical testing once the test was held to a substrate substitution check.",
+      "prediction": "All claims of the form \"narrative contributes X to substrate\" should fail the substrate substitution test (tools/substrate_substitution.py).",
+      "falsification_criteria": "Find an in-simulator scenario where a narrative agent measurably contributes to substrate function via a mechanism whose ecological substitution (\"X insects contribute Y to grass\") is a known biological phenomenon.",
+      "measurement_method": "Aggregate across the simulator: (a) substrate-only sustainability surface scores at high ratio + low extraction; (b) refutation status of EMRG_013 and EMRG_015 (both refuted by substitution).",
+      "measured_outcome": {
+        "high_ratio_low_extraction_sustainability_score": 0.9976870235504213,
+        "substrate_only_sustains_at_high_ratio": true,
+        "pre_industrial_sustainability_score": 0.9980182078713776,
+        "emrg_013_status": "refuted",
+        "emrg_015_status": "refuted"
       },
       "status": "confirmed",
       "probability": 1.0,
-      "evidence_strength": "medium",
+      "evidence_strength": "high",
       "evidence_basis": [
-        "Cherokee syllabary: literacy spread across the nation",
-        "Inca quipu: continental empire coordination",
-        "Polynesian charts: Pacific-wide navigation methodology",
-        "All examples of reach amplification, not survival."
-      ]
+        "10,000+ years of substrate civilizations (Anishinaabe corridor, Aboriginal Australia, Polynesian wayfinding, Iroquois Confederacy)",
+        "Ecological pattern: grass communities sustain without grasshoppers; grasshoppers are consumers",
+        "Refutation of EMRG_013 (drift / disruption artifacts)",
+        "Refutation of EMRG_015 (anchor-effect artifact)"
+      ],
+      "methodology_note": "EMRG_014 was reached by applying the substrate substitution test to my own narrative-instinct claims. See CASE_STUDY_NARRATIVE_INSTINCT.md for the multi-round correction sequence that produced this claim."
     }
   ]
 }

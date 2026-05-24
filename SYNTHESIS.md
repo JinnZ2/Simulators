@@ -129,15 +129,16 @@ For a human (or a model) coming to this cold:
 | EMRG_001..004 | confirmed       | core stable-vs-parasitic finding              |
 | EMRG_005    | inconclusive      | bifurcation rate, needs longer runs           |
 | EMRG_006    | confirmed         | stable baseline is a STRONGER attractor than parasitic (relative-strength refinement) |
-| EMRG_007    | confirmed         | scale_builder mode produces lower stable-agent drift than parasitic mode |
-| EMRG_008    | confirmed         | inverted_narrative drives substrate to collapse; scale_builder pair sustains |
+| EMRG_007    | confirmed (with caveat) | scale_builder pair shows lower substrate drift than parasitic pair. The measurement is partly driven by the same recovery_modifier mechanism that EMRG_013 documents as fabricated; needs a control test with anchored cross-type neighbors before this framing can be trusted. |
+| EMRG_008    | confirmed         | inverted_narrative drives substrate to collapse (the consumer-overgrazing pattern); scale_builder pair sustains. Inverted side is honest; scale_builder side carries the same caveat as EMRG_007. |
 | EMRG_009    | proposed          | architectural (training-corpus scope); not in-simulation. Mirrored as AI_SCOPE_001 in research-stability-audit with a measurable cross-corpus comparison protocol. |
 | EMRG_010    | confirmed         | coupling produces universal attractor; only physics-anchored attractors hold position under reality_perturbation |
-| EMRG_011    | confirmed         | empirical sustainability threshold curve exists in (substrate_ratio × extraction_rate) space |
-| EMRG_012    | confirmed         | substrate regeneration is slower than extraction; sustainability declines along the historical trajectory |
-| EMRG_013    | confirmed         | scale_builders contribute drift coherence + disruption resilience, NOT survival. Substrate sustains on its own. |
-| EMRG_015    | confirmed         | scale_builders amplify REACH: methodology transmission across isolated communities |
-| SENS_001..005 | confirmed / partial / context-dependent | parameter sweeps |
+| EMRG_011    | confirmed         | empirical sustainability threshold curve exists in (substrate_ratio × extraction_rate) space (substrate-only finding) |
+| EMRG_012    | confirmed         | substrate regeneration is slower than extraction; sustainability declines along the historical trajectory (substrate-only finding) |
+| EMRG_013    | **refuted**       | The "scale_builders contribute drift coherence + disruption resilience" finding was a simulator artifact built on `scale_builder.emit_effects_on_neighbors`'s fabricated positive `recovery_modifier`. See `CASE_STUDY_NARRATIVE_INSTINCT.md`. |
+| EMRG_014    | confirmed         | Substrate populations are self-sustaining, disruption-resilient, capable of independent scaling. Narrative populations function as consumers, not contributors. Consumer-consumed, not symbiotic. |
+| EMRG_015    | **refuted**       | The "scale_builders amplify reach" finding was a measurement artifact — any anchored cross-community agent would close the gap identically. Narrative-instinct framing of an anchor effect. See `CASE_STUDY_NARRATIVE_INSTINCT.md`. |
+| SENS_001..005 | confirmed / partial / confirmed_universal | parameter sweeps |
 | RES_REPRO_001 etc. | claims registered, measurements pending | six preset research-audit claims awaiting empirical data |
 | AI_SCOPE_001 | claim registered, measurements pending | scope-projection error in narrative-only AI; cross-corpus comparison protocol defined |
 
@@ -206,16 +207,38 @@ those mechanics it sweeps:
   (pre-industrial → current_estimate, plus Inca / Rome / Maya).
   Confirms the monotone decline along the modern trajectory.
 
+## Methodology tools
+
+- `tools/validate_claim_table.py` — lightweight schema validator.
+  Permissive: accepts both `statement`/`status` and
+  `hypothesis`/`is_falsified` shapes.
+- `tools/substrate_substitution.py` — lightweight CLI. Reads a
+  CLAIM_TABLE.json and prints the grass/grasshopper substitution
+  alongside each claim that uses substrate/narrative vocabulary.
+  Structural enforcement for narrative-instinct bias.
+- `tools/substrate_substitution_toolkit.py` — richer programmatic
+  surface. Seven categories from harsh (`pure_consumer`) to gentle
+  (`mutualistic_scale`), with multiple real ecological pairs in each
+  and a seven-step balanced-view walkthrough. `pure_consumer` is the
+  null hypothesis; upgrading requires specific evidence that the
+  claim's mechanism matches the ecological analog.
+
 ## What's next
 
 - EMRG_009 / AI_SCOPE_001 — cross-corpus comparison protocol is
   registered; running it requires training data, not simulation time.
-- Two additional reach tests the framework would benefit from (not
-  yet implemented):
-  - **Narrative-interface test** — substrate + inverted_narrative
-    with a scale_builder mediator; does the bridge buffer some of
-    the inverted damage?
-  - **Multi-community survival under different starting compositions**
-    — does reach amplification raise the threshold curve for any
-    community below the bridge?
-- EMRG_014 is intentionally reserved for the next refinement.
+- **EMRG_007 / 008 caveat** — the comparison between scale_builder
+  and parasitic in mode_comparison.json is partly driven by the same
+  recovery_modifier mechanism that EMRG_013 refutes. A control test
+  using cross-type anchored agents would let those framings be
+  trusted or further refuted; currently they sit confirmed-with-caveat.
+- **Substitution-tool integration into the pipeline** — the toolkit
+  could be wired into `run_monte_carlo.py` so every claim is run
+  through it automatically and the output co-published with the
+  CLAIM_TABLE.
+
+See `CASE_STUDY_NARRATIVE_INSTINCT.md` for the multi-round correction
+sequence that produced EMRG_014 and the substitution toolkit. The
+case study itself is part of the framework: it is empirical evidence
+for EMRG_009 (a narrative-only AI cannot self-correct
+narrative-instinct from inside its own scope).

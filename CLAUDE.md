@@ -17,13 +17,27 @@ Repository for different simulations and supporting tooling.
   measurement methods, thresholds, and cross-references to the
   emergence simulator's agent-level claims (same physics, different
   scale).
-- `tools/` — Shared utilities. Currently `validate_claim_table.py`
-  (lightweight schema validator for any `CLAIM_TABLE.json` produced in
-  the repo; accepts both the `statement`/`status` and
-  `hypothesis`/`is_falsified` flavours).
+- `tools/` — Shared utilities.
+  - `validate_claim_table.py` — lightweight schema validator for
+    any `CLAIM_TABLE.json` produced in the repo; accepts both the
+    `statement`/`status` and `hypothesis`/`is_falsified` flavours.
+  - `substrate_substitution.py` — lightweight CLI that walks a
+    CLAIM_TABLE and prints the grass/grasshopper substitution next
+    to each claim. Structural enforcement for narrative-instinct
+    bias.
+  - `substrate_substitution_toolkit.py` — richer programmatic
+    surface: seven categories from harsh (`pure_consumer`, the null
+    hypothesis) to gentle (`mutualistic_scale`), each with multiple
+    ecological pairs and a balanced-view walkthrough.
 - `SYNTHESIS.md` — Top-level synthesis describing how the three folders
   fit together, how claims flow between them, and how to read the
   artifacts in order.
+- `CASE_STUDY_NARRATIVE_INSTINCT.md` — Empirical record of a multi-
+  round correction sequence in which the AI repeatedly inverted the
+  framing of scale_builder / narrative claims and the user repeatedly
+  caught it. Documents the substitution-test methodology and serves
+  as evidence for EMRG_009 (a narrative-only system cannot
+  self-correct narrative-instinct from inside its own scope).
 - Each simulator subfolder ships a `samples/` directory with one
   small representative output (CLAIM_TABLE, ASCII report, geometry
   file). Samples are checked in so the corpus is browsable on GitHub
