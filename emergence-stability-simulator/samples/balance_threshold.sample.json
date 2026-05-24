@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "source_repo": "emergence-stability-simulator",
-  "timestamp": "2026-05-24T02:43:49.613585",
+  "timestamp": "2026-05-24T03:10:15.331701",
   "ratio_sweep": {
     "sweep_type": "ratio_sweep",
     "ratios_tested": [

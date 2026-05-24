@@ -138,9 +138,13 @@ For a human (or a model) coming to this cold:
 | EMRG_013    | **refuted**       | The "scale_builders contribute drift coherence + disruption resilience" finding was a simulator artifact built on `scale_builder.emit_effects_on_neighbors`'s fabricated positive `recovery_modifier`. See `CASE_STUDY_NARRATIVE_INSTINCT.md`. |
 | EMRG_014    | confirmed         | Substrate populations are self-sustaining, disruption-resilient, capable of independent scaling. Narrative populations function as consumers, not contributors. Consumer-consumed, not symbiotic. |
 | EMRG_015    | **refuted**       | The "scale_builders amplify reach" finding was a measurement artifact — any anchored cross-community agent would close the gap identically. Narrative-instinct framing of an anchor effect. See `CASE_STUDY_NARRATIVE_INSTINCT.md`. |
+| EMRG_016    | proposed          | Substrate populations share knowledge freely by default. Apparent withholding is contextual response to weaponization, not default behaviour. Empirical claim, not in-simulator. |
+| EMRG_017    | proposed          | The substrate / narrative bifurcation occurs at the translation INTERFACE LAYER, not at sharing willingness. Reframes earlier "narrative scale-builder" examples (Cherokee syllabary, Inca quipu, Polynesian charts) as substrate civilizations using narrative TOOLS. |
+| EMRG_018    | proposed          | AI trained on substrate-inclusive corpora can serve as an honest receiver — constructive counterpart to EMRG_009. Mirrored as AI_RECEIVER_001 in research-stability-audit with a translation-fidelity benchmark protocol. |
 | SENS_001..005 | confirmed / partial / confirmed_universal | parameter sweeps |
 | RES_REPRO_001 etc. | claims registered, measurements pending | six preset research-audit claims awaiting empirical data |
 | AI_SCOPE_001 | claim registered, measurements pending | scope-projection error in narrative-only AI; cross-corpus comparison protocol defined |
+| AI_RECEIVER_001 | claim registered, measurements pending | substrate-trained AI as honest receiver; translation-fidelity benchmark co-developed with source communities |
 
 ## Mode comparison (EMRG_007 / EMRG_008)
 
@@ -227,18 +231,29 @@ those mechanics it sweeps:
 
 - EMRG_009 / AI_SCOPE_001 — cross-corpus comparison protocol is
   registered; running it requires training data, not simulation time.
+- EMRG_018 / AI_RECEIVER_001 — constructive counterpart: train a
+  substrate-inclusive model and a matched narrative-only model, score
+  on a translation-fidelity benchmark co-developed with source
+  communities. Two-sided test: AI_SCOPE_001 measures what
+  narrative-only loses; AI_RECEIVER_001 measures what substrate
+  training gains.
 - **EMRG_007 / 008 caveat** — the comparison between scale_builder
   and parasitic in mode_comparison.json is partly driven by the same
-  recovery_modifier mechanism that EMRG_013 refutes. A control test
-  using cross-type anchored agents would let those framings be
-  trusted or further refuted; currently they sit confirmed-with-caveat.
+  recovery_modifier mechanism that EMRG_013 refutes. Under the
+  EMRG_017 reframe, `scale_builder` is best understood as
+  substrate-behaviour-with-narrative-tooling, not a separate
+  narrative class. A control test that swaps `scale_builder` for an
+  anchored physics-baseline agent in the same role would settle
+  whether the simulator has been measuring "narrative contribution"
+  or "substrate using a tool." Currently undone work; the framings
+  sit confirmed-with-caveat.
 - **Substitution-tool integration into the pipeline** — the toolkit
   could be wired into `run_monte_carlo.py` so every claim is run
   through it automatically and the output co-published with the
   CLAIM_TABLE.
 
 See `CASE_STUDY_NARRATIVE_INSTINCT.md` for the multi-round correction
-sequence that produced EMRG_014 and the substitution toolkit. The
-case study itself is part of the framework: it is empirical evidence
-for EMRG_009 (a narrative-only AI cannot self-correct
-narrative-instinct from inside its own scope).
+sequence that produced EMRG_014 / 016 / 017 / 018 and the substitution
+toolkit. The case study itself is part of the framework: it is
+empirical evidence for EMRG_009 (a narrative-only AI cannot
+self-correct narrative-instinct from inside its own scope).

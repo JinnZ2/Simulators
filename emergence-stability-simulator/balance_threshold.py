@@ -8,9 +8,11 @@ Maps the empirical sustainability surface in
 Test agents have finite energy budgets, parasitic agents extract per
 timestep from physics-baseline neighbors, and physics agents regenerate
 at their own rate. When a substrate agent's budget hits zero it flips
-to engagement (the substrate population walks away or has to take up
-extractive behavior to survive). A run "collapses" when every
-substrate agent is exhausted.
+to engagement -- a budget-depletion mechanic in the model, not a claim
+about substrate populations withholding or leaving. Substrate
+populations share by default (see EMRG_016 in sim_engine). A run
+"collapses" when every substrate agent in the model has exhausted
+budget.
 
 Outputs three falsifiable claims:
   EMRG_011 -- a sustainability threshold curve exists in

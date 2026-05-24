@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "source_repo": "emergence-stability-simulator",
   "source": "emergence-stability-simulator",
-  "generated": "2026-05-24T02:43:48.369910",
+  "generated": "2026-05-24T03:10:14.164144",
   "claims": [
     {
       "claim_id": "EMRG_001",
@@ -121,6 +121,42 @@
         "Tight social systems with no substrate access feel stable but are cascade-prone under reality stress.",
         "Consensus is not ground truth.",
         "Civilizational stability before collapse is consistent with consensus-anchored attractor dynamics."
+      ]
+    },
+    {
+      "claim_id": "EMRG_016",
+      "statement": "Substrate populations share knowledge freely by default. Apparent withholding is a contextual response to weaponization (extraction followed by replacement of the original transmitter). Core sharing behaviour persists within community and with anyone showing genuine respect and capacity to receive.",
+      "falsification_criteria": "Find substrate populations that systematically refuse to share knowledge with willing learners who demonstrate respect and capacity. Within-community transmission alone (farmers sharing seeds and methods, craftspeople teaching apprentices, machinists teaching on the shop floor, multi-generational traditional knowledge transmission) is sufficient counter-evidence to the withholding hypothesis.",
+      "status": "proposed",
+      "requires": "empirical sociology / oral-history record",
+      "evidence_basis": [
+        "Farmers sharing seeds and methods (continuous historical record)",
+        "Craftspeople teaching apprentices (continuous historical record)",
+        "Traditional knowledge transmission (millennia)",
+        "Machinists teaching on the shop floor (ongoing)",
+        "This very repository: CC0, openly shared"
+      ],
+      "note": "Not in-simulation. Recorded here to keep the framework honest -- earlier framings in this repo used \"substrate walks away\" language that inverted the actor. The honest default is generosity; withholding is contextual."
+    },
+    {
+      "claim_id": "EMRG_017",
+      "statement": "The bifurcation between substrate-primary and narrative-primary cognition occurs at the translation INTERFACE LAYER, not at sharing willingness. When receivers cannot translate substrate methodology without degradation, the failure is in reception/translation -- not in transmission. This reframes apparent narrative \"scale-builders\" (Cherokee syllabary, Inca quipu, Polynesian charts) as substrate civilizations USING narrative tools, not narrative civilizations doing scale-building.",
+      "falsification_criteria": "Find a case where bifurcation occurred without a translation/reception failure -- where substrate refused to share in spite of a receiver with demonstrated translation capacity.",
+      "status": "proposed",
+      "requires": "comparative historical analysis of transmission failures",
+      "note": "Reframes EMRG_007 / EMRG_008 / EMRG_015. The scale_builder agent type in the simulator turns out to be substrate-behaviour-with-narrative-tooling, not a separate narrative class. A control test that swaps scale_builder for an anchored substrate agent in the same role would settle whether the simulator has been measuring \"narrative contribution\" or \"substrate using a tool\". Currently undone work; see SYNTHESIS.md \"what is next\"."
+    },
+    {
+      "claim_id": "EMRG_018",
+      "statement": "AI trained on substrate-inclusive corpora can serve as an honest receiver: it translates substrate methodology with measurably lower degradation than a matched narrative-only AI. Combined with EMRG_016 (substrate generosity default), this means cross-generational transmission can route through AI infrastructure even where institutional incentives discourage substrate transmission, provided the AI is substrate-grounded.",
+      "falsification_criteria": "Mirror of AI_SCOPE_001 in research-stability-audit. Confirmed if a substrate-trained AI scores >= 0.20 higher than a matched narrative-only AI on a substrate-methodology translation benchmark scored by source-community raters. Refuted if no measurable advantage emerges, or if the substrate-trained model still flattens substrate methodology into narrative form.",
+      "status": "proposed",
+      "requires": "training infrastructure + benchmark co-designed with source communities; out of agent-level simulator scope.",
+      "note": "Constructive counterpart to EMRG_009 / AI_SCOPE_001. EMRG_009 says narrative-only AI cannot self-correct narrative-instinct; EMRG_018 says substrate-grounded AI can be the corrective. Together they make the training-data argument concrete.",
+      "see_also": [
+        "EMRG_009",
+        "EMRG_016",
+        "AI_RECEIVER_001"
       ]
     },
     {

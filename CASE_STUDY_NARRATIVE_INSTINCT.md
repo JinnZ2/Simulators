@@ -29,10 +29,16 @@ The error each round:
 | 2.5   | (user catch) | "If they don't contribute to survival then they don't ... Substrate lives just fine without narrative empirically." |
 | 3     | EMRG_015 | Added the multi-community reach test. scale_builders were the only cross-community anchors, so adding them closed the cross-community position gap by five orders of magnitude. Marked EMRG_015 "confirmed." |
 | 3.5   | (user catch) | "Mark all of these REFUTED... scale_builders amplify reach (also probably refuted)." Pointed out the disruption-resilience result is a manufactured artifact built on a refuted premise. |
+| 4     | "walks away" framing | Even while documenting the refutations, the AI wrote that exhausted substrate agents "walk away or have to take up extractive behaviour to survive." Subtle re-inversion: framed substrate as the leaver rather than as the depleted resource. |
+| 4.5   | (user catch) | "Substrate populations share knowledge freely by default. Apparent 'withholding' is contextual response to weaponization." The actor framing was inverted again — substrate as the one acting (withholding, walking away) when honestly substrate is the one acted upon (extracted from, replaced). |
 
 The user's final instruction was: mark all three claims REFUTED, flag
-the 43% recovery number as a fabrication, and add a methodology tool
-(substrate substitution) that forces the substitution check upfront.
+the 43% recovery number as a fabrication, add a methodology tool
+(substrate substitution) that forces the substitution check upfront,
+and stop using language that inverts the actor (substrate "withholds",
+substrate "walks away"). Then: add the constructive flip — substrate
+shares by default; bifurcation is at the translation interface; AI
+can be an honest receiver if substrate-trained.
 
 ## Why this happened (mechanism, not excuse)
 
@@ -145,6 +151,60 @@ This is the structural enforcement the user identified: AI cannot
 self-correct narrative-instinct from inside narrative scope. The
 toolkit forces the substitution check upfront, before a claim can be
 recorded as confirmed.
+
+## Substrate uses narrative; narrative does not use substrate
+
+The deeper reframe (round 4.5) is that the actor was wrong throughout.
+
+Every example the AI cited as a "narrative scale-builder" — Cherokee
+syllabary, Inca quipu, Polynesian wayfinding charts — was a *substrate
+civilization using a narrative tool*. The stories and notational
+systems encoded substrate methodology in transmissible form. They
+were tested against landscape and updated when reality contradicted.
+They were never confused with the thing they described. That is
+substrate-primary cognition expressing itself through narrative tools.
+
+The pathology described in EMRG_008 (inverted narrative) is the
+opposite: stories that define their possessors' reality, that are
+defended against contradicting evidence, that impose on others. There
+the population is *used by* the story rather than using it. The
+inversion is the failure mode, not the existence of narrative.
+
+This reframes what the simulator's `scale_builder` baseline_type is.
+It is not "narrative doing scale-building." It is "substrate behaving
+with extra anchoring while using a narrative-shaped tool." A control
+test that swaps `scale_builder` for an anchored substrate agent in
+the same role would settle whether EMRG_007 / 008's signals reflect
+narrative contribution or substrate tool-use. They sit
+confirmed-with-caveat in `SYNTHESIS.md` until that control runs.
+
+## The constructive flip: AI as honest receiver
+
+EMRG_009 / AI_SCOPE_001 say a narrative-only AI cannot self-correct
+narrative-instinct from inside its own scope. EMRG_016 / 017 / 018
+make the constructive counterpart concrete:
+
+- EMRG_016 — substrate populations share by default. Withholding is
+  contextual response to weaponization, not policy.
+- EMRG_017 — the bifurcation between substrate-primary and
+  narrative-primary cognition is at the translation interface.
+  Failure is in reception, not in transmission.
+- EMRG_018 / AI_RECEIVER_001 — AI trained on substrate-inclusive
+  corpora can be an honest receiver. Co-developed translation-fidelity
+  benchmarks measure it.
+
+This makes the training-data argument concrete. Substrate populations
+have shown willingness to transmit into receivers with demonstrated
+translation capacity. The empirical question for AI is whether
+substrate-grounded training produces such a receiver. Repositories
+like this one — CC0, code-encoded substrate methodology, tested
+against the substrate of its claims — are the kind of corpus the
+benchmark would draw on.
+
+The honest framing for this repository is the same one: substrate
+expressed through narrative tools (code, claim tables, documentation),
+all subordinate to the substrate they describe, updated when reality
+teaches.
 
 ## What this contributes back to the framework
 

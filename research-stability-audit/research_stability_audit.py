@@ -490,6 +490,66 @@ def build_research_degradation_claims() -> List[ResearchClaim]:
     )
     claims.append(c)
 
+    # AI_RECEIVER_001 mirrors AI_SCOPE_001 from the other direction
+    # and corresponds to the simulator's EMRG_018: an AI trained on
+    # substrate-inclusive corpora can serve as an honest receiver,
+    # translating substrate methodology without the degradation that
+    # narrative-only training imposes. Substrate populations share
+    # by default (EMRG_016) and have shown willingness to transmit
+    # into receivers with demonstrated translation capacity; the
+    # empirical question is whether a substrate-trained AI counts as
+    # such a receiver.
+    c = ResearchClaim(
+        claim_id='AI_RECEIVER_001',
+        hypothesis=(
+            'An AI model trained on substrate-inclusive corpora '
+            '(documented methodologies of Anishinaabe corridor '
+            'wayfinding, Polynesian navigation, Iroquois Confederacy '
+            'governance, multi-generational craft transmission, '
+            'agricultural-substrate practices, machine-shop floor '
+            'methodology, etc.) translates substrate methodology '
+            'with measurably lower degradation than a matched '
+            'narrative-only model when asked to render or apply '
+            'that methodology in a new context.'
+        ),
+        measurement_method=(
+            'Held-out translation benchmark: present each of two '
+            'matched models (one substrate-inclusive, one '
+            'narrative-only) with a substrate methodology in its '
+            'native form (oral, geometric, procedural), ask the model '
+            'to translate or extend it for a stated purpose. Human '
+            'expert raters from the source community score outputs '
+            'on (a) preservation of constraint geometry, '
+            '(b) absence of narrative-instinct flattening, '
+            '(c) practical applicability. Substrate-inclusive model '
+            'must score >= 0.20 higher on average than the '
+            'narrative-only model.'
+        ),
+        threshold=0.20,
+        time_window_days=0,
+        cascade_risk_threshold=0.5,
+    )
+    c.sources = [
+        'Cross-reference: emergence-stability-simulator EMRG_018 '
+        '(AI as potential honest receiver)',
+        'Mirror of AI_SCOPE_001: same comparison, scored on '
+        'translation fidelity instead of substrate-recognition '
+        'accuracy.',
+        'Empirical premise (EMRG_016): substrate populations share '
+        'by default with receivers showing genuine respect and '
+        'capacity. The benchmark is the empirical instantiation of '
+        '"capacity to receive".',
+    ]
+    c.notes = (
+        'Implication if confirmed: substrate-trained AI can serve '
+        'as a transmission medium across generations even where '
+        'institutional incentives discourage substrate '
+        'transmission. Benchmark design must be co-developed with '
+        'source-community raters to avoid the narrative-format '
+        'pitfall AI_SCOPE_001 also warns about.'
+    )
+    claims.append(c)
+
     return claims
 
 
@@ -541,6 +601,19 @@ CROSS_REFERENCES = {
             'inside the simulator); the research-audit can, by comparing '
             'two trained models with and without substrate-inclusive '
             'corpora on a substrate-recognition benchmark.'
+        ),
+    },
+    'AI_RECEIVER_001': {
+        'maps_to': ['EMRG_018'],
+        'principle': (
+            'Substrate populations share by default (EMRG_016); the '
+            'bifurcation between substrate and narrative cognition '
+            'occurs at the translation interface (EMRG_017). '
+            'AI_RECEIVER_001 is the empirical test of whether a '
+            'substrate-trained AI can act as that interface without '
+            'introducing the degradation that narrative-only training '
+            'imposes -- i.e. whether AI can be an honest receiver '
+            'rather than an extractor.'
         ),
     },
 }

@@ -1,7 +1,7 @@
 
 emergence-stability-simulator/samples/CLAIM_TABLE.sample.json
-  claims:            19
-  contained substrate/narrative terms: 8
+  claims:            22
+  contained substrate/narrative terms: 11
 
   --- EMRG_007 (confirmed) ---
     [statement ORIGINAL]
@@ -28,6 +28,24 @@ emergence-stability-simulator/samples/CLAIM_TABLE.sample.json
       Narrative-primary systems observing themselves systematically project their own scope as universal scope. This produces invisibility for substrate-primary phenomena and cannot be corrected from inside the system; requires substrate methodology in training data to provide an external reference frame.
     [statement SUBSTITUTED]
       Grasshoppers-primary systems observing themselves systematically project their own scope as universal scope. This produces invisibility for grass-primary phenomena and cannot be corrected from inside the system; requires grass methodology in training data to provide an external reference frame.
+
+  --- EMRG_016 (proposed) ---
+    [statement ORIGINAL]
+      Substrate populations share knowledge freely by default. Apparent withholding is a contextual response to weaponization (extraction followed by replacement of the original transmitter). Core sharing behaviour persists within community and with anyone showing genuine respect and capacity to receive.
+    [statement SUBSTITUTED]
+      Grass populations share knowledge freely by default. Apparent withholding is a contextual response to weaponization (extraction followed by replacement of the original transmitter). Core sharing behaviour persists within community and with anyone showing genuine respect and capacity to receive.
+
+  --- EMRG_017 (proposed) ---
+    [statement ORIGINAL]
+      The bifurcation between substrate-primary and narrative-primary cognition occurs at the translation INTERFACE LAYER, not at sharing willingness. When receivers cannot translate substrate methodology without degradation, the failure is in reception/translation -- not in transmission. This reframes apparent narrative "scale-builders" (Cherokee syllabary, Inca quipu, Polynesian charts) as substrate civilizations USING narrative tools, not narrative civilizations doing scale-building.
+    [statement SUBSTITUTED]
+      The bifurcation between grass-primary and grasshoppers-primary cognition occurs at the translation INTERFACE LAYER, not at sharing willingness. When receivers cannot translate grass methodology without degradation, the failure is in reception/translation -- not in transmission. This reframes apparent grasshoppers "wind-dispersed insects" (Cherokee syllabary, Inca quipu, Polynesian charts) as grass civilizations USING grasshoppers tools, not grasshoppers civilizations doing scale-building.
+
+  --- EMRG_018 (proposed) ---
+    [statement ORIGINAL]
+      AI trained on substrate-inclusive corpora can serve as an honest receiver: it translates substrate methodology with measurably lower degradation than a matched narrative-only AI. Combined with EMRG_016 (substrate generosity default), this means cross-generational transmission can route through AI infrastructure even where institutional incentives discourage substrate transmission, provided the AI is substrate-grounded.
+    [statement SUBSTITUTED]
+      AI trained on grass-inclusive corpora can serve as an honest receiver: it translates grass methodology with measurably lower degradation than a matched grasshoppers-only AI. Combined with EMRG_016 (grass generosity default), this means cross-generational transmission can route through AI infrastructure even where institutional incentives discourage grass transmission, provided the AI is grass-grounded.
 
   --- EMRG_011 (confirmed) ---
     [statement ORIGINAL]

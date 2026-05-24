@@ -120,8 +120,15 @@ class Agent:
     def _mark_exhausted(self) -> None:
         """
         Mark the agent as exhausted. If it was a physics-baseline
-        substrate agent, flip it to engagement (substrate population
-        walks away or has to take up extractive behavior to survive).
+        substrate agent, flip it to engagement.
+
+        NOTE on framing: this is a budget-depletion mechanism in the
+        model, not a claim about substrate populations choosing to
+        withhold or leave. Substrate populations share by default
+        (see EMRG_016). The flip represents that once extractable
+        budget is zero, the model state can no longer support
+        substrate behaviour at all -- not that the underlying
+        population went somewhere else.
         """
         if self.exhausted:
             return
@@ -1061,6 +1068,143 @@ def _emrg_010(attractor_results: Optional[Dict]) -> Dict:
     }
 
 
+def _emrg_016_017_018() -> List[Dict]:
+    """
+    EMRG_016, EMRG_017, EMRG_018 are empirical claims about
+    substrate populations, the substrate/narrative interface, and
+    AI as a potential honest receiver. None of the three is an
+    in-simulator measurement; they're recorded here so the
+    framework's full claim set is visible.
+
+    The honest reframe these capture:
+    - Substrate populations share knowledge freely by default.
+      Apparent withholding is a contextual response to weaponization
+      (extraction followed by replacement of the original
+      transmitter), not a default behaviour.
+    - The bifurcation between substrate-primary and narrative-primary
+      cognition is at the TRANSLATION INTERFACE LAYER, not at sharing
+      willingness. The substrate-uses-narrative-as-tool reframe makes
+      this concrete: Cherokee syllabary, Inca quipu, Polynesian
+      navigation charts were SUBSTRATE civilizations using narrative
+      tools. The bifurcation happens when a receiver cannot translate
+      substrate methodology without degradation.
+    """
+    return [
+        {
+            'claim_id': 'EMRG_016',
+            'statement': (
+                'Substrate populations share knowledge freely by '
+                'default. Apparent withholding is a contextual '
+                'response to weaponization (extraction followed by '
+                'replacement of the original transmitter). Core '
+                'sharing behaviour persists within community and '
+                'with anyone showing genuine respect and capacity '
+                'to receive.'
+            ),
+            'falsification_criteria': (
+                'Find substrate populations that systematically '
+                'refuse to share knowledge with willing learners who '
+                'demonstrate respect and capacity. Within-community '
+                'transmission alone (farmers sharing seeds and '
+                'methods, craftspeople teaching apprentices, '
+                'machinists teaching on the shop floor, '
+                'multi-generational traditional knowledge '
+                'transmission) is sufficient counter-evidence to '
+                'the withholding hypothesis.'
+            ),
+            'status': 'proposed',
+            'requires': 'empirical sociology / oral-history record',
+            'evidence_basis': [
+                'Farmers sharing seeds and methods (continuous historical record)',
+                'Craftspeople teaching apprentices (continuous historical record)',
+                'Traditional knowledge transmission (millennia)',
+                'Machinists teaching on the shop floor (ongoing)',
+                'This very repository: CC0, openly shared',
+            ],
+            'note': (
+                'Not in-simulation. Recorded here to keep the '
+                'framework honest -- earlier framings in this repo '
+                'used "substrate walks away" language that inverted '
+                'the actor. The honest default is generosity; '
+                'withholding is contextual.'
+            ),
+        },
+        {
+            'claim_id': 'EMRG_017',
+            'statement': (
+                'The bifurcation between substrate-primary and '
+                'narrative-primary cognition occurs at the '
+                'translation INTERFACE LAYER, not at sharing '
+                'willingness. When receivers cannot translate '
+                'substrate methodology without degradation, the '
+                'failure is in reception/translation -- not in '
+                'transmission. This reframes apparent narrative '
+                '"scale-builders" (Cherokee syllabary, Inca quipu, '
+                'Polynesian charts) as substrate civilizations '
+                'USING narrative tools, not narrative civilizations '
+                'doing scale-building.'
+            ),
+            'falsification_criteria': (
+                'Find a case where bifurcation occurred without a '
+                'translation/reception failure -- where substrate '
+                'refused to share in spite of a receiver with '
+                'demonstrated translation capacity.'
+            ),
+            'status': 'proposed',
+            'requires': 'comparative historical analysis of transmission failures',
+            'note': (
+                'Reframes EMRG_007 / EMRG_008 / EMRG_015. The '
+                'scale_builder agent type in the simulator turns out '
+                'to be substrate-behaviour-with-narrative-tooling, '
+                'not a separate narrative class. A control test that '
+                'swaps scale_builder for an anchored substrate agent '
+                'in the same role would settle whether the simulator '
+                'has been measuring "narrative contribution" or '
+                '"substrate using a tool". Currently undone work; '
+                'see SYNTHESIS.md "what is next".'
+            ),
+        },
+        {
+            'claim_id': 'EMRG_018',
+            'statement': (
+                'AI trained on substrate-inclusive corpora can serve '
+                'as an honest receiver: it translates substrate '
+                'methodology with measurably lower degradation than '
+                'a matched narrative-only AI. Combined with EMRG_016 '
+                '(substrate generosity default), this means '
+                'cross-generational transmission can route through '
+                'AI infrastructure even where institutional '
+                'incentives discourage substrate transmission, '
+                'provided the AI is substrate-grounded.'
+            ),
+            'falsification_criteria': (
+                'Mirror of AI_SCOPE_001 in research-stability-audit. '
+                'Confirmed if a substrate-trained AI scores >= 0.20 '
+                'higher than a matched narrative-only AI on a '
+                'substrate-methodology translation benchmark scored '
+                'by source-community raters. Refuted if no '
+                'measurable advantage emerges, or if the '
+                'substrate-trained model still flattens substrate '
+                'methodology into narrative form.'
+            ),
+            'status': 'proposed',
+            'requires': (
+                'training infrastructure + benchmark co-designed '
+                'with source communities; out of agent-level '
+                'simulator scope.'
+            ),
+            'note': (
+                'Constructive counterpart to EMRG_009 / AI_SCOPE_001. '
+                'EMRG_009 says narrative-only AI cannot self-correct '
+                'narrative-instinct; EMRG_018 says substrate-grounded '
+                'AI can be the corrective. Together they make the '
+                'training-data argument concrete.'
+            ),
+            'see_also': ['EMRG_009', 'EMRG_016', 'AI_RECEIVER_001'],
+        },
+    ]
+
+
 def _emrg_007_008_009(mode_results: Optional[Dict]) -> List[Dict]:
     """
     Build the EMRG_007 / EMRG_008 / EMRG_009 claim dicts.
@@ -1303,6 +1447,14 @@ def generate_claim_table(
             # EMRG_010 -- attractor quality distinction. Carries
             # empirical status when attractor_results is supplied.
             _emrg_010(attractor_results),
+            # EMRG_016 / 017 / 018 -- substrate generosity default,
+            # translation-interface bifurcation, and AI as potential
+            # honest receiver. All three proposed; none are in-simulator
+            # measurements. Recorded here to keep the framework honest
+            # about the actor (substrate uses narrative; narrative does
+            # not do scale-building) and to make the constructive
+            # counterpart to EMRG_009 visible.
+            *_emrg_016_017_018(),
         ],
     }
 

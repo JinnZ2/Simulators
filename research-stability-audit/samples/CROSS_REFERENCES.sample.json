@@ -35,6 +35,12 @@
         "EMRG_009"
       ],
       "principle": "Scope-projection error is an architectural property of any system whose only reference frame is internal. The simulator cannot falsify it from inside (any agent it adds is still inside the simulator); the research-audit can, by comparing two trained models with and without substrate-inclusive corpora on a substrate-recognition benchmark."
+    },
+    "AI_RECEIVER_001": {
+      "maps_to": [
+        "EMRG_018"
+      ],
+      "principle": "Substrate populations share by default (EMRG_016); the bifurcation between substrate and narrative cognition occurs at the translation interface (EMRG_017). AI_RECEIVER_001 is the empirical test of whether a substrate-trained AI can act as that interface without introducing the degradation that narrative-only training imposes -- i.e. whether AI can be an honest receiver rather than an extractor."
     }
   }
 }

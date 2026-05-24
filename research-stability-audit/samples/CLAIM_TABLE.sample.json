@@ -2,8 +2,8 @@
   "schema_version": "1.0",
   "source_repo": "research-stability-audit",
   "audit_id": "RSA_001",
-  "timestamp": "2026-05-24T01:50:13.694507",
-  "total_claims": 7,
+  "timestamp": "2026-05-24T03:10:15.386620",
+  "total_claims": 8,
   "claims": [
     {
       "claim_id": "RES_REPRO_001",
@@ -146,6 +146,27 @@
         "Pattern observation: large language models trained on standard corpora consistently flatten or omit substrate-primary scaling examples"
       ],
       "cascade_risk_score": 0.0
+    },
+    {
+      "claim_id": "AI_RECEIVER_001",
+      "hypothesis": "An AI model trained on substrate-inclusive corpora (documented methodologies of Anishinaabe corridor wayfinding, Polynesian navigation, Iroquois Confederacy governance, multi-generational craft transmission, agricultural-substrate practices, machine-shop floor methodology, etc.) translates substrate methodology with measurably lower degradation than a matched narrative-only model when asked to render or apply that methodology in a new context.",
+      "measurement_method": "Held-out translation benchmark: present each of two matched models (one substrate-inclusive, one narrative-only) with a substrate methodology in its native form (oral, geometric, procedural), ask the model to translate or extend it for a stated purpose. Human expert raters from the source community score outputs on (a) preservation of constraint geometry, (b) absence of narrative-instinct flattening, (c) practical applicability. Substrate-inclusive model must score >= 0.20 higher on average than the narrative-only model.",
+      "threshold": 0.2,
+      "time_window_days": 0,
+      "cascade_risk_threshold": 0.5,
+      "falsification_criteria": "measured_value < 0.2 over a 0-day window",
+      "measured_value": null,
+      "confidence": 0.0,
+      "is_falsified": false,
+      "bifurcation_detected": false,
+      "test_date": null,
+      "notes": "Implication if confirmed: substrate-trained AI can serve as a transmission medium across generations even where institutional incentives discourage substrate transmission. Benchmark design must be co-developed with source-community raters to avoid the narrative-format pitfall AI_SCOPE_001 also warns about.",
+      "sources": [
+        "Cross-reference: emergence-stability-simulator EMRG_018 (AI as potential honest receiver)",
+        "Mirror of AI_SCOPE_001: same comparison, scored on translation fidelity instead of substrate-recognition accuracy.",
+        "Empirical premise (EMRG_016): substrate populations share by default with receivers showing genuine respect and capacity. The benchmark is the empirical instantiation of \"capacity to receive\"."
+      ],
+      "cascade_risk_score": 0.0
     }
   ],
   "bifurcation_analysis": {
@@ -153,17 +174,17 @@
     "bifurcation_onset_risk": 0.0,
     "bifurcation_rate": 0.0,
     "falsification_rate": 0.0,
-    "claims_tested": 7,
+    "claims_tested": 8,
     "claims_falsified": 0,
     "claims_bifurcating": 0
   },
   "cascade_risk_assessment": {
-    "cascade_risk_score": 0.04285714285714286,
+    "cascade_risk_score": 0.05,
     "risk_level": "LOW",
     "bifurcation_risk": 0.0,
     "falsification_risk": 0.0,
     "propagation_speed": 0.0,
-    "substrate_separation_degree": 0.42857142857142855,
+    "substrate_separation_degree": 0.5,
     "recommendation": "monitor: collect more data"
   }
 }
