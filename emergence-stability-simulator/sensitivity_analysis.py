@@ -135,6 +135,31 @@ def build_stable_majority_scenario(param_name, param_value, stable_count=3):
     return agents
 
 
+def build_parasitic_majority_scenario(param_name, param_value,
+                                      parasitic_count=3):
+    """
+    Build scenario with parasitic majority + one stable.
+    Counterpart to stable_majority — used to demonstrate the direction
+    reversal (parasites amplify each other; coupling now hurts).
+    """
+    if param_name not in PARAMETER_REGISTRY:
+        return None
+
+    baseline_type, field = PARAMETER_REGISTRY[param_name]
+
+    # First parasitic carries the swept parameter; others use defaults.
+    parasitic_kwargs = {}
+    if baseline_type == 'engagement':
+        parasitic_kwargs[field] = param_value
+
+    agents = [make_parasitic_agent('parasitic', **parasitic_kwargs)]
+    for i in range(parasitic_count - 1):
+        agents.append(make_parasitic_agent(f'parasitic_{i + 1}'))
+
+    agents.append(make_stable_agent('stable'))
+    return agents
+
+
 # ============================================================
 # CORE SWEEP FUNCTION
 # ============================================================
@@ -145,6 +170,7 @@ def parameter_sweep(
     runs_per_value: int = 10,
     timesteps: int = 100,
     use_attractor_scenario: bool = False,
+    scenario: Optional[str] = None,
 ) -> Dict:
     """
     Sweep a single parameter across values.
@@ -188,9 +214,13 @@ def parameter_sweep(
             'error': f'Parameter {param_name} not in registry',
         }
 
-    # Determine scenario type
-    # For parasitic_coupling_susceptibility, also do stable_majority test
-    is_coupling_sweep = (param_name == 'parasitic_coupling_susceptibility')
+    # Determine scenario type. Explicit `scenario` arg wins over auto-select.
+    if scenario in ('stable_majority', 'mixed', 'parasitic_majority'):
+        chosen_scenario = scenario
+    elif use_attractor_scenario or param_name == 'parasitic_coupling_susceptibility':
+        chosen_scenario = 'stable_majority'
+    else:
+        chosen_scenario = 'mixed'
 
     sweep_results = []
 
@@ -199,8 +229,10 @@ def parameter_sweep(
 
         for run_idx in range(runs_per_value):
             # Build scenario
-            if use_attractor_scenario or is_coupling_sweep:
+            if chosen_scenario == 'stable_majority':
                 agents = build_stable_majority_scenario(param_name, value)
+            elif chosen_scenario == 'parasitic_majority':
+                agents = build_parasitic_majority_scenario(param_name, value)
             else:
                 agents = build_mixed_scenario(param_name, value)
 
@@ -231,7 +263,7 @@ def parameter_sweep(
         'runs_per_value': runs_per_value,
         'timesteps': timesteps,
         'sweeps': sweep_results,
-        'scenario': 'stable_majority' if (use_attractor_scenario or is_coupling_sweep) else 'mixed',
+        'scenario': chosen_scenario,
     }
 
 
@@ -375,6 +407,11 @@ def generate_sensitivity_claims(results: Dict) -> List[Dict]:
     claims = []
     analyses = results.get('analyses', [])
 
+    # parasitic_coupling_susceptibility may appear under multiple scenarios
+    # (mixed + stable_majority). Group them so SENS_003 and EMRG_006 each
+    # emit exactly once with the right scenario context.
+    coupling_by_scenario: Dict[str, Dict] = {}
+
     for analysis in analyses:
         param_name = analysis.get('param_name', '')
         sweeps = analysis.get('sweeps', [])
@@ -382,7 +419,6 @@ def generate_sensitivity_claims(results: Dict) -> List[Dict]:
         if not sweeps:
             continue
 
-        # Generate parameter-specific claims
         if param_name == 'stable_recovery_rate':
             claims.append(_claim_stable_recovery(analysis))
 
@@ -390,15 +426,24 @@ def generate_sensitivity_claims(results: Dict) -> List[Dict]:
             claims.append(_claim_parasitic_persistence(analysis))
 
         elif param_name == 'parasitic_coupling_susceptibility':
-            # Two claims: one general SENS, one EMRG_006 (attractor)
-            claims.append(_claim_parasitic_coupling(analysis))
-            claims.append(_claim_emrg_006_attractor(analysis))
+            coupling_by_scenario[analysis.get('scenario', 'unknown')] = analysis
 
         elif param_name == 'stable_coupling_susceptibility':
             claims.append(_claim_stable_coupling(analysis))
 
         elif param_name == 'parasitic_recovery_rate':
             claims.append(_claim_parasitic_recovery(analysis))
+
+    if coupling_by_scenario:
+        # Prefer stable_majority as the "primary" SENS_003 measurement, but
+        # include every scenario's outcome inside the claim body.
+        primary = (coupling_by_scenario.get('stable_majority')
+                   or next(iter(coupling_by_scenario.values())))
+        claims.append(_claim_parasitic_coupling_combined(primary, coupling_by_scenario))
+
+        # EMRG_006 is specifically the stable-majority attractor finding.
+        if 'stable_majority' in coupling_by_scenario:
+            claims.append(_claim_emrg_006_attractor(coupling_by_scenario['stable_majority']))
 
     return claims
 
@@ -448,6 +493,40 @@ def _claim_parasitic_persistence(analysis: Dict) -> Dict:
         'evidence_strength': 'medium',
         'notes': 'Intrinsic parameter test: persistence drives drift regardless of environment',
     }
+
+
+def _claim_parasitic_coupling_combined(primary: Dict, by_scenario: Dict[str, Dict]) -> Dict:
+    """SENS_003 enriched with per-scenario measurements; status is data-driven."""
+    base = _claim_parasitic_coupling(primary)
+    per_scenario = {}
+    correlations: List[float] = []
+    for scen, analysis in by_scenario.items():
+        corr = extract_sweep_correlation(analysis, 'parasitic_avg_drift')
+        correlations.append(corr)
+        per_scenario[scen] = {
+            'correlation_coupling_to_parasitic_drift': corr,
+            'sweep_values': [s['param_value'] for s in analysis['sweeps']],
+            'measured_drifts': [s['parasitic_avg_drift'] for s in analysis['sweeps']],
+        }
+    base['measured_outcome']['per_scenario'] = per_scenario
+
+    # Sign-reversal across scenarios → "context_dependent" is empirically true.
+    # Otherwise the prediction is refuted: all scenarios point the same way.
+    if len(correlations) >= 2:
+        has_positive = any(c > 0.2 for c in correlations)
+        has_negative = any(c < -0.2 for c in correlations)
+        if has_positive and has_negative:
+            base['status'] = 'context_dependent'
+            base['notes'] = ('Sign of correlation reverses across scenarios; '
+                             'parameter is RELATIONAL, not intrinsic.')
+        else:
+            base['status'] = 'refuted'
+            base['notes'] = ('No sign reversal observed across scenarios. '
+                             'Coupling reduces parasitic drift in every '
+                             'environment tested — neighbors (stable or '
+                             'parasitic) act as a common attractor; stable '
+                             'neighbors are simply a stronger one.')
+    return base
 
 
 def _claim_parasitic_coupling(analysis: Dict) -> Dict:
@@ -645,14 +724,18 @@ def run_full_sensitivity_analysis(
         timesteps=timesteps,
     ))
 
-    # Sweep parasitic_coupling_susceptibility (stable-majority scenario)
-    print("  Sweeping parasitic_coupling_susceptibility (attractor test)...")
-    analyses.append(parameter_sweep(
-        'parasitic_coupling_susceptibility',
-        [0.1, 0.3, 0.5, 0.7, 0.9],
-        runs_per_value=runs_per_value,
-        timesteps=timesteps,
-    ))
+    # Sweep parasitic_coupling_susceptibility in all three scenarios. The
+    # reversal lives between stable_majority (negative correlation) and
+    # parasitic_majority (positive correlation); mixed sits between.
+    for scen in ('stable_majority', 'parasitic_majority', 'mixed'):
+        print(f"  Sweeping parasitic_coupling_susceptibility ({scen})...")
+        analyses.append(parameter_sweep(
+            'parasitic_coupling_susceptibility',
+            [0.1, 0.3, 0.5, 0.7, 0.9],
+            runs_per_value=runs_per_value,
+            timesteps=timesteps,
+            scenario=scen,
+        ))
 
     # Sweep parasitic_adaptation_persistence
     print("  Sweeping parasitic_adaptation_persistence...")
