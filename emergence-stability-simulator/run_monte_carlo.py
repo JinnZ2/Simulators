@@ -86,7 +86,7 @@ def main():
             f.write(sens_report)
         sens_claims = generate_sensitivity_claims(sens_results)
         merge_sensitivity_claims('CLAIM_TABLE.json', sens_claims)
-        print(f"\nMerged {len(sens_claims)} SENS_* claims into CLAIM_TABLE.json")
+        print(f"\nMerged {len(sens_claims)} sweep-derived claims into CLAIM_TABLE.json")
 
     # 4. ASCII report
     if not args.skip_report:

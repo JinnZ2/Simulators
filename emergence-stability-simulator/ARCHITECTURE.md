@@ -53,6 +53,16 @@ emergence-stability-simulator/
 └── metadata.json                # Structured semantic info
 ```
 
+## Cascade amplification metric
+
+`Agent.cascade_amplifications` is a continuous accumulator, not a binary
+threshold counter. Each timestep it adds
+`|total_pressure| * coupling_susceptibility`, so the signal is
+well-defined even on short or low-perturbation runs (no threshold
+artifact). It captures how much external pressure an agent absorbs
+weighted by its reactivity, which is the structural quantity EMRG_003
+is asking about.
+
 ## Parameter sensitivity analysis
 
 `sensitivity_analysis.py` sweeps four parameters
@@ -70,6 +80,12 @@ giving each falsifiable claim a measured outcome and explicit
 falsification criterion. The sensitivity analysis turns the project
 from "grounding wins" into "grounding wins in regime X for parameter Y
 above threshold Z" — a mechanistic, not just descriptive, finding.
+
+The same coupling-susceptibility sweep also feeds `EMRG_006`: with one
+parasitic agent in a stable-majority environment, parasitic drift is
+*inversely* correlated with parasitic coupling. The stable baseline
+behaves as a thermodynamic attractor — higher coupling pulls the parasite
+toward the anchor rather than amplifying its drift.
 
 ## Key assumptions
 

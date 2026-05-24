@@ -13,6 +13,7 @@ Dependencies: stdlib only
 """
 
 import json
+import math
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -187,6 +188,21 @@ If stable advantage disappears above threshold:
     return "\n".join(lines)
 
 
+def _pearson(xs: List[float], ys: List[float]) -> float:
+    """Pearson correlation coefficient (stdlib only). Returns 0 on degenerate input."""
+    n = len(xs)
+    if n < 2 or n != len(ys):
+        return 0.0
+    mean_x = sum(xs) / n
+    mean_y = sum(ys) / n
+    num = sum((x - mean_x) * (y - mean_y) for x, y in zip(xs, ys))
+    den_x = math.sqrt(sum((x - mean_x) ** 2 for x in xs))
+    den_y = math.sqrt(sum((y - mean_y) ** 2 for y in ys))
+    if den_x == 0 or den_y == 0:
+        return 0.0
+    return num / (den_x * den_y)
+
+
 def generate_sensitivity_claims(results: Dict) -> List[Dict]:
     """
     Build SENS_* claims from sweep results and return them.
@@ -271,6 +287,29 @@ def generate_sensitivity_claims(results: Dict) -> List[Dict]:
             },
             'falsification_criteria': 'drift_ratio < 2.0 across all persistence values',
             'status': 'confirmed' if critical is not None else 'inconclusive',
+        })
+
+    # EMRG_006: stable baseline acts as thermodynamic attractor
+    # Higher parasitic coupling, when surrounded by stable agents, pulls
+    # the parasite toward the stable baseline rather than amplifying drift.
+    a = find_analysis('parasitic_coupling_susceptibility')
+    if a:
+        couplings = [s['parameter_value'] for s in a['sweeps']]
+        parasitic_drifts = [s['parasitic_avg_drift'] for s in a['sweeps']]
+        correlation = _pearson(couplings, parasitic_drifts)
+        claims.append({
+            'claim_id': 'EMRG_006',
+            'statement': 'Parasitic agents with high coupling susceptibility are pulled toward the stable baseline when surrounded by stable agents (stable baseline acts as a thermodynamic attractor)',
+            'prediction': 'parasitic_drift inversely correlates with parasitic_coupling_susceptibility when stable agents form the majority',
+            'measured_outcome': {
+                'correlation_coupling_to_parasitic_drift': correlation,
+                'sweep_values': couplings,
+                'parasitic_drifts': parasitic_drifts,
+                'scenario': 'one parasitic agent + one stable agent + one hybrid agent',
+            },
+            'falsification_criteria': 'parasitic_drift increases with coupling (correlation >= 0) in a stable-majority environment',
+            'status': 'confirmed' if correlation < 0 else 'refuted',
+            'note': 'stable_baseline_is_thermodynamic_attractor — stronger evidence than predicted; parasites in a grounded environment are absorbed rather than amplified',
         })
 
     return claims

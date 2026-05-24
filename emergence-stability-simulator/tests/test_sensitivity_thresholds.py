@@ -60,7 +60,7 @@ class TestSensitivityClaims(unittest.TestCase):
                 parameter_sweep('stable_recovery_rate', [0.0, 0.5, 1.0],
                                 runs_per_value=3),
                 parameter_sweep('parasitic_coupling_susceptibility',
-                                [0.4, 0.8], runs_per_value=3),
+                                [0.2, 0.6, 1.0], runs_per_value=3),
                 parameter_sweep('parasitic_adaptation_persistence',
                                 [0.2, 0.8], runs_per_value=3),
             ]
@@ -72,7 +72,37 @@ class TestSensitivityClaims(unittest.TestCase):
             self.assertIn('statement', c)
             self.assertIn('falsification_criteria', c)
             self.assertIn('status', c)
-            self.assertTrue(c['claim_id'].startswith('SENS_'))
+            self.assertTrue(c['claim_id'].startswith('SENS_')
+                            or c['claim_id'].startswith('EMRG_'))
+
+
+class TestThermodynamicAttractorClaim(unittest.TestCase):
+    """EMRG_006: parasitic_coupling inversely correlates with parasitic_drift
+    when surrounded by stable agents."""
+
+    def test_emrg_006_emitted_when_coupling_sweep_present(self):
+        results = {
+            'analyses': [
+                parameter_sweep('parasitic_coupling_susceptibility',
+                                [0.2, 0.6, 1.0], runs_per_value=4),
+            ]
+        }
+        claims = generate_sensitivity_claims(results)
+        ids = {c['claim_id'] for c in claims}
+        self.assertIn('EMRG_006', ids)
+
+    def test_emrg_006_confirmed_with_negative_correlation(self):
+        results = {
+            'analyses': [
+                parameter_sweep('parasitic_coupling_susceptibility',
+                                [0.2, 0.4, 0.6, 0.8, 1.0], runs_per_value=6),
+            ]
+        }
+        claims = generate_sensitivity_claims(results)
+        emrg = next(c for c in claims if c['claim_id'] == 'EMRG_006')
+        correlation = emrg['measured_outcome']['correlation_coupling_to_parasitic_drift']
+        self.assertLess(correlation, 0.0)
+        self.assertEqual(emrg['status'], 'confirmed')
 
 
 if __name__ == "__main__":

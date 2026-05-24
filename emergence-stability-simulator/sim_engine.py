@@ -65,7 +65,11 @@ class Agent:
         # Cumulative metrics
         self.total_energy_spent = 0.0
         self.max_drift = 0.0
-        self.cascade_amplifications = 0
+        # Continuous cascade score: accumulates |total_pressure| * coupling_susceptibility
+        # per timestep, capturing how much external pressure this agent absorbs
+        # weighted by how reactive it is. Replaces a binary threshold counter so
+        # short / low-perturbation runs still produce a meaningful signal.
+        self.cascade_amplifications = 0.0
 
     def compute_drift(self) -> float:
         """Distance from baseline."""
@@ -88,6 +92,9 @@ class Agent:
         # Add external perturbation
         total_pressure = coupling_pressure + perturbation
 
+        # Continuous cascade score (applies to all baseline types)
+        self.cascade_amplifications += abs(total_pressure) * self.coupling_susceptibility
+
         # Update position based on baseline_type
         if self.baseline_type == 'physics':
             # Stable: absorb perturbation, but return to baseline
@@ -106,7 +113,6 @@ class Agent:
             drift = self.position - self.baseline_value
             self.position += drift * self.adaptation_persistence * 0.1
             energy_cost = abs(total_pressure) * 0.8  # high energy cost
-            self.cascade_amplifications += 1 if abs(total_pressure) > 0.5 else 0
 
         elif self.baseline_type == 'hybrid':
             # Mixed: partial absorption, partial recovery
