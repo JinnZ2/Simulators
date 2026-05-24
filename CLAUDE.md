@@ -17,6 +17,17 @@ Repository for different simulations and supporting tooling.
   measurement methods, thresholds, and cross-references to the
   emergence simulator's agent-level claims (same physics, different
   scale).
+- `tools/` — Shared utilities. Currently `validate_claim_table.py`
+  (lightweight schema validator for any `CLAIM_TABLE.json` produced in
+  the repo; accepts both the `statement`/`status` and
+  `hypothesis`/`is_falsified` flavours).
+- `SYNTHESIS.md` — Top-level synthesis describing how the three folders
+  fit together, how claims flow between them, and how to read the
+  artifacts in order.
+- Each simulator subfolder ships a `samples/` directory with one
+  small representative output (CLAIM_TABLE, ASCII report, geometry
+  file). Samples are checked in so the corpus is browsable on GitHub
+  without running anything.
 
 ## Working branch
 

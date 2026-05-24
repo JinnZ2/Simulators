@@ -5,9 +5,12 @@ License: CC0
 Dependencies: stdlib only (unittest)
 """
 
+import json
 import os
 import sys
+import tempfile
 import unittest
+from pathlib import Path
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -257,6 +260,42 @@ class TestSensitivityReport(unittest.TestCase):
         report = generate_sensitivity_report(results)
         self.assertIn('not_a_param', report)
         self.assertIn('no sweeps', report)
+
+
+class TestCli(unittest.TestCase):
+    def test_single_param_sweep_via_cli(self):
+        import subprocess
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / 'sweep.json'
+            result = subprocess.run(
+                [sys.executable, 'sensitivity_analysis.py',
+                 '--param', 'stable_recovery_rate',
+                 '--values', '0.0,1.0',
+                 '--runs', '2',
+                 '--timesteps', '20',
+                 '--output', str(out)],
+                cwd=os.path.join(os.path.dirname(__file__), '..'),
+                capture_output=True, text=True, timeout=30,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertTrue(out.exists())
+            data = json.loads(out.read_text())
+            self.assertEqual(data['schema_version'], '1.0')
+            self.assertEqual(data['source_repo'], 'emergence-stability-simulator')
+            self.assertEqual(len(data['analyses']), 1)
+            self.assertEqual(data['analyses'][0]['param_name'],
+                             'stable_recovery_rate')
+
+    def test_unknown_param_returns_nonzero(self):
+        import subprocess
+        result = subprocess.run(
+            [sys.executable, 'sensitivity_analysis.py',
+             '--param', 'not_a_real_param',
+             '--runs', '2', '--timesteps', '10'],
+            cwd=os.path.join(os.path.dirname(__file__), '..'),
+            capture_output=True, text=True, timeout=10,
+        )
+        self.assertNotEqual(result.returncode, 0)
 
 
 class TestParameterRegistry(unittest.TestCase):

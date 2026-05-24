@@ -1,0 +1,482 @@
+======================================================================
+SENSITIVITY ANALYSIS - FULL REPORT
+======================================================================
+Generated: 2026-05-24T01:27:26.499467
+Runs per value: 5
+Timesteps: 80
+Parameters analyzed: 6
+
+======================================================================
+INDIVIDUAL PARAMETER SWEEPS
+======================================================================
+
+
+======================================================================
+PARAMETER SWEEP: stable_recovery_rate
+Scenario: mixed
+Values tested: [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
+Runs per value: 5
+======================================================================
+
+DRIFT vs PARAMETER VALUE
+Legend: ● stable_drift  ○ parasitic_drift
+
+    0.313 │ ○∙∙∙∙∙                                                      
+    0.281 │       ∙∙∙∙∙                                                 
+    0.248 │            ○∙∙∙∙∙∙∙∙∙∙∙○∙∙∙∙∙∙∙∙∙∙∙○∙∙∙∙∙∙∙∙∙∙∙○∙∙∙∙∙∙∙∙∙∙∙ 
+    0.216 │                                                            ○
+    0.183 │ ●··                                                         
+    0.151 │    ···                                                      
+    0.118 │       ···                                                   
+    0.086 │          ··                                                 
+    0.053 │            ●···········                                     
+    0.021 │                        ●···········●···········●···········●
+          └────────────────────────────────────────────────────────────
+           0.00                          0.50                          1.00
+
+           stable_recovery_rate
+
+======================================================================
+CORRELATION ANALYSIS
+======================================================================
+
+Stable drift correlation with stable_recovery_rate:
+-1.0 ────●───────────────│─────────────────── +1.0
+  correlation: -0.805 (strong negative)
+
+Parasitic drift correlation with stable_recovery_rate:
+-1.0 ──────●─────────────│─────────────────── +1.0
+  correlation: -0.724 (strong negative)
+
+======================================================================
+DIRECTION ANALYSIS
+======================================================================
+  Stable drift DECREASES with stable_recovery_rate (-0.805)
+  Parasitic drift DECREASES with stable_recovery_rate (-0.724)
+
+  >>> RECOVERY MECHANISM CONFIRMED (SENS_001) <<<
+  Higher recovery rate reduces stable drift, as expected.
+
+======================================================================
+SWEEP TABLE
+======================================================================
+│ param │ stable_drift │ parasitic_drift │ drift_ratio │ win_rate │ bifurc_rate │
+├───────┼──────────────┼─────────────────┼─────────────┼──────────┼─────────────┤
+│ 0.00  │    0.190     │      0.313      │    1.65x    │   40%    │     0%      │
+│ 0.20  │    0.060     │      0.255      │    4.21x    │   100%   │     0%      │
+│ 0.40  │    0.048     │      0.253      │    5.30x    │   100%   │     0%      │
+│ 0.60  │    0.037     │      0.251      │    6.86x    │   100%   │     0%      │
+│ 0.80  │    0.028     │      0.249      │    8.97x    │   100%   │     0%      │
+│ 1.00  │    0.021     │      0.248      │   11.89x    │   100%   │     0%      │
+
+
+======================================================================
+PARAMETER SWEEP: parasitic_coupling_susceptibility
+Scenario: stable_majority
+Values tested: [0.1, 0.3, 0.5, 0.7, 0.9]
+Runs per value: 5
+======================================================================
+
+DRIFT vs PARAMETER VALUE
+Legend: ● stable_drift  ○ parasitic_drift
+
+    8.861 │ ○∙                                                          
+    7.880 │   ∙∙                                                        
+    6.898 │     ∙                                                       
+    5.916 │      ∙∙                                                     
+    4.935 │        ∙                                                    
+    3.953 │         ∙∙                                                  
+    2.972 │           ∙                                                 
+    1.990 │            ∙∙                                               
+    1.009 │              ∙                                              
+    0.027 │ ●·············○··············○··············○··············○
+          └────────────────────────────────────────────────────────────
+           0.10                          0.50                          0.90
+
+           parasitic_coupling_susceptibility
+
+======================================================================
+CORRELATION ANALYSIS
+======================================================================
+
+Stable drift correlation with parasitic_coupling_susceptibility:
+-1.0 ──────●─────────────│─────────────────── +1.0
+  correlation: -0.708 (strong negative)
+
+Parasitic drift correlation with parasitic_coupling_susceptibility:
+-1.0 ──────●─────────────│─────────────────── +1.0
+  correlation: -0.717 (strong negative)
+
+======================================================================
+DIRECTION ANALYSIS
+======================================================================
+  Stable drift DECREASES with parasitic_coupling_susceptibility (-0.708)
+  Parasitic drift DECREASES with parasitic_coupling_susceptibility (-0.717)
+
+  >>> ATTRACTOR EFFECT DETECTED (EMRG_006) <<<
+  Higher coupling pulls parasite TOWARD stable baseline.
+  Confirms: stable baseline acts as thermodynamic attractor.
+
+======================================================================
+SWEEP TABLE
+======================================================================
+│ param │ stable_drift │ parasitic_drift │ drift_ratio │ win_rate │ bifurc_rate │
+├───────┼──────────────┼─────────────────┼─────────────┼──────────┼─────────────┤
+│ 0.10  │    0.113     │      8.861      │   78.15x    │   100%   │     60%     │
+│ 0.30  │    0.027     │      0.374      │   13.66x    │   100%   │     0%      │
+│ 0.50  │    0.027     │      0.248      │    9.10x    │   100%   │     0%      │
+│ 0.70  │    0.027     │      0.235      │    8.62x    │   100%   │     0%      │
+│ 0.90  │    0.027     │      0.219      │    8.03x    │   100%   │     0%      │
+
+
+======================================================================
+PARAMETER SWEEP: parasitic_coupling_susceptibility
+Scenario: parasitic_majority
+Values tested: [0.1, 0.3, 0.5, 0.7, 0.9]
+Runs per value: 5
+======================================================================
+
+DRIFT vs PARAMETER VALUE
+Legend: ● stable_drift  ○ parasitic_drift
+
+   17.353 │ ○∙                                                          
+   15.429 │   ∙∙                                                        
+   13.504 │     ∙∙                                                      
+   11.580 │       ∙                                                     
+    9.655 │        ∙∙                                                   
+    7.731 │          ∙∙                                                 
+    5.806 │            ∙∙                                               
+    3.882 │              ∙                                              
+    1.958 │               ○∙∙∙∙∙∙∙∙∙∙∙∙∙∙                               
+    0.033 │ ●·············●··············○··············○··············○
+          └────────────────────────────────────────────────────────────
+           0.10                          0.50                          0.90
+
+           parasitic_coupling_susceptibility
+
+======================================================================
+CORRELATION ANALYSIS
+======================================================================
+
+Stable drift correlation with parasitic_coupling_susceptibility:
+-1.0 ─────●──────────────│─────────────────── +1.0
+  correlation: -0.761 (strong negative)
+
+Parasitic drift correlation with parasitic_coupling_susceptibility:
+-1.0 ─────●──────────────│─────────────────── +1.0
+  correlation: -0.769 (strong negative)
+
+======================================================================
+DIRECTION ANALYSIS
+======================================================================
+  Stable drift DECREASES with parasitic_coupling_susceptibility (-0.761)
+  Parasitic drift DECREASES with parasitic_coupling_susceptibility (-0.769)
+
+  >>> ATTRACTOR EFFECT DETECTED (EMRG_006) <<<
+  Higher coupling pulls parasite TOWARD stable baseline.
+  Confirms: stable baseline acts as thermodynamic attractor.
+
+======================================================================
+SWEEP TABLE
+======================================================================
+│ param │ stable_drift │ parasitic_drift │ drift_ratio │ win_rate │ bifurc_rate │
+├───────┼──────────────┼─────────────────┼─────────────┼──────────┼─────────────┤
+│ 0.10  │    0.632     │     17.353      │   27.45x    │   100%   │     80%     │
+│ 0.30  │    0.096     │      2.405      │   24.93x    │   100%   │     40%     │
+│ 0.50  │    0.035     │      0.747      │   21.43x    │   100%   │     0%      │
+│ 0.70  │    0.033     │      0.527      │   15.85x    │   100%   │     0%      │
+│ 0.90  │    0.033     │      0.423      │   12.80x    │   100%   │     0%      │
+
+
+======================================================================
+PARAMETER SWEEP: parasitic_coupling_susceptibility
+Scenario: mixed
+Values tested: [0.1, 0.3, 0.5, 0.7, 0.9]
+Runs per value: 5
+======================================================================
+
+DRIFT vs PARAMETER VALUE
+Legend: ● stable_drift  ○ parasitic_drift
+
+   21.026 │ ○∙                                                          
+   18.693 │   ∙∙                                                        
+   16.360 │     ∙                                                       
+   14.027 │      ∙∙                                                     
+   11.694 │        ∙                                                    
+    9.361 │         ∙∙                                                  
+    7.027 │           ∙                                                 
+    4.694 │            ∙∙                                               
+    2.361 │              ∙                                              
+    0.028 │ ●·············○··············○··············○··············○
+          └────────────────────────────────────────────────────────────
+           0.10                          0.50                          0.90
+
+           parasitic_coupling_susceptibility
+
+======================================================================
+CORRELATION ANALYSIS
+======================================================================
+
+Stable drift correlation with parasitic_coupling_susceptibility:
+-1.0 ──────●─────────────│─────────────────── +1.0
+  correlation: -0.713 (strong negative)
+
+Parasitic drift correlation with parasitic_coupling_susceptibility:
+-1.0 ──────●─────────────│─────────────────── +1.0
+  correlation: -0.742 (strong negative)
+
+======================================================================
+DIRECTION ANALYSIS
+======================================================================
+  Stable drift DECREASES with parasitic_coupling_susceptibility (-0.713)
+  Parasitic drift DECREASES with parasitic_coupling_susceptibility (-0.742)
+
+  >>> ATTRACTOR EFFECT DETECTED (EMRG_006) <<<
+  Higher coupling pulls parasite TOWARD stable baseline.
+  Confirms: stable baseline acts as thermodynamic attractor.
+
+======================================================================
+SWEEP TABLE
+======================================================================
+│ param │ stable_drift │ parasitic_drift │ drift_ratio │ win_rate │ bifurc_rate │
+├───────┼──────────────┼─────────────────┼─────────────┼──────────┼─────────────┤
+│ 0.10  │    0.285     │     21.026      │   73.70x    │   100%   │     80%     │
+│ 0.30  │    0.030     │      1.578      │   51.93x    │   100%   │     20%     │
+│ 0.50  │    0.028     │      0.421      │   15.10x    │   80%    │     0%      │
+│ 0.70  │    0.028     │      0.257      │    9.25x    │   80%    │     0%      │
+│ 0.90  │    0.028     │      0.249      │    8.97x    │   100%   │     0%      │
+
+
+======================================================================
+PARAMETER SWEEP: parasitic_adaptation_persistence
+Scenario: mixed
+Values tested: [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
+Runs per value: 5
+======================================================================
+
+DRIFT vs PARAMETER VALUE
+Legend: ● stable_drift  ○ parasitic_drift
+
+    0.258 │                                                 ∙∙∙∙∙∙∙∙∙∙∙○
+    0.233 │                         ∙∙∙∙∙∙∙∙∙∙∙○∙∙∙∙∙∙∙∙∙∙∙○            
+    0.207 │ ○∙∙∙∙∙∙∙∙∙∙○∙∙∙∙∙∙∙∙∙∙∙○                                    
+    0.181 │                                                             
+    0.156 │                                                             
+    0.130 │                                                             
+    0.105 │                                                             
+    0.079 │                                                             
+    0.053 │                                                             
+    0.028 │ ●··········●···········●···········●···········●···········●
+          └────────────────────────────────────────────────────────────
+           0.00                          0.50                          1.00
+
+           parasitic_adaptation_persistence
+
+======================================================================
+CORRELATION ANALYSIS
+======================================================================
+
+Stable drift correlation with parasitic_adaptation_persistence:
+-1.0 ────────────────────│──────────────────● +1.0
+  correlation: +0.999 (strong positive)
+
+Parasitic drift correlation with parasitic_adaptation_persistence:
+-1.0 ────────────────────│──────────────────● +1.0
+  correlation: +1.000 (strong positive)
+
+======================================================================
+DIRECTION ANALYSIS
+======================================================================
+  Stable drift INCREASES with parasitic_adaptation_persistence (+0.999)
+  Parasitic drift INCREASES with parasitic_adaptation_persistence (+1.000)
+
+======================================================================
+SWEEP TABLE
+======================================================================
+│ param │ stable_drift │ parasitic_drift │ drift_ratio │ win_rate │ bifurc_rate │
+├───────┼──────────────┼─────────────────┼─────────────┼──────────┼─────────────┤
+│ 0.00  │    0.028     │      0.215      │    7.75x    │   100%   │     0%      │
+│ 0.20  │    0.028     │      0.223      │    8.06x    │   100%   │     0%      │
+│ 0.40  │    0.028     │      0.232      │    8.36x    │   100%   │     0%      │
+│ 0.60  │    0.028     │      0.240      │    8.66x    │   100%   │     0%      │
+│ 0.80  │    0.028     │      0.249      │    8.97x    │   100%   │     0%      │
+│ 1.00  │    0.028     │      0.258      │    9.29x    │   100%   │     0%      │
+
+
+======================================================================
+PARAMETER SWEEP: stable_coupling_susceptibility
+Scenario: mixed
+Values tested: [0.1, 0.3, 0.5, 0.7, 0.9]
+Runs per value: 5
+======================================================================
+
+DRIFT vs PARAMETER VALUE
+Legend: ● stable_drift  ○ parasitic_drift
+
+    0.249 │                                              ∙∙∙∙∙∙∙∙∙∙∙∙∙∙○
+    0.225 │ ○∙∙∙∙∙∙∙∙∙∙∙∙∙○∙∙∙∙∙∙∙∙∙∙∙∙∙∙○∙∙∙∙∙∙∙∙∙∙∙∙∙∙○               
+    0.200 │                                                             
+    0.175 │                                                             
+    0.150 │                                                             
+    0.126 │                                                             
+    0.101 │                                                             
+    0.076 │                                                             
+    0.051 │                                                             
+    0.027 │ ●·············●··············●··············●··············●
+          └────────────────────────────────────────────────────────────
+           0.10                          0.50                          0.90
+
+           stable_coupling_susceptibility
+
+======================================================================
+CORRELATION ANALYSIS
+======================================================================
+
+Stable drift correlation with stable_coupling_susceptibility:
+-1.0 ────────────────────│──────────────────● +1.0
+  correlation: +1.000 (strong positive)
+
+Parasitic drift correlation with stable_coupling_susceptibility:
+-1.0 ────────────────────│──────────────────● +1.0
+  correlation: +0.999 (strong positive)
+
+======================================================================
+DIRECTION ANALYSIS
+======================================================================
+  Stable drift INCREASES with stable_coupling_susceptibility (+1.000)
+  Parasitic drift INCREASES with stable_coupling_susceptibility (+0.999)
+
+======================================================================
+SWEEP TABLE
+======================================================================
+│ param │ stable_drift │ parasitic_drift │ drift_ratio │ win_rate │ bifurc_rate │
+├───────┼──────────────┼─────────────────┼─────────────┼──────────┼─────────────┤
+│ 0.10  │    0.027     │      0.249      │    9.38x    │   100%   │     0%      │
+│ 0.30  │    0.028     │      0.249      │    8.97x    │   100%   │     0%      │
+│ 0.50  │    0.029     │      0.249      │    8.60x    │   100%   │     0%      │
+│ 0.70  │    0.030     │      0.249      │    8.27x    │   100%   │     0%      │
+│ 0.90  │    0.031     │      0.249      │    7.96x    │   100%   │     0%      │
+
+
+
+======================================================================
+SENSITIVITY ANALYSIS CLAIMS SUMMARY
+======================================================================
+
+Status Distribution:
+  confirmed            ███ 3
+  partial              █ 1
+  refuted              █ 1
+
+Total claims: 5
+
+
+──────────────────────────────────────────────────────────────────────
+[SENS_001] stable_recovery_rate
+──────────────────────────────────────────────────────────────────────
+Statement: Higher stable_recovery_rate produces lower stable_drift in mixed scenarios
+Prediction: correlation(recovery_rate, stable_drift) < 0
+Falsification: correlation >= 0 across parameter sweep
+
+Status: ✓ CONFIRMED
+Probability: 1.00
+Evidence strength: medium
+
+correlation_recovery_to_stable_drift:
+-1.0 ────●───────────────│─────────────────── +1.0
+  correlation: -0.805 (strong negative)
+
+──────────────────────────────────────────────────────────────────────
+[SENS_002] parasitic_adaptation_persistence
+──────────────────────────────────────────────────────────────────────
+Statement: Higher parasitic_adaptation_persistence produces higher parasitic_drift
+Prediction: correlation(persistence, parasitic_drift) > 0
+Falsification: correlation <= 0 across parameter sweep
+
+Status: ✓ CONFIRMED
+Probability: 1.00
+Evidence strength: medium
+
+correlation_persistence_to_parasitic_drift:
+-1.0 ────────────────────│──────────────────● +1.0
+  correlation: +1.000 (strong positive)
+
+Notes: Intrinsic parameter test: persistence drives drift regardless of environment
+
+──────────────────────────────────────────────────────────────────────
+[SENS_004] stable_coupling_susceptibility
+──────────────────────────────────────────────────────────────────────
+Statement: Stable agents with higher coupling_susceptibility maintain stability through recovery
+Prediction: stable_drift remains low even with high coupling, due to recovery_rate
+Falsification: stable_drift increases sharply with coupling
+
+Status: ? PARTIAL
+Probability: 0.00
+Evidence strength: medium
+
+correlation_coupling_to_stable_drift:
+-1.0 ────────────────────│──────────────────● +1.0
+  correlation: +1.000 (strong positive)
+
+──────────────────────────────────────────────────────────────────────
+[SENS_003] parasitic_coupling_susceptibility
+──────────────────────────────────────────────────────────────────────
+Statement: Parasitic_coupling_susceptibility effect on drift depends on environment composition
+Prediction: In stable-majority, correlation < 0 (attractor effect); In parasitic-majority, correlation > 0
+Falsification: Correlation direction same regardless of environment
+
+Status: ✗ REFUTED
+Probability: 0.50
+Evidence strength: high
+
+correlation_coupling_to_parasitic_drift:
+-1.0 ──────●─────────────│─────────────────── +1.0
+  correlation: -0.717 (strong negative)
+
+Notes: No sign reversal observed across scenarios. Coupling reduces parasitic drift in every environment tested — neighbors (stable or parasitic) act as a common attractor; stable neighbors are simply a stronger one.
+
+──────────────────────────────────────────────────────────────────────
+[EMRG_006] parasitic_coupling_susceptibility
+──────────────────────────────────────────────────────────────────────
+Statement: Stable baseline acts as thermodynamic attractor: parasitic agents with higher coupling susceptibility are pulled toward stable baseline when in stable-majority environment
+Prediction: correlation(parasitic_coupling, parasitic_drift) < 0 in stable-majority scenario
+Falsification: correlation >= 0 in stable-majority scenario
+
+Status: ✓ CONFIRMED
+Probability: 1.00
+Evidence strength: high
+
+correlation_coupling_to_parasitic_drift:
+-1.0 ──────●─────────────│─────────────────── +1.0
+  correlation: -0.717 (strong negative)
+
+Implications:
+  • Grounding propagates through coupling
+  • Minority grounded agents influence dynamics
+  • Coupling is relational, not intrinsic
+  • One stable agent per N parasitic may shift system
+
+
+
+
+======================================================================
+CROSS-SCENARIO ANALYSIS
+======================================================================
+
+
+
+======================================================================
+KEY FINDINGS
+======================================================================
+  Confirmed claims:        3
+  Refuted claims:          1
+  Context-dependent:       0
+
+THERMODYNAMIC ATTRACTOR FINDING (EMRG_006):
+  ✓ CONFIRMED with correlation -0.717
+  ✓ Stable baseline acts as thermodynamic attractor
+  ✓ Grounding propagates through coupling
+
+======================================================================
+End of report
+======================================================================

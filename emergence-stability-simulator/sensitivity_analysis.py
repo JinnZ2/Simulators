@@ -782,5 +782,78 @@ def run_full_sensitivity_analysis(
     return results
 
 
+def _cli() -> None:
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description=(
+            "Run parameter sensitivity sweeps. With no --param, runs the "
+            "default four-sweep set. With --param, runs a single sweep."
+        ),
+    )
+    parser.add_argument('--param', type=str, default=None,
+                        help=(f"Single parameter to sweep. Must be one of "
+                              f"{sorted(PARAMETER_REGISTRY)}"))
+    parser.add_argument('--values', type=str, default='0.0,0.25,0.5,0.75,1.0',
+                        help="Comma-separated parameter values "
+                             "(only used with --param). Default 0,0.25,0.5,0.75,1.")
+    parser.add_argument('--scenario', type=str, default=None,
+                        choices=['stable_majority', 'mixed', 'parasitic_majority'],
+                        help="Scenario override (only used with --param). "
+                             "Default: auto-select.")
+    parser.add_argument('--runs', type=int, default=10,
+                        help="Monte Carlo runs per parameter value (default 10).")
+    parser.add_argument('--timesteps', type=int, default=100,
+                        help="Timesteps per simulation (default 100).")
+    parser.add_argument('--output', type=str, default=None,
+                        help="Output JSON path. Default depends on mode.")
+    args = parser.parse_args()
+
+    if args.param is None:
+        out = args.output or 'results/sensitivity_analysis.json'
+        run_full_sensitivity_analysis(
+            runs_per_value=args.runs,
+            timesteps=args.timesteps,
+            output_path=out,
+        )
+        return
+
+    if args.param not in PARAMETER_REGISTRY:
+        parser.error(f"unknown --param {args.param!r}; valid options: "
+                     f"{sorted(PARAMETER_REGISTRY)}")
+
+    try:
+        values = [float(v) for v in args.values.split(',') if v.strip()]
+    except ValueError as e:
+        parser.error(f"--values must be a comma-separated list of floats: {e}")
+
+    analysis = parameter_sweep(
+        param_name=args.param,
+        values=values,
+        runs_per_value=args.runs,
+        timesteps=args.timesteps,
+        scenario=args.scenario,
+    )
+
+    out = args.output or f'results/sweep_{args.param}.json'
+    out_path = Path(out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(out_path, 'w') as f:
+        json.dump({
+            'schema_version': '1.0',
+            'source_repo': 'emergence-stability-simulator',
+            'timestamp': datetime.utcnow().isoformat(),
+            'runs_per_value': args.runs,
+            'timesteps': args.timesteps,
+            'analyses': [analysis],
+            'claims': generate_sensitivity_claims({'analyses': [analysis]}),
+        }, f, indent=2)
+    print(f"Sweep result written to {out_path}")
+    print(f"  param:     {args.param}")
+    print(f"  scenario:  {analysis['scenario']}")
+    print(f"  values:    {values}")
+    print(f"  data points: {len(analysis['sweeps'])}")
+
+
 if __name__ == "__main__":
-    run_full_sensitivity_analysis(runs_per_value=10, timesteps=50)
+    _cli()

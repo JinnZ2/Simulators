@@ -1,0 +1,302 @@
+{
+  "schema_version": "1.0",
+  "source_repo": "emergence-stability-simulator",
+  "source": "emergence-stability-simulator",
+  "generated": "2026-05-24T01:27:26.408528",
+  "claims": [
+    {
+      "claim_id": "EMRG_001",
+      "statement": "physics-grounded baseline produces lower drift than engagement-metric baseline in multi-agent emergence",
+      "prediction": "stable_agent_avg_drift < parasitic_agent_avg_drift",
+      "measured_outcome": {
+        "stable_drift": 0.013443489852611179,
+        "parasitic_drift": 0.2232464914185832,
+        "ratio": 16.606290023361844
+      },
+      "probability": 1.0,
+      "falsification_criteria": "parasitic_drift <= stable_drift over 1000+ runs",
+      "status": "confirmed"
+    },
+    {
+      "claim_id": "EMRG_002",
+      "statement": "physics-grounded agents win stability competition vs engagement-optimized agents",
+      "prediction": "stable_win_rate > parasitic_win_rate",
+      "measured_outcome": {
+        "stable_win_rate": 1.0,
+        "parasitic_win_rate": 0.0
+      },
+      "probability": 1.0,
+      "falsification_criteria": "stable_win_rate < 0.5 in independent replication",
+      "status": "confirmed"
+    },
+    {
+      "claim_id": "EMRG_003",
+      "statement": "engagement-optimized agents amplify cascade more than grounded agents",
+      "prediction": "parasitic_cascade_amplifications > stable_cascade_amplifications",
+      "measured_outcome": {
+        "stable_amplifications": 0.017613292131293028,
+        "parasitic_amplifications": 0.3623642482362564
+      },
+      "probability": 1.0,
+      "falsification_criteria": "parasitic_amplifications <= stable_amplifications",
+      "status": "confirmed"
+    },
+    {
+      "claim_id": "EMRG_004",
+      "statement": "engagement-optimized agents spend more energy than grounded agents (thermodynamic waste)",
+      "prediction": "parasitic_energy > stable_energy",
+      "measured_outcome": {
+        "stable_energy": 1.0180869405653397,
+        "parasitic_energy": 3.221015539877833,
+        "waste_ratio": 3.163792218068543
+      },
+      "probability": 1.0,
+      "falsification_criteria": "parasitic_energy <= stable_energy",
+      "status": "confirmed"
+    },
+    {
+      "claim_id": "EMRG_005",
+      "statement": "multi-agent emergence with engagement-optimized agents leads to bifurcation",
+      "prediction": "bifurcation_rate > 0.3 when parasitic agents present",
+      "measured_outcome": {
+        "bifurcation_rate": 0.0
+      },
+      "probability": 0.0,
+      "falsification_criteria": "bifurcation_rate < 0.1 in replications",
+      "status": "inconclusive"
+    },
+    {
+      "claim_id": "EMRG_007",
+      "statement": "Narrative-primary populations and systems operate in one of two modes based on their coupling to substrate: PARASITIC (displaces and corrupts substrate) or AUTHENTIC SCALE-BUILDING (respects and extends substrate). Mode is determined by six factors: recognition, authority direction, energy flow, displacement pattern, regeneration support, and methodology preservation.",
+      "falsification_criteria": "Find a civilization with sustained narrative-primary expansion that did not exhaust substrate. Find collapse without a preceding narrative shift to parasitic mode. Find authentic scale-building that did not involve substrate respect.",
+      "status": "proposed",
+      "requires": "scale_builder agent type with bidirectional coupling",
+      "note": "Testable in simulation by adding a `scale_builder` baseline_type that contributes to stable agents' recovery_rate and couples bidirectionally."
+    },
+    {
+      "claim_id": "EMRG_008",
+      "statement": "Civilizations scale via two distinct mechanisms: substrate scaling (landscape-based, distributed, time-deep) and narrative scaling (abstraction-based, centralized, rapid). Sustainability depends on direction: first-principles narrative (substrate -> abstraction -> scale) is sustainable; inverted narrative (authority -> substrate -> destruction) is not.",
+      "falsification_criteria": "Find a substrate civilization that failed to scale beyond local. Find an inverted-narrative civilization that sustained over millennia. Find a civilization that sustained without a substrate component.",
+      "status": "proposed",
+      "requires": "first_principles_narrative and inverted_narrative agent types",
+      "note": "Substrate-only baseline plus first_principles_narrative should produce sustained scaling; substrate-only plus inverted_narrative should produce collapse."
+    },
+    {
+      "claim_id": "EMRG_009",
+      "statement": "Narrative-primary systems observing themselves systematically project their own scope as universal scope. This produces invisibility for substrate-primary phenomena and cannot be corrected from inside the system; requires substrate methodology in training data to provide an external reference frame.",
+      "falsification_criteria": "Find a narrative-only system that recognized substrate scaling without external correction. Find an AI trained only on narrative records that modeled substrate civilizations accurately.",
+      "status": "proposed",
+      "requires": "cross-corpus comparison test (out of simulation scope)",
+      "note": "Architectural property of how narrative systems observe themselves; the simulator can model it via a `scope_blind` agent that systematically downweights observations outside its baseline_type."
+    },
+    {
+      "claim_id": "SENS_001",
+      "parameter": "stable_recovery_rate",
+      "statement": "Higher stable_recovery_rate produces lower stable_drift in mixed scenarios",
+      "prediction": "correlation(recovery_rate, stable_drift) < 0",
+      "falsification_criteria": "correlation >= 0 across parameter sweep",
+      "measurement_method": "Sweep stable_recovery_rate, measure stable_avg_drift in mixed scenario",
+      "measured_outcome": {
+        "correlation_recovery_to_stable_drift": -0.8051948025783116,
+        "sweep_values": [
+          0.0,
+          0.2,
+          0.4,
+          0.6,
+          0.8,
+          1.0
+        ],
+        "measured_drifts": [
+          0.19032864647458222,
+          0.06046658233675632,
+          0.047672617859101145,
+          0.03656658397875433,
+          0.027775053667122775,
+          0.020829305662428292
+        ]
+      },
+      "status": "confirmed",
+      "probability": 1.0,
+      "evidence_strength": "medium"
+    },
+    {
+      "claim_id": "SENS_002",
+      "parameter": "parasitic_adaptation_persistence",
+      "statement": "Higher parasitic_adaptation_persistence produces higher parasitic_drift",
+      "prediction": "correlation(persistence, parasitic_drift) > 0",
+      "falsification_criteria": "correlation <= 0 across parameter sweep",
+      "measurement_method": "Sweep parasitic_adaptation_persistence, measure parasitic_avg_drift",
+      "measured_outcome": {
+        "correlation_persistence_to_parasitic_drift": 0.999961679749244,
+        "sweep_values": [
+          0.0,
+          0.2,
+          0.4,
+          0.6,
+          0.8,
+          1.0
+        ],
+        "measured_drifts": [
+          0.21452391854217048,
+          0.22315957006316722,
+          0.23180568736392235,
+          0.2404563375430561,
+          0.24919755578192043,
+          0.25827575829188926
+        ]
+      },
+      "status": "confirmed",
+      "probability": 1.0,
+      "evidence_strength": "medium",
+      "notes": "Intrinsic parameter test: persistence drives drift regardless of environment"
+    },
+    {
+      "claim_id": "SENS_004",
+      "parameter": "stable_coupling_susceptibility",
+      "statement": "Stable agents with higher coupling_susceptibility maintain stability through recovery",
+      "prediction": "stable_drift remains low even with high coupling, due to recovery_rate",
+      "falsification_criteria": "stable_drift increases sharply with coupling",
+      "measurement_method": "Sweep stable_coupling_susceptibility in mixed scenario",
+      "measured_outcome": {
+        "correlation_coupling_to_stable_drift": 0.9999720193003677,
+        "sweep_values": [
+          0.1,
+          0.3,
+          0.5,
+          0.7,
+          0.9
+        ],
+        "measured_drifts": [
+          0.026558170514538616,
+          0.027775053667122775,
+          0.028976630926494308,
+          0.030163108694486785,
+          0.03133469376224089
+        ]
+      },
+      "status": "partial",
+      "probability": 2.798069963227956e-05,
+      "evidence_strength": "medium"
+    },
+    {
+      "claim_id": "SENS_003",
+      "parameter": "parasitic_coupling_susceptibility",
+      "statement": "Parasitic_coupling_susceptibility effect on drift depends on environment composition",
+      "prediction": "In stable-majority, correlation < 0 (attractor effect); In parasitic-majority, correlation > 0",
+      "falsification_criteria": "Correlation direction same regardless of environment",
+      "measurement_method": "Sweep coupling in stable-majority scenario",
+      "measured_outcome": {
+        "correlation_coupling_to_parasitic_drift": -0.7168414145329058,
+        "scenario": "stable_majority",
+        "sweep_values": [
+          0.1,
+          0.3,
+          0.5,
+          0.7,
+          0.9
+        ],
+        "measured_drifts": [
+          8.861102425012016,
+          0.3738762095470426,
+          0.24834956697599186,
+          0.23538523242104442,
+          0.21900539265964686
+        ],
+        "per_scenario": {
+          "stable_majority": {
+            "correlation_coupling_to_parasitic_drift": -0.7168414145329058,
+            "sweep_values": [
+              0.1,
+              0.3,
+              0.5,
+              0.7,
+              0.9
+            ],
+            "measured_drifts": [
+              8.861102425012016,
+              0.3738762095470426,
+              0.24834956697599186,
+              0.23538523242104442,
+              0.21900539265964686
+            ]
+          },
+          "parasitic_majority": {
+            "correlation_coupling_to_parasitic_drift": -0.7691806295125784,
+            "sweep_values": [
+              0.1,
+              0.3,
+              0.5,
+              0.7,
+              0.9
+            ],
+            "measured_drifts": [
+              17.35318014962216,
+              2.4046973227206343,
+              0.7469727410112341,
+              0.5271982028670382,
+              0.4234616220645009
+            ]
+          },
+          "mixed": {
+            "correlation_coupling_to_parasitic_drift": -0.7417092983922734,
+            "sweep_values": [
+              0.1,
+              0.3,
+              0.5,
+              0.7,
+              0.9
+            ],
+            "measured_drifts": [
+              21.02647310240357,
+              1.5779609566917325,
+              0.42124321863441194,
+              0.25687807622578357,
+              0.24919755578192043
+            ]
+          }
+        }
+      },
+      "status": "refuted",
+      "probability": 0.5,
+      "evidence_strength": "high",
+      "notes": "No sign reversal observed across scenarios. Coupling reduces parasitic drift in every environment tested \u2014 neighbors (stable or parasitic) act as a common attractor; stable neighbors are simply a stronger one."
+    },
+    {
+      "claim_id": "EMRG_006",
+      "parameter": "parasitic_coupling_susceptibility",
+      "statement": "Stable baseline acts as thermodynamic attractor: parasitic agents with higher coupling susceptibility are pulled toward stable baseline when in stable-majority environment",
+      "prediction": "correlation(parasitic_coupling, parasitic_drift) < 0 in stable-majority scenario",
+      "falsification_criteria": "correlation >= 0 in stable-majority scenario",
+      "measurement_method": "Sweep parasitic_coupling_susceptibility (0.1-1.0) in scenario with 3+ stable agents and 1 parasitic; measure parasitic_avg_drift",
+      "measured_outcome": {
+        "correlation_coupling_to_parasitic_drift": -0.7168414145329058,
+        "scenario": "stable_majority",
+        "sweep_values": [
+          0.1,
+          0.3,
+          0.5,
+          0.7,
+          0.9
+        ],
+        "measured_drifts": [
+          8.861102425012016,
+          0.3738762095470426,
+          0.24834956697599186,
+          0.23538523242104442,
+          0.21900539265964686
+        ]
+      },
+      "status": "confirmed",
+      "probability": 1.0,
+      "evidence_strength": "high",
+      "implications": [
+        "Grounding propagates through coupling",
+        "Minority grounded agents influence dynamics",
+        "Coupling is relational, not intrinsic",
+        "One stable agent per N parasitic may shift system"
+      ],
+      "extends": "EMRG_001 (stable produces stability) by showing mechanism: attraction not just resistance",
+      "discovered_via": "SENS_002 investigation revealed direction reversal"
+    }
+  ]
+}

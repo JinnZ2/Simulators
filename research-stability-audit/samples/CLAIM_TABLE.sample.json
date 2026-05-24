@@ -1,0 +1,148 @@
+{
+  "schema_version": "1.0",
+  "source_repo": "research-stability-audit",
+  "audit_id": "RSA_001",
+  "timestamp": "2026-05-24T01:28:09.083402",
+  "total_claims": 6,
+  "claims": [
+    {
+      "claim_id": "RES_REPRO_001",
+      "hypothesis": "Research reproducibility failure rate exceeds 50% in fast-moving fields",
+      "measurement_method": "Attempt to replicate published studies; count failures",
+      "threshold": 0.5,
+      "time_window_days": 365,
+      "cascade_risk_threshold": 0.6,
+      "falsification_criteria": "measured_value < 0.5 over a 365-day window",
+      "measured_value": null,
+      "confidence": 0.0,
+      "is_falsified": false,
+      "bifurcation_detected": false,
+      "test_date": null,
+      "notes": "Real failure rate is 40-60% but formal retraction is 0-5%. The gap is the bifurcation: corpus retains broken claims for years.",
+      "sources": [
+        "Nature (2024): Half of social-science studies fail replication (3,900 papers)",
+        "Nature survey: 70% of researchers failed to reproduce others' work; 50% own",
+        "PNAS: psychology ~40% replicate (implying ~60% fail)"
+      ],
+      "cascade_risk_score": 0.0
+    },
+    {
+      "claim_id": "RES_RETLAG_001",
+      "hypothesis": "Formal retractions lag failed replications by at least 2 years",
+      "measurement_method": "Track time from first failed replication to formal retraction",
+      "threshold": 2.0,
+      "time_window_days": 1825,
+      "cascade_risk_threshold": 0.7,
+      "falsification_criteria": "measured_value < 2.0 over a 1825-day window",
+      "measured_value": null,
+      "confidence": 0.0,
+      "is_falsified": false,
+      "bifurcation_detected": false,
+      "test_date": null,
+      "notes": "Downstream work builds on false foundations during the lag.",
+      "sources": [
+        "Nature (2024): biomedical retractions quadrupled in 20 years",
+        "Scholarly Kitchen: 51% of retractions from 34 journals (concentrated)"
+      ],
+      "cascade_risk_score": 0.0
+    },
+    {
+      "claim_id": "RES_DECAY_001",
+      "hypothesis": "Citation half-life in fast-moving fields is below 5 years",
+      "measurement_method": "Compute citation half-life across 10 fields, correlate with innovation velocity",
+      "threshold": 5.0,
+      "time_window_days": 1825,
+      "cascade_risk_threshold": 0.65,
+      "falsification_criteria": "measured_value < 5.0 over a 1825-day window",
+      "measured_value": null,
+      "confidence": 0.0,
+      "is_falsified": false,
+      "bifurcation_detected": false,
+      "test_date": null,
+      "notes": "Conservative estimate; AI subfields are closer to 2-3 years.",
+      "sources": [
+        "LIS Academy: fast-moving fields (AI, medicine) have 3-5yr half-life",
+        "ACM: computing research shows wide variation by subfield"
+      ],
+      "cascade_risk_score": 0.0
+    },
+    {
+      "claim_id": "AI_DEGRAD_001",
+      "hypothesis": "91% or more of ML models degrade within one year of deployment",
+      "measurement_method": "Deploy N models, track accuracy over time, count those that degrade",
+      "threshold": 0.91,
+      "time_window_days": 30,
+      "cascade_risk_threshold": 0.8,
+      "falsification_criteria": "measured_value < 0.91 over a 30-day window",
+      "measured_value": null,
+      "confidence": 0.0,
+      "is_falsified": false,
+      "bifurcation_detected": false,
+      "test_date": null,
+      "notes": "AI model obsolescence is FASTER than research-paper obsolescence; training AI on AI accelerates the cycle.",
+      "sources": [
+        "Nature (2025): 91% of ML models degrade over time",
+        "IBM / Splunk: concept drift occurs in weeks to months"
+      ],
+      "cascade_risk_score": 0.0
+    },
+    {
+      "claim_id": "BIF_ONSET_001",
+      "hypothesis": "Substrate knowledge transmission collapses when adoption falls below 50% per generation",
+      "measurement_method": "Survey practitioner cohorts; measure rate of knowledge handoff",
+      "threshold": 0.5,
+      "time_window_days": 1095,
+      "cascade_risk_threshold": 0.75,
+      "falsification_criteria": "measured_value < 0.5 over a 1095-day window",
+      "measured_value": null,
+      "confidence": 0.0,
+      "is_falsified": false,
+      "bifurcation_detected": false,
+      "test_date": null,
+      "notes": "Once broken, recovery requires more than one generation.",
+      "sources": [
+        "Anthropological observation: skilled-trade knowledge loss in <1 generation",
+        "Historical precedent: Roman concrete, Damascus steel, agricultural varieties"
+      ],
+      "cascade_risk_score": 0.0
+    },
+    {
+      "claim_id": "CASCADE_METHOD_001",
+      "hypothesis": "Falsifiable-methodology corpora replicate at higher rate than narrative-conclusion corpora",
+      "measurement_method": "Compare replication rates of registered/methodology-explicit papers vs narrative-only papers",
+      "threshold": 0.5,
+      "time_window_days": 1095,
+      "cascade_risk_threshold": 0.6,
+      "falsification_criteria": "measured_value < 0.5 over a 1095-day window",
+      "measured_value": null,
+      "confidence": 0.0,
+      "is_falsified": false,
+      "bifurcation_detected": false,
+      "test_date": null,
+      "notes": "Same physics as emergence-stability-simulator: grounded baselines damp cascade, narrative baselines amplify. CC0 corpora that embed falsifiable claims behave like physics-grounded agents.",
+      "sources": [
+        "Pre-registration studies: registered reports show higher replication rate",
+        "Cross-reference: emergence-stability-simulator EMRG_001..EMRG_006"
+      ],
+      "cascade_risk_score": 0.0
+    }
+  ],
+  "bifurcation_analysis": {
+    "bifurcation_detected": false,
+    "bifurcation_onset_risk": 0.0,
+    "bifurcation_rate": 0.0,
+    "falsification_rate": 0.0,
+    "claims_tested": 6,
+    "claims_falsified": 0,
+    "claims_bifurcating": 0
+  },
+  "cascade_risk_assessment": {
+    "cascade_risk_score": 0.03333333333333333,
+    "risk_level": "LOW",
+    "bifurcation_risk": 0.0,
+    "falsification_risk": 0.0,
+    "propagation_speed": 0.0,
+    "substrate_separation_degree": 0.3333333333333333,
+    "recommendation": "monitor: collect more data"
+  }
+}

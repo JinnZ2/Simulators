@@ -31,7 +31,15 @@ def merge_sensitivity_claims(claim_table_path: str, sens_claims: list) -> None:
         with open(path) as f:
             table = json.load(f)
     else:
-        table = {'schema_version': '1.0', 'claims': []}
+        table = {
+            'schema_version': '1.0',
+            'source_repo': 'emergence-stability-simulator',
+            'claims': [],
+        }
+    # Ensure the header fields are present even if the file pre-existed
+    # without them.
+    table.setdefault('schema_version', '1.0')
+    table.setdefault('source_repo', 'emergence-stability-simulator')
 
     existing_ids = {c['claim_id'] for c in table.get('claims', [])}
     for c in sens_claims:

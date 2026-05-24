@@ -85,6 +85,12 @@ class ResearchClaim:
             'threshold': self.threshold,
             'time_window_days': self.time_window_days,
             'cascade_risk_threshold': self.cascade_risk_threshold,
+            # Derived from threshold so schema validators see an explicit
+            # falsifiability statement.
+            'falsification_criteria': (
+                f'measured_value < {self.threshold} '
+                f'over a {self.time_window_days}-day window'
+            ),
             'measured_value': self.measured_value,
             'confidence': self.confidence,
             'is_falsified': self.is_falsified,
@@ -214,6 +220,8 @@ class ResearchStabilityAudit:
         bif = self.detect_bifurcation()
         cas = self.cascade_risk_assessment()
         return {
+            'schema_version': '1.0',
+            'source_repo': 'research-stability-audit',
             'audit_id': self.audit_id,
             'timestamp': self.audit_timestamp,
             'total_claims': len(self.claims),

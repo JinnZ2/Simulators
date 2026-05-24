@@ -1,0 +1,34 @@
+{
+  "source_repo": "research-stability-audit",
+  "target_repo": "emergence-stability-simulator",
+  "mappings": {
+    "AI_DEGRAD_001": {
+      "maps_to": [
+        "EMRG_003",
+        "EMRG_004"
+      ],
+      "principle": "AI model degradation is cascade amplification at the model level. A trained model without continued grounding behaves like a parasitic agent: total_pressure (data drift) is absorbed and amplified rather than damped by physics_baseline."
+    },
+    "RES_REPRO_001": {
+      "maps_to": [
+        "EMRG_001",
+        "EMRG_002"
+      ],
+      "principle": "Reproducibility failure is drift from baseline at the field level. Fields with strong physics grounding (math, classical physics) show lower drift; fields driven by engagement metrics (citations, novelty) show higher drift."
+    },
+    "BIF_ONSET_001": {
+      "maps_to": [
+        "EMRG_005",
+        "EMRG_006"
+      ],
+      "principle": "A grounded minority can dominate dynamics when coupled to a parasitic majority \u2014 but only if the coupling and the minority size pass the attractor threshold identified in EMRG_006."
+    },
+    "CASCADE_METHOD_001": {
+      "maps_to": [
+        "EMRG_001",
+        "EMRG_006"
+      ],
+      "principle": "Methodology-explicit research is the field-level analog of the physics baseline. The same falsifiability that lets the simulator damp cascade lets a corpus damp narrative drift."
+    }
+  }
+}
