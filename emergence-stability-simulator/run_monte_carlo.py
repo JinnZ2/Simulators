@@ -19,7 +19,10 @@ import json
 from pathlib import Path
 
 from sim_engine import run_monte_carlo, generate_claim_table
-from sensitivity_analysis import run_full_sensitivity_analysis
+from sensitivity_analysis import (
+    run_full_sensitivity_analysis,
+    generate_sensitivity_report,
+)
 from analysis import generate_full_report
 
 
@@ -73,7 +76,7 @@ def main():
     # 2. Falsifiable claims (writes CLAIM_TABLE.json)
     generate_claim_table(aggregate)
 
-    # 3. Sensitivity analysis + merge sweep-derived claims
+    # 3. Sensitivity analysis + merge sweep-derived claims + text report
     if not args.skip_sensitivity:
         sens_results = run_full_sensitivity_analysis(
             runs_per_value=args.sensitivity_runs,
@@ -82,6 +85,12 @@ def main():
         sens_claims = sens_results.get('claims', [])
         merge_sensitivity_claims('CLAIM_TABLE.json', sens_claims)
         print(f"\nMerged {len(sens_claims)} sweep-derived claims into CLAIM_TABLE.json")
+
+        report = generate_sensitivity_report(sens_results)
+        Path('results').mkdir(exist_ok=True)
+        with open('results/sensitivity_report.txt', 'w') as f:
+            f.write(report)
+        print("Sensitivity report at results/sensitivity_report.txt")
 
     # 4. ASCII report
     if not args.skip_report:

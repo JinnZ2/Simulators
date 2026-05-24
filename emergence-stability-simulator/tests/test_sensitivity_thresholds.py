@@ -14,6 +14,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 from sensitivity_analysis import (
     parameter_sweep,
     generate_sensitivity_claims,
+    generate_sensitivity_report,
     compute_correlation,
     PARAMETER_REGISTRY,
 )
@@ -135,6 +136,32 @@ class TestThermodynamicAttractorClaim(unittest.TestCase):
         correlation = emrg['measured_outcome']['correlation_coupling_to_parasitic_drift']
         self.assertLess(correlation, 0.0)
         self.assertEqual(emrg['status'], 'confirmed')
+
+
+class TestSensitivityReport(unittest.TestCase):
+    def test_report_renders_param_and_claim_sections(self):
+        analysis = parameter_sweep('stable_recovery_rate', [0.0, 1.0],
+                                   runs_per_value=2)
+        claims = generate_sensitivity_claims({'analyses': [analysis]})
+        results = {
+            'timestamp': '2026-05-24T00:00:00',
+            'runs_per_value': 2,
+            'timesteps': 100,
+            'analyses': [analysis],
+            'claims': claims,
+        }
+        report = generate_sensitivity_report(results)
+        self.assertIn('PARAMETER SENSITIVITY ANALYSIS', report)
+        self.assertIn('stable_recovery_rate', report)
+        self.assertIn('GENERATED CLAIMS', report)
+        self.assertIn('SENS_001', report)
+
+    def test_report_handles_unknown_parameter_sweep(self):
+        analysis = parameter_sweep('not_a_param', [0.0, 1.0], runs_per_value=1)
+        results = {'analyses': [analysis], 'claims': []}
+        report = generate_sensitivity_report(results)
+        self.assertIn('not_a_param', report)
+        self.assertIn('no sweeps', report)
 
 
 class TestParameterRegistry(unittest.TestCase):

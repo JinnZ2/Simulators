@@ -556,6 +556,70 @@ def _claim_parasitic_recovery(analysis: Dict) -> Dict:
 
 
 # ============================================================
+# TEXT REPORT
+# ============================================================
+
+def generate_sensitivity_report(results: Dict) -> str:
+    """Build a human-readable ASCII report from a sensitivity results dict."""
+    lines = []
+    lines.append("=" * 78)
+    lines.append("PARAMETER SENSITIVITY ANALYSIS")
+    lines.append("=" * 78)
+    lines.append(f"timestamp:      {results.get('timestamp', '?')}")
+    lines.append(f"runs per value: {results.get('runs_per_value', '?')}")
+    lines.append(f"timesteps:      {results.get('timesteps', '?')}")
+
+    for analysis in results.get('analyses', []):
+        param = analysis.get('param_name', '?')
+        scenario = analysis.get('scenario', '?')
+        sweeps = analysis.get('sweeps', [])
+
+        lines.append("")
+        lines.append("-" * 78)
+        lines.append(f"{param}   (scenario: {scenario})")
+        lines.append("-" * 78)
+
+        if not sweeps:
+            lines.append(f"  (no sweeps — {analysis.get('error', 'no data')})")
+            continue
+
+        lines.append(
+            f"{'value':>7} {'stable_drift':>13} {'parasitic_drift':>16} "
+            f"{'ratio':>8} {'stable_win':>11} {'bifurc':>8}"
+        )
+        for s in sweeps:
+            lines.append(
+                f"{s['param_value']:>7.2f} "
+                f"{s['stable_avg_drift']:>13.3f} "
+                f"{s['parasitic_avg_drift']:>16.3f} "
+                f"{s['drift_ratio']:>7.2f}x "
+                f"{s['stable_win_rate']:>10.1%} "
+                f"{s['bifurcation_rate']:>7.1%}"
+            )
+
+        bif = [s['param_value'] for s in sweeps if s['bifurcation_rate'] > 0.3]
+        if bif:
+            lines.append(f"  → bifurcation threshold:  ~{min(bif):.2f}")
+        lost = [s['param_value'] for s in sweeps if s['stable_win_rate'] < 0.55]
+        if lost:
+            lines.append(f"  → grounding advantage lost at: ~{lost[0]:.2f}")
+
+    claims = results.get('claims', [])
+    if claims:
+        lines.append("")
+        lines.append("=" * 78)
+        lines.append("GENERATED CLAIMS")
+        lines.append("=" * 78)
+        for c in claims:
+            lines.append(f"  {c['claim_id']:<10} {c['status']:<18} "
+                         f"({c.get('parameter', 'n/a')})")
+            lines.append(f"             {c['statement']}")
+
+    lines.append("")
+    return "\n".join(lines)
+
+
+# ============================================================
 # MAIN ANALYSIS
 # ============================================================
 
