@@ -235,13 +235,16 @@ class TestScaleBuilderAgent(unittest.TestCase):
 
     def test_scale_builder_stays_anchored(self):
         # scale_builder still has its own baseline_value; should not
-        # run away even when paired with substrate. Identical to a
-        # physics agent at the same params, but the label remains.
+        # run away even when paired with substrate. After round 6 the
+        # scale_builder baseline_type was removed; the partner agent
+        # is now physics-typed, identified by its agent_id ending
+        # with 'scale_builder' (historical label).
         sb_final_drifts = []
         for seed in range(20):
             agents = scenario_substrate_plus_scale_builder()
             EmergenceSimulation(agents, timesteps=100, seed=seed).run()
-            sb = next(a for a in agents if a.baseline_type == 'scale_builder')
+            sb = next(a for a in agents
+                      if a.agent_id.endswith('scale_builder'))
             sb_final_drifts.append(sb.compute_drift())
         avg = sum(sb_final_drifts) / len(sb_final_drifts)
         self.assertLess(avg, 1.0)

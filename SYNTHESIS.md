@@ -237,8 +237,9 @@ those mechanics it sweeps:
   communities. Two-sided test: AI_SCOPE_001 measures what
   narrative-only loses; AI_RECEIVER_001 measures what substrate
   training gains.
-- **EMRG_007 / 008 / 017 control test ran (and round 6 removal
-  followed).** Both controls are now in `run_mode_comparison`:
+- **EMRG_007 / 008 / 017 control test ran; the round-6 removal
+  followed; the scale_builder baseline_type was then deleted
+  entirely (round 7).** Sequence:
   - `substrate_plus_anchored_physics_control` — substitutes an
     anchored physics agent (at scale_builder's params) into the
     scale_builder role. Empirical result before round 6: the
@@ -246,8 +247,20 @@ those mechanics it sweeps:
     scale_builder-vs-parasitic gap; the fabricated recovery_modifier
     emission carried the bulk. The user authorized removing the
     fabricated mechanism. After removal, scale_builder ≡ anchored
-    physics structurally; EMRG_007 and EMRG_017 land confirmed by
+    physics structurally; EMRG_007 and EMRG_017 landed confirmed by
     construction.
+  - **Round 7 (current):** the `'scale_builder'` baseline_type is
+    deleted at every construction site. `Agent.__init__` now
+    normalizes any incoming `'scale_builder'` to `'physics'`, the
+    dead `elif` branch in `interact()` is gone, and the factory /
+    scenarios / build_balance_scenario construct physics agents
+    directly. Function and parameter names (`make_scale_builder`,
+    `scale_builder_count`, `scenario_substrate_plus_scale_builder`)
+    are retained as API + historical labels; the agent_id prefix
+    `scale_builder_*` survives so older logs remain readable. After
+    the deletion, `substrate_plus_scale_builder` and
+    `substrate_plus_anchored_physics_control` produce identical
+    drift to floating-point precision (0.013601 = 0.013601).
   - `substrate_plus_inverted_no_emission_control` — disables
     inverted_narrative's negative emission. Substrate still goes to
     runaway divergence (orders of magnitude above substrate_only

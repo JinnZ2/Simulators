@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "source_repo": "emergence-stability-simulator",
-  "timestamp": "2026-05-25T03:44:09.514584",
+  "timestamp": "2026-05-25T12:57:18.690783",
   "ratio_sweep": {
     "sweep_type": "ratio_sweep",
     "ratios_tested": [
@@ -786,7 +786,7 @@
           "runs": 2,
           "avg_sustainability_score": 0.0,
           "collapse_rate": 1.0,
-          "bifurcation_rate": 0.0,
+          "bifurcation_rate": 1.0,
           "avg_substrate_drift": 0.0,
           "avg_exhausted_ratio": 1.0,
           "sustainable": false,
@@ -801,7 +801,7 @@
           "runs": 2,
           "avg_sustainability_score": 0.0,
           "collapse_rate": 1.0,
-          "bifurcation_rate": 0.5,
+          "bifurcation_rate": 1.0,
           "avg_substrate_drift": 0.0,
           "avg_exhausted_ratio": 1.0,
           "sustainable": false,
@@ -835,18 +835,18 @@
       },
       {
         "scale_builder_count": 3,
-        "avg_peak_post_disruption_drift": 1.1286836398364022,
-        "avg_timesteps_to_recover": 6.0,
+        "avg_peak_post_disruption_drift": 1.2279778592770778,
+        "avg_timesteps_to_recover": 8.0,
         "recovery_rate": 1.0,
-        "avg_final_substrate_drift": 0.00024564599028409763,
+        "avg_final_substrate_drift": 0.0003839690949238009,
         "runs": 2
       },
       {
         "scale_builder_count": 6,
-        "avg_peak_post_disruption_drift": 1.0959645115095875,
-        "avg_timesteps_to_recover": 6.0,
+        "avg_peak_post_disruption_drift": 1.2492701133478992,
+        "avg_timesteps_to_recover": 8.0,
         "recovery_rate": 1.0,
-        "avg_final_substrate_drift": 0.00022455447780538824,
+        "avg_final_substrate_drift": 0.00036941522810452783,
         "runs": 2
       }
     ]
@@ -1160,9 +1160,9 @@
         },
         "disruption_resilience_artifact": {
           "recovery_steps_without_scale_builders": 7.0,
-          "best_recovery_steps_with_scale_builders": 6.0,
+          "best_recovery_steps_with_scale_builders": 8.0,
           "peak_drift_without": 1.1616334143461367,
-          "peak_drift_best_with": 1.1286836398364022,
+          "peak_drift_best_with": 1.2279778592770778,
           "best_scale_builder_count": 3
         }
       },

@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "source_repo": "emergence-stability-simulator",
   "source": "emergence-stability-simulator",
-  "generated": "2026-05-25T03:44:08.130095",
+  "generated": "2026-05-25T12:57:17.339500",
   "claims": [
     {
       "claim_id": "EMRG_001",
@@ -516,9 +516,9 @@
         },
         "disruption_resilience_artifact": {
           "recovery_steps_without_scale_builders": 7.0,
-          "best_recovery_steps_with_scale_builders": 6.0,
+          "best_recovery_steps_with_scale_builders": 8.0,
           "peak_drift_without": 1.1616334143461367,
-          "peak_drift_best_with": 1.1286836398364022,
+          "peak_drift_best_with": 1.2279778592770778,
           "best_scale_builder_count": 3
         }
       },

@@ -33,6 +33,7 @@ The error each round:
 | 4.5   | (user catch) | "Substrate populations share knowledge freely by default. Apparent 'withholding' is contextual response to weaponization." The actor framing was inverted again — substrate as the one acting (withholding, walking away) when honestly substrate is the one acted upon (extracted from, replaced). |
 | 5     | EMRG_017 control test | Added two control scenarios (anchored_physics_control and inverted_no_emission_control), measured them. The scale_builder advantage was ~70% fabricated mechanism; the inverted destruction was empirically robust. EMRG_007 refuted; EMRG_017 refuted at simulator level; EMRG_008 confirmed_with_control. |
 | 6     | Remove the fabricated mechanism | User authorized the clean follow-through: delete `scale_builder.emit_effects_on_neighbors` and unify scale_builder's interact branch with physics. A measurement bug surfaced and was fixed (drift average was including the partner physics agent in the anchored control). After removal scale_builder ≡ anchored physics by construction. The artifacts EMRG_013 documented (~50% drift reduction, ~43% faster disruption recovery) collapse to noise (~2%, ~14%). |
+| 7     | Delete the baseline_type entirely | User confirmed full removal of the `'scale_builder'` baseline_type. `Agent.__init__` normalizes it to `'physics'`; the dead `interact()` branch is gone; factories and scenarios construct physics directly. Function and parameter names retained as API; `agent_id` prefixes retained as historical labels. `substrate_plus_scale_builder` and `substrate_plus_anchored_physics_control` are now identical to floating-point precision (0.013601 = 0.013601). |
 
 The user's instruction across these rounds: mark the narrative-
 contribution claims REFUTED, flag the 43% recovery number as a
@@ -224,10 +225,79 @@ absent. The balance_threshold tests are updated from "assert the
 artifact appears" to "assert the artifact does not appear" as
 regression checks against accidentally re-introducing the fabrication.
 
+## Round 7: deleting the baseline_type entirely
+
+After round 6, scale_builder's `emit_effects_on_neighbors` branch
+and its differentiated `interact()` coefficients were gone, but the
+string `'scale_builder'` was still in use as a baseline_type label
+across factories, scenarios, and tests. The user asked for the full
+deletion.
+
+Concrete changes in round 7:
+
+- `Agent.__init__` now normalizes `baseline_type='scale_builder'`
+  to `'physics'` at construction. Older callers that still pass the
+  string get a physics agent. Both `baseline_type` and
+  `initial_baseline_type` are set to `'physics'`, so all downstream
+  code (including `detect_collapse`) sees the normalized value.
+- `Agent.interact`'s dead `elif self.baseline_type == 'scale_builder'`
+  branch is deleted entirely. The unified physics behaviour that
+  scale_builder shared after round 6 is now expressed only through
+  the `'physics'` branch.
+- `Agent.__init__` docstring's baseline_type list no longer includes
+  `'scale_builder'`. The docstring now flags the round-6 removal
+  explicitly and points new readers to this file.
+- All factories and scenarios that previously constructed
+  `baseline_type='scale_builder'` agents now construct
+  `baseline_type='physics'` agents:
+  - `agent_variants.make_scale_builder` (factory retained as API).
+  - `_mode_scenarios.substrate_plus_scale_builder` in `sim_engine`.
+  - `balance_threshold.build_balance_scenario` (the
+    `scale_builder_count` parameter still exists but builds physics
+    agents with the historical `scale_builder_*` agent_id prefix).
+  - `balance_threshold._build_two_community_population` (bridge
+    agents are now physics-typed; agent_id prefix retained).
+- Tests that filtered by `baseline_type == 'scale_builder'` are
+  updated to filter by `agent_id.endswith('scale_builder')` instead
+  (the historical label is preserved in the id, not the type).
+- A new test (`test_legacy_scale_builder_type_normalises_to_physics`)
+  asserts that constructing an Agent with the legacy type string
+  produces a physics agent.
+
+Function and parameter names stay (`make_scale_builder`,
+`scale_builder_count`, `scenario_substrate_plus_scale_builder`,
+`scale_builder_amplification_test`). They were API surface and
+removing them would break callers; their internals are honest now.
+
+Empirical confirmation of structural identity. In the regenerated
+sample (`mode-runs 100`, primary-substrate averaging):
+
+| Scenario                                       | substrate drift |
+| ---------------------------------------------- | --------------- |
+| substrate_plus_scale_builder                   | 0.013601        |
+| substrate_plus_anchored_physics_control        | 0.013601        |
+
+The two scenarios are now identical to floating-point precision.
+EMRG_017's `anchoring_fraction_of_effect` measures 1.000000 exactly.
+The two scenarios are kept side by side in `_mode_scenarios` as
+documentation of the equivalence rather than collapsed into one.
+
+The `scale_builder` label survives only as:
+1. Historical strings in `agent_id` values (e.g.
+   `scale_builder_0`), used to identify partner agents by role in
+   tests and the multi-community scenario.
+2. Function and parameter names in the API.
+3. Refuted-claim text in `CLAIM_TABLE.json` (the old `EMRG_013`,
+   `EMRG_015` framings) and in this case study.
+
+`grep -rn "baseline_type='scale_builder'"` returns one hit, in a
+docstring describing the removed historical behaviour. No agent in
+the running codebase carries the deleted type.
+
 ## Status of the affected claims
 
-After applying the substitution test, the EMRG_017 control, AND the
-round-6 removal:
+After applying the substitution test, the EMRG_017 control, the
+round-6 removal, AND the round-7 deletion:
 
 | Claim    | Status                          | Notes                                              |
 | -------- | ------------------------------- | -------------------------------------------------- |

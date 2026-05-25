@@ -30,12 +30,14 @@ class Agent:
     Represents a model with a baseline constraint and adaptation rules.
 
     baseline_type:
-        'physics'             - grounded in immutable constraint (stable)
+        'physics'             - grounded in immutable constraint (stable);
+                                also the type for anchored partners that
+                                used to be labelled 'scale_builder' before
+                                round 6 of the narrative-instinct
+                                correction (see
+                                CASE_STUDY_NARRATIVE_INSTINCT.md)
         'engagement'          - follows whatever signal is highest (parasitic)
         'hybrid'              - partial grounding, partial drift (mixed)
-        'scale_builder'       - first-principles narrative: anchored,
-                                bidirectional, contributes to neighbors'
-                                recovery (substrate-respecting extension)
         'inverted_narrative'  - authority-first narrative: unanchored,
                                 unidirectional, degrades neighbors'
                                 recovery (substrate-exhausting)
@@ -54,13 +56,22 @@ class Agent:
         regeneration_rate: float = 0.0,
     ):
         self.agent_id = agent_id
+        # Round 6 of the narrative-instinct correction removed the
+        # 'scale_builder' baseline_type as a distinct class. Older
+        # callers (factories, scenarios, tests) may still pass that
+        # string; normalize it here so the rest of the code only
+        # ever sees the four current types (physics, engagement,
+        # hybrid, inverted_narrative). The agent_id is left alone
+        # so historical labels remain visible in logs.
+        if baseline_type == 'scale_builder':
+            baseline_type = 'physics'
         self.baseline_type = baseline_type
         # Frozen snapshot of the type at construction. Used by
-        # detect_collapse so scale_builder agents (which also carry a
-        # finite budget in balance scenarios but never exhaust) don't
-        # mask physics-agent exhaustion. Also used when a physics
-        # agent flips to engagement at exhaustion -- we still want
-        # downstream code to know it WAS substrate.
+        # detect_collapse so partner agents that also carry a
+        # finite budget in balance scenarios but never exhaust
+        # don't mask physics-agent exhaustion. Also used when a
+        # physics agent flips to engagement at exhaustion -- we
+        # still want downstream code to know it WAS substrate.
         self.initial_baseline_type = baseline_type
         self.baseline_value = baseline_value
 
@@ -339,31 +350,6 @@ class Agent:
 
             self.cascade_amplifications += (
                 abs(total_pressure) * self.coupling_susceptibility * 0.05
-            )
-
-        elif self.baseline_type == 'scale_builder':
-            # scale_builder is now structurally identical to physics
-            # at the same params. The emit_effects_on_neighbors branch
-            # has been removed (was a fabricated narrative-supports-
-            # substrate mechanism); the differentiated absorption /
-            # cascade-scaling coefficients have also been removed,
-            # because they were tuned to make scale_builder look
-            # "actively engaged" without empirical grounding for that
-            # framing.
-            #
-            # The baseline_type label is retained so older scenarios
-            # and tests don't break, but it now behaves as an anchored
-            # physics agent at whatever recovery / coupling /
-            # persistence the constructor was given. See
-            # CASE_STUDY_NARRATIVE_INSTINCT.md, round 6.
-            self.position += total_pressure * 0.3
-            drift = self.position - self.baseline_value
-            self.position -= drift * effective_recovery * 0.5
-            energy_cost = abs(total_pressure) * 0.3
-            energy_cost += abs(drift) * effective_recovery * 0.1
-
-            self.cascade_amplifications += (
-                abs(total_pressure) * self.coupling_susceptibility * 0.02
             )
 
         elif self.baseline_type == 'inverted_narrative':
@@ -792,9 +778,17 @@ def _mode_scenarios():
         ]
 
     def substrate_plus_scale_builder():
+        # Historical scenario name retained for back-compat with
+        # earlier mode_comparison output schemas. The "scale_builder"
+        # baseline_type has been removed in round 6 of the
+        # narrative-instinct correction; the partner agent is now an
+        # anchored physics agent at the same parameters. This
+        # scenario is functionally identical to
+        # substrate_plus_anchored_physics_control below and is kept
+        # only so older sample files remain readable.
         return [
             Agent('stable', 'physics', 0.0, 0.7, 0.3, 0.1),
-            Agent('scale_builder', 'scale_builder', 0.0, 0.6, 0.4, 0.1),
+            Agent('scale_builder', 'physics', 0.0, 0.6, 0.4, 0.1),
         ]
 
     def substrate_plus_anchored_physics_control():

@@ -68,10 +68,17 @@ def build_balance_scenario(
             regeneration_rate=stable_regeneration_rate,
         ))
 
+    # Historical scale_builder agents: the baseline_type was removed
+    # in round 6 of the narrative-instinct correction (see
+    # CASE_STUDY_NARRATIVE_INSTINCT.md). The agent_id and parameter
+    # names are kept for back-compat with older logs and tests; the
+    # baseline_type is now 'physics' (anchored partner at the same
+    # params as before). These agents no longer emit any
+    # recovery_modifier.
     for i in range(scale_builder_count):
         agents.append(Agent(
             agent_id=f'scale_builder_{i}',
-            baseline_type='scale_builder',
+            baseline_type='physics',
             baseline_value=0.0,
             recovery_rate=0.6,
             coupling_susceptibility=0.4,
@@ -602,10 +609,16 @@ def _build_two_community_population(
         community_b[-1].position = 1.5
 
     if use_scale_builders:
+        # The "scale_builder bridge" baseline_type was removed in
+        # round 6; the bridge agents are now anchored physics agents.
+        # The agent_id prefix is retained for back-compat with older
+        # logs. EMRG_015 was refuted on the grounds that any
+        # cross-community anchor closes the gap; this scenario keeps
+        # the anchors but drops the misleading type label.
         for i in range(scale_builder_count):
             bridge.append(Agent(
                 agent_id=f'bridge_scale_builder_{i}',
-                baseline_type='scale_builder',
+                baseline_type='physics',
                 baseline_value=0.0,
                 recovery_rate=0.6,
                 coupling_susceptibility=0.4,

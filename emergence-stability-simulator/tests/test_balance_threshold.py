@@ -77,11 +77,21 @@ class TestEnergyBudgetMechanics(unittest.TestCase):
         a.regenerate()  # would go to 11, capped at 10
         self.assertAlmostEqual(a.energy_budget, 10.0)
 
-    def test_scale_builder_does_NOT_contribute_to_substrate_energy(self):
+    def test_legacy_scale_builder_type_normalises_to_physics(self):
+        # Constructing an Agent with the historical 'scale_builder'
+        # baseline_type should produce an agent whose baseline_type
+        # has been migrated to 'physics' (the round-6 normalization).
+        # The agent_id is left alone so older logs remain readable.
+        sb = Agent('sb', 'scale_builder', 0.0, 0.6, 0.4, 0.1)
+        self.assertEqual(sb.baseline_type, 'physics')
+        self.assertEqual(sb.initial_baseline_type, 'physics')
+        self.assertEqual(sb.agent_id, 'sb')
+
+    def test_anchored_partner_does_not_contribute_to_neighbor_energy(self):
         # Substrate civilizations sustain on their own at adequate
         # ratios -- they do not depend on narrative for survival.
-        # Adding a scale_builder must not increase a substrate
-        # neighbor's energy budget.
+        # An anchored partner agent must not increase a substrate
+        # neighbor's energy budget through emit_effects.
         sb = Agent('sb', 'scale_builder', 0.0, 0.6, 0.4, 0.1)
         target = Agent('t', 'physics', 0.0, 0.8, 0.3, 0.1,
                        energy_budget=10.0, regeneration_rate=0.0)
@@ -90,8 +100,9 @@ class TestEnergyBudgetMechanics(unittest.TestCase):
         self.assertEqual(target.energy_budget, 5.0)
 
     def test_contribute_to_neighbor_budget_primitive_still_available(self):
-        # The primitive itself remains usable (other code can opt-in)
-        # but scale_builder doesn't invoke it.
+        # The primitive itself remains callable directly (other code
+        # can opt-in if a future controlled experiment needs it).
+        # emit_effects no longer invokes it.
         sb = Agent('sb', 'scale_builder', 0.0, 0.6, 0.4, 0.1)
         target = Agent('t', 'physics', 0.0, 0.8, 0.3, 0.1,
                        energy_budget=10.0, regeneration_rate=0.0)
@@ -131,14 +142,28 @@ class TestExtractionPhase(unittest.TestCase):
 
 class TestScenarioBuilder(unittest.TestCase):
     def test_builds_agents_with_correct_counts_and_types(self):
+        # After round 6 of the narrative-instinct correction, the
+        # scale_builder baseline_type was removed; partner agents
+        # are now physics-typed. The agent_id prefix distinguishes
+        # primary substrate ('stable_*') from anchored partner
+        # ('scale_builder_*'); both have baseline_type 'physics'.
         agents = build_balance_scenario(
             stable_count=3, parasitic_count=5, scale_builder_count=2,
             extraction_rate=0.5,
         )
         types = [a.baseline_type for a in agents]
-        self.assertEqual(types.count('physics'), 3)
+        # 3 primary substrate + 2 anchored partner = 5 physics agents.
+        self.assertEqual(types.count('physics'), 5)
         self.assertEqual(types.count('engagement'), 5)
-        self.assertEqual(types.count('scale_builder'), 2)
+        # No agent should carry the deleted baseline_type.
+        self.assertNotIn('scale_builder', types)
+        # Counts by historical agent_id prefix are still meaningful.
+        substrate_ids = [a for a in agents
+                         if a.agent_id.startswith('stable_')]
+        partner_ids = [a for a in agents
+                       if a.agent_id.startswith('scale_builder_')]
+        self.assertEqual(len(substrate_ids), 3)
+        self.assertEqual(len(partner_ids), 2)
 
     def test_stable_agents_have_finite_budget_and_regen(self):
         agents = build_balance_scenario(stable_count=2, parasitic_count=4)

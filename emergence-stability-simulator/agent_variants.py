@@ -116,14 +116,20 @@ def make_aggressive_parasitic(agent_id: str = 'parasitic_aggressive') -> Agent:
 
 def make_scale_builder(agent_id: str = 'scale_builder') -> Agent:
     """
-    First-principles narrative: anchored like physics, contributes to
-    neighbors' recovery via emit_effects_on_neighbors. Represents
-    substrate-respecting abstraction (Cherokee syllabary, Inca quipu,
-    Polynesian navigation charts).
+    Historical factory: this used to return an agent with
+    baseline_type='scale_builder' carrying a positive
+    recovery_modifier emission. The baseline_type and its emission
+    were removed in round 6 of the narrative-instinct correction
+    (see CASE_STUDY_NARRATIVE_INSTINCT.md). The factory is kept for
+    back-compat with older scenarios and tests; it now returns an
+    anchored physics-baseline agent at the same parameters
+    (recovery_rate=0.6, coupling_susceptibility=0.4,
+    adaptation_persistence=0.1). The agent_id default preserves
+    the historical label so older logs remain readable.
     """
     return Agent(
         agent_id=agent_id,
-        baseline_type='scale_builder',
+        baseline_type='physics',
         baseline_value=0.0,
         recovery_rate=0.6,
         coupling_susceptibility=0.4,
