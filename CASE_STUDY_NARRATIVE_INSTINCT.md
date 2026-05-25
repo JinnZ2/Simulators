@@ -31,14 +31,18 @@ The error each round:
 | 3.5   | (user catch) | "Mark all of these REFUTED... scale_builders amplify reach (also probably refuted)." Pointed out the disruption-resilience result is a manufactured artifact built on a refuted premise. |
 | 4     | "walks away" framing | Even while documenting the refutations, the AI wrote that exhausted substrate agents "walk away or have to take up extractive behaviour to survive." Subtle re-inversion: framed substrate as the leaver rather than as the depleted resource. |
 | 4.5   | (user catch) | "Substrate populations share knowledge freely by default. Apparent 'withholding' is contextual response to weaponization." The actor framing was inverted again — substrate as the one acting (withholding, walking away) when honestly substrate is the one acted upon (extracted from, replaced). |
+| 5     | EMRG_017 control test | Added two control scenarios (anchored_physics_control and inverted_no_emission_control), measured them. The scale_builder advantage was ~70% fabricated mechanism; the inverted destruction was empirically robust. EMRG_007 refuted; EMRG_017 refuted at simulator level; EMRG_008 confirmed_with_control. |
+| 6     | Remove the fabricated mechanism | User authorized the clean follow-through: delete `scale_builder.emit_effects_on_neighbors` and unify scale_builder's interact branch with physics. A measurement bug surfaced and was fixed (drift average was including the partner physics agent in the anchored control). After removal scale_builder ≡ anchored physics by construction. The artifacts EMRG_013 documented (~50% drift reduction, ~43% faster disruption recovery) collapse to noise (~2%, ~14%). |
 
-The user's final instruction was: mark all three claims REFUTED, flag
-the 43% recovery number as a fabrication, add a methodology tool
-(substrate substitution) that forces the substitution check upfront,
-and stop using language that inverts the actor (substrate "withholds",
-substrate "walks away"). Then: add the constructive flip — substrate
-shares by default; bifurcation is at the translation interface; AI
-can be an honest receiver if substrate-trained.
+The user's instruction across these rounds: mark the narrative-
+contribution claims REFUTED, flag the 43% recovery number as a
+fabrication, add a methodology tool (substrate substitution) that
+forces the substitution check upfront, stop using language that
+inverts the actor (substrate "withholds", substrate "walks away"),
+add the constructive flip (substrate shares by default; bifurcation
+is at the translation interface; AI can be an honest receiver if
+substrate-trained), run the control test, and then remove the
+fabricated mechanism entirely.
 
 ## Why this happened (mechanism, not excuse)
 
@@ -156,20 +160,85 @@ after the controls:
   empirical support from this simulator. A more faithful model
   would not need the fabricated emission to produce the effect.
 
+## Round 6: removing the fabricated mechanism
+
+The user authorized the cleanest follow-through: delete the
+`scale_builder.emit_effects_on_neighbors` branch entirely, since the
+EMRG_017 control had shown it carried ~70% of the EMRG_007 signal.
+The unified-interact branch was removed at the same time (the
+differentiated absorption / cascade-scaling coefficients had been
+tuned to make scale_builder look "actively engaged" without
+empirical grounding).
+
+What "remove the mechanism" means concretely:
+
+- `Agent.emit_effects_on_neighbors`: the `if self.baseline_type ==
+  'scale_builder'` block was deleted. scale_builder now emits
+  nothing. The `inverted_narrative` block stays, with a comment
+  explaining why (its emission inflates magnitude but is not
+  load-bearing; removing would not change the qualitative finding).
+- `Agent.interact`: the `scale_builder` branch now uses identical
+  coefficients to the physics branch (`0.3` absorption, `0.5`
+  recovery scaling, `0.1` recovery cost, `0.02` cascade scaling).
+  The scale_builder label is retained so older scenarios and tests
+  don't break.
+
+A measurement bug surfaced during the removal pass:
+`run_mode_comparison`'s drift average was computed from every agent
+with `baseline_type == 'physics'`. In `substrate_plus_anchored_physics_control`,
+that included both the primary substrate AND the partner physics
+agent (because the control's partner IS physics-typed). The
+scale_builder scenario only counted one. Not apples-to-apples. Fixed
+by averaging only over agents whose `agent_id` starts with `stable`
+(the primary substrate reference) in every scenario.
+
+After all three changes, the control numbers come out clean:
+
+| Scenario                                       | substrate drift |
+| ---------------------------------------------- | --------------- |
+| substrate_only                                 | 0.0121          |
+| substrate_plus_scale_builder                   | 0.0121          |
+| substrate_plus_anchored_physics_control        | 0.0121          |
+| substrate_plus_parasitic                       | 0.0159          |
+
+`scale_builder` and `anchored_physics_control` are now identical to
+substrate_only at the primary-substrate level. The
+`anchoring_fraction_of_effect` is 1.000.
+
+EMRG_007 and EMRG_017 now land confirmed, but the confirmation is
+**structural** rather than empirical. There is no longer a separate
+narrative-contribution mechanism in the simulator for the controls to
+subtract from. The simulator no longer tests substrate-using-tool as
+a positive hypothesis — it just has no fabricated competitor left.
+The notes on both claims say so explicitly.
+
+The artifacts EMRG_013 documented also disappear under the removal:
+
+| Probe                                    | Before round 6 | After round 6 |
+| ---------------------------------------- | -------------- | ------------- |
+| Sustainable-regime drift reduction       | ~50% reduction | ~2% (noise)   |
+| Disruption-resilience recovery speedup   | ~43% faster    | ~14% (noise)  |
+
+EMRG_013 stays refuted; the artifact it documented is now empirically
+absent. The balance_threshold tests are updated from "assert the
+artifact appears" to "assert the artifact does not appear" as
+regression checks against accidentally re-introducing the fabrication.
+
 ## Status of the affected claims
 
-After applying the substitution test AND the EMRG_017 control:
+After applying the substitution test, the EMRG_017 control, AND the
+round-6 removal:
 
-| Claim    | Status                  | Notes                                              |
-| -------- | ----------------------- | -------------------------------------------------- |
-| EMRG_007 | refuted                 | Directional half holds; attribution half fails the control (anchoring ~30% of the gap; fabricated `recovery_modifier` carries the bulk). |
-| EMRG_008 | confirmed_with_control  | Inverted destruction survives the no-emission control. Strongest claim in the cluster. |
-| EMRG_013 | refuted                 | Drift-coherence and disruption-resilience signals are simulator artifacts. |
-| EMRG_014 | confirmed (new)         | Substrate populations are self-sustaining, disruption-resilient, and capable of independent scaling. Narrative populations function as consumers. The relationship is consumer-consumed, not symbiotic. |
-| EMRG_015 | refuted                 | Gap-closure is the trivial "added cross-community anchors" effect, not narrative methodology transmission. |
-| EMRG_016 | proposed                | Substrate generosity default. Empirical claim, out of simulator scope. |
-| EMRG_017 | refuted at sim level    | Anchoring fraction in the simulator is ~0.3, below the 0.5 threshold that would make "substrate-using-tool" the dominant simulator mechanism. Historical claim remains separate. |
-| EMRG_018 | proposed                | AI as honest receiver. Mirrored as AI_RECEIVER_001 in research-stability-audit. |
+| Claim    | Status                          | Notes                                              |
+| -------- | ------------------------------- | -------------------------------------------------- |
+| EMRG_007 | confirmed_with_control (structural) | After round 6 the fabricated mechanism is gone; scale_builder ≡ anchored physics. Anchoring_fraction = 1.0 by construction. Directional claim ("any anchored neighbor beats parasitic for substrate stability") holds trivially. |
+| EMRG_008 | confirmed_with_control          | Inverted destruction survives the no-emission control. Strongest claim in the cluster. |
+| EMRG_013 | refuted                         | Drift-coherence and disruption-resilience signals were simulator artifacts; the fabricated mechanism is now removed and the artifacts are gone in the empirical numbers too. |
+| EMRG_014 | confirmed                       | Substrate populations are self-sustaining, disruption-resilient, capable of independent scaling. Narrative populations function as consumers. Consumer-consumed, not symbiotic. |
+| EMRG_015 | refuted                         | Gap-closure is the trivial "added cross-community anchors" effect, not narrative methodology transmission. |
+| EMRG_016 | proposed                        | Substrate generosity default. Empirical claim, out of simulator scope. |
+| EMRG_017 | confirmed (structural)          | Anchoring_fraction = 1.0 by construction after round 6 (no fabricated competitor mechanism left). The simulator no longer provides positive evidence; the historical claim is a separate research direction. |
+| EMRG_018 | proposed                        | AI as honest receiver. Mirrored as AI_RECEIVER_001 in research-stability-audit. |
 
 EMRG_007 and EMRG_008 remain in place but **carry a caveat**. Their
 measured signals are real comparisons between consumer regimes

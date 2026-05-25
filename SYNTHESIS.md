@@ -129,8 +129,8 @@ For a human (or a model) coming to this cold:
 | EMRG_001..004 | confirmed       | core stable-vs-parasitic finding              |
 | EMRG_005    | inconclusive      | bifurcation rate, needs longer runs           |
 | EMRG_006    | confirmed         | stable baseline is a STRONGER attractor than parasitic (relative-strength refinement) |
-| EMRG_007    | **refuted**       | Directional half holds (scale_builder pair has lower substrate drift than parasitic pair) but the attribution half fails the EMRG_017 control: an anchored physics agent at scale_builder's params recovers only ~30% of the gap, so the fabricated `recovery_modifier` emission carries the bulk of the signal. The directional finding is mostly a measurement of the fabricated mechanism. |
-| EMRG_008    | confirmed_with_control | Inverted-direction consumer (no recovery + positive feedback) destroys substrate. Robust to disabling the fabricated negative emission: the inverted_no_emission control still produces orders-of-magnitude divergence above substrate_only baseline. Magnitude is inflated ~3x by the emission, but the qualitative signal is intrinsic. Strongest claim in the EMRG_007 / 008 / 013 / 015 cluster. |
+| EMRG_007    | confirmed_with_control (post-removal) | After round 6, the fabricated `scale_builder.emit_effects` mechanism has been removed. scale_builder is now structurally identical to an anchored physics agent at the same params; `anchoring_fraction = 1.0` by construction. Directional claim ("anchored neighbor beats parasitic neighbor for substrate stability") holds trivially. No remaining narrative attribution. |
+| EMRG_008    | confirmed_with_control | Inverted-direction consumer (no recovery + positive feedback) destroys substrate. Robust to disabling the fabricated negative emission: the `inverted_no_emission_control` still produces orders-of-magnitude divergence above substrate_only baseline. Magnitude inflated ~3x by the emission, but the qualitative signal is intrinsic. Strongest claim in the EMRG_007 / 008 / 013 / 015 cluster. |
 | EMRG_009    | proposed          | architectural (training-corpus scope); not in-simulation. Mirrored as AI_SCOPE_001 in research-stability-audit with a measurable cross-corpus comparison protocol. |
 | EMRG_010    | confirmed         | coupling produces universal attractor; only physics-anchored attractors hold position under reality_perturbation |
 | EMRG_011    | confirmed         | empirical sustainability threshold curve exists in (substrate_ratio × extraction_rate) space (substrate-only finding) |
@@ -139,7 +139,7 @@ For a human (or a model) coming to this cold:
 | EMRG_014    | confirmed         | Substrate populations are self-sustaining, disruption-resilient, capable of independent scaling. Narrative populations function as consumers, not contributors. Consumer-consumed, not symbiotic. |
 | EMRG_015    | **refuted**       | The "scale_builders amplify reach" finding was a measurement artifact — any anchored cross-community agent would close the gap identically. Narrative-instinct framing of an anchor effect. See `CASE_STUDY_NARRATIVE_INSTINCT.md`. |
 | EMRG_016    | proposed          | Substrate populations share knowledge freely by default. Apparent withholding is contextual response to weaponization, not default behaviour. Empirical claim, not in-simulator. |
-| EMRG_017    | **refuted at simulator level** | Empirical control test ran: an anchored physics agent at scale_builder's parameters recovers only ~30% of the scale_builder-vs-parasitic gap, well below the 50% threshold that would confirm "substrate-using-narrative-tool" as the dominant mechanism in the simulator. The historical claim (substrate civilizations using narrative tools) remains separately proposed; the simulator's `scale_builder` is empirically not a faithful model of it. |
+| EMRG_017    | confirmed (structural) | After round 6, the simulator no longer contains a separate narrative-contribution mechanism. scale_builder ≡ anchored physics at the same params, so `anchoring_fraction = 1.0` is satisfied by construction. The confirmation is structural rather than a positive empirical finding. The historical claim about substrate civilizations using narrative tools remains a separate research direction; the simulator does not provide independent evidence for it. |
 | EMRG_018    | proposed          | AI trained on substrate-inclusive corpora can serve as an honest receiver — constructive counterpart to EMRG_009. Mirrored as AI_RECEIVER_001 in research-stability-audit with a translation-fidelity benchmark protocol. |
 | SENS_001..005 | confirmed / partial / confirmed_universal | parameter sweeps |
 | RES_REPRO_001 etc. | claims registered, measurements pending | six preset research-audit claims awaiting empirical data |
@@ -237,22 +237,26 @@ those mechanics it sweeps:
   communities. Two-sided test: AI_SCOPE_001 measures what
   narrative-only loses; AI_RECEIVER_001 measures what substrate
   training gains.
-- **EMRG_007 / 008 / 017 control test ran.** Both controls are now
-  in `run_mode_comparison`:
+- **EMRG_007 / 008 / 017 control test ran (and round 6 removal
+  followed).** Both controls are now in `run_mode_comparison`:
   - `substrate_plus_anchored_physics_control` — substitutes an
     anchored physics agent (at scale_builder's params) into the
-    scale_builder role. Empirical result: the anchored control
-    recovers only ~30% of the scale_builder-vs-parasitic gap, so
-    the fabricated recovery_modifier emission carries the bulk
-    of the signal. EMRG_007 refuted; EMRG_017 refuted at simulator
-    level.
+    scale_builder role. Empirical result before round 6: the
+    anchored control recovered only ~30% of the
+    scale_builder-vs-parasitic gap; the fabricated recovery_modifier
+    emission carried the bulk. The user authorized removing the
+    fabricated mechanism. After removal, scale_builder ≡ anchored
+    physics structurally; EMRG_007 and EMRG_017 land confirmed by
+    construction.
   - `substrate_plus_inverted_no_emission_control` — disables
-    inverted_narrative's negative emission. Empirical result:
-    substrate still goes to runaway divergence (orders of magnitude
-    above substrate_only baseline), so the destruction signal is
-    intrinsic to inverted's positive-feedback dynamics, not the
-    fabrication. EMRG_008 confirmed_with_control; the strongest
-    surviving narrative-side claim.
+    inverted_narrative's negative emission. Substrate still goes to
+    runaway divergence (orders of magnitude above substrate_only
+    baseline), so the destruction signal is intrinsic to inverted's
+    positive-feedback dynamics. EMRG_008 confirmed_with_control;
+    the strongest surviving narrative-side claim. The inverted
+    emission was kept (not removed) because the EMRG_008 result is
+    robust to disabling it — removing would not change the
+    qualitative finding.
 - **Substitution-tool integration into the pipeline** — the toolkit
   could be wired into `run_monte_carlo.py` so every claim is run
   through it automatically and the output co-published with the

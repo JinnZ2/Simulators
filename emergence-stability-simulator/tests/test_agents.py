@@ -185,19 +185,35 @@ class TestScenarios(unittest.TestCase):
 
 
 class TestScaleBuilderAgent(unittest.TestCase):
-    """EMRG_007: substrate-respecting narrative extends substrate stability."""
+    """
+    After round 6 of the narrative-instinct correction (see
+    CASE_STUDY_NARRATIVE_INSTINCT.md), scale_builder is no longer a
+    distinct mechanism: its emit_effects_on_neighbors branch and its
+    differentiated interact() coefficients were removed. The
+    baseline_type label is retained so older scenarios still work,
+    but it behaves as an anchored physics-baseline agent at whatever
+    parameters its constructor was given.
 
-    def test_emit_effects_boosts_neighbor_recovery_modifier(self):
+    These tests are the regression checks that the removal stays
+    removed.
+    """
+
+    def test_emit_effects_is_a_no_op(self):
+        # The fabricated positive recovery_modifier emission was
+        # removed. A scale_builder agent must NOT push any value
+        # onto a neighbor.
         sb = make_scale_builder()
         stable = make_pure_stable()
-        # No emission before call
         self.assertEqual(stable.recovery_modifier, 0.0)
         sb.emit_effects_on_neighbors([stable])
-        self.assertGreater(stable.recovery_modifier, 0.0)
+        self.assertEqual(stable.recovery_modifier, 0.0)
 
     def test_scale_builder_outperforms_parasitic_for_substrate(self):
-        # Substrate + scale_builder should leave stable agent with
-        # lower drift than substrate + parasitic over many runs.
+        # Any anchored neighbor (now including a scale_builder, which
+        # is functionally an anchored physics agent) outperforms a
+        # parasitic neighbor for substrate stability. The directional
+        # finding survives the removal; only the attribution to
+        # narrative was wrong.
         sb_drift_total = 0.0
         para_drift_total = 0.0
         runs = 30
@@ -218,8 +234,9 @@ class TestScaleBuilderAgent(unittest.TestCase):
         self.assertLess(sb_drift_total / runs, para_drift_total / runs)
 
     def test_scale_builder_stays_anchored(self):
-        # scale_builder has its own baseline; should not run away even
-        # when paired with substrate.
+        # scale_builder still has its own baseline_value; should not
+        # run away even when paired with substrate. Identical to a
+        # physics agent at the same params, but the label remains.
         sb_final_drifts = []
         for seed in range(20):
             agents = scenario_substrate_plus_scale_builder()
@@ -228,6 +245,32 @@ class TestScaleBuilderAgent(unittest.TestCase):
             sb_final_drifts.append(sb.compute_drift())
         avg = sum(sb_final_drifts) / len(sb_final_drifts)
         self.assertLess(avg, 1.0)
+
+    def test_scale_builder_equivalent_to_anchored_physics_at_same_params(self):
+        # After the removal, scale_builder and a physics agent at the
+        # same params must produce identical drift over many runs
+        # (same seed = identical trajectories).
+        sb_drift_total = 0.0
+        physics_drift_total = 0.0
+        runs = 20
+        for seed in range(runs):
+            agents = [
+                Agent('stable', 'physics', 0.0, 0.7, 0.3, 0.1),
+                Agent('partner', 'scale_builder', 0.0, 0.6, 0.4, 0.1),
+            ]
+            EmergenceSimulation(agents, timesteps=80, seed=seed).run()
+            sb_drift_total += agents[0].compute_drift()
+
+            agents = [
+                Agent('stable', 'physics', 0.0, 0.7, 0.3, 0.1),
+                Agent('partner', 'physics', 0.0, 0.6, 0.4, 0.1),
+            ]
+            EmergenceSimulation(agents, timesteps=80, seed=seed).run()
+            physics_drift_total += agents[0].compute_drift()
+
+        self.assertAlmostEqual(sb_drift_total / runs,
+                               physics_drift_total / runs,
+                               places=10)
 
 
 class TestInvertedNarrativeAgent(unittest.TestCase):

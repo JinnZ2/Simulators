@@ -3,7 +3,7 @@ emergence-stability-simulator/samples/CLAIM_TABLE.sample.json
   claims:            22
   contained substrate/narrative terms: 11
 
-  --- EMRG_007 (refuted) ---
+  --- EMRG_007 (confirmed_with_control) ---
     [statement ORIGINAL]
       A substrate agent paired with a scale_builder agent shows lower stable-agent drift than a substrate agent paired with a parasitic agent (directional). The effect is primarily caused by being paired with an anchored substrate carrying a narrative tool, NOT by the scale_builder type emitting recovery_modifier (attribution).
     [statement SUBSTITUTED]
@@ -35,7 +35,7 @@ emergence-stability-simulator/samples/CLAIM_TABLE.sample.json
     [statement SUBSTITUTED]
       Grass populations share knowledge freely by default. Apparent withholding is a contextual response to weaponization (extraction followed by replacement of the original transmitter). Core sharing behaviour persists within community and with anyone showing genuine respect and capacity to receive.
 
-  --- EMRG_017 (refuted) ---
+  --- EMRG_017 (confirmed) ---
     [statement ORIGINAL]
       The bifurcation between substrate-primary and narrative-primary cognition occurs at the translation INTERFACE LAYER, not at sharing willingness. When receivers cannot translate substrate methodology without degradation, the failure is in reception/translation -- not in transmission. This reframes apparent narrative "scale-builders" (Cherokee syllabary, Inca quipu, Polynesian charts) as substrate civilizations USING narrative tools, not narrative civilizations doing scale-building.
     [statement SUBSTITUTED]

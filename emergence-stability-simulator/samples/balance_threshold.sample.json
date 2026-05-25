@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "source_repo": "emergence-stability-simulator",
-  "timestamp": "2026-05-24T03:38:45.047044",
+  "timestamp": "2026-05-25T03:44:09.514584",
   "ratio_sweep": {
     "sweep_type": "ratio_sweep",
     "ratios_tested": [
@@ -730,10 +730,10 @@
           "extraction_rate": 0.4,
           "stable_ratio": 0.38461538461538464,
           "runs": 2,
-          "avg_sustainability_score": 0.9982140476242413,
+          "avg_sustainability_score": 0.9980067890478295,
           "collapse_rate": 0.0,
           "bifurcation_rate": 0.0,
-          "avg_substrate_drift": 0.008929761878793662,
+          "avg_substrate_drift": 0.009966054760852616,
           "avg_exhausted_ratio": 0.0,
           "sustainable": true,
           "regime": "sustainable"
@@ -745,10 +745,10 @@
           "extraction_rate": 0.4,
           "stable_ratio": 0.3125,
           "runs": 2,
-          "avg_sustainability_score": 0.9982595491909929,
+          "avg_sustainability_score": 0.998047776679079,
           "collapse_rate": 0.0,
           "bifurcation_rate": 0.0,
-          "avg_substrate_drift": 0.008702254045035218,
+          "avg_substrate_drift": 0.00976111660460538,
           "avg_exhausted_ratio": 0.0,
           "sustainable": true,
           "regime": "sustainable"
@@ -835,18 +835,18 @@
       },
       {
         "scale_builder_count": 3,
-        "avg_peak_post_disruption_drift": 0.939000053849015,
-        "avg_timesteps_to_recover": 5.0,
+        "avg_peak_post_disruption_drift": 1.1286836398364022,
+        "avg_timesteps_to_recover": 6.0,
         "recovery_rate": 1.0,
-        "avg_final_substrate_drift": 5.670370660374633e-05,
+        "avg_final_substrate_drift": 0.00024564599028409763,
         "runs": 2
       },
       {
         "scale_builder_count": 6,
-        "avg_peak_post_disruption_drift": 0.91176891373725,
-        "avg_timesteps_to_recover": 4.0,
+        "avg_peak_post_disruption_drift": 1.0959645115095875,
+        "avg_timesteps_to_recover": 6.0,
         "recovery_rate": 1.0,
-        "avg_final_substrate_drift": 3.974888631522635e-05,
+        "avg_final_substrate_drift": 0.00022455447780538824,
         "runs": 2
       }
     ]
@@ -876,22 +876,22 @@
       ]
     },
     "with_bridge": {
-      "avg_cross_community_gap": 0.0629337526842576,
-      "avg_b_position": 0.07151631496535069,
-      "avg_a_substrate_position": 0.008582562281093074,
-      "avg_b_drift": 0.07151631496535069,
+      "avg_cross_community_gap": 0.06059371174546601,
+      "avg_b_position": 0.07185847430006351,
+      "avg_a_substrate_position": 0.01126476255459749,
+      "avg_b_drift": 0.07185847430006351,
       "per_run": [
         {
-          "avg_b_position": 0.001692155372979282,
-          "avg_a_substrate_position": 3.420574083848317e-05,
-          "cross_community_gap": 0.0016579496321407988,
-          "avg_b_drift": 0.001692155372979282
+          "avg_b_position": 0.003282155701029961,
+          "avg_a_substrate_position": 0.00029413786168331485,
+          "cross_community_gap": 0.002988017839346646,
+          "avg_b_drift": 0.003282155701029961
         },
         {
-          "avg_b_position": 0.14134047455772208,
-          "avg_a_substrate_position": 0.017130918821347665,
-          "cross_community_gap": 0.12420955573637442,
-          "avg_b_drift": 0.14134047455772208
+          "avg_b_position": 0.14043479289909705,
+          "avg_a_substrate_position": 0.022235387247511666,
+          "cross_community_gap": 0.11819940565158538,
+          "avg_b_drift": 0.14043479289909705
         }
       ]
     }
@@ -1150,9 +1150,9 @@
       "measured_outcome": {
         "sustainable_regime": {
           "substrate_drift_without_scale_builders": 0.009564072382124257,
-          "best_substrate_drift_with_scale_builders": 0.008702254045035218,
+          "best_substrate_drift_with_scale_builders": 0.00976111660460538,
           "best_scale_builder_count": 6,
-          "drift_reduction": 0.0008618183370890393
+          "drift_reduction": -0.00019704422248112245
         },
         "unsustainable_regime": {
           "collapse_rate_without_scale_builders": 1.0,
@@ -1160,10 +1160,10 @@
         },
         "disruption_resilience_artifact": {
           "recovery_steps_without_scale_builders": 7.0,
-          "best_recovery_steps_with_scale_builders": 4.0,
+          "best_recovery_steps_with_scale_builders": 6.0,
           "peak_drift_without": 1.1616334143461367,
-          "peak_drift_best_with": 0.91176891373725,
-          "best_scale_builder_count": 6
+          "peak_drift_best_with": 1.1286836398364022,
+          "best_scale_builder_count": 3
         }
       },
       "status": "refuted",
@@ -1185,8 +1185,8 @@
       "measurement_method": "multi_community_reach_test. The measured gap closure is real but its cause is structural: scale_builder agents are the only cross-community anchors in the with-bridge run, so they act as attractors at position 0. Any anchored agent in the same role (including a physics agent) would close the gap.",
       "measured_outcome": {
         "gap_without_bridge": 1876.9106728336799,
-        "gap_with_bridge": 0.0629337526842576,
-        "gap_reduction_artifact": 1876.8477390809956,
+        "gap_with_bridge": 0.06059371174546601,
+        "gap_reduction_artifact": 1876.8500791219344,
         "scale_builder_count": 4
       },
       "status": "refuted",

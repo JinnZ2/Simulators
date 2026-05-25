@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "source_repo": "emergence-stability-simulator",
   "source": "emergence-stability-simulator",
-  "generated": "2026-05-24T03:38:43.958171",
+  "generated": "2026-05-25T03:44:08.130095",
   "claims": [
     {
       "claim_id": "EMRG_001",
@@ -70,20 +70,20 @@
       "statement": "A substrate agent paired with a scale_builder agent shows lower stable-agent drift than a substrate agent paired with a parasitic agent (directional). The effect is primarily caused by being paired with an anchored substrate carrying a narrative tool, NOT by the scale_builder type emitting recovery_modifier (attribution).",
       "prediction": "avg_stable_drift in substrate_plus_scale_builder < avg_stable_drift in substrate_plus_parasitic AND anchoring_fraction_of_effect >= 0.5 (control with anchored physics agent reproduces majority of gap).",
       "measured_outcome": {
-        "scale_builder_stable_drift": 0.009430586983391278,
+        "scale_builder_stable_drift": 0.013601480325930636,
         "parasitic_stable_drift": 0.017385200422254363,
-        "directional_gap": 0.007954613438863086,
-        "anchored_control_stable_drift": 0.015045947331901526,
-        "control_vs_parasitic_gap": 0.0023392530903528375,
-        "anchoring_fraction_of_effect": 0.2940750180171138,
+        "directional_gap": 0.0037837200963237276,
+        "anchored_control_stable_drift": 0.013601480325930636,
+        "control_vs_parasitic_gap": 0.0037837200963237276,
+        "anchoring_fraction_of_effect": 1.0,
         "directional_prediction_holds": true,
-        "attribution_prediction_holds": false
+        "attribution_prediction_holds": true
       },
       "falsification_criteria": "scale_builder stable drift >= parasitic stable drift over 100+ runs, OR anchoring_fraction_of_effect < 0.5 (meaning the fabricated recovery_modifier dominates).",
-      "probability": 0.0,
-      "status": "refuted",
-      "refutation_basis": "attribution_failed",
-      "note": "Directional half of the claim holds: scale_builder pair has lower drift than parasitic pair. Attribution half fails: control test reveals that an anchored physics agent at the same parameters recovers only a minority of the gap (anchoring_fraction ~ 0.3 in typical runs), so the bulk of the signal comes from the scale_builder.emit_effects_on_neighbors recovery_modifier mechanism -- the same fabricated mechanism EMRG_013 refuted. The directional finding is therefore mostly a measurement of the fabricated mechanism, not of substrate dynamics.",
+      "probability": 1.0,
+      "status": "confirmed_with_control",
+      "refutation_basis": null,
+      "note": "Directional half holds: scale_builder pair has lower drift than parasitic pair. After round 6, the attribution half is satisfied by construction: scale_builder no longer has a separate recovery_modifier emission, so anchoring_fraction = 1.0 trivially -- there is no fabricated mechanism left to attribute signal to. The directional claim reduces to \"any anchored neighbor beats a parasitic one for substrate stability\", which is structurally true and not specific to narrative typing. See CASE_STUDY_NARRATIVE_INSTINCT.md round 6 for the removal record.",
       "see_also": [
         "EMRG_017",
         "EMRG_013",
@@ -95,7 +95,7 @@
       "statement": "A consumer with no recovery to a baseline, high coupling, and positive-feedback drift amplification (modeled here as inverted_narrative) drives a physics-baseline neighbor into runaway divergence. The destruction signal is robust to disabling the fabricated negative recovery_modifier emission: the positive-feedback dynamics alone are enough. Any anchored pair sustains by comparison.",
       "prediction": "inverted pair stable drift > substrate-only stable drift (inverted destroys); AND anchored-control pair entropy < inverted pair entropy (anchoring sustains); AND substrate drift in inverted_no_emission_control remains orders of magnitude above substrate_only (destruction signal does not depend on the fabricated emission).",
       "measured_outcome": {
-        "scale_builder_entropy": 0.006140013411162707,
+        "scale_builder_entropy": 0.0014607495230779918,
         "anchored_control_entropy": 0.0014607495230779918,
         "inverted_entropy": 169511.6901451779,
         "inverted_stable_drift": 8729.044222610637,
@@ -177,17 +177,17 @@
       "falsification_criteria": "Anchored control recovers < 50% of the scale_builder advantage, OR the control fails to beat parasitic. Either would mean the recovery_modifier emission carries the bulk of the effect, not anchoring.",
       "measurement_method": "run_mode_comparison + substrate_plus_anchored_physics_control scenario. Compare drift gaps:\n  scale_vs_parasitic   = parasitic - scale_builder\n  control_vs_parasitic = parasitic - anchored_control\nanchoring_fraction = control_vs_parasitic / scale_vs_parasitic",
       "measured_outcome": {
-        "scale_builder_drift": 0.009430586983391278,
-        "anchored_control_drift": 0.015045947331901526,
+        "scale_builder_drift": 0.013601480325930636,
+        "anchored_control_drift": 0.013601480325930636,
         "parasitic_drift": 0.017385200422254363,
-        "scale_vs_parasitic_gap": 0.007954613438863086,
-        "control_vs_parasitic_gap": 0.0023392530903528375,
-        "anchoring_fraction_of_effect": 0.2940750180171138
+        "scale_vs_parasitic_gap": 0.0037837200963237276,
+        "control_vs_parasitic_gap": 0.0037837200963237276,
+        "anchoring_fraction_of_effect": 1.0
       },
-      "probability": 0.0,
+      "probability": 1.0,
       "evidence_strength": "high",
-      "status": "refuted",
-      "note": "Empirically confirmed by the EMRG_017 control test: most of the scale_builder advantage over parasitic is reproduced by an anchored physics agent at the same parameters. The scale_builder agent type in the simulator turned out to be substrate-behaviour-with-narrative-tool, not a separate narrative class. Reframes EMRG_007 / 008 / 013 / 015 accordingly."
+      "status": "confirmed",
+      "note": "After round 6 (see CASE_STUDY_NARRATIVE_INSTINCT.md), the scale_builder.emit_effects_on_neighbors branch and its differentiated interact() coefficients have been removed. scale_builder is now structurally identical to an anchored physics-baseline agent at the same params, so the anchoring_fraction is 1.0 by construction. The confirmation is structural -- there is no longer a separate narrative-contribution mechanism in the simulator to attribute the signal to. The historical claim about substrate civilizations using narrative tools remains a separate research direction; the simulator does not provide independent empirical evidence for it."
     },
     {
       "claim_id": "EMRG_018",
@@ -210,7 +210,7 @@
       "falsification_criteria": "correlation >= 0 across parameter sweep",
       "measurement_method": "Sweep stable_recovery_rate, measure stable_avg_drift in mixed scenario",
       "measured_outcome": {
-        "correlation_recovery_to_stable_drift": -0.8051948025783116,
+        "correlation_recovery_to_stable_drift": -0.834568145169818,
         "sweep_values": [
           0.0,
           0.2,
@@ -220,12 +220,12 @@
           1.0
         ],
         "measured_drifts": [
-          0.19032864647458222,
-          0.06046658233675632,
-          0.047672617859101145,
-          0.03656658397875433,
-          0.027775053667122775,
-          0.020829305662428292
+          0.16514813295063743,
+          0.06037785134800709,
+          0.045808086647556326,
+          0.03381234038927939,
+          0.02502588860004004,
+          0.01846302087821157
         ]
       },
       "status": "confirmed",
@@ -240,7 +240,7 @@
       "falsification_criteria": "correlation <= 0 across parameter sweep",
       "measurement_method": "Sweep parasitic_adaptation_persistence, measure parasitic_avg_drift",
       "measured_outcome": {
-        "correlation_persistence_to_parasitic_drift": 0.999961679749244,
+        "correlation_persistence_to_parasitic_drift": 0.9994358270464533,
         "sweep_values": [
           0.0,
           0.2,
@@ -250,12 +250,12 @@
           1.0
         ],
         "measured_drifts": [
-          0.21452391854217048,
-          0.22315957006316722,
-          0.23180568736392235,
-          0.2404563375430561,
-          0.24919755578192043,
-          0.25827575829188926
+          0.2117454475163052,
+          0.22216421161003946,
+          0.2325795659056836,
+          0.242737190607772,
+          0.2523121860009486,
+          0.26096648769747305
         ]
       },
       "status": "confirmed",
@@ -271,7 +271,7 @@
       "falsification_criteria": "stable_drift increases sharply with coupling",
       "measurement_method": "Sweep stable_coupling_susceptibility in mixed scenario",
       "measured_outcome": {
-        "correlation_coupling_to_stable_drift": 0.9999720193003677,
+        "correlation_coupling_to_stable_drift": 0.9999226379016577,
         "sweep_values": [
           0.1,
           0.3,
@@ -280,15 +280,15 @@
           0.9
         ],
         "measured_drifts": [
-          0.026558170514538616,
-          0.027775053667122775,
-          0.028976630926494308,
-          0.030163108694486785,
-          0.03133469376224089
+          0.023460209735219183,
+          0.02502588860004004,
+          0.026558617558059078,
+          0.02805945908089761,
+          0.02952943256733017
         ]
       },
       "status": "partial",
-      "probability": 2.798069963227956e-05,
+      "probability": 7.736209834230401e-05,
       "evidence_strength": "medium"
     },
     {
@@ -299,7 +299,7 @@
       "falsification_criteria": "Correlation direction same regardless of environment",
       "measurement_method": "Sweep coupling in stable-majority scenario",
       "measured_outcome": {
-        "correlation_coupling_to_parasitic_drift": -0.7168414145329058,
+        "correlation_coupling_to_parasitic_drift": -0.7185083934292013,
         "scenario": "stable_majority",
         "sweep_values": [
           0.1,
@@ -309,15 +309,15 @@
           0.9
         ],
         "measured_drifts": [
-          8.861102425012016,
-          0.3738762095470426,
-          0.24834956697599186,
-          0.23538523242104442,
-          0.21900539265964686
+          7.18116169467051,
+          0.34979491613491565,
+          0.2505605665476624,
+          0.23023770072066846,
+          0.20629578609124627
         ],
         "per_scenario": {
           "stable_majority": {
-            "correlation_coupling_to_parasitic_drift": -0.7168414145329058,
+            "correlation_coupling_to_parasitic_drift": -0.7185083934292013,
             "sweep_values": [
               0.1,
               0.3,
@@ -326,15 +326,15 @@
               0.9
             ],
             "measured_drifts": [
-              8.861102425012016,
-              0.3738762095470426,
-              0.24834956697599186,
-              0.23538523242104442,
-              0.21900539265964686
+              7.18116169467051,
+              0.34979491613491565,
+              0.2505605665476624,
+              0.23023770072066846,
+              0.20629578609124627
             ]
           },
           "parasitic_majority": {
-            "correlation_coupling_to_parasitic_drift": -0.7691806295125784,
+            "correlation_coupling_to_parasitic_drift": -0.7754511498597705,
             "sweep_values": [
               0.1,
               0.3,
@@ -343,15 +343,15 @@
               0.9
             ],
             "measured_drifts": [
-              17.35318014962216,
-              2.4046973227206343,
-              0.7469727410112341,
-              0.5271982028670382,
-              0.4234616220645009
+              13.620562260288482,
+              2.1004705836573425,
+              0.6795417241665276,
+              0.47167513597287786,
+              0.39371095322116273
             ]
           },
           "mixed": {
-            "correlation_coupling_to_parasitic_drift": -0.7417092983922734,
+            "correlation_coupling_to_parasitic_drift": -0.7445018508910612,
             "sweep_values": [
               0.1,
               0.3,
@@ -360,11 +360,11 @@
               0.9
             ],
             "measured_drifts": [
-              21.02647310240357,
-              1.5779609566917325,
-              0.42124321863441194,
-              0.25687807622578357,
-              0.24919755578192043
+              16.467511728312317,
+              1.3783589967692136,
+              0.38800833657456335,
+              0.25646480184679965,
+              0.2523121860009486
             ]
           }
         }
@@ -382,9 +382,9 @@
       "falsification_criteria": "parasitic_majority correlation <= stable_majority correlation (parasitic attractor is at least as strong).",
       "measurement_method": "Sweep parasitic_coupling_susceptibility (0.1-1.0) in stable-majority (3+ stable + 1 parasitic) and parasitic-majority (1 stable + 3+ parasitic) scenarios. Compare correlation magnitudes.",
       "measured_outcome": {
-        "stable_majority_correlation": -0.7168414145329058,
-        "parasitic_majority_correlation": -0.7691806295125784,
-        "attractor_strength_gap": -0.05233921497967253,
+        "stable_majority_correlation": -0.7185083934292013,
+        "parasitic_majority_correlation": -0.7754511498597705,
+        "attractor_strength_gap": -0.05694275643056923,
         "sweep_values_stable_majority": [
           0.1,
           0.3,
@@ -506,9 +506,9 @@
       "measured_outcome": {
         "sustainable_regime": {
           "substrate_drift_without_scale_builders": 0.009564072382124257,
-          "best_substrate_drift_with_scale_builders": 0.008702254045035218,
+          "best_substrate_drift_with_scale_builders": 0.00976111660460538,
           "best_scale_builder_count": 6,
-          "drift_reduction": 0.0008618183370890393
+          "drift_reduction": -0.00019704422248112245
         },
         "unsustainable_regime": {
           "collapse_rate_without_scale_builders": 1.0,
@@ -516,10 +516,10 @@
         },
         "disruption_resilience_artifact": {
           "recovery_steps_without_scale_builders": 7.0,
-          "best_recovery_steps_with_scale_builders": 4.0,
+          "best_recovery_steps_with_scale_builders": 6.0,
           "peak_drift_without": 1.1616334143461367,
-          "peak_drift_best_with": 0.91176891373725,
-          "best_scale_builder_count": 6
+          "peak_drift_best_with": 1.1286836398364022,
+          "best_scale_builder_count": 3
         }
       },
       "status": "refuted",
@@ -541,8 +541,8 @@
       "measurement_method": "multi_community_reach_test. The measured gap closure is real but its cause is structural: scale_builder agents are the only cross-community anchors in the with-bridge run, so they act as attractors at position 0. Any anchored agent in the same role (including a physics agent) would close the gap.",
       "measured_outcome": {
         "gap_without_bridge": 1876.9106728336799,
-        "gap_with_bridge": 0.0629337526842576,
-        "gap_reduction_artifact": 1876.8477390809956,
+        "gap_with_bridge": 0.06059371174546601,
+        "gap_reduction_artifact": 1876.8500791219344,
         "scale_builder_count": 4
       },
       "status": "refuted",

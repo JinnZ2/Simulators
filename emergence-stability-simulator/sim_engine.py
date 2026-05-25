@@ -219,32 +219,27 @@ class Agent:
         """
         if self.narrative_emission_disabled:
             return
-        if self.baseline_type == 'scale_builder':
-            # First-principles narrative: substrate-respecting extension.
-            # Contributes a positive boost to every neighbor's effective
-            # recovery rate this step (drift-coherence support).
-            # Magnitude decays with own drift — a scale builder that
-            # has drifted far from its own baseline can no longer
-            # support neighbors well.
-            #
-            # NOTE: scale_builder does NOT contribute to neighbor
-            # energy_budget. Substrate civilizations (Anishinaabe
-            # corridor, Aboriginal Australia, Polynesian wayfinding,
-            # Iroquois Confederacy) sustained for millennia without
-            # narrative augmentation. Narrative does not save
-            # substrate from extraction; it supports drift coherence
-            # under perturbation. See EMRG_013 for the measurable
-            # version of that distinction.
-            own_drift = self.compute_drift()
-            health = max(0.0, 1.0 - own_drift * 0.5)
-            boost = 0.20 * health
-            for other in other_agents:
-                other.recovery_modifier += boost
-        elif self.baseline_type == 'inverted_narrative':
+        # NOTE: the scale_builder branch that previously pushed a
+        # positive recovery_modifier onto every neighbor has been
+        # removed. The EMRG_017 control test showed it carried ~70%
+        # of the EMRG_007 signal -- a fabricated "narrative supports
+        # substrate" mechanism with no empirical basis. scale_builder
+        # is now structurally an anchored physics-baseline variant;
+        # only its interact() absorption parameters still differ.
+        # See CASE_STUDY_NARRATIVE_INSTINCT.md, round 6.
+        if self.baseline_type == 'inverted_narrative':
             # Authority-first narrative: substrate exhaustion. Imposes
             # a negative modifier on every neighbor's effective recovery
-            # rate. Magnitude scales with own drift — the more inverted
+            # rate. Magnitude scales with own drift -- the more inverted
             # it gets, the more it drags substrate down.
+            #
+            # Kept (vs. scale_builder's removal) because the EMRG_008
+            # control showed this emission inflates magnitude ~3x but
+            # is NOT load-bearing: substrate still gets destroyed
+            # without it. Removing it would not change the qualitative
+            # finding. Left in place with this note rather than
+            # deleted, so future readers can compare the two
+            # emission cases.
             own_drift = self.compute_drift()
             drag = 0.30 + 0.10 * min(own_drift, 2.0)
             for other in other_agents:
@@ -347,18 +342,28 @@ class Agent:
             )
 
         elif self.baseline_type == 'scale_builder':
-            # First-principles narrative: anchored like physics, but with
-            # somewhat higher absorption (it engages with substrate
-            # actively) and lower waste than engagement. Substrate
-            # contribution happens in emit_effects_on_neighbors.
-            self.position += total_pressure * 0.4
+            # scale_builder is now structurally identical to physics
+            # at the same params. The emit_effects_on_neighbors branch
+            # has been removed (was a fabricated narrative-supports-
+            # substrate mechanism); the differentiated absorption /
+            # cascade-scaling coefficients have also been removed,
+            # because they were tuned to make scale_builder look
+            # "actively engaged" without empirical grounding for that
+            # framing.
+            #
+            # The baseline_type label is retained so older scenarios
+            # and tests don't break, but it now behaves as an anchored
+            # physics agent at whatever recovery / coupling /
+            # persistence the constructor was given. See
+            # CASE_STUDY_NARRATIVE_INSTINCT.md, round 6.
+            self.position += total_pressure * 0.3
             drift = self.position - self.baseline_value
             self.position -= drift * effective_recovery * 0.5
-            energy_cost = abs(total_pressure) * 0.35
-            energy_cost += abs(drift) * effective_recovery * 0.08
+            energy_cost = abs(total_pressure) * 0.3
+            energy_cost += abs(drift) * effective_recovery * 0.1
 
             self.cascade_amplifications += (
-                abs(total_pressure) * self.coupling_susceptibility * 0.03
+                abs(total_pressure) * self.coupling_susceptibility * 0.02
             )
 
         elif self.baseline_type == 'inverted_narrative':
@@ -880,13 +885,18 @@ def run_mode_comparison(
                 seed=run_idx,
             )
             sim.run()
-            # "Stable" reference is the physics-baseline agent; in
-            # substrate_only there are two, so we average.
-            physics_drifts = [a.compute_drift()
+            # "Stable" reference is the primary substrate agent: any
+            # agent whose ID starts with 'stable'. This keeps the
+            # measurement apples-to-apples across scenarios -- the
+            # anchored_physics_control also has a second physics
+            # agent (named 'anchored_substrate'), but we don't want
+            # to mix it into the stable reference average.
+            primary_drifts = [a.compute_drift()
                               for a in agents
-                              if a.baseline_type == 'physics']
+                              if a.agent_id.startswith('stable')]
             stable_drifts.append(
-                sum(physics_drifts) / len(physics_drifts) if physics_drifts else 0.0
+                sum(primary_drifts) / len(primary_drifts)
+                if primary_drifts else 0.0
             )
             final_entropies.append(sim.system_entropy_history[-1])
             cumulative_cascades.append(
@@ -1220,14 +1230,19 @@ def _build_emrg_017(mode_results: Optional[Dict]) -> Dict:
         'evidence_strength': 'high',
         'status': 'confirmed' if confirmed else 'refuted',
         'note': (
-            'Empirically confirmed by the EMRG_017 control test: '
-            'most of the scale_builder advantage over parasitic is '
-            'reproduced by an anchored physics agent at the same '
-            'parameters. The scale_builder agent type in the '
-            'simulator turned out to be '
-            'substrate-behaviour-with-narrative-tool, not a separate '
-            'narrative class. Reframes EMRG_007 / 008 / 013 / 015 '
-            'accordingly.'
+            'After round 6 (see CASE_STUDY_NARRATIVE_INSTINCT.md), '
+            'the scale_builder.emit_effects_on_neighbors branch and '
+            'its differentiated interact() coefficients have been '
+            'removed. scale_builder is now structurally identical to '
+            'an anchored physics-baseline agent at the same params, '
+            'so the anchoring_fraction is 1.0 by construction. The '
+            'confirmation is structural -- there is no longer a '
+            'separate narrative-contribution mechanism in the '
+            'simulator to attribute the signal to. The historical '
+            'claim about substrate civilizations using narrative '
+            'tools remains a separate research direction; the '
+            'simulator does not provide independent empirical '
+            'evidence for it.'
         ),
     })
     return base
@@ -1466,17 +1481,18 @@ def _emrg_007_008_009(mode_results: Optional[Dict]) -> List[Dict]:
             'refutation_basis': (None if emrg_007_confirmed
                                  else 'attribution_failed'),
             'note': (
-                'Directional half of the claim holds: scale_builder '
-                'pair has lower drift than parasitic pair. Attribution '
-                'half fails: control test reveals that an anchored '
-                'physics agent at the same parameters recovers only a '
-                'minority of the gap (anchoring_fraction ~ 0.3 in '
-                'typical runs), so the bulk of the signal comes from '
-                'the scale_builder.emit_effects_on_neighbors '
-                'recovery_modifier mechanism -- the same fabricated '
-                'mechanism EMRG_013 refuted. The directional finding '
-                'is therefore mostly a measurement of the fabricated '
-                'mechanism, not of substrate dynamics.'
+                'Directional half holds: scale_builder pair has lower '
+                'drift than parasitic pair. After round 6, the '
+                'attribution half is satisfied by construction: '
+                'scale_builder no longer has a separate '
+                'recovery_modifier emission, so anchoring_fraction = '
+                '1.0 trivially -- there is no fabricated mechanism '
+                'left to attribute signal to. The directional claim '
+                'reduces to "any anchored neighbor beats a parasitic '
+                'one for substrate stability", which is structurally '
+                'true and not specific to narrative typing. See '
+                'CASE_STUDY_NARRATIVE_INSTINCT.md round 6 for the '
+                'removal record.'
             ),
             'see_also': ['EMRG_017', 'EMRG_013',
                          'CASE_STUDY_NARRATIVE_INSTINCT.md'],

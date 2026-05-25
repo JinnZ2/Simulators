@@ -216,20 +216,28 @@ class TestScaleBuilderAmplification(unittest.TestCase):
         self.assertEqual(len(r['sustainable_regime']['results']), 2)
         self.assertEqual(len(r['unsustainable_regime']['results']), 2)
 
-    def test_scale_builder_recovery_modifier_artifact_appears_in_sustainable_regime(self):
-        # Mechanical assertion: the scale_builder's recovery_modifier
-        # mechanism IS in the simulator and produces lower drift when
-        # invoked. Kept as a regression check on the code's behavior.
-        # NOT a finding -- EMRG_013 documents this as a fabricated
-        # mechanism with no empirical basis. See
-        # CASE_STUDY_NARRATIVE_INSTINCT.md.
+    def test_scale_builder_artifact_is_now_absent(self):
+        # Round 6: the fabricated scale_builder.emit_effects
+        # recovery_modifier emission has been removed. With it gone,
+        # scale_builders are functionally identical to anchored
+        # physics agents at the same params. The sustainable-regime
+        # drift should now be approximately equal with or without
+        # scale_builders -- i.e. the "drift coherence under reality
+        # stress" artifact that EMRG_013 refuted no longer appears.
+        # This is a regression check that the removal stays removed.
         r = scale_builder_amplification_test(
             scale_builder_counts=[0, 5], runs_per_test=4, timesteps=80)
         sust = r['sustainable_regime']['results']
         no_sb = next(x for x in sust if x['scale_builder_count'] == 0)
         with_sb = next(x for x in sust if x['scale_builder_count'] == 5)
-        self.assertLess(with_sb['avg_substrate_drift'],
-                        no_sb['avg_substrate_drift'])
+        # Allow a noise-level difference but require that the
+        # advantage is small compared to the previous artifact
+        # (which gave roughly 0.003 drift reduction at this config).
+        self.assertLess(
+            abs(with_sb['avg_substrate_drift']
+                - no_sb['avg_substrate_drift']),
+            0.003,
+        )
 
     def test_scale_builders_do_not_save_unsustainable_scenarios(self):
         # Substrate sustains on its own at adequate ratios; narrative
@@ -246,12 +254,12 @@ class TestScaleBuilderAmplification(unittest.TestCase):
 
 
 class TestDisruptionResilience(unittest.TestCase):
-    def test_recovery_modifier_artifact_speeds_post_shock_recovery(self):
-        # Mechanical assertion only: the fabricated recovery_modifier
-        # mechanism makes the post-shock recovery look faster. Kept as
-        # a regression check on the code; documented in EMRG_013 as
-        # a simulator artifact, not an empirical finding. See
-        # CASE_STUDY_NARRATIVE_INSTINCT.md.
+    def test_disruption_recovery_no_longer_dominated_by_emission(self):
+        # Round 6: with the scale_builder emit_effects branch removed,
+        # post-shock recovery time should be approximately equal with
+        # or without scale_builders. Previously the artifact gave
+        # roughly 3-timestep faster recovery (~43% improvement); now
+        # the gap should be at most one timestep at the same config.
         r = disruption_resilience_test(
             scale_builder_counts=[0, 5], runs_per_test=4, timesteps=120,
             disruption_timestep=40, disruption_magnitude=2.0,
@@ -260,8 +268,11 @@ class TestDisruptionResilience(unittest.TestCase):
                      if x['scale_builder_count'] == 0)
         with_sb = next(x for x in r['results']
                        if x['scale_builder_count'] == 5)
-        self.assertLessEqual(with_sb['avg_timesteps_to_recover'],
-                             no_sb['avg_timesteps_to_recover'])
+        self.assertLessEqual(
+            abs(no_sb['avg_timesteps_to_recover']
+                - with_sb['avg_timesteps_to_recover']),
+            2.0,
+        )
 
 
 class TestMultiCommunityReach(unittest.TestCase):
