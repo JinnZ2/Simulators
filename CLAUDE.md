@@ -17,6 +17,13 @@ Repository for different simulations and supporting tooling.
   measurement methods, thresholds, and cross-references to the
   emergence simulator's agent-level claims (same physics, different
   scale).
+- `continuity-audit/` — Field-level audit. Models incentive structure
+  as a field acting on a Hill-number diversity field, propagates a
+  replicator trajectory, reports a continuity verdict (`SUPPORTS_`,
+  `DEGRADES_`, `INDETERMINATE`) plus the falsifier that would flip
+  it. Anti-freeze: the verdict is always published alongside the
+  full trajectory and an explicit "do not store" note. Stdlib only,
+  one file.
 - `tools/` — Shared utilities.
   - `validate_claim_table.py` — lightweight schema validator for
     any `CLAIM_TABLE.json` produced in the repo; accepts both the
