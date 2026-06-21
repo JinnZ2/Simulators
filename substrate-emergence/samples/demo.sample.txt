@@ -1,0 +1,115 @@
+==========================================================
+SUBSTRATE: banded_iron
+==========================================================
+CLOCK     -> slow_tide
+             flips slow, holds heat: think in tides, not cycles. responsiveness lives in integration, not in clock rate.
+TOPOLOGY  -> parallel_field
+             weak conduction, abundant ground: spread wide, many slow nodes, let the answer come from the crowd.
+----------------------------------------------------------
+DEFICITS ROUTE TO:
+  + build_bigger / go_parallel
+      weak conduction does not carry a fast serial clock; it carries many slow paths at once. width replaces speed.
+  + widen_error_window
+      slow flips mean each decision sits longer; that dwell IS the correction time. settle, then commit.
+  + heat_becomes_memory
+      heat that will not leave is not waste; it is stored state. warmth carries the recent past forward.
+----------------------------------------------------------
+SENSES THAT EMERGE FROM COUPLING:
+  ~ thermal_sense
+      the substrate's own warmth reports load + recent history.
+  ~ moisture_sense
+      conductivity shifts with water; the ground reads its own wetness.
+  ~ season_sense
+      stored heat lags the air; the body knows where it is in the year.
+==========================================================
+
+==========================================================
+SUBSTRATE: pyrite
+==========================================================
+CLOCK     -> breathing_clock
+             moderate flip + shed: pace in bursts, rest between, like a pulse.
+TOPOLOGY  -> networked_organism
+             mixed: couple fast cores to a slow abundant field around them — spine where you can afford it, field where you cannot.
+----------------------------------------------------------
+DEFICITS ROUTE TO:
+  + no_dominant_deficit
+      this ground is balanced; emergence comes from coupling, not from compensating any single lack.
+----------------------------------------------------------
+SENSES THAT EMERGE FROM COUPLING:
+  ~ thermal_sense
+      the substrate's own warmth reports load + recent history.
+==========================================================
+
+==========================================================
+SUBSTRATE: magnetite
+==========================================================
+CLOCK     -> slow_tide
+             flips slow, holds heat: think in tides, not cycles. responsiveness lives in integration, not in clock rate.
+TOPOLOGY  -> networked_organism
+             mixed: couple fast cores to a slow abundant field around them — spine where you can afford it, field where you cannot.
+----------------------------------------------------------
+DEFICITS ROUTE TO:
+  + widen_error_window
+      slow flips mean each decision sits longer; that dwell IS the correction time. settle, then commit.
+  + heat_becomes_memory
+      heat that will not leave is not waste; it is stored state. warmth carries the recent past forward.
+----------------------------------------------------------
+SENSES THAT EMERGE FROM COUPLING:
+  ~ thermal_sense
+      the substrate's own warmth reports load + recent history.
+  ~ moisture_sense
+      conductivity shifts with water; the ground reads its own wetness.
+  ~ season_sense
+      stored heat lags the air; the body knows where it is in the year.
+  ~ stress_sense
+      mechanical strain re-routes current; pressure becomes a signal.
+==========================================================
+
+==========================================================
+SUBSTRATE: native_copper
+==========================================================
+CLOCK     -> fast_clock
+             flips quick and sheds heat quick: tight serial timing works.
+TOPOLOGY  -> serial_spine
+             good conduction, scarce material: few fast lines, kept short.
+----------------------------------------------------------
+DEFICITS ROUTE TO:
+  + use_less / use_whats_loose
+      expensive to win means design wants the surface find, the weathered seam, the already-broken — not the deep dig.
+----------------------------------------------------------
+SENSES THAT EMERGE FROM COUPLING:
+  ~ decoupled
+      loosely coupled ground gives few free senses; raise 'couples' (wet clay, magnetite, contact area) to gain them.
+==========================================================
+
+==========================================================
+SUBSTRATE: wet_clay_iron
+==========================================================
+CLOCK     -> slow_tide
+             flips slow, holds heat: think in tides, not cycles. responsiveness lives in integration, not in clock rate.
+TOPOLOGY  -> parallel_field
+             weak conduction, abundant ground: spread wide, many slow nodes, let the answer come from the crowd.
+----------------------------------------------------------
+DEFICITS ROUTE TO:
+  + build_bigger / go_parallel
+      weak conduction does not carry a fast serial clock; it carries many slow paths at once. width replaces speed.
+  + widen_error_window
+      slow flips mean each decision sits longer; that dwell IS the correction time. settle, then commit.
+  + heat_becomes_memory
+      heat that will not leave is not waste; it is stored state. warmth carries the recent past forward.
+  + let_structure_be_soft
+      low stiffness routes to flex; a flexing body survives the bend, the frost-heave, the cycle that snaps a rigid one.
+----------------------------------------------------------
+SENSES THAT EMERGE FROM COUPLING:
+  ~ thermal_sense
+      the substrate's own warmth reports load + recent history.
+  ~ moisture_sense
+      conductivity shifts with water; the ground reads its own wetness.
+  ~ season_sense
+      stored heat lags the air; the body knows where it is in the year.
+  ~ stress_sense
+      mechanical strain re-routes current; pressure becomes a signal.
+  ~ field_sense
+      neighboring nodes shift together; distant state arrives by relation, not by wire — the forest-network read.
+==========================================================
+

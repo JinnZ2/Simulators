@@ -22,8 +22,33 @@ Repository for different simulations and supporting tooling.
   replicator trajectory, reports a continuity verdict (`SUPPORTS_`,
   `DEGRADES_`, `INDETERMINATE`) plus the falsifier that would flip
   it. Anti-freeze: the verdict is always published alongside the
-  full trajectory and an explicit "do not store" note. Stdlib only,
-  one file.
+  full trajectory and an explicit "do not store" note. Stdlib only.
+  `continuity_audit.py` is the field-level audit; the companion
+  `interface_layer.py` produces the dynamic κ that the audit
+  consumes — a translator that widens an agent's reachable-substrate
+  band literally is κ dropping. Classification spine: `ENABLING`
+  widens the band, `COERCIVE` narrows it.
+- `substrate-emergence/` — Reads a material substrate as a profile of
+  verb-first axes (`conducts`, `switches`, `dissipates`,
+  `holds_heat`, `costs_extract`, `abounds`, `bears_load`, `couples`)
+  and reports the architecture the ground wants. A deficit on one
+  axis routes to a capability on another — `weak conduction → wide
+  parallel paths`, `heat that will not leave → stored state`.
+  Returns a relationship-trajectory, never a stored verdict. Two
+  modules speaking a shared profile-dict contract:
+  `substrate_emergence.py` (read the profile) and
+  `site_substrate_map.py` (build a profile from a mix of real-site
+  materials plus environment modifiers — wetness, thermal swing,
+  energy flux). The two scripts share no imports; paste the profile
+  across.
+- `neural-augmentation-audit/` — Cost-accounting scaffold (CC0
+  document, not code). Names seven constraint axes (metabolic,
+  cortical territory, plasticity window, cross-modal reuse,
+  attention/WM, inhibition, sleep/autonomic) and a cross-reference
+  table mapping each proposed augmentation to what it borrows and
+  the predicted deficit, with `[E]`/`[I]`/`[S]` confidence marks per
+  cell. Methodology spine: "demote on contact with evidence; never
+  modify the table to protect a prior."
 - `tools/` — Shared utilities.
   - `validate_claim_table.py` — lightweight schema validator for
     any `CLAIM_TABLE.json` produced in the repo; accepts both the
