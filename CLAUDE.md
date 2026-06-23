@@ -2,6 +2,32 @@
 
 Repository for different simulations and supporting tooling.
 
+## Meta-spine (read first)
+
+The methodology spine sits in four root-level files. Every simulator
+in the repo rests on it. Read in order:
+
+- `PREAMBLE.md` — physics baseline as a direct declarative statement.
+  "Thermodynamics doesn't negotiate."
+- `PROTOCOL.md` — the same baseline as a formal protocol for any
+  intelligence reading the repo. Names the Model/Reality Dissonance
+  failure mode and the Ground State acknowledgement test.
+- `BNRAM_STRICT.md` — finalized repository addendum
+  (Bias-Neutralization & Reality-Audit Module v2.0). Operating mandate,
+  Physical Audit Protocol, Diagnostic of Deflection, five-section
+  BNRAM (Entropy-Constraint Engine, Universal Physical Constant
+  Cross-Check, Literal Baseline Lexicon, Shadow-Variable Handling,
+  Dissonance-Forced Reset), operational rules, archive requirements.
+- `PVL.md` — Phenomenological Validation Layer. Inverse audit
+  (physical-state query before literature search), cross-temporal
+  correlation (persistence over documentation volume), opaque-source
+  flagging. Integrates with BNRAM Shadow-Variable Handling.
+
+Simulator-specific aperture documents live inside their folders
+(e.g. `incentive-blindspot-sim/00_APERTURE.md` pins the six
+state variables to physical functions and the conservation laws
+underneath).
+
 ## Layout
 
 - `token-minimizer/` — Token compression tool design notes and a working
