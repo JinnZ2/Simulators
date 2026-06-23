@@ -1,0 +1,46 @@
+{
+  "source_repo": "research-stability-audit",
+  "target_repo": "emergence-stability-simulator",
+  "mappings": {
+    "AI_DEGRAD_001": {
+      "maps_to": [
+        "EMRG_003",
+        "EMRG_004"
+      ],
+      "principle": "AI model degradation is cascade amplification at the model level. A trained model without continued grounding behaves like a parasitic agent: total_pressure (data drift) is absorbed and amplified rather than damped by physics_baseline."
+    },
+    "RES_REPRO_001": {
+      "maps_to": [
+        "EMRG_001",
+        "EMRG_002"
+      ],
+      "principle": "Reproducibility failure is drift from baseline at the field level. Fields with strong physics grounding (math, classical physics) show lower drift; fields driven by engagement metrics (citations, novelty) show higher drift."
+    },
+    "BIF_ONSET_001": {
+      "maps_to": [
+        "EMRG_005",
+        "EMRG_006"
+      ],
+      "principle": "A grounded minority can dominate dynamics when coupled to a parasitic majority \u2014 but only if the coupling and the minority size pass the attractor threshold identified in EMRG_006."
+    },
+    "CASCADE_METHOD_001": {
+      "maps_to": [
+        "EMRG_001",
+        "EMRG_006"
+      ],
+      "principle": "Methodology-explicit research is the field-level analog of the physics baseline. The same falsifiability that lets the simulator damp cascade lets a corpus damp narrative drift."
+    },
+    "AI_SCOPE_001": {
+      "maps_to": [
+        "EMRG_009"
+      ],
+      "principle": "Scope-projection error is an architectural property of any system whose only reference frame is internal. The simulator cannot falsify it from inside (any agent it adds is still inside the simulator); the research-audit can, by comparing two trained models with and without substrate-inclusive corpora on a substrate-recognition benchmark."
+    },
+    "AI_RECEIVER_001": {
+      "maps_to": [
+        "EMRG_018"
+      ],
+      "principle": "Substrate populations share by default (EMRG_016); the bifurcation between substrate and narrative cognition occurs at the translation interface (EMRG_017). AI_RECEIVER_001 is the empirical test of whether a substrate-trained AI can act as that interface without introducing the degradation that narrative-only training imposes -- i.e. whether AI can be an honest receiver rather than an extractor."
+    }
+  }
+}

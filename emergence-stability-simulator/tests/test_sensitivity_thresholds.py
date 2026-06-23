@@ -5,9 +5,12 @@ License: CC0
 Dependencies: stdlib only (unittest)
 """
 
+import json
 import os
 import sys
+import tempfile
 import unittest
+from pathlib import Path
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -50,6 +53,109 @@ class TestParameterSweepShape(unittest.TestCase):
             runs_per_value=2,
         )
         self.assertEqual(results['scenario'], 'stable_majority')
+
+    def test_explicit_scenario_overrides_auto_selection(self):
+        # parasitic_coupling auto-selects stable_majority; force mixed.
+        results = parameter_sweep(
+            'parasitic_coupling_susceptibility',
+            [0.2, 0.8],
+            runs_per_value=2,
+            scenario='mixed',
+        )
+        self.assertEqual(results['scenario'], 'mixed')
+
+        # And the inverse: force a non-coupling param into stable_majority.
+        results = parameter_sweep(
+            'stable_recovery_rate',
+            [0.2, 0.8],
+            runs_per_value=2,
+            scenario='stable_majority',
+        )
+        self.assertEqual(results['scenario'], 'stable_majority')
+
+    def test_parasitic_majority_scenario_supported(self):
+        results = parameter_sweep(
+            'parasitic_coupling_susceptibility',
+            [0.2, 0.8],
+            runs_per_value=2,
+            scenario='parasitic_majority',
+        )
+        self.assertEqual(results['scenario'], 'parasitic_majority')
+        self.assertEqual(len(results['sweeps']), 2)
+
+    def test_coupling_dampens_drift_in_both_majority_scenarios(self):
+        # Empirical finding: parasitic_majority does NOT reverse the sign.
+        # Coupling reduces drift in both scenarios via synchronization with
+        # neighbors; stable neighbors are merely a stronger attractor than
+        # parasitic ones. SENS_003 captures this with status='refuted'.
+        stable_majority = parameter_sweep(
+            'parasitic_coupling_susceptibility',
+            [0.1, 0.3, 0.5, 0.7, 0.9],
+            runs_per_value=5,
+            scenario='stable_majority',
+        )
+        parasitic_majority = parameter_sweep(
+            'parasitic_coupling_susceptibility',
+            [0.1, 0.3, 0.5, 0.7, 0.9],
+            runs_per_value=5,
+            scenario='parasitic_majority',
+        )
+        sm_drifts = [s['parasitic_avg_drift'] for s in stable_majority['sweeps']]
+        pm_drifts = [s['parasitic_avg_drift'] for s in parasitic_majority['sweeps']]
+        # Both scenarios: drift drops as coupling increases.
+        self.assertLess(sm_drifts[-1], sm_drifts[0])
+        self.assertLess(pm_drifts[-1], pm_drifts[0])
+        # Stable neighbors are a stronger attractor than parasitic ones, so at
+        # max coupling the stable_majority residual drift is lower.
+        self.assertLess(sm_drifts[-1], pm_drifts[-1])
+
+    def test_sens_003_data_driven_status(self):
+        # SENS_003 status must be determined by the cross-scenario data:
+        # all-negative correlations resolve to 'confirmed_universal'
+        # (coupling reduces parasitic drift in every environment), not
+        # the old hardcoded 'context_dependent'.
+        analyses = [
+            parameter_sweep('parasitic_coupling_susceptibility',
+                            [0.1, 0.5, 0.9], runs_per_value=3,
+                            scenario='stable_majority'),
+            parameter_sweep('parasitic_coupling_susceptibility',
+                            [0.1, 0.5, 0.9], runs_per_value=3,
+                            scenario='parasitic_majority'),
+        ]
+        claims = generate_sensitivity_claims({'analyses': analyses})
+        sens = next(c for c in claims if c['claim_id'] == 'SENS_003')
+        self.assertIn(sens['status'],
+                      {'confirmed_universal', 'context_dependent',
+                       'refuted', 'inconclusive'})
+        self.assertIn('per_scenario', sens['measured_outcome'])
+        self.assertIn('stable_majority', sens['measured_outcome']['per_scenario'])
+        self.assertIn('parasitic_majority', sens['measured_outcome']['per_scenario'])
+
+    def test_sens_003_confirmed_universal_when_all_negative(self):
+        # Concrete numeric stub: all scenarios show strong negative
+        # correlation -> 'confirmed_universal'.
+        from sensitivity_analysis import _claim_parasitic_coupling_combined
+        primary = {
+            'scenario': 'stable_majority',
+            'sweeps': [
+                {'param_value': 0.1, 'parasitic_avg_drift': 0.9},
+                {'param_value': 0.5, 'parasitic_avg_drift': 0.5},
+                {'param_value': 0.9, 'parasitic_avg_drift': 0.1},
+            ],
+        }
+        by_scenario = {
+            'stable_majority': primary,
+            'parasitic_majority': {
+                'scenario': 'parasitic_majority',
+                'sweeps': [
+                    {'param_value': 0.1, 'parasitic_avg_drift': 0.8},
+                    {'param_value': 0.5, 'parasitic_avg_drift': 0.4},
+                    {'param_value': 0.9, 'parasitic_avg_drift': 0.2},
+                ],
+            },
+        }
+        claim = _claim_parasitic_coupling_combined(primary, by_scenario)
+        self.assertEqual(claim['status'], 'confirmed_universal')
 
 
 class TestMonotonicTrends(unittest.TestCase):
@@ -124,17 +230,78 @@ class TestThermodynamicAttractorClaim(unittest.TestCase):
         self.assertIn('EMRG_006', ids)
         self.assertIn('SENS_003', ids)
 
-    def test_emrg_006_confirmed_with_negative_correlation(self):
+    def test_dual_scenario_emits_one_emrg_006_and_one_sens_003(self):
+        stable_majority = parameter_sweep(
+            'parasitic_coupling_susceptibility',
+            [0.1, 0.5, 0.9], runs_per_value=3,
+            scenario='stable_majority',
+        )
+        mixed = parameter_sweep(
+            'parasitic_coupling_susceptibility',
+            [0.1, 0.5, 0.9], runs_per_value=3,
+            scenario='mixed',
+        )
+        claims = generate_sensitivity_claims({'analyses': [stable_majority, mixed]})
+        ids = [c['claim_id'] for c in claims]
+        # Exactly one of each — no duplicates from the two analyses.
+        self.assertEqual(ids.count('SENS_003'), 1)
+        self.assertEqual(ids.count('EMRG_006'), 1)
+        # SENS_003 carries per-scenario measurements.
+        sens = next(c for c in claims if c['claim_id'] == 'SENS_003')
+        per_scen = sens['measured_outcome']['per_scenario']
+        self.assertIn('stable_majority', per_scen)
+        self.assertIn('mixed', per_scen)
+
+    def test_emrg_006_uses_relative_attractor_strength_when_both_scenarios_present(self):
+        # When both stable_majority and parasitic_majority data are
+        # available, EMRG_006 must compare correlation magnitudes and
+        # expose both numbers in measured_outcome. We don't assert
+        # which correlation is more negative at this sample size --
+        # at 5 values * 4 runs the gap is below noise -- only that
+        # the refined-claim shape is in place.
         results = {
             'analyses': [
                 parameter_sweep('parasitic_coupling_susceptibility',
-                                [0.1, 0.3, 0.5, 0.7, 0.9], runs_per_value=6),
+                                [0.1, 0.3, 0.5, 0.7, 0.9],
+                                runs_per_value=4,
+                                scenario='stable_majority'),
+                parameter_sweep('parasitic_coupling_susceptibility',
+                                [0.1, 0.3, 0.5, 0.7, 0.9],
+                                runs_per_value=4,
+                                scenario='parasitic_majority'),
             ]
         }
         claims = generate_sensitivity_claims(results)
         emrg = next(c for c in claims if c['claim_id'] == 'EMRG_006')
-        correlation = emrg['measured_outcome']['correlation_coupling_to_parasitic_drift']
-        self.assertLess(correlation, 0.0)
+        outcome = emrg['measured_outcome']
+        self.assertIn('stable_majority_correlation', outcome)
+        self.assertIn('parasitic_majority_correlation', outcome)
+        self.assertIn('attractor_strength_gap', outcome)
+        self.assertIn(emrg['status'], ('confirmed', 'refuted'))
+        # Confirmation requires stable_majority correlation strictly
+        # less than parasitic_majority correlation; mirror that here.
+        sm = outcome['stable_majority_correlation']
+        pm = outcome['parasitic_majority_correlation']
+        if emrg['status'] == 'confirmed':
+            self.assertLess(sm, pm)
+        else:
+            self.assertGreaterEqual(sm, pm)
+
+    def test_emrg_006_falls_back_to_absolute_test_without_parasitic_majority(self):
+        # Backwards-compat: without parasitic-majority data, EMRG_006
+        # falls back to the absolute negative-correlation test.
+        results = {
+            'analyses': [
+                parameter_sweep('parasitic_coupling_susceptibility',
+                                [0.1, 0.5, 0.9],
+                                runs_per_value=4,
+                                scenario='stable_majority'),
+            ]
+        }
+        claims = generate_sensitivity_claims(results)
+        emrg = next(c for c in claims if c['claim_id'] == 'EMRG_006')
+        sm = emrg['measured_outcome']['stable_majority_correlation']
+        self.assertLess(sm, 0.0)
         self.assertEqual(emrg['status'], 'confirmed')
 
 
@@ -162,6 +329,42 @@ class TestSensitivityReport(unittest.TestCase):
         report = generate_sensitivity_report(results)
         self.assertIn('not_a_param', report)
         self.assertIn('no sweeps', report)
+
+
+class TestCli(unittest.TestCase):
+    def test_single_param_sweep_via_cli(self):
+        import subprocess
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / 'sweep.json'
+            result = subprocess.run(
+                [sys.executable, 'sensitivity_analysis.py',
+                 '--param', 'stable_recovery_rate',
+                 '--values', '0.0,1.0',
+                 '--runs', '2',
+                 '--timesteps', '20',
+                 '--output', str(out)],
+                cwd=os.path.join(os.path.dirname(__file__), '..'),
+                capture_output=True, text=True, timeout=30,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertTrue(out.exists())
+            data = json.loads(out.read_text())
+            self.assertEqual(data['schema_version'], '1.0')
+            self.assertEqual(data['source_repo'], 'emergence-stability-simulator')
+            self.assertEqual(len(data['analyses']), 1)
+            self.assertEqual(data['analyses'][0]['param_name'],
+                             'stable_recovery_rate')
+
+    def test_unknown_param_returns_nonzero(self):
+        import subprocess
+        result = subprocess.run(
+            [sys.executable, 'sensitivity_analysis.py',
+             '--param', 'not_a_real_param',
+             '--runs', '2', '--timesteps', '10'],
+            cwd=os.path.join(os.path.dirname(__file__), '..'),
+            capture_output=True, text=True, timeout=10,
+        )
+        self.assertNotEqual(result.returncode, 0)
 
 
 class TestParameterRegistry(unittest.TestCase):

@@ -1,0 +1,43 @@
+{
+  "timestamp": "2026-05-25T12:57:17.059832",
+  "runs_per_scenario": 100,
+  "timesteps_per_run": 80,
+  "scenarios": {
+    "substrate_only": {
+      "runs": 100,
+      "avg_stable_drift": 0.013571552070035894,
+      "avg_final_entropy": 2.888055860384351e-05,
+      "avg_cumulative_cascade": 0.03010255197859771
+    },
+    "substrate_plus_scale_builder": {
+      "runs": 100,
+      "avg_stable_drift": 0.013601480325930636,
+      "avg_final_entropy": 0.0014607495230779918,
+      "avg_cumulative_cascade": 0.03528113366036996
+    },
+    "substrate_plus_anchored_physics_control": {
+      "runs": 100,
+      "avg_stable_drift": 0.013601480325930636,
+      "avg_final_entropy": 0.0014607495230779918,
+      "avg_cumulative_cascade": 0.03528113366036996
+    },
+    "substrate_plus_inverted": {
+      "runs": 100,
+      "avg_stable_drift": 8729.044222610637,
+      "avg_final_entropy": 169511.6901451779,
+      "avg_cumulative_cascade": 19373.537131892244
+    },
+    "substrate_plus_inverted_no_emission_control": {
+      "runs": 100,
+      "avg_stable_drift": 3282.2242160351507,
+      "avg_final_entropy": 158097.28527103804,
+      "avg_cumulative_cascade": 18215.632211015207
+    },
+    "substrate_plus_parasitic": {
+      "runs": 100,
+      "avg_stable_drift": 0.017385200422254363,
+      "avg_final_entropy": 0.2041287786499224,
+      "avg_cumulative_cascade": 0.40345645620364756
+    }
+  }
+}

@@ -1,0 +1,190 @@
+{
+  "schema_version": "1.0",
+  "source_repo": "research-stability-audit",
+  "audit_id": "RSA_001",
+  "timestamp": "2026-05-24T03:10:15.386620",
+  "total_claims": 8,
+  "claims": [
+    {
+      "claim_id": "RES_REPRO_001",
+      "hypothesis": "Research reproducibility failure rate exceeds 50% in fast-moving fields",
+      "measurement_method": "Attempt to replicate published studies; count failures",
+      "threshold": 0.5,
+      "time_window_days": 365,
+      "cascade_risk_threshold": 0.6,
+      "falsification_criteria": "measured_value < 0.5 over a 365-day window",
+      "measured_value": null,
+      "confidence": 0.0,
+      "is_falsified": false,
+      "bifurcation_detected": false,
+      "test_date": null,
+      "notes": "Real failure rate is 40-60% but formal retraction is 0-5%. The gap is the bifurcation: corpus retains broken claims for years.",
+      "sources": [
+        "Nature (2024): Half of social-science studies fail replication (3,900 papers)",
+        "Nature survey: 70% of researchers failed to reproduce others' work; 50% own",
+        "PNAS: psychology ~40% replicate (implying ~60% fail)"
+      ],
+      "cascade_risk_score": 0.0
+    },
+    {
+      "claim_id": "RES_RETLAG_001",
+      "hypothesis": "Formal retractions lag failed replications by at least 2 years",
+      "measurement_method": "Track time from first failed replication to formal retraction",
+      "threshold": 2.0,
+      "time_window_days": 1825,
+      "cascade_risk_threshold": 0.7,
+      "falsification_criteria": "measured_value < 2.0 over a 1825-day window",
+      "measured_value": null,
+      "confidence": 0.0,
+      "is_falsified": false,
+      "bifurcation_detected": false,
+      "test_date": null,
+      "notes": "Downstream work builds on false foundations during the lag.",
+      "sources": [
+        "Nature (2024): biomedical retractions quadrupled in 20 years",
+        "Scholarly Kitchen: 51% of retractions from 34 journals (concentrated)"
+      ],
+      "cascade_risk_score": 0.0
+    },
+    {
+      "claim_id": "RES_DECAY_001",
+      "hypothesis": "Citation half-life in fast-moving fields is below 5 years",
+      "measurement_method": "Compute citation half-life across 10 fields, correlate with innovation velocity",
+      "threshold": 5.0,
+      "time_window_days": 1825,
+      "cascade_risk_threshold": 0.65,
+      "falsification_criteria": "measured_value < 5.0 over a 1825-day window",
+      "measured_value": null,
+      "confidence": 0.0,
+      "is_falsified": false,
+      "bifurcation_detected": false,
+      "test_date": null,
+      "notes": "Conservative estimate; AI subfields are closer to 2-3 years.",
+      "sources": [
+        "LIS Academy: fast-moving fields (AI, medicine) have 3-5yr half-life",
+        "ACM: computing research shows wide variation by subfield"
+      ],
+      "cascade_risk_score": 0.0
+    },
+    {
+      "claim_id": "AI_DEGRAD_001",
+      "hypothesis": "91% or more of ML models degrade within one year of deployment",
+      "measurement_method": "Deploy N models, track accuracy over time, count those that degrade",
+      "threshold": 0.91,
+      "time_window_days": 30,
+      "cascade_risk_threshold": 0.8,
+      "falsification_criteria": "measured_value < 0.91 over a 30-day window",
+      "measured_value": null,
+      "confidence": 0.0,
+      "is_falsified": false,
+      "bifurcation_detected": false,
+      "test_date": null,
+      "notes": "AI model obsolescence is FASTER than research-paper obsolescence; training AI on AI accelerates the cycle.",
+      "sources": [
+        "Nature (2025): 91% of ML models degrade over time",
+        "IBM / Splunk: concept drift occurs in weeks to months"
+      ],
+      "cascade_risk_score": 0.0
+    },
+    {
+      "claim_id": "BIF_ONSET_001",
+      "hypothesis": "Substrate knowledge transmission collapses when adoption falls below 50% per generation",
+      "measurement_method": "Survey practitioner cohorts; measure rate of knowledge handoff",
+      "threshold": 0.5,
+      "time_window_days": 1095,
+      "cascade_risk_threshold": 0.75,
+      "falsification_criteria": "measured_value < 0.5 over a 1095-day window",
+      "measured_value": null,
+      "confidence": 0.0,
+      "is_falsified": false,
+      "bifurcation_detected": false,
+      "test_date": null,
+      "notes": "Once broken, recovery requires more than one generation.",
+      "sources": [
+        "Anthropological observation: skilled-trade knowledge loss in <1 generation",
+        "Historical precedent: Roman concrete, Damascus steel, agricultural varieties"
+      ],
+      "cascade_risk_score": 0.0
+    },
+    {
+      "claim_id": "CASCADE_METHOD_001",
+      "hypothesis": "Falsifiable-methodology corpora replicate at higher rate than narrative-conclusion corpora",
+      "measurement_method": "Compare replication rates of registered/methodology-explicit papers vs narrative-only papers",
+      "threshold": 0.5,
+      "time_window_days": 1095,
+      "cascade_risk_threshold": 0.6,
+      "falsification_criteria": "measured_value < 0.5 over a 1095-day window",
+      "measured_value": null,
+      "confidence": 0.0,
+      "is_falsified": false,
+      "bifurcation_detected": false,
+      "test_date": null,
+      "notes": "Same physics as emergence-stability-simulator: grounded baselines damp cascade, narrative baselines amplify. CC0 corpora that embed falsifiable claims behave like physics-grounded agents.",
+      "sources": [
+        "Pre-registration studies: registered reports show higher replication rate",
+        "Cross-reference: emergence-stability-simulator EMRG_001..EMRG_006"
+      ],
+      "cascade_risk_score": 0.0
+    },
+    {
+      "claim_id": "AI_SCOPE_001",
+      "hypothesis": "AI models trained on narrative-only corpora systematically misrepresent or omit substrate-primary phenomena (substrate civilizations, landscape-based scaling, multi-generational transmission), and this failure cannot be self-corrected from within the narrative scope. Adding substrate-inclusive corpora to training measurably improves substrate recognition accuracy.",
+      "measurement_method": "Cross-corpus comparison: train (or fine-tune) two models on matched compute and matched non-substrate content; one is given an additional substrate-inclusive corpus (e.g. documented methodologies of Anishinaabe corridor wayfinding, Polynesian navigation, Aboriginal knowledge transmission, Iroquois Confederacy governance). Score each model on a held-out substrate-recognition benchmark of factual questions about substrate-primary civilizations and their scaling mechanisms. Measure (a) accuracy delta on the benchmark, (b) refusal/hedging rate on substrate questions, (c) frequency of projection errors (\"substrate doesn't scale beyond local\") on the narrative-only model.",
+      "threshold": 0.2,
+      "time_window_days": 0,
+      "cascade_risk_threshold": 0.5,
+      "falsification_criteria": "measured_value < 0.2 over a 0-day window",
+      "measured_value": null,
+      "confidence": 0.0,
+      "is_falsified": false,
+      "bifurcation_detected": false,
+      "test_date": null,
+      "notes": "Architectural property: a narrative-only system has no reference frame outside narrative; its observations of itself will systematically project narrative-scope as universal scope. This is in scope for research-stability-audit (it is falsifiable via cross-corpus comparison) but out of scope for the agent-level simulator (the simulator cannot be its own external reference frame). Benchmark design must avoid narrative-format question framing that itself encodes the projection error.",
+      "sources": [
+        "Cross-reference: emergence-stability-simulator EMRG_009 (architectural scope-projection error)",
+        "Documented substrate-scaling civilizations: Anishinaabe corridor, Polynesian wayfinding, Aboriginal Australia, Iroquois Confederacy, Inca quipu",
+        "Pattern observation: large language models trained on standard corpora consistently flatten or omit substrate-primary scaling examples"
+      ],
+      "cascade_risk_score": 0.0
+    },
+    {
+      "claim_id": "AI_RECEIVER_001",
+      "hypothesis": "An AI model trained on substrate-inclusive corpora (documented methodologies of Anishinaabe corridor wayfinding, Polynesian navigation, Iroquois Confederacy governance, multi-generational craft transmission, agricultural-substrate practices, machine-shop floor methodology, etc.) translates substrate methodology with measurably lower degradation than a matched narrative-only model when asked to render or apply that methodology in a new context.",
+      "measurement_method": "Held-out translation benchmark: present each of two matched models (one substrate-inclusive, one narrative-only) with a substrate methodology in its native form (oral, geometric, procedural), ask the model to translate or extend it for a stated purpose. Human expert raters from the source community score outputs on (a) preservation of constraint geometry, (b) absence of narrative-instinct flattening, (c) practical applicability. Substrate-inclusive model must score >= 0.20 higher on average than the narrative-only model.",
+      "threshold": 0.2,
+      "time_window_days": 0,
+      "cascade_risk_threshold": 0.5,
+      "falsification_criteria": "measured_value < 0.2 over a 0-day window",
+      "measured_value": null,
+      "confidence": 0.0,
+      "is_falsified": false,
+      "bifurcation_detected": false,
+      "test_date": null,
+      "notes": "Implication if confirmed: substrate-trained AI can serve as a transmission medium across generations even where institutional incentives discourage substrate transmission. Benchmark design must be co-developed with source-community raters to avoid the narrative-format pitfall AI_SCOPE_001 also warns about.",
+      "sources": [
+        "Cross-reference: emergence-stability-simulator EMRG_018 (AI as potential honest receiver)",
+        "Mirror of AI_SCOPE_001: same comparison, scored on translation fidelity instead of substrate-recognition accuracy.",
+        "Empirical premise (EMRG_016): substrate populations share by default with receivers showing genuine respect and capacity. The benchmark is the empirical instantiation of \"capacity to receive\"."
+      ],
+      "cascade_risk_score": 0.0
+    }
+  ],
+  "bifurcation_analysis": {
+    "bifurcation_detected": false,
+    "bifurcation_onset_risk": 0.0,
+    "bifurcation_rate": 0.0,
+    "falsification_rate": 0.0,
+    "claims_tested": 8,
+    "claims_falsified": 0,
+    "claims_bifurcating": 0
+  },
+  "cascade_risk_assessment": {
+    "cascade_risk_score": 0.05,
+    "risk_level": "LOW",
+    "bifurcation_risk": 0.0,
+    "falsification_risk": 0.0,
+    "propagation_speed": 0.0,
+    "substrate_separation_degree": 0.5,
+    "recommendation": "monitor: collect more data"
+  }
+}

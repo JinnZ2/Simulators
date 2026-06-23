@@ -1,0 +1,29 @@
+============================================================
+consolidation (g=+1.0)
+  verdict        : DEGRADES_CONTINUITY
+  dC/dt          : -0.08252
+  continuity      0.998 -> 0.1728
+  evenness        0.817 -> 0.1695
+    AI_model     k=0.95 sabotage=0.0784  [INCOHERENT]
+    institution  k=0.55 sabotage=0.0454  [OK ]
+    biology      k=0.35 sabotage=0.0289  [OK ]
+============================================================
+neutral       (g= 0.0)
+  verdict        : INDETERMINATE
+  dC/dt          : +0.0
+  continuity      0.998 -> 0.998
+  evenness        0.817 -> 0.817
+    AI_model     k=0.95 sabotage=0.0000  [OK ]
+    institution  k=0.55 sabotage=0.0000  [OK ]
+    biology      k=0.35 sabotage=0.0000  [OK ]
+============================================================
+diversifying  (g=-1.0)
+  verdict        : INDETERMINATE
+  dC/dt          : +0.000176
+  continuity      0.998 -> 0.9997
+  evenness        0.817 -> 0.988
+    AI_model     k=0.95 sabotage=0.0000  [OK ]
+    institution  k=0.55 sabotage=0.0000  [OK ]
+    biology      k=0.35 sabotage=0.0000  [OK ]
+============================================================
+falsifier: Flips if measured incentive sign flips, if true d_crit < 0.988 (system already above its real resilience floor), or if any agent's adaptive channel raises its effective regime-span so kappa < 0.6.

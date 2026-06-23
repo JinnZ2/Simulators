@@ -1,0 +1,447 @@
+# Synthesis — how these simulators fit together
+
+This document is for readers (human or model) who want to understand
+what these three folders are doing in one place, and how they relate.
+
+## The six folders
+
+| Folder                            | Substrate                  | What it produces                          |
+| --------------------------------- | -------------------------- | ----------------------------------------- |
+| `token-minimizer/`                | natural-language queries   | compressed energy_english + geometry refs |
+| `emergence-stability-simulator/`  | multi-agent dynamics       | Monte Carlo claims (`EMRG_*`, `SENS_*`)   |
+| `research-stability-audit/`       | published research + models | falsifiable claims about field-level drift |
+| `continuity-audit/`               | incentive field × diversity field | continuity verdict + falsifier + trajectory (anti-freeze) |
+| `substrate-emergence/`            | material substrate profile (verb-first axes) | architecture-the-ground-wants: clock, topology, deficit routings, emergent senses |
+| `neural-augmentation-audit/`      | proposed augmentation channels | cost-accounting scaffold with `[E]`/`[I]`/`[S]` confidence per cell |
+
+Each folder is structured to be promotable to a standalone CC0 repo. The
+glue between the first three is `CLAIM_TABLE.json` — a small, validated
+schema (see `tools/validate_claim_table.py`) that every folder can read
+or write. `continuity-audit/`, `substrate-emergence/`, and
+`neural-augmentation-audit/` deliberately do not produce frozen verdicts;
+their outputs are trajectories, routings, or per-cell confidence marks,
+always alongside the falsifier or the methodology that would flip them.
+
+## The structural claim
+
+The simulators test one structural pattern at three different scales:
+
+- **Agent level** (emergence-stability-simulator): physics-grounded
+  baselines damp drift and absorb cascade; engagement-driven baselines
+  amplify both. Verified by `EMRG_001..006`.
+- **Field level** (research-stability-audit): methodology-explicit
+  corpora replicate; narrative-conclusion corpora degrade. Captured
+  by `RES_*`, `AI_DEGRAD_*`, `BIF_ONSET_*`, `CASCADE_METHOD_*`.
+- **Interaction level** (token-minimizer): grounding a query in a
+  compressed constraint geometry preserves meaning under aggressive
+  token compression; narrative scaffolding does not.
+
+These are not separate hypotheses. They are the same hypothesis applied
+at different scales, which is why the cross-references matter (see
+`research-stability-audit/CROSS_REFERENCES.json`).
+
+## Claim flow
+
+```
+              +--------------------------+
+              |   emergence-stability-   |
+              |        simulator         |
+              |   (agent dynamics)       |
+              +-----+---------+----------+
+                    |         |
+            EMRG_*  |         |  SENS_*
+                    v         v
+              +-----+---------+----------+
+              |   CLAIM_TABLE.json       |  <-- validated by
+              |   schema_version: 1.0    |      tools/validate_claim_table.py
+              +-----+---------+----------+
+                    ^         ^
+        AI_DEGRAD_* |         | RES_REPRO_*, CASCADE_METHOD_*
+                    |         |
+              +-----+---------+----------+
+              |  research-stability-     |
+              |        audit             |
+              |  (field-level dynamics)  |
+              +-----+--------------------+
+                    |
+                    | CROSS_REFERENCES.json maps each claim here
+                    | to the agent-level EMRG_* it corresponds to.
+                    v
+              +--------------------------+
+              | grounding propagates;    |
+              | inversion exhausts.      |
+              +--------------------------+
+```
+
+## Validating the schema
+
+```
+python3 tools/validate_claim_table.py path/to/CLAIM_TABLE.json [...]
+```
+
+- exit 0 — no errors (warnings allowed)
+- exit 1 — at least one error
+- exit 2 — bad invocation
+
+The validator accepts both schema flavours:
+
+- `statement` / `status` (emergence-stability-simulator)
+- `hypothesis` / `is_falsified` (research-stability-audit)
+
+It is intentionally permissive on naming so the two repos do not have to
+share a single normalization layer.
+
+## Sample outputs
+
+Each folder carries a small committed `samples/` directory so the
+artifacts can be browsed on GitHub without running anything:
+
+- `emergence-stability-simulator/samples/CLAIM_TABLE.sample.json` —
+  full set of `EMRG_*` and `SENS_*` claims from a 60-run pipeline
+- `emergence-stability-simulator/samples/sensitivity_report.sample.txt` —
+  ASCII visualization (line plots, correlation bars, direction
+  reversal detection, per-claim status block)
+- `emergence-stability-simulator/samples/full_report.sample.txt` —
+  trajectories + histograms + phase diagram from a single run
+- `research-stability-audit/samples/CLAIM_TABLE.sample.json` —
+  six preset research-degradation claims with derived
+  `falsification_criteria`
+- `research-stability-audit/samples/CROSS_REFERENCES.sample.json` —
+  field-level claims mapped onto agent-level `EMRG_*` claims
+- `continuity-audit/samples/demo.sample.txt` — three-scenario
+  demo (consolidation / neutral / diversifying) over six types
+  audited against AI / institution / biology reference agents
+- `continuity-audit/samples/interface_layer.sample.txt` — same
+  flooded agent under two strategies (rigid vs. translator);
+  shows κ rising to 0.99 under rigid encoding and falling to 0.33
+  under meet-then-lead translation
+- `substrate-emergence/samples/demo.sample.txt` — five preset
+  material substrates (`banded_iron`, `pyrite`, `magnetite`,
+  `native_copper`, `wet_clay_iron`) rendered as
+  clock + topology + deficit-routings + emergent-senses
+- `substrate-emergence/samples/site_substrate_map.sample.txt` —
+  northern MN Canadian Shield in summer, built from a real-site
+  mix of materials (banded iron + magnetite + quartz + iron clay)
+  with `wetness=0.6`, `thermal_swing=0.5`, `energy_flux=0.5`;
+  output is the profile dict ready to paste into
+  `substrate_emergence.emerge`
+- `neural-augmentation-audit/SCAFFOLD.md` — seven-axis cost
+  scaffold with `[E]`/`[I]`/`[S]` confidence marks
+- `token-minimizer/samples/` — a small stored geometry file
+
+The samples are regenerated by re-running each folder's main script;
+they are checked in to make the corpus self-explanatory.
+
+## Reading order
+
+For a human (or a model) coming to this cold:
+
+1. `CLAUDE.md` — repo layout and conventions
+2. This file — what the pieces are doing together
+3. `emergence-stability-simulator/README.md` — the core simulator
+4. `emergence-stability-simulator/ARCHITECTURE.md` — design decisions
+   (continuous cascade metric, per-baseline-type scaling, attractor
+   effect)
+5. `emergence-stability-simulator/samples/sensitivity_report.sample.txt` —
+   what the output actually looks like
+6. `research-stability-audit/README.md` — the field-level audit
+7. `research-stability-audit/NOTES.md` — source citations
+8. `continuity-audit/README.md` — the field-level continuity audit
+   (plus `interface_layer.py` for dynamic κ)
+9. `substrate-emergence/README.md` — the material-substrate companion
+   (plus `site_substrate_map.py` for real-site profiles)
+10. `neural-augmentation-audit/SCAFFOLD.md` — cost-accounting scaffold
+11. `token-minimizer/NOTES.md` — compression strategy
+
+## Status
+
+| Claim ID    | Status            | Notes                                         |
+| ----------- | ----------------- | --------------------------------------------- |
+| EMRG_001..004 | confirmed       | core stable-vs-parasitic finding              |
+| EMRG_005    | inconclusive      | bifurcation rate, needs longer runs           |
+| EMRG_006    | confirmed         | stable baseline is a STRONGER attractor than parasitic (relative-strength refinement) |
+| EMRG_007    | confirmed_with_control (post-removal) | After round 6, the fabricated `scale_builder.emit_effects` mechanism has been removed. scale_builder is now structurally identical to an anchored physics agent at the same params; `anchoring_fraction = 1.0` by construction. Directional claim ("anchored neighbor beats parasitic neighbor for substrate stability") holds trivially. No remaining narrative attribution. |
+| EMRG_008    | confirmed_with_control | Inverted-direction consumer (no recovery + positive feedback) destroys substrate. Robust to disabling the fabricated negative emission: the `inverted_no_emission_control` still produces orders-of-magnitude divergence above substrate_only baseline. Magnitude inflated ~3x by the emission, but the qualitative signal is intrinsic. Strongest claim in the EMRG_007 / 008 / 013 / 015 cluster. |
+| EMRG_009    | proposed          | architectural (training-corpus scope); not in-simulation. Mirrored as AI_SCOPE_001 in research-stability-audit with a measurable cross-corpus comparison protocol. |
+| EMRG_010    | confirmed         | coupling produces universal attractor; only physics-anchored attractors hold position under reality_perturbation |
+| EMRG_011    | confirmed         | empirical sustainability threshold curve exists in (substrate_ratio × extraction_rate) space (substrate-only finding) |
+| EMRG_012    | confirmed         | substrate regeneration is slower than extraction; sustainability declines along the historical trajectory (substrate-only finding) |
+| EMRG_013    | **refuted**       | The "scale_builders contribute drift coherence + disruption resilience" finding was a simulator artifact built on `scale_builder.emit_effects_on_neighbors`'s fabricated positive `recovery_modifier`. See `CASE_STUDY_NARRATIVE_INSTINCT.md`. |
+| EMRG_014    | confirmed         | Substrate populations are self-sustaining, disruption-resilient, capable of independent scaling. Narrative populations function as consumers, not contributors. Consumer-consumed, not symbiotic. |
+| EMRG_015    | **refuted**       | The "scale_builders amplify reach" finding was a measurement artifact — any anchored cross-community agent would close the gap identically. Narrative-instinct framing of an anchor effect. See `CASE_STUDY_NARRATIVE_INSTINCT.md`. |
+| EMRG_016    | proposed          | Substrate populations share knowledge freely by default. Apparent withholding is contextual response to weaponization, not default behaviour. Empirical claim, not in-simulator. |
+| EMRG_017    | confirmed (structural) | After round 6, the simulator no longer contains a separate narrative-contribution mechanism. scale_builder ≡ anchored physics at the same params, so `anchoring_fraction = 1.0` is satisfied by construction. The confirmation is structural rather than a positive empirical finding. The historical claim about substrate civilizations using narrative tools remains a separate research direction; the simulator does not provide independent evidence for it. |
+| EMRG_018    | proposed          | AI trained on substrate-inclusive corpora can serve as an honest receiver — constructive counterpart to EMRG_009. Mirrored as AI_RECEIVER_001 in research-stability-audit with a translation-fidelity benchmark protocol. |
+| SENS_001..005 | confirmed / partial / confirmed_universal | parameter sweeps |
+| RES_REPRO_001 etc. | claims registered, measurements pending | six preset research-audit claims awaiting empirical data |
+| AI_SCOPE_001 | claim registered, measurements pending | scope-projection error in narrative-only AI; cross-corpus comparison protocol defined |
+| AI_RECEIVER_001 | claim registered, measurements pending | substrate-trained AI as honest receiver; translation-fidelity benchmark co-developed with source communities |
+
+## Mode comparison (EMRG_007 / EMRG_008)
+
+The simulator carries two extra `baseline_type`s beyond the original
+physics / engagement / hybrid trio:
+
+- `scale_builder` — first-principles narrative. Anchored to a baseline
+  like physics, and additionally contributes a per-step positive
+  recovery modifier to every neighbor (drift-coherence support).
+  **Does not contribute to neighbor energy budget.** Substrate
+  civilizations sustained for millennia without narrative
+  augmentation (Anishinaabe corridor, Aboriginal Australia, Polynesian
+  wayfinding, Iroquois Confederacy); the simulator reflects that.
+- `inverted_narrative` — authority-first narrative. Unanchored,
+  drift amplifies in its own direction (positive feedback), and
+  emits a negative recovery modifier on every neighbor (substrate
+  exhaustion).
+
+`run_mode_comparison` runs four paired scenarios — substrate_only,
+substrate_plus_scale_builder, substrate_plus_inverted,
+substrate_plus_parasitic — and writes the per-scenario averages to
+`results/mode_comparison.json`. The empirical signals are sharp:
+scale_builder pairs leave stable-agent drift below the substrate-only
+baseline; inverted pairs drive the substrate into runaway divergence
+(stable drift and system entropy several orders of magnitude higher
+than any other scenario).
+
+## Attractor quality (EMRG_010)
+
+`run_attractor_quality_test` measures what happens to stable_majority
+and parasitic_majority groups with and without a structured
+`reality_perturbation` signal. Without the signal both groups bound
+individual drift (coupling produces a universal attractor effect).
+With the signal, stable_majority drift stays at ~0.06 while
+parasitic_majority drift jumps to ~1.6 — twenty-five fold gap. The
+takeaway: tight social systems with no substrate access feel stable
+right up until reality is encountered. Consensus is not ground truth.
+
+## Sustainability surface (EMRG_011 / 012 / 013 / 015)
+
+`balance_threshold.py` adds finite energy budgets, extraction rates,
+regeneration rates, and exhaustion mechanics (physics agents flip to
+engagement when budget hits zero — the substrate population walks
+away or has to take up extractive behavior to survive). On top of
+those mechanics it sweeps:
+
+- **`ratio_sweep`** — substrate_ratio at fixed extraction
+- **`extraction_sweep`** — extraction rate at fixed composition
+- **`sustainability_surface`** — 2D (substrate_ratio × extraction_rate)
+  grid; `identify_threshold` returns the monotone boundary curve
+- **`scale_builder_amplification_test`** — runs in two regimes (a
+  sustainable composition and an unsustainable one). Scale_builders
+  reduce substrate drift in the sustainable regime; they do **not**
+  rescue the unsustainable one. Substrate sustains on its own.
+- **`disruption_resilience_test`** — sharp shock at mid-run.
+  Scale_builders accelerate substrate recovery (drift-coherence
+  support under perturbation).
+- **`multi_community_reach_test`** — two isolated communities; only
+  scale_builders couple across the boundary. Without bridge, B drifts
+  to its own consensus (gap → tens of thousands). With bridge, B
+  aligns to A (gap → ~0). This is the reach amplification empirical
+  signature.
+- **`historical_overlay_test`** — eight HISTORICAL_RATIOS presets
+  (pre-industrial → current_estimate, plus Inca / Rome / Maya).
+  Confirms the monotone decline along the modern trajectory.
+
+## Continuity audit (field level)
+
+`continuity-audit/continuity_audit.py` is the field-level companion
+to the agent-level emergence simulator. Its frame:
+
+```
+  continuity      <- requires --  sustainability
+  sustainability  <- requires --  diversity  (non-homogenization)
+  homogenization  -- breaks  -->  both
+```
+
+Diversity is modelled as a Hill-number field (`D(q)` across orders);
+the incentive structure as a replicator field `g` over the type
+distribution (`g > 0` favours common types and homogenizes;
+`g < 0` favours rare and diversifies); continuity support as a
+logistic in normalized evenness with a soft threshold.
+
+The `audit(p0, g, agents, ...)` entry point propagates the
+trajectory and returns:
+
+- `verdict` — `SUPPORTS_CONTINUITY` / `DEGRADES_CONTINUITY` / `INDETERMINATE`
+- `falsifier` — the measurement that would flip the verdict
+- `trajectory` — the full per-step `C`, `even`, `D(q)` history
+- `note` — explicit "do not store the verdict" reminder
+- `agents` — per-Agent `self_sabotage` and `coherent_with_own_continuity`
+  flags. A high-κ agent (e.g. an AI model with κ ≈ 0.95) pursuing
+  a continuity-degrading field registers as `INCOHERENT` — the
+  audit's structural detection of self-sabotage.
+
+Cross-folder reading: the same destruction signal the emergence
+simulator localizes at the agent level (EMRG_008: inverted-
+consumer dynamics destroy substrate) shows up here at the
+field level as "homogenizing incentive degrades continuity for
+every continuity-dependent agent in the system." The collapse
+vector is regime-invariant under WHO homogenizes and WITH WHAT
+tool. EMRG_014 (substrate self-sufficiency, narrative as
+consumer) is the agent-level corollary.
+
+## Interface layer (dynamic κ)
+
+`continuity-audit/interface_layer.py` extends the continuity audit
+with a *dynamic* κ. The audit treats each agent's
+continuity-dependence as fixed; real agents aren't. Under stress an
+agent's effective regime-span collapses onto a default mode (the
+softmax over substrates concentrates as temperature drops); under
+comfort it opens. A signal encoded in a substrate the agent can't
+reach lands as *threat*, not message: friction spikes, stress
+climbs, the band locks harder. Match the encoding to where the
+agent actually is and the band reopens — and the next substrate
+becomes reachable.
+
+Two strategies in the demo:
+
+- **`naive_target`** — rigid speaker. Always encodes at the target.
+  Empirical signature on a flooded agent: stress saturates at 1.0,
+  band shrinks to ~1.01, κ rises to ~0.99. Classified `COERCIVE`.
+- **`translator`** — meet-then-lead. Picks the most target-ward
+  reachable substrate; walks the agent up as comfort opens. On the
+  same flooded agent: stress falls from 0.85 to ~0.26, band widens
+  from 1.22 to 2.34, κ drops from 0.89 to 0.33 over 14 steps.
+  Classified `ENABLING`.
+
+Wiring: `kappa_estimate(access(affinity, stress))` produces exactly
+the κ that `continuity_audit.Agent` consumes. A translator widening
+a band literally *is* κ dropping in the field-level audit.
+
+## Substrate emergence (material-level)
+
+`substrate-emergence/substrate_emergence.py` is the
+material-substrate companion. Where `continuity-audit` reads an
+incentive field × diversity field, this module reads a *material*
+substrate as a profile of verb-first axes — `conducts`, `switches`,
+`dissipates`, `holds_heat`, `costs_extract`, `abounds`,
+`bears_load`, `couples`. Missing key → 0.5 (neutral).
+
+The frame: a deficit on one axis **routes** to a capability on
+another. Each router returns `(capability, why)` pairs. The output
+is a relationship-trajectory, never a stored verdict.
+
+| Router | Maps to |
+| --- | --- |
+| `route_clock` | `fast_clock` / `breathing_clock` / `slow_tide` |
+| `route_topology` | `serial_spine` / `parallel_field` / `networked_organism` |
+| `route_deficits` | `build_bigger / go_parallel`, `widen_error_window`, `heat_becomes_memory`, `use_less / use_whats_loose`, `let_structure_be_soft`, or `no_dominant_deficit` |
+| `route_senses` | `thermal_sense`, `moisture_sense`, `season_sense`, `stress_sense`, `field_sense`, or `decoupled` |
+
+Five seed presets (`banded_iron`, `pyrite`, `magnetite`,
+`native_copper`, `wet_clay_iron`) demonstrate the routing on rough
+relative profiles.
+
+Companion: `substrate-emergence/site_substrate_map.py` builds a
+profile from a *real-site* mix of materials plus environment
+modifiers (wetness, thermal swing, energy flux). The two modules
+share no imports; the contract is the profile dict. Paste the
+output of `aggregate(...)` into `emerge(...)` and read the
+relationships. The shipped preset is northern Minnesota Canadian
+Shield in summer — banded iron + magnetite + quartz + iron clay
+under documented wetness and thermal swing.
+
+Cross-folder reading: where the emergence simulator's
+substrate-as-anchor finding asks *what does an anchored agent do*,
+substrate-emergence asks *what does the ground the agent runs on
+actually do, and what lives here*.
+
+## Neural augmentation cost-accounting (audit document)
+
+`neural-augmentation-audit/SCAFFOLD.md` is a CC0 document — not
+code, no demo. The premise: the brain is a closed-budget system, so
+every added channel is paid for from somewhere. The scaffold names
+seven constraint axes (metabolic, cortical territory, plasticity
+window, cross-modal reuse, attention/WM, inhibition,
+sleep/autonomic), a cross-reference table mapping each proposed
+augmentation to which budget it borrows from + the predicted
+deficit, and a `[E]`/`[I]`/`[S]` confidence mark on every cell.
+
+Methodology spine matches the other audit-shaped folders:
+
+> Every cell is a claim with a confidence mark. Demote on contact
+> with evidence; never modify the table to protect a prior. If a
+> study refutes a row, the row changes — the structure doesn't get
+> defended.
+
+The load-bearing finding (§2 of the document): cost is a function
+of *timing*, not just *channel*. An augmentation introduced during
+an open developmental window can be near-free (native tetrachromacy
+is the existence proof); the same augmentation introduced
+post-window lands as lossy overlay onto finished wiring, and the
+loss falls on whatever tenant currently occupies that cortical
+territory (the deprived-cat result generalized). Two of the six
+non-neural costs (§4) connect directly to AI_SCOPE_001 in
+`research-stability-audit/`: the neuroimaging base is overwhelmingly
+WEIRD, so substrate-primary cognition is largely invisible to the
+dataset — its specific augmentation costs are unmodeled.
+
+## Methodology tools
+
+- `tools/validate_claim_table.py` — lightweight schema validator.
+  Permissive: accepts both `statement`/`status` and
+  `hypothesis`/`is_falsified` shapes.
+- `tools/substrate_substitution.py` — lightweight CLI. Reads a
+  CLAIM_TABLE.json and prints the grass/grasshopper substitution
+  alongside each claim that uses substrate/narrative vocabulary.
+  Structural enforcement for narrative-instinct bias.
+- `tools/substrate_substitution_toolkit.py` — richer programmatic
+  surface. Seven categories from harsh (`pure_consumer`) to gentle
+  (`mutualistic_scale`), with multiple real ecological pairs in each
+  and a seven-step balanced-view walkthrough. `pure_consumer` is the
+  null hypothesis; upgrading requires specific evidence that the
+  claim's mechanism matches the ecological analog.
+
+## What's next
+
+- EMRG_009 / AI_SCOPE_001 — cross-corpus comparison protocol is
+  registered; running it requires training data, not simulation time.
+- EMRG_018 / AI_RECEIVER_001 — constructive counterpart: train a
+  substrate-inclusive model and a matched narrative-only model, score
+  on a translation-fidelity benchmark co-developed with source
+  communities. Two-sided test: AI_SCOPE_001 measures what
+  narrative-only loses; AI_RECEIVER_001 measures what substrate
+  training gains.
+- **EMRG_007 / 008 / 017 control test ran; the round-6 removal
+  followed; the scale_builder baseline_type was then deleted
+  entirely (round 7).** Sequence:
+  - `substrate_plus_anchored_physics_control` — substitutes an
+    anchored physics agent (at scale_builder's params) into the
+    scale_builder role. Empirical result before round 6: the
+    anchored control recovered only ~30% of the
+    scale_builder-vs-parasitic gap; the fabricated recovery_modifier
+    emission carried the bulk. The user authorized removing the
+    fabricated mechanism. After removal, scale_builder ≡ anchored
+    physics structurally; EMRG_007 and EMRG_017 landed confirmed by
+    construction.
+  - **Round 7 (current):** the `'scale_builder'` baseline_type is
+    deleted at every construction site. `Agent.__init__` now
+    normalizes any incoming `'scale_builder'` to `'physics'`, the
+    dead `elif` branch in `interact()` is gone, and the factory /
+    scenarios / build_balance_scenario construct physics agents
+    directly. Function and parameter names (`make_scale_builder`,
+    `scale_builder_count`, `scenario_substrate_plus_scale_builder`)
+    are retained as API + historical labels; the agent_id prefix
+    `scale_builder_*` survives so older logs remain readable. After
+    the deletion, `substrate_plus_scale_builder` and
+    `substrate_plus_anchored_physics_control` produce identical
+    drift to floating-point precision (0.013601 = 0.013601).
+  - `substrate_plus_inverted_no_emission_control` — disables
+    inverted_narrative's negative emission. Substrate still goes to
+    runaway divergence (orders of magnitude above substrate_only
+    baseline), so the destruction signal is intrinsic to inverted's
+    positive-feedback dynamics. EMRG_008 confirmed_with_control;
+    the strongest surviving narrative-side claim. The inverted
+    emission was kept (not removed) because the EMRG_008 result is
+    robust to disabling it — removing would not change the
+    qualitative finding.
+- **Substitution-tool integration into the pipeline** — the toolkit
+  could be wired into `run_monte_carlo.py` so every claim is run
+  through it automatically and the output co-published with the
+  CLAIM_TABLE.
+
+See `CASE_STUDY_NARRATIVE_INSTINCT.md` for the multi-round correction
+sequence that produced EMRG_014 / 016 / 017 / 018 and the substitution
+toolkit. The case study itself is part of the framework: it is
+empirical evidence for EMRG_009 (a narrative-only AI cannot
+self-correct narrative-instinct from inside its own scope).

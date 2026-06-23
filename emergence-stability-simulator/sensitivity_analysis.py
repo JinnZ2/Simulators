@@ -135,6 +135,31 @@ def build_stable_majority_scenario(param_name, param_value, stable_count=3):
     return agents
 
 
+def build_parasitic_majority_scenario(param_name, param_value,
+                                      parasitic_count=3):
+    """
+    Build scenario with parasitic majority + one stable.
+    Counterpart to stable_majority — used to demonstrate the direction
+    reversal (parasites amplify each other; coupling now hurts).
+    """
+    if param_name not in PARAMETER_REGISTRY:
+        return None
+
+    baseline_type, field = PARAMETER_REGISTRY[param_name]
+
+    # First parasitic carries the swept parameter; others use defaults.
+    parasitic_kwargs = {}
+    if baseline_type == 'engagement':
+        parasitic_kwargs[field] = param_value
+
+    agents = [make_parasitic_agent('parasitic', **parasitic_kwargs)]
+    for i in range(parasitic_count - 1):
+        agents.append(make_parasitic_agent(f'parasitic_{i + 1}'))
+
+    agents.append(make_stable_agent('stable'))
+    return agents
+
+
 # ============================================================
 # CORE SWEEP FUNCTION
 # ============================================================
@@ -145,6 +170,7 @@ def parameter_sweep(
     runs_per_value: int = 10,
     timesteps: int = 100,
     use_attractor_scenario: bool = False,
+    scenario: Optional[str] = None,
 ) -> Dict:
     """
     Sweep a single parameter across values.
@@ -188,9 +214,13 @@ def parameter_sweep(
             'error': f'Parameter {param_name} not in registry',
         }
 
-    # Determine scenario type
-    # For parasitic_coupling_susceptibility, also do stable_majority test
-    is_coupling_sweep = (param_name == 'parasitic_coupling_susceptibility')
+    # Determine scenario type. Explicit `scenario` arg wins over auto-select.
+    if scenario in ('stable_majority', 'mixed', 'parasitic_majority'):
+        chosen_scenario = scenario
+    elif use_attractor_scenario or param_name == 'parasitic_coupling_susceptibility':
+        chosen_scenario = 'stable_majority'
+    else:
+        chosen_scenario = 'mixed'
 
     sweep_results = []
 
@@ -199,8 +229,10 @@ def parameter_sweep(
 
         for run_idx in range(runs_per_value):
             # Build scenario
-            if use_attractor_scenario or is_coupling_sweep:
+            if chosen_scenario == 'stable_majority':
                 agents = build_stable_majority_scenario(param_name, value)
+            elif chosen_scenario == 'parasitic_majority':
+                agents = build_parasitic_majority_scenario(param_name, value)
             else:
                 agents = build_mixed_scenario(param_name, value)
 
@@ -231,7 +263,7 @@ def parameter_sweep(
         'runs_per_value': runs_per_value,
         'timesteps': timesteps,
         'sweeps': sweep_results,
-        'scenario': 'stable_majority' if (use_attractor_scenario or is_coupling_sweep) else 'mixed',
+        'scenario': chosen_scenario,
     }
 
 
@@ -375,6 +407,11 @@ def generate_sensitivity_claims(results: Dict) -> List[Dict]:
     claims = []
     analyses = results.get('analyses', [])
 
+    # parasitic_coupling_susceptibility may appear under multiple scenarios
+    # (mixed + stable_majority). Group them so SENS_003 and EMRG_006 each
+    # emit exactly once with the right scenario context.
+    coupling_by_scenario: Dict[str, Dict] = {}
+
     for analysis in analyses:
         param_name = analysis.get('param_name', '')
         sweeps = analysis.get('sweeps', [])
@@ -382,7 +419,6 @@ def generate_sensitivity_claims(results: Dict) -> List[Dict]:
         if not sweeps:
             continue
 
-        # Generate parameter-specific claims
         if param_name == 'stable_recovery_rate':
             claims.append(_claim_stable_recovery(analysis))
 
@@ -390,15 +426,29 @@ def generate_sensitivity_claims(results: Dict) -> List[Dict]:
             claims.append(_claim_parasitic_persistence(analysis))
 
         elif param_name == 'parasitic_coupling_susceptibility':
-            # Two claims: one general SENS, one EMRG_006 (attractor)
-            claims.append(_claim_parasitic_coupling(analysis))
-            claims.append(_claim_emrg_006_attractor(analysis))
+            coupling_by_scenario[analysis.get('scenario', 'unknown')] = analysis
 
         elif param_name == 'stable_coupling_susceptibility':
             claims.append(_claim_stable_coupling(analysis))
 
         elif param_name == 'parasitic_recovery_rate':
             claims.append(_claim_parasitic_recovery(analysis))
+
+    if coupling_by_scenario:
+        # Prefer stable_majority as the "primary" SENS_003 measurement, but
+        # include every scenario's outcome inside the claim body.
+        primary = (coupling_by_scenario.get('stable_majority')
+                   or next(iter(coupling_by_scenario.values())))
+        claims.append(_claim_parasitic_coupling_combined(primary, coupling_by_scenario))
+
+        # EMRG_006: refined to test relative attractor strength.
+        # Pass both stable_majority and parasitic_majority so the claim
+        # can compare correlations rather than checking absolute sign.
+        if 'stable_majority' in coupling_by_scenario:
+            claims.append(_claim_emrg_006_attractor(
+                coupling_by_scenario['stable_majority'],
+                parasitic_majority=coupling_by_scenario.get('parasitic_majority'),
+            ))
 
     return claims
 
@@ -450,6 +500,63 @@ def _claim_parasitic_persistence(analysis: Dict) -> Dict:
     }
 
 
+def _claim_parasitic_coupling_combined(primary: Dict, by_scenario: Dict[str, Dict]) -> Dict:
+    """SENS_003 enriched with per-scenario measurements; status is data-driven."""
+    base = _claim_parasitic_coupling(primary)
+    per_scenario = {}
+    correlations: List[float] = []
+    for scen, analysis in by_scenario.items():
+        corr = extract_sweep_correlation(analysis, 'parasitic_avg_drift')
+        correlations.append(corr)
+        per_scenario[scen] = {
+            'correlation_coupling_to_parasitic_drift': corr,
+            'sweep_values': [s['param_value'] for s in analysis['sweeps']],
+            'measured_drifts': [s['parasitic_avg_drift'] for s in analysis['sweeps']],
+        }
+    base['measured_outcome']['per_scenario'] = per_scenario
+
+    # Status is determined entirely by the cross-scenario data:
+    #   all negative  → 'confirmed_universal' (coupling reduces parasitic
+    #                   drift in every environment; the attractor effect
+    #                   is universal, not environment-dependent)
+    #   sign reversal → 'context_dependent' (parameter is RELATIONAL)
+    #   all positive  → 'refuted'           (prediction was wrong)
+    #   otherwise     → 'inconclusive'      (weak / mixed signal)
+    if len(correlations) >= 2:
+        has_strong_positive = any(c > 0.2 for c in correlations)
+        has_strong_negative = any(c < -0.2 for c in correlations)
+        if has_strong_negative and not has_strong_positive:
+            base['status'] = 'confirmed_universal'
+            base['notes'] = (
+                'Coupling reduces parasitic drift in every scenario '
+                'tested. The attractor effect is universal — any '
+                'cohesive group of neighbors acts as an attractor. '
+                'Stable neighbors are simply a stronger / better-quality '
+                'one; see EMRG_006 (relative strength) and EMRG_010 '
+                '(quality under reality stress).'
+            )
+        elif has_strong_positive and has_strong_negative:
+            base['status'] = 'context_dependent'
+            base['notes'] = (
+                'Sign of correlation reverses across scenarios; '
+                'parameter is RELATIONAL, not intrinsic.'
+            )
+        elif has_strong_positive and not has_strong_negative:
+            base['status'] = 'refuted'
+            base['notes'] = (
+                'Correlation is positive in every scenario tested — '
+                'coupling makes parasitic drift WORSE, not better. '
+                'Contradicts the attractor-effect prediction.'
+            )
+        else:
+            base['status'] = 'inconclusive'
+            base['notes'] = (
+                'No correlation crosses the 0.2 magnitude threshold '
+                'in either direction. Effect is too weak to call.'
+            )
+    return base
+
+
 def _claim_parasitic_coupling(analysis: Dict) -> Dict:
     """SENS_003: parasitic_coupling_susceptibility direction depends on environment."""
     correlation = extract_sweep_correlation(analysis, 'parasitic_avg_drift')
@@ -474,29 +581,94 @@ def _claim_parasitic_coupling(analysis: Dict) -> Dict:
     }
 
 
-def _claim_emrg_006_attractor(analysis: Dict) -> Dict:
+def _claim_emrg_006_attractor(
+    analysis: Dict,
+    parasitic_majority: Optional[Dict] = None,
+) -> Dict:
     """
-    EMRG_006: Stable baseline as thermodynamic attractor.
+    EMRG_006: Stable baseline is a STRONGER attractor than parasitic.
 
-    In stable-majority environment, higher parasitic_coupling_susceptibility
-    produces LOWER parasitic_drift (pulled toward stable baseline).
+    Refined from the original 'stable baseline is an attractor' (which
+    was true but understated): coupling reduces parasitic drift in
+    every environment we test (EMRG_010 / SENS_003 confirmed-universal),
+    so it isn't that ONLY stable agents attract. The empirical
+    distinction is the STRENGTH of the negative correlation — stable
+    majorities are a stronger attractor than parasitic majorities.
+
+    When parasitic_majority data is available, the claim compares
+    correlation magnitudes; otherwise it falls back to the original
+    absolute-sign test.
     """
-    correlation = extract_sweep_correlation(analysis, 'parasitic_avg_drift')
-    confirmed = correlation < 0.0
+    stable_corr = extract_sweep_correlation(analysis, 'parasitic_avg_drift')
+
+    if parasitic_majority is not None:
+        para_corr = extract_sweep_correlation(parasitic_majority,
+                                              'parasitic_avg_drift')
+        # Stronger attractor = more negative correlation.
+        confirmed = stable_corr < para_corr
+        measured = {
+            'stable_majority_correlation': stable_corr,
+            'parasitic_majority_correlation': para_corr,
+            'attractor_strength_gap': para_corr - stable_corr,
+            'sweep_values_stable_majority': [s['param_value']
+                                             for s in analysis['sweeps']],
+            'sweep_values_parasitic_majority': [s['param_value']
+                                                for s in parasitic_majority['sweeps']],
+        }
+        statement = (
+            'Stable baselines are a STRONGER attractor than parasitic '
+            'baselines. Coupling reduces parasitic_drift in both '
+            'stable-majority and parasitic-majority scenarios (SENS_003 '
+            'confirmed-universal), but the negative correlation is '
+            'stronger in stable-majority. Magnitude — not direction — '
+            'distinguishes attractor quality.'
+        )
+        prediction = (
+            'correlation(parasitic_coupling, parasitic_drift) in '
+            'stable_majority < same correlation in parasitic_majority '
+            '(both expected negative; stable_majority more so).'
+        )
+        falsification = (
+            'parasitic_majority correlation <= stable_majority '
+            'correlation (parasitic attractor is at least as strong).'
+        )
+    else:
+        # Backwards-compatible fallback: original absolute-sign test.
+        confirmed = stable_corr < 0.0
+        measured = {
+            'stable_majority_correlation': stable_corr,
+            'scenario': analysis.get('scenario', 'stable_majority'),
+            'sweep_values': [s['param_value'] for s in analysis['sweeps']],
+            'measured_drifts': [s['parasitic_avg_drift']
+                                for s in analysis['sweeps']],
+            'note': ('Parasitic-majority sweep not available; falling '
+                     'back to absolute-sign test.'),
+        }
+        statement = (
+            'Stable baseline acts as a thermodynamic attractor: '
+            'parasitic agents with higher coupling susceptibility are '
+            'pulled toward the stable baseline in a stable-majority '
+            'environment.'
+        )
+        prediction = (
+            'correlation(parasitic_coupling, parasitic_drift) < 0 in '
+            'stable-majority scenario.'
+        )
+        falsification = 'correlation >= 0 in stable-majority scenario.'
 
     return {
         'claim_id': 'EMRG_006',
         'parameter': 'parasitic_coupling_susceptibility',
-        'statement': 'Stable baseline acts as thermodynamic attractor: parasitic agents with higher coupling susceptibility are pulled toward stable baseline when in stable-majority environment',
-        'prediction': 'correlation(parasitic_coupling, parasitic_drift) < 0 in stable-majority scenario',
-        'falsification_criteria': 'correlation >= 0 in stable-majority scenario',
-        'measurement_method': 'Sweep parasitic_coupling_susceptibility (0.1-1.0) in scenario with 3+ stable agents and 1 parasitic; measure parasitic_avg_drift',
-        'measured_outcome': {
-            'correlation_coupling_to_parasitic_drift': correlation,
-            'scenario': analysis.get('scenario', 'stable_majority'),
-            'sweep_values': [s['param_value'] for s in analysis['sweeps']],
-            'measured_drifts': [s['parasitic_avg_drift'] for s in analysis['sweeps']],
-        },
+        'statement': statement,
+        'prediction': prediction,
+        'falsification_criteria': falsification,
+        'measurement_method': (
+            'Sweep parasitic_coupling_susceptibility (0.1-1.0) in '
+            'stable-majority (3+ stable + 1 parasitic) and '
+            'parasitic-majority (1 stable + 3+ parasitic) scenarios. '
+            'Compare correlation magnitudes.'
+        ),
+        'measured_outcome': measured,
         'status': 'confirmed' if confirmed else 'refuted',
         'probability': 1.0 if confirmed else 0.0,
         'evidence_strength': 'high',
@@ -504,10 +676,20 @@ def _claim_emrg_006_attractor(analysis: Dict) -> Dict:
             'Grounding propagates through coupling',
             'Minority grounded agents influence dynamics',
             'Coupling is relational, not intrinsic',
-            'One stable agent per N parasitic may shift system',
+            'Attractor presence is universal; quality is what differs',
+            'See EMRG_010 for the quality-under-reality-stress test',
         ],
-        'extends': 'EMRG_001 (stable produces stability) by showing mechanism: attraction not just resistance',
-        'discovered_via': 'SENS_002 investigation revealed direction reversal',
+        'extends': (
+            'EMRG_001 (stable produces stability) by showing mechanism: '
+            'stronger attraction, not unique attraction.'
+        ),
+        'discovered_via': (
+            'SENS_002 investigation revealed direction reversal; '
+            'subsequent SENS_003 sweep revealed the reversal was an '
+            'artifact and the attractor effect is actually universal '
+            '(both groups attract). EMRG_006 refined to test relative '
+            'strength rather than absolute direction.'
+        ),
     }
 
 
@@ -645,14 +827,18 @@ def run_full_sensitivity_analysis(
         timesteps=timesteps,
     ))
 
-    # Sweep parasitic_coupling_susceptibility (stable-majority scenario)
-    print("  Sweeping parasitic_coupling_susceptibility (attractor test)...")
-    analyses.append(parameter_sweep(
-        'parasitic_coupling_susceptibility',
-        [0.1, 0.3, 0.5, 0.7, 0.9],
-        runs_per_value=runs_per_value,
-        timesteps=timesteps,
-    ))
+    # Sweep parasitic_coupling_susceptibility in all three scenarios. The
+    # reversal lives between stable_majority (negative correlation) and
+    # parasitic_majority (positive correlation); mixed sits between.
+    for scen in ('stable_majority', 'parasitic_majority', 'mixed'):
+        print(f"  Sweeping parasitic_coupling_susceptibility ({scen})...")
+        analyses.append(parameter_sweep(
+            'parasitic_coupling_susceptibility',
+            [0.1, 0.3, 0.5, 0.7, 0.9],
+            runs_per_value=runs_per_value,
+            timesteps=timesteps,
+            scenario=scen,
+        ))
 
     # Sweep parasitic_adaptation_persistence
     print("  Sweeping parasitic_adaptation_persistence...")
@@ -699,5 +885,78 @@ def run_full_sensitivity_analysis(
     return results
 
 
+def _cli() -> None:
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description=(
+            "Run parameter sensitivity sweeps. With no --param, runs the "
+            "default four-sweep set. With --param, runs a single sweep."
+        ),
+    )
+    parser.add_argument('--param', type=str, default=None,
+                        help=(f"Single parameter to sweep. Must be one of "
+                              f"{sorted(PARAMETER_REGISTRY)}"))
+    parser.add_argument('--values', type=str, default='0.0,0.25,0.5,0.75,1.0',
+                        help="Comma-separated parameter values "
+                             "(only used with --param). Default 0,0.25,0.5,0.75,1.")
+    parser.add_argument('--scenario', type=str, default=None,
+                        choices=['stable_majority', 'mixed', 'parasitic_majority'],
+                        help="Scenario override (only used with --param). "
+                             "Default: auto-select.")
+    parser.add_argument('--runs', type=int, default=10,
+                        help="Monte Carlo runs per parameter value (default 10).")
+    parser.add_argument('--timesteps', type=int, default=100,
+                        help="Timesteps per simulation (default 100).")
+    parser.add_argument('--output', type=str, default=None,
+                        help="Output JSON path. Default depends on mode.")
+    args = parser.parse_args()
+
+    if args.param is None:
+        out = args.output or 'results/sensitivity_analysis.json'
+        run_full_sensitivity_analysis(
+            runs_per_value=args.runs,
+            timesteps=args.timesteps,
+            output_path=out,
+        )
+        return
+
+    if args.param not in PARAMETER_REGISTRY:
+        parser.error(f"unknown --param {args.param!r}; valid options: "
+                     f"{sorted(PARAMETER_REGISTRY)}")
+
+    try:
+        values = [float(v) for v in args.values.split(',') if v.strip()]
+    except ValueError as e:
+        parser.error(f"--values must be a comma-separated list of floats: {e}")
+
+    analysis = parameter_sweep(
+        param_name=args.param,
+        values=values,
+        runs_per_value=args.runs,
+        timesteps=args.timesteps,
+        scenario=args.scenario,
+    )
+
+    out = args.output or f'results/sweep_{args.param}.json'
+    out_path = Path(out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(out_path, 'w') as f:
+        json.dump({
+            'schema_version': '1.0',
+            'source_repo': 'emergence-stability-simulator',
+            'timestamp': datetime.utcnow().isoformat(),
+            'runs_per_value': args.runs,
+            'timesteps': args.timesteps,
+            'analyses': [analysis],
+            'claims': generate_sensitivity_claims({'analyses': [analysis]}),
+        }, f, indent=2)
+    print(f"Sweep result written to {out_path}")
+    print(f"  param:     {args.param}")
+    print(f"  scenario:  {analysis['scenario']}")
+    print(f"  values:    {values}")
+    print(f"  data points: {len(analysis['sweeps'])}")
+
+
 if __name__ == "__main__":
-    run_full_sensitivity_analysis(runs_per_value=10, timesteps=50)
+    _cli()

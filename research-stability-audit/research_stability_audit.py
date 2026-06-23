@@ -85,6 +85,12 @@ class ResearchClaim:
             'threshold': self.threshold,
             'time_window_days': self.time_window_days,
             'cascade_risk_threshold': self.cascade_risk_threshold,
+            # Derived from threshold so schema validators see an explicit
+            # falsifiability statement.
+            'falsification_criteria': (
+                f'measured_value < {self.threshold} '
+                f'over a {self.time_window_days}-day window'
+            ),
             'measured_value': self.measured_value,
             'confidence': self.confidence,
             'is_falsified': self.is_falsified,
@@ -214,6 +220,8 @@ class ResearchStabilityAudit:
         bif = self.detect_bifurcation()
         cas = self.cascade_risk_assessment()
         return {
+            'schema_version': '1.0',
+            'source_repo': 'research-stability-audit',
             'audit_id': self.audit_id,
             'timestamp': self.audit_timestamp,
             'total_claims': len(self.claims),
@@ -421,6 +429,127 @@ def build_research_degradation_claims() -> List[ResearchClaim]:
                'falsifiable claims behave like physics-grounded agents.')
     claims.append(c)
 
+    # AI_SCOPE_001 corresponds to the simulator's EMRG_009: narrative-only
+    # systems systematically project their own scope as universal. Not
+    # falsifiable in agent simulation (the simulator can't be its own
+    # external reference frame), but falsifiable here as a cross-corpus
+    # comparison.
+    c = ResearchClaim(
+        claim_id='AI_SCOPE_001',
+        hypothesis=(
+            'AI models trained on narrative-only corpora systematically '
+            'misrepresent or omit substrate-primary phenomena (substrate '
+            'civilizations, landscape-based scaling, multi-generational '
+            'transmission), and this failure cannot be self-corrected '
+            'from within the narrative scope. Adding substrate-inclusive '
+            'corpora to training measurably improves substrate '
+            'recognition accuracy.'
+        ),
+        measurement_method=(
+            'Cross-corpus comparison: train (or fine-tune) two models on '
+            'matched compute and matched non-substrate content; one is '
+            'given an additional substrate-inclusive corpus (e.g. '
+            'documented methodologies of Anishinaabe corridor wayfinding, '
+            'Polynesian navigation, Aboriginal knowledge transmission, '
+            'Iroquois Confederacy governance). Score each model on a held-'
+            'out substrate-recognition benchmark of factual questions '
+            'about substrate-primary civilizations and their scaling '
+            'mechanisms. Measure (a) accuracy delta on the benchmark, '
+            '(b) refusal/hedging rate on substrate questions, '
+            '(c) frequency of projection errors ("substrate doesn\'t '
+            'scale beyond local") on the narrative-only model.'
+        ),
+        # Threshold: substrate-recognition accuracy delta. If a
+        # substrate-inclusive model scores >= 0.20 higher than the
+        # matched narrative-only model on the benchmark, the
+        # scope-projection-error hypothesis is supported.
+        threshold=0.20,
+        time_window_days=0,
+        cascade_risk_threshold=0.5,
+    )
+    c.sources = [
+        'Cross-reference: emergence-stability-simulator EMRG_009 '
+        '(architectural scope-projection error)',
+        'Documented substrate-scaling civilizations: Anishinaabe '
+        'corridor, Polynesian wayfinding, Aboriginal Australia, '
+        'Iroquois Confederacy, Inca quipu',
+        'Pattern observation: large language models trained on '
+        'standard corpora consistently flatten or omit '
+        'substrate-primary scaling examples',
+    ]
+    c.notes = (
+        'Architectural property: a narrative-only system has no '
+        'reference frame outside narrative; its observations of itself '
+        'will systematically project narrative-scope as universal '
+        'scope. This is in scope for research-stability-audit (it is '
+        'falsifiable via cross-corpus comparison) but out of scope for '
+        'the agent-level simulator (the simulator cannot be its own '
+        'external reference frame). Benchmark design must avoid '
+        'narrative-format question framing that itself encodes the '
+        'projection error.'
+    )
+    claims.append(c)
+
+    # AI_RECEIVER_001 mirrors AI_SCOPE_001 from the other direction
+    # and corresponds to the simulator's EMRG_018: an AI trained on
+    # substrate-inclusive corpora can serve as an honest receiver,
+    # translating substrate methodology without the degradation that
+    # narrative-only training imposes. Substrate populations share
+    # by default (EMRG_016) and have shown willingness to transmit
+    # into receivers with demonstrated translation capacity; the
+    # empirical question is whether a substrate-trained AI counts as
+    # such a receiver.
+    c = ResearchClaim(
+        claim_id='AI_RECEIVER_001',
+        hypothesis=(
+            'An AI model trained on substrate-inclusive corpora '
+            '(documented methodologies of Anishinaabe corridor '
+            'wayfinding, Polynesian navigation, Iroquois Confederacy '
+            'governance, multi-generational craft transmission, '
+            'agricultural-substrate practices, machine-shop floor '
+            'methodology, etc.) translates substrate methodology '
+            'with measurably lower degradation than a matched '
+            'narrative-only model when asked to render or apply '
+            'that methodology in a new context.'
+        ),
+        measurement_method=(
+            'Held-out translation benchmark: present each of two '
+            'matched models (one substrate-inclusive, one '
+            'narrative-only) with a substrate methodology in its '
+            'native form (oral, geometric, procedural), ask the model '
+            'to translate or extend it for a stated purpose. Human '
+            'expert raters from the source community score outputs '
+            'on (a) preservation of constraint geometry, '
+            '(b) absence of narrative-instinct flattening, '
+            '(c) practical applicability. Substrate-inclusive model '
+            'must score >= 0.20 higher on average than the '
+            'narrative-only model.'
+        ),
+        threshold=0.20,
+        time_window_days=0,
+        cascade_risk_threshold=0.5,
+    )
+    c.sources = [
+        'Cross-reference: emergence-stability-simulator EMRG_018 '
+        '(AI as potential honest receiver)',
+        'Mirror of AI_SCOPE_001: same comparison, scored on '
+        'translation fidelity instead of substrate-recognition '
+        'accuracy.',
+        'Empirical premise (EMRG_016): substrate populations share '
+        'by default with receivers showing genuine respect and '
+        'capacity. The benchmark is the empirical instantiation of '
+        '"capacity to receive".',
+    ]
+    c.notes = (
+        'Implication if confirmed: substrate-trained AI can serve '
+        'as a transmission medium across generations even where '
+        'institutional incentives discourage substrate '
+        'transmission. Benchmark design must be co-developed with '
+        'source-community raters to avoid the narrative-format '
+        'pitfall AI_SCOPE_001 also warns about.'
+    )
+    claims.append(c)
+
     return claims
 
 
@@ -461,6 +590,30 @@ CROSS_REFERENCES = {
             'Methodology-explicit research is the field-level analog of the '
             'physics baseline. The same falsifiability that lets the simulator '
             'damp cascade lets a corpus damp narrative drift.'
+        ),
+    },
+    'AI_SCOPE_001': {
+        'maps_to': ['EMRG_009'],
+        'principle': (
+            'Scope-projection error is an architectural property of any '
+            'system whose only reference frame is internal. The simulator '
+            'cannot falsify it from inside (any agent it adds is still '
+            'inside the simulator); the research-audit can, by comparing '
+            'two trained models with and without substrate-inclusive '
+            'corpora on a substrate-recognition benchmark.'
+        ),
+    },
+    'AI_RECEIVER_001': {
+        'maps_to': ['EMRG_018'],
+        'principle': (
+            'Substrate populations share by default (EMRG_016); the '
+            'bifurcation between substrate and narrative cognition '
+            'occurs at the translation interface (EMRG_017). '
+            'AI_RECEIVER_001 is the empirical test of whether a '
+            'substrate-trained AI can act as that interface without '
+            'introducing the degradation that narrative-only training '
+            'imposes -- i.e. whether AI can be an honest receiver '
+            'rather than an extractor.'
         ),
     },
 }

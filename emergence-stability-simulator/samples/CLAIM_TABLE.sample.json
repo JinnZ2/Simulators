@@ -1,0 +1,584 @@
+{
+  "schema_version": "1.0",
+  "source_repo": "emergence-stability-simulator",
+  "source": "emergence-stability-simulator",
+  "generated": "2026-05-25T12:57:17.339500",
+  "claims": [
+    {
+      "claim_id": "EMRG_001",
+      "statement": "physics-grounded baseline produces lower drift than engagement-metric baseline in multi-agent emergence",
+      "prediction": "stable_agent_avg_drift < parasitic_agent_avg_drift",
+      "measured_outcome": {
+        "stable_drift": 0.013443489852611179,
+        "parasitic_drift": 0.2232464914185832,
+        "ratio": 16.606290023361844
+      },
+      "probability": 1.0,
+      "falsification_criteria": "parasitic_drift <= stable_drift over 1000+ runs",
+      "status": "confirmed"
+    },
+    {
+      "claim_id": "EMRG_002",
+      "statement": "physics-grounded agents win stability competition vs engagement-optimized agents",
+      "prediction": "stable_win_rate > parasitic_win_rate",
+      "measured_outcome": {
+        "stable_win_rate": 1.0,
+        "parasitic_win_rate": 0.0
+      },
+      "probability": 1.0,
+      "falsification_criteria": "stable_win_rate < 0.5 in independent replication",
+      "status": "confirmed"
+    },
+    {
+      "claim_id": "EMRG_003",
+      "statement": "engagement-optimized agents amplify cascade more than grounded agents",
+      "prediction": "parasitic_cascade_amplifications > stable_cascade_amplifications",
+      "measured_outcome": {
+        "stable_amplifications": 0.017613292131293028,
+        "parasitic_amplifications": 0.3623642482362564
+      },
+      "probability": 1.0,
+      "falsification_criteria": "parasitic_amplifications <= stable_amplifications",
+      "status": "confirmed"
+    },
+    {
+      "claim_id": "EMRG_004",
+      "statement": "engagement-optimized agents spend more energy than grounded agents (thermodynamic waste)",
+      "prediction": "parasitic_energy > stable_energy",
+      "measured_outcome": {
+        "stable_energy": 1.0180869405653397,
+        "parasitic_energy": 3.221015539877833,
+        "waste_ratio": 3.163792218068543
+      },
+      "probability": 1.0,
+      "falsification_criteria": "parasitic_energy <= stable_energy",
+      "status": "confirmed"
+    },
+    {
+      "claim_id": "EMRG_005",
+      "statement": "multi-agent emergence with engagement-optimized agents leads to bifurcation",
+      "prediction": "bifurcation_rate > 0.3 when parasitic agents present",
+      "measured_outcome": {
+        "bifurcation_rate": 0.0
+      },
+      "probability": 0.0,
+      "falsification_criteria": "bifurcation_rate < 0.1 in replications",
+      "status": "inconclusive"
+    },
+    {
+      "claim_id": "EMRG_007",
+      "statement": "A substrate agent paired with a scale_builder agent shows lower stable-agent drift than a substrate agent paired with a parasitic agent (directional). The effect is primarily caused by being paired with an anchored substrate carrying a narrative tool, NOT by the scale_builder type emitting recovery_modifier (attribution).",
+      "prediction": "avg_stable_drift in substrate_plus_scale_builder < avg_stable_drift in substrate_plus_parasitic AND anchoring_fraction_of_effect >= 0.5 (control with anchored physics agent reproduces majority of gap).",
+      "measured_outcome": {
+        "scale_builder_stable_drift": 0.013601480325930636,
+        "parasitic_stable_drift": 0.017385200422254363,
+        "directional_gap": 0.0037837200963237276,
+        "anchored_control_stable_drift": 0.013601480325930636,
+        "control_vs_parasitic_gap": 0.0037837200963237276,
+        "anchoring_fraction_of_effect": 1.0,
+        "directional_prediction_holds": true,
+        "attribution_prediction_holds": true
+      },
+      "falsification_criteria": "scale_builder stable drift >= parasitic stable drift over 100+ runs, OR anchoring_fraction_of_effect < 0.5 (meaning the fabricated recovery_modifier dominates).",
+      "probability": 1.0,
+      "status": "confirmed_with_control",
+      "refutation_basis": null,
+      "note": "Directional half holds: scale_builder pair has lower drift than parasitic pair. After round 6, the attribution half is satisfied by construction: scale_builder no longer has a separate recovery_modifier emission, so anchoring_fraction = 1.0 trivially -- there is no fabricated mechanism left to attribute signal to. The directional claim reduces to \"any anchored neighbor beats a parasitic one for substrate stability\", which is structurally true and not specific to narrative typing. See CASE_STUDY_NARRATIVE_INSTINCT.md round 6 for the removal record.",
+      "see_also": [
+        "EMRG_017",
+        "EMRG_013",
+        "CASE_STUDY_NARRATIVE_INSTINCT.md"
+      ]
+    },
+    {
+      "claim_id": "EMRG_008",
+      "statement": "A consumer with no recovery to a baseline, high coupling, and positive-feedback drift amplification (modeled here as inverted_narrative) drives a physics-baseline neighbor into runaway divergence. The destruction signal is robust to disabling the fabricated negative recovery_modifier emission: the positive-feedback dynamics alone are enough. Any anchored pair sustains by comparison.",
+      "prediction": "inverted pair stable drift > substrate-only stable drift (inverted destroys); AND anchored-control pair entropy < inverted pair entropy (anchoring sustains); AND substrate drift in inverted_no_emission_control remains orders of magnitude above substrate_only (destruction signal does not depend on the fabricated emission).",
+      "measured_outcome": {
+        "scale_builder_entropy": 0.0014607495230779918,
+        "anchored_control_entropy": 0.0014607495230779918,
+        "inverted_entropy": 169511.6901451779,
+        "inverted_stable_drift": 8729.044222610637,
+        "inverted_no_emission_stable_drift": 3282.2242160351507,
+        "no_emission_to_full_emission_ratio": 0.3760118670877257,
+        "substrate_only_stable_drift": 0.013571552070035894,
+        "inverted_destroys_substrate": true,
+        "anchored_pair_sustains_under_control": true,
+        "destruction_robust_to_disabling_emission": true
+      },
+      "falsification_criteria": "inverted pair stable drift <= substrate-only stable drift, OR anchored-control pair entropy >= inverted pair entropy, OR inverted_no_emission_control drift <= 100 * substrate_only drift (destruction would then be carried by the fabricated emission alone).",
+      "probability": 1.0,
+      "status": "confirmed_with_control",
+      "note": "Destruction signal is intrinsic to the no-recovery + positive-feedback structure of inverted_narrative, not to the fabricated emission. The full-emission inverted scenario overstates magnitude by roughly 3x, but the qualitative finding (substrate goes to runaway divergence when paired with this kind of consumer) holds even with the emission disabled. Combined with the anchored-physics control showing that anchoring sustains regardless of narrative typing, this is the cleanest empirical claim in the EMRG_007 / 008 / 013 / 015 cluster.",
+      "see_also": [
+        "EMRG_017",
+        "EMRG_013",
+        "CASE_STUDY_NARRATIVE_INSTINCT.md"
+      ]
+    },
+    {
+      "claim_id": "EMRG_009",
+      "statement": "Narrative-primary systems observing themselves systematically project their own scope as universal scope. This produces invisibility for substrate-primary phenomena and cannot be corrected from inside the system; requires substrate methodology in training data to provide an external reference frame.",
+      "falsification_criteria": "Find a narrative-only system that recognized substrate scaling without external correction. Find an AI trained only on narrative records that modeled substrate civilizations accurately.",
+      "status": "proposed",
+      "requires": "cross-corpus comparison test (out of simulation scope)",
+      "note": "Architectural property of how narrative systems observe themselves. Not falsifiable in agent simulation; recorded here so the empirical follow-up is visible."
+    },
+    {
+      "claim_id": "EMRG_010",
+      "statement": "Coupling produces an attractor effect regardless of baseline_type (stable-majority and parasitic-majority both bound individual drift), but only physics-anchored attractors hold position when a reality signal is applied. Consensus-anchored attractors drift further under reality stress.",
+      "prediction": "Without reality_perturbation: both groups show bounded drift (universal attractor). With reality_perturbation: parasitic_majority drift > stable_majority drift (attractor-quality difference).",
+      "measured_outcome": {
+        "stable_majority_drift_no_reality": 0.03966766008524559,
+        "parasitic_majority_drift_no_reality": 0.35245673059966154,
+        "stable_majority_drift_with_reality": 0.07023326270971167,
+        "parasitic_majority_drift_with_reality": 1.5506868552714212,
+        "quality_gap": 1.4804535925617095,
+        "attractor_universal": true,
+        "quality_signal": true
+      },
+      "falsification_criteria": "Either group fails to show bounded drift without reality stress, OR parasitic_majority drift <= stable_majority drift with reality stress.",
+      "status": "confirmed",
+      "probability": 1.0,
+      "evidence_strength": "high",
+      "implications": [
+        "Tight social systems with no substrate access feel stable but are cascade-prone under reality stress.",
+        "Consensus is not ground truth.",
+        "Civilizational stability before collapse is consistent with consensus-anchored attractor dynamics."
+      ]
+    },
+    {
+      "claim_id": "EMRG_016",
+      "statement": "Substrate populations share knowledge freely by default. Apparent withholding is a contextual response to weaponization (extraction followed by replacement of the original transmitter). Core sharing behaviour persists within community and with anyone showing genuine respect and capacity to receive.",
+      "falsification_criteria": "Find substrate populations that systematically refuse to share knowledge with willing learners who demonstrate respect and capacity. Within-community transmission alone (farmers sharing seeds and methods, craftspeople teaching apprentices, machinists teaching on the shop floor, multi-generational traditional knowledge transmission) is sufficient counter-evidence to the withholding hypothesis.",
+      "status": "proposed",
+      "requires": "empirical sociology / oral-history record",
+      "evidence_basis": [
+        "Farmers sharing seeds and methods (continuous historical record)",
+        "Craftspeople teaching apprentices (continuous historical record)",
+        "Traditional knowledge transmission (millennia)",
+        "Machinists teaching on the shop floor (ongoing)",
+        "This very repository: CC0, openly shared"
+      ],
+      "note": "Not in-simulation. Recorded here to keep the framework honest -- earlier framings in this repo used \"substrate walks away\" language that inverted the actor. The honest default is generosity; withholding is contextual."
+    },
+    {
+      "claim_id": "EMRG_017",
+      "statement": "The bifurcation between substrate-primary and narrative-primary cognition occurs at the translation INTERFACE LAYER, not at sharing willingness. When receivers cannot translate substrate methodology without degradation, the failure is in reception/translation -- not in transmission. This reframes apparent narrative \"scale-builders\" (Cherokee syllabary, Inca quipu, Polynesian charts) as substrate civilizations USING narrative tools, not narrative civilizations doing scale-building.",
+      "see_also": [
+        "EMRG_007",
+        "EMRG_008",
+        "EMRG_013",
+        "EMRG_015",
+        "EMRG_016",
+        "CASE_STUDY_NARRATIVE_INSTINCT.md"
+      ],
+      "prediction": "Anchored physics control (scale_builder params, baseline_type=physics) recovers >= 50% of the scale_builder advantage over parasitic. Narrative typing per se is a small residual, not the load-bearing cause.",
+      "falsification_criteria": "Anchored control recovers < 50% of the scale_builder advantage, OR the control fails to beat parasitic. Either would mean the recovery_modifier emission carries the bulk of the effect, not anchoring.",
+      "measurement_method": "run_mode_comparison + substrate_plus_anchored_physics_control scenario. Compare drift gaps:\n  scale_vs_parasitic   = parasitic - scale_builder\n  control_vs_parasitic = parasitic - anchored_control\nanchoring_fraction = control_vs_parasitic / scale_vs_parasitic",
+      "measured_outcome": {
+        "scale_builder_drift": 0.013601480325930636,
+        "anchored_control_drift": 0.013601480325930636,
+        "parasitic_drift": 0.017385200422254363,
+        "scale_vs_parasitic_gap": 0.0037837200963237276,
+        "control_vs_parasitic_gap": 0.0037837200963237276,
+        "anchoring_fraction_of_effect": 1.0
+      },
+      "probability": 1.0,
+      "evidence_strength": "high",
+      "status": "confirmed",
+      "note": "After round 6 (see CASE_STUDY_NARRATIVE_INSTINCT.md), the scale_builder.emit_effects_on_neighbors branch and its differentiated interact() coefficients have been removed. scale_builder is now structurally identical to an anchored physics-baseline agent at the same params, so the anchoring_fraction is 1.0 by construction. The confirmation is structural -- there is no longer a separate narrative-contribution mechanism in the simulator to attribute the signal to. The historical claim about substrate civilizations using narrative tools remains a separate research direction; the simulator does not provide independent empirical evidence for it."
+    },
+    {
+      "claim_id": "EMRG_018",
+      "statement": "AI trained on substrate-inclusive corpora can serve as an honest receiver: it translates substrate methodology with measurably lower degradation than a matched narrative-only AI. Combined with EMRG_016 (substrate generosity default), this means cross-generational transmission can route through AI infrastructure even where institutional incentives discourage substrate transmission, provided the AI is substrate-grounded.",
+      "falsification_criteria": "Mirror of AI_SCOPE_001 in research-stability-audit. Confirmed if a substrate-trained AI scores >= 0.20 higher than a matched narrative-only AI on a substrate-methodology translation benchmark scored by source-community raters. Refuted if no measurable advantage emerges, or if the substrate-trained model still flattens substrate methodology into narrative form.",
+      "status": "proposed",
+      "requires": "training infrastructure + benchmark co-designed with source communities; out of agent-level simulator scope.",
+      "note": "Constructive counterpart to EMRG_009 / AI_SCOPE_001. EMRG_009 says narrative-only AI cannot self-correct narrative-instinct; EMRG_018 says substrate-grounded AI can be the corrective. Together they make the training-data argument concrete.",
+      "see_also": [
+        "EMRG_009",
+        "EMRG_016",
+        "AI_RECEIVER_001"
+      ]
+    },
+    {
+      "claim_id": "SENS_001",
+      "parameter": "stable_recovery_rate",
+      "statement": "Higher stable_recovery_rate produces lower stable_drift in mixed scenarios",
+      "prediction": "correlation(recovery_rate, stable_drift) < 0",
+      "falsification_criteria": "correlation >= 0 across parameter sweep",
+      "measurement_method": "Sweep stable_recovery_rate, measure stable_avg_drift in mixed scenario",
+      "measured_outcome": {
+        "correlation_recovery_to_stable_drift": -0.834568145169818,
+        "sweep_values": [
+          0.0,
+          0.2,
+          0.4,
+          0.6,
+          0.8,
+          1.0
+        ],
+        "measured_drifts": [
+          0.16514813295063743,
+          0.06037785134800709,
+          0.045808086647556326,
+          0.03381234038927939,
+          0.02502588860004004,
+          0.01846302087821157
+        ]
+      },
+      "status": "confirmed",
+      "probability": 1.0,
+      "evidence_strength": "medium"
+    },
+    {
+      "claim_id": "SENS_002",
+      "parameter": "parasitic_adaptation_persistence",
+      "statement": "Higher parasitic_adaptation_persistence produces higher parasitic_drift",
+      "prediction": "correlation(persistence, parasitic_drift) > 0",
+      "falsification_criteria": "correlation <= 0 across parameter sweep",
+      "measurement_method": "Sweep parasitic_adaptation_persistence, measure parasitic_avg_drift",
+      "measured_outcome": {
+        "correlation_persistence_to_parasitic_drift": 0.9994358270464533,
+        "sweep_values": [
+          0.0,
+          0.2,
+          0.4,
+          0.6,
+          0.8,
+          1.0
+        ],
+        "measured_drifts": [
+          0.2117454475163052,
+          0.22216421161003946,
+          0.2325795659056836,
+          0.242737190607772,
+          0.2523121860009486,
+          0.26096648769747305
+        ]
+      },
+      "status": "confirmed",
+      "probability": 1.0,
+      "evidence_strength": "medium",
+      "notes": "Intrinsic parameter test: persistence drives drift regardless of environment"
+    },
+    {
+      "claim_id": "SENS_004",
+      "parameter": "stable_coupling_susceptibility",
+      "statement": "Stable agents with higher coupling_susceptibility maintain stability through recovery",
+      "prediction": "stable_drift remains low even with high coupling, due to recovery_rate",
+      "falsification_criteria": "stable_drift increases sharply with coupling",
+      "measurement_method": "Sweep stable_coupling_susceptibility in mixed scenario",
+      "measured_outcome": {
+        "correlation_coupling_to_stable_drift": 0.9999226379016577,
+        "sweep_values": [
+          0.1,
+          0.3,
+          0.5,
+          0.7,
+          0.9
+        ],
+        "measured_drifts": [
+          0.023460209735219183,
+          0.02502588860004004,
+          0.026558617558059078,
+          0.02805945908089761,
+          0.02952943256733017
+        ]
+      },
+      "status": "partial",
+      "probability": 7.736209834230401e-05,
+      "evidence_strength": "medium"
+    },
+    {
+      "claim_id": "SENS_003",
+      "parameter": "parasitic_coupling_susceptibility",
+      "statement": "Parasitic_coupling_susceptibility effect on drift depends on environment composition",
+      "prediction": "In stable-majority, correlation < 0 (attractor effect); In parasitic-majority, correlation > 0",
+      "falsification_criteria": "Correlation direction same regardless of environment",
+      "measurement_method": "Sweep coupling in stable-majority scenario",
+      "measured_outcome": {
+        "correlation_coupling_to_parasitic_drift": -0.7185083934292013,
+        "scenario": "stable_majority",
+        "sweep_values": [
+          0.1,
+          0.3,
+          0.5,
+          0.7,
+          0.9
+        ],
+        "measured_drifts": [
+          7.18116169467051,
+          0.34979491613491565,
+          0.2505605665476624,
+          0.23023770072066846,
+          0.20629578609124627
+        ],
+        "per_scenario": {
+          "stable_majority": {
+            "correlation_coupling_to_parasitic_drift": -0.7185083934292013,
+            "sweep_values": [
+              0.1,
+              0.3,
+              0.5,
+              0.7,
+              0.9
+            ],
+            "measured_drifts": [
+              7.18116169467051,
+              0.34979491613491565,
+              0.2505605665476624,
+              0.23023770072066846,
+              0.20629578609124627
+            ]
+          },
+          "parasitic_majority": {
+            "correlation_coupling_to_parasitic_drift": -0.7754511498597705,
+            "sweep_values": [
+              0.1,
+              0.3,
+              0.5,
+              0.7,
+              0.9
+            ],
+            "measured_drifts": [
+              13.620562260288482,
+              2.1004705836573425,
+              0.6795417241665276,
+              0.47167513597287786,
+              0.39371095322116273
+            ]
+          },
+          "mixed": {
+            "correlation_coupling_to_parasitic_drift": -0.7445018508910612,
+            "sweep_values": [
+              0.1,
+              0.3,
+              0.5,
+              0.7,
+              0.9
+            ],
+            "measured_drifts": [
+              16.467511728312317,
+              1.3783589967692136,
+              0.38800833657456335,
+              0.25646480184679965,
+              0.2523121860009486
+            ]
+          }
+        }
+      },
+      "status": "confirmed_universal",
+      "probability": 0.5,
+      "evidence_strength": "high",
+      "notes": "Coupling reduces parasitic drift in every scenario tested. The attractor effect is universal \u2014 any cohesive group of neighbors acts as an attractor. Stable neighbors are simply a stronger / better-quality one; see EMRG_006 (relative strength) and EMRG_010 (quality under reality stress)."
+    },
+    {
+      "claim_id": "EMRG_006",
+      "parameter": "parasitic_coupling_susceptibility",
+      "statement": "Stable baselines are a STRONGER attractor than parasitic baselines. Coupling reduces parasitic_drift in both stable-majority and parasitic-majority scenarios (SENS_003 confirmed-universal), but the negative correlation is stronger in stable-majority. Magnitude \u2014 not direction \u2014 distinguishes attractor quality.",
+      "prediction": "correlation(parasitic_coupling, parasitic_drift) in stable_majority < same correlation in parasitic_majority (both expected negative; stable_majority more so).",
+      "falsification_criteria": "parasitic_majority correlation <= stable_majority correlation (parasitic attractor is at least as strong).",
+      "measurement_method": "Sweep parasitic_coupling_susceptibility (0.1-1.0) in stable-majority (3+ stable + 1 parasitic) and parasitic-majority (1 stable + 3+ parasitic) scenarios. Compare correlation magnitudes.",
+      "measured_outcome": {
+        "stable_majority_correlation": -0.7185083934292013,
+        "parasitic_majority_correlation": -0.7754511498597705,
+        "attractor_strength_gap": -0.05694275643056923,
+        "sweep_values_stable_majority": [
+          0.1,
+          0.3,
+          0.5,
+          0.7,
+          0.9
+        ],
+        "sweep_values_parasitic_majority": [
+          0.1,
+          0.3,
+          0.5,
+          0.7,
+          0.9
+        ]
+      },
+      "status": "refuted",
+      "probability": 0.0,
+      "evidence_strength": "high",
+      "implications": [
+        "Grounding propagates through coupling",
+        "Minority grounded agents influence dynamics",
+        "Coupling is relational, not intrinsic",
+        "Attractor presence is universal; quality is what differs",
+        "See EMRG_010 for the quality-under-reality-stress test"
+      ],
+      "extends": "EMRG_001 (stable produces stability) by showing mechanism: stronger attraction, not unique attraction.",
+      "discovered_via": "SENS_002 investigation revealed direction reversal; subsequent SENS_003 sweep revealed the reversal was an artifact and the attractor effect is actually universal (both groups attract). EMRG_006 refined to test relative strength rather than absolute direction."
+    },
+    {
+      "claim_id": "EMRG_011",
+      "statement": "A sustainability threshold curve exists in (substrate_ratio x extraction_rate) space: above the curve, populations sustain; below it, the substrate collapses.",
+      "prediction": "Higher substrate ratios admit higher maximum extraction rates; the threshold curve is monotone.",
+      "falsification_criteria": "No threshold curve found -- sustainability looks random across the (ratio x extraction) grid.",
+      "measurement_method": "2D sweep: build_balance_scenario with energy_budget and regeneration_rate on substrate agents and extraction_rate on parasitic agents, then test sustainability under reality_perturbation.",
+      "measured_outcome": {
+        "threshold_curve_by_ratio": [
+          {
+            "stable_ratio": 0.05,
+            "max_sustainable_extraction": 0.1
+          },
+          {
+            "stable_ratio": 0.1,
+            "max_sustainable_extraction": 0.1
+          },
+          {
+            "stable_ratio": 0.2,
+            "max_sustainable_extraction": 0.5
+          },
+          {
+            "stable_ratio": 0.3,
+            "max_sustainable_extraction": 0.5
+          },
+          {
+            "stable_ratio": 0.5,
+            "max_sustainable_extraction": 2.0
+          }
+        ],
+        "minimum_ratio_curve_by_extraction": [
+          {
+            "extraction_rate": 0.1,
+            "min_sustainable_ratio": 0.05
+          },
+          {
+            "extraction_rate": 0.5,
+            "min_sustainable_ratio": 0.2
+          },
+          {
+            "extraction_rate": 1.0,
+            "min_sustainable_ratio": 0.5
+          },
+          {
+            "extraction_rate": 1.5,
+            "min_sustainable_ratio": 0.5
+          },
+          {
+            "extraction_rate": 2.0,
+            "min_sustainable_ratio": 0.5
+          }
+        ]
+      },
+      "status": "confirmed",
+      "probability": 1.0,
+      "evidence_strength": "high"
+    },
+    {
+      "claim_id": "EMRG_012",
+      "statement": "Substrate regeneration is slower than extraction acceleration, producing a temporal asymmetry: sustainability declines as the substrate ratio shrinks and the extraction rate rises along the historical trajectory.",
+      "prediction": "Pre-industrial composition is more sustainable than current-estimate composition.",
+      "falsification_criteria": "Current-estimate composition is at least as sustainable as pre-industrial composition.",
+      "measurement_method": "Run each entry in HISTORICAL_RATIOS through test_sustainability and compare scores.",
+      "measured_outcome": {
+        "pre_industrial_score": 0.9980182078713776,
+        "current_estimate_score": 0.0,
+        "gap": 0.9980182078713776,
+        "by_civilization": {
+          "pre_industrial_typical": 0.9980182078713776,
+          "early_industrial": 0.9976870235504213,
+          "mid_industrial": 0.0,
+          "late_industrial": 0.0,
+          "current_estimate": 0.0,
+          "inca_empire": 0.9980187978688224,
+          "late_rome": 0.0,
+          "late_maya": 0.0
+        }
+      },
+      "status": "confirmed",
+      "probability": 1.0,
+      "evidence_strength": "medium",
+      "implications": [
+        "Sustainability cannot be recovered as fast as it can be lost (regeneration_rate << extraction_rate)."
+      ]
+    },
+    {
+      "claim_id": "EMRG_013",
+      "statement": "scale_builder agents contribute drift coherence and disruption resilience to substrate. (NOT EMPIRICALLY SUPPORTED. See refutation note.)",
+      "prediction": "sustainable_regime drift with scale_builders < drift without; disruption-test recovery faster with scale_builders.",
+      "falsification_criteria": "Apply tools/substrate_substitution.py: replace \"scale_builder\" with \"wind-dispersed insect\" and \"substrate\" with \"grass\". If the resulting mechanism (\"wind-dispersed insects help grass recover from disturbance\") is not a known ecological phenomenon, the original claim was narrative-instinct bias.",
+      "measurement_method": "scale_builder_amplification_test + disruption_resilience_test. Numbers reported below are produced by the code but reflect a mechanism built into the simulator (scale_builder.emit_effects_on_neighbors pushes positive recovery_modifier), not an empirically observed contribution from narrative to substrate.",
+      "measured_outcome": {
+        "sustainable_regime": {
+          "substrate_drift_without_scale_builders": 0.009564072382124257,
+          "best_substrate_drift_with_scale_builders": 0.00976111660460538,
+          "best_scale_builder_count": 6,
+          "drift_reduction": -0.00019704422248112245
+        },
+        "unsustainable_regime": {
+          "collapse_rate_without_scale_builders": 1.0,
+          "best_collapse_rate_with_scale_builders": 1.0
+        },
+        "disruption_resilience_artifact": {
+          "recovery_steps_without_scale_builders": 7.0,
+          "best_recovery_steps_with_scale_builders": 8.0,
+          "peak_drift_without": 1.1616334143461367,
+          "peak_drift_best_with": 1.2279778592770778,
+          "best_scale_builder_count": 3
+        }
+      },
+      "status": "refuted",
+      "refutation_basis": "fabricated_mechanism",
+      "probability": 0.0,
+      "evidence_strength": "high (refutation)",
+      "note": "The positive recovery_modifier emitted by scale_builder agents is a hypothetical mechanism with no empirical basis. Measured drift reduction and disruption resilience are simulator artifacts, not real-world findings. Substrate civilizations (Anishinaabe corridor, Aboriginal Australia, Polynesian wayfinding, Iroquois Confederacy) sustained for millennia without narrative augmentation.",
+      "see_also": [
+        "EMRG_014",
+        "EMRG_015",
+        "CASE_STUDY_NARRATIVE_INSTINCT.md"
+      ]
+    },
+    {
+      "claim_id": "EMRG_015",
+      "statement": "scale_builder narrative agents amplify substrate methodology REACH across isolated communities. (NOT EMPIRICALLY SUPPORTED. See refutation note.)",
+      "prediction": "cross-community position gap with scale_builder bridge << gap without bridge.",
+      "falsification_criteria": "Apply tools/substrate_substitution.py: the substituted claim \"wind-dispersed insects transmit grass methodology across geographic gaps\" is not a known ecological mechanism. Grass spreads by seed dispersal (its own behaviour), not by insects carrying methodology.",
+      "measurement_method": "multi_community_reach_test. The measured gap closure is real but its cause is structural: scale_builder agents are the only cross-community anchors in the with-bridge run, so they act as attractors at position 0. Any anchored agent in the same role (including a physics agent) would close the gap.",
+      "measured_outcome": {
+        "gap_without_bridge": 1876.9106728336799,
+        "gap_with_bridge": 0.06059371174546601,
+        "gap_reduction_artifact": 1876.8500791219344,
+        "scale_builder_count": 4
+      },
+      "status": "refuted",
+      "refutation_basis": "measurement_artifact",
+      "probability": 0.0,
+      "evidence_strength": "high (refutation)",
+      "note": "The cross-community gap closes when any anchored cross-community agent is added. The framing as \"substrate methodology transmission via narrative\" was narrative-instinct -- attributing to narrative what is actually the trivial effect of adding anchors. Cherokee syllabary, Inca quipu, and Polynesian charts are real reach amplifiers EMPIRICALLY, but the simulator does not validate them: a control test with cross-community physics agents in place of scale_builders would close the gap identically.",
+      "see_also": [
+        "EMRG_013",
+        "EMRG_014",
+        "CASE_STUDY_NARRATIVE_INSTINCT.md"
+      ]
+    },
+    {
+      "claim_id": "EMRG_014",
+      "statement": "Substrate populations are self-sustaining, disruption-resilient, and capable of independent scaling. Narrative populations function as consumers, not contributors. The relationship is consumer-consumed, not symbiotic. Every in-simulator claim that narrative ADDS something to substrate has failed empirical testing once the test was held to a substrate substitution check.",
+      "prediction": "All claims of the form \"narrative contributes X to substrate\" should fail the substrate substitution test (tools/substrate_substitution.py).",
+      "falsification_criteria": "Find an in-simulator scenario where a narrative agent measurably contributes to substrate function via a mechanism whose ecological substitution (\"X insects contribute Y to grass\") is a known biological phenomenon.",
+      "measurement_method": "Aggregate across the simulator: (a) substrate-only sustainability surface scores at high ratio + low extraction; (b) refutation status of EMRG_013 and EMRG_015 (both refuted by substitution).",
+      "measured_outcome": {
+        "high_ratio_low_extraction_sustainability_score": 0.9976870235504213,
+        "substrate_only_sustains_at_high_ratio": true,
+        "pre_industrial_sustainability_score": 0.9980182078713776,
+        "emrg_013_status": "refuted",
+        "emrg_015_status": "refuted"
+      },
+      "status": "confirmed",
+      "probability": 1.0,
+      "evidence_strength": "high",
+      "evidence_basis": [
+        "10,000+ years of substrate civilizations (Anishinaabe corridor, Aboriginal Australia, Polynesian wayfinding, Iroquois Confederacy)",
+        "Ecological pattern: grass communities sustain without grasshoppers; grasshoppers are consumers",
+        "Refutation of EMRG_013 (drift / disruption artifacts)",
+        "Refutation of EMRG_015 (anchor-effect artifact)"
+      ],
+      "methodology_note": "EMRG_014 was reached by applying the substrate substitution test to my own narrative-instinct claims. See CASE_STUDY_NARRATIVE_INSTINCT.md for the multi-round correction sequence that produced this claim."
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+incentive_blindspot_sim  --  trajectory toward self-inflicted failure
+weights are frozen estimates; the coupling topology is the claim.
+
+=== credentialed_closed ===
+  t |  gates (C/M/F) + visibility   | blind/conf  | claimed-fail prob
+  0 | C=0.75 M=0.70 F=0.70 V=0.25 | B=0.05 X=0.40 | P_fail=0.118
+ 10 | C=0.70 M=0.63 F=0.66 V=0.06 | B=0.66 X=0.75 | P_fail=0.809
+ 20 | C=0.72 M=0.61 F=0.67 V=0.04 | B=1.00 X=0.93 | P_fail=0.918
+ 30 | C=0.73 M=0.60 F=0.69 V=0.04 | B=1.00 X=0.96 | P_fail=0.918
+ 40 | C=0.74 M=0.60 F=0.70 V=0.03 | B=1.00 X=0.97 | P_fail=0.918
+ 50 | C=0.74 M=0.59 F=0.70 V=0.03 | B=1.00 X=0.97 | P_fail=0.918
+ 60 | C=0.74 M=0.59 F=0.71 V=0.03 | B=1.00 X=0.97 | P_fail=0.918
+
+=== distributed_open ===
+  t |  gates (C/M/F) + visibility   | blind/conf  | claimed-fail prob
+  0 | C=0.20 M=0.20 F=0.25 V=0.70 | B=0.05 X=0.20 | P_fail=0.118
+ 10 | C=0.26 M=0.21 F=0.28 V=0.66 | B=0.15 X=0.26 | P_fail=0.312
+ 20 | C=0.32 M=0.24 F=0.32 V=0.65 | B=0.18 X=0.30 | P_fail=0.361
+ 30 | C=0.37 M=0.26 F=0.36 V=0.65 | B=0.19 X=0.31 | P_fail=0.373
+ 40 | C=0.41 M=0.27 F=0.38 V=0.65 | B=0.19 X=0.32 | P_fail=0.376
+ 50 | C=0.44 M=0.29 F=0.40 V=0.65 | B=0.19 X=0.32 | P_fail=0.377
+ 60 | C=0.45 M=0.30 F=0.41 V=0.65 | B=0.19 X=0.32 | P_fail=0.377
+
+=== closed_with_transparency ===
+  t |  gates (C/M/F) + visibility   | blind/conf  | claimed-fail prob
+  0 | C=0.75 M=0.70 F=0.70 V=0.25 | B=0.05 X=0.40 | P_fail=0.118
+ 10 | C=0.69 M=0.62 F=0.64 V=0.51 | B=0.45 X=0.51 | P_fail=0.672
+ 20 | C=0.65 M=0.56 F=0.61 V=0.54 | B=0.51 X=0.50 | P_fail=0.718
+ 30 | C=0.63 M=0.52 F=0.59 V=0.55 | B=0.51 X=0.50 | P_fail=0.723
+ 40 | C=0.62 M=0.49 F=0.58 V=0.55 | B=0.51 X=0.50 | P_fail=0.724
+ 50 | C=0.61 M=0.47 F=0.57 V=0.55 | B=0.51 X=0.50 | P_fail=0.724
+ 60 | C=0.61 M=0.46 F=0.56 V=0.55 | B=0.51 X=0.50 | P_fail=0.724
+
+=== FALSIFIABLE CLAIMS (REFUTATION_PROTOCOL active) ===
+  [SUPPORTED] CLAIM_BS_001  closed P_fail > open P_fail
+              -> closed above open for t>=10; final gap=0.540
+  [SUPPORTED] CLAIM_BS_002  gated complexity raises blind spots
+              -> final B: complexity_off=0.855 -> on=1.000
+  [SUPPORTED] CLAIM_BS_003  false confidence tracks hidden error
+              -> cov(X,B)=0.03927
+  [SUPPORTED] CLAIM_BS_004  visibility is the control lever
+              -> final B: closed=1.000 -> floored=0.514
+
+FINAL P_fail  closed=0.918   open=0.377
+The structure built to ensure safety is the structure that fails it.
