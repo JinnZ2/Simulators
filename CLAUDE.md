@@ -49,6 +49,17 @@ Repository for different simulations and supporting tooling.
   the predicted deficit, with `[E]`/`[I]`/`[S]` confidence marks per
   cell. Methodology spine: "demote on contact with evidence; never
   modify the table to protect a prior."
+- `incentive-blindspot-sim/` — Coupled difference-equation model of
+  how an institution's incentive structure (credential closure +
+  capital concentration + frame narrowness) gates external
+  visibility multiplicatively, lets blind spots accumulate, and
+  drives the system toward the failure mode it claims to prevent.
+  Six coupled state variables, three scenarios
+  (`credentialed_closed`, `distributed_open`,
+  `closed_with_transparency`), four falsifiable claims
+  (`CLAIM_BS_001..004`) under an explicit `REFUTATION_PROTOCOL`:
+  weights are frozen estimates, the coupling topology is the claim,
+  and a failed check updates the claim — not the weights.
 - `tools/` — Shared utilities.
   - `validate_claim_table.py` — lightweight schema validator for
     any `CLAIM_TABLE.json` produced in the repo; accepts both the
