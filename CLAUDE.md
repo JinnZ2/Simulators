@@ -86,6 +86,20 @@ underneath).
   (`CLAIM_BS_001..004`) under an explicit `REFUTATION_PROTOCOL`:
   weights are frozen estimates, the coupling topology is the claim,
   and a failed check updates the claim — not the weights.
+- `AMOC/` — REGIME_SHIFT trajectory framework for asking what a
+  specific patch of ground does when Atlantic overturning flips.
+  Seven modules (`forcing.py`, `baseline.py`, `divergence.py`,
+  `sitespec.py`, `response.py`, `trajectory.py`, plus the worked
+  `carlton_county.py` slice). Two forcing instruments (`StommelBox`,
+  `KramersWell`) sweep a freshwater-loading control parameter and
+  surface the spinodal; paleo analogs (Younger Dryas, 8.2ka,
+  Heinrich 1) supply patterns; `divergence.py` strips analog terms
+  that needed continental ice / meltwater buffer / permafrost cycle
+  and discounts recovery because present loading is ocean-sourced
+  and not finite. Honest-gap protocol: missing site data stays
+  `None`, response bands widen and tag the gap, never silently
+  fill with false precision. Four claims (`RGS_001..004`) follow
+  the REFUTATION_PROTOCOL pattern.
 - `tools/` — Shared utilities.
   - `validate_claim_table.py` — lightweight schema validator for
     any `CLAIM_TABLE.json` produced in the repo; accepts both the
