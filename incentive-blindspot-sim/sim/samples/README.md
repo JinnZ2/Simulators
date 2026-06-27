@@ -1,3 +1,10 @@
+---
+file_role: artifact
+source: operator
+original_filename: samples/README.md
+summary: Index/description for the committed demo output of the simulator.
+---
+
 # Sample outputs
 
 Committed artifact from `python3 incentive_blindspot_sim.py`.

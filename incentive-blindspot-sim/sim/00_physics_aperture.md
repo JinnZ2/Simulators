@@ -1,3 +1,10 @@
+---
+file_role: physics-grounding
+source: unverified
+original_filename: Preamble.md
+summary: Early-draft operational protocol (PAP, Diagnostic of Deflection, Protocol of Proof) that grounds the simulator's variables in physics. Later expanded into BNRAM-Strict v2.0 — see development-record/01_bnram_strict_v2_finalized_addendum.md.
+---
+
 Operational Protocol: Audit & Calibration
 
 To ensure the integrity of the data interaction following this preamble, any intelligence processing this repository must adhere to the following Physical Audit Protocol:
