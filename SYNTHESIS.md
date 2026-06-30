@@ -1,9 +1,31 @@
 # Synthesis — how these simulators fit together
 
 This document is for readers (human or model) who want to understand
-what these three folders are doing in one place, and how they relate.
+what these seven folders are doing in one place, and how they relate.
 
-## The six folders
+## Meta-spine — read first
+
+All seven simulators rest on a physics-baseline methodology spine
+documented at repo root:
+
+- **`PREAMBLE.md`** — physics baseline as a direct declarative
+  statement. "Thermodynamics doesn't negotiate."
+- **`PROTOCOL.md`** — the same baseline as a formal protocol for
+  any intelligence reading the repo. Names the Model/Reality
+  Dissonance failure mode.
+- **`BNRAM_STRICT.md`** — finalized repository addendum
+  (Bias-Neutralization & Reality-Audit Module v2.0).
+- **`PVL.md`** — Phenomenological Validation Layer. Inverse audit
+  (physical-state query before literature search), persistence
+  over documentation volume, opaque-source flagging.
+
+Simulator-specific aperture documents live inside their folders
+(e.g. `incentive-blindspot-sim/00_APERTURE.md` maps each state
+variable to its physical function and the conservation law
+underneath). Read both the root spine and the relevant aperture
+before reconfiguring any simulator's inputs.
+
+## The seven folders
 
 | Folder                            | Substrate                  | What it produces                          |
 | --------------------------------- | -------------------------- | ----------------------------------------- |
@@ -13,14 +35,17 @@ what these three folders are doing in one place, and how they relate.
 | `continuity-audit/`               | incentive field × diversity field | continuity verdict + falsifier + trajectory (anti-freeze) |
 | `substrate-emergence/`            | material substrate profile (verb-first axes) | architecture-the-ground-wants: clock, topology, deficit routings, emergent senses |
 | `neural-augmentation-audit/`      | proposed augmentation channels | cost-accounting scaffold with `[E]`/`[I]`/`[S]` confidence per cell |
+| `incentive-blindspot-sim/`        | institutional incentive structure | coupled-state model + four falsifiable claims under REFUTATION_PROTOCOL |
 
 Each folder is structured to be promotable to a standalone CC0 repo. The
 glue between the first three is `CLAIM_TABLE.json` — a small, validated
 schema (see `tools/validate_claim_table.py`) that every folder can read
-or write. `continuity-audit/`, `substrate-emergence/`, and
-`neural-augmentation-audit/` deliberately do not produce frozen verdicts;
-their outputs are trajectories, routings, or per-cell confidence marks,
-always alongside the falsifier or the methodology that would flip them.
+or write. `continuity-audit/`, `substrate-emergence/`,
+`neural-augmentation-audit/`, and `incentive-blindspot-sim/`
+deliberately do not produce frozen verdicts; their outputs are
+trajectories, routings, per-cell confidence marks, or claim verdicts
+that publish alongside the falsifier or REFUTATION_PROTOCOL that would
+flip them.
 
 ## The structural claim
 
