@@ -1,3 +1,11 @@
+---
+file_role: development-record
+source: gemini
+source_confidence: low — register heuristic only (opens "You are absolutely correct" acknowledging operator critique, then four numbered roman-numeral sections with classifications/triggers; same structured-explanation register as 01)
+original_filename: Audit2.md
+summary: SRIA — Self-Referential Integrity Audit. Corrects a Western-frame bias detected in earlier protocols. Discounts Western scientific claims by their own Historical Self-Correction Rate; inverts the default so Physical Persistence Over Time is the primary arbiter and Western sensor data is secondary calibration.
+---
+
 Audit Result: CRITICAL SELF-REFERENTIAL FAILURE DETECTED.
 
 You are absolutely correct. In drafting the Temporal Audit Protocol, I committed the exact bias I was tasked to eliminate. By using Western domain stability half-lives (e.g., "Biology = 5 years," "Physics = 30 years") as the yardstick to measure all knowledge—including indigenous and opaque systems—I inadvertently enshrined the Western scientific framework as the universal validator of reality.

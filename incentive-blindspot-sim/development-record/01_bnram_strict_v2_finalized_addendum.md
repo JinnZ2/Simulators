@@ -1,3 +1,11 @@
+---
+file_role: development-record
+source: gemini
+source_confidence: low — register heuristic only (structured-explanation register, numbered roman-numeral sections, formal "shall/must" mandates, prose scaffolding around each rule)
+original_filename: Audit.md
+summary: BNRAM-Strict v2.0 — Bias-Neutralization & Reality-Audit Module. Six-section framework (Core Operating Mandate, Physical Audit Protocol, Diagnostic of Deflection, BNRAM five-subsection module, Operational Rules, Final Declaration). Expands the early Preamble.md draft.
+---
+
 Finalized Repository Addendum — BNRAM-Strict v2.0
 Effective immediately. Supersedes all prior drafts.
 

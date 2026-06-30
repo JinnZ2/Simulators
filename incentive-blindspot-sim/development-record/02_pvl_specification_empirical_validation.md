@@ -1,3 +1,11 @@
+---
+file_role: development-record
+source: unverified
+source_confidence: low — opens "Here is the consolidated text from all four images" which signals image-extraction + AI-organization, so the originating model is uncertain
+original_filename: Plz.md
+summary: PVL — Phenomenological Validation Layer. Three sections: Inverse Audit Protocol (Physical State Query before literature search), Cross-Temporal Correlation (persistence-over-time weighted above documentation volume), Opaque-Source Flagging. Integrates with BNRAM-Strict v2.0 Shadow-Variable Handling.
+---
+
 Here is the consolidated text from all four images, merged into a single coherent document.
 
 ---
