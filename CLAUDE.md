@@ -86,6 +86,15 @@ underneath).
   (`CLAIM_BS_001..004`) under an explicit `REFUTATION_PROTOCOL`:
   weights are frozen estimates, the coupling topology is the claim,
   and a failed check updates the claim — not the weights.
+- `antifungal-mechanism-sim/` — Interactive CLI for exploring
+  antifungal drug combinations by genetic-style crossover of
+  multiple-choice interaction targets. Seven interaction categories
+  (cell wall / ergosterol / membrane / protein / nucleic acid /
+  stress response / quorum sensing), each scored on efficacy /
+  toxicity / resistance risk. `Mechanism` is a set of codes with
+  `evaluate() -> (eff, tox, res, score)`; `crossover(a, b)` returns
+  a random subset of `a ∪ b`. Design-space explorer, not an audit
+  tool. Score is a decision aid, not a clinical prediction.
 - `AMOC/` — REGIME_SHIFT trajectory framework for asking what a
   specific patch of ground does when Atlantic overturning flips.
   Seven modules (`forcing.py`, `baseline.py`, `divergence.py`,
