@@ -1,3 +1,9 @@
+update grounding pipeline:
+
+# After processing, check for gatekeeping flag
+        if result.get("audit_entry", {}).get("gatekeeping_flag"):
+            report["warning"] = result["audit_entry"]["gatekeeping_reason"]
+
 update safeguards:
 
 def institutional_gatekeeping_check(claim: str) -> tuple:
