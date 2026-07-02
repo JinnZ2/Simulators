@@ -263,6 +263,59 @@ destroy the system.
 
 **Status.** `active`.
 
+## L2 — planetary mass balance
+
+Constraint set: `water_reserve_initial=1e7`, `water_recharge_rate=1000.0`,
+`soil_mass_initial=1e6`, `soil_regen_rate=10.0`,
+`mineral_reserve_initial=5e5`, `mineral_regen_rate=0.0`,
+`carbon_sink_capacity=2e6`, `carbon_uptake_rate=500.0`,
+`max_extraction_ratio=0.8`. All frozen.
+See [`l2_planetary.py`](l2_planetary.py) module docstring.
+
+### GL_L2_001 — water extraction bounded by recharge
+
+**Statement.** `PlanetaryWorld.extract_water` rejects any extraction
+that would cause the reserve to drop below zero, and also caps
+extraction at `max_extraction_ratio * current_reserve`.
+
+**Why it matters.** Water is finite and must be recharged.
+
+**Status.** `active`.
+
+---
+
+### GL_L2_002 — soil erosion bounded by regeneration
+
+**Statement.** `PlanetaryWorld.erode_soil` rejects erosion that exceeds
+`max_extraction_ratio * current_soil` or would drive soil mass negative.
+
+**Why it matters.** Soil formation is slow; erosion must be sustainable.
+
+**Status.** `active`.
+
+---
+
+### GL_L2_003 — minerals are non‑renewable
+
+**Statement.** `PlanetaryWorld.mine_mineral` rejects mining that exceeds
+`max_extraction_ratio * current_reserve` and does NOT add a regen rate.
+
+**Why it matters.** Minerals are effectively finite; no magical replenishment.
+
+**Status.** `active`.
+
+---
+
+### GL_L2_004 — carbon sink has limited capacity
+
+**Statement.** `PlanetaryWorld.emit_carbon` rejects emissions that would
+push cumulative load above `carbon_sink_capacity`.
+
+**Why it matters.** Carbon sinks are finite; overshoot leads to climate
+runaway.
+
+**Status.** `active`.
+
 ## License
 
 CC0. See the repo root [`LICENSE`](../LICENSE).
