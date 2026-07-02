@@ -425,6 +425,48 @@ A probability distribution better reflects reality.
 
 **Status.** `active`.
 
+### GL_Le_005 — measurement gap estimation
+
+**Statement.** `EpistemicInstrument.observe()` returns a `gap_estimate`
+object that includes `sigma` (standard deviation of measurement error)
+and a `confidence_interval` derived from the instrument's known
+limitations (resolution, noise, drift).
+
+**Why it matters.** A measurement without an uncertainty interval is
+incomplete. The gap estimate allows higher layers to account for
+unmeasured variance.
+
+**Status.** `active`.
+
+---
+
+### GL_Le_006 — instrument scoping check
+
+**Statement.** `EpistemicInstrument.instrument_scoped(value)` returns
+`False` if `value` is outside the instrument's declared measurement range
+(when clipping is enabled). This allows the system to flag claims that
+require measurement beyond the instrument's capability.
+
+**Why it matters.** A claim about a human capability that exceeds the
+instrument's range should not be rejected outright—but it should be
+flagged as "unmeasured, not impossible."
+
+**Status.** `active`.
+
+---
+
+### GL_Le_007 — bias integration
+
+**Statement.** When `bias_audit=True`, `EpistemicInstrument.observe()`
+attaches a `bias_report` from the `cultural_lens` to the metadata,
+allowing the instrument's own bias (e.g., human-centric calibration)
+to be flagged.
+
+**Why it matters.** The instrument is not neutral. Its design choices
+embed cultural and epistemic assumptions.
+
+**Status.** `active`.
+
 ## License
 
 CC0. See the repo root [`LICENSE`](../LICENSE).
