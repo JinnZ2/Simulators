@@ -1,3 +1,11 @@
+update safeguard:
+
+# Add to L1 violations list
+l1_violations = [
+    "free energy", "cooling without work", "entropy decrease",
+    "perpetual motion", "100% efficiency", "over-unity"
+]
+
 update run pipeline:
 
 def run_pipeline(claim, source_id="default", human_state=None, ai_state=None):
