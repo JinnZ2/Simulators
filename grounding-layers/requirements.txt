@@ -1,3 +1,7 @@
 numpy
 matplotlib
 scipy
+# --- required for tests ---
+# numpy is the only hard dep for the audit-grade tests. matplotlib and
+# scipy are only needed to run the __main__ demo of each sim; both are
+# imported lazily so the tests run without them.

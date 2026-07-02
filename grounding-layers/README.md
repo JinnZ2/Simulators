@@ -36,11 +36,26 @@ Audit-grade side of the repo: each file's constraint set is stated
 up-front in its docstring; violations are surfaced by the inspector
 and reported alongside the AI's original (violating) proposal.
 
-No `CLAIM_TABLE` yet — the claim structure is not stable enough to pin.
-When it is, expect a `CLAIMS.md` file listing each layer's inspection
-rule as a falsifiable claim (e.g. "L1 rejects any process with total
-`ΔS < 0`"; falsifier: "produce a physical process that halves entropy
-without export to a hotter sink").
+**L0 is the audit-grade pilot** — [`l0_physics_causality.py`](l0_physics_causality.py)
+has a `CONSTRAINTS` block + `REFUTATION_PROTOCOL` in its docstring,
+its demo is wrapped in `if __name__ == "__main__":` so the module is
+safely importable, and its five falsifiable claims (`GL_L0_001..004`
++ `GL_L0_PIN`) are in [`CLAIMS.md`](CLAIMS.md) alongside a full test
+suite ([`tests/test_l0_physics_causality.py`](tests/test_l0_physics_causality.py))
+and a captured sample ([`samples/l0_demo.sample.txt`](samples/l0_demo.sample.txt)).
+
+`GL_L0_001` was falsified during test authoring (its v1 pinned a
+specific rejection reason string; the implementation checks speed
+before finite, so `-Inf` velocity is rejected as "Speed limit
+exceeded" not "Non-finite"). The claim was weakened in place to pin
+the rejection outcome only; the v1 statement is preserved in the
+claim's History block. This is the refutation protocol working as
+designed: the CLAIM changed, the frozen constants did not.
+
+L1–L5 + Lε + temporal + tensor-field remain framed-but-not-pinned —
+the CLAIMS.md contains sketched load-bearing claims (`GL_L{N}_LB`)
+for each but no test wiring yet. When the L0 pattern generalises,
+those get promoted one at a time.
 
 ## Running
 
@@ -55,13 +70,19 @@ emits a matplotlib plot showing the raw proposal vs the grounded
 
 ## Tests
 
-Smoke tests in [`tests/`](tests/) verify the extractions are
-well-formed (parse cleanly, have module docstrings, name the source).
-Stdlib only.
+Two test modules under [`tests/`](tests/):
+
+- `test_extraction_shape.py` — stdlib-only smoke tests over every
+  layer file (parse, docstring, expected names). Runs without numpy.
+- `test_l0_physics_causality.py` — audit-grade tests for L0 (frozen
+  constants + primitive contracts + load-bearing claim + demo pin).
+  Needs `numpy` (`pip install numpy`).
 
 ```
 python3 -m unittest discover grounding-layers/tests
 ```
+
+30 tests total (25 audit-grade for L0 + 5 shape smoke), all green.
 
 ## License
 
