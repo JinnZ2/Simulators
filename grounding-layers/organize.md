@@ -13,6 +13,16 @@ def institutional_gatekeeping_check(claim: str) -> tuple:
             return (True, f"Institutional gatekeeping detected: '{term}'")
     return (False, "")
 
+
+# 2.5 Gatekeeping flag (soft warning)
+        gatekeep_flag, gatekeep_reason = institutional_gatekeeping_check(claim)
+        if gatekeep_flag:
+            # We don't reject, but we add a flag to the audit log
+            audit_entry["gatekeeping_flag"] = True
+            audit_entry["gatekeeping_reason"] = gatekeep_reason
+
+            
+
 update cultural lens:
 
 def _detect_institutional_gatekeeping(self, text: str) -> Optional[str]:
