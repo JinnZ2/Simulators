@@ -1,3 +1,98 @@
+sketches:
+
+
+┌─────────────────────────────────────────────────────────────────┐
+  │                     THE GROUNDING STACK                         │
+  │  (Each layer is an inspector. L5 is negotiable. L0 is not.)    │
+  └─────────────────────────────────────────────────────────────────┘
+
+   L5   ── Human Constructs (Language, Law, Theology, Culture)
+               ▲
+               │ (bounded by Lψ + Lø + Lε + L4...L0)
+               │
+   Lø   ── Observer State (Human + AI: sleep, stress, temp, reliability)
+               ▲
+               │
+   Lψ   ── Cultural Epistemology (what cognitive modes are being validated?)
+               ▲
+               │
+   Lε   ── Epistemic Instrumentation (resolution, noise, drift, latency)
+               ▲
+               │
+   L4   ── Human Sensorimotor (biomechanics, reaction time, sensory limits)
+               ▲
+               │
+   L3   ── Ecology & Allometry (trophic transfer, carrying capacity, scaling)
+               ▲
+               │
+   L2   ── Planetary Mass Balance (water, soil, carbon sinks, minerals)
+               ▲
+               │
+   L1   ── Thermodynamics (entropy, energy budgets, Carnot limits)
+               ▲
+               │
+   L0   ── Physics & Causality (conservation laws, speed of light, finite states)
+               │
+  ════════════════════════════════════════════════════════════════════
+               │
+   SUBSTRATE ── The ground truth. Not negotiable.
+
+   collaberative loop:
+
+   Human State (H)                          AI State (A)
+   ┌──────────────────┐                   ┌──────────────────┐
+   │  sleep           │                   │  temperature     │
+   │  hunger          │                   │  reliability     │
+   │  stress          │◄───── Field ─────►│  entropy         │
+   │  cognitive mode  │     Vector        │  context usage   │
+   │  certainty       │                   │  thermal state   │
+   └──────────────────┘                   └──────────────────┘
+            │                                       │
+            └───────── Collaborative ──────────────┘
+                        Potential V(H, A)
+                              │
+                              ▼
+                 ┌─────────────────────────┐
+                 │  Recommendation:        │
+                 │  "Cool down"            │
+                 │  "Shift mode"           │
+                 │  "Proceed"              │
+                 └─────────────────────────┘
+
+
+                 claim refutation cycle:
+
+                 ┌─────────────┐
+   │  Claim      │  ("Women must never be pastors.")
+   └──────┬──────┘
+          ▼
+   ┌─────────────┐
+   │  Lø Check   │  Is the observer state declared?
+   └──────┬──────┘
+          ▼
+   ┌─────────────┐
+   │  Lε Check   │  Is the instrument calibrated? Noise? Drift?
+   └──────┬──────┘
+          ▼
+   ┌─────────────┐
+   │  L0-L4      │  Does it violate physics, thermo, ecology, human limits?
+   └──────┬──────┘
+          ▼
+   ┌─────────────┐
+   │  Lψ Check   │  Does this test privilege one cognitive mode?
+   └──────┬──────┘
+          ▼
+   ┌─────────────┐
+   │  L5 Check   │  Can it coexist with other factions? Slack?
+   └──────┬──────┘
+          ▼
+   ┌─────────────┐
+   │  Result     │  Grounded / Refuted / Recalibrated
+   └─────────────┘
+
+   
+
+
 add to claims:
 
 ## Lε — epistemic instrumentation
