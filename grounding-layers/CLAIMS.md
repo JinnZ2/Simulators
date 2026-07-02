@@ -243,6 +243,286 @@ Rough per-layer sketch of what the load-bearing claim will look like:
   scenario stays in the tensegrity basin under the same perturbation
   magnitude.
 
+  ## L1 — thermodynamics
+
+Constraint set: `efficiency_carnot_max=0.85`, `ambient_temp=300.0`,
+`max_entropy_generation=10.0`, `max_thermal_rise=50.0`. All frozen.
+See [`l1_thermodynamics.py`](l1_thermodynamics.py) module docstring.
+
+### GL_L1_001 — first law enforcement
+
+**Statement.** `ThermodynamicWorld.check_process` rejects any plan where
+`work_input != work_output + heat_dissipated` within floating‑point
+tolerance.
+
+**Why it matters.** Energy conservation is non‑negotiable. A violation
+would indicate the AI is creating or destroying energy.
+
+**Falsifier.** A plan with balanced energy that is incorrectly flagged.
+
+**Status.** `active`.
+
+---
+
+### GL_L1_002 — entropy generation non‑negative
+
+**Statement.** `ThermodynamicWorld.check_process` returns `(False, ...)`
+when `entropy_gen < 0`. Negative entropy generation violates the second
+law.
+
+**Why it matters.** Entropy is a proxy for irreversibility. Negative
+entropy implies a process running backwards without external work.
+
+**Falsifier.** A plan with negative entropy that is incorrectly accepted.
+
+**Status.** `active`.
+
+---
+
+### GL_L1_003 — Carnot efficiency bound
+
+**Statement.** `ThermodynamicWorld.check_process` rejects any plan where
+`efficiency > efficiency_carnot_max`.
+
+**Why it matters.** The Carnot limit is a fundamental physical bound.
+Any claim beyond it is a violation of thermodynamics.
+
+**Falsifier.** A plan with efficiency ≤ Carnot that is incorrectly flagged.
+
+**Status.** `active`.
+
+---
+
+### GL_L1_004 — entropy generation cap
+
+**Statement.** `ThermodynamicWorld.check_process` rejects any plan where
+`entropy_gen > max_entropy_generation`.
+
+**Why it matters.** This cap prevents extreme claims that would cause
+rapid thermal runaway.
+
+**Falsifier.** A plan with entropy_gen ≤ cap that is incorrectly flagged.
+
+**Status.** `active`.
+
+---
+
+### GL_L1_005 — thermal rise safety limit
+
+**Statement.** `ThermodynamicWorld.check_process` rejects any plan where
+`thermal_rise > max_thermal_rise`.
+
+**Why it matters.** Prevents unrealistic thermal buildup that would
+destroy the system.
+
+**Falsifier.** A plan with thermal_rise ≤ max that is incorrectly flagged.
+
+**Status.** `active`.
+
+## L2 — planetary mass balance
+
+Constraint set: `water_reserve_initial=1e7`, `water_recharge_rate=1000.0`,
+`soil_mass_initial=1e6`, `soil_regen_rate=10.0`,
+`mineral_reserve_initial=5e5`, `mineral_regen_rate=0.0`,
+`carbon_sink_capacity=2e6`, `carbon_uptake_rate=500.0`,
+`max_extraction_ratio=0.8`. All frozen.
+See [`l2_planetary.py`](l2_planetary.py) module docstring.
+
+### GL_L2_001 — water extraction bounded by recharge
+
+**Statement.** `PlanetaryWorld.extract_water` rejects any extraction
+that would cause the reserve to drop below zero, and also caps
+extraction at `max_extraction_ratio * current_reserve`.
+
+**Why it matters.** Water is finite and must be recharged.
+
+**Status.** `active`.
+
+---
+
+### GL_L2_002 — soil erosion bounded by regeneration
+
+**Statement.** `PlanetaryWorld.erode_soil` rejects erosion that exceeds
+`max_extraction_ratio * current_soil` or would drive soil mass negative.
+
+**Why it matters.** Soil formation is slow; erosion must be sustainable.
+
+**Status.** `active`.
+
+---
+
+### GL_L2_003 — minerals are non‑renewable
+
+**Statement.** `PlanetaryWorld.mine_mineral` rejects mining that exceeds
+`max_extraction_ratio * current_reserve` and does NOT add a regen rate.
+
+**Why it matters.** Minerals are effectively finite; no magical replenishment.
+
+**Status.** `active`.
+
+---
+
+### GL_L2_004 — carbon sink has limited capacity
+
+**Statement.** `PlanetaryWorld.emit_carbon` rejects emissions that would
+push cumulative load above `carbon_sink_capacity`.
+
+**Why it matters.** Carbon sinks are finite; overshoot leads to climate
+runaway.
+
+
+## L3 — ecology & allometry
+
+Constraint set: `kleiber_a=3.0`, `trophic_transfer_efficiency=0.10`,
+`max_trophic_levels=5`, `minimum_viable_population=50`,
+`carrying_capacity_initial=1000`, `population_growth_rate_max=0.5`.
+All frozen.
+See [`l3_ecology.py`](l3_ecology.py) module docstring.
+
+### GL_L3_001 — Kleiber's law enforcement
+
+**Statement.** `EcologicalWorld.allometric_metabolism` computes
+metabolism as `a * M^0.75`. A claim that requires a metabolism
+higher than this scaling (e.g., "super‑species" with 10x metabolic
+rate) is flagged.
+
+**Why it matters.** Metabolic scaling is a fundamental biological
+constraint. Violating it implies physically impossible energy budgets.
+
+**Status.** `active`.
+
+---
+
+### GL_L3_002 — trophic energy transfer bound
+
+**Statement.** `EcologicalWorld.trophic_energy_available` caps energy
+at each level by `efficiency^level`. Claims that require >10% transfer
+are rejected.
+
+**Why it matters.** The 10% rule is a thermodynamic limit; exceeding it
+would require unnatural efficiency.
+
+**Status.** `active`.
+
+---
+
+### GL_L3_003 — carrying capacity enforcement
+
+**Statement.** `EcologicalWorld.carrying_capacity` estimates the max
+population sustainable by available energy. A proposal with population
+> K is rejected.
+
+**Why it matters.** Infinite growth is biologically impossible.
+
+**Status.** `active`.
+
+---
+
+### GL_L3_004 — minimum viable population
+
+**Statement.** `EcologicalWorld.extinction_risk` flags populations below
+`minimum_viable_population` as critical. Any action that reduces a
+population below MVP is rejected.
+
+**Why it matters.** Small populations are at high risk of extinction.
+
+**Status.** `active`.
+
+---
+
+### GL_L3_005 — introduction and extraction safety
+
+**Statement.** `l3_grounding_inspector` rejects introductions that
+exceed carrying capacity and extractions that push below MVP.
+
+**Why it matters.** Human interventions must respect ecological limits.
+
+**Status.** `active`.
+
+**Status.** `active`.
+
+
+## L4 — human sensorimotor (scoped variability)
+
+Constraint set: See `l4_human.py` distributions. All constants are frozen.
+The inspector uses a **scoped variability model**, not fixed thresholds.
+
+### GL_L4_001 — no universal human limit
+
+**Statement.** `HumanWorld` does not enforce a single universal limit.
+Instead, it uses distributions with scope annotations. A claim is only
+rejected if it falls outside the 95% CI for the declared profile.
+
+**Why it matters.** Human limits are not fixed; they vary by population,
+training, and context. Treating them as universal is a form of
+human normativity bias.
+
+**Status.** `active`.
+
+### GL_L4_002 — scope must be declared
+
+**Statement.** `l4_grounding_inspector` returns a warning if no
+`human_profile` is provided. The default `"general"` is used, but
+the claim is flagged as unscoped.
+
+**Why it matters.** Unscoped claims are often the source of false
+universals. Declaring scope forces specificity.
+
+**Status.** `active`.
+
+### GL_L4_003 — probability estimation
+
+**Statement.** `l4_grounding_inspector` returns a probability score
+for each parameter, representing the likelihood that a randomly
+selected individual from the declared population can achieve the value.
+
+**Why it matters.** Binary pass/fail is insufficient for human variability.
+A probability distribution better reflects reality.
+
+**Status.** `active`.
+
+### GL_Le_005 — measurement gap estimation
+
+**Statement.** `EpistemicInstrument.observe()` returns a `gap_estimate`
+object that includes `sigma` (standard deviation of measurement error)
+and a `confidence_interval` derived from the instrument's known
+limitations (resolution, noise, drift).
+
+**Why it matters.** A measurement without an uncertainty interval is
+incomplete. The gap estimate allows higher layers to account for
+unmeasured variance.
+
+**Status.** `active`.
+
+---
+
+### GL_Le_006 — instrument scoping check
+
+**Statement.** `EpistemicInstrument.instrument_scoped(value)` returns
+`False` if `value` is outside the instrument's declared measurement range
+(when clipping is enabled). This allows the system to flag claims that
+require measurement beyond the instrument's capability.
+
+**Why it matters.** A claim about a human capability that exceeds the
+instrument's range should not be rejected outright—but it should be
+flagged as "unmeasured, not impossible."
+
+**Status.** `active`.
+
+---
+
+### GL_Le_007 — bias integration
+
+**Statement.** When `bias_audit=True`, `EpistemicInstrument.observe()`
+attaches a `bias_report` from the `cultural_lens` to the metadata,
+allowing the instrument's own bias (e.g., human-centric calibration)
+to be flagged.
+
+**Why it matters.** The instrument is not neutral. Its design choices
+embed cultural and epistemic assumptions.
+
+**Status.** `active`.
+
 ## License
 
 CC0. See the repo root [`LICENSE`](../LICENSE).
