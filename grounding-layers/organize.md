@@ -1,3 +1,15 @@
+update safeguards:
+
+def instrument_scope_check(claim: str, value: float) -> tuple:
+    """If the claim exceeds the instrument's range, flag it."""
+    # We need to know the instrument's range; this is a simplified version.
+    # In practice, the claim text would be parsed to extract a numeric value.
+    # For now, we return a placeholder.
+    if "measure" in claim.lower() and "beyond" in claim.lower():
+        return (True, "Claim requires measurement beyond current instrument range.")
+    return (False, "")
+
+
 from l1_epsilon_epistemic import detect_instrumented_range_gap
 
 # Inside l4_grounding_inspector, after the 95% CI check:
