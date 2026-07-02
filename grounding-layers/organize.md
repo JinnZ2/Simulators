@@ -1,3 +1,20 @@
+update run pipeline:
+
+def run_pipeline(claim, source_id="default", human_state=None, ai_state=None):
+    # 1. Safeguard check
+    guardian = SafeguardGuardian()
+    result = guardian.process_claim(claim, source_id)
+    if not result["allowed"]:
+        return {
+            "status": "REJECTED",
+            "reason": result["reason"],
+            "claim": claim
+        }
+    
+    # ... rest of existing pipeline ...
+    
+
+
 update cultural lens:
 
 def _detect_human_centrism(self, text: str) -> bool:
