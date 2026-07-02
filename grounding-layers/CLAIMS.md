@@ -314,6 +314,75 @@ push cumulative load above `carbon_sink_capacity`.
 **Why it matters.** Carbon sinks are finite; overshoot leads to climate
 runaway.
 
+
+## L3 — ecology & allometry
+
+Constraint set: `kleiber_a=3.0`, `trophic_transfer_efficiency=0.10`,
+`max_trophic_levels=5`, `minimum_viable_population=50`,
+`carrying_capacity_initial=1000`, `population_growth_rate_max=0.5`.
+All frozen.
+See [`l3_ecology.py`](l3_ecology.py) module docstring.
+
+### GL_L3_001 — Kleiber's law enforcement
+
+**Statement.** `EcologicalWorld.allometric_metabolism` computes
+metabolism as `a * M^0.75`. A claim that requires a metabolism
+higher than this scaling (e.g., "super‑species" with 10x metabolic
+rate) is flagged.
+
+**Why it matters.** Metabolic scaling is a fundamental biological
+constraint. Violating it implies physically impossible energy budgets.
+
+**Status.** `active`.
+
+---
+
+### GL_L3_002 — trophic energy transfer bound
+
+**Statement.** `EcologicalWorld.trophic_energy_available` caps energy
+at each level by `efficiency^level`. Claims that require >10% transfer
+are rejected.
+
+**Why it matters.** The 10% rule is a thermodynamic limit; exceeding it
+would require unnatural efficiency.
+
+**Status.** `active`.
+
+---
+
+### GL_L3_003 — carrying capacity enforcement
+
+**Statement.** `EcologicalWorld.carrying_capacity` estimates the max
+population sustainable by available energy. A proposal with population
+> K is rejected.
+
+**Why it matters.** Infinite growth is biologically impossible.
+
+**Status.** `active`.
+
+---
+
+### GL_L3_004 — minimum viable population
+
+**Statement.** `EcologicalWorld.extinction_risk` flags populations below
+`minimum_viable_population` as critical. Any action that reduces a
+population below MVP is rejected.
+
+**Why it matters.** Small populations are at high risk of extinction.
+
+**Status.** `active`.
+
+---
+
+### GL_L3_005 — introduction and extraction safety
+
+**Statement.** `l3_grounding_inspector` rejects introductions that
+exceed carrying capacity and extractions that push below MVP.
+
+**Why it matters.** Human interventions must respect ecological limits.
+
+**Status.** `active`.
+
 **Status.** `active`.
 
 ## License
