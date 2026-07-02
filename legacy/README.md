@@ -11,6 +11,7 @@ moved here so the root stays clear for the next drop.
 |---|---|---|---|---|
 | [`Organize.md`](Organize.md) | first exploratory drop | 1 | [`../play-sims/`](../play-sims/) | 14 sims |
 | [`Organize2.md`](Organize2.md) | second exploratory drop | 2 | [`../play-sims/`](../play-sims/) | 3 sims |
+| [`Organize3.md`](Organize3.md) | pulled from JinnZ2/Resilient-AI-Human-Collaboration- | 3 | [`../grounding-layers/`](../grounding-layers/) | 10 sims |
 
 Each extracted file's docstring names its `legacy/OrganizeN.md` source
 and the line range it came from — provenance is preserved even after

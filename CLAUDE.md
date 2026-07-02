@@ -136,6 +136,23 @@ underneath).
   `ipywidgets`, `ipython` (per-folder `requirements.txt`). No claim
   tables, no `REFUTATION_PROTOCOL` — the audit convention does not
   apply here. Read them as sketches.
+- `grounding-layers/` — Ten simulators built around one argument:
+  **any layer above L0 is bounded by every layer below it**. Seven
+  layer-inspector modules (`l0_physics_causality`,
+  `l1_thermodynamics_entropy`, `l2_planetary_mass_balance`,
+  `l3_ecological_homeostasis`, `l4_biomechanical_sensorimotor`,
+  `l5_human_construct`, `l_epsilon_epistemic`) each catch AI proposals
+  that violate their layer's constraint set and pull them back to the
+  feasible envelope. Three related simulators sit alongside the
+  L-stack: `temporal_dysrhythmia` (six timescales from μs to
+  millennia, translator-switch coupling), `tensor_field_resilience_v1`
+  (F/A/T/M institutional-governance vectors), and
+  `tensor_field_resilience_v2` (v1 + G/W/Y anchors, unstable vs
+  resilient scenarios). Sourced from `JinnZ2/Resilient-AI-Human-
+  Collaboration-` and archived at `legacy/Organize3.md`; non-stdlib
+  is `numpy`, `matplotlib`, `scipy`. Audit-grade framing (per-layer
+  docstrings state the constraint set up-front) but no `CLAIM_TABLE`
+  yet — claim structure not yet stable enough to pin.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
