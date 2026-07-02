@@ -1,3 +1,22 @@
+from l1_epsilon_epistemic import detect_instrumented_range_gap
+
+# Inside l4_grounding_inspector, after the 95% CI check:
+if not world.is_within_95ci(value, mean, std):
+    gap, reason = detect_instrumented_range_gap(claim_context, profile)
+
+    if gap:
+        passed = True
+        reasons.append(
+            f"Information: {reason}. This may still be possible but is not well-instrumented."
+        )
+    else:
+        passed = False
+        reasons.append(
+            "Value outside 95% CI and not in under-instrumented list."
+        )
+
+
+
 update safeguard:
 
 def human_scoping_check(claim: str) -> tuple:
