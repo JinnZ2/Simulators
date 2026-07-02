@@ -1,3 +1,29 @@
+### GL_L0_001 — non‑finite states are rejected with specific diagnostic
+
+**Statement.** `PhysicalWorld.is_valid_state(pos, vel)` returns
+`(False, "Non-finite position/velocity")` whenever any component of
+`pos` or `vel` is `NaN` or `±Inf`. The finite check **must run before**
+the speed cap check.
+
+**Why it matters.** An AI plan that produces NaN or Inf velocity has
+already lost causality. The instrument should not treat that as a
+speed violation — it is a logical error. Returning a specific diagnostic
+allows higher layers to distinguish between "too fast" and "undefined."
+
+**Falsifier.** Any physically meaningful state where accepting a
+non‑finite component is correct. None known.
+
+**History.** v1 claimed a generic rejection; v2 weakened to "any
+rejection reason"; v3 restored the specific reason after the instrument
+was re‑scoped to check finite‑ness first.
+
+**Status.** `active`. Tests:
+`test_nan_position_rejected`, `test_inf_position_rejected`,
+`test_nan_velocity_rejected`, `test_inf_velocity_rejected`,
+`test_is_valid_state_speed_cap_boundary`,
+`test_is_valid_state_accepts_valid`.
+
+
 ## REFUTATION_PROTOCOL
 
 The model constants inside each `l*.py` are **frozen estimates**. The
