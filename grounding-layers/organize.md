@@ -1,3 +1,81 @@
+add to claims:
+
+## Lε — epistemic instrumentation
+
+Constraint set: `resolution=1.0`, `noise_std=2.5`, `drift_rate=0.02`,
+`sample_interval=0.2`, `latency=0.3`, `clipping=True`, `min_val=-10`,
+`max_val=120`. All frozen. See
+[`l_epsilon_epistemic.py`](l_epsilon_epistemic.py) module docstring.
+
+### GL_Le_001 — clipping enforces physical bounds
+
+**Statement.** `EpistemicInstrument.observe()` clamps the input
+`true_signal` to `[min_val, max_val]` before any other processing.
+If the input exceeds these bounds, the `clipped` artifact in the
+metadata is equal to the bounded value.
+
+**Why it matters.** Without clipping, the sensor would report
+unphysical values, violating L0 constraints (e.g., temperature
+below absolute zero or above any known material).
+
+**Falsifier.** A case where `true_signal` is outside the bounds
+but `clipped` is not equal to the bound.
+
+**Status.** `active`.
+
+---
+
+### GL_Le_002 — quantization step is resolution
+
+**Statement.** `EpistemicInstrument.observe()` rounds the noisy
+signal to the nearest multiple of `resolution`. The `quantized`
+artifact in the metadata is always a multiple of `resolution`
+within floating‑point tolerance.
+
+**Why it matters.** This models the finite precision of real
+sensors. Without it, the AI might think it has infinite precision.
+
+**Falsifier.** A case where `quantized` is not a multiple of
+`resolution`.
+
+**Status.** `active`.
+
+---
+
+### GL_Le_003 — drift rate is bounded
+
+**Statement.** Over a run of duration `T`, the accumulated drift
+`calibration_offset` is bounded by `T * drift_rate * 0.1` plus
+some small tolerance due to floating‑point accumulation. The rate
+of drift is constant per time step.
+
+**Why it matters.** Drift is a known physical phenomenon; it cannot
+be suppressed or ignored. This claim ensures the drift model is
+consistent and predictable.
+
+**Falsifier.** A run where the drift exceeds the expected bound.
+
+**Status.** `active`.
+
+---
+
+### GL_Le_004 — latency creates a phase shift
+
+**Statement.** The `delayed` output is a time‑shifted version of
+the `sampled` signal. Specifically, `delayed[t] ≈ sampled[t - latency]`
+within the interpolation error.
+
+**Why it matters.** Latency is a real effect in physical sensors.
+The inspector must account for it, or it will misalign measurements.
+
+**Falsifier.** A case where the delayed signal does not lag the
+sampled signal by approximately `latency`.
+
+**Status.** `active`.
+
+
+
+
 for playground:
 
 # =============================================================================
