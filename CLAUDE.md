@@ -86,15 +86,27 @@ underneath).
   (`CLAIM_BS_001..004`) under an explicit `REFUTATION_PROTOCOL`:
   weights are frozen estimates, the coupling topology is the claim,
   and a failed check updates the claim — not the weights.
-- `antifungal-mechanism-sim/` — Interactive CLI for exploring
-  antifungal drug combinations by genetic-style crossover of
-  multiple-choice interaction targets. Seven interaction categories
-  (cell wall / ergosterol / membrane / protein / nucleic acid /
-  stress response / quorum sensing), each scored on efficacy /
-  toxicity / resistance risk. `Mechanism` is a set of codes with
-  `evaluate() -> (eff, tox, res, score)`; `crossover(a, b)` returns
-  a random subset of `a ∪ b`. Design-space explorer, not an audit
-  tool. Score is a decision aid, not a clinical prediction.
+- `antifungal-mechanism-sim/` — Three-module progression for
+  exploring antifungal drug combinations, each opening an axis the
+  previous one collapses.
+  1. `antifungal_mechanism_sim.py` — interactive CLI over seven
+     interaction categories (cell wall / ergosterol / membrane /
+     protein / nucleic acid / stress response / quorum-biofilm)
+     scored additively (Σ eff − Σ tox − Σ res), with genetic-style
+     `crossover(a, b)` returning a random subset of `a ∪ b`.
+  2. `antifungal_coupling_core.py` — same seven codes, coupling
+     topology: signed pairwise `J[i, j]` (synergy/antagonism) plus
+     resistance ∏ over orthogonal axes with same-axis min-not-product.
+     Rank-flip claim: the additive scorer and the coupling scorer
+     disagree on the SIGN of the best combination; the coupling
+     answer (three orthogonal axes → p_res ≈ 0.08 on
+     echinocandin+5FC+Hsp90) matches clinical practice.
+  3. `temporal_dosing_resistance.py` — adds the time axis (populations
+     + genotypes as a kicked relaxor under a dosing schedule) and
+     surfaces sequence-dependent kill: `J[i → j] ≠ J[j → i]`, the
+     interaction matrix is non-commutative. Empirical: simultaneous
+     suppresses ~140× harder than sequential-mono; polyene→azole
+     kills ~60% more than azole→polyene.
 - `AMOC/` — REGIME_SHIFT trajectory framework for asking what a
   specific patch of ground does when Atlantic overturning flips.
   Seven modules (`forcing.py`, `baseline.py`, `divergence.py`,
