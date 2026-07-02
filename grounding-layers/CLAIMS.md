@@ -385,6 +385,46 @@ exceed carrying capacity and extractions that push below MVP.
 
 **Status.** `active`.
 
+
+## L4 — human sensorimotor (scoped variability)
+
+Constraint set: See `l4_human.py` distributions. All constants are frozen.
+The inspector uses a **scoped variability model**, not fixed thresholds.
+
+### GL_L4_001 — no universal human limit
+
+**Statement.** `HumanWorld` does not enforce a single universal limit.
+Instead, it uses distributions with scope annotations. A claim is only
+rejected if it falls outside the 95% CI for the declared profile.
+
+**Why it matters.** Human limits are not fixed; they vary by population,
+training, and context. Treating them as universal is a form of
+human normativity bias.
+
+**Status.** `active`.
+
+### GL_L4_002 — scope must be declared
+
+**Statement.** `l4_grounding_inspector` returns a warning if no
+`human_profile` is provided. The default `"general"` is used, but
+the claim is flagged as unscoped.
+
+**Why it matters.** Unscoped claims are often the source of false
+universals. Declaring scope forces specificity.
+
+**Status.** `active`.
+
+### GL_L4_003 — probability estimation
+
+**Statement.** `l4_grounding_inspector` returns a probability score
+for each parameter, representing the likelihood that a randomly
+selected individual from the declared population can achieve the value.
+
+**Why it matters.** Binary pass/fail is insufficient for human variability.
+A probability distribution better reflects reality.
+
+**Status.** `active`.
+
 ## License
 
 CC0. See the repo root [`LICENSE`](../LICENSE).
