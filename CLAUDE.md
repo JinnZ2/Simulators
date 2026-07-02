@@ -121,6 +121,20 @@ underneath).
   `None`, response bands widen and tag the gap, never silently
   fill with false precision. Four claims (`RGS_001..004`) follow
   the REFUTATION_PROTOCOL pattern.
+- `play-sims/` — Exploratory sandbox and the repo's explicit exception
+  to stdlib-only. Seventeen visualisation-first simulations across five
+  domains: `plasma-waves/` (4 — 1D/2D FDTD, wave→dust heating, 2D PIC),
+  `atmospheric-heating/` (6 — meteor ablation → cascade → oblique EM
+  → GCM+acoustic dashboard → flare/radio/climate ultimate),
+  `sponge-reef/` (3 — basic → light+temp+herbivory → seasons+larvae),
+  `exoplanet-forensics/` (3 — multi-framework, data archaeology,
+  population synthesis), `photon-upconversion/` (1 — TTA-PUC + solar
+  boost). Extracted verbatim from the two source drops at the repo
+  root (`Organize.md`, `Organize2.md`); each `.py` file's docstring
+  names its source line range. Non-stdlib: `numpy`, `matplotlib`,
+  `scipy`, `ipywidgets`, `ipython` (per-folder `requirements.txt`).
+  No claim tables, no `REFUTATION_PROTOCOL` — the audit convention
+  does not apply here. Read them as sketches.
 - `tools/` — Shared utilities.
   - `validate_claim_table.py` — lightweight schema validator for
     any `CLAIM_TABLE.json` produced in the repo; accepts both the
@@ -156,7 +170,8 @@ on that branch.
 ## Conventions
 
 - Python files target the standard library only unless a note says
-  otherwise.
+  otherwise. **Exception**: `play-sims/` uses `numpy`/`matplotlib`/
+  `scipy`/`ipywidgets` and is exempt from this rule.
 - Notes files (`NOTES.md`) preserve design thinking as written so the
   reasoning is traceable; implementation files keep to what the notes
   specify.

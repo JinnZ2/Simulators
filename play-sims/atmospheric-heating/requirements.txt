@@ -1,0 +1,7 @@
+numpy
+matplotlib
+scipy
+ipywidgets
+# IPython is pulled in transitively by ipywidgets; listed here for
+# clarity because several sims do `from IPython.display import HTML`.
+ipython

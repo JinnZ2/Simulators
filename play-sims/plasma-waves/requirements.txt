@@ -1,0 +1,5 @@
+numpy
+matplotlib
+# The Jupyter/notebook-only extras below are optional. Import them if you
+# want the animations; the pure-math parts run without them.
+# IPython
