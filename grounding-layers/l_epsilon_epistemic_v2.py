@@ -134,3 +134,29 @@ def demo():
 
 if __name__ == "__main__":
     demo()
+
+
+patch:
+# Add at the top
+from cultural_lens import CulturalLens
+
+# Add to __init__
+def __init__(self, ..., bias_audit: bool = False):
+    # ... existing init ...
+    self.bias_audit = bias_audit
+    if bias_audit:
+        self.bias_lens = CulturalLens()
+    else:
+        self.bias_lens = None
+
+# Add to observe signature
+def observe(self, true_signal, time, claim_context: str = None):
+    # ... existing measurement ...
+    if self.bias_audit and claim_context:
+        bias_report = self.bias_lens.annotate(claim_context, {})
+        # Add to metadata
+        metadata["bias_report"] = bias_report
+    return measured, metadata
+
+
+
