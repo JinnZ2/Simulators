@@ -1,0 +1,12 @@
+combo                               additive  coupled   p_res
+azole+polyene  (EG,MD)                  -3.0    -6.39   0.200
+echinocandin+azole  (CW,EG)              1.0    10.29   0.240
+echinocandin+5FC+Hsp90 (CW,NA,SS)       -3.0    10.39   0.084
+all seven                              -10.0    22.89   0.003
+
+RANK-FLIP: azole+polyene scores similar-ish additively but the coupled
+model penalizes it (antagonism + shared sterol axis = no resistance ∏).
+echinocandin+5FC+Hsp90: ADDITIVE REJECTS it (sums resistance to a big
+penalty); COUPLED ranks it TOP — three orthogonal axes multiply escape
+probability down to ~0.08. that is the clinically correct answer, and
+the additive model gets the SIGN backwards. the ∏ is the lever.

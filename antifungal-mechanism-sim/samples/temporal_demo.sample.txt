@@ -1,0 +1,15 @@
+[1] resistance vs dosing schedule (dose = kick):
+schedule             final_pop   R_frac  outcome
+simultaneous               461    1.000  survives
+sequential mono          65749    1.000  survives
+fast cycling             10938    1.000  survives
+  simultaneous suppresses (escape needs both mutations ~mu^2);
+  sequential mono breeds RAB stepwise (each block sweeps a single-R).
+
+  with collateral sensitivity (RA hypersensitive to B):
+  fast cycling -> final_pop 9352  survives
+
+[2] sequence-dependent antagonism (non-commutative J):
+  azole -> polyene : kill = 9.4   (ergosterol depleted first, polyene blunted)
+  polyene -> azole : kill = 15.0   (polyene binds first, then azole)
+  J[azole->polyene] != J[polyene->azole]  -> matrix is NON-COMMUTATIVE

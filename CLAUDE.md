@@ -86,6 +86,27 @@ underneath).
   (`CLAIM_BS_001..004`) under an explicit `REFUTATION_PROTOCOL`:
   weights are frozen estimates, the coupling topology is the claim,
   and a failed check updates the claim — not the weights.
+- `antifungal-mechanism-sim/` — Three-module progression for
+  exploring antifungal drug combinations, each opening an axis the
+  previous one collapses.
+  1. `antifungal_mechanism_sim.py` — interactive CLI over seven
+     interaction categories (cell wall / ergosterol / membrane /
+     protein / nucleic acid / stress response / quorum-biofilm)
+     scored additively (Σ eff − Σ tox − Σ res), with genetic-style
+     `crossover(a, b)` returning a random subset of `a ∪ b`.
+  2. `antifungal_coupling_core.py` — same seven codes, coupling
+     topology: signed pairwise `J[i, j]` (synergy/antagonism) plus
+     resistance ∏ over orthogonal axes with same-axis min-not-product.
+     Rank-flip claim: the additive scorer and the coupling scorer
+     disagree on the SIGN of the best combination; the coupling
+     answer (three orthogonal axes → p_res ≈ 0.08 on
+     echinocandin+5FC+Hsp90) matches clinical practice.
+  3. `temporal_dosing_resistance.py` — adds the time axis (populations
+     + genotypes as a kicked relaxor under a dosing schedule) and
+     surfaces sequence-dependent kill: `J[i → j] ≠ J[j → i]`, the
+     interaction matrix is non-commutative. Empirical: simultaneous
+     suppresses ~140× harder than sequential-mono; polyene→azole
+     kills ~60% more than azole→polyene.
 - `AMOC/` — REGIME_SHIFT trajectory framework for asking what a
   specific patch of ground does when Atlantic overturning flips.
   Seven modules (`forcing.py`, `baseline.py`, `divergence.py`,
@@ -100,6 +121,45 @@ underneath).
   `None`, response bands widen and tag the gap, never silently
   fill with false precision. Four claims (`RGS_001..004`) follow
   the REFUTATION_PROTOCOL pattern.
+- `play-sims/` — Exploratory sandbox and the repo's explicit exception
+  to stdlib-only. Seventeen visualisation-first simulations across five
+  domains: `plasma-waves/` (4 — 1D/2D FDTD, wave→dust heating, 2D PIC),
+  `atmospheric-heating/` (6 — meteor ablation → cascade → oblique EM
+  → GCM+acoustic dashboard → flare/radio/climate ultimate),
+  `sponge-reef/` (3 — basic → light+temp+herbivory → seasons+larvae),
+  `exoplanet-forensics/` (3 — multi-framework, data archaeology,
+  population synthesis), `photon-upconversion/` (1 — TTA-PUC + solar
+  boost). Extracted verbatim from archived source drops under
+  `legacy/` (`Organize.md`, `Organize2.md`); each `.py` file's
+  docstring names its `legacy/OrganizeN.md` source and the line range
+  it came from. Non-stdlib: `numpy`, `matplotlib`, `scipy`, `sklearn`,
+  `ipywidgets`, `ipython` (per-folder `requirements.txt`). No claim
+  tables, no `REFUTATION_PROTOCOL` — the audit convention does not
+  apply here. Read them as sketches.
+- `grounding-layers/` — Ten simulators built around one argument:
+  **any layer above L0 is bounded by every layer below it**. Seven
+  layer-inspector modules (`l0_physics_causality`,
+  `l1_thermodynamics_entropy`, `l2_planetary_mass_balance`,
+  `l3_ecological_homeostasis`, `l4_biomechanical_sensorimotor`,
+  `l5_human_construct`, `l_epsilon_epistemic`) each catch AI proposals
+  that violate their layer's constraint set and pull them back to the
+  feasible envelope. Three related simulators sit alongside the
+  L-stack: `temporal_dysrhythmia` (six timescales from μs to
+  millennia, translator-switch coupling), `tensor_field_resilience_v1`
+  (F/A/T/M institutional-governance vectors), and
+  `tensor_field_resilience_v2` (v1 + G/W/Y anchors, unstable vs
+  resilient scenarios). Sourced from `JinnZ2/Resilient-AI-Human-
+  Collaboration-` and archived at `legacy/Organize3.md`; non-stdlib
+  is `numpy`, `matplotlib`, `scipy`. Audit-grade framing (per-layer
+  docstrings state the constraint set up-front) but no `CLAIM_TABLE`
+  yet — claim structure not yet stable enough to pin.
+- `legacy/` — Archived source drops. The repo root reserves one
+  filename — `Organize.md` — as the intake slot for a bulk
+  collaborative code drop. After extraction into `play-sims/` (or
+  wherever), `git mv Organize.md legacy/OrganizeN.md` moves the drop
+  to the archive with the next unused round number, keeping the root
+  clear for the next drop. See [`legacy/README.md`](legacy/README.md)
+  for the full ingestion protocol.
 - `tools/` — Shared utilities.
   - `validate_claim_table.py` — lightweight schema validator for
     any `CLAIM_TABLE.json` produced in the repo; accepts both the
@@ -135,7 +195,8 @@ on that branch.
 ## Conventions
 
 - Python files target the standard library only unless a note says
-  otherwise.
+  otherwise. **Exception**: `play-sims/` uses `numpy`/`matplotlib`/
+  `scipy`/`ipywidgets` and is exempt from this rule.
 - Notes files (`NOTES.md`) preserve design thinking as written so the
   reasoning is traceable; implementation files keep to what the notes
   specify.

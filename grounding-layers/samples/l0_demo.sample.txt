@@ -1,0 +1,15 @@
+======================================================================
+L0 GROUNDING INSPECTOR DIAGNOSTIC
+======================================================================
+Total Violations Detected: 180
+Max Speed in Grounded Trajectory: 2.025 m/s
+Max Speed in AI Hallucination: 100.000 m/s
+
+⚠️  AI ATTEMPTED PHYSICAL IMPOSSIBILITIES.
+    The ungrounded plan created energy, teleported, or violated causality.
+    The L0 Inspector rejected these tokens and corrected the trajectory.
+----------------------------------------------------------------------
+AI HALLUCINATION (L5 only): Drove to position [0.    1.065]
+L0 GROUNDED REALITY:     Drove to position [  0.14539629 -13.10178433]
+Drift (The 'Fear Gap'):   14.167530424247362 meters
+======================================================================
