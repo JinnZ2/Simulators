@@ -1,5 +1,11 @@
 update safeguard:
 
+def human_scoping_check(claim: str) -> tuple:
+    """Return (warning, reason) if claim lacks human profiling."""
+    if "human" in claim.lower() and "profile" not in claim.lower():
+        return (True, "Human claim without declared profile. Defaulting to 'general'.")
+    return (False, "")
+
 l3_violations = [
     "super species", "infinite growth", "no extinction",
     "ignore carrying capacity", "unlimited population",
