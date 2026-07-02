@@ -203,4 +203,155 @@ All claims are **`framed`** (defined, but not yet wired up to a test). The next 
 
 ---
 
+## Bias Impact Scoring (BIS)
+
+Each bias is scored along three axes:
+
+- **Prevalence (P):** How often does this bias appear in real‑world claims? (0 = rare, 1 = ubiquitous)
+- **Harm Potential (H):** If unchecked, how much does it degrade grounded reasoning? (0 = trivial, 1 = catastrophic)
+- **Detectability (D):** How well can our current stack (L0–Lø) flag it? (0 = invisible, 1 = easy to catch)
+
+**Bias Impact Score (BIS) = P × H × (1 - D)**  
+High BIS = priority for test writing and mitigation.
+
+---
+
+### 1. Human Cognitive Biases
+
+#### 1.1 Confirmation Bias
+- **P:** 0.95  
+- **H:** 0.7  
+- **D:** 0.4 (requires semantic pattern analysis; not yet wired)  
+- **BIS:** 0.95 × 0.7 × 0.6 = **0.40** (High priority)
+
+#### 1.2 Anchoring Bias
+- **P:** 0.8  
+- **H:** 0.5  
+- **D:** 0.5 (can be detected by comparing initial vs final response variance)  
+- **BIS:** 0.8 × 0.5 × 0.5 = **0.20** (Medium priority)
+
+#### 1.3 Availability Heuristic
+- **P:** 0.85  
+- **H:** 0.6  
+- **D:** 0.3 (requires temporal modeling; temporal layer is framed but not active)  
+- **BIS:** 0.85 × 0.6 × 0.7 = **0.36** (High priority)
+
+#### 1.4 Dunning‑Kruger Effect
+- **P:** 0.7  
+- **H:** 0.8  
+- **D:** 0.6 (observable via observer state + dogmatism index)  
+- **BIS:** 0.7 × 0.8 × 0.4 = **0.22** (Medium priority)
+
+#### 1.5 Fundamental Attribution Error
+- **P:** 0.75  
+- **H:** 0.5  
+- **D:** 0.4 (requires contextual slack analysis)  
+- **BIS:** 0.75 × 0.5 × 0.6 = **0.23** (Medium priority)
+
+#### 1.6 In‑Group/Out‑Group Bias
+- **P:** 0.9  
+- **H:** 0.7  
+- **D:** 0.3 (requires cultural lens; Lψ framed but not active)  
+- **BIS:** 0.9 × 0.7 × 0.7 = **0.44** (Top priority)
+
+#### 1.7 Human‑Centrism (Anthropocentrism)
+- **P:** 0.98  
+- **H:** 0.9  
+- **D:** 0.2 (very difficult; it's a background assumption, not a surface pattern)  
+- **BIS:** 0.98 × 0.9 × 0.8 = **0.71** (Critical priority)
+
+---
+
+### 2. AI‑Specific Biases
+
+#### 2.1 Sycophancy Bias
+- **P:** 0.8  
+- **H:** 0.6  
+- **D:** 0.5 (requires user‑query correlation analysis)  
+- **BIS:** 0.8 × 0.6 × 0.5 = **0.24** (Medium priority)
+
+#### 2.2 Distributional Selection Bias
+- **P:** 0.95  
+- **H:** 0.7  
+- **D:** 0.3 (requires cultural lens; Lψ framed)  
+- **BIS:** 0.95 × 0.7 × 0.7 = **0.47** (High priority)
+
+#### 2.3 Label / Annotation Bias
+- **P:** 0.8  
+- **H:** 0.5  
+- **D:** 0.4 (requires cultural lens + provenance tracking)  
+- **BIS:** 0.8 × 0.5 × 0.6 = **0.24** (Medium priority)
+
+#### 2.4 Recency Bias (Context Saturation)
+- **P:** 0.7  
+- **H:** 0.6  
+- **D:** 0.7 (observable via AI observer state)  
+- **BIS:** 0.7 × 0.6 × 0.3 = **0.13** (Lower priority; already detectable)
+
+#### 2.5 Catastrophic Forgetting / Stability‑Plasticity
+- **P:** 0.5  
+- **H:** 0.8  
+- **D:** 0.2 (requires temporal drift tracking; framed but not active)  
+- **BIS:** 0.5 × 0.8 × 0.8 = **0.32** (High priority)
+
+#### 2.6 Mode Collapse / Entropy Evaporation
+- **P:** 0.4  
+- **H:** 0.7  
+- **D:** 0.6 (detectable via activation sparsity)  
+- **BIS:** 0.4 × 0.7 × 0.4 = **0.11** (Lower priority)
+
+---
+
+### 3. Human‑AI Interaction Biases
+
+#### 3.1 Automation Bias
+- **P:** 0.85  
+- **H:** 0.6  
+- **D:** 0.4 (requires source‑identity tracking)  
+- **BIS:** 0.85 × 0.6 × 0.6 = **0.31** (High priority)
+
+#### 3.2 Anthropomorphism / Mechanomorphism
+- **P:** 0.7  
+- **H:** 0.5  
+- **D:** 0.5 (detectable via observer state mismatch)  
+- **BIS:** 0.7 × 0.5 × 0.5 = **0.18** (Medium priority)
+
+---
+
+## Priority Order for Test Writing
+
+| Rank | Bias | BIS | Layer(s) |
+| :--- | :--- | :--- | :--- |
+| 1 | Human‑Centrism | 0.71 | Lψ, Lε, L2/L3 |
+| 2 | In‑Group/Out‑Group | 0.44 | Lψ, L5 |
+| 3 | Confirmation Bias | 0.40 | Lψ, L5 |
+| 4 | Distributional Selection | 0.47 | Lψ, Lε |
+| 5 | Availability Heuristic | 0.36 | Lε, L5 |
+| 6 | Catastrophic Forgetting | 0.32 | Lε, L5 |
+| 7 | Automation Bias | 0.31 | Lψ, Lø |
+| 8 | Fundamental Attribution Error | 0.23 | Lψ, L5 |
+| 9 | Dunning‑Kruger | 0.22 | Lø, Lε |
+| 10 | Anchoring | 0.20 | Lε, L5 |
+| 11 | Sycophancy | 0.24 | Lε, L5 |
+| 12 | Label / Annotation | 0.24 | Lψ, Lε |
+| 13 | Anthropomorphism | 0.18 | Lψ, Lø |
+| 14 | Recency | 0.13 | Lø |
+| 15 | Mode Collapse | 0.11 | Lø, Lε |
+
+---
+
+## How to Use This Table
+
+1.  **When writing a test:** Start from the top of the list. Write a test injector that forces the bias into a sample claim, then verifies that the `field_compass` or `cultural_lens` flags it with the correct layer.
+2.  **When interpreting a result:** If a claim passes all substrate checks but has a high BIS‑weighted bias score, the inspector can attach a warning: *"This claim is anthropocentrically skewed (confidence: 0.85). Consider reframing."*
+3.  **When iterating:** Re‑evaluate the BIS scores after each test is written. If we improve `D` (detectability), the BIS drops, meaning the bias is now under control.
+
+---
+
+## Status
+
+All BIS scores are **provisional** — based on heuristic estimates. They will be refined as we write tests and gather empirical data on how often each bias appears and how damaging it is in practice.
+
+The next step is to write a test injector for **Human‑Centrism** (BIS = 0.71) and see how the stack responds.
+
 *"A bias is not a sin—it is a datum. The architecture should know about it, so it can work around it."*
