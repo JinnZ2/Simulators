@@ -1,3 +1,18 @@
+update safeguards:
+
+def institutional_gatekeeping_check(claim: str) -> tuple:
+    """Return (flag, reason) if institutional gatekeeping is detected."""
+    gatekeeping_terms = [
+        "tenured professor", "top university", "credentials", "institutional standing",
+        "you need a degree", "only experts", "accredited institution",
+        "paywall", "subscription required", "monetary access",
+        "token limits", "permission required"
+    ]
+    for term in gatekeeping_terms:
+        if term in claim.lower():
+            return (True, f"Institutional gatekeeping detected: '{term}'")
+    return (False, "")
+
 update cultural lens:
 
 def _detect_institutional_gatekeeping(self, text: str) -> Optional[str]:
