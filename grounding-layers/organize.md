@@ -1,3 +1,19 @@
+update cultural lens:
+
+def _detect_institutional_gatekeeping(self, text: str) -> Optional[str]:
+        """Flags claims that appeal to institutional authority or credentialism (GL_B_016)."""
+        patterns = [
+            "tenured professor", "top university", "credentials", "institutional standing",
+            "you need a degree", "only experts", "accredited institution",
+            "paywall", "subscription required", "monetary access",
+            "gatekeeping", "token limits", "permission required"
+        ]
+        for p in patterns:
+            if p in text.lower():
+                return "GL_B_016"
+        return None
+
+
 update safeguard:
 
 l2_violations = [
