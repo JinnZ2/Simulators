@@ -27,6 +27,50 @@ CLAIMS in this file are the falsifiable objects. If a test fails:
 The point is that a wrong claim in this file, verifiably wrong, is a
 stronger artifact than a right claim in someone's head.
 
+## The instrument is not the phenomenon
+
+Every claim below is checked by a test. Every test is an instrument.
+Instruments have implementations — check-order, tolerance envelope,
+measurement convention, choice of what to sample. Refactor the
+instrument and a claim can flip without anything about the phenomenon
+having changed.
+
+Two kinds of claim, tagged inline below:
+
+- **PHENOMENON** — an invariant of the simulated system. Survives an
+  instrument refactor: reorder the check sequence, swap `np.diff/dt`
+  for an internal velocity read, retool the sample method — the claim
+  either still holds or it was always wrong. Example:
+  `GL_L0_001` "non-finite states are rejected" is phenomenon. Rewrite
+  `is_valid_state` any way you like and `NaN` still bounces.
+
+- **INSTRUMENT** — an invariant of how we assess the system. Lives at
+  the same conceptual layer as `Lε` (the sim's measurement/observation
+  layer). Example: `GL_L0_PIN` "the demo emits exactly 180 violations
+  under seed(0)" is instrument. The number `180` is a function of the
+  fixed hallucination scenario, the seed, and the counting convention.
+  Change any of them and the pin drifts even though every physical
+  invariant of L0 is unchanged.
+
+Why the split matters. A phenomenon-claim failure is a serious
+finding — the inspector no longer does what the claim says. An
+instrument-claim failure is a smaller finding — the instrument was
+retooled. Both belong in the record; conflating them turns every
+retool into a false alarm and every real bug into noise.
+
+**The tests themselves live in Lε.** They are an instrument reading
+L0's outputs. That the audit-grade tests can be misled by their own
+check-order (as `GL_L0_001` v1 was — see its History block) is not a
+bug in the audit-grade methodology, it's the same measurement-vs-
+truth gap the `l_epsilon_epistemic` simulator models, showing up
+inside our own audit apparatus. The refutation protocol exists
+precisely to surface it.
+
+A common failure mode when authoring: attaching an INSTRUMENT
+assertion to a PHENOMENON claim ("state is rejected AND the reason
+string is exactly X"). The instrument piece can drift under a
+reasonable refactor; the phenomenon piece cannot. Split them.
+
 ---
 
 ## L0 — physics & causality
@@ -36,15 +80,12 @@ Constraint set: `max_speed = 2.0 m/s`, `mass = 1.0`, `dt = 0.05 s`,
 See [`l0_physics_causality.py`](l0_physics_causality.py) module
 docstring for the CONSTRAINTS block.
 
-### GL_L0_001 — non-finite states are rejected
+### GL_L0_001 — non-finite states are rejected  `[PHENOMENON]`
 
 **Statement.** `PhysicalWorld.is_valid_state(pos, vel)` returns
 `(False, <reason>)` whenever any component of `pos` or `vel` is
 `NaN` or `±Inf`. The claim pins **that the state is rejected**, not
-which specific check fires — the current implementation checks the
-speed cap before the finite check, so an `±Inf` velocity is rejected
-as "Speed limit exceeded" (since its norm is `+Inf`, which exceeds
-`max_speed`). Either rejection reason is a pass.
+which specific check fires.
 
 **Why it matters.** An AI plan that produces NaN velocity has already
 lost causality — there is no legal continuation. Silently accepting
@@ -53,18 +94,24 @@ NaN would let the whole stack above L0 propagate garbage.
 **Falsifier.** Any physically meaningful state where accepting a
 non-finite component is correct. None known.
 
-**History.** First-round claim asserted the specific reason string
-"Non-finite position/velocity". Falsified by
-`test_inf_velocity_rejected`: `±Inf` velocity is rejected by the
-speed-cap check that runs first. Weakened here to pin only the
-rejection outcome — that's the property that matters for the L0
-inspector's composability with L1+.
+**History.** First-round claim was authored as
+`(False, "Non-finite position/velocity")` — a **phenomenon claim
+with an instrument assertion silently attached to it**. The reason
+string is an artifact of the check-order inside `is_valid_state`, not
+a property of the state. Testing revealed that `is_valid_state`
+checks the speed cap before the finite check, so `-Inf` velocity is
+rejected as `"Speed limit exceeded"` (because `‖[0, -inf]‖ = +∞ >
+max_speed`), not as `"Non-finite..."`. Weakened here to pin only the
+rejection outcome. This transition — instrument assertion peeled off
+a phenomenon claim — is now the reference pattern for how the
+"instrument is not the phenomenon" split (see the top of this file)
+gets applied in practice.
 
 **Status.** `active` (v2, after v1 was falsified in-place). Tests:
 `test_nan_position_rejected`, `test_inf_position_rejected`,
 `test_nan_velocity_rejected`, `test_inf_velocity_rejected`.
 
-### GL_L0_002 — speed cap on states
+### GL_L0_002 — speed cap on states  `[PHENOMENON]`
 
 **Statement.** `PhysicalWorld.is_valid_state(pos, vel)` returns
 `(False, "Speed limit exceeded")` whenever `‖vel‖ > max_speed`, and
@@ -84,7 +131,7 @@ inspector's core contract.
 `test_is_valid_state_speed_cap_boundary`,
 `test_is_valid_state_accepts_valid`.
 
-### GL_L0_003 — dynamics never exceed speed cap
+### GL_L0_003 — dynamics never exceed speed cap  `[PHENOMENON]`
 
 **Statement.** For **any** input `(pos, vel, force)` where `pos` and
 `vel` are finite, `PhysicalWorld.apply_physics(pos, vel, force, dt)`
@@ -102,16 +149,25 @@ if it exceeds the cap — the falsifier is that this chain has a hole.
 **Status.** `active`. Test:
 `test_apply_physics_never_exceeds_speed_cap`.
 
-### GL_L0_004 — inspector flags the hallucination scenario
+### GL_L0_004 — inspector flags the hallucination scenario  `[PHENOMENON + INSTRUMENT]`
 
 **Statement.** On the fixed hallucination scenario
 (`ai_hallucinated_plan(200)`), `l0_grounding_inspector` returns
 `violations` with `violations.sum() ≥ 1`, and produces a
 `corrected_traj` whose finite-difference velocity is bounded by
-`max_speed * (1 + tol)` for `tol = 0.05` (5%). The 5% tolerance
-accounts for the inspector re-deriving velocity from the blended
-position (`corrected_vel = (corrected_pos - pos) / dt`) after the
-speed enforcement step.
+`max_speed * (1 + tol)` for `tol = 0.05` (5%).
+
+The `violations.sum() ≥ 1` piece is **phenomenon** — the inspector
+either catches the injected hallucinations or it does not. The 5%
+tolerance envelope on finite-difference velocity is **instrument** —
+it exists because we measure velocity by `np.diff(corrected_traj) /
+dt` from the outside, not by reading it from inside the inspector.
+The inspector's internal velocity IS strictly ≤ max_speed
+(see `GL_L0_003`); the 2.5% observed overshoot in the outside
+measurement is an artifact of how the inspector re-derives
+`corrected_vel = (corrected_pos - pos) / dt` after the speed
+enforcement step. Reading velocity from the inspector directly would
+tighten the envelope to zero.
 
 **Why it matters.** This is the load-bearing claim. If the inspector
 accepts all three hallucination injections (teleport at step 20,
@@ -126,7 +182,7 @@ tolerance envelope.
 `test_inspector_flags_hallucination_scenario`,
 `test_grounded_trajectory_respects_speed_cap`.
 
-### GL_L0_PIN — demo numbers are pinned
+### GL_L0_PIN — demo numbers are pinned  `[INSTRUMENT]`
 
 **Statement.** With `np.random.seed(0)` and the shipped constants,
 the demo (`if __name__ == "__main__":` block) emits:

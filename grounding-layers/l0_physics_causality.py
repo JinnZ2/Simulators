@@ -30,6 +30,15 @@ are the falsifiable objects. A failing test updates the CLAIM (mark
 `is_falsified: true` and attach the failing case), NOT the frozen
 constants. If a claim can no longer be stated correctly at all, it is
 retired to `REFUTED` and a replacement claim is authored.
+
+The tests themselves are instruments: check-order, tolerance
+envelopes, and measurement conventions are choices we made about how
+to assess this sim. Split each claim into PHENOMENON (an invariant of
+the sim, survives an instrument refactor) and INSTRUMENT (an
+invariant of how we assess the sim, drifts when the instrument is
+retooled) — see the "The instrument is not the phenomenon" section
+at the top of CLAIMS.md. The `speed-before-finite` check-order that
+falsified GL_L0_001 v1 is the reference case for this split.
 ─────────────────────────────────────────────────────────────
 """
 
