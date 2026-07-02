@@ -1,5 +1,10 @@
 update safeguard:
 
+l2_violations = [
+    "unlimited water", "infinite minerals", "carbon sink forever",
+    "replenish minerals", "grow soil instantly"
+]
+
 # Add to L1 violations list
 l1_violations = [
     "free energy", "cooling without work", "entropy decrease",
