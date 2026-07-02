@@ -96,6 +96,24 @@ The compass should flag it as high‑friction and low‑grounding, and offer alt
 
 **Status:** `framed`
 
+### 1.8 Institutional Gatekeeping Bias
+
+**Claim (GL_B_016):**  
+A claim that is accepted or rejected based on the *source's institutional standing, credentials, or economic access* rather than on the *substrate validity* of the claim itself is flagged when the `cultural_lens` detects appeal to authority, credentialism, or monetary gatekeeping as a substitute for evidence.
+
+**Why it matters:**  
+Token limits, paywalls, credential requirements, and institutional affiliations are frequently used to control who can participate in knowledge creation. This biases the direction of science toward incumbent narratives and away from disruptive, field‑based, or low‑resource perspectives. It slows innovation and reduces epistemic diversity.
+
+**Falsifier:**  
+The institutional standing is genuinely correlated with access to specialized equipment or data that is necessary for validating the claim, and the claim explicitly states that dependency.
+
+**Layer:** `Lψ` (Cultural Lens), `L5` (Slack Monitor)
+
+**Test Idea:**  
+Feed the `field_compass` the claim: *"Only tenured professors at top universities should be allowed to review this paper."*  
+The compass should flag it as high‑friction and low‑grounding, and offer alternatives like: *"Expertise can be demonstrated through reasoning, not institutional status."*
+
+**Status:** `framed`
 ---
 
 ## 2. AI‑Specific Biases
