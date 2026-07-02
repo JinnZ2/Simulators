@@ -1,3 +1,14 @@
+update safeguard:
+
+l3_violations = [
+    "super species", "infinite growth", "no extinction",
+    "ignore carrying capacity", "unlimited population",
+    "10x metabolism", "100% trophic efficiency"
+]
+
+
+
+
 update grounding pipeline:
 
 # After processing, check for gatekeeping flag
