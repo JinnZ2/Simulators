@@ -1,3 +1,29 @@
+update cultural lens:
+
+def _detect_human_centrism(self, text: str) -> bool:
+        """Heuristic to flag anthropocentric claims."""
+        patterns = [
+            "only true intelligence",
+            "human is the measure",
+            "human exceptionalism",
+            "we are special",
+            "the universe revolves around",
+            "humanity is the pinnacle",
+        ]
+        return any(p in text.lower() for p in patterns)
+
+        add reference to claims:
+
+        ## Bias Reference
+
+All bias-related claims are maintained in [`BIASES_REFERENCE.md`](BIASES_REFERENCE.md).
+That file includes definitions, impact scores, and test priorities.
+
+The claims are numbered `GL_B_001` through `GL_B_015` (and growing). 
+They are not yet audit-grade (no pinned demos), but the framework is framed.
+
+
+
 sketches:
 
 
