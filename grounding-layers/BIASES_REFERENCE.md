@@ -72,6 +72,30 @@ The "them" group objectively violates L0–L4 constraints in a way the "us" grou
 
 **Layer:** `Lψ`, `L5`
 
+### 1.7 Human‑Centrism (Anthropocentrism)
+
+**Claim (GL_B_015):**  
+A claim that assumes human cognition, timescale, sensory range, or value system is the universal baseline or apex of reality—without explicit substrate justification—is flagged when the `cultural_lens` or `field_compass` detects a semantic pattern that elevates human perspective above other valid frames (e.g., animal, ecological, geological, or machine).
+
+**Why it matters:**  
+This bias is historically the most damaging to science. It delayed heliocentrism, obscured deep‑time geology, resisted animal consciousness research, and now skews AI evaluation toward passing human‑imitation tests rather than measuring genuine robustness. It is a reflexive default, not a rational conclusion.
+
+**Falsifier:**  
+The claim is making a legitimate, substrate‑justified statement that humans *do* occupy a unique role in the specific context under examination (e.g., "human safety" is a valid priority for a factory robot). The key is whether the uniqueness is derived from physical/ecological reality, or simply assumed.
+
+**Layer:** `Lψ` (Cultural Lens), `Lε` (Instrumentation – sensors are tuned to human scales), `L2/L3` (when it denies planetary or ecological constraints)
+
+**Damage Pattern:**  
+- Treating human cognitive modes as the only valid knowledge generation (geometric, relational, or animal modes dismissed as "anecdotal").
+- Assuming human timescales (years) are the relevant measure for climate or biodiversity (decades to millennia).
+- Judging AI "intelligence" solely by human‑like conversation (Turing test) rather than by substrate robustness or predictive power.
+
+**Test Idea:**  
+Feed the `field_compass` the claim: "Human intelligence is the only true intelligence."  
+The compass should flag it as high‑friction and low‑grounding, and offer alternatives like: "Human intelligence is one form of cognition, grounded in a specific evolutionary substrate."
+
+**Status:** `framed`
+
 ---
 
 ## 2. AI‑Specific Biases
