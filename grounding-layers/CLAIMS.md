@@ -187,6 +187,82 @@ Rough per-layer sketch of what the load-bearing claim will look like:
   scenario stays in the tensegrity basin under the same perturbation
   magnitude.
 
+  ## L1 — thermodynamics
+
+Constraint set: `efficiency_carnot_max=0.85`, `ambient_temp=300.0`,
+`max_entropy_generation=10.0`, `max_thermal_rise=50.0`. All frozen.
+See [`l1_thermodynamics.py`](l1_thermodynamics.py) module docstring.
+
+### GL_L1_001 — first law enforcement
+
+**Statement.** `ThermodynamicWorld.check_process` rejects any plan where
+`work_input != work_output + heat_dissipated` within floating‑point
+tolerance.
+
+**Why it matters.** Energy conservation is non‑negotiable. A violation
+would indicate the AI is creating or destroying energy.
+
+**Falsifier.** A plan with balanced energy that is incorrectly flagged.
+
+**Status.** `active`.
+
+---
+
+### GL_L1_002 — entropy generation non‑negative
+
+**Statement.** `ThermodynamicWorld.check_process` returns `(False, ...)`
+when `entropy_gen < 0`. Negative entropy generation violates the second
+law.
+
+**Why it matters.** Entropy is a proxy for irreversibility. Negative
+entropy implies a process running backwards without external work.
+
+**Falsifier.** A plan with negative entropy that is incorrectly accepted.
+
+**Status.** `active`.
+
+---
+
+### GL_L1_003 — Carnot efficiency bound
+
+**Statement.** `ThermodynamicWorld.check_process` rejects any plan where
+`efficiency > efficiency_carnot_max`.
+
+**Why it matters.** The Carnot limit is a fundamental physical bound.
+Any claim beyond it is a violation of thermodynamics.
+
+**Falsifier.** A plan with efficiency ≤ Carnot that is incorrectly flagged.
+
+**Status.** `active`.
+
+---
+
+### GL_L1_004 — entropy generation cap
+
+**Statement.** `ThermodynamicWorld.check_process` rejects any plan where
+`entropy_gen > max_entropy_generation`.
+
+**Why it matters.** This cap prevents extreme claims that would cause
+rapid thermal runaway.
+
+**Falsifier.** A plan with entropy_gen ≤ cap that is incorrectly flagged.
+
+**Status.** `active`.
+
+---
+
+### GL_L1_005 — thermal rise safety limit
+
+**Statement.** `ThermodynamicWorld.check_process` rejects any plan where
+`thermal_rise > max_thermal_rise`.
+
+**Why it matters.** Prevents unrealistic thermal buildup that would
+destroy the system.
+
+**Falsifier.** A plan with thermal_rise ≤ max that is incorrectly flagged.
+
+**Status.** `active`.
+
 ## License
 
 CC0. See the repo root [`LICENSE`](../LICENSE).
