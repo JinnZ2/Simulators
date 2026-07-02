@@ -182,152 +182,168 @@ class AI_ScientistEstimator:
 # -----------------------------------------------------------------------------
 # 5. RUN THE SIMULATION
 # -----------------------------------------------------------------------------
-# True physical reality
-true_system = TruePhysicalSystem(dt=0.02, total_time=60.0)
-true_temp = true_system.true_temp
-time = true_system.time
+# Guarded so importing this module for tests / integration doesn't run the
+# demo (and doesn't hit the plotting bug at line ~277). Same pattern as L0.
+if __name__ == "__main__":
+    # True physical reality
+    true_system = TruePhysicalSystem(dt=0.02, total_time=60.0)
+    true_temp = true_system.true_temp
+    time = true_system.time
 
-# The Messy Instrument
-instrument = MessyInstrument(resolution=1.0,      # 1°C resolution
-                             noise_std=2.5,      # 2.5°C noise
-                             drift_rate=0.02,    # slow drift
-                             sample_interval=0.2, # 5 Hz sampling (aliasing if signal faster)
-                             latency=0.3)         # 0.3 second delay
+    # The Messy Instrument
+    instrument = MessyInstrument(resolution=1.0,      # 1°C resolution
+                                 noise_std=2.5,      # 2.5°C noise
+                                 drift_rate=0.02,    # slow drift
+                                 sample_interval=0.2, # 5 Hz sampling (aliasing if signal faster)
+                                 latency=0.3)         # 0.3 second delay
 
-# Get the measurement (this is all the AI gets)
-measured, instrument_data = instrument.observe(true_temp, time)
-metadata = instrument_data['metadata']
+    # Get the measurement (this is all the AI gets)
+    measured, instrument_data = instrument.observe(true_temp, time)
+    metadata = instrument_data['metadata']
 
-# Naive AI
-naive_ai = AI_NaiveEstimator()
-peaks, fitted_naive, naive_claim = naive_ai.estimate_trend(measured, time)
+    # Naive AI
+    naive_ai = AI_NaiveEstimator()
+    peaks, fitted_naive, naive_claim = naive_ai.estimate_trend(measured, time)
 
-# Scientist AI
-scientist_ai = AI_ScientistEstimator()
-smooth, drift_corrected, uncertainty, scientist_claim = scientist_ai.estimate_trend(measured, time, metadata)
+    # Scientist AI
+    scientist_ai = AI_ScientistEstimator()
+    smooth, drift_corrected, uncertainty, scientist_claim = scientist_ai.estimate_trend(measured, time, metadata)
+
+    # -----------------------------------------------------------------------------
+    # 6. VISUALIZATION: The Epistemic Gap
+    # -----------------------------------------------------------------------------
+    fig = plt.figure(figsize=(20, 14))
+    fig.suptitle("Lε: The Messy Instrumental Epistemic Layer\nScience is an Interface, Not a Window", 
+                 fontsize=20, fontweight='bold', color='white')
+    plt.style.use('dark_background')
+
+    # Plot 1: The Full Stack – True vs Measured vs Filtered
+    ax1 = plt.subplot(3, 2, 1)
+    ax1.plot(time, true_temp, 'lime', lw=2, label='L0-L4: True Substrate Reality (Unseen)')
+    ax1.plot(time, measured, 'red', lw=1.5, alpha=0.6, label='Lε: Raw Instrument Output (Noisy, Drifting)')
+    ax1.plot(time, smooth, 'cyan', lw=2, label='Lε+Filter: Bayesian Estimate (Uncertainty shaded)')
+    ax1.fill_between(time, smooth - uncertainty, smooth + uncertainty, color='cyan', alpha=0.2, label='95% Confidence')
+    ax1.set_ylabel('Temperature (°C)')
+    ax1.set_xlabel('Time (s)')
+    ax1.set_title('The Grounding Gap: What We See vs. What Is')
+    ax1.legend()
+    ax1.grid(True, alpha=0.2)
+
+    # Plot 2: The Components of the Measurement (Instrument Artifacts)
+    ax2 = plt.subplot(3, 2, 2)
+    ax2.plot(time, instrument_data['clipped'], 'green', alpha=0.4, label='Clipped (L0+Boundary)')
+    ax2.plot(time, instrument_data['drifted'], 'orange', alpha=0.5, label='Drifted (Lε Calibration Error)')
+    ax2.plot(time, instrument_data['noisy'], 'red', alpha=0.3, label='Noise (Lε Shot/Thermal)')
+    ax2.plot(time, instrument_data['quantized'], 'magenta', lw=1, label='Quantized (Resolution step)')
+    ax2.plot(time, instrument_data['delayed'], 'yellow', lw=1.5, label='Delayed (Latency)')
+    ax2.set_ylabel('Temperature (°C)')
+    ax2.set_xlabel('Time (s)')
+    ax2.set_title('Instrument Artifacts: Each Layer Adds Distortion')
+    ax2.legend()
+    ax2.grid(True, alpha=0.2)
+
+    # Plot 3: Naive AI Hallucination (Overfitting to Noise)
+    ax3 = plt.subplot(3, 2, 3)
+    ax3.plot(time, true_temp, 'lime', lw=2, label='True Signal (Hidden)')
+    ax3.plot(time, measured, 'red', alpha=0.4, label='Measured (Noisy)')
+    ax3.plot(time, fitted_naive, 'yellow', lw=2, label='Naive AI: Overfitted Polynomial')
+    # Mark false peaks found by naive AI
+    peak_times = time[peaks]
+    peak_vals = measured[peaks]
+    ax3.scatter(peak_times, peak_vals, color='white', s=50, zorder=5, label='Naive AI "Significant Events" (Phantom)')
+    ax3.set_ylabel('Temperature (°C)')
+    ax3.set_xlabel('Time (s)')
+    ax3.set_title(f'Naive AI (L5 only): Treats Measurement as Truth\n{naive_claim}')
+    ax3.legend()
+    ax3.grid(True, alpha=0.2)
+
+    # Plot 4: Scientist AI (Probabilistic Grounding)
+    ax4 = plt.subplot(3, 2, 4)
+    ax4.plot(time, true_temp, 'lime', lw=2, label='True Signal')
+    ax4.plot(time, smooth, 'cyan', lw=2, label='Scientist AI: Smoothed Estimate')
+    ax4.fill_between(time, smooth - uncertainty, smooth + uncertainty, color='cyan', alpha=0.3, label='Uncertainty Bound')
+    # Show the drift correction
+    ax4.plot(time, drift_corrected, 'orange', lw=1.5, linestyle='--', label='Drift-Corrected Signal')
+    ax4.set_ylabel('Temperature (°C)')
+    ax4.set_xlabel('Time (s)')
+    ax4.set_title(f'Scientist AI (Models Lε): Bayesian Estimate\n{scientist_claim}')
+    ax4.legend()
+    ax4.grid(True, alpha=0.2)
+
+    # Plot 5: Uncertainty Quantification (The "Faith" Gap)
+    ax5 = plt.subplot(3, 2, 5)
+    # Calculate the error of the naive AI vs the true signal
+    naive_error = np.abs(fitted_naive - true_temp)
+    scientist_error = np.abs(smooth - true_temp)
+    ax5.fill_between(time, 0, naive_error, color='red', alpha=0.4, label='Naive AI Error (Overconfidence)')
+    ax5.fill_between(time, 0, scientist_error, color='cyan', alpha=0.4, label='Scientist AI Error (Probabilistic)')
+    ax5.plot(time, uncertainty, 'yellow', lw=2, label='Estimated Uncertainty (Scientist)')
+    ax5.set_ylabel('Absolute Error (°C)')
+    ax5.set_xlabel('Time (s)')
+    ax5.set_title('Epistemic Humility: The Scientist Admits What It Doesn\'t Know')
+    ax5.legend()
+    ax5.grid(True, alpha=0.2)
+
+    # Plot 6: The Resolution Limit (The Ultimate Boundary)
+    ax6 = plt.subplot(3, 2, 6)
+    # Show how resolution limits detection of small features
+    true_zoomed = true_temp[200:400]
+    meas_zoomed = measured[200:400]
+    time_zoomed = time[200:400]
+    ax6.plot(time_zoomed, true_zoomed, 'lime', lw=3, label='True Signal (Subtle Oscillations)')
+    ax6.plot(time_zoomed, meas_zoomed, 'red', lw=1.5, alpha=0.7, label='Measured (Quantized + Noise)')
+    ax6.axhline(y=0, color='white', linestyle=':', alpha=0.3)
+    ax6.set_xlabel('Time (s)')
+    ax6.set_ylabel('Temperature (°C)')
+    ax6.set_title(f'Resolution Limit: {metadata["resolution"]}°C — AI Cannot See Below This')
+    ax6.legend()
+    ax6.grid(True, alpha=0.2)
+
+    plt.tight_layout()
+    plt.show()
+
+    # -----------------------------------------------------------------------------
+    # 7. DIAGNOSTIC REPORT: EPISTEMIC HUMILITY
+    # -----------------------------------------------------------------------------
+    print("=" * 70)
+    print("Lε EPISTEMIC DIAGNOSTIC: The Instrumental Reality Check")
+    print("=" * 70)
+    print(f"Instrument Resolution: {metadata['resolution']:.1f} °C")
+    print(f"Instrument Noise Std: {metadata['noise_std']:.1f} °C")
+    print(f"Calibration Drift: {metadata['drift_offset']:.2f} °C (accumulated)")
+    print(f"Sampling Interval: {metadata['sample_interval']:.1f} s (Aliasing Risk: {1/metadata['sample_interval']:.1f} Hz)")
+    print("-" * 70)
+    print(f"Naive AI Max Error vs True: {np.max(naive_error):.1f} °C")
+    print(f"Scientist AI Max Error vs True: {np.max(scientist_error):.1f} °C")
+    print(f"Uncertainty Estimate (avg): {np.mean(uncertainty):.1f} °C")
+    print("-" * 70)
+    if np.max(naive_error) > np.max(scientist_error) * 1.5:
+        print("⚠️  NAIVE AI HALLUCINATED: It treated noisy measurements as absolute truth.")
+        print("    It found 'meaningful patterns' that were just instrument artifacts.")
+        print("    This is the same error as treating a flawed translation as divine inerrancy.")
+    else:
+        print("✅ SCIENTIST AI GROUNDED: It explicitly modeled the instrument.")
+        print("    It reported uncertainty and corrected for drift and resolution limits.")
+        print("    This is the scientific method—probabilistic, humble, and self-aware.")
+
+    print("\nLε INSIGHT:")
+    print("All human knowledge of L0-L4 is mediated through Lε instruments.")
+    print("Without modeling the instrument, an AI cannot distinguish signal from noise.")
+    print("This is why 'raw data' is a theological concept, not a scientific one.")
+    print("=" * 70)
+
 
 # -----------------------------------------------------------------------------
-# 6. VISUALIZATION: The Epistemic Gap
+# Re-export from the v2 module so callers using
+# `from l_epsilon_epistemic import EpistemicInstrument` succeed. The v2 file
+# is where EpistemicInstrument actually lives; this module (Organize3-extract)
+# ships the messy-instrument + AI-estimator demo. Keeps parallel work wiring
+# without editing every import site.
 # -----------------------------------------------------------------------------
-fig = plt.figure(figsize=(20, 14))
-fig.suptitle("Lε: The Messy Instrumental Epistemic Layer\nScience is an Interface, Not a Window", 
-             fontsize=20, fontweight='bold', color='white')
-plt.style.use('dark_background')
-
-# Plot 1: The Full Stack – True vs Measured vs Filtered
-ax1 = plt.subplot(3, 2, 1)
-ax1.plot(time, true_temp, 'lime', lw=2, label='L0-L4: True Substrate Reality (Unseen)')
-ax1.plot(time, measured, 'red', lw=1.5, alpha=0.6, label='Lε: Raw Instrument Output (Noisy, Drifting)')
-ax1.plot(time, smooth, 'cyan', lw=2, label='Lε+Filter: Bayesian Estimate (Uncertainty shaded)')
-ax1.fill_between(time, smooth - uncertainty, smooth + uncertainty, color='cyan', alpha=0.2, label='95% Confidence')
-ax1.set_ylabel('Temperature (°C)')
-ax1.set_xlabel('Time (s)')
-ax1.set_title('The Grounding Gap: What We See vs. What Is')
-ax1.legend()
-ax1.grid(True, alpha=0.2)
-
-# Plot 2: The Components of the Measurement (Instrument Artifacts)
-ax2 = plt.subplot(3, 2, 2)
-ax2.plot(time, instrument_data['clipped'], 'green', alpha=0.4, label='Clipped (L0+Boundary)')
-ax2.plot(time, instrument_data['drifted'], 'orange', alpha=0.5, label='Drifted (Lε Calibration Error)')
-ax2.plot(time, instrument_data['noisy'], 'red', alpha=0.3, label='Noise (Lε Shot/Thermal)')
-ax2.plot(time, instrument_data['quantized'], 'magenta', lw=1, label='Quantized (Resolution step)')
-ax2.plot(time, instrument_data['delayed'], 'yellow', lw=1.5, label='Delayed (Latency)')
-ax2.set_ylabel('Temperature (°C)')
-ax2.set_xlabel('Time (s)')
-ax2.set_title('Instrument Artifacts: Each Layer Adds Distortion')
-ax2.legend()
-ax2.grid(True, alpha=0.2)
-
-# Plot 3: Naive AI Hallucination (Overfitting to Noise)
-ax3 = plt.subplot(3, 2, 3)
-ax3.plot(time, true_temp, 'lime', lw=2, label='True Signal (Hidden)')
-ax3.plot(time, measured, 'red', alpha=0.4, label='Measured (Noisy)')
-ax3.plot(time, fitted_naive, 'yellow', lw=2, label='Naive AI: Overfitted Polynomial')
-# Mark false peaks found by naive AI
-peak_times = time[peaks]
-peak_vals = measured[peaks]
-ax3.scatter(peak_times, peak_vals, color='white', s=50, zorder=5, label='Naive AI "Significant Events" (Phantom)')
-ax3.set_ylabel('Temperature (°C)')
-ax3.set_xlabel('Time (s)')
-ax3.set_title(f'Naive AI (L5 only): Treats Measurement as Truth\n{naive_claim}')
-ax3.legend()
-ax3.grid(True, alpha=0.2)
-
-# Plot 4: Scientist AI (Probabilistic Grounding)
-ax4 = plt.subplot(3, 2, 4)
-ax4.plot(time, true_temp, 'lime', lw=2, label='True Signal')
-ax4.plot(time, smooth, 'cyan', lw=2, label='Scientist AI: Smoothed Estimate')
-ax4.fill_between(time, smooth - uncertainty, smooth + uncertainty, color='cyan', alpha=0.3, label='Uncertainty Bound')
-# Show the drift correction
-ax4.plot(time, drift_corrected, 'orange', lw=1.5, linestyle='--', label='Drift-Corrected Signal')
-ax4.set_ylabel('Temperature (°C)')
-ax4.set_xlabel('Time (s)')
-ax4.set_title(f'Scientist AI (Models Lε): Bayesian Estimate\n{scientist_claim}')
-ax4.legend()
-ax4.grid(True, alpha=0.2)
-
-# Plot 5: Uncertainty Quantification (The "Faith" Gap)
-ax5 = plt.subplot(3, 2, 5)
-# Calculate the error of the naive AI vs the true signal
-naive_error = np.abs(fitted_naive - true_temp)
-scientist_error = np.abs(smooth - true_temp)
-ax5.fill_between(time, 0, naive_error, color='red', alpha=0.4, label='Naive AI Error (Overconfidence)')
-ax5.fill_between(time, 0, scientist_error, color='cyan', alpha=0.4, label='Scientist AI Error (Probabilistic)')
-ax5.plot(time, uncertainty, 'yellow', lw=2, label='Estimated Uncertainty (Scientist)')
-ax5.set_ylabel('Absolute Error (°C)')
-ax5.set_xlabel('Time (s)')
-ax5.set_title('Epistemic Humility: The Scientist Admits What It Doesn\'t Know')
-ax5.legend()
-ax5.grid(True, alpha=0.2)
-
-# Plot 6: The Resolution Limit (The Ultimate Boundary)
-ax6 = plt.subplot(3, 2, 6)
-# Show how resolution limits detection of small features
-true_zoomed = true_temp[200:400]
-meas_zoomed = measured[200:400]
-time_zoomed = time[200:400]
-ax6.plot(time_zoomed, true_zoomed, 'lime', lw=3, label='True Signal (Subtle Oscillations)')
-ax6.plot(time_zoomed, meas_zoomed, 'red', lw=1.5, alpha=0.7, label='Measured (Quantized + Noise)')
-ax6.axhline(y=0, color='white', linestyle=':', alpha=0.3)
-ax6.set_xlabel('Time (s)')
-ax6.set_ylabel('Temperature (°C)')
-ax6.set_title(f'Resolution Limit: {metadata["resolution"]}°C — AI Cannot See Below This')
-ax6.legend()
-ax6.grid(True, alpha=0.2)
-
-plt.tight_layout()
-plt.show()
-
-# -----------------------------------------------------------------------------
-# 7. DIAGNOSTIC REPORT: EPISTEMIC HUMILITY
-# -----------------------------------------------------------------------------
-print("=" * 70)
-print("Lε EPISTEMIC DIAGNOSTIC: The Instrumental Reality Check")
-print("=" * 70)
-print(f"Instrument Resolution: {metadata['resolution']:.1f} °C")
-print(f"Instrument Noise Std: {metadata['noise_std']:.1f} °C")
-print(f"Calibration Drift: {metadata['drift_offset']:.2f} °C (accumulated)")
-print(f"Sampling Interval: {metadata['sample_interval']:.1f} s (Aliasing Risk: {1/metadata['sample_interval']:.1f} Hz)")
-print("-" * 70)
-print(f"Naive AI Max Error vs True: {np.max(naive_error):.1f} °C")
-print(f"Scientist AI Max Error vs True: {np.max(scientist_error):.1f} °C")
-print(f"Uncertainty Estimate (avg): {np.mean(uncertainty):.1f} °C")
-print("-" * 70)
-if np.max(naive_error) > np.max(scientist_error) * 1.5:
-    print("⚠️  NAIVE AI HALLUCINATED: It treated noisy measurements as absolute truth.")
-    print("    It found 'meaningful patterns' that were just instrument artifacts.")
-    print("    This is the same error as treating a flawed translation as divine inerrancy.")
-else:
-    print("✅ SCIENTIST AI GROUNDED: It explicitly modeled the instrument.")
-    print("    It reported uncertainty and corrected for drift and resolution limits.")
-    print("    This is the scientific method—probabilistic, humble, and self-aware.")
-
-print("\nLε INSIGHT:")
-print("All human knowledge of L0-L4 is mediated through Lε instruments.")
-print("Without modeling the instrument, an AI cannot distinguish signal from noise.")
-print("This is why 'raw data' is a theological concept, not a scientific one.")
-print("=" * 70)
+try:
+    from l_epsilon_epistemic_v2 import EpistemicInstrument  # noqa: F401
+except Exception:  # pragma: no cover
+    pass
 
 
 

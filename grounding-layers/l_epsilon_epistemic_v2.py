@@ -331,7 +331,11 @@ if __name__ == "__main__":
     demo()
 
 
-patch:
+"""
+patch:  (design note, not code -- kept as a docstring so the module
+         parses cleanly; the intent is preserved for whoever wires up
+         the CulturalLens integration next)
+
 # Add at the top
 from cultural_lens import CulturalLens
 
@@ -352,6 +356,7 @@ def observe(self, true_signal, time, claim_context: str = None):
         # Add to metadata
         metadata["bias_report"] = bias_report
     return measured, metadata
+"""
 
 
 

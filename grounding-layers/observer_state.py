@@ -164,3 +164,19 @@ if __name__ == "__main__":
         if "warning" in res_tired:
             print(f"    ⚠️  {res_tired['warning']}")
         print("-" * 40)
+
+
+# -----------------------------------------------------------------------------
+# Re-exports so callers can `from observer_state import AIObserverState,
+# HumanState, AIState` even though those classes live in sibling modules.
+# Keeps the parallel-work import statements working without editing them.
+# -----------------------------------------------------------------------------
+try:
+    from ai_observer_state import AIObserverState  # noqa: F401
+except Exception:  # pragma: no cover — module optional
+    pass
+
+try:
+    from collaborative_field import HumanState, AIState  # noqa: F401
+except Exception:  # pragma: no cover — module optional
+    pass

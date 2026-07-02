@@ -341,11 +341,17 @@ if __name__ == "__main__":
     print("Drift (The 'Fear Gap'):  ", np.linalg.norm(ai_traj[-1] - corrected_traj[-1]), "meters")
     print("=" * 70)
 
-SCOPE:
-  This inspector is designed for finite, real‑valued states only.
-  It assumes Newtonian mechanics at human‑scale speeds.
-  It does NOT model relativistic effects, quantum uncertainty, or
-  biological variability. Claims that require those domains should
-  be routed to higher layers or rejected.
+# -----------------------------------------------------------------------------
+# SCOPE
+# -----------------------------------------------------------------------------
+# This inspector is designed for finite, real-valued states only.
+# It assumes Newtonian mechanics at human-scale speeds.
+# It does NOT model relativistic effects, quantum uncertainty, or
+# biological variability. Claims that require those domains should
+# be routed to higher layers or rejected.
+#
+# (Was originally appended as a bare `SCOPE:` block after the `if __name__`
+# guard; that broke module-parse. Now a comment block so the intent
+# survives and the file imports cleanly.)
 
 
