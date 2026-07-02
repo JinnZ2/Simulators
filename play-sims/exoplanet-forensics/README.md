@@ -9,7 +9,7 @@ one can and cannot see.
 | `data_archaeology.py` | Archive mining under a follow-up budget constraint. Models false-positive tax (eclipsing binaries, blended systems); trains a lightweight classifier to rank candidates. |
 | `population_synthesis.py` | Draws a galactic planet population from occurrence-rate priors, applies a chosen survey method with its noise floor, characterises what survives, scores habitability. |
 
-All extracted verbatim from `../../Organize.md` and `../../Organize2.md`;
+All extracted verbatim from `../../legacy/Organize.md` and `../../legacy/Organize2.md`;
 source line range in each docstring.
 
 ## For play

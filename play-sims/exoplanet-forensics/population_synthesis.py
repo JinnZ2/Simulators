@@ -6,7 +6,7 @@ Draws a galactic planet population from occurrence-rate priors
 floor, characterises what survived, and scores habitability. Interactive
 widget over method / noise / sample size.
 
-CC0 / for play. Extracted verbatim from Organize2.md lines 458-948.
+CC0 / for play. Extracted verbatim from legacy/Organize2.md lines 458-948.
 Non-stdlib: numpy, matplotlib, ipywidgets, IPython.display.
 """
 

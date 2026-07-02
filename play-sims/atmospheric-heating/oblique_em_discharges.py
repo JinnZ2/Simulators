@@ -6,7 +6,7 @@ length and altitude-of-ablation; (2) charge separation from ionization
 gradients drives sprite-style EM discharges that couple upward into the
 ionosphere and downward as EMP. Reports blackout and cascade signatures.
 
-CC0 / for play. Extracted verbatim from Organize.md lines 4353-4817.
+CC0 / for play. Extracted verbatim from legacy/Organize.md lines 4353-4817.
 Non-stdlib: numpy, matplotlib (FuncAnimation), IPython.display.
 """
 

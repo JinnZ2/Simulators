@@ -7,7 +7,7 @@ annihilation, singlet emission. Reports UC quantum yield vs excitation
 intensity and the fractional efficiency boost when an upconversion
 layer sits under a bandgap-limited solar cell.
 
-CC0 / for play. Extracted verbatim from Organize2.md lines 951-1262.
+CC0 / for play. Extracted verbatim from legacy/Organize2.md lines 951-1262.
 Non-stdlib: numpy, matplotlib, ipywidgets, IPython.display.
 """
 

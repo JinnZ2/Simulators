@@ -9,7 +9,7 @@ photosynthetic mixotrophs, progressively adding axes.
 | `reef_light_temp_herbivory.py` | Spectral attenuation (blue + red), oblique solar angle, temperature-driven metabolism, herbivory pressure, competition between morphs. |
 | `reef_seasons_pulses_larvae.py` | Latitude-driven seasonal light/temperature cycles, discrete nutrient pulses (upwelling/runoff), larval production + advective dispersal. |
 
-All extracted verbatim from `../../Organize.md`; source line range in
+All extracted verbatim from `../../legacy/Organize.md`; source line range in
 each docstring.
 
 ## For play

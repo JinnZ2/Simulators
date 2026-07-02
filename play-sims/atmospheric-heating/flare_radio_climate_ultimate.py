@@ -6,7 +6,7 @@ D/E-layer, sprite discharges over the storm, radio blackout maps, and a
 gravity-wave-driven SSW (sudden stratospheric warming) proxy. Nine-panel
 final visualisation.
 
-CC0 / for play. Extracted verbatim from Organize.md lines 1-555.
+CC0 / for play. Extracted verbatim from legacy/Organize.md lines 1-555.
 Non-stdlib: numpy, matplotlib (FuncAnimation), scipy.ndimage, IPython.display.
 """
 

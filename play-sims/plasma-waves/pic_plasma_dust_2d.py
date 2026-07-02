@@ -7,7 +7,7 @@ charge density. Reports final field structure and dust-driven kinetic
 heating of the plasma population — a toy demonstration of the coronal
 heating pathway.
 
-CC0 / for play. Extracted verbatim from Organize.md lines 3098-3353.
+CC0 / for play. Extracted verbatim from legacy/Organize.md lines 3098-3353.
 Non-stdlib: numpy, matplotlib (FuncAnimation), IPython.display.
 """
 

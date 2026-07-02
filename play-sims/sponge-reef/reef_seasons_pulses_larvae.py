@@ -6,7 +6,7 @@ pulses (upwelling/runoff), and larval production + advective dispersal
 by currents. Interactive widget over lat / pulse frequency / feeding +
 photo efficiency / herbivory / steps.
 
-CC0 / for play. Extracted verbatim from Organize.md lines 1737-2261.
+CC0 / for play. Extracted verbatim from legacy/Organize.md lines 1737-2261.
 Non-stdlib: numpy, matplotlib, ipywidgets, scipy.ndimage, IPython.display.
 """
 

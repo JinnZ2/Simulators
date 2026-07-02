@@ -7,7 +7,7 @@ per-bin temperature rise. Baseline (Interplanetary Dust) vs elevated-flux
 (Asteroid Belt Debris) scenarios; two-panel animation of the fireball
 cascade.
 
-CC0 / for play. Extracted verbatim from Organize.md lines 3738-4012.
+CC0 / for play. Extracted verbatim from legacy/Organize.md lines 3738-4012.
 Non-stdlib: numpy, matplotlib (FuncAnimation), IPython.display.
 """
 

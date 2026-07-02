@@ -6,7 +6,7 @@ Light attenuates with depth; mixotrophs sit shallow and photosynthesise;
 filter-feeders sit deep and pull suspended food. Interactive widget over
 size / depth / attenuation / mixo fraction / feeding + photo efficiency.
 
-CC0 / for play. Extracted verbatim from Organize.md lines 1022-1326.
+CC0 / for play. Extracted verbatim from legacy/Organize.md lines 1022-1326.
 Non-stdlib: numpy, matplotlib, ipywidgets, IPython.display.
 """
 

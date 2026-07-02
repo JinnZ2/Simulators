@@ -1,7 +1,7 @@
 # plasma-waves
 
 Four toy simulations that put dust into a wave field and watch what
-falls out. All extracted verbatim from `../../Organize.md`; the source
+falls out. All extracted verbatim from `../../legacy/Organize.md`; the source
 line range is in each file's docstring.
 
 | file | what it does |

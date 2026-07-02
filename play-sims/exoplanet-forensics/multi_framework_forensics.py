@@ -8,7 +8,7 @@ highlight "hidden gems" — planets one method missed that another
 recovered (e.g. a super-Jupiter TESS transits missed but Gaia's
 microlensing surfaced).
 
-CC0 / for play. Extracted verbatim from Organize.md lines 2264-2700.
+CC0 / for play. Extracted verbatim from legacy/Organize.md lines 2264-2700.
 Non-stdlib: numpy, matplotlib, ipywidgets, IPython.display.
 """
 

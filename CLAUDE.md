@@ -129,12 +129,20 @@ underneath).
   `sponge-reef/` (3 — basic → light+temp+herbivory → seasons+larvae),
   `exoplanet-forensics/` (3 — multi-framework, data archaeology,
   population synthesis), `photon-upconversion/` (1 — TTA-PUC + solar
-  boost). Extracted verbatim from the two source drops at the repo
-  root (`Organize.md`, `Organize2.md`); each `.py` file's docstring
-  names its source line range. Non-stdlib: `numpy`, `matplotlib`,
-  `scipy`, `ipywidgets`, `ipython` (per-folder `requirements.txt`).
-  No claim tables, no `REFUTATION_PROTOCOL` — the audit convention
-  does not apply here. Read them as sketches.
+  boost). Extracted verbatim from archived source drops under
+  `legacy/` (`Organize.md`, `Organize2.md`); each `.py` file's
+  docstring names its `legacy/OrganizeN.md` source and the line range
+  it came from. Non-stdlib: `numpy`, `matplotlib`, `scipy`, `sklearn`,
+  `ipywidgets`, `ipython` (per-folder `requirements.txt`). No claim
+  tables, no `REFUTATION_PROTOCOL` — the audit convention does not
+  apply here. Read them as sketches.
+- `legacy/` — Archived source drops. The repo root reserves one
+  filename — `Organize.md` — as the intake slot for a bulk
+  collaborative code drop. After extraction into `play-sims/` (or
+  wherever), `git mv Organize.md legacy/OrganizeN.md` moves the drop
+  to the archive with the next unused round number, keeping the root
+  clear for the next drop. See [`legacy/README.md`](legacy/README.md)
+  for the full ingestion protocol.
 - `tools/` — Shared utilities.
   - `validate_claim_table.py` — lightweight schema validator for
     any `CLAIM_TABLE.json` produced in the repo; accepts both the

@@ -6,7 +6,7 @@ the false-positive tax (eclipsing binaries, blended systems), applies a
 follow-up budget constraint, and trains a lightweight classifier to
 rank which candidates deserve the next telescope slot.
 
-CC0 / for play. Extracted verbatim from Organize2.md lines 1-455.
+CC0 / for play. Extracted verbatim from legacy/Organize2.md lines 1-455.
 Non-stdlib: numpy, matplotlib, ipywidgets, IPython.display.
 """
 

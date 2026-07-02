@@ -8,7 +8,7 @@ upconversion layer sits under a bandgap-limited solar cell.
 |---|---|
 | `tta_puc_solar_boost.py` | Sensitiser absorption → ISC to triplet → energy transfer to annihilator → T-T annihilation → singlet emission. Reports UC quantum yield vs excitation intensity and the efficiency gain for a Si-band-gap cell. |
 
-Extracted verbatim from `../../Organize2.md`; source line range in the
+Extracted verbatim from `../../legacy/Organize2.md`; source line range in the
 docstring.
 
 ## For play

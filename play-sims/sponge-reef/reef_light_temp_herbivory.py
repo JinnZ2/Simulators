@@ -6,7 +6,7 @@ angle, temperature-driven metabolism, and herbivory pressure to the
 basic reef. Competition between the two sponge morphs plays out over
 the depth gradient.
 
-CC0 / for play. Extracted verbatim from Organize.md lines 1329-1735.
+CC0 / for play. Extracted verbatim from legacy/Organize.md lines 1329-1735.
 Non-stdlib: numpy, matplotlib, ipywidgets, scipy.ndimage, IPython.display.
 """
 

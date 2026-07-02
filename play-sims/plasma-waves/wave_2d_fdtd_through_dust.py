@@ -5,7 +5,7 @@ Extends the 1D case to a 2D grid with an azimuthal dust ring and a dense
 core at the domain center. Reports side-by-side animation of the clean
 vs dusty wavefield and a per-scenario energy accounting.
 
-CC0 / for play. Extracted verbatim from Organize.md lines 2812-2953.
+CC0 / for play. Extracted verbatim from legacy/Organize.md lines 2812-2953.
 Non-stdlib: numpy, matplotlib (FuncAnimation), IPython.display.
 """
 

@@ -7,7 +7,7 @@ energy into altitude bins. This file is a DRAFT — the main loop is
 stubbed with a pass and a note pointing at the "integrated version"
 (dust_debris_basic.py) that actually runs to completion.
 
-CC0 / for play. Extracted verbatim from Organize.md lines 3354-3736.
+CC0 / for play. Extracted verbatim from legacy/Organize.md lines 3354-3736.
 Non-stdlib: numpy, matplotlib.
 """
 

@@ -7,7 +7,7 @@ sprites, and the cascade simulator into a single Jupyter dashboard.
 Widgets control orbit type, particle count, flare intensity, and sprite
 threshold.
 
-CC0 / for play. Extracted verbatim from Organize.md lines 556-1021.
+CC0 / for play. Extracted verbatim from legacy/Organize.md lines 556-1021.
 Non-stdlib: numpy, matplotlib, ipywidgets, IPython.display.
 """
 

@@ -6,7 +6,7 @@ population of charged dust grains. Wave field damps near the dust; grain
 kinetic energy rises. Shows energy transferred from wave to particles
 via dust scattering.
 
-CC0 / for play. Extracted verbatim from Organize.md lines 2954-3097.
+CC0 / for play. Extracted verbatim from legacy/Organize.md lines 2954-3097.
 Non-stdlib: numpy, matplotlib (FuncAnimation), IPython.display.
 """
 

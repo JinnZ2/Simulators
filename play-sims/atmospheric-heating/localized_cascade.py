@@ -7,7 +7,7 @@ increasing drag and re-radiating heat in a runaway loop. Compares
 normal-flux vs elevated-flux scenarios and highlights the cascade
 signature.
 
-CC0 / for play. Extracted verbatim from Organize.md lines 4014-4352.
+CC0 / for play. Extracted verbatim from legacy/Organize.md lines 4014-4352.
 Non-stdlib: numpy, matplotlib (FuncAnimation), IPython.display.
 """
 

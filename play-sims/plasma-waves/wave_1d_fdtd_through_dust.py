@@ -6,7 +6,7 @@ dust cloud that both slows the wave (lower c) and damps it (higher eta).
 Runs a WITH-dust and WITHOUT-dust control, then reports the fractional
 energy lost to the cloud.
 
-CC0 / for play. Extracted verbatim from Organize.md lines 2703-2811.
+CC0 / for play. Extracted verbatim from legacy/Organize.md lines 2703-2811.
 Non-stdlib: numpy, matplotlib.
 """
 

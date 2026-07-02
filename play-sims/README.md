@@ -20,16 +20,29 @@ Total: 17 sims across 5 domains.
 
 ## Source
 
-Every file was extracted verbatim from the two source drops at the
-repo root:
+Every file was extracted verbatim from the archived source drops in
+[`../legacy/`](../legacy/):
 
-- [`../Organize.md`](../Organize.md) — 14 sims
-- [`../Organize2.md`](../Organize2.md) — 3 sims
+- [`../legacy/Organize.md`](../legacy/Organize.md) — 14 sims
+- [`../legacy/Organize2.md`](../legacy/Organize2.md) — 3 sims
 
 Each `.py` file's docstring names its source line range. If you edit a
 sim and want the source-of-truth to move here, remove the extraction
-note from the docstring — the Organize\*.md files at the root are the
+note from the docstring — the archived `Organize*.md` files are the
 original drops, not the current state.
+
+## Adding new sims
+
+The intake pattern (see [`../legacy/README.md`](../legacy/README.md) for
+the full protocol):
+
+1. Drop a new `Organize.md` at the repo root.
+2. Extract each simulation into the right domain folder here.
+3. `git mv` the drop into `../legacy/` with the next round number
+   (`OrganizeN.md`) so the root stays clear for the next drop.
+
+Each extraction keeps the docstring pointer to the archived source
+file, so provenance survives the move.
 
 ## For play
 

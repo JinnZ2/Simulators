@@ -13,7 +13,7 @@ the atmospheric column. The progression roughly runs simple → coupled
 | `interactive_dashboard.py` | Ties orbital-mechanics entry parameters, a simplified 2D GCM, a 1D acoustic wave solver, and the cascade sim into a Jupyter dashboard. |
 | `flare_radio_climate_ultimate.py` | The full stack: grazing storm + solar flare + sprites + radio blackout maps + gravity-wave-driven SSW proxy. Nine-panel viz. |
 
-All extracted verbatim from `../../Organize.md`; the source line range
+All extracted verbatim from `../../legacy/Organize.md`; the source line range
 is in each file's docstring.
 
 ## For play
