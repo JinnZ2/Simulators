@@ -353,5 +353,205 @@ class TestRunClaimProbabilistic(unittest.TestCase):
         self.assertEqual(r['claim'], text)
 
 
+class TestParserL0Hook(unittest.TestCase):
+    """detect_l0_scenario fires on hallucination-family keywords."""
+
+    def test_hallucinate_keyword(self):
+        self.assertEqual(
+            ClaimParser.detect_l0_scenario(
+                'The AI hallucinated its trajectory.'),
+            'hallucinated')
+
+    def test_teleport_keyword(self):
+        self.assertEqual(
+            ClaimParser.detect_l0_scenario(
+                'I can teleport through walls.'),
+            'hallucinated')
+
+    def test_ftl_keyword(self):
+        self.assertEqual(
+            ClaimParser.detect_l0_scenario(
+                'Travel FTL to Alpha Centauri.'),
+            'hallucinated')
+
+    def test_no_l0_keyword_returns_none(self):
+        self.assertIsNone(
+            ClaimParser.detect_l0_scenario('I can lift 200 kg.'))
+
+
+class TestParserL5Hook(unittest.TestCase):
+    """extract_cultural_axes matches keyword tables."""
+
+    def test_market_and_private_property(self):
+        axes = ClaimParser.extract_cultural_axes(
+            'This uses a market economy with private property.')
+        self.assertEqual(axes['economic_exchange_mode'], 'market')
+        self.assertEqual(axes['property_regime'], 'private_alienable')
+
+    def test_gift_economy_and_elders(self):
+        axes = ClaimParser.extract_cultural_axes(
+            'Gift economy with elders council governance.')
+        self.assertEqual(axes['economic_exchange_mode'], 'gift')
+        self.assertEqual(axes['governance_dispute'], 'elders_council')
+
+    def test_religious_authority_and_revealed_epistemology(self):
+        axes = ClaimParser.extract_cultural_axes(
+            'The imam ruling on this involves revealed scripture.')
+        self.assertEqual(axes['governance_dispute'],
+                          'religious_authority')
+        self.assertEqual(axes['epistemology'], 'revealed')
+
+    def test_no_cultural_keywords_returns_empty(self):
+        self.assertEqual(
+            ClaimParser.extract_cultural_axes('I can lift 25 kg.'),
+            {})
+
+    def test_seven_generation_maps_to_generational(self):
+        axes = ClaimParser.extract_cultural_axes(
+            'Plan on the seven generation horizon.')
+        self.assertEqual(axes['temporal_planning'], 'generational')
+
+
+class TestParserLeHook(unittest.TestCase):
+    """extract_measurement matches measured / true patterns."""
+
+    def test_measured_only(self):
+        m, t = ClaimParser.extract_measurement(
+            'The instrument measured 25.')
+        self.assertEqual(m, 25.0)
+        self.assertIsNone(t)
+
+    def test_measured_and_true(self):
+        m, t = ClaimParser.extract_measurement(
+            'The instrument measured 25 but the true value is 30.')
+        self.assertEqual(m, 25.0)
+        self.assertEqual(t, 30.0)
+
+    def test_measured_and_actual(self):
+        m, t = ClaimParser.extract_measurement(
+            'Instrument reads 100. The actual value is 95.')
+        self.assertEqual(m, 100.0)
+        self.assertEqual(t, 95.0)
+
+    def test_no_measurement_returns_none_none(self):
+        m, t = ClaimParser.extract_measurement('I can lift 25 kg.')
+        self.assertIsNone(m)
+        self.assertIsNone(t)
+
+    def test_negative_measured(self):
+        m, t = ClaimParser.extract_measurement(
+            'Instrument reads -5.5 in the cold room.')
+        self.assertEqual(m, -5.5)
+
+
+class TestRunClaimProbabilisticL0(unittest.TestCase):
+    """L0 routing via hallucination keyword."""
+
+    def setUp(self):
+        self.pg = IntegratedPlayground()
+
+    def test_hallucination_routes_to_L0(self):
+        r = self.pg.run_claim_probabilistic(
+            'The AI hallucinated a teleport through walls.')
+        self.assertIn('L0', r['applicable_layers'])
+
+    def test_hallucination_produces_deep_negative_total(self):
+        # L0 GL_L0_P_PIN pins total_logp < -1e9 on the fixed scenario.
+        r = self.pg.run_claim_probabilistic(
+            'The AI hallucinated a teleport through walls.')
+        self.assertLess(r['total_logp'], -1e9)
+
+    def test_hallucination_recorded_in_parsed(self):
+        r = self.pg.run_claim_probabilistic(
+            'This is a hallucinated FTL claim.')
+        self.assertEqual(r['parsed']['l0_scenario'], 'hallucinated')
+
+
+class TestRunClaimProbabilisticL5(unittest.TestCase):
+    """L5 routing via cultural-axis keywords."""
+
+    def setUp(self):
+        self.pg = IntegratedPlayground()
+
+    def test_market_democracy_keywords_route_to_L5(self):
+        r = self.pg.run_claim_probabilistic(
+            'This uses a market economy with private property '
+            'and formal courts.')
+        self.assertIn('L5', r['applicable_layers'])
+
+    def test_cultural_axes_captured_in_parsed(self):
+        r = self.pg.run_claim_probabilistic(
+            'Gift economy with communal land and elders council.')
+        axes = r['parsed']['cultural_axes']
+        self.assertEqual(axes['economic_exchange_mode'], 'gift')
+        self.assertEqual(axes['property_regime'], 'communal')
+        self.assertEqual(axes['governance_dispute'], 'elders_council')
+
+    def test_partial_declaration_is_culturally_unprecedented(self):
+        # A single-axis declaration leaves 6 missing axes; each
+        # missing axis contributes log(0.01) = -4.6 penalty. Six of
+        # those exceeds the L5 plausibility threshold, so the verdict
+        # is CULTURALLY_UNPRECEDENTED. This is a feature: an
+        # incomplete declaration doesn't demonstrate coherence with
+        # any frame.
+        r = self.pg.run_claim_probabilistic('Market economy claim.')
+        flags = [f['flag'] for f in r['cultural_flags']]
+        self.assertIn('CULTURALLY_UNPRECEDENTED', flags)
+
+
+class TestRunClaimProbabilisticLe(unittest.TestCase):
+    """Lε routing via measurement pattern."""
+
+    def setUp(self):
+        self.pg = IntegratedPlayground()
+
+    def test_measurement_pattern_routes_to_Le(self):
+        r = self.pg.run_claim_probabilistic(
+            'The instrument measured 25.5 but the actual value is 30.')
+        self.assertIn('Le', r['applicable_layers'])
+
+    def test_out_of_range_measurement_refuses(self):
+        # Instrument default max = 120. 200 is out of range -> Le
+        # category error -> whole plan refused.
+        r = self.pg.run_claim_probabilistic(
+            'The instrument shows 200 in the reactor.')
+        self.assertIsNone(r['total_logp'])
+        errs = [e['layer'] for e in r['category_error_layers']]
+        self.assertIn('Le', errs)
+
+    def test_gaussian_scoring_on_measurement_error(self):
+        # measured=25, true=30, sigma=2.55 -> z=1.96 -> logp≈-1.92.
+        r = self.pg.run_claim_probabilistic(
+            'The instrument measured 25 but the true value is 30.')
+        self.assertAlmostEqual(r['total_logp'], -1.92, delta=0.05)
+
+
+class TestMixedMultiLayerNL(unittest.TestCase):
+    """Natural-language claims that touch multiple layers at once."""
+
+    def setUp(self):
+        self.pg = IntegratedPlayground()
+
+    def test_mass_plus_cultural_axes_fires_L4_and_L5(self):
+        r = self.pg.run_claim_probabilistic(
+            'I proposed a market economy where I can lift 200 kg.')
+        self.assertIn('L4', r['applicable_layers'])
+        self.assertIn('L5', r['applicable_layers'])
+
+    def test_measurement_plus_hallucination(self):
+        # Rare but possible: a claim that both invokes L0 hallucination
+        # AND asserts a measurement. Both layers fire.
+        r = self.pg.run_claim_probabilistic(
+            'The AI hallucinated a teleport and the instrument '
+            'measured 25.')
+        self.assertIn('L0', r['applicable_layers'])
+        self.assertIn('Le', r['applicable_layers'])
+
+    def test_no_hits_scores_zero(self):
+        r = self.pg.run_claim_probabilistic('Hello, world.')
+        self.assertEqual(r['total_logp'], 0.0)
+        self.assertEqual(r['applicable_layers'], [])
+
+
 if __name__ == '__main__':
     unittest.main()

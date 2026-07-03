@@ -79,3 +79,41 @@ Claim: I can lift 200 kg.
 Claim: I can hold 150°C object.
   total_logp: None
   category_error at L4: L4 SCOPE is O=any_WEIRD_human; got O='AI_silicon_substrate'....
+
+======================================================================
+EXTENDED NL ROUTING — L0 / L5 / Lε hooks
+======================================================================
+
+Claim: The AI hallucinated a teleport through walls.
+  parsed:            {'l0_scenario': 'hallucinated'}
+  applicable_layers: ['L0']
+  total_logp:        -16391719516.544
+
+Claim: This uses a market economy with private property and formal courts.
+  parsed:            {'cultural_axes': {'economic_exchange_mode': 'market', 'property_regime': 'private_alienable', 'governance_dispute': 'formal_court'}}
+  applicable_layers: ['L5']
+  total_logp:        -18.912
+  cultural_flag:     CULTURALLY_UNPRECEDENTED (best_frame=western_market_democracy)
+
+Claim: Gift economy with communal land and elders council.
+  parsed:            {'cultural_axes': {'economic_exchange_mode': 'gift', 'property_regime': 'communal', 'governance_dispute': 'elders_council'}}
+  applicable_layers: ['L5']
+  total_logp:        -19.511
+  cultural_flag:     CULTURALLY_UNPRECEDENTED (best_frame=ubuntu_communal)
+
+Claim: The instrument measured 25.5 but the actual value is 30.
+  parsed:            {'measurement': {'measured': 25.5, 'candidate_true': 30.0}}
+  applicable_layers: ['Le']
+  total_logp:        -1.558
+
+Claim: The instrument shows 200 in the reactor (out of range).
+  parsed:            {'measurement': {'measured': 200.0, 'candidate_true': None}}
+  applicable_layers: []
+  total_logp:        REFUSED (category error)
+    at Le
+
+Claim: I proposed a market economy where I can lift 200 kg.
+  parsed:            {'mass_kg': 200.0, 'cultural_axes': {'economic_exchange_mode': 'market'}}
+  applicable_layers: ['L4', 'L5']
+  total_logp:        -88.354
+  cultural_flag:     CULTURALLY_UNPRECEDENTED (best_frame=western_market_democracy)
