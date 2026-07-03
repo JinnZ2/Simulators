@@ -255,6 +255,160 @@ frozen constant was unfrozen).
 
 ---
 
+## L0 (Probabilistic) — Bayesian counterpart to the deterministic inspector
+
+Design in [`LOG.md`](LOG.md) — "Reasoning Log: Probabilistic L0
+Foundation" (bottom-most reasoning entry, chronologically earliest).
+Implemented as `ProbabilisticWorld(PhysicalWorld)` +
+`l0_probabilistic_inspector` in
+[`l0_physics_causality.py`](l0_physics_causality.py).
+
+Constraint set is `PhysicalWorld`'s (frozen: `max_speed = 2.0`,
+`mass = 1.0`, `dt = 0.05`, `gravity = (0, -0.5)`) plus these frozen
+noise/scale parameters on `ProbabilisticWorld`:
+
+  - `pos_sigma    = 0.01`   (position continuity noise)
+  - `vel_sigma    = 0.05`   (velocity continuity noise; not used in
+                             the current formulation but reserved)
+  - `energy_sigma = 0.1`    (energy conservation noise)
+  - `accel_sigma  = 0.1`    (momentum/F=ma noise)
+  - `speed_scale  = 10.0`   (steepness of the logistic speed barrier)
+
+The claims below pin what each component of `log_likelihood`
+contributes as a function of the AI's deviation from true physics.
+All four are PHENOMENON claims — retooling the noise-model formula
+would flip them, retooling the numerical evaluation would not.
+
+### GL_L0_P001 — position continuity is Gaussian  `[PHENOMENON]`
+
+**Statement.** `ProbabilisticWorld.log_likelihood` contributes a
+Gaussian term `logp_pos = -‖pos - true_pos‖² / (2 · pos_sigma²)`
+to the total log-probability of the AI's proposed state, where
+`true_pos` is the mean predicted by `apply_physics`. With
+`pos_sigma = 0.01`, a position error of `δ` metres contributes
+`-δ² / (2 · 10⁻⁴) = -5·10⁴ · δ²`. A 1 m teleport contributes
+approximately `-5000` to logp; a 5 m teleport (the fixed
+hallucination scenario's step 20) contributes `≈ -125000` on the
+position term alone.
+
+**Why it matters.** Position continuity is the primary catcher for
+teleportation-style hallucinations. A Gaussian formulation means
+the penalty grows quadratically with the size of the discontinuity
+— an AI that hedges its teleport by a factor of 10 pays 100× the
+score penalty.
+
+**Falsifier.** A finite `(pos, prev_pos, prev_vel, force)` where
+`logp_pos` disagrees with `-‖pos - true_pos‖²/(2σ²)` at
+`pos_sigma = 0.01` by more than 1 unit of logp.
+
+**Status.** `active`. Test:
+`test_gaussian_position_contribution_unit_error`,
+`test_teleport_1m_contributes_at_least_5000_penalty`.
+
+### GL_L0_P002 — speed cap is a smooth logistic barrier  `[PHENOMENON]`
+
+**Statement.** The speed constraint contributes
+`logp_speed = -log(1 + exp(speed_scale · (‖vel‖ - max_speed)))` =
+`-logaddexp(0, k · (v - v_max))` with frozen `k = 10.0` and
+`v_max = 2.0`. Reference values:
+
+  - `‖vel‖ ≪ v_max`:      `logp_speed → 0` (no penalty below the cap)
+  - `‖vel‖ = v_max`:       `logp_speed = -log(2) ≈ -0.693`
+  - `‖vel‖ = v_max + 1`:   `logp_speed ≈ -10.00`
+  - `‖vel‖ = v_max + 10`:  `logp_speed ≈ -100`
+
+The asymptotic slope above the cap is `-k = -10` per m/s of
+excess speed. Below the cap the penalty is not zero but
+exponentially small (softplus, not ReLU).
+
+**Why it matters.** The deterministic inspector rejects at
+`‖vel‖ > max_speed` with a hard boundary; the probabilistic
+version replaces that boundary with a smooth curve so a proposal
+at `v_max + ε` gets a `k·ε`-sized penalty, not a full reject.
+Numerical stability requires the `logaddexp` form: naive
+`-log(1 + exp(k·Δv))` overflows for the AI hallucination's step-20
+teleport (which implies `‖v‖ ≈ 100 m/s`; `exp(980)` overflows).
+
+**Falsifier.** A finite `‖vel‖` where the returned `logp_speed`
+disagrees with `-logaddexp(0, k · (‖vel‖ - v_max))` for
+`k = 10, v_max = 2.0`.
+
+**Status.** `active`. Tests:
+`test_speed_barrier_below_cap_is_negligible`,
+`test_speed_barrier_at_cap_is_neg_log2`,
+`test_speed_barrier_slope_above_cap`.
+
+### GL_L0_P003 — energy conservation is Gaussian  `[PHENOMENON]`
+
+**Statement.** `log_likelihood` contributes
+`logp_energy = -(ΔKE - work)² / (2 · energy_sigma²)` with frozen
+`energy_sigma = 0.1`, where `ΔKE = ½·m·(‖v‖² - ‖prev_v‖²)` and
+`work = (F + m·g) · (pos - prev_pos)` (conservative-work
+approximation on the current step). A 1 J energy imbalance
+contributes `-1/(2·0.01) = -50` to logp.
+
+**Why it matters.** Catches "momentum creation from nothing" — the
+hallucination scenario's step 40-44 doubles velocity per step from
+a tiny 0.1 N force, generating KE that no work paid for. The
+energy penalty scales quadratically with the imbalance.
+
+**Falsifier.** A finite `(pos, vel, prev_pos, prev_vel, force)`
+where `logp_energy` differs from the closed-form Gaussian by more
+than 1 unit at `energy_sigma = 0.1`.
+
+**Status.** `active`. Tests:
+`test_energy_conservation_zero_imbalance_no_penalty`,
+`test_energy_1J_imbalance_contributes_neg50`.
+
+### GL_L0_P004 — momentum sanity (F=ma) is Gaussian  `[PHENOMENON]`
+
+**Statement.** `log_likelihood` contributes
+`logp_accel = -‖actual_acc - expected_acc‖² / (2 · accel_sigma²)`
+with frozen `accel_sigma = 0.1`, where
+`expected_acc = F/m + g` (Newton's second) and
+`actual_acc = (vel - prev_vel) / dt`. A 1 m/s² acceleration error
+per axis contributes `-50` to logp; a full vector-norm error of
+1 m/s² contributes `-50` (`‖·‖² = 1`).
+
+**Why it matters.** The AI hallucination's step 40-44 (momentum
+creation) and step 60+ (gravity denial) both surface here even if
+the position and energy terms don't fully catch them.
+
+**Falsifier.** A finite `(vel, prev_vel, force)` where
+`logp_accel` differs from the closed-form Gaussian.
+
+**Status.** `active`. Tests:
+`test_momentum_consistent_step_no_penalty`,
+`test_momentum_creation_from_nothing_flagged`.
+
+### GL_L0_P_PIN — probabilistic inspector's trace on the fixed hallucination  `[INSTRUMENT]`
+
+**Statement.** With `np.random.seed(0)` and the shipped constants,
+`l0_probabilistic_inspector(ai_traj, ai_forces,
+ProbabilisticWorld(), 0.05)` produces:
+
+  - `corrected_traj.shape == (201, 2)`
+  - `log_probs.shape == (200,)`
+  - Total log-probability: `< -1·10⁹` (scenario is decisively
+    rejected)
+  - Baseline steps (0-19, 100-199): all `|logp| < 1000`
+    (small negative from noise floor)
+  - Teleport (step 20): `logp < -1·10⁶`
+  - Momentum-creation window (steps 40-44): all `< -1·10⁷`
+  - Gravity-denial onset (steps 60-61): all `< -1·10⁶`
+
+**Why it matters.** Any silent retuning of the noise constants or
+the log-probability formula surfaces as a delta on the trace's
+shape.
+
+**Falsifier.** The trace runs and the scenario's total logp is
+`> -10⁶`, or a baseline step exceeds the small-noise envelope.
+
+**Status.** `active`. Tests: full class
+`TestProbabilisticInspectorDemoPin`.
+
+---
+
 ## Lε — scope-profile matrix for scope-sensitive claims
 
 Lives in [`scope_profile.py`](scope_profile.py) alongside (not inside)

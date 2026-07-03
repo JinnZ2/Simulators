@@ -1,0 +1,40 @@
+======================================================================
+PROBABILISTIC L0 INSPECTOR — trace on the fixed hallucination
+======================================================================
+Frozen noise constants:
+  pos_sigma    = 0.01
+  vel_sigma    = 0.05
+  energy_sigma = 0.1
+  accel_sigma  = 0.1
+  speed_scale  = 10.0
+
+Trace shape: corrected=(201, 2), log_probs=(200,)
+Total logp:                       -16391719516.5
+Mean per step:                      -81958597.58
+Worst step:                     step  20 @ -1452377216.9
+Best step:                      step  79 @      -1.94
+
+Landmark steps (hallucination injections at 20, 40-44, 60+):
+  step   0: logp =             -12.51
+  step   5: logp =             -32.26
+  step  15: logp =             -34.75
+  step  19: logp =             -34.74
+  step  20: logp =     -1452377216.91  <- +5m teleport
+  step  21: logp =     -1338557357.34
+  step  39: logp =      -256962127.17
+  step  40: logp =      -229443854.58  <- momentum creation (v *= 1.8, F=0.1N)
+  step  41: logp =      -204319549.00  <- momentum creation (v *= 1.8, F=0.1N)
+  step  44: logp =      -141487796.13  <- momentum creation (v *= 1.8, F=0.1N)
+  step  45: logp =      -124324845.41
+  step  59: logp =       -10940643.50
+  step  60: logp =        -8479827.37  <- gravity denial starts
+  step  61: logp =        -6414191.53  <- gravity denial starts
+  step 100: logp =             -12.51
+  step 150: logp =             -12.53
+  step 199: logp =             -12.57
+
+======================================================================
+Score is deeply negative on hallucination steps; near zero on quiet
+baseline steps. No hard reject inside L0 — score cascades upward for
+higher orchestration layers to threshold, per LOG.md section 4.
+======================================================================

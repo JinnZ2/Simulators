@@ -431,8 +431,14 @@ class ProbabilisticWorld(PhysicalWorld):
 
         # 3. Velocity continuity (speed constraint + soft barrier)
         speed = np.linalg.norm(vel)
-        # Logistic barrier: high penalty above max_speed, negligible below
-        logp_speed = -np.log(1 + np.exp(self.speed_scale * (speed - self.max_speed)))
+        # Logistic barrier: high penalty above max_speed, negligible below.
+        # Use np.logaddexp for numerical stability at very high speed —
+        # the naive form `-log(1 + exp(k * dv))` overflows for large dv
+        # (e.g. an AI teleport briefly implies |v| = 100 m/s, dv = 98,
+        # k*dv = 980, exp(980) overflows). logaddexp(0, x) = log(1 + e^x)
+        # is stable for any x and asymptotes to max(0, x).
+        logp_speed = -np.logaddexp(
+            0.0, self.speed_scale * (speed - self.max_speed))
 
         # 4. Energy conservation: compare KE change to work
         ke_change = 0.5 * self.mass * (np.sum(vel**2) - np.sum(prev_vel**2))
@@ -450,3 +456,81 @@ class ProbabilisticWorld(PhysicalWorld):
         # The most probable state under this likelihood (ignoring constraints)
         # is the true physical state; we return it for the caller's blending.
         return total_logp, true_pos, true_vel
+
+
+# -----------------------------------------------------------------------------
+# STAGE 4.2 (per LOG.md): Probabilistic inspector — Bayesian counterpart
+# to l0_grounding_inspector. No hard reject; every step contributes a
+# scalar log-probability to a per-step trace. The "corrected" trajectory
+# is the same blend of true-physics and AI-proposal we use in the
+# deterministic inspector (0.6/0.4), retained for visualisation
+# continuity across the two inspectors.
+#
+# Frozen noise constants:  see ProbabilisticWorld.__init__ defaults
+# above (pos_sigma=0.01, vel_sigma=0.05, energy_sigma=0.1,
+# accel_sigma=0.1, speed_scale=10.0). Pinned by GL_L0_P001..004
+# in CLAIMS.md.
+# -----------------------------------------------------------------------------
+def l0_probabilistic_inspector(ai_traj, ai_forces, world, dt=0.05):
+    """
+    Probabilistic (Bayesian) counterpart to l0_grounding_inspector.
+
+    Returns:
+      - corrected_traj: numpy array of blended physics-vs-AI positions,
+        same shape as l0_grounding_inspector's output for continuity.
+      - log_probs: per-step scalar log-likelihood of the AI's proposed
+        state under the true physics + noise model. NEGATIVE values
+        indicate the AI's proposal is unlikely given L0 + Lε. Very
+        negative values (e.g. -1000+) mark hallucination steps.
+
+    `world` must be a ProbabilisticWorld (or subclass); PhysicalWorld
+    alone lacks the noise parameters and the log_likelihood method.
+
+    Design notes:
+      - No hard reject inside L0. The score accumulates; rejection
+        thresholds (if any) move to higher orchestration layers.
+      - Blend weight (0.6 AI, 0.4 physics) matches
+        l0_grounding_inspector so the corrected trajectory is
+        visually comparable across the two inspectors.
+      - Speed cap is a smooth logistic barrier (see
+        log_likelihood, GL_L0_P002), so a proposal just above cap
+        gets a small penalty and a proposal far above gets a large
+        penalty — no discontinuity at the boundary.
+    """
+    pos = ai_traj[0].copy()
+    vel = np.array([0.0, 0.0])
+
+    corrected_traj = [pos.copy()]
+    log_probs = []
+
+    for i in range(len(ai_forces)):
+        ai_next_pos = ai_traj[i + 1] if i + 1 < len(ai_traj) else pos
+        # Reconstruct the AI's implied velocity from its proposed
+        # position delta (the AI never publishes vel directly in this
+        # sim; the deterministic inspector does the same reconstruction).
+        ai_next_vel = (ai_next_pos - pos) / dt
+        force = ai_forces[i] if i < len(ai_forces) else np.array([0.0, 0.0])
+
+        # Score the AI's proposed step under the probabilistic model.
+        step_logp, true_next_pos, true_next_vel = world.log_likelihood(
+            ai_next_pos, ai_next_vel, pos, vel, force,
+        )
+        log_probs.append(step_logp)
+
+        # Blend for the corrected trajectory (visual continuity with
+        # the deterministic inspector's output).
+        blend = 0.6
+        corrected_pos = blend * ai_next_pos + (1 - blend) * true_next_pos
+        corrected_vel = (corrected_pos - pos) / dt
+        # Same re-enforce-speed pass as the deterministic inspector.
+        if np.linalg.norm(corrected_vel) > world.max_speed:
+            corrected_vel = (corrected_vel
+                             / np.linalg.norm(corrected_vel)
+                             * world.max_speed)
+            corrected_pos = pos + corrected_vel * dt
+
+        pos = corrected_pos
+        vel = corrected_vel
+        corrected_traj.append(pos.copy())
+
+    return np.array(corrected_traj), np.array(log_probs)
