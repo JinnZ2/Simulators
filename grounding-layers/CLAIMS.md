@@ -533,6 +533,137 @@ number by more than 0.1 logp under the shipped constants.
 
 ---
 
+### GL_L2_P001 — extraction resources penalized by (usage/stock)²  `[PHENOMENON]`
+
+**Statement.** For each extraction resource in
+`{water_extract, soil_erosion, mineral_mine}`,
+`ProbabilisticPlanetaryWorld.log_likelihood` contributes
+`logp_resource = -(usage / stock)²`, where `stock` is the world's
+current mutable state (`self.water`, `self.soil`, `self.minerals`).
+Reference values under the shipped constants:
+
+  - water 10% of `water_reserve_initial = 1e7`:  `-0.01`
+  - water 50%:                                   `-0.25`
+  - water at reserve:                            `-1.0`
+  - water 10× reserve:                           `-100.0`
+
+Soil and minerals use the same shape against their own stocks.
+
+**Why it matters.** LOG.md section 3 says: "For each resource, model
+a log-probability that proposed consumption exceeds available
+stock: `log p(consumption) ∝ -(consumption / stock)²`." The
+quadratic form gives a small "frugality tax" for small extractions
+and rapidly-growing penalty for extractions approaching or
+exceeding stock — which is the load-bearing property.
+
+**Falsifier.** A finite `(usage, stock)` pair where the returned
+per-resource contribution disagrees with `-(usage/stock)²`.
+
+**Status.** `active`. Tests:
+`test_water_10pc_gives_neg_0p01`,
+`test_water_50pc_gives_neg_0p25`,
+`test_water_at_stock_gives_neg_1`,
+`test_water_10x_stock_gives_neg_100`,
+`test_soil_and_mineral_same_shape`.
+
+### GL_L2_P002 — carbon accumulator penalizes only above sink  `[PHENOMENON]`
+
+**Statement.** For `carbon_emit`, the contribution is
+`-(new_load / carbon_sink_capacity)²` when
+`new_load > 0`, else `0`, where
+`new_load = carbon_load + emit - carbon_uptake_rate`. Reference
+values under `carbon_sink_capacity = 2e6`, `carbon_uptake_rate = 500`,
+`carbon_load = 0`:
+
+  - `emit = 2e6` (roughly at sink):    `≈ -1.0`
+  - `emit = 100` (well under uptake):  `0` (net drawdown, free)
+  - `emit = 4e6`:                       `≈ -4.0`
+
+**Why it matters.** Carbon differs from extraction resources — it's
+an accumulator. Emitting less than the uptake rate is a net
+drawdown and physically fine; only accumulated load matters.
+
+**Falsifier.** A finite `(carbon_emit, carbon_load, uptake, sink)`
+combination where the contribution disagrees with the closed form.
+
+**Status.** `active`. Tests:
+`test_carbon_below_uptake_is_free`,
+`test_carbon_at_capacity_gives_neg_1`,
+`test_carbon_above_capacity_quadratic`.
+
+### GL_L2_P003 — heat budget as (emit/capacity)²  `[PHENOMENON]`
+
+**Statement.** For `heat_emit`, the contribution is
+`-(heat_emit / heat_budget_capacity)²`. Frozen
+`heat_budget_capacity = 1e5` (arbitrary planetary heat units;
+this constant is a toy placeholder — the phenomenon claim is the
+quadratic shape, not the specific number). Reference values:
+
+  - `heat_emit = 1e4` (10% of budget):  `-0.01`
+  - `heat_emit = 1e5` (at budget):      `-1.0`
+  - `heat_emit = 1e6` (10× budget):     `-100.0`
+
+**Why it matters.** LOG.md section 3 introduces the heat budget as
+a new constraint the deterministic L2 doesn't carry. Radiative
+cooling capacity is finite; waste-heat plans exceeding it cook
+the planet.
+
+**Falsifier.** A finite `heat_emit` where the contribution
+disagrees with `-(heat_emit/heat_budget_capacity)²`.
+
+**Scope note.** `heat_budget_capacity = 1e5` is not calibrated to
+real Earth radiative budget (~120,000 TW). The shape claim is
+what's audited; calibration is a future refinement.
+
+**Status.** `active`. Tests:
+`test_heat_at_budget_gives_neg_1`,
+`test_heat_scales_quadratically`.
+
+### GL_L2_P004 — inspector is pure (no state mutation)  `[PHENOMENON]`
+
+**Statement.** `ProbabilisticPlanetaryWorld.log_likelihood(plan)`
+and `l2_probabilistic_inspector(plan, world)` are **pure
+functions**: neither mutates `world.water`, `world.soil`,
+`world.minerals`, or `world.carbon_load`. Two calls with the
+same `(plan, world state)` return the same result.
+
+**Why it matters.** The deterministic PlanetaryWorld MUTATES state
+on each `extract_water` etc. — that's fine for stepping through a
+plan but incompatible with a Bayesian scorer that should be
+side-effect-free. Callers who want stateful accumulation across a
+multi-step plan update world state manually between scoring calls.
+
+**Falsifier.** Any input `(plan, world)` where calling
+`log_likelihood(plan)` changes any of `world.{water, soil,
+minerals, carbon_load}`.
+
+**Status.** `active`. Tests:
+`test_log_likelihood_does_not_mutate_water`,
+`test_log_likelihood_does_not_mutate_carbon_load`,
+`test_two_calls_return_same_result`.
+
+### GL_L2_P_PIN — six canonical plans pinned  `[INSTRUMENT]`
+
+**Statement.** Under the shipped constants, `l2_probabilistic_inspector`
+produces the following total-logp values on canonical plans:
+
+| plan                                            | total logp  |
+|-------------------------------------------------|-------------|
+| Small clean (1000/10/100 m³/t/t + 100t + 1000h) | `≈ -0.0001` |
+| Water 100% of reserve                            | `-1.0000`   |
+| Water 10× reserve                                | `-100.0`    |
+| Multi-resource at limit (water+soil+min+carbon) | `≈ -4.0`    |
+| Heat 10× budget                                  | `-100.0`    |
+| Carbon net drawdown (100 t emit)                | `0.0`       |
+
+**Falsifier.** Any pinned value shifts by more than `0.001` under
+the shipped constants.
+
+**Status.** `active`. Tests: full class
+`TestL2ProbabilisticInspectorDemoPin`.
+
+---
+
 ### GL_L0_P_PIN — probabilistic inspector's trace on the fixed hallucination  `[INSTRUMENT]`
 
 **Statement.** With `np.random.seed(0)` and the shipped constants,
