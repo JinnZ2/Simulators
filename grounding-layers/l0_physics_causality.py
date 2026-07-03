@@ -387,3 +387,66 @@ if __name__ == "__main__":
 # be routed to higher layers or rejected.
 
 
+# -----------------------------------------------------------------------------
+# STAGE 4.1 (per LOG.md): Probabilistic extension of L0
+# -----------------------------------------------------------------------------
+# ProbabilisticWorld extends PhysicalWorld with Gaussian log-likelihoods
+# for position continuity, energy conservation, momentum sanity, and a
+# smooth logistic barrier for the speed cap. Design in
+# grounding-layers/LOG.md ("Reasoning Log: Probabilistic L0 Foundation").
+#
+# The original PhysicalWorld stays intact for backward compatibility and
+# the audit-grade tests (GL_L0_001..004 + GL_L0_PIN); the probabilistic
+# inspector accumulates a plausibility score instead of hard-rejecting.
+#
+# (The bare `patch:` marker that used to sit here was a design-note
+# residue from the DeepSeek edit surface; wrapped as a section comment
+# so the module parses.)
+class ProbabilisticWorld(PhysicalWorld):
+    """
+    L0 physics with Gaussian noise assumptions for each constraint.
+    Constants are frozen; uncertainties are frozen as per Lε.
+    """
+    def __init__(self, mass=1.0, dt=0.05, max_speed=2.0,
+                 pos_noise=0.01, vel_noise=0.05, energy_noise=0.1,
+                 accel_noise=0.1, speed_scale=10.0):
+        super().__init__(mass, dt, max_speed)
+        self.pos_sigma = pos_noise
+        self.vel_sigma = vel_noise
+        self.energy_sigma = energy_noise
+        self.accel_sigma = accel_noise
+        self.speed_scale = speed_scale  # steepness of logistic barrier
+
+    def log_likelihood(self, pos, vel, prev_pos, prev_vel, force):
+        """
+        Returns scalar log-probability of the AI's proposed state
+        (pos, vel) given the previous corrected state and the applied force.
+        Also returns a physically plausible 'corrected' state (mode).
+        """
+        # 1. Predict mean next state via true physics
+        true_pos, true_vel = self.apply_physics(prev_pos, prev_vel, force, self.dt)
+
+        # 2. Position continuity log-likelihood
+        logp_pos = -np.sum((pos - true_pos)**2) / (2 * self.pos_sigma**2)
+
+        # 3. Velocity continuity (speed constraint + soft barrier)
+        speed = np.linalg.norm(vel)
+        # Logistic barrier: high penalty above max_speed, negligible below
+        logp_speed = -np.log(1 + np.exp(self.speed_scale * (speed - self.max_speed)))
+
+        # 4. Energy conservation: compare KE change to work
+        ke_change = 0.5 * self.mass * (np.sum(vel**2) - np.sum(prev_vel**2))
+        work = np.dot(force + self.mass * self.gravity, pos - prev_pos)  # conservative approximation
+        energy_error = ke_change - work
+        logp_energy = -energy_error**2 / (2 * self.energy_sigma**2)
+
+        # 5. Momentum sanity: F=ma consistency
+        expected_acc = force / self.mass + self.gravity
+        actual_acc = (vel - prev_vel) / self.dt
+        logp_accel = -np.sum((actual_acc - expected_acc)**2) / (2 * self.accel_sigma**2)
+
+        total_logp = logp_pos + logp_speed + logp_energy + logp_accel
+
+        # The most probable state under this likelihood (ignoring constraints)
+        # is the true physical state; we return it for the caller's blending.
+        return total_logp, true_pos, true_vel
