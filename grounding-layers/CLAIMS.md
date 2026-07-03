@@ -12,20 +12,39 @@ stubs.
 ## REFUTATION_PROTOCOL
 
 The model constants inside each `l*.py` are **frozen estimates**. The
-CLAIMS in this file are the falsifiable objects. If a test fails:
+CLAIMS in this file are the falsifiable objects. On a test failure,
+work through these three steps in order:
 
-1. **Do not retune the constants** to make the test pass. The value
-   of a claim is precisely that it can be shown wrong.
-2. **Update the claim in place**. Mark `status: falsified`, attach
-   the failing case (inputs, observed vs expected outputs), and
-   restate what a next-round claim would look like — or retire the
-   claim to `REFUTED` if it can no longer be stated correctly at all.
-3. **Author a replacement**, if one is warranted. Number it with the
-   next available `GL_L*_NNN`. Do not reuse the number of a refuted
-   claim.
+1. **Check the claim.** Is it simply wrong? If so, update it in place,
+   mark `status: falsified`, attach the failing case (inputs, observed
+   vs expected outputs), and restate what a next-round claim would
+   look like — or retire the claim to `REFUTED` if it can no longer
+   be stated correctly at all.
+
+2. **Check the instrument.** If the claim is logically coherent but
+   the test fails due to the *order* or *priority* of checks inside
+   the inspector, the instrument may be operating outside its scope.
+   Ask:
+   - *Is this instrument designed to handle this edge case?*
+   - *Should the instrument's priority be reordered, or should we
+     restrict its scope to exclude this case?*
+   If the instrument is reordered or re-scoped, capture the change
+   explicitly in the module's `SCOPE` block (on the class that owns
+   the constraint). Then revisit the claim: it may be **strengthened**,
+   or a new claim may be warranted.
+
+3. **Author a replacement claim**, if one is warranted. Number with
+   the next available `GL_L*_NNN`. Do not reuse a refuted number.
+
+**Do not retune the frozen constants** to make a test pass. The value
+of a claim is precisely that it can be shown wrong; the value of a
+frozen constant is precisely that it doesn't move to protect a wrong
+claim. The lever is the CLAIM or the SCOPE, not the constant.
 
 The point is that a wrong claim in this file, verifiably wrong, is a
-stronger artifact than a right claim in someone's head.
+stronger artifact than a right claim in someone's head — and a
+correctly scoped instrument is a stronger artifact than a claim
+carefully weakened around an instrument's blind spot.
 
 ## The instrument is not the phenomenon
 
@@ -71,6 +90,17 @@ assertion to a PHENOMENON claim ("state is rejected AND the reason
 string is exactly X"). The instrument piece can drift under a
 reasonable refactor; the phenomenon piece cannot. Split them.
 
+But splitting is not the only move. Sometimes the INSTRUMENT
+assertion isn't sloppy — it's a claim about what the instrument
+*ought* to be doing. In that case the correct move under Step 2 of
+the REFUTATION_PROTOCOL is to **rescope the instrument** so it
+actually does what the claim says, capture the scope explicitly, and
+strengthen the claim. `GL_L0_001` v1→v2→v3 walks through both moves:
+v2 splits (retreats to phenomenon-only), v3 rescopes (fixes the
+instrument, restores the instrument assertion). v3 is the stronger
+resting place. v2 is the correct move only when the instrument
+cannot be sensibly rescoped.
+
 ---
 
 ## L0 — physics & causality
@@ -80,34 +110,53 @@ Constraint set: `max_speed = 2.0 m/s`, `mass = 1.0`, `dt = 0.05 s`,
 See [`l0_physics_causality.py`](l0_physics_causality.py) module
 docstring for the CONSTRAINTS block.
 
-### GL_L0_001 — non-finite states are rejected  `[PHENOMENON]`
+### GL_L0_001 — non-finite states are rejected with a specific diagnostic  `[PHENOMENON]`
 
 **Statement.** `PhysicalWorld.is_valid_state(pos, vel)` returns
-`(False, <reason>)` whenever any component of `pos` or `vel` is
-`NaN` or `±Inf`. The claim pins **that the state is rejected**, not
-which specific check fires.
+`(False, "Non-finite position/velocity")` whenever any component of
+`pos` or `vel` is `NaN` or `±Inf`. The finite check **must run before**
+the speed-cap check — see the SCOPE block on `PhysicalWorld`.
 
-**Why it matters.** An AI plan that produces NaN velocity has already
-lost causality — there is no legal continuation. Silently accepting
-NaN would let the whole stack above L0 propagate garbage.
+**Why it matters.** An AI plan that produces NaN or Inf velocity has
+already lost causality. The instrument should not treat that as a
+speed violation — it is a logical error. Returning a specific
+diagnostic lets higher layers distinguish between "too fast" and
+"undefined" without re-inspecting the state.
 
 **Falsifier.** Any physically meaningful state where accepting a
 non-finite component is correct. None known.
 
-**History.** First-round claim was authored as
-`(False, "Non-finite position/velocity")` — a **phenomenon claim
-with an instrument assertion silently attached to it**. The reason
-string is an artifact of the check-order inside `is_valid_state`, not
-a property of the state. Testing revealed that `is_valid_state`
-checks the speed cap before the finite check, so `-Inf` velocity is
-rejected as `"Speed limit exceeded"` (because `‖[0, -inf]‖ = +∞ >
-max_speed`), not as `"Non-finite..."`. Weakened here to pin only the
-rejection outcome. This transition — instrument assertion peeled off
-a phenomenon claim — is now the reference pattern for how the
-"instrument is not the phenomenon" split (see the top of this file)
-gets applied in practice.
+**History.** Three-round arc, the reference case for the two levers
+in the REFUTATION_PROTOCOL above:
 
-**Status.** `active` (v2, after v1 was falsified in-place). Tests:
+- *v1 (falsified).* First-round claim: `(False, "Non-finite
+  position/velocity")` for NaN/Inf inputs. Falsified by
+  `test_inf_velocity_rejected` — the instrument's `is_valid_state`
+  checked the speed cap *before* the finite check, so `-Inf`
+  velocity was rejected as `"Speed limit exceeded"` (its norm is
+  `+∞ > max_speed`) instead of the claimed reason string.
+
+- *v2 (retired).* Weakened to "the state is rejected, reason string
+  not pinned." Kept the claim honest at the cost of throwing away
+  the higher-layer diagnostic. This was **Step 1** of the
+  REFUTATION_PROTOCOL applied without Step 2 — the claim was
+  softened around the instrument's blind spot.
+
+- *v3 (active).* Under **Step 2** of the extended protocol, the
+  instrument was inspected and found to be operating outside its
+  scope: `is_valid_state` was doing a physical check on a state
+  whose logical integrity had not yet been established. Rescoped
+  the instrument (finite check first, speed check second), captured
+  the ordering as an invariant in the SCOPE block on
+  `PhysicalWorld`, and RESTORED v1's specific-reason claim. The
+  frozen constants did not move.
+
+Two levers, two directions. v1→v2 weakens the claim to survive an
+instrument blind spot; v2→v3 fixes the instrument and strengthens
+the claim. The correct move is v2→v3 when the instrument can be
+sensibly rescoped — as here.
+
+**Status.** `active` (v3). Tests:
 `test_nan_position_rejected`, `test_inf_position_rejected`,
 `test_nan_velocity_rejected`, `test_inf_velocity_rejected`.
 

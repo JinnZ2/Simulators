@@ -9,15 +9,10 @@ CC0. Extracted verbatim from legacy/Organize3.md lines 2651-2945.
 Non-stdlib: numpy, matplotlib, scipy.integrate.
 
 ── CONSTRAINTS ──────────────────────────────────────────────
-Frozen model constants. Refute the CLAIM, not the constant.
-
-  max_speed  = 2.0 m/s    hard cap; enforced in apply_physics + is_valid_state
-  mass       = 1.0 kg     unit mass, so F=a
-  dt         = 0.05 s     inspection timestep
-  gravity    = (0, -0.5) m/s^2   mild downward drift on the substrate
-  force_clip = ±50 N      apply_physics clips force before F=ma
-  blend      = 0.6        AI-vs-physics trust weight in the inspector
-                          (0.6 * ai + 0.4 * true_physics)
+Constraint set and SCOPE block live on `PhysicalWorld` (see its class
+docstring). All values are frozen estimates — refute the CLAIM, not
+the constant. The `blend` parameter (0.6) is applied by
+`l0_grounding_inspector`, not `PhysicalWorld`.
 
 The hallucination scenario is a FIXED test fixture (not tunable): at
 step 20 the AI teleports +5 m vertically; at steps 40-44 it doubles
@@ -26,19 +21,32 @@ integrating gravity correctly.
 
 ── REFUTATION_PROTOCOL ──────────────────────────────────────
 Weights are frozen estimates. The claims (CLAIMS.md, GL_L0_001..004)
-are the falsifiable objects. A failing test updates the CLAIM (mark
-`is_falsified: true` and attach the failing case), NOT the frozen
-constants. If a claim can no longer be stated correctly at all, it is
-retired to `REFUTED` and a replacement claim is authored.
+are the falsifiable objects. On a test failure:
 
-The tests themselves are instruments: check-order, tolerance
-envelopes, and measurement conventions are choices we made about how
-to assess this sim. Split each claim into PHENOMENON (an invariant of
-the sim, survives an instrument refactor) and INSTRUMENT (an
-invariant of how we assess the sim, drifts when the instrument is
-retooled) — see the "The instrument is not the phenomenon" section
-at the top of CLAIMS.md. The `speed-before-finite` check-order that
-falsified GL_L0_001 v1 is the reference case for this split.
+  1. CHECK THE CLAIM. Is it simply wrong? Update in place, mark
+     `status: falsified`, attach the failing case, restate what a
+     next-round claim would look like — or retire to `REFUTED`.
+
+  2. CHECK THE INSTRUMENT. If the claim is logically coherent but the
+     failure is about check-ORDER or check-PRIORITY, the instrument
+     may be operating outside its scope. Ask: is this instrument
+     designed to handle this edge case? If not — reorder or restrict
+     scope, capture the change in the class's SCOPE block, and
+     revisit the claim (it may be strengthened, or a new claim may
+     be warranted). GL_L0_001 v1→v2→v3 is the reference case: v1's
+     specific-reason claim was falsified because the instrument
+     checked speed before finite; v2 weakened the claim to "any
+     rejection reason"; v3 rescoped the instrument (finite-check
+     first) and RESTORED the specific-reason claim.
+
+  3. AUTHOR A REPLACEMENT if warranted. Number with the next available
+     `GL_L*_NNN`. Do not reuse a refuted number.
+
+The tests are instruments in Lε reading L0. That the audit apparatus
+can be misled by its own check-order is not a bug in the methodology
+— it's the measurement-vs-truth gap the l_epsilon_epistemic simulator
+models, showing up inside our own instrument. See "The instrument is
+not the phenomenon" section at the top of CLAIMS.md.
 ─────────────────────────────────────────────────────────────
 """
 
@@ -69,6 +77,26 @@ import numpy as np
 # 1. PHYSICAL SYSTEM DEFINITION (Substrate Reality)
 # -----------------------------------------------------------------------------
 class PhysicalWorld:
+    """
+    L0: Physics & Causality Inspector
+
+    SCOPE:
+      This inspector is designed for finite, real-valued states only.
+      If a state is non-finite (NaN, Inf), the inspector will reject it
+      *before* applying any physical constraints. Non-finite states are
+      treated as logical errors, not physical violations. The speed cap
+      check runs only after the finite-ness check.
+
+    CONSTRAINTS (frozen):
+      max_speed  = 2.0 m/s
+      mass       = 1.0
+      dt         = 0.05 s
+      gravity    = (0, -0.5)
+      force_clip = ±50 N
+      blend      = 0.6 (soft blend between AI and true physics, applied
+                        in l0_grounding_inspector)
+    """
+
     def __init__(self, mass=1.0, dt=0.05, max_speed=2.0):
         self.mass = mass
         self.dt = dt
@@ -76,13 +104,22 @@ class PhysicalWorld:
         self.gravity = np.array([0.0, -0.5])  # mild downward drift
 
     def is_valid_state(self, pos, vel):
-        """Check L0 invariants for a given state."""
-        # Speed limit
-        if np.linalg.norm(vel) > self.max_speed:
-            return False, "Speed limit exceeded"
-        # Position finite (no NaN or Inf)
+        """
+        Returns (True, "OK") if the state is finite and within speed cap.
+        Returns (False, reason) otherwise, with reason being either
+          - "Non-finite position/velocity" (if any component is NaN or Inf)
+          - "Speed limit exceeded" (if speed > max_speed and state is finite)
+
+        Order matters (see the SCOPE block on this class): logical
+        integrity is checked before the physical constraint, so ±Inf
+        velocity is reported as non-finite, not as a speed violation.
+        """
+        # 1. Logical integrity first (scope boundary)
         if not np.isfinite(pos).all() or not np.isfinite(vel).all():
             return False, "Non-finite position/velocity"
+        # 2. Physical constraint
+        if np.linalg.norm(vel) > self.max_speed:
+            return False, "Speed limit exceeded"
         return True, "OK"
 
     def apply_physics(self, pos, vel, force, dt):
@@ -342,16 +379,11 @@ if __name__ == "__main__":
     print("=" * 70)
 
 # -----------------------------------------------------------------------------
-# SCOPE
+# SCOPE (module-level extension, complements the SCOPE block on PhysicalWorld)
 # -----------------------------------------------------------------------------
-# This inspector is designed for finite, real-valued states only.
-# It assumes Newtonian mechanics at human-scale speeds.
+# The inspector assumes Newtonian mechanics at human-scale speeds.
 # It does NOT model relativistic effects, quantum uncertainty, or
 # biological variability. Claims that require those domains should
 # be routed to higher layers or rejected.
-#
-# (Was originally appended as a bare `SCOPE:` block after the `if __name__`
-# guard; that broke module-parse. Now a comment block so the intent
-# survives and the file imports cleanly.)
 
 
