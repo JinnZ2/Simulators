@@ -216,3 +216,191 @@ def demo():
 
 if __name__ == "__main__":
     demo()
+
+
+# =============================================================================
+# STAGE (per LOG.md "Probabilistic L1-L4 Conditioning" section 4):
+# ProbabilisticEcologicalWorld and l3_probabilistic_inspector
+#
+# Bayesian counterpart to l3_grounding_inspector. Each ecological
+# constraint contributes an additive log-probability term:
+#
+#   Allometry:            Gaussian on (claimed_metabolism_W
+#                          - kleiber_prediction)
+#   Trophic transfer:     Gaussian on (claimed_efficiency - 0.10)
+#   Population overshoot: -scale * max(0, N/K - 1)^2
+#   Population MVP:       -scale * max(0, 1 - N/MVP)^2
+#   Trophic ceiling:      -scale * max(0, level - max_levels)^2
+#
+# Frozen additional noise/scale constants live on the class __init__
+# defaults, pinned by GL_L3_P001..P005 + P_PIN in CLAIMS.md.
+# =============================================================================
+
+
+class ProbabilisticEcologicalWorld(EcologicalWorld):
+    """
+    L3 with additive Gaussian / smooth-barrier terms on the ecological
+    constraints. Extends EcologicalWorld so the deterministic API
+    (allometric_metabolism, trophic_energy_available,
+    carrying_capacity, population_growth, extinction_risk) stays
+    available.
+
+    SCOPE (see grounding-layers/SCOPE_TAXONOMY.md):
+      T = generational
+          Population dynamics operate on lifespans; per-step
+          semantics is caller-defined.
+      S = ecosystem
+          Bounded region with declared trophic structure.
+      O = any_biological
+          Kleiber's law is empirically fit to aerobic metabolism.
+          Anaerobic microbes, deep-sea chemolithoautotrophs, and
+          hypothetical non-terrestrial metabolisms do not follow
+          the same 3/4-power scaling — the phenomenon claim uses
+          O=any_biological rather than O=universal.
+      C = ecosystem_frame
+          The predator-prey / trophic-level / carrying-capacity
+          ontology is ONE framing of ecology. Reciprocity-based
+          frames from many Indigenous ecological knowledge
+          systems, guild-based frames, and network-of-relations
+          frames would carve the same substrate differently.
+          Constants inherited from EcologicalWorld encode this
+          specific framing.
+
+    An AI evaluating claims about its own operation would NOT
+    route through this layer — silicon substrate is not part of
+    the biological ecosystem the constraint set is drawn from.
+    An AI evaluating claims about an ecosystem it observes DOES
+    route through this layer, and inherits the cultural framing.
+
+    Constraint set inherited from EcologicalWorld:
+      kleiber_a                     = 3.0    (W / kg^0.75)
+      trophic_transfer_efficiency   = 0.10
+      max_trophic_levels            = 5
+      minimum_viable_population     = 50
+      carrying_capacity_initial     = 1000
+      population_growth_rate_max    = 0.5
+
+    Frozen additional noise / scale constants added here:
+      allometry_sigma          = 1.0    W noise on Kleiber prediction
+      trophic_sigma            = 0.05   noise on 10% efficiency claim
+      overcapacity_scale       = 2.0    scale on N > K barrier
+      mvp_scale                = 2.0    scale on N < MVP barrier
+      trophic_ceiling_scale    = 1.0    scale on level > max barrier
+
+    Refute the CLAIM, not the constant. Same protocol as L0/L1/L2.
+    """
+
+    def __init__(self,
+                 kleiber_a=3.0,
+                 trophic_transfer_efficiency=0.10,
+                 max_trophic_levels=5,
+                 minimum_viable_population=50,
+                 carrying_capacity_initial=1000,
+                 population_growth_rate_max=0.5,
+                 allometry_sigma=1.0,
+                 trophic_sigma=0.05,
+                 overcapacity_scale=2.0,
+                 mvp_scale=2.0,
+                 trophic_ceiling_scale=1.0):
+        super().__init__(kleiber_a, trophic_transfer_efficiency,
+                         max_trophic_levels, minimum_viable_population,
+                         carrying_capacity_initial,
+                         population_growth_rate_max)
+        self.allometry_sigma = allometry_sigma
+        self.trophic_sigma = trophic_sigma
+        self.overcapacity_scale = overcapacity_scale
+        self.mvp_scale = mvp_scale
+        self.trophic_ceiling_scale = trophic_ceiling_scale
+
+    def log_likelihood(self, plan):
+        """
+        Return dict with total log-probability and per-component
+        breakdown for a proposed ecological plan.
+
+        plan (dict) may include:
+          mass_kg                    (kg)   species body mass
+          population                 (int)  proposed population size
+          trophic_level              (int)  0 = producers, 1 = herbivores...
+          base_energy                (J/step, default 100000.0) producer energy
+          claimed_metabolism_W       (W, optional) AI-proposed metabolism;
+                                      scored against Kleiber's law
+          claimed_trophic_efficiency (0..1, optional) AI-proposed transfer
+                                      efficiency; scored against 0.10
+
+        Returns:
+          {
+            'logp': float,                     # total, sum of components
+            'components': {                     # per-constraint
+              'allometry':        float or absent,
+              'trophic_transfer': float or absent,
+              'overcapacity':     float or absent,
+              'mvp':              float or absent,
+              'trophic_ceiling':  float or absent,
+            }
+          }
+
+        Pure function — does NOT mutate self.
+        """
+        components = {}
+        mass = plan.get('mass_kg', 0.0)
+        pop = plan.get('population', 0.0)
+        trophic = plan.get('trophic_level', 0)
+        base_energy = plan.get('base_energy', 100000.0)
+
+        # Allometry: penalize deviation from Kleiber's prediction
+        if 'claimed_metabolism_W' in plan and mass > 0:
+            kleiber_pred = self.allometric_metabolism(mass)
+            claim = plan['claimed_metabolism_W']
+            components['allometry'] = (
+                -((claim - kleiber_pred) ** 2)
+                / (2 * self.allometry_sigma ** 2))
+
+        # Trophic transfer efficiency: Gaussian on deviation from 10%
+        if 'claimed_trophic_efficiency' in plan:
+            claim = plan['claimed_trophic_efficiency']
+            components['trophic_transfer'] = (
+                -((claim - self.trophic_transfer_efficiency) ** 2)
+                / (2 * self.trophic_sigma ** 2))
+
+        # Population dynamics: carrying capacity + MVP
+        if pop > 0 and mass > 0:
+            K = self.carrying_capacity(base_energy, trophic, mass)
+            if K > 0:
+                # Overshoot penalty
+                overshoot = max(0.0, pop / K - 1.0)
+                components['overcapacity'] = (
+                    -self.overcapacity_scale * overshoot ** 2)
+
+                # MVP undershoot penalty
+                undershoot = max(0.0,
+                    1.0 - pop / self.minimum_viable_population)
+                components['mvp'] = (
+                    -self.mvp_scale * undershoot ** 2)
+
+        # Trophic ceiling: penalize levels above max
+        over_trophic = max(0, trophic - self.max_trophic_levels)
+        if over_trophic > 0:
+            components['trophic_ceiling'] = (
+                -self.trophic_ceiling_scale * over_trophic ** 2)
+
+        total = sum(components.values())
+        return {'logp': total, 'components': components}
+
+
+def l3_probabilistic_inspector(plan, world=None):
+    """
+    Thin wrapper around ProbabilisticEcologicalWorld.log_likelihood.
+
+    plan: dict — see log_likelihood for keys and units.
+    world: optional ProbabilisticEcologicalWorld; if None a fresh
+           world is created with default frozen constants.
+
+    Returns the same dict shape as l2_probabilistic_inspector:
+      {'logp': float, 'components': dict}.
+
+    Does NOT mutate world. Same purity guarantee as L2 (GL_L3_P006).
+    """
+    if world is None:
+        world = ProbabilisticEcologicalWorld()
+    return world.log_likelihood(plan)
+

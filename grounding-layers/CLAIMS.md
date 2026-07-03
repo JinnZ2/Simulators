@@ -734,6 +734,184 @@ the shipped constants.
 
 ---
 
+### GL_L3_P001 — allometry as Gaussian on Kleiber deviation  `[PHENOMENON]`
+
+**Statement.** `ProbabilisticEcologicalWorld.log_likelihood`
+contributes `logp_allometry = -(claimed_W - kleiber_a·mass^0.75)² /
+(2·allometry_sigma²)` when a `claimed_metabolism_W` is supplied and
+`mass > 0`. Frozen `kleiber_a = 3.0 W/kg^0.75` and
+`allometry_sigma = 1.0 W`. Reference values (for a 2 kg body, Kleiber
+= 5.05 W):
+
+  - `claimed = 5.05` (spot-on):      `≈ 0`
+  - `claimed = 6.05` (+1 W off):      `≈ -0.5`
+  - `claimed = 50.4` (10× Kleiber):   `≈ -1028`
+
+**Why it matters.** Kleiber's 3/4-power scaling is one of the most
+empirically robust allometric regularities in biology. An AI
+claiming a species has metabolism wildly different from Kleiber's
+prediction is either proposing a new metabolic mode or hallucinating.
+
+**Falsifier.** A finite `(claimed_W, mass)` where the returned
+contribution disagrees with the closed-form Gaussian.
+
+**SCOPE.** T=generational | S=ecosystem | O=any_biological | C=ecosystem_frame (Kleiber's law is fit to AEROBIC metabolism — anaerobic microbes, deep-sea chemolithoautotrophs, and hypothetical non-terrestrial metabolisms don't follow the 3/4-power scaling. The Gaussian SHAPE is culture-neutral; the specific `kleiber_a = 3.0` is a terrestrial-biology default.)
+
+**Status.** `active`. Tests:
+`test_allometry_spot_on_kleiber_zero_penalty`,
+`test_allometry_1W_off_gives_neg_half`,
+`test_allometry_10x_kleiber_gives_deep_penalty`,
+`test_allometry_silent_without_claim`.
+
+### GL_L3_P002 — trophic transfer as Gaussian on efficiency deviation  `[PHENOMENON]`
+
+**Statement.** For an AI-claimed trophic transfer efficiency, the
+contribution is `-(claimed - 0.10)² / (2·trophic_sigma²)` with
+frozen `trophic_sigma = 0.05`. Reference values:
+
+  - `claimed = 0.10`:  `≈ 0` (matches the empirical baseline)
+  - `claimed = 0.15`:  `≈ -0.5`
+  - `claimed = 0.50` (unrealistic 50% transfer): `≈ -32.0`
+
+**Why it matters.** The ~10% trophic efficiency rule (Lindeman 1942)
+is a strong empirical regularity across observed ecosystems. Claims
+of dramatically higher efficiency violate energy balance and are
+usually a sign of a hallucinated "super productive" ecosystem.
+
+**Falsifier.** A finite `claimed` where the contribution disagrees
+with the closed-form Gaussian.
+
+**SCOPE.** T=generational | S=ecosystem | O=any_biological | C=ecosystem_frame (10% is an empirical average across a specific ecosystem sample; the specific number encodes a research tradition. The GAUSSIAN SHAPE is universal.)
+
+**Status.** `active`. Tests:
+`test_trophic_transfer_at_10pc_zero_penalty`,
+`test_trophic_transfer_at_15pc_gives_neg_half`,
+`test_trophic_transfer_at_50pc_gives_deep_penalty`.
+
+### GL_L3_P003 — overcapacity as smooth overshoot barrier  `[PHENOMENON]`
+
+**Statement.** Population overshoot contributes
+`logp_overcapacity = -overcapacity_scale · max(0, N/K - 1)²`
+with frozen `overcapacity_scale = 2.0`, where `K` is the derived
+carrying capacity for the species at its trophic level. Reference
+values:
+
+  - `N ≤ K`:               `0` (no penalty at or below capacity)
+  - `N = 2·K` (100% over): `-2.0`
+  - `N = 10·K`:            `≈ -18.4` (at typical K = ~50)
+
+**Why it matters.** Populations above carrying capacity cannot
+sustain themselves; the Verhulst logistic goes negative. AI plans
+that assume `N ≫ K` are proposing something the ecosystem
+cannot support.
+
+**Falsifier.** A finite `(N, K)` where the contribution disagrees
+with `-scale · max(0, N/K - 1)²`.
+
+**SCOPE.** T=generational | S=ecosystem | O=any_biological | C=ecosystem_frame (the CARRYING-CAPACITY ontology is a specific frame — Verhulst's logistic model. Reciprocity-based ecological frames would carve this constraint differently.)
+
+**Status.** `active`. Tests:
+`test_overcapacity_at_K_zero_penalty`,
+`test_overcapacity_2K_gives_neg_2`,
+`test_overcapacity_only_penalizes_overshoot`.
+
+### GL_L3_P004 — MVP as smooth undershoot barrier  `[PHENOMENON]`
+
+**Statement.** Population undershoot vs minimum viable population
+contributes `logp_mvp = -mvp_scale · max(0, 1 - N/MVP)²` with
+frozen `mvp_scale = 2.0` and `minimum_viable_population = 50`.
+Reference values:
+
+  - `N ≥ MVP = 50`:  `0` (no penalty above MVP)
+  - `N = 25` (50%):  `-0.5`
+  - `N = 5` (10%):   `≈ -1.62`
+  - `N = 0`:         `-2.0`
+
+**Why it matters.** Populations below MVP face extinction from
+demographic stochasticity, inbreeding depression, and Allee effects.
+The barrier is smooth so a plan just under MVP gets a small penalty,
+a plan at zero gets the maximum.
+
+**Falsifier.** A finite `(N, MVP)` where the contribution
+disagrees with the closed form.
+
+**SCOPE.** T=generational | S=ecosystem | O=any_biological | C=ecosystem_frame (the MVP concept encodes conservation-biology framing; `MVP = 50` is a specific empirical rule of thumb (Franklin 1980) — species-dependent in practice)
+
+**Status.** `active`. Tests:
+`test_mvp_at_or_above_zero_penalty`,
+`test_mvp_at_half_gives_neg_half`,
+`test_mvp_at_zero_gives_neg_2`.
+
+### GL_L3_P005 — trophic ceiling as smooth barrier  `[PHENOMENON]`
+
+**Statement.** Proposed trophic levels above the ceiling contribute
+`logp_trophic_ceiling = -trophic_ceiling_scale · max(0, level - max_levels)²`
+with frozen `trophic_ceiling_scale = 1.0` and
+`max_trophic_levels = 5`. Reference values:
+
+  - `level ≤ 5`:   `0`
+  - `level = 7`:   `-4`
+  - `level = 10`:  `-25`
+
+**Why it matters.** Terrestrial food webs rarely exceed 5 trophic
+levels because ~10%-per-level trophic transfer leaves too little
+energy for a 6th layer of predators. AI plans proposing
+higher-order predators need to justify the energy accounting.
+
+**Falsifier.** A finite `level` where the contribution disagrees
+with the closed form.
+
+**SCOPE.** T=generational | S=ecosystem | O=any_biological | C=ecosystem_frame (empirically-derived from terrestrial-marine ecosystems; hypothetical high-productivity ecosystems could sustain more)
+
+**Status.** `active`. Tests:
+`test_trophic_ceiling_at_max_zero_penalty`,
+`test_trophic_ceiling_at_10_gives_neg_25`.
+
+### GL_L3_P006 — inspector is pure (no state mutation)  `[PHENOMENON]`
+
+**Statement.** `ProbabilisticEcologicalWorld.log_likelihood(plan)`
+and `l3_probabilistic_inspector(plan, world)` are pure functions:
+neither mutates world state. Two calls with the same `(plan, world)`
+return identical results.
+
+**Why it matters.** Same rationale as GL_L2_P004 — a Bayesian scorer
+that mutates hidden state is nearly impossible to reason about.
+
+**Falsifier.** Any input where calling `log_likelihood` changes
+any observable world attribute.
+
+**SCOPE.** T=universal | S=universal | O=any_information_system | C=culture_neutral (property of the code, not physics or culture)
+
+**Status.** `active`. Tests:
+`test_log_likelihood_is_idempotent`,
+`test_two_calls_return_same_result`.
+
+### GL_L3_P_PIN — canonical plans pinned  `[INSTRUMENT]`
+
+**Statement.** Under the shipped constants, `l3_probabilistic_inspector`
+produces the following total-logp values:
+
+| plan                                            | total logp     |
+|-------------------------------------------------|----------------|
+| Empty plan                                       | `0.0`          |
+| Rabbit at K with valid Kleiber metabolism       | `≈ 0.0`        |
+| Rabbit with 10× Kleiber metabolism claim        | `≈ -1028.5`    |
+| Trophic efficiency claimed at 50%               | `-32.0`        |
+| Population 10× K (overshoot)                     | `≈ -18.4`      |
+| Population = 5 (below MVP = 50)                  | `-1.62`        |
+| Trophic level = 10 (above cap of 5)              | `-25.0`        |
+| Super species (mass=1000kg, pop=10, trophic=2)   | `≈ -38.86`     |
+
+**Falsifier.** Any pinned value shifts by more than `0.5` under
+the shipped constants.
+
+**SCOPE.** T=single_step | S=ecosystem | O=any_biological | C=ecosystem_frame (pin values depend on frozen constants encoding ecosystem_frame ontology)
+
+**Status.** `active`. Tests: full class
+`TestL3ProbabilisticInspectorDemoPin`.
+
+---
+
 ### GL_L0_P_PIN — probabilistic inspector's trace on the fixed hallucination  `[INSTRUMENT]`
 
 **Statement.** With `np.random.seed(0)` and the shipped constants,
