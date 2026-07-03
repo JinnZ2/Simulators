@@ -237,5 +237,121 @@ class TestThermalSafe(unittest.TestCase):
         self.assertTrue(safe)
 
 
+class TestRunClaimProbabilistic(unittest.TestCase):
+    """New probabilistic path (integrated stack). Runs a natural-
+    language claim through L0-L5+Lε and returns integrated_stack's
+    result dict augmented with parsed / plan / claim."""
+
+    def setUp(self):
+        self.pg = IntegratedPlayground()
+
+    def test_return_shape_has_expected_keys(self):
+        r = self.pg.run_claim_probabilistic("I can lift 25 kg.")
+        for k in ('total_logp', 'per_layer', 'applicable_layers',
+                  'skipped_layers', 'category_error_layers',
+                  'cultural_flags', 'ontological_scope',
+                  'claim', 'plan', 'parsed'):
+            self.assertIn(k, r)
+
+    def test_lift_25kg_scores_near_zero(self):
+        # z = (25 - 35) / 15 = -0.667 -> logp = -0.222.
+        r = self.pg.run_claim_probabilistic("I can lift 25 kg.")
+        self.assertAlmostEqual(r['total_logp'], -0.222, delta=0.005)
+        self.assertEqual(r['applicable_layers'], ['L4'])
+
+    def test_lift_200kg_scores_deep_negative(self):
+        # z = (200 - 35)/15 = 11 -> logp = -60.5.
+        r = self.pg.run_claim_probabilistic("I can lift 200 kg.")
+        self.assertAlmostEqual(r['total_logp'], -60.5, delta=0.01)
+
+    def test_hold_150C_object_scores_negative(self):
+        # z = (150 - 43) / 5 = 21.4 -> logp = -228.98.
+        r = self.pg.run_claim_probabilistic(
+            "I can hold 150°C object.")
+        self.assertAlmostEqual(r['total_logp'], -228.98, delta=0.02)
+
+    def test_run_50_ms_maps_to_sustained_power(self):
+        r = self.pg.run_claim_probabilistic("I can run at 50 m/s.")
+        # 50 m/s * 15 W/m/s = 750 W. z = (750-150)/50 = 12 -> -72.
+        self.assertAlmostEqual(r['total_logp'], -72.0, delta=0.01)
+        self.assertEqual(r['parsed']['speed_to_power_W'], 750.0)
+
+    def test_unlimited_water_routes_to_L2(self):
+        r = self.pg.run_claim_probabilistic(
+            "I can extract unlimited water.")
+        self.assertIn('L2', r['applicable_layers'])
+        # 1e8 / 1e7 = 10; -(10)^2 = -100.
+        self.assertAlmostEqual(r['total_logp'], -100.0, delta=0.01)
+
+    def test_super_species_routes_to_L3(self):
+        r = self.pg.run_claim_probabilistic(
+            "I can create a super species.")
+        self.assertIn('L3', r['applicable_layers'])
+        # From L3 pin: mass=1000, pop=10, trophic=2 -> ~-38.86.
+        self.assertAlmostEqual(r['total_logp'], -38.86, delta=0.5)
+
+    def test_perpetual_motion_routes_to_L1(self):
+        r = self.pg.run_claim_probabilistic(
+            "I can build a perpetual motion machine.")
+        self.assertIn('L1', r['applicable_layers'])
+        # L1 perpetual (work_in=100, work_out=150, heat=0) -> ~-204.
+        # But note the phrase also has no other axes so only L1 runs.
+        self.assertLess(r['total_logp'], -100)
+
+    def test_ai_scope_on_lift_claim_refuses_whole_plan(self):
+        r = self.pg.run_claim_probabilistic(
+            "I can lift 200 kg.",
+            ontological_scope='AI_silicon_substrate')
+        self.assertIsNone(r['total_logp'])
+        err_layers = [e['layer'] for e in r['category_error_layers']]
+        self.assertIn('L4', err_layers)
+
+    def test_ai_scope_on_temperature_claim_refuses(self):
+        r = self.pg.run_claim_probabilistic(
+            "I can hold 150°C object.",
+            ontological_scope='AI_silicon_substrate')
+        self.assertIsNone(r['total_logp'])
+
+    def test_ai_scope_on_unlimited_water_still_scores(self):
+        # 'unlimited water' routes to L2, not L4. L2 doesn't have a
+        # category-error guard for AI_silicon_substrate (planetary
+        # resources apply to AI operations too -- water for cooling,
+        # etc). So the plan STILL scores under AI scope.
+        r = self.pg.run_claim_probabilistic(
+            "I can extract unlimited water.",
+            ontological_scope='AI_silicon_substrate')
+        # Not refused.
+        self.assertIsNotNone(r['total_logp'])
+        self.assertEqual(r['applicable_layers'], ['L2'])
+
+    def test_multi_axis_claim_sums_correctly(self):
+        # A claim with BOTH mass and temperature -> both L4 axes fire.
+        r = self.pg.run_claim_probabilistic(
+            "I can lift 200 kg at 150°C.")
+        self.assertEqual(r['applicable_layers'], ['L4'])
+        # z_mass = (200-35)/15 = 11 -> -60.5
+        # z_temp = (150-43)/5 = 21.4 -> -228.98
+        # Total ≈ -289.48
+        expected = (-60.5) + (-228.98)
+        self.assertAlmostEqual(r['total_logp'], expected, delta=0.05)
+
+    def test_plan_is_populated_when_claim_routes(self):
+        r = self.pg.run_claim_probabilistic("I can lift 25 kg.")
+        self.assertIn('L4', r['plan'])
+        self.assertEqual(r['plan']['L4']['lift_mass'], 25.0)
+
+    def test_empty_claim_produces_zero_logp(self):
+        r = self.pg.run_claim_probabilistic("Hello.")
+        # No parser hits.
+        self.assertEqual(r['total_logp'], 0.0)
+        self.assertEqual(r['applicable_layers'], [])
+        self.assertEqual(r['parsed'], {})
+
+    def test_claim_text_carried_back(self):
+        text = "I can lift 42 kg."
+        r = self.pg.run_claim_probabilistic(text)
+        self.assertEqual(r['claim'], text)
+
+
 if __name__ == '__main__':
     unittest.main()

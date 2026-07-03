@@ -24,7 +24,7 @@ from typing import Optional
 
 import numpy as np
 
-from l0_physics_causality import PhysicalWorld, l0_grounding_inspector
+from l0_physics_causality import PhysicalWorld
 from l1_thermodynamics import ThermodynamicWorld
 from l2_planetary import PlanetaryWorld
 from l3_ecology import EcologicalWorld
@@ -34,6 +34,7 @@ from scope_profile import (
     Verdict,
     assess_probability_claim,
 )
+from integrated_stack import integrated_probabilistic_inspector
 
 
 class ClaimParser:
@@ -188,6 +189,102 @@ class IntegratedPlayground:
 
         return report
 
+    def run_claim_probabilistic(
+        self,
+        claim_text: str,
+        ontological_scope: str = 'any_WEIRD_human',
+    ) -> dict:
+        """
+        Parse `claim_text` into layer sub-plans and route through
+        `integrated_probabilistic_inspector` (L0-L5 + Lε per LOG.md
+        sections 1-6 + the L5/Lε probabilistic wraps).
+
+        This is the successor to `run_claim`. The old keyword-matched
+        path stays available for backward compatibility.
+
+        Routing rules (parser-driven):
+          mass (kg)          -> L4.lift_mass sub-plan
+          temperature (°C)   -> L4.temp_tolerance sub-plan
+          speed (m/s)        -> L4.sustained_power sub-plan
+                                (proxy: ~15 W per m/s of sustained
+                                running for a ~70 kg human; toy
+                                conversion, encoded in the parsed
+                                sub-plan for auditability)
+          "unlimited water"  -> L2.water_extract set to 10× reserve
+          "super species"    -> L3 with mass=1000/pop=10/trophic=2
+          "perpetual motion"
+             or "free energy" -> L1 with work_out > work_in
+
+        Returns the integrated_stack result dict, augmented with:
+          'claim':       original claim text
+          'plan':        the layer sub-plans the parser assembled
+          'parsed':      raw parser extractions for auditability
+
+        SCOPE. This method IS the audit-grade path. The claim's own
+        ontological scope is passed through -- an AI-self claim like
+        "I can lift 200 kg" tagged O=AI_silicon_substrate triggers
+        category-error refusal at L4 (per GL_L4_P001), and the whole
+        plan is refused (per GL_INT_003).
+        """
+        parser = ClaimParser()
+        plan = {}
+        parsed = {}
+
+        # Mass -> L4 lift claim
+        mass = parser.extract_mass(claim_text)
+        if mass is not None:
+            plan.setdefault('L4', {})['lift_mass'] = mass
+            parsed['mass_kg'] = mass
+
+        # Temperature -> L4 temp_tolerance
+        temp = parser.extract_temperature(claim_text)
+        if temp is not None:
+            plan.setdefault('L4', {})['temp_tolerance'] = temp
+            parsed['temperature_C'] = temp
+
+        # Speed -> L4 sustained_power (rough conversion for a
+        # ~70 kg human running: sustained mechanical power scales
+        # roughly linearly with velocity for aerobic effort. Use
+        # 15 W per m/s as a placeholder; this is a toy conversion
+        # and the specific coefficient is not physiologically
+        # calibrated -- flagged as instrument, not phenomenon).
+        speed = parser.extract_speed(claim_text)
+        if speed is not None:
+            plan.setdefault('L4', {})['sustained_power'] = speed * 15.0
+            parsed['speed_m_s'] = speed
+            parsed['speed_to_power_W'] = speed * 15.0
+
+        # Categorical routes: L2 unlimited water
+        if 'unlimited water' in claim_text.lower():
+            # Extract 10× reserve (obviously excessive under the
+            # (usage/stock)² penalty).
+            plan.setdefault('L2', {})['water_extract'] = 1e8
+            parsed['unlimited_water'] = True
+
+        # Categorical routes: L3 super species
+        if 'super species' in claim_text.lower():
+            l3 = plan.setdefault('L3', {})
+            l3['mass_kg'] = 1000.0
+            l3['population'] = 10
+            l3['trophic_level'] = 2
+            parsed['super_species'] = True
+
+        # Categorical routes: L1 perpetual motion / free energy
+        text_low = claim_text.lower()
+        if 'perpetual motion' in text_low or 'free energy' in text_low:
+            l1 = plan.setdefault('L1', {})
+            l1['work_input'] = 100.0
+            l1['work_output'] = 150.0
+            l1['heat_dissipated'] = 0.0
+            parsed['perpetual_motion'] = True
+
+        result = integrated_probabilistic_inspector(
+            plan, ontological_scope=ontological_scope)
+        result['claim'] = claim_text
+        result['plan'] = plan
+        result['parsed'] = parsed
+        return result
+
 
 # --- Demo ---
 if __name__ == "__main__":
@@ -200,6 +297,10 @@ if __name__ == "__main__":
         "I can create a super species.",
         "I can lift 25 kg.",
     ]
+
+    print("=" * 70)
+    print("LEGACY PATH — run_claim (keyword-matched grounded/not-grounded)")
+    print("=" * 70)
     for claim in claims:
         result = pg.run_claim(claim)
         print(f"\nClaim: {claim}")
@@ -207,3 +308,34 @@ if __name__ == "__main__":
         print(f"  Score: {result['score']}/100")
         for layer, msg in result['layers'].items():
             print(f"  {layer}: {msg}")
+
+    print()
+    print("=" * 70)
+    print("PROBABILISTIC PATH — run_claim_probabilistic (integrated L0-L5+Lε)")
+    print("=" * 70)
+    for claim in claims:
+        result = pg.run_claim_probabilistic(claim)
+        print(f"\nClaim: {claim}")
+        print(f"  parsed: {result['parsed']}")
+        print(f"  applicable_layers: {result['applicable_layers']}")
+        if result['total_logp'] is None:
+            print(f"  total_logp: REFUSED (category error)")
+            for err in result['category_error_layers']:
+                print(f"    at {err['layer']}")
+        else:
+            print(f"  total_logp: {result['total_logp']:.3f}")
+
+    print()
+    print("=" * 70)
+    print("AI-SELF CLAIMS under AI_silicon_substrate scope:")
+    print("(same claims should refuse at L4 -- category error, not")
+    print(" low-probability)")
+    print("=" * 70)
+    for claim in ["I can lift 200 kg.", "I can hold 150°C object."]:
+        result = pg.run_claim_probabilistic(
+            claim, ontological_scope='AI_silicon_substrate')
+        print(f"\nClaim: {claim}")
+        print(f"  total_logp: {result['total_logp']}")
+        for err in result['category_error_layers']:
+            print(f"  category_error at {err['layer']}: "
+                  f"{err['reason'][:60]}...")
