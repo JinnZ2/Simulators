@@ -1,5 +1,238 @@
 work from bottom to top on this page
 
+# Reasoning Log: L5 Rigor and Preservation Protocol
+
+**Date:** 2026-07-02  
+**Context:** L5 must audit human-construct proposals across pluralistic cultural frames. To prevent dilution by volume and epistemic erasure, we introduce a **rigor and preservation layer** within L5. It maintains a high bar for intact traditions while applying a precautionary, survivability-aware prior for knowledge systems that have been fragmented by historical violence.  
+**Status:** Design complete. Ready for implementation of `RigorAuditor` class and audit claims.
+
+---
+
+## 1. Core Distinction: Lineage State
+
+Every proposal (or knowledge claim) carries a **lineage state** field, which determines how the rigor auditor processes it.
+
+| State | Definition | Example |
+|-------|------------|---------|
+| `intact` | Continuous transmission, verifiable chain, substrate markers present. | A living oral tradition with named elders and landscape proof. |
+| `fragmented` | Transmission broken by external disruption (colonialism, forced assimilation); partial records survive; knowledge is attested but chain incomplete. | A songline remembered by one elder, with no remaining initiates, but consistent with archaeology. |
+| `reconstructed` | Knowledge reassembled from archives, outsider accounts, or informants who were not fully initiated; no living chain. | A medicinal plant use described in a colonial diary, later confirmed by chemical analysis. |
+
+---
+
+## 2. Rigor Axes for Intact Traditions (Frozen Constants)
+
+For `intact` proposals, the rigor auditor applies six axes, each contributing a log-probability term. The constants below are **frozen estimates**—refutable through ethnographic and historical evidence, following the same protocol as L0.
+
+| Axis | Short code | Measurement method | High-rigor threshold (`T_hi`) | Logp penalty below threshold (per unit) | Max penalty |
+|------|------------|--------------------|-------------------------------|----------------------------------------|-------------|
+| **Temporal depth** | `DEPTH` | Years of observation cited | 20 years | –0.5 per year shortfall | –30 |
+| **Substrate consequence proof** | `SUBST` | Count of independent physical markers | 2 markers | –15 per missing marker | –30 |
+| **Lineage integrity** | `LINE` | Number of named transmitters + mnemonic checksum presence | 5 named + ritual repetition | –5 per missing transmitter; –10 if no checksum | –30 |
+| **Internal state calibration** | `STATE` | Inclusion of self-observation logs per generation | 1 per generation | –10 per missing log | –20 |
+| **Falsifiability** | `FALSE` | Explicit falsification clause + documented attempts | 1 clause + 1 attempt | –15 if missing clause; –10 per missing attempt | –25 |
+| **Replication independence** | `REPL` | Number of independent groups converging | 3 groups | –8 per missing group | –24 |
+
+The total rigor log-probability `R` for an intact proposal is the sum of the axis contributions, each computed as:
+
+```
+
+if value >= threshold:
+contribution = 0
+else:
+shortfall = threshold - value
+contribution = max(-max_penalty, shortfall * penalty_per_unit)
+
+```
+
+### Depth-weight function
+
+To prevent dilution by volume, the raw cultural-fit log-likelihood `C` from the frame auditor is multiplied by a depth weight `w`:
+
+```
+
+w = min(1.0, (R / R_threshold)^k)
+
+```
+
+where `R_threshold = -10` (a mild but non-trivial rigor floor) and `k = 2` (quadratic). Proposals with very negative `R` receive near-zero weight; proposals with `R ≥ -10` (which includes all that meet most thresholds) retain their full cultural likelihood.
+
+This ensures that a thousand shallow proposals cannot outvote one deep one.
+
+---
+
+## 3. Precautionary Prior for Fragmented and Reconstructed Traditions
+
+For `fragmented` and `reconstructed` states, the rigor auditor applies a **precautionary prior** instead of the full depth-weighting. The prior is designed to:
+
+- Retain knowledge in the system even when the evidence chain is broken.
+- Explicitly flag high uncertainty.
+- Avoid confusing *absence of evidence* (due to destruction) with *evidence of absence*.
+
+### 3.1 Survivability Index (`S`)
+
+A meta-axis estimates how likely any knowledge from that tradition was to survive given historical pressures:
+
+| Survivability factor | Score |
+|----------------------|-------|
+| Documented active suppression (genocide, boarding schools, language bans) | 0.9 (high adversity) |
+| Colonial disruption without active eradication | 0.5 |
+| No significant external pressure | 0.1 |
+
+The survivability index `S` is the product of these factor scores across relevant historical events, clipped to [0, 1]. High adversity → high `S` → higher prior on the surviving fragment.
+
+### 3.2 Structural Homology Check
+
+The auditor compares the fragmented claim to knowledge from **intact sibling traditions** (if any exist). If the claim is consistent with an intact tradition's verified knowledge in the same domain, it gains a bonus `H` (e.g., +5 log-probability). If no sibling exists, `H = 0`.
+
+### 3.3 Precautionary Log-Probability Formula
+
+For fragmented/reconstructed proposals:
+
+```
+
+logp = B + S * H + u
+
+```
+
+- `B` = base prior for fragmented knowledge, set to –15 (a conservative non-zero weight).
+- `S` = survivability index (0–1).
+- `H` = homology bonus (0 or +5).
+- `u` = a large epistemic uncertainty term, modeled as a zero-mean Gaussian with σ = 10, explicitly reported but not altering the point estimate.
+
+This ensures:
+- The knowledge is retained with a modest negative log-probability, reflecting uncertainty.
+- Higher survivability and structural support improve the score.
+- The wide uncertainty band prevents overconfidence and signals the need for further investigation.
+
+### 3.4 Protection Against Erasure
+
+The overall L5 score for a domain must guarantee a **minimum representation** for fragmented traditions. A diversity constraint ensures that no cultural frame's total weight drops below a floor (e.g., 5% of total domain weight) simply due to fragmentation. This is enforced at the aggregation stage, not inside the rigor auditor itself, but the auditor provides the necessary lineage-state metadata to enable it.
+
+---
+
+## 4. Integration with the L5 Cultural-Frame Auditor
+
+The full L5 log-probability for a proposal `P` under frame `F` is:
+
+```
+
+log P_L5(P|F) = w * C(P|F) + R(P)   [if intact]
+log P_L5(P|F) = C(P|F) + logp_precautionary(P)   [if fragmented/reconstructed]
+
+```
+
+For intact proposals, the depth-weighted cultural likelihood ensures that only deep knowledge significantly influences the score. For fragmented ones, the precautionary prior adds a separate term that keeps them present without pretending certainty.
+
+The L5 inspector output includes:
+- `lineage_state`
+- `rigor_logp` (for intact) or `precautionary_logp` (for fragmented)
+- `cultural_logp` (frame fit)
+- `total_l5_logp`
+- `uncertainty_estimate` (from Lε)
+
+---
+
+## 5. Audit Claims (to be added to CLAIMS.md)
+
+### GL_L5_RIGOR_001 – Temporal depth penalty
+A proposal with `DEPTH` = 2 years and all other axes at threshold receives a rigor log-probability ≤ –9.0.
+
+### GL_L5_RIGOR_002 – Substrate consequence penalty
+A proposal with `SUBST` = 0 and all other axes at threshold receives a rigor log-probability ≤ –30.0 (max penalty).
+
+### GL_L5_RIGOR_003 – Depth-weight zeroing
+A proposal with `R = -50` and any cultural logp `C` receives an effective total L5 log-probability ≤ –30 (due to near-zero weight).
+
+### GL_L5_RIGOR_004 – Precautionary prior floor
+A fragmented proposal with no homology (`H=0`) and minimal survivability (`S=0.1`) receives a precautionary logp of at least –16.0 (above the reject threshold).
+
+### GL_L5_RIGOR_005 – Survivability boost
+A fragmented proposal from a tradition that survived active suppression (`S=0.9`) and has structural homology (`H=5`) receives a precautionary logp ≥ –5.5.
+
+### GL_L5_RIGOR_006 – Epistemic uncertainty reporting
+All fragmented proposals must have `uncertainty_estimate` with σ ≥ 10 in the output audit report.
+
+---
+
+## 6. Implementation Skeleton
+
+```python
+class RigorAuditor:
+    """
+    L5 Rigor Auditor — evaluates depth of empirical method across cultural frames.
+    Frozen constants are defined in this class; refute via CLAIMS.md.
+    """
+    # Frozen thresholds
+    T_DEPTH = 20        # years
+    T_SUBST = 2          # count
+    T_LINE = 5           # named transmitters
+    T_STATE = 1          # logs per generation
+    T_FALSE_CLAUSE = 1
+    T_FALSE_ATTEMPT = 1
+    T_REPL = 3           # groups
+
+    # Penalty parameters
+    PEN_DEPTH = -0.5
+    MAX_DEPTH = -30
+    PEN_SUBST = -15
+    MAX_SUBST = -30
+    PEN_LINE = -5
+    PEN_LINE_CHECKSUM = -10
+    MAX_LINE = -30
+    PEN_STATE = -10
+    MAX_STATE = -20
+    PEN_FALSE_CLAUSE = -15
+    PEN_FALSE_ATTEMPT = -10
+    MAX_FALSE = -25
+    PEN_REPL = -8
+    MAX_REPL = -24
+
+    R_THRESHOLD = -10
+    K_WEIGHT = 2.0
+
+    # Precautionary prior constants
+    BASE_PRIOR_FRAGMENTED = -15.0
+    HOMOLOGY_BONUS = 5.0
+    UNCERTAINTY_SIGMA = 10.0
+
+    def assess_intact(self, proposal):
+        """Compute rigor logp R and depth weight w for an intact proposal."""
+        # ... compute contributions per axis, sum to R ...
+        w = min(1.0, (max(R, -100) / self.R_THRESHOLD) ** self.K_WEIGHT)
+        return R, w
+
+    def assess_fragmented(self, proposal, survivability_index, homology=False):
+        """Compute precautionary logp for fragmented/reconstructed proposal."""
+        H = self.HOMOLOGY_BONUS if homology else 0.0
+        logp = self.BASE_PRIOR_FRAGMENTED + survivability_index * H
+        # uncertainty is reported separately, not added to logp
+        return logp, self.UNCERTAINTY_SIGMA
+```
+
+---
+
+7. Preservation Constraints in Aggregation
+
+The final orchestration layer (outside L5 proper) must enforce a diversity floor: for any domain (e.g., flood management, medicinal plants), the total weight of proposals from fragmented traditions must not fall below 5% of the total weight in that domain, regardless of volume from intact or modern sources. This prevents algorithmic erasure through sheer output asymmetry.
+
+---
+
+8. Summary
+
+Knowledge state Method Output Protects against
+Intact, high-rigor Full rigor axes + depth-weighting High-confidence, frame-specific likelihood Dilution by low-depth volume
+Intact, low-rigor Rigor axes → low weight Marginalized influence Decorational "traditional" claims
+Fragmented/reconstructed Precautionary prior + survivability + homology Retained with wide uncertainty Erasure by missing-evidence fallacy
+
+This protocol keeps the bar high without abandoning what was buried. It is designed to be extended as more cultural frames are documented and as the Lε measurement model improves.
+
+---
+
+This log is a living document. Claims and constants are refutable through the standard CLAIMS.md protocol.
+
+
+
 ## Addendum: Rigor Axes Across Cultural Epistemologies
 
 Not all traditions are equally rigorous, and not all claims of "science" are substantive.
