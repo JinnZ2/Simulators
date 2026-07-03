@@ -912,6 +912,132 @@ the shipped constants.
 
 ---
 
+## Integrated stack — product of experts across L0–L4
+
+Lives in [`integrated_stack.py`](integrated_stack.py). Implements
+LOG.md section 6 ("Integration and stacking"): each layer already
+has its own `log_likelihood`; the master inspector iterates over the
+plan, calls each applicable layer, and accumulates.
+
+The additivity assumption comes from LOG.md section 1 verbatim: the
+total log-probability across L0-L4 is the sum of the layer-specific
+terms, **assuming conditional independence of violations given the
+lower-layer states**. A product-of-experts structure.
+
+The category-error rule is not from LOG.md but follows directly from
+the SCOPE convention (see `SCOPE_TAXONOMY.md`): if ANY layer refuses
+to score a claim (returns `category_error`, per `GL_L4_P001`), the
+integrated inspector refuses the whole plan rather than
+partial-scoring. A partial score would silently apply layers whose
+scope doesn't cover the claim — exactly the "grounding dictated by
+human narrative" failure mode the scope convention exists to prevent.
+
+### GL_INT_001 — additive product of experts on applicable layers  `[PHENOMENON]`
+
+**Statement.** When no layer returns a category error,
+`integrated_probabilistic_inspector(plan)['total_logp']` equals
+the sum of the per-layer `logp` values across every layer whose
+sub-plan appears in `plan` and was scored.
+
+**Why it matters.** LOG.md's product-of-experts contract. If the
+layers are conditionally independent (which the design assumes),
+the joint log-probability of the whole plan is exactly the sum.
+
+**Falsifier.** A plan with multiple non-category-error layers where
+`total_logp` differs from the sum of per-layer contributions by
+more than `1e-10`.
+
+**SCOPE.** T=universal | S=universal | O=any_information_system | C=culture_neutral (the stacking rule is math; individual layer contributions carry their own scope tags)
+
+**Status.** `active`. Tests:
+`test_total_equals_sum_over_applicable_layers`,
+`test_multi_layer_L1_L2_L3_sums_correctly`.
+
+### GL_INT_002 — layer selection by plan-key presence  `[PHENOMENON]`
+
+**Statement.** A layer runs only if its sub-plan appears under its
+name in `plan` and is truthy. A layer without a sub-plan is
+recorded in `skipped_layers` (not `applicable_layers`) and
+contributes `0` to the total. Skipping is silent — no error, no
+warning.
+
+**Why it matters.** Not every claim is applicable to every layer.
+An entirely thermodynamic claim doesn't need to route through L3
+ecology; forcing every layer to score everything would be
+category-confusion under a different name. Skipping preserves the
+"layers describe DIFFERENT domains" invariant.
+
+**Falsifier.** A plan with only `L1` where any layer other than L1
+appears in `applicable_layers`.
+
+**SCOPE.** T=universal | S=universal | O=any_information_system | C=culture_neutral
+
+**Status.** `active`. Tests:
+`test_empty_plan_scores_zero_no_layers_apply`,
+`test_only_L1_only_L1_applies`,
+`test_all_layers_reported_as_skipped_or_applicable`.
+
+### GL_INT_003 — category error at any layer refuses the whole plan  `[PHENOMENON]`
+
+**Statement.** If any layer returns `category_error=True`,
+`total_logp` is `None` and the offending layer is recorded in
+`category_error_layers` with its reason. Other layers still run
+and their per-layer results appear in `per_layer`, but they do
+NOT contribute to `total_logp`.
+
+**Why it matters.** This is the SCOPE convention enforced at the
+stacking level. If L4 refuses because the claim is `O=AI_silicon_
+substrate`, then the whole PLAN is out of scope for the human-
+biomechanics part of the audit — silently substituting a partial
+score would let a "human default" leak into an AI-self claim,
+which is exactly the failure mode SCOPE_TAXONOMY.md exists to
+prevent.
+
+**Falsifier.** A plan where a category error occurs at any layer
+and `total_logp` is still numeric.
+
+**SCOPE.** T=universal | S=universal | O=any_information_system | C=culture_neutral
+
+**Status.** `active`. Tests:
+`test_L4_category_error_refuses_whole_plan`,
+`test_L4_category_error_still_runs_L1`,
+`test_category_error_reason_carried_back`.
+
+### GL_INT_004 — inspector is pure  `[PHENOMENON]`
+
+**Statement.** `integrated_probabilistic_inspector(plan, scope,
+l0_world)` does not mutate `plan` or `l0_world`. Two calls with
+the same inputs return identical results.
+
+**SCOPE.** T=universal | S=universal | O=any_information_system | C=culture_neutral
+
+**Status.** `active`. Tests:
+`test_two_calls_return_same_result`,
+`test_plan_not_mutated`,
+`test_l0_world_not_mutated`.
+
+### GL_INT_PIN — canonical multi-layer plans pinned  `[INSTRUMENT]`
+
+**Statement.** Under the shipped constants,
+`integrated_probabilistic_inspector` produces:
+
+| plan                                                      | total_logp           |
+|-----------------------------------------------------------|----------------------|
+| Empty                                                      | `0.0`                |
+| L1 perpetual motion only                                   | `≈ -204.22`          |
+| L1 perpetual + L2 water 100% + L3 super species            | `≈ -244.09`          |
+| Any plan with L4 sub-plan under `O=AI_silicon_substrate`  | `None` (refused)     |
+
+**Falsifier.** Any pinned value shifts by more than `0.5` under
+the shipped constants of the constituent layers.
+
+**SCOPE.** T=single_step | S=local | O=any_information_system | C=culture_neutral (pin values inherit the scope of the underlying frozen layer constants)
+
+**Status.** `active`. Tests: full class
+`TestIntegratedStackDemoPin`.
+
+---
+
 ## L4 (Probabilistic) — Bayesian counterpart with category-error guard
 
 Lives in [`l4_human.py`](l4_human.py). Extends

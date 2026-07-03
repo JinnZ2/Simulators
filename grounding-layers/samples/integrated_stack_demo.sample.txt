@@ -1,0 +1,38 @@
+======================================================================
+INTEGRATED PROBABILISTIC STACK — L0-L4 product of experts
+======================================================================
+SCOPE (stacking rule): T=universal | S=universal |
+  O=any_information_system | C=culture_neutral
+(Individual layer contributions carry their own SCOPE.)
+
+[1] Empty plan (no layer applies):
+  total_logp        = 0.0
+  applicable        = []
+  skipped           = ['L0', 'L1', 'L2', 'L3', 'L4']
+
+[2] L1: perpetual motion (100/120/0):
+  total_logp        = -204.223
+  applicable        = ['L1']
+  L1 logp           = -204.223
+
+[3] Multi-layer sum (L1 perpetual + L2 water 100% + L3 super species):
+  total_logp        = -244.085
+  applicable        = ['L1', 'L2', 'L3']
+  L1 contribution  = -204.223
+  L2 contribution  = -1.000
+  L3 contribution  = -38.862
+  sum-of-components = -244.085
+
+[4] AI-self claim routed into L4 (should refuse whole plan):
+  total_logp             = None
+  applicable             = ['L1']
+  category_error_layers  = ['L4']
+  (L1 individually would have scored -0.71, but the category
+  error means the WHOLE plan is refused, not partially scored.)
+
+======================================================================
+Product-of-experts: total_logp is the sum of per-layer logp.
+Category error at ANY layer -> total_logp = None. No partial
+scoring, because a partial score would silently apply layers
+whose scope doesn't cover the claim.
+======================================================================
