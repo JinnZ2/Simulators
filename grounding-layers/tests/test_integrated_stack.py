@@ -77,7 +77,7 @@ class TestGL_INT_002_LayerSelection(unittest.TestCase):
         self.assertEqual(r['total_logp'], 0.0)
         self.assertEqual(r['applicable_layers'], [])
         self.assertEqual(set(r['skipped_layers']),
-                         {'L0', 'L1', 'L2', 'L3', 'L4'})
+                         {'L0', 'L1', 'L2', 'L3', 'L4', 'L5'})
 
     def test_only_L1_only_L1_applies(self):
         r = integrated_probabilistic_inspector({
@@ -86,7 +86,7 @@ class TestGL_INT_002_LayerSelection(unittest.TestCase):
         })
         self.assertEqual(r['applicable_layers'], ['L1'])
         self.assertEqual(set(r['skipped_layers']),
-                         {'L0', 'L2', 'L3', 'L4'})
+                         {'L0', 'L2', 'L3', 'L4', 'L5'})
 
     def test_all_layers_reported_as_skipped_or_applicable(self):
         r = integrated_probabilistic_inspector({
@@ -240,6 +240,111 @@ class TestIntegratedStackDemoPin(unittest.TestCase):
         self.assertIsNone(r['total_logp'])
 
 
+PROTO_UBUNTU = {
+    'economic_exchange_mode': 'gift',
+    'property_regime': 'communal',
+    'governance_dispute': 'elders_council',
+    'epistemology': 'consensus',
+    'communication_style': 'indirect_high_context',
+    'temporal_planning': 'generational',
+    'social_stratification': 'egalitarian',
+}
+
+
+class TestGL_INT_005_L5Threading(unittest.TestCase):
+    """[PHENOMENON] L5 pluralistic verdict threads correctly."""
+
+    def test_L5_plausible_adds_best_logp(self):
+        # PROTO_UBUNTU under all frames -> best is ubuntu_communal.
+        # With no explicit frame, best_logp is what's added.
+        r = integrated_probabilistic_inspector({
+            'L5': {'proposal': PROTO_UBUNTU},
+        })
+        self.assertIn('L5', r['applicable_layers'])
+        best = r['per_layer']['L5']['best_logp']
+        self.assertAlmostEqual(r['total_logp'], best, places=10)
+
+    def test_L5_explicit_frame_adds_that_frames_logp(self):
+        # Explicitly commit to islamic_finance frame; that frame's
+        # logp is added regardless of which frame is best.
+        r = integrated_probabilistic_inspector({
+            'L5': {'proposal': PROTO_UBUNTU,
+                    'frame': 'islamic_finance'},
+        })
+        expected = r['per_layer']['L5']['per_frame']['islamic_finance']
+        # islamic_finance won't be best for Ubuntu proposal.
+        self.assertNotEqual(expected,
+                            r['per_layer']['L5']['best_logp'])
+        self.assertAlmostEqual(r['total_logp'], expected, places=10)
+
+    def test_L5_unknown_frame_flags_and_skips(self):
+        # Non-existent frame -> no contribution, cultural_flags
+        # records FRAME_NOT_IN_LIBRARY.
+        r = integrated_probabilistic_inspector({
+            'L5': {'proposal': PROTO_UBUNTU,
+                    'frame': 'atlantean_technocracy'},
+        })
+        self.assertNotIn('L5', r['applicable_layers'])
+        self.assertEqual(r['total_logp'], 0.0)
+        flag_kinds = [f['flag'] for f in r['cultural_flags']]
+        self.assertIn('FRAME_NOT_IN_LIBRARY', flag_kinds)
+
+    def test_L5_unprecedented_still_scores_with_flag(self):
+        # Scattered proposal -> CULTURALLY_UNPRECEDENTED. best_logp
+        # still contributes (may be -inf); cultural_flags records
+        # the outcome.
+        scattered = {
+            'economic_exchange_mode': 'gift',
+            'property_regime': 'private_alienable',
+            'governance_dispute': 'religious_authority',
+            'epistemology': 'consensus',
+            'communication_style': 'direct_explicit',
+            'temporal_planning': 'cyclical',
+            'social_stratification': 'meritocratic',
+        }
+        r = integrated_probabilistic_inspector({
+            'L5': {'proposal': scattered},
+        })
+        # Verdict was unprecedented
+        self.assertEqual(r['per_layer']['L5']['verdict'],
+                         'CULTURALLY_UNPRECEDENTED')
+        # cultural_flags records it
+        flag_kinds = [f['flag'] for f in r['cultural_flags']]
+        self.assertIn('CULTURALLY_UNPRECEDENTED', flag_kinds)
+        # But it is NOT a refusal -- total_logp is still populated.
+        self.assertIsNotNone(r['total_logp'])
+
+    def test_L5_category_error_refuses_whole_plan(self):
+        # AI scope -> L5 refuses -> total_logp = None.
+        r = integrated_probabilistic_inspector(
+            {'L1': dict(work_input=100.0, work_output=60.0,
+                        heat_dissipated=40.0),
+             'L5': {'proposal': {'economic_exchange_mode': 'market'}}},
+            ontological_scope='AI_silicon_substrate')
+        self.assertIsNone(r['total_logp'])
+        error_layers = [e['layer'] for e in r['category_error_layers']]
+        self.assertIn('L5', error_layers)
+
+    def test_L5_and_L4_both_refuse_under_ai_scope(self):
+        r = integrated_probabilistic_inspector(
+            {'L4': dict(lift_mass=200.0),
+             'L5': {'proposal': {'economic_exchange_mode': 'market'}}},
+            ontological_scope='AI_silicon_substrate')
+        error_layers = [e['layer'] for e in r['category_error_layers']]
+        self.assertIn('L4', error_layers)
+        self.assertIn('L5', error_layers)
+
+    def test_L5_empty_sub_plan_is_skipped(self):
+        r = integrated_probabilistic_inspector({'L5': {}})
+        self.assertIn('L5', r['skipped_layers'])
+
+    def test_L5_sub_plan_without_proposal_key_is_skipped(self):
+        # Truthy but missing 'proposal' key -> skip.
+        r = integrated_probabilistic_inspector(
+            {'L5': {'frame': 'ubuntu_communal'}})
+        self.assertIn('L5', r['skipped_layers'])
+
+
 class TestReturnShape(unittest.TestCase):
     """Contract on the top-level return dict."""
 
@@ -255,8 +360,14 @@ class TestReturnShape(unittest.TestCase):
             {}, ontological_scope='any_human')
         self.assertEqual(r['ontological_scope'], 'any_human')
 
-    def test_layer_order_constant_is_the_five_layers(self):
-        self.assertEqual(LAYER_ORDER, ('L0', 'L1', 'L2', 'L3', 'L4'))
+    def test_layer_order_constant_is_the_six_layers(self):
+        self.assertEqual(LAYER_ORDER,
+                         ('L0', 'L1', 'L2', 'L3', 'L4', 'L5'))
+
+    def test_dict_has_cultural_flags(self):
+        r = integrated_probabilistic_inspector({})
+        self.assertIn('cultural_flags', r)
+        self.assertIsInstance(r['cultural_flags'], list)
 
 
 if __name__ == '__main__':

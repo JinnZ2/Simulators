@@ -1196,6 +1196,61 @@ the same inputs return identical results.
 `test_plan_not_mutated`,
 `test_l0_world_not_mutated`.
 
+### GL_INT_005 — L5 pluralistic verdict threads into the stack  `[PHENOMENON]`
+
+**Statement.** When an `L5` sub-plan appears in `plan` with shape
+`{'proposal': {...}, 'frame': str or None}`, the integrated
+inspector routes through `l5_probabilistic_inspector` and folds
+its output into the return dict per the following rules:
+
+  - **`PLAUSIBLE_UNDER_FRAME(S)`** with `frame=None`:
+    `best_logp` is added to `total_logp`; L5 appears in
+    `applicable_layers`.
+  - **`PLAUSIBLE_UNDER_FRAME(S)`** with explicit `frame`:
+    `per_frame[frame]` is added instead of `best_logp` (LOG.md
+    3.4 with frame committed). If the frame is not in the shipped
+    library, no contribution is added and a
+    `FRAME_NOT_IN_LIBRARY` entry is appended to `cultural_flags`.
+  - **`CULTURALLY_UNPRECEDENTED`**: `best_logp` (very negative)
+    IS still added to `total_logp` — the proposal is an outlier,
+    not a refusal — and a `CULTURALLY_UNPRECEDENTED` entry is
+    appended to `cultural_flags` so the caller sees the frame
+    library's limitation.
+  - **`CATEGORY_ERROR`** (non-human `ontological_scope`): L5 is
+    appended to `category_error_layers`, propagating the same
+    whole-plan-refusal semantics as L4 (`total_logp = None`).
+
+**Why it matters.** L5's pluralistic verdict is not a scalar in
+the L0-L4 sense. Threading it through requires two different
+mechanisms: log-probability contribution for scored proposals,
+and a separate `cultural_flags` channel for outcomes the caller
+needs to see (unprecedented, frame-not-in-library) without
+letting them silently refuse the plan.
+
+The `CULTURALLY_UNPRECEDENTED`-still-scores design is deliberate:
+the sim's own frame library is FINITE. Reading "no shipped frame
+fits" as "the proposal is bad" would elevate the frame library
+to a universal reference — the very failure mode L5's
+pluralism-by-default was built to avoid. Instead the sim reports
+the outlier logp AND surfaces the flag, and the caller decides
+whether the proposal is genuinely novel or whether the library
+is missing something.
+
+**Falsifier.** An L5 sub-plan where the verdict-to-total-logp
+mapping doesn't follow the rules above, or where category error
+at L5 doesn't set `total_logp=None`, or where an
+`CULTURALLY_UNPRECEDENTED` verdict fails to appear in
+`cultural_flags`.
+
+**SCOPE.** T=universal | S=universal | O=any_information_system | C=culture_neutral (the threading rule is code-level; the L5 output it processes carries its own O=human_cultural_artifact scope)
+
+**Status.** `active`. Tests:
+`test_L5_plausible_adds_best_logp`,
+`test_L5_explicit_frame_adds_that_frames_logp`,
+`test_L5_unknown_frame_flags_and_skips`,
+`test_L5_unprecedented_still_scores_with_flag`,
+`test_L5_category_error_refuses_whole_plan`.
+
 ### GL_INT_PIN — canonical multi-layer plans pinned  `[INSTRUMENT]`
 
 **Statement.** Under the shipped constants,

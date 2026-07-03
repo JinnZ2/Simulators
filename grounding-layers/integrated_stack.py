@@ -38,9 +38,10 @@ from l1_thermodynamics import l1_probabilistic_inspector
 from l2_planetary import l2_probabilistic_inspector
 from l3_ecology import l3_probabilistic_inspector
 from l4_human import l4_probabilistic_inspector
+from l5_core import l5_probabilistic_inspector
 
 
-LAYER_ORDER = ('L0', 'L1', 'L2', 'L3', 'L4')
+LAYER_ORDER = ('L0', 'L1', 'L2', 'L3', 'L4', 'L5')
 
 
 def integrated_probabilistic_inspector(
@@ -152,6 +153,64 @@ def integrated_probabilistic_inspector(
     else:
         skipped.append('L4')
 
+    # L5: pluralistic frame audit + category-error guard.
+    # Sub-plan shape: {'proposal': {axis: state, ...},
+    #                  'frame': str or None (optional)}
+    # If 'frame' is specified, the caller has committed to one frame
+    # and its logp is what's added to the total. If omitted, L5's
+    # own best_logp is used (LOG.md 3.4 "log P_{L5, F}" with F chosen
+    # as best-fit).
+    l5_sub = plan.get('L5')
+    cultural_flags = []
+    if l5_sub and 'proposal' in l5_sub:
+        result = l5_probabilistic_inspector(
+            l5_sub['proposal'],
+            ontological_scope=ontological_scope,
+        )
+        per_layer['L5'] = result
+        if result['category_error']:
+            category_errors.append({
+                'layer': 'L5',
+                'reason': result['reason'],
+                'ontological_scope': result.get('ontological_scope'),
+            })
+        else:
+            # Which frame contributes to the sum?
+            explicit_frame = l5_sub.get('frame')
+            if explicit_frame is not None:
+                if explicit_frame not in result['per_frame']:
+                    # Caller specified a frame not in the library.
+                    # Treat as culturally unprecedented under that
+                    # specific frame -- do not sum an unknown-quantity.
+                    cultural_flags.append({
+                        'layer': 'L5',
+                        'flag': 'FRAME_NOT_IN_LIBRARY',
+                        'requested_frame': explicit_frame,
+                    })
+                else:
+                    contribution = result['per_frame'][explicit_frame]
+                    running_total += contribution
+                    applicable.append('L5')
+            else:
+                # Use best_logp (LOG.md 3.4's frame-conditioned form
+                # under best-fit).
+                if result['best_logp'] is not None:
+                    running_total += result['best_logp']
+                    applicable.append('L5')
+
+            # CULTURALLY_UNPRECEDENTED is a FLAG not a refusal. The
+            # frame library may be incomplete; the very-negative
+            # logp is already in running_total.
+            if result['verdict'] == 'CULTURALLY_UNPRECEDENTED':
+                cultural_flags.append({
+                    'layer': 'L5',
+                    'flag': 'CULTURALLY_UNPRECEDENTED',
+                    'best_frame': result['best_frame'],
+                    'best_logp': result['best_logp'],
+                })
+    else:
+        skipped.append('L5')
+
     # Any category error -> whole plan is refused, not partial scored.
     if category_errors:
         total_logp = None
@@ -164,6 +223,7 @@ def integrated_probabilistic_inspector(
         'applicable_layers': applicable,
         'skipped_layers': skipped,
         'category_error_layers': category_errors,
+        'cultural_flags': cultural_flags,
         'ontological_scope': ontological_scope,
     }
 
@@ -231,9 +291,77 @@ if __name__ == "__main__":
     print(f"  error means the WHOLE plan is refused, not partially scored.)")
 
     print()
+
+    # 5. L5 pluralistic cultural claim
+    print("[5] L1 + L5 (Ubuntu proposal, best-fit frame):")
+    r = integrated_probabilistic_inspector({
+        'L1': dict(work_input=100.0, work_output=60.0,
+                   heat_dissipated=40.0),
+        'L5': {'proposal': {
+            'economic_exchange_mode': 'gift',
+            'property_regime': 'communal',
+            'governance_dispute': 'elders_council',
+            'epistemology': 'consensus',
+            'communication_style': 'indirect_high_context',
+            'temporal_planning': 'generational',
+            'social_stratification': 'egalitarian',
+        }},
+    })
+    print(f"  total_logp        = {r['total_logp']:.3f}")
+    print(f"  applicable        = {r['applicable_layers']}")
+    print(f"  L1 contribution   = {r['per_layer']['L1']['logp']:.3f}")
+    l5_r = r['per_layer']['L5']
+    print(f"  L5 verdict        = {l5_r['verdict']}")
+    print(f"  L5 best_frame     = {l5_r['best_frame']}")
+    print(f"  L5 best_logp      = {l5_r['best_logp']:.3f}")
+    print()
+
+    # 6. L5 culturally unprecedented (flag but not refusal)
+    print("[6] L1 + L5 (scattered proposal -> unprecedented FLAG, not refusal):")
+    r = integrated_probabilistic_inspector({
+        'L1': dict(work_input=100.0, work_output=60.0,
+                   heat_dissipated=40.0),
+        'L5': {'proposal': {
+            'economic_exchange_mode': 'gift',
+            'property_regime': 'private_alienable',
+            'governance_dispute': 'religious_authority',
+            'epistemology': 'consensus',
+            'communication_style': 'direct_explicit',
+            'temporal_planning': 'cyclical',
+            'social_stratification': 'meritocratic',
+        }},
+    })
+    print(f"  total_logp        = {r['total_logp']}")
+    print(f"  cultural_flags    = "
+          f"{[f['flag'] for f in r['cultural_flags']]}")
+    print(f"  (total_logp is still a number -- the proposal is a")
+    print(f"   VERY-negative outlier under all shipped frames but not")
+    print(f"   a refusal. The frame library may be incomplete.)")
+    print()
+
+    # 7. L5 category error under AI scope
+    print("[7] L4 + L5 under AI scope (both refuse):")
+    r = integrated_probabilistic_inspector(
+        {
+            'L4': dict(lift_mass=200.0),
+            'L5': {'proposal': {'economic_exchange_mode': 'market'}},
+        },
+        ontological_scope='AI_silicon_substrate')
+    print(f"  total_logp             = {r['total_logp']}")
+    print(f"  category_error_layers  = "
+          f"{[e['layer'] for e in r['category_error_layers']]}")
+
+    print()
     print("=" * 70)
     print("Product-of-experts: total_logp is the sum of per-layer logp.")
     print("Category error at ANY layer -> total_logp = None. No partial")
     print("scoring, because a partial score would silently apply layers")
     print("whose scope doesn't cover the claim.")
+    print()
+    print("L5 pluralistic verdicts thread differently:")
+    print("  PLAUSIBLE_UNDER_FRAME(S) -> best_logp added to total.")
+    print("  CULTURALLY_UNPRECEDENTED -> best_logp still added, but")
+    print("                              a cultural_flag records the")
+    print("                              limitation of the frame library.")
+    print("  CATEGORY_ERROR           -> whole plan refused (same as L4).")
     print("=" * 70)

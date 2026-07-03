@@ -8,7 +8,7 @@ SCOPE (stacking rule): T=universal | S=universal |
 [1] Empty plan (no layer applies):
   total_logp        = 0.0
   applicable        = []
-  skipped           = ['L0', 'L1', 'L2', 'L3', 'L4']
+  skipped           = ['L0', 'L1', 'L2', 'L3', 'L4', 'L5']
 
 [2] L1: perpetual motion (100/120/0):
   total_logp        = -204.223
@@ -30,9 +30,35 @@ SCOPE (stacking rule): T=universal | S=universal |
   (L1 individually would have scored -0.71, but the category
   error means the WHOLE plan is refused, not partially scored.)
 
+[5] L1 + L5 (Ubuntu proposal, best-fit frame):
+  total_logp        = -3.554
+  applicable        = ['L1', 'L5']
+  L1 contribution   = -0.708
+  L5 verdict        = PLAUSIBLE_UNDER_FRAME(S)
+  L5 best_frame     = ubuntu_communal
+  L5 best_logp      = -2.846
+
+[6] L1 + L5 (scattered proposal -> unprecedented FLAG, not refusal):
+  total_logp        = -inf
+  cultural_flags    = ['CULTURALLY_UNPRECEDENTED']
+  (total_logp is still a number -- the proposal is a
+   VERY-negative outlier under all shipped frames but not
+   a refusal. The frame library may be incomplete.)
+
+[7] L4 + L5 under AI scope (both refuse):
+  total_logp             = None
+  category_error_layers  = ['L4', 'L5']
+
 ======================================================================
 Product-of-experts: total_logp is the sum of per-layer logp.
 Category error at ANY layer -> total_logp = None. No partial
 scoring, because a partial score would silently apply layers
 whose scope doesn't cover the claim.
+
+L5 pluralistic verdicts thread differently:
+  PLAUSIBLE_UNDER_FRAME(S) -> best_logp added to total.
+  CULTURALLY_UNPRECEDENTED -> best_logp still added, but
+                              a cultural_flag records the
+                              limitation of the frame library.
+  CATEGORY_ERROR           -> whole plan refused (same as L4).
 ======================================================================
