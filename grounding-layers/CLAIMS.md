@@ -912,6 +912,209 @@ the shipped constants.
 
 ---
 
+## Inverse Knowledge Tree — verification by demonstrated lineage
+
+Lives in [`inverse_knowledge_tree.py`](inverse_knowledge_tree.py) as a
+**peer to the L-stack**, not a member of it. The L-stack asks "does
+this claim violate a layer's constraints?" This asks "has the chain
+of prerequisites actually paid the failure-cost of its assertions?"
+Different epistemic axis; complementary use.
+
+Each node in a knowledge tree declares:
+- `claimed`: understanding the builders asserted, `[0, 1]`
+- `demonstrated`: reliability the structure showed under load, `[0, 1]`
+- `failures_absorbed`, `span_years`: the graveyard behind that node
+
+`gap = claimed - demonstrated`. Positive gaps mean margin SPENT
+(abstraction outran the stone); negative gaps mean margin HELD
+(overbuilt reserve against unnamed unknowns).
+
+### GL_IKT_001 — Node carries two-numbers-that-must-not-be-conflated  `[PHENOMENON]`
+
+**Statement.** Every `Node` in a knowledge tree carries `claimed`
+and `demonstrated` as independent fields in `[0, 1]`. The derived
+`gap = claimed - demonstrated` measures margin spent (positive) or
+held (negative). Neither number is auto-derived from the other;
+both are asserted by the tree's author.
+
+**Why it matters.** Conflating the two — treating an asserted
+understanding as demonstrated reliability — is the specific
+epistemic move this whole audit exists to catch. The dataclass
+enforces the separation at the schema level.
+
+**Falsifier.** A tree that stores only one of the two numbers, or a
+derivation that computes `demonstrated` from `claimed`.
+
+**SCOPE.** T=uncalibrated | S=uncalibrated | O=any_information_system | C=culture_neutral (the framework is domain-agnostic; specific trees encode specific epistemic traditions and should carry their own SCOPE)
+
+**Status.** `active`. Tests:
+`test_node_has_claimed_and_demonstrated_fields`,
+`test_gap_is_claimed_minus_demonstrated`.
+
+### GL_IKT_002 — Backward closure walks the requires-edges  `[PHENOMENON]`
+
+**Statement.** `closure(tree, root)` walks the `requires` edges
+backward from `root` and returns `(reached, missing)`. A node id
+that appears in some `requires` tuple but is not a key in the
+tree lands in `missing`; all other nodes reached are in `reached`.
+The order of `reached` is a walk order (implementation detail),
+but the SET of reached ids and missing ids is stable under any
+walk order.
+
+**Why it matters.** The audit cannot conclude anything about a
+chain until it knows what's in the chain. Missing prerequisites
+that no one has claimed to demonstrate are the load-bearing sign
+of an ungrounded assertion.
+
+**Falsifier.** A tree where a `requires` id resolves in the tree
+but does not appear in `closure(tree, root).reached`, or a
+non-existent id that does not appear in `missing`.
+
+**SCOPE.** T=uncalibrated | S=uncalibrated | O=any_information_system | C=culture_neutral
+
+**Status.** `active`. Tests:
+`test_closure_reaches_all_ancestors`,
+`test_closure_flags_missing_ancestors`,
+`test_closure_terminates_on_cycles`.
+
+### GL_IKT_003 — Failure load aggregates over the closure  `[PHENOMENON]`
+
+**Statement.** `failure_load(tree, root)` returns a dict aggregating
+across the reached closure:
+
+  - `failures`: sum of `failures_absorbed` over reached nodes
+  - `span_years`: sum of `span_years`
+  - `margin_spent`: sum of positive gaps only (rounded to 3)
+  - `margin_held`: sum of `|negative gaps|` only (rounded to 3)
+  - `spenders`: ids of nodes with `gap > 0`
+  - `missing`: forwarded from `closure`
+
+**Why it matters.** The audit's core reframe: "how much failure did
+your ancestors pay for this?" A high failure-load with low
+margin-spent means the ancestors ate the cost and paid off the
+claim; a low failure-load with high margin-spent means the current
+claim is riding unearned confidence.
+
+**Falsifier.** A closure member whose contribution to any of the
+above totals disagrees with the field on its own node.
+
+**SCOPE.** T=uncalibrated | S=uncalibrated | O=any_information_system | C=culture_neutral
+
+**Status.** `active`. Tests:
+`test_failure_load_sums_across_closure`,
+`test_margin_spent_only_positive_gaps`,
+`test_margin_held_only_negative_gaps`,
+`test_spenders_lists_positive_gap_ids`.
+
+### GL_IKT_004 — Four verdicts, priority-ordered  `[PHENOMENON]`
+
+**Statement.** `audit(tree, root, margin_attempts, gap_tol,
+terminal_tol)` returns one of exactly four verdicts, evaluated in
+priority order:
+
+1. `UNGROUNDED` — `missing` is non-empty. Chain rests on nodes not
+   in the ledger.
+2. `EXCEEDS` — `failures > margin_attempts`. Historical failure-load
+   exceeds the margin the projection can absorb before it must pay
+   off.
+3. `BORROWS` (terminal) — `terminal_gap > terminal_tol`. Point-of-
+   application spends unearned margin regardless of chain average.
+4. `BORROWS` (chain-wide) — `margin_spent > gap_tol · max(n_nodes, 1)`.
+   Chain-wide spend beyond tolerance.
+5. `HOLDS` — none of the above. Margin covers load; chain stands on
+   demonstrated ground.
+
+Priority matters: an `UNGROUNDED` chain is never `EXCEEDS`, an
+`EXCEEDS` chain is never `BORROWS`, etc. This lets an auditor read
+a single verdict as the strongest failure mode.
+
+**Why it matters.** Collapsing "chain looks bad" into a single
+number would hide the DIFFERENT ways a claim can be under-grounded.
+An untraceable ancestor is a different failure mode from a
+too-thin margin, and both are different from a strong terminal
+spend on top of an honest chain.
+
+**Falsifier.** A tree where a verdict fires out of priority order,
+or where the same input produces different verdicts on repeated
+calls.
+
+**SCOPE.** T=uncalibrated | S=uncalibrated | O=any_information_system | C=culture_neutral
+
+**Status.** `active`. Tests:
+`test_ungrounded_fires_when_missing`,
+`test_exceeds_fires_when_failures_over_margin`,
+`test_borrows_fires_on_terminal_gap`,
+`test_borrows_fires_on_chain_wide_spend`,
+`test_holds_when_all_gates_pass`,
+`test_verdict_priority_ungrounded_over_exceeds`.
+
+### GL_IKT_005 — Terminal AND chain gates are both checked  `[PHENOMENON]`
+
+**Statement.** The two `BORROWS` gates exist because collapse is
+LOCAL: a chain can average honest while its point-of-application
+spends hard. The terminal node's own posture cannot hide behind
+honest ancestors. The audit checks the terminal gate independently
+of the chain-wide gate.
+
+**Why it matters.** This is the reason the i35w case fires
+`BORROWS`: 7-node chain, only 4 spenders, chain-wide spend 0.96 —
+that alone doesn't cross `gap_tol · 7 = 1.05`. But the terminal
+node itself carries `gap = 0.37`, above `terminal_tol = 0.20`. The
+terminal gate fires. Without this gate, the chain would read as
+"borderline holds" and the i35w collapse would be a surprise.
+
+**Falsifier.** A tree where the terminal node has `gap > 0.20`
+and the audit does NOT return `BORROWS`.
+
+**SCOPE.** T=uncalibrated | S=uncalibrated | O=any_information_system | C=culture_neutral
+
+**Status.** `active`. Tests:
+`test_terminal_gate_fires_alone`,
+`test_chain_gate_fires_alone`.
+
+### GL_IKT_006 — Frozen tolerances  `[INSTRUMENT]`
+
+**Statement.** Default `gap_tol = 0.15` and `terminal_tol = 0.20`
+are frozen. Retuning either without updating a CLAIM violates the
+REFUTATION_PROTOCOL. Callers may override both explicitly for
+domain-specific trees, but the defaults reflect the design
+sensitivity used in the shipped demo.
+
+**Why it matters.** These two numbers govern where the audit
+draws the line between "still holds" and "spending unearned
+margin." Silently retuning them would move the load-bearing pin
+without visible commentary.
+
+**SCOPE.** T=uncalibrated | S=uncalibrated | O=any_information_system | C=culture_neutral
+
+**Status.** `active`. Tests:
+`test_default_gap_tol_is_0p15`,
+`test_default_terminal_tol_is_0p20`.
+
+### GL_IKT_PIN — Demo bridges verdicts pinned  `[INSTRUMENT]`
+
+**Statement.** Under the shipped `BRIDGES` tree and default
+tolerances, `audit` produces:
+
+| root                          | margin  | verdict       | key numbers                        |
+|-------------------------------|---------|---------------|------------------------------------|
+| `aqueduct_span`               | 1000    | `HOLDS`       | 4 nodes, 107 failures, held 2.34   |
+| `i35w_span`                   | 1000    | `BORROWS`     | 7 nodes, 825 failures, term 0.37   |
+| `new_gorge_span`              | 2000    | `BORROWS`     | 7 nodes, term 0.93                 |
+| `new_gorge_span`              | 500     | `EXCEEDS`     | 810 failures > 500 available       |
+| `nano_lattice_span` (ghosted) | 5000    | `UNGROUNDED`  | missing `self_healing_alloy`       |
+
+**Falsifier.** Any of the five verdicts changes under the shipped
+tree and default tolerances, or a numeric summary shifts by more
+than 0.1 on the load fields.
+
+**SCOPE.** T=uncalibrated | S=uncalibrated | O=any_information_system | C=engineering_epistemology_frame (the BRIDGES tree specifically encodes an engineering-history epistemology; a different domain's tree would live under a different C tag)
+
+**Status.** `active`. Tests: full class
+`TestIKTBridgesDemoPin`.
+
+---
+
 ### GL_L0_P_PIN — probabilistic inspector's trace on the fixed hallucination  `[INSTRUMENT]`
 
 **Statement.** With `np.random.seed(0)` and the shipped constants,

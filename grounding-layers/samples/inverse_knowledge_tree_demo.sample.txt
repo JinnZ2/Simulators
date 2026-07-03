@@ -1,0 +1,57 @@
+============================================================
+STANDING vs FALLEN — same domain, opposite margin posture
+============================================================
+root          aqueduct_span
+verdict       HOLDS
+chain depth   4 nodes
+failure-load  107 attempts over 4000y
+margin spent  0   (abstraction outran stone)
+margin held   2.34   (overbuilt reserve)
+terminal gap  -0.62   (spend at point-of-application)
+------------------------------------------------------------
+root          i35w_span
+verdict       BORROWS
+chain depth   7 nodes
+failure-load  825 attempts over 5375y
+margin spent  0.96   (abstraction outran stone)
+margin held   0.98   (overbuilt reserve)
+terminal gap  0.37   (spend at point-of-application)
+spenders      i35w_span, cost_optimization, fea_modeling, stress_theory
+------------------------------------------------------------
+
+============================================================
+FORWARD PROJECTION — 'overcome the gorge through optimization'
+============================================================
+
+available margin = 2000 attempts
+root          new_gorge_span
+verdict       BORROWS
+chain depth   7 nodes
+failure-load  810 attempts over 5370y
+margin spent  1.52   (abstraction outran stone)
+margin held   0.98   (overbuilt reserve)
+terminal gap  0.93   (spend at point-of-application)
+spenders      new_gorge_span, fea_modeling, stress_theory, cost_optimization
+
+available margin = 500 attempts
+root          new_gorge_span
+verdict       EXCEEDS
+chain depth   7 nodes
+failure-load  810 attempts over 5370y
+margin spent  1.52   (abstraction outran stone)
+margin held   0.98   (overbuilt reserve)
+terminal gap  0.93   (spend at point-of-application)
+spenders      new_gorge_span, fea_modeling, stress_theory, cost_optimization
+
+============================================================
+UNGROUNDED — claim resting on a node not in the ledger
+============================================================
+root          nano_lattice_span
+verdict       UNGROUNDED
+chain depth   1 nodes
+failure-load  0 attempts over 0y
+margin spent  0.98   (abstraction outran stone)
+margin held   0   (overbuilt reserve)
+terminal gap  0.98   (spend at point-of-application)
+spenders      nano_lattice_span
+MISSING       self_healing_alloy  <- untraceable
