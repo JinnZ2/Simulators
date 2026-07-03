@@ -1,5 +1,30 @@
 work from bottom to top on this page
 
+## Addendum: Rigor Axes Across Cultural Epistemologies
+
+Not all traditions are equally rigorous, and not all claims of "science" are substantive.
+To prevent L5 from becoming a flat, permissive cultural relativism, we introduce
+**rigor axes** that measure the depth of empirical process, independent of storage medium.
+
+These axes include:
+- Temporal depth (decadal vs. single-event)
+- Internal state calibration (introspective reporting)
+- Substrate consequence proof (landscape markers)
+- Replication across independent contexts
+- Falsifiability protocol clarity
+- Transmission integrity
+
+Each cultural frame has expected minima along these axes for a claim to be treated
+as settled knowledge. An AI proposal can be scored not only for *cultural fit* but
+also for *empirical rigor* within the claimed frame. This prevents the AI from
+confusing decorative science with genuine method, and from collapsing into a
+uniformity of low-rigor narratives.
+
+The probability matrix for L5 now includes these axes as additional dimensions,
+allowing the inspector to assess not just "does this fit the culture?" but
+"is this rigorous *by the standards of that culture*?"
+
+
 # Reasoning Log: L5 – Pluralistic Human Constructs as a Weighted Probability Matrix
 
 **Date:** 2026-07-02  
