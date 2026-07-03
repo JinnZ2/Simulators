@@ -1,0 +1,65 @@
+======================================================================
+PROBABILISTIC L3 INSPECTOR — canonical plans
+======================================================================
+SCOPE: T=generational | S=ecosystem | O=any_biological | C=ecosystem_frame
+
+Frozen constants (inherited + new):
+  kleiber_a                    = 3.0    (W/kg^0.75)
+  trophic_transfer_efficiency  = 0.1
+  max_trophic_levels           = 5
+  minimum_viable_population    = 50
+  allometry_sigma              = 1.0    (W)
+  trophic_sigma                = 0.05
+  overcapacity_scale           = 2.0
+  mvp_scale                    = 2.0
+  trophic_ceiling_scale        = 1.0
+
+Kleiber prediction, 2kg rabbit: 5.045 W
+
+Empty plan:
+  total logp =       0.0000
+
+Rabbit at K, Kleiber-valid metabolism:
+  total logp =       0.0000
+             allometry:      -0.0000
+                   mvp:      -0.0000
+          overcapacity:      -0.0000
+
+Rabbit claiming 10× Kleiber metabolism:
+  total logp =   -1030.9617
+             allometry:   -1030.9617
+                   mvp:      -0.0000
+          overcapacity:      -0.0000
+
+Claimed 50% trophic efficiency:
+  total logp =     -32.0000
+      trophic_transfer:     -32.0000
+
+Rabbit population 10× K:
+  total logp =     -18.4383
+                   mvp:      -0.0000
+          overcapacity:     -18.4383
+
+Rabbit population below MVP:
+  total logp =      -1.6200
+                   mvp:      -1.6200
+          overcapacity:      -0.0000
+
+Trophic level 10 (above cap 5):
+  total logp =     -25.0000
+       trophic_ceiling:     -25.0000
+
+Super species: 1000kg apex predator, pop 10:
+  total logp =     -38.8616
+                   mvp:      -1.2800
+          overcapacity:     -37.5816
+
+======================================================================
+Semantics:
+  * Kleiber violations dominate when metabolism claims are wild.
+  * Trophic transfer efficiency > 10% quickly gets deep penalty.
+  * Population overshoots K -> smooth quadratic barrier.
+  * Population under MVP -> smooth quadratic barrier (capped at -2).
+  * Trophic level above 5 -> smooth quadratic barrier.
+  * All terms additive; log_likelihood is pure.
+======================================================================

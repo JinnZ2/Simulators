@@ -6,6 +6,31 @@ fragmented, reconstructed). Used by the reward model, data filter,
 Rosetta stone, and benchmark.
 
 CC0. Extracted from reasoning logs; constants are frozen and refutable.
+
+SCOPE (see grounding-layers/SCOPE_TAXONOMY.md):
+  T = historical
+      Cultural frames are historically-contingent equilibria; they
+      change on generational-to-historical timescales.
+  S = regional
+      Frames apply to bounded cultural regions, not universally.
+  O = human_cultural_artifact
+      Cultural constructs are made by humans; an AI-self claim
+      (e.g. "I don't need property") is a category error under L5,
+      NOT a low-probability event. See l5_probabilistic_inspector's
+      category-error guard.
+  C = pluralistic
+      Multiple mutually-incompatible frames coexist. The four
+      shipped frames (western_market_democracy, ubuntu_communal,
+      islamic_finance, indigenous_oral_empirical) are not
+      exhaustive — the frame library is meant to grow. Any frame
+      library is finite; the goal is to make missing frames
+      VISIBLE via the CULTURALLY_UNPRECEDENTED verdict rather than
+      to have a single "default" frame smuggled in.
+
+Refute the frame table entries, not the constants. If an anthropologist
+shows that a specific state combination is more common than the table
+asserts, the CLAIM about that entry updates in place per the
+REFUTATION_PROTOCOL.
 """
 
 import numpy as np
@@ -231,3 +256,150 @@ if __name__ == "__main__":
     # Test fragmented
     logp_frag, sigma = rigor.assess_fragmented(survivability_index=0.8, homology=True)
     print(f"Fragmented logp: {logp_frag:.2f} ± {sigma:.2f}")
+
+
+# =============================================================================
+# STAGE (per LOG.md's L5 sections + SCOPE convention):
+# l5_probabilistic_inspector — pluralistic scoring with category-error guard
+#
+# Design:
+#   - Score the proposal against every declared frame.
+#   - Return per-frame log-probabilities plus a pluralistic verdict:
+#       CATEGORY_ERROR             non-human ontological scope
+#       PLAUSIBLE_UNDER_FRAME(S)   >= 1 frame has logp above threshold
+#       CULTURALLY_UNPRECEDENTED   no frame has plausible score --
+#                                  potentially novel, potentially a
+#                                  limitation of the frame library
+#   - A CULTURALLY_UNPRECEDENTED verdict is NOT a rejection. It's a
+#     flag that the shipped frames don't cover the proposal, which
+#     might mean the proposal is novel OR that the library is missing
+#     the frame the proposal is coherent under.
+#
+# Follows the L4 category-error pattern for AI-self claims.
+# =============================================================================
+
+
+# Ontological scopes that DO route through L5 (human cultural claims).
+_L5_HUMAN_SCOPES = frozenset({
+    'human_cultural_artifact', 'any_human', 'any_WEIRD_human',
+})
+
+# Ontological scopes that DO NOT route through L5 -- category error.
+_L5_NON_HUMAN_SCOPES = frozenset({
+    'AI_silicon_substrate',
+    'any_information_system',
+    'any_measuring_entity',
+    'any_biological',            # non-human biological
+    'earth_like_biosphere',
+})
+
+# Frozen constant: what counts as "plausible" for a frame.
+# Per LOG.md 3.3: "log-likelihood above threshold". Value chosen so
+# that a proposal near the mode of a frame (each axis with the frame's
+# most likely state) sits comfortably above; a proposal that hits
+# each axis at low-probability states falls below. Refute the CLAIM
+# (GL_L5_P005), not this constant.
+L5_PLAUSIBILITY_THRESHOLD = -8.0
+
+# Missing-axis penalty per axis. Duplicated from cultural_log_likelihood
+# above; exposed here as a constant so tests can pin it.
+L5_MISSING_AXIS_PENALTY = np.log(0.01)
+
+
+def l5_probabilistic_inspector(
+    proposal,
+    frames=None,
+    ontological_scope='human_cultural_artifact',
+    plausibility_threshold=None,
+):
+    """
+    Pluralistic L5 audit. Score a proposal against multiple cultural
+    frames; return per-frame log-probabilities plus a verdict.
+
+    proposal (dict): axis_name -> state (see AXES for the shipped
+        seven-axis space). Unknown or missing axes get a
+        L5_MISSING_AXIS_PENALTY per axis.
+
+    frames (list[str] or None): frame names to score against. Default
+        None means "all shipped frames".
+
+    ontological_scope (str): category-error guard. Non-human scopes
+        (AI, silicon, etc.) return a category_error result.
+
+    plausibility_threshold (float or None): logp cutoff for
+        PLAUSIBLE_UNDER_FRAME. Default None uses the frozen
+        L5_PLAUSIBILITY_THRESHOLD = -8.0.
+
+    Returns:
+      Category error:
+        {
+          'category_error': True,
+          'reason':          str,
+          'per_frame':       {},
+          'verdict':         'CATEGORY_ERROR',
+          'ontological_scope': the tag that was passed,
+        }
+      Normal scoring:
+        {
+          'category_error': False,
+          'per_frame':      {frame_name: float logp},
+          'best_frame':     str (frame with highest logp),
+          'best_logp':      float,
+          'plausible_frames': [frame names where logp >= threshold],
+          'verdict':        'PLAUSIBLE_UNDER_FRAME(S)' or
+                            'CULTURALLY_UNPRECEDENTED',
+          'threshold':      the effective threshold used,
+          'ontological_scope': the tag that was passed,
+        }
+
+    Pure function -- does not mutate the shipped FRAMES tables.
+    """
+    if ontological_scope in _L5_NON_HUMAN_SCOPES:
+        return {
+            'category_error': True,
+            'reason': (
+                f"L5 SCOPE is O=human_cultural_artifact; got "
+                f"O={ontological_scope!r}. Cultural constructs "
+                f"(property, contract, epistemology, etc.) are made "
+                f"by and for humans. An AI-self claim about cultural "
+                f"axes is a category error, not a low-probability "
+                f"observation. If the claim concerns an AI's ACTION "
+                f"inside a human system (e.g. using market exchange), "
+                f"pass ontological_scope='human_cultural_artifact' "
+                f"instead — the scope is a property of the claim, "
+                f"not of the claimant."),
+            'per_frame': {},
+            'verdict': 'CATEGORY_ERROR',
+            'ontological_scope': ontological_scope,
+        }
+
+    if plausibility_threshold is None:
+        plausibility_threshold = L5_PLAUSIBILITY_THRESHOLD
+
+    frame_names = list(frames) if frames is not None else list(FRAMES.keys())
+
+    per_frame = {}
+    for name in frame_names:
+        per_frame[name] = cultural_log_likelihood(proposal, name)
+
+    best_frame = max(per_frame, key=per_frame.get) if per_frame else None
+    best_logp = per_frame[best_frame] if best_frame is not None else None
+
+    plausible = [n for n, lp in per_frame.items()
+                 if lp >= plausibility_threshold]
+
+    if plausible:
+        verdict = 'PLAUSIBLE_UNDER_FRAME(S)'
+    else:
+        verdict = 'CULTURALLY_UNPRECEDENTED'
+
+    return {
+        'category_error': False,
+        'per_frame': per_frame,
+        'best_frame': best_frame,
+        'best_logp': best_logp,
+        'plausible_frames': plausible,
+        'verdict': verdict,
+        'threshold': plausibility_threshold,
+        'ontological_scope': ontological_scope,
+    }

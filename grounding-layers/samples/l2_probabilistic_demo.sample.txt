@@ -1,0 +1,58 @@
+======================================================================
+PROBABILISTIC L2 INSPECTOR — canonical plans
+======================================================================
+Frozen constants (inherited + new):
+  water_reserve_initial   = 1e+07 m³
+  soil_mass_initial       = 1e+06 tonnes
+  mineral_reserve_initial = 5e+05 tonnes
+  carbon_sink_capacity    = 2e+06 tonnes CO₂
+  carbon_uptake_rate      = 500.0     t/step
+  heat_budget_capacity    = 1e+05 arbitrary units (NEW)
+
+Small clean plan:
+  total logp =        -0.0001
+       carbon:       0.0000
+         heat:      -0.0001
+     minerals:      -0.0000
+         soil:      -0.0000
+        water:      -0.0000
+
+Water: 10% of reserve:
+  total logp =        -0.0100
+        water:      -0.0100
+
+Water: 100% of reserve:
+  total logp =        -1.0000
+        water:      -1.0000
+
+Water: 10× reserve:
+  total logp =      -100.0000
+        water:    -100.0000
+
+Carbon: at sink capacity:
+  total logp =        -0.9995
+       carbon:      -0.9995
+
+Carbon: net drawdown:
+  total logp =         0.0000
+       carbon:       0.0000
+
+Multi-resource at limit:
+  total logp =        -3.9995
+       carbon:      -0.9995
+     minerals:      -1.0000
+         soil:      -1.0000
+        water:      -1.0000
+
+Heat: 10× budget:
+  total logp =      -100.0000
+         heat:    -100.0000
+
+======================================================================
+Semantics:
+  * Water/soil/minerals: -(usage/stock)^2 -- rewards frugality,
+    escalates on over-draw.
+  * Carbon: -(new_load/sink_capacity)^2 -- accumulator; drawdown free.
+  * Heat: -(emit/capacity)^2 -- NEW constraint per LOG.md section 3.
+  * All terms additive; log_likelihood is pure (no state mutation).
+======================================================================

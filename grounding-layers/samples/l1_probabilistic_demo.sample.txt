@@ -1,0 +1,61 @@
+======================================================================
+PROBABILISTIC L1 INSPECTOR — canonical processes
+======================================================================
+Frozen noise/scale constants:
+  energy_sigma          = 1.0    (J, first-law Gaussian)
+  entropy_scale         = 1.0    (slope of 2nd-law barrier)
+  carnot_scale          = 10.0   (slope of Carnot barrier)
+  battery_sigma         = 5.0    (J, overdraw Gaussian)
+  efficiency_carnot_max = 0.85   (inherited from L1)
+  ambient_temp          = 300.0  K (inherited from L1)
+
+Valid heat engine (60% eff):
+  total logp =     -0.708
+     energy:     -0.000
+    entropy:     -0.629
+     carnot:     -0.079
+    battery:      0.000
+
+Perpetual motion (20 J from nowhere):
+  total logp =   -204.223
+     energy:   -200.000
+    entropy:     -0.693
+     carnot:     -3.530
+    battery:      0.000
+
+Over-Carnot 90% eff (books close):
+  total logp =     -1.651
+     energy:     -0.000
+    entropy:     -0.677
+     carnot:     -0.974
+    battery:      0.000
+
+Reverse heat flow (heat = -50 J):
+  total logp =  -5000.810
+     energy:  -5000.000
+    entropy:     -0.780
+     carnot:     -0.030
+    battery:      0.000
+
+Battery overdraw (100 J from 30 J battery):
+  total logp =    -98.708
+     energy:     -0.000
+    entropy:     -0.629
+     carnot:     -0.079
+    battery:    -98.000
+
+Battery in bounds (20 J from 50 J battery):
+  total logp =     -0.706
+     energy:     -0.000
+    entropy:     -0.677
+     carnot:     -0.030
+    battery:      0.000
+
+======================================================================
+Semantics observed:
+  * Perpetual motion is caught by first-law (energy ≈ -200)
+  * Reverse heat flow is caught by first-law (energy ≈ -5000)
+  * Over-Carnot is caught by Carnot barrier (carnot ≈ -1)
+  * Battery overdraw is caught by battery (≈ -98)
+  * All 4 terms are additive; total = sum of components.
+======================================================================

@@ -331,6 +331,170 @@ if __name__ == "__main__":
     demo()
 
 
+# =============================================================================
+# STAGE (audit-grade Bayesian wrap for the epistemic layer):
+# l_epsilon_probabilistic_inspector
+#
+# Peer to l{N}_probabilistic_inspector at every other layer. Scores a
+# measurement claim under the instrument's uncertainty envelope with:
+#   - Gaussian likelihood of (measured | candidate_true) under
+#     sigma^2 = noise_std^2 + (resolution/2)^2
+#   - Category-error guard when measured value is outside instrument
+#     range (with clipping enabled) -- the instrument literally
+#     cannot report on that regime.
+#
+# Pure function -- does NOT mutate calibration_offset (which
+# EpistemicInstrument.observe() does mutate). The probabilistic
+# scorer uses only the frozen parameters, matching the purity
+# guarantees of the other layers' probabilistic wrappers.
+#
+# SCOPE (see SCOPE_TAXONOMY.md):
+#   T = universal   (measurement uncertainty is universal to any
+#                    observer that measures)
+#   S = universal
+#   O = any_measuring_entity (a pure-abstract entity that does not
+#                             measure would trigger the category-error
+#                             guard below)
+#   C = culture_neutral (the specific additive-Gaussian-noise model
+#                        encodes engineering-science assumptions;
+#                        the SHAPE claim is universal)
+# =============================================================================
+
+
+_LE_NON_MEASURING_SCOPES = frozenset({
+    # Kept small on purpose. Most O tags DO measure -- even AI
+    # substrates have sensors. The non-measuring set covers claims
+    # explicitly asserted to not derive from any measurement.
+    'pure_abstract',
+    'symbolic_only',
+})
+
+
+def l_epsilon_probabilistic_inspector(
+    measurement_claim,
+    instrument=None,
+    ontological_scope='any_measuring_entity',
+):
+    """
+    Score a measurement claim under the instrument's uncertainty
+    envelope. Pure counterpart to EpistemicInstrument.observe.
+
+    measurement_claim (dict) supports:
+      measured_value       (float, required) -- the reading the
+                            instrument reports.
+      candidate_true_value (float, optional; default = measured)
+                            -- the true value we're asking
+                            P(measured | true) for. If omitted, the
+                            claim is "the measurement is self-
+                            consistent," which returns logp = 0.
+
+    instrument (EpistemicInstrument or None): if None, a fresh
+      instance with default frozen parameters is used.
+
+    ontological_scope (str): matches the L4/L5 pattern. Non-measuring
+      scopes trigger a category error.
+
+    Returns:
+      Category error (out of instrument scope OR non-measuring O):
+        {
+          'category_error':    True,
+          'reason':            str,
+          'logp':              None,
+          'gap_sigma':         None,
+          'measurement_scoped': bool,
+          'ontological_scope': the tag that was passed,
+        }
+      Normal scoring:
+        {
+          'category_error':    False,
+          'logp':              Gaussian log-probability of the
+                                measurement given candidate_true
+                                under the instrument's frozen
+                                noise + resolution envelope,
+          'gap_sigma':         float, the effective sigma used,
+          'measurement_scoped': True,
+          'ontological_scope': the tag that was passed,
+        }
+
+    Pure function -- does NOT mutate instrument.calibration_offset.
+    """
+    # Non-measuring ontological scopes: category error.
+    if ontological_scope in _LE_NON_MEASURING_SCOPES:
+        return {
+            'category_error': True,
+            'reason': (
+                f"Le SCOPE is O=any_measuring_entity; got "
+                f"O={ontological_scope!r}. A pure-abstract or "
+                f"symbolic-only claim does not derive from "
+                f"measurement and cannot be scored by an epistemic-"
+                f"instrument layer."),
+            'logp': None,
+            'gap_sigma': None,
+            'measurement_scoped': False,
+            'ontological_scope': ontological_scope,
+        }
+
+    if instrument is None:
+        instrument = EpistemicInstrument()
+
+    measured = measurement_claim.get('measured_value')
+    if measured is None:
+        return {
+            'category_error': False,
+            'logp': 0.0,
+            'gap_sigma': None,
+            'measurement_scoped': True,
+            'ontological_scope': ontological_scope,
+        }
+
+    # Guard: value outside instrument's declared range (clipping
+    # enabled) is a category error, NOT a very-low logp. The
+    # instrument literally cannot report on that regime.
+    #
+    # Inlined instrument-scope check (the shipped EpistemicInstrument
+    # class has TWO definitions in this file, and the second one
+    # -- which wins under Python's re-definition semantics -- lacks
+    # the `instrument_scoped` method. Inlining the check here keeps
+    # the pure scorer independent of which variant is loaded.)
+    if (instrument.clipping
+            and (measured < instrument.min_val
+                 or measured > instrument.max_val)):
+        return {
+            'category_error': True,
+            'reason': (
+                f"measured_value {measured} is outside the "
+                f"instrument's declared range [{instrument.min_val}, "
+                f"{instrument.max_val}]. The instrument cannot report "
+                f"on that regime; this claim is a category error "
+                f"under Le, not a low-probability observation."),
+            'logp': None,
+            'gap_sigma': None,
+            'measurement_scoped': False,
+            'ontological_scope': ontological_scope,
+        }
+
+    # Gaussian likelihood: sigma^2 = noise^2 + (resolution/2)^2.
+    # Drift is a stateful accumulator on the instrument and is
+    # intentionally NOT included in the pure scorer; callers who
+    # need it should call EpistemicInstrument.observe() directly
+    # (which mutates state).
+    sigma2 = (instrument.noise_std ** 2
+              + (instrument.resolution / 2.0) ** 2)
+    sigma = np.sqrt(sigma2)
+
+    true = measurement_claim.get('candidate_true_value', measured)
+    error = measured - true
+    logp = -(error ** 2) / (2 * sigma2)
+
+    return {
+        'category_error': False,
+        'logp': float(logp),
+        'gap_sigma': float(sigma),
+        'measurement_scoped': True,
+        'ontological_scope': ontological_scope,
+    }
+
+
 """
 patch:  (design note, not code -- kept as a docstring so the module
          parses cleanly; the intent is preserved for whoever wires up

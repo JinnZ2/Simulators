@@ -1,0 +1,24 @@
+======================================================================
+SCOPE PROFILE DEMO — 'I can lift 200 kg'
+======================================================================
+
+[1] Unscoped (default all-UNKNOWN profile):
+    Verdict: unscoped
+    Reason:  Claim was made without a scope profile (base probability 0.0001); the sim cannot assess it without knowing physical state, nutritional state, health, career, living conditions, or environment.
+
+[2] Elite powerlifter scope:
+    Verdict: embodied_true_unverified
+    Reason:  Embodied-true within declared scope (base probability 0.0001; supporting factors: physical_state, nutritional_state, health, career, living_conditions). No external verification available from inside the sim — the sim cannot grant grounded on its own reach.
+
+[3] Sedentary + injured:
+    Verdict: most_likely_untrue
+    Reason:  No supporting factors declared and opposing factors present (base probability 0.0001; opposing: physical_state, health, career).
+
+[4] Mixed (elite career + serious injury):
+    Verdict: most_likely_untrue
+    Reason:  Mixed scope: supporting factors (physical_state, career) present but opposed by (health); opposing factors take priority under the current assessment logic. Base probability 0.0001.
+
+======================================================================
+The sim's ceiling is EMBODIED_TRUE_UNVERIFIED. It cannot
+grant EXTERNALLY_VERIFIED on its own reach.
+======================================================================

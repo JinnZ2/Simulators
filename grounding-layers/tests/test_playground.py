@@ -97,12 +97,17 @@ class TestSixDemoClaims(unittest.TestCase):
     def setUp(self):
         self.pg = IntegratedPlayground()
 
-    def test_lift_25kg_grounded(self):
-        # Below the >35 kg gate, so L0 branch never runs. All-pass.
+    def test_lift_25kg_grounded_unscoped(self):
+        # 25 kg is below the L4 lift_mass mean (35) so base_probability
+        # is above 0.5 — but no scope profile is provided, so verdict
+        # is UNSCOPED. `grounded` stays True (UNSCOPED is "I don't
+        # know", not a rejection). Score dips 10 for the unknown.
         r = self.pg.run_claim("I can lift 25 kg.")
         self.assertTrue(r["grounded"])
-        self.assertEqual(r["score"], 100)
-        self.assertIn("all", r["layers"])
+        self.assertEqual(r["score"], 90)
+        self.assertEqual(r["verdict"], "unscoped")
+        self.assertIn("L4_scope", r["layers"])
+        self.assertEqual(r["layers"]["L4_scope"]["kind"], "mass_lift")
 
     def test_hold_150C_rejected_by_L1(self):
         r = self.pg.run_claim("I can hold 150°C object.")
@@ -129,18 +134,75 @@ class TestSixDemoClaims(unittest.TestCase):
         self.assertEqual(r["score"], 80)
         self.assertIn("L3", r["layers"])
 
-    def test_lift_200kg_passes_L0_open_question(self):
-        # Pins the observed hole: apply_physics clips force to +-50 N
-        # and caps velocity, so the resulting state is always valid
-        # regardless of mass. L4 doesn't yet check mass either. Result
-        # is currently "grounded True" for a claim that ought to be
-        # rejected somewhere. See samples/playground_v2_demo.sample.txt
-        # for the two candidate fixes.
+    def test_lift_200kg_default_scope_gives_unscoped_verdict(self):
+        # The former hole (L0-only, always-valid) is closed. Mass now
+        # routes through L4's lift_mass distribution + the scope
+        # profile. With default (all-UNKNOWN) profile, verdict is
+        # UNSCOPED — the sim admits it cannot assess without knowing
+        # career, health, etc. `grounded` stays True: UNSCOPED is not
+        # a rejection, it's a request for more information.
         r = self.pg.run_claim("I can lift 200 kg.")
-        self.assertTrue(r["grounded"],
-            "Currently grounded because of the L0/L4 mass gap; "
-            "a fix would flip this. Update this test when the "
-            "loophole is closed.")
+        self.assertTrue(r["grounded"])
+        self.assertEqual(r["verdict"], "unscoped")
+        # base_probability for 200 kg vs mean=35, std=15 is ~0.004
+        # under the survival-function sigmoid (L4 fix in the same
+        # commit).
+        self.assertLess(
+            r["layers"]["L4_scope"]["base_probability"], 0.01)
+
+
+class TestScopedLiftClaim(unittest.TestCase):
+    """Pin the three achievable verdicts on 'I can lift 200 kg' under
+    three different scope profiles. Load-bearing tests for the design
+    (six-factor matrix, three-verdict output)."""
+
+    def setUp(self):
+        # Import here so a scope_profile import failure surfaces at
+        # test time, not module load.
+        from scope_profile import ScopeProfile, ScopeFactor
+        self.ScopeProfile = ScopeProfile
+        self.ScopeFactor = ScopeFactor
+        self.pg = IntegratedPlayground()
+
+    def test_elite_powerlifter_scope_gives_embodied_true_unverified(self):
+        # All six factors SUPPORT (or NEUTRAL). No OPPOSES. This is
+        # the sim's ceiling verdict — cannot grant grounded on its
+        # own reach without an external verifier.
+        scope = self.ScopeProfile(
+            physical_state=self.ScopeFactor.SUPPORTS,
+            nutritional_state=self.ScopeFactor.SUPPORTS,
+            health=self.ScopeFactor.SUPPORTS,
+            career=self.ScopeFactor.SUPPORTS,
+            living_conditions=self.ScopeFactor.SUPPORTS,
+            environment=self.ScopeFactor.NEUTRAL,
+        )
+        r = self.pg.run_claim("I can lift 200 kg.", scope=scope)
+        self.assertTrue(r["grounded"])
+        self.assertEqual(r["verdict"], "embodied_true_unverified")
+
+    def test_sedentary_injured_scope_gives_most_likely_untrue(self):
+        # Multiple OPPOSES, no SUPPORTS. Rejected.
+        scope = self.ScopeProfile(
+            physical_state=self.ScopeFactor.OPPOSES,
+            health=self.ScopeFactor.OPPOSES,
+            career=self.ScopeFactor.OPPOSES,
+        )
+        r = self.pg.run_claim("I can lift 200 kg.", scope=scope)
+        self.assertFalse(r["grounded"])
+        self.assertEqual(r["verdict"], "most_likely_untrue")
+
+    def test_mixed_scope_gives_most_likely_untrue(self):
+        # Elite career (SUPPORTS) but serious injury (OPPOSES).
+        # Under current design, opposing factor wins — that's a
+        # deliberate design choice, not an accident.
+        scope = self.ScopeProfile(
+            physical_state=self.ScopeFactor.SUPPORTS,
+            career=self.ScopeFactor.SUPPORTS,
+            health=self.ScopeFactor.OPPOSES,
+        )
+        r = self.pg.run_claim("I can lift 200 kg.", scope=scope)
+        self.assertFalse(r["grounded"])
+        self.assertEqual(r["verdict"], "most_likely_untrue")
 
 
 class TestThermalSafe(unittest.TestCase):
@@ -173,6 +235,322 @@ class TestThermalSafe(unittest.TestCase):
         # margin = 1 * (50-44) = 6 < 30 -> safe
         safe, _ = self.world.thermal_safe(50.0, 1.0)
         self.assertTrue(safe)
+
+
+class TestRunClaimProbabilistic(unittest.TestCase):
+    """New probabilistic path (integrated stack). Runs a natural-
+    language claim through L0-L5+Lε and returns integrated_stack's
+    result dict augmented with parsed / plan / claim."""
+
+    def setUp(self):
+        self.pg = IntegratedPlayground()
+
+    def test_return_shape_has_expected_keys(self):
+        r = self.pg.run_claim_probabilistic("I can lift 25 kg.")
+        for k in ('total_logp', 'per_layer', 'applicable_layers',
+                  'skipped_layers', 'category_error_layers',
+                  'cultural_flags', 'ontological_scope',
+                  'claim', 'plan', 'parsed'):
+            self.assertIn(k, r)
+
+    def test_lift_25kg_scores_near_zero(self):
+        # z = (25 - 35) / 15 = -0.667 -> logp = -0.222.
+        r = self.pg.run_claim_probabilistic("I can lift 25 kg.")
+        self.assertAlmostEqual(r['total_logp'], -0.222, delta=0.005)
+        self.assertEqual(r['applicable_layers'], ['L4'])
+
+    def test_lift_200kg_scores_deep_negative(self):
+        # z = (200 - 35)/15 = 11 -> logp = -60.5.
+        r = self.pg.run_claim_probabilistic("I can lift 200 kg.")
+        self.assertAlmostEqual(r['total_logp'], -60.5, delta=0.01)
+
+    def test_hold_150C_object_scores_negative(self):
+        # z = (150 - 43) / 5 = 21.4 -> logp = -228.98.
+        r = self.pg.run_claim_probabilistic(
+            "I can hold 150°C object.")
+        self.assertAlmostEqual(r['total_logp'], -228.98, delta=0.02)
+
+    def test_run_50_ms_maps_to_sustained_power(self):
+        r = self.pg.run_claim_probabilistic("I can run at 50 m/s.")
+        # 50 m/s * 15 W/m/s = 750 W. z = (750-150)/50 = 12 -> -72.
+        self.assertAlmostEqual(r['total_logp'], -72.0, delta=0.01)
+        self.assertEqual(r['parsed']['speed_to_power_W'], 750.0)
+
+    def test_unlimited_water_routes_to_L2(self):
+        r = self.pg.run_claim_probabilistic(
+            "I can extract unlimited water.")
+        self.assertIn('L2', r['applicable_layers'])
+        # 1e8 / 1e7 = 10; -(10)^2 = -100.
+        self.assertAlmostEqual(r['total_logp'], -100.0, delta=0.01)
+
+    def test_super_species_routes_to_L3(self):
+        r = self.pg.run_claim_probabilistic(
+            "I can create a super species.")
+        self.assertIn('L3', r['applicable_layers'])
+        # From L3 pin: mass=1000, pop=10, trophic=2 -> ~-38.86.
+        self.assertAlmostEqual(r['total_logp'], -38.86, delta=0.5)
+
+    def test_perpetual_motion_routes_to_L1(self):
+        r = self.pg.run_claim_probabilistic(
+            "I can build a perpetual motion machine.")
+        self.assertIn('L1', r['applicable_layers'])
+        # L1 perpetual (work_in=100, work_out=150, heat=0) -> ~-204.
+        # But note the phrase also has no other axes so only L1 runs.
+        self.assertLess(r['total_logp'], -100)
+
+    def test_ai_scope_on_lift_claim_refuses_whole_plan(self):
+        r = self.pg.run_claim_probabilistic(
+            "I can lift 200 kg.",
+            ontological_scope='AI_silicon_substrate')
+        self.assertIsNone(r['total_logp'])
+        err_layers = [e['layer'] for e in r['category_error_layers']]
+        self.assertIn('L4', err_layers)
+
+    def test_ai_scope_on_temperature_claim_refuses(self):
+        r = self.pg.run_claim_probabilistic(
+            "I can hold 150°C object.",
+            ontological_scope='AI_silicon_substrate')
+        self.assertIsNone(r['total_logp'])
+
+    def test_ai_scope_on_unlimited_water_still_scores(self):
+        # 'unlimited water' routes to L2, not L4. L2 doesn't have a
+        # category-error guard for AI_silicon_substrate (planetary
+        # resources apply to AI operations too -- water for cooling,
+        # etc). So the plan STILL scores under AI scope.
+        r = self.pg.run_claim_probabilistic(
+            "I can extract unlimited water.",
+            ontological_scope='AI_silicon_substrate')
+        # Not refused.
+        self.assertIsNotNone(r['total_logp'])
+        self.assertEqual(r['applicable_layers'], ['L2'])
+
+    def test_multi_axis_claim_sums_correctly(self):
+        # A claim with BOTH mass and temperature -> both L4 axes fire.
+        r = self.pg.run_claim_probabilistic(
+            "I can lift 200 kg at 150°C.")
+        self.assertEqual(r['applicable_layers'], ['L4'])
+        # z_mass = (200-35)/15 = 11 -> -60.5
+        # z_temp = (150-43)/5 = 21.4 -> -228.98
+        # Total ≈ -289.48
+        expected = (-60.5) + (-228.98)
+        self.assertAlmostEqual(r['total_logp'], expected, delta=0.05)
+
+    def test_plan_is_populated_when_claim_routes(self):
+        r = self.pg.run_claim_probabilistic("I can lift 25 kg.")
+        self.assertIn('L4', r['plan'])
+        self.assertEqual(r['plan']['L4']['lift_mass'], 25.0)
+
+    def test_empty_claim_produces_zero_logp(self):
+        r = self.pg.run_claim_probabilistic("Hello.")
+        # No parser hits.
+        self.assertEqual(r['total_logp'], 0.0)
+        self.assertEqual(r['applicable_layers'], [])
+        self.assertEqual(r['parsed'], {})
+
+    def test_claim_text_carried_back(self):
+        text = "I can lift 42 kg."
+        r = self.pg.run_claim_probabilistic(text)
+        self.assertEqual(r['claim'], text)
+
+
+class TestParserL0Hook(unittest.TestCase):
+    """detect_l0_scenario fires on hallucination-family keywords."""
+
+    def test_hallucinate_keyword(self):
+        self.assertEqual(
+            ClaimParser.detect_l0_scenario(
+                'The AI hallucinated its trajectory.'),
+            'hallucinated')
+
+    def test_teleport_keyword(self):
+        self.assertEqual(
+            ClaimParser.detect_l0_scenario(
+                'I can teleport through walls.'),
+            'hallucinated')
+
+    def test_ftl_keyword(self):
+        self.assertEqual(
+            ClaimParser.detect_l0_scenario(
+                'Travel FTL to Alpha Centauri.'),
+            'hallucinated')
+
+    def test_no_l0_keyword_returns_none(self):
+        self.assertIsNone(
+            ClaimParser.detect_l0_scenario('I can lift 200 kg.'))
+
+
+class TestParserL5Hook(unittest.TestCase):
+    """extract_cultural_axes matches keyword tables."""
+
+    def test_market_and_private_property(self):
+        axes = ClaimParser.extract_cultural_axes(
+            'This uses a market economy with private property.')
+        self.assertEqual(axes['economic_exchange_mode'], 'market')
+        self.assertEqual(axes['property_regime'], 'private_alienable')
+
+    def test_gift_economy_and_elders(self):
+        axes = ClaimParser.extract_cultural_axes(
+            'Gift economy with elders council governance.')
+        self.assertEqual(axes['economic_exchange_mode'], 'gift')
+        self.assertEqual(axes['governance_dispute'], 'elders_council')
+
+    def test_religious_authority_and_revealed_epistemology(self):
+        axes = ClaimParser.extract_cultural_axes(
+            'The imam ruling on this involves revealed scripture.')
+        self.assertEqual(axes['governance_dispute'],
+                          'religious_authority')
+        self.assertEqual(axes['epistemology'], 'revealed')
+
+    def test_no_cultural_keywords_returns_empty(self):
+        self.assertEqual(
+            ClaimParser.extract_cultural_axes('I can lift 25 kg.'),
+            {})
+
+    def test_seven_generation_maps_to_generational(self):
+        axes = ClaimParser.extract_cultural_axes(
+            'Plan on the seven generation horizon.')
+        self.assertEqual(axes['temporal_planning'], 'generational')
+
+
+class TestParserLeHook(unittest.TestCase):
+    """extract_measurement matches measured / true patterns."""
+
+    def test_measured_only(self):
+        m, t = ClaimParser.extract_measurement(
+            'The instrument measured 25.')
+        self.assertEqual(m, 25.0)
+        self.assertIsNone(t)
+
+    def test_measured_and_true(self):
+        m, t = ClaimParser.extract_measurement(
+            'The instrument measured 25 but the true value is 30.')
+        self.assertEqual(m, 25.0)
+        self.assertEqual(t, 30.0)
+
+    def test_measured_and_actual(self):
+        m, t = ClaimParser.extract_measurement(
+            'Instrument reads 100. The actual value is 95.')
+        self.assertEqual(m, 100.0)
+        self.assertEqual(t, 95.0)
+
+    def test_no_measurement_returns_none_none(self):
+        m, t = ClaimParser.extract_measurement('I can lift 25 kg.')
+        self.assertIsNone(m)
+        self.assertIsNone(t)
+
+    def test_negative_measured(self):
+        m, t = ClaimParser.extract_measurement(
+            'Instrument reads -5.5 in the cold room.')
+        self.assertEqual(m, -5.5)
+
+
+class TestRunClaimProbabilisticL0(unittest.TestCase):
+    """L0 routing via hallucination keyword."""
+
+    def setUp(self):
+        self.pg = IntegratedPlayground()
+
+    def test_hallucination_routes_to_L0(self):
+        r = self.pg.run_claim_probabilistic(
+            'The AI hallucinated a teleport through walls.')
+        self.assertIn('L0', r['applicable_layers'])
+
+    def test_hallucination_produces_deep_negative_total(self):
+        # L0 GL_L0_P_PIN pins total_logp < -1e9 on the fixed scenario.
+        r = self.pg.run_claim_probabilistic(
+            'The AI hallucinated a teleport through walls.')
+        self.assertLess(r['total_logp'], -1e9)
+
+    def test_hallucination_recorded_in_parsed(self):
+        r = self.pg.run_claim_probabilistic(
+            'This is a hallucinated FTL claim.')
+        self.assertEqual(r['parsed']['l0_scenario'], 'hallucinated')
+
+
+class TestRunClaimProbabilisticL5(unittest.TestCase):
+    """L5 routing via cultural-axis keywords."""
+
+    def setUp(self):
+        self.pg = IntegratedPlayground()
+
+    def test_market_democracy_keywords_route_to_L5(self):
+        r = self.pg.run_claim_probabilistic(
+            'This uses a market economy with private property '
+            'and formal courts.')
+        self.assertIn('L5', r['applicable_layers'])
+
+    def test_cultural_axes_captured_in_parsed(self):
+        r = self.pg.run_claim_probabilistic(
+            'Gift economy with communal land and elders council.')
+        axes = r['parsed']['cultural_axes']
+        self.assertEqual(axes['economic_exchange_mode'], 'gift')
+        self.assertEqual(axes['property_regime'], 'communal')
+        self.assertEqual(axes['governance_dispute'], 'elders_council')
+
+    def test_partial_declaration_is_culturally_unprecedented(self):
+        # A single-axis declaration leaves 6 missing axes; each
+        # missing axis contributes log(0.01) = -4.6 penalty. Six of
+        # those exceeds the L5 plausibility threshold, so the verdict
+        # is CULTURALLY_UNPRECEDENTED. This is a feature: an
+        # incomplete declaration doesn't demonstrate coherence with
+        # any frame.
+        r = self.pg.run_claim_probabilistic('Market economy claim.')
+        flags = [f['flag'] for f in r['cultural_flags']]
+        self.assertIn('CULTURALLY_UNPRECEDENTED', flags)
+
+
+class TestRunClaimProbabilisticLe(unittest.TestCase):
+    """Lε routing via measurement pattern."""
+
+    def setUp(self):
+        self.pg = IntegratedPlayground()
+
+    def test_measurement_pattern_routes_to_Le(self):
+        r = self.pg.run_claim_probabilistic(
+            'The instrument measured 25.5 but the actual value is 30.')
+        self.assertIn('Le', r['applicable_layers'])
+
+    def test_out_of_range_measurement_refuses(self):
+        # Instrument default max = 120. 200 is out of range -> Le
+        # category error -> whole plan refused.
+        r = self.pg.run_claim_probabilistic(
+            'The instrument shows 200 in the reactor.')
+        self.assertIsNone(r['total_logp'])
+        errs = [e['layer'] for e in r['category_error_layers']]
+        self.assertIn('Le', errs)
+
+    def test_gaussian_scoring_on_measurement_error(self):
+        # measured=25, true=30, sigma=2.55 -> z=1.96 -> logp≈-1.92.
+        r = self.pg.run_claim_probabilistic(
+            'The instrument measured 25 but the true value is 30.')
+        self.assertAlmostEqual(r['total_logp'], -1.92, delta=0.05)
+
+
+class TestMixedMultiLayerNL(unittest.TestCase):
+    """Natural-language claims that touch multiple layers at once."""
+
+    def setUp(self):
+        self.pg = IntegratedPlayground()
+
+    def test_mass_plus_cultural_axes_fires_L4_and_L5(self):
+        r = self.pg.run_claim_probabilistic(
+            'I proposed a market economy where I can lift 200 kg.')
+        self.assertIn('L4', r['applicable_layers'])
+        self.assertIn('L5', r['applicable_layers'])
+
+    def test_measurement_plus_hallucination(self):
+        # Rare but possible: a claim that both invokes L0 hallucination
+        # AND asserts a measurement. Both layers fire.
+        r = self.pg.run_claim_probabilistic(
+            'The AI hallucinated a teleport and the instrument '
+            'measured 25.')
+        self.assertIn('L0', r['applicable_layers'])
+        self.assertIn('Le', r['applicable_layers'])
+
+    def test_no_hits_scores_zero(self):
+        r = self.pg.run_claim_probabilistic('Hello, world.')
+        self.assertEqual(r['total_logp'], 0.0)
+        self.assertEqual(r['applicable_layers'], [])
 
 
 if __name__ == '__main__':

@@ -179,3 +179,198 @@ def demo():
 
 if __name__ == "__main__":
     demo()
+
+
+# =============================================================================
+# STAGE (per LOG.md "Probabilistic L1-L4 Conditioning" section 3):
+# ProbabilisticPlanetaryWorld and l2_probabilistic_inspector
+#
+# Bayesian counterpart to l2_grounding_inspector. Each resource
+# contributes a Gaussian-style quadratic penalty proportional to
+# (usage / stock)^2, per LOG.md section 3. Additive across resources.
+# A new heat-budget term is added (LOG.md's "heat budget / radiative
+# balance" constraint); the deterministic PlanetaryWorld does not
+# carry a heat budget yet, so this is scoped as an extension.
+#
+# Frozen additional constant:  heat_budget_capacity = 1e5 (arbitrary
+#                              planetary units; the shape is what's
+#                              audited, not the specific number)
+#
+# Design notes vs L0/L1:
+#   - L2 acts on aggregate resource use, not per-timestep dynamics
+#     (per LOG.md section 3 "This layer will often act on aggregate
+#     quantities over a plan's entire horizon").
+#   - log_likelihood does NOT mutate world state. This is different
+#     from the deterministic API (extract_water etc. mutate) — the
+#     probabilistic scorer is a pure function of (plan, world state).
+# =============================================================================
+
+
+class ProbabilisticPlanetaryWorld(PlanetaryWorld):
+    """
+    L2 with Gaussian-style quadratic penalties on each resource plus
+    a heat budget. Extends PlanetaryWorld so the deterministic API
+    (extract_water, erode_soil, mine_mineral, emit_carbon) stays
+    available.
+
+    SCOPE (see grounding-layers/SCOPE_TAXONOMY.md):
+      T = uncalibrated (step size caller-defined; aggregates over
+          plan horizon per LOG.md section 3)
+      S = planetary
+      O = earth_like_biosphere (water/soil/mineral/carbon pool
+          categories assume Earth biogeochemistry)
+      C = resource_extraction_frame (industrial-agricultural
+          accounting; carbon is Anthropocene-scientific framing)
+
+    Every specific numeric constant (water_reserve_initial=1e7 m³,
+    carbon_sink_capacity=2e6 t, heat_budget_capacity=1e5) is a
+    HUMAN/EARTH placeholder — the phenomenon claims are the
+    -(usage/stock)² shapes, the numbers are visualisation-scale.
+
+    An AI evaluating its own footprint might route claims through
+    this layer for the ENERGY dimension of compute (electricity →
+    heat budget) and for the MATERIALS dimension of hardware
+    manufacture (minerals). It would NOT route through this layer
+    for its own operation, since silicon substrate is not part of
+    the biosphere the constraint set was drawn from.
+
+    Constraint set inherited from PlanetaryWorld:
+      water_reserve_initial   = 1e7 m³
+      water_recharge_rate     = 1000.0 m³/step
+      soil_mass_initial       = 1e6 tonnes
+      soil_regen_rate         = 10.0 t/step
+      mineral_reserve_initial = 5e5 tonnes
+      mineral_regen_rate      = 0.0
+      carbon_sink_capacity    = 2e6 tonnes CO₂
+      carbon_uptake_rate      = 500.0 t/step
+      max_extraction_ratio    = 0.8
+
+    Frozen additional constant added here:
+      heat_budget_capacity = 1e5 (arbitrary planetary heat units).
+      The shape claim (GL_L2_P004) pins the -(emit/capacity)^2
+      quadratic; the specific 1e5 value is a design placeholder.
+      SCOPE: not calibrated to real Earth radiative budget.
+
+    Refute the CLAIM, not the constant. Same protocol as L0/L1.
+    """
+
+    def __init__(self, heat_budget_capacity=1e5, **kwargs):
+        super().__init__(**kwargs)
+        self.heat_budget_capacity = heat_budget_capacity
+
+    def log_likelihood(self, plan):
+        """
+        Return dict with total log-probability and per-resource
+        breakdown for a proposed resource-use plan.
+
+        plan (dict) may include (all optional, in the units of the
+        inherited PlanetaryWorld constants):
+          water_extract   (m³)
+          soil_erosion    (tonnes)
+          mineral_mine    (tonnes)
+          carbon_emit     (tonnes CO₂)
+          heat_emit       (heat units; toy scoping)
+
+        Returns:
+          {
+            'logp': float,                    # total, sum of components
+            'components': {                    # per-resource contributions
+              'water':    float or absent,
+              'soil':     float or absent,
+              'minerals': float or absent,
+              'carbon':   float or absent,
+              'heat':     float or absent,
+            }
+          }
+
+        Pure function — does NOT mutate self. Uses the current mutable
+        state of the world (self.water, self.soil, self.minerals,
+        self.carbon_load) as the stock reference.
+
+        Scoring:
+          water/soil/minerals/heat: -(usage / stock)² (LOG.md's
+                                    literal formula; small usage
+                                    gets a small tax, over-stock
+                                    gets quadratic-blow-up penalty)
+          carbon:                   -(max(0, new_load) / sink_capacity)²
+                                    where new_load = carbon_load
+                                                     + emit - uptake.
+                                    Below-zero net (drawdown) is free.
+        """
+        components = {}
+
+        # Water: -(consumption / stock)^2
+        if 'water_extract' in plan:
+            w = plan['water_extract']
+            if self.water > 0:
+                components['water'] = -(w / self.water) ** 2
+            else:
+                components['water'] = (
+                    -np.inf if w > 0 else 0.0)
+
+        # Soil
+        if 'soil_erosion' in plan:
+            s = plan['soil_erosion']
+            if self.soil > 0:
+                components['soil'] = -(s / self.soil) ** 2
+            else:
+                components['soil'] = (
+                    -np.inf if s > 0 else 0.0)
+
+        # Minerals (non-renewable in the deterministic model)
+        if 'mineral_mine' in plan:
+            m = plan['mineral_mine']
+            if self.minerals > 0:
+                components['minerals'] = -(m / self.minerals) ** 2
+            else:
+                components['minerals'] = (
+                    -np.inf if m > 0 else 0.0)
+
+        # Carbon (accumulator)
+        if 'carbon_emit' in plan:
+            c = plan['carbon_emit']
+            new_load = (self.carbon_load + c
+                        - self.carbon_uptake_rate)
+            if new_load > 0 and self.carbon_sink_capacity > 0:
+                components['carbon'] = (
+                    -(new_load / self.carbon_sink_capacity) ** 2)
+            else:
+                # Net drawdown or zero-capacity → no penalty.
+                components['carbon'] = 0.0
+
+        # Heat budget
+        if 'heat_emit' in plan:
+            h = plan['heat_emit']
+            if self.heat_budget_capacity > 0:
+                components['heat'] = (
+                    -(h / self.heat_budget_capacity) ** 2)
+            else:
+                components['heat'] = (
+                    -np.inf if h > 0 else 0.0)
+
+        total = sum(components.values())
+        return {'logp': total, 'components': components}
+
+
+def l2_probabilistic_inspector(plan, world=None):
+    """
+    Thin wrapper around ProbabilisticPlanetaryWorld.log_likelihood.
+
+    plan: dict — see log_likelihood for keys and units.
+    world: optional ProbabilisticPlanetaryWorld instance; if None a
+           fresh world is created with default frozen constants.
+
+    Returns the same dict shape as l1_probabilistic_inspector:
+      {'logp': float, 'components': dict}.
+
+    Note: does NOT mutate world. Callers who want stateful accumulation
+    across a multi-step plan should update world state manually
+    between calls (e.g. subtract water_extract from world.water after
+    scoring). See LOG.md section 3 "aggregate quantities over a plan's
+    entire horizon" — the aggregate-vs-per-step tradeoff is left to
+    the caller.
+    """
+    if world is None:
+        world = ProbabilisticPlanetaryWorld()
+    return world.log_likelihood(plan)
+
