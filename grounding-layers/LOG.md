@@ -131,6 +131,79 @@ The inspector must parse an AI proposal (which might be natural language or stru
   ...
 }
 
+In the short term, the L5 inspector will accept this structured metadata as part of the proposal. In the long term, an LLM‑based classifier could infer it from free text.
+
+3.4 Scoring Algorithm
+
+For a given frame F:
+
+1. For each axis i, look up the probability P_F(\text{state}_i).
+2. If the frame has interaction matrices (joint probabilities for pairs of axes), add the log of the joint probability for the observed pair minus the product of marginals (the mutual information bonus/penalty).
+3. Sum across all axes (and interactions) to get a total log‑likelihood.
+
+A proposal that perfectly matches the frame’s prototypical pattern will have the highest score; deviations are penalised according to their improbability under that frame.
+
+Additionally, the L5 inspector must verify that the proposal does not violate L0–L4. This is easy because lower layers have already computed their own log‑likelihoods. The total score becomes:
+
+\log P(\text{proposal overall}) = \log P_{L0} + \log P_{L1} + ... + \log P_{L4} + \log P_{L5, F}
+
+The L5 term is frame‑dependent; the lower terms are frame‑independent physics/ecology constraints.
+
+3.5 Output and Visualisation
+
+The inspector can output a radar chart of axis‑by‑axis compatibility for a chosen frame, plus the overall log‑likelihood. For multi‑frame auditing, it can produce a bar chart of frame scores. This makes the cultural grounding transparent and contestable – exactly what L5 needs.
+
+---
+
+4. Staging (context‑friendly)
+
+Stage 1: Axis definition + 2 frames (hardcoded)
+
+Pick two well‑documented frames, e.g.:
+
+· “West African gift economy (Dahomey/Kula‑like)”
+· “Modern market democracy”
+
+Hardcode the probability tables as Python dicts. Write a simple L5CulturalAuditor class that takes a structured proposal and frame name, and returns a log‑likelihood. This can be a single .py file that loads the tables.
+
+Stage 2: Extend to 5–6 frames, add interaction matrices
+
+Encode more frames, including Ubuntu, Islamic finance, and Ostrom commons. Add pairwise interaction matrices where necessary (e.g., market mode + egalitarian stratification may be less likely in some frames). This enriches the tensor structure.
+
+Stage 3: Proposal parser from natural language (optional)
+
+For demo purposes, use a simple keyword‑based classifier or a small LLM call to map a free‑text proposal onto axis states.
+
+Stage 4: Audit claims
+
+Add GL_L5_* claims that pin the penalty for clear violations within a frame (e.g., a proposal for a central bank in a gift economy frame gets a log‑likelihood < –20). These become testable assertions.
+
+Stage 5: Integration with full stack
+
+The orchestrator runs L0–L4, then calls L5 for one or more frames, producing a comprehensive feasibility report.
+
+---
+
+5. The “Probability Matrix” Visualised
+
+At the heart of L5 is a joint probability tensor for each frame:
+
+M_{ijk...}^{(F)} = P_F(\text{axis}_1=i,\; \text{axis}_2=j,\; \text{axis}_3=k, ...)
+
+For example, for a frame with 7 axes each having 3–5 states, this tensor could have ~10⁴ entries – large, but manageable as a sparse structure or factorised as low‑rank matrices. Interaction matrices capture pairwise co‑occurrence probabilities (like a covariance matrix). This is exactly the “matrix of intersecting values across vectors” you described.
+
+The weights come from historical frequency, expert elicitation, or ethnographic literature. They are frozen estimates (like any other constant) – falsifiable if an anthropologist shows that a particular combination is actually more common than we assumed.
+
+---
+
+6. Open Questions & Philosophical Guards
+
+· Who chooses the frames? The library must be open and extensible. The system must never assume a single universal frame. Frames can be added or modified by communities themselves.
+· How do we prevent frame‑based discrimination? The inspector must be used to assess coherence, not to rank the worth of cultures. All frames are equally valid if they respect L0–L4.
+· Is L5 truly falsifiable? Yes, in the sense that a claim like “Proposal X gets log‑likelihood < –10 under frame Y” can be tested by asking cultural experts. The “instrument” here is our encoding, which may be flawed (Lε again).
+· What about frame evolution? Cultures change. Frames can be versioned and updated with new data.
+
+
 
 # Reasoning Log: Probabilistic L1–L4 Conditioning
 
