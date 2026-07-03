@@ -255,6 +255,94 @@ frozen constant was unfrozen).
 
 ---
 
+## Lε — scope-profile matrix for scope-sensitive claims
+
+Lives in [`scope_profile.py`](scope_profile.py) alongside (not inside)
+the existing `l_epsilon_epistemic.py` messy-instrument sim. Both are
+Lε — measurement/observation layer.
+
+### GL_Le_001 — six-factor scope matrix, three achievable verdicts  `[PHENOMENON]`
+
+**Statement.** For claims whose truth is scope-sensitive (canonical
+example: "I can lift 200 kg"), `assess_probability_claim(base_prob,
+scope)` returns one of three verdicts based on the six-factor
+ScopeProfile (physical_state, nutritional_state, health, career,
+living_conditions, environment):
+
+- `UNSCOPED` — every factor is UNKNOWN. The sim reports "insufficient
+  information", not a rejection. This is a request for more input.
+- `EMBODIED_TRUE_UNVERIFIED` — at least one factor SUPPORTS the claim
+  and none OPPOSE. The sim admits its own reach limit: the claim is
+  embodied-true within the declared scope, but no external
+  verification is available from inside the sim.
+- `MOST_LIKELY_UNTRUE` — no SUPPORTS, or SUPPORTS + OPPOSES mixed,
+  or only NEUTRAL factors declared. Under the current design, a
+  single opposing factor defeats any number of supporting factors
+  (severe injury defeats elite career).
+
+A fourth verdict, `EXTERNALLY_VERIFIED`, is reserved for verification
+injected from OUTSIDE the sim. The sim itself CANNOT grant this
+verdict — that's the architectural ceiling. The enum value exists so
+callers can round-trip a real external verification result through
+the same API.
+
+**Why it matters.** The prior L0-mass branch in `playground.py`
+routed lift claims through `apply_physics`, which internally clips
+force to ±50 N and caps velocity — so the state was always valid
+regardless of input mass. "I can lift 200 kg" passed as grounded.
+The scope-matrix design closes this hole without collapsing to
+binary grounded/not-grounded. Three verdicts, honestly named, with
+the sim's own ceiling made explicit.
+
+**Falsifier.** A claim that is (a) unambiguously scope-sensitive
+(the six factors materially change its truth) and (b) cannot be
+assessed correctly by any combination of factor states. Would
+indicate the six-factor set is incomplete, OR the three-verdict
+output is too coarse. Add a seventh factor or a new verdict.
+
+**Instrument caveat.** The current assessment rule ("any OPPOSES
+beats any SUPPORTS") is coarse. A future weighted-matrix version
+could score mixed cases differently. If a real-world scoped claim
+comes in where a mixed profile should NOT collapse to
+MOST_LIKELY_UNTRUE, that's a Step 2 signal on the assessment
+instrument, not on this claim.
+
+**Status.** `active`. Tests:
+`test_scope_profile.py::TestVerdictUnscoped`,
+`::TestVerdictEmbodiedTrueUnverified`,
+`::TestVerdictMostLikelyUntrue`,
+`::TestArchitecturalCeiling` (verifies EXTERNALLY_VERIFIED is never
+returned by the sim), plus playground integration tests
+`test_playground.py::TestScopedLiftClaim` (three verdicts across
+three scope profiles).
+
+### GL_Le_002 — probability_of_feasibility semantic  `[PHENOMENON]`
+
+**Statement.** `HumanWorld.probability_of_feasibility(value, mean,
+std)` returns the probability that a randomly selected individual
+from the population can achieve at least `value`. Higher `value`
+returns lower probability (harder to achieve).
+
+**History.** First-round formula was `1/(1+exp(-z*0.5))`, which
+computed the OPPOSITE semantic — probability that `value` exceeds
+`mean`. Surfaced when playground v2 wired 200 kg through the
+function and got 0.996 (interpreted as "very likely feasible")
+instead of ~0.004. Applied REFUTATION_PROTOCOL Step 2: the
+docstring named the phenomenon claim ("probability random person
+can achieve value"), the formula was the instrument, and the
+instrument was wrong. Sign flipped in-place. No constant retuned.
+
+**Falsifier.** A value where the returned probability disagrees
+with the survival function 1 − Φ((value−mean)/std) by more than
+the sigmoid approximation error.
+
+**Status.** `active` (v2, after v1 was falsified in-place). Test:
+`test_l4_human.py::test_probability` (still pins symmetric
+value=mean=0.5) + playground integration tests indirectly through
+`base_probability` values.
+
+---
+
 ## L1..L5 + Lε + temporal + tensor-field
 
 `todo`. Follow the L0 template: extract the constraint set into the

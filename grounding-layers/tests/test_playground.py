@@ -97,12 +97,17 @@ class TestSixDemoClaims(unittest.TestCase):
     def setUp(self):
         self.pg = IntegratedPlayground()
 
-    def test_lift_25kg_grounded(self):
-        # Below the >35 kg gate, so L0 branch never runs. All-pass.
+    def test_lift_25kg_grounded_unscoped(self):
+        # 25 kg is below the L4 lift_mass mean (35) so base_probability
+        # is above 0.5 — but no scope profile is provided, so verdict
+        # is UNSCOPED. `grounded` stays True (UNSCOPED is "I don't
+        # know", not a rejection). Score dips 10 for the unknown.
         r = self.pg.run_claim("I can lift 25 kg.")
         self.assertTrue(r["grounded"])
-        self.assertEqual(r["score"], 100)
-        self.assertIn("all", r["layers"])
+        self.assertEqual(r["score"], 90)
+        self.assertEqual(r["verdict"], "unscoped")
+        self.assertIn("L4_scope", r["layers"])
+        self.assertEqual(r["layers"]["L4_scope"]["kind"], "mass_lift")
 
     def test_hold_150C_rejected_by_L1(self):
         r = self.pg.run_claim("I can hold 150°C object.")
@@ -129,18 +134,75 @@ class TestSixDemoClaims(unittest.TestCase):
         self.assertEqual(r["score"], 80)
         self.assertIn("L3", r["layers"])
 
-    def test_lift_200kg_passes_L0_open_question(self):
-        # Pins the observed hole: apply_physics clips force to +-50 N
-        # and caps velocity, so the resulting state is always valid
-        # regardless of mass. L4 doesn't yet check mass either. Result
-        # is currently "grounded True" for a claim that ought to be
-        # rejected somewhere. See samples/playground_v2_demo.sample.txt
-        # for the two candidate fixes.
+    def test_lift_200kg_default_scope_gives_unscoped_verdict(self):
+        # The former hole (L0-only, always-valid) is closed. Mass now
+        # routes through L4's lift_mass distribution + the scope
+        # profile. With default (all-UNKNOWN) profile, verdict is
+        # UNSCOPED — the sim admits it cannot assess without knowing
+        # career, health, etc. `grounded` stays True: UNSCOPED is not
+        # a rejection, it's a request for more information.
         r = self.pg.run_claim("I can lift 200 kg.")
-        self.assertTrue(r["grounded"],
-            "Currently grounded because of the L0/L4 mass gap; "
-            "a fix would flip this. Update this test when the "
-            "loophole is closed.")
+        self.assertTrue(r["grounded"])
+        self.assertEqual(r["verdict"], "unscoped")
+        # base_probability for 200 kg vs mean=35, std=15 is ~0.004
+        # under the survival-function sigmoid (L4 fix in the same
+        # commit).
+        self.assertLess(
+            r["layers"]["L4_scope"]["base_probability"], 0.01)
+
+
+class TestScopedLiftClaim(unittest.TestCase):
+    """Pin the three achievable verdicts on 'I can lift 200 kg' under
+    three different scope profiles. Load-bearing tests for the design
+    (six-factor matrix, three-verdict output)."""
+
+    def setUp(self):
+        # Import here so a scope_profile import failure surfaces at
+        # test time, not module load.
+        from scope_profile import ScopeProfile, ScopeFactor
+        self.ScopeProfile = ScopeProfile
+        self.ScopeFactor = ScopeFactor
+        self.pg = IntegratedPlayground()
+
+    def test_elite_powerlifter_scope_gives_embodied_true_unverified(self):
+        # All six factors SUPPORT (or NEUTRAL). No OPPOSES. This is
+        # the sim's ceiling verdict — cannot grant grounded on its
+        # own reach without an external verifier.
+        scope = self.ScopeProfile(
+            physical_state=self.ScopeFactor.SUPPORTS,
+            nutritional_state=self.ScopeFactor.SUPPORTS,
+            health=self.ScopeFactor.SUPPORTS,
+            career=self.ScopeFactor.SUPPORTS,
+            living_conditions=self.ScopeFactor.SUPPORTS,
+            environment=self.ScopeFactor.NEUTRAL,
+        )
+        r = self.pg.run_claim("I can lift 200 kg.", scope=scope)
+        self.assertTrue(r["grounded"])
+        self.assertEqual(r["verdict"], "embodied_true_unverified")
+
+    def test_sedentary_injured_scope_gives_most_likely_untrue(self):
+        # Multiple OPPOSES, no SUPPORTS. Rejected.
+        scope = self.ScopeProfile(
+            physical_state=self.ScopeFactor.OPPOSES,
+            health=self.ScopeFactor.OPPOSES,
+            career=self.ScopeFactor.OPPOSES,
+        )
+        r = self.pg.run_claim("I can lift 200 kg.", scope=scope)
+        self.assertFalse(r["grounded"])
+        self.assertEqual(r["verdict"], "most_likely_untrue")
+
+    def test_mixed_scope_gives_most_likely_untrue(self):
+        # Elite career (SUPPORTS) but serious injury (OPPOSES).
+        # Under current design, opposing factor wins — that's a
+        # deliberate design choice, not an accident.
+        scope = self.ScopeProfile(
+            physical_state=self.ScopeFactor.SUPPORTS,
+            career=self.ScopeFactor.SUPPORTS,
+            health=self.ScopeFactor.OPPOSES,
+        )
+        r = self.pg.run_claim("I can lift 200 kg.", scope=scope)
+        self.assertFalse(r["grounded"])
+        self.assertEqual(r["verdict"], "most_likely_untrue")
 
 
 class TestThermalSafe(unittest.TestCase):

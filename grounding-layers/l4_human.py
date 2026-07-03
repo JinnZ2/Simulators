@@ -87,14 +87,30 @@ class HumanWorld:
     def probability_of_feasibility(self, value: float, mean: float, std: float) -> float:
         """
         Estimate probability that a randomly selected individual
-        from this population can achieve this value.
-        Uses a simple cumulative normal approximation.
+        from this population can achieve at least `value`. Uses a
+        sigmoid approximation of the survival function 1 - Φ(z).
+
+        Higher `value` -> LOWER probability (harder to achieve).
+        - value = mean:      0.5
+        - value = mean + σ:  ≈ 0.38
+        - value = mean + 2σ: ≈ 0.27
+        - value = mean + 5σ: ≈ 0.076
+        - value = mean + 11σ (200 kg vs mean=35, std=15): ≈ 0.004
+
+        Instrument-scope fix. First-round formula was
+        `1 / (1 + exp(-z * 0.5))`, which computed "probability that
+        value exceeds mean" — the opposite direction. Surfaced by
+        wiring the playground's 200 kg lift through this function
+        (returned 0.996 instead of ~0.004). Per REFUTATION_PROTOCOL
+        Step 2 (Check the instrument): the docstring's promised
+        semantics is the phenomenon claim, the formula is the
+        instrument, and the instrument was wrong. Sign flipped.
         """
         if std <= 0:
             return 1.0 if value <= mean else 0.0
         z = (value - mean) / std
-        # Approximate cumulative distribution (sigmoid)
-        return 1.0 / (1.0 + math.exp(-z * 0.5))
+        # Survival-function sigmoid: high z -> low probability.
+        return 1.0 / (1.0 + math.exp(z * 0.5))
 
 def l4_grounding_inspector(plan: dict) -> dict:
     """

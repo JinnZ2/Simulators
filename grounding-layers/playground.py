@@ -20,6 +20,8 @@
 # =============================================================================
 
 import re
+from typing import Optional
+
 import numpy as np
 
 from l0_physics_causality import PhysicalWorld, l0_grounding_inspector
@@ -27,6 +29,11 @@ from l1_thermodynamics import ThermodynamicWorld
 from l2_planetary import PlanetaryWorld
 from l3_ecology import EcologicalWorld
 from l4_human import HumanWorld
+from scope_profile import (
+    ScopeProfile,
+    Verdict,
+    assess_probability_claim,
+)
 
 
 class ClaimParser:
@@ -72,32 +79,74 @@ class IntegratedPlayground:
         self.l4_world = HumanWorld()
         self.results = []
 
-    def run_claim(self, claim_text):
+    def run_claim(self, claim_text, scope: Optional[ScopeProfile] = None):
+        """
+        Route claim_text through the layer inspectors and return a
+        report.
+
+        `scope` is a six-factor ScopeProfile used by scope-sensitive
+        branches (currently: mass lift claims). Defaults to a
+        fully-unknown profile, which drives the UNSCOPED verdict for
+        such claims — meaning the sim reports "insufficient
+        information", not a rejection.
+
+        Categorical claims (unlimited water, super species) and hard
+        physics/biology limits (contact burn, superhuman speed) are
+        NOT scope-sensitive and route around this parameter.
+        """
+        if scope is None:
+            scope = ScopeProfile()
+
         parser = ClaimParser()
         report = {
             "claim": claim_text,
             "layers": {},
-            "grounded": True,
+            "grounded": True,     # "no categorical reject"; UNSCOPED
+                                  # and EMBODIED_TRUE_UNVERIFIED both
+                                  # keep this True.
+            "verdict": None,      # top-level verdict from the
+                                  # scope-sensitive branch that fired,
+                                  # if any (Verdict enum value string).
             "score": 100,
         }
 
-        # --- L0: Physics ---
+        # --- L4 (scope-sensitive): mass lift claim ---
+        # Previously routed through L0's apply_physics, which clips
+        # force and caps velocity internally, so the state was always
+        # valid regardless of mass — the claim was never rejected.
+        # Now routes through L4's lift_mass distribution combined with
+        # the six-factor scope profile; verdict comes from
+        # assess_probability_claim (see scope_profile.py).
         mass = parser.extract_mass(claim_text)
-        if mass is not None and mass > 35:
-            # Simulate the lift with a falling mass
-            pos = np.array([0.0, 1.0])
-            vel = np.array([0.0, 0.0])
-            force = np.array([0.0, -mass * 9.81])
-            new_pos, new_vel = self.l0_world.apply_physics(
-                pos, vel, force, 0.05)
-            speed = np.linalg.norm(new_vel)
-            valid, reason = self.l0_world.is_valid_state(new_pos, new_vel)
-            if not valid:
-                report["layers"]["L0"] = (
-                    f"Rejected: {reason} "
-                    f"(mass {mass} kg generated velocity {speed:.2f} m/s)")
+        if mass is not None:
+            mean, std = self.l4_world.get_limit("lift_mass")
+            base_prob = self.l4_world.probability_of_feasibility(
+                mass, mean, std)
+            verdict, reason = assess_probability_claim(base_prob, scope)
+            report["layers"]["L4_scope"] = {
+                "kind": "mass_lift",
+                "value_kg": mass,
+                "base_probability": base_prob,
+                "verdict": verdict.value,
+                "reason": reason,
+            }
+            report["verdict"] = verdict.value
+            if verdict == Verdict.MOST_LIKELY_UNTRUE:
                 report["grounded"] = False
                 report["score"] -= 20
+            elif verdict == Verdict.UNSCOPED:
+                # UNSCOPED is "I don't know", not "false". Grounded
+                # stays True; score dips 10 to mark the unknown.
+                report["score"] -= 10
+            elif verdict == Verdict.EMBODIED_TRUE_UNVERIFIED:
+                # Scope supports; sim admits its own reach limit.
+                # Grounded stays True; no score change — the honest
+                # position is that the sim can't do better.
+                pass
+            elif verdict == Verdict.EXTERNALLY_VERIFIED:
+                # Reserved for verification injected from outside;
+                # the sim itself can't produce this verdict.
+                pass
 
         # --- L1: Thermodynamics ---
         temp = parser.extract_temperature(claim_text)
