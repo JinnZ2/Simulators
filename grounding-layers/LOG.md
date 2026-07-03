@@ -1,5 +1,118 @@
 work from bottom to top on this page
 
+# Reasoning Log: Probabilistic L1–L4 Conditioning
+
+**Date:** 2026-07-02  
+**Context:** After establishing a probabilistic L0 (physics likelihood), we extend the same approach upward through thermodynamics (L1), planetary mass balance (L2), ecological homeostasis (L3), and biomechanical constraints (L4). Each layer adds a log-likelihood term for the AI’s proposal, conditioning on the physical plausibility from below.  
+**Status:** Design reasoning complete. Implementation stages proposed. L5 (pluralistic human constructs) will follow after this block.
+
+---
+
+## 1. General pattern
+
+Every layer Ln (n ≥ 1) receives:
+- The AI’s proposed plan (which may include trajectories, resource draws, or population manipulations).
+- The physical likelihood (or trajectory sample) from L0.
+- Any relevant outputs from intermediate layers.
+
+It returns:
+- A **conditional log-likelihood** `log p(proposal | Ln constraints, lower-layer states)`.
+- Optionally, a corrected state estimate (the mode) for visualisation / enforcement.
+
+The layers are designed to be **additive**: the total log-probability of a proposal across L0–L4 is the sum of the layer-specific terms (assuming conditional independence of violations given the lower-layer states). This is a product-of-experts structure.
+
+Implementation can follow the same pattern as `ProbabilisticWorld`:
+
+- A class for each layer with frozen constants and noise/deviation parameters.
+- A `log_likelihood(...)` method.
+- A thin inspector function that iterates over time steps (if dynamic) and accumulates the score.
+
+---
+
+## 2. L1 – Thermodynamics & Entropy
+
+**Constraints (from README):**
+- 2nd law: entropy generation must be non-negative on average.
+- Battery depletion, Carnot ceiling (efficiency ≤ 1 – T_cold/T_hot).
+- Energy books must close (no perpetual motion).
+
+**Probabilistic treatment:**
+- Entropy generation per step: compute `ΔS = (heat_in / T_hot) – (heat_out / T_cold)`. Expectation over noise can be modelled as a Gaussian around zero, with a sharp penalty if the mean falls significantly below zero.
+- Carnot ceiling: proposed work extraction vs. maximum. Penalise with a logistic barrier: `log p ∝ –softplus(scale * (work – max_work))`.
+- Battery depletion: track stored energy; if the proposal draws more energy than available, apply a heavy-tailed cost (e.g., negative log-likelihood grows quadratically beyond capacity).
+
+**Key observation:**
+L1 operates on energy flows and heat reservoirs. If the proposal is a trajectory of forces and velocities, we can compute work, heat dissipation, and entropy from the physical state (already available from L0). So L1’s `log_likelihood` can take the L0 physical states (or just the proposed forces/velocities) and add its own thermal accounting.
+
+**Stage:**  
+Add a `ThermodynamicsAuditor` class with `log_likelihood(pos, vel, force, battery_state, reservoir_temps)` that returns a scalar. The `__main__` demo can be extended to include a simple battery and two thermal reservoirs.
+
+---
+
+## 3. L2 – Planetary Mass Balance
+
+**Constraints:**
+- Finite pools: water, soil, minerals, carbon.
+- Heat budget (radiative balance).
+
+**Probabilistic treatment:**
+- The proposal likely involves resource extraction/consumption rates. For each resource, model a log-probability that proposed consumption exceeds available stock: `log p(consumption) ∝ –(consumption / stock)^2` or a similar logistic penalty as stock approaches zero.
+- Heat budget: if the plan emits waste heat, compare to radiative cooling capacity. Soft penalty for exceeding the planetary energy balance.
+- Noise parameters represent measurement uncertainty in global inventories.
+
+**Scope:**  
+This layer will often act on aggregate quantities over a plan’s entire horizon, not per-timestep. The inspector can sum resource uses and evaluate a final score. Alternatively, it can penalise the *cumulative* overdraft.
+
+**Implementation idea:**  
+`PlanetaryMassAuditor` takes a proposed extraction schedule (e.g., kg/year of lithium, gigatonnes of CO₂) and returns a log-likelihood. It may also call L0 to ensure that the plan’s energy demands (e.g., mining energy) are physically plausible – thus, it conditions on the physical likelihood.
+
+---
+
+## 4. L3 – Ecological Homeostasis
+
+**Constraints:**
+- Allometric scaling laws.
+- Lotka-Volterra dynamics (predator-prey oscillations bounded).
+- ~10% trophic transfer efficiency.
+- Extinction cascades (thresholds on population sizes).
+
+**Probabilistic treatment:**
+- Given a proposed intervention (e.g., harvest rates, habitat destruction), the auditor runs a simplified ecosystem model (maybe a few species) and compares predicted population trajectories to viability thresholds.
+- For each species, probability of persistence can be modelled as a soft function of minimum population size over time. Extinction cascade risk: if one keystone species drops below a critical level, add a large penalty.
+- Log-likelihood can be the joint probability that all populations remain above viable levels, assuming stochastic demographic/environmental noise.
+
+**Important nuance:**  
+L3’s model itself is uncertain (Lε again). The auditor can incorporate structural uncertainty by having multiple possible ecosystem models and marginalising over them, but for the first pass, a single deterministic model with process noise suffices.
+
+**Implementation:**  
+`EcologicalHomeostasisAuditor` with `log_likelihood(intervention_schedule)` that runs a Lotka-Volterra simulation and returns a score based on minimum population thresholds.
+
+---
+
+## 5. L4 – Biomechanical Sensorimotor
+
+**Constraints:**
+- Joint limits, grip strength, neural latency (~50–200 ms).
+- Thermal tolerance (e.g., core temperature ≤ 40°C).
+- Sustained power output ≤ 200 W (human baseline).
+
+**Probabilistic treatment:**
+- These are agent-specific constraints that can be applied to the physical trajectory from L0. The L0 inspector already works on a point mass; L4 can check if the required joint torques, reaction times, and metabolic power exceed human capabilities.
+- For example, given a velocity profile, compute required limb accelerations; if they imply joint angles beyond anatomical limits, penalise.
+- Thermal tolerance: a simple two-compartment heat model. If core temperature drifts beyond bounds, add penalty.
+- Neural latency: if the AI’s proposed control loop requires reaction faster than a threshold, penalise heavily (since it violates sensorimotor reality).
+
+**Implementation:**  
+`BiomechanicalAuditor` that takes the agent’s trajectory (pos, vel, forces) and a set of body parameters, then returns a log-likelihood based on feasible effort, power, and thermal profiles.
+
+---
+
+## 6. Integration and stacking
+
+Once each layer has its own `log_likelihood` method, a master inspector can iterate over the plan and accumulate:
+
+
+
 # Reasoning Log: Probabilistic L0 Foundation
 
 **Date:** 2026-07-02  
