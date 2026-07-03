@@ -8,7 +8,7 @@ SCOPE (stacking rule): T=universal | S=universal |
 [1] Empty plan (no layer applies):
   total_logp        = 0.0
   applicable        = []
-  skipped           = ['L0', 'L1', 'L2', 'L3', 'L4', 'L5']
+  skipped           = ['L0', 'L1', 'L2', 'L3', 'L4', 'L5', 'Le']
 
 [2] L1: perpetual motion (100/120/0):
   total_logp        = -204.223

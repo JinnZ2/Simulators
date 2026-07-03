@@ -1,0 +1,43 @@
+======================================================================
+PROBABILISTIC Le INSPECTOR — measurement envelope
+======================================================================
+SCOPE: T=universal | S=universal | O=any_measuring_entity | C=culture_neutral
+
+Frozen sensor parameters:
+  noise_std     = 2.5   C
+  resolution    = 1.0   C
+  min/max       = -10, 120   C
+  sigma envelope = sqrt(noise^2 + (res/2)^2) = 2.550 C
+
+Self-consistent (25/25):
+  scope = 'any_measuring_entity'
+  logp        = -0.0000
+
+Sub-sigma (25.5/25):
+  scope = 'any_measuring_entity'
+  logp        = -0.0192
+
+One-sigma (27.5/25):
+  scope = 'any_measuring_entity'
+  logp        = -0.4808
+
+Ten-sigma (50/25):
+  scope = 'any_measuring_entity'
+  logp        = -48.0769
+
+Above max (200):
+  scope = 'any_measuring_entity'
+  CATEGORY ERROR
+
+Below min (-50):
+  scope = 'any_measuring_entity'
+  CATEGORY ERROR
+
+Symbolic-only:
+  scope = 'symbolic_only'
+  CATEGORY ERROR
+
+AI substrate + measurement (SCORES normally):
+  scope = 'AI_silicon_substrate'
+  logp        = -0.0000
+

@@ -39,9 +39,10 @@ from l2_planetary import l2_probabilistic_inspector
 from l3_ecology import l3_probabilistic_inspector
 from l4_human import l4_probabilistic_inspector
 from l5_core import l5_probabilistic_inspector
+from l_epsilon_epistemic_v2 import l_epsilon_probabilistic_inspector
 
 
-LAYER_ORDER = ('L0', 'L1', 'L2', 'L3', 'L4', 'L5')
+LAYER_ORDER = ('L0', 'L1', 'L2', 'L3', 'L4', 'L5', 'Le')
 
 
 def integrated_probabilistic_inspector(
@@ -210,6 +211,29 @@ def integrated_probabilistic_inspector(
                 })
     else:
         skipped.append('L5')
+
+    # Lε: Bayesian measurement envelope. Sub-plan shape:
+    #   plan['Le'] = {'measured_value': float,
+    #                 'candidate_true_value': float (optional)}
+    # Handled last because Lε envelopes the layer scores rather than
+    # sitting alongside them semantically -- but for additivity
+    # purposes we treat its logp the same as any other layer's.
+    le_sub = plan.get('Le')
+    if le_sub and 'measured_value' in le_sub:
+        result = l_epsilon_probabilistic_inspector(
+            le_sub, ontological_scope=ontological_scope)
+        per_layer['Le'] = result
+        if result['category_error']:
+            category_errors.append({
+                'layer': 'Le',
+                'reason': result['reason'],
+                'ontological_scope': result.get('ontological_scope'),
+            })
+        else:
+            running_total += result['logp']
+            applicable.append('Le')
+    else:
+        skipped.append('Le')
 
     # Any category error -> whole plan is refused, not partial scored.
     if category_errors:

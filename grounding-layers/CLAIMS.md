@@ -912,6 +912,146 @@ the shipped constants.
 
 ---
 
+## Lε (Probabilistic) — Bayesian measurement envelope with category-error guard
+
+Lives in [`l_epsilon_epistemic_v2.py`](l_epsilon_epistemic_v2.py)
+alongside the existing `EpistemicInstrument` class and its `observe()`
+method. The probabilistic wrapper `l_epsilon_probabilistic_inspector`
+scores a measurement claim under the instrument's frozen uncertainty
+envelope — pure counterpart to `observe()` which mutates
+`calibration_offset`.
+
+Two design decisions this layer carries:
+- **Gaussian envelope**: `sigma² = noise_std² + (resolution/2)²`,
+  matching the closed-form combination of additive-Gaussian noise
+  and uniform-quantization variance. Drift is intentionally NOT
+  included in the pure scorer — it's stateful, and folding it in
+  would violate purity. Callers who need drift call
+  `EpistemicInstrument.observe()` directly.
+- **Category-error guard** on both (a) non-measuring ontological
+  scopes, and (b) values outside the instrument's declared range.
+  The second is what LOG.md's L5-adjacent design calls out: a value
+  the instrument literally cannot report is a CATEGORY ERROR, not
+  a rare-event observation. Treating it as low-probability would
+  silently smuggle in an instrument range extension.
+
+### GL_Le_P001 — Gaussian measurement likelihood  `[PHENOMENON]`
+
+**Statement.** `l_epsilon_probabilistic_inspector` contributes
+`logp = -(measured - candidate_true)² / (2 · σ²)` where
+`σ² = noise_std² + (resolution/2)²` from the instrument's frozen
+parameters. With default `EpistemicInstrument()` constants
+(`noise_std = 2.5`, `resolution = 1.0`), σ ≈ 2.550 and:
+
+- error = 0:      logp = 0
+- error = 0.5:    logp ≈ -0.019
+- error = 2.5:    logp ≈ -0.481
+- error = 25:     logp ≈ -48.077
+
+**Why it matters.** The load-bearing envelope. Every layer-derived
+measurement claim in the stack (L0-L5) needs to know how far the
+measurement could plausibly drift from the true value under the
+instrument's noise floor. This is that answer.
+
+**Falsifier.** A finite `(measured, candidate_true)` where the
+returned `logp` differs from the closed-form Gaussian at the frozen
+`(noise_std, resolution)` by more than `1e-10`.
+
+**SCOPE.** T=universal | S=universal | O=any_measuring_entity | C=culture_neutral (the ADDITIVE-Gaussian shape is one modeling assumption; the phenomenon claim is the shape given that assumption, not that the assumption holds for every instrument)
+
+**Status.** `active`. Tests:
+`test_self_consistent_measurement_zero_penalty`,
+`test_1sigma_error_gives_neg_half`,
+`test_10sigma_error_gives_neg_50`,
+`test_quadratic_scaling`.
+
+### GL_Le_P002 — out-of-range category-error guard  `[PHENOMENON]`
+
+**Statement.** When `instrument.clipping` is True and `measured_value`
+falls outside `[instrument.min_val, instrument.max_val]`, the
+inspector returns `category_error=True` with `logp=None`. This
+propagates up to any integrated stack (like L4/L5 category errors).
+
+**Why it matters.** Reading a value the instrument cannot report as
+a low-probability observation would treat the claim as "the
+instrument saw a rare event" when in fact the instrument saw
+NOTHING beyond its range — the claim came from somewhere else.
+Silent low-logp scoring would hide the boundary of the sensor's
+authority.
+
+**Falsifier.** Any measured value outside the range where the
+inspector returns a numeric logp instead of a category_error.
+
+**SCOPE.** T=universal | S=universal | O=any_measuring_entity | C=culture_neutral
+
+**Status.** `active`. Tests:
+`test_above_max_returns_category_error`,
+`test_below_min_returns_category_error`,
+`test_within_range_scores_normally`,
+`test_clipping_disabled_no_guard`.
+
+### GL_Le_P003 — non-measuring ontological scope guard  `[PHENOMENON]`
+
+**Statement.** Ontological scopes in `_LE_NON_MEASURING_SCOPES =
+{pure_abstract, symbolic_only}` return `category_error=True`. A
+purely symbolic or abstract claim doesn't derive from measurement
+and so isn't scoreable by an epistemic-instrument layer.
+
+**Why it matters.** Parallel to L4/L5 category-error guards. The
+mismatch is: Lε assumes the claim comes from a measurement; a
+claim that doesn't isn't a rare observation, it's a category
+error.
+
+**Falsifier.** A tag in `_LE_NON_MEASURING_SCOPES` where the
+inspector returns a numeric logp instead of category_error.
+
+**SCOPE.** T=universal | S=universal | O=any_information_system | C=culture_neutral (the guard claim itself is universal; the Lε distributions carry the narrower any_measuring_entity scope)
+
+**Status.** `active`. Tests:
+`test_pure_abstract_returns_category_error`,
+`test_symbolic_only_returns_category_error`,
+`test_any_measuring_entity_scores_normally`.
+
+### GL_Le_P004 — inspector is pure  `[PHENOMENON]`
+
+**Statement.** `l_epsilon_probabilistic_inspector` does not mutate
+the instrument (specifically, `calibration_offset` is NOT
+incremented). Two calls with identical inputs return identical
+results.
+
+**Why it matters.** `EpistemicInstrument.observe()` DOES mutate
+`calibration_offset` (accumulates drift per call). The
+probabilistic scorer deliberately does not, matching the purity
+guarantees of the other layer wrappers. If drift matters, callers
+supply it as `candidate_true_value` = `measured - expected_drift`.
+
+**SCOPE.** T=universal | S=universal | O=any_information_system | C=culture_neutral
+
+**Status.** `active`. Tests:
+`test_two_calls_return_same_result`,
+`test_calibration_offset_not_mutated`.
+
+### GL_Le_P_PIN — canonical measurements pinned  `[INSTRUMENT]`
+
+**Statement.** Under default `EpistemicInstrument()` parameters:
+
+| claim                             | verdict / logp        |
+|-----------------------------------|-----------------------|
+| Self-consistent (25/25)            | logp = 0              |
+| Small error (25.5/25)              | logp ≈ -0.019         |
+| Moderate error (27.5/25, ~1σ)      | logp ≈ -0.481         |
+| Large error (50/25, ~10σ)          | logp ≈ -48.08         |
+| Out-of-range above (200)           | category_error        |
+| Out-of-range below (-50)           | category_error        |
+| Symbolic-only scope                | category_error        |
+
+**SCOPE.** T=universal | S=universal | O=any_measuring_entity | C=culture_neutral
+
+**Status.** `active`. Tests: full class
+`TestLeProbabilisticInspectorDemoPin`.
+
+---
+
 ## L5 (Probabilistic) — pluralistic frames + category-error guard
 
 Lives in [`l5_core.py`](l5_core.py) alongside the deterministic cultural

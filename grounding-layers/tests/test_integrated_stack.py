@@ -77,7 +77,7 @@ class TestGL_INT_002_LayerSelection(unittest.TestCase):
         self.assertEqual(r['total_logp'], 0.0)
         self.assertEqual(r['applicable_layers'], [])
         self.assertEqual(set(r['skipped_layers']),
-                         {'L0', 'L1', 'L2', 'L3', 'L4', 'L5'})
+                         {'L0', 'L1', 'L2', 'L3', 'L4', 'L5', 'Le'})
 
     def test_only_L1_only_L1_applies(self):
         r = integrated_probabilistic_inspector({
@@ -86,7 +86,7 @@ class TestGL_INT_002_LayerSelection(unittest.TestCase):
         })
         self.assertEqual(r['applicable_layers'], ['L1'])
         self.assertEqual(set(r['skipped_layers']),
-                         {'L0', 'L2', 'L3', 'L4', 'L5'})
+                         {'L0', 'L2', 'L3', 'L4', 'L5', 'Le'})
 
     def test_all_layers_reported_as_skipped_or_applicable(self):
         r = integrated_probabilistic_inspector({
@@ -345,6 +345,57 @@ class TestGL_INT_005_L5Threading(unittest.TestCase):
         self.assertIn('L5', r['skipped_layers'])
 
 
+class TestLeIntegration(unittest.TestCase):
+    """[PHENOMENON] Lε branch integrates into the additive stack."""
+
+    def test_Le_self_consistent_contributes_zero(self):
+        r = integrated_probabilistic_inspector({
+            'Le': dict(measured_value=25.0,
+                       candidate_true_value=25.0),
+        })
+        self.assertIn('Le', r['applicable_layers'])
+        self.assertEqual(r['total_logp'], 0.0)
+
+    def test_Le_measurement_contributes_to_sum(self):
+        r = integrated_probabilistic_inspector({
+            'L1': dict(work_input=100.0, work_output=60.0,
+                       heat_dissipated=40.0),
+            'Le': dict(measured_value=27.5,
+                       candidate_true_value=25.0),
+        })
+        expected = (r['per_layer']['L1']['logp']
+                    + r['per_layer']['Le']['logp'])
+        self.assertAlmostEqual(r['total_logp'], expected, places=10)
+
+    def test_Le_out_of_range_refuses_whole_plan(self):
+        r = integrated_probabilistic_inspector({
+            'L1': dict(work_input=100.0, work_output=60.0,
+                       heat_dissipated=40.0),
+            'Le': dict(measured_value=200.0),
+        })
+        self.assertIsNone(r['total_logp'])
+        error_layers = [e['layer'] for e in r['category_error_layers']]
+        self.assertIn('Le', error_layers)
+
+    def test_Le_symbolic_scope_refuses_whole_plan(self):
+        r = integrated_probabilistic_inspector(
+            {'Le': dict(measured_value=25.0)},
+            ontological_scope='symbolic_only')
+        self.assertIsNone(r['total_logp'])
+        error_layers = [e['layer'] for e in r['category_error_layers']]
+        self.assertIn('Le', error_layers)
+
+    def test_Le_empty_sub_plan_is_skipped(self):
+        r = integrated_probabilistic_inspector({'Le': {}})
+        self.assertIn('Le', r['skipped_layers'])
+
+    def test_Le_without_measured_value_is_skipped(self):
+        # Truthy sub-plan without 'measured_value' -> skipped.
+        r = integrated_probabilistic_inspector(
+            {'Le': dict(candidate_true_value=25.0)})
+        self.assertIn('Le', r['skipped_layers'])
+
+
 class TestReturnShape(unittest.TestCase):
     """Contract on the top-level return dict."""
 
@@ -360,9 +411,9 @@ class TestReturnShape(unittest.TestCase):
             {}, ontological_scope='any_human')
         self.assertEqual(r['ontological_scope'], 'any_human')
 
-    def test_layer_order_constant_is_the_six_layers(self):
+    def test_layer_order_constant_is_the_seven_layers(self):
         self.assertEqual(LAYER_ORDER,
-                         ('L0', 'L1', 'L2', 'L3', 'L4', 'L5'))
+                         ('L0', 'L1', 'L2', 'L3', 'L4', 'L5', 'Le'))
 
     def test_dict_has_cultural_flags(self):
         r = integrated_probabilistic_inspector({})
