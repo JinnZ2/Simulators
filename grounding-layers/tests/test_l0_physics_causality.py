@@ -1,15 +1,26 @@
 """
 Audit-grade tests for L0 — physics & causality enforcement.
 
-Pins five things (see CLAIMS.md for the falsifiable statements):
+Pins five things (see CLAIMS.md for the falsifiable statements). Each
+test class is tagged PHENOMENON or INSTRUMENT so a future reader can
+tell which failures are load-bearing and which mean the instrument
+was retooled — see the "The instrument is not the phenomenon" section
+at the top of CLAIMS.md.
 
-  GL_L0_001: is_valid_state rejects NaN / Inf components
-  GL_L0_002: is_valid_state enforces the speed cap on the input state
-  GL_L0_003: apply_physics never returns velocity beyond the speed cap
-  GL_L0_004: l0_grounding_inspector flags the fixed hallucination
-             scenario and its grounded trajectory respects the cap
-  GL_L0_PIN: the demo emits the pinned diagnostic numbers under
-             np.random.seed(0)
+  GL_L0_001 [PHENOMENON]: is_valid_state rejects NaN / Inf components
+             with the specific "Non-finite position/velocity"
+             diagnostic (v3, after rescoping the instrument to check
+             finite before speed)
+  GL_L0_002 [PHENOMENON]: is_valid_state enforces the speed cap
+  GL_L0_003 [PHENOMENON]: apply_physics never returns super-cap vel
+  GL_L0_004 [PHENOMENON + INSTRUMENT]: l0_grounding_inspector flags
+             the fixed hallucination and its grounded trajectory
+             respects the cap under a 5% tolerance envelope (the 5%
+             is instrument; the flagging is phenomenon)
+  GL_L0_PIN [INSTRUMENT]: the demo emits the pinned diagnostic
+             numbers under np.random.seed(0) — every number here is
+             a function of the fixed scenario + seed + counting
+             convention, not a physical invariant
 
 Plus a set of frozen-constant tests. Any silent retuning of the
 model's constraint set surfaces as a test failure — see the
@@ -37,9 +48,12 @@ from l0_physics_causality import (
 
 
 class TestFrozenConstants(unittest.TestCase):
-    """The constraint set is frozen. Retuning any of these values in
-    the source without updating the corresponding CLAIM is a
-    REFUTATION_PROTOCOL violation."""
+    """[INSTRUMENT] The constraint set is frozen. Retuning any of
+    these values in the source without updating the corresponding
+    CLAIM is a REFUTATION_PROTOCOL violation. Tagged INSTRUMENT
+    because "we chose to pin these specific numbers at these
+    specific defaults" is a measurement convention, not a
+    phenomenon."""
 
     def test_max_speed(self):
         self.assertEqual(PhysicalWorld().max_speed, 2.0)
@@ -56,47 +70,46 @@ class TestFrozenConstants(unittest.TestCase):
 
 
 class TestIsValidState_GL_L0_001(unittest.TestCase):
-    """GL_L0_001 — non-finite states are rejected."""
+    """[PHENOMENON] GL_L0_001 v3 — non-finite states are rejected with
+    the specific "Non-finite position/velocity" diagnostic. The SCOPE
+    block on PhysicalWorld pins the check-order (finite first, speed
+    second), which is what allows this assertion to hold — see
+    CLAIMS.md for the v1→v2→v3 arc."""
 
     def setUp(self):
         self.world = PhysicalWorld()
 
-    # GL_L0_001 claims the STATE is rejected; it deliberately does not
-    # pin WHICH check fires. In the current implementation the speed
-    # check runs before the finite check, so an ±Inf velocity gets
-    # rejected as "Speed limit exceeded" (since np.linalg.norm on Inf
-    # is Inf, which exceeds max_speed). That's fine — the state is
-    # still rejected, which is what the claim asserts.
-
-    def _assert_rejected(self, valid, reason):
+    def _assert_non_finite_rejection(self, valid, reason):
+        # v3 claim: the specific reason string is part of the contract.
+        # v1 was falsified by an instrument blind spot; v3 rescoped the
+        # instrument (finite check first) and restored the strong claim.
         self.assertFalse(valid)
-        low = reason.lower()
-        self.assertTrue('finite' in low or 'speed' in low,
-                        f'unexpected rejection reason: {reason!r}')
+        self.assertIn('finite', reason.lower(),
+                      f'expected "Non-finite..." reason; got {reason!r}')
 
     def test_nan_position_rejected(self):
         valid, reason = self.world.is_valid_state(
             np.array([np.nan, 0.0]), np.array([0.0, 0.0]))
-        self._assert_rejected(valid, reason)
+        self._assert_non_finite_rejection(valid, reason)
 
     def test_inf_position_rejected(self):
         valid, reason = self.world.is_valid_state(
             np.array([np.inf, 0.0]), np.array([0.0, 0.0]))
-        self._assert_rejected(valid, reason)
+        self._assert_non_finite_rejection(valid, reason)
 
     def test_nan_velocity_rejected(self):
         valid, reason = self.world.is_valid_state(
             np.array([0.0, 0.0]), np.array([np.nan, 0.0]))
-        self._assert_rejected(valid, reason)
+        self._assert_non_finite_rejection(valid, reason)
 
     def test_inf_velocity_rejected(self):
         valid, reason = self.world.is_valid_state(
             np.array([0.0, 0.0]), np.array([0.0, -np.inf]))
-        self._assert_rejected(valid, reason)
+        self._assert_non_finite_rejection(valid, reason)
 
 
 class TestIsValidState_GL_L0_002(unittest.TestCase):
-    """GL_L0_002 — speed cap on states."""
+    """[PHENOMENON] GL_L0_002 — speed cap on states."""
 
     def setUp(self):
         self.world = PhysicalWorld()
@@ -130,7 +143,8 @@ class TestIsValidState_GL_L0_002(unittest.TestCase):
 
 
 class TestApplyPhysics_GL_L0_003(unittest.TestCase):
-    """GL_L0_003 — apply_physics never returns super-cap velocity."""
+    """[PHENOMENON] GL_L0_003 — apply_physics never returns super-cap
+    velocity."""
 
     def setUp(self):
         self.world = PhysicalWorld()
@@ -173,9 +187,11 @@ class TestApplyPhysics_GL_L0_003(unittest.TestCase):
 
 
 class TestInspector_GL_L0_004(unittest.TestCase):
-    """GL_L0_004 — inspector flags the hallucination and produces a
-    grounded trajectory whose finite-difference velocity stays within
-    max_speed * (1 + tol) with tol = 5%."""
+    """[PHENOMENON + INSTRUMENT] GL_L0_004 — inspector flags the
+    hallucination (phenomenon) and produces a grounded trajectory
+    whose finite-difference velocity stays within max_speed * (1 +
+    tol) with tol = 5% (instrument — the 5% envelope exists because
+    we read velocity from OUTSIDE the inspector via np.diff/dt)."""
 
     TOL = 0.05
 
@@ -236,9 +252,12 @@ class TestInspector_GL_L0_004(unittest.TestCase):
 
 
 class TestDemoPinnedNumbers_GL_L0_PIN(unittest.TestCase):
-    """GL_L0_PIN — under np.random.seed(0) and the shipped constants,
-    the demo emits the pinned diagnostic numbers. Silent retuning of
-    any frozen constant surfaces here."""
+    """[INSTRUMENT] GL_L0_PIN — under np.random.seed(0) and the
+    shipped constants, the demo emits the pinned diagnostic numbers.
+    Silent retuning of any frozen constant surfaces here. Every
+    number in this class is a function of (fixed hallucination
+    scenario, seed, counting convention) — it moves when the
+    instrument is retooled, not when the phenomenon changes."""
 
     def setUp(self):
         np.random.seed(0)

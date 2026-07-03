@@ -252,11 +252,11 @@ if __name__ == "__main__":
 
 import sys
 import json
-from grounding_layers.field_compass import FieldCompass
-from grounding_layers.observer_state import ObserverState
-from grounding_layers.ai_observer_state import AIObserverState
-from grounding_layers.collaborative_field import CollaborativeField, HumanState, AIState
-from grounding_layers.cultural_lens import CulturalLens
+from field_compass import FieldCompass
+from observer_state import ObserverState
+from ai_observer_state import AIObserverState
+from collaborative_field import CollaborativeField, HumanState, AIState
+from cultural_lens import CulturalLens
 
 def run_pipeline(claim, human_state=None, ai_state=None):
     if human_state is None:

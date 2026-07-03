@@ -52,6 +52,19 @@ the rejection outcome only; the v1 statement is preserved in the
 claim's History block. This is the refutation protocol working as
 designed: the CLAIM changed, the frozen constants did not.
 
+That falsification also surfaced a bigger point, now codified at the
+top of [`CLAIMS.md`](CLAIMS.md) under "The instrument is not the
+phenomenon". Every test is an instrument — check-order, tolerance
+envelope, measurement convention, what to sample. A claim can be
+PHENOMENON (an invariant of the sim) or INSTRUMENT (an invariant of
+how we assess the sim) or a mix; a phenomenon-claim failure means
+the inspector no longer does what it claims, an instrument-claim
+failure means the instrument was retooled. `GL_L0_001` v1 was a
+phenomenon claim with an instrument assertion silently attached.
+The tests themselves live in Lε — they are the audit apparatus
+looking at L0 — so the audit apparatus is not exempt from the same
+measurement-vs-truth gap the `l_epsilon_epistemic` simulator models.
+
 L1–L5 + Lε + temporal + tensor-field remain framed-but-not-pinned —
 the CLAIMS.md contains sketched load-bearing claims (`GL_L{N}_LB`)
 for each but no test wiring yet. When the L0 pattern generalises,
