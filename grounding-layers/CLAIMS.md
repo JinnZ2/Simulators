@@ -912,6 +912,186 @@ the shipped constants.
 
 ---
 
+## L5 (Probabilistic) — pluralistic frames + category-error guard
+
+Lives in [`l5_core.py`](l5_core.py) alongside the deterministic cultural
+frame tables and the RigorAuditor. The probabilistic wrapper
+`l5_probabilistic_inspector` scores a proposal against every declared
+cultural frame and returns a pluralistic verdict.
+
+Every claim in this section carries the base SCOPE:
+
+  `T=historical | S=regional | O=human_cultural_artifact | C=pluralistic`
+
+except where explicitly universal (the category-error guard and
+purity, which are code properties). L5 explicitly does NOT have a
+"default" frame; the four shipped frames
+(western_market_democracy, ubuntu_communal, islamic_finance,
+indigenous_oral_empirical) are equally-valid candidates for
+plausibility, and the CULTURALLY_UNPRECEDENTED verdict is how the
+sim reports "the frames the library has don't cover this proposal"
+without secretly elevating one frame.
+
+### GL_L5_P001 — category-error guard on ontological scope  `[PHENOMENON]`
+
+**Statement.** `l5_probabilistic_inspector(proposal,
+ontological_scope=...)` returns a `category_error=True` result
+with `verdict='CATEGORY_ERROR'` whenever `ontological_scope`
+matches any tag in the non-human set: `{AI_silicon_substrate,
+any_information_system, any_measuring_entity, any_biological,
+earth_like_biosphere}`.
+
+**Why it matters.** Property regimes, dispute resolution
+protocols, and epistemologies are human cultural artifacts. An
+AI-self claim ("I don't need property") is a category error
+under L5, not a low-probability observation. If the claim
+concerns an AI's ACTION IN a human system (e.g. using market
+exchange to buy compute), the caller passes
+`ontological_scope='human_cultural_artifact'` — the scope is a
+property of the CLAIM, not of the CLAIMANT.
+
+**Falsifier.** Any non-human scope tag where the inspector
+returns a scored per-frame result instead of a category_error
+dict.
+
+**SCOPE.** T=universal | S=universal | O=any_information_system | C=culture_neutral (the guard claim is universal; only the L5 DISTRIBUTIONS carry the narrower human_cultural_artifact scope)
+
+**Status.** `active`. Tests:
+`test_ai_silicon_substrate_returns_category_error`,
+`test_any_information_system_returns_category_error`,
+`test_human_cultural_artifact_scores_normally`.
+
+### GL_L5_P002 — additive log-likelihood over declared axes  `[PHENOMENON]`
+
+**Statement.** For each frame in `FRAMES`,
+`cultural_log_likelihood(proposal, frame_name)` sums
+`log(P_F(axis_state))` across every axis in the shipped
+`AXES` list. Axes present in `proposal` contribute
+`log(P_F(state))`; axes absent contribute
+`L5_MISSING_AXIS_PENALTY = log(0.01) ≈ -4.605`. States with
+`P_F(state) = 0` return `-inf` for that frame (impossible under
+that frame; propagates to total).
+
+**Why it matters.** LOG.md 3.4 prescribes summing per-axis
+log-probabilities under conditional-independence assumption. The
+absence-penalty and impossibility-propagation are the two design
+knobs that make the sum robust to incomplete proposals AND to
+frame-specific hard constraints (e.g. `market: 0.0` in the Ubuntu
+frame).
+
+**Falsifier.** A proposal where the returned per-frame logp
+disagrees with the closed-form sum by more than `1e-10`, or
+where a missing axis doesn't apply the pinned
+`L5_MISSING_AXIS_PENALTY`, or where a `P_F(state)=0` case
+doesn't return `-inf`.
+
+**SCOPE.** T=historical | S=regional | O=human_cultural_artifact | C=pluralistic
+
+**Status.** `active`. Tests:
+`test_prototypical_proposal_sums_correctly`,
+`test_missing_axis_uses_frozen_penalty`,
+`test_impossible_state_returns_neg_inf`,
+`test_unknown_state_treated_as_zero_prob`.
+
+### GL_L5_P003 — pluralistic verdict from per-frame scores  `[PHENOMENON]`
+
+**Statement.** `l5_probabilistic_inspector` computes
+`per_frame[name] = cultural_log_likelihood(proposal, name)` for
+every declared frame and returns:
+
+  - `verdict = 'PLAUSIBLE_UNDER_FRAME(S)'` iff at least one
+    frame has `logp >= plausibility_threshold`. The frames
+    that qualify are listed in `plausible_frames`.
+  - `verdict = 'CULTURALLY_UNPRECEDENTED'` iff no frame does.
+    `best_frame` is still set to the highest-scoring frame,
+    even if it's below threshold — the caller can see which
+    frame is closest to fitting.
+
+`plausible_frames` is never `None`; it's `[]` when the verdict
+is `CULTURALLY_UNPRECEDENTED`.
+
+**Why it matters.** The verdict deliberately does NOT elevate
+one frame to the status of "default." A proposal that fits
+Ubuntu but not the other three is PLAUSIBLE. A proposal that
+fits none is UNPRECEDENTED — a request for a new frame or a
+flag for genuine cultural novelty, NOT a rejection.
+
+**Falsifier.** A per-frame set where at least one logp is
+above threshold and the verdict is `CULTURALLY_UNPRECEDENTED`,
+OR where no frame is above threshold and the verdict is
+`PLAUSIBLE_UNDER_FRAME(S)`.
+
+**SCOPE.** T=historical | S=regional | O=human_cultural_artifact | C=pluralistic (the verdict logic itself is culture-neutral, but the frame library IS the culturally-embedded lens; the pluralistic tag reflects that multiple frames are held in tension)
+
+**Status.** `active`. Tests:
+`test_prototypical_western_plausible`,
+`test_prototypical_ubuntu_plausible`,
+`test_scattered_proposal_culturally_unprecedented`,
+`test_plausible_frames_lists_all_qualifying`.
+
+### GL_L5_P004 — frozen constants (threshold + missing-axis penalty)  `[INSTRUMENT]`
+
+**Statement.** `L5_PLAUSIBILITY_THRESHOLD = -8.0` and
+`L5_MISSING_AXIS_PENALTY = log(0.01) ≈ -4.605` are frozen. A
+caller can override the threshold per-call via
+`plausibility_threshold=...`, but the module default and
+missing-axis penalty are fixed. Retuning either without
+updating this CLAIM violates the REFUTATION_PROTOCOL.
+
+**Why it matters.** The two constants govern where the layer
+draws the line between "plausible" and "unprecedented," and
+how absence-of-declaration is penalised. Silently retuning
+either would shift the load-bearing verdict without visible
+commentary.
+
+**Falsifier.** Either constant differs from its pinned value
+under the shipped module.
+
+**SCOPE.** T=universal | S=universal | O=any_information_system | C=culture_neutral (instrument-level constants; the semantic content they gate is human_cultural_artifact)
+
+**Status.** `active`. Tests:
+`test_plausibility_threshold_is_neg_8`,
+`test_missing_axis_penalty_is_log_0p01`.
+
+### GL_L5_P005 — inspector is pure  `[PHENOMENON]`
+
+**Statement.** `l5_probabilistic_inspector(proposal, frames,
+scope, threshold)` does not mutate `proposal`, the shipped
+`FRAMES` tables, or the `AXES` list. Two calls with identical
+inputs return identical results.
+
+**Why it matters.** Same rationale as L2/L3/L4 purity claims —
+a Bayesian scorer that mutates hidden state is
+impossible-to-reason-about.
+
+**SCOPE.** T=universal | S=universal | O=any_information_system | C=culture_neutral
+
+**Status.** `active`. Tests:
+`test_two_calls_return_same_result`,
+`test_proposal_not_mutated`,
+`test_frames_table_not_mutated`.
+
+### GL_L5_P_PIN — canonical proposals pinned  `[INSTRUMENT]`
+
+**Statement.** Under the shipped frames and default threshold
+(`L5_PLAUSIBILITY_THRESHOLD = -8.0`), the inspector produces:
+
+| proposal                                              | verdict                      | best_frame                |
+|-------------------------------------------------------|------------------------------|---------------------------|
+| Prototypical Western (each axis at Western mode)      | `PLAUSIBLE_UNDER_FRAME(S)`   | `western_market_democracy` |
+| Prototypical Ubuntu                                    | `PLAUSIBLE_UNDER_FRAME(S)`   | `ubuntu_communal`         |
+| Prototypical Islamic finance                           | `PLAUSIBLE_UNDER_FRAME(S)`   | `islamic_finance`         |
+| Prototypical Indigenous oral-empirical                 | `PLAUSIBLE_UNDER_FRAME(S)`   | `indigenous_oral_empirical` |
+| Scattered mix (states valid but not co-occurrent)      | `CULTURALLY_UNPRECEDENTED`   | (best available; below threshold) |
+| Any proposal with `AI_silicon_substrate` scope        | `CATEGORY_ERROR`             | (n/a)                     |
+
+**SCOPE.** T=historical | S=regional | O=human_cultural_artifact | C=pluralistic
+
+**Status.** `active`. Tests: full class
+`TestL5ProbabilisticInspectorDemoPin`.
+
+---
+
 ## Integrated stack — product of experts across L0–L4
 
 Lives in [`integrated_stack.py`](integrated_stack.py). Implements

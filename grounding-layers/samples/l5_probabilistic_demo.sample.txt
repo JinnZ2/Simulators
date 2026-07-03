@@ -1,0 +1,70 @@
+======================================================================
+PROBABILISTIC L5 — pluralistic frames + category-error guard
+======================================================================
+SCOPE: T=historical | S=regional | O=human_cultural_artifact | C=pluralistic
+
+Shipped frames (4): western_market_democracy, ubuntu_communal, islamic_finance, indigenous_oral_empirical
+Shipped axes   (7): economic_exchange_mode, property_regime, governance_dispute, epistemology, communication_style, temporal_planning, social_stratification
+L5_PLAUSIBILITY_THRESHOLD: -8.0
+
+[1] Prototypical Western market democracy
+  verdict           = PLAUSIBLE_UNDER_FRAME(S)
+  best_frame        = western_market_democracy
+  best_logp         = -1.821
+  plausible_frames  = ['western_market_democracy', 'islamic_finance']
+          western_market_democracy:   -1.821  <-- plausible
+                   ubuntu_communal:    -inf 
+                   islamic_finance:   -6.782  <-- plausible
+         indigenous_oral_empirical:    -inf 
+
+[2] Prototypical Ubuntu communal
+  verdict           = PLAUSIBLE_UNDER_FRAME(S)
+  best_frame        = ubuntu_communal
+  best_logp         = -2.846
+  plausible_frames  = ['ubuntu_communal']
+          western_market_democracy:  -16.811
+                   ubuntu_communal:   -2.846  <-- plausible
+                   islamic_finance:    -inf 
+         indigenous_oral_empirical:    -inf 
+
+[3] Prototypical Islamic finance
+  verdict           = PLAUSIBLE_UNDER_FRAME(S)
+  best_frame        = islamic_finance
+  best_logp         = -4.556
+  plausible_frames  = ['islamic_finance']
+          western_market_democracy:    -inf 
+                   ubuntu_communal:    -inf 
+                   islamic_finance:   -4.556  <-- plausible
+         indigenous_oral_empirical:    -inf 
+
+[4] Prototypical Indigenous oral-empirical
+  verdict           = PLAUSIBLE_UNDER_FRAME(S)
+  best_frame        = indigenous_oral_empirical
+  best_logp         = -3.344
+  plausible_frames  = ['indigenous_oral_empirical']
+          western_market_democracy:    -inf 
+                   ubuntu_communal:    -inf 
+                   islamic_finance:    -inf 
+         indigenous_oral_empirical:   -3.344  <-- plausible
+
+[5] Scattered mix (no frame has these together)
+  verdict           = CULTURALLY_UNPRECEDENTED
+  best_frame        = western_market_democracy
+  best_logp         = -inf
+  plausible_frames  = []
+          western_market_democracy:    -inf 
+                   ubuntu_communal:    -inf 
+                   islamic_finance:    -inf 
+         indigenous_oral_empirical:    -inf 
+
+[6] AI-self claim about cultural axes
+  CATEGORY ERROR (CATEGORY_ERROR)
+  reason: L5 SCOPE is O=human_cultural_artifact; got O='AI_silicon_substrate'. Cultural co...
+
+======================================================================
+The pluralistic verdict does NOT elevate one frame as default.
+A proposal that fits at least one frame is PLAUSIBLE.
+A proposal that fits none is CULTURALLY_UNPRECEDENTED --
+potentially novel, potentially outside the frame library.
+An AI-self claim triggers CATEGORY_ERROR.
+======================================================================
