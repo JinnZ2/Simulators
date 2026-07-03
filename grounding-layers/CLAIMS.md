@@ -912,6 +912,157 @@ the shipped constants.
 
 ---
 
+## L4 (Probabilistic) — Bayesian counterpart with category-error guard
+
+Lives in [`l4_human.py`](l4_human.py). Extends
+`HumanWorld` with a `ProbabilisticHumanWorld` subclass and
+`l4_probabilistic_inspector`. Every claim in this section carries
+the SCOPE:
+
+  `T=historical | S=individual | O=any_WEIRD_human | C=biomedical_frame`
+
+The load-bearing move for "not dictated by human narrative":
+`GL_L4_P001` — the category-error guard. An AI claim about ITSELF
+under `O=AI_silicon_substrate` (or any non-human O tag) is NOT
+scored as a low-probability human observation; it's flagged as a
+category error. Doing otherwise would let the layer silently apply
+WEIRD-adult statistics to entities the statistics do not describe.
+
+### GL_L4_P001 — category-error guard on ontological scope  `[PHENOMENON]`
+
+**Statement.** `ProbabilisticHumanWorld.log_likelihood(plan,
+ontological_scope)` returns a category-error dict (not a low-logp
+score) whenever `ontological_scope` matches any tag in the
+non-human set: `{AI_silicon_substrate, any_information_system,
+any_measuring_entity, any_biological, earth_like_biosphere}`. The
+return dict has `category_error=True`, `logp=None`, and a
+`reason` string explaining the mismatch.
+
+**Why it matters.** This is the design decision that makes L4
+usable by non-human callers. Without the guard, an AI querying
+"can I lift 200 kg" gets a very-low-probability answer that treats
+the AI as a rare human, rather than the correct answer — this is
+not a claim L4 is authorised to score. Category error, not low
+probability.
+
+**Falsifier.** Any non-human scope tag where the layer returns a
+scored logp instead of a category_error dict, OR any human scope
+tag where the guard misfires and rejects a valid claim.
+
+**SCOPE.** T=universal | S=universal | O=any_information_system | C=culture_neutral (the GUARD claim is universal — refusing to score outside your scope is domain-neutral. Only the L4 DISTRIBUTIONS carry the narrower O=any_WEIRD_human scope.)
+
+**Status.** `active`. Tests:
+`test_ai_silicon_substrate_returns_category_error`,
+`test_any_information_system_returns_category_error`,
+`test_any_biological_returns_category_error`,
+`test_any_WEIRD_human_scores_normally`,
+`test_none_scope_scores_with_default_assumed_flag`.
+
+### GL_L4_P002 — Gaussian scoring for declared biomechanical parameters  `[PHENOMENON]`
+
+**Statement.** For each declared parameter in `plan` from
+`{lift_mass, reaction_time, temp_tolerance, sustained_power}`,
+the log-likelihood contribution is `-(z²)/2` where
+`z = (value - mean) / std` and `(mean, std)` come from the
+profile-shifted distribution `HumanWorld.get_limit(param, profile)`.
+Reference values under the default 'general' profile:
+
+  - `lift_mass = 35` (at mean): `≈ 0`
+  - `lift_mass = 65` (2σ above): `-2`
+  - `lift_mass = 100` (≈4.33σ above): `≈ -9.4`
+  - `reaction_time = 0.25` (mean): `0`
+  - `reaction_time = 0.15` (2σ below): `-2`
+  - `temp_tolerance = 60` (3.4σ above): `≈ -5.78`
+  - `sustained_power = 500` (7σ above): `≈ -24.5`
+
+**Why it matters.** The Gaussian shape gives smooth grading of how
+"WEIRD-typical" a claim is. A claim at 4σ isn't rejected outright
+— it gets a `-9.4` logp that a higher orchestration layer can
+combine with other layers' scores.
+
+**Falsifier.** A finite `(value, mean, std)` where the returned
+per-parameter contribution disagrees with `-((value-mean)/std)²/2`.
+
+**SCOPE.** T=historical | S=individual | O=any_WEIRD_human | C=biomedical_frame (WEIRD-adult distributions from occupational-health literature; non-WEIRD or non-human callers get category-error via GL_L4_P001)
+
+**Status.** `active`. Tests:
+`test_lift_mass_at_mean_zero_penalty`,
+`test_lift_mass_2sigma_gives_neg_2`,
+`test_reaction_time_2sigma_below`,
+`test_temp_tolerance_scales_quadratically`,
+`test_sustained_power_scales_quadratically`.
+
+### GL_L4_P003 — profile shifts apply per-parameter  `[PHENOMENON]`
+
+**Statement.** The five named profiles in `PROFILES`
+(`general, athlete, elder, child, trained`) shift the distribution
+mean per-parameter without shifting std:
+
+  - `athlete`:  lift +15, reaction −0.05, power +50
+  - `elder`:    lift −10, reaction +0.10, power −30
+  - `child`:    lift −20, reaction +0.05, power −50
+  - `trained`:  lift +10, reaction −0.02, power +30
+  - `general`:  no shifts (identity)
+
+`temp_tolerance` is not shifted by any profile (temp_shift = 0 for
+all profiles in the shipped `PROFILES` table). The probabilistic
+scoring uses these shifted means directly via `get_limit`.
+
+**Why it matters.** Profile-scoping is a first-order concession to
+sub-population variation within `O=any_WEIRD_human`. It doesn't
+solve the WEIRD scope issue (there's no `subsistence_farmer` or
+`martial_artist` profile), but it does prevent the layer from
+scoring an athlete's 60 kg lift as a 1.67σ event when it's really
+mean-ish for their profile.
+
+**Falsifier.** A profile whose shifts don't match the numbers
+above, OR a per-parameter score that doesn't use the profile shift.
+
+**SCOPE.** T=historical | S=individual | O=any_WEIRD_human | C=biomedical_frame (profile taxonomy is Western-kinesiological categories; other categorisation traditions would carve differently)
+
+**Status.** `active`. Tests:
+`test_athlete_shift_on_lift_mass`,
+`test_child_shift_on_lift_mass`,
+`test_elder_shift_reduces_lift`,
+`test_temp_tolerance_no_profile_shift`.
+
+### GL_L4_P004 — inspector is pure  `[PHENOMENON]`
+
+**Statement.** `ProbabilisticHumanWorld.log_likelihood(plan,
+ontological_scope)` does not mutate `self` or `plan`. Two calls
+with the same inputs return identical results.
+
+**SCOPE.** T=universal | S=universal | O=any_information_system | C=culture_neutral
+
+**Status.** `active`. Tests:
+`test_log_likelihood_is_idempotent`,
+`test_log_likelihood_does_not_mutate_plan`.
+
+### GL_L4_P_PIN — canonical claims pinned  `[INSTRUMENT]`
+
+**Statement.** Under the shipped WEIRD-adult constants,
+`l4_probabilistic_inspector` produces:
+
+| plan                                        | scope                    | verdict / logp        |
+|---------------------------------------------|--------------------------|-----------------------|
+| lift_mass=200 (AI claim)                    | `AI_silicon_substrate`   | category_error        |
+| lift_mass=40 (general, near mean)           | `any_WEIRD_human`        | `≈ -0.056`            |
+| lift_mass=100 (general, ~4.3σ above)        | `any_WEIRD_human`        | `≈ -9.4`              |
+| lift_mass=60, profile=athlete               | `any_WEIRD_human`        | `≈ -0.22` (near mean) |
+| lift_mass=40, profile=elder                 | `any_WEIRD_human`        | `-0.5`                |
+| reaction_time=0.15 (2σ below mean)          | `any_WEIRD_human`        | `-2.0`                |
+| temp_tolerance=60                            | `any_WEIRD_human`        | `≈ -5.78`             |
+| sustained_power=500 (7σ above)              | `any_WEIRD_human`        | `-24.5`               |
+| full 4-param plan at all means              | `any_WEIRD_human`        | `≈ 0`                 |
+| Any plan                                     | `any_information_system` | category_error        |
+
+**SCOPE.** T=historical | S=individual | O=any_WEIRD_human | C=biomedical_frame (pin values depend on frozen WEIRD-adult constants and profile shift table)
+
+**Status.** `active`. Tests: full class
+`TestL4ProbabilisticInspectorDemoPin`.
+
+---
+
 ## Inverse Knowledge Tree — verification by demonstrated lineage
 
 Lives in [`inverse_knowledge_tree.py`](inverse_knowledge_tree.py) as a

@@ -1,0 +1,75 @@
+======================================================================
+PROBABILISTIC L4 — canonical claims + category-error guard
+======================================================================
+SCOPE: T=historical | S=individual | O=any_WEIRD_human | C=biomedical_frame
+
+AI claim about itself (200kg lift):
+  scope = 'AI_silicon_substrate'
+  CATEGORY ERROR (not scored)
+  reason: L4 SCOPE is O=any_WEIRD_human; got O='AI_silicon_substrate'. This claim is a category error under L4...
+
+AI claim about compute rate:
+  scope = 'any_information_system'
+  CATEGORY ERROR (not scored)
+  reason: L4 SCOPE is O=any_WEIRD_human; got O='any_information_system'. This claim is a category error under ...
+
+Dog lift (5kg):
+  scope = 'any_biological'
+  CATEGORY ERROR (not scored)
+  reason: L4 SCOPE is O=any_WEIRD_human; got O='any_biological'. This claim is a category error under L4's hum...
+
+General adult, near mean lift:
+  scope = 'any_WEIRD_human'
+  logp = -0.0556
+           lift_mass:    -0.0556
+
+General adult, superhuman lift:
+  scope = 'any_WEIRD_human'
+  logp = -9.3889
+           lift_mass:    -9.3889
+
+Athlete, mean lift:
+  scope = 'any_WEIRD_human'
+  logp = -0.2222
+           lift_mass:    -0.2222
+
+Elder, moderate lift:
+  scope = 'any_WEIRD_human'
+  logp = -0.5000
+           lift_mass:    -0.5000
+
+Fast reaction (2σ below mean):
+  scope = 'any_WEIRD_human'
+  logp = -2.0000
+       reaction_time:    -2.0000
+
+Hold 60°C object:
+  scope = 'any_WEIRD_human'
+  logp = -5.7800
+      temp_tolerance:    -5.7800
+
+Sustained 500W:
+  scope = 'any_WEIRD_human'
+  logp = -24.5000
+     sustained_power:   -24.5000
+
+Full plan, all at mean:
+  scope = 'any_WEIRD_human'
+  logp = 0.0000
+           lift_mass:    -0.0000
+       reaction_time:    -0.0000
+      temp_tolerance:    -0.0000
+     sustained_power:    -0.0000
+
+Undeclared scope (defaults with warn):
+  scope = None
+  logp = -0.0556
+           lift_mass:    -0.0556
+  [WARN: scope=None; defaulted]
+
+======================================================================
+The category-error guard is what makes L4 usable by non-human callers.
+Without it, an AI query about compute would get a low logp and appear
+as "physically possible but statistically rare" -- treating the AI as
+a rare human. With it, the layer refuses to score the claim at all.
+======================================================================
