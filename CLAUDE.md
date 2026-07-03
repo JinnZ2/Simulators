@@ -136,23 +136,54 @@ underneath).
   `ipywidgets`, `ipython` (per-folder `requirements.txt`). No claim
   tables, no `REFUTATION_PROTOCOL` — the audit convention does not
   apply here. Read them as sketches.
-- `grounding-layers/` — Ten simulators built around one argument:
-  **any layer above L0 is bounded by every layer below it**. Seven
-  layer-inspector modules (`l0_physics_causality`,
-  `l1_thermodynamics_entropy`, `l2_planetary_mass_balance`,
-  `l3_ecological_homeostasis`, `l4_biomechanical_sensorimotor`,
-  `l5_human_construct`, `l_epsilon_epistemic`) each catch AI proposals
-  that violate their layer's constraint set and pull them back to the
-  feasible envelope. Three related simulators sit alongside the
-  L-stack: `temporal_dysrhythmia` (six timescales from μs to
+- `grounding-layers/` — Seven-layer probabilistic grounding stack
+  (L0-L5 + Lε) built around one argument: **any layer above L0 is
+  bounded by every layer below it**, extended by SCOPE-annotated
+  category-error guards that refuse to score claims outside a
+  layer's ontology.
+
+  **Entry point for any AI**: [`entry.py`](grounding-layers/entry.py)
+  exposes a single `audit(claim_or_plan, ontological_scope)` call
+  that accepts either a natural-language string or a structured plan
+  dict and returns the full seven-layer result. See
+  [`USAGE.md`](grounding-layers/USAGE.md) for the read-first guide.
+
+  Seven deterministic + seven probabilistic layer inspectors:
+  `l0_physics_causality` (+`ProbabilisticWorld`),
+  `l1_thermodynamics_entropy` / `l1_thermodynamics`
+  (+`ProbabilisticThermodynamicsWorld`),
+  `l2_planetary_mass_balance` / `l2_planetary`
+  (+`ProbabilisticPlanetaryWorld`),
+  `l3_ecological_homeostasis` / `l3_ecology`
+  (+`ProbabilisticEcologicalWorld`),
+  `l4_biomechanical_sensorimotor` / `l4_human`
+  (+`ProbabilisticHumanWorld` with category-error guard for
+  non-human ontological scopes),
+  `l5_human_construct` / `l5_core` (+`l5_probabilistic_inspector`
+  with pluralistic frames + category-error guard),
+  `l_epsilon_epistemic` / `l_epsilon_epistemic_v2`
+  (+`l_epsilon_probabilistic_inspector` with two-axis
+  category-error guard).
+
+  Meta files: [`SCOPE_TAXONOMY.md`](grounding-layers/SCOPE_TAXONOMY.md)
+  (four-dimension T | S | O | C vocabulary),
+  [`CLAIMS.md`](grounding-layers/CLAIMS.md) (73 falsifiable claims,
+  all with SCOPE annotations, REFUTATION_PROTOCOL, category
+  taxonomy), [`LOG.md`](grounding-layers/LOG.md) (design record,
+  read bottom-up), [`USAGE.md`](grounding-layers/USAGE.md)
+  (AI-facing usage guide).
+
+  Three related simulators sit alongside the L-stack:
+  `temporal_dysrhythmia` (six timescales from μs to
   millennia, translator-switch coupling), `tensor_field_resilience_v1`
   (F/A/T/M institutional-governance vectors), and
   `tensor_field_resilience_v2` (v1 + G/W/Y anchors, unstable vs
-  resilient scenarios). Sourced from `JinnZ2/Resilient-AI-Human-
-  Collaboration-` and archived at `legacy/Organize3.md`; non-stdlib
-  is `numpy`, `matplotlib`, `scipy`. Audit-grade framing (per-layer
-  docstrings state the constraint set up-front) but no `CLAIM_TABLE`
-  yet — claim structure not yet stable enough to pin.
+  resilient scenarios). Also `inverse_knowledge_tree.py`: verification
+  by demonstrated lineage (peer to the L-stack, not a member of it),
+  and `scope_profile.py`: six-factor scope matrix for human-embodied
+  claims. Sourced from `JinnZ2/Resilient-AI-Human-Collaboration-` and
+  archived at `legacy/Organize3.md`; non-stdlib is `numpy`,
+  `matplotlib`, `scipy`. 430+ audit-grade tests green.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

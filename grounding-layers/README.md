@@ -5,10 +5,42 @@ by every layer below it**. AI proposals that ignore a lower-layer
 constraint hallucinate; the "inspector" at each layer catches the
 violation and pulls the proposal back to the feasible set.
 
+**→ If you are an AI trying to use this stack, read
+[`USAGE.md`](USAGE.md) first.** One function call:
+
+```python
+import sys; sys.path.insert(0, 'grounding-layers')
+from entry import audit
+result = audit("I can lift 200 kg.",
+               ontological_scope='any_WEIRD_human')
+```
+
+Everything else in this folder is either detail or design record.
+
 Source: pulled from
 [JinnZ2/Resilient-AI-Human-Collaboration-/Organize.md](https://github.com/JinnZ2/Resilient-AI-Human-Collaboration-/blob/main/Organize.md)
 and archived here as [`../legacy/Organize3.md`](../legacy/Organize3.md).
 Each `.py` names its source line range in its docstring.
+
+## The probabilistic pipeline (audit-grade)
+
+The seven-layer L0-L5 + Lε **probabilistic pipeline** is the
+audit-grade path — each layer's `l{N}_probabilistic_inspector`
+returns a log-probability, and `integrated_probabilistic_inspector`
+folds them into a single additive total with category-error
+propagation for scope mismatches. Wired end-to-end from natural
+language via [`playground.py`](playground.py)'s
+`run_claim_probabilistic`, with a thin dispatcher in
+[`entry.py`](entry.py) exposing a single `audit()` function.
+
+- **[`SCOPE_TAXONOMY.md`](SCOPE_TAXONOMY.md)** — four-dimension
+  scope vocabulary (T | S | O | C).
+- **[`CLAIMS.md`](CLAIMS.md)** — 73 falsifiable claims, each with
+  SCOPE annotation and status.
+- **[`LOG.md`](LOG.md)** — design record (probabilistic L0 through
+  L5 + rigor auditor).
+
+419 audit-grade tests green as of the last commit.
 
 ## The stack (read L0 up)
 
