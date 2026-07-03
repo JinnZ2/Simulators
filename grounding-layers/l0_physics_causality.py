@@ -406,6 +406,17 @@ class ProbabilisticWorld(PhysicalWorld):
     """
     L0 physics with Gaussian noise assumptions for each constraint.
     Constants are frozen; uncertainties are frozen as per Lε.
+
+    SCOPE (see grounding-layers/SCOPE_TAXONOMY.md):
+      T = universal
+      S = universal
+      O = any_massive_object
+      C = culture_neutral
+
+    Binds any AI or human caller. The specific numeric constants
+    (pos_sigma=0.01, speed_scale=10.0, etc.) are visualisation-scale
+    for the demo hallucination; the Gaussian-and-logistic-barrier
+    SHAPE is the universal claim.
     """
     def __init__(self, mass=1.0, dt=0.05, max_speed=2.0,
                  pos_noise=0.01, vel_noise=0.05, energy_noise=0.1,

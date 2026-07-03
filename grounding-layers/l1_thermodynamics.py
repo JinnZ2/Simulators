@@ -212,6 +212,21 @@ class ProbabilisticThermodynamicsWorld(ThermodynamicWorld):
     thermodynamic constraints. Extends ThermodynamicWorld so the
     deterministic API stays available.
 
+    SCOPE (see grounding-layers/SCOPE_TAXONOMY.md):
+      T = single_step (one process at a time; caller sequences)
+      S = single_reservoir (LOG.md two-reservoir refinement is future)
+      O = any_energy_system
+      C = industrial_science_frame (Carnot ceiling comes from a
+          heat-engine framing; efficiency_carnot_max = 0.85 encodes
+          a specific engine family. Second-law and first-law claims
+          themselves are culture_neutral; the specific Carnot number
+          is human/industrial.)
+
+    An AI evaluating its own thermal footprint (compute → heat)
+    would be bound by first law, second law, and Carnot ceiling
+    (as any energy system); the Earth-normal ambient_temp=300K
+    default may not apply to an off-Earth substrate.
+
     Constraint set inherited from ThermodynamicWorld:
       efficiency_carnot_max = 0.85
       ambient_temp          = 300.0 K

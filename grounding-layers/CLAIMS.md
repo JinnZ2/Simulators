@@ -101,6 +101,38 @@ instrument, restores the instrument assertion). v3 is the stronger
 resting place. v2 is the correct move only when the instrument
 cannot be sensibly rescoped.
 
+## Scope taxonomy — grounding for any AI, not just human callers
+
+The purpose of this stack is to give any AI a grounding ability
+**not dictated by human narrative**. That purpose fails silently if
+a constant, a distribution, or a barrier hard-codes an Earth-normal,
+WEIRD-population, or industrial-science default without saying so.
+
+Every module, class, and claim now carries a four-dimensional scope
+annotation defined in
+[`SCOPE_TAXONOMY.md`](SCOPE_TAXONOMY.md):
+
+- **T** (Temporal): at what timescale does this hold?
+- **S** (Spatial): at what spatial scale?
+- **O** (Ontological): to what kind of entity does this apply?
+- **C** (Cultural): does this encode a specific cultural narrative?
+
+Format under each claim:
+
+```
+**SCOPE.** T=<tag> | S=<tag> | O=<tag> | C=<tag>
+```
+
+Where a dimension genuinely doesn't apply, `uncalibrated` is
+preferred to `universal` — those mean different things (see
+SCOPE_TAXONOMY.md).
+
+This is not a validation gate. It doesn't argue all scopes are
+equal. L0's `O=any_massive_object` really is stronger than L4's
+`O=any_WEIRD_human`. The point is to make the difference **visible**
+so an AI reading this stack can tell "this binds me" from "this is
+a human default."
+
 ---
 
 ## L0 — physics & causality
@@ -156,6 +188,8 @@ instrument blind spot; v2→v3 fixes the instrument and strengthens
 the claim. The correct move is v2→v3 when the instrument can be
 sensibly rescoped — as here.
 
+**SCOPE.** T=universal | S=universal | O=any_massive_object | C=culture_neutral
+
 **Status.** `active` (v3). Tests:
 `test_nan_position_rejected`, `test_inf_position_rejected`,
 `test_nan_velocity_rejected`, `test_inf_velocity_rejected`.
@@ -176,6 +210,8 @@ the number.
 `‖vel‖ > max_speed` and returns `(True, ...)`. Would refute the
 inspector's core contract.
 
+**SCOPE.** T=universal | S=universal | O=any_massive_object | C=culture_neutral (`max_speed = 2.0 m/s` is a visualization-only value; the enforcement claim is universal)
+
 **Status.** `active`. Test:
 `test_is_valid_state_speed_cap_boundary`,
 `test_is_valid_state_accepts_valid`.
@@ -194,6 +230,8 @@ produce a super-cap velocity, the composition breaks.
 returns `‖new_vel‖ > max_speed`. The internal implementation clips
 `force ∈ [-50, 50]` then applies `F = ma`, then renormalises velocity
 if it exceeds the cap — the falsifier is that this chain has a hole.
+
+**SCOPE.** T=universal | S=universal | O=any_massive_object | C=culture_neutral
 
 **Status.** `active`. Test:
 `test_apply_physics_never_exceeds_speed_cap`.
@@ -227,6 +265,8 @@ argument for L0 as a grounding layer is empty.
 grounded trajectory contains a step with velocity beyond the
 tolerance envelope.
 
+**SCOPE.** T=universal | S=universal | O=any_massive_object | C=culture_neutral (phenomenon claim is universal; the 5% tolerance envelope is instrument and lives at T=single_step | S=local | O=any_massive_object | C=culture_neutral)
+
 **Status.** `active`. Test:
 `test_inspector_flags_hallucination_scenario`,
 `test_grounded_trajectory_respects_speed_cap`.
@@ -250,6 +290,8 @@ as a delta on these numbers — the pin protects the constraint set.
 are unchanged (indicating a numerical-implementation drift), OR the
 constants change and the numbers correctly follow (indicating a
 frozen constant was unfrozen).
+
+**SCOPE.** T=single_step | S=local | O=any_massive_object | C=culture_neutral (pinned numbers are an instrument artifact — the fixed hallucination scenario, seed 0, and counting convention. Change any and the numbers move.)
 
 **Status.** `active`. Test: `test_demo_pinned_numbers`.
 
@@ -301,6 +343,8 @@ score penalty.
 `logp_pos` disagrees with `-‖pos - true_pos‖²/(2σ²)` at
 `pos_sigma = 0.01` by more than 1 unit of logp.
 
+**SCOPE.** T=universal | S=universal | O=any_massive_object | C=culture_neutral (`pos_sigma = 0.01` is a Newtonian-noise scale — visualization-oriented; the Gaussian shape claim itself is universal)
+
 **Status.** `active`. Test:
 `test_gaussian_position_contribution_unit_error`,
 `test_teleport_1m_contributes_at_least_5000_penalty`.
@@ -338,6 +382,8 @@ disagrees with `-logaddexp(0, k · (‖vel‖ - v_max))` for
 `test_speed_barrier_at_cap_is_neg_log2`,
 `test_speed_barrier_slope_above_cap`.
 
+**SCOPE.** T=universal | S=universal | O=any_massive_object | C=culture_neutral (`speed_scale = 10.0`, `max_speed = 2.0` are visualization-only; the smooth-barrier claim generalises)
+
 ### GL_L0_P003 — energy conservation is Gaussian  `[PHENOMENON]`
 
 **Statement.** `log_likelihood` contributes
@@ -355,6 +401,8 @@ energy penalty scales quadratically with the imbalance.
 **Falsifier.** A finite `(pos, vel, prev_pos, prev_vel, force)`
 where `logp_energy` differs from the closed-form Gaussian by more
 than 1 unit at `energy_sigma = 0.1`.
+
+**SCOPE.** T=universal | S=universal | O=any_massive_object | C=culture_neutral
 
 **Status.** `active`. Tests:
 `test_energy_conservation_zero_imbalance_no_penalty`,
@@ -376,6 +424,8 @@ the position and energy terms don't fully catch them.
 
 **Falsifier.** A finite `(vel, prev_vel, force)` where
 `logp_accel` differs from the closed-form Gaussian.
+
+**SCOPE.** T=universal | S=universal | O=any_massive_object | C=culture_neutral
 
 **Status.** `active`. Tests:
 `test_momentum_consistent_step_no_penalty`,
@@ -400,6 +450,8 @@ the books don't close — the primary hallucination catcher for
 **Falsifier.** A finite `(work_input, work_output, heat_dissipated)`
 where `logp_energy` disagrees with the closed-form Gaussian at
 `energy_sigma = 1.0 J`.
+
+**SCOPE.** T=single_step | S=single_reservoir | O=any_energy_system | C=culture_neutral
 
 **Status.** `active`. Tests:
 `test_energy_zero_imbalance_no_penalty`,
@@ -440,6 +492,8 @@ logaddexp.
 (ΔS = heat_in/T_hot - heat_out/T_cold, per LOG.md's section 2
 sketch) is a future round.
 
+**SCOPE.** T=single_step | S=single_reservoir | O=any_energy_system | C=culture_neutral (SCOPE note: single-reservoir approximation; two-reservoir refinement per LOG.md sketch is a future round)
+
 **Status.** `active`. Tests:
 `test_entropy_positive_no_penalty`,
 `test_entropy_zero_gives_neg_log2`,
@@ -473,6 +527,8 @@ proposals near the cap don't have a discontinuity.
 `logp_carnot` disagrees with the closed-form
 `-logaddexp(0, k·(η - η_max))` for the frozen constants.
 
+**SCOPE.** T=single_step | S=single_process | O=any_heat_engine | C=industrial_science_frame (`efficiency_carnot_max = 0.85` is a specific-engine-family placeholder for a heat engine at ~44K reservoir gap on ambient 300K; the barrier SHAPE is universal, the specific cap number is a human/engineering default)
+
 **Status.** `active`. Tests:
 `test_carnot_far_below_cap_no_penalty`,
 `test_carnot_at_cap_gives_neg_log2`,
@@ -504,6 +560,8 @@ penalty and a large overdraw is decisively rejected.
 **Falsifier.** A finite `(work_input, battery_state)` where the
 returned battery term disagrees with the closed-form quadratic.
 
+**SCOPE.** T=uncalibrated | S=local | O=any_energy_storage | C=culture_neutral (battery discharge timescale is caller-defined; `battery_sigma = 5.0 J` is a design-arbitrary noise scale)
+
 **Status.** `active`. Tests:
 `test_battery_underdraw_no_penalty`,
 `test_battery_none_silent`,
@@ -527,6 +585,8 @@ as a delta on these numbers.
 
 **Falsifier.** Any of the six values disagrees with the pinned
 number by more than 0.1 logp under the shipped constants.
+
+**SCOPE.** T=single_step | S=local | O=any_energy_system | C=culture_neutral (pinned values are instrument artifacts of the frozen sigma/scale constants)
 
 **Status.** `active`. Tests: full class
 `TestL1ProbabilisticInspectorDemoPin`.
@@ -559,6 +619,8 @@ exceeding stock — which is the load-bearing property.
 **Falsifier.** A finite `(usage, stock)` pair where the returned
 per-resource contribution disagrees with `-(usage/stock)²`.
 
+**SCOPE.** T=uncalibrated | S=planetary | O=earth_like_biosphere | C=resource_extraction_frame (water/soil/mineral pools and `max_extraction_ratio = 0.8` encode an industrial-agricultural framing. The `-(usage/stock)²` shape is the phenomenon claim; the Earth-scale constants are human/industrial defaults. Step size is caller-defined.)
+
 **Status.** `active`. Tests:
 `test_water_10pc_gives_neg_0p01`,
 `test_water_50pc_gives_neg_0p25`,
@@ -585,6 +647,8 @@ drawdown and physically fine; only accumulated load matters.
 
 **Falsifier.** A finite `(carbon_emit, carbon_load, uptake, sink)`
 combination where the contribution disagrees with the closed form.
+
+**SCOPE.** T=uncalibrated | S=planetary | O=earth_like_biosphere | C=industrial_science_frame (carbon accounting is Anthropocene-scientific framing; `carbon_sink_capacity = 2e6 t` is a toy Earth-scale number and NOT calibrated to any actual sink)
 
 **Status.** `active`. Tests:
 `test_carbon_below_uptake_is_free`,
@@ -615,6 +679,8 @@ disagrees with `-(heat_emit/heat_budget_capacity)²`.
 real Earth radiative budget (~120,000 TW). The shape claim is
 what's audited; calibration is a future refinement.
 
+**SCOPE.** T=uncalibrated | S=planetary | O=earth_like_biosphere | C=industrial_science_frame (`heat_budget_capacity = 1e5` is NOT calibrated to Earth's ~120,000 TW radiative budget; the phenomenon is the -(emit/capacity)² shape, the specific number is a human placeholder)
+
 **Status.** `active`. Tests:
 `test_heat_at_budget_gives_neg_1`,
 `test_heat_scales_quadratically`.
@@ -637,6 +703,8 @@ multi-step plan update world state manually between scoring calls.
 `log_likelihood(plan)` changes any of `world.{water, soil,
 minerals, carbon_load}`.
 
+**SCOPE.** T=universal | S=universal | O=any_information_system | C=culture_neutral (purity is a property of the code, not of physics or culture. Binds any caller — human, AI, human-AI team.)
+
 **Status.** `active`. Tests:
 `test_log_likelihood_does_not_mutate_water`,
 `test_log_likelihood_does_not_mutate_carbon_load`,
@@ -658,6 +726,8 @@ produces the following total-logp values on canonical plans:
 
 **Falsifier.** Any pinned value shifts by more than `0.001` under
 the shipped constants.
+
+**SCOPE.** T=single_step | S=planetary | O=earth_like_biosphere | C=resource_extraction_frame (pinned values depend on the frozen Earth-scale constants above)
 
 **Status.** `active`. Tests: full class
 `TestL2ProbabilisticInspectorDemoPin`.
@@ -686,6 +756,8 @@ shape.
 
 **Falsifier.** The trace runs and the scenario's total logp is
 `> -10⁶`, or a baseline step exceeds the small-noise envelope.
+
+**SCOPE.** T=single_step | S=local | O=any_massive_object | C=culture_neutral (the pin numbers are instrument artifacts of the fixed hallucination scenario + seed 0 + counting convention)
 
 **Status.** `active`. Tests: full class
 `TestProbabilisticInspectorDemoPin`.
@@ -744,6 +816,8 @@ comes in where a mixed profile should NOT collapse to
 MOST_LIKELY_UNTRUE, that's a Step 2 signal on the assessment
 instrument, not on this claim.
 
+**SCOPE.** T=uncalibrated | S=uncalibrated | O=any_human | C=biomedical_frame (the six factors — physical_state, nutritional_state, health, career, living_conditions, environment — are HUMAN embodied factors. **Does not apply to an AI making a claim about itself.** An AI-self-scoping analog does not yet exist in this stack; `ai_observer_state.py` is a start but doesn't cover the same conceptual territory.)
+
 **Status.** `active`. Tests:
 `test_scope_profile.py::TestVerdictUnscoped`,
 `::TestVerdictEmbodiedTrueUnverified`,
@@ -772,6 +846,8 @@ instrument was wrong. Sign flipped in-place. No constant retuned.
 **Falsifier.** A value where the returned probability disagrees
 with the survival function 1 − Φ((value−mean)/std) by more than
 the sigmoid approximation error.
+
+**SCOPE.** T=uncalibrated | S=uncalibrated | O=any_WEIRD_human | C=biomedical_frame (uses L4's `lift_mass = (35, 15)` distribution, which is WEIRD-adult population statistics — a specific cultural/demographic default. The survival-function SHAPE generalises to any distribution; the specific numbers do not.)
 
 **Status.** `active` (v2, after v1 was falsified in-place). Test:
 `test_l4_human.py::test_probability` (still pins symmetric

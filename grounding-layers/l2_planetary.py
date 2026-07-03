@@ -213,6 +213,27 @@ class ProbabilisticPlanetaryWorld(PlanetaryWorld):
     (extract_water, erode_soil, mine_mineral, emit_carbon) stays
     available.
 
+    SCOPE (see grounding-layers/SCOPE_TAXONOMY.md):
+      T = uncalibrated (step size caller-defined; aggregates over
+          plan horizon per LOG.md section 3)
+      S = planetary
+      O = earth_like_biosphere (water/soil/mineral/carbon pool
+          categories assume Earth biogeochemistry)
+      C = resource_extraction_frame (industrial-agricultural
+          accounting; carbon is Anthropocene-scientific framing)
+
+    Every specific numeric constant (water_reserve_initial=1e7 m³,
+    carbon_sink_capacity=2e6 t, heat_budget_capacity=1e5) is a
+    HUMAN/EARTH placeholder — the phenomenon claims are the
+    -(usage/stock)² shapes, the numbers are visualisation-scale.
+
+    An AI evaluating its own footprint might route claims through
+    this layer for the ENERGY dimension of compute (electricity →
+    heat budget) and for the MATERIALS dimension of hardware
+    manufacture (minerals). It would NOT route through this layer
+    for its own operation, since silicon substrate is not part of
+    the biosphere the constraint set was drawn from.
+
     Constraint set inherited from PlanetaryWorld:
       water_reserve_initial   = 1e7 m³
       water_recharge_rate     = 1000.0 m³/step
