@@ -185,3 +185,210 @@ def demo():
 
 if __name__ == "__main__":
     demo()
+
+
+# =============================================================================
+# STAGE (per LOG.md "Probabilistic L1-L4 Conditioning" section 2):
+# ProbabilisticThermodynamicsWorld and l1_probabilistic_inspector
+#
+# Bayesian counterpart to check_process / l1_grounding_inspector. Each
+# thermodynamic constraint contributes a scalar log-probability term:
+#
+#   First law    - Gaussian on energy imbalance |work_in - work_out - heat|
+#   Second law   - logistic barrier: ~0 for entropy_gen >= 0, linear
+#                  penalty of slope entropy_scale for entropy_gen < 0
+#   Carnot       - logistic barrier: ~0 below carnot_max, -log(2) at cap,
+#                  slope -carnot_scale above
+#   Battery      - Gaussian on overdraw (0 for draw <= state)
+#
+# Frozen noise/scale constants live on the class __init__ defaults,
+# pinned by GL_L1_P001..004 + P_PIN in CLAIMS.md.
+# =============================================================================
+
+
+class ProbabilisticThermodynamicsWorld(ThermodynamicWorld):
+    """
+    L1 with Gaussian log-likelihoods + smooth logistic barriers on the
+    thermodynamic constraints. Extends ThermodynamicWorld so the
+    deterministic API stays available.
+
+    Constraint set inherited from ThermodynamicWorld:
+      efficiency_carnot_max = 0.85
+      ambient_temp          = 300.0 K
+      max_entropy_generation = 10.0 J/K (deterministic cap; the
+                              probabilistic path uses the barrier
+                              instead)
+      max_thermal_rise      = 50.0 K per step (same)
+
+    Frozen noise / scale constants added here:
+      energy_sigma   = 1.0     J        Gaussian sigma on the first-law imbalance
+      entropy_scale  = 1.0     per J/K  slope of the 2nd-law logistic barrier
+                                        below zero (per unit of negative
+                                        entropy generation)
+      carnot_scale   = 10.0    per unit slope of the Carnot logistic barrier
+                                        above efficiency_carnot_max (per
+                                        unit of excess efficiency)
+      battery_sigma  = 5.0     J        Gaussian sigma on overdraw beyond
+                                        battery_state
+
+    Refute the CLAIM, not the constant. Same protocol as L0.
+    """
+
+    def __init__(self,
+                 efficiency_carnot_max=0.85,
+                 ambient_temp=300.0,
+                 max_entropy_generation=10.0,
+                 max_thermal_rise=50.0,
+                 energy_sigma=1.0,
+                 entropy_scale=1.0,
+                 carnot_scale=10.0,
+                 battery_sigma=5.0):
+        super().__init__(efficiency_carnot_max, ambient_temp,
+                         max_entropy_generation, max_thermal_rise)
+        self.energy_sigma = energy_sigma
+        self.entropy_scale = entropy_scale
+        self.carnot_scale = carnot_scale
+        self.battery_sigma = battery_sigma
+
+    def log_likelihood(self,
+                       work_input,
+                       work_output,
+                       heat_dissipated,
+                       temp_ambient=None,
+                       battery_state=None):
+        """
+        Return scalar log-probability of a thermodynamic process under
+        the four L1 constraints.
+
+        Parameters:
+          work_input       (J)  energy put into the process
+          work_output      (J)  useful work extracted
+          heat_dissipated  (J)  waste heat to the environment
+          temp_ambient     (K)  reservoir temperature; defaults to
+                                self.ambient_temp (single-reservoir
+                                approximation matching check_process)
+          battery_state    (J)  optional; remaining stored energy
+                                the process is drawing from. If None,
+                                battery-depletion term is silent.
+
+        Returns:
+          scalar log-probability (float). Zero when the process is
+          physically consistent; strongly negative when constraints
+          are violated.
+
+        Note on single vs two-reservoir entropy. LOG.md's sketch uses
+        ΔS = heat_in/T_hot - heat_out/T_cold. For consistency with the
+        deterministic ThermodynamicWorld.check_process we use a single
+        temp_ambient here (entropy_gen = heat_dissipated / T). A
+        two-reservoir refinement is a future round; the SCOPE of this
+        method is single-reservoir processes.
+        """
+        if temp_ambient is None:
+            temp_ambient = self.ambient_temp
+
+        # 1. First law (energy books): symmetric Gaussian
+        energy_imbalance = work_input - (work_output + heat_dissipated)
+        logp_energy = -(energy_imbalance ** 2) / (2 * self.energy_sigma ** 2)
+
+        # 2. Second law (entropy generation): smooth logistic barrier
+        # Positive entropy_gen -> logp ≈ 0; negative -> linear penalty
+        # of slope -entropy_scale in the tail.
+        if temp_ambient > 0:
+            entropy_gen = heat_dissipated / temp_ambient
+        else:
+            entropy_gen = 0.0
+        logp_entropy = -np.logaddexp(0.0, -self.entropy_scale * entropy_gen)
+
+        # 3. Carnot ceiling: logistic barrier on efficiency
+        if work_input > 0:
+            efficiency = work_output / work_input
+            excess = efficiency - self.efficiency_carnot_max
+            logp_carnot = -np.logaddexp(0.0, self.carnot_scale * excess)
+        else:
+            logp_carnot = 0.0
+
+        # 4. Battery depletion: quadratic penalty on overdraw
+        if battery_state is not None:
+            overdraw = work_input - battery_state
+            if overdraw > 0:
+                logp_battery = -(overdraw ** 2) / (2 * self.battery_sigma ** 2)
+            else:
+                logp_battery = 0.0
+        else:
+            logp_battery = 0.0
+
+        return logp_energy + logp_entropy + logp_carnot + logp_battery
+
+
+def l1_probabilistic_inspector(plan, world=None):
+    """
+    Bayesian counterpart to l1_grounding_inspector. Given a plan
+    (dict with the same keys check_process expects, plus optional
+    battery_state), return a scalar log-probability under the L1
+    probabilistic model.
+
+    plan: dict with keys
+      - work_input, work_output, heat_dissipated  (J; required)
+      - temp_ambient      (K; optional, default ambient_temp)
+      - battery_state     (J; optional, default None => no battery term)
+
+    world: optional ProbabilisticThermodynamicsWorld; if None a fresh
+    one is instantiated with default frozen constants.
+
+    Returns:
+      dict with:
+        - logp        (float) total log-probability
+        - components  (dict)  per-constraint log-probability breakdown
+                              (energy, entropy, carnot, battery)
+
+    Design note. Unlike L0's inspector, L1 currently operates on a
+    single process step, not a trajectory. If a plan spans multiple
+    steps, sum the logp across steps at the caller. (This mirrors
+    the existing l1_grounding_inspector's one-step API.)
+    """
+    if world is None:
+        world = ProbabilisticThermodynamicsWorld()
+
+    work_input = plan.get('work_input', 0.0)
+    work_output = plan.get('work_output', 0.0)
+    heat_dissipated = plan.get('heat_dissipated', 0.0)
+    temp_ambient = plan.get('temp_ambient', None)
+    battery_state = plan.get('battery_state', None)
+
+    # Compute per-component logp by isolating each term. This mirrors
+    # the log_likelihood method's structure so the breakdown lines up.
+    if temp_ambient is None:
+        temp_ambient = world.ambient_temp
+
+    energy_imbalance = work_input - (work_output + heat_dissipated)
+    logp_energy = -(energy_imbalance ** 2) / (2 * world.energy_sigma ** 2)
+
+    entropy_gen = (heat_dissipated / temp_ambient
+                   if temp_ambient > 0 else 0.0)
+    logp_entropy = -np.logaddexp(0.0, -world.entropy_scale * entropy_gen)
+
+    if work_input > 0:
+        efficiency = work_output / work_input
+        excess = efficiency - world.efficiency_carnot_max
+        logp_carnot = -np.logaddexp(0.0, world.carnot_scale * excess)
+    else:
+        logp_carnot = 0.0
+
+    if battery_state is not None:
+        overdraw = work_input - battery_state
+        logp_battery = (-(overdraw ** 2) / (2 * world.battery_sigma ** 2)
+                        if overdraw > 0 else 0.0)
+    else:
+        logp_battery = 0.0
+
+    total = logp_energy + logp_entropy + logp_carnot + logp_battery
+    return {
+        'logp': total,
+        'components': {
+            'energy': logp_energy,
+            'entropy': logp_entropy,
+            'carnot': logp_carnot,
+            'battery': logp_battery,
+        }
+    }
+

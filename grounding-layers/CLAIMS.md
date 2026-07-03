@@ -381,6 +381,158 @@ the position and energy terms don't fully catch them.
 `test_momentum_consistent_step_no_penalty`,
 `test_momentum_creation_from_nothing_flagged`.
 
+### GL_L1_P001 — first law as Gaussian on energy imbalance  `[PHENOMENON]`
+
+**Statement.** `ProbabilisticThermodynamicsWorld.log_likelihood`
+contributes `logp_energy = -(work_input - work_output -
+heat_dissipated)² / (2 · energy_sigma²)` with frozen
+`energy_sigma = 1.0 J`. Reference values:
+
+  - 0 J imbalance:  `logp_energy = 0`
+  - 1 J imbalance:  `logp_energy = -0.5`
+  - 10 J imbalance: `logp_energy = -50`
+  - Perpetual-motion example (20 J from nowhere): `logp_energy = -200`
+
+**Why it matters.** The first-law term catches any process where
+the books don't close — the primary hallucination catcher for
+"free energy" plans.
+
+**Falsifier.** A finite `(work_input, work_output, heat_dissipated)`
+where `logp_energy` disagrees with the closed-form Gaussian at
+`energy_sigma = 1.0 J`.
+
+**Status.** `active`. Tests:
+`test_energy_zero_imbalance_no_penalty`,
+`test_energy_1J_imbalance_gives_neg_half`,
+`test_energy_10J_imbalance_gives_neg_50`,
+`test_perpetual_motion_20J_gives_neg_200`.
+
+### GL_L1_P002 — second law as smooth logistic barrier  `[PHENOMENON]`
+
+**Statement.** The second-law term contributes
+`logp_entropy = -logaddexp(0, -entropy_scale · entropy_gen)` with
+frozen `entropy_scale = 1.0` per unit of entropy generation
+(J/K). Here `entropy_gen = heat_dissipated / temp_ambient` in
+the single-reservoir approximation matching `check_process`.
+Reference values:
+
+  - `entropy_gen ≫ 0`:  `logp_entropy → 0` (no penalty — 2nd law
+                        happy with positive entropy)
+  - `entropy_gen = 0`:  `logp_entropy = -log(2) ≈ -0.693`
+  - `entropy_gen = -1`: `logp_entropy = -logaddexp(0, 1) ≈ -1.313`
+  - `entropy_gen = -5`: `logp_entropy ≈ -5.007`
+
+Asymptotic slope in the tail (`entropy_gen ≪ 0`) is
+`+entropy_scale = 1.0` — the barrier grows linearly with the
+size of the second-law violation.
+
+**Why it matters.** Positive entropy is allowed by the 2nd law
+without penalty; negative entropy generation is a violation the
+inspector must catch. The logistic form matches L0's speed
+barrier's shape and shares its numerical stability under
+logaddexp.
+
+**Falsifier.** A finite `heat_dissipated` at fixed
+`temp_ambient > 0` where `logp_entropy` disagrees with
+`-logaddexp(0, -entropy_scale · heat_dissipated / temp_ambient)`.
+
+**Scope note.** Single-reservoir. Two-reservoir refinement
+(ΔS = heat_in/T_hot - heat_out/T_cold, per LOG.md's section 2
+sketch) is a future round.
+
+**Status.** `active`. Tests:
+`test_entropy_positive_no_penalty`,
+`test_entropy_zero_gives_neg_log2`,
+`test_entropy_neg1_shape`,
+`test_entropy_barrier_linear_in_tail`.
+
+### GL_L1_P003 — Carnot ceiling as smooth logistic barrier  `[PHENOMENON]`
+
+**Statement.** The Carnot term contributes
+`logp_carnot = -logaddexp(0, carnot_scale · (efficiency -
+efficiency_carnot_max))` where `efficiency = work_output /
+work_input` (only computed when `work_input > 0`; else 0).
+Frozen `carnot_scale = 10.0`, `efficiency_carnot_max = 0.85`.
+Reference values:
+
+  - `efficiency ≪ 0.85`:                `logp_carnot → 0`
+  - `efficiency = 0.85` (at cap):        `-log(2) ≈ -0.693`
+  - `efficiency = 0.95` (excess 0.10):   `≈ -1.313`
+  - `efficiency = 1.85` (excess 1.00):   `≈ -10.0`
+  - `efficiency = 2.85` (excess 2.00):   `≈ -20.0`
+
+Asymptotic slope above cap: `-carnot_scale = -10` per unit of
+excess efficiency.
+
+**Why it matters.** Carnot's ceiling is the classical
+thermodynamic limit on heat-engine efficiency; the AI-proposal
+audit path needs a smooth penalty (not a hard reject) so that
+proposals near the cap don't have a discontinuity.
+
+**Falsifier.** A finite `(work_input, work_output)` where
+`logp_carnot` disagrees with the closed-form
+`-logaddexp(0, k·(η - η_max))` for the frozen constants.
+
+**Status.** `active`. Tests:
+`test_carnot_far_below_cap_no_penalty`,
+`test_carnot_at_cap_gives_neg_log2`,
+`test_carnot_excess_slope_ten`,
+`test_carnot_no_penalty_when_work_input_zero`.
+
+### GL_L1_P004 — battery depletion as quadratic penalty  `[PHENOMENON]`
+
+**Statement.** When `battery_state` is provided, the battery
+term contributes `logp_battery = -(work_input - battery_state)² /
+(2 · battery_sigma²)` if `work_input > battery_state`, else 0.
+Frozen `battery_sigma = 5.0 J`. Reference values:
+
+  - `work_input ≤ battery_state`:     `logp_battery = 0`
+  - overdraw `= 5 J`:  `logp_battery = -0.5`
+  - overdraw `= 10 J`: `logp_battery = -2.0`
+  - overdraw `= 50 J`: `logp_battery = -50.0`
+
+If `battery_state is None`, this term is silent (a plan without a
+declared battery isn't penalised, matching how the deterministic
+`check_process` handles optional inputs).
+
+**Why it matters.** A plan can be locally thermodynamically clean
+(books close, entropy fine, efficiency under Carnot) yet still
+draw more energy than the actual reservoir contains. The
+quadratic penalty scales sharply so a small overdraw is a small
+penalty and a large overdraw is decisively rejected.
+
+**Falsifier.** A finite `(work_input, battery_state)` where the
+returned battery term disagrees with the closed-form quadratic.
+
+**Status.** `active`. Tests:
+`test_battery_underdraw_no_penalty`,
+`test_battery_none_silent`,
+`test_battery_overdraw_quadratic_scaling`.
+
+### GL_L1_P_PIN — six canonical processes are pinned  `[INSTRUMENT]`
+
+**Statement.** With the shipped constants, `l1_probabilistic_inspector`
+produces the following total-logp values on six canonical process
+specs. Any silent retuning of the noise/scale constants surfaces
+as a delta on these numbers.
+
+| process                                            | total logp    |
+|----------------------------------------------------|---------------|
+| Valid heat engine (100/60/40)                       | ≈ -0.71       |
+| Perpetual motion (100/120/0)                        | ≈ -204        |
+| Over-Carnot 90% (100/90/10)                         | ≈ -1.65       |
+| Reverse heat flow (100/50/-50)                      | ≈ -5001       |
+| Battery overdraw (100/60/40 with battery_state=30)  | ≈ -98.7       |
+| Battery in-bounds (20/10/10 with battery_state=50)  | ≈ -0.71       |
+
+**Falsifier.** Any of the six values disagrees with the pinned
+number by more than 0.1 logp under the shipped constants.
+
+**Status.** `active`. Tests: full class
+`TestL1ProbabilisticInspectorDemoPin`.
+
+---
+
 ### GL_L0_P_PIN — probabilistic inspector's trace on the fixed hallucination  `[INSTRUMENT]`
 
 **Statement.** With `np.random.seed(0)` and the shipped constants,
