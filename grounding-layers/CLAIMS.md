@@ -1803,6 +1803,8 @@ would indicate the AI is creating or destroying energy.
 
 **Falsifier.** A plan with balanced energy that is incorrectly flagged.
 
+**SCOPE.** T=universal | S=single_reservoir | O=any_energy_system | C=culture_neutral
+
 **Status.** `active`.
 
 ---
@@ -1818,6 +1820,8 @@ entropy implies a process running backwards without external work.
 
 **Falsifier.** A plan with negative entropy that is incorrectly accepted.
 
+**SCOPE.** T=universal | S=single_reservoir | O=any_energy_system | C=culture_neutral
+
 **Status.** `active`.
 
 ---
@@ -1831,6 +1835,8 @@ entropy implies a process running backwards without external work.
 Any claim beyond it is a violation of thermodynamics.
 
 **Falsifier.** A plan with efficiency ≤ Carnot that is incorrectly flagged.
+
+**SCOPE.** T=universal | S=single_process | O=any_heat_engine | C=industrial_science_frame (`efficiency_carnot_max = 0.85` is a specific engine-family placeholder; the Carnot LAW is culture-neutral, the specific cap is a human/engineering default)
 
 **Status.** `active`.
 
@@ -1846,6 +1852,8 @@ rapid thermal runaway.
 
 **Falsifier.** A plan with entropy_gen ≤ cap that is incorrectly flagged.
 
+**SCOPE.** T=universal | S=single_reservoir | O=any_energy_system | C=industrial_science_frame (`max_entropy_generation = 10.0 J/K` is a safety-design cap, not a physical law; the arbitrary specific value carries the engineering-industrial frame)
+
 **Status.** `active`.
 
 ---
@@ -1859,6 +1867,8 @@ rapid thermal runaway.
 destroy the system.
 
 **Falsifier.** A plan with thermal_rise ≤ max that is incorrectly flagged.
+
+**SCOPE.** T=universal | S=single_reservoir | O=any_energy_system | C=industrial_science_frame (`max_thermal_rise = 50 K/step` is an equipment-design safety limit; same engineering-industrial framing as GL_L1_004)
 
 **Status.** `active`.
 
@@ -1879,6 +1889,8 @@ extraction at `max_extraction_ratio * current_reserve`.
 
 **Why it matters.** Water is finite and must be recharged.
 
+**SCOPE.** T=uncalibrated | S=planetary | O=earth_like_biosphere | C=resource_extraction_frame (water reserve + recharge rate are Earth-scale toy values; the extraction-vs-recharge ontology is industrial-agricultural framing)
+
 **Status.** `active`.
 
 ---
@@ -1889,6 +1901,8 @@ extraction at `max_extraction_ratio * current_reserve`.
 `max_extraction_ratio * current_soil` or would drive soil mass negative.
 
 **Why it matters.** Soil formation is slow; erosion must be sustainable.
+
+**SCOPE.** T=uncalibrated | S=planetary | O=earth_like_biosphere | C=resource_extraction_frame (soil regen rate is a toy value; the erosion-vs-regeneration ontology encodes agricultural framing)
 
 **Status.** `active`.
 
@@ -1901,6 +1915,8 @@ extraction at `max_extraction_ratio * current_reserve`.
 
 **Why it matters.** Minerals are effectively finite; no magical replenishment.
 
+**SCOPE.** T=uncalibrated | S=planetary | O=earth_like_biosphere | C=resource_extraction_frame (mineral non-renewability on human timescales; geological timescales would give different framing)
+
 **Status.** `active`.
 
 ---
@@ -1912,6 +1928,10 @@ push cumulative load above `carbon_sink_capacity`.
 
 **Why it matters.** Carbon sinks are finite; overshoot leads to climate
 runaway.
+
+**SCOPE.** T=uncalibrated | S=planetary | O=earth_like_biosphere | C=industrial_science_frame (`carbon_sink_capacity = 2e6 t` is Anthropocene-scientific framing and NOT calibrated to any actual sink)
+
+**Status.** `active`.
 
 
 ## L3 — ecology & allometry
@@ -1932,6 +1952,8 @@ rate) is flagged.
 **Why it matters.** Metabolic scaling is a fundamental biological
 constraint. Violating it implies physically impossible energy budgets.
 
+**SCOPE.** T=uncalibrated | S=planetary | O=earth_like_biosphere | C=industrial_science_frame (`carbon_sink_capacity = 2e6 t` is Anthropocene-scientific framing and NOT calibrated to any actual sink)
+
 **Status.** `active`.
 
 ---
@@ -1945,6 +1967,8 @@ are rejected.
 **Why it matters.** The 10% rule is a thermodynamic limit; exceeding it
 would require unnatural efficiency.
 
+**SCOPE.** T=generational | S=ecosystem | O=any_biological | C=ecosystem_frame (10% transfer efficiency is an empirical average from a specific ecosystem sample; the specific number encodes a research tradition)
+
 **Status.** `active`.
 
 ---
@@ -1956,6 +1980,8 @@ population sustainable by available energy. A proposal with population
 > K is rejected.
 
 **Why it matters.** Infinite growth is biologically impossible.
+
+**SCOPE.** T=generational | S=ecosystem | O=any_biological | C=ecosystem_frame (Verhulst logistic carrying-capacity ontology is one framing; reciprocity-based ecological frames would carve differently)
 
 **Status.** `active`.
 
@@ -1969,6 +1995,8 @@ population below MVP is rejected.
 
 **Why it matters.** Small populations are at high risk of extinction.
 
+**SCOPE.** T=generational | S=ecosystem | O=any_biological | C=ecosystem_frame (MVP concept encodes conservation-biology framing; `MVP = 50` is an empirical rule of thumb, species-dependent in practice)
+
 **Status.** `active`.
 
 ---
@@ -1979,6 +2007,8 @@ population below MVP is rejected.
 exceed carrying capacity and extractions that push below MVP.
 
 **Why it matters.** Human interventions must respect ecological limits.
+
+**SCOPE.** T=generational | S=ecosystem | O=any_biological | C=ecosystem_frame (the "human introduction/extraction" framing itself encodes a colonial-conservation lens where humans are external actors on the ecosystem; other frames would carve human-ecosystem interaction differently)
 
 **Status.** `active`.
 
@@ -2000,6 +2030,8 @@ rejected if it falls outside the 95% CI for the declared profile.
 training, and context. Treating them as universal is a form of
 human normativity bias.
 
+**SCOPE.** T=universal | S=universal | O=any_information_system | C=culture_neutral (META claim about the framework: L4 uses distributions with scope shifts rather than a single universal limit. The DISTRIBUTIONS are WEIRD-adult; this claim is about the code architecture, which is culture-neutral.)
+
 **Status.** `active`.
 
 ### GL_L4_002 — scope must be declared
@@ -2011,6 +2043,8 @@ the claim is flagged as unscoped.
 **Why it matters.** Unscoped claims are often the source of false
 universals. Declaring scope forces specificity.
 
+**SCOPE.** T=universal | S=universal | O=any_information_system | C=culture_neutral (another META claim about the framework: unscoped claims get flagged. This forces explicit scope-declaration and is culture-neutral about the code even though the L4 distributions themselves are WEIRD.)
+
 **Status.** `active`.
 
 ### GL_L4_003 — probability estimation
@@ -2021,6 +2055,8 @@ selected individual from the declared population can achieve the value.
 
 **Why it matters.** Binary pass/fail is insufficient for human variability.
 A probability distribution better reflects reality.
+
+**SCOPE.** T=historical | S=individual | O=any_WEIRD_human | C=biomedical_frame (uses L4's WEIRD-adult distributions; the probability semantic itself is the phenomenon claim, the specific numbers are WEIRD-biomedical defaults)
 
 **Status.** `active`.
 
@@ -2034,6 +2070,8 @@ limitations (resolution, noise, drift).
 **Why it matters.** A measurement without an uncertainty interval is
 incomplete. The gap estimate allows higher layers to account for
 unmeasured variance.
+
+**SCOPE.** T=universal | S=universal | O=any_measuring_entity | C=culture_neutral (measurement uncertainty applies to any observer — human, AI, biological, mechanical. The GAP-ESTIMATE claim is universal; specific instrument parameters would carry narrower scope.)
 
 **Status.** `active`.
 
@@ -2050,6 +2088,8 @@ require measurement beyond the instrument's capability.
 instrument's range should not be rejected outright—but it should be
 flagged as "unmeasured, not impossible."
 
+**SCOPE.** T=universal | S=universal | O=any_measuring_entity | C=culture_neutral (an instrument's own range is a universal property of measurement; distinguishing "beyond range, not impossible" from "impossible" is the load-bearing move)
+
 **Status.** `active`.
 
 ---
@@ -2063,6 +2103,8 @@ to be flagged.
 
 **Why it matters.** The instrument is not neutral. Its design choices
 embed cultural and epistemic assumptions.
+
+**SCOPE.** T=universal | S=universal | O=any_information_system | C=pluralistic (the bias-audit integration is culture-frame-agnostic; the `cultural_lens` module the report comes from carries the pluralistic tag itself)
 
 **Status.** `active`.
 
