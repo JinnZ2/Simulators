@@ -33,6 +33,7 @@ as a co-equal substrate. The idea being explored:
 |---|---|
 | [`field_compass.py`](field_compass.py) | ALIGNER (not translator). Takes a human sensorimotor `Read` and an AI cascade `Read` of the same system, points at their delta, names the lesson the AI has to learn (topology, early_broadcast, amplification, scalar_drift). |
 | [`holistic_field_state.py`](holistic_field_state.py) | Lε ENTRY INSTRUMENT. Multi-channel operator-as-instrument read with confidence gating (`Trust.HIGH` / `BASELINE` / `GATED`), coupling graph, stress-field computation, shift-margin projection, verdict + refutation. |
+| [`calibration_channels.py`](calibration_channels.py) | FLAT REGISTRY / BASIS SET. Eight ways an AI can calibrate against human sensing (psychophysics/SDT, Gibson ecological perception, Klein RPD, inverse-RL/behavioral cloning, biosignal instrumentation, cross-modal correspondence, Bayesian fusion as null-hypothesis foil, and the coupled harmonic read). Places the sparse-narrative operator read among documented peers — no privileged channel, no default. Turns N=1 into one column of a convergence table. |
 
 ## Status
 

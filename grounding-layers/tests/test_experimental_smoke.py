@@ -35,6 +35,7 @@ def _load(module_name, filename):
 
 _fc = _load('_exp_field_compass', 'field_compass.py')
 _hfs = _load('_exp_holistic_field_state', 'holistic_field_state.py')
+_cc = _load('_exp_calibration_channels', 'calibration_channels.py')
 
 Compass = _fc.Compass
 Frame = _fc.Frame
@@ -47,6 +48,14 @@ Edge = _hfs.Edge
 FieldState = _hfs.FieldState
 Trust = _hfs.Trust
 compare = _hfs.compare
+
+CC_Channel = _cc.Channel
+CC_Density = _cc.Density
+CC_Relation = _cc.Relation
+CC_REGISTRY = _cc.REGISTRY
+cc_by_relation = _cc.by_relation
+cc_entry_map = _cc.entry_map
+cc_convergence_table = _cc.convergence_table
 
 
 # =============================================================================
@@ -279,6 +288,106 @@ class TestCompareRefutation(unittest.TestCase):
         self.assertFalse(r['match'])
 
 
+# =============================================================================
+# calibration_channels smoke tests
+# =============================================================================
+
+class TestCalibrationRegistry(unittest.TestCase):
+    """Shape checks on the flat channel registry."""
+
+    def test_registry_has_eight_channels(self):
+        self.assertEqual(len(CC_REGISTRY), 8)
+
+    def test_registry_entries_are_channel_instances(self):
+        for c in CC_REGISTRY:
+            self.assertIsInstance(c, CC_Channel)
+
+    def test_channel_has_expected_fields(self):
+        c = CC_REGISTRY[0]
+        for field_name in ('name', 'couples', 'entry', 'density',
+                           'relation', 'gives'):
+            self.assertTrue(hasattr(c, field_name))
+
+    def test_channel_is_frozen(self):
+        c = CC_REGISTRY[0]
+        with self.assertRaises(Exception):
+            c.name = 'mutated'
+
+    def test_channel_names_are_unique(self):
+        names = [c.name for c in CC_REGISTRY]
+        self.assertEqual(len(names), len(set(names)))
+
+
+class TestCalibrationEnums(unittest.TestCase):
+    def test_density_has_three_values(self):
+        self.assertEqual(len(list(CC_Density)), 3)
+        for name in ('DENSE', 'MEDIUM', 'SPARSE'):
+            self.assertTrue(hasattr(CC_Density, name))
+
+    def test_relation_has_five_values(self):
+        self.assertEqual(len(list(CC_Relation)), 5)
+        for name in ('FORMALIZES', 'METHOD', 'CROSS_CHECK',
+                     'TRANSLATES', 'FOIL'):
+            self.assertTrue(hasattr(CC_Relation, name))
+
+
+class TestCalibrationViews(unittest.TestCase):
+    def test_by_relation_filters(self):
+        formalizes = cc_by_relation(CC_Relation.FORMALIZES)
+        self.assertTrue(len(formalizes) >= 1)
+        for c in formalizes:
+            self.assertIs(c.relation, CC_Relation.FORMALIZES)
+
+    def test_by_relation_returns_tuple(self):
+        result = cc_by_relation(CC_Relation.FOIL)
+        self.assertIsInstance(result, tuple)
+
+    def test_entry_map_is_dict_of_lists(self):
+        m = cc_entry_map()
+        self.assertIsInstance(m, dict)
+        for entry, names in m.items():
+            self.assertIsInstance(entry, str)
+            self.assertIsInstance(names, list)
+            self.assertTrue(len(names) >= 1)
+
+    def test_entry_map_covers_every_channel(self):
+        m = cc_entry_map()
+        flat = [n for names in m.values() for n in names]
+        self.assertEqual(len(flat), len(CC_REGISTRY))
+
+    def test_convergence_table_shape(self):
+        t = cc_convergence_table()
+        self.assertEqual(len(t), len(CC_REGISTRY))
+        for row in t:
+            self.assertEqual(len(row), 4)
+
+
+class TestHarmonicReadIsInRegistry(unittest.TestCase):
+    """The whole point: harmonic read sits among documented peers."""
+
+    def _find(self, name):
+        for c in CC_REGISTRY:
+            if c.name == name:
+                return c
+        return None
+
+    def test_coupled_harmonic_read_present(self):
+        self.assertIsNotNone(self._find('coupled_harmonic_read'))
+
+    def test_coupled_harmonic_read_is_sparse(self):
+        c = self._find('coupled_harmonic_read')
+        self.assertIs(c.density, CC_Density.SPARSE)
+
+    def test_coupled_harmonic_read_formalizes(self):
+        c = self._find('coupled_harmonic_read')
+        self.assertIs(c.relation, CC_Relation.FORMALIZES)
+
+    def test_bayesian_fusion_is_the_foil(self):
+        c = self._find('bayesian_sensor_fusion')
+        self.assertIsNotNone(c)
+        self.assertIs(c.relation, CC_Relation.FOIL)
+
+
 class TestDemosRun(unittest.TestCase):
     """Each experimental instrument's __main__ demo should run cleanly."""
 
@@ -291,6 +400,12 @@ class TestDemosRun(unittest.TestCase):
         import runpy
         runpy.run_path(
             os.path.join(_EXP_DIR, 'holistic_field_state.py'),
+            run_name='__main__')
+
+    def test_calibration_channels_demo_runs(self):
+        import runpy
+        runpy.run_path(
+            os.path.join(_EXP_DIR, 'calibration_channels.py'),
             run_name='__main__')
 
 

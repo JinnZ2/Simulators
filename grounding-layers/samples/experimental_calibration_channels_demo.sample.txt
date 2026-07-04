@@ -1,0 +1,26 @@
+CONVERGENCE TABLE
+  psychophysics_SDT                DENSE   FORMALIZES   -> L_epsilon
+  ecological_perception            DENSE   FORMALIZES   -> L4 -> L_epsilon seam
+  recognition_primed_decision      DENSE   FORMALIZES   -> observer_state (human node)
+  inverse_rl_behavioral_cloning    DENSE   METHOD       -> ai_observer_state (AI node)
+  biosignal_instrumentation        DENSE   CROSS_CHECK  -> L_epsilon
+  cross_modal_correspondence       MEDIUM  TRANSLATES   -> harmonic_signature translation
+  bayesian_sensor_fusion           DENSE   FOIL         -> field_compass (null hypothesis)
+  coupled_harmonic_read            SPARSE  FORMALIZES   -> holistic_field_state -> field_compass
+
+CASCADE ENTRY MAP
+  L_epsilon
+      psychophysics_SDT
+      biosignal_instrumentation
+  L4 -> L_epsilon seam
+      ecological_perception
+  observer_state (human node)
+      recognition_primed_decision
+  ai_observer_state (AI node)
+      inverse_rl_behavioral_cloning
+  harmonic_signature translation
+      cross_modal_correspondence
+  field_compass (null hypothesis)
+      bayesian_sensor_fusion
+  holistic_field_state -> field_compass
+      coupled_harmonic_read
