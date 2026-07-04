@@ -1,0 +1,11 @@
+TRUCK compass verdict:
+  action: log_delta -> update_claim
+  learned: coupling_topology_wrong: model located stress at steering_feel, system broadcasts it at tie_rod_right
+  rule: update the CLAIM. never retune the human read.
+  ready: True
+  frame: truck_front_end
+  driver: groove_65mph_speed_dependent_pitch
+  location: {'human': 'tie_rod_right', 'ai': 'steering_feel', 'agree': False}
+  d_peak_load: 0.12
+  d_shift_margin: -0.17
+  match: False
