@@ -1,0 +1,9 @@
+after pitch        : {'fire': False, 'state': 'UNDERDETERMINED', 'action': 'recruit more: N=1 < N_crit=3', 'candidates': ('L_bearing', 'L_brake', 'L_tierod', 'R_bearing', 'R_brake', 'R_tierod', 'groove_resonance'), 'confidence': 0.0, 'n_independent': 1}
+after speed        : {'fire': False, 'state': 'UNDERDETERMINED', 'action': 'recruit more: N=2 < N_crit=3', 'candidates': ('L_bearing', 'L_brake', 'L_tierod', 'R_bearing', 'R_brake', 'R_tierod'), 'confidence': 0.167, 'n_independent': 2}
+after surface      : {'fire': False, 'state': 'UNDERDETERMINED', 'action': 'recruit more: N=2 < N_crit=3', 'candidates': ('L_bearing', 'L_brake', 'L_tierod', 'R_bearing', 'R_brake', 'R_tierod'), 'confidence': 0.167, 'n_independent': 2}
+after side         : {'fire': True, 'state': 'PARTIAL', 'candidates': ('R_bearing', 'R_brake', 'R_tierod'), 'confidence': 0.667, 'n_independent': 3, 'flag': 'UNDERDETERMINED: intersection is a region, not a point'}
+after steering     : {'fire': True, 'state': 'DETERMINED', 'verdict': 'R_tierod', 'confidence': 1.0, 'n_independent': 4, 'flag': None}
+after damping      : {'fire': True, 'state': 'DETERMINED', 'verdict': 'R_tierod', 'confidence': 1.0, 'n_independent': 4, 'flag': None}
+
+FOIL (2 chan)      : {'fire': False, 'state': 'UNDERDETERMINED', 'action': 'recruit more: N=2 < N_crit=3', 'candidates': ('R_bearing', 'R_brake', 'R_tierod', 'groove_resonance'), 'confidence': 0.5, 'n_independent': 2}
+  -> region, not point. locates SYMPTOM zone, cannot fire source.

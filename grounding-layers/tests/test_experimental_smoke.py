@@ -36,6 +36,7 @@ def _load(module_name, filename):
 _fc = _load('_exp_field_compass', 'field_compass.py')
 _hfs = _load('_exp_holistic_field_state', 'holistic_field_state.py')
 _cc = _load('_exp_calibration_channels', 'calibration_channels.py')
+_dg = _load('_exp_determinacy_gate', 'determinacy_gate.py')
 
 Compass = _fc.Compass
 Frame = _fc.Frame
@@ -56,6 +57,9 @@ CC_REGISTRY = _cc.REGISTRY
 cc_by_relation = _cc.by_relation
 cc_entry_map = _cc.entry_map
 cc_convergence_table = _cc.convergence_table
+
+Constraint = _dg.Constraint
+DeterminacyGate = _dg.DeterminacyGate
 
 
 # =============================================================================
@@ -388,6 +392,154 @@ class TestHarmonicReadIsInRegistry(unittest.TestCase):
         self.assertIs(c.relation, CC_Relation.FOIL)
 
 
+# =============================================================================
+# determinacy_gate smoke tests
+# =============================================================================
+
+class TestConstraint(unittest.TestCase):
+    def test_informative_over_true_when_shrinks(self):
+        c = Constraint('c', permits=frozenset({'a', 'b'}))
+        self.assertTrue(c.informative_over(frozenset({'a', 'b', 'c'})))
+
+    def test_informative_over_false_when_superset(self):
+        c = Constraint('c', permits=frozenset({'a', 'b', 'c'}))
+        self.assertFalse(c.informative_over(frozenset({'a', 'b'})))
+
+    def test_informative_over_false_when_empty_current(self):
+        c = Constraint('c', permits=frozenset({'a'}))
+        self.assertFalse(c.informative_over(frozenset()))
+
+
+class TestDeterminacyGateBasics(unittest.TestCase):
+    def _S(self):
+        return frozenset({'a', 'b', 'c', 'd'})
+
+    def test_empty_gate_intersection_equals_hypotheses(self):
+        g = DeterminacyGate(self._S())
+        self.assertEqual(g.intersection(), self._S())
+
+    def test_recruit_returns_self_for_chaining(self):
+        g = DeterminacyGate(self._S())
+        r = g.recruit(Constraint('c', permits=self._S()))
+        self.assertIs(r, g)
+
+    def test_intersection_shrinks_with_each_recruit(self):
+        g = DeterminacyGate(self._S())
+        g.recruit(Constraint('c1', permits=frozenset({'a', 'b', 'c'})))
+        g.recruit(Constraint('c2', permits=frozenset({'a', 'b'})))
+        self.assertEqual(g.intersection(), frozenset({'a', 'b'}))
+
+
+class TestDeterminacy(unittest.TestCase):
+    def _S(self):
+        return frozenset({'a', 'b', 'c', 'd'})
+
+    def test_determinacy_one_when_point(self):
+        g = DeterminacyGate(self._S())
+        g.recruit(Constraint('c', permits=frozenset({'a'})))
+        self.assertEqual(g.determinacy(), 1.0)
+
+    def test_determinacy_zero_when_nothing_pinned(self):
+        g = DeterminacyGate(self._S())
+        self.assertEqual(g.determinacy(), 0.0)
+
+    def test_determinacy_negative_on_contradiction(self):
+        g = DeterminacyGate(self._S())
+        g.recruit(Constraint('c1', permits=frozenset({'a'})))
+        g.recruit(Constraint('c2', permits=frozenset({'b'})))
+        self.assertEqual(g.determinacy(), -1.0)
+
+    def test_determinacy_intermediate(self):
+        # |S|=4, |inter|=2 -> (4-2)/(4-1) = 0.667
+        g = DeterminacyGate(self._S())
+        g.recruit(Constraint('c', permits=frozenset({'a', 'b'})))
+        self.assertAlmostEqual(g.determinacy(), 0.667, places=3)
+
+
+class TestNIndependent(unittest.TestCase):
+    def _S(self):
+        return frozenset({'a', 'b', 'c', 'd'})
+
+    def test_redundant_channel_not_counted(self):
+        g = DeterminacyGate(self._S())
+        g.recruit(Constraint('c1', permits=frozenset({'a', 'b'})))
+        # c2 permits a superset of the current intersection -> uninformative
+        g.recruit(Constraint('c2', permits=frozenset({'a', 'b', 'c'})))
+        self.assertEqual(g.n_independent(), 1)
+
+    def test_independent_of_group_dedup(self):
+        g = DeterminacyGate(self._S())
+        g.recruit(Constraint('c1', permits=frozenset({'a', 'b', 'c'})))
+        # c2 declares it shares info with c1 -> skipped
+        g.recruit(Constraint('c2', permits=frozenset({'a', 'b'}),
+                             independent_of=frozenset({'c1'})))
+        self.assertEqual(g.n_independent(), 1)
+
+    def test_multiple_informative_counted(self):
+        g = DeterminacyGate(self._S())
+        g.recruit(Constraint('c1', permits=frozenset({'a', 'b', 'c'})))
+        g.recruit(Constraint('c2', permits=frozenset({'a', 'b'})))
+        g.recruit(Constraint('c3', permits=frozenset({'a'})))
+        self.assertEqual(g.n_independent(), 3)
+
+
+class TestVerdict(unittest.TestCase):
+    def _S(self):
+        return frozenset({'a', 'b', 'c', 'd'})
+
+    def test_determined_when_single_point(self):
+        g = DeterminacyGate(self._S())
+        g.recruit(Constraint('c1', permits=frozenset({'a', 'b', 'c'})))
+        g.recruit(Constraint('c2', permits=frozenset({'a', 'b'})))
+        g.recruit(Constraint('c3', permits=frozenset({'a'})))
+        v = g.verdict()
+        self.assertTrue(v['fire'])
+        self.assertEqual(v['state'], 'DETERMINED')
+        self.assertEqual(v['verdict'], 'a')
+        self.assertEqual(v['confidence'], 1.0)
+
+    def test_underdetermined_when_low_n(self):
+        g = DeterminacyGate(self._S())
+        g.recruit(Constraint('c1', permits=frozenset({'a', 'b', 'c'})))
+        v = g.verdict(n_crit=3)
+        self.assertFalse(v['fire'])
+        self.assertEqual(v['state'], 'UNDERDETERMINED')
+        self.assertIn('candidates', v)
+
+    def test_contradiction_state(self):
+        g = DeterminacyGate(self._S())
+        g.recruit(Constraint('c1', permits=frozenset({'a'})))
+        g.recruit(Constraint('c2', permits=frozenset({'b'})))
+        v = g.verdict()
+        self.assertFalse(v['fire'])
+        self.assertEqual(v['state'], 'CONTRADICTION')
+        self.assertEqual(v['determinacy'], -1.0)
+
+    def test_partial_when_exhausted_but_region(self):
+        # Only 1 recruited channel, but exhausted=True.
+        g = DeterminacyGate(self._S())
+        g.recruit(Constraint('c1', permits=frozenset({'a', 'b'})))
+        v = g.verdict(n_crit=3, exhausted=True)
+        self.assertTrue(v['fire'])
+        self.assertEqual(v['state'], 'PARTIAL')
+        self.assertIn('flag', v)
+        self.assertIn('UNDERDETERMINED', v['flag'])
+
+    def test_partial_when_n_met_but_still_region(self):
+        # Three informative channels each shrinking the intersection,
+        # but joint intersection still holds two candidates.
+        S = frozenset({'a', 'b', 'c', 'd', 'e'})
+        g = DeterminacyGate(S)
+        g.recruit(Constraint('c1', permits=frozenset({'a', 'b', 'c', 'd'})))
+        g.recruit(Constraint('c2', permits=frozenset({'a', 'b', 'c', 'e'})))
+        g.recruit(Constraint('c3', permits=frozenset({'a', 'b', 'd', 'e'})))
+        v = g.verdict(n_crit=3)
+        self.assertEqual(v['n_independent'], 3)
+        self.assertEqual(g.intersection(), frozenset({'a', 'b'}))
+        self.assertTrue(v['fire'])
+        self.assertEqual(v['state'], 'PARTIAL')
+
+
 class TestDemosRun(unittest.TestCase):
     """Each experimental instrument's __main__ demo should run cleanly."""
 
@@ -406,6 +558,12 @@ class TestDemosRun(unittest.TestCase):
         import runpy
         runpy.run_path(
             os.path.join(_EXP_DIR, 'calibration_channels.py'),
+            run_name='__main__')
+
+    def test_determinacy_gate_demo_runs(self):
+        import runpy
+        runpy.run_path(
+            os.path.join(_EXP_DIR, 'determinacy_gate.py'),
             run_name='__main__')
 
 
