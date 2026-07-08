@@ -1,10 +1,19 @@
-Repository Core Focus Role in Unified Sim Key Input/Output
+Repository Core Focus Role in Unified Sim 
+
+Key Input/Output
+
 earth-systems-physics Coupled Earth physics (electromagnetic → biosphere) The Physical Engine Provides environmental state variables: temperature, pressure, radiation, resource depletion.
+
 thermodynamic-accountability-framework Energy cost & friction of institutions The Cost Function Evaluates the thermodynamic "price" of economic choices and infrastructure. Provides a thermodynamic_price_guard.
+
 Mathematic-economics Falsifiable economic equations The Economic Model Defines measurable economic states (OSDI, ER, RI, etc.) and their coupling to physical resources.
+
 Simulators (grounding-layers) Foundational simulation logic The Integration Core Provides the base simulation architecture, data structures, and verification protocols.
 
-
+git clone https://github.com/JinnZ2/earth-systems-physics
+git clone https://github.com/JinnZ2/thermodynamic-accountability-framework
+git clone https://github.com/JinnZ2/Mathematic-economics
+git clone https://github.com/JinnZ2/Simulators/tree/main/grounding-layers
 
 
 1. Initialization: Load parameters from Mathematic-economics (equations.yaml) and earth-systems-physics (layer definitions).
