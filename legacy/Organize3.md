@@ -1,5 +1,5 @@
 # =============================================================================
-# CCO 1.0 Universal Public Domain Dedication
+# CC0 1.0 Universal Public Domain Dedication
 # 
 # L5 Simulator: The Messy Human Construct Layer (Culture, Law, Theology)
 # 
@@ -394,7 +394,7 @@ print("=" * 70)
 
 
 # =============================================================================
-# CCO 1.0 Universal Public Domain Dedication
+# CC0 1.0 Universal Public Domain Dedication
 # 
 # Lε Instrumental Epistemic Layer Simulator
 # 
@@ -716,7 +716,7 @@ print("=" * 70)
 
 
 # =============================================================================
-# CCO 1.0 Universal Public Domain Dedication
+# CC0 1.0 Universal Public Domain Dedication
 # 
 # L4 Grounding Inspector: Human Sensorimotor & Biomechanical Constraints
 # 
@@ -1215,7 +1215,7 @@ print("=" * 70)
 
 
 # =============================================================================
-# CCO 1.0 Universal Public Domain Dedication
+# CC0 1.0 Universal Public Domain Dedication
 # 
 # L3 Grounding Inspector: Ecological Homeostasis & Allometry
 # 
@@ -1734,7 +1734,7 @@ print("=" * 70)
 
 
 # =============================================================================
-# CCO 1.0 Universal Public Domain Dedication
+# CC0 1.0 Universal Public Domain Dedication
 # 
 # L2 Grounding Inspector: Planetary Constraints & Mass Balance
 # 
@@ -2214,7 +2214,7 @@ print("=" * 70)
 
 
 # =============================================================================
-# CCO 1.0 Universal Public Domain Dedication
+# CC0 1.0 Universal Public Domain Dedication
 # 
 # L1 Grounding Inspector: Thermodynamics & Entropy Enforcement
 # 
@@ -2649,7 +2649,7 @@ print("=" * 70)
 
 
 # =============================================================================
-# CCO 1.0 Universal Public Domain Dedication
+# CC0 1.0 Universal Public Domain Dedication
 # 
 # L0 Grounding Inspector: Physics & Causality Enforcement
 # 
@@ -2944,7 +2944,7 @@ print("=" * 70)
 
 
 # =============================================================================
-# CCO 1.0 Universal Public Domain Dedication
+# CC0 1.0 Universal Public Domain Dedication
 # 
 # Temporal Dysrhythmia Simulator v1.0
 # 
@@ -3210,7 +3210,7 @@ print("=" * 70)
 
 
 # =============================================================================
-# CCO 1.0 Universal Public Domain Dedication
+# CC0 1.0 Universal Public Domain Dedication
 #
 # Tensor Field of Institutional Resilience v2.0
 # Now with: G (Grounding), W (Temporal Weight), Y (Agency)
@@ -3454,7 +3454,7 @@ print("=" * 70)
 
 
 # =============================================================================
-# CCO 1.0 Universal Public Domain Dedication
+# CC0 1.0 Universal Public Domain Dedication
 # 
 # Tensor Field of Institutional Resilience v1.0
 # Models: F (Feedback), A (Audit), T (Forensic), M (Meta-Awareness)

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # =============================================================================
-# CCO 1.0 Universal Public Domain Dedication
+# CC0 1.0 Universal Public Domain Dedication
 #
 # run_grounding_pipeline.py
 #
@@ -243,7 +243,7 @@ if __name__ == "__main__":
 
 #!/usr/bin/env python3
 # =============================================================================
-# CCO 1.0 Universal Public Domain Dedication
+# CC0 1.0 Universal Public Domain Dedication
 #
 # run_grounding_pipeline.py
 #

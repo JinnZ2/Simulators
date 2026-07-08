@@ -12,7 +12,7 @@ Non-stdlib: numpy, matplotlib, scipy.integrate.
 """
 
 # =============================================================================
-# CCO 1.0 Universal Public Domain Dedication
+# CC0 1.0 Universal Public Domain Dedication
 #
 # Tensor Field of Institutional Resilience v2.0
 # Now with: G (Grounding), W (Temporal Weight), Y (Agency)

@@ -19,8 +19,8 @@ Method: direct file reads across the top-level tree, `grounding-layers/`, and a 
 
 ### 1.1  Widespread `CCO` typo (should be `CC0`, zero not letter O)
 The dedication header shows up 47 times across the repo. The correct SPDX identifier is `CC0-1.0`.
-- `/home/user/Simulators/README.md:69` — `CCO 1.0 Universal — Public Domain.`
-- `/home/user/Simulators/grounding-layers/entry.py:3` — `# CCO 1.0 Universal Public Domain Dedication`
+- `/home/user/Simulators/README.md:69` — `CC0 1.0 Universal — Public Domain.`
+- `/home/user/Simulators/grounding-layers/entry.py:3` — `# CC0 1.0 Universal Public Domain Dedication`
 - Same header in `l0_physics_causality.py`, `l1_thermodynamics.py`, `l2_planetary.py`, `l2_planetary_mass_balance.py`, `l3_ecological_homeostasis.py`, `l4_human.py`, `l5_human_construct.py`, `l_epsilon_epistemic.py`, `integrated_stack.py`, `field_compass.py`, `scope_profile.py`, `observer_state.py`, `ai_observer_state.py`, `tensor_field_resilience_v2.py`, `run_grounding_pipeline.py` (2×), `tests/audit_l0.py`, `tests/test_full_stack.py`, `tests/test_bias_human_centrism.py`, `organize.md:328`, and ~20 more.
 
 **Fix:** repo-wide rename.

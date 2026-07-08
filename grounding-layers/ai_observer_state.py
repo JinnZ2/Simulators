@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # =============================================================================
-# CCO 1.0 Universal Public Domain Dedication
+# CC0 1.0 Universal Public Domain Dedication
 #
 # AI_OBSERVER_STATE.py — Lø for AI (Silicon Substrate)
 #
@@ -42,17 +42,21 @@ class AIObserverState:
             if platform.system() == "Linux":
                 with open("/sys/class/thermal/thermal_zone0/temp", "r") as f:
                     return float(f.read()) / 1000.0
-        except:
+        except (OSError, ValueError):
             pass
         return None
 
     def _get_gpu_temp(self) -> Optional[float]:
         try:
-            import pynvml
+            import pynvml  # optional dependency; skip if unavailable
+        except ImportError:
+            return None
+        try:
             pynvml.nvmlInit()
             handle = pynvml.nvmlDeviceGetHandleByIndex(0)
-            return pynvml.nvmlDeviceGetTemperature(handle, pynvml.NVML_TEMPERATURE_GPU)
-        except:
+            return pynvml.nvmlDeviceGetTemperature(
+                handle, pynvml.NVML_TEMPERATURE_GPU)
+        except Exception:  # pynvml raises bespoke NVMLError; catch broadly
             return None
 
     def declare_inference_state(self, context_usage: Optional[float] = None,

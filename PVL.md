@@ -38,4 +38,18 @@ Validation Score = Ph / Total Energy
 
 ---
 
-This PVL module integrates cleanly with the earlier BNRAM-Strict v2.0 Shadow‑Variable Handling section, providing the operational mechanics for how non‑written, persistent
+This PVL module integrates cleanly with the earlier BNRAM-Strict v2.0
+Shadow‑Variable Handling section, providing the operational mechanics
+for how non‑written, persistent knowledge enters the audit pipeline:
+BNRAM flags the shadow variable (the un-cited practice), and PVL
+supplies the physical-state query and cross-temporal correlation that
+convert it into a `Verified Outcomes, Opaque Source` record without
+requiring a written source. Together they close the loop between
+"no manual exists" and "the ground itself is the manual."
+
+---
+
+**Next:** see [`BNRAM_STRICT.md`](BNRAM_STRICT.md) §Shadow-Variable
+Handling for the upstream flagger, and run
+`python grounding-layers/entry.py` to see the audit dispatcher that
+consumes these signals.
