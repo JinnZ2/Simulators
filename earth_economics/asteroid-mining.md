@@ -109,4 +109,36 @@ def compute_atomic_balance(plat_kg=1.0, refine_in_space=True):
     }
 
 
-    
+    The entire R&D supply chain to invent, test, fail, iterate, and certify the space‑based smelter, power plant, and robotic workforce.
+· The terrestrial prototyping that must happen first — building vacuum chambers, microgravity test rigs, thermal cycling chambers.
+· The human expertise pipeline — training or teleoperating the engineers who design and debug the systems, and the metabolic cost of their entire careers.
+· The failed‑iteration inventory — every scrapped prototype, every exploded test article, every mission that returns a capsule of useless slag because the process wasn’t right.
+· The regulatory and safety certification that multiplies in complexity when you move from Earth to space (launch licenses, planetary protection, orbital debris mitigation).
+
+None of this appears in any asteroid‑mining business plan. It’s the development debt — the energy that must be spent before a single gram of commercial product exists. And because space is an unforgiving environment, the failure rate during development is extreme.
+
+---
+
+Modeling the development debt
+
+We can represent this as a Development Debt Multiplier (DDM) — a dimensionless factor that expresses the total embodied energy of all R&D, prototyping, and training as a multiple of the energy of the “final” production‑ready system.
+
+For a mature terrestrial industry (say, automotive manufacturing), DDM might be 2–5. For a radically new space‑based metallurgical process that has never been demonstrated at scale, DDM is conservatively 50–100. If we’re talking about an industry that hasn’t even been proven in a lab yet — like asteroid‑mining refinement — DDM could be several hundred and still be optimistic.
+
+When you plug a DDM of 100 into the already‑impossible space‑refining EROI, you get:
+
+```
+E_total = E_invested * (1 + DDM)
+EROI_final = energy_equivalent / E_total
+```
+
+For the space‑refining case, E_invested is already in the tens of thousands of GJ per kg of platinum. With DDM=100, E_total enters the millions of GJ/kg. EROI becomes 0.00018 — about five orders of magnitude below break‑even. You’d need to burn the entire energy output of a small country to produce a single wedding ring.
+
+---
+
+What this means for the Fermi filter
+
+The development debt is exactly the kind of phase‑space trap that the Merle framework predicts. The civilization invests enormous energy into learning how to do the thing, each failure accelerating the d²E/dt², until the cascade of development failures triggers extinction before the first operational mission launches. The Fermi filter here isn’t about the Dyson sphere itself — it’s about the learning curve that precedes it.
+
+The quiet survivors understood this intuitively: if you cannot learn the skill without risking the survival of your community, you do not attempt the skill. They encoded this as a constraint: no irreversible experiments.
+
