@@ -1,0 +1,131 @@
+# =========================================================================
+# Equation 16: Regenerative Index (RI_gen)
+# =========================================================================
+RI_gen:
+  name: Regenerative Index
+  equation_number: 16
+  description: >
+    Fraction of total value produced that is deliberately recirculated
+    back into the commons. Measures the "gift economy" dimension.
+  formula: "RI_gen = Value_Recirculated / Total_Value_Produced"
+  range: "0 to 1"
+  interpretation:
+    RI_gen_0: "All value retained by producer (extraction limit)"
+    RI_gen_1: "All value given back (pure gift limit)"
+  falsification: >
+    Measure total value produced in a community and total value recirculated
+    through gift, ceremony, sharing, or commons contribution. If RI_gen > 0
+    and the community still expands extraction, the index is measuring
+    something other than regenerative intent.
+
+# =========================================================================
+# Equation 17: Value Flow Direction (VFD)
+# =========================================================================
+VFD:
+  name: Value Flow Direction
+  equation_number: 17
+  description: >
+    Polarity of value flow between labor and capital. Removes the
+    assumption that capital always extracts from labor.
+  formula: "VFD = sign(VE/VL)"
+  values:
+    VFD_plus1: "Capital extracts from labor (extraction economy)"
+    VFD_0: "Balanced or no distinction between labor and capital"
+    VFD_minus1: "Value flows from capital holders to labor/community (gift economy)"
+  falsification: >
+    Find a system where VFD = +1 (extraction) but UFR is negative (wealth
+    flows downward). This would be an internal contradiction requiring
+    redefinition of the extraction metric.
+
+# =========================================================================
+# Equation 18: Scale Ceiling Index (SCI)
+# =========================================================================
+SCI:
+  name: Scale Ceiling Index
+  equation_number: 18
+  description: >
+    Ratio of maximum sustainable network size to current size, where
+    the ceiling is determined by the energetic cost of converting
+    relational trust to institutional enforcement.
+  formula: "SCI = N_max / N_current"
+  interpretation:
+    SCI_greater_than_1: "System operating below scale ceiling (healthy)"
+    SCI_less_than_1: "System has exceeded scale ceiling (brittle, requires coercion)"
+  data_source:
+    N_max: "Function of communication cost, Dunbar limits, and coordination energy"
+    N_current: "Measurable population or network size"
+  falsification: >
+    Find a system with SCI < 1 (exceeded scale ceiling) that maintains
+    >50% relational trust fraction for more than one generation without
+    increasing institutional coercion.
+    
+# =========================================================================
+# Equation 14: Overall Capitalist Dependence Index (OCDI)
+# =========================================================================
+OCDI:
+  name: Overall Capitalist Dependence Index
+  equation_number: 14
+  description: >
+    Measures the degree to which capital extraction outpaces substrate 
+    maintenance. The symmetric counter-index to OSDI.
+  formula: "OCDI = (OCDI_1 * 0.20) + (OCDI_2 * 0.20) + (OCDI_3 * 0.20) + (OCDI_4 * 0.20) + (OCDI_5 * 0.20)"
+  components:
+    OCDI_1:
+      name: Extraction-to-Maintenance Ratio
+      formula: "er / pmi"
+      data_source:
+        er: "BLS PRS85006173 (labor share → ER = 1 - labor_share)"
+        pmi: "BEA NIPA Table 5.1 (depreciation) + EPA environmental restoration expenditure"
+      normalization: "capped at 2.0"
+    OCDI_2:
+      name: Rentier Capture Ratio
+      formula: "rentier_profits / total_corporate_profits"
+      data_source:
+        rentier_profits: "BEA NIPA Table 6.16D (financial sector profits + IP royalties + land rents)"
+        total_profits: "FRED CP (corporate profits after tax)"
+    OCDI_3:
+      name: Wealth-to-Labor Power Ratio
+      formula: "top10_wealth / (median_wage * labor_force)"
+      data_source:
+        top10_wealth: "Fed SCF (top 10% wealth share × total household net worth)"
+        median_wage: "FRED AHETPI (average hourly earnings) × 2000 hours"
+        labor_force: "FRED CLF16OV (civilian labor force)"
+    OCDI_4:
+      name: Capital Mobility Index
+      formula: "financial_transaction_volume / gross_fixed_capital_formation"
+      data_source:
+        financial_transactions: "FRED TFAABSHNO (financial sector assets)"
+        gfcf: "FRED NFIRSAXDC (non-financial fixed investment)"
+    OCDI_5:
+      name: Substrate Debt Ratio
+      formula: "nonfinancial_corporate_debt / tangible_assets"
+      data_source:
+        debt: "FRED NCBDBIQ027S (non-financial corporate debt)"
+        assets: "FRED TTAABSHNO (tangible assets)"
+  thresholds:
+    productive: "< 0.5"
+    jevons_regime: "0.5 - 1.0"
+    rentier_phase: "> 1.0"
+    locked_in: "> 1.5"
+
+# =========================================================================
+# Equation 15: Rentier Phase Index (RPI)
+# =========================================================================
+RPI:
+  name: Rentier Phase Index
+  equation_number: 15
+  description: >
+    Detects irreversibility in extraction dynamics. Measures whether
+    extraction rate is decoupled from efficiency improvements and whether
+    the system exhibits hysteresis (er does not fall when efficiency declines).
+  formula: "RPI = d(er)/dt / d(efficiency)/dt"
+  data_source:
+    er: "BLS PRS85006173 (labor share → ER = 1 - labor_share)"
+    efficiency: "EIA energy intensity (GDP / total energy consumption)"
+  interpretation:
+    RPI_positive_with_efficiency_gain: "Extraction captured the efficiency gain"
+    RPI_positive_despite_efficiency_decline: "Hysteresis confirmed - phase locked"
+    RPI_negative: "System still responsive to efficiency changes"
+  falsification: >
+    Find a period where OCDI > 1.0 but RPI < 0 (extraction declined when efficiency declined).
+    This would falsify the phase-lock hypothesis for that period.
