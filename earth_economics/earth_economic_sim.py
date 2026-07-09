@@ -107,7 +107,22 @@ class EconomicModel:
         # Simplified: higher resource depletion -> higher extraction
         depletion = physics_state.get('resource_depletion', 0)
         er = 0.3 + depletion * 0.5
+            def compute_ocdi(self, physics_state: Dict[str, float], er: float) -> float:
+        """
+        Compute Overall Capitalist Dependence Index (Equation 14).
+        Measures the degree to which capital extraction outpaces 
+        substrate maintenance.
+        """
+        # Assume PMI is inversely proportional to depletion
+        # If the environment is depleting, maintenance intensity MUST increase
+        # If it doesn't, the system is 'Capitalist Dependent' (extracting without repairing)
+        depletion = physics_state.get('resource_depletion', 0)
+        pmi = max(0.01, (1.0 - depletion)) 
         
+        # OCDI increases if extraction (er) is high and maintenance (pmi) is low
+        ocdi = er / pmi
+        return min(2.0, ocdi)
+
         # Example: Socialist Infrastructure Dependency (Equation 2)
         # SID = C / (C + P). Simplified: higher complexity -> more dependence
         temp = physics_state.get('temperature', 15)
