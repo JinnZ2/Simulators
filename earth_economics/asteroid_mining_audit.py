@@ -263,6 +263,52 @@ if __name__ == "__main__":
     main()
 
 
+# ----------------------------------------------------------------------
+# 5. DEVIATION STRESS TEST (Earth-side shocks)
+# ----------------------------------------------------------------------
+def apply_earth_deviation(energy_breakdown, shock_type, magnitude):
+    """
+    Apply a nonlinear energy-cost multiplier based on a terrestrial deviation.
+    shock_type: 'supply_chain', 'geopolitical', 'infrastructure', 'climate'
+    magnitude: 0.0 (no shock) to 1.0 (severe shock)
+    Returns updated breakdown and EROI.
+    """
+    import copy
+    updated = copy.deepcopy(energy_breakdown)
+
+    # Each shock type scales specific debts nonlinearly
+    if shock_type == 'supply_chain':
+        # Launch logistics become more expensive, and embodied energy rises
+        factor = 1.0 + 3.0 * magnitude  # nonlinear: small shock → big cost
+        updated["E_logistics_GJ"] *= factor
+        updated["E_embodied_GJ"] *= (1.0 + 1.5 * magnitude)
+    elif shock_type == 'geopolitical':
+        # Trade restrictions, sanctions, loss of launch site access
+        factor = 1.0 + 5.0 * magnitude
+        updated["E_logistics_GJ"] *= factor
+        updated["E_refinement_GJ"] *= (1.0 + 2.0 * magnitude)
+    elif shock_type == 'infrastructure':
+        # Grid failure, port closure, comms blackout
+        factor = 1.0 + 4.0 * magnitude
+        updated["E_embodied_GJ"] *= factor
+        updated["E_refinement_GJ"] *= (1.0 + 3.0 * magnitude)
+    elif shock_type == 'climate':
+        # Launch delays, increased cooling needs, more system entropy
+        factor = 1.0 + 2.0 * magnitude
+        updated["E_logistics_GJ"] *= factor
+        updated["delta_S_GJ"] *= (1.0 + 5.0 * magnitude)  # entropy explodes
+    else:
+        raise ValueError("Unknown shock type")
+
+    # Recompute total and EROI
+    total = (updated["E_embodied_GJ"] + updated["E_logistics_GJ"] +
+             updated["E_extract_GJ"] + updated["E_refinement_GJ"] +
+             updated["E_isotopic_GJ"])
+    updated["E_invested_GJ"] = total + updated["delta_S_GJ"]
+    updated["EROI"] = updated["energy_equivalent_GJ"] / updated["E_invested_GJ"] if updated["E_invested_GJ"] > 0 else float("inf")
+    return updated
+
+
 #!/usr/bin/env python3
 """
 asteroid_mining_audit.py – Closed-loop thermodynamic audit of asteroid mining.
