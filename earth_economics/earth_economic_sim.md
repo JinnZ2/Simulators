@@ -93,10 +93,86 @@ Cross-plot OCDI vs RPI over time yields a phase diagram:
 
 ---
 
-What I'll build now
+
 
 1. equations.yaml update: Add OCDI₁–OCDI₅, OCDI composite, and RPI with data-source bindings.
 2. data/compute_ocdi.py: Fetches the needed series from FRED/BEA and computes the index over a historical range, with sensitivity analysis.
 3. audit/ocdi_audit.py: An audit module patterned after eroi_real_time_audit.py that takes current-period data, computes OCDI and RPI, and outputs a verdict: RECOVERABLE, RENTIER_PHASE, or LOCKED_IN.
 4. Register in inquiry_engine: Claims like "OCDI crossed 1.0 in year X" become testable hypotheses with falsifiers.
 
+add:
+
+#!/usr/bin/env python3
+"""
+Register OCDI claims in the inquiry engine for the lifecycle workbench.
+Run once to add these claims to claims_registry.json.
+CC0.
+"""
+
+import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from inquiry_engine.claim_lifecycle import ClaimLifecycle, ClaimRegistry
+
+OCDI_CLAIMS = [
+    {
+        "id": "OCDI_001",
+        "statement": "OCDI crossed 1.0 (rentier phase) before the year 2000.",
+        "falsifier": "Show OCDI < 1.0 for all years 1950-2000 using audited data from compute_ocdi.py.",
+        "test_procedure": {
+            "module": "data.compute_ocdi",
+            "function": "run_historical",
+            "args": {"start": 1950, "end": 2000}
+        },
+    },
+    {
+        "id": "OCDI_002",
+        "statement": "The US economy entered the locked-in phase (OCDI > 1.5, RPI > 0) by 2020.",
+        "falsifier": "Show OCDI < 1.5 or RPI < 0 for any year 2010-2026 using audited data.",
+        "test_procedure": {
+            "module": "data.compute_ocdi",
+            "function": "run_historical",
+            "args": {"start": 2010, "end": 2026}
+        },
+    },
+    {
+        "id": "OCDI_003",
+        "statement": "OSDI exists without a symmetric OCDI in economic measurement frameworks.",
+        "falsifier": "Demonstrate an existing, widely-used index that measures capital extraction intensity relative to substrate maintenance with comparable mathematical rigor to OSDI.",
+        "test_procedure": None,  # Manual review claim
+    },
+    {
+        "id": "OCDI_004",
+        "statement": "The phase-locked rentier state is irreversible under current institutional arrangements.",
+        "falsifier": "Show a sustained decline in OCDI (≥0.2 drop over 5+ years) without a systemic crisis or institutional overhaul.",
+        "test_procedure": {
+            "module": "data.compute_ocdi",
+            "function": "run_historical",
+            "args": {"start": 1950, "end": 2026}
+        },
+    },
+]
+
+def register():
+    registry = ClaimRegistry()
+    for claim_data in OCDI_CLAIMS:
+        claim = ClaimLifecycle(
+            claim_id=claim_data["id"],
+            statement=claim_data["statement"],
+            falsifier=claim_data["falsifier"],
+            test_procedure=claim_data.get("test_procedure"),
+        )
+        claim.propose(proposed_by="OCDI-framework-builder")
+        claim.under_review()
+        claim.activate()
+        registry.add(claim)
+        print(f"Registered {claim.claim_id}: {claim.statement[:60]}...")
+    print(f"\nTotal OCDI claims registered: {len(OCDI_CLAIMS)}")
+
+if __name__ == "__main__":
+    register()
+
+
+
+    
