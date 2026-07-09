@@ -118,7 +118,13 @@ class EconomicModel:
         # If it doesn't, the system is 'Capitalist Dependent' (extracting without repairing)
         depletion = physics_state.get('resource_depletion', 0)
         pmi = max(0.01, (1.0 - depletion)) 
-        
+
+        RPI = (d(er)/dt) / (d(efficiency)/dt)
+
+If RPI >> 0 during an efficiency improvement: extraction captured the gain.
+If RPI remains positive even when efficiency declines: hysteresis — the system cannot go back.
+
+
         # OCDI increases if extraction (er) is high and maintenance (pmi) is low
         ocdi = er / pmi
         return min(2.0, ocdi)
