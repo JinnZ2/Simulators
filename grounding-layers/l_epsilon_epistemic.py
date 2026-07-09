@@ -11,7 +11,7 @@ Non-stdlib: numpy, matplotlib, scipy.signal.
 """
 
 # =============================================================================
-# CCO 1.0 Universal Public Domain Dedication
+# CC0 1.0 Universal Public Domain Dedication
 #
 # Lε Instrumental Epistemic Layer Simulator
 # 

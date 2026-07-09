@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # =============================================================================
-# CCO 1.0 Universal Public Domain Dedication
+# CC0 1.0 Universal Public Domain Dedication
 #
 # cultural_lens.py — Lψ: Cultural Epistemology Layer
 #
@@ -138,7 +138,7 @@ if __name__ == "__main__":
 
 #!/usr/bin/env python3
 # =============================================================================
-# CCO 1.0 Universal Public Domain Dedication
+# CC0 1.0 Universal Public Domain Dedication
 #
 # CULTURAL_LENS.py — Lψ: The Cultural Epistemology Layer
 #

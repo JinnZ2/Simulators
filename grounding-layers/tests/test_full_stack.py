@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # =============================================================================
-# CCO 1.0 Universal Public Domain Dedication
+# CC0 1.0 Universal Public Domain Dedication
 #
 # test_full_stack.py
 #

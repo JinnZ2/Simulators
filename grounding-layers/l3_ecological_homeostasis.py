@@ -12,7 +12,7 @@ Non-stdlib: numpy, matplotlib, scipy.integrate.
 """
 
 # =============================================================================
-# CCO 1.0 Universal Public Domain Dedication
+# CC0 1.0 Universal Public Domain Dedication
 #
 # L3 Grounding Inspector: Ecological Homeostasis & Allometry
 # 

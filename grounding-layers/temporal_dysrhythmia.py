@@ -11,7 +11,7 @@ Non-stdlib: numpy, matplotlib, scipy.integrate.
 """
 
 # =============================================================================
-# CCO 1.0 Universal Public Domain Dedication
+# CC0 1.0 Universal Public Domain Dedication
 #
 # Temporal Dysrhythmia Simulator v1.0
 # 

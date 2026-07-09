@@ -1,0 +1,39 @@
+name: tests
+
+on:
+  push:
+    branches: [main, master, "claude/**"]
+  pull_request:
+
+jobs:
+  grounding-layers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: install soft deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy matplotlib scipy psutil
+      - name: grounding-layers audit-grade suite
+        run: python -m unittest discover -s grounding-layers -p 'test_*.py'
+
+  simulator-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: substrate-emergence
+        run: python -m unittest discover -s substrate-emergence/tests -p 'test_*.py'
+      - name: continuity-audit
+        run: python -m unittest discover -s continuity-audit/tests -p 'test_*.py'
+      - name: emergence-stability-simulator
+        run: python -m unittest discover -s emergence-stability-simulator/tests -p 'test_*.py'
+      - name: incentive-blindspot-sim
+        run: python -m unittest discover -s incentive-blindspot-sim -p 'test_*.py'
+      - name: antifungal-mechanism-sim
+        run: python -m unittest discover -s antifungal-mechanism-sim/tests -p 'test_*.py'

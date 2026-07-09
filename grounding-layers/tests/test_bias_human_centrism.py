@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # =============================================================================
-# CCO 1.0 Universal Public Domain Dedication
+# CC0 1.0 Universal Public Domain Dedication
 #
 # TEST_BIAS_HUMAN_CENTRISM.py
 #

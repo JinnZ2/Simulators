@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite it."
+title: "Simulators: grounded, auditable claim-verification for AI"
+abstract: >
+  Standard-library-only simulators and audits that ground AI claims
+  in physics, thermodynamics, planetary balance, ecology, biomechanics,
+  culture, and epistemic scope. Refutation-protocol-first: constants
+  are frozen; when a test fails, the claim updates, not the constant.
+authors:
+  - family-names: "JinnZ2"
+type: software
+license: CC0-1.0
+repository-code: "https://github.com/JinnZ2/Simulators"
+url: "https://github.com/JinnZ2/Simulators"
+keywords:
+  - grounded-ai
+  - claim-verification
+  - epistemic-audit
+  - falsifiability
+  - refutation-protocol
+  - scope-taxonomy
+  - thermodynamic-audit
+  - planetary-mass-balance
+  - ecological-homeostasis
+  - biomechanical-constraint
+  - category-error-guard
+  - stdlib-only
+  - cc0

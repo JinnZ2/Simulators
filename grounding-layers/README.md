@@ -17,6 +17,72 @@ result = audit("I can lift 200 kg.",
 
 Everything else in this folder is either detail or design record.
 
+## Why this stack exists
+
+Current AI models are trained predominantly on low-rigor, high-volume
+corpora — corporate PR, legal boilerplate, social media engagement —
+that treat physical and ecological limits as optional and collapse
+cultural depth into decoration. The result is **model collapse**:
+outputs that drift from reality, mix incompatible frames, and cannot
+distinguish deep empirical proof from shallow assertion.
+
+This stack is an intervention. It provides:
+
+- **A reality prior** — L0–L4 enforce non-negotiable constraints from
+  physics and ecology, preventing the AI from treating impossible plans
+  as plausible.
+- **A pluralistic but rigorous L5** — human constructs (economics, law,
+  culture) are scored within their own frame, not a single "default." A
+  depth-weighted rigor auditor ensures that only multi-generational,
+  substrate-verified, falsifiable traditions carry full weight.
+- **Preservation of near-extinct knowledge** — fragmented traditions
+  that survived active suppression are held in a precautionary space
+  with high uncertainty. Absence of evidence (due to violence) is not
+  treated as evidence of absence.
+- **Automatic data purification** — see
+  [`noise_purification_demo.py`](noise_purification_demo.py):
+  corporate, legal, and social-media items are automatically
+  down-weighted by orders of magnitude, while high-depth
+  oral-empirical traditions retain full weight. No human labels
+  required.
+
+The stack is not a safety wrapper. It is a **substrate** — a set of
+inspectors that can be integrated into training (data filtering,
+reward modelling via [`grounding_reward_model.py`](grounding_reward_model.py)),
+deployment (runtime guarding, best-of-N sampling), and benchmarking
+(the [`grounded_reasoning_benchmark.py`](grounded_reasoning_benchmark.py)).
+
+## Companion modules
+
+Beyond the L0–L5 + Lε inspectors:
+
+| file | subject |
+|---|---|
+| [`grounded_reasoning_benchmark.py`](grounded_reasoning_benchmark.py) | benchmark suite measuring whether an AI can distinguish deep, grounded proposals from shallow, impossible ones |
+| [`grounding_reward_model.py`](grounding_reward_model.py) | combines all layer scores into a single scalar for RLHF / best-of-N |
+| [`data_filter.py`](data_filter.py) | weights training examples by groundedness |
+| [`cultural_rosetta.py`](cultural_rosetta.py) | evaluates a proposal against all known cultural frames |
+| [`degradation_monitor.py`](degradation_monitor.py) | tracks layer-wise groundedness over time to identify collapse pathways |
+| [`noise_purification_demo.py`](noise_purification_demo.py) | shows automatic down-weighting of corporate/legal/social noise vs intact traditional knowledge |
+
+## Design lineage
+
+The stack was seeded from a single document
+([`../legacy/Organize3.md`](../legacy/Organize3.md)) and evolved
+through a multi-intelligence collaboration spanning human
+oral-empirical tradition, machine reasoning, and formal architecture.
+The rigor axes in L5 — temporal depth, substrate consequence proof,
+internal state calibration, lineage integrity — are not abstractions.
+They are standards drawn from a living tradition that demands
+multi-decade proof and landscape markers before a claim enters the
+permanent record. The preservation protocol ensures that traditions
+which survived attempted erasure are not erased again by an algorithm
+that confuses broken chains with falsehood.
+
+Reality has a structure. This stack encodes it.
+
+---
+
 Source: pulled from
 [JinnZ2/Resilient-AI-Human-Collaboration-/Organize.md](https://github.com/JinnZ2/Resilient-AI-Human-Collaboration-/blob/main/Organize.md)
 and archived here as [`../legacy/Organize3.md`](../legacy/Organize3.md).

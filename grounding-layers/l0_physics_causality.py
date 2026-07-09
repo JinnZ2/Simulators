@@ -51,7 +51,7 @@ not the phenomenon" section at the top of CLAIMS.md.
 """
 
 # =============================================================================
-# CCO 1.0 Universal Public Domain Dedication
+# CC0 1.0 Universal Public Domain Dedication
 #
 # L0 Grounding Inspector: Physics & Causality Enforcement
 # 

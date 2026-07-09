@@ -1,5 +1,5 @@
 # =============================================================================
-# CCO 1.0 Universal Public Domain Dedication
+# CC0 1.0 Universal Public Domain Dedication
 # 
 # Tensor Field of Institutional Resilience v1.0
 # Models: F (Feedback), A (Audit), T (Forensic), M (Meta-Awareness)
