@@ -23,3 +23,90 @@ print("5. DEVIATION STRESS TEST (EARTH-SIDE SHOCKS)")
     print("level dead end that depends on a fantasy of perfect terrestrial stability. The")
     print("quiet survivors already account for this: they don't build systems whose")
     print("energy debt can be multiplied by a single supply-chain hiccup.")
+
+
+def compute_atomic_balance(plat_kg=1.0, refine_in_space=True):
+    """
+    Full atomic-debt calculation for 1 kg of platinum.
+    If refine_in_space is True, the energy for smelting/alloying/isotopic
+    adjustment must be provided by space‑based infrastructure, whose embodied
+    energy and launch cost are added.
+    """
+    # --- Extraction debt (same as before) ---
+    comminution_MJ_per_kg = 1.0
+    bond_breaking_MJ_per_kg = 50.0
+    extraction_debt = (comminution_MJ_per_kg + bond_breaking_MJ_per_kg) / 1000  # GJ/kg
+    E_extract = extraction_debt * plat_kg
+
+    # --- Embodied energy of mining robot ---
+    robot_mass_per_kg = 20.0
+    robot_embodied = 200.0          # GJ/kg
+    E_embodied = robot_mass_per_kg * robot_embodied * plat_kg
+
+    # --- Logistics (launch + transit + braking) ---
+    launch_per_kg = 30.0
+    departure_per_kg = 20.0
+    return_burn_per_kg = 25.0
+    E_logistics = (launch_per_kg + departure_per_kg + return_burn_per_kg) * plat_kg
+
+    # --- Refinement: if done in space, we must lift the smelter and power supply ---
+    if refine_in_space:
+        # Space-based smelter and power plant embodied energy per kg of throughput
+        # Assume a 1-tonne smelter can process 100 kg of Pt per year, lifetime 10 years -> 1000 kg total
+        # Smelter embodied energy = 500 GJ (aerospace grade), launch cost same as per-kg logistics
+        smelter_mass_per_kg_throughput = 1000.0 / 1000.0   # 1 kg smelter / kg Pt
+        smelter_embodied_per_kg = 500.0                     # GJ per kg of smelter
+        E_smelter_embodied = smelter_mass_per_kg_throughput * smelter_embodied_per_kg * plat_kg
+        E_smelter_launch = smelter_mass_per_kg_throughput * (launch_per_kg + departure_per_kg) * plat_kg
+        # Power supply: solar array or nuclear. Assume 10 kW needed per kg Pt output, 24/7.
+        # Specific power 200 W/kg for advanced solar, so 50 kg power system per kg Pt.
+        power_system_mass_per_kg = 50.0
+        power_embodied = 200.0                                # GJ/kg
+        E_power_embodied = power_system_mass_per_kg * power_embodied * plat_kg
+        E_power_launch = power_system_mass_per_kg * (launch_per_kg + departure_per_kg) * plat_kg
+        # Actual process energy: the smelter still needs to run; we supply it from the space power system,
+        # but the energy itself is "free" (solar) — however, we already paid for the power system.
+        # We still account for the thermal energy input as an operational cost (0.25 GJ/kg as before)
+        E_refine_process = 0.25 * plat_kg   # GJ (same as Earth-based estimate)
+        E_refinement = (E_smelter_embodied + E_smelter_launch +
+                        E_power_embodied + E_power_launch +
+                        E_refine_process)
+        # Isotopic penalty (same 10% of process energy, but the process energy is now minimal compared to infra)
+        E_isotopic = 0.1 * E_refine_process
+    else:
+        # Earth-based refining (as before)
+        E_refinement = (0.2 + 0.05) * plat_kg
+        E_isotopic = 0.1 * E_refinement
+
+    # --- Systemic entropy ---
+    total_raw = E_embodied + E_logistics + E_extract + E_refinement + E_isotopic
+    delta_S = 0.3 * total_raw
+
+    E_invested = total_raw + delta_S
+    gdp_energy_intensity = 0.006
+    energy_equivalent = 30000 * gdp_energy_intensity
+    eroi = energy_equivalent / E_invested if E_invested > 0 else float("inf")
+
+    return {
+        "plat_kg": plat_kg,
+        "refine_in_space": refine_in_space,
+        "E_extract_GJ": E_extract,
+        "E_embodied_GJ": E_embodied,
+        "E_logistics_GJ": E_logistics,
+        "E_refinement_GJ": E_refinement,
+        "E_isotopic_GJ": E_isotopic,
+        "delta_S_GJ": delta_S,
+        "E_invested_GJ": E_invested,
+        "energy_equivalent_GJ": energy_equivalent,
+        "EROI": eroi,
+        "debt_breakdown": {
+            "extraction": E_extract,
+            "embodied_robot": E_embodied,
+            "logistics": E_logistics,
+            "refinement_total": E_refinement,
+            "isotopic": E_isotopic,
+        }
+    }
+
+
+    
