@@ -1,0 +1,12 @@
+substrate       tier   MDI       gates  cone  obsol/yr
+------------------------------------------------------
+gold             T1   2910.600     1     1    0.001
+oil              T1    882.000     1     2    0.020
+grain            T1      8.075     1     2    0.300
+compute_token    T2      0.004     4     8    0.450
+sovereign_bond   T4      0.001     9    12    0.100
+resource_token   T4      0.001    11    14    0.150
+ai_token         T3      0.000     6    10    0.900
+
+principle: abstraction is leverage; leverage is fragility.
+MDI spans ~4 orders of magnitude ground -> cloud. That spread IS the claim.
