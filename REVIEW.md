@@ -10,8 +10,13 @@ Repository-wide review of `/home/user/Simulators` performed 2026-07-08.
 | 4. Organizational Structure Suggestions | 6 |
 | 5. Limitations Mitigation Checklist | 15 sub-items |
 | 6. Discoverability & Crawler Optimization | 13 items (mostly missing) |
+| 7. Addendum: `earth_economics/` (post-merge scan) | 2 findings (both fixed) |
 
 Method: direct file reads across the top-level tree, `grounding-layers/`, and a sample of simulator subfolders; three subagent explorations dispatched (one completed, two aborted at session-limit — those sections carry a note where coverage is partial). Findings are anchored to `file:line` where possible; ready-to-paste snippets are supplied for the discoverability items.
+
+Section 7 was added after `origin/main` was merged and a whole new
+`earth_economics/` folder appeared (25 files). It captures the two
+must-fix issues found in the post-merge scan.
 
 ---
 
@@ -440,3 +445,65 @@ If you use this repository, please cite it via the metadata in
 - `REVIEW.md` created at `/home/user/Simulators/REVIEW.md`.
 - Summary table appears at the top of the file (see the leader table above).
 - Two of the three exploration agents I dispatched hit a session limit before returning; the corresponding sections (grounding-layers deep code audit; per-simulator code audit) are the smaller of the six sections and remain a candidate for a follow-up review pass.
+
+---
+
+## 7. Addendum: `earth_economics/` (post-merge scan)
+
+`origin/main` was merged into this branch after the review was written.
+The merge brought in a new `earth_economics/` folder (25 files): a
+coupled physics–economics–accountability simulation with an asteroid
+mining thermodynamic audit, a Fermi paradox audit, an OCDI/RPI/VFD/SCI
+equation set, and nine cultural/economic system profiles (Ainu, Sámi,
+Aboriginal Australia, Ubuntu, Potlatch, open-source gift, Arabic
+trust-based trade, USSR, US). A quick smoke pass surfaced two must-fix
+issues.
+
+### 7.1  `earth_economic_sim.py` did not parse — botched paste
+
+`earth_economics/earth_economic_sim.py:100-145`:
+`compute_ocdi` was pasted **inside** `compute_state`, with prose
+("If RPI >> 0 during an efficiency improvement…") and a pseudocode
+line (`RPI = (d(er)/dt) / (d(efficiency)/dt)`) mixed into the method
+body. `python3 -m compileall` fails at line 110 with `IndentationError:
+unexpected indent`. The whole module was unimportable — anything that
+depended on `UnifiedEarthEconomicSim` couldn't run.
+
+**Fix (applied):** split `compute_ocdi` into a sibling method after
+`compute_state`, absorbed the RPI prose as a docstring inside
+`compute_ocdi`, and let the `sid`/`hhi`/`osdi` computation continue
+its normal flow so `compute_state` returns the intended dict.
+Verified: file parses; `EconomicModel().compute_state({'temperature':
+20, 'resource_depletion': 0.1})` → `{'er': 0.35, 'sid': 0.6,
+'hhi': 3500, 'osdi': 0.66}`; `compute_ocdi(...)` → `0.389`.
+
+### 7.2  `ussr_1885.py` filename typo — breaks `run.py` import
+
+`earth_economics/scenarios/ussr_1885.py` says in its header
+`"USSR economic system profile (circa 1985, pre-perestroika)"` — but
+the filename claims year **1885** (which pre-dates the USSR entirely,
+and pre-dates Marx's death by two years). Meanwhile,
+`earth_economics/comparative_economics_audit/run.py:8` and `:37`
+explicitly try to load `ussr_1985` (the correct spelling), so the file
+would never actually be picked up by the scenario loader.
+
+**Fix (applied):** `git mv ussr_1885.py ussr_1985.py`. Verified: the
+scenario loader now imports it alongside the other nine profiles.
+
+### 7.3  Not fixed — worth checking
+
+Not addressed in this addendum (candidate for a follow-up pass):
+
+- The new folder is described in `earth_economics/README.md` under
+  "Project Structure" as living at `Simulators/grounding-layers/`,
+  but it actually lives at `Simulators/earth_economics/`. Same
+  for the "Quick Start" (`cd Simulators/grounding-layers`) — copy-paste
+  from a template.
+- The README references a `requirements.txt`, `data/fetch_and_compute.py`,
+  `data/sensitivity_analysis.py`, `docs/DIFFERENTIAL_FRAME.md`,
+  `docs/GLOSSARY.md`, `tests/test_smoke.py`, and
+  `assumption_validator/api.py` — none of which exist in the folder.
+- No CLAIMS.md; no `REFUTATION_PROTOCOL` in any of the audit scripts.
+  Once the folder stabilises, promoting `asteroid_mining_audit.py`
+  and `fermi_paradox_audit.py` to audit-grade would fit the repo
+  pattern.

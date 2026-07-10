@@ -107,42 +107,45 @@ class EconomicModel:
         # Simplified: higher resource depletion -> higher extraction
         depletion = physics_state.get('resource_depletion', 0)
         er = 0.3 + depletion * 0.5
-            def compute_ocdi(self, physics_state: Dict[str, float], er: float) -> float:
-        """
-        Compute Overall Capitalist Dependence Index (Equation 14).
-        Measures the degree to which capital extraction outpaces 
-        substrate maintenance.
-        """
-        # Assume PMI is inversely proportional to depletion
-        # If the environment is depleting, maintenance intensity MUST increase
-        # If it doesn't, the system is 'Capitalist Dependent' (extracting without repairing)
-        depletion = physics_state.get('resource_depletion', 0)
-        pmi = max(0.01, (1.0 - depletion)) 
-
-        RPI = (d(er)/dt) / (d(efficiency)/dt)
-
-If RPI >> 0 during an efficiency improvement: extraction captured the gain.
-If RPI remains positive even when efficiency declines: hysteresis — the system cannot go back.
-
-
-        # OCDI increases if extraction (er) is high and maintenance (pmi) is low
-        ocdi = er / pmi
-        return min(2.0, ocdi)
 
         # Example: Socialist Infrastructure Dependency (Equation 2)
         # SID = C / (C + P). Simplified: higher complexity -> more dependence
         temp = physics_state.get('temperature', 15)
         sid = 0.5 + (temp - 15) * 0.02
-        
+
         # Example: HHI (Equation 12) - concentration increases with stress
         hhi = 2500 + max(0, (temp - 18) * 500)
-        
+
         return {
             'er': min(0.9, er),
             'sid': min(0.95, sid),
             'hhi': max(1500, hhi),
             'osdi': 0.5 * sid + 0.3 * 0.8 + 0.2 * 0.6  # Simplified OSDI
         }
+
+    def compute_ocdi(self, physics_state: Dict[str, float], er: float) -> float:
+        """
+        Compute Overall Capitalist Dependence Index (Equation 14).
+        Measures the degree to which capital extraction outpaces
+        substrate maintenance.
+
+        Related concept — Recovery Path Index (RPI):
+            RPI = d(er)/dt / d(efficiency)/dt
+        - RPI >> 0 during an efficiency improvement: extraction
+          captured the gain.
+        - RPI remains positive even when efficiency declines:
+          hysteresis — the system cannot go back.
+        """
+        # Assume PMI is inversely proportional to depletion.
+        # If the environment is depleting, maintenance intensity MUST
+        # increase. If it doesn't, the system is 'Capitalist Dependent'
+        # (extracting without repairing).
+        depletion = physics_state.get('resource_depletion', 0)
+        pmi = max(0.01, (1.0 - depletion))
+
+        # OCDI increases if extraction (er) is high and maintenance (pmi) is low
+        ocdi = er / pmi
+        return min(2.0, ocdi)
 
 # ==============================================================================
 # 4. Thermodynamic Accountability Framework (TAF)
