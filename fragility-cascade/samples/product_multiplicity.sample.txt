@@ -1,0 +1,12 @@
+branches   oil-like CoV (corr=0)   compute-like CoV (corr=1)
+------------------------------------------------------------
+     1           0.394                  0.399
+     2           0.282                  0.398
+     5           0.179                  0.398
+    10           0.126                  0.400
+    20           0.089                  0.397
+
+Oil-like column falls ~1/sqrt(N): real diversification, an intrinsic
+hedge baked into the substrate. Compute-like column is flat: adding menu
+items buys you nothing, because they all die on the same trunk shock.
+Product multiplicity is only a hedge if the branches can fail apart.
