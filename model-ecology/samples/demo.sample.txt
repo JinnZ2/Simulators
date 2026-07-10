@@ -1,0 +1,64 @@
+============================================================================
+MODEL ECOLOGY AUDIT  |  15 models, 4 families, 281 scored windows
+============================================================================
+
+[P1] Same-family models correlate more than cross-family? (perm null)
+     within |r| = 0.534 (n=21)   cross |r| = 0.533 (n=84)
+     gap = +0.0009   p = 0.4248  (2000 label permutations)
+     P1 SUPPORTED: False
+     -> `family` does NOT explain the correlation structure here.
+        The tree is decoration on this data. Revise the TREE.
+
+[ARTIFICIAL CONSENSUS] how many independent votes are really here?
+     naive count = 15    empirical N_eff = 2.48    phylogenetic N_eff = 9.07
+     phantom votes = 12.52    inflation = 6.05x
+     |N_phylo - N_empir| = 6.60  <- P2 error
+     -> tree predicts far more independence than the spectrum shows.
+        Consistent with P1 failing. The TREE is wrong, not the spectrum.
+
+[D1] Does STRUCTURED disagreement lead the shift? (threshold sweep)
+      thresh  regimes  early_str  lead_str  early_iso  lead_iso  status
+        0.30        3       0.62      0.00       0.00      0.00  discriminating
+        0.45        3       1.00      0.67       0.00      0.17  discriminating
+        0.60        1       1.00      1.00       0.00      0.00  SATURATED (untestable)
+        0.75        2       1.00      1.00       0.00      0.00  discriminating
+        0.85        2       1.00      1.00       0.00      0.00  discriminating
+        0.92        2       1.00      0.50       0.00      0.00  discriminating
+     across discriminating thresholds: d_structured=-0.292  d_isolated=+0.033
+     D1 SUPPORTED: False
+     -> structured disagreement did not lead here. Report it.
+        Update the claim. Do not retune the detector.
+
+[D2] Species census against a CONTINUOUS truth (local variance)
+     prophet    : emd[spec], gaussian_process[prob], hmm[prob], koopman[geom], persistent_homology[geom]
+     workhorse  : bayesian_changepoint[prob], delay_embedding[geom], hilbert[spec], hurst[stat], recurrence[geom]
+     conformist : autocorrelation[stat], fourier[spec], mutual_information[stat], wavelet[spec]
+     crank      : transfer_entropy[stat]
+     ranked by INFORMATION CONTRIBUTION (not accuracy):
+       gaussian_process       pre=-0.71 post=+0.69 dissent=0.84  IC=1.170
+       hmm                    pre=-0.49 post=+0.69 dissent=0.98  IC=1.164
+       koopman                pre=-0.71 post=+0.77 dissent=0.75  IC=1.112
+       persistent_homology    pre=-0.47 post=+0.21 dissent=0.84  IC=0.574
+
+[M1] Observer sensitivity: vary ONLY the observer (32 profiles)
+     mean rank agreement = 0.743   churn = 0.257
+     OBSERVER-INVARIANT  = False
+     winners by observer = {'hilbert': 30, 'hurst': 2}
+     -> 'the best model' is partly an artifact of who is looking.
+
+[M2] Representation invariance. Manifold audited like everything else.
+     time        : supports
+     frequency   : supports
+     rank        : supports
+     difference  : supports
+     manifold    : does NOT support   <- the fashionable one
+     fraction supporting = 80.0%   survives all = False
+
+============================================================================
+STABILITY STATEMENT
+============================================================================
+  conclusion: 'a regime transition occurred'
+  stable across  46.7% of mathematical frameworks,  74.3% of observer parameterizations,  80.0% of representations; independent mathematical families: 2
+
+  NOT 'gaussian_process is the best model.'
+  That sentence is not available from this pipeline, by construction.
