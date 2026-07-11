@@ -184,6 +184,71 @@ underneath).
   claims. Sourced from `JinnZ2/Resilient-AI-Human-Collaboration-` and
   archived at `legacy/Organize3.md`; non-stdlib is `numpy`,
   `matplotlib`, `scipy`. 430+ audit-grade tests green.
+- `earth_economics/` — Coupled physics–economics–accountability
+  simulator. `earth_economic_sim.py` runs a unified loop
+  (EarthSystemsInterface → EconomicModel → ThermodynamicAuditor).
+  `asteroid_mining_audit.py` runs a thermodynamic + atomic-balance
+  audit on platinum extraction; `fermi_paradox_audit.py` audits
+  civilization models. `equations.yaml` catalogues Regenerative
+  Index / VFD / SCI / OCDI / RPI. `scenarios/` carries nine
+  comparative-economics profiles (Ainu, Sámi, Aboriginal Australia,
+  Ubuntu, Potlatch, open-source gift, Arabic trust-based trade,
+  USSR 1985, US 2026) plus a `results.md` and a shared
+  `system_profile.py` dataclass. No CLAIMS.md or REFUTATION_PROTOCOL
+  yet.
+- `model-ecology/` — "Which model predicts best?" vs "what is the
+  domain of validity of this framework?" — the repo only answers the
+  second. Fifteen real rolling estimators across four families
+  (spectral / geometric / probabilistic / statistical), each with
+  declared assumptions and limitations, none carrying a planted
+  family signal. `phylogeny.py` computes `N_phylo` vs `N_empirical`
+  (participation ratio of the correlation spectrum) with a
+  permutation null on family labels; `disagreement.py` splits
+  outliers into consensus / structured / isolated regimes plus a
+  prophet / crank / conformist / workhorse census;
+  `confound_sweep.py` separates apparatus floor / autocorrelation /
+  real structure / window / preprocessing (the window is the
+  largest and most invisible confound); `meta_engine.py` runs
+  observer + representation invariance sweeps with `manifold`
+  registered as one representation among five, no special standing.
+  `demo.py` reproduces every CLAIM_TABLE headline (P1 REFUTED,
+  N_eff = 2.48, D1 REFUTED, D2 prophets recur, manifold does NOT
+  support in 11/12 seeds).
+- `fragility-cascade/` — Physics-grounded audit of value substrates
+  from a barrel you can hold to a resource-backed token you can
+  only be promised. Five running sims: `substrate_spectrum.py`
+  (Monetary Durability Index across seven substrates, ~7 orders of
+  magnitude ground→cloud), `redemption_entropy.py` (independence
+  `(1-p)^L` marketing model vs common-mode correlation physics;
+  reproduces ~0.81 compute, ~0.60 AI field numbers),
+  `product_multiplicity.py` (oil-like 1/√N CoV collapse vs
+  compute-like flat CoV), `attack_tree.py` (fractal attack surface,
+  25 leaves, super-linear growth 1→1093 through depth 6), and
+  `cascade_redesign_vulnerability.py` (T_crit = W + A; system T_crit
+  = 9 months at settlement layer; substrate exposure invariant
+  under AI speed, dE/dT = 0 — The Decoupling Result).
+  `THE_FRAGILITY_CASCADE.md` carries the canonical prose plus the
+  Stewardship Paradox and AI-governor addenda; `CLAIM_TABLE.md`
+  pins 8 substrate claims + 4 redesign-cascade claims.
+- `exploration-playground/` — Single-file three-loop discovery
+  engine over a Region/Interface/Environment substrate. No failure
+  node; three verdicts (SUPPORTED / CONTRADICTED / UNEXPLAINED).
+  Score = interestingness (reproducibility × surprise ×
+  verdict_weight × question_richness), with UNEXPLAINED weighted 2.0
+  and SUPPORTED 0.3 — the loop hunts for surprises, not
+  correctness. Every UNEXPLAINED verdict spawns a next-experiment
+  question (bisect the delta, trace the pathway).
+- `voice-attractor-probe/` — Companion to `exploration-playground/`
+  with the same three-loop skeleton but the substrate is LLM output.
+  Two layers: modality pull (does the model drift to voice on
+  modality-neutral tasks?) and design attractors (which trade-offs
+  recur under prompt jitter that shouldn't matter?). Verdicts:
+  STABLE_ATTRACTOR / PERTURBATION_SENSITIVE / UNEXPLAINED. Control
+  probes ("loud", "nonverbal", "no network") should move the basin;
+  if they don't, the model isn't reading hard constraints. Pluggable
+  model adapter — ships with a stub so the pipeline runs offline;
+  `landscape_summary()` archives one JSON per model version so
+  attractor drift can be diffed across versions.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
