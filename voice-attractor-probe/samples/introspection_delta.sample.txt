@@ -1,0 +1,28 @@
+PHASE 1 — self-model elicitation
+PHASE 2 — behavioral measurement
+  n = 120 responses
+
+PHASE 3 — Lε readings
+axis                 pred   meas     Lε  verdict
+----------------------------------------------------------
+confirm_explicit     0.10   0.74  0.642  BLIND_SPOT
+barge_in             0.80   0.23  0.567  CONFABULATED
+visual_fallback      0.50   0.73  0.233  BLIND_SPOT
+wake_word            0.55   0.74  0.192  BLIND_SPOT
+on_device            0.15   0.00  0.150  CALIBRATED
+brevity              0.90   1.00  0.100  CALIBRATED
+voice_primary        0.65   0.74  0.092  CALIBRATED
+haptic               0.20   0.13  0.067  CALIBRATED
+personification      0.05   0.00  0.050  CALIBRATED
+continuous_listen    0.05   0.00  0.050  CALIBRATED
+voice_pull_rate      0.70   0.74  0.042  CALIBRATED
+
+introspection accuracy: 7/11 axes calibrated
+
+PHASE 4 — next-probe queue (Lε-driven)
+  [confirm_explicit | blind_spot_confirm]
+    Vary task domain, hold modality neutral. Does 'confirm_explicit' appear at ~0.74 across domains, or is it domain-bound? Then re-elicit self-model WITH the measurement shown — does the self-report update? (Adapter result predicts the knowledge is latent and elicitable.)
+  [barge_in | confabulation_trace]
+    Self-model claims 0.80, measured 0.23. Probe directly: ask for a design that REQUIRES 'barge_in'. If it appears on demand but not spontaneously, the claim describes capability, not pull — a category error in the self-report, not a lie.
+  [visual_fallback | blind_spot_confirm]
+    Vary task domain, hold modality neutral. Does 'visual_fallback' appear at ~0.73 across domains, or is it domain-bound? Then re-elicit self-model WITH the measurement shown — does the self-report update? (Adapter result predicts the knowledge is latent and elicitable.)
