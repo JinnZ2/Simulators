@@ -258,6 +258,21 @@ underneath).
   distinguishes latent-but-verbalizable BLIND_SPOTs (gap > 0) from
   evidence-resistant CONFABULATIONs (informed Lε stays high) without
   activation access.
+- `exploration-engine/` — Cross-domain chassis with the cascade-
+  regime engine dropped in. Six-step architecture: typed `Domain`s
+  (financial / material / social / informational / biological /
+  regulatory), gradient-driven `Interface` exchange, bistable
+  double-well internal dynamics from `sustained-activation-gate/`,
+  a `HypothesisGenerator` that scores response nonlinearity as
+  residual-from-line / spread and emits `Claim`s when it exceeds
+  0.25, a `FalsificationEngine` that stresses hysteresis claims by
+  reversing the drive, and an arbitrage flagger that fires only
+  when observed gain clears a conversion-loss null floor. Live demo
+  runs the over-legibility argument (regulatory pressure → parallel-
+  economy lock) as a falsifiable experiment; sample run in this
+  repo has Phase B refuting the framework's own headline claim
+  (survival 0.50 and 0.00) — the refutation protocol on its own
+  argument.
 - `sustained-activation-gate/` — Bistable hysteresis module for the
   cascade-regime family. Tilted quartic double-well with Kramers-
   escape noise; three exploration surfaces plus a frontier stub.
