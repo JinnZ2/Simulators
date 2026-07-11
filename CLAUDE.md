@@ -248,7 +248,30 @@ underneath).
   if they don't, the model isn't reading hard constraints. Pluggable
   model adapter — ships with a stub so the pipeline runs offline;
   `landscape_summary()` archives one JSON per model version so
-  attractor drift can be diffed across versions.
+  attractor drift can be diffed across versions. Stacked companion
+  modules `introspection_delta.py` (v1: one-shot self-model → Lε →
+  static probe queue) and `introspection_delta_v2.py` (five run
+  modes, interactive informed loop, Lε_spontaneous / Lε_informed
+  fork, drift sensor for regenerated-vs-stored self-models,
+  measured-cost thermal brake) turn Anthropic's introspection-
+  adapter framing into a purely behavioral measurement — the harness
+  distinguishes latent-but-verbalizable BLIND_SPOTs (gap > 0) from
+  evidence-resistant CONFABULATIONs (informed Lε stays high) without
+  activation access.
+- `sustained-activation-gate/` — Bistable hysteresis module for the
+  cascade-regime family. Tilted quartic double-well with Kramers-
+  escape noise; three exploration surfaces plus a frontier stub.
+  FIRM (physics) and SOFT (biology interpretation) layers
+  deliberately separated: the C1→vlPAG stress-circuit labels are
+  held in a swappable `INTERPRETATION` dict tagged "ANALOGY_GRADE"
+  (one paper, mouse, small-n); the physics claims stand regardless.
+  Header carries explicit reliability tiers — `compare_programs()`
+  is Tier 1 (four structural claims earned from dynamics),
+  `explore_separability()` is Tier 2 (clean θ ≈ 0.0052 boundary),
+  `explore_theta_vs_persistence()` is Tier 3 (instructive negative:
+  θ flat because baseline collapses faster than the lock persists).
+  `explore_theta_vs_restore()` is a frontier stub with a build
+  recipe — the real controlling axis Tier 3 relocated.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
