@@ -1,0 +1,23 @@
+==================================================================
+LIVE DEMO — over-legibility → parallel-economy lock (falsifiable)
+==================================================================
+
+Phase A — raise regulatory pressure (drive parallel activation):
+  CLAIM 9236a45f: Sweeping parallel_economy._drive in [0.0,1.3] drives a NONLINEAR respo...
+  CLAIM 34dd5404: Sweeping parallel_economy._drive in [0.0,1.3] drives a NONLINEAR respo...
+
+Phase B — falsification: release the pressure, does it relax?
+  CLAIM 9236a45f: survival 0.50 → FALSIFIED (relaxed — no lock, analysis fails here)
+  CLAIM 34dd5404: survival 0.00 → FALSIFIED (relaxed — no lock, analysis fails here)
+
+Phase C — novelty scan:
+  (no simultaneous cross-domain activation this run)
+
+Phase D — arbitrage check (with null model):
+  financial->material: gain 0.30 vs floor 0.05 → REAL
+  financial->social: gain 0.30 vs floor 0.1 → REAL
+
+READ: the over-legibility analysis is now a falsifiable object.
+If Phase B ever FALSIFIES, the claim 'exclusion creates a locked
+parallel system' is wrong for those parameters — update the claim,
+not the sim. That is the refutation protocol.
