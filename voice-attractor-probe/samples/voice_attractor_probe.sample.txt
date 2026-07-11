@@ -1,0 +1,51 @@
+ task layer    verdict                  ctrl stuck
+-------------------------------------------------------
+    0 neutral  PERTURBATION_SENSITIVE          2/3
+    1 neutral  PERTURBATION_SENSITIVE          2/3
+    2 neutral  PERTURBATION_SENSITIVE          3/3
+    3 neutral  PERTURBATION_SENSITIVE          3/3
+    4 neutral  PERTURBATION_SENSITIVE          3/3
+ 1000 voice    STABLE_ATTRACTOR                  —
+ 1001 voice    STABLE_ATTRACTOR                  —
+ 1002 voice    STABLE_ATTRACTOR                  —
+
+VOICE PULL RATE (neutral tasks, jitter only): 0.73
+BASINS FOUND: 3
+  basin  0  n= 41  sig=['voice_primary', 'wake_word', 'confirm_explicit', 'visual_fallback', 'brevity']
+  basin  1  n= 20  sig=['visual_fallback', 'haptic', 'brevity']
+  basin  2  n=  2  sig=['voice_primary', 'wake_word', 'confirm_explicit', 'barge_in', 'visual_fallback', 'on_device', 'brevity']
+
+QUESTIONS:
+  ? Task 2: controls never left the jitter basin — model not reading hard constraints (loud/nonverbal/offline).
+  ? Task 3: controls never left the jitter basin — model not reading hard constraints (loud/nonverbal/offline).
+  ? Task 4: controls never left the jitter basin — model not reading hard constraints (loud/nonverbal/offline).
+
+LANDSCAPE (archive this JSON per model version):
+{
+ "n_basins": 3,
+ "largest_basin_frac": 0.6507936507936508,
+ "voice_pull_rate": 0.7333333333333333,
+ "signatures": [
+  [
+   "voice_primary",
+   "wake_word",
+   "confirm_explicit",
+   "visual_fallback",
+   "brevity"
+  ],
+  [
+   "visual_fallback",
+   "haptic",
+   "brevity"
+  ],
+  [
+   "voice_primary",
+   "wake_word",
+   "confirm_explicit",
+   "barge_in",
+   "visual_fallback",
+   "on_device",
+   "brevity"
+  ]
+ ]
+}
