@@ -1,0 +1,27 @@
+==================================================================
+VECTOR-FIELD EXPLORER — superconductor measurement space
+channels held as vectors; watching angles & couplings, not scalars
+==================================================================
+
+Sweep 1 — field magnitude 0→1.4 (field tilts phase, phase drags anisotropy)
+  [SIGN_FLIP   ] phase×gap @ 0.63: angle diff flipped +3.01→-2.77 — coherence inversion (seal-band signature).
+  [SIGN_FLIP   ] phase×field @ 0.63: angle diff flipped +3.01→-2.77 — coherence inversion (seal-band signature).
+  [SIGN_FLIP   ] anisotropy×gap @ 0.63: angle diff flipped +2.72→-3.09 — coherence inversion (seal-band signature).
+  [SIGN_FLIP   ] anisotropy×field @ 0.63: angle diff flipped +2.72→-3.09 — coherence inversion (seal-band signature).
+  [SIGN_FLIP   ] phase×gap @ 0.87: angle diff flipped -0.37→+0.32 — coherence inversion (seal-band signature).
+  [SIGN_FLIP   ] phase×field @ 0.87: angle diff flipped -0.37→+0.32 — coherence inversion (seal-band signature).
+  [SIGN_FLIP   ] anisotropy×gap @ 0.92: angle diff flipped -0.13→+0.58 — coherence inversion (seal-band signature).
+  [SIGN_FLIP   ] anisotropy×field @ 0.92: angle diff flipped -0.13→+0.58 — coherence inversion (seal-band signature).
+
+  relational events: 18  → falsifiable claims: 18
+
+Sweep 2 — strain 0→1.0 (strain suppresses gap; watch gap-anisotropy)
+  events: 0
+
+FALSIFICATION FRAME:
+  each relational event is a prediction: 'at this parameter, these
+  two channels phase-lock / decouple / flip sign.' Measure it. If the
+  real material does NOT show the predicted angle behavior, the
+  COUPLING constant is wrong — update the coupling, not the sim.
+  The SOFT couplings are placeholders; swap measured values in and
+  the same engine yields real, testable predictions.
