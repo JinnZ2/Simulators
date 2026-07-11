@@ -258,6 +258,21 @@ underneath).
   distinguishes latent-but-verbalizable BLIND_SPOTs (gap > 0) from
   evidence-resistant CONFABULATIONs (informed Lε stays high) without
   activation access.
+- `vector-field-explorer/` — Vector-substrate sim for
+  superconductor-style measurement spaces. Channels held as
+  vectors (2D magnitude+angle or 3D spherical), not scalars — the
+  angle is the load-bearing quantity that scalar-projection
+  instruments drop. Three coupling kinds (`mag_to_mag`,
+  `mag_to_angle`, `angle_to_angle`) map field / strain / phase /
+  anisotropy / gap dynamics. A `RelationalDetector` watches
+  channel pairs across a sweep and flags PHASE_LOCK / DECOUPLE /
+  SIGN_FLIP, gated by warm-up + prior-motion + magnitude-floor
+  guards to keep two idle channels from being mis-labelled locked.
+  Demo sweep of field magnitude fires 18 SIGN_FLIP events at
+  two coherence-inversion parameter clusters; each event becomes a
+  falsifiable CouplingClaim. SOFT coupling constants labeled
+  PLACEHOLDER inline; swap for measured superconductor values
+  before any real claim.
 - `exploration-engine/` — Cross-domain chassis with the cascade-
   regime engine dropped in. Six-step architecture: typed `Domain`s
   (financial / material / social / informational / biological /
