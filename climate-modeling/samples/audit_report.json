@@ -1,0 +1,150 @@
+[
+  {
+    "audit_name": "Phase Change Blindness",
+    "failure_detected": true,
+    "metrics": {
+      "final_biomass_error": 73.16938249399738
+    },
+    "true_final": -0.40804702007528315,
+    "audited_final": 72.76133547392209
+  },
+  {
+    "audit_name": "Stationarity Assumption",
+    "failure_detected": true,
+    "metrics": {
+      "final_biomass_error": 99.97253174009143
+    },
+    "true_final": 514.6721694092142,
+    "audited_final": 614.6447011493057
+  },
+  {
+    "audit_name": "Missing Feedback",
+    "failure_detected": true,
+    "metrics": {
+      "final_biomass_error": 248944.55323030715
+    },
+    "true_final": 249028.25535073102,
+    "audited_final": 83.70212042386505
+  },
+  {
+    "audit_name": "Omitted Variable",
+    "failure_detected": true,
+    "metrics": {
+      "final_biomass_error": 76.05093590603505
+    },
+    "true_final": 174.87270310713225,
+    "audited_final": 250.9236390131673
+  },
+  {
+    "audit_name": "Data Aggregation Error",
+    "failure_detected": true,
+    "metrics": {
+      "rmse": 7.34477517427706,
+      "max_error": 23.183053480657236
+    },
+    "true_final": 707.2425067336953,
+    "audited_final": 730.4099157531193
+  },
+  {
+    "audit_name": "Cascade Speed Blindness",
+    "failure_detected": true,
+    "metrics": {
+      "rmse": 307017.86945442733,
+      "collapse_time_true_h": 240.0,
+      "collapse_time_audited_h": 240.0,
+      "audited_late_by_h": -0.0
+    },
+    "true_final": 754402.2847606484,
+    "audited_final": 479.7081588808984
+  },
+  {
+    "audit_name": "Missing Positive Feedback",
+    "failure_detected": null,
+    "metrics": {
+      "status": "FRONTIER_STUB"
+    },
+    "true_final": null,
+    "audited_final": null
+  },
+  {
+    "audit_name": "Threshold Smoothing",
+    "failure_detected": null,
+    "metrics": {
+      "status": "FRONTIER_STUB"
+    },
+    "true_final": null,
+    "audited_final": null
+  },
+  {
+    "audit_name": "Temporal Aggregation Extremes",
+    "failure_detected": null,
+    "metrics": {
+      "status": "FRONTIER_STUB"
+    },
+    "true_final": null,
+    "audited_final": null
+  },
+  {
+    "audit_name": "Spatial Homogenization",
+    "failure_detected": null,
+    "metrics": {
+      "status": "FRONTIER_STUB"
+    },
+    "true_final": null,
+    "audited_final": null
+  },
+  {
+    "audit_name": "Memory Amnesia",
+    "failure_detected": null,
+    "metrics": {
+      "status": "FRONTIER_STUB"
+    },
+    "true_final": null,
+    "audited_final": null
+  },
+  {
+    "audit_name": "Cross-System Coupling",
+    "failure_detected": null,
+    "metrics": {
+      "status": "FRONTIER_STUB"
+    },
+    "true_final": null,
+    "audited_final": null
+  },
+  {
+    "audit_name": "Buffer Exhaustion",
+    "failure_detected": null,
+    "metrics": {
+      "status": "FRONTIER_STUB"
+    },
+    "true_final": null,
+    "audited_final": null
+  },
+  {
+    "audit_name": "Clustered Extremes",
+    "failure_detected": null,
+    "metrics": {
+      "status": "FRONTIER_STUB"
+    },
+    "true_final": null,
+    "audited_final": null
+  },
+  {
+    "audit_name": "Gaussian Blindness",
+    "failure_detected": null,
+    "metrics": {
+      "status": "FRONTIER_STUB"
+    },
+    "true_final": null,
+    "audited_final": null
+  },
+  {
+    "audit_name": "Incentive Bias",
+    "failure_detected": null,
+    "metrics": {
+      "status": "FRONTIER_STUB"
+    },
+    "true_final": null,
+    "audited_final": null
+  }
+]

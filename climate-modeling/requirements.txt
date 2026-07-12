@@ -1,0 +1,6 @@
+numpy>=1.24
+scipy>=1.10
+# optional, for dashboard.py:
+# streamlit>=1.28
+# optional, for IncentiveBiasAudit when built:
+# scikit-learn>=1.3
