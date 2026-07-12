@@ -299,9 +299,15 @@ underneath).
   is Tier 1 (four structural claims earned from dynamics),
   `explore_separability()` is Tier 2 (clean θ ≈ 0.0052 boundary),
   `explore_theta_vs_persistence()` is Tier 3 (instructive negative:
-  θ flat because baseline collapses faster than the lock persists).
-  `explore_theta_vs_restore()` is a frontier stub with a build
-  recipe — the real controlling axis Tier 3 relocated.
+  θ flat because baseline collapses faster than the lock persists),
+  and `explore_theta_vs_restore()` (the axis Tier 3 relocated) now
+  built and pinned: θ rises 23.9× as restore grows 40× — the
+  "spares baseline" claim is possible on either side of the
+  restoration-vs-coupling trade-off. The soft biology label is a
+  registry of three substrates (C1→vlPAG, AMOC overturning, grid
+  load blackout) — swap `SELECTED_INTERPRETATION` and the module
+  runs unchanged. Ships with README.md + CLAIM_TABLE.md (11
+  refutable claims across five groups).
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
