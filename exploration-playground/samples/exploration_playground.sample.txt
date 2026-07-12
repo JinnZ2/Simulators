@@ -1,0 +1,30 @@
+cyc param                       Δ obs              z verdict       repro   score
+------------------------------------------------------------------------------------
+  0 b.adaptation_rate       -0.25 b_mob        -1.87 SUPPORTED      0.33   0.062
+  1 a.mobility              -0.50 a_trapped    -0.05 SUPPORTED      0.00   0.000
+      ? Phase transition(s) in a_trapped at step(s) [0, 1] — what changed immediately before?
+  2 b.mobility              +0.25 a_trapped     0.02 SUPPORTED      0.00   0.000
+      ? Phase transition(s) in a_trapped at step(s) [0] — what changed immediately before?
+  3 a.mobility              +1.00 b_density     2.13 SUPPORTED      1.00   0.213
+  4 a.mobility              -0.50 b_mob        -3.42 UNEXPLAINED    1.00   5.699
+      ? Why does a.mobility move b_mob? No coupling in prior — trace the pathway.
+      ? Bisect: does a.mobility at half delta (-0.25) still move b_mob?
+      ? Phase transition(s) in b_mob at step(s) [9] — what changed immediately before?
+  5 a.recombination_rate    -0.50 b_density    -0.04 SUPPORTED      0.00   0.000
+  6 b.mobility              +1.00 b_mob         5.93 UNEXPLAINED    1.00   7.913
+      ? Why does b.mobility move b_mob? No coupling in prior — trace the pathway.
+      ? Bisect: does b.mobility at half delta (+0.50) still move b_mob?
+  7 a.mobility              +1.00 a_density     0.80 CONTRADICTED   0.00   0.000
+      ? Prior sign wrong for a.mobility→a_density. What mediates the reversal? Check trap saturation.
+  8 b.trap_density          +1.00 a_density    -0.06 SUPPORTED      0.00   0.000
+  9 b.noise_strength        +1.00 b_mob         0.23 SUPPORTED      0.00   0.000
+ 10 a.mobility              -0.25 a_density    -0.34 CONTRADICTED   0.00   0.000
+      ? Prior sign wrong for a.mobility→a_density. What mediates the reversal? Check trap saturation.
+ 11 a.noise_strength        -0.25 a_mob        -2.23 UNEXPLAINED    0.00   0.000
+      ? Why does a.noise_strength move a_mob? No coupling in prior — trace the pathway.
+      ? Bisect: does a.noise_strength at half delta (-0.12) still move a_mob?
+
+NEXT-EXPERIMENT QUEUE (by interestingness):
+  [  7.913] b.mobility +1.00 → b_mob  (UNEXPLAINED)
+  [  5.699] a.mobility -0.50 → b_mob  (UNEXPLAINED)
+  [  0.213] a.mobility +1.00 → b_density  (SUPPORTED)

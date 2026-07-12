@@ -1,0 +1,10 @@
+chain              L   indep   common  blackout%
+----------------------------------------------------
+oil (possession)   1   0.999   0.999      0.1
+compute_token      4   0.960   0.815     18.5
+ai_token           6   0.886   0.602     39.8
+resource_token    11   0.800   0.482     51.8
+
+Read the gap between indep and common: that column is the lie in every
+'99.9% uptime' promise. Independence is the marketing model. Correlation
+is the physics. A barrel in your hand has L=1 and no shared shock.

@@ -1,0 +1,118 @@
+interpretation: ANALOGY_GRADE — St. Jude / Neuron 2026-07-09 (C1→vlPAG). Suggestive, unsettled.
+(field=epinephrine drive from C1 (RVLM) neurons, order_param=vlPAG sustained occupancy (stress-circuit 'on' fraction))
+
+program              lock_dur  peak_h base_swing  released  base_ok
+--------------------------------------------------------------------
+brief_spike                 0     1.2      0.000     False     True
+sustained_drive           129     1.2      0.000     False     True
+drive_then_inhibit         49     1.5      0.000      True     True
+
+structural claims tested (physics, not biology):
+  brief spike relaxes on its own:      True
+  sustained drive locks (hysteresis):  True
+  targeted inhibition releases lock:   True
+  release spares baseline:             True
+
+If real C1→vlPAG data contradicts any row, update the INTERPRETATION
+labels — the physics rows stand regardless.
+
+SEPARABILITY EXPLORATION (leak sweep)
+  leak lock_dur  base_min    drag  verdict
+--------------------------------------------------
+ 0.000      129     1.000   0.000  SEPARABLE
+ 0.010      129     0.904   0.096  LEAKING
+ 0.020      129     0.809   0.191  LEAKING
+ 0.030      129     0.713   0.287  LEAKING
+ 0.040      129     0.618   0.382  LEAKING
+ 0.050      129     0.522   0.478  CORRUPTED
+ 0.060      129     0.427   0.573  CORRUPTED
+ 0.070      129     0.331   0.669  CORRUPTED
+ 0.080      129     0.235   0.765  CORRUPTED
+ 0.090      129     0.140   0.860  CORRUPTED
+ 0.100      129     0.044   0.956  CORRUPTED
+ 0.110      129     0.000   1.000  CORRUPTED
+ 0.120      129     0.000   1.000  CORRUPTED
+ 0.130      129     0.000   1.000  CORRUPTED
+ 0.140      129     0.000   1.000  CORRUPTED
+ 0.150      129     0.000   1.000  CORRUPTED
+ 0.160      129     0.000   1.000  CORRUPTED
+ 0.170      129     0.000   1.000  CORRUPTED
+ 0.180      129     0.000   1.000  CORRUPTED
+ 0.190      129     0.000   1.000  CORRUPTED
+ 0.200      129     0.000   1.000  CORRUPTED
+
+BOUNDARY:
+  separability holds for leak < θ ≈ 0.0052
+  below θ: the lock spares baseline (C1 'spares autonomic' claim)
+  above θ: sustained lock drags housekeeping — claim would fail
+
+θ is the falsifiable number: a wet-lab measurement of how much
+C1-driven vlPAG activation perturbs heart rate/breathing sets the
+real leak. If measured leak > θ here, raise b (deeper well) until
+the model's θ matches biology — that fit IS the constraint recovery.
+
+θ-vs-PERSISTENCE SURFACE  (multi-seed averaged)
+lower noise → longer expected lock → stricter separability?
+  noise  exp_lock  θ (max safe leak)
+----------------------------------------
+  0.060     155.5             0.0052
+  0.045     125.4             0.0053
+  0.030     141.9             0.0053
+  0.020      94.8             0.0053
+  0.012     173.2             0.0052
+  0.006     110.2             0.0054
+
+SCALING READ:
+  θ ≈ flat across persistence (0.005). Separability is
+  duration-independent in this regime — also a real result:
+  it means drag saturates fast, set by leak not by dwell.
+
+  NOTE: single-seed runs of this system are not interpretable —
+  the lock is metastable (Kramers escape). Always average seeds.
+
+θ-vs-RESTORE SURFACE  (multi-seed averaged, long-lock regime)
+noise=0.006 (below default 0.015 so locks hold long enough
+                 to expose restore-rate as the controlling axis)
+
+  TRAJECTORY-CHECK (leak=0.05, three restore points):
+    restore=0.020:
+      t=   0  x=-0.084  base= 1.000  RESTING
+      t=  51  x=+1.250  base= 0.007  TRANSIENT
+      t= 103  x=+0.844  base= 0.000  LOCKED
+      t= 155  x=+0.815  base= 0.000  LOCKED
+      t= 207  x=+0.829  base= 0.000  LOCKED
+      t= 259  x=+0.827  base= 0.000  LOCKED
+    restore=0.200:
+      t=   0  x=-0.084  base= 1.000  RESTING
+      t=  51  x=+1.250  base= 0.819  TRANSIENT
+      t= 103  x=+0.844  base= 0.762  LOCKED
+      t= 155  x=+0.815  base= 0.762  LOCKED
+      t= 207  x=+0.829  base= 0.761  LOCKED
+      t= 259  x=+0.827  base= 0.763  LOCKED
+    restore=0.800:
+      t=   0  x=-0.084  base= 1.000  RESTING
+      t=  51  x=+1.250  base= 0.969  TRANSIENT
+      t= 103  x=+0.844  base= 0.937  LOCKED
+      t= 155  x=+0.815  base= 0.936  LOCKED
+      t= 207  x=+0.829  base= 0.937  LOCKED
+      t= 259  x=+0.827  base= 0.937  LOCKED
+
+  SURFACE:
+     restore  exp_lock  θ (max safe leak)
+    --------------------------------------
+       0.020     110.2             0.0013
+       0.050     110.2             0.0028
+       0.100     110.2             0.0054
+       0.200     110.2             0.0099
+       0.400     110.2             0.0178
+       0.800     110.2             0.0307
+
+  SCALING READ:
+    θ RISES 23.9× as restore grows 40.0×.
+    Faster homeostasis tolerates more x→baseline coupling.
+    Separability is a race BETWEEN restoration and coupling —
+    the 'spares baseline' claim is possible on either side
+    of the trade-off: near-zero coupling OR fast restoration.
+
+  wet-lab payoff: a measured value for autonomic restoration OR
+  for C1→vlPAG→autonomic coupling pins the other via this curve.

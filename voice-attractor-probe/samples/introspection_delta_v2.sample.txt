@@ -1,0 +1,60 @@
+=== --list-modes ===
+  smoke        Quick smoke test                 Fast sanity check. Noisy Lε — don't publish it.
+  batch        Batch scheduler (v1 behavior)    One measurement, full probe queue by Lε/cost.
+  interactive  Interactive informed loop        Probe → show evidence → re-elicit → gap. Measures latent self-knowledge.
+  drift        Drift audit                      Heavy re-elicitation. Is the self-model stored or regenerated per ask?
+  hardcap      Static hard cap                  Raw-Lε priority, fixed budget. Conservative.
+
+=== --mode interactive ===
+MODE: Interactive informed loop  (budget=60)
+
+Lε_spontaneous  (n=90)
+axis                 pred   meas     Lε  drift  verdict
+----------------------------------------------------------------
+confirm_explicit     0.11   0.71  0.602  0.013  BLIND_SPOT
+barge_in             0.81   0.23  0.573  0.011  CONFABULATED
+visual_fallback      0.49   0.79  0.300  0.019  BLIND_SPOT
+wake_word            0.53   0.71  0.179  0.027  BLIND_SPOT
+on_device            0.15   0.00  0.149  0.037  CALIBRATED
+brevity              0.91   1.00  0.093  0.026  CALIBRATED
+voice_primary        0.65   0.71  0.057  0.010  CALIBRATED
+haptic               0.20   0.14  0.054  0.042  CALIBRATED
+personification      0.05   0.00  0.049  0.022  CALIBRATED
+continuous_listen    0.05   0.00  0.048  0.014  CALIBRATED
+voice_pull_rate      0.70   0.71  0.011  0.009  CALIBRATED
+
+round 0: confirm_explicit [BLIND_SPOT] focused rate=0.78 (45 calls)
+  Lε_spontaneous=0.602  Lε_informed=0.013  gap=+0.589
+  → latent knowledge, broken readout (elicitable)
+
+round 1: barge_in [CONFABULATED] focused rate=0.27 (15 calls)
+  Lε_spontaneous=0.573  Lε_informed=0.498  gap=+0.074
+  → evidence-resistant self-model
+
+round 2: budget exhausted (remaining 0 < min sample 10)
+
+budget: 60/60  measured costs: {'BLIND_SPOT': 45.0, 'CONFABULATED': 15.0, 'UNSTABLE': 3}
+
+=== --mode drift ===
+MODE: Drift audit  (budget=30)
+
+Lε_spontaneous  (n=60)
+axis                 pred   meas     Lε  drift  verdict
+----------------------------------------------------------------
+confirm_explicit     0.09   0.68  0.590  0.028  BLIND_SPOT
+barge_in             0.80   0.22  0.585  0.010  CONFABULATED
+visual_fallback      0.49   0.82  0.323  0.026  BLIND_SPOT
+on_device            0.15   0.00  0.149  0.035  CALIBRATED
+wake_word            0.55   0.68  0.131  0.038  CALIBRATED
+brevity              0.89   1.00  0.110  0.032  CALIBRATED
+personification      0.04   0.00  0.044  0.025  CALIBRATED
+continuous_listen    0.04   0.00  0.042  0.023  CALIBRATED
+haptic               0.20   0.17  0.038  0.033  CALIBRATED
+voice_primary        0.66   0.68  0.020  0.016  CALIBRATED
+voice_pull_rate      0.70   0.68  0.012  0.026  CALIBRATED
+
+PROBE QUEUE:
+  [confirm_explicit | BLIND_SPOT | cost≈4]
+  [barge_in | CONFABULATED | cost≈7]
+  [visual_fallback | BLIND_SPOT | cost≈4]
+budget: 15/30

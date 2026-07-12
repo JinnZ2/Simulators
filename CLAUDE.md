@@ -184,6 +184,154 @@ underneath).
   claims. Sourced from `JinnZ2/Resilient-AI-Human-Collaboration-` and
   archived at `legacy/Organize3.md`; non-stdlib is `numpy`,
   `matplotlib`, `scipy`. 430+ audit-grade tests green.
+- `earth_economics/` — Coupled physics–economics–accountability
+  simulator. `earth_economic_sim.py` runs a unified loop
+  (EarthSystemsInterface → EconomicModel → ThermodynamicAuditor).
+  `asteroid_mining_audit.py` runs a thermodynamic + atomic-balance
+  audit on platinum extraction; `fermi_paradox_audit.py` audits
+  civilization models. `equations.yaml` catalogues Regenerative
+  Index / VFD / SCI / OCDI / RPI. `scenarios/` carries nine
+  comparative-economics profiles (Ainu, Sámi, Aboriginal Australia,
+  Ubuntu, Potlatch, open-source gift, Arabic trust-based trade,
+  USSR 1985, US 2026) plus a `results.md` and a shared
+  `system_profile.py` dataclass. No CLAIMS.md or REFUTATION_PROTOCOL
+  yet.
+- `model-ecology/` — "Which model predicts best?" vs "what is the
+  domain of validity of this framework?" — the repo only answers the
+  second. Fifteen real rolling estimators across four families
+  (spectral / geometric / probabilistic / statistical), each with
+  declared assumptions and limitations, none carrying a planted
+  family signal. `phylogeny.py` computes `N_phylo` vs `N_empirical`
+  (participation ratio of the correlation spectrum) with a
+  permutation null on family labels; `disagreement.py` splits
+  outliers into consensus / structured / isolated regimes plus a
+  prophet / crank / conformist / workhorse census;
+  `confound_sweep.py` separates apparatus floor / autocorrelation /
+  real structure / window / preprocessing (the window is the
+  largest and most invisible confound); `meta_engine.py` runs
+  observer + representation invariance sweeps with `manifold`
+  registered as one representation among five, no special standing.
+  `demo.py` reproduces every CLAIM_TABLE headline (P1 REFUTED,
+  N_eff = 2.48, D1 REFUTED, D2 prophets recur, manifold does NOT
+  support in 11/12 seeds).
+- `fragility-cascade/` — Physics-grounded audit of value substrates
+  from a barrel you can hold to a resource-backed token you can
+  only be promised. Five running sims: `substrate_spectrum.py`
+  (Monetary Durability Index across seven substrates, ~7 orders of
+  magnitude ground→cloud), `redemption_entropy.py` (independence
+  `(1-p)^L` marketing model vs common-mode correlation physics;
+  reproduces ~0.81 compute, ~0.60 AI field numbers),
+  `product_multiplicity.py` (oil-like 1/√N CoV collapse vs
+  compute-like flat CoV), `attack_tree.py` (fractal attack surface,
+  25 leaves, super-linear growth 1→1093 through depth 6), and
+  `cascade_redesign_vulnerability.py` (T_crit = W + A; system T_crit
+  = 9 months at settlement layer; substrate exposure invariant
+  under AI speed, dE/dT = 0 — The Decoupling Result).
+  `THE_FRAGILITY_CASCADE.md` carries the canonical prose plus the
+  Stewardship Paradox and AI-governor addenda; `CLAIM_TABLE.md`
+  pins 8 substrate claims + 4 redesign-cascade claims.
+- `exploration-playground/` — Single-file three-loop discovery
+  engine over a Region/Interface/Environment substrate. No failure
+  node; three verdicts (SUPPORTED / CONTRADICTED / UNEXPLAINED).
+  Score = interestingness (reproducibility × surprise ×
+  verdict_weight × question_richness), with UNEXPLAINED weighted 2.0
+  and SUPPORTED 0.3 — the loop hunts for surprises, not
+  correctness. Every UNEXPLAINED verdict spawns a next-experiment
+  question (bisect the delta, trace the pathway).
+- `voice-attractor-probe/` — Companion to `exploration-playground/`
+  with the same three-loop skeleton but the substrate is LLM output.
+  Two layers: modality pull (does the model drift to voice on
+  modality-neutral tasks?) and design attractors (which trade-offs
+  recur under prompt jitter that shouldn't matter?). Verdicts:
+  STABLE_ATTRACTOR / PERTURBATION_SENSITIVE / UNEXPLAINED. Control
+  probes ("loud", "nonverbal", "no network") should move the basin;
+  if they don't, the model isn't reading hard constraints. Pluggable
+  model adapter — ships with a stub so the pipeline runs offline;
+  `landscape_summary()` archives one JSON per model version so
+  attractor drift can be diffed across versions. Stacked companion
+  modules `introspection_delta.py` (v1: one-shot self-model → Lε →
+  static probe queue) and `introspection_delta_v2.py` (five run
+  modes, interactive informed loop, Lε_spontaneous / Lε_informed
+  fork, drift sensor for regenerated-vs-stored self-models,
+  measured-cost thermal brake) turn Anthropic's introspection-
+  adapter framing into a purely behavioral measurement — the harness
+  distinguishes latent-but-verbalizable BLIND_SPOTs (gap > 0) from
+  evidence-resistant CONFABULATIONs (informed Lε stays high) without
+  activation access.
+- `climate-modeling/` — Two-layer audit taxonomy for ecological /
+  climate models. Level 1: simulation models (`models/grass.py`
+  plain carbon balance, `models/cascade_grass.py` threshold + soil
+  feedback + vulnerability memory as the "true system"). Level 2:
+  sixteen failure-mode audits — six built, ten frontier stubs with
+  build recipes (same pattern as `sustained-activation-gate/`'s
+  frontier stub before it landed). The load-bearing target is
+  **cascade-speed blindness**: smooth / memoryless / Gaussian-
+  driven models systematically underestimate how fast collapse
+  arrives. Built audits: `PhaseChangeAudit` (missing threshold),
+  `StationarityAudit` (stationary-window params vs trending
+  forcing), `MissingFeedbackAudit` (no soil-plant coupling),
+  `OmittedVariableAudit` (hidden moisture), `DataAggregationAudit`
+  (daily-mean fit bias), and the flagship `CascadeSpeedAudit`
+  (threshold + feedback + memory + fat tails). `run_audits.py`
+  emits a report card; sample run in this repo has 6 built → 6
+  FAIL (every simplification detected) and 10 stub → 10 STUB
+  (recipes staked). Ships with `ai_interface.py` (rule-based
+  AIScientist that proposes structural patches; openai backend
+  path stubbed), `meta_experiments.py` (patching loop), and
+  `AUDIT_TAXONOMY.md` mapping each failure mode to
+  fallacy / mathematical condition / real-world consequence.
+  Non-stdlib (numpy + scipy required; sklearn + streamlit optional)
+  — same exemption pattern as `play-sims/`.
+- `vector-field-explorer/` — Vector-substrate sim for
+  superconductor-style measurement spaces. Channels held as
+  vectors (2D magnitude+angle or 3D spherical), not scalars — the
+  angle is the load-bearing quantity that scalar-projection
+  instruments drop. Three coupling kinds (`mag_to_mag`,
+  `mag_to_angle`, `angle_to_angle`) map field / strain / phase /
+  anisotropy / gap dynamics. A `RelationalDetector` watches
+  channel pairs across a sweep and flags PHASE_LOCK / DECOUPLE /
+  SIGN_FLIP, gated by warm-up + prior-motion + magnitude-floor
+  guards to keep two idle channels from being mis-labelled locked.
+  Demo sweep of field magnitude fires 18 SIGN_FLIP events at
+  two coherence-inversion parameter clusters; each event becomes a
+  falsifiable CouplingClaim. SOFT coupling constants labeled
+  PLACEHOLDER inline; swap for measured superconductor values
+  before any real claim.
+- `exploration-engine/` — Cross-domain chassis with the cascade-
+  regime engine dropped in. Six-step architecture: typed `Domain`s
+  (financial / material / social / informational / biological /
+  regulatory), gradient-driven `Interface` exchange, bistable
+  double-well internal dynamics from `sustained-activation-gate/`,
+  a `HypothesisGenerator` that scores response nonlinearity as
+  residual-from-line / spread and emits `Claim`s when it exceeds
+  0.25, a `FalsificationEngine` that stresses hysteresis claims by
+  reversing the drive, and an arbitrage flagger that fires only
+  when observed gain clears a conversion-loss null floor. Live demo
+  runs the over-legibility argument (regulatory pressure → parallel-
+  economy lock) as a falsifiable experiment; sample run in this
+  repo has Phase B refuting the framework's own headline claim
+  (survival 0.50 and 0.00) — the refutation protocol on its own
+  argument.
+- `sustained-activation-gate/` — Bistable hysteresis module for the
+  cascade-regime family. Tilted quartic double-well with Kramers-
+  escape noise; three exploration surfaces plus a frontier stub.
+  FIRM (physics) and SOFT (biology interpretation) layers
+  deliberately separated: the C1→vlPAG stress-circuit labels are
+  held in a swappable `INTERPRETATION` dict tagged "ANALOGY_GRADE"
+  (one paper, mouse, small-n); the physics claims stand regardless.
+  Header carries explicit reliability tiers — `compare_programs()`
+  is Tier 1 (four structural claims earned from dynamics),
+  `explore_separability()` is Tier 2 (clean θ ≈ 0.0052 boundary),
+  `explore_theta_vs_persistence()` is Tier 3 (instructive negative:
+  θ flat because baseline collapses faster than the lock persists),
+  and `explore_theta_vs_restore()` (the axis Tier 3 relocated) now
+  built and pinned: θ rises 23.9× as restore grows 40× — the
+  "spares baseline" claim is possible on either side of the
+  restoration-vs-coupling trade-off. The soft biology label is a
+  registry of three substrates (C1→vlPAG, AMOC overturning, grid
+  load blackout) — swap `SELECTED_INTERPRETATION` and the module
+  runs unchanged. Ships with README.md + CLAIM_TABLE.md (11
+  refutable claims across five groups).
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
