@@ -258,6 +258,30 @@ underneath).
   distinguishes latent-but-verbalizable BLIND_SPOTs (gap > 0) from
   evidence-resistant CONFABULATIONs (informed Lε stays high) without
   activation access.
+- `climate-modeling/` — Two-layer audit taxonomy for ecological /
+  climate models. Level 1: simulation models (`models/grass.py`
+  plain carbon balance, `models/cascade_grass.py` threshold + soil
+  feedback + vulnerability memory as the "true system"). Level 2:
+  sixteen failure-mode audits — six built, ten frontier stubs with
+  build recipes (same pattern as `sustained-activation-gate/`'s
+  frontier stub before it landed). The load-bearing target is
+  **cascade-speed blindness**: smooth / memoryless / Gaussian-
+  driven models systematically underestimate how fast collapse
+  arrives. Built audits: `PhaseChangeAudit` (missing threshold),
+  `StationarityAudit` (stationary-window params vs trending
+  forcing), `MissingFeedbackAudit` (no soil-plant coupling),
+  `OmittedVariableAudit` (hidden moisture), `DataAggregationAudit`
+  (daily-mean fit bias), and the flagship `CascadeSpeedAudit`
+  (threshold + feedback + memory + fat tails). `run_audits.py`
+  emits a report card; sample run in this repo has 6 built → 6
+  FAIL (every simplification detected) and 10 stub → 10 STUB
+  (recipes staked). Ships with `ai_interface.py` (rule-based
+  AIScientist that proposes structural patches; openai backend
+  path stubbed), `meta_experiments.py` (patching loop), and
+  `AUDIT_TAXONOMY.md` mapping each failure mode to
+  fallacy / mathematical condition / real-world consequence.
+  Non-stdlib (numpy + scipy required; sklearn + streamlit optional)
+  — same exemption pattern as `play-sims/`.
 - `vector-field-explorer/` — Vector-substrate sim for
   superconductor-style measurement spaces. Channels held as
   vectors (2D magnitude+angle or 3D spherical), not scalars — the
