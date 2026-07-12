@@ -75,19 +75,59 @@ from dataclasses import dataclass, field
 from enum import Enum
 
 # ----------------------------------------------------------------------
-# SOFT LAYER — swappable interpretation. Replace freely.
+# SOFT LAYER — swappable interpretations.
 # ----------------------------------------------------------------------
+# Registry of substrate labels for the same firm physics. Pick one by
+# assigning SELECTED_INTERPRETATION; the physics is unchanged.
+# Add a new substrate by adding a dict; if the shape (brief-relaxes /
+# sustained-locks / inhibition-releases / baseline-spared) applies, the
+# labels transfer without editing any dynamics code.
 
-INTERPRETATION = {
-    "confidence": "ANALOGY_GRADE",   # not EMPIRICAL. one paper, mouse, small-n.
-    "source": "St. Jude / Neuron 2026-07-09 (C1→vlPAG). Suggestive, unsettled.",
-    "field":        "epinephrine drive from C1 (RVLM) neurons",
-    "order_param":  "vlPAG sustained occupancy (stress-circuit 'on' fraction)",
-    "baseline":     "autonomic housekeeping (heart rate, breathing)",
-    "lock":         "prolonged activation → days-long anxiety persistence",
-    "release":      "targeted C1 inhibition that spares baseline",
-    "caveat":       "map is a hypothesis to falsify, not a finding to cite.",
+INTERPRETATIONS = {
+    "c1_vlpag_stress_circuit": {
+        "confidence": "ANALOGY_GRADE",  # not EMPIRICAL. one paper, mouse, small-n.
+        "source":       "St. Jude / Neuron 2026-07-09 (C1→vlPAG). Suggestive, unsettled.",
+        "field":        "epinephrine drive from C1 (RVLM) neurons",
+        "order_param":  "vlPAG sustained occupancy (stress-circuit 'on' fraction)",
+        "baseline":     "autonomic housekeeping (heart rate, breathing)",
+        "lock":         "prolonged activation → days-long anxiety persistence",
+        "release":      "targeted C1 inhibition that spares baseline",
+        "caveat":       "map is a hypothesis to falsify, not a finding to cite.",
+    },
+    "amoc_overturning": {
+        # The physics class the module docstring's "AMOC hysteresis" note
+        # points at. Bistability itself is well established (Stommel-box
+        # + paleo evidence); the "inhibition that spares baseline" arm is
+        # much weaker — targeted freshwater removal is speculative.
+        "confidence": "STRUCTURAL_ANALOGY",
+        "source":       "Stommel 1961 / Rahmstorf 1996 + paleo record. Bistability well established; release arm is speculative.",
+        "field":        "freshwater loading of the North Atlantic",
+        "order_param":  "Atlantic Meridional Overturning strength (Sv)",
+        "baseline":     "European surface climate (temperature, rainfall)",
+        "lock":         "collapsed overturning state — reduced meridional heat transport, persists past forcing removal",
+        "release":      "sustained removal of freshwater forcing (slow; may not exist for present forcing)",
+        "caveat":       "the release arm is genuinely uncertain for present-day loading (ocean-sourced, not finite meltwater).",
+    },
+    "grid_load_blackout": {
+        # Textbook cascading-failure class. Lock = tripped subnet that
+        # doesn't recover after demand drops. Release = controlled
+        # islanding of the collapsed region without moving intact loads.
+        "confidence": "ENGINEERING_ANALOGY",
+        "source":       "Cascading-failure literature (Dobson, Carreras). Well-instrumented.",
+        "field":        "aggregate load / demand on the grid",
+        "order_param":  "fraction of stations tripped offline",
+        "baseline":     "frequency stability (60 Hz / 50 Hz margin) on the intact subnet",
+        "lock":         "cascading blackout — trip-offs persist after demand drops",
+        "release":      "controlled islanding of the collapsed subnet",
+        "caveat":       "grid recovery is normally faster than the model's Kramers time; this map applies to slow-restoration failures (widespread equipment damage, cold-start blackstart delays).",
+    },
 }
+
+# The active interpretation. Swap freely; the module still runs.
+SELECTED_INTERPRETATION = "c1_vlpag_stress_circuit"
+
+# Alias for existing callers (compare_programs uses INTERPRETATION[...]).
+INTERPRETATION = INTERPRETATIONS[SELECTED_INTERPRETATION]
 
 # ----------------------------------------------------------------------
 # FIRM LAYER — the physics. Trust this independently of the labels.
@@ -479,34 +519,107 @@ def explore_theta_vs_persistence(c_base: WellConfig = None, seeds=12,
     return curve
 
 # ----------------------------------------------------------------------
-# FRONTIER STUB — θ(restore_rate). For the next builder.
+# θ(restore_rate) — the real controlling axis Tier 3 relocated
 # ----------------------------------------------------------------------
 #
-# NOT YET BUILT. This is the named entry point for the open problem.
-# Tier 3 showed separability is governed by baseline restoration vs coupling,
-# not by lock persistence. To build this surface:
+# Separability is a race between BASELINE RESTORATION and coupling, not
+# between lock persistence and coupling. This surface sweeps
+# c.baseline_restore as the independent axis in the long-lock regime
+# (low noise, so the drive-window setting doesn't dominate) and finds
+# θ = max baseline_leak whose seed-averaged drag stays under tolerance.
 #
-#   1. Sweep c.baseline_restore (homeostatic self-correction rate) as the
-#      independent axis, holding a long lock fixed (low noise, or pin x high).
-#   2. For each restore rate, find θ = max leak whose seed-AVERAGED drag stays
-#      under tolerance. (Reuse expected_lock_and_drag — it already averages.)
-#   3. Expect θ to RISE with restore_rate: faster homeostasis tolerates more
-#      coupling. The curve θ(restore) is the trade-off the C1 result implies.
+# Prediction (falsifiable): θ rises with restore rate.
 #
-#   TRAJECTORY-CHECK EVERY POINT before trusting the curve. Every surface in
-#   this file hid an axis bug that only trajectory inspection caught. Do not
-#   trust a smooth-looking output until you have watched x(t) and baseline(t)
-#   for at least the endpoints and one middle point.
+# Wet-lab payoff: a measured value for autonomic restoration rate OR for
+# C1→vlPAG→autonomic coupling pins the other via this curve.
 #
-#   Falsifiable payoff: a wet-lab value for autonomic restoration rate OR for
-#   C1→vlPAG→autonomic coupling pins the other via this curve.
+# TRAJECTORY-CHECK. Every surface in this file hid an axis bug that
+# only trajectory inspection caught. `_sanity_trajectory` runs one seed
+# at (restore, leak) and returns sampled x(t), baseline(t), regime for
+# eyeball inspection. The sweep calls it on endpoints + midpoint before
+# the surface is trusted.
 
-def explore_theta_vs_restore(*args, **kwargs):
-    raise NotImplementedError(
-        "Frontier stub. See the header block above this function for the "
-        "build recipe. Trajectory-check every point.")
+def _sanity_trajectory(restore: float, leak: float, noise: float,
+                       c_base: WellConfig, samples=6, seed=0,
+                       drive_dur=60, steps=260) -> list:
+    """Return sampled (t, x, baseline, regime) rows for eyeball inspection."""
+    c = WellConfig(**{**c_base.__dict__,
+                      "baseline_restore": restore,
+                      "baseline_leak": leak, "noise": noise})
+    tr = run(make_sustained(drive_dur), c, steps=steps, seed=seed)
+    idxs = [int(i * (steps - 1) / (samples - 1)) for i in range(samples)]
+    return [(idx, round(tr.xs[idx], 3), round(tr.base[idx], 3),
+             tr.regimes[idx].value) for idx in idxs]
+
+
+def explore_theta_vs_restore(c_base: WellConfig = None, seeds=12,
+                             restore_grid=None, noise=0.006,
+                             drive_dur=60, steps=260,
+                             sanity_check=True):
+    """θ(restore_rate). Sweep baseline_restore, find max leak whose
+    seed-averaged drag stays under tolerance.
+
+    Prediction: θ rises with restore rate — faster homeostasis tolerates
+    more x→baseline coupling."""
+    c_base = c_base or WellConfig()
+    if restore_grid is None:
+        # slow -> fast (default 0.10 sits in the middle)
+        restore_grid = [0.02, 0.05, 0.10, 0.20, 0.40, 0.80]
+
+    print("\nθ-vs-RESTORE SURFACE  (multi-seed averaged, long-lock regime)")
+    print(f"noise={noise} (below default 0.015 so locks hold long enough")
+    print(f"                 to expose restore-rate as the controlling axis)")
+
+    if sanity_check:
+        # trajectory-check at slow / mid / fast restore before the sweep
+        print("\n  TRAJECTORY-CHECK (leak=0.05, three restore points):")
+        sample_r = [restore_grid[0], restore_grid[len(restore_grid) // 2],
+                    restore_grid[-1]]
+        for restore in sample_r:
+            print(f"    restore={restore:.3f}:")
+            rows = _sanity_trajectory(restore, 0.05, noise, c_base,
+                                      drive_dur=drive_dur, steps=steps)
+            for t, x, b, r in rows:
+                print(f"      t={t:>4}  x={x:>+6.3f}  base={b:>6.3f}  {r}")
+
+    print("\n  SURFACE:")
+    print(f"    {'restore':>8} {'exp_lock':>9} {'θ (max safe leak)':>18}")
+    print("    " + "-" * 38)
+    curve = []
+    for r_val in restore_grid:
+        c = WellConfig(**{**c_base.__dict__, "baseline_restore": r_val})
+        exp_lock, theta = theta_at_noise(noise, c, seeds=seeds,
+                                         drive_dur=drive_dur, steps=steps)
+        curve.append((r_val, exp_lock, theta))
+        print(f"    {r_val:>8.3f} {exp_lock:>9.1f} {theta:>18.4f}")
+
+    print("\n  SCALING READ:")
+    ordered = sorted(curve)
+    if len(ordered) >= 2:
+        r0, l0, t0 = ordered[0]
+        r1, l1, t1 = ordered[-1]
+        if t1 > t0 * 1.5:
+            print(f"    θ RISES {t1/max(t0,1e-6):.1f}× as restore grows "
+                  f"{r1/max(r0,1e-6):.1f}×.")
+            print(f"    Faster homeostasis tolerates more x→baseline coupling.")
+            print(f"    Separability is a race BETWEEN restoration and coupling —")
+            print(f"    the 'spares baseline' claim is possible on either side")
+            print(f"    of the trade-off: near-zero coupling OR fast restoration.")
+        elif t1 < t0 * 0.9:
+            print(f"    θ FALLS with restore rate ({t0:.4f} → {t1:.4f}).")
+            print(f"    Unexpected. Trace: does stronger restore also accelerate")
+            print(f"    x→baseline via some unintended path? Rerun _sanity_trajectory.")
+        else:
+            print(f"    θ ≈ flat across restore ({t0:.4f}). Either coupling")
+            print(f"    saturates baseline regardless of restore, or restore")
+            print(f"    isn't the controlling axis either. Trajectory-check.")
+    print("\n  wet-lab payoff: a measured value for autonomic restoration OR")
+    print("  for C1→vlPAG→autonomic coupling pins the other via this curve.")
+    return curve
+
 
 if __name__ == "__main__":
     compare_programs()
     explore_separability()
     explore_theta_vs_persistence()
+    explore_theta_vs_restore()

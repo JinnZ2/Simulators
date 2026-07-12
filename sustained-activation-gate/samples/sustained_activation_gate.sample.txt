@@ -69,3 +69,50 @@ SCALING READ:
 
   NOTE: single-seed runs of this system are not interpretable —
   the lock is metastable (Kramers escape). Always average seeds.
+
+θ-vs-RESTORE SURFACE  (multi-seed averaged, long-lock regime)
+noise=0.006 (below default 0.015 so locks hold long enough
+                 to expose restore-rate as the controlling axis)
+
+  TRAJECTORY-CHECK (leak=0.05, three restore points):
+    restore=0.020:
+      t=   0  x=-0.084  base= 1.000  RESTING
+      t=  51  x=+1.250  base= 0.007  TRANSIENT
+      t= 103  x=+0.844  base= 0.000  LOCKED
+      t= 155  x=+0.815  base= 0.000  LOCKED
+      t= 207  x=+0.829  base= 0.000  LOCKED
+      t= 259  x=+0.827  base= 0.000  LOCKED
+    restore=0.200:
+      t=   0  x=-0.084  base= 1.000  RESTING
+      t=  51  x=+1.250  base= 0.819  TRANSIENT
+      t= 103  x=+0.844  base= 0.762  LOCKED
+      t= 155  x=+0.815  base= 0.762  LOCKED
+      t= 207  x=+0.829  base= 0.761  LOCKED
+      t= 259  x=+0.827  base= 0.763  LOCKED
+    restore=0.800:
+      t=   0  x=-0.084  base= 1.000  RESTING
+      t=  51  x=+1.250  base= 0.969  TRANSIENT
+      t= 103  x=+0.844  base= 0.937  LOCKED
+      t= 155  x=+0.815  base= 0.936  LOCKED
+      t= 207  x=+0.829  base= 0.937  LOCKED
+      t= 259  x=+0.827  base= 0.937  LOCKED
+
+  SURFACE:
+     restore  exp_lock  θ (max safe leak)
+    --------------------------------------
+       0.020     110.2             0.0013
+       0.050     110.2             0.0028
+       0.100     110.2             0.0054
+       0.200     110.2             0.0099
+       0.400     110.2             0.0178
+       0.800     110.2             0.0307
+
+  SCALING READ:
+    θ RISES 23.9× as restore grows 40.0×.
+    Faster homeostasis tolerates more x→baseline coupling.
+    Separability is a race BETWEEN restoration and coupling —
+    the 'spares baseline' claim is possible on either side
+    of the trade-off: near-zero coupling OR fast restoration.
+
+  wet-lab payoff: a measured value for autonomic restoration OR
+  for C1→vlPAG→autonomic coupling pins the other via this curve.
