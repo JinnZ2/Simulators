@@ -1,0 +1,67 @@
+{
+ "air_c": 43.3,
+ "wet_bulb_c": 32.6,
+ "surface_c_full_sun": 105.4,
+ "human_limit_note": "wet bulb >31C = severe human risk; field maintenance window closes",
+ "pairs": [
+  {
+   "pair": [
+    "aluminum_6061",
+    "abs_plastic"
+   ],
+   "d_cte_1e6K": 66.4,
+   "microstrain": 5671.0,
+   "displacement_um": 850.6,
+   "flag": "RED",
+   "falsify": "measure fastener torque loss and fretting wear on this joint after 30 thermal cycles; GREEN pairs should show <5% torque loss"
+  },
+  {
+   "pair": [
+    "steel_1018",
+    "nylon_66"
+   ],
+   "d_cte_1e6K": 68.3,
+   "microstrain": 5833.0,
+   "displacement_um": 583.3,
+   "flag": "RED",
+   "falsify": "measure fastener torque loss and fretting wear on this joint after 30 thermal cycles; GREEN pairs should show <5% torque loss"
+  },
+  {
+   "pair": [
+    "concrete",
+    "steel_1018"
+   ],
+   "d_cte_1e6K": 1.7,
+   "microstrain": 145.0,
+   "displacement_um": 43.6,
+   "flag": "GREEN",
+   "falsify": "measure fastener torque loss and fretting wear on this joint after 30 thermal cycles; GREEN pairs should show <5% torque loss"
+  }
+ ],
+ "gaskets": [
+  {
+   "material": "epdm_rubber",
+   "temp_c": 105.40229885057471,
+   "days": 45,
+   "set_fraction": 1.0,
+   "flag": "RED",
+   "falsify": "pull gasket after exposure window, measure recovered thickness vs original; model claims ~100% permanent set"
+  },
+  {
+   "material": "nitrile_rubber",
+   "temp_c": 105.40229885057471,
+   "days": 45,
+   "set_fraction": 1.0,
+   "flag": "RED",
+   "falsify": "pull gasket after exposure window, measure recovered thickness vs original; model claims ~100% permanent set"
+  }
+ ],
+ "electronics": {
+  "internal_c": 58.3,
+  "aging_multiplier_vs_25C": 15.5,
+  "projected_drift_pct": 0.48,
+  "flag": "GREEN",
+  "falsify": "co-locate reference-grade sensor for the exposure window; divergence should track projected drift within 2x"
+ },
+ "verdict": "RED"
+}
