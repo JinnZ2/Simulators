@@ -258,6 +258,18 @@ underneath).
   distinguishes latent-but-verbalizable BLIND_SPOTs (gap > 0) from
   evidence-resistant CONFABULATIONs (informed Lε stays high) without
   activation access.
+- `open-instrumentation-project/` — Single-file stdlib-only CLI for
+  private institutional-health self-assessment. Five sensors
+  (Epistemic Exit Velocity, Institutional Attachment Half-Life,
+  Autodidact Vitality / Scientific Trust Inversion, Resilience
+  Dependency Ratio, Open-Source Vitality resource-normalized), each
+  with an explicit threshold and an explicit falsification
+  condition. Ships with a persistent `claims.json` registry
+  (five defaults) + a `manage_claims()` interactive menu; assessments
+  write a timestamped JSON locally, nothing leaves the machine.
+  Verb-speaking foundation stated in the README ("reality is
+  verb-based; sensors measure flows, not states"). CC0. Full
+  falsification log per sensor.
 - `climate-modeling/` — Two-layer audit taxonomy for ecological /
   climate models. Level 1: simulation models (`models/grass.py`
   plain carbon balance, `models/cascade_grass.py` threshold + soil
@@ -273,9 +285,11 @@ underneath).
   `OmittedVariableAudit` (hidden moisture), `DataAggregationAudit`
   (daily-mean fit bias), and the flagship `CascadeSpeedAudit`
   (threshold + feedback + memory + fat tails). `run_audits.py`
-  emits a report card; sample run in this repo has 6 built → 6
-  FAIL (every simplification detected) and 10 stub → 10 STUB
-  (recipes staked). Ships with `ai_interface.py` (rule-based
+  emits a report card; sample run in this repo has 7 built → 7
+  FAIL (every simplification detected, including the promoted
+  `MissingPositiveFeedbackAudit` catching a CO2 amplifying loop)
+  and 9 stub → 9 STUB (recipes staked). Ships with `ai_interface.py`
+  (rule-based
   AIScientist that proposes structural patches; openai backend
   path stubbed), `meta_experiments.py` (patching loop), and
   `AUDIT_TAXONOMY.md` mapping each failure mode to
