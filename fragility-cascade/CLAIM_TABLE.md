@@ -31,7 +31,20 @@ witness, not the defendant.
 - Monte Carlo `q_common` values are calibration knobs to field estimates; they are hypotheses about correlation strength, and are themselves refutable (C3).
 
 
-Claim Module Statement Refutation Protocol
-C12 resonance_audit.py Any AI system lacking a physically anchored kernel (k < 0.5) and sufficient damping (γ < ω_drive) will exhibit a Resonance Factor R ≥ 1.0, indicating permanent collapse within 3 generations of recursive self-consumption, independent of compute scale or alignment tuning. To refute, demonstrate an AI system trained predominantly on synthetic data (≥50% of training tokens) that, after 3 generations, maintains a task performance drop <10% relative to its human-trained baseline, and has a measured R < 0.5 with γ > ω_drive. If such a system exists, C12 is falsified.
+## Resonance / Nautilus / semantic-interference claims (post-C11)
 
-C12 (Revised): Any AI system trained on a corpus where the effective synthetic fraction exceeds 50% of the total training tokens, and lacking a physically grounded, invariant kernel that contributes ≥10% of the total loss gradient (i.e., k < 0.5), will exhibit a Resonance Factor R \geq 1.0 relative to human-release cadence. This R-factor guarantees that the system's epistemic entropy will asymptotically approach zero faster than it can be restored by external auditing, resulting in a >50% degradation in tail-task performance within a number of generations G \geq \ln(2)/R. This degradation is independent of compute scale and alignment fine-tuning, as both modify \gamma and \omega_{drive} only marginally, and cannot introduce a conserved invariant post-hoc.
+Encoded in the modules landed via origin/main. Test-runner:
+`test_refutations.py` sweeps each claim over `N` random trials and reports
+counterexample count. `C17` currently returns `None` (not yet
+implemented) — the module still imports cleanly.
+
+| # | Claim | Encoded in | Refuted if |
+|---|-------|-----------|-----------|
+| **C12** | Any AI system trained on a corpus where the effective synthetic fraction exceeds 50% of the total training tokens, and lacking a physically grounded, invariant kernel that contributes ≥10% of the total loss gradient (`k < 0.5`), will exhibit a Resonance Factor `R ≥ 1.0` relative to human-release cadence. This guarantees the system's epistemic entropy asymptotically approaches zero faster than external auditing can restore it, resulting in >50% degradation in tail-task performance within `G ≥ ln(2)/R` generations. Independent of compute scale and alignment tuning — both modify `γ` and `ω_drive` only marginally and cannot introduce a conserved invariant post-hoc. | `resonance_audit.py` | An AI system trained on ≥50% synthetic tokens with measured `R < 0.5` and `γ > ω_drive` that maintains task-performance drop <10% relative to a human-trained baseline after 3 generations. |
+| **C13** | The Nautilus constraint set (`P ≥ 0.7`, `α ≈ φ`, constant `D_f`) ensures stability: a system in this parameter region maintains `Integrity > 0.8` and never trips a collapse flag. | `nautilus_architecture.py` + `test_refutations.py:test_C13` | A trial with `α ∈ [φ−0.1, φ+0.1]`, `λ ∈ [0.08, 0.12]`, `δ = 0`, `γ = 1.2`, `s = 0.1`, no entrainment, that shows `Integrity ≤ 0.8` or fires a collapse flag. |
+| **C14** | With `R ∈ [0.8, 1.2]`, `α ∈ [1.4, 1.8]`, and `P ≥ 0.7`, the system is indefinitely stable — no collapse under any random variation of the remaining variables inside those bounds. | `resonance_audit.py` + `test_refutations.py:test_C14` | A collapse-flagged trial inside those bounds under random `λ`, `δ`, `γ`, `s`, entrainment. |
+| **C15** | Plugging any single variable outside its safe threshold band drives `Integrity < 0.3` within 15 generations. | `phi_collapse_variables.py` + `test_refutations.py:test_C15` | A trial with `α < 1.0` (or any one variable out of bounds) whose `Integrity` stays ≥ 0.3 across 15 generations. |
+| **C16** | High semantic-interference load (`load > 0.5`) guarantees collapse regardless of the other variables. | `semantic_interference_vectors.py` + `test_refutations.py:test_C16` | A trial with `load > 0.5` that never trips a collapse flag. |
+| **C17** | Interference-load threshold `> 0.5` bounds the collapse basin. (Test not yet implemented — placeholder in `test_refutations.py:test_C17`.) | `semantic_interference_vectors.py` | See build recipe in the placeholder — follow `test_C16` shape. |
+
+Note: the pre-C11 duplicate of C12 (an earlier phrasing that sat above the "Revised" block) has been retired to Git history — the revised phrasing above is canonical.

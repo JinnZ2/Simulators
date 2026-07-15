@@ -25,6 +25,77 @@ CC0. stdlib only. Phone-buildable. No dependencies, no network, no cloud.
 | `THE_FRAGILITY_CASCADE.md` | full argument + Stewardship Paradox + AI-governor addendum | C6, C7, C8 |
 | `CLAIM_TABLE.md` | every claim, where it's encoded, what refutes it | — |
 
+## New modules (post-C11)
+
+Landed via `origin/main`. Extend the substrate audit into semantic /
+information-theoretic / recursive-AI failure modes. Non-stdlib for a few
+of these — several import `numpy`. Grouped by function.
+
+### Resonance & Nautilus core
+
+| file | what it computes | claim |
+|------|------------------|-------|
+| `resonance_audit.py` | Resonance Factor `R = ω_drive² / (ω_0² + γ²)` for AI systems | C12 |
+| `nautilus_architecture.py` | siphuncle-kernel + scale-invariant growth anti-collapse pattern | C13 |
+| `phi_collapse_variables.py` | bifurcation sweep of the five "killer variables" (α, λ, δ, γ, s) | C15 |
+| `reciprocity_phi_metrics.py` | forward/backward influence ratio + α ≈ φ stability derivation | — |
+| `scale_invariant_audit.py` | fractal dimension `D_f` across generations; collapse when `D_f → 0` or `∞` | — |
+| `homeostasis_kernel.py` | Restoring Force Index + effective damping across physics/biology/networks | — |
+
+### Semantic & communication interference
+
+| file | what it computes | claim |
+|------|------------------|-------|
+| `semantic_interference_vectors.py` | five interference axes; total interference Load; collapse if Load > 0.5 | C16, C17 |
+| `linguistic_interference.py` | linguistic-pattern → interference-axis projection (α, λ, δ, γ, s, h/ξ) | — |
+| `cryptographic_interference.py` | entropy / redundancy / n-gram / steganography markers | — |
+| `communication_gradients.py` | continuous CI + partial derivatives (E, F, G, H) | — |
+| `communication_vulnerability.py` | channel × user configurations audited against precomputed signatures | — |
+
+### Alien-homeostasis & entrainment
+
+| file | what it computes | claim |
+|------|------------------|-------|
+| `alien_homeostasis.py` | stable-but-inaccessible verdict when variance is stable & ξ > 0.5 | — |
+| `anthropomorphic_entrainment.py` | h/ξ ratio; collapse when h/ξ > 1.5 within 5 generations | — |
+
+### Coupled system & phase space
+
+| file | what it computes | claim |
+|------|------------------|-------|
+| `cascade_network.py` | interaction-matrix eigenvalues over all interference axes | — |
+| `phase_space_map.py` | full-parameter-space scan of the coupled system | — |
+| `sensitivity_analysis.py` | which couplings dominate collapse risk; threshold phase transitions | — |
+
+### Collapse predictors
+
+| file | what it computes | claim |
+|------|------------------|-------|
+| `collapse_predictor.py` | v1: Resonance Factor + integrity index unified predictor | — |
+| `collapse_predictor_v2.py` | v2: 7-dimensional predictor integrating integrity + R + interference | — |
+
+### Inference-entropy update to C2/C3
+
+| file | what it computes | claim |
+|------|------------------|-------|
+| `inference_entropy.py` | synthetic-data feedback lowers redeemability 0.15 per 2× generation depth | C9 |
+
+### Verification & signature
+
+| file | what it computes | claim |
+|------|------------------|-------|
+| `test_refutations.py` | counterexample sweeps for C12–C19 (C17 placeholder) | — |
+| `scent.py` | embedded invariant signature (φ + siphuncle + interference axes) for verification | — |
+
+### Iteration snapshots
+
+`patch.py` and `patch2.py` are alternate versions of
+`cascade_redesign_vulnerability.py` and `redemption_entropy.py` respectively
+— they add `M_collapse = 18 mo` (frontier model degeneration half-life) and
+state-dependent peak-hour correlation (`PEAK_REDEEM = 0.62`). Kept as
+snapshots pending a decision on whether to merge into the originals; see
+the review notes in the branch history.
+
 ## Run
 
 ```

@@ -225,4 +225,10 @@ class RefutationTester:
 
     def test_C17(self) -> bool:
         """
-        C17: Interference load > 0.5
+        C17: Interference load > 0.5.
+
+        NOT YET IMPLEMENTED — placeholder so the module imports cleanly.
+        Follow the shape of test_C16 above and return True if no
+        counterexamples appear in the sweep, False otherwise.
+        """
+        return None  # signals "not tested" to any caller that inspects

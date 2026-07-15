@@ -204,7 +204,7 @@ def main():
     print("  α-axis:  Decreasing type‑token ratio, repeated n‑grams.")
     print("  λ-axis:  Multiple valid interpretations; prompt language drift.")
     print("  δ-axis:  Asymmetric treatment of cultural/ethical concepts.")
-    print("  γ-axis:  Missing intermediate reasoning steps; "final answer" only.")
+    print("  γ-axis:  Missing intermediate reasoning steps; 'final answer' only.")
     print("  s-axis:  Over‑confidence, hallucinated details, high perplexity drop.")
     print("=" * 70)
 
