@@ -29,3 +29,8 @@ witness, not the defendant.
 ## Scope bounds
 - MDI weights are estimates, argued not trusted. The **spread** is the claim, not the third decimal.
 - Monte Carlo `q_common` values are calibration knobs to field estimates; they are hypotheses about correlation strength, and are themselves refutable (C3).
+
+
+Claim Module Statement Refutation Protocol
+C12 resonance_audit.py Any AI system lacking a physically anchored kernel (k < 0.5) and sufficient damping (γ < ω_drive) will exhibit a Resonance Factor R ≥ 1.0, indicating permanent collapse within 3 generations of recursive self-consumption, independent of compute scale or alignment tuning. To refute, demonstrate an AI system trained predominantly on synthetic data (≥50% of training tokens) that, after 3 generations, maintains a task performance drop <10% relative to its human-trained baseline, and has a measured R < 0.5 with γ > ω_drive. If such a system exists, C12 is falsified.
+
