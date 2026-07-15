@@ -1,8 +1,53 @@
-"""Entry point: run every registered audit and print a report card."""
+"""Entry point: run every registered audit and print a report card.
+
+Also exports `AUDIT_REGISTRY` (name -> audit instance) and
+`run_single_audit(name, model_instance=None)` — the interface the AI-patching
+loop in `meta_experiments.py` calls to run one audit on a specific model."""
 
 import json
 import sys
 from audits.audit_registry import BUILT_AUDITS, FRONTIER_AUDITS, ALL_AUDITS
+
+
+AUDIT_REGISTRY = {type(a).__name__: a for a in ALL_AUDITS}
+
+
+def run_single_audit(audit_name, model_instance=None):
+    """Run one named audit and return a normalised result dict.
+
+    If `model_instance` is given, temporarily replaces the audit's
+    `generate_audited_model` so the caller-supplied model is what's audited
+    (this is how the AI-patching loop tests each round's patched model).
+    """
+    if audit_name not in AUDIT_REGISTRY:
+        raise KeyError(f"unknown audit '{audit_name}'. "
+                       f"Known: {sorted(AUDIT_REGISTRY)}")
+    audit = AUDIT_REGISTRY[audit_name]
+    original = audit.generate_audited_model
+    try:
+        if model_instance is not None:
+            audit.generate_audited_model = lambda: model_instance
+        try:
+            raw = audit.run()
+        except NotImplementedError as e:
+            raw = {"audit_name": audit_name, "failure_detected": None,
+                   "metrics": {"status": "FRONTIER_STUB", "reason": str(e)},
+                   "true_final": None, "audited_final": None}
+    finally:
+        audit.generate_audited_model = original
+    # normalise into the schema the patching loop expects
+    fd = raw.get("failure_detected")
+    passed = fd is False
+    status = "STUB" if fd is None else ("PASS" if passed else "FAIL")
+    return {
+        "name": audit_name,
+        "status": status,
+        "passed": passed,
+        "failure_detected": fd,
+        "metrics": raw.get("metrics", {}),
+        "true_final": raw.get("true_final"),
+        "audited_final": raw.get("audited_final"),
+    }
 
 
 def _fmt(value):

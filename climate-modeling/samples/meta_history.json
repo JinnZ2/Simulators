@@ -1,0 +1,22 @@
+[
+  {
+    "iteration": 0,
+    "status": "FAIL",
+    "metrics": {
+      "final_biomass_error": 283254.4829037338
+    },
+    "true_final": 298095.7988141838,
+    "audited_final": 14841.315910450032,
+    "patch_applied": true,
+    "patch_body": "x = state[0]\nT = forcing_value.get('temperature', 20.0)\nco2 = forcing_value.get('co2', 380.0)\nlight = forcing_value.get('light', 1.0)\nif x < 20.0 or T > 35.0:\n    return [-0.10 * x]\ngrowth = 0.10 * x * (1.0 + 0.005 * (co2 - 380.0))\ndeath = 0.05 * x\nif T > 35.0:\n    death += 0.5 * x\nreturn [growth - death]"
+  },
+  {
+    "iteration": 1,
+    "status": "PASS",
+    "metrics": {
+      "final_biomass_error": 0.0
+    },
+    "true_final": 298095.7988141838,
+    "audited_final": 298095.7988141838
+  }
+]

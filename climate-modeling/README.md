@@ -71,17 +71,52 @@ procedure in [`AUDIT_TAXONOMY.md`](AUDIT_TAXONOMY.md).
 
 ## AI-patching loop
 
-`ai_interface.py` ships with a rule-based stub AI that recognises each
-built audit and proposes a structural patch on failure (add threshold, add
-feedback, recalibrate on richer data, adjust `Q10`). Swap `backend="openai"`
-to route through an LLM; the prompt template is spelled out in
-`_build_prompt`.
+Two patcher families live in `ai_interface.py`:
 
-`meta_experiments.MetaExperiment.run_audit_with_patching()` runs an audit,
-asks the AI for a patch on failure, records the patch, re-runs. Bounded by
-`max_iterations`. Failed patches are recorded in `history`, not silently
-discarded — the diagnostic point of the loop is which failure modes an
-LLM's structural suggestions can actually repair.
+- **`RuleBasedPatcher`** — deterministic, no network. Reads audit-failure
+  metrics (`rmse`, `final_biomass_error`, `audited_late_by_h`) and emits
+  a fresh derivative body: threshold cliff when RMSE is severe, memory
+  term when the audit is late, CO2 coupling when biomass drifts. Full
+  code output, not a patch dict.
+- **`LLMPatcher`** — same interface. Falls back to the rule-based patcher
+  if the `openai` package or `OPENAI_API_KEY` is missing, so `--openai` is
+  safe to flip in either environment.
+
+`meta_experiments.py` exposes `run_meta_experiment(audit_name, max_iterations,
+use_openai)` — the active loop:
+
+1. Take the audit's default audited model, subclass it so the parent stays
+   untouched (`Patched_<BaseName>` per meta-experiment).
+2. Run the audit via `run_audits.run_single_audit(name, instance)`.
+3. On failure, hand `(audit_result, current_derivative_source)` to the patcher.
+4. `apply_patch_to_class` compiles the returned body inside a namespace with
+   `numpy` + `math`, then swaps the class's `derivative`.
+5. Re-audit until pass or `max_iterations`.
+
+The derivative source used at step 3 is tracked as a local (not
+`inspect.getsource` on the class), because after the first `exec`-compiled
+patch the class method has no file for `inspect` to read.
+
+CLI:
+
+```bash
+python meta_experiments.py --audit MissingPositiveFeedbackAudit --max-iter 3
+python meta_experiments.py --audit MissingPositiveFeedbackAudit --openai
+```
+
+Pinned run:
+[`samples/meta_experiment_missing_positive_feedback.sample.txt`](samples/meta_experiment_missing_positive_feedback.sample.txt)
++ [`samples/meta_history.json`](samples/meta_history.json).
+The loop fixes the flat-growth audit in **one iteration** — patched body
+recovers `final_biomass_error = 0.0` because rule 3 happens to reproduce
+the true CO2 coupling exactly. That's the happy-path demo. Real LLM
+patches on stiff audits (e.g. `CascadeSpeedAudit` after threshold
+discontinuities are added) can be numerically slower; expect the second
+iteration to take longer than the first.
+
+`meta_experiments.MetaExperiment.run_audit_with_patching()` is the older
+scenario-level loop (dict-patch `AIScientist`), kept for the dashboard hook.
+`run_meta_experiment()` is the code-editing loop.
 
 ## Refutation protocol
 
