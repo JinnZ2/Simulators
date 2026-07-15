@@ -1,0 +1,13 @@
+
+META-EXPERIMENT — MissingPositiveFeedbackAudit
+  patcher: RuleBasedPatcher
+  max_iterations: 3
+  patched class: Patched__FlatGrass (subclass of _FlatGrass)
+
+  iter 0: FAIL  final_biomass_error=283254.4829037338
+  patch applied; re-auditing
+
+  iter 1: PASS  final_biomass_error=0.0
+  passed after 1 patch attempts
+
+  history -> samples/meta_history.json

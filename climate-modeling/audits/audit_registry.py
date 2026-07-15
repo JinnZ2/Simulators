@@ -6,8 +6,8 @@ from .missing_feedback import MissingFeedbackAudit
 from .omitted_variable import OmittedVariableAudit
 from .data_aggregation import DataAggregationAudit
 from .cascade_speed import CascadeSpeedAudit
+from .missing_positive_feedback import MissingPositiveFeedbackAudit
 from .frontier_stubs import (
-    MissingPositiveFeedbackAudit,
     ThresholdSmoothingAudit,
     TemporalAggregationExtremesAudit,
     SpatialHomogenizationAudit,
@@ -26,10 +26,10 @@ BUILT_AUDITS = [
     OmittedVariableAudit(),
     DataAggregationAudit(),
     CascadeSpeedAudit(),
+    MissingPositiveFeedbackAudit(),
 ]
 
 FRONTIER_AUDITS = [
-    MissingPositiveFeedbackAudit(),
     ThresholdSmoothingAudit(),
     TemporalAggregationExtremesAudit(),
     SpatialHomogenizationAudit(),
