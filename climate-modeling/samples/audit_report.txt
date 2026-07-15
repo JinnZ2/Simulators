@@ -1,5 +1,5 @@
 ========================================================================
-CLIMATE MODELING AUDIT SUITE — 6 built, 10 frontier stubs
+CLIMATE MODELING AUDIT SUITE — 7 built, 9 frontier stubs
 ========================================================================
 
 audit                            verdict    metric                        
@@ -10,7 +10,7 @@ Missing Feedback                 FAIL       final_biomass_error=248944.553
 Omitted Variable                 FAIL       final_biomass_error=76.051    
 Data Aggregation Error           FAIL       rmse=7.345                    
 Cascade Speed Blindness          FAIL       rmse=307017.869               
-Missing Positive Feedback        STUB       status=FRONTIER_STUB          
+Missing Positive Feedback        FAIL       final_biomass_error=283254.483
 Threshold Smoothing              STUB       status=FRONTIER_STUB          
 Temporal Aggregation Extremes    STUB       status=FRONTIER_STUB          
 Spatial Homogenization           STUB       status=FRONTIER_STUB          
@@ -22,6 +22,6 @@ Gaussian Blindness               STUB       status=FRONTIER_STUB
 Incentive Bias                   STUB       status=FRONTIER_STUB          
 
 ========================================================================
-SUMMARY: 0 pass, 6 fail, 10 stub
+SUMMARY: 0 pass, 7 fail, 9 stub
 ========================================================================
 report saved -> samples/audit_report.json

@@ -34,20 +34,7 @@ class _FrontierStub(BaseAudit):
         }
 
 
-class MissingPositiveFeedbackAudit(_FrontierStub):
-    """Temperature-dependent amplifying loop the audit misses.
-
-    TRUE: grass + soil model where the feedback strength itself rises with T
-    (e.g. warmer soil accelerates decomposition, releasing CO2 that warms more).
-    AUDITED: constant-strength feedback or no feedback.
-    FORCING: `DiurnalTemperature(T_mean=23, amplitude=8)` — moderate warming.
-    METRIC: RMSE of biomass trajectory; failure if RMSE > 10.
-    PREDICTION: audit underestimates decline speed once the feedback engages."""
-
-    def __init__(self):
-        super().__init__(
-            "Missing Positive Feedback",
-            "Temperature-scaled soil-plant feedback the audited model omits.")
+# MissingPositiveFeedbackAudit promoted to audits/missing_positive_feedback.py.
 
 
 class ThresholdSmoothingAudit(_FrontierStub):

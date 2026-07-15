@@ -97,6 +97,28 @@ class StochasticForcing:
         return {'temperature': T, 'light': light}
 
 
+class LinearForcing:
+    """Linear ramp of a driver (e.g. CO2 ppm) over `duration` hours. Returns a
+    dict with the ramp value in `co2` plus `light=1.0` (constant illumination).
+    Simpler than the diurnal forcings; useful for the promoted
+    MissingPositiveFeedbackAudit."""
+
+    def __init__(self, start, end, duration, key="co2"):
+        self.start = start
+        self.end = end
+        self.duration = duration
+        self.key = key
+
+    def __call__(self, t):
+        if t <= 0:
+            val = self.start
+        elif t >= self.duration:
+            val = self.end
+        else:
+            val = self.start + (self.end - self.start) * t / self.duration
+        return {self.key: val, 'temperature': 20.0, 'light': 1.0}
+
+
 class FatTailedForcing:
     """Diurnal cycle plus Student's t noise. Heavy tails -> extreme heatwaves."""
 
