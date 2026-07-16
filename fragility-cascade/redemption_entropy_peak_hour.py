@@ -1,11 +1,17 @@
 #!/usr/bin/env python3
 """
-redemption_entropy.py
+redemption_entropy_peak_hour.py
 
-C2, C3, C11 — period-by-period redeemability with common-mode correlation.
-UPDATED with C11: state-dependent correlation. Peak grid hours (4/day) drop
-redeemability to 0.62 vs. off-peak 0.81. Average daily redemption = 0.778.
-Independence model (1-p)^L still predicts ~0.96; field estimate ~0.78 (new).
+Adds C11 (state-dependent correlation) to the Monte-Carlo redemption-entropy
+audit in redemption_entropy.py. Peak grid hours (5-9 PM, ~4/day) drop
+per-gate redeemability from 0.81 (off-peak) to 0.62; daily average 0.778.
+Independence model still predicts ~0.96; field estimate ~0.78. The gap is
+the physics of correlated load.
+
+Standalone module — does NOT replace redemption_entropy.py. That module's
+chain-Monte-Carlo across oil / compute / ai / resource tokens stays
+canonical; this file adds the time-of-day state dependency as a separate
+reading and encodes C11.
 """
 
 import math
@@ -24,7 +30,7 @@ def p_redeem(hour_of_day):
     Return redeemability for a given hour (0–23).
     Peak if hour in [17,18,19,20] (5–9 PM).
     """
-    if 17 <= hour <= 20:
+    if 17 <= hour_of_day <= 20:
         return PEAK_REDEEM
     else:
         return BASE_REDEEM

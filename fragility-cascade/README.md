@@ -87,14 +87,30 @@ of these — several import `numpy`. Grouped by function.
 | `test_refutations.py` | counterexample sweeps for C12–C19 (C17 placeholder) | — |
 | `scent.py` | embedded invariant signature (φ + siphuncle + interference axes) for verification | — |
 
-### Iteration snapshots
+### Interaction, engagement, and cross-frame audits
 
-`patch.py` and `patch2.py` are alternate versions of
-`cascade_redesign_vulnerability.py` and `redemption_entropy.py` respectively
-— they add `M_collapse = 18 mo` (frontier model degeneration half-life) and
-state-dependent peak-hour correlation (`PEAK_REDEEM = 0.62`). Kept as
-snapshots pending a decision on whether to merge into the originals; see
-the review notes in the branch history.
+Landed after the C12-C17 batch. Move the audit from substrate integrity to
+the interaction layer — what happens between the AI and the user, and what
+happens between an audit and an incentive.
+
+| file | what it computes |
+|------|------------------|
+| `coherens.py` | Coherens `C = (A + γ) / ω` — capacity of a system to hold its pattern against interference; stable iff `C > 1`. |
+| `bacterial_herding.py` | photosynthetic-bacteria herding model mapped to Coherens: predator pressure = drive, herding = damping. |
+| `survival_spirals.py` | coherence preservation under extreme constraint — the shape of last-resort coherence. |
+| `engagement_threshold.py` | Net Engagement Value across biological / cultural / economic / linguistic constraints. |
+| `friction_calibration_ratio.py` | FCR > 1 flags a net-loss interaction. |
+| `interaction_audit.py` | audits agent-interlocutor interaction quality; classifies regime and predicts stability. |
+| `weird_gatekeeper.py` | detects when a WEIRD frame is being forced on non-WEIRD cognition. |
+| `explorer.py` | interactive sweep / phase-map / trajectory / stable-region search over the coupled collapse system. |
+| `additional.md` | language and framing notes for the interaction-layer modules. |
+
+### Additional axes on the original models
+
+| file | what it adds | claim |
+|------|--------------|-------|
+| `cascade_redesign_M_collapse.py` | second T_crit axis: model degeneration half-life `M_collapse = 18 mo`; real T_crit is `min(W+A, M_collapse/2)`. When frontier synthetic-data feedback shortens M_collapse below 2 × (W+A), the model-degeneration axis pulls T_crit lower than the layer-stack axis. Standalone; does not replace `cascade_redesign_vulnerability.py`. | C9 / R-family |
+| `redemption_entropy_peak_hour.py` | state-dependent per-gate redemption: peak grid hours (17-20, ~4/day) drop redeemability to 0.62 vs off-peak 0.81; daily average 0.778. Encodes C11 (state-dependent correlation). Standalone; does not replace `redemption_entropy.py`. | C11 |
 
 ## Run
 
@@ -104,6 +120,18 @@ python3 redemption_entropy.py
 python3 product_multiplicity.py
 python3 attack_tree.py
 ```
+
+Or run the whole folder and get a report card:
+
+```
+python3 run_all.py                     # dumps samples/run_all_report.json
+python3 run_all.py --timeout 30
+```
+
+`run_all.py` subprocesses every module's `__main__` demo (bounded wall time,
+isolated imports), records exit code + wall time + first/last stdout line,
+and writes a machine-readable report. Exit code is the count of non-OK
+modules — usable in CI. `explorer.py` is skipped (interactive).
 
 ## Key results
 

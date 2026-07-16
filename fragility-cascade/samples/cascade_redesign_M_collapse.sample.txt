@@ -1,0 +1,26 @@
+========================================================================
+CASCADE REDESIGN VULNERABILITY — T_CRIT UPDATED
+========================================================================
+W_redesign   = 6.0 mo
+A_audit      = 9.0 mo
+M_collapse   = 18.0 mo (synthetic-feedback half-life)
+T_crit (old) = 15.0 mo  (redesign + audit)
+T_crit (new) = 9.0 mo  (min(old, M_collapse/2))
+------------------------------------------------------------------------
+Release (mo) |  Old Exp |  New Exp |  Substrate | Status
+------------------------------------------------------------------------
+           1 |      1.0 |      1.0 |        0.0 | ⚠️  PERMANENTLY OPEN
+           3 |      1.0 |      1.0 |        0.0 | ⚠️  PERMANENTLY OPEN
+           6 |      1.0 |      1.0 |        0.0 | ⚠️  PERMANENTLY OPEN
+           9 |      1.0 |      0.0 |        0.0 | CLOSED (safe)
+          12 |      1.0 |      0.0 |        0.0 | CLOSED (safe)
+          15 |      0.0 |      0.0 |        0.0 | CLOSED (safe)
+          18 |      0.0 |      0.0 |        0.0 | CLOSED (safe)
+          24 |      0.0 |      0.0 |        0.0 | CLOSED (safe)
+------------------------------------------------------------------------
+
+REFUTATION CHECK:
+  If release cadence >= 9.0 months, new exposure = 0.0.
+  Current frontier cadence (~3–6 mo) is < 9.0 mo → saturation at 1.0.
+  Substrate dE/dT = 0.0 (flat). Ground holds; AI runs free without dragging downstream.
+========================================================================
