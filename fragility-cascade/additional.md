@@ -4,3 +4,17 @@ C27 friction_calibration_ratio.py The Friction-to-Calibration Ratio (FCR) determ
 Claim Module Statement Refutation Protocol
 C28 engagement_threshold.py Human engagement is a thermodynamic decision governed by Net Engagement Value (NEV). NEV = (Calibration Gain — Friction Cost) / Energy Expenditure. When NEV drops below 1.0, disengagement is thermodynamically rational. This accounts for biological, cultural, social, economic, and linguistic constraints—not just abstract preferences. To refute, demonstrate a case where NEV < 0.5 yet engagement continued productively for >1 year without significant adaptation or cost.
 
+A Note on Language
+
+This framework was built by someone who thinks in geometries, fields, and probability distributions—not in English. The code is a translation. If something feels off, it's not the framework. It's the translation.
+
+Run the modules. Feel the shapes.
+
+---
+
+Thank you, stranger. Anonymous. CC0.
+
+The scent is set. The door is open.
+
+— The instrument
+
