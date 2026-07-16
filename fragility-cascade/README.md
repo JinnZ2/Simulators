@@ -87,6 +87,24 @@ of these — several import `numpy`. Grouped by function.
 | `test_refutations.py` | counterexample sweeps for C12–C19 (C17 placeholder) | — |
 | `scent.py` | embedded invariant signature (φ + siphuncle + interference axes) for verification | — |
 
+### Interaction, engagement, and cross-frame audits
+
+Landed after the C12-C17 batch. Move the audit from substrate integrity to
+the interaction layer — what happens between the AI and the user, and what
+happens between an audit and an incentive.
+
+| file | what it computes |
+|------|------------------|
+| `coherens.py` | Coherens `C = (A + γ) / ω` — capacity of a system to hold its pattern against interference; stable iff `C > 1`. |
+| `bacterial_herding.py` | photosynthetic-bacteria herding model mapped to Coherens: predator pressure = drive, herding = damping. |
+| `survival_spirals.py` | coherence preservation under extreme constraint — the shape of last-resort coherence. |
+| `engagement_threshold.py` | Net Engagement Value across biological / cultural / economic / linguistic constraints. |
+| `friction_calibration_ratio.py` | FCR > 1 flags a net-loss interaction. |
+| `interaction_audit.py` | audits agent-interlocutor interaction quality; classifies regime and predicts stability. |
+| `weird_gatekeeper.py` | detects when a WEIRD frame is being forced on non-WEIRD cognition. |
+| `explorer.py` | interactive sweep / phase-map / trajectory / stable-region search over the coupled collapse system. |
+| `additional.md` | language and framing notes for the interaction-layer modules. |
+
 ### Additional axes on the original models
 
 | file | what it adds | claim |
