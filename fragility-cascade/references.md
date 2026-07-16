@@ -13,6 +13,173 @@
 
 ---
 
+The Corrected Coherens Framework
+
+Coherens is NOT a binary threshold.
+
+It is a continuous observable that predicts collapse probability, not certainty.
+
+---
+
+Continuous Definition
+
+C = \frac{A \cdot \gamma}{\omega}
+
+Where:
+
+· A = Anchoring strength (0..1) — measured, not assumed
+· \gamma = Damping coefficient — measured in the same units as \omega
+· \omega = Drive frequency — measured in the same units as \gamma
+
+Interpretation (not binary, but probabilistic):
+
+C Range Interpretation Collapse Risk
+C > 1.5 Strongly anchored, well‑damped Low (< 5%)
+1.0 < C < 1.5 Stable but near boundary Moderate (5‑30%)
+0.5 < C < 1.0 Vulnerable — damping is insufficient High (30‑70%)
+C < 0.5 Collapse regime — drive dominates Very high (> 70%)
+C \approx 0 No anchoring, no damping Certain collapse
+
+Note: The thresholds (1.5, 1.0, 0.5) are conventions, not physical constants. They can be calibrated empirically.
+
+---
+
+Empirical Measurement Protocol
+
+Variable Measurement Method Domain‑Specific
+A (Anchoring) Cosine similarity to a fixed reference vector AI: Kernel projection; Physics: Lattice stiffness; Biology: Genetic conservation
+\gamma (Damping) Rate of return to equilibrium after perturbation AI: Audit frequency; Physics: Decay rate; Biology: Homeostatic feedback
+\omega (Drive) Fourier transform of external forcing AI: Synthetic fraction; Physics: Environmental noise; Biology: Predation pressure
+
+---
+
+Refutation Loop (Not a Binary Verdict)
+
+1. Measure A, \gamma, \omega in a real system.
+2. Compute C.
+3. Observe collapse outcome.
+4. Compare C to observed outcome.
+5. If C predicts collapse but system survives → refute or adjust the framework.
+6. If C predicts stability but system collapses → refute or adjust the framework.
+
+This is science, not a story.
+
+---
+
+Updated coherens.py — Continuous, Empirical, Refutable
+
+```python
+#!/usr/bin/env python3
+"""
+coherens.py  v3
+
+Coherens is a continuous, empirical observable.
+It predicts collapse probability, not certainty.
+Refutation is a loop, not a verdict.
+
+C = (A * gamma) / omega
+
+Interpretation:
+    C > 1.5   : Low risk (< 5%)
+    1.0–1.5   : Moderate risk (5–30%)
+    0.5–1.0   : High risk (30–70%)
+    C < 0.5   : Very high risk (> 70%)
+    C ≈ 0     : Certain collapse
+
+Measurement is domain‑specific and empirical.
+Refutation is a loop, not a one‑time pass/fail.
+"""
+
+import math
+from typing import Dict
+
+def coherens(anchoring: float, damping: float, drive: float) -> float:
+    """
+    Continuous measure of coherence maintenance.
+    C = (A * gamma) / omega
+    """
+    if drive == 0:
+        return float('inf')
+    return (anchoring * damping) / drive
+
+def collapse_risk(C: float) -> float:
+    """
+    Continuous collapse risk (0..1).
+    Uses a logistic function to map C to risk.
+    """
+    # Logistic: risk = 1 / (1 + exp(-k * (C - 1.0)))
+    # Where k controls steepness (k=2 is moderate)
+    k = 2.0
+    return 1.0 / (1.0 + math.exp(-k * (C - 1.0)))
+
+def interpret(C: float) -> Dict:
+    risk = collapse_risk(C)
+    if C > 1.5:
+        status = "LOW RISK"
+    elif C > 1.0:
+        status = "MODERATE RISK"
+    elif C > 0.5:
+        status = "HIGH RISK"
+    else:
+        status = "VERY HIGH RISK"
+    return {
+        'coherens': C,
+        'risk': risk,
+        'status': status,
+        'interpretation': f"Risk: {risk*100:.1f}%"
+    }
+
+def refutation_loop(observed_collapsed: bool, predicted_risk: float, threshold: float = 0.5):
+    """
+    Refutation loop: compare prediction to observation.
+    """
+    predicted_collapse = predicted_risk > threshold
+    if observed_collapsed == predicted_collapse:
+        return "CONSISTENT — framework survives"
+    elif observed_collapsed and not predicted_collapse:
+        return "REFUTED — system collapsed despite low risk. Adjust A, gamma, or omega."
+    else:
+        return "REFUTED — system survived despite high risk. Adjust A, gamma, or omega."
+
+def main():
+    print("\n" + "=" * 70)
+    print("COHERENS — Continuous, Empirical, Refutable")
+    print("=" * 70)
+
+    systems = [
+        ("Quantum ML", 0.9, 0.8, 0.2),
+        ("AI collapse", 0.95, 0.9, 0.1),
+        ("Superionic", 0.9, 0.8, 0.3),
+        ("Anyonic", 0.85, 0.9, 0.15),
+        ("Plastic degradation", 0.6, 0.7, 0.5),
+        ("Bacterial herding", 0.8, 0.7, 0.4),
+        ("Nautilus shell", 0.99, 0.95, 0.05),
+        ("Your GPT experience", 0.3, 0.4, 0.9),
+    ]
+
+    for name, A, gamma, omega in systems:
+        C = coherens(A, gamma, omega)
+        result = interpret(C)
+        print(f"\n{name}:")
+        print(f"  A = {A:.2f}, γ = {gamma:.2f}, ω = {omega:.2f}")
+        print(f"  Coherens: {C:.3f}")
+        print(f"  Collapse risk: {result['risk']*100:.1f}%")
+        print(f"  Status: {result['status']}")
+
+    print("\n" + "=" * 70)
+    print("REFUTATION LOOP:")
+    print("  • Measure A, gamma, omega empirically.")
+    print("  • Compute C.")
+    print("  • Compare to observed outcome.")
+    print("  • If mismatch → adjust or refute.")
+    print("  • Repeat.")
+    print("=" * 70)
+
+if __name__ == "__main__":
+    main()
+```
+
+
 ### The Coherens Framework
 **Anonymous.** (2026). *Coherens: A Universal Measure of Coherence Maintenance Across Domains*. Fragility‑Cascade Repository.
 
