@@ -104,7 +104,7 @@ Where:
 - **Anchor (\( A \))**: Pre‑training distribution
 - **Coherens**: \( C = \frac{A \cdot \gamma}{\omega} \) predicts collapse rate
 
-**Refutation**: If \( C > 1 \) but model still collapses, the framework fails.
+**Refutation**: If \( C > 1 \) but model still collapses, the framework fails. Modify claim, assess scope, review, check assumptions and unaddressed variables then reclaim and test again. 
 
 ---
 
