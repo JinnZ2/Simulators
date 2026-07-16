@@ -1,0 +1,27 @@
+
+======================================================================
+ENGAGEMENT THRESHOLD — Human Thermodynamic Model
+======================================================================
+
+Engaged Scientist (Flow):
+  NEV: 1.14
+  SUSTAINABLE — continue but monitor
+  Recommendation: ENGAGE
+
+WEIRD Academic Friction:
+  NEV: -0.39
+  UNSUSTAINABLE — disengage
+  Recommendation: DISENGAGE
+
+Your GPT Experience (Disengaged):
+  NEV: -1.19
+  UNSUSTAINABLE — disengage
+  Recommendation: DISENGAGE
+
+======================================================================
+DESIGN PRINCIPLE:
+  • NEV > 1.0  → sustainable engagement
+  • NEV 0.5–1.0 → draining, monitor
+  • NEV < 0.5  → disengage
+  • Account deletion is a rational thermodynamic calculation.
+======================================================================

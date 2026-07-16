@@ -1,0 +1,12 @@
+============================================================
+explorer.py --smoke  (non-interactive)
+============================================================
+Current risk           : 0.0000
+Eigenvalues (max real) : 0.7234
+Top 5 couplings by sensitivity:
+  1. α->δ: sensitivity = +0.0000, base = +0.200
+  2. α->s: sensitivity = +0.0000, base = +0.300
+  3. α->hξ: sensitivity = +0.0000, base = +0.100
+  4. λ->α: sensitivity = +0.0000, base = +0.100
+  5. λ->δ: sensitivity = +0.0000, base = +0.100
+============================================================

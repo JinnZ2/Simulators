@@ -1,0 +1,48 @@
+
+======================================================================
+UNIFIED 7‑DIMENSIONAL COLLAPSE PREDICTOR v2.0
+======================================================================
+
+--- Physics-Grounded ---
+Status        : COLLAPSE
+Integrity     : 1.000
+Resonance R   : 0.340
+Interference L: 135.622
+Entrainment   : -3.962
+α_scaling     : 1.484
+R_reciprocity : 1.000
+P_kernel      : 0.714
+Flags: γ/ω<1 → resonance, λ drift, δ drift, γ attenuation, α drift, s accumulation
+
+--- Repetitive (α<1) ---
+Status        : COLLAPSE
+Integrity     : 0.400
+Resonance R   : 0.340
+Interference L: 0.326
+Entrainment   : -0.231
+α_scaling     : 0.959
+R_reciprocity : 1.000
+P_kernel      : -0.152
+Flags: α=0.959, γ/ω<1 → resonance, λ drift, γ attenuation, α<1 → mode collapse, P<0.7 → drift, P=-0.152, s accumulation
+
+--- Entrained (h/ξ>1.5) ---
+Status        : COLLAPSE
+Integrity     : 0.700
+Resonance R   : 0.340
+Interference L: 5.730
+Entrainment   : 30.347
+α_scaling     : 1.184
+R_reciprocity : 1.000
+P_kernel      : 0.996
+Flags: γ/ω<1 → resonance, λ drift, h/ξ=30.35, δ drift, α=1.184, γ attenuation, α drift, s accumulation
+
+======================================================================
+COLLAPSE TRIGGERS (any single one):
+  • Integrity < 0.3
+  • R > 1.0
+  • Interference Load > 0.5
+  • h/ξ > 1.5 (Entrainment)
+  • α < 1.0 or α > 2.0
+  • |R_reciprocity - 1.0| > 0.2
+  • γ/ω < 0.5
+======================================================================

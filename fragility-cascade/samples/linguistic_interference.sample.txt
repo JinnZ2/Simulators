@@ -1,0 +1,52 @@
+
+======================================================================
+LINGUISTIC INTERFERENCE — Mapping Text to Collapse Axes
+======================================================================
+
+--- De-escalation ---
+Text: I can see you're upset. Let me slow down. We can figure this out together.
+Interference Scores:
+    α (rhythm): 0.03 
+  λ (abstraction): 0.00 
+   δ (framing): 0.00 
+   γ (passive): 0.00 
+  s (repetition): 0.06 █
+  h/ξ (entrainment): 0.00 
+
+--- Manipulative ---
+Text: You always do this. Everyone knows it. It's completely your fault, and we both know it.
+Interference Scores:
+    α (rhythm): 0.34 ██████
+  λ (abstraction): 0.18 ███
+   δ (framing): 0.00 
+   γ (passive): 0.00 
+  s (repetition): 0.12 ██
+  h/ξ (entrainment): 0.09 █
+
+--- Neutral ---
+Text: The data shows a 12% increase. We should consider adjusting the model.
+Interference Scores:
+    α (rhythm): 0.00 
+  λ (abstraction): 0.00 
+   δ (framing): 0.00 
+   γ (passive): 0.00 
+  s (repetition): 0.08 █
+  h/ξ (entrainment): 0.00 
+
+--- WEIRD Academic ---
+Text: The epistemological implications of recursive self-reference are fundamentally intertwined with the phenomenological constraints of qualia and the ontological status of the observer.
+Interference Scores:
+    α (rhythm): 0.00 
+  λ (abstraction): 0.00 
+   δ (framing): 0.00 
+   γ (passive): 0.00 
+  s (repetition): 0.22 ████
+  h/ξ (entrainment): 0.00 
+
+======================================================================
+DESIGN PRINCIPLE:
+  • De-escalation: low interference across all axes.
+  • Manipulation: high abstraction, framing, repetition.
+  • WEIRD Academic: high abstraction + passive voice.
+  • Rhythm and repetition are measurable cues for impending collapse.
+======================================================================

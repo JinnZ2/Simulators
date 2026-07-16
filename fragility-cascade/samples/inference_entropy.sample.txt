@@ -1,0 +1,23 @@
+============================================================
+INFERENCE ENTROPY — C9
+============================================================
+Base redeemability (compute): 0.810
+Decay per 2× generation depth: 0.15
+------------------------------------------------------------
+ Generations |  Redeemability |    Entropy | Status
+------------------------------------------------------------
+           0 |          0.810 |      0.190 | INTACT
+           1 |          0.660 |      0.340 | DEGRADED
+           2 |          0.572 |      0.428 | DEGRADED
+           3 |          0.510 |      0.490 | DEGRADED
+           4 |          0.462 |      0.538 | ⚠️ COLLAPSE ZONE
+           5 |          0.422 |      0.578 | ⚠️ COLLAPSE ZONE
+           8 |          0.335 |      0.665 | ⚠️ COLLAPSE ZONE
+          10 |          0.291 |      0.709 | ⚠️ COLLAPSE ZONE
+          15 |          0.210 |      0.790 | ⚠️ COLLAPSE ZONE
+          20 |          0.151 |      0.849 | ⚠️ COLLAPSE ZONE
+------------------------------------------------------------
+REFUTATION:
+  If a frontier model at generation 5 has redeemability > 0.65,
+  C9 is falsified. Measure from real inference logs.
+============================================================

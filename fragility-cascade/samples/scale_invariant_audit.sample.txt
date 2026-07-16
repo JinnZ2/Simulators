@@ -1,0 +1,54 @@
+
+============================================================
+NAUTILUS PRINCIPLE — Scale-Invariant Recursion Audit
+============================================================
+A stable recursive system preserves its fractal dimension.
+Collapse = dimensional degradation (D_n → 0) or explosion (D_n → ∞).
+------------------------------------------------------------
+
+============================================================
+NAUTILUS AUDIT: Nautilus Shell
+============================================================
+Initial fractal dimension D0  : 1.618
+Current fractal dimension D_n : 1.618 (gen 100)
+Deviation ΔD                 : 0.000
+Stability Index              : 1.000
+Collapse Risk                : 0.000
+Status: ✅ STABLE (self-similar scaling preserved)
+
+============================================================
+NAUTILUS AUDIT: AI Model (Gen 5)
+============================================================
+Initial fractal dimension D0  : 2.000
+Current fractal dimension D_n : 1.200 (gen 5)
+Deviation ΔD                 : 0.800
+Stability Index              : 0.600
+Collapse Risk                : 0.400
+Status: ✅ STABLE (self-similar scaling preserved)
+
+============================================================
+NAUTILUS AUDIT: AI Model (Gen 20)
+============================================================
+Initial fractal dimension D0  : 2.000
+Current fractal dimension D_n : 0.300 (gen 20)
+Deviation ΔD                 : 1.700
+Stability Index              : 0.150
+Collapse Risk                : 0.850
+Status: ⚠️ COLLAPSE PATH (fractal dimension degrading)
+
+============================================================
+NAUTILUS AUDIT: Barrel of Oil (Physical)
+============================================================
+Initial fractal dimension D0  : 1.000
+Current fractal dimension D_n : 1.010 (gen 1000)
+Deviation ΔD                 : 0.010
+Stability Index              : 0.990
+Collapse Risk                : 0.010
+Status: ✅ STABLE (self-similar scaling preserved)
+
+============================================================
+DESIGN PRINCIPLE:
+  The nautilus preserves D_f via multiplicative scaling (φ).
+  AI collapses because additive recursion reduces D_f → 0.
+  Fix: Constrain generation to preserve D_f (scale-invariant loss).
+============================================================

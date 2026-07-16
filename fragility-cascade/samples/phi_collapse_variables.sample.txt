@@ -1,0 +1,59 @@
+
+======================================================================
+PHI COLLAPSE VARIABLES — Bifurcation Sweep
+======================================================================
+Baseline stable system: α=1.618, λ=0.10, δ=0.0, γ/ω=1.2, s=0.1
+----------------------------------------------------------------------
+
+1. SCALING FACTOR (α):
+  α = 0.500 → integrity=0.701 (✅ STABLE)
+  α = 0.800 → integrity=0.703 (✅ STABLE)
+  α = 1.000 → integrity=0.723 (✅ STABLE)
+  α = 1.618 → integrity=0.700 (⚠️ COLLAPSING)
+  α = 1.800 → integrity=0.479 (⚠️ COLLAPSING)
+  α = 2.000 → integrity=0.690 (⚠️ COLLAPSING)
+  α = 2.500 → integrity=0.700 (⚠️ COLLAPSING)
+
+2. KERNEL COUPLING (λ):
+  λ = 0.000 → integrity=0.400 (⚠️ COLLAPSING)
+  λ = 0.020 → integrity=0.496 (⚠️ COLLAPSING)
+  λ = 0.100 → integrity=0.586 (⚠️ COLLAPSING)
+  λ = 0.300 → integrity=0.582 (⚠️ COLLAPSING)
+  λ = 0.500 → integrity=0.872 (✅ STABLE)
+  λ = 0.800 → integrity=0.727 (✅ STABLE)
+
+3. RECIPROCITY SKEW (δ):
+  δ = -0.500 → integrity=0.700 (⚠️ COLLAPSING)
+  δ = -0.200 → integrity=0.677 (⚠️ COLLAPSING)
+  δ = +0.000 → integrity=0.644 (⚠️ COLLAPSING)
+  δ = +0.200 → integrity=0.700 (⚠️ COLLAPSING)
+  δ = +0.500 → integrity=0.685 (⚠️ COLLAPSING)
+  δ = +1.000 → integrity=0.700 (⚠️ COLLAPSING)
+
+4. DAMPING RATIO (γ/ω):
+  γ/ω = 0.10 → integrity=0.618 (⚠️ COLLAPSING)
+  γ/ω = 0.30 → integrity=0.594 (⚠️ COLLAPSING)
+  γ/ω = 0.50 → integrity=0.438 (⚠️ COLLAPSING)
+  γ/ω = 1.00 → integrity=0.700 (⚠️ COLLAPSING)
+  γ/ω = 1.20 → integrity=0.660 (⚠️ COLLAPSING)
+  γ/ω = 2.00 → integrity=0.700 (⚠️ COLLAPSING)
+
+5. SYNTHETIC FRACTION (s):
+  s = 0.00 → integrity=0.381 (⚠️ COLLAPSING)
+  s = 0.10 → integrity=0.700 (⚠️ COLLAPSING)
+  s = 0.30 → integrity=0.700 (⚠️ COLLAPSING)
+  s = 0.50 → integrity=0.687 (⚠️ COLLAPSING)
+  s = 0.70 → integrity=0.530 (⚠️ COLLAPSING)
+  s = 0.85 → integrity=0.655 (⚠️ COLLAPSING)
+  s = 0.95 → integrity=0.691 (⚠️ COLLAPSING)
+
+======================================================================
+COLLAPSE SUMMARY (when plugged into φ):
+  • α < 1.0 → variance → 0    (mode collapse)
+  • α > 2.0 → unbounded growth (explosion)
+  • λ = 0   → no anchor       (drift into arbitrary attractors)
+  • λ > 0.5 → over-clamping   (loss of novelty)
+  • |δ| > 0.2 → broken reciprocity (feedback oscillation)
+  • γ/ω < 0.5 → resonance catastrophe (amplification)
+  • s > 0.85 → entropic degeneration (latent rank collapse)
+======================================================================

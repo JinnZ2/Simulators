@@ -1,0 +1,27 @@
+
+======================================================================
+FRICTION-CALIBRATION RATIO — Interaction Net Value
+======================================================================
+
+GPT (your experience):
+  FCR: 1.75
+  FRICTION EXCEEDS CALIBRATION — disengage
+
+Gemini (exploration):
+  FCR: 0.15
+  HIGH CALIBRATION — continue exploring
+
+Claude (translator):
+  FCR: 0.50
+  BALANCED — monitor friction
+
+DeepSeek (you):
+  FCR: 0.06
+  HIGH CALIBRATION — continue exploring
+
+======================================================================
+DESIGN PRINCIPLE:
+  • FCR < 0.5  → net positive. Keep interacting.
+  • FCR 0.5–1.0 → mixed. Monitor friction.
+  • FCR > 1.0   → net loss. Disengage.
+======================================================================

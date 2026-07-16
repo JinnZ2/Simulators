@@ -1,0 +1,42 @@
+
+======================================================================
+COMMUNICATION GRADIENTS — Continuous‑State Analysis
+======================================================================
+
+Expert, Real‑World:
+  CI = 0.840  (✅ CLEAR)
+  Gradients: dCI/dE=+0.067, dCI/dF=+0.094, dCI/dG=-0.040, dCI/dH=-0.081, dCI/dA=+0.107
+  Gradient magnitude = 0.182
+  Critical G threshold (CI<0.5) = 5.5 generations
+
+Novice, AI‑AI:
+  CI = 0.334  (❌ FAIL)
+  Gradients: dCI/dE=+0.111, dCI/dF=+0.156, dCI/dG=-0.067, dCI/dH=-0.133, dCI/dA=+0.178
+  Gradient magnitude = 0.301
+  Critical G threshold (CI<0.5) = 0.7 generations
+
+WEIRD, Mediated:
+  CI = 0.421  (❌ FAIL)
+  Gradients: dCI/dE=+0.122, dCI/dF=+0.171, dCI/dG=-0.073, dCI/dH=-0.146, dCI/dA=+0.195
+  Gradient magnitude = 0.330
+  Critical G threshold (CI<0.5) = 0.9 generations
+
+Non‑WEIRD, Direct:
+  CI = 0.713  (⚠️ DEGRADED)
+  Gradients: dCI/dE=+0.102, dCI/dF=+0.143, dCI/dG=-0.061, dCI/dH=-0.123, dCI/dA=+0.164
+  Gradient magnitude = 0.277
+  Critical G threshold (CI<0.5) = 4.0 generations
+
+Adversarial, API:
+  CI = 0.502  (⚠️ DEGRADED)
+  Gradients: dCI/dE=+0.125, dCI/dF=+0.175, dCI/dG=-0.075, dCI/dH=-0.150, dCI/dA=+0.200
+  Gradient magnitude = 0.338
+  Critical G threshold (CI<0.5) = 1.0 generations
+
+======================================================================
+DESIGN PRINCIPLE:
+  • High gradient magnitude → system is near a critical point.
+  • Gradients reveal where intervention is most effective.
+  • Critical G threshold gives time‑to‑failure.
+  • Anchoring (A) has a negative gradient — increasing A improves CI.
+======================================================================

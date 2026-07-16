@@ -35,8 +35,12 @@ from datetime import datetime
 # Modules that are interactive or otherwise not eligible for automated demo.
 SKIP = frozenset({
     "run_all.py",           # this file
-    "explorer.py",          # interactive input loop
 })
+
+# Modules with a non-interactive smoke path invoked via extra CLI args.
+SMOKE_ARGS = {
+    "explorer.py": ["--smoke"],   # bypasses the interactive menu
+}
 
 
 def module_files(root: str) -> list:
@@ -58,9 +62,10 @@ def run_one(path: str, timeout: float) -> dict:
     exit_code = 0
     stdout = ""
     stderr = ""
+    extra = SMOKE_ARGS.get(os.path.basename(path), [])
     try:
         proc = subprocess.run(
-            [sys.executable, path],
+            [sys.executable, path, *extra],
             capture_output=True,
             text=True,
             timeout=timeout,

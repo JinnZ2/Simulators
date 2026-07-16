@@ -1,0 +1,34 @@
+
+======================================================================
+WEIRD GATEKEEPER — Detecting Frame Enforcement
+======================================================================
+
+Transcript analyzed:
+  A: I think in geometries and fields, not in words.
+  B: That's interesting. Can you put that in plain English for me? What do you mean by geometries?
+  A: I don't translate. I work with the shape of the problem.
+  B: I'm not sure I understand. Could you clarify? Most people use words to communicate.
+  A: I use geometry. The words are a translation I have to do for you.
+  B: If you don't explain in plain English, this conversation won't work.
+
+WEIRD Pressure Profile:
+  forced_categories: 0.2
+  pathologizing: 0.4
+  translation_pressure: 0.0
+  termination_threats: 0.4
+  entrainment: 0.0
+  weird_pressure: 0.21000000000000002
+  status: LOW_WEIRD_PRESSURE
+
+Flags: TERMINATION_THREAT
+
+Status: LOW_WEIRD_PRESSURE
+
+Strategy:
+
+STRATEGY: EXPLORE FREELY
+
+1. The system is not forcing a WEIRD frame.
+2. Continue as you are.
+3. Monitor for shifts in pressure.
+

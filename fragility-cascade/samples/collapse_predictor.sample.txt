@@ -1,0 +1,66 @@
+
+======================================================================
+UNIFIED COLLAPSE PREDICTOR — Demo
+======================================================================
+
+--- Stable ---
+Status        : COLLAPSE
+Integrity     : 0.700
+Resonance R   : 0.340
+Interference L: 300.953
+R_reciprocity : 1.000
+α_scaling     : 1.458
+P_kernel      : 0.088
+Flags:
+  - Semantic s-axis projection > 0.1 → entropy collapse
+  - Kernel projection P < 0.7 → drift chaos
+  - γ attenuation → resonance
+  - λ drift → kernel decoupling
+  - Kernel drift: P=0.088 (<0.7)
+  - δ drift → reciprocity skew
+  - s accumulation → entropy collapse
+  - α drift → variance collapse
+  - Damping ratio γ/ω < 1.0 → resonance
+
+--- Repetitive (α<1) ---
+Status        : WARNING
+Integrity     : 0.400
+Resonance R   : 0.340
+Interference L: 0.293
+R_reciprocity : 1.000
+α_scaling     : 0.920
+P_kernel      : 0.110
+Flags:
+  - Scaling factor α < 1.0 → mode collapse
+  - Kernel projection P < 0.7 → drift chaos
+  - δ drift → reciprocity skew
+  - Scaling drift: α=0.920 (φ=1.618)
+  - α drift → variance collapse
+  - Damping ratio γ/ω < 1.0 → resonance
+  - Kernel drift: P=0.110 (<0.7)
+
+--- Biased (δ≠0) ---
+Status        : COLLAPSE
+Integrity     : 0.700
+Resonance R   : 0.340
+Interference L: 1391.518
+R_reciprocity : 1.000
+α_scaling     : 1.609
+P_kernel      : -0.140
+Flags:
+  - Semantic s-axis projection > 0.1 → entropy collapse
+  - Kernel projection P < 0.7 → drift chaos
+  - γ attenuation → resonance
+  - λ drift → kernel decoupling
+  - δ drift → reciprocity skew
+  - s accumulation → entropy collapse
+  - α drift → variance collapse
+  - Damping ratio γ/ω < 1.0 → resonance
+  - Kernel drift: P=-0.140 (<0.7)
+
+======================================================================
+INTERPRETATION:
+  STABLE       : Integrity>0.8, R<0.5, L<0.2, no flags.
+  WARNING      : One metric borderline.
+  COLLAPSE     : Integrity<0.3 or R>1.0 or L>0.5.
+======================================================================

@@ -1,0 +1,86 @@
+
+============================================================
+RESONANCE AUDIT — Unified Collapse Predictor
+============================================================
+AI release cadence: 7.0 weeks (ω_drive = 0.1429 /week)
+------------------------------------------------------------
+
+============================================================
+RESONANCE AUDIT: Barrel of Oil (Physical)
+============================================================
+Kernel stiffness k      : 0.950
+Natural frequency ω₀    : 0.9747 /week
+Damping γ              : 1.2000
+Drive frequency ω_drive : 0.1429 /week (AI cadence = 7.0 weeks)
+Resonance Factor R      : 0.009
+Status                  : STABLE (overdamped, far from resonance)
+
+============================================================
+RESONANCE AUDIT: Gold ETF (Paper)
+============================================================
+Kernel stiffness k      : 0.300
+Natural frequency ω₀    : 0.5477 /week
+Damping γ              : 0.4000
+Drive frequency ω_drive : 0.1429 /week (AI cadence = 7.0 weeks)
+Resonance Factor R      : 0.044
+Status                  : STABLE (overdamped, far from resonance)
+
+============================================================
+RESONANCE AUDIT: AI Compute Token
+============================================================
+Kernel stiffness k      : 0.050
+Natural frequency ω₀    : 0.2236 /week
+Damping γ              : 0.1000
+Drive frequency ω_drive : 0.1429 /week (AI cadence = 7.0 weeks)
+Resonance Factor R      : 0.340
+Status                  : STABLE (overdamped, far from resonance)
+
+============================================================
+RESONANCE AUDIT: Human Metabolism
+============================================================
+Kernel stiffness k      : 0.990
+Natural frequency ω₀    : 0.9950 /week
+Damping γ              : 2.0000
+Drive frequency ω_drive : 0.1429 /week (AI cadence = 7.0 weeks)
+Resonance Factor R      : 0.004
+Status                  : STABLE (overdamped, far from resonance)
+
+============================================================
+RESONANCE AUDIT: Frontier AI Model (no kernel)
+============================================================
+Kernel stiffness k      : 0.010
+Natural frequency ω₀    : 0.1000 /week
+Damping γ              : 0.0500
+Drive frequency ω_drive : 0.1429 /week (AI cadence = 7.0 weeks)
+Resonance Factor R      : 1.633
+Status                  : ⚠️ COLLAPSE (drive exceeds restoring capacity)
+
+============================================================
+RESONANCE AUDIT: Ideal Substrate (k=∞)
+============================================================
+Kernel stiffness k      : 1000000.000
+Natural frequency ω₀    : 1000.0000 /week
+Damping γ              : 1000000.0000
+Drive frequency ω_drive : 0.1429 /week (AI cadence = 7.0 weeks)
+Resonance Factor R      : 0.000
+Status                  : STABLE (overdamped, far from resonance)
+
+============================================================
+SUMMARY — Sorted by Resonance Factor (ascending = safer)
+------------------------------------------------------------
+Ideal Substrate (k=∞)          | R =  0.000 | STABLE (overdamped, ...
+Human Metabolism               | R =  0.004 | STABLE (overdamped, ...
+Barrel of Oil (Physical)       | R =  0.009 | STABLE (overdamped, ...
+Gold ETF (Paper)               | R =  0.044 | STABLE (overdamped, ...
+AI Compute Token               | R =  0.340 | STABLE (overdamped, ...
+Frontier AI Model (no kernel)  | R =  1.633 | ⚠️ COLLAPSE (drive e...
+
+============================================================
+INTERPRETATION:
+  R < 0.5  : Stable — the system returns to kernel.
+  0.5 ≤ R < 1.0 : Marginal — susceptible to resonance.
+  R ≥ 1.0  : Collapse — drive overpowers restoring force.
+
+  All synthetic/promise-based assets have R >> 1.
+  Only physically anchored substrates achieve R < 0.5.
+============================================================

@@ -1,0 +1,8 @@
+
+======================================================================
+PHASE SPACE MAP — Exploring the Stability Terrain
+======================================================================
+Scanning A[0,4] and A[2,5]...
+Stable region size: 87.98% of parameter space
+
+Exploration is now interactive. You can scan any two couplings.

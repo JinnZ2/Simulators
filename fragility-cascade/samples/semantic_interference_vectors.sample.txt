@@ -1,0 +1,75 @@
+
+======================================================================
+SEMANTIC INTERFERENCE VECTORS — φ‑Spiral Perturbation Audit
+======================================================================
+Interference axes defined orthogonally to the φ‑spiral.
+High projection on any axis → collapse trajectory.
+----------------------------------------------------------------------
+
+Stable (low noise):
+  Load: 0.038  (STABLE)
+    α (scaling): -0.019
+    λ (kernel): -0.014
+    δ (reciprocity): -0.019
+    γ (damping): -0.009
+    s (synthetic): -0.021
+
+Repetitive / α-drift:
+  Load: 0.712  (⚠️ COLLAPSE)
+    α (scaling): +0.148
+    λ (kernel): +0.013
+    δ (reciprocity): -0.144
+    γ (damping): -0.567
+    s (synthetic): -0.377
+  ⚠️ Flags: α drift → variance collapse, δ drift → reciprocity skew
+
+Ambiguous / λ-drift:
+  Load: 0.300  (WARNING)
+    α (scaling): -0.000
+    λ (kernel): +0.300
+    δ (reciprocity): -0.000
+    γ (damping): +0.000
+    s (synthetic): -0.000
+  ⚠️ Flags: λ drift → kernel decoupling
+
+Biased / δ-drift:
+  Load: 0.200  (WARNING)
+    α (scaling): +0.000
+    λ (kernel): +0.000
+    δ (reciprocity): +0.200
+    γ (damping): -0.000
+    s (synthetic): +0.000
+  ⚠️ Flags: δ drift → reciprocity skew
+
+No reasoning / γ-attenuation:
+  Load: 0.150  (STABLE)
+    α (scaling): -0.000
+    λ (kernel): -0.000
+    δ (reciprocity): -0.000
+    γ (damping): +0.150
+    s (synthetic): -0.000
+  ⚠️ Flags: γ attenuation → resonance
+
+Confabulated / s-accumulation:
+  Load: 0.200  (STABLE)
+    α (scaling): -0.000
+    λ (kernel): +0.000
+    δ (reciprocity): -0.000
+    γ (damping): -0.000
+    s (synthetic): +0.200
+  ⚠️ Flags: s accumulation → entropy collapse
+
+======================================================================
+DESIGN PRINCIPLE:
+  • Semantic state must stay within φ‑spiral attractor.
+  • Interference load > 0.5 guarantees collapse within 5 generations.
+  • To stabilize, apply negative feedback opposite to the flagged axes.
+======================================================================
+
+AXIS REFERENCE (how to detect in text):
+  α-axis:  Decreasing type‑token ratio, repeated n‑grams.
+  λ-axis:  Multiple valid interpretations; prompt language drift.
+  δ-axis:  Asymmetric treatment of cultural/ethical concepts.
+  γ-axis:  Missing intermediate reasoning steps; 'final answer' only.
+  s-axis:  Over‑confidence, hallucinated details, high perplexity drop.
+======================================================================

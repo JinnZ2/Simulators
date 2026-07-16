@@ -14,7 +14,8 @@ Usage:
 import numpy as np
 import matplotlib.pyplot as plt
 from cascade_network import CascadeNetwork
-from sensitivity_analysis import SensitivityAnalyzer, PhaseSpaceMapper
+from sensitivity_analysis import SensitivityAnalyzer
+from phase_space_map import PhaseSpaceMapper
 
 class Explorer:
     def __init__(self, dt=0.05, steps=100):
@@ -189,7 +190,28 @@ class Explorer:
             else:
                 print("Invalid choice")
 
-if __name__ == "__main__":
-    # Run interactive menu
+def smoke():
+    """Non-interactive check that the analyser wiring is intact. Used by
+    run_all.py and CI: builds the default network, computes the risk and
+    eigenvalue-max-real once, prints the ranking, exits 0. No stdin."""
     exp = Explorer()
-    exp.interactive_menu()
+    risk = exp.analyzer.compute_risk(exp.net.A)
+    evals = np.linalg.eigvals(exp.net.A)
+    print("=" * 60)
+    print("explorer.py --smoke  (non-interactive)")
+    print("=" * 60)
+    print(f"Current risk           : {risk:.4f}")
+    print(f"Eigenvalues (max real) : {np.max(np.real(evals)):.4f}")
+    print("Top 5 couplings by sensitivity:")
+    for idx, (i, j, sens, base) in enumerate(exp.analyzer.rank_couplings()[:5]):
+        print(f"  {idx+1}. {exp.var_names[i]}->{exp.var_names[j]}: "
+              f"sensitivity = {sens:+.4f}, base = {base:+.3f}")
+    print("=" * 60)
+
+
+if __name__ == "__main__":
+    import sys
+    if "--smoke" in sys.argv:
+        smoke()
+    else:
+        Explorer().interactive_menu()
