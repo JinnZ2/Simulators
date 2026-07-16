@@ -1,0 +1,45 @@
+==============================================================================
+fragility-cascade — run_all  (35 modules, timeout 15s)
+==============================================================================
+  module                                 verdict     wall  last stdout line
+  -------------------------------------------------------------------------
+  alien_homeostasis.py                   OK         0.03s  
+  anthropomorphic_entrainment.py         OK         0.03s  ============================================================
+  attack_tree.py                         OK         0.03s  A barrel of oil sits at L=0. Its surface is a fence and a lo
+  bacterial_herding.py                   OK         0.03s  ============================================================
+  cascade_network.py                     OK         0.10s  ============================================================
+  cascade_redesign_M_collapse.py         OK         0.01s  ============================================================
+  cascade_redesign_vulnerability.py      OK         0.04s    Let the ground hold the value. Let the AI run.
+  coherens.py                            OK         0.02s  ============================================================
+  collapse_predictor.py                  OK         0.03s  ============================================================
+  collapse_predictor_v2.py               OK         0.04s  ============================================================
+  communication_gradients.py             ERROR      0.01s  NameError: name 'alpha' is not defined
+  communication_vulnerability.py         OK         0.02s  ============================================================
+  cryptographic_interference.py          OK         0.03s  ============================================================
+  engagement_threshold.py                OK         0.03s  ============================================================
+  friction_calibration_ratio.py          OK         0.03s  ============================================================
+  homeostasis_kernel.py                  OK         0.01s  ============================================================
+  inference_entropy.py                   OK         0.01s  ============================================================
+  interaction_audit.py                   OK         0.04s  ============================================================
+  linguistic_interference.py             OK         0.03s  ============================================================
+  nautilus_architecture.py               OK         0.04s  ============================================================
+  phase_space_map.py                     OK         0.81s  Exploration is now interactive. You can scan any two couplin
+  phi_collapse_variables.py              OK         0.04s  ============================================================
+  product_multiplicity.py                OK         0.99s  Product multiplicity is only a hedge if the branches can fai
+  reciprocity_phi_metrics.py             OK         0.03s  ============================================================
+  redemption_entropy.py                  OK         0.29s  is the physics. A barrel in your hand has L=1 and no shared 
+  redemption_entropy_peak_hour.py        OK         0.01s  ============================================================
+  resonance_audit.py                     OK         0.02s  ============================================================
+  scale_invariant_audit.py               ERROR      0.01s  TypeError: FractalDimensionAudit.__init__() got an unexpecte
+  scent.py                               OK         0.03s  ============================================================
+  semantic_interference_vectors.py       OK         0.03s  ============================================================
+  sensitivity_analysis.py                OK         0.97s    χ: +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000
+  substrate_spectrum.py                  OK         0.03s  MDI spans ~4 orders of magnitude ground -> cloud. That sprea
+  survival_spirals.py                    OK         0.03s  ============================================================
+  test_refutations.py                    OK         0.03s  
+  weird_gatekeeper.py                    OK         0.03s  3. Monitor for shifts in pressure.
+
+==============================================================================
+SUMMARY: 33 OK, 2 error, 0 timeout, 1 skipped (explorer.py)
+==============================================================================
+report -> samples/run_all_report.json

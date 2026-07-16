@@ -121,6 +121,18 @@ python3 product_multiplicity.py
 python3 attack_tree.py
 ```
 
+Or run the whole folder and get a report card:
+
+```
+python3 run_all.py                     # dumps samples/run_all_report.json
+python3 run_all.py --timeout 30
+```
+
+`run_all.py` subprocesses every module's `__main__` demo (bounded wall time,
+isolated imports), records exit code + wall time + first/last stdout line,
+and writes a machine-readable report. Exit code is the count of non-OK
+modules — usable in CI. `explorer.py` is skipped (interactive).
+
 ## Key results
 
 **T_crit — the windows stop closing.** Each downstream layer needs `W + A` months

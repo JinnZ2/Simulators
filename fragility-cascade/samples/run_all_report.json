@@ -1,0 +1,365 @@
+{
+  "run_at_utc": "2026-07-16T14:00:30Z",
+  "timeout_seconds": 15.0,
+  "n_modules": 35,
+  "skipped": [
+    "explorer.py"
+  ],
+  "counts": {
+    "OK": 33,
+    "ERROR": 2,
+    "TIMEOUT": 0
+  },
+  "results": [
+    {
+      "module": "alien_homeostasis.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.032,
+      "stdout_first": "",
+      "stdout_last": "",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "anthropomorphic_entrainment.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.03,
+      "stdout_first": "======================================================================",
+      "stdout_last": "======================================================================",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "attack_tree.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.04,
+      "stdout_first": "- CompCoin surface",
+      "stdout_last": "A barrel of oil sits at L=0. Its surface is a fence and a lock.",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "bacterial_herding.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.014,
+      "stdout_first": "======================================================================",
+      "stdout_last": "======================================================================",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "cascade_network.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 3.327,
+      "stdout_first": "======================================================================",
+      "stdout_last": "======================================================================",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "cascade_redesign_M_collapse.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.013,
+      "stdout_first": "========================================================================",
+      "stdout_last": "========================================================================",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "cascade_redesign_vulnerability.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.034,
+      "stdout_first": "======================================================================",
+      "stdout_last": "  Let the ground hold the value. Let the AI run.",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "coherens.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.024,
+      "stdout_first": "======================================================================",
+      "stdout_last": "======================================================================",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "collapse_predictor.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.04,
+      "stdout_first": "======================================================================",
+      "stdout_last": "======================================================================",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "collapse_predictor_v2.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.056,
+      "stdout_first": "======================================================================",
+      "stdout_last": "======================================================================",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "communication_gradients.py",
+      "verdict": "ERROR",
+      "exit_code": 1,
+      "seconds": 0.016,
+      "stdout_first": "======================================================================",
+      "stdout_last": "======================================================================",
+      "stderr_first": "Traceback (most recent call last):",
+      "stderr_last": "NameError: name 'alpha' is not defined"
+    },
+    {
+      "module": "communication_vulnerability.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.029,
+      "stdout_first": "======================================================================",
+      "stdout_last": "======================================================================",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "cryptographic_interference.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.028,
+      "stdout_first": "======================================================================",
+      "stdout_last": "======================================================================",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "engagement_threshold.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.023,
+      "stdout_first": "======================================================================",
+      "stdout_last": "======================================================================",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "friction_calibration_ratio.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.023,
+      "stdout_first": "======================================================================",
+      "stdout_last": "======================================================================",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "homeostasis_kernel.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.013,
+      "stdout_first": "============================================================",
+      "stdout_last": "============================================================",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "inference_entropy.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.012,
+      "stdout_first": "============================================================",
+      "stdout_last": "============================================================",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "interaction_audit.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.025,
+      "stdout_first": "======================================================================",
+      "stdout_last": "======================================================================",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "linguistic_interference.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.025,
+      "stdout_first": "======================================================================",
+      "stdout_last": "======================================================================",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "nautilus_architecture.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.04,
+      "stdout_first": "======================================================================",
+      "stdout_last": "======================================================================",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "phase_space_map.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 3.742,
+      "stdout_first": "======================================================================",
+      "stdout_last": "Exploration is now interactive. You can scan any two couplings.",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "phi_collapse_variables.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.04,
+      "stdout_first": "======================================================================",
+      "stdout_last": "======================================================================",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "product_multiplicity.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.998,
+      "stdout_first": "branches   oil-like CoV (corr=0)   compute-like CoV (corr=1)",
+      "stdout_last": "Product multiplicity is only a hedge if the branches can fail apart.",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "reciprocity_phi_metrics.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.029,
+      "stdout_first": "======================================================================",
+      "stdout_last": "======================================================================",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "redemption_entropy.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.317,
+      "stdout_first": "chain              L   indep   common  blackout%",
+      "stdout_last": "is the physics. A barrel in your hand has L=1 and no shared shock.",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "redemption_entropy_peak_hour.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.025,
+      "stdout_first": "========================================================================",
+      "stdout_last": "========================================================================",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "resonance_audit.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.017,
+      "stdout_first": "============================================================",
+      "stdout_last": "============================================================",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "scale_invariant_audit.py",
+      "verdict": "ERROR",
+      "exit_code": 1,
+      "seconds": 0.013,
+      "stdout_first": "============================================================",
+      "stdout_last": "------------------------------------------------------------",
+      "stderr_first": "Traceback (most recent call last):",
+      "stderr_last": "TypeError: FractalDimensionAudit.__init__() got an unexpected keyword argument 'D0'"
+    },
+    {
+      "module": "scent.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.036,
+      "stdout_first": "======================================================================",
+      "stdout_last": "======================================================================",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "semantic_interference_vectors.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.03,
+      "stdout_first": "======================================================================",
+      "stdout_last": "======================================================================",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "sensitivity_analysis.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.939,
+      "stdout_first": "Initializing sensitivity analysis...",
+      "stdout_last": "  \u03c7: +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "substrate_spectrum.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.032,
+      "stdout_first": "substrate       tier   MDI       gates  cone  obsol/yr",
+      "stdout_last": "MDI spans ~4 orders of magnitude ground -> cloud. That spread IS the claim.",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "survival_spirals.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.024,
+      "stdout_first": "======================================================================",
+      "stdout_last": "======================================================================",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "test_refutations.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.04,
+      "stdout_first": "",
+      "stdout_last": "",
+      "stderr_first": "",
+      "stderr_last": ""
+    },
+    {
+      "module": "weird_gatekeeper.py",
+      "verdict": "OK",
+      "exit_code": 0,
+      "seconds": 0.026,
+      "stdout_first": "======================================================================",
+      "stdout_last": "3. Monitor for shifts in pressure.",
+      "stderr_first": "",
+      "stderr_last": ""
+    }
+  ]
+}
