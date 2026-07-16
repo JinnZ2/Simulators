@@ -319,4 +319,98 @@ from scale_invariant_audit import estimate_D, ScaleInvariantAudit
 # 4. Feed D0, D_n, G into ScaleInvariantAudit
 # 5. Check: exponential decay (v2) vs power-law decay (C9)
 # 6. Run R1: if lam ≈ 0 but collapse observed → update claim
-# 7. Run R2: fit both models to same data; loser gets updated
+# 7. Run R2: fit both models to same data; loser gets modified
+
+testable predictions?
+
+---
+
+Prediction 1: Collapse is exponential in generations, not power‑law
+
+· v2 (this module) : Fractal dimension decays as D_n = D_0 e^{\lambda G} with constant \lambda < 0 (log‑drift per generation).
+· C9 (inference_entropy.py) : Damage scales with \log_2(G), so D_n = D_0 G^{-\beta}.
+
+Test : Fit both to CollapseTracker's D_n vs G.
+
+Prediction : The exponential fit will have a higher r^2 than the power‑law for most conditions, especially at high synthetic fractions. The power‑law will systematically over‑predict early damage and under‑predict late damage.
+
+---
+
+Prediction 2: λ is negative and roughly constant after generation 2–3
+
+· Early generations (0→1, 1→2) may show transient effects (e.g., mode collapse from initial RLHF).
+· After generation 3, \lambda stabilizes to a negative constant for a given mixing ratio.
+
+Test : Compute \lambda per generation using sliding windows: \lambda_i = \ln(D_{i+1}/D_i).
+
+Prediction : The sequence \lambda_i will settle into a flat line (within noise) for i \geq 3.
+
+---
+
+Prediction 3: λ is more negative for higher synthetic fractions
+
+· 100% synthetic : \lambda \approx -0.1 to -0.2 nats/gen (rapid collapse).
+· 50% synthetic : \lambda \approx -0.02 to -0.05 (slow degradation).
+· 0% synthetic (real data only) : \lambda \approx 0 or slightly positive (stable or improving).
+
+Test : Correlate \lambda with synthetic fraction.
+
+Prediction : The relationship is roughly linear, but may show a threshold (e.g., sudden onset of collapse above 70% synthetic). If a threshold exists, it will be visible as a phase change in \lambda vs fraction.
+
+---
+
+Prediction 4: The branch is always DEGENERATE (\lambda < 0) for recursive training
+
+· The framework has two branches: degenerate (D_n \to 0) and explosive (D_n \to \infty).
+· For LLM recursive training, we predict the degenerate branch is the only one observed.
+· Explosive branch would require something like positive feedback in variance (e.g., training on increasingly diverse synthetic outputs), which is not typical.
+
+Test : Check sign of \lambda across all CollapseTracker runs.
+
+Prediction : All runs show \lambda < 0 (negative drift).
+
+---
+
+Prediction 5: The band edges (green/yellow/red) will be calibrated by this data
+
+· Currently, BAND\_GREEN = \ln(1.25) and BAND\_YELLOW = \ln(2) are arbitrary.
+· We can use CollapseTracker to set them empirically based on where collapse becomes irreversible (e.g., when the model's performance drops below a critical threshold like 50% of original).
+
+Prediction : After calibration, the green/yellow/red thresholds will align with observable qualitative collapse states (e.g., "still recoverable", "degrading but not terminal", "terminal collapse").
+
+---
+
+Prediction 6: r2 will be high (>0.95) for most runs, confirming clean power‑law scaling of D_f
+
+· The box‑counting estimator requires a clean power‑law to give a reliable D_f.
+· The CollapseTracker embeddings are high‑dimensional and should show fractal scaling.
+
+Test : Compute r2 for each generation's embedding set.
+
+Prediction : r2 ≥ 0.95 for most generations, except possibly at very late generations where the distribution becomes extremely degenerate (e.g., all outputs collapse to a single point).
+
+---
+
+Broader Theoretical Prediction
+
+The exponential decay rate \lambda is not arbitrary—it is governed by the information‑theoretic capacity of the model and the entropy of the training data. Specifically:
+
+\lambda \approx - \frac{I_{synthetic}}{C_{model}}
+
+Where I_{synthetic} is the mutual information between synthetic and real data (a measure of contamination) and C_{model} is the model's effective capacity (number of distinguishable states). This is speculative but testable—if we can measure I_{synthetic} and C_{model}, we can predict \lambda.
+
+---
+
+What the Data Will Tell Us
+
+Outcome What It Means
+Exponential fit dominates v2 is correct; collapse rate is constant per generation.
+Power‑law fit dominates C9 is correct; collapse slows down with depth.
+Neither fits well Fractal dimension is not the right summary; update claim (R1 triggers).
+λ changes abruptly at a mixing ratio There is a phase transition in collapse dynamics.
+λ = 0 for some runs Stability is possible; identify the conditions (likely real‑data fraction above a threshold).
+
+---
+
+The framework is now falsifiable—and the CollapseTracker dataset is the first test.
+
