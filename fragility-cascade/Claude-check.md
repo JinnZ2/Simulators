@@ -290,3 +290,33 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
+Aspect Details
+What it contains GPT-2 (124M) & DistilGPT-2 (82M) fine-tuned across 10 recursive generations, with 240 experimental conditions
+Domains Wikipedia abstracts, creative fiction, technical Q&A
+Mixing ratios 100%, 75%, 50%, 25% synthetic-to-real data
+Metrics Distinct n-grams, Self-BLEU, KL divergence, vocabulary coverage, rare-token survival, repetition, perplexity
+License CC-BY 4.0
+Location IEEE DataPort (DOI: 10.21227/bvav-q038) or GitHub
+
+
+Resource What It Offers Best For
+GenProof Framework Open‑source tool measuring dataset collapse risk before training (ICS score: semantic entropy, tail‑density, AI detection) Testing your framework against an independent collapse‑risk metric
+Model Zoos Dataset 3.8M+ model states across 27 model zoos, 8 image datasets Testing fractal dimension on neural network parameter trajectories, not just text
+Multi-LLM Trace Dataset Pairwise embedding distance matrices across multiple agents Testing Alien Homeostasis — multi‑agent semantic convergence
+
+
+
+# Pseudocode workflow
+from scale_invariant_audit import estimate_D, ScaleInvariantAudit
+
+# 1. Load CollapseTracker: for each generation, get generated text samples
+# 2. Compute embeddings (e.g., Sentence-BERT) for each generation's samples
+# 3. Estimate D_f for each generation using box-counting on embedding points
+# 4. Feed D0, D_n, G into ScaleInvariantAudit
+# 5. Check: exponential decay (v2) vs power-law decay (C9)
+# 6. Run R1: if lam ≈ 0 but collapse observed → update claim
+# 7. Run R2: fit both models to same data; loser gets updated
