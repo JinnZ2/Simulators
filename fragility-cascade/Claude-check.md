@@ -414,3 +414,9 @@ Neither fits well Fractal dimension is not the right summary; update claim (R1 t
 
 The framework is now falsifiable—and the CollapseTracker dataset is the first test.
 
+
+
+claim:
+Claim Module Statement Refutation Protocol
+C29 the_laboratory.py An LLM can autonomously run a refutation loop: instrument itself, measure A, γ, ω, compute C, run an experiment, compare outcome to claim, and update the claim. This process converges to a standing hypothesis over multiple iterations, regardless of initial claim quality. To refute, demonstrate an LLM running this loop for 10 iterations without converging, or converging to a false hypothesis that remains standing despite contradictory evidence.
+
