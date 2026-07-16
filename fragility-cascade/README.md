@@ -87,14 +87,12 @@ of these — several import `numpy`. Grouped by function.
 | `test_refutations.py` | counterexample sweeps for C12–C19 (C17 placeholder) | — |
 | `scent.py` | embedded invariant signature (φ + siphuncle + interference axes) for verification | — |
 
-### Iteration snapshots
+### Additional axes on the original models
 
-`patch.py` and `patch2.py` are alternate versions of
-`cascade_redesign_vulnerability.py` and `redemption_entropy.py` respectively
-— they add `M_collapse = 18 mo` (frontier model degeneration half-life) and
-state-dependent peak-hour correlation (`PEAK_REDEEM = 0.62`). Kept as
-snapshots pending a decision on whether to merge into the originals; see
-the review notes in the branch history.
+| file | what it adds | claim |
+|------|--------------|-------|
+| `cascade_redesign_M_collapse.py` | second T_crit axis: model degeneration half-life `M_collapse = 18 mo`; real T_crit is `min(W+A, M_collapse/2)`. When frontier synthetic-data feedback shortens M_collapse below 2 × (W+A), the model-degeneration axis pulls T_crit lower than the layer-stack axis. Standalone; does not replace `cascade_redesign_vulnerability.py`. | C9 / R-family |
+| `redemption_entropy_peak_hour.py` | state-dependent per-gate redemption: peak grid hours (17-20, ~4/day) drop redeemability to 0.62 vs off-peak 0.81; daily average 0.778. Encodes C11 (state-dependent correlation). Standalone; does not replace `redemption_entropy.py`. | C11 |
 
 ## Run
 

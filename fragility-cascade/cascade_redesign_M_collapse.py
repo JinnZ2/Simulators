@@ -1,11 +1,19 @@
 #!/usr/bin/env python3
 """
-cascade_redesign_vulnerability.py
+cascade_redesign_M_collapse.py
 
-T_crit — the windows stop closing.
-Updated with M_collapse (model degeneration half-life, 18 mo) from 2024–2026
-synthetic-feedback studies. The real T_crit is the shorter of (redesign+audit)
-and (M_collapse / 2). Result: current AI release cadence already saturates.
+Adds a second T_crit axis to the six-layer stack in
+cascade_redesign_vulnerability.py: model degeneration half-life.
+
+The real T_crit is the SHORTER of (redesign + audit) and (M_collapse / 2).
+When frontier synthetic-data feedback shortens M_collapse below 2 × (W + A),
+the model-degeneration axis pulls T_crit lower than the layer-stack axis
+does, and the standard cadence saturates exposure even where the layer
+audits could in principle close their windows.
+
+Standalone module — does NOT replace cascade_redesign_vulnerability.py.
+The layer-stack model there stays canonical for the substrate audit; this
+file adds the model-degeneration axis as a separate reading.
 """
 
 import math

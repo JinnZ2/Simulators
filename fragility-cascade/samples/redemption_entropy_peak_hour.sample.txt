@@ -1,0 +1,38 @@
+========================================================================
+REDEMPTION ENTROPY — with State-Dependent Correlation (C11)
+========================================================================
+Off-peak redeemability: 0.810
+Peak-hour redeemability: 0.620  (4 hours/day)
+Daily average redeemability: 0.778
+Downstream layers (L): 3
+------------------------------------------------------------------------
+Model                |    Redeemability | Status
+------------------------------------------------------------------------
+Independence (1-p)^L |            0.011 | Marketing claim
+Common-mode (0.35 corr) |            0.003 | Field estimate
+Peak-hour only (L=1) |            0.620 | Worst-case instant
+------------------------------------------------------------------------
+
+Hour-by-hour redemption (L=3, common-mode corrected):
+  Hour |   p_redeem |   Redeem (L=3) | Status
+------------------------------------------------------------------------
+     0 |      0.810 |          0.002 | off-peak
+     2 |      0.810 |          0.002 | off-peak
+     4 |      0.810 |          0.002 | off-peak
+     6 |      0.810 |          0.002 | off-peak
+     8 |      0.810 |          0.002 | off-peak
+    10 |      0.810 |          0.002 | off-peak
+    12 |      0.810 |          0.002 | off-peak
+    14 |      0.810 |          0.002 | off-peak
+    16 |      0.810 |          0.002 | off-peak
+    18 |      0.620 |          0.015 | ⚠️ PEAK (grid + inference)
+    20 |      0.620 |          0.015 | ⚠️ PEAK (grid + inference)
+    22 |      0.810 |          0.002 | off-peak
+------------------------------------------------------------------------
+
+C11 REFUTATION:
+  If measured peak-hour redeemability > 0.70 across 30 days,
+  C11 is falsified. Log actual redemption attempts with timestamps.
+  Average daily redeemability should be ~0.778; independence predicts ~0.96.
+  The gap is the physics of correlated load.
+========================================================================
