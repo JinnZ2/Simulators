@@ -75,16 +75,37 @@ def critical_threshold(E: float, F: float, H: float, A: float,
                        G_vary: float = 0.0,
                        **kwargs) -> float:
     """
-    Find the generation G at which CI drops below 0.5.
-    Solve CI(E, F, G, H, A) = 0.5 ⇒ L = 1.
+    Solve for the generation G at which CI(E, F, G, H, A) drops to 0.5,
+    i.e. interference load L = 1.
+
+    CLAIM: For (E, F, H, A) in the demo scope with L0 = 1 and gamma > 0,
+      G_crit = (alpha*E + beta*F - delta*H + epsilon*A - ln(L0)) / gamma
+      is well defined and >= 0 in the "clear" region, and the linearised
+      threshold is a monotone-decreasing function of E, F, A (helpful axes)
+      and monotone-increasing in H (harmful).
+    SCOPE: rate coefficients alpha, beta, gamma, delta, epsilon > 0.
+      G_vary is accepted only for demo call-site parity; not used here.
+    REFUTATION: if the analytic numerator is negative, the linearised
+      threshold has already been crossed at G = 0 — return 0.0 rather
+      than a negative "generations from now" reading. If gamma = 0, the
+      claim's denominator is degenerate; return inf and let the caller
+      handle it.
+    UNKNOWNS: the choice of 0.5 as the "critical CI" is a demo threshold,
+      not derived from first principles; the exponential mixing model is
+      heuristic, not measured. G_vary is a hook for future extensions.
     """
-    # L = L0 * exp(-alpha E - beta F + gamma G + delta H - epsilon A) = 1
-    # => gamma G = alpha E + beta F - delta H + epsilon A - ln(L0)
-    numerator = alpha*E + beta*F - delta*H + epsilon*A - math.log(kwargs.get('L0', 1.0))
-    gamma_val = kwargs.get('gamma', 0.3)
-    if gamma_val == 0:
-        return float('inf')
-    G_crit = numerator / gamma_val
+    L0 = kwargs.get('L0', 1.0)
+    alpha_c = kwargs.get('alpha', 0.5)
+    beta_c = kwargs.get('beta', 0.7)
+    gamma_c = kwargs.get('gamma', 0.3)
+    delta_c = kwargs.get('delta', 0.6)
+    epsilon_c = kwargs.get('epsilon', 0.8)
+    if gamma_c == 0:
+        return float('inf')      # per REFUTATION note above
+    numerator = (alpha_c * E + beta_c * F
+                 - delta_c * H + epsilon_c * A
+                 - math.log(L0))
+    G_crit = numerator / gamma_c
     return max(0.0, G_crit)
 
 def main():

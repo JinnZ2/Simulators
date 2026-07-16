@@ -106,11 +106,14 @@ def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__.strip().splitlines()[0])
     p.add_argument("--timeout", type=float, default=15.0,
                    help="per-module wall-time cap in seconds (default 15)")
-    p.add_argument("--json", default="samples/run_all_report.json",
-                   help="path to write the JSON report")
+    p.add_argument("--json", default=None,
+                   help="path to write the JSON report "
+                        "(default: <root>/samples/run_all_report.json)")
     p.add_argument("--root", default=os.path.dirname(os.path.abspath(__file__)),
                    help="directory of modules to run")
     args = p.parse_args(argv)
+    if args.json is None:
+        args.json = os.path.join(args.root, "samples", "run_all_report.json")
 
     files = module_files(args.root)
     print("=" * 78)

@@ -13,11 +13,28 @@ where N(r) is the number of balls of radius r needed to cover the state space.
 import math
 
 class FractalDimensionAudit:
-    def __init__(self, name, initial_dimension, current_dimension, generations):
+    """Audits scale-invariant recursion via drift between initial and current
+    fractal dimension.
+
+    CLAIM: A recursive system's collapse risk is monotone in
+      |D_n − D0| / D0. Zero drift → risk = 0. Full drift (D_n far from
+      D0) → risk saturates at 1.0.
+    SCOPE: D0, D_n > 0; G >= 0. Symbols match the module docstring
+      (D0, D_n, G).
+    REFUTATION: if a run shows D_n = D0 (zero drift) but the system has
+      demonstrably collapsed, the fractal-dimension proxy does not
+      summarise the collapse — update the CLAIM to name what does.
+    UNKNOWNS: real fractal dimension of production AI models is not
+      directly measured in this file; the demo-scenario numbers (Gen 5,
+      Gen 20) are illustrative. Wiring a measured D_n from a real
+      generative-recursion run is the next builder's job.
+    """
+
+    def __init__(self, name, D0, D_n, G):
         self.name = name
-        self.D0 = initial_dimension
-        self.D_n = current_dimension
-        self.G = generations
+        self.D0 = float(D0)
+        self.D_n = float(D_n)
+        self.G = int(G)
 
     def stability_index(self):
         """Returns 1.0 if D_n ≈ D0, 0.0 if D_n has drifted."""
