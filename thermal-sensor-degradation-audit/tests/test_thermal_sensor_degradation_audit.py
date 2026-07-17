@@ -183,6 +183,34 @@ class TestAuditDriver(unittest.TestCase):
         self.assertEqual(len(res["pairs"]), 3)
         self.assertEqual(len(res["gaskets"]), 2)
 
+    def test_corruption_readings_optional_absent_by_default(self):
+        res = audit(air_f=70, rh_pct=40, days=1,
+                    pairs=[("concrete", "steel_1018", 300)], gaskets=[])
+        self.assertNotIn("corruption", res)
+
+    def test_corruption_signature_fires_and_flags_red(self):
+        # Physical layers are benign (GREEN) but the record itself is
+        # corrupted -> the whole package verdict must go RED.
+        before = [20, 25, 30, 35, 40, 45]
+        during = [37.0, 37.1, 37.2, 37.0, 37.1]
+        res = audit(air_f=70, rh_pct=40, days=1,
+                    pairs=[("concrete", "steel_1018", 300)], gaskets=[],
+                    readings_before=before, readings_during=during)
+        self.assertIn("corruption", res)
+        self.assertTrue(res["corruption"]["variance_collapse"])
+        self.assertTrue(res["corruption"]["range_clipping"])
+        self.assertEqual(res["verdict"], "RED")
+
+    def test_corruption_negative_leaves_verdict_alone(self):
+        # Signature does NOT fire; physical layers benign -> not RED.
+        before = [20, 25, 30, 35, 40, 45]
+        during = [22, 28, 33, 38, 44, 50]
+        res = audit(air_f=70, rh_pct=40, days=1,
+                    pairs=[("concrete", "steel_1018", 300)], gaskets=[],
+                    readings_before=before, readings_during=during)
+        self.assertIn("corruption", res)
+        self.assertNotEqual(res["verdict"], "RED")
+
 
 if __name__ == "__main__":
     unittest.main()

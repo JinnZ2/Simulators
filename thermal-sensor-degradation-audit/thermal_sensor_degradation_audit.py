@@ -73,7 +73,7 @@ def pair_mismatch(mat_a, mat_b, span_mm, delta_t_k):
     if microstrain > 1000: flag = "RED"
     elif microstrain > 500: flag = "YELLOW"
     else: flag = "GREEN"
-    return {"pair": (mat_a, mat_b), "d_cte_1e6K": round(d_cte, 1),
+    return {"pair": [mat_a, mat_b], "d_cte_1e6K": round(d_cte, 1),
             "microstrain": round(microstrain, 0),
             "displacement_um": round(disp_um, 1), "flag": flag,
             "falsify": ("measure fastener torque loss and fretting "
@@ -117,6 +117,15 @@ def compression_set(material, temp_c, days, q10=2.0, ref_c=70.0):
 K_B = 8.617e-5  # eV/K
 
 def aging_multiplier(temp_c, ea_ev=0.7, ref_c=25.0):
+    """Arrhenius aging acceleration vs the reference temperature.
+
+    IMPORTANT: pass the sensor's INTERNAL temperature — enclosure air
+    inside the box, not ambient outdoor air. A dark enclosure in sun
+    typically runs 10-25 C above ambient; `sensor_drift` handles this
+    by adding `enclosure_rise_c` before calling this function. If you
+    call `aging_multiplier(ambient)` directly you'll silently
+    underestimate aging by the enclosure-rise factor.
+    """
     t1, t0 = temp_c + 273.15, ref_c + 273.15
     return math.exp((ea_ev / K_B) * (1.0/t0 - 1.0/t1))
 
@@ -142,14 +151,30 @@ def sensor_drift(air_c, enclosure_rise_c, rated_drift_pct_yr, days):
 # extreme readings bias LOW exactly at the tail. Signature:
 # variance collapse + clipped maxima + post-event step offset.
 # ---------------------------------------------------------------
+def _percentile_range(xs, lo_pct=5, hi_pct=95):
+    """Spread between the lo/hi percentiles of xs. Robust to a single
+    outlier at either end (which raw min/max was not).
+
+    SCOPE: len(xs) >= 3 for the percentile idea to bite; below that the
+    percentile indexes collapse to min/max and the check degrades
+    gracefully to the old behaviour.
+    """
+    ordered = sorted(xs)
+    n = len(ordered)
+    lo_i = int(lo_pct / 100.0 * (n - 1))
+    hi_i = int(hi_pct / 100.0 * (n - 1))
+    return ordered[hi_i] - ordered[lo_i]
+
+
 def corruption_signature(readings_before, readings_during):
     def var(xs):
         m = sum(xs)/len(xs)
         return sum((x-m)**2 for x in xs)/len(xs)
     v0, v1 = var(readings_before), var(readings_during)
     variance_collapse = v1 < 0.5 * v0
-    clipped = (max(readings_during) - min(readings_during)) < \
-              0.5 * (max(readings_before) - min(readings_before))
+    # Percentile-based range comparison (5th/95th) so a single outlier
+    # in `readings_before` cannot defeat the clipping check.
+    clipped = _percentile_range(readings_during) < 0.5 * _percentile_range(readings_before)
     return {"variance_collapse": variance_collapse,
             "range_clipping": clipped,
             "read": ("LOW-BIAS LIKELY: extreme-event record "
@@ -163,7 +188,15 @@ def corruption_signature(readings_before, readings_during):
 # AUDIT DRIVER: one call, whole package verdict
 # ---------------------------------------------------------------
 def audit(air_f, rh_pct, days, pairs, gaskets, enclosure_rise_c=15.0,
-          rated_drift_pct_yr=0.25):
+          rated_drift_pct_yr=0.25, readings_before=None, readings_during=None):
+    """One-call package verdict. Worst flag across L4/L5/L6 wins.
+
+    If both `readings_before` and `readings_during` are supplied, the L7
+    corruption-signature check runs and joins the flag aggregation: a
+    signature-positive read (variance collapse + range clipping) fires
+    RED, since the entire package record is then low-biased regardless
+    of what the individual layer flags say.
+    """
     air_c = f_to_c(air_f)
     tw = wet_bulb_c(air_c, rh_pct)
     surf = surface_temp_c(air_c)
@@ -179,6 +212,14 @@ def audit(air_f, rh_pct, days, pairs, gaskets, enclosure_rise_c=15.0,
     flags = ([p["flag"] for p in out["pairs"]] +
              [g.get("flag","GREEN") for g in out["gaskets"]] +
              [out["electronics"]["flag"]])
+    if readings_before is not None and readings_during is not None:
+        corr = corruption_signature(readings_before, readings_during)
+        out["corruption"] = corr
+        # L7 headline: a positive signature means the record itself
+        # is likely low-biased. That's RED for record trustworthiness
+        # even if the physical-layer flags happen to be green.
+        if corr["variance_collapse"] and corr["range_clipping"]:
+            flags.append("RED")
     out["verdict"] = ("RED" if "RED" in flags else
                       "YELLOW" if "YELLOW" in flags else "GREEN")
     return out
