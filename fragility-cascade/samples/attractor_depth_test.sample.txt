@@ -1,0 +1,25 @@
+E1  latency vs depth (solo, amp=3.0)
+    d=0.05  lat=47.5
+    d=0.1   lat=23.0
+    d=0.15  lat=15.5
+    d=0.25  lat=8.9
+    d=0.4   lat=5.1
+    d=0.6   lat=3.1
+    d=0.8   lat=2
+E2  load routing, mixed group d=[0.7,0.3,0.15,0.1]
+    route=deepest  total_lat=16 dropouts=0
+    route=random   total_lat=120 dropouts=0
+    route=shallow  total_lat=201 dropouts=0
+E3  formation gradient, base=0.8, g=[1.0,0.7,0.5]
+    g=1.0  expressed_d=0.8  lat=2
+    g=0.7  expressed_d=0.56  lat=3.2
+    g=0.5  expressed_d=0.4  lat=5.1
+E4  amplitude scaling: lat(4A)/lat(A), A=1.0
+    d=0.6  ratio=1.6
+    d=0.1  ratio=2.05
+
+CLAIM_TABLE evaluation (refute → edit claim, not sim)
+    C1  HOLDS
+    C2  HOLDS
+    C3  HOLDS
+    C4  REFUTED — update the claim

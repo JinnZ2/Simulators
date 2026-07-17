@@ -66,6 +66,44 @@ is the witness*: the numbers stand and the claims get rewritten. The
 refutation column above already sketches the direction each rewrite should
 go; the file itself is unchanged.
 
+## Attractor-depth claims (`attractor_depth_test.py`)
+
+Governing variable: attractor depth `d` (restoring-force coefficient) — not
+width, not symmetry, not agency. `s ← s·(1−d) + noise`; latency to
+`|s| < REC` after a shock is the observable. Four experiments (E1 latency
+vs depth; E2 load routing across a mixed group; E3 formation-gradient
+sibling signatures; E4 amplitude scaling).
+
+Sample: [`samples/attractor_depth_test.sample.txt`](samples/attractor_depth_test.sample.txt)
+(seed=7, steps=400, noise=0.05, REC=0.3, BREAK=6.0, HOLD=25).
+
+| # | Claim | Refuted if | Verdict at seed=7 |
+|---|-------|-----------|-------------------|
+| ADT-1 | Recovery latency is monotone-decreasing in depth across the population (rank corr < −0.9). | Any depth pair whose latency ranking inverts, driving the rank correlation above −0.9. | **HOLDS** — {0.05:47.5, 0.1:23.0, 0.15:15.5, 0.25:8.9, 0.4:5.1, 0.6:3.1, 0.8:2.0}, strictly monotone. |
+| ADT-2 | Deepest-takes-load routing yields lower total group latency AND fewer dropouts than random; random beats shallow. | Random routing matching or beating deepest, or shallow matching or beating random. | **HOLDS** — total latency {deepest:16, random:120, shallow:201}; zero dropouts across all routes at this shock scale. |
+| ADT-3 | Identical base depth under formation gradients [1.0, 0.7, 0.5] expresses proportionally shallower wells → latency ordering elder < mid < younger on the same shock series. | Any pair mis-ordered under a fixed base and monotone gradient. | **HOLDS** — {g=1.0:lat=2.0, g=0.7:lat=3.2, g=0.5:lat=5.1}. |
+| ADT-4 | Latency grows sub-linearly with shock amplitude for deep wells (d ≥ 0.5) and super-linearly for shallow (d ≤ 0.15): `lat(4A)/lat(A) < 4` deep, `> 4` shallow. | A ratio landing in the wrong regime for its depth class. | **REFUTED** — {d=0.6:1.6, d=0.1:2.05}. Both are sub-linear. In a linear geometric-decay system, `lat(A) = log(REC/A)/log(1−d)`, so `lat(4A)/lat(A) = 1 − log(4)/log(REC/A)` — depth CANCELS in the ratio; only the shock/threshold ratio matters. At A=1, REC=0.3 the analytical value is 2.15. Update direction: to see super-linear scaling in the shallow-well regime you need a NONLINEAR damage term — e.g., dropout probability rising with amplitude, or restoring force saturating. Linear dynamics cannot support the claim as stated. |
+
+## Semantic-drift claims (`semantic_drift_test.py`)
+
+Instrument for machine-mediated moral-overlay drift on measurement words.
+State variable `m ∈ [0, 1]` is the moral load carried by one word-sense
+(0 = pure measurement, 1 = pure verdict). Humans update by exposure
+coupling `λ` minus a veto term `β·m` (terrain use pulls the word back
+toward measurement — the slack rope is right there). Machine amplifies
+the corpus by `a` and adds offset `s`. Corpus is a blend of human and
+machine text at fraction `f`.
+
+Sample: [`samples/semantic_drift_test.sample.txt`](samples/semantic_drift_test.sample.txt)
+(seed=3, N=200 speakers, gens=300, λ=0.10, β₀=0.08, a=1.06, s=0.01, m₀=0.30).
+
+| # | Claim | Refuted if | Verdict at seed=3 |
+|---|-------|-----------|-------------------|
+| SDT-1 | With no machine (f=0), `m` equilibrates at a stable fixed point `λ·c/(λ+β)` — drift stops. Language self-corrects when terrain use is uncontested. | `\|m(t) − m(t−40)\|` fails to drop below 0.005 over the run's tail. | **HOLDS** — m: 0.30 → 0.00 at gen 100 and end. Fixed point is 0 because there is no external drive to hold it above zero once the machine channel is gone; veto wins. |
+| SDT-2 | Equilibrium `m` rises monotonically with `f` (a=1.06 fixed). More machine-mediated text ⇒ more moralization. | Any pair `f_i < f_j` with `m_eq(f_i) ≥ m_eq(f_j)`. | **HOLDS** — {0.0:0.0, 0.2:0.006, 0.4:0.017, 0.6:0.043, 0.8:0.203}. Strictly monotone; 0.8 shows a knee — the ratchet accelerates as machine share dominates. |
+| SDT-3 | The ratchet requires amplification: with `a=1, s=0`, machine mediation at any `f` does not raise equilibrium `m` above the f=0 value. Mediation alone is neutral; amplification drives. | Any `f > 0` at `a=1, s=0` yielding `m_eq > m_eq(f=0) + 0.01`. | **HOLDS** — {0.0:0.0, 0.4:0.0, 0.8:0.0}. Isolates the mechanism: it's the safety prior's asymmetric resolution of ambiguity, not mediation itself, that drives drift. |
+| SDT-4 | Declining veto `β(t)` interacts super-additively with rising `f`: `Δm(f↑ & β↓) > Δm(f↑) + Δm(β↓)`. The two curves crossing is worse than the sum of each. | `Δm(both) ≤ Δm(f alone) + Δm(β alone)`. | **HOLDS** — Δ(f alone)=0.043, Δ(β↓ alone)=0.0, Δ(both)=0.366 vs sum 0.043. Roughly 8× the additive prediction — strong super-additivity. Note β-alone Δ is 0 because at f=0 the corpus already collapses to 0, leaving nothing for veto decay to interact with; the coupling term dominates only once the machine has established a raised corpus baseline. |
+
 ## Resonance / Nautilus / semantic-interference claims (post-C11)
 
 Encoded in the modules landed via origin/main. Test-runner:
