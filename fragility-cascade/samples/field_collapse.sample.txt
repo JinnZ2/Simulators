@@ -1,0 +1,37 @@
+======================================================================
+field_collapse.py -- mean-field phi^4 spinodal (FC-1)
+======================================================================
+
+Reduced potential:  F(phi, h) = -1/2 phi^2 + 1/4 phi^4 - h phi
+
+Spinodal is where the metastable minimum coalesces with the
+local maximum. Solve dF/dphi = 0 AND d2F/dphi2 = 0 together:
+
+   -phi + phi^3 - h = 0
+   -1 + 3 phi^2   = 0     ->   phi_s = 1/sqrt(3)
+   h_s = -phi_s + phi_s^3 = -2 / (3 sqrt(3))
+
+   phi_s   = 1/sqrt(3)     = 0.57735026918962584
+   |h*|    = 2/(3 sqrt(3)) = 0.38490017945975052
+
+Numerical cross-check (bisect the cubic discriminant of F'):
+   |h*|  (numeric) = 0.384900179459751
+   |closed - numeric| = 1.11e-16   (should be < 1e-14)
+
+Real-root count of  dF/dphi = phi^3 - phi - h = 0  vs h:
+            h   discriminant   #roots   geometry
+    0.0000000   4.000000e+00        3   two wells + hump
+    0.1924501   3.000000e+00        3   two wells + hump
+    0.3848992   2.078458e-05        3   two wells + hump
+    0.3849002   0.000000e+00        2   spinodal: metastable well merges with hump
+    0.3849012  -2.078464e-05        1   one well left; the other has vanished
+    0.5773503  -5.000000e+00        1   one well left; the other has vanished
+
+USED BY:
+   collapsetracker_harness.py imports SPINODAL_H_STAR from here.
+   The P3 knee test in the harness brackets the CollapseTracker
+   grid (0.25 / 0.5 / 0.75 / 1.0) against |h*| = 0.3849 and
+   fails if the measured knee sits outside [0.25, 0.5].
+
+NOTE: mean-field spinodal is a CEILING. Fluctuations (Ginzburg-criterion corrections) lower the effective threshold below |h*| = 0.3849. This module does not compute them.
+======================================================================

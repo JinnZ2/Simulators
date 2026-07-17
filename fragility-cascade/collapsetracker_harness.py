@@ -126,7 +126,10 @@ KEYS = {
     "domain": ("domain", "track", "dataset"),
 }
 
-SPINODAL_H_STAR = 0.385   # field_collapse.py
+try:
+    from field_collapse import SPINODAL_H_STAR  # 2/(3 sqrt(3)) = 0.38490018
+except ImportError:
+    SPINODAL_H_STAR = 2.0 / (3.0 * math.sqrt(3.0))  # closed-form fallback
 
 
 # ------------------------------------------------- intrinsic dimension
@@ -308,7 +311,7 @@ def main(argv=None):
             "P2  monotone  |λ(1.0)| > |λ(0.75)| > |λ(0.5)| > |λ(0.25)|",
             "P3  knee      λ(ratio) NOT linear. second difference ≠ 0.",
             "              knee between 0.25 and 0.5, bracketing",
-            f"              field_collapse.py spinodal h* ≈ {SPINODAL_H_STAR}",
+            f"              field_collapse.py spinodal h* ≈ {SPINODAL_H_STAR:.5f}",
             "P4  coupling  λ sign agrees across ≥4 of 5 metrics per trajectory",
             "P5  law       exp beats (1+G)^-β by AIC in >70% of 24 trajectories",
             "P6  capacity  |λ(DistilGPT-2, 82M)| > |λ(GPT-2, 124M)|",
