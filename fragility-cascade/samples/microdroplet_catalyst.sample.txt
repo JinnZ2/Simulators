@@ -1,0 +1,33 @@
+
+======================================================================
+MICRODROPLET CATALYSIS — A Coherens Case Study
+======================================================================
+
+Low curvature:
+  Radical flux: 0.020
+  Bond break probability: 0.202
+  Degradation rate: 0.014
+  Coherens at interface: 0.024
+  Status: STUBBORN
+
+High curvature:
+  Radical flux: 0.250
+  Bond break probability: 0.207
+  Degradation rate: 0.173
+  Coherens at interface: 0.238
+  Status: STUBBORN
+
+High temperature:
+  Radical flux: 0.075
+  Bond break probability: 0.255
+  Degradation rate: 0.052
+  Coherens at interface: 0.086
+  Status: STUBBORN
+
+======================================================================
+DESIGN PRINCIPLE:
+  • Microdroplet interfaces create high‑damping regions.
+  • High curvature → more radicals → restoring force.
+  • Plastic's stubbornness is overcome when radical flux > bond energy.
+  • The phase change is driven by geometric confinement.
+======================================================================

@@ -50,13 +50,25 @@ def main():
     print("MICRODROPLET CATALYSIS — A Coherens Case Study")
     print("=" * 70)
 
+    # CLAIM: the microdroplet Coherens verdict is monotone in `radical`
+    # (which rises with curvature and oxygen) and monotone in `temp`.
+    # SCOPE: curvature, oxygen in [0, 1]; bond, temp positive.
+    # REFUTATION: two scenarios with the same `radical` and `temp` that
+    #   produce different Coherens verdicts break the monotonicity claim.
+    # UNKNOWNS: the exponent constants in radical_generation are
+    #   illustrative; a wet-lab calibration would pin them.
     scenarios = [
-        ("Low curvature", curvature=0.2, oxygen=0.2, bond=4.0, temp=300, length=1000),
-        ("High curvature", curvature=1.0, oxygen=0.5, bond=4.0, temp=300, length=1000),
-        ("High temperature", curvature=0.5, oxygen=0.3, bond=4.0, temp=350, length=1000),
+        ("Low curvature",   dict(curvature=0.2, oxygen=0.2, bond=4.0, temp=300, length=1000)),
+        ("High curvature",  dict(curvature=1.0, oxygen=0.5, bond=4.0, temp=300, length=1000)),
+        ("High temperature", dict(curvature=0.5, oxygen=0.3, bond=4.0, temp=350, length=1000)),
     ]
 
-    for name, curvature, oxygen, bond, temp, length in scenarios:
+    for name, params in scenarios:
+        curvature = params["curvature"]
+        oxygen = params["oxygen"]
+        bond = params["bond"]
+        temp = params["temp"]
+        length = params["length"]
         radical = radical_generation(curvature, oxygen)
         prob = bond_break_probability(radical, bond, temp)
         rate = plastic_degradation_rate(radical, length)

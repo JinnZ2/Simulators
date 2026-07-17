@@ -22,15 +22,36 @@ def piecewise_lambda(s, regime):
     else:
         return 0.0
 
-def detect_regime(D_f_series, scale_series, threshold=0.1):
+def detect_regime(D_f_series, scale_series, threshold=0.1, D_f_floor=1e-6):
     """
     Detect where lambda changes sign or magnitude.
+
+    CLAIM: fractal dimension D_f evolves monotonically inside each regime;
+      lambda = log(D_f_n / D_f_{n-1}) / (scale_n - scale_{n-1}) captures the
+      per-scale exponential growth rate. Regime shifts are where |Δλ| exceeds
+      the threshold.
+    SCOPE: D_f > 0 (fractal dimensions are positive by definition). scale
+      is strictly monotone.
+    REFUTATION: if any consecutive D_f pair produces a non-positive ratio,
+      the fractal-dimension proxy has fallen outside its domain — treat
+      that transition as a hard regime shift, not a math error. The
+      demo catastrophic branch drives D_f negative, which is physically
+      nonsense but numerically expressive; clamp to `D_f_floor` and
+      record the transition as `lam = -inf` (catastrophic).
+    UNKNOWNS: the `D_f_floor` sentinel is a numerical convention, not a
+      measurement; a wet-lab or simulation D_f cannot become negative.
     """
     lambda_vals = []
     for i in range(1, len(D_f_series)):
         if scale_series[i] == scale_series[i-1]:
             continue
-        lam = math.log(D_f_series[i] / D_f_series[i-1]) / (scale_series[i] - scale_series[i-1])
+        prev = max(D_f_series[i-1], D_f_floor)
+        curr = max(D_f_series[i],   D_f_floor)
+        ratio = curr / prev
+        if ratio <= 0:
+            lambda_vals.append(float("-inf"))     # catastrophic transition
+            continue
+        lam = math.log(ratio) / (scale_series[i] - scale_series[i-1])
         lambda_vals.append(lam)
     # Identify change points
     change_points = []

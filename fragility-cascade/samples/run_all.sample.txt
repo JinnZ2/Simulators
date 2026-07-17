@@ -1,45 +1,54 @@
 ==============================================================================
-fragility-cascade — run_all  (35 modules, timeout 15s)
+fragility-cascade — run_all  (44 modules, timeout 15s)
 ==============================================================================
   module                                 verdict     wall  last stdout line
   -------------------------------------------------------------------------
   alien_homeostasis.py                   OK         0.03s  
   anthropomorphic_entrainment.py         OK         0.03s  ============================================================
   attack_tree.py                         OK         0.03s  A barrel of oil sits at L=0. Its surface is a fence and a lo
+  attribution_field.py                   OK         0.01s  
   bacterial_herding.py                   OK         0.01s  ============================================================
   cascade_network.py                     OK         0.09s  ============================================================
-  cascade_redesign_M_collapse.py         OK         0.02s  ============================================================
+  cascade_redesign_M_collapse.py         OK         0.01s  ============================================================
   cascade_redesign_vulnerability.py      OK         0.03s    Let the ground hold the value. Let the AI run.
-  coherens.py                            OK         0.03s  ============================================================
+  coherens.py                            OK         0.02s  ============================================================
+  coherens_attack.py                     OK         0.01s  ============================================================
   collapse_predictor.py                  OK         0.03s  ============================================================
   communication_gradients.py             OK         0.01s  ============================================================
   communication_vulnerability.py         OK         0.02s  ============================================================
   cryptographic_interference.py          OK         0.03s  ============================================================
-  engagement_threshold.py                OK         0.03s  ============================================================
-  explorer.py                            OK         0.55s  ============================================================
+  engagement_threshold.py                OK         0.02s  ============================================================
+  explorer.py                            OK         0.46s  ============================================================
   friction_calibration_ratio.py          OK         0.02s  ============================================================
   homeostasis_kernel.py                  OK         0.01s  ============================================================
   inference_entropy.py                   OK         0.01s  ============================================================
+  institutional_audit.py                 OK         0.01s  
   interaction_audit.py                   OK         0.02s  ============================================================
   linguistic_interference.py             OK         0.02s  ============================================================
+  microdroplet_catalyst.py               OK         0.01s  ============================================================
   nautilus_architecture.py               OK         0.04s  ============================================================
-  phase_space_map.py                     OK         0.84s  Exploration is now interactive. You can scan any two couplin
-  phi_collapse_variables.py              OK         0.04s  ============================================================
-  product_multiplicity.py                OK         1.12s  Product multiplicity is only a hedge if the branches can fai
+  phase_space_map.py                     OK         0.85s  Exploration is now interactive. You can scan any two couplin
+  phi_collapse_variables.py              OK         0.05s  ============================================================
+  product_multiplicity.py                OK         1.14s  Product multiplicity is only a hedge if the branches can fai
   reciprocity_phi_metrics.py             OK         0.03s  ============================================================
   redemption_entropy.py                  OK         0.34s  is the physics. A barrel in your hand has L=1 and no shared 
   redemption_entropy_peak_hour.py        OK         0.01s  ============================================================
   resonance_audit.py                     OK         0.01s  ============================================================
   scale_invariant_audit.py               OK         0.01s  ============================================================
+  scale_regime_shift.py                  OK         0.50s  ============================================================
   scent.py                               OK         0.03s  ============================================================
   semantic_interference_vectors.py       OK         0.03s  ============================================================
-  sensitivity_analysis.py                OK         0.98s    χ: +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000
+  sensitivity_analysis.py                OK         0.90s    χ: +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000
   substrate_spectrum.py                  OK         0.03s  MDI spans ~4 orders of magnitude ground -> cloud. That sprea
+  superionic_anyionic_bridge.py          OK         0.01s  ============================================================
   survival_spirals.py                    OK         0.02s  ============================================================
+  testC29.py                             OK         0.04s  Standing hypotheses: 0
+  test_c29_live.py                       OK         0.01s  — Compare standing hypotheses across domains.
   test_refutations.py                    OK         0.06s  ============================================================
+  the_laboratory.py                      OK         0.04s  ============================================================
   weird_gatekeeper.py                    OK         0.02s  3. Monitor for shifts in pressure.
 
 ==============================================================================
-SUMMARY: 35 OK, 0 error, 0 timeout, 0 skipped ()
+SUMMARY: 44 OK, 0 error, 0 timeout, 0 skipped ()
 ==============================================================================
 report -> /home/user/Simulators/fragility-cascade/samples/run_all_report.json
