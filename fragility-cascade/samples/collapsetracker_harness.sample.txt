@@ -4,19 +4,28 @@ collapsetracker_harness — log-drift frame vs real recursive training
 
 No CSV supplied. Predictions locked BEFORE data, per protocol:
 
-  P1  sign      lambda < 0 for all ratio > 0                    [24/24]
-  P2  monotone  |lam(1.0)| > |lam(0.75)| > |lam(0.5)| > |lam(0.25)|
-  P3  knee      lam(ratio) NOT linear; 2nd difference != 0;
-                knee brackets spinodal h* = 0.385
-  P4  coupling  lam sign agrees across >=4 of 5 metrics/trajectory
-  P5  law       exp beats (1+G)^-beta by AIC in >70% of 24
-  P6  capacity  |lam(DistilGPT-2 82M)| > |lam(GPT-2 124M)|
-  P7  tail      |lam| largest in domain with highest M_0
+  P1  sign      λ < 0 for all ratio > 0                          [24/24]
+  P2  monotone  |λ(1.0)| > |λ(0.75)| > |λ(0.5)| > |λ(0.25)|
+  P3  knee      λ(ratio) NOT linear. second difference ≠ 0.
+                knee between 0.25 and 0.5, bracketing
+                field_collapse.py spinodal h* ≈ 0.385
+  P4  coupling  λ sign agrees across ≥4 of 5 metrics per trajectory
+  P5  law       exp beats (1+G)^-β by AIC in >70% of 24 trajectories
+  P6  capacity  |λ(DistilGPT-2, 82M)| > |λ(GPT-2, 124M)|
+  P7  tail      |λ| largest in the domain with highest M_0
+                (most tail to lose)
 
-  P1-P2 are nearly free; any collapse framework predicts them.
+  P1–P2 are nearly free; any collapse framework predicts them.
   P3 is the one worth the download: it tests whether the
   spinodal formalism transfers from diversity-collapse to
-  model-collapse. Linear lam(ratio) refutes the transfer.
+  model-collapse. Linear λ(ratio) refutes the transfer.
+
+  Alternate substrates (no CollapseTracker download):
+    Path C — Model Zoos: TwoNN directly on 3.8M parameter
+      states across 27 zoos. Weights are already vectors.
+    Path D — Multi-LLM Trace: twonn_from_distances() on a
+      pairwise dissimilarity matrix. Bridges to
+      alien_homeostasis.py on the same trace.
 
   Run:  python3 collapsetracker_harness.py metrics.csv
 ==========================================================================

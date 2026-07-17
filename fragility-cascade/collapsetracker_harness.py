@@ -14,16 +14,33 @@ DATASET (verified 2026-07-17 against the IEEE DataPort record)
   Artifacts: generated samples (99.2 MB), metrics table (57.7 KB), plots.
   Seed datasets NOT redistributed (third-party licences).
 
-TWO PATHS
+FOUR PATHS -- pick by what the substrate already gives you
   Path B (metrics, 57.7 KB, phone-runnable)  <-- default
       lambda = ln(M_n / M_0) / G  for each shipped diversity metric.
       The v2 claim is about log-drift of A diversity measure. D_f is one
       instantiation, not the claim itself. Five channels ship free:
       distinct n-grams, Self-BLEU, KL divergence, vocabulary coverage,
       rare-token survival.
-  Path A (embeddings, 99.2 MB + Sentence-BERT + GPU)
+  Path A (CollapseTracker embeddings, 99.2 MB + Sentence-BERT + GPU)
       Estimate intrinsic dimension per generation, then same frame.
       USE twonn(). DO NOT USE box-counting -- see BOX_COUNTING_IS_DEAD.
+      Kept for completeness; C and D make it optional.
+  Path C (Model Zoos, 3.8M states across 27 zoos)
+      Weights ARE the vectors. No embedding model, no Sentence-BERT,
+      no GPU. Feed parameter trajectories straight into twonn() and
+      run the same log-drift frame per zoo. This is the cleanest test
+      of C-scale-2 the substrate offers: a real recursive-training
+      artifact with a native coordinate system.
+      Source: modelzoos.org (Schurholt et al., 2022-).
+  Path D (Multi-LLM Trace, pairwise distance matrix only)
+      TwoNN needs only mu = r2/r1 per point, so a full nxn distance
+      matrix is sufficient input -- coordinates are not required.
+      twonn_from_distances() consumes the matrix directly, so a trace
+      shipped as pairwise dissimilarities can be audited without ever
+      reconstructing an embedding. Bridges to alien_homeostasis.py --
+      the log-drift audit here answers "is diversity draining?" while
+      alien homeostasis answers "is the fixed point still human-
+      readable?" Both can fire on the same trace.
 
 BOX_COUNTING_IS_DEAD
   Measured 2026-07-17, true intrinsic D = 5, N = 2000:
@@ -160,6 +177,51 @@ def twonn(points, discard=0.1):
     return d, (1.0 - ss_res / ss_tot if ss_tot > 0 else 0.0)
 
 
+def twonn_from_distances(dmat, discard=0.1):
+    """TwoNN consuming a symmetric nxn distance matrix directly.
+
+    Path D substrate: a Multi-LLM Trace shipped as pairwise distances
+    (or any pipeline whose native output is a dissimilarity matrix) has
+    no coordinates to feed twonn(). But TwoNN only needs mu = r2/r1 per
+    point, and that is recoverable from the two smallest positive
+    entries in each row -- no coordinates required.
+
+    dmat : list of lists, dmat[i][j] = distance(i, j), dmat[i][i] == 0
+    Returns (d, fit_r2), same shape as twonn().
+    """
+    n = len(dmat)
+    mus = []
+    for i in range(n):
+        best = second = float("inf")
+        row = dmat[i]
+        for j in range(n):
+            if j == i:
+                continue
+            r = row[j]
+            if r < best:
+                second, best = best, r
+            elif r < second:
+                second = r
+        if best > 1e-12 and second != float("inf"):
+            mus.append(second / best)
+    mus.sort()
+    m = len(mus)
+    keep = int(m * (1 - discard))
+    xs, ys = [], []
+    for i in range(keep):
+        if mus[i] <= 1.0:
+            continue
+        xs.append(math.log(mus[i]))
+        ys.append(-math.log(1.0 - (i + 1) / (m + 1)))
+    if len(xs) < 8:
+        return 0.0, 0.0
+    d = sum(x * y for x, y in zip(xs, ys)) / sum(x * x for x in xs)
+    my = sum(ys) / len(ys)
+    ss_res = sum((y - d * x) ** 2 for x, y in zip(xs, ys))
+    ss_tot = sum((y - my) ** 2 for y in ys)
+    return d, (1.0 - ss_res / ss_tot if ss_tot > 0 else 0.0)
+
+
 # --------------------------------------------------------------- frame
 def log_drift(M_0, M_n, G, inverted=False):
     """lambda = ln(M_n/M_0)/G. Sign-flipped for inverted metrics."""
@@ -242,20 +304,28 @@ def main(argv=None):
     if not a.metrics_csv:
         print("\nNo CSV supplied. Predictions locked BEFORE data, per protocol:\n")
         for line in [
-            "P1  sign      lambda < 0 for all ratio > 0                    [24/24]",
-            "P2  monotone  |lam(1.0)| > |lam(0.75)| > |lam(0.5)| > |lam(0.25)|",
-            f"P3  knee      lam(ratio) NOT linear; 2nd difference != 0;",
-            f"              knee brackets spinodal h* = {SPINODAL_H_STAR}",
-            "P4  coupling  lam sign agrees across >=4 of 5 metrics/trajectory",
-            "P5  law       exp beats (1+G)^-beta by AIC in >70% of 24",
-            "P6  capacity  |lam(DistilGPT-2 82M)| > |lam(GPT-2 124M)|",
-            "P7  tail      |lam| largest in domain with highest M_0",
+            "P1  sign      λ < 0 for all ratio > 0                          [24/24]",
+            "P2  monotone  |λ(1.0)| > |λ(0.75)| > |λ(0.5)| > |λ(0.25)|",
+            "P3  knee      λ(ratio) NOT linear. second difference ≠ 0.",
+            "              knee between 0.25 and 0.5, bracketing",
+            f"              field_collapse.py spinodal h* ≈ {SPINODAL_H_STAR}",
+            "P4  coupling  λ sign agrees across ≥4 of 5 metrics per trajectory",
+            "P5  law       exp beats (1+G)^-β by AIC in >70% of 24 trajectories",
+            "P6  capacity  |λ(DistilGPT-2, 82M)| > |λ(GPT-2, 124M)|",
+            "P7  tail      |λ| largest in the domain with highest M_0",
+            "              (most tail to lose)",
         ]:
             print("  " + line)
-        print("\n  P1-P2 are nearly free; any collapse framework predicts them.")
+        print("\n  P1–P2 are nearly free; any collapse framework predicts them.")
         print("  P3 is the one worth the download: it tests whether the")
         print("  spinodal formalism transfers from diversity-collapse to")
-        print("  model-collapse. Linear lam(ratio) refutes the transfer.")
+        print("  model-collapse. Linear λ(ratio) refutes the transfer.")
+        print("\n  Alternate substrates (no CollapseTracker download):")
+        print("    Path C — Model Zoos: TwoNN directly on 3.8M parameter")
+        print("      states across 27 zoos. Weights are already vectors.")
+        print("    Path D — Multi-LLM Trace: twonn_from_distances() on a")
+        print("      pairwise dissimilarity matrix. Bridges to")
+        print("      alien_homeostasis.py on the same trace.")
         print("\n  Run:  python3 collapsetracker_harness.py metrics.csv")
         print("=" * 74)
         return 0
