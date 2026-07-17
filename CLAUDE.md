@@ -121,6 +121,21 @@ underneath).
   `None`, response bands widen and tag the gap, never silently
   fill with false precision. Four claims (`RGS_001..004`) follow
   the REFUTATION_PROTOCOL pattern.
+- `thermal-sensor-degradation-audit/` — Single-file, stdlib-only audit
+  of what sustained heat does to the sensor package that is supposed
+  to measure the heat. Seven lumped layers over one driver
+  (temperature × time): material handbook table (CTE / service ceiling
+  / creep onset), Stull wet-bulb, dark-surface solar amplification,
+  differential-expansion microstrain across a bolted dissimilar-material
+  pair, Arrhenius/Q10 gasket compression set, Arrhenius (Ea ≈ 0.7 eV)
+  electronic drift, and a measurement-corruption signature. One
+  `audit()` call rolls them into a worst-flag-wins `GREEN`/`YELLOW`/`RED`
+  verdict. Headline claim (L7): `corruption(trend) =
+  corruption(measurement) × corruption(framework)` — multiplicative;
+  a package degrades *during* the extreme event it records, so the
+  tail biases LOW (variance collapse + range clipping + step offset).
+  Four claims (`TSD_001..004`) each ship the field experiment that
+  refutes them; update the claim, never retune the sim. 23 tests green.
 - `play-sims/` — Exploratory sandbox and the repo's explicit exception
   to stdlib-only. Seventeen visualisation-first simulations across five
   domains: `plasma-waves/` (4 — 1D/2D FDTD, wave→dust heating, 2D PIC),
