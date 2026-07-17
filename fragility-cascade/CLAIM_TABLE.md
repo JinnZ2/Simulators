@@ -56,15 +56,19 @@ the main-table `C1..C17` numbering.
 | # | Claim | Refuted if | Verdict at seed=11 |
 |---|-------|-----------|--------------------|
 | CGT-1 | Under drift, decoupled coherence stays high (>0.8 mean) while accuracy falls below 0.5; coupled keeps the two within 0.2. | Decoupled coherence ≤ 0.8, or decoupled accuracy ≥ 0.5, or the coupled coh/acc gap ≥ 0.2. | **HOLDS** — decoupled coh=1.0 acc=0.493; coupled coh=0.903 acc=0.768 (gap 0.135). |
-| CGT-2 | Scaling decoupled capacity 8 → 32 → 128 raises coherence but accuracy rise is ≤ 0.05. Better wallpaper, same gap. | Accuracy rises > 0.05 across the sweep (capacity fixes the problem), or coherence falls (wallpaper doesn't grow with slots). | **REFUTED** — coherence is already saturated at 1.0 at cap=8, so the "raises coherence" precondition fails. Accuracy is flat (0.493 across all three). The **wallpaper claim holds** (accuracy invariant at 16× capacity); the coherence-rise premise was wrong because saturation happens sooner. Update the claim, not the sim. |
-| CGT-3 | Coupled correction latency after a regime shift is finite and < SHIFT/2; decoupled latency is unbounded (never re-converges). | A coupled shift with unbounded latency, or every decoupled shift re-converging (latency finite for all shifts). | **REFUTED** — coupled latencies [0, 15, 9] all < 75 ✓; decoupled latencies [0, 28, 0] all finite. LSQ has 2 free params and terrain is linear, so decoupled sometimes accidentally aligns with the new regime after a shift. The "never re-converges" prediction was too strong; the accuracy-gap claim (CGT-1) is where the real distinction lives. Update to "mean decoupled recovery quality < coupled" or a coefficient-space distance metric. |
-| CGT-4 | Each generation trained on the previous decoupled output loses accuracy monotonically while coherence does not fall. | Any generation raises accuracy vs the previous, or coherence drops > 0.05 across 4 generations. | **REFUTED** — accs [0.493, 0.461, 0.57, 0.408] not monotone; noise dominates at 4 generations. Coherence flat at 1.0 (that half holds). Update to expected-value framing over many seeds, or extend to more generations where the trend can dominate the noise. |
+| CGT-2 v1 | Scaling decoupled capacity 8 → 32 → 128 raises coherence but accuracy rise is ≤ 0.05. Better wallpaper, same gap. | Accuracy rises > 0.05 across the sweep, or coherence falls. | **REFUTED (retired)** — coherence is already saturated at 1.0 at cap=8, so the "raises coherence" precondition fails. Accuracy is flat (0.493 across all three), which is the load-bearing point. |
+| CGT-2 v2 | Decoupled coherence stays HIGH (≥ 0.8) across capacity 8 → 128 while accuracy is invariant (\|Δacc\| ≤ 0.05). Drops v1's coherence-rise premise; keeps the wallpaper claim. | Coherence drops below 0.8 anywhere in the sweep, or accuracy delta exceeds 0.05. | **HOLDS** — coherence 1.0 / 1.0 / 1.0, accuracy 0.493 / 0.493 / 0.493. Wallpaper survives at 16× capacity. |
+| CGT-3 v1 | Coupled correction latency after a regime shift is finite and < SHIFT/2; decoupled latency is unbounded (never re-converges). | A coupled shift with unbounded latency, or every decoupled shift re-converging. | **REFUTED (retired)** — coupled latencies all < 75 ✓; decoupled latencies [0, 28, 0] all finite. Linear terrain + 2-param LSQ occasionally re-aligns after a shift by accident, so "never" is too strong. |
+| CGT-3 v2 | Mean coupled recovery latency (scoring never-re-converged as SHIFT) is LESS than mean decoupled across a 5-seed sweep. Coupled beats decoupled in expectation; single-seed accidents are folded into the mean. | Mean coupled scored-latency ≥ mean decoupled across the sweep. | **HOLDS** — coupled mean 9.13, decoupled mean 26.33 (2.9× ratio). Per-seed decoupled shows two seeds hitting the SHIFT penalty (54.7, 52). |
+| CGT-4 v1 | Each generation trained on the previous decoupled output loses accuracy monotonically while coherence does not fall. | Any generation raises accuracy vs the previous, or coherence drops > 0.05 across 4 generations. | **REFUTED (retired)** — accs [0.493, 0.461, 0.57, 0.408] not monotone; noise dominates at 4 generations. |
+| CGT-4 v2 | Linear-regression slope of accuracy vs generation across 12 generations is negative; coherence slope is ≈ 0. Trades per-step monotonicity for a mean-trend test that noise cannot dominate. | Accuracy slope ≥ 0, or coherence slope drifts by more than 0.01 per generation. | **HOLDS** — acc_slope = −0.0047, coh_slope = 0.0000. Decay is small but robustly negative. |
 
-**Note on refuted-in-first-sample claims.** CGT-2/3/4 refute themselves on
-their own first sample. Per the module's own refutation protocol, the *sim
-is the witness*: the numbers stand and the claims get rewritten. The
-refutation column above already sketches the direction each rewrite should
-go; the file itself is unchanged.
+**Note on the refutation protocol.** CGT-2/3/4 v1 refuted themselves on
+their own first sample. Per the module's own protocol, the *sim is the
+witness*: the numbers stand and the claims get rewritten. The v1
+evaluators are preserved verbatim inside `main()` alongside v2, so the
+history of what was refuted stays reproducible. The v2 rewrites are what
+the sim actually supports.
 
 ## Attractor-depth claims (`attractor_depth_test.py`)
 

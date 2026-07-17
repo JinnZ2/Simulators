@@ -5,14 +5,20 @@ E2  capacity sweep, decoupled (wallpaper test)
     cap=8    coh=1.0 acc=0.493
     cap=32   coh=1.0 acc=0.493
     cap=128  coh=1.0 acc=0.493
-E3  generational decay loop (decoupled trains decoupled)
-    gen=0 coh=1.0 acc=0.493
-    gen=1 coh=1.0 acc=0.461
-    gen=2 coh=1.0 acc=0.57
-    gen=3 coh=1.0 acc=0.408
+E3  generational decay loop, extended (12 gens for C4 v2)
+    gen=0  coh=1.0 acc=0.493
+    gen=3  coh=1.0 acc=0.408
+    gen=7  coh=1.0 acc=0.396
+    gen=11 coh=1.0 acc=0.418
+E4  5-seed sweep for C3 v2 (score None as SHIFT)
+    coupled   mean scored lat = 9.13   per-seed = [8, 15.7, 2.3, 11.3, 8.3]
+    decoupled mean scored lat = 26.33   per-seed = [9.3, 54.7, 52, 9.7, 6]
 
 CLAIM_TABLE evaluation (refute → edit claim, not sim)
-    C1  HOLDS
-    C2  REFUTED — update the claim
-    C3  REFUTED — update the claim
-    C4  REFUTED — update the claim
+    C1      HOLDS
+    C2 v1   REFUTED — update the claim
+    C2 v2   HOLDS
+    C3 v1   REFUTED — update the claim
+    C3 v2   HOLDS
+    C4 v1   REFUTED — update the claim
+    C4 v2   HOLDS    (acc_slope=-0.0047, coh_slope=0.0)
