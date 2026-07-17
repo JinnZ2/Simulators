@@ -40,6 +40,32 @@ Sample: [`samples/cascade_redesign_vulnerability.sample.txt`](samples/cascade_re
 - Monte Carlo `q_common` values are calibration knobs to field estimates; they are hypotheses about correlation strength, and are themselves refutable (C3).
 
 
+## Coupling-gap claims (`coupling_gap_test.py`)
+
+The module operationalizes the split: `coupled` (propose ═══ test — terrain
+vetoes and the veto is inherited) vs `decoupled` (propose ──► verify later /
+maybe / never — coherence with own fit fills the gap). Same generator both
+regimes; only the feedback loop differs.
+
+Sample: [`samples/coupling_gap_test.sample.txt`](samples/coupling_gap_test.sample.txt)
+(seed=11, steps=600, shift=150, tol=1.5, capacity=32).
+
+Local labels `C1..C4` are internal to this module; they do not collide with
+the main-table `C1..C17` numbering.
+
+| # | Claim | Refuted if | Verdict at seed=11 |
+|---|-------|-----------|--------------------|
+| CGT-1 | Under drift, decoupled coherence stays high (>0.8 mean) while accuracy falls below 0.5; coupled keeps the two within 0.2. | Decoupled coherence ≤ 0.8, or decoupled accuracy ≥ 0.5, or the coupled coh/acc gap ≥ 0.2. | **HOLDS** — decoupled coh=1.0 acc=0.493; coupled coh=0.903 acc=0.768 (gap 0.135). |
+| CGT-2 | Scaling decoupled capacity 8 → 32 → 128 raises coherence but accuracy rise is ≤ 0.05. Better wallpaper, same gap. | Accuracy rises > 0.05 across the sweep (capacity fixes the problem), or coherence falls (wallpaper doesn't grow with slots). | **REFUTED** — coherence is already saturated at 1.0 at cap=8, so the "raises coherence" precondition fails. Accuracy is flat (0.493 across all three). The **wallpaper claim holds** (accuracy invariant at 16× capacity); the coherence-rise premise was wrong because saturation happens sooner. Update the claim, not the sim. |
+| CGT-3 | Coupled correction latency after a regime shift is finite and < SHIFT/2; decoupled latency is unbounded (never re-converges). | A coupled shift with unbounded latency, or every decoupled shift re-converging (latency finite for all shifts). | **REFUTED** — coupled latencies [0, 15, 9] all < 75 ✓; decoupled latencies [0, 28, 0] all finite. LSQ has 2 free params and terrain is linear, so decoupled sometimes accidentally aligns with the new regime after a shift. The "never re-converges" prediction was too strong; the accuracy-gap claim (CGT-1) is where the real distinction lives. Update to "mean decoupled recovery quality < coupled" or a coefficient-space distance metric. |
+| CGT-4 | Each generation trained on the previous decoupled output loses accuracy monotonically while coherence does not fall. | Any generation raises accuracy vs the previous, or coherence drops > 0.05 across 4 generations. | **REFUTED** — accs [0.493, 0.461, 0.57, 0.408] not monotone; noise dominates at 4 generations. Coherence flat at 1.0 (that half holds). Update to expected-value framing over many seeds, or extend to more generations where the trend can dominate the noise. |
+
+**Note on refuted-in-first-sample claims.** CGT-2/3/4 refute themselves on
+their own first sample. Per the module's own refutation protocol, the *sim
+is the witness*: the numbers stand and the claims get rewritten. The
+refutation column above already sketches the direction each rewrite should
+go; the file itself is unchanged.
+
 ## Resonance / Nautilus / semantic-interference claims (post-C11)
 
 Encoded in the modules landed via origin/main. Test-runner:
