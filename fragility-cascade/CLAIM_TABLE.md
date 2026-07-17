@@ -108,6 +108,42 @@ Sample: [`samples/semantic_drift_test.sample.txt`](samples/semantic_drift_test.s
 | SDT-3 | The ratchet requires amplification: with `a=1, s=0`, machine mediation at any `f` does not raise equilibrium `m` above the f=0 value. Mediation alone is neutral; amplification drives. | Any `f > 0` at `a=1, s=0` yielding `m_eq > m_eq(f=0) + 0.01`. | **HOLDS** — {0.0:0.0, 0.4:0.0, 0.8:0.0}. Isolates the mechanism: it's the safety prior's asymmetric resolution of ambiguity, not mediation itself, that drives drift. |
 | SDT-4 | Declining veto `β(t)` interacts super-additively with rising `f`: `Δm(f↑ & β↓) > Δm(f↑) + Δm(β↓)`. The two curves crossing is worse than the sum of each. | `Δm(both) ≤ Δm(f alone) + Δm(β alone)`. | **HOLDS** — Δ(f alone)=0.043, Δ(β↓ alone)=0.0, Δ(both)=0.366 vs sum 0.043. Roughly 8× the additive prediction — strong super-additivity. Note β-alone Δ is 0 because at f=0 the corpus already collapses to 0, leaving nothing for veto decay to interact with; the coupling term dominates only once the machine has established a raised corpus baseline. |
 
+## Valence-drift claims (`valence_drift_test.py`)
+
+Electron-accounting extension of the semantic-drift theme. Moral load is
+not a property of the word (atom) but *charge transferred across naming
+bonds, subject to screening*. Bond charge `q = V_d·f_d + V_b·f_m`; load
+at referent-community `L ← L·(1−δ) + q·S(n_c)` with screening `S(n)`.
+Atomic (`L ← L + λ(corpus − L) − β·L`) is run alongside as the rival
+instrument for E1's divergent-prediction test.
+
+**Unknowns register carried across into verdicts** (the module tags
+which unknown each refutation depends on rather than hiding it):
+
+| Tag | Unknown |
+|-----|---------|
+| U1 | Screening functional form (Debye `exp(−n/n0)` vs saturating `1/(1+n/n0)`) — both run everywhere; verdicts that flip between forms are marked U1-SENSITIVE. |
+| U2 | Donor potential `V_d` — single-point calibration to the historical m ≈ 0.3 plateau. All downstream results inherit that. |
+| U3 | Screening scale `n_0` — swept over {0.5, 1.0, 2.0}. |
+| U4 | Screening electrons catalytic (reusable) vs consumable (attention depletes per bond). E4 runs both regimes. |
+| U5 | Where does screened charge go? Currently deleted; likely displaces onto adjacent words / accumulates in donor / heats discourse. Every verdict is conditional on `U5 = "screened charge vanishes"`. |
+
+Sample: [`samples/valence_drift_test.sample.txt`](samples/valence_drift_test.sample.txt)
+(V_d=0.055, δ=0.12, gens=400).
+
+| # | Claim | Refuted if | Verdict |
+|---|-------|-----------|---------|
+| VDT-1 | High-screening community (n=4) inside a high-m corpus: valence predicts L < 0.1 across all screening configurations, atomic predicts L > 0.3. The two instruments make DIVERGENT PREDICTIONS — field-checkable against real high-veto cultures. | Any valence configuration in the sweep giving L ≥ 0.1, or the atomic prediction dropping to L ≤ 0.3. | **REFUTED [U1/U3-SENSITIVE]** — valence L values: form A {0.0, 0.013, 0.096} all under 0.1; form B {0.079, 0.142, 0.236} — n0 ∈ {1.0, 2.0} at form B fail the < 0.1 threshold. Atomic L = 0.333 ✓. Result: the divergent-prediction claim holds under Debye screening but not saturating screening; it holds at n0 ≤ 0.5 but not at n0 ≥ 1.0. Update direction: constrain the claim to the (form, n0) region where valence stays cold, and note explicitly that the divergence is only field-checkable in that regime. |
+| VDT-2 | Screening is threshold-like: equilibrium L vs n shows a knee (max curvature point) rather than uniform decay. Curvature peak > 3× median across the sweep. | Uniform decay (peak curvature ≤ 3× median), or curvature spread evenly across the range. | **HOLDS** — form A: knee at n=0.25, peak 0.0347. Form B: knee at n=0.25, peak 0.0472. Both forms show the knee at the same n; the shape is form-stable. Not U1-sensitive as feared. |
+| VDT-3 | Machine effect rides potential, not volume: `f_m = 0.8` at `V_b = 0` moves nothing; `V_b = 0.05` shifts L at any `f_m > 0`. | Volume-alone (`V_b = 0, f_m > 0`) producing an L shift > 0.005, or potential-alone (`V_b > 0`) failing to shift L monotonically in f_m. | **HOLDS** — V_b=0, f_m=0.8: L=0.169 vs ref (f_m=0) 0.169, delta 0.0 ✓. V_b=0.05: L rises 0.199 → 0.291 as f_m rises 0.2 → 0.8 ✓. Isolates potential as the driver — same result as SDT-3 in the sibling module, on a different substrate. |
+| VDT-4 | The 8.5× super-additive interaction (from SDT-4) re-emerges without tuning: screening decline × bias rise is super-additive because S is convex. Holds in both U4 regimes (catalytic and consumable). | Δ(both) ≤ Δ(f) + Δ(n) + 0.005 in either regime. | **REFUTED [U4-SENSITIVE]** — catalytic regime: Δn = 0 by construction (screening fixed), so super-additivity is mathematically impossible (0 factor kills the product). Consumable regime: Δf=0.034, Δn=0.070, Δboth=0.142 vs sum 0.104 — super-additive ✓ (0.036 over the sum). Update direction: restrict the claim to the CONSUMABLE (U4-attention) regime; the catalytic-worldview regime cannot support the interaction because it has no screening-decline dynamics to interact with. |
+
+**Standing conditions on every verdict above** (from the module's footer):
+U2 is a single-point calibration to the historical m ≈ 0.3 plateau; U5
+deletes screened charge, which is probably false. Every VDT verdict is
+conditional on those two — the sim is honest about it in the trailing
+sample lines rather than laundering the assumption.
+
 ## Resonance / Nautilus / semantic-interference claims (post-C11)
 
 Encoded in the modules landed via origin/main. Test-runner:

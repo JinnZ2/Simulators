@@ -1,0 +1,27 @@
+E1  divergent prediction — high-screen community, hot corpus
+    valence ('A', 0.5): L=0.0
+    valence ('A', 1.0): L=0.013
+    valence ('A', 2.0): L=0.096
+    valence ('B', 0.5): L=0.079
+    valence ('B', 1.0): L=0.142
+    valence ('B', 2.0): L=0.236
+    atomic  (β=.08, corpus=.6): L=0.333
+E2  L_eq vs screening density n (sweep, knee test)
+    form A: knee at n=0.25  curvature=0.0347  L(0)=0.708 L(4)=0.013
+    form B: knee at n=0.25  curvature=0.0472  L(0)=0.708 L(4)=0.142
+E3  potential vs volume
+    V_b=0, f_m=.8: L=0.169 (ref f_m=0: 0.169)
+    V_b=.05, f_m=0.2: L=0.199
+    V_b=.05, f_m=0.8: L=0.291
+E4  interaction, both U4 regimes (n 2.0→decline, V_b 0→.05)
+    consumable=False: Δf=0.034 Δn=0.0 Δboth=0.034 sum=0.034
+    consumable=True: Δf=0.034 Δn=0.07 Δboth=0.142 sum=0.104
+
+CLAIM_TABLE evaluation (refute → edit claim, not sim)
+    C1  REFUTED — update the claim [U1/U3-SENSITIVE]
+    C2  HOLDS
+    C3  HOLDS
+    C4  REFUTED — update the claim [U4-SENSITIVE]
+
+    standing conditions: U2 single-point calibration,
+    U5 screened charge deleted (probably false) — all verdicts conditional.
