@@ -129,19 +129,37 @@ def aging_multiplier(temp_c, ea_ev=0.7, ref_c=25.0):
     t1, t0 = temp_c + 273.15, ref_c + 273.15
     return math.exp((ea_ev / K_B) * (1.0/t0 - 1.0/t1))
 
-def sensor_drift(air_c, enclosure_rise_c, rated_drift_pct_yr, days):
+def sensor_drift(air_c, enclosure_rise_c, rated_drift_pct_yr, days,
+                 t_cal_days=None):
+    """Projected sensor drift over the exposure window.
+
+    `days` is the extreme-event window itself. `t_cal_days` is the
+    cumulative time since last calibration (a missing variable
+    identified in L7_iteration.md). If supplied, the projection
+    integrates over `days + t_cal_days`, because Arrhenius drift
+    accumulates from the last zero-point. If None, only `days` is
+    used (the shipped v0 behaviour).
+
+    Rated drift is applied at the accelerated rate for the whole
+    period; a real calibration is what zeroes it.
+    """
     internal_c = air_c + enclosure_rise_c
     mult = aging_multiplier(internal_c)
-    drift = rated_drift_pct_yr * mult * (days / 365.0)
+    total_days = days if t_cal_days is None else (days + t_cal_days)
+    drift = rated_drift_pct_yr * mult * (total_days / 365.0)
     if drift > 2.0: flag = "RED"
     elif drift > 0.5: flag = "YELLOW"
     else: flag = "GREEN"
-    return {"internal_c": round(internal_c, 1),
-            "aging_multiplier_vs_25C": round(mult, 1),
-            "projected_drift_pct": round(drift, 2), "flag": flag,
-            "falsify": ("co-locate reference-grade sensor for the "
-                        "exposure window; divergence should track "
-                        "projected drift within 2x")}
+    out = {"internal_c": round(internal_c, 1),
+           "aging_multiplier_vs_25C": round(mult, 1),
+           "days_in_projection": total_days,
+           "projected_drift_pct": round(drift, 2), "flag": flag,
+           "falsify": ("co-locate reference-grade sensor for the "
+                       "exposure window; divergence should track "
+                       "projected drift within 2x")}
+    if t_cal_days is not None:
+        out["t_cal_days"] = t_cal_days
+    return out
 
 # ---------------------------------------------------------------
 # LAYER 7: MEASUREMENT CORRUPTION SIGNATURE
@@ -166,7 +184,23 @@ def _percentile_range(xs, lo_pct=5, hi_pct=95):
     return ordered[hi_i] - ordered[lo_i]
 
 
-def corruption_signature(readings_before, readings_during):
+def corruption_signature(readings_before, readings_during, mean_true=None):
+    """L7 signature detector, per L7_iteration.md § L7 v1.
+
+    Emits the shipped booleans (variance_collapse, range_clipping) AND
+    an operational bias estimate. When `mean_true` is supplied (a
+    reference-traverse mean during the event window), the bias
+    fraction and sign are computed against truth. When it is not, the
+    bias is computed against the before-window mean — informative but
+    not the L7 verdict.
+
+    The signature is NECESSARY but not sufficient for a positive L7:
+    it identifies packages AT RISK of the multiplicative product, it
+    does not measure the product itself. The multiplicative form
+    b_trend ~= b_m * b_f is only computable when a caller supplies
+    both b_m (from reference traverse) and b_f (from replaying the
+    network's aggregation).
+    """
     def var(xs):
         m = sum(xs)/len(xs)
         return sum((x-m)**2 for x in xs)/len(xs)
@@ -175,51 +209,110 @@ def corruption_signature(readings_before, readings_during):
     # Percentile-based range comparison (5th/95th) so a single outlier
     # in `readings_before` cannot defeat the clipping check.
     clipped = _percentile_range(readings_during) < 0.5 * _percentile_range(readings_before)
+
+    mean_before = sum(readings_before) / len(readings_before)
+    mean_during = sum(readings_during) / len(readings_during)
+    if mean_true is not None and mean_true != 0.0:
+        bias_frac = (mean_during - mean_true) / mean_true
+        bias_against = "reference_traverse"
+    elif mean_before != 0.0:
+        bias_frac = (mean_during - mean_before) / mean_before
+        bias_against = "before_window_mean"
+    else:
+        bias_frac = 0.0
+        bias_against = "unavailable (zero denominator)"
+    sign = "under_reporting" if bias_frac < 0 else ("over_reporting"
+           if bias_frac > 0 else "neutral")
+
     return {"variance_collapse": variance_collapse,
             "range_clipping": clipped,
+            "bias_estimate_fraction": round(bias_frac, 4),
+            "bias_sign": sign,
+            "bias_against": bias_against,
+            "signature_fires": variance_collapse and clipped,
             "read": ("LOW-BIAS LIKELY: extreme-event record "
                      "understates true tail" if (variance_collapse
-                     and clipped) else "no corruption signature"),
+                     and clipped and bias_frac < 0) else
+                     "signature fires but bias non-negative -- inspect"
+                     if (variance_collapse and clipped) else
+                     "no corruption signature"),
             "falsify": ("independent mobile reference traverse during "
                         "heat event; fixed-network tail should read "
-                        "low vs traverse if signature is real")}
+                        "low vs traverse if signature is real. "
+                        "Multiplicative form b_trend~=b_m*b_f requires "
+                        "b_f from a separate framework-aggregation replay.")}
 
 # ---------------------------------------------------------------
 # AUDIT DRIVER: one call, whole package verdict
 # ---------------------------------------------------------------
+WET_BULB_HUMAN_LIMIT_C = 31.0
+
+
+def maintenance_window_closed_by_wet_bulb(tw_c):
+    """The wet-bulb human-limit line the L7 iteration relies on."""
+    return tw_c > WET_BULB_HUMAN_LIMIT_C
+
+
 def audit(air_f, rh_pct, days, pairs, gaskets, enclosure_rise_c=15.0,
-          rated_drift_pct_yr=0.25, readings_before=None, readings_during=None):
+          rated_drift_pct_yr=0.25, readings_before=None, readings_during=None,
+          reference_mean_true=None, t_cal_days=None,
+          maintenance_deferred=None):
     """One-call package verdict. Worst flag across L4/L5/L6 wins.
 
-    If both `readings_before` and `readings_during` are supplied, the L7
-    corruption-signature check runs and joins the flag aggregation: a
-    signature-positive read (variance collapse + range clipping) fires
-    RED, since the entire package record is then low-biased regardless
-    of what the individual layer flags say.
+    Extended per L7_iteration.md § L7 v1:
+
+    - `readings_before` / `readings_during` (+ optional
+      `reference_mean_true`) drive `corruption_signature`. Signature-
+      positive reads still flag RED; the bias fraction / sign are now
+      reported for downstream multiplicative-form testing.
+    - `t_cal_days` (missing variable: cumulative time since last
+      calibration) is threaded into `sensor_drift`. Absent -> shipped v0
+      behaviour.
+    - `maintenance_deferred` (missing variable: maintenance-window
+      closure). When True AND `wet_bulb_c > 31`, the audit flags RED
+      via TSD_006: the human-limit note becomes an operational input.
+      Auto-detected as True if left None and the wet-bulb crosses the
+      limit — override with False only if you have field evidence that
+      maintenance actually happened during the extreme event.
     """
     air_c = f_to_c(air_f)
     tw = wet_bulb_c(air_c, rh_pct)
     surf = surface_temp_c(air_c)
+    human_limit_hit = maintenance_window_closed_by_wet_bulb(tw)
+    if maintenance_deferred is None:
+        maintenance_deferred = human_limit_hit
     out = {"air_c": round(air_c,1), "wet_bulb_c": round(tw,1),
            "surface_c_full_sun": round(surf,1),
+           "human_limit_hit": human_limit_hit,
+           "maintenance_deferred": maintenance_deferred,
            "human_limit_note": "wet bulb >31C = severe human risk; "
                                "field maintenance window closes",
            "pairs": [pair_mismatch(a, b, span, surf - 20.0)
                      for (a, b, span) in pairs],
            "gaskets": [compression_set(g, surf, days) for g in gaskets],
            "electronics": sensor_drift(air_c, enclosure_rise_c,
-                                       rated_drift_pct_yr, days)}
+                                       rated_drift_pct_yr, days,
+                                       t_cal_days=t_cal_days)}
     flags = ([p["flag"] for p in out["pairs"]] +
              [g.get("flag","GREEN") for g in out["gaskets"]] +
              [out["electronics"]["flag"]])
     if readings_before is not None and readings_during is not None:
-        corr = corruption_signature(readings_before, readings_during)
+        corr = corruption_signature(readings_before, readings_during,
+                                    mean_true=reference_mean_true)
         out["corruption"] = corr
         # L7 headline: a positive signature means the record itself
         # is likely low-biased. That's RED for record trustworthiness
         # even if the physical-layer flags happen to be green.
-        if corr["variance_collapse"] and corr["range_clipping"]:
+        if corr["signature_fires"]:
             flags.append("RED")
+    # TSD_006: maintenance-window closure compounds the physical layers.
+    # If the wet bulb crossed the human limit AND we deferred
+    # maintenance, upgrade any YELLOW to RED (and note the compounding
+    # even when everything is GREEN, for the operator).
+    tsd_006_fired = human_limit_hit and maintenance_deferred
+    out["tsd_006_fired"] = tsd_006_fired
+    if tsd_006_fired and "YELLOW" in flags:
+        flags.append("RED")
     out["verdict"] = ("RED" if "RED" in flags else
                       "YELLOW" if "YELLOW" in flags else "GREEN")
     return out

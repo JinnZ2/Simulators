@@ -145,10 +145,25 @@ class TestCorruptionSignature(unittest.TestCase):
     def test_signature_fires_on_collapse_and_clip(self):
         before = [20, 25, 30, 35, 40, 45]
         during = [37.0, 37.1, 37.2, 37.0, 37.1]  # low variance, clipped range
-        res = corruption_signature(before, during)
+        # Supply reference truth so the bias-direction test can run;
+        # true event mean was 45 (the tail) -> the record under-reports.
+        res = corruption_signature(before, during, mean_true=45.0)
         self.assertTrue(res["variance_collapse"])
         self.assertTrue(res["range_clipping"])
+        self.assertLess(res["bias_estimate_fraction"], 0)
+        self.assertEqual(res["bias_sign"], "under_reporting")
         self.assertIn("LOW-BIAS", res["read"])
+
+    def test_signature_fires_but_bias_positive_flags_inspect(self):
+        # Same shipped-signature booleans, but the reference truth says
+        # bias is actually positive (during mean > true mean). The new
+        # read discriminates and flags "inspect" not "LOW-BIAS".
+        before = [20, 25, 30, 35, 40, 45]
+        during = [37.0, 37.1, 37.2, 37.0, 37.1]
+        res = corruption_signature(before, during, mean_true=30.0)
+        self.assertTrue(res["signature_fires"])
+        self.assertGreater(res["bias_estimate_fraction"], 0)
+        self.assertIn("inspect", res["read"])
 
     def test_no_signature_when_range_preserved(self):
         before = [20, 25, 30, 35, 40, 45]
@@ -210,6 +225,82 @@ class TestAuditDriver(unittest.TestCase):
                     readings_before=before, readings_during=during)
         self.assertIn("corruption", res)
         self.assertNotEqual(res["verdict"], "RED")
+
+    def test_corruption_signature_reports_bias_sign_and_fraction(self):
+        # under-reporting example against reference truth
+        before = [20, 25, 30, 35, 40, 45]
+        during = [37.0, 37.1, 37.2, 37.0, 37.1]
+        res = audit(air_f=70, rh_pct=40, days=1,
+                    pairs=[("concrete", "steel_1018", 300)], gaskets=[],
+                    readings_before=before, readings_during=during,
+                    reference_mean_true=45.0)
+        c = res["corruption"]
+        self.assertEqual(c["bias_against"], "reference_traverse")
+        self.assertLess(c["bias_estimate_fraction"], 0)
+        self.assertEqual(c["bias_sign"], "under_reporting")
+        self.assertTrue(c["signature_fires"])
+
+
+class TestCumulativeCalibration(unittest.TestCase):
+    """TSD_005 — projected drift scales approximately linearly with
+    time since last calibration at fixed internal temperature."""
+
+    def test_drift_stacks_with_t_cal_days(self):
+        # 30-day event, at 43.3 C air + 15 C enclosure rise
+        short = sensor_drift(43.3, 15.0, 0.25, 30, t_cal_days=0)
+        long = sensor_drift(43.3, 15.0, 0.25, 30, t_cal_days=335)
+        # Total days: 30 vs 365. Ratio should be ~12x. Delta widened
+        # to accommodate the 2-dp rounding on projected_drift_pct.
+        self.assertAlmostEqual(
+            long["projected_drift_pct"] / short["projected_drift_pct"],
+            365 / 30, delta=0.5)
+        # And the day-count metadata should be exact.
+        self.assertEqual(short["days_in_projection"], 30)
+        self.assertEqual(long["days_in_projection"], 365)
+
+    def test_t_cal_none_matches_shipped_behaviour(self):
+        # Explicit t_cal_days=None must equal the shipped no-arg call.
+        default = sensor_drift(43.3, 15.0, 0.25, 30)
+        explicit = sensor_drift(43.3, 15.0, 0.25, 30, t_cal_days=None)
+        self.assertEqual(default["projected_drift_pct"],
+                         explicit["projected_drift_pct"])
+
+
+class TestMaintenanceDeferral(unittest.TestCase):
+    """TSD_006 — maintenance-window closure during extreme heat
+    compounds the physical-layer flags."""
+
+    def test_wet_bulb_gate(self):
+        from thermal_sensor_degradation_audit import (
+            maintenance_window_closed_by_wet_bulb, WET_BULB_HUMAN_LIMIT_C
+        )
+        self.assertFalse(maintenance_window_closed_by_wet_bulb(WET_BULB_HUMAN_LIMIT_C - 0.1))
+        self.assertTrue(maintenance_window_closed_by_wet_bulb(WET_BULB_HUMAN_LIMIT_C + 0.1))
+
+    def test_yellow_upgrades_to_red_when_maintenance_deferred(self):
+        # Configure a scenario that would ordinarily be YELLOW (one
+        # borderline pair, no gaskets), heavy heat pushing wet bulb
+        # past 31, maintenance deferred. Expect RED per TSD_006.
+        # aluminum vs steel at 100 mm span, delta_t chosen for YELLOW.
+        d_cte = abs(MATERIALS["aluminum_6061"]["cte"]
+                    - MATERIALS["steel_1018"]["cte"])
+        # Force air+RH to push wet bulb past 31 C.
+        res = audit(air_f=110, rh_pct=70, days=1,
+                    pairs=[("aluminum_6061", "steel_1018", 100)],
+                    gaskets=[])
+        self.assertTrue(res["human_limit_hit"])
+        self.assertTrue(res["maintenance_deferred"])  # auto-detected
+        self.assertTrue(res["tsd_006_fired"])
+
+    def test_maintenance_override_when_field_evidence_shows_visit(self):
+        # Same heavy conditions, but operator declares maintenance
+        # actually happened. tsd_006 should not fire.
+        res = audit(air_f=110, rh_pct=70, days=1,
+                    pairs=[("aluminum_6061", "steel_1018", 100)],
+                    gaskets=[], maintenance_deferred=False)
+        self.assertTrue(res["human_limit_hit"])
+        self.assertFalse(res["maintenance_deferred"])
+        self.assertFalse(res["tsd_006_fired"])
 
 
 if __name__ == "__main__":
