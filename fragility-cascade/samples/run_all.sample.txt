@@ -3,43 +3,43 @@ fragility-cascade — run_all  (44 modules, timeout 15s)
 ==============================================================================
   module                                 verdict     wall  last stdout line
   -------------------------------------------------------------------------
-  alien_homeostasis.py                   OK         0.04s  
+  alien_homeostasis.py                   OK         0.03s  
   anthropomorphic_entrainment.py         OK         0.03s  ============================================================
-  attack_tree.py                         OK         0.04s  A barrel of oil sits at L=0. Its surface is a fence and a lo
+  attack_tree.py                         OK         0.03s  A barrel of oil sits at L=0. Its surface is a fence and a lo
   attribution_field.py                   OK         0.01s  
   bacterial_herding.py                   OK         0.01s  ============================================================
-  cascade_network.py                     OK         3.00s  ============================================================
+  cascade_network.py                     OK         0.09s  ============================================================
   cascade_redesign_M_collapse.py         OK         0.01s  ============================================================
   cascade_redesign_vulnerability.py      OK         0.04s    Let the ground hold the value. Let the AI run.
   coherens.py                            OK         0.02s  ============================================================
   coherens_attack.py                     OK         0.01s  ============================================================
-  collapse_predictor.py                  OK         0.03s  ============================================================
+  collapse_predictor.py                  OK         0.04s  ============================================================
   communication_gradients.py             OK         0.01s  ============================================================
   communication_vulnerability.py         OK         0.02s  ============================================================
   cryptographic_interference.py          OK         0.03s  ============================================================
   engagement_threshold.py                OK         0.02s  ============================================================
-  explorer.py                            OK         2.92s  ============================================================
+  explorer.py                            OK         0.60s  ============================================================
   friction_calibration_ratio.py          OK         0.03s  ============================================================
   homeostasis_kernel.py                  OK         0.01s  ============================================================
   inference_entropy.py                   OK         0.01s  ============================================================
   institutional_audit.py                 OK         0.01s  
   interaction_audit.py                   OK         0.03s  ============================================================
-  linguistic_interference.py             OK         0.03s  ============================================================
+  linguistic_interference.py             OK         0.02s  ============================================================
   microdroplet_catalyst.py               OK         0.01s  ============================================================
   nautilus_architecture.py               OK         0.04s  ============================================================
-  phase_space_map.py                     OK         1.18s  Exploration is now interactive. You can scan any two couplin
+  phase_space_map.py                     OK         0.98s  Exploration is now interactive. You can scan any two couplin
   phi_collapse_variables.py              OK         0.04s  ============================================================
-  product_multiplicity.py                OK         1.13s  Product multiplicity is only a hedge if the branches can fai
+  product_multiplicity.py                OK         1.11s  Product multiplicity is only a hedge if the branches can fai
   reciprocity_phi_metrics.py             OK         0.03s  ============================================================
-  redemption_entropy.py                  OK         0.35s  is the physics. A barrel in your hand has L=1 and no shared 
+  redemption_entropy.py                  OK         0.34s  is the physics. A barrel in your hand has L=1 and no shared 
   redemption_entropy_peak_hour.py        OK         0.01s  ============================================================
   resonance_audit.py                     OK         0.01s  ============================================================
-  scale_invariant_audit.py               OK         0.55s  ============================================================
-  scale_regime_shift.py                  OK         4.16s  ============================================================
-  scent.py                               OK         0.05s  ============================================================
+  scale_invariant_audit.py               OK         0.54s  ============================================================
+  scale_regime_shift.py                  OK         0.60s  ============================================================
+  scent.py                               OK         0.03s  ============================================================
   semantic_interference_vectors.py       OK         0.03s  ============================================================
-  sensitivity_analysis.py                OK         0.98s    χ: +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000
-  substrate_spectrum.py                  OK         0.04s  MDI spans ~4 orders of magnitude ground -> cloud. That sprea
+  sensitivity_analysis.py                OK         0.94s    χ: +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000
+  substrate_spectrum.py                  OK         0.03s  MDI spans ~4 orders of magnitude ground -> cloud. That sprea
   superionic_anyionic_bridge.py          OK         0.01s  ============================================================
   survival_spirals.py                    OK         0.02s  ============================================================
   testC29.py                             OK         0.04s  Standing hypotheses: 0
