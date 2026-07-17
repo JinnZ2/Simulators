@@ -1,0 +1,22 @@
+==========================================================================
+collapsetracker_harness — log-drift frame vs real recursive training
+==========================================================================
+
+No CSV supplied. Predictions locked BEFORE data, per protocol:
+
+  P1  sign      lambda < 0 for all ratio > 0                    [24/24]
+  P2  monotone  |lam(1.0)| > |lam(0.75)| > |lam(0.5)| > |lam(0.25)|
+  P3  knee      lam(ratio) NOT linear; 2nd difference != 0;
+                knee brackets spinodal h* = 0.385
+  P4  coupling  lam sign agrees across >=4 of 5 metrics/trajectory
+  P5  law       exp beats (1+G)^-beta by AIC in >70% of 24
+  P6  capacity  |lam(DistilGPT-2 82M)| > |lam(GPT-2 124M)|
+  P7  tail      |lam| largest in domain with highest M_0
+
+  P1-P2 are nearly free; any collapse framework predicts them.
+  P3 is the one worth the download: it tests whether the
+  spinodal formalism transfers from diversity-collapse to
+  model-collapse. Linear lam(ratio) refutes the transfer.
+
+  Run:  python3 collapsetracker_harness.py metrics.csv
+==========================================================================
