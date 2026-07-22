@@ -349,6 +349,45 @@ combustion; TP-4 is a straight arithmetic bug that over-credits
 and still fails the 95% threshold. Both need operator decisions; the
 tool refuses to silently pick either side.
 
+## Value-ontology claims (`thermo_value.py`)
+
+Reads the SAME transaction through two perpendicular lenses —
+`token_primary` (counts the pointer) vs `substrate_primary` (counts
+the referent: skill, knowledge, time, labor, care) — and reports the
+gap between the two readings as the observable. Ripples the same
+residue-vs-return posture from the earlier thermo layers into a
+value frame, and — because AI defaults to token-primary from training
+on prices, revenue, willingness-to-pay — makes the collapsed axis
+explicit as a calibration channel.
+
+Ships an is→ought slide detector (flags a descriptive-desire premise
+carrying a normative conclusion — a category error, not a verdict on
+the desire) and a HARD BOUNDARY: `OUT_OF_SCOPE` lists three interior
+verdicts the module refuses to output ("whether a desire is healthy
+for a person", "whether a holder is greedy/bad", "whether a token is
+morally legitimate"). Named explicitly so the boundary is not silently
+crossed.
+
+Sample: [`samples/thermo_value.sample.txt`](samples/thermo_value.sample.txt).
+
+| # | Claim | Refuted if | Verdict |
+|---|-------|-----------|---------|
+| TV-1 | `reference_integrity(c)` classifies transaction structure into `bound` (substrate delivered AND kind in DELIVERS), `partial` (substrate delivered but kind implies more), `detached` (no substrate delivered, kind in POOL_CLAIM_NO_DELIVERY), or `unclassified`. Reading is from structure only — never from the person's intent. | A wage claim with matching labor delivered classified as anything but `bound`, or a rent claim with no delivery classified as anything but `detached`. | **HOLDS** — sample: framing labor `bound`, rent `detached`, speculation `detached`, elder teaching `bound` (kind=teaching in DELIVERS, delivered 120 units of knowledge/care). |
+| TV-2 | The two lenses return DIFFERENT numbers on the same claim; `discrepancy = token_view − substrate_view` is the observable. Detached claims show large positive discrepancy (token high, substrate zero). Bound claims with matched delivery show zero. Untokenized substrate delivery (e.g. unpaid teaching) shows NEGATIVE discrepancy — the frame's asymmetry becomes visible. | Two lenses returning identical values on a detached claim, or the discrepancy on unpaid delivery evaluating to ≥ 0. | **HOLDS** — sample: rent discrepancy +100, speculation +500 (token > substrate); elder teaching −120 (substrate > token, running the other way). The observable behaves as claimed across three regimes. |
+| TV-3 | `pool_delta` measures shared-pool flow: detached claims return `+token_amount` (drawn without adding); bound claims return `token − delivered` (≈ 0 when delivery matches claim); over-delivery (elder teaching case) returns negative (added, not drawn — pool receives more than the claim withdraws). | Detached claim returning zero or negative pool_delta, or matched bound claim returning nonzero. | **HOLDS** — sample: framing labor pool_delta 0.0, rent +100, speculation +500, elder teaching −120. Sign carries direction correctly across all four cases. |
+| TV-4 | `normative_slide(j)` flags is→ought category errors: a `DESCRIPTIVE` premise (`is_desired`, `willing_to_pay`, `is_priced`, `sells`) with a `NORMATIVE` conclusion (`should_provide`, `should_build`, `is_good`, `deserves_funding`) fires SLIDE FLAGGED. Reads a REASONING MOVE, not a person. Not a verdict on whether the conclusion happens to be true — only on the illegitimate inference structure. | A pair with both premise ∈ DESCRIPTIVE and conclusion ∈ NORMATIVE evaluating to False, or a pair with the same set membership evaluating differently under different runs. | **HOLDS** — sample: 3/3 pairs flagged (`willing_to_pay → should_build`, `is_priced → deserves_funding`, `is_desired → is_good`). Detection is set-membership; deterministic. |
+| TV-5 | HARD BOUNDARY: `OUT_OF_SCOPE` enumerates three interior verdicts the module refuses to output. These are named in code as a literal list, not implicit — so the boundary is auditable and any future addition that crosses it is a visible edit, not a silent leak. | Any function in the module returning a value that reads on one of the OUT_OF_SCOPE items (e.g. a `desire_health` metric, a `holder_moral_status` field, a `token_legitimacy` scalar). | **HOLDS** — the module's returned surfaces (`Reading`, `Look`, `bool` for slide detector) carry no interior-verdict fields. Every public function is structural: integrity class, mass value, sign, category-error flag. Nothing scores an intent or a person. |
+
+**On the token-primary default.** TV-2's substrate lens exists as a
+calibration channel for the exact frame collapse the module names in
+its header: AI trained on prices reads value AT THE POINTER and
+collapses the substrate axis silently. TV-3's negative pool_delta on
+the unpaid-teaching case is the sharpest teaching-artifact — a
+substrate lens sees a positive contribution to the pool; a token lens
+reads zero, and can only ever read zero, no matter how well-designed
+the pricing. The frames aren't ranked; the module says so explicitly.
+The **discrepancy** is the observable, and it's signed.
+
 ## Resonance / Nautilus / semantic-interference claims (post-C11)
 
 Encoded in the modules landed via origin/main. Test-runner:

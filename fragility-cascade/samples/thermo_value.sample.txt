@@ -1,0 +1,43 @@
+==================================================================
+VALUE ONTOLOGIES -- same claim, two lenses, measure the gap
+==================================================================
+
+  CLAIM: day of framing labor   [bound]
+    token-primary lens   ->    100.0   a claim of 100 tokens -> wealth
+    substrate-primary    ->    100.0   100 units of labor substrate at the referent
+    discrepancy          ->      0.0   (gap = the observable)
+    pool_delta           ->      0.0   (-> 0 is balance)
+    note: reference bound: token issued against delivered labor
+
+  CLAIM: rent on owned land   [detached]
+    token-primary lens   ->    100.0   a claim of 100 tokens -> wealth
+    substrate-primary    ->      0.0   0 units of no substrate at the referent
+    discrepancy          ->    100.0   (gap = the observable)
+    pool_delta           ->    100.0   (-> 0 is balance)
+    note: detached: claim on the pool, no substrate added this cycle
+
+  CLAIM: speculative flip   [detached]
+    token-primary lens   ->    500.0   a claim of 500 tokens -> wealth
+    substrate-primary    ->      0.0   0 units of no substrate at the referent
+    discrepancy          ->    500.0   (gap = the observable)
+    pool_delta           ->    500.0   (-> 0 is balance)
+    note: detached: claim by price-bet; nothing delivered to referent
+
+  CLAIM: elder teaching land-care, unpaid   [bound]
+    token-primary lens   ->      0.0   a claim of 0 tokens -> wealth
+    substrate-primary    ->    120.0   120 units of knowledge/care substrate at the referent
+    discrepancy          ->   -120.0   (gap = the observable)
+    pool_delta           ->   -120.0   (-> 0 is balance)
+    note: token lens reads ~0; substrate lens reads real value delivered -> the discrepancy runs the OTHER way (untokenized substrate)
+
+==================================================================
+is -> ought slide check (reads the reasoning move, not the person):
+    willing_to_pay   => should_build        SLIDE FLAGGED
+    is_priced        => deserves_funding    SLIDE FLAGGED
+    is_desired       => is_good             SLIDE FLAGGED
+
+  held out of scope (named, not silently crossed):
+    - whether a given desire is healthy FOR a specific person
+    - whether a claim-holder is greedy / good / bad
+    - whether a token is morally legitimate
+==================================================================
