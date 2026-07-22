@@ -211,6 +211,39 @@ overlay, add an exclusion (e.g., a `mode:code_compliant` gate on the
 inverse of `lay_stone_pad`, or a goal that specifies which process must
 produce the footing).
 
+## Assumption-coverage claims (`thermo_assume.py`)
+
+The binding constraint on the thermo stack isn't the engine — it's the
+completeness of the assumption space. An unlisted energy source or an
+unmodeled constraint doesn't surface as an error; it surfaces as a
+*confident wrong answer* (diesel is the sole energy source; labor
+breathes free; combustion has no air debt). This layer flags which
+assumption **dimensions have zero coverage** and ships parameterized
+templates — but it INVENTS NO NUMBERS. Filling gaps with fabricated
+figures is the failure mode being fought.
+
+Five dimensions audited: energy diversity, air quality (state + gate +
+sink), human factors, origin balance, temporal (design life / decay).
+
+Sample: [`samples/thermo_assume.sample.txt`](samples/thermo_assume.sample.txt).
+
+| # | Claim | Refuted if | Verdict |
+|---|-------|-----------|---------|
+| TA-1 | `audit_assumptions(sys)` flags EVERY dimension with zero coverage in the system and NO dimension that has any coverage. The audit is a coverage check, not a quality check — one modeled solar panel passes the energy-diversity flag even if the panel's spec is wrong. | Any dimension present in the system going unflagged, or any dimension flagged when a resource / process of the right shape exists. | **HOLDS** — demo start: 5 flags (energy diversity, air quality, emission sink, human factors, temporal). After adding solar + air_kit + ventilation + emit_into_air + gate_labor_on_air: 4 flags cleared, only `temporal` remains — matching the closed-under-library gaps exactly. |
+| TA-2 | The tool INVENTS no numbers. Library builders (`solar_pv`, `grid_tie`, `human_power`, `diesel`, `biomass_gasifier`, `air_quality_kit`) take the joules / kg / thresholds as REQUIRED operator inputs; every returned Resource or Process carries the operator-supplied number verbatim. There is no default-fill code path. | A library builder returning a Resource / Process with a numerical field that wasn't passed in, or defaulting a number when the operator didn't supply one (thresholds like `air_quality_kit(threshold=50)` are FACTORY parameters, not silent fills — the operator names them at construction). | **HOLDS** — inspection: `solar_pv(name, joules)` requires `joules`; no fill. `air_quality_kit(threshold=50.0)` — threshold is a positional-default at call site, forced through the returned tuple. `emit_into_air(proc, particulate_kg, air_hit)` — both required. `biomass_gasifier(name, fuel_in, work_out, ash_kg, exhaust_kg)` — all required. |
+| TA-3 | `emit_into_air` and `gate_labor_on_air` are COUPLINGS, not standalone changes: emit adds an exhaust byproduct AND a side_effect that degrades the air-quality state; gate adds an information-type input that the referee's presence check reads without draining. The two together make combustion pay its air debt to the same state the labour reads from. | Emit that changes only byproducts (no side_effect on air), or gate that drains the air-quality resource (violating TPM-3). | **HOLDS** — `emit_into_air` mutates BOTH `byproducts` and `side_effects`; `gate_labor_on_air` adds `air_quality: min_air` to `inputs`. Since `air_quality` is `information`-typed, `consume()` skips it (TPM-3 preserved). Ventilation costs `grid_power` energy and restores air via side_effect — the loop closes. |
+| TA-4 | The audit is a NECESSARY condition, not sufficient. "No empty dimensions detected" reads as "does not mean complete" — the tool refuses to certify completeness because it can only see the five dimensions it audits. Anything not in {energy diversity, air, emissions, human factors, origin, temporal} is by construction outside its coverage. | The tool ever printing an unqualified "complete" or "certified", or omitting the "does not mean complete" caveat from a zero-flag report. | **HOLDS** — the zero-flag branch prints "no empty dimensions detected (does not mean complete)" verbatim. Every audit is a necessary-but-not-sufficient check by design; extending coverage means adding new flag rules, not tightening thresholds on existing ones. |
+
+**Why omission is the load-bearing failure mode.** The whole stack —
+referee, playground, interrogation, assumption audit — has one target:
+turn a *silent wrong answer* into a *loud gap*. The referee catches
+conservation violations (loud). The playground names the failing law
+(loud). The interrogation reports code age + basis verbatim (loud when
+basis is None). The assumption audit reports which dimensions haven't
+been modeled at all (loud when a source doesn't exist). Filling those
+gaps with plausible defaults would return the tool to quiet-wrong-answer
+territory — TA-2 exists precisely to hold that line.
+
 ## Resonance / Nautilus / semantic-interference claims (post-C11)
 
 Encoded in the modules landed via origin/main. Test-runner:
