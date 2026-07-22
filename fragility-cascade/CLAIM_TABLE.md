@@ -144,6 +144,38 @@ deletes screened charge, which is probably false. Every VDT verdict is
 conditional on those two — the sim is honest about it in the trailing
 sample lines rather than laundering the assumption.
 
+## Thermodynamic-referee + playground claims (`thermo_pm.py` + `thermo_explore.py`)
+
+Two-layer split: `thermo_pm.py` is the referee (typed resources — energy,
+matter, information, artifact — with per-process conservation enforcement,
+information gates that don't drain, waste_heat computed as the energy
+residual). `thermo_explore.py` is the AI-facing exploration surface that
+sits on top: `propose(plan)` returns a structured `Verdict` naming the
+step, process, and *which law* failed (presence / skill / energy / matter),
+plus `producers(resource)` and `frontier(state)` for backward-chaining.
+
+The playground ignores mode-gated processes on purpose — modes are the
+institutional layer above ground truth.
+
+Samples: [`samples/thermo_pm.sample.txt`](samples/thermo_pm.sample.txt),
+[`samples/thermo_explore.sample.txt`](samples/thermo_explore.sample.txt).
+
+| # | Claim | Refuted if | Verdict |
+|---|-------|-----------|---------|
+| TPM-1 | Energy conservation is enforced per process: any process whose typed-energy outputs + byproducts exceed typed-energy inputs is REJECTED before it commits. Waste heat is not a knob — it is the residual `E_in − E_out_useful − E_byproduct_energy` and added automatically. | A process emitting more typed-energy than it takes in that the referee accepts, or waste_heat that doesn't sum to the residual across a valid plan. | **HOLDS** — the site-only 5-step demo runs cleanly with `computed waste_heat = 20500 J`; every process passes the pre-check and the residual is bookkept, not declared. |
+| TPM-2 | Matter conservation is symmetric with energy: `import_fill_bad` (5000 kg output, 0 kg matter input, only labour + a mode gate) MUST be rejected, naming the equation. Loss to a declared sink is allowed; conjuring is not. | The referee accepting a matter-conjuring process, or rejecting a matter-balanced one. | **HOLDS** — `import_fill_bad` rejected with `matter not conserved: out 5000 > in 0`. `import_fill_sourced` (same output but drawing 5000 kg `offsite_reserve` + 3000 J `diesel`) accepted, transport waste = 5000 J correctly credited to `waste_heat`. |
+| TPM-3 | Information-typed inputs are READ-ONLY gates: skills / permits / mode markers are checked for presence but NOT drained on process fire. An `information` resource used as input has the same amount after `run_process` as before. | Any information resource whose `amount` decreases after a successful `run_process` that lists it as an input. | **HOLDS** — `make_boiler` gates on `skill_required="masonry"` (an information resource with `amount=1, unit="bit"`); after firing, `masonry.amount` remains 1. Same for `mode:code_compliant` in scenario [3]. `consume()` explicitly skips `type == "information"`. |
+| TPM-4 | Waste heat is the ENERGY RESIDUAL, not `efficiency × output`. `efficiency` on a process is ADVISORY only — declared vs computed drift emits a warning; the residual definition is authoritative. | A process where waste_heat added ≠ `E_in − E_out_useful − E_byproduct_energy` (given eps), or where a declared-but-mismatched efficiency shifts the residual. | **HOLDS** — the fix is textual (`FIX 4` in the docstring); demo shows `waste_heat = 20500 J` for the 5-step plan matches the residual of the burn/engine/form energy flows. |
+| TE-1 | `propose(plan)` returns a structured `Verdict` naming the failing law — `presence`, `skill`, `energy`, `matter`, or `undefined` — before mutating state. An AI branches on `Verdict.law`, not on a parsed error string. | A verdict returning without `law` set for a rejection, or `law="run"` firing for a case the pre-check classifier should have caught. | **HOLDS** — one-leap `propose(["form_wall"])` returns `law="presence"` with `unmet={'mechanical_work': 500}`. The pre-check classifier catches skill / presence / typed-conservation failures ahead of `run_process` so the class of failure is explicit, not inferred. |
+| TE-2 | The playground supports backward-chaining via `producers(resource)` (processes whose outputs or byproducts yield the resource) and `frontier(state)` (processes that can fire NOW given the current state). Together these let an AI reconstruct a valid plan from a `presence` failure without touching the referee's internals. | An AI given only `Verdict.unmet` + `producers()` + `frontier()` failing to find a valid plan that the reference BFS `solve()` finds. | **HOLDS** — demo reconstructs `[gather_biomass, burn_biomass, make_boiler, run_engine, form_wall]` from `unmet={mechanical_work: 500}` → `producers("mechanical_work") = [run_engine]` → chain back through `steam_heat` → `biomass` → `frontier(start) = [gather_biomass, make_boiler]`. Same plan `solve()` finds via BFS. |
+
+**Scope of ground truth.** Mode gates (`mode:code_compliant`, etc.) are
+excluded from the playground's `_physical()` view on purpose: the referee
+weighs them because they gate processes, but the exploration surface
+treats them as institutional overlay. An AI reasoning about *what the
+world will accept* sees only physics; an AI reasoning about *what a
+regulatory frame will accept* uses the referee directly.
+
 ## Resonance / Nautilus / semantic-interference claims (post-C11)
 
 Encoded in the modules landed via origin/main. Test-runner:

@@ -1,0 +1,16 @@
+==============================================================
+THERMO_PM -- referee now weighs
+==============================================================
+
+[1] site-only plan: gather_biomass -> burn_biomass -> make_boiler -> run_engine -> form_wall
+    VALID. computed waste_heat = 20500 J
+
+[2] import_fill_bad (5000 kg from nothing):
+    REJECTED -- matter not conserved: out 5000 > in 0 (import_fill_bad)
+
+[3] import_fill_sourced (5000 kg drawn from reserve):
+    VALID -- transport waste = 5000 J
+
+==============================================================
+orderer -> referee: matter/energy cannot exceed inputs + stocks.
+==============================================================
