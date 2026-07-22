@@ -280,6 +280,42 @@ requires an operator to add a phenomenon; the tool refuses to invent
 one, exactly as TA-2 (thermo_assume's no-invention claim) requires
 across the stack.
 
+## Site-survey claims (`thermo_survey.py`)
+
+Sits ABOVE `thermo_synth`. Where the synthesizer starts from an on-hand
+material list, the survey layer starts from physical DOMAINS —
+chemistry, pressure, atmosphere, topology, biology, geology, materials,
+water, sunlight, wind, weather — and asks the operator to observe each
+one. The unifying frame: every domain exposes an AMBIENT GRADIENT
+(energy already flowing at no import cost); an UNREAD field is a silent
+assumption ("nothing there") that the coverage report makes loud.
+
+Extends `thermo_synth.DIM` with three quantity kinds (`velocity`,
+`density`, `g_field`) and `thermo_synth.LIBRARY` with six ambient
+phenomena (`gravity_potential`, `wind_kinetic`, `freeze_thaw_split`,
+`evaporative_cooling`, `fermentation`, `gravity_feed`). The extension
+is idempotent — a duplicate name is a no-op.
+
+Sample: [`samples/thermo_survey.sample.txt`](samples/thermo_survey.sample.txt).
+
+| # | Claim | Refuted if | Verdict |
+|---|-------|-----------|---------|
+| TSV-1 | `DOMAINS` covers 11 physical fields; each field carries `(name, reads, gradient, unlocks)`. `SiteScan.coverage()` prints `[read]` vs `[UNREAD]` for every field in `DOMAINS`, in the declared order. An unread field is loud — never silently treated as empty. | A field in `DOMAINS` that fails to appear in the coverage report, or a scan reporting "complete" without every unread field flagged. | **HOLDS** — sample lists all 11 domains; 4 read (`geology`, `materials`, `water`, `sunlight`), 7 UNREAD (`chemistry`, `pressure`, `atmosphere`, `topology`, `biology`, `wind`, `weather`) each with their gradient shown. `materials` reads without a gradient tapped — printed as "no gradient tapped", not omitted. |
+| TSV-2 | `SiteScan.unlocked()` returns the sorted union of `Domain.unlocks` across read domains. This is CONCEPTUAL availability — a phenomenon appears if any read domain nominally unlocks it, regardless of whether the specific substances present actually let it fire. Execution feasibility is `Synth.paths_to()`, not `unlocked()`. | An unlocked phenomenon whose source domain wasn't read, or a phenomenon left out despite its source domain being read. | **HOLDS** — sample: 4 read domains → 6 unlocked phenomena (`confined_vapor_pressure`, `evaporative_cooling`, `freeze_thaw_split`, `sensible_heating`, `solar_concentration`, `vaporization`). Every one traces back to at least one read domain's `unlocks` list; nothing extra, nothing missing. |
+| TSV-3 | Extension of `thermo_synth.LIBRARY` is idempotent: the `for p in AMBIENT: if p.name not in {x.name for x in LIBRARY}: LIBRARY.append(p)` guard prevents duplicate registration on repeat imports. Same-name phenomena from `AMBIENT` never displace existing entries. | Importing `thermo_survey` twice increasing the LIBRARY count beyond the union, or an `AMBIENT` phenomenon overwriting an existing same-named entry. | **HOLDS** — the guard uses a `set` comprehension over existing names. Verified: `import thermo_survey` then `reload(thermo_survey)` leaves `len(LIBRARY)` unchanged past the first import. No overwrite semantics because `append` only fires on name-absence. |
+| TSV-4 | Demo footer claim: "the read fields carried enough gradient — sun's flux, water's phase, copper's melting point — to synthesize lift." Under the shipped library extended with ambient phenomena, backward search from `force` on the desert scan produces at least one assembly. | The desert search for `force` returns 0 assemblies after the survey's ambient extension. | **REFUTED (as shipped)** — inherits the TS-4 failure: `power → heat` is still unbridged after the ambient additions. `fermentation` produces `heat` but requires `biomass` (biology UNREAD → not in on-hand). `combustion_heat` needs `fuel` (chemistry UNREAD). `freeze_thaw_split` produces `force` directly but requires `temperature_cycle` (weather UNREAD). No chain closes for `force`. `paths_to("power")` DOES work (`solar_concentration ← flux + area`). Refutation direction — same as TS-4: extend the LIBRARY with a `power → heat` bridge, OR extend the scan (read `chemistry` for fuel → `combustion_heat`, or `biology` for biomass → `fermentation`, or `weather` for temperature_cycle → `freeze_thaw_split`). The tool refuses to invent the missing observation; the operator's next survey pass is where TSV-4 would become true. |
+
+**On the two paired refutations (TS-4 and TSV-4).** They fail for the
+SAME reason: a specific quantity-kind conversion that no shipped
+phenomenon supports. TS-4 identifies it at the library level (`power`
+has no producer chain to `heat`). TSV-4 identifies it at the survey
+level (the operator's next unread field — `chemistry`, `biology`, or
+`weather` — is exactly what would close the chain via a phenomenon
+that IS in the library). Both refutations point in constructive
+directions and neither retunes the sim. The pattern is intentional:
+the tools name what's missing; the operator supplies the observation
+or the phenomenon.
+
 ## Resonance / Nautilus / semantic-interference claims (post-C11)
 
 Encoded in the modules landed via origin/main. Test-runner:
