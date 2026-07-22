@@ -1,0 +1,106 @@
+
+==================================================================
+ STAGE 1  assumption audit on the naive site
+==================================================================
+
+  5 gaps flagged (dimensions with zero coverage):
+    - energy diversity: only one process-energy source modeled: diesel
+    - air quality: 1 combustion process(es), no air state modeled
+    - emission sink: combustion produces no exhaust/particulate byproduct
+    - human factors: 4 labor process(es), none gated by air/heat/water/rest
+    - temporal: no lifespan/decay dimension -- design life and end-of-life unmodeled
+
+  the tool INVENTS nothing here. it names which dimensions the
+  operator has not populated. filling them is the operator's job.
+
+==================================================================
+ STAGE 2  naive interrogation
+==================================================================
+
+  full report against the naive site (delta = 0 -- the code
+  overlay is PERMISSIVE, not FORCING; BFS routes around it):
+==============================================================
+SITE INTERROGATION
+==============================================================
+
+1. what does the land offer?
+     local_stone               20000 kg
+     clay                      10000 kg
+     human_labor              500000 J
+     waste_heat                    0 J
+     soil_bearing           adequate  (reading)
+     buildable from site alone: ['lay_stone_pad']
+
+2/3. what does the code say?  how old is it?
+     footing_min_500mm: 52y old (enacted 1974)
+        basis: none declared
+        site already meets its stated intent (soil_bearing:adequate) -- mandate is convention, not physics
+
+5. what external energy is required?
+     physics_optimal             0 J          0 kg
+     code_constrained            0 J          0 kg
+
+4. waste / unoptimized by not aligning with thermodynamics
+     external energy the code adds over physics: 0 J
+     external matter the code adds over physics: 0 kg
+     extra waste heat: 0 J
+==============================================================
+
+==================================================================
+ STAGE 3  close air-related gaps with the library
+==================================================================
+
+  4 gaps cleared: ['air quality', 'emission sink', 'energy diversity', 'human factors']
+  1 still open: ['temporal']
+
+==================================================================
+ STAGE 4  walk the code path manually  (institutional fact:
+==================================================================
+           lay_stone_pad is not an APPROVED method under the
+           code, so an operator forced down the code path
+           must run these three steps, in order)
+
+  propose(approve_footing_code -> import_fill -> pour_footing_code)
+    verdict : FAILED @step 2 law='presence'
+    process : pour_footing_code
+    detail  : missing {'air_quality': 50}
+
+  the air-quality gate on pour_footing_code fired. import_fill
+  dropped air 100 -> 40 (60-point exhaust hit); pour needs 50.
+  BEFORE closing the air gap this failure was INVISIBLE.
+
+==================================================================
+ STAGE 5  add ventilation between import and pour
+==================================================================
+
+  propose(approve_footing_code -> import_fill -> ventilation -> pour_footing_code)
+    verdict: ok  goal_reached=True
+    air_quality: 100 -> 60  (dropped 60, restored 20)
+    waste_heat : 32000 J  (computed residual)
+
+==================================================================
+ STAGE 6  physics path unchanged
+==================================================================
+
+  propose(lay_stone_pad)
+    verdict: ok  goal_reached=True
+    air_quality: 100 -> 100  (no combustion, no debt)
+    waste_heat : 1500 J
+
+==================================================================
+ STAGE 7  the delta the audit-and-close cycle SURFACED
+==================================================================
+
+  physics path external draw :        0 J        0 kg
+  code    path external draw :    22000 J     1200 kg
+  DELTA (code - physics)     :   +22000 J    +1200 kg
+
+  of that delta, 20000 J diesel + 1200 kg offsite live in
+  import_fill and were always in the code path's definition --
+  Stage 2 hid them by taking the shorter physics route. The 2000 J
+  ventilation cost is DIFFERENT: it did not exist as a step at all
+  before Stage 3 added the air state. Modeling the air turned a
+  free approval into a metered restoration. Same physics; more of
+  it visible.
+
+==================================================================
