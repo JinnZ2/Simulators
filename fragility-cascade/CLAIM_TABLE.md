@@ -316,6 +316,39 @@ directions and neither retunes the sim. The pattern is intentional:
 the tools name what's missing; the operator supplies the observation
 or the phenomenon.
 
+## End-of-life lifecycle-close claims (`thermo_purpose.py`)
+
+Closes the accounting loop past end-of-life. Where `thermo_pm` checks
+conservation at BUILD, this layer keeps the ledger open through
+serve-fail-return: every kilogram borrowed from the site carries a
+return, judged fresh at end-of-life on three independent gates —
+**QUANTITY** (returned / borrowed ≥ 0.95), **FORM** (harm debt = 0;
+returning matter matches a current need or the ground takes it),
+**TIMING** (nothing held past the purpose's return window). Fallback
+ladder handles intact-at-EOL substrates: convert-to-serve-a-need,
+else reuse, else hold, else HARM.
+
+The tool invents no timing windows, no need magnitudes, no
+ground-uptake list, and no conversion ratios — all are operator inputs.
+
+Sample: [`samples/thermo_purpose.sample.txt`](samples/thermo_purpose.sample.txt) (four scenarios).
+
+| # | Claim | Refuted if | Verdict |
+|---|-------|-----------|---------|
+| TP-1 | Substrates that degrade as intended into forms the ground takes directly close all three gates. Seasonal-shelter (earth 800 + fiber 40 kg, ground takes both) and star-guide college (mineral_dust 5000 + stone 12000 kg, ground takes both, 1000 yr return window) both verdict "feeds the earth without harm". | Either scenario failing any of QUANTITY/FORM/TIMING under the same substrate + need + ground_takes inputs. | **HOLDS** — both scenarios PASS all three gates. site_delta = 0.00 kg each. Verdicts: "feeds the earth without harm". |
+| TP-2 | The concrete-slab scenario (rubble 20000 kg, need={}, ground_takes=empty, no matching conversion in DEFAULT_CONVERSIONS) fires the HARM route and fails both QUANTITY and FORM. This is the failure mode the layer exists to make loud: mass closed at build, harm open at end-of-life. | The slab scenario evaluating to any non-HARM route, or failing to trip FORM. | **HOLDS** — one route emitted, `HARM concrete_rubble 20000.0 no need, ground won't take it, not convertible`. QUANTITY FAIL (returned 0 / borrowed 20000), FORM FAIL (harm 20000). Verdict: "return does not close". The delta the layer is designed to name is right there in the report. |
+| TP-3 v1 | Burning intact timber to serve a warming need + yielding ash the ground takes is a valid closure of the return — the demo's implicit "one move, serves a need, advances the return" framing. | The migration_lodge scenario failing any gate under conditions the demo names as valid. | **REFUTED (as shipped)** — QUANTITY FAILS on the lodge: `returned 300.0 / borrowed 3000.0 kg` (ratio 0.10, needs ≥ 0.95). Structurally, combustion converts most fuel mass to volatile products that leave the site (CO2, H2O). Only the ash residue (~5%) comes back as recoverable mass. The 95% QUANTITY threshold is incompatible with ANY combustion-based closure by construction. Refutation direction — a design choice, not a retune: (a) relax QUANTITY to accept conversions-that-serve-need at any mass-return ratio, (b) split QUANTITY into "mass returned to site" (strict) + "work done in return" (soft, credited by need satisfaction), or (c) accept the current behavior as saying "combustion loses mass; a closure via combustion is a partial return, honest about it". |
+| TP-4 | Accounting correctness: the `returned` scalar equals the sum of mass actually routed through non-HARM outcomes. Held mass is not credited to `returned`; converted output routed to a need or ground is credited exactly once. | `returned` including mass that got HELD, or double-counting mass in a conversion branch. | **REFUTED** — the migration_lodge report shows `returned 300.0` but only 150 kg of ash physically existed (3000 kg timber × 0.05 ratio). The conversion branch increments `returned` twice: once inside `route_returnable` when the ash routes successfully, and again after the loop via `returned += mass * sum(r for f, r in c.gives.items() if f != "heat")`. The same post-loop expression also credits mass that got HELD (route_returnable failure path) — falsely inflating `returned` when nothing was actually returned. Fix direction: remove the post-loop `returned +=` and let `route_returnable` be the single source of truth. Independent of the TP-3 design tension. |
+| TP-5 | The three gates fire independently: a scenario can fail one gate while passing the others. TIMING (held > 0) is separate from FORM (harm > 0) which is separate from QUANTITY (returned/borrowed < 0.95). | A scenario in which two gates always flip together, or one gate silently gated by another. | **HOLDS** — evidence across the 4 scenarios: seasonal + college pass all three; slab fails QUANTITY + FORM but PASSES TIMING (held=0 because HARM route consumed the mass, not the HELD route); lodge fails QUANTITY only. Three distinct pass/fail signatures across four scenarios — the gates are independent in practice. |
+
+**On TP-3 and TP-4 together.** They're separate concerns. TP-3 is a
+design tension between the QUANTITY threshold and the physics of
+combustion; TP-4 is a straight arithmetic bug that over-credits
+`returned`. Fixing the bug (TP-4) doesn't resolve the design tension
+(TP-3) — even with correct accounting, lodge returns 150/3000 = 5%
+and still fails the 95% threshold. Both need operator decisions; the
+tool refuses to silently pick either side.
+
 ## Resonance / Nautilus / semantic-interference claims (post-C11)
 
 Encoded in the modules landed via origin/main. Test-runner:

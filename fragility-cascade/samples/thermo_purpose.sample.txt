@@ -1,0 +1,52 @@
+================================================================
+LIFECYCLE CLOSE -- seasonal_shelter  (serves 0.5yr, return window 1yr)
+================================================================
+    earth        800.00  to_ground  degraded as intended; ground takes earth directly
+    fiber         40.00  to_ground  degraded as intended; ground takes fiber directly
+
+  site_delta (mass not back): 0.00 kg  [objective -> 0]
+  QUANTITY  PASS   returned 840.0 / borrowed 840.0 kg
+  FORM      PASS   harm debt 0.0 kg (form nothing takes)
+  TIMING    PASS   held 0.0 kg unrouted within 1 yr
+
+  VERDICT: feeds the earth without harm
+================================================================
+================================================================
+LIFECYCLE CLOSE -- star_guide_college  (serves 1000yr, return window 1000yr)
+================================================================
+    mineral_dust  5000.00  to_ground  degraded as intended; ground takes mineral_dust directly
+    stone      12000.00  to_ground  degraded as intended; ground takes stone directly
+
+  site_delta (mass not back): 0.00 kg  [objective -> 0]
+  QUANTITY  PASS   returned 17000.0 / borrowed 17000.0 kg
+  FORM      PASS   harm debt 0.0 kg (form nothing takes)
+  TIMING    PASS   held 0.0 kg unrouted within 1000 yr
+
+  VERDICT: feeds the earth without harm
+================================================================
+================================================================
+LIFECYCLE CLOSE -- migration_lodge  (serves 15yr, return window 2yr)
+================================================================
+    timber      3000.00  converted  burn: serves warming need; yields ash for ground that needs ash
+    heat        3000.00  to_need    warms tribe -- work done in the return
+    ash          150.00  to_need    from burn; meets current need for ash
+
+  site_delta (mass not back): 2700.00 kg  [objective -> 0]
+  QUANTITY  FAIL   returned 300.0 / borrowed 3000.0 kg
+  FORM      PASS   harm debt 0.0 kg (form nothing takes)
+  TIMING    PASS   held 0.0 kg unrouted within 2 yr
+
+  VERDICT: return does not close
+================================================================
+================================================================
+LIFECYCLE CLOSE -- concrete_slab  (serves 50yr, return window 1yr)
+================================================================
+ !! concrete_rubble 20000.00  HARM       no need, ground won't take it, not convertible
+
+  site_delta (mass not back): 20000.00 kg  [objective -> 0]
+  QUANTITY  FAIL   returned 0.0 / borrowed 20000.0 kg
+  FORM      FAIL   harm debt 20000.0 kg (form nothing takes)
+  TIMING    PASS   held 0.0 kg unrouted within 1 yr
+
+  VERDICT: return does not close
+================================================================
