@@ -176,6 +176,41 @@ treats them as institutional overlay. An AI reasoning about *what the
 world will accept* sees only physics; an AI reasoning about *what a
 regulatory frame will accept* uses the referee directly.
 
+## Site-interrogation claims (`thermo_interrogate.py`)
+
+Sits on top of the referee + playground pair. Answers five operator
+questions for a `(site, goal, code_overlay)` triple: (1) what does the
+land offer, (2) what does the code say, (3) how old is the code,
+(4) what is the waste of not aligning with thermodynamics (external
+energy + matter + waste-heat delta between code-constrained and
+physics-optimal plans), (5) what external energy is required.
+
+`CodeRequirement` fields (`enacted_year`, `basis`, `intent_met_by`) are
+DATA reported verbatim — the tool never infers a basis, never invents an
+age, and only says "site already meets intent" when a site reading
+literally matches the code's declared intent.
+
+Sample: [`samples/thermo_interrogate.sample.txt`](samples/thermo_interrogate.sample.txt).
+
+| # | Claim | Refuted if | Verdict |
+|---|-------|-----------|---------|
+| TI-1 | The interrogation reports the code's age and basis verbatim from `CodeRequirement` fields — never inferred. A requirement with `basis=None` reports as "none declared", not a manufactured justification. | The tool emitting a basis string for a requirement whose `basis` field is `None`, or altering `enacted_year` to fit the outcome. | **HOLDS** — demo requirement `footing_min_500mm` has `basis=None`, `enacted_year=1974`; report shows "52y old (enacted 1974)" and "basis: none declared". |
+| TI-2 | When a site reading (info-value like `soil_bearing:adequate`) matches a code's `intent_met_by` field, the report says "site already meets its stated intent — mandate is convention, not physics". When the reading fails to match, it says "mandate may be load-bearing". Neither judgement is inferred from anything other than the literal reading-vs-intent match. | Any case where the "convention vs load-bearing" label fires without the exact `f"{name}:{value}"` match, or fails to fire when the match exists. | **HOLDS** — demo site has `soil_bearing.info_value="adequate"`, code has `intent_met_by="soil_bearing:adequate"`; report fires "mandate is convention, not physics". Remove the site reading and the label flips to "load-bearing". |
+| TI-3 | External accounting is location-scoped: `_external_consumed(before, after)` sums the drop in every resource with `location="external"` between the two states, typed into energy and matter. Site-local drawdowns (`location="site"`) do not appear in the external totals. | External totals including site-local resources, or missing external resources actually drawn by the plan. | **HOLDS** — demo has `diesel` and `offsite_reserve` at `location="external"`; site resources (`local_stone`, `clay`, `human_labor`) at `location="site"`. External totals count only the former. |
+| TI-4 | The waste-of-misalignment delta is `code_plan_external − physics_plan_external`, computed on both plans independently. When both plans exist, both numbers are reported; when either plan fails BFS, the delta is `None` and the report says so. | A delta reported without both plans succeeding, or the delta not equalling the raw subtraction of the two `_external_consumed` results. | **HOLDS** — demo: both plans exist; `plan_with_mode` under `mode="code_compliant"` accepts ungated processes too, so BFS picks the 1-step `lay_stone_pad` for both paths. Delta = 0. This is the honest artifact: the mandate is PERMISSIVE (allows the code chain) rather than FORCING (requires it); the goal `{"footing": 1}` doesn't discriminate on which process produced it. To surface a nonzero delta, the code overlay must actually block the site-native path (e.g., `lay_stone_pad` requiring `mode:not_code_compliant`, or the goal specifying `pour_footing_code`-produced footings). |
+| TI-5 | The BFS reference solver (`Playground.solve()` for physics, `plan_with_mode()` for code-constrained) is a floor, not the point. When BFS fails to find any valid plan under a mode, `code_plan` is `None` and the delta is `None` — the tool does not fall back to the physics plan and label it "code-compliant". | The report labelling a physics plan as `code_plan` when the code path is unreachable, or emitting a fabricated code_plan. | **HOLDS** — code overlay is passed through `plan_with_mode`; on solve failure, the tool returns `None` and the report says "no valid plan" for that side. Never substitutes the physics plan. |
+
+**On the demo's delta = 0 result.** The nonzero-delta story only fires
+when the code overlay genuinely blocks the physics path. The demo
+site's overlay is PERMISSIVE — it adds a longer path (approve → import →
+pour) without blocking the shorter one (lay stone pad). BFS finds the
+shortest valid plan in either mode. This is a correct interrogation of
+a permissive overlay; TI-1 and TI-2 (which fire on the "site already
+meets intent" data) carry the load-bearing insight here. For a forcing
+overlay, add an exclusion (e.g., a `mode:code_compliant` gate on the
+inverse of `lay_stone_pad`, or a goal that specifies which process must
+produce the footing).
+
 ## Resonance / Nautilus / semantic-interference claims (post-C11)
 
 Encoded in the modules landed via origin/main. Test-runner:
