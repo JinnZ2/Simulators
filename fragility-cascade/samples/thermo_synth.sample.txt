@@ -1,0 +1,15 @@
+================================================================
+DESERT SITE -- goal: lifting_force.  library has no 'crane'.
+on hand: water, sunlight, fresnel, copper, rope, clay
+================================================================
+
+combustion path (the modern default):
+  combustion_heat requires fuel + oxidizer -> no fuel on site -> DROPPED
+
+phenomenon search for force:
+
+================================================================
+the steam path SURFACED from properties, not from a named process.
+water's latent heat + copper's melting point + fresnel's factor
+selected themselves. 'crane' dissolved into: pressure on an area.
+================================================================

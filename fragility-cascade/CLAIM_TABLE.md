@@ -244,6 +244,42 @@ been modeled at all (loud when a source doesn't exist). Filling those
 gaps with plausible defaults would return the tool to quiet-wrong-answer
 territory — TA-2 exists precisely to hold that line.
 
+## Phenomenon-synthesis claims (`thermo_synth.py`)
+
+Inverts the search direction of the rest of the thermo stack. Where
+`thermo_pm` + `thermo_explore` validate plans built from processes
+someone already named (a `lay_stone_pad`, a `run_engine`), this layer
+starts from a physical **quantity + magnitude** (`force`, `power`)
+and backward-searches through a library of PHENOMENA (`vaporization`,
+`pressure_on_area`, `solar_concentration`) filtered by which on-hand
+SUBSTANCE PROPERTIES satisfy each phenomenon's `needs_property` gate.
+The frontier is capped by physics + material properties, not by
+whoever thought to name a process.
+
+Dimensional algebra (M, L, T, Θ vector) is the referee for
+MULTIPLY-form phenomena. ENABLE-form gates state transitions
+without a dim product to check.
+
+Sample: [`samples/thermo_synth.sample.txt`](samples/thermo_synth.sample.txt).
+
+| # | Claim | Refuted if | Verdict |
+|---|-------|-----------|---------|
+| TS-1 | On-hand substance capabilities are matched by literal PROPERTY comparison (`substance.props[prop] >= minv`), not by role label. `copper_tubing` qualifies as a vessel because `melting_K=1358 ≥ 400`, not because it's named "boiler". | A phenomenon selecting a substance whose property doesn't meet the minimum, or rejecting one that does. | **HOLDS** — `_substance_with(prop, minv)` iterates substances and returns the first with `props.get(prop, 0.0) >= minv`. Verified: `confined_vapor_pressure.needs_property = {"vessel": ("melting_K", 400.0)}` accepts `copper_tubing` (1358 > 400); would reject clay (no `melting_K` property). |
+| TS-2 | `paths_to(kind)` returns an empty list when no chain closes, rather than a partial or invented assembly. A dropped phenomenon (property gate unmet, or upstream requirement unsourceable) does not appear in results as an "aspirational" step. | An `Assembly` returned whose `steps` reference a phenomenon whose requirements weren't fully satisfied by the substances on hand. | **HOLDS** — `_search()` only appends to `results` when `satisfied` is True across every `phen.requires` element. Verified: desert search for `power` returns 1 assembly (`solar_concentration` from `flux + area`); searches for `force`, `pressure`, `vapor_mass`, `heat`, `temperature` return 0 assemblies because upstream chains don't close. No aspirational padding. |
+| TS-3 | Dimensional algebra rejects MULTIPLY phenomena where `combine_dim(requires) ≠ DIM[produces]`. A phenomenon with a dim mismatch fires `flags.append("DIMENSION MISMATCH ...")` and is dropped before appearing in results. | A MULTIPLY phenomenon accepted with mismatched dims, or an ENABLE-form phenomenon spuriously flagged. | **HOLDS** — `Phenomenon.dim_ok()` checks the composed dimension of `requires` against the declared `produces`. Verified for the shipped library: `pressure_on_area` ([1,-1,-2,0] × [0,2,0,0] = [1,1,-2,0] = force) ✓; `solar_concentration` ([1,0,-3,0] × [0,2,0,0] = [1,2,-3,0] = power) ✓; `mechanical_lift` (force × length = energy → matches `work` since work aliases energy in the dim algebra) ✓. |
+| TS-4 | Demo footer claim: "the steam path SURFACED from properties — water's latent heat + copper's melting point + fresnel's factor selected themselves." Under the shipped library, backward search from `force` on the desert substrate produces an assembly containing `solar_concentration → vaporization → confined_vapor_pressure → pressure_on_area`. | The desert search for `force` returns 0 assemblies (the chain fails to close), or the returned chain omits any of the four named phenomena. | **REFUTED (as shipped)** — `paths_to("force")` returns 0 assemblies. The shipped LIBRARY has an unbridged gap between `power` (produced by `solar_concentration`) and `heat` (required by `vaporization`): the two are distinct quantity kinds in `DIM`, and no phenomenon in the library converts one to the other. `sensible_heating` produces `temperature`, not `heat`. `combustion_heat` produces `heat` but requires `fuel`, correctly dropped on the desert site. Update the LIBRARY, not the search: add a `power_over_time_to_heat` phenomenon (requires `power` + a time-window property, produces `heat`), or rewrite `sensible_heating.produces` from `temperature` to `heat`, or add a `radiative_heating` phenomenon. Per the refutation protocol, the search engine holds; the library's completeness is the object of update. |
+
+**Note on the refutation direction.** TS-1, TS-2, TS-3 pin the search
+engine's mechanism — property-based selection, no aspirational output,
+dim-checked MULTIPLY. All hold. TS-4 is the demo's specific empirical
+claim about the desert substrate under the shipped library, and it
+fails as-shipped. This is the sim being the witness: the search
+correctly reports "no chain closes" rather than papering over the gap
+by inferring a `power → heat` bridge that isn't in the library. Fixing
+requires an operator to add a phenomenon; the tool refuses to invent
+one, exactly as TA-2 (thermo_assume's no-invention claim) requires
+across the stack.
+
 ## Resonance / Nautilus / semantic-interference claims (post-C11)
 
 Encoded in the modules landed via origin/main. Test-runner:
