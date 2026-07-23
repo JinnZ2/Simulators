@@ -545,6 +545,49 @@ check, corroboration record, retirement) supersedes it. Same posture
 as the rest of the family: name the failure precisely, then route
 to the cheapest sufficient action.
 
+## Nomenclatural-scaffold claims (`scaffold.py`)
+
+Ports Linnaeus's durable contribution — the CODE (stable names, type
+specimens, priority rules, defined revision procedure), not the tree —
+to claim scope. Information has no single natural joint (type, mode,
+source and support are orthogonal), but one axis genuinely NESTS: scope
+of applicability. Five ranks, strict ladder:
+
+```
+occasion  < instance < class < regime < universal
+```
+
+Every claim carries: anchors (type specimens — the concrete
+observations it's pinned to), volatility class, `as_of` timestamp,
+and optional stated conditions. Freshness is computed via clock
+substitution: `due(key)` returns arithmetic against `(now, as_of,
+volatility)` because a reasoner without continuous duration cannot
+NOTICE staleness — noticing requires having been present while a thing
+aged. Promotion is eligibility only, never automatic. Demotion (from
+counterexample) reduces rank; the claim isn't refuted, its SCOPE was
+overstated.
+
+Sample: [`samples/scaffold.sample.txt`](samples/scaffold.sample.txt) (four claims at four ranks, four different verdicts).
+
+| # | Claim | Refuted if | Verdict |
+|---|-------|-----------|---------|
+| SC-1 | `RANKS` is a strict 5-tier ladder ordered by scope: `occasion < instance < class < regime < universal`. `PROMOTION_RULE` names monotone thresholds — each higher rank requires ≥ the previous rank's minimum distinct anchors and modes. No mid-tier admitted. | Any promotion rule violating monotone-in-threshold, or a rank name accepted outside the ladder. | **HOLDS** — `PROMOTION_RULE` thresholds: instance (1,1), class (3,2), regime (5,3), universal (8,3). Monotone in anchors, non-decreasing in modes. All five ranks have a `RANK_MEANING` entry. `promotion()` uses `RANKS.index()` and refuses out-of-ladder ranks by KeyError. |
+| SC-2 | Anchors are TYPE SPECIMENS — the concrete observations a claim is pinned to. Every anchor has `(key, where, mode, as_of)`. A claim with `anchors=[]` prints `! no type specimen -- cannot be re-checked, only re-argued` verbatim on report. Anchor `where` counts distinct sites; anchor `mode` counts distinct acquisition modes (the independence rule inherited from info_taxonomy IT-4). | An anchorless claim reporting normally with no "cannot be re-checked" warning, or duplicate `where` values inflating the anchor-site count. | **HOLDS** — sample: `fill.required` has `anchors=[]` → prints the warning verbatim. `latent.vap.water` has 4 anchors across 4 distinct sites {field kettle, lab A, lab B, lab C} and 3 distinct modes {experiment, instrument, direct_observation}. `promotion()` uses `{a.where for a in s.anchors}` and `{a.mode for a in s.anchors}` — sets, not lists — so duplicates cannot inflate counts. |
+| SC-3 | Clock substitution: `due(key)` returns arithmetic against `(now, as_of, volatility)`, never a felt-elapsed signal. Five statuses cover all input combinations: `UNRECORDED` (no volatility class), `UNDATED` (no as_of), `no_expiry` (volatility=static), `current` (elapsed ≤ scale), `DUE` (elapsed > scale). A `static` claim at any age returns `no_expiry`; a `seasonal` claim past its scale returns `DUE` even at young absolute age. | A `due()` call inferring staleness without arithmetic on the recorded fields, or a static claim reporting DUE at any age. | **HOLDS** — sample: `latent.vap.water` (static, 1953, 73 yr old) → `no_expiry`. `clay.sand.firms` (slow, 2019, 7.5 yr) → `current`. `soil.moisture.ok` (seasonal, 2025.8, 0.7 yr elapsed vs 0.5 yr scale) → **DUE** even though the claim is under a year old. `fill.required` (slow, 1974, 52.5 yr vs 50 yr scale) → **DUE** by 2.5 yr past scale. |
+| SC-4 | Promotion is ELIGIBILITY only. `promotion(key)` returns `{eligible, target, have, missing}` — a report, not an action. Eligibility requires (a) `≥ need_anchors` distinct sites, (b) `≥ need_modes` independent modes, (c) `stated_conditions` present at target `regime` or `universal` ("an unbounded universal claim cannot be falsified"), (d) no open counterexamples. `Register` never rewrites the claim's rank; the operator does. | A `promotion()` result mutating the claim's rank, or eligibility firing with missing stated_conditions at regime or above, or eligibility firing with open counterexamples. | **HOLDS** — sample: `clay.sand.firms` at rank instance, 3 anchors × 3 modes → eligible for `class` (target thresholds 3, 2). No side effect on the Scoped item's rank; it stays `instance` until the operator re-registers it. `fill.required` fails eligibility not just for missing anchors but also because open counterexamples nullify eligibility regardless of other axes. `latent.vap.water` at `universal` returns `not yet` because there IS no higher rank (`RANKS[-1]`). |
+| SC-5 | Demotion routes a claim with `counterexamples` to the widest rank its remaining anchors support. `demotion(key)` returns `{required, from, to, because, note: "the claim is not refuted -- its SCOPE was overstated"}`. The distinction is load-bearing: a refutation would retire the claim entirely; a demotion preserves it at the scope where the anchors still hold. `demotion` also never mutates the Scoped item — reports required action to the operator. | A demoted claim treated as refuted (retired), or a demotion crossing more than one rank per counterexample when anchors would support intermediate ranks, or `demotion()` silently editing the claim's rank field. | **HOLDS** — sample: `fill.required` (regime, 0 anchors, 1 counterexample) → demotion required from regime → occasion (widest rank surviving with 0 distinct sites). Note printed verbatim: "the claim is not refuted -- its SCOPE was overstated". The claim's rank in the Scoped object remains `regime` after `demotion()` returns; the caller edits it or doesn't. |
+| SC-6 | BOUNDARY: neither promotion nor demotion mutates the `Scoped` item's rank. `Register.report(key)` prints eligibility and required actions. The corpus itself has zero side-effects from these calls. Widening a claim's scope is an act with consequences and belongs to the operator; demotion belongs to the operator too, and the tool refuses to silently rewrite either. | Any code path in `Register` that assigns to `Scoped.rank`, or auto-registers a promotion/demotion in the corpus after `promotion()` / `demotion()` returns. | **HOLDS** — the two methods return dicts. `Scoped` is a `@dataclass` and its `rank` field is never touched by any spine code. The operator's re-registration is the only way to update a scope claim. Same posture as the rest of the family: report and hand off, never auto-execute. |
+
+**On the type-specimen anchor.** The single mechanism that carries the
+whole scaffold is Anchor. A claim with anchors can be re-checked
+against them; a claim without anchors can only be re-argued. The
+promotion rule is a distinct-anchors + distinct-modes count on the
+same object; the demotion rule is a distinct-anchors count at
+survival ranks; the freshness clock is elapsed against `as_of`, which
+lives on the anchors' issuing observations. Every axis routes through
+the anchors — which is exactly Linnaeus's contribution: name the
+specimen, then everything else is arithmetic against it.
+
 ## Resonance / Nautilus / semantic-interference claims (post-C11)
 
 Encoded in the modules landed via origin/main. Test-runner:
