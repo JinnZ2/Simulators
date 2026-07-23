@@ -388,6 +388,43 @@ reads zero, and can only ever read zero, no matter how well-designed
 the pricing. The frames aren't ranked; the module says so explicitly.
 The **discrepancy** is the observable, and it's signed.
 
+## Knowledge-provenance claims (`thermo_know.py`)
+
+Codes the axis every earlier layer gestured at: WHAT is claimed, HOW
+it was gotten (8 acquisition modes each with `reads_well` / `blind_to`
+/ `decays_by` / `stays_fresh_by`), and LINKS between claims (corroborates
+/ contradicts, plus `parents` for inference). Corroboration strength is
+counted as INDEPENDENCE — two readings through the same mode are echo,
+counted separately and weighted zero. Same posture as trowel+LiDAR (both
+residue-mode → echo) vs oral tradition + excavation (independent axes →
+real corroboration — the Upano case).
+
+Explicit boundary held in code: the tool measures traceability,
+independence, staleness, mode-masquerade — it does NOT rank modes as
+inherently supreme, and it does NOT rule on truth.
+
+Sample: [`samples/thermo_know.sample.txt`](samples/thermo_know.sample.txt).
+
+| # | Claim | Refuted if | Verdict |
+|---|-------|-----------|---------|
+| TK-1 | `MODES` encodes 8 acquisition modes (`direct_observation`, `repeated_practice`, `experiment`, `instrument`, `transmission`, `inference`, `authority`, `model_generated`), each with 4 fields naming what it reads well and what it is structurally blind to. No mode is ranked supreme. | A mode missing any of the four fields, or a scalar/ordering emitted by the module that would let an outside caller rank modes as inherently superior. | **HOLDS** — 8 modes, 4 fields each, no ordering. Every entry carries a `blind_to` line so blindness is co-present with strength. `instrument` explicitly names the trowel-reads-residue-not-return blindness from earlier layers; `model_generated` explicitly names token-primary / diesel-assumed / residue-read as its distribution default. |
+| TK-2 | `Corpus.support(key)` counts INDEPENDENT modes agreeing (own mode + distinct modes of any corroborator). Same-mode agreement is echo — counted separately in `echoes_same_mode`, weighted zero in `strength`. Corroboration link is bidirectional (either side declaring corroborates counts). | Support strength incremented by a same-mode corroborator, or independence unaffected by adding an already-present mode's corroborator. | **HOLDS** — sample: `bearing_obs` strength=3 across {direct_observation, repeated_practice, instrument} (three distinct modes). `bearing_penetrometer` strength=2 across {instrument, direct_observation}. `bearing_county` alone at strength=1. `floodplain_teaching` strength=2 across {transmission, direct_observation} — the Upano pattern. Every counted mode is distinct; echoes remain at 0 because the demo never adds a same-mode corroborator. |
+| TK-3 | `Corpus.audit(current_year)` flags five specific patterns and only those: unknown `how` string, `authority` older than 20 years (age > 20 flagged as decayed), `inference` with no parents (unnamed sources), `inference` whose parent is not in the corpus (chain broken), `transmission` without a lineage `chain`, `model_generated` without corroboration. Does not flag `direct_observation`, `repeated_practice`, `experiment`, `instrument`, or `transmission` with lineage. | The audit firing on a mode/state not in the enumerated flag rules, or failing to fire on one that is (e.g. a 1974 authority going unflagged in a 2026 audit). | **HOLDS** — sample audit output at `current_year=2026`: 3 flags fire on exactly the intended items (`bearing_county` aged 52yr; `ai_span_guess` model-generated uncorroborated; `steam_feasible` inference with `water_latent` parent not in corpus). The 4 well-provenanced items (bearing_obs / bearing_practice / bearing_penetrometer / floodplain_teaching / flood_marks) draw no flags. |
+| TK-4 | `contradicted_by` is symmetric: if A declares `contradicts=[B]`, both A and B report the other in their `contradicted_by` list, regardless of which side wrote the link. This lets a claim added later declare a contradiction against an existing claim without editing the existing one. | An asymmetric contradiction: A contradicts B declared, but B's `support()` result omitting A from `contradicted_by`, or vice versa. | **HOLDS** — sample: `bearing_county.contradicts = [bearing_penetrometer]` is the only declared link, yet BOTH `bearing_penetrometer` and `bearing_county` show each other in `contradicted_by`. The symmetric-check code path is: `key in ot.contradicts or o in k.contradicts` — either declaration counts. |
+| TK-5 | HARD BOUNDARY: the module's public surfaces (`support()`, `audit()`, `show()`) return only structural quantities — mode names, integer counts, string flag descriptions, contradiction lists. Nothing returns a truth verdict, a mode ranking, or a "believe this" recommendation. The header says so explicitly ("it does not rank modes as inherently superior, and it does not rule on truth"). | Any function in the module returning a field that would rank modes (e.g. `mode_reliability_score`, `truth_probability`, `should_trust`). | **HOLDS** — no such fields on any returned dict. `support()` returns four keys (`independent_modes`, `strength`, `echoes_same_mode`, `contradicted_by`) — all structural. `audit()` returns a list of flag strings naming patterns to fix, no rankings. `show()` prints; returns nothing. |
+
+**On the mode-supremacy failure mode.** Ranking a claim by its
+acquisition mode ("this is instrument-derived, therefore better than
+that traditional teaching") is the same error the earlier layers audit
+in other frames: reading the label on the meter instead of the meter's
+properties. TK-1's 4-field mode records make the *blindness of every
+mode* co-present with its strength, so an audit reader sees both at
+once. TK-2's independence-not-count corroboration is the sharpest
+mechanical carrier of that stance: LiDAR + trowel doesn't score higher
+than trowel alone, because they share the residue-vs-return blindness.
+Living-practice-plus-oral-tradition scores higher than either alone,
+because the axes are distinct. The math and the philosophy match.
+
 ## Resonance / Nautilus / semantic-interference claims (post-C11)
 
 Encoded in the modules landed via origin/main. Test-runner:
