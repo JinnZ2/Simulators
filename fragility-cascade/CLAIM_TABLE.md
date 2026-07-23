@@ -425,6 +425,45 @@ than trowel alone, because they share the residue-vs-return blindness.
 Living-practice-plus-oral-tradition scores higher than either alone,
 because the axes are distinct. The math and the philosophy match.
 
+## Provenance-spine claims (`thermo_spine.py`)
+
+Threads `thermo_know` through the whole stack WITHOUT rewriting the
+eight working files. A `Spine` is a registry that attaches alongside:
+`tag()` records provenance at entry (value + how + year); `derive()`
+records inference chains automatically because a computed result IS
+an inference — the chain is built by the act of computing, not by
+discipline. `backing()` walks any result to its leaves and returns
+a mode census, distinct-mode count, weakest links, and inherited
+audit flags. `coverage()` walks a `thermo_pm` System and flags every
+resource whose quantity carries no provenance tag — the same "unread
+field = silent assumption" move from `thermo_assume` and `thermo_survey`,
+now applied to values in flight.
+
+Adds one mode row (flagged as assistant-added, not an operator cut):
+`measured_constant` for latent heats, Avogadro-like constants, and
+other quantities replicated across independent labs. Its blindness is
+explicit — the constant is solid; applicability at THIS site's
+conditions is the assumption.
+
+Sample: [`samples/thermo_spine.sample.txt`](samples/thermo_spine.sample.txt).
+
+| # | Claim | Refuted if | Verdict |
+|---|-------|-----------|---------|
+| TSP-1 | A `derive(key, value, parents=[...])` call records the result as `Know(how="inference", parents=parents)` in the corpus. The chain cannot silently break — a computed result exists with its named parents, or it doesn't exist as a spine entry. `derive` also inspects `parents` at call time and stamps `[MISSING PARENTS: ...]` into the `note` field for any parent key not already in the corpus. | A `derive()` call producing a Know entry with empty `parents`, or missing parents going unrecorded. | **HOLDS** — sample: `audit.waste_delta_J` derived with parents `[plan.code_energy_J, plan.physics_energy_J]`; both parents exist in the corpus, no MISSING PARENTS stamp. The two intermediate plans (`plan.code_energy_J`, `plan.physics_energy_J`) themselves record their parents. Chain closes end-to-end at depth 2, backing traverses cleanly. |
+| TSP-2 | `backing(key)` returns leaves + mode census + weakest links. Weakest-link identification fires on three specific conditions: (a) `model_generated` with independence-strength ≤ 1, (b) `authority` with `year` older than 20 years, (c) any leaf with strength ≤ 1 whose mode is NOT in `{measured_constant, direct_observation, repeated_practice}`. Never fires on a leaf that satisfies none of the three. | A leaf flagged as weakest without meeting any of the three conditions, or a leaf meeting a condition that goes unflagged. | **HOLDS** — sample: `audit.waste_delta_J` has 4 leaves. `code.fill_depth_m` fires (authority, 2026-1974=52 > 20 → condition b). The three site/constant leaves don't fire: `site.soil_bearing_kPa` is `instrument` but has strength 2 via corroboration with `site.rig_test`; `site.rig_test` similarly; `const.diesel_J_per_L` is `measured_constant`, in the exempt set even at strength 1. Exactly one weakest link surfaced — matches the design. |
+| TSP-3 | `coverage(sys=None)` returns two categories of flag concatenated: (1) resources in the passed `thermo_pm` System whose names don't appear anywhere in the corpus as a tagged value; (2) every flag `corpus.audit()` would return on its own. When `sys is None`, only the audit half runs — the coverage half is skipped, not defaulted. | Coverage swallowing a System resource that has no matching tag, or coverage emitting audit flags when the underlying `audit()` returns none. | **HOLDS** — sample runs `sp.coverage()` with no System, so only the audit half fires: 2 flags emitted (`code.fill_depth_m` aged authority, `model.span_guess_m` model-generated uncorroborated). Both match what `thermo_know.Corpus.audit()` would return on this corpus standalone. |
+| TSP-4 | Weakest-link inheritance: audit flags on ANY node in the parents-tree of a result surface in `Backing.flags`. A result's groundedness is bounded by the least-supported node in its transitive parent set, not just its direct parents. | An audit flag on an intermediate node (parent of a parent) failing to surface in the top-level result's `Backing.flags`, or a flag on an unrelated node leaking in. | **HOLDS** — sample: the `[code.fill_depth_m]` authority-aged flag is a DIRECT-parent flag (code.fill_depth_m is a direct parent of plan.code_energy_J, which is a direct parent of audit.waste_delta_J), and it surfaces on the top-level report as expected. `model.span_guess_m` is uncorroborated but is NOT in the parents tree of `audit.waste_delta_J` — its flag appears in `coverage()` output but NOT in `audit.waste_delta_J`'s `Backing.flags`. Scope of inheritance matches the transitive-parent tree exactly. |
+| TSP-5 | HARD BOUNDARY: the spine adds one mode row (`measured_constant`) as an assistant-added bookkeeping cut, explicitly documented in the docstring as "flagged as mine". The row's blindness is real and stated: constants are solid across labs, but applicability at a specific site's temperature / pressure / purity is the operator's call. No other mode is added or reordered; the cultural cuts of the mode table remain the operator's. The spine also does NOT modify the eight working files — it is a registry that attaches alongside them. | Additional modes added silently, existing modes reordered or edited, or spine code monkeypatching another module's globals beyond the documented `MODES["measured_constant"]` entry. | **HOLDS** — one mode addition guarded by `if "measured_constant" not in MODES`, docstring explicitly names it as assistant-added with rationale. All other modules unchanged; the spine reads `thermo_pm.System` via duck-typed `sys.resources` iteration in `coverage()` and mutates nothing. Idempotent (guarded add) and non-invasive (no writes back into other modules' state). |
+
+**Weakest link becomes visible at the point of use.** The whole spine
+is a mechanical rewrite of a discipline claim from the earlier layers.
+Before, an operator had to trace the headline number back through three
+files to find that the 24800 J waste-delta rested on a 52-year-old
+authority with no basis on file. Now the report at `audit.waste_delta_J`
+prints that authority's flag directly — the weakest link is co-present
+with the answer, not buried upstream. Same 24800 J; different visibility
+of what it rests on.
+
 ## Resonance / Nautilus / semantic-interference claims (post-C11)
 
 Encoded in the modules landed via origin/main. Test-runner:
