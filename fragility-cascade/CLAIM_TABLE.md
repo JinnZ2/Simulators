@@ -464,6 +464,45 @@ prints that authority's flag directly — the weakest link is co-present
 with the answer, not buried upstream. Same 24800 J; different visibility
 of what it rests on.
 
+## Information-taxonomy claims (`info_taxonomy.py`)
+
+Domain-neutral generalization of `thermo_know` + `thermo_spine`. Names
+six axes and gives each an operational surface: faceted TYPE (content +
+form + open "about"), acquisition MODE (extensible table with
+blindness/decay/freshness as data), SOURCE track record (held separate
+from claim support — the Admiralty split, kept split), independence-only
+SUPPORT counting, per-mode STALENESS via half-life, and PROV-JSON export
+of chains. The header explicitly diagnoses what the existing landscape
+does well and what it drops:
+
+- epistemology names modes, no operations
+- GRADE / evidence-pyramid ranks modes (mode supremacy)
+- Admiralty grades source, not the mode's structural blindness
+- W3C PROV records THAT a derivation happened, no theory of blindness
+- library science: categorization only
+
+Sample: [`samples/info_taxonomy.sample.txt`](samples/info_taxonomy.sample.txt) (four domains — soil / siting / medicine / structure — one structure).
+
+| # | Claim | Refuted if | Verdict |
+|---|-------|-----------|---------|
+| IT-1 | TYPE is FACETED, not a tree: `content` (from a controlled vocabulary of 9 kinds) × `form` (7 kinds) × `about` (open domain tags). Any item names all three independently — a `teaching / oral` item and a `measurement / instrument_trace` item are both first-class, differing on both cross-cutting facets. | An item forced to declare a parent-type before naming form and content, or `content` and `form` collapsed into one dimension. | **HOLDS** — sample: seven items across four domains, each declaring `content/form` independently. `siting.bench` = `teaching/oral`, `siting.silt` = `observation/text`, `soil.penetrometer` = `measurement/instrument_trace`, `plan.waste` = `claim/numeric`. No tree; no forced parent. |
+| IT-2 | MODES table is extensible via `register_mode(m)`, and every entry must fill `reads_well`, `blind_to`, `decays_by`, `stays_fresh_by`. A mode you cannot state the blindness of is not admitted. The nine bootstrap modes ship with all four fields; two carry an explicit `half_life_yr` (`authority=20`, `model_generated=3`). No mode is marked supreme. | A mode registered without one of the four required fields, or the table exposing an ordering / rank scalar over modes. | **HOLDS** — dataclass forces the four required fields at construction; the nine bootstrap modes all fill them. `register_mode(m)` is the only entry path. No `rank` / `priority` / `authority_score` field on `Mode` — modes are structurally peers. |
+| IT-3 | SOURCE and SUPPORT are held on separate axes. `Source.reliability()` is a fraction over the source's past track record; it is NOT combined with `Corpus.support(key)` into a single scalar. Sources with no track return `None` — "unknown", never "bad", never a default 0.0. | A function returning a combined source×support scalar, or `Source.reliability()` defaulting a no-track source to zero. | **HOLDS** — sample: `assistant_model` returns "no track yet" (None), never confused with a low reliability score. `operator` shows 1.00 across a 4-item track; `county_office` shows 0.50 across a 2-item track. Neither is multiplied into `support()` output. |
+| IT-4 | SUPPORT counts INDEPENDENT modes: `Corpus.support(key)["strength"]` = number of distinct acquisition modes across all corroborators (including the item's own). `echoes` counts same-mode corroborators separately and receives zero weight in strength. | Strength incremented by a same-mode corroborator, or echoes leaking into the strength count. | **HOLDS** — sample: `soil.bearing` (direct_observation) corroborated by `soil.penetrometer` (instrument) → strength=2, echoes=0. `siting.bench` (transmission) corroborated by `siting.silt` (direct_observation) → strength=2, echoes=0. `med.aspirin` (authority) uncorroborated → strength=1. |
+| IT-5 | STALENESS is per-mode, using each mode's declared `half_life_yr`. A mode with `half_life_yr=None` (direct_observation, repeated_practice, etc.) is never flagged stale by age; a mode with a half-life is flagged when `current_year − max(refreshed, year) > half_life_yr`. The `refreshed` field lets an item declare its last re-check independent of first-issue year. | Staleness firing on a `half_life_yr=None` mode, or an item's `refreshed` timestamp failing to reset the age window. | **HOLDS** — sample: `med.aspirin` (authority, half-life 20 yr, issued 1998, no refresh, current 2026) → aged 28yr > 20yr → flagged. `model.span` (model_generated, half-life 3 yr, year 2026) → age 0, not flagged by staleness (uncorroborated flag fires separately). Nothing else flagged stale — `direct_observation`, `instrument`, `transmission` items have `half_life_yr=None` in the mode table and stay clear regardless of age. |
+| IT-6 | Corpus exports a minimal PROV-JSON-shaped dict: `entity` (labels + mode + year), `agent` (source kind), `wasAttributedTo` (item → source edges), `wasDerivedFrom` (item → parent edges). Chain records that would exist in W3C PROV exist here identically. | An export shape that misses one of the four PROV keys, or a `derived_from` link failing to appear as a `wasDerivedFrom` entry. | **HOLDS** — sample: 2 derivation edges emitted (matching `plan.waste.derived_from = [soil.bearing, soil.penetrometer]`). All four PROV keys present. Existing PROV tooling can consume the dict without translation. |
+| IT-7 | HARD BOUNDARY: `audit()` returns structural flag strings only (missing lineage, broken chain, uncorroborated model output, echo chamber, staleness by half-life, contradicted-by). Contradictions are SURFACED but never auto-resolved. No verdict on whether a claim is TRUE; no interior verdict on a knower. | `audit()` returning a truth verdict, a resolution of a contradiction, or a scalar over a knower's honesty. | **HOLDS** — sample audit fires exactly two flags: `[med.aspirin]` stale-authority; `[model.span]` model uncorroborated. Neither is a truth verdict — both name structural conditions. Contradictions in the demo corpus: zero (no `contradicts` links declared), so no held-open notices. When they exist, the audit says "held open, not auto-resolved" verbatim. |
+
+**On the six axes as a spine for the family.** `info_taxonomy` is the
+domain-neutral generalization of `thermo_know` (which was already 8
+modes + support + audit) plus the source-track-record split from
+Admiralty and the PROV export from W3C. The thermo family's specific
+cuts (measured_constant added by thermo_spine, coverage() flagging
+untagged System resources) remain in the thermo layer where they're
+tied to physics. The taxonomy here is what to use when the domain is
+NOT physics — a medical rule, a family teaching, a legal precedent —
+and the same six axes still name the shape.
+
 ## Resonance / Nautilus / semantic-interference claims (post-C11)
 
 Encoded in the modules landed via origin/main. Test-runner:
