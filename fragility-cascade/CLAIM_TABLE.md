@@ -503,6 +503,48 @@ tied to physics. The taxonomy here is what to use when the domain is
 NOT physics — a medical rule, a family teaching, a legal precedent —
 and the same six axes still name the shape.
 
+## Revalidation-plan claims (`revalidate.py`)
+
+Extends `info_taxonomy` past the single-flag response of `staleness()`.
+A `staleness` flag implies one action (retest everything). Decay is not
+one thing, and the retest a decayed claim actually needs is often much
+cheaper — or none, or impossible. Diagnoses along FIVE axes, each
+naming a distinct failure mode, and routes to one of five outcomes.
+
+Five axes:
+```
+temporal_scope         does the referent MOVE? age is not decay
+scope                  established range vs current use conditions
+methodology            mode sound / superseded / structurally blind
+updated_info           corroboration or contradiction since acquisition
+physical_authenticity  can ground truth settle it, and how cheaply
+```
+
+Five outcomes: `undecidable` (unfalsifiable), `re_establish` (unrecorded
+scope or unregistered method), `none` (static referent or already
+corroborated), `directed` (contradicted — aim at the contradiction),
+`cheap` (direct physical check available).
+
+Sample: [`samples/revalidate.sample.txt`](samples/revalidate.sample.txt) (five decayed-looking claims, five different plans).
+
+| # | Claim | Refuted if | Verdict |
+|---|-------|-----------|---------|
+| RV-1 | `VOLATILITY_YR` and mode `half_life_yr` govern staleness INDEPENDENTLY. A `static` referent under `measured_constant` at any age produces a `STATIC` temporal_scope finding and PLAN `none` (age-based staleness is spurious). A `seasonal` referent under `direct_observation` at age > 0.5 yr produces `EXPIRED` regardless of the mode's half-life (which is `None` for direct_observation). | A static-referent claim's staleness flag driving a nonzero-cost plan, or a seasonal-referent claim at age 1 yr going unflagged as EXPIRED. | **HOLDS** — sample: `const.latent_vap` (1953, measured_constant, static) → temporal_scope STATIC, PLAN `NONE` (zero cost). `site.moisture` (2025, direct_observation, seasonal, scale 0.5 yr) → temporal_scope EXPIRED at age 1 yr, PLAN `CHEAP` (hand test at depth). Two claims, opposite verdicts on temporal_scope, driven by volatility rather than mode half-life alone. |
+| RV-2 | `scope` axis distinguishes DRIFTED (established range ≠ applied range) from in-scope. A drifted claim routes to "extend the range at current conditions", explicitly narrower than full re-establishment. When `established_over` is `None` or unrecorded, the axis fires `UNRECORDED` and the plan escalates to `re_establish` (a claim with no stated range cannot be shown in-range). | A drifted claim getting a `none` plan, or an unrecorded scope claim getting anything less severe than `re_establish`. | **HOLDS** — sample: `code.fill_depth` established over 1974 conditions, applied to 2026 → scope DRIFTED, plan uses direct check (penetrometer) which the notes explicitly says "extends the range and refreshes in one move". `claim.vibes` has no `established_over` recorded → scope UNRECORDED, plan `UNDECIDABLE` (a higher escalation because `physical_authenticity=UNFALSIFIABLE` overrides). |
+| RV-3 | `updated_info` reads the corpus's own `corroborates` / `contradicts` links to short-circuit needless retests. If independent modes have corroborated the claim since acquisition AND temporal_scope is not EXPIRED AND scope is not DRIFTED, plan is `none` with the note "record the corroborating item as the refresh". A contradiction always overrides corroboration and routes to `directed`. | A corroborated claim (independent mode, no expiry, no drift) yielding a nonzero-cost plan, or a contradicted claim escaping the `directed` route. | **HOLDS** — sample: `siting.bench` (transmission) corroborated by `siting.silt` (direct_observation, distinct mode) → updated_info CORROBORATED → PLAN `NONE`. `code.fill_depth` contradicted by `site.penetrometer` → updated_info CONTRADICTED → PLAN `DIRECTED`, method = the physical check when available, else `mode.stays_fresh_by`. |
+| RV-4 | `physical_authenticity=UNFALSIFIABLE` overrides every other axis: a claim not checkable against ground truth as stated routes to `undecidable`, method "restate or retire". No amount of retest resolves an unfalsifiable claim, so the plan says so and terminates rather than escalating to `re_establish`. | An unfalsifiable claim routed to any outcome other than `undecidable`, or to a method other than "restate or retire". | **HOLDS** — sample: `claim.vibes` (`checkable=False`) → PLAN `UNDECIDABLE` verbatim, cost `n/a`, method "restate or retire". Note: "no check could fail — retesting cannot resolve it". Even with other axes fired (UNRECORDED × 2), the unfalsifiability short-circuits. |
+| RV-5 | BOUNDARY: `revalidate` outputs a retest PLAN (a trajectory), NOT a new verdict on the claim. It does not re-decide truth, does not auto-refresh, and does not judge whether a mode is *fit* for the claim. Where fit requires reading meaning (does the mode's blindness touch what this claim asserts?), the `methodology` axis prints the blindness verbatim and hands the judgment to the operator with `-> operator judges whether that blindness touches what this claim asserts`. | A `Plan` field containing a new truth value, an auto-refresh side-effect on the corpus, or a mode-fit scoring function. | **HOLDS** — `retest_plan()` returns a `Plan` with `outcome / method / cost / notes` — all trajectory data, none of it a re-verdict. `report()` prints; mutates nothing. `methodology` axis in every case says `review` and prints the mode's `blind_to` field, letting the operator decide fit. Sample line: `mode 'authority' is blind to: everything since issue; the issuer's own basis -> operator judges whether that blindness touches what this claim asserts`. |
+
+**On the five-outcome routing.** The design premise is a rebuttal to
+"stale means retest": five decayed-looking claims produce five
+distinct plans in the sample — no retest / directed cheap check /
+straight retest / no retest / retire. The mode table already carried
+the prescription in `stays_fresh_by`; the axes only decide WHICH
+mode's freshness path to follow, or which alternative (physical
+check, corroboration record, retirement) supersedes it. Same posture
+as the rest of the family: name the failure precisely, then route
+to the cheapest sufficient action.
+
 ## Resonance / Nautilus / semantic-interference claims (post-C11)
 
 Encoded in the modules landed via origin/main. Test-runner:
