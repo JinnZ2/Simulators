@@ -1,42 +1,55 @@
-==================================================================
-clock.py -- shared volatility clock (domain-neutral)
-==================================================================
+====================================================================
+clock.py v2 -- decay registry (6 channels, 3 targets)
+====================================================================
 
-Volatility classes registered: 6
-  constant     no expiry  holds until the substrate changes
-  structural       9125d  holds across a generation of practice
-  regime           1825d  holds while the governing conditions hold
-  annual            365d  holds within a cycle, not across it
-  seasonal           90d  holds within one phase of the cycle
-  event               1d  holds only near the occasion
+CHANNEL TABLE (registered on import):
+  channel        target             note
+  time           claim              
+  disuse         mode_sensitivity   a 20-year-old reading by someone still in da
+  use            claim              dominant channel for oral and testimonial an
+  constancy      mode_sensitivity   a blind_to that only appears with duration; 
+  transmission   claim              bounds chain DEPTH; the data processing ineq
+  diffusion      independence       two sources independent in 2019 need not be 
 
-Freshness bands (remaining fraction thresholds):
-  FRESH     >= 0.75
-  DECAYING  >= 0.35
-  STALE     >= 0.1
-  EXPIRED   >= 0.0
+THREE-TARGET ROUTING -- one Observation, three separate readings:
+--------------------------------------------------------------------
+  now = 2026-06-30
 
-Scenario walk (composed with as_of, now, optional mode half-life):
+  per-channel readings:
+    time           target=claim              band=DECAYING     remaining=0.3533
+    disuse         target=mode_sensitivity   band=FRESH        remaining=0.9995
+    use            target=claim              band=DECAYING     remaining=0.3660
+    constancy      target=mode_sensitivity   band=UNDETERMINED remaining=None
+    transmission   target=claim              band=FRESH        remaining=0.9412
+    diffusion      target=independence       band=EXPIRED      remaining=0.0063
 
-  [constant, no mode         ] band=UNDETERMINED rem=   None hl=    None clock=undetermined
-    ! mode half_life UNRECORDED -- mode table row incomplete
-  [structural, 7.5yr         ] band=FRESH        rem= 0.8123 hl=   9125d clock=referent
-    ! mode half_life UNRECORDED -- mode table row incomplete
-  [seasonal, 0.7yr           ] band=STALE        rem= 0.1231 hl=     90d clock=referent
-    ! mode half_life UNRECORDED -- mode table row incomplete
-  [regime + authority 20yr   ] band=EXPIRED      rem= 0.0007 hl=   1825d clock=referent
-  [event, 3d                 ] band=STALE        rem= 0.1250 hl=      1d clock=referent
-    ! mode half_life UNRECORDED -- mode table row incomplete
-  [as_of missing             ] band=UNDETERMINED rem=   None hl=    None clock=undetermined
-    ! mode half_life UNRECORDED -- mode table row incomplete
-    ! as_of UNRECORDED -- claim cannot be aged, only re-argued
-  [bogus volatility          ] band=UNDETERMINED rem=   None hl=    None clock=undetermined
-    ! volatility class 'bogus' not in table -- register_volatility() or re-cut for this domain
-    ! mode half_life UNRECORDED -- mode table row incomplete
-  [as_of in future           ] band=FRESH        rem= 1.0142 hl=   9125d clock=referent
-    ! mode half_life UNRECORDED -- mode table row incomplete
-    ! as_of is later than now -- anchor or clock is wrong
+  per-TARGET governing (fastest WITHIN each target, never across):
+    claim              band=DECAYING     governing=time
+    mode_sensitivity   band=FRESH        governing=disuse
+    independence       band=EXPIRED      governing=diffusion
 
-==================================================================
-governing clock is the FASTER of (mode, referent) -- min, never mean.
-==================================================================
+  interpretation: 30-yr-old teaching by daily-practicer with
+    3-hop chain, told 100 times, independence set 36 yr ago
+    -> claim band from time/use/transmission -- fastest wins
+    -> mode_sensitivity fresh: elder still practices
+    -> independence EXPIRED: 36 yr past mixing scale
+    THREE DIFFERENT BANDS FOR THREE DIFFERENT TARGETS.
+
+MAX_CHAIN_HOPS (Eigen error threshold):
+  hop_fidelity=0.99  max_hops_to_35pct_floor=104.5
+  hop_fidelity=0.95  max_hops_to_35pct_floor=20.5
+  hop_fidelity=0.9  max_hops_to_35pct_floor=10.0
+  hop_fidelity=0.8  max_hops_to_35pct_floor=4.7
+
+BACKWARD COMPAT: freshness() v1 API preserved for echo.py client:
+  as_of=2019, structural, 7.5yr elapsed:
+    band=FRESH  remaining=0.8123  clock=referent
+  (v1 shape unchanged, echo.py imports still work)
+
+REGISTRATION GUARDS:
+  attempting to register channel with empty blind_to:
+    RAISED: channel 'bad': blind_to is empty -- a decay channel that will not state what it cannot see is a supremacy claim wearing a row
+  attempting to register with unknown target:
+    RAISED: channel 'bad': target must be one of ('claim', 'mode_sensitivity', 'independence')
+
+====================================================================

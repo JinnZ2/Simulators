@@ -588,39 +588,55 @@ lives on the anchors' issuing observations. Every axis routes through
 the anchors — which is exactly Linnaeus's contribution: name the
 specimen, then everything else is arithmetic against it.
 
-## Shared-clock claims (`clock.py`)
+## Decay-registry claims (`clock.py`)
 
-Closes the seam where `scaffold.py` and `revalidate.py` each carried
-private decay arithmetic. Domain-neutral module: **six volatility
-classes** (constant / structural / regime / annual / seasonal / event),
-**four freshness bands** (FRESH ≥ 0.75, DECAYING ≥ 0.35, STALE ≥ 0.10,
-EXPIRED < 0.10), **two clocks that compose but never merge** (mode
-half-life = how fast the way of knowing goes blind; referent volatility
-= how fast the thing itself moves — take the faster, not the average).
+**v1 retired to `legacy/clock_v1.py`.** v1 had ONE decay term:
+elapsed calendar time — the mode-supremacy move performed on clocks.
+v2 registers **six decay channels** distributed across **three
+targets**, with a hard rule against taking min across targets.
 
-`now` is always an explicit argument. There is no implicit present
-tense; freshness is arithmetic over absolute anchors, not something
-felt.
+Six channels, each with `measures` / `blind_to` / `fn`:
 
-Sample: [`samples/clock.sample.txt`](samples/clock.sample.txt) (eight scenarios exercising every branch).
+| channel | target | reads |
+|---------|--------|-------|
+| `time` | claim | calendar aging vs mode half-life / referent volatility (faster wins) |
+| `disuse` | mode_sensitivity | observer out of practice |
+| `use` | claim | retrievals × per-retrieval fidelity (retrieval rewrites the record) |
+| `constancy` | mode_sensitivity | adaptation to unchanging stimulus |
+| `transmission` | claim | chain hops × per-hop fidelity (Eigen error threshold) |
+| `diffusion` | independence | independence itself decaying via field mixing |
+
+Three targets, decayed WITHIN each target only: `claim` (content less
+likely to hold), `mode_sensitivity` (reader can still be right and
+report nothing), `independence` (content fine, support count no
+longer honest).
+
+`Observation` dataclass carries all inputs; `decay(o)` returns
+per-channel readings + per-target governing channel + per-target
+band. The v1 API — `freshness(as_of, now, ...)` — is preserved
+verbatim as a time-channel-only shortcut so `echo.py` and any other
+v1 caller works unchanged.
+
+Sample: [`samples/clock.sample.txt`](samples/clock.sample.txt) (channel table + three-target demo + Eigen threshold + v1 backward-compat + registration guards).
 
 | # | Claim | Refuted if | Verdict |
 |---|-------|-----------|---------|
-| CL-1 | `effective_half_life(mode_half_life_days, volatility_name)` returns the FASTER of the two clocks — `min(candidates)` — never their average, sum, or product. If both clocks are absent, returns `(None, "undetermined", loud)`. If only one is present, returns that one with its source labeled. | A combined half-life value that's between the two clocks (indicating averaging), or a value greater than the smaller (indicating something other than min). | **HOLDS** — sample: `regime + authority 20yr` composes referent scale 5·365=1825 days and mode half-life 20·365=7300 days. `effective_half_life` picks 1825 (`referent`), the faster clock. Cross-checked against source: `min(candidates, key=lambda c: c[0])`. |
-| CL-2 | Freshness bands are ordered fraction thresholds. `band_for(remaining)` walks `BANDS` in declared order and returns the first label whose floor is ≤ remaining; falls through to `EXPIRED` below zero. Boundaries are inclusive: `remaining=0.75` → `FRESH`, `remaining=0.35` → `DECAYING`. | A remaining value getting a band label whose floor exceeds it, or a boundary-exact value flipping to the next-lower band. | **HOLDS** — sample: `structural 7.5yr` → remaining 0.8122 ≥ 0.75 → `FRESH`. `seasonal 0.7yr` → remaining 0.1231 ≥ 0.10 but < 0.35 → `STALE`. `regime + authority` → remaining 0.0007 < 0.10 → `EXPIRED`. Every scenario's band matches `band_for` walked over the thresholds. |
-| CL-3 | `freshness(as_of, now, ...)` requires an explicit `now`. Elapsed is `(now.date - as_of.date).days`. Missing `as_of` or missing `now` returns band `UNDETERMINED` with the LOUD flag `"as_of UNRECORDED -- claim cannot be aged, only re-argued"`. Negative elapsed (as_of after now) computes the math anyway but flags `"as_of is later than now -- anchor or clock is wrong"` — honest math, loud tag. | An implicit `datetime.now()` call anywhere in the module, or a missing anchor silently defaulting to 0 elapsed instead of UNDETERMINED. | **HOLDS** — sample: `as_of missing` scenario → band UNDETERMINED, loud fires. `as_of in future` scenario → elapsed −185, band FRESH (2^0.507 = 1.42 ≥ 0.75), loud fires the anchor-or-clock-wrong flag. `grep -c "datetime.now\|date.today" clock.py` returns 0 — no implicit present tense anywhere in the module. |
-| CL-4 | Volatility table is extensible via `register_volatility(v)`. The bootstrap set (6 classes) has no supremacy — no ordering scalar over classes. Every class carries `(name, span_days, reads, examples)`. `constant` uses `span_days=None` to mark no-expiry-by-time; other classes carry positive day counts. | Volatility class registered without one of the four fields, or an ordering / rank scalar over VOLATILITY. | **HOLDS** — `Volatility` is a `@dataclass(frozen=True)` requiring all four fields at construction. 6 bootstrap classes all fill them. No comparison operators defined on Volatility; the dict is keyed by name; no priority attribute. Extension is via `register_volatility(v) -> Volatility` — same door as `info_taxonomy.register_mode`. |
-| CL-5 | The `constant` volatility class combined with a `None` mode half-life returns `UNDETERMINED`, not `no_expiry`. A no-expiry finding requires ONE of the clocks to be knowable-and-infinite; both being absent means the arithmetic can't produce a number, and the module says so. This differs from `scaffold.py`'s old `no_expiry` semantic which fired on `volatility=static` alone. | The `constant + no mode` combination returning a numeric remaining fraction or a `no_expiry` band without the operator supplying at least one clock. | **HOLDS** — sample: `constant, no mode` scenario → band UNDETERMINED, half_life_days=None, governing_clock=undetermined, loud=`"mode half_life UNRECORDED -- mode table row incomplete"`. Note: when the operator supplies a mode half-life alongside `volatility=constant`, that mode half-life becomes the governing clock — the referent's no-expiry is honored as "no bound from THAT clock", and the mode's clock governs by being the only one present. |
-| CL-6 | SEAM STATUS: `scaffold.py` still contains its own `VOLATILITY_YR` dict (4 classes) and `due()` arithmetic. `revalidate.py` still contains its own `VOLATILITY_YR` dict (4 classes) and staleness math. Neither imports `clock.py` yet. The docstring's "Both now import from here. Neither computes locally" is aspirational — the refactor is pending. Two seams remain until either module rewires. | Someone claiming the ecosystem uses `clock.py` as the single source of decay arithmetic. | **REFUTED (pending refactor)** — grep confirms `VOLATILITY_YR` present in both `scaffold.py` and `revalidate.py`; neither imports `clock.py`. Refactor direction: replace each module's private `VOLATILITY_YR` and staleness logic with a call to `clock.freshness()`. Note the semantic delta (CL-5): `scaffold.py`'s `static → no_expiry` shortcut disappears; the refactor either preserves the shortcut inside scaffold (checking `volatility == "constant"` before calling clock) or requires an explicit mode half-life at every static-referent site. Operator picks. |
+| CL-1 | Six channels register on module import; every row has non-empty `measures` and `blind_to`. `register_decay_channel()` RAISES `ValueError` on empty either field, with the message "a decay channel that will not state what it cannot see is a supremacy claim wearing a row". Also raises when `target` is outside `TARGETS = ("claim", "mode_sensitivity", "independence")`. | An empty-field channel registering, or a channel with an unrecognized target registering. | **HOLDS** — 6 channels shipped, all fields populated. Sample verifies both guards raise: empty `blind_to` → `ValueError: channel 'bad': blind_to is empty -- ...`; target `'bogus_target'` → `ValueError: channel 'bad': target must be one of ('claim', 'mode_sensitivity', 'independence')`. |
+| CL-2 | `decay(o)` computes readings for every registered channel. Governing channel per target is the FASTEST (min `remaining`) channel WHOSE TARGET IS THAT TARGET. No cross-target minimization. If no channel for a target is computable (all return `None`), that target's band is `UNDETERMINED` with a LOUD flag. | A per-target governing channel drawn from a different target, or a min across all channels blurring the three-target split. | **HOLDS** — sample: single Observation yields three distinct governing channels — `claim` governed by `time` (0.3533, DECAYING); `mode_sensitivity` governed by `disuse` (0.9995, FRESH); `independence` governed by `diffusion` (0.0063, EXPIRED). The point of the design: claim / mode / support decay on separate ledgers with separate consequences. |
+| CL-3 | `time` channel: `effective_half_life(mode_hl, volatility)` picks `min(candidates)` — mode half-life and referent volatility never average. Missing either → still returns the other. Missing both → returns `(None, "undetermined", loud)`. | A combined half-life value that's between the two clocks (indicating averaging). | **HOLDS** — unchanged from v1 CL-1. Sample: 30-yr authority claim (mode 7300d) under regime volatility (referent 1825d) picks 1825d as governing time-channel half-life. Verified in the three-target demo: `time` reports remaining=0.3533 = 2^(-30·365/1825). |
+| CL-4 | `use` channel: `f ** retrievals` where `f` = `retrieval_fidelity`. Handles `retrievals=0` (returns 1.0). Handles `retrievals` unrecorded → returns `None` with LOUD. Handles `f` outside `(0, 1]` → returns `None` with LOUD. Dominant for oral / testimonial anchors; inert for instrumented ones (which have no retrieval count). | A `use` value greater than 1 (fidelity should never amplify), or a channel accepting `f > 1` without loud-flagging. | **HOLDS** — sample: 100 retrievals × 0.99 fidelity = 0.99^100 = 0.366, DECAYING. The `use` channel's `blind_to` note verbatim: "elapsed time -- an untouched record scores perfect here at any age". |
+| CL-5 | `transmission` channel: `f ** chain_hops`. `max_chain_hops(hop_fidelity, floor=0.35)` returns `log(floor)/log(f)` — the Eigen error threshold, chain depth past which content is not maintained. Undefined outside `0 < f < 1`. | A `max_chain_hops` value where `hop_fidelity ** result != floor` (arithmetic bug), or a result returned for `f >= 1` (would be infinity or negative). | **HOLDS** — sample: hf=0.99 → 104.5 hops to 0.35 floor. hf=0.95 → 20.5 hops. hf=0.9 → 10.0 hops (exact: log(0.35)/log(0.9) = 10.0). hf=0.8 → 4.7 hops. Verified: 0.9^10.0 = 0.348, matches the 0.35 floor within rounding. The docstring notes: bounds chain DEPTH; data processing inequality bounds support WIDTH — same graph, different limit. |
+| CL-6 | Backward compatibility: v1's `freshness(as_of, now, mode_half_life_days, volatility)` is preserved with the same `Freshness` dataclass shape (9 fields including `governing_clock`, `half_lives_elapsed`, `band`, `loud`). Callers holding no additional inputs — like `echo.py`'s `retest_queue()` — work unchanged. | The v1 `Freshness` shape being altered, or `freshness()` returning something other than a time-channel-only reading. | **HOLDS** — sample: `freshness('2019-01-01', '2026-06-30', None, 'structural')` returns band=FRESH remaining=0.8123 clock='referent'. `echo.py` imports `freshness` and runs without modification. `Freshness` dataclass field-count and names identical to v1. |
+| CL-7 | SEAM STATUS (inherited from v1 CL-6): `scaffold.py` and `revalidate.py` still carry private `VOLATILITY_YR` dicts and decay math. Neither imports `clock.py` yet. The v2 six-channel model gives them more surface to migrate to, but also raises the migration cost — the refactor now decides not just which clock to call but which of six channels each caller's decay question maps to. | Someone claiming the ecosystem uses `clock.py` as the single source of decay arithmetic. | **REFUTED (pending refactor, wider scope now)** — grep confirms `VOLATILITY_YR` still present in both `scaffold.py` and `revalidate.py`. The v2 module makes the refactor MORE useful (six channels, three targets) but also more design-y — a single `scaffold.Anchor` might have anchors that should decay on `time` (calendar-anchored measurements) and others that should decay on `transmission` (oral chains). The operator's call, not a mechanical rewrite. |
 
-**On the seam being still open.** CL-1 through CL-5 pin the clock
-module's mechanism, and all hold at the demo. CL-6 pins the
-integration state, and it correctly refutes itself: the aspirational
-docstring got ahead of the code. Landing `clock.py` first, refactoring
-scaffold + revalidate second, is the safer order — the arithmetic is
-now in one place ready to be called, and any regression from the
-refactor can be isolated cleanly. Same posture as `thermo_spine`
-sitting alongside the eight thermo files without rewriting them.
+**On the three-target commitment.** The sample's headline demonstration
+is that ONE observation of a 30-year-old elder-taught claim produces
+THREE independent bands: claim=DECAYING, mode_sensitivity=FRESH,
+independence=EXPIRED. That's the design's whole point. Each band has a
+different consequence: the claim needs re-checking (time), the elder
+does not need re-training (mode_sensitivity), the independence count
+needs recomputing (diffusion). Rolling any of these into a single
+freshness scalar would erase the information that's the actual output.
 
 ## Mode-harness claims (`modes.py`)
 
