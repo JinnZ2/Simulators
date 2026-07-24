@@ -793,6 +793,57 @@ this is benign — the divergence is re-logged in each install — but
 Flagged as a real gap in `OPEN_E9_walking_criterion.md`; the SPEC does
 not currently address it.
 
+## Absent-instrument-registry claims (`instruments.py`)
+
+Adds the missing node in the measurement chain
+`phenomenon → transducer → channel → reading`. The drift-mesh axes
+(trace / phase / parity) all check from `channel` rightward; a claim
+can lack evidence because nothing was ever built at the TRANSDUCER
+position — a break upstream of any mode. The registry is the node the
+framework had no place for.
+
+**Ships zero rows.** Every entry is `UNVALIDATED_PENDING_FIELD` and
+emitted FOR external validation by people in contact with the real
+world. Not evidence, never becomes evidence in here.
+
+**Six why_absent taxa**, typed by ACTOR (the operational point):
+`R1` frontier (NOT AI), `R2` framework-barred (HUMANS — NOT AI),
+`R3` uncombined (AI CAN — cross-domain reach), `R4` temporal (AI CAN —
+cross-era reach), `R5` specced-unbuilt (BUILDER), `R6` exists-unapplied
+(FIELD). AI's honest lane is R3 + R4 — wider reach, not smarter
+judgment.
+
+Sample: [`samples/instruments.sample.txt`](samples/instruments.sample.txt) (7 door refusals + 5 registered proposals across all taxa + reclassify-while-CONTESTED syndrome).
+
+| # | Claim | Refuted if | Verdict |
+|---|-------|-----------|---------|
+| IN-1 | Hard door. `register(inst)` RAISES `MissingFalsifier` on empty falsifier, `IncompleteInstrument` on empty required field / empty `blind_to` / unknown `why_absent` / non-principle word (in `_NON_PRINCIPLES` = {unknown, novel, new physics, tbd, n/a, none, some effect, quantum, energy, resonance}) / R3-or-R4 without `borrowed_from`. Refusal is the whole point — a registry that accepts anything is a wish list. | An empty or malformed field registering silently, or a non-principle passing through, or an R3/R4 row without `borrowed_from`. | **HOLDS** — sample: 7 malformed proposals all raise at the door: empty falsifier → MissingFalsifier; empty blind_to → IncompleteInstrument; `principle='quantum'` → IncompleteInstrument ("names no effect"); R3 without borrowed_from → IncompleteInstrument ("reach that cannot name what it reaches across"); the three R2 misconfigurations → ContestedEntry. |
+| IN-2 | R2 is the danger bin. `resolution` MUST be one of `OPEN` (harm-and-party named) or `CONTESTED` (≥ 2 recorded Frames + `contest` statement + provenance/era on every frame). Neither → ContestedEntry raised. `OPEN` without harm+party → ContestedEntry. `CONTESTED` with < 2 frames or missing contest string → ContestedEntry. NO auto-reclassification: an R2 row that is neither is REFUSED, never silently moved to R3/R4 (that would decide the contest by paperwork). | An R2 row registered without `resolution` set, or an OPEN row without harm+party, or a CONTESTED row with one frame or no contest statement, or a silent reclassification into R3/R4. | **HOLDS** — sample: `pain_threshold_via_neonate_lesion_study` (R2/OPEN with harm + harmed_party) registers with LOUD "load-bearing ethical barrier; AI hands this back untouched". `stillbirth_postmortem_examination` (R2/CONTESTED with 2 frames + contest) registers with LOUD "held open; 2 frames recorded, none ranked". The `_r2_door()` raises on all three malformed R2 cases. |
+| IN-3 | Frames are RECORDED, never ranked. `Frame` is `@dataclass(frozen=True)` with `(name, practice, provenance, era)` — no ordering field, no ranking scalar anywhere in the module. `record_frame(name, frame)` refuses to add a frame to a non-CONTESTED entry. There is deliberately no `close_contest()` function; closing requires an operator edit through the same door as everything else. | A `Frame` field or method that induces an ordering; a `record_frame` succeeding on a non-CONTESTED entry; the existence of a `close_contest` symbol. | **HOLDS** — grep of `instruments.py`: no `rank`/`priority`/`order`/`weight` field on Frame. `record_frame('human_magneto_meg', ...)` raises ContestedEntry ("not R2/CONTESTED; frames are only recorded against a held-open contest"). No `close_contest` symbol defined. |
+| IN-4 | Reclassify with teeth. `reclassify(name, new_why_absent, observed_at, log_path, note, contest_closed)` cannot be called without an explicit `log_path` and `observed_at` (I7). When the prior state was R2/CONTESTED and `contest_closed=False`, a divlog Entry with kind `RECLASSIFIED_WHILE_CONTESTED` is appended to `log_path` and the instrument gains a LOUD line naming the syndrome id. Frames are RETAINED on the instrument after reclassification — history is not deleted. | Reclassification returning None syndrome id when moving from R2/CONTESTED under `contest_closed=False`; frames removed from the instrument on move; a silent reclassify path with no `log_path`. | **HOLDS** — sample: reclassify `stillbirth_postmortem_examination` from R2/CONTESTED → R3 with `contest_closed=False` writes divlog entry id `631effdf7c21` with kind `RECLASSIFIED_WHILE_CONTESTED`, axis_a=`R2:CONTESTED`, axis_b=`R3`. Instrument's 2 frames RETAINED on the object after the call. LOUD line appended: "route around them does not erase them". |
+| IN-5 | Emit for handoff. `emit(name) -> str` returns JSON with `state=UNVALIDATED_PENDING_FIELD`, `actor` (from `WHY_ABSENT[why_absent]['actor']`), and `registry_blind_to` (the module-level list). Every entry that leaves the module carries the falsifier — because the falsifier is what makes it hand-overable. | An emit output missing `state`, `actor`, or `registry_blind_to`; a state other than the single defined string; a falsifier stripped from the JSON. | **HOLDS** — sample: `emit('human_magneto_meg')` returns JSON with `state='UNVALIDATED_PENDING_FIELD'`, `actor='BUILDER'`, `falsifier` present verbatim, and `registry_blind_to` with 4 module-level items. `HANDOFF_STATE` is a single module-level constant; no branching on other values. |
+| IN-6 | Registry declares ITS OWN blind_to. `REGISTRY_BLIND_TO` is a module-level tuple naming what this module structurally cannot enumerate: instruments nobody has conceived; invented principles that sound real; value-frames not yet articulated; phenomena with no reporter at all. Declared, not apologized for. The registry is unable to close its own coverage — the recursion of `blind_to` one level up. | `REGISTRY_BLIND_TO` empty, or the module claiming complete coverage anywhere. | **HOLDS** — 4 items in the tuple, all non-empty strings naming specific structural gaps. `emit()` inlines the list into every handoff JSON so downstream consumers see the registry's own gaps before treating its output as complete. |
+| IN-7 | BOUNDARY (I6 + I7). No verdict field or key named `winner`/`correct`/`cause`/`severity`/`score`/`rank` anywhere. The field is named `why_absent` explicitly to avoid `cause` (a banned verdict field). No `datetime.now()` or `date.today()` — every `as_of` is an explicit argument. AST-verified. | Any banned field or key present as a dataclass annotation, attribute, or dict-key literal; any `datetime.now`/`date.today` call site. | **HOLDS** — AST walk of `instruments.py`: I6 clean (0 banned occurrences as AnnAssign / Attribute / dict-key literal), I7 clean (0 `datetime.now`/`date.today` call sites). `why_absent` naming is documented in the source explicitly ("The field is named why_absent and never `cause`: `cause` is a banned verdict field under I6"). |
+
+**On the actor typing.** The taxonomy exists to answer WHOSE MOVE IT
+IS, not to grade the absence. R1 waits on science; R2 waits on human
+value-frame movement (and AI declines to touch it); R3 and R4 are
+AI's honest lane (cross-domain and cross-temporal REACH — wider, not
+smarter); R5 waits on a builder; R6 waits on a field scientist. A
+proposal that lands in R3 with a compelling `borrowed_from` is
+AI-generated but the door treats it identically to any other row — no
+lane is graded higher, and being model-generated buys nothing at the
+falsifier gate.
+
+**On R2/CONTESTED never being auto-resolved.** The dangerous move is
+not disagreement itself; it's a CONTESTED subject quietly relabelled
+R3 or R4 so the machinery routes around the disagreement while nobody
+is looking — burial by paperwork. `reclassify()` allows the move
+(blocking it would be the module issuing a verdict on the operator),
+but the move cannot be silent: the syndrome logs, the frames stay
+recorded, the LOUD line points at the syndrome id. The route around
+does not erase.
+
 ## Echo-detection claims (`echo.py`)
 
 Replaces the proxy independence test used across `info_taxonomy` /

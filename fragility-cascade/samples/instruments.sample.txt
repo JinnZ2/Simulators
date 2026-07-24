@@ -1,0 +1,59 @@
+====================================================================
+instruments.py -- absent-instruments registry (v1)
+====================================================================
+
+why_absent taxonomy (6 taxa, typed by ACTOR):
+  R1 frontier             actor=NOT AI               unlock: science reaches the effect the instrument wo
+  R2 framework-barred     actor=HUMANS -- NOT AI     unlock: a value-frame shifts, or the contest closes
+  R3 uncombined           actor=AI CAN               unlock: cross-DOMAIN transfer: every transduction pr
+  R4 temporal             actor=AI CAN               unlock: cross-TEMPORAL reach: a duration/cadence no 
+  R5 specced-unbuilt      actor=BUILDER              unlock: funding / fabrication
+  R6 exists-unapplied     actor=FIELD                unlock: point the existing instrument at this claim
+
+Ships ZERO rows. Rows are field content, not architecture.
+REGISTRY on import: 0 rows.
+
+DOOR (hard falsifier gate):
+  empty falsifier      RAISED MissingFalsifier -- instrument 'x': no falsifier. Nothing to hand to the fi
+  empty blind_to       RAISED IncompleteInstrument -- instrument 'x': blind_to is empty. Every channel is bli
+  non-principle        RAISED IncompleteInstrument -- instrument 'x': principle='quantum' names no effect. An
+  R3 no borrow         RAISED IncompleteInstrument -- instrument 'x': R3 claims reach (uncombined) but borrow
+  R2 no resolution     RAISED ContestedEntry -- instrument 'x': why_absent=R2 requires resolution in ('
+  R2/OPEN no harm      RAISED ContestedEntry -- instrument 'x': R2/OPEN requires BOTH harm and harmed_p
+  R2/CON 1 frame       RAISED ContestedEntry -- instrument 'x': CONTESTED requires >= 2 frames recorded
+
+REGISTERED PROPOSALS (all UNVALIDATED_PENDING_FIELD by construction):
+  [R5] human_magneto_meg                                    actor=BUILDER
+  [R3] seasonal_bearing_via_soil_thermal_lag                actor=AI CAN
+  [R4] road_grade_from_snow_settlement_photos               actor=AI CAN
+  [R2] pain_threshold_via_neonate_lesion_study              actor=HUMANS -- NOT AI
+    LOUD: R2/OPEN: load-bearing ethical barrier. actor=HUMANS -- NOT AI. AI hand
+  [R2] stillbirth_postmortem_examination                    actor=HUMANS -- NOT AI
+    LOUD: R2/CONTESTED: held open. 2 frames recorded, none ranked. Not resolvabl
+
+by_actor routing:
+  HUMANS -- NOT AI: ['pain_threshold_via_neonate_lesion_study', 'stillbirth_postmortem_examination']
+  AI CAN: ['road_grade_from_snow_settlement_photos', 'seasonal_bearing_via_soil_thermal_lag']
+  BUILDER: ['human_magneto_meg']
+
+held_open() = ['stillbirth_postmortem_examination']
+
+emit(human_magneto_meg) -> handoff JSON (excerpt):
+  state: UNVALIDATED_PENDING_FIELD
+  actor: BUILDER
+  falsifier: no MEG signal above sham baseline across N shielded trials
+  registry_blind_to (module-level): 4 items
+
+reclassify while CONTESTED -- syndrome logged into divlog:
+  syndrome id logged: 631effdf7c21
+  frames RETAINED after reclassification: 2 frames still present
+  divlog entry: id=631effdf7c21 kind=RECLASSIFIED_WHILE_CONTESTED
+    axis_a='R2:CONTESTED' -> axis_b='R3'
+
+REGISTRY_BLIND_TO (module-level, the recursion):
+  - instruments nobody has conceived -- unenumerable by construction
+  - invented principles that sound like real ones; the door checks that a principle is NAMED, not that it is real. Naming is the operator's and the field's job.
+  - value-frames not yet articulated by anyone, which cannot be recorded as priors under a CONTESTED entry
+  - phenomena with no reporter at all -- nobody has said 'I sense this', so no claim exists to hang an absent instrument on
+
+====================================================================
