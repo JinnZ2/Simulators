@@ -1,107 +1,234 @@
 """
-syndrome.py -- parity / trace / mesh on the divergence log. CC0. stdlib only.
-imports divlog. (entrain is orthogonal; syndrome reads whatever phase fields
-are already on the entries.)
+syndrome.py -- parity between peers, without reading content. v1 against SPEC.
+CC0. stdlib only. imports clock, entrain, divlog.
 
-Reads a divergence log and returns FLAT LISTS:
-    parity(entries)          count entries by KIND, on digest+band only.
-                             Never a score. Counts are for the operator.
-    trace(entries, primary)  entries where axis_a or axis_b is `primary`,
-                             ordered as recorded. The primary's own history.
-    mesh(entries)            the 3x3 (target x kind), flat list of cells.
-                             Every cell carries its entries; nothing is
-                             aggregated into a scalar.
+    TRACE     vertical    module reading  vs  primary reference     (metrology)
+    PARITY    horizontal  module reading  vs  peer module reading   (syndrome)
+    PHASE     temporal    time since each module last re-read ref   (zeitgeber)
 
-No aggregation. No verdicts. The log's shape is the answer; the operator
-looks at it.
+parity() reads two 12-char digests and two band labels. It never opens the
+claim. It never picks a winner. RAISES on cross-target comparison (I2).
+
+trace() would recompute a reading from primary. The spec's Reading holds
+`inputs_digest` (the FINGERPRINT), not the raw inputs, so trace requires the
+caller to supply the inputs it used. Missing inputs -> None with LOUD (I4).
+
+mesh() runs every pairwise parity within a target, every trace where inputs
+are supplied, and one phase check per peripheral. Flat list; no aggregation.
 """
 
 from dataclasses import dataclass, field
-from typing import Dict, List, Iterable
+from typing import Optional, List, Dict, Iterable
+import hashlib, json
 
+import clock
+import entrain
 import divlog
 
 
-TARGETS = ("claim", "mode_sensitivity", "independence")
-
-MESH_KINDS = (divlog.KIND_DIVERGENCE_SAME_FACTS,
-              divlog.KIND_HOMOPLASY,
-              divlog.KIND_DIVERGENCE_DIFFERENT_INPUTS)
-# AGREEMENT_SAME_FACTS is intentionally omitted from the mesh -- trivial
-# agreement is logged (see divlog docstring) but is not part of the syndrome
-# shape. The mesh is what needs looking at.
-
-
-# --------------------------------------------------------------------- parity
-
-def parity(entries: Iterable[divlog.Entry]) -> Dict[str, int]:
-    """Count entries by KIND. Digest+band only; no other axis reads."""
-    counts = {k: 0 for k in divlog.KINDS}
-    for e in entries:
-        counts[e.kind] = counts.get(e.kind, 0) + 1
-    return counts
-
-
-# ---------------------------------------------------------------------- trace
-
-def trace(entries: Iterable[divlog.Entry], primary: str) -> List[divlog.Entry]:
-    """Return every entry involving `primary` on either axis, in original order.
-    The primary is the reference; trace is the primary's own divergence
-    history."""
-    return [e for e in entries if e.axis_a == primary or e.axis_b == primary]
-
-
-# ----------------------------------------------------------------------- mesh
+# ------------------------------------------------------------------- reading
 
 @dataclass
-class MeshCell:
-    target: str
+class Reading:
+    module: str                    # who made the reading
+    target: str                    # MUST be one of clock target names
+    subject: str                   # claim id / mode name / anchor id
+    band: Optional[str]            # FRESH / DECAYING / STALE / EXPIRED / UNDETERMINED
+    governing: Optional[str]       # which clock channel governed, or None
+    inputs_digest: str             # sha256[:12] of sorted (key, value) pairs
+    as_of: str                     # when the reading was taken (explicit; I7)
+
+
+def digest(inputs: dict) -> str:
+    """
+    Canonical fingerprint of the inputs a reading was computed from.
+    Sorted keys; None rendered as the string "None" so a missing input is
+    part of the fingerprint, not invisible. Two readings that both silently
+    dropped the same field would collide if None were skipped; here they
+    hash the same because the None is part of the canonical form -- exactly
+    the shared-blindness case we want to be visible, not hidden.
+    """
+    canonical = [(k, "None" if inputs[k] is None else repr(inputs[k]))
+                 for k in sorted(inputs.keys())]
+    blob = json.dumps(canonical, sort_keys=True)
+    return hashlib.sha256(blob.encode()).hexdigest()[:12]
+
+
+# ------------------------------------------------------------------ syndrome
+
+KIND_SAME_INPUTS_DIFF_BAND  = "SAME_INPUTS_DIFF_BAND"    # real module disagreement
+KIND_DIFF_INPUTS_DIFF_BAND  = "DIFF_INPUTS_DIFF_BAND"    # separate bucket
+KIND_DIFF_INPUTS_SAME_BAND  = "DIFF_INPUTS_SAME_BAND"    # homoplasy analogue
+KIND_MISSING                = "MISSING"                  # UNDETERMINED input
+KIND_TRACE_DIVERGENCE       = "TRACE_DIVERGENCE"         # drift from primary
+KIND_PHASE_DRIFTED          = "PHASE_DRIFTED"
+KIND_PHASE_FREE_RUNNING     = "PHASE_FREE_RUNNING"
+KIND_PHASE_NEVER            = "PHASE_NEVER"
+
+
+@dataclass
+class Syndrome:
     kind: str
-    entries: List[divlog.Entry] = field(default_factory=list)
+    a: Reading
+    b: Optional[Reading] = None    # None for TRACE and PHASE syndromes
+    detail: str = ""
+    loud: List[str] = field(default_factory=list)
 
 
-def mesh(entries: Iterable[divlog.Entry],
-         targets=TARGETS, kinds=MESH_KINDS) -> List[MeshCell]:
+# ------------------------------------------------------- horizontal: parity
+
+def parity(a: Reading, b: Reading) -> Optional[Syndrome]:
     """
-    Flat list of `len(targets) * len(kinds)` cells. Every cell carries the
-    entries that landed in it. Nothing is counted, nothing is scored.
-
-    Cells are emitted in row-major order (all kinds of target[0], then all
-    kinds of target[1], ...). Empty cells are emitted with `entries=[]`.
+    Compare two peer readings. Digests + bands only -- never opens the claim.
+    RAISES on cross-target comparison (I2) or subject mismatch.
+    Returns None on trivial agreement (same digest AND same band); a Syndrome
+    otherwise.
     """
-    cells: List[MeshCell] = []
-    by_key: Dict[tuple, List[divlog.Entry]] = {}
-    for e in entries:
-        by_key.setdefault((e.target, e.kind), []).append(e)
-    for t in targets:
-        for k in kinds:
-            cells.append(MeshCell(target=t, kind=k,
-                                  entries=list(by_key.get((t, k), []))))
-    return cells
+    if a.target != b.target:
+        raise ValueError(
+            f"cross-target comparison forbidden (I2): "
+            f"a.target={a.target!r} vs b.target={b.target!r} -- claim, "
+            f"mode_sensitivity, and independence are separate meshes")
+    if a.subject != b.subject:
+        raise ValueError(
+            f"subject mismatch: a.subject={a.subject!r} vs "
+            f"b.subject={b.subject!r}")
+
+    # I4: missing input goes LOUD + UNDETERMINED, never silent-agreement
+    if a.band == "UNDETERMINED" or b.band == "UNDETERMINED":
+        return Syndrome(
+            KIND_MISSING, a, b,
+            detail=f"a.band={a.band}, b.band={b.band}",
+            loud=[f"one or both sides UNDETERMINED -- LOUD, no agreement "
+                  "inferred from absence (I4)"])
+
+    same_digest = (a.inputs_digest == b.inputs_digest)
+    same_band = (a.band == b.band)
+
+    if same_digest and same_band:
+        return None
+
+    if same_digest and not same_band:
+        return Syndrome(
+            KIND_SAME_INPUTS_DIFF_BAND, a, b,
+            detail=f"digests match ({a.inputs_digest}); bands differ "
+                   f"({a.band} vs {b.band})")
+
+    if not same_digest and same_band:
+        return Syndrome(
+            KIND_DIFF_INPUTS_SAME_BAND, a, b,
+            detail=f"agreement from different inputs ({a.inputs_digest} vs "
+                   f"{b.inputs_digest}) -- homoplasy analogue; logged but not "
+                   f"evidence of agreement")
+
+    return Syndrome(
+        KIND_DIFF_INPUTS_DIFF_BAND, a, b,
+        detail=f"different inputs ({a.inputs_digest} vs {b.inputs_digest}); "
+               f"different bands ({a.band} vs {b.band}); separate bucket -- "
+               f"NOT module disagreement")
 
 
-# ------------------------------------------------------------ pretty-print
+# ------------------------------------------------------- vertical: trace
 
-def print_mesh(cells: List[MeshCell]) -> None:
-    """Diagnostic view: rows are targets, columns are kinds, cells show
-    count and a leading subject sample. No aggregation happens here either
-    -- this is a formatter, not a metric."""
-    from collections import OrderedDict
-    per_target: Dict[str, List[MeshCell]] = OrderedDict()
-    for c in cells:
-        per_target.setdefault(c.target, []).append(c)
-    if not per_target:
-        print("  (empty mesh)")
-        return
-    kinds = [c.kind for c in next(iter(per_target.values()))]
-    print("  " + " " * 22 + "  ".join(f"{k[:26]:>26s}" for k in kinds))
-    for t, row in per_target.items():
-        cells_txt = []
-        for c in row:
-            n = len(c.entries)
-            sample = ""
-            if c.entries:
-                s = c.entries[0].subject
-                sample = f" e.g. {s[:18]}"
-            cells_txt.append(f"n={n}{sample:<21}")
-        print(f"  {t:20s}  " + "  ".join(f"{txt:>26s}" for txt in cells_txt))
+def trace(r: Reading, now: str,
+          inputs: Optional[Dict] = None) -> Optional[Syndrome]:
+    """
+    Vertical check: recompute the reading from primary and compare bands.
+
+    The Reading holds only `inputs_digest` (the fingerprint), not the raw
+    inputs. To recompute, the caller must supply `inputs` -- the same dict
+    it hashed into `inputs_digest`. If not supplied, trace returns None with
+    LOUD (I4): the check cannot be performed without them.
+
+    On band mismatch, kind=TRACE_DIVERGENCE means the module's own copy of
+    the logic (or its inputs) has drifted from the registry.
+    """
+    if inputs is None:
+        return Syndrome(
+            KIND_MISSING, r, None,
+            detail="trace cannot recompute without raw inputs",
+            loud=[f"trace('{r.module}/{r.subject}') called without inputs -- "
+                  "LOUD, cannot compare against primary (I4)"])
+
+    # verify the supplied inputs match the reading's declared digest --
+    # otherwise the caller is comparing something OTHER than what the module
+    # originally read, which is not what trace measures
+    if digest(inputs) != r.inputs_digest:
+        return Syndrome(
+            KIND_MISSING, r, None,
+            detail=f"supplied inputs digest != reading.inputs_digest",
+            loud=[f"trace inputs' digest {digest(inputs)!r} does not match "
+                  f"reading.inputs_digest {r.inputs_digest!r} -- supplied "
+                  "inputs are not what was originally read"])
+
+    o = clock.Observation(now=now, **inputs)
+    d = clock.decay(o)
+    primary_band = d.band.get(r.target, "UNDETERMINED")
+
+    if primary_band == r.band:
+        return None
+    return Syndrome(
+        KIND_TRACE_DIVERGENCE, r, None,
+        detail=f"module band={r.band} vs primary band={primary_band} "
+               f"(target={r.target})",
+        loud=[f"module '{r.module}' band ({r.band}) diverges from primary "
+              f"({primary_band}) on target '{r.target}' -- the module's own "
+              "copy of the logic has drifted from the registry"])
+
+
+# --------------------------------------------------------- temporal: mesh
+
+def mesh(readings: List[Reading], now: str,
+         inputs_by_reading: Optional[Dict[str, Dict]] = None
+         ) -> List[Syndrome]:
+    """
+    The full mesh: every pairwise parity within a (target, subject) group,
+    every trace where inputs are supplied, one phase per registered
+    peripheral. Flat list. No aggregation, no counts-as-score (I1).
+
+    inputs_by_reading is keyed by "{module}/{target}/{subject}" ->
+    the raw inputs dict; used ONLY by trace (parity never opens content).
+    """
+    out: List[Syndrome] = []
+    ibr = inputs_by_reading or {}
+
+    # group by (target, subject) so parity never crosses targets (I2)
+    groups: Dict[tuple, List[Reading]] = {}
+    for r in readings:
+        groups.setdefault((r.target, r.subject), []).append(r)
+
+    for _, group in groups.items():
+        for i, a in enumerate(group):
+            for b in group[i + 1:]:
+                s = parity(a, b)
+                if s is not None:
+                    out.append(s)
+            key = f"{a.module}/{a.target}/{a.subject}"
+            t = trace(a, now, inputs=ibr.get(key))
+            if t is not None:
+                out.append(t)
+
+    # one phase check per module that has a registered peripheral
+    seen_modules = {r.module for r in readings}
+    for name in sorted(seen_modules):
+        if name not in entrain.PERIPHERALS:
+            continue
+        ph = entrain.phase(name, now)
+        if ph.name == entrain.PHASE_ENTRAINED:
+            continue
+        # DRIFTED / FREE_RUNNING / NEVER -> surface as a Syndrome, no Reading
+        kind_map = {
+            entrain.PHASE_DRIFTED: KIND_PHASE_DRIFTED,
+            entrain.PHASE_FREE_RUNNING: KIND_PHASE_FREE_RUNNING,
+            entrain.PHASE_NEVER: KIND_PHASE_NEVER,
+        }
+        placeholder = Reading(module=name, target="phase", subject=name,
+                              band=None, governing=None, inputs_digest="",
+                              as_of=now)
+        out.append(Syndrome(
+            kind_map[ph.name], placeholder, None,
+            detail=f"phase.{ph.name} days_since={ph.days_since_entrained} "
+                   f"interval={ph.interval}",
+            loud=ph.loud))
+
+    return out

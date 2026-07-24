@@ -701,66 +701,97 @@ robustness — they'll go blind together. The audit names which is
 which so the operator can distinguish a resilient redundancy from a
 correlated one.
 
-## Divergence-log claims (`divlog.py` + `entrain.py` + `syndrome.py`)
+## Drift-mesh claims (`divlog.py` + `entrain.py` + `syndrome.py`)
 
 Three-module stack for logging module disagreements as they occur,
-without picking winners, assigning causes, or grading severity.
+without picking winners, assigning causes, or grading severity. Now
+built against `SPEC_drift_mesh.md`, with `PROVENANCE_drift_mesh.md`
+as the WHY.
 
-- **`divlog.py`** — append-only NDJSON. `Entry` carries `observed_at /
-  target / subject / axis_a / axis_b / kind / band_a / band_b /
-  digest_a / digest_b / governing_a / governing_b / ref_version /
-  phase_a / phase_b / supersedes / note`. `kind` is classified from
-  `digest × band` only. `residual(history)` classifies the SHAPE of a
-  history: NEW / FLAT / WALKING / WIDENING.
-- **`entrain.py`** — zeitgeber. `reference_version(state)` is a
-  deterministic canonical-JSON fingerprint. `phase(recorded, current)`
-  returns ENTRAINED / FREE_RUNNING / DRIFTED / NEVER.
-- **`syndrome.py`** — flat readouts. `parity()` counts by kind;
-  `trace(entries, primary)` filters to entries involving the primary;
-  `mesh()` returns the 3 × 3 (target × kind) as a flat list of cells,
-  never aggregated.
+**Prior versions retired to `legacy/`.** `divlog_v1.py` (pre-spec
+draft) and `divlog_v2.py` (first spec pass) both live in legacy;
+`entrain_v1.py` and `syndrome_v1.py` are the retired earlier
+implementations. See `legacy/README.md` for full retirement
+rationale on each.
 
-Sample: [`samples/divlog_entrain_syndrome.sample.txt`](samples/divlog_entrain_syndrome.sample.txt) (5 entries covering all four kinds; NDJSON round-trip; residual on a subject history; phase before/after primary moves; parity/trace/mesh output).
+- **`divlog.py`** — append-only NDJSON. `Entry` is frozen; `id` is a
+  `@property` (`sha256[:12]` of all fields except `note`). `_guard()`
+  runtime-checks against `_BANNED = (winner, correct, cause, severity,
+  score, rank)` before every append. `residual(entries) → Residual`
+  classifies shape (NEW / FLAT / WALKING / INTERMITTENT / WIDENING)
+  with the entry ids read and a LOUD list. `history(path, target,
+  subject, axis_a, axis_b)` is the pair-based, order-insensitive
+  baseline query.
+- **`entrain.py`** — zeitgeber. `Peripheral` dataclass + `PERIPHERALS`
+  registry + `register_peripheral(p)` door. `reference_version()`
+  takes no args and fingerprints `clock.CHANNELS + clock.VOLATILITY`
+  directly. `phase(name, now) → Phase` returns ENTRAINED /
+  FREE_RUNNING / DRIFTED / NEVER with `days_since_entrained` +
+  `interval` + LOUD flags. `entrain(name, now)` records the pull —
+  writes `last_entrained` and `ref_version`; never touches readings.
+- **`syndrome.py`** — parity between peers, without reading content.
+  `Reading(module, target, subject, band, governing, inputs_digest,
+  as_of)` is the input type; `Syndrome(kind, a, b, detail, loud)` is
+  the output. `parity()` raises on cross-target comparison (T1 / I2).
+  `digest(inputs)` renders `None` as `"None"` so shared-blindness
+  cases hash the same rather than hide. `trace(r, now, inputs)`
+  requires inputs to recompute; missing → LOUD. `mesh(readings, now,
+  inputs_by_reading)` groups by (target, subject) — cross-target
+  parity impossible by construction.
+
+Sample: [`samples/divlog_entrain_syndrome.sample.txt`](samples/divlog_entrain_syndrome.sample.txt) (mesh + peripherals + residual across three subject histories; T6 FREE_RUNNING demonstrated end-to-end).
+
+**All SPEC T1..T12 pass**:
+
+```
+T1  PASS  parity() raises on cross-target                            (I2)
+T2  PASS  same digest, diff band -> SAME_INPUTS_DIFF_BAND
+T3  PASS  diff digest, diff band -> DIFF_INPUTS_DIFF_BAND (separate bucket)
+T4  PASS  diff digest, same band -> DIFF_INPUTS_SAME_BAND (logged, homoplasy)
+T5  PASS  peripheral never entrained -> phase NEVER, LOUD            (I4)
+T6  PASS  add clock channel -> reference_version changes -> peripheral
+          within interval flips to FREE_RUNNING                      (I8, D10)
+T7  PASS  3x same pair -> residual FLAT
+T8  PASS  3x FRESH/DECAYING/STALE gap -> residual WALKING
+T9  PASS  n=1 -> residual NEW (no baseline)                          (D7)
+T10 PASS  2 appends -> 2 loaded in order; ids stable
+T11 PASS  no winner/correct/cause/severity/score/rank field or key   (I6)
+T12 PASS  no datetime.now / date.today anywhere                      (I7)
+```
 
 | # | Claim | Refuted if | Verdict |
 |---|-------|-----------|---------|
-| DL-1 | `classify_kind(digest_a, digest_b, band_a, band_b)` is a pure function of the four inputs and returns exactly one of `DIVERGENCE_SAME_FACTS` (same digest, different band), `DIVERGENCE_DIFFERENT_INPUTS` (different digest, different band), `HOMOPLASY` (different digest, same band), `AGREEMENT_SAME_FACTS` (same digest, same band). Never returns a winner, cause, or severity. | A `kind` value outside the four, or a classification depending on any input other than digests+bands. | **HOLDS** — sample: all four kinds fire exactly once on the 5-entry corpus. Signature is `(str, str, str, str) -> str`; no other inputs; no import of anything scoring. |
-| DL-2 | `append(path, entry)` writes one NDJSON line, opens the file in `"a"` mode ONLY (E3 verified via grep — no `"w"` opens exist in the module). `load(path)` returns the full log in order; empty/missing file → `[]`. Round-trip preserves ids across serialization. `supersedes` is a REVISIT pointer (Optional[str], another entry's id), not a delete. | Any `"w"` mode open surviving in the module, a round-trip losing ids, or `supersedes` deleting a prior entry. | **HOLDS** — sample: E3 grep for `open\(.*'w'` returns 0 hits. Wrote 5 entries; loaded 5; `[e.id for e in loaded] == [e.id for e in entries]` is True. No delete path exists anywhere in the module. |
-| DL-3 | `residual(history)` returns a SHAPE label, never a severity. `n=0` → EMPTY. `n=1` → NEW (not a verdict — the module says so verbatim per D7). n≥2: WIDENING if a governing channel appears in the later half absent from the earlier half; else FLAT if all gaps equal; else INTERMITTENT if consecutive-diffs have BOTH signs (direction reversal); else WALKING (monotone). Five outcomes total. | A residual firing that grades severity, or a WIDENING verdict without a new governing channel, or an INTERMITTENT verdict on a monotone sequence. | **HOLDS with OPEN E9** — sample: `residual` on `soil_bearing_ok` returns `WIDENING` (new `transmission` channel). `residual([])` = EMPTY. `residual([one])` = NEW. INTERMITTENT sample: gaps [3, 0, -3, 3], diffs [-3, -3, +6], both signs → INTERMITTENT ✓. **OPEN E9**: `residual([-1, 0, +2])` returns WALKING under this rule (monotone increasing); SPEC_intent for that sequence was INTERMITTENT. Held OPEN in [`OPEN_E9_walking_criterion.md`](OPEN_E9_walking_criterion.md); resolution via a NEW entry that supersedes id `8a6a9e291671`, per D5. NOT patched. |
-| DL-4 | `Entry` is `@dataclass(frozen=True)`. `id` is a `@property` returning `sha256(json_canonical(all fields except note))[:12]`. `note` is operator-only per D8 and MUST NOT enter the identity — two entries differing only in `note` return the same id. | An `Entry` field settable after construction; `id` including the `note` field; or two entries with identical non-note fields returning different ids. | **HOLDS** — sample: `e_alpha` (note='alpha') and `e_beta` (note='beta different note') with all other fields identical both return id `9468264dba6a`. Attempting `e.kind = "X"` after construction raises `FrozenInstanceError` (dataclass frozen semantics). `id` implementation iterates `fields(self)` skipping `"note"`. |
-| DL-5 | `history(entries, subject)` returns every entry whose `subject == subject`, in original order. The baseline query per D5: "off the same way as in March, or is this new?" is answerable only via this filtered list. `load()` returns the full log; `history()` narrows to one subject; neither aggregates. | `history()` returning entries in altered order, or dropping entries matching the subject, or aggregating counts. | **HOLDS** — sample: `history(entries, 'soil_bearing_ok')` returns 3 of 5, in observed_at order (the natural append order). The other 2 entries (subject='pour_gate') correctly excluded. No aggregation; the list carries `Entry` objects. |
-| ZG-1 | `reference_version(state)` is deterministic and content-addressed: `_canonical()` sorts dict keys, recurses into nested containers, normalizes sets. Same state → same fingerprint; any change → new fingerprint. `state=None` → `""`. Fingerprints are prefixed (default `"ref:"`) and truncated to a fixed 16-hex tail. | Two calls with the same state returning different fingerprints, or a state change (added key, moved value, reordered set) not changing the fingerprint. | **HOLDS** — sample: `ref_v1` (as_of='2026-06-01') and `ref_v2` (as_of='2026-06-30') differ in one field → distinct fingerprints (`ref:56fcc3c6...` vs `ref:006ca0e9...`). Re-hashing `primary_state_v1` returns `ref_v1` identically. |
-| ZG-2 | `phase(recorded, current)` returns one of four labels: `NEVER` (current is None/empty — there IS no primary), `FREE_RUNNING` (recorded is None/empty — the reader never claimed alignment), `ENTRAINED` (recorded == current), `DRIFTED` (recorded != current — was aligned; no longer). Four distinct branches; no fifth state. | A phase value outside the four, or `ENTRAINED` firing when the strings differ, or `DRIFTED` firing when `current` is None (would need to be NEVER). | **HOLDS** — sample: after primary moves from `ref_v1` to `ref_v2`, all 5 log entries report `DRIFTED` on both axes (they were captured at v1, primary is now v2). `phase(None, ref_v2)` → FREE_RUNNING; `phase(ref_v1, None)` → NEVER; `phase(ref_v1, ref_v1)` → ENTRAINED. |
-| ZG-3 | `entrain` NEVER mutates a stored log to reflect drift. A stored `Entry` keeps its `phase_a` / `phase_b` fields as captured; `phase_pair(entry, current)` computes phase against a NEW primary WITHOUT touching the entry. The log's honesty is that DRIFTED becomes visible post-hoc when audited, not that entries are rewritten to hide it. | An `entrain` function that writes back to a `divlog.Entry` or its file. | **HOLDS** — `phase_pair()` returns a tuple; no writes anywhere in the module. `entrain.py` imports `divlog` for `Entry` typing only. No `append` or file I/O in entrain. |
-| SY-1 | `parity(entries)` returns `{kind: count}` covering all four `divlog.KINDS`. Empty input returns all zeros. Never a score, never weighted. | A missing kind key, a non-integer count, or a weighted sum. | **HOLDS** — sample: `parity` returns 4 keys, one per kind, with counts 2/1/1/1. Verified against manual count of the 5-entry corpus. `parity([])` returns 4 zeros. |
-| SY-2 | `trace(entries, primary)` returns every entry where `axis_a == primary` OR `axis_b == primary`, in ORIGINAL order. Never re-sorts by time or severity. | Entries returned in a different order, or entries not involving `primary` sneaking in. | **HOLDS** — sample: `trace(entries, 'penetrometer')` returns 4 of 5 entries in the original append order (the `hand_test`/`surface_reading` entry correctly excluded). The one excluded entry involves neither axis. |
-| SY-3 | `mesh(entries)` returns `len(targets) × len(kinds)` cells as a FLAT list. Each cell carries its matching entries in a `MeshCell(target, kind, entries)`. Empty cells are emitted with `entries=[]` — never dropped. No cell holds an aggregated scalar. | Cells returned as a nested dict, or empty cells omitted, or a cell holding a count instead of the entries. | **HOLDS** — sample: 3 targets × 3 kinds = 9 cells returned. Empty cells (e.g. `independence × HOMOPLASY`) present with `entries=[]`. Every non-empty cell holds the raw `Entry` objects; `print_mesh` computes counts as a display concern, not stored in the cell. Note: `AGREEMENT_SAME_FACTS` is intentionally NOT in the mesh (it's logged for denominator honesty but is not part of the syndrome shape); `MESH_KINDS` is a documented subset. |
-| SY-4 | BOUNDARY: no module in this stack picks a winner, assigns cause, or grades severity. `divlog` classifies kind from digest+band only. `entrain` reports phase, nothing else. `syndrome` counts and filters — every returned surface is a list, dict of counts, or dict of raw entries. No `severity`, `blame`, `worse_than`, `resolve`, `merge`, or `winner` symbol anywhere in the three modules. | Any function returning a score, a winner, an assigned cause, or a severity level. | **HOLDS** — grep confirms none of `severity|winner|blame|cause|worse|resolve|merge` appears in any of the three modules' public API. The mesh even omits `AGREEMENT_SAME_FACTS` by design — that's the closest thing to aggregation, and it's documented as an intentional omission (trivial agreement is logged but is not part of the syndrome). |
+| DL-1 | `Entry` is `@dataclass(frozen=True)`. `id` is a `@property` returning `sha256[:12]` of `asdict(self)` minus `note` (D8). `_guard(entry)` in `append()` runtime-checks against `_BANNED = (winner, correct, cause, severity, score, rank)` and raises before writing. | Any Entry field settable post-construction; id including note; a banned field slipping through into the file. | **HOLDS** — T11 grep shows no banned fields as attributes/keys. `_guard` is called first in every `append`. Any attempt to mutate a frozen Entry raises `FrozenInstanceError`. |
+| DL-2 | `append(path, entry)` opens the file in `"a"` mode ONLY. No `open(..., "w")` in the module. Two appends → two loaded, in order, with ids preserved. `supersedes` is a REVISIT pointer (`Optional[str]`, another entry's id), not a delete path. | Any `"w"` open surviving in the module; ids reordered by `load()`; `supersedes` deleting a prior entry. | **HOLDS** — T10 verified: 2 appends → 2 loaded in observed order; ids `782f1a88e2f6, 778a9c36fb07` stable across serialization. No delete path exists anywhere in the module. |
+| DL-3 | `residual(entries) → Residual(shape, n, read_ids, loud)`. `shape ∈ {NEW, FLAT, WALKING, INTERMITTENT, WIDENING}`. n<2 → NEW. Same kind + same band pair across history → FLAT. Monotone band-gap → WALKING. Distinct governing channels grow across history (≥ 2 growth events) → WIDENING. Otherwise → INTERMITTENT. Never grades severity, never picks a side. | An INTERMITTENT verdict on a monotone sequence, or a WIDENING verdict with fewer than 2 growth events, or a residual returning a scalar severity. | **HOLDS with OPEN E9** — T7/T8/T9 verified in the test harness. Sample: `drift_A` (FRESH/DEC/STALE on axis_b) → WALKING; `drift_B` (identical 3x) → FLAT; `drift_C` (3 distinct governing_b values) → WIDENING. **OPEN E9**: `residual([-1, 0, +2] gap)` returns WALKING (monotone increasing); SPEC_intent was INTERMITTENT. Held OPEN in [`OPEN_E9_walking_criterion.md`](OPEN_E9_walking_criterion.md); ids that reference the divergence: user 03efe4e41e61, earlier install 8a6a9e291671, current install 48da4f4d47cd. Resolution = new entry that supersedes, per D5, plus a versioned rule change. |
+| ZG-1 | `reference_version()` takes NO args (D10, I8). Reads `clock.CHANNELS` (channel name + target) and `clock.VOLATILITY` (class name + span_days), sorts, returns `sha256[:12]` of canonical JSON. Any registry edit changes the string. Modules keep NO private copy of the reference — they hold a `ref_version` string and a `last_entrained` timestamp, and re-read. | `reference_version` accepting a state argument; a channel/volatility edit not changing the fingerprint; a module attribute caching the raw registry state instead of a version string. | **HOLDS** — T6 verified: adding a `DUMMY_T6` channel to `clock.CHANNELS` changes `reference_version()` from `5e82b1643322` to `fd1b8de996fc`, and a peripheral within interval flips to FREE_RUNNING as a result. Signature is `def reference_version() -> str` — no args. |
+| ZG-2 | `phase(name, now) → Phase(name, days_since_entrained, interval, recorded_ref, current_ref, loud)`. Four states: NEVER (last_entrained is None → LOUD), FREE_RUNNING (within interval BUT ref moved), DRIFTED (past interval), ENTRAINED. `now` is always an explicit argument (I7). | An implicit `date.today()` in the module; a phase outside the four states; FREE_RUNNING firing when ref matches; DRIFTED firing when within interval. | **HOLDS** — T5 (NEVER + LOUD), T6 (FREE_RUNNING after registry move), T12 (no implicit now anywhere) all verified. Four states are exhaustive branches. |
+| ZG-3 | `entrain(name, now)` mutates ONLY the Peripheral in the registry (writes `last_entrained` and `ref_version`). Does NOT touch any module's readings — the log, if any, stays byte-for-byte identical (D11). `Peripheral` is a plain (non-frozen) dataclass so registry state can update; `divlog.Entry` remains frozen. | `entrain()` writing to a divlog file, or mutating any object outside its own Peripheral. | **HOLDS** — grep of `entrain.py`: `entrain()` sets `p.last_entrained` and `p.ref_version` only; no file I/O; no imports of divlog. Peripheral is `@dataclass` (mutable); Entry is `@dataclass(frozen=True)` (immutable). |
+| SY-1 | `parity(a: Reading, b: Reading) → Optional[Syndrome]`. RAISES `ValueError` on `a.target != b.target` (I2, T1) or subject mismatch. Returns None on trivial agreement (same digest AND same band). Otherwise returns a `Syndrome` with kind ∈ {SAME_INPUTS_DIFF_BAND, DIFF_INPUTS_DIFF_BAND, DIFF_INPUTS_SAME_BAND, MISSING}. Never opens content (D2, I3). | A silent None on cross-target instead of raise; agreement dropped instead of returning None; a kind outside the four; parity opening claim content. | **HOLDS** — T1/T2/T3/T4 all verified. Signature is 4 lines of dataclass-field comparison + digest+band comparison. No content access anywhere. |
+| SY-2 | `digest(inputs)` renders `None` as the string `"None"` in the canonical form (D3). Two readings that both silently dropped the same field DO fingerprint identically — but the None is visible in the canonical string, not hidden. That's the shared-blindness case surfacing as a match on `MISSING`-adjacent digests, not as invisible agreement. | `None` skipped in the canonical form; two readings dropping different fields fingerprinting the same. | **HOLDS** — code inspection: `[(k, "None" if inputs[k] is None else repr(inputs[k])) for k in sorted(inputs)]`. None enters the fingerprint literally. |
+| SY-3 | `trace(reading, now, inputs=None) → Optional[Syndrome]`. Without inputs → MISSING with LOUD (I4). With inputs whose digest doesn't match the reading's declared digest → MISSING with LOUD (caller lied about what was originally read). With correct inputs, recomputes via `clock.decay(Observation(**inputs, now=now))` and compares band → TRACE_DIVERGENCE if bands differ; None if bands match. | Trace defaulting a missing input to a value; trace accepting inputs whose digest doesn't match; trace overriding the reading's band. | **HOLDS** — code inspection: three explicit branches (missing inputs, digest mismatch, band comparison). No default filling. |
+| SY-4 | `mesh(readings, now, inputs_by_reading=None)` groups by (target, subject) BEFORE any parity call, so cross-target comparisons are impossible by construction — not by check (defense-in-depth for I2). Runs pairwise parity within group, then trace per reading, then one phase per registered peripheral module. Flat list; empty groups produce empty output; no aggregation. | Any mesh output entry with `a.target != b.target`; a group being aggregated to a count; a peripheral phase check skipped when the peripheral is registered and non-ENTRAINED. | **HOLDS** — code inspection: `groups.setdefault((r.target, r.subject), []).append(r)` groups by (target, subject); pairwise parity walks WITHIN each group only. Phase check runs for every module with a registered Peripheral that is non-ENTRAINED. |
+| SY-5 | BOUNDARY: no module in this stack picks a winner, assigns cause, or grades severity. `divlog` reads digest+band; `entrain` reports phase; `syndrome` compares readings by digest and band. `_BANNED` is explicitly enumerated in `divlog._guard`. T11 greps the three modules + clock + modes + echo for winner/correct/cause/severity/score/rank as field/key patterns — 0 hits. | Any function returning a score, a winner, an assigned cause, or a severity level as a field or key. | **HOLDS** — T11 verified across 6 modules. The one prose "never the severity" in a divlog docstring is documentation of the boundary, not a field. |
 
-**On the digest/band split.** DL-1's four-way classification is the
-whole point of the log. Same digest + different band = the two axes
-are reading the same underlying facts and reaching different
-conclusions — a REAL module disagreement. Different digest +
-different band = different inputs; kept in a separate bucket so it
-can never masquerade as module disagreement. Different digest + same
-band = agreement reached from different inputs = HOMOPLASY:
-convergent, cheap, not evidence — the case most systems drop but
-this stack logs because leaving it out would inflate the honest
-denominator.
+**On the retirement cascade.** `divlog_v1` (pre-spec) and `divlog_v2`
+(first spec pass) both live in legacy — the canonical divlog is the
+SPEC-formal version with explicit `_guard()` runtime check, `Residual`
+dataclass return, and pair-based `history()`. Same pattern for
+`entrain_v1` and `syndrome_v1`: their APIs matched earlier design
+drafts but the SPEC required structural distinctions they couldn't
+express (Peripheral registry with scheduled pull-back; Reading distinct
+from Entry so parity operates on peer readings before anything is
+logged and raises on cross-target). See `legacy/README.md` for
+per-file retirement rationale.
 
-**On `residual` returning NEW at n=1, not a verdict.** A single
-observation is not a shape. The module refuses to interpolate.
-Verdicts require at least two data points; before that there is a
-reading and nothing to say about its trajectory. Same posture as
-`clock.py`'s UNDETERMINED for missing inputs — silence over
-confabulation.
-
-**On the mesh being flat.** `syndrome.mesh()` returns
-`MeshCell(target, kind, entries)` objects, never a nested dict. The
-operator sees the 9 cells side by side and picks up where the load is
-concentrated; the module refuses to render a heatmap or a scalar. If
-you want a total, you count. If you want a max, you pick. The tool
-does not.
+**On id stability across module revisions.** When divlog was rewritten,
+the JSON serialization changed (compact separators, slightly different
+field defaults). Identical logical entries now hash to different ids
+than they would have under earlier divlog versions. For E9 specifically
+this is benign — the divergence is re-logged in each install — but
+`supersedes` chains across divlog versions would break if not handled.
+Flagged as a real gap in `OPEN_E9_walking_criterion.md`; the SPEC does
+not currently address it.
 
 ## Echo-detection claims (`echo.py`)
 

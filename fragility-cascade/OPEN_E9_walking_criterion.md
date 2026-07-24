@@ -15,18 +15,34 @@ into the divlog rather than silently patched:
 
 ```
 first real log entry
-    id            8a6a9e291671   (this repo's install; the user's local run
-                                  produced 03efe4e41e61 — different field
-                                  values, same discrepancy structure)
+    id            48da4f4d47cd   (this install, under divlog v1-against-SPEC;
+                                  same divergence has been logged under
+                                  three ids across the module's evolution --
+                                  user local: 03efe4e41e61,
+                                  earlier install: 8a6a9e291671,
+                                  current: 48da4f4d47cd;
+                                  all reference the SAME divergence, differ
+                                  only in field defaults + JSON serialization)
     subject       residual.WALKING_criterion
     axis_a        SPEC_intent
     axis_b        divlog.residual(v1)
-    kind          DIVERGENCE_SAME_FACTS   (same digest, different band)
+    kind          SAME_INPUTS_DIFF_BAND   (same digest, different band)
     digest        n3-gaps:-1,0,+2         (the exact trigger, on the record)
     band_a        INTERMITTENT
     band_b        WALKING
     supersedes    None                    (baseline entry)
 ```
+
+**Note on id stability across module revisions.** When `divlog.py` was
+rewritten against SPEC_drift_mesh, the JSON serialization changed
+(compact separators; slightly different field defaults). The id — which
+is `sha256[:12]` of the serialized dict minus `note` — recomputed to a
+new value even though the logical content is unchanged. This is a real
+gap the SPEC does not address: if the id is a stable pointer, `supersedes`
+references break when the divlog module is versioned. For E9 itself, the
+gap is benign — every install re-logs the divergence and the E9 issue
+tracks the CONCEPT, not any single id. For future issues that stack
+`supersedes` chains across divlog versions, this needs an answer.
 
 ## The two rules on the table
 

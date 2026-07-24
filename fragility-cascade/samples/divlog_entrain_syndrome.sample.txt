@@ -1,59 +1,70 @@
 ====================================================================
-divlog v1 (SPEC_drift_mesh) + entrain + syndrome
+drift mesh v1 -- SPEC_drift_mesh implementation, all T1..T12 PASS
 ====================================================================
 
-primary ref_v1=ref:56fcc3c630cdad81
-primary ref_v2=ref:006ca0e9938e2c49
+reference_version() = 5e82b1643322
+  fingerprints clock.CHANNELS + clock.VOLATILITY; any registry edit
+  changes this string (D10, I8).
 
-CLASSIFIED KINDS (digest+band only) and computed IDs:
-  [2026-06-01] id=5d55285f4241 soil_bearing_ok        DIVERGENCE_SAME_FACTS
-  [2026-06-02] id=594cf9210644 soil_bearing_ok        HOMOPLASY
-  [2026-06-03] id=7ac4b797d592 pour_gate              DIVERGENCE_DIFFERENT_INPUTS
-  [2026-06-04] id=047fd25d4a4d pour_gate              AGREEMENT_SAME_FACTS
-  [2026-06-20] id=8791ecfa3a56 soil_bearing_ok        DIVERGENCE_SAME_FACTS
+phase before any entrain (all NEVER, LOUD):
+  scaffold     name=NEVER        loud=peripheral 'scaffold' NEVER entrained -- LOUD, UNDET...
+  revalidate   name=NEVER        loud=peripheral 'revalidate' NEVER entrained -- LOUD, UND...
+  echo         name=NEVER        loud=peripheral 'echo' NEVER entrained -- LOUD, UNDETERMI...
 
-append/load round-trip: wrote 5, loaded 5, ids preserved: True
+after en(scaffold, 2026-06-30):
+  scaffold  name=ENTRAINED  days_since=5.0
 
-id stability (note excluded from id, per D8):
-  alpha: id=9468264dba6a
-  beta:  id=9468264dba6a   (same fields, different note) -> True
-
-history(entries, subject="soil_bearing_ok"):
-  [2026-06-01] id=5d55285f4241 bands=FRESH/STALE
-  [2026-06-02] id=594cf9210644 bands=FRESH/FRESH
-  [2026-06-20] id=8791ecfa3a56 bands=FRESH/EXPIRED
-
-residual() on soil_bearing_ok (3 entries): WIDENING
-residual([]):        EMPTY
-residual([one]):     NEW
-
---- INTERMITTENT case (gap sequence with direction reversal) ---
-  gaps: [3, 0, -3, 3], residual = INTERMITTENT
-
-entrain phase after primary moved v1 -> v2:
-  [2026-06-01] axis_a=DRIFTED, axis_b=DRIFTED
-  [2026-06-02] axis_a=DRIFTED, axis_b=DRIFTED
-
-syndrome.parity:
-  DIVERGENCE_SAME_FACTS            2
-  DIVERGENCE_DIFFERENT_INPUTS      1
-  HOMOPLASY                        1
-  AGREEMENT_SAME_FACTS             1
-
-syndrome.mesh (3 targets x 3 kinds):
-                             DIVERGENCE_SAME_FACTS                   HOMOPLASY  DIVERGENCE_DIFFERENT_INPUT
-  claim                   n=2 e.g. soil_bearing_ok    n=1 e.g. soil_bearing_ok    n=0                     
-  mode_sensitivity        n=0                         n=0                         n=1 e.g. pour_gate      
-  independence            n=0                         n=0                         n=0                     
+demonstrate T6 FREE_RUNNING (registry moves under a peripheral):
+  before adding channel: name=ENTRAINED, ref=5e82b1643322
+  after adding channel:  name=FREE_RUNNING, ref=39422c75a801
+    -> primary moved; pull DUE regardless of schedule
 
 ====================================================================
-E1 PASS (clock.decay has for-target loop; verified above)
-E3 PASS (grep divlog.py for w-mode opens: none)
-E4 PASS (no verdict fields in any of 6 modules; severity in prose only)
-E6 PASS (residual([single]) returns NEW)
+syndrome: parity + trace + mesh
+====================================================================
 
-E9 OPEN: residual([-1,0,+2]) returns WALKING under shipped rule
-         (SPEC_intent: INTERMITTENT). Logged in samples/drift_mesh.ndjson
-         as entry 8a6a9e291671 (this install; user local: 03efe4e41e61).
-         See OPEN_E9_walking_criterion.md.
+mesh() flat list of syndromes:
+  SAME_INPUTS_DIFF_BAND    penetrometer vs site_map               target=claim
+    detail: digests match (cc2eb682dd2a); bands differ (FRESH vs STALE)
+  MISSING                  penetrometer                           target=claim
+    detail: trace cannot recompute without raw inputs
+  MISSING                  site_map                               target=claim
+    detail: trace cannot recompute without raw inputs
+  DIFF_INPUTS_SAME_BAND    penetrometer vs elder_teaching         target=claim
+    detail: agreement from different inputs (c56586c5ac5f vs f01633752311) -- homoplasy an
+  MISSING                  penetrometer                           target=claim
+    detail: trace cannot recompute without raw inputs
+  MISSING                  elder_teaching                         target=claim
+    detail: trace cannot recompute without raw inputs
+  DIFF_INPUTS_DIFF_BAND    hand_test vs surface_reading           target=mode_sensitivity
+    detail: different inputs (9e975113e27b vs 52de53fbb88f); different bands (DECAYING vs 
+  MISSING                  hand_test                              target=mode_sensitivity
+    detail: trace cannot recompute without raw inputs
+  MISSING                  surface_reading                        target=mode_sensitivity
+    detail: trace cannot recompute without raw inputs
+  MISSING                  unset_meter vs another_meter           target=independence
+    detail: a.band=UNDETERMINED, b.band=FRESH
+  MISSING                  unset_meter                            target=independence
+    detail: trace cannot recompute without raw inputs
+  MISSING                  another_meter                          target=independence
+    detail: trace cannot recompute without raw inputs
+
+====================================================================
+divlog: log the E9 entry, compute residual over one subject
+====================================================================
+
+  drift_A: n=3 shape=WALKING
+    loud: band gap moves monotonically -- reads as real drift, act (D6)
+  drift_B: n=3 shape=FLAT
+    loud: stable offset across history -- reads as calibration, not signal
+  drift_C: n=3 shape=FLAT
+    loud: stable offset across history -- reads as calibration, not signal
+
+====================================================================
+T1..T12: ALL PASS (see separate test harness)
+OPEN E9: residual([[-1,0,+2] gap]) returns WALKING; SPEC_intent was
+  INTERMITTENT. Logged in samples/drift_mesh.ndjson as id 48da4f4d47cd
+  (previous ids under earlier divlog: user 03efe4e41e61,
+  earlier install 8a6a9e291671 -- all reference the SAME divergence).
+  Resolution = new entry that supersedes, never an untracked edit.
 ====================================================================

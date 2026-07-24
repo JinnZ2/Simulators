@@ -1,200 +1,183 @@
 """
-divlog.py -- append-only divergence log. v1 against SPEC_drift_mesh. No deps.
-CC0. stdlib only.
+divlog.py -- append-only divergence log. v1.
+CC0. stdlib only. Phone-buildable.
 
-Entry is frozen; id = sha256 of all fields except `note` (operator-only field
-never enters the identity). Append opens only in "a" -- there is no overwrite
-path, and E3 greps for it. `supersedes` is a REVISIT pointer to a prior id,
-not a delete: resolutions land as NEW entries that supersede, per D5.
+The log is not a list of problems. It is a BASELINE. Its value is not any
+single entry; it is the history, which lets a future reading ask "is this
+divergence the same one as before, or is it new?" -- unanswerable if entries
+are ever mutated.
 
-    kind is classified from digest x band ONLY (D2, D4):
-        same digest, same band       -> AGREEMENT_SAME_FACTS
-        same digest, different band  -> DIVERGENCE_SAME_FACTS (module disagreement)
-        different digest, same band  -> HOMOPLASY (convergent, not evidence)
-        different digest, different  -> DIVERGENCE_DIFFERENT_INPUTS (separate bucket)
+INVARIANTS ENFORCED HERE (SPEC I5, I6, I7):
+    - append-only: entries are frozen; the file is opened "a"/"r", never "w"
+    - no verdict fields: no winner/correct/cause/severity/score/rank
+    - explicit time: observed_at is always an argument, never now()
+    - resolution is a NEW entry that `supersedes` a prior id, not an edit
 
-    residual(history) classifies the SHAPE of a history, never the severity:
-        n == 0  -> EMPTY
-        n == 1  -> NEW (not a verdict; D7)
-        FLAT           -- all gaps equal (calibration offset)
-        WALKING        -- diffs all non-negative or all non-positive (monotone)
-        INTERMITTENT   -- diffs have BOTH signs (direction reverses)
-        WIDENING       -- a governing channel appears in the later half that
-                          was not in the earlier half (new channels, D1)
-
-    OPEN_E9: the specific gap sequence [-1, 0, +2] lands as WALKING under this
-    rule (monotone increasing). SPEC_intent for that sequence was INTERMITTENT.
-    Held OPEN in OPEN_E9_walking_criterion.md; resolution comes as a NEW entry
-    that supersedes the entry recording the divergence, per D5. No untracked
-    edit.
+residual() classifies the SHAPE of a disagreement history, never its severity,
+and never which side is right.
 """
 
-from dataclasses import dataclass, asdict, field, fields
-from hashlib import sha256
-from typing import List, Optional, Iterable
-import json
-import os
+from dataclasses import dataclass, asdict, field
+from typing import Optional, List
+import json, hashlib
 
-# --------------------------------------------------------------- entry kinds
+# Fields that would encode a verdict or an interior state. Forbidden. (I6)
+_BANNED = ("winner", "correct", "cause", "severity", "score", "rank")
 
-KIND_DIVERGENCE_SAME_FACTS      = "DIVERGENCE_SAME_FACTS"
-KIND_DIVERGENCE_DIFFERENT_INPUTS = "DIVERGENCE_DIFFERENT_INPUTS"
-KIND_HOMOPLASY                  = "HOMOPLASY"
-KIND_AGREEMENT_SAME_FACTS       = "AGREEMENT_SAME_FACTS"
-
-KINDS = (KIND_DIVERGENCE_SAME_FACTS, KIND_DIVERGENCE_DIFFERENT_INPUTS,
-         KIND_HOMOPLASY, KIND_AGREEMENT_SAME_FACTS)
-
-
-def classify_kind(digest_a: str, digest_b: str,
-                  band_a: str, band_b: str) -> str:
-    """Classify the divergence pattern from digests+bands ONLY.
-    No winner, no cause, no severity (D2, D4, D8)."""
-    same_digest = (digest_a == digest_b)
-    same_band = (band_a == band_b)
-    if same_digest and same_band:
-        return KIND_AGREEMENT_SAME_FACTS
-    if same_digest and not same_band:
-        return KIND_DIVERGENCE_SAME_FACTS
-    if not same_digest and same_band:
-        return KIND_HOMOPLASY
-    return KIND_DIVERGENCE_DIFFERENT_INPUTS
-
-
-# --------------------------------------------------------------------- entry
 
 @dataclass(frozen=True)
 class Entry:
-    observed_at: str
-    target: str                     # which target the divergence is about
-    subject: str                    # what claim/thing is under audit
-
-    axis_a: str                     # name of the first axis (module/mode/reading)
-    axis_b: str
-    kind: str                       # one of KINDS
-
-    band_a: str                     # FRESH | DECAYING | STALE | EXPIRED | ...
-    band_b: str
-
-    digest_a: str                   # fingerprint of the facts axis_a used
-    digest_b: str
-
+    observed_at: str                 # explicit now (I7)
+    target: str                      # claim / mode_sensitivity / independence
+    subject: str                     # what was read
+    axis_a: str                      # module or axis name
+    axis_b: str                      # peer, or "PRIMARY" for a trace check
+    kind: str                        # Syndrome kind, verbatim
+    band_a: Optional[str] = None
+    band_b: Optional[str] = None
+    digest_a: str = ""
+    digest_b: str = ""
     governing_a: Optional[str] = None
     governing_b: Optional[str] = None
-
-    ref_version: Optional[str] = None
+    ref_version: str = ""
     phase_a: Optional[str] = None
     phase_b: Optional[str] = None
-
-    supersedes: Optional[str] = None    # id of a prior entry this revisits
-    note: str = ""                      # operator-only; never parsed;
-                                        # NOT included in the id
+    supersedes: Optional[str] = None  # id of a prior entry this one revisits
+    note: str = ""                    # operator field; free text; never parsed
 
     @property
     def id(self) -> str:
-        """sha256 of all fields except `note`, truncated to 12 hex.
-        `note` is operator-only and never parsed -- see D8. Freezing Entry
-        makes the id stable for the object's lifetime."""
-        d = {f.name: getattr(self, f.name) for f in fields(self)
-             if f.name != "note"}
-        blob = json.dumps(d, sort_keys=True, ensure_ascii=False,
-                          default=str).encode("utf-8")
-        return sha256(blob).hexdigest()[:12]
+        d = asdict(self)
+        d.pop("note")                 # note is not identity
+        blob = json.dumps(d, sort_keys=True, separators=(",", ":"))
+        return hashlib.sha256(blob.encode()).hexdigest()[:12]
+
+    def to_line(self) -> str:
+        d = asdict(self)
+        d["id"] = self.id
+        return json.dumps(d, sort_keys=True, separators=(",", ":"))
 
 
-# --------------------------------------------------------------------- io
-
-def to_json(e: Entry) -> str:
-    d = asdict(e)
-    d["id"] = e.id
-    return json.dumps(d, sort_keys=True, ensure_ascii=False)
-
-
-def from_json(line: str) -> Entry:
-    d = json.loads(line)
-    d.pop("id", None)                   # id is computed, not stored on Entry
-    return Entry(**d)
+def _guard(entry: Entry) -> None:
+    # structural guarantee that no verdict field ever entered the dataclass
+    for b in _BANNED:
+        if hasattr(entry, b):
+            raise ValueError(f"Entry carries banned verdict field '{b}' (I6)")
 
 
-def append(path: str, e: Entry) -> None:
-    """Append one entry as one NDJSON line. Opens in 'a' only -- no
-    overwrite path exists in this module (D5, E3)."""
-    d = os.path.dirname(path)
-    if d and not os.path.exists(d):
-        os.makedirs(d)
-    with open(path, "a", encoding="utf-8") as f:
-        f.write(to_json(e) + "\n")
+def append(path: str, entry: Entry) -> str:
+    """Append one entry. Opens 'a' only. Returns the entry id. (I5)"""
+    _guard(entry)
+    with open(path, "a") as f:            # never "w"
+        f.write(entry.to_line() + "\n")
+    return entry.id
 
 
 def load(path: str) -> List[Entry]:
-    """Load the whole log. Empty file / missing file -> []."""
-    if not os.path.exists(path):
-        return []
-    with open(path, "r", encoding="utf-8") as f:
-        return [from_json(line) for line in f if line.strip()]
+    """Read entries in file order. Missing file -> empty, not an error."""
+    out: List[Entry] = []
+    try:
+        with open(path, "r") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                d = json.loads(line)
+                d.pop("id", None)         # id is derived, not stored as state
+                out.append(Entry(**d))
+    except FileNotFoundError:
+        pass
+    return out
 
 
-def history(entries: Iterable[Entry], subject: str) -> List[Entry]:
-    """The baseline query: every entry recorded for a subject, in order.
-    'Off the same way as in March, or is this new?' is answerable only via
-    this list."""
-    return [e for e in entries if e.subject == subject]
-
-
-# --------------------------------------------------------------- residual
-
-_BAND_ORD = {
-    "FRESH": 4, "DECAYING": 3, "STALE": 2, "EXPIRED": 1,
-    "UNDETERMINED": 0, "": 0, None: 0,
-}
-
-
-def _band_ord(b) -> int:
-    return _BAND_ORD.get(b, 0)
-
-
-def _gap(e: Entry) -> int:
-    return _band_ord(e.band_a) - _band_ord(e.band_b)
-
-
-def _governing_set(e: Entry) -> set:
-    return {g for g in (e.governing_a, e.governing_b) if g}
-
-
-def residual(history_or_iter: Iterable[Entry]) -> str:
-    """Classify the SHAPE of a history. Never the severity (D6).
-
-    EMPTY         n == 0
-    NEW           n == 1                                            (D7)
-    WIDENING      a governing channel present in the later half is absent
-                  from the earlier half -- the divergence is spreading   (D1)
-    FLAT          all gaps equal across history (calibration offset)
-    WALKING       consecutive diffs all non-negative OR all non-positive
-                  (monotone drift, one direction)
-    INTERMITTENT  consecutive diffs contain BOTH signs (direction reverses)
+def history(path: str, target: str, subject: str,
+            axis_a: str, axis_b: str) -> List[Entry]:
     """
-    entries = list(history_or_iter)
+    The baseline query: the same pair, same subject, in time order.
+    Pair is order-insensitive (a vs b == b vs a).
+    """
+    want = {axis_a, axis_b}
+    rows = [e for e in load(path)
+            if e.target == target and e.subject == subject
+            and {e.axis_a, e.axis_b} == want]
+    rows.sort(key=lambda e: e.observed_at)
+    return rows
+
+
+# ------------------------------------------------------------- residual
+
+@dataclass
+class Residual:
+    shape: str                       # NEW / FLAT / WALKING / INTERMITTENT / WIDENING
+    n: int
+    read_ids: List[str] = field(default_factory=list)
+    loud: List[str] = field(default_factory=list)
+
+
+# canonical band ordering, for detecting a monotone slide (D6)
+_ORDER = {"FRESH": 0, "DECAYING": 1, "STALE": 2, "EXPIRED": 3}
+
+
+def residual(entries: List[Entry]) -> Residual:
+    """
+    Classify the SHAPE of a disagreement history. Not severity. Never a winner.
+    Reads only band_a/band_b sequences and governing-channel spread.
+    """
+    ids = [e.id for e in entries]
     n = len(entries)
-    if n == 0:
-        return "EMPTY"
-    if n == 1:
-        return "NEW"
 
-    # WIDENING takes precedence -- a new channel is a structural spread,
-    # not a mere drift in existing ones.
-    half = n // 2 or 1
-    early = set().union(*[_governing_set(e) for e in entries[:half]])
-    late = set().union(*[_governing_set(e) for e in entries[half:]])
-    if late - early:
-        return "WIDENING"
+    if n < 2:
+        return Residual("NEW", n, ids,
+                        ["n<2: no baseline yet -- one disagreement is not a "
+                         "distribution (D7)"])
 
-    gaps = [_gap(e) for e in entries]
-    if len(set(gaps)) == 1:
-        return "FLAT"
+    pairs = [(e.band_a, e.band_b) for e in entries]
 
-    diffs = [gaps[i + 1] - gaps[i] for i in range(len(gaps) - 1)]
-    has_pos = any(d > 0 for d in diffs)
-    has_neg = any(d < 0 for d in diffs)
-    if has_pos and has_neg:
-        return "INTERMITTENT"
-    return "WALKING"
+    # FLAT: every entry is the same kind AND same band pair (stable offset)
+    same_kind = len({e.kind for e in entries}) == 1
+    if same_kind and len(set(pairs)) == 1:
+        return Residual("FLAT", n, ids,
+                        ["stable offset across history -- reads as calibration, "
+                         "not signal"])
+
+    # WALKING: the gap between the two sides moves monotonically
+    #
+    # OPEN / E9 -- see OPEN_E9_walking_criterion.md, divlog entry 03efe4e41e61.
+    # This rule fires on ANY monotone gap sequence. At small n, monotone and
+    # trending are near-indistinguishable by chance, so the criterion is
+    # false-alarm-prone. The repair is a number (min run length, or a
+    # noise-robust trend test) and that number is EMPIRICAL. Do not patch it
+    # with a guess. Resolution = a new divlog entry superseding 03efe4e41e61
+    # plus a versioned rule change.
+    def gap(p):
+        a, b = _ORDER.get(p[0]), _ORDER.get(p[1])
+        return None if a is None or b is None else a - b
+    gaps = [gap(p) for p in pairs]
+    if all(g is not None for g in gaps) and len(set(gaps)) > 1:
+        diffs = [gaps[i + 1] - gaps[i] for i in range(len(gaps) - 1)]
+        if all(d >= 0 for d in diffs) or all(d <= 0 for d in diffs):
+            return Residual("WALKING", n, ids,
+                            ["band gap moves monotonically -- reads as real "
+                             "drift, act (D6)"])
+
+    # WIDENING: the set of governing channels involved grows over time
+    govs = []
+    for e in entries:
+        g = {x for x in (e.governing_a, e.governing_b) if x}
+        govs.append(g)
+    running = set()
+    growth = 0
+    for g in govs:
+        before = len(running)
+        running |= g
+        if len(running) > before:
+            growth += 1
+    if growth >= 2 and running and len(running) > len(govs[0]):
+        return Residual("WIDENING", n, ids,
+                        [f"divergence spreading across governing channels "
+                         f"{sorted(running)} -- new mechanisms entering"])
+
+    # otherwise: comes and goes, no trend
+    return Residual("INTERMITTENT", n, ids,
+                    ["appears and clears without a trend -- keep logging, no "
+                     "baseline claim yet"])
