@@ -5,18 +5,20 @@ Tests the REFUSALS, not the acceptances. A registry is only as good as what
 it turns away; an accept-anything workbench hands junk to field scientists,
 whose time is the one resource this design cannot manufacture.
 
-T-I1  no falsifier            -> MissingFalsifier
-T-I2  unnamed principle       -> IncompleteInstrument (magic)
-T-I3  empty blind_to          -> IncompleteInstrument (supremacy claim)
-T-I4  R3 with no borrowed_from-> IncompleteInstrument (reach with no across)
-T-I5  R2 with no resolution   -> ContestedEntry (danger bin unlabelled)
-T-I6  R2/OPEN, no harm named  -> ContestedEntry, NOT auto-moved to R4
-T-I7  CONTESTED, 1 frame      -> ContestedEntry (verdict with extra steps)
-T-I8  CONTESTED, undated frame-> ContestedEntry (look back that doesn't)
-T-I9  CONTESTED, 2 dated      -> registers, held_open True, no ranking field
-T-I10 reclassify held-open    -> syndrome logged, frames kept
-T-I11 valid R3/R4 proposal    -> registers, actor routing, emit() carries
-                                 falsifier + UNVALIDATED_PENDING_FIELD
+T-I1  no falsifier                       -> MissingFalsifier
+T-I2  unnamed principle                  -> IncompleteInstrument (magic)
+T-I3  empty blind_to                     -> IncompleteInstrument (supremacy)
+T-I4  R3 with no borrowed_from           -> IncompleteInstrument (no across)
+T-I5  R2 with no resolution              -> ContestedEntry (danger bin)
+T-I6  R2/DEPENDENCY, reaches_layer bogus -> ContestedEntry (not in stack)
+T-I6b R2/DEPENDENCY, no removes_above    -> ContestedEntry (gesture, not claim)
+T-I7  CONTESTED, 1 frame                 -> ContestedEntry (verdict-with-steps)
+T-I8  CONTESTED, undated frame           -> ContestedEntry (look-back-that-doesn't)
+T-I9  CONTESTED, 2 dated                 -> registers, held_open, no ranking
+T-I10 reclassify held-open               -> syndrome logged, frames kept
+T-I11 valid R3/R4 proposal               -> registers, actor routing, emit()
+                                            carries falsifier + state + stack
+T-I12 reclassified entry enters AI lane  -> trace present in log
 """
 
 import os
@@ -65,9 +67,17 @@ ok.append(expect(I.ContestedEntry,
                  lambda: I.register(base(why_absent="R2")),
                  "T-I5 R2 unlabelled"))
 ok.append(expect(I.ContestedEntry,
-                 lambda: I.register(base(why_absent="R2", resolution=I.OPEN,
-                                         harm="", harmed_party="")),
-                 "T-I6 R2/OPEN unnamed harm (not auto-moved)"))
+                 lambda: I.register(base(name="dep-bogus", why_absent="R2",
+                                         resolution=I.DEPENDENCY,
+                                         reaches_layer="feelings",
+                                         removes_above=["something"])),
+                 "T-I6 R2/DEPENDENCY reaches_layer not in stack"))
+ok.append(expect(I.ContestedEntry,
+                 lambda: I.register(base(name="dep-hollow", why_absent="R2",
+                                         resolution=I.DEPENDENCY,
+                                         reaches_layer="biology",
+                                         removes_above=[])),
+                 "T-I6b R2/DEPENDENCY empty removes_above"))
 
 one_frame = [I.Frame("frame-a", "practice a", "source a", "era a")]
 ok.append(expect(I.ContestedEntry,
@@ -125,9 +135,10 @@ good = I.register(I.Instrument(
     why_absent="R4", as_of=AS_OF, borrowed_from=["older-era instrument"]))
 payload = I.emit("example-R4")
 t11 = (good.actor == "AI CAN" and I.HANDOFF_STATE in payload
-       and "falsifier" in payload and "registry_blind_to" in payload)
+       and "falsifier" in payload and "registry_blind_to" in payload
+       and "dependency_stack" in payload)
 print(f"  {'PASS' if t11 else 'FAIL'} T-I11 actor={good.actor} "
-      f"emit carries state+falsifier+recursion")
+      f"emit carries state+falsifier+recursion+stack")
 ok.append(t11)
 
 # T-I12 -- first draft of T-I11 asserted by_actor("AI CAN") == ["example-R4"]

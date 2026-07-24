@@ -1,5 +1,5 @@
 """
-instruments.py -- registry of measuring instruments that DO NOT YET EXIST. v2.
+instruments.py -- registry of measuring instruments that DO NOT YET EXIST. v1.
 CC0. stdlib only. Phone-buildable.
 
 WHY THIS MODULE EXISTS (D1)
@@ -25,26 +25,6 @@ NON-EXISTENCE IS TIMESTAMPED, NOT ESSENTIAL (D2)
     of DATE, because X." X routes the repair. The state decays. It flips.
     Hence every entry carries as_of, and as_of is always an explicit
     argument (I7) -- this module never calls now().
-
-D11 -- THE OPEN BRANCH IS GONE (2026-07-24)
-    v1 had R2/OPEN: "name a harm and a harmed party" -> settled ethics.
-    Broken by the operator: "whose harm" is the same contest as "whose
-    party". OPEN was CONTESTED that hadn't been noticed.
-
-    v2 replaces OPEN with R2/DEPENDENCY -- a STRUCTURAL claim, not a
-    value label. Two required fields:
-        reaches_layer   how far down the stack the damage goes
-        removes_above   what collapses if that layer is removed
-
-    DEPENDENCY_STACK, base first, physical not moral:
-        energy -> earth -> ecology -> biology -> culture
-    each layer exists only because the one below does. Ordering is not
-    editable. The arrows already point. Physics did the ordering; no
-    operator has standing to reorder it.
-
-    The value question ("is this instrument OK to build?") does not go
-    away, but it stops pretending to be settled at the door. R2/DEPENDENCY
-    reports the DEPENDENCY, not a verdict on it.
 
 WHAT THIS REGISTRY IS
     A proposal generator with a hard falsifier gate. A workbench.
@@ -110,22 +90,10 @@ WHY_ABSENT: Dict[str, Dict[str, str]] = {
 # much of what gets filed R2 ("not respectable") is misfiled R4.
 AI_LANE = ("R3", "R4")
 
-# D11 -- R2 resolution states.
-# v1 had OPEN (harm+party named). Retired to legacy: the discriminator
-# smuggled in the thing it was meant to decide.
-# v2: DEPENDENCY (structural claim on the stack) + CONTESTED (frames
-# recorded, held open). Neither is a verdict.
-DEPENDENCY = "DEPENDENCY"
-CONTESTED = "CONTESTED"
-RESOLUTIONS = (DEPENDENCY, CONTESTED)
-
-# DEPENDENCY_STACK -- base first, physical not moral. Ordering is not
-# editable; each layer exists because the layer below does. No operator
-# reorders it. Registering a layer name outside this tuple is a
-# category error and refused at the door.
-DEPENDENCY_STACK: Tuple[str, ...] = (
-    "energy", "earth", "ecology", "biology", "culture",
-)
+# R2 resolution states (D6, D7)
+OPEN = "OPEN"              # a settled barrier: harm named, party named
+CONTESTED = "CONTESTED"    # a live disagreement BETWEEN value-frames
+RESOLUTIONS = (OPEN, CONTESTED)
 
 HANDOFF_STATE = "UNVALIDATED_PENDING_FIELD"
 
@@ -138,8 +106,6 @@ REGISTRY_BLIND_TO = (
     "as priors under a CONTESTED entry",
     "phenomena with no reporter at all -- nobody has said 'I sense this', "
     "so no claim exists to hang an absent instrument on",
-    "collapse mechanisms above the reaches_layer that the operator did not "
-    "articulate; DEPENDENCY_STACK names layers, not specifics",
 )
 
 
@@ -159,8 +125,8 @@ class MissingFalsifier(IncompleteInstrument):
 
 
 class ContestedEntry(ValueError):
-    """Raised when a CONTESTED or DEPENDENCY entry is malformed, never when
-    it is unresolved. Unresolved is the correct state and is not an error."""
+    """Raised when a CONTESTED entry is malformed, never when it is unresolved.
+    Unresolved is the correct state and is not an error."""
 
 
 # ---------------------------------------------------------------------------
@@ -214,14 +180,11 @@ class Instrument:
     # not a reach claim.
 
     # --- R2 only ----------------------------------------------------------
-    # D11: OPEN retired; DEPENDENCY (structural) + CONTESTED (frames).
-    resolution: str = ""
-    reaches_layer: str = ""      # DEPENDENCY: one of DEPENDENCY_STACK
-    removes_above: List[str] = field(default_factory=list)
-                                 # DEPENDENCY: what collapses if reaches_layer
-                                 # is removed. non-empty required.
-    frames: List[Frame] = field(default_factory=list)   # CONTESTED
-    contest: str = ""                                    # CONTESTED
+    harm: str = ""            # the SPECIFIC harm the barrier prevents
+    harmed_party: str = ""    # WHO is harmed
+    resolution: str = ""      # OPEN | CONTESTED, R2 only
+    frames: List[Frame] = field(default_factory=list)
+    contest: str = ""         # what exactly the frames disagree ON
 
     # --- provenance of the ROW itself -------------------------------------
     row_source: Optional[str] = None
@@ -302,39 +265,35 @@ def _door(inst: Instrument) -> List[str]:
     if inst.why_absent == "R2":
         loud += _r2_door(inst)
     else:
-        stray = []
-        if inst.resolution: stray.append("resolution")
-        if inst.reaches_layer: stray.append("reaches_layer")
-        if inst.removes_above: stray.append("removes_above")
-        if inst.frames: stray.append("frames")
-        if stray:
+        if inst.resolution or inst.frames or inst.harm or inst.harmed_party:
             loud.append(
                 f"{inst.why_absent} row carries R2-only fields "
-                f"({', '.join(stray)}) -- ignored downstream")
+                f"(resolution/frames/harm/harmed_party) -- ignored downstream")
 
     return loud
 
 
 def _r2_door(inst: Instrument) -> List[str]:
-    """R2 is the danger bin. (D6, D7, D11)
+    """R2 is the danger bin. (D6, D7)
 
-    v1 had OPEN vs CONTESTED. OPEN required "name a harm + a harmed party".
-    The operator broke it: autopsy, fetal tissue, a stillborn eaten by the
-    pack -- whether a harmed party exists there IS the contested question.
-    The test smuggled in the thing it was meant to decide. OPEN was
-    CONTESTED that hadn't been noticed.
+    It holds two unlike things: arbitrary taboo, and load-bearing ethics.
+    An entry must carry WHICH, and AI never overrules the second.
 
-    v2 replaces OPEN with DEPENDENCY (D11) -- a STRUCTURAL claim on
-    DEPENDENCY_STACK, not a value label. `reaches_layer` names how far down
-    the physical stack the damage goes; `removes_above` names what collapses
-    if that layer is removed. Physics ordered the stack; no operator
-    reorders it, and no value verdict is issued here.
+    The discriminator first proposed was 'names a specific harm and a
+    harmed party'. The operator broke it: autopsy, fetal tissue, a
+    stillborn eaten by the pack -- whether a harmed party exists there IS
+    the contested question. The test smuggled in the thing it was meant to
+    decide. Same failure shape as a detector that fires on surface form.
 
-    NO AUTO-RECLASSIFICATION. An entry that is neither DEPENDENCY-declared
-    nor CONTESTED is REFUSED, not silently moved to R3/R4. The door
-    declines; it does not decide. Moving it is an operator act, because
-    deciding that a barrier is "merely" fashion is itself a value judgment,
-    and auto-resolution is exactly what this framework forbids everywhere.
+    Repair: a third state. Not 'settled ethics' and not 'mere fashion' --
+    CONTESTED, a live disagreement BETWEEN value-frames. Held open. Logged,
+    timestamped, frames named, never auto-resolved.
+
+    NO AUTO-RECLASSIFICATION. An entry that is neither harm-named nor
+    CONTESTED is REFUSED, not silently moved to R3/R4. The door declines;
+    it does not decide. Moving it is an operator act, because deciding
+    that a barrier is 'merely' fashion is itself a value judgment, and
+    auto-resolution is exactly what this framework forbids everywhere else.
     """
     loud: List[str] = []
 
@@ -342,33 +301,22 @@ def _r2_door(inst: Instrument) -> List[str]:
         raise ContestedEntry(
             f"instrument '{inst.name}': why_absent=R2 requires resolution in "
             f"{RESOLUTIONS}. R2 is the danger bin; an unlabelled R2 row hides "
-            f"structural dependency and live contest in one place. (D6, D11)")
+            f"load-bearing ethics and arbitrary taboo in one place. (D6)")
 
-    if inst.resolution == DEPENDENCY:
-        # Structural claim. reaches_layer must be a real layer in the stack
-        # (ordering is physics, not editable). removes_above must be
-        # non-empty -- a DEPENDENCY claim that cannot name what collapses is
-        # not a dependency claim; it is a gesture at one.
-        if inst.reaches_layer not in DEPENDENCY_STACK:
+    if inst.resolution == OPEN:
+        # The settled branch. Both fields required -- this is the version of
+        # the harmed-party test that survives, because it is only applied
+        # where the operator has already asserted the contest is NOT live.
+        if not (inst.harm or "").strip() or not (inst.harmed_party or "").strip():
             raise ContestedEntry(
-                f"instrument '{inst.name}': R2/DEPENDENCY requires "
-                f"reaches_layer in DEPENDENCY_STACK {DEPENDENCY_STACK}. "
-                f"Ordering is physics; the layer must exist. (D11)")
-        if not inst.removes_above:
-            raise ContestedEntry(
-                f"instrument '{inst.name}': R2/DEPENDENCY requires "
-                f"removes_above to name what collapses if reaches_layer is "
-                f"removed. An unarticulated collapse is a gesture, not a "
-                f"claim. (D11)")
-        # anything ABOVE reaches_layer in the stack is what would collapse
-        idx = DEPENDENCY_STACK.index(inst.reaches_layer)
-        above = DEPENDENCY_STACK[idx + 1:]
+                f"instrument '{inst.name}': R2/OPEN requires BOTH harm and "
+                f"harmed_party. If neither can be named, the row is not "
+                f"settled -- it is either CONTESTED or it was never R2. "
+                f"Reclassification is the operator's move, not the door's. "
+                f"(D6: no auto-resolution)")
         loud.append(
-            f"R2/DEPENDENCY: structural claim -- reaches "
-            f"{inst.reaches_layer!r} in DEPENDENCY_STACK; "
-            f"removing that layer removes everything above "
-            f"({list(above)!r}). actor={inst.actor}. No verdict is issued "
-            f"here; the value question is separate. (D11)")
+            f"R2/OPEN: load-bearing ethical barrier. actor={inst.actor}. "
+            f"AI hands this back untouched -- no repair route is offered.")
 
     if inst.resolution == CONTESTED:
         if len(inst.frames) < 2:
@@ -463,8 +411,8 @@ def record_frame(name: str, frame: Frame) -> Instrument:
     There is deliberately no close_contest(). Closing is not an operation
     this module has standing to perform, and providing a function for it
     would make the overreach a one-liner. A contest closes when an operator
-    edits the entry to R2 with the appropriate structural claim, and that
-    edit goes through the same door as everything else.
+    edits the entry to R2/OPEN with a harm and a party named, and that edit
+    goes through the same door as everything else.
     """
     inst = REGISTRY[name]
     if not inst.held_open:
@@ -481,7 +429,6 @@ def emit(name: str) -> str:
     and the falsifier, because the falsifier is what makes it hand-overable."""
     d = REGISTRY[name].to_dict()
     d["registry_blind_to"] = list(REGISTRY_BLIND_TO)
-    d["dependency_stack"] = list(DEPENDENCY_STACK)
     return json.dumps(d, sort_keys=True, separators=(",", ":"))
 
 
