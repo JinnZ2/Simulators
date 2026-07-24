@@ -54,6 +54,23 @@ def digest(inputs: dict) -> str:
     return hashlib.sha256(blob.encode()).hexdigest()[:12]
 
 
+def reading(module: str, target: str, subject: str,
+            band: Optional[str], governing: Optional[str],
+            inputs: dict, as_of: str) -> Reading:
+    """
+    Factory: constructor computes the digest, no caller invents one.
+
+    Callers pass the raw `inputs` dict; digest(inputs) runs here. The
+    returned Reading carries `inputs_digest` as a field so downstream
+    parity + trace work as specified, but the caller never had a chance
+    to hand in a mismatched hash. Preferred over `Reading(...)` direct
+    construction whenever the raw inputs are in hand.
+    """
+    return Reading(module=module, target=target, subject=subject,
+                   band=band, governing=governing,
+                   inputs_digest=digest(inputs), as_of=as_of)
+
+
 # ------------------------------------------------------------------ syndrome
 
 KIND_SAME_INPUTS_DIFF_BAND  = "SAME_INPUTS_DIFF_BAND"    # real module disagreement
@@ -164,16 +181,25 @@ def trace(r: Reading, now: str,
     o = clock.Observation(now=now, **inputs)
     d = clock.decay(o)
     primary_band = d.band.get(r.target, "UNDETERMINED")
+    primary_governing = d.governing.get(r.target)
 
-    if primary_band == r.band:
+    # divergence on band OR on governing channel is both a trace-level defect
+    # -- a module that reports the "right" band but attributes it to the wrong
+    # channel has drifted from the registry's routing.
+    if primary_band == r.band and primary_governing == r.governing:
         return None
+    parts = []
+    if primary_band != r.band:
+        parts.append(f"band {r.band} vs primary {primary_band}")
+    if primary_governing != r.governing:
+        parts.append(f"governing {r.governing!r} vs primary "
+                     f"{primary_governing!r}")
     return Syndrome(
         KIND_TRACE_DIVERGENCE, r, None,
-        detail=f"module band={r.band} vs primary band={primary_band} "
-               f"(target={r.target})",
-        loud=[f"module '{r.module}' band ({r.band}) diverges from primary "
-              f"({primary_band}) on target '{r.target}' -- the module's own "
-              "copy of the logic has drifted from the registry"])
+        detail=f"({r.target}) " + "; ".join(parts),
+        loud=[f"module '{r.module}' diverges from primary on target "
+              f"'{r.target}': {'; '.join(parts)} -- the module's own copy "
+              "of the logic has drifted from the registry"])
 
 
 # --------------------------------------------------------- temporal: mesh
@@ -232,3 +258,47 @@ def mesh(readings: List[Reading], now: str,
             loud=ph.loud))
 
     return out
+
+
+# --------------------------------------- log_all: syndromes -> divlog
+
+def log_all(syndromes: List[Syndrome], path: str) -> List[str]:
+    """
+    Hand a list of syndromes to divlog -- where they stop.
+
+    Returns the list of appended entry ids, in the same order as the input.
+    Each Syndrome becomes one divlog.Entry: axis_a=a.module,
+    axis_b=b.module (or "PRIMARY" for TRACE, "REGISTRY" for PHASE),
+    kind=Syndrome.kind verbatim. `ref_version` is read from
+    entrain.reference_version() at log time so each entry pins the primary
+    it was captured against.
+    """
+    ref = entrain.reference_version()
+    ids: List[str] = []
+    for s in syndromes:
+        a, b = s.a, s.b
+        if b is None and s.kind.startswith("PHASE_"):
+            axis_b = "REGISTRY"
+        elif b is None:
+            axis_b = "PRIMARY"
+        else:
+            axis_b = b.module
+        entry = divlog.Entry(
+            observed_at=a.as_of,
+            target=a.target,
+            subject=a.subject,
+            axis_a=a.module,
+            axis_b=axis_b,
+            kind=s.kind,
+            band_a=a.band,
+            band_b=(b.band if b else None),
+            digest_a=a.inputs_digest,
+            digest_b=(b.inputs_digest if b else ""),
+            governing_a=a.governing,
+            governing_b=(b.governing if b else None),
+            ref_version=ref,
+            note=s.detail,   # detail lands in the operator-only note;
+                             # never enters the id
+        )
+        ids.append(divlog.append(path, entry))
+    return ids
