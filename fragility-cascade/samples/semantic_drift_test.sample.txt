@@ -1,0 +1,20 @@
+E1  no machine (f=0): does drift stop?
+    m: start=0.3 → gen100=0.0 → end=0.0
+E2  equilibrium vs machine fraction f (a=1.06)
+    f=0.0  m_eq=0.0
+    f=0.2  m_eq=0.006
+    f=0.4  m_eq=0.017
+    f=0.6  m_eq=0.043
+    f=0.8  m_eq=0.203
+E3  mediation without amplification (a=1, s=0)
+    f=0.0  m_eq=0.0
+    f=0.4  m_eq=0.0
+    f=0.8  m_eq=0.0
+E4  interaction: f=0.6 rise × veto decay 1%/gen
+    Δ(f alone)=0.043  Δ(β↓ alone)=0.0  Δ(both)=0.366  sum=0.043
+
+CLAIM_TABLE evaluation (refute → edit claim, not sim)
+    C1  HOLDS
+    C2  HOLDS
+    C3  HOLDS
+    C4  HOLDS

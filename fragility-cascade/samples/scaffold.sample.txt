@@ -1,0 +1,38 @@
+======================================================================
+SCAFFOLD -- scope ranks, type anchors, computed freshness
+======================================================================
+
+  [latent.vap.water] water vaporizes at 2.26 MJ/kg
+     rank: universal (holds wherever the stated conditions are met)
+     anchors: 4 (field kettle, lab A, lab B, lab C)
+     freshness: no_expiry    referent is static; elapsed time carries no decay signal
+     promotion: not yet -> -  needs already at widest rank
+
+  [clay.sand.firms] clay-sand mix firms under compaction
+     rank: instance  (holds for this site / this specimen)
+     anchors: 3 (site 1, site 2, site 3)
+     freshness: current      elapsed 7.50yr vs slow scale 50yr
+     promotion: ELIGIBLE -> class (3 anchor(s), 3 mode(s))
+
+  [soil.moisture.ok] surface moisture supports compaction
+     rank: occasion  (holds at this moment, this reading)
+     anchors: 1 (site 4)
+     freshness: DUE          elapsed 0.70yr vs seasonal scale 0.5yr
+     promotion: ELIGIBLE -> instance (1 anchor(s), 1 mode(s))
+
+  [fill.required] 0.5 m imported fill is required
+     rank: regime    (holds within a stated range of conditions)
+     anchors: 0 (NONE)
+     ! no type specimen -- cannot be re-checked, only re-argued
+     freshness: DUE          elapsed 52.50yr vs slow scale 50yr
+     DEMOTION REQUIRED: regime -> occasion
+        because ['site.penetrometer 240 kPa native']; the claim is not refuted -- its SCOPE was overstated
+
+======================================================================
+constant: universal, 4 anchors across 3 modes, static -> no expiry.
+clay-sand: 3 anchors, 3 modes -> ELIGIBLE for promotion to class.
+moisture: seasonal, 0.7yr elapsed -> DUE. young but expired.
+fill rule: regime rank with NO anchor and an open counterexample
+           -> demotion required. the claim isn't refuted; its
+              SCOPE was overstated.
+======================================================================

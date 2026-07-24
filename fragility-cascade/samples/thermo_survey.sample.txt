@@ -1,0 +1,29 @@
+==============================================================
+SITE SCAN -- desert_site   (unread field = silent assumption)
+==============================================================
+  [UNREAD] chemistry   -- chemical potential not surveyed
+  [UNREAD] pressure    -- pressure differential not surveyed
+  [UNREAD] atmosphere  -- thermal / humidity not surveyed
+  [UNREAD] topology    -- gravitational potential not surveyed
+  [UNREAD] biology     -- metabolic not surveyed
+  [read]   geology     gradient: thermal-mass storage
+  [read]   materials   gradient: no gradient tapped
+  [read]   water       gradient: phase / buoyancy / thermal mass
+  [read]   sunlight    gradient: radiant flux
+  [UNREAD] wind        -- kinetic not surveyed
+  [UNREAD] weather     -- thermal cycling not surveyed
+
+  phenomena unlocked by read fields:
+    confined_vapor_pressure, evaporative_cooling, freeze_thaw_split, sensible_heating, solar_concentration, vaporization
+==============================================================
+
+>>> feeding scanned substances to the synthesizer, goal=force:
+
+
+==============================================================
+the scan read 4 fields, left 7 UNREAD (loud, not assumed-empty).
+even so, the read fields carried enough gradient -- sun's flux,
+water's phase, copper's melting point -- to synthesize lift.
+the unread fields (wind, weather freeze-thaw, biology) are
+further gradients still on the table, now VISIBLE as unread.
+==============================================================

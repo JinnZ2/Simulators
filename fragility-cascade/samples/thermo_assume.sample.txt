@@ -1,0 +1,35 @@
+==============================================================
+ASSUMPTION AUDIT -- RealSite
+==============================================================
+
+  [energy diversity]
+     gap: only one process-energy source modeled: diesel
+     fix: add alternatives from the library (solar_pv, grid_tie, human_power, biomass_gasifier); let the referee compare them
+
+  [air quality]
+     gap: 1 combustion process(es), no air state modeled
+     fix: add air_quality_kit(threshold); combustion should emit into it, labor should gate on it, ventilation should cost energy to restore it
+
+  [emission sink]
+     gap: combustion produces no exhaust/particulate byproduct
+     fix: declare an emission byproduct so the air debt is visible, not free
+
+  [human factors]
+     gap: 4 labor process(es), none gated by air/heat/water/rest
+     fix: labor modeled as unconstrained -- gate at least air and heat where the site demands it
+
+  [temporal]
+     gap: no lifespan/decay dimension -- design life and end-of-life unmodeled
+     fix: attach intended design-life to the goal; it changes what's optimal
+==============================================================
+
+>>> closing two gaps with the library (numbers still yours):
+
+==============================================================
+ASSUMPTION AUDIT -- RealSite
+==============================================================
+
+  [temporal]
+     gap: no lifespan/decay dimension -- design life and end-of-life unmodeled
+     fix: attach intended design-life to the goal; it changes what's optimal
+==============================================================

@@ -1,0 +1,46 @@
+======================================================================
+REFUTATION PROTOCOL v2 -- propagation and truth held separate
+======================================================================
+
+OBJECT 1 -- PROPAGATION (no truth content)
+  claim       : The economy requires constant growth to be healthy.
+  anchoring   : 0.9
+  drive       : 0.8
+  carriage    : high_drive
+  note        : propagation only; not evidence for or against the claim
+
+OBJECT 2 -- THERMODYNAMIC HORIZON (computed, not scored)
+   g %/yr  d %/yr   g_eff     solar   boiling  binding
+      3.0     0.0    3.00       302       333  solar_intercepted
+      3.0     1.5    1.50       605       666  solar_intercepted
+      3.0     2.9    0.10      9071      9992  solar_intercepted
+      3.0     3.0    0.00        --        --  none (R1 satisfied)
+      2.3     0.0    2.30       394       434  solar_intercepted
+      7.0     1.5    5.50       165       182  solar_intercepted
+
+  Bounds are attackable numbers, not vibes:
+    solar_intercepted    1.74e+17 W
+      total solar power intercepted by Earth's disk
+    waste_heat_boiling   4.37e+17 W
+      human flux raising surface to 373K via Stefan-Boltzmann, sigma*T^4 = 1097 W/m^2 minus ~240 W/m^2 solar, over 5.1e14 m^2. Independent of energy SOURCE -- all use ends as heat.
+
+OUT-OF-SCOPE HANDLING
+  NOT_APPLICABLE  Markets are self-correcting.
+  NOT_APPLICABLE  AI is a neutral tool.
+  IN_SCOPE        Energy use grows 3%/yr indefinitely.
+  v1 returned FALSE NARRATIVE + DISENGAGE for all of these.
+  Two have no quantitative physical content. There is nothing to
+  compute. Returning a verdict anyway was the laundering step.
+
+======================================================================
+WHAT v2 REFUSES TO EMIT
+======================================================================
+  no scalar 'Coherens' fusing propagation with truth
+  no 'FALSE NARRATIVE' / 'STANDING' moral labels in the dict
+  no sovereign_calibration() ENGAGE/DISENGAGE instruction
+  no verdict for claims with no quantitative content
+
+  The live edge is R1: sustained d >= g for decades and the
+  physical bound never binds. That is the real argument against
+  C29-v2, and it is a free parameter above, not a hidden one.
+======================================================================

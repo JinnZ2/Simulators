@@ -62,32 +62,15 @@ that trusts the record inherits the bias multiplicatively.
 
 ## Refutation protocol (refute the claim, not the model)
 
-Each layer ships the experiment that would break it, in its `falsify` field.
+Each layer ships the experiment that would break it in its `falsify`
+field. The four claims TSD_001–004 (mount pair, gasket, drift, corruption
+signature) live in [`CLAIM_TABLE.md`](CLAIM_TABLE.md) alongside the
+frozen-vs-on-the-table breakdown and scope bounds.
 
-**TSD_001** — *A dissimilar-material bolted pair flagged GREEN loses <5 % fastener
-torque over 30 thermal cycles; a RED pair loses materially more.* Refutation:
-instrument torque and fretting wear on a GREEN joint and a RED joint over 30
-cycles. If the GREEN joint loosens or the RED joint holds, the microstrain
-thresholds in `pair_mismatch` are wrong.
-
-**TSD_002** — *A gasket held above its creep-onset temperature for the exposure
-window takes the predicted permanent set.* Refutation: pull the gasket, measure
-recovered thickness vs original. If recovery beats the model's `set_fraction`,
-the base rate or Q10 in `compression_set` is wrong.
-
-**TSD_003** — *Sensor drift tracks the Arrhenius projection within 2×.* Refutation:
-co-locate a reference-grade sensor for the exposure window; if the field unit's
-divergence falls outside 2× of `projected_drift_pct`, the Ea or enclosure-rise
-estimate is wrong.
-
-**TSD_004** — *The corruption signature (variance collapse + range clipping) marks a
-low-biased tail.* Refutation: run an independent mobile reference traverse during
-a heat event. If the fixed network's tail does **not** read low against the
-traverse when the signature fires, L7 is detecting an artifact, not a bias.
-
-A failed check updates the claim. The material constants and kinetic rates are
-frozen estimates; the *coupling* — heat drives all seven pathways together, and
-they bias the record in one direction — is what the audit asserts.
+A failed check updates the claim. The material constants and kinetic
+rates are frozen estimates; the *coupling* — heat drives all seven
+pathways together, and they bias the record in one direction — is what
+the audit asserts.
 
 ---
 
@@ -104,9 +87,12 @@ Sample output at
 [`samples/heat_dome.sample.txt`](samples/heat_dome.sample.txt).
 
 Call `audit()` directly with your own air temp, humidity, exposure window,
-material pairs, and gasket list. `corruption_signature()` takes before/during
-reading arrays and is not wired into the driver — feed it your own network
-traces.
+material pairs, and gasket list. To auto-integrate the L7 corruption
+check into the package verdict, pass `readings_before=` and
+`readings_during=` (per-timestamp reading arrays from your network); if
+both are supplied, a positive signature (variance collapse + range
+clipping) flags the whole package RED for record trustworthiness, even
+when the physical-layer flags are green.
 
 ## License
 

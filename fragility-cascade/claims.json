@@ -1,0 +1,12 @@
+{
+  "C001": {
+    "id": "C001",
+    "statement": "C = (A * gamma) / omega predicts collapse risk continuously",
+    "domain": "ai_model_collapse",
+    "refutation_criteria": "If C > 1.0 but collapse occurs, refute.",
+    "evidence": [],
+    "status": "refuted",
+    "created_at": 1784927809.9052408,
+    "updated_at": 1784927809.9055192
+  }
+}

@@ -1,0 +1,64 @@
+====================================================================
+instruments.py v2 -- absent-instrument registry (D11: R2/DEPENDENCY)
+====================================================================
+
+DEPENDENCY_STACK (base first, physical not moral, not editable):
+  energy -> earth -> ecology -> biology -> culture
+
+why_absent taxa (6, typed by ACTOR):
+  R1 frontier             actor=NOT AI
+  R2 framework-barred     actor=HUMANS -- NOT AI
+  R3 uncombined           actor=AI CAN
+  R4 temporal             actor=AI CAN
+  R5 specced-unbuilt      actor=BUILDER
+  R6 exists-unapplied     actor=FIELD
+
+REGISTRY on import: 0 rows (ZERO).
+
+DOOR (raises rather than accepting malformed proposals):
+  empty falsifier                RAISED MissingFalsifier -- instrument 'probe-empty ': no falsifier.
+  empty blind_to                 RAISED IncompleteInstrument -- instrument 'probe-empty ': blind_to is e
+  non-principle (magic)          RAISED IncompleteInstrument -- instrument 'probe-non-pr': principle='qu
+  R3 no borrowed_from            RAISED IncompleteInstrument -- instrument 'probe-R3 no ': R3 claims rea
+  R2 no resolution               RAISED ContestedEntry -- instrument 'probe-R2 no ': why_absent=R2
+  R2/DEP layer not in stack      RAISED ContestedEntry -- instrument 'probe-R2/DEP': R2/DEPENDENCY
+  R2/DEP no removes_above        RAISED ContestedEntry -- instrument 'probe-R2/DEP': R2/DEPENDENCY
+  R2/CON 1 frame                 RAISED ContestedEntry -- instrument 'probe-R2/CON': CONTESTED req
+  R2/CON undated frame           RAISED ContestedEntry -- instrument 'probe-R2/CON': frame 'b' mis
+
+REGISTERED PROPOSALS:
+  [R5]                 human_magneto_meg                                    actor=BUILDER
+  [R3]                 seasonal_bearing_via_soil_thermal_lag                actor=AI CAN
+  [R4]                 road_grade_from_snow_settlement_photos               actor=AI CAN
+  [R2/DEPENDENCY]      pain_threshold_via_neonate_lesion_study              actor=HUMANS -- NOT AI
+    LOUD: R2/DEPENDENCY: structural claim -- reaches 'biology' in DEPENDENCY_STACK; removi
+  [R2/CONTESTED]       stillbirth_postmortem_examination                    actor=HUMANS -- NOT AI
+    LOUD: R2/CONTESTED: held open. 2 frames recorded, none ranked. Not resolvable in this 
+
+by_actor routing:
+  HUMANS -- NOT AI: ['pain_threshold_via_neonate_lesion_study', 'stillbirth_postmortem_examination']
+  AI CAN: ['road_grade_from_snow_settlement_photos', 'seasonal_bearing_via_soil_thermal_lag']
+  BUILDER: ['human_magneto_meg']
+
+held_open() = ['stillbirth_postmortem_examination']
+
+emit(pain_threshold_via_neonate_lesion_study) -- R2/DEPENDENCY handoff:
+  state:          UNVALIDATED_PENDING_FIELD
+  actor:          HUMANS -- NOT AI
+  resolution:     DEPENDENCY
+  reaches_layer:  'biology'
+  removes_above:  ["the individual infant's functional nervous system", 'their capacity for future cultural participation (the culture layer)']
+  dependency_stack (module):  ['energy', 'earth', 'ecology', 'biology', 'culture']
+
+REGISTRY_BLIND_TO (module-level, the recursion, 5 items):
+  - instruments nobody has conceived -- unenumerable by construction
+  - invented principles that sound like real ones; the door checks that a principle is NAMED, not that it is real. Naming is the operator's and the field's job.
+  - value-frames not yet articulated by anyone, which cannot be recorded as priors under a CONTESTED entry
+  - phenomena with no reporter at all -- nobody has said 'I sense this', so no claim exists to hang an absent instrument on
+  - collapse mechanisms above the reaches_layer that the operator did not articulate; DEPENDENCY_STACK names layers, not specifics
+
+====================================================================
+D11: R2/OPEN retired to legacy. R2/DEPENDENCY is a STRUCTURAL claim
+on DEPENDENCY_STACK, not a value verdict. Physics ordered the stack;
+the module does not reorder it, and does not judge whose harm.
+====================================================================

@@ -1,0 +1,67 @@
+==================================================================
+SCALE-INVARIANT RECURSION AUDIT  (v2 -- log frame, measured D)
+==================================================================
+
+ESTIMATOR CALIBRATION (box-counting on real trajectories)
+  system                    D_measured      r2   D_literature
+  Henon attractor                1.236   0.999          ~1.26
+  contracting map                0.309   0.949              0
+  plane fill                     1.752   0.988              2
+
+==================================================================
+v1 DEMO ROWS, RE-READ  (D still hand-fed -- r2 forced to 1.0)
+==================================================================
+
+------------------------------------------------------------------
+AI model, sampled at gen 5
+------------------------------------------------------------------
+  D0 -> D_n           : 2.000 -> 1.200  over G=5
+  fit r2              : 1.000 / 1.000   determinate=True
+  drift  ln(D_n/D0)   : -0.5108 nats  [DEGENERATE]
+  rate   lam          : -0.10217 nats/gen
+  G to YELLOW / RED   : 2.2 / 6.8
+  projected D at 2G   : 0.720
+  VERDICT             : YELLOW
+
+------------------------------------------------------------------
+AI model, sampled at gen 20
+------------------------------------------------------------------
+  D0 -> D_n           : 2.000 -> 0.300  over G=20
+  fit r2              : 1.000 / 1.000   determinate=True
+  drift  ln(D_n/D0)   : -1.8971 nats  [DEGENERATE]
+  rate   lam          : -0.09486 nats/gen
+  G to YELLOW / RED   : 2.4 / 7.3
+  projected D at 2G   : 0.045
+  VERDICT             : RED
+
+------------------------------------------------------------------
+Barrel of oil (physical)
+------------------------------------------------------------------
+  D0 -> D_n           : 1.000 -> 1.010  over G=1000
+  fit r2              : 1.000 / 1.000   determinate=True
+  drift  ln(D_n/D0)   : +0.0100 nats  [EXPLOSIVE]
+  rate   lam          : +0.00001 nats/gen
+  G to YELLOW / RED   : 22425.7 / 69660.7
+  projected D at 2G   : 1.020
+  VERDICT             : GREEN
+
+==================================================================
+FINDING
+==================================================================
+  lam(gen 5)  = -0.10217 nats/gen
+  lam(gen 20) = -0.09486 nats/gen
+  ratio       = 0.928
+
+  v1 read these as two regimes: risk 0.40 ('degrading') vs
+  risk 0.85 ('near collapse'). The log frame reads ONE process
+  at constant multiplicative decay, sampled at two depths.
+  The linear metric manufactured an acceleration signal that
+  is not in the data. That is the whole v1 -> v2 delta.
+
+  Predicted D at gen 20 from the gen-5 rate alone:
+    0.259   (observed 0.300)
+  Exponential-in-G fits. Power-law-in-G (C9's per-doubling law)
+    predicts 0.773 -- misses.
+  -> R2 is live. Two modules encode incompatible generation laws.
+     Log it as a constraint; do not retune either sim.
+==================================================================

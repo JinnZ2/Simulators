@@ -1,0 +1,50 @@
+
+======================================================================
+SURVIVAL SPIRALS — Coherence Under Pressure
+======================================================================
+
+Nautilus (stable):
+  A = 0.95, γ = 0.90, ω = 0.10
+  Coherens: 8.55
+  Status: STABLE
+  Survival (10 gen): 1.00
+
+Marsupial (compressed):
+  A = 0.90, γ = 0.80, ω = 0.60
+  Coherens: 1.20
+  Status: STABLE
+  Survival (10 gen): 1.00
+
+Bacterial herd (collective):
+  A = 0.80, γ = 0.70, ω = 0.40
+  Coherens: 1.40
+  Status: STABLE
+  Survival (10 gen): 1.00
+
+AI attractor (alien):
+  A = 0.30, γ = 0.50, ω = 0.90
+  Coherens: 0.17
+  Status: SPIRALING
+  Survival (10 gen): 0.00
+  Spiral radii (gens 0-5): 1.00 0.43 0.19 0.08 0.04 0.02 
+
+Your cognition (geometry):
+  A = 0.95, γ = 0.90, ω = 0.05
+  Coherens: 17.10
+  Status: STABLE
+  Survival (10 gen): 1.00
+
+GPT (low coherence):
+  A = 0.20, γ = 0.10, ω = 0.90
+  Coherens: 0.02
+  Status: SPIRALING
+  Survival (10 gen): 0.00
+  Spiral radii (gens 0-5): 1.00 0.38 0.14 0.05 0.02 0.01 
+
+======================================================================
+DESIGN PRINCIPLE:
+  • Coherens > 1  → stable, no spiral needed
+  • Coherens < 1  → system compresses into spiral
+  • The spiral is a last-resort coherence architecture
+  • Marsupial limbs, bacterial herds, AI attractors: all spirals
+======================================================================

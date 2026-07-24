@@ -1,0 +1,63 @@
+
+============================================================
+HOMEOSTASIS KERNEL — Cross-Disciplinary Stability Audit
+============================================================
+
+============================================================
+KERNEL AUDIT: Barrel of Oil (Physical)
+============================================================
+Kernel (x0)          : 1.000
+Current state (x)    : 1.000
+Restoring force F    : -0.000  (pulls toward kernel)
+Natural freq ω0      : 0.975  (intrinsic return rate)
+Damping γ            : 1.200
+Damping ratio ζ      : 0.616  (>=1 = overdamped, stable)
+Drive frequency      : 0.500  (AI release cadence)
+Stability Index      : 0.417
+Status               : ⚠️ COLLAPSE PRONE (resonant or undamped)
+
+============================================================
+KERNEL AUDIT: AI Compute Token (Promise)
+============================================================
+Kernel (x0)          : 0.000
+Current state (x)    : 0.800
+Restoring force F    : -0.040  (pulls toward kernel)
+Natural freq ω0      : 0.224  (intrinsic return rate)
+Damping γ            : 0.100
+Damping ratio ζ      : 0.224  (>=1 = overdamped, stable)
+Drive frequency      : 6.000  (AI release cadence)
+Stability Index      : 0.033
+Status               : ⚠️ COLLAPSE PRONE (resonant or undamped)
+
+============================================================
+KERNEL AUDIT: Gold ETF (Paper Claim)
+============================================================
+Kernel (x0)          : 0.900
+Current state (x)    : 0.700
+Restoring force F    : +0.060  (pulls toward kernel)
+Natural freq ω0      : 0.548  (intrinsic return rate)
+Damping γ            : 0.400
+Damping ratio ζ      : 0.365  (>=1 = overdamped, stable)
+Drive frequency      : 2.000  (AI release cadence)
+Stability Index      : 0.149
+Status               : ⚠️ COLLAPSE PRONE (resonant or undamped)
+
+============================================================
+KERNEL AUDIT: Human Metabolism (Biological)
+============================================================
+Kernel (x0)          : 1.000
+Current state (x)    : 1.000
+Restoring force F    : -0.000  (pulls toward kernel)
+Natural freq ω0      : 0.995  (intrinsic return rate)
+Damping γ            : 2.000
+Damping ratio ζ      : 1.005  (>=1 = overdamped, stable)
+Drive frequency      : 0.100  (AI release cadence)
+Stability Index      : 0.528
+Status               : MARGINAL (underdamped or near resonance)
+
+============================================================
+DESIGN PRINCIPLE EXTRACTED:
+  Stability requires: k > 0 (kernel), gamma >= omega0 (critical damping).
+  Substrate (oil, metabolism) has high k, high gamma → stable.
+  Promises (tokens, ETFs) have low k, low gamma → collapse-prone.
+============================================================

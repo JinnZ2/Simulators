@@ -2,6 +2,8 @@
  "air_c": 43.3,
  "wet_bulb_c": 32.6,
  "surface_c_full_sun": 105.4,
+ "human_limit_hit": true,
+ "maintenance_deferred": true,
  "human_limit_note": "wet bulb >31C = severe human risk; field maintenance window closes",
  "pairs": [
   {
@@ -59,9 +61,11 @@
  "electronics": {
   "internal_c": 58.3,
   "aging_multiplier_vs_25C": 15.5,
+  "days_in_projection": 45,
   "projected_drift_pct": 0.48,
   "flag": "GREEN",
   "falsify": "co-locate reference-grade sensor for the exposure window; divergence should track projected drift within 2x"
  },
+ "tsd_006_fired": true,
  "verdict": "RED"
 }

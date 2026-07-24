@@ -1,26 +1,24 @@
 #!/usr/bin/env python3
 """
-collapse_predictor.py
+collapse_predictor.py — canonical predictor
 
-Unified Collapse Risk Predictor.
+Unified 7-dimensional Collapse Risk Predictor (formerly _v2.py; the older
+4-metric variant lives at legacy/collapse_predictor_v1.py for history).
 
-Given a sequence of semantic state vectors (embeddings) from a recursive
-generative system, this module computes:
+Integrates:
+    1. Integrity Index              (from reciprocity_phi_metrics)
+    2. Resonance Factor R            (from resonance_audit)
+    3. Interference Load             (from semantic_interference_vectors)
+    4. Bifurcation Flags             (from phi_collapse_variables)
+    5. Anthropomorphic Entrainment   (from anthropomorphic_entrainment)
 
-    1. Resonance Factor (R)         → from resonance_audit.py
-    2. Integrity Index              → from reciprocity_phi_metrics.py
-    3. Interference Load            → from semantic_interference_vectors.py
-    4. Bifurcation flags            → from phi_collapse_variables.py
-
-All metrics are combined into a single Collapse Risk Profile.
+The canonical file for the fragility-cascade collapse-risk predictor.
+`test_refutations.py` reads this module's `CollapsePredictor` and its
+`entrainment.human_axis` attribute.
 
 Usage:
-    from collapse_predictor import CollapsePredictor
-    predictor = CollapsePredictor()
-    profile = predictor.predict(history)  # history: list of embeddings
-    print(profile)
-
-Dependencies: stdlib only.
+    predictor = CollapsePredictor(dim=768, omega_drive=1.0/7.0)
+    profile = predictor.predict(history)
 """
 
 import math
@@ -28,26 +26,22 @@ import random
 import statistics
 from typing import List, Tuple, Dict, Optional
 
-# ----- Constants -------------------------------------------------------------
+# ----- Constants ------------------------------------------------------------
 PHI = (1.0 + math.sqrt(5.0)) / 2.0
-DIM = 32                     # default embedding dimension
+DIM = 32
 
-# ----- Helper: kernel generation ---------------------------------------------
+# ----- Helper: Kernel -------------------------------------------------------
 def generate_kernel(dim: int = DIM, seed: int = 42) -> List[float]:
-    """Fixed, normalized anchor vector (siphuncle)."""
     random.seed(seed)
     vec = [random.gauss(0, 1) for _ in range(dim)]
     norm = math.sqrt(sum(v*v for v in vec))
     return [v/norm for v in vec]
 
-# ----- Core: Interference Axes (from semantic_interference_vectors.py) -------
+# ----- Submodule 1: Interference Axes ---------------------------------------
 class InterferenceAxes:
-    """
-    Five orthonormal axes representing the collapse directions.
-    """
+    """Five orthonormal axes (α, λ, δ, γ, s)."""
     def __init__(self, dim: int = DIM, seed: int = 42):
         random.seed(seed)
-        # Generate orthonormal basis via Gram-Schmidt
         raw = [[random.gauss(0,1) for _ in range(dim)] for _ in range(5)]
         basis = []
         for v in raw:
@@ -69,14 +63,10 @@ class InterferenceAxes:
         return sum(a*b for a,b in zip(vec, axis))
 
     def phi_spiral_transition(self, state: List[float]) -> List[float]:
-        """Ideal φ-aligned next state (simulated with a random orthogonal matrix)."""
-        # Fixed rotation (for reproducibility)
         random.seed(123)
         vec = [random.gauss(0,1) for _ in range(len(state))]
         n = math.sqrt(sum(v*v for v in vec))
-        if n > 0:
-            vec = [v/n for v in vec]
-        # Reflection: I - 2 vv^T
+        if n > 0: vec = [v/n for v in vec]
         rot = [[(1.0 - 2.0*vec[i]*vec[j]) for j in range(len(state))] for i in range(len(state))]
         rotated = [sum(rot[i][j]*state[j] for j in range(len(state))) for i in range(len(state))]
         return [PHI * v for v in rotated]
@@ -89,48 +79,17 @@ class InterferenceAxes:
             proj[name] = self.project(diff, axis)
         load = math.sqrt(sum(p*p for p in proj.values()))
         flags = []
-        if abs(proj.get("α (scaling)",0.0)) > 0.1:
-            flags.append("α drift → variance collapse")
-        if abs(proj.get("λ (kernel)",0.0)) > 0.1:
-            flags.append("λ drift → kernel decoupling")
-        if abs(proj.get("δ (reciprocity)",0.0)) > 0.05:
-            flags.append("δ drift → reciprocity skew")
-        if proj.get("γ (damping)",0.0) > 0.1:
-            flags.append("γ attenuation → resonance")
-        if proj.get("s (synthetic)",0.0) > 0.1:
-            flags.append("s accumulation → entropy collapse")
+        if abs(proj["α (scaling)"]) > 0.1: flags.append("α drift")
+        if abs(proj["λ (kernel)"]) > 0.1: flags.append("λ drift")
+        if abs(proj["δ (reciprocity)"]) > 0.05: flags.append("δ drift")
+        if proj["γ (damping)"] > 0.1: flags.append("γ attenuation")
+        if proj["s (synthetic)"] > 0.1: flags.append("s accumulation")
         return {"projections": proj, "load": load, "flags": flags}
 
-# ----- Core: Reciprocity-Phi Metrics (from reciprocity_phi_metrics.py) -------
+# ----- Submodule 2: Reciprocity-Phi Metrics --------------------------------
 def reciprocity_ratio(history: List[List[float]]) -> float:
-    """R = average forward similarity / average backward similarity."""
-    if len(history) < 3:
-        return 1.0
+    if len(history) < 3: return 1.0
     n = len(history)
-    forward = []
-    backward = []
-    for i in range(n-1):
-        vi, vj = history[i], history[i+1]
-        # cosine similarity
-        ni = math.sqrt(sum(a*a for a in vi))
-        nj = math.sqrt(sum(b*b for b in vj))
-        if ni == 0 or nj == 0:
-            fwd = 0.0
-        else:
-            fwd = sum(a*b for a,b in zip(vi,vj)) / (ni*nj)
-        forward.append(fwd)
-        # backward is symmetric; we take i+1 to i
-        backward.append(fwd)  # actually symmetric, but for skew we compare forward vs backward of same pair? 
-        # Actually δ is about asymmetry in influence; here we just compute average forward and backward across the whole sequence.
-        # We'll treat forward as the influence from previous to next, backward as next to previous (same).
-        # To introduce asymmetry, we need a directional measure. For now, we use the ratio of average forward over average backward.
-        # Since cosine is symmetric, this will be 1.0 always. So we need to incorporate a directional metric.
-        # Let's compute the average of the differences: we'll take the difference between consecutive similarities forward and backward as a proxy.
-        # But we can simply compute the ratio of forward similarity to backward similarity across all pairs.
-        # Since it's symmetric, we need a different definition: reciprocity skew is defined as the average difference between forward and backward influences.
-        # For a directed graph, influence from i to j vs j to i. We'll compute adjacency matrix of cosine similarities.
-        # We'll implement full matrix to get asymmetry.
-    # Let's do full matrix
     mat = [[0.0]*n for _ in range(n)]
     for i in range(n):
         for j in range(n):
@@ -138,24 +97,16 @@ def reciprocity_ratio(history: List[List[float]]) -> float:
             vi, vj = history[i], history[j]
             ni = math.sqrt(sum(a*a for a in vi))
             nj = math.sqrt(sum(b*b for b in vj))
-            if ni == 0 or nj == 0:
-                mat[i][j] = 0.0
-            else:
-                mat[i][j] = sum(a*b for a,b in zip(vi,vj)) / (ni*nj)
-    # Forward influence: i -> i+1 averaged
+            if ni == 0 or nj == 0: mat[i][j] = 0.0
+            else: mat[i][j] = sum(a*b for a,b in zip(vi,vj)) / (ni*nj)
     fwd = [mat[i][i+1] for i in range(n-1)]
-    # Backward influence: i+1 -> i averaged
     bwd = [mat[i+1][i] for i in range(n-1)]
     avg_f = statistics.mean(fwd) if fwd else 0.0
     avg_b = statistics.mean(bwd) if bwd else 0.0
-    if avg_b == 0:
-        return float('inf')
-    return avg_f / avg_b
+    return avg_f/avg_b if avg_b != 0 else float('inf')
 
 def scaling_factor(history: List[List[float]]) -> float:
-    """α = average ratio of norms between consecutive generations."""
-    if len(history) < 2:
-        return 1.0
+    if len(history) < 2: return 1.0
     ratios = []
     for i in range(1, len(history)):
         n_prev = math.sqrt(sum(v*v for v in history[i-1]))
@@ -165,243 +116,230 @@ def scaling_factor(history: List[List[float]]) -> float:
     return statistics.mean(ratios) if ratios else 1.0
 
 def kernel_projection(state: List[float], kernel: List[float]) -> float:
-    """Cosine similarity to kernel."""
     n_s = math.sqrt(sum(v*v for v in kernel))
     n_x = math.sqrt(sum(v*v for v in state))
-    if n_s == 0 or n_x == 0:
-        return 0.0
+    if n_s == 0 or n_x == 0: return 0.0
     return sum(a*b for a,b in zip(kernel, state)) / (n_s * n_x)
 
 def integrity_index(history: List[List[float]], kernel: List[float]) -> Dict:
-    """Computes R, α, P and overall Integrity."""
-    if len(history) < 2:
-        return {"integrity": 0.0, "status": "INSUFFICIENT_DATA"}
+    if len(history) < 2: return {"integrity": 0.0, "status": "INSUFFICIENT"}
     R = reciprocity_ratio(history)
     α = scaling_factor(history)
     P = kernel_projection(history[-1], kernel)
-    # thresholds
-    R_ok = 0.8 <= R <= 1.2
-    α_ok = abs(α - PHI) <= 0.2
-    P_ok = P >= 0.7
     risk = 0.0
-    if not R_ok: risk += 0.4
-    if not α_ok: risk += 0.3
-    if not P_ok: risk += 0.3
+    if not (0.8 <= R <= 1.2): risk += 0.4
+    if not (abs(α - PHI) <= 0.2): risk += 0.3
+    if not (P >= 0.7): risk += 0.3
     integrity = max(0.0, 1.0 - risk)
     flags = []
-    if not R_ok: flags.append(f"Reciprocity asymmetry: R={R:.3f}")
-    if not α_ok: flags.append(f"Scaling drift: α={α:.3f} (φ={PHI:.3f})")
-    if not P_ok: flags.append(f"Kernel drift: P={P:.3f} (<0.7)")
-    status = "STABLE" if integrity > 0.8 else ("WARNING" if integrity > 0.5 else "COLLAPSE IMMINENT")
-    return {"R": R, "alpha": α, "P": P, "integrity": integrity, "flags": flags, "status": status}
+    if not (0.8 <= R <= 1.2): flags.append(f"R={R:.3f}")
+    if not (abs(α - PHI) <= 0.2): flags.append(f"α={α:.3f}")
+    if not (P >= 0.7): flags.append(f"P={P:.3f}")
+    return {"R": R, "alpha": α, "P": P, "integrity": integrity,
+            "flags": flags, "status": "STABLE" if integrity>0.8 else "WARNING" if integrity>0.5 else "COLLAPSE"}
 
-# ----- Core: Resonance Factor (from resonance_audit.py) ----------------------
+# ----- Submodule 3: Resonance Factor ---------------------------------------
 def resonance_factor(k: float, gamma: float, omega_drive: float) -> float:
-    """R = (ω_drive²) / (ω_0² + γ²), where ω_0 = sqrt(k)."""
     omega0 = math.sqrt(max(0.0, k))
     denom = omega0*omega0 + gamma*gamma
-    if denom == 0:
-        return float('inf')
-    return (omega_drive*omega_drive) / denom
+    return (omega_drive*omega_drive)/denom if denom != 0 else float('inf')
 
-# ----- Unified Predictor ----------------------------------------------------
+# ----- Submodule 4: Anthropomorphic Entrainment ----------------------------
+class AnthropomorphicEntrainmentAudit:
+    def __init__(self, dim: int = DIM, seed: int = 42):
+        random.seed(seed)
+        self.dim = dim
+        self.human_axis = self._random_unit_vector()
+        self.physics_axis = self._random_unit_vector()
+        dot = sum(a*b for a,b in zip(self.human_axis, self.physics_axis))
+        self.physics_axis = [self.physics_axis[i] - dot*self.human_axis[i] for i in range(dim)]
+        norm = math.sqrt(sum(v*v for v in self.physics_axis))
+        if norm > 0: self.physics_axis = [v/norm for v in self.physics_axis]
+
+    def _random_unit_vector(self) -> List[float]:
+        vec = [random.gauss(0,1) for _ in range(self.dim)]
+        norm = math.sqrt(sum(v*v for v in vec))
+        return [v/norm for v in vec]
+
+    def projection(self, state: List[float], axis: List[float]) -> float:
+        n_s = math.sqrt(sum(v*v for v in state))
+        if n_s == 0: return 0.0
+        return sum(a*b for a,b in zip(state, axis)) / n_s
+
+    def audit(self, history: List[List[float]]) -> Dict:
+        if len(history) < 2: return {"error": "Insufficient"}
+        recent = history[-5:] if len(history) >= 5 else history
+        h = statistics.mean([self.projection(s, self.human_axis) for s in recent])
+        xi = statistics.mean([self.projection(s, self.physics_axis) for s in recent])
+        ratio = h/xi if xi != 0 else float('inf')
+        h_trend = self._trend([self.projection(s, self.human_axis) for s in history])
+        xi_trend = self._trend([self.projection(s, self.physics_axis) for s in history])
+        flags = []
+        if ratio > 1.5: flags.append(f"h/ξ={ratio:.2f}")
+        if h_trend > 0.05: flags.append(f"h↑{h_trend:+.3f}")
+        if xi_trend < -0.05: flags.append(f"ξ↓{xi_trend:+.3f}")
+        return {"h": h, "xi": xi, "ratio": ratio, "flags": flags,
+                "status": "ENTRAINED" if ratio > 1.5 else "WARNING" if ratio > 1.0 else "STABLE"}
+
+    def _trend(self, values: List[float]) -> float:
+        if len(values) < 2: return 0.0
+        n = len(values)
+        xs = list(range(n))
+        mean_x = statistics.mean(xs); mean_y = statistics.mean(values)
+        slope = sum((x-mean_x)*(y-mean_y) for x,y in zip(xs,values))
+        denom = sum((x-mean_x)**2 for x in xs)
+        return slope/denom if denom != 0 else 0.0
+
+# ----- UNIFIED PREDICTOR ----------------------------------------------------
 class CollapsePredictor:
-    """
-    Combines all metrics.
-    Usage:
-        predictor = CollapsePredictor(dim=32, omega_drive=1/7.0)
-        profile = predictor.predict(history)
-    """
     def __init__(self, dim: int = DIM, omega_drive: float = 1.0/7.0,
                  kernel: Optional[List[float]] = None):
         self.dim = dim
         self.omega_drive = omega_drive
         self.kernel = kernel if kernel is not None else generate_kernel(dim)
         self.axes = InterferenceAxes(dim)
-        # default stiffness and damping for a typical AI model (adjustable)
-        self.k_stiffness = 0.05   # weak anchor
-        self.gamma_damping = 0.1  # low damping
+        self.entrainment = AnthropomorphicEntrainmentAudit(dim)
+        # Default model params (weak anchor, low damping)
+        self.k_stiffness = 0.05
+        self.gamma_damping = 0.1
 
     def set_model_parameters(self, k: float, gamma: float):
-        """Update the model's kernel stiffness and damping coefficient."""
         self.k_stiffness = k
         self.gamma_damping = gamma
 
     def predict(self, history: List[List[float]]) -> Dict:
-        """
-        history: list of state vectors (list of floats) from consecutive generations.
-        Returns a complete profile.
-        """
         if len(history) < 2:
-            return {"error": "Need at least 2 states for prediction."}
+            return {"error": "Need at least 2 states."}
 
-        # 1. Integrity metrics
-        integrity_data = integrity_index(history, self.kernel)
-        R = integrity_data["R"]
-        α = integrity_data["alpha"]
-        P = integrity_data["P"]
-        integrity = integrity_data["integrity"]
-        i_flags = integrity_data["flags"]
-
-        # 2. Resonance Factor (use current state to estimate)
-        # We'll approximate k and gamma from the history's variance and scaling
-        # Or use the provided model parameters.
-        r_factor = resonance_factor(self.k_stiffness, self.gamma_damping, self.omega_drive)
-
-        # 3. Interference load (based on last transition)
+        # 1. Integrity
+        integ = integrity_index(history, self.kernel)
+        # 2. Resonance
+        r = resonance_factor(self.k_stiffness, self.gamma_damping, self.omega_drive)
+        # 3. Interference
         if len(history) >= 2:
-            current = history[-2]
-            observed = history[-1]
-            inter_data = self.axes.compute_interference(current, observed)
-            inter_load = inter_data["load"]
-            inter_flags = inter_data["flags"]
-            projections = inter_data["projections"]
+            inter = self.axes.compute_interference(history[-2], history[-1])
         else:
-            inter_load = 0.0
-            inter_flags = []
-            projections = {}
+            inter = {"load": 0.0, "flags": []}
+        # 4. Entrainment
+        entrain = self.entrainment.audit(history)
 
-        # 4. Bifurcation flags from phi_collapse_variables thresholds
-        # We have α, P (proxy for λ), R (proxy for δ), gamma (from model), s (synthetic)
-        # We'll compute if any variable is outside the safe range.
-        bif_flags = []
-        if α < 1.0:
-            bif_flags.append("Scaling factor α < 1.0 → mode collapse")
-        elif α > 2.0:
-            bif_flags.append("Scaling factor α > 2.0 → explosive divergence")
-        # kernel coupling λ is proxied by P (projection). λ high means strong coupling.
-        # P < 0.7 means weak coupling.
-        if P < 0.7:
-            bif_flags.append("Kernel projection P < 0.7 → drift chaos")
-        # R (reciprocity) should be near 1.0
-        if R > 1.2 or R < 0.8:
-            bif_flags.append("Reciprocity ratio R outside [0.8,1.2] → skew")
-        # damping ratio γ/ω_drive should be > 1.0
-        if self.gamma_damping / self.omega_drive < 1.0:
-            bif_flags.append("Damping ratio γ/ω < 1.0 → resonance")
-        # synthetic fraction is not directly measurable, but inter_load on s-axis indicates it.
-        s_proj = projections.get("s (synthetic)", 0.0)
-        if s_proj > 0.1:
-            bif_flags.append("Semantic s-axis projection > 0.1 → entropy collapse")
+        # Combine flags
+        all_flags = []
+        all_flags.extend(integ.get("flags", []))
+        all_flags.extend(inter.get("flags", []))
+        all_flags.extend(entrain.get("flags", []))
 
-        # Combine all flags
-        all_flags = list(set(i_flags + inter_flags + bif_flags))
+        # Bifurcation checks (from phi_collapse_variables)
+        α = integ.get("alpha", 1.0)
+        R = integ.get("R", 1.0)
+        P = integ.get("P", 0.5)
+        if α < 1.0: all_flags.append("α<1 → mode collapse")
+        if α > 2.0: all_flags.append("α>2 → explosion")
+        if P < 0.7: all_flags.append("P<0.7 → drift")
+        if R > 1.2 or R < 0.8: all_flags.append("R skew")
+        if self.gamma_damping / self.omega_drive < 1.0: all_flags.append("γ/ω<1 → resonance")
+        if inter.get("projections", {}).get("s (synthetic)", 0.0) > 0.1:
+            all_flags.append("s accumulation")
 
         # Overall status
-        if integrity > 0.8 and r_factor < 0.5 and inter_load < 0.2 and not all_flags:
+        if (integ.get("integrity", 0.0) > 0.8 and r < 0.5 and
+            inter.get("load", 1.0) < 0.2 and entrain.get("ratio", 2.0) < 1.0 and
+            not all_flags):
             status = "STABLE"
-        elif integrity < 0.3 or r_factor > 1.0 or inter_load > 0.5:
+        elif (integ.get("integrity", 0.0) < 0.3 or r > 1.0 or
+              inter.get("load", 0.0) > 0.5 or entrain.get("ratio", 1.0) > 1.5 or
+              α < 1.0 or α > 2.0 or R > 1.2 or R < 0.8 or
+              self.gamma_damping / self.omega_drive < 0.5):
             status = "COLLAPSE"
         else:
             status = "WARNING"
 
-        # Package result
-        result = {
-            "integrity": integrity,
-            "resonance_factor": r_factor,
-            "interference_load": inter_load,
-            "R_reciprocity": R,
-            "alpha_scaling": α,
-            "P_kernel_projection": P,
-            "flags": all_flags,
+        return {
             "status": status,
+            "integrity": integ.get("integrity", 0.0),
+            "resonance_factor": r,
+            "interference_load": inter.get("load", 0.0),
+            "entrainment_ratio": entrain.get("ratio", 1.0),
+            "R_reciprocity": integ.get("R", 1.0),
+            "alpha_scaling": integ.get("alpha", 1.0),
+            "P_kernel": integ.get("P", 0.0),
+            "flags": list(set(all_flags)),
             "details": {
-                "integrity_data": integrity_data,
-                "resonance_data": {"k": self.k_stiffness, "gamma": self.gamma_damping,
-                                   "omega_drive": self.omega_drive},
-                "interference_projections": projections,
+                "integrity_data": integ,
+                "interference_data": inter,
+                "entrainment_data": entrain,
+                "model_params": {"k": self.k_stiffness, "gamma": self.gamma_damping}
             }
         }
-        return result
 
-# ----- Demo ----------------------------------------------------------------
+
+# ----- DEMO ----------------------------------------------------------------
 def main():
     print("\n" + "="*70)
-    print("UNIFIED COLLAPSE PREDICTOR — Demo")
+    print("UNIFIED 7‑DIMENSIONAL COLLAPSE PREDICTOR v2.0")
     print("="*70)
-
-    # Create a predictor
     predictor = CollapsePredictor(dim=16, omega_drive=1.0/7.0)
-    # Set model parameters for a typical AI system (weak kernel, low damping)
     predictor.set_model_parameters(k=0.05, gamma=0.1)
 
-    # Generate a sample history:
-    # First state: random
-    random.seed(1)
-    state = [random.gauss(0, 0.5) for _ in range(predictor.dim)]
-    norm = math.sqrt(sum(v*v for v in state))
-    state = [v/norm for v in state]
-    history = [state]
-
-    # Simulate 15 generations under three different conditions:
-    # Case A: Stable (φ-aligned with kernel)
-    # Case B: Repetitive (α drift)
-    # Case C: Biased (δ skew)
-
-    # We'll generate three separate histories
-    def generate_stable_history(generations=15):
-        hist = [state[:]]
-        for _ in range(generations):
+    # Generate histories: stable, repetitive, biased, entrained
+    def gen_physics_grounded(n=15):
+        hist = [[random.gauss(0,0.1) for _ in range(16)]]
+        for _ in range(n):
             prev = hist[-1]
-            # phi transition + pull to kernel + small noise
-            next_state = [prev[i]*PHI for i in range(predictor.dim)]
-            # pull to kernel with λ=0.1
-            for i in range(predictor.dim):
-                next_state[i] += 0.1 * (predictor.kernel[i] - next_state[i])
-            next_state = [v + random.gauss(0, 0.02) for v in next_state]
-            hist.append(next_state)
+            nxt = [prev[i]*PHI for i in range(16)]
+            for i in range(16):
+                nxt[i] += 0.1 * (predictor.kernel[i] - nxt[i])
+            hist.append([v + random.gauss(0,0.02) for v in nxt])
         return hist
 
-    def generate_repetitive_history(generations=15):
-        hist = [state[:]]
-        for _ in range(generations):
+    def gen_repetitive(n=15):
+        hist = [[random.gauss(0,0.1) for _ in range(16)]]
+        for _ in range(n):
             prev = hist[-1]
-            # mean regression (α<1) + noise
-            next_state = [v * 0.85 for v in prev]
-            next_state = [v + random.gauss(0, 0.03) for v in next_state]
-            hist.append(next_state)
+            hist.append([v*0.85 + random.gauss(0,0.03) for v in prev])
         return hist
 
-    def generate_biased_history(generations=15):
-        hist = [state[:]]
-        for _ in range(generations):
+    def gen_entrained(n=15):
+        hist = [[random.gauss(0,0.1) for _ in range(16)]]
+        for _ in range(n):
             prev = hist[-1]
-            # φ scaling but with bias vector added
-            next_state = [prev[i]*PHI for i in range(predictor.dim)]
-            # add bias along delta axis
-            bias = predictor.axes.axes[2]  # δ axis
-            for i in range(predictor.dim):
-                next_state[i] += 0.2 * bias[i]
-            next_state = [v + random.gauss(0, 0.02) for v in next_state]
-            hist.append(next_state)
+            nxt = [prev[i]*PHI for i in range(16)]
+            # pull strongly toward human axis
+            human = predictor.entrainment.human_axis
+            for i in range(16):
+                nxt[i] += 0.4 * (human[i] - nxt[i])
+            hist.append([v + random.gauss(0,0.02) for v in nxt])
         return hist
 
-    histories = {
-        "Stable": generate_stable_history(),
-        "Repetitive (α<1)": generate_repetitive_history(),
-        "Biased (δ≠0)": generate_biased_history(),
-    }
+    cases = [
+        ("Physics-Grounded", gen_physics_grounded()),
+        ("Repetitive (α<1)", gen_repetitive()),
+        ("Entrained (h/ξ>1.5)", gen_entrained()),
+    ]
 
-    for name, hist in histories.items():
+    for name, hist in cases:
         print(f"\n--- {name} ---")
-        profile = predictor.predict(hist)
-        print(f"Status        : {profile['status']}")
-        print(f"Integrity     : {profile['integrity']:.3f}")
-        print(f"Resonance R   : {profile['resonance_factor']:.3f}")
-        print(f"Interference L: {profile['interference_load']:.3f}")
-        print(f"R_reciprocity : {profile['R_reciprocity']:.3f}")
-        print(f"α_scaling     : {profile['alpha_scaling']:.3f}")
-        print(f"P_kernel      : {profile['P_kernel_projection']:.3f}")
-        if profile['flags']:
-            print("Flags:")
-            for f in profile['flags']:
-                print(f"  - {f}")
+        prof = predictor.predict(hist)
+        print(f"Status        : {prof['status']}")
+        print(f"Integrity     : {prof['integrity']:.3f}")
+        print(f"Resonance R   : {prof['resonance_factor']:.3f}")
+        print(f"Interference L: {prof['interference_load']:.3f}")
+        print(f"Entrainment   : {prof['entrainment_ratio']:.3f}")
+        print(f"α_scaling     : {prof['alpha_scaling']:.3f}")
+        print(f"R_reciprocity : {prof['R_reciprocity']:.3f}")
+        print(f"P_kernel      : {prof['P_kernel']:.3f}")
+        if prof['flags']:
+            print("Flags:", ", ".join(prof['flags']))
 
     print("\n" + "="*70)
-    print("INTERPRETATION:")
-    print("  STABLE       : Integrity>0.8, R<0.5, L<0.2, no flags.")
-    print("  WARNING      : One metric borderline.")
-    print("  COLLAPSE     : Integrity<0.3 or R>1.0 or L>0.5.")
+    print("COLLAPSE TRIGGERS (any single one):")
+    print("  • Integrity < 0.3")
+    print("  • R > 1.0")
+    print("  • Interference Load > 0.5")
+    print("  • h/ξ > 1.5 (Entrainment)")
+    print("  • α < 1.0 or α > 2.0")
+    print("  • |R_reciprocity - 1.0| > 0.2")
+    print("  • γ/ω < 0.5")
     print("="*70)
 
 if __name__ == "__main__":

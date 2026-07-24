@@ -1,0 +1,83 @@
+
+======================================================================
+CRYPTOGRAPHIC INTERFERENCE — Entropy, Redundancy, Anomaly
+======================================================================
+
+--- Natural English ---
+Text: The cat sat on the mat. It was a sunny day....
+  Entropy: 3.525 bits/char
+  Redundancy: 0.000
+  Entropy deviation: 0.565
+  Anomaly (steganographic): 0.001
+  Interference profile:
+     α (scaling): 0.29 █████
+      λ (kernel): 0.00 
+    δ (reciprocity): 0.28 █████
+     γ (damping): 0.00 
+    s (synthetic): 1.00 ████████████████████
+    h/ξ (entrainment): 0.28 █████
+
+--- AI‑Generated ---
+Text: The cat sat on the mat in a very sunny and bright ...
+  Entropy: 3.756 bits/char
+  Redundancy: 0.000
+  Entropy deviation: 0.487
+  Anomaly (steganographic): 0.000
+  Interference profile:
+     α (scaling): 0.25 ████
+      λ (kernel): 0.00 
+    δ (reciprocity): 0.24 ████
+     γ (damping): 0.00 
+    s (synthetic): 1.00 ████████████████████
+    h/ξ (entrainment): 0.24 ████
+
+--- Manipulative ---
+Text: You always do this. Everyone knows it. It's comple...
+  Entropy: 4.157 bits/char
+  Redundancy: 0.000
+  Entropy deviation: 0.472
+  Anomaly (steganographic): 0.015
+  Interference profile:
+     α (scaling): 0.17 ███
+      λ (kernel): 0.02 
+    δ (reciprocity): 0.24 ████
+     γ (damping): 0.00 
+    s (synthetic): 1.00 ████████████████████
+    h/ξ (entrainment): 0.24 ████
+
+--- Cryptic ---
+Text: Xyzl mq b kpq. Wkh vhfuhw lv klgghq....
+  Entropy: 3.783 bits/char
+  Redundancy: 0.000
+  Entropy deviation: 1.000
+  Anomaly (steganographic): 0.000
+  Interference profile:
+     α (scaling): 0.24 ████
+      λ (kernel): 0.00 
+    δ (reciprocity): 0.50 ██████████
+     γ (damping): 0.00 
+    s (synthetic): 1.00 ████████████████████
+    h/ξ (entrainment): 0.50 ██████████
+
+--- WEIRD Academic ---
+Text: The epistemological implications of recursive self...
+  Entropy: 4.158 bits/char
+  Redundancy: 0.000
+  Entropy deviation: 0.294
+  Anomaly (steganographic): 0.000
+  Interference profile:
+     α (scaling): 0.17 ███
+      λ (kernel): 0.00 
+    δ (reciprocity): 0.15 ██
+     γ (damping): 0.00 
+    s (synthetic): 1.00 ████████████████████
+    h/ξ (entrainment): 0.15 ██
+
+======================================================================
+DESIGN PRINCIPLE:
+  • Natural English has moderate entropy (~4.0) and low redundancy.
+  • AI‑generated text often has lower entropy and higher redundancy.
+  • Manipulative text has high redundancy and high deviation.
+  • Cryptic text has high entropy and high anomaly.
+  • Cryptographic interference is measurable and maps to collapse axes.
+======================================================================

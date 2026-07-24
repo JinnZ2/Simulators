@@ -1,0 +1,26 @@
+==============================================================
+SITE INTERROGATION
+==============================================================
+
+1. what does the land offer?
+     local_stone               20000 kg
+     clay                      10000 kg
+     human_labor              500000 J
+     waste_heat                    0 J
+     soil_bearing           adequate  (reading)
+     buildable from site alone: ['lay_stone_pad']
+
+2/3. what does the code say?  how old is it?
+     footing_min_500mm: 52y old (enacted 1974)
+        basis: none declared
+        site already meets its stated intent (soil_bearing:adequate) -- mandate is convention, not physics
+
+5. what external energy is required?
+     physics_optimal             0 J          0 kg
+     code_constrained            0 J          0 kg
+
+4. waste / unoptimized by not aligning with thermodynamics
+     external energy the code adds over physics: 0 J
+     external matter the code adds over physics: 0 kg
+     extra waste heat: 0 J
+==============================================================

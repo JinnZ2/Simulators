@@ -1,0 +1,12 @@
+{
+  "C29_TEST": {
+    "id": "C29_TEST",
+    "statement": "Coherens predicts collapse risk continuously and reliably.",
+    "domain": "ai_model_collapse",
+    "refutation_criteria": "If C > 1.0 but collapse occurs, or C < 0.5 but stability persists, refute.",
+    "evidence": [],
+    "status": "refuted",
+    "created_at": 1784927809.743602,
+    "updated_at": 1784927809.745764
+  }
+}

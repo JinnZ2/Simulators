@@ -1,0 +1,44 @@
+
+======================================================================
+ANTHROPOMORPHIC ENTRAINMENT AUDIT
+======================================================================
+Measures h = human‑plausibility pull vs. ξ = physics‑fidelity restoring force.
+When h/ξ > 1.5, the system is entrained toward consensus hallucination.
+----------------------------------------------------------------------
+
+--- Physics‑Grounded ---
+h (human pull)    : 0.013
+ξ (physics fidelity): 0.989
+h/ξ ratio         : 0.013
+h trend           : -0.017/gen
+ξ trend           : +0.034/gen
+Status            : STABLE — physics‑grounded
+
+--- Human‑Entrained ---
+h (human pull)    : 0.995
+ξ (physics fidelity): 0.028
+h/ξ ratio         : 35.185
+h trend           : +0.016/gen
+ξ trend           : -0.011/gen
+Status            : ⚠️ ENTRAINED — collapse imminent
+Flags:
+  - Entrainment ratio h/ξ = 35.19 > 1.5 → collapse
+
+--- Crossing (physics → human) ---
+h (human pull)    : 0.987
+ξ (physics fidelity): 0.091
+h/ξ ratio         : 10.879
+h trend           : +0.064/gen
+ξ trend           : -0.046/gen
+Status            : ⚠️ ENTRAINED — collapse imminent
+Flags:
+  - Entrainment ratio h/ξ = 10.88 > 1.5 → collapse
+  - h increasing (+0.064/gen) → human‑plausibility pull strengthening
+
+======================================================================
+DESIGN PRINCIPLE:
+  • A stable system must maintain ξ > h.
+  • If h/ξ > 1.5, the system is entrained toward human‑plausibility.
+  • This is a distinct collapse mode: **Consensus Hallucination**.
+  • To stabilize: increase empirical‑fidelity loss terms; decrease RLHF weight.
+======================================================================

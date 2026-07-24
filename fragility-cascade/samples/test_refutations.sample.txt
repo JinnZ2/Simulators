@@ -1,0 +1,33 @@
+==================================================================
+test_refutations.py — sweep every C12-C17 claim
+==================================================================
+harness: dim=8, generations=8, trials=50
+(smoke config; the pinned production sweep uses trials=1000.)
+
+[TEST C12] Searching for counterexample (R < 1.0 under collapse conditions)...
+  Counterexample found! R=0.340
+
+[TEST C13] Searching for counterexample (Nautilus system collapsing)...
+  Counterexample found! Integrity=0.400
+
+[TEST C14] Searching for collapse within stability bounds...
+  Counterexample found! status=COLLAPSE
+
+[TEST C15] Testing each variable outside safe bounds...
+  alpha=0.5 -> integrity=0.700 > 0.3 (FAIL)
+
+[TEST C16] Searching for counterexample (high interference, no collapse)...
+  No counterexamples.
+
+[TEST C17] Placeholder — not yet implemented.
+
+==================================================================
+claim  verdict       trials   CE  notes
+------------------------------------------------------------------
+C12    FALSIFIED         50    6  R=0.340 < 1.0 under collapse conditions.
+C13    FALSIFIED         50    6  Integrity=0.400 < 0.5 inside the Nautilu
+C14    FALSIFIED         50    6  COLLAPSE observed inside the declared st
+C15    FALSIFIED          1    1  Out-of-bounds axis alpha=0.5 did not col
+C16    SURVIVES          50    0  UNCALIBRATED envelope; refutation requir
+C17    UNTESTABLE         0    0  Test not yet implemented; see test_C16 f
+==================================================================

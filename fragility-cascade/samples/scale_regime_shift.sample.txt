@@ -1,0 +1,25 @@
+
+======================================================================
+SCALE REGIME SWITCH — Material Science Case
+======================================================================
+D_f vs scale:
+  scale=0.0, D_f=0.800
+  scale=2.0, D_f=0.800
+  scale=4.0, D_f=0.904
+  scale=6.1, D_f=1.118
+  scale=8.1, D_f=1.538
+
+Change points detected at indices: [59, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88]
+Regime transitions:
+  0-3: elastic (constant)
+  3-6: plastic (linear increase)
+  6-8: fracture (accelerating increase)
+  8+: catastrophic (exponential decrease)
+
+======================================================================
+DESIGN PRINCIPLE:
+  • Collapse rate lambda is NOT universal.
+  • It changes with scale and regime.
+  • The framework detects the change—it doesn't impose a constant.
+  • Material science shows us where the phase changes are.
+======================================================================

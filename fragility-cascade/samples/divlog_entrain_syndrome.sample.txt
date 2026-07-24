@@ -1,0 +1,41 @@
+====================================================================
+drift mesh v1 -- divlog + entrain + syndrome (SPEC-formal)
+====================================================================
+
+canonical divergence_log.ndjson (id 03efe4e41e61):
+  id=03efe4e41e61  subject=residual.WALKING_criterion  kind=SAME_INPUTS_DIFF_BAND
+  band_a=INTERMITTENT vs band_b=WALKING  digest=n3-gaps:-1,0,+2
+  note[:80]='WALKING fires on any monotone band-gap sequence. At n=3, monotone and trending a'
+
+====================================================================
+entrain: register peripherals + reference_version
+====================================================================
+  reference_version() = 5e82b1643322
+
+====================================================================
+syndrome: reading() -> parity() -> log_all() -> divlog
+====================================================================
+  parity(pen, site_map): kind=SAME_INPUTS_DIFF_BAND
+  parity(pen, elder):    kind=DIFF_INPUTS_SAME_BAND
+  log_all wrote 2 entries: ['d8f6f7e04794', '2304a81923c0']
+  loaded id=d8f6f7e04794 subject=soil_bearing_ok kind=SAME_INPUTS_DIFF_BAND
+  loaded id=2304a81923c0 subject=pour_gate kind=DIFF_INPUTS_SAME_BAND
+
+E2: digest collision-safe on missing inputs
+  digest with c=None:  d6eda7519a13
+  digest without c:    ddc7523b594d
+  differ: True   (dropped field visible)
+
+I6/I7 AST checks across drift-mesh modules:
+  divlog     I6=clean  I7=clean
+  entrain    I6=clean  I7=clean
+  syndrome   I6=clean  I7=clean
+  clock      I6=clean  I7=clean
+  modes      I6=clean  I7=clean
+  echo       I6=clean  I7=clean
+
+====================================================================
+ALL T1..T12 pass in the separate spec harness; syndrome v2 adds
+reading() factory + log_all() + trace-with-governing per user build
+note. AST checks (I6/I7) clean across all 6 drift-mesh modules.
+====================================================================

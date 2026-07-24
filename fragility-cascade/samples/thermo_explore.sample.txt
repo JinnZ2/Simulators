@@ -1,0 +1,19 @@
+==============================================================
+PLAYGROUND -- AI proposes, reality referees
+==============================================================
+
+[propose] form_wall
+   FALSIFIED @step0 (presence): missing {'mechanical_work': 500}
+
+[query] what the AI asks next:
+   producers(mechanical_work) = ['run_engine']
+   producers(steam_heat) = ['burn_biomass']
+   producers(biomass) = ['gather_biomass']
+   frontier(start) = ['gather_biomass', 'make_boiler']
+
+[propose] gather_biomass -> burn_biomass -> make_boiler -> run_engine -> form_wall
+   VALID, goal reached
+   waste_heat = 20500 J  (computed)
+
+[solve] BFS floor: gather_biomass -> burn_biomass -> make_boiler -> run_engine -> form_wall
+==============================================================

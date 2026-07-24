@@ -1,0 +1,26 @@
+==================================================================
+PROVENANCE SPINE -- the headline number carries its chain
+==================================================================
+
+  RESULT audit.waste_delta_J = 24800
+    rests on 4 leaf input(s), 4 independent mode(s), depth 2:
+       authority          x1   blind_to: everything since issue; the issuer's own bas
+       direct_observation x1   blind_to: what the senses don't span; one vantage
+       instrument         x1   blind_to: every axis the device has no channel for (th
+       measured_constant  x1   blind_to: applicability at THIS site's temperature/pre
+    WEAKEST LINKS (bound the result's groundedness):
+       ! code.fill_depth_m
+    audit: [code.fill_depth_m] authority aged 52yr -- decays by age; re-derive from ground truth
+
+------------------------------------------------------------------
+COVERAGE (unrecorded provenance made loud):
+   ! [code.fill_depth_m] authority aged 52yr -- decays by age; re-derive from ground truth
+   ! [model.span_guess_m] model-generated, uncorroborated -- central tendency of a training set; ground it
+
+==================================================================
+the waste delta now reads: rests on 1 aged authority (52 yr,
+basis undeclared), 1 measured constant, and 2 mutually-
+corroborating site readings. the number is the same 24800 J --
+what changed is that its weakest link is VISIBLE at the point
+of use, instead of buried three files upstream.
+==================================================================

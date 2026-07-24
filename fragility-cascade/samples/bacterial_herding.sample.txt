@@ -1,0 +1,30 @@
+
+======================================================================
+BACTERIAL HERDING — A Coherens Case Study
+======================================================================
+
+Low predation, small herd:
+  Herding efficiency: 1.00
+  Coherens (C): 2.25
+  Carbon storage impact: 0.50 units
+  Status: STABLE
+
+High predation, small herd:
+  Herding efficiency: 1.00
+  Coherens (C): 0.56
+  Carbon storage impact: 0.50 units
+  Status: VULNERABLE
+
+High predation, large herd:
+  Herding efficiency: 1.00
+  Coherens (C): 0.56
+  Carbon storage impact: 2.50 units
+  Status: VULNERABLE
+
+======================================================================
+DESIGN PRINCIPLE:
+  • Bacteria herd to increase damping against predation.
+  • Herding preserves photosynthetic function = anchoring.
+  • The same Coherens condition applies.
+  • Carbon cycling is affected by coherence at biological scale.
+======================================================================

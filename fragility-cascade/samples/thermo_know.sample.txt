@@ -1,0 +1,67 @@
+==================================================================
+KNOWLEDGE CORPUS -- what / how / cross-reference
+==================================================================
+
+  [bearing_obs]  this ground holds an 80k lb rig without rutting
+     about: soil, bearing
+     how:   direct_observation  (reads: what is present here, now, to the senses)
+            blind:  what the senses don't span; one vantage
+     year:  2026
+     support: 3 independent mode(s) ['direct_observation', 'instrument', 'repeated_practice']  echoes(same-mode): 0
+
+  [bearing_practice]  clay-sand mix here firms under compaction; sites like this bore every structure I built on them
+     about: soil, bearing
+     how:   repeated_practice  (reads: what works -- embodied, error-corrected over m...)
+            blind:  why it works; conditions outside the practiced range
+     support: 2 independent mode(s) ['direct_observation', 'repeated_practice']  echoes(same-mode): 0
+
+  [bearing_penetrometer]  penetrometer reads 240 kPa at 0.5 m
+     about: soil, bearing
+     how:   instrument  (reads: the exact quantity the device is built to regi...)
+            blind:  every axis the device has no channel for (the trowel reads residue, not return)
+     year:  2026
+     support: 2 independent mode(s) ['direct_observation', 'instrument']  echoes(same-mode): 0
+     CONTRADICTED by: ['bearing_county']
+
+  [bearing_county]  county table: assume 150 kPa for this soil class
+     about: soil, bearing
+     how:   authority  (reads: consensus of whoever issued it, at issue time)
+            blind:  everything since issue; the issuer's own basis
+     year:  1974
+     support: 1 independent mode(s) ['authority']  echoes(same-mode): 0
+     CONTRADICTED by: ['bearing_penetrometer']
+
+  [floodplain_teaching]  do not build below the second bench; the river takes the first
+     about: siting, water
+     how:   transmission  (reads: deep time -- pattern integrated over more gene...)
+            blind:  drift and loss in the chain; context of origin fading
+     chain: grandmother -> mother -> operator
+     support: 2 independent mode(s) ['direct_observation', 'transmission']  echoes(same-mode): 0
+
+  [flood_marks]  silt lines on the valley trees at first-bench height
+     about: siting, water
+     how:   direct_observation  (reads: what is present here, now, to the senses)
+            blind:  what the senses don't span; one vantage
+     year:  2025
+     support: 2 independent mode(s) ['direct_observation', 'transmission']  echoes(same-mode): 0
+
+  [ai_span_guess]  model suggests 4 m max clear span for that timber section
+     about: structure, timber
+     how:   model_generated  (reads: the central tendency of its training distribut...)
+            blind:  what the distribution under-sampled; its own defaults (token-primary, diesel-assumed, residue-read)
+     support: 1 independent mode(s) ['model_generated']  echoes(same-mode): 0
+
+------------------------------------------------------------------
+PROVENANCE AUDIT:
+   ! [bearing_county] authority aged 52yr -- decays by age; re-derive from ground truth
+   ! [ai_span_guess] model-generated, uncorroborated -- central tendency of a training set; ground it
+   ! [steam_feasible] parent 'water_latent' not in corpus -- chain broken
+
+==================================================================
+bearing: 3 INDEPENDENT modes agree (observation, practice,
+instrument) -- strong. the 1974 authority contradicts the live
+reading and is aged: flagged for re-derivation, not obeyed, not
+erased. the teaching carries its lineage and is corroborated by
+an independent mode -- deep time + present marks. the model's
+span guess stands alone: usable, but named as ungrounded.
+==================================================================

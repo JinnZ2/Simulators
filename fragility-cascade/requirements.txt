@@ -1,0 +1,11 @@
+# fragility-cascade: mostly stdlib, a few modules use numpy.
+#
+# Modules that import numpy:
+#   cascade_network.py         (eigenvalue computation over interaction matrix)
+#   explorer.py                (parameter sweeps)
+#   phase_space_map.py         (parameter sweeps)
+#   sensitivity_analysis.py    (coupling-coefficient sweeps)
+#
+# Everything else in the folder is Python-stdlib only and runs on a phone.
+
+numpy>=1.24

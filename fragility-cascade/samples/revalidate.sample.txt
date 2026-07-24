@@ -1,0 +1,86 @@
+======================================================================
+REVALIDATION -- what decayed, and what retest that implies
+======================================================================
+
+  [const.latent_vap] water latent heat of vaporization 2.26 MJ/kg
+     mode: measured_constant   year: 1953
+     temporal_scope         STATIC         referent is static -- does not move with time
+                                           -> any age-based staleness flag is SPURIOUS here
+     scope                  in_scope       applied within [1 atm, pure water]
+     methodology            review         mode 'measured_constant' is blind to: applicability at THIS context's conditions
+                                           -> operator judges whether that blindness touches what this claim asserts
+     updated_info           none           nothing independent has arrived since
+     physical_authenticity  PROXY_ONLY     no direct ground-truth check recorded
+                                           -> retest falls back to the mode's own refresh path
+     PLAN: NONE          cost=zero
+           method: no retest -- referent does not move
+           note: age-based staleness flag is spurious for a static referent; check the applicability range instead
+
+  [code.fill_depth] county table: 0.5 m imported fill required
+     mode: authority   year: 1974
+     temporal_scope         EXPIRED        referent is slow (scale 50yr), claim age 52yr
+                                           -> re-observe -- volatility governs, not half-life
+     scope                  DRIFTED        established over [1974 materials, equipment, risk models], applied to [2026 site, measured bearing]
+                                           -> extend the range at current conditions -- a narrower job than full re-establishment
+     methodology            review         mode 'authority' is blind to: everything since issue; the issuer's own basis
+                                           -> operator judges whether that blindness touches what this claim asserts
+     updated_info           CONTRADICTED   contradicted by ['site.penetrometer']
+                                           -> aim the retest at the contradiction, not the whole claim
+     physical_authenticity  DIRECT         direct check available: penetrometer at footing depth
+                                           -> cheapest sufficient retest -- run this first
+     PLAN: DIRECTED      cost=direct
+           method: penetrometer at footing depth
+           note: aim at the contradiction; do not re-establish the whole claim
+
+  [site.moisture] surface moisture supports compaction
+     mode: direct_observation   year: 2025
+     temporal_scope         EXPIRED        referent is seasonal (scale 0.5yr), claim age 1yr
+                                           -> re-observe -- volatility governs, not half-life
+     scope                  in_scope       applied within [autumn, post-rain]
+     methodology            review         mode 'direct_observation' is blind to: what the senses don't span; one vantage
+                                           -> operator judges whether that blindness touches what this claim asserts
+     updated_info           none           nothing independent has arrived since
+     physical_authenticity  DIRECT         direct check available: hand test at depth
+                                           -> cheapest sufficient retest -- run this first
+     PLAN: CHEAP         cost=direct
+           method: hand test at depth
+
+  [siting.bench] never build below the second bench
+     mode: transmission   year: None
+     temporal_scope         current        referent slow, age Noneyr within scale
+     scope                  in_scope       applied within [this valley, this river]
+     methodology            review         mode 'transmission' is blind to: drift and loss in the chain; origin context fading
+                                           -> operator judges whether that blindness touches what this claim asserts
+     updated_info           CORROBORATED   1 independent mode(s) since: ['direct_observation']
+                                           -> decay may already be answered without a retest
+     physical_authenticity  PROXY_ONLY     no direct ground-truth check recorded
+                                           -> retest falls back to the mode's own refresh path
+     PLAN: NONE          cost=zero
+           method: no retest -- refreshed by independent corroboration
+           note: record the corroborating item as the refresh
+
+  [claim.vibes] the site feels right
+     mode: direct_observation   year: 2026
+     temporal_scope         UNRECORDED     referent volatility not recorded
+                                           -> record it -- age alone cannot distinguish a constant from a seasonal reading
+     scope                  UNRECORDED     conditions of establishment not recorded
+                                           -> a claim with no stated range cannot be shown in-range -- re-establish, don't retest
+     methodology            review         mode 'direct_observation' is blind to: what the senses don't span; one vantage
+                                           -> operator judges whether that blindness touches what this claim asserts
+     updated_info           none           nothing independent has arrived since
+     physical_authenticity  UNFALSIFIABLE  not checkable against ground truth as stated
+                                           -> cannot be repaired by retest -- restate it so a check could fail, or retire it
+     PLAN: UNDECIDABLE   cost=n/a
+           method: restate or retire
+           note: no check could fail -- retesting cannot resolve it
+
+======================================================================
+five decayed-looking claims, five DIFFERENT answers:
+  constant   -> no retest. referent doesn't move; age flag spurious.
+  code rule  -> directed. a contradiction arrived; a direct
+                physical check settles it cheaply.
+  moisture   -> expired by VOLATILITY, not half-life. re-observe.
+  teaching   -> no retest. independent mode already corroborated.
+  'vibes'    -> undecidable. no check could fail it -- retesting
+                cannot resolve what was never falsifiable.
+======================================================================

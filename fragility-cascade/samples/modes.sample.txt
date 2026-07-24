@@ -1,0 +1,66 @@
+====================================================================
+modes.py v3 -- built against the decay registry (6 channels)
+====================================================================
+
+[1] register with empty criterion (new required field, expects raise):
+    RAISED: mode 'no_bias': criterion is empty. A row must state all five to register. reads_well without blind_to is a supremacy claim; sensitivity without criterion reads bias as blindness.
+
+[2] 6 rows registered
+
+Per-row loud flags:
+  [penetrometer] (no loud flags)
+  [elder_teaching] (no loud flags)
+  [half_finished]
+    LOUD: channel 'disuse' UNSTATED (practice_half_life_days) -- target 'mode_sensitivity' will read UNDETERMINED for every claim held by this mode; parameterize it or declare it not-applicable with a reason
+    LOUD: channel 'use' UNSTATED (retrieval_fidelity) -- target 'claim' will read UNDETERMINED for every claim held by this mode; parameterize it or declare it not-applicable with a reason
+    LOUD: channel 'constancy' UNSTATED (adaptation_half_life_days) -- target 'mode_sensitivity' will read UNDETERMINED for every claim held by this mode; parameterize it or declare it not-applicable with a reason
+    LOUD: channel 'transmission' UNSTATED (hop_fidelity) -- target 'claim' will read UNDETERMINED for every claim held by this mode; parameterize it or declare it not-applicable with a reason
+    LOUD: channel 'diffusion' UNSTATED (field_mixing_half_life_days) -- target 'independence' will read UNDETERMINED for every claim held by this mode; parameterize it or declare it not-applicable with a reason
+  [contradicts_itself]
+    LOUD: channel 'time': parameterized AND declared not-applicable -- one of the two is wrong
+  [twin_a] (no loud flags)
+  [twin_b] (no loud flags)
+
+[3] read() end-to-end -- mode row + claim facts -> per-target decay:
+
+--- penetrometer reading, 3yr old, regime volatility:
+    time           target=claim              band=DECAYING     rem=0.6595
+    disuse         target=mode_sensitivity   band=UNDETERMINED rem=None
+    use            target=claim              band=UNDETERMINED rem=None
+    constancy      target=mode_sensitivity   band=UNDETERMINED rem=None
+    transmission   target=claim              band=UNDETERMINED rem=None
+    diffusion      target=independence       band=UNDETERMINED rem=None
+  per-target governing:
+    claim              band=DECAYING     governing=time
+    mode_sensitivity   band=UNDETERMINED governing=None
+    independence       band=UNDETERMINED governing=None
+  LOUD: target 'mode_sensitivity': no channel computable (disuse, constancy) -- unaged, not fresh
+  LOUD: target 'independence': no channel computable (diffusion) -- unaged, not fresh
+  LOUD: channel 'disuse' declared not-applicable for mode 'penetrometer': instrument-mediated; no observer skill in the loop
+  LOUD: channel 'use' declared not-applicable for mode 'penetrometer': instrument reading is not a rewritten record
+  LOUD: channel 'constancy' declared not-applicable for mode 'penetrometer': instrument has no adaptation to unchanging stimulus
+  LOUD: channel 'transmission' declared not-applicable for mode 'penetrometer': no per-hop retelling; direct read
+  LOUD: channel 'diffusion' declared not-applicable for mode 'penetrometer': reading is not a support-count claim
+
+--- elder_teaching, retrievals=100, chain_hops=3, static referent:
+    time           target=claim              band=UNDETERMINED rem=None
+    disuse         target=mode_sensitivity   band=FRESH        rem=0.9973
+    use            target=claim              band=STALE        rem=0.1326
+    constancy      target=mode_sensitivity   band=UNDETERMINED rem=None
+    transmission   target=claim              band=FRESH        rem=0.8574
+    diffusion      target=independence       band=UNDETERMINED rem=None
+  per-target governing:
+    claim              band=STALE        governing=use
+    mode_sensitivity   band=FRESH        governing=disuse
+    independence       band=UNDETERMINED governing=None
+
+[4] audit() -- table-level report:
+  ! channel 'disuse' unstated in: half_finished
+  ! channel 'use' unstated in: half_finished
+  ! channel 'constancy' unstated in: half_finished
+  ! channel 'transmission' unstated in: half_finished
+  ! channel 'diffusion' unstated in: half_finished
+  ! declared blind, read by no mode in table: a different specific blind, a specific blind, drift and loss in the chain, much, origin context fading, soil above the instrument depth, soil layering below the instrument depth, y
+  ! twin_a / twin_b: identical reads_well -- degenerate (different blind_to: adds robustness)
+
+====================================================================

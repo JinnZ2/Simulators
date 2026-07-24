@@ -1,0 +1,38 @@
+
+======================================================================
+RECIPROCITY-PHI AUDIT — Core Integrity Early Warning System
+======================================================================
+Stable core requires:
+  - Reciprocity R ≈ 1.0 (symmetric influence)
+  - Scaling α ≈ φ (1.618)
+  - Kernel projection P ≥ 0.7
+----------------------------------------------------------------------
+STABLE HISTORY:
+  R: 1.0
+  R_ok: True
+  alpha: 1.4645713239874742
+  alpha_ok: True
+  P: 0.4136312130002181
+  P_ok: False
+  integrity: 0.7
+  status: WARNING — Core degrading
+  Flags: Kernel drift: P=0.414 (<0.7)
+
+UNSTABLE HISTORY:
+  R: 1.0
+  R_ok: True
+  alpha: 0.8525969939761655
+  alpha_ok: False
+  P: 0.06265945580368913
+  P_ok: False
+  integrity: 0.4
+  status: ⚠️ COLLAPSE IMMINENT — Core broken
+  Flags: Scaling drift: α=0.853 (φ=1.618), Kernel drift: P=0.063 (<0.7)
+
+======================================================================
+EARLY WARNING SIGNALS (before variance collapses):
+  1. R deviates from 1.0 → asymmetry emerges
+  2. α drifts away from φ → scaling loses self-similarity
+  3. P drops below 0.7 → the core is lost
+  When all three occur, collapse is inevitable.
+======================================================================

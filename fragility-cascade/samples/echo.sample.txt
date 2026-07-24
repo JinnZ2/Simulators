@@ -1,0 +1,41 @@
+==================================================================
+echo.py -- independence by vertex-disjoint paths (Menger)
+==================================================================
+
+SCENARIO 1 -- 3 apparent supports through 1 shared source (echo)
+==================================================================
+  support: 1   apparent (immediate upstream): 3
+  cut: ['usda_1974']   -> the choke point
+  anchors_reached: ['pit_1953']
+  LOUD: ECHO: 3 apparent supports collapse to 1 -- routes share interior node(s) ['usda_1974']; the agreement is homologous (inherited), not convergent
+
+SCENARIO 2 -- 2 disjoint chains through 2 distinct anchors (real)
+==================================================================
+  support: 2   apparent: 2
+  cut: ['instr', 'observed']
+  anchors_reached: ['penetrometer_2026', 'rig_test_2026']
+  choke_points: [] (empty when support >= 2)
+
+AGREEMENT between two claims (homology vs homoplasy)
+==================================================================
+  shared_ancestors: ['a_shared']
+  reading: HOMOLOGY -- inherited agreement, weight 0
+  --- disjoint provenance ---
+  shared_ancestors: []
+  reading: HOMOPLASY -- convergent, counts as support
+
+RETEST QUEUE (Scenario 1, cut node ordered by clock.freshness)
+==================================================================
+  usda_1974      kind=source   band=EXPIRED    rem=0.0007
+
+==================================================================
+scenario 1: 3 modes agree, but every route passes through usda_1974.
+             menger says support=1 and names the choke.  the ECHO
+             flag surfaces the discrepancy between APPARENT (3) and
+             INDEPENDENT (1) support.
+scenario 2: 2 chains, no shared interior node.  support=2, no choke.
+agreement:  same claim seen from same source = HOMOLOGY (weight 0);
+            same claim from disjoint provenance = HOMOPLASY (counts).
+retest queue: the cut node ordered by clock.freshness -- the order
+              the claim will fall over. staleest first.
+==================================================================

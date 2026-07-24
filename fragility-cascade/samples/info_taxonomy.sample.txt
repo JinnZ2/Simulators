@@ -1,0 +1,49 @@
+==================================================================
+INFO TAXONOMY -- one structure, four domains
+==================================================================
+
+  [soil.bearing] ground holds 80k lb rig without rutting
+     type: measurement/embodied  about: soil
+     mode: direct_observation   source: operator (track record: 1.00)
+     support: 2 independent mode(s) ['direct_observation', 'instrument']  echoes: 0
+
+  [soil.penetrometer] 240 kPa at 0.5 m
+     type: measurement/instrument_trace  about: soil
+     mode: instrument   source: operator (track record: 1.00)
+     support: 2 independent mode(s) ['direct_observation', 'instrument']  echoes: 0
+
+  [siting.bench] never build below the second bench
+     type: teaching/oral  about: siting,water
+     mode: transmission   source: grandmother_line (track record: 1.00)
+     support: 2 independent mode(s) ['direct_observation', 'transmission']  echoes: 0
+
+  [siting.silt] silt lines on valley trees at first-bench height
+     type: observation/text  about: siting,water
+     mode: direct_observation   source: operator (track record: 1.00)
+     support: 2 independent mode(s) ['direct_observation', 'transmission']  echoes: 0
+
+  [med.aspirin] county clinic protocol: daily aspirin for all over 60
+     type: rule/text  about: medicine
+     mode: authority   source: county_office (track record: 0.50)
+     support: 1 independent mode(s) ['authority']  echoes: 0
+
+  [model.span] 4 m max clear span for that timber section
+     type: model_output/text  about: structure
+     mode: model_generated   source: assistant_model (track record: no track yet)
+     support: 1 independent mode(s) ['model_generated']  echoes: 0
+
+  [plan.waste] 24800 J avoidable under code mode
+     type: claim/numeric  about: audit
+     mode: inference   source: operator (track record: 1.00)
+     support: 1 independent mode(s) ['inference']  echoes: 0
+
+  backing of plan.waste (transitive): {'direct_observation': 1, 'instrument': 1}
+
+------------------------------------------------------------------
+AUDIT (structure, never truth):
+   ! [med.aspirin] aged 28yr > half-life 20yr for mode 'authority' -- re-derivation from ground truth
+   ! [model.span] model output, uncorroborated -- ground it
+
+------------------------------------------------------------------
+PROV export (interop): 2 derivation edge(s) emitted
+==================================================================

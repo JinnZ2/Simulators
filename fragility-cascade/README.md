@@ -11,7 +11,15 @@ Plugs in beside `metabolic-accounting` (money fails as a signal): this repo is t
 substrate/backing half of the same argument — *what* the failing signal is nailed to,
 and why nailing it further from the ground makes it worse.
 
-CC0. stdlib only. Phone-buildable. No dependencies, no network, no cloud.
+CC0. Mostly stdlib — four modules import numpy for eigenvalue and sweep work
+(`cascade_network`, `explorer`, `phase_space_map`, `sensitivity_analysis`).
+Everything else runs on a phone. See [`requirements.txt`](requirements.txt).
+No network, no cloud.
+
+**For any AI or human walking in fresh:** read
+[`docs/PHYSICS.md`](docs/PHYSICS.md) first. Symbol → definition → units →
+canonical range → owning module → claim, plus the symbol-collision map
+that says which Greek letters mean different things in different modules.
 
 ## Modules
 

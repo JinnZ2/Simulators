@@ -1,0 +1,35 @@
+
+======================================================================
+NAUTILUS ARCHITECTURE — Collapse Prevention Simulation
+======================================================================
+Running two recursive generation processes side-by-side:
+  A) Nautilus-stable (kernel anchor + scale invariance)
+  B) Unstable (mean-regression, no kernel)
+----------------------------------------------------------------------
+Metric                         |    Nautilus-Stable |     Unstable
+----------------------------------------------------------------------
+Final variance (trace)         |        3304064.194 |        0.809
+Fractal dimension D_f          |              0.019 |        0.249
+Projection onto kernel         |              0.994 |        0.024
+Loss (Nautilus constraint)     |              1.936 |          N/A
+----------------------------------------------------------------------
+
+INTERPRETATION:
+  ⚠️  Unstable process still degrading (check higher generations).
+  Adjust parameters for stronger constraint (reduce noise).
+
+======================================================================
+DESIGN PRINCIPLE FOR AI ARCHITECTURES:
+  1. Freeze a Siphuncle (kernel vector) derived from physical invariants.
+  2. Enforce scale-invariant growth (multiplicative, not additive).
+  3. Penalize deviations from the initial fractal dimension.
+  4. Archive old states to export entropy (exclude from training).
+======================================================================
+
+DROP-IN LOSS FUNCTION FOR TRAINING:
+
+def nautilus_loss(model_output, siphuncle, target_D=1.618, prev_output=None, history=[]):
+    constraint = NautilusConstraint(siphuncle, target_D)
+    return constraint.loss(model_output, prev_output, history)
+
+======================================================================
