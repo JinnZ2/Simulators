@@ -622,6 +622,50 @@ now in one place ready to be called, and any regression from the
 refactor can be isolated cleanly. Same posture as `thermo_spine`
 sitting alongside the eight thermo files without rewriting them.
 
+## Mode-harness claims (`modes.py`)
+
+Ships **zero rows**. The prior mode tables (in `info_taxonomy`,
+`thermo_know`, `thermo_spine`) always came with content — this
+module is the harness ONLY: hard validation on registration, plus a
+self-audit that reports the table's own blind spots. Operator supplies
+the rows; the harness refuses malformed ones and loud-flags
+incomplete ones.
+
+Enforced fields: `reads_well`, `blind_to`, `decays_by`, `stays_fresh_by`
+— all non-empty, or `register_mode()` **raises**. Optional clock-pair
+fields (`half_life_days` for self-paced, `tracks` for slaved to a
+`clock.Volatility` class) — at least one should be set; if neither is
+set the row registers with a LOUD flag and downstream freshness will
+return UNDETERMINED. Row provenance fields (`row_source`, `row_as_of`)
+apply the info_taxonomy stance to the mode table itself: the table is
+a set of claims and ages like one.
+
+The audit's headline output is the table's own coverage gap: for every
+`blind_to` declared, whether any OTHER mode's `reads_well` covers it
+by content-token overlap. Uncovered blindnesses name what the whole
+registered set fails to see — what to fetch a new row FOR.
+
+Sample: [`samples/modes.sample.txt`](samples/modes.sample.txt) (5 registration attempts, one raises, four register with mixed clock states).
+
+| # | Claim | Refuted if | Verdict |
+|---|-------|-----------|---------|
+| MH-1 | `register_mode(m)` RAISES `ValueError` on any of the four required prose fields (`reads_well`, `blind_to`, `decays_by`, `stays_fresh_by`) being empty or whitespace-only. Message names the field and quotes the "supremacy claim wearing a row" language verbatim. | An empty-field row registering silently, or the ValueError message omitting the field name. | **HOLDS** — sample: `register_mode(Mode(name="bad", ..., blind_to=""))` raises `ValueError: mode 'bad' missing required field 'blind_to' -- a mode that won't state its blindness is a supremacy claim wearing a row`. Four required fields; whitespace-only strings also caught via `str(v).strip()`. |
+| MH-2 | Clock handshake: `tracks` may name a `clock.VOLATILITY` class; if set to an unknown name, row registers with LOUD `"tracks={name!r} not in clock.VOLATILITY"`. If NEITHER `half_life_days` nor `tracks` is set, row registers with LOUD `"neither half_life_days nor tracks set -- downstream freshness will report UNDETERMINED"`. Incomplete allowed; silent never. | An unknown tracks value passing without a loud flag, or a neither-clock row passing without a loud flag. | **HOLDS** — sample: `misnamed_clock` (tracks='not_a_real_class') fires the unknown-class LOUD flag. `transmission` (neither clock set) fires the UNDETERMINED loud flag. Both rows still register — the harness allows incomplete rows but never silently. |
+| MH-3 | `audit()` partitions the registered set into three clock cohorts: `self_paced` (has half_life_days, no tracks), `slaved` (has tracks), `undetermined` (neither). A row cannot appear in more than one cohort. | A row appearing in two cohorts, or a row with only half_life_days landing in `slaved`. | **HOLDS** — sample: 4 rows registered. `direct_observation` (tracks='event') in slaved; `authority` (half_life_days=7300) in self_paced; `transmission` in undetermined; `misnamed_clock` (tracks='not_a_real_class') in slaved (unknown class still tags the row as slaved intent, separate from the LOUD flag). Cohorts partition — no duplicates. |
+| MH-4 | `audit().uncovered_blindness` lists every mode row and the set of OTHER rows whose `reads_well` covers this row's `blind_to`. Coverage is content-token overlap (stopwords filtered, ≥ 1 shared token = covered). A row with `covered_by=[]` is a coverage gap — its blindness is a hole the whole registered set fails to see. | A row's coverage listing including itself, or a row with `covered_by=[]` when another row's `reads_well` shares ≥ 1 content token with its `blind_to`. | **HOLDS** — sample: all 4 rows list `covered_by: []` because the demo rows use disjoint vocabulary in their blind_to statements. Verified: `direct_observation.blind_to` = "what the senses don't span; one vantage" shares no content tokens with any other row's `reads_well`. Self-exclusion works: no mode appears in its own `covered_by`. |
+| MH-5 | Row provenance is tracked but not enforced: `row_source` and `row_as_of` are optional fields; audit reports the lists of undated / unsourced rows so the mode table ages as its own claim under `info_taxonomy` scope. | `register_mode()` requiring row_source or row_as_of, or a row without provenance failing to appear in the audit's provenance lists. | **HOLDS** — sample: all 4 demo rows carry both fields, so `row_provenance.undated` and `unsourced` are both empty and the audit skips printing those sections. Registering a row without them would land it in those lists — no enforcement, no silent skip. |
+| MH-6 | BOUNDARY: the harness invents NO rows. `MODES` starts empty; `MODES` after `import modes` is still empty; only `register_mode()` adds entries. The demo in `__main__` registers illustrative rows but those live only in the demo process. Coverage detection uses a token-overlap heuristic that is documented as producing false positives (unrelated words shared) and false negatives (related concepts in different vocabulary) — operator tightens by editing prose or by adding a future explicit `covers` field. The heuristic is not the truth. | `MODES` populated with any row on bare import, or coverage detection using a source other than the operator-supplied prose. | **HOLDS** — `python3 -c "import modes; print(len(modes.MODES))"` returns `0`. Import has no side effects on the registry. `_covers()` docstring names both failure modes explicitly. The harness does not ship a semantic index, embedding model, or synonym table — it uses the prose as declared. |
+
+**On zero rows.** The mode-table content across `info_taxonomy` /
+`thermo_know` / `thermo_spine` was drafted by an LLM against Western
+analytic epistemology — ceremony, dreaming, land-reading, and
+kinship-with-place have no rows in those tables. This harness makes
+that gap addressable rather than papered over: an operator working
+from a different frame registers their own rows and the audit
+immediately shows what the registered set fails to cover. The rows are
+never the harness's to name; refusing to ship a default set is the
+posture.
+
 ## Resonance / Nautilus / semantic-interference claims (post-C11)
 
 Encoded in the modules landed via origin/main. Test-runner:

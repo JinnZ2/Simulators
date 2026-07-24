@@ -1,0 +1,32 @@
+==================================================================
+modes.py -- harness for B. zero rows shipped.
+==================================================================
+
+[1] register with empty blind_to (expects ValueError):
+    RAISED: mode 'bad' missing required field 'blind_to' -- a mode that won't state its blindness is a supremacy claim wearing a row
+
+  n_rows: 4
+
+  LOUD:
+    ! [transmission] neither half_life_days nor tracks set -- downstream freshness will report UNDETERMINED
+    ! [misnamed_clock] tracks='not_a_real_class' not in clock.VOLATILITY -- register_volatility() first or fix the class name
+
+  clock_pairing:
+    slaved to referent clock:
+      direct_observation -> tracks 'event'
+      misnamed_clock -> tracks 'not_a_real_class'
+    self-paced (own half-life):
+      authority -> 7300 days
+    undetermined (neither clock set):
+      transmission
+
+  uncovered_blindness (declared blind, no other mode reads it):
+    ! [direct_observation] what the senses don't span; one vantage
+    ! [authority] everything since issue; the issuer's own basis
+    ! [transmission] drift and loss in the chain; origin context fading
+    ! [misnamed_clock] everything else
+
+==================================================================
+harness posture: refuses empty rows, loud-flags incomplete ones,
+names its own coverage gaps. content is the operator's.
+==================================================================
