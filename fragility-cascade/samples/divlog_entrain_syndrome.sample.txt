@@ -1,64 +1,59 @@
 ====================================================================
-divlog + entrain + syndrome -- three modules, one demo
+divlog v1 (SPEC_drift_mesh) + entrain + syndrome
 ====================================================================
 
-primary ref_v1 = ref:56fcc3c630cdad81
-primary ref_v2 = ref:006ca0e9938e2c49
-they differ    = True
+primary ref_v1=ref:56fcc3c630cdad81
+primary ref_v2=ref:006ca0e9938e2c49
 
-CLASSIFIED KINDS (from digest+band only, no other signal):
-  [2026-06-01] soil_bearing_ok        penetrometer   vs site_map         -> DIVERGENCE_SAME_FACTS
-  [2026-06-02] soil_bearing_ok        penetrometer   vs elder_teaching   -> HOMOPLASY
-  [2026-06-03] pour_gate              hand_test      vs surface_reading  -> DIVERGENCE_DIFFERENT_INPUTS
-  [2026-06-04] pour_gate              penetrometer   vs penetrometer_re_read -> AGREEMENT_SAME_FACTS
-  [2026-06-20] soil_bearing_ok        penetrometer   vs site_map         -> DIVERGENCE_SAME_FACTS
+CLASSIFIED KINDS (digest+band only) and computed IDs:
+  [2026-06-01] id=5d55285f4241 soil_bearing_ok        DIVERGENCE_SAME_FACTS
+  [2026-06-02] id=594cf9210644 soil_bearing_ok        HOMOPLASY
+  [2026-06-03] id=7ac4b797d592 pour_gate              DIVERGENCE_DIFFERENT_INPUTS
+  [2026-06-04] id=047fd25d4a4d pour_gate              AGREEMENT_SAME_FACTS
+  [2026-06-20] id=8791ecfa3a56 soil_bearing_ok        DIVERGENCE_SAME_FACTS
 
-append/read round-trip: wrote 5, read 5, match=True
+append/load round-trip: wrote 5, loaded 5, ids preserved: True
 
-residual() on soil_bearing_ok history (3 entries):
-  -> WIDENING
-  (WIDENING: entry [2026-06-20] introduces transmission on axis_b,
-   which was not in the governing set of the earlier half)
-residual([]):                EMPTY
-residual([entries[0]]):      NEW
+id stability (note excluded from id, per D8):
+  alpha: id=9468264dba6a
+  beta:  id=9468264dba6a   (same fields, different note) -> True
 
-ENTRAIN -- primary moved from ref_v1 to ref_v2; audit each entry:
-  [2026-06-01] axis_a phase=DRIFTED      axis_b phase=DRIFTED      (recorded ref=ref:56fcc3c6..., now ref:006ca0e9...)
-  [2026-06-02] axis_a phase=DRIFTED      axis_b phase=DRIFTED      (recorded ref=ref:56fcc3c6..., now ref:006ca0e9...)
-  [2026-06-03] axis_a phase=DRIFTED      axis_b phase=DRIFTED      (recorded ref=ref:56fcc3c6..., now ref:006ca0e9...)
-  [2026-06-04] axis_a phase=DRIFTED      axis_b phase=DRIFTED      (recorded ref=ref:56fcc3c6..., now ref:006ca0e9...)
-  [2026-06-20] axis_a phase=DRIFTED      axis_b phase=DRIFTED      (recorded ref=ref:56fcc3c6..., now ref:006ca0e9...)
-  all DRIFTED because every entry was captured against v1 and primary
-  moved to v2 -- the log makes the drift honest, not silent
+history(entries, subject="soil_bearing_ok"):
+  [2026-06-01] id=5d55285f4241 bands=FRESH/STALE
+  [2026-06-02] id=594cf9210644 bands=FRESH/FRESH
+  [2026-06-20] id=8791ecfa3a56 bands=FRESH/EXPIRED
 
-  phase(None, ref_v2)  = FREE_RUNNING    -- FREE_RUNNING
-  phase(ref_v1, None)  = NEVER    -- NEVER (no primary)
-  phase(ref_v1, ref_v1)= ENTRAINED      -- ENTRAINED
+residual() on soil_bearing_ok (3 entries): WIDENING
+residual([]):        EMPTY
+residual([one]):     NEW
 
-SYNDROME parity() -- counts by KIND from digest+band only:
+--- INTERMITTENT case (gap sequence with direction reversal) ---
+  gaps: [3, 0, -3, 3], residual = INTERMITTENT
+
+entrain phase after primary moved v1 -> v2:
+  [2026-06-01] axis_a=DRIFTED, axis_b=DRIFTED
+  [2026-06-02] axis_a=DRIFTED, axis_b=DRIFTED
+
+syndrome.parity:
   DIVERGENCE_SAME_FACTS            2
   DIVERGENCE_DIFFERENT_INPUTS      1
   HOMOPLASY                        1
   AGREEMENT_SAME_FACTS             1
 
-SYNDROME trace(entries, primary="penetrometer"):
-  [2026-06-01] soil_bearing_ok        penetrometer vs site_map -> DIVERGENCE_SAME_FACTS
-  [2026-06-02] soil_bearing_ok        penetrometer vs elder_teaching -> HOMOPLASY
-  [2026-06-04] pour_gate              penetrometer vs penetrometer_re_read -> AGREEMENT_SAME_FACTS
-  [2026-06-20] soil_bearing_ok        penetrometer vs site_map -> DIVERGENCE_SAME_FACTS
-
-SYNDROME mesh() -- 3 targets x 3 kinds, flat list, no aggregation:
+syndrome.mesh (3 targets x 3 kinds):
                              DIVERGENCE_SAME_FACTS                   HOMOPLASY  DIVERGENCE_DIFFERENT_INPUT
   claim                   n=2 e.g. soil_bearing_ok    n=1 e.g. soil_bearing_ok    n=0                     
   mode_sensitivity        n=0                         n=0                         n=1 e.g. pour_gate      
   independence            n=0                         n=0                         n=0                     
-  (9 cells total; empty cells emitted with entries=[])
 
 ====================================================================
-divlog: NDJSON round-trips; kind classified from digest+band alone;
-        residual() names shape (NEW / FLAT / WALKING / WIDENING).
-entrain: reference_version deterministic; phase names 4 states;
-         a stored log surfaces DRIFTED without editing entries.
-syndrome: parity counts; trace filters to the primary; mesh returns
-          9 flat cells -- no scalar, no verdict, no aggregation.
+E1 PASS (clock.decay has for-target loop; verified above)
+E3 PASS (grep divlog.py for w-mode opens: none)
+E4 PASS (no verdict fields in any of 6 modules; severity in prose only)
+E6 PASS (residual([single]) returns NEW)
+
+E9 OPEN: residual([-1,0,+2]) returns WALKING under shipped rule
+         (SPEC_intent: INTERMITTENT). Logged in samples/drift_mesh.ndjson
+         as entry 8a6a9e291671 (this install; user local: 03efe4e41e61).
+         See OPEN_E9_walking_criterion.md.
 ====================================================================
