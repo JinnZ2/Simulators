@@ -1,32 +1,43 @@
 ==================================================================
-modes.py -- harness for B. zero rows shipped.
+modes.py v2 -- mode-table harness with clock handshake
 ==================================================================
 
-[1] register with empty blind_to (expects ValueError):
-    RAISED: mode 'bad' missing required field 'blind_to' -- a mode that won't state its blindness is a supremacy claim wearing a row
+[1] register with empty blind_to (expects IncompleteMode):
+    RAISED: mode 'bad': blind_to is empty. A row must state all four to register.
 
-  n_rows: 4
+[2] 6 rows registered (bad row raised, did not register)
 
-  LOUD:
-    ! [transmission] neither half_life_days nor tracks set -- downstream freshness will report UNDETERMINED
-    ! [misnamed_clock] tracks='not_a_real_class' not in clock.VOLATILITY -- register_volatility() first or fix the class name
+Per-row loud flags:
+  [transmission]
+    LOUD: no half_life_days and no tracks -- this mode has no clock; freshness() will report UNDETERMINED for every claim held by it until one is supplied
+  [both_clocks]
+    LOUD: both half_life_days and tracks set -- clock.freshness() takes the faster; confirm that is intended
+  [misnamed_clock]
+    LOUD: tracks='not_a_real_class' not in clock.VOLATILITY -- register_volatility() first, or the slaving is dead
+  [unprovenanced]
+    LOUD: no half_life_days and no tracks -- this mode has no clock; freshness() will report UNDETERMINED for every claim held by it until one is supplied
+    LOUD: row provenance incomplete (row_source / row_as_of) -- the mode table is itself a set of claims and ages like one
 
-  clock_pairing:
-    slaved to referent clock:
-      direct_observation -> tracks 'event'
-      misnamed_clock -> tracks 'not_a_real_class'
-    self-paced (own half-life):
-      authority -> 7300 days
-    undetermined (neither clock set):
-      transmission
+[3] resolve_clock() -- the bridge to clock.freshness():
+  direct_observation   -> half_life=        1d  volatility='UNRECORDED'
+  authority            -> half_life=     7300d  volatility='UNRECORDED'
+  transmission         -> half_life=      None  volatility='UNRECORDED'
+  both_clocks          -> half_life=      365d  volatility='UNRECORDED'
+  misnamed_clock       -> half_life=      None  volatility='UNRECORDED'
+  unknown_mode         -> half_life=      None  volatility='UNRECORDED'
 
-  uncovered_blindness (declared blind, no other mode reads it):
-    ! [direct_observation] what the senses don't span; one vantage
-    ! [authority] everything since issue; the issuer's own basis
-    ! [transmission] drift and loss in the chain; origin context fading
-    ! [misnamed_clock] everything else
+[4] resolve_clock() + clock.freshness() end-to-end:
+  authority claim, 30yr old, referent volatility=regime:
+    band=EXPIRED  remaining=0.0156  governing=referent
+    (mode half-life 7300d, referent regime 1825d -- faster wins)
+
+[5] audit() -- table-level report, names the table own blind spot:
+  ! no clock: transmission, unprovenanced
+  ! row unprovenanced: unprovenanced
+  ! declared blind, read by no mode in table: drift and loss in the chain, everything since issue, origin context fading, the aging of previously observed conditions, the issuer own basis for the rule, what the senses do not span, whatever they don not point it at, y, z
 
 ==================================================================
-harness posture: refuses empty rows, loud-flags incomplete ones,
-names its own coverage gaps. content is the operator's.
+audit reads: NO clock on transmission + unprovenanced. Blindness
+items no mode in the table claims to READ are listed literally --
+a set difference over List[str] fields, not a token heuristic.
 ==================================================================

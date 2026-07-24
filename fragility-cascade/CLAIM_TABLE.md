@@ -626,35 +626,43 @@ sitting alongside the eight thermo files without rewriting them.
 
 Ships **zero rows**. The prior mode tables (in `info_taxonomy`,
 `thermo_know`, `thermo_spine`) always came with content — this
-module is the harness ONLY: hard validation on registration, plus a
-self-audit that reports the table's own blind spots. Operator supplies
-the rows; the harness refuses malformed ones and loud-flags
-incomplete ones.
+module is the harness ONLY: hard validation on registration, a clock
+handshake to `clock.py`, and a self-audit that names what the table
+itself fails to read. Operator supplies the rows; the harness refuses
+malformed ones and loud-flags incomplete ones.
 
-Enforced fields: `reads_well`, `blind_to`, `decays_by`, `stays_fresh_by`
-— all non-empty, or `register_mode()` **raises**. Optional clock-pair
-fields (`half_life_days` for self-paced, `tracks` for slaved to a
-`clock.Volatility` class) — at least one should be set; if neither is
-set the row registers with a LOUD flag and downstream freshness will
-return UNDETERMINED. Row provenance fields (`row_source`, `row_as_of`)
-apply the info_taxonomy stance to the mode table itself: the table is
-a set of claims and ages like one.
+**v1 retired to `legacy/modes_v1.py`.** v1 stored `reads_well` and
+`blind_to` as scalar strings and detected blind spots via a
+content-token-overlap heuristic (false positives on unrelated shared
+words; false negatives on same-concept-different-vocabulary). v1 also
+lacked the `resolve_clock()` bridge to `clock.py`. See
+`legacy/README.md` for the full retirement rationale.
 
-The audit's headline output is the table's own coverage gap: for every
-`blind_to` declared, whether any OTHER mode's `reads_well` covers it
-by content-token overlap. Uncovered blindnesses name what the whole
-registered set fails to see — what to fetch a new row FOR.
+Enforced fields (raise `IncompleteMode`, don't register):
+`reads_well`, `blind_to`, `decays_by`, `stays_fresh_by`. `reads_well`
+and `blind_to` are `List[str]` — the audit's blind-spot detection is
+now a literal set difference `blind - seen`, not a heuristic.
 
-Sample: [`samples/modes.sample.txt`](samples/modes.sample.txt) (5 registration attempts, one raises, four register with mixed clock states).
+Clock handshake fields (register with LOUD when problematic):
+`half_life_days` (own decay rate) and `tracks` (slaved to a
+`clock.Volatility` class). Every combination has an audit voice:
+neither set → UNDETERMINED downstream; both set → confirm the faster-
+wins semantic is intended; unknown tracks name → slaving is dead.
+
+Row-provenance fields (`row_source`, `row_as_of`) are optional but
+loud-flag when absent — the mode table is a set of claims and ages
+like one, per info_taxonomy IT-3.
+
+Sample: [`samples/modes.sample.txt`](samples/modes.sample.txt) (7 registration attempts covering every branch, plus resolve_clock + end-to-end freshness).
 
 | # | Claim | Refuted if | Verdict |
 |---|-------|-----------|---------|
-| MH-1 | `register_mode(m)` RAISES `ValueError` on any of the four required prose fields (`reads_well`, `blind_to`, `decays_by`, `stays_fresh_by`) being empty or whitespace-only. Message names the field and quotes the "supremacy claim wearing a row" language verbatim. | An empty-field row registering silently, or the ValueError message omitting the field name. | **HOLDS** — sample: `register_mode(Mode(name="bad", ..., blind_to=""))` raises `ValueError: mode 'bad' missing required field 'blind_to' -- a mode that won't state its blindness is a supremacy claim wearing a row`. Four required fields; whitespace-only strings also caught via `str(v).strip()`. |
-| MH-2 | Clock handshake: `tracks` may name a `clock.VOLATILITY` class; if set to an unknown name, row registers with LOUD `"tracks={name!r} not in clock.VOLATILITY"`. If NEITHER `half_life_days` nor `tracks` is set, row registers with LOUD `"neither half_life_days nor tracks set -- downstream freshness will report UNDETERMINED"`. Incomplete allowed; silent never. | An unknown tracks value passing without a loud flag, or a neither-clock row passing without a loud flag. | **HOLDS** — sample: `misnamed_clock` (tracks='not_a_real_class') fires the unknown-class LOUD flag. `transmission` (neither clock set) fires the UNDETERMINED loud flag. Both rows still register — the harness allows incomplete rows but never silently. |
-| MH-3 | `audit()` partitions the registered set into three clock cohorts: `self_paced` (has half_life_days, no tracks), `slaved` (has tracks), `undetermined` (neither). A row cannot appear in more than one cohort. | A row appearing in two cohorts, or a row with only half_life_days landing in `slaved`. | **HOLDS** — sample: 4 rows registered. `direct_observation` (tracks='event') in slaved; `authority` (half_life_days=7300) in self_paced; `transmission` in undetermined; `misnamed_clock` (tracks='not_a_real_class') in slaved (unknown class still tags the row as slaved intent, separate from the LOUD flag). Cohorts partition — no duplicates. |
-| MH-4 | `audit().uncovered_blindness` lists every mode row and the set of OTHER rows whose `reads_well` covers this row's `blind_to`. Coverage is content-token overlap (stopwords filtered, ≥ 1 shared token = covered). A row with `covered_by=[]` is a coverage gap — its blindness is a hole the whole registered set fails to see. | A row's coverage listing including itself, or a row with `covered_by=[]` when another row's `reads_well` shares ≥ 1 content token with its `blind_to`. | **HOLDS** — sample: all 4 rows list `covered_by: []` because the demo rows use disjoint vocabulary in their blind_to statements. Verified: `direct_observation.blind_to` = "what the senses don't span; one vantage" shares no content tokens with any other row's `reads_well`. Self-exclusion works: no mode appears in its own `covered_by`. |
-| MH-5 | Row provenance is tracked but not enforced: `row_source` and `row_as_of` are optional fields; audit reports the lists of undated / unsourced rows so the mode table ages as its own claim under `info_taxonomy` scope. | `register_mode()` requiring row_source or row_as_of, or a row without provenance failing to appear in the audit's provenance lists. | **HOLDS** — sample: all 4 demo rows carry both fields, so `row_provenance.undated` and `unsourced` are both empty and the audit skips printing those sections. Registering a row without them would land it in those lists — no enforcement, no silent skip. |
-| MH-6 | BOUNDARY: the harness invents NO rows. `MODES` starts empty; `MODES` after `import modes` is still empty; only `register_mode()` adds entries. The demo in `__main__` registers illustrative rows but those live only in the demo process. Coverage detection uses a token-overlap heuristic that is documented as producing false positives (unrelated words shared) and false negatives (related concepts in different vocabulary) — operator tightens by editing prose or by adding a future explicit `covers` field. The heuristic is not the truth. | `MODES` populated with any row on bare import, or coverage detection using a source other than the operator-supplied prose. | **HOLDS** — `python3 -c "import modes; print(len(modes.MODES))"` returns `0`. Import has no side effects on the registry. `_covers()` docstring names both failure modes explicitly. The harness does not ship a semantic index, embedding model, or synonym table — it uses the prose as declared. |
+| MH-1 | `register_mode(m)` RAISES `IncompleteMode` (a `ValueError` subclass) on any of the four required fields being empty. Message names the field verbatim and states "A row must state all four to register." Empty `List[str]` counts as empty via `if not v`; whitespace-only strings caught via `str(v).strip()`. | An empty required field registering silently, or the `IncompleteMode` message omitting the field name. | **HOLDS** — sample: `register_mode(Mode(name="bad", ..., blind_to=[]))` raises `IncompleteMode: mode 'bad': blind_to is empty. A row must state all four to register.` The bad row does NOT appear in `MODES`. |
+| MH-2 | Clock handshake fires four distinct loud flags in the four distinct clock-state combinations. (a) Neither `half_life_days` nor `tracks` → LOUD "no half_life_days and no tracks". (b) Both set → LOUD "clock.freshness() takes the faster; confirm that is intended". (c) `tracks` naming an unknown `clock.VOLATILITY` class → LOUD "slaving is dead". (d) Missing `row_source` or `row_as_of` → LOUD "row provenance incomplete". Every incomplete combination registers WITH the loud flag; no silent register. | An incomplete combination registering with no loud flag, or a fully-specified row firing a spurious loud flag. | **HOLDS** — sample: `transmission` (neither clock) fires (a); `both_clocks` fires (b); `misnamed_clock` (tracks='not_a_real_class') fires (c); `unprovenanced` fires (a) and (d). `direct_observation` and `authority` (fully specified with exactly one clock + provenance) fire zero loud flags. |
+| MH-3 | `resolve_clock(mode_name, referent_volatility=None)` is the single call site joining the mode table to `clock.freshness()`. Returns `(half_life_days, volatility_name)`. Precedence: (i) if `half_life_days` set, return it; (ii) else if `tracks` names a known volatility class, return that class's `span_days`; (iii) else return `None`. Unknown mode name → return `(None, referent or UNRECORDED)`. Never invents a number; never silently defaults. | `resolve_clock()` returning a numeric half_life_days for a mode with neither clock set, or resolving an unknown tracks name to a nonzero span. | **HOLDS** — sample: `direct_observation` (tracks='event', event.span=1d) → `(1.0, 'UNRECORDED')`. `authority` (half_life_days=7300) → `(7300, 'UNRECORDED')`. `transmission` (neither) → `(None, 'UNRECORDED')`. `both_clocks` (half_life_days=365, tracks='seasonal') → `(365, 'UNRECORDED')` because half_life_days takes precedence per (i). `misnamed_clock` → `(None, ...)` because unknown tracks class resolves to None. `unknown_mode` → `(None, 'UNRECORDED')`. |
+| MH-4 | End-to-end handshake: `hl, vol = resolve_clock('authority')` then `clock.freshness(as_of, now, mode_half_life_days=hl, volatility=referent_volatility)` produces a bandwidth-correct decay reading. When both clocks are supplied, `clock.freshness()` picks the faster (CL-1). Verified: a 30-year-old authority claim under regime volatility (5yr referent scale) uses referent (1825d) as governing clock, remaining ≈ 0.0156, band EXPIRED. | The end-to-end handshake producing a remaining value inconsistent with the faster-clock rule, or misrouting `resolve_clock`'s tuple as `freshness()` inputs. | **HOLDS** — sample: 30-year authority claim, regime volatility, mode half-life 7300d. Governing = referent (regime, 1825d). Remaining = 2^-(30·365/1825) = 2^-6 = 0.0156. Band = EXPIRED. Sample output matches. |
+| MH-5 | `audit()` returns a flat `List[str]` naming the table's structural gaps: (i) clockless rows, (ii) unprovenanced rows, (iii) declared blindnesses that no other mode's `reads_well` literally covers (SET DIFFERENCE `blind - seen`, lowercased for case-insensitivity). Empty table returns `["mode table EMPTY"]`. No numeric score anywhere. | A score in the return list, or the blind-spot detection using anything other than set difference on the operator-declared `List[str]` fields. | **HOLDS** — sample: `audit()` returns 3 strings. Clockless: `transmission, unprovenanced`. Unprovenanced: `unprovenanced`. Declared blind, read by no mode: 9 items listed literally (all the `blind_to` strings that don't appear in any `reads_well`). Every string is operator-declared verbatim — no heuristic. |
+| MH-6 | BOUNDARY: the harness invents NO rows. `MODES` starts empty; `import modes` leaves it empty. Extension is only via `register_mode()`. No `__main__` block executes on module load; the file body only defines dataclasses, functions, and the empty `MODES` dict. | `MODES` populated with any row on bare import, or module load having a side effect beyond dict/function definitions. | **HOLDS** — `python3 -c "import modes; print(len(modes.MODES))"` returns `0`. The trailing commented-out template shows the shape a row must fill but is dead code (indentation-preserved comment). Ships zero rows; refusing to ship a default set is the position. |
 
 **On zero rows.** The mode-table content across `info_taxonomy` /
 `thermo_know` / `thermo_spine` was drafted by an LLM against Western
@@ -665,6 +673,17 @@ from a different frame registers their own rows and the audit
 immediately shows what the registered set fails to cover. The rows are
 never the harness's to name; refusing to ship a default set is the
 posture.
+
+**On the v1 → v2 delta.** Two upgrades: (1) `List[str]` fields let the
+blind-spot audit be a literal set difference — a mode's blindness is
+uncovered iff no other mode's `reads_well` list contains the same
+string. v1's token-overlap heuristic is retired for producing both
+false positives and false negatives. (2) `resolve_clock()` closes the
+gap between the mode table and `clock.freshness()` — downstream
+modules import one function name rather than walking `MODES` and
+reasoning about half-life vs tracks precedence themselves. The v1 API
+sat next to `clock.py` without connecting; v2 makes the join a
+one-liner.
 
 ## Echo-detection claims (`echo.py`)
 
