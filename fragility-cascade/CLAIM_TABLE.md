@@ -666,6 +666,49 @@ immediately shows what the registered set fails to cover. The rows are
 never the harness's to name; refusing to ship a default set is the
 posture.
 
+## Echo-detection claims (`echo.py`)
+
+Replaces the proxy independence test used across `info_taxonomy` /
+`thermo_know` / `thermo_spine` (which counted distinct MODE names)
+with a graph-theoretic construction: **two supports are independent
+iff their provenance paths share no interior node**. Menger's theorem
+delivers both quantities in one pass — max vertex-disjoint paths =
+min vertex cut — so `independence(g, claim)` returns:
+
+- `support` — the number of independent ways this claim reaches ground
+- `cut` — the minimum set of interior nodes whose loss disconnects it
+- `loud` — an `ECHO:` flag when apparent supports (immediate upstream
+  count) exceed real supports (max flow)
+
+Same structure, three dialects: **graph** (Menger, implemented here),
+**systematics** (homology vs homoplasy — `agreement()` returns one
+label or the other), **estimation** (correlated-error fusion — the
+warning label). `retest_queue(g, claim, now, mode_half_lives)` orders
+the cut set by `clock.freshness()` — the order the claim will fall
+over. Staleest cut member first.
+
+Sample: [`samples/echo.sample.txt`](samples/echo.sample.txt) (four scenarios: echo detection, real independence, homology, homoplasy).
+
+| # | Claim | Refuted if | Verdict |
+|---|-------|-----------|---------|
+| EC-1 | `independence(g, claim)` returns `support = max flow` where each interior node has capacity 1. When three modes feed the same source and that source has one upstream anchor, the apparent count is 3 but every path passes through the source → max flow = 1. The `ECHO:` LOUD flag names the collapse and the cut. | Three modes fanning from one source producing `support = 3`, or a support value greater than the number of vertex-disjoint paths in the graph. | **HOLDS** — sample Scenario 1: 3 modes fan from `usda_1974`; `independence.support = 1`, `cut = ['usda_1974']`, `choke_points = ['usda_1974']`. LOUD verbatim: `ECHO: 3 apparent supports collapse to 1 -- routes share interior node(s) ['usda_1974']; the agreement is homologous (inherited), not convergent`. |
+| EC-2 | Two disjoint chains through distinct sources and distinct anchors yield `support = 2`. `choke_points = []` when `support >= 2` (no single node whose removal disconnects). The cut still has cardinality = support (Menger), but each node in the cut is a redundant edge, not a choke. | Two disjoint chains yielding `support < 2`, or `choke_points` non-empty when `support >= 2`. | **HOLDS** — sample Scenario 2: 2 disjoint chains from `penetrometer_2026` and `rig_test_2026`; `support = 2`, `cut = ['instr', 'observed']` (the two saturated modes at the boundary), `choke_points = []`. Both anchors appear in `anchors_reached`. |
+| EC-3 | `agreement(g, a, b)` returns HOMOLOGY when `a` and `b` share any ancestor (agreement inherited, weight 0), HOMOPLASY when their ancestor sets are disjoint (agreement convergent, counts as support). Systematics dialect over the same graph structure. | Two claims sharing an ancestor labelled HOMOPLASY, or two claims with disjoint ancestry labelled HOMOLOGY. | **HOLDS** — sample: `claim_a` and `claim_b` fed through modes from the same `a_shared` anchor → `shared_ancestors = ['a_shared']`, reading = `HOMOLOGY -- inherited agreement, weight 0`. Rebuilt with distinct anchors `a1` and `a2` → `shared_ancestors = []`, reading = `HOMOPLASY -- convergent, counts as support`. |
+| EC-4 | `retest_queue(g, claim, now, mode_half_lives)` returns rows for each node in the cut set, ordered by `clock.freshness().remaining` (staleest first, `None` sinks to bottom because it's UNDETERMINED). Node freshness is computed against its own `as_of` / `volatility` / `mode`; nodes lacking these fields return `band=UNDETERMINED` with LOUD flags from `clock.py`. | A retest queue that reorders cut nodes freshest-first, or that silently defaults a missing `as_of` to `now` (yielding remaining=1.0). | **HOLDS** — sample Scenario 1's queue: `usda_1974` (the only cut node) reports band=UNDETERMINED because the demo node didn't declare an operator-mode; freshness returned `None` for remaining, and three LOUD flags fired verbatim from `clock.py`. Consistent with the "cut node dating is the operator's" posture — no default fills. |
+| EC-5 | BOUNDARY: `independence()` and `agreement()` return counts, cuts, and labels — never a truth value on the claim itself. When `support = 0` (no anchor reached), the LOUD flag says `"cannot be re-checked, only re-argued"` verbatim — same language as `scaffold.py` uses for anchorless claims. The module refuses to fabricate independence out of nomenclature. | An `Independence` field containing a truth value / confidence score / rank, or a support count silently inflated by aliased modes. | **HOLDS** — `Independence` has fields `support (int)`, `cut (List[str])`, `anchors_reached (List[str])`, `choke_points (List[str])`, `loud (List[str])`. No truth field. No inflate. The claim `support=0` in code fires the "cannot be re-checked, only re-argued" LOUD verbatim; scaffold.py fires the same string for anchorless Scoped items. |
+
+**On the echo-vs-independence delta.** Every earlier module in the
+family (info_taxonomy IT-4, thermo_know TK-2, thermo_spine TSP-2)
+counted distinct MODE names as the independence measure. That's a
+proxy — it treats "instrument + direct_observation" as two
+independent supports even when both readings trace to the same
+1974 USDA soil map. Menger corrects the proxy: routes are what count.
+Two modes fed by the same interior node are one support wearing two
+hats. This is not a claim ABOUT the earlier modules; it is a
+sharper mechanism they can migrate to when it makes sense. The
+migration is not automatic; the earlier modules still use the mode-
+distinctness heuristic and will until an operator rewires.
+
 ## Resonance / Nautilus / semantic-interference claims (post-C11)
 
 Encoded in the modules landed via origin/main. Test-runner:

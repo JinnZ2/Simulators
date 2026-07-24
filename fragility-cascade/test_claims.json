@@ -6,7 +6,7 @@
     "refutation_criteria": "If C > 1.0 but collapse occurs, or C < 0.5 but stability persists, refute.",
     "evidence": [],
     "status": "refuted",
-    "created_at": 1784898175.5078368,
-    "updated_at": 1784898175.5110297
+    "created_at": 1784898511.3984675,
+    "updated_at": 1784898511.401479
   }
 }
