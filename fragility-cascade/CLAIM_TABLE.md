@@ -640,66 +640,66 @@ freshness scalar would erase the information that's the actual output.
 
 ## Mode-harness claims (`modes.py`)
 
-Ships **zero rows**. The prior mode tables (in `info_taxonomy`,
-`thermo_know`, `thermo_spine`) always came with content — this
-module is the harness ONLY: hard validation on registration, a clock
-handshake to `clock.py`, and a self-audit that names what the table
-itself fails to read. Operator supplies the rows; the harness refuses
-malformed ones and loud-flags incomplete ones.
+Ships **zero rows**. Mode is an Umwelt — its `blind_to` is not a
+deficiency to apologize for, it is the shape of the world that mode
+inhabits. `reads_well` and `blind_to` are two ends of one sensitivity
+curve, not a pro/con list.
 
-**v1 retired to `legacy/modes_v1.py`.** v1 stored `reads_well` and
-`blind_to` as scalar strings and detected blind spots via a
-content-token-overlap heuristic (false positives on unrelated shared
-words; false negatives on same-concept-different-vocabulary). v1 also
-lacked the `resolve_clock()` bridge to `clock.py`. See
-`legacy/README.md` for the full retirement rationale.
+**v1 and v2 retired to `legacy/`.** v1 (scalar fields, token-overlap
+heuristic) → `modes_v1.py`. v2 (`List[str]` fields + `resolve_clock()`
+but only ONE decay channel) → `modes_v2.py`. See `legacy/README.md` for
+retirement rationale on each.
 
-Enforced fields (raise `IncompleteMode`, don't register):
-`reads_well`, `blind_to`, `decays_by`, `stays_fresh_by`. `reads_well`
-and `blind_to` are `List[str]` — the audit's blind-spot detection is
-now a literal set difference `blind - seen`, not a heuristic.
+**v3 rebuild against clock.py's six-channel decay registry.** Two
+major additions:
 
-Clock handshake fields (register with LOUD when problematic):
-`half_life_days` (own decay rate) and `tracks` (slaved to a
-`clock.Volatility` class). Every combination has an audit voice:
-neither set → UNDETERMINED downstream; both set → confirm the faster-
-wins semantic is intended; unknown tracks name → slaving is dead.
+1. **Signal-detection split.** `reads_well` / `blind_to` describe
+   SENSITIVITY (d'); `criterion` (new required field) describes BIAS
+   — which way the mode errs when uncertain. Independent axes; a
+   table that records only sensitivity reads bias as sensitivity
+   failure. Never flattened into one number.
 
-Row-provenance fields (`row_source`, `row_as_of`) are optional but
-loud-flag when absent — the mode table is a set of claims and ages
-like one, per info_taxonomy IT-3.
+2. **Per-channel parameter or explicit NA.** Six per-channel fields
+   on `Mode` (one per clock.CHANNELS entry). Every channel is either
+   parameterized OR listed in `channels_na` with a REASON. Silence
+   (neither) fires a LOUD flag naming the target that will read
+   UNDETERMINED. "n/a" alone is not a reason.
 
-Sample: [`samples/modes.sample.txt`](samples/modes.sample.txt) (7 registration attempts covering every branch, plus resolve_clock + end-to-end freshness).
+Clock integration is via `to_observation(mode_name, now, **facts)` +
+`read(mode_name, now, **facts) → clock.Decay`. Mode supplies its own
+decay parameters; caller supplies claim-specific facts; anything
+neither supplies stays `None` and goes LOUD downstream. Never defaults.
+
+Sample: [`samples/modes.sample.txt`](samples/modes.sample.txt) (7 registration attempts covering every branch, `read()` end-to-end on two modes, table audit with degeneracy detection).
 
 | # | Claim | Refuted if | Verdict |
 |---|-------|-----------|---------|
-| MH-1 | `register_mode(m)` RAISES `IncompleteMode` (a `ValueError` subclass) on any of the four required fields being empty. Message names the field verbatim and states "A row must state all four to register." Empty `List[str]` counts as empty via `if not v`; whitespace-only strings caught via `str(v).strip()`. | An empty required field registering silently, or the `IncompleteMode` message omitting the field name. | **HOLDS** — sample: `register_mode(Mode(name="bad", ..., blind_to=[]))` raises `IncompleteMode: mode 'bad': blind_to is empty. A row must state all four to register.` The bad row does NOT appear in `MODES`. |
-| MH-2 | Clock handshake fires four distinct loud flags in the four distinct clock-state combinations. (a) Neither `half_life_days` nor `tracks` → LOUD "no half_life_days and no tracks". (b) Both set → LOUD "clock.freshness() takes the faster; confirm that is intended". (c) `tracks` naming an unknown `clock.VOLATILITY` class → LOUD "slaving is dead". (d) Missing `row_source` or `row_as_of` → LOUD "row provenance incomplete". Every incomplete combination registers WITH the loud flag; no silent register. | An incomplete combination registering with no loud flag, or a fully-specified row firing a spurious loud flag. | **HOLDS** — sample: `transmission` (neither clock) fires (a); `both_clocks` fires (b); `misnamed_clock` (tracks='not_a_real_class') fires (c); `unprovenanced` fires (a) and (d). `direct_observation` and `authority` (fully specified with exactly one clock + provenance) fire zero loud flags. |
-| MH-3 | `resolve_clock(mode_name, referent_volatility=None)` is the single call site joining the mode table to `clock.freshness()`. Returns `(half_life_days, volatility_name)`. Precedence: (i) if `half_life_days` set, return it; (ii) else if `tracks` names a known volatility class, return that class's `span_days`; (iii) else return `None`. Unknown mode name → return `(None, referent or UNRECORDED)`. Never invents a number; never silently defaults. | `resolve_clock()` returning a numeric half_life_days for a mode with neither clock set, or resolving an unknown tracks name to a nonzero span. | **HOLDS** — sample: `direct_observation` (tracks='event', event.span=1d) → `(1.0, 'UNRECORDED')`. `authority` (half_life_days=7300) → `(7300, 'UNRECORDED')`. `transmission` (neither) → `(None, 'UNRECORDED')`. `both_clocks` (half_life_days=365, tracks='seasonal') → `(365, 'UNRECORDED')` because half_life_days takes precedence per (i). `misnamed_clock` → `(None, ...)` because unknown tracks class resolves to None. `unknown_mode` → `(None, 'UNRECORDED')`. |
-| MH-4 | End-to-end handshake: `hl, vol = resolve_clock('authority')` then `clock.freshness(as_of, now, mode_half_life_days=hl, volatility=referent_volatility)` produces a bandwidth-correct decay reading. When both clocks are supplied, `clock.freshness()` picks the faster (CL-1). Verified: a 30-year-old authority claim under regime volatility (5yr referent scale) uses referent (1825d) as governing clock, remaining ≈ 0.0156, band EXPIRED. | The end-to-end handshake producing a remaining value inconsistent with the faster-clock rule, or misrouting `resolve_clock`'s tuple as `freshness()` inputs. | **HOLDS** — sample: 30-year authority claim, regime volatility, mode half-life 7300d. Governing = referent (regime, 1825d). Remaining = 2^-(30·365/1825) = 2^-6 = 0.0156. Band = EXPIRED. Sample output matches. |
-| MH-5 | `audit()` returns a flat `List[str]` naming the table's structural gaps: (i) clockless rows, (ii) unprovenanced rows, (iii) declared blindnesses that no other mode's `reads_well` literally covers (SET DIFFERENCE `blind - seen`, lowercased for case-insensitivity). Empty table returns `["mode table EMPTY"]`. No numeric score anywhere. | A score in the return list, or the blind-spot detection using anything other than set difference on the operator-declared `List[str]` fields. | **HOLDS** — sample: `audit()` returns 3 strings. Clockless: `transmission, unprovenanced`. Unprovenanced: `unprovenanced`. Declared blind, read by no mode: 9 items listed literally (all the `blind_to` strings that don't appear in any `reads_well`). Every string is operator-declared verbatim — no heuristic. |
-| MH-6 | BOUNDARY: the harness invents NO rows. `MODES` starts empty; `import modes` leaves it empty. Extension is only via `register_mode()`. No `__main__` block executes on module load; the file body only defines dataclasses, functions, and the empty `MODES` dict. | `MODES` populated with any row on bare import, or module load having a side effect beyond dict/function definitions. | **HOLDS** — `python3 -c "import modes; print(len(modes.MODES))"` returns `0`. The trailing commented-out template shows the shape a row must fill but is dead code (indentation-preserved comment). Ships zero rows; refusing to ship a default set is the position. |
+| MH-1 | `register_mode(m)` RAISES `IncompleteMode` on any of the FIVE required fields being empty: `reads_well`, `blind_to`, `decays_by`, `stays_fresh_by`, `criterion` (new). Message quotes "sensitivity without criterion reads bias as blindness" — the signal-detection separation held explicitly. | An empty required field registering silently, or the message omitting the sensitivity/criterion split. | **HOLDS** — sample: `register_mode(Mode(name='no_bias', ..., criterion=''))` raises `IncompleteMode: mode 'no_bias': criterion is empty. A row must state all five to register. reads_well without blind_to is a supremacy claim; sensitivity without criterion reads bias as blindness.` Message verbatim. |
+| MH-2 | Per-channel state (six of them): PARAMETERIZED (attribute set to a value), DECLARED NA (in `channels_na` with a non-empty reason), or SILENT. Silence fires LOUD naming the channel and the target that will read UNDETERMINED. Parameterized-AND-NA on the same channel fires LOUD "one of the two is wrong". Empty-string NA reason fires LOUD "inapplicability is a claim and needs one". `time` is special-cased: covered by `tracks` if set. | A parameterized channel silently overriding an NA declaration, or a silent channel not naming which target it leaves UNDETERMINED, or an "n/a" empty reason passing without flag. | **HOLDS** — sample: `penetrometer` parameterizes time via `mode_half_life_days=5·365`, declares 5 channels NA with reasons → zero loud. `elder_teaching` parameterizes use / transmission / disuse, declares 3 channels NA with reasons → zero loud. `half_finished` parameterizes only time → 5 LOUD flags for the 5 silent channels, each naming its target ("target 'claim' will read UNDETERMINED"). `contradicts_itself` fires "channel 'time': parameterized AND declared not-applicable -- one of the two is wrong". |
+| MH-3 | `to_observation(mode_name, now, **claim_facts)` copies mode's per-channel decay parameters onto a `clock.Observation`, then applies caller-supplied claim facts (as_of, retrievals, chain_hops, etc). The mode supplies parameters; the caller supplies facts. Never defaults; unset stays `None`. Unknown mode → returns Observation with only the caller-supplied facts (missing decay params surface as clock LOUDs). | `to_observation()` filling a `None` field with a default value, or mode parameters silently overriding caller-supplied claim facts. | **HOLDS** — sample: `read('penetrometer', now='2026-06-30', as_of='2023-06-30', volatility='regime')` → time channel gets mode_half_life=1825 (from mode) + as_of='2023-06-30' + volatility='regime' (from caller). Time decays cleanly; other 5 channels report UNDETERMINED because their parameters are None (declared NA). NA reasons surface as LOUDs in the `Decay.loud` list, verbatim. |
+| MH-4 | `read(mode_name, now, **facts)` returns `clock.Decay` — the full 6-channel × 3-target reading. Governing channel is per-target (MH-3 semantics inherited from clock CL-2). NA reasons are appended to the returned `Decay.loud` list so a caller sees WHY a target is UNDETERMINED, not just that it is. | `read()` returning a decay reading that mutates the mode table, or NA reasons being silently swallowed. | **HOLDS** — sample: `read('elder_teaching', now, retrievals=100, chain_hops=3, ...)` returns three-target reading: `claim` STALE via `use` (0.99^100 = 0.36 wait actually 0.98^100... let me check output... `use rem=0.1326` which is 0.98^100 = 0.132 ✓); `mode_sensitivity` FRESH via `disuse` (0.9973); `independence` UNDETERMINED (diffusion NA). Three-target routing preserved end-to-end. |
+| MH-5 | `audit()` returns a flat `List[str]` with FIVE checks: (a) per-channel across-table coverage — which modes are silent on which channels; (b) unprovenanced rows; (c) modes missing `criterion` (bias unstated); (d) declared-blind-read-by-none set difference; (e) DEGENERACY vs REDUNDANCY on pairs with identical `reads_well` — different `blind_to` = degenerate (adds robustness), identical `blind_to` = redundant (adds coverage but not robustness). | An audit that lumps degenerate and redundant together, or misses the criterion-unstated check, or reports pair-level identity where none exists. | **HOLDS** — sample: audit reports 5 channels unstated in `half_finished`; 8 blindnesses read by no mode; and `twin_a / twin_b: identical reads_well -- degenerate (different blind_to: adds robustness)`. Verified: twin_a's blind_to = "A specific blind" ≠ twin_b's "A DIFFERENT specific blind", so the pair adds robustness (a real one-then-the-other coverage), not just doubles the same view. |
+| MH-6 | BOUNDARY: `MODES` starts empty; `import modes` leaves it empty. No `__main__` block. `to_observation()` and `read()` return NEW objects — never mutate the mode table. The audit is read-only. No implicit clock (mode inherits `import clock` but never calls a date function; `now` is always caller-supplied). | `MODES` populated on import, or `read()` mutating a mode row, or an implicit `datetime.now()` anywhere. | **HOLDS** — `python3 -c "import modes; print(len(modes.MODES))"` returns `0`. Trailing template is a comment. `to_observation` constructs a new `clock.Observation`; `read` calls `clock.decay` which returns a new `Decay`. No mutation of `MODES` anywhere outside `register_mode`. `grep "datetime.now\|date.today" modes.py` returns 0. |
 
-**On zero rows.** The mode-table content across `info_taxonomy` /
-`thermo_know` / `thermo_spine` was drafted by an LLM against Western
-analytic epistemology — ceremony, dreaming, land-reading, and
-kinship-with-place have no rows in those tables. This harness makes
-that gap addressable rather than papered over: an operator working
-from a different frame registers their own rows and the audit
-immediately shows what the registered set fails to cover. The rows are
-never the harness's to name; refusing to ship a default set is the
-posture.
+**On the v2 → v3 delta.** v2 was written when `clock.py` had one
+decay channel. When clock v2 shipped six channels + three targets,
+v2 modes rows became silently under-specified for five of them: any
+claim held by a v2 mode reports UNDETERMINED across five of six
+decay targets. v3 forces the operator to state ALL SIX channels
+(parameterize or declare NA with a reason) — silence is exactly
+what the audit hunts. Adding `criterion` from signal detection
+theory is the second axis fix: sensitivity (`reads_well`/`blind_to`)
+and bias (`criterion`) are independent, and a table that records
+only sensitivity misreads bias as sensitivity failure.
 
-**On the v1 → v2 delta.** Two upgrades: (1) `List[str]` fields let the
-blind-spot audit be a literal set difference — a mode's blindness is
-uncovered iff no other mode's `reads_well` list contains the same
-string. v1's token-overlap heuristic is retired for producing both
-false positives and false negatives. (2) `resolve_clock()` closes the
-gap between the mode table and `clock.freshness()` — downstream
-modules import one function name rather than walking `MODES` and
-reasoning about half-life vs tracks precedence themselves. The v1 API
-sat next to `clock.py` without connecting; v2 makes the join a
-one-liner.
+**On DEGENERACY vs REDUNDANCY.** Not a stylistic distinction. Two
+modes with identical `reads_well` and different `blind_to` add
+ROBUSTNESS — if one goes blind (or is refuted), the other's
+different failure mode still covers the axis. Two modes with
+identical `reads_well` and identical `blind_to` add COVERAGE without
+robustness — they'll go blind together. The audit names which is
+which so the operator can distinguish a resilient redundancy from a
+correlated one.
 
 ## Echo-detection claims (`echo.py`)
 
