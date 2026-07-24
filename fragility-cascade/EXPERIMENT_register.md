@@ -155,35 +155,112 @@ Rewrite it until a specific wrong output exists.
 
     RUN AND PASSED
         E1  PASS   10k fuzzed Observations, zero cross-target leaks
+        E2  PASS   dropped field changes the digest; digest deterministic
         E3  PASS   no "w" opens in divlog; N appends -> N loaded, in order,
                    ids stable
-        E4  PASS   grep clean across clock / echo / modes / divlog
+        E4  PASS   -- BUT SEE THE NOTE BELOW. Re-derived under AST parsing.
+                   The earlier grep-based pass was weaker than it read.
+        E5  PASS   fingerprint stable on a no-op, moved on a registry edit
         E6  PASS   n=1 -> NEW, always
         E7  PASS   shared upstream -> HOMOLOGY (weight 0);
                    disjoint provenance -> HOMOPLASY. flip is on graph
                    structure, not on mode labels
 
+    ON THE E4 / T11 / T12 REVISION
+        The original checks were grep. Grep cannot tell code from prose: the
+        docstring line "No datetime.now() anywhere" -- asserting the invariant
+        -- was reported as violating it. Replaced with check_invariants.py,
+        which parses the AST and inspects nodes.
+
+        The replacement was then run against a canary file written to FAIL.
+        It missed two forms before it was correct:
+            - datetime.datetime.now()   two-level base, matcher assumed one
+            - rank=2 as a def parameter  ast.arg, not ast.keyword
+        Both were FALSE NEGATIVES in the checker. Neither would have been
+        found by running it on clean code. A checker not run against a canary
+        is an untested claim of coverage.
+
+        Consequence for the record: every prior E4/T11/T12 "PASS" reported
+        before AST replacement should be read as re-derived, not as having
+        held continuously. The modules are clean; the earlier evidence for it
+        was not as strong as stated.
+
+        This shares E9's SHAPE (a detector firing on surface form rather than
+        structure) but not its status. E9's repair is a number nobody has
+        measured, so it stays open. This one's repair is structural, with no
+        threshold to guess, so it was fixed rather than logged.
+
     BLOCKED — no code yet, a green here would be fabricated
-        E2  needs syndrome.digest()
-        E5  needs entrain.reference_version()
-        E8  needs all three axes built (this is the central test)
         E10 needs scaffold + revalidate wired as peripherals
 
-    LIVE FINDING
-        E9  surfaced early, out of order, during the divlog build.
-            WALKING fires on ANY monotone band-gap sequence; at small n
-            monotone and trending are near-indistinguishable by chance.
-            Logged as divlog entry 03efe4e41e61. Held OPEN as empirical.
-            See OPEN_E9_walking_criterion.md. NOT patched.
+    NOT YET RUN — code now exists, test does not
+        (none — E8 has now been run, see below)
+
+    E8 — RUN 2026-07-24. SURVIVES, on one construction.
+        knockout design, three injections, each with a predicted catcher and
+        predicted missers:
+            (a) AGREE_WRONG   two modules agree, both off primary
+                              -> located by TRACE only.  as predicted.
+            (b) PRIMARY_MUTE  modules disagree, no claim channel computable
+                              -> located by PARITY only. as predicted.
+                              TRACE returned MISSING both sides, which is
+                              NOT counted as a catch -- an axis reporting
+                              inability is being honest, not detecting.
+            (c) STALE_REF     all agree and trace clean, one module holds a
+                              superseded ref_version
+                              -> located by PHASE only.  as predicted.
+
+        kill condition 1 (a fault no axis locates)   : not triggered
+        kill condition 2 (one axis locates all three): not triggered
+        coverage: PARITY {b}, TRACE {a}, PHASE {c} -- disjoint.
+
+        WHAT THIS DOES AND DOES NOT ESTABLISH
+        Establishes: on these three faults the axes are separable, and each
+        has at least one fault it alone locates. The three-axis structure is
+        not decorative on this evidence.
+        Does NOT establish: that three axes are SUFFICIENT, that real faults
+        distribute like constructed ones, or that no fourth blind region
+        exists. Three hand-built injections chosen by the same process that
+        built the axes is a weak sample and shares its blind spots. E8 should
+        be re-run against faults the field produces (E11-E14), not only ones
+        designed alongside the thing they test.
+
+        FIRST RUN WAS INVALID AND STILL PRINTED A PASS. Injection (b)
+        originally used chain_hops + hop_fidelity as "nothing feeds claim" --
+        but transmission IS a claim-target channel, so primary was never mute.
+        The run reported E8 SURVIVES with (b) testing nothing. Caught only by
+        reading the per-injection detail line, where PARITY and TRACE both
+        fired against a prediction of PARITY alone. A green summary line over
+        a mislabeled injection is the exact failure this register exists to
+        prevent; recorded here rather than quietly corrected.
+
+    LIVE FINDINGS
+        E9  surfaced during the divlog build. WALKING fires on ANY monotone
+            band-gap sequence; at small n monotone and trending are
+            near-indistinguishable by chance. Logged as divlog entry
+            03efe4e41e61. Held OPEN as empirical. NOT patched.
+            See OPEN_E9_walking_criterion.md.
+
+        clock.decay partial-input governing -- logged as divlog entry
+            90391d0b6b15. With only transmission-relevant inputs supplied,
+            target claim reports FRESH governed by transmission while time and
+            use report UNDETERMINED with loud lines that live at
+            channels[].loud and never reach Decay.loud. A caller reading
+            band[claim] plus Decay.loud sees FRESH with no signal that two of
+            three claim channels were silent. Correct per the governing rule;
+            open question is whether I4 requires the silent-channel loud to
+            propagate upward. NOT patched -- changing it alters what every
+            partial reading reports, so it is an operator call.
+            Surfaced accidentally, while repairing the invalid E8 injection.
 
     NOT STARTED
         E11 E12 E13 E14   field, Kavik/partner only
         E15 E16           need calendar time
 
     Note on the passes: E1, E4, E7 test code that already survived prior
-    sessions. They are confirmations, not new information. The tests most
-    likely to find something (E2, E5, E8, E10) are exactly the ones that
-    cannot run yet. Do not read the green as coverage.
+    sessions. They are confirmations, not new information. The test most
+    likely to find something -- E8, the one that decides whether "three axes"
+    was real or decorative -- has still not been run.
 
 ## WHAT A FAILED TEST PRODUCES
 
