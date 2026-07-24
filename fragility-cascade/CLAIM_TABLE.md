@@ -701,6 +701,65 @@ robustness — they'll go blind together. The audit names which is
 which so the operator can distinguish a resilient redundancy from a
 correlated one.
 
+## Divergence-log claims (`divlog.py` + `entrain.py` + `syndrome.py`)
+
+Three-module stack for logging module disagreements as they occur,
+without picking winners, assigning causes, or grading severity.
+
+- **`divlog.py`** — append-only NDJSON. `Entry` carries `observed_at /
+  target / subject / axis_a / axis_b / kind / band_a / band_b /
+  digest_a / digest_b / governing_a / governing_b / ref_version /
+  phase_a / phase_b / supersedes / note`. `kind` is classified from
+  `digest × band` only. `residual(history)` classifies the SHAPE of a
+  history: NEW / FLAT / WALKING / WIDENING.
+- **`entrain.py`** — zeitgeber. `reference_version(state)` is a
+  deterministic canonical-JSON fingerprint. `phase(recorded, current)`
+  returns ENTRAINED / FREE_RUNNING / DRIFTED / NEVER.
+- **`syndrome.py`** — flat readouts. `parity()` counts by kind;
+  `trace(entries, primary)` filters to entries involving the primary;
+  `mesh()` returns the 3 × 3 (target × kind) as a flat list of cells,
+  never aggregated.
+
+Sample: [`samples/divlog_entrain_syndrome.sample.txt`](samples/divlog_entrain_syndrome.sample.txt) (5 entries covering all four kinds; NDJSON round-trip; residual on a subject history; phase before/after primary moves; parity/trace/mesh output).
+
+| # | Claim | Refuted if | Verdict |
+|---|-------|-----------|---------|
+| DL-1 | `classify_kind(digest_a, digest_b, band_a, band_b)` is a pure function of the four inputs and returns exactly one of `DIVERGENCE_SAME_FACTS` (same digest, different band), `DIVERGENCE_DIFFERENT_INPUTS` (different digest, different band), `HOMOPLASY` (different digest, same band), `AGREEMENT_SAME_FACTS` (same digest, same band). Never returns a winner, cause, or severity. | A `kind` value outside the four, or a classification depending on any input other than digests+bands. | **HOLDS** — sample: all four kinds fire exactly once on the 5-entry corpus. Signature is `(str, str, str, str) -> str`; no other inputs; no import of anything scoring. |
+| DL-2 | `append(path, entry)` writes one NDJSON line, creating the file if absent. `read(path)` returns the full history in order; empty/missing file → `[]`. Round-trip `read(write(entries))` returns the same entries. Log is append-only — `supersedes` is a REVISIT pointer, not an overwrite. | Round-trip returning entries in a different order, dropping fields, or coercing types; or `supersedes` deleting a prior entry. | **HOLDS** — sample: wrote 5, read 5, dataclass equality holds (`loaded == entries` is True). No delete path in the module; `supersedes` is a plain `Optional[str]` field that later readers can follow. |
+| DL-3 | `residual(history)` returns a SHAPE label, never a severity. `n=0` → EMPTY. `n=1` → NEW (not a verdict — the module says so verbatim). n≥2: WIDENING if a governing channel appears in the later half that wasn't in the earlier half; otherwise FLAT if the band gap is constant across the history; otherwise WALKING. | A residual firing that grades severity, or a WIDENING verdict without a new governing channel, or a FLAT verdict when the gap varies. | **HOLDS** — sample: `residual` on `soil_bearing_ok` (3 entries) returns `WIDENING` because entry [2026-06-20] introduces `transmission` on axis_b, absent from the earlier half's governing set. `residual([])` = EMPTY. `residual([one_entry])` = NEW. |
+| ZG-1 | `reference_version(state)` is deterministic and content-addressed: `_canonical()` sorts dict keys, recurses into nested containers, normalizes sets. Same state → same fingerprint; any change → new fingerprint. `state=None` → `""`. Fingerprints are prefixed (default `"ref:"`) and truncated to a fixed 16-hex tail. | Two calls with the same state returning different fingerprints, or a state change (added key, moved value, reordered set) not changing the fingerprint. | **HOLDS** — sample: `ref_v1` (as_of='2026-06-01') and `ref_v2` (as_of='2026-06-30') differ in one field → distinct fingerprints (`ref:56fcc3c6...` vs `ref:006ca0e9...`). Re-hashing `primary_state_v1` returns `ref_v1` identically. |
+| ZG-2 | `phase(recorded, current)` returns one of four labels: `NEVER` (current is None/empty — there IS no primary), `FREE_RUNNING` (recorded is None/empty — the reader never claimed alignment), `ENTRAINED` (recorded == current), `DRIFTED` (recorded != current — was aligned; no longer). Four distinct branches; no fifth state. | A phase value outside the four, or `ENTRAINED` firing when the strings differ, or `DRIFTED` firing when `current` is None (would need to be NEVER). | **HOLDS** — sample: after primary moves from `ref_v1` to `ref_v2`, all 5 log entries report `DRIFTED` on both axes (they were captured at v1, primary is now v2). `phase(None, ref_v2)` → FREE_RUNNING; `phase(ref_v1, None)` → NEVER; `phase(ref_v1, ref_v1)` → ENTRAINED. |
+| ZG-3 | `entrain` NEVER mutates a stored log to reflect drift. A stored `Entry` keeps its `phase_a` / `phase_b` fields as captured; `phase_pair(entry, current)` computes phase against a NEW primary WITHOUT touching the entry. The log's honesty is that DRIFTED becomes visible post-hoc when audited, not that entries are rewritten to hide it. | An `entrain` function that writes back to a `divlog.Entry` or its file. | **HOLDS** — `phase_pair()` returns a tuple; no writes anywhere in the module. `entrain.py` imports `divlog` for `Entry` typing only. No `append` or file I/O in entrain. |
+| SY-1 | `parity(entries)` returns `{kind: count}` covering all four `divlog.KINDS`. Empty input returns all zeros. Never a score, never weighted. | A missing kind key, a non-integer count, or a weighted sum. | **HOLDS** — sample: `parity` returns 4 keys, one per kind, with counts 2/1/1/1. Verified against manual count of the 5-entry corpus. `parity([])` returns 4 zeros. |
+| SY-2 | `trace(entries, primary)` returns every entry where `axis_a == primary` OR `axis_b == primary`, in ORIGINAL order. Never re-sorts by time or severity. | Entries returned in a different order, or entries not involving `primary` sneaking in. | **HOLDS** — sample: `trace(entries, 'penetrometer')` returns 4 of 5 entries in the original append order (the `hand_test`/`surface_reading` entry correctly excluded). The one excluded entry involves neither axis. |
+| SY-3 | `mesh(entries)` returns `len(targets) × len(kinds)` cells as a FLAT list. Each cell carries its matching entries in a `MeshCell(target, kind, entries)`. Empty cells are emitted with `entries=[]` — never dropped. No cell holds an aggregated scalar. | Cells returned as a nested dict, or empty cells omitted, or a cell holding a count instead of the entries. | **HOLDS** — sample: 3 targets × 3 kinds = 9 cells returned. Empty cells (e.g. `independence × HOMOPLASY`) present with `entries=[]`. Every non-empty cell holds the raw `Entry` objects; `print_mesh` computes counts as a display concern, not stored in the cell. Note: `AGREEMENT_SAME_FACTS` is intentionally NOT in the mesh (it's logged for denominator honesty but is not part of the syndrome shape); `MESH_KINDS` is a documented subset. |
+| SY-4 | BOUNDARY: no module in this stack picks a winner, assigns cause, or grades severity. `divlog` classifies kind from digest+band only. `entrain` reports phase, nothing else. `syndrome` counts and filters — every returned surface is a list, dict of counts, or dict of raw entries. No `severity`, `blame`, `worse_than`, `resolve`, `merge`, or `winner` symbol anywhere in the three modules. | Any function returning a score, a winner, an assigned cause, or a severity level. | **HOLDS** — grep confirms none of `severity|winner|blame|cause|worse|resolve|merge` appears in any of the three modules' public API. The mesh even omits `AGREEMENT_SAME_FACTS` by design — that's the closest thing to aggregation, and it's documented as an intentional omission (trivial agreement is logged but is not part of the syndrome). |
+
+**On the digest/band split.** DL-1's four-way classification is the
+whole point of the log. Same digest + different band = the two axes
+are reading the same underlying facts and reaching different
+conclusions — a REAL module disagreement. Different digest +
+different band = different inputs; kept in a separate bucket so it
+can never masquerade as module disagreement. Different digest + same
+band = agreement reached from different inputs = HOMOPLASY:
+convergent, cheap, not evidence — the case most systems drop but
+this stack logs because leaving it out would inflate the honest
+denominator.
+
+**On `residual` returning NEW at n=1, not a verdict.** A single
+observation is not a shape. The module refuses to interpolate.
+Verdicts require at least two data points; before that there is a
+reading and nothing to say about its trajectory. Same posture as
+`clock.py`'s UNDETERMINED for missing inputs — silence over
+confabulation.
+
+**On the mesh being flat.** `syndrome.mesh()` returns
+`MeshCell(target, kind, entries)` objects, never a nested dict. The
+operator sees the 9 cells side by side and picks up where the load is
+concentrated; the module refuses to render a heatmap or a scalar. If
+you want a total, you count. If you want a max, you pick. The tool
+does not.
+
 ## Echo-detection claims (`echo.py`)
 
 Replaces the proxy independence test used across `info_taxonomy` /

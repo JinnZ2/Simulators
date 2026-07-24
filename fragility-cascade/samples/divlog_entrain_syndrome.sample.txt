@@ -1,0 +1,64 @@
+====================================================================
+divlog + entrain + syndrome -- three modules, one demo
+====================================================================
+
+primary ref_v1 = ref:56fcc3c630cdad81
+primary ref_v2 = ref:006ca0e9938e2c49
+they differ    = True
+
+CLASSIFIED KINDS (from digest+band only, no other signal):
+  [2026-06-01] soil_bearing_ok        penetrometer   vs site_map         -> DIVERGENCE_SAME_FACTS
+  [2026-06-02] soil_bearing_ok        penetrometer   vs elder_teaching   -> HOMOPLASY
+  [2026-06-03] pour_gate              hand_test      vs surface_reading  -> DIVERGENCE_DIFFERENT_INPUTS
+  [2026-06-04] pour_gate              penetrometer   vs penetrometer_re_read -> AGREEMENT_SAME_FACTS
+  [2026-06-20] soil_bearing_ok        penetrometer   vs site_map         -> DIVERGENCE_SAME_FACTS
+
+append/read round-trip: wrote 5, read 5, match=True
+
+residual() on soil_bearing_ok history (3 entries):
+  -> WIDENING
+  (WIDENING: entry [2026-06-20] introduces transmission on axis_b,
+   which was not in the governing set of the earlier half)
+residual([]):                EMPTY
+residual([entries[0]]):      NEW
+
+ENTRAIN -- primary moved from ref_v1 to ref_v2; audit each entry:
+  [2026-06-01] axis_a phase=DRIFTED      axis_b phase=DRIFTED      (recorded ref=ref:56fcc3c6..., now ref:006ca0e9...)
+  [2026-06-02] axis_a phase=DRIFTED      axis_b phase=DRIFTED      (recorded ref=ref:56fcc3c6..., now ref:006ca0e9...)
+  [2026-06-03] axis_a phase=DRIFTED      axis_b phase=DRIFTED      (recorded ref=ref:56fcc3c6..., now ref:006ca0e9...)
+  [2026-06-04] axis_a phase=DRIFTED      axis_b phase=DRIFTED      (recorded ref=ref:56fcc3c6..., now ref:006ca0e9...)
+  [2026-06-20] axis_a phase=DRIFTED      axis_b phase=DRIFTED      (recorded ref=ref:56fcc3c6..., now ref:006ca0e9...)
+  all DRIFTED because every entry was captured against v1 and primary
+  moved to v2 -- the log makes the drift honest, not silent
+
+  phase(None, ref_v2)  = FREE_RUNNING    -- FREE_RUNNING
+  phase(ref_v1, None)  = NEVER    -- NEVER (no primary)
+  phase(ref_v1, ref_v1)= ENTRAINED      -- ENTRAINED
+
+SYNDROME parity() -- counts by KIND from digest+band only:
+  DIVERGENCE_SAME_FACTS            2
+  DIVERGENCE_DIFFERENT_INPUTS      1
+  HOMOPLASY                        1
+  AGREEMENT_SAME_FACTS             1
+
+SYNDROME trace(entries, primary="penetrometer"):
+  [2026-06-01] soil_bearing_ok        penetrometer vs site_map -> DIVERGENCE_SAME_FACTS
+  [2026-06-02] soil_bearing_ok        penetrometer vs elder_teaching -> HOMOPLASY
+  [2026-06-04] pour_gate              penetrometer vs penetrometer_re_read -> AGREEMENT_SAME_FACTS
+  [2026-06-20] soil_bearing_ok        penetrometer vs site_map -> DIVERGENCE_SAME_FACTS
+
+SYNDROME mesh() -- 3 targets x 3 kinds, flat list, no aggregation:
+                             DIVERGENCE_SAME_FACTS                   HOMOPLASY  DIVERGENCE_DIFFERENT_INPUT
+  claim                   n=2 e.g. soil_bearing_ok    n=1 e.g. soil_bearing_ok    n=0                     
+  mode_sensitivity        n=0                         n=0                         n=1 e.g. pour_gate      
+  independence            n=0                         n=0                         n=0                     
+  (9 cells total; empty cells emitted with entries=[])
+
+====================================================================
+divlog: NDJSON round-trips; kind classified from digest+band alone;
+        residual() names shape (NEW / FLAT / WALKING / WIDENING).
+entrain: reference_version deterministic; phase names 4 states;
+         a stored log surfaces DRIFTED without editing entries.
+syndrome: parity counts; trace filters to the primary; mesh returns
+          9 flat cells -- no scalar, no verdict, no aggregation.
+====================================================================
