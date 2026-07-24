@@ -588,6 +588,40 @@ lives on the anchors' issuing observations. Every axis routes through
 the anchors — which is exactly Linnaeus's contribution: name the
 specimen, then everything else is arithmetic against it.
 
+## Shared-clock claims (`clock.py`)
+
+Closes the seam where `scaffold.py` and `revalidate.py` each carried
+private decay arithmetic. Domain-neutral module: **six volatility
+classes** (constant / structural / regime / annual / seasonal / event),
+**four freshness bands** (FRESH ≥ 0.75, DECAYING ≥ 0.35, STALE ≥ 0.10,
+EXPIRED < 0.10), **two clocks that compose but never merge** (mode
+half-life = how fast the way of knowing goes blind; referent volatility
+= how fast the thing itself moves — take the faster, not the average).
+
+`now` is always an explicit argument. There is no implicit present
+tense; freshness is arithmetic over absolute anchors, not something
+felt.
+
+Sample: [`samples/clock.sample.txt`](samples/clock.sample.txt) (eight scenarios exercising every branch).
+
+| # | Claim | Refuted if | Verdict |
+|---|-------|-----------|---------|
+| CL-1 | `effective_half_life(mode_half_life_days, volatility_name)` returns the FASTER of the two clocks — `min(candidates)` — never their average, sum, or product. If both clocks are absent, returns `(None, "undetermined", loud)`. If only one is present, returns that one with its source labeled. | A combined half-life value that's between the two clocks (indicating averaging), or a value greater than the smaller (indicating something other than min). | **HOLDS** — sample: `regime + authority 20yr` composes referent scale 5·365=1825 days and mode half-life 20·365=7300 days. `effective_half_life` picks 1825 (`referent`), the faster clock. Cross-checked against source: `min(candidates, key=lambda c: c[0])`. |
+| CL-2 | Freshness bands are ordered fraction thresholds. `band_for(remaining)` walks `BANDS` in declared order and returns the first label whose floor is ≤ remaining; falls through to `EXPIRED` below zero. Boundaries are inclusive: `remaining=0.75` → `FRESH`, `remaining=0.35` → `DECAYING`. | A remaining value getting a band label whose floor exceeds it, or a boundary-exact value flipping to the next-lower band. | **HOLDS** — sample: `structural 7.5yr` → remaining 0.8122 ≥ 0.75 → `FRESH`. `seasonal 0.7yr` → remaining 0.1231 ≥ 0.10 but < 0.35 → `STALE`. `regime + authority` → remaining 0.0007 < 0.10 → `EXPIRED`. Every scenario's band matches `band_for` walked over the thresholds. |
+| CL-3 | `freshness(as_of, now, ...)` requires an explicit `now`. Elapsed is `(now.date - as_of.date).days`. Missing `as_of` or missing `now` returns band `UNDETERMINED` with the LOUD flag `"as_of UNRECORDED -- claim cannot be aged, only re-argued"`. Negative elapsed (as_of after now) computes the math anyway but flags `"as_of is later than now -- anchor or clock is wrong"` — honest math, loud tag. | An implicit `datetime.now()` call anywhere in the module, or a missing anchor silently defaulting to 0 elapsed instead of UNDETERMINED. | **HOLDS** — sample: `as_of missing` scenario → band UNDETERMINED, loud fires. `as_of in future` scenario → elapsed −185, band FRESH (2^0.507 = 1.42 ≥ 0.75), loud fires the anchor-or-clock-wrong flag. `grep -c "datetime.now\|date.today" clock.py` returns 0 — no implicit present tense anywhere in the module. |
+| CL-4 | Volatility table is extensible via `register_volatility(v)`. The bootstrap set (6 classes) has no supremacy — no ordering scalar over classes. Every class carries `(name, span_days, reads, examples)`. `constant` uses `span_days=None` to mark no-expiry-by-time; other classes carry positive day counts. | Volatility class registered without one of the four fields, or an ordering / rank scalar over VOLATILITY. | **HOLDS** — `Volatility` is a `@dataclass(frozen=True)` requiring all four fields at construction. 6 bootstrap classes all fill them. No comparison operators defined on Volatility; the dict is keyed by name; no priority attribute. Extension is via `register_volatility(v) -> Volatility` — same door as `info_taxonomy.register_mode`. |
+| CL-5 | The `constant` volatility class combined with a `None` mode half-life returns `UNDETERMINED`, not `no_expiry`. A no-expiry finding requires ONE of the clocks to be knowable-and-infinite; both being absent means the arithmetic can't produce a number, and the module says so. This differs from `scaffold.py`'s old `no_expiry` semantic which fired on `volatility=static` alone. | The `constant + no mode` combination returning a numeric remaining fraction or a `no_expiry` band without the operator supplying at least one clock. | **HOLDS** — sample: `constant, no mode` scenario → band UNDETERMINED, half_life_days=None, governing_clock=undetermined, loud=`"mode half_life UNRECORDED -- mode table row incomplete"`. Note: when the operator supplies a mode half-life alongside `volatility=constant`, that mode half-life becomes the governing clock — the referent's no-expiry is honored as "no bound from THAT clock", and the mode's clock governs by being the only one present. |
+| CL-6 | SEAM STATUS: `scaffold.py` still contains its own `VOLATILITY_YR` dict (4 classes) and `due()` arithmetic. `revalidate.py` still contains its own `VOLATILITY_YR` dict (4 classes) and staleness math. Neither imports `clock.py` yet. The docstring's "Both now import from here. Neither computes locally" is aspirational — the refactor is pending. Two seams remain until either module rewires. | Someone claiming the ecosystem uses `clock.py` as the single source of decay arithmetic. | **REFUTED (pending refactor)** — grep confirms `VOLATILITY_YR` present in both `scaffold.py` and `revalidate.py`; neither imports `clock.py`. Refactor direction: replace each module's private `VOLATILITY_YR` and staleness logic with a call to `clock.freshness()`. Note the semantic delta (CL-5): `scaffold.py`'s `static → no_expiry` shortcut disappears; the refactor either preserves the shortcut inside scaffold (checking `volatility == "constant"` before calling clock) or requires an explicit mode half-life at every static-referent site. Operator picks. |
+
+**On the seam being still open.** CL-1 through CL-5 pin the clock
+module's mechanism, and all hold at the demo. CL-6 pins the
+integration state, and it correctly refutes itself: the aspirational
+docstring got ahead of the code. Landing `clock.py` first, refactoring
+scaffold + revalidate second, is the safer order — the arithmetic is
+now in one place ready to be called, and any regression from the
+refactor can be isolated cleanly. Same posture as `thermo_spine`
+sitting alongside the eight thermo files without rewriting them.
+
 ## Resonance / Nautilus / semantic-interference claims (post-C11)
 
 Encoded in the modules landed via origin/main. Test-runner:

@@ -1,0 +1,42 @@
+==================================================================
+clock.py -- shared volatility clock (domain-neutral)
+==================================================================
+
+Volatility classes registered: 6
+  constant     no expiry  holds until the substrate changes
+  structural       9125d  holds across a generation of practice
+  regime           1825d  holds while the governing conditions hold
+  annual            365d  holds within a cycle, not across it
+  seasonal           90d  holds within one phase of the cycle
+  event               1d  holds only near the occasion
+
+Freshness bands (remaining fraction thresholds):
+  FRESH     >= 0.75
+  DECAYING  >= 0.35
+  STALE     >= 0.1
+  EXPIRED   >= 0.0
+
+Scenario walk (composed with as_of, now, optional mode half-life):
+
+  [constant, no mode         ] band=UNDETERMINED rem=   None hl=    None clock=undetermined
+    ! mode half_life UNRECORDED -- mode table row incomplete
+  [structural, 7.5yr         ] band=FRESH        rem= 0.8123 hl=   9125d clock=referent
+    ! mode half_life UNRECORDED -- mode table row incomplete
+  [seasonal, 0.7yr           ] band=STALE        rem= 0.1231 hl=     90d clock=referent
+    ! mode half_life UNRECORDED -- mode table row incomplete
+  [regime + authority 20yr   ] band=EXPIRED      rem= 0.0007 hl=   1825d clock=referent
+  [event, 3d                 ] band=STALE        rem= 0.1250 hl=      1d clock=referent
+    ! mode half_life UNRECORDED -- mode table row incomplete
+  [as_of missing             ] band=UNDETERMINED rem=   None hl=    None clock=undetermined
+    ! mode half_life UNRECORDED -- mode table row incomplete
+    ! as_of UNRECORDED -- claim cannot be aged, only re-argued
+  [bogus volatility          ] band=UNDETERMINED rem=   None hl=    None clock=undetermined
+    ! volatility class 'bogus' not in table -- register_volatility() or re-cut for this domain
+    ! mode half_life UNRECORDED -- mode table row incomplete
+  [as_of in future           ] band=FRESH        rem= 1.0142 hl=   9125d clock=referent
+    ! mode half_life UNRECORDED -- mode table row incomplete
+    ! as_of is later than now -- anchor or clock is wrong
+
+==================================================================
+governing clock is the FASTER of (mode, referent) -- min, never mean.
+==================================================================
