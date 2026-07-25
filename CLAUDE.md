@@ -361,6 +361,27 @@ underneath).
   load blackout) — swap `SELECTED_INTERPRETATION` and the module
   runs unchanged. Ships with README.md + CLAIM_TABLE.md (11
   refutable claims across five groups).
+- `equivalence-field/` — Two-file folder built on a
+  falsification-as-pointer spine. `claim_lineage.py` treats a
+  refuted claim as evidence the variable set was incomplete: the
+  break points at a missing dimension, and `extend()` spawns a
+  child (parent + exposed variable + a new independent falsifiable
+  prediction) — with an epicycle guardrail that raises
+  `EpicycleRejected` unless the new variable is both
+  independently measurable and predicts beyond rescuing the
+  parent. `equivalence_field.py` is the client: pushes comparison
+  down the pyramid to INTENSIVE variables (densities, per-capita
+  ratios, gradients) where extensive-total equivalence hides
+  asymmetries. `gradient(A,B) = v(A) − v(B)` is odd under actor
+  exchange; `oddness_audit(reading, A, B)` reports WHICH dimensions
+  fail oddness under a given reading. `honest_reading` is odd by
+  construction; `make_threat_reading()` returns `max(0, g)` per dim
+  (the propaganda shape — scores a gradient as pressure only when
+  it runs against the reader) and breaks on every non-zero dim.
+  `seed_claims()` seeds E1/E2/E3 into a Lineage — the module's own
+  claims held as first-class objects in the same spine. No
+  verdicts, no moral labels, no intent — intensive measurements
+  and potentials only.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
