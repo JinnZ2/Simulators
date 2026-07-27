@@ -361,6 +361,45 @@ underneath).
   load blackout) — swap `SELECTED_INTERPRETATION` and the module
   runs unchanged. Ships with README.md + CLAIM_TABLE.md (11
   refutable claims across five groups).
+- `equivalence-field/` — Two-file folder built on a
+  falsification-as-pointer spine. `claim_lineage.py` treats a
+  refuted claim as evidence the variable set was incomplete: the
+  break points at a missing dimension, and `extend()` spawns a
+  child (parent + exposed variable + a new independent falsifiable
+  prediction) — with an epicycle guardrail that raises
+  `EpicycleRejected` unless the new variable is both
+  independently measurable and predicts beyond rescuing the
+  parent. `equivalence_field.py` is the client: pushes comparison
+  down the pyramid to INTENSIVE variables (densities, per-capita
+  ratios, gradients) where extensive-total equivalence hides
+  asymmetries. `gradient(A,B) = v(A) − v(B)` is odd under actor
+  exchange; `oddness_audit(reading, A, B)` reports WHICH dimensions
+  fail oddness under a given reading. `honest_reading` is odd by
+  construction; `make_threat_reading()` returns `max(0, g)` per dim
+  (the propaganda shape — scores a gradient as pressure only when
+  it runs against the reader) and breaks on every non-zero dim.
+  `seed_claims()` seeds E1/E2/E3 into a Lineage — the module's own
+  claims held as first-class objects in the same spine. No
+  verdicts, no moral labels, no intent — intensive measurements
+  and potentials only.
+- `rigidification-sensor/` — Spec-only folder (no code yet).
+  Trajectory spec for detecting when a system's variance is being
+  suppressed self-reinforcingly — reversibility loss, not outcome
+  prediction. Five sections: §0 branch selection (the prior, stated
+  openly and open to attack), §1 invariant (variance suppressed
+  faster than it regenerates; past threshold the suppression is
+  cheaper to continue than to reverse — a rate crossing a line,
+  substrate-independent), §2 three claims each with `falsifier_shape`
+  specified and `falsifier_value: OPEN` (the honest hole is left for
+  the next operator to measure), §3 tells that measure REVERSIBILITY
+  not harm (first-order: counts of viable options actually in use;
+  second-order: cost-of-reversal vs cost-of-continuation derivative —
+  the §1 threshold being crossed live), §4 candidate control-parameter
+  knobs for the credit–insurance node (hypotheses, not asserted), §5
+  handoff (contest §0, instantiate the node, measure the OPEN
+  falsifiers, stand up §3 as a live dial). Names no actor, motive, or
+  plan by construction; "control" throughout means control PARAMETER,
+  not a hand on a knob.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

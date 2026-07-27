@@ -1,0 +1,3 @@
+genealogy K1: ['K0', 'K1']
+frontier: ['K1']
+rejected: 'mood_of_the_week': measurable=False, predicts_beyond_parent=False -> epicycle, not admitted

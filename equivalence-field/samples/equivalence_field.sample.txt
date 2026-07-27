@@ -1,0 +1,8 @@
+== honest reading ==
+gradient_field: {'ownership_concentration': 1.1111, 'people_per_space': 1.0769, 'capital_per_node': -0.0328}
+exposed_asymmetry: {'ownership_concentration': 1.1111, 'people_per_space': 1.0769}
+oddness: True
+== threat reading (propaganda shape) ==
+oddness: False
+breaks (where actor-label does the work): ['ownership_concentration', 'people_per_space', 'capital_per_node']
+seeded claims: ['E1', 'E2', 'E3']
