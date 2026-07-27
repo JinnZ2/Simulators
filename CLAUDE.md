@@ -382,6 +382,24 @@ underneath).
   claims held as first-class objects in the same spine. No
   verdicts, no moral labels, no intent — intensive measurements
   and potentials only.
+- `rigidification-sensor/` — Spec-only folder (no code yet).
+  Trajectory spec for detecting when a system's variance is being
+  suppressed self-reinforcingly — reversibility loss, not outcome
+  prediction. Five sections: §0 branch selection (the prior, stated
+  openly and open to attack), §1 invariant (variance suppressed
+  faster than it regenerates; past threshold the suppression is
+  cheaper to continue than to reverse — a rate crossing a line,
+  substrate-independent), §2 three claims each with `falsifier_shape`
+  specified and `falsifier_value: OPEN` (the honest hole is left for
+  the next operator to measure), §3 tells that measure REVERSIBILITY
+  not harm (first-order: counts of viable options actually in use;
+  second-order: cost-of-reversal vs cost-of-continuation derivative —
+  the §1 threshold being crossed live), §4 candidate control-parameter
+  knobs for the credit–insurance node (hypotheses, not asserted), §5
+  handoff (contest §0, instantiate the node, measure the OPEN
+  falsifiers, stand up §3 as a live dial). Names no actor, motive, or
+  plan by construction; "control" throughout means control PARAMETER,
+  not a hand on a knob.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
