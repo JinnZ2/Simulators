@@ -1,0 +1,14 @@
+ok _t_amplifying_coupling_inflates
+ok _t_dissipating_coupling_does_not_inflate
+ok _t_local_imbalance_no_coupling_does_not_displace
+ok _t_missing_mode_raises
+ok _t_mode_carried_in_signature
+ok _t_surplus_exports_nothing
+
+modes:
+  strict                   shipped behavior; all orders including boundary must grow
+  multiplication_factor    nuclear k, epidemic R0, feedback loop gain
+  horizon_limited          propagation constant defined only within the medium
+  peak_to_source           amplifier gain reported as max_output / input
+
+all pass

@@ -131,3 +131,57 @@ Task for next operator:
   4. stand up §3 tells as a live dial
 Goal: make the branch legible enough to prune — pull probability back
 under threshold by illuminating the off-ramp, not by predicting the fall.
+
+---
+
+## §6 — code: `harm.py`
+
+`harm.py` is the first §3 tell instantiated as a reader. Reads a
+signature on a coupled `System` of `Node`s (each with `draw` and
+`regen` rates) and `Coupling`s (with `transfer` and `sensitivity`).
+Returns numbers and a shape; no verdict.
+
+**Signature fields:**
+
+| field | meaning |
+|-------|---------|
+| `local` | per-node `max(0, draw − regen)` (surplus exports nothing) |
+| `per_order` | total induced imbalance at each order outward |
+| `displaced` | any cost moved through a coupling |
+| `inflates` | bool per the caller's chosen `inflates_mode` |
+| `inflates_mode` | which physics reading was applied — carries forward |
+
+**`inflates` has four caller-selectable modes** (no default; the choice
+is physics-substantive, so `read()` raises `InflatesModeUnset` if the
+caller omits it):
+
+| mode | physics analog | reading |
+|------|----------------|---------|
+| `strict` | shipped behavior | all orders must grow, including through boundary zeros |
+| `multiplication_factor` | nuclear k, epidemic R0, feedback loop gain | consecutive non-zero pairs must grow; peak must exceed source |
+| `horizon_limited` | propagation constant defined only within the medium | auto-caps `orders` at `len(couplings)`; strict check on the capped window |
+| `peak_to_source` | amplifier gain reported as max_output / input | no monotone requirement; fires on any cascade whose peak exceeds source |
+
+Each mode is registered in `INFLATES_MODES` with its physics analog and
+a usage note. The returned signature carries `inflates_mode` so a
+downstream reader always sees WHICH physics was applied.
+
+**The four modes are documented against a single amplifying-cascade
+case** (system: `a(3,1) → b(1,1) → c(1,1)` with `transfer=1.0,
+sensitivity=2.0` on both couplings; `per_order = [2, 4, 8, 0]` at
+default `orders=3`):
+
+| mode | `inflates` | why |
+|------|-----------|-----|
+| `strict` | `False` | trailing zero at order 3 breaks the check |
+| `multiplication_factor` | `True` | zero skipped; peak 8 > source 2 |
+| `horizon_limited` | `True` | orders auto-capped at 2 → `[2, 4, 8]` |
+| `peak_to_source` | `True` | 8 > 2 regardless of shape |
+
+`_t_amplifying_coupling_inflates` locks in each mode's answer, so
+future edits surface which cases move.
+
+Self-test: `python3 harm.py` runs 6 assert-based tests (all pass) and
+prints the mode registry.
+
+Sample: [`samples/harm.sample.txt`](samples/harm.sample.txt)
