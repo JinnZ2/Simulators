@@ -382,24 +382,59 @@ underneath).
   claims held as first-class objects in the same spine. No
   verdicts, no moral labels, no intent — intensive measurements
   and potentials only.
-- `rigidification-sensor/` — Spec-only folder (no code yet).
-  Trajectory spec for detecting when a system's variance is being
-  suppressed self-reinforcingly — reversibility loss, not outcome
-  prediction. Five sections: §0 branch selection (the prior, stated
-  openly and open to attack), §1 invariant (variance suppressed
-  faster than it regenerates; past threshold the suppression is
-  cheaper to continue than to reverse — a rate crossing a line,
-  substrate-independent), §2 three claims each with `falsifier_shape`
-  specified and `falsifier_value: OPEN` (the honest hole is left for
-  the next operator to measure), §3 tells that measure REVERSIBILITY
-  not harm (first-order: counts of viable options actually in use;
-  second-order: cost-of-reversal vs cost-of-continuation derivative —
-  the §1 threshold being crossed live), §4 candidate control-parameter
-  knobs for the credit–insurance node (hypotheses, not asserted), §5
-  handoff (contest §0, instantiate the node, measure the OPEN
-  falsifiers, stand up §3 as a live dial). Names no actor, motive, or
-  plan by construction; "control" throughout means control PARAMETER,
-  not a hand on a knob.
+- `rigidification-sensor/` — Trajectory spec + two live tells for
+  detecting when a system's variance is being suppressed self-
+  reinforcingly — reversibility loss, not outcome prediction. Spec
+  sections: §0 branch selection (the prior, stated openly and open
+  to attack), §1 invariant (variance suppressed faster than it
+  regenerates; past threshold the suppression is cheaper to continue
+  than to reverse — a rate crossing a line, substrate-independent),
+  §2 three claims each with `falsifier_shape` specified and
+  `falsifier_value: OPEN` (the honest hole is left for the next
+  operator to measure), §3 tells that measure REVERSIBILITY not
+  harm (first-order: counts of viable options actually in use;
+  second-order: cost-of-reversal vs cost-of-continuation derivative
+  — the §1 threshold being crossed live), §4 candidate control-
+  parameter knobs for the credit–insurance node (hypotheses, not
+  asserted), §5 handoff. Code: `harm.py` reads a signature on a
+  coupled `System` of `Node`s (`draw`/`regen`) and `Coupling`s
+  (`transfer`/`sensitivity`), returning `local`/`per_order`/
+  `displaced`/`inflates`/`inflates_mode` — the `inflates` reading
+  has four caller-selectable modes (`strict`,
+  `multiplication_factor` = nuclear k / R0, `horizon_limited` =
+  propagation constant within the medium, `peak_to_source` =
+  amplifier gain) with no default, so the physics choice is
+  named at every callsite. `simulator.py` makes it dynamical:
+  displaced cost erodes the receiving node's regen, and `run(...)`
+  records per-tick `dof`/`continuation`/`reversal`/`d_continuation`/
+  `d_reversal` plus `locked_at` — the first tick where
+  `reversal > continuation` AND `d_reversal > d_continuation`, the
+  §1 threshold crossing. Names no actor, motive, or plan by
+  construction; "control" throughout means control PARAMETER, not
+  a hand on a knob.
+- `claim-audits/` — Standalone single-file audits of external
+  documents. Each audit hand-classifies every claim it addresses
+  under one of eight verdict codes (`VERIFIED`, `SOUND`,
+  `SIGN_BACKWARDS`, `UNGROUNDED_NUMBER`, `DIMENSIONALLY_VOID`,
+  `GAMEABLE`, `IDENTITY`, `UNVERIFIED`) plus a per-claim `who`
+  attribution (`K` = original author's move, `M` = model overlay)
+  so the document's own moves are audited on their own terms
+  instead of being conflated with what an LLM added on top.
+  `GAMEABLE` and `SIGN_BACKWARDS` carry the most information —
+  both name a mechanism that runs against the stated intent;
+  `UNVERIFIED` is deliberately distinct from a negative verdict
+  (it flags a gap, not a failure); `SOUND` and `VERIFIED` are
+  separable (internal coherence vs external source checked).
+  Each `Claim` carries `why` (the audit's reasoning) and `fix`
+  (the smallest actionable repair). Every entry is hand-written;
+  the module runs a printer over the list. Landed:
+  `claim_audit_visibility.py` (14 claims V0-V13, 4 K-moves +
+  10 M-overlay; headline V0: no null model anywhere — every
+  threshold in the document is undecidable until each metric has
+  a distribution under "nothing is happening"). Siblings named
+  in the module docstring but not yet in the tree:
+  `adversarial_corpus.py`, `claim_audit_spin.py`. CC0. stdlib
+  only. Phone-buildable.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

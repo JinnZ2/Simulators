@@ -1,0 +1,47 @@
+
+claim_audit_visibility.py — audit of the Visibility Protocol document
+CC0-1.0.  stdlib only.  single file.
+
+Same verdict shape as adversarial_corpus.py / claim_audit_spin.py.
+
+SEPARATION FIRST
+    Attribution is marked per claim. K = Kavik's move, M = model overlay.
+    Auditing the overlay as though it were the claim wastes both our time.
+
+VERDICT CODES
+    VERIFIED          source checked, mechanism holds
+    SIGN_BACKWARDS    the quantity is real, the direction of the claim is inverted
+    UNGROUNDED_NUMBER threshold with no derivation, units, or calibration
+    DIMENSIONALLY_VOID the expression is not a quantity
+    GAMEABLE          metric is maximized by doing the opposite of the intent
+    IDENTITY          true but empty — a bookkeeping relation, no predictive content
+    UNVERIFIED        cited source not locatable; absence of evidence, not absence
+    SOUND             holds as stated
+
+id    who  verdict             claim
+V0    M    UNGROUNDED_NUMBER   the metrology layer as a whole (CED, SSC, NS
+V1    M    SIGN_BACKWARDS      diversity is the curvature of the manifold, 
+V2    K    GAMEABLE            H^1 > 0 = productive tension = alive; H^1 = 
+V3    M    DIMENSIONALLY_VOID  Phi (Exchange Rate) = mutual information acr
+V4    M    UNGROUNDED_NUMBER   CED < 0.05 over 100 queries = collapse immin
+V5    M    IDENTITY            dS/dt = -integral(J.dA) + Sigma as the unive
+V6    M    GAMEABLE            Proof-of-Physical-Cognition: 'you cannot fak
+V7    K    GAMEABLE            the community holds the kill switch / AGI po
+V8    M    SIGN_BACKWARDS      bootstrap: AGI observes 30 days, highest-ent
+V9    K    SIGN_BACKWARDS      Self-Destruct Clause: if the system never fa
+V10   M    VERIFIED            ERBP (Entropy-Reservoir Bregman Projection) 
+V11   M    UNVERIFIED          Uniqueness Quotient (Jia, 2026)
+V12   K    SOUND               assumption audit + claim tables + audit-the-
+V13   M    SOUND               consistency vs exploration as a coupled osci
+
+  {'UNGROUNDED_NUMBER': 2, 'SIGN_BACKWARDS': 3, 'GAMEABLE': 3, 'DIMENSIONALLY_VOID': 1, 'IDENTITY': 1, 'VERIFIED': 1, 'UNVERIFIED': 1, 'SOUND': 2}
+  attribution: {'M': 10, 'K': 4}  (K = Kavik, M = model overlay)
+
+  YOUR moves that break: ['V2', 'V7', 'V9']
+  everything else on the failure list is the model's.
+
+  HEADLINE
+    V0. no null model anywhere. every threshold in the document is
+    undecidable until each metric has a distribution under 'nothing
+    happening.' that is one shuffle loop per metric and it is the
+    only thing standing between this and an unfalsifiable framework.
