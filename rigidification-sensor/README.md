@@ -185,3 +185,52 @@ Self-test: `python3 harm.py` runs 6 assert-based tests (all pass) and
 prints the mode registry.
 
 Sample: [`samples/harm.sample.txt`](samples/harm.sample.txt)
+
+---
+
+## §7 — code: `simulator.py`
+
+`harm.read` is a snapshot. `simulator.run` makes it dynamical: displaced
+cost actually erodes the receiving node's `regen`, so the deficit
+compounds. Persistence IS the §1 invariant — "cheaper to continue than
+reverse" stops being a phrase and becomes a measured divergence.
+
+Time carries the propagation: one coupling hop per tick, so `order == tick`.
+
+**Per-tick tells:**
+
+| field | meaning |
+|-------|---------|
+| `dof` | nodes still in surplus (`regen > draw`) — off-ramps open |
+| `continuation` | current total imbalance — the bill this tick |
+| `reversal` | cumulative eroded regen — capacity you'd rebuild to undo |
+| `d_continuation` | change in continuation vs last tick |
+| `d_reversal` | change in reversal vs last tick |
+
+**`locked_at`**: first tick where `reversal > continuation` AND
+`d_reversal > d_continuation` — the §1 threshold crossing. Past that
+tick, pruning stops being cheap.
+
+**Demo (amplifying chain, ticks 0–11):**
+
+```
+t  dof  contin  revers  dCont  dRev
+0  1    2.0     2.0     2.0    2.0
+1  0    3.0     4.0     1.0    2.0     ← locked_at
+2  0    4.0     4.0     1.0    0.0
+3+ 0    4.0     4.0     0.0    0.0     (saturated)
+```
+
+`dof` drops from 1 → 0 between tick 0 and tick 1 (off-ramp b closes as
+its regen erodes past its draw). Lock fires at tick 1. After tick 2,
+both metrics saturate at a shared cap because the erosion has driven
+every node's regen to zero — read the lock at the crossing tick, not
+at the trace's end.
+
+Self-test: `python3 simulator.py` runs 3 tests + demo.
+
+Sample: [`samples/simulator.sample.txt`](samples/simulator.sample.txt)
+
+`simulator.py` is the first `§3 tells` instantiated as a live dial —
+step 4 of the §5 handoff. Each tell is per-tick, so an operator can
+watch the crossing arrive rather than diagnose it after.
