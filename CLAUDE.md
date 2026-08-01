@@ -435,6 +435,30 @@ underneath).
   in the module docstring but not yet in the tree:
   `adversarial_corpus.py`, `claim_audit_spin.py`. CC0. stdlib
   only. Phone-buildable.
+- `inverseminar/` — Micro-inverseminar as a single stdlib-only script
+  (`inverseminar.py`). One artifact, one reconstruction, one
+  correction; ~60s per round. Runs the Nature Physics inverseminar
+  mechanism — the correction is the product, the reconstruction is
+  only the bait — against a single artifact instead of a paper and
+  against yourself instead of a live audience. Three channels:
+  `RECONSTRUCTION` (model states your reasoning back confidently;
+  correction contradicts it), `GUESSING AT` (flat assertions killable
+  in one word), `CANNOT DERIVE` (direct questions on load-bearing
+  links the model has no basis to guess — surfaces absences that
+  confident guessing cannot bait). Four verdicts: `corrected`,
+  `answered`, `unprobed` (logged as a model MISS, never as a
+  confirmation), `confirmed` (explicit only — silence is not a
+  verdict; `record()` raises on empty capture). Provenance separated
+  at capture time: reconstruction is model-authored, correction and
+  answers are yours verbatim, and `TACIT.md` marks stated lines with
+  `[stated]` while stashing the reconstruction in a `<details>`
+  block so the tacit layer never inherits overlay. `triage`
+  subcommand ranks artifacts by overlay-density (rhetorical LLM
+  padding per word, damped for short files) with a `done` marker for
+  artifacts already run. Runtime state (`TACIT.jsonl`, `TACIT.md`)
+  gitignored inside the folder — tacit knowledge stays on the
+  machine unless the operator decides otherwise. No model calls; the
+  tool prints a prompt for the operator to paste. CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
