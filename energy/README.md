@@ -111,7 +111,7 @@ Rendered plots from the report and the playground:
 `manifold_graph_payload.jsonl` is the AI-consumable node payload for
 the manifold graph.
 
-## Report (`Coupled_Quintessence_Geometry_Report.pdf`)
+## Report (`Coupled_Quintessence_Geometry_Report.pdf` / `.md`)
 
 *The Geometry of Coupled Quintessence: Parameter Sweeps, Fisher
 Geometry, and Packing Analysis of a Dark-Energy–Dark-Matter
@@ -122,6 +122,16 @@ growth sweeps (the fifth-force observable), the effective (phantom)
 layer, Fisher geometry of the model manifold, packing geometry
 (distinguishability and optimal covering), and conclusions.
 Appendix: the machine-readable manifold graph.
+
+Shipped in two forms:
+
+- [`Coupled_Quintessence_Geometry_Report.pdf`](Coupled_Quintessence_Geometry_Report.pdf) —
+  the original typeset artifact.
+- [`Coupled_Quintessence_Geometry_Report.md`](Coupled_Quintessence_Geometry_Report.md) —
+  the same text as GitHub-flavored markdown: LaTeX math via `$…$` and
+  `$$…$$`, tables converted, ligatures normalized, and figure blocks
+  pointing at the local `figures/` PNGs so it renders inline on
+  GitHub.
 
 ## Provenance
 

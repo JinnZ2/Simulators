@@ -476,8 +476,11 @@ underneath).
   inserts the proposal as a running coupling
   `β(z) = β₀ + β₁·z/(1+z)`: the projection closes to `0.15σ` but
   the growth channel vetoes (`fs8/ΛCDM ≈ 8×`) — the falsification
-  loop stays open by design. Ships the flagship report
-  (`Coupled_Quintessence_Geometry_Report.pdf`, Aug 2026), three
+  loop stays open by design. Ships the flagship report as both
+  `Coupled_Quintessence_Geometry_Report.pdf` (typeset original, Aug
+  2026) and `Coupled_Quintessence_Geometry_Report.md` (same text as
+  GitHub-flavored markdown with LaTeX math, converted tables, and
+  inline figure references), three
   sweep CSVs (`coupled_quintessence_sweep`, `coupling_growth_sweep`,
   `phantom_layer_sweep`), the `app/` playground (self-contained
   HTML + JSON payload for the 223 integrated cosmologies), and the
