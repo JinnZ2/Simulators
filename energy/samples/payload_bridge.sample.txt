@@ -1,0 +1,40 @@
+Loaded 223 integrated cosmologies (grid 10x5x5)
+
+=== Evaluation point: geodesic foot (lambda=1.1, beta=0.0, alpha=0.0) ===
+
+--- Instrument A (projection) ---
+    Fisher eigenvalues: [2.477e+02 2.468e+01 1.641e-14]
+    Gate1=INSUFFICIENT_DATA, Gate2=INSUFFICIENT_DATA, Gate3=INSTRUMENTATION_DEGENERATE, Gate4=CREATE_NEW_FORMULATION
+    Gate3 action: The instrument is blind (S_min=0.0000). Increase its rank: add redshift-resolved (tomographic) channels.
+    Final: ACTION: Build a higher-rank (tomographic) instrument. The current compression has a zero eigenvalue.
+
+--- Instrument B (tomography) ---
+    Fisher eigenvalues: [2.763e+03 1.389e+02 2.089e+00]
+    Gate1=SYSTEMATIC_SIGNAL, Gate2=INTRINSIC_DATA, Gate3=WELL_POSED, Gate4=CREATE_NEW_FORMULATION
+    Gate3 action: Parameter space is observable.
+    Final: ACTION: Reformulate the parameter basis (e.g., w0-wa -> PCA modes).
+
+=== Gate 4 + Generative Module: canonical track residuals ===
+    residual amplitude: max 0.265 in w(z)
+    proposed missing term: -0.3531*z*inv(1+z) + -0.04347*exp(-2*z)
+    The missing term in canonical-track w(z) residuals is:  -0.3531*z*inv(1+z) + -0.04347*exp(-2*z)  . Its redshift dependence localizes the new physics; insert it into the field equations as a new coupling and re-run the 4-gate diagnostic.
+
+=== Falsification Engine: is the canonical claim self-falsifying? ===
+    falsified: True  (DW=0.00, break@3.00)
+    hidden-variable suggestions: ['0.0213*x^2 + -0.1275*x']
+
+=== Singularity Cartographer: the 1+alpha*phi^2 pole (27 failed cells) ===
+    real grid: 27 failed cells (pole crossings)
+    verdict: SIMPLE_POLE
+    substitution scores: {'reciprocal': 1.0, 'inverse_square': 0.998, 'logarithmic': 0.733, 'sqrt': 0.451, 'even_offset': 0.212}
+    note: Wall behaves like 1/(x - -0.445). Add a residue term with a new coupling.
+
+========================================================================
+ORCHESTRATOR VERDICT (3-paragraph LLM-style output)
+========================================================================
+
+ROOT CAUSE: Instrumentation. Gate 3 of the legacy instrument reports S_min = 1.64e-14 with a lambda-alpha correlation of -1.00: the rank-2 w0-wa projection is a degenerate compression of the theory manifold. The alpha impurity is present in the dynamics but invisible to the instrument. Gates 1-2 confirm the signal is systematic and self-consistent, so this is not equipment noise.
+
+JUSTIFICATION: Switching to rank-3 z-tomography lifts the smallest Fisher eigenvalue from 1.64e-14 to 2.09 (condition number 1.32e+03), and sigma(alpha) becomes finite. Gate 4 on the canonical track flags CREATE_NEW_FORMULATION: the residuals carry physical curvature. Symbolic regression proposes the missing term  [-0.3531*z*inv(1+z) + -0.04347*exp(-2*z)]  (basis_library (numpy fallback)).
+
+PRESCRIPTION: Build the tomographic instrument (increase rank 2 -> 3). Then extend the theory: the singularity cartographer classifies the 1+alpha*phi^2 brick wall as SIMPLE_POLE - Wall behaves like 1/(x - -0.445). Add a residue term with a new coupling. Insert the proposed term as a new alpha-like coupling and re-run the 4-gate protocol iteratively until all gates pass.

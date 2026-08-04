@@ -1,0 +1,97 @@
+====================================================================
+$ python3 inverseminar.py triage /home/user/Simulators  (top 10)
+====================================================================
+TRIAGE -- run inverseminar top-down (most buried reasoning first)
+  file                                    words   ovl   sub  ratio  score done
+  /home/user/Simulators/KEYWORDS.md         156     5     4   1.25  32.05 
+  s/grounding-layers/BIASES_REFERENCE.md   2399    63    67   0.94  26.26 
+  lators/fragility-cascade/references.md   5153   131     8  16.38  25.42 
+  /home/user/Simulators/PVL.md              416    10     2   5.00  24.04 
+  /home/user/Simulators/BNRAM_STRICT.md     945    17     3   5.67  17.99 
+  r/Simulators/earth_economics/README.md    772    10     4   2.50  12.95 
+  imulators/inverseminar/inverseminar.py   1380    13    11   1.18   9.42 
+  rs/sustained-activation-gate/README.md    672     5     8   0.62   7.44 
+  rounding-layers/experimental/README.md    557     4     4   1.00   7.18 
+  ors/antifungal-mechanism-sim/README.md    944     6     3   2.00   6.36 
+
+====================================================================
+$ python3 inverseminar.py prompt
+====================================================================
+INVERSEMINAR. You present, I correct.
+
+Read the artifact. Output exactly this, nothing else:
+
+RECONSTRUCTION | <what you think I DECIDED and WHY. the reasoning, not
+                  the content. content is already in the file. 3 lines
+                  max. be CONFIDENT even where you are guessing -- a
+                  hedge provokes no correction.>
+
+GUESSING AT    | <the 2-3 points you are least sure of, as flat
+                  assertions I can contradict in one word.>
+
+CANNOT DERIVE  | <2-3 links this artifact depends on that you can tell
+                  are load-bearing but have NO basis to guess. state
+                  them as direct questions. do NOT guess here. do NOT
+                  pad this section -- if you can derive it, it belongs
+                  in GUESSING AT.>
+
+Do not summarise the artifact. Do not praise it. Do not ask questions
+outside CANNOT DERIVE. Reply with corrections, answers, or "miss" if
+all three channels went past the thing that actually matters.
+An empty reply is not agreement.
+
+====================================================================
+$ python3 inverseminar.py status  (after 4 recorded rounds)
+====================================================================
+4 rounds across 4 artifacts
+  corrected  1
+  answered   1
+  unprobed   1
+  confirmed  1
+  model hit rate: 75% (3/4)
+  tacit lines captured: 2
+
+====================================================================
+$ python3 inverseminar.py emit TACIT.md
+====================================================================
+wrote TACIT.md -- 1 corrections, 1 link answers, 1 misses, 4 rounds
+
+--- TACIT.md ---
+# TACIT
+
+Knowledge that was in no file. Recovered by inverseminar.
+
+`[stated]` lines are verbatim. Reconstructions are model-authored and kept only to show what the correction was against. Nothing here is inferred from silence.
+
+4 rounds | 1 corrections | 1 link answers | 1 misses
+
+## LINKS
+
+Steps the model could not derive and did not guess at. These were in no file and in no reconstruction.
+
+### rigidification-sensor/README.md  (2026-08-01T13:09)
+
+- [stated] credit-insurance was chosen because it's the point where reversibility loss is most measurable pre-outcome, not because it's the largest node.
+
+## CORRECTIONS
+
+Deltas against a confident wrong guess.
+
+### PVL.md  (2026-08-01T13:09)
+
+- [stated] the point isn't to short-circuit citations. it's that physical-state queries and literature queries answer different questions. inversion sequences them so the second can't overwrite the first.
+
+<details><summary>reconstruction it corrected</summary>
+
+```
+the inverse audit exists to short-circuit citation-first workflows -- ask what the physical body reports before asking what the literature reports.
+```
+</details>
+
+## MISSES
+
+Rounds where all three channels went past the load-bearing gap. Not confirmations. Re-run these artifacts with a different framing.
+
+- claim-audits/README.md  (2026-08-01T13:09)
+
+
