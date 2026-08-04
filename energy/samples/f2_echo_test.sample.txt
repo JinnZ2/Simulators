@@ -1,0 +1,42 @@
+F2 TEST -- does the generative module discover or echo?
+==================================================================
+
+Construction the module is fitting against:
+  w_desi(z) = w0 + wa * (1 - 1/(1+z))       # payload_bridge.py:156
+            = w0 + wa * z/(1+z)             # i.e. CPL by definition
+  w0 = -0.86,  wa = -0.53   (DESI_MU)
+
+=== ORIGINAL basis  --  z/(1+z) present (listed twice) ===
+
+  proposed:     -0.3531*z*inv(1+z) + -0.04347*exp(-2*z)
+  terms used:   ['z*inv(1+z)', 'exp(-2*z)']
+  residual std: 0.05923 -> 0.00315  (94.7% reduction)
+
+=== EXCISED basis  --  'z*inv(1+z)' and '(1-a) [CPL-like]' removed ===
+
+  proposed:     -0.214*log(1+z) + -0.05986*exp(-z)
+  terms used:   ['log(1+z)', 'exp(-z)']
+  residual std: 0.05923 -> 0.01387  (76.6% reduction)
+
+=== Correlation of survivors with the residual (short z-range) ===
+
+  corr(residual, z/(1+z)  [excised]  ) = -0.9962
+  corr(residual, inv(1+z)            ) = +0.9962
+  corr(residual, exp(-z)             ) = +0.9946
+  corr(residual, log(1+z)            ) = -0.9940
+  corr(residual, exp(-2*z)           ) = +0.9424
+  corr(residual, z*exp(-z)           ) = -0.1375
+  corr(residual, z                   ) = -0.9604
+
+VERDICT
+  F2 confirmed. Removing z/(1+z) from the basis produces a
+  completely different functional form (-0.214*log(1+z) vs
+  -0.353*z/(1+z)) with worse fit (77% vs 95% reduction).
+  The original 'discovery' of a CPL w_a term is the greedy
+  regressor returning the exact primitive it was seeded with,
+  against a target constructed as that same primitive.
+
+  Multiple survivors (inv, log, exp) correlate |>0.99| with the
+  residual because at short redshift range they all look similar.
+  The 'first term IS the CPL w_a form' phrasing described the
+  regressor's basis, not the physics.

@@ -488,7 +488,16 @@ underneath).
   Non-stdlib: `numpy` + `scipy` (per `requirements.txt`); `pysr`
   optional with a numpy basis-library fallback. Same exemption
   pattern as `play-sims/` and `climate-modeling/`. Modules are
-  MIT-licensed per file header.
+  MIT-licensed per file header (F6 in `FINDINGS.md` flags this as a
+  license collision with the repo's CC0 root). **Audit layer:**
+  `FINDINGS.md` lands six findings against the interpretation. F2
+  (CONFIRMED, see `samples/f2_echo_test.sample.txt`) — removing
+  `z/(1+z)` from the basis library produces `log(1+z)` instead of
+  the CPL-shaped `z·inv(1+z)`, so the "discovery" was the greedy
+  regressor returning its own seed against a target defined as
+  CPL. What survives: the qualitative projection-vs-tomography
+  contrast, the shooting method, the sweep CSVs. Read `FINDINGS.md`
+  before quoting the headline numbers.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

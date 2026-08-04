@@ -5,6 +5,22 @@ Dark-energy simulation drop: coupled-quintessence sweeps, a
 audits whether the failure lives in the mathematics, the
 formulation, the instrument, or the equipment.
 
+> **AUDIT — read [`FINDINGS.md`](FINDINGS.md) before quoting numbers.**
+> Six findings against the interpretation layer:
+> **F1** the "14 orders of magnitude" jump is a float64-noise artifact
+> (3 params → 2 observables is a structural rank deficiency, true
+> eigenvalue = 0); **F2 CONFIRMED** — the generative module echoed
+> its own basis (target and library both contained `z/(1+z)`;
+> removing it produces `log(1+z)` instead, see
+> [`samples/f2_echo_test.sample.txt`](samples/f2_echo_test.sample.txt));
+> **F3** `fs8 ≈ 8× ΛCDM` is a physical blowup, not a tension;
+> **F4** `SIMPLE_POLE at α ≈ −1/λ²` fixed a moving boundary to a
+> static α; **F5** `S_min = 0.05` and the phantom-layer χ² covariance
+> are undefined; **F6** MIT-headered modules sit inside a CC0 repo.
+> What survives: the qualitative Instrument A/B contrast, the
+> shooting method, the sweep CSVs. What does not: the headline
+> "discovery" of the CPL wₐ term.
+
 Non-stdlib (`numpy`, `scipy`) — see `requirements.txt`. Same
 exemption as `play-sims/` and `climate-modeling/`. `pysr` optional;
 the generative module falls back to a numpy basis library when it
