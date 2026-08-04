@@ -190,6 +190,20 @@ Five capability layers, all in `energy/modules/`:
 - **Puzzle piece.** r̂ ≈ 1 is a *shape* property of a locally-power-law wall with slope near 1.5: a linear tangent at any point under-estimates the tail by ~20% by the time you have doubled the coordinate. This should transfer to any nonlinear-wall-plus-linear-certificate pair with similar convexity. If a future gate wall has slope 3 or 5, r̂ will be smaller; if it has slope 1.1, r̂ will be much larger.
 - **Numerical footnote.** With CERT_BETA1 = 0.05 and DEV_TOL = 0.20, β₁_onset happens to land ON the sweep point 0.10 for both base points — a coarser grid would still detect the onset here, but the *precision* of r̂ = 1.0 is one grid step (Δβ₁ = 0.02, so r̂ known to ±0.4). A finer grid would sharpen the number; the qualitative result (LP-certificate radius ~100% of certified β₁) is robust.
 
+### DP-18 — DIVERGENCE PLAYGROUND wired in (external audit spec)
+- **Situation.** Audit added the DIVERGENCE PLAYGROUND spec: a hash-sealed multi-reader loop over fork points that measures spread on three structured axes (verdict / mechanism / collapse), with C1-C4 coincidence tests and a null-ensemble runner. The object under test is not the cosmology; it's the spread across readers.
+- **Choice.** Land as a top-level `divergence-playground/` folder (matches the `inverseminar/` and `claim-audits/` pattern — general mechanism, phone-buildable, stdlib-only). Seed a project-specific `energy/FORKS.jsonl` with the seven forks harvested from this ledger and the earlier audit passes.
+- **Fork inventory** (`energy/FORKS.jsonl`, status snapshot as of DP-18):
+    - FK-1 θ* engine split — **RESOLVED by DP-13** (documentation drift, not engine disagreement)
+    - FK-2 generative CPL recovery — **RESOLVED by F2** (basis echo)
+    - FK-3 H0 orthogonality — **PARTIAL**: DP-14 added the two-sided option, OB-8 stakes the rerun
+    - FK-4 fs8 ≈ 8× ΛCDM — **OPEN**: cheapest collapse is a tolerance + high-z cutoff sweep on `run_iteration6`
+    - FK-5 α wall classification — **OPEN**: cheapest collapse is `singularity_cartographer` at 3 epochs along the attractor
+    - FK-6 certificate validity r̂ — **RESOLVED by DP-17** (r̂ = 1.00, property of the wall)
+    - FK-7 D as distance — **STAKED**: DP-15 caveat lands the docstring; the D-vs-Pareto ordering test is OB-9
+- **Convergence rule.** A claim that N quantities converge on a common cause must first pass C1 (no deterministic map collapsing them to one), then C2 (state N_trials before claiming surprise), then C3 (pre-declared tolerance window), then C4 (out-of-sample prediction). Any prior "convergence" reading in this repo that was not run through this ladder is under audit; the rs_ratio / E_ede / Δfσ8 "three shadows" note in the earlier chat log was the trigger case.
+- **Anchor.** Playground modules ship with self-tests; running `python3 seal.py` verifies the seal, hash-mismatch detection, and post-reveal-commit rejection. Worked example on FK-2 in `divergence-playground/samples/worked_example.sample.txt`.
+
 ---
 
 ## 3. Anchor tests (trust calibration)
@@ -234,6 +248,12 @@ Ranked by (information gain)/(cost), cheapest meaningful next step stated for ea
 - **OB-6: Point the metrology stack at a non-cosmology dataset.** The 4-gate + obstruction-geometry machinery is domain-agnostic. Cost: medium (mostly gate redefinition). Gain: tests whether the *method*, not just the models, is doing real work.
 - **OB-7: AI-facing API over the stack.** Scriptable gate evaluation (JSON in/out) so other agents can propose models and receive gate vectors. Natural extension of OB work; see §8.
 - **OB-8: Rerun DP-9 obstruction geometry under two-sided H0 gate.** DP-14 added the `h0_two_sided=True` option to `gate_vector` but kept the default one-sided so existing analyses reproduce. This branch reruns the gate-gradient cosine matrix, D-distance landscape, and the LP escape cone with `h0_two_sided=True`. Two outcomes: (a) obstruction rank stays 2 and H0 stays orthogonal → DP-9 is real; (b) rank changes or H0 stops being orthogonal → DP-9 gets amended, the "H0 free direction" claim is downgraded to "H0 free direction *upward* only," and the "linear-mirage" LP-cone verdict may need reinterpretation. **Cost: low** (mostly re-invoking existing code with one kwarg). **Gain: decides whether one of DP-9's load-bearing verdicts is physics or an artifact of the gate function.**
+
+- **OB-9: FK-4, FK-5, FK-7 collapse tests (from `energy/FORKS.jsonl`, staged by DP-18).**
+    - **FK-4** (`fs8 ≈ 8× ΛCDM`, LOW): tolerance sweep on `solve_ivp` (rtol, atol) + high-z cutoff test (N_i ∈ {−10, −14, −18}). If fs8_ratio is stable across all three, F3's "physical blowup, not integrator bug" verdict holds. Should also cross-check by inspecting `β(z)` and `G_eff` traces from `run_iteration6` at z ≫ 1.
+    - **FK-5** (`α wall classification`, MEDIUM): run `singularity_cartographer` on the `1 + α·φ̂²` wall at 3 epochs along the attractor trajectory (e.g. N ∈ {−3, −1.5, 0}). If the classified `α_wall` moves, the report's static SIMPLE_POLE classification is a snapshot; if it holds, F4 is wrong and the pole is genuinely attached to the attractor.
+    - **FK-7** (`D as a distance`, LOW): for a set of gate vectors, compute D-ordering and raw-gate-vector Pareto (dominance) ordering. If they ever disagree on a pair (i.e., model A dominates B on every gate but has larger D), D is not a metric compatible with the physics. DP-15's docstring caveat is a documentation fix; this test is the empirical version.
+    All three are staged for the next writer.
 
 ---
 
@@ -286,4 +306,4 @@ Every threshold and normalization used in a gate or cross-module verdict is list
 4. **Respect DP-2 and DP-5.** The q-coefficient rule and the conservation-law-for-the-quantity-of-interest rule are the two easiest things to break and the two hardest to notice broken.
 5. **Append, don't rewrite.** Add new DPs, F-items, and OBs below with the next sequence numbers. Breadcrumbs only work if the trail is contiguous.
 
-*Ledger closes at DP-17, F-8, OB-8. Next writer starts at DP-18.*
+*Ledger closes at DP-18, F-8, OB-9. Next writer starts at DP-19.*

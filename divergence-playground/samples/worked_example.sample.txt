@@ -1,0 +1,67 @@
+========================================================================
+DIVERGENCE PLAYGROUND -- worked example on FK-2 (generative CPL recovery)
+========================================================================
+
+Fork:      FK-2  generative CPL recovery
+Data:      generative_module proposed -0.353*z/(1+z) against DESI-mean CPL residual; matches CPL wa form exactly
+Branches:  ['discovery_of_missing_physics', 'basis_library_echo_of_the_target']
+Collapse:  drop z/(1+z) from the numpy basis library and rerun on the same residuals
+Cost:      LOW
+
+--- three readers commit blind (seal.commit) ---
+  reader_A committed  (sha256[:12] = 86b292fdfd08)
+  reader_B committed  (sha256[:12] = 9741ebe45988)
+  reader_C committed  (sha256[:12] = 49b3f97ed2bc)
+
+--- status before reveal (only hashes visible) ---
+fork      state     readers (masked hashes)
+FK-2      SEALED    reader_A_physics, reader_B_basis, reader_C_algo
+
+--- reveal + spread report ---
+SPREAD REPORT  --  FK-2
+=======================
+  readers                : 3
+  verdict spread   [0..1]: 0.33
+  mechanism spread [0..1]: 1.00
+  collapse spread  [0..1]: 0.33   <- strong axis
+
+  clusters on verdict   : [['reader_B_basis', 'reader_C_algo']]
+  clusters on collapse  : [['reader_A_physics', 'reader_B_basis']]
+
+  RUN QUEUE (collapse conditions proposed by >= 2 readers):
+    1. vary [basis_library], observe 'proposed_form'  (proposed by 2: reader_A_physics, reader_B_basis)
+
+
+========================================================================
+C1 test on the earlier 'convergence' this audit already flagged:
+========================================================================
+  generator             : C1_same_object_two_shadows
+  name_a                : rs_ratio
+  value_a               : 0.9886
+  name_b                : E_ede_frac
+  value_b               : 0.0114
+  map                   : A = 1 - B  (r_s deficit == E excess by the integral identity)
+  predicted_a           : 0.9886
+  relative_residual     : 0.0
+  tolerance             : 0.001
+  collapses_to_one_hit  : True
+
+========================================================================
+C2 look-elsewhere:
+========================================================================
+  generator             : C2_trials_factor
+  p_local               : 0.05
+  n_trials              : 100
+  p_effective           : 0.994079470779666
+  surprising_at_005     : False
+
+========================================================================
+Null ensemble: F2 basis-echo shuffle test (illustrative)
+========================================================================
+  observed max |corr|      : 0.999
+  null trials              : 200
+  null hits >= observed    : 0
+  p_empirical              : 0.0050
+  -> If p small: the echo IS distinguishable from a random-basis null.
+     For F2, the operational test remains the direct one (drop z/(1+z),
+     see samples/f2_echo_test.sample.txt in energy/).

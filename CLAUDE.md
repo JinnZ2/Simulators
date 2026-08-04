@@ -435,6 +435,32 @@ underneath).
   in the module docstring but not yet in the tree:
   `adversarial_corpus.py`, `claim_audit_spin.py`. CC0. stdlib
   only. Phone-buildable.
+- `divergence-playground/` — Anti-anchoring scaffold for testing what
+  N readers (human or AI) do with the same fork point. **Object under
+  test: the spread across readers, not the artifact.** Loop: serve a
+  fork with the raw data (never the prior readings) → readers commit
+  hash-sealed `Reading`s (verdict + mechanism-as-DAG + collapse
+  experiment + confidence) → only when everyone has committed does
+  `reveal()` unseal and verify every hash → spread is computed on
+  three structured axes (VERDICT categorical / MECHANISM Jaccard on
+  DAG edges / **COLLAPSE — the strong axis**, "would the same
+  experiment resolve them?") with an `agree_by_accident` flag for the
+  interesting cell where verdict-axis agrees but collapse-axis does
+  not. Coincidence tests C1–C4 (same-object-two-shadows via
+  deterministic map; trials-factor; pre-declared tolerance window;
+  real-common-cause-with-pre-registered-out-of-sample-prediction) are
+  structured elicitation — the tool refuses to certify a convergence
+  claim without the required inputs. `null_ensemble.py` provides
+  shuffle / IID-resample / permutation nulls for the rigorous
+  version. Six stdlib-only modules (`fork.py`, `reading.py`,
+  `seal.py`, `spread.py`, `coincidence.py`, `null_ensemble.py`) with
+  self-tests all pass; XOR obfuscation in `seal.py` is
+  accidental-peek defence, not cryptographic (swap for real crypto
+  in adversarial multi-agent settings, API unchanged). Runtime state
+  (`SEALED.jsonl`, `REVEALED.jsonl`, `.nonces.json`) gitignored.
+  Worked example in `samples/worked_example.sample.txt` runs the
+  full loop on `energy/FORKS.jsonl`'s FK-2. Seeded by PROVENANCE
+  DP-18 and audit spec "DIVERGENCE PLAYGROUND". CC0.
 - `inverseminar/` — Micro-inverseminar as a single stdlib-only script
   (`inverseminar.py`). One artifact, one reconstruction, one
   correction; ~60s per round. Runs the Nature Physics inverseminar
@@ -528,7 +554,13 @@ underneath).
   spanning 1.5×10⁶ over the matter era — the report's static
   α = −1/λ² = −0.826 is crossed at exactly one epoch (N ≈ −0.10).
   Same numbers-and-shape posture as `harm.py` and
-  `equivalence_field.py`.
+  `equivalence_field.py`. **Divergence playground seed:**
+  `energy/FORKS.jsonl` carries seven fork points harvested from the
+  ledger (FK-1 θ* engine split RESOLVED / FK-2 CPL echo RESOLVED /
+  FK-3 H0 orthogonality PARTIAL / FK-4 fs8 8× OPEN / FK-5 α wall
+  OPEN / FK-6 certificate r̂ RESOLVED / FK-7 D-as-distance STAKED)
+  — pluggable into the top-level `divergence-playground/` for
+  multi-reader spread analysis.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
