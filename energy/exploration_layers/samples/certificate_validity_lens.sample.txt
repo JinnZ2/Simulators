@@ -1,0 +1,42 @@
+ok _t_evaluate_returns_positive_theta_sigma
+ok _t_lcdm_zero_point_matches_bisect
+ok _t_sweep_monotone_growth_of_theta_shift
+all pass
+
+same-engine ΛCDM 100θ* = 1.04020  (Δ column is against this)
+
+=== base point A: λ=1.1, β₁_certified=0.05, f_ede=0.05 ===
+  β₁=0.02  Δθ*=  13.61σ  w0=-0.821  σ8=0.781  H0=68.24
+  β₁=0.03  Δθ*=  22.78σ  w0=-0.823  σ8=0.785  H0=68.23
+  β₁=0.04  Δθ*=  35.23σ  w0=-0.825  σ8=0.791  H0=68.22
+  β₁=0.05  Δθ*=  50.95σ  w0=-0.828  σ8=0.797  H0=68.20 <- certified
+  β₁=0.06  Δθ*=  69.87σ  w0=-0.830  σ8=0.806  H0=68.18
+  β₁=0.07  Δθ*=  91.95σ  w0=-0.833  σ8=0.815  H0=68.15
+  β₁=0.08  Δθ*= 117.12σ  w0=-0.835  σ8=0.827  H0=68.12
+  β₁=0.10  Δθ*= 176.42σ  w0=-0.840  σ8=0.854  H0=68.05
+  β₁=0.12  Δθ*= 247.08σ  w0=-0.845  σ8=0.887  H0=67.96
+  power fit:  slope = +1.64, R² = 0.9952
+  exp fit:    slope = +28.42, R² = 0.9608
+  winner:     log-log (power law)
+  linear tangent dΔθ*/dβ₁ at cert: +1732.0 σ per β₁
+  onset β₁ (LP extrapolation >20% off): 0.1
+  r̂ = 1.0
+
+=== base point B: λ=0.9, β₁_certified=0.05, f_ede=0.05  (r̂-stability test) ===
+  β₁=0.02  Δθ*=  26.44σ  w0=-0.882  σ8=0.781  H0=68.24
+  β₁=0.03  Δθ*=  35.37σ  w0=-0.884  σ8=0.785  H0=68.23
+  β₁=0.04  Δθ*=  47.59σ  w0=-0.886  σ8=0.790  H0=68.22
+  β₁=0.05  Δθ*=  63.06σ  w0=-0.888  σ8=0.797  H0=68.20 <- certified
+  β₁=0.06  Δθ*=  81.72σ  w0=-0.890  σ8=0.805  H0=68.18
+  β₁=0.07  Δθ*= 103.54σ  w0=-0.892  σ8=0.814  H0=68.15
+  β₁=0.08  Δθ*= 128.43σ  w0=-0.894  σ8=0.825  H0=68.12
+  β₁=0.10  Δθ*= 187.16σ  w0=-0.897  σ8=0.852  H0=68.05
+  β₁=0.12  Δθ*= 257.23σ  w0=-0.901  σ8=0.885  H0=67.96
+  power slope = +1.30 (R² 0.9763), exp slope = +22.95 (R² 0.9857)
+  onset β₁ = 0.1,  r̂ = 1.0
+
+wrote sweeps/certificate_validity.csv  (18 rows)
+wrote figures/certificate_validity.png
+
+r̂(λ=1.1) = 1.000,   r̂(λ=0.9) = 1.000   (relative difference 0%)
+→ r̂ is stable across base points: property of the wall.

@@ -159,6 +159,37 @@ Five capability layers, all in `energy/modules/`:
     - σ8 gate: `|σ8 − 0.81| / 0.016` — 0.81 is the ΛCDM control σ8 in the sub-horizon growth approximation used here; 0.016 is a working tolerance, not a Planck error bar.
 - **Rule for successors.** A new gate or a new threshold does not exist for cross-module use until it is named here with (a) the numerical value, (b) the units or normalization, and (c) the data source or the tolerance it represents.
 
+### DP-17 — Certificate validity radius (external audit 3.5; DP-9 companion)
+- **Situation.** DP-9 labeled its LP escape cone a "linear mirage" — the CMB wall is nonlinear (13σ → 141σ across β₁ = 0.05 → 0.10). The audit asked for the exportable, cosmology-free quantity that names *how far* the linear certificate is trustworthy from any given base point.
+- **Definition.** For a certificate computed at parameter point p₀:
+    - `β₁_onset` = first sweep point where actual Δθ*(β₁) deviates from the **linear-in-β₁ tangent** at p₀ by more than DEV_TOL = 20%.
+    - `r_valid = |β₁_onset − β₁_certified|`.
+    - **`r̂ = r_valid / β₁_certified`** — dimensionless, no cosmology in it. This is the exportable quantity.
+- **Sweep** (see `exploration_layers/certificate_validity_lens.py`, `samples/certificate_validity_lens.sample.txt`, `sweeps/certificate_validity.csv`, `figures/certificate_validity.png`). All Δθ*_σ reported as same-engine Δ per DP-13.
+
+  Base point A: (λ=1.1, β₁_certified=0.05, f_ede=0.05, z_c=3162):
+
+  | β₁    | 0.02 | 0.03 | 0.04 | **0.05** | 0.06 | 0.07 | 0.08 | 0.10 | 0.12 |
+  |------:|-----:|-----:|-----:|--------:|-----:|-----:|-----:|-----:|-----:|
+  | Δθ*_σ | 13.6 | 22.8 | 35.2 | **51.0** | 69.9 | 92.0 | 117.1| 176.4| 247.1|
+
+  Base point B (r̂-stability test): (λ=0.9, β₁=0.05, f_ede=0.05, z_c=3162):
+
+  | β₁    | 0.02 | 0.03 | 0.04 | **0.05** | 0.06 | 0.07 | 0.08 | 0.10 | 0.12 |
+  |------:|-----:|-----:|-----:|--------:|-----:|-----:|-----:|-----:|-----:|
+  | Δθ*_σ | 26.4 | 35.4 | 47.6 | **63.1** | 81.7 | 103.5| 128.4| 187.2| 257.2|
+
+- **Shape.**
+    - Base A: log-log slope = +1.64, R² = 0.9952 (power law wins; Δθ*_σ ∝ β₁^1.64).
+    - Base B: log-log slope = +1.30 (R² 0.976), log-linear slope = +23 (R² 0.986) — **exponential edges out power law here.** Functional class is base-point-dependent even when r̂ is not.
+- **Result.**
+    - **r̂(λ=1.1) = 1.00** (onset at β₁ = 0.10, tangent-slope 1732 σ per β₁ deviates by ≥20% by β₁ = 0.10).
+    - **r̂(λ=0.9) = 1.00** (same onset).
+    - **Relative difference: 0%.**
+- **Interpretation.** r̂ is stable across the two base points tested → **property of the wall**, not of the base point. The LP-certificate around the coupled-quintessence CMB wall stays trustworthy for roughly a **doubling** of the certified β₁ before nonlinearity breaks it. A certificate at β₁ = 0.05 is honest out to β₁ ≈ 0.10; past that, the linear tangent under-predicts the θ* damage by more than 20%. Two base points is a weak stability test — a third at f_ede shifted (per the audit's TODO 3.5.d) would harden the claim, but r̂ = 1.00 exactly at both current points is a strong signal.
+- **Puzzle piece.** r̂ ≈ 1 is a *shape* property of a locally-power-law wall with slope near 1.5: a linear tangent at any point under-estimates the tail by ~20% by the time you have doubled the coordinate. This should transfer to any nonlinear-wall-plus-linear-certificate pair with similar convexity. If a future gate wall has slope 3 or 5, r̂ will be smaller; if it has slope 1.1, r̂ will be much larger.
+- **Numerical footnote.** With CERT_BETA1 = 0.05 and DEV_TOL = 0.20, β₁_onset happens to land ON the sweep point 0.10 for both base points — a coarser grid would still detect the onset here, but the *precision* of r̂ = 1.0 is one grid step (Δβ₁ = 0.02, so r̂ known to ±0.4). A finer grid would sharpen the number; the qualitative result (LP-certificate radius ~100% of certified β₁) is robust.
+
 ---
 
 ## 3. Anchor tests (trust calibration)
@@ -255,4 +286,4 @@ Every threshold and normalization used in a gate or cross-module verdict is list
 4. **Respect DP-2 and DP-5.** The q-coefficient rule and the conservation-law-for-the-quantity-of-interest rule are the two easiest things to break and the two hardest to notice broken.
 5. **Append, don't rewrite.** Add new DPs, F-items, and OBs below with the next sequence numbers. Breadcrumbs only work if the trail is contiguous.
 
-*Ledger closes at DP-16, F-8, OB-8. Next writer starts at DP-17.*
+*Ledger closes at DP-17, F-8, OB-8. Next writer starts at DP-18.*

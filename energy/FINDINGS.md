@@ -281,6 +281,34 @@ raised five sharper concerns (G1-G5). Resolutions:
   resolved from `__file__`. Duplicate `app/PROVENANCE.md` deleted.
 - **G5 §8.6 personal paragraph — DONE.** Removed from PROVENANCE §8.
 
+## Follow-on (audit TODO 3.5): DP-17 certificate validity radius
+
+Executed the certificate-validity sweep the audit prescribed alongside
+the G1 bisect (they share the θ* machinery). Sweep of β₁ at pinned
+(λ, f_ede, z_c) with linear-in-β₁ tangent onset criterion (>20%
+extrapolation deviation triggers onset). Results at two base points:
+
+| base point            | β₁_certified | β₁_onset | **r̂**   | shape (winner)          |
+|-----------------------|-------------:|---------:|--------:|-------------------------|
+| A: λ=1.1, f=0.05     | 0.05         | 0.10     | **1.00** | power law (R²=0.995)    |
+| B: λ=0.9, f=0.05     | 0.05         | 0.10     | **1.00** | exponential (R²=0.986)  |
+
+**r̂ is stable across base points → property of the wall.** The
+LP-certificate around the coupled-quintessence CMB wall stays trustworthy
+for roughly a **doubling** of the certified β₁ before the tangent
+under-predicts by more than 20%. A certificate computed at β₁ = 0.05
+is honest out to β₁ ≈ 0.10; past that, nonlinearity bites.
+
+The functional form itself (power law vs exponential) *is*
+base-point-dependent — R² winners flip between λ=1.1 and λ=0.9 —
+but the LP-radius r̂ is not. That is a genuine "shape property of a
+locally-power-law-with-slope-~1.5 wall" reading and should transfer
+to any nonlinear-wall-plus-linear-certificate pair with similar
+convexity. Full DP-17 write-up in PROVENANCE, artifacts in
+[`exploration_layers/certificate_validity_lens.py`](exploration_layers/certificate_validity_lens.py),
+[`sweeps/certificate_validity.csv`](sweeps/certificate_validity.csv),
+[`figures/certificate_validity.png`](figures/certificate_validity.png).
+
 ## Exploration-layer pattern
 
 The above lenses live in

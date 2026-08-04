@@ -27,11 +27,12 @@ returns **numbers and shape**, not a verdict (same posture as
 
 ## Landed
 
-| lens                          | wall                              | reading                                                                                        |
-|-------------------------------|-----------------------------------|------------------------------------------------------------------------------------------------|
-| `reaction_diffusion_lens.py`  | F3 — running-coupling "blowup"    | growing-mode exponent `p(N)` and Damköhler analog `Da(N)` along the trajectory; total growth ratio to ΛCDM |
-| `percolation_lens.py`         | §8 — "N ≈ 4 distinguishable"      | giant-component fraction vs threshold θ on the observable-space graph                          |
-| `rg_flow_lens.py`             | F4 — moving `α = −1/φ̂²` boundary | fixed points of the (x, y) autonomous system, classification, and `α_wall(N)` along the flow  |
+| lens                            | wall                                | reading                                                                                        |
+|---------------------------------|-------------------------------------|------------------------------------------------------------------------------------------------|
+| `reaction_diffusion_lens.py`    | F3 — running-coupling "blowup"      | growing-mode exponent `p(N)` and Damköhler analog `Da(N)` along the trajectory; total growth ratio to ΛCDM (fixed-background upper bound; qualitative — see `../FINDINGS.md` for the walk-back) |
+| `percolation_lens.py`           | §8 — "N ≈ 4 distinguishable"        | giant-component fraction vs threshold θ on the observable-space graph                          |
+| `rg_flow_lens.py`               | F4 — moving `α = −1/φ̂²` boundary   | fixed points of the (x, y) autonomous system, classification, and `α_wall(N)` along the flow  |
+| `certificate_validity_lens.py`  | DP-9 — LP-certificate "linear mirage" | β₁ sweep at pinned base point; linear-tangent onset test; **r̂ = r_valid / β₁_certified** — dimensionless, exportable, cosmology-free. Companion to PROVENANCE DP-17. |
 
 ## What each lens said
 
