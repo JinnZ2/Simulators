@@ -1,0 +1,4 @@
+numpy>=1.20
+scipy>=1.7
+# optional -- generative_module falls back to numpy basis library if absent
+# pysr>=0.19

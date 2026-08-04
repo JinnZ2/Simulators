@@ -459,6 +459,33 @@ underneath).
   gitignored inside the folder — tacit knowledge stays on the
   machine unless the operator decides otherwise. No model calls; the
   tool prints a prompt for the operator to paste. CC0.
+- `energy/` — Dark-energy drop: coupled-quintessence sweeps, a
+  223-cosmology browser playground, and a five-module metrology
+  stack (`metrology_diagnostic`, `falsification_engine`,
+  `singularity_cartographer`, `generative_module`, `payload_bridge`)
+  plus the `run_iteration6` driver. Pure Popper translated into
+  linear algebra; discipline-agnostic (X can be redshift, time,
+  GDP, dosage). Reproduces the tomographic verdict end-to-end at
+  the geodesic foot `λ=1.10, β=0, α=0`: the rank-2 `w₀–wₐ`
+  projection is `INSTRUMENTATION_DEGENERATE` (Fisher `S_min ≈
+  1.6×10⁻¹⁴`); rank-3 z-tomography lifts `S_min` to `2.09` — the
+  blindness lifts by 14 orders of magnitude — and the generative
+  module proposes `−0.353·z·inv(1+z) − 0.043·exp(−2z)`, whose first
+  term is literally the CPL `wₐ` form. The `1+αφ²` wall classifies
+  as `SIMPLE_POLE` at `α ≈ −1/λ²` (not a true horizon). Iteration 6
+  inserts the proposal as a running coupling
+  `β(z) = β₀ + β₁·z/(1+z)`: the projection closes to `0.15σ` but
+  the growth channel vetoes (`fs8/ΛCDM ≈ 8×`) — the falsification
+  loop stays open by design. Ships the flagship report
+  (`Coupled_Quintessence_Geometry_Report.pdf`, Aug 2026), three
+  sweep CSVs (`coupled_quintessence_sweep`, `coupling_growth_sweep`,
+  `phantom_layer_sweep`), the `app/` playground (self-contained
+  HTML + JSON payload for the 223 integrated cosmologies), and the
+  `figures/` renderings including the manifold-graph JSONL payload.
+  Non-stdlib: `numpy` + `scipy` (per `requirements.txt`); `pysr`
+  optional with a numpy basis-library fallback. Same exemption
+  pattern as `play-sims/` and `climate-modeling/`. Modules are
+  MIT-licensed per file header.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
