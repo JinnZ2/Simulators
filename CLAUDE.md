@@ -460,10 +460,20 @@ underneath).
   machine unless the operator decides otherwise. No model calls; the
   tool prints a prompt for the operator to paste. CC0.
 - `energy/` — Dark-energy drop: coupled-quintessence sweeps, a
-  223-cosmology browser playground, and a five-module metrology
-  stack (`metrology_diagnostic`, `falsification_engine`,
+  223-cosmology browser playground, a late-time-kink Needle Lab,
+  and an 11-module stack. The five metrology modules
+  (`metrology_diagnostic`, `falsification_engine`,
   `singularity_cartographer`, `generative_module`, `payload_bridge`)
-  plus the `run_iteration6` driver. Pure Popper translated into
+  ride on top of true dynamical engines: `unified_cq_ede.py`
+  (single-integration CQ+EDE, `anchors()` self-test to per-mille
+  consistency vs `edelens.py` and `run_iteration6.py`) and
+  `late_trigger_lens.py` (phenomenological w(z)-kink background +
+  growth + r_s integrator). `overlap_lens.py` bridges CQ and EDE
+  in the (σ₈, H₀) plane; `theory_space_lenses.py` runs an R-D /
+  percolation / Fisher three-lens scan and reports the "UNIVERSAL
+  PATHOLOGY" verdict — growth kink, graph-fragmentation peak,
+  and Fisher rank collapse all at β₁≈0.2–0.3 (converges with
+  `exploration_layers/` built independently on this side). Pure Popper translated into
   linear algebra; discipline-agnostic (X can be redshift, time,
   GDP, dosage). Reproduces the tomographic verdict end-to-end at
   the geodesic foot `λ=1.10, β=0, α=0`: the rank-2 `w₀–wₐ`
@@ -497,6 +507,12 @@ underneath).
   regressor returning its own seed against a target defined as
   CPL. What survives: the qualitative projection-vs-tomography
   contrast, the shooting method, the sweep CSVs. Read `FINDINGS.md`
+  and `PROVENANCE.md` (author's own decision ledger — 12 DPs, 8
+  falsification entries, 7 open branches, 5 anchor tests —
+  independently reproduces F3 as PROVENANCE F-2/F-4 with the
+  matching σ8 ≈ 3.2 gate units at β₁=0.4, and adds F-5
+  "late-triggered β(a) dodges θ* but buys nothing" plus the "still
+  alive" late-kink family at DP-11 seeding the Needle Lab)
   before quoting the headline numbers. **Exploration layers:**
   `exploration_layers/` attaches one lens per wall in FINDINGS —
   `reaction_diffusion_lens.py` reads F3's β(z) = β₀+β₁·z/(1+z) as

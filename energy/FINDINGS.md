@@ -4,6 +4,32 @@ Author audit of the `energy/` drop. Six findings, four survivals.
 The report's headline claims are on trial here, not the sweep data
 or the qualitative Instrument A vs B contrast.
 
+> **Read [`PROVENANCE.md`](PROVENANCE.md) alongside this file.** It
+> is the author's own decision ledger (12 DPs, 8 falsification
+> entries, 7 open branches, 5 anchor tests) and it independently
+> reproduces several findings below:
+>
+> - **F-2 in PROVENANCE = F3 here:** constant-β corridor CMB-vetoed
+>   at 283σ; β₁=0.4 champion killed with σ8≈3.2 gate units
+>   (matches the R-D lens prediction `growth_ratio = 3.249`, see
+>   [`exploration_layers/reaction_diffusion_lens.py`](exploration_layers/reaction_diffusion_lens.py)).
+> - **F-5 in PROVENANCE = R-D lens prediction:** late-triggered
+>   β(a) = β₀·aⁿ "dodges θ* but buys nothing" — the coupling's
+>   usefulness IS its early action. Consistent with the finding
+>   that the mechanism is autocatalytic accumulation over the
+>   matter era, not the late-time value.
+> - **DP-4 = F5 here:** "A disclosed systematic is a measurement;
+>   a calibrated-away systematic is a story." The author holds a
+>   known 2.3σ θ* offset in every CMB verdict rather than
+>   recalibrating it away.
+> - **DP-11 late-time kink = "still alive" branch:** the phenomeno-
+>   logical w_DE kink at a_t=0.92–0.95 passes all four gates;
+>   [`app/needle_lab.html`](app/needle_lab.html) is the
+>   instrument-design surface for measuring it.
+>
+> Where PROVENANCE and this file diverge in language they converge
+> in verdict. Read them together.
+
 ---
 
 ## F1 — the "14 orders of magnitude" is not a measurement

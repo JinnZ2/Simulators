@@ -11,6 +11,20 @@ Three lenses landed here, each attached to a specific finding. Each
 returns **numbers and shape**, not a verdict (same posture as
 `../../rigidification-sensor/harm.py`).
 
+> **Convergent discovery.** The author's v2 drop shipped their own
+> three-lens scan as [`../modules/theory_space_lenses.py`](../modules/theory_space_lenses.py)
+> — same R-D / percolation / Fisher-curvature triad, developed
+> independently on their side. The two implementations reached the
+> β₁ ≈ 0.2–0.3 pathology from different directions:
+>
+> - `theory_space_lenses.py.survival_report()` — "UNIVERSAL
+>   PATHOLOGY: growth kink, graph fragmentation peak (8.75σ), and
+>   Fisher rank collapse all at β₁≈0.2–0.3."
+> - `reaction_diffusion_lens.py` — `growth_ratio = 3.249` at β₁=0.4,
+>   compounding to 12.5 at β₁=0.6.
+>
+> Both name the same wall; the modules stand as sibling readings.
+
 ## Landed
 
 | lens                          | wall                              | reading                                                                                        |

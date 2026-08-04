@@ -1,0 +1,11 @@
+==================================================================
+anchors() -- run per PROVENANCE.md section 8 before trusting edits
+==================================================================
+
+ANCHOR 1: pure CQ (f_ede=0) vs run_iteration6 engine
+  lam=1.1, beta=+0.0:  w0 unified=-0.81574 vs it6=-0.81574   d(w0)=-3.78e-06
+  lam=1.1, beta=+0.2:  w0 unified=-0.90941 vs it6=-0.90941   d(w0)=-8.07e-07
+  lam=0.7, beta=-0.1:  w0 unified=-0.89008 vs it6=-0.89008   d(w0)=-8.87e-08
+ANCHOR 2: pure EDE (beta=0) vs edelens engine
+  zc=3162, f=0.05:  rs_ratio unified=0.9888 vs edelens=0.9834 | s8 unified=0.7770 vs edelens=0.7733
+  zc=1000, f=0.1:  rs_ratio unified=0.9920 vs edelens=0.9699 | s8 unified=0.7427 vs edelens=0.7339

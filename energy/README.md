@@ -30,17 +30,35 @@ is absent, and every module ships a runnable `__main__` demo.
 
 ```
 energy/
-  Coupled_Quintessence_Geometry_Report.pdf   flagship report (v2, Aug 2026)
+  Coupled_Quintessence_Geometry_Report.pdf   flagship report (Aug 2026)
   Coupled_Quintessence_Geometry_Report.md    same text, markdown + LaTeX math
-  FINDINGS.md                                author audit (F1-F6 + §8 lens)
+  PROVENANCE.md                              author decision ledger (12 DPs, 8 F-items, 7 OBs)
+  FINDINGS.md                                external audit (F1-F6 + §8 lens)
   sweeps/                                    three parameter-sweep CSVs
-  modules/                                   five-module metrology stack + iter-6 driver
+  modules/                                   11-module stack: 5 metrology + engines + lenses
   exploration_layers/                        one lens per wall (R-D, percolation, RG flow)
-  app/                                       browser playground (index.html + JSON payload)
+  app/                                       browser playground + late-time Needle Lab
   figures/                                   plots + manifold-graph JSONL payload
-  samples/                                   captured end-to-end output
+  samples/                                   captured end-to-end output + anchors self-test
   requirements.txt                           numpy + scipy
 ```
+
+**Trust protocol (read `PROVENANCE.md` §3 and §8 before editing engines).**
+`unified_cq_ede.anchors()` re-runs the two calibration tests each edit
+must preserve:
+
+```
+ANCHOR 1: pure CQ (f_ede=0) vs run_iteration6 engine
+  lam=1.1, beta=+0.0:  d(w0) = -3.78e-06         # spec: <4e-6
+  lam=1.1, beta=+0.2:  d(w0) = -8.07e-07
+ANCHOR 2: pure EDE (beta=0) vs edelens engine
+  zc=3162, f=0.05:  rs_ratio 0.9888 vs 0.9834    # per-mille consistency
+```
+
+Captured: [`samples/anchors.sample.txt`](samples/anchors.sample.txt).
+A diff that moves an anchor is either a bug or a disclosed
+systematic; PROVENANCE says: decide which, in writing, in
+PROVENANCE.md.
 
 ## The physics being probed
 
