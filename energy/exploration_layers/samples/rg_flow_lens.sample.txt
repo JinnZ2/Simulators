@@ -1,0 +1,25 @@
+ok _t_alpha_wall_moves
+ok _t_field_dominated_attractor_exists_for_shallow_potential
+ok _t_no_field_attractor_for_steep_potential
+ok _t_phi_hat_grows_monotonically_along_flow
+all pass
+
+--- Fixed points of the (x, y) system at lambda=1.10, beta=0 ---
+        x        y    Om_phi    w_phi        class                 eigenvalues
+    0.000    0.000     0.000    0.000       SADDLE   -1.50+0.00j, +1.50+0.00j
+    1.000    0.000     1.000    1.000     REPELLER   +1.65+0.00j, +3.00+0.00j
+    0.449    0.893     1.000   -0.597    ATTRACTOR   -1.79+0.00j, -2.40+0.00j
+
+--- F4 wall alpha_wall(N) = -1/phi_hat(N)^2 along the flow ---
+      N   phi_hat   alpha_wall
+  -6.00    0.0010       -1e+06
+  -4.50    0.0010   -9.559e+05
+  -3.00    0.0030   -1.131e+05
+  -1.50    0.1372       -53.14
+   0.00    1.2347      -0.6559
+
+alpha_wall spans 1.5e+06 between N=-6.0 and N=+0.0.
+Report classifier fixed this wall at alpha = -1/lambda^2 = -0.826.
+  -> the trajectory crosses alpha = -0.826 at N ~ -0.10 (phi_hat ~ 1.136).
+     Fixing this ONE epoch as if it were a coupling is the
+     F4 error: the wall is a trajectory, not a constant.

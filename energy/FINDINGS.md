@@ -64,6 +64,30 @@ module returned its own seed.
 - **Suspect:** runaway in `β(z) = β₀ + β₁·z/(1+z)` at high z, where
   `z/(1+z) → 1` and the coupling never turns off.
 
+### Lens: reaction-diffusion (see [`exploration_layers/reaction_diffusion_lens.py`](exploration_layers/reaction_diffusion_lens.py))
+
+The growth equation is a reaction with rate
+`R(N) = 1.5·Ω_m·(1 + 2β²)` and damping `F(N) = 2 − q`. Reading β(z)
+as an autocatalytic term that never removes itself gives the total
+growth ratio to ΛCDM at fixed background:
+
+| β₀, β₁      | growth_ratio | β(today) contribution |
+|-------------|-------------:|-----------------------|
+| (0, 0)      | 1.000        | 0 (baseline)          |
+| (0, 0.20)   | 1.356        | 0                     |
+| (0, 0.40)   | **3.249**    | 0                     |
+| (0, 0.60)   | 12.455       | 0                     |
+
+**F3 refined, not overturned.** The 8× is **not** integrator
+instability — it is the mechanism the parameterization prescribes.
+`β(today) ≈ 0` so `p(N=0)` matches ΛCDM, but the growth compounded
+over the matter era where β(z) saturated near `β₀ + β₁`. The
+R-D name for the mechanism: autocatalytic reaction whose catalyst
+is never removed. Any physical β(z) must decay at high z;
+`β₀ + β₁·z/(1+z)` cannot. Iteration-6's "champion" is genuinely
+killed by the growth channel — the loop stayed open for the right
+reason.
+
 ---
 
 ## F4 — SIMPLE_POLE at α ≈ −1/λ² is epoch-dependent
@@ -73,6 +97,33 @@ module returned its own seed.
 - `φ̂` evolves → the wall **moves**.
 - Classifier fixed a moving boundary to a static α.
 - Score `0.9999` from 27 cells is over-reported precision.
+
+### Lens: RG flow (see [`exploration_layers/rg_flow_lens.py`](exploration_layers/rg_flow_lens.py))
+
+Fixed points of the (x, y) autonomous subsystem at (λ=1.10, β=0):
+
+| x     | y     | Ω_φ   | w_φ    | class    | eigenvalues        |
+|-------|-------|-------|--------|----------|---------------------|
+| 0.000 | 0.000 | 0.000 |  0.000 | SADDLE   | ±1.50               |
+| 1.000 | 0.000 | 1.000 | +1.000 | REPELLER | +1.65, +3.00        |
+| 0.449 | 0.893 | 1.000 | −0.597 | ATTRACTOR| −1.79, −2.40        |
+
+At the field-dominated attractor, `x* = 0.449 ≠ 0`, so
+`φ̂(N) = φ̂_i + √6·x*·(N − N_i)` grows linearly along the flow. The
+apparent wall `α_wall(N) = −1/φ̂(N)²` then moves:
+
+| N     | φ̂       | α_wall     |
+|-------|---------|------------|
+| −6.00 | 0.0010  | −1 × 10⁶   |
+| −3.00 | 0.0030  | −1.1 × 10⁵ |
+| −1.50 | 0.1372  | −53.14     |
+|  0.00 | 1.2347  | −0.656     |
+
+**F4 CONFIRMED.** `α_wall` spans **1.5 × 10⁶** across the matter
+era. The report's static value `α = −1/λ² = −0.826` is crossed at
+exactly **one epoch** (N ≈ −0.10, φ̂ ≈ 1.14). Fixing this snapshot
+as if it were a coupling constant is the F4 error: the wall is a
+trajectory, not a coupling.
 
 ---
 
@@ -98,6 +149,29 @@ per-folder license map).
 
 ---
 
+## §8 — "N ≈ 4 distinguishable cosmologies" is a transition reading
+
+Not in the original F1-F6 list, but the percolation lens
+([`exploration_layers/percolation_lens.py`](exploration_layers/percolation_lens.py))
+raises this as a companion finding on the report's §8. Building a
+graph on the 48 manifold nodes with edges at observable-space
+distance ≤ θ (using `σ_w0=0.04, σ_wa=0.16, σ_fs8=0.02`):
+
+| θ (σ) | n_components | giant_fraction |
+|------:|-------------:|---------------:|
+|  0.50 |           24 |          0.333 |
+|  0.70 |           10 |          0.479 |
+|  1.00 |            2 |          0.667 |
+|  1.50 |            1 |          1.000 |
+
+The report picked θ = 1σ. The percolation transition
+(`giant_fraction` crossing 0.5) sits between θ = 0.7 and θ = 1.0 —
+the report threshold is **on the transition**, not on a plateau.
+This means the "N ≈ 4" count is not a robust readout of the geometry;
+it is a transition-region readout that will jump under modest
+covariance rescaling. The geometry is stable, the number attached
+to it is not.
+
 ## What survives
 
 - ✓ **Instrument A/B contrast** — the qualitative result (projection
@@ -115,17 +189,36 @@ per-folder license map).
 
 1. **F2 — done.** See table above and the sample. The claim of a
    CPL-shaped discovery collapses.
-2. **F1** — swap "14 orders lifted" for "the projection is exactly
+2. **F3 — done, sharpened.** See the R-D lens above and the sample.
+   The 8× is real physics of a pathological parameterization, not
+   an integrator bug. The finding stands and now has a mechanism.
+3. **F4 — done, confirmed.** See the RG lens above and the sample.
+   The α-wall spans 6 orders of magnitude across the flow; the
+   report's static classification captured one snapshot of a moving
+   boundary.
+4. **§8 — done, weakened.** See the percolation lens above. The
+   "N ≈ 4" count sits on the percolation transition; the geometry
+   is stable but the count attached to it is not.
+5. **F1** — swap "14 orders lifted" for "the projection is exactly
    rank-deficient by construction (3 params → 2 observables); the
    rank-3 tomographic instrument is well-posed at `S_min = 2.09`."
-3. **F3** — instrument `run_iteration6.py` to log `β(z)`, `G_eff`,
-   and `f/H` step-by-step and check for the high-z runaway before
-   quoting the `fs8 ≈ 8×` veto.
-4. **F5** — inline the `S_min` normalization convention and the
+6. **F5** — inline the `S_min` normalization convention and the
    DESI-mock covariance used for the χ² surface in the README or
    in `modules/README.md`.
-5. **F4** — recompute the singularity classifier along the actual
-   `φ̂(N)` trajectory, not at the static attractor value.
-6. **F6** — decide license posture; either request CC0 waiver from
+7. **F6** — decide license posture; either request CC0 waiver from
    the module authors or add an explicit `LICENSE.MIT` inside
    `modules/` and note the repo carries a mixed license.
+
+## Exploration-layer pattern
+
+The above lenses live in
+[`exploration_layers/`](exploration_layers/README.md) and follow a
+simple rule: **when a wall is named, look for the same wall in
+another field's language and land a reading in that language.**
+Three families landed here (reaction-diffusion, percolation, RG
+flow); nothing stops more from arriving. The lens returns numbers
+and shape, not a verdict — it can strengthen a finding (F3 kept its
+teeth), confirm it (F4 got a quantitative number for the wall's
+motion), or weaken it (percolation reframed §8's count). What
+matters is that the reading exists in language the original framing
+could not have produced.

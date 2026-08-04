@@ -497,7 +497,22 @@ underneath).
   regressor returning its own seed against a target defined as
   CPL. What survives: the qualitative projection-vs-tomography
   contrast, the shooting method, the sweep CSVs. Read `FINDINGS.md`
-  before quoting the headline numbers.
+  before quoting the headline numbers. **Exploration layers:**
+  `exploration_layers/` attaches one lens per wall in FINDINGS —
+  `reaction_diffusion_lens.py` reads F3's β(z) = β₀+β₁·z/(1+z) as
+  an autocatalytic reaction whose catalyst never removes itself,
+  giving growth-ratio = 3.25 at β₁=0.4 and 12.5 at β₁=0.6 (the "8×
+  fs8" is real physics of a pathological parameterization, not an
+  integrator bug); `percolation_lens.py` reads the manifold graph
+  and shows the report's θ=1σ threshold sits on the percolation
+  transition (giant-fraction 0.479 → 0.667 between θ=0.7 and 1.0),
+  so the "N≈4" count is a transition reading not a plateau;
+  `rg_flow_lens.py` finds the (x,y) fixed points and traces
+  `α_wall(N) = −1/φ̂(N)²` along the field-dominated attractor,
+  spanning 1.5×10⁶ over the matter era — the report's static
+  α = −1/λ² = −0.826 is crossed at exactly one epoch (N ≈ −0.10).
+  Same numbers-and-shape posture as `harm.py` and
+  `equivalence_field.py`.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

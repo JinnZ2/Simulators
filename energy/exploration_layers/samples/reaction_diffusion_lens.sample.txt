@@ -1,0 +1,18 @@
+ok _t_damkohler_stays_reaction_dominated_in_matter_era
+ok _t_running_coupling_amplifies
+ok _t_static_small_beta_is_modest
+ok _t_uncoupled_matches_lcdm
+all pass
+
+--- F3 R-D reading: beta(z) = beta0 + beta1*z/(1+z), 14 e-folds ---
+label                       growth_ratio    p(N=0)   p_lcdm(N=0)    Da_max
+LCDM control      (0,0)            1.000     0.175         0.175     0.665
+static small      (0.05,0)         1.023     0.176         0.175     0.668
+static moderate   (0.10,0)         1.093     0.178         0.175     0.678
+F3 iteration-6    (0,0.20)         1.356     0.175         0.175     0.714
+F3 iteration-6    (0,0.40)         3.249     0.175         0.175     0.868
+large runaway     (0,0.60)        12.455     0.175         0.175     1.126
+
+Reading: growth_ratio >> 1 with small local beta means the
+coupling accumulated over the matter era. Da_max is Ω_m·(1+2β²)/(2-q)²
+-- the R-D signature of a reaction that never turns off.

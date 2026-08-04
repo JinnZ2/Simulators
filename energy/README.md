@@ -31,8 +31,11 @@ is absent, and every module ships a runnable `__main__` demo.
 ```
 energy/
   Coupled_Quintessence_Geometry_Report.pdf   flagship report (v2, Aug 2026)
+  Coupled_Quintessence_Geometry_Report.md    same text, markdown + LaTeX math
+  FINDINGS.md                                author audit (F1-F6 + §8 lens)
   sweeps/                                    three parameter-sweep CSVs
   modules/                                   five-module metrology stack + iter-6 driver
+  exploration_layers/                        one lens per wall (R-D, percolation, RG flow)
   app/                                       browser playground (index.html + JSON payload)
   figures/                                   plots + manifold-graph JSONL payload
   samples/                                   captured end-to-end output
