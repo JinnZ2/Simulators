@@ -24,7 +24,7 @@ Result for the running-coupling family beta(z)=b0+b1*z/(1+z), lambda=1.3:
 Requires a `model_evaluator` callable: (b0, b1, lam) -> dict with keys
   w0, wa, r0   (w0, wa, and fs8/LCDM ratio at z=0)
 See run_iteration6.py for the coupled-quintessence engine that provides it.
-License: MIT
+License: CC0 1.0 Universal (public domain).
 """
 
 import numpy as np

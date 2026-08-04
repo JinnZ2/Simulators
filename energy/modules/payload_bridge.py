@@ -18,10 +18,11 @@ Scenario reproduced (the Day-5 test):
   6. Print the orchestrator-style 3-paragraph verdict.
 
 Usage:  python payload_bridge.py [path/to/playground_data.json]
-License: MIT
+License: CC0 1.0 Universal (public domain).
 """
 
 import sys
+import os
 import json
 import numpy as np
 
@@ -119,7 +120,7 @@ def orchestrator_verdict(gates_proj, gates_tomo, gen_out, cart_out):
     return p1, p2, p3
 
 
-def main(path='/mnt/agents/output/app/playground_data.json'):
+def main(path=os.path.join(os.path.dirname(__file__), '..', 'app', 'playground_data.json')):
     pg = Playground(path)
     print(f"Loaded {len(pg.models)} integrated cosmologies "
           f"(grid {len(pg.lam)}x{len(pg.beta)}x{len(pg.alpha)})\n")
@@ -200,4 +201,4 @@ def main(path='/mnt/agents/output/app/playground_data.json'):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1] if len(sys.argv) > 1 else '/mnt/agents/output/app/playground_data.json')
+    main(sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(__file__), '..', 'app', 'playground_data.json'))

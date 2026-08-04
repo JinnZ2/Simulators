@@ -9,7 +9,7 @@ tries every meaningful substitution, and classifies the wall:
   BRANCH_CUT        - log singularity: multi-valued physics, new sheet
   PHASE_TRANSITION  - sqrt threshold: tachyonic / imaginary beyond
   TRUE_HORIZON      - no substitution works: NEW MATH REQUIRED
-License: MIT
+License: CC0 1.0 Universal (public domain).
 """
 
 import numpy as np

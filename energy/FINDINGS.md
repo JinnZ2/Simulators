@@ -9,10 +9,18 @@ or the qualitative Instrument A vs B contrast.
 > entries, 7 open branches, 5 anchor tests) and it independently
 > reproduces several findings below:
 >
-> - **F-2 in PROVENANCE = F3 here:** constant-β corridor CMB-vetoed
->   at 283σ; β₁=0.4 champion killed with σ8≈3.2 gate units
->   (matches the R-D lens prediction `growth_ratio = 3.249`, see
->   [`exploration_layers/reaction_diffusion_lens.py`](exploration_layers/reaction_diffusion_lens.py)).
+> - **F-2 in PROVENANCE ≈ F3 here:** constant-β corridor CMB-vetoed
+>   at 283σ; β₁=0.4 champion killed with σ8 ≈ 3.2 gate units. The
+>   R-D lens
+>   ([`exploration_layers/reaction_diffusion_lens.py`](exploration_layers/reaction_diffusion_lens.py))
+>   reports `growth_ratio = 3.249` at β₁=0.4 over 14 matter-era
+>   e-folds on a **fixed ΛCDM background**; that is a *toy upper
+>   bound* on the linear-growth ODE and does **not** correspond to
+>   σ8 3.2 gate units (a 5% σ8 enhancement) — the numeric coincidence
+>   between 3.249 and 3.2 is not a physics match. What survives is
+>   the *qualitative* mechanism: β(z) that never turns off pumps the
+>   matter era, both readings say so, and both point at the same
+>   parameter region as pathological.
 > - **F-5 in PROVENANCE = R-D lens prediction:** late-triggered
 >   β(a) = β₀·aⁿ "dodges θ* but buys nothing" — the coupling's
 >   usefulness IS its early action. Consistent with the finding
@@ -94,15 +102,23 @@ module returned its own seed.
 
 The growth equation is a reaction with rate
 `R(N) = 1.5·Ω_m·(1 + 2β²)` and damping `F(N) = 2 − q`. Reading β(z)
-as an autocatalytic term that never removes itself gives the total
-growth ratio to ΛCDM at fixed background:
+as an autocatalytic term that never removes itself gives an
+**upper-bound growth ratio** on a fixed ΛCDM background (no backreaction
+on the expansion history):
 
-| β₀, β₁      | growth_ratio | β(today) contribution |
-|-------------|-------------:|-----------------------|
-| (0, 0)      | 1.000        | 0 (baseline)          |
-| (0, 0.20)   | 1.356        | 0                     |
-| (0, 0.40)   | **3.249**    | 0                     |
-| (0, 0.60)   | 12.455       | 0                     |
+| β₀, β₁      | growth_ratio (fixed-bkg) | β(today) contribution |
+|-------------|-------------------------:|-----------------------|
+| (0, 0)      | 1.000                    | 0 (baseline)          |
+| (0, 0.20)   | 1.356                    | 0                     |
+| (0, 0.40)   | **3.249**                | 0                     |
+| (0, 0.60)   | 12.455                   | 0                     |
+
+**Caveat.** These are fixed-background upper bounds on `D(a=1)/D(a_i)`;
+the self-consistent shooting engine backreacts on the expansion
+history and delivers a much smaller σ8 enhancement (`late_trigger_lens`
+and `unified_cq_ede`: σ8 ≈ 0.86 for β₁=0.4 → 3.2 gate units, a ~5%
+effect). The lens' contribution is qualitative — it names the
+mechanism — not quantitative.
 
 **F3 refined, not overturned.** The 8× is **not** integrator
 instability — it is the mechanism the parameterization prescribes.
@@ -228,12 +244,42 @@ to it is not.
 5. **F1** — swap "14 orders lifted" for "the projection is exactly
    rank-deficient by construction (3 params → 2 observables); the
    rank-3 tomographic instrument is well-posed at `S_min = 2.09`."
-6. **F5** — inline the `S_min` normalization convention and the
-   DESI-mock covariance used for the χ² surface in the README or
-   in `modules/README.md`.
-7. **F6** — decide license posture; either request CC0 waiver from
-   the module authors or add an explicit `LICENSE.MIT` inside
-   `modules/` and note the repo carries a mixed license.
+6. **F5 — DONE.** PROVENANCE §7.1 "Named denominators" table lands
+   every threshold used by any gate: `S_MIN_THRESHOLD`, DESI mock
+   covariance, Planck 100θ*, H0 gate (with DP-14 caveat), σ8
+   working tolerance, `R_EQ_MODE` requirement. Adding a new gate
+   without an entry there is now a documentation bug per DP-16.
+7. **F6 — DONE.** MIT headers waived to CC0 across all 10 modules;
+   modules/README.md and top-level README updated.
+
+## Follow-on audit results (external G-findings)
+
+The initial F1-F6 list was answered by a follow-up audit that
+raised five sharper concerns (G1-G5). Resolutions:
+
+- **G1 SIGN — DONE.** The doc's A4 = "+2.33σ HIGH" was **stale** —
+  neither R_EQ mode of the current code reproduces it. Both engines
+  actually sit at −3.0σ LOW and agree with each other to 0.08σ. The
+  earlier "opposite signs 5.4σ apart" reading was based on the stale
+  doc, not the code. Fixed in PROVENANCE §3 A4/A5 and DP-4/DP-13.
+  Also enforced a warning at `cmb_observables` when `R_EQ_MODE` is
+  not `'physical'` (the default `'it6'` gives r_s off by 25%). See
+  `samples/g1_bisect.sample.txt`.
+- **G1 DP-11 champion — DONE.** Re-reported as **Δθ* = +5.43σ vs
+  same-engine ΛCDM** (primary) with absolute-vs-Planck 2.4σ as a
+  labeled second column. The mechanism produces a real +5σ shift;
+  it does not sit near null.
+- **G2 H0 clip — PARTIAL.** `gate_vector` now accepts
+  `h0_two_sided=True` (default unchanged for reproducibility). The
+  actual rerun of DP-9's cosines/rank under the two-sided form is
+  staked as PROVENANCE OB-8.
+- **G3 D metric — DONE.** `D_of` docstring now labels D as a
+  log-compressed ranking heuristic, not a metric. PROVENANCE DP-15
+  requires the raw gate vector alongside every D quote.
+- **G4 sandbox paths — DONE.** All `/mnt/agents/output/*` references
+  removed from PROVENANCE §1; `payload_bridge.py` default path now
+  resolved from `__file__`. Duplicate `app/PROVENANCE.md` deleted.
+- **G5 §8.6 personal paragraph — DONE.** Removed from PROVENANCE §8.
 
 ## Exploration-layer pattern
 

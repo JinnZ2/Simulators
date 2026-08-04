@@ -58,4 +58,6 @@ strips away computational theater and leaves only irreducible physical truth.
 The 27 failed cells are not errors — they are where the universe reveals
 its true geometry.
 
-License: MIT — use freely, let the machines think critically.
+License: CC0 1.0 Universal (public domain) — matches the repo root.
+Modules were originally MIT-headered; the author waived to CC0 to keep
+the ecosystem coherent (see PROVENANCE.md and F6 in FINDINGS.md).

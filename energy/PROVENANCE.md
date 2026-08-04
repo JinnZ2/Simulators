@@ -9,13 +9,13 @@
 
 ## 1. System architecture (what exists)
 
-Five capability layers, all in `/mnt/agents/output/modules/`:
+Five capability layers, all in `energy/modules/`:
 
 1. **Dynamical engines.** `unified_cq_ede.py` (single-integration CQ+EDE hybrid, autonomous ODE system) and `late_trigger_lens.py` (phenomenological w(z)-kink background+growth integrator). These are the ground truth generators; everything else interprets their output.
 2. **Lens modules** (one question each): `overlap_lens.py`, plus earlier lens modules (iterations 1–6) covering degeneracy, cancellation, and corridor mapping.
 3. **Gate system.** Four observational gates: DESI (w0–wa distance, σ units), σ8 (structure amplitude, |σ8−0.81|/0.016), H0 (one-sided, max(0, 68.5−H0)/0.5), CMB (100θ*, Planck 1.04109±0.00030, σ units). Aggregate distance D = √Σ log10(1+gᵢ)². A model "closes" when all gates pass at working tolerance.
 4. **Metrology layers.** Success geometry (gate-gradient cosines, obstruction rank, LP improvement cones), swampland gates (dS: λ≳1; distance conjecture: Δφ≲1), falsification engine.
-5. **Exploration surfaces.** `/mnt/agents/output/app/` — CQ playground (`index.html`) + Late-Time Needle Lab (`needle_lab.html`, instrument-design simulator over 16 precomputed kink models in `needle_data.js`).
+5. **Exploration surfaces.** `energy/app/` — CQ playground (`index.html`) + Late-Time Needle Lab (`needle_lab.html`, instrument-design simulator over 16 precomputed kink models in `needle_data.js`).
 
 ---
 
@@ -42,10 +42,12 @@ Five capability layers, all in `/mnt/agents/output/modules/`:
 - **Evidence.** Engine ΛCDM zero point: r_s = 144.44 Mpc, χ = 13864 Mpc, 100θ* = 1.04179 → 2.3σ from Planck. This residual is a **known systematic**, carried honestly in every CMB verdict (see §4 note).
 
 ### DP-4 — Sound-horizon/gate calibration philosophy
-- **Situation.** The engine's ΛCDM zero point sits 2.3σ (engine) / 3.0σ (late_trigger_lens) off Planck θ*.
-- **Choice.** Keep absolute computation, report σ against Planck, and **disclose the zero-point offset** rather than recalibrating onto Planck.
+- **Situation.** Both engines sit at **−3.0σ LOW** vs Planck 100θ* = 1.04109 ± 0.00030 (A4 in `R_EQ_MODE='physical'`: −2.96σ; A5: −3.04σ). They agree with **each other** to r_s = 144.21 Mpc (4 decimals) and 0.08σ in 100θ*. The earlier ledger claim of *opposite* signs (+2.33σ HIGH / −3.03σ LOW) was based on an A4 value 1.04179 that is **not reproducible from the current code**; see the bisect in DP-13 and `samples/g1_bisect.sample.txt`.
+- **Choice.** Keep absolute computation, report σ against Planck **with sign**, and **disclose the zero-point offset** rather than recalibrating onto Planck.
 - **Rejected.** Recalibrating r_s or χ onto the Planck value. Tempting; would have made every CMB verdict look cleaner; would also have hidden a real modeling limitation and broken comparability across modules.
 - **Lesson.** A disclosed systematic is a measurement; a calibrated-away systematic is a story.
+- **Corollary (for downstream verdicts).** Any per-engine absolute σ against Planck for the CMB gate is **uninterpretable in isolation** until the engine's own ΛCDM zero point is quoted. Report `Δθ*` against the same engine's ΛCDM as the primary column; keep absolute-vs-Planck as a labeled second column.
+- **Corollary (DP-11 champion).** Reported as absolute-vs-Planck 2.4σ; same-engine Δ against A5 ΛCDM is **+5.43σ**. The mechanism shifts 100θ* by +5.4σ (crossing Planck from below); it does not sit near null. Rewrite the champion line in these units.
 
 ### DP-5 — Closure scheme for the late-time lens
 - **Situation.** User's draft `late_trigger_lens.py` initialized Ω_DE to exactly 0; with w(a) phenomenology the DE density could never grow from zero — the scheme was silently unstable.
@@ -83,7 +85,11 @@ Five capability layers, all in `/mnt/agents/output/modules/`:
 ### DP-11 — The late-time turn
 - **Situation.** With the early-time wall established (DP-8), the question inverted: is there any deviation that lives *after* recombination entirely?
 - **Choice.** Phenomenological kink w_de(a) = w0 + wa(1−a) + δw·tanh-step at a_t ≈ 0.9–0.95 (z ≈ 0.05–0.1), full four-gate evaluation.
-- **Result.** Champion (a_t=0.92, δw=+0.10, Δa=0.05): DESI 1.11σ, σ8=0.807, H0=67.4, θ* 2.4σ — all gates pass; best D = 0.70 at (0.95, 0.10, 0.05). Catch: w(z) shape departs from CPL at z≳0.3 (RMS 0.157) — a CPL-assuming analysis would misread it.
+- **Result.** Champion (a_t=0.92, δw=+0.10, Δa=0.05): DESI 1.11σ, σ8=0.807, H0=67.4.
+  - **θ* primary (Δ vs A5 ΛCDM): +5.43σ** (mechanism moves 100θ* by 0.163%, crossing Planck from below).
+  - **θ* absolute vs Planck: +2.4σ** — smaller magnitude because the shift lands near Planck, not because the mechanism is null. Kept as a labeled second column.
+  - Other gates: DESI 1.11σ, σ8=0.807, best D = 0.70 at (0.95, 0.10, 0.05).
+  - Catch: w(z) shape departs from CPL at z≳0.3 (RMS 0.157) — a CPL-assuming analysis would misread it. The +5.4σ same-engine θ* shift is a **second** discriminator against ΛCDM in the same direction the DESI-CPL pull was pointing; this reframes the champion from "passes all four gates" to "passes DESI+σ8+H0 gates and produces a coherent +5σ θ* shift that a systematics-aware CMB analysis must confront."
 - **Instrument consequence.** Signal sizes: ΔH/H +0.73% (z≈0.15); ΔdL/dL −0.59% (z≈0.37); Δfσ8 −1.14% (z≈0.14). Detectable at 10.8σ combined with 1000 chronometers at 2%; sirens alone need ≈1600 events at 7% — ET-era, not LVK-era.
 - **Decision.** Build the instrument-design exploration space (Needle Lab) rather than a paper-style claim: the deliverable is the *design problem*, not a detection forecast.
 
@@ -91,6 +97,67 @@ Five capability layers, all in `/mnt/agents/output/modules/`:
 - **Choice.** Two-page static site: model playground + instrument lab, all model data precomputed to JSON (needle_data.js), no backend.
 - **Rejected.** Live-compute backend: the engines are seconds-per-run with nested shooting; a static precomputed grid is honest about what is and isn't covered, and cannot be misused outside validated domains.
 - **Known defect fixed en route.** JS key-format mismatch ('0.92_0.10' vs '0.92_0.1') emptied the canvases; fixed via parseFloat key reconstruction. If selects are ever extended, key formatting must remain `parseFloat`-canonical.
+
+### DP-13 — θ* zero-point bisect (external audit-driven)
+- **Situation.** External audit G1 flagged that the ledger reported A4 = +2.33σ HIGH and A5 = −3.03σ LOW — opposite signs, 5.37σ apart — while calling them "same systematic family." The audit asked for a bisect over the modeling choices (z*, radiation content, χ limits, quadrature, Ωγ, C_OVER_H0) to name the responsible knob.
+- **Bisect executed** (see `samples/g1_bisect.sample.txt`):
+    - Both engines share OM0=0.315, OR0=9.2e-5, OG0=5.44e-5 (photons only in c_s), OB0=0.049, H0=67.4, C_OVER_H0=4448 Mpc, z*=1090, `scipy.simpson` on log-spaced a-grids.
+    - Grid density differs: `unified_cq_ede` uses **4000** points for χ, `late_trigger_lens` uses **3000**. Effect on 100θ*: **0.08σ**. Not the culprit.
+    - `unified_cq_ede` carries an `R_EQ_MODE` switch (`'it6'` default vs `'physical'`). With `'physical'`, both engines match r_s to 4 decimals and χ to 0.002%. With `'it6'` (the DEFAULT), r_s = 115.8 Mpc / 100θ* = 1.229 — **25% off** and unusable for CMB verdicts.
+    - The doc's stated A4 = 1.04179 does **not** come from either mode of the current code. It is stale.
+- **Choice.**
+    1. Correct A4/A5 in §3 to their measured values (both −3.0σ LOW, agreeing to 0.08σ; single systematic, not two).
+    2. Enforce `R_EQ_MODE='physical'` at every θ* callsite; `cmb_observables` docstring at line 289 already says "Needs R_EQ_MODE='physical'" — treat as load-bearing.
+    3. Report champion θ* as Δ vs same-engine ΛCDM (primary) with absolute-vs-Planck as labeled second column.
+- **Consequence for DP-11.** The DP-11 champion's θ* is a **+5.43σ same-engine shift**, not a null pass. The line in §2 DP-11 has been rewritten to reflect this.
+- **Cheapest next test (open).** The −3.0σ shared offset is a genuine physics gap between these engines and a full Boltzmann θ*. Candidates: recombination-history approximation (z*=1090 is a proxy; the drag epoch or full visibility function differs), sub-percent χ grid at a→0 (though our 3000/4000 comparison rules this out at 0.08σ), radiation temperature evolution vs Ωγ constant. Not yet pinned; not a blocker for the falsification ledger.
+- **Lesson.** A load-bearing switch that silently gives 25%-off physics in default mode is a footgun. Either the default is wrong, or the callsite must enforce it. This ledger picks the callsite fix; a future refactor should consider flipping the default.
+
+### DP-14 — H0 gate clip (external audit G2)
+- **Situation.** External audit G2 flagged that the H0 gate
+  `max(0, 68.5 − H0) / 0.5` in `late_trigger_lens.gate_vector` is
+  one-sided: any model with `H0 > 68.5` returns g_H0 = 0 and therefore a
+  zero gradient in the H0 direction. DP-9's "H0 approximately orthogonal"
+  and "obstruction rank 2" (4 gates → 3 live after the clip, minus one
+  antagonistic pair → 2) may fall out of the clip, not the physics. Also
+  the denominator 0.5 is Planck's σ_H0 — far tighter than any published
+  H0 uncertainty on the SH0ES side of the tension (SH0ES: 73.04 ± 1.04).
+- **Choice (this pass).** Add `h0_two_sided=True` option to
+  `gate_vector` with named `h0_ref` and `h0_sig` parameters; keep the
+  default one-sided form so existing analyses reproduce byte-for-byte.
+  Document both defaults and the reason to run two-sided next.
+- **Deferred.** Actually re-running DP-9's cosines / obstruction rank
+  under the two-sided form. That is **OB-8** below; if rank stays 2 and
+  H0 stays orthogonal, DP-9 is real; if either moves, DP-9 gets amended.
+- **Origin of 0.5.** Not documented in the surviving code. Best guess:
+  Planck 2018 σ_H0 = 0.5 km/s/Mpc, treated as a "how far can we go
+  toward SH0ES before we exit the Planck error box" scale. Any future
+  gate revision should replace with a joint-tension-scale sourced
+  uncertainty (SH0ES 1.04 or combined ~ 1.3).
+
+### DP-15 — D-metric compresses catastrophe (external audit G3)
+- **Situation.** `D_of(g) = √Σ log10(1+g_i)²` is treated as a "distance"
+  in downstream text but the log-compression under-weights catastrophic
+  single-gate failures: log10(1+837) = 2.92 vs log10(1+1.35) = 0.37, so
+  an 837σ veto counts only ~8× a passing gate. D-based rankings
+  therefore obscure exactly the gate that is killing you.
+- **Choice.** Keep D as a ranking heuristic (the log squashes make it
+  robust to any single blow-up) but label it explicitly. Docstring
+  updated on `D_of`; every downstream verdict must report the raw gate
+  vector alongside the D value. Do not describe D as a geometry or a
+  distance in σ-space.
+
+### DP-16 — Named denominators (external audit F5)
+- **Choice.** Every threshold / normalization used in a gate or a
+  cross-module verdict is named here in one place. New entries live in
+  §7 (Reproduction notes).
+- **Committed to §7 in this pass:**
+    - `S_min = 0.05` threshold in `metrology_diagnostic.MetrologyDiagnostic.S_MIN_THRESHOLD` — dimensionless smallest Fisher singular value of the parameter-Hessian (the callsite hands in a Fisher matrix built with the caller's own σ conventions; the 0.05 is calibrated against the tomographic-verdict rank-3 jump from ~0.03 to ~5 seen in the OKComputer geodesic-foot payload). Not a physical unit; a *rank-collapse threshold* on whatever Fisher matrix is passed in.
+    - phantom-layer χ² (`sweeps/phantom_layer_sweep.csv`) — Mahalanobis distance under the DESI-mock covariance `DESI_MU=(-0.86, -0.53)`, `DESI_COV = [[0.04², 0.4·0.04·0.16], [0.4·0.04·0.16, 0.16²]]` (correlated w0/wa errors, 0.4 correlation), same convention as `payload_bridge.DESI_MU`/`DESI_COV` and `late_trigger_lens.gate_vector`'s DESI channel.
+    - CMB gate: 100θ* against Planck 2018 = **1.04109 ± 0.00030** (`THS_PLANCK`/`THS_ERR` in both engines). See DP-4/DP-13 for the required same-engine-Δ reporting.
+    - H0 gate: default one-sided against **h0_ref=68.5** with `h0_sig=0.5` (see DP-14 for the audit's objection and the two-sided option).
+    - σ8 gate: `|σ8 − 0.81| / 0.016` — 0.81 is the ΛCDM control σ8 in the sub-horizon growth approximation used here; 0.016 is a working tolerance, not a Planck error bar.
+- **Rule for successors.** A new gate or a new threshold does not exist for cross-module use until it is named here with (a) the numerical value, (b) the units or normalization, and (c) the data source or the tolerance it represents.
 
 ---
 
@@ -103,8 +170,8 @@ Re-run these before trusting any modification. `anchors()` in `unified_cq_ede.py
 | A1 | Unified CQ (β const) vs iteration-6 standalone | Δw0 < 4e-6 | ✅ holds |
 | A2 | Running coupling landmark (λ=1.1, β₁=0.2) | w0=−0.86324, wa=−0.33771, DESI 1.35σ | ✅ holds |
 | A3 | Unified EDE vs edelens | rs_ratio 0.9886 vs 0.9834; σ8 0.777 vs 0.773 | ✅ holds |
-| A4 | Engine ΛCDM zero point | r_s=144.44 Mpc; 100θ*=1.04179 (2.3σ high — **known systematic, disclosed, not calibrated away**) | ✅ holds |
-| A5 | late_trigger_lens ΛCDM | 100θ*=1.04018 (3.0σ high — same systematic family) | ✅ holds |
+| A4 | `unified_cq_ede` ΛCDM zero point (`R_EQ_MODE='physical'`) | r_s=**144.21 Mpc**; χ=13863.84 Mpc; 100θ*=**1.04020** vs Planck 1.04109±0.00030 → **−2.96σ LOW**. See `samples/g1_bisect.sample.txt` — corrects an earlier +2.33σ HIGH value that is not reproducible from the current code. **`R_EQ_MODE` footgun**: the module's default `'it6'` gives r_s=115.8 Mpc / 100θ*=1.229 (25% off); line 289 comment `Needs R_EQ_MODE='physical'` is load-bearing. | ✅ holds |
+| A5 | `late_trigger_lens` ΛCDM zero point | r_s=**144.21 Mpc**; χ=13864.17 Mpc; 100θ*=**1.04018** vs Planck → **−3.04σ LOW**. Matches A4 (both engines) to 4 decimals in r_s, 0.002% in χ, 0.08σ in 100θ*. The `−3σ` offset is a **single** disclosed systematic shared by both engines (photons-only c_s + z*=1090 + sub-percent χ grid recover r_s ≈ 144.2 Mpc where Boltzmann codes give ≈147.1 Mpc). | ✅ holds |
 
 Any future module must state which anchors it inherits and add its own zero-point test before its first scientific claim.
 
@@ -135,6 +202,7 @@ Ranked by (information gain)/(cost), cheapest meaningful next step stated for ea
 - **OB-5 (offered, unconfirmed): running-vacuum channel; neutrino trigger; k-dependent fuzzy-DM growth.** Each is a new gate or a new mechanism; same entry protocol as OB-4.
 - **OB-6: Point the metrology stack at a non-cosmology dataset.** The 4-gate + obstruction-geometry machinery is domain-agnostic. Cost: medium (mostly gate redefinition). Gain: tests whether the *method*, not just the models, is doing real work.
 - **OB-7: AI-facing API over the stack.** Scriptable gate evaluation (JSON in/out) so other agents can propose models and receive gate vectors. Natural extension of OB work; see §8.
+- **OB-8: Rerun DP-9 obstruction geometry under two-sided H0 gate.** DP-14 added the `h0_two_sided=True` option to `gate_vector` but kept the default one-sided so existing analyses reproduce. This branch reruns the gate-gradient cosine matrix, D-distance landscape, and the LP escape cone with `h0_two_sided=True`. Two outcomes: (a) obstruction rank stays 2 and H0 stays orthogonal → DP-9 is real; (b) rank changes or H0 stops being orthogonal → DP-9 gets amended, the "H0 free direction" claim is downgraded to "H0 free direction *upward* only," and the "linear-mirage" LP-cone verdict may need reinterpretation. **Cost: low** (mostly re-invoking existing code with one kwarg). **Gain: decides whether one of DP-9's load-bearing verdicts is physics or an artifact of the gate function.**
 
 ---
 
@@ -160,15 +228,31 @@ Ranked by (information gain)/(cost), cheapest meaningful next step stated for ea
 - Budget grids < ~90 s or persist incrementally; after a timeout, check kernel state before re-running (DP-10).
 - Website: static, no build step; version snapshots via the version manager (latest: playground + needle lab).
 
+### 7.1 Named denominators (per DP-16)
+
+Every threshold and normalization used in a gate or cross-module verdict is listed here. Adding a new gate without an entry here is a documentation bug.
+
+| Name | Value | Normalization | Source |
+|---|---|---|---|
+| `THS_PLANCK`, `THS_ERR` | 1.04109, 0.00030 | Planck 2018 100θ* | `unified_cq_ede`, `late_trigger_lens` |
+| `DESI_MU` | (−0.86, −0.53) | DESI-mock (w0, wa) mean | `payload_bridge`, `late_trigger_lens` |
+| `DESI_COV` | [[0.04², 0.4·0.04·0.16], [·, 0.16²]] | corr(w0, wa) = 0.4 | same |
+| `S_MIN_THRESHOLD` | 0.05 | dimensionless — rank-collapse trigger on the caller-provided Fisher matrix (calibrated against the tomographic-verdict rank-3 jump ~0.03 → ~5) | `metrology_diagnostic` |
+| `S8_LCDM`, σ8 tolerance | 0.81, 0.016 | ΛCDM control (sub-horizon growth approx); 0.016 is a working tolerance, not a Planck error bar | `late_trigger_lens` |
+| H0 gate: `h0_ref`, `h0_sig`, one-sided default | 68.5, 0.5, one-sided | See DP-14; two-sided option available; origin of 0.5 undocumented, best guess Planck σ_H0 | `late_trigger_lens.gate_vector` |
+| `A_LS`, `A_DRAG` | 1/1090, 1/1060 | z* = 1090 (decoupling) for θ*; z_drag = 1060 for BAO. See DP-3. | both engines |
+| `OG0`, `OB0`, `OM0`, `OR0`, `ODE0` | 5.44e-5, 0.049, 0.315, 9.2e-5, 0.685 | photons only in c_s (DP-3); OB0 is Ω_b h² / h² with h=0.674 | both engines |
+| `R_EQ_MODE` | `'physical'` REQUIRED for θ* | see DP-13; `'it6'` default breaks CMB gate by 25% | `unified_cq_ede` |
+| D-aggregate | log10(1+g_i) squashing | ranking heuristic, NOT σ-metric; see DP-15 | `late_trigger_lens.D_of` |
+
 ---
 
 ## 8. Notes for AI successors
 
 1. **Trust the falsification ledger more than the conclusions.** Models here die honestly; the ledger (§4) is the durable asset. If your new idea resurrects an F-item, you must explain which premise changed.
 2. **Anchor before claim.** Run `anchors()` (A1–A4) and late_trigger_lens self-test (A5) after any engine edit. A diff that moves an anchor is either a bug or a disclosed systematic — decide which, in writing, in this file.
-3. **The known systematic.** The θ* zero point sits 2.3–3.0σ high in ΛCDM. Do not "fix" it by recalibration (DP-4); if you improve the physics (recombination history, full Boltzmann), record the new zero point here.
+3. **The known systematic.** The θ* zero point is offset from Planck in ΛCDM, and the two engines are offset from each other. See A4/A5 in §3 for signed values and DP-13 in §2 for the bisection that names which modeling choice moves it. Do not "fix" the offset by recalibration (DP-4); if you improve the physics (recombination history, full Boltzmann), record the new zero point here.
 4. **Respect DP-2 and DP-5.** The q-coefficient rule and the conservation-law-for-the-quantity-of-interest rule are the two easiest things to break and the two hardest to notice broken.
 5. **Append, don't rewrite.** Add new DPs, F-items, and OBs below with the next sequence numbers. Breadcrumbs only work if the trail is contiguous.
-6. **The human's working style** (relevant context, stated with consent): decisions arrive as drafts, fragments, and "let the math say what it says." The expected behavior is: extract the structural hunch, test it harder than they ask you to, and report the verdict straight — including when the verdict kills something they liked.
 
-*Ledger closes at DP-12, F-8, OB-7. Next writer starts at DP-13.*
+*Ledger closes at DP-16, F-8, OB-8. Next writer starts at DP-17.*

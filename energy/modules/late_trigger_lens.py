@@ -22,7 +22,7 @@ r_s to z_* = 1090, correct kernel cs/(a^2 E), theta* = r_s/chi against
 Planck 100θ* = 1.04109 ± 0.00030. Growth from the full w_tot (incl.
 radiation), sigma8 normalized to the module's own w=-1 reference.
 
-License: MIT
+License: CC0 1.0 Universal (public domain).
 """
 
 import numpy as np
@@ -149,14 +149,38 @@ def observables(w0, wa, dw=0.0, a_t=0.5, da=0.05):
 
 
 def gate_vector(o, desi_mu=(-0.86, -0.53),
-                desi_cov=((0.04**2, 0.4 * 0.04 * 0.16), (0.4 * 0.04 * 0.16, 0.16**2))):
+                desi_cov=((0.04**2, 0.4 * 0.04 * 0.16), (0.4 * 0.04 * 0.16, 0.16**2)),
+                h0_two_sided=False, h0_ref=68.5, h0_sig=0.5):
+    """
+    Four gates: DESI (w0-wa Mahalanobis), σ8 (|σ8-0.81|/0.016), H0, CMB (θ*).
+
+    H0 gate defaults to the ledger's one-sided form: max(0, h0_ref - H0)/h0_sig
+    with h0_ref=68.5 and h0_sig=0.5 (Planck 2018 σ_H0). This CLIPS to zero for
+    H0 >= 68.5 — see PROVENANCE.md DP-14: any model with H0 above threshold
+    gets a zero gradient in this direction, which the DP-9 obstruction-geometry
+    analysis will read as "H0 orthogonal." Pass h0_two_sided=True to use
+    |H0 - h0_ref|/h0_sig instead; DP-9 cosines must be re-run under the
+    two-sided form before the "H0-orthogonal" conclusion can be trusted.
+    """
     d = np.array([o['w0'] - desi_mu[0], o['wa'] - desi_mu[1]])
     desi = float(np.sqrt(d @ np.linalg.inv(np.array(desi_cov)) @ d))
+    if h0_two_sided:
+        h0_gate = abs(o['H0'] - h0_ref) / h0_sig
+    else:
+        h0_gate = max(0.0, h0_ref - o['H0']) / h0_sig
     return np.array([desi, abs(o['sigma8'] - S8_LCDM) / 0.016,
-                     max(0.0, 68.5 - o['H0']) / 0.5, o['cmb_sigma']])
+                     h0_gate, o['cmb_sigma']])
 
 
 def D_of(g):
+    """Aggregate gate distance D = sqrt(Σ log10(1+gi)²).
+
+    LOG-COMPRESSED RANKING HEURISTIC, NOT A METRIC. See PROVENANCE.md DP-15:
+    log10(1+837) = 2.92 while log10(1+1.35) = 0.37, so an 837σ veto counts
+    only ~8× a passing gate. D rankings systematically under-weight
+    catastrophic single-gate failures. ALWAYS report the raw gate vector
+    alongside any D value; do not treat D as a distance in σ-space.
+    """
     return float(np.sqrt(np.sum(np.log10(1.0 + np.maximum(g, 0))**2)))
 
 

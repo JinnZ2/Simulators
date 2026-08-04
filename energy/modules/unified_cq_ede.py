@@ -30,7 +30,7 @@ Observables: w0, wa (CQ field), sigma8 (growth ratio vs per-lambda LCDM
 reference), H0 (sound-horizon ratio vs the engine's own LCDM reference,
 r_s = ∫ c_s da / (a^2 H) to the drag epoch on a dense 3000-point grid).
 
-License: MIT
+License: CC0 1.0 Universal (public domain).
 """
 
 import numpy as np
@@ -286,7 +286,20 @@ def _E_on_grid(s1, s2, N_c, Ns):
     return out
 
 def cmb_observables(s1, s2, N_c):
-    """Absolute r_s [Mpc], chi(z_ls) [Mpc], 100*theta_s. Needs R_EQ_MODE='physical'."""
+    """Absolute r_s [Mpc], chi(z_ls) [Mpc], 100*theta_s.
+
+    REQUIRES R_EQ_MODE='physical' -- the 'it6' default gives r_s ~ 115 Mpc
+    (25% off) because it uses OR0/ODE0 for the radiation initial condition
+    instead of OR0/OM0. See PROVENANCE.md DP-13 for the bisect.
+    """
+    if R_EQ_MODE != 'physical':
+        import warnings
+        warnings.warn(
+            "cmb_observables called with R_EQ_MODE='{}'. Only "
+            "R_EQ_MODE='physical' gives calibrated r_s / theta*; "
+            "'it6' mode returns r_s ~ 115 Mpc (25% off). Any theta* "
+            "verdict from this call is invalid. See PROVENANCE.md DP-13."
+            .format(R_EQ_MODE), RuntimeWarning, stacklevel=2)
     rs_int = _sound_horizon(s1, s2, N_c, None)
     rs_mpc = (C_KMS / H0_LCDM) * rs_int
     a = np.logspace(np.log10(A_LS), 0.0, 4000)

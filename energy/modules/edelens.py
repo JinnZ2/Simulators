@@ -20,7 +20,7 @@ Reference result (log10 z_c in [3,4], f_EDE in [0.01,0.20]):
 
 Note: theta_i is degenerate with the amplitude shot for (nearly) quadratic
 thawing; the effective parameter space here is (log10 z_c, f_EDE).
-License: MIT
+License: CC0 1.0 Universal (public domain).
 """
 
 import numpy as np

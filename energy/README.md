@@ -16,7 +16,8 @@ formulation, the instrument, or the equipment.
 > **F3** `fs8 ≈ 8× ΛCDM` is a physical blowup, not a tension;
 > **F4** `SIMPLE_POLE at α ≈ −1/λ²` fixed a moving boundary to a
 > static α; **F5** `S_min = 0.05` and the phantom-layer χ² covariance
-> are undefined; **F6** MIT-headered modules sit inside a CC0 repo.
+> are undefined; **F6 RESOLVED** — MIT headers waived to CC0 across all
+> 10 modules per author preference (see PROVENANCE.md).
 > What survives: the qualitative Instrument A/B contrast, the
 > shooting method, the sweep CSVs. What does not: the headline
 > "discovery" of the CPL wₐ term.
@@ -173,5 +174,7 @@ Shipped in two forms:
 ## Provenance
 
 Drop originated from the OKComputer coupled-quintessence
-playground. Modules are MIT-licensed (see per-file headers); the
+playground. All modules are CC0 (matches the repo root; the drop's
+original MIT headers were waived to CC0 per user preference — see
+FINDINGS.md F6 and PROVENANCE.md); the
 report and sweeps are the working artifacts of that investigation.

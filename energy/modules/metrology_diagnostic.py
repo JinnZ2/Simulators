@@ -6,7 +6,7 @@ Detects whether a failure lives in: Mathematics, Formulation,
 Instrumentation, or Equipment.
 Inspired by the coupled-quintessence tomographic verdict
 (rank-2 w0-wa projection S_min ~ 0.03  ->  rank-3 tomography S_min ~ 5.2).
-License: MIT
+License: CC0 1.0 Universal (public domain).
 """
 
 import numpy as np
