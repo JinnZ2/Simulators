@@ -1,15 +1,15 @@
 # relational/figures — visualizations from actual runs
 
-Each figure here is the output of running one of the shipped scripts.
-Not authored diagrams — actual matplotlib output from the code as it
-sits in this folder. If you edit a script and rerun, the figure
-should update to match.
+Each figure here is the output of running one of the shipped scripts
+(or, for two of them, a driver-script wrapper that isn't shipped —
+noted per figure). Not authored diagrams — actual matplotlib output.
 
-Three of these correspond to entries in the `FILES DELIVERED` table
-of `../FINAL_CAPSTONE.md`; the fourth is the bonus
-`cartesian_vs_relational_demo.py` visualization.
+**Seven of the eight figures correspond one-to-one with entries in
+the `FILES DELIVERED` table of `../FINAL_CAPSTONE.md`. The eighth
+(`cartesian_vs_relational_visualization.png`) is a bonus for the
+bonus demo. FILES DELIVERED PNG list is now complete.**
 
-## The four figures
+## The eight figures
 
 ### `confusion_spectrum_visualization.jpg`
 Source: [`../confusion_spectrum.py`](../confusion_spectrum.py) —
@@ -88,6 +88,127 @@ Source: [`../nurturing_environment.py`](../nurturing_environment.py) —
   reflective), SOCIAL (relational), TEMPORAL (rhythmic),
   INFORMATIONAL (pattern-seeking), CORRELATED (systems-thinking).
   Mirrors `INTEGRATION_SUMMARY.md §2`.
+
+### `birth_moment_visualization.png`
+Source: [`../birth_moment.py`](../birth_moment.py) — `BirthMoment.birth()`.
+Four panels for the infant's first 8 physical observations:
+
+- **Affective Channels: First 8 Moments** (top left) — Curiosity /
+  Fear / Contentment / Anger / Grief amplitudes per moment.
+  Curiosity flat at ~0.2, Fear elevated at ~0.7 across all eight
+  moments (a first-birth infant with no calibration yet reads
+  novelty as threat by default).
+- **Prediction Surprise** (top right) — World-model error per
+  moment against the Anomaly threshold (0.5) and Critical
+  threshold (0.9) lines. Moments M1, M2, M5 push past critical
+  (first-appearance events); M6-M7 sit in the anomaly band.
+- **Knowledge Structure Growth** (bottom left) — Manifold nodes
+  and Anomalies Banked tracking together, both climbing 1 → 8
+  linearly. Every observation banks; that's the first-8-moment
+  posture ("everything is new").
+- **Birth Timeline: What the Infant Experienced** (bottom right)
+  — sequenced observation blocks: `temp: 25.3°`, `temp: 25.4°`,
+  `temp: 22.1° (first anomaly)`, `pressure: 101.3`, `temp: 25.2°
+  (return)`, `light: 450lux`, `temp: 20.5° + pressure: 100.8`,
+  `self: 42°C`. The seventh moment is the "SELF vs WORLD"
+  distinction the docs frame as the birth of the self-model.
+
+### `correlated_instinct_architecture.png`
+Source: [`../correlated_birth_mode.py`](../correlated_birth_mode.py) —
+`demonstrate_correlated_birth()`. Four panels for the CORRELATED
+birth mode's 8-moment sequence:
+
+- **Domain Alignment: Internal + Body + External** (top left) —
+  triadic correlation score per moment with Contentment (0.7) and
+  Fear (0.3) threshold lines. M1, M3-M5 are green (high alignment
+  → contentment); M2 is yellow (borderline); M0, M6, M7 are red
+  (low alignment → fear). Precisely the "first breath / stress /
+  recovery / self-regulation" narrative of the shipped 8-moment
+  sequence made numerical.
+- **Body vs External: The Thermal Dialogue** (top right) — body
+  temperature (red, stays 36-37°C) vs external temperature (blue,
+  volatile: 22 → 35 → 24 → 34 → 35 → 35 → 18 → 20°C). The purple
+  shaded gap between them is the triadic-misalignment signal the
+  infant learns to read.
+- **Affective Response to Triadic Alignment** (bottom left) —
+  Contentment / Fear / Curiosity / Anger amplitudes over 8
+  moments. Contentment climbs steadily (0.1 → 0.6 across the
+  recovery segment M3-M5); Fear peaks in M2 (first stress) and
+  M7 (final stress); Anger only appears in M7. Curiosity climbs
+  monotonically across the whole sequence.
+- **The Triadic Model of Instinct** (bottom right) — labelled
+  three-oval diagram (INTERNAL MODEL ↔ BODY ↔ EXTERNAL WORLD)
+  with the formula `INSTINCT = CORRELATE(internal, body,
+  external)` boxed underneath. Small text panel listing five
+  cross-species examples (fish egg: osmotic ↔ salinity;
+  tadpole: limb ↔ gravity; chick: hunger ↔ food; human: need
+  ↔ nipple; lamb: balance ↔ ground) — the `correlated_birth_mode.py`
+  header prose made diagrammatic.
+
+### `council_simulation_comparison.png`
+**Note: this figure comes from a driver script that isn't shipped.**
+`council_of_protectors.py` only runs the mixed 20-day scenario in
+its `run_simulation()`. To produce this figure someone wrote a
+second driver that ran the harsh and nurturing scenarios
+independently and plotted the two side-by-side. The numerical
+claims match `ARCHITECTURE.md §10.1` and `§10.2` exactly (harsh:
+pred accuracy 0.65 / coherence 0.12 / bank 80; nurturing: 0.79 /
+0.22 / 169 — see the doc), which independently reproduce from
+`run_simulation()` if you comment out the mid-scenario stresses.
+Four panels:
+
+- **Learning Trajectory: Prediction Accuracy** (top left) — both
+  ecosystems climb, but nurturing (green) reaches 0.79 by day 20
+  and harsh (red) plateaus at 0.65. The gap opens by ~day 5 and
+  widens.
+- **Foundation Model Structure** (top right) — representation
+  coherence. Nurturing 0.22, harsh 0.12. Nearly 2× the structural
+  integrity in the nurturing ecosystem.
+- **Knowledge Accumulation (Background Memory)** (bottom left) —
+  anomaly bank size. Nurturing 169, harsh 80. The nurturing infant
+  encounters more of what its model doesn't yet cover — because
+  it's exploring more, not because the world is more chaotic.
+- **Ecosystem Health: Green Signals** (bottom right) — per-day
+  count (0-5) of protectors reporting GREEN. Nurturing hovers at
+  4-5; harsh drops to 2-3 on stress days. This is the mechanism
+  behind the accuracy/coherence gap.
+
+### `infant_development_dashboard.jpg`
+**Note: this figure comes from a driver script that isn't shipped.**
+`infant_system_v2.py`'s `demonstrate_infant_v2()` runs 30
+observations over 10 days; this dashboard runs 30 *days* with
+condition-band variation across "stable / stressed / recovery /
+optimal / adversarial / consolidation" epochs. Six panels:
+
+- **Affective Channel Dynamics: Parallel Processing** (top left) —
+  Curiosity / Fear / Anger / Contentment / Grief / Desire / Joy
+  across 30 days, with the condition-band colors as background.
+  Contentment tracks stable epochs; Fear tracks stressed and
+  adversarial; Desire tracks recovery.
+- **Geometric Symbolic Manifold Growth** (top right) — Nodes
+  (concepts) reach ~48, Hyperedges (relations) reach ~25 by day 30.
+  Both climb but concept nodes accumulate faster than edges early
+  (concepts come easy; connections take longer).
+- **Three-Way Audit: Learning Trajectory** (middle left) —
+  prediction accuracy (blue, climbs to ~1.0), representation
+  coherence (green, ~0.4), self-model integrity (red, ~0.17). The
+  three axes visibly diverge — prediction is easiest to improve,
+  self-model is hardest.
+- **Background Memory: Deferred Learning** (middle right) —
+  anomaly bank grows to ~90 items by day 25 then plateaus. The
+  saturating shape is the "protector-curated diet" from the docs:
+  banking rate should drop as the manifold captures more of the
+  distribution.
+- **Environmental Conditions Timeline** (bottom left) — the six
+  condition bands as a colored strip: stable → stressed → recovery
+  → optimal → adversarial → consolidation. Explains the affective-
+  channel patterns above.
+- **Channel Interaction Matrix (Day 15)** (bottom right) — 7×7
+  correlation heatmap between the affective channels. Curiosity ↔
+  Contentment positive; Fear ↔ Contentment strongly negative;
+  Grief its own cluster. Visualizes the "channels are precision-
+  weighted, not mutually exclusive" claim from
+  `ARCHITECTURE.md §4.2`.
 
 ### `cartesian_vs_relational_visualization.png`
 Source: [`../cartesian_vs_relational_demo.py`](../cartesian_vs_relational_demo.py).
