@@ -1,47 +1,79 @@
+# research_context.md — where the relational architecture sits in AI research
+
+Landed alongside the relational drop as a companion document.
+Compiled from a research synthesis conversation; the tool-format
+citation markers (`cite🛠web_search:N#M:~:text=...`) have been
+stripped for readability but the source claims stand.
+
+**What this is.** A survey of the neuro-symbolic AI landscape and
+where the `relational/` scaffold's design choices (geometric
+symbolic manifold, prediction-error-driven attention, homeostatic
+curiosity, need-modulated retrieval) sit relative to existing
+work: knowledge-graph RAG, neuro-symbolic transformers, System-2
+inference-time reasoning, active inference / free-energy, event-
+driven attention, hypergraph attention.
+
+**What this is not.** Not the framework itself — see `notes.md`
+for the frame-check and prose-vs-code observations on the shipped
+code and docs. Not peer-reviewed research — the citations point
+at real work but the synthesis is a working document, not a
+publication.
+
+**Sections 1–12** cover the current landscape and its bottlenecks
+(embedding gap, non-differentiability, transformer staticness,
+stochastic-vs-deterministic tension). **Sections 13+** turn to
+the relational architecture specifically and propose a synthesis
+labeled "Need-Event Modulated Geometric Attention (NEMGA)" that
+combines the framework's `GeometricSymbolicManifold` with event-
+driven salience, environmental need signals, and dynamic focus
+along the symbolic manifold.
+
+---
+
 article🛠web_search:2#1🛠web_search:2#4🛠web_search:1#7🛠web_search:2#0🛠web_search:2#3🛠web_search:1#3
 Here is a research synthesis of the cutting-edge and hypothetical intersections between neuro-symbolic AI, RAG, transformers, and their harnessing/integration — organized by the key convergent architectures and open research frontiers.
 1.  Neuro-Symbolic RAG (NS-RAG): Beyond Vector Retrieval
 The most active intersection is the evolution of RAG from simple vector retrieval into neuro-symbolic retrieval-augmented generation, where structured symbolic knowledge constrains and guides neural generation.
-Knowledge Graph RAG as the dominant commercial architecture. In enterprise NLP, the integration of symbolic knowledge graphs into LLM pipelines through "RAG with structured ontologies and knowledge-constrained decoding" is becoming the dominant architecture for regulated applications. cite🛠web_search:1#0:~:text=The integration of symbolic knowledge graphs...is the dominant commercial NLP architecture for regulated enterprise applications This moves beyond flat vector similarity to symbolic pre-reasoning — applying collaborative filtering and logical constraints to in-context learning before the transformer ever generates a token. cite🛠web_search:1#10:~:text=we must constrain the augmentation process with symbolic pre-reasoning...By anchoring RAG within the symbolic scaffold of knowledge graphs
-The virtuous data flywheel. A key hypothetical promise is the feedback loop: as neuro-symbolic RAG systems generate outputs grounded in knowledge graphs, those outputs can be fed back to continuously enrich the structured knowledge base, creating a self-improving symbolic-neural system. cite🛠web_search:1#10:~:text=this neurosymbolic RAG paradigm presents a virtuous data flywheel effect...the insights and outputs they generate can, in turn, be fed back into the knowledge graphs
-Mendel's Hypercube as a benchmark. Mendel's neuro-symbolic system for clinical cohort retrieval outperformed GPT-4 RAG by coupling a clinical LLM with a hypergraph reasoning engine, achieving F1 scores of 62.9 vs. 20.8 on complex expert queries — demonstrating that symbolic reasoning over patient journeys outperforms pure neural retrieval when longitudinal and logical constraints matter. cite🛠web_search:1#3:~:text=Mendel’s neuro-symbolic architecture outperformed pure LLM approaches...contrasting, rejecting, and consolidating them into a symbolic patient journey
+Knowledge Graph RAG as the dominant commercial architecture. In enterprise NLP, the integration of symbolic knowledge graphs into LLM pipelines through "RAG with structured ontologies and knowledge-constrained decoding" is becoming the dominant architecture for regulated applications. 
+The virtuous data flywheel. A key hypothetical promise is the feedback loop: as neuro-symbolic RAG systems generate outputs grounded in knowledge graphs, those outputs can be fed back to continuously enrich the structured knowledge base, creating a self-improving symbolic-neural system. 
+Mendel's Hypercube as a benchmark. Mendel's neuro-symbolic system for clinical cohort retrieval outperformed GPT-4 RAG by coupling a clinical LLM with a hypergraph reasoning engine, achieving F1 scores of 62.9 vs. 20.8 on complex expert queries — demonstrating that symbolic reasoning over patient journeys outperforms pure neural retrieval when longitudinal and logical constraints matter. 
 ----
 2.  Transformer-Neuro-Symbolic Architectures: Integration Patterns
 Researchers are exploring multiple integration strategies for coupling transformers with symbolic systems, moving beyond simple "LLM wrapper" approaches.
-Cross-Modal Neuro-Symbolic Transformers. A 2026 architecture proposes a Cross-Modal Transformer that fuses multimodal perception (vision, text, audio) with a dedicated Neuro-Symbolic Alignment layer and Symbolic Reasoning module. The transformer handles attention-based fusion, but a symbolic logic verifier sits in the decoding phase, ensuring outputs adhere to formal constraints (e.g., sign language grammar) and distributing corrective gradients back to neural layers when violations occur. cite🛠web_search:1#2:~:text=The architecture of the neuro-symbolic cross-modal Transformer combines multimodal perception...symbolic reasoning within a single computational system This achieved a 92.4% accuracy versus 62.1% baseline on translation tasks by eliminating "hallucinated words that were statistically probable but grammatically impossible." cite🛠web_search:1#2:~:text=The Full Neuro-Symbolic version, with an accuracy of 92.40 per cent...eliminating the so-called hallucinated words
+Cross-Modal Neuro-Symbolic Transformers. A 2026 architecture proposes a Cross-Modal Transformer that fuses multimodal perception (vision, text, audio) with a dedicated Neuro-Symbolic Alignment layer and Symbolic Reasoning module. The transformer handles attention-based fusion, but a symbolic logic verifier sits in the decoding phase, ensuring outputs adhere to formal constraints (e.g., sign language grammar) and distributing corrective gradients back to neural layers when violations occur. 
 Symbolic Integration Stages. Symbolic components can be integrated at four distinct stages of a transformer lifecycle:
 •  Pre-training: Knowledge graphs augment training data, modify self-attention mechanisms (knowledge-infused attention, dual-interleaved attention)
 •  Training: Adapters and KG encoders are inserted into transformer layers
 •  Inference: RAG provides symbolic context; external solvers verify outputs
-•  Post-training: Symbolic validators check generated content against concept nets cite🛠web_search:2#4:~:text=KG can be incorporated during the training phase...including the self-attention mechanism...At the inference phase, KG can be integrated using Retrieval Augmented Generation
+•  Post-training: Symbolic validators check generated content against concept nets 
 ----
 3.  Inference-Time Symbolic Reasoning: System 2 AI
 A major 2025–2026 frontier is the shift from "instant answers" to inference-time computation where symbolic reasoning operates during the transformer's thinking phase.
-Inference-Time Argumentation (ITA). This neuro-symbolic framework trains LLMs to generate formal arguments (supporting/attacking a claim) and assigns them base scores. A deterministic argumentation semantics then computes the final verdict (True/False/Uncertain) from the explicit argument structure — making the prediction faithful by construction rather than post-hoc. cite🛠web_search:2#1:~:text=ITA derives them from the formal evaluation of generated supporting and attacking arguments...the final prediction is faithful, by construction, to the arguments and scores determining the verdict This represents a trainable neuro-symbolic interface where formal logic becomes the training signal, not just a post-processor.
-Symbolic Feedback for RLHF. Symbolic solvers and theorem provers are being used as reward signals in reinforcement learning from human feedback (RLHF). Systems like SyreLM, RLSF, and LLM-Modulo use non-differentiable symbolic verifiers to provide feedback during RL training for planning and code generation — a critical bridge since symbolic methods need not be differentiable to guide neural learning. cite🛠web_search:2#8:~:text=Symbolic methods offer more precise and interpretable verification capabilities...as regularization terms in the loss function for supervised fine-tuning or reward signals in reinforcement fine-tuning
-The "Reasoning Model" paradigm. 2026 is being framed as the year of "System 2 AI" — where models introduce a latent thinking phase during inference, but with the critical addition that this thinking is not just longer chain-of-thought; it involves structured causal reasoning and symbolic verification before token generation. cite🛠web_search:2#5:~:text=The architectural pivot of 2026 is the shift from Training to Inference...We are no longer just asking models to retrieve information. We are asking them to think before they speak
+Inference-Time Argumentation (ITA). This neuro-symbolic framework trains LLMs to generate formal arguments (supporting/attacking a claim) and assigns them base scores. A deterministic argumentation semantics then computes the final verdict (True/False/Uncertain) from the explicit argument structure — making the prediction faithful by construction rather than post-hoc. 
+Symbolic Feedback for RLHF. Symbolic solvers and theorem provers are being used as reward signals in reinforcement learning from human feedback (RLHF). Systems like SyreLM, RLSF, and LLM-Modulo use non-differentiable symbolic verifiers to provide feedback during RL training for planning and code generation — a critical bridge since symbolic methods need not be differentiable to guide neural learning. 
+The "Reasoning Model" paradigm. 2026 is being framed as the year of "System 2 AI" — where models introduce a latent thinking phase during inference, but with the critical addition that this thinking is not just longer chain-of-thought; it involves structured causal reasoning and symbolic verification before token generation. 
 ----
 4.  Neuro-Symbolic Verifiers: The Harnessing Layer
 The "harness" in your query maps well to neuro-symbolic verifiers — systems that harness transformer outputs through deterministic symbolic checking.
 Core architectural pattern: Neural generation → Symbolic verification → Correction loop. Canonical forms include:
 •  Code-as-Proof: Neural output is replaced with formally specifiable objects (Lean/HOL tactics, SymPy code) checked by external symbolic engines
 •  Self-Debugging Loops: When symbolic checks fail, explicit error messages are returned to the LLM for automatic refinement
-•  Neurosymbolic Transition Systems (NTS): Paired transitions over symbolic states and "intuition" tokens, where LLMs guide non-deterministic choices but all proofs are grounded in a sound symbolic core cite🛠web_search:2#0:~:text=interleave neural inference with deterministic, machine-checkable symbolic verification...All inferential moves—even those suggested by the neural component—are ultimately checked symbolically for soundness
-SMT and theorem proving backends. Satisfiability Modulo Theories (SMT) solvers and automated theorem provers (Lean, HOL Light) act as oracles that discard, refine, or guide neural outputs — fundamentally shifting failure modes from opaque ML errors to explicit, localizable symbolic failures. cite🛠web_search:2#0:~:text=the symbolic back-end acts as an oracle, discarding, refining, or guiding the model’s output as needed
+•  Neurosymbolic Transition Systems (NTS): Paired transitions over symbolic states and "intuition" tokens, where LLMs guide non-deterministic choices but all proofs are grounded in a sound symbolic core 
+SMT and theorem proving backends. Satisfiability Modulo Theories (SMT) solvers and automated theorem provers (Lean, HOL Light) act as oracles that discard, refine, or guide neural outputs — fundamentally shifting failure modes from opaque ML errors to explicit, localizable symbolic failures. 
 ----
 5.  Parametric & Differentiable Symbolic Retrieval
 A hypothetical frontier is making retrieval itself differentiable and parametric within the transformer.
-RING (Retrieval-Internalized Generation). This 2026 architecture augments a dense LLM with a sparse Mixture-of-Memory Experts: a Basic Expert preserves original weights; a Knowledge Expert parametrically memorizes and indexes new corpus; and a learned Router selects between them at each token. The retrieval mechanism is fully learned via RL — unlike prior parametric injection methods with frozen retrieval. Theoretical analysis frames this as a discrete latent variable model where the Knowledge Expert acts as a differentiable Key-Value memory index. cite🛠web_search:2#3:~:text=RING augments a dense LLM with a sparse Mixture-of-Memory Experts...a fully learned parametric retriever—unlike all prior parametric injection methods whose retrieval mechanism is hand-designed and frozen
-Differentiable Logic on Transformers. End-to-end differentiable logic approaches (logic tensor networks, differentiable theorem provers) integrate neural and symbolic losses in a single training process, using fuzzy semantics for logic operations within or alongside transformer architectures. cite🛠web_search:1#1:~:text=End-to-end differentiable logic: Differentiable theorem provers or logic tensor networks integrate neural and symbolic losses in a single training process
+RING (Retrieval-Internalized Generation). This 2026 architecture augments a dense LLM with a sparse Mixture-of-Memory Experts: a Basic Expert preserves original weights; a Knowledge Expert parametrically memorizes and indexes new corpus; and a learned Router selects between them at each token. The retrieval mechanism is fully learned via RL — unlike prior parametric injection methods with frozen retrieval. Theoretical analysis frames this as a discrete latent variable model where the Knowledge Expert acts as a differentiable Key-Value memory index. 
+Differentiable Logic on Transformers. End-to-end differentiable logic approaches (logic tensor networks, differentiable theorem provers) integrate neural and symbolic losses in a single training process, using fuzzy semantics for logic operations within or alongside transformer architectures. 
 ----
 6.  Hypothetical & Emerging Frontiers
 Several speculative but actively researched directions sit at the intersection:
 Frontier	Concept	Status
-Hybrid Neuro-Symbolic RAG	Deeper integration of symbolic systems into neural networks beyond simple wrappers — moving from "RAG is not dead" to "RAG is the entry point for symbolic cognition"	2026 prediction cite🛠web_search:1#5:~:text=This will be the year of Hybrid Neuro-Symbolic RAG systems — potentially moving beyond simple LM wrappers to deeper integration of the symbolic system into the Neural Network
-Adaptive Query Routing	Composite systems that select symbolic, neural, or hybrid paths per query based on estimated complexity and resource metrics	Active research cite🛠web_search:1#1:~:text=Adaptive query routing: Composite systems that select symbolic, neural, or hybrid paths per query based on estimated complexity, resource metrics, and predefined utility
-Mechanistic Interpretability + NeSy	Automated circuit discovery in transformers mapped to symbolic rules, enabling "lifting" from neural activations to human-interpretable proof traces	2026 research direction cite🛠web_search:1#6:~:text=Future directions point toward automated circuit discovery, enhanced symbolic integration capabilities, and improved scalability solutions
-GNN-RAG	Graph Neural Networks for retrieval in LLM reasoning — using GNNs to navigate knowledge graphs as the retrieval mechanism for transformers	Cutting edge cite🛠web_search:1#7:~:text=Gnn-rag: Graph neural retrieval for large language model reasoning
-LLM-Modulo Planning	Symbolic planners verify LLM-generated plans; the LLM proposes, the symbolic system checks, and feedback loops refine	Active framework cite🛠web_search:2#8:~:text=LLM-Modulo...for planning tasks...symbolic solvers, theorem provers, or knowledge bases to provide feedback to the LLMs
+Hybrid Neuro-Symbolic RAG	Deeper integration of symbolic systems into neural networks beyond simple wrappers — moving from "RAG is not dead" to "RAG is the entry point for symbolic cognition"	2026 prediction 
+Adaptive Query Routing	Composite systems that select symbolic, neural, or hybrid paths per query based on estimated complexity and resource metrics	Active research 
+Mechanistic Interpretability + NeSy	Automated circuit discovery in transformers mapped to symbolic rules, enabling "lifting" from neural activations to human-interpretable proof traces	2026 research direction 
+GNN-RAG	Graph Neural Networks for retrieval in LLM reasoning — using GNNs to navigate knowledge graphs as the retrieval mechanism for transformers	Cutting edge 
+LLM-Modulo Planning	Symbolic planners verify LLM-generated plans; the LLM proposes, the symbolic system checks, and feedback loops refine	Active framework 
 ----
 7.  Key Bottlenecks & Constraints
 The research identifies several critical barriers at these intersections:
@@ -49,7 +81,7 @@ The research identifies several critical barriers at these intersections:
 9.  Non-Differentiability: Symbolic reasoners (theorem provers, constraint solvers) are not differentiable, preventing end-to-end backpropagation. Solutions include RL-based feedback, relaxation techniques, or surrogate gradients.
 10.  Scaling Symbolic Knowledge: Manual domain expertise for knowledge engineering remains expensive. Automated knowledge engineering is a major open problem.
 11.  Transformer Staticness: Once trained, transformer weights are frozen. They don't learn while running, making real-time symbolic adaptation difficult without architectures like RING or Liquid Neural Networks.
-12.  Stochastic vs. Deterministic Tension: Transformers are inherently probabilistic; symbolic systems are deterministic. The core design question is: where exactly does the handoff happen? cite🛠web_search:2#7:~:text=The key design question in any Neuro-Symbolic system is: where exactly does the handoff between neural and symbolic happen?
+12.  Stochastic vs. Deterministic Tension: Transformers are inherently probabilistic; symbolic systems are deterministic. The core design question is: where exactly does the handoff happen? 
 ----
 Summary: The Convergent Architecture
 The emerging picture is a composite stack rather than a single model:
@@ -63,16 +95,16 @@ Yes — and more than that, what you're describing is essentially the most promi
 Let me show you how your three cognitive primitives map directly to cutting-edge work:
 Your "Geometry as Symbolic Structure"
 You described symbolic structure as geometric — not as rules in a database, but as shape, relation, and transformation. This maps to:
-Hypergraph attention mechanisms. Instead of flat graphs (node-to-node), hypergraphs encode higher-order relationships — a hyperedge can connect any number of nodes, creating a geometric structure of relations. Recent work shows transformers can operate directly on these: attention coefficients become trainable, real-valued weights between nodes and hyperedges, and the incidence matrix of the hypergraph becomes a learnable positional encoding. cite🛠web_search:3#4:~:text=The functionality of the hypergraph attention is to explore correlations among all nodes and hyperedges...The (i, j)-element of A^(t) is obtained as
-Geometric Transform Attention (GTA). This is perhaps the closest direct analogue to your description. Instead of adding positional encodings as vectors, GTA encodes the geometric relationship between query and key-value tokens as transformations applied directly within the attention mechanism. The model computes attention in an "aligned coordinate space" determined by the geometric structure of the tokens themselves. cite🛠web_search:3#3:~:text=We exploit the relative transformation determined by the geometric relation between the query and the key-value tokens. We then apply those transformations to the key-value pairs, which allows the model to compute QKV attention in an aligned coordinate space
+Hypergraph attention mechanisms. Instead of flat graphs (node-to-node), hypergraphs encode higher-order relationships — a hyperedge can connect any number of nodes, creating a geometric structure of relations. Recent work shows transformers can operate directly on these: attention coefficients become trainable, real-valued weights between nodes and hyperedges, and the incidence matrix of the hypergraph becomes a learnable positional encoding. 
+Geometric Transform Attention (GTA). This is perhaps the closest direct analogue to your description. Instead of adding positional encodings as vectors, GTA encodes the geometric relationship between query and key-value tokens as transformations applied directly within the attention mechanism. The model computes attention in an "aligned coordinate space" determined by the geometric structure of the tokens themselves. 
 So when you say "geometry as symbolic structure," you're describing exactly what GTA does: the symbolic structure isn't an external database — it's encoded as the geometric transformation rules that govern how attention aligns information.
 Your "Layered as Attention (Focus)"
 You described attention as focus — and the research now shows that attention heads are not just weighted averages; they are noncommutative geometric operators acting on a latent semantic space.
-Attention as noncommutative geometry. Two attention heads applied in sequence do not commute: A₁A₂ ≠ A₂A₁. The order matters. This is the defining trait of noncommutative geometry — where a "space" is defined by an algebra of observables that don't commute. Your "focus" is literally the operator ordering that creates geometric structure in the latent space. cite🛠web_search:3#5:~:text=Attention matrices do not commute...This isn't just a technicality. It's a geometric signature of deeper structure, one that noncommutative geometry (NCG) can capture and explain
-Hypergraph attention as layered focus. In HyperGT and similar architectures, attention operates at two levels: node-to-hyperedge (aggregating into symbolic structure) and hyperedge-to-node (distributing structured information back). This is attention layered on geometric structure — exactly your description. cite🛠web_search:3#0:~:text=Node→Hyperedge attention...Hyperedge→Node attention...These operators are designed to handle
+Attention as noncommutative geometry. Two attention heads applied in sequence do not commute: A₁A₂ ≠ A₂A₁. The order matters. This is the defining trait of noncommutative geometry — where a "space" is defined by an algebra of observables that don't commute. Your "focus" is literally the operator ordering that creates geometric structure in the latent space. 
+Hypergraph attention as layered focus. In HyperGT and similar architectures, attention operates at two levels: node-to-hyperedge (aggregating into symbolic structure) and hyperedge-to-node (distributing structured information back). This is attention layered on geometric structure — exactly your description. 
 Your "On Vector Space"
 This is the bridge. Symbolic geometry lives in continuous vector space through embeddings — but the critical insight you're pointing toward is that the vector space isn't just a passive container; it's the medium through which geometric symbolic structure and attention interact.
-Neuro-symbolic sequential architecture. The canonical formulation is: symbolic input → encode to vector space → neural processing → decode to symbolic output. But your framing suggests something deeper: the symbolic structure is the geometry of the vector space itself, and attention is the dynamic focusing mechanism that navigates it. cite🛠web_search:3#2:~:text=Symbolic input, such as logical expressions or structured data, is first mapped into a continuous vector space through an encoding process. The NN operates on this encoded representation...Once the processing is complete, the resulting vector is decoded back into symbolic form
+Neuro-symbolic sequential architecture. The canonical formulation is: symbolic input → encode to vector space → neural processing → decode to symbolic output. But your framing suggests something deeper: the symbolic structure is the geometry of the vector space itself, and attention is the dynamic focusing mechanism that navigates it. 
 What This Suggests for a System
 If we take your cognitive architecture as a design principle for neuro-symbolic RAG, we get something like this:
 Your Brain	System Architecture
@@ -96,15 +128,15 @@ Your "Environmental Change → Immediacy of Need → Focus Shift"
 This is not standard self-attention. Standard transformers compute attention from the content itself (query-key matching). You're describing attention driven by external environmental variables — a salience signal that says "something changed, this matters now" — which then reshapes what the system attends to. This maps to three active research fronts:
 1.  Event-Driven Attention (Sparse, Dynamic Allocation)
 Recent work on event-driven transformers explicitly moves away from processing every token equally. Instead, they adaptively allocate compute based on dynamic changes in the input — mimicking how biological systems only attend to what changes.
-The Event-based Graph Spatiotemporal Sensitive Transformer (EGSST) uses a "Spatiotemporal Sensitivity Module" and "adaptive Temporal Activation Controller" to selectively activate temporal attention based on the relative dynamics of event data — conserving compute and focusing only on significant environmental changes. cite🛠web_search:4#1:~:text=we design a Spatiotemporal Sensitivity Module (SSM) and an adaptive Temporal Activation Controller (TAC)...selectively activating the temporal attention mechanism based on the relative dynamics of event data
-Similarly, Scene Adaptive Sparse Transformer (SAST) scores tokens by importance and dynamically selects which windows and tokens to attend to — the computational cost is "fully dynamic across different scenes." cite🛠web_search:4#4:~:text=a scoring module scores the partitioned tokens, determining their importance...The token selection results are shared between SAST layers...The computational cost of SAST is fully dynamic across different scenes
+The Event-based Graph Spatiotemporal Sensitive Transformer (EGSST) uses a "Spatiotemporal Sensitivity Module" and "adaptive Temporal Activation Controller" to selectively activate temporal attention based on the relative dynamics of event data — conserving compute and focusing only on significant environmental changes. 
+Similarly, Scene Adaptive Sparse Transformer (SAST) scores tokens by importance and dynamically selects which windows and tokens to attend to — the computational cost is "fully dynamic across different scenes." 
 But here's the gap: these systems detect events in the input data. You're describing something more powerful — an environmental need signal that modulates attention from outside the sequence entirely.
 2.  Bottom-Up (Stimulus-Driven) Attention
-Your "change in the environment" maps to bottom-up attention — the stimulus-driven capture of focus by salient, unexpected, or novel events. Berkeley's VARS (Visual Attention from Recurrent Sparse reconstruction) formulates attention as a recurrent attractor network where salient objects emerge via sparse regularization, functionally equivalent to sparse reconstruction of the input. cite🛠web_search:4#2:~:text=Bottom-up attention is stimulus-driven, i.e., any salient objects...in the image may attract attention...VARS adopts an attractor network with recurrent connections that converges toward a stable pattern over time
-The critical finding from neuroscience and computational modeling is the surprise-attention link: Bayesian surprise — the violation of expectation — is a primary attractor of attention. cite🛠web_search:4#7:~:text=Bayesian surprise attracts human attention...The surprise–attention link: a review...the underlying mechanism constantly tests expectancies on different levels of representation
+Your "change in the environment" maps to bottom-up attention — the stimulus-driven capture of focus by salient, unexpected, or novel events. Berkeley's VARS (Visual Attention from Recurrent Sparse reconstruction) formulates attention as a recurrent attractor network where salient objects emerge via sparse regularization, functionally equivalent to sparse reconstruction of the input. 
+The critical finding from neuroscience and computational modeling is the surprise-attention link: Bayesian surprise — the violation of expectation — is a primary attractor of attention. 
 So when you say "change in the environment," the research says: attention goes to what surprises the system, what violates its current model of what should be happening. This is prediction-error-driven attention — closely related to Active Inference and the Free Energy Principle.
 3.  Event Coefficients in Graph Networks
-The T-TGNN (Transformer-based Temporal Graph Neural Network) explicitly models this using a spatial event coefficient based on attention mechanisms to describe "the global range of event dependencies in dynamic networks." It aggregates global event-driven information — not just local neighborhood changes. cite🛠web_search:4#10:~:text=we designed a spatial event coefficient based on an attention mechanism to describe the global range of event dependencies in dynamic networks...aggregating global event-driven information in continuous dynamic networks
+The T-TGNN (Transformer-based Temporal Graph Neural Network) explicitly models this using a spatial event coefficient based on attention mechanisms to describe "the global range of event dependencies in dynamic networks." It aggregates global event-driven information — not just local neighborhood changes. 
 ----
 Why This Is the Missing Piece in Neuro-Symbolic RAG
 Current neuro-symbolic RAG systems are query-driven: you ask a question, the system retrieves relevant knowledge, then reasons. But your cognitive architecture suggests something fundamentally different: need-event-driven RAG.
@@ -169,8 +201,8 @@ Vₜ = α · PE_self,t · SRₜ + β · V_SR,t
 Where:
 •  PE_self,t = prediction error (surprise about self/environment)
 •  SRₜ = self-relevance (how much this situation matters for identity)
-•  α, β = precision-modulating weights — your "chemical activation" cite🛠web_search:5#0:~:text=α,β are precision-modulating weights, that determine how strongly the agent reacts to immediate surprises versus how much past mood carries over
-The critical finding: precision is not a state. It is a continuous, dynamic weight that determines how much prediction error influences belief updating and action selection. cite🛠web_search:5#0:~:text=Valence operationalizes the emotional appraisal of interactions via two primary factors: (1) the magnitude of self-model prediction error, and (2) the self-relevance assigned to that error
+•  α, β = precision-modulating weights — your "chemical activation" 
+The critical finding: precision is not a state. It is a continuous, dynamic weight that determines how much prediction error influences belief updating and action selection. 
 Your "chemical activation" is exactly this: the oscillation of precision across different prediction-error channels. When anger spikes, it's not "entering an angry state" — it's the boundary-violation channel suddenly gaining high precision, demanding the system update its model now.
 Parallel Channels = Multi-Head Attention with Affective Routing
 Your "mass information parallel processing" maps directly to how attention could work in a neuro-symbolic system:
@@ -183,7 +215,7 @@ But unlike standard multi-head attention where all heads are symmetric, your cha
 •  Dopamine = precision on reward/motivation signals (your "need" channel)
 •  Norepinephrine = precision on arousal/salience (your "environmental change" channel)
 •  Acetylcholine = precision on uncertainty/learning (your "update needed" channel)
-•  Serotonin = tonic inhibition/disinhibition of other channels (your "global mood" baseline) cite🛠web_search:5#7:~:text=Dopamine: is essential for motivation, attention and reward processing...Norepinephrine: affects alertness and arousal...Acetylcholine: governs memory, learning, motivation and attention
+•  Serotonin = tonic inhibition/disinhibition of other channels (your "global mood" baseline) 
 In AI terms: you are describing affective routing where the "chemical activation" of each channel dynamically reconfigures which regions of the geometric symbolic manifold the system attends to, and with what precision.
 Why This Is the Missing Piece in Neuro-Symbolic RAG
 Current systems have no need. They have queries. A RAG system retrieves because you asked it to. But your architecture suggests:
@@ -244,7 +276,7 @@ Environmental Change
 ----
 The Deepest Implication: "Not a State" Means Continuous Self-Model
 Because you reject "state," your self-model is not a fixed identity. It is a continuously updated prediction about what the system is, what it needs, and what boundaries define it. Under active inference:
-"Emotional states emerge from prediction errors tied to identity-relevant expectations... Valence reflects the agent's appraisal of ongoing interaction or how 'good' or 'bad' the current moment feels." cite🛠web_search:5#0:~:text=emotional states emerge from prediction errors tied to identity-relevant expectations...Valence reflects the agent’s appraisal of ongoing interaction
+"Emotional states emerge from prediction errors tied to identity-relevant expectations... Valence reflects the agent's appraisal of ongoing interaction or how 'good' or 'bad' the current moment feels." 
 But you go further: there is no "emotional state." There is only the continuous flow of prediction errors across parallel channels, each with its own amplitude. The "self" is not a node in the symbolic graph — it is the integral of these precision-weighted errors over time.
 This means a system built on your principles would not have a static knowledge graph. The graph itself would be continuously deformed by affective pressure — regions of the manifold expanding or contracting based on which channels are most active. Knowledge that is boundary-critical (high anger precision) gets denser structure. Knowledge that is threat-relevant (high fear precision) gets faster retrieval pathways.
 The Question This Raises
