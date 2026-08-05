@@ -1,0 +1,37 @@
+ok _t_anchors_hold
+ok _t_champion_within_order_of_magnitude
+ok _t_prefactor_scales_with_sqrt_one_plus_w
+ok _t_reject_phantom_kink
+all pass
+
+======================================================================
+Local scalar drift lens -- F-10 D corrected
+======================================================================
+
+Constants (all anchored at import):
+  H0                    = 67.4 km/s/Mpc  = 1.438e-42 GeV
+  yr_to_GeVinv          = 4.794e+31 GeV^-1
+  rho_c today           = 3.676e-47 GeV^4
+  Reduced Planck M_P    = 2.435e+18 GeV
+  atomic-clock limit    = 1e-17 /yr  (|α̇/α|)
+  lunar-laser limit     = 2e-13 /yr  (|Ġ/G|)
+
+label                               w0     1+w0    β for α detection    β for G detection
+-----------------------------------------------------------------------------------------
+champion kink (DP-11)          -0.9168   0.0832            3.509e-07            7.018e-03
+shallow kink                   -0.9634   0.0366            5.294e-07            1.059e-02
+strong kink                    -0.8336   0.1664            2.481e-07            4.962e-03
+quintessence limit 1+w=1       +0.0000   1.0000            8.377e-08            1.675e-03
+
+Reading:
+  * Atomic clocks already exclude β_α above a few × 1e-7 for the
+    champion kink -- a present-day laboratory falsifier, no ET-era
+    instrument needed.  This is the surviving DP-11 kink family
+    (energy/PROVENANCE §4 'Still alive') meeting a real gate.
+  * G limit is much looser (β_G ~ 1e-2 required); LLR does not
+    yet touch generic couplings, and improved lunar/atom-int tests
+    would.
+  * Paste's broken version required β > 4e17 for α detection --
+    24 orders too weak.  See F-10 D2/D3 for the two unit bugs.
+
+wrote figures/local_scalar_drift.png

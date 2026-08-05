@@ -590,7 +590,13 @@ underneath).
   `rg_flow_lens.py` finds the (x,y) fixed points and traces
   `α_wall(N) = −1/φ̂(N)²` along the field-dominated attractor,
   spanning 1.5×10⁶ over the matter era — the report's static
-  α = −1/λ² = −0.826 is crossed at exactly one epoch (N ≈ −0.10).
+  α = −1/λ² = −0.826 is crossed at exactly one epoch (N ≈ −0.10);
+  `local_scalar_drift_lens.py` projects the DP-11 "still-alive"
+  kink family down to a laboratory-scale falsifier via
+  `d ln X/dt = β_X · φ̇/M_P`, giving β_α > 3.5×10⁻⁷ for atomic-clock
+  detection (present-day, no ET-era instrument needed) — corrects
+  the pasted `local_scalar_drift.py` after F-10 killed it at 1.23×10²⁴
+  prefactor error, ships with four import-time constant anchors.
   Same numbers-and-shape posture as `harm.py` and
   `equivalence_field.py`. **Divergence playground seed:**
   `energy/FORKS.jsonl` carries seven fork points harvested from the

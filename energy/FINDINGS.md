@@ -281,6 +281,35 @@ raised five sharper concerns (G1-G5). Resolutions:
   resolved from `__file__`. Duplicate `app/PROVENANCE.md` deleted.
 - **G5 §8.6 personal paragraph — DONE.** Removed from PROVENANCE §8.
 
+## F-10 D correction landed: local scalar drift lens
+
+The F-10 audit killed the pasted `local_scalar_drift.py` (drift
+prefactor off by 1.23×10²⁴). The corrected version ships as
+[`exploration_layers/local_scalar_drift_lens.py`](exploration_layers/local_scalar_drift_lens.py)
+with four import-time anchors on the physical constants (H0 in GeV,
+yr_to_GeVinv, ρ_c today, and the prefactor at 1+w=1 equal to
+√3·H0 in per-year — all match textbook values to 1%).
+
+**What this delivers.** For the DP-11 "still-alive" champion kink
+(`a_t=0.92, δw=0.10, Δa=0.05`, `w0 = −0.917`), the corrected
+prefactor lands at `2.85×10⁻¹¹ /yr` per unit β. Sensitivity
+thresholds for present-day laboratory tests:
+
+| measurement                 | limit /yr | β to see it        |
+|-----------------------------|----------:|-------------------:|
+| atomic clocks (α̇/α)        | 1×10⁻¹⁷   | **β_α > 3.5×10⁻⁷** |
+| lunar laser ranging (Ġ/G)   | 2×10⁻¹³   | β_G > 7×10⁻³       |
+
+The α limit sits well inside plausible Damour-Polyakov coupling
+range — atomic clocks **today** rule out any kink whose scalar
+carries a photon coupling above `~3×10⁻⁷`. That is the present-day
+laboratory falsification channel the paste was aiming at but could
+not deliver because of the F-10-D2 and F-10-D3 unit bugs. DP-11's
+"still alive" verdict now has a real gate.
+
+Full plot: [`figures/local_scalar_drift.png`](figures/local_scalar_drift.png).
+Sample run: [`exploration_layers/samples/local_scalar_drift_lens.sample.txt`](exploration_layers/samples/local_scalar_drift_lens.sample.txt).
+
 ## Follow-on (audit TODO 3.5): DP-17 certificate validity radius
 
 Executed the certificate-validity sweep the audit prescribed alongside

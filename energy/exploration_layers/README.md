@@ -33,6 +33,7 @@ returns **numbers and shape**, not a verdict (same posture as
 | `percolation_lens.py`           | §8 — "N ≈ 4 distinguishable"        | giant-component fraction vs threshold θ on the observable-space graph                          |
 | `rg_flow_lens.py`               | F4 — moving `α = −1/φ̂²` boundary   | fixed points of the (x, y) autonomous system, classification, and `α_wall(N)` along the flow  |
 | `certificate_validity_lens.py`  | DP-9 — LP-certificate "linear mirage" | β₁ sweep at pinned base point; linear-tangent onset test; **r̂ = r_valid / β₁_certified** — dimensionless, exportable, cosmology-free. Companion to PROVENANCE DP-17. |
+| `local_scalar_drift_lens.py`    | DP-11 — "still-alive" kink family with no near-term detector | Projects kink (a_t, δw, Δa) to secular drift of a fundamental constant via `d ln X/dt = β_X · φ̇/M_P`. Champion kink lands at β_α > 3.5×10⁻⁷ (atomic-clock-testable **today**) and β_G > 7×10⁻³ (LLR-testable). Present-day laboratory falsification channel, no ET-era instrument needed. Anchors A_D1..A_D4 in the header; rejects phantom w₀. F-10 D corrected (see below). |
 
 ## What each lens said
 
