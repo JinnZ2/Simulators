@@ -270,9 +270,90 @@ of its structural moves land on the same shapes as the physics side's
 disciplined moves — from the opposite direction — is the interesting
 part.
 
+## 10. Second drop — what filled in
+
+A follow-up drop landed four of the six referenced-but-not-delivered
+sibling files:
+
+- `council_of_protectors.py` — reference implementation of the five
+  protectors with real `evaluate(infant, env)` methods (not the
+  simplified subclass in `nurturing_environment.py`). Includes a
+  20-day `run_simulation()` covering harsh conditions.
+- `infant_system_v2.py` — standalone version of the `InfantSystem`
+  class that was previously embedded inside `birth_moment.py`. The
+  class is the same; this file has it in isolation for reuse.
+- `nurturing_environment.py` — integration layer. `NurturingEnvironment`
+  wraps `SimpleInfant` (a lightweight infant) with the five protectors
+  and a `BirthMomentGenerator` that produces the six birth-mode
+  sequences. Includes a `compare_birth_modes()` comparative simulation.
+- `INTEGRATION_SUMMARY.md` — the middle doc in the version history
+  (v0.3), documenting the integration and the comparative birth-mode
+  findings.
+
+**Still missing** (referenced in the capstone `FILES DELIVERED` table):
+
+- `confusion_spectrum.py` — the capstone's "final" contribution
+- `the_brake.py` — the audit-loop terminator implementation
+- `pain_as_sensor.py` — physical pain (distinct from `social_pain_sensors.py`)
+- `correlated_birth_mode.py` — CORRELATED mode as a standalone module
+
+## 11. Second drop — revising the prose-vs-code observation
+
+My §4 said the prose sometimes ran ahead of the code. **The
+second drop shows the opposite is also happening: the docs' key
+quantitative claims are reproducible from the shipped simulations.**
+Two examples I re-ran:
+
+- `ARCHITECTURE.md §10.1 "Harsh Ecosystem"` promises prediction
+  accuracy 0.65, representation coherence 0.12, anomaly bank 80,
+  0/4 milestones. Running `python3 council_of_protectors.py` on
+  the 20-day scenario in the file produces exactly those numbers.
+  Not authored — computed.
+- `INTEGRATION_SUMMARY.md §3` "The SOCIAL infant is the only one
+  with anomalies banked (1) due to the harsh interaction moment"
+  and "Only one with fear amplitude > 0 (0.20)". Running
+  `python3 nurturing_environment.py` reproduces both: social =
+  1 anomaly, fear = 0.20; every other mode = 0 and 0.00.
+
+So the load-bearing empirical claims in the docs are grounded in
+the shipped code. The gaps I noted earlier (hash-based vectors;
+keyword pain sensors; birth-moment closing prose that is authored
+rather than derived) still hold, but they are **narrower** than
+"prose runs ahead of code" — they are specific spots where a
+finished system would derive what the docs currently script.
+
+## 12. Second drop — new observation worth naming
+
+`INTEGRATION_SUMMARY.md §5 "The Meta-Curiosity Insight"` says the
+`META_CURIOSITY` birth mode does not need external sensors to
+begin learning — it can begin by observing its own code, its own
+structure, its own capacity to wonder. The first observation is
+`"I am a system that processes information"`. The ontological
+protector correctly flags this as YELLOW (not RED) because the
+infant IS observing something real (its own code), even without
+external instrument streams; the 1% reserve is still intact
+because the infant can question its own self-model.
+
+**This resonates with `inverseminar/` in the rest of the repo.**
+The inverseminar is a solo-user version of the Nature Physics
+inverseminar mechanism: bait the operator's tacit knowledge by
+having the model reconstruct their reasoning wrong. It works on
+the same principle the meta-curiosity mode is doing here from
+the opposite side: **recursive self-observation is a valid axiom
+for a system that has no external instrument stream to start
+from.** The relational drop arrived at it from a
+developmental-psychology direction; the inverseminar arrived at
+it from an epistemic-extraction direction. Same shape, different
+starting point. Worth naming.
+
 ---
 
 *Not audited under the F-10 protocol; that protocol does not apply.*
 *Read in the frame the drop asked for; evaluated on internal coherence*
 *and prose-vs-code fidelity. Landed verbatim so the operator can decide*
-*how much of the map to give away.*
+*how much of the map to give away.  Second drop landed four of the six*
+*referenced-but-not-delivered files; prose-vs-code fidelity better than*
+*first-drop reading suggested (§10.1 harsh-ecosystem numbers are*
+*byte-reproducible from council_of_protectors.py, INTEGRATION §3*
+*comparative-summary numbers are byte-reproducible from*
+*nurturing_environment.py).*

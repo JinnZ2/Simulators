@@ -527,11 +527,29 @@ underneath).
   `birth_moment.py` (InfantSystem + BirthMoment demo, imports ok,
   runs end-to-end), `social_pain_sensors.py` (SocialPainSensor demo,
   8 scenarios, imports ok, runs end-to-end), and `notes.md` with the
-  frame-check and prose-vs-code observations. Referenced-but-not-
-  delivered siblings named in the capstone `FILES DELIVERED` table:
-  `council_of_protectors.py`, `confusion_spectrum.py`, `the_brake.py`,
-  `pain_as_sensor.py` (physical, distinct from social),
-  `correlated_birth_mode.py`, `nurturing_environment.py`.
+  frame-check and prose-vs-code observations. **Second drop** landed
+  four more of the referenced files: `council_of_protectors.py`
+  (reference implementation of the five `Protector` subclasses with
+  a 20-day `run_simulation()`), `infant_system_v2.py` (standalone
+  version of the `InfantSystem` previously embedded in birth_moment.py),
+  `nurturing_environment.py` (integration layer wrapping `SimpleInfant`
+  with the five protectors and a `BirthMomentGenerator` for all six
+  birth modes; includes `compare_birth_modes()`), and
+  `INTEGRATION_SUMMARY.md` (v0.3 doc in the version history). All three
+  new `.py` files run end-to-end; the docs' quantitative claims turn
+  out to be reproducible from the code (`ARCHITECTURE.md §10.1` harsh-
+  ecosystem numbers 0.65/0.12/80/0-of-4 milestones are byte-reproducible
+  from `council_of_protectors.py`; `INTEGRATION_SUMMARY.md §3` claim that
+  SOCIAL is the only mode with anomalies banked and fear amplitude > 0
+  is byte-reproducible from `nurturing_environment.py`) — better prose-
+  vs-code fidelity than the first-drop reading suggested. New cross-repo
+  resonance flagged in notes.md §12: the META_CURIOSITY birth mode's
+  "recursive self-observation is a valid axiom for a system with no
+  external instrument stream" is the same shape as `inverseminar/`'s
+  tacit-knowledge-via-self-reconstruction move, arrived at from the
+  opposite starting point. Still missing from the FILES DELIVERED
+  table: `confusion_spectrum.py`, `the_brake.py`, `pain_as_sensor.py`
+  (physical, distinct from social), `correlated_birth_mode.py`.
 - `inverseminar/` — Micro-inverseminar as a single stdlib-only script
   (`inverseminar.py`). One artifact, one reconstruction, one
   correction; ~60s per round. Runs the Nature Physics inverseminar
