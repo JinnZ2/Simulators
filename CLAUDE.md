@@ -411,7 +411,16 @@ underneath).
   `reversal > continuation` AND `d_reversal > d_continuation`, the
   §1 threshold crossing. Names no actor, motive, or plan by
   construction; "control" throughout means control PARAMETER, not
-  a hand on a knob.
+  a hand on a knob. `sensor_v1.py` is the concrete instantiation
+  the spec's §5 handoff staged: it wires up the credit-insurance
+  node chain (`insurer → reinsurer → capital_markets`), extends
+  `simulator.step` with a `regen_rate` parameter so the "outpaces
+  regeneration" claim (claim_001) gets a true null hypothesis, and
+  populates the three OPEN falsifier values (variance decline vs
+  regeneration; K sweep over coupling sensitivity; reversal-cost
+  at lock). Self-test passes; end-to-end demo prints all three
+  claim results. Add-on module — imports harm + simulator, doesn't
+  modify them.
 - `claim-audits/` — Standalone single-file audits of external
   documents. Each audit hand-classifies every claim it addresses
   under one of eight verdict codes (`VERIFIED`, `SOUND`,
@@ -600,8 +609,8 @@ underneath).
   lines 505-506); other 8 shipped .py files run on 3.11.
   All FILES DELIVERED code + docs now landed; only the PNG
   visualizations remain outside scope. 15 files total in
-  `relational/`. **Forward-looking companion:** `proposal.md` (16
-  files total now) surveys ten avenues for taking the framework
+  `relational/`. **Forward-looking companion:** `proposal.md`
+  surveys ten avenues for taking the framework
   from scaffold to real: (1) phones as the most-instrumented
   altricial system, (2) real sensor packages for the ontological
   protector, (3) altricial robotics as the direct fit (with a nod
@@ -620,7 +629,15 @@ underneath).
   signal, brake — with what already exists in the domain, what the
   framework contributes, what remains hard, and the cheapest first
   prototype. Not commitments; specifications for anyone who wants
-  to bring the body.
+  to bring the body. **Landscape companion:** `research_context.md`
+  positions the framework in the neuro-symbolic AI research space
+  (knowledge-graph RAG, neuro-symbolic transformers, System-2
+  inference, active inference, event-driven attention, hypergraph
+  attention) — its later sections propose a "Need-Event Modulated
+  Geometric Attention (NEMGA)" synthesis combining the framework's
+  `GeometricSymbolicManifold` with event-driven salience,
+  environmental need signals, and dynamic focus along the
+  manifold. 17 files total in `relational/`.
 - `inverseminar/` — Micro-inverseminar as a single stdlib-only script
   (`inverseminar.py`). One artifact, one reconstruction, one
   correction; ~60s per round. Runs the Nature Physics inverseminar

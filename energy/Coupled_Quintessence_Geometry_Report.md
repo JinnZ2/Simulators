@@ -424,6 +424,14 @@ negative lattice coordinates.
    folded into the allowed ellipse in the $\beta$ direction.
 4. Curvature values near the $\Lambda$ caustic are noise-amplified
    and indicative only.
+5. The growth equation uses the sub-horizon approximation and
+   neglects scale-dependent screening, which becomes relevant for
+   $\beta \gtrsim 0.1$.
+6. The hexagonal-graph encoding of Appendix A assumes the Fisher
+   metric is locally constant over each cell; validation against
+   exact geodesic distances is recommended.
+7. CMB constraints on $\Omega_{\phi,\mathrm{early}}$ were enforced
+   but not fully marginalized over nuisance parameters.
 
 **Suggested next steps.** Swap in the DESI DR2 covariance; port the
 background to CLASS/CAMB with a coupled-dark-energy module for
