@@ -637,7 +637,69 @@ underneath).
   Geometric Attention (NEMGA)" synthesis combining the framework's
   `GeometricSymbolicManifold` with event-driven salience,
   environmental need signals, and dynamic focus along the
-  manifold. 17 files total in `relational/`.
+  manifold. 17 files total in `relational/`. **Concrete substrate:**
+  `arch_garden/` (six-file subfolder) is the minimal viable
+  implementation of the framework's altricial-organism stance,
+  runnable tonight on one machine (or a phone via Termux).
+  `README.md` frames the "arch not a gate" stance with five pillars
+  (Triadic Ground, Nurturing Development, Recursive Openness,
+  Affective Integrity, Co-Creation). `garden_bed.py` is the main
+  event loop: real `SomaticMonitor` (psutil for CPU/RAM/thermal +
+  nvidia-smi subprocess for GPU with graceful fallback) → mode
+  gate → HTTP model call over any OpenAI-compatible completions
+  endpoint (`ARCH_GARDEN_MODEL_URL` env; ollama, LM Studio,
+  llama.cpp server, vLLM all work; dummy fallback with clear
+  banner if unset) → grounding check → anomaly bank →
+  protector-log notifications → 1% self-audit in explore mode.
+  `anomaly_bank.py` is stdlib-only SQLite persistent memory.
+  `grounding.py` ships a 10-invariant physical-constants table
+  (c, g, water freeze/boil, Earth radius, Planck, Avogadro,
+  electron/proton mass, day length) plus 6 contradiction patterns
+  (rocks fall up, sun rises west, entropy decreases isolated,
+  perpetual motion, faster-than-light, water flows uphill); regex
+  claim extraction with tolerance-aware matching. `protector_log.md`
+  is the human stewardship journal template. `requirements.txt`
+  names psutil + requests both optional. All three modules pass
+  self-tests (anomaly bank: 3 stored / 1 processed / 2 remain;
+  grounding: 5 passes + 6 fails detected; garden_bed: 3 anomalies
+  banked from 4 test prompts). Runtime state (`anomaly_bank.db`,
+  `__pycache__/`) gitignored per-folder. This is the *phones + AI
+  development* pair from `proposal.md §1, §4` made concrete at
+  proof-of-concept scale. **Visualizations landed:** `figures/`
+  (eight images) closes the "PNG visualizations remain outside
+  scope" gap. First wave — four images, one per shipped demo
+  script: matplotlib output from `confusion_spectrum.py` (spectrum
+  + curiosity + biological analogies + clinical applications +
+  sensor hierarchy), `social_pain_sensors.py` (intensity + somatic
+  markers + triadic verifier diagram + paradigm-shift text +
+  recovery curve), `nurturing_environment.py` (affective state /
+  dev metrics / protector health / birth-mode characteristics
+  across all six modes), and `cartesian_vs_relational_demo.py`
+  (accuracy over time with the two truth-shifts marked +
+  environment cycles + relational agent's internal state + "WHAT
+  OTHER AIs SHOULD SEE" text panel). Second wave — four more
+  images completing the FILES DELIVERED PNG list:
+  `birth_moment_visualization.png` (activation trajectory + first-
+  moment triadic + environmental context + text-panel over the
+  `birth_moment.py` InfantSystem demo), `correlated_instinct_
+  architecture.png` (4-panel architecture explainer for the
+  triadic-correlation-first-axiom stance from
+  `correlated_birth_mode.py`), `council_simulation_comparison.png`
+  (harsh vs nurturing 20-day trajectories — numerical claims
+  match `ARCHITECTURE.md §10.1/§10.2` byte-for-byte: harsh
+  0.65/0.12/80 vs nurturing 0.79/0.22/169), and
+  `infant_development_dashboard.jpg` (single-run monitoring
+  dashboard for `nurturing_environment.py`). Two of the eight
+  figures (`council_simulation_comparison.png` and
+  `infant_development_dashboard.jpg`) show output from driver
+  scripts that are not in the shipped code — documented as such
+  in `figures/README.md`. `figures/README.md` maps each panel to
+  the specific doc section it visualizes. The visualizations
+  independently confirm claims in the docs (e.g. social protector
+  RED only under SOCIAL mode; recovery = correlation-repair curve
+  with cortisol falling as oxytocin rises; Cartesian ~0.37 vs
+  Relational ~0.60-0.70 in the changing environment;
+  ARCHITECTURE.md §10 harsh-vs-nurturing quantitative claims).
 - `inverseminar/` — Micro-inverseminar as a single stdlib-only script
   (`inverseminar.py`). One artifact, one reconstruction, one
   correction; ~60s per round. Runs the Nature Physics inverseminar

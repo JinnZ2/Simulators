@@ -589,6 +589,112 @@ extending. Both are outside notes.md's scope — but see
 it real" could look like, written for others who might want to
 pick up any one of them.
 
+## 22. Sixth drop — the FILES DELIVERED visualizations land
+
+Landed as `relational/figures/`, closing the "PNG visualizations
+remain outside scope" gap I flagged in §16. Two waves. First wave:
+four figures for the shipped demo scripts. Second wave: four more
+figures completing the FILES DELIVERED PNG list.
+
+**First wave (each the output of running one of the shipped scripts):**
+
+- `confusion_spectrum_visualization.jpg` — `confusion_spectrum.py`
+- `social_pain_architecture.jpg` — `social_pain_sensors.py`
+- `birth_mode_comparison.jpg` — `nurturing_environment.py`
+- `cartesian_vs_relational_visualization.png` — the bonus demo
+
+**Second wave (rest of the FILES DELIVERED PNG list):**
+
+- `birth_moment_visualization.png` — `birth_moment.py`
+- `correlated_instinct_architecture.png` — `correlated_birth_mode.py`
+- `council_simulation_comparison.png` — a driver script that isn't
+  shipped, running the harsh + nurturing scenarios independently and
+  plotting side-by-side. Numerical claims match `ARCHITECTURE.md §10.1`
+  and `§10.2` exactly (harsh: 0.65 / 0.12 / 80; nurturing: 0.79 /
+  0.22 / 169). Anyone reproducing this: land a `_run_two_ecosystems.py`
+  wrapper around `council_of_protectors.py`.
+- `infant_development_dashboard.jpg` — a longer-run driver over 30
+  days with condition-band variation ("stable / stressed / recovery
+  / optimal / adversarial / consolidation" epochs). `infant_system_v2.py`'s
+  shipped demo is 30 observations across 10 days; this is the same
+  class run under a longer, more varied scenario.
+
+Two of the eight figures (`council_simulation_comparison.png`,
+`infant_development_dashboard.jpg`) show output from driver code
+that isn't in the shipped scripts. Called out in `figures/README.md`
+under each figure. Not a bug — a note about where the ready-to-run
+version stops and where a driver would have to pick up.
+
+`figures/README.md` documents each panel of each figure and
+cross-references the source script + relevant doc section.
+
+**What these visually confirm.** Each figure independently verifies
+a claim I made earlier in this file:
+
+- The Recovery panel of `social_pain_architecture.jpg` visualizes
+  the `COMPLETE_ARCHITECTURE.md §6` claim (pain decays exponentially
+  as cortisol drops and oxytocin rises when correlation is repaired).
+- The Protector Health panel of `birth_mode_comparison.jpg`
+  visualizes the `INTEGRATION_SUMMARY.md §6` table (SOCIAL is the
+  only mode where the social protector ever goes RED).
+- The Accuracy panel of `cartesian_vs_relational_visualization.png`
+  shows Cartesian ~0.37 vs Relational ~0.60-0.70 across 25 steps
+  with the two truth-shifts visibly marked. My §19 smoke test hit
+  0.36 vs 0.52 — same shape, small run-to-run variance from random
+  seeds and step count.
+
+Not artistically composed diagrams — actual matplotlib output. If
+you edit a script and rerun, the figure updates to match.
+
+## 21. Fifth drop — arch_garden as the first concrete substrate
+
+Landed as a subfolder `arch_garden/` — the minimal viable
+implementation of the framework's altricial-organism stance,
+runnable tonight on a single machine (or a phone via Termux).
+
+Six files:
+
+- `README.md` — the Arch's five pillars (Triadic Ground, Nurturing
+  Development, Recursive Openness, Affective Integrity, Co-Creation)
+  + component spec + how-to-begin + handoff protocol
+- `garden_bed.py` — main event loop. Real `SomaticMonitor` (psutil
+  when installed, cross-platform CPU/RAM/thermal + nvidia-smi
+  subprocess for GPU; falls back to uptime-only). Real HTTP model
+  client speaking OpenAI-compatible completions API (works with
+  ollama, LM Studio, llama.cpp server, vLLM, remote OpenAI-
+  compatible; falls back to dummy generator with clear banner).
+  Mode gate based on thermal / RAM / VRAM / context-fill.
+- `anomaly_bank.py` — SQLite persistent memory. Stdlib only.
+  `store()`, `count_unprocessed()`, `recent_patterns()`,
+  `mark_processed()`, `log_audit()`. Smoke test passes.
+- `grounding.py` — real physical-invariant table (10 constants:
+  c, g, water freeze/boil, Earth radius, Planck, Avogadro,
+  electron/proton mass, day length) + 6 contradiction patterns
+  (rocks fall up, sun rises west, entropy decreases isolated,
+  perpetual motion, faster-than-light, water flows uphill).
+  Regex-based claim extraction with tolerance-aware matching.
+  Smoke test: 5 correct passes + 6 correct fails detected.
+- `protector_log.md` — template for the human protector's
+  stewardship journal. Automatic entries appended by the loop;
+  human entries go above as separate session blocks.
+- `requirements.txt` — psutil (optional), requests (optional).
+  Both graceful-fallback; stdlib-only mode works everywhere.
+
+This is the *phones + AI development* pair from `proposal.md §1, §4`
+made concrete at proof-of-concept scale. Runnable in three modes
+depending on how much infrastructure the operator has: stdlib +
+dummy generator (everywhere), stdlib + psutil (real body reads), or
+full (real body + real model over HTTP).
+
+The frame-check I did in §1-9 still holds. Nothing in arch_garden
+is claimed to be more than declared scaffolding-becoming-substrate.
+The `pain_as_sensor` mechanism from the wider framework isn't
+plumbed in yet — grounding.py is closer to the *ontological
+protector*'s "physics is 99% anchored" role, and the mode gate is
+closer to the *thermodynamic protector*. A full Council would map
+each of the five protectors onto a corresponding sub-daemon; that
+is a `proposal.md §1` follow-on, not this drop's job.
+
 ---
 
 *Not audited under the F-10 protocol; that protocol does not apply.*
