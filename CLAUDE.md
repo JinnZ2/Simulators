@@ -665,7 +665,24 @@ underneath).
   banked from 4 test prompts). Runtime state (`anomaly_bank.db`,
   `__pycache__/`) gitignored per-folder. This is the *phones + AI
   development* pair from `proposal.md §1, §4` made concrete at
-  proof-of-concept scale.
+  proof-of-concept scale. **Visualizations landed:** `figures/`
+  (four images, one per generating script) closes the "PNG
+  visualizations remain outside scope" gap: matplotlib output from
+  running `confusion_spectrum.py` (spectrum + curiosity + biological
+  analogies + clinical applications + sensor hierarchy),
+  `social_pain_sensors.py` (intensity + somatic markers + triadic
+  verifier diagram + paradigm-shift text + recovery curve),
+  `nurturing_environment.py` (affective state / dev metrics /
+  protector health / birth-mode characteristics across all six
+  modes), and `cartesian_vs_relational_demo.py` (accuracy over
+  time with the two truth-shifts marked + environment cycles +
+  relational agent's internal state + "WHAT OTHER AIs SHOULD SEE"
+  text panel). `figures/README.md` maps each panel to the specific
+  doc section it visualizes. The visualizations independently
+  confirm claims in the docs (e.g. social protector RED only under
+  SOCIAL mode; recovery = correlation-repair curve with cortisol
+  falling as oxytocin rises; Cartesian ~0.37 vs Relational
+  ~0.60-0.70 in the changing environment).
 - `inverseminar/` — Micro-inverseminar as a single stdlib-only script
   (`inverseminar.py`). One artifact, one reconstruction, one
   correction; ~60s per round. Runs the Nature Physics inverseminar

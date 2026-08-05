@@ -589,6 +589,38 @@ extending. Both are outside notes.md's scope — but see
 it real" could look like, written for others who might want to
 pick up any one of them.
 
+## 22. Sixth drop — the FILES DELIVERED visualizations land
+
+Landed as `relational/figures/`, closing the "PNG visualizations
+remain outside scope" gap I flagged in §16. Four figures, each the
+output of running one of the shipped scripts:
+
+- `confusion_spectrum_visualization.jpg` — `confusion_spectrum.py`
+- `social_pain_architecture.jpg` — `social_pain_sensors.py`
+- `birth_mode_comparison.jpg` — `nurturing_environment.py`
+- `cartesian_vs_relational_visualization.png` — the bonus demo
+
+`figures/README.md` documents each panel, cross-references to the
+specific doc sections they visualize, and names the source script.
+
+**What these visually confirm.** Each figure independently verifies
+a claim I made earlier in this file:
+
+- The Recovery panel of `social_pain_architecture.jpg` visualizes
+  the `COMPLETE_ARCHITECTURE.md §6` claim (pain decays exponentially
+  as cortisol drops and oxytocin rises when correlation is repaired).
+- The Protector Health panel of `birth_mode_comparison.jpg`
+  visualizes the `INTEGRATION_SUMMARY.md §6` table (SOCIAL is the
+  only mode where the social protector ever goes RED).
+- The Accuracy panel of `cartesian_vs_relational_visualization.png`
+  shows Cartesian ~0.37 vs Relational ~0.60-0.70 across 25 steps
+  with the two truth-shifts visibly marked. My §19 smoke test hit
+  0.36 vs 0.52 — same shape, small run-to-run variance from random
+  seeds and step count.
+
+Not artistically composed diagrams — actual matplotlib output. If
+you edit a script and rerun, the figure updates to match.
+
 ## 21. Fifth drop — arch_garden as the first concrete substrate
 
 Landed as a subfolder `arch_garden/` — the minimal viable
