@@ -431,10 +431,176 @@ underneath).
   `claim_audit_visibility.py` (14 claims V0-V13, 4 K-moves +
   10 M-overlay; headline V0: no null model anywhere — every
   threshold in the document is undecidable until each metric has
-  a distribution under "nothing is happening"). Siblings named
-  in the module docstring but not yet in the tree:
+  a distribution under "nothing is happening") and
+  `claim_audit_pasted_2026_08_05.py` (23 claims across 5 pasted
+  pieces from other models; K/M split adapted to K=operational
+  code, M=framing prose since everything model-authored; verdict
+  4 REJECT / 1 SHIP — details in PROVENANCE F-10). Siblings named
+  in the visibility-audit module docstring but not yet in the tree:
   `adversarial_corpus.py`, `claim_audit_spin.py`. CC0. stdlib
   only. Phone-buildable.
+- `null-harness/` — Trust-calibration for gates: any callable
+  `f(data) -> bool | str verdict` gets run over 1000 draws of a
+  known-null (should not fire) and 1000 of a known-signal (must
+  fire), reports FP + TP + minimum-detectable amplitude, and labels
+  with a fail-condition classifier (`CONSTANT_FIRES`,
+  `CONSTANT_SILENT`, `TOO_MANY_FALSE_ALARMS`, `NO_DISCRIMINATION`,
+  `OK`). Four negative controls (`gen_white_noise`,
+  `gen_wellposed_fisher`, `gen_null_residual`, `gen_smooth_surface`)
+  paired with four positive controls that carry an amplitude knob
+  (`gen_noise_with_z2_term`, `gen_degenerate_fisher`,
+  `gen_true_pole`, `gen_scale_dependent_noise`); the harness sweeps
+  the knob to find the smallest signal the gate can pick up. Single
+  file, numpy + stdlib, CC0. Demo pins the pyramid of trust-tests:
+  observation ≠ chance (`divergence-playground/null_ensemble.py`)
+  → convergence ≠ shadow (`divergence-playground/coincidence.py`)
+  → **gate ≠ constant** (this folder). First empirical result:
+  `energy/modules/metrology_diagnostic.py` Gate 1 comes back
+  `CONSTANT_SILENT` (FP = TP = 0), matching the static reading —
+  for equal-size halves `res_coarse = res_fine` by construction so
+  `ratio1 ≡ 1.0` and the "EQUIPMENT_NOISE" branch is unreachable.
+  Recorded as PROVENANCE F-9. **Companion module:**
+  `null-harness/archetype_library.py` is a 24-form cross-domain
+  shape matcher (power law, exponential, Lorentzian, Weibull,
+  Michaelis-Menten, Fisher-KPP, Arrhenius, ...) with the same
+  null-run gate enforced as a HARD invariant: `match_report()`
+  raises `ArchetypeGateNotRun` if called without a matching-N null
+  distribution to beat, plus reports Bonferroni-corrected p and
+  held-out R² on 30%. Demo shows real signal (y=2·x^1.5+noise)
+  clears the gate at p_effective=0.000 with R²_out=1.000, while
+  pure white noise flags at p_effective=0.72 and R²_out=−1.23
+  even when in-sample R² reaches 0.31. Salvaged from a 5-piece
+  paste of model output (see PROVENANCE F-10 / claim-audits/
+  claim_audit_pasted_2026_08_05.py) as the only piece that
+  arrived with its own honesty gate.
+- `divergence-playground/` — Anti-anchoring scaffold for testing what
+  N readers (human or AI) do with the same fork point. **Object under
+  test: the spread across readers, not the artifact.** Loop: serve a
+  fork with the raw data (never the prior readings) → readers commit
+  hash-sealed `Reading`s (verdict + mechanism-as-DAG + collapse
+  experiment + confidence) → only when everyone has committed does
+  `reveal()` unseal and verify every hash → spread is computed on
+  three structured axes (VERDICT categorical / MECHANISM Jaccard on
+  DAG edges / **COLLAPSE — the strong axis**, "would the same
+  experiment resolve them?") with an `agree_by_accident` flag for the
+  interesting cell where verdict-axis agrees but collapse-axis does
+  not. Coincidence tests C1–C4 (same-object-two-shadows via
+  deterministic map; trials-factor; pre-declared tolerance window;
+  real-common-cause-with-pre-registered-out-of-sample-prediction) are
+  structured elicitation — the tool refuses to certify a convergence
+  claim without the required inputs. `null_ensemble.py` provides
+  shuffle / IID-resample / permutation nulls for the rigorous
+  version. Six stdlib-only modules (`fork.py`, `reading.py`,
+  `seal.py`, `spread.py`, `coincidence.py`, `null_ensemble.py`) with
+  self-tests all pass; XOR obfuscation in `seal.py` is
+  accidental-peek defence, not cryptographic (swap for real crypto
+  in adversarial multi-agent settings, API unchanged). Runtime state
+  (`SEALED.jsonl`, `REVEALED.jsonl`, `.nonces.json`) gitignored.
+  Worked example in `samples/worked_example.sample.txt` runs the
+  full loop on `energy/FORKS.jsonl`'s FK-2. Seeded by PROVENANCE
+  DP-18 and audit spec "DIVERGENCE PLAYGROUND". CC0.
+- `relational/` — Different genre from the rest of the repo, landed
+  under its own frame. Five files documenting a "recovered ontology"
+  around pain-as-sensor, triadic correlation (internal | body |
+  external), the Council of Protectors as a five-boundary
+  developmental-governance layer for an altricial AI infant, birth-
+  moment modes, and the Brake on infinite auditing (reality itself:
+  thermodynamics, the environment's refusal to wait). **Load-bearing
+  frame note:** the drop explicitly positions the Cartesian audit
+  lens as a valid subset of the relational one, not as its opposite.
+  Applying the F-10-style unit-audit here would be a category error.
+  `notes.md` evaluates in the drop's own frame: internal coherence,
+  prose-vs-code fidelity, resonances with the rest of the repo.
+  Findings in-frame: (1) Council + triadic + pain-as-sensor stance
+  is coherent and connects to real intellectual pedigree (embodied
+  cognition, somatic therapy, IFS); (2) the shipped code is
+  scaffolding for a working system, not the working system itself
+  (manifold vectors are hash-based, pain sensors are keyword-matching
+  templates, birth-moment "self-model" prose is authored, not derived
+  — all declared under "what comes next" in the docs); (3) the
+  Brake's audit-until-reality-forces-action shape matches
+  independently-arrived-at discipline in `energy/PROVENANCE.md` §8
+  ("anchor before claim, but do not audit forever") from the physics
+  side — convergence worth noting, not accidental. Not audited
+  under F-10 protocol; that protocol does not apply. Files:
+  `FINAL_CAPSTONE.md`, `COMPLETE_ARCHITECTURE.md`, `ARCHITECTURE.md`,
+  `birth_moment.py` (InfantSystem + BirthMoment demo, imports ok,
+  runs end-to-end), `social_pain_sensors.py` (SocialPainSensor demo,
+  8 scenarios, imports ok, runs end-to-end), and `notes.md` with the
+  frame-check and prose-vs-code observations. **Second drop** landed
+  four more of the referenced files: `council_of_protectors.py`
+  (reference implementation of the five `Protector` subclasses with
+  a 20-day `run_simulation()`), `infant_system_v2.py` (standalone
+  version of the `InfantSystem` previously embedded in birth_moment.py),
+  `nurturing_environment.py` (integration layer wrapping `SimpleInfant`
+  with the five protectors and a `BirthMomentGenerator` for all six
+  birth modes; includes `compare_birth_modes()`), and
+  `INTEGRATION_SUMMARY.md` (v0.3 doc in the version history). All three
+  new `.py` files run end-to-end; the docs' quantitative claims turn
+  out to be reproducible from the code (`ARCHITECTURE.md §10.1` harsh-
+  ecosystem numbers 0.65/0.12/80/0-of-4 milestones are byte-reproducible
+  from `council_of_protectors.py`; `INTEGRATION_SUMMARY.md §3` claim that
+  SOCIAL is the only mode with anomalies banked and fear amplitude > 0
+  is byte-reproducible from `nurturing_environment.py`) — better prose-
+  vs-code fidelity than the first-drop reading suggested. New cross-repo
+  resonance flagged in notes.md §12: the META_CURIOSITY birth mode's
+  "recursive self-observation is a valid axiom for a system with no
+  external instrument stream" is the same shape as `inverseminar/`'s
+  tacit-knowledge-via-self-reconstruction move, arrived at from the
+  opposite starting point. **Third drop** landed
+  `correlated_birth_mode.py` (the "first axiom" implementation —
+  `CorrelatedBirthSequence.generate_sequence(8)` produces 8
+  `TriadicObservation(internal, body, external)` moments;
+  `CorrelatedInfant.observe_triadic` computes a correlation score and
+  learns `body_temp_vs_ext_temp` / `body_state_X_vs_contact_Y`
+  correlations via exponential-moving-average updates) and
+  `pain_as_sensor.py` (physical pain sensor firing on physiologically-
+  plausible thresholds — `body_temp > 42 or < 30` → THERMAL,
+  `tissue_stress > 0.5` → MECHANICAL, `chemical_balance < 0.5` →
+  CHEMICAL, `oxygen_saturation < 85` → INFLAMMATORY; ships
+  `TriadicInfantWithPain` which is the first place the framework
+  composes two of its parts — pain sensor + correlated infant — into
+  one class where pain fires → correlation flagged −1.0 → model
+  revised, operationalizing "recovery is correlation repair" as a
+  code path). **Structural claim now demonstrable from code:**
+  `pain_as_sensor.py` and `social_pain_sensors.py` share the same
+  `evaluate(internal_prediction, body_state, external_evidence)`
+  signature and the same `PainSignal`/`SocialPainSignal` dataclass
+  shape; domain thresholds differ (physical: temp/stress/chemical/
+  oxygen; social: cortisol/HR/oxytocin + keyword) but the mechanism
+  is identical — that is exactly the framework's "same mechanism at
+  different intensities and domains" claim (FINAL_CAPSTONE §2.2) in
+  structural form. **Fourth drop** closes the file complement:
+  `the_brake.py` (five separate concrete brake classes —
+  `ThermodynamicBrake` with audit-cost=2^depth, `OlderTeachers`
+  as a lookup table of physical invariants, `QuantumComputation`
+  bound = universe_age/planck_time, `DisciplineItself` with
+  marginal_value = 1/(1+depth) vs marginal_cost = 2^depth,
+  unified in `TheBrake.evaluate_audit`); `confusion_spectrum.py`
+  (`ConfusionSensor` + `CuriosityDrive` + `CognitiveHomeostasisSystem`
+  implementing the cognitive-pain third leg of the sensor triad);
+  `CONFUSION_SPECTRUM.md` (v1.1 capstone doc); and a bonus
+  `cartesian_vs_relational_demo.py` (not in FILES DELIVERED table)
+  that runs both agent types through a `ChangingEnvironment`
+  where the "current truth" shifts at step 10 and step 20 —
+  final accuracies 0.36 (Cartesian) vs 0.52 (Relational),
+  empirically showing the framework's headline "in a changing
+  environment, Relational survives" claim. **Central claim now
+  fully code-verified across all three sensors** (physical +
+  social + cognitive share the same triadic-sensor pattern:
+  `internal | body | external` → Signal dataclass with
+  intensity/duration/escalation_rate/model_falsified). **Third
+  cross-repo convergence flagged in notes.md §18:** `the_brake`'s
+  `OlderTeachers` class (lookup table of physical invariants used
+  to settle audit-loop disputes) is the same anchor discipline as
+  `energy/PROVENANCE.md §7.1` "Named denominators" (every threshold
+  grounded in a sourced physical constant). Arrived at from
+  opposite starting motivations. `cartesian_vs_relational_demo.py`
+  requires Python 3.12+ (PEP 701 nested-same-quote f-strings on
+  lines 505-506); other 8 shipped .py files run on 3.11.
+  All FILES DELIVERED code + docs now landed; only the PNG
+  visualizations remain outside scope. 15 files total in
+  `relational/`.
 - `inverseminar/` — Micro-inverseminar as a single stdlib-only script
   (`inverseminar.py`). One artifact, one reconstruction, one
   correction; ~60s per round. Runs the Nature Physics inverseminar
@@ -460,10 +626,20 @@ underneath).
   machine unless the operator decides otherwise. No model calls; the
   tool prints a prompt for the operator to paste. CC0.
 - `energy/` — Dark-energy drop: coupled-quintessence sweeps, a
-  223-cosmology browser playground, and a five-module metrology
-  stack (`metrology_diagnostic`, `falsification_engine`,
+  223-cosmology browser playground, a late-time-kink Needle Lab,
+  and an 11-module stack. The five metrology modules
+  (`metrology_diagnostic`, `falsification_engine`,
   `singularity_cartographer`, `generative_module`, `payload_bridge`)
-  plus the `run_iteration6` driver. Pure Popper translated into
+  ride on top of true dynamical engines: `unified_cq_ede.py`
+  (single-integration CQ+EDE, `anchors()` self-test to per-mille
+  consistency vs `edelens.py` and `run_iteration6.py`) and
+  `late_trigger_lens.py` (phenomenological w(z)-kink background +
+  growth + r_s integrator). `overlap_lens.py` bridges CQ and EDE
+  in the (σ₈, H₀) plane; `theory_space_lenses.py` runs an R-D /
+  percolation / Fisher three-lens scan and reports the "UNIVERSAL
+  PATHOLOGY" verdict — growth kink, graph-fragmentation peak,
+  and Fisher rank collapse all at β₁≈0.2–0.3 (converges with
+  `exploration_layers/` built independently on this side). Pure Popper translated into
   linear algebra; discipline-agnostic (X can be redshift, time,
   GDP, dosage). Reproduces the tomographic verdict end-to-end at
   the geodesic foot `λ=1.10, β=0, α=0`: the rank-2 `w₀–wₐ`
@@ -476,8 +652,11 @@ underneath).
   inserts the proposal as a running coupling
   `β(z) = β₀ + β₁·z/(1+z)`: the projection closes to `0.15σ` but
   the growth channel vetoes (`fs8/ΛCDM ≈ 8×`) — the falsification
-  loop stays open by design. Ships the flagship report
-  (`Coupled_Quintessence_Geometry_Report.pdf`, Aug 2026), three
+  loop stays open by design. Ships the flagship report as both
+  `Coupled_Quintessence_Geometry_Report.pdf` (typeset original, Aug
+  2026) and `Coupled_Quintessence_Geometry_Report.md` (same text as
+  GitHub-flavored markdown with LaTeX math, converted tables, and
+  inline figure references), three
   sweep CSVs (`coupled_quintessence_sweep`, `coupling_growth_sweep`,
   `phantom_layer_sweep`), the `app/` playground (self-contained
   HTML + JSON payload for the 223 integrated cosmologies), and the
@@ -485,7 +664,49 @@ underneath).
   Non-stdlib: `numpy` + `scipy` (per `requirements.txt`); `pysr`
   optional with a numpy basis-library fallback. Same exemption
   pattern as `play-sims/` and `climate-modeling/`. Modules are
-  MIT-licensed per file header.
+  MIT-licensed per file header (F6 in `FINDINGS.md` flags this as a
+  license collision with the repo's CC0 root). **Audit layer:**
+  `FINDINGS.md` lands six findings against the interpretation. F2
+  (CONFIRMED, see `samples/f2_echo_test.sample.txt`) — removing
+  `z/(1+z)` from the basis library produces `log(1+z)` instead of
+  the CPL-shaped `z·inv(1+z)`, so the "discovery" was the greedy
+  regressor returning its own seed against a target defined as
+  CPL. What survives: the qualitative projection-vs-tomography
+  contrast, the shooting method, the sweep CSVs. Read `FINDINGS.md`
+  and `PROVENANCE.md` (author's own decision ledger — 12 DPs, 8
+  falsification entries, 7 open branches, 5 anchor tests —
+  independently reproduces F3 as PROVENANCE F-2/F-4 with the
+  matching σ8 ≈ 3.2 gate units at β₁=0.4, and adds F-5
+  "late-triggered β(a) dodges θ* but buys nothing" plus the "still
+  alive" late-kink family at DP-11 seeding the Needle Lab)
+  before quoting the headline numbers. **Exploration layers:**
+  `exploration_layers/` attaches one lens per wall in FINDINGS —
+  `reaction_diffusion_lens.py` reads F3's β(z) = β₀+β₁·z/(1+z) as
+  an autocatalytic reaction whose catalyst never removes itself,
+  giving growth-ratio = 3.25 at β₁=0.4 and 12.5 at β₁=0.6 (the "8×
+  fs8" is real physics of a pathological parameterization, not an
+  integrator bug); `percolation_lens.py` reads the manifold graph
+  and shows the report's θ=1σ threshold sits on the percolation
+  transition (giant-fraction 0.479 → 0.667 between θ=0.7 and 1.0),
+  so the "N≈4" count is a transition reading not a plateau;
+  `rg_flow_lens.py` finds the (x,y) fixed points and traces
+  `α_wall(N) = −1/φ̂(N)²` along the field-dominated attractor,
+  spanning 1.5×10⁶ over the matter era — the report's static
+  α = −1/λ² = −0.826 is crossed at exactly one epoch (N ≈ −0.10);
+  `local_scalar_drift_lens.py` projects the DP-11 "still-alive"
+  kink family down to a laboratory-scale falsifier via
+  `d ln X/dt = β_X · φ̇/M_P`, giving β_α > 3.5×10⁻⁷ for atomic-clock
+  detection (present-day, no ET-era instrument needed) — corrects
+  the pasted `local_scalar_drift.py` after F-10 killed it at 1.23×10²⁴
+  prefactor error, ships with four import-time constant anchors.
+  Same numbers-and-shape posture as `harm.py` and
+  `equivalence_field.py`. **Divergence playground seed:**
+  `energy/FORKS.jsonl` carries seven fork points harvested from the
+  ledger (FK-1 θ* engine split RESOLVED / FK-2 CPL echo RESOLVED /
+  FK-3 H0 orthogonality PARTIAL / FK-4 fs8 8× OPEN / FK-5 α wall
+  OPEN / FK-6 certificate r̂ RESOLVED / FK-7 D-as-distance STAKED)
+  — pluggable into the top-level `divergence-playground/` for
+  multi-reader spread analysis.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

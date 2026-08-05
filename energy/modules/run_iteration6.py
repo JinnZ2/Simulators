@@ -18,7 +18,7 @@ Result summary (lambda=1.1, canonical track):
   w(z) shape departs from CPL for z >~ 1 -- the falsification engine
   catches both. The projection is fooled; the tomographic instrument is not.
 
-License: MIT
+License: CC0 1.0 Universal (public domain).
 """
 
 import numpy as np

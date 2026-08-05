@@ -8,7 +8,7 @@ Primary backend: PySR (symbolic regression) if installed.
 Fallback backend: a greedy search over a physics-motivated basis library
 (exp, inv, square, z, z*exp(-z), 1/(1+z^2), ...) with BIC selection.
 The fallback needs only numpy and runs on a phone.
-License: MIT
+License: CC0 1.0 Universal (public domain).
 """
 
 import numpy as np

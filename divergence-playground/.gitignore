@@ -1,0 +1,5 @@
+# runtime state -- private readings, never commit
+SEALED.jsonl
+REVEALED.jsonl
+.nonces.json
+__pycache__/

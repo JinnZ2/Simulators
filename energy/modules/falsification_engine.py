@@ -5,7 +5,7 @@ A general-purpose metrology and audit tool for any AI.
 Lets the AI make a claim, falsify it against residual topology,
 search for hidden variables, evolve the claim, and retest.
 Pure Karl Popper, translated into linear algebra. Runs on a phone.
-License: MIT - use freely, let the machines think critically.
+License: CC0 1.0 Universal (public domain).
 """
 
 import numpy as np

@@ -1,0 +1,22 @@
+ok _t_large_theta_gives_one_component
+ok _t_monotone_in_theta
+ok _t_theta_zero_gives_n_singletons
+all pass
+
+--- Percolation sweep on the 48-node manifold graph ---
+  theta   n_comp   giant_frac   mean_size   n_nodes
+   0.20       40        0.104        1.20        48
+   0.30       35        0.125        1.37        48
+   0.50       24        0.333        2.00        48
+   0.70       10        0.479        4.80        48
+   1.00        2        0.667       24.00        48
+   1.50        1        1.000       48.00        48
+   2.00        1        1.000       48.00        48
+   3.00        1        1.000       48.00        48
+   5.00        1        1.000       48.00        48
+
+Report's threshold (theta = 1.0 sigma) -> 2 components, giant_fraction = 0.667
+Percolation transition (giant_fraction crosses 0.5) between theta = 0.7 and 1.0
+  -> The report's 'N ~ 4 distinguishable' count sits ON the
+     percolation transition. Small covariance changes will
+     jump the count. The number is unstable, not the geometry.

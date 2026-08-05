@@ -5,6 +5,23 @@ Dark-energy simulation drop: coupled-quintessence sweeps, a
 audits whether the failure lives in the mathematics, the
 formulation, the instrument, or the equipment.
 
+> **AUDIT — read [`FINDINGS.md`](FINDINGS.md) before quoting numbers.**
+> Six findings against the interpretation layer:
+> **F1** the "14 orders of magnitude" jump is a float64-noise artifact
+> (3 params → 2 observables is a structural rank deficiency, true
+> eigenvalue = 0); **F2 CONFIRMED** — the generative module echoed
+> its own basis (target and library both contained `z/(1+z)`;
+> removing it produces `log(1+z)` instead, see
+> [`samples/f2_echo_test.sample.txt`](samples/f2_echo_test.sample.txt));
+> **F3** `fs8 ≈ 8× ΛCDM` is a physical blowup, not a tension;
+> **F4** `SIMPLE_POLE at α ≈ −1/λ²` fixed a moving boundary to a
+> static α; **F5** `S_min = 0.05` and the phantom-layer χ² covariance
+> are undefined; **F6 RESOLVED** — MIT headers waived to CC0 across all
+> 10 modules per author preference (see PROVENANCE.md).
+> What survives: the qualitative Instrument A/B contrast, the
+> shooting method, the sweep CSVs. What does not: the headline
+> "discovery" of the CPL wₐ term.
+
 Non-stdlib (`numpy`, `scipy`) — see `requirements.txt`. Same
 exemption as `play-sims/` and `climate-modeling/`. `pysr` optional;
 the generative module falls back to a numpy basis library when it
@@ -14,14 +31,35 @@ is absent, and every module ships a runnable `__main__` demo.
 
 ```
 energy/
-  Coupled_Quintessence_Geometry_Report.pdf   flagship report (v2, Aug 2026)
+  Coupled_Quintessence_Geometry_Report.pdf   flagship report (Aug 2026)
+  Coupled_Quintessence_Geometry_Report.md    same text, markdown + LaTeX math
+  PROVENANCE.md                              author decision ledger (12 DPs, 8 F-items, 7 OBs)
+  FINDINGS.md                                external audit (F1-F6 + §8 lens)
   sweeps/                                    three parameter-sweep CSVs
-  modules/                                   five-module metrology stack + iter-6 driver
-  app/                                       browser playground (index.html + JSON payload)
+  modules/                                   11-module stack: 5 metrology + engines + lenses
+  exploration_layers/                        one lens per wall (R-D, percolation, RG flow)
+  app/                                       browser playground + late-time Needle Lab
   figures/                                   plots + manifold-graph JSONL payload
-  samples/                                   captured end-to-end output
+  samples/                                   captured end-to-end output + anchors self-test
   requirements.txt                           numpy + scipy
 ```
+
+**Trust protocol (read `PROVENANCE.md` §3 and §8 before editing engines).**
+`unified_cq_ede.anchors()` re-runs the two calibration tests each edit
+must preserve:
+
+```
+ANCHOR 1: pure CQ (f_ede=0) vs run_iteration6 engine
+  lam=1.1, beta=+0.0:  d(w0) = -3.78e-06         # spec: <4e-6
+  lam=1.1, beta=+0.2:  d(w0) = -8.07e-07
+ANCHOR 2: pure EDE (beta=0) vs edelens engine
+  zc=3162, f=0.05:  rs_ratio 0.9888 vs 0.9834    # per-mille consistency
+```
+
+Captured: [`samples/anchors.sample.txt`](samples/anchors.sample.txt).
+A diff that moves an anchor is either a bug or a disclosed
+systematic; PROVENANCE says: decide which, in writing, in
+PROVENANCE.md.
 
 ## The physics being probed
 
@@ -111,7 +149,7 @@ Rendered plots from the report and the playground:
 `manifold_graph_payload.jsonl` is the AI-consumable node payload for
 the manifold graph.
 
-## Report (`Coupled_Quintessence_Geometry_Report.pdf`)
+## Report (`Coupled_Quintessence_Geometry_Report.pdf` / `.md`)
 
 *The Geometry of Coupled Quintessence: Parameter Sweeps, Fisher
 Geometry, and Packing Analysis of a Dark-Energy–Dark-Matter
@@ -123,8 +161,20 @@ layer, Fisher geometry of the model manifold, packing geometry
 (distinguishability and optimal covering), and conclusions.
 Appendix: the machine-readable manifold graph.
 
+Shipped in two forms:
+
+- [`Coupled_Quintessence_Geometry_Report.pdf`](Coupled_Quintessence_Geometry_Report.pdf) —
+  the original typeset artifact.
+- [`Coupled_Quintessence_Geometry_Report.md`](Coupled_Quintessence_Geometry_Report.md) —
+  the same text as GitHub-flavored markdown: LaTeX math via `$…$` and
+  `$$…$$`, tables converted, ligatures normalized, and figure blocks
+  pointing at the local `figures/` PNGs so it renders inline on
+  GitHub.
+
 ## Provenance
 
 Drop originated from the OKComputer coupled-quintessence
-playground. Modules are MIT-licensed (see per-file headers); the
+playground. All modules are CC0 (matches the repo root; the drop's
+original MIT headers were waived to CC0 per user preference — see
+FINDINGS.md F6 and PROVENANCE.md); the
 report and sweeps are the working artifacts of that investigation.
