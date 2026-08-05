@@ -232,6 +232,7 @@ Any future module must state which anchors it inherits and add its own zero-poin
 - **F-6: Shallow-slope CQ** — swampland dS gate (λ≳1) kills the shallow-λ region that would soften other tensions.
 - **F-7: Large constant β (≳0.15)** — distance conjecture: field excursion Δφ = 2.66 ≳ 1.
 - **F-8: Strong combined frontier** — anything above combined strength ≈0.05 dies at θ* ≥ 54σ.
+- **F-9: `metrology_diagnostic` Gate 1 is not a gate** — external audit ran the (top-level) `null-harness` on `metrology_diagnostic.MetrologyDiagnostic`'s Gate 1 ("Scale/Coarsening — Equipment vs. Signal") and found it `CONSTANT_SILENT` (FP = TP = 0.000 on white noise vs scale-dependent noise, 200 draws each). Static reading of the code confirms the mechanism: for equal-size halves, `res_coarse = (mean|first| + mean|second|)/2 = mean|all| = res_fine` by construction, so `ratio1 ≡ 1.0` and the `> 1.8` branch is unreachable. The gate always emits `SYSTEMATIC_SIGNAL`. Any downstream verdict that depended on Gate 1 discriminating equipment noise from signal was reading a constant. See `null-harness/samples/null_harness.sample.txt`. **Killed by:** `null-harness/null_harness.py` demo + trivial algebra.
 - **Still alive:** (i) the late-time kink family (DP-11) — passes all four gates, distinguishable from ΛCDM by next-generation instruments; (ii) pure EDE at f=0.05 as closest-to-success point (D=1.19 vs ΛCDM 1.68); (iii) H0-orthogonal directions (free parameter space per DP-9 geometry).
 
 ---
@@ -306,4 +307,4 @@ Every threshold and normalization used in a gate or cross-module verdict is list
 4. **Respect DP-2 and DP-5.** The q-coefficient rule and the conservation-law-for-the-quantity-of-interest rule are the two easiest things to break and the two hardest to notice broken.
 5. **Append, don't rewrite.** Add new DPs, F-items, and OBs below with the next sequence numbers. Breadcrumbs only work if the trail is contiguous.
 
-*Ledger closes at DP-18, F-8, OB-9. Next writer starts at DP-19.*
+*Ledger closes at DP-18, F-9, OB-9. Next writer starts at DP-19.*

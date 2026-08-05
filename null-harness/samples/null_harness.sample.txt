@@ -1,0 +1,31 @@
+ok _t_always_false_is_constant_silent
+ok _t_always_true_is_constant_fires
+ok _t_fisher_smin_gate
+ok _t_real_gate_z2_detector
+ok _t_sweep_finds_threshold
+all pass
+
+==============================================================================
+null_harness demo -- calibrating gates against known-answer controls
+==============================================================================
+
+gate                              FP      TP     min_amp   verdict
+------------------------------------------------------------------
+always_true_gate               1.000   1.000         n/a   CONSTANT_FIRES  (always says yes; not a gate)
+always_false_gate              0.000   0.000         n/a   CONSTANT_SILENT (never says yes; not a gate)
+z2_ols_3sigma                  0.004   1.000         0.2   OK
+fisher_smin<0.05               0.000   1.000         n/a   OK
+M2_Gate1_EQUIPMENT_NOISE       0.000   0.000         n/a   CONSTANT_SILENT (never says yes; not a gate)
+
+Reading:
+  * always_true / always_false are the two trivial-fail shapes
+    the harness must catch.
+  * z2_ols_3sigma is a proper gate: low FP, high TP, min_amp
+    names the smallest z^2 amplitude it detects at TP ≥ 0.5.
+  * fisher_smin<0.05 discriminates identity from degenerate.
+  * M2_Gate1_EQUIPMENT_NOISE: predicted (from static reading)
+    to be CONSTANT_SILENT because for equal-size halves,
+    res_coarse = mean(mean|first|, mean|second|) equals
+    res_fine = mean|all| by construction, so ratio ≡ 1.
+    The harness verifies the prediction empirically -- if it
+    fires at 0.0 on both controls it is not a gate.

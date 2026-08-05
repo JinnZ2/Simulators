@@ -435,6 +435,27 @@ underneath).
   in the module docstring but not yet in the tree:
   `adversarial_corpus.py`, `claim_audit_spin.py`. CC0. stdlib
   only. Phone-buildable.
+- `null-harness/` — Trust-calibration for gates: any callable
+  `f(data) -> bool | str verdict` gets run over 1000 draws of a
+  known-null (should not fire) and 1000 of a known-signal (must
+  fire), reports FP + TP + minimum-detectable amplitude, and labels
+  with a fail-condition classifier (`CONSTANT_FIRES`,
+  `CONSTANT_SILENT`, `TOO_MANY_FALSE_ALARMS`, `NO_DISCRIMINATION`,
+  `OK`). Four negative controls (`gen_white_noise`,
+  `gen_wellposed_fisher`, `gen_null_residual`, `gen_smooth_surface`)
+  paired with four positive controls that carry an amplitude knob
+  (`gen_noise_with_z2_term`, `gen_degenerate_fisher`,
+  `gen_true_pole`, `gen_scale_dependent_noise`); the harness sweeps
+  the knob to find the smallest signal the gate can pick up. Single
+  file, numpy + stdlib, CC0. Demo pins the pyramid of trust-tests:
+  observation ≠ chance (`divergence-playground/null_ensemble.py`)
+  → convergence ≠ shadow (`divergence-playground/coincidence.py`)
+  → **gate ≠ constant** (this folder). First empirical result:
+  `energy/modules/metrology_diagnostic.py` Gate 1 comes back
+  `CONSTANT_SILENT` (FP = TP = 0), matching the static reading —
+  for equal-size halves `res_coarse = res_fine` by construction so
+  `ratio1 ≡ 1.0` and the "EQUIPMENT_NOISE" branch is unreachable.
+  Recorded as PROVENANCE F-9.
 - `divergence-playground/` — Anti-anchoring scaffold for testing what
   N readers (human or AI) do with the same fork point. **Object under
   test: the spread across readers, not the artifact.** Loop: serve a
