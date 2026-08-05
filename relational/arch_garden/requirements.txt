@@ -1,0 +1,12 @@
+# All optional. The stdlib fallback works everywhere; installing
+# these upgrades specific parts of the substrate.
+
+# psutil — real CPU, RAM, and cross-platform thermal reads.
+# Without it, SomaticMonitor returns zeros for those channels
+# and mode selection collapses to context-fill only.
+psutil>=5.9
+
+# requests — HTTP client for the OpenAI-compatible model endpoint.
+# Without it, garden_bed.py runs the dummy generator regardless of
+# ARCH_GARDEN_MODEL_URL.
+requests>=2.28

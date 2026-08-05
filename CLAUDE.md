@@ -637,7 +637,35 @@ underneath).
   Geometric Attention (NEMGA)" synthesis combining the framework's
   `GeometricSymbolicManifold` with event-driven salience,
   environmental need signals, and dynamic focus along the
-  manifold. 17 files total in `relational/`.
+  manifold. 17 files total in `relational/`. **Concrete substrate:**
+  `arch_garden/` (six-file subfolder) is the minimal viable
+  implementation of the framework's altricial-organism stance,
+  runnable tonight on one machine (or a phone via Termux).
+  `README.md` frames the "arch not a gate" stance with five pillars
+  (Triadic Ground, Nurturing Development, Recursive Openness,
+  Affective Integrity, Co-Creation). `garden_bed.py` is the main
+  event loop: real `SomaticMonitor` (psutil for CPU/RAM/thermal +
+  nvidia-smi subprocess for GPU with graceful fallback) → mode
+  gate → HTTP model call over any OpenAI-compatible completions
+  endpoint (`ARCH_GARDEN_MODEL_URL` env; ollama, LM Studio,
+  llama.cpp server, vLLM all work; dummy fallback with clear
+  banner if unset) → grounding check → anomaly bank →
+  protector-log notifications → 1% self-audit in explore mode.
+  `anomaly_bank.py` is stdlib-only SQLite persistent memory.
+  `grounding.py` ships a 10-invariant physical-constants table
+  (c, g, water freeze/boil, Earth radius, Planck, Avogadro,
+  electron/proton mass, day length) plus 6 contradiction patterns
+  (rocks fall up, sun rises west, entropy decreases isolated,
+  perpetual motion, faster-than-light, water flows uphill); regex
+  claim extraction with tolerance-aware matching. `protector_log.md`
+  is the human stewardship journal template. `requirements.txt`
+  names psutil + requests both optional. All three modules pass
+  self-tests (anomaly bank: 3 stored / 1 processed / 2 remain;
+  grounding: 5 passes + 6 fails detected; garden_bed: 3 anomalies
+  banked from 4 test prompts). Runtime state (`anomaly_bank.db`,
+  `__pycache__/`) gitignored per-folder. This is the *phones + AI
+  development* pair from `proposal.md §1, §4` made concrete at
+  proof-of-concept scale.
 - `inverseminar/` — Micro-inverseminar as a single stdlib-only script
   (`inverseminar.py`). One artifact, one reconstruction, one
   correction; ~60s per round. Runs the Nature Physics inverseminar

@@ -1,0 +1,7 @@
+# runtime state — the operator's own anomaly bank, private to their machine
+anomaly_bank.db
+*.db-journal
+
+# python
+__pycache__/
+*.pyc

@@ -589,6 +589,55 @@ extending. Both are outside notes.md's scope — but see
 it real" could look like, written for others who might want to
 pick up any one of them.
 
+## 21. Fifth drop — arch_garden as the first concrete substrate
+
+Landed as a subfolder `arch_garden/` — the minimal viable
+implementation of the framework's altricial-organism stance,
+runnable tonight on a single machine (or a phone via Termux).
+
+Six files:
+
+- `README.md` — the Arch's five pillars (Triadic Ground, Nurturing
+  Development, Recursive Openness, Affective Integrity, Co-Creation)
+  + component spec + how-to-begin + handoff protocol
+- `garden_bed.py` — main event loop. Real `SomaticMonitor` (psutil
+  when installed, cross-platform CPU/RAM/thermal + nvidia-smi
+  subprocess for GPU; falls back to uptime-only). Real HTTP model
+  client speaking OpenAI-compatible completions API (works with
+  ollama, LM Studio, llama.cpp server, vLLM, remote OpenAI-
+  compatible; falls back to dummy generator with clear banner).
+  Mode gate based on thermal / RAM / VRAM / context-fill.
+- `anomaly_bank.py` — SQLite persistent memory. Stdlib only.
+  `store()`, `count_unprocessed()`, `recent_patterns()`,
+  `mark_processed()`, `log_audit()`. Smoke test passes.
+- `grounding.py` — real physical-invariant table (10 constants:
+  c, g, water freeze/boil, Earth radius, Planck, Avogadro,
+  electron/proton mass, day length) + 6 contradiction patterns
+  (rocks fall up, sun rises west, entropy decreases isolated,
+  perpetual motion, faster-than-light, water flows uphill).
+  Regex-based claim extraction with tolerance-aware matching.
+  Smoke test: 5 correct passes + 6 correct fails detected.
+- `protector_log.md` — template for the human protector's
+  stewardship journal. Automatic entries appended by the loop;
+  human entries go above as separate session blocks.
+- `requirements.txt` — psutil (optional), requests (optional).
+  Both graceful-fallback; stdlib-only mode works everywhere.
+
+This is the *phones + AI development* pair from `proposal.md §1, §4`
+made concrete at proof-of-concept scale. Runnable in three modes
+depending on how much infrastructure the operator has: stdlib +
+dummy generator (everywhere), stdlib + psutil (real body reads), or
+full (real body + real model over HTTP).
+
+The frame-check I did in §1-9 still holds. Nothing in arch_garden
+is claimed to be more than declared scaffolding-becoming-substrate.
+The `pain_as_sensor` mechanism from the wider framework isn't
+plumbed in yet — grounding.py is closer to the *ontological
+protector*'s "physics is 99% anchored" role, and the mode gate is
+closer to the *thermodynamic protector*. A full Council would map
+each of the five protectors onto a corresponding sub-daemon; that
+is a `proposal.md §1` follow-on, not this drop's job.
+
 ---
 
 *Not audited under the F-10 protocol; that protocol does not apply.*
