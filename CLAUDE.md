@@ -431,8 +431,12 @@ underneath).
   `claim_audit_visibility.py` (14 claims V0-V13, 4 K-moves +
   10 M-overlay; headline V0: no null model anywhere — every
   threshold in the document is undecidable until each metric has
-  a distribution under "nothing is happening"). Siblings named
-  in the module docstring but not yet in the tree:
+  a distribution under "nothing is happening") and
+  `claim_audit_pasted_2026_08_05.py` (23 claims across 5 pasted
+  pieces from other models; K/M split adapted to K=operational
+  code, M=framing prose since everything model-authored; verdict
+  4 REJECT / 1 SHIP — details in PROVENANCE F-10). Siblings named
+  in the visibility-audit module docstring but not yet in the tree:
   `adversarial_corpus.py`, `claim_audit_spin.py`. CC0. stdlib
   only. Phone-buildable.
 - `null-harness/` — Trust-calibration for gates: any callable
@@ -455,7 +459,20 @@ underneath).
   `CONSTANT_SILENT` (FP = TP = 0), matching the static reading —
   for equal-size halves `res_coarse = res_fine` by construction so
   `ratio1 ≡ 1.0` and the "EQUIPMENT_NOISE" branch is unreachable.
-  Recorded as PROVENANCE F-9.
+  Recorded as PROVENANCE F-9. **Companion module:**
+  `null-harness/archetype_library.py` is a 24-form cross-domain
+  shape matcher (power law, exponential, Lorentzian, Weibull,
+  Michaelis-Menten, Fisher-KPP, Arrhenius, ...) with the same
+  null-run gate enforced as a HARD invariant: `match_report()`
+  raises `ArchetypeGateNotRun` if called without a matching-N null
+  distribution to beat, plus reports Bonferroni-corrected p and
+  held-out R² on 30%. Demo shows real signal (y=2·x^1.5+noise)
+  clears the gate at p_effective=0.000 with R²_out=1.000, while
+  pure white noise flags at p_effective=0.72 and R²_out=−1.23
+  even when in-sample R² reaches 0.31. Salvaged from a 5-piece
+  paste of model output (see PROVENANCE F-10 / claim-audits/
+  claim_audit_pasted_2026_08_05.py) as the only piece that
+  arrived with its own honesty gate.
 - `divergence-playground/` — Anti-anchoring scaffold for testing what
   N readers (human or AI) do with the same fork point. **Object under
   test: the spread across readers, not the artifact.** Loop: serve a

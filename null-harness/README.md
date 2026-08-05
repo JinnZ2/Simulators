@@ -141,9 +141,20 @@ Pairs naturally with:
   *convergence* across observations is real.
 - `null-harness/null_harness.py` (this file) — tests whether a
   *gate* can distinguish signal from noise in the first place.
+- `null-harness/archetype_library.py` — 24-form cross-domain shape
+  matcher (power law, exponential, Lorentzian, Weibull, Michaelis-
+  Menten, Fisher-KPP, ...) with the same **null-run gate as a HARD
+  INVARIANT**: `match_report()` raises `ArchetypeGateNotRun` if
+  called without a `run_null_ensemble()` distribution to beat, plus
+  reports Bonferroni-corrected p and out-of-sample R² on a held-out
+  30%. Salvaged from a 5-piece paste of model output (see
+  `claim-audits/claim_audit_pasted_2026_08_05.py` claim C1-C5) —
+  the only piece of that paste that arrived with its own honesty
+  gate.
 
-Three levels: **observation ≠ chance? → convergence ≠ shadow? → gate
-≠ constant?** All CC0, all stdlib-plus-numpy at most.
+Four levels: **observation ≠ chance? → convergence ≠ shadow? → gate
+≠ constant? → shape-match ≠ noise-fit?** All CC0, all stdlib-plus-
+numpy (archetype_library adds `scipy.optimize.curve_fit`).
 
 ## License
 

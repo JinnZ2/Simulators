@@ -60,6 +60,20 @@ claim_audit_visibility.py   audit of the Visibility Protocol document.
                             happening."
 ```
 
+```
+claim_audit_pasted_2026_08_05.py
+                            audit of a 5-piece paste from other models.
+                            23 claims across 5 pieces (D/T/E/A/C). Verdict:
+                            4 of 5 pieces REJECT (unit bugs of 10²⁴, factor-
+                            100 H0 errors, misnamed Farkas, identically-zero
+                            gates, dependencies on unwritten code). 1 of 5
+                            SHIPS (CROSS_DOMAIN_ARCHETYPES v0 -- the only
+                            piece that arrived with its own honesty gate).
+                            The K/M split is adapted since everything is
+                            model-authored: K = operational code/formula,
+                            M = framing prose around it.
+```
+
 Sibling files named in the module docstrings but not yet in the tree:
 
 ```

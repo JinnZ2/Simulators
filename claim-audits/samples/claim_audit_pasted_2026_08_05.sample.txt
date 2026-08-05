@@ -1,0 +1,96 @@
+
+claim_audit_pasted_2026_08_05.py -- audit of a five-piece paste from
+other models.  Same verdict shape as claim_audit_visibility.py.
+
+WHAT WAS PASTED
+    1. local_scalar_drift.py     scalar-field drift of α, G from kink params
+    2. tension_geometry.py       portable obstruction-geometry engine
+                                 + muon g-2 demo
+    3. metrology_engine.py       Pyodide-friendly cosmological gate engine
+       (metrology_challenge.html) public-facing browser UI
+    4. ai_api.py                 JSON-in/out gate evaluator
+       autonomous_search.py      Bayesian scan wrapper
+    5. CROSS_DOMAIN_ARCHETYPES   35-form shape library + 5-step validation
+
+ALL FIVE PIECES ARE MODEL-AUTHORED.  The K/M attribution below is
+adapted: K = the *operational* content (formula / code / algorithm as
+written); M = the *framing* prose around it (marketing, "beautifully",
+overclaims of what the piece demonstrates).  Load-bearing bugs live
+in K.  Overclaims live in M.
+
+VERDICT CODES (same as claim_audit_visibility.py)
+    VERIFIED          source checked, mechanism holds
+    SIGN_BACKWARDS    the quantity is real, the direction is inverted
+    UNGROUNDED_NUMBER threshold with no derivation, units, or calibration
+    DIMENSIONALLY_VOID the expression is not a quantity
+    GAMEABLE          metric is maximized by doing the opposite of the intent
+    IDENTITY          true but empty -- a bookkeeping relation
+    UNVERIFIED        cited source not locatable
+    SOUND             holds as stated
+
+id   who  verdict             claim
+D1   K    VERIFIED            H0_GeV = H0_km_s_Mpc * 2.133e-44   # H0 in GeV (ℏ=1)
+D2   K    UNGROUNDED_NUMBER   yr_to_GeVinv = 1.956e8      # 1 year in GeV^-1
+D3   K    UNGROUNDED_NUMBER   rho_crit = 3 * H0_GeV**2 * M_P**2 / (8 * np.pi)   # GeV^4  (
+D4   K    SIGN_BACKWARDS      drift_prefactor = phi_dot_over_M * yr_to_GeVinv   # 1/yr
+D5   M    GAMEABLE            plot title: 'Local scalar drift from the late-time kink'  --
+T1   K    SOUND               cosine matrix C_ij = J_i · J_j / (|J_i| |J_j|), Jacobian J_i
+T2   K    SOUND               obstruction_rank via SVD, count singular values > tol · S_ma
+T3   K    DIMENSIONALLY_VOID  farkas_cone(point) returns 'the negative of the mean gradien
+T4   M    IDENTITY            muon g-2 example demonstrates the geometry: 'a classic singl
+T5   M    UNVERIFIED          'Expected output: at the compromise minimum around a_μ ≈ a_S
+E1   K    UNGROUNDED_NUMBER   sound_horizon:  H = 100 * H0_km_s_Mpc / c_kms * np.sqrt(Esq)
+E2   K    UNGROUNDED_NUMBER   growth_factor's ODE RHS uses idx = np.searchsorted(a_vals, a
+E3   K    DIMENSIONALLY_VOID  def gate_H0(w_func): return 0.0    # placeholder; could be e
+E4   K    UNVERIFIED          DESI covariance: sigma_w0=0.12, sigma_wa=0.45, correlation c
+A1   K    UNVERIFIED          verify_anchors() calls ltl.self_test() and reads 'theta_star
+A2   K    SOUND               evaluate_model uses exec(code, {'np': np}, local_vars) on us
+A3   K    GAMEABLE            gate_H0 = 0.0 inside evaluate_model, mirroring metrology_eng
+A4   M    IDENTITY            'The module is now live. You can immediately hand a task to 
+C1   K    SOUND               35-form shape library covering monotone, saturating, resonan
+C2   K    VERIFIED            'on white noise it WILL return a confident match'
+C3   K    SOUND               5-step gate: (1) AIC/BIC not correlation; (2) null-run on wh
+C4   M    SOUND               '#2 is the one everyone skips and the only one that makes th
+C5   K    VERIFIED            Warning: 'over a one-sided interval these [power/exp/stretch
+
+  {'VERIFIED': 3, 'UNGROUNDED_NUMBER': 4, 'SIGN_BACKWARDS': 1, 'GAMEABLE': 2, 'SOUND': 6, 'DIMENSIONALLY_VOID': 2, 'IDENTITY': 2, 'UNVERIFIED': 3}
+  attribution: {'K': 18, 'M': 5}  (K = operational content; M = framing prose)
+
+  BY PIECE  ---------------------------------------
+  D  local_scalar_drift.py                         5 claims  4 broken   -> REJECT
+  T  tension_geometry.py + muon g-2 demo           5 claims  3 broken   -> REJECT
+  E  metrology_engine.py                           4 claims  4 broken   -> REJECT
+  A  ai_api.py + autonomous_search.py              4 claims  3 broken   -> REJECT
+  C  CROSS_DOMAIN_ARCHETYPES v0                    5 claims  0 broken   -> SHIP
+
+  HEADLINES
+    D. local_scalar_drift.py IS BROKEN: two compounding unit
+       bugs make the drift prefactor 1.23e24× too small.  β
+       required for α detection reads 4e17 (absurd) when the
+       correct answer is 3e-7.  DO NOT LAND without fixing D2, D3.
+
+    E. metrology_engine.py sound_horizon has a factor-100 H0
+       error, producing r_s ≈ 1.5 Mpc where Planck is 147 Mpc.
+       Its ODE growth_factor also uses grid-snapped RHS values
+       under solve_ivp, giving uncontrolled numerical error.
+       DO NOT LAND.
+
+    A. ai_api.py depends on functions the paste proposes to add
+       to late_trigger_lens but hasn't landed yet, and its H0
+       gate is identically zero -- Bayesian optimization over
+       this API silently drops one of four gates.  DO NOT LAND
+       until A1 and A3 are fixed.
+
+    T. tension_geometry.py has a sound core (cosine matrix +
+       SVD rank) but misnames a heuristic as 'Farkas cone' and
+       demonstrates itself in 1D where the geometry is trivial.
+       PARTIAL LAND: extract the core, rename the misnomer,
+       replace the demo with the 3D DESI/σ8/CMB case from
+       energy/'s DP-9.
+
+    C. CROSS_DOMAIN_ARCHETYPES v0 SHIPS.  It's the only piece
+       that arrives with its own honesty gate built in and
+       clearly labeled 'do not skip.'  Landed as
+       null-harness/archetype_library.py with the null-run
+       gate ENFORCED (raises if a match is claimed without a
+       null distribution to beat).

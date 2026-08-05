@@ -1,0 +1,51 @@
+ok _t_gate_enforced_no_null_raises
+ok _t_gate_enforced_wrong_N_raises
+ok _t_real_signal_beats_null
+ok _t_white_noise_does_not_beat_null
+all pass
+
+======================================================================
+Demo A: real power-law signal, y = 2·x^1.5 + noise
+======================================================================
+Null (N=40, 100 draws, 24 forms): best-R² 95% = 0.273, 99% = 0.342, max = 0.343
+Holdout fraction: 30%
+
+rank archetype               R2_in  R2_out       AIC   p_null    p_eff
+----------------------------------------------------------------------
+1    critical_scaling        0.999   1.000   -173.03    0.000    0.000
+2    power_law               0.999   1.000   -174.43    0.000    0.000
+3    one_over_f              0.999   1.000   -174.43    0.000    0.000
+
+Reading:
+  * p_null  < 0.05 → top match beats what the library gets on noise
+  * p_eff   < 0.05 → survives the trials-factor bound (Bonferroni)
+  * R2_out ≥ R2_in → generalizes to held-out points (not memorized)
+  * The paste's item #5 (parameter plausibility) is domain-specific;
+    inspect `params` against physical priors yourself.
+
+======================================================================
+Demo B: pure white noise, N=40  (the paste's failure mode)
+======================================================================
+Null (N=40, 100 draws, 24 forms): best-R² 95% = 0.273, 99% = 0.342, max = 0.343
+Holdout fraction: 30%
+
+rank archetype               R2_in  R2_out       AIC   p_null    p_eff
+----------------------------------------------------------------------
+1    damped_oscillator       0.314  -1.233    -10.41    0.030    0.720
+2    biexponential           0.107  -0.741     -3.02    0.660    1.000
+3    bass_diffusion          0.093  -0.386     -4.59    0.690    1.000
+
+Reading:
+  * p_null  < 0.05 → top match beats what the library gets on noise
+  * p_eff   < 0.05 → survives the trials-factor bound (Bonferroni)
+  * R2_out ≥ R2_in → generalizes to held-out points (not memorized)
+  * The paste's item #5 (parameter plausibility) is domain-specific;
+    inspect `params` against physical priors yourself.
+
+Reading of Demo B: the noise still gets a non-trivial top match
+(R²_in ≈ 0.3), but:
+  * p_effective under trials factor exceeds 0.05
+  * R²_out_of_sample is NEGATIVE -- the fit did not generalize
+Either signal alone is enough to reject the match.  The paste's
+warning ('on white noise it WILL return a confident match') is
+exactly what the top row shows without the gate.
