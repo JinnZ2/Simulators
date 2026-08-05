@@ -700,6 +700,87 @@ underneath).
   with cortisol falling as oxytocin rises; Cartesian ~0.37 vs
   Relational ~0.60-0.70 in the changing environment;
   ARCHITECTURE.md §10 harsh-vs-nurturing quantitative claims).
+  **Concrete NEMGA substrate:** `geometric_rag/` (subfolder) —
+  single-file numpy demo instantiating the retrieval architecture
+  proposed in `research_context.md`. Two classes on a shared toy
+  corpus: `StandardRAG` (flat cosine similarity, no verification)
+  vs `GeometricNeuroSymbolicRAG` (`Hyperedge`+`ManifoldPoint`
+  hypergraph on a curved manifold, curvature-modulated attention
+  kernel, structural propagation along hyperedges, symbolic
+  verification of the retrieved subgraph, plus somatic-coupling
+  knobs `confusion_level` / `pain_level`). Demo shows the load-
+  bearing contrast: Standard RAG returns aspirin+bleeding as top
+  result with no signal; Geometric RAG catches the contradiction
+  via a `contradicts` hyperedge and prefixes the answer
+  `(Verification failed: ...)`. Under `confusion=0.8, pain=0.7`
+  the top attention score jumps ~0.225 → ~1.001 and spread widens
+  — same manifold, same query, different retrieval shape because
+  the "body" is stressed. Same envelope shape (`verification`,
+  `coupling`, `answer`) as the framework's `Signal` dataclasses in
+  `pain_as_sensor.py` and `social_pain_sensors.py` — the fourth
+  structural convergence with the framework's triadic-sensor
+  pattern (noted in notes.md §23). Same scaffolding-becoming-
+  substrate posture as arch_garden: hash-seeded random embeddings,
+  two-rule verification layer, `I` metric tensor — all declared
+  under "What this is NOT." Non-stdlib: `numpy`. Sample output in
+  `geometric_rag/samples/demo_output.sample.txt`.
+- `engine-boiler-guide/` — Single-file offline mobile app for
+  triaging engine and boiler problems in the field. Four-screen
+  decision flow: symptom → machine → era → filtered checklist.
+  Ten symptom paths (won't start, hard start, starts then dies,
+  runs rough, smoking, overheating, no power, backfires, surges,
+  boiler/burner problem), seven machine types (tractor, car/truck,
+  lawn mower, boiler, chainsaw, pump/generator, other), four eras
+  (1800-1940 / 1940-1980 / 1980-2000 / 2000-now). ~130 individual
+  checks each tagged with applicable machine/era combos; only
+  matching checks show. Single HTML file, no dependencies, no
+  state saved, touch targets sized for gloved hands. Different
+  genre from the simulators — a practical field tool, not a sim.
+  CC0.
+- `field-fabrication-guide/` — Single-file offline mobile app for
+  making precision tools and processing raw materials from scratch.
+  Ten sections navigable from a two-column menu: **Lime** (burning
+  limestone at 825-900 C, slaking, three lime types, whitewash),
+  **Ammonia** (field production from urine / fermented waste,
+  optional distillation, dilution ratios), **Aluminum Smelting**
+  (scrap identification by source, furnace types, crucibles, green
+  sand / lost foam / investment molds), **Straight Rules** (three-
+  plate method for generating flatness from nothing, scraping),
+  **Squares** (3-4-5 / Thales for 90° from scratch, flip test),
+  **Levels** (spirit-vial construction, the water level accurate
+  to 1/8" over 100 ft), **Plumb Bobs** (casting + center-of-mass
+  tuning), **Sextants** (double reflection, arc graduation,
+  vernier, noon latitude), **Dividers & Calipers** (forging from
+  scrap steel), **Angles & Protractors** (geometric construction
+  more accurate than measurement). Each section: data cards,
+  procedure steps with why/how notes, warning/tip callouts,
+  material trade-off tables. Same visual system as
+  `fuel-independence-guide/`. Single HTML file. CC0.
+- `fuel-independence-guide/` — Single-file offline mobile app for
+  keeping engines running when the fuel supply chain stops. Seven
+  sections: **Decision Chart** (what you have + engine type →
+  which solution), **Wood Gasifier** (Imbert downdraft dimensioned
+  for 50-100 hp tractor, fire tube / tuyere ring / reduction zone
+  / grate / condensate trap / filter train, dual-fuel operation
+  with 10-20% pilot diesel on compression-ignition engines),
+  **Biodiesel (2-Stage)** (acid esterification stage that lets
+  rancid oil become biodiesel instead of soap; 5 g NaOH + 200 mL
+  methanol per liter of oil; wash, dry, winterize), **Waste Motor
+  Oil** (settle/decant/filter + scrap-built drum-and-cone
+  centrifuge; blending ratios for summer diesel), **Cold Diesel
+  Ops** (fuel gelling table down to -60 F, coolant-loop tank
+  heating, filter heating, starting aids with the ether-lock
+  warning), **Alcohol Fuels** (methanol from hardwood via
+  destructive distillation, ethanol by fermentation/distillation/
+  drying, carb + timing + lubrication mods for gas engines),
+  **Safety** (CO from wood gas, methanol toxicity with ethanol as
+  antidote, ether pool-ignition, lithium thermal runaway at -60 F,
+  lye and acid handling). Named benchmarks throughout — kerosene
+  cloud point -40 F, wood gas 20-30% CO, 1 kg dry hardwood →
+  10-20 mL methanol — so setups can be sanity-checked, not just
+  "should work." Same visual system as `field-fabrication-guide/`.
+  Together the three guides cover: **diagnose it** (engine-boiler)
+  → **make it** (fabrication) → **fuel it** (this one). CC0.
 - `inverseminar/` — Micro-inverseminar as a single stdlib-only script
   (`inverseminar.py`). One artifact, one reconstruction, one
   correction; ~60s per round. Runs the Nature Physics inverseminar
