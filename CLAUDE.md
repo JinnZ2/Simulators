@@ -600,7 +600,27 @@ underneath).
   lines 505-506); other 8 shipped .py files run on 3.11.
   All FILES DELIVERED code + docs now landed; only the PNG
   visualizations remain outside scope. 15 files total in
-  `relational/`.
+  `relational/`. **Forward-looking companion:** `proposal.md` (16
+  files total now) surveys ten avenues for taking the framework
+  from scaffold to real: (1) phones as the most-instrumented
+  altricial system, (2) real sensor packages for the ontological
+  protector, (3) altricial robotics as the direct fit (with a nod
+  to Friston active-inference), (4) AI training governance
+  (`TrainingCouncil` gating checkpoints), (5) clinical / therapy as
+  the framework's native domain, (6) education (confusion spectrum
+  as Vygotsky's ZPD), (7) ecology / land management (councils at
+  community scale, resonance with indigenous land practice), (8)
+  elder care and dementia (target-adjustment-as-care), (9)
+  distributed systems / SRE (Council of Protectors as ops layer),
+  plus (10) six shorter entries (community governance, group
+  therapy, agricultural cooperatives, peer-support communities,
+  long-form journalism, municipal infrastructure). Each of the
+  first nine avenues is specified against the same five-element
+  template — three domains, five protectors, birth mode, pain
+  signal, brake — with what already exists in the domain, what the
+  framework contributes, what remains hard, and the cheapest first
+  prototype. Not commitments; specifications for anyone who wants
+  to bring the body.
 - `inverseminar/` — Micro-inverseminar as a single stdlib-only script
   (`inverseminar.py`). One artifact, one reconstruction, one
   correction; ~60s per round. Runs the Nature Physics inverseminar
