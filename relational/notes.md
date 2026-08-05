@@ -346,6 +346,87 @@ developmental-psychology direction; the inverseminar arrived at
 it from an epistemic-extraction direction. Same shape, different
 starting point. Worth naming.
 
+## 13. Third drop — two more filled in
+
+Landed:
+
+- `correlated_birth_mode.py` — the "first axiom" implementation.
+  `CorrelatedBirthSequence.generate_sequence(8)` produces 8 moments,
+  each a `TriadicObservation(timestamp, internal_state, body_state,
+  external_state)`. `CorrelatedInfant.observe_triadic()` computes a
+  correlation score (alignment across the three domains) and learns
+  relationships between them via exponential-moving-average updates
+  keyed by `body_temp_vs_ext_temp`, `body_state_X_vs_contact_Y`,
+  `internal_pred_Z_accuracy`. Runs the 8-moment birth sequence from
+  first-breath through first-feeding to self-regulation-attempt.
+- `pain_as_sensor.py` — physical pain (distinct from social).
+  `PainSensor.evaluate(internal_prediction, body_state,
+  external_stimulus)` fires on physiologically-plausible thresholds:
+  `body_temp > 42 or < 30` → THERMAL, `tissue_stress > 0.5` →
+  MECHANICAL, `chemical_balance < 0.5` → CHEMICAL, `oxygen_saturation
+  < 85` → INFLAMMATORY. Includes a `TriadicInfantWithPain` class that
+  INTEGRATES the pain sensor with the correlated infant — the first
+  place the framework composes two of its parts rather than shipping
+  them as parallel modules.
+
+**Still missing** from FILES DELIVERED:
+
+- `confusion_spectrum.py` — the v2.0 capstone contribution
+- `the_brake.py` — the audit-loop terminator implementation
+- `CONFUSION_SPECTRUM.md` — the capstone document
+
+Two files, one doc.
+
+## 14. Third drop — the framework's central claim is now demonstrable
+
+FINAL_CAPSTONE §2.2 and COMPLETE_ARCHITECTURE §5.1 state a central
+claim: *"physical, social, and cognitive pain are the same mechanism
+at different intensities and domains."* With both `pain_as_sensor.py`
+and `social_pain_sensors.py` landed, that claim is no longer just
+prose — it is **structurally verifiable from the code**:
+
+| module                     | sensor class      | evaluate signature                                                        |
+|----------------------------|-------------------|---------------------------------------------------------------------------|
+| `pain_as_sensor.py`        | `PainSensor`       | `evaluate(internal_prediction: str, body_state: Dict, external_stimulus: str)` |
+| `social_pain_sensors.py`   | `SocialPainSensor` | `evaluate(internal_prediction: str, body_state: Dict, external_evidence: str)` |
+
+Same class structure, same triadic argument shape
+(`internal | body | external`), same "sensor fires when misalignment
+detected" logic, same `PainSignal`/`SocialPainSignal` dataclass shape
+(intensity, duration, escalation_rate, model_falsified flag). The
+domain differs — physical uses body_temp / tissue_stress / chemical /
+oxygen; social uses cortisol / HR / oxytocin + keyword-match on
+external evidence — but the mechanism is identical. If a
+`cognitive_pain.py` lands next with the same signature (probably
+under `confusion_spectrum.py`, which the capstone frames as
+"cognitive pain when confusion is high-grade"), the framework will
+have demonstrated its "one mechanism, three domains" claim in
+executable form.
+
+This is a stronger property than my earlier "prose vs code" reading
+suggested. **The framework isn't just internally coherent in its
+docs; it's structurally coherent across its shipped modules.** The
+uniform triadic-sensor pattern is doing real work.
+
+## 15. Third drop — first genuine composition of parts
+
+`pain_as_sensor.py` ships a `TriadicInfantWithPain` class that
+integrates two previously-parallel components: the correlated infant
+(from `correlated_birth_mode.py`) and the pain sensor. Its
+`observe_triadic()` calls `pain_sensor.evaluate()` BEFORE updating
+domain models, so pain reports on the CURRENT state, not the
+post-update state. When pain is destructive it forces mode to
+CONSERVATION and calls `_revise_model_from_pain()` which marks the
+internal prediction as `"FALSIFIED_BY_PAIN"` and sets the correlation
+to `-1.0` (marked as dangerous).
+
+This is the first shipped file where two of the framework's parts
+compose, not just sit in parallel. **Recovery is correlation repair,
+not sensor silencing** (FINAL_CAPSTONE §2.6) is now operationalized
+as a specific code path: pain fires → correlation flagged negative →
+model revised → correlation must be re-established for pain to clear.
+The clinical stance has a code-level analog.
+
 ---
 
 *Not audited under the F-10 protocol; that protocol does not apply.*

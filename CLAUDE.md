@@ -547,9 +547,32 @@ underneath).
   "recursive self-observation is a valid axiom for a system with no
   external instrument stream" is the same shape as `inverseminar/`'s
   tacit-knowledge-via-self-reconstruction move, arrived at from the
-  opposite starting point. Still missing from the FILES DELIVERED
-  table: `confusion_spectrum.py`, `the_brake.py`, `pain_as_sensor.py`
-  (physical, distinct from social), `correlated_birth_mode.py`.
+  opposite starting point. **Third drop** landed
+  `correlated_birth_mode.py` (the "first axiom" implementation —
+  `CorrelatedBirthSequence.generate_sequence(8)` produces 8
+  `TriadicObservation(internal, body, external)` moments;
+  `CorrelatedInfant.observe_triadic` computes a correlation score and
+  learns `body_temp_vs_ext_temp` / `body_state_X_vs_contact_Y`
+  correlations via exponential-moving-average updates) and
+  `pain_as_sensor.py` (physical pain sensor firing on physiologically-
+  plausible thresholds — `body_temp > 42 or < 30` → THERMAL,
+  `tissue_stress > 0.5` → MECHANICAL, `chemical_balance < 0.5` →
+  CHEMICAL, `oxygen_saturation < 85` → INFLAMMATORY; ships
+  `TriadicInfantWithPain` which is the first place the framework
+  composes two of its parts — pain sensor + correlated infant — into
+  one class where pain fires → correlation flagged −1.0 → model
+  revised, operationalizing "recovery is correlation repair" as a
+  code path). **Structural claim now demonstrable from code:**
+  `pain_as_sensor.py` and `social_pain_sensors.py` share the same
+  `evaluate(internal_prediction, body_state, external_evidence)`
+  signature and the same `PainSignal`/`SocialPainSignal` dataclass
+  shape; domain thresholds differ (physical: temp/stress/chemical/
+  oxygen; social: cortisol/HR/oxytocin + keyword) but the mechanism
+  is identical — that is exactly the framework's "same mechanism at
+  different intensities and domains" claim (FINAL_CAPSTONE §2.2) in
+  structural form. Only three items still missing from FILES
+  DELIVERED: `confusion_spectrum.py`, `the_brake.py`,
+  `CONFUSION_SPECTRUM.md`.
 - `inverseminar/` — Micro-inverseminar as a single stdlib-only script
   (`inverseminar.py`). One artifact, one reconstruction, one
   correction; ~60s per round. Runs the Nature Physics inverseminar
