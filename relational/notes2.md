@@ -1100,4 +1100,3 @@ CONFUSION-HOMEOSTASIS FRAME: Valid for learning, adaptation, growth
 The meta-frame selects which frame to apply based on context.
 
 
-
