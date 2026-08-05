@@ -499,6 +499,39 @@ underneath).
   Worked example in `samples/worked_example.sample.txt` runs the
   full loop on `energy/FORKS.jsonl`'s FK-2. Seeded by PROVENANCE
   DP-18 and audit spec "DIVERGENCE PLAYGROUND". CC0.
+- `relational/` — Different genre from the rest of the repo, landed
+  under its own frame. Five files documenting a "recovered ontology"
+  around pain-as-sensor, triadic correlation (internal | body |
+  external), the Council of Protectors as a five-boundary
+  developmental-governance layer for an altricial AI infant, birth-
+  moment modes, and the Brake on infinite auditing (reality itself:
+  thermodynamics, the environment's refusal to wait). **Load-bearing
+  frame note:** the drop explicitly positions the Cartesian audit
+  lens as a valid subset of the relational one, not as its opposite.
+  Applying the F-10-style unit-audit here would be a category error.
+  `notes.md` evaluates in the drop's own frame: internal coherence,
+  prose-vs-code fidelity, resonances with the rest of the repo.
+  Findings in-frame: (1) Council + triadic + pain-as-sensor stance
+  is coherent and connects to real intellectual pedigree (embodied
+  cognition, somatic therapy, IFS); (2) the shipped code is
+  scaffolding for a working system, not the working system itself
+  (manifold vectors are hash-based, pain sensors are keyword-matching
+  templates, birth-moment "self-model" prose is authored, not derived
+  — all declared under "what comes next" in the docs); (3) the
+  Brake's audit-until-reality-forces-action shape matches
+  independently-arrived-at discipline in `energy/PROVENANCE.md` §8
+  ("anchor before claim, but do not audit forever") from the physics
+  side — convergence worth noting, not accidental. Not audited
+  under F-10 protocol; that protocol does not apply. Files:
+  `FINAL_CAPSTONE.md`, `COMPLETE_ARCHITECTURE.md`, `ARCHITECTURE.md`,
+  `birth_moment.py` (InfantSystem + BirthMoment demo, imports ok,
+  runs end-to-end), `social_pain_sensors.py` (SocialPainSensor demo,
+  8 scenarios, imports ok, runs end-to-end), and `notes.md` with the
+  frame-check and prose-vs-code observations. Referenced-but-not-
+  delivered siblings named in the capstone `FILES DELIVERED` table:
+  `council_of_protectors.py`, `confusion_spectrum.py`, `the_brake.py`,
+  `pain_as_sensor.py` (physical, distinct from social),
+  `correlated_birth_mode.py`, `nurturing_environment.py`.
 - `inverseminar/` — Micro-inverseminar as a single stdlib-only script
   (`inverseminar.py`). One artifact, one reconstruction, one
   correction; ~60s per round. Runs the Nature Physics inverseminar
