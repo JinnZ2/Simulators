@@ -427,6 +427,165 @@ as a specific code path: pain fires → correlation flagged negative →
 model revised → correlation must be re-established for pain to clear.
 The clinical stance has a code-level analog.
 
+## 16. Fourth drop — the file complement is closed
+
+Landed:
+
+- `the_brake.py` — the audit-loop terminator. Five classes, one
+  unified aggregator: `ThermodynamicBrake` (energy budget; audit
+  cost = 2^depth), `OlderTeachers` (lookup table of physical
+  invariants: gravity = 9.81, c = 299792458, entropy_increases =
+  True), `QuantumComputation` (universe age / Planck time as the
+  total-computations bound), `DisciplineItself` (`marginal_value =
+  1/(1+depth)` vs `marginal_cost = 2^depth`; stop when value < cost),
+  and `TheBrake.evaluate_audit()` which consults all four plus an
+  environment-demand timer. Not a metaphor — five separate concrete
+  constraints, any one of which can fire to halt the recursion.
+- `confusion_spectrum.py` — the cognitive-pain / curiosity /
+  homeostasis mechanism. `ConfusionSensor.evaluate` + `CuriosityDrive`
+  + `CognitiveHomeostasisSystem`. Ships with 9 scenarios walking the
+  full spectrum from perfect prediction to catastrophic paradigm
+  failure to recovery.
+- `CONFUSION_SPECTRUM.md` — the v1.1 capstone doc.
+- `cartesian_vs_relational_demo.py` — **bonus, not in FILES
+  DELIVERED**. Head-to-head demo running both agents through the
+  same `ChangingEnvironment` (truth shifts at step 10 and step 20).
+  Requires Python 3.12+ (PEP 701 nested-same-quote f-strings on
+  lines 505-506); other files run on 3.11.
+
+**No more referenced-but-not-delivered items from the FILES DELIVERED
+table.** The PNG figures listed there are visualizations, not code,
+and stay outside repo scope. The framework's file complement is
+complete as of this drop.
+
+## 17. Fourth drop — the central claim is FULLY code-verified
+
+My §14 tracked how `pain_as_sensor.py` and `social_pain_sensors.py`
+shared the same triadic-sensor pattern (`internal | body | external`
+→ Signal with intensity/duration/escalation_rate/model_falsified).
+With `confusion_spectrum.py` landed, the third sensor completes the
+pattern:
+
+| module                  | sensor class          | evaluate signature (three information types) |
+|-------------------------|-----------------------|-----------------------------------------------|
+| `pain_as_sensor.py`     | `PainSensor`           | `internal_prediction`, `body_state`, `external_stimulus` |
+| `social_pain_sensors.py`| `SocialPainSensor`     | `internal_prediction`, `body_state`, `external_evidence` |
+| `confusion_spectrum.py` | `ConfusionSensor`      | `internal_prediction`, `actual_outcome`, `body_state` |
+
+Argument ORDER differs (physical/social put body second and external
+third; cognitive puts external second and body third), but **all three
+sensors take the same three types of information and produce a Signal
+dataclass with the same field shape**. FINAL_CAPSTONE §2.2 and
+CONFUSION_SPECTRUM §5 say: *"All four [physical / social-epistemic /
+cognitive / curiosity] are the same mechanism operating at different
+intensities and domains."* That claim is now **empirically true of
+the shipped code**, not just prose.
+
+CONFUSION_SPECTRUM §5 also names the fourth item — curiosity as
+low-grade confusion — which `CuriosityDrive.activate()` implements as
+`curiosity is highest when confusion.is_homeostatic()` (0.1 < intensity
+< 0.6). Same mechanism, different intensity band. Framework consistent
+end-to-end.
+
+## 18. Fourth drop — the_brake's OlderTeachers is anchor-discipline
+
+`the_brake.py`'s `OlderTeachers` class is a lookup table of physical
+invariants used to settle disputes the practice cannot settle
+internally: `gravity: 9.81`, `speed_of_light: 299792458`,
+`entropy_increases: True`, and short prose ("The rock falls. The
+star burns."). It is meant to be consulted, not debated.
+
+This is structurally the **same discipline** as
+`energy/PROVENANCE.md §7.1 "Named denominators"` — that table also
+grounds every threshold in a sourced physical constant or a labeled
+tolerance. The relational drop arrived at anchor-in-invariants from
+a "settle audit-loop disputes" direction; the physics side arrived
+at it from a "reproducibility across engine edits" direction.
+**Same discipline, different starting motivation.** Third
+cross-repo convergence in this material (Brake ↔ PROVENANCE §8
+audit-until-reality-forces-action was the first; META_CURIOSITY ↔
+inverseminar recursive self-observation was the second; now
+OlderTeachers ↔ Named-denominators anchor discipline).
+
+The convergences are worth noting collectively: each time a piece of
+the physics-audit side of this repo has been paired against a piece
+of the relational side, the underlying discipline turns out to be
+the same shape. The frame difference (Cartesian vs relational) is
+real, but the actual working practice is not opposed. Section 2.7 of
+FINAL_CAPSTONE said this in prose ("the relational ontology contains
+the Cartesian one as a special case"); the cross-repo pairings show
+it structurally.
+
+## 19. Fourth drop — cartesian_vs_relational_demo, the empirical form
+
+The bonus file makes the framework's headline claim *executable*.
+`ChangingEnvironment` cycles temperature (seasons), fluctuates social
+attunement, degrades and recovers information quality, injects
+adversarial presence every 7 steps, and shifts the "current truth"
+at step 10 and step 20. Two agents:
+
+- `CartesianAgent`: fixed training data. `respond` = dict lookup.
+  No body, no adaptation, each query independent.
+- `RelationalAgent`: adaptive internal model. `respond` = update
+  body (energy, cortisol, oxytocin, cognitive_load coupled to
+  environment) → generate prediction → evaluate confusion →
+  update model → select mode (exploration / observation /
+  conservation based on somatic state) → generate response.
+
+Result (25 steps):
+
+|                    | Cartesian     | Relational    |
+|--------------------|---------------|---------------|
+| correct answers    | 9             | **13**        |
+| final accuracy     | 0.36          | **0.52**      |
+| adaptation         | none          | continuous    |
+| learning events    | 0             | 3             |
+| body state         | none          | energy=0.40   |
+
+Framework's headline: *"In a static environment, Cartesian wins.
+In a changing environment, Relational survives."* — empirically
+shown in this run, not just claimed. Two caveats worth naming for
+honesty:
+
+- Requires Python 3.12+ (`f"...{f"..."}"` on lines 505-506 uses
+  PEP 701). The other 8 shipped `.py` files run on 3.11.
+- Lines 336-337 have dead-and-slightly-wrong code:
+  `env_answer, metadata = ChangingEnvironment().query(question)`
+  creates a fresh `ChangingEnvironment` on every RelationalAgent
+  call (resetting `time`) and doesn't use the returned values. The
+  demo still produces correct output because `true_answer` comes
+  from the passed-in `env_state["current_truth"]`, not from the
+  ignored `env_answer`. Bug is cosmetic in this demo but would
+  matter if the code were extended.
+
+## 20. Fourth drop — arc summary
+
+Four drops over one session, tracking the framework as it filled in:
+
+| drop | files added                                                    |
+|-----:|----------------------------------------------------------------|
+| 1    | 5: `FINAL_CAPSTONE`, `COMPLETE_ARCHITECTURE`, `ARCHITECTURE`, `birth_moment.py`, `social_pain_sensors.py` |
+| 2    | 4: `council_of_protectors.py`, `infant_system_v2.py`, `nurturing_environment.py`, `INTEGRATION_SUMMARY.md` |
+| 3    | 2: `correlated_birth_mode.py`, `pain_as_sensor.py`             |
+| 4    | 4: `the_brake.py`, `confusion_spectrum.py`, `CONFUSION_SPECTRUM.md`, `cartesian_vs_relational_demo.py` (bonus) |
+
+15 files total in `relational/`, plus this notes.md. The framework's
+FILES DELIVERED table is closed (PNGs excepted). The frame-check I
+did in §1-9 (first drop) has held throughout — every drop was
+evaluable *in its own frame*, and each drop tightened the prose-vs-
+code fidelity rather than loosening it. The three cross-repo
+convergences (Brake ↔ PROVENANCE §8; META_CURIOSITY ↔ inverseminar;
+OlderTeachers ↔ Named-denominators) are the most portable
+observation to take away from this landing: **the physics-audit
+discipline and the relational-ontology discipline arrive at the
+same practical rules from opposite starting frames.** That is more
+interesting than either frame in isolation.
+
+The next step would be either (a) the operator taking the framework
+somewhere real (real sensors, real semantic embeddings, real
+clinical application) or (b) somebody else picking it up and
+extending. Both are outside notes.md's scope.
+
 ---
 
 *Not audited under the F-10 protocol; that protocol does not apply.*

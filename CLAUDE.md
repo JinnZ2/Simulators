@@ -570,9 +570,37 @@ underneath).
   oxygen; social: cortisol/HR/oxytocin + keyword) but the mechanism
   is identical — that is exactly the framework's "same mechanism at
   different intensities and domains" claim (FINAL_CAPSTONE §2.2) in
-  structural form. Only three items still missing from FILES
-  DELIVERED: `confusion_spectrum.py`, `the_brake.py`,
-  `CONFUSION_SPECTRUM.md`.
+  structural form. **Fourth drop** closes the file complement:
+  `the_brake.py` (five separate concrete brake classes —
+  `ThermodynamicBrake` with audit-cost=2^depth, `OlderTeachers`
+  as a lookup table of physical invariants, `QuantumComputation`
+  bound = universe_age/planck_time, `DisciplineItself` with
+  marginal_value = 1/(1+depth) vs marginal_cost = 2^depth,
+  unified in `TheBrake.evaluate_audit`); `confusion_spectrum.py`
+  (`ConfusionSensor` + `CuriosityDrive` + `CognitiveHomeostasisSystem`
+  implementing the cognitive-pain third leg of the sensor triad);
+  `CONFUSION_SPECTRUM.md` (v1.1 capstone doc); and a bonus
+  `cartesian_vs_relational_demo.py` (not in FILES DELIVERED table)
+  that runs both agent types through a `ChangingEnvironment`
+  where the "current truth" shifts at step 10 and step 20 —
+  final accuracies 0.36 (Cartesian) vs 0.52 (Relational),
+  empirically showing the framework's headline "in a changing
+  environment, Relational survives" claim. **Central claim now
+  fully code-verified across all three sensors** (physical +
+  social + cognitive share the same triadic-sensor pattern:
+  `internal | body | external` → Signal dataclass with
+  intensity/duration/escalation_rate/model_falsified). **Third
+  cross-repo convergence flagged in notes.md §18:** `the_brake`'s
+  `OlderTeachers` class (lookup table of physical invariants used
+  to settle audit-loop disputes) is the same anchor discipline as
+  `energy/PROVENANCE.md §7.1` "Named denominators" (every threshold
+  grounded in a sourced physical constant). Arrived at from
+  opposite starting motivations. `cartesian_vs_relational_demo.py`
+  requires Python 3.12+ (PEP 701 nested-same-quote f-strings on
+  lines 505-506); other 8 shipped .py files run on 3.11.
+  All FILES DELIVERED code + docs now landed; only the PNG
+  visualizations remain outside scope. 15 files total in
+  `relational/`.
 - `inverseminar/` — Micro-inverseminar as a single stdlib-only script
   (`inverseminar.py`). One artifact, one reconstruction, one
   correction; ~60s per round. Runs the Nature Physics inverseminar
