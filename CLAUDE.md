@@ -779,8 +779,45 @@ underneath).
   cloud point -40 F, wood gas 20-30% CO, 1 kg dry hardwood →
   10-20 mL methanol — so setups can be sanity-checked, not just
   "should work." Same visual system as `field-fabrication-guide/`.
-  Together the three guides cover: **diagnose it** (engine-boiler)
-  → **make it** (fabrication) → **fuel it** (this one). CC0.
+  Together with `cold-weather-battery-guide/` the four guides cover:
+  **diagnose it** (engine-boiler) → **make it** (fabrication) →
+  **fuel it** (this one) → **power it** (cold-weather battery). CC0.
+- `cold-weather-battery-guide/` — Fourth offline mobile app in the
+  practical-field-reference family. Sleeper-cab Li-ion that has to
+  work at both -60 F winter mornings and 125 F summer sun, so both
+  ends of the envelope are addressed. Eleven HTML sections:
+  **Overview** (cold-end failure hierarchy — electrolyte transport
+  ~100× loss → SEI/Rct ~1000× → Li plating → freeze-out; hot-end
+  is shade+emissivity, not chemistry), **Chemistry Options**
+  (Option A liquefied fluoromethane = skip, Option B LATP solid
+  state, Option C Mars-rover ester recommended for fastest path),
+  **Ester Electrolyte** (1M LiPF6 in EC:DMC:EA 1:1:2 + 2-3% VC,
+  drying hardware-store EA over 3Å sieves, LiPF6 HF hazard),
+  **LATP Solid State** (Li₁.₃Al₀.₃Ti₁.₇(PO₄)₃ from scrap:
+  cordierite from cat converters — the highest-leverage item —
+  spark plug alumina, ABC-powder phosphate, welding-flux TiO₂,
+  pottery Li₂CO₃; skip LLZO / LAGP / sulfide argyrodites),
+  **Kiln** (Fresnel solar cavity with SiC susceptor + thermal
+  mass, microwave + SiC backup for nights, sinter at 900-1000 C),
+  **Dry Box** (glove-bin build from plastic tote + PVC gauntlets
+  + welding-gas purge + molecular-sieve tray), **Cell Assembly**
+  (pouch cell from harvested LFP + graphite foils), **Formation
+  Cycling** (5-stage first charge C/50→C/20→C/10→CV that tames
+  ester toward graphite), **Thermal Management** (4-state
+  machine STANDBY/PREHEAT/CHARGE_WAIT/OVERHEAT_PROTECT driving
+  a Fresnel-heated solar block into the battery), **BMS
+  Overview** (pointer to bms/ folder), **Safety** (HF from
+  LiPF6, Fresnel focal-spot burns + retinal damage, CO,
+  methanol, ether pool ignition, Li thermal runaway, caustic
+  chemicals). Plus `bms/bms_1s_basic.ino` (minimal single-cell
+  LFP protection with low-temp charge lockout) and
+  `bms/bms_1s_merged.ino` (adds thermal state machine driving
+  damper servo + PWM fan, predictive sunrise via photoresistor
+  + 30-min stability window, and PIR-triggered safety shutter
+  for the Fresnel focal spot — "jeans protection" earned in
+  singed denim from a solar go-kart incident); `bms/README.md`
+  pin table + calibration + testing protocol + notes on scaling
+  to 4S. Same visual system as the other three guides. CC0.
 - `inverseminar/` — Micro-inverseminar as a single stdlib-only script
   (`inverseminar.py`). One artifact, one reconstruction, one
   correction; ~60s per round. Runs the Nature Physics inverseminar
