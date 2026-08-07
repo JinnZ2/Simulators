@@ -930,6 +930,33 @@ underneath).
   OPEN / FK-6 certificate r̂ RESOLVED / FK-7 D-as-distance STAKED)
   — pluggable into the top-level `divergence-playground/` for
   multi-reader spread analysis.
+- `crossdomain-eval/` — Cross-domain scientific-analysis toolkit
+  (`crossdomain_eval` package + `cdeval` CLI) landed from two
+  coordinated OKComputer drops. **Core package**: `symbolic`
+  (SymPy engine — parse / substitute / solve / differentiate /
+  integrate / evaluate over `EquationSet`), `numerical` (SciPy
+  root_find / solve_ode / optimize), `experiments`
+  (parameter_sweep, sensitivity, propose_experiments full-factorial
+  DOE), `report` (markdown_report + plot_sweep), `cli` with four
+  subcommands (`eval`, `solve`, `sweep`, `doe`), and two
+  `domains/` adapters (`physics.kinematics`/`energy`,
+  `geometry.packing_density`/`tsp_distance_matrix`). **Two
+  coexisting reasoning variants**: `reasoning.py` (default; guarded
+  `eval` with builtins-disabled, tracker returns `None`, check by
+  predicate-name-or-substring, 11 tests) and `reasoning_v2.py`
+  (stricter alternative; `_FORBIDDEN` token-blocklist screening at
+  `add_rule` time, `AssumptionTracker.add` returns int IDs with
+  `retract` + confidence-threshold `check`, `_fired` provenance
+  list in the derived facts, 21 tests). Both variants ship with
+  their own test file; both suites pass together (68 total, 47
+  core + 21 v2). Neither uses full AST-sandboxed `safe_eval` —
+  that design was discussed in the source conversation but not
+  what the zips shipped. Non-stdlib: `sympy` + `numpy` + `scipy` +
+  `matplotlib` (`pytest` under `dev` extra). Same exemption
+  pattern as `energy/`, `play-sims/`, `climate-modeling/`, and
+  `relational/geometric_rag/`. No `CLAIMS.md` /
+  `REFUTATION_PROTOCOL` — this is scaffolding for downstream
+  simulators to use, not a claim-making artifact itself. CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
