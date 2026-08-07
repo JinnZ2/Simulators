@@ -19,7 +19,7 @@ the full safety envelope.
 - `bms/README.md` — hardware pin table, wiring notes, calibration
   procedure, testing steps, notes on scaling to 4S.
 
-## The eleven sections
+## The twelve sections
 
 1. **Overview & Failure Stack** — the cold-end failure hierarchy
    (electrolyte transport → SEI/Rct → Li plating → freeze-out) and
@@ -27,31 +27,38 @@ the full safety envelope.
    a chemistry one.
 2. **Chemistry Options** — decision matrix: liquefied gas (A, skip),
    LATP solid state (B), Mars-rover ester (C).
-3. **Ester Electrolyte (Option C)** — 1 M LiPF6 in EC:DMC:EA (1:1:2)
+3. **Small-Scale Alternative (Pumice)** — Abdulhalikova pumice-stone
+   solid-state cell for emergency lighting and small-device charging.
+   Pumice plates soaked in salt + baking soda; carbon + galvanized
+   electrodes give ~1.5-1.9 V per cell. No dry box, no HF, no kiln —
+   the other end of the scale spectrum from the tractor path. Also
+   flags upcycled paths (yarn nanofiber, biomass electrodes, coffee-
+   ground activated carbon).
+4. **Ester Electrolyte (Option C)** — 1 M LiPF6 in EC:DMC:EA (1:1:2)
    + 2-3% VC. Includes drying hardware-store ethyl acetate over
    3 Å sieves, LiPF6 handling safety, and the home-brew Fischer
    esterification side quest.
-4. **LATP Solid State (Option B)** — target
+5. **LATP Solid State (Option B)** — target
    Li₁.₃Al₀.₃Ti₁.₇(PO₄)₃, scrap precursor stream table (cordierite
    from cat converters, spark plug alumina, ABC-powder phosphate,
    welding-flux TiO₂, pottery Li₂CO₃), and why other solid-state
    families are the wrong choice for this environment.
-5. **Kiln** — Fresnel solar cavity with SiC susceptor + thermal
+6. **Kiln** — Fresnel solar cavity with SiC susceptor + thermal
    mass, and the microwave + SiC backup for nights and overcast.
-6. **Dry Box** — glove-bin build from a plastic storage tote, PVC
+7. **Dry Box** — glove-bin build from a plastic storage tote, PVC
    gauntlet gloves, welding-gas purge, molecular sieve tray,
    cobalt-chloride humidity indicator.
-7. **Cell Assembly** — pouch cell construction with LFP + graphite
+8. **Cell Assembly** — pouch cell construction with LFP + graphite
    from harvested foils, vacuum wetting, tab welding.
-8. **Formation Cycling** — five-stage first charge protocol
+9. **Formation Cycling** — five-stage first charge protocol
    (C/50 → C/20 → C/10 → CV → discharge) that tames the ester
    toward the graphite anode.
-9. **Thermal Management** — solar block preheat, four-state
-   machine (STANDBY / PREHEAT / CHARGE_WAIT / OVERHEAT_PROTECT),
-   scrap actuator options, predictive sunrise.
-10. **BMS Overview** — pointer to the two `.ino` files with pin
+10. **Thermal Management** — solar block preheat, four-state
+    machine (STANDBY / PREHEAT / CHARGE_WAIT / OVERHEAT_PROTECT),
+    scrap actuator options, predictive sunrise.
+11. **BMS Overview** — pointer to the two `.ino` files with pin
     table excerpt and analog-hack fallback.
-11. **Safety** — HF from LiPF6, concentrated sunlight hazards
+12. **Safety** — HF from LiPF6, concentrated sunlight hazards
     (including the PIR shutter requirement), CO, methanol,
     ether pool ignition, lithium thermal runaway, caustic chemicals.
 

@@ -785,12 +785,18 @@ underneath).
 - `cold-weather-battery-guide/` — Fourth offline mobile app in the
   practical-field-reference family. Sleeper-cab Li-ion that has to
   work at both -60 F winter mornings and 125 F summer sun, so both
-  ends of the envelope are addressed. Eleven HTML sections:
+  ends of the envelope are addressed. Twelve HTML sections:
   **Overview** (cold-end failure hierarchy — electrolyte transport
   ~100× loss → SEI/Rct ~1000× → Li plating → freeze-out; hot-end
   is shade+emissivity, not chemistry), **Chemistry Options**
   (Option A liquefied fluoromethane = skip, Option B LATP solid
   state, Option C Mars-rover ester recommended for fastest path),
+  **Small-Scale Alternative** (Abdulhalikova pumice-stone
+  solid-state cell for emergency lighting: pumice soaked in salt
+  + baking soda + carbon/galvanized electrodes = 1.5-1.9 V per
+  cell; also flags yarn nanofiber / biomass electrode / coffee-
+  ground activated carbon upcycled paths — honest scale note
+  that this is emergency-lighting scale, not tractor scale),
   **Ester Electrolyte** (1M LiPF6 in EC:DMC:EA 1:1:2 + 2-3% VC,
   drying hardware-store EA over 3Å sieves, LiPF6 HF hazard),
   **LATP Solid State** (Li₁.₃Al₀.₃Ti₁.₇(PO₄)₃ from scrap:

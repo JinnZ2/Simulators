@@ -73,6 +73,7 @@
   <div class="toc-grid">
     <button class="toc-btn" onclick="showSection('overview')">Overview &amp; Failure Stack</button>
     <button class="toc-btn" onclick="showSection('chemistry')">Chemistry Options</button>
+    <button class="toc-btn" onclick="showSection('pumice')">Small-Scale Alt (Pumice)</button>
     <button class="toc-btn" onclick="showSection('ester')">Ester Electrolyte (Option C)</button>
     <button class="toc-btn" onclick="showSection('latp')">LATP Solid State (Option B)</button>
     <button class="toc-btn" onclick="showSection('kiln')">Kiln (Solar + Microwave)</button>
@@ -154,6 +155,41 @@
     <tr><td>Methyl propionate (MP)</td><td>&minus;88&nbsp;C</td><td>Chem supply; less common in hardware</td></tr>
   </table>
   <p>Purity matters. Water must be below ~20 ppm or the cell dies. Hardware-store EA can be dried over 3&Aring; molecular sieves for a week; see the Ester Electrolyte section for the procedure.</p>
+</div>
+
+<div class="section" id="pumice">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Small-Scale Alternative &mdash; Pumice-Stone Battery</div>
+
+  <div class="note"><strong>Different problem, different tool.</strong> Options A/B/C above are all aimed at the sleeper-cab / tractor scale &mdash; kilowatt-hours of cold-tolerant storage. This section is for the other end of the spectrum: emergency lighting, phone charging, small-device backup. If your actual need is "keep an LED lantern going through a grid-down night," you do not need HF-hazard chemistry or a Fresnel kiln. You need a stone.</div>
+
+  <h3>The pumice battery (Abdulhalikova method)</h3>
+  <p>A documented low-tech solid-state cell that uses porous volcanic rock (pumice) as the electrolyte. The pumice acts as an ionic sponge &mdash; soaked in a salt solution, it conducts between two dissimilar electrodes. No acids, no flammable metals, no dry box.</p>
+
+  <h4>Quick reference</h4>
+  <div class="data-grid">
+    <div class="data-card"><div class="label">Single cell voltage</div><div class="value">~0.5 V (soot / carbon pair)</div></div>
+    <div class="data-card"><div class="label">With galvanized plate</div><div class="value">1.5&ndash;1.9 V</div></div>
+    <div class="data-card"><div class="label">Chemistry</div><div class="value">Salt + baking soda in porous silicate</div></div>
+    <div class="data-card"><div class="label">Use case</div><div class="value">Emergency lighting, small devices</div></div>
+  </div>
+
+  <h4>Build</h4>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Prepare the electrolyte</div><div class="step-desc">Cut pumice into rectangular or oval plates a few millimeters thick. Soak the pieces in a saturated solution of table salt + baking soda (boil for a few minutes to drive it into the pores). Let dry.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Create the electrodes</div><div class="step-desc">Apply a conductive layer to one surface: candle soot, or heavy pencil (graphite) scribbling. Either works &mdash; the graphite acts as the current collector.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Assemble a single cell</div><div class="step-desc">Press a small piece of activated carbon (from a pharmacy) against the carbon-coated side. That single cell reads ~0.5 V. For 1.5&ndash;1.9 V, press a small piece of galvanized metal (galvanized roofing scrap or a strip cut from a tin can) against the opposite side of the pumice.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Chain in series</div><div class="step-desc">Wire several cells positive-to-negative to reach the voltage you need (three cells &asymp; 4.5&ndash;5.7 V is enough to drive a small buck converter for USB charging). Case in folded paper or a plastic box.</div></div></div>
+
+  <div class="tip"><strong>Why this works when the fancy chemistry might not:</strong> no dry-box discipline required, no HF hazard, no sinter cycle, no BMS. If you already have pumice (widely available at pottery / garden / hardware stores as a lightweight aggregate), the whole build is a kitchen-table project. Store the finished cells dry.</div>
+
+  <h3>Other upcycled paths worth knowing about</h3>
+  <ul>
+    <li><strong>Waste acrylic yarn &rarr; ceramic nanofiber:</strong> textile waste can be processed into a ceramic composite nanofiber that acts as a solid electrolyte for lithium cells. Research-grade, but the input is literally clothing.</li>
+    <li><strong>Biomass electrodes:</strong> peanut shells and rice husks can be pyrolyzed into hard-carbon electrode material. Same destructive-distillation logic as the methanol section in <code>../fuel-independence-guide/index.html</code>.</li>
+    <li><strong>Coffee grounds &rarr; activated carbon:</strong> spent grounds carbonized under limited oxygen give a highly conductive activated carbon suitable for electrodes and supercapacitors.</li>
+  </ul>
+
+  <div class="warning"><strong>Honest scale note.</strong> The pumice battery is not going to start a diesel tractor at &minus;60&nbsp;F. It will not power a house for hours. A cell that runs a headlamp for a night is a huge win in an actual emergency, but it is a different order of magnitude from what Options B and C are trying to solve. To match a sleeper-cab pack you still need advanced ceramic electrolytes (NASICON-type sintered at ~1250&nbsp;C), controlled atmospheres, and specialized materials like lithium and cobalt. Right tool for the right load.</div>
 </div>
 
 <div class="section" id="ester">
