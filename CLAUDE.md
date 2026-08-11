@@ -957,6 +957,39 @@ underneath).
   `relational/geometric_rag/`. No `CLAIMS.md` /
   `REFUTATION_PROTOCOL` — this is scaffolding for downstream
   simulators to use, not a claim-making artifact itself. CC0.
+- `fourd-municipal-engine/` — Stdlib-only Python package
+  (`fourd_municipal_engine` + `fourd-municipal-engine` CLI) landed
+  from an OKComputer full-repo build. **Two "4D" ontologies fused
+  in one package** — deliberate, not a naming accident. **4D
+  Language Lens** (D1 Agency Routing / D2 Affective Impedance /
+  D3 Reality Construction / D4 Iconic-Graphic Mass): regex-based,
+  density-normalized (hits per 100 tokens), saturated to [0,1],
+  weighted into a scalar `manipulation_index` + `cognitive_energy`
+  estimate. Two engines: `FourDLens` (fixed thresholds) and
+  `DynamicFourDLens` (genre-calibrated re-weighting via
+  `GENRE_PROFILES` + `ContextRule` — a "critical failure" scores
+  benign in a technical report, loaded in corporate PR). Five
+  shipped genres: general, corporate PR, legal contract, technical
+  report, casual social. **4D Municipal Code Entity** (Density /
+  Design / Delay / Dollars + Temporal + Spatial) — structured
+  dataclass model for ordinance analysis:
+  `MunicipalCodeTranslator` (20+ jargon → plain-English map, fee
+  regex, purpose extractor) + `AdvancedAnalysisPipeline` that
+  wires in `RegulationRootCauseAnalyzer` (public safety /
+  affordable housing / environmental / traffic / economic
+  development intent extraction), `CitationGraph` (federal / state
+  / municipal / industry_standard classification of Section /
+  Chapter / Ordinance / IBC / IRC / ADA / NFPA references),
+  `FeeExplorationEngine` (flat + per-sqft + %-of-valuation
+  + project cost calc), and `AuditEngine` (KPI-target regex,
+  auditability score in [0,1]). CLI with `--genre`,
+  `--deep-analysis`, `--citation`, `--json`, `--file` flags.
+  22 tests all green. MIT per upstream `pyproject.toml`
+  (compatible-per-file with the repo's CC0 default, same pattern
+  as `energy/` modules). No `CLAIMS.md` / `REFUTATION_PROTOCOL` —
+  operational tooling, not a claim-making artifact. Roadmap
+  (upstream): Phase 2 temporal versioning of ordinance amendments,
+  Phase 3 GIS overlay on `spatial_zoning_districts`.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
