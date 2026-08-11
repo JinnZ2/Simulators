@@ -1,0 +1,141 @@
+{
+  "investigation_id": "inv-burnout-latency-001",
+  "proxy_candidate": {
+    "target_variable": "Employee burnout (operationalized: sustained cognitive-emotional exhaustion scale)",
+    "observable_metric": "Median Slack response latency outside core hours (minutes, weekly median)",
+    "claimed_mapping": "Positive monotone: burnout -> withdrawal behavior -> slower voluntary after-hours response"
+  },
+  "phases": {
+    "decomposition": {
+      "alternative_constructs": [
+        "disengagement from employer (not exhaustion)",
+        "boundary-setting / healthy disconnection",
+        "time-zone shifts in team composition"
+      ]
+    },
+    "grounding_chain": {
+      "chain_fidelity": 0.4322,
+      "n_links": 3,
+      "weakest_link": {
+        "name": "burnout->withdrawal",
+        "fidelity": 0.65,
+        "grade": "estimated"
+      },
+      "links": [
+        {
+          "name": "burnout->withdrawal",
+          "fidelity": 0.65,
+          "grade": "estimated",
+          "alternative_causes": [
+            "healthy boundaries",
+            "job dissatisfaction without exhaustion"
+          ]
+        },
+        {
+          "name": "withdrawal->latency",
+          "fidelity": 0.7,
+          "grade": "estimated",
+          "alternative_causes": [
+            "vacation",
+            "focus blocks",
+            "notification settings"
+          ]
+        },
+        {
+          "name": "latency->measurement",
+          "fidelity": 0.95,
+          "grade": "measured",
+          "alternative_causes": [
+            "mobile vs desktop capture asymmetry"
+          ]
+        }
+      ]
+    },
+    "instrument": {
+      "post_experiment": {
+        "bias": -0.05036040594287837,
+        "noise": 0.15194976758098885,
+        "provenance": {
+          "precision": "measured",
+          "noise_floor": "measured",
+          "systematic_bias": "measured"
+        }
+      },
+      "synthetic_recovery": {
+        "bias_error": 0.0003604059428783668,
+        "noise_error": 0.0019497675809888593,
+        "passed": true
+      }
+    },
+    "validity_threats": [
+      {
+        "threat": "construct redefinition",
+        "severity": "high"
+      },
+      {
+        "threat": "Goodhart gaming",
+        "severity": "medium"
+      }
+    ],
+    "experiments": [
+      "exp-synth-burnout-001"
+    ],
+    "calibration": {
+      "method": "isotonic",
+      "ece_before": 0.2286,
+      "ece_after": 0.0277,
+      "improved": true,
+      "params": {
+        "n_knots": 23
+      },
+      "holdout_n": 2000
+    }
+  },
+  "coverage": {
+    "aspects": [
+      {
+        "aspect": "metric capture (log pipeline)",
+        "grade": "measured",
+        "grounding_level": "G1",
+        "upgrade_path": "none needed; periodic pipeline audit"
+      },
+      {
+        "aspect": "instrument bias/noise values",
+        "grade": "measured",
+        "grounding_level": "G3",
+        "upgrade_path": "larger verified-label holdout (actigraphy-linked)"
+      },
+      {
+        "aspect": "burnout->withdrawal mechanism",
+        "grade": "estimated",
+        "grounding_level": "G3",
+        "upgrade_path": "longitudinal within-person study; instrument with exogenous workload shocks"
+      },
+      {
+        "aspect": "construct redefinition risk",
+        "grade": "assumed",
+        "grounding_level": "G4",
+        "upgrade_path": "discriminant validity test vs. boundary-setting scale"
+      },
+      {
+        "aspect": "Goodhart pressure under decision use",
+        "grade": "assumed",
+        "grounding_level": "G4",
+        "upgrade_path": "red-team: announce metric use, measure gaming latency"
+      },
+      {
+        "aspect": "calibration of fidelity scores",
+        "grade": "measured",
+        "grounding_level": "G3",
+        "upgrade_path": "expand holdout; recalibrate quarterly (ECE drift watch)"
+      }
+    ],
+    "grounded_fraction": 0.583,
+    "weakest_aspects": [
+      "construct redefinition risk",
+      "Goodhart pressure under decision use",
+      "burnout->withdrawal mechanism"
+    ],
+    "verdict": "partially grounded"
+  }
+}

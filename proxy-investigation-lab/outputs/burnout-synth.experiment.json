@@ -1,0 +1,25 @@
+{
+  "experiment_id": "exp-synth-burnout-001",
+  "kind": "synthetic_ground_truth",
+  "setup": {
+    "n": 4000,
+    "true_bias": -0.05,
+    "true_noise": 0.15,
+    "confounder_leak": 0.3,
+    "alt_cause_weight": 0.25
+  },
+  "results": {
+    "estimates": {
+      "estimated_bias": -0.05036040594287837,
+      "estimated_noise": 0.15194976758098885,
+      "correlation_obs_latent": 0.8491066284279603,
+      "holdout_n": 1000
+    },
+    "recovery": {
+      "bias_error": 0.0003604059428783668,
+      "noise_error": 0.0019497675809888593,
+      "passed": true
+    }
+  },
+  "timestamp": "2026-08-12T00:00:00Z"
+}

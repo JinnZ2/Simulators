@@ -1,0 +1,22 @@
+{
+  "experiment_id": "exp-goodhart-001",
+  "kind": "synthetic_ground_truth",
+  "setup": {
+    "scenario": "proxy becomes decision target; agents adapt observable only",
+    "n": 3000,
+    "periods": 12,
+    "adapt_rate": 0.35
+  },
+  "results": {
+    "baseline_correlation": 0.904,
+    "gamed_correlation": 0.7126,
+    "fidelity_collapse": 0.1915,
+    "gaming_latency_periods": 12,
+    "detection_surface": {
+      "variance_ratio_top_decile": 0.09077126540438493,
+      "slope_top_vs_bottom": 0.6333546555060985,
+      "interpretation": "gaming flattens the observed-vs-latent slope at the top of the distribution and inflates top-decile variance \u2014 audit there first"
+    }
+  },
+  "timestamp": "2026-08-12T00:00:00Z"
+}

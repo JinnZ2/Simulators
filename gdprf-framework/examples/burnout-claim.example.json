@@ -1,0 +1,136 @@
+{
+  "spec_version": "2.0.0",
+  "claim": {
+    "claim_id": "3f6e2a1c-9b4d-4e8a-a2c1-7d5f0e9b8a11",
+    "domain": "organizational_behavior",
+    "statement": "Employee burnout is rising in the platform engineering team.",
+    "scope": {
+      "temporal_bounds": "2026-Q2 to 2026-Q3",
+      "spatial_bounds": "Platform Engineering org, North America offices + remote",
+      "locality_context": "Post-reorg period following the Q1 infrastructure consolidation"
+    },
+    "confidence_gradient": 0.68,
+    "variance_margin": 0.12,
+    "assigned_proxies": [
+      "a11b2c3d-0001-4e00-9000-aaabbbccc001",
+      "a11b2c3d-0002-4e00-9000-aaabbbccc002"
+    ],
+    "unknown_variable_risk_score": 0.31,
+    "hidden_variable_search": {
+      "triggered": false,
+      "residual_variance_observed": null,
+      "threshold": 0.15,
+      "identification_gate": {
+        "status": "not_triggered",
+        "method": null,
+        "assumptions": []
+      }
+    }
+  },
+  "proxies": [
+    {
+      "proxy_id": "a11b2c3d-0001-4e00-9000-aaabbbccc001",
+      "target_variable": "Employee burnout (unobservable)",
+      "observable_metric": "Median Slack response latency outside core hours",
+      "metrology": {
+        "sensor_type": "collaboration_platform_logs",
+        "precision": 0.9,
+        "noise_floor": 0.15,
+        "systematic_bias": -0.05,
+        "provenance": {
+          "precision_source": "measured",
+          "noise_floor_source": "estimated",
+          "systematic_bias_source": "estimated",
+          "reference_standard": "internal A/B instrumentation benchmark 2026-05"
+        }
+      },
+      "fidelity_gradient": 0.72,
+      "calibration": {
+        "method": "isotonic_regression",
+        "calibrated_fidelity": 0.61,
+        "validation_set": "2025 wellbeing-survey-linked telemetry holdout (n=412)",
+        "calibrated_at": "2026-08-01T09:00:00Z",
+        "expected_calibration_error": 0.04
+      },
+      "validity_claim_id": "9c9c9c9c-0001-4e00-9000-aaabbbccc0v1",
+      "thermodynamic_physical_grounding": "Sustained cognitive overload degrades voluntary responsiveness; after-hours latency reflects withdrawal behavior",
+      "vector_embedding": [
+        0.021,
+        -0.114,
+        0.087,
+        0.442,
+        -0.203,
+        0.156,
+        0.038,
+        -0.271
+      ]
+    },
+    {
+      "proxy_id": "a11b2c3d-0002-4e00-9000-aaabbbccc002",
+      "target_variable": "Slack response velocity (intermediate proxy)",
+      "observable_metric": "Keystroke / server log activity timestamps per employee",
+      "metrology": {
+        "sensor_type": "server_log",
+        "precision": 0.97,
+        "noise_floor": 0.08,
+        "systematic_bias": 0.02,
+        "provenance": {
+          "precision_source": "measured",
+          "noise_floor_source": "measured",
+          "systematic_bias_source": "measured",
+          "reference_standard": "log-pipeline audit 2026-06"
+        }
+      },
+      "fidelity_gradient": 0.81,
+      "calibration": {
+        "method": "platt_scaling",
+        "calibrated_fidelity": 0.76,
+        "validation_set": "synthetic-event replay holdout (n=5000)",
+        "calibrated_at": "2026-08-01T09:00:00Z",
+        "expected_calibration_error": 0.02
+      },
+      "validity_claim_id": "9c9c9c9c-0002-4e00-9000-aaabbbccc0v2",
+      "thermodynamic_physical_grounding": "All message sends produce authenticated API events in immutable server logs",
+      "vector_embedding": [
+        0.018,
+        -0.102,
+        0.079,
+        0.401,
+        -0.187,
+        0.149,
+        0.041,
+        -0.248
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "e0e0e0e0-0001-4e00-9000-aaabbbccc0e1",
+      "source_id": "a11b2c3d-0001-4e00-9000-aaabbbccc001",
+      "target_id": "3f6e2a1c-9b4d-4e8a-a2c1-7d5f0e9b8a11",
+      "relationship_type": "proxy_of",
+      "coupling_strength": 0.65,
+      "evidence_weight": 0.7,
+      "last_updated": "2026-08-10T14:22:00Z"
+    },
+    {
+      "edge_id": "e0e0e0e0-0002-4e00-9000-aaabbbccc0e2",
+      "source_id": "a11b2c3d-0002-4e00-9000-aaabbbccc002",
+      "target_id": "a11b2c3d-0001-4e00-9000-aaabbbccc001",
+      "relationship_type": "causal",
+      "coupling_strength": 0.9,
+      "evidence_weight": 0.95,
+      "last_updated": "2026-08-10T14:22:00Z"
+    },
+    {
+      "edge_id": "e0e0e0e0-0003-4e00-9000-aaabbbccc0e3",
+      "source_id": "b0b0b0b0-0001-4e00-9000-aaabbbccc0c1",
+      "target_id": "a11b2c3d-0001-4e00-9000-aaabbbccc001",
+      "relationship_type": "governs",
+      "coupling_strength": 1.0,
+      "evidence_weight": 1.0,
+      "last_updated": "2026-08-11T08:00:00Z",
+      "_comment": "Employee-consent policy claim constrains deployment use of the latency proxy; research-mode inference unaffected"
+    }
+  ]
+}

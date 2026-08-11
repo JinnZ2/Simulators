@@ -1,0 +1,134 @@
+{
+  "investigation_id": "inv-edna-001",
+  "instrument": "eDNA metabarcoding assay",
+  "domain": "biology",
+  "measurand_decomposition": {
+    "measurand": "Presence/absence (and relative abundance) of species in a water body",
+    "indication": "Amplicon sequence read counts per barcode locus",
+    "bridge_model": "Reference-library taxonomic assignment + occupancy/detection model"
+  },
+  "transduction_chain": {
+    "chain_fidelity": 0.1646,
+    "weakest_link": {
+      "name": "organism->DNA shedding",
+      "fidelity": 0.55,
+      "grade": "estimated"
+    },
+    "links": [
+      {
+        "name": "organism->DNA shedding",
+        "fidelity": 0.55,
+        "grade": "estimated",
+        "aliases": [
+          "high shedder at low abundance looks like low shedder at high abundance"
+        ]
+      },
+      {
+        "name": "shedding->capture",
+        "fidelity": 0.7,
+        "grade": "estimated",
+        "aliases": [
+          "DNA transport from upstream \u2014 species never present at site"
+        ]
+      },
+      {
+        "name": "capture->amplification",
+        "fidelity": 0.6,
+        "grade": "estimated",
+        "aliases": [
+          "primer mismatch suppresses entire taxonomic groups"
+        ]
+      },
+      {
+        "name": "amplification->sequencing",
+        "fidelity": 0.95,
+        "grade": "measured",
+        "aliases": []
+      },
+      {
+        "name": "reads->taxon assignment",
+        "fidelity": 0.75,
+        "grade": "estimated",
+        "aliases": [
+          "library gap: present species assigns to wrong taxon or nothing"
+        ]
+      }
+    ]
+  },
+  "model_rung": "M2",
+  "traceability": {
+    "highest_break": "chain broken at working_standard (lapsed): mock community standards exist but not run every batch",
+    "grade": "estimated"
+  },
+  "blindness_map": [
+    {
+      "kind": "gate",
+      "description": "Species absent from reference library reads as ABSENT from the water body",
+      "consequence": "false absences for exactly the rare/undescribed species surveys care most about"
+    },
+    {
+      "kind": "null_state",
+      "description": "Low-shedding or ephemeral species produce no signal at sampling time",
+      "consequence": "presence becomes a lottery of shedding kinetics, not occupancy"
+    },
+    {
+      "kind": "alias_state",
+      "description": "Upstream transport deposits DNA of species not living at the site",
+      "consequence": "false presences inflate richness estimates"
+    },
+    {
+      "kind": "frame",
+      "description": "Sampling only open water misses benthic/crevice communities",
+      "consequence": "community composition skewed toward pelagic taxa"
+    }
+  ],
+  "validation": {
+    "forward_simulation": {
+      "injected": 1.0,
+      "recovered": 0.1651,
+      "recovery_error": 0.8349,
+      "passed": false,
+      "detail": {
+        "chain_fidelity": 0.1646,
+        "model_bias": 0.0,
+        "noise": 0.05,
+        "note": "unmodelled fidelity loss+bias appears as systematic error"
+      }
+    }
+  },
+  "coverage": {
+    "aspects": [
+      {
+        "aspect": "sequencing chemistry",
+        "grade": "measured"
+      },
+      {
+        "aspect": "PCR amplification fidelity",
+        "grade": "estimated"
+      },
+      {
+        "aspect": "shedding-rate heterogeneity",
+        "grade": "assumed"
+      },
+      {
+        "aspect": "reference library completeness",
+        "grade": "assumed"
+      },
+      {
+        "aspect": "transport/alias correction",
+        "grade": "estimated"
+      },
+      {
+        "aspect": "detection probability model",
+        "grade": "estimated"
+      }
+    ],
+    "grounded_fraction": 0.417,
+    "weakest_aspects": [
+      "shedding-rate heterogeneity",
+      "reference library completeness",
+      "PCR amplification fidelity"
+    ],
+    "verdict": "mostly assumed \u2014 investigation incomplete"
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "investigation_id": "inv-sst-001",
+  "instrument": "Satellite thermal IR radiometer",
+  "domain": "physics",
+  "measurand_decomposition": {
+    "measurand": "Sea-surface skin temperature (K)",
+    "indication": "Top-of-atmosphere radiance counts in thermal IR bands",
+    "bridge_model": "Radiative transfer inversion with atmospheric (water vapor, aerosol) correction priors"
+  },
+  "transduction_chain": {
+    "chain_fidelity": 0.5042,
+    "weakest_link": {
+      "name": "emission->TOA radiance",
+      "fidelity": 0.7,
+      "grade": "estimated"
+    },
+    "links": [
+      {
+        "name": "ocean->emission",
+        "fidelity": 0.99,
+        "grade": "measured",
+        "aliases": []
+      },
+      {
+        "name": "emission->TOA radiance",
+        "fidelity": 0.7,
+        "grade": "estimated",
+        "aliases": [
+          "water vapor and aerosols mimic temperature changes"
+        ]
+      },
+      {
+        "name": "radiance->counts",
+        "fidelity": 0.97,
+        "grade": "measured",
+        "aliases": []
+      },
+      {
+        "name": "counts->SST (inversion)",
+        "fidelity": 0.75,
+        "grade": "estimated",
+        "aliases": [
+          "wrong vapor prior = wrong temperature"
+        ]
+      }
+    ]
+  },
+  "model_rung": "M3",
+  "traceability": {
+    "highest_break": "unbroken chain to SI",
+    "grade": "measured"
+  },
+  "blindness_map": [
+    {
+      "kind": "null_state",
+      "description": "Cloud cover blocks the surface entirely \u2014 IR sees cloud tops",
+      "consequence": "SST maps have systematic gaps exactly in stormy/dynamic regions"
+    },
+    {
+      "kind": "alias_state",
+      "description": "Diurnal warm skin layer vs. true bulk SST under low wind",
+      "consequence": "skin-bulk difference up to several K misread as spatial variation"
+    },
+    {
+      "kind": "saturation",
+      "description": "Detector saturates over very hot surfaces (fires)",
+      "consequence": "not an SST issue but corrupts adjacent pixels"
+    }
+  ],
+  "validation": {
+    "forward_simulation": {
+      "injected": 290.0,
+      "recovered": 147.7211,
+      "recovery_error": 0.4906,
+      "passed": false,
+      "detail": {
+        "chain_fidelity": 0.5042,
+        "model_bias": 1.5,
+        "noise": 0.3,
+        "note": "unmodelled fidelity loss+bias appears as systematic error"
+      }
+    }
+  },
+  "coverage": {
+    "aspects": [
+      {
+        "aspect": "detector calibration (on-board blackbody)",
+        "grade": "measured"
+      },
+      {
+        "aspect": "SI traceability via buoy network",
+        "grade": "measured"
+      },
+      {
+        "aspect": "atmospheric absorption physics",
+        "grade": "estimated"
+      },
+      {
+        "aspect": "inversion prior realism",
+        "grade": "assumed"
+      },
+      {
+        "aspect": "skin-bulk temperature conversion",
+        "grade": "estimated"
+      },
+      {
+        "aspect": "cloud-gap sampling bias",
+        "grade": "estimated"
+      }
+    ],
+    "grounded_fraction": 0.583,
+    "weakest_aspects": [
+      "inversion prior realism",
+      "atmospheric absorption physics",
+      "skin-bulk temperature conversion"
+    ],
+    "verdict": "partially grounded"
+  }
+}

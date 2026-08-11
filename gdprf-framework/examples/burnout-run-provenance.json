@@ -1,0 +1,154 @@
+[
+  {
+    "record_id": "rec-0001",
+    "entity": "a11b2c3d-0001-4e00-9000-aaabbbccc001",
+    "activity": "evidence_ingestion",
+    "agent": "gdprf-engine 2.1.0",
+    "inputs": {
+      "raw_signal": 0.35,
+      "systematic_bias": -0.05,
+      "bias_source": "estimated"
+    },
+    "outputs": {
+      "corrected_signal": 0.38,
+      "residual_bias_uncertainty": 0.02
+    },
+    "timestamp": "2026-08-11T18:24:51.101666+00:00",
+    "content_hash": "7af0fdebf2eb99d35ebb132f2cdb400a3465dfd74758194d88cbc76cd2e9fe24",
+    "previous_hash": "GENESIS"
+  },
+  {
+    "record_id": "rec-0002",
+    "entity": "a11b2c3d-0001-4e00-9000-aaabbbccc001",
+    "activity": "calibration",
+    "agent": "gdprf-engine 2.1.0",
+    "inputs": {
+      "raw_fidelity": 0.72,
+      "method": "isotonic_regression"
+    },
+    "outputs": {
+      "effective_fidelity": 0.61,
+      "was_calibrated": true,
+      "ece": 0.04
+    },
+    "timestamp": "2026-08-11T18:24:51.101792+00:00",
+    "content_hash": "37e69238b0617c65287128bf84194cc5c882e86bffebea43fd5f47664adbc957",
+    "previous_hash": "7af0fdebf2eb99d35ebb132f2cdb400a3465dfd74758194d88cbc76cd2e9fe24"
+  },
+  {
+    "record_id": "rec-0003",
+    "entity": "a11b2c3d-0002-4e00-9000-aaabbbccc002",
+    "activity": "evidence_ingestion",
+    "agent": "gdprf-engine 2.1.0",
+    "inputs": {
+      "raw_signal": 0.35,
+      "systematic_bias": 0.02,
+      "bias_source": "measured"
+    },
+    "outputs": {
+      "corrected_signal": 0.33,
+      "residual_bias_uncertainty": 0.0
+    },
+    "timestamp": "2026-08-11T18:24:51.101871+00:00",
+    "content_hash": "810b9104da6f29dfd7a795d3c1ae5e2a1fb13a9ede93319f81481abd5cc6dbd5",
+    "previous_hash": "37e69238b0617c65287128bf84194cc5c882e86bffebea43fd5f47664adbc957"
+  },
+  {
+    "record_id": "rec-0004",
+    "entity": "a11b2c3d-0002-4e00-9000-aaabbbccc002",
+    "activity": "calibration",
+    "agent": "gdprf-engine 2.1.0",
+    "inputs": {
+      "raw_fidelity": 0.81,
+      "method": "platt_scaling"
+    },
+    "outputs": {
+      "effective_fidelity": 0.76,
+      "was_calibrated": true,
+      "ece": 0.02
+    },
+    "timestamp": "2026-08-11T18:24:51.101916+00:00",
+    "content_hash": "c3eb301aead07026d03a9189040fec086bbf286d7d2585122f97184faeab286a",
+    "previous_hash": "810b9104da6f29dfd7a795d3c1ae5e2a1fb13a9ede93319f81481abd5cc6dbd5"
+  },
+  {
+    "record_id": "rec-0005",
+    "entity": "3f6e2a1c-9b4d-4e8a-a2c1-7d5f0e9b8a11",
+    "activity": "cascade_assembly",
+    "agent": "gdprf-engine 2.1.0",
+    "inputs": {
+      "chain": [
+        "a11b2c3d-0002-4e00-9000-aaabbbccc002",
+        "a11b2c3d-0001-4e00-9000-aaabbbccc001"
+      ]
+    },
+    "outputs": {
+      "cascade_fidelity": 0.4636,
+      "edge_coupling": 0.65
+    },
+    "timestamp": "2026-08-11T18:24:51.101984+00:00",
+    "content_hash": "384d9aeec2b26440c14b3f51a659fe1bffb0283b85728f276141ee9c13a7da78",
+    "previous_hash": "c3eb301aead07026d03a9189040fec086bbf286d7d2585122f97184faeab286a"
+  },
+  {
+    "record_id": "rec-0006",
+    "entity": "3f6e2a1c-9b4d-4e8a-a2c1-7d5f0e9b8a11",
+    "activity": "gradient_update",
+    "agent": "gdprf-engine 2.1.0",
+    "inputs": {
+      "prior": 0.68,
+      "evidence": [
+        {
+          "fidelity": 0.4636,
+          "coupling": 0.65
+        }
+      ]
+    },
+    "outputs": {
+      "posterior": 0.7696
+    },
+    "timestamp": "2026-08-11T18:24:51.102045+00:00",
+    "content_hash": "399a2d2efab88c6eab472f94f5a71d5560b38196d5d41c1297bf3673129c9fb6",
+    "previous_hash": "384d9aeec2b26440c14b3f51a659fe1bffb0283b85728f276141ee9c13a7da78"
+  },
+  {
+    "record_id": "rec-0007",
+    "entity": "3f6e2a1c-9b4d-4e8a-a2c1-7d5f0e9b8a11",
+    "activity": "gate_decision",
+    "agent": "gdprf-engine 2.1.0",
+    "inputs": {
+      "triggered": false
+    },
+    "outputs": {
+      "status": "not_triggered",
+      "action": "no action"
+    },
+    "timestamp": "2026-08-11T18:24:51.102090+00:00",
+    "content_hash": "71c122f3738444b6ae38852a4a9a1b8cc482a7a221855c8c6fc0825917c6eb4e",
+    "previous_hash": "399a2d2efab88c6eab472f94f5a71d5560b38196d5d41c1297bf3673129c9fb6"
+  },
+  {
+    "record_id": "rec-0008",
+    "entity": "3f6e2a1c-9b4d-4e8a-a2c1-7d5f0e9b8a11",
+    "activity": "decision_point",
+    "agent": "gdprf-engine 2.1.0",
+    "inputs": {
+      "confidence": 0.7696,
+      "uvr": 0.31,
+      "policy": {
+        "deploy_confidence": 0.8,
+        "escalate_unknown_risk": 0.45
+      }
+    },
+    "outputs": {
+      "action": "abort",
+      "rationale": "deployment blocked by governance constraint(s); research-mode inference unaffected",
+      "blocked_by": [
+        "proxy a11b2c3d-0001-4e00-9000-aaabbbccc001 under unsatisfied governs edge"
+      ]
+    },
+    "timestamp": "2026-08-11T18:24:51.102143+00:00",
+    "content_hash": "e9536e3988981138b95a64b51e1003ced3dc5626da6c49306dcec423d247702d",
+    "previous_hash": "71c122f3738444b6ae38852a4a9a1b8cc482a7a221855c8c6fc0825917c6eb4e"
+  }
+]

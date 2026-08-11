@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://proxylab.dev/schemas/investigation.schema.json",
+  "title": "Proxy Investigation Record",
+  "type": "object",
+  "required": [
+    "investigation_id",
+    "proxy_candidate",
+    "phases",
+    "coverage"
+  ],
+  "properties": {
+    "investigation_id": {
+      "type": "string"
+    },
+    "proxy_candidate": {
+      "type": "object",
+      "required": [
+        "target_variable",
+        "observable_metric",
+        "claimed_mapping"
+      ],
+      "properties": {
+        "target_variable": {
+          "type": "string"
+        },
+        "observable_metric": {
+          "type": "string"
+        },
+        "claimed_mapping": {
+          "type": "string",
+          "description": "direction + functional form + why believed"
+        }
+      }
+    },
+    "phases": {
+      "type": "object",
+      "properties": {
+        "decomposition": {
+          "type": "object"
+        },
+        "grounding_chain": {
+          "type": "object"
+        },
+        "instrument": {
+          "type": "object"
+        },
+        "validity_threats": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "experiments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "experiment record ids"
+        },
+        "calibration": {
+          "type": "object"
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "required": [
+        "aspects",
+        "grounded_fraction"
+      ],
+      "properties": {
+        "aspects": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "aspect",
+              "grade",
+              "upgrade_path"
+            ],
+            "properties": {
+              "aspect": {
+                "type": "string"
+              },
+              "grade": {
+                "type": "string",
+                "enum": [
+                  "measured",
+                  "estimated",
+                  "assumed"
+                ]
+              },
+              "grounding_level": {
+                "type": "string",
+                "enum": [
+                  "G1",
+                  "G2",
+                  "G3",
+                  "G4",
+                  "G5"
+                ]
+              },
+              "upgrade_path": {
+                "type": "string",
+                "description": "experiment/data that would upgrade this aspect"
+              }
+            }
+          }
+        },
+        "grounded_fraction": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "share of aspects at measured (1.0), estimated (0.5), assumed (0.0) weighted"
+        }
+      }
+    }
+  }
+}

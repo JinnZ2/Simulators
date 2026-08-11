@@ -1,0 +1,119 @@
+{
+  "investigation_id": "inv-lidar-biomass-001",
+  "instrument": "Airborne LiDAR",
+  "domain": "ecology",
+  "measurand_decomposition": {
+    "measurand": "Above-ground dry biomass per hectare (Mg/ha)",
+    "indication": "Georeferenced laser return point cloud (height/intensity distribution)",
+    "bridge_model": "Allometric equation: biomass = f(canopy height metrics, cover) fitted on harvested-tree plots"
+  },
+  "transduction_chain": {
+    "chain_fidelity": 0.5139,
+    "weakest_link": {
+      "name": "metrics->biomass (allometry)",
+      "fidelity": 0.6,
+      "grade": "estimated"
+    },
+    "links": [
+      {
+        "name": "canopy->photon scattering",
+        "fidelity": 0.95,
+        "grade": "measured",
+        "aliases": [
+          "dense canopy blocks returns from lower strata"
+        ]
+      },
+      {
+        "name": "returns->point cloud",
+        "fidelity": 0.98,
+        "grade": "measured",
+        "aliases": []
+      },
+      {
+        "name": "point cloud->height metrics",
+        "fidelity": 0.92,
+        "grade": "estimated",
+        "aliases": []
+      },
+      {
+        "name": "metrics->biomass (allometry)",
+        "fidelity": 0.6,
+        "grade": "estimated",
+        "aliases": [
+          "model trained in one biome applied to another"
+        ]
+      }
+    ]
+  },
+  "model_rung": "M2",
+  "traceability": {
+    "highest_break": "chain broken at reference_standard (broken): no biomass primary standard; allometric references are region-specific conventions",
+    "grade": "estimated"
+  },
+  "blindness_map": [
+    {
+      "kind": "null_state",
+      "description": "Understory and below-ground biomass return little/no signal",
+      "consequence": "carbon inventories systematically miss below-ground and understory pools"
+    },
+    {
+      "kind": "saturation",
+      "description": "Signal saturates in high-biomass dense canopy",
+      "consequence": "underestimation precisely where biomass is highest"
+    },
+    {
+      "kind": "alias_state",
+      "description": "Tall sparse stand vs. short dense stand can yield similar height metrics",
+      "consequence": "allometry misallocates biomass between structurally different forests"
+    }
+  ],
+  "validation": {
+    "forward_simulation": {
+      "injected": 250.0,
+      "recovered": 140.5569,
+      "recovery_error": 0.4378,
+      "passed": false,
+      "detail": {
+        "chain_fidelity": 0.5139,
+        "model_bias": 12.0,
+        "noise": 8.0,
+        "note": "unmodelled fidelity loss+bias appears as systematic error"
+      }
+    }
+  },
+  "coverage": {
+    "aspects": [
+      {
+        "aspect": "photon scattering physics",
+        "grade": "measured"
+      },
+      {
+        "aspect": "point cloud georegistration",
+        "grade": "measured"
+      },
+      {
+        "aspect": "height metric computation",
+        "grade": "estimated"
+      },
+      {
+        "aspect": "allometric bridge model",
+        "grade": "estimated"
+      },
+      {
+        "aspect": "biome transferability of allometry",
+        "grade": "assumed"
+      },
+      {
+        "aspect": "traceability to reference",
+        "grade": "estimated"
+      }
+    ],
+    "grounded_fraction": 0.583,
+    "weakest_aspects": [
+      "biome transferability of allometry",
+      "height metric computation",
+      "allometric bridge model"
+    ],
+    "verdict": "partially grounded"
+  }
+}

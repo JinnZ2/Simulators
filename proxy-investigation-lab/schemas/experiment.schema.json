@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://proxylab.dev/schemas/experiment.schema.json",
+  "title": "Proxy Experiment Record",
+  "type": "object",
+  "required": [
+    "experiment_id",
+    "kind",
+    "setup",
+    "results"
+  ],
+  "properties": {
+    "experiment_id": {
+      "type": "string"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "synthetic_ground_truth",
+        "observational",
+        "benchmark"
+      ]
+    },
+    "setup": {
+      "type": "object"
+    },
+    "results": {
+      "type": "object"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

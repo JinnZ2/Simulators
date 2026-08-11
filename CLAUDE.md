@@ -1056,7 +1056,118 @@ underneath).
   constraint-axis analysis shape as `neural-augmentation-audit/`,
   incentive-blindspot / fragility-cascade adjacencies. CC0.
   Different genre from the simulators — a framework document, not
-  a sim.
+  a sim. **Head of a five-folder family** — see
+  `gdprf-framework/`, `msiaf-gdprf-bridge/`,
+  `proxy-investigation-lab/`, `instrument-epistemology/`.
+- `gdprf-framework/` — GDPRF = **Gradient-Driven Proxy Reasoning
+  Framework**. Reasoning in continuous confidence gradients instead
+  of binary true/false, by linking unverifiable abstract claims
+  ("employee morale is low") to observable **proxies** carrying
+  explicit metrology (precision, noise floor, systematic bias).
+  Five-step operational cycle: scoped claim formulation → proxy
+  traversal/discovery → metrological evaluation → gradient Bayesian
+  update → unknown-variable search on residual-variance breach.
+  Reference implementation in `src/gdprf/`: `engine.py` (calibration,
+  provenance-weighted metrology, log-odds update, identification
+  gate), `provenance.py` (W3C PROV-inspired hash-chained ledger),
+  `decisions.py` (DEPLOY / RESEARCH / HOLD / ESCALATE / ABORT).
+  **v3.0** makes instrument epistemology first-class — measurand
+  decomposition, transduction chains, traceability pyramids, M0–M3
+  model-dependence rungs, blindness maps in the schemas; engine does
+  blindness-adjusted updates. Schemas NOT backward compatible with
+  v2.x. Worked burnout example shows the load-bearing separation:
+  posterior *rises* 0.68 → 0.77 and the decision layer still returns
+  **ABORT** because a governance edge is unsatisfied — rising
+  confidence does not buy authority. `research/framework-assessment.md`
+  runs the framework's own five-step cycle over its own six core
+  claims and publishes the posteriors (same self-application move as
+  `equivalence-field/`'s `seed_claims()`). 23 tests green.
+  Stdlib-only except `jsonschema`, used by exactly one schema-
+  validation test. An earlier zip shipped a docs-only v2 subset;
+  superseded entirely by the v3 drop, only v3 landed. CC0.
+- `msiaf-gdprf-bridge/` — Expresses MSIAF systemic incident
+  investigations as GDPRF gradient claims, so a determination like
+  "D4 penalty structure forced D2 rigid dispatch onto a D1-degraded
+  driver" becomes a chain of scoped claims with calibrated
+  confidence, proxy fidelity, provenance, and explicit
+  unknown-variable risk instead of a confident narrative. Mapping:
+  dimensional friction claim → Claim object; investigation evidence
+  → Proxy node with metrology (evidence is an *instrument*, not a
+  fact); Systemic Interconnection Pathway → causal edge chain;
+  investigation checklist → fidelity-assignment protocol; final
+  determination → governed decision point. **Worked reefer case is
+  the argument**: all four cascade links are individually
+  more-likely-than-not (0.590–0.751), the conjunctive chain is
+  **0.202**, weakest-link bound 0.590, divergence 0.389 fires the
+  residual trigger → **ESCALATE**, "human must adjudicate
+  unexplained ignorance." A four-link systemic story whose every
+  link is plausible is not itself plausible. 24-record hash chain
+  validates. 7 tests green. **Only cross-folder Python import in
+  the repo** — imports the GDPRF engine from
+  `../gdprf-framework/src` (deliberate: consumer, not copy, so the
+  two cannot drift); sibling layout at repo root makes it resolve
+  as-is, `GDPRF_SRC` overrides. CC0.
+- `proxy-investigation-lab/` — Experimental workbench that takes any
+  candidate proxy and grounds out as much as can be grounded: causal
+  chain, instrument properties, validity threats, empirically
+  measured fidelity. Seven-phase protocol (decomposition → grounding
+  chain → instrument characterization → validity threats → synthetic
+  ground-truth → calibration → coverage). **Two headline results.**
+  (1) `catalog_batch` grades all 16 MSIAF catalog proxies: top is
+  `river-water-level` (fidelity 0.931, grounded 1.00), bottom is
+  `drone-corridor-density` (grounded 0.25) — chain fidelity is
+  *multiplicative*, so one assumed 0.55 link caps the proxy no
+  matter how good the sensor; report ends with a priority queue of
+  exactly those proxies MSIAF *uses* while resting on assumed
+  links. (2) `goodhart_redteam` measures rather than asserts
+  Goodhart: 3000 agents / 12 periods adapting the observable drops
+  correlation 0.904 → 0.713 (collapse 0.191) and yields a
+  **detection surface** — gaming flattens the observed-vs-latent
+  slope at the top (0.633 top-vs-bottom) and inflates top-decile
+  variance, so audit the top decile first. Design stance:
+  known-truth first ("if the pipeline can't recover a known
+  instrument, it has no business grading an unknown one"), grounding
+  graded not binary (measured / estimated / assumed), Goodhart a
+  mandatory assessment for any decision-use proxy. 13 tests green,
+  5 experiments run clean. Closest repo sibling is `null-harness/` —
+  same known-truth-first invariant, one level up the stack.
+  Stdlib-only. CC0.
+- `instrument-epistemology/` — Applies the proxy-investigation method
+  to **scientific instruments themselves**: every fact about biology,
+  ecology, and physics arrives through a device that is formally a
+  proxy (unobservable measurand → observable indication via a
+  physical transduction chain plus a model). Six questions per
+  instrument: measurand vs. indication, transduction chain, model
+  dependence, traceability, observational blindness, theory-ladenness.
+  Six instruments graded in `outputs/cross-instrument-report.md`:
+  seismometer (M1, fidelity 0.800, grounded 0.83, *well grounded*) →
+  satellite SST (M3, 0.504) → LiDAR biomass (M2, 0.514) → camera trap
+  (M2, 0.293) → IRMS isotope diet (M2, 0.275) → eDNA metabarcoding
+  (M2, 0.165, *mostly assumed*). **The finding is not about
+  hardware** — the eDNA sequencer is as precisely built as the
+  seismometer's digitizer; what separates them is transduction chain,
+  bridge model, reference standards, and blindness map. Physics
+  instruments know more because decades went into standards and
+  traceability, not because nature is simpler there. Honest handling
+  of the no-answer-key problem, in declared strength order:
+  metrological traceability → inter-instrument triangulation →
+  forward simulation → intervention. 9 tests green, all 7
+  experiments run clean. **One repair applied on landing**:
+  `experiments/lidar_biomass/run.py` shipped a multi-line expression
+  inside an f-string replacement field (PEP 701, Python 3.12+ only),
+  which was a hard `SyntaxError` on 3.11 and failed the drop's own
+  `test_all_experiments_run`; lifted the verdict out of the
+  replacement field, printed output byte-identical since the
+  adjacent literals were already concatenating. Documented in the
+  folder README — same PEP 701 class as
+  `relational/cartesian_vs_relational_demo.py`, but repaired rather
+  than documented-around because here a shipped test asserted it
+  ran. Strongest cross-repo convergence in the drop:
+  `thermal-sensor-degradation-audit/`'s
+  `corruption(trend) = corruption(measurement) × corruption(framework)`
+  is precisely an observational-blindness map in this folder's
+  vocabulary — a package degrades *during* the event it records, so
+  the tail biases LOW. Arrived at independently. Stdlib-only. CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

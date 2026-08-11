@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gdprf.dev/schemas/claim.schema.json",
+  "title": "GDPRF Claim / Hypothesis",
+  "version": "3.0.0",
+  "description": "v3.0: measurand decomposition, grounding status, model-dependence rung (instrument-epistemology consolidation).",
+  "type": "object",
+  "required": [
+    "claim_id",
+    "domain",
+    "statement",
+    "scope",
+    "target_measurand",
+    "confidence_gradient",
+    "grounding_status",
+    "model_dependence_rung",
+    "assigned_proxies",
+    "unknown_variable_risk_score"
+  ],
+  "properties": {
+    "claim_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "domain": {
+      "type": "string"
+    },
+    "statement": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "object",
+      "required": [
+        "temporal_bounds",
+        "spatial_bounds",
+        "locality_context"
+      ],
+      "properties": {
+        "temporal_bounds": {
+          "type": "string"
+        },
+        "spatial_bounds": {
+          "type": "string"
+        },
+        "locality_context": {
+          "type": "string"
+        }
+      }
+    },
+    "target_measurand": {
+      "type": "string",
+      "description": "The unobservable true state the claim is about"
+    },
+    "confidence_gradient": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "grounding_status": {
+      "type": "string",
+      "enum": [
+        "measured",
+        "estimated",
+        "assumed"
+      ]
+    },
+    "model_dependence_rung": {
+      "type": "string",
+      "enum": [
+        "M0",
+        "M1",
+        "M2",
+        "M3"
+      ]
+    },
+    "variance_margin": {
+      "type": "number"
+    },
+    "assigned_proxies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "unknown_variable_risk_score": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "hidden_variable_search": {
+      "type": "object",
+      "properties": {
+        "triggered": {
+          "type": "boolean"
+        },
+        "residual_variance_observed": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "threshold": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "identification_gate": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "not_triggered",
+                "pending",
+                "passed",
+                "failed"
+              ]
+            },
+            "method": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "assumptions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

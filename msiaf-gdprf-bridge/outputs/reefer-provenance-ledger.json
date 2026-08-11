@@ -1,0 +1,440 @@
+[
+  {
+    "record_id": "inv-0001",
+    "entity": "p-contract-clause",
+    "activity": "evidence_ingestion",
+    "agent": "msiaf-gdprf-bridge 1.0.0 / gdprf-engine 2.1.0",
+    "inputs": {
+      "phase_evidence": "Signed contract text: rejection at >2F deviation for >15 min",
+      "provenance": {
+        "precision_source": "measured",
+        "noise_floor_source": "measured",
+        "systematic_bias_source": "measured"
+      }
+    },
+    "outputs": {
+      "instrument": "contract_document"
+    },
+    "timestamp": "2026-08-11T17:46:27.963992+00:00",
+    "content_hash": "4b759480c3f9fec8ba692b77e79491c646aa53c5c96df95bb941062099b334b3",
+    "previous_hash": "GENESIS"
+  },
+  {
+    "record_id": "inv-0002",
+    "entity": "p-contract-clause",
+    "activity": "calibration",
+    "agent": "msiaf-gdprf-bridge 1.0.0 / gdprf-engine 2.1.0",
+    "inputs": {
+      "raw_fidelity": 0.95,
+      "method": "isotonic_regression"
+    },
+    "outputs": {
+      "effective_fidelity": 0.93,
+      "was_calibrated": true
+    },
+    "timestamp": "2026-08-11T17:46:27.964145+00:00",
+    "content_hash": "7d1f120c0cc5fbf64283c9e561a888e4434e153d1612d53f5f776fecd20e0583",
+    "previous_hash": "4b759480c3f9fec8ba692b77e79491c646aa53c5c96df95bb941062099b334b3"
+  },
+  {
+    "record_id": "inv-0003",
+    "entity": "p-dispatch-message",
+    "activity": "evidence_ingestion",
+    "agent": "msiaf-gdprf-bridge 1.0.0 / gdprf-engine 2.1.0",
+    "inputs": {
+      "phase_evidence": "Timestamped dispatch message: 'rest at the receiver... 5 AM. No exceptions.' + dispatcher bonus tied to on-time %",
+      "provenance": {
+        "precision_source": "measured",
+        "noise_floor_source": "measured",
+        "systematic_bias_source": "measured"
+      }
+    },
+    "outputs": {
+      "instrument": "eld_message_log"
+    },
+    "timestamp": "2026-08-11T17:46:27.964205+00:00",
+    "content_hash": "7a1dbf8c9245bd47e0c9e570be1b1fe478b54de02bae4afe7f27861f2e0d95a5",
+    "previous_hash": "7d1f120c0cc5fbf64283c9e561a888e4434e153d1612d53f5f776fecd20e0583"
+  },
+  {
+    "record_id": "inv-0004",
+    "entity": "p-dispatch-message",
+    "activity": "calibration",
+    "agent": "msiaf-gdprf-bridge 1.0.0 / gdprf-engine 2.1.0",
+    "inputs": {
+      "raw_fidelity": 0.92,
+      "method": "platt_scaling"
+    },
+    "outputs": {
+      "effective_fidelity": 0.9,
+      "was_calibrated": true
+    },
+    "timestamp": "2026-08-11T17:46:27.964258+00:00",
+    "content_hash": "0c0cd1fee3e0b71687faaa5d36bcd21ce5afaf5d281ebac42691b7f278832d49",
+    "previous_hash": "7a1dbf8c9245bd47e0c9e570be1b1fe478b54de02bae4afe7f27861f2e0d95a5"
+  },
+  {
+    "record_id": "inv-0005",
+    "entity": "c1d4d2-reefer-0001",
+    "activity": "gradient_update",
+    "agent": "msiaf-gdprf-bridge 1.0.0 / gdprf-engine 2.1.0",
+    "inputs": {
+      "pathway": "D4 -> D2",
+      "prior": 0.5,
+      "cascade_fidelity": 0.837,
+      "coupling": 0.85
+    },
+    "outputs": {
+      "posterior": 0.7441
+    },
+    "timestamp": "2026-08-11T17:46:27.964316+00:00",
+    "content_hash": "9f4e8f058969af4abf32db9b25133e93a76f61338cd8756498f88f5d5c6c670f",
+    "previous_hash": "0c0cd1fee3e0b71687faaa5d36bcd21ce5afaf5d281ebac42691b7f278832d49"
+  },
+  {
+    "record_id": "inv-0006",
+    "entity": "c1d4d2-reefer-0001",
+    "activity": "gate_decision",
+    "agent": "msiaf-gdprf-bridge 1.0.0 / gdprf-engine 2.1.0",
+    "inputs": {
+      "triggered": false
+    },
+    "outputs": {
+      "status": "not_triggered",
+      "action": "no action"
+    },
+    "timestamp": "2026-08-11T17:46:27.964358+00:00",
+    "content_hash": "6d67b252a772ef741d0302eaf77dd06ecffb2887ea6915a06074596065b558e1",
+    "previous_hash": "9f4e8f058969af4abf32db9b25133e93a76f61338cd8756498f88f5d5c6c670f"
+  },
+  {
+    "record_id": "inv-0007",
+    "entity": "p-fatigue-model",
+    "activity": "evidence_ingestion",
+    "agent": "msiaf-gdprf-bridge 1.0.0 / gdprf-engine 2.1.0",
+    "inputs": {
+      "phase_evidence": "Fatigue-equivalence model from duty logs, cab-sleep heat exposure (105F), meal access",
+      "provenance": {
+        "precision_source": "estimated",
+        "noise_floor_source": "estimated",
+        "systematic_bias_source": "assumed"
+      }
+    },
+    "outputs": {
+      "instrument": "fatigue_model"
+    },
+    "timestamp": "2026-08-11T17:46:27.964427+00:00",
+    "content_hash": "a32465b9c41daabfccbcb82b58875001f9818915d2f2bd5058b9c9895a4d949e",
+    "previous_hash": "6d67b252a772ef741d0302eaf77dd06ecffb2887ea6915a06074596065b558e1"
+  },
+  {
+    "record_id": "inv-0008",
+    "entity": "p-fatigue-model",
+    "activity": "calibration",
+    "agent": "msiaf-gdprf-bridge 1.0.0 / gdprf-engine 2.1.0",
+    "inputs": {
+      "raw_fidelity": 0.62,
+      "method": "isotonic_regression"
+    },
+    "outputs": {
+      "effective_fidelity": 0.58,
+      "was_calibrated": true
+    },
+    "timestamp": "2026-08-11T17:46:27.964491+00:00",
+    "content_hash": "05bf0a28f9164d46555f0e6346ffb198609a92360c58d009cf2ebf46d0f53ef4",
+    "previous_hash": "a32465b9c41daabfccbcb82b58875001f9818915d2f2bd5058b9c9895a4d949e"
+  },
+  {
+    "record_id": "inv-0009",
+    "entity": "p-stop-audit",
+    "activity": "evidence_ingestion",
+    "agent": "msiaf-gdprf-bridge 1.0.0 / gdprf-engine 2.1.0",
+    "inputs": {
+      "phase_evidence": "Directed truck stop has no healthy food options (site audit)",
+      "provenance": {
+        "precision_source": "measured",
+        "noise_floor_source": "estimated",
+        "systematic_bias_source": "estimated"
+      }
+    },
+    "outputs": {
+      "instrument": "site_audit"
+    },
+    "timestamp": "2026-08-11T17:46:27.964527+00:00",
+    "content_hash": "23260932bc5a8c61208260c307fec5a85e3e07bee9f2191898c319f464b3b17d",
+    "previous_hash": "05bf0a28f9164d46555f0e6346ffb198609a92360c58d009cf2ebf46d0f53ef4"
+  },
+  {
+    "record_id": "inv-0010",
+    "entity": "p-stop-audit",
+    "activity": "calibration",
+    "agent": "msiaf-gdprf-bridge 1.0.0 / gdprf-engine 2.1.0",
+    "inputs": {
+      "raw_fidelity": 0.7,
+      "method": "none"
+    },
+    "outputs": {
+      "effective_fidelity": 0.6,
+      "was_calibrated": false
+    },
+    "timestamp": "2026-08-11T17:46:27.964571+00:00",
+    "content_hash": "7c26f723d0f6bb2d4e3f625c2e1435318817dd2028a8d45459127c3385065730",
+    "previous_hash": "23260932bc5a8c61208260c307fec5a85e3e07bee9f2191898c319f464b3b17d"
+  },
+  {
+    "record_id": "inv-0011",
+    "entity": "c2d2d1-reefer-0002",
+    "activity": "gradient_update",
+    "agent": "msiaf-gdprf-bridge 1.0.0 / gdprf-engine 2.1.0",
+    "inputs": {
+      "pathway": "D2 -> D1",
+      "prior": 0.5,
+      "cascade_fidelity": 0.348,
+      "coupling": 0.7
+    },
+    "outputs": {
+      "posterior": 0.5903
+    },
+    "timestamp": "2026-08-11T17:46:27.964612+00:00",
+    "content_hash": "a8c2710a93a3ef97b549bbd7c00ee87aa6d2c961f4d2d0188f4636548f061342",
+    "previous_hash": "7c26f723d0f6bb2d4e3f625c2e1435318817dd2028a8d45459127c3385065730"
+  },
+  {
+    "record_id": "inv-0012",
+    "entity": "c2d2d1-reefer-0002",
+    "activity": "gate_decision",
+    "agent": "msiaf-gdprf-bridge 1.0.0 / gdprf-engine 2.1.0",
+    "inputs": {
+      "triggered": false
+    },
+    "outputs": {
+      "status": "not_triggered",
+      "action": "no action"
+    },
+    "timestamp": "2026-08-11T17:46:27.964687+00:00",
+    "content_hash": "0928db816fc81e6a9346d0ce9723d5e00a60b6b442321a2fea78905b8ffab838",
+    "previous_hash": "a8c2710a93a3ef97b549bbd7c00ee87aa6d2c961f4d2d0188f4636548f061342"
+  },
+  {
+    "record_id": "inv-0013",
+    "entity": "p-soil-test",
+    "activity": "evidence_ingestion",
+    "agent": "msiaf-gdprf-bridge 1.0.0 / gdprf-engine 2.1.0",
+    "inputs": {
+      "phase_evidence": "Soil compaction test: shoulder unpaved/unstable for weeks; debris documented",
+      "provenance": {
+        "precision_source": "measured",
+        "noise_floor_source": "measured",
+        "systematic_bias_source": "measured"
+      }
+    },
+    "outputs": {
+      "instrument": "soil_compaction_test"
+    },
+    "timestamp": "2026-08-11T17:46:27.964746+00:00",
+    "content_hash": "1ea7ae32c58b97d662f4eee11c2bedc7ad6f48c7ea73e62f4b059945c5d3ef37",
+    "previous_hash": "0928db816fc81e6a9346d0ce9723d5e00a60b6b442321a2fea78905b8ffab838"
+  },
+  {
+    "record_id": "inv-0014",
+    "entity": "p-soil-test",
+    "activity": "calibration",
+    "agent": "msiaf-gdprf-bridge 1.0.0 / gdprf-engine 2.1.0",
+    "inputs": {
+      "raw_fidelity": 0.9,
+      "method": "isotonic_regression"
+    },
+    "outputs": {
+      "effective_fidelity": 0.89,
+      "was_calibrated": true
+    },
+    "timestamp": "2026-08-11T17:46:27.964805+00:00",
+    "content_hash": "ed1c9f4080af48a0dee8ca988037566b14681126d6f6d4bd8e69d1f9a31158b4",
+    "previous_hash": "1ea7ae32c58b97d662f4eee11c2bedc7ad6f48c7ea73e62f4b059945c5d3ef37"
+  },
+  {
+    "record_id": "inv-0015",
+    "entity": "p-gps-staleness",
+    "activity": "evidence_ingestion",
+    "agent": "msiaf-gdprf-bridge 1.0.0 / gdprf-engine 2.1.0",
+    "inputs": {
+      "phase_evidence": "Route calculated 2h before trip; weather warning issued after calculation, never pushed",
+      "provenance": {
+        "precision_source": "measured",
+        "noise_floor_source": "measured",
+        "systematic_bias_source": "measured"
+      }
+    },
+    "outputs": {
+      "instrument": "routing_platform_logs"
+    },
+    "timestamp": "2026-08-11T17:46:27.964850+00:00",
+    "content_hash": "2edbfc8b72f9429eed6e9229e177c8993edcc8585092acf6229f104e123db8b1",
+    "previous_hash": "ed1c9f4080af48a0dee8ca988037566b14681126d6f6d4bd8e69d1f9a31158b4"
+  },
+  {
+    "record_id": "inv-0016",
+    "entity": "p-gps-staleness",
+    "activity": "calibration",
+    "agent": "msiaf-gdprf-bridge 1.0.0 / gdprf-engine 2.1.0",
+    "inputs": {
+      "raw_fidelity": 0.93,
+      "method": "platt_scaling"
+    },
+    "outputs": {
+      "effective_fidelity": 0.92,
+      "was_calibrated": true
+    },
+    "timestamp": "2026-08-11T17:46:27.964891+00:00",
+    "content_hash": "7f1ea8871974293ef43b05715d7324f394edb10cf150e7b7d078729eb502978c",
+    "previous_hash": "2edbfc8b72f9429eed6e9229e177c8993edcc8585092acf6229f104e123db8b1"
+  },
+  {
+    "record_id": "inv-0017",
+    "entity": "c3d3-reefer-0003",
+    "activity": "gradient_update",
+    "agent": "msiaf-gdprf-bridge 1.0.0 / gdprf-engine 2.1.0",
+    "inputs": {
+      "pathway": "D3 hazard + D2 stale feed",
+      "prior": 0.5,
+      "cascade_fidelity": 0.8188,
+      "coupling": 0.9
+    },
+    "outputs": {
+      "posterior": 0.7513
+    },
+    "timestamp": "2026-08-11T17:46:27.964930+00:00",
+    "content_hash": "40fc2f2c0f88e38439cc0c5fd854aa3f97d5503c2015ff7a07338c54bc6c85f5",
+    "previous_hash": "7f1ea8871974293ef43b05715d7324f394edb10cf150e7b7d078729eb502978c"
+  },
+  {
+    "record_id": "inv-0018",
+    "entity": "c3d3-reefer-0003",
+    "activity": "gate_decision",
+    "agent": "msiaf-gdprf-bridge 1.0.0 / gdprf-engine 2.1.0",
+    "inputs": {
+      "triggered": false
+    },
+    "outputs": {
+      "status": "not_triggered",
+      "action": "no action"
+    },
+    "timestamp": "2026-08-11T17:46:27.964968+00:00",
+    "content_hash": "b31eda615974abad460ced8085108a587b7eb42c2cb74c6a0a2c8244121ec67e",
+    "previous_hash": "40fc2f2c0f88e38439cc0c5fd854aa3f97d5503c2015ff7a07338c54bc6c85f5"
+  },
+  {
+    "record_id": "inv-0019",
+    "entity": "p-reaction-reconstruction",
+    "activity": "evidence_ingestion",
+    "agent": "msiaf-gdprf-bridge 1.0.0 / gdprf-engine 2.1.0",
+    "inputs": {
+      "phase_evidence": "Event reconstruction: estimated reaction window vs. model-predicted degraded reaction time",
+      "provenance": {
+        "precision_source": "assumed",
+        "noise_floor_source": "estimated",
+        "systematic_bias_source": "assumed"
+      }
+    },
+    "outputs": {
+      "instrument": "event_reconstruction"
+    },
+    "timestamp": "2026-08-11T17:46:27.965021+00:00",
+    "content_hash": "8befc070317d6f022d22e3eaf5f2ee9d512ffda3e3e41a00f3b43342765918a4",
+    "previous_hash": "b31eda615974abad460ced8085108a587b7eb42c2cb74c6a0a2c8244121ec67e"
+  },
+  {
+    "record_id": "inv-0020",
+    "entity": "p-reaction-reconstruction",
+    "activity": "calibration",
+    "agent": "msiaf-gdprf-bridge 1.0.0 / gdprf-engine 2.1.0",
+    "inputs": {
+      "raw_fidelity": 0.5,
+      "method": "none"
+    },
+    "outputs": {
+      "effective_fidelity": 0.5,
+      "was_calibrated": false
+    },
+    "timestamp": "2026-08-11T17:46:27.965079+00:00",
+    "content_hash": "2de161d5a43dc823e061fff8d454e231521166c6bc2ba3a743e7ae77d8f1f782",
+    "previous_hash": "8befc070317d6f022d22e3eaf5f2ee9d512ffda3e3e41a00f3b43342765918a4"
+  },
+  {
+    "record_id": "inv-0021",
+    "entity": "c4d1-reefer-0004",
+    "activity": "gradient_update",
+    "agent": "msiaf-gdprf-bridge 1.0.0 / gdprf-engine 2.1.0",
+    "inputs": {
+      "pathway": "D1 micro-delay at the moment of the incident",
+      "prior": 0.5,
+      "cascade_fidelity": 0.5,
+      "coupling": 0.6
+    },
+    "outputs": {
+      "posterior": 0.6106
+    },
+    "timestamp": "2026-08-11T17:46:27.965127+00:00",
+    "content_hash": "1a09c638304d19eda26cafa421d79dc37193c48994a742c064e17244ca63f1cf",
+    "previous_hash": "2de161d5a43dc823e061fff8d454e231521166c6bc2ba3a743e7ae77d8f1f782"
+  },
+  {
+    "record_id": "inv-0022",
+    "entity": "c4d1-reefer-0004",
+    "activity": "gate_decision",
+    "agent": "msiaf-gdprf-bridge 1.0.0 / gdprf-engine 2.1.0",
+    "inputs": {
+      "triggered": true
+    },
+    "outputs": {
+      "status": "failed",
+      "action": "gradient frozen for this branch; unknown_variable_risk_score raised"
+    },
+    "timestamp": "2026-08-11T17:46:27.965162+00:00",
+    "content_hash": "0a845f588ada6d8d2b45f1178d6629d51cad846dbbe542576532b6d5b6428e98",
+    "previous_hash": "1a09c638304d19eda26cafa421d79dc37193c48994a742c064e17244ca63f1cf"
+  },
+  {
+    "record_id": "inv-0023",
+    "entity": "msiaf-reefer-001-determination",
+    "activity": "cascade_assembly",
+    "agent": "msiaf-gdprf-bridge 1.0.0 / gdprf-engine 2.1.0",
+    "inputs": {
+      "link_posteriors": {
+        "D4 -> D2": 0.7441,
+        "D2 -> D1": 0.5903,
+        "D3 hazard + D2 stale feed": 0.7513,
+        "D1 micro-delay at the moment of the incident": 0.6106
+      }
+    },
+    "outputs": {
+      "chain": 0.2015,
+      "weakest_link": 0.5903,
+      "residual_trigger": true
+    },
+    "timestamp": "2026-08-11T17:46:27.965243+00:00",
+    "content_hash": "64107ab501ca7dc89a271b151eb1fa5bbe13a90c4210f2aba95444a2a632d29e",
+    "previous_hash": "0a845f588ada6d8d2b45f1178d6629d51cad846dbbe542576532b6d5b6428e98"
+  },
+  {
+    "record_id": "inv-0024",
+    "entity": "msiaf-reefer-001-determination",
+    "activity": "decision_point",
+    "agent": "msiaf-gdprf-bridge 1.0.0 / gdprf-engine 2.1.0",
+    "inputs": {
+      "chain_confidence": 0.2015,
+      "uvr": 0.5,
+      "policy": {
+        "deploy_confidence": 0.7,
+        "escalate_unknown_risk": 0.45
+      }
+    },
+    "outputs": {
+      "action": "escalate",
+      "rationale": "residual variance trigger with unpassed identification gate; human must adjudicate unexplained ignorance"
+    },
+    "timestamp": "2026-08-11T17:46:27.965365+00:00",
+    "content_hash": "4042c05310a2cd35effe9eab51c644a0685c49f32f0d8c7b1a41225f683f6dc5",
+    "previous_hash": "64107ab501ca7dc89a271b151eb1fa5bbe13a90c4210f2aba95444a2a632d29e"
+  }
+]
