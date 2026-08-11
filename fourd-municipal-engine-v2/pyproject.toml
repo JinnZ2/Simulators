@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fourd-municipal-engine"
+version = "0.1.0"
+description = "4D Municipal Intelligence Engine: density-normalized language lens, municipal code translator, and advanced analysis pipeline."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+db = ["sqlalchemy", "psycopg2-binary", "geoalchemy2", "geopandas"]
+api = ["fastapi", "uvicorn", "psycopg2-binary"]
+parser = ["pydantic", "openai", "pypdf"]
+integrity = ["rapidfuzz"]
+all = ["sqlalchemy", "psycopg2-binary", "geoalchemy2", "geopandas", "fastapi", "uvicorn", "pydantic", "openai", "pypdf", "rapidfuzz"]
+
+[project.scripts]
+fourd-municipal-engine = "fourd_municipal_engine.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["fourd_municipal_engine*"]

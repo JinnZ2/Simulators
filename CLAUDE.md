@@ -990,6 +990,43 @@ underneath).
   operational tooling, not a claim-making artifact. Roadmap
   (upstream): Phase 2 temporal versioning of ordinance amendments,
   Phase 3 GIS overlay on `spatial_zoning_districts`.
+- `fourd-municipal-engine-v2/` — Second OKComputer drop of the
+  same package with persistence + ETL + parser + integrity + API
+  addons. Landed as a NEW folder (not merged into v1) per user
+  instruction, so both drops stay inspectable as delivered.
+  **v1 core files byte-identical between the two folders**; v2
+  adds five subsystems and four new test files. **New subsystems**:
+  `db/` (bitemporal + simple SQL schema variants + corruption +
+  analytics addendum + Neo4j graph schema + docker-compose /
+  Dockerfile / init-db.sql — inert until you `pip install .[db]`
+  and stand up PostGIS), `parser/` (`Ordinance4DParser` with LLM
+  path when an OpenAI API key is present and a deterministic
+  regex fallback otherwise; extended in v2 to include
+  `stated_intent` + `root_causes` + `references` in the payload
+  by reusing v1 analysis modules), `etl/` (SQLAlchemy ORM
+  `Jurisdiction` / `ZoningDistrict` / `CodeSection` /
+  `Code4DMetrics` + `Municipal4DETLPipeline` +
+  `BatchOrdinanceIngestor` with `ThreadPoolExecutor`),
+  `integrity/` (stdlib-only: `EntityResolutionMatcher` with
+  rapidfuzz-optional / difflib-fallback + `CorruptionRiskCalculator`
+  with exact-per-source weights 0.35/0.25/0.20/0.20 and stepped
+  temporal decay 14/30/60/90/180 → 100/85/60/40/15/0), `api/`
+  (FastAPI `/health`, envelope by-district/by-location,
+  sections/{id}/root-causes, sections/{id}/citations,
+  fees/calculate, audit/intent-compliance — import-guarded, skip
+  at test time when fastapi missing). **Optional-extras policy**:
+  core `pip install .` stays stdlib-only; heavy deps split into
+  `db` (sqlalchemy + psycopg2 + geoalchemy2 + geopandas), `api`
+  (fastapi + uvicorn + psycopg2), `parser` (pydantic + openai +
+  pypdf), `integrity` (rapidfuzz), and `all`. **"Multiple avenues"
+  policy** on ambiguous source: two SQL schema variants shipped
+  side-by-side (bitemporal + simple), LLM parser + regex fallback
+  in the same class, rapidfuzz + difflib in the same matcher,
+  outcome-audit (v1) + integrity/CRI-audit (v2) coexisting in
+  different modules. Total tests: 22 v1 (unchanged) + 18 new
+  stdlib (9 corruption risk + 9 entity resolution) + 2 skipped
+  optional (pydantic / api-imports) = **40 pass, 2 skip**.
+  Same MIT / stdlib-only-core / no-CLAIMS.md posture as v1.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
