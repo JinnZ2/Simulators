@@ -1027,6 +1027,36 @@ underneath).
   stdlib (9 corruption risk + 9 entity resolution) + 2 skipped
   optional (pydantic / api-imports) = **40 pass, 2 skip**.
   Same MIT / stdlib-only-core / no-CLAIMS.md posture as v1.
+- `msiaf-framework/` — Docs-only OKComputer drop. MSIAF =
+  **Multi-Dimensional Systemic Incident Analysis Framework** for
+  transportation and logistics. Fourteen Markdown files (~5,900
+  words) covering the same **four-dimension cascade** thinking as
+  `fourd-municipal-engine/` (Density/Design/Delay/Dollars) but
+  applied to what an incident *is* rather than what an ordinance
+  *does*: D1 Human Factors & Physiology / D2 Operations & System
+  Design / D3 Infrastructure & Environment / D4 Financial,
+  Insurance & Regulatory. Typical cascade **D4 → D2 → D1 → D3**
+  — financial penalty structures force rigid dispatch → operator
+  physiology degrades → hazard was never communicated. Layout:
+  `docs/` (framework-overview + investigation-checklist),
+  `case-studies/` (five reactive analyses: reefer trucking,
+  last-mile delivery, warehouse distribution, maritime port,
+  multimodal infrastructure), `models/` (four proactive redesigns:
+  reefer-financial, last-mile-architecture, warehouse-architecture,
+  infrastructure-WIM), `proxies/` (early-warning indicator
+  catalog). Load-bearing move: the same D4→D2→D1→D3 cascade that
+  manufactures incidents is rewired from **pressure to protection**
+  in the proactive models — safety becomes the path of least
+  resistance rather than a heroic individual act. Not audited
+  under the F-10 protocol (qualitative frame, not quantitative
+  claims). No CLAIMS.md yet — testing the "aligned cascade"
+  thesis quantitatively would need a claims-and-falsifiers
+  addendum. Cross-repo convergences noted in the README:
+  parallel 4D pattern with `fourd-municipal-engine/`, same
+  constraint-axis analysis shape as `neural-augmentation-audit/`,
+  incentive-blindspot / fragility-cascade adjacencies. CC0.
+  Different genre from the simulators — a framework document, not
+  a sim.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
