@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SoilMetrologyTelemetryPayload",
+  "description": "Schema for ingesting heterogeneous soil sensor and observational telemetry into a metrology audit pipeline. Landed verbatim from the source specification.",
+  "type": "object",
+  "required": [
+    "telemetry_id",
+    "timestamp",
+    "location",
+    "target_measurand",
+    "indication",
+    "transduction_metadata",
+    "model_dependence"
+  ],
+  "properties": {
+    "telemetry_id": { "type": "string", "format": "uuid" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "location": {
+      "type": "object",
+      "required": ["latitude", "longitude", "depth_interval_cm"],
+      "properties": {
+        "latitude": { "type": "number", "minimum": -90, "maximum": 90 },
+        "longitude": { "type": "number", "minimum": -180, "maximum": 180 },
+        "depth_interval_cm": {
+          "type": "array",
+          "items": { "type": "number" },
+          "minItems": 2,
+          "maxItems": 2
+        }
+      }
+    },
+    "target_measurand": {
+      "type": "string",
+      "enum": [
+        "active_soc_fraction",
+        "mycorrhizal_hyphal_density",
+        "subsoil_macro_pore_connectivity",
+        "potential_net_n_mineralization"
+      ]
+    },
+    "indication": {
+      "type": "object",
+      "required": ["raw_value", "unit", "sensor_type"],
+      "properties": {
+        "raw_value": { "type": "number" },
+        "unit": { "type": "string" },
+        "sensor_type": {
+          "type": "string",
+          "enum": [
+            "MIR_spectrometer",
+            "amplicon_sequencing_16S_ITS",
+            "electronic_penetrometer",
+            "micro_CT_scanner",
+            "CO2_irga_chamber"
+          ]
+        }
+      }
+    },
+    "transduction_metadata": {
+      "type": "object",
+      "required": ["signal_to_noise_ratio", "last_calibration_date", "calibration_expired"],
+      "properties": {
+        "signal_to_noise_ratio": { "type": "number", "minimum": 0 },
+        "last_calibration_date": { "type": "string", "format": "date" },
+        "calibration_expired": { "type": "boolean" }
+      }
+    },
+    "model_dependence": {
+      "type": "object",
+      "required": ["rung", "bridge_model_id", "training_domain_coverage"],
+      "properties": {
+        "rung": { "type": "string", "enum": ["M0", "M1", "M2", "M3"] },
+        "bridge_model_id": { "type": "string" },
+        "training_domain_coverage": { "type": "number", "minimum": 0.0, "maximum": 1.0 }
+      }
+    }
+  }
+}

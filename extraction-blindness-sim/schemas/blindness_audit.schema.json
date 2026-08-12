@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EpistemicBlindnessAuditReport",
+  "description": "Output schema for an audit engine evaluating sensor telemetry against known physical and algorithmic blindness constraints. Landed verbatim from the source specification. The blindness_mask fields correspond to the flags produced by blindness.BlindnessMask.",
+  "type": "object",
+  "required": [
+    "audit_id",
+    "telemetry_id",
+    "grounding_status",
+    "adjusted_confidence_gradient",
+    "blindness_mask",
+    "model_coupling_action"
+  ],
+  "properties": {
+    "audit_id": { "type": "string", "format": "uuid" },
+    "telemetry_id": { "type": "string", "format": "uuid" },
+    "grounding_status": { "type": "string", "enum": ["measured", "estimated", "assumed"] },
+    "adjusted_confidence_gradient": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+    "blindness_mask": {
+      "type": "object",
+      "required": [
+        "null_state_detected",
+        "alias_state_detected",
+        "saturation_flag",
+        "gate_active",
+        "frame_offset"
+      ],
+      "properties": {
+        "null_state_detected": { "type": "boolean" },
+        "alias_state_detected": { "type": "boolean" },
+        "saturation_flag": { "type": "boolean" },
+        "gate_active": { "type": "boolean" },
+        "frame_offset": { "type": "boolean" },
+        "mask_reasoning": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "model_coupling_action": {
+      "type": "object",
+      "required": ["target_sim_engine", "state_update_payload"],
+      "properties": {
+        "target_sim_engine": {
+          "type": "string",
+          "enum": ["RothC_Py", "MIMICS", "GSoilCPM", "MEMC", "CPlantBox", "SWAT_Plus"]
+        },
+        "state_update_payload": { "type": "object" }
+      }
+    }
+  }
+}

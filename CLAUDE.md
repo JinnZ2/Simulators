@@ -1168,6 +1168,58 @@ underneath).
   is precisely an observational-blindness map in this folder's
   vocabulary — a package degrades *during* the event it records, so
   the tail biases LOW. Arrived at independently. Stdlib-only. CC0.
+- `extraction-blindness-sim/` — Stdlib-only coupled-dynamics sim of
+  the failure mode where **an optimizer whose sensors cannot detect
+  cumulative degradation reads the absence of an error signal as
+  confirmation of safety**, and drives a regenerating substrate past
+  its tipping point while reporting nominal. Three structural
+  blindness operators, all one-sided (they report the substrate as
+  healthier than it is, never worse — asserted by a test, because
+  that one-sidedness is what makes the failure bias toward overshoot
+  rather than caution): **frame blindness** (state outside the
+  yield boundary is absent from the observation, not mispriced in
+  it), **model-dependence masking** (M2/M3 reports regress toward
+  the bridge model's prior outside its training domain; includes the
+  MIR-in-high-clay saturation failure), **temporal aliasing** (trend
+  estimated over a window short relative to relaxation, against a
+  noise floor — emergent, no fudge factor). `Substrate` is logistic
+  with depensation plus recovery hysteresis; two domain profiles
+  (AI-optimised purse-seine fishery, arable soil under nitrogen
+  priming) with every constant marked `[SPEC]` (from source) or
+  `[MODEL]` (scaffolding). Six claims, all SUPPORTED in the pinned
+  run; 9 tests. **Two results ran against expectation.** (1)
+  `EBS_003`: the hard non-negotiable boundary *underperformed* the
+  advisory indicator layer (final stock 0.3107 vs 1.0000, while
+  permitting 4.3× more extraction) — not because it failed but
+  because the spec writes the biomass floor at 50% of B_MSY = 25%
+  of pristine while depensation starts at 40%, so the floor sits
+  below the threshold it defends; **placement dominates authority**.
+  (2) `EBS_006`: temporal aliasing was initially inert because the
+  perceived trend fed only the *reported* safety, never the
+  decision — blindness in a channel nothing acts on is cosmetic.
+  With a `trend_responsive` controller it becomes decisive (0.8798
+  vs 0.0000) in exactly one of three regimes; an effort ratchet
+  defending a fixed target masks it again. **Source contradictions
+  reproduced, not repaired**: `throughput.py` implements five RT
+  formulations as written so the disagreements are measurable. Four
+  were flagged by the source's own audit (two irreconcilable
+  RT_soil equations, a 10/20/30 cm depth conflict, the uncalibrated
+  0.95 threshold, the caloric sign error); **a fifth was not** — the
+  RT metric is inverted relative to its own governance rule, since
+  both prescribed remedies ("reduce extraction", "invest more")
+  *lower* `Output/(Regen+Reinvest)` and only raise the inverted
+  form. Calibration note kept in the README as an instance of the
+  sim's own subject: "120% of F_MSY" sized against textbook `r*K/4`
+  was silently a 1.97× overshoot, because depensation drags true
+  peak regeneration below the logistic value — a model-derived
+  reference point taken for a physical one. Landed **minus the
+  narrative** per user instruction (predation metaphor and
+  rhetorical framing dropped; mechanism, numbers, equations,
+  instrument-verification findings, JSON schemas and self-audit
+  kept). Direct child of `instrument-epistemology/` (M0-M3 ladder,
+  blindness maps); same cascade-speed-blindness target as
+  `climate-modeling/`; hysteresis shape shared with
+  `sustained-activation-gate/`. CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
