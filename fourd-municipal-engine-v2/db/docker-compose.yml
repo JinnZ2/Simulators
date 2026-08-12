@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    container_name: municipal_postgis_db
+    environment:
+      POSTGRES_DB: municipal_4d
+      POSTGRES_USER: municipal_user
+      POSTGRES_PASSWORD: spatial_pass_2026
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgis_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U municipal_user -d municipal_4d"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ..
+      dockerfile: db/Dockerfile
+    container_name: municipal_4d_api
+    restart: always
+    environment:
+      DATABASE_URL: postgresql://municipal_user:spatial_pass_2026@db:5432/municipal_4d
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgis_data:

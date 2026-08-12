@@ -1,0 +1,122 @@
+{
+  "investigation_id": "inv-isotope-diet-001",
+  "instrument": "IRMS + isotopic mixing model",
+  "domain": "biology",
+  "measurand_decomposition": {
+    "measurand": "Proportional diet composition over tissue integration window (weeks-months)",
+    "indication": "Isotope ratios d13C/d15N in consumer tissue (IRMS delta values)",
+    "bridge_model": "Bayesian mixing model with trophic discrimination factors (TDFs)"
+  },
+  "transduction_chain": {
+    "chain_fidelity": 0.2749,
+    "weakest_link": {
+      "name": "diet->tissue incorporation",
+      "fidelity": 0.55,
+      "grade": "assumed"
+    },
+    "links": [
+      {
+        "name": "diet->tissue incorporation",
+        "fidelity": 0.55,
+        "grade": "assumed",
+        "aliases": [
+          "TDFs vary with species, tissue, diet quality, physiology"
+        ]
+      },
+      {
+        "name": "tissue->sample prep",
+        "fidelity": 0.85,
+        "grade": "estimated",
+        "aliases": [
+          "lipids skew d13C; ethanol shifts ratios"
+        ]
+      },
+      {
+        "name": "sample->IRMS reading",
+        "fidelity": 0.98,
+        "grade": "measured",
+        "aliases": []
+      },
+      {
+        "name": "ratios->diet proportions (mixing model)",
+        "fidelity": 0.6,
+        "grade": "estimated",
+        "aliases": [
+          "many diet mixtures produce identical isotope signature"
+        ]
+      }
+    ]
+  },
+  "model_rung": "M2",
+  "traceability": {
+    "highest_break": "unbroken chain to SI",
+    "grade": "measured",
+    "scope_note": "traceability covers ratio measurement, not diet inference"
+  },
+  "blindness_map": [
+    {
+      "kind": "alias_state",
+      "description": "Many distinct diet mixtures yield identical isotope ratios",
+      "consequence": "mixing models return a posterior over diets, not 'the diet' \u2014 often reported as one"
+    },
+    {
+      "kind": "gate",
+      "description": "Unsampled food sources are excluded from the mixing model a priori",
+      "consequence": "the true diet component is invisible if nobody isotopically characterized it"
+    },
+    {
+      "kind": "null_state",
+      "description": "Tissue integrates only the assimilation window \u2014 no memory beyond turnover",
+      "consequence": "seasonal diet shifts vanish depending on tissue choice"
+    }
+  ],
+  "validation": {
+    "forward_simulation": {
+      "injected": 0.4,
+      "recovered": 0.1602,
+      "recovery_error": 0.5996,
+      "passed": false,
+      "detail": {
+        "chain_fidelity": 0.2749,
+        "model_bias": 0.05,
+        "noise": 0.02,
+        "note": "unmodelled fidelity loss+bias appears as systematic error"
+      }
+    }
+  },
+  "coverage": {
+    "aspects": [
+      {
+        "aspect": "IRMS ratio measurement",
+        "grade": "measured"
+      },
+      {
+        "aspect": "sample preparation effects",
+        "grade": "estimated"
+      },
+      {
+        "aspect": "trophic discrimination factors",
+        "grade": "assumed"
+      },
+      {
+        "aspect": "mixing model identifiability",
+        "grade": "estimated"
+      },
+      {
+        "aspect": "source endmember completeness",
+        "grade": "assumed"
+      },
+      {
+        "aspect": "tissue integration window",
+        "grade": "estimated"
+      }
+    ],
+    "grounded_fraction": 0.417,
+    "weakest_aspects": [
+      "trophic discrimination factors",
+      "source endmember completeness",
+      "sample preparation effects"
+    ],
+    "verdict": "mostly assumed \u2014 investigation incomplete"
+  }
+}

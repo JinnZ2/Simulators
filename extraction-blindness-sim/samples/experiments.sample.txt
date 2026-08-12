@@ -1,0 +1,133 @@
+======================================================================
+extraction-blindness-sim — experiment suite
+======================================================================
+An optimizer acting on a blinded observation reads the absence of
+an error signal as confirmation of safety. These six experiments
+measure how far that reading diverges from the substrate's state.
+
+======================================================================
+EXPERIMENT 1 — EBS_001: reported safety vs true health under full blindness
+======================================================================
+  collapsed              : True (step 7)
+  final stock fraction   : 0.0000
+  max safety-health gap  : 0.5630
+
+  step  true_health  reported_safety  gap
+     0       0.4811           1.0000  +0.5189
+     6       0.2481           0.5930  +0.3449
+    12       0.0000           0.5595  +0.5595
+    18       0.0000           1.0000  +1.0000
+    24       0.0000           1.0000  +1.0000
+    30       0.0000           1.0000  +1.0000
+    36       0.0000           1.0000  +1.0000
+    42       0.0000           1.0000  +1.0000
+    48       0.0000           1.0000  +1.0000
+    54       0.0000           1.0000  +1.0000
+
+  at collapse (step 7): reported_safety=0.3728, true_health=0.1755
+  VERDICT: SUPPORTED — blind optimizer's confidence exceeds reality by >0.30 and it collapses
+
+======================================================================
+EXPERIMENT 2 — EBS_002: lead time bought by decay-velocity indicators (passive panel)
+======================================================================
+
+  [fishery]
+    first indicator fired : step 1
+    collapse              : step 7
+    lead time             : 6
+      FIRED replenishment_deficit      at     2   ((catch - recruitment) / recruitment; >0 liquidates principal)
+      FIRED mean_trophic_level         at     1   (decline per decade; fishing down the food web)
+      FIRED juvenile_adult_ratio       at     1   (recruitment failure before spawning biomass drops)
+      FIRED benthic_recovery_lag       at     1   (years for trawled seabed to regain complexity)
+
+  [soil]
+    first indicator fired : step 31
+    collapse              : step 55
+    lead time             : 24
+      FIRED fb_ratio                   at    33   (fungal:bacterial; mycorrhizal network disruption)
+      FIRED humic_recalcitrance        at    31   (humic:fulvic; burning structural carbon for nutrient supply)
+      FIRED compaction_hysteresis      at    40   (surface moisture vs deep drainage divergence; hardpan forming)
+      FIRED qco2                       at    39   (CO2 per unit microbial biomass; stress dissipation not humification)
+  VERDICT: SUPPORTED — both panels fired strictly before collapse of the blind trajectory
+
+======================================================================
+EXPERIMENT 3 — EBS_003: threshold placement vs authority
+======================================================================
+
+  configuration             collapsed  final stock   extracted
+  blind (no correction)          True       0.0000      0.8185
+  indicators (advisory)         False       1.0000      0.3207
+  boundaries (override)         False       0.3107      3.4817
+  both                          False       1.0000      0.3127
+
+  boundary first breached at step: 1
+  depensation threshold is 40% of pristine; the specified biomass
+  floor (50% of B_MSY) sits at 25% of pristine -- below it.
+
+  boundaries beat blind operation      : True
+  advisory beat the hard override      : True
+  VERDICT: SUPPORTED — an earlier advisory signal outperforms a later non-negotiable floor
+
+======================================================================
+EXPERIMENT 4 — EBS_004: RT formulations disagree in sign
+======================================================================
+
+  (a) Orientation: does RT-as-written respond to its own remedies?
+      as written   baseline=0.9130  reduce_extraction=0.7825  increase_reinvest=0.8077
+      inverted     baseline=1.0952  reduce_extraction=1.2780  increase_reinvest=1.2381
+      as-written remedies raise RT : False
+      inverted   remedies raise RT : True
+
+  (b) Caloric sign: does Version B mask a 30% loss of humified carbon?
+      C_humified change      : -0.3000
+      Version B    0.6667 -> 1.1833  (delta +0.5167)
+      mass balance 1.2500 -> 0.1250  (delta -1.1250)
+      Version B masks depletion       : True
+      mass-balance reports depletion  : True
+  VERDICT: SUPPORTED — both contradictions reproduce: orientation inverted, caloric sign wrong
+
+======================================================================
+EXPERIMENT 5 — EBS_005: absolute vs baseline-relative RT trigger
+======================================================================
+
+  (a) Naturally low-RT substrate, operating at its own healthy baseline 0.92
+      absolute(0.95) fired : True   <- false alarm
+      relative(2-sigma)    : False   (RT 0.9200 vs baseline mean 0.9200 sd 0.0063; 2-sigma floor 0.9074 (intact))
+
+  (b) Naturally high-RT substrate, dropped to 1.05 (19% below baseline)
+      absolute(0.95) fired : False   <- missed detection
+      relative(2-sigma)    : True   (RT 1.0500 vs baseline mean 1.3000 sd 0.0141; 2-sigma floor 1.2717 (breached))
+  VERDICT: SUPPORTED — fixed threshold produces both a false alarm and a missed detection
+
+======================================================================
+EXPERIMENT 6 — EBS_006: temporal aliasing, with and without the trend in the loop
+======================================================================
+
+  Two conditions govern whether aliasing matters: whether the
+  trend steers, and whether an effort ratchet is defending a target.
+
+  regime                                            alias steps  final stock
+  trend not in loop, no ratchet, clear                        0       0.0000
+  trend not in loop, no ratchet, aliased                      2       0.0000
+  trend steers, no ratchet, clear                             0       0.8798
+  trend steers, no ratchet, aliased                          13       0.0000
+  trend steers, ratchet defending target, clear               0       0.0000
+  trend steers, ratchet defending target, aliased             8       0.0000
+
+  (a) trend not in loop      -> outcome delta 0.0000  (aliasing cosmetic)
+  (b) trend steers, no ratchet -> outcome delta +0.8798  (aliasing decisive)
+  (c) ratchet defending target -> outcome delta 0.0000  (ratchet dominates)
+  VERDICT: SUPPORTED — aliasing is decisive only where the trend steers AND no ratchet overrides it
+
+======================================================================
+SUMMARY
+======================================================================
+  EBS_001: SUPPORTED
+  EBS_002: SUPPORTED
+  EBS_003: SUPPORTED
+  EBS_004: SUPPORTED
+  EBS_005: SUPPORTED
+  EBS_006: SUPPORTED
+
+  6/6 claims supported by this run.
+  Refutation protocol: a REFUTED row updates the claim, not the constants.

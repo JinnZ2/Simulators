@@ -1,0 +1,134 @@
+{
+  "spec_version": "3.0.0",
+  "claim": {
+    "claim_id": "3f6e2a1c-9b4d-4e8a-a2c1-7d5f0e9b8a11",
+    "domain": "ecology",
+    "statement": "Above-ground biomass in the survey sector exceeds 200 Mg/ha.",
+    "scope": {
+      "temporal_bounds": "2026 dry season",
+      "spatial_bounds": "Sector 7, 40 ha survey polygon",
+      "locality_context": "post-logging secondary forest, mixed recovery ages"
+    },
+    "target_measurand": "Above-ground dry biomass per hectare",
+    "confidence_gradient": 0.62,
+    "grounding_status": "estimated",
+    "model_dependence_rung": "M2",
+    "variance_margin": 0.18,
+    "assigned_proxies": [
+      "lidar-sector7-0001",
+      "plot-census-0001"
+    ],
+    "unknown_variable_risk_score": 0.38,
+    "hidden_variable_search": {
+      "triggered": false,
+      "residual_variance_observed": null,
+      "threshold": 0.15,
+      "identification_gate": {
+        "status": "not_triggered",
+        "method": null,
+        "assumptions": []
+      }
+    }
+  },
+  "proxies": [
+    {
+      "proxy_id": "lidar-sector7-0001",
+      "target_measurand": "Above-ground dry biomass per hectare",
+      "observable_indication": "Georeferenced return point cloud (height/intensity)",
+      "bridge_model": {
+        "model_type": "allometric_regression",
+        "model_dependence_rung": "M2",
+        "calibration_source": "42 harvested reference trees, Panama (transfer)",
+        "uncertainty_source": "model_error"
+      },
+      "transduction_chain": [
+        {
+          "stage": "phenomenon->interaction",
+          "fidelity": 0.95,
+          "grade": "measured",
+          "alias_states": [
+            "dense canopy blocks lower strata"
+          ]
+        },
+        {
+          "stage": "transducer",
+          "fidelity": 0.98,
+          "grade": "measured"
+        },
+        {
+          "stage": "signal_conditioning",
+          "fidelity": 0.92,
+          "grade": "estimated"
+        },
+        {
+          "stage": "bridge(allometry)",
+          "fidelity": 0.6,
+          "grade": "assumed",
+          "alias_states": [
+            "cross-biome model transfer"
+          ]
+        }
+      ],
+      "traceability_pyramid": {
+        "primary_standard_exists": false,
+        "calibration_chain_status": "convention_only",
+        "si_unit_link": null
+      },
+      "blindness_map": {
+        "null_states": [
+          "understory biomass below canopy return threshold"
+        ],
+        "alias_states": [
+          "tall-sparse vs short-dense stands"
+        ],
+        "saturation_limit": "dense high-biomass canopy",
+        "gate_cutoffs": [
+          "minimum return height cutoff 2 m"
+        ],
+        "frame_biases": [
+          "flight lines over accessible terrain only"
+        ]
+      },
+      "fidelity_gradient": 0.78,
+      "epistemic_mask_score": 0.25,
+      "metrology": {
+        "sensor_type": "airborne_lidar",
+        "precision": 0.97,
+        "noise_floor": 0.03,
+        "systematic_bias": 0.01,
+        "provenance": {
+          "precision_source": "measured",
+          "noise_floor_source": "measured",
+          "systematic_bias_source": "estimated",
+          "reference_standard": "hard-target range calibration"
+        }
+      },
+      "calibration": {
+        "method": "isotonic_regression",
+        "calibrated_fidelity": 0.71,
+        "validation_set": "plot-census holdout (n=36)",
+        "calibrated_at": "2026-08-01T00:00:00Z",
+        "expected_calibration_error": 0.06
+      },
+      "validity_claim_id": "v-lidar-biomass-0001",
+      "thermodynamic_physical_grounding": "Photon time-of-flight scattering from canopy elements",
+      "vector_embedding": [
+        0.11,
+        0.22,
+        -0.05,
+        0.31
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "e-lidar-claim-0001",
+      "source_id": "lidar-sector7-0001",
+      "target_id": "3f6e2a1c-9b4d-4e8a-a2c1-7d5f0e9b8a11",
+      "relationship_type": "proxy_of",
+      "coupling_strength": 0.8,
+      "evidence_weight": 0.75,
+      "last_updated": "2026-08-12T00:00:00Z"
+    }
+  ]
+}

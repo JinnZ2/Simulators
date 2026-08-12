@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Field Fabrication & Materials Reference</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0; padding: 0; background: #fafafa; color: #222;
+    line-height: 1.55; font-size: 15px;
+  }
+  .container { max-width: 720px; margin: 0 auto; background: #fff; min-height: 100vh; }
+  .header {
+    background: #1a1a2e; color: #fff; padding: 20px 16px; position: sticky; top: 0; z-index: 100;
+  }
+  .header h1 { margin: 0; font-size: 20px; font-weight: 600; }
+  .header p { margin: 6px 0 0; font-size: 13px; color: #aaa; }
+  .toc {
+    padding: 12px 16px; background: #f0f0f0; border-bottom: 1px solid #ddd;
+  }
+  .toc-title { font-size: 13px; font-weight: 600; color: #555; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .toc-btn {
+    padding: 10px 12px; background: #fff; border: 1px solid #ccc; border-radius: 6px;
+    font-size: 13px; color: #333; cursor: pointer; text-align: left; transition: all 0.1s;
+  }
+  .toc-btn:hover, .toc-btn:active { background: #1a1a2e; color: #fff; border-color: #1a1a2e; }
+  .section { display: none; padding: 16px; }
+  .section.active { display: block; }
+  .back-bar {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 16px;
+  }
+  .back-btn {
+    padding: 8px 14px; background: #1a1a2e; color: #fff; border: none; border-radius: 6px;
+    font-size: 13px; cursor: pointer;
+  }
+  .section-title { font-size: 22px; font-weight: 600; margin: 0 0 16px; color: #1a1a2e; }
+  h3 { font-size: 16px; font-weight: 600; color: #1a1a2e; margin: 24px 0 10px; padding-bottom: 6px; border-bottom: 2px solid #e0e0e0; }
+  h4 { font-size: 14px; font-weight: 600; color: #333; margin: 18px 0 8px; }
+  p { margin: 0 0 12px; }
+  .note {
+    background: #fff8e1; border-left: 4px solid #f9a825; padding: 10px 14px; margin: 12px 0;
+    font-size: 14px; color: #5d4037;
+  }
+  .warning {
+    background: #ffebee; border-left: 4px solid #c62828; padding: 10px 14px; margin: 12px 0;
+    font-size: 14px; color: #b71c1c;
+  }
+  .tip {
+    background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 10px 14px; margin: 12px 0;
+    font-size: 14px; color: #1b5e20;
+  }
+  table {
+    width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px;
+  }
+  th {
+    background: #1a1a2e; color: #fff; padding: 10px 8px; text-align: left; font-weight: 500;
+  }
+  td { padding: 8px; border-bottom: 1px solid #e0e0e0; vertical-align: top; }
+  tr:nth-child(even) { background: #f5f5f5; }
+  .formula {
+    background: #f5f5f5; padding: 10px 14px; border-radius: 6px; font-family: "SF Mono", Monaco, monospace;
+    font-size: 14px; margin: 10px 0; overflow-x: auto;
+  }
+  .data-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0;
+  }
+  .data-card {
+    background: #f8f8f8; border: 1px solid #e0e0e0; border-radius: 6px; padding: 10px;
+  }
+  .data-card .label { font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 0.3px; }
+  .data-card .value { font-size: 16px; font-weight: 600; color: #1a1a2e; margin-top: 4px; }
+  ul, ol { margin: 8px 0; padding-left: 20px; }
+  li { margin-bottom: 6px; }
+  .step { display: flex; gap: 10px; margin: 10px 0; }
+  .step-num {
+    width: 24px; height: 24px; background: #1a1a2e; color: #fff; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .step-body { flex: 1; }
+  .step-title { font-weight: 600; font-size: 14px; }
+  .step-desc { font-size: 14px; color: #555; margin-top: 2px; }
+  .divider { height: 1px; background: #e0e0e0; margin: 20px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>Field Fabrication &amp; Materials Reference</h1>
+  <p>Offline guide for lime, ammonia, precision instruments, and smelting</p>
+</div>
+
+<div class="toc" id="toc">
+  <div class="toc-title">Jump to Section</div>
+  <div class="toc-grid">
+    <button class="toc-btn" onclick="showSection('lime')">Lime</button>
+    <button class="toc-btn" onclick="showSection('ammonia')">Ammonia</button>
+    <button class="toc-btn" onclick="showSection('aluminum')">Aluminum Smelting</button>
+    <button class="toc-btn" onclick="showSection('straightedge')">Straight Rules</button>
+    <button class="toc-btn" onclick="showSection('square')">Squares</button>
+    <button class="toc-btn" onclick="showSection('level')">Levels</button>
+    <button class="toc-btn" onclick="showSection('plumb')">Plumb Bobs</button>
+    <button class="toc-btn" onclick="showSection('sextant')">Sextants</button>
+    <button class="toc-btn" onclick="showSection('divider')">Dividers &amp; Calipers</button>
+    <button class="toc-btn" onclick="showSection('protractor')">Angles &amp; Protractors</button>
+  </div>
+</div>
+
+<div class="section active" id="lime">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Lime: Burning, Slaking, &amp; Using</div>
+
+  <h3>Quick Reference</h3>
+  <div class="data-grid">
+    <div class="data-card"><div class="label">Burn Temperature</div><div class="value">825-900 C (1500-1650 F)</div></div>
+    <div class="data-card"><div class="label">Slaking Ratio</div><div class="value">1 part quicklime : 3-4 parts water</div></div>
+    <div class="data-card"><div class="label">Set Time (lime putty)</div><div class="value">Days to weeks</div></div>
+    <div class="data-card"><div class="label">Shelf Life (putty)</div><div class="value">Indefinite under water</div></div>
+  </div>
+
+  <h3>Types of Lime</h3>
+  <table>
+    <tr><th>Type</th><th>How Made</th><th>Uses</th></tr>
+    <tr><td><strong>Quicklime (CaO)</strong></td><td>Limestone burned at 825-900 C. White, crumbly, very reactive.</td><td>Slaking to make lime putty, whitewash, mortar. Keep dry.</td></tr>
+    <tr><td><strong>Slaked Lime / Lime Putty (Ca(OH)2)</strong></td><td>Quicklime + water. Slakes violently, generates heat.</td><td>Mortar, plaster, whitewash, limewash for buildings. Best aged 3+ months.</td></tr>
+    <tr><td><strong>Hydrated Lime (bagged)</strong></td><td>Quicklime slaked with minimal water, then dried and powdered.</td><td>Mortar additive, soil stabilization. Not as good for plaster as putty.</td></tr>
+    <tr><td><strong>Hydraulic Lime</strong></td><td>Contains clay/silica impurities. Sets under water.</td><td>Foundations, exterior work, cold/damp climates. NHL 2, 3.5, 5 grades.</td></tr>
+  </table>
+
+  <h3>Burning Limestone</h3>
+  <div class="formula">CaCO3 + heat (825 C) -&gt; CaO + CO2</div>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Build the kiln</div><div class="step-desc">Stack limestone and fuel (wood, coal, dry biomass) in layers. A simple clamp kiln or pit works. Ensure draft — chimney effect or side vents.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Fire to 825-900 C</div><div class="step-desc">Too low = incomplete burn (core remains limestone). Too high = overburned, dead lime (won't slake properly). Cherry-red to orange heat is right. Limestone glows dull red at 700 C, bright orange at 900 C.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Hold temperature 6-72 hours</div><div class="step-desc">Depends on stone size and kiln. Small stones (egg-sized) 6-12 hours. Large blocks 24-72 hours. Uniform size burns evenly.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Cool before opening</div><div class="step-desc">Let kiln cool completely. Opening hot lets in moisture and CO2, re-carbonating the quicklime. Result should be light, porous, white/grey chunks.</div></div></div>
+
+  <div class="warning"><strong>SAFETY:</strong> Quicklime is caustic. Wear gloves and eye protection. It reacts violently with water, generating steam and heat that can spatter. Always add quicklime TO water, not water to quicklime. Stand back during slaking.</div>
+
+  <h3>Slaking</h3>
+  <div class="formula">CaO + H2O -&gt; Ca(OH)2 + heat (65 kJ/mol)</div>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Use a metal or wooden tub</div><div class="step-desc">Not plastic — heat can melt it. Add water first (3-4 parts water to 1 part quicklime by volume).</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Add quicklime gradually</div><div class="step-desc">It will boil, steam, and crackle. Stand clear. The mixture will reach 100 C easily. Stir with a wooden stick.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Let it settle</div><div class="step-desc">After reaction subsides, let it sit. The solids settle to a thick paste. Cover with a layer of water to prevent carbonation from air.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Age the putty</div><div class="step-desc">Minimum 2 weeks. Better 3+ months. Longer aging = finer particle size, better workability, stronger set. Keep submerged in water indefinitely.</div></div></div>
+
+  <h3>Lime for House Coating (Whitewash / Limewash)</h3>
+  <div class="formula">Lime putty + water to brushable consistency + optional binders</div>
+  <p><strong>Basic recipe:</strong> 1 part lime putty : 1-2 parts water. Add salt (1/2 cup per gallon) or alum (1/4 cup) as binder to improve adhesion and water resistance. Add pigment (ochre, iron oxide, etc.) for color.</p>
+  <p><strong>Application:</strong> Dampen wall first. Apply 2-3 thin coats, not one thick one. Each coat must be touch-dry before next. Works on stone, brick, earth, wood (with casein or linseed oil binder). Breathes — lets moisture escape.</p>
+
+  <div class="tip"><strong>Far North Tip:</strong> In cold climates, lime work needs temps above 5 C (40 F) to set. If applying in fall before freeze, ensure 3-5 days above freezing. Hydraulic lime (NHL 3.5 or 5) sets better in cold/damp than pure lime putty.</div>
+
+  <h3>Testing Burn Quality</h3>
+  <ul>
+    <li><strong>Good quicklime:</strong> Light, porous, white/grey. Falls apart when poked. Slakes vigorously.</li>
+    <li><strong>Underburned:</strong> Dense, hard core. Doesn't slake fully. Re-burn or discard core.</li>
+    <li><strong>Overburned / dead burned:</strong> Very hard, dense, glassy. Slakes slowly or not at all. Useless for mortar/plaster — use for road base or discard.</li>
+  </ul>
+
+  <div class="divider"></div>
+  <h3>Sources of Limestone</h3>
+  <p>Any calcium carbonate rock: limestone, chalk, marble, coral, shells (oyster, clam, egg). Crush to egg-size or smaller for even burning. Wash to remove dirt/organics — they cause uneven burning and smell.</p>
+</div>
+
+<div class="section" id="ammonia">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Ammonia: Production &amp; Use</div>
+
+  <h3>Quick Reference</h3>
+  <div class="data-grid">
+    <div class="data-card"><div class="label">Formula</div><div class="value">NH3</div></div>
+    <div class="data-card"><div class="label">Boiling Point</div><div class="value">-33 C (-28 F)</div></div>
+    <div class="data-card"><div class="label">pH (1% solution)</div><div class="value">~11.6</div></div>
+    <div class="data-card"><div class="label">Concentration (household)</div><div class="value">5-10% NH3 in water</div></div>
+  </div>
+
+  <h3>Field Production from Organic Waste</h3>
+  <div class="formula">Organic nitrogen (urea, proteins) + bacteria + time -&gt; NH3 + CO2 + other compounds</div>
+
+  <h4>Method 1: Urine Collection (Simplest)</h4>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Collect urine in a sealed container</div><div class="step-desc">Urine is ~95% water, 2% urea, and traces of salts. Urea breaks down to ammonia over time. A 20L bucket with a loose lid works. Keep it anaerobic (no air).</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Let it age 2-4 weeks</div><div class="step-desc">Bacteria convert urea to ammonia. The smell will become very strong. In warm weather, 2 weeks. In cold, 4+ weeks. Stir occasionally.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Strain and dilute</div><div class="step-desc">Strain through cloth to remove solids. Dilute 1:10 with water for general cleaning. 1:5 for heavy degreasing. Full strength for stripping paint or heavy grease (with ventilation).</div></div></div>
+
+  <h4>Method 2: Batch Fermentation (Higher Concentration)</h4>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Mix nitrogen source with carbon</div><div class="step-desc">Use manure, urine, blood meal, or fish waste. Mix with straw, sawdust, or leaves (2:1 nitrogen to carbon). Moisture should be like a wrung-out sponge.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Seal in a barrel or pit</div><div class="step-desc">Anaerobic fermentation produces ammonia gas. In a sealed barrel, the gas dissolves into any liquid present. A gas trap (water seal) prevents pressure buildup and captures some ammonia.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Collect liquid after 4-8 weeks</div><div class="step-desc">The liquid at the bottom will be ammonia-rich. Siphon it off. The remaining solids are compost.</div></div></div>
+
+  <h3>Concentration by Distillation (Optional)</h3>
+  <p>To make stronger ammonia solution, gently heat the aged urine in a closed container with a condenser tube leading to a cooled collection vessel. Ammonia gas boils off at -33 C but dissolves readily in water. The condenser can be a copper coil in cold water. <strong>Do this outdoors with ventilation.</strong></p>
+
+  <h3>Uses</h3>
+  <table>
+    <tr><th>Use</th><th>Dilution</th><th>Notes</th></tr>
+    <tr><td>General cleaning</td><td>1:10 to 1:20</td><td>Glass, floors, counters. Rinse after.</td></tr>
+    <tr><td>Degreasing</td><td>1:5</td><td>Engines, tools, machinery. Wear gloves.</td></tr>
+    <tr><td>Paint stripping</td><td>Full strength or 1:2</td><td>Soak painted metal. Ammonia swells old oil paint.</td></tr>
+    <tr><td>Neutralizing acid</td><td>1:10</td><td>After battery acid spills, lime acid burns.</td></tr>
+    <tr><td>Textile cleaning</td><td>1:20</td><td>Removes protein stains (blood, milk). Test colorfastness.</td></tr>
+    <tr><td>Pest deterrent</td><td>1:10</td><td>Spray around garden edges. Repels rabbits, deer.</td></tr>
+  </table>
+
+  <div class="warning"><strong>SAFETY:</strong> Ammonia is caustic and the vapor is irritating. Never mix with bleach — produces toxic chloramine gas. Use in ventilated areas. Eye and skin protection recommended for concentrated solutions. In cold climates, ammonia solutions stay stable indefinitely but may freeze at high concentrations.</div>
+
+  <div class="tip"><strong>Storage:</strong> Store in sealed plastic or glass (not aluminum or copper — ammonia corrodes them). Label clearly. In sub-zero temps, dilute solutions freeze; keep in a heated space or use before winter.</div>
+</div>
+
+<div class="section" id="aluminum">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Aluminum Smelting &amp; Casting</div>
+
+  <h3>Quick Reference</h3>
+  <div class="data-grid">
+    <div class="data-card"><div class="label">Melting Point</div><div class="value">660 C (1220 F)</div></div>
+    <div class="data-card"><div class="label">Pouring Temp</div><div class="value">700-750 C (1300-1400 F)</div></div>
+    <div class="data-card"><div class="label">Specific Gravity</div><div class="value">2.70</div></div>
+    <div class="data-card"><div class="label">Shrinkage</div><div class="value">~6% by volume</div></div>
+  </div>
+
+  <h3>Scrap Sources &amp; Identification</h3>
+  <table>
+    <tr><th>Source</th><th>Alloy Type</th><th>Notes</th></tr>
+    <tr><td>Beverage cans</td><td>3004 (body), 5182 (tab)</td><td>Clean, thin. Lots of oxide. Mix with thicker scrap.</td></tr>
+    <tr><td>Engine pistons</td><td>Hypereutectic Al-Si</td><td>High silicon, hard. Good for wear parts. Hard to machine.</td></tr>
+    <tr><td>Wheel rims</td><td>356 or A356</td><td>Excellent casting alloy. Clean, thick, good yield.</td></tr>
+    <tr><td>Transmission cases</td><td>319 or A380</td><td>Good castability, some iron content. Machinable.</td></tr>
+    <tr><td>Ladder/scaffolding</td><td>6061 or 6063</td><td>Wrought alloy. Doesn't cast well — cracks, hot shorts. Use for machining stock, not casting.</td></tr>
+    <tr><td>Wire, cable</td><td>1100 or 1350</td><td>Pure aluminum. Very soft. Good for electrical, not structural.</td></tr>
+    <tr><td>Heat sinks</td><td>6063 or 6061</td><td>Wrought. Poor for casting. Good machining stock.</td></tr>
+  </table>
+
+  <div class="note"><strong>Alloy Test:</strong> Spark test with grinder. Wrought alloys (6061, 1100) give short, bright sparks. Cast alloys (356, 319) give fewer sparks. Pure aluminum (1100) gives almost none. Magnesium (AZ91) gives very bright white sparks — do NOT melt with aluminum, fire hazard.</div>
+
+  <h3>Furnace Types</h3>
+  <h4>1. Charcoal / Wood Furnace (Simplest)</h4>
+  <p>Steel bucket or pipe, refractory lining (fireclay, sand, ash), charcoal or hardwood fuel. Air blast from hair dryer or hand bellows through tuyere pipe. Reaches 700-800 C easily. Good for 1-5 kg melts.</p>
+
+  <h4>2. Propane Burner (Cleanest)</h4>
+  <p>Reil or venturi burner into a steel drum lined with ceramic blanket (Kaowool). Reaches 900+ C. Good for 5-20 kg. Propane consumption ~1 lb per kg of aluminum melted.</p>
+
+  <h4>3. Waste Oil Burner (Free Fuel)</h4>
+  <p>Drip waste oil (motor oil, transmission fluid, hydraulic oil) into a hot chamber with air blast. Very hot, very dirty. Requires good ventilation and a scrap steel chamber. Can melt 10+ kg.</p>
+
+  <h3>Crucibles</h3>
+  <table>
+    <tr><th>Type</th><th>Max Temp</th><th>Pros</th><th>Cons</th></tr>
+    <tr><td>Steel pipe/ can</td><td>~900 C</td><td>Free, available</td><td>Lasts 3-10 melts, dissolves iron into aluminum</td></tr>
+    <tr><td>Graphite (salamander)</td><td>1600 C</td><td>Long life, clean metal</td><td>Expensive, fragile to thermal shock</td></tr>
+    <tr><td>Silicon carbide</td><td>1500 C</td><td>Durable, good heat transfer</td><td>Expensive, heavy</td></tr>
+    <tr><td>Fireclay (homemade)</td><td>1200 C</td><td>Free, customizable</td><td>Short life, porous, absorbs metal</td></tr>
+  </table>
+
+  <h3>Melting Procedure</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Preheat furnace and crucible</div><div class="step-desc">Gradual heat prevents thermal shock. A cold crucible dropped into a hot furnace will crack.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Charge with dry scrap</div><div class="step-desc">Wet or oily metal causes steam explosions. Pre-dry in sun or near furnace. Small pieces melt faster than large. Fill crucible 2/3 full.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Flux and degas</div><div class="step-desc">Add flux (salt + cryolite 50:50, or just plain salt) to dissolve oxides. Skim dross (oxide skin) off the top. For degassing, plunge a dry piece of wood or a chlorine tablet (swimming pool) to release hydrogen bubbles.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Skim and check temperature</div><div class="step-desc">Metal should be fluid, slightly shiny. If it's thick and pasty, it's too cold. If it's smoking and burning, it's too hot. A piece of wood charred black in 3 seconds = about 700 C.</div></div></div>
+  <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Pour into preheated mold</div><div class="step-desc">Mold must be warm and dry. Cold mold = cold shuts, misruns, porosity. Pour steadily, fill sprue quickly, don't stop and start. Dross stays in crucible if you pour carefully.</div></div></div>
+
+  <h3>Making Molds</h3>
+  <h4>Green Sand (Simplest, Reusable)</h4>
+  <p><strong>Mix:</strong> 85% fine sand (screened, washed), 10% bentonite clay (cat litter — unscented, clay-based), 5% water. Mix thoroughly. Should clump when squeezed, break cleanly when pulled apart. Add parting powder (talc, cornstarch, fine ash) to pattern before ramming.</p>
+  <p><strong>Ramming:</strong> Pack sand firmly around pattern in a flask (two-part box). Strike off level. Separate flask halves, remove pattern carefully. Cut sprue and riser channels. Reassemble, pour.</p>
+
+  <h4>Lost Foam (Complex Shapes)</h4>
+  <p>Carve shape from expanded polystyrene (Styrofoam). Embed in sand. Pour molten metal directly onto foam — it vaporizes and the metal fills the cavity. No parting lines, complex shapes possible. Vent gases well.</p>
+
+  <h4>Investment / Plaster Mold (Precision)</h4>
+  <p>Mix plaster of Paris + silica flour (fine sand) + water. Pour around wax or plastic pattern. Let set. Heat gently to burn out pattern (200 C for hours). Then pour metal. Good for jewelry, small precision parts.</p>
+
+  <div class="warning"><strong>SAFETY:</strong> Molten aluminum looks like water but is 700 C. Water contact = steam explosion. No wet tools, no damp floors, no sweaty hands. Wear leather boots, long pants, natural fiber shirt (synthetic melts into skin), face shield, leather gloves. Have a dry sand bucket ready for spills. Never use water on a metal fire.</div>
+
+  <div class="tip"><strong>Far North Tip:</strong> In extreme cold, molds and crucibles absorb moisture from air. Preheat everything near the furnace for 30+ minutes before use. Condensation on cold metal poured with hot aluminum causes violent steam. Store sand in a heated space or dry it before use.</div>
+</div>
+
+<div class="section" id="straightedge">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Straight Rules &amp; Straightedges</div>
+
+  <h3>Principles</h3>
+  <p>A straightedge is a reference, not a measuring tool. It establishes a line of perfect straightness against which other things are checked or cut. The three-plate method (scraping three plates against each other until they all mate perfectly) is the fundamental way to generate flatness from nothing.</p>
+
+  <h3>Three-Plate Method (Generating Flatness)</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Prepare three rough plates</div><div class="step-desc">Cast or machine three plates of similar size (6x6" to 12x12"). Aluminum, cast iron, or steel. Surface should be reasonably flat to start — within 0.010" or so.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Apply marking compound</div><div class="step-desc">Prussian blue, lipstick, or even charcoal + oil. Thin, even layer on plate A.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Rub plate B against A</div><div class="step-desc">Slide B over A in a figure-8 pattern. High spots pick up blue. Scrape the blue spots on B with a scraper (triangle scraper, hook scraper, or sharpened file edge).</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Rub plate C against A</div><div class="step-desc">Same process. Scrape high spots on C. Now A and C are flatter, but B is still rough relative to them.</div></div></div>
+  <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Rub B against C</div><div class="step-desc">Now B and C are compared. Scrape high spots. Repeat the cycle: A vs B, A vs C, B vs C. Each cycle makes all three flatter. 10-20 cycles gets you within 0.0001".</div></div></div>
+
+  <h3>Scraping Tools</h3>
+  <table>
+    <tr><th>Tool</th><th>Make From</th><th>Use</th></tr>
+    <tr><td>Triangle scraper</td><td>Old file, ground to 3 edges</td><td>General flat scraping, 60 degree cutting angle</td></tr>
+    <tr><td>Hook scraper</td><td>Old file, bent and ground</td><td>Curved surfaces, bearing scraping</td></tr>
+    <tr><td>Flat scraper</td><td>Old file, ground flat</td><td>Precision flat work, fine finishing</td></tr>
+    <tr><td>Bull nose scraper</td><td>Round file or rod</td><td>Concave surfaces, radii</td></tr>
+  </table>
+
+  <div class="tip"><strong>Grinding a scraper:</strong> Hold file in vice. Grind end flat (90 degrees to length). Then grind relief angle (10-15 degrees) on underside. Hone cutting edge on oilstone. Edge should be sharp but not razor-thin — it will chip. A burr is OK; it breaks off and leaves a fine finish.</div>
+
+  <h3>Casting a Straight Rule from Aluminum</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Make a wooden pattern</div><div class="step-desc">Oversize by 1/8" in length, 1/16" in thickness. Add draft (1-2 degree taper) for easy removal from sand. Make it slightly bowed (crowned) — scraping will flatten it.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Cast in green sand</div><div class="step-desc">Use a flat-back mold (pattern on a flat board, sand rammed on top). This gives one flat face automatically. The other face will need machining or scraping.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Machine or file to rough size</div><div class="step-desc">Leave 0.020-0.030" for scraping. If you have a mill or lathe, skim the faces. If not, file and sand flat.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Scrape to flatness</div><div class="step-desc">Use the three-plate method or rub against a known flat surface (granite countertop, thick glass, precision ground plate if you have one). Blue, rub, scrape, repeat. For a 12" rule, aim for 0.001" or better.</div></div></div>
+  <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Mark graduations (optional)</div><div class="step-desc">Scribe with a sharp divider or etching tool. For a working rule, 1/8" or 1/16" divisions are practical. For a precision straightedge, leave it unmarked — it's a reference, not a ruler.</div></div></div>
+
+  <h3>Testing Straightness</h3>
+  <p><strong>Without instruments:</strong> Place straightedge on a flat surface. Shine a light behind it. No light leaks = straight. Rotate 180 degrees and check again — this reveals twist. Check edge-on against a stretched string (gravity catenary is negligible over short distances).</p>
+  <p><strong>With a feeler gauge:</strong> Place straightedge on surface. Slide feeler gauges under gaps. Record gap at each point. A 12" straightedge should have less than 0.001" gap anywhere.</p>
+  <p><strong>Optical:</strong> Sight along the edge. Your eye is remarkably sensitive to deviations. Look for a straight line of reflection. Any wiggle = error.</p>
+
+  <div class="note"><strong>Aluminum straightedges:</strong> Light, non-marring, easy to cast. But soft — edges dent. For a shop straightedge, cast iron or steel is better. For a field tool, aluminum is fine. Harden the edge by cold-working (peening with a hammer) or case-hardening with Kasenit if available.</div>
+</div>
+
+<div class="section" id="square">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Squares: Try Squares &amp; Carpenter's Squares</div>
+
+  <h3>Quick Reference</h3>
+  <div class="data-grid">
+    <div class="data-card"><div class="label">Target Accuracy</div><div class="value">90.0 degrees +/- 0.05</div></div>
+    <div class="data-card"><div class="label">Test Method</div><div class="value">Scribe line, flip, compare</div></div>
+  </div>
+
+  <h3>Generating a Right Angle from Scratch</h3>
+  <p><strong>Method 1: 3-4-5 Triangle</strong></p>
+  <div class="formula">3^2 + 4^2 = 5^2 (9 + 16 = 25)</div>
+  <p>Mark 3 units on one edge, 4 units on the other, measure diagonal — should be exactly 5. Any multiple works: 6-8-10, 12-16-20, 30-40-50. The larger the triangle, the more accurate. A 30-40-50" layout on a floor is accurate to 0.1 degrees.</p>
+
+  <p><strong>Method 2: Compass Construction (Thales' Theorem)</strong></p>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Draw a baseline</div><div class="step-desc">Scribe a straight line on your workpiece or a flat plate.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Mark center point</div><div class="step-desc">Pick a point on the line. This will be the corner of your square.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Draw a semicircle</div><div class="step-desc">Using a compass or divider, draw a semicircle centered on that point, crossing the baseline at two points.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Pick any point on the semicircle</div><div class="step-desc">Connect that point to the two baseline crossings. The angle at the semicircle point is exactly 90 degrees.</div></div></div>
+
+  <h3>Building a Try Square</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Cast or machine the blade and stock</div><div class="step-desc">Blade: 6-12" long, 1-1.5" wide, 3/16-1/4" thick. Stock (handle): 3-4" long, 2-2.5" tall, same thickness. Aluminum, brass, or cast iron.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Machine the mating faces flat and square</div><div class="step-desc">The face of the stock that meets the blade must be flat and exactly 90 degrees to the reference face. If you have a mill, this is straightforward. If not, file and scrape using the 3-4-5 method to check.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Attach blade to stock</div><div class="step-desc">Rivets, screws, or brazing. The joint must be rigid. If riveting, use brass or copper rivets (softer than steel, won't crack the aluminum). Peen the rivets carefully.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Test and adjust</div><div class="step-desc">Place square on a flat edge. Scribe a line along the blade. Flip the square over (mirror image). Scribe another line from the same starting point. The two lines should be exactly on top of each other. If they diverge, the square is off by half that angle. File or scrape the stock face to correct.</div></div></div>
+
+  <div class="tip"><strong>Flip Test:</strong> This is the most important test for any square. Scribe, flip, scribe again. Any deviation = error. A 0.010" gap at 12" = about 0.05 degrees error. For woodworking, 0.1 degrees is acceptable. For metalworking, 0.02 degrees is better.</div>
+
+  <h3>Adjustable Square</h3>
+  <p>If you want a square that can be set to any angle, make a bevel gauge style: two arms pinned at one end with a wing nut or thumb screw. Copy an angle from a workpiece, then transfer to a saw or machine. Simplest adjustable angle tool.</p>
+</div>
+
+<div class="section" id="level">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Levels: Spirit, Water, &amp; Plumb</div>
+
+  <h3>Spirit Level (Bubble Level)</h3>
+  <h4>How It Works</h4>
+  <p>A curved glass tube (vial) filled with alcohol and a small air bubble. When level, the bubble sits at the center of the curve. The curve radius determines sensitivity: tighter curve = more sensitive. A 10-second level (bubble moves 1/10" per 10 feet) is standard. A 2-minute level is very sensitive.</p>
+
+  <h4>Making a Spirit Level from Scratch</h4>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Make the body</div><div class="step-desc">Cast or machine a rectangular bar, 12-24" long, 1.5-2" tall, 3/4-1" thick. Aluminum or cast iron. One face must be flat (reference face). Scrape or machine it flat.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Mill or file a vial channel</div><div class="step-desc">A slot 3/8" wide, 1/4" deep, running lengthwise. The bottom of the slot must be parallel to the reference face within 0.001".</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Make or source a vial</div><div class="step-desc">Commercial vials are cheap and available. To make one: seal a glass tube at both ends, fill with ethanol or methanol (rubbing alcohol works), leave a small bubble. The tube must have a slight curve. A straight tube won't work — the bubble won't center. Curvature can be ground into the tube or the tube can be bent slightly while hot.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Mount the vial</div><div class="step-desc">Set the vial in the channel with plaster, epoxy, or hot glue. Adjust it until the bubble centers when the body is on a known flat surface. Test by reversing the level end-for-end on the same surface — bubble should read the same both ways. If not, shim the vial until it does.</div></div></div>
+  <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Add a cross vial (optional)</div><div class="step-desc">A second vial perpendicular to the first lets you level in two directions at once. Mount it the same way, testing against a known flat.</div></div></div>
+
+  <div class="tip"><strong>Testing a level:</strong> Place on a flat surface, note bubble position. Flip end-for-end. Bubble should be in the same position. If it moves, the vial is not parallel to the body. Shim or remount. Also test by placing on a flat surface and sliding a shim under one end until bubble centers. Measure shim thickness. Reverse level and repeat. Should match exactly.</div>
+
+  <h3>Water Level (No Vial Needed)</h3>
+  <p>The simplest, most accurate level. Uses the principle that water finds its own level.</p>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Get a long clear tube</div><div class="step-desc">Garden hose, aquarium tubing, IV tubing. 10-50+ feet. Clear is best so you can see the water.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Fill with water</div><div class="step-desc">Fill almost completely, leaving a small bubble at the top. No air gaps in the line. Add food coloring to see the level easily.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Hold both ends up</div><div class="step-desc">The water level at both ends is exactly the same elevation, regardless of the path the hose takes. Mark the wall at the water level on both ends. Those marks are level with each other.</div></div></div>
+
+  <div class="note"><strong>Accuracy:</strong> A water level is accurate to 1/8" over 100 feet if you hold the tube steady and read the meniscus (bottom of the curve) consistently. No moving parts, no calibration, works over any distance. In freezing weather, use windshield washer fluid or antifreeze instead of water.</div>
+
+  <h3>Plumb Bob Level (Vertical)</h3>
+  <p>See the Plumb Bobs section. A plumb bob establishes vertical. Two plumb bobs spaced apart, sighted along, establish a vertical plane. A plumb bob + a horizontal reference (water level or spirit level) = full 3D orientation.</p>
+</div>
+
+<div class="section" id="plumb">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Plumb Bobs</div>
+
+  <h3>Principles</h3>
+  <p>A plumb bob uses gravity to establish a vertical line. The center of mass must be directly below the suspension point. Accuracy depends on: symmetry of the bob, point sharpness, stillness of air, and length of line. A longer line = more accurate (swings less, settles faster). A 4-foot plumb is more accurate than a 12-inch one.</p>
+
+  <h3>Quick Reference</h3>
+  <div class="data-grid">
+    <div class="data-card"><div class="label">Ideal Weight</div><div class="value">8-16 oz (225-450g)</div></div>
+    <div class="data-card"><div class="label">Ideal Length</div><div class="value">4-6 feet</div></div>
+    <div class="data-card"><div class="label">Material</div><div class="value">Brass, steel, lead, cast iron</div></div>
+    <div class="data-card"><div class="label">Point Angle</div><div class="value">30-60 degrees</div></div>
+  </div>
+
+  <h3>Casting a Plumb Bob from Aluminum</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Make a pattern</div><div class="step-desc">Classic shape: teardrop or cone with a rounded top. 3-4" tall, 1-1.5" diameter at base. Include a loop or eye at the top for the string. Pattern should have 1-2 degree draft for easy removal from sand.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Cast in green sand</div><div class="step-desc">Two-part mold. The point should be in the cope (top half) so it fills cleanly. Use a central sprue. The eye/loop can be cast in or drilled/tapped later.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Machine or file to shape</div><div class="step-desc">Clean up casting flash. Turn or file the body to be concentric and smooth. The point is critical — it must be sharp and centered.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Center of mass check</div><div class="step-desc">Hang the bob from its eye on a pin. It should hang perfectly vertical. If it leans, the mass is off-center. File material from the heavy side until it hangs straight. Test by rotating 90 degrees — should still hang straight.</div></div></div>
+  <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Sharpen the point</div><div class="step-desc">Grind or file to a sharp point, 30-60 degree cone. The point is the reference — it must be sharp and on the centerline. Harden if possible (case harden steel, or use a hardened steel tip pressed into an aluminum body).</div></div></div>
+
+  <h3>Alternative: The Mason's Plumb (Simplest)</h3>
+  <p>A steel nut, bolt, or piece of scrap with a string tied through a hole. Not elegant but functional. Weight should be 8+ oz for stability. A 1/2" bolt 4" long with a nut on the end works. File the end to a point. Tie string through a hole drilled in the head.</p>
+
+  <h3>Using a Plumb Bob</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Suspend from a fixed point</div><div class="step-desc">The suspension point must be stable. A nail, hook, or clamp. The line should be free to swing without touching anything.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Let it settle</div><div class="step-desc">A plumb bob swings in a decreasing arc. Wait until it stops completely. In wind, shield it or use a bucket of oil/water to dampen oscillations (plumb in a can of oil — the viscosity stops swinging fast).</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Mark the point</div><div class="step-desc">The point of the bob indicates vertical. Mark the floor/wall at the point. For transferring a point up, use two plumb bobs at the same point and sight along them.</div></div></div>
+
+  <div class="tip"><strong>Far North Tip:</strong> In cold shops, a plumb bob line can ice up and stick. Use braided nylon line (doesn't absorb water like cotton). Keep the bob indoors until use. If the point ices, warm it in your hand or near a heat source before using.</div>
+
+  <h3>Testing Vertical Accuracy</h3>
+  <p><strong>Two-point method:</strong> Hang plumb at point A, mark. Move to point B directly above/below A, hang again, mark. The two marks should be in a straight line. If not, the structure is out of plumb.</p>
+  <p><strong>Mirror method:</strong> Hold a mirror against the wall with the plumb line visible in it. When the plumb line and its reflection align perfectly, the mirror is vertical — meaning the wall is vertical. Any gap = out of plumb.</p>
+</div>
+
+<div class="section" id="sextant">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Sextants: Principles &amp; Construction</div>
+
+  <h3>What It Measures</h3>
+  <p>A sextant measures the angle between two objects — typically the sun (or star) and the horizon. From that angle and the time, you can calculate your latitude. With additional data, longitude too. It is the most precise handheld navigation instrument ever made.</p>
+
+  <h3>Quick Reference</h3>
+  <div class="data-grid">
+    <div class="data-card"><div class="label">Principle</div><div class="value">Double reflection</div></div>
+    <div class="data-card"><div class="label">Arc Range</div><div class="value">0-120 degrees</div></div>
+    <div class="data-card"><div class="label">Precision</div><div class="value">0.1 arc-minute (1/10 mile)</div></div>
+    <div class="data-card"><div class="label">Mirror Angle</div><div class="value">Half the measured angle</div></div>
+  </div>
+
+  <h3>How It Works (Double Reflection)</h3>
+  <p>Light from the sun hits the index mirror (on the moving arm), reflects to the horizon mirror (half-silvered), and then to your eye. The horizon passes straight through the clear half of the horizon mirror. You see both images superimposed. When the sun's reflection sits exactly on the horizon, the angle between the two mirrors is exactly half the sun's altitude above the horizon. The arc is calibrated to read the full angle directly.</p>
+
+  <div class="formula">Measured angle = 2 x (mirror angle) | Index mirror rotates with arm, horizon mirror is fixed at 45 degrees to frame</div>
+
+  <h3>Building a Sextant from Scratch</h3>
+  <div class="warning"><strong>Reality check:</strong> A precision sextant requires optical-grade mirrors, a precisely divided arc, and micrometer machining. A field-built sextant will be accurate to 1-5 arc-minutes (1-5 miles) at best — good for backup, not primary navigation. For real precision, scavenge mirrors from a commercial instrument or use front-surface mirrors.</div>
+
+  <h4>Materials</h4>
+  <table>
+    <tr><th>Part</th><th>Material</th><th>Notes</th></tr>
+    <tr><td>Frame</td><td>Aluminum, brass, or wood</td><td>Must be rigid. Wood is traditional (mahogany, ebony). Aluminum is lighter, more stable.</td></tr>
+    <tr><td>Arc</td><td>Brass or aluminum strip</td><td>Radius 6-8". Must be perfectly circular. Graduated in degrees.</td></tr>
+    <tr><td>Index mirror</td><td>Front-surface mirror</td><td>Back-silvered mirrors give double images. Scavenge from old instrument, telescope, or laser printer.</td></tr>
+    <tr><td>Horizon mirror</td><td>Half-silvered mirror</td><td>Clear on half, mirrored on half. Can be made by masking half of a mirror and silvering the other, or using beam-splitter film.</td></tr>
+    <tr><td>Telescope / sight</td><td>Monocular or simple tube</td><td>2-4x magnification. Can be a simple lens pair from binoculars, reading glasses, or a magnifying glass.</td></tr>
+    <tr><td>Shades</td><td>Dark glass or welding filter</td><td>For sun shots. Shade #10-12 welding glass works. Stack for darker.</td></tr>
+  </table>
+
+  <h4>Construction Steps</h4>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Make the frame</div><div class="step-desc">Traditional shape: a pie-slice wedge, about 60 degrees, with a handle. The arc is the curved outer edge. The frame must be rigid — any flex ruins accuracy. Cast aluminum or machine from plate. Wood: laminate 3+ layers for stability.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Cut and graduate the arc</div><div class="step-desc">A 6" radius arc, 60 degrees of arc. Mark degrees with a divider: set to chord length for 1 degree = 2 x radius x sin(0.5 deg) = 2 x 6" x 0.00873 = 0.105". For 6" radius, each degree is ~0.105" along the arc. Use a sharp scribe and magnifier. Subdivide into 10-minute marks (0.0175" spacing). This is the hardest part — patience and good eyesight required.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Mount the horizon mirror</div><div class="step-desc">Fixed at 45 degrees to the frame plane, perpendicular to the arc. The mirror's edge should bisect the field of view. Half clear, half mirrored. Adjust so the horizon line is continuous across the mirror boundary.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Build the index arm</div><div class="step-desc">A pivoting arm that rides the arc. Pivot at the center of the arc's circle. The index mirror mounts on this arm, perpendicular to the frame, facing the horizon mirror. The arm should have a vernier scale for reading minutes of arc.</div></div></div>
+  <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Add the telescope / sight tube</div><div class="step-desc">Mounts on the frame, aligned with the horizon mirror. Simple tube with a lens at each end (2x power). Focus on infinity. The tube should point at the horizon mirror so the eye sees both the horizon (through clear half) and the reflected object (through mirrored half).</div></div></div>
+  <div class="step"><div class="step-num">6</div><div class="step-body"><div class="step-title">Calibrate (index error)</div><div class="step-desc">Point at the horizon. Set arm to 0 degrees. The horizon in the mirror should align with the direct horizon. If not, adjust the horizon mirror or note the offset as "index error." Correct all readings by this amount. Test by measuring the sun's diameter (about 32 arc-minutes) — it should read 32'.</div></div></div>
+
+  <h3>Vernier Scale (Reading Minutes)</h3>
+  <p>A vernier lets you read fractions of a degree. On the arc, mark degrees. On the index arm, mark a short scale of 60 divisions that spans 59 divisions on the arc. When the 0 line on the arm aligns with a degree mark, you read the degree. When it's between marks, find which vernier line aligns with an arc line — that's the minutes.</p>
+
+  <h3>Using the Sextant</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Sight the horizon</div><div class="step-desc">Look through the telescope at the horizon. Keep the sextant vertical (use the swinging arc method: let the sextant swing slightly; the object stays on the horizon only when vertical).</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Bring the object down</div><div class="step-desc">Move the index arm until the sun (or star) appears in the mirror, then bring it down to the horizon. Use the shade to reduce brightness. Fine-tune with the micrometer or by tapping the arm.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Note the time and reading</div><div class="step-desc">Record the angle (corrected for index error) and the exact time (to the second). Use a watch set to GMT/UTC. The time is as critical as the angle.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Reduce the sight</div><div class="step-desc">Use the nautical almanac (or an app) to find the sun's declination at that time. Apply corrections: dip (height of eye), refraction (air density), parallax, semidiameter. The result is your latitude.</div></div></div>
+
+  <div class="formula">Latitude = 90 - observed altitude + declination (if same hemisphere) or 90 - observed altitude - declination (if opposite)</div>
+
+  <div class="tip"><strong>Field simplification:</strong> If you only need latitude and have a noon sun sight, the math is simple: measure sun's highest altitude at local noon. Latitude = 90 - altitude + declination. No timepiece needed if you watch for the sun's highest point (it pauses briefly). This is how navigators worked for centuries.</div>
+</div>
+
+<div class="section" id="divider">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Dividers, Calipers &amp; Measuring Tools</div>
+
+  <h3>Dividers (Transferring Measurements)</h3>
+  <p>Dividers don't measure — they transfer. Set to a distance on a rule, then walk off that distance on a workpiece. Or set to a scribed line, then transfer to another surface. The most fundamental layout tool.</p>
+
+  <h4>Building a Pair of Dividers</h4>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Forge or machine two legs</div><div class="step-desc">Steel rod or flat stock, 6-8" long, 1/4-3/8" thick. One end pointed (scriber), other end rounded for a pivot. Aluminum works for light duty but points wear fast.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Drill pivot hole</div><div class="step-desc">Exactly centered, same location on both legs. Hole should be a tight fit for a rivet or screw. The pivot must be tight enough to hold setting but loose enough to adjust.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Add a spring or friction joint</div><div class="step-desc">A leaf spring (clock spring, hacksaw blade) between the legs pushes them apart. A wing nut or thumb screw on one leg tightens against the other to lock the setting. Or use a simple rivet with friction — tap tighter to hold, looser to adjust.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Harden and sharpen the points</div><div class="step-desc">Heat to red, quench in oil or water. Temper to straw color (220 C) for toughness. Grind points to sharp cones, symmetrical. Uneven points = uneven spacing when walking.</div></div></div>
+
+  <h3>Calipers (Inside &amp; Outside)</h3>
+  <h4>Outside Calipers</h4>
+  <p>Same as dividers but with curved legs that wrap around the outside of a cylinder. Set to the diameter, then transfer to a rule. The legs should be curved so the contact points are directly opposite each other (true diameter).</p>
+
+  <h4>Inside Calipers</h4>
+  <p>Legs bow outward to reach inside a bore. Set to the bore diameter, then transfer to an outside caliper or rule. The spring pushes legs outward; you squeeze to insert, release to contact walls.</p>
+
+  <h4>Building Calipers from Sheet Metal</h4>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Cut legs from spring steel</div><div class="step-desc">Hacksaw blade, old saw blade, or leaf spring. Two identical pieces, 6-8" long, 3/4" wide. Shape the contact ends: outside calipers = curved inward; inside calipers = curved outward.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Bend the spring section</div><div class="step-desc">Leave the middle 2" straight for the pivot. Bend the rest to shape. The spring action comes from the material flexing. If steel is too stiff, thin it with a grinder.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Pivot and adjust mechanism</div><div class="step-desc">Rivet or bolt through the center. A simple nut and bolt with friction works. For finer adjustment, add a screw between the legs near the pivot — turning it spreads or closes the contact points.</div></div></div>
+
+  <h3>Depth Gauge</h3>
+  <p>A rule with a perpendicular base that slides along it. The base sits on the surface, the rule drops into the hole. Read the depth at the base edge. Can be made from a steel rule and a block of wood or metal with a slot. For precision, add a locking screw.</p>
+
+  <div class="tip"><strong>Transfer technique:</strong> The skill with dividers and calipers is the "feel" — the light drag when the points just touch. Too light = not contacting. Too heavy = springing the legs, distorting the measurement. Practice on a known diameter until you can repeat within 0.005".</div>
+</div>
+
+<div class="section" id="protractor">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Angles, Protractors &amp; Bevel Gauges</div>
+
+  <h3>Generating Angles from Scratch</h3>
+
+  <h4>Equilateral Triangle (60 degrees)</h4>
+  <p>Draw a line. Set compass to the line length. Scribe arcs from both ends; intersection is the third point. All angles = 60 degrees. Bisect any angle = 30 degrees. Bisect again = 15 degrees.</p>
+
+  <h4>Square (90 degrees)</h4>
+  <p>See the Squares section. 3-4-5 triangle or Thales' theorem.</p>
+
+  <h4>Pentagon (108 degrees)</h4>
+  <div class="formula">Side = radius x 1.1756 | Draw circle, step off chord length with dividers 5 times</div>
+
+  <h4>Hexagon (120 degrees)</h4>
+  <p>Radius = side length. Step off radius around circle. Connect points. Every angle = 120 degrees. Bisect = 60 degrees.</p>
+
+  <h4>Octagon (135 degrees)</h4>
+  <p>Draw square. Mark center points of each side. Connect center points to corners. Trim corners. Each interior angle = 135 degrees.</p>
+
+  <h3>Building a Protractor</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Make a flat semicircle</div><div class="step-desc">Aluminum, brass, or steel. 4-6" diameter. Machine or file to a clean semicircle. The straight edge must be truly straight (diameter of the circle).</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Find center and mark 0-180</div><div class="step-desc">The center is the midpoint of the straight edge. Scribe a line from center to the arc midpoint = 90 degrees. Use dividers to step off degree marks: circumference = pi x diameter. For 6" diameter, circumference = 18.85". Half = 9.42". Each degree = 9.42 / 180 = 0.0524". Mark every 5 or 10 degrees for readability.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Add a pivoting arm</div><div class="step-desc">A thin arm pivots at the center point. It should have a fine point at the center and a sighting edge or hairline at the outer end. A rivet or screw through the center, tight enough to hold position.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Calibrate against known angles</div><div class="step-desc">Use a 3-4-5 triangle to set 90 degrees. Use a hexagon to set 60 and 120. Mark corrections on the scale if needed.</div></div></div>
+
+  <h3>Bevel Gauge (Adjustable Angle)</h3>
+  <p>Two arms pinned at one end, with a wing nut or thumb screw to lock any angle. Copy an angle from a workpiece, then transfer to a saw or machine. Simplest adjustable angle tool.</p>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Make two arms</div><div class="step-desc">Steel or aluminum flat stock, 6-10" long, 1" wide, 1/8" thick. One arm has a slot (3/8" wide, 4" long) for adjustment range.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Pivot and lock</div><div class="step-desc">Bolt through one end of both arms. Wing nut on the other arm tightens through the slot to lock any angle. A washer between the arms prevents binding.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Add a blade (optional)</div><div class="step-desc">A thin steel blade on one arm lets you slide the gauge into tight spaces. The blade should be removable or foldable.</div></div></div>
+
+  <h3>Setting Angles Without a Protractor</h3>
+  <table>
+    <tr><th>Angle</th><th>Method</th><th>Accuracy</th></tr>
+    <tr><td>15</td><td>Bisect 30 (from hexagon)</td><td>0.5 deg</td></tr>
+    <tr><td>22.5</td><td>Bisect 45 (bisect 90)</td><td>0.5 deg</td></tr>
+    <tr><td>30</td><td>Hexagon or equilateral triangle</td><td>0.2 deg</td></tr>
+    <tr><td>45</td><td>Bisect 90 (square diagonal)</td><td>0.2 deg</td></tr>
+    <tr><td>60</td><td>Equilateral triangle</td><td>0.2 deg</td></tr>
+    <tr><td>90</td><td>3-4-5 or Thales</td><td>0.1 deg</td></tr>
+    <tr><td>Any</td><td>Tangent method: tan(angle) = opposite / adjacent</td><td>Depends on measurement</td></tr>
+  </table>
+
+  <div class="formula">Tangent method: To set angle A, measure distance D from pivot. Height H = D x tan(A). For 30 degrees at 10": H = 10 x 0.577 = 5.77". Scribe arc at 5.77", connect to pivot.</div>
+
+  <div class="tip"><strong>Accuracy:</strong> Geometric constructions (bisection, 3-4-5) are more accurate than measuring with a crude protractor. A carefully laid out 3-4-5 triangle is accurate to 0.05 degrees. A hand-scribed protractor might only be accurate to 0.5 degrees. For precision, use geometry first, measurement second.</div>
+</div>
+
+</div>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>

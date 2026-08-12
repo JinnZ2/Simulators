@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://instrep.dev/schemas/instrument.schema.json",
+  "title": "Instrument Investigation Record",
+  "type": "object",
+  "required": [
+    "investigation_id",
+    "instrument",
+    "measurand_decomposition",
+    "model_rung",
+    "coverage"
+  ],
+  "properties": {
+    "investigation_id": {
+      "type": "string"
+    },
+    "instrument": {
+      "type": "string"
+    },
+    "domain": {
+      "type": "string",
+      "enum": [
+        "biology",
+        "ecology",
+        "physics",
+        "cross-cutting"
+      ]
+    },
+    "measurand_decomposition": {
+      "type": "object",
+      "required": [
+        "measurand",
+        "indication",
+        "bridge_model"
+      ],
+      "properties": {
+        "measurand": {
+          "type": "string"
+        },
+        "indication": {
+          "type": "string"
+        },
+        "bridge_model": {
+          "type": "string"
+        }
+      }
+    },
+    "transduction_chain": {
+      "type": "object"
+    },
+    "model_rung": {
+      "type": "string",
+      "enum": [
+        "M0",
+        "M1",
+        "M2",
+        "M3"
+      ]
+    },
+    "traceability": {
+      "type": "object"
+    },
+    "blindness_map": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "validation": {
+      "type": "object"
+    },
+    "coverage": {
+      "type": "object",
+      "required": [
+        "grounded_fraction",
+        "verdict"
+      ],
+      "properties": {
+        "aspects": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "grounded_fraction": {
+          "type": "number"
+        },
+        "verdict": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "investigation_id": "inv-port-dwell-001",
+  "proxy_candidate": {
+    "target_variable": "Terminal congestion-induced systemic accident risk",
+    "observable_metric": "Average drayage dwell time at terminal gates (minutes, daily)",
+    "claimed_mapping": "Positive: congestion -> queue pressure + fatigue + rushed maneuvers -> elevated incident probability"
+  },
+  "phases": {
+    "decomposition": {
+      "alternative_constructs": [
+        "terminal under-staffing without congestion",
+        "appointment system misconfiguration",
+        "chassis shortage (equipment, not congestion)"
+      ]
+    },
+    "grounding_chain": {
+      "chain_fidelity": 0.4199,
+      "n_links": 4,
+      "weakest_link": {
+        "name": "pressure->risk",
+        "fidelity": 0.65,
+        "grade": "estimated"
+      },
+      "links": [
+        {
+          "name": "congestion->dwell",
+          "fidelity": 0.85,
+          "grade": "measured",
+          "alternative_causes": [
+            "equipment breakdown",
+            "customs holds"
+          ]
+        },
+        {
+          "name": "dwell->pressure",
+          "fidelity": 0.8,
+          "grade": "estimated",
+          "alternative_causes": [
+            "driver payment structure varies by carrier"
+          ]
+        },
+        {
+          "name": "pressure->risk",
+          "fidelity": 0.65,
+          "grade": "estimated",
+          "alternative_causes": [
+            "baseline incident rate varies by terminal design"
+          ]
+        },
+        {
+          "name": "risk->measurement",
+          "fidelity": 0.95,
+          "grade": "measured",
+          "alternative_causes": []
+        }
+      ]
+    },
+    "instrument": {
+      "post_experiment": {
+        "bias": 0.07812783500609612,
+        "noise": 0.11860325303167471
+      },
+      "synthetic_recovery": {
+        "bias_error": 0.0018721649939038854,
+        "noise_error": 0.0013967469683252853,
+        "passed": true
+      }
+    },
+    "validity_threats": [
+      {
+        "threat": "equipment-failure confound",
+        "severity": "medium"
+      },
+      {
+        "threat": "carrier payment heterogeneity",
+        "severity": "medium"
+      }
+    ],
+    "experiments": [
+      "exp-synth-dwell-001"
+    ],
+    "calibration": {
+      "method": "platt",
+      "ece_before": 0.2645,
+      "ece_after": 0.0152,
+      "improved": true,
+      "params": {
+        "a": -8.374242743658073,
+        "b": 6.486602855344164
+      },
+      "holdout_n": 1500
+    }
+  },
+  "coverage": {
+    "aspects": [
+      {
+        "aspect": "dwell-time capture (RFID/TOS logs)",
+        "grade": "measured",
+        "grounding_level": "G1",
+        "upgrade_path": "none needed"
+      },
+      {
+        "aspect": "congestion->dwell link",
+        "grade": "measured",
+        "grounding_level": "G2",
+        "upgrade_path": "cross-terminal replication"
+      },
+      {
+        "aspect": "instrument bias/noise values",
+        "grade": "measured",
+        "grounding_level": "G3",
+        "upgrade_path": "verified incident-linked holdout"
+      },
+      {
+        "aspect": "dwell->urgency link (payment structure)",
+        "grade": "estimated",
+        "grounding_level": "G3",
+        "upgrade_path": "carrier-level compensation audit"
+      },
+      {
+        "aspect": "urgency->accident link",
+        "grade": "estimated",
+        "grounding_level": "G3",
+        "upgrade_path": "case-control on incidents vs. matched dwell exposure"
+      },
+      {
+        "aspect": "demurrage-clock pause confound",
+        "grade": "assumed",
+        "grounding_level": "G4",
+        "upgrade_path": "natural experiment at tariff change"
+      }
+    ],
+    "grounded_fraction": 0.667,
+    "weakest_aspects": [
+      "demurrage-clock pause confound",
+      "dwell->urgency link (payment structure)",
+      "urgency->accident link"
+    ],
+    "verdict": "partially grounded"
+  }
+}

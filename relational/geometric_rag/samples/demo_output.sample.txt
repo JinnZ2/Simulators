@@ -1,0 +1,22 @@
+============================================================
+STANDARD RAG (Cartesian)
+============================================================
+Retrieved: [('d4', 0.1278401337349693), ('d1', 0.08875061651113564), ('d3', 0.048090237143280784)]
+Answer: Based on retrieved documents: Aspirin can cause stomach bleeding. Aspirin reduces fever and inflammation. Ibuprofen also reduces f...
+Verification: None
+
+============================================================
+GEOMETRIC NEURO-SYMBOLIC RAG (Relational)
+============================================================
+Retrieved: [('d2', '0.225'), ('d1', '0.225'), ('d7', '0.212'), ('d5', '0.198'), ('d6', '0.170')]
+Answer: (Verification failed: ["Contradiction between {'d1', 'd6'}"]) Partial answer from [d2] Fever is often caused by infection.
+[d1] Aspirin reduces fever and inflammation.
+[d7] Paracetam...
+Verification: {'coherent': False, 'contradictions': ["Contradiction between {'d1', 'd6'}"], 'missing_relations': []}
+Coupling: {'confusion': 0.1, 'pain': 0.0}
+
+--- Under high confusion/pain ---
+Retrieved: [('d1', '1.001'), ('d2', '0.904'), ('d5', '0.870'), ('d7', '0.747'), ('d6', '0.713')]
+Answer: (Verification failed: ["Contradiction between {'d1', 'd6'}"]) Partial answer from [d1] Aspirin reduces fever and inflammation.
+[d2] Fever is often caused by infection.
+[d5] Infection...

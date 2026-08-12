@@ -589,6 +589,71 @@ extending. Both are outside notes.md's scope — but see
 it real" could look like, written for others who might want to
 pick up any one of them.
 
+## 23. Seventh drop — Geometric Neuro-Symbolic RAG lands as a
+##     concrete substrate for the NEMGA proposal
+
+Landed as `relational/geometric_rag/` — a single-file numpy demo
+that instantiates the retrieval architecture proposed in
+`research_context.md`'s NEMGA (Need-Event Modulated Geometric
+Attention) synthesis. The `research_context.md` sections talked
+about combining a `GeometricSymbolicManifold` with event-driven
+salience and somatic modulation; this file *is* that combination,
+at scaffold scale.
+
+**Two classes on the same seven-doc toy corpus:**
+
+- `StandardRAG` — flat cosine similarity, no verification, no
+  context. The Cartesian reference.
+- `GeometricNeuroSymbolicRAG` — a `Hyperedge`+`ManifoldPoint`
+  hypergraph on a curved manifold, curvature-modulated attention
+  kernel, structural propagation along hyperedges, symbolic
+  verification of the retrieved subgraph, plus explicit somatic
+  coupling knobs (`confusion_level`, `pain_level`) that raise the
+  attention temperature and flatten the score distribution.
+
+**What the demo actually shows.** For "What reduces fever?" over
+seven documents with authored hyperedges (`treats`, `causes`,
+`side_effect`, `contradicts`, `part_of`):
+
+- Standard RAG returns `d4` (aspirin bleeding) as top result with
+  no signal — the Cartesian retrieval doesn't know the returned
+  set includes a contradiction.
+- Geometric RAG at low confusion returns a broader set and
+  immediately flags `Contradiction between {'d1', 'd6'}` in the
+  verification envelope; the answer text is prefixed
+  `(Verification failed: ...)`.
+- Under `confusion=0.8, pain=0.7`, top attention score jumps from
+  ~0.225 to ~1.001, spread widens across the returned nodes —
+  attention has flattened. Same manifold, same query, different
+  retrieval shape because the "body" is stressed. This is the
+  operative claim: **retrieval is not context-free**.
+
+Sample output in `samples/demo_output.sample.txt`, README in the
+folder explaining every component with its position in the wider
+framework.
+
+**Fourth structural convergence with the framework.** Same shape
+as the physical + social + cognitive triadic sensors previously
+noted (§17): the mechanism triad is `internal prediction | somatic
+state | external evidence`, with domain-specific thresholds. Here
+the "external evidence" is the retrieved subgraph, the "somatic
+state" is the coupling knobs, and the "internal prediction" is the
+attention pattern the query induces before propagation. The
+`GeometricNeuroSymbolicRAG.query()` return dict has the same
+envelope shape (`verification`, `coupling`, `answer`) as the
+Signal dataclasses in `pain_as_sensor.py` and
+`social_pain_sensors.py`.
+
+**Same scaffolding-becoming-substrate posture as arch_garden.**
+The README's "What this is NOT" section is explicit: the
+embeddings are hash-seeded random vectors (not real embeddings),
+the verification layer has two rules (not a rule schema), the
+metric tensor is `I` (Euclidean). Everything is declared under
+what needs to be swapped for real use.
+
+**Non-stdlib.** `numpy`. Same exemption pattern as `energy/`,
+`play-sims/`, and `climate-modeling/`.
+
 ## 22. Sixth drop — the FILES DELIVERED visualizations land
 
 Landed as `relational/figures/`, closing the "PNG visualizations

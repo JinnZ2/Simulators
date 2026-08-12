@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crossdomain-eval"
+version = "0.1.0"
+description = "Cross-domain analysis, scientific evaluation, and experiment proposal toolkit"
+requires-python = ">=3.10"
+dependencies = ["sympy", "numpy", "scipy", "matplotlib"]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+cdeval = "crossdomain_eval.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["crossdomain_eval*"]

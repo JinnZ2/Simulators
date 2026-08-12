@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cold-Weather Battery Guide</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0; padding: 0; background: #fafafa; color: #222;
+    line-height: 1.55; font-size: 15px;
+  }
+  .container { max-width: 720px; margin: 0 auto; background: #fff; min-height: 100vh; }
+  .header {
+    background: #1a1a2e; color: #fff; padding: 20px 16px; position: sticky; top: 0; z-index: 100;
+  }
+  .header h1 { margin: 0; font-size: 20px; font-weight: 600; }
+  .header p { margin: 6px 0 0; font-size: 13px; color: #aaa; }
+  .toc { padding: 12px 16px; background: #f0f0f0; border-bottom: 1px solid #ddd; }
+  .toc-title { font-size: 13px; font-weight: 600; color: #555; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .toc-btn {
+    padding: 10px 12px; background: #fff; border: 1px solid #ccc; border-radius: 6px;
+    font-size: 13px; color: #333; cursor: pointer; text-align: left; transition: all 0.1s;
+  }
+  .toc-btn:hover, .toc-btn:active { background: #1a1a2e; color: #fff; border-color: #1a1a2e; }
+  .section { display: none; padding: 16px; }
+  .section.active { display: block; }
+  .back-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+  .back-btn {
+    padding: 8px 14px; background: #1a1a2e; color: #fff; border: none; border-radius: 6px;
+    font-size: 13px; cursor: pointer;
+  }
+  .section-title { font-size: 22px; font-weight: 600; margin: 0 0 16px; color: #1a1a2e; }
+  h3 { font-size: 16px; font-weight: 600; color: #1a1a2e; margin: 24px 0 10px; padding-bottom: 6px; border-bottom: 2px solid #e0e0e0; }
+  h4 { font-size: 14px; font-weight: 600; color: #333; margin: 18px 0 8px; }
+  p { margin: 0 0 12px; }
+  .note { background: #fff8e1; border-left: 4px solid #f9a825; padding: 10px 14px; margin: 12px 0; font-size: 14px; color: #5d4037; }
+  .warning { background: #ffebee; border-left: 4px solid #c62828; padding: 10px 14px; margin: 12px 0; font-size: 14px; color: #b71c1c; }
+  .tip { background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 10px 14px; margin: 12px 0; font-size: 14px; color: #1b5e20; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+  th { background: #1a1a2e; color: #fff; padding: 10px 8px; text-align: left; font-weight: 500; }
+  td { padding: 8px; border-bottom: 1px solid #e0e0e0; vertical-align: top; }
+  tr:nth-child(even) { background: #f5f5f5; }
+  .formula { background: #f5f5f5; padding: 10px 14px; border-radius: 6px; font-family: "SF Mono", Monaco, monospace; font-size: 14px; margin: 10px 0; overflow-x: auto; }
+  .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+  .data-card { background: #f8f8f8; border: 1px solid #e0e0e0; border-radius: 6px; padding: 10px; }
+  .data-card .label { font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 0.3px; }
+  .data-card .value { font-size: 16px; font-weight: 600; color: #1a1a2e; margin-top: 4px; }
+  ul, ol { margin: 8px 0; padding-left: 20px; }
+  li { margin-bottom: 6px; }
+  .step { display: flex; gap: 10px; margin: 10px 0; }
+  .step-num { width: 24px; height: 24px; background: #1a1a2e; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0; margin-top: 2px; }
+  .step-body { flex: 1; }
+  .step-title { font-weight: 600; font-size: 14px; }
+  .step-desc { font-size: 14px; color: #555; margin-top: 2px; }
+  .divider { height: 1px; background: #e0e0e0; margin: 20px 0; }
+  code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-family: "SF Mono", Monaco, monospace; font-size: 13px; }
+  pre { background: #f5f5f5; padding: 10px 14px; border-radius: 6px; font-size: 13px; overflow-x: auto; margin: 10px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>Cold-Weather Battery Guide</h1>
+  <p>Sleeper-cab Li-ion that survives &minus;60&nbsp;F and 125&nbsp;F sun</p>
+</div>
+
+<div class="toc" id="toc">
+  <div class="toc-title">Jump to Section</div>
+  <div class="toc-grid">
+    <button class="toc-btn" onclick="showSection('overview')">Overview &amp; Failure Stack</button>
+    <button class="toc-btn" onclick="showSection('chemistry')">Chemistry Options</button>
+    <button class="toc-btn" onclick="showSection('pumice')">Small-Scale Alt (Pumice)</button>
+    <button class="toc-btn" onclick="showSection('ester')">Ester Electrolyte (Option C)</button>
+    <button class="toc-btn" onclick="showSection('latp')">LATP Solid State (Option B)</button>
+    <button class="toc-btn" onclick="showSection('kiln')">Kiln (Solar + Microwave)</button>
+    <button class="toc-btn" onclick="showSection('drybox')">Dry Box</button>
+    <button class="toc-btn" onclick="showSection('cell')">Cell Assembly</button>
+    <button class="toc-btn" onclick="showSection('formation')">Formation Cycling</button>
+    <button class="toc-btn" onclick="showSection('thermal')">Thermal Management</button>
+    <button class="toc-btn" onclick="showSection('bms')">BMS Overview</button>
+    <button class="toc-btn" onclick="showSection('safety')">Safety</button>
+  </div>
+</div>
+
+<div class="section active" id="overview">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Overview &amp; Cold-End Failure Stack</div>
+
+  <div class="warning"><strong>The premise:</strong> a sleeper-cab battery that has to work at both &minus;60&nbsp;F on winter mornings and inside a 125&nbsp;F sun-soaked cab in summer. The cold end is a materials problem. The hot end is a shade &amp; emissivity problem &mdash; not a chemistry one.</div>
+
+  <h3>Why conventional Li-ion cells die below &minus;50&nbsp;C</h3>
+  <p>Ranked by dominance:</p>
+  <table>
+    <tr><th>#</th><th>Mechanism</th><th>Approx. loss, 25 &rarr; &minus;51&nbsp;C</th></tr>
+    <tr><td>1</td><td>Ionic transport in the electrolyte<br>&sigma; &prop; exp(&minus;Ea/kT), Ea &asymp; 0.35 eV</td><td>~100&times; conductivity drop</td></tr>
+    <tr><td>2</td><td>SEI / interfacial charge-transfer resistance (Rct)</td><td>~1000&times; &mdash; <strong>this is what actually kills performance</strong>. Interfacial kinetics freeze long before the bulk electrolyte solidifies.</td></tr>
+    <tr><td>3</td><td>Kinetic Li plating on charge</td><td>Not thermodynamic &mdash; happens because ion transport can't keep up with the demanded current. Once plated, dendrites risk shorting.</td></tr>
+    <tr><td>4</td><td>Bulk electrolyte viscosity / freeze-out</td><td>The final straw &mdash; the electrolyte literally turns solid or glassy.</td></tr>
+  </table>
+
+  <div class="note"><strong>Practical implication:</strong> a cell that reads OK at open-circuit voltage in the cold can still fail catastrophically the moment you demand current. Charge at low temperature is the danger zone &mdash; always limit charge current to C/20 or less below &minus;30&nbsp;C to avoid plating.</div>
+
+  <h3>Three viable cold-end paths</h3>
+  <table>
+    <tr><th>Option</th><th>Chemistry</th><th>Kiln?</th><th>Low-T limit</th><th>Key risk</th></tr>
+    <tr><td>A (skip)</td><td>Liquefied fluoromethane (Meng/UCSD)</td><td>No</td><td>&minus;80&nbsp;C</td><td>Synthesis impractical, high GWP, toxicity</td></tr>
+    <tr><td>B</td><td>LATP ceramic from scrap</td><td>Yes (solar/microwave)</td><td>No freeze possible</td><td>Ceramic processing, interface engineering</td></tr>
+    <tr><td>C</td><td>LiPF&#8326; + carbonate/ester liquid (Mars-rover)</td><td>No</td><td>&minus;60&nbsp;C proven, likely &minus;70&nbsp;C</td><td>Dry handling required, still a liquid (sealing, wetting)</td></tr>
+  </table>
+
+  <div class="tip"><strong>Recommended path:</strong> pursue B and C in parallel. C gets you a cold-capable cell in a week or two using hardware-store solvents and store-bought LFP foil. B is the beautiful materials project that eliminates the liquid entirely and can't freeze at all.</div>
+
+  <h3>Hot-end note (125&nbsp;F sleeper cab)</h3>
+  <p>This is not a materials problem. Solve it with geometry: radiative barriers, reflective shade over the battery box, high-emissivity coatings on the surface radiating to sky. A thermal envelope for a sleeper-cab battery in full sun is a heat-rejection design task, not an electrochemical one.</p>
+</div>
+
+<div class="section" id="chemistry">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Chemistry Options in Detail</div>
+
+  <h3>Option A: Liquefied-gas electrolytes (usually skip)</h3>
+  <p>Fluoromethane-based systems (e.g. Meng/UCSD) run as liquids under modest pressure and retain ionic mobility down to &minus;80&nbsp;C. Published, real. But:</p>
+  <ul>
+    <li>Fluoromethane is a potent greenhouse gas (GWP &asymp;&nbsp;1500 if released).</li>
+    <li>Synthesizing it off-grid is energy-intensive and chemically hostile.</li>
+    <li>Cells must be sealed pressure vessels.</li>
+  </ul>
+  <p>Cross off the outdoor, low-infrastructure list. Sealed cells contain the gas safely; making the gas is a different problem.</p>
+
+  <h3>Option B: LATP solid-state (freeze-proof)</h3>
+  <p>Target phase: <strong>Li&#8321;&#8323;Al&#8320;&#8323;Ti&#8321;&#8327;(PO&#8324;)&#8323;</strong> &mdash; a NASICON-type oxide ceramic.</p>
+  <ul>
+    <li>Sinters at 900&ndash;1000&nbsp;C.</li>
+    <li>No expensive critical elements: skip LLZO (La cost wall), skip LAGP (Ge cost), skip sulfide argyrodites (hydrolyze to H&#8322;S on any moisture &mdash; disqualifying in a sleeper cab).</li>
+    <li>Every precursor is scrap-sourceable &mdash; see the LATP section.</li>
+    <li>Once sintered, no freeze is possible &mdash; there is no liquid in the cell.</li>
+  </ul>
+
+  <h3>Option C: Mars-rover ester electrolyte (fast path)</h3>
+  <p>The Spirit and Opportunity rovers carried rechargeable Li-ion cells that survived diurnal swings +20&nbsp;C &rarr; &minus;100&nbsp;C at night. The electrolyte was not exotic &mdash; it was a carbonate + ester blend using ordinary LiPF&#8326; salt:</p>
+  <div class="formula">1.0 M LiPF&#8326; in EC : EMC : methyl butyrate (or ethyl butyrate, or methyl propionate), roughly 1:1:1 by volume</div>
+  <p>These systems hold ionic conductivity above 1 mS/cm at &minus;60&nbsp;C and support charge/discharge without lithium plating at moderate rates. Direct ancestor of today's "ester-cosolvent LiFSI" papers, but LiPF&#8326; works and is vastly easier to get.</p>
+
+  <div class="note"><strong>Ester, not ether.</strong> The starting fluid you squirt into a cold tractor intake is diethyl ether. Ethers oxidize at the cathode above ~4.0 V in Li-ion cells &mdash; not ideal unless running low-voltage chemistries. Esters (methyl acetate, ethyl acetate, methyl propionate) have no oxygen&ndash;oxygen bond, are more oxidatively stable, and work up to 4.3 V with LFP or NMC. The idea is directionally smart, but the chemistry family is different.</div>
+
+  <h3>Ester options that actually work</h3>
+  <table>
+    <tr><th>Ester</th><th>Freezing point</th><th>Where to get</th></tr>
+    <tr><td>Methyl acetate (MA)</td><td>&minus;98&nbsp;C</td><td>Some "green" paint strippers, or anhydrous lab grade</td></tr>
+    <tr><td>Ethyl acetate (EA)</td><td>&minus;84&nbsp;C</td><td>Hardware store as "MEK substitute" or as pure solvent</td></tr>
+    <tr><td>Methyl propionate (MP)</td><td>&minus;88&nbsp;C</td><td>Chem supply; less common in hardware</td></tr>
+  </table>
+  <p>Purity matters. Water must be below ~20 ppm or the cell dies. Hardware-store EA can be dried over 3&Aring; molecular sieves for a week; see the Ester Electrolyte section for the procedure.</p>
+</div>
+
+<div class="section" id="pumice">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Small-Scale Alternative &mdash; Pumice-Stone Battery</div>
+
+  <div class="note"><strong>Different problem, different tool.</strong> Options A/B/C above are all aimed at the sleeper-cab / tractor scale &mdash; kilowatt-hours of cold-tolerant storage. This section is for the other end of the spectrum: emergency lighting, phone charging, small-device backup. If your actual need is "keep an LED lantern going through a grid-down night," you do not need HF-hazard chemistry or a Fresnel kiln. You need a stone.</div>
+
+  <h3>The pumice battery (Abdulhalikova method)</h3>
+  <p>A documented low-tech solid-state cell that uses porous volcanic rock (pumice) as the electrolyte. The pumice acts as an ionic sponge &mdash; soaked in a salt solution, it conducts between two dissimilar electrodes. No acids, no flammable metals, no dry box.</p>
+
+  <h4>Quick reference</h4>
+  <div class="data-grid">
+    <div class="data-card"><div class="label">Single cell voltage</div><div class="value">~0.5 V (soot / carbon pair)</div></div>
+    <div class="data-card"><div class="label">With galvanized plate</div><div class="value">1.5&ndash;1.9 V</div></div>
+    <div class="data-card"><div class="label">Chemistry</div><div class="value">Salt + baking soda in porous silicate</div></div>
+    <div class="data-card"><div class="label">Use case</div><div class="value">Emergency lighting, small devices</div></div>
+  </div>
+
+  <h4>Build</h4>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Prepare the electrolyte</div><div class="step-desc">Cut pumice into rectangular or oval plates a few millimeters thick. Soak the pieces in a saturated solution of table salt + baking soda (boil for a few minutes to drive it into the pores). Let dry.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Create the electrodes</div><div class="step-desc">Apply a conductive layer to one surface: candle soot, or heavy pencil (graphite) scribbling. Either works &mdash; the graphite acts as the current collector.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Assemble a single cell</div><div class="step-desc">Press a small piece of activated carbon (from a pharmacy) against the carbon-coated side. That single cell reads ~0.5 V. For 1.5&ndash;1.9 V, press a small piece of galvanized metal (galvanized roofing scrap or a strip cut from a tin can) against the opposite side of the pumice.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Chain in series</div><div class="step-desc">Wire several cells positive-to-negative to reach the voltage you need (three cells &asymp; 4.5&ndash;5.7 V is enough to drive a small buck converter for USB charging). Case in folded paper or a plastic box.</div></div></div>
+
+  <div class="tip"><strong>Why this works when the fancy chemistry might not:</strong> no dry-box discipline required, no HF hazard, no sinter cycle, no BMS. If you already have pumice (widely available at pottery / garden / hardware stores as a lightweight aggregate), the whole build is a kitchen-table project. Store the finished cells dry.</div>
+
+  <h3>Other upcycled paths worth knowing about</h3>
+  <ul>
+    <li><strong>Waste acrylic yarn &rarr; ceramic nanofiber:</strong> textile waste can be processed into a ceramic composite nanofiber that acts as a solid electrolyte for lithium cells. Research-grade, but the input is literally clothing.</li>
+    <li><strong>Biomass electrodes:</strong> peanut shells and rice husks can be pyrolyzed into hard-carbon electrode material. Same destructive-distillation logic as the methanol section in <code>../fuel-independence-guide/index.html</code>.</li>
+    <li><strong>Coffee grounds &rarr; activated carbon:</strong> spent grounds carbonized under limited oxygen give a highly conductive activated carbon suitable for electrodes and supercapacitors.</li>
+  </ul>
+
+  <div class="warning"><strong>Honest scale note.</strong> The pumice battery is not going to start a diesel tractor at &minus;60&nbsp;F. It will not power a house for hours. A cell that runs a headlamp for a night is a huge win in an actual emergency, but it is a different order of magnitude from what Options B and C are trying to solve. To match a sleeper-cab pack you still need advanced ceramic electrolytes (NASICON-type sintered at ~1250&nbsp;C), controlled atmospheres, and specialized materials like lithium and cobalt. Right tool for the right load.</div>
+</div>
+
+<div class="section" id="ester">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Ester Electrolyte (Option C) &mdash; Recipe &amp; Drying</div>
+
+  <h3>Target recipe</h3>
+  <div class="formula">1.0 M LiPF&#8326; in EC : DMC : EA (or MA) = 1 : 1 : 2 by volume</div>
+  <ul>
+    <li><strong>EC (ethylene carbonate)</strong> &mdash; already in the 1 M LiPF&#8326; base electrolyte you buy premixed. Solid at room temperature.</li>
+    <li><strong>DMC (dimethyl carbonate)</strong> &mdash; also in the premix.</li>
+    <li><strong>EA (ethyl acetate)</strong> or MA &mdash; added by you after drying.</li>
+    <li><strong>VC (vinylene carbonate) additive</strong> &mdash; 2&ndash;3&nbsp;wt%. Sacrificial SEI-former. Without it, first-cycle Coulombic efficiency can be as low as 50%; with it, &gt;80%. Highly recommended.</li>
+  </ul>
+  <p>Expected liquidus below &minus;70&nbsp;C. Conductivity ~2&ndash;3 mS/cm at &minus;40&nbsp;C, degrading gracefully toward &minus;60&nbsp;C. Works with graphite anodes and LFP cathodes &mdash; no special electrode modifications required.</p>
+
+  <div class="warning"><strong>LiPF&#8326; hazard:</strong> releases toxic HF on contact with moisture or skin oils. Work outside or in a fume hood. Nitrile gloves, eye protection. Have a tub of saturated baking-soda solution nearby to neutralize spills. Relative humidity below 5% is ideal &mdash; see the Dry Box section.</div>
+
+  <h3>Drying hardware-store ethyl acetate to &lt;20 ppm water</h3>
+  <p>Hardware-store EA (often labelled "MEK substitute") is typically &ge;95% ethyl acetate with the balance ethanol or water. Both need drying.</p>
+
+  <h4>Materials</h4>
+  <ul>
+    <li>3&Aring; molecular sieves (beads or pellets). 3&Aring; traps water and excludes ethanol; 4&Aring; traps both. For EA, 3&Aring; is preferred. Get 500 g per litre of solvent.</li>
+    <li>Glass jar with a metal screw lid (or clean HDPE, but test the lid liner &mdash; EA attacks some plastics). Aluminium foil for the lid seal.</li>
+    <li>Toaster oven or similar reaching 250&ndash;300&nbsp;C for sieve activation.</li>
+  </ul>
+
+  <h4>Sieve activation (must be done first)</h4>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Spread sieves in a metal tray</div><div class="step-desc">Bake at 250&ndash;300&nbsp;C for at least 4 hours, preferably overnight.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Transfer to a mason jar while still hot</div><div class="step-desc">Seal immediately and let cool. This is your activated sieve stock. Opened sieves pick up moisture from ambient air in minutes.</div></div></div>
+
+  <h4>Drying the EA</h4>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Filter first if particulate</div><div class="step-desc">Coffee filter is fine.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Add activated 3&Aring; sieves</div><div class="step-desc">Roughly 20% by weight (200 g sieves per litre of EA).</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Seal tightly, sit at least 1 week</div><div class="step-desc">Aluminium foil under the lid liner if needed. Agitate daily. Cool, dark place.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Second-stage sieve treatment</div><div class="step-desc">To get below 20 ppm, decant the liquid (leaving the sieve layer behind) into a fresh jar with newly-activated sieves. Let sit a few more days.</div></div></div>
+
+  <div class="tip"><strong>Cheat:</strong> buy "anhydrous" ethyl acetate (&gt;99.5%, &lt;100 ppm water) from a lab supply. Sieves then drop that from ~100 ppm to sub-20 easily. Recommended for a first build. Hardware-store EA works with patience and double-drying.</div>
+
+  <h4>How dry is dry enough?</h4>
+  <ul>
+    <li><strong>Cobalt chloride silica gel</strong> strip inside the jar: blue = dry, pink = wet. Not quantitative below ~10% RH but a clear danger signal.</li>
+    <li><strong>Anhydrous copper(II) sulfate</strong> powder in a small dish: pure white = dry; blue = moisture. Very sensitive.</li>
+    <li><strong>Cell test:</strong> if the first-cycle Coulombic efficiency of a fresh graphite half-cell is &gt;85%, water is low enough. If you see gross gassing and puffy pouches, water is too high.</li>
+  </ul>
+
+  <h3>The salt: LiPF&#8326;, not exotica</h3>
+  <p>Mars rovers used LiPF&#8326; because it was the established industry standard. Every phone battery still uses it. Buy "battery-grade" 1 M LiPF&#8326; in EC/DMC premixed from a lab or battery supplier &mdash; then add your dried ester to tune the low-temperature properties.</p>
+  <p>Harvesting LiPF&#8326; from dead cells is possible but hazardous (HF gas if heated, requires true glove-box discipline). Buy it ready-made for initial tests; only consider cell cannibalization once you're fluent in dry handling.</p>
+  <p>LiFSI (lithium bis(fluorosulfonyl)imide) is technically better but harder to source and often more expensive than the rest of the project combined. Start with LiPF&#8326;.</p>
+
+  <h3>Home-brewing an ester (optional side quest)</h3>
+  <p>Fischer esterification: acetic acid (concentrated vinegar) + methanol (gas-line antifreeze "Heet" in a pinch) + acid catalyst &rarr; methyl acetate. The resulting MA must be rigorously dried and distilled. Fun chemistry, but purchasing a sealed bottle of anhydrous methyl acetate is cheaper, safer, and yields known-pure product. Home-brew only if there is truly no other access.</p>
+</div>
+
+<div class="section" id="latp">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">LATP Solid State (Option B) &mdash; Scrap Precursors</div>
+
+  <h3>Target phase</h3>
+  <div class="formula">LATP &mdash; Li&#8321;&#8323;Al&#8320;&#8323;Ti&#8321;&#8327;(PO&#8324;)&#8323;</div>
+  <p>Sinters at 900&ndash;1000&nbsp;C. Every precursor below is scrap-sourceable.</p>
+
+  <h3>Precursor stream mapping</h3>
+  <table>
+    <tr><th>Stream</th><th>Yields</th><th>Feeds (as precursor)</th><th>Notes</th></tr>
+    <tr><td>Cat converter monolith (junkyard)</td><td>Cordierite (2MgO&middot;2Al&#8322;O&#8323;&middot;5SiO&#8322;, prefired)</td><td>Housing, kiln furniture, thermal barrier</td><td><strong>Highest-leverage item.</strong> Free, CTE 1&ndash;2 ppm/K, survives &minus;60&nbsp;C to 900&nbsp;C cycling indefinitely.</td></tr>
+    <tr><td>Spark plug insulators</td><td>94&ndash;99% Al&#8322;O&#8323;</td><td>Al source for LATP; also crucibles</td><td>Crush, grind, use as alumina donor.</td></tr>
+    <tr><td>ABC fire extinguisher powder / 11-52-0 fertilizer</td><td>NH&#8324;H&#8322;PO&#8324; (75&ndash;90% purity)</td><td>Phosphate source</td><td>Calcines to P&#8322;O&#8325; glass in situ. Cheapest, most available phosphate.</td></tr>
+    <tr><td>Welding rod flux / white pigment / oxidized Ti scrap</td><td>TiO&#8322; (rutile)</td><td>Ti source for LATP</td><td>Any high-purity TiO&#8322; works.</td></tr>
+    <tr><td>Dead LFP cells (leach) or pottery-supply Li&#8322;CO&#8323;</td><td>Li&#8322;CO&#8323;</td><td>Li source</td><td>Pottery-grade is usually cheaper than the labor to leach cells. Try pottery first.</td></tr>
+    <tr><td>Bottle glass, crushed</td><td>SiO&#8322; + Na flux</td><td>Sinter-aid frit</td><td>Lowers soak temperature by forming a transient liquid phase.</td></tr>
+    <tr><td>Dental lab / grinding media</td><td>ZrO&#8322;</td><td>Garnet route (LLZO)</td><td><strong>Skip</strong> &mdash; La is the cost wall; pulls you into a more expensive chemistry.</td></tr>
+  </table>
+
+  <h3>Cordierite is the load-bearing item</h3>
+  <p>Cordierite honeycomb from dead catalytic converters is the single highest-value item in the whole process. It comes prefired. Thermal expansion coefficient 1&ndash;2 ppm/K. Doesn't crack from thermal shock cycling between &minus;60&nbsp;C and 900&nbsp;C. Exactly what your kiln furniture, housings, and thermal barriers need.</p>
+  <div class="tip">Get as much cordierite as you can before you start anything else. It's your housing, your thermal barrier, and your kiln furniture before you sinter anything.</div>
+
+  <h3>Why not the other solid-state families?</h3>
+  <ul>
+    <li><strong>LLZO (Li&#8327;La&#8323;Zr&#8322;O&#8321;&#8322;):</strong> lanthanum is the cost wall.</li>
+    <li><strong>LAGP (Li&#8321;&#8323;Al&#8320;&#8323;Ge&#8321;&#8327;(PO&#8324;)&#8323;):</strong> germanium is the cost wall.</li>
+    <li><strong>Sulfide argyrodites</strong> (Li&#8326;PS&#8325;Cl and family): highest conductivity (10&#8315;&sup3; S/cm) but hydrolyze to H&#8322;S on any moisture contact. Disqualifying in a sleeper cab where a fuel leak or a spilled coffee could kill.</li>
+  </ul>
+</div>
+
+<div class="section" id="kiln">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">The Kiln &mdash; Solar Fresnel + Microwave/SiC Backup</div>
+
+  <p>Nine Fresnel lenses from rear-projection TVs make a solar furnace. A large rear-projection lens easily hits &gt;1500&nbsp;C at its focal spot &mdash; past LATP's soak temperature. The problem is intermittency, not peak temperature.</p>
+
+  <div class="warning"><strong>Learned in blood (and singed denim):</strong> A concentrated solar spot on an unshielded surface will burn through jeans in seconds. A small child in the exclusion zone is a lethal accident waiting to happen. The BMS in <code>bms/bms_1s_merged.ino</code> includes a PIR-triggered safety shutter for exactly this reason. Do not skip it.</div>
+
+  <h3>Design principle: don't sinter at the focal point</h3>
+  <p>Sinter in a high-thermal-mass cavity. The focal spot heats a SiC susceptor plate; the plate conducts into a refractory cavity; the cavity holds soak through cloud gaps.</p>
+
+  <pre>[fresnel array] &rarr; [focal spot on SiC susceptor plate]
+                        &darr; conduction
+                  [refractory cavity: cordierite honeycomb
+                   packed in perlite/vermiculite, high mass]
+                        &darr;
+                  [work zone holds soak through cloud gaps]</pre>
+
+  <h4>Thermal-mass sizing</h4>
+  <p>Enough mass that the temperature decay rate during a cloud passage stays &lt;5&nbsp;C/min. Cordierite kiln furniture tolerates those cycles; alumina would crack. The SiC susceptor plate absorbs the concentrated light and transfers heat evenly into the cavity.</p>
+
+  <div class="data-grid">
+    <div class="data-card"><div class="label">Primary heat source</div><div class="value">Free sunlight</div></div>
+    <div class="data-card"><div class="label">Soak strategy</div><div class="value">Conduction through mass</div></div>
+    <div class="data-card"><div class="label">Cavity insulation</div><div class="value">Perlite / vermiculite loose fill</div></div>
+    <div class="data-card"><div class="label">Susceptor</div><div class="value">SiC plate (or graphite if sealed from O&#8322;)</div></div>
+  </div>
+
+  <h3>Backup: microwave + SiC susceptor</h3>
+  <p>For nights, overcast days, or guaranteed cycles:</p>
+  <ul>
+    <li>Consumer microwave (1000 W) with a SiC susceptor (small silicon carbide kiln shelf or rod) inside a perlite-packed alumina cavity.</li>
+    <li>Known technique, ~$40 in susceptor material, reaches 1100&ndash;1200&nbsp;C &mdash; well above LATP's 900&ndash;1000&nbsp;C sintering window.</li>
+    <li>Use the same cordierite/perlite cavity layout; replace the solar input with the microwave/SiC couple.</li>
+  </ul>
+
+  <h4>Fallback order</h4>
+  <ol>
+    <li>Fresnel solar cavity (primary, zero operating cost).</li>
+    <li>Microwave + SiC (night, overcast, guaranteed cycle).</li>
+  </ol>
+
+  <div class="tip"><strong>Other uses for the same Fresnel array:</strong> tab welding (aluminium melts at 660&nbsp;C, copper at 1084&nbsp;C &mdash; both easily reached), sieve regeneration by baking in the focal spot, or slow solvent distillation with a copper coil through the hot block. The block heats a lot more than just the LATP.</div>
+</div>
+
+<div class="section" id="drybox">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Dry Box (Glove Bin) Build</div>
+
+  <p>Goal: workspace with &lt;5% relative humidity at room temperature, or better yet a dew point below &minus;30&nbsp;C. Achievable with a plastic bin, PVC gloves, and a trickle of dry gas.</p>
+
+  <h3>Materials</h3>
+  <table>
+    <tr><th>Item</th><th>Why</th><th>Source / notes</th></tr>
+    <tr><td>Clear plastic storage bin, 60&ndash;100 L, gasketed lid</td><td>Rigid, transparent, cheap</td><td>Add weatherstrip foam to lid rim if not already gasketed.</td></tr>
+    <tr><td>PVC gauntlet gloves, elbow-length</td><td>Your hands</td><td>Hardware store. Cotton liners optional.</td></tr>
+    <tr><td>Hose clamps and rubber grommets or bulkhead fittings</td><td>Seal gloves to box</td><td>Clamp glove cuff over PVC pipe glued into a hole.</td></tr>
+    <tr><td>Silicone sealant (clear)</td><td>Gas-tight seals</td><td>Cure fully before use &mdash; acetic vapor is corrosive to some metals.</td></tr>
+    <tr><td>Gas inlet/outlet ports</td><td>Purge flow</td><td>Brass tube through tight hole sealed with epoxy, or bulkhead barbs.</td></tr>
+    <tr><td>Needle valve / low-flow regulator</td><td>Control gas</td><td>Aquarium air valve works at low pressure.</td></tr>
+    <tr><td>Small computer fan (12V, 40&ndash;80mm) + battery/wall adapter</td><td>Internal circulation</td><td>Speeds drying and purge.</td></tr>
+    <tr><td>Molecular sieves (3&Aring; or 4&Aring;), freshly activated</td><td>Final moisture scavenger</td><td>Open tray inside the box.</td></tr>
+    <tr><td>Humidity indicator</td><td>Know when it's dry</td><td>Cobalt-chloride silica gel or anhydrous CuSO&#8324;.</td></tr>
+    <tr><td>Dry nitrogen or argon</td><td>Purge gas</td><td>Welding cylinder + regulator, or small disposable argon cylinder. 2&ndash;5 PSI output.</td></tr>
+  </table>
+
+  <h3>Assembly</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Mount the gloves</div><div class="step-desc">Cut two 100 mm holes in one long side. Attach glove cuffs by clamping over a short section of 4" PVC pipe glued into each hole. Hose-clamp the glove tight. Seal pipe-to-bin joint with epoxy.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Install gas ports</div><div class="step-desc">Two holes near the top on opposite sides for cross-flow. Bulkhead fittings or epoxied brass tubing. Vent outlet outside or into a bubbler (a jar with tubing) to verify flow and act as a check valve.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Internal fan</div><div class="step-desc">12V fan wired to a battery pack outside the box (or thin wires through a sealed feedthrough). Blow across the desiccant tray.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Desiccant tray</div><div class="step-desc">Shallow tray of freshly activated molecular sieves inside the box. Scrubs residual moisture after initial purge.</div></div></div>
+  <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Humidity indicator</div><div class="step-desc">Cobalt-chloride silica gel strip taped where you can see it (colour change 10&ndash;20% RH), or anhydrous CuSO&#8324; in a small dish (white = dry, blue = moisture, very sensitive).</div></div></div>
+
+  <h3>Operation</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Load first, then seal</div><div class="step-desc">Place all dry tools, electrodes, sealed vials, and the cell stack inside the box before closing.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Purge</div><div class="step-desc">Start gas at ~2&ndash;5 L/min. Fan running. Watch the indicator; box will dry in 10&ndash;30 minutes.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Maintain slight positive pressure</div><div class="step-desc">Once indicator stays dry for a few minutes, reduce gas flow to a whisper (~0.1 L/min) to keep ambient from diffusing in through glove pinholes.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Work quickly through gloves</div><div class="step-desc">Electrolyte vials and freshly baked electrodes open only inside the box. Plan critical steps for one session.</div></div></div>
+
+  <div class="tip"><strong>Ready-made alternative:</strong> commercial "glove bags" (e.g. Sigma-Aldrich AtmosBag) are flexible polyethylene bags with integrated gloves and a zip lock. Easier to purge and store. $80&ndash;150. You can build your own from heavy clear plastic sheeting and tape if truly scrap-constrained.</div>
+</div>
+
+<div class="section" id="cell">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Cell Assembly (Pouch)</div>
+
+  <p>Target: a small pouch cell (single or few hundred mAh) for testing. Graphite anode, LFP cathode &mdash; both harvestable from dead cells or bought as coated foils. Electrolyte: 1 M LiPF&#8326; in EC:DMC:EA (1:1:2 v/v) + 2&ndash;3% VC.</p>
+
+  <div class="warning"><strong>Do everything inside the dry box.</strong> LiPF&#8326; releases HF on contact with moisture. Nitrile gloves, eye protection, baking-soda spill neutralizer on hand.</div>
+
+  <h3>Materials and scrap sources</h3>
+  <table>
+    <tr><th>Component</th><th>Source</th><th>Notes</th></tr>
+    <tr><td>1 M LiPF&#8326; in EC:DMC (1:1)</td><td>Battery-grade electrolyte from MTI, MSE, Alibaba</td><td>Base salt + carbonates. Dilute with your ester.</td></tr>
+    <tr><td>Anhydrous ethyl acetate (dry)</td><td>Sieves-dried EA (Ester Electrolyte section)</td><td>Keep in sealed jar inside dry box.</td></tr>
+    <tr><td>Cathode: LFP-coated Al foil</td><td>Dead LiFePO&#8324; cells (A123, LFP tool packs)</td><td>Peel, wash with DMC, dry.</td></tr>
+    <tr><td>Anode: graphite-coated Cu foil</td><td>Dead phone or 18650 cells</td><td>Wash in DMC, dry.</td></tr>
+    <tr><td>Separator: porous PP or PE</td><td>Dead-cell harvest or buy Celgard 2500</td><td>Must be wrinkle-free.</td></tr>
+    <tr><td>Pouch: Al-laminate film</td><td>Coffee-bag laminate or proper pouch foil</td><td>Must be heat-sealable on the inside.</td></tr>
+    <tr><td>Tabs: Ni and Al strips</td><td>Cut from dead-cell tabs, or buy</td><td>Al tab for cathode, Ni (or Cu) tab for anode.</td></tr>
+    <tr><td>Vinylene carbonate (VC) additive</td><td>Lab supply</td><td>2&ndash;3 wt% of electrolyte. Dramatic SEI improvement.</td></tr>
+    <tr><td>Dry Ar or N&#8322;</td><td>Welding gas cylinder + regulator</td><td>Purge dry box, displace moisture.</td></tr>
+  </table>
+
+  <h3>Steps</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Electrode prep</div><div class="step-desc">Cut cathode and anode foils, leaving small uncoated "tab" area. Weigh accurately. Bake cut electrodes at 120&nbsp;C under vacuum (or in a sealed jar flushed with dry gas) at least 4 hours. Keep sealed until assembly.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Electrolyte mixing (inside dry box)</div><div class="step-desc">For 5 mL total: 2.5 mL of 1 M LiPF&#8326; in EC:DMC premix + 2.5 mL dry EA + 0.1&ndash;0.2 mL (a few drops) VC. Mix gently with a clean glass rod. Final salt concentration slightly under 1 M &mdash; fine for low-T work.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Stack assembly</div><div class="step-desc">Anode / separator / cathode / separator / anode (single cell, two anodes). Separator must extend beyond all electrode edges to prevent shorts. Bind lightly between glass plates with Kapton tape or a PTFE binder clip.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Tab welding and pouch sealing</div><div class="step-desc">Weld or crimp Al tab to cathode foil, Ni/Cu tab to anode. No spot welder? Fold the tab area over several times and use a small crimp connector or screw terminal. Tab exits through the pouch seal. Heat-seal three sides of the pouch; leave one open for electrolyte fill. An impulse sealer or clothes iron on low (with foil to protect the pouch) works.</div></div></div>
+  <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Electrolyte injection</div><div class="step-desc">Syringe with fine needle, ~0.3 mL electrolyte per 100 mAh of expected capacity, injected directly onto the exposed stack.</div></div></div>
+  <div class="step"><div class="step-num">6</div><div class="step-body"><div class="step-title">Vacuum wet</div><div class="step-desc">Place open-ended pouch in a vacuum jar (thick-walled mason jar + hand pump). Evacuate slowly and release a few times to force electrolyte into porosity. When bubbles stop, backfill with dry gas.</div></div></div>
+  <div class="step"><div class="step-num">7</div><div class="step-body"><div class="step-title">Seal final edge</div><div class="step-desc">Under partial vacuum or slight positive inert pressure.</div></div></div>
+
+  <div class="note"><strong>Expected performance:</strong> at &minus;40&nbsp;C, a well-built ester cell with LFP delivers roughly 40&ndash;50% of room-temperature capacity at C/5. At &minus;60&nbsp;C, roughly 20&ndash;30% &mdash; still usable. Charge at low temperature is the danger zone; always limit charge current to C/20 or less below &minus;30&nbsp;C to avoid Li plating.</div>
+</div>
+
+<div class="section" id="formation">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Formation Cycling for Ester Cells</div>
+
+  <p>Ester co-solvents like ethyl acetate are notoriously aggressive toward graphite during the first charge &mdash; they can co-intercalate and exfoliate the graphite if the SEI is not built correctly. The formation protocol is everything.</p>
+
+  <h3>The chemistry problem</h3>
+  <p>In a standard carbonate electrolyte, EC is reduced early (~0.8 V vs Li/Li&#8314;) to form a protective SEI. Ethyl acetate has lower reductive stability and can slip into graphite layers before the SEI is solid, causing gas and structural damage. We counter with:</p>
+  <ul>
+    <li>Slow, staged first charge.</li>
+    <li>VC as sacrificial SEI-former (2&ndash;3 wt%).</li>
+    <li>A hold at low voltage to pre-form a thin SEI before bulk intercalation.</li>
+  </ul>
+
+  <h3>Protocol (graphite / LFP pouch)</h3>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Wet rest</div><div class="step-desc">After electrolyte injection and sealing, rest at room temperature at least 6 hours, preferably 12, for full wetting.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Open-circuit check</div><div class="step-desc">Measure OCV. Should be 0.0&ndash;0.5 V for a fresh discharged cell. If negative or above 1 V &mdash; short or contamination. Abort.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Stage A &mdash; C/50 from OCV to 1.5 V</div><div class="step-desc">Allows VC and EC to reduce gently and form the initial SEI without ester interference. 6&ndash;10 hours.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Stage B &mdash; C/20 from 1.5 V to 3.0 V</div><div class="step-desc">Main SEI thickening and start of graphite intercalation. Low current prevents local hotspots or plating.</div></div></div>
+  <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Stage C &mdash; C/10 from 3.0 V to 3.65 V</div><div class="step-desc">Top of charge for LFP. Once SEI is established, esters tolerate normal rates.</div></div></div>
+  <div class="step"><div class="step-num">6</div><div class="step-body"><div class="step-title">Stage D &mdash; CV hold at 3.65 V until current &le; C/50</div><div class="step-desc">Full lithiation of graphite, relaxation of concentration gradients.</div></div></div>
+  <div class="step"><div class="step-num">7</div><div class="step-body"><div class="step-title">Rest 1 hour, then discharge at C/10 to 2.5 V</div><div class="step-desc">Healthy OCV settles around 3.35&ndash;3.40 V during rest.</div></div></div>
+
+  <h3>Evaluation</h3>
+  <div class="formula">CE = (discharge capacity mAh) / (charge capacity mAh)</div>
+  <ul>
+    <li><strong>Good:</strong> &gt;80% with VC, &gt;70% without VC.</li>
+    <li><strong>Poor (&lt;65%):</strong> excessive side reactions, likely gassing. The pouch may balloon. If ballooned but not burst, carefully pierce with a needle inside the dry box, let the gas escape, reseal with epoxy or a fresh heat-seal strip, and continue cycling.</li>
+  </ul>
+  <p>Second cycle: charge at C/10 to 3.65 V CV until C/50, discharge at C/10 to 2.5 V. Second-cycle CE should be &gt;98%. If not, the SEI is still forming &mdash; give it one more slow cycle.</p>
+
+  <h3>Cold-temperature performance check</h3>
+  <ol>
+    <li>Charge at room temperature at C/5 to 3.6 V + CV. Measure baseline capacity.</li>
+    <li>Place cell in freezer or dry-ice bath (thermocouple on cell body). Soak &ge;2 hours.</li>
+    <li>Discharge only at the cold temperature, starting at C/5. If voltage sag exceeds 0.5 V at start, drop to C/10. Record capacity vs temperature.</li>
+    <li>Never charge below &minus;30&nbsp;C at rates above C/20 without close plating monitoring. LFP is robust but graphite will plate if anode potential falls below 0 V.</li>
+  </ol>
+</div>
+
+<div class="section" id="thermal">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Thermal Management &mdash; Solar Block Preheat</div>
+
+  <p>The Fresnel array heats a high-thermal-mass block (SiC or steel inside cordierite / perlite insulation). The block stores solar heat. When the battery is too cold to safely charge, a fan pulls warm air from the block through the battery box.</p>
+
+  <h3>Hardware picture</h3>
+  <ul>
+    <li><strong>Solar block:</strong> cordierite-enclosed SiC or steel mass, well insulated (perlite / cordierite honeycomb spacers). Thermocouple (Type K, or a pair of NTCs) buried in it.</li>
+    <li><strong>Battery pack:</strong> ester cells in cordierite housing with an NTC on the cell body.</li>
+    <li><strong>Thermal connection:</strong> insulated duct from block box to battery box. Damper vane inside the duct actuated by a small servo (salvaged RC servo, wax thermostat actuator, or dead-appliance solenoid). Small 12 V computer fan pushes air through the duct when the damper is open.</li>
+    <li><strong>Ambient sensor:</strong> optional but useful for predictive logic.</li>
+    <li><strong>Arduino:</strong> runs the BMS + thermal state machine, wired to the actuators.</li>
+  </ul>
+
+  <h3>Four operating states</h3>
+  <table>
+    <tr><th>State</th><th>Condition</th><th>Action</th></tr>
+    <tr><td>STANDBY</td><td>Battery temp &gt; CHG_MIN OR block cold</td><td>Damper closed, fan off. Normal BMS charging.</td></tr>
+    <tr><td>PREHEAT</td><td>Battery temp &lt; CHG_MIN, block &gt; BLOCK_MIN, sun available or block hot</td><td>Damper open, fan on low. Move heat to battery.</td></tr>
+    <tr><td>CHARGE_WAIT</td><td>Battery temp rising but still &lt; CHG_MIN, block heat depleted</td><td>Damper closed, fan off. Wait for sun to reheat block or ambient to warm.</td></tr>
+    <tr><td>OVERHEAT_PROTECT</td><td>Battery &gt; 50&nbsp;C or block &gt; 300&nbsp;C</td><td>Block damper closed, fan on full (vent to outside if equipped). Stop charging.</td></tr>
+  </table>
+
+  <h3>Predictive sunrise</h3>
+  <p>A photoresistor (or a small solar panel voltage) plus a stability window predicts when the block will be hot enough for preheat. Simple time-constant model: if light &gt; ~30% for 30 minutes, block will be &gt; 80&nbsp;C. The BMS could then pre-emptively start a tiny trickle self-warm (if some charge is available) to align battery readiness with block-heat arrival. That's the "BMS that reads the weather" the merged sketch implements.</p>
+
+  <h3>Scrap actuator options</h3>
+  <table>
+    <tr><th>Actuator</th><th>Source</th><th>Notes</th></tr>
+    <tr><td>Micro servo (SG90 / dead RC car)</td><td>~$3 or free</td><td>Simplest damper drive. Use Servo library.</td></tr>
+    <tr><td>Wax motor from car thermostat or dishwasher</td><td>Junkyard</td><td>Opens valve mechanically when heated; heat with a small resistor. Finicky.</td></tr>
+    <tr><td>Solenoid from washing-machine water valve</td><td>Scrap appliance</td><td>Spring-return. Bang-bang control.</td></tr>
+    <tr><td>12V computer case fan</td><td>Dead PC</td><td>PWM speed control via MOSFET (IRLZ44N). Slow fan on preheat avoids cold-air shock and condensation.</td></tr>
+  </table>
+
+  <div class="tip"><strong>Sensor placement:</strong> battery NTC epoxied to the side of a center cell under an insulating foam pad so it reads cell body, not air. Block thermocouple inserted into a drilled hole, secured with furnace cement. For a block above 250&nbsp;C, swap the NTC for a MAX6675-driven K-type thermocouple.</div>
+</div>
+
+<div class="section" id="bms">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">BMS &mdash; Arduino Reference Sketches</div>
+
+  <p>Two Arduino sketches ship with this guide, under <code>bms/</code>:</p>
+
+  <h3><code>bms_1s_basic.ino</code> &mdash; start here</h3>
+  <p>Minimal single-cell (1S) LFP protection: overvoltage / undervoltage / overcurrent / charge-temperature lockout. Arduino Nano or Uno, INA219 current sensor, one NTC thermistor. Good for benching a first ester cell.</p>
+
+  <h3><code>bms_1s_merged.ino</code> &mdash; the full system</h3>
+  <p>Same electrical BMS, plus:</p>
+  <ul>
+    <li><strong>Thermal state machine</strong> (STANDBY / PREHEAT / CHARGE_WAIT / OVERHEAT_PROTECT). Drives damper servo and PWM fan.</li>
+    <li><strong>Predictive sunrise</strong> from a photoresistor + 30-minute stability window. Lights a blue LED when triggered.</li>
+    <li><strong>PIR "jeans-protection" safety shutter</strong> &mdash; motion in the danger zone closes a servo shutter over the Fresnel focal spot and sounds a continuous buzzer.</li>
+  </ul>
+
+  <h3>Quick-option analog hack (no Arduino)</h3>
+  <p>If you just need to safely cycle a single ester cell right now, a $2 1S protection module (DW01 + 8205A MOSFET, the LFP version with 3.65 V overcharge) already handles OV/UV/OC. Add a low-temp charge lockout with an NTC, an LM393 comparator, and a voltage divider &mdash; the comparator pulls the DW01's CS pin low when the temperature drops below threshold. Rigid and unadjustable, but useful as a hardware backstop when the Arduino BMS is offline.</p>
+
+  <h3>Pin table (excerpt from <code>bms/README.md</code>)</h3>
+  <table>
+    <tr><th>Pin</th><th>Function</th></tr>
+    <tr><td>A0</td><td>Cell voltage (100k+10k divider)</td></tr>
+    <tr><td>A1 / A2</td><td>Battery NTC / block NTC</td></tr>
+    <tr><td>A3</td><td>Photoresistor (sunrise)</td></tr>
+    <tr><td>A4 / A5</td><td>INA219 I&sup2;C</td></tr>
+    <tr><td>D2</td><td>PIR motion input</td></tr>
+    <tr><td>D3 / D4</td><td>Discharge MOSFET / charge relay</td></tr>
+    <tr><td>D5</td><td>Fan MOSFET (PWM)</td></tr>
+    <tr><td>D6 / D7</td><td>Damper servo / shutter servo</td></tr>
+    <tr><td>D8&ndash;D11</td><td>OK LED / fault LED / buzzer / sunrise LED</td></tr>
+  </table>
+
+  <p>Full pin table, wiring notes, calibration procedure, and testing protocol in <code>bms/README.md</code>. The sketches are 1S only; scaling to a 4S pack needs a CD4051 multiplexer for cell taps, a high-side charge disconnect (40 A automotive relay is easiest), and per-cell balancing shunts (or manual top-balance with a hobby charger). Not implemented &mdash; noted as a next step.</p>
+</div>
+
+<div class="section" id="safety">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Safety &mdash; What Can Kill You</div>
+
+  <h4>Hydrogen fluoride (from LiPF&#8326;)</h4>
+  <p>LiPF&#8326; hydrolyzes on contact with moisture, skin oils, or ambient humidity to release HF gas and dissolved fluoride. HF is a bone-seeking cytotoxin &mdash; it doesn't just burn skin, it dissolves calcium in the tissue underneath, and severe exposure can cause fatal cardiac arrest hours after the initial contact.</p>
+  <ul>
+    <li>Work in the dry box or a fume hood. Never bare-handed.</li>
+    <li>Have calcium gluconate gel on hand (2.5%) for skin exposure. Saturated baking-soda solution for spill neutralization on surfaces.</li>
+    <li>Ventilate any workspace where a pouch is being pierced or reseal is being done.</li>
+  </ul>
+
+  <h4>Concentrated sunlight from the Fresnel array</h4>
+  <p>A rear-projection Fresnel lens can hit 1500+&nbsp;C at its focal spot. It will burn through jeans in seconds, ignite dry grass at 10+ meters if aimed wrong, and cause instant retinal damage without proper filter goggles.</p>
+  <ul>
+    <li>Enforce an exclusion zone with a physical fence, not a rope. Small humans are attracted to sparkly things.</li>
+    <li>The PIR shutter in the merged BMS sketch is the fallback when the fence fails. Test the shutter closure weekly.</li>
+    <li>Welding-grade IR/UV goggles when adjusting the array. Solar-eclipse glasses are not enough.</li>
+    <li>Never leave the array unattended pointed at anything. When you walk away, un-focus it or cover it.</li>
+  </ul>
+
+  <h4>Carbon monoxide (from any combustion)</h4>
+  <p>If you're using the fuel-independence-guide's wood gasifier or a fuel-oil-fired kiln backup, CO builds up silently in enclosed spaces. Symptoms: headache, dizziness, nausea, confusion. CO detector in every building with an engine or heater; ventilation on any exhaust path.</p>
+
+  <h4>Methanol toxicity</h4>
+  <p>Only relevant if you're home-brewing your own ester via Fischer esterification with methanol. Methanol metabolizes to formic acid &rarr; blindness &rarr; metabolic acidosis. Ethanol is the antidote (competes for the same enzyme). Skin absorption is real. Full description in <code>../fuel-independence-guide/index.html</code>.</p>
+
+  <h4>Ether (starting fluid) explosions</h4>
+  <p>If you're tempted to use ether as an electrolyte co-solvent (don't &mdash; ethers oxidize at cathode &gt; 4 V), the vapor is heavier than air, pools in low spots, and ignites from static or a hot surface. Never spray into a hot engine or turbo. Full note in <code>../fuel-independence-guide/index.html</code>.</p>
+
+  <h4>Lithium battery thermal runaway</h4>
+  <p>Any Li-ion cell (ester or solid-state) can enter thermal runaway if punctured, overcharged, over-discharged, or heated above ~150&nbsp;C. Runaway releases oxygen internally, ignites the electrolyte, and burns at 1000+&nbsp;C. Water does not put it out &mdash; reacts with metallic lithium to release hydrogen.</p>
+  <ul>
+    <li>Pack-level hardware fuse in the battery negative lead, in addition to the BMS.</li>
+    <li>Vent the battery enclosure to outside &mdash; never into the cab.</li>
+    <li>Fire extinguisher class D dry powder, sand, or let it burn out in a controlled area. Do not breathe the smoke (HF gas plus every other fluorinated combustion byproduct).</li>
+    <li>At &minus;60&nbsp;F, do not use lithium-ion for primary starting power &mdash; cannot charge below freezing without plating, and BMS heater death spirals are a documented failure mode. Lead-acid, kept warm, is the safe starting battery in extreme cold.</li>
+  </ul>
+
+  <h4>Caustic chemicals (lye, sulfuric acid)</h4>
+  <p>Biodiesel production and Fischer esterification use NaOH (lye) and H&#8322;SO&#8324; (sulfuric acid). Both cause severe chemical burns. Goggles, rubber gloves, apron, water source. Always add acid to water, not water to acid.</p>
+
+  <div class="tip"><strong>Summary for the sleeper cab:</strong> a well-built ester cell in a cordierite housing with a coolant-loop preheater and a proper BMS is not more dangerous than any commercial Li-ion pack. It's more visible, which is safer &mdash; you can see the pouches, hear the buzzer, and know when something is going wrong. The danger comes from cutting corners on the dry box, the fuse, the vent path, or the exclusion zone around the Fresnel.</div>
+</div>
+
+</div>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+{
+  "investigation_id": "inv-wim-pavement-001",
+  "proxy_candidate": {
+    "target_variable": "Cumulative pavement fatigue consumption (fraction of design life used)",
+    "observable_metric": "Piezoelectric WIM sensor axle-load spectrum (kN per axle, continuous)",
+    "claimed_mapping": "Fourth-power law: fatigue consumption ~ sum(axle_load^4); WIM measures the load directly"
+  },
+  "phases": {
+    "decomposition": {
+      "alternative_constructs": [
+        "static point-load damage from idling queues (different failure mode)",
+        "subgrade moisture weakening (load-independent)"
+      ]
+    },
+    "grounding_chain": {
+      "chain_fidelity": 0.864,
+      "n_links": 2,
+      "weakest_link": {
+        "name": "load->fatigue",
+        "fidelity": 0.9,
+        "grade": "measured"
+      },
+      "links": [
+        {
+          "name": "load->fatigue",
+          "fidelity": 0.9,
+          "grade": "measured",
+          "alternative_causes": [
+            "freeze-thaw cycles",
+            "subgrade washout bypass load channel"
+          ]
+        },
+        {
+          "name": "fatigue->sensor",
+          "fidelity": 0.96,
+          "grade": "measured",
+          "alternative_causes": [
+            "temperature drift",
+            "sensor aging -> recalibration schedule"
+          ]
+        }
+      ]
+    },
+    "instrument": {
+      "post_experiment": {
+        "bias": 0.021404177002781213,
+        "noise": 0.050190944894691815
+      },
+      "synthetic_recovery": {
+        "bias_error": 0.0014041770027812123,
+        "noise_error": 0.00019094489469181214,
+        "passed": true
+      }
+    },
+    "validity_threats": [
+      {
+        "threat": "load-independent failure modes",
+        "severity": "medium"
+      },
+      {
+        "threat": "sensor drift",
+        "severity": "low (recalibration scheduled)"
+      }
+    ],
+    "experiments": [
+      "exp-synth-wim-001"
+    ],
+    "calibration": {
+      "method": "isotonic",
+      "ece_before": 0.3191,
+      "ece_after": 0.0076,
+      "improved": true,
+      "params": {
+        "n_knots": 21
+      },
+      "holdout_n": 2500
+    }
+  },
+  "coverage": {
+    "aspects": [
+      {
+        "aspect": "axle-load measurement (piezo sensor)",
+        "grade": "measured",
+        "grounding_level": "G1",
+        "upgrade_path": "none needed; scheduled recalibration vs. reference weighbridge"
+      },
+      {
+        "aspect": "load->fatigue law (4th power)",
+        "grade": "measured",
+        "grounding_level": "G2",
+        "upgrade_path": "site-specific falling-weight-deflectometer validation"
+      },
+      {
+        "aspect": "instrument bias/noise values",
+        "grade": "measured",
+        "grounding_level": "G1",
+        "upgrade_path": "none needed"
+      },
+      {
+        "aspect": "non-load failure modes (moisture, freeze-thaw)",
+        "grade": "estimated",
+        "grounding_level": "G3",
+        "upgrade_path": "fuse WIM with soil-moisture sensors for full failure-mode coverage"
+      },
+      {
+        "aspect": "calibration of fatigue-consumption scores",
+        "grade": "measured",
+        "grounding_level": "G2",
+        "upgrade_path": "expand core-sample verification set"
+      }
+    ],
+    "grounded_fraction": 0.9,
+    "weakest_aspects": [
+      "non-load failure modes (moisture, freeze-thaw)",
+      "axle-load measurement (piezo sensor)",
+      "load->fatigue law (4th power)"
+    ],
+    "verdict": "well grounded"
+  }
+}

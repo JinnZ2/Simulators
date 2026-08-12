@@ -1,0 +1,119 @@
+{
+  "investigation_id": "inv-seismometer-001",
+  "instrument": "Broadband seismometer network",
+  "domain": "physics",
+  "measurand_decomposition": {
+    "measurand": "Ground velocity/acceleration vs. time at a point (m/s, m/s2)",
+    "indication": "Voltage from inertial mass displacement transducer",
+    "bridge_model": "Instrument response deconvolution (poles/zeros); site correction"
+  },
+  "transduction_chain": {
+    "chain_fidelity": 0.7999,
+    "weakest_link": {
+      "name": "counts->ground motion",
+      "fidelity": 0.85,
+      "grade": "estimated"
+    },
+    "links": [
+      {
+        "name": "ground->inertial mass",
+        "fidelity": 0.98,
+        "grade": "measured",
+        "aliases": [
+          "tilt couples into horizontal channels"
+        ]
+      },
+      {
+        "name": "mass->voltage",
+        "fidelity": 0.97,
+        "grade": "measured",
+        "aliases": []
+      },
+      {
+        "name": "voltage->digital counts",
+        "fidelity": 0.99,
+        "grade": "measured",
+        "aliases": []
+      },
+      {
+        "name": "counts->ground motion",
+        "fidelity": 0.85,
+        "grade": "estimated",
+        "aliases": [
+          "soft sediment amplifies \u2014 site, not source"
+        ]
+      }
+    ]
+  },
+  "model_rung": "M1",
+  "traceability": {
+    "highest_break": "unbroken chain to SI",
+    "grade": "measured"
+  },
+  "blindness_map": [
+    {
+      "kind": "gate",
+      "description": "Below magnitude-completeness threshold, small quakes are 'not occurring'",
+      "consequence": "seismicity rate biased low; completeness must be estimated per network"
+    },
+    {
+      "kind": "frame",
+      "description": "Station geometry: gaps offshore / between stations",
+      "consequence": "locations and mechanisms biased where coverage is thin"
+    },
+    {
+      "kind": "alias_state",
+      "description": "Local site amplification vs. genuinely large source signal",
+      "consequence": "hazard maps conflate site response with source hazard if unmodeled"
+    }
+  ],
+  "validation": {
+    "forward_simulation": {
+      "injected": 0.02,
+      "recovered": 0.02,
+      "recovery_error": 0.0003,
+      "passed": true,
+      "detail": {
+        "chain_fidelity": 0.995,
+        "model_bias": 0.0001,
+        "noise": 0.0005,
+        "note": "unmodelled fidelity loss+bias appears as systematic error"
+      }
+    }
+  },
+  "coverage": {
+    "aspects": [
+      {
+        "aspect": "inertial transduction physics",
+        "grade": "measured"
+      },
+      {
+        "aspect": "digitizer and timing",
+        "grade": "measured"
+      },
+      {
+        "aspect": "SI traceability (laser primary standard)",
+        "grade": "measured"
+      },
+      {
+        "aspect": "response deconvolution",
+        "grade": "measured"
+      },
+      {
+        "aspect": "site amplification correction",
+        "grade": "estimated"
+      },
+      {
+        "aspect": "magnitude-completeness of network",
+        "grade": "estimated"
+      }
+    ],
+    "grounded_fraction": 0.833,
+    "weakest_aspects": [
+      "site amplification correction",
+      "magnitude-completeness of network",
+      "inertial transduction physics"
+    ],
+    "verdict": "well grounded"
+  }
+}

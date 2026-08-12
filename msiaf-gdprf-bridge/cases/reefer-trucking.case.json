@@ -1,0 +1,376 @@
+{
+  "case_id": "msiaf-reefer-001",
+  "title": "Reefer run-off-road onto soft shoulder after debris avoidance",
+  "spec": "MSIAF x GDPRF bridge v1.0",
+  "scope": {
+    "temporal_bounds": "incident day, summer; drive window 13h",
+    "spatial_bounds": "rural highway stretch, washout zone, carrier's assigned route",
+    "locality_context": "peak produce season; strict temperature-excursion contract"
+  },
+  "links": [
+    {
+      "link_id": "L1",
+      "pathway": "D4 -> D2",
+      "claim": {
+        "claim_id": "c1d4d2-reefer-0001",
+        "domain": "freight_operations",
+        "statement": "The temperature-excursion penalty clause created top-down dispatch pressure on the carrier.",
+        "confidence_gradient": 0.5,
+        "variance_margin": 0.2,
+        "assigned_proxies": [
+          "p-contract-clause",
+          "p-dispatch-message"
+        ],
+        "unknown_variable_risk_score": 0.2,
+        "hidden_variable_search": {
+          "triggered": false,
+          "residual_variance_observed": null,
+          "threshold": 0.15,
+          "identification_gate": {
+            "status": "not_triggered",
+            "method": null,
+            "assumptions": []
+          }
+        }
+      },
+      "proxies": [
+        {
+          "proxy_id": "p-contract-clause",
+          "target_variable": "Financial penalty pressure (D4)",
+          "observable_metric": "Signed contract text: rejection at >2F deviation for >15 min",
+          "metrology": {
+            "sensor_type": "contract_document",
+            "precision": 0.98,
+            "noise_floor": 0.02,
+            "systematic_bias": 0.0,
+            "provenance": {
+              "precision_source": "measured",
+              "noise_floor_source": "measured",
+              "systematic_bias_source": "measured",
+              "reference_standard": "executed contract PDF"
+            }
+          },
+          "fidelity_gradient": 0.95,
+          "calibration": {
+            "method": "isotonic_regression",
+            "calibrated_fidelity": 0.93,
+            "validation_set": "contract-vs-behavior audit corpus",
+            "calibrated_at": "2026-08-01T00:00:00Z",
+            "expected_calibration_error": 0.02
+          },
+          "validity_claim_id": "v-contract-0001",
+          "thermodynamic_physical_grounding": "Contract clauses are directly executed obligations; rejection risk is read verbatim",
+          "vector_embedding": [
+            0.1,
+            0.2,
+            0.05,
+            -0.1
+          ]
+        },
+        {
+          "proxy_id": "p-dispatch-message",
+          "target_variable": "Dispatch pressure (D2)",
+          "observable_metric": "Timestamped dispatch message: 'rest at the receiver... 5 AM. No exceptions.' + dispatcher bonus tied to on-time %",
+          "metrology": {
+            "sensor_type": "eld_message_log",
+            "precision": 0.97,
+            "noise_floor": 0.03,
+            "systematic_bias": 0.0,
+            "provenance": {
+              "precision_source": "measured",
+              "noise_floor_source": "measured",
+              "systematic_bias_source": "measured",
+              "reference_standard": "ELD device extraction"
+            }
+          },
+          "fidelity_gradient": 0.92,
+          "calibration": {
+            "method": "platt_scaling",
+            "calibrated_fidelity": 0.9,
+            "validation_set": "ELD forensics holdout",
+            "calibrated_at": "2026-08-01T00:00:00Z",
+            "expected_calibration_error": 0.03
+          },
+          "validity_claim_id": "v-dispatch-0001",
+          "thermodynamic_physical_grounding": "ELD logs are immutable device records with timestamps",
+          "vector_embedding": [
+            0.12,
+            0.18,
+            0.04,
+            -0.09
+          ]
+        }
+      ],
+      "edge": {
+        "relationship_type": "causal",
+        "coupling_strength": 0.85,
+        "evidence_weight": 0.9
+      }
+    },
+    {
+      "link_id": "L2",
+      "pathway": "D2 -> D1",
+      "claim": {
+        "claim_id": "c2d2d1-reefer-0002",
+        "domain": "human_factors",
+        "statement": "Dispatch pressure degraded the driver's physiological state (skipped rest, poor nutrition, heat-disrupted sleep).",
+        "confidence_gradient": 0.5,
+        "variance_margin": 0.25,
+        "assigned_proxies": [
+          "p-fatigue-model",
+          "p-stop-audit"
+        ],
+        "unknown_variable_risk_score": 0.35,
+        "hidden_variable_search": {
+          "triggered": false,
+          "residual_variance_observed": null,
+          "threshold": 0.15,
+          "identification_gate": {
+            "status": "not_triggered",
+            "method": null,
+            "assumptions": []
+          }
+        }
+      },
+      "proxies": [
+        {
+          "proxy_id": "p-fatigue-model",
+          "target_variable": "Driver physiological degradation (D1)",
+          "observable_metric": "Fatigue-equivalence model from duty logs, cab-sleep heat exposure (105F), meal access",
+          "metrology": {
+            "sensor_type": "fatigue_model",
+            "precision": 0.7,
+            "noise_floor": 0.2,
+            "systematic_bias": 0.08,
+            "provenance": {
+              "precision_source": "estimated",
+              "noise_floor_source": "estimated",
+              "systematic_bias_source": "assumed",
+              "reference_standard": "SAFTE/FAST-class model defaults"
+            }
+          },
+          "fidelity_gradient": 0.62,
+          "calibration": {
+            "method": "isotonic_regression",
+            "calibrated_fidelity": 0.58,
+            "validation_set": "actigraphy-linked validation set",
+            "calibrated_at": "2026-08-01T00:00:00Z",
+            "expected_calibration_error": 0.09
+          },
+          "validity_claim_id": "v-fatigue-0001",
+          "thermodynamic_physical_grounding": "Sleep loss and heat exposure measurably slow reaction time; model maps exposure to BAC-equivalent degradation",
+          "vector_embedding": [
+            0.05,
+            0.1,
+            0.22,
+            -0.04
+          ]
+        },
+        {
+          "proxy_id": "p-stop-audit",
+          "target_variable": "Nutritional environment on route",
+          "observable_metric": "Directed truck stop has no healthy food options (site audit)",
+          "metrology": {
+            "sensor_type": "site_audit",
+            "precision": 0.85,
+            "noise_floor": 0.1,
+            "systematic_bias": 0.03,
+            "provenance": {
+              "precision_source": "measured",
+              "noise_floor_source": "estimated",
+              "systematic_bias_source": "estimated",
+              "reference_standard": "investigator site visit"
+            }
+          },
+          "fidelity_gradient": 0.7,
+          "calibration": {
+            "method": "none",
+            "calibrated_fidelity": null,
+            "validation_set": "",
+            "calibrated_at": "2026-08-01T00:00:00Z",
+            "expected_calibration_error": null
+          },
+          "validity_claim_id": "v-stopaudit-0001",
+          "thermodynamic_physical_grounding": "Physical site audit directly enumerates food options",
+          "vector_embedding": [
+            0.04,
+            0.08,
+            0.15,
+            -0.02
+          ]
+        }
+      ],
+      "edge": {
+        "relationship_type": "causal",
+        "coupling_strength": 0.7,
+        "evidence_weight": 0.75
+      }
+    },
+    {
+      "link_id": "L3",
+      "pathway": "D3 hazard + D2 stale feed",
+      "claim": {
+        "claim_id": "c3d3-reefer-0003",
+        "domain": "infrastructure",
+        "statement": "An environmental hazard existed and was never communicated: unpaved unstable shoulder + tire debris + stale GPS routing.",
+        "confidence_gradient": 0.5,
+        "variance_margin": 0.15,
+        "assigned_proxies": [
+          "p-soil-test",
+          "p-gps-staleness"
+        ],
+        "unknown_variable_risk_score": 0.15,
+        "hidden_variable_search": {
+          "triggered": false,
+          "residual_variance_observed": null,
+          "threshold": 0.15,
+          "identification_gate": {
+            "status": "not_triggered",
+            "method": null,
+            "assumptions": []
+          }
+        }
+      },
+      "proxies": [
+        {
+          "proxy_id": "p-soil-test",
+          "target_variable": "Shoulder instability (D3)",
+          "observable_metric": "Soil compaction test: shoulder unpaved/unstable for weeks; debris documented",
+          "metrology": {
+            "sensor_type": "soil_compaction_test",
+            "precision": 0.95,
+            "noise_floor": 0.05,
+            "systematic_bias": 0.01,
+            "provenance": {
+              "precision_source": "measured",
+              "noise_floor_source": "measured",
+              "systematic_bias_source": "measured",
+              "reference_standard": "ASTM D1557"
+            }
+          },
+          "fidelity_gradient": 0.9,
+          "calibration": {
+            "method": "isotonic_regression",
+            "calibrated_fidelity": 0.89,
+            "validation_set": "lab-vs-field holdout",
+            "calibrated_at": "2026-08-01T00:00:00Z",
+            "expected_calibration_error": 0.02
+          },
+          "validity_claim_id": "v-soil-0001",
+          "thermodynamic_physical_grounding": "Compaction is a direct physical measurement of load-bearing capacity",
+          "vector_embedding": [
+            0.2,
+            0.05,
+            0.02,
+            0.1
+          ]
+        },
+        {
+          "proxy_id": "p-gps-staleness",
+          "target_variable": "Information feed staleness (D2/D3)",
+          "observable_metric": "Route calculated 2h before trip; weather warning issued after calculation, never pushed",
+          "metrology": {
+            "sensor_type": "routing_platform_logs",
+            "precision": 0.98,
+            "noise_floor": 0.02,
+            "systematic_bias": 0.0,
+            "provenance": {
+              "precision_source": "measured",
+              "noise_floor_source": "measured",
+              "systematic_bias_source": "measured",
+              "reference_standard": "provider API logs"
+            }
+          },
+          "fidelity_gradient": 0.93,
+          "calibration": {
+            "method": "platt_scaling",
+            "calibrated_fidelity": 0.92,
+            "validation_set": "log-forensics holdout",
+            "calibrated_at": "2026-08-01T00:00:00Z",
+            "expected_calibration_error": 0.01
+          },
+          "validity_claim_id": "v-gps-0001",
+          "thermodynamic_physical_grounding": "Timestamp comparison is exact arithmetic on immutable logs",
+          "vector_embedding": [
+            0.18,
+            0.06,
+            0.03,
+            0.12
+          ]
+        }
+      ],
+      "edge": {
+        "relationship_type": "causal",
+        "coupling_strength": 0.9,
+        "evidence_weight": 0.92
+      }
+    },
+    {
+      "link_id": "L4",
+      "pathway": "D1 micro-delay at the moment of the incident",
+      "claim": {
+        "claim_id": "c4d1-reefer-0004",
+        "domain": "human_factors",
+        "statement": "Fatigue-induced micro-delay in visual processing narrowed evasive options at the debris encounter, causing the overcorrection onto the soft shoulder.",
+        "confidence_gradient": 0.5,
+        "variance_margin": 0.3,
+        "assigned_proxies": [
+          "p-reaction-reconstruction"
+        ],
+        "unknown_variable_risk_score": 0.5,
+        "hidden_variable_search": {
+          "triggered": true,
+          "residual_variance_observed": 0.22,
+          "threshold": 0.15,
+          "identification_gate": {
+            "status": "failed",
+            "method": "negative-control review of alternative overcorrection causes",
+            "assumptions": [
+              "no mechanical steering defect found in post-crash inspection"
+            ]
+          }
+        }
+      },
+      "proxies": [
+        {
+          "proxy_id": "p-reaction-reconstruction",
+          "target_variable": "Reaction-time deficit at the moment of avoidance",
+          "observable_metric": "Event reconstruction: estimated reaction window vs. model-predicted degraded reaction time",
+          "metrology": {
+            "sensor_type": "event_reconstruction",
+            "precision": 0.55,
+            "noise_floor": 0.3,
+            "systematic_bias": 0.12,
+            "provenance": {
+              "precision_source": "assumed",
+              "noise_floor_source": "estimated",
+              "systematic_bias_source": "assumed",
+              "reference_standard": "reconstruction expert protocol"
+            }
+          },
+          "fidelity_gradient": 0.5,
+          "calibration": {
+            "method": "none",
+            "calibrated_fidelity": null,
+            "validation_set": "",
+            "calibrated_at": "2026-08-01T00:00:00Z",
+            "expected_calibration_error": null
+          },
+          "validity_claim_id": "v-recon-0001",
+          "thermodynamic_physical_grounding": "Reconstruction infers timing from physical evidence; counterfactual reaction windows are model-dependent",
+          "vector_embedding": [
+            0.02,
+            0.04,
+            0.3,
+            -0.01
+          ]
+        }
+      ],
+      "edge": {
+        "relationship_type": "causal",
+        "coupling_strength": 0.6,
+        "evidence_weight": 0.55
+      }
+    }
+  ]
+}

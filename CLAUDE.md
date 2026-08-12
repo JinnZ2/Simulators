@@ -700,6 +700,130 @@ underneath).
   with cortisol falling as oxytocin rises; Cartesian ~0.37 vs
   Relational ~0.60-0.70 in the changing environment;
   ARCHITECTURE.md §10 harsh-vs-nurturing quantitative claims).
+  **Concrete NEMGA substrate:** `geometric_rag/` (subfolder) —
+  single-file numpy demo instantiating the retrieval architecture
+  proposed in `research_context.md`. Two classes on a shared toy
+  corpus: `StandardRAG` (flat cosine similarity, no verification)
+  vs `GeometricNeuroSymbolicRAG` (`Hyperedge`+`ManifoldPoint`
+  hypergraph on a curved manifold, curvature-modulated attention
+  kernel, structural propagation along hyperedges, symbolic
+  verification of the retrieved subgraph, plus somatic-coupling
+  knobs `confusion_level` / `pain_level`). Demo shows the load-
+  bearing contrast: Standard RAG returns aspirin+bleeding as top
+  result with no signal; Geometric RAG catches the contradiction
+  via a `contradicts` hyperedge and prefixes the answer
+  `(Verification failed: ...)`. Under `confusion=0.8, pain=0.7`
+  the top attention score jumps ~0.225 → ~1.001 and spread widens
+  — same manifold, same query, different retrieval shape because
+  the "body" is stressed. Same envelope shape (`verification`,
+  `coupling`, `answer`) as the framework's `Signal` dataclasses in
+  `pain_as_sensor.py` and `social_pain_sensors.py` — the fourth
+  structural convergence with the framework's triadic-sensor
+  pattern (noted in notes.md §23). Same scaffolding-becoming-
+  substrate posture as arch_garden: hash-seeded random embeddings,
+  two-rule verification layer, `I` metric tensor — all declared
+  under "What this is NOT." Non-stdlib: `numpy`. Sample output in
+  `geometric_rag/samples/demo_output.sample.txt`.
+- `engine-boiler-guide/` — Single-file offline mobile app for
+  triaging engine and boiler problems in the field. Four-screen
+  decision flow: symptom → machine → era → filtered checklist.
+  Ten symptom paths (won't start, hard start, starts then dies,
+  runs rough, smoking, overheating, no power, backfires, surges,
+  boiler/burner problem), seven machine types (tractor, car/truck,
+  lawn mower, boiler, chainsaw, pump/generator, other), four eras
+  (1800-1940 / 1940-1980 / 1980-2000 / 2000-now). ~130 individual
+  checks each tagged with applicable machine/era combos; only
+  matching checks show. Single HTML file, no dependencies, no
+  state saved, touch targets sized for gloved hands. Different
+  genre from the simulators — a practical field tool, not a sim.
+  CC0.
+- `field-fabrication-guide/` — Single-file offline mobile app for
+  making precision tools and processing raw materials from scratch.
+  Ten sections navigable from a two-column menu: **Lime** (burning
+  limestone at 825-900 C, slaking, three lime types, whitewash),
+  **Ammonia** (field production from urine / fermented waste,
+  optional distillation, dilution ratios), **Aluminum Smelting**
+  (scrap identification by source, furnace types, crucibles, green
+  sand / lost foam / investment molds), **Straight Rules** (three-
+  plate method for generating flatness from nothing, scraping),
+  **Squares** (3-4-5 / Thales for 90° from scratch, flip test),
+  **Levels** (spirit-vial construction, the water level accurate
+  to 1/8" over 100 ft), **Plumb Bobs** (casting + center-of-mass
+  tuning), **Sextants** (double reflection, arc graduation,
+  vernier, noon latitude), **Dividers & Calipers** (forging from
+  scrap steel), **Angles & Protractors** (geometric construction
+  more accurate than measurement). Each section: data cards,
+  procedure steps with why/how notes, warning/tip callouts,
+  material trade-off tables. Same visual system as
+  `fuel-independence-guide/`. Single HTML file. CC0.
+- `fuel-independence-guide/` — Single-file offline mobile app for
+  keeping engines running when the fuel supply chain stops. Seven
+  sections: **Decision Chart** (what you have + engine type →
+  which solution), **Wood Gasifier** (Imbert downdraft dimensioned
+  for 50-100 hp tractor, fire tube / tuyere ring / reduction zone
+  / grate / condensate trap / filter train, dual-fuel operation
+  with 10-20% pilot diesel on compression-ignition engines),
+  **Biodiesel (2-Stage)** (acid esterification stage that lets
+  rancid oil become biodiesel instead of soap; 5 g NaOH + 200 mL
+  methanol per liter of oil; wash, dry, winterize), **Waste Motor
+  Oil** (settle/decant/filter + scrap-built drum-and-cone
+  centrifuge; blending ratios for summer diesel), **Cold Diesel
+  Ops** (fuel gelling table down to -60 F, coolant-loop tank
+  heating, filter heating, starting aids with the ether-lock
+  warning), **Alcohol Fuels** (methanol from hardwood via
+  destructive distillation, ethanol by fermentation/distillation/
+  drying, carb + timing + lubrication mods for gas engines),
+  **Safety** (CO from wood gas, methanol toxicity with ethanol as
+  antidote, ether pool-ignition, lithium thermal runaway at -60 F,
+  lye and acid handling). Named benchmarks throughout — kerosene
+  cloud point -40 F, wood gas 20-30% CO, 1 kg dry hardwood →
+  10-20 mL methanol — so setups can be sanity-checked, not just
+  "should work." Same visual system as `field-fabrication-guide/`.
+  Together with `cold-weather-battery-guide/` the four guides cover:
+  **diagnose it** (engine-boiler) → **make it** (fabrication) →
+  **fuel it** (this one) → **power it** (cold-weather battery). CC0.
+- `cold-weather-battery-guide/` — Fourth offline mobile app in the
+  practical-field-reference family. Sleeper-cab Li-ion that has to
+  work at both -60 F winter mornings and 125 F summer sun, so both
+  ends of the envelope are addressed. Twelve HTML sections:
+  **Overview** (cold-end failure hierarchy — electrolyte transport
+  ~100× loss → SEI/Rct ~1000× → Li plating → freeze-out; hot-end
+  is shade+emissivity, not chemistry), **Chemistry Options**
+  (Option A liquefied fluoromethane = skip, Option B LATP solid
+  state, Option C Mars-rover ester recommended for fastest path),
+  **Small-Scale Alternative** (Abdulhalikova pumice-stone
+  solid-state cell for emergency lighting: pumice soaked in salt
+  + baking soda + carbon/galvanized electrodes = 1.5-1.9 V per
+  cell; also flags yarn nanofiber / biomass electrode / coffee-
+  ground activated carbon upcycled paths — honest scale note
+  that this is emergency-lighting scale, not tractor scale),
+  **Ester Electrolyte** (1M LiPF6 in EC:DMC:EA 1:1:2 + 2-3% VC,
+  drying hardware-store EA over 3Å sieves, LiPF6 HF hazard),
+  **LATP Solid State** (Li₁.₃Al₀.₃Ti₁.₇(PO₄)₃ from scrap:
+  cordierite from cat converters — the highest-leverage item —
+  spark plug alumina, ABC-powder phosphate, welding-flux TiO₂,
+  pottery Li₂CO₃; skip LLZO / LAGP / sulfide argyrodites),
+  **Kiln** (Fresnel solar cavity with SiC susceptor + thermal
+  mass, microwave + SiC backup for nights, sinter at 900-1000 C),
+  **Dry Box** (glove-bin build from plastic tote + PVC gauntlets
+  + welding-gas purge + molecular-sieve tray), **Cell Assembly**
+  (pouch cell from harvested LFP + graphite foils), **Formation
+  Cycling** (5-stage first charge C/50→C/20→C/10→CV that tames
+  ester toward graphite), **Thermal Management** (4-state
+  machine STANDBY/PREHEAT/CHARGE_WAIT/OVERHEAT_PROTECT driving
+  a Fresnel-heated solar block into the battery), **BMS
+  Overview** (pointer to bms/ folder), **Safety** (HF from
+  LiPF6, Fresnel focal-spot burns + retinal damage, CO,
+  methanol, ether pool ignition, Li thermal runaway, caustic
+  chemicals). Plus `bms/bms_1s_basic.ino` (minimal single-cell
+  LFP protection with low-temp charge lockout) and
+  `bms/bms_1s_merged.ino` (adds thermal state machine driving
+  damper servo + PWM fan, predictive sunrise via photoresistor
+  + 30-min stability window, and PIR-triggered safety shutter
+  for the Fresnel focal spot — "jeans protection" earned in
+  singed denim from a solar go-kart incident); `bms/README.md`
+  pin table + calibration + testing protocol + notes on scaling
+  to 4S. Same visual system as the other three guides. CC0.
 - `inverseminar/` — Micro-inverseminar as a single stdlib-only script
   (`inverseminar.py`). One artifact, one reconstruction, one
   correction; ~60s per round. Runs the Nature Physics inverseminar
@@ -806,6 +930,296 @@ underneath).
   OPEN / FK-6 certificate r̂ RESOLVED / FK-7 D-as-distance STAKED)
   — pluggable into the top-level `divergence-playground/` for
   multi-reader spread analysis.
+- `crossdomain-eval/` — Cross-domain scientific-analysis toolkit
+  (`crossdomain_eval` package + `cdeval` CLI) landed from two
+  coordinated OKComputer drops. **Core package**: `symbolic`
+  (SymPy engine — parse / substitute / solve / differentiate /
+  integrate / evaluate over `EquationSet`), `numerical` (SciPy
+  root_find / solve_ode / optimize), `experiments`
+  (parameter_sweep, sensitivity, propose_experiments full-factorial
+  DOE), `report` (markdown_report + plot_sweep), `cli` with four
+  subcommands (`eval`, `solve`, `sweep`, `doe`), and two
+  `domains/` adapters (`physics.kinematics`/`energy`,
+  `geometry.packing_density`/`tsp_distance_matrix`). **Two
+  coexisting reasoning variants**: `reasoning.py` (default; guarded
+  `eval` with builtins-disabled, tracker returns `None`, check by
+  predicate-name-or-substring, 11 tests) and `reasoning_v2.py`
+  (stricter alternative; `_FORBIDDEN` token-blocklist screening at
+  `add_rule` time, `AssumptionTracker.add` returns int IDs with
+  `retract` + confidence-threshold `check`, `_fired` provenance
+  list in the derived facts, 21 tests). Both variants ship with
+  their own test file; both suites pass together (68 total, 47
+  core + 21 v2). Neither uses full AST-sandboxed `safe_eval` —
+  that design was discussed in the source conversation but not
+  what the zips shipped. Non-stdlib: `sympy` + `numpy` + `scipy` +
+  `matplotlib` (`pytest` under `dev` extra). Same exemption
+  pattern as `energy/`, `play-sims/`, `climate-modeling/`, and
+  `relational/geometric_rag/`. No `CLAIMS.md` /
+  `REFUTATION_PROTOCOL` — this is scaffolding for downstream
+  simulators to use, not a claim-making artifact itself. CC0.
+- `fourd-municipal-engine/` — Stdlib-only Python package
+  (`fourd_municipal_engine` + `fourd-municipal-engine` CLI) landed
+  from an OKComputer full-repo build. **Two "4D" ontologies fused
+  in one package** — deliberate, not a naming accident. **4D
+  Language Lens** (D1 Agency Routing / D2 Affective Impedance /
+  D3 Reality Construction / D4 Iconic-Graphic Mass): regex-based,
+  density-normalized (hits per 100 tokens), saturated to [0,1],
+  weighted into a scalar `manipulation_index` + `cognitive_energy`
+  estimate. Two engines: `FourDLens` (fixed thresholds) and
+  `DynamicFourDLens` (genre-calibrated re-weighting via
+  `GENRE_PROFILES` + `ContextRule` — a "critical failure" scores
+  benign in a technical report, loaded in corporate PR). Five
+  shipped genres: general, corporate PR, legal contract, technical
+  report, casual social. **4D Municipal Code Entity** (Density /
+  Design / Delay / Dollars + Temporal + Spatial) — structured
+  dataclass model for ordinance analysis:
+  `MunicipalCodeTranslator` (20+ jargon → plain-English map, fee
+  regex, purpose extractor) + `AdvancedAnalysisPipeline` that
+  wires in `RegulationRootCauseAnalyzer` (public safety /
+  affordable housing / environmental / traffic / economic
+  development intent extraction), `CitationGraph` (federal / state
+  / municipal / industry_standard classification of Section /
+  Chapter / Ordinance / IBC / IRC / ADA / NFPA references),
+  `FeeExplorationEngine` (flat + per-sqft + %-of-valuation
+  + project cost calc), and `AuditEngine` (KPI-target regex,
+  auditability score in [0,1]). CLI with `--genre`,
+  `--deep-analysis`, `--citation`, `--json`, `--file` flags.
+  22 tests all green. MIT per upstream `pyproject.toml`
+  (compatible-per-file with the repo's CC0 default, same pattern
+  as `energy/` modules). No `CLAIMS.md` / `REFUTATION_PROTOCOL` —
+  operational tooling, not a claim-making artifact. Roadmap
+  (upstream): Phase 2 temporal versioning of ordinance amendments,
+  Phase 3 GIS overlay on `spatial_zoning_districts`.
+- `fourd-municipal-engine-v2/` — Second OKComputer drop of the
+  same package with persistence + ETL + parser + integrity + API
+  addons. Landed as a NEW folder (not merged into v1) per user
+  instruction, so both drops stay inspectable as delivered.
+  **v1 core files byte-identical between the two folders**; v2
+  adds five subsystems and four new test files. **New subsystems**:
+  `db/` (bitemporal + simple SQL schema variants + corruption +
+  analytics addendum + Neo4j graph schema + docker-compose /
+  Dockerfile / init-db.sql — inert until you `pip install .[db]`
+  and stand up PostGIS), `parser/` (`Ordinance4DParser` with LLM
+  path when an OpenAI API key is present and a deterministic
+  regex fallback otherwise; extended in v2 to include
+  `stated_intent` + `root_causes` + `references` in the payload
+  by reusing v1 analysis modules), `etl/` (SQLAlchemy ORM
+  `Jurisdiction` / `ZoningDistrict` / `CodeSection` /
+  `Code4DMetrics` + `Municipal4DETLPipeline` +
+  `BatchOrdinanceIngestor` with `ThreadPoolExecutor`),
+  `integrity/` (stdlib-only: `EntityResolutionMatcher` with
+  rapidfuzz-optional / difflib-fallback + `CorruptionRiskCalculator`
+  with exact-per-source weights 0.35/0.25/0.20/0.20 and stepped
+  temporal decay 14/30/60/90/180 → 100/85/60/40/15/0), `api/`
+  (FastAPI `/health`, envelope by-district/by-location,
+  sections/{id}/root-causes, sections/{id}/citations,
+  fees/calculate, audit/intent-compliance — import-guarded, skip
+  at test time when fastapi missing). **Optional-extras policy**:
+  core `pip install .` stays stdlib-only; heavy deps split into
+  `db` (sqlalchemy + psycopg2 + geoalchemy2 + geopandas), `api`
+  (fastapi + uvicorn + psycopg2), `parser` (pydantic + openai +
+  pypdf), `integrity` (rapidfuzz), and `all`. **"Multiple avenues"
+  policy** on ambiguous source: two SQL schema variants shipped
+  side-by-side (bitemporal + simple), LLM parser + regex fallback
+  in the same class, rapidfuzz + difflib in the same matcher,
+  outcome-audit (v1) + integrity/CRI-audit (v2) coexisting in
+  different modules. Total tests: 22 v1 (unchanged) + 18 new
+  stdlib (9 corruption risk + 9 entity resolution) + 2 skipped
+  optional (pydantic / api-imports) = **40 pass, 2 skip**.
+  Same MIT / stdlib-only-core / no-CLAIMS.md posture as v1.
+- `msiaf-framework/` — Docs-only OKComputer drop. MSIAF =
+  **Multi-Dimensional Systemic Incident Analysis Framework** for
+  transportation and logistics. Fourteen Markdown files (~5,900
+  words) covering the same **four-dimension cascade** thinking as
+  `fourd-municipal-engine/` (Density/Design/Delay/Dollars) but
+  applied to what an incident *is* rather than what an ordinance
+  *does*: D1 Human Factors & Physiology / D2 Operations & System
+  Design / D3 Infrastructure & Environment / D4 Financial,
+  Insurance & Regulatory. Typical cascade **D4 → D2 → D1 → D3**
+  — financial penalty structures force rigid dispatch → operator
+  physiology degrades → hazard was never communicated. Layout:
+  `docs/` (framework-overview + investigation-checklist),
+  `case-studies/` (five reactive analyses: reefer trucking,
+  last-mile delivery, warehouse distribution, maritime port,
+  multimodal infrastructure), `models/` (four proactive redesigns:
+  reefer-financial, last-mile-architecture, warehouse-architecture,
+  infrastructure-WIM), `proxies/` (early-warning indicator
+  catalog). Load-bearing move: the same D4→D2→D1→D3 cascade that
+  manufactures incidents is rewired from **pressure to protection**
+  in the proactive models — safety becomes the path of least
+  resistance rather than a heroic individual act. Not audited
+  under the F-10 protocol (qualitative frame, not quantitative
+  claims). No CLAIMS.md yet — testing the "aligned cascade"
+  thesis quantitatively would need a claims-and-falsifiers
+  addendum. Cross-repo convergences noted in the README:
+  parallel 4D pattern with `fourd-municipal-engine/`, same
+  constraint-axis analysis shape as `neural-augmentation-audit/`,
+  incentive-blindspot / fragility-cascade adjacencies. CC0.
+  Different genre from the simulators — a framework document, not
+  a sim. **Head of a five-folder family** — see
+  `gdprf-framework/`, `msiaf-gdprf-bridge/`,
+  `proxy-investigation-lab/`, `instrument-epistemology/`.
+- `gdprf-framework/` — GDPRF = **Gradient-Driven Proxy Reasoning
+  Framework**. Reasoning in continuous confidence gradients instead
+  of binary true/false, by linking unverifiable abstract claims
+  ("employee morale is low") to observable **proxies** carrying
+  explicit metrology (precision, noise floor, systematic bias).
+  Five-step operational cycle: scoped claim formulation → proxy
+  traversal/discovery → metrological evaluation → gradient Bayesian
+  update → unknown-variable search on residual-variance breach.
+  Reference implementation in `src/gdprf/`: `engine.py` (calibration,
+  provenance-weighted metrology, log-odds update, identification
+  gate), `provenance.py` (W3C PROV-inspired hash-chained ledger),
+  `decisions.py` (DEPLOY / RESEARCH / HOLD / ESCALATE / ABORT).
+  **v3.0** makes instrument epistemology first-class — measurand
+  decomposition, transduction chains, traceability pyramids, M0–M3
+  model-dependence rungs, blindness maps in the schemas; engine does
+  blindness-adjusted updates. Schemas NOT backward compatible with
+  v2.x. Worked burnout example shows the load-bearing separation:
+  posterior *rises* 0.68 → 0.77 and the decision layer still returns
+  **ABORT** because a governance edge is unsatisfied — rising
+  confidence does not buy authority. `research/framework-assessment.md`
+  runs the framework's own five-step cycle over its own six core
+  claims and publishes the posteriors (same self-application move as
+  `equivalence-field/`'s `seed_claims()`). 23 tests green.
+  Stdlib-only except `jsonschema`, used by exactly one schema-
+  validation test. An earlier zip shipped a docs-only v2 subset;
+  superseded entirely by the v3 drop, only v3 landed. CC0.
+- `msiaf-gdprf-bridge/` — Expresses MSIAF systemic incident
+  investigations as GDPRF gradient claims, so a determination like
+  "D4 penalty structure forced D2 rigid dispatch onto a D1-degraded
+  driver" becomes a chain of scoped claims with calibrated
+  confidence, proxy fidelity, provenance, and explicit
+  unknown-variable risk instead of a confident narrative. Mapping:
+  dimensional friction claim → Claim object; investigation evidence
+  → Proxy node with metrology (evidence is an *instrument*, not a
+  fact); Systemic Interconnection Pathway → causal edge chain;
+  investigation checklist → fidelity-assignment protocol; final
+  determination → governed decision point. **Worked reefer case is
+  the argument**: all four cascade links are individually
+  more-likely-than-not (0.590–0.751), the conjunctive chain is
+  **0.202**, weakest-link bound 0.590, divergence 0.389 fires the
+  residual trigger → **ESCALATE**, "human must adjudicate
+  unexplained ignorance." A four-link systemic story whose every
+  link is plausible is not itself plausible. 24-record hash chain
+  validates. 7 tests green. **Only cross-folder Python import in
+  the repo** — imports the GDPRF engine from
+  `../gdprf-framework/src` (deliberate: consumer, not copy, so the
+  two cannot drift); sibling layout at repo root makes it resolve
+  as-is, `GDPRF_SRC` overrides. CC0.
+- `proxy-investigation-lab/` — Experimental workbench that takes any
+  candidate proxy and grounds out as much as can be grounded: causal
+  chain, instrument properties, validity threats, empirically
+  measured fidelity. Seven-phase protocol (decomposition → grounding
+  chain → instrument characterization → validity threats → synthetic
+  ground-truth → calibration → coverage). **Two headline results.**
+  (1) `catalog_batch` grades all 16 MSIAF catalog proxies: top is
+  `river-water-level` (fidelity 0.931, grounded 1.00), bottom is
+  `drone-corridor-density` (grounded 0.25) — chain fidelity is
+  *multiplicative*, so one assumed 0.55 link caps the proxy no
+  matter how good the sensor; report ends with a priority queue of
+  exactly those proxies MSIAF *uses* while resting on assumed
+  links. (2) `goodhart_redteam` measures rather than asserts
+  Goodhart: 3000 agents / 12 periods adapting the observable drops
+  correlation 0.904 → 0.713 (collapse 0.191) and yields a
+  **detection surface** — gaming flattens the observed-vs-latent
+  slope at the top (0.633 top-vs-bottom) and inflates top-decile
+  variance, so audit the top decile first. Design stance:
+  known-truth first ("if the pipeline can't recover a known
+  instrument, it has no business grading an unknown one"), grounding
+  graded not binary (measured / estimated / assumed), Goodhart a
+  mandatory assessment for any decision-use proxy. 13 tests green,
+  5 experiments run clean. Closest repo sibling is `null-harness/` —
+  same known-truth-first invariant, one level up the stack.
+  Stdlib-only. CC0.
+- `instrument-epistemology/` — Applies the proxy-investigation method
+  to **scientific instruments themselves**: every fact about biology,
+  ecology, and physics arrives through a device that is formally a
+  proxy (unobservable measurand → observable indication via a
+  physical transduction chain plus a model). Six questions per
+  instrument: measurand vs. indication, transduction chain, model
+  dependence, traceability, observational blindness, theory-ladenness.
+  Six instruments graded in `outputs/cross-instrument-report.md`:
+  seismometer (M1, fidelity 0.800, grounded 0.83, *well grounded*) →
+  satellite SST (M3, 0.504) → LiDAR biomass (M2, 0.514) → camera trap
+  (M2, 0.293) → IRMS isotope diet (M2, 0.275) → eDNA metabarcoding
+  (M2, 0.165, *mostly assumed*). **The finding is not about
+  hardware** — the eDNA sequencer is as precisely built as the
+  seismometer's digitizer; what separates them is transduction chain,
+  bridge model, reference standards, and blindness map. Physics
+  instruments know more because decades went into standards and
+  traceability, not because nature is simpler there. Honest handling
+  of the no-answer-key problem, in declared strength order:
+  metrological traceability → inter-instrument triangulation →
+  forward simulation → intervention. 9 tests green, all 7
+  experiments run clean. **One repair applied on landing**:
+  `experiments/lidar_biomass/run.py` shipped a multi-line expression
+  inside an f-string replacement field (PEP 701, Python 3.12+ only),
+  which was a hard `SyntaxError` on 3.11 and failed the drop's own
+  `test_all_experiments_run`; lifted the verdict out of the
+  replacement field, printed output byte-identical since the
+  adjacent literals were already concatenating. Documented in the
+  folder README — same PEP 701 class as
+  `relational/cartesian_vs_relational_demo.py`, but repaired rather
+  than documented-around because here a shipped test asserted it
+  ran. Strongest cross-repo convergence in the drop:
+  `thermal-sensor-degradation-audit/`'s
+  `corruption(trend) = corruption(measurement) × corruption(framework)`
+  is precisely an observational-blindness map in this folder's
+  vocabulary — a package degrades *during* the event it records, so
+  the tail biases LOW. Arrived at independently. Stdlib-only. CC0.
+- `extraction-blindness-sim/` — Stdlib-only coupled-dynamics sim of
+  the failure mode where **an optimizer whose sensors cannot detect
+  cumulative degradation reads the absence of an error signal as
+  confirmation of safety**, and drives a regenerating substrate past
+  its tipping point while reporting nominal. Three structural
+  blindness operators, all one-sided (they report the substrate as
+  healthier than it is, never worse — asserted by a test, because
+  that one-sidedness is what makes the failure bias toward overshoot
+  rather than caution): **frame blindness** (state outside the
+  yield boundary is absent from the observation, not mispriced in
+  it), **model-dependence masking** (M2/M3 reports regress toward
+  the bridge model's prior outside its training domain; includes the
+  MIR-in-high-clay saturation failure), **temporal aliasing** (trend
+  estimated over a window short relative to relaxation, against a
+  noise floor — emergent, no fudge factor). `Substrate` is logistic
+  with depensation plus recovery hysteresis; two domain profiles
+  (AI-optimised purse-seine fishery, arable soil under nitrogen
+  priming) with every constant marked `[SPEC]` (from source) or
+  `[MODEL]` (scaffolding). Six claims, all SUPPORTED in the pinned
+  run; 9 tests. **Two results ran against expectation.** (1)
+  `EBS_003`: the hard non-negotiable boundary *underperformed* the
+  advisory indicator layer (final stock 0.3107 vs 1.0000, while
+  permitting 4.3× more extraction) — not because it failed but
+  because the spec writes the biomass floor at 50% of B_MSY = 25%
+  of pristine while depensation starts at 40%, so the floor sits
+  below the threshold it defends; **placement dominates authority**.
+  (2) `EBS_006`: temporal aliasing was initially inert because the
+  perceived trend fed only the *reported* safety, never the
+  decision — blindness in a channel nothing acts on is cosmetic.
+  With a `trend_responsive` controller it becomes decisive (0.8798
+  vs 0.0000) in exactly one of three regimes; an effort ratchet
+  defending a fixed target masks it again. **Source contradictions
+  reproduced, not repaired**: `throughput.py` implements five RT
+  formulations as written so the disagreements are measurable. Four
+  were flagged by the source's own audit (two irreconcilable
+  RT_soil equations, a 10/20/30 cm depth conflict, the uncalibrated
+  0.95 threshold, the caloric sign error); **a fifth was not** — the
+  RT metric is inverted relative to its own governance rule, since
+  both prescribed remedies ("reduce extraction", "invest more")
+  *lower* `Output/(Regen+Reinvest)` and only raise the inverted
+  form. Calibration note kept in the README as an instance of the
+  sim's own subject: "120% of F_MSY" sized against textbook `r*K/4`
+  was silently a 1.97× overshoot, because depensation drags true
+  peak regeneration below the logistic value — a model-derived
+  reference point taken for a physical one. Landed **minus the
+  narrative** per user instruction (predation metaphor and
+  rhetorical framing dropped; mechanism, numbers, equations,
+  instrument-verification findings, JSON schemas and self-audit
+  kept). Direct child of `instrument-epistemology/` (M0-M3 ladder,
+  blindness maps); same cascade-speed-blindness target as
+  `climate-modeling/`; hysteresis shape shared with
+  `sustained-activation-gate/`. CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

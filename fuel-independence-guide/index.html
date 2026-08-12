@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Far North Fuel Independence</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0; padding: 0; background: #fafafa; color: #222;
+    line-height: 1.55; font-size: 15px;
+  }
+  .container { max-width: 720px; margin: 0 auto; background: #fff; min-height: 100vh; }
+  .header {
+    background: #1a1a2e; color: #fff; padding: 20px 16px; position: sticky; top: 0; z-index: 100;
+  }
+  .header h1 { margin: 0; font-size: 20px; font-weight: 600; }
+  .header p { margin: 6px 0 0; font-size: 13px; color: #aaa; }
+  .toc { padding: 12px 16px; background: #f0f0f0; border-bottom: 1px solid #ddd; }
+  .toc-title { font-size: 13px; font-weight: 600; color: #555; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .toc-btn {
+    padding: 10px 12px; background: #fff; border: 1px solid #ccc; border-radius: 6px;
+    font-size: 13px; color: #333; cursor: pointer; text-align: left; transition: all 0.1s;
+  }
+  .toc-btn:hover, .toc-btn:active { background: #1a1a2e; color: #fff; border-color: #1a1a2e; }
+  .section { display: none; padding: 16px; }
+  .section.active { display: block; }
+  .back-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+  .back-btn {
+    padding: 8px 14px; background: #1a1a2e; color: #fff; border: none; border-radius: 6px;
+    font-size: 13px; cursor: pointer;
+  }
+  .section-title { font-size: 22px; font-weight: 600; margin: 0 0 16px; color: #1a1a2e; }
+  h3 { font-size: 16px; font-weight: 600; color: #1a1a2e; margin: 24px 0 10px; padding-bottom: 6px; border-bottom: 2px solid #e0e0e0; }
+  h4 { font-size: 14px; font-weight: 600; color: #333; margin: 18px 0 8px; }
+  p { margin: 0 0 12px; }
+  .note { background: #fff8e1; border-left: 4px solid #f9a825; padding: 10px 14px; margin: 12px 0; font-size: 14px; color: #5d4037; }
+  .warning { background: #ffebee; border-left: 4px solid #c62828; padding: 10px 14px; margin: 12px 0; font-size: 14px; color: #b71c1c; }
+  .tip { background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 10px 14px; margin: 12px 0; font-size: 14px; color: #1b5e20; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+  th { background: #1a1a2e; color: #fff; padding: 10px 8px; text-align: left; font-weight: 500; }
+  td { padding: 8px; border-bottom: 1px solid #e0e0e0; vertical-align: top; }
+  tr:nth-child(even) { background: #f5f5f5; }
+  .formula { background: #f5f5f5; padding: 10px 14px; border-radius: 6px; font-family: "SF Mono", Monaco, monospace; font-size: 14px; margin: 10px 0; overflow-x: auto; }
+  .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+  .data-card { background: #f8f8f8; border: 1px solid #e0e0e0; border-radius: 6px; padding: 10px; }
+  .data-card .label { font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 0.3px; }
+  .data-card .value { font-size: 16px; font-weight: 600; color: #1a1a2e; margin-top: 4px; }
+  ul, ol { margin: 8px 0; padding-left: 20px; }
+  li { margin-bottom: 6px; }
+  .step { display: flex; gap: 10px; margin: 10px 0; }
+  .step-num { width: 24px; height: 24px; background: #1a1a2e; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0; margin-top: 2px; }
+  .step-body { flex: 1; }
+  .step-title { font-weight: 600; font-size: 14px; }
+  .step-desc { font-size: 14px; color: #555; margin-top: 2px; }
+  .divider { height: 1px; background: #e0e0e0; margin: 20px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>Far North Fuel Independence</h1>
+  <p>Wood gasification, biodiesel, WMO, -60&nbsp;F diesel ops, alcohol fuels</p>
+</div>
+
+<div class="toc" id="toc">
+  <div class="toc-title">Jump to Section</div>
+  <div class="toc-grid">
+    <button class="toc-btn" onclick="showSection('overview')">Decision Chart</button>
+    <button class="toc-btn" onclick="showSection('gasifier')">Wood Gasifier</button>
+    <button class="toc-btn" onclick="showSection('biodiesel')">Biodiesel (2-Stage)</button>
+    <button class="toc-btn" onclick="showSection('wmo')">Waste Motor Oil</button>
+    <button class="toc-btn" onclick="showSection('cold-diesel')">Cold Diesel Ops</button>
+    <button class="toc-btn" onclick="showSection('alcohol')">Alcohol Fuels</button>
+    <button class="toc-btn" onclick="showSection('safety')">Safety</button>
+  </div>
+</div>
+
+<div class="section active" id="overview">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">The Reality &amp; the Decision Chart</div>
+
+  <div class="warning"><strong>Reality:</strong> Corporations will not deliver fuel to unprofitable places. Batteries fail at -60&nbsp;F and can burn your house down. A 1968 Case diesel with a mechanical pump will run on things that destroy modern engines. This guide is about keeping tractors and generators running when the supply chain stops.</div>
+
+  <h3>Quick Decision Chart</h3>
+  <table>
+    <tr><th>What You Have</th><th>Engine Type</th><th>Solution</th></tr>
+    <tr><td>Dry wood, any kind</td><td>Gas or diesel</td><td>Wood gasifier (best long-term)</td></tr>
+    <tr><td>Old vegetable oil, rancid</td><td>Diesel</td><td>Two-stage biodiesel + winterize</td></tr>
+    <tr><td>Waste motor oil</td><td>Diesel (summer)</td><td>Filter + blend 20-50%</td></tr>
+    <tr><td>Hardwood (birch, oak)</td><td>Gas engine</td><td>Destructive distillation for methanol</td></tr>
+    <tr><td>Starch/sugar waste</td><td>Gas engine</td><td>Fermentation for ethanol</td></tr>
+    <tr><td>Nothing</td><td>Diesel</td><td>Buy kerosene / #1 diesel, heat tank, blend</td></tr>
+  </table>
+
+  <div class="tip"><strong>What survives -60&nbsp;F:</strong> wood, mechanical injection, lead-acid (kept warm), and a stove that burns whatever's dry. What doesn't: lithium anything, plastic fuel lines, summer diesel, cheap winter additives.</div>
+</div>
+
+<div class="section" id="gasifier">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Wood Gasification: The Robust Solution</div>
+
+  <p>A downdraft (Imbert) gasifier turns wood chunks into combustible gas: CO, H2, CH4, and N2. A 50-100 hp tractor needs roughly 1.5-3&nbsp;kg of dry wood per hour. The gas burns in any engine with minor carburetor or intake modifications. On a diesel, you keep 10-20% diesel as a "pilot" ignition source.</p>
+
+  <h4>Why It Works at -60&nbsp;F</h4>
+  <ul>
+    <li>Wood does not gel. Ever.</li>
+    <li>The gasifier itself produces waste heat — can warm the tractor cab or a shed.</li>
+    <li>No batteries required to produce fuel (unlike electrolysis or charging).</li>
+    <li>Any dry biomass works: slabs, bark, chunks, even pelletized material.</li>
+  </ul>
+
+  <h4>Imbert Downdraft Gasifier: Dimensions for 50-100 HP</h4>
+  <div class="data-grid">
+    <div class="data-card"><div class="label">Fire Tube ID</div><div class="value">10-12 inches</div></div>
+    <div class="data-card"><div class="label">Fire Tube Height</div><div class="value">28-36 inches</div></div>
+    <div class="data-card"><div class="label">Reduction Zone ID</div><div class="value">8-10 inches</div></div>
+    <div class="data-card"><div class="label">Reduction Zone Depth</div><div class="value">10-14 inches</div></div>
+    <div class="data-card"><div class="label">Air Nozzles</div><div class="value">4-6 x 1/2 inch</div></div>
+    <div class="data-card"><div class="label">Grate Area</div><div class="value">75-100 sq in</div></div>
+    <div class="data-card"><div class="label">Insulation</div><div class="value">4 inch firebrick or ceramic blanket</div></div>
+    <div class="data-card"><div class="label">Outer Shell</div><div class="value">55-gallon drum or 1/4 inch steel</div></div>
+  </div>
+
+  <h4>Construction</h4>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Build the outer shell</div><div class="step-desc">A 55-gallon drum, upright. Cut the top off, save it as a lid. Weld a 1/4 inch steel plate bottom if the drum bottom is thin. The shell is just a container — the inner fire tube does the work.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Build the fire tube (inner)</div><div class="step-desc">10-12 inch diameter pipe, 1/4 inch wall, 30 inches tall. This is the combustion zone. Weld a flange or tabs to center it in the drum. The gap between fire tube and drum is filled with insulation (ash, sand, perlite, or ceramic blanket).</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Install air nozzles (tuyeres)</div><div class="step-desc">4-6 half-inch pipes welded through the fire tube wall, 4-6 inches above the grate, aimed slightly downward (15-30 degrees). They form a ring. Air enters here, creates a high-temperature combustion zone (1500-2000 F) that cracks tar. This is the key to clean gas.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Build the reduction zone</div><div class="step-desc">Below the nozzles, the fire tube narrows to 8-10 inches (a cone or smaller pipe welded on). This is the reduction zone, filled with hot charcoal. The hot gases pass through this charcoal bed, converting CO2 to CO and cracking remaining tar. Depth: 10-14 inches. Too shallow = dirty gas. Too deep = restricted flow.</div></div></div>
+  <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Grate and ash pit</div><div class="step-desc">Below the reduction zone, a grate made of 1/2 inch bars spaced 1/4 inch apart. Ash falls through into a removable ash pit (a drawer or a drum section with a door). The grate must withstand 1500+ F — cast iron or stainless steel. Plain steel will warp and burn out.</div></div></div>
+  <div class="step"><div class="step-num">6</div><div class="step-body"><div class="step-title">Gas outlet and cooling</div><div class="step-desc">Gas exits below the grate through a 3-4 inch pipe. Route it through a condensate trap first: a 2-gallon drum or bucket, gas enters top, exits top, water and tar condense and collect at the bottom. Drain daily. Then route through 20-30 feet of 2-3 inch pipe (radiator pipe, exhaust pipe) to cool the gas. Hot gas has less energy density and can melt plastic filters.</div></div></div>
+  <div class="step"><div class="step-num">7</div><div class="step-body"><div class="step-title">Filter train</div><div class="step-desc">Even clean gas has dust. Filter in stages: (1) Hay or straw in a 5-gallon bucket — gas enters bottom, percolates up. (2) Cloth bag or sock stretched over a frame. (3) Sawdust or wood chips in a bucket. (4) Fine mesh screen. Check filters daily; replace when dirty. A dirty filter restricts flow and makes the engine run rich.</div></div></div>
+  <div class="step"><div class="step-num">8</div><div class="step-body"><div class="step-title">Hopper and lid</div><div class="step-desc">Above the fire tube, a hopper holds 2-4 hours of wood. The original drum top, inverted, works as a lid. Seal with a weight, not airtight — some leakage is fine. A large hopper means less refueling. Wood size: 2-4 inch chunks, dry (under 20% moisture). Wet wood = tar = engine damage.</div></div></div>
+
+  <h4>Operation</h4>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Start the gasifier</div><div class="step-desc">Fill hopper with dry wood. Light paper or kindling on the grate from below (through the ash pit door). Once burning, close the ash door partially. Turn on the blower (shop vac, leaf blower on low, or hand-cranked fan). The fire moves up to the nozzles. After 5-10 minutes, the gas at the outlet should be combustible. Test with a match at the filter outlet — should burn with a pale blue flame.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Connect to a GAS engine</div><div class="step-desc">Disconnect the carburetor air intake. Connect the gas line through a T-fitting with a butterfly valve. Start the engine on gasoline, then gradually open the gas valve and close the gasoline valve. The engine should run smoothly on gas alone. Adjust the butterfly to control power.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Connect to a DIESEL (dual-fuel)</div><div class="step-desc">Keep the diesel injection pump running at 10-20% of normal flow. The diesel ignites from compression and lights the wood gas. Connect the gas line before the intake manifold (after the air filter). Use a butterfly valve to meter gas. Start the engine on pure diesel. Once warm, gradually open the gas valve while reducing diesel to the pilot level. If the engine knocks or runs rough, reduce gas or increase diesel. Never shut off diesel completely — the gas will not ignite from compression alone.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Refueling</div><div class="step-desc">Add wood every 1-3 hours depending on load. Open the lid, add chunks, close quickly. A brief puff of smoke is normal. Never add wet wood — it will tar up the reduction zone and the engine.</div></div></div>
+  <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Shutdown</div><div class="step-desc">Close the gas valve at the engine first. Let the gasifier burn out (stop the blower, close air inlets). Do NOT seal it airtight while hot — pressure buildup can rupture the drum. Once cool, empty ash and check the grate. A hot gasifier left full of wood will continue to smolder and produce CO.</div></div></div>
+
+  <h4>Stationary vs. Tractor-Mounted</h4>
+  <p><strong>Stationary:</strong> Build the gasifier on a concrete pad or steel frame. Run a hose to a gas bag (large inner tube, tarp bag, or old water tank) or pipe directly to a stationary generator or shop compressor. Fill the bag, then run the tractor off stored gas. Safer, simpler, no vehicle modifications.</p>
+  <p><strong>Tractor-mounted:</strong> A smaller unit (6-8 inch fire tube) on the tractor's rear or side. Gas piped directly to the intake. Only practical for 2-4 hour tasks. The unit is heavy (200-400 lb) and takes up space. Good for fieldwork where you can't run a stationary line.</p>
+
+  <div class="warning"><strong>CO POISONING:</strong> Wood gas is 20-30% carbon monoxide. It is odorless, colorless, and deadly. Never run a gasifier in an enclosed space without ventilation. Never breathe the gas. If you feel headache, dizziness, or nausea near the gasifier, leave immediately. CO binds to hemoglobin 200x stronger than oxygen. A leaking gas line in a cab can kill the driver in minutes. Install a CO detector in any cab where gas is used.</div>
+</div>
+
+<div class="section" id="biodiesel">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Biodiesel from Rancid Oil (Two-Stage Process)</div>
+
+  <p>Old, oxidized peanut oil has high Free Fatty Acids (FFA). A single-stage base reaction (lye + methanol) will make soap instead of biodiesel. You need acid esterification first.</p>
+
+  <h4>Equipment Needed</h4>
+  <ul>
+    <li>Reactor vessel: 10-20 gallon steel drum or HDPE barrel, with lid and vent</li>
+    <li>Heat source: propane burner, electric element, or fire (indirect — don't scorch the oil)</li>
+    <li>Mixer: paint mixer on a drill, or a hand-cranked paddle</li>
+    <li>Thermometer: 0-120 C (0-250 F)</li>
+    <li>Settling/wash tank: 20-30 gallon drum with cone bottom or drain valve</li>
+    <li>Filter: 10-20 micron bag filter or cloth</li>
+  </ul>
+
+  <h4>Stage 1: Acid Esterification (FFA Reduction)</h4>
+  <div class="formula">FFA + Methanol + Acid catalyst -&gt; Methyl esters + Water</div>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Measure oil</div><div class="step-desc">Filter the old oil through 100-mesh screen or cloth to remove food particles and sludge. Heat to 60 C (140 F) to reduce viscosity. Measure volume.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Mix methanol and acid</div><div class="step-desc">For each liter of oil: use 200 mL methanol + 10 mL concentrated sulfuric acid (H2SO4, battery acid or drain cleaner acid). ALWAYS add acid to methanol, not methanol to acid. The mixture will heat up. Use a glass or plastic container, not aluminum — acid eats aluminum.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Combine and react</div><div class="step-desc">Add the acid-methanol mix to the warm oil. Stir vigorously. Maintain 60 C (140 F). React for 2 hours. The mixture will darken and separate into two layers: top = oil + esters, bottom = water + methanol + acid. A 3-arm mixer on a drill at 300-500 RPM works well.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Settle and drain</div><div class="step-desc">Let settle 2-4 hours. The bottom layer (water, methanol, acid, glycerol) is waste. Drain it off carefully. The top layer is now "pre-treated oil" with reduced FFA. Test with pH paper — should be neutral or slightly acidic. If still very acidic, a light water wash (spray water on top, drain) helps.</div></div></div>
+
+  <h4>Stage 2: Base Transesterification</h4>
+  <div class="formula">Triglycerides + Methanol + NaOH -&gt; Methyl esters (biodiesel) + Glycerol</div>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Make sodium methoxide</div><div class="step-desc">For each liter of pre-treated oil: dissolve 5 grams of NaOH (lye, drain cleaner crystals) in 200 mL fresh methanol. This is exothermic — the methanol will heat up. Use a glass or plastic container. Stir until fully dissolved (clear liquid). If it stays cloudy, the lye is bad or the methanol has water.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">React</div><div class="step-desc">Add the sodium methoxide to the pre-treated oil at 60 C (140 F). Stir vigorously for 1 hour. The mixture will turn cloudy, then begin to separate into two distinct layers: golden biodiesel on top, dark glycerol on bottom. If it does not separate, the FFA was still too high — add more acid stage next time.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Settle</div><div class="step-desc">Let settle 12-24 hours. The glycerol layer is thick, dark, and settles to the bottom. Drain it completely. It can be composted (diluted) or used to make soap. The biodiesel layer should be clear, golden, and bright.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Wash</div><div class="step-desc">Gently spray warm water (50 C) onto the biodiesel through a fine nozzle or shower head. The water droplets fall through the biodiesel, picking up soap, methanol, and catalyst. Let settle 2-4 hours. Drain the cloudy water. Repeat 2-3 times until the wash water is clear. Do NOT agitate vigorously — you will make an emulsion that never separates.</div></div></div>
+  <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Dry</div><div class="step-desc">Heat the washed biodiesel to 100 C (212 F) gently until it stops bubbling. The bubbles are residual water and methanol evaporating. Alternatively, let it settle in a warm, dry place for a week. Water in biodiesel causes microbial growth and injector corrosion.</div></div></div>
+
+  <h4>Testing Your Biodiesel</h4>
+  <ul>
+    <li><strong>Visual:</strong> Should be clear, bright amber, no cloudiness or particles.</li>
+    <li><strong>27/3 test:</strong> Mix 27 mL methanol + 3 mL biodiesel. Shake. Should dissolve completely in 10 minutes at 20 C. If it separates, there are unreacted triglycerides (incomplete reaction).</li>
+    <li><strong>Water test:</strong> Heat a small sample in a pan. Should not pop or spit (water). Should burn cleanly with a yellow flame.</li>
+  </ul>
+
+  <h4>Winterizing Biodiesel for -60&nbsp;F</h4>
+  <p>Peanut oil biodiesel has a cloud point around 30-40 F (0-4 C). At -60&nbsp;F it is a solid block. You MUST winterize it.</p>
+  <table>
+    <tr><th>Method</th><th>How</th><th>Effectiveness</th></tr>
+    <tr><td>Kerosene blend</td><td>50-80% kerosene (#1 diesel) + 20-50% biodiesel</td><td>Best. Kerosene cloud point -40 F. Blend handles -50 F.</td></tr>
+    <tr><td>Tank heating</td><td>Engine coolant loop through tank (3/8 copper coil)</td><td>Required. Keeps fuel liquid until engine heat takes over.</td></tr>
+    <tr><td>Filter heating</td><td>Wrap filter in coolant line or electric heat tape</td><td>Required. Filters gel first.</td></tr>
+    <tr><td>Anti-gel additive</td><td>Commercial winter diesel treatment</td><td>Helps 10-20 F. Not enough alone at -60 F.</td></tr>
+    <tr><td>Store indoors</td><td>Keep fuel barrel in heated shed</td><td>Effective if you have heated space. Fill tractor just before use.</td></tr>
+  </table>
+
+  <div class="tip"><strong>Practical winter blend for -60&nbsp;F:</strong> 70% kerosene or #1 diesel + 30% biodiesel. Heat the tank with coolant loop. Heat the filter. Start on pure kerosene if possible, switch to blend once engine is warm. In summer, run 100% biodiesel.</div>
+</div>
+
+<div class="section" id="wmo">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Waste Motor Oil (WMO) Filtration &amp; Use</div>
+
+  <p>WMO has lubricity, some detergents, and energy. But it has ash, metals, carbon, and water. At -60&nbsp;F it is too thick even when blended. Use it in summer or for heating, not winter engine fuel.</p>
+
+  <h4>Simple Settling Method</h4>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Heat and settle</div><div class="step-desc">Heat WMO to 80-100 C (176-212 F) in a settling tank (55-gallon drum). Hold for 24 hours. Water and light solvents evaporate or settle. Heavy particles settle to bottom. Sludge may float or settle.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Decant</div><div class="step-desc">Siphon or drain the middle layer — the cleanest oil. Discard bottom sludge and top foam/scum. The middle layer is your filtered WMO.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Filter</div><div class="step-desc">Pass through 20-micron, then 10-micron filters. Bag filters or sock filters work. If you have a centrifuge (see below), use it instead.</div></div></div>
+
+  <h4>Building a Centrifuge from Scrap</h4>
+  <p>A centrifuge spins oil at high speed (1500-3000 RPM). Centrifugal force separates particles and water from oil based on density difference.</p>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Drum and cone</div><div class="step-desc">Use a 55-gallon drum. Cut the bottom off. Weld a cone (made from sheet steel) to the bottom, pointing down. The cone angle should be 30-60 degrees. The cone tip needs a 1-inch outlet pipe with a valve.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Bearings and shaft</div><div class="step-desc">A 1-inch steel shaft runs vertically through the drum center. Top bearing: a pillow block mounted on a frame. Bottom bearing: a thrust bearing or second pillow block. The drum must spin freely.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Drive</div><div class="step-desc">Belt drive from a 1/2 hp electric motor (if you have power) or a small gas engine. A tractor PTO can work with a belt and pulley. Speed: 1500-3000 RPM. A hand crank is possible but exhausting for the volumes needed.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Feed and collection</div><div class="step-desc">A pipe enters the top center, feeding raw WMO to the bottom of the spinning drum. Clean oil overflows at the top rim into a collection ring/trough. Sludge and water exit the cone bottom valve. Start the spin, then open the feed slowly. Open the bottom valve slightly to let sludge out continuously.</div></div></div>
+
+  <h4>Blending WMO for Summer Diesel Use</h4>
+  <table>
+    <tr><th>Blend</th><th>Ratio</th><th>Use</th></tr>
+    <tr><td>WMO + Diesel</td><td>20% WMO / 80% diesel</td><td>Safe in most old mechanical diesels. Filter aggressively.</td></tr>
+    <tr><td>WMO + Biodiesel</td><td>30% WMO / 70% biodiesel</td><td>Biodiesel's lubricity helps. Good in warm weather.</td></tr>
+    <tr><td>WMO + Kerosene</td><td>50% WMO / 50% kerosene</td><td>Thins it for cold. Still risky below 0 F.</td></tr>
+    <tr><td>WMO for heat</td><td>100% WMO</td><td>Best use in winter. Burn in a waste oil heater or boiler.</td></tr>
+  </table>
+
+  <div class="warning"><strong>WMO in engines:</strong> Ash content (from detergents and wear metals) builds up in the combustion chamber, on valves, and in the exhaust. It will foul injectors over time. It will clog DPFs (if the engine has one — a 1968 Case does not). Old mechanical pumps tolerate it better than modern common-rail. Change oil more frequently. Check and clean injectors every 100 hours.</div>
+</div>
+
+<div class="section" id="cold-diesel">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Extreme Cold Diesel Operation (-40 F to -60 F)</div>
+
+  <h4>Fuel Gelling: What Happens</h4>
+  <p>Diesel fuel contains paraffin wax. At low temperatures, wax crystals form and grow. The fuel becomes cloudy (cloud point), then thick (pour point), then solid. A gelled fuel line or filter stops the engine. At -60&nbsp;F, even #1 diesel/kerosene can gel if it has any #2 blend or water contamination.</p>
+
+  <table>
+    <tr><th>Fuel Type</th><th>Cloud Point</th><th>Pour Point</th><th>Usable At -60&nbsp;F?</th></tr>
+    <tr><td>#2 Diesel (summer)</td><td>10-20 F</td><td>-10 to 10 F</td><td>No. Will be solid.</td></tr>
+    <tr><td>#1 Diesel / Kerosene</td><td>-30 to -40 F</td><td>-50 to -60 F</td><td>Maybe. Blend with anti-gel.</td></tr>
+    <tr><td>Jet-A / JP-8</td><td>-40 to -50 F</td><td>-60 to -70 F</td><td>Yes. Best liquid fuel for extreme cold.</td></tr>
+    <tr><td>Biodiesel (peanut)</td><td>30-40 F</td><td>20-30 F</td><td>No. Must be blended 70%+ with kerosene.</td></tr>
+    <tr><td>WMO</td><td>0-20 F</td><td>-10 to 10 F</td><td>No. Too thick. Use for heat only.</td></tr>
+    <tr><td>Wood gas</td><td>N/A</td><td>N/A</td><td>Yes. No gelling.</td></tr>
+  </table>
+
+  <h4>Fuel System Heating</h4>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Tank heating (coolant loop)</div><div class="step-desc">Plumb a 3/8 inch copper tube in a coil against the inside or outside of the fuel tank. Connect to engine coolant: outlet from engine block, through the coil, back to radiator or water pump. When the engine runs, hot coolant (180-200 F) circulates through the coil, keeping the tank warm. Insulate the tank with blankets, foam, or even snow (snow is an excellent insulator). A warm tank at 80-100 F prevents gelling.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Fuel line heating</div><div class="step-desc">Run the fuel line inside a larger coolant line (a 1/2 inch pipe with the fuel line inside), or wrap the fuel line with copper coolant tube and insulate together. Heat tape (electric) works if you have power, but coolant is more reliable.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Filter heating</div><div class="step-desc">The filter is the narrowest point and gels first. Wrap the filter housing in coolant lines or heat tape. Keep a spare filter indoors, warm. If the filter gels, swap it for a warm one. Some people build a heated filter base (coolant passages cast or machined into the base).</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Return line</div><div class="step-desc">On a 1968 Case, the injection pump overflows fuel back to the tank. This return fuel is warm (it absorbed heat from the pump). Route the return line to splash onto the tank wall or dip into the fuel. This passive heating helps.</div></div></div>
+
+  <h4>Starting Aids</h4>
+  <table>
+    <tr><th>Aid</th><th>How</th><th>Risk</th></tr>
+    <tr><td>Ether (starting fluid)</td><td>Spray 2-3 seconds into intake while cranking</td><td>Can shatter pistons if overused. Use sparingly.</td></tr>
+    <tr><td>Intake heater</td><td>Electric coil or flame in intake manifold</td><td>Fire risk if fuel leaks. Essential for -40 F.</td></tr>
+    <tr><td>Block heater</td><td>120V element in freeze plug, or coolant heater</td><td>Requires electricity. 2-4 hours to warm block.</td></tr>
+    <tr><td>Propane torch</td><td>Warm intake manifold, oil pan, fuel lines with flame</td><td>Fire risk. Don't melt rubber lines.</td></tr>
+    <tr><td>Hot battery</td><td>Keep battery indoors, install warm</td><td>None. Essential. Cold battery has 30% power.</td></tr>
+    <tr><td>Thin oil</td><td>0W-30 or 5W-30 synthetic motor oil</td><td>Less protection at high temp. Change back in summer.</td></tr>
+    <tr><td>Glow plugs / grid heater</td><td>Stock on some diesels. Preheat 20-60 seconds.</td><td>None. Best factory option if equipped.</td></tr>
+  </table>
+
+  <div class="warning"><strong>Ether is dangerous.</strong> It ignites at very low compression and burns explosively. A 1968 Case with high compression (16:1 or more) can ignite ether before the piston reaches TDC, creating a downward force while the crank is still trying to push it up. This is called "ether lock" and can bend connecting rods or break pistons. Use 1-2 second bursts only. Wait between cranks. Better: use a propane torch to warm the intake manifold for 5 minutes first, then crank without ether.</div>
+
+  <h4>Battery Care at -60&nbsp;F</h4>
+  <ul>
+    <li><strong>Lead-acid:</strong> At -60&nbsp;F, capacity drops to 30-40%. Cranking power is severely reduced. Keep batteries in a warm space (house, heated shed) and install them just before starting. Use TWO batteries in parallel for more cranking amps.</li>
+    <li><strong>Trickle charge:</strong> A fully charged battery freezes at -90&nbsp;F. A half-charged battery freezes at -20&nbsp;F. Keep it on a maintainer or charge fully before use.</li>
+    <li><strong>Jump starting:</strong> Use a running vehicle with a warm battery. Connect jumper cables, let the good battery charge the cold one for 10 minutes before cranking. Direct jump to starter often fails — the cold battery can't accept the surge.</li>
+    <li><strong>Lithium:</strong> Do NOT use lithium starting batteries at -60&nbsp;F. They cannot charge below freezing. They can internally short if charged cold. The BMS may fail and catch fire. A lithium battery fire at -60&nbsp;F is a nightmare — you can't ventilate (open windows = freeze), you can't evacuate into -60&nbsp;F. Lead-acid is the only safe battery technology for extreme cold.</li>
+  </ul>
+</div>
+
+<div class="section" id="alcohol">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Alcohol Fuel for Gas Engines (Not Diesel)</div>
+
+  <p>Methanol and ethanol work in gasoline engines with modifications. They do NOT work in diesel engines without extensive redesign (fumigation, spark ignition, etc.). For a gas tractor, chainsaw, or generator, alcohol is viable.</p>
+
+  <h4>Methanol from Hardwood (Improved Process)</h4>
+  <p>Softwoods (spruce, pine) produce methanol contaminated with turpentine, acetone, and tar. Hardwoods (birch, aspen, poplar, oak, maple) produce cleaner methanol. Birch bark is especially good.</p>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Build a retort</div><div class="step-desc">A sealed steel pipe or drum (not galvanized — zinc fumes are toxic). Fill with dry hardwood chunks. Seal the lid with a clamp or bolts. Weld a 1/2 inch outlet pipe from the top/lid. This pipe leads to a condenser.</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Condenser</div><div class="step-desc">The outlet pipe should be 10-20 feet long, coiled or sloped, passing through a cooling bath (water, snow, ice). The vapor condenses to liquid. Collect in glass or plastic jars. The first liquid to come out (below 65 C boiling fraction) is mostly acetone and water. The 65-85 C fraction is methanol. Above 85 C is water and tar.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Heat the retort</div><div class="step-desc">Build a fire under the retort. Heat to 400-500 C (750-930 F) internally. This is destructive distillation — pyrolysis. The wood decomposes into gas and vapor. Do NOT let air into the retort — it's not combustion, it's decomposition. A temperature gauge on the retort wall helps. Too hot = more tar. Too cool = low yield.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Fractionate and dry</div><div class="step-desc">Collect in separate jars as the temperature of the vapor changes. The methanol fraction (middle) should be clear. Test by burning — methanol burns with a pale blue, almost invisible flame. Add quicklime (CaO) or magnesium sulfate (Epsom salt) to absorb water. Let settle, decant the clear methanol.</div></div></div>
+
+  <div class="note"><strong>Yield:</strong> 1 kg of dry hardwood yields roughly 10-20 mL of methanol. A 50-gallon retort of wood might yield 1-2 gallons. This is why wood gasification is more practical for tractors — the energy yield per hour of labor is 10x higher. Methanol is better for small engines, racing, or chemical use.</div>
+
+  <h4>Ethanol from Biomass (Fermentation)</h4>
+  <p>Any starchy or sugary material can become ethanol: corn, potatoes, beets, fruit waste, molasses, even cellulose (harder). The process: mash → ferment → distill → dry.</p>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Mash</div><div class="step-desc">Grind starch source (corn, grain, potatoes) to a coarse meal. Mix with water (1 part grain to 4-5 parts water). Heat to 150-160 F (65-70 C) to gelatinize starch. Hold 1 hour. Cool to 140 F (60 C). Add malted grain (barley, wheat) or commercial amylase enzyme. Hold 1-2 hours — starch converts to sugar. Cool to 80 F (27 C).</div></div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Ferment</div><div class="step-desc">Add yeast (bread yeast works, champagne yeast is better). Keep at 75-85 F for 3-7 days. Bubble airlock or loose lid. The mash will bubble and foam. When bubbling stops, fermentation is done. Alcohol content: 8-12% by volume.</div></div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Distill</div><div class="step-desc">Heat the mash gently in a still. Ethanol boils at 173 F (78 C). Water boils at 212 F. Collect the vapor that comes off below 185 F — this is the ethanol fraction. A simple pot still (pressure cooker with a copper coil condenser) works. The first 50 mL (foreshots) contains methanol and acetone — discard it (toxic). The "hearts" (middle fraction) is drinkable ethanol. For fuel, you can keep more of the run.</div></div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Dry the ethanol</div><div class="step-desc">Ethanol from a simple still is 40-60% alcohol (80-120 proof). For fuel, you need 95%+ (190 proof). Dry it with molecular sieve (zeolite), calcium oxide (quicklime), or by salting out (add salt until the water layer separates). For engine use, 85% ethanol works if you adjust the carburetor jetting (more fuel, richer mixture).</div></div></div>
+
+  <h4>Running a Gas Engine on Alcohol</h4>
+  <ul>
+    <li><strong>Carburetor:</strong> Alcohol needs 30-40% more fuel volume than gasoline for the same power. Drill the main jet larger (1.3-1.5x original diameter). Or replace with a larger jet. The idle jet may also need enlarging.</li>
+    <li><strong>Timing:</strong> Alcohol burns slower than gasoline. Advance ignition timing 5-10 degrees for best power. On a small engine, this means moving the flywheel key or bending the ignition trigger bracket.</li>
+    <li><strong>Compression:</strong> Alcohol tolerates higher compression than gasoline. If rebuilding an engine, increase compression ratio to 12:1 or higher for more power and efficiency.</li>
+    <li><strong>Lubrication:</strong> Alcohol washes oil off cylinder walls. Add 2-4% upper cylinder lubricant to the fuel: castor oil (if you can get it), peanut oil, 2-stroke oil, or ATF. Without lube, the engine will seize in 50-100 hours.</li>
+    <li><strong>Cold starting:</strong> Alcohol has low vapor pressure. At -60&nbsp;F it barely evaporates. Start on gasoline (keep a small tank), run until warm, then switch to alcohol. Or use a primer bulb filled with gasoline. Or heat the intake manifold with a torch before cranking.</li>
+    <li><strong>Materials:</strong> Alcohol corrodes aluminum and some rubbers over time. Use ethanol-compatible fuel line (Tygon, Viton). Aluminum carbs will survive but may oxidize — inspect and clean annually.</li>
+  </ul>
+</div>
+
+<div class="section" id="safety">
+  <div class="back-bar"><button class="back-btn" onclick="showSection('toc')">Back to Menu</button></div>
+  <div class="section-title">Safety: What Can Kill You</div>
+
+  <h4>Carbon Monoxide (CO)</h4>
+  <p>Wood gas is 20-30% CO. Engine exhaust from any fuel contains CO. At -60&nbsp;F, you run engines in enclosed sheds or with cabs sealed tight. CO builds up silently.</p>
+  <ul>
+    <li>Symptoms: headache, dizziness, nausea, confusion, cherry-red lips (late sign).</li>
+    <li>First aid: get to fresh air immediately. CPR if not breathing. CO binds hemoglobin for hours — even after recovery, rest for 24 hours.</li>
+    <li>Prevention: CO detector in every building with an engine or heater. Ventilation — even a cracked window helps. Never run a gasifier or engine in a closed garage without exhaust piped outside.</li>
+  </ul>
+
+  <h4>Methanol Toxicity</h4>
+  <p>Methanol is absorbed through skin, eyes, and lungs. It metabolizes to formic acid, which causes blindness and metabolic acidosis.</p>
+  <ul>
+    <li>Symptoms: headache, nausea, blurred vision, blindness, coma, death.</li>
+    <li>Antidote: ethanol (drinking alcohol). Ethanol competes for the same enzyme, slowing methanol metabolism. If someone drinks methanol, give them whiskey, beer, or any ethanol immediately while seeking help. 1 mL/kg of 40% ethanol (80 proof) every 4 hours is the hospital protocol.</li>
+    <li>Prevention: gloves, goggles, ventilation. Never drink homemade distillate without testing — the foreshots contain methanol even in ethanol production.</li>
+  </ul>
+
+  <h4>Ether (Starting Fluid) Explosions</h4>
+  <p>Ether vapor is heavier than air and pools in low spots. It ignites from static electricity, hot surfaces, or sparks. A can of starting fluid in a warm cab is a bomb.</p>
+  <ul>
+    <li>Store ether outside, in a metal can, away from heat.</li>
+    <li>Use 1-second bursts only. Wait between cranks.</li>
+    <li>Never spray ether into a hot engine or turbo — it can ignite before the intake valve opens, causing a backfire through the intake manifold.</li>
+    <li>A propane torch is safer for preheating — no explosive vapor, controlled flame.</li>
+  </ul>
+
+  <h4>Lithium Battery Fires</h4>
+  <p>Lithium-ion batteries (EVs, power tools, home storage) can enter thermal runaway. The BMS (battery management system) can fail, especially at temperature extremes. A failed BMS may overcharge, overheat, or short cells internally.</p>
+  <ul>
+    <li>Thermal runaway: a cell reaches 150-200 F, decomposes, releases oxygen, and burns at 1000+ F. It spreads to adjacent cells. Water does NOT put out lithium fires — it reacts with lithium to produce hydrogen gas, making it worse.</li>
+    <li>At -60&nbsp;F: a cold lithium battery cannot be charged. If you try, lithium metal plates on the anode, creating internal shorts. When the battery warms, the shorts cause runaway. The BMS heater draws power, draining the battery, making it colder, creating a death spiral.</li>
+    <li>Prevention: Do not use lithium for primary power in unheated spaces at -60&nbsp;F. Use lead-acid (kept warm and charged). If you must use lithium, keep it in a heated, fire-resistant enclosure (concrete, sand surround) with a CO2 or dry chemical extinguisher. Never sleep in the same room as a charging lithium battery in extreme cold.</li>
+    <li>Extinguishing: Class D dry powder, sand, or let it burn out in a controlled area. Do not use water. Do not breathe the smoke (HF gas, toxic).</li>
+  </ul>
+
+  <h4>Caustic Chemicals (Lye, Acid)</h4>
+  <p>Biodiesel production uses sodium hydroxide (lye) and sulfuric acid. Both cause severe chemical burns.</p>
+  <ul>
+    <li>Lye (NaOH): dissolves skin and eyes. Neutralize spills with vinegar or dilute acid. Rinse skin with water for 15 minutes.</li>
+    <li>Sulfuric acid: causes immediate burns and dehydration. Neutralize with baking soda or lime. Rinse with water.</li>
+    <li>Always add acid to water, not water to acid. The heat of solution can boil and splash concentrated acid.</li>
+    <li>Wear goggles, rubber gloves, long sleeves, and apron. Have a water source nearby.</li>
+  </ul>
+
+  <div class="tip"><strong>Far North Summary:</strong> At -60&nbsp;F, batteries fail, liquid fuel gels, and corporations stop delivering. The only robust solutions are: (1) wood gasification for engines, (2) kerosene / #1 diesel with heated tanks for liquid backup, (3) lead-acid batteries kept warm for starting, (4) biodiesel in summer only. A 1968 Case diesel with a mechanical pump and a wood gasifier is more future-proof than a $50,000 electric tractor with a lithium battery that dies in two winters and burns your barn down.</div>
+</div>
+
+</div>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,288 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gdprf.dev/schemas/proxy.schema.json",
+  "title": "GDPRF Proxy Node",
+  "version": "3.0.0",
+  "description": "v3.0: measurand/indication decomposition, transduction chain, traceability pyramid, blindness map, epistemic mask score.",
+  "type": "object",
+  "required": [
+    "proxy_id",
+    "target_measurand",
+    "observable_indication",
+    "bridge_model",
+    "transduction_chain",
+    "traceability_pyramid",
+    "blindness_map",
+    "fidelity_gradient",
+    "epistemic_mask_score",
+    "calibration",
+    "validity_claim_id"
+  ],
+  "properties": {
+    "proxy_id": {
+      "type": "string"
+    },
+    "target_measurand": {
+      "type": "string",
+      "description": "The unobservable true state"
+    },
+    "observable_indication": {
+      "type": "string",
+      "description": "Raw output metric"
+    },
+    "bridge_model": {
+      "type": "object",
+      "required": [
+        "model_type",
+        "model_dependence_rung",
+        "calibration_source",
+        "uncertainty_source"
+      ],
+      "properties": {
+        "model_type": {
+          "type": "string",
+          "description": "e.g. allometric_regression, seismic_inversion, occupancy"
+        },
+        "model_dependence_rung": {
+          "type": "string",
+          "enum": [
+            "M0",
+            "M1",
+            "M2",
+            "M3"
+          ]
+        },
+        "calibration_source": {
+          "type": "string"
+        },
+        "uncertainty_source": {
+          "type": "string",
+          "enum": [
+            "model_error",
+            "instrument_error"
+          ]
+        }
+      }
+    },
+    "transduction_chain": {
+      "type": "array",
+      "description": "phenomenon \u2192 interaction \u2192 transducer \u2192 signal_conditioning \u2192 digitization \u2192 indication",
+      "items": {
+        "type": "object",
+        "required": [
+          "stage",
+          "fidelity",
+          "grade"
+        ],
+        "properties": {
+          "stage": {
+            "type": "string"
+          },
+          "fidelity": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "grade": {
+            "type": "string",
+            "enum": [
+              "measured",
+              "estimated",
+              "assumed"
+            ]
+          },
+          "alias_states": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "traceability_pyramid": {
+      "type": "object",
+      "required": [
+        "primary_standard_exists",
+        "calibration_chain_status",
+        "si_unit_link"
+      ],
+      "properties": {
+        "primary_standard_exists": {
+          "type": "boolean"
+        },
+        "calibration_chain_status": {
+          "type": "string",
+          "enum": [
+            "intact",
+            "expired",
+            "convention_only",
+            "broken"
+          ]
+        },
+        "si_unit_link": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "blindness_map": {
+      "type": "object",
+      "required": [
+        "null_states",
+        "alias_states",
+        "gate_cutoffs",
+        "frame_biases"
+      ],
+      "properties": {
+        "null_states": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "alias_states": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "saturation_limit": {
+          "type": [
+            "number",
+            "string",
+            "null"
+          ]
+        },
+        "gate_cutoffs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "frame_biases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "fidelity_gradient": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "RAW pre-calibration fidelity; consumers use calibration.calibrated_fidelity"
+    },
+    "epistemic_mask_score": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "P(Blind) \u2014 probability the proxy is in a blindness state for this claim context"
+    },
+    "metrology": {
+      "type": "object",
+      "properties": {
+        "sensor_type": {
+          "type": "string"
+        },
+        "precision": {
+          "type": "number"
+        },
+        "noise_floor": {
+          "type": "number"
+        },
+        "systematic_bias": {
+          "type": "number"
+        },
+        "provenance": {
+          "type": "object",
+          "properties": {
+            "precision_source": {
+              "type": "string",
+              "enum": [
+                "measured",
+                "estimated",
+                "assumed"
+              ]
+            },
+            "noise_floor_source": {
+              "type": "string",
+              "enum": [
+                "measured",
+                "estimated",
+                "assumed"
+              ]
+            },
+            "systematic_bias_source": {
+              "type": "string",
+              "enum": [
+                "measured",
+                "estimated",
+                "assumed"
+              ]
+            },
+            "reference_standard": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "calibration": {
+      "type": "object",
+      "required": [
+        "method"
+      ],
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": [
+            "platt_scaling",
+            "isotonic_regression",
+            "temperature_scaling",
+            "none"
+          ]
+        },
+        "calibrated_fidelity": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "validation_set": {
+          "type": "string"
+        },
+        "calibrated_at": {
+          "type": "string"
+        },
+        "expected_calibration_error": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0.0
+        }
+      }
+    },
+    "validity_claim_id": {
+      "type": "string"
+    },
+    "thermodynamic_physical_grounding": {
+      "type": "string"
+    },
+    "vector_embedding": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    }
+  }
+}

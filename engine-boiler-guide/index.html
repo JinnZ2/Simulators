@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Engine & Boiler Fix Guide</title>
+<style>
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 12px; background: #fff; color: #111; }
+  .screen { display: none; }
+  .screen.active { display: block; }
+  .big-btn {
+    display: flex; align-items: center; gap: 14px;
+    width: 100%; min-height: 80px; padding: 14px 18px;
+    margin-bottom: 10px; border: 2px solid #ccc;
+    border-radius: 10px; background: #fff;
+    color: #111; font-size: 18px; font-weight: 500;
+    cursor: pointer; transition: all 0.12s ease;
+    text-align: left; line-height: 1.3; touch-action: manipulation;
+  }
+  .big-btn:hover, .big-btn:active { border-color: #111; background: #f5f5f5; }
+  .big-btn:active { transform: scale(0.97); }
+  .big-btn .btn-icon { flex-shrink: 0; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
+  .big-btn .btn-icon svg { width: 28px; height: 28px; }
+  .big-btn .btn-text { flex: 1; }
+  .big-btn .btn-sub { font-size: 13px; color: #666; font-weight: 400; margin-top: 3px; }
+  .header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid #ddd; }
+  .header h2 { margin: 0; font-size: 20px; font-weight: 500; flex: 1; }
+  .back-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; border-radius: 8px;
+    border: 2px solid #ccc; background: #fff; cursor: pointer; color: #666; flex-shrink: 0;
+  }
+  .back-btn:active { background: #f5f5f5; }
+  .progress { display: flex; gap: 6px; margin-bottom: 14px; }
+  .progress-dot { flex: 1; height: 5px; border-radius: 3px; background: #e5e5e5; }
+  .progress-dot.done { background: #111; }
+  .progress-dot.current { background: #666; }
+  .intro-text { font-size: 15px; color: #555; margin-bottom: 14px; line-height: 1.45; }
+  .check-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px; margin-bottom: 8px;
+    border: 2px solid #ccc; border-radius: 10px; cursor: pointer;
+    transition: all 0.12s ease; background: #fff;
+  }
+  .check-item:active { border-color: #111; }
+  .check-item.checked { border-color: #2a9d3d; background: #f0faf2; }
+  .check-item .cb-icon { flex-shrink: 0; width: 28px; height: 28px; margin-top: 1px; }
+  .check-text { flex: 1; }
+  .check-title { font-size: 16px; font-weight: 500; margin-bottom: 3px; }
+  .check-detail { font-size: 14px; color: #555; line-height: 1.4; }
+  .tag { display: inline-block; padding: 3px 8px; border-radius: 5px; font-size: 12px; font-weight: 500; margin-top: 5px; margin-right: 4px; }
+  .tag.boiler { background: #fff3e0; color: #111; }
+  .tag.modern { background: #e3f2fd; color: #111; }
+  .tag.field { background: #f3e5f5; color: #111; }
+  .summary-bar { padding: 12px 14px; border-radius: 10px; margin-bottom: 12px; background: #f5f5f5; font-size: 14px; color: #555; }
+  .summary-bar strong { color: #111; }
+  .reset-btn {
+    width: 100%; min-height: 52px; margin-top: 16px;
+    border: 2px solid #ccc; border-radius: 10px;
+    background: #fff; font-size: 17px; font-weight: 500;
+    cursor: pointer; color: #111;
+  }
+  .reset-btn:active { background: #f5f5f5; }
+</style>
+</head>
+<body>
+
+<div id="app">
+  <div class="screen active" id="screen1">
+    <div class="header"><h2>What is it doing?</h2></div>
+    <div class="progress"><div class="progress-dot current"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div></div>
+    <p class="intro-text">Pick the main problem. Tap the one that fits best.</p>
+
+    <button class="big-btn" onclick="goTo(2,'wont-start')">
+      <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="currentColor"/><path d="M11 7h2v6h-2zm0 4h2v2h-2z" fill="currentColor"/></svg></div>
+      <div class="btn-text">Won't start at all<div class="btn-sub">No fire, no run, dead silence or just cranking</div></div>
+    </button>
+
+    <button class="big-btn" onclick="goTo(2,'hard-start')">
+      <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="currentColor"/><path d="M11 7h2v6h-2zm0 4h2v2h-2z" fill="currentColor"/></svg></div>
+      <div class="btn-text">Hard to start<div class="btn-sub">Takes many pulls or cranks, but eventually fires</div></div>
+    </button>
+
+    <button class="big-btn" onclick="goTo(2,'starts-dies')">
+      <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="currentColor"/></svg></div>
+      <div class="btn-text">Starts then dies<div class="btn-sub">Fires up, runs a few seconds, then quits</div></div>
+    </button>
+
+    <button class="big-btn" onclick="goTo(2,'runs-rough')">
+      <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" fill="currentColor"/></svg></div>
+      <div class="btn-text">Runs rough or misses<div class="btn-sub">Shaking, sputtering, not smooth</div></div>
+    </button>
+
+    <button class="big-btn" onclick="goTo(2,'smokes')">
+      <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="currentColor"/></svg></div>
+      <div class="btn-text">Smoking (blue or black)<div class="btn-sub">Blue = oil. Black = too much fuel. White = water.</div></div>
+    </button>
+
+    <button class="big-btn" onclick="goTo(2,'overheats')">
+      <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M12 2c-5.33 4.55-8 8.48-8 11.8 0 4.98 3.8 8.2 8 8.2s8-3.22 8-8.2c0-3.32-2.67-7.25-8-11.8z" fill="currentColor"/></svg></div>
+      <div class="btn-text">Overheating<div class="btn-sub">Hot to touch, steam, warning light, or seized</div></div>
+    </button>
+
+    <button class="big-btn" onclick="goTo(2,'no-power')">
+      <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M11 21h-1l1-7H7.5c-.58 0-.57-.32-.38-.66.19-.34.05-.08.07-.12C8.48 10.94 10.42 7.54 13 3h1l-1 7h3.5c.49 0 .56.33.47.51l-.07.15C12.96 17.55 11 21 11 21z" fill="currentColor"/></svg></div>
+      <div class="btn-text">No power / weak<div class="btn-sub">Won't pull, won't cut, bogs down under load</div></div>
+    </button>
+
+    <button class="big-btn" onclick="goTo(2,'backfires')">
+      <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="currentColor"/></svg></div>
+      <div class="btn-text">Backfires or pops<div class="btn-sub">Loud bang from exhaust or carburetor</div></div>
+    </button>
+
+    <button class="big-btn" onclick="goTo(2,'surges')">
+      <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z" fill="currentColor"/></svg></div>
+      <div class="btn-text">Surges or hunts<div class="btn-sub">RPM goes up and down, won't hold steady</div></div>
+    </button>
+
+    <button class="big-btn" onclick="goTo(2,'boiler-fail')">
+      <div class="btn-icon"><svg viewBox="0 0 24 24"><path d="M12 2c-5.33 4.55-8 8.48-8 11.8 0 4.98 3.8 8.2 8 8.2s8-3.22 8-8.2c0-3.32-2.67-7.25-8-11.8zM12 20c-2.73 0-5.5-1.73-5.5-5.5 0-1.83.92-3.93 2.7-6.3 1.08 3.75 2.5 5.5 2.5 5.5s1.42-1.75 2.5-5.5c1.78 2.37 2.7 4.47 2.7 6.3C17.5 18.27 14.73 20 12 20z" fill="currentColor"/></svg></div>
+      <div class="btn-text">Boiler / burner problem<div class="btn-sub">No heat, puffback, sooting, or converted coal boiler</div></div>
+    </button>
+  </div>
+
+  <div class="screen" id="screen2">
+    <div class="header">
+      <button class="back-btn" onclick="goBack(1)"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="currentColor"/></svg></button>
+      <h2>What machine?</h2>
+    </div>
+    <div class="progress"><div class="progress-dot done"></div><div class="progress-dot current"></div><div class="progress-dot"></div><div class="progress-dot"></div></div>
+    <p class="intro-text">Pick what you are working on.</p>
+
+    <button class="big-btn" onclick="goTo(3,'tractor')">
+      <div class="btn-text">Tractor or farm machine<div class="btn-sub">Farmall, John Deere, Ford, International</div></div>
+    </button>
+    <button class="big-btn" onclick="goTo(3,'car')">
+      <div class="btn-text">Car or truck<div class="btn-sub">Pickup, sedan, work truck, anything with plates</div></div>
+    </button>
+    <button class="big-btn" onclick="goTo(3,'lawn')">
+      <div class="btn-text">Lawn mower or rider<div class="btn-sub">Push mower, riding mower, zero-turn</div></div>
+    </button>
+    <button class="big-btn" onclick="goTo(3,'boiler')">
+      <div class="btn-text">Boiler or furnace<div class="btn-sub">Steam, hot water, coal converted to oil, gas</div></div>
+    </button>
+    <button class="big-btn" onclick="goTo(3,'small')">
+      <div class="btn-text">Chainsaw, trimmer, small engine<div class="btn-sub">2-stroke or 4-stroke handheld</div></div>
+    </button>
+    <button class="big-btn" onclick="goTo(3,'pump')">
+      <div class="btn-text">Pump or generator<div class="btn-sub">Water pump, pressure washer, generator</div></div>
+    </button>
+    <button class="big-btn" onclick="goTo(3,'other')">
+      <div class="btn-text">Other engine or machine<div class="btn-sub">Hit-and-miss, stationary, compressor, etc.</div></div>
+    </button>
+  </div>
+
+  <div class="screen" id="screen3">
+    <div class="header">
+      <button class="back-btn" onclick="goBack(2)"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="currentColor"/></svg></button>
+      <h2>How old is it?</h2>
+    </div>
+    <div class="progress"><div class="progress-dot done"></div><div class="progress-dot done"></div><div class="progress-dot current"></div><div class="progress-dot"></div></div>
+    <p class="intro-text">Pick the era. If you are not sure, guess from the looks.</p>
+
+    <button class="big-btn" onclick="goTo(4,'old')">
+      <div class="btn-text">Old iron — 1800 to 1940<div class="btn-sub">Hit-and-miss, magneto, updraft carb, hand start, coal boiler</div></div>
+    </button>
+    <button class="big-btn" onclick="goTo(4,'mid')">
+      <div class="btn-text">Mid-century — 1940 to 1980<div class="btn-sub">Aluminum engines, 2-stroke, side-draft carb, converted oil boiler</div></div>
+    </button>
+    <button class="big-btn" onclick="goTo(4,'emission')">
+      <div class="btn-text">Emission era — 1980 to 2000<div class="btn-sub">Down-draft carbs, electronic ignition, sealed adjustments, ethanol</div></div>
+    </button>
+    <button class="big-btn" onclick="goTo(4,'modern')">
+      <div class="btn-text">Modern — 2000 to now<div class="btn-sub">Fuel injection, computer, OBD codes, electronic controls</div></div>
+    </button>
+  </div>
+
+  <div class="screen" id="screen4">
+    <div class="header">
+      <button class="back-btn" onclick="goBack(3)"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="currentColor"/></svg></button>
+      <h2>Check these</h2>
+    </div>
+    <div class="progress"><div class="progress-dot done"></div><div class="progress-dot done"></div><div class="progress-dot done"></div><div class="progress-dot current"></div></div>
+    <div class="summary-bar" id="summary"></div>
+    <div id="checklist"></div>
+    <button class="reset-btn" onclick="resetAll()">Start over</button>
+  </div>
+</div>
+
+<script>
+let state={symptom:'',machine:'',era:''};
+
+const data={
+  'wont-start':{title:"Won't start",checks:[
+    {t:'Fuel is fresh and not stale',d:'Smell it. If it smells like varnish, drain it and get fresh gas. For 2-stroke, check oil mix ratio.',tags:['all']},
+    {t:'Spark plug has spark',d:'Pull plug, ground to metal, crank. Look for blue spark. Weak or no spark = ignition problem.',tags:['all']},
+    {t:'Compression feels strong',d:'Pull starter slowly — should feel resistance and "pump" air. Weak = rings or valves.',tags:['all']},
+    {t:'Fuel reaching carburetor',d:'Check fuel line flow. Clogged line, dirty filter, or stuck needle valve.',tags:['old','mid','emission']},
+    {t:'Fuel reaching injector',d:'Listen for pump prime. Check pressure with gauge if you have one.',tags:['modern']},
+    {t:'Carburetor not gummed up',d:'Old gas turns to varnish. Clean jets with wire and carb cleaner.',tags:['old','mid','emission']},
+    {t:'Throttle body clean',d:'Carbon buildup chokes idle air. Clean with throttle body spray.',tags:['modern']},
+    {t:'Magneto / coil not dead',d:'Test with multimeter. Classic fail: starts cold, dies warm = coil breaking down.',tags:['old','mid']},
+    {t:'Ignition module / ECU OK',d:'Check for spark at coil. No spark on modern = scan for codes first.',tags:['emission','modern']},
+    {t:'Flywheel key not sheared',d:'If it backfires while cranking, timing is off. Check flywheel key.',tags:['old','mid']},
+    {t:'Safety switches not stuck',d:'Seat, blade brake, PTO switches can prevent start. Test with multimeter or bypass one at a time.',tags:['lawn','modern']},
+    {t:'Battery has juice',d:'12.6V+ at rest. Under 12V = charge or replace.',tags:['car','tractor','modern']},
+    {t:'Boiler has water',d:'Never fire dry. Check sight glass. Low water = automatic shutdown.',tags:['boiler']},
+    {t:'Boiler pressure OK',d:'Check pressure gauge. Too low = will not run. Too high = relief valve pops.',tags:['boiler']},
+    {t:'Burner transformer sparking',d:'Check electrodes for spark. Should jump 1/8 inch gap. Weak = clean or replace transformer.',tags:['boiler']},
+    {t:'Fuel oil reaching burner',d:'Check filter, pump, and line. No oil = no fire. Bleed air from pump if needed.',tags:['boiler']},
+  ]},
+  'hard-start':{title:'Hard to start',checks:[
+    {t:'Choke working right',d:'Choke should close cold, open warm. Stuck choke = flooded or starved.',tags:['all']},
+    {t:'Fuel fresh and correct mix',d:'2-stroke: 50:1, 40:1, or 32:1 per spec. Wrong mix = hard start or damage.',tags:['small','mid']},
+    {t:'Primer bulb fills',d:'If bulb stays soft, fuel line is cracked or filter clogged.',tags:['small','mid','emission']},
+    {t:'Spark plug clean and gapped',d:'Clean with wire brush. Gap to spec (usually .030"). Fouled = too rich or oil burning.',tags:['all']},
+    {t:'Carburetor adjusted right',d:'Mixture screws: 1 to 1.5 turns out from seated as baseline. Adjust for smooth idle.',tags:['old','mid']},
+    {t:'Cold start enrichment works',d:'EFI: coolant temp sensor tells ECU to enrich. Bad sensor = lean cold start.',tags:['modern']},
+    {t:'Valves not too tight',d:'Tight valves = compression leak when cold. Check clearance with feeler gauge.',tags:['old','mid','emission']},
+    {t:'Decompression release OK',d:'Some small engines have decomp lever. Make sure it closes after start.',tags:['small']},
+    {t:'Ignition timing correct',d:'Points gap or pickup coil gap out of spec. Check manual.',tags:['old','mid']},
+    {t:'Boiler draft correct',d:'Too much draft = hard light-off. Too little = smoky. Check barometric damper.',tags:['boiler']},
+    {t:'Burner electrodes clean and gapped',d:'1/8 inch gap, 1/4 inch ahead of nozzle. Carbon buildup causes weak spark.',tags:['boiler']},
+    {t:'Nozzle not clogged',d:'Coked nozzle = poor spray. Clean with tip cleaner or replace.',tags:['boiler']},
+  ]},
+  'starts-dies':{title:'Starts then dies',checks:[
+    {t:'Fuel tank vent clear',d:'Sealed cap or clogged vent = vacuum lock. Loosen cap and try again.',tags:['all']},
+    {t:'Fuel filter not clogged',d:'Replace if dirty. In-tank pickups can rot.',tags:['all']},
+    {t:'Carburetor float / needle OK',d:'Stuck needle = no fuel. Stuck float = flooding. Tap carburetor gently.',tags:['old','mid','emission']},
+    {t:'Idle jet not plugged',d:'Tiny idle jet clogs first. Clean with wire and carb cleaner.',tags:['old','mid','emission']},
+    {t:'Air leak at intake boot',d:'Cracked rubber boot = lean condition. Replace boot or clamp.',tags:['small','mid']},
+    {t:'Fuel pump pressure steady',d:'EFI: pressure should hold when pump stops. Leaking injector or regulator = pressure drop.',tags:['modern']},
+    {t:'Evap system not flooded',d:'Overfilled tank or tipped machine floods carbon canister. Let dry or replace.',tags:['emission','modern']},
+    {t:'Governor not stuck',d:'Stuck governor = idle too low and dies. Clean linkage and check spring.',tags:['all']},
+    {t:'Idle speed set right',d:'Too low = dies at idle. Adjust screw or linkage.',tags:['all']},
+    {t:'Boiler low water cutoff working',d:'If LWCO trips, boiler shuts down. Check water level and LWCO function.',tags:['boiler']},
+    {t:'Burner primary control not locking out',d:'Safety control locks out after failed ignition. Reset and watch flame.',tags:['boiler']},
+    {t:'Fuel not phase-separated',d:'Ethanol + water sinks to bottom. Drain bad fuel, add fresh.',tags:['all']},
+  ]},
+  'runs-rough':{title:'Runs rough or misses',checks:[
+    {t:'Spark plug good and correct heat range',d:'Wrong heat range = fouling or overheating. Use what the manual says.',tags:['all']},
+    {t:'Plug wire not cracked',d:'Arcing through cracked boot = misfire under load. Replace wire.',tags:['old','mid','emission']},
+    {t:'Coil pack not failing',d:'Swap coil to another cylinder. If misfire moves = bad coil.',tags:['modern']},
+    {t:'Air filter clean',d:'Dirty filter = rich mixture, black smoke, rough running. Clean or replace.',tags:['all']},
+    {t:'Carburetor mixture right',d:'Turn screws in until engine slows, then out 1.5 turns. Fine-tune for smooth.',tags:['old','mid']},
+    {t:'No air leaks after carb',d:'Loose clamp, cracked hose, bad gasket = extra air = lean = rough.',tags:['all']},
+    {t:'Valves sealing good',d:'Low compression on one cylinder = burnt valve or bad seat. Leak-down test confirms.',tags:['all']},
+    {t:'Head gasket not blown',d:'Two adjacent cylinders low = blown gasket between them. Coolant in oil = definite.',tags:['all']},
+    {t:'OBD codes checked',d:'Modern: scan for P0300-P030x misfire codes. Points to cylinder or system.',tags:['modern']},
+    {t:'Injector not clogged',d:'Modern: bad spray pattern = lean misfire. Ultrasonic clean or replace.',tags:['modern']},
+    {t:'Boiler sooting up',d:'Black smoke from stack = too much oil or not enough air. Check air band and draft.',tags:['boiler']},
+    {t:'Burner flame pattern correct',d:'Should be bright yellow-orange, no smoke. Lazy flame = not enough air.',tags:['boiler']},
+  ]},
+  'smokes':{title:'Smoking',checks:[
+    {t:'Blue smoke = burning oil',d:'Worn rings, valve seals, or overfilled crankcase. Check oil level first.',tags:['all']},
+    {t:'Black smoke = too rich',d:'Dirty air filter, stuck choke, or mixture screw too far out.',tags:['all']},
+    {t:'White smoke = water/coolant',d:'Blown head gasket or cracked head. Check coolant level and oil for milkiness.',tags:['all']},
+    {t:'2-stroke mix ratio correct',d:'Too much oil = blue smoke. Too little = seizure. Use jigger, not guessing.',tags:['small','mid']},
+    {t:'Valve seals not hard',d:'Old rubber seals crack and leak oil into cylinders. Replace seals if head is off.',tags:['old','mid','emission']},
+    {t:'Turbo seals OK',d:'Turbo oil seal leak = blue smoke under boost. Check shaft play.',tags:['car','tractor','modern']},
+    {t:'PCV system clear',d:'Clogged PCV = pressure buildup = oil pushed past seals. Blow through valve — should rattle.',tags:['car','emission','modern']},
+    {t:'Emission era: cannot richen mix',d:'1980+ sealed carbs. If black smoke, check air filter and choke. Do not drill jets illegally.',tags:['emission']},
+    {t:'Boiler sooting (black smoke)',d:'Too much oil, not enough air, or bad draft. Check nozzle size and air band.',tags:['boiler']},
+  ]},
+  'overheats':{title:'Overheating',checks:[
+    {t:'Cooling fins clean',d:'Grass and dirt block air. Brush off and blow out with compressed air.',tags:['all']},
+    {t:'Shroud / blower housing intact',d:'Missing baffles = wrong airflow. Duct tape is a temp fix, not permanent.',tags:['lawn','small','mid']},
+    {t:'Oil level correct',d:'Low oil = friction = heat. High oil = foaming = poor cooling. Check dipstick.',tags:['all']},
+    {t:'Oil not broken down',d:'Black and thin = change it. Use correct viscosity for season.',tags:['all']},
+    {t:'Fuel mixture not too lean',d:'Lean = hot. Check for air leaks, clogged main jet, or wrong jetting.',tags:['old','mid']},
+    {t:'Thermostat opening',d:'Liquid cooled: stuck closed = overheat. Remove and test in hot water.',tags:['car','tractor','modern']},
+    {t:'Water pump working',d:'Liquid cooled: belt driving pump? Impeller corroded? Check flow.',tags:['car','tractor','modern']},
+    {t:'Radiator not clogged',d:'External: wash bugs and dirt. Internal: flush if overheating persists.',tags:['car','tractor','modern']},
+    {t:'Fan clutch / electric fan working',d:'Fan should spin when hot. Electric fan: test relay and temp sensor.',tags:['car','tractor','modern']},
+    {t:'Boiler scale buildup',d:'Hard water = scale = poor heat transfer. Descale with acid solution.',tags:['boiler']},
+    {t:'Boiler water level right',d:'Low water = overheating and damage. Auto-feed may be stuck.',tags:['boiler']},
+    {t:'Rest periods for 2-stroke',d:'Chainsaws and trimmers: run 20-30 min, rest 10 min. Continuous WOT = seizure.',tags:['small','mid']},
+    {t:'Boiler not over-firing',d:'Too much draft or oversized nozzle = too hot. Check stack temp and draft.',tags:['boiler']},
+    {t:'Converted boiler refractory OK',d:'Missing target brick = flame hits cast iron. Firebrick temporary fix.',tags:['boiler']},
+  ]},
+  'no-power':{title:'No power / weak',checks:[
+    {t:'Compression test',d:'Healthy = 100+ PSI. Below 80 = rings, valves, or gasket. Below 60 = rebuild time.',tags:['all']},
+    {t:'Exhaust not blocked',d:'2-stroke: carbon in port or muffler. 4-stroke: catalytic converter plugged.',tags:['all']},
+    {t:'Air filter clean',d:'Severely clogged = engine cannot breathe. Check foam or paper element.',tags:['all']},
+    {t:'Fuel flow adequate under load',d:'Gravity feed: tank higher than carb. Pumped: pump delivering enough volume.',tags:['all']},
+    {t:'Governor opening throttle fully',d:'Under load, throttle should open wide. If not, adjust governor or check linkage.',tags:['all']},
+    {t:'Timing not retarded',d:'Sheared flywheel key or worn timing chain = late combustion = no power.',tags:['old','mid','emission']},
+    {t:'Turbo boost present',d:'No boost = leak, stuck wastegate, or bad turbo. Check hoses and actuator.',tags:['car','tractor','modern']},
+    {t:'Valve timing correct',d:'Slipped timing belt/chain = valves open at wrong time. Check marks align.',tags:['car','modern']},
+    {t:'Catalytic converter not melted',d:'Emission era: overheated cat collapses and blocks exhaust. Check backpressure.',tags:['emission','modern']},
+    {t:'Boiler tubes clear',d:'Soot and scale in tubes = poor heat = low steam pressure. Sand the flues.',tags:['boiler']},
+    {t:'Burner nozzle size correct',d:'Wrong GPH = over or under fired. Match nozzle to boiler rating.',tags:['boiler']},
+    {t:'Fuel pump pressure correct',d:'Oil burner pump: 100 PSI typical. Weak pump = poor atomization.',tags:['boiler']},
+  ]},
+  'backfires':{title:'Backfires or pops',checks:[
+    {t:'Timing not way off',d:'Backfire through carb = too early or intake valve open. Backfire through exhaust = too late.',tags:['all']},
+    {t:'Valves seating properly',d:'Burnt or warped valve leaks mixture. Compression test and leak-down find it.',tags:['all']},
+    {t:'Mixture not too lean',d:'Lean mixture burns slow and still ignites when intake opens. Richen slightly.',tags:['old','mid']},
+    {t:'Air leak at intake manifold',d:'Extra air after carb = lean backfire. Tighten bolts, check gasket.',tags:['all']},
+    {t:'Exhaust valve not stuck open',d:'Stuck exhaust valve = combustion into exhaust = loud pop. Check valve train.',tags:['all']},
+    {t:'Cam timing correct',d:'Modern: slipped chain/belt. Check alignment marks. Misfire codes may show.',tags:['modern']},
+    {t:'Anti-afterfire solenoid working',d:'Emission era: solenoid cuts fuel when key off. If stuck open = backfire on shutdown.',tags:['emission','modern']},
+    {t:'Deceleration valve OK',d:'Some carbs have valve to prevent lean backfire on throttle snap closed.',tags:['old','mid']},
+    {t:'Boiler delayed ignition',d:'Puffback = oil pooling before ignition. DANGEROUS. Check electrodes, nozzle, draft.',tags:['boiler']},
+  ]},
+  'surges':{title:'Surges or hunts',checks:[
+    {t:'Governor linkage free',d:'Sticky or binding linkage = RPM swings. Clean, lube, and check for wear.',tags:['all']},
+    {t:'Governor spring not stretched',d:'Weak spring = slow response, hunting. Replace or move to tighter hole.',tags:['all']},
+    {t:'Carburetor gasket not leaking',d:'Air leak = lean = speed changes as governor fights it. Replace gasket.',tags:['old','mid','emission']},
+    {t:'Fuel flow steady',d:'Intermittent fuel = speed changes. Check filter, line, and tank vent.',tags:['all']},
+    {t:'Idle / low speed jet clear',d:'Partially blocked idle circuit = uneven low-RPM running. Clean jet.',tags:['old','mid','emission']},
+    {t:'Air-vane governor clean',d:'Debris on vane = false speed signal. Blow out housing.',tags:['lawn','small','mid']},
+    {t:'Throttle position sensor smooth',d:'Modern: TPS with dead spot = erratic idle. Scan live data or replace.',tags:['modern']},
+    {t:'Idle air control valve clean',d:'Modern: carboned IAC = idle hunts. Remove and clean with solvent.',tags:['modern']},
+    {t:'Vacuum leaks',d:'Modern: cracked hose or bad intake gasket = unmetered air = surge. Smoke test or propane test.',tags:['car','modern']},
+    {t:'Boiler pressure regulator',d:'Hunting pressure = regulator valve sticking or oversized. Clean or resize.',tags:['boiler']},
+  ]},
+  'boiler-fail':{title:'Boiler / burner problem',checks:[
+    {t:'Boiler has water in sight glass',d:'Never fire dry. Low water = cracked sections or explosion. Check LWCO.',tags:['all']},
+    {t:'Fuel reaching burner',d:'Check tank level, filter, pump, and line. Bleed air from pump if needed.',tags:['all']},
+    {t:'Burner transformer sparking',d:'Should jump 1/8 inch gap. Clean electrodes, check gap.',tags:['all']},
+    {t:'Nozzle not clogged or worn',d:'Coked nozzle = bad spray pattern. Clean with tip cleaner or replace.',tags:['all']},
+    {t:'Refractory / target wall intact',d:'Converted coal boiler: missing target brick = flame hits cast iron. Firebrick temporary.',tags:['old','mid']},
+    {t:'Draft correct (not too strong)',d:'Tall chimney from coal era pulls too hard. Add barometric damper or baffle.',tags:['old','mid']},
+    {t:'Air band set for clean burn',d:'Light brown/tan flue pipe = good. Black = too rich. White = too lean.',tags:['all']},
+    {t:'Stack temperature 300-500F',d:'Too low = too much draft or running cold. Too high = over-fired.',tags:['all']},
+    {t:'No delayed ignition / puffback',d:'Boom at light-off = oil pooling. DANGEROUS. Check electrodes, nozzle, draft.',tags:['all']},
+    {t:'Fuel tank not leaking',d:'Check lines, fittings, and tank. Patch small leaks with JB Weld. Replace if bad.',tags:['all']},
+    {t:'Pressure relief valve tests OK',d:'Must open at set pressure. Stuck = explosion risk. Test annually.',tags:['all']},
+    {t:'Hydrostatic test if offline',d:'Before firing a long-idle boiler, pressurize to 1.5x working pressure. No leaks = safe.',tags:['all']},
+    {t:'Converted boiler: chamber size',d:'Oil flame is smaller than coal bed. Reduce chamber with firebrick if too big.',tags:['old','mid']},
+    {t:'Carbon monoxide detector working',d:'Bad burner = CO. If people get headaches, shut down and ventilate.',tags:['all']},
+  ]}
+};
+
+function goTo(screen,value){
+  if(screen===2)state.symptom=value;
+  if(screen===3)state.machine=value;
+  if(screen===4)state.era=value;
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen'+screen).classList.add('active');
+  if(screen===4)renderChecklist();
+}
+function goBack(screen){goTo(screen,null);}
+function resetAll(){state={symptom:'',machine:'',era:''};document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screen1').classList.add('active');}
+
+function renderChecklist(){
+  const s=data[state.symptom];
+  const ml={tractor:'Tractor',car:'Car/truck',lawn:'Lawn mower',boiler:'Boiler',small:'Small engine',pump:'Pump/gen',other:'Engine'};
+  const el={old:'1800-1940',mid:'1940-1980',emission:'1980-2000',modern:'2000-now'};
+  document.getElementById('summary').innerHTML='<strong>'+s.title+'</strong> &mdash; '+ml[state.machine]+' &mdash; '+el[state.era];
+  const c=document.getElementById('checklist');c.innerHTML='';
+
+  s.checks.forEach((check,i)=>{
+    const relevant=check.tags.includes('all')||check.tags.includes(state.machine)||check.tags.includes(state.era);
+    if(!relevant)return;
+    const div=document.createElement('div');div.className='check-item';
+    div.onclick=function(){
+      div.classList.toggle('checked');
+      const cb=div.querySelector('.cb-icon');
+      cb.innerHTML=div.classList.contains('checked')?
+        '<svg width="28" height="28" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M17.1363 8.56362C17.4878 8.91509 17.4878 9.48494 17.1363 9.83641L11.1489 15.8239C10.7974 16.1754 10.2275 16.1754 9.87606 15.8239L7.15447 13.1023C6.803 12.7508 6.803 12.181 7.15447 11.8295C7.50594 11.4781 8.07579 11.4781 8.42727 11.8295L10.5125 13.9147L15.8635 8.56362C16.215 8.21215 16.7849 8.21215 17.1363 8.56362Z" fill="currentColor"/></svg>':
+        '<svg width="28" height="28" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.10001 12C2.10001 6.53224 6.53225 2.1 12 2.1C17.4678 2.1 21.9 6.53224 21.9 12C21.9 17.4678 17.4678 21.9 12 21.9C6.53225 21.9 2.10001 17.4678 2.10001 12ZM12 3.9C7.52636 3.9 3.90001 7.52635 3.90001 12C3.90001 16.4736 7.52636 20.1 12 20.1C16.4736 20.1 20.1 16.4736 20.1 12C20.1 7.52635 16.4736 3.9 12 3.9Z" fill="currentColor"/></svg>';
+    };
+    let th='';
+    if(check.tags.includes('boiler'))th+='<span class="tag boiler">Boiler</span>';
+    if(check.tags.includes('modern'))th+='<span class="tag modern">Modern</span>';
+    if(check.tags.includes('old'))th+='<span class="tag field">Old iron</span>';
+
+    div.innerHTML='<div class="cb-icon"><svg width="28" height="28" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.10001 12C2.10001 6.53224 6.53225 2.1 12 2.1C17.4678 2.1 21.9 6.53224 21.9 12C21.9 17.4678 17.4678 21.9 12 21.9C6.53225 21.9 2.10001 17.4678 2.10001 12ZM12 3.9C7.52636 3.9 3.90001 7.52635 3.90001 12C3.90001 16.4736 7.52636 20.1 12 20.1C16.4736 20.1 20.1 16.4736 20.1 12C20.1 7.52635 16.4736 3.9 12 3.9Z" fill="currentColor"/></svg></div><div class="check-text"><div class="check-title">'+check.t+'</div><div class="check-detail">'+check.d+'</div>'+th+'</div>';
+    c.appendChild(div);
+  });
+}
+</script>
+</body>
+</html>

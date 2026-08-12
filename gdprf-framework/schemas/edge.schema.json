@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gdprf.dev/schemas/edge.schema.json",
+  "title": "GDPRF Knowledge Graph Edge",
+  "version": "2.0.0",
+  "description": "Amendment 5 \u2014 'governs' relationship type for consent/deployability constraints (Chowdhary et al. 2023).",
+  "type": "object",
+  "required": [
+    "edge_id",
+    "source_id",
+    "target_id",
+    "relationship_type",
+    "coupling_strength",
+    "evidence_weight",
+    "last_updated"
+  ],
+  "properties": {
+    "edge_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "source_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "proxy_id or claim_id"
+    },
+    "target_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "proxy_id or claim_id"
+    },
+    "relationship_type": {
+      "type": "string",
+      "enum": [
+        "causal",
+        "correlated",
+        "confounding",
+        "proxy_of",
+        "governs"
+      ],
+      "description": "'governs' = legal/ethical/consent constraint on the use of source as evidence for target; does not change evidential strength but constrains deployability"
+    },
+    "coupling_strength": {
+      "type": "number",
+      "minimum": -1.0,
+      "maximum": 1.0
+    },
+    "evidence_weight": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Must be a calibrated value (see proxy calibration); uncalibrated weights are flagged by the update engine"
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

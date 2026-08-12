@@ -1,0 +1,123 @@
+{
+  "investigation_id": "inv-camera-trap-001",
+  "instrument": "Camera trap array",
+  "domain": "ecology",
+  "measurand_decomposition": {
+    "measurand": "Population density of a terrestrial mammal species (individuals/km2)",
+    "indication": "Timestamped shutter-trigger events with images",
+    "bridge_model": "Random encounter model / spatial capture-recapture with estimated detection probability"
+  },
+  "transduction_chain": {
+    "chain_fidelity": 0.293,
+    "weakest_link": {
+      "name": "events->density",
+      "fidelity": 0.5,
+      "grade": "assumed"
+    },
+    "links": [
+      {
+        "name": "animal->trigger zone",
+        "fidelity": 0.7,
+        "grade": "estimated",
+        "aliases": [
+          "small/cold-bodied animals under-trigger; trails funnel movement"
+        ]
+      },
+      {
+        "name": "trigger->image",
+        "fidelity": 0.9,
+        "grade": "measured",
+        "aliases": [
+          "vegetation heat flicker triggers empty frames"
+        ]
+      },
+      {
+        "name": "image->species ID",
+        "fidelity": 0.93,
+        "grade": "estimated",
+        "aliases": [
+          "similar congeners confused at night"
+        ]
+      },
+      {
+        "name": "events->density",
+        "fidelity": 0.5,
+        "grade": "assumed",
+        "aliases": [
+          "1 animal x 10 passes \u2261 10 animals x 1 pass without individual ID"
+        ]
+      }
+    ]
+  },
+  "model_rung": "M2",
+  "traceability": {
+    "highest_break": "chain broken at working_standard (broken): no field standard for detection probability; estimated per-study",
+    "grade": "estimated"
+  },
+  "blindness_map": [
+    {
+      "kind": "alias_state",
+      "description": "Without individual recognition, passes and individuals are confounded",
+      "consequence": "density estimates scale with animal behavior, not just abundance"
+    },
+    {
+      "kind": "null_state",
+      "description": "Arboreal, fossorial, and trap-shy individuals generate no events",
+      "consequence": "presence/absence and density biased toward bold terrestrial animals"
+    },
+    {
+      "kind": "frame",
+      "description": "Traps placed on trails/access routes for practical reasons",
+      "consequence": "samples the funneled movement network, not the landscape"
+    }
+  ],
+  "validation": {
+    "forward_simulation": {
+      "injected": 5.0,
+      "recovered": 2.2691,
+      "recovery_error": 0.5462,
+      "passed": false,
+      "detail": {
+        "chain_fidelity": 0.293,
+        "model_bias": 0.8,
+        "noise": 0.4,
+        "note": "unmodelled fidelity loss+bias appears as systematic error"
+      }
+    }
+  },
+  "coverage": {
+    "aspects": [
+      {
+        "aspect": "trigger/imaging hardware",
+        "grade": "measured"
+      },
+      {
+        "aspect": "species classification",
+        "grade": "estimated"
+      },
+      {
+        "aspect": "detection probability",
+        "grade": "estimated"
+      },
+      {
+        "aspect": "animal movement parameters",
+        "grade": "assumed"
+      },
+      {
+        "aspect": "individual identifiability",
+        "grade": "assumed"
+      },
+      {
+        "aspect": "placement bias",
+        "grade": "estimated"
+      }
+    ],
+    "grounded_fraction": 0.417,
+    "weakest_aspects": [
+      "animal movement parameters",
+      "individual identifiability",
+      "species classification"
+    ],
+    "verdict": "mostly assumed \u2014 investigation incomplete"
+  }
+}
