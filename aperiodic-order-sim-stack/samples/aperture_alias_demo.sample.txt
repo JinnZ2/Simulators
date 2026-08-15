@@ -1,0 +1,97 @@
+
+APERTURE / ALIASING CONTROL FOR SIM-A
+N = 1000 points, k-grid dk = 0.39, 400 grid points, seed 20260815
+1D probes with analytically known spectra. See module docstring
+for what this does and does not establish.
+
+==========================================================================
+A1  can a grid of dk = 0.39 land on the Bragg peaks?
+==========================================================================
+  periodic probe, spacing 1.381 over length 1381
+  first Bragg peak at k = 4.5499, spaced 4.5499 apart
+  finite-sample peak width 2*pi/L = 0.0045
+  grid spacing dk = 0.39 is 86x the peak width
+
+  Bragg peaks in range : 34
+  landed on by the grid: 9
+  missed entirely      : 25
+
+  S(0) = N = 1000 by construction, for every point set that exists.
+  It is the one k that is always sampled and always maximal, and
+  it carries no information about order.
+
+  NOTE: 9 peak(s) are hit, because 4.5499 / 0.39 is near a
+  rational. Whether a coarse grid hits anything is a
+  commensurability accident between two numbers nobody chose
+  together — which is the failure mode, not an exception to it.
+  Sampled max here reaches 990 of a possible 1000.
+
+==========================================================================
+A2  a pure point spectrum has a floor BELOW the random one
+==========================================================================
+  probe                         mean S(k)      floor   expected
+  Fibonacci (quasiperiodic)          2.45       0.09   pure point
+  Poisson (random)                   1.03       0.99   S(k) -> 1
+
+  quasiperiodic floor / random floor = 0.09
+
+  The quasiperiodic floor sits FAR BELOW the random one. Between
+  its peaks a pure point spectrum has almost nothing, so a coarse
+  grid that misses the peaks reads a floor near zero — lower than
+  the uncorrelated value of 1, not higher.
+
+  SIM-A reports the opposite ordering:
+    Ammann-Beenker floor  2.08
+    cascade floor         0.96   (~1, the correct random asymptote)
+
+  The cascade number is right. The AB number is above the
+  uncorrelated floor, and no pure point spectrum produces that.
+  Whatever 2.08 measures, it is not the tiling's structure factor.
+
+==========================================================================
+READING
+==========================================================================
+
+  A1 CONFIRMED AS A MECHANISM, with its magnitude configuration-
+     dependent. In this run the grid misses 25 of 34 Bragg peaks. The 9
+     it lands on are a commensurability accident — the peak spacing
+     over the grid spacing happens to sit near 35/3. Move either number
+     slightly and the hit count goes to zero. On the Fibonacci probe,
+     the quasiperiodic one and the analogue of interest, exactly ONE of
+     400 grid samples lands on a strong peak.
+
+     So the honest version is narrower than "only k=0 survives": a
+     coarse grid loses most of a point spectrum, loses all of it under
+     small changes to numbers nobody chose together, and always keeps
+     k=0 — which every point set has and which says nothing about
+     order.
+
+  A2 CONFIRMED, and it is the stronger of the two because it does not
+     depend on guessing the grid spacing at all. The DIRECTION of the
+     floor comparison is fixed by what a pure point spectrum is. Here
+     the quasiperiodic floor is 0.09 against a random floor of 0.99,
+     an order of magnitude BELOW. SIM-A puts Ammann-Beenker at 2.08,
+     twice ABOVE the cascade's 0.96.
+
+  Together these say SIM-A's numbers are properties of the measurement,
+  not of the tilings: "68 peaks", the diffuse floor, and the tail
+  exponent alpha all describe the apparatus.
+
+  One caveat on the floor, stated because it would change the reading:
+  the plain MEAN of the same Fibonacci samples is 2.45, not 0.09,
+  because a single sampled peak dominates it. If SIM-A's 2.08 were a
+  mean rather than a top-excluded floor, a quasiperiodic set could
+  produce it. The figure panel is labelled "Diffuse Background (excl.
+  top 1%)", which is the definition used here, so the comparison stands
+  as read — but it rests on that label.
+
+  What this does NOT establish: that the drop's S(k) code has this
+  specific bug. The generators were not shipped. The one run that would
+  settle it is still the one the back-trace names — push the SIM-B
+  periodic lattice through the SIM-A code and see whether it, too,
+  returns only k=0.
+
+  It also does not revive the cascade side. S(k) -> 1 is the correct
+  asymptote for an uncorrelated point set, and 0.96 is what the cascade
+  returned.
+

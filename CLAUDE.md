@@ -1220,6 +1220,223 @@ underneath).
   blindness maps); same cascade-speed-blindness target as
   `climate-modeling/`; hysteresis shape shared with
   `sustained-activation-gate/`. CC0.
+- `aperiodic-order-sim-stack/` — A delivered results drop plus an audit
+  of it. The drop (`SIM_STACK_REPORT.txt` + eight PNGs, **no generator
+  code**) asks whether quasiperiodic tilings and branching cascades
+  share a geometry or only share not-being-periodic, and concludes from
+  three sims — SIM-B fractal dimension, SIM-A structure factor, SIM-C
+  band-edge splitting — that they are structurally distinct. Report and
+  figures are checked in **verbatim as delivered**; all audit content is
+  confined to `README.md`, `CLAIM_TABLE.md`, `figures/README.md`, and
+  `finite_n_control.py`. **Headline finding:** the drop shipped **two**
+  dimension estimators and they disagree on the SIGN of the headline
+  quantity — box counting gives `D_f(AB) − D_f(Cascade) = +0.334`
+  (plateau) / `+0.240` (global), the sandbox mass-radius method gives
+  `−0.247` / `−0.023` on the same five point sets. Only the
+  box-counting family appears in the report; `sim_b_sandbox*.png` were
+  shipped without being mentioned. There IS a good reason to prefer box
+  counting — the sandbox estimator returns **1.913** for the Line
+  control whose true `D_f` is exactly 1.000, an error larger than the
+  effect under study — but the report reaches that outcome by omission
+  rather than by checking the control, and states "Controls Validate
+  Method" of the estimator it published while silent on the one it did
+  not. **Second finding:** `finite_n_control.py` (stdlib only,
+  deterministic) runs the matched-N control the drop skipped — the
+  decisive gap is measured across a 12× sample-size drop (AB 12,000 pts
+  vs Cascade 1,024) while the 0.021 baseline that licenses it is
+  matched-N. Probes with known, N-independent dimensions move up to
+  0.137 under that sample-size drop, and box-ladder commensurability
+  moves a known fractal a further 0.115 at fixed N (Cantor dust, base-2
+  ladder 1.304 vs base-3 1.189 against a true 1.2619) — an artifact
+  budget of **0.252 against a reported 0.334, ~75% of it**. Budget is an
+  UPPER bound, residual 0.082 a LOWER bound on structure, still 4× the
+  0.021 baseline: **direction survives, magnitude does not**.
+  **Third:** SIM-C's own section reports a null ("does not show a sharp
+  threshold") and the OVERALL CONCLUSION enters it as positive evidence
+  of "different threshold behavior" with no positive control — the
+  `null-harness/` `CONSTANT_SILENT` failure exactly. **Fourth:** the
+  `S(k)` figure shows one forward-scattering spike at the origin on a
+  linear color scale, not the eight-fold Bragg star the text claims;
+  what the figure does support is AB oscillating out to |k| ≈ 20 vs
+  Cascade flat at ≈ 1. Eight claims (`AOS_001..008`) under a
+  REFUTATION_PROTOCOL whose falsifiers are all *new* runs, since the
+  generators were not shipped; `AOS_007` is `UNVERIFIED` (a gap, not a
+  defect) and `AOS_008` records that the drop's substantive direction is
+  probably right — the objection is to evidence strength and to the
+  omission, not to the conclusion. Closest siblings: `null-harness/`
+  (same never-fires invariant), `model-ecology/confound_sweep.py` (fit
+  window as the largest invisible confound, reproduced here on a
+  different substrate), `instrument-epistemology/` (the estimator is the
+  instrument). CC0.
+- `reasoning-gate/` — Fail-closed gate sitting between a simulation and
+  its conclusions, and the direct follow-up to
+  `aperiodic-order-sim-stack/`. Default is DENY: a sim that does not
+  declare gets no output, an untagged quantity is not recorded, a ratio
+  across unlike objects is void, a claim without named support does not
+  enter the conclusion. Checks nothing about arithmetic — every failure
+  it catches is one a correct program produces happily. Landed across
+  two drops; **six delivered files are verbatim as received** (`gate.py`,
+  `guards.json`, `make_docs.py`, `GUARDS.md`, `replay_sim_stack.py`,
+  `README.md`), with all added analysis confined to `AUDIT_NOTES.md`,
+  `retro_sim_stack.py`, `tests/`, and `samples/`. `guards.json` is the
+  single source of truth and `GUARDS.md` is generated from it by
+  `make_docs.py` — regenerates byte-identically, asserted by a test.
+  Three layers (`generator` = property of the code that produced the
+  data / `physical` = property of the modelled system, defensible
+  outside the script / `instrument` = property of the measuring
+  apparatus). Eight guards across three stages: PRE — `G-RES`
+  (instrument × margin ≤ feature), `G-CTRL` (controls named with
+  predicted values, "sized by fragility, not by expected surprise"),
+  `G-PRE` (expected output written before execution); MID — `G-LAYER`
+  (tag every quantity + name its object; no promotion without an
+  explicit step); POST — `G-DIM` (a ratio needs both operands to be
+  properties of ONE object), `G-SUP` (a claim names its supporting
+  quantities), `G-FIT` (the statistic must discriminate; one blind by
+  construction must be flagged), `G-IND` (convergence requires naming
+  what the lines share). Pre-stage guards always deny; `strict=False`
+  downgrades post-stage to findings. Two distinctions the design gets
+  right: **G-DIM voids ratios, not comparisons**, and **G-IND does not
+  forbid convergence claims** — it requires the shared input named,
+  downgrading "independent" to "qualified". The delivered README is
+  explicit that this is **n=1** — "a marker, not a position", one shape
+  back-traced from a single paired sample — and invites reports of where
+  it breaks; `AUDIT_NOTES.md` is the answer to that invitation.
+  **Two replays that disagree.** `replay_sim_stack.py` (delivered)
+  replays the audited stack with SIM-B sound: it PASSES, SIM-A is denied
+  at `pre()` on G-RES, SIM-C runs but voids its ratio and loses its
+  claim. `retro_sim_stack.py` (added) replays the same three mapping
+  gate verdicts onto the audit's four findings, every input sourced
+  `[R]`/`[F]`/`[C]`/`[G]` — and **DENIES SIM-B**. Same guard, same sim,
+  opposite verdicts, because replay declares the box-count's *geometric*
+  resolution (smallest box 0.05 vs mean NN spacing 0.20 → passes) and
+  retro declares its *statistical* one (artifact floor 0.252 vs
+  separation 0.334 → denies at the 2.0 margin). **`AUDIT_NOTES.md` §1:
+  G-RES is only as strong as the pair declared, and nothing makes the
+  binding pair the declared one** — not a bug, a limit on what the guard
+  can promise. Related: the replay's declared error bar
+  (`cluster_spread` 0.075, spread across three sets all at ~12,000 pts)
+  excludes the 12× sample-size drop that `finite_n_control.py` measures
+  at up to 0.137 on its own. **§2, the sharpest gap, visible in the
+  delivered replay's own output:** `Df_cascade` is correctly tagged
+  `generator` ("set by E_split, E_min, branch rule - not a tungsten
+  property"), `summary()` prints `generator-level (no physical claim
+  permitted): Df_cascade`, and the claim resting on it is recorded
+  `[supported]` with `findings` EMPTY. G-LAYER guards the *tagging* of
+  quantities, nothing guards their *use*; `claim()` computes
+  `support_layers` and never inspects it. Substantively this is a
+  sharper version of the audit's Finding 2 — by the replay's own
+  tagging, "the two sets do not share a fractal dimension" compares a
+  physical property of the AB tiling against a parameter of the cascade
+  generator, i.e. a tiling against a piece of code. **§3:**
+  `guards.json` labels `G-FIT` `"stage": "post"` so `GUARDS.md` renders
+  it under POST, but `gate.py` enforces it inside `pre()` — a one-word
+  fix in the JSON, since the doc is generated. **§4, four defects in
+  `gate.py`** (locked into `tests/ShippedDefects` asserting current
+  behaviour so a repair turns a test red): D1 the module docstring's
+  usage example denies at `pre()` (now clearly deliberate — the replay
+  uses the same two numbers for SIM-A — but unlabelled under "Usage");
+  D2 `promote()`/`ratio()` silently overwrite where `record()` refuses
+  to; D3 strict `close()` raises before writing the report and leaves
+  the gate open, so a retry with a placeholder `control_result` yields a
+  report whose controls block says `run: True` while a finding below
+  says otherwise; D4 a registry missing a `fail_message` loads fine and
+  raises `KeyError` instead of `GateError` when that guard fires — fails
+  open at load, hard-crashes at denial. **SIM-A survives both
+  declarations**: k-grid 0.39 vs finite-sample peak width 2π/L = 0.063,
+  6.2× too coarse — the peaks fall between sample points, so SIM-A could
+  not have resolved Bragg peaks whether or not they were there and its
+  null carries no information about quasiperiodic order. 46 tests green.
+  Siblings: `null-harness/` (G-CTRL is its invariant as a precondition
+  rather than a measurement), `instrument-epistemology/` (G-RES/G-LAYER
+  as the M0-M3 ladder made enforceable), `grounding-layers/` (same
+  refuse-to-score-out-of-scope stance, one level down),
+  `divergence-playground/` (G-IND is `agree_by_accident` as a
+  precondition). Stdlib only, phone-buildable, CC0.
+  **Third drop** lands `mine_logs.py` (guard hit rates + never-fired
+  guards + "divergences with no guard attached" over a `gate_*.json`
+  dir), `explore.py` (21 unranked widening probes across
+  instrument/statistic/physical/disposition; "outputs candidates, ranks
+  nothing, refuses to converge"), and `SIM_STACK_BACKTRACE.md` — the
+  origin document named in `guards.json`'s `origin` field, with per-sim
+  verdicts, six candidate PATTERNs, a confidence readout, and the n=1
+  caveat. **AUDIT_NOTES §7-9 responds.** §7: the back-trace's SIM-A
+  diagnosis is checked by a new
+  `aperiodic-order-sim-stack/aperture_alias_demo.py` (stdlib, 1D probes
+  with analytically known spectra) and **both halves hold**. The strong
+  half is the floor tell — a quasiperiodic set has a PURE POINT spectrum
+  so its between-peak floor sits BELOW the uncorrelated value; a
+  Fibonacci chain (1D analogue of Ammann-Beenker) returns floor **0.09**
+  against Poisson **0.99**, while SIM-A reports AB at 2.08 and cascade
+  at 0.96 — inverted, and independent of any guess about grid spacing.
+  The aliasing half is confirmed as a mechanism but
+  configuration-dependent: a grid 86× the peak width misses 25 of 34
+  Bragg peaks, the 9 hits being a 35/3 commensurability accident, and on
+  the Fibonacci probe exactly 1 of 400 samples lands on a peak. **This
+  corrected an error in the repo's own earlier audit** — the first pass
+  conceded AB's |k| ≈ 20 oscillations were real structure when the
+  refuting number (floor 2.08 vs 0.96) was already in the same
+  paragraph; `AOS_006` revised, `AOS_007` upgraded UNVERIFIED →
+  SUPPORTED. Caveat kept: the Fibonacci plain MEAN is 2.45, so if 2.08
+  were a mean rather than a top-excluded floor a real quasicrystal could
+  produce it — the comparison rests on the panel's "excl. top 1%" label.
+  §8: the back-trace catches what the first audit missed on SIM-B — the
+  report's "15× baseline" uses `|AB−Poisson| = 0.021`, the **smallest**
+  of three pairwise gaps in the space-filling cluster, when the cluster
+  spread is 0.075; honest ratio **0.334/0.075 ≈ 4.5×**, still decisive,
+  not 15×. Converges with `finite_n_control.py` from the opposite
+  direction (0.252 artifact budget → 0.082 residual): two routes, an
+  effective error bar near 0.08. Recorded as `AOS_009`; `AOS_010` adds
+  that no cascade number in the stack supports a statement about
+  tungsten. §9: **two defects in the new tools.** `mine_logs.py` tests
+  `expected != observed` on free-text strings, which are never equal, so
+  its "growth edge" section flags every guard-free run — on the
+  delivered corpus it flags SIM-B, the one sound sim. Deeper:
+  **`mine_logs.py` is blind to denials** — a pre-stage deny raises
+  before `close()` and writes no log, so G-RES reports `NEVER FIRED`
+  *because it worked*; an operator pruning never-fired guards would
+  delete the most effective ones first. Fix is on the gate side (write
+  `gate_<SIM>.denied.json` before raising), which would also close D3's
+  lost forensic record — one change, two defects. `explore.py` reads
+  `sim` as `None` on a real gate report, since `sim_id` is top-level
+  and `__main__` passes only `declaration`.
+  **Fourth pass: all reported defects fixed.** `gate.py`, `guards.json`,
+  `make_docs.py`, `mine_logs.py`, `explore.py` and both replays are now
+  repaired rather than verbatim; `SIM_STACK_BACKTRACE.md` is untouched.
+  Each defect keeps a test that asserted the broken behaviour first and
+  asserts the fix now, so a regression turns it red. **D1** docstring
+  Usage example now declares a resolution that passes, with the SIM-A
+  numbers moved to a labelled `DENIAL EXAMPLE`. **D2** `promote()` and
+  `ratio()` deny on name collision like `record()` does; the prior value
+  survives. **D3** the gate now closes BEFORE denying, killing the
+  retry-with-placeholder bypass entirely (a caller that catches the
+  denial cannot call `control_result()` or `close()` again), and every
+  denial at any stage writes `gate_<SIM>.denied.json` carrying the
+  denying guard, detail, declaration and quantities-so-far;
+  `control_result()` refuses an empty observation. **D4** the registry
+  loader rejects any guard with a missing or blank `fail_message`,
+  naming the offenders — fail-closed at load instead of `KeyError` at
+  denial. **§2, the sharpest one:** `claim()` gained a `scope`
+  (`physical` default, `generator` escape hatch); a physical-scope claim
+  resting on generator-level support is recorded **`qualified`** with a
+  `layer_note` naming the offending quantities plus a G-LAYER finding —
+  downgraded, not refused, the same shape G-IND already uses. SIM-B
+  still passes but its claim now reads `[qualified] ... ^ physical scope
+  claim resting on generator-level support: Df_cascade`, so the summary
+  no longer prints "no physical claim permitted" directly above a
+  supported physical claim resting on one. **§3:** `G-FIT` stage
+  corrected `post` → `pre`; `G-CTRL` is now `["pre","post"]` and
+  `make_docs.py` accepts a string or list, rendering multi-stage guards
+  under each stage with an "Also fires at:" line. **§9:** divergence is
+  now `close(diverged=True|False|None)` — the author's explicit call,
+  never inferred from two prose strings, so `mine_logs.py` stops
+  flagging every sound run; it reports the real growth edge
+  (`diverged=True`, no guard fired), lists unassessed runs separately,
+  reads denial records, and shows findings vs denials in separate
+  columns — G-RES now reads `1 denial` where it used to read `NEVER
+  FIRED because it worked`. `explore.py` finds `sim_id` in a report or a
+  bare declaration. Section 1 (G-RES is only as strong as the declared
+  pair) was NOT "fixed" — it is a limit on what the guard can promise,
+  not a defect. 66 tests green. Stdlib only, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

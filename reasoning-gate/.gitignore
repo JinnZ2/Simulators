@@ -1,0 +1,5 @@
+# runtime state -- gate reports and explore output from local runs
+runs/
+gate_*.json
+explore_*.json
+__pycache__/

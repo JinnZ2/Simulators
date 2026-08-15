@@ -1,0 +1,160 @@
+==========================================================================
+THE GATE, RUN BACKWARDS OVER A DROP THAT ALREADY SHIPPED
+==========================================================================
+Subject: ../aperiodic-order-sim-stack/
+Sources: [R] report  [F] figure  [C] measured control  [G] gate.py
+
+==========================================================================
+SIM-A  structure factor
+==========================================================================
+  DENIED at pre(). the sim never runs.
+
+  [G-RES] resolution not declared or instrument coarser than feature: output is not admissible | k-grid vs Bragg peak width: instrument 0.39 x margin 2 > feature 0.063
+
+  The k-grid is 6.2x coarser than the peaks it must resolve.
+  At the gate's default 2x margin that is a 12.4x shortfall.
+  A run in this configuration cannot see Bragg peaks whether
+  or not they are there, so its null carries no information.
+
+  This is the audit's Finding 4 — 'no Bragg star visible in
+  the S(k) figure' — arriving before the figure exists, as an
+  arithmetic check on two declared numbers.
+
+==========================================================================
+SIM-B  fractal dimension  (the decisive sim)
+==========================================================================
+  DENIED at pre().
+
+  [G-RES] resolution not declared or instrument coarser than feature: output is not admissible | estimator artifact floor vs separation: instrument 0.252 x margin 2 > feature 0.334
+
+  Artifact floor 0.252, separation 0.334. The floor alone does
+  not swallow the effect — but the gate's default 2x margin
+  requires 0.504, and the effect is 0.334.
+
+  Read this as the gate's policy dial rather than a verdict:
+  at margin 1.0 the declaration passes, narrowly. That is the
+  audit's Finding 2 restated — direction survives, magnitude
+  does not — as a margin the operator has to choose out loud
+  instead of a precision quietly implied by three decimals.
+
+  Rerunning below at margin 1.0 to reach the post-stage guards.
+
+GATE SIM-B-margin1
+  expected : if the classes are distinct, |D_f(AB) - D_f(cascade)| exceeds the estimator's artifact floor
+  observed : two estimators shipped. box-count separates by +0.334, sandbox by -0.023 with the sign reversed. the sandbox estimator fails the Line control at 1.913.
+  diverged : YES
+  control  : Line, true D_f = 1           run
+  control  : matched-N Poisson at 1,024 pts NOT RUN
+  resolve  : estimator artifact floor vs separation ok
+  claim    : [supported] the quasiperiodic and cascade dimensions do not coincide
+  claim    : [unsupported] the two classes do not share a common fractal geometry
+  finding  : [G-SUP] claim has no named support
+             ^ the two classes do not share a common fractal geometry
+  finding  : [G-CTRL] no controls declared: a confirming result cannot be distinguished from an artifact
+             ^ declared but never run: matched-N Poisson at 1,024 pts
+
+  The gate cannot know the sandbox numbers exist unless they are
+  recorded, and it cannot stop an author from omitting them. What
+  it does force is the shape of the record: the Line control has
+  one slot, both results go in it, and the disagreement is in the
+  report next to the claim that rests on it. Finding 1 becomes a
+  line item rather than something to notice in an unreferenced
+  figure.
+
+  G-CTRL flags the matched-N Poisson run as declared-never-run.
+  G-SUP marks the geometry claim unsupported: it names nothing.
+
+==========================================================================
+SIM-C  threshold sweep
+==========================================================================
+
+  g.ratio(...) returned None
+
+GATE SIM-C
+  expected : if the two correspond, the knee sits at the cascade's own branching fraction
+  observed : no sharp threshold found. splitting grows gradually. curvature has comparable peaks at f = 0.45 / 0.55 / 0.65 / 0.70 / 0.80 / 0.90 and the winner lands on a local minimum of the curve it is meant to find the knee of.
+  diverged : YES
+  control  : threshold inserted at a known f NOT RUN
+  resolve  : f-grid vs knee width         ok
+  VOID     : ratio_54x (tight-binding lattice model vs cascade set)
+  claim    : [unsupported] the two systems show different threshold behavior
+  finding  : [G-DIM] ratio operands are properties of different objects: void, no interpretation permitted
+             ^ ratio_54x: 'knee_splitting' is a property of 'tight-binding lattice model', 'cascade_E_split' is a property of 'cascade set'
+  finding  : [G-SUP] claim has no named support
+             ^ the two systems show different threshold behavior
+  finding  : [G-CTRL] no controls declared: a confirming result cannot be distinguished from an artifact
+             ^ declared but never run: threshold inserted at a known f
+
+  G-DIM voids the 54.1. Both operands are real, both are
+  dimensionless, the division runs without error — and the
+  quotient is a property of the lattice model over a property of
+  the cascade set, which denotes nothing. The report reaches the
+  same place in words: 'the two systems operate on very different
+  normalized energy scales.' The gate reaches it as a void.
+
+  G-CTRL: the positive control was declared and never run, so the
+  null cannot be entered as evidence. That is Finding 3, caught
+  structurally rather than by noticing a null promoted to a
+  positive three sections later.
+
+  G-SUP: the threshold claim names no quantity. Recorded
+  unsupported.
+
+==========================================================================
+SIM-STACK  the overall conclusion
+==========================================================================
+
+GATE SIM-STACK
+  expected : if the lines are independent, agreement multiplies confidence
+  observed : the three lines are not independent. SIM-A and SIM-B are two statistics on one pair of point sets, and SIM-C's contribution is a null.
+  diverged : YES
+  control  : independence check           run
+  resolve  : matched-N baseline vs claimed separation ok
+  claim    : [qualified] convergence across SIM-A, SIM-B, SIM-C
+
+  G-IND does not forbid the convergence claim. It requires the
+  shared input to be named, which downgrades 'three independent
+  simulations converge' to a qualified claim about two statistics
+  over one pair of point sets. The report's word is 'independent'.
+  Nothing in the drop establishes that.
+
+==========================================================================
+WHAT THE GATE WOULD HAVE CAUGHT
+==========================================================================
+
+  Finding 1  two estimators, opposite signs, one reported
+             PARTIAL — G-CTRL gives the Line control one slot that both
+             results must go into, so the disagreement lands next to the
+             claim. The gate cannot compel an author to record a run.
+
+  Finding 2  decisive gap ~75% inside the artifact budget
+             CAUGHT at pre() — G-RES, as a comparison of two declared
+             numbers, before any point set is generated. But see
+             AUDIT_NOTES.md section 1: replay_sim_stack.py declares
+             SIM-B's resolution as smallest-box vs nearest-neighbour
+             spacing and PASSES. Same guard, same sim, opposite
+             verdicts. G-RES is only as strong as the pair declared,
+             and nothing makes the binding pair the declared one.
+
+  Finding 3  SIM-C's null entered as positive evidence
+             CAUGHT twice — G-CTRL on the unrun positive control, G-SUP
+             on the claim that names nothing.
+
+  Finding 4  no Bragg peaks in the S(k) figure
+             CAUGHT at pre() — G-RES. The k-grid is 6.2x coarser than the
+             peak width. SIM-A never runs.
+
+  Not in the audit, surfaced here:
+             G-DIM voids the ratio 54.1. Two real numbers, a clean
+             division, and a quotient that is a property of one object
+             over a property of another.
+
+             G-IND downgrades 'three independent simulations converge'.
+             Two of the three are statistics on the same pair of point
+             sets.
+
+  Two of the four audit findings are pre-stage arithmetic. They cost two
+  declared numbers each and would have landed before the first figure was
+  rendered. The audit cost four figures read against a report and a
+  control rerun from scratch.
+

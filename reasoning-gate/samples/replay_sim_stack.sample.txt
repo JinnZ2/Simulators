@@ -1,0 +1,38 @@
+==============================================================
+GATE SIM-B
+  expected : AB near 2 (space-filling), cascade below 2 (clustered)
+  observed : AB 1.889 / cascade 1.555, controls on target
+  diverged : no
+  control  : poisson                      run
+  control  : periodic lattice             run
+  control  : line                         run
+  resolve  : smallest box vs mean nearest-neighbour spacing ok
+  generator-level (no physical claim permitted): Df_cascade
+  claim    : [qualified] the two sets do not share a fractal dimension
+             ^ physical scope claim resting on generator-level support: Df_cascade
+  finding  : [G-LAYER] untagged quantity: cannot be recorded
+             ^ the two sets do not share a fractal dimension | physical scope claim resting on generator-level support: Df_cascade
+-> SIM-B PASSES
+
+==============================================================
+SIM-A DENIED AT PRE:
+  [G-RES] resolution not declared or instrument coarser than feature: output is not admissible | k-grid spacing vs Bragg peak width: instrument 0.39 x margin 2 > feature 0.063
+-> never executes. the ringing spectrum is never produced.
+
+==============================================================
+GATE SIM-C
+  expected : a knee, or no knee
+  observed : knee at f=0.65, splitting 0.0812
+  diverged : YES
+  control  : f=0 periodic limit           run
+  resolve  : finite-size level spacing vs splitting ok
+  generator-level (no physical claim permitted): cascade_E_split
+  VOID     : knee_over_Esplit (16x16 tight-binding model vs branching_walk output)
+  claim    : [unsupported] the two systems operate on different normalized energy scales
+  finding  : [G-DIM] ratio operands are properties of different objects: void, no interpretation permitted
+             ^ knee_over_Esplit: 'knee_splitting' is a property of '16x16 tight-binding model', 'cascade_E_split' is a property of 'branching_walk output'
+  finding  : [G-SUP] claim has no named support
+             ^ the two systems operate on different normalized energy scales | not recorded: knee_over_Esplit
+  finding  : [G-IND] convergence asserted across measurements with shared inputs
+             ^ convergence across SIM-A, SIM-B, SIM-C with nothing named as shared
+-> SIM-C runs but its ratio is void and its claim unsupported.
