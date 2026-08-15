@@ -1,0 +1,92 @@
+
+================================================================================
+SIM STACK — MASTER REPORT
+================================================================================
+Date: 2026-08-15
+Protocol: Run B → if dimensions separate, skip A and C
+Decision: Dimensions DO separate (|D_f diff| = 0.334). A and C run as 
+          exploratory checks only.
+
+================================================================================
+SIM-B: BRANCHING / FRACTAL DIMENSION (DECISIVE)
+================================================================================
+
+Box-Counting Dimension Results:
+  Ammann-Beenker (quasiperiodic):  D_f = 1.889  (r²=0.9994)
+  Cascade (branching walk):        D_f = 1.555  (r²=0.9972)
+  Poisson (random):                D_f = 1.911  (r²=0.9990)
+  Lattice (periodic):              D_f = 1.964  (r²=0.9999)
+  Line (1D control):               D_f = 1.000  (r²=1.0000)
+
+Key Distance:
+  |D_f(AB) − D_f(Cascade)| = 0.334
+  This is ~15× larger than the AB–Poisson finite-size baseline (0.021).
+
+Controls Validate Method:
+  • Line hits 1.000 exactly
+  • Poisson and Lattice both land near 2
+  • Ammann-Beenker sits with the 2D controls
+  • Cascade sits alone at 1.555
+
+VERDICT: The quasiperiodic and cascade dimensions do NOT coincide.
+         The axis narrows to: "Both break periodicity-assuming models,
+         but they do not share a common fractal geometry."
+
+================================================================================
+SIM-A: STRUCTURE FACTOR S(k) (EXPLORATORY)
+================================================================================
+
+  Peak sparsity:     AB = 68 peaks,  Cascade = 14 peaks
+  Diffuse floor:     AB = 2.08,      Cascade = 0.96
+  Peak/floor ratio:  AB = 5537,      Cascade = 190
+
+  Scaling exponent (tail, S(k) ~ k^α):
+    Ammann-Beenker:  α = −1.529
+    Cascade:         α = −0.069
+    Difference:      |α_AB − α_C| = 1.460
+
+  Interpretation: AB shows sharp Bragg peaks (quasi-crystalline order)
+                  with strong diffuse background. Cascade shows nearly
+                  flat, diffuse scattering with no sharp structure.
+                  The scaling exponents are completely different.
+
+================================================================================
+SIM-C: THRESHOLD SWEEP (EXPLORATORY)
+================================================================================
+
+  Model: 2D tight-binding on 16×16 grid, periodic BC
+  Sweep: aperiodicity fraction f = 0 → 1
+
+  Knee detected at f = 0.65
+  Splitting at knee = 0.0812 (normalized to t₀ = 1)
+
+  Cascade comparison:
+    Knee splitting / t₀      = 0.0812
+    Cascade E_split / E₀     = 0.0015
+    Ratio                    = 54.1
+
+  Interpretation: No direct correspondence between the knee location
+                  and the cascade branching threshold. The band-edge
+                  splitting grows gradually with disorder and does not
+                  show a sharp threshold. The two systems operate on
+                  very different normalized energy scales.
+
+================================================================================
+OVERALL CONCLUSION
+================================================================================
+
+The three independent simulations (B, A, C) converge on the same 
+conclusion: quasiperiodic tilings and branching cascades are 
+structurally distinct classes of aperiodic order.
+
+  • SIM-B (fractal dimension): Different dimensions → different 
+    scaling of spatial coverage.
+  • SIM-A (structure factor): Different peak structure → different 
+    Fourier-space order (Bragg vs diffuse).
+  • SIM-C (band-edge splitting): Different threshold behavior → 
+    different response to symmetry breaking.
+
+They share only one property: both violate periodicity. They do not
+share geometry, scaling, or spectral signatures.
+
+================================================================================

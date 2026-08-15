@@ -44,6 +44,7 @@ underneath. Read those before running the corresponding script.
 | `substrate-emergence/` | material substrate profile | architecture-the-ground-wants |
 | `neural-augmentation-audit/` | proposed augmentation channels | cost-accounting scaffold with `[E]`/`[I]`/`[S]` confidence |
 | `incentive-blindspot-sim/` | institutional incentive structure | coupled-state model + four falsifiable claims under REFUTATION_PROTOCOL |
+| `aperiodic-order-sim-stack/` | a delivered results drop (report + figures) | audit of it: estimator-disagreement finding, matched-N control, eight `AOS_*` claims |
 | `tools/` | shared utilities | validators, substitution toolkits |
 
 See [`SYNTHESIS.md`](SYNTHESIS.md) for the cross-folder reading and

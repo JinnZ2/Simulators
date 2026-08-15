@@ -1220,6 +1220,54 @@ underneath).
   blindness maps); same cascade-speed-blindness target as
   `climate-modeling/`; hysteresis shape shared with
   `sustained-activation-gate/`. CC0.
+- `aperiodic-order-sim-stack/` — A delivered results drop plus an audit
+  of it. The drop (`SIM_STACK_REPORT.txt` + eight PNGs, **no generator
+  code**) asks whether quasiperiodic tilings and branching cascades
+  share a geometry or only share not-being-periodic, and concludes from
+  three sims — SIM-B fractal dimension, SIM-A structure factor, SIM-C
+  band-edge splitting — that they are structurally distinct. Report and
+  figures are checked in **verbatim as delivered**; all audit content is
+  confined to `README.md`, `CLAIM_TABLE.md`, `figures/README.md`, and
+  `finite_n_control.py`. **Headline finding:** the drop shipped **two**
+  dimension estimators and they disagree on the SIGN of the headline
+  quantity — box counting gives `D_f(AB) − D_f(Cascade) = +0.334`
+  (plateau) / `+0.240` (global), the sandbox mass-radius method gives
+  `−0.247` / `−0.023` on the same five point sets. Only the
+  box-counting family appears in the report; `sim_b_sandbox*.png` were
+  shipped without being mentioned. There IS a good reason to prefer box
+  counting — the sandbox estimator returns **1.913** for the Line
+  control whose true `D_f` is exactly 1.000, an error larger than the
+  effect under study — but the report reaches that outcome by omission
+  rather than by checking the control, and states "Controls Validate
+  Method" of the estimator it published while silent on the one it did
+  not. **Second finding:** `finite_n_control.py` (stdlib only,
+  deterministic) runs the matched-N control the drop skipped — the
+  decisive gap is measured across a 12× sample-size drop (AB 12,000 pts
+  vs Cascade 1,024) while the 0.021 baseline that licenses it is
+  matched-N. Probes with known, N-independent dimensions move up to
+  0.137 under that sample-size drop, and box-ladder commensurability
+  moves a known fractal a further 0.115 at fixed N (Cantor dust, base-2
+  ladder 1.304 vs base-3 1.189 against a true 1.2619) — an artifact
+  budget of **0.252 against a reported 0.334, ~75% of it**. Budget is an
+  UPPER bound, residual 0.082 a LOWER bound on structure, still 4× the
+  0.021 baseline: **direction survives, magnitude does not**.
+  **Third:** SIM-C's own section reports a null ("does not show a sharp
+  threshold") and the OVERALL CONCLUSION enters it as positive evidence
+  of "different threshold behavior" with no positive control — the
+  `null-harness/` `CONSTANT_SILENT` failure exactly. **Fourth:** the
+  `S(k)` figure shows one forward-scattering spike at the origin on a
+  linear color scale, not the eight-fold Bragg star the text claims;
+  what the figure does support is AB oscillating out to |k| ≈ 20 vs
+  Cascade flat at ≈ 1. Eight claims (`AOS_001..008`) under a
+  REFUTATION_PROTOCOL whose falsifiers are all *new* runs, since the
+  generators were not shipped; `AOS_007` is `UNVERIFIED` (a gap, not a
+  defect) and `AOS_008` records that the drop's substantive direction is
+  probably right — the objection is to evidence strength and to the
+  omission, not to the conclusion. Closest siblings: `null-harness/`
+  (same never-fires invariant), `model-ecology/confound_sweep.py` (fit
+  window as the largest invisible confound, reproduced here on a
+  different substrate), `instrument-epistemology/` (the estimator is the
+  instrument). CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

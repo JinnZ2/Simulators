@@ -1,0 +1,63 @@
+==========================================================================
+FINITE-N CONTROL FOR SIM-B
+==========================================================================
+How much D_f does the estimator move between 12,000 and 1,024
+points, on sets whose true dimension does not depend on N?
+
+Poisson (space-filling)   true D_f = 2.0000   ladder = base 2
+  N = 12,000   D_f = 1.936   r2 = 0.9997   6 live scales
+  N =  1,024   D_f = 1.799   r2 = 0.9969   5 live scales
+  finite-N shift (dense - sparse) = +0.137
+
+Line (1D sanity check)   true D_f = 1.0000   ladder = base 2
+  N = 12,000   D_f = 0.951   r2 = 0.9990   13 live scales
+  N =  1,024   D_f = 0.901   r2 = 0.9977   10 live scales
+  finite-N shift (dense - sparse) = +0.050
+
+Cantor dust   true D_f = 1.2619   ladder = base 2
+  N = 12,000   D_f = 1.304   r2 = 0.9942   9 live scales
+  N =  1,024   D_f = 1.326   r2 = 0.9952   6 live scales
+  finite-N shift (dense - sparse) = -0.021
+
+Cantor dust   true D_f = 1.2619   ladder = base 3
+  N = 12,000   D_f = 1.189   r2 = 0.9993   6 live scales
+  N =  1,024   D_f = 1.144   r2 = 0.9948   5 live scales
+  finite-N shift (dense - sparse) = +0.045
+
+==========================================================================
+READING
+==========================================================================
+  SIM-B reported  |D_f(AB) - D_f(Cascade)|  = 0.334
+  SIM-B baseline  |D_f(AB) - D_f(Poisson)|  = 0.021   (matched-N)
+
+  Artifact 1 — unmatched sample size. Largest shift across the
+  three known-truth probes when N drops 12x: 0.137
+    Poisson +0.137   Line +0.050   dust(base2) -0.021   dust(base3) +0.045
+
+  Artifact 2 — box-ladder commensurability. The same 12,000-point
+  Cantor dust, same estimator, only the ladder ratio changed:
+    base 2 (incommensurate) D_f = 1.304   error +0.042
+    base 3 (commensurate)   D_f = 1.189   error -0.073
+    ladder shift = 0.115
+
+  Combined artifact budget: 0.252 against a reported
+  separation of 0.334 — roughly 75% of it.
+
+  Read the budget as an UPPER bound, not an expected error: it adds
+  the worst observed shift from each artifact, and the two need not
+  align in sign on any real point set. The residual below is
+  correspondingly a LOWER bound on how much is structure.
+
+  A residual of 0.082 survives the budget,
+  still well above the 0.021 matched-N baseline.
+  SIM-B's DIRECTION survives: the Cascade does read lower, and
+  not only because it is sparser. Its MAGNITUDE does not — the
+  0.334 figure is quoted to a precision the method does not
+  support, and 'decisive' is doing more work than it has earned.
+
+  What would settle it: rerun SIM-B with Ammann-Beenker subsampled
+  to 1,024 points, and with a Poisson control also at 1,024 in the
+  Cascade's own bounding box. Both are cheap. Neither was run.
+
+  This control cannot recover the true Cascade dimension, and does
+  not claim to. It sizes the artifact, nothing more.
