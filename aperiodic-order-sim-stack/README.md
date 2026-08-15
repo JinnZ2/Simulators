@@ -236,6 +236,15 @@ to run. Output is pinned at
 - [`instrument-epistemology/`](../instrument-epistemology/) — the
   estimator is the instrument here. The sandbox method's Line failure is
   a blindness map entry, not a rounding error.
+- [`reasoning-gate/`](../reasoning-gate/) — the follow-up.
+  `retro_sim_stack.py` runs a fail-closed declaration gate backwards over
+  this drop. Findings 2 and 4 turn out to be pre-stage arithmetic on two
+  declared numbers each, catchable before any figure is rendered; Finding
+  3 trips two guards. It also voids SIM-C's ratio of 54.1 — a property of
+  the lattice model divided by a property of the cascade set — and
+  downgrades "three independent simulations converge," since SIM-A and
+  SIM-B are two statistics on the same pair of point sets. Neither is in
+  the findings above.
 
 ## Provenance and license
 

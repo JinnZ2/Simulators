@@ -1268,6 +1268,61 @@ underneath).
   window as the largest invisible confound, reproduced here on a
   different substrate), `instrument-epistemology/` (the estimator is the
   instrument). CC0.
+- `reasoning-gate/` — Fail-closed gate sitting between a simulation and
+  its conclusions, and the direct follow-up to
+  `aperiodic-order-sim-stack/`. Default is DENY: a sim that does not
+  declare gets no output, an untagged quantity is not recorded, a ratio
+  across unlike objects is void, a claim without named support does not
+  enter the conclusion. Checks nothing about arithmetic — every failure
+  it catches is one a correct program produces happily. Eight guards:
+  `G-PRE` (declare question/statistic/expectation before executing),
+  `G-FIT` (the statistic must discriminate), `G-RES` (instrument ×
+  margin ≤ feature), `G-CTRL` (controls named with predicted values and
+  results recorded), `G-LAYER` (tag every quantity `generator` /
+  `physical` / `instrument` + name its object; crossing layers needs
+  justification), `G-DIM` (a ratio needs both operands to be properties
+  of ONE object), `G-SUP` (a claim names its supporting quantities),
+  `G-IND` (convergence requires naming what the lines share). Pre-stage
+  guards always deny; `strict=False` downgrades post-stage to findings.
+  Two distinctions the design gets right: **G-DIM voids ratios, not
+  comparisons** (one statistic across two objects is what a comparative
+  sim is for; dividing a property of one by a property of the other is
+  not), and **G-IND does not forbid convergence claims** — it requires
+  the shared input named, downgrading "independent" to "qualified".
+  `gate.py` is checked in **verbatim as delivered**; `guards.json` is
+  authored here, since the drop omitted it and the module fails closed
+  without it. **`retro_sim_stack.py` runs the gate backwards over
+  `aperiodic-order-sim-stack/`**, every input sourced `[R]`/`[F]`/`[C]`/
+  `[G]`: audit Findings 2 and 4 are **caught at `pre()` by G-RES** as
+  arithmetic on two declared numbers (SIM-A's k-grid is 6.2× coarser
+  than the Bragg peaks it must resolve — SIM-A never runs, and its null
+  carries no information about quasiperiodic order); Finding 3 trips
+  G-CTRL and G-SUP; Finding 1 is only partial (the gate forces one Line
+  control slot both estimator results must occupy, but cannot compel an
+  author to record a run). Two findings the audit MISSED: G-DIM voids
+  SIM-C's ratio 54.1 (lattice-model splitting ÷ cascade-set splitting —
+  both real, both dimensionless, quotient denotes nothing), and G-IND
+  downgrades "three independent simulations converge" since SIM-A and
+  SIM-B are two statistics on the same pair of point sets. SIM-B shows
+  the margin as a **policy dial** — artifact floor 0.252 vs separation
+  0.334 denies at the 2.0 default, passes narrowly at 1.0, which is
+  "direction survives, magnitude does not" in enforceable form.
+  **Audit of the gate itself** (4 defects, locked into
+  `tests/ShippedDefects` asserting current behaviour so a repair turns a
+  test red): D1 the module's own docstring usage example denies at
+  `pre()`; D2 `promote()`/`ratio()` silently overwrite where `record()`
+  refuses to; D3 strict `close()` raises before writing the report and
+  leaves the gate open, so a retry with a placeholder `control_result`
+  yields a report whose controls block says `run: True` while a finding
+  below says otherwise; D4 a registry missing a `fail_message` loads
+  fine and then raises `KeyError` instead of `GateError` when that guard
+  fires — fails open at load, hard-crashes at denial. 38 tests green.
+  Siblings: `null-harness/` (G-CTRL is its invariant as a precondition
+  rather than a measurement), `instrument-epistemology/` (G-RES/G-LAYER
+  as the M0-M3 ladder made enforceable), `grounding-layers/` (same
+  refuse-to-score-out-of-scope stance, one level down),
+  `divergence-playground/` (G-IND is `agree_by_accident` as a
+  precondition). Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
