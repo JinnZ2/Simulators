@@ -369,5 +369,110 @@ class ShippedDefects(unittest.TestCase):
             gate.record("x", 1.0, "physical", "A")
 
 
+class DeliveredRegistryAndReplay(unittest.TestCase):
+    """
+    Findings against the delivered guards.json and replay_sim_stack.py.
+    Documented in ../AUDIT_NOTES.md sections 1-3. Each asserts CURRENT
+    behaviour, so a repair turns a test red on purpose.
+    """
+
+    def test_g_res_verdict_depends_on_which_pair_is_declared(self):
+        """
+        AUDIT_NOTES section 1. Same sim, same guard, opposite verdicts,
+        because replay declares the geometric resolution and retro
+        declares the statistical one. Nothing forces the binding pair.
+        """
+        # replay: smallest box vs mean nearest-neighbour spacing
+        self.assertTrue(
+            opened(resolution=[Resolution("geometric", 0.05, 0.20)])._opened)
+        # retro: estimator artifact floor vs claimed separation
+        with self.assertRaises(GateError):
+            opened(resolution=[Resolution("statistical", 0.252, 0.334)])
+
+    def test_generator_quantity_can_support_a_physical_claim(self):
+        """
+        AUDIT_NOTES section 2. summary() prints 'no physical claim
+        permitted' for generator-level quantities while claim() records a
+        claim resting on one as supported, with no finding. G-LAYER
+        guards tagging, not use.
+        """
+        g = opened(strict=True)
+        g.record("Df_AB", 1.889, "physical", "Ammann-Beenker tiling")
+        g.record("Df_cascade", 1.555, "generator", "branching_walk output")
+        g.claim("the two sets do not share a fractal dimension",
+                supported_by=["Df_AB", "Df_cascade"])
+        g.control_result("c", "ran")
+        report = g.close(observed="o", write=False)
+
+        self.assertEqual(report["claims"][0]["status"], "supported")
+        self.assertIn("generator", report["claims"][0]["support_layers"])
+        self.assertEqual(report["findings"], [])          # nothing fired
+        text = g.summary(report)
+        self.assertIn("no physical claim permitted", text)
+        self.assertIn("[supported]", text)                # both, same page
+
+    def test_g_fit_documented_post_but_enforced_pre(self):
+        """
+        AUDIT_NOTES section 3. guards.json labels G-FIT stage 'post';
+        gate.py denies on it inside pre().
+        """
+        entry = next(g for g in _load_registry()["guards"] if g["id"] == "G-FIT")
+        self.assertEqual(entry["stage"], "post")
+        with self.assertRaises(GateError) as cm:
+            opened(discriminates="")       # denied before anything runs
+        self.assertIn("G-FIT", str(cm.exception))
+
+    def test_delivered_registry_carries_the_doc_fields(self):
+        reg = _load_registry()
+        self.assertEqual(reg["layers"], ["generator", "physical", "instrument"])
+        for g in reg["guards"]:
+            for field in ("id", "stage", "name", "rule", "fail_message",
+                          "rationale"):
+                self.assertIn(field, g)
+
+    def test_guards_md_is_in_sync_with_guards_json(self):
+        """GUARDS.md is generated. It must match a fresh render."""
+        sys.path.insert(0, os.path.dirname(os.path.dirname(
+            os.path.abspath(__file__))))
+        import make_docs
+        here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        with open(os.path.join(here, "GUARDS.md")) as fh:
+            on_disk = fh.read()
+        self.assertEqual(on_disk, make_docs.render(_load_registry()))
+
+
+class DeliveredReplayBehaviour(unittest.TestCase):
+    """replay_sim_stack.py must keep doing what its docstring says."""
+
+    def setUp(self):
+        sys.path.insert(0, os.path.dirname(os.path.dirname(
+            os.path.abspath(__file__))))
+        self.cwd = os.getcwd()
+        os.chdir(tempfile.mkdtemp())      # gate writes gate_<SIM>.json to cwd
+
+    def tearDown(self):
+        os.chdir(self.cwd)
+
+    def test_sim_b_passes(self):
+        import replay_sim_stack
+        g, rep = replay_sim_stack.sim_b()
+        self.assertEqual(rep["claims"][0]["status"], "supported")
+        self.assertTrue(all(c["run"] for c in rep["declaration"]["controls"]))
+
+    def test_sim_a_denies_at_pre(self):
+        import replay_sim_stack
+        with self.assertRaises(GateError) as cm:
+            replay_sim_stack.sim_a()
+        self.assertIn("G-RES", str(cm.exception))
+
+    def test_sim_c_runs_but_voids_its_ratio(self):
+        import replay_sim_stack
+        g, rep = replay_sim_stack.sim_c()
+        self.assertEqual(rep["voided_ratios"][0]["name"], "knee_over_Esplit")
+        self.assertEqual(rep["claims"][0]["status"], "unsupported")
+        fired = [f["guard"] for f in rep["findings"]]
+        self.assertEqual(set(fired), {"G-DIM", "G-SUP", "G-IND"})
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -1,3 +1,4 @@
-# runtime state -- gate reports from local runs, regenerate with retro_sim_stack.py
+# runtime state -- gate reports from local runs, regenerate with replay_sim_stack.py
 runs/
+gate_*.json
 __pycache__/

@@ -9,7 +9,7 @@ SIM-A  structure factor
 ==========================================================================
   DENIED at pre(). the sim never runs.
 
-  [G-RES] the instrument is coarser than the feature it must resolve. a null from an instrument that could not have seen the feature is not evidence of absence. | k-grid vs Bragg peak width: instrument 0.39 x margin 2 > feature 0.063
+  [G-RES] resolution not declared or instrument coarser than feature: output is not admissible | k-grid vs Bragg peak width: instrument 0.39 x margin 2 > feature 0.063
 
   The k-grid is 6.2x coarser than the peaks it must resolve.
   At the gate's default 2x margin that is a 12.4x shortfall.
@@ -25,7 +25,7 @@ SIM-B  fractal dimension  (the decisive sim)
 ==========================================================================
   DENIED at pre().
 
-  [G-RES] the instrument is coarser than the feature it must resolve. a null from an instrument that could not have seen the feature is not evidence of absence. | estimator artifact floor vs separation: instrument 0.252 x margin 2 > feature 0.334
+  [G-RES] resolution not declared or instrument coarser than feature: output is not admissible | estimator artifact floor vs separation: instrument 0.252 x margin 2 > feature 0.334
 
   Artifact floor 0.252, separation 0.334. The floor alone does
   not swallow the effect — but the gate's default 2x margin
@@ -47,8 +47,8 @@ GATE SIM-B-margin1
   resolve  : estimator artifact floor vs separation ok
   claim    : [supported] the quasiperiodic and cascade dimensions do not coincide
   claim    : [unsupported] the two classes do not share a common fractal geometry
-  finding  : [G-SUP] a claim names no recorded quantity that supports it.
-  finding  : [G-CTRL] a control was not declared, carries no predicted value, or was declared and never run. an untested gate is not a passing gate.
+  finding  : [G-SUP] claim has no named support
+  finding  : [G-CTRL] no controls declared: a confirming result cannot be distinguished from an artifact
 
   The gate cannot know the sandbox numbers exist unless they are
   recorded, and it cannot stop an author from omitting them. What
@@ -74,9 +74,9 @@ GATE SIM-C
   resolve  : f-grid vs knee width         ok
   VOID     : ratio_54x (tight-binding lattice model vs cascade set)
   claim    : [unsupported] the two systems show different threshold behavior
-  finding  : [G-DIM] a ratio was formed across two different objects. the quotient of a property of A by a property of B denotes nothing.
-  finding  : [G-SUP] a claim names no recorded quantity that supports it.
-  finding  : [G-CTRL] a control was not declared, carries no predicted value, or was declared and never run. an untested gate is not a passing gate.
+  finding  : [G-DIM] ratio operands are properties of different objects: void, no interpretation permitted
+  finding  : [G-SUP] claim has no named support
+  finding  : [G-CTRL] no controls declared: a confirming result cannot be distinguished from an artifact
 
   G-DIM voids the 54.1. Both operands are real, both are
   dimensionless, the division runs without error — and the
@@ -121,7 +121,12 @@ WHAT THE GATE WOULD HAVE CAUGHT
 
   Finding 2  decisive gap ~75% inside the artifact budget
              CAUGHT at pre() — G-RES, as a comparison of two declared
-             numbers, before any point set is generated.
+             numbers, before any point set is generated. But see
+             AUDIT_NOTES.md section 1: replay_sim_stack.py declares
+             SIM-B's resolution as smallest-box vs nearest-neighbour
+             spacing and PASSES. Same guard, same sim, opposite
+             verdicts. G-RES is only as strong as the pair declared,
+             and nothing makes the binding pair the declared one.
 
   Finding 3  SIM-C's null entered as positive evidence
              CAUGHT twice — G-CTRL on the unrun positive control, G-SUP

@@ -1,78 +1,99 @@
 {
-  "schema_version": "1.0",
-  "note": "Guard registry for gate.py. The module fails closed without this file, and refuses to load if any of the eight ids below is absent. Each guard is a rule about what a run is permitted to conclude, not about whether its arithmetic is correct.",
+  "schema_version": "1",
+  "license": "CC0-1.0",
+  "origin": "derived from a paired sim-stack audit: one sound sim (with controls and a stated prediction) run alongside two deliberately un-gated sims, so the divergence was observable",
+  "layers": ["generator", "physical", "instrument"],
+  "layer_meaning": {
+    "generator": "property of the code that produced the data (parameters, sampling rule, seed)",
+    "physical": "property of the modelled system, defensible outside this script",
+    "instrument": "property of the measuring apparatus (grid spacing, window, fit range, estimator)"
+  },
   "guards": [
     {
-      "id": "G-PRE",
-      "name": "pre-registration",
-      "rule": "A run declares its question, statistic, and expected outcome before it executes, and closes against that declaration.",
-      "fail_message": "the run was not declared before it executed. what a run may conclude is fixed before it produces numbers, not after.",
-      "rationale": "Without a prior expectation there is no such thing as a surprising result, and any output can be narrated as confirmation. The declaration is what makes close() a comparison rather than a summary.",
-      "stage": "pre",
-      "enforcement": "deny"
-    },
-    {
-      "id": "G-FIT",
-      "name": "statistic fits the question",
-      "rule": "The declared statistic must be shown to discriminate between the hypotheses actually in play.",
-      "fail_message": "the statistic is not shown to discriminate between the hypotheses in play.",
-      "rationale": "A statistic can be computed correctly, be reported honestly, and still be unable to tell the two candidate answers apart. That failure is invisible in the output and has to be caught at declaration time.",
-      "stage": "pre",
-      "enforcement": "deny"
-    },
-    {
       "id": "G-RES",
-      "name": "resolution",
-      "rule": "The instrument scale, times a safety margin, must be finer than the feature the run must resolve.",
-      "fail_message": "the instrument is coarser than the feature it must resolve. a null from an instrument that could not have seen the feature is not evidence of absence.",
-      "rationale": "The most common way to find nothing is to look with something too coarse to have found it. Declaring both scales converts an unfalsifiable null into an arithmetic check that can be made before the run.",
       "stage": "pre",
-      "enforcement": "deny"
+      "name": "instrument resolution declared before run",
+      "rule": "for every measurement, state the instrument scale and the feature scale it must resolve; instrument scale must be finer by the stated margin",
+      "examples": [
+        "k-grid spacing dk vs finite-sample peak width 2*pi/L",
+        "finite-size level spacing vs the splitting being swept",
+        "box-count smallest box vs mean nearest-neighbour distance"
+      ],
+      "fail_message": "resolution not declared or instrument coarser than feature: output is not admissible",
+      "rationale": "an apparatus that cannot resolve the feature still emits numbers with plausible magnitudes"
     },
     {
       "id": "G-CTRL",
-      "name": "controls",
-      "rule": "Every control is named with a predicted value before the run, and its observed value is recorded before close.",
-      "fail_message": "a control was not declared, carries no predicted value, or was declared and never run. an untested gate is not a passing gate.",
-      "rationale": "A detector that has never been shown to fire on a known positive cannot support a negative result. Recording predicted separately from observed also makes a failed control impossible to drop silently from the writeup.",
-      "stage": "pre+post",
-      "enforcement": "deny at declaration, finding at close"
+      "stage": "pre",
+      "name": "controls sized by fragility, not by expected surprise",
+      "rule": "declare named controls with predicted values before running; a measurement expected to confirm requires controls first, not last",
+      "examples": [
+        "feed a periodic lattice through the same S(k) code",
+        "feed a 1D line through the same dimension estimator"
+      ],
+      "fail_message": "no controls declared: a confirming result cannot be distinguished from an artifact",
+      "rationale": "control budget tends to track anticipated doubt rather than measurement fragility, so the most fragile step gets the least scaffolding"
+    },
+    {
+      "id": "G-PRE",
+      "stage": "pre",
+      "name": "expected output written before execution",
+      "rule": "state in advance what the output should look like if the setup is working",
+      "examples": [
+        "expect a dense point spectrum with many sharp peaks across the k-plane",
+        "expect S(k) tail to approach 1"
+      ],
+      "fail_message": "no expected output recorded: divergence will not be visible",
+      "rationale": "an artifact is invisible against nothing and obvious against a written prediction"
     },
     {
       "id": "G-LAYER",
-      "name": "layer tagging",
-      "rule": "Every quantity is tagged generator, physical, or instrument, and names the object it is a property of. Crossing layers requires an explicit justification.",
-      "fail_message": "a quantity is untagged or crosses layers without justification. a property of the generator is not a property of the physical system.",
-      "rationale": "The characteristic self-confirmation failure is reading a structure back out of a model that was built to contain it. Tagging at record time makes the promotion an explicit, reviewable act rather than a silent one.",
       "stage": "mid",
-      "enforcement": "deny"
+      "name": "every quantity tagged with its origin layer",
+      "rule": "each recorded number declares layer and the object it is a property of; no promotion between layers without an explicit step",
+      "examples": [
+        "a branching-walk dimension is a generator property, not a property of the material being modelled"
+      ],
+      "fail_message": "untagged quantity: cannot be recorded",
+      "rationale": "generator-level and physical-level statements merge silently once they share a table"
     },
     {
       "id": "G-DIM",
-      "name": "dimensional integrity",
-      "rule": "A ratio is admissible only when numerator and denominator are properties of the same object.",
-      "fail_message": "a ratio was formed across two different objects. the quotient of a property of A by a property of B denotes nothing.",
-      "rationale": "Two quantities can be individually meaningful, share units, divide without error, and produce a number that refers to nothing. Comparing one statistic across two objects is fine; dividing a property of one by a property of the other is not.",
       "stage": "post",
-      "enforcement": "void the ratio, record a finding"
+      "name": "ratios name both operands' objects",
+      "rule": "a ratio is admissible only if numerator and denominator are properties of the same object; otherwise it is void and carries no interpretation",
+      "examples": [
+        "eigenvalue splitting over hopping integral, divided by an energy fraction in a branching rule, is void"
+      ],
+      "fail_message": "ratio operands are properties of different objects: void, no interpretation permitted",
+      "rationale": "a labelled dimensionless number of plausible magnitude is accepted as physical"
     },
     {
       "id": "G-SUP",
-      "name": "named support",
-      "rule": "A claim names the recorded quantities that support it, and those quantities must exist.",
-      "fail_message": "a claim names no recorded quantity that supports it.",
-      "rationale": "Claims that name their support can be checked against the layer tags of what they rest on. Claims that do not are prose, and prose accumulates in a conclusion without ever passing a check.",
       "stage": "post",
-      "enforcement": "record as unsupported"
+      "name": "every claim names the statistic supporting it",
+      "rule": "each claim lists recorded quantity names; a claim with no support is logged as unsupported and does not enter the conclusion",
+      "fail_message": "claim has no named support",
+      "rationale": "demotion of a result to exploratory does not survive into a summary unless enforced"
+    },
+    {
+      "id": "G-FIT",
+      "stage": "post",
+      "name": "statistic addresses the stated question",
+      "rule": "restate the question and name why the chosen statistic can discriminate it; a statistic blind to the property by construction must be flagged",
+      "examples": [
+        "box-counting dimension is blind to quasiperiodic order by construction: uniform coverage returns the embedding dimension regardless of arrangement"
+      ],
+      "fail_message": "no discrimination argument: statistic may be blind to the property under test",
+      "rationale": "the tested version drifts from the live version without a re-derivation step"
     },
     {
       "id": "G-IND",
-      "name": "independence",
-      "rule": "Convergence across several lines may be asserted only after naming what those lines share.",
-      "fail_message": "convergence asserted without naming what the converging lines share. lines that share an input do not independently confirm.",
-      "rationale": "Agreement between analyses run on the same generated data measures the data, not the world. Naming the shared input does not forbid the claim; it downgrades it from independent confirmation to a qualified one.",
       "stage": "post",
-      "enforcement": "record as qualified, or finding if nothing named"
+      "name": "independence asserted, not assumed",
+      "rule": "before calling results convergent, state what is shared between them: same data, same generator, same predicted outcome",
+      "fail_message": "convergence asserted across measurements with shared inputs",
+      "rationale": "measurements on the same data whose outcome was predictable in advance are restatement, not corroboration"
     }
   ]
 }

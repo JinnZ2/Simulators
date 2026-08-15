@@ -1274,55 +1274,84 @@ underneath).
   declare gets no output, an untagged quantity is not recorded, a ratio
   across unlike objects is void, a claim without named support does not
   enter the conclusion. Checks nothing about arithmetic — every failure
-  it catches is one a correct program produces happily. Eight guards:
-  `G-PRE` (declare question/statistic/expectation before executing),
-  `G-FIT` (the statistic must discriminate), `G-RES` (instrument ×
-  margin ≤ feature), `G-CTRL` (controls named with predicted values and
-  results recorded), `G-LAYER` (tag every quantity `generator` /
-  `physical` / `instrument` + name its object; crossing layers needs
-  justification), `G-DIM` (a ratio needs both operands to be properties
-  of ONE object), `G-SUP` (a claim names its supporting quantities),
-  `G-IND` (convergence requires naming what the lines share). Pre-stage
-  guards always deny; `strict=False` downgrades post-stage to findings.
-  Two distinctions the design gets right: **G-DIM voids ratios, not
-  comparisons** (one statistic across two objects is what a comparative
-  sim is for; dividing a property of one by a property of the other is
-  not), and **G-IND does not forbid convergence claims** — it requires
-  the shared input named, downgrading "independent" to "qualified".
-  `gate.py` is checked in **verbatim as delivered**; `guards.json` is
-  authored here, since the drop omitted it and the module fails closed
-  without it. **`retro_sim_stack.py` runs the gate backwards over
-  `aperiodic-order-sim-stack/`**, every input sourced `[R]`/`[F]`/`[C]`/
-  `[G]`: audit Findings 2 and 4 are **caught at `pre()` by G-RES** as
-  arithmetic on two declared numbers (SIM-A's k-grid is 6.2× coarser
-  than the Bragg peaks it must resolve — SIM-A never runs, and its null
-  carries no information about quasiperiodic order); Finding 3 trips
-  G-CTRL and G-SUP; Finding 1 is only partial (the gate forces one Line
-  control slot both estimator results must occupy, but cannot compel an
-  author to record a run). Two findings the audit MISSED: G-DIM voids
-  SIM-C's ratio 54.1 (lattice-model splitting ÷ cascade-set splitting —
-  both real, both dimensionless, quotient denotes nothing), and G-IND
-  downgrades "three independent simulations converge" since SIM-A and
-  SIM-B are two statistics on the same pair of point sets. SIM-B shows
-  the margin as a **policy dial** — artifact floor 0.252 vs separation
-  0.334 denies at the 2.0 default, passes narrowly at 1.0, which is
-  "direction survives, magnitude does not" in enforceable form.
-  **Audit of the gate itself** (4 defects, locked into
-  `tests/ShippedDefects` asserting current behaviour so a repair turns a
-  test red): D1 the module's own docstring usage example denies at
-  `pre()`; D2 `promote()`/`ratio()` silently overwrite where `record()`
-  refuses to; D3 strict `close()` raises before writing the report and
-  leaves the gate open, so a retry with a placeholder `control_result`
-  yields a report whose controls block says `run: True` while a finding
-  below says otherwise; D4 a registry missing a `fail_message` loads
-  fine and then raises `KeyError` instead of `GateError` when that guard
-  fires — fails open at load, hard-crashes at denial. 38 tests green.
+  it catches is one a correct program produces happily. Landed across
+  two drops; **six delivered files are verbatim as received** (`gate.py`,
+  `guards.json`, `make_docs.py`, `GUARDS.md`, `replay_sim_stack.py`,
+  `README.md`), with all added analysis confined to `AUDIT_NOTES.md`,
+  `retro_sim_stack.py`, `tests/`, and `samples/`. `guards.json` is the
+  single source of truth and `GUARDS.md` is generated from it by
+  `make_docs.py` — regenerates byte-identically, asserted by a test.
+  Three layers (`generator` = property of the code that produced the
+  data / `physical` = property of the modelled system, defensible
+  outside the script / `instrument` = property of the measuring
+  apparatus). Eight guards across three stages: PRE — `G-RES`
+  (instrument × margin ≤ feature), `G-CTRL` (controls named with
+  predicted values, "sized by fragility, not by expected surprise"),
+  `G-PRE` (expected output written before execution); MID — `G-LAYER`
+  (tag every quantity + name its object; no promotion without an
+  explicit step); POST — `G-DIM` (a ratio needs both operands to be
+  properties of ONE object), `G-SUP` (a claim names its supporting
+  quantities), `G-FIT` (the statistic must discriminate; one blind by
+  construction must be flagged), `G-IND` (convergence requires naming
+  what the lines share). Pre-stage guards always deny; `strict=False`
+  downgrades post-stage to findings. Two distinctions the design gets
+  right: **G-DIM voids ratios, not comparisons**, and **G-IND does not
+  forbid convergence claims** — it requires the shared input named,
+  downgrading "independent" to "qualified". The delivered README is
+  explicit that this is **n=1** — "a marker, not a position", one shape
+  back-traced from a single paired sample — and invites reports of where
+  it breaks; `AUDIT_NOTES.md` is the answer to that invitation.
+  **Two replays that disagree.** `replay_sim_stack.py` (delivered)
+  replays the audited stack with SIM-B sound: it PASSES, SIM-A is denied
+  at `pre()` on G-RES, SIM-C runs but voids its ratio and loses its
+  claim. `retro_sim_stack.py` (added) replays the same three mapping
+  gate verdicts onto the audit's four findings, every input sourced
+  `[R]`/`[F]`/`[C]`/`[G]` — and **DENIES SIM-B**. Same guard, same sim,
+  opposite verdicts, because replay declares the box-count's *geometric*
+  resolution (smallest box 0.05 vs mean NN spacing 0.20 → passes) and
+  retro declares its *statistical* one (artifact floor 0.252 vs
+  separation 0.334 → denies at the 2.0 margin). **`AUDIT_NOTES.md` §1:
+  G-RES is only as strong as the pair declared, and nothing makes the
+  binding pair the declared one** — not a bug, a limit on what the guard
+  can promise. Related: the replay's declared error bar
+  (`cluster_spread` 0.075, spread across three sets all at ~12,000 pts)
+  excludes the 12× sample-size drop that `finite_n_control.py` measures
+  at up to 0.137 on its own. **§2, the sharpest gap, visible in the
+  delivered replay's own output:** `Df_cascade` is correctly tagged
+  `generator` ("set by E_split, E_min, branch rule - not a tungsten
+  property"), `summary()` prints `generator-level (no physical claim
+  permitted): Df_cascade`, and the claim resting on it is recorded
+  `[supported]` with `findings` EMPTY. G-LAYER guards the *tagging* of
+  quantities, nothing guards their *use*; `claim()` computes
+  `support_layers` and never inspects it. Substantively this is a
+  sharper version of the audit's Finding 2 — by the replay's own
+  tagging, "the two sets do not share a fractal dimension" compares a
+  physical property of the AB tiling against a parameter of the cascade
+  generator, i.e. a tiling against a piece of code. **§3:**
+  `guards.json` labels `G-FIT` `"stage": "post"` so `GUARDS.md` renders
+  it under POST, but `gate.py` enforces it inside `pre()` — a one-word
+  fix in the JSON, since the doc is generated. **§4, four defects in
+  `gate.py`** (locked into `tests/ShippedDefects` asserting current
+  behaviour so a repair turns a test red): D1 the module docstring's
+  usage example denies at `pre()` (now clearly deliberate — the replay
+  uses the same two numbers for SIM-A — but unlabelled under "Usage");
+  D2 `promote()`/`ratio()` silently overwrite where `record()` refuses
+  to; D3 strict `close()` raises before writing the report and leaves
+  the gate open, so a retry with a placeholder `control_result` yields a
+  report whose controls block says `run: True` while a finding below
+  says otherwise; D4 a registry missing a `fail_message` loads fine and
+  raises `KeyError` instead of `GateError` when that guard fires — fails
+  open at load, hard-crashes at denial. **SIM-A survives both
+  declarations**: k-grid 0.39 vs finite-sample peak width 2π/L = 0.063,
+  6.2× too coarse — the peaks fall between sample points, so SIM-A could
+  not have resolved Bragg peaks whether or not they were there and its
+  null carries no information about quasiperiodic order. 46 tests green.
   Siblings: `null-harness/` (G-CTRL is its invariant as a precondition
   rather than a measurement), `instrument-epistemology/` (G-RES/G-LAYER
   as the M0-M3 ladder made enforceable), `grounding-layers/` (same
   refuse-to-score-out-of-scope stance, one level down),
   `divergence-playground/` (G-IND is `agree_by_accident` as a
-  precondition). Stdlib only, CC0.
+  precondition). Stdlib only, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

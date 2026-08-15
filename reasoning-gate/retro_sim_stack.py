@@ -12,6 +12,10 @@ drop skipped.
 This script asks the cheaper question: which of those findings would the
 gate have caught, and at what stage?
 
+Companion to replay_sim_stack.py, which replays the same three sims as
+delivered. The two disagree about SIM-B, and the disagreement is the
+useful part — see AUDIT_NOTES.md section 1.
+
 Every number below is sourced. Nothing is invented for the demonstration:
 
   [R]  SIM_STACK_REPORT.txt, as delivered
@@ -329,7 +333,12 @@ def main() -> None:
 
   Finding 2  decisive gap ~75% inside the artifact budget
              CAUGHT at pre() — G-RES, as a comparison of two declared
-             numbers, before any point set is generated.
+             numbers, before any point set is generated. But see
+             AUDIT_NOTES.md section 1: replay_sim_stack.py declares
+             SIM-B's resolution as smallest-box vs nearest-neighbour
+             spacing and PASSES. Same guard, same sim, opposite
+             verdicts. G-RES is only as strong as the pair declared,
+             and nothing makes the binding pair the declared one.
 
   Finding 3  SIM-C's null entered as positive evidence
              CAUGHT twice — G-CTRL on the unrun positive control, G-SUP
