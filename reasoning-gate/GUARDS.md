@@ -42,6 +42,8 @@ because an apparatus that cannot resolve the feature still emits numbers
 
 ### G-CTRL - controls sized by fragility, not by expected surprise
 
+Also fires at: post
+
 ```
 rule    declare named controls with predicted values before running; a
         measurement expected to confirm requires controls first, not
@@ -69,6 +71,20 @@ because an artifact is invisible against nothing and obvious against a
 - expect a dense point spectrum with many sharp peaks across the k-plane
 - expect S(k) tail to approach 1
 
+### G-FIT - statistic addresses the stated question
+
+```
+rule    restate the question and name why the chosen statistic can
+        discriminate it; a statistic blind to the property by
+        construction must be flagged
+denies  no discrimination argument: statistic may be blind to the
+        property under test
+because the tested version drifts from the live version without a
+        re-derivation step
+```
+
+- box-counting dimension is blind to quasiperiodic order by construction: uniform coverage returns the embedding dimension regardless of arrangement
+
 ## MID - while quantities are emitted
 
 ### G-LAYER - every quantity tagged with its origin layer
@@ -85,6 +101,24 @@ because generator-level and physical-level statements merge silently
 - a branching-walk dimension is a generator property, not a property of the material being modelled
 
 ## POST - at report assembly
+
+### G-CTRL - controls sized by fragility, not by expected surprise
+
+Also fires at: pre
+
+```
+rule    declare named controls with predicted values before running; a
+        measurement expected to confirm requires controls first, not
+        last
+denies  no controls declared: a confirming result cannot be
+        distinguished from an artifact
+because control budget tends to track anticipated doubt rather than
+        measurement fragility, so the most fragile step gets the least
+        scaffolding
+```
+
+- feed a periodic lattice through the same S(k) code
+- feed a 1D line through the same dimension estimator
 
 ### G-DIM - ratios name both operands' objects
 
@@ -110,20 +144,6 @@ denies  claim has no named support
 because demotion of a result to exploratory does not survive into a
         summary unless enforced
 ```
-
-### G-FIT - statistic addresses the stated question
-
-```
-rule    restate the question and name why the chosen statistic can
-        discriminate it; a statistic blind to the property by
-        construction must be flagged
-denies  no discrimination argument: statistic may be blind to the
-        property under test
-because the tested version drifts from the live version without a
-        re-derivation step
-```
-
-- box-counting dimension is blind to quasiperiodic order by construction: uniform coverage returns the embedding dimension regardless of arrangement
 
 ### G-IND - independence asserted, not assumed
 

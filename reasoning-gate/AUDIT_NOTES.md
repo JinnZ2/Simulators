@@ -3,15 +3,24 @@
 Taking up the invitation in [`README.md`](README.md): *"Test fit, extend
 it, or report where it breaks."*
 
-Everything here is additive. The delivered files —
+**Status: all reported defects are fixed.** The delivered files were
+checked in verbatim across three drops, audited here, and then repaired.
+Sections 2, 3, 4 and 9 below describe defects that no longer exist —
+kept, with what changed, because the repair is the record. Every one has
+a test in [`tests/test_gate.py`](tests/test_gate.py) that asserted the
+broken behaviour first and asserts the fix now, so a regression turns it
+red. Section 1 is not a defect and was not "fixed": it is a limit on what
+`G-RES` can promise.
+
+The delivered files —
 [`gate.py`](gate.py), [`guards.json`](guards.json),
 [`make_docs.py`](make_docs.py), [`GUARDS.md`](GUARDS.md),
 [`replay_sim_stack.py`](replay_sim_stack.py),
 [`mine_logs.py`](mine_logs.py), [`explore.py`](explore.py),
-[`SIM_STACK_BACKTRACE.md`](SIM_STACK_BACKTRACE.md) — and the delivered
-`README.md` are checked in exactly as received. `GUARDS.md` regenerates
-byte-identically from `make_docs.py`, so the generated doc and its source
-agree.
+[`SIM_STACK_BACKTRACE.md`](SIM_STACK_BACKTRACE.md) — arrived across three
+drops and are now modified only by the repairs recorded here.
+`SIM_STACK_BACKTRACE.md` is untouched. `GUARDS.md` regenerates
+byte-identically from `make_docs.py`, asserted by a test.
 
 Added alongside them:
 
@@ -27,7 +36,7 @@ The subject of both replays is
 
 ---
 
-## 1. G-RES is only as strong as the pair you declare
+## 1. G-RES is only as strong as the pair you declare — NOT A DEFECT
 
 `replay_sim_stack.py` passes SIM-B. `retro_sim_stack.py` denies it at
 `pre()`. Same guard, same sim, same gate, opposite verdicts — because
@@ -64,103 +73,118 @@ declared as "spread across the three space-filling sets" — all three at
 12,000 points and the cascade at 1,024. The finite-N shift that spread
 excludes is up to 0.137 on its own, larger than the error bar itself.
 
-## 2. A generator-level quantity can support a physical claim
+## 2. A generator-level quantity could support a physical claim — FIXED
 
-The sharpest gap, and it shows up in the delivered replay's own output.
+The sharpest gap, and it showed up in the delivered replay's own output.
 
 `replay_sim_stack.py` tags `Df_cascade` as `generator` with the note
 *"set by E_split, E_min, branch rule - not a tungsten property"* — a
-careful, correct tag. `summary()` then prints:
+careful, correct tag. `summary()` then printed:
 
 ```
 generator-level (no physical claim permitted): Df_cascade
 claim    : [supported] the two sets do not share a fractal dimension
 ```
 
-The claim is `supported_by=["Df_AB", "Df_cascade", "cluster_spread"]`.
-Its `support_layers` come out `["generator", "instrument", "physical"]`,
-and `findings` is **empty**.
+The claim was `supported_by=["Df_AB", "Df_cascade", "cluster_spread"]`,
+its `support_layers` came out `["generator", "instrument", "physical"]`,
+and `findings` was **empty**. The summary asserted "no physical claim
+permitted" on the same page as a supported physical claim resting on that
+quantity. G-LAYER guarded the *tagging* of quantities; nothing guarded
+their *use*. `claim()` computed `support_layers` and never inspected it.
 
-So the summary asserts "no physical claim permitted" on the same page as
-a supported physical claim resting on that quantity. G-LAYER guards the
-*tagging* of quantities; nothing guards their *use*. `claim()` records
-`support_layers` and never inspects it.
+**Repair.** `claim()` now takes a `scope` — `"physical"` by default, or
+`"generator"` for a claim explicitly about the code that produced the
+data. A physical-scope claim resting on generator-level support is
+recorded `qualified` rather than `supported`, carries a `layer_note`
+naming the offending quantities, and emits a G-LAYER finding.
 
-This is not cosmetic. By the replay's own tagging, "the two sets do not
-share a fractal dimension" compares a physical property of the
-Ammann-Beenker tiling against a parameter of the cascade generator —
-which is a sharper version of the audit's Finding 2 than the audit
-reached. The drop's headline conclusion, that quasiperiodic tilings and
-branching cascades are structurally distinct classes of aperiodic order,
-is on this reading partly a comparison between a tiling and a piece of
-code.
+Downgraded, **not refused**, which is the same shape `G-IND` already uses
+for convergence across shared inputs. The support is real; what it cannot
+carry is a statement about the modelled system. SIM-B still passes — no
+denial — but its claim now reads:
 
-The smallest fix that would catch it: have `claim()` emit a finding when
-`support_layers` contains `generator` and the claim is not itself scoped
-to the generator. The information is already computed — it is recorded
-and then not acted on.
-
-## 3. G-FIT is documented at the wrong stage
-
-`guards.json` gives G-FIT `"stage": "post"`, so `make_docs.py` renders it
-under **POST - at report assembly** in `GUARDS.md`. `gate.py` enforces it
-in `pre()` — `discriminates` is one of the four fields checked before
-anything runs, and pre-stage guards deny regardless of `strict`.
-
-An operator reading `GUARDS.md` would expect to supply the discrimination
-argument when assembling the report, and would instead be denied before
-the sim executes. A one-word change to `"stage"` in `guards.json` fixes
-the doc, since `GUARDS.md` is generated.
-
-Same class of thing in G-CTRL, less severe: it is documented `"stage":
-"pre"`, and it does deny at `pre()`, but it also fires at `close()` for
-controls declared and never run. The stage field carries one value where
-the guard has two.
-
-## 4. Four defects in `gate.py`
-
-Locked into `tests/test_gate.py::ShippedDefects` asserting **current**
-behaviour, so a repair turns a test red on purpose rather than passing
-silently. `gate.py` is unmodified.
-
-**D1 — the module docstring's usage example denies at `pre()`.** It
-declares `Resolution(..., instrument=0.39, feature=0.063)` and then
-continues through `record` / `claim` / `close`. It cannot: 0.39 × 2.0 >
-0.063. Now clearly deliberate rather than accidental — `replay_sim_stack.py`
-uses the same two numbers to demonstrate SIM-A being denied. The docstring
-presents them under "Usage" without saying so, which is the only thing
-worth changing.
-
-**D2 — `promote()` and `ratio()` silently overwrite.** `record()`
-explicitly refuses to overwrite a recorded name; neither of the other two
-writers checks. `promote("x", "y", ...)` replaces an existing `y` and its
-value is gone — in the one operation G-LAYER exists to make explicit.
-
-**D3 — strict `close()` loses the report, and the retry misreports.**
-With an unrun control, `_soft` raises before `self._closed = True` and
-before the JSON is written. Denying is right; producing no forensic record
-is not, since the reason exists only in the traceback. The gate is also
-left open:
-
-```python
-try:
-    g.close(observed=...)                          # denied: control never run
-except GateError:
-    pass
-g.control_result("positive control", "n/a")        # accepts any string
-g.close(observed=...)                              # clean report
+```
+claim    : [qualified] the two sets do not share a fractal dimension
+           ^ physical scope claim resting on generator-level support: Df_cascade
 ```
 
-The finding survives in `findings[]`, so this is not silent — but the
-report's `controls` block then says `run: True` and `summary()` prints
-the control as `run`, contradicting the finding below it.
+That is the substantive point from the back-trace's PATTERN 4 made
+mechanical. By the replay's own tagging, "the two sets do not share a
+fractal dimension" compares a physical property of the Ammann-Beenker
+tiling against a parameter of the cascade generator. The gate now says so
+in the report instead of leaving it to a reader.
 
-**D4 — a malformed registry loads, then crashes.** `_load_guards`
-verifies all eight ids are present but not that each carries a
-`fail_message`. A registry missing one loads fine and raises `KeyError` —
-not `GateError` — at the moment that guard fires. For a fail-closed tool
-that is the wrong order: fails open at load, hard-crashes in the code path
-that runs precisely when something has gone wrong.
+`scope="generator"` is the escape hatch and it is deliberately narrow: a
+claim about what the branching walk does at given parameters is fully
+supported by generator quantities, and is not downgraded.
+
+## 3. G-FIT was documented at the wrong stage — FIXED
+
+`guards.json` gave G-FIT `"stage": "post"`, so `make_docs.py` rendered it
+under **POST - at report assembly**. `gate.py` enforces it in `pre()` —
+`discriminates` is one of four fields checked before anything runs, and
+pre-stage guards deny regardless of `strict`. An operator reading
+`GUARDS.md` would expect to supply the discrimination argument at report
+assembly and would instead be denied before the sim executed.
+
+**Repair.** `G-FIT` is now `"stage": "pre"`.
+
+The related G-CTRL case is also fixed. It denies at `pre()` *and* fires at
+`close()` for controls declared and never run, but `stage` carried one
+value. It is now `["pre", "post"]`, and `make_docs.py` accepts a string or
+a list — rendering such a guard under each stage it belongs to, with an
+"Also fires at:" line. `GUARDS.md` regenerated.
+
+## 4. Four defects in `gate.py` — ALL FIXED
+
+Each has a test in `tests/test_gate.py::RepairedDefects` that asserted the
+broken behaviour before the repair and asserts the fix now.
+
+**D1 — the module docstring's usage example denied at `pre()`.** It
+declared `Resolution(..., instrument=0.39, feature=0.063)` and then
+continued through `record` / `claim` / `close`. It could not: 0.39 × 2.0 >
+0.063.
+
+*Fixed* by giving the Usage example a resolution that passes
+(`instrument=0.020`) and moving the SIM-A numbers into an explicitly
+labelled `DENIAL EXAMPLE` block that says what they are and why not to
+copy them. The numbers are worth keeping — they are the real failure — but
+not under a heading called "Usage".
+
+**D2 — `promote()` and `ratio()` silently overwrote.** `record()` refuses
+to overwrite a recorded name; neither of the other two writers checked, so
+`promote("x", "y", ...)` replaced an existing `y` and its value was gone —
+in the one operation G-LAYER exists to make explicit.
+
+*Fixed* — both now deny on a name collision, matching `record()`. The
+prior value is preserved.
+
+**D3 — strict `close()` lost the report, and the retry misreported.** With
+an unrun control, `_soft` raised before `self._closed = True` and before
+the JSON was written, so the reason for the denial existed only in the
+traceback. The gate was left open, so catching the error, answering the
+control with a placeholder and closing again produced a clean report whose
+`controls` block said `run: True` while a finding below said otherwise.
+
+*Fixed* in two parts. The gate now closes **before** denying, so the retry
+path is gone — a caller that catches the denial cannot call
+`control_result()` or `close()` again. And every denial, at any stage,
+writes `gate_<SIM>.denied.json` before raising, carrying the guard that
+denied, the detail, the declaration and whatever had been recorded.
+`control_result()` also now refuses an empty observation.
+
+That denial record is the same change that fixes the mining blindness in
+§9 — one repair, two defects.
+
+**D4 — a malformed registry loaded, then crashed.** `_load_guards`
+verified all eight ids were present but not that each carried a
+`fail_message`. A registry missing one loaded fine and raised `KeyError` —
+not `GateError` — at the moment that guard fired: open at load, crashing
+at denial, the wrong order for a fail-closed tool.
+
+*Fixed* — the loader now rejects any registry with a missing or blank
+`fail_message`, naming the guards at fault.
 
 ## 5. What the gate catches on the audited stack
 
@@ -290,14 +314,13 @@ separated, not 15×"** says the same thing with the number attached, and
 identifies *which* step produced the inflation — picking the closest pair
 in a cluster as the width of the cluster. Recorded as `AOS_009`.
 
-## 9. Two defects in the new tools
+## 9. Two defects in the new tools — FIXED
 
-**`mine_logs.py` flags every sound run as a divergence.** The
+**`mine_logs.py` flagged every sound run as a divergence.** The
 "divergences with no guard attached" section — labelled the growth edge —
-tests `expected != observed` on two free-text strings. Those strings will
-essentially never be equal, so any run that fires no guard lands in the
-list. On the delivered corpus it flags SIM-B, which is the one sound sim
-in the set:
+tested `expected != observed` on two free-text strings. Those are never
+equal, so any run that fired no guard landed in the list. On the delivered
+corpus it flagged SIM-B, the one sound sim:
 
 ```
 divergences with no guard attached  (the growth edge)
@@ -308,31 +331,52 @@ divergences with no guard attached  (the growth edge)
 
 Those agree. A section that fires on everything finds nothing.
 
-**`mine_logs.py` is blind to the denials, which is the deeper one.** Hit
-rates are computed over `gate_*.json` files, and a pre-stage deny writes
-no file — the run raises before `close()`. In the delivered corpus SIM-A
-is denied by G-RES and leaves no log, so the report reads:
+*Fixed* on the gate side, where the information actually lives.
+`close()` now takes `diverged=True | False | None` — the author's explicit
+call, defaulting to `None` for not assessed. Divergence is not inferred
+from prose, because two descriptions of one outcome never compare equal.
+`mine_logs.py` reports the real growth edge (`diverged=True` with no guard
+fired) and lists unassessed runs separately under "closed without a
+divergence call (nobody has looked)" rather than guessing. `summary()`
+shows the call as `YES` / `no` / `NOT ASSESSED`.
+
+**`mine_logs.py` was blind to denials, which is the deeper one.** Hit
+rates were computed over `gate_*.json` files, and a pre-stage deny wrote
+no file — the run raised before `close()`. In the delivered corpus SIM-A
+is denied by G-RES and left no log, so the report read:
 
 ```
   G-RES      0    0.0%   NEVER FIRED
 ```
 
-G-RES is marked never-fired **because it worked**. The same applies to
-every pre-stage guard, and to strict-mode post-stage denials via defect
-D3, which also write nothing. An operator pruning never-fired guards from
-`guards.json` would delete the most effective ones first, and the tool
-gives them no signal that anything happened.
+G-RES was marked never-fired **because it worked**. An operator pruning
+never-fired guards would have deleted the most effective ones first.
 
-The fix is on the gate side rather than the miner's: `pre()` and a denied
-`close()` would need to write a `gate_<SIM>.denied.json` before raising.
-That would also fix D3's lost forensic record — one change, two defects.
+*Fixed* by the D3 denial records. `mine_logs.py` now reads both
+`gate_<SIM>.json` and `gate_<SIM>.denied.json` and reports findings and
+denials in separate columns. The same corpus now reads:
 
-**`explore.py` reads `sim` as `None` on a real gate report.** `__main__`
-passes `d.get("declaration", d)` into `explore()`, which then reads
-`declaration.get("sim_id")` — but `sim_id` is top-level in a gate report,
-not inside `declaration`. The output filename gets it right because
-`__main__` reads `d.get("sim_id")` from the top level; the `sim` field
-inside the document does not. Cosmetic, and one line.
+```
+runs: 3   (closed 2, denied 1)   voided ratios: 1
+
+guard activity
+  guard    findings  denials    total
+  G-RES           0        1        1
+  ...
+```
+
+It also warns when a corpus contains no denial records at all, since that
+is either a very clean corpus or a missing-log problem, and the two look
+identical from the outside.
+
+**`explore.py` read `sim` as `None` on a real gate report.** `__main__`
+passed `d.get("declaration", d)` into `explore()`, which looked for
+`sim_id` inside it — but `sim_id` is top-level in a gate report. The
+output filename got it right; the `sim` field in the document did not.
+
+*Fixed* — `explore()` accepts either a full report or a bare declaration
+and finds `sim_id` in either position. Its output handle is also closed
+properly now.
 
 ## 10. On the n=1 caveat, revisited
 

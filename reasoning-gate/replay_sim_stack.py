@@ -42,7 +42,8 @@ def sim_b():
 
     g.claim("the two sets do not share a fractal dimension",
             supported_by=["Df_AB", "Df_cascade", "cluster_spread"])
-    return g, g.close(observed="AB 1.889 / cascade 1.555, controls on target")
+    return g, g.close(observed="AB 1.889 / cascade 1.555, controls on target",
+                      diverged=False)
 
 
 def sim_a():
@@ -82,7 +83,8 @@ def sim_c():
     g.claim("the two systems operate on different normalized energy scales",
             supported_by=["knee_over_Esplit"])
     g.convergence(across=["SIM-A", "SIM-B", "SIM-C"], shared=[])
-    return g, g.close(observed="knee at f=0.65, splitting 0.0812")
+    return g, g.close(observed="knee at f=0.65, splitting 0.0812",
+                      diverged=True)
 
 
 if __name__ == "__main__":

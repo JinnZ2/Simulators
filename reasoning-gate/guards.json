@@ -2,7 +2,11 @@
   "schema_version": "1",
   "license": "CC0-1.0",
   "origin": "derived from a paired sim-stack audit: one sound sim (with controls and a stated prediction) run alongside two deliberately un-gated sims, so the divergence was observable",
-  "layers": ["generator", "physical", "instrument"],
+  "layers": [
+    "generator",
+    "physical",
+    "instrument"
+  ],
   "layer_meaning": {
     "generator": "property of the code that produced the data (parameters, sampling rule, seed)",
     "physical": "property of the modelled system, defensible outside this script",
@@ -24,7 +28,10 @@
     },
     {
       "id": "G-CTRL",
-      "stage": "pre",
+      "stage": [
+        "pre",
+        "post"
+      ],
       "name": "controls sized by fragility, not by expected surprise",
       "rule": "declare named controls with predicted values before running; a measurement expected to confirm requires controls first, not last",
       "examples": [
@@ -78,7 +85,7 @@
     },
     {
       "id": "G-FIT",
-      "stage": "post",
+      "stage": "pre",
       "name": "statistic addresses the stated question",
       "rule": "restate the question and name why the chosen statistic can discriminate it; a statistic blind to the property by construction must be flagged",
       "examples": [

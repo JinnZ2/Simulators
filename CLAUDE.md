@@ -1398,7 +1398,45 @@ underneath).
   `gate_<SIM>.denied.json` before raising), which would also close D3's
   lost forensic record — one change, two defects. `explore.py` reads
   `sim` as `None` on a real gate report, since `sim_id` is top-level
-  and `__main__` passes only `declaration`. 49 tests green.
+  and `__main__` passes only `declaration`.
+  **Fourth pass: all reported defects fixed.** `gate.py`, `guards.json`,
+  `make_docs.py`, `mine_logs.py`, `explore.py` and both replays are now
+  repaired rather than verbatim; `SIM_STACK_BACKTRACE.md` is untouched.
+  Each defect keeps a test that asserted the broken behaviour first and
+  asserts the fix now, so a regression turns it red. **D1** docstring
+  Usage example now declares a resolution that passes, with the SIM-A
+  numbers moved to a labelled `DENIAL EXAMPLE`. **D2** `promote()` and
+  `ratio()` deny on name collision like `record()` does; the prior value
+  survives. **D3** the gate now closes BEFORE denying, killing the
+  retry-with-placeholder bypass entirely (a caller that catches the
+  denial cannot call `control_result()` or `close()` again), and every
+  denial at any stage writes `gate_<SIM>.denied.json` carrying the
+  denying guard, detail, declaration and quantities-so-far;
+  `control_result()` refuses an empty observation. **D4** the registry
+  loader rejects any guard with a missing or blank `fail_message`,
+  naming the offenders — fail-closed at load instead of `KeyError` at
+  denial. **§2, the sharpest one:** `claim()` gained a `scope`
+  (`physical` default, `generator` escape hatch); a physical-scope claim
+  resting on generator-level support is recorded **`qualified`** with a
+  `layer_note` naming the offending quantities plus a G-LAYER finding —
+  downgraded, not refused, the same shape G-IND already uses. SIM-B
+  still passes but its claim now reads `[qualified] ... ^ physical scope
+  claim resting on generator-level support: Df_cascade`, so the summary
+  no longer prints "no physical claim permitted" directly above a
+  supported physical claim resting on one. **§3:** `G-FIT` stage
+  corrected `post` → `pre`; `G-CTRL` is now `["pre","post"]` and
+  `make_docs.py` accepts a string or list, rendering multi-stage guards
+  under each stage with an "Also fires at:" line. **§9:** divergence is
+  now `close(diverged=True|False|None)` — the author's explicit call,
+  never inferred from two prose strings, so `mine_logs.py` stops
+  flagging every sound run; it reports the real growth edge
+  (`diverged=True`, no guard fired), lists unassessed runs separately,
+  reads denial records, and shows findings vs denials in separate
+  columns — G-RES now reads `1 denial` where it used to read `NEVER
+  FIRED because it worked`. `explore.py` finds `sim_id` in a report or a
+  bare declaration. Section 1 (G-RES is only as strong as the declared
+  pair) was NOT "fixed" — it is a limit on what the guard can promise,
+  not a defect. 66 tests green. Stdlib only, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

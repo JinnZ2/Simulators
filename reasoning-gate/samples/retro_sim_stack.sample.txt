@@ -42,13 +42,16 @@ SIM-B  fractal dimension  (the decisive sim)
 GATE SIM-B-margin1
   expected : if the classes are distinct, |D_f(AB) - D_f(cascade)| exceeds the estimator's artifact floor
   observed : two estimators shipped. box-count separates by +0.334, sandbox by -0.023 with the sign reversed. the sandbox estimator fails the Line control at 1.913.
+  diverged : YES
   control  : Line, true D_f = 1           run
   control  : matched-N Poisson at 1,024 pts NOT RUN
   resolve  : estimator artifact floor vs separation ok
   claim    : [supported] the quasiperiodic and cascade dimensions do not coincide
   claim    : [unsupported] the two classes do not share a common fractal geometry
   finding  : [G-SUP] claim has no named support
+             ^ the two classes do not share a common fractal geometry
   finding  : [G-CTRL] no controls declared: a confirming result cannot be distinguished from an artifact
+             ^ declared but never run: matched-N Poisson at 1,024 pts
 
   The gate cannot know the sandbox numbers exist unless they are
   recorded, and it cannot stop an author from omitting them. What
@@ -70,13 +73,17 @@ SIM-C  threshold sweep
 GATE SIM-C
   expected : if the two correspond, the knee sits at the cascade's own branching fraction
   observed : no sharp threshold found. splitting grows gradually. curvature has comparable peaks at f = 0.45 / 0.55 / 0.65 / 0.70 / 0.80 / 0.90 and the winner lands on a local minimum of the curve it is meant to find the knee of.
+  diverged : YES
   control  : threshold inserted at a known f NOT RUN
   resolve  : f-grid vs knee width         ok
   VOID     : ratio_54x (tight-binding lattice model vs cascade set)
   claim    : [unsupported] the two systems show different threshold behavior
   finding  : [G-DIM] ratio operands are properties of different objects: void, no interpretation permitted
+             ^ ratio_54x: 'knee_splitting' is a property of 'tight-binding lattice model', 'cascade_E_split' is a property of 'cascade set'
   finding  : [G-SUP] claim has no named support
+             ^ the two systems show different threshold behavior
   finding  : [G-CTRL] no controls declared: a confirming result cannot be distinguished from an artifact
+             ^ declared but never run: threshold inserted at a known f
 
   G-DIM voids the 54.1. Both operands are real, both are
   dimensionless, the division runs without error — and the
@@ -100,6 +107,7 @@ SIM-STACK  the overall conclusion
 GATE SIM-STACK
   expected : if the lines are independent, agreement multiplies confidence
   observed : the three lines are not independent. SIM-A and SIM-B are two statistics on one pair of point sets, and SIM-C's contribution is a null.
+  diverged : YES
   control  : independence check           run
   resolve  : matched-N baseline vs claimed separation ok
   claim    : [qualified] convergence across SIM-A, SIM-B, SIM-C

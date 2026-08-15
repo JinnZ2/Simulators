@@ -19,6 +19,12 @@ STAGE_TITLE = {
 }
 
 
+def _stages(guard):
+    """`stage` may be a single string or a list -- a guard can fire twice."""
+    st = guard.get("stage", [])
+    return [st] if isinstance(st, str) else list(st)
+
+
 def render(reg):
     out = []
     out.append("# GUARDS")
@@ -47,7 +53,7 @@ def render(reg):
     out.append("")
 
     for stage in STAGE_ORDER:
-        guards = [g for g in reg["guards"] if g["stage"] == stage]
+        guards = [g for g in reg["guards"] if stage in _stages(g)]
         if not guards:
             continue
         out.append("## %s" % STAGE_TITLE[stage])
@@ -55,6 +61,10 @@ def render(reg):
         for g in guards:
             out.append("### %s - %s" % (g["id"], g["name"]))
             out.append("")
+            if len(_stages(g)) > 1:
+                out.append("Also fires at: %s"
+                           % ", ".join(x for x in _stages(g) if x != stage))
+                out.append("")
             out.append("```")
             out.append("rule    %s" % _wrap(g["rule"], 8))
             out.append("denies  %s" % _wrap(g["fail_message"], 8))

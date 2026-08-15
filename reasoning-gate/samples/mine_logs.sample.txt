@@ -1,16 +1,15 @@
-runs: 2   voided ratios: 1
+runs: 3   (closed 2, denied 1)   voided ratios: 1
 
-guard hit rate
-  G-RES      0    0.0%   NEVER FIRED
-  G-CTRL     0    0.0%   NEVER FIRED
-  G-PRE      0    0.0%   NEVER FIRED
-  G-LAYER    0    0.0%   NEVER FIRED
-  G-DIM      1   50.0%
-  G-SUP      1   50.0%
-  G-FIT      0    0.0%   NEVER FIRED
-  G-IND      1   50.0%
+guard activity
+  guard    findings  denials    total
+  G-RES           0        1        1
+  G-CTRL          0        0        0   NEVER FIRED
+  G-PRE           0        0        0   NEVER FIRED
+  G-LAYER         1        0        1
+  G-DIM           1        0        1
+  G-SUP           1        0        1
+  G-FIT           0        0        0   NEVER FIRED
+  G-IND           1        0        1
 
 divergences with no guard attached  (the growth edge)
-  SIM-B
-    expected: AB near 2 (space-filling), cascade below 2 (clustered)
-    observed: AB 1.889 / cascade 1.555, controls on target
+  none

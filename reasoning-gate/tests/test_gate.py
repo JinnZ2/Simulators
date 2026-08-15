@@ -3,12 +3,12 @@ Tests for gate.py.
 
 Two halves, deliberately separated:
 
-  GuardBehaviour  — the eight guards do what guards.json says they do.
-  ShippedDefects  — four defects found on landing, locked in as tests so
-                    a fix flips a test rather than passing silently.
+  GuardBehaviour   — the eight guards do what guards.json says they do.
+  RepairedDefects  — the defects found on landing, now fixed. These tests
+                     asserted the broken behaviour until the repair; they
+                     now assert the fix, so a regression turns them red.
 
-gate.py is checked in exactly as delivered and has not been repaired. The
-defects are documented in ../README.md under "Audit of the gate itself".
+The defects and their repairs are documented in ../AUDIT_NOTES.md.
 
 Run:  python3 -m unittest discover tests
 """
@@ -281,92 +281,158 @@ class GuardBehaviour(unittest.TestCase):
             g.close(observed="o", write=False)
 
 
-class ShippedDefects(unittest.TestCase):
+class RepairedDefects(unittest.TestCase):
     """
-    Four defects in gate.py as delivered. Each test asserts the CURRENT
-    behaviour, so fixing the module turns the test red on purpose.
+    D1-D4, found on landing and since fixed. Each test asserted the broken
+    behaviour before the repair and asserts the fix now.
     """
 
-    def test_defect_1_docstring_example_denies_at_pre(self):
+    # ---- D1: the docstring's usage example must actually run ----
+
+    def test_d1_docstring_example_runs(self):
         """
-        gate.py's module docstring presents a usage example that continues
-        through record/claim/close. It cannot: 0.39 x 2.0 > 0.063, so
-        G-RES denies at pre() and the example never reaches line two.
+        The module docstring declared instrument=0.39 against feature=0.063
+        and then continued through record/claim/close. It could not: G-RES
+        denied at pre(). The example now declares a resolution that passes,
+        and the SIM-A numbers are kept in a clearly labelled DENIAL EXAMPLE.
         """
+        g = opened(resolution=[Resolution("k-grid vs Bragg peak width",
+                                          instrument=0.020, feature=0.063)])
+        g.control_result("c", "peaks resolved")
+        g.record("alpha_tail_AB", -1.529, "physical", "AB tiling")
+        g.claim("AB is quasi-crystalline", supported_by=["alpha_tail_AB"])
+        report = g.close(observed="only k=0 present", diverged=True,
+                         write=False)
+        self.assertEqual(report["claims"][0]["status"], "supported")
+
+    def test_d1_the_denial_example_still_denies(self):
         with self.assertRaises(GateError) as cm:
             opened(resolution=[Resolution("k-grid vs Bragg peak width",
                                           instrument=0.39, feature=0.063)])
         self.assertIn("G-RES", str(cm.exception))
 
-    def test_defect_2_promote_silently_overwrites(self):
-        """
-        record() refuses to overwrite a recorded name. promote() does not
-        check, so a promotion can replace an unrelated physical quantity —
-        in the one operation G-LAYER exists to make explicit.
-        """
+    # ---- D2: promote() and ratio() must not overwrite ----
+
+    def test_d2_promote_refuses_to_overwrite(self):
         g = opened()
         g.record("x", 1.0, "generator", "A")
         g.record("y", 99.0, "physical", "A")
-        g.promote("x", "y", "physical",
-                  "a justification long enough to clear the length check")
-        self.assertEqual(g.quantities["y"]["value"], 1.0)  # 99.0 is gone
+        with self.assertRaises(GateError) as cm:
+            g.promote("x", "y", "physical",
+                      "a justification long enough to clear the length check")
+        self.assertIn("already recorded", str(cm.exception))
+        self.assertEqual(g.quantities["y"]["value"], 99.0)   # preserved
 
-    def test_defect_2b_ratio_silently_overwrites(self):
-        """Same missing check in ratio()."""
+    def test_d2_ratio_refuses_to_overwrite(self):
         g = opened()
         g.record("a", 10.0, "physical", "A")
         g.record("b", 2.0, "physical", "A")
         g.record("r", 77.0, "physical", "A")
-        g.ratio("r", "a", "b")
-        self.assertEqual(g.quantities["r"]["value"], 5.0)  # 77.0 is gone
+        with self.assertRaises(GateError) as cm:
+            g.ratio("r", "a", "b")
+        self.assertIn("already recorded", str(cm.exception))
+        self.assertEqual(g.quantities["r"]["value"], 77.0)   # preserved
 
-    def test_defect_3_strict_close_writes_no_report(self):
+    def test_d2_promote_and_ratio_still_work_on_fresh_names(self):
+        g = opened()
+        g.record("x", 1.0, "generator", "A")
+        g.promote("x", "x_phys", "physical",
+                  "measured independently downstream of the generator")
+        g.record("b", 2.0, "physical", "A")
+        self.assertEqual(g.quantities["x_phys"]["layer"], "physical")
+        self.assertEqual(g.ratio("q", "x_phys", "b"), 0.5)
+
+    # ---- D3: a denied close must leave a record and close the gate ----
+
+    def test_d3_strict_close_writes_a_denial_record(self):
+        d = tempfile.mkdtemp()
+        g = opened(strict=True, log_dir=d)
+        with self.assertRaises(GateError):
+            g.close(observed="o")
+        self.assertEqual(os.listdir(d), ["gate_T.denied.json"])
+        with open(os.path.join(d, "gate_T.denied.json")) as fh:
+            rec = json.load(fh)
+        self.assertEqual(rec["outcome"], "DENIED")
+        self.assertEqual(rec["denied_by"], "G-CTRL")
+
+    def test_d3_the_retry_bypass_is_closed(self):
         """
-        In strict mode an unrun control raises from close() before the
-        report is written and before _closed is set. The gate denies, which
-        is correct — but the forensic record is lost, and the gate is left
-        open for a retry.
+        Catching the denial, answering the control with a placeholder and
+        closing again used to produce a clean report claiming run: True.
+        The gate now closes before denying, so nothing further is accepted.
         """
         d = tempfile.mkdtemp()
         g = opened(strict=True, log_dir=d)
         with self.assertRaises(GateError):
             g.close(observed="o")
-        self.assertEqual(os.listdir(d), [])
-        self.assertFalse(g._closed)
-
-    def test_defect_3b_retry_after_deny_reports_the_control_as_run(self):
-        """
-        The retry path. control_result() accepts any string, so answering a
-        denied close() with a placeholder produces a clean report whose
-        controls block says run=True. The finding survives in findings[],
-        but summary() prints the control as "run" — the two disagree.
-        """
-        d = tempfile.mkdtemp()
-        g = opened(strict=True, log_dir=d)
+        self.assertTrue(g._closed)
+        with self.assertRaises(GateError):
+            g.control_result("c", "n/a")
         with self.assertRaises(GateError):
             g.close(observed="o")
-        g.control_result("c", "n/a")
-        report = g.close(observed="o")
-        self.assertTrue(report["declaration"]["controls"][0]["run"])
-        self.assertIn("G-CTRL", [f["guard"] for f in report["findings"]])
-        self.assertIn("control  : c                            run",
-                      g.summary(report))
 
-    def test_defect_4_malformed_registry_loads_then_crashes(self):
-        """
-        _load_guards checks that all eight ids are present but not that each
-        carries a fail_message. A registry missing one loads fine and then
-        raises KeyError — not GateError — at the moment that guard fires.
-        A fail-closed tool should reject the registry at load.
-        """
+    def test_d3_pre_stage_denials_also_leave_a_record(self):
+        d = tempfile.mkdtemp()
+        with self.assertRaises(GateError):
+            Gate("DENIED", guards=GUARDS, log_dir=d).pre(
+                question="q", statistic="s", discriminates="d", expected="e",
+                resolution=[Resolution("too coarse", 0.39, 0.063)],
+                controls=[Control("c", predicted="p")])
+        with open(os.path.join(d, "gate_DENIED.denied.json")) as fh:
+            rec = json.load(fh)
+        self.assertEqual(rec["denied_by"], "G-RES")
+
+    def test_d3_empty_control_result_is_refused(self):
+        g = opened()
+        with self.assertRaises(GateError):
+            g.control_result("c", "   ")
+
+    # ---- D4: a registry without fail_messages must not load ----
+
+    def test_d4_registry_missing_fail_message_is_rejected_at_load(self):
         reg = _load_registry()
         for g in reg["guards"]:
             g.pop("fail_message", None)
-        path = _write_registry(reg)
+        with self.assertRaises(GateError) as cm:
+            Gate("T", guards=_write_registry(reg))
+        self.assertIn("no fail_message", str(cm.exception))
 
-        gate = Gate("T", guards=path)  # loads, wrongly
-        with self.assertRaises(KeyError):
-            gate.record("x", 1.0, "physical", "A")
+    def test_d4_one_blank_fail_message_is_enough_to_reject(self):
+        reg = _load_registry()
+        for g in reg["guards"]:
+            if g["id"] == "G-DIM":
+                g["fail_message"] = "   "
+        with self.assertRaises(GateError) as cm:
+            Gate("T", guards=_write_registry(reg))
+        self.assertIn("G-DIM", str(cm.exception))
+
+
+class DivergenceCall(unittest.TestCase):
+    """close(diverged=...) — the author's explicit call, not inferred."""
+
+    def test_diverged_defaults_to_unassessed(self):
+        g = opened(strict=False)
+        g.control_result("c", "ran")
+        self.assertIsNone(g.close(observed="o", write=False)["diverged"])
+
+    def test_diverged_is_recorded_verbatim(self):
+        for value in (True, False):
+            g = opened(strict=False)
+            g.control_result("c", "ran")
+            report = g.close(observed="o", diverged=value, write=False)
+            self.assertIs(report["diverged"], value)
+
+    def test_diverged_rejects_a_non_verdict(self):
+        g = opened(strict=False)
+        g.control_result("c", "ran")
+        with self.assertRaises(GateError):
+            g.close(observed="o", diverged="maybe")
+
+    def test_summary_shows_the_divergence_call(self):
+        g = opened(strict=False)
+        g.control_result("c", "ran")
+        report = g.close(observed="o", write=False)
+        self.assertIn("NOT ASSESSED", g.summary(report))
 
 
 class DeliveredRegistryAndReplay(unittest.TestCase):
@@ -389,12 +455,12 @@ class DeliveredRegistryAndReplay(unittest.TestCase):
         with self.assertRaises(GateError):
             opened(resolution=[Resolution("statistical", 0.252, 0.334)])
 
-    def test_generator_quantity_can_support_a_physical_claim(self):
+    def test_generator_support_downgrades_a_physical_claim(self):
         """
-        AUDIT_NOTES section 2. summary() prints 'no physical claim
-        permitted' for generator-level quantities while claim() records a
-        claim resting on one as supported, with no finding. G-LAYER
-        guards tagging, not use.
+        AUDIT_NOTES section 2, repaired. summary() used to print 'no
+        physical claim permitted' directly above a claim resting on one,
+        recorded as supported, with findings empty. G-LAYER guarded the
+        tagging of quantities and not their use.
         """
         g = opened(strict=True)
         g.record("Df_AB", 1.889, "physical", "Ammann-Beenker tiling")
@@ -404,23 +470,53 @@ class DeliveredRegistryAndReplay(unittest.TestCase):
         g.control_result("c", "ran")
         report = g.close(observed="o", write=False)
 
-        self.assertEqual(report["claims"][0]["status"], "supported")
-        self.assertIn("generator", report["claims"][0]["support_layers"])
-        self.assertEqual(report["findings"], [])          # nothing fired
+        claim = report["claims"][0]
+        self.assertEqual(claim["status"], "qualified")
+        self.assertIn("Df_cascade", claim["layer_note"])
+        self.assertIn("G-LAYER", [f["guard"] for f in report["findings"]])
         text = g.summary(report)
         self.assertIn("no physical claim permitted", text)
-        self.assertIn("[supported]", text)                # both, same page
+        self.assertIn("[qualified]", text)
+        self.assertNotIn("[supported]", text)
 
-    def test_g_fit_documented_post_but_enforced_pre(self):
-        """
-        AUDIT_NOTES section 3. guards.json labels G-FIT stage 'post';
-        gate.py denies on it inside pre().
-        """
+    def test_a_generator_scoped_claim_is_not_downgraded(self):
+        """The downgrade is about scope, not about touching the generator."""
+        g = opened(strict=True)
+        g.record("Df_cascade", 1.555, "generator", "branching_walk output")
+        g.claim("the branching walk produces D_f = 1.555 at these parameters",
+                supported_by=["Df_cascade"], scope="generator")
+        g.control_result("c", "ran")
+        report = g.close(observed="o", write=False)
+        self.assertEqual(report["claims"][0]["status"], "supported")
+        self.assertEqual(report["findings"], [])
+
+    def test_a_purely_physical_claim_is_not_downgraded(self):
+        g = opened(strict=True)
+        g.record("Df_AB", 1.889, "physical", "Ammann-Beenker tiling")
+        g.record("spread", 0.075, "instrument", "box-count estimator")
+        g.claim("AB sits in the space-filling cluster",
+                supported_by=["Df_AB", "spread"])
+        g.control_result("c", "ran")
+        report = g.close(observed="o", write=False)
+        self.assertEqual(report["claims"][0]["status"], "supported")
+
+    def test_an_unknown_claim_scope_denies(self):
+        g = opened(strict=False)
+        g.record("x", 1.0, "physical", "A")
+        with self.assertRaises(GateError):
+            g.claim("c", supported_by=["x"], scope="hypothesis")
+
+    def test_g_fit_is_documented_at_the_stage_it_fires(self):
+        """AUDIT_NOTES section 3, repaired: G-FIT was labelled 'post'."""
         entry = next(g for g in _load_registry()["guards"] if g["id"] == "G-FIT")
-        self.assertEqual(entry["stage"], "post")
+        self.assertEqual(entry["stage"], "pre")
         with self.assertRaises(GateError) as cm:
-            opened(discriminates="")       # denied before anything runs
+            opened(discriminates="")
         self.assertIn("G-FIT", str(cm.exception))
+
+    def test_g_ctrl_declares_both_stages_it_fires_at(self):
+        entry = next(g for g in _load_registry()["guards"] if g["id"] == "G-CTRL")
+        self.assertEqual(entry["stage"], ["pre", "post"])
 
     def test_delivered_registry_carries_the_doc_fields(self):
         reg = _load_registry()
@@ -429,16 +525,6 @@ class DeliveredRegistryAndReplay(unittest.TestCase):
             for field in ("id", "stage", "name", "rule", "fail_message",
                           "rationale"):
                 self.assertIn(field, g)
-
-    def test_guards_md_is_in_sync_with_guards_json(self):
-        """GUARDS.md is generated. It must match a fresh render."""
-        sys.path.insert(0, os.path.dirname(os.path.dirname(
-            os.path.abspath(__file__))))
-        import make_docs
-        here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        with open(os.path.join(here, "GUARDS.md")) as fh:
-            on_disk = fh.read()
-        self.assertEqual(on_disk, make_docs.render(_load_registry()))
 
 
 class DeliveredReplayBehaviour(unittest.TestCase):
@@ -456,7 +542,10 @@ class DeliveredReplayBehaviour(unittest.TestCase):
     def test_sim_b_passes(self):
         import replay_sim_stack
         g, rep = replay_sim_stack.sim_b()
-        self.assertEqual(rep["claims"][0]["status"], "supported")
+        # Passes -- no denial -- but its claim is qualified, not supported:
+        # Df_cascade is generator-level and the claim is physical-scope.
+        self.assertEqual(rep["outcome"], "CLOSED")
+        self.assertEqual(rep["claims"][0]["status"], "qualified")
         self.assertTrue(all(c["run"] for c in rep["declaration"]["controls"]))
 
     def test_sim_a_denies_at_pre(self):
@@ -474,23 +563,25 @@ class DeliveredReplayBehaviour(unittest.TestCase):
         self.assertEqual(set(fired), {"G-DIM", "G-SUP", "G-IND"})
 
 
-class DeliveredTools(unittest.TestCase):
+class RepairedTools(unittest.TestCase):
     """
-    Findings against mine_logs.py and explore.py. AUDIT_NOTES.md section 9.
-    Assert CURRENT behaviour so a repair turns a test red.
+    mine_logs.py and explore.py, repaired. AUDIT_NOTES.md section 9.
     """
 
     def setUp(self):
         self.here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         sys.path.insert(0, self.here)
+        self.guards = os.path.join(self.here, "guards.json")
 
     def _corpus(self):
-        """A gate log dir with one clean run and one that fired guards."""
+        """One sound run, one that fired guards, one denied outright."""
         d = tempfile.mkdtemp()
-        clean = opened(strict=False, log_dir=d)
-        clean.record("x", 1.0, "physical", "A")
-        clean.control_result("c", "ran")
-        clean.close(observed="a restatement of the expectation, in other words")
+
+        sound = opened(strict=False, log_dir=d)
+        sound.record("x", 1.0, "physical", "A")
+        sound.control_result("c", "ran")
+        sound.close(observed="a restatement of the expectation, other words",
+                    diverged=False)
 
         dirty = Gate("DIRTY", guards=GUARDS, strict=False, log_dir=d)
         dirty.pre(question="q", statistic="s", discriminates="d", expected="e",
@@ -498,45 +589,61 @@ class DeliveredTools(unittest.TestCase):
                   controls=[Control("c", predicted="p")])
         dirty.control_result("c", "ran")
         dirty.claim("unsupported thing", supported_by=[])
-        dirty.close(observed="o")
-        return d
+        dirty.close(observed="o", diverged=True)
 
-    def test_mine_logs_flags_a_sound_run_as_a_divergence(self):
-        """
-        The 'growth edge' section tests expected != observed on two
-        free-text strings, which are never equal. Any run that fires no
-        guard lands in the list -- including a sound one.
-        """
-        import mine_logs
-        out = mine_logs.mine(self._corpus(), os.path.join(self.here, "guards.json"))
-        flagged = [sim for sim, _, _ in out["uncaught"]]
-        self.assertIn("T", flagged)          # the clean run, wrongly flagged
-        self.assertNotIn("DIRTY", flagged)   # fired a guard, so excluded
-
-    def test_mine_logs_cannot_see_denials(self):
-        """
-        A pre-stage deny raises before close(), so it writes no gate_*.json.
-        The guard that stopped a run is invisible to the miner and reports
-        as NEVER FIRED -- precisely because it worked.
-        """
-        d = tempfile.mkdtemp()
         with self.assertRaises(GateError):
             Gate("DENIED", guards=GUARDS, strict=False, log_dir=d).pre(
                 question="q", statistic="s", discriminates="d", expected="e",
                 resolution=[Resolution("too coarse", 0.39, 0.063)],
                 controls=[Control("c", predicted="p")])
-        self.assertEqual(os.listdir(d), [])
+        return d
+
+    def test_a_sound_run_is_no_longer_flagged_as_a_divergence(self):
+        """
+        The growth edge used to test expected != observed on free text,
+        which is never equal, so every guard-free run landed in it. It now
+        reads the author's explicit diverged call.
+        """
+        import mine_logs
+        out = mine_logs.mine(self._corpus(), self.guards)
+        self.assertEqual([sim for sim, _, _ in out["uncaught"]], [])
+
+    def test_a_real_uncaught_divergence_is_still_reported(self):
+        """diverged=True with no guard fired is the case worth surfacing."""
+        d = tempfile.mkdtemp()
+        g = opened(strict=False, log_dir=d)
+        g.record("x", 1.0, "physical", "A")
+        g.control_result("c", "ran")
+        g.close(observed="nothing like the prediction", diverged=True)
 
         import mine_logs
-        out = mine_logs.mine(d, os.path.join(self.here, "guards.json"))
-        self.assertEqual(out["runs"], 0)
-        self.assertEqual(out["fires"], {})
+        out = mine_logs.mine(d, self.guards)
+        self.assertEqual([sim for sim, _, _ in out["uncaught"]], ["T"])
 
-    def test_explore_reads_sim_id_as_none_on_a_gate_report(self):
+    def test_unassessed_runs_are_named_not_guessed(self):
+        d = tempfile.mkdtemp()
+        g = opened(strict=False, log_dir=d)
+        g.control_result("c", "ran")
+        g.close(observed="o")                      # no diverged call
+
+        import mine_logs
+        out = mine_logs.mine(d, self.guards)
+        self.assertEqual(out["unassessed"], ["T"])
+        self.assertEqual(out["uncaught"], [])
+
+    def test_mine_logs_counts_denials(self):
         """
-        __main__ passes d["declaration"] into explore(), which then looks
-        for sim_id inside it -- but sim_id is top-level in a gate report.
+        A guard that stops a run used to leave no log and report NEVER
+        FIRED. Denial records are now written and counted.
         """
+        import mine_logs
+        out = mine_logs.mine(self._corpus(), self.guards)
+        self.assertEqual(out["denied"], 1)
+        self.assertEqual(out["closed"], 2)
+        self.assertEqual(out["denies"].get("G-RES"), 1)
+        self.assertEqual(out["fires"].get("G-SUP"), 1)
+
+    def test_explore_finds_sim_id_in_a_gate_report(self):
         import explore as explore_mod
         d = tempfile.mkdtemp()
         g = opened(strict=False, log_dir=d)
@@ -545,10 +652,38 @@ class DeliveredTools(unittest.TestCase):
         with open(report["_path"]) as fh:
             loaded = json.load(fh)
 
-        doc = explore_mod.explore(loaded["declaration"])
-        self.assertIsNone(doc["sim"])                     # lost
-        self.assertEqual(loaded["sim_id"], "T")           # present one level up
+        doc = explore_mod.explore(loaded)
+        self.assertEqual(doc["sim"], "T")
+        self.assertEqual(doc["question"], "q")
         self.assertEqual(len(doc["candidates"]), 21)
+
+    def test_explore_still_accepts_a_bare_declaration(self):
+        import explore as explore_mod
+        doc = explore_mod.explore({"question": "q", "statistic": "s"})
+        self.assertIsNone(doc["sim"])
+        self.assertEqual(doc["question"], "q")
+
+
+class GeneratedDocs(unittest.TestCase):
+
+    def test_guards_md_matches_a_fresh_render(self):
+        sys.path.insert(0, os.path.dirname(os.path.dirname(
+            os.path.abspath(__file__))))
+        import make_docs
+        here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        with open(os.path.join(here, "GUARDS.md")) as fh:
+            self.assertEqual(fh.read(), make_docs.render(_load_registry()))
+
+    def test_a_multi_stage_guard_renders_under_each_stage(self):
+        sys.path.insert(0, os.path.dirname(os.path.dirname(
+            os.path.abspath(__file__))))
+        import make_docs
+        text = make_docs.render(_load_registry())
+        pre = text.index("## PRE"), text.index("## MID")
+        post = text.index("## POST")
+        self.assertTrue(pre[0] < text.index("### G-CTRL") < pre[1])
+        self.assertTrue(post < text.rindex("### G-CTRL"))
+        self.assertIn("Also fires at: post", text)
 
 
 if __name__ == "__main__":

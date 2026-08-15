@@ -183,7 +183,8 @@ def sim_b_relaxed(artifact_floor: float, separation: float) -> None:
     report = g.close(
         observed="two estimators shipped. box-count separates by +0.334, "
                  "sandbox by -0.023 with the sign reversed. the sandbox "
-                 "estimator fails the Line control at 1.913.")
+                 "estimator fails the Line control at 1.913.",
+        diverged=True)
     print()
     print(g.summary(report))
     print()
@@ -238,6 +239,7 @@ def sim_c() -> None:
             supported_by=[])
 
     report = g.close(
+        diverged=True,
         observed="no sharp threshold found. splitting grows gradually. "
                  "curvature has comparable peaks at f = 0.45 / 0.55 / 0.65 / "
                  "0.70 / 0.80 / 0.90 and the winner lands on a local minimum "
@@ -297,6 +299,7 @@ def overall() -> None:
     )
 
     report = g.close(
+        diverged=True,
         observed="the three lines are not independent. SIM-A and SIM-B are "
                  "two statistics on one pair of point sets, and SIM-C's "
                  "contribution is a null.")

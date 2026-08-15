@@ -35,8 +35,13 @@ MOVES = {
  ],
 }
 
-def explore(declaration, kinds=None, out=None):
+def explore(declaration, kinds=None, out=None, sim_id=None):
+    """`declaration` may be a gate report or the declaration block inside
+    one. sim_id lives at the top level of a report, not in the declaration,
+    so accept it from either place."""
     kinds = kinds or list(MOVES)
+    decl = declaration.get("declaration", declaration)
+    sim_id = sim_id or declaration.get("sim_id") or decl.get("sim_id")
     cands = []
     for k in kinds:
         for i, m in enumerate(MOVES[k]):
@@ -44,18 +49,23 @@ def explore(declaration, kinds=None, out=None):
                           "kind": k, "probe": m,
                           "applies": None,      # yes | no | unclear
                           "note": ""})
-    doc = {"sim": declaration.get("sim_id"),
-           "question": declaration.get("question"),
-           "statistic": declaration.get("statistic"),
+    doc = {"sim": sim_id,
+           "question": decl.get("question"),
+           "statistic": decl.get("statistic"),
            "candidates": cands,
            "ordering": "arbitrary. not a ranking. not a shortest path."}
     if out:
-        json.dump(doc, open(out, "w"), indent=2)
+        with open(out, "w") as fh:
+            json.dump(doc, fh, indent=2)
     for c in cands:
         print("[ ] %-8s %s" % (c["id"], c["probe"]))
     print("\n%d candidates, unranked. fill applies= yes|no|unclear." % len(cands))
     return doc
 
 if __name__ == "__main__":
-    d = json.load(open(sys.argv[1])) if len(sys.argv) > 1 else {}
-    explore(d.get("declaration", d), out="explore_%s.json" % d.get("sim_id","x"))
+    if len(sys.argv) > 1:
+        with open(sys.argv[1]) as fh:
+            d = json.load(fh)
+    else:
+        d = {}
+    explore(d, out="explore_%s.json" % (d.get("sim_id") or "x"))

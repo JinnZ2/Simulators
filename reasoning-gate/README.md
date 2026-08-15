@@ -10,12 +10,20 @@ make_docs.py         guards.json -> GUARDS.md (generated, not hand-edited)
 GUARDS.md            human-readable, regenerate after any json edit
 replay_sim_stack.py  test case: replays an audited stack, gate must
                      pass the sound sim and catch the other two
+mine_logs.py         reads gate_*.json + gate_*.denied.json
+explore.py           widens one declaration. ranks nothing.
+retro_sim_stack.py   second replay, declared differently. disagrees
+                     with the first about SIM-B, on purpose.
+SIM_STACK_BACKTRACE.md  the audit these guards were back-traced from
+AUDIT_NOTES.md       what broke, what was fixed, what is a limit
+tests/               66 tests. run: python3 -m unittest discover tests
 ```
 
 ```
 python3 gate.py               # selftest
 python3 replay_sim_stack.py   # test case
 python3 make_docs.py          # regenerate docs
+python3 mine_logs.py .        # what fired, what denied, what nobody looked at
 ```
 
 ## What it enforces
@@ -32,8 +40,16 @@ MID   every quantity tagged  generator | physical | instrument
 
 POST  ratio across unlike objects -> void
       claim with no named support -> unsupported, excluded
+      physical claim resting on generator-level support
+        -> qualified, not supported
       convergence claim -> must name what the results share
+      divergence -> the author's explicit call, or NOT ASSESSED.
+        never inferred by comparing two prose strings
 ```
+
+Every denial writes `gate_<SIM>.denied.json` before raising. A guard
+that stops a run has to leave a record, or it reads as never having
+fired.
 
 ## Status
 
