@@ -1352,6 +1352,53 @@ underneath).
   refuse-to-score-out-of-scope stance, one level down),
   `divergence-playground/` (G-IND is `agree_by_accident` as a
   precondition). Stdlib only, phone-buildable, CC0.
+  **Third drop** lands `mine_logs.py` (guard hit rates + never-fired
+  guards + "divergences with no guard attached" over a `gate_*.json`
+  dir), `explore.py` (21 unranked widening probes across
+  instrument/statistic/physical/disposition; "outputs candidates, ranks
+  nothing, refuses to converge"), and `SIM_STACK_BACKTRACE.md` — the
+  origin document named in `guards.json`'s `origin` field, with per-sim
+  verdicts, six candidate PATTERNs, a confidence readout, and the n=1
+  caveat. **AUDIT_NOTES §7-9 responds.** §7: the back-trace's SIM-A
+  diagnosis is checked by a new
+  `aperiodic-order-sim-stack/aperture_alias_demo.py` (stdlib, 1D probes
+  with analytically known spectra) and **both halves hold**. The strong
+  half is the floor tell — a quasiperiodic set has a PURE POINT spectrum
+  so its between-peak floor sits BELOW the uncorrelated value; a
+  Fibonacci chain (1D analogue of Ammann-Beenker) returns floor **0.09**
+  against Poisson **0.99**, while SIM-A reports AB at 2.08 and cascade
+  at 0.96 — inverted, and independent of any guess about grid spacing.
+  The aliasing half is confirmed as a mechanism but
+  configuration-dependent: a grid 86× the peak width misses 25 of 34
+  Bragg peaks, the 9 hits being a 35/3 commensurability accident, and on
+  the Fibonacci probe exactly 1 of 400 samples lands on a peak. **This
+  corrected an error in the repo's own earlier audit** — the first pass
+  conceded AB's |k| ≈ 20 oscillations were real structure when the
+  refuting number (floor 2.08 vs 0.96) was already in the same
+  paragraph; `AOS_006` revised, `AOS_007` upgraded UNVERIFIED →
+  SUPPORTED. Caveat kept: the Fibonacci plain MEAN is 2.45, so if 2.08
+  were a mean rather than a top-excluded floor a real quasicrystal could
+  produce it — the comparison rests on the panel's "excl. top 1%" label.
+  §8: the back-trace catches what the first audit missed on SIM-B — the
+  report's "15× baseline" uses `|AB−Poisson| = 0.021`, the **smallest**
+  of three pairwise gaps in the space-filling cluster, when the cluster
+  spread is 0.075; honest ratio **0.334/0.075 ≈ 4.5×**, still decisive,
+  not 15×. Converges with `finite_n_control.py` from the opposite
+  direction (0.252 artifact budget → 0.082 residual): two routes, an
+  effective error bar near 0.08. Recorded as `AOS_009`; `AOS_010` adds
+  that no cascade number in the stack supports a statement about
+  tungsten. §9: **two defects in the new tools.** `mine_logs.py` tests
+  `expected != observed` on free-text strings, which are never equal, so
+  its "growth edge" section flags every guard-free run — on the
+  delivered corpus it flags SIM-B, the one sound sim. Deeper:
+  **`mine_logs.py` is blind to denials** — a pre-stage deny raises
+  before `close()` and writes no log, so G-RES reports `NEVER FIRED`
+  *because it worked*; an operator pruning never-fired guards would
+  delete the most effective ones first. Fix is on the gate side (write
+  `gate_<SIM>.denied.json` before raising), which would also close D3's
+  lost forensic record — one change, two defects. `explore.py` reads
+  `sim` as `None` on a real gate report, since `sim_id` is top-level
+  and `__main__` passes only `declaration`. 49 tests green.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

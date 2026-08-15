@@ -171,19 +171,43 @@ quasiperiodic order. It reaches `S(0) ≈ 11,500` against a diffuse floor
 of 2.08, so on the linear color scale used it flattens everything else to
 black. The quoted "peak/floor ratio = 5537" is essentially `S(0)/floor`.
 
-Part of the SIM-A reading does hold. The radial profile (top-right panel,
-log scale) shows real oscillatory structure in the AB curve out to
-|k| ≈ 20 while the Cascade is flat at ≈ 1. Flat-at-1 is the signature of
-an uncorrelated point set, and AB clearly is not that. **AB has more
-k-space structure than the Cascade — that much the figure supports.**
+**Correction.** An earlier version of this section said the AB radial
+profile's oscillations out to |k| ≈ 20 were real structure, and that
+"AB has more k-space structure than the Cascade — that much the figure
+supports." That was wrong, and the reason is in the number I had already
+quoted.
 
-What the figure does not support is the specific reading. The tail
-exponent difference (α_AB = −1.529 vs α_C = −0.069) is measured on a
-profile whose dynamic range is dominated by the forward peak, so it is at
-least partly a measurement of `S(0)` falloff rather than of structural
-scaling. Re-plotting on a log color scale with `k = 0` excluded would
-settle in one pass whether the eight-fold peaks are there. It is the
-single cheapest outstanding check in the drop.
+The diffuse floor is **2.08 for AB and 0.96 for the Cascade**. `S(k) → 1`
+is the correct asymptote for an uncorrelated point set, so the Cascade's
+0.96 is right. But a quasiperiodic tiling has a **pure point** spectrum:
+between its Bragg peaks there is almost nothing, so its floor must sit
+*below* the uncorrelated value, not twice above it. The ordering is
+backwards, and no pure point spectrum produces it.
+
+[`aperture_alias_demo.py`](aperture_alias_demo.py) confirms this on 1D
+probes with analytically known spectra: a Fibonacci chain — the standard
+analogue of an Ammann-Beenker tiling — returns a floor of **0.09** against
+a Poisson floor of **0.99**, an order of magnitude below. The same demo
+shows a k-grid 86× the finite-sample peak width missing 25 of 34 Bragg
+peaks, with the survivors a commensurability accident.
+
+So the oscillations are the aperture, not the tiling: sinc/Airy ringing
+from the finite sample window. On that reading "68 peaks" are fringe
+maxima, the 2.08 floor is residual ringing, and α_AB = −1.529 is the decay
+of the window envelope. **Nothing in SIM-A is a property of the
+Ammann-Beenker tiling.** The Cascade side is unaffected — α ≈ 0 and
+floor ≈ 1 are what an uncorrelated point set should give.
+
+One caveat that would change this: the plain *mean* of the same Fibonacci
+samples is 2.45, not 0.09, because one sampled peak dominates it. If
+SIM-A's 2.08 were a mean rather than a top-excluded floor, a
+quasiperiodic set could produce it. The figure panel is labelled "Diffuse
+Background (excl. top 1%)", so the comparison stands as read — but it
+rests on that label.
+
+The decisive run is still cheap and still outstanding: push the SIM-B
+periodic lattice, already in hand, through the SIM-A code. If the lattice
+also returns only `k = 0`, aliasing is confirmed in one run.
 
 ## What the drop actually establishes
 

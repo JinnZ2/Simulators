@@ -474,5 +474,82 @@ class DeliveredReplayBehaviour(unittest.TestCase):
         self.assertEqual(set(fired), {"G-DIM", "G-SUP", "G-IND"})
 
 
+class DeliveredTools(unittest.TestCase):
+    """
+    Findings against mine_logs.py and explore.py. AUDIT_NOTES.md section 9.
+    Assert CURRENT behaviour so a repair turns a test red.
+    """
+
+    def setUp(self):
+        self.here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        sys.path.insert(0, self.here)
+
+    def _corpus(self):
+        """A gate log dir with one clean run and one that fired guards."""
+        d = tempfile.mkdtemp()
+        clean = opened(strict=False, log_dir=d)
+        clean.record("x", 1.0, "physical", "A")
+        clean.control_result("c", "ran")
+        clean.close(observed="a restatement of the expectation, in other words")
+
+        dirty = Gate("DIRTY", guards=GUARDS, strict=False, log_dir=d)
+        dirty.pre(question="q", statistic="s", discriminates="d", expected="e",
+                  resolution=[Resolution("r", 1.0, 10.0)],
+                  controls=[Control("c", predicted="p")])
+        dirty.control_result("c", "ran")
+        dirty.claim("unsupported thing", supported_by=[])
+        dirty.close(observed="o")
+        return d
+
+    def test_mine_logs_flags_a_sound_run_as_a_divergence(self):
+        """
+        The 'growth edge' section tests expected != observed on two
+        free-text strings, which are never equal. Any run that fires no
+        guard lands in the list -- including a sound one.
+        """
+        import mine_logs
+        out = mine_logs.mine(self._corpus(), os.path.join(self.here, "guards.json"))
+        flagged = [sim for sim, _, _ in out["uncaught"]]
+        self.assertIn("T", flagged)          # the clean run, wrongly flagged
+        self.assertNotIn("DIRTY", flagged)   # fired a guard, so excluded
+
+    def test_mine_logs_cannot_see_denials(self):
+        """
+        A pre-stage deny raises before close(), so it writes no gate_*.json.
+        The guard that stopped a run is invisible to the miner and reports
+        as NEVER FIRED -- precisely because it worked.
+        """
+        d = tempfile.mkdtemp()
+        with self.assertRaises(GateError):
+            Gate("DENIED", guards=GUARDS, strict=False, log_dir=d).pre(
+                question="q", statistic="s", discriminates="d", expected="e",
+                resolution=[Resolution("too coarse", 0.39, 0.063)],
+                controls=[Control("c", predicted="p")])
+        self.assertEqual(os.listdir(d), [])
+
+        import mine_logs
+        out = mine_logs.mine(d, os.path.join(self.here, "guards.json"))
+        self.assertEqual(out["runs"], 0)
+        self.assertEqual(out["fires"], {})
+
+    def test_explore_reads_sim_id_as_none_on_a_gate_report(self):
+        """
+        __main__ passes d["declaration"] into explore(), which then looks
+        for sim_id inside it -- but sim_id is top-level in a gate report.
+        """
+        import explore as explore_mod
+        d = tempfile.mkdtemp()
+        g = opened(strict=False, log_dir=d)
+        g.control_result("c", "ran")
+        report = g.close(observed="o")
+        with open(report["_path"]) as fh:
+            loaded = json.load(fh)
+
+        doc = explore_mod.explore(loaded["declaration"])
+        self.assertIsNone(doc["sim"])                     # lost
+        self.assertEqual(loaded["sim_id"], "T")           # present one level up
+        self.assertEqual(len(doc["candidates"]), 21)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
