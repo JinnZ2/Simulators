@@ -1,6 +1,7 @@
 # CLAIM_TABLE — uninstrumented
 
-Twelve claims, `UNI_001..012`.
+Twelve claims, `UNI_001..012`. **Three repaired** (`UNI_003`, `UNI_009`,
+`UNI_010`), see *Repairs* at the end.
 
 ## REFUTATION_PROTOCOL
 
@@ -289,3 +290,92 @@ obvious one has the shape of `scan.py --asym` — count, across a corpus of
 reports, how often a structural claim with a stated referent is answered
 about the reporter's state rather than about the referent. That is the same
 instrument, aimed one step earlier.
+
+---
+
+## Repairs
+
+`UNI_003`, `UNI_009` and `UNI_010` are repaired. `DF_009`'s two scanner
+findings are repaired with them, since they are the same trigger list.
+
+### `UNI_003` — primary plus a list
+
+`entry()` takes `also=[(mechanism, why), ...]`, validates every mechanism
+against the closed vocabulary, refuses a primary repeated in the list, and
+`mechanisms_of()` returns all of them. The register sorts under each, so an
+entry appears wherever it has a claim — the correct cost, because it is in
+more than one place.
+
+**This is what let check 1 return anything but zero.** With a primary only,
+8 entries under 8 mechanisms from 8 fields made the mechanism partition and
+the field partition identical by construction. Now **5 mechanisms hold
+entries from more than one field**:
+
+```
+AUDIT_ASYMMETRY      ML evaluation | model behaviour
+AUTHORED_REFERENCE   ML evaluation | model behaviour
+BUDGET_BOUNDARY      behavioural ecology / industrial skill | energy accounting
+SCALAR_DEMAND        animal cognition | survey methodology
+SCORED_AS_WASTE      behavioural ecology / industrial skill | transport regulation
+```
+
+**`UNI_002` is not closed by this, and the script says so.** The secondary
+mechanisms were hand-assigned in `uninstrumented.py`, not filed as separate
+cases. That is weak evidence for the cross-domain grouping. The strong
+version is still the original expiry condition: a second entry, filed by
+someone else, landing under an existing mechanism from a different field.
+
+### `UNI_009` — one word boundary, on one trigger
+
+`lean` → `\blean\b` in `patterns.json`. Corpus candidates fell from ~845 to
+676 and `lean` left the top five entirely; the bare word accounted for 7 of
+its 193 hits, the rest being `clean`, `cleanly`, `boolean`.
+
+`slack` is **not** changed. Its 104 matches are mostly the bare word, and
+the residue is a proper-noun homograph and a code identifier — neither of
+which `\b` removes. Per-trigger, not global: a blanket `\b` would also break
+triggers written to match inside words.
+
+### `UNI_010` — the exclusion moved into the scanner
+
+`scan.py` gained `--exclude PATH` and honours a `.scanignore` file **anywhere
+in the tree it walks**, not only at the target root. `uninstrumented/.scanignore`
+lists `samples`, so the audit's own output is unreachable from any scan root.
+
+The claim's own falsifier asked for exactly this: *"an exclusion rule stated
+in `scan.py` rather than in the caller."* `scan_audit.py` no longer carries
+a path filter. The loop is closed in the tool, so **the reported corpus is
+the corpus on disk for every caller**, which the hand-broken version could
+not say.
+
+### `DF_009` — both findings, at a cost of 2 candidates
+
+The claim's falsifier: *a trigger that fires on the bare-numbers form without
+breaking the triage load.*
+
+```
+\d+(?:\.\d+)?\s*%[^.!?]{0,90}?\d+(?:\.\d+)?\s*%     -> BUDGET BOUNDARY
+inefficien(t|cy|cies) (at|in|as)                    -> BUDGET BOUNDARY
+```
+
+The delivered result string — *"Silicon PV converts ~22% of incident photons;
+leaf converts ~1-2%"* — now fires, **marked `weak`**, because `score()` gained
+a rule: a `BUDGET BOUNDARY` hit with no comparative word in the sentence is a
+triage candidate, not a finding. That is the delivered confidence gradient
+doing the work rather than a threshold.
+
+And the register's own `VISIBLE AS` line now fires under **both** mechanisms:
+
+```
+BUDGET BOUNDARY   'inefficient at'   candidate
+SCORED AS WASTE   'inefficient'      candidate
+```
+
+**A correction to the earlier audit:** it said the delivered `break` in
+`scan()` enforced one mechanism per sentence. It does not — the `break` exits
+the trigger loop, so mechanisms already co-fire. The wrong-mechanism finding
+was a missing trigger, not a blocked co-firing, and the repair is one trigger
+rather than two changes.
+
+Triage load after all of it: **0.9 candidates per 1000 words**, unchanged in
+the first decimal.

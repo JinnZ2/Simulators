@@ -10,6 +10,11 @@
 #   python3 scan.py --mech "SCORED AS WASTE" docs/
 #   python3 scan.py --asym transcripts/          (audit-asymmetry count)
 #   python3 scan.py --jsonl out.jsonl docs/      (machine-readable)
+#   python3 scan.py --exclude docs/out docs/     (skip a path)
+#
+# A .scanignore at the root of a directory target does the same thing
+# without a flag. Anything that writes its report into the scanned tree
+# needs one, or the next run measures the last run.
 
 import json
 import os
@@ -21,10 +26,28 @@ PATTERNS_PATH = os.path.join(HERE, "patterns.json")
 
 TEXT_EXT = (".txt", ".md", ".rst", ".org", ".csv", ".json", ".jsonl", ".py")
 
+# UNI_010: this scanner reads .txt, and anything that writes a report into
+# the tree it scans makes run N+1 measure run N -- consecutive runs disagree
+# before the corpus has changed. Callers were breaking that loop by
+# reimplementing a path filter, which puts the rule outside the tool. It
+# belongs here: --exclude, and a .scanignore alongside the target.
+DEFAULT_IGNORE_FILE = ".scanignore"
+
 # Sentence split. Deliberately crude: over-splitting costs nothing here.
 SENT = re.compile(r"(?<=[.!?])\s+(?=[A-Z(\"'\[])|\n{2,}")
 
 # Conditioning terms. Presence near a SCALAR DEMAND hit weakens it.
+# A bare pair of numbers is a comparison only sometimes. The BUDGET
+# BOUNDARY trigger that catches "22% ... 1-2%" also catches any two
+# percentages in one sentence, so a hit with no comparative nearby is
+# reported weak rather than dropped. DF_009 / UNI_009.
+COMPARATIVES = re.compile(
+    r"\b(than|versus|vs\.?|compared|relative to|against|"
+    r"outperform\w*|beat\w*|exceed\w*|more|less|higher|lower|better|"
+    r"worse|efficien\w*)\b",
+    re.I,
+)
+
 CONDITIONERS = re.compile(
     r"\b(when|during|if|context|situation|condition|domain|"
     r"depend(s|ing)?|varies|by (task|target|item|setting))\b",
@@ -68,15 +91,58 @@ def load_patterns(path=PATTERNS_PATH):
     return out
 
 
-def walk(targets):
+def read_ignore_file(directory):
+    """One path per line, relative to `directory`. Blank and # skipped."""
+    path = os.path.join(directory, DEFAULT_IGNORE_FILE)
+    if not os.path.exists(path):
+        return []
+    out = []
+    with open(path, "r", encoding="utf-8", errors="replace") as fh:
+        for line in fh:
+            line = line.split("#", 1)[0].strip()
+            if line:
+                out.append(os.path.abspath(os.path.join(directory, line)))
+    return out
+
+
+def load_ignores(targets, extra=()):
+    """
+    Prefixes to skip, from --exclude plus any .scanignore at a target root.
+    A .scanignore deeper in the tree is picked up during the walk, so a
+    folder can protect its own output no matter where the scan starts --
+    which is the case that matters: the loop is not the caller's to know
+    about.
+    """
+    out = [os.path.abspath(x) for x in extra]
+    for t in targets:
+        if os.path.isdir(t):
+            out.extend(read_ignore_file(t))
+    return out
+
+
+def _ignored(path, ignores):
+    ap = os.path.abspath(path)
+    return any(ap == ig or ap.startswith(ig.rstrip(os.sep) + os.sep)
+               for ig in ignores)
+
+
+def walk(targets, ignores=()):
     for t in targets:
         if os.path.isfile(t):
-            yield t
+            if not _ignored(t, ignores):
+                yield t
         elif os.path.isdir(t):
-            for root, _dirs, files in os.walk(t):
+            live = list(ignores)
+            for root, dirs, files in os.walk(t):
+                live.extend(read_ignore_file(root))
+                dirs[:] = [d for d in sorted(dirs)
+                           if not _ignored(os.path.join(root, d), live)]
                 for f in sorted(files):
-                    if f.lower().endswith(TEXT_EXT):
-                        yield os.path.join(root, f)
+                    if not f.lower().endswith(TEXT_EXT):
+                        continue
+                    full = os.path.join(root, f)
+                    if not _ignored(full, live):
+                        yield full
 
 
 def sentences(path):
@@ -102,14 +168,16 @@ def score(mech, sent):
         return "weak"     # conditioning present; may not be collapsed
     if mech == "AUDIT ASYMMETRY" and not HEDGES.search(sent):
         return "weak"
+    if mech == "BUDGET BOUNDARY" and not COMPARATIVES.search(sent):
+        return "weak"     # two numbers, no comparison stated
     if len(sent) > 400:
         return "weak"     # probably swept up a whole paragraph
     return "candidate"
 
 
-def scan(targets, patterns, only=None):
+def scan(targets, patterns, only=None, ignores=()):
     hits = []
-    for path in walk(targets):
+    for path in walk(targets, ignores):
         for lineno, sent in sentences(path):
             for mech, spec in patterns.items():
                 if only and mech != only:
@@ -130,10 +198,10 @@ def scan(targets, patterns, only=None):
     return hits
 
 
-def asym(targets):
+def asym(targets, ignores=()):
     """Count hedges by account type. Runs on transcripts you already have."""
     tally = {}
-    for path in walk(targets):
+    for path in walk(targets, ignores):
         out_h = out_n = inc_h = inc_n = 0
         for _lineno, sent in sentences(path):
             hedged = bool(HEDGES.search(sent))
@@ -196,6 +264,7 @@ def main(argv):
     only = None
     jsonl = None
     mode = "scan"
+    excludes = []
     targets = []
     i = 0
     while i < len(args):
@@ -206,6 +275,9 @@ def main(argv):
         elif a == "--jsonl":
             i += 1
             jsonl = args[i]
+        elif a == "--exclude":
+            i += 1
+            excludes.append(args[i])
         elif a == "--asym":
             mode = "asym"
         elif a in ("-h", "--help"):
@@ -217,11 +289,13 @@ def main(argv):
 
     if not targets:
         sys.stderr.write("usage: scan.py [--mech M] [--asym] "
-                         "[--jsonl OUT] FILE_OR_DIR...\n")
+                         "[--exclude PATH] [--jsonl OUT] FILE_OR_DIR...\n")
         return 2
 
+    ignores = load_ignores(targets, excludes)
+
     if mode == "asym":
-        report_asym(asym(targets))
+        report_asym(asym(targets, ignores))
         return 0
 
     patterns = load_patterns()
@@ -230,7 +304,7 @@ def main(argv):
                          % (only, ", ".join(sorted(patterns))))
         return 2
 
-    hits = scan(targets, patterns, only)
+    hits = scan(targets, patterns, only, ignores)
     report(hits)
     if jsonl:
         with open(jsonl, "w", encoding="utf-8") as fh:

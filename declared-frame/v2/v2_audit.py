@@ -12,9 +12,16 @@ v2 is a rewrite, not a patch. `compare()` returns a `(verdict, why)` pair
 instead of printing, which makes the verdict scriptable for the first time.
 That is the main gain and it is real.
 
-Three findings from `../CLAIM_TABLE.md` are re-run against it below. One is
-improved, one survives unchanged, one is worse. A fourth result is new to v2
-and follows from the same change that made it scriptable.
+Four findings from `../CLAIM_TABLE.md` are re-run against it below.
+
+DF_002 and DF_004 are now REPAIRED in v2/check_frame.py -- omission returns
+the open verdict, and the exit code carries the verdict. DF_003 and DF_007
+are not repaired and are not defects: they are limits on what a
+frame-declaration instrument can promise, and papering over either would
+cost more than it buys.
+
+v1 is loaded alongside and unmodified, so every before/after below is
+computed rather than quoted.
 """
 
 from __future__ import annotations
@@ -96,8 +103,7 @@ def run_v2_cli(a, b):
 
 
 def check_df002() -> None:
-    section("1  DF_002 survives unchanged -- omission is still the more "
-            "confident verdict")
+    section("1  DF_002 -- repaired. Omission returns the OPEN verdict")
 
     base = base_frame()
     omitted = dict(base)
@@ -112,33 +118,35 @@ def check_df002() -> None:
     print("  So omission is the worse of the two, and the tool should treat")
     print("  it at least as cautiously.\n")
 
-    print("  %-12s %-24s %-32s" % ("side B", "v1", "v2"))
+    print("  %-12s %-26s %-26s" % ("side B", "v1 (delivered)", "v2 repaired"))
     print("  " + "-" * 70)
     for label, fr in (("omitted", omitted), ("'unknown'", unknown)):
         v2v, _ = V2.compare(base, fr)
-        print("  %-12s %-24s %-32s"
+        print("  %-12s %-26s %-26s"
               % (label, "+".join(v1_verdict(base, fr)) or "-", v2v))
 
     print()
-    print("  Unchanged. `unknowns()` in v2 reads")
+    print("  Both now return the OPEN verdict. `unknowns()` reads")
     print("  `str(frame.get(f, \"\")).strip().lower() == \"unknown\"`, so a")
-    print("  MISSING field becomes \"\", is not 'unknown', falls through to")
-    print("  the core diff, and compares as a value against a real string.")
+    print("  MISSING field became \"\", was not 'unknown', fell through to")
+    print("  the core diff and compared as a value -- the settled verdict")
+    print("  for the case the doc calls worse. `compare()` now checks")
+    print("  `omitted()` first and names the missing field.")
     print()
-    print("  v2 makes it visible in a single run, which v1 did not:\n")
+    print("  The run that used to contradict itself:\n")
     out, _ = run_v2_cli(base, omitted)
     for line in _stable(out).strip().splitlines():
         print("      %s" % line)
     print()
-    print("  The tool prints 'omission reads as absence of the issue' and")
-    print("  then, three lines down, issues the settled verdict on that")
-    print("  field. The warning and the verdict contradict each other in one")
-    print("  stdout. Fix is the same three lines as before: treat a missing")
-    print("  core field as undetermined, tagged omitted rather than declared.")
+    print("  The OMITTED warning and the verdict now agree. Before the")
+    print("  repair the same stdout printed 'omission reads as absence of")
+    print("  the issue' and, three lines down, NOT DIRECTLY COMPARABLE on")
+    print("  that field -- the settled verdict, for the case the doc calls")
+    print("  the worse one.")
 
 
 def check_df004() -> None:
-    section("2  DF_004 is worse in v2 -- the exit code now tracks nothing")
+    section("2  DF_004 -- repaired. The exit code carries the verdict")
 
     base = base_frame()
     broken = dict(base)
@@ -146,9 +154,10 @@ def check_df004() -> None:
     other = dict(base)
     other["boundary"] = "everything, cradle to grave"
 
-    print("  v1 returned rc=1 when a block was malformed, so `check_frame.py")
-    print("  a b && use_both` at least caught a broken block.\n")
-    print("  v2's main() returns 0 on every path except a missing argument.\n")
+    print("  v1 returned rc=1 on a malformed block. v2 as delivered")
+    print("  returned 0 on every path except a missing argument, so")
+    print("  `check_frame.py a b && use_both` passed on two results the")
+    print("  tool had just said do not compare.\n")
 
     for label, b in (("malformed block (field omitted)", broken),
                      ("well-formed, not comparable", other),
@@ -157,16 +166,18 @@ def check_df004() -> None:
         print("    %-34s rc = %d" % (label, rc))
 
     print()
-    print("  Every case returns 0. The verdict IS now scriptable -- it comes")
-    print("  back from compare() as a value rather than as printed text --")
-    print("  so the fix is to route it into the exit code, which v1 could")
-    print("  not have done. One line, and only reachable because of the")
-    print("  rewrite:")
-    print()
     print("      DIRECTLY COMPARABLE      -> 0")
     print("      LOGIC MISMATCH           -> 1")
     print("      NOT DIRECTLY COMPARABLE  -> 1")
     print("      UNDETERMINED             -> 2   (not resolved, not failed)")
+    print()
+    print("  UNDETERMINED is deliberately not 1. It is neither a pass nor a")
+    print("  failure, and a caller that treats it as either has resolved a")
+    print("  gap the tool refused to resolve.")
+    print()
+    print("  The repair is only REACHABLE because of the v2 rewrite:")
+    print("  compare() returns a value, so there is a verdict to route.")
+    print("  DF_008 called that the rewrite's real gain; this is it spent.")
 
 
 def check_precedence() -> None:
@@ -249,16 +260,16 @@ def main() -> int:
   (verdict, why) pair instead of printing, so the verdict is scriptable
   for the first time.
 
-  DF_002 survives unchanged. A missing core field still becomes the empty
-  string, still falls through to the value comparison, and still produces
-  NOT DIRECTLY COMPARABLE where the same gap declared as `unknown`
-  correctly produces UNDETERMINED. v2 makes it worse to look at and easier
-  to fix: the OMITTED warning and the settled verdict now appear in one
-  stdout, three lines apart.
+  DF_002 is repaired. A missing core field used to become the empty string,
+  fall through to the value comparison, and produce NOT DIRECTLY COMPARABLE
+  where the same gap declared as `unknown` correctly produced UNDETERMINED
+  -- the more confident verdict for the case the doc calls worse. compare()
+  now checks omitted() first and returns the open verdict, naming the field.
 
-  DF_004 is worse. v1 returned rc=1 on a malformed block; v2 returns 0 on
-  every path. The repair is one line and is only reachable because of the
-  rewrite -- route the returned verdict into the exit code.
+  DF_004 is repaired. The verdict is routed into the exit code, with
+  UNDETERMINED at 2 rather than 1 because it is neither a pass nor a
+  failure. Only reachable because the v2 rewrite made compare() return a
+  value.
 
   New in v2: the single-verdict return preempts. A pair that is
   undetermined on one core field and substantively different on another

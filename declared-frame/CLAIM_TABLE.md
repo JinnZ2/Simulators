@@ -353,3 +353,55 @@ for precision. That is the measurement this claim exists to say has not been
 run.
 
 **Evidence:** `v2/scan_audit.py` §2–§5.
+
+---
+
+## Repairs
+
+`DF_002` and `DF_004` are **repaired in `v2/check_frame.py`**. `DF_003` and
+`DF_007` are not, and are not defects — they are limits on what the tool can
+promise, recorded rather than papered over.
+
+### `DF_002` — omission no longer produces the more confident verdict
+
+`compare()` gained a three-line `omitted()` check that runs **before** the
+unknown check:
+
+```
+side B        was                        now
+omitted       NOT DIRECTLY COMPARABLE    UNDETERMINED   rc 2
+'unknown'     UNDETERMINED               UNDETERMINED   rc 2
+```
+
+The doc says an omitted field *"converts an open question into a settled one
+by silence"*, so it must not settle anything. It now returns the open verdict
+and says which core field is missing, which matches the `OMITTED` warning the
+same run already printed three lines above.
+
+### `DF_004` — the exit code carries the verdict
+
+```
+DIRECTLY COMPARABLE      -> 0
+LOGIC MISMATCH           -> 1
+NOT DIRECTLY COMPARABLE  -> 1
+UNDETERMINED             -> 2
+```
+
+`UNDETERMINED` is deliberately **not** 1. It is neither a pass nor a failure,
+and a caller that treats it as either has resolved a gap the tool refused to
+resolve. `check_frame.py a b && use_both` now stops on a pair the tool has
+said does not compare.
+
+This repair is only reachable because of the v2 rewrite — `compare()` returns
+a value, so there is a verdict to route. `DF_008` recorded that as the
+rewrite's real gain; this is it being spent.
+
+### Not repaired, on purpose
+
+`DF_003` — comparability is exact string equality on free text. There is no
+string fix: whether two free-text boundaries denote the same accounting is a
+judgement, and under-matching is the safe direction.
+
+`DF_007` — nothing in the block adjudicates. That is the boundary of what a
+frame-declaration instrument can do, and the repair is an evaluated term
+(inputs/outputs with units, one closure check), not a seventh compared field.

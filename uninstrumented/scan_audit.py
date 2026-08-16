@@ -52,22 +52,16 @@ def section(title: str) -> None:
     print(RULE)
 
 
-# This script writes its own output to samples/, and scan.py reads .txt.
-# Left alone, run N+1 measures run N's output and the script has no fixed
-# point -- consecutive runs differ. The samples directory is excluded from
-# every corpus walk below so the numbers converge; section 5 measures what
-# the exclusion is hiding rather than leaving it implicit.
-EXCLUDE = (os.path.join(HERE, "samples"),)
-
-
+# UNI_010 repaired. This script writes its output to samples/, and scan.py
+# reads .txt, so run N+1 used to measure run N. The exclusion was a path
+# filter reimplemented here, which put the rule outside the tool and left
+# anyone else running scan.py over the repo seeing the hits anyway.
+#
+# It is now a `.scanignore` next to this file, honoured by scan.walk()
+# wherever the scan starts from. The loop is closed in the scanner, so the
+# reported corpus IS the corpus on disk for every caller.
 def corpus():
-    out = []
-    for f in scan.walk([ROOT]):
-        if any(os.path.abspath(f).startswith(os.path.abspath(x) + os.sep)
-               for x in EXCLUDE):
-            continue
-        out.append(f)
-    return sorted(out)
+    return sorted(scan.walk([ROOT], scan.load_ignores([ROOT])))
 
 
 def words(path):

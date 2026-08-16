@@ -58,6 +58,25 @@ def transitions(metrics):
             for p in metrics.pairs}
 
 
+def shipped_series(model_scores, metrics):
+    """
+    The pre-repair build_series(), reproduced here so the defect and its
+    cost stay measurable after the repair. Two things it did: version_order
+    from `to_version` only (dropping the first version), and a planted
+    y = 0.0 at the head paired with a real drift value.
+    """
+    order = [p["to_version"] for p in metrics.pairs]
+    into = {p["to_version"]: p["composite_drift"] for p in metrics.pairs}
+    ordered = [(v, model_scores[v]) for v in order if v in model_scores]
+    if len(ordered) < 2:
+        return [], []
+    x, y = [], []
+    for i, (v, sc) in enumerate(ordered):
+        x.append(into.get(v, 0.0))
+        y.append(0.0 if i == 0 else sc - ordered[i - 1][1])
+    return x, y
+
+
 def honest_series(model_scores, trans):
     """Every transition whose BOTH endpoints have a score. No planted points."""
     x, y = [], []
@@ -74,15 +93,14 @@ def honest_series(model_scores, trans):
 def check_planted(versions, metrics, matrix) -> None:
     section("1  every series begins with a fabricated point")
 
-    reg = DriftRegressor(matrix, metrics)
-    print("  build_series(score_type='delta') sets imp = 0.0 at i == 0, and")
-    print("  pairs it with the drift INTO that version -- a real x against a")
-    print("  y that was not measured.\n")
+    print("  The pre-repair build_series(score_type='delta') set imp = 0.0")
+    print("  at i == 0 and paired it with the drift INTO that version -- a")
+    print("  real x against a y that was not measured.\n")
 
     print("  %-12s %-38s %s" % ("model", "y series as built", "planted"))
     print("  " + "-" * 68)
     for m in sorted(matrix):
-        x, y = reg.build_series(m, score_type="delta")
+        x, y = shipped_series(matrix[m], metrics)
         if not y:
             print("  %-12s %-38s %s" % (m, "(empty)", "-"))
             continue
@@ -107,18 +125,22 @@ def check_dropped(versions, metrics, matrix) -> None:
 
     reg = DriftRegressor(matrix, metrics)
     print("  all criteria versions   %s" % [v.version_id for v in versions])
-    print("  regressor version_order %s" % reg.version_order)
+    print("  pre-repair order        %s"
+          % [p["to_version"] for p in metrics.pairs])
+    print("  repaired version_order  %s" % reg.version_order)
     print()
-    print("  version_order = [p['to_version'] for p in pairs], so the FIRST")
-    print("  version never appears and any score attached to it is dropped")
-    print("  before the series is built.\n")
+    print("  version_order was [p['to_version'] for p in pairs], so the")
+    print("  FIRST version never appeared and any score attached to it was")
+    print("  dropped before the series was built.\n")
 
-    print("  %-12s %-34s %s" % ("model", "scores on record", "usable n"))
-    print("  " + "-" * 66)
+    print("  %-12s %-30s %-10s %s"
+          % ("model", "scores on record", "was", "now"))
+    print("  " + "-" * 68)
     for m in sorted(matrix):
-        x, _ = reg.build_series(m, score_type="delta")
-        print("  %-12s %-34s %d"
-              % (m, ",".join(sorted(matrix[m])), len(x)))
+        old, _ = shipped_series(matrix[m], metrics)
+        new, _ = reg.build_series(m, score_type="delta")
+        print("  %-12s %-30s %-10d %d"
+              % (m, ",".join(sorted(matrix[m])), len(old), len(new)))
 
     print()
     print("  Delta-350M holds scores at the FIRST and LAST version -- the")
@@ -143,9 +165,9 @@ def check_repair(versions, metrics, matrix) -> None:
     print("  " + "-" * 70)
     flips = []
     for m in sorted(matrix):
-        x, y = reg.build_series(m, score_type="delta")
+        x, y = shipped_series(matrix[m], metrics)
         a = ols_regression(x, y)
-        cx, cy = honest_series(matrix[m], trans)
+        cx, cy = reg.build_series(m, score_type="delta")
         b = ols_regression(cx, cy)
         fa = ("n=%d slope=%+.4f" % (a.n, a.slope) if a.n >= 2
               else "n=%d (no fit)" % a.n)
@@ -167,8 +189,31 @@ def check_repair(versions, metrics, matrix) -> None:
         print("  of that rule. The verdict is set by the fabricated point.")
     print()
     print("  After correction the demo supports one n=3 fit and one n=2.")
-    print("  Two models fall below two points. The shipped n column is")
+    print("  Two models fall below two points. The shipped n column was")
     print("  inflated by the planted head, not by having more data.")
+    print()
+    print("  REPAIRED, and one more thing the repair made visible: with")
+    print("  span pairing, a model scored across a MULTI-version gap is")
+    print("  matched against the summed drift over that span rather than")
+    print("  dropped. Delta-350M is back in the series.\n")
+    total = 0
+    for m in sorted(matrix):
+        x, _ = reg.build_series(m, score_type="delta")
+        total += len(x)
+    print("    real observations across all models: %d" % total)
+    pooled = reg.regress_pooled()
+    d = pooled.to_dict()
+    print("    pooled fit  n=%d df=%d slope=%+.4f t=%s p=%s sig=%s"
+          % (d["n"], d["df"], d["slope"],
+             "n/a" if d["t_slope"] is None else "%.2f" % d["t_slope"],
+             "n/a" if d["p_slope"] is None else "%.3f" % d["p_slope"],
+             d["significant_at_05"]))
+    print()
+    print("  composite_drift is a property of the ARTIFACT, so every")
+    print("  per-model fit ran against the same x-vector -- four models,")
+    print("  four slopes, two signs, from one criteria history. The pooled")
+    print("  fit is the one the design's question asks for, and it is the")
+    print("  only fit here with degrees of freedom to spare.")
 
 
 def check_significance(metrics, matrix) -> None:
@@ -184,13 +229,13 @@ def check_significance(metrics, matrix) -> None:
               % (term, term in src))
     print()
     reg = DriftRegressor(matrix, metrics)
-    print("  What the demo actually produces:\n")
+    print("  REPAIRED: t, df, p and significant_at_05 are in to_dict(), and")
+    print("  r_squared is null below three points. What the demo produces:\n")
     print("  %-12s %-6s %-11s %-11s %-8s %s"
           % ("model", "n", "slope", "se", "t", "df"))
     print("  " + "-" * 60)
     for m in sorted(matrix):
-        x, y = reg.build_series(m, score_type="delta")
-        r = ols_regression(x, y)
+        r = reg.regress(m)
         if r.n < 2:
             print("  %-12s %-6d %s" % (m, r.n, "(no fit)"))
             continue
@@ -275,7 +320,11 @@ def main() -> int:
 
     section("READING")
     print("""
-  Two mechanical defects in build_series(). It plants y = 0.0 at the head
+  REPAIRED. Every result below is the pre-repair behaviour, reproduced by
+  shipped_series() so the cost stays measurable, against what
+  build_series() returns now. tests/test_repairs.py pins each one.
+
+  Two mechanical defects in build_series(). It planted y = 0.0 at the head
   of every series and pairs it with a real drift value -- for Alpha-1B that
   fabricated point REPLACES a measured -0.04 -- and it builds version_order
   from `to_version`, so the first criteria version and every score attached
@@ -292,12 +341,13 @@ def main() -> int:
   n = 2 is emitted as a field next to an interpretation string that says
   the data is insufficient.
 
-  The structural one: the capability term is in the stated model and not in
-  the code, because it is unobservable, so the drift slope absorbs it. The
-  repair is already expressible -- ModelScore keys on version, so scoring
-  every model on the first version alongside its contemporary one is a
-  legal ingest today. Nothing asks for it, and the example data is built
-  the one way that cannot separate the two terms.
+  The structural one is NOT repaired and cannot be by editing a function:
+  the capability term is in the stated model and not in the code, because
+  it is unobservable, so the drift slope absorbs it. The repair is already
+  expressible -- ModelScore keys on version, so scoring every model on the
+  first version alongside its contemporary one is a legal ingest today.
+  Nothing asks for it, and the example data is built the one way that
+  cannot separate the two terms. That stays open as CD_006.
 """)
     return 0
 

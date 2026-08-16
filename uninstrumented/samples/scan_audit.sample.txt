@@ -1,6 +1,6 @@
 
 GRADING scan.py + patterns.json
-8 mechanisms, 69 triggers
+8 mechanisms, 71 triggers
 
 ========================================================================
 0  the delivered scanner is not the reconstructed one
@@ -32,12 +32,13 @@ GRADING scan.py + patterns.json
   No corpus, no threshold, no adjudication: does the scanner
   fire on the case its own trigger list was written for?
 
-    declared-frame/v2/examples/ -> 0 candidate(s)
+    declared-frame/v2/examples/ -> 1 candidate(s)
+      BUDGET BOUNDARY via '22% of incident photons; leaf converts ~1-2%'
 
   Now the same case in four phrasings:
 
-    the register's own VISIBLE AS line   SCORED AS WASTE ('inefficient', candidate)
-    the delivered result string          NO HIT
+    the register's own VISIBLE AS line   BUDGET BOUNDARY ('inefficient at', candidate), SCORED AS WASTE ('inefficient', candidate)
+    the delivered result string          BUDGET BOUNDARY ('22% of incident photons; leaf converts ~1-2%', weak)
     stated as a comparative              BUDGET BOUNDARY ('more efficient than', candidate)
     stated with the noun                 BUDGET BOUNDARY ('conversion efficiency', candidate)
 
@@ -68,10 +69,10 @@ GRADING scan.py + patterns.json
   binding constraint is not precision but how many `check`
   questions a human must answer per unit of text.
 
-  corpus: 959 files (.txt .md .rst .org .csv .json .jsonl .py), 827626 words
-    all candidates        837   1.0 per 1000 words
-    strength=candidate    551   0.7 per 1000 words
-    strength=weak         286
+  corpus: 960 files (.txt .md .rst .org .csv .json .jsonl .py), 834503 words
+    all candidates        744   0.9 per 1000 words
+    strength=candidate    422   0.5 per 1000 words
+    strength=weak         322
 
   The `weak` band is the delivered scanner's own confidence
   gradient -- reported, never used to filter, which is the same
@@ -83,38 +84,38 @@ GRADING scan.py + patterns.json
   Densest files:
 
     CLAUDE.md                                            19275 w   33 hits   1.7 /1000
-    legacy/Organize3.md                                  17643 w   28 hits   1.6 /1000
-    fragility-cascade/CLAIM_TABLE.md                     19662 w   22 hits   1.1 /1000
+    legacy/Organize3.md                                  17643 w   29 hits   1.6 /1000
     grounding-layers/l5_human_construct.py                1926 w   22 hits  11.4 /1000
-    uninstrumented/scan_audit.py                          2506 w   18 hits   7.2 /1000
-    declared-frame/v2/README.md                           1552 w   14 hits   9.0 /1000
+    fragility-cascade/CLAIM_TABLE.md                     19662 w   18 hits   0.9 /1000
+    uninstrumented/scan_audit.py                          2516 w   18 hits   7.2 /1000
+    uninstrumented/CLAIM_TABLE.md                         2919 w   15 hits   5.1 /1000
 
 ========================================================================
 3  concentration and coverage
 ========================================================================
-  837 candidates, 8 mechanisms, 69 triggers defined
+  744 candidates, 8 mechanisms, 71 triggers defined
 
     mechanism                  hits    share
     ----------------------------------------
-    SCORED AS WASTE             385    46.0%
-    AUTHORED REFERENCE          155    18.5%
-    AUDIT ASYMMETRY             103    12.3%
-    PROXY SUBSTITUTION          101    12.1%
-    STORAGE                      37     4.4%
-    BUDGET BOUNDARY              23     2.7%
-    SCALAR DEMAND                20     2.4%
-    MODALITY                     13     1.6%
+    SCORED AS WASTE             200    26.9%
+    AUTHORED REFERENCE          157    21.1%
+    BUDGET BOUNDARY             113    15.2%
+    AUDIT ASYMMETRY             103    13.8%
+    PROXY SUBSTITUTION          101    13.6%
+    STORAGE                      37     5.0%
+    SCALAR DEMAND                20     2.7%
+    MODALITY                     13     1.7%
 
   Top matched strings:
 
-    SCORED AS WASTE        lean                            200
-    AUTHORED REFERENCE     benchmark                       104
+    AUTHORED REFERENCE     benchmark                       106
     AUDIT ASYMMETRY        unverified                       86
-    SCORED AS WASTE        slack                            84
+    SCORED AS WASTE        slack                            85
     PROXY SUBSTITUTION     compliance                       52
     AUTHORED REFERENCE     ground truth                     48
+    SCORED AS WASTE        redundancy                       34
 
-  4 matched strings produce 474 of 837 candidates (57%).
+  4 matched strings produce 329 of 744 candidates (44%).
 
   Corpus-conditional, and neither number grades the list.
   SCALAR DEMAND is near-silent because this corpus contains no
@@ -131,15 +132,15 @@ GRADING scan.py + patterns.json
   single number in the table. `lean` is compiled raw, so it
   matches as a substring:
 
-    `lean`    200 hits   surrounding forms: clean x109, cleanly x26, boolean x22, snaps_clean x17
-             the bare word appears 13 time(s)
-    `slack`    84 hits   surrounding forms: slack x108, slack_radius x31, slack_monitor x2, slacken x2
-             the bare word appears 108 time(s)
+    `lean`     13 hits   surrounding forms: lean x15, clean x4, boolean x4, cleanly x3
+             the bare word appears 15 time(s)
+    `slack`    85 hits   surrounding forms: slack x109, slack_radius x31, slack_monitor x2, slacken x2
+             the bare word appears 109 time(s)
 
   `lean` is the most-fired trigger in the corpus and nearly all
   of it is `clean`, `cleanly` and `boolean`. Adding word
-  boundaries to that one trigger removes ~200 of 837 candidates
-  (24%) at no cost, because the bare word is rare here.
+  boundaries to that one trigger removes ~13 of 744 candidates
+  (2%) at no cost, because the bare word is rare here.
 
   `slack` is the harder case and stays: the bare word IS what
   mostly matches, and the noise is a proper-noun homograph and a
@@ -157,11 +158,11 @@ GRADING scan.py + patterns.json
   and CLAIM_TABLE.md calls it the cheapest of the three
   unworked entries to run. scan.py --asym is that measurement.
 
-    files with an account mention   360
+    files with an account mention   363
     files with ANY hedge at all     10
     outside    hedged   6 of  480   0.0125
-    incumbent  hedged   7 of  626   0.0112
-    ratio (outside/incumbent)       1.12
+    incumbent  hedged   7 of  631   0.0111
+    ratio (outside/incumbent)       1.13
 
   Every hedge in the corpus, hand-checked:
 
@@ -200,8 +201,8 @@ GRADING scan.py + patterns.json
   patterns.json holds the trigger strings, and the scanner reads
   .json. So the definition file is in the corpus:
 
-    candidates from the scanner's own files: 31 of 837
-      uninstrumented/AUDIT_NOTES.md                2
+    candidates from the scanner's own files: 32 of 744
+      uninstrumented/AUDIT_NOTES.md                3
       uninstrumented/patterns.json                 10
       uninstrumented/scan.py                       1
       uninstrumented/scan_audit.py                 18
@@ -226,7 +227,7 @@ GRADING scan.py + patterns.json
   the script has NO FIXED POINT -- consecutive runs disagree
   before anything in the repo has changed.
 
-    candidates in this script's own last output: 21
+    candidates in this script's own last output: 23
     excluded from every walk above, by path
 
   That exclusion is a hand-broken loop, not a fix. Anyone

@@ -59,12 +59,13 @@ def section(title: str) -> None:
     print(RULE)
 
 
-def cv(vid, dims=None, weights=None, exemplars=100, **overrides):
+def cv(vid, dims=None, weights=None, exemplars=100, direction=None,
+       **overrides):
     f = dict(BASE)
     f.update(overrides)
     return CriteriaVersion(
         artifact_name="X", version_id=vid, timestamp="2024-01-01T00:00:00Z",
-        frame=Frame(**f),
+        frame=Frame(**f), direction=direction,
         rubric_dimensions=dims if dims is not None else ["correctness"],
         rubric_weights=weights if weights is not None else {"correctness": 1.0},
         exemplar_count=exemplars,
@@ -216,6 +217,54 @@ def check_what_signed_needs() -> None:
     print("  which is a real finding and is not the one the README states.")
 
 
+def check_repaired() -> None:
+    section("6  repaired -- the signed metrics, alongside the unsigned ones")
+
+    print("  The unsigned primitives above are unchanged: a caller that")
+    print("  wants magnitude still has it. These are added, not swapped.\n")
+
+    a = cv("a")
+    wider = cv("w", boundary="pass at 1 on held-out unit tests plus docs",
+               direction={"boundary": "widened"})
+    narrower = cv("n", boundary="pass at 1",
+                  direction={"boundary": "narrowed"})
+    undeclared = cv("u", boundary="pass at 1")
+
+    print("  %-30s %-12s %-12s" % ("", "unsigned", "signed"))
+    print("  " + "-" * 58)
+    for label, other in (("boundary widened, declared", wider),
+                         ("boundary narrowed, declared", narrower),
+                         ("boundary changed, undeclared", undeclared)):
+        m = E.compute_pair(a, other)
+        print("  %-30s %-12.4f %+.4f"
+              % (label, m["boundary"], m["signed_boundary"]))
+    print()
+    for label, v1, v2 in (("exemplar 100 -> 1000", 100, 1000),
+                          ("exemplar 1000 -> 100", 1000, 100)):
+        print("  %-30s %-12.4f %+.4f"
+              % (label, E._numeric_drift(v1, v2), E._signed_numeric(v1, v2)))
+    for label, x, y in (("access unknown -> verified", "unknown", "verified"),
+                        ("access verified -> unknown", "verified", "unknown"),
+                        ("access partial -> verified", "partial", "verified")):
+        print("  %-30s %-12.4f %+.4f"
+              % (label, E._str_drift(x, y), E._signed_ordinal(x, y)))
+    print()
+    print("  An UNDECLARED direction stays 0.0. That is the load-bearing")
+    print("  choice: it is not a lateral change, it is a change nobody said")
+    print("  the direction of, and collapsing those two would put the")
+    print("  original defect back one level down.")
+    print()
+    m = E.compute_pair(a, undeclared)
+    print("  composite          %.4f" % m["composite"])
+    print("  composite_signed   %+.4f" % m["composite_signed"])
+    print("  signed_coverage    %.2f" % m["signed_coverage"])
+    print()
+    print("  `signed_coverage` is what stops the repair from creating a new")
+    print("  version of the same problem. Without it a caller cannot tell")
+    print("  'no net movement' from 'no direction declared', and a")
+    print("  composite_signed near zero would mean both.")
+
+
 def _wrap(text, indent, width=60):
     words, out, cur = text.split(), [], ""
     for w in words:
@@ -239,6 +288,7 @@ def main() -> int:
     check_ordinal()
     check_free_text()
     check_what_signed_needs()
+    check_repaired()
 
     section("READING")
     print("""
@@ -259,6 +309,13 @@ def main() -> int:
   because whether a free-text boundary widened or narrowed is a judgement
   the text does not contain. Two have no natural direction and should stay
   unsigned.
+
+  REPAIRED, section 6. All four signable fields now carry a sign, the
+  three free-text ones take a declared `direction`, and the two with no
+  natural direction stay at zero. `composite_signed` is reported beside
+  `composite`, never instead of it, and `signed_coverage` says how much of
+  the composite carries a direction at all -- without which a caller could
+  not tell "no net change" from "nobody declared one".
 """)
     return 0
 

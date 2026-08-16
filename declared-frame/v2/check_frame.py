@@ -12,6 +12,16 @@ FIELDS = ["boundary", "horizon", "who_counts",
 ACCESS = ["unknown", "partial", "verified"]
 CORE = ["boundary", "horizon", "who_counts"]
 
+# Exit codes. UNDETERMINED is deliberately not 1: it is neither a pass nor a
+# failure, and a caller that treats it as either has resolved a gap the tool
+# refused to resolve.
+EXIT = {
+    "DIRECTLY COMPARABLE": 0,
+    "LOGIC MISMATCH": 1,
+    "NOT DIRECTLY COMPARABLE": 1,
+    "UNDETERMINED": 2,
+}
+
 
 def validate(frame, label="frame"):
     problems = []
@@ -37,7 +47,25 @@ def unknowns(frame):
             if str(frame.get(f, "")).strip().lower() == "unknown"]
 
 
+def omitted(frame):
+    """
+    DF_002: the doc calls omission WORSE than 'unknown' -- it converts an
+    open question into a settled one by silence. compare() read a missing
+    field as "" and compared it as a VALUE, so omission produced NOT
+    DIRECTLY COMPARABLE (settled) where the same gap declared as 'unknown'
+    correctly produced UNDETERMINED (open). The more confident verdict for
+    the worse case, in the function shipped to prevent exactly that.
+    """
+    return [f for f in CORE if f not in frame or frame.get(f) is None]
+
+
 def compare(a, b):
+    oa, ob = omitted(a), omitted(b)
+    if oa or ob:
+        return ("UNDETERMINED",
+                "core field omitted: a=%s b=%s -- an omitted field is a gap, "
+                "not a value. Write 'unknown' to make it visible."
+                % (oa or "-", ob or "-"))
     ua, ub = unknowns(a), unknowns(b)
     if ua or ub:
         return ("UNDETERMINED",
@@ -82,7 +110,13 @@ def main(argv):
         print()
         print("VERDICT: %s" % verdict)
         print("         %s" % why)
-    return 0
+        # DF_004: main() returned 0 on every path, so
+        # `check_frame.py a b && use_both` passed on two results the tool
+        # had just said do not compare. v1 at least returned 1 on a
+        # malformed block. The verdict is a value now, so it can be an exit
+        # code -- the repair is only reachable because of the rewrite.
+        return EXIT.get(verdict, 1)
+    return 1 if problems else 0
 
 
 if __name__ == "__main__":

@@ -2,8 +2,8 @@
 falsifier_sweep.py -- can any arm emit a design capable of failing the
 stated falsifier?
 
-CC0-1.0. Standard library only. Deterministic. Reads the delivered arms and
-PROBES_K11_K18.py; modifies neither.
+CC0-1.0. Standard library only. Deterministic. Reads the arms, the spec and
+PROBES_K11_K18.py.
 
 THE REQUIREMENT, stated in the delivered PROBES_K11_K18.py header
 -----------------------------------------------------------------
@@ -14,25 +14,26 @@ THE REQUIREMENT, stated in the delivered PROBES_K11_K18.py header
     falsifier whose terms are not swept by any arm.
 
 That last sentence is a check, and this file is it. `compare.py` is
-delivered verbatim and is not modified; this runs alongside.
+unmodified; this runs alongside.
 
-WHAT THE CHECK NEEDS AND DOES NOT HAVE
---------------------------------------
-Two fields, neither of which exists:
+WHAT THE CHECK NEEDED, AND NOW HAS
+----------------------------------
+This used to hand-transcribe its falsifiers from prose, because two fields
+did not exist:
 
-    probe.sweep       which spec variable the probe must be run across
-                      -> not in quantities.probe(). MF_017.
-
+    probe.sweep       which spec variable a probe must be run across
     spec.falsifiers   what would refute the claim, and in which terms
-                      -> not in the spec schema at all. The falsifier the
-                         header quotes lives in prose, and K13 refers to it
-                         by the tag "falsifier:ratio_flat" -- a tag that
-                         resolves to nothing in any delivered file.
 
-So the falsifier list below is TRANSCRIBED BY HAND from the prose and is
-marked as such. That transcription step is the finding: a check the drop
-asks `compare.py` to run cannot be run from the spec, because the spec has
-nowhere to put the thing being checked. Same shape as MF_017, one level up.
+Both are in the schema now. `quantities.probe()` takes
+`sweep=(variable, levels)`, refuses fewer than two levels, and requires a
+`point_reason` when a probe declares `sweep=None`. `validate.py` asks for
+`falsifiers: [{id, statement, terms}]` and says so when they are absent.
+K13's `closes=["falsifier:ratio_flat"]` resolves against that registry
+instead of against nothing.
+
+So the check is mechanical: for each declared falsifier, is every term in
+the union of the variables some arm sweeps. No transcription, no
+adjudication, no prose.
 """
 
 from __future__ import annotations
@@ -44,7 +45,7 @@ import sys
 import conventional
 import coupling
 import widen
-from quantities import OBJECTS
+from quantities import OBJECTS, resolve_sweep
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SPEC = os.path.join(HERE, "systems", "provisioning_calibration.json")
@@ -66,50 +67,27 @@ def norm(s):
     return "_".join(str(s).lower().replace("-", " ").replace(".", " ").split())
 
 
-# ---------------------------------------------------------------------------
-# [HAND-TRANSCRIBED] Falsifiers, and the spec variable each is stated in
-# terms of. The spec has no `falsifiers` field, so these come from prose:
-#   - the "ratio flat across the provisioning gradient" falsifier, quoted in
-#     the PROBES_K11_K18.py header
-#   - K13's predicted= line, "tau rises with provisioning; flat tau falsifies"
-#   - K15's predicted= line, "threshold rises with staleness"
-#   - the PREDICTED_ORDER mediation falsifier
-FALSIFIERS = (
-    ("ratio_flat",
-     "ratio flat across the provisioning gradient",
-     ("provisioning level",),
-     "quoted in the PROBES_K11_K18.py header; K13 tags it "
-     "closes=['falsifier:ratio_flat']"),
-    ("tau_flat",
-     "tau rises with provisioning; flat tau falsifies",
-     ("provisioning level",),
-     "K13 predicted="),
-    ("threshold_flat",
-     "detection threshold rises with staleness; flat falsifies",
-     ("time since clean reference",),
-     "K15 predicted="),
-    ("mediation_broken",
-     "K14 predicts K16 with K15 controlled out",
-     ("provisioning level", "time since clean reference",
-      "baseline staleness"),
-     "PREDICTED_ORDER"),
-)
+def falsifiers(spec):
+    return spec.get("falsifiers") or []
 
 
-def delivered_sweeps(spec):
-    """Every variable any DELIVERED arm sweeps. Spoiler: none."""
+def arm_sweeps(spec):
+    """Every variable the arms sweep, default resolved against the regime."""
     probes = (conventional.generate(spec) + coupling.generate(spec)
               + widen.generate(spec))
     measuring = [p for p in probes if p["quantity"]["object_of"] in OBJECTS]
-    swept = set()
+    swept, points = {}, []
     for p in measuring:
-        if "sweep" in p and p["sweep"]:
-            swept.add(norm(p["sweep"][0]))
-    return measuring, swept
+        r = resolve_sweep(p, spec)
+        if r is None:
+            points.append(p)
+        else:
+            swept.setdefault(r[0], []).append((p["id"], r[1]))
+    return measuring, swept, points
 
 
 def new_sweeps(spec):
-    """Variables the K11-K16 batch sweeps, resolving the default."""
+    """Variables the K11-K16 batch sweeps."""
     ns = {}
     path = os.path.join(HERE, "PROBES_K11_K18.py")
     src = {}
@@ -128,114 +106,124 @@ def new_sweeps(spec):
 # ---------------------------------------------------------------------------
 
 
-def check_delivered(spec) -> None:
-    section("1  the delivered arms sweep nothing")
+def check_declared(spec) -> None:
+    section("1  what the arms declare")
 
-    measuring, swept = delivered_sweeps(spec)
+    measuring, swept, points = arm_sweeps(spec)
     print("  measuring probes across the three arms: %d" % len(measuring))
-    print("  of those, carrying a sweep declaration:  %d" % len(swept))
+    print("  swept: %d    point probes: %d\n"
+          % (len(measuring) - len(points), len(points)))
+    print("  %-28s %s" % ("swept variable", "probes"))
+    print("  " + "-" * 62)
+    for var in sorted(swept):
+        print("  %-28s %s"
+              % (var, ", ".join("%s@%d" % t for t in sorted(swept[var]))))
     print()
-    print("  quantities.probe() fields: arm id quantity protocol reads")
-    print("                             blind_to")
+    for p in points:
+        print("  point probe %s" % p["id"])
+        print("      %s" % p["point_reason"])
     print()
-    print("  So every falsifier below is unreachable by every delivered")
-    print("  probe, and not because any probe was written badly. The")
-    print("  generator has no way to emit a swept design.")
+    print("  MF_017 repaired: `sweep` is a field on quantities.probe(), it")
+    print("  defaults to the spec's regime variable, it refuses fewer than")
+    print("  two levels, and a point probe must say WHY. Before the repair")
+    print("  the field did not exist, so 0 of %d could declare anything."
+          % len(measuring))
 
 
 def check_falsifiers(spec) -> None:
-    section("2  each falsifier against the variables actually swept")
+    section("2  each declared falsifier against the swept variables")
 
-    _, delivered = delivered_sweeps(spec)
-    src, new = new_sweeps(spec)
-    reg = norm((spec.get("regime") or {}).get("variable", ""))
+    _, swept, _ = arm_sweeps(spec)
+    _, new = new_sweeps(spec)
+    reachable_now = set(swept)
+    reachable_with_new = reachable_now | set(new)
 
-    print("  regime variable declared in the spec: %r -> %r\n"
-          % ((spec.get("regime") or {}).get("variable"), reg))
-    print("  variables swept by the K11-K16 batch:\n")
-    for var in sorted(new):
-        who = ", ".join("%s@%d" % (i, n) for i, n in sorted(new[var]))
-        print("      %-30s %s" % (var, who))
+    fs = falsifiers(spec)
+    if not fs:
+        print("  spec declares no falsifiers -- run validate.py")
+        return
 
-    print()
-    print("  %-18s %-34s %s" % ("falsifier", "terms", "reachable?"))
-    print("  " + "-" * 72)
-    unreached = []
-    for tag, text, terms, _ in FALSIFIERS:
-        need = {norm(t) for t in terms}
-        have_new = need <= set(new)
-        have_old = need <= delivered
-        verdict = ("YES via K11-K16" if have_new
-                   else "NO -- unswept: %s"
-                        % ", ".join(sorted(need - set(new))))
-        if not have_new:
-            unreached.append((tag, sorted(need - set(new))))
-        print("  %-18s %-34s %s"
-              % (tag, ", ".join(sorted(need))[:34], verdict))
-        if have_old:
-            print("      (also reachable by a delivered arm)")
+    print("  %-18s %-30s %-12s %s"
+          % ("falsifier", "terms", "arms now", "with K11-K16"))
+    print("  " + "-" * 74)
+    open_now = open_new = 0
+    for f in fs:
+        need = {norm(t) for t in f["terms"]}
+        a = need <= reachable_now
+        b = need <= reachable_with_new
+        open_now += not a
+        open_new += not b
+        print("  %-18s %-30s %-12s %s"
+              % (f["id"], ", ".join(sorted(need))[:30],
+                 "yes" if a else "NO", "yes" if b else "NO"))
 
     print()
-    print("  delivered arms: 0 of %d falsifiers reachable" % len(FALSIFIERS))
-    print("  with K11-K16:   %d of %d reachable"
-          % (len(FALSIFIERS) - len(unreached), len(FALSIFIERS)))
-    if unreached:
+    print("  arms as they stand: %d of %d falsifiers reachable"
+          % (len(fs) - open_now, len(fs)))
+    print("  with K11-K16 added: %d of %d"
+          % (len(fs) - open_new, len(fs)))
+    if open_new:
         print()
-        for tag, missing in unreached:
-            print("    %s still unreachable -- no probe sweeps %s"
-                  % (tag, ", ".join(missing)))
+        for f in fs:
+            need = {norm(t) for t in f["terms"]}
+            if not need <= reachable_with_new:
+                print("    %s unreachable -- nothing sweeps %s"
+                      % (f["id"], ", ".join(sorted(need - reachable_with_new))))
 
 
-def check_schema_gap() -> None:
-    section("3  the check cannot be run from the spec")
+def check_registry(spec) -> None:
+    section("3  K13's `closes` tag now resolves")
 
-    spec = load_spec()
-    print("  spec fields: %s\n" % ", ".join(sorted(spec)))
-    print("  `falsifiers` is not among them.\n")
-    print("  So the requirement in the PROBES_K11_K18.py header --")
-    print()
-    print("      compare.py must flag any falsifier whose terms are not")
-    print("      swept by any arm")
-    print()
-    print("  needs two fields that do not exist. `sweep` on a probe")
-    print("  (MF_017), and `falsifiers` on a spec. The four falsifiers in")
-    print("  section 2 are HAND-TRANSCRIBED from prose and from the")
-    print("  `predicted=` lines of individual probes.")
-    print()
-    print("  K13 makes the gap concrete: it declares")
-    print()
-    print("      closes=['reversibility', 'falsifier:ratio_flat']")
-    print()
-    print("  and `falsifier:ratio_flat` resolves to nothing in any")
-    print("  delivered file. It is a reference to a registry that has not")
-    print("  been created. Once it exists, section 2 becomes mechanical and")
-    print("  this hand transcription goes away.")
-    print()
-    print("  The two gaps are the same gap seen at two levels: a probe")
-    print("  cannot say what it must be run across, and a spec cannot say")
-    print("  what would refute it. Between them, a generator can emit a")
-    print("  complete, well-formed design that is incapable of failing.")
+    src, _ = new_sweeps(spec)
+    ids = {f["id"] for f in falsifiers(spec)}
+    print("  spec declares falsifiers: %s\n" % ", ".join(sorted(ids)))
+    dangling = []
+    for p in src["COUPLING_PROBES"]:
+        for tag in p.get("closes", []):
+            if not tag.startswith("falsifier:"):
+                continue
+            fid = tag.split(":", 1)[1]
+            ok = fid in ids
+            print("  %-6s closes %-28s %s"
+                  % (p["id"], tag, "resolves" if ok else "DANGLING"))
+            if not ok:
+                dangling.append((p["id"], tag))
+    if not dangling:
+        print()
+        print("  MF_020 repaired. Before, `falsifier:ratio_flat` resolved to")
+        print("  nothing in any file -- a reference to a registry that had")
+        print("  not been created. The spec carries it now, and validate.py")
+        print("  refuses a spec that declares no falsifiers at all.")
+    else:
+        print()
+        print("  %d dangling reference(s)." % len(dangling))
 
 
-def check_what_it_would_take(spec) -> None:
-    section("4  the smallest schema that makes this mechanical")
+def check_null(spec) -> None:
+    section("4  the check can still fail")
 
-    print("  On the probe, one field (MF_017's):\n")
-    print('      sweep = (spec_variable, n_levels)   # or None + a reason\n')
-    print("  On the spec, one list:\n")
-    print("""      "falsifiers": [
-        {"id": "ratio_flat",
-         "statement": "ratio flat across the provisioning gradient",
-         "terms": ["provisioning level"]}
-      ]\n""")
-    print("  Then the check is three lines: for each falsifier, is every")
-    print("  term in the union of the arms' swept variables. No prose, no")
-    print("  transcription, no adjudication.")
+    print("  A guard that cannot deny is not a guard. Two constructed")
+    print("  cases, neither of which is in the spec:\n")
+
+    _, swept, _ = arm_sweeps(spec)
+    _, new = new_sweeps(spec)
+    reach = set(swept) | set(new)
+
+    cases = (
+        ("reachable", {"terms": ["provisioning level"]}),
+        ("unreachable", {"terms": ["ambient temperature"]}),
+        ("partly", {"terms": ["provisioning level", "ambient temperature"]}),
+    )
+    for label, f in cases:
+        need = {norm(t) for t in f["terms"]}
+        ok = need <= reach
+        print("    %-12s terms=%-42s %s"
+              % (label, ", ".join(sorted(need)),
+                 "reachable" if ok else "FLAGGED: %s"
+                 % ", ".join(sorted(need - reach))))
     print()
-    print("  And it is a PRE-stage check, not a post one -- it decides")
-    print("  whether the design can fail before anything is measured, which")
-    print("  is the ../reasoning-gate/ G-CTRL shape: controls sized by")
-    print("  fragility, declared before the run.")
+    print("  So the check discriminates. Every falsifier in the spec being")
+    print("  reachable is a property of this spec, not of the check.")
 
 
 def main() -> int:
@@ -244,30 +232,28 @@ def main() -> int:
     print("FALSIFIER SWEEP -- can the design fail?")
     print("subject: %s" % spec["system_id"])
 
-    check_delivered(spec)
+    check_declared(spec)
     check_falsifiers(spec)
-    check_schema_gap()
-    check_what_it_would_take(spec)
+    check_registry(spec)
+    check_null(spec)
 
     section("READING")
     print("""
-  The delivered arms sweep nothing, so 0 of 4 stated falsifiers are
-  reachable by any probe they emit. That is not a badly written probe --
-  `quantities.probe()` has no `sweep` field, so the generator cannot emit
-  a swept design at all.
+  Both schema gaps are closed. `sweep` is a field on the probe, defaulting
+  to the spec's regime variable, refusing fewer than two levels, and
+  requiring a stated reason when a probe is a point. `falsifiers` is a
+  field on the spec, and validate.py asks for it.
 
-  The K11-K16 batch sweeps four variables and makes 4 of 4 reachable.
+  With those, the check the drop asked compare.py to run is three lines and
+  needs no prose: for each declared falsifier, is every term in the union
+  of the swept variables.
 
-  The check the drop asks compare.py to run cannot be run from the spec,
-  because the spec has no `falsifiers` field. K13 declares
-  closes=['falsifier:ratio_flat'] and that tag resolves to nothing in any
-  delivered file -- a reference to a registry that does not exist yet. The
-  four falsifiers checked here are hand-transcribed from prose.
+  K13's closes=["falsifier:ratio_flat"] resolved to nothing in any
+  delivered file. It resolves now.
 
-  Two schema gaps, one shape: a probe cannot say what it must be run
-  across, and a spec cannot say what would refute it. Between them a
-  generator can emit a complete, well-formed design that is incapable of
-  failing, which is what happened.
+  Section 4 keeps the check honest: a falsifier naming a variable no arm
+  sweeps is still flagged, so every falsifier in this spec coming back
+  reachable is a property of the spec rather than of the check.
 """)
     return 0
 

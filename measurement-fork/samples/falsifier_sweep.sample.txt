@@ -3,113 +3,81 @@ FALSIFIER SWEEP -- can the design fail?
 subject: provisioning_calibration
 
 ========================================================================
-1  the delivered arms sweep nothing
+1  what the arms declare
 ========================================================================
   measuring probes across the three arms: 17
-  of those, carrying a sweep declaration:  0
+  swept: 16    point probes: 1
 
-  quantities.probe() fields: arm id quantity protocol reads
-                             blind_to
+  swept variable               probes
+  --------------------------------------------------------------
+  perturbation_size            K05@3
+  provisioning_level           C01@2, C02@2, C03@2, C04@2, C05@2, C06@2, K01@2, K02@2, K03@2, K04@2, K06@2, K08@2, K09@2, K10@2
+  stimulus_severity            K07@4
 
-  So every falsifier below is unreachable by every delivered
-  probe, and not because any probe was written badly. The
-  generator has no way to emit a swept design.
+  point probe C07
+      present-day administration by design. The instrument reads one moment; running it across the regime variable would be a different probe, not this one swept.
 
-========================================================================
-2  each falsifier against the variables actually swept
-========================================================================
-  regime variable declared in the spec: 'provisioning level' -> 'provisioning_level'
-
-  variables swept by the K11-K16 batch:
-
-      baseline_staleness             K16@3
-      provisioning_level             K11@2, K12@2, K13@2, K14@2
-      time_since_clean_reference     K15@3
-
-  falsifier          terms                              reachable?
-  ------------------------------------------------------------------------
-  ratio_flat         provisioning_level                 YES via K11-K16
-  tau_flat           provisioning_level                 YES via K11-K16
-  threshold_flat     time_since_clean_reference         YES via K11-K16
-  mediation_broken   baseline_staleness, provisioning_l YES via K11-K16
-
-  delivered arms: 0 of 4 falsifiers reachable
-  with K11-K16:   4 of 4 reachable
+  MF_017 repaired: `sweep` is a field on quantities.probe(), it
+  defaults to the spec's regime variable, it refuses fewer than
+  two levels, and a point probe must say WHY. Before the repair
+  the field did not exist, so 0 of 17 could declare anything.
 
 ========================================================================
-3  the check cannot be run from the spec
+2  each declared falsifier against the swept variables
 ========================================================================
-  spec fields: actors, boundary, currently_measured, description, known_latency, open_questions, provisioned, regime, system_id, test_items_source
+  falsifier          terms                          arms now     with K11-K16
+  --------------------------------------------------------------------------
+  ratio_flat         provisioning_level             yes          yes
+  tau_flat           provisioning_level             yes          yes
+  threshold_flat     time_since_clean_reference     NO           yes
+  mediation_broken   baseline_staleness, provisioni NO           yes
+  gradient_flat      stimulus_severity              yes          yes
 
-  `falsifiers` is not among them.
-
-  So the requirement in the PROBES_K11_K18.py header --
-
-      compare.py must flag any falsifier whose terms are not
-      swept by any arm
-
-  needs two fields that do not exist. `sweep` on a probe
-  (MF_017), and `falsifiers` on a spec. The four falsifiers in
-  section 2 are HAND-TRANSCRIBED from prose and from the
-  `predicted=` lines of individual probes.
-
-  K13 makes the gap concrete: it declares
-
-      closes=['reversibility', 'falsifier:ratio_flat']
-
-  and `falsifier:ratio_flat` resolves to nothing in any
-  delivered file. It is a reference to a registry that has not
-  been created. Once it exists, section 2 becomes mechanical and
-  this hand transcription goes away.
-
-  The two gaps are the same gap seen at two levels: a probe
-  cannot say what it must be run across, and a spec cannot say
-  what would refute it. Between them, a generator can emit a
-  complete, well-formed design that is incapable of failing.
+  arms as they stand: 3 of 5 falsifiers reachable
+  with K11-K16 added: 5 of 5
 
 ========================================================================
-4  the smallest schema that makes this mechanical
+3  K13's `closes` tag now resolves
 ========================================================================
-  On the probe, one field (MF_017's):
+  spec declares falsifiers: gradient_flat, mediation_broken, ratio_flat, tau_flat, threshold_flat
 
-      sweep = (spec_variable, n_levels)   # or None + a reason
+  K13    closes falsifier:ratio_flat         resolves
 
-  On the spec, one list:
+  MF_020 repaired. Before, `falsifier:ratio_flat` resolved to
+  nothing in any file -- a reference to a registry that had
+  not been created. The spec carries it now, and validate.py
+  refuses a spec that declares no falsifiers at all.
 
-      "falsifiers": [
-        {"id": "ratio_flat",
-         "statement": "ratio flat across the provisioning gradient",
-         "terms": ["provisioning level"]}
-      ]
+========================================================================
+4  the check can still fail
+========================================================================
+  A guard that cannot deny is not a guard. Two constructed
+  cases, neither of which is in the spec:
 
-  Then the check is three lines: for each falsifier, is every
-  term in the union of the arms' swept variables. No prose, no
-  transcription, no adjudication.
+    reachable    terms=provisioning_level                         reachable
+    unreachable  terms=ambient_temperature                        FLAGGED: ambient_temperature
+    partly       terms=ambient_temperature, provisioning_level    FLAGGED: ambient_temperature
 
-  And it is a PRE-stage check, not a post one -- it decides
-  whether the design can fail before anything is measured, which
-  is the ../reasoning-gate/ G-CTRL shape: controls sized by
-  fragility, declared before the run.
+  So the check discriminates. Every falsifier in the spec being
+  reachable is a property of this spec, not of the check.
 
 ========================================================================
 READING
 ========================================================================
 
-  The delivered arms sweep nothing, so 0 of 4 stated falsifiers are
-  reachable by any probe they emit. That is not a badly written probe --
-  `quantities.probe()` has no `sweep` field, so the generator cannot emit
-  a swept design at all.
+  Both schema gaps are closed. `sweep` is a field on the probe, defaulting
+  to the spec's regime variable, refusing fewer than two levels, and
+  requiring a stated reason when a probe is a point. `falsifiers` is a
+  field on the spec, and validate.py asks for it.
 
-  The K11-K16 batch sweeps four variables and makes 4 of 4 reachable.
+  With those, the check the drop asked compare.py to run is three lines and
+  needs no prose: for each declared falsifier, is every term in the union
+  of the swept variables.
 
-  The check the drop asks compare.py to run cannot be run from the spec,
-  because the spec has no `falsifiers` field. K13 declares
-  closes=['falsifier:ratio_flat'] and that tag resolves to nothing in any
-  delivered file -- a reference to a registry that does not exist yet. The
-  four falsifiers checked here are hand-transcribed from prose.
+  K13's closes=["falsifier:ratio_flat"] resolved to nothing in any
+  delivered file. It resolves now.
 
-  Two schema gaps, one shape: a probe cannot say what it must be run
-  across, and a spec cannot say what would refute it. Between them a
-  generator can emit a complete, well-formed design that is incapable of
-  failing, which is what happened.
+  Section 4 keeps the check honest: a falsifier naming a variable no arm
+  sweeps is still flagged, so every falsifier in this spec coming back
+  reachable is a property of the spec rather than of the check.
 

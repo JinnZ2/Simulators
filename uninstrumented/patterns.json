@@ -56,10 +56,12 @@
       "less efficient than",
       "(higher|greater|improved) efficiency",
       "conversion efficiency",
+      "inefficien(t|cy|cies) (at|in|as)",
       "outperforms",
       "cost[- ]effective",
       "(yield|output) per",
-      "orders of magnitude (better|more)"
+      "orders of magnitude (better|more)",
+      "\\d+(?:\\.\\d+)?\\s*%[^.!?]{0,90}?\\d+(?:\\.\\d+)?\\s*%"
     ],
     "check": "Name every input and disposal path for both sides. Are both budgets closed at the same boundary, and who set the line?"
   },
@@ -78,7 +80,7 @@
       "downtime",
       "eliminate waste",
       "streamlin(e|ed|ing)",
-      "lean"
+      "\\blean\\b"
     ],
     "check": "What does it return, and on what interval? If the return is conditional on a change that has not happened in the sampled range, the accounting cannot see it."
   },

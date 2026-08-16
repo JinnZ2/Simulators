@@ -1,29 +1,45 @@
 # CLAIM_TABLE — criteria-drift
 
-Seven claims, `CD_001..007`.
+Seven claims, `CD_001..007`. **Six repaired, one open.**
+
+| | |
+| --- | --- |
+| repaired | `CD_002` `CD_003` `CD_004` `CD_005` `CD_007` |
+| open, and not fixable by editing a function | `CD_006` |
+| holds as delivered | `CD_001` |
+
+Each repair is pinned by `tests/test_repairs.py` (28 tests), which asserted
+the broken behaviour when it was written and asserts the fix now. The
+delivered kit is modified — `schema.py`, `drift.py`, `regress.py`,
+`store.py`, `audit.py` — and the pre-repair behaviour is reproduced inside
+`regression_audit.py` by `shipped_series()` so the cost stays measurable.
 
 ## REFUTATION_PROTOCOL
 
-The kit is delivered verbatim and is not modified. Claims here are about
-what it measures and what it can conclude, checked by running it.
+Claims here are about what the kit measures and what it can conclude,
+checked by running it.
 
-Two of the seven are mechanical defects with a demonstrated repair; three
-are structural and cannot be fixed by editing a function; two are about
-what holds.
+The kit landed verbatim and was audited in that state. It has since been
+REPAIRED — `schema.py`, `drift.py`, `regress.py`, `store.py` and `audit.py`
+are modified. Each claim keeps the pre-repair evidence, because the finding
+is what the defect cost, not that a line was changed; `regression_audit.py`
+reproduces the old builder in `shipped_series()` so the comparison stays
+live rather than quoted.
 
-A failed check updates the claim. It does not edit the kit to protect one.
+A failed check updates the claim. It does not edit the kit to protect one,
+and no repair here was made to move a number.
 
 ## Claims
 
 | id | statement | status |
 | --- | --- | --- |
 | `CD_001` | The kit runs end to end on its own quick start, stdlib only, SQLite-backed, and is the **first real consumer of the declared-frame block** — `Frame` is a first-class dataclass, `unknown` is legal, omission is flagged, and drift is computed per frame field. | SUPPORTED |
-| `CD_002` | **The drift metric is unsigned and the decision rule reads the sign.** Every primitive returns a non-negative distance, so widening and narrowing both push `composite_drift` up. | SUPPORTED |
-| `CD_003` | `build_series()` **plants a `y = 0.0` at the head of every model's series** and pairs it with a real drift value. For Alpha-1B it replaces a measured `−0.04`. | SUPPORTED |
-| `CD_004` | `version_order` is built from `to_version`, so the **first criteria version and every score attached to it is dropped.** Delta-350M holds the longest baseline in the dataset and contributes nothing. | SUPPORTED |
-| `CD_005` | `CD_003` and `CD_004` together **flip the sign** of the only model with three real transitions — between the two opposite readings the README's decision rule offers. | SUPPORTED |
-| `CD_006` | **The capability term is in the stated model and not in the code.** `Δscore = β₀ + β₁·drift + ε` drops the unobservable term, so the drift slope absorbs it. The repair is already expressible in the shipped schema. | SUPPORTED |
-| `CD_007` | *"Significant"* appears twice in `README.md` and **zero times in `regress.py`.** No t-statistic, no p-value. The fits that exist have one degree of freedom, and `r_squared: 1.0` at n=2 is emitted as a field next to an interpretation string saying the data is insufficient. | SUPPORTED |
+| `CD_002` | **The drift metric is unsigned and the decision rule reads the sign.** Every primitive returns a non-negative distance, so widening and narrowing both push `composite_drift` up. | REPAIRED |
+| `CD_003` | `build_series()` **plants a `y = 0.0` at the head of every model's series** and pairs it with a real drift value. For Alpha-1B it replaces a measured `−0.04`. | REPAIRED |
+| `CD_004` | `version_order` is built from `to_version`, so the **first criteria version and every score attached to it is dropped.** Delta-350M holds the longest baseline in the dataset and contributes nothing. | REPAIRED |
+| `CD_005` | `CD_003` and `CD_004` together **flip the sign** of the only model with three real transitions — between the two opposite readings the README's decision rule offers. | REPAIRED (the flip is now measured against the repaired builder) |
+| `CD_006` | **The capability term is in the stated model and not in the code.** `Δscore = β₀ + β₁·drift + ε` drops the unobservable term, so the drift slope absorbs it. The repair is already expressible in the shipped schema. | **OPEN** — not fixable by editing a function |
+| `CD_007` | *"Significant"* appears twice in `README.md` and **zero times in `regress.py`.** No t-statistic, no p-value. The fits that exist have one degree of freedom, and `r_squared: 1.0` at n=2 is emitted as a field next to an interpretation string saying the data is insufficient. | REPAIRED |
 
 ---
 
@@ -101,15 +117,15 @@ the series and Delta-350M — scored at the **first and last** version, the
 only pair spanning every criteria change — filters down to one score,
 `len(ordered_scores) < 2`, and returns `([], [])`.
 
-Corrected: every transition whose both endpoint scores exist, no planted
-head, first version included.
+Repaired: no planted head, first version included, and a multi-version gap
+paired with the summed drift across it.
 
 ```
-model        as shipped              corrected
+model        as shipped              repaired
 Alpha-1B     n=3 slope=-0.0782       n=3 slope=+0.0526      ← SIGN FLIP
 Beta-7B      n=3 slope=+0.2835       n=2 slope=+0.6482
-Delta-350M   n=0 (no fit)            n=0 (below 2)
-Gamma-70B    n=2 slope=-0.1768       n=1 (below 2)
+Delta-350M   n=0 (no fit)            n=1  (back in the series)
+Gamma-70B    n=2 slope=-0.1768       n=1
 ```
 
 Alpha-1B is the only model with three real transitions, and shipped versus
@@ -219,3 +235,77 @@ internal.
   `SCALAR DEMAND` inverted is `CD_002`'s ordinal-as-nominal result.
 - `../null-harness/` — `CD_007` is the missing gate: a statistic reported
   without the test that would let it fail.
+
+
+---
+
+## The repairs
+
+### `CD_002` — signed metrics alongside the unsigned ones
+
+Four fields now carry a sign, computed from data already in the schema:
+
+```
+                              unsigned   signed
+exemplar 100 -> 1000            0.9000   +0.9000
+exemplar 1000 -> 100            0.9000   -0.9000
+access unknown  -> verified     1.0000   +1.0000
+access verified -> unknown      1.0000   -1.0000
+access partial  -> verified     1.0000   +0.5000     ← step size survives
+rubric dimension added                    +0.5000
+rubric dimension removed                  -0.5000
+```
+
+Three free-text fields (`boundary`, `horizon`, `who_counts`) take a
+**declared** `direction: widened | narrowed | lateral | unknown` on the
+newer version, because whether a boundary widened is a judgement the text
+does not contain. Two (`sign_source`, `logic`) have no natural direction
+and stay at zero.
+
+**An undeclared direction stays 0.0.** That is load-bearing: it is not a
+lateral change, it is a change nobody stated the direction of, and
+collapsing the two would reinstate the original defect one level down.
+`signed_coverage` reports how much of the composite carries a direction at
+all — without it a caller could not tell *no net movement* from *nobody
+declared one*.
+
+`composite` is unchanged and `composite_signed` is reported beside it.
+
+### `CD_003` / `CD_004` — the series
+
+The head point is gone: a delta needs two endpoints, so the series starts at
+the first transition. `version_order` now includes the first pair's
+`from_version`, so the baseline is in. And a delta spanning several versions
+is paired with `span_drift()` — the summed movement over that interval —
+rather than dropped, which puts Delta-350M back in the series.
+
+### `CD_007` — the test the decision rule asks for
+
+`regress.py` computes a two-sided t-test through a regularized incomplete
+beta (stdlib, no dependency). Checked against four standard critical values:
+`t=12.706, df=1`, `t=4.303, df=2`, `t=2.776, df=4`, `t=2.228, df=10` all
+return `p ≈ 0.05`.
+
+`to_dict()` now emits `df`, `t_slope`, `p_slope`, `significant_at_05` and
+`insufficient`, and **`r_squared` is `null` below three points** rather than
+`1.0` beside a string saying the data is insufficient. The interpretation
+string names the failed test instead of reporting a sign.
+
+On the demo: the pooled fit is `n=7, df=5, slope=-0.1050, t=-1.42,
+p=0.215` — **not significant**, stated as such.
+
+### `CD_006` — why it stays open
+
+Nothing in `regress.py` can recover a term that was never measured. The
+repair is a **data** change, not a code change: score every model on the
+first criteria version as well as its contemporary one, and the divergence
+isolates the criteria term up to that version's own unknown gain and offset.
+`ModelScore` already keys on version, so it is a legal ingest today, and
+**0 of 4** demo models carry one.
+
+What did change: `regress_pooled()` and `audit.py regress --pooled`.
+`composite_drift` is a property of the artifact, so every per-model fit ran
+against the same x-vector — four models, four slopes, two signs, from one
+criteria history, decided by which model was picked. The pooled fit is the
+one the design's question asks for, and on this demo it is the only fit with
+degrees of freedom to spare.

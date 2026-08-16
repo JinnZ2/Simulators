@@ -28,6 +28,11 @@ THE REGISTER, sorted by mechanism
 
   SCALAR_DEMAND -- function collapsed to a number
 
+    [also, primary is MODALITY]
+                    capability in a non-human configuration
+                    the tasks are scored on a human-derived scale, so a different
+                    competence integrates to a low number rather than to no number
+
     QUANTITY       response as a function over situations (empathy(framework,
                     target, aspect))
     VISIBLE AS     middling score, indistinguishable from flat moderate response
@@ -46,6 +51,13 @@ THE REGISTER, sorted by mechanism
     CONFIDENCE     high
     WORKED IN      ../declared-frame/ DF_005, DF_007 ; K18 in ../measurement-fork/
 
+    [also, primary is SCORED_AS_WASTE]
+                    practice rate during the stable interval (play, exploration,
+                    off-hours kinesthetic practice, the crossing when nothing is
+                    at stake)
+                    the return falls outside the sampling window, which is a
+                    boundary placed in time rather than in space
+
   AUTHORED_REFERENCE -- reference produced by the measured party
 
     QUANTITY       model drift
@@ -57,6 +69,11 @@ THE REGISTER, sorted by mechanism
                     case: CASP -- blind, periodic, externally referenced,
                     reference cannot be edited from inside.
     WORKED IN      ../anchor-interval/moving_reference.py ; ANC_005..008
+
+    [also, primary is AUDIT_ASYMMETRY]
+                    reliability of an account
+                    the corpus that sets what counts as a normal account was
+                    produced by the side that goes unaudited
 
   PROXY_SUBSTITUTION -- enforceable measure displaces the target it stood in for
 
@@ -80,6 +97,11 @@ THE REGISTER, sorted by mechanism
 
   AUDIT_ASYMMETRY -- guard fires on one side only
 
+    [also, primary is AUTHORED_REFERENCE]
+                    model drift
+                    the contemporary benchmark is not checked against the fixed
+                    one, only the reverse
+
     QUANTITY       reliability of an account
     VISIBLE AS     neutrality
     WOULD MEASURE  count caveats issued per account type across a transcript
@@ -101,6 +123,14 @@ THE REGISTER, sorted by mechanism
     CONFIDENCE     high on the mechanism. Decay rate unmeasured.
     WORKED IN      ../measurement-fork/ K14-K16, MF_014, MF_015
 
+    [also, primary is PROXY_SUBSTITUTION]
+                    recovery-permitting environment during the off-duty interval
+                    (posture change, standing, walking distance, temperature
+                    control, separation of work space from rest space)
+                    the environment that permits recovery is an unpriced input
+                    that arrived with the arrangement; an efficiency instrument
+                    reads its removal as a saving
+
 ========================================================================
 1  does sorting by mechanism cut across field?
 ========================================================================
@@ -109,24 +139,44 @@ THE REGISTER, sorted by mechanism
   next to one from survey methodology and be recognizably the
   same failure. That is checkable.
 
-  mechanism              field                             
-  ----------------------------------------------------------
-  MODALITY               animal cognition                  
-  STORAGE                tacit skill                       
-  SCALAR_DEMAND          survey methodology                
-  BUDGET_BOUNDARY        energy accounting                 
-  AUTHORED_REFERENCE     ML evaluation                     
-  SCORED_AS_WASTE        behavioural ecology / industrial skill
-  PROXY_SUBSTITUTION     transport regulation              
-  AUDIT_ASYMMETRY        model behaviour                   
+  mechanism              field                          role
+  ------------------------------------------------------------------
+  MODALITY               animal cognition               primary
+  STORAGE                tacit skill                    primary
+  SCALAR_DEMAND          animal cognition               also
+  SCALAR_DEMAND          survey methodology             primary
+  BUDGET_BOUNDARY        energy accounting              primary
+  BUDGET_BOUNDARY        behavioural ecology / industri also
+  AUTHORED_REFERENCE     ML evaluation                  primary
+  AUTHORED_REFERENCE     model behaviour                also
+  PROXY_SUBSTITUTION     transport regulation           primary
+  AUDIT_ASYMMETRY        ML evaluation                  also
+  AUDIT_ASYMMETRY        model behaviour                primary
+  SCORED_AS_WASTE        behavioural ecology / industri primary
+  SCORED_AS_WASTE        transport regulation           also
 
-  8 entries, 8 distinct fields, 8 distinct mechanisms
-  mechanisms holding more than one field: 0
+  8 entries, 8 distinct fields, 8 mechanisms
 
-  The two partitions are still identical, so the sort remains
-  UNTESTED rather than confirmed. It buys nothing until a
-  second entry lands under an existing mechanism from a
-  different field.
+  UNI_003 landed: entries now sort under a PRIMARY plus a list,
+  so a mechanism can hold entries filed elsewhere. That is what
+  makes this check able to return anything but zero.
+
+  mechanisms holding more than one field: 5
+
+  5 mechanism(s) now hold entries from more than one field.
+      AUDIT_ASYMMETRY        ML evaluation | model behaviour
+      AUTHORED_REFERENCE     ML evaluation | model behaviour
+      BUDGET_BOUNDARY        behavioural ecology / industrial skill | energy accounting
+      SCALAR_DEMAND          animal cognition | survey methodology
+      SCORED_AS_WASTE        behavioural ecology / industrial skill | transport regulation
+
+  That is the first evidence the mechanism sort groups across
+  fields rather than restating the field partition -- and it
+  is WEAK evidence, because the secondary mechanisms were
+  hand-assigned in this file rather than arriving as separate
+  cases. The strong version is still UNI_002's original
+  expiry condition: a second entry, filed by someone else,
+  landing under an existing mechanism from a different field.
 
   Nearest candidate already in the repo: MODALITY currently holds
   animal cognition. ../reasoning-dial/ RD_009's G-STATE gap -- a
@@ -270,8 +320,10 @@ READING
   Three results on the register itself, none of them fatal and all of
   them structural:
 
-  The mechanism sort is UNTESTED rather than confirmed, and section 1
-  reports whether the latest entries have changed that.
+  The mechanism sort now groups across fields -- 5 mechanisms hold
+  entries from more than one field -- but only because UNI_003's primary-
+  plus-list filing landed and the secondaries were hand-assigned here.
+  Weak evidence. The strong version is a second entry filed independently.
 
   The mechanisms are not mutually exclusive. The filing decides which
   comparison case an entry sits next to, so it is a choice and should

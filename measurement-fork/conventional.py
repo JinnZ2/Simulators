@@ -76,6 +76,11 @@ def generate(spec):
         pid="C%02d" % n,
         q=quantity(base="self_report", object_of="organism"),
         protocol="validated questionnaire, present-day administration",
+        sweep=None,
+        point_reason=("present-day administration by design. The instrument "
+                      "reads one moment; running it across the regime "
+                      "variable would be a different probe, not this one "
+                      "swept."),
         reads="reported state at time of administration",
         blind_to=("recall is state-modulated; the reported history is "
                   "an instrument-level quantity reported as an "

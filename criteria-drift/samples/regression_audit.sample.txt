@@ -5,9 +5,9 @@ artifact CodeBench, 4 criteria versions, 4 models
 ========================================================================
 1  every series begins with a fabricated point
 ========================================================================
-  build_series(score_type='delta') sets imp = 0.0 at i == 0, and
-  pairs it with the drift INTO that version -- a real x against a
-  y that was not measured.
+  The pre-repair build_series(score_type='delta') set imp = 0.0
+  at i == 0 and paired it with the drift INTO that version -- a
+  real x against a y that was not measured.
 
   model        y series as built                      planted
   --------------------------------------------------------------------
@@ -27,18 +27,19 @@ artifact CodeBench, 4 criteria versions, 4 models
 2  the baseline version is not in the series at all
 ========================================================================
   all criteria versions   ['v1.0', 'v2.0', 'v3.0', 'v3.1-hard']
-  regressor version_order ['v2.0', 'v3.0', 'v3.1-hard']
+  pre-repair order        ['v2.0', 'v3.0', 'v3.1-hard']
+  repaired version_order  ['v1.0', 'v2.0', 'v3.0', 'v3.1-hard']
 
-  version_order = [p['to_version'] for p in pairs], so the FIRST
-  version never appears and any score attached to it is dropped
-  before the series is built.
+  version_order was [p['to_version'] for p in pairs], so the
+  FIRST version never appeared and any score attached to it was
+  dropped before the series was built.
 
-  model        scores on record                   usable n
-  ------------------------------------------------------------------
-  Alpha-1B     v1.0,v2.0,v3.0,v3.1-hard           3
-  Beta-7B      v2.0,v3.0,v3.1-hard                3
-  Delta-350M   v1.0,v3.1-hard                     0
-  Gamma-70B    v3.0,v3.1-hard                     2
+  model        scores on record               was        now
+  --------------------------------------------------------------------
+  Alpha-1B     v1.0,v2.0,v3.0,v3.1-hard       3          3
+  Beta-7B      v2.0,v3.0,v3.1-hard            3          2
+  Delta-350M   v1.0,v3.1-hard                 0          1
+  Gamma-70B    v3.0,v3.1-hard                 2          1
 
   Delta-350M holds scores at the FIRST and LAST version -- the
   longest baseline in the dataset, and the only pair spanning
@@ -59,7 +60,7 @@ artifact CodeBench, 4 criteria versions, 4 models
   ----------------------------------------------------------------------
   Alpha-1B     n=3 slope=-0.0782            n=3 slope=+0.0526           
   Beta-7B      n=3 slope=+0.2835            n=2 slope=+0.6482           
-  Delta-350M   n=0 (no fit)                 n=0 (below 2)               
+  Delta-350M   n=0 (no fit)                 n=1 (below 2)               
   Gamma-70B    n=2 slope=-0.1768            n=1 (below 2)               
 
   SIGN FLIP on Alpha-1B.
@@ -74,8 +75,22 @@ artifact CodeBench, 4 criteria versions, 4 models
   of that rule. The verdict is set by the fabricated point.
 
   After correction the demo supports one n=3 fit and one n=2.
-  Two models fall below two points. The shipped n column is
+  Two models fall below two points. The shipped n column was
   inflated by the planted head, not by having more data.
+
+  REPAIRED, and one more thing the repair made visible: with
+  span pairing, a model scored across a MULTI-version gap is
+  matched against the summed drift over that span rather than
+  dropped. Delta-350M is back in the series.
+
+    real observations across all models: 7
+    pooled fit  n=7 df=5 slope=-0.1050 t=-1.42 p=0.215 sig=False
+
+  composite_drift is a property of the ARTIFACT, so every
+  per-model fit ran against the same x-vector -- four models,
+  four slopes, two signs, from one criteria history. The pooled
+  fit is the one the design's question asks for, and it is the
+  only fit here with degrees of freedom to spare.
 
 ========================================================================
 4  'significant' is in the decision rule and not in the code
@@ -86,20 +101,21 @@ artifact CodeBench, 4 criteria versions, 4 models
       'progress' is the ruler stretching.
       beta1 > 0, significant: Criteria inflation explains ...
 
-      regress.py contains 'signific'  False
+      regress.py contains 'signific'  True
       regress.py contains 'p_value'   False
       regress.py contains 'pvalue'    False
       regress.py contains 't_stat'    False
       regress.py contains 'ttest'     False
 
-  What the demo actually produces:
+  REPAIRED: t, df, p and significant_at_05 are in to_dict(), and
+  r_squared is null below three points. What the demo produces:
 
   model        n      slope       se          t        df
   ------------------------------------------------------------
-  Alpha-1B     3      -0.0782     0.2363      -0.33    1
-  Beta-7B      3      0.2835      0.2745      1.03     1
-  Delta-350M   0      (no fit)
-  Gamma-70B    2      -0.1768     inf         n/a      0
+  Alpha-1B     3      0.0526      0.1379      0.38     1
+  Beta-7B      2      0.6482      inf         n/a      0
+  Delta-350M   1      (no fit)
+  Gamma-70B    1      (no fit)
 
   One degree of freedom on the fits that have any. No t is near
   a conventional threshold, and the interpretation string reports
@@ -161,7 +177,11 @@ artifact CodeBench, 4 criteria versions, 4 models
 READING
 ========================================================================
 
-  Two mechanical defects in build_series(). It plants y = 0.0 at the head
+  REPAIRED. Every result below is the pre-repair behaviour, reproduced by
+  shipped_series() so the cost stays measurable, against what
+  build_series() returns now. tests/test_repairs.py pins each one.
+
+  Two mechanical defects in build_series(). It planted y = 0.0 at the head
   of every series and pairs it with a real drift value -- for Alpha-1B that
   fabricated point REPLACES a measured -0.04 -- and it builds version_order
   from `to_version`, so the first criteria version and every score attached
@@ -178,10 +198,11 @@ READING
   n = 2 is emitted as a field next to an interpretation string that says
   the data is insufficient.
 
-  The structural one: the capability term is in the stated model and not in
-  the code, because it is unobservable, so the drift slope absorbs it. The
-  repair is already expressible -- ModelScore keys on version, so scoring
-  every model on the first version alongside its contemporary one is a
-  legal ingest today. Nothing asks for it, and the example data is built
-  the one way that cannot separate the two terms.
+  The structural one is NOT repaired and cannot be by editing a function:
+  the capability term is in the stated model and not in the code, because
+  it is unobservable, so the drift slope absorbs it. The repair is already
+  expressible -- ModelScore keys on version, so scoring every model on the
+  first version alongside its contemporary one is a legal ingest today.
+  Nothing asks for it, and the example data is built the one way that
+  cannot separate the two terms. That stays open as CD_006.
 

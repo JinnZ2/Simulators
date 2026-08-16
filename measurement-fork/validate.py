@@ -89,6 +89,26 @@ def check(spec):
                 "[malformed] %s -- must be a list, got %s"
                 % (field, type(val).__name__))
 
+    # MF_020: a spec with no `falsifiers` cannot say what would refute it,
+    # so a generator can emit a complete, well-formed design that is
+    # incapable of failing. That is not a missing nicety -- it is the gap
+    # that let the point-vs-gradient bug exist, and it is why the falsifier
+    # check had to hand-transcribe from prose.
+    fs = spec.get("falsifiers")
+    if fs is None:
+        questions.append(
+            "falsifiers: not declared. What would refute this? Each entry "
+            "needs {id, statement, terms}, where `terms` name spec "
+            "variables some arm can sweep across. Without them a design "
+            "cannot be checked for whether it is capable of failing.")
+    else:
+        for i, f in enumerate(fs):
+            missing = [k for k in ("id", "statement", "terms")
+                       if not f.get(k)]
+            if missing:
+                questions.append("falsifiers[%d]: missing %s"
+                                 % (i, ", ".join(missing)))
+
     return questions
 
 

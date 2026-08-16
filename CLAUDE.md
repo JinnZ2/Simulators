@@ -1798,6 +1798,14 @@ underneath).
   not yet created. Two schema gaps, one shape: a probe cannot say what it
   must be run across and a spec cannot say what would refute it, and between
   them a generator emits a well-formed design that is incapable of failing.
+  **REPAIRED:** `quantities.probe()` now takes `sweep=(variable, levels)`
+  defaulting to the regime variable, refuses fewer than two levels, and
+  requires a `point_reason` when a probe declares `sweep=None`; the spec
+  declares five `falsifiers` as `{id, statement, terms}` and `validate.py`
+  asks for them; `K13`'s `closes=["falsifier:ratio_flat"]` resolves.
+  `falsifier_sweep.py` reads both registries instead of hand-transcribing —
+  3 of 5 falsifiers reachable by the arms as written, 5 of 5 with K11-K16,
+  and a constructed-null section keeps the check's deny branch reachable.
   Twenty claims `MF_001..020`.
   **`MF_011`:** `make_docs.py` / `README.md` / `GUARDS.md` arrive as
   pre-repair copies too (12 / 16 / 48 differing lines) — five bundled
@@ -2063,7 +2071,25 @@ underneath).
   analysis, so the referent is dropped and nothing enters the record as a
   measurement. Distinct from `AUDIT ASYMMETRY`, which is a guard firing on
   one side; this is a channel reclassified at intake, so the reading never
-  reaches a guard. Twelve claims `UNI_001..012`. Stdlib only, CC0.
+  reaches a guard. **REPAIRED:** `UNI_003` (`entry()` takes a primary plus
+  an `also` list and the register sorts under every mechanism — which is
+  what lets check 1 return anything but zero: 5 mechanisms now hold entries
+  from more than one field, though weakly, since the secondaries were
+  hand-assigned rather than filed as cases, so `UNI_002` stays open);
+  `UNI_009` (`lean` → `\blean\b`, candidates ~845 → 676, `slack`
+  deliberately unchanged since `\b` does not touch a proper-noun homograph);
+  `UNI_010` (`--exclude` and a `.scanignore` honoured anywhere in the walked
+  tree, so the loop is closed in `scan.py` rather than in the caller and the
+  reported corpus is the corpus on disk). `DF_009`'s two scanner findings
+  land with them, at a cost of 2 candidates: a bare-numbers trigger that
+  fires on the delivered result string and is scored `weak` when no
+  comparative is present, and `inefficien(t|cy|cies) (at|in|as)` so the
+  register's own `VISIBLE AS` line fires under both mechanisms. **A
+  correction:** the earlier audit said the delivered `break` in `scan()`
+  enforced one mechanism per sentence — it does not, the `break` exits the
+  trigger loop and mechanisms already co-fire, so the wrong-mechanism
+  finding was a missing trigger rather than a blocked co-firing. Twelve
+  claims `UNI_001..012`. Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
   time-series variable** — version the ruler, compute drift on its own
@@ -2107,8 +2133,20 @@ underneath).
   zero times in `regress.py`; the fits have one degree of freedom (t = 1.03
   and −0.33), and `r_squared: 1.0` at n=2 is emitted as a field beside an
   interpretation string saying the data is insufficient — the guard is in
-  the sentence, not in the data. Seven claims `CD_001..007`. Stdlib only,
-  CC0.
+  the sentence, not in the data. **REPAIRED**, six of seven, each pinned by
+  `tests/test_repairs.py` (28 tests): signed metrics alongside the unsigned
+  ones (four fields signed from stored data, three taking a declared
+  `direction`, two staying at zero, plus `signed_coverage` so a caller can
+  tell "no net change" from "nobody declared one"); the planted head gone
+  and the baseline version back, with a multi-version gap paired against
+  `span_drift()` so Delta-350M returns to the series; a two-sided t-test
+  through a regularized incomplete beta (checked against four standard
+  critical values) with `r_squared` null below three points; and
+  `regress_pooled()` / `--pooled`, since drift is a property of the artifact
+  and four per-model fits ran against one x-vector. `CD_006` stays OPEN and
+  is not fixable by editing a function — the repair is a data change nobody
+  has made (0 of 4 demo models carry a score on a non-current version).
+  Seven claims `CD_001..007`. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

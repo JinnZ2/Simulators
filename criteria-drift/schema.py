@@ -48,6 +48,18 @@ class Frame:
         )
 
 
+# Legal values for the declared direction of a free-text frame change.
+# Whether a boundary WIDENED or NARROWED is a semantic judgement the text
+# does not contain, so it is declared by whoever made the version rather
+# than inferred. See CLAIM_TABLE.md CD_002.
+DIRECTIONS = ("widened", "narrowed", "lateral", "unknown")
+
+# observer_access is an ORDINAL. Ranking it makes its drift signed; the
+# delivered engine compared it as a string, so gaining and losing
+# verification scored identically. CD_002.
+ACCESS_RANK = {"unknown": 0, "partial": 1, "verified": 2}
+
+
 @dataclass
 class CriteriaVersion:
     """One version of a benchmark/evaluation criteria."""
@@ -60,6 +72,19 @@ class CriteriaVersion:
     rubric_weights: Optional[Dict[str, float]] = None
     exemplar_count: Optional[int] = None
     notes: str = ""
+    # Declared direction of change vs the PREVIOUS version, per free-text
+    # frame field. Absent or "unknown" leaves that field unsigned, which is
+    # the honest default -- an undeclared direction is not a lateral one.
+    direction: Optional[Dict[str, str]] = None
+
+    def validate_direction(self) -> List[str]:
+        problems = []
+        for field, val in (self.direction or {}).items():
+            if val not in DIRECTIONS:
+                problems.append(
+                    "BAD DIRECTION %s=%r (expected %s)"
+                    % (field, val, "|".join(DIRECTIONS)))
+        return problems
 
     def to_dict(self) -> Dict[str, Any]:
         d = asdict(self)
@@ -77,6 +102,7 @@ class CriteriaVersion:
             rubric_weights=d.get("rubric_weights"),
             exemplar_count=d.get("exemplar_count"),
             notes=d.get("notes", ""),
+            direction=d.get("direction"),
         )
 
 

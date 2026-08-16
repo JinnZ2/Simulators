@@ -561,7 +561,7 @@ by it, and `MF_009`'s classifier problem gets smaller by the same move.
 
 ## MF_017 — `sweep` is a schema addition with teeth, and the schema has no room for it
 
-**who:** A · **status:** SUPPORTED
+**who:** A · **status:** REPAIRED (see *Repairs* at the end)
 
 The rule as specified:
 
@@ -683,7 +683,7 @@ staleness is incidental to bundling rather than caused by it.
 
 ## MF_020 — the falsifier check the drop asks for cannot be run from the spec
 
-**who:** A · **status:** SUPPORTED
+**who:** A · **status:** REPAIRED (see *Repairs* at the end)
 
 The delivered `PROBES_K11_K18.py` header states the structural bug directly
 and adds a requirement:
@@ -730,3 +730,53 @@ vocabulary. Then the proposed schema is insufficient and the check needs
 more than a term list.
 
 **Evidence:** `falsifier_sweep.py` §1–§4.
+
+---
+
+## Repairs — MF_017 and MF_020
+
+Both schema gaps are closed, and the check they blocked is now mechanical.
+
+### `MF_017` — `sweep` on the probe
+
+`quantities.probe()` takes `sweep=(variable, levels)`, defaulting to
+`DEFAULT_SWEEP = "regime.variable"`, resolved against the spec's declared
+regime by `resolve_sweep()`. It **refuses fewer than two levels**, and a
+point probe must pass `sweep=None` *with* a `point_reason` — saying why a
+single setting is the design rather than an omission.
+
+The arms declare against it: 16 swept across three variables
+(`provisioning_level`, `stimulus_severity` at 4 levels, `perturbation_size`
+at 3), and one point probe — `C07`, the present-day questionnaire, whose
+reason is that running it across the regime variable would be a different
+probe rather than this one swept.
+
+### `MF_020` — `falsifiers` on the spec
+
+`systems/provisioning_calibration.json` declares five, each
+`{id, statement, terms}`. `validate.py` asks for them and says what they are
+for when they are absent. `K13`'s `closes=["falsifier:ratio_flat"]` **now
+resolves** — it referred to a registry that had not been created.
+
+`falsifier_sweep.py` reads both registries instead of hand-transcribing from
+prose:
+
+```
+falsifier          terms                        arms now   with K11-K16
+ratio_flat         provisioning_level           yes        yes
+tau_flat           provisioning_level           yes        yes
+threshold_flat     time_since_clean_reference   NO         yes
+mediation_broken   baseline_staleness, prov...  NO         yes
+gradient_flat      stimulus_severity            yes        yes
+
+arms as they stand: 3 of 5      with K11-K16: 5 of 5
+```
+
+Two falsifiers are still unreachable by the arms as written, which is a
+result rather than a repair: nothing sweeps `time_since_clean_reference` or
+`baseline_staleness` until K15 and K16 land.
+
+**The check keeps a reachable deny.** Section 4 puts three constructed
+falsifiers through it — one reachable, one naming a variable no arm sweeps,
+one mixed — and the last two are flagged. So every falsifier in this spec
+coming back reachable is a property of the spec, not of the check.

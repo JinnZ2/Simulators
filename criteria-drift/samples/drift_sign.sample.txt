@@ -127,6 +127,38 @@ subject: DriftEngine, delivered
   which is a real finding and is not the one the README states.
 
 ========================================================================
+6  repaired -- the signed metrics, alongside the unsigned ones
+========================================================================
+  The unsigned primitives above are unchanged: a caller that
+  wants magnitude still has it. These are added, not swapped.
+
+                                 unsigned     signed      
+  ----------------------------------------------------------
+  boundary widened, declared     0.2222       +0.2222
+  boundary narrowed, declared    0.5714       -0.5714
+  boundary changed, undeclared   0.5714       +0.0000
+
+  exemplar 100 -> 1000           0.9000       +0.9000
+  exemplar 1000 -> 100           0.9000       -0.9000
+  access unknown -> verified     1.0000       +1.0000
+  access verified -> unknown     1.0000       -1.0000
+  access partial -> verified     1.0000       +0.5000
+
+  An UNDECLARED direction stays 0.0. That is the load-bearing
+  choice: it is not a lateral change, it is a change nobody said
+  the direction of, and collapsing those two would put the
+  original defect back one level down.
+
+  composite          0.0672
+  composite_signed   +0.0000
+  signed_coverage    0.00
+
+  `signed_coverage` is what stops the repair from creating a new
+  version of the same problem. Without it a caller cannot tell
+  'no net movement' from 'no direction declared', and a
+  composite_signed near zero would mean both.
+
+========================================================================
 READING
 ========================================================================
 
@@ -147,4 +179,11 @@ READING
   because whether a free-text boundary widened or narrowed is a judgement
   the text does not contain. Two have no natural direction and should stay
   unsigned.
+
+  REPAIRED, section 6. All four signable fields now carry a sign, the
+  three free-text ones take a declared `direction`, and the two with no
+  natural direction stay at zero. `composite_signed` is reported beside
+  `composite`, never instead of it, and `signed_coverage` says how much of
+  the composite carries a direction at all -- without which a caller could
+  not tell "no net change" from "nobody declared one".
 

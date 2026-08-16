@@ -1,0 +1,3 @@
+# UNI_010: this directory holds scan_audit.py output, which scan.py
+# reads back as .txt. Without this the audit has no fixed point.
+samples

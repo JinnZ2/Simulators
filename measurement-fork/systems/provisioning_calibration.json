@@ -33,5 +33,44 @@
     "coupling bandwidth",
     "whether trust in own sensing is a measurement or a belief",
     "reversibility after regime shift"
+  ],
+  "falsifiers": [
+    {
+      "id": "ratio_flat",
+      "statement": "response magnitude per perturbation size is flat across the provisioning gradient",
+      "terms": [
+        "provisioning level"
+      ]
+    },
+    {
+      "id": "tau_flat",
+      "statement": "relearn time constant after a regime shift does not rise with provisioning",
+      "terms": [
+        "provisioning level"
+      ]
+    },
+    {
+      "id": "threshold_flat",
+      "statement": "detection threshold does not rise with baseline staleness",
+      "terms": [
+        "time since clean reference"
+      ]
+    },
+    {
+      "id": "mediation_broken",
+      "statement": "practice rate predicts detection latency with baseline freshness controlled out",
+      "terms": [
+        "provisioning level",
+        "time since clean reference",
+        "baseline staleness"
+      ]
+    },
+    {
+      "id": "gradient_flat",
+      "statement": "discrimination gradient across severities is flat in the calibrated group",
+      "terms": [
+        "stimulus severity"
+      ]
+    }
   ]
 }

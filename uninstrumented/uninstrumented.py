@@ -65,23 +65,36 @@ MECHANISM_GLOSS = {
 
 
 def entry(quantity, excluded_by, visible_as, would_measure, confidence,
-          field, note=None, worked_in=None):
+          field, note=None, worked_in=None, also=None):
     """
     quantity       what would be measured
-    excluded_by    what in the instrument's constitution prevents it
+    excluded_by    PRIMARY mechanism -- the filing this entry is sorted by
+    also           [(mechanism, why), ...] -- other mechanisms with a claim
     visible_as     how the absence currently reads
     would_measure  the design, if one exists yet
     confidence     stated gradient, recorded verbatim and not adjudicated
     field          domain of origin -- used only by check 1
     note           optional
     worked_in      where in this repo the case is already worked, if it is
+
+    UNI_003: the mechanisms are not mutually exclusive, and the filing
+    decides which comparison case an entry sits next to -- which is the
+    register's whole function. So the filing is a CHOICE and is now visible
+    as one: a primary plus a list, sorted under all of them. The cost is
+    that an entry appears more than once, which is the correct cost: it is
+    in more than one place.
     """
-    if excluded_by not in MECHANISMS:
-        raise ValueError("excluded_by must be one of %r, got %r"
-                         % (MECHANISMS, excluded_by))
+    for m in [excluded_by] + [x[0] for x in (also or ())]:
+        if m not in MECHANISMS:
+            raise ValueError("mechanism must be one of %r, got %r"
+                             % (MECHANISMS, m))
+    if excluded_by in [x[0] for x in (also or ())]:
+        raise ValueError("primary mechanism %r repeated in `also`"
+                         % excluded_by)
     return {
         "quantity": quantity,
         "excluded_by": excluded_by,
+        "also": tuple(also or ()),
         "visible_as": visible_as,
         "would_measure": would_measure,
         "confidence": confidence,
@@ -89,6 +102,11 @@ def entry(quantity, excluded_by, visible_as, would_measure, confidence,
         "note": note,
         "worked_in": worked_in,
     }
+
+
+def mechanisms_of(e):
+    """Primary first, then the secondaries. Sort under all of them."""
+    return (e["excluded_by"],) + tuple(x[0] for x in e["also"])
 
 
 ENTRIES = (
@@ -100,6 +118,10 @@ ENTRIES = (
                        "own modality"),
         confidence="high on the exclusion, unmeasured on magnitude",
         field="animal cognition",
+        also=(("SCALAR_DEMAND",
+               "the tasks are scored on a human-derived scale, so a "
+               "different competence integrates to a low number rather "
+               "than to no number"),),
     ),
     entry(
         quantity=("calibration between one body and one environment "
@@ -151,6 +173,9 @@ ENTRIES = (
               "case: CASP -- blind, periodic, externally referenced, "
               "reference cannot be edited from inside."),
         worked_in="../anchor-interval/moving_reference.py ; ANC_005..008",
+        also=(("AUDIT_ASYMMETRY",
+               "the contemporary benchmark is not checked against the "
+               "fixed one, only the reverse"),),
     ),
     entry(
         quantity=("practice rate during the stable interval (play, "
@@ -164,6 +189,9 @@ ENTRIES = (
         confidence="high on the mechanism. Decay rate unmeasured.",
         field="behavioural ecology / industrial skill",
         worked_in="../measurement-fork/ K14-K16, MF_014, MF_015",
+        also=(("BUDGET_BOUNDARY",
+               "the return falls outside the sampling window, which is a "
+               "boundary placed in time rather than in space"),),
     ),
     entry(
         quantity=("recovery-permitting environment during the off-duty "
@@ -188,6 +216,10 @@ ENTRIES = (
               "the arrangement: off-duty meant leaving a building. For one "
               "occupation it was removed structurally and nothing "
               "re-derived the rule."),
+        also=(("SCORED_AS_WASTE",
+               "the environment that permits recovery is an unpriced input "
+               "that arrived with the arrangement; an efficiency instrument "
+               "reads its removal as a saving"),),
     ),
     entry(
         quantity="reliability of an account",
@@ -202,6 +234,9 @@ ENTRIES = (
               "surface, so it is absorbed uncaveated. Filter strength "
               "scales with distance from corpus, which is the same variable "
               "as novelty."),
+        also=(("AUTHORED_REFERENCE",
+               "the corpus that sets what counts as a normal account was "
+               "produced by the side that goes unaudited"),),
     ),
 )
 
@@ -231,11 +266,20 @@ def wrap(text, indent, width=62):
 def register() -> None:
     section("THE REGISTER, sorted by mechanism")
     for m in MECHANISMS:
-        rows = [e for e in ENTRIES if e["excluded_by"] == m]
+        rows = [e for e in ENTRIES if m in mechanisms_of(e)]
         if not rows:
             continue
         print("\n  %s -- %s" % (m, MECHANISM_GLOSS[m]))
         for e in rows:
+            if e["excluded_by"] != m:
+                why = dict(e["also"])[m]
+                print()
+                print("    [also, primary is %s]" % e["excluded_by"])
+                for line in wrap(e["quantity"], 20):
+                    print(line)
+                for line in wrap(why, 20):
+                    print(line)
+                continue
             print()
             for label, key in (("QUANTITY", "quantity"),
                                ("VISIBLE AS", "visible_as"),
@@ -266,19 +310,27 @@ def check_cross_domain() -> None:
     print("  next to one from survey methodology and be recognizably the")
     print("  same failure. That is checkable.\n")
 
-    print("  %-22s %-34s" % ("mechanism", "field"))
-    print("  " + "-" * 58)
-    for e in ENTRIES:
-        print("  %-22s %-34s" % (e["excluded_by"], e["field"]))
+    print("  %-22s %-30s %s" % ("mechanism", "field", "role"))
+    print("  " + "-" * 66)
+    for m in MECHANISMS:
+        for e in ENTRIES:
+            if m not in mechanisms_of(e):
+                continue
+            print("  %-22s %-30s %s"
+                  % (m, e["field"][:30],
+                     "primary" if e["excluded_by"] == m else "also"))
 
     fields = {e["field"] for e in ENTRIES}
-    mechs = {e["excluded_by"] for e in ENTRIES}
     print()
-    print("  %d entries, %d distinct fields, %d distinct mechanisms"
-          % (len(ENTRIES), len(fields), len(mechs)))
-    collisions = [m for m in mechs
+    print("  %d entries, %d distinct fields, %d mechanisms"
+          % (len(ENTRIES), len(fields), len(MECHANISMS)))
+    print()
+    print("  UNI_003 landed: entries now sort under a PRIMARY plus a list,")
+    print("  so a mechanism can hold entries filed elsewhere. That is what")
+    print("  makes this check able to return anything but zero.\n")
+    collisions = [m for m in MECHANISMS
                   if len({e["field"] for e in ENTRIES
-                          if e["excluded_by"] == m}) > 1]
+                          if m in mechanisms_of(e)}) > 1]
     print("  mechanisms holding more than one field: %d" % len(collisions))
     print()
     if not collisions:
@@ -291,10 +343,16 @@ def check_cross_domain() -> None:
               % len(collisions))
         for m in sorted(collisions):
             fs = sorted({e["field"] for e in ENTRIES
-                         if e["excluded_by"] == m})
+                         if m in mechanisms_of(e)})
             print("      %-22s %s" % (m, " | ".join(fs)))
+        print()
         print("  That is the first evidence the mechanism sort groups across")
-        print("  fields rather than restating the field partition.")
+        print("  fields rather than restating the field partition -- and it")
+        print("  is WEAK evidence, because the secondary mechanisms were")
+        print("  hand-assigned in this file rather than arriving as separate")
+        print("  cases. The strong version is still UNI_002's original")
+        print("  expiry condition: a second entry, filed by someone else,")
+        print("  landing under an existing mechanism from a different field.")
     print()
     print("  Nearest candidate already in the repo: MODALITY currently holds")
     print("  animal cognition. ../reasoning-dial/ RD_009's G-STATE gap -- a")
@@ -481,8 +539,10 @@ def main() -> None:
   Three results on the register itself, none of them fatal and all of
   them structural:
 
-  The mechanism sort is UNTESTED rather than confirmed, and section 1
-  reports whether the latest entries have changed that.
+  The mechanism sort now groups across fields -- 5 mechanisms hold
+  entries from more than one field -- but only because UNI_003's primary-
+  plus-list filing landed and the secondaries were hand-assigned here.
+  Weak evidence. The strong version is a second entry filed independently.
 
   The mechanisms are not mutually exclusive. The filing decides which
   comparison case an entry sits next to, so it is a choice and should

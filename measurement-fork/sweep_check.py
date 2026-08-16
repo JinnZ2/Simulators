@@ -11,10 +11,11 @@ THE RULE, as specified
     how many levels. default regime.variable, min 2. Point-probes must
     declare sweep=None with a reason.
 
-This is a schema addition with teeth. `quantities.probe()` has six fields
-and none of them is `sweep`, so the rule is not expressible in the delivered
-schema and no delivered probe satisfies it. That is the measurement below,
-not a complaint: section 1 counts.
+This was a schema addition with teeth that the schema had no room for:
+`quantities.probe()` had six fields and none was `sweep`, so the rule was
+not expressible and 0 of 17 measuring probes satisfied it -- one gap, not
+seventeen oversights. Section 1 counts, and now reports the repaired state
+alongside what it used to read.
 
 Why it matters more than a missing field usually does. A probe with no
 declared sweep returns a number at ONE setting of the control parameter. The
@@ -100,7 +101,8 @@ def validate(p) -> list:
         bad.append("NO SWEEP FIELD")
         return bad
     if p["sweep"] is None:
-        if not p.get("reason"):
+        # `point_reason` on a probe(); `reason` on the K11-K18 dicts.
+        if not (p.get("point_reason") or p.get("reason")):
             bad.append("POINT-PROBE WITHOUT REASON")
         return bad
     var, levels = p["sweep"]
@@ -135,15 +137,25 @@ def check_delivered() -> None:
     print("  MF_008 / MF_016 -- so the rule does not apply to it)\n")
 
     fails = [p for p in measuring if validate(p)]
-    print("  measuring probes carrying a `sweep` field: %d of %d"
-          % (len(measuring) - len(fails), len(measuring)))
+    swept = [p for p in measuring if p.get("sweep")]
+    points = [p for p in measuring if "sweep" in p and not p["sweep"]]
+    print("  carrying a `sweep` declaration: %d of %d  (%d swept, %d point)"
+          % (len(measuring) - len(fails), len(measuring),
+             len(swept), len(points)))
     print()
-    print("  quantities.probe() has these fields:")
+    print("  BEFORE THE REPAIR this read 0 of 17, and not because seventeen")
+    print("  probes were written badly. quantities.probe() had six fields --")
     print("      arm  id  quantity  protocol  reads  blind_to")
+    print("  and `sweep` was not among them, so the rule was not expressible")
+    print("  in the schema the arms were written against. One schema gap,")
+    print("  not seventeen oversights.")
     print()
-    print("  `sweep` is not among them, so the rule is not expressible in")
-    print("  the delivered schema and every measuring probe fails it. That")
-    print("  is a schema gap, not %d separate oversights." % len(fails))
+    print("  MF_017 repaired. The field defaults to the spec's regime")
+    print("  variable, refuses fewer than %d levels, and requires a stated"
+          % MIN_LEVELS)
+    print("  reason when a probe declares sweep=None:")
+    for p in points:
+        print("      %s  %s" % (p["id"], p["point_reason"]))
     print()
     print("  Why it is load-bearing rather than tidy: the spec's own")
     print("  falsifiers are statements about a gradient.\n")
@@ -277,10 +289,11 @@ def main() -> None:
 
     section("READING")
     print("""
-  `sweep` is a schema addition with teeth, and no delivered probe
-  satisfies it -- because `quantities.probe()` has no such field, so the
-  rule is not expressible in the schema the arms were written against.
-  One gap, not N oversights.
+  `sweep` was a schema addition with teeth that no delivered probe could
+  satisfy, because `quantities.probe()` had no such field -- the rule was
+  not expressible in the schema the arms were written against. One gap,
+  not N oversights. REPAIRED: the field exists, defaults to the regime
+  variable, refuses a single level, and makes a point probe say why.
 
   It is load-bearing rather than tidy because the spec's falsifiers are
   statements about gradients, and a probe run at one setting of the

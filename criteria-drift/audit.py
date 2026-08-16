@@ -90,9 +90,18 @@ def cmd_regress(args):
     if args.model:
         result = regressor.regress(args.model, lag=args.lag, score_type=args.score_type)
         print(json.dumps(result.to_dict(), indent=2))
+    elif getattr(args, "pooled", False):
+        result = regressor.regress_pooled(lag=args.lag,
+                                          score_type=args.score_type)
+        print(json.dumps(result.to_dict(), indent=2))
     else:
         results = regressor.regress_all_models(lag=args.lag, score_type=args.score_type)
         out = {k: v.to_dict() for k, v in results.items()}
+        # composite_drift is a property of the ARTIFACT, so every per-model
+        # fit runs against the same x-vector. The pooled fit is the one that
+        # answers the question the design asks. CD_006.
+        out["_pooled"] = regressor.regress_pooled(
+            lag=args.lag, score_type=args.score_type).to_dict()
         if args.output:
             with open(args.output, "w") as f:
                 json.dump(out, f, indent=2)
@@ -174,6 +183,9 @@ def main():
     p_r.add_argument("--model", help="Specific model name (default: all)")
     p_r.add_argument("--lag", type=int, default=0, help="Lag steps")
     p_r.add_argument("--score-type", default="delta", choices=["absolute", "delta", "relative"])
+    p_r.add_argument("--pooled", action="store_true",
+                     help="One fit over every model's observations "
+                          "(drift is a property of the artifact)")
     p_r.add_argument("-o", "--output", help="Write JSON output to file")
 
     # report

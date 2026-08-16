@@ -10,6 +10,14 @@ from typing import List, Optional, Tuple, Dict, Any
 from schema import CriteriaVersion, ModelScore, Frame
 
 
+def _has(row, col) -> bool:
+    """Tolerate a database created before direction_json existed."""
+    try:
+        return col in row.keys()
+    except Exception:
+        return False
+
+
 class DriftStore:
     DB_SCHEMA = """
     CREATE TABLE IF NOT EXISTS criteria_versions (
@@ -22,6 +30,7 @@ class DriftStore:
         rubric_weights_json TEXT,
         exemplar_count INTEGER,
         notes TEXT,
+        direction_json TEXT,
         UNIQUE(artifact_name, version_id)
     );
 
@@ -74,8 +83,8 @@ class DriftStore:
             """INSERT OR REPLACE INTO criteria_versions
                (artifact_name, version_id, timestamp, frame_json,
                 rubric_dimensions_json, rubric_weights_json,
-                exemplar_count, notes)
-               VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+                exemplar_count, notes, direction_json)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
             (
                 cv.artifact_name,
                 cv.version_id,
@@ -85,6 +94,7 @@ class DriftStore:
                 json.dumps(cv.rubric_weights) if cv.rubric_weights else None,
                 cv.exemplar_count,
                 cv.notes,
+                json.dumps(cv.direction) if cv.direction else None,
             ),
         )
         self.conn.commit()
@@ -117,6 +127,8 @@ class DriftStore:
             if row["rubric_weights_json"] else None,
             exemplar_count=row["exemplar_count"],
             notes=row["notes"] or "",
+            direction=json.loads(row["direction_json"])
+            if _has(row, "direction_json") and row["direction_json"] else None,
         )
 
     # ------------------------------------------------------------------

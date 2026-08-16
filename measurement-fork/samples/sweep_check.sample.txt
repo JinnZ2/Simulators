@@ -9,14 +9,19 @@ subject: the delivered arms and the newly specified K11-K16
   (the widen arm emits design-directed options, not quantities --
   MF_008 / MF_016 -- so the rule does not apply to it)
 
-  measuring probes carrying a `sweep` field: 0 of 17
+  carrying a `sweep` declaration: 17 of 17  (16 swept, 1 point)
 
-  quantities.probe() has these fields:
+  BEFORE THE REPAIR this read 0 of 17, and not because seventeen
+  probes were written badly. quantities.probe() had six fields --
       arm  id  quantity  protocol  reads  blind_to
+  and `sweep` was not among them, so the rule was not expressible
+  in the schema the arms were written against. One schema gap,
+  not seventeen oversights.
 
-  `sweep` is not among them, so the rule is not expressible in
-  the delivered schema and every measuring probe fails it. That
-  is a schema gap, not 17 separate oversights.
+  MF_017 repaired. The field defaults to the spec's regime
+  variable, refuses fewer than 2 levels, and requires a stated
+  reason when a probe declares sweep=None:
+      C07  present-day administration by design. The instrument reads one moment; running it across the regime variable would be a different probe, not this one swept.
 
   Why it is load-bearing rather than tidy: the spec's own
   falsifiers are statements about a gradient.
@@ -139,10 +144,11 @@ subject: the delivered arms and the newly specified K11-K16
 READING
 ========================================================================
 
-  `sweep` is a schema addition with teeth, and no delivered probe
-  satisfies it -- because `quantities.probe()` has no such field, so the
-  rule is not expressible in the schema the arms were written against.
-  One gap, not N oversights.
+  `sweep` was a schema addition with teeth that no delivered probe could
+  satisfy, because `quantities.probe()` had no such field -- the rule was
+  not expressible in the schema the arms were written against. One gap,
+  not N oversights. REPAIRED: the field exists, defaults to the regime
+  variable, refuses a single level, and makes a point probe say why.
 
   It is load-bearing rather than tidy because the spec's falsifiers are
   statements about gradients, and a probe run at one setting of the

@@ -9,7 +9,7 @@ Design principle: drift must be computable from the declared frame alone,
 without looking at model scores. The ruler moves on its own axis.
 """
 from typing import Dict, List, Tuple, Optional
-from schema import CriteriaVersion, Frame
+from schema import CriteriaVersion, Frame, ACCESS_RANK
 import math
 
 
@@ -91,6 +91,29 @@ class DriftEngine:
         m["exemplar_count"] = self._numeric_drift(
             a.exemplar_count, b.exemplar_count)
 
+        # --- Signed drift ---------------------------------------------
+        # CD_002: every metric above is a non-negative DISTANCE, and the
+        # decision rule reads the SIGN of a slope on it. Widening and
+        # narrowing both pushed composite up. These carry direction where
+        # direction exists, and stay at 0.0 where it does not -- an
+        # undeclared direction is not a lateral one.
+        signed = {}
+        signed["exemplar_count"] = self._signed_numeric(
+            a.exemplar_count, b.exemplar_count)
+        signed["observer_access"] = self._signed_ordinal(
+            a.frame.observer_access, b.frame.observer_access)
+        signed["rubric_dimensions"] = self._signed_list(
+            a.rubric_dimensions or [], b.rubric_dimensions or [])
+        signed["rubric_weights"] = self._signed_dict(
+            a.rubric_weights or {}, b.rubric_weights or {})
+        for field in ("boundary", "horizon", "who_counts"):
+            signed[field] = self._declared_direction(b, field, m[field])
+        for field in ("sign_source", "logic"):
+            # No natural direction. Saying so is worth more than forcing one.
+            signed[field] = 0.0
+        for k, v in signed.items():
+            m["signed_" + k] = v
+
         # --- Composite -----------------------------------------------
         total_weight = 0.0
         weighted_sum = 0.0
@@ -99,6 +122,24 @@ class DriftEngine:
                 weighted_sum += m[key] * weight
                 total_weight += weight
         m["composite"] = weighted_sum / total_weight if total_weight > 0 else 0.0
+
+        # Signed composite over the same weights. Reported alongside, never
+        # instead of -- a caller that wants magnitude still has it.
+        sw_sum = 0.0
+        sw_total = 0.0
+        for key, weight in self.weights.items():
+            sk = "signed_" + key
+            if sk in m:
+                sw_sum += m[sk] * weight
+                sw_total += weight
+        m["composite_signed"] = sw_sum / sw_total if sw_total > 0 else 0.0
+
+        # How much of the composite carries a direction at all. A caller
+        # reading composite_signed without this cannot tell "no net change"
+        # from "no direction declared".
+        signable = sum(w for k, w in self.weights.items()
+                       if ("signed_" + k) in m and m["signed_" + k] != 0.0)
+        m["signed_coverage"] = signable / total_weight if total_weight else 0.0
 
         return m
 
@@ -142,6 +183,71 @@ class DriftEngine:
             if v1 != v2:
                 diffs += 1
         return diffs / len(keys)
+
+    # ------------------------------------------------------------------
+    # Signed primitives. Range [-1, 1]. Positive = the criteria got
+    # LOOSER / WIDER / more inclusive; negative = stricter / narrower.
+    # ------------------------------------------------------------------
+    @staticmethod
+    def _signed_numeric(v1: Optional[int], v2: Optional[int]) -> float:
+        """Same as _numeric_drift without the abs(). One character."""
+        if v1 is None or v2 is None or v1 == v2:
+            return 0.0
+        base = max(abs(v1), abs(v2), 1)
+        return max(-1.0, min((v2 - v1) / base, 1.0))
+
+    @staticmethod
+    def _signed_ordinal(s1: str, s2: str) -> float:
+        """observer_access is ordered. Rank it instead of string-matching."""
+        r1 = ACCESS_RANK.get(str(s1).strip().lower())
+        r2 = ACCESS_RANK.get(str(s2).strip().lower())
+        if r1 is None or r2 is None:
+            return 0.0
+        span = max(ACCESS_RANK.values()) - min(ACCESS_RANK.values())
+        # Negative = verification LOST, which is a loosening of the check.
+        return (r2 - r1) / span if span else 0.0
+
+    @staticmethod
+    def _signed_list(l1: List[str], l2: List[str]) -> float:
+        """|added| - |removed| over the union. Dimensions gained = wider."""
+        s1 = set(x.lower().strip() for x in l1)
+        s2 = set(x.lower().strip() for x in l2)
+        union = s1 | s2
+        if not union:
+            return 0.0
+        return (len(s2 - s1) - len(s1 - s2)) / len(union)
+
+    @staticmethod
+    def _signed_dict(d1: Dict, d2: Dict) -> float:
+        """Sum of signed weight changes, normalized by total weight moved."""
+        keys = set(d1) | set(d2)
+        if not keys:
+            return 0.0
+        deltas = []
+        for k in keys:
+            try:
+                deltas.append(float(d2.get(k, 0.0)) - float(d1.get(k, 0.0)))
+            except (TypeError, ValueError):
+                return 0.0
+        moved = sum(abs(x) for x in deltas)
+        if moved == 0.0:
+            return 0.0
+        return max(-1.0, min(sum(deltas) / moved, 1.0))
+
+    @staticmethod
+    def _declared_direction(newer: CriteriaVersion, field: str,
+                            magnitude: float) -> float:
+        """
+        Free-text fields carry no recoverable direction. The sign has to be
+        DECLARED by whoever made the version. Undeclared stays 0.0 -- not
+        because nothing changed, but because nobody said which way.
+        """
+        d = (newer.direction or {}).get(field, "unknown")
+        if d == "widened":
+            return magnitude
+        if d == "narrowed":
+            return -magnitude
+        return 0.0
 
     @staticmethod
     def _numeric_drift(v1: Optional[int], v2: Optional[int]) -> float:

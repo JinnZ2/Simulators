@@ -55,6 +55,7 @@ def generate(spec):
         protocol=("small periodic contingency breaks; record response "
                   "magnitude divided by objective perturbation size. "
                   "The RATIO is the readout, not the response."),
+        sweep="perturbation_size", levels=3,
         reads="accumulated calibration error",
         blind_to=("nothing about absolute response level; deliberately "
                   "discards it"),
@@ -81,6 +82,7 @@ def generate(spec):
                    normalizer="stimulus_severity"),
         protocol=("graded severity series, 4+ levels. Fit the slope. "
                   "A single matched stimulus cannot run this."),
+        sweep="stimulus_severity", levels=4,
         reads=("discrimination gradient. Calibrated = graded. "
                "Degraded = flat."),
         blind_to="which mechanism produced a given slope, absent history",
