@@ -48,6 +48,7 @@ underneath. Read those before running the corresponding script.
 | `reasoning-gate/` | a simulation's declarations and claims | fail-closed deny, eight guards across three stages, a per-run JSON report |
 | `reasoning-dial/` | two drops on thinking-budget as a dimension | dial gradients, a knee-rule defect, an overthinking branch, fifteen `RD_*` claims |
 | `triad-playground/` | (physical, instrument, reasoning) triads | triad schema + generated checklist, shadow-panel N_eff analysis, thirteen `TP_*` claims |
+| `measurement-fork/` | one system, three measurement designs | four-cell design diff, reconstructed modules, seven `MF_*` claims |
 | `tools/` | shared utilities | validators, substitution toolkits |
 
 See [`SYNTHESIS.md`](SYNTHESIS.md) for the cross-folder reading and

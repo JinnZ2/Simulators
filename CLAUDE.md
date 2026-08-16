@@ -1630,6 +1630,53 @@ underneath).
   budget parameter collapses two declared shadows into one silently. The
   check reads like a G-RES pair (declared budget separation vs observed
   reasoning-token separation, with a margin). Thirteen claims `TP_001..013`.
+- `measurement-fork/` — Take one system and design the measurement three
+  ways at once, then diff the DESIGNS rather than the results. Four cells:
+  **SOLE REACH** (a quantity exactly one arm reaches), **VOID RATIO** (same
+  base name, different `object_of` or normalizer — they do not compare),
+  **SAME QUANTITY, DIFFERENT ROUTE** (convergent; the conventional number is
+  reusable as-is), **RESIDUAL** (open questions no arm reaches — the growth
+  edge, and the product). Three arms: `conventional.py` (the design a field
+  would actually run, written to be COMPETENT so gaps show up as gaps rather
+  than mistakes), `coupling.py` (when a quantity is a RELATION between
+  organism and environment, the standard instrument reads one side and
+  reports it as a property of the organism; this arm generates the missing
+  side and the ratio), and `widen.py` (options, not quantities; ranks
+  nothing — descendant of `reasoning-gate/explore.py`). **The delivered
+  package did not run**: `compare.py` imports `quantities`, `widen` and
+  `validate`, none of which were in the drop, so both arms failed on their
+  first import; all three are **reconstructed** here from the call sites,
+  with `[CHOICE]` marking anything the call sites did not fix (`MF_001`).
+  **The load-bearing design idea** is that a quantity is
+  `(base, object_of, normalizer)` and two are the same one only when all
+  three match — `reasoning-gate/`'s **G-DIM moved one stage earlier**, from
+  report time to design time, which is the only point at which a mismatch is
+  cheap to fix (`MF_002`). On the worked spec the `SAME QUANTITY` cell comes
+  back **empty** and `compare.py` handles it as a result rather than an
+  absence: the arms share no quantity at all, so no conventional result is
+  evidence for or against the coupling questions — they are not disagreeing,
+  they are not addressing the same quantities (`MF_003`). **Two defects,
+  both found by null-testing the classifier** (`coverage_check.py`, the
+  `null-harness/` known-null/known-signal invariant applied to a classifier):
+  `MF_004` — `compare.py` pools every arm into `allp` including the widen
+  arm, which its own output labels "options, not quantities", so a proposal
+  to RENAME a question marks that question REACHED and the residual goes
+  0-of-7 where measuring arms alone give 1-of-7; RESIDUAL is the one cell
+  where a false COVERED costs most, and the fix is one line. `MF_005` —
+  the 60%-of-distinct-stems threshold refuses two deliberate nulls and fires
+  on a third that shares five of six stems with a single probe, so the
+  failure mode is specific (a null built from ONE probe's vocabulary beats
+  it, one built from the pool's does not); `compare.py`'s "not resolved
+  here" caution on PARTIAL belongs on COVERED too, since COVERED is the
+  verdict that removes a question from the list. **`MF_006`:** the drop also
+  bundled `gate.py` + `guards.json`, both the **pre-repair** versions — a
+  170-line diff with all seven repairs absent and both stage bugs intact
+  (`G-FIT` still `post`, `G-CTRL` still `pre`). Neither is checked in; the
+  repo convention is to IMPORT the gate (`msiaf-gdprf-bridge/`,
+  `reasoning-dial/gate_dial.py`) precisely so it cannot drift, and this drop
+  is that drift arriving on schedule. `MF_007` records the untouched
+  question: on a real design, does the fork surface a quantity the designers
+  had not considered? Seven claims `MF_001..007`. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

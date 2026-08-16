@@ -1,0 +1,28 @@
+{
+  "system_id": "variable-provisioning",
+  "description": "An organism developed under a variable resource regime, later assessed against a fixed reference population. The question is whether measured differences are properties of the organism or of its relation to the environment it calibrated to.",
+  "currently_measured": [
+    "stress_hormone_level",
+    "startle_amplitude",
+    "resting_heart_rate"
+  ],
+  "test_items_source": "the reference population's own domain",
+  "regime": {
+    "variable": "resource_predictability",
+    "range": "highly scheduled to fully irregular"
+  },
+  "provisioned": [
+    "food arrival",
+    "response to distress signal",
+    "shelter availability"
+  ],
+  "open_questions": [
+    "is a flat response a loss of discrimination or a shift of allocation",
+    "what was the organism calibrating to",
+    "does apparent deficit reverse when items come from the other domain",
+    "how tightly could the loop close, given the latency actually available",
+    "does confidence decouple from accuracy while every state variable reads nominal",
+    "what does the environment's own variance structure look like",
+    "which measured differences reverse if the reference population is changed"
+  ]
+}

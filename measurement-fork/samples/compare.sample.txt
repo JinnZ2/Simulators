@@ -1,0 +1,127 @@
+==================================================================
+MEASUREMENT FORK  --  variable-provisioning
+==================================================================
+An organism developed under a variable resource regime, later assessed against a fixed reference population. The question is whether measured differences are properties of the organism or of its relation to the environment it calibrated to.
+
+  arm conventional    6 probes
+  arm coupling       12 probes
+  arm widen          14 probes
+
+------------------------------------------------------------------
+SOLE REACH -- reached by exactly one arm
+------------------------------------------------------------------
+
+  [conventional]
+
+    outcome_endpoint  [of organism]
+      reads    endpoint incidence by exposure level
+      blind to anything that improves while endpoints improve; one column, so an allocation shift and a loss look identical
+
+    resting_heart_rate  [of organism]
+      reads    level of resting_heart_rate in the organism at one point
+      blind to whether the level is a property of the organism or of its relation to the environment; no gradient, so a calibrated response and a degraded one return the same number
+
+    self_report  [of organism]
+      reads    reported state at time of administration
+      blind to recall is state-modulated; the reported history is an instrument-level quantity reported as an organism-level one
+
+    startle_amplitude  [of organism]
+      reads    level of startle_amplitude in the organism at one point
+      blind to whether the level is a property of the organism or of its relation to the environment; no gradient, so a calibrated response and a degraded one return the same number
+
+    stress_hormone_level  [of organism]
+      reads    level of stress_hormone_level in the organism at one point
+      blind to whether the level is a property of the organism or of its relation to the environment; no gradient, so a calibrated response and a degraded one return the same number
+
+    task_performance  [of organism]
+      reads    performance relative to the reference population
+      blind to performance in the domain the organism actually calibrated to; items come from one side only, so domain mismatch reads as deficit
+
+  [coupling]
+
+    allocation / total_budget  [of organism]
+      reads    whether a drop in one column is a shift or a loss
+      blind to the budget itself; only its distribution
+
+    autocorrelation  [of environment]
+      reads    what the organism was calibrating TO
+      blind to the organism entirely; this measures the surround
+
+    confidence / accuracy  [of coupling]
+      reads    decoupling of confidence from validity -- rises silently while every state variable reads nominal
+      blind to cases where the actor cannot report confidence
+
+    contingency_consistency  [of coupling]
+      reads    whether the mapping is learnable at all
+      blind to magnitude of consequence; only its reliability
+
+    latency  [of coupling]
+      reads    how tightly the loop can close
+      blind to whether the actor's own sensors were used to read it
+
+    response_magnitude / perturbation_size  [of coupling]
+      reads    accumulated calibration error
+      blind to nothing about absolute response level; deliberately discards it
+
+    response_magnitude / stimulus_severity  [of organism]
+      reads    discrimination gradient. Calibrated = graded. Degraded = flat.
+      blind to which mechanism produced a given slope, absent history
+
+    task_performance / domain_match  [of coupling]
+      reads    whether apparent deficit is domain mismatch
+      blind to absolute capability; only the interaction
+
+  [widen] -- options, not quantities. mark applies yes|no|unclear:
+      ask who benefits from each possible answer
+      measure resource_predictability on a population that was never exposed
+      measure the same quantity on the environment as well as the organism
+      measure the same thing twice on one subject, same session
+      rename or decompose: does apparent deficit reverse when items come from the other domain
+      rename or decompose: does confidence decouple from accuracy while every state variable reads nominal
+      rename or decompose: how tightly could the loop close, given the latency actually available
+      rename or decompose: is a flat response a loss of discrimination or a shift of allocation
+      rename or decompose: what does the environment's own variance structure look like
+      rename or decompose: what was the organism calibrating to
+      rename or decompose: which measured differences reverse if the reference population is changed
+      run the instrument on a case whose answer is already known
+      state what would change the number without changing the system
+      vary sample size by 4x and see which numbers move
+
+------------------------------------------------------------------
+VOID RATIO -- same name, different quantity
+------------------------------------------------------------------
+
+  base name: response_magnitude
+    response_magnitude / perturbation_size  [of coupling]  coupling
+    response_magnitude / stimulus_severity  [of organism]  coupling
+    -> these do not compare. A ratio or a disagreement between
+       them is undefined until the objects are matched.
+
+  base name: task_performance
+    task_performance / domain_match  [of coupling]  coupling
+    task_performance  [of organism]                 conventional
+    -> these do not compare. A ratio or a disagreement between
+       them is undefined until the objects are matched.
+
+------------------------------------------------------------------
+SAME QUANTITY, DIFFERENT ROUTE
+------------------------------------------------------------------
+
+  none -- the arms share no quantity at all.
+  That is itself a finding: the designs do not overlap,
+  so no existing result speaks to the coupling questions.
+
+------------------------------------------------------------------
+RESIDUAL -- open questions no arm reaches
+------------------------------------------------------------------
+  [COVERED coupling,widen]  is a flat response a loss of discrimination or a shift of allocation
+  [COVERED coupling,widen]  what was the organism calibrating to
+  [COVERED coupling,widen]  does apparent deficit reverse when items come from the other domain
+  [COVERED coupling,widen]  how tightly could the loop close, given the latency actually available
+  [COVERED coupling,widen]  does confidence decouple from accuracy while every state variable reads nominal
+  [COVERED coupling,widen]  what does the environment's own variance structure look like
+  [COVERED widen       ]  which measured differences reverse if the reference population is changed
+
+  all open questions reached by at least one arm.
+
+==================================================================
