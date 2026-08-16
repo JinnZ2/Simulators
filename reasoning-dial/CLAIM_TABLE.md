@@ -47,7 +47,7 @@ quantity than the table's "Knee Location" column.
 
 ## RD_002 — "maximum curvature" does not name one point
 
-**who:** A · **status:** SUPPORTED
+**who:** A · **status:** SUPPORTED, and superseded in remedy by `RD_011`
 
 Any saturating response curve has **two** curvature extrema: one where
 returns begin, one where they stop. On a logistic in log-budget they sit at
@@ -83,7 +83,7 @@ which it is not.
 
 ## RD_003 — declaring which shoulder makes the method work
 
-**who:** A · **status:** SUPPORTED
+**who:** A · **status:** SUPPORTED on its own terms, **response family REFUTED** by `RD_010`
 
 With the knee defined as the **saturation** shoulder — the only one that is
 a stopping rule — a logistic model with `μ` and `s` both increasing in `D_r`
@@ -261,3 +261,180 @@ there.
 something outside the operator's own report — timestamp, cabin temperature,
 hours since sleep. Any of those would make `G-STATE` a two-number guard like
 `G-RES`, and it should then be built.
+
+---
+
+# Second drop
+
+Claims arising from [`SOURCE_DROP_2.md`](SOURCE_DROP_2.md), the research
+landscape. **Nothing below verifies that the surveyed papers exist or say what
+the survey says they say** — their citation markers point outside the delivery
+and the dates sit at the edge of what is checkable from here. Every finding is
+internal: the survey against its own quotations, the framework against its own
+model.
+
+---
+
+## RD_010 — the response family in `dial_response.py` forbids the phenomenon
+
+**who:** A · **status:** SUPPORTED. Refutes this folder's own prior model.
+
+`SOURCE_DROP_2` reports negative marginal utility as the central empirical
+finding of the work it surveys: past some budget, additional thinking flips
+correct answers to incorrect ones.
+
+A logistic is monotone. Its gradient is positive everywhere, measured at
+`1.0e-08` to `6.3e-03` across the three difficulties over 2 to 10⁷ tokens.
+`dial_response.py` therefore cannot represent overthinking at any parameter
+setting, and `RD_003` reported that the family "behaves well" while that
+family ruled out the effect by construction.
+
+This is a correction to the audit, not to the drop. The saturating model was
+chosen to match the *first* drop's prose, which described saturation; the
+second drop says the prose was describing the wrong shape.
+
+**Falsifier:** a monotone response family exhibiting negative marginal
+utility. There is none — monotone means the gradient does not change sign.
+The claim is refutable only by showing that real quality-vs-budget curves do
+not decline, which is a measurement, not an argument.
+
+**Evidence:** `overthinking.py` §1; `samples/overthinking.sample.txt`.
+
+---
+
+## RD_011 — with a declining branch the stopping rule becomes well-posed
+
+**who:** A · **status:** SUPPORTED
+
+Model the response as a logistic rise minus drift accruing per log-token.
+`argmax Q` — equivalently the zero of `dQ/d(log B)` on the declining side —
+is then unique, interior, and independent of the sweep window:
+
+```
+problem                     argmax Q    Q there   interior
+Easy (pattern match)             444      0.914       True
+Medium (multi-step)             8194      0.805       True
+Hard (novel mechanism)        224214      0.675       True
+```
+
+Every objection `RD_002` raised against `argmax |curvature|` dissolves — not
+because the objection was wrong, but because the rule is **unnecessary**. The
+surveyed work's own primitive is marginal utility crossing zero, which has no
+tie to break and no shoulder to choose.
+
+The `interior` column is a guard against exactly the failure `RD_002`
+documented: an extremum reported at the edge of a sweep is a property of the
+sweep. It passes for all three.
+
+**Falsifier:** a plausible response shape on which `dQ/d(log B) = 0` has
+multiple interior solutions. Multi-modal quality curves would do it, and
+nothing here rules them out — the model has one rise and one drift by
+construction.
+
+**Evidence:** `overthinking.py` §2.
+
+---
+
+## RD_012 — on this shape the knee rule stops far too early
+
+**who:** A · **status:** SUPPORTED
+
+`SOURCE_DROP_2`'s synthesis table maps "knee detection (max curvature)" onto
+"optimal stopping point". On a curve with a declining branch these are not the
+same point, and the gap is large:
+
+```
+problem                     argmax Q    knee rule   knee/opt
+Easy (pattern match)             444           76       0.17
+Medium (multi-step)             8194          680       0.08
+Hard (novel mechanism)        224214        14024       0.06
+```
+
+The knee lands at 6–17% of the optimal budget, always early, and the error
+**grows with difficulty** — worst exactly where the budget matters most. It
+is not a conservative version of the optimum; it is a different point on the
+curve.
+
+**Falsifier:** show the surveyed paper's stopping rule is curvature-based
+rather than marginal-utility-based. The survey's own summary says otherwise —
+it describes tracking where marginal utility goes negative — so the synthesis
+table's mapping appears to be the survey's, not the paper's.
+
+**Evidence:** `overthinking.py` §3.
+
+---
+
+## RD_013 — the novelty claim is undercut by the survey's own quotation
+
+**who:** A · **status:** SUPPORTED
+
+`SOURCE_DROP_2` closes: *"None of these papers explicitly compute
+cross-gradients... The 'Overthinking' paper measures marginal utility by
+difficulty level but doesn't formalize it as a mixed partial derivative."*
+
+Six sections earlier the same document quotes that paper: *"easier problems
+(Level 1-2) reach negative marginal utility earlier than hard problems."*
+
+That sentence is a statement about how the zero of the budget-gradient moves
+with problem difficulty — the mixed partial, measured, stratified by
+difficulty, and reported. The quantity is already an object of study. What is
+not standard is the notation.
+
+The contribution is real and smaller than claimed: writing the ordering as a
+derivative turns a fact to be reported into a consequence to be derived, with
+a falsifier attached (`RD_014`). Prose does not do that. But "no paper
+computes this" and "the paper measures this by difficulty level" cannot both
+stand, and the second is the survey's own quotation of the source.
+
+**Falsifier:** show the quoted sentence reports something other than the
+difficulty-dependence of the optimal stopping budget.
+
+**Evidence:** `SOURCE_DROP_2.md` §1 against its closing section;
+`overthinking.py` §4.
+
+---
+
+## RD_014 — "easier problems flip earlier" follows from problem-independent drift
+
+**who:** A · **status:** SUPPORTED (generator scope), with a cheap falsifier
+
+In `overthinking.py` the drift rate is identical across difficulties — damage
+from overthinking is modelled as a property of the reasoning system, not of
+the problem. Only the rise moves with `D_r`. The optimal stop then comes out
+monotone increasing (444 / 8194 / 224214) without that ordering being put in.
+
+An easy problem finishes rising sooner, so a fixed drift overtakes it sooner.
+The empirical ordering needs no separate explanation.
+
+**Falsifier, and it is the most valuable measurement named anywhere in this
+folder:** estimate the drift rate on problems of different difficulty. If it
+is flat, the ordering is explained. If drift varies systematically with
+difficulty, this model is wrong and the ordering is an independent empirical
+fact requiring its own account.
+
+That measurement also settles `RD_007`: it requires exactly the
+quality-vs-budget curves whose absence keeps every quantity in this folder at
+generator level.
+
+**Evidence:** `overthinking.py` §4.
+
+---
+
+## RD_015 — the second drop's citations are unverifiable, as the first drop's were
+
+**who:** A · **status:** UNVERIFIED
+
+Extends `RD_008`. The surveyed papers — "Overthinking in LLM Test-Time Compute
+Scaling", BetaPRM, TRIM, R2R, the metacognition framework, "Predictive
+Metacognition", the Gap Function paper, T² scaling laws — carry
+`cite web_search:NN#M` markers pointing at results not included in the
+delivery, and are dated January–May 2026.
+
+`UNVERIFIED` is a gap, not a negative verdict. The specific numbers quoted
+(97% of peak accuracy at 60% of compute; 33.57% token reduction; ≈6% divergent
+tokens; 6× cost-efficiency; Brier reductions of 11.6% and 17.2%) are
+internally plausible and mutually consistent, and nothing here suggests
+otherwise. They simply cannot be checked from what arrived, and no claim in
+this folder rests on them.
+
+**Falsifier:** supply the citations.

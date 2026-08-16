@@ -46,7 +46,7 @@ underneath. Read those before running the corresponding script.
 | `incentive-blindspot-sim/` | institutional incentive structure | coupled-state model + four falsifiable claims under REFUTATION_PROTOCOL |
 | `aperiodic-order-sim-stack/` | a delivered results drop (report + figures) | audit of it: estimator-disagreement finding, matched-N control, eight `AOS_*` claims |
 | `reasoning-gate/` | a simulation's declarations and claims | fail-closed deny, eight guards across three stages, a per-run JSON report |
-| `reasoning-dial/` | a drop on thinking-budget as a dimension | dial gradients + cross-gradients, a knee-rule defect, nine `RD_*` claims |
+| `reasoning-dial/` | two drops on thinking-budget as a dimension | dial gradients, a knee-rule defect, an overthinking branch, fifteen `RD_*` claims |
 | `tools/` | shared utilities | validators, substitution toolkits |
 
 See [`SYNTHESIS.md`](SYNTHESIS.md) for the cross-folder reading and

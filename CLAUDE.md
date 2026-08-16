@@ -1493,6 +1493,45 @@ underneath).
   web_search:NN#M` markers point at results not included in the delivery;
   Snell 2024, Titans, PRM800K, PURE min-form, Anthropic's backward
   rhyme-planning and `circuit-tracer` do check out). CC0.
+  **Second drop** — a research landscape (`SOURCE_DROP_2.md`, verbatim)
+  placing the framework against 2026 adaptive-computation work: marginal
+  utility, BetaPRM, TRIM/R2R stepwise and token-level routing, metacognitive
+  self-governance, the Gap Function, T² scaling laws. It does three things,
+  all recorded internally since the citation markers again point outside the
+  delivery and the papers are dated Jan–May 2026 (`RD_015` UNVERIFIED).
+  **(1) It refutes MY response family, not the drop's.** The survey's central
+  reported finding is negative marginal utility — past some budget more
+  thinking flips correct answers to incorrect. A logistic is monotone
+  (gradient measured 1.0e-08..6.3e-03 across the three difficulties), so
+  `dial_response.py` **cannot produce overthinking at any parameter setting**;
+  `RD_003` reported the family behaves well while that family ruled out the
+  effect by construction (`RD_010`). **(2) It replaces the knee with a better
+  primitive.** `overthinking.py` rebuilds the response as a logistic rise
+  minus drift accruing per log-token; `argmax Q` — the zero of `dQ/d(log B)`
+  on the declining side — is then unique, interior and window-independent
+  (444 / 8194 / 224214 tokens, all passing an explicit `interior` guard
+  against the RD_002 failure). Every RD_002 objection dissolves because the
+  rule is **unnecessary**, the surveyed work's own primitive being marginal
+  utility crossing zero (`RD_011`). Keeping the knee is expensive: on this
+  shape it lands at **6–17% of the optimal budget, always early, error
+  growing with difficulty** — worst where budget matters most (`RD_012`).
+  **(3) It undercuts its own novelty claim.** The landscape closes "none of
+  these papers explicitly compute cross-gradients"; six sections earlier it
+  quotes one of them reporting that "easier problems reach negative marginal
+  utility earlier than hard problems" — which IS the mixed partial, measured
+  and stratified by difficulty, in prose. The quantity is already an object
+  of study; the notation is what is not standard (`RD_013`). Smaller than
+  claimed and still real: with drift held **problem-independent** the
+  ordering 444/8194/224214 falls out rather than being put in (an easy
+  problem finishes rising sooner so fixed drift overtakes it sooner), turning
+  an empirical fact into a derivable consequence with a falsifier attached
+  (`RD_014`). **The measurement that closes three claims at once** —
+  `RD_007`, `RD_014`, and DIAL-GRAD's generator/physical split — is one
+  experiment: estimate the drift rate on problems of different difficulty
+  from measured quality-vs-budget curves. Fifteen claims `RD_001..015`.
+  Shape-sibling to `equivalence-field/claim_lineage.py`: RD_010 is not wrong
+  arithmetic but a missing dimension, and RD_011 is the child claim the break
+  pointed at.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

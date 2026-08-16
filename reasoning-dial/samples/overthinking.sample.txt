@@ -1,0 +1,125 @@
+
+OVERTHINKING: A DECLINING BRANCH, AND WHAT IT COSTS THE KNEE
+No reasoning model was run. Every constant is generator-level.
+
+==========================================================================
+1  the model in dial_response.py forbids the phenomenon
+==========================================================================
+  SOURCE_DROP_2 reports negative marginal utility as the central
+  empirical finding: past some budget, more thinking makes answers
+  worse. A logistic is monotone, so dial_response.py cannot produce
+  that at any parameter setting.
+
+  problem                  min dQ/dlnB over 2..1e7 tokens
+  Easy (pattern match)                        1.041e-08
+  Medium (multi-step)                         1.687e-04
+  Hard (novel mechanism)                      6.270e-03
+
+  Positive throughout. This is a correction to this folder's own
+  prior work, not to the drop's: RD_003 picked a response family
+  that rules out the effect by construction, and then reported that
+  the family behaves well. It does. It is also the wrong family.
+
+==========================================================================
+2  with a declining branch the stopping rule becomes well-posed
+==========================================================================
+  Q(u) = logistic rise - drift accruing at 0.030 per log-token from
+  B = 50. Drift does not depend on D_r.
+
+  problem                      argmax Q    Q there   interior
+  Easy (pattern match)              444      0.914       True
+  Medium (multi-step)              8194      0.805       True
+  Hard (novel mechanism)         224214      0.675       True
+
+  dQ/d(ln B) = 0 has ONE solution on the declining side. No tie, no
+  choice of shoulder, no dependence on the sweep window -- the
+  interior column is the guard and it passes for all three.
+
+  RD_002 found the knee rule degenerate on a saturating curve. On
+  the curve the literature actually reports, the degeneracy is not
+  merely a defect: it is unnecessary. A better primitive exists,
+  and it is the one the surveyed work uses -- marginal utility
+  crossing zero, not curvature reaching a maximum.
+
+==========================================================================
+3  on this shape the knee rule stops far too early
+==========================================================================
+  problem                      argmax Q    knee rule   knee/opt
+  Easy (pattern match)              444           76       0.17
+  Medium (multi-step)              8194          680       0.08
+  Hard (novel mechanism)         224214        14024       0.06
+
+  The knee lands at 6%-17% of the optimal budget, always
+  early, and the error grows with difficulty -- worst exactly where
+  the budget matters most.
+
+  So the knee is not a conservative version of the optimum. It is a
+  different point on the curve, and reading it as a stopping rule
+  costs the hardest problems most of their budget.
+
+==========================================================================
+4  'easier problems flip earlier' is a cross-gradient result
+==========================================================================
+  SOURCE_DROP_2 quotes the surveyed work: 'easier problems (Level
+  1-2) reach negative marginal utility earlier than hard problems.'
+
+  That sentence is a statement about d(argmax Q)/d(difficulty) --
+  how the zero of the budget-gradient moves with problem structure.
+  It is the mixed partial, reported in words.
+
+  problem                     D_r       argmax Q
+  Easy (pattern match)        0.5            444
+  Medium (multi-step)         2.0           8194
+  Hard (novel mechanism)      4.0         224214
+
+  monotone increasing? True
+
+  And here it is a CONSEQUENCE, not an input. Drift is the same for
+  all three problems; only the rise moves. An easy problem finishes
+  rising sooner, so the fixed drift overtakes it sooner. The
+  ordering falls out of making overthinking-damage a property of
+  the reasoning system rather than of the problem.
+
+  That is a structural prediction with a cheap falsifier: measure
+  the drift rate on problems of different difficulty. If it is
+  flat, the ordering needs no separate explanation. If it varies
+  with difficulty, this model is wrong and the ordering is an
+  independent empirical fact.
+
+==========================================================================
+READING
+==========================================================================
+
+  The second drop does three things to the first.
+
+  It REFUTES the response family. A saturating curve cannot produce negative
+  marginal utility, so dial_response.py could not have represented the effect
+  the surveyed work is about. That is a correction to this folder's model,
+  recorded as RD_010.
+
+  It REPLACES the knee. On a curve that declines, the stopping point is where
+  the gradient crosses zero -- unique, interior, and independent of the sweep
+  window. Every objection RD_002 raised against argmax|curvature| dissolves,
+  not because the objection was wrong but because the rule is unnecessary.
+  Section 3 measures what keeping it would cost: a stop at 6-17% of the
+  optimal budget, worst on the hardest problems.
+
+  It UNDERCUTS the novelty claim. SOURCE_DROP_2 closes by saying no surveyed
+  paper computes cross-gradients, and that formalising them is the
+  contribution on offer. But the same document quotes a surveyed paper
+  reporting that easier problems reach negative marginal utility earlier than
+  hard ones -- which is the mixed partial, measured and stratified by
+  difficulty, stated in prose. The quantity is already an object of study.
+  What is not yet standard is the notation.
+
+  That is a smaller contribution than claimed and still a real one. Section 4
+  is the argument for it: written as a derivative, the ordering stops being a
+  fact to report and becomes a consequence to derive, with a falsifier
+  attached. Prose does not do that.
+
+  None of this checks whether the surveyed papers exist or say what the
+  survey says they say. Their citation markers point outside the delivery,
+  and the dates sit at the edge of what can be checked from here. Every
+  finding above is internal: the framework against its own model, and the
+  survey against its own quotations.
+
