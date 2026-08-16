@@ -1532,6 +1532,61 @@ underneath).
   Shape-sibling to `equivalence-field/claim_lineage.py`: RD_010 is not wrong
   arithmetic but a missing dimension, and RD_011 is the child claim the break
   pointed at.
+- `triad-playground/` — Every experiment as a tuple of three agents
+  (physical system, measurement instrument, **reasoning agent**), each with
+  its own dial. "The claim is only as strong as the weakest calibration in
+  the chain." Delivered proposal verbatim in `SOURCE_DROP.md`; `triad.json`
+  is the authored schema (agents, dial vector, calibration checks, shadow
+  protocol, pedigree fields) and `CHECKLIST.md` is **generated** from it by
+  `make_checklist.py` — same source-of-truth arrangement as
+  `reasoning-gate/`'s `guards.json → GUARDS.md`. **The framing is the
+  contribution and it holds** (`TP_001`): `reasoning-gate/` tags quantities
+  `generator`/`physical`/`instrument` with no slot for the observer, and
+  `instrument-epistemology/` grades six instruments with the reader outside
+  the frame in all six; this supplies the missing fourth layer, with the rule
+  that a physical-scope claim resting on reasoning-level support is
+  `qualified` not `supported`. **The protocol as specified does not yet
+  measure it** — three design results, provable without data, each with a
+  cheap fix. **`TP_002`: step 5 forbids the design step 6 requires.** "Never
+  upgrade all three simultaneously" is one-factor-at-a-time; "cross-gradient:
+  did conclusion change with dial setting?" asks for an INTERACTION, and OFAT
+  cannot estimate one at any number of runs. Demonstrated on a planted
+  interaction: OFAT (4 runs) recovers the three main effects and predicts
+  y(P=1,R=1)=3.0 against a truth of 6.0 — the entire interaction, invisible;
+  a 2³ factorial (8 runs, ±1 contrasts) recovers everything exactly. The
+  stated reason for OFAT ("can't attribute variance") is backwards.
+  **`TP_003`: consensus is blind to the error shadows share.** The four
+  shadows read one physical declaration, one instrument output and (for the
+  AI shadows) one prompt written by a human shadow. Modelling each as
+  `truth + shared_bias + individual_noise`, spread stays flat at ~2.04 while
+  shared bias runs 0 → 20 and the error tracks it one-for-one: four shadows
+  agreeing tightly at 120 when truth is 100 reads as a pass. Fix is mostly
+  built — `divergence-playground/` is this protocol with the null attached
+  (hash-sealed readings, three declared spread axes, `null_ensemble.py`), and
+  its `agree_by_accident` flag is the cell the shadow pattern needs most.
+  **`TP_004`: the proposed first experiment cannot fail its own skip
+  condition.** A 1 m aluminium bar over 60 K moves 1.386 mm against a 0.01 mm
+  dial division (139×, easy) — but the experiment is about OBSERVER variance,
+  where reading spread ~0.005 mm sits at half the resolution, so four people
+  reading one mechanical dial agree within a division by construction.
+  `null-harness/` `CONSTANT_SILENT` plus `G-RES`. Fix needs no better bar:
+  the instrument must log independently of the observer reading it (digital
+  indicator + data log, or timestamped photo), making observer error a
+  measured residual `|observer − logged|` instead of a consensus inference.
+  **`TP_005`: the worked aluminium example shows physical mis-specification,
+  not observer variance** — run 3's "wrought, not cast" reports that runs 1
+  and 2 answered a question about a different specimen, so scoring it as a
+  reasoning-dial gradient means every physical error the reasoning agent
+  CATCHES inflates measured observer variance; `triad.json` check `P4`
+  separates `state_revised_during_run` from `state_declared`. **`TP_006`:**
+  three of four reasoning checks are self-report only (fatigue, emotional
+  investment, conflict of interest); only the AI one is externally readable —
+  `reasoning-dial/` `RD_009`'s G-STATE gap at system scale, with `readable`
+  marked per check so `CHECKLIST.md` renders `[DECLARED]` rather than hiding
+  it. **`TP_007` UNVERIFIED:** no triad experiment has been run, and the
+  load-bearing empirical question — does observer variance matter at any
+  scale worth measuring — is untouched. Falsifier: run it. Seven claims
+  `TP_001..007`. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

@@ -1,0 +1,190 @@
+
+THE SHADOW-SIM PATTERN, TESTED
+A study of a proposed protocol. No triad experiment was run.
+
+==========================================================================
+1  step 5 forbids the design step 6 requires
+==========================================================================
+  The protocol says:
+    step 5  'Never upgrade all three simultaneously (can't
+             attribute variance).'
+    step 6  'Cross-gradient: did conclusion change with dial
+             setting?'
+
+  Step 5 is one-factor-at-a-time. Step 6 asks for an interaction.
+  OFAT cannot estimate an interaction, because no run in an OFAT
+  design varies two factors together.
+
+  Truth planted in the response: main effects P=1.0 I=0.5 R=2.0,
+  interaction P*R = 3.0
+
+  OFAT, 4 runs, baseline plus one dial each:
+    P      1.00
+    I      0.50
+    R      2.00
+    P*R     n/a   <- no run has both dials up
+
+    OFAT predicts y(P=1, R=1) = 3.0. Truth = 6.0. Error = 3.0,
+    which is the entire interaction, invisible and unattributed.
+
+  2^3 factorial, 8 runs, orthogonal +/-1 contrasts:
+    P      2.00   truth   2.00
+    I      1.00   truth   1.00
+    R      4.00   truth   4.00
+    P*R    6.00   truth   6.00
+    P*I    0.00   truth   0.00
+
+  Every effect recovered exactly, interaction included, for four
+  extra runs. The protocol's stated reason for OFAT -- 'can't
+  attribute variance' -- is exactly backwards: a factorial design
+  attributes variance to each factor AND to their interaction,
+  which OFAT cannot do at any number of runs.
+
+  Fix: replace step 5 with a 2^3 factorial over the three dials at
+  low/high, then upgrade the axis with the largest effect. Eight
+  runs is still cheap, and it is the only design that answers
+  step 6.
+
+==========================================================================
+2  consensus among shadows is blind to what shadows share
+==========================================================================
+  The protocol: 'Do the three agree? If not, the axis is
+  underdetermined.' Read as a test, agreement is the pass.
+
+  But the four shadows -- you rested, you fatigued, AI-low,
+  AI-high -- are not independent. They read the same physical
+  declaration, the same instrument output, and for the AI shadows
+  the same prompt, written by one of the human shadows.
+
+  Model each shadow as   truth + shared_bias + individual_noise.
+  Spread across shadows measures individual_noise. It cannot see
+  shared_bias at all, because shared_bias moves every shadow the
+  same way.
+
+     shared bias    mean shadow         spread error vs truth
+             0.0         100.01           2.04         0.01
+             2.0         102.00           2.04         2.00
+             5.0         105.01           2.06         5.01
+            20.0         120.00           2.02        20.00
+
+  The spread column does not move. The error column tracks the
+  bias one-for-one. Four shadows agreeing tightly at 120 when the
+  truth is 100 is exactly what this looks like from inside.
+
+  So 'do the shadows agree?' has no null. Before agreement means
+  anything you need the disagreement between two runs of the SAME
+  observer at the SAME dial -- the noise floor -- and a way to
+  detect the shared term, which consensus cannot supply.
+
+  Both already exist in this repo. ../divergence-playground/ is
+  this protocol built with the null: readings are hash-sealed
+  before reveal so later readers cannot anchor on earlier ones,
+  spread is computed on three declared axes rather than eyeballed,
+  and null_ensemble.py supplies shuffle and permutation nulls.
+  Its agree_by_accident flag is the cell this protocol needs most:
+  shadows that reach the same verdict by different mechanisms.
+
+==========================================================================
+3  the first experiment cannot fail its own skip condition
+==========================================================================
+  Aluminium bar, 1 m, 23.1 ppm/K, 60 K swing:
+    expansion               1.386 mm
+    dial division           0.010 mm
+    signal / division         139     -- the expansion is easy
+
+  But the experiment is not about the expansion. It is about
+  observer variance, and the skip condition reads:
+
+    'If all four observers agree within instrument resolution,
+     observer variance is negligible.'
+
+    observer reading spread   ~0.0050 mm  (half a division)
+    instrument resolution      0.0100 mm
+    ratio                      0.50
+
+  Four people reading one mechanical dial agree to within a
+  division because a division is the quantum of what the dial can
+  say. The skip condition fires whether or not observer variance
+  exists, so 'negligible' is a statement about the dial.
+
+  This is null-harness's CONSTANT_SILENT: a gate that cannot fire
+  has not been shown to work. It is also G-RES -- a null from an
+  instrument that could not have seen the feature.
+
+  The fix is cheap and does not need a better bar. The instrument
+  must record independently of the observer reading it:
+    - digital indicator with a data log, or a photograph of the
+      dial timestamped at each reading
+    - observer writes down a value without seeing the log
+    - observer error = |observer value - logged value|, directly
+  Observer variance stops being inferred from consensus and
+  becomes a measured residual against a recorded reference.
+
+  With that change the skip condition can fail, which is what
+  makes running it worth anything.
+
+==========================================================================
+4  the worked example shows a different failure than claimed
+==========================================================================
+  From the drop, one physical dial setting, three reasoning dials:
+
+    low     'crack at 200 cycles'        pattern-matched from a
+                                          previous casting
+    medium  'crack at 1,800 +/- 400'     propagated uncertainty
+    high    'no crack; the heuristic was wrong because this is
+             wrought, not cast'
+
+  The drop reads this as a reasoning-dial cross-gradient, and as a
+  G-LAYER violation: the reasoning claim outruns what the physical
+  evidence carries.
+
+  Run 3 says something else. It reports that runs 1 and 2 were
+  answering a question about cast aluminium while the specimen is
+  wrought. That is not the observer's gain varying against a fixed
+  system -- it is the physical declaration being wrong, and the
+  high-dial observer catching it.
+
+  The distinction is load-bearing for the whole protocol. If a
+  mis-specified physical system is scored as reasoning-dial
+  variance, then every physical error the reasoning agent catches
+  inflates the measured observer variance -- and the playground
+  concludes the observer is unreliable when what happened is that
+  the observer was right.
+
+  Both are worth measuring; they are different quantities. The
+  separator is whether the physical declaration survives the run.
+  In triad.json that is `physical.state_declared` versus
+  `physical.state_revised_during_run`, and a run that revises it
+  reports a physical finding, not a reasoning gradient.
+
+==========================================================================
+READING
+==========================================================================
+
+  The triad framing holds and is the useful part. Naming the reasoning agent
+  as an instrument with its own calibration is the move the rest of this repo
+  has been circling: reasoning-gate tags quantities by layer,
+  instrument-epistemology grades instruments, and neither has a slot for the
+  observer. This does.
+
+  The shadow-sim pattern, as specified, does not yet measure it.
+
+  Step 5's one-factor-at-a-time rule forbids the only design that estimates
+  the cross-gradient step 6 asks for. Consensus among shadows measures the
+  error they do not share and is blind to the error they do -- which, for
+  shadows reading one declaration through one prompt, is the larger term. And
+  the proposed first experiment's skip condition fires regardless of the
+  truth, because four people reading one mechanical dial agree to within a
+  division by construction.
+
+  All three have cheap fixes, and none of them requires abandoning the idea:
+  a 2^3 factorial instead of OFAT; hash-sealed readings with a null ensemble,
+  which ../divergence-playground/ already implements; and an instrument that
+  logs independently of the observer reading it, which turns observer variance
+  from something inferred by consensus into a measured residual.
+
+  What this does not establish: that observer variance matters at any
+  particular scale. Section 3's fix makes it measurable; nobody has measured
+  it. The playground's first real result is still unrun, and it is one bar,
+  one dial indicator, one afternoon.
+
