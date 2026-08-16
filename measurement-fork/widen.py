@@ -27,7 +27,36 @@ from __future__ import annotations
 import json
 import sys
 
-from quantities import probe, quantity
+from quantities import OBJECTS, probe
+
+# The widen arm does not measure anything, so it cannot build a quantity().
+# The canonical quantities.py enforces a CLOSED vocabulary --
+#     OBJECTS = ("organism", "environment", "coupling", "instrument")
+# -- and refuses any other object_of outright. A widening is about the
+# DESIGN, which is not on that list and should not be added to it.
+#
+# That refusal is load-bearing and is the schema confirming, from the
+# delivered code, what coverage_check.py section 3 measures: widen output
+# is not a quantity, so it must not appear in any quantity-keyed cell and
+# must not count toward measurement coverage.
+#
+# So widen builds the same-shaped dict locally, tagged with an object_of
+# OUTSIDE the closed vocabulary. Any consumer that filters on OBJECTS
+# drops it automatically, which is the behaviour wanted.
+
+NOT_A_QUANTITY = "design"
+assert NOT_A_QUANTITY not in OBJECTS, (
+    "widen's marker must stay outside the canonical vocabulary")
+
+
+def option(base):
+    """Quantity-shaped, deliberately not a quantity. See above."""
+    return {"base": base, "normalizer": None, "object_of": NOT_A_QUANTITY}
+
+
+def is_quantity(p):
+    """True for probes that propose a measurement. Filter with this."""
+    return p["quantity"]["object_of"] in OBJECTS
 
 # Widenings that do not depend on the spec. Each names a way the fork's own
 # framing could be wrong.
@@ -63,7 +92,7 @@ def generate(spec):
         out.append(probe(
             arm="widen",
             pid="W%02d" % n,
-            q=quantity(base=base, object_of="the design"),
+            q=option(base),
             protocol="mark applies: yes | no | unclear. Then say why.",
             reads=why,
             blind_to=BLIND,
@@ -76,9 +105,7 @@ def generate(spec):
         out.append(probe(
             arm="widen",
             pid="W%02d" % n,
-            q=quantity(
-                base="rename or decompose: %s" % q,
-                object_of="the design"),
+            q=option("rename or decompose: %s" % q),
             protocol="mark applies: yes | no | unclear. Then say why.",
             reads=("a question no arm reaches may be unmeasurable, or may "
                    "be one question wearing the name of three"),
@@ -92,10 +119,8 @@ def generate(spec):
         out.append(probe(
             arm="widen",
             pid="W%02d" % n,
-            q=quantity(
-                base=("measure %s on a population that was never exposed"
-                      % reg["variable"]),
-                object_of="the design"),
+            q=option("measure %s on a population that was never exposed"
+                     % reg["variable"]),
             protocol="mark applies: yes | no | unclear. Then say why.",
             reads=("dose-response across an exposed range has no zero. "
                    "Without one, the reference is the least-exposed group "

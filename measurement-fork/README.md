@@ -17,32 +17,68 @@ harness is most likely to suppress by accident.
 | [`compare.py`](compare.py) | The three-way diff. **Delivered, verbatim.** |
 | [`conventional.py`](conventional.py) | Arm 1 — the design a field would actually run. **Delivered, verbatim.** |
 | [`coupling.py`](coupling.py) | Arm 2 — the missing side of every organism/environment relation. **Delivered, verbatim.** |
-| [`quantities.py`](quantities.py) | What a quantity is, and when two are the same one. **Reconstructed.** |
+| [`quantities.py`](quantities.py) | What a quantity is, and when two are the same one. **Delivered, verbatim.** Closed `OBJECTS` vocabulary. |
 | [`widen.py`](widen.py) | Arm 3 — options, not quantities. Ranks nothing. **Reconstructed.** |
 | [`validate.py`](validate.py) | Is the spec complete enough to fork on? **Reconstructed.** |
-| [`systems/`](systems/) | Worked spec exercising every branch. |
-| [`coverage_check.py`](coverage_check.py) | Null-tests the RESIDUAL classifier. |
-| [`CLAIM_TABLE.md`](CLAIM_TABLE.md) | Seven claims (`MF_001..007`). |
+| [`systems/`](systems/) | `provisioning_calibration.json` **delivered, verbatim**; `variable_provisioning.json` is a fixture exercising every branch. |
+| [`coverage_check.py`](coverage_check.py) | Null-tests the RESIDUAL classifier on the fixture. |
+| [`residual_audit.py`](residual_audit.py) | Adjudicates the RESIDUAL cell by hand on the real spec. **The result.** |
+| [`CLAIM_TABLE.md`](CLAIM_TABLE.md) | Eleven claims (`MF_001..011`). |
 | [`samples/`](samples/) | Pinned output. |
 
 ```bash
-python3 validate.py systems/variable_provisioning.json   # spec complete?
-python3 compare.py  systems/variable_provisioning.json   # the fork
-python3 coverage_check.py                                # audit the classifier
+python3 validate.py systems/provisioning_calibration.json  # spec complete?
+python3 compare.py  systems/provisioning_calibration.json  # the fork
+python3 residual_audit.py                                  # the growth edge
+python3 coverage_check.py                                  # audit the classifier
 ```
 
 Standard library only, deterministic.
 
-## The delivered package does not run
+## The result
 
-`compare.py` imports `quantities`, `widen` and `validate`. None of the three
-was in the drop, so `conventional.py` and `coupling.py` both fail on their
-first import.
+`provisioning_calibration.json` through the fork, RESIDUAL cell adjudicated
+by reading protocols rather than counting tokens:
 
-All three are reconstructed here from the call sites, which fully determine
-the contracts. Choices beyond what the call sites fix are marked `[CHOICE]`
-in the source, and the one place a reconstruction choice affects a finding is
-flagged in that finding. (`MF_001`)
+```
+residual as delivered      0 of 9   widen pooled into coverage
+residual, measuring arms   5 of 9   widen excluded
+residual, adjudicated      3 of 9   protocols read
+```
+
+Zero understates. Five overstates. **Three is the growth edge:**
+
+```
+[NO PROBE] coupling bandwidth
+           latency and contingency_consistency measure delay and
+           reliability of the loop. Neither measures how much can
+           cross it per unit time.
+
+[NO PROBE] whether trust in own sensing is a measurement or a belief
+           confidence/accuracy reaches the confidence-validity gap,
+           not whether reliance on the sensor was ever validated
+           against outcome.
+
+[NO PROBE] reversibility after regime shift
+           nothing measures relearn RATE after the buffer is removed.
+```
+
+The third has a stated prediction and no instrument. The predicted contrast
+is a **rate** — fast relearn against slow relearn once the buffer is removed
+— and no K-probe returns a rate. Every one measures a level, a ratio, a
+slope or a variance, all at fixed regime. The stated falsifier has the same
+shape: *ratio flat across the provisioning gradient* needs the gradient
+swept, and the probes as generated sit at one point on it.
+
+**One probe closes both.** Error against trials-since-shift, fitted for a
+time constant, at two or more provisioning levels. (`MF_010`)
+
+## Still missing from the package
+
+`widen.py` and `validate.py` are reconstructed from the call sites;
+`quantities.py` has since been delivered and replaces its reconstruction.
+Choices beyond what the call sites fix are marked `[CHOICE]` in the source,
+and any finding that leans on one says so. (`MF_001`)
 
 ## What the design gets right
 
@@ -76,6 +112,27 @@ disagreeing; they are not addressing the same quantities. (`MF_003`)
 
 ## What it gets wrong
 
+### The schema refuses what the comparator counts
+
+The delivered `quantities.py` enforces a closed vocabulary:
+
+```python
+OBJECTS = ("organism", "environment", "coupling", "instrument")
+
+def quantity(base, object_of, normalizer=None):
+    if object_of not in OBJECTS:
+        raise ValueError(...)
+```
+
+The widen arm proposes options about the **design**, which is not on that
+list — so `quantity()` raises and a widen output cannot be constructed as a
+quantity at all. `MF_004` argued this from behaviour. The delivered schema
+reaches it from the type system, independently. (`MF_008`)
+
+`widen.py` here now builds its records with a local `option()` helper tagged
+`object_of="design"`, deliberately outside the vocabulary, plus
+`is_quantity(p)` so consumers filter mechanically rather than by convention.
+
 ### A non-measuring arm suppresses the growth edge
 
 `compare.py` pools every arm into `allp` and runs `coverage()` over all of
@@ -102,6 +159,23 @@ each open question's text, which makes the effect maximal. The structural
 point survives either way: an arm proposing no quantity should not sit in the
 denominator of a cell about which quantities are missing. **Fix is one line:**
 build the coverage pool from the measuring arms. (`MF_004`)
+
+### And on the real spec it is wrong in the other direction too
+
+The false positives above are one half. On `provisioning_calibration` the
+classifier also **misses two questions a coupling probe was explicitly
+written for**:
+
+| question | probe | why it missed |
+| --- | --- | --- |
+| `environmental autocorrelation` | K09 `autocorrelation [environment]` | 2 stems, need 2, hits 1. `environmental` does not stem to `environment` — `_stem` strips `-ies/-es/-s` only |
+| `domain match between calibrating environment and test items` | K08 `task_performance / domain_match` | 7 stems, need 4, hits 3. Misses by one |
+
+The two error types are independent and point opposite ways, landing on
+different questions. **No single threshold fixes both** — raising it worsens
+the false negatives, lowering it worsens the false positives. The widen
+pooling is a one-line fix; the stemming is not fixable by threshold.
+(`MF_009`)
 
 ### The classifier is beaten by a single probe's vocabulary
 
@@ -142,6 +216,16 @@ versions of the files already in [`reasoning-gate/`](../reasoning-gate/) — a
 | `G-FIT` stage | still `post`, enforced at `pre` |
 | `G-CTRL` stage | still `pre`, also fires at `post` |
 
+Three more arrived in the next drop, same pattern:
+
+| file | differing lines | what is missing |
+| --- | ---: | --- |
+| `make_docs.py` | 12 | `_stages()` — multi-stage guards render under one stage only |
+| `README.md` | 16 | lists 5 files; the folder has 11 |
+| `GUARDS.md` | 48 | `G-FIT` still under POST |
+
+Five bundled files, five stale, across three drops. (`MF_011`)
+
 **Neither file is checked in here.** The repo's convention is to *import* the
 gate — [`msiaf-gdprf-bridge/`](../msiaf-gdprf-bridge/) and
 [`reasoning-dial/gate_dial.py`](../reasoning-dial/gate_dial.py) both do,
@@ -158,13 +242,12 @@ from gate import Gate, Resolution, Control
 
 ## What is unrun
 
-`systems/variable_provisioning.json` is a test fixture written to exercise
-every branch, not a research design. The load-bearing question for the tool
-is untouched: **on a real design, does the fork surface a quantity the
-designers had not considered?**
+`MF_007` asked whether the fork surfaces a quantity its designers had not
+considered. On `provisioning_calibration` it surfaces three, and one of them
+has a stated prediction attached — so the answer is yes on n=1.
 
-Everything here checks that the instrument can see its own gaps. Whether it
-sees anyone else's is unmeasured. (`MF_007`)
+What is still unrun is the probe itself. `MF_010` names it; nobody has
+measured a relearn rate.
 
 ## Cross-repo
 

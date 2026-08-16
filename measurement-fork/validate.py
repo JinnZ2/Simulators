@@ -46,6 +46,14 @@ EXPECTED = {
         "What varies, and over what range? Needs {\"variable\": ..., "
         "\"range\": ...}. Drives the endpoint probe and the environment's "
         "own autocorrelation."),
+    "boundary": (
+        "Where does the organism end and the environment begin? Consequence "
+        "delivery crosses this line, and which side a quantity sits on is "
+        "the object_of field the whole comparator keys on."),
+    "actors": (
+        "Who is in the loop? A provisioning agent between organism and "
+        "environment is a third actor, and quantities about it belong to "
+        "neither of the other two."),
     "test_items_source": (
         "Where do the test items come from? If items are drawn from one "
         "side only, domain mismatch is scored as deficit and no arm can "

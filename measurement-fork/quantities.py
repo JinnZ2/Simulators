@@ -1,104 +1,70 @@
-#!/usr/bin/env python3
 """
-quantities.py -- what a quantity IS, and when two of them are the same one.
+Canonical quantity structure. Shared by all arms so the comparator
+can key on something stable.
 
 CC0-1.0. stdlib only.
 
-Reconstructed from the call sites in conventional.py, coupling.py and
-compare.py, which the drop shipped without this module. The contract is
-fully determined by those call sites; the choices this file makes beyond
-them are marked below.
+A quantity is not a name. It is:
 
-THE ONE IDEA
-------------
-A quantity is not its name. It is the triple
+    base        what is being counted
+    normalizer  what it is divided by (None = raw)
+    object_of   what the number is a property OF
+                organism | environment | coupling | instrument
 
-    (base, object_of, normalizer)
-
-and two quantities are the same quantity only when all three match. That is
-the whole basis of compare.py's VOID RATIO cell: two arms can both report
-"response_magnitude" and be measuring different things, because one is a
-property of the organism and the other of the coupling, or because one is
-per-unit-stimulus and the other is raw.
-
-This is ../reasoning-gate/'s G-DIM moved one stage earlier. G-DIM voids a
-ratio at report time when its operands turn out to belong to different
-objects. Carrying object_of in the quantity itself means the mismatch is
-visible at DESIGN time, before anyone runs anything -- which is the only
-point at which it is cheap to fix.
+Two probes with the same base and different object_of are NOT
+measuring the same thing. That is the void-ratio case and the
+comparator flags it rather than merging them.
 """
 
-from __future__ import annotations
+OBJECTS = ("organism", "environment", "coupling", "instrument")
 
 
 def quantity(base, object_of, normalizer=None):
-    """
-    A quantity's full identity.
-
-      base        what is measured, as a name
-      object_of   what it is a property OF -- organism, environment,
-                  coupling, instrument. The load-bearing field.
-      normalizer  what it is divided by, or None. A raw magnitude and a
-                  magnitude-per-unit-stimulus are different quantities.
-    """
-    if not (isinstance(base, str) and base.strip()):
-        raise ValueError("quantity needs a base name")
-    if not (isinstance(object_of, str) and object_of.strip()):
-        raise ValueError(
-            "quantity %r declares no object_of. A number that does not say "
-            "what it is a property of cannot be compared with anything."
-            % base)
+    if object_of not in OBJECTS:
+        raise ValueError("object_of must be one of %r, got %r"
+                         % (OBJECTS, object_of))
     return {
-        "base": base.strip(),
-        "object_of": object_of.strip(),
-        "normalizer": normalizer.strip() if isinstance(normalizer, str)
-        else normalizer,
+        "base": _norm(base),
+        "normalizer": _norm(normalizer) if normalizer else None,
+        "object_of": object_of,
     }
 
 
-def probe(arm, pid, q, protocol, reads, blind_to):
-    """
-    One proposed measurement.
-
-    `blind_to` is required and is not decoration. A probe that cannot say
-    what it is blind to has not been thought through, and the blindness map
-    is what makes the SOLE REACH cell readable -- an arm reaching a quantity
-    alone is only interesting next to what the other arms could not see.
-    """
-    for name, val in (("protocol", protocol), ("reads", reads),
-                      ("blind_to", blind_to)):
-        if not (isinstance(val, str) and val.strip()):
-            raise ValueError("probe %s: %r is empty" % (pid, name))
-    return {
-        "arm": arm,
-        "pid": pid,
-        "quantity": q,
-        "protocol": protocol.strip(),
-        "reads": reads.strip(),
-        "blind_to": blind_to.strip(),
-    }
+def _norm(s):
+    return "_".join(str(s).lower().replace("-", " ").replace("/", " ").split())
 
 
 def key(q):
-    """Full identity. Same key == same quantity == directly comparable."""
-    return (q["base"], q["object_of"], q["normalizer"])
+    """Full identity. Same key = same quantity."""
+    return (q["base"], q["normalizer"], q["object_of"])
 
 
 def base_key(q):
-    """Name only. Same base with different keys is the VOID RATIO cell."""
+    """Name-level only. Same base_key + different key = void ratio."""
     return q["base"]
 
 
 def render(q):
-    """
-    Human-readable, and deliberately verbose about object_of.
-
-    [CHOICE] The drop's call sites do not fix this format. It is written to
-    put object_of next to the name every time it is printed, because the
-    failure this whole module exists to catch is a reader seeing two
-    identical names and assuming one quantity.
-    """
-    text = q["base"]
+    s = q["base"]
     if q["normalizer"]:
-        text += " / " + q["normalizer"]
-    return "%s  [of %s]" % (text, q["object_of"])
+        s += " / " + q["normalizer"]
+    return "%s  [%s]" % (s, q["object_of"])
+
+
+def probe(arm, pid, q, protocol, reads, blind_to):
+    """
+    arm       which generator emitted this
+    pid       stable id within the arm
+    q         quantity() dict
+    protocol  how it would be run
+    reads     what the number registers
+    blind_to  what this probe structurally cannot see
+    """
+    return {
+        "arm": arm,
+        "id": pid,
+        "quantity": q,
+        "protocol": protocol,
+        "reads": reads,
+        "blind_to": blind_to,
+    }

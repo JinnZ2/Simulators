@@ -1677,6 +1677,39 @@ underneath).
   is that drift arriving on schedule. `MF_007` records the untouched
   question: on a real design, does the fork surface a quantity the designers
   had not considered? Seven claims `MF_001..007`. Stdlib only, CC0.
+  **Second drop** delivers the canonical `quantities.py` and the real spec
+  `provisioning_calibration.json` (both verbatim), plus three more stale
+  `reasoning-gate/` copies. **`MF_008`:** the canonical schema enforces a
+  CLOSED vocabulary — `OBJECTS = (organism, environment, coupling,
+  instrument)` and `quantity()` raises on anything else — so a widen probe,
+  which is about the *design*, **cannot be constructed as a quantity at
+  all**. `MF_004` argued that from behaviour; the delivered schema reaches
+  it from the type system independently: the schema refuses what the
+  comparator then counts. `widen.py` now uses a local `option()` helper
+  tagged `object_of="design"` plus `is_quantity(p)`, so the exclusion is
+  mechanical. **`MF_009`, the sharp one:** on the real spec the classifier
+  is wrong in BOTH directions and the errors point opposite ways — five
+  questions marked COVERED by widen alone (false positive), and two
+  questions a coupling probe was explicitly written for scored as unreached
+  (false negative: `environmental` does not stem to `environment`, and
+  `domain match ...` misses 4-of-7 by one). **No single threshold fixes
+  both.** Three counts of the same cell: `0 of 9` as delivered, `5 of 9`
+  with widen excluded, **`3 of 9` adjudicated by reading protocols** —
+  zero understates, five overstates. **`MF_010`, the result:** the real
+  growth edge is `coupling bandwidth`, `whether trust in own sensing is a
+  measurement or a belief`, and `reversibility after regime shift`. The
+  third has a stated prediction and no instrument — the predicted contrast
+  is a RATE (fast vs slow relearn once the buffer is removed) and **no
+  K-probe returns a rate**; every one measures a level, ratio, slope or
+  variance at fixed regime. The stated falsifier ("ratio flat across the
+  provisioning gradient") has the same shape: it needs the gradient swept
+  and the probes sit at one point on it. One probe closes both — error
+  against trials-since-shift, fitted for a time constant, at two or more
+  provisioning levels. `residual_audit.py` is that adjudication.
+  **`MF_011`:** `make_docs.py` / `README.md` / `GUARDS.md` arrive as
+  pre-repair copies too (12 / 16 / 48 differing lines) — five bundled
+  files, five stale, across three drops, which is what copying instead of
+  importing produces. Eleven claims `MF_001..011`.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

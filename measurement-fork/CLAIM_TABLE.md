@@ -9,9 +9,9 @@ Claims from the delivered package and from the audit here.
 
 1. A failed check updates the **claim**, not the code. The delivered arms
    are not retuned to preserve any entry here.
-2. `quantities.py`, `validate.py` and `widen.py` are **reconstructed**, not
-   delivered. Any finding that depends on their specific content says so
-   inline. `MF_004` is the one that does.
+2. `quantities.py` is now the **canonical delivered** version.
+   `validate.py` and `widen.py` remain reconstructed; any finding that
+   depends on their content says so inline.
 3. Nothing here is a claim about the domain the worked spec describes. The
    fork is a design instrument; this folder audits the instrument.
 
@@ -25,13 +25,13 @@ Claims from the delivered package and from the audit here.
 was in the drop, so nothing executes: `conventional.py` and `coupling.py`
 both fail at `from quantities import quantity, probe`.
 
-All three are reconstructed here from the call sites, which fully determine
-their contracts:
+`quantities.py` has since been delivered and replaces the reconstruction.
+The canonical version is **stricter** than the reconstruction in the place
+that matters: `OBJECTS` is a closed vocabulary and `quantity()` raises on
+anything outside it. `validate.py` and `widen.py` remain reconstructed from
+the call sites:
 
 ```
-quantity(base, object_of, normalizer=None)   -> dict
-probe(arm, pid, q, protocol, reads, blind_to) -> dict
-key(q) / base_key(q) / render(q)
 widen.generate(spec)   -> probes, arm="widen"
 validate.check(spec)   -> list of open questions, empty means go
 ```
@@ -230,3 +230,148 @@ it sees anyone else's is unmeasured.
 
 **Falsifier:** fork a real design and see whether the SOLE REACH and
 RESIDUAL cells contain anything its authors did not already know.
+
+---
+
+# Canonical schema and the real spec
+
+`quantities.py` and `systems/provisioning_calibration.json` delivered.
+Both verbatim.
+
+---
+
+## MF_008 — the canonical schema refuses to build a widen probe
+
+**who:** A · **status:** SUPPORTED. Confirms `MF_004` from the delivered code.
+
+The delivered `quantities.py` enforces a closed vocabulary:
+
+```python
+OBJECTS = ("organism", "environment", "coupling", "instrument")
+
+def quantity(base, object_of, normalizer=None):
+    if object_of not in OBJECTS:
+        raise ValueError(...)
+```
+
+The widen arm proposes options about the **design**, which is not on that
+list. So `quantity()` raises outright — the schema will not let a widen
+output be constructed as a quantity at all.
+
+`MF_004` argued from behaviour that widen must not be pooled into coverage.
+This is the same conclusion arriving from the type system, delivered
+independently: **the schema refuses what the comparator then counts.**
+
+`widen.py` here now builds its records with a local `option()` helper tagged
+`object_of="design"`, deliberately outside the vocabulary, plus
+`is_quantity(p)` so any consumer filters correctly. The exclusion is
+mechanical rather than a convention someone has to remember.
+
+**Falsifier:** add `"design"` to `OBJECTS`. That would make widen output a
+quantity, and then the VOID RATIO and SOLE REACH cells would have to accept
+it — which is the outcome the closed vocabulary exists to prevent.
+
+---
+
+## MF_009 — on the real spec the classifier is wrong in both directions
+
+**who:** A · **status:** SUPPORTED
+
+Three counts of the same cell on `provisioning_calibration`:
+
+```
+residual as delivered      0 of 9   widen pooled into coverage
+residual, measuring arms   5 of 9   widen excluded
+residual, adjudicated      3 of 9   protocols read
+```
+
+**Zero understates. Five overstates. Three is the growth edge.**
+
+The false positives are `MF_004`/`MF_008`: five questions marked COVERED by
+widen alone.
+
+The false negatives are new, and they are stemming failures on questions a
+coupling probe was explicitly written for:
+
+| question | probe | why it missed |
+| --- | --- | --- |
+| `environmental autocorrelation` | K09 `autocorrelation [environment]` | 2 stems, need 2, hits 1. `environmental` does not stem to `environment` — `_stem` strips `-ies/-es/-s` only |
+| `domain match between calibrating environment and test items` | K08 `task_performance / domain_match [coupling]` | 7 stems, need 4, hits 3. Misses by one |
+
+The two error types are independent and point opposite ways, landing on
+different questions. **No single threshold fixes both**: raising it worsens
+the false negatives, lowering it worsens the false positives. The widen
+pooling is a one-line fix; the stemming is not fixable by threshold at all.
+
+**Falsifier:** a stemmer and threshold that refuse `coverage_check.py` §1's
+firing null while catching both K08 and K09. Adding `-al`, `-ing`, `-ity`
+is the obvious attempt and its false-positive rate is a measurement.
+
+**Evidence:** `residual_audit.py`.
+
+---
+
+## MF_010 — the real growth edge is three questions, and one has a prediction attached
+
+**who:** A · **status:** SUPPORTED
+
+Adjudicated by reading the protocols rather than counting tokens:
+
+```
+[NO PROBE] coupling bandwidth
+           latency and contingency_consistency measure delay and
+           reliability of the loop; neither measures how much can cross
+           it per unit time
+
+[NO PROBE] whether trust in own sensing is a measurement or a belief
+           confidence/accuracy reaches the confidence-validity gap but
+           not whether reliance on the sensor was ever validated against
+           outcome
+
+[NO PROBE] reversibility after regime shift
+           nothing measures relearn RATE after the buffer is removed
+```
+
+The third is the one with a stated prediction and no instrument. The
+predicted contrast is a **rate** — fast relearn against slow relearn once
+the buffer is removed — and no probe in the coupling arm measures a rate.
+Every K-probe measures a level, a ratio, a slope or a variance, all at
+fixed regime.
+
+The same gap shows up in the stated falsifier. "Ratio flat across the
+provisioning gradient" needs the gradient swept; the probes as generated
+sit at one point on it.
+
+**One probe closes both**: error against trials-since-shift, fitted for a
+time constant, at two or more provisioning levels. It reaches
+`reversibility after regime shift` and supplies the gradient the falsifier
+requires.
+
+**Falsifier:** name an existing K-probe that returns a rate. `latency` is
+a delay, not a rate of change; `contingency_consistency` is a variance at
+fixed regime.
+
+---
+
+## MF_011 — three more bundled files are stale copies
+
+**who:** A · **status:** SUPPORTED. Extends `MF_006`.
+
+`make_docs.py`, `README.md` and `GUARDS.md` arrived alongside, all
+pre-repair versions of files already in
+[`reasoning-gate/`](../reasoning-gate/):
+
+| file | differing lines vs repaired | what is missing |
+| --- | ---: | --- |
+| `make_docs.py` | 12 | `_stages()` — multi-stage guards render under one stage only |
+| `README.md` | 16 | lists 5 files; the folder has 11 |
+| `GUARDS.md` | 48 | `G-FIT` still under POST, enforced at `pre` |
+
+None is checked in. Five bundled files now, five stale, from three
+separate drops — which is what copying instead of importing produces, and
+the reason `msiaf-gdprf-bridge/` and `reasoning-dial/gate_dial.py` both
+import.
+
+**Falsifier:** as `MF_006`. Nothing in any drop describes these as a
+deliberate fork, and the missing pieces are exactly the repairs made
+upstream.
