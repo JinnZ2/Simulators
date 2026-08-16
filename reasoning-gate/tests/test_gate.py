@@ -500,6 +500,50 @@ class DeliveredRegistryAndReplay(unittest.TestCase):
         report = g.close(observed="o", write=False)
         self.assertEqual(report["claims"][0]["status"], "supported")
 
+    def test_physical_claim_with_no_physical_support_is_downgraded(self):
+        """
+        A residual count is a property of the classifier; an artifact floor
+        of the estimator. Neither becomes a property of the system by being
+        counted. A physical claim resting only on instrument quantities is
+        a promotion without a step.
+        """
+        g = opened(strict=True)
+        g.record("residual_count", 3, "instrument", "the coverage classifier")
+        g.record("threshold", 0.6, "instrument", "the coverage classifier")
+        g.claim("the design has 3 unmeasured quantities",
+                supported_by=["residual_count", "threshold"])
+        g.control_result("c", "ran")
+        report = g.close(observed="o", write=False)
+
+        claim = report["claims"][0]
+        self.assertEqual(claim["status"], "qualified")
+        self.assertIn("no physical-level support", claim["layer_note"])
+        self.assertIn("G-LAYER", [f["guard"] for f in report["findings"]])
+
+    def test_instrument_support_alongside_physical_is_not_downgraded(self):
+        """
+        The bound case. 'The separation exceeds the estimator's error bar'
+        needs the error bar, and downgrading that would be wrong.
+        """
+        g = opened(strict=True)
+        g.record("separation", 0.334, "physical", "AB tiling vs cascade set")
+        g.record("error_bar", 0.075, "instrument", "box-count estimator")
+        g.claim("the separation exceeds the estimator's error bar",
+                supported_by=["separation", "error_bar"])
+        g.control_result("c", "ran")
+        report = g.close(observed="o", write=False)
+        self.assertEqual(report["claims"][0]["status"], "supported")
+        self.assertEqual(report["findings"], [])
+
+    def test_instrument_scoped_claim_on_instrument_support_stands(self):
+        g = opened(strict=True)
+        g.record("residual_count", 3, "instrument", "the coverage classifier")
+        g.claim("the classifier reports 3 unreached questions",
+                supported_by=["residual_count"], scope="instrument")
+        g.control_result("c", "ran")
+        report = g.close(observed="o", write=False)
+        self.assertEqual(report["claims"][0]["status"], "supported")
+
     def test_an_unknown_claim_scope_denies(self):
         g = opened(strict=False)
         g.record("x", 1.0, "physical", "A")

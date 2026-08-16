@@ -375,3 +375,57 @@ import.
 **Falsifier:** as `MF_006`. Nothing in any drop describes these as a
 deliberate fork, and the missing pieces are exactly the repairs made
 upstream.
+
+---
+
+## MF_012 — the drift is now detectable, and the gate is imported
+
+**who:** A · **status:** SUPPORTED. Closes `MF_006` and `MF_011`.
+
+`gate_fork.py` runs this folder's claims through the canonical gate by
+import, so there is no copy here to go stale.
+
+`../tools/check_gate_drift.py` finds any gate-family file anywhere in the
+repo, matched on **content** rather than filename so `gate_2.py` is still
+caught, and reports each as `IDENTICAL` or `DRIFTED`. Identical copies are
+reported too — the only reason a copy is ever stale is that it started
+identical. `../tests/test_gate_drift.py` fails the repo suite if one lands,
+and plants a stale copy to prove the detector is not `CONSTANT_SILENT`.
+
+**Falsifier:** a gate-family file the checker misses. The marker pairs are
+in the tool; a copy that strips both of a pair would evade it, and would
+also no longer be a usable copy of the gate.
+
+---
+
+## MF_013 — running the fork through the gate found a gap in the gate
+
+**who:** A · **status:** SUPPORTED. Fixed upstream.
+
+The residual count is a property of the coverage classifier — instrument
+level. A physical-scope claim resting only on instrument-level quantities
+was recorded `supported`:
+
+```
+claim : [supported] the measurement design has 3 unmeasured quantities
+```
+
+`G-LAYER`'s repair had covered generator-level support and said nothing
+about instrument-level, which is the same category move one layer over.
+
+Now fixed in `reasoning-gate/gate.py`: a physical-scope claim with **no
+physical-level support at all** is `qualified`. The rule does not fire when
+physical support is present, because a physical claim legitimately uses
+instrument quantities as bounds.
+
+The distinction it enforces is real. A quantity can be unmeasured because
+nobody wrote the probe, or because it is not measurable, and a count of the
+probe list cannot separate those.
+
+**Falsifier:** a physical claim that rests only on instrument quantities and
+is nonetheless a sound statement about the modelled system. Then the rule is
+too broad and the right test is something narrower than "no physical
+support".
+
+**Evidence:** `gate_fork.py` FORK-ADJUDICATED;
+`reasoning-gate/tests/test_gate.py`.

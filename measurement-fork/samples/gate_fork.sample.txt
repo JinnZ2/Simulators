@@ -1,0 +1,93 @@
+==========================================================================
+THE FORK, THROUGH THE CANONICAL GATE
+==========================================================================
+gate: /home/user/Simulators/reasoning-gate
+spec: provisioning_calibration.json
+
+==========================================================================
+FORK-RESIDUAL   the residual cell, classifier as delivered
+==========================================================================
+  DENIED at pre().
+
+  [G-RES] resolution not declared or instrument coarser than feature: output is not admissible | gaps missed by the classifier vs gaps present: instrument 3 x margin 2 > feature 3
+
+  The classifier misses 3 of 3 gaps, so its positional
+  error on the quantity being measured is the whole quantity.
+  Recall on the growth edge is zero, and a cell that cannot
+  report a gap is not measuring gaps.
+
+  G-RES is doing here what it did to SIM-A: an instrument
+  whose error equals the feature returns a null that carries
+  no information. The residual of 0 is that null.
+
+==========================================================================
+FORK-ADJUDICATED   the same cell, protocols read
+==========================================================================
+
+GATE FORK-ADJUDICATED
+  expected : a count between the delivered 0 and the widen-excluded 5, since the two classifier errors point opposite ways
+  observed : adjudicated 3 gaps; delivered classifier reported 0 and widen-excluded reported 5
+  diverged : YES
+  control  : cited probe exists           run
+  control  : cited probe measures it      run
+  resolve  : adjudication granularity vs the count ok
+  claim    : [supported] no probe in any measuring arm reaches 3 of the spec's open questions
+  claim    : [qualified] the measurement design has 3 unmeasured quantities
+             ^ physical scope claim with no physical-level support: rests entirely on instrument
+  finding  : [G-LAYER] untagged quantity: cannot be recorded
+             ^ the measurement design has 3 unmeasured quantities | physical scope claim with no physical-level support: rests entirely on instrument
+
+  Two claims, one support. The instrument-scoped one stands: it
+  says what reading the probe list returned. The physical-scoped
+  one is qualified, because a count of what a probe list contains
+  is not yet a statement about the design -- a quantity can be
+  unmeasured because nobody wrote the probe, or because it is not
+  measurable, and this instrument cannot tell those apart.
+
+==========================================================================
+FORK-VOID   the cell the fork exists to produce, gated
+==========================================================================
+
+  g.ratio(...) returned None
+
+GATE FORK-VOID
+  expected : if the arms measure the same quantity, the ratio is interpretable; if not, it is void
+  observed : both arms report task_performance; the objects differ, so the ratio is void
+  diverged : no
+  control  : same-object ratio            run
+  resolve  : object_of granularity vs the distinction ok
+  VOID     : apparent_deficit (organism vs coupling)
+  finding  : [G-DIM] ratio operands are properties of different objects: void, no interpretation permitted
+             ^ apparent_deficit: 'perf_conventional' is a property of 'organism', 'perf_coupling' is a property of 'coupling'
+
+  This is the VOID RATIO cell reaching the same verdict twice, by
+  two routes. quantities.py refuses the comparison at design time
+  because the object_of fields differ. G-DIM refuses it at report
+  time on the same grounds. The fork's contribution is that the
+  first happens before anyone runs anything.
+
+==========================================================================
+READING
+==========================================================================
+
+  The gate is imported, not copied. That is the whole point of running it
+  from here: this folder received a pre-repair gate.py in one drop and three
+  more stale files in the next, and an import cannot go stale. Run
+  ../tools/check_gate_drift.py to confirm there is still exactly one.
+
+  FORK-RESIDUAL denies at pre(). The classifier misses every gap it is
+  meant to find, so its error on the quantity equals the quantity, and the
+  residual of 0 is a null from an instrument that could not have seen the
+  feature.
+
+  FORK-ADJUDICATED passes and splits on scope. The same count supports an
+  instrument-level claim about what reading the probe list returned, and
+  fails to support a physical-level claim about the design -- because a
+  quantity can be unmeasured for two different reasons and this instrument
+  cannot separate them.
+
+  FORK-VOID reaches the fork's own headline cell from the other end. G-DIM
+  voids the cross-arm task_performance ratio at report time; quantities.py
+  refuses it at design time. Same verdict, and the design-time one is the
+  cheaper of the two.
+

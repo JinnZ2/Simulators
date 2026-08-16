@@ -23,6 +23,7 @@ harness is most likely to suppress by accident.
 | [`systems/`](systems/) | `provisioning_calibration.json` **delivered, verbatim**; `variable_provisioning.json` is a fixture exercising every branch. |
 | [`coverage_check.py`](coverage_check.py) | Null-tests the RESIDUAL classifier on the fixture. |
 | [`residual_audit.py`](residual_audit.py) | Adjudicates the RESIDUAL cell by hand on the real spec. **The result.** |
+| [`gate_fork.py`](gate_fork.py) | The fork's own claims through [`../reasoning-gate/`](../reasoning-gate/). Imports the gate, does not copy it. |
 | [`CLAIM_TABLE.md`](CLAIM_TABLE.md) | Eleven claims (`MF_001..011`). |
 | [`samples/`](samples/) | Pinned output. |
 
@@ -31,6 +32,8 @@ python3 validate.py systems/provisioning_calibration.json  # spec complete?
 python3 compare.py  systems/provisioning_calibration.json  # the fork
 python3 residual_audit.py                                  # the growth edge
 python3 coverage_check.py                                  # audit the classifier
+python3 gate_fork.py                                       # gated
+python3 ../tools/check_gate_drift.py                       # one gate?
 ```
 
 Standard library only, deterministic.
@@ -225,6 +228,37 @@ Three more arrived in the next drop, same pattern:
 | `GUARDS.md` | 48 | `G-FIT` still under POST |
 
 Five bundled files, five stale, across three drops. (`MF_011`)
+
+**Fixed on the repo side.** [`gate_fork.py`](gate_fork.py) now runs this
+folder's claims through the canonical gate by import, so there is nothing
+here to go stale. [`../tools/check_gate_drift.py`](../tools/check_gate_drift.py)
+finds any gate-family copy by content rather than filename, and
+[`../tests/test_gate_drift.py`](../tests/test_gate_drift.py) fails the repo
+suite if one lands. (`MF_012`)
+
+Running it here also found a gap in the gate. The residual count is a
+property of the coverage classifier, and a physical-scope claim resting only
+on instrument-level quantities was recorded `supported`:
+
+```
+claim : [supported] the measurement design has 3 unmeasured quantities
+```
+
+`G-LAYER` downgraded on generator-level support and said nothing about
+instrument-level. Now fixed upstream — a physical claim with no
+physical-level support at all is `qualified`, and the same run splits:
+
+```
+claim : [supported] no probe in any measuring arm reaches 3 of the
+                    spec's open questions            (instrument scope)
+claim : [qualified] the measurement design has 3 unmeasured quantities
+        ^ physical scope claim with no physical-level support:
+          rests entirely on instrument
+```
+
+The distinction is real: a quantity can be unmeasured because nobody wrote
+the probe, or because it is not measurable, and a count of the probe list
+cannot separate those. (`MF_013`)
 
 **Neither file is checked in here.** The repo's convention is to *import* the
 gate — [`msiaf-gdprf-bridge/`](../msiaf-gdprf-bridge/) and

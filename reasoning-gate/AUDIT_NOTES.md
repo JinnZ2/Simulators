@@ -394,3 +394,47 @@ contradicted by B". The aperture demo does not resolve the contradiction
 — B genuinely did run its resolution check — but it does confirm that
 where the check was skipped, the failure it would have caught is real and
 reproducible.
+
+---
+
+## 11. Two more findings, from using the gate elsewhere
+
+**G-LAYER did not downgrade on instrument-only support.** The repair in §2
+made a physical-scope claim resting on generator-level support `qualified`.
+It said nothing about instrument-level support, and
+`measurement-fork/gate_fork.py` walked straight into the gap: a residual
+count is a property of the coverage classifier, and
+
+```
+claim : [supported] the measurement design has 3 unmeasured quantities
+```
+
+rested entirely on two instrument-level quantities. Same category move as
+§2, one layer over.
+
+*Fixed.* A physical-scope claim with **no physical-level support at all** is
+now `qualified` with a `layer_note` naming the layers it does rest on. The
+rule is deliberately narrow: it does not fire when physical support is
+present, because a physical claim legitimately uses instrument quantities as
+bounds — *"the separation exceeds the estimator's error bar"* needs the error
+bar, and downgrading that would be wrong. Three tests, including the
+bound case.
+
+**Nothing detected stale copies of the gate.** Five pre-repair copies
+arrived across three drops — `gate.py`, `guards.json`, `make_docs.py`,
+`README.md`, `GUARDS.md` — each missing repairs already made here, each
+found by diffing by hand. Recorded as `measurement-fork` `MF_006` and
+`MF_011`.
+
+*Fixed on the repo side.* `../tools/check_gate_drift.py` finds any
+gate-family copy by content rather than filename, so a renamed copy is still
+caught, and reports it as `IDENTICAL` or `DRIFTED` — identical still gets
+reported, since the only reason a copy is ever stale is that it started
+identical. `../tests/test_gate_drift.py` fails the repo suite if one lands,
+and includes a planted-copy test so the detector cannot be
+`CONSTANT_SILENT`.
+
+The checker identifies itself by content, not by path. Its first version
+matched on a single marker and flagged its own docstring — the check working
+and the rule being wrong — and a path-based skip would have broken the one
+case it exists for, scanning a tree that contains a copy of the tool.

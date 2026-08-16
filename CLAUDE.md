@@ -1436,7 +1436,19 @@ underneath).
   FIRED because it worked`. `explore.py` finds `sim_id` in a report or a
   bare declaration. Section 1 (G-RES is only as strong as the declared
   pair) was NOT "fixed" — it is a limit on what the guard can promise,
-  not a defect. 66 tests green. Stdlib only, phone-buildable, CC0.
+  not a defect. **Fifth pass, from using the gate elsewhere:** `G-LAYER`
+  downgraded on generator-level support but said nothing about
+  instrument-only support, so `measurement-fork/gate_fork.py` recorded
+  `[supported] the measurement design has 3 unmeasured quantities` resting
+  entirely on two instrument-level quantities — the same category move one
+  layer over. Fixed: a physical-scope claim with **no physical-level
+  support at all** is now `qualified`, deliberately narrow so it does NOT
+  fire when physical support is present (a physical claim legitimately
+  uses instrument quantities as bounds — "the separation exceeds the
+  estimator's error bar" needs the error bar). And nothing had ever
+  detected the five stale copies; `tools/check_gate_drift.py` +
+  `tests/test_gate_drift.py` now do. 69 tests green. Stdlib only,
+  phone-buildable, CC0.
 - `reasoning-dial/` — A drop about how reasoning models allocate thinking,
   put through the gate the previous drop produced. Two delivered parts in
   `SOURCE_DROP.md` (verbatim): a 2026 survey of reasoning / learning /
@@ -1725,6 +1737,20 @@ underneath).
     CLAIM_TABLE and prints the grass/grasshopper substitution next
     to each claim. Structural enforcement for narrative-instinct
     bias.
+  - `check_gate_drift.py` — there is one gate. Finds every copy of the
+    `reasoning-gate/` family anywhere in the repo, matched on **content**
+    (two markers per file, one a code construct) rather than filename, so
+    a renamed copy is still caught. Reports each `IDENTICAL` or `DRIFTED`;
+    identical still gets reported, since the only reason a copy is ever
+    stale is that it started identical. Also verifies `GUARDS.md` is what
+    `make_docs.py` renders. Exit 1 on drift. Paired with
+    `tests/test_gate_drift.py`, which fails the repo suite if a copy lands
+    and plants a stale copy to prove the detector is not
+    `CONSTANT_SILENT`. Written after five pre-repair copies arrived across
+    three drops (`measurement-fork/` MF_006, MF_011) with nothing in the
+    repo noticing. The checker identifies itself by content, not by path —
+    a path-based skip breaks the one case it exists for, scanning a tree
+    that contains a copy of the tool.
   - `substrate_substitution_toolkit.py` — richer programmatic
     surface: seven categories from harsh (`pure_consumer`, the null
     hypothesis) to gentle (`mutualistic_scale`), each with multiple
