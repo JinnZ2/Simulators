@@ -244,3 +244,172 @@ result is still unrun, and it is one bar, one indicator with a data log, and
 one afternoon.
 
 **Falsifier:** run it.
+
+---
+
+# Spec v1
+
+Claims arising from [`SPEC_V1.md`](SPEC_V1.md) / [`spec_v1.json`](spec_v1.json),
+the generic protocol delivered for reuse. Both are checked in verbatim.
+[`triad.json`](triad.json) is v1 plus the corrections below; where the two
+differ, the difference is a finding.
+
+---
+
+## TP_008 — the pattern works without the human; it does not work without decorrelation
+
+**who:** A · **status:** SUPPORTED (generator scope)
+
+The question attached to the drop. Modelling each shadow as
+`truth + b_shared + b_family + e_ind` and reading the panel two ways —
+`N_eff` (participation ratio of the shadow correlation spectrum) and
+false-pass rate (P(shadows agree | panel mean wrong by more than tolerance)):
+
+```
+panel                                      k   N_eff    spread  false-pass
+v1 required: human + AI-low + AI-high      3    1.61     1.346       38.2%
+v1 full: + human_degraded                  4    1.72     1.577       25.1%
+v1 minus the human                         2    1.14     0.565       84.2%
+no human, 4 shadows, one model             4    1.22     1.027       50.2%
+no human, 3 model families                 3    1.93     1.596       26.8%
+no human, 4 model families                 4    2.18     1.938       12.4%
+human + 3 model families                   4    2.16     1.929       12.7%
+```
+
+**Answer: yes, without the human — provided the human's decorrelation is
+replaced.** Four model families with no human reach `N_eff` 2.18 and
+false-pass 12.4%, *stronger* than v1's required panel with a human (1.61,
+38.2%). Adding the human back on top changes `N_eff` by −0.02, inside the
+noise.
+
+Drop the human from v1's panel without substituting and it collapses:
+`N_eff` 1.61 → 1.14, false-pass 38% → **84%**. A panel that returns a
+confident wrong answer 84 times in a hundred is not a check.
+
+The reason is `TP_003`: `ai_low` and `ai_high` on one model share a family
+bias, so v1's required panel has one decorrelated element and it is the
+human. The design variable is independent failure modes, not human-vs-AI.
+
+**What a human still uniquely supplies** is embodied context — cold-stiffened
+proprioception is not a failure mode any model has. That argues for a human
+shadow on *physical* measurements specifically, and it is a different
+argument from the decorrelation one.
+
+**Falsifier:** measure the correlation between two model families on a real
+shadow task. If cross-family correlation is as high as within-family, model
+diversity buys nothing and the human is not substitutable.
+
+**Evidence:** `shadow_panel.py` §1–2; ranking survives a 5-point sweep of the
+variance components in §3.
+
+---
+
+## TP_009 — the spec should require a minimum N_eff, not a minimum shadow count
+
+**who:** A · **status:** SUPPORTED
+
+v1 requires `human_baseline`, `ai_low`, `ai_high`, and a minimum of two
+controls. Counting shadows measures effort; it does not measure independence.
+A four-shadow panel can carry `N_eff` = 1.22.
+
+The spec already requires a minimum *number* of controls for exactly this
+kind of reason. `N_eff` is the same kind of number for the shadow panel, and
+[`model-ecology/phylogeny.py`](../model-ecology/phylogeny.py) already computes
+it for a family of estimators — fifteen of which turned out to carry
+`N_eff` = 2.48.
+
+Recorded in `triad.json` under `shadow_protocol.panel_independence`.
+
+**Falsifier:** a panel-quality statistic that predicts false-pass rate better
+than `N_eff` does. This is a modelling choice, not a theorem.
+
+---
+
+## TP_010 — v1 improved the consensus denominator and it is still the wrong one
+
+**who:** A · **status:** SUPPORTED
+
+v1 adds `"threshold_rule": "Variance must be compared against instrument
+resolution, not against zero."` That is a real improvement over the first
+drop and it addresses half of `TP_004`.
+
+It is still the wrong denominator. Instrument resolution bounds what the
+**instrument** can say. Shadow spread is bounded by what an **observer** can
+repeat. The correct reference is the same-observer repeat variance — one
+observer measuring twice at one dial — which is also the null `TP_003` says
+is missing.
+
+If observer repeat variance exceeds instrument resolution, every panel reads
+`exceeds_resolution` and the verdict is a statement about observer
+repeatability, not about underdetermination.
+
+**Falsifier:** a measurement regime where observer repeat variance is
+reliably below instrument resolution. Then the two denominators coincide and
+v1's rule is sufficient — and `TP_004`'s independent-log fix is what would
+establish it.
+
+---
+
+## TP_011 — v1 states the mixed partials explicitly and still forbids the design
+
+**who:** A · **status:** SUPPORTED. Sharpens `TP_002`.
+
+v1 §5 now names the interactions directly: `∂²/∂(physical)∂(reasoning)` and
+`∂²/∂(instrument)∂(reasoning)`. v1 §2 execution rule 3 still says *"upgrade
+ONE dial at a time, re-shadow"*.
+
+Rule 3 is the binding one. Rule 4 — *"never upgrade all three
+simultaneously"* — would permit a 2² factorial over any pair, which is
+exactly what a two-factor interaction needs. So the contradiction is now
+sharper than in the first drop and the fix is smaller:
+
+> replace rule 3 with *"vary dials in a 2² factorial over the pair whose
+> interaction is being tested"*, and keep rule 4 unchanged.
+
+Four runs per pair, three pairs, and every mixed partial in §5 becomes
+estimable while rule 4's prohibition survives intact.
+
+**Falsifier:** as `TP_002` — an OFAT design that recovers a two-factor
+interaction. There is none.
+
+---
+
+## TP_012 — v1 assigns G-DIM a job it does not do, and the job is real
+
+**who:** A · **status:** SUPPORTED
+
+v1 §6 maps `G-DIM` to *"checks that dial settings are actually different
+compute levels"*. `G-DIM` in
+[`reasoning-gate/guards.json`](../reasoning-gate/guards.json) voids ratios
+whose operands are properties of different objects. It does not check dial
+distinctness and cannot be made to without becoming a different guard.
+
+The job named is genuine and currently unassigned: **nothing verifies that
+`ai_low` and `ai_high` actually produced different reasoning effort.** A model
+that ignores its budget parameter, or a task below the budget's effect
+threshold, silently collapses two declared shadows into one — which is
+`TP_008`'s failure mode arriving without anyone declaring it.
+
+The check is cheap and reads like a `G-RES` pair: declared budget separation
+versus observed reasoning-token separation, with a margin.
+
+**Falsifier:** show `G-DIM` as implemented rejects a run whose two dial
+settings produced identical output. It does not — it never inspects dial
+settings at all.
+
+---
+
+## TP_013 — none of this has been measured on a real panel
+
+**who:** A · **status:** UNVERIFIED. Extends `TP_007`.
+
+`shadow_panel.py`'s three variance components are chosen, not fitted. What
+survives the sweep is the **ranking** of panel compositions, which follows
+from which shadows share which bias term; the absolute rates do not and
+should be read as illustrative.
+
+Fitting them needs one measurement: several observers, including at least two
+model families, reading one instrument against an independently logged
+reference. That is the same experiment `TP_004` and `TP_007` already name.
+
+**Falsifier:** run it.

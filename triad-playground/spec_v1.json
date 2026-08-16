@@ -1,0 +1,213 @@
+{
+  "triad_schema": {
+    "$schema": "triad-playground/v1",
+    "description": "Every experiment is a tuple of three agents: Physical, Instrument, Reasoning. The claim is only as strong as the weakest calibration in the chain.",
+    "agents": {
+      "physical": {
+        "role": "The system under study",
+        "calibration_question": "Is the system in a known state?",
+        "dial": {
+          "low": "Analytical / closed-form / synthetic",
+          "medium": "Numerical / reduced-order / simulation",
+          "high": "Experimental / atomistic / field"
+        },
+        "required_declarations": [
+          "system_state",
+          "boundary_conditions",
+          "known_unknowns",
+          "synthetic_generator_params (if applicable)"
+        ]
+      },
+      "instrument": {
+        "role": "The thing producing numbers",
+        "calibration_question": "Is the instrument calibrated and traceable?",
+        "dial": {
+          "low": "Single sensor / single estimator / no cross-check",
+          "medium": "Redundant sensors / multiple estimators / statistical averaging",
+          "high": "Full metrological chain / environmental compensation / NIST-traceable or equivalent"
+        },
+        "required_declarations": [
+          "instrument_identity",
+          "calibration_method",
+          "cross_check_instrument",
+          "environmental_compensation_applied"
+        ]
+      },
+      "reasoning": {
+        "role": "The thing interpreting numbers",
+        "calibration_question": "Is the observer's gain known?",
+        "dial": {
+          "low": "Pattern match / heuristic / cached response / single forward pass",
+          "medium": "Step-by-step / cross-referenced / uncertainty propagation / chain-of-thought",
+          "high": "Full mechanism reconstruction / multiple hypotheses / adversarial check / explicit metacognition"
+        },
+        "required_declarations": [
+          "observer_identity",
+          "self_reported_state",
+          "thinking_budget_or_equivalent",
+          "conflict_of_interest_declared"
+        ]
+      }
+    },
+    "resolution_pair": {
+      "description": "The binding pair that must be declared before any sim runs.",
+      "instrument": "What measurable quantity is produced",
+      "feature": "What property of the system it targets",
+      "note": "The claim is only valid for this pair. Changing the pair changes the claim."
+    },
+    "skip_condition": {
+      "description": "Falsifiable condition that, if met, kills the axis before expensive variants run.",
+      "required": true,
+      "example": "If |D_f(A) - D_f(B)| < baseline_noise, skip SIM-A and SIM-C"
+    },
+    "controls": {
+      "description": "Known-reference measurements that validate the instrument, not the hypothesis.",
+      "minimum": 2,
+      "examples": [
+        "null_model",
+        "known_limit",
+        "embedding_dimension",
+        "analytical_solution"
+      ]
+    }
+  },
+  "shadow_protocol": {
+    "description": "For every physical sim, run shadows with the same instrument dial but different reasoning agents.",
+    "shadow_types": {
+      "human_baseline": {
+        "description": "Human observer, self-reported optimal state",
+        "required": true,
+        "record": [
+          "fatigue_level",
+          "time_pressure",
+          "environmental_stressors",
+          "emotional_investment"
+        ]
+      },
+      "human_degraded": {
+        "description": "Human observer, degraded state (if ethically and practically available)",
+        "required": false,
+        "record": [
+          "same as baseline, but state is degraded"
+        ]
+      },
+      "ai_low": {
+        "description": "Fast model, no extended thinking, minimal context",
+        "required": true,
+        "record": [
+          "model_version",
+          "temperature",
+          "max_tokens",
+          "context_window_used"
+        ]
+      },
+      "ai_high": {
+        "description": "Reasoning model, full budget, extended thinking",
+        "required": true,
+        "record": [
+          "model_version",
+          "thinking_budget",
+          "reasoning_tokens_used",
+          "routing_used"
+        ]
+      },
+      "consensus": {
+        "description": "Do shadows agree? If not, the axis is underdetermined.",
+        "method": "Compute variance across shadow conclusions. If variance > threshold, flag underdetermination.",
+        "threshold_rule": "Variance must be compared against instrument resolution, not against zero."
+      }
+    },
+    "execution_order": [
+      "Run all shadows at LOW dial on all three axes first",
+      "Compare consensus. If underdetermined, STOP. Do not upgrade dials.",
+      "If consensus holds, upgrade ONE dial at a time, re-shadow",
+      "Never upgrade all three dials simultaneously \u2014 variance becomes unattributable"
+    ]
+  },
+  "interior_checklist": {
+    "pre_sim_checklist": {
+      "physical": [
+        "[ ] System state declared (initial conditions, history, environment)",
+        "[ ] Boundary conditions specified (finite, periodic, open, mixed)",
+        "[ ] Known unknowns listed (what is acknowledged as not known)",
+        "[ ] Synthetic generator parameters declared (if applicable)",
+        "[ ] Physical scope declared (generator-level, model-level, or physical-level)"
+      ],
+      "instrument": [
+        "[ ] Instrument identity declared (what produced this number)",
+        "[ ] Calibration method stated (when, how, against what standard)",
+        "[ ] Cross-check instrument identified (second instrument for same quantity)",
+        "[ ] Environmental compensation applied (temperature, pressure, drift)",
+        "[ ] Instrument resolution declared (smallest distinguishable difference)"
+      ],
+      "reasoning": [
+        "[ ] Observer identity declared (human name, model name, version)",
+        "[ ] Self-reported state recorded (fatigue, cold, pressure, investment)",
+        "[ ] Thinking budget or equivalent declared (tokens, time, depth)",
+        "[ ] Conflict of interest declared (do I want this result?)",
+        "[ ] Prior state acknowledged (what I believed before this measurement)"
+      ]
+    },
+    "uncalibrated_server_protocol": {
+      "description": "If any checklist item is unreadable, the server is uncalibrated.",
+      "action": "Continue with caution. Tag all outputs with 'qualified' scope and 'unreadable_server' note.",
+      "prohibition": "Do not upgrade dial past low if any agent is uncalibrated."
+    }
+  },
+  "pedigree_format": {
+    "description": "Every number in the playground carries a full pedigree.",
+    "required_fields": {
+      "value": "The numerical result",
+      "units": "Physical units or 'dimensionless'",
+      "resolution_pair": {
+        "instrument": "What produced this number",
+        "feature": "What property it targets"
+      },
+      "dial_settings": {
+        "physical": "low / medium / high",
+        "instrument": "low / medium / high",
+        "reasoning": "low / medium / high"
+      },
+      "calibration_status": {
+        "physical": "declared / partial / unreadable",
+        "instrument": "calibrated / estimated / uncalibrated",
+        "reasoning": "self_reported / inferred / unreadable"
+      },
+      "traceability": [
+        "sim_identifier",
+        "observer_identifier",
+        "timestamp",
+        "environmental_conditions",
+        "software_versions"
+      ],
+      "gate_verdict": {
+        "G-RES": "supported / qualified / void / denied",
+        "G-DIM": "supported / qualified / void / denied",
+        "G-CTRL": "supported / qualified / void / denied",
+        "G-LAYER": "supported / qualified / void / denied",
+        "G-IND": "supported / qualified / void / denied"
+      },
+      "shadow_variance": {
+        "description": "Variance across shadow conclusions for this number",
+        "compared_against": "instrument_resolution",
+        "verdict": "within_resolution / exceeds_resolution / underdetermined"
+      }
+    }
+  },
+  "cross_gradient_protocol": {
+    "description": "After N sims on related axes, compute how conclusions change with dial settings.",
+    "gradients": {
+      "dial_gradient": "\u2202(conclusion) / \u2202(dial_setting) \u2014 does more compute change the answer?",
+      "cross_gradient_physical_reasoning": "\u2202\u00b2(conclusion) / \u2202(physical_dial)\u2202(reasoning_dial)",
+      "cross_gradient_instrument_reasoning": "\u2202\u00b2(conclusion) / \u2202(instrument_dial)\u2202(reasoning_dial)",
+      "cross_gradient_problem_difficulty": "\u2202\u00b2(conclusion) / \u2202(dial_setting)\u2202(problem_difficulty)"
+    },
+    "interpretation_rules": {
+      "flat_dial_gradient": "Additional compute doesn't change the conclusion. The dial doesn't matter for this domain. Stop burning tokens.",
+      "steep_dial_gradient": "Conclusion is dial-dependent. The reasoning agent is doing more work than the physical evidence supports. Downgrade claim.",
+      "sign_change": "Conclusion changes sign when dial increases. The axis is underdetermined. The physical sim cannot support the reasoning claim.",
+      "flat_cross_gradient": "Problem difficulty doesn't modulate the value of additional compute. Routing by difficulty is unnecessary.",
+      "steep_cross_gradient": "Problem difficulty strongly modulates the value of compute. Routing by difficulty is essential."
+    }
+  }
+}

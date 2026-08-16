@@ -103,6 +103,34 @@ def render(spec):
         out.append("> %s" % _wrap(sp[key], 2))
         out.append("")
 
+    if "panel_independence" in sp:
+        pi = sp["panel_independence"]
+        out.append("### Panel independence")
+        out.append("")
+        out.append("```")
+        out.append("rule    %s" % _wrap(pi["rule"], 8))
+        out.append("N_eff   %s" % _wrap(pi["n_eff"], 8))
+        out.append("```")
+        out.append("")
+        for key in ("why", "v1_gap", "without_a_human",
+                    "what_a_human_still_uniquely_supplies"):
+            out.append("> **%s** — %s"
+                       % (key.replace("_", " "), _wrap(pi[key], 2)))
+            out.append("")
+
+    if "consensus_denominator" in sp:
+        cd = sp["consensus_denominator"]
+        out.append("### Consensus denominator")
+        out.append("")
+        out.append("```")
+        out.append("v1 says   %s" % _wrap(cd["v1_rule"], 10))
+        out.append("verdict   %s" % _wrap(cd["verdict"], 10))
+        out.append("use       %s" % _wrap(cd["correct_denominator"], 10))
+        out.append("```")
+        out.append("")
+        out.append("> %s" % _wrap(cd["why"], 2))
+        out.append("")
+
     out.append("## Skip conditions")
     out.append("")
     sc = spec["skip_conditions"]
@@ -126,6 +154,12 @@ def render(spec):
     out.append("")
     out.append("> %s" % _wrap(pf["layer_note"], 2))
     out.append("")
+
+    if spec.get("gate_mapping_note"):
+        out.append("## Gate mapping")
+        out.append("")
+        out.append("> %s" % _wrap(spec["gate_mapping_note"], 2))
+        out.append("")
     return "\n".join(out)
 
 

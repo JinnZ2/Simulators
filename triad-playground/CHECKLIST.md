@@ -117,6 +117,53 @@ blind to  consensus is blind to error the shadows share. Shadows reading one
   and their agreement measures nothing. ../divergence-playground/
   implements the seal, the three spread axes, and the null ensemble.
 
+### Panel independence
+
+```
+rule    require a minimum N_eff over the shadow panel, not a minimum
+        shadow COUNT
+N_eff   participation ratio of the shadow correlation spectrum, (sum L)^2
+        / sum L^2
+```
+
+> **why** — shadow_panel.py: a panel of four shadows can carry N_eff = 1.2.
+  Counting shadows measures effort; the participation ratio measures
+  how much of it was independent. ../model-ecology/phylogeny.py
+  already computes this statistic for a family of estimators.
+
+> **v1 gap** — v1 requires human_baseline + ai_low + ai_high. On one model,
+  ai_low and ai_high share a family bias and are close to one shadow
+  at two dial settings -- so the human is the only decorrelated
+  element, and dropping it takes N_eff from 1.61 to 1.14 and the
+  false-pass rate from 38% to 84%.
+
+> **without a human** — supported, but the substitution is THREE MODEL FAMILIES, not three
+  budgets on one model. Four families with no human reach N_eff 2.18
+  and false-pass 12.4%, stronger than v1's required panel with one.
+  Adding a human on top of that changes N_eff by -0.02.
+
+> **what a human still uniquely supplies** — embodied context. Cold-stiffened proprioception is not a failure
+  mode any model has, which argues for a human shadow on physical
+  measurements specifically -- a different argument from the
+  decorrelation one.
+
+### Consensus denominator
+
+```
+v1 says   'Variance must be compared against instrument resolution, not
+          against zero.'
+verdict   an improvement over comparing to zero, and still the wrong
+          denominator
+use       the same-observer repeat variance -- the spread of one observer
+          measuring twice at one dial
+```
+
+> instrument resolution bounds what the INSTRUMENT can say. Shadow
+  spread is bounded by what an OBSERVER can repeat. If observer
+  repeat variance exceeds instrument resolution, every panel reads
+  'exceeds_resolution' and the verdict is about the observer's
+  repeatability, not about underdetermination.
+
 ## Skip conditions
 
 ```
@@ -145,3 +192,13 @@ layer     generator | physical | instrument | reasoning
   reasoning-level, and a physical-scope claim resting on one is
   qualified, not supported -- the same rule gate.py already applies
   to generator-level support.
+
+## Gate mapping
+
+> v1 section 6 assigns G-DIM the job of 'checks that dial settings
+  are actually different compute levels'. G-DIM in
+  ../reasoning-gate/guards.json voids ratios across unlike objects
+  and does not do this. The job named is real and unassigned:
+  nothing verifies that ai_low and ai_high actually produced
+  different reasoning effort, and a model that ignores its budget
+  parameter would collapse two declared shadows into one silently.

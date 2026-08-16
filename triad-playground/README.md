@@ -12,16 +12,19 @@ below, all with cheap fixes, none of which requires abandoning the idea.
 
 | File | What it is |
 | --- | --- |
-| [`SOURCE_DROP.md`](SOURCE_DROP.md) | The delivered proposal, **verbatim**. |
+| [`SOURCE_DROP.md`](SOURCE_DROP.md) | The first delivered proposal, **verbatim**. |
+| [`SPEC_V1.md`](SPEC_V1.md) / [`spec_v1.json`](spec_v1.json) | The generic v1 protocol delivered for reuse, **verbatim**. |
 | [`triad.json`](triad.json) | The schema. Single source of truth: agents, dial vector, calibration checks, shadow protocol, pedigree fields. |
 | [`CHECKLIST.md`](CHECKLIST.md) | Human-fillable pre-run checklist, **generated** from `triad.json`. |
 | [`make_checklist.py`](make_checklist.py) | The generator. Regenerates byte-identically. |
 | [`shadow_design.py`](shadow_design.py) | Does the shadow-sim pattern measure what it is for? Four checks. Stdlib only. |
-| [`CLAIM_TABLE.md`](CLAIM_TABLE.md) | Seven claims (`TP_001..007`) under a REFUTATION_PROTOCOL. |
+| [`shadow_panel.py`](shadow_panel.py) | **With or without the human?** Panel composition vs `N_eff` and false-pass rate. Stdlib only. |
+| [`CLAIM_TABLE.md`](CLAIM_TABLE.md) | Thirteen claims (`TP_001..013`) under a REFUTATION_PROTOCOL. |
 | [`samples/`](samples/) | Pinned output. |
 
 ```bash
-python3 shadow_design.py     # the four checks
+python3 shadow_design.py     # the four design checks
+python3 shadow_panel.py      # with or without the human
 python3 make_checklist.py    # regenerate CHECKLIST.md after editing triad.json
 ```
 
@@ -180,6 +183,94 @@ question is untouched:
 result is one bar, one indicator with a data log, and one afternoon.
 (`TP_007`)
 
+## With or without the human?
+
+The question the v1 spec came with. v1 requires `human_baseline`, `ai_low`,
+`ai_high`, with `human_degraded` optional.
+
+Model each shadow as `truth + b_shared + b_family + e_ind` and read the panel
+two ways — `N_eff`, the participation ratio of the shadow correlation
+spectrum, and the false-pass rate, `P(shadows agree | panel mean wrong by
+more than tolerance)`:
+
+```
+panel                                      k   N_eff    spread  false-pass
+v1 required: human + AI-low + AI-high      3    1.61     1.346       38.2%
+v1 full: + human_degraded                  4    1.72     1.577       25.1%
+v1 minus the human                         2    1.14     0.565       84.2%
+no human, 4 shadows, one model             4    1.22     1.027       50.2%
+no human, 3 model families                 3    1.93     1.596       26.8%
+no human, 4 model families                 4    2.18     1.938       12.4%
+human + 3 model families                   4    2.16     1.929       12.7%
+```
+
+**Yes, it works without the human — but the human's decorrelation has to be
+replaced, not just removed.**
+
+Four model families with no human reach `N_eff` 2.18 and false-pass 12.4%,
+**stronger than v1's required panel with a human** (1.61, 38.2%). Adding the
+human back on top of that moves `N_eff` by −0.02, inside the noise.
+
+Drop the human from v1's panel without substituting and it collapses:
+`N_eff` 1.61 → 1.14, false-pass 38% → **84%**. A panel that returns a
+confident wrong answer 84 times in a hundred is not a check.
+
+The reason is that `ai_low` and `ai_high` **on one model** share a family
+bias — they are close to one shadow at two dial settings, so the human is the
+only decorrelated element v1's required panel has. The design variable is not
+human-vs-AI. It is how many independent failure modes the panel contains.
+
+Three consequences for the spec:
+
+1. **`ai_low` and `ai_high` are not two shadows.** On one model they are one
+   shadow at two budgets, which is a reasoning-*dial* measurement. Both are
+   worth doing; they answer different questions.
+2. **Require a minimum `N_eff`, not a minimum count.** A four-shadow panel
+   can carry `N_eff` = 1.22. Counting shadows measures effort.
+   [`model-ecology/phylogeny.py`](../model-ecology/phylogeny.py) already
+   computes this statistic — fifteen estimators there turn out to carry
+   `N_eff` = 2.48. (`TP_009`)
+3. **The substitution for a human is three model families, not three
+   budgets.** That is a procurement fact rather than an epistemics problem:
+   three vendors, not three prompts.
+
+What a human still uniquely supplies is **embodied context** — cold-stiffened
+proprioception is not a failure mode any model has. That argues for a human
+shadow on *physical* measurements specifically, and it is a different
+argument from the decorrelation one. (`TP_008`)
+
+The ranking survives a five-point sweep of the variance components; the
+absolute rates do not and are illustrative. (`TP_013`)
+
+## What v1 changed, and what it did not
+
+v1 is a real improvement on the first drop in one place and unchanged in
+three.
+
+**Improved:** `"Variance must be compared against instrument resolution, not
+against zero."` That addresses half of `TP_004`. It is still the wrong
+denominator — instrument resolution bounds what the *instrument* can say,
+while shadow spread is bounded by what an *observer* can repeat. The correct
+reference is same-observer repeat variance, which is also the null `TP_003`
+says is missing. (`TP_010`)
+
+**Sharpened, not fixed:** v1 §5 now names `∂²/∂(physical)∂(reasoning)` and
+`∂²/∂(instrument)∂(reasoning)` explicitly, while §2 rule 3 still says
+"upgrade ONE dial at a time". Rule 3 is the binding one; rule 4 ("never
+upgrade all three") would happily permit a 2² factorial over a pair. So the
+fix is now one line: replace rule 3 with *"vary dials in a 2² factorial over
+the pair whose interaction is being tested"* and keep rule 4. Four runs per
+pair. (`TP_011`)
+
+**New problem:** §6 maps `G-DIM` to *"checks that dial settings are actually
+different compute levels"*. `G-DIM` voids ratios across unlike objects and
+does not do this. The job named is real and unassigned — **nothing verifies
+that `ai_low` and `ai_high` actually produced different reasoning effort**,
+and a model ignoring its budget parameter would collapse two declared shadows
+into one silently, which is `TP_008`'s failure mode arriving undeclared. The
+check reads like a `G-RES` pair: declared budget separation versus observed
+reasoning-token separation, with a margin. (`TP_012`)
+
 ## Cross-repo
 
 - [`reasoning-gate/`](../reasoning-gate/) — the epistemics this applies at
@@ -196,6 +287,11 @@ result is one bar, one indicator with a data log, and one afternoon.
   puts the reader in it.
 - [`reasoning-dial/`](../reasoning-dial/) — `RD_009`'s `G-STATE` gap is
   `TP_006` here, unchanged by the change of scale.
+- [`model-ecology/`](../model-ecology/) — `phylogeny.py` computes the same
+  participation ratio `TP_009` asks the spec to require, on a family of
+  estimators rather than a panel of observers. Fifteen estimators, `N_eff` =
+  2.48. The shadow panel is that question with the estimators replaced by
+  readers.
 
 ## License
 

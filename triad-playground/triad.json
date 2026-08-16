@@ -3,7 +3,11 @@
   "license": "CC0-1.0",
   "origin": "proposed in SOURCE_DROP.md as a triad harness; the dial vector, shadow protocol, interior-calibration checklist and pedigree format are the drop's, the design corrections in shadow_design.py are not",
   "principle": "A claim is only as strong as the weakest calibration in the chain. Every experiment has three agents, and the reasoning agent is an instrument like the other two.",
-  "agents": ["physical", "instrument", "reasoning"],
+  "agents": [
+    "physical",
+    "instrument",
+    "reasoning"
+  ],
   "agent_meaning": {
     "physical": "the system being studied. Its state drifts with temperature, load and history.",
     "instrument": "the thing producing numbers. Calibrated and traceable, or not.",
@@ -28,22 +32,72 @@
   },
   "calibration_checks": {
     "physical": [
-      {"id": "P1", "check": "system state declared: temperature, load, history", "readable": "usually"},
-      {"id": "P2", "check": "boundary conditions specified", "readable": "usually"},
-      {"id": "P3", "check": "known unknowns listed", "readable": "sometimes"},
-      {"id": "P4", "check": "state_revised_during_run recorded separately from state_declared", "readable": "always", "note": "shadow_design.py section 4: a run that revises the physical declaration reports a PHYSICAL finding, not a reasoning-dial gradient. Without this field the two are scored as the same thing."}
+      {
+        "id": "P1",
+        "check": "system state declared: temperature, load, history",
+        "readable": "usually"
+      },
+      {
+        "id": "P2",
+        "check": "boundary conditions specified",
+        "readable": "usually"
+      },
+      {
+        "id": "P3",
+        "check": "known unknowns listed",
+        "readable": "sometimes"
+      },
+      {
+        "id": "P4",
+        "check": "state_revised_during_run recorded separately from state_declared",
+        "readable": "always",
+        "note": "shadow_design.py section 4: a run that revises the physical declaration reports a PHYSICAL finding, not a reasoning-dial gradient. Without this field the two are scored as the same thing."
+      }
     ],
     "instrument": [
-      {"id": "I1", "check": "calibration date and method", "readable": "usually"},
-      {"id": "I2", "check": "environmental compensation applied", "readable": "usually"},
-      {"id": "I3", "check": "cross-check instrument identified", "readable": "sometimes"},
-      {"id": "I4", "check": "instrument records independently of the observer reading it", "readable": "always", "note": "shadow_design.py section 3: without an independent log, observer error is inferred from consensus and the skip condition cannot fail."}
+      {
+        "id": "I1",
+        "check": "calibration date and method",
+        "readable": "usually"
+      },
+      {
+        "id": "I2",
+        "check": "environmental compensation applied",
+        "readable": "usually"
+      },
+      {
+        "id": "I3",
+        "check": "cross-check instrument identified",
+        "readable": "sometimes"
+      },
+      {
+        "id": "I4",
+        "check": "instrument records independently of the observer reading it",
+        "readable": "always",
+        "note": "shadow_design.py section 3: without an independent log, observer error is inferred from consensus and the skip condition cannot fail."
+      }
     ],
     "reasoning": [
-      {"id": "R1", "check": "human: fatigue, cold, time pressure", "readable": "self-report only"},
-      {"id": "R2", "check": "human: emotional investment in a particular result", "readable": "self-report only"},
-      {"id": "R3", "check": "AI: model version, thinking budget, temperature, context window", "readable": "always"},
-      {"id": "R4", "check": "conflict of interest declared: do I want this result?", "readable": "self-report only"}
+      {
+        "id": "R1",
+        "check": "human: fatigue, cold, time pressure",
+        "readable": "self-report only"
+      },
+      {
+        "id": "R2",
+        "check": "human: emotional investment in a particular result",
+        "readable": "self-report only"
+      },
+      {
+        "id": "R3",
+        "check": "AI: model version, thinking budget, temperature, context window",
+        "readable": "always"
+      },
+      {
+        "id": "R4",
+        "check": "conflict of interest declared: do I want this result?",
+        "readable": "self-report only"
+      }
     ]
   },
   "readability_note": "Three of the four reasoning checks are self-report, and a self-report from a miscalibrated observer is the quantity in question. That is reasoning-dial/CLAIM_TABLE.md RD_009 restated. Checks tied to something outside the observer -- ambient temperature, hours since sleep, a timestamp, a model version string -- are readable; the rest are declarations, and the pedigree marks which is which.",
@@ -54,10 +108,33 @@
     "sealing": "each shadow commits its reading before any other shadow's is revealed",
     "sealing_note": "shadow_design.py section 2: unsealed shadows anchor on each other and their agreement measures nothing. ../divergence-playground/ implements the seal, the three spread axes, and the null ensemble.",
     "null_required": "the disagreement between two runs of the SAME observer at the SAME dial, measured before any cross-observer spread is interpreted",
-    "blind_spot": "consensus is blind to error the shadows share. Shadows reading one declaration through one prompt share most of their error."
+    "blind_spot": "consensus is blind to error the shadows share. Shadows reading one declaration through one prompt share most of their error.",
+    "panel_independence": {
+      "rule": "require a minimum N_eff over the shadow panel, not a minimum shadow COUNT",
+      "n_eff": "participation ratio of the shadow correlation spectrum, (sum L)^2 / sum L^2",
+      "why": "shadow_panel.py: a panel of four shadows can carry N_eff = 1.2. Counting shadows measures effort; the participation ratio measures how much of it was independent. ../model-ecology/phylogeny.py already computes this statistic for a family of estimators.",
+      "v1_gap": "v1 requires human_baseline + ai_low + ai_high. On one model, ai_low and ai_high share a family bias and are close to one shadow at two dial settings -- so the human is the only decorrelated element, and dropping it takes N_eff from 1.61 to 1.14 and the false-pass rate from 38% to 84%.",
+      "without_a_human": "supported, but the substitution is THREE MODEL FAMILIES, not three budgets on one model. Four families with no human reach N_eff 2.18 and false-pass 12.4%, stronger than v1's required panel with one. Adding a human on top of that changes N_eff by -0.02.",
+      "what_a_human_still_uniquely_supplies": "embodied context. Cold-stiffened proprioception is not a failure mode any model has, which argues for a human shadow on physical measurements specifically -- a different argument from the decorrelation one."
+    },
+    "consensus_denominator": {
+      "v1_rule": "'Variance must be compared against instrument resolution, not against zero.'",
+      "verdict": "an improvement over comparing to zero, and still the wrong denominator",
+      "correct_denominator": "the same-observer repeat variance -- the spread of one observer measuring twice at one dial",
+      "why": "instrument resolution bounds what the INSTRUMENT can say. Shadow spread is bounded by what an OBSERVER can repeat. If observer repeat variance exceeds instrument resolution, every panel reads 'exceeds_resolution' and the verdict is about the observer's repeatability, not about underdetermination."
+    }
   },
   "pedigree_fields": {
-    "required": ["value", "units", "physical_dial", "instrument_dial", "reasoning_dial", "calibration_status", "traceability", "gate_verdict"],
+    "required": [
+      "value",
+      "units",
+      "physical_dial",
+      "instrument_dial",
+      "reasoning_dial",
+      "calibration_status",
+      "traceability",
+      "gate_verdict"
+    ],
     "layer": "generator | physical | instrument | reasoning",
     "layer_note": "extends the three layers in ../reasoning-gate/guards.json with a fourth. A quantity whose value depends on who read it is reasoning-level, and a physical-scope claim resting on one is qualified, not supported -- the same rule gate.py already applies to generator-level support.",
     "gate_verdict": "per-guard result from ../reasoning-gate/, recorded with the number and inseparable from it"
@@ -66,5 +143,7 @@
     "rule": "a skip condition must be able to fail",
     "test": "state the outcome that would prevent the skip, and check the instrument can resolve it",
     "note": "shadow_design.py section 3: 'all four observers agree within instrument resolution' fires whatever the truth is, because observers reading one dial agree to within a division by construction. That is null-harness's CONSTANT_SILENT."
-  }
+  },
+  "based_on": "spec_v1.json / SPEC_V1.md, checked in verbatim. This file is v1 plus the corrections in CLAIM_TABLE.md; where the two differ, the difference is a finding, not a preference.",
+  "gate_mapping_note": "v1 section 6 assigns G-DIM the job of 'checks that dial settings are actually different compute levels'. G-DIM in ../reasoning-gate/guards.json voids ratios across unlike objects and does not do this. The job named is real and unassigned: nothing verifies that ai_low and ai_high actually produced different reasoning effort, and a model that ignores its budget parameter would collapse two declared shadows into one silently."
 }

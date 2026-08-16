@@ -1587,6 +1587,49 @@ underneath).
   load-bearing empirical question — does observer variance matter at any
   scale worth measuring — is untouched. Falsifier: run it. Seven claims
   `TP_001..007`. Stdlib only, CC0.
+  **Second drop: a generic v1 spec** (`SPEC_V1.md` + `spec_v1.json`,
+  verbatim) delivered for reuse, with the question sharpened to *does the
+  shadow pattern work with or without the human*. `shadow_panel.py` answers
+  it by modelling each shadow as `truth + b_shared + b_family + e_ind` and
+  reading the panel two ways — **N_eff** (participation ratio of the shadow
+  correlation spectrum, the statistic `model-ecology/phylogeny.py` already
+  computes) and **false-pass rate** (P(shadows agree | panel mean wrong by
+  more than tolerance)). **`TP_008`, the answer: yes without the human, but
+  the human's decorrelation must be REPLACED, not just removed.** Four model
+  families with no human reach N_eff 2.18 / false-pass 12.4%, *stronger* than
+  v1's required panel with a human (1.61 / 38.2%); adding the human back on
+  top moves N_eff by −0.02. Drop the human from v1's panel without
+  substituting and it collapses to N_eff 1.14 / false-pass **84%** — because
+  `ai_low` and `ai_high` **on one model** share a family bias and are close
+  to one shadow at two dial settings, leaving the human as the only
+  decorrelated element. The design variable is independent failure modes,
+  not human-vs-AI; the substitution is **three model families, not three
+  budgets** (a procurement fact, not an epistemics problem). What a human
+  still uniquely supplies is embodied context — cold-stiffened
+  proprioception is not a failure mode any model has — which argues for a
+  human shadow on *physical* measurements specifically, a different argument
+  from decorrelation. Ranking survives a 5-point sweep of the variance
+  components; absolute rates do not (`TP_013`). **`TP_009`:** the spec should
+  require a minimum **N_eff**, not a minimum shadow COUNT — a four-shadow
+  panel can carry N_eff 1.22, and counting shadows measures effort not
+  independence. **`TP_010`:** v1 improved the consensus denominator from zero
+  to *instrument resolution* and it is still wrong — instrument resolution
+  bounds what the INSTRUMENT can say, shadow spread is bounded by what an
+  OBSERVER can repeat, so the correct reference is same-observer repeat
+  variance (which is also `TP_003`'s missing null). **`TP_011`:** v1 §5 now
+  names `∂²/∂(physical)∂(reasoning)` explicitly while §2 rule 3 still says
+  "upgrade ONE dial at a time" — sharper contradiction, smaller fix: rule 4
+  ("never all three") would permit a 2² factorial over a pair, so replacing
+  only rule 3 with "vary dials in a 2² factorial over the pair whose
+  interaction is being tested" makes every mixed partial in §5 estimable at
+  four runs per pair. **`TP_012`:** v1 §6 assigns `G-DIM` the job "checks
+  that dial settings are actually different compute levels"; G-DIM voids
+  ratios across unlike objects and does not do this — and the job named is
+  real and unassigned, since **nothing verifies `ai_low` and `ai_high`
+  actually produced different reasoning effort**, so a model ignoring its
+  budget parameter collapses two declared shadows into one silently. The
+  check reads like a G-RES pair (declared budget separation vs observed
+  reasoning-token separation, with a margin). Thirteen claims `TP_001..013`.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
