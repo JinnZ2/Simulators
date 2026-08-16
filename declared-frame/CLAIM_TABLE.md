@@ -175,3 +175,48 @@ faster than without.
 
 **Falsifier:** run it. Two results, two declared blocks, one disagreement,
 and a record of where the parties looked first.
+
+---
+
+## DF_007 — every field in the block is switchable, so nothing adjudicates
+
+**who:** A · **status:** SUPPORTED
+
+The six fields are all **layer 1** in the sense the source notes give it:
+cultural frames, many, each internally valid, switchable, none privileged.
+`compare()` is right not to rank them — two results that count different
+people are two accountings, and neither is wrong.
+
+The cost is visible in one run. `layer_zero.py` §1 puts two pairs through
+the unmodified `compare()`:
+
+| pair | differs on | verdict |
+| --- | --- | --- |
+| A | `who_counts` — a pure convention | `NOT DIRECTLY COMPARABLE` |
+| B | a `boundary` that does not close — an input that physically crossed it entered the budget as zero | `NOT DIRECTLY COMPARABLE` |
+
+Same verdict. The tool has no way to say that one of them fails to
+conserve, because conservation is not one of the six fields and there is
+nothing in the block that is not a declaration. So the position *"this
+frame is internally coherent and does not match the shape"* is not
+statable by the instrument built to make frames comparable.
+
+**A seventh free-text field does not fix it.** Comparability here is string
+equality over declarations, so two frames declaring incompatible physics
+land back on `NOT DIRECTLY COMPARABLE`, which is where they already are.
+The repair is an **evaluated** term rather than a compared one: an
+inputs/outputs list per frame, with units, and one check for closure. Two
+numbers and a subtraction — the `../reasoning-gate/` `G-RES` shape, where
+the author declares a pair and the tool does arithmetic on it.
+
+`K18` in `../measurement-fork/` specifies exactly that audit (name every
+input and every disposal path, which are inside the boundary, which
+outside, and who set the line). It sits there as a widen move pointed at a
+design. Here it would be a check.
+
+**Falsifier:** a free-text seventh field, or any string-compared field,
+that returns a different verdict for pair B than for pair A. If declaration
+alone can carry the distinction, the evaluated-term argument is
+unnecessary.
+
+**Evidence:** `layer_zero.py` §1–§2.

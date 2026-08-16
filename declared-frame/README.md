@@ -24,13 +24,15 @@ load-bearing.
 | [`check_frame.py`](check_frame.py) | The delivered checker, **verbatim**. |
 | [`frames/`](frames/) | The delivered worked example, plus its counterpart so the comparison runs. |
 | [`frame_audit.py`](frame_audit.py) | Null-tests the comparability verdicts. |
-| [`CLAIM_TABLE.md`](CLAIM_TABLE.md) | Six claims (`DF_001..006`). |
+| [`layer_zero.py`](layer_zero.py) | Every field is switchable, so nothing adjudicates. |
+| [`CLAIM_TABLE.md`](CLAIM_TABLE.md) | Seven claims (`DF_001..007`). |
 | [`samples/`](samples/) | Pinned output. |
 
 ```bash
 python3 check_frame.py frames/panel_conversion.json
 python3 check_frame.py frames/panel_conversion.json frames/leaf_conversion.json
 python3 frame_audit.py
+python3 layer_zero.py
 ```
 
 Standard library only, deterministic.

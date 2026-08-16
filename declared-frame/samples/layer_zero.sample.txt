@@ -1,0 +1,85 @@
+
+LAYER 0 AND LAYER 1 IN THE DECLARED-FRAME BLOCK
+subject: check_frame.compare(), unmodified
+
+========================================================================
+1  every field in the block is switchable
+========================================================================
+  A  differ on a convention (who_counts):
+       NOT DIRECTLY COMPARABLE
+
+  B  differ on a boundary that does not close (an input that
+     crossed it entered the budget as zero):
+       NOT DIRECTLY COMPARABLE
+
+  same verdict for both: True
+
+  The tool reports B exactly as it reports A: two declared
+  frames that differ. It has no way to say that one of them
+  fails to conserve, because conservation is not one of the
+  six fields and there is nothing in the block that is not
+  a declaration.
+
+  That is the layer-1-only reading arriving in a tool: every
+  frame is a peer, and 'this frame is coherent internally and
+  does not match the shape' is not a statable verdict.
+
+========================================================================
+2  a seventh free-text field would not fix it
+========================================================================
+  The obvious repair is a seventh field. It does not work, and
+  the reason is the same reason the other six work:
+
+  field                  checked by
+  --------------------------------------------------------
+  boundary               the reader; the tool compares strings
+  horizon                the reader; the tool compares strings
+  who_counts             the reader; the tool compares strings
+  sign_source            the reader; the tool compares strings
+  logic                  the reader; the tool compares strings
+  observer_access        the reader; the tool compares strings
+  (proposed) layer_0     ??
+
+  Every existing field is a DECLARATION, and comparability is
+  string equality over declarations. A layer-0 field would have
+  to be the one entry the tool can evaluate rather than compare --
+  otherwise two frames declaring incompatible physics come back
+  NOT DIRECTLY COMPARABLE, which is where they already are.
+
+  Shape that would work, and it is not a field:
+
+      an inputs/outputs list per frame, with units, and one
+      check -- does the budget close
+
+  That is two numbers and a subtraction, and it is the same shape
+  as ../reasoning-gate/ G-RES: a pair the author declares and the
+  tool arithmetically checks, not a sentence it string-matches.
+  A frame whose budget does not close is not one of several valid
+  readings; it is refused, and the refusal comes from a term the
+  frame did not author.
+
+  K18 in ../measurement-fork/ specifies precisely this audit --
+  name every input and every disposal path, which are inside the
+  boundary, which outside, and who set the line. It sits there as
+  a widen move against a design. Here it would be a check.
+
+========================================================================
+READING
+========================================================================
+
+  The six fields are all layer 1 and the tool is right not to rank them.
+  Two frames that differ on who_counts are two accountings, and neither is
+  wrong.
+
+  The cost is that a frame whose budget does not close gets the same
+  verdict as a frame that merely counts different people. Nothing in the
+  block is unswitchable, so nothing adjudicates, and the position "this
+  frame is internally coherent and does not match the shape" cannot be
+  stated by the tool that exists to make frames comparable.
+
+  A seventh free-text field inherits the same problem, because
+  comparability here is string equality over declarations. The repair is
+  an evaluated term rather than a compared one: inputs and outputs with
+  units, and one check for closure. Two numbers and a subtraction, the
+  G-RES shape.
+

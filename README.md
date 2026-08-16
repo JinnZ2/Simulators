@@ -49,7 +49,8 @@ underneath. Read those before running the corresponding script.
 | `reasoning-dial/` | two drops on thinking-budget as a dimension | dial gradients, a knee-rule defect, an overthinking branch, fifteen `RD_*` claims |
 | `triad-playground/` | (physical, instrument, reasoning) triads | triad schema + generated checklist, shadow-panel N_eff analysis, thirteen `TP_*` claims |
 | `measurement-fork/` | one system, three measurement designs | four-cell design diff, adjudicated growth edge, fifteen `MF_*` claims |
-| `declared-frame/` | any measurement, model, or claim | six-field frame block + comparability check, six `DF_*` claims |
+| `declared-frame/` | any measurement, model, or claim | six-field frame block + comparability check, seven `DF_*` claims |
+| `anchor-interval/` | a system fitted to a corpus it writes into | coherence-up/coupling-down loop, two graded detectors, provenance regimes, eleven `ANC_*` claims |
 | `tools/` | shared utilities | validators, substitution toolkits, gate-drift check |
 
 See [`SYNTHESIS.md`](SYNTHESIS.md) for the cross-folder reading and

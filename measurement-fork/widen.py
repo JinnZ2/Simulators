@@ -77,6 +77,18 @@ STRUCTURAL = (
     ("ask who benefits from each possible answer",
      "the design was chosen by someone, and choice of measurand is not "
      "neutral"),
+    # K17, relocated. It was specified as a probe with object_of=instrument,
+    # which is inside quantities.OBJECTS and so would have been legal. It is
+    # here instead because of what it points AT: it takes no reading from the
+    # system, it decomposes the model's own terms, and it applies unchanged
+    # to any model. That is a question about a design, which is what this arm
+    # holds. Recorded as MF_016.
+    ("decompose each term in the model and tag each component with its "
+     "object_of; a count above one is a flag",
+     "a single word can carry several quantities with different object_of "
+     "and different rates. Summing them can cancel a real movement, which "
+     "is Simpson's paradox on the decomposition rather than the ecological "
+     "fallacy"),
 )
 
 BLIND = ("this is not an instrument and has no blindness map. It is a "

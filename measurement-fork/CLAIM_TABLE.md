@@ -517,3 +517,42 @@ intervals spanning the plausible lag range. Then the units do not matter and
 this claim is unnecessary.
 
 **Evidence:** `proposed_probes.py` §3.
+
+---
+
+## MF_016 — K17 is a widen move, and the schema does not catch it
+
+**who:** A · **status:** SUPPORTED
+
+`K17 aggregation_depth` was specified with `object_of = "instrument"`,
+which **is** inside `quantities.OBJECTS`, so unlike `K18` it would have
+been constructible as a legal quantity. `MF_008`'s type-system argument
+does not reach it.
+
+It still belongs in the widen arm, and the reason is what it points at.
+Every K-probe takes a reading from the system under study. K17 takes none:
+it decomposes the terms of the **model**, tags each component, and counts.
+It applies unchanged to any model, and it would return a number on a design
+with no system attached at all. That is a question pointed at a design,
+which is the widen arm's whole content.
+
+So the closed vocabulary is necessary and not sufficient. `MF_008` catches
+probes whose `object_of` is outside `OBJECTS`; it cannot catch a probe with
+a legal `object_of` that is nonetheless about the design. Nothing mechanical
+separates those, and the adjudication here is by reading the protocol —
+the same way `residual_audit.py` and `proposed_probes.py` adjudicate.
+
+Landed as a `STRUCTURAL` entry in `widen.py`, which puts it under
+`option()` with `object_of = "design"`, so `is_quantity()` drops it from
+the coverage pool automatically.
+
+**Prior-art correction carried with it:** the source notes match K17 to the
+ecological fallacy. That is individual-from-aggregate inference and is the
+wrong object. The mechanism K17 names is **sign reversal on
+decomposition** — Simpson's paradox — with the Lucas critique and the
+capital-aggregation debates as the nearer relatives.
+
+**Falsifier:** a rule computable from the probe record alone — not from
+reading the protocol — that separates design-directed probes from
+system-directed ones. If one exists, this adjudication should be replaced
+by it, and `MF_009`'s classifier problem gets smaller by the same move.

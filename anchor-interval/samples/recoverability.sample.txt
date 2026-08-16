@@ -1,0 +1,152 @@
+
+RECOVERABILITY: PROVENANCE FIRST, TIMING SECOND
+
+========================================================================
+1  REGIME I -- independent provenance: timing decides
+========================================================================
+  Acquisition needs t_acq consecutive stable steps. Shifts arrive
+  with mean spacing t_shift. Sampling longer buys precision and
+  costs survival probability, so there is an interior optimum.
+
+  t_shift = 20
+    t_acq      P(window)      err | success    expected err    
+    ----------------------------------------------------------
+    2          0.9048         0.7071           0.7350          
+    5          0.7788         0.4472           0.5695          
+    10         0.6065         0.3162           0.5853          
+    20         0.3679         0.2236           0.7144          
+    40         0.1353         0.1581           0.8861          
+    80         0.0183         0.1118           0.9837          
+    160        0.0003         0.0791           0.9997          
+    optimum at t_acq = 6, expected err 0.5616
+
+  t_shift = 60
+    t_acq      P(window)      err | success    expected err    
+    ----------------------------------------------------------
+    2          0.9672         0.7071           0.7167          
+    5          0.9200         0.4472           0.4914          
+    10         0.8465         0.3162           0.4212          
+    20         0.7165         0.2236           0.4437          
+    40         0.5134         0.1581           0.5678          
+    80         0.2636         0.1118           0.7659          
+    160        0.0695         0.0791           0.9360          
+    optimum at t_acq = 12, expected err 0.4176
+
+  t_shift = 200
+    t_acq      P(window)      err | success    expected err    
+    ----------------------------------------------------------
+    2          0.9900         0.7071           0.7100          
+    5          0.9753         0.4472           0.4609          
+    10         0.9512         0.3162           0.3496          
+    20         0.9048         0.2236           0.2975          
+    40         0.8187         0.1581           0.3107          
+    80         0.6703         0.1118           0.4046          
+    160        0.4493         0.0791           0.5862          
+    optimum at t_acq = 25, expected err 0.2940
+
+  The optimum is interior and finite, it MOVES with t_shift, and
+  the expected error goes to zero as t_shift grows. Everything
+  here is an argument about scheduling.
+
+========================================================================
+2  REGIME II -- downstream provenance: sampling longer is inert
+========================================================================
+  Pool is a mix. Fraction f of samples came through the system
+  being corrected and carry its bias (0.35 here); the rest are
+  independent. Averaging removes the variance, not the bias.
+
+  n       f=0.00      f=0.10      f=0.30      f=0.60      f=1.00      
+  --------------------------------------------------------------------
+  10      0.3580      0.3580      0.2180      0.1830      0.0080      
+  100     0.0470      0.0260      0.0510      0.1595      0.3030      
+  1000    0.0289      0.0594      0.1290      0.2368      0.3789      
+  10000   0.0068      0.0425      0.1140      0.2196      0.3568      
+  100000  0.0009      0.0359      0.1062      0.2105      0.3509      
+  floor   0.0000      0.0350      0.1050      0.2100      0.3500      
+
+  Every column with f > 0 converges to f x bias and stops. The
+  10,000x increase in sample count between the first and last row
+  buys nothing once the floor is reached.
+
+  Sample count needed to reach an error of 0.05:
+    f          n required      
+    ------------------------------
+    0.00       400             
+    0.10       785             
+    0.14       10102           
+    0.30       unreachable at any n
+    0.60       unreachable at any n
+    1.00       unreachable at any n
+
+  Above f = 0.143 the target is not slow to reach. It is outside
+  the reachable set, and no schedule changes that.
+
+========================================================================
+3  the measurement that decides which regime you are in
+========================================================================
+  ONE number separates them:
+
+      f = fraction of the re-acquisition pool that is downstream
+          of the system being corrected
+
+  and it is a provenance audit, not a statistical estimate. It is
+  answered by labelling the pool, not by analysing it.
+
+  Verdict column is against a STATED tolerance of 0.05, which is
+  a choice and not a fact. Change the tolerance and the boundary
+  moves; the floor does not.
+
+  f          error floor            at tolerance 0.05             
+  ----------------------------------------------------------------
+  0.00       0.0000                 retrain remedy is sound       
+  0.02       0.0070                 retrain remedy is sound       
+  0.10       0.0350                 retrain remedy is sound       
+  0.35       0.1225                 irrecoverability holds        
+  0.70       0.2450                 irrecoverability holds        
+
+  So the contradiction resolves into a precondition nobody states.
+
+    If f is near zero, K15 (baseline_freshness, in
+    ../measurement-fork/) collapses into an ops step and the
+    mediation prediction that rests on it fails.
+
+    If f is not near zero, the retraining remedy has a hidden
+    precondition. f is not among the quantities the remedy asks
+    you to report, so a pipeline can satisfy every published step
+    of it and still sit above the floor. Whether any given paper
+    reports f is a literature question and is NOT checked here --
+    the source drop's citation markers are unresolvable as
+    delivered, so no literature claim in this folder is verified.
+
+  Both sides lose something on a measurement neither has run.
+
+  Second axis, separate from f and NOT settled by it: the
+  irrecoverability position also asserts no stable plateau is
+  guaranteed -- change is continuous, or the next shift arrives
+  before the sample completes. That is section 1's t_shift, and
+  it is a timing argument. f decides whether timing is even the
+  right axis. Only if f is near zero does t_shift get to matter.
+
+========================================================================
+READING
+========================================================================
+
+  The drift literature's remedy and the irrecoverability claim contradict
+  each other only if they are read as claims about one regime. They are
+  claims about two, and the regimes are separated by a single measurable
+  quantity -- the downstream fraction f of the re-acquisition pool.
+
+  In REGIME I the argument is entirely about scheduling: the optimal
+  acquisition length is interior, finite, and moves with the shift
+  interval.
+
+  In REGIME II scheduling is inert. Error floors at f x bias, the floor is
+  independent of sample count, and above f = 0.14 a 0.05 target is outside
+  the reachable set at any n. Recovery is by re-grounding on a reference
+  the system did not generate -- which is the anchor interval in
+  corpus_loop.py, arrived at from the other end.
+
+  f is a provenance audit, answered by labelling the pool. Nobody reports
+  it, and both positions have something to lose depending on how it comes
+  back.
+

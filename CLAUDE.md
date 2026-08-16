@@ -1784,8 +1784,81 @@ underneath).
   UNVERIFIED: nothing has been attached to a real result, and the
   load-bearing question — does declaring the frame change what anyone does
   — is a claim about a process, measurable as whether two disagreeing
-  parties given both blocks locate the disagreement faster. Six claims
-  `DF_001..006`. Stdlib only, CC0.
+  parties given both blocks locate the disagreement faster. **`DF_007`,
+  added from the `anchor-interval/` drop's layer-0 / layer-1 split:** every
+  one of the six fields is layer 1 — switchable, declared, none privileged
+  — so nothing in the block adjudicates. `layer_zero.py` puts two pairs
+  through the unmodified `compare()`: one differing on `who_counts` (a pure
+  convention) and one differing on a `boundary` that does not close (an
+  input that physically crossed it entered the budget as zero). **Same
+  verdict, `NOT DIRECTLY COMPARABLE`, for both** — so "this frame is
+  internally coherent and does not match the shape" is not a statable
+  verdict for the instrument built to make frames comparable. A seventh
+  free-text field inherits the problem, since comparability here is string
+  equality over declarations; the repair is an EVALUATED term rather than a
+  compared one — inputs/outputs with units and one closure check, which is
+  the `reasoning-gate/` `G-RES` shape, and which `measurement-fork/`'s
+  `K18` already specifies as a widen move. Seven claims `DF_001..007`.
+  Stdlib only, CC0.
+- `anchor-interval/` — A drop about a system fitted to a corpus it also
+  writes into. Notes verbatim in `SOURCE_DROP.md`; three of the structures
+  in them are runnable and this folder runs them. **`corpus_loop.py`:** the
+  loop `corpus → model → outputs → corpus` needs no adversary, only a fit
+  that is not an identity map (`lam` — the shrinkage any regularized or
+  capacity-limited estimator applies). Coupling to an unauthored substrate
+  degrades 0.3604 → 0.4141 while both statistics computable from inside
+  improve or go quiet (coherence 0.0677 → 0.0481, corpus shift 0.0520 →
+  0.0035); at `lam = 0` the loop is a fixed point and the drift falls from
+  +0.0537 to +0.0063, so the shrinkage carries it, not the feedback.
+  **Two detectors, graded by `null-harness/`.** `D1` (model vs the corpus
+  it was fitted to) is `CONSTANT_SILENT` structurally and gets QUIETER as
+  the drift proceeds — it fell 29.0% while coupling error rose 14.9%,
+  because it measures how much of the corpus the model has yet to write.
+  `D2` (corpus now vs corpus then) has a reachable fire branch and on the
+  known-null / known-signal sweep — the two arms identical in every line
+  but the provenance of what is injected — comes back `NO_DISCRIMINATION`,
+  and worse: **`FP ≥ TP` at every threshold**, since correcting a 0.35 bias
+  displaces the corpus more than shrinking toward a pooled mean does, so a
+  monitor tuned to fire on real degradation fires harder on real repair.
+  Hence the anchor interval must be SCHEDULED — confidence-triggered
+  anchoring fires in 0 of 24 generations and returns the no-anchoring
+  number exactly, while scheduled anchoring recovers monotonically in
+  frequency (0.3867 every-12 → 0.1629 every-2). **`moving_reference.py`:**
+  "the model drifted" is a difference between two moving things reported as
+  a property of one. Under `reported = a·c + b`, a capability rising 117%
+  with a fixed ruler and a capability that never moves under a ruler
+  stretching 117% produce the same published number to `5.6e-17` — a rank
+  problem, not a precision problem. A held-fixed benchmark IS the right
+  measurement and buys a SHARE, not a capability: it identifies capability
+  only up to its own unknown gain and offset, so ratios of differences are
+  identified (0.428571 exactly) and levels are not. Seven co-moving terms
+  and one published number give `N_eff = 1.22` at loading 0.95 against an
+  apparatus floor of 6.41 at loading 0 (participation ratio, the
+  `model-ecology/phylogeny.py` statistic on a new substrate); and the
+  co-movement is not removable by a better ablation because the
+  architectural term was SELECTED against the corpus — attention shapes to
+  language statistics, tokenizers to the writing system — so the covariance
+  predates the experiment. **`recoverability.py`:** the drift literature's
+  retrain remedy and the irrecoverability claim are not two opinions about
+  one regime but two regimes, separated by one measurable quantity `f`, the
+  fraction of the re-acquisition pool downstream of the system being
+  corrected. Regime I (independent provenance) is entirely about
+  scheduling — the optimal acquisition length is interior and finite and
+  moves with the shift interval (`t_acq` = 6 / 12 / 25 at `t_shift` = 20 /
+  60 / 200). Regime II (downstream provenance) floors at `f·b` and a
+  10,000× increase in sample count buys nothing; above `f = 0.143` at bias
+  0.35 and a stated tolerance of 0.05 the target is outside the reachable
+  set at any `n`. Both sides lose something on a measurement neither has
+  run: `f ≈ 0` collapses `measurement-fork/`'s `K15` into an ops step and
+  fails the mediation prediction resting on it; `f` above the floor means
+  the published remedy has a precondition it does not ask anyone to report.
+  Eleven claims `ANC_001..011`, two of them deliberately not closed —
+  `ANC_010` UNVERIFIED (the drop's own citation markers are unresolvable as
+  delivered and one venue attribution is flagged unconfirmed by the drop
+  itself, so no claim here rests on a literature fact) and `ANC_011` OPEN
+  (the creek-crossing case — "literature contains what survives removal of
+  the body" — with `inverseminar/`'s `CANNOT DERIVE` channel named as the
+  instrument and no round yet run). Stdlib only, deterministic, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
