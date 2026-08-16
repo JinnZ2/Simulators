@@ -1,0 +1,4 @@
+examples/photosynthesis.json: all six fields declared
+
+VERDICT: NOT DIRECTLY COMPARABLE
+         differs on boundary, horizon, who_counts -- this is a frame difference, not a finding

@@ -1,0 +1,140 @@
+
+CHECK_FRAME v1 -> v2
+both versions loaded side by side, neither modified
+
+========================================================================
+1  DF_002 survives unchanged -- omission is still the more confident verdict
+========================================================================
+  The rule the document calls load-bearing:
+
+      UNKNOWN is a legal value. OMISSION is not.
+      An unpopulated field is a visible gap. An omitted field
+      reads as absence of the issue.
+
+  So omission is the worse of the two, and the tool should treat
+  it at least as cautiously.
+
+  side B       v1                       v2                              
+  ----------------------------------------------------------------------
+  omitted      NOT DIRECTLY COMPARABLE  NOT DIRECTLY COMPARABLE         
+  'unknown'    UNDETERMINED             UNDETERMINED                    
+
+  Unchanged. `unknowns()` in v2 reads
+  `str(frame.get(f, "")).strip().lower() == "unknown"`, so a
+  MISSING field becomes "", is not 'unknown', falls through to
+  the core diff, and compares as a value against a real string.
+
+  v2 makes it visible in a single run, which v1 did not:
+
+      a.json: all six fields declared
+      b.json: OMITTED field 'horizon'. Write 'unknown' instead -- omission reads as absence of the issue.
+      
+      VERDICT: NOT DIRECTLY COMPARABLE
+               differs on horizon -- this is a frame difference, not a finding
+
+  The tool prints 'omission reads as absence of the issue' and
+  then, three lines down, issues the settled verdict on that
+  field. The warning and the verdict contradict each other in one
+  stdout. Fix is the same three lines as before: treat a missing
+  core field as undetermined, tagged omitted rather than declared.
+
+========================================================================
+2  DF_004 is worse in v2 -- the exit code now tracks nothing
+========================================================================
+  v1 returned rc=1 when a block was malformed, so `check_frame.py
+  a b && use_both` at least caught a broken block.
+
+  v2's main() returns 0 on every path except a missing argument.
+
+    malformed block (field omitted)    rc = 0
+    well-formed, not comparable        rc = 0
+    identical frames                   rc = 0
+
+  Every case returns 0. The verdict IS now scriptable -- it comes
+  back from compare() as a value rather than as printed text --
+  so the fix is to route it into the exit code, which v1 could
+  not have done. One line, and only reachable because of the
+  rewrite:
+
+      DIRECTLY COMPARABLE      -> 0
+      LOGIC MISMATCH           -> 1
+      NOT DIRECTLY COMPARABLE  -> 1
+      UNDETERMINED             -> 2   (not resolved, not failed)
+
+========================================================================
+3  new in v2 -- a single verdict loses what v1 printed
+========================================================================
+  A pair that is BOTH undetermined on one core field and
+  genuinely different on another:
+
+      A.horizon = 'instantaneous conversion rate'
+      B.horizon = 'unknown'
+      A.boundary and B.boundary differ substantively
+
+    v2:  UNDETERMINED
+         unknown fields present: a=- b=['horizon']
+
+    v1:  UNDETERMINED + NOT DIRECTLY COMPARABLE
+
+  v2 checks `unknowns()` first and returns, so UNDETERMINED
+  preempts and the boundary difference is never reported. v1
+  printed both.
+
+  The precedence is RIGHT -- an unknown field should not be
+  resolved into a comparability claim -- and the loss is in the
+  return type, not the ordering. A verdict plus a findings list
+  keeps both, which is the shape ../../reasoning-gate/ already
+  uses: one status, and notes that do not change it.
+
+========================================================================
+4  DF_007 still holds -- nothing in the block adjudicates
+========================================================================
+  A  differ on a convention (who_counts)
+       v2: NOT DIRECTLY COMPARABLE
+  B  differ on a boundary that does not close -- an input that
+     physically crossed it entered the budget as zero
+       v2: NOT DIRECTLY COMPARABLE
+
+  same verdict: True
+
+  v2's Cost and Growth sections are new and both are layer-1
+  statements. Nothing added between versions evaluates anything,
+  so a frame whose budget does not close still gets the verdict a
+  frame that counts different people gets.
+
+  The Growth rule is worth stating because the drop already
+  follows it: 'the format grows by adding a declared field, never
+  by widening an existing one. Widening is the aggregation
+  failure.' patterns.json adds PROXY SUBSTITUTION as an EIGHTH
+  mechanism rather than widening one of the seven -- which is the
+  rule applied to a different artifact in the same drop.
+
+========================================================================
+READING
+========================================================================
+
+  v2 is a rewrite and its main gain is real: compare() returns a
+  (verdict, why) pair instead of printing, so the verdict is scriptable
+  for the first time.
+
+  DF_002 survives unchanged. A missing core field still becomes the empty
+  string, still falls through to the value comparison, and still produces
+  NOT DIRECTLY COMPARABLE where the same gap declared as `unknown`
+  correctly produces UNDETERMINED. v2 makes it worse to look at and easier
+  to fix: the OMITTED warning and the settled verdict now appear in one
+  stdout, three lines apart.
+
+  DF_004 is worse. v1 returned rc=1 on a malformed block; v2 returns 0 on
+  every path. The repair is one line and is only reachable because of the
+  rewrite -- route the returned verdict into the exit code.
+
+  New in v2: the single-verdict return preempts. A pair that is
+  undetermined on one core field and substantively different on another
+  comes back UNDETERMINED with the difference unreported, where v1 printed
+  both. The precedence is right; the return type is what loses. A verdict
+  plus a findings list keeps both.
+
+  DF_007 still holds. Cost and Growth are both layer-1 additions, nothing
+  added evaluates anything, and a frame whose budget does not close still
+  scores identically to one that merely counts different people.
+

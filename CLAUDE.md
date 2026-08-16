@@ -1831,8 +1831,57 @@ underneath).
   equality over declarations; the repair is an EVALUATED term rather than a
   compared one — inputs/outputs with units and one closure check, which is
   the `reasoning-gate/` `G-RES` shape, and which `measurement-fork/`'s
-  `K18` already specifies as a widen move. Seven claims `DF_001..007`.
-  Stdlib only, CC0.
+  `K18` already specifies as a widen move.
+  **Second drop, landed verbatim in `v2/`** (v1 stays at the parent level
+  unmodified, so both are inspectable as delivered): a v2 `FRAME.md` adding
+  **Cost** and **Growth** sections, a REWRITTEN `check_frame.py`, and the
+  new `patterns.json` — the `uninstrumented/` register turned into regex
+  triggers over text, with a `check` question per mechanism and an eighth
+  mechanism `PROXY SUBSTITUTION`. No runner shipped, so `scan.py` is
+  reconstructed with `[CHOICE]` marks (case-insensitivity, word boundaries,
+  hit dedup). **`DF_009`, the result that needs no corpus:** the register's
+  canonical `BUDGET_BOUNDARY` case is leaf vs panel, this drop ships both
+  halves as declared-frame examples, and **the scanner returns ZERO on
+  both** — the triggers catch the RHETORIC of a comparison (`more efficient
+  than`, `outperforms`) and not the comparison, so two numbers side by side
+  with no comparative, which is the usual result-line form, is invisible to
+  all eight `BUDGET BOUNDARY` triggers; and the register's own `VISIBLE AS`
+  phrasing ("the tree is inefficient at photosynthesis") fires under the
+  WRONG mechanism, `SCORED AS WASTE` via `inefficient`, handing the reader
+  the wrong `check` question. Both repairs cheap: a bare-numbers trigger,
+  and letting mechanisms co-fire — which is `uninstrumented/` `UNI_003`
+  arriving in the scanner. **`DF_010`:** triage load is the quantity the
+  design turns on by its own statement ("every hit is a candidate for
+  triage, not a finding") and it is low — 276 candidates over 201 markdown
+  files / 306,635 words = **0.9 per 1000 words**, with `--raw` (no word
+  boundaries) costing +42% for no gain. **No precision figure is reported
+  and none is reportable from this repo**: this is a corpus ABOUT
+  measurement failure written in the triggers' own vocabulary — `UNVERIFIED`
+  is a claim-table status code here, so `(unverified|uncorroborated)` fires
+  52 times on the repo's own verdict vocabulary. 4 triggers produce 161 of
+  276 candidates (58%) and 45 of 69 never fire, both corpus-conditional and
+  neither grading the list (`SCALAR DEMAND` is 7-of-8 silent because there
+  are no survey instruments here). One trigger IS the list's own problem:
+  `slack`, a four-letter common noun with a proper-noun homograph.
+  **An expectation checked and failed:** use-mention was expected to
+  dominate — `uninstrumented/README.md` returns 2 hits in 986 words and
+  `v2/FRAME.md` returns none, because the triggers are written in the
+  vocabulary of the FAILING document, not of the mechanism, and the two
+  barely overlap. **`DF_008`:** the v2 rewrite's real gain is that
+  `compare()` RETURNS `(verdict, why)` instead of printing, making the
+  verdict scriptable for the first time; `DF_002`, `DF_003` and `DF_007`
+  all survive unchanged, and `DF_004` is WORSE (rc=0 on every path where v1
+  returned 1 on a malformed block) — with the repair now one line and only
+  reachable because of the rewrite. New in v2: the single-verdict return
+  PREEMPTS, so a pair both undetermined on one core field and substantively
+  different on another comes back `UNDETERMINED` with the difference
+  unreported where v1 printed both; the precedence is right and the loss is
+  in the return TYPE, arguing for verdict-plus-findings, the shape
+  `reasoning-gate/` already uses. v2's `Growth` rule ("the format grows by
+  adding a declared field, never by widening an existing one. Widening is
+  the aggregation failure") is followed by the drop itself — `PROXY
+  SUBSTITUTION` is an eighth mechanism, not a widened one. Ten claims
+  `DF_001..010`. Stdlib only, CC0.
 - `anchor-interval/` — A drop about a system fitted to a corpus it also
   writes into. Notes verbatim in `SOURCE_DROP.md`; three of the structures
   in them are runnable and this folder runs them. **`corpus_loop.py`:** the

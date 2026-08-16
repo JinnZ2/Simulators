@@ -220,3 +220,136 @@ alone can carry the distinction, the evaluated-term argument is
 unnecessary.
 
 **Evidence:** `layer_zero.py` §1–§2.
+
+---
+
+## DF_008 — the v2 rewrite makes the verdict scriptable and leaves three findings standing
+
+**who:** A · **status:** SUPPORTED
+
+`v2/check_frame.py` is a rewrite, not a patch. `compare()` returns a
+`(verdict, why)` pair instead of printing, which is a real gain: the verdict
+is scriptable for the first time.
+
+| finding | v2 |
+| --- | --- |
+| `DF_002` omission is the more confident verdict | **unchanged** |
+| `DF_003` comparability is exact string equality | **unchanged** |
+| `DF_004` exit code tracks nothing useful | **worse** — rc=0 on every path, where v1 returned 1 on a malformed block |
+| `DF_007` nothing in the block adjudicates | **unchanged** |
+
+`DF_002` is now visible in a single stdout: the tool prints *"omission reads
+as absence of the issue"* and three lines later issues the settled verdict on
+that field. Warning and verdict contradict each other in one run.
+
+`DF_004`'s repair is one line and is **only reachable because of the
+rewrite** — route the returned verdict into the exit code
+(`DIRECTLY COMPARABLE` → 0, `LOGIC MISMATCH` / `NOT DIRECTLY COMPARABLE` → 1,
+`UNDETERMINED` → 2).
+
+**New in v2:** the single-verdict return preempts. A pair that is both
+undetermined on one core field and substantively different on another comes
+back `UNDETERMINED` with the difference unreported; v1 printed both. The
+precedence is right — an unknown field should not be resolved into a
+comparability claim — and the loss is in the return TYPE. A verdict plus a
+findings list keeps both, which is the shape `../reasoning-gate/` already
+uses.
+
+**Falsifier:** a caller for whom the collapsed verdict is sufficient — one
+that never needs to know a second core field differed once the first was
+undetermined. Then the return type is adequate and this is decoration.
+
+**Evidence:** `v2/v2_audit.py` §1–§4.
+
+---
+
+## DF_009 — the scanner returns zero on the drop's own worked example
+
+**who:** A · **status:** SUPPORTED
+
+`v2/patterns.json` turns `../uninstrumented/`'s register into regex triggers
+over text, with a `check` question per mechanism. It adds an eighth
+mechanism, `PROXY SUBSTITUTION`.
+
+The register's canonical `BUDGET_BOUNDARY` case is leaf vs panel, and this
+drop ships both halves of it as declared-frame examples. **The scanner
+returns zero candidates on both.** No corpus, no threshold, no adjudication.
+
+```
+the register's own VISIBLE AS line   -> SCORED AS WASTE ('inefficient')
+the delivered result string          -> NO HIT
+stated as a comparative              -> BUDGET BOUNDARY ('more efficient than')
+stated with the noun                 -> BUDGET BOUNDARY ('conversion efficiency')
+```
+
+**(a)** The triggers catch the RHETORIC of a comparison, not the comparison.
+Two numbers side by side with no comparative — the usual form in a result
+line — is invisible to all eight `BUDGET BOUNDARY` triggers.
+
+**(b)** The register's own phrasing fires under the WRONG mechanism, so a
+reader triaging that hit is handed the wrong `check` question.
+
+Both repairs are cheap: a trigger for the bare-numbers form, and letting
+mechanisms co-fire — which is `UNI_003` arriving in the scanner.
+
+**Falsifier:** a `BUDGET_BOUNDARY` trigger that fires on
+`"silicon PV converts ~22% of incident photons; leaf converts ~1-2%"`
+without also firing across a corpus at a rate that breaks the triage load in
+`DF_010`. The two constraints are what make this non-trivial.
+
+**Evidence:** `v2/scan_audit.py` §1.
+
+---
+
+## DF_010 — triage load is low; no precision figure is reportable from this repo
+
+**who:** A · **status:** SUPPORTED (load) · UNVERIFIED (precision)
+
+`patterns.json` states its own standard — *"every hit is a candidate for
+triage, not a finding"* — so the binding quantity is not precision but how
+many `check` questions a human must answer per unit of text.
+
+**≈1.0 candidate per 1000 words** over ~300k words of repository markdown;
+dropping word boundaries costs roughly 40% more for no obvious gain. A
+5000-word document arrives with about five questions attached. Affordable.
+
+**The precision figure is not reported and will not be from this corpus.**
+This repository is a corpus *about* measurement failure written in the
+triggers' own vocabulary: `UNVERIFIED` is a claim-table status code here, so
+`(unverified|uncorroborated)` fires dozens of times on the repo's own
+verdict vocabulary. `benchmark`, `compliance`, `proxy for`, `tacit` are all subject
+terms. Scoring a false-positive rate on it would measure the corpus.
+
+Two corpus-conditional numbers, neither of which grades the trigger list:
+**4 triggers produce ~57% of all candidates**, and **more than half of the 69
+triggers never fire**. `SCALAR DEMAND` has 7 of 8 silent because there are no
+survey instruments here — a silent trigger on the wrong corpus is not a dead
+trigger.
+
+One trigger is the list's own problem: `slack` is a four-letter common noun
+with a proper-noun homograph, and its hits mix Slack the product, *the
+slack rope*, a code identifier, and genuine idle-capacity usage.
+
+**An expectation that was checked and failed:** use-mention was expected to
+dominate — a surface-word scanner should not distinguish a document
+exhibiting a failure from one describing it. `uninstrumented/README.md`
+returns 2 hits in 986 words and `v2/FRAME.md` returns none. The triggers are
+written in the vocabulary of the failing document, not of the mechanism, and
+the two barely overlap. That separation is load-bearing and is not visible
+from reading the file.
+
+**The corpus is live, and writing the audit changed it.** `v2/README.md`
+quotes the triggers in order to discuss them, so it entered the corpus as
+text — and moved five triggers from never-firing to firing, three of them the
+`SCALAR DEMAND` triggers reported silent *because this corpus contains no
+survey instruments*. That reading is still correct and they now fire on the
+document explaining that they do not. Counts are a snapshot, not a fixture;
+no exact figure is quoted outside the pinned sample. This is
+`../anchor-interval/`'s moving reference occurring rather than being
+described.
+
+**Falsifier:** an outside corpus — one not about its own subject — scored
+for precision. That is the measurement this claim exists to say has not been
+run.
+
+**Evidence:** `v2/scan_audit.py` §2–§5.

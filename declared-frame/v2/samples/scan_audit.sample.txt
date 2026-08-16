@@ -1,0 +1,223 @@
+
+GRADING patterns.json
+8 mechanisms, 69 triggers
+
+========================================================================
+1  the drop's own worked example of BUDGET BOUNDARY
+========================================================================
+  The register's canonical BUDGET BOUNDARY case is the leaf vs
+  panel comparison, and this drop ships both halves of it as
+  declared-frame examples. No corpus, no adjudication, no
+  threshold: does the scanner fire on the case its own trigger
+  list was written for?
+
+    examples/photosynthesis.json 0 candidate(s)
+      result: silicon PV converts ~22% of incident photons; leaf converts 
+    examples/tree.json          0 candidate(s)
+      result: tree sustains conversion, self-repair, self-replication, loa
+
+  Zero. Now the same case in four phrasings:
+
+    the register's own VISIBLE AS line   SCORED AS WASTE ('inefficient')
+    the delivered result string          NO HIT
+    stated as a comparative              BUDGET BOUNDARY ('more efficient than')
+    stated with the noun                 BUDGET BOUNDARY ('conversion efficiency')
+
+  Two results, and the second is the sharper one.
+
+  (a) The delivered result string does not fire. The trigger list
+      catches the RHETORIC of a comparison -- 'more efficient
+      than', 'outperforms', 'orders of magnitude better' -- and
+      not the comparison. Two numbers placed side by side with no
+      comparative is how the claim usually appears in a result
+      line, and that form is invisible to every BUDGET BOUNDARY
+      trigger.
+
+  (b) The register's own phrasing of the case fires under the
+      WRONG mechanism: 'inefficient' is a SCORED AS WASTE trigger.
+      A reader triaging that hit is handed the wrong `check`
+      question -- 'what does it return, and on what interval' --
+      for a case whose actual question is 'are both budgets closed
+      at the same boundary'.
+
+  Neither is fatal to the design, and both are cheap: BUDGET
+  BOUNDARY needs a trigger for the bare-numbers form (a percentage
+  or ratio within N tokens of a second one for a different
+  object), and the mechanisms need to be allowed to co-fire, which
+  is uninstrumented/ UNI_003 arriving in the scanner.
+
+========================================================================
+2  triage load -- the quantity the design actually turns on
+========================================================================
+  patterns.json states its own standard: 'Every hit is a candidate
+  for triage, not a finding.' Under that standard precision is not
+  the binding constraint -- how many `check` questions a human has
+  to answer per unit of text is.
+
+  corpus: 202 markdown files, 309659 words
+    with word boundaries    314 candidates  1.0 per 1000 words
+    without (--raw)         431 candidates  1.4 per 1000 words
+    cost of dropping \b    +117 candidates (+37%)
+
+  About one candidate per 1000 words. That is a workable triage
+  load -- a 5000-word document arrives with roughly five questions
+  attached, not fifty. The trigger list is written tightly enough
+  that the human step it depends on is affordable.
+
+  Densest files:
+
+    inverseminar/README.md                             776 w   12 hits   15.5 /1000
+    declared-frame/v2/README.md                       1480 w   19 hits   12.8 /1000
+    msiaf-framework/proxies/proxy-catalog.md           351 w    3 hits    8.5 /1000
+    msiaf-framework/models/warehouse-architecture.md   562 w    4 hits    7.1 /1000
+
+========================================================================
+3  use-mention: a checked expectation that failed
+========================================================================
+  Expected before running: a scanner keyed on surface words
+  cannot distinguish a document EXHIBITING a failure from one
+  DESCRIBING it, so documents about the mechanisms should light
+  up entirely with false positives.
+
+    uninstrumented/README.md                   986 w   2 hits   2.0 /1000
+        ['AUTHORED REFERENCE', 'SCORED AS WASTE']
+    uninstrumented/CLAIM_TABLE.md              698 w   1 hits   1.4 /1000
+        ['AUDIT ASYMMETRY']
+    declared-frame/v2/FRAME.md                 246 w   0 hits   0.0 /1000
+    declared-frame/README.md                   861 w   0 hits   0.0 /1000
+
+  It did not happen. The document that names all seven mechanisms
+  and glosses each one returns 2 candidates in 986 words, and the
+  v2 frame document returns none.
+
+  Why: the triggers are written as the vocabulary of the FAILING
+  document, not as the vocabulary of the mechanism. 'apparatus in
+  the wrong channel' is how the register names MODALITY; 'failed
+  to demonstrate' is what a paper exhibiting it says. The two
+  vocabularies barely overlap, and that separation is doing more
+  work than the trigger list looks like it is doing.
+
+========================================================================
+4  concentration: 24 triggers of 69 ever fire
+========================================================================
+  314 candidates, 8 mechanisms, 69 triggers defined
+
+    mechanism                  hits    share
+    ----------------------------------------
+    STORAGE                      24     7.6%
+    SCALAR DEMAND                 6     1.9%
+    AUTHORED REFERENCE           55    17.5%
+    BUDGET BOUNDARY              12     3.8%
+    SCORED AS WASTE             102    32.5%
+    PROXY SUBSTITUTION           52    16.6%
+    MODALITY                      4     1.3%
+    AUDIT ASYMMETRY              59    18.8%
+
+  Top triggers:
+
+    AUDIT ASYMMETRY        (unverified|uncorroborated)          59
+    SCORED AS WASTE        slack                                55
+    AUTHORED REFERENCE     benchmark                            36
+    PROXY SUBSTITUTION     compliance                           28
+    STORAGE                tacit                                21
+    SCORED AS WASTE        redundan(t|cy)                       21
+
+  4 triggers produce 178 of 314 candidates (57%).
+  38 of 69 triggers never fire on 309659 words.
+
+  Both numbers are CORPUS-CONDITIONAL and neither grades the
+  trigger list. SCALAR DEMAND is 7 of 8 triggers silent because
+  this corpus contains no survey instruments -- 'on a scale of',
+  'rate yourself', 'composite score' are psychometrics vocabulary
+  and there is none here. A silent trigger on the wrong corpus is
+  not a dead trigger.
+
+  The concentration is corpus-conditional in the other direction
+  and worth naming precisely, because it is the shape of every
+  false positive this corpus produces:
+
+    `(unverified|uncorroborated)` fires 52 times, almost all on
+    the string UNVERIFIED -- a claim-table STATUS CODE in this
+    repo, not a hedge attached to an account. The trigger is
+    correct and the corpus is adversarial to it.
+
+    `slack` fires 49 times on a mix of Slack the product, 'the
+    slack rope', a code identifier, and genuine idle-capacity
+    usage. This one is the trigger's own problem: a four-letter
+    common noun with a proper-noun homograph.
+
+  Which is why no precision number appears in this file. Getting
+  one requires a corpus that is not about its own subject, and
+  every corpus in this repository is.
+
+========================================================================
+5  writing this audit changed the corpus it measures
+========================================================================
+  The README written to report sections 1-4 quotes the triggers
+  in order to discuss them, so it entered the corpus as text.
+
+                                 hits   silent
+    --------------------------------------------
+    without v2/README.md          295       43
+    with v2/README.md             314       38
+
+  Triggers this audit's own README moved from never-firing to
+  firing: 5
+
+      BUDGET BOUNDARY        orders of magnitude (better|more)
+      MODALITY               failed to (demonstrate|show|exhibit)
+      SCALAR DEMAND          (rate|rated|rating) (yourself|your|their|his|her)
+      SCALAR DEMAND          composite (score|index|measure)
+      SCALAR DEMAND          on a scale of
+
+  Three of the five are SCALAR DEMAND triggers that section 4
+  reported silent 'because this corpus contains no survey
+  instruments'. That reading is still correct -- there are none --
+  and the triggers now fire anyway, on a document explaining that
+  they do not fire.
+
+  So the corpus counts in sections 2-4 are a SNAPSHOT, not a
+  fixture, and re-running after any markdown is added will not
+  reproduce them. Pinning would need a frozen corpus copy.
+
+  This is ../../anchor-interval/'s moving reference occurring
+  rather than being described: the measurement and its reference
+  are not independent, and reporting the number changed it. The
+  numbers in the folder README are quoted from a pinned sample
+  and are not re-derived here, which is the smallest honest
+  handling short of freezing the corpus.
+
+========================================================================
+READING
+========================================================================
+
+  The one result that needs no corpus: the scanner returns ZERO on both
+  halves of the drop's own worked example of BUDGET BOUNDARY, and the
+  register's own phrasing of that case fires under SCORED AS WASTE
+  instead. The triggers catch the rhetoric of a comparison and not the
+  comparison, and two numbers side by side -- the usual form -- is
+  invisible to all eight BUDGET BOUNDARY triggers.
+
+  Triage load is the quantity the design turns on, by its own statement,
+  and it is low: about one candidate per 1000 words across ~300k. Dropping
+  word boundaries costs roughly 40% more candidates for no obvious gain.
+  Exact counts are in section 2 and move with the corpus.
+
+  The expectation that use-mention would dominate was checked and did not
+  hold. Documents describing the mechanisms return almost nothing, because
+  the triggers are written in the vocabulary of the failing document
+  rather than the vocabulary of the mechanism. That separation is load-
+  bearing and is not visible from reading the file.
+
+  No precision figure is reported. This repository is a corpus about
+  measurement failure written in the triggers' own vocabulary --
+  UNVERIFIED is a status code here -- so a false-positive rate scored on
+  it would measure the corpus. That measurement needs an outside corpus
+  and is the next thing to run.
+
+  And the corpus is live. Writing the README that reports sections 1-4
+  moved five triggers from never-firing to firing, three of them SCALAR
+  DEMAND triggers that section 4 calls silent for want of survey
+  instruments -- now firing on the document that says so. The counts here
+  are a snapshot, not a fixture.
+

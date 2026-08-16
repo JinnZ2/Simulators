@@ -25,7 +25,8 @@ load-bearing.
 | [`frames/`](frames/) | The delivered worked example, plus its counterpart so the comparison runs. |
 | [`frame_audit.py`](frame_audit.py) | Null-tests the comparability verdicts. |
 | [`layer_zero.py`](layer_zero.py) | Every field is switchable, so nothing adjudicates. |
-| [`CLAIM_TABLE.md`](CLAIM_TABLE.md) | Seven claims (`DF_001..007`). |
+| [`CLAIM_TABLE.md`](CLAIM_TABLE.md) | Ten claims (`DF_001..010`). |
+| [`v2/`](v2/) | Second drop, verbatim — v2 frame doc, a rewritten checker, and `patterns.json`: the register as a text scanner. Graded in [`v2/README.md`](v2/README.md). |
 | [`samples/`](samples/) | Pinned output. |
 
 ```bash
