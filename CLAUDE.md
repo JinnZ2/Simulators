@@ -1437,6 +1437,62 @@ underneath).
   bare declaration. Section 1 (G-RES is only as strong as the declared
   pair) was NOT "fixed" — it is a limit on what the guard can promise,
   not a defect. 66 tests green. Stdlib only, phone-buildable, CC0.
+- `reasoning-dial/` — A drop about how reasoning models allocate thinking,
+  put through the gate the previous drop produced. Two delivered parts in
+  `SOURCE_DROP.md` (verbatim): a 2026 survey of reasoning / learning /
+  exploring / harnesses, and a proposal to treat **thinking budget as a
+  measurable dimension** — an axis with gradients, cross-gradients and a
+  knee, read with the same machinery the repo uses for physical fields.
+  `dial_response.py` implements it (stdlib, deterministic) and checks the
+  numbers the drop published. **The gradient transfers; the knee does not.**
+  The delivered table (knee 26 / 910 / 66 tok for D_r 0.5 / 2.0 / 4.0)
+  contradicts its own prose — the hard problem's knee is 14× EARLIER than
+  the medium one's and its gradient twice as steep, where the text says
+  later and shallower. Root cause: **"maximum curvature" names two points.**
+  Any saturating curve has two curvature extrema, at `z = ±ln(2+√3)` on a
+  logistic, **exactly equal in magnitude** (measured tie: `0.000e+00`), so a
+  max-|curvature| rule chooses between tied candidates and the **sweep
+  window** decides which is reachable. An independent implementation with
+  different constants reproduces the small/large/small shape (76 / 716 / 38)
+  with the flip on the same row: the hard problem's saturation shoulder sits
+  at ~14,000 tok, outside a 10⁴ window, so only the take-off shoulder
+  survives. "A knee that moves when you change the plot range is a property
+  of the plot range" — `model-ecology/confound_sweep.py`'s window result on
+  a new substrate, and the same defect as `AOS_005`'s SIM-C knee detector.
+  **The fix is one word**: say which shoulder. Defining the knee as the
+  saturation shoulder gives 76 / 716 / 14,170 with gradients 0.247 / 0.124 /
+  0.074 — monotone in both columns, matching the prose. **The cross-gradient
+  survives** (`∂²Q/∂lnB∂D_r` changes sign at an interior peak, D_r ≈ 3 at
+  B = 1000) and is the drop's best idea, being the only part not requiring a
+  knee. **`RD_005`:** RND is described as "the agent tries to predict the
+  outcome of its actions" — that is the Intrinsic Curiosity Module (Pathak
+  2017); RND (Burda 2018) matches a fixed random target network on the
+  observation, and exists specifically to avoid the noisy-TV problem the
+  misdescription attributes to it. `gate_dial.py` is the repo's **second
+  cross-folder Python import** (after `msiaf-gdprf-bridge/`), pulling the
+  gate from `../reasoning-gate/` rather than copying: DIAL-KNEE **denies at
+  `pre()`** on G-RES (positional ambiguity 3.56 log-units vs a 2.99 knee
+  shift), DIAL-GRAD **passes and splits** — identical support yields a
+  `supported` generator-scoped claim and a `qualified` physical one, naming
+  the missing experiment exactly (a measured quality-vs-budget curve from a
+  real model would promote D_r from generator to physical) — and DIAL-SYNTH
+  **qualifies** "four independent domains converge", since they are four
+  sections of one survey written to a thesis stated before it. **Where the
+  gate did not help**, recorded as a limit: G-FIT should have caught the
+  knee ambiguity and could not — its rule is "name why the statistic can
+  discriminate", its implementation checks a string is non-empty, and a
+  wrong-but-fluent sentence satisfies it. That is `reasoning-gate/
+  AUDIT_NOTES.md` §1 in a second instance, on a worse guard. `RD_009` logs
+  the drop's proposed **G-STATE** (observer-state: am I cold, time-pressured,
+  invested in a diagnosis?) as a real gap deliberately NOT built — a
+  self-report from a miscalibrated observer is the quantity in question, so
+  the gate could record it but not check it; the falsifier names what would
+  make it buildable (tie it to cabin temperature, hours since sleep, a
+  timestamp, and it becomes a two-number guard like G-RES). Nine claims
+  `RD_001..009` including one `UNVERIFIED` (the survey's `cite
+  web_search:NN#M` markers point at results not included in the delivery;
+  Snell 2024, Titans, PRM800K, PURE min-form, Anthropic's backward
+  rhyme-planning and `circuit-tracer` do check out). CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

@@ -1,0 +1,144 @@
+
+THE THINKING DIAL AS A DIMENSION
+A study of a proposed measurement. No reasoning model was run.
+Every quantity below is generator- or instrument-level.
+
+==========================================================================
+1  the delivered table against its own prose
+==========================================================================
+  Prose: 'For an easy problem the knee is early and the gradient is
+  steep. For a hard problem the knee is later and the gradient is
+  shallower.'
+
+  problem                     D_r   knee (tok)   gradient
+  Easy (pattern match)        0.5           26       0.21
+  Medium (multi-step)         2.0          910       0.06
+  Hard (novel mechanism)      4.0           66       0.12
+
+  knee increasing with D_r, as the prose requires?  False   [26, 910, 66]
+  gradient decreasing with D_r, as the prose requires?  False   [0.21, 0.06, 0.12]
+
+  Neither. The hard problem's knee is 14x EARLIER than the medium
+  problem's, and its gradient is twice as steep. The table and the
+  sentence above it describe opposite behaviours.
+
+==========================================================================
+2  a monotone model gives a monotone knee
+==========================================================================
+  Q(B) logistic in ln B, with mu and s both increasing in D_r --
+  the parameterisation the prose describes.
+
+  problem                     D_r knee_sat (tok)   grad there
+  Easy (pattern match)        0.5           76.3       0.2469
+  Medium (multi-step)         2.0          716.0       0.1235
+  Hard (novel mechanism)      4.0        14170.1       0.0741
+
+  monotone increasing knee?    True
+  monotone decreasing gradient? True
+
+  So the prose is self-consistent and implementable. Whatever
+  produced the delivered table, it was not this.
+
+==========================================================================
+3  'maximum curvature' does not name one point
+==========================================================================
+  A logistic has two curvature extrema, at z = +/- 1.3170, EQUAL in
+  magnitude and opposite in sign:
+
+    take-off    B =      20.4   curvature = +0.052798
+    saturation  B =     716.0   curvature = -0.052798
+
+    |difference in magnitude| = 0.000e+00  -- an exact tie
+
+  A knee finder that maximises |curvature| is therefore choosing
+  between two equal candidates. Nothing in the curve prefers either,
+  so the winner is decided by which one is inside the sweep window.
+  Same window, 1 to 1e4 tokens, over all three rows:
+
+  problem                     D_r   knee (tok)     shoulder sat in win
+  Easy (pattern match)        0.5         76.3   saturation       True
+  Medium (multi-step)         2.0        715.7   saturation       True
+  Hard (novel mechanism)      4.0         37.8     take-off      False
+
+  Pattern: ['76', '716', '38']
+  Delivered: ['26', '910', '66']
+
+  Small, large, small -- non-monotone, and the flip happens at the
+  same row. Different constants, same shape, because the shape is a
+  property of the knee RULE and not of the model underneath it.
+
+  The mechanism is compound. The exact tie means nothing in the
+  curve prefers one shoulder. The window then decides: the hard
+  problem's saturation shoulder sits at 14170 tokens, outside a 1e4
+  window, so the only extremum left to find is the take-off one --
+  and the reported knee collapses by an order of magnitude exactly
+  where the problem got harder.
+
+  A knee that moves when you change the plot range is a property
+  of the plot range.
+
+==========================================================================
+4  the cross-gradient claim, which holds
+==========================================================================
+  Claim: at a fixed budget, additional thinking helps least on
+  trivial problems (already saturated) and least on very hard ones
+  (the budget is not enough to matter), peaking in between.
+
+  budget = 1000 tokens
+
+       D_r        dQ/dlnB    d2Q/dlnB dD_r
+      0.00        0.00037          0.00361
+      0.50        0.00867          0.03495
+      1.00        0.03650          0.07269
+      1.50        0.07499          0.07444
+      2.00        0.10598          0.04702
+      2.50        0.12161          0.01659
+      3.00        0.12426         -0.00412
+      3.50        0.11919         -0.01478
+      4.00        0.11058         -0.01884
+      4.50        0.10093         -0.01935
+      5.00        0.09150         -0.01820
+      5.50        0.08283         -0.01643
+      6.00        0.07510         -0.01453
+      6.50        0.06829         -0.01273
+      7.00        0.06233         -0.01112
+      7.50        0.05713         -0.00972
+      8.00        0.05258         -0.00851
+
+  gradient peaks at D_r = 3.00, interior to the swept range: True
+  cross-gradient changes sign there, as an interior peak requires.
+
+  SUPPORTED. This is the drop's most useful idea and it survives
+  implementation. It is also the one part that does not depend on
+  locating a knee.
+
+==========================================================================
+READING
+==========================================================================
+
+  The gradient framework transfers. dQ/d(log B) is a well-defined marginal
+  value, the cross-gradient picks out where thinking is worth buying, and
+  both are computable from any response curve you can measure.
+
+  The knee does not transfer, and that is the finding. "Point of maximum
+  curvature" is ambiguous on any saturating curve: there are two extrema of
+  equal magnitude, one where returns start and one where they stop. Section 3
+  reproduces the delivered table's non-monotone shape from that ambiguity
+  alone. The fix is to say which shoulder you mean -- the saturation
+  shoulder, for a stopping rule -- at which point section 2 shows the answer
+  is monotone and matches the prose.
+
+  This is the same defect as SIM-C in ../aperiodic-order-sim-stack/, on a
+  completely unrelated substrate. There a knee detector fired on the largest
+  of six comparable curvature peaks and landed on a local minimum of the
+  curve it was meant to find the knee of. Here it fires on one of two exactly
+  tied extrema. Both drops then read the location as a result.
+
+  What none of this establishes: anything about a deployed reasoning model.
+  D_r is a parameter of the curve chosen above, not a measured property of
+  any system, and the drop says so itself before using it in an analogy to
+  fractal dimension anyway. To make D_r physical you would have to fit it to
+  measured quality-vs-budget curves from a real model, with the budget under
+  your control and the quality scored by something that is not the model.
+  That experiment is cheap and nobody in this chain has run it.
+

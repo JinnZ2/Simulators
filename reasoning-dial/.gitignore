@@ -1,0 +1,4 @@
+# runtime state -- gate reports from local runs, regenerate with gate_dial.py
+runs/
+gate_*.json
+__pycache__/
