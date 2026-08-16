@@ -1741,8 +1741,41 @@ underneath).
   its own lag returns the chain collapsed into a single step, which is
   indistinguishable from the chain being wrong and would read as the
   falsifier firing. Declare the units and it becomes a `G-RES` pair,
-  sampling interval against the lag being resolved. Fifteen claims
-  `MF_001..015`.
+  sampling interval against the lag being resolved.
+  **Fourth drop: the `sweep` field and K11-K13.** `sweep_check.py`.
+  **`MF_017`:** the stated rule — every probe declares which spec variable
+  it must be run across and at how many levels, default `regime.variable`,
+  min 2, point-probes declare `sweep=None` with a reason — is **not
+  expressible in the delivered schema**: `quantities.probe()` has six fields
+  and none is `sweep`, so **0 of 17** measuring probes across the three arms
+  satisfy it. One schema gap, not seventeen oversights. Load-bearing rather
+  than tidy, because the spec's own falsifiers are statements about a
+  gradient ("ratio flat across the provisioning gradient") and a probe run
+  at one setting of the control parameter cannot participate in one — **the
+  missing field and `MF_010`'s unreachable falsifier are the same gap seen
+  from two sides.** All six new probes pass; resolving the default against
+  the spec's declared regime variable, 4 of 6 sweep it (2 by default, 2 by
+  naming it), so the field carries information on 2 of 6 and K13/K14
+  spelling out the default is a redundancy the schema should collapse.
+  K15/K16 declare 3 levels against a minimum of 2, both being on the
+  mediation chain where 2 levels gives a slope with no curvature.
+  **`MF_018`:** the last two gaps `MF_010` named now close. `reversibility
+  after regime shift` PARTIAL → CLOSED on **K13 `tau`** — `error vs
+  trials-since-shift` is measured across a regime change by construction
+  (trials-since-shift has no meaning without one), fitting tau returns the
+  RATE `MF_010` said no probe returned, and sweeping provisioning supplies
+  the gradient the stated falsifier needs; the prediction "tau rises with
+  provisioning, flat tau falsifies" has a reachable null, so not the
+  `CONSTANT_SILENT` shape. `coupling bandwidth` OPEN → CLOSED on **K11
+  `information_rate`** — the capacity term the other three were not,
+  explicitly marked `not_` against K01 delay and K02 reliability, with the
+  honest blind spot "whether anything is done with the states". **K12
+  reaches `MF_014`'s K15 distinction by a second route**: "trust is a
+  measurement only if (b) was run" makes it a precondition on reading K12
+  at all rather than a separate probe. All three of `MF_010`'s gaps are now
+  reached — as specifications; nothing has been run, the mediation lags are
+  still ordinal, and `sweep` is still not in the schema. Eighteen claims
+  `MF_001..018`.
   **`MF_011`:** `make_docs.py` / `README.md` / `GUARDS.md` arrive as
   pre-repair copies too (12 / 16 / 48 differing lines) — five bundled
   files, five stale, across three drops, which is what copying instead of
@@ -1859,6 +1892,45 @@ underneath).
   (the creek-crossing case — "literature contains what survives removal of
   the body" — with `inverseminar/`'s `CANNOT DERIVE` channel named as the
   instrument and no round yet run). Stdlib only, deterministic, CC0.
+- `uninstrumented/` — Register of cases where a quantity exists and the
+  instrument's constitution prevents it from appearing. **Not a gap log —
+  a gap is an oversight; these are exclusions built into the apparatus
+  before the first reading is taken.** Five-field entry structure
+  (`QUANTITY` / `EXCLUDED BY` / `VISIBLE AS` / `WOULD MEASURE` /
+  `CONFIDENCE`, the last stated separately from the shape and recorded
+  verbatim rather than adjudicated) over a closed seven-mechanism
+  vocabulary — `MODALITY` (apparatus in the wrong channel), `STORAGE`
+  (medium cannot hold the shape), `SCALAR_DEMAND` (function collapsed to a
+  number), `BUDGET_BOUNDARY` (closed budget compared to open),
+  `AUTHORED_REFERENCE` (reference produced by the measured party),
+  `AUDIT_ASYMMETRY` (guard fires on one side only), `SCORED_AS_WASTE`
+  (component read as cost by the instrument's own accounting). Sorted by
+  mechanism, not by field, so a case from evolutionary biology sits next to
+  one from survey methodology. Seven entries; five have a worked instance
+  elsewhere in the repo, which makes this a cross-index rather than a new
+  claim surface. **`uninstrumented.py` does not only print the register —
+  it tests it, three ways.** (1) `UNI_002`: the mechanism sort is UNTESTED,
+  not confirmed — at 7 entries / 7 fields / 7 mechanisms the two partitions
+  are identical, so nothing yet demonstrates the cross-domain grouping the
+  sort exists for; the expiry condition is a second entry under an existing
+  mechanism from a different field, and `reasoning-dial/` `RD_009`'s
+  G-STATE gap is the nearest candidate already in the repo. (2) `UNI_003`:
+  the mechanisms are NOT mutually exclusive — 4 of 7 entries have a second
+  mechanism with a claim, so the filing is a CHOICE and should carry a
+  primary plus a list, accepting that an entry then appears more than once.
+  (3) `UNI_004`, the null test: every delivered entry states high confidence
+  on the exclusion, so a list that only ever admits entries is
+  `CONSTANT_FIRES` in `null-harness/` terms. Run against the six externally
+  graded instruments in `instrument-epistemology/` as a known-null corpus —
+  real apparatus, real chains, three graded "mostly assumed", the worst at
+  chain fidelity 0.165 — **0 of 6 file**. `UNI_005` names the line that
+  holds: **a reached-but-badly quantity has a blindness map; an excluded one
+  does not, because the exclusion happens before the map is drawn.**
+  `UNI_006` is the honest counterweight and is UNVERIFIED — all seven
+  entries are uncontested and the null corpus was chosen for being well
+  documented rather than for sitting near the boundary, so a classifier that
+  never fires on the null has not been shown to fire on the signal. Six
+  claims `UNI_001..006`. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

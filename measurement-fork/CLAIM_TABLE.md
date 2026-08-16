@@ -556,3 +556,97 @@ capital-aggregation debates as the nearer relatives.
 reading the protocol — that separates design-directed probes from
 system-directed ones. If one exists, this adjudication should be replaced
 by it, and `MF_009`'s classifier problem gets smaller by the same move.
+
+---
+
+## MF_017 — `sweep` is a schema addition with teeth, and the schema has no room for it
+
+**who:** A · **status:** SUPPORTED
+
+The rule as specified:
+
+> every probe declares which spec variable it must be run across, and at how
+> many levels. default `regime.variable`, min 2. Point-probes must declare
+> `sweep=None` with a reason.
+
+`quantities.probe()` has six fields — `arm`, `id`, `quantity`, `protocol`,
+`reads`, `blind_to` — and none of them is `sweep`. So the rule is not
+expressible in the delivered schema, and **0 of 17** measuring probes across
+the three arms satisfy it. That is one schema gap, not seventeen oversights.
+
+It is load-bearing rather than tidy. The spec's own falsifiers are
+statements about a gradient — *"ratio flat across the provisioning
+gradient"* — and a probe run at one setting of the control parameter cannot
+participate in a claim about one. **The missing field and `MF_010`'s
+unreachable falsifier are the same gap seen from two sides.**
+
+All six newly specified probes pass. Resolving the default against the
+spec's declared regime variable (`provisioning level`), 4 of 6 sweep the
+regime variable — 2 by default and 2 by naming it directly — so the field
+carries information on 2 of 6, and `K13`/`K14` spelling out the default is a
+redundancy the schema should collapse rather than a choice. `K15` and `K16`
+declare 3 levels against a minimum of 2, both being on the mediation chain
+where 2 levels gives a slope with no curvature.
+
+**Falsifier:** a probe whose declared sweep is inert — the number it returns
+is the same at every level of the declared variable. Then the declaration is
+decoration and the field should be dropped rather than added to the schema.
+
+**Evidence:** `sweep_check.py` §1–§2.
+
+---
+
+## MF_018 — K13 and K11 close the last two gaps `MF_010` named
+
+**who:** A · **status:** SUPPORTED
+
+`MF_010` named three open questions no measuring arm reached. `MF_014` moved
+one to CLOSED and one to PARTIAL. The remaining two now close.
+
+**`reversibility after regime shift`: PARTIAL → CLOSED, on K13.**
+
+`MF_010`'s objection was that the predicted contrast is a **rate** — fast vs
+slow relearn once the buffer is removed — and every delivered K-probe
+returned a level, ratio, slope or variance at fixed regime. `MF_014` then
+credited K14 with half of it: the provisioning gradient the stated falsifier
+needs. The other half was a post-shift time constant, and nothing had one.
+
+```
+K13  tau
+     protocol   error vs trials-since-shift, fit tau
+     sweep      provisioning_level at 2 levels
+     returns    a time constant
+     predicted  tau rises with provisioning; flat tau falsifies
+```
+
+`trials-since-shift` has no meaning without a regime change, so the probe is
+measured across one by construction, and fitting `tau` returns the rate.
+Swept across provisioning it supplies both halves at once. The prediction
+falsifies in the direction that costs something, and the null (flat tau) is
+reachable — not the `../null-harness/` `CONSTANT_SILENT` shape.
+
+**`coupling bandwidth`: OPEN → CLOSED, on K11.**
+
+`MF_014` left this open on the grounds that rate-of-use, staleness and
+latency are three quantities and capacity is a fourth. `K11
+information_rate` is the fourth — *"distinguishable environmental states
+registered per unit time, by the actor's own sensors"* — and is explicitly
+marked `not_` against K01 delay and K02 reliability: *"This is channel
+capacity."* Its stated blind spot is the honest one: *"whether anything is
+done with the states."*
+
+**`K12` reaches the same distinction as `K15` by a second route.** *"Trust
+is a measurement only if (b) was run"* makes `whether trust in own sensing
+is a measurement or a belief` a precondition on reading `K12` at all, rather
+than a separate probe. Two independent arrivals at one distinction.
+
+**What is not closed:** every probe here is a specification. Nothing has
+been run, the mediation lags are still ordinal (`MF_015`), and `sweep` is
+still not in `quantities.probe()` (`MF_017`).
+
+**Falsifier:** run K13 and find `tau` is not estimable — error against
+trials-since-shift does not fit an exponential, so there is no time constant
+to report. Then the gap reopens with a sharper shape: the predicted contrast
+assumes a relaxation form nobody has checked.
+
+**Evidence:** `sweep_check.py` §3–§4.

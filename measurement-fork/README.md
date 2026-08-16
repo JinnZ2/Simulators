@@ -35,6 +35,7 @@ python3 residual_audit.py                                  # the growth edge
 python3 coverage_check.py                                  # audit the classifier
 python3 gate_fork.py                                       # gated
 python3 proposed_probes.py                                 # do K14-K18 close them?
+python3 sweep_check.py                                     # the sweep rule; K11-K16
 #   K17 landed in widen.py as a design-directed move -- see MF_016
 python3 ../tools/check_gate_drift.py                       # one gate?
 ```
