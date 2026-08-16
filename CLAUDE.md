@@ -1774,8 +1774,31 @@ underneath).
   measurement only if (b) was run" makes it a precondition on reading K12
   at all rather than a separate probe. All three of `MF_010`'s gaps are now
   reached — as specifications; nothing has been run, the mediation lags are
-  still ordinal, and `sweep` is still not in the schema. Eighteen claims
-  `MF_001..018`.
+  still ordinal, and `sweep` is still not in the schema.
+  **Fifth drop: canonical README + `PROBES_K11_K18.py`.** The delivered
+  `README.md` now heads the folder and the prior audit-authored one moved to
+  `AUDIT_NOTES.md` (the `reasoning-gate/` arrangement). **`MF_019`:** the
+  drop re-delivered `compare.py`, `conventional.py` and `coupling.py`
+  **byte-identical** to the repo copies — 0 differing lines each — while
+  also bundling `gate.py` (189 differing lines, all seven repairs absent)
+  and `GUARDS.md` (48 lines, both stage bugs intact): the **sixth and
+  seventh** stale gate copies, neither checked in. Files that live in one
+  place do not drift; files bundled into every drop do. **`MF_020`:** the
+  delivered `PROBES_K11_K18.py` header states the structural bug itself —
+  "coupling.py generated probes at a POINT while the stated falsifier is
+  about a GRADIENT; the generator could not emit a design capable of failing
+  its own falsifier" — and adds a requirement: *compare.py must flag any
+  falsifier whose terms are not swept by any arm*. `falsifier_sweep.py` is
+  that check (`compare.py` stays verbatim). Delivered arms reach **0 of 4**
+  stated falsifiers; K11–K16 reach **4 of 4** across three swept variables.
+  But the check needs a SECOND field that also does not exist: the spec
+  schema has no `falsifiers` list, so the four falsifiers are
+  hand-transcribed from prose, and K13's `closes=["falsifier:ratio_flat"]`
+  **resolves to nothing in any delivered file** — a reference to a registry
+  not yet created. Two schema gaps, one shape: a probe cannot say what it
+  must be run across and a spec cannot say what would refute it, and between
+  them a generator emits a well-formed design that is incapable of failing.
+  Twenty claims `MF_001..020`.
   **`MF_011`:** `make_docs.py` / `README.md` / `GUARDS.md` arrive as
   pre-repair copies too (12 / 16 / 48 differing lines) — five bundled
   files, five stale, across three drops, which is what copying instead of
@@ -1978,8 +2001,48 @@ underneath).
   `UNI_006` is the honest counterweight and is UNVERIFIED — all seven
   entries are uncontested and the null corpus was chosen for being well
   documented rather than for sitting near the boundary, so a classifier that
-  never fires on the null has not been shown to fire on the signal. Six
-  claims `UNI_001..006`. Stdlib only, CC0.
+  never fires on the null has not been shown to fire on the signal.
+  **Second drop: canonical README + `scan.py`.** The delivered README heads
+  the folder (audit content moved to `AUDIT_NOTES.md`) and carries **eight**
+  mechanisms — `PROXY SUBSTITUTION` (enforceable measure displaces the
+  target) is new. `scan.py` + `patterns.json` live here now; the
+  reconstructed scanner in `declared-frame/v2/` is deleted and that folder
+  IMPORTS this one, per the no-copies convention. **`UNI_007`:** `PROXY
+  SUBSTITUTION` is a mechanism with **no entry** — it arrived from the
+  scanner side rather than from a case, which every other mechanism did, so
+  the sort cannot yet group anything under it. **`UNI_008`:** `scan.py
+  --asym` IS the `AUDIT_ASYMMETRY` entry's own `WOULD MEASURE` (count
+  caveats per account type; the ratio is the measurement), so the
+  **instrument gap closes and the corpus gap does not** — across 932 files
+  the repo yields 10 files with any hedge, and every one hand-checked is an
+  artifact (`UNVERIFIED` as a status code, `claims to` in prose about a
+  model, `Self-reported` in a JSON spec string, and `anecdotal` inside
+  `patterns.json` itself, the scanner matching the file that defines the
+  trigger). Zero are a hedge attached to an account, so the 1.11 ratio is
+  computed on nothing; the entry is no longer unrun for want of a design but
+  for want of reportage. **`UNI_009`:** `scan.py` compiles triggers raw, and
+  the single most-fired trigger in the corpus is `lean` at ~193 hits of
+  which the bare word accounts for 7 — the rest is `clean`, `cleanly`,
+  `boolean`. One `\b` on that trigger removes ~24% of all candidates at no
+  cost; `slack` does NOT move the same way (the bare word is what matches;
+  the residue is a proper-noun homograph and a code identifier), so the
+  repair is per-trigger, not global. `scan_audit.py` grades the delivered
+  scanner and states up front the four ways it differs from the earlier
+  reconstruction (sentences not lines, one hit per mechanism per sentence,
+  eight file extensions not one, raw compile not word-bounded) — the
+  BUDGET_BOUNDARY zero-hit result survives the instrument change unchanged.
+  **`UNI_010`, the sharpest one:** `scan.py` reads `.txt` and
+  `scan_audit.py` writes its output to `samples/`, so run N+1 measures run
+  N and **two consecutive runs disagree before anything in the repo has
+  changed** (~16 candidates of drift, with the previous run's own output
+  appearing as the densest file). An `EXCLUDE` on `samples/` makes the
+  script converge — and it is a hand-broken loop, not a fix: anyone running
+  `scan.py` over the repo still sees those hits, so the reported corpus is
+  no longer the corpus on disk. Both halves are stated in §5 rather than
+  one being quietly true. Same loop as `anchor-interval/` `ANC_001..004` at
+  three files and one script, visible only because two runs were diffed —
+  which is the scheduled anchor, not a triggered one. Ten claims
+  `UNI_001..010`. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

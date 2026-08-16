@@ -650,3 +650,83 @@ to report. Then the gap reopens with a sharper shape: the predicted contrast
 assumes a relaxation form nobody has checked.
 
 **Evidence:** `sweep_check.py` §3–§4.
+
+---
+
+## MF_019 — the sixth and seventh stale gate copies, and three that are not
+
+**who:** A · **status:** SUPPORTED
+
+A drop bundled `gate.py` and `GUARDS.md` again. Both are the **pre-repair**
+versions: `gate.py` differs from the repo's by 189 lines with all seven
+repairs absent — no `diverged` on `close()`, no `scope` on `claim()`, no
+denial records, no `layer_note` — and `GUARDS.md` differs by 48 lines with
+`G-FIT` still under POST and `G-CTRL` under PRE only.
+
+Neither is checked in. `MF_006` and `MF_011` recorded five such copies
+across three drops; these are the sixth and seventh, and
+`../tools/check_gate_drift.py` exists because of them. The convention is to
+**import** the gate (`../msiaf-gdprf-bridge/`,
+`../reasoning-dial/gate_dial.py`, `gate_fork.py`), never to copy it.
+
+**The same drop shows the convention working.** `compare.py`,
+`conventional.py` and `coupling.py` were re-delivered and are
+**byte-identical** to the copies here — 0 differing lines each. Files that
+live in exactly one place do not drift; files that get bundled into every
+drop do. That is not a claim about care. It is a claim about how many
+copies exist.
+
+**Falsifier:** a bundled gate copy that is not stale. One would show the
+staleness is incidental to bundling rather than caused by it.
+
+---
+
+## MF_020 — the falsifier check the drop asks for cannot be run from the spec
+
+**who:** A · **status:** SUPPORTED
+
+The delivered `PROBES_K11_K18.py` header states the structural bug directly
+and adds a requirement:
+
+> coupling.py generated probes at a POINT while the stated falsifier
+> ("ratio flat across the provisioning gradient") is about a GRADIENT. The
+> generator could not emit a design capable of failing its own falsifier.
+> **compare.py must flag any falsifier whose terms are not swept by any
+> arm.**
+
+`falsifier_sweep.py` is that check. `compare.py` is delivered verbatim and
+is not modified.
+
+**Result.** Delivered arms: **0 of 4** stated falsifiers reachable — not
+because any probe is badly written, but because `quantities.probe()` has no
+`sweep` field (`MF_017`), so the generator cannot emit a swept design at
+all. With K11–K16: **4 of 4** reachable, across three swept variables
+(`provisioning_level`, `time_since_clean_reference`, `baseline_staleness`).
+
+**The check needs a second field that also does not exist.** The spec schema
+has no `falsifiers` list — its ten fields are `system_id`, `description`,
+`boundary`, `actors`, `provisioned`, `currently_measured`, `regime`,
+`test_items_source`, `known_latency`, `open_questions`. So the four
+falsifiers checked are **hand-transcribed from prose** and from individual
+probes' `predicted=` lines.
+
+K13 makes the gap concrete: it declares
+`closes=["reversibility", "falsifier:ratio_flat"]`, and
+`falsifier:ratio_flat` **resolves to nothing in any delivered file** — a
+reference to a registry that has not been created.
+
+Two schema gaps, one shape: a probe cannot say what it must be run across,
+and a spec cannot say what would refute it. Between them a generator emits
+a complete, well-formed design that is incapable of failing. Adding
+`sweep` to the probe and `falsifiers: [{id, statement, terms}]` to the spec
+makes the check three lines and removes the transcription entirely.
+
+**It is a PRE-stage check.** It decides whether the design can fail before
+anything is measured, which is `../reasoning-gate/`'s `G-CTRL` shape.
+
+**Falsifier:** a stated falsifier whose terms are not a spec variable at
+all — one that cannot be written as `terms: [...]` over the spec's own
+vocabulary. Then the proposed schema is insufficient and the check needs
+more than a term list.
+
+**Evidence:** `falsifier_sweep.py` §1–§4.

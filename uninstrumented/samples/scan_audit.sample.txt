@@ -1,0 +1,265 @@
+
+GRADING scan.py + patterns.json
+8 mechanisms, 69 triggers
+
+========================================================================
+0  the delivered scanner is not the reconstructed one
+========================================================================
+  Four differences that move numbers:
+
+    unit          delivered splits into SENTENCES (>= 20 chars);
+                  the reconstruction worked line by line
+    dedup         delivered `break`s after the first matching
+                  trigger per mechanism per sentence -- at most
+                  one hit per (mechanism, sentence)
+    extensions    delivered reads .txt .md .rst .org .csv .json .jsonl .py
+                  the reconstruction read .md only
+    boundaries    delivered compiles each trigger RAW:
+                  re.compile(t, re.I), no \b
+
+  That last one was flagged [CHOICE] in the reconstruction and
+  guessed the other way. Raw matching means `lean` matches
+  `cleaning` and `slack` matches `slacken`. The dedup pulls in
+  the opposite direction, so the two do not simply add.
+
+  Every number below is from the delivered instrument.
+
+========================================================================
+1  the drop's own worked example of BUDGET BOUNDARY
+========================================================================
+  The register's canonical BUDGET_BOUNDARY case is leaf vs
+  panel, and ../declared-frame/v2/examples/ ships both halves.
+  No corpus, no threshold, no adjudication: does the scanner
+  fire on the case its own trigger list was written for?
+
+    declared-frame/v2/examples/ -> 0 candidate(s)
+
+  Now the same case in four phrasings:
+
+    the register's own VISIBLE AS line   SCORED AS WASTE ('inefficient', candidate)
+    the delivered result string          NO HIT
+    stated as a comparative              BUDGET BOUNDARY ('more efficient than', candidate)
+    stated with the noun                 BUDGET BOUNDARY ('conversion efficiency', candidate)
+
+  Unchanged from the reconstructed run. Two results:
+
+  (a) The delivered result string does not fire. The triggers
+      catch the RHETORIC of a comparison -- 'more efficient
+      than', 'outperforms', 'orders of magnitude better' -- not
+      the comparison. Two numbers side by side with no
+      comparative is the usual result-line form, and it is
+      invisible to all eight BUDGET BOUNDARY triggers.
+
+  (b) The register's own phrasing fires under the WRONG
+      mechanism: 'inefficient' is a SCORED AS WASTE trigger, so
+      the reader is handed the wrong `check` question.
+
+  Both repairs are cheap: a trigger for the bare-numbers form,
+  and letting mechanisms co-fire -- which is UNI_003 arriving in
+  the scanner. The delivered `break` in scan() is what enforces
+  one-mechanism-per-sentence, so the co-firing repair is a
+  two-line change there.
+
+========================================================================
+2  triage load -- the quantity the design turns on
+========================================================================
+  patterns.json states its own standard: every hit is a
+  candidate for triage, not a finding. Under that standard the
+  binding constraint is not precision but how many `check`
+  questions a human must answer per unit of text.
+
+  corpus: 932 files (.txt .md .rst .org .csv .json .jsonl .py), 815400 words
+    all candidates        815   1.0 per 1000 words
+    strength=candidate    538   0.7 per 1000 words
+    strength=weak         277
+
+  The `weak` band is the delivered scanner's own confidence
+  gradient -- reported, never used to filter, which is the same
+  discipline as the register's CONFIDENCE field. It downgrades
+  a SCALAR DEMAND hit when conditioning words are nearby, an
+  AUDIT ASYMMETRY hit with no hedge in the sentence, and any
+  sentence over 400 chars.
+
+  Densest files:
+
+    CLAUDE.md                                            18567 w   31 hits   1.7 /1000
+    legacy/Organize3.md                                  17643 w   28 hits   1.6 /1000
+    fragility-cascade/CLAIM_TABLE.md                     19662 w   22 hits   1.1 /1000
+    grounding-layers/l5_human_construct.py                1926 w   22 hits  11.4 /1000
+    uninstrumented/scan_audit.py                          2506 w   18 hits   7.2 /1000
+    declared-frame/v2/README.md                           1552 w   14 hits   9.0 /1000
+
+========================================================================
+3  concentration and coverage
+========================================================================
+  815 candidates, 8 mechanisms, 69 triggers defined
+
+    mechanism                  hits    share
+    ----------------------------------------
+    SCORED AS WASTE             384    47.1%
+    AUTHORED REFERENCE          139    17.1%
+    AUDIT ASYMMETRY             103    12.6%
+    PROXY SUBSTITUTION           96    11.8%
+    STORAGE                      37     4.5%
+    BUDGET BOUNDARY              23     2.8%
+    SCALAR DEMAND                20     2.5%
+    MODALITY                     13     1.6%
+
+  Top matched strings:
+
+    SCORED AS WASTE        lean                            200
+    AUTHORED REFERENCE     benchmark                        88
+    AUDIT ASYMMETRY        unverified                       86
+    SCORED AS WASTE        slack                            84
+    PROXY SUBSTITUTION     compliance                       49
+    AUTHORED REFERENCE     ground truth                     48
+
+  4 matched strings produce 458 of 815 candidates (56%).
+
+  Corpus-conditional, and neither number grades the list.
+  SCALAR DEMAND is near-silent because this corpus contains no
+  survey instruments -- 'on a scale of', 'rate yourself',
+  'composite score' are psychometrics vocabulary. A silent
+  trigger on the wrong corpus is not a dead trigger.
+
+  In the other direction, the dominant strings are corpus
+  artifacts: UNVERIFIED is a claim-table STATUS CODE here, not a
+  hedge attached to an account. The trigger is correct and the
+  corpus is adversarial to it.
+
+  One result IS about the instrument, and it is the largest
+  single number in the table. `lean` is compiled raw, so it
+  matches as a substring:
+
+    `lean`    200 hits   surrounding forms: clean x109, cleanly x26, boolean x22, snaps_clean x17
+             the bare word appears 13 time(s)
+    `slack`    84 hits   surrounding forms: slack x108, slack_radius x31, slack_monitor x2, slacken x2
+             the bare word appears 108 time(s)
+
+  `lean` is the most-fired trigger in the corpus and nearly all
+  of it is `clean`, `cleanly` and `boolean`. Adding word
+  boundaries to that one trigger removes ~200 of 815 candidates
+  (25%) at no cost, because the bare word is rare here.
+
+  `slack` is the harder case and stays: the bare word IS what
+  mostly matches, and the noise is a proper-noun homograph and a
+  code identifier, neither of which \b removes. That one is a
+  triage cost the design already accepts.
+
+========================================================================
+4  --asym: the register's own WOULD MEASURE, now shipped
+========================================================================
+  The AUDIT ASYMMETRY entry names its measurement:
+
+      count caveats issued per account type across a transcript
+      corpus; the ratio is the measurement
+
+  and CLAIM_TABLE.md calls it the cheapest of the three
+  unworked entries to run. scan.py --asym is that measurement.
+
+    files with an account mention   356
+    files with ANY hedge at all     10
+    outside    hedged   6 of  477   0.0126
+    incumbent  hedged   7 of  619   0.0113
+    ratio (outside/incumbent)       1.11
+
+  Every hedge in the corpus, hand-checked:
+
+    CLAUDE.md                                'claims to'
+    CLAUDE.md                                'UNVERIFIED'
+    anchor-interval/CLAIM_TABLE.md           'UNVERIFIED'
+    anchor-interval/README.md                'UNVERIFIED'
+    fragility-cascade/THERMO_PM.md           'unverified'
+    fragility-cascade/THERMO_PM.md           'unverified'
+    grounding-layers/scope_profile.py        'claim to'
+    incentive-blindspot-sim/README.md        'claims to'
+    incentive-blindspot-sim/REORG_REPORT.md  'unverified'
+    incentive-blindspot-sim/REORG_REPORT.md  'unverified'
+    incentive-blindspot-sim/sim/incentive_bl 'claims to'
+    triad-playground/spec_v1.json            'Self-reported'
+    uninstrumented/patterns.json             'anecdotal'
+
+  All of them are artifacts: `UNVERIFIED` and `unverified` as
+  claim-table and provenance STATUS CODES, `claims to` inside
+  prose describing a model, `Self-reported` inside a JSON spec
+  string, and `anecdotal` inside patterns.json itself -- the
+  scanner matching the file that defines the trigger.
+
+  Zero are a hedge attached to an account, so the ratio above is
+  computed on nothing and means nothing.
+
+  The instrument gap is CLOSED and the corpus gap is not. The
+  measurement needs reportage -- limitations sections, news,
+  transcripts, regulatory filings -- and this repository
+  contains none. That is a sharper statement of UNI_006 than
+  UNI_006 makes: the entry is not unrun for want of a design.
+
+========================================================================
+5  the corpus is live, and the scanner is inside it
+========================================================================
+  patterns.json holds the trigger strings, and the scanner reads
+  .json. So the definition file is in the corpus:
+
+    candidates from the scanner's own files: 31 of 815
+      uninstrumented/AUDIT_NOTES.md                2
+      uninstrumented/patterns.json                 10
+      uninstrumented/scan.py                       1
+      uninstrumented/scan_audit.py                 18
+
+  Not a bug to fix by excluding a path. It is the use-mention
+  problem at its purest, and it is the one place in this corpus
+  where it actually bites -- documents ABOUT the mechanisms
+  return almost nothing, because the triggers are written in the
+  vocabulary of the FAILING document, not of the mechanism.
+  'apparatus in the wrong channel' is how the register names
+  MODALITY; 'failed to demonstrate' is what a paper exhibiting
+  it says. The two barely overlap -- except in the file that
+  lists both.
+
+  The counts in sections 2-4 are therefore a SNAPSHOT, not a
+  fixture. This is ../anchor-interval/'s moving reference
+  occurring rather than being described.
+
+  And one step further, which is why EXCLUDE exists at the top
+  of this file: scan.py reads .txt, and this script writes its
+  own output to samples/. Left alone, run N+1 measures run N and
+  the script has NO FIXED POINT -- consecutive runs disagree
+  before anything in the repo has changed.
+
+    candidates in this script's own last output: 21
+    excluded from every walk above, by path
+
+  That exclusion is a hand-broken loop, not a fix. Anyone
+  running scan.py over this repo WILL see those hits, because
+  the file is really there. What the exclusion buys is a script
+  that converges; what it costs is that the reported corpus is
+  no longer the corpus on disk. Both halves are stated here
+  rather than one of them being quietly true.
+
+========================================================================
+READING
+========================================================================
+
+  The one result that needs no corpus survives the change of instrument:
+  the scanner returns ZERO on both halves of the drop's own worked example
+  of BUDGET BOUNDARY, and the register's own phrasing of that case fires
+  under SCORED AS WASTE instead. The triggers catch the rhetoric of a
+  comparison and not the comparison.
+
+  Triage load is the quantity the design turns on by its own statement,
+  and it is affordable. The delivered `weak` band is a real addition --
+  a confidence gradient reported and never used to filter, the same
+  discipline as the register's CONFIDENCE field.
+
+  No precision figure is reported. This repository is a corpus about
+  measurement failure written in the triggers' own vocabulary, and
+  patterns.json is itself in the corpus. That measurement needs an outside
+  corpus.
+
+  --asym is the AUDIT ASYMMETRY entry's own WOULD MEASURE, now shipped as
+  code. It runs, and every hedge this corpus produces is an artifact --
+  status codes, spec strings, and the trigger file matching itself. Zero
+  are a hedge attached to an account. The instrument gap is closed and the
+  corpus gap is not, which is a sharper statement than UNI_006 makes: that
+  entry is no longer unrun for want of a design.
+

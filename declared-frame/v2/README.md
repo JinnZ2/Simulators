@@ -6,7 +6,7 @@ Second drop. Five files delivered, all **verbatim**:
 | --- | --- |
 | [`FRAME.md`](FRAME.md) | the frame document, v2 — adds **Cost** and **Growth** |
 | [`check_frame.py`](check_frame.py) | a rewrite, not a patch — `compare()` returns instead of printing |
-| [`patterns.json`](patterns.json) | **new** — eight mechanisms as regex triggers plus a `check` question each |
+| `patterns.json` | **new** — eight mechanisms as regex triggers plus a `check` question each. Now lives in [`../../uninstrumented/`](../../uninstrumented/), where the delivered `uninstrumented/README.md` puts it. |
 | [`examples/photosynthesis.json`](examples/photosynthesis.json) | the panel half of the worked pair |
 | [`examples/tree.json`](examples/tree.json) | the tree half |
 
@@ -16,23 +16,33 @@ delivered.
 Added here, not delivered:
 
 ```
-scan.py         run patterns.json over text  [RECONSTRUCTED -- no runner shipped]
-scan_audit.py   grade the trigger set
 v2_audit.py     what changed v1 -> v2, and which findings survive
 ```
 
 ```bash
 python3 check_frame.py examples/photosynthesis.json examples/tree.json
-python3 scan.py FILE [FILE ...]
-python3 scan_audit.py
 python3 v2_audit.py
 ```
+
+**The scanner moved.** This folder briefly held a reconstructed `scan.py`
+and a copy of `patterns.json`. `scan.py` was then delivered, so both now
+live in [`../../uninstrumented/`](../../uninstrumented/) and the audit of
+them is [`../../uninstrumented/scan_audit.py`](../../uninstrumented/scan_audit.py).
+Keeping a second copy here is exactly the drift
+`../../measurement-fork/CLAIM_TABLE.md` `MF_006` / `MF_011` / `MF_019`
+records seven instances of.
 
 Standard library only, deterministic.
 
 ---
 
 ## patterns.json — the register as a scanner
+
+*Graded in* [`../../uninstrumented/scan_audit.py`](../../uninstrumented/scan_audit.py)
+*and* [`../../uninstrumented/CLAIM_TABLE.md`](../../uninstrumented/CLAIM_TABLE.md) `UNI_007..009`.
+*The findings below were computed with a reconstructed scanner and were
+re-run against the delivered one; the BUDGET BOUNDARY result is unchanged,
+the corpus counts are not.*
 
 `../../uninstrumented/` is a register of seven mechanisms by which an
 instrument's constitution keeps a quantity from appearing. `patterns.json`
@@ -90,7 +100,8 @@ obvious gain.
 A 5000-word document arrives with about five questions attached, not fifty —
 the human step the design depends on is affordable.
 
-Exact counts live in [`samples/scan_audit.sample.txt`](samples/scan_audit.sample.txt)
+Exact counts live in
+[`../../uninstrumented/samples/scan_audit.sample.txt`](../../uninstrumented/samples/scan_audit.sample.txt)
 and are **not repeated here on purpose**. See *the corpus is live* below.
 
 ### An expectation that was checked and failed
