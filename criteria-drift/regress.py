@@ -253,6 +253,32 @@ class DriftRegressor:
             total += entry[1]
         return total
 
+    def bridges(self):
+        """
+        Models that span two or more criteria versions. A model does not
+        change, so such a model is a FROZEN INSTRUMENT: every bit of
+        movement in its score across versions is criteria movement at
+        fixed capability.
+
+        CD_006 / CD_008: without at least one, a slope on composite_drift
+        absorbs the capability term and cannot be read as a criteria share.
+        Every field that solved cross-time comparability solved it this way
+        -- stable words, the primary standard, a frozen model -- and each
+        treats the alignment as first class rather than optional.
+        """
+        return sorted(m for m, sc in self.score_matrix.items()
+                      if len(sc) >= 2)
+
+    def identified(self):
+        """(bool, why). Is the criteria term separable from capability?"""
+        b = self.bridges()
+        if not b:
+            return False, ("no model spans two criteria versions, so there "
+                           "is no frozen instrument and the criteria term "
+                           "is not separable from capability")
+        return True, ("%d model(s) span two or more versions: %s"
+                      % (len(b), ", ".join(b)))
+
     def regress_pooled(self, lag: int = 0, score_type: str = "delta"):
         """
         One fit over every model's observations.

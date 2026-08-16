@@ -1,11 +1,11 @@
 # CLAIM_TABLE — criteria-drift
 
-Seven claims, `CD_001..007`. **Six repaired, one open.**
+Nine claims, `CD_001..009`. **Seven repaired, two added from a cross-domain map.**
 
 | | |
 | --- | --- |
-| repaired | `CD_002` `CD_003` `CD_004` `CD_005` `CD_007` |
-| open, and not fixable by editing a function | `CD_006` |
+| repaired | `CD_002` `CD_003` `CD_004` `CD_005` `CD_006` `CD_007` |
+| open | — |
 | holds as delivered | `CD_001` |
 
 Each repair is pinned by `tests/test_repairs.py` (28 tests), which asserted
@@ -38,7 +38,7 @@ and no repair here was made to move a number.
 | `CD_003` | `build_series()` **plants a `y = 0.0` at the head of every model's series** and pairs it with a real drift value. For Alpha-1B it replaces a measured `−0.04`. | REPAIRED |
 | `CD_004` | `version_order` is built from `to_version`, so the **first criteria version and every score attached to it is dropped.** Delta-350M holds the longest baseline in the dataset and contributes nothing. | REPAIRED |
 | `CD_005` | `CD_003` and `CD_004` together **flip the sign** of the only model with three real transitions — between the two opposite readings the README's decision rule offers. | REPAIRED (the flip is now measured against the repaired builder) |
-| `CD_006` | **The capability term is in the stated model and not in the code.** `Δscore = β₀ + β₁·drift + ε` drops the unobservable term, so the drift slope absorbs it. The repair is already expressible in the shipped schema. | **OPEN** — not fixable by editing a function |
+| `CD_006` | **The capability term is in the stated model and not in the code.** `Δscore = β₀ + β₁·drift + ε` drops it, so the drift slope absorbs it. **Corrected and repaired** — the bridge was already in the shipped data and nothing used it; `anchor.py` uses it. | REPAIRED, with a correction to the original evidence |
 | `CD_007` | *"Significant"* appears twice in `README.md` and **zero times in `regress.py`.** No t-statistic, no p-value. The fits that exist have one degree of freedom, and `r_squared: 1.0` at n=2 is emitted as a field next to an interpretation string saying the data is insufficient. | REPAIRED |
 
 ---
@@ -309,3 +309,131 @@ against the same x-vector — four models, four slopes, two signs, from one
 criteria history, decided by which model was picked. The pooled fit is the
 one the design's question asks for, and on this demo it is the only fit with
 degrees of freedom to spare.
+
+---
+
+## CD_006 — corrected, then repaired
+
+**The original evidence line was wrong.** `CD_006` said *"0 of 4 demo models
+carry scores on more than one non-current version — the one design that
+cannot separate the two terms."* The script that produced that number printed
+**2 of 4**; the prose said 0. And by the weaker, correct test — does a model
+span two or more criteria versions at all — it is **4 of 4**.
+
+So the bridge was in the shipped data the whole time. What was missing was
+any code that used it, which is a smaller gap and a worse one: nothing had to
+be collected.
+
+**A model does not change.** A model scored on two criteria versions is
+therefore a frozen instrument, and every bit of movement in its score is
+criteria movement at fixed capability:
+
+```
+model        v1.0    v2.0    v3.0    v3.1-hard
+Alpha-1B     0.42    0.38    0.35    0.28
+Beta-7B      -       0.55    0.62    0.58
+Delta-350M   0.18    -       -       0.05
+Gamma-70B    -       -       0.78    0.81
+
+criteria movement at FIXED model:
+  v1.0 -> v2.0        Alpha -0.04
+  v2.0 -> v3.0        Alpha -0.03   Beta +0.07
+  v3.0 -> v3.1-hard   Alpha -0.07   Beta -0.04   Gamma +0.03
+```
+
+The signs disagree, and that is **not** evidence against the affine model.
+Under `reported = a·c + b` a version change moves a model by
+`(a₂−a₁)·c + (b₂−b₁)`, which is linear in capability — a rising gain with a
+falling offset moves weak models down and strong models up, and the crossing
+is where the two terms cancel.
+
+Three frozen models on the last transition over-determine it — two unknowns,
+three equations:
+
+```
+gain change    a₂ − a₁ = +0.2198
+offset change  b₂ − b₁ = −0.1549
+crossing at capability 0.7046
+
+score   observed   fitted    residual
+0.35    -0.0700    -0.0780   +0.0080
+0.62    -0.0400    -0.0186   -0.0214
+0.78    +0.0300    +0.0166   +0.0134
+```
+
+Largest residual 0.0214 against movements of order 0.05. The affine form is
+neither refuted nor confirmed — three points and two parameters leave exactly
+one residual, the smallest sample that can produce one at all. **That
+residual is the error budget the cross-domain notes say alignment should
+carry**, and it exists only because the transition is over-determined.
+
+**Falsifier:** a transition with four or more frozen models whose residuals
+are large and structured against capability. That refutes the affine form and
+sends the decomposition back for a different functional shape.
+
+**Evidence:** `anchor.py` §4.
+
+---
+
+## CD_008 — the bridge buys a share, exactly, and a level not at all
+
+**status:** SUPPORTED (known-truth)
+
+`anchor.py` §1 plants a capability trajectory and a criteria trajectory,
+generates both score series, and subtracts:
+
+```
+criteria_k = contemporary_k − anchored_k = (a_k − a_0)·c_k + (b_k − b_0)
+max error 6.9e-17
+```
+
+Exact, because it is a subtraction and not a fit. What it does **not** buy is
+the capability level — scores on the frozen version are `a_0·c + b_0` with
+`a_0`, `b_0` unknown — so ratios of differences are identified (`0.600000`
+recovered exactly) and levels are not.
+
+§2 is the constructive converse: a world where capability rose 83% under a
+moving ruler, and a world where capability never moved and the ruler did all
+of it, produce published series identical to `5.6e-17`. Their **anchor**
+series differ completely — one rises, one is flat. One extra measurement per
+model per generation, and two indistinguishable datasets become two.
+
+This is `../anchor-interval/` `ANC_005`/`ANC_006` reached by construction in
+a tool rather than by argument in a note.
+
+**Falsifier:** an identifying restriction that needs no frozen reference — an
+item whose difficulty is fixed by construction, or an external standard with
+known gain. Then the bridge is one option rather than the only one.
+
+---
+
+## CD_009 — the cross-domain map is a marker, and its citations are not checked
+
+**status:** UNVERIFIED on the literature; SUPPORTED on the structural claim
+
+`SOURCE_DROP_KIMI.md` maps seven fields onto this framework — metrology,
+adaptive Kalman filtering, Kuhn, computational semantic drift, high
+reliability organizations, panarchy, predictive processing. Its citation
+markers are `cite🛠web_search:NN#M` and are **unresolvable as delivered**,
+the same as every previous drop. No claim in this folder rests on one, and
+none of the literature statements are checked here.
+
+What **is** checkable, and holds, is the structural pattern it names:
+
+> identify an invariant subset that does not change, and use it as the
+> bridge — stable words, the primary standard, a frozen model
+
+That shape is already in this repository twice, arrived at independently:
+`../anchor-interval/` `ANC_006` (a held-fixed benchmark identifies capability
+up to its own unknown constants) and `../instrument-epistemology/`
+(metrological traceability is the strongest of its four no-answer-key
+methods). This drop supplies the name and a third instance.
+
+Two borrowings are implemented rather than noted: **as-found / as-left**
+(`anchor.py` §3) and a **Shewhart chart on a frozen pair** (§5). The second
+is not run on the example data, because there is no frozen model repeatedly
+scored on a frozen version — the same absence §4 reports, one axis over.
+
+**Falsifier for the structural claim:** a field that solved cross-time
+comparability without an invariant subset. The notes assert none exists; that
+is the part not checked.

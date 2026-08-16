@@ -273,3 +273,78 @@ class Significance(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# ---------------------------------------------------------------------------
+# CD_006 / CD_008 -- the bridge
+
+
+class Bridge(unittest.TestCase):
+
+    def setUp(self):
+        self.versions, self.metrics = make_history()
+
+    def test_a_model_on_two_versions_is_a_bridge(self):
+        r = regress.DriftRegressor({"M": {"v1": 0.4, "v3": 0.3}},
+                                   self.metrics)
+        self.assertEqual(r.bridges(), ["M"])
+        self.assertTrue(r.identified()[0])
+
+    def test_no_bridge_is_reported_as_not_identified(self):
+        r = regress.DriftRegressor({"M": {"v2": 0.4}, "N": {"v3": 0.5}},
+                                   self.metrics)
+        self.assertEqual(r.bridges(), [])
+        ok, why = r.identified()
+        self.assertFalse(ok)
+        self.assertIn("not separable", why)
+
+    def test_the_shipped_demo_has_bridges(self):
+        """CD_006 said 0 of 4. The correct count is 4 of 4."""
+        import os
+        db = os.path.join(HERE, "..", "drift.db")
+        if not os.path.exists(db):
+            self.skipTest("no drift.db")
+        import store
+        s = store.DriftStore(db)
+        dm = drift.DriftEngine().compute_history(
+            s.get_criteria_history("CodeBench"))
+        r = regress.DriftRegressor(s.get_score_matrix("CodeBench"), dm)
+        self.assertEqual(len(r.bridges()), 4)
+
+
+class AnchorRecovery(unittest.TestCase):
+    """CD_008: the criteria term is a subtraction, so it comes back exact."""
+
+    def setUp(self):
+        import anchor
+        self.a = anchor
+
+    def test_criteria_term_recovered_exactly(self):
+        a = self.a
+        con = a.contemporary(a.TRUE_CAPABILITY, a.GAIN, a.OFFSET)
+        anc = a.anchored(a.TRUE_CAPABILITY, a.GAIN, a.OFFSET)
+        for k in range(a.K):
+            truth = ((a.GAIN[k] - a.GAIN[0]) * a.TRUE_CAPABILITY[k]
+                     + (a.OFFSET[k] - a.OFFSET[0]))
+            self.assertAlmostEqual(con[k] - anc[k], truth, places=12)
+
+    def test_two_worlds_share_a_published_series(self):
+        a = self.a
+        con = a.contemporary(a.TRUE_CAPABILITY, a.GAIN, a.OFFSET)
+        flat = [a.TRUE_CAPABILITY[0]] * a.K
+        off = [a.OFFSET[0]] * a.K
+        gain = [(r - b) / c for r, c, b in zip(con, flat, off)]
+        con_b = a.contemporary(flat, gain, off)
+        for x, y in zip(con, con_b):
+            self.assertAlmostEqual(x, y, places=12)
+
+    def test_but_their_anchor_series_differ(self):
+        a = self.a
+        con = a.contemporary(a.TRUE_CAPABILITY, a.GAIN, a.OFFSET)
+        flat = [a.TRUE_CAPABILITY[0]] * a.K
+        off = [a.OFFSET[0]] * a.K
+        gain = [(r - b) / c for r, c, b in zip(con, flat, off)]
+        anc_a = a.anchored(a.TRUE_CAPABILITY, a.GAIN, a.OFFSET)
+        anc_b = a.anchored(flat, gain, off)
+        self.assertGreater(max(abs(x - y) for x, y in zip(anc_a, anc_b)), 0.2)
+        self.assertEqual(len(set(round(x, 9) for x in anc_b)), 1)

@@ -87,6 +87,18 @@ def cmd_regress(args):
     drift_metrics = engine.compute_history(versions)
     regressor = DriftRegressor(matrix, drift_metrics)
 
+    ok, why = regressor.identified()
+    if not ok:
+        print(json.dumps({
+            "identified": False,
+            "why": why,
+            "note": ("A slope on composite_drift here absorbs the "
+                     "capability term. Score one model on two criteria "
+                     "versions and rerun; ModelScore already keys on "
+                     "version. See anchor.py."),
+        }, indent=2))
+        return
+
     if args.model:
         result = regressor.regress(args.model, lag=args.lag, score_type=args.score_type)
         print(json.dumps(result.to_dict(), indent=2))
@@ -102,6 +114,7 @@ def cmd_regress(args):
         # answers the question the design asks. CD_006.
         out["_pooled"] = regressor.regress_pooled(
             lag=args.lag, score_type=args.score_type).to_dict()
+        out["_identification"] = {"identified": ok, "why": why}
         if args.output:
             with open(args.output, "w") as f:
                 json.dump(out, f, indent=2)

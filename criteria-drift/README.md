@@ -98,6 +98,13 @@ The core test:
 
 Run with lag to test predictive power: does drift at t predict improvement at t+k?
 
+**The regression refuses to run unidentified.** A slope on drift alone
+absorbs the capability term, so `audit.py regress` first checks for a
+**bridge**: a model scored on two or more criteria versions. A model does not
+change, so such a model is a frozen instrument and every bit of movement in
+its score is criteria movement at fixed capability. Without one, the command
+reports `identified: false` and stops. See `anchor.py`.
+
 ## File structure
 
 ```
@@ -109,6 +116,15 @@ criteria_drift_kit/
   audit.py           # CLI entry point
   example_data/      # Sample CodeBench history
   README.md          # This file
+```
+
+Added after audit (see `AUDIT_NOTES.md`, `CLAIM_TABLE.md`):
+
+```
+  anchor.py          # anchor-version scoring, made first class
+  drift_sign.py      # can the metric carry the hypothesis?
+  regression_audit.py# the series, and the term that was missing
+  tests/             # 34 tests, one per repaired defect
 ```
 
 ## Extending

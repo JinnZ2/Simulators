@@ -2143,10 +2143,41 @@ underneath).
   through a regularized incomplete beta (checked against four standard
   critical values) with `r_squared` null below three points; and
   `regress_pooled()` / `--pooled`, since drift is a property of the artifact
-  and four per-model fits ran against one x-vector. `CD_006` stays OPEN and
-  is not fixable by editing a function — the repair is a data change nobody
-  has made (0 of 4 demo models carry a score on a non-current version).
-  Seven claims `CD_001..007`. Stdlib only, CC0.
+  and four per-model fits ran against one x-vector. **`CD_006` is CORRECTED, then
+  repaired.** Its original evidence line said "0 of 4 demo models carry
+  scores on more than one non-current version"; the script that produced it
+  printed **2 of 4** and the prose said 0, and by the correct test — does a
+  model span two or more versions — it is **4 of 4**. The bridge was in the
+  shipped data the whole time and nothing used it, which is a smaller gap
+  and a worse one. `anchor.py` uses it: a model does not change, so a model
+  scored on two criteria versions IS a frozen instrument and every bit of
+  movement in its score is criteria movement at fixed capability. The demo's
+  last transition carries THREE frozen models, over-determining the affine
+  criteria change (two unknowns, three equations) → gain change +0.2198,
+  offset change −0.1549, crossing at capability 0.7046, largest residual
+  0.0214 against movements of order 0.05 — and **that residual is the error
+  budget the cross-domain map says alignment should carry**, existing only
+  because the transition is over-determined. The per-model signs disagreeing
+  (Alpha −0.07, Beta −0.04, Gamma +0.03 on one transition) is NOT evidence
+  against the affine form: a rising gain with a falling offset moves weak
+  models down and strong models up, and the crossing is where the two
+  cancel. **`CD_008`:** the criteria term is recovered EXACTLY from an
+  anchor series (max error 6.9e-17 — a subtraction, not a fit), and what it
+  buys is a SHARE not a capability, ratios of differences identified to
+  0.600000 and levels not; the constructive converse is a world where
+  capability rose 83% under a moving ruler and a world where capability
+  never moved, producing published series identical to 5.6e-17, separated
+  only by the anchor series. **`CD_009`** records the cross-domain map
+  (metrology / adaptive Kalman / Kuhn / semantic drift / HROs / panarchy /
+  predictive processing) as UNVERIFIED on the literature — citation markers
+  unresolvable as delivered — while the structural pattern it names holds
+  and is already in the repo twice independently (`anchor-interval/`
+  `ANC_006`, `instrument-epistemology/` traceability). Two borrowings
+  implemented rather than noted: **as-found / as-left** and a **Shewhart
+  chart on a frozen pair**, the latter not run on the example data because
+  no frozen model is repeatedly scored on a frozen version. `audit.py
+  regress` now refuses to run unidentified: no bridge, no slope. Nine claims
+  `CD_001..009`; 34 tests. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
