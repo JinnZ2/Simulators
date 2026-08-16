@@ -429,3 +429,91 @@ support".
 
 **Evidence:** `gate_fork.py` FORK-ADJUDICATED;
 `reasoning-gate/tests/test_gate.py`.
+
+---
+
+## MF_014 — K14-K18 close one of the three gaps, half of a second, none of the third
+
+**who:** A · **status:** SUPPORTED
+
+Five probes specified after `MF_010`. Adjudicated by reading protocols;
+`coupling.py` is unmodified.
+
+```
+id     quantity               object_of    returns
+K14    practice_rate          coupling     rate
+K15    baseline_freshness     coupling     duration
+K16    detection_latency      coupling     latency
+K17    aggregation_depth      instrument   count
+K18    budget_closure         design       audit
+```
+
+**K14 is the first probe in the arm that returns a rate.** `MF_010` turned
+on exactly that: the delivered arm returned levels, ratios, slopes and
+variances, all at fixed regime.
+
+Against the three gaps:
+
+| gap | verdict | via |
+| --- | --- | --- |
+| `whether trust in own sensing is a measurement or a belief` | **CLOSED** | K15 |
+| `reversibility after regime shift` | **PARTIAL** | K14 |
+| `coupling bandwidth` | **OPEN** | — |
+
+`K15` closes its gap because injecting a small *known* deviation scores the
+sensing apparatus against ground truth rather than against its own report,
+which is the distinction the question asks for.
+
+`reversibility` goes partial. K14 sweeps provisioning level, supplying the
+gradient the stated falsifier needs and the delivered probes lacked. The
+other half does not move: no proposed probe measures relearn rate *after*
+the buffer is removed. K16 is a latency swept against staleness at **fixed
+regime**; the predicted contrast is across a regime change.
+
+`coupling bandwidth` does not move. Rate-of-use, staleness and latency are
+three quantities; capacity is a fourth.
+
+**K18's `object_of` is `design`**, outside `quantities.OBJECTS` — so by
+`MF_008` it is a widen move rather than a probe and must not enter the
+coverage pool. The specification says as much by calling it a widen move.
+
+**Falsifier:** a reading of K16 under which its sweep crosses a regime
+change rather than running at fixed regime. Then `reversibility` closes.
+
+**Evidence:** `proposed_probes.py`.
+
+---
+
+## MF_015 — the mediation chain is the strongest part, and its lags are ordinal
+
+**who:** A · **status:** SUPPORTED
+
+```
+practice_rate falls              K14
+  -> baseline_freshness degrades   K15   lag 1
+    -> detection_latency rises     K16   lag 2
+
+all three while state variables read nominal
+
+falsifier: if K14 predicts K16 with K15 controlled out,
+           the causal chain is wrong
+```
+
+This is refutable by a partial correlation on three measured series, it
+names which way the refutation cuts before the data exist, and it does not
+depend on the effect being large. Nothing else in the fork has that shape.
+
+What is not specified: **the lag units.** "lag 1" and "lag 2" are ordinal.
+Whether the lag is hours or seasons decides the sampling rate, and a
+mediation test sampled coarser than its own lag returns the chain collapsed
+into a single step — which is indistinguishable from the chain being wrong,
+and would be read as the falsifier firing.
+
+Declare the units and it becomes a `G-RES` pair: sampling interval against
+the lag being resolved.
+
+**Falsifier:** a mediation estimate that is stable across sampling
+intervals spanning the plausible lag range. Then the units do not matter and
+this claim is unnecessary.
+
+**Evidence:** `proposed_probes.py` §3.

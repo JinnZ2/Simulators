@@ -24,6 +24,7 @@ harness is most likely to suppress by accident.
 | [`coverage_check.py`](coverage_check.py) | Null-tests the RESIDUAL classifier on the fixture. |
 | [`residual_audit.py`](residual_audit.py) | Adjudicates the RESIDUAL cell by hand on the real spec. **The result.** |
 | [`gate_fork.py`](gate_fork.py) | The fork's own claims through [`../reasoning-gate/`](../reasoning-gate/). Imports the gate, does not copy it. |
+| [`proposed_probes.py`](proposed_probes.py) | K14–K18 against the gaps `MF_010` named. |
 | [`CLAIM_TABLE.md`](CLAIM_TABLE.md) | Eleven claims (`MF_001..011`). |
 | [`samples/`](samples/) | Pinned output. |
 
@@ -33,6 +34,7 @@ python3 compare.py  systems/provisioning_calibration.json  # the fork
 python3 residual_audit.py                                  # the growth edge
 python3 coverage_check.py                                  # audit the classifier
 python3 gate_fork.py                                       # gated
+python3 proposed_probes.py                                 # do K14-K18 close them?
 python3 ../tools/check_gate_drift.py                       # one gate?
 ```
 
@@ -75,6 +77,51 @@ swept, and the probes as generated sit at one point on it.
 
 **One probe closes both.** Error against trials-since-shift, fitted for a
 time constant, at two or more provisioning levels. (`MF_010`)
+
+### K14–K18 against those three gaps
+
+Five probes specified since. Adjudicated by reading protocols;
+`coupling.py` is unmodified.
+
+| gap | verdict | via |
+| --- | --- | --- |
+| `whether trust in own sensing is a measurement or a belief` | **CLOSED** | K15 |
+| `reversibility after regime shift` | **PARTIAL** | K14 |
+| `coupling bandwidth` | **OPEN** | — |
+
+**K14 is the first probe in the arm that returns a rate**, which is what
+`MF_010` turned on. K15 closes its gap by injecting a *known* deviation —
+scoring the sensing apparatus against ground truth rather than its own
+report.
+
+`reversibility` goes partial: K14 supplies the provisioning gradient the
+stated falsifier needs, but nothing measures relearn rate *after* the
+buffer is removed. K16 is a latency swept against staleness at **fixed
+regime**; the predicted contrast is across a regime change.
+
+K18's `object_of` is `design` — outside `quantities.OBJECTS`, so by
+`MF_008` it is a widen move rather than a probe. The specification says so
+itself. (`MF_014`)
+
+**The mediation chain is the strongest part:**
+
+```
+practice_rate falls              K14
+  -> baseline_freshness degrades   K15   lag 1
+    -> detection_latency rises     K16   lag 2
+
+falsifier: if K14 predicts K16 with K15 controlled out,
+           the causal chain is wrong
+```
+
+Refutable by a partial correlation, direction named in advance, does not
+depend on the effect being large.
+
+Its one gap is that **the lags are ordinal.** A mediation test sampled
+coarser than its own lag returns the chain collapsed into a single step —
+indistinguishable from the chain being wrong, and it would read as the
+falsifier firing. Declare the units and it becomes a `G-RES` pair:
+sampling interval against the lag being resolved. (`MF_015`)
 
 ## Still missing from the package
 

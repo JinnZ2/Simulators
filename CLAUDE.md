@@ -1718,10 +1718,74 @@ underneath).
   and the probes sit at one point on it. One probe closes both — error
   against trials-since-shift, fitted for a time constant, at two or more
   provisioning levels. `residual_audit.py` is that adjudication.
+  **Third drop: K14-K18.** `proposed_probes.py` adjudicates the five newly
+  specified probes against the three gaps `MF_010` named, by reading
+  protocols — `coupling.py` stays unmodified. **`MF_014`:** `K14
+  practice_rate` is the **first probe in the arm that returns a rate**,
+  which is exactly what `MF_010` turned on. One gap CLOSES (`whether trust
+  in own sensing is a measurement or a belief`, via `K15`, because
+  injecting a small KNOWN deviation scores the sensing apparatus against
+  ground truth rather than against its own report); one goes PARTIAL
+  (`reversibility after regime shift` — K14 supplies the provisioning
+  gradient the stated falsifier needed, but nothing measures relearn rate
+  AFTER the buffer is removed, and K16 is a latency swept against
+  staleness at FIXED regime); one stays OPEN (`coupling bandwidth` —
+  rate-of-use, staleness and latency are three quantities, capacity is a
+  fourth). `K18`'s `object_of` is `design`, outside `quantities.OBJECTS`,
+  so by `MF_008` it is a widen move not a probe — as its own specification
+  says. **`MF_015`:** the mediation chain `K14 → K15 → K16` is the
+  strongest part of the specification — refutable by a partial correlation
+  on three measured series, with the direction of refutation named before
+  the data exist, and not dependent on the effect being large. Its one gap
+  is that **the lags are ordinal**: a mediation test sampled coarser than
+  its own lag returns the chain collapsed into a single step, which is
+  indistinguishable from the chain being wrong and would read as the
+  falsifier firing. Declare the units and it becomes a `G-RES` pair,
+  sampling interval against the lag being resolved. Fifteen claims
+  `MF_001..015`.
   **`MF_011`:** `make_docs.py` / `README.md` / `GUARDS.md` arrive as
   pre-repair copies too (12 / 16 / 48 differing lines) — five bundled
   files, five stale, across three drops, which is what copying instead of
   importing produces. Eleven claims `MF_001..011`.
+- `declared-frame/` — A six-field block to attach to any measurement,
+  model or claim (`boundary` / `horizon` / `who_counts` / `sign_source` /
+  `logic` / `observer_access`), plus `check_frame.py`, which validates a
+  block and tests two of them for comparability. Both delivered verbatim
+  along with the worked panel-vs-leaf example. **The block holds**
+  (`DF_001`): the fields are not interchangeable and `compare()` treats
+  them three ways — `boundary`/`horizon`/`who_counts` are core and must
+  match, `logic` gets a separate mismatch line, and `sign_source` /
+  `observer_access` are recorded but never compared. That split is right:
+  two results can share a boundary and disagree about which direction is
+  better, and the disagreement is legible precisely because both declared
+  it. **`DF_002`, the sharp one: the checker inverts the rule the doc
+  calls load-bearing.** The doc says an omitted field "converts an open
+  question into a settled one by silence" and `unknown` preserves the gap
+  — so omission is the worse of the two. In `compare()` a missing core
+  field is read as `str(a.get(f, ""))`, becomes `""`, and is compared as a
+  VALUE: omitted → `NOT DIRECTLY COMPARABLE`, `unknown` → `UNDETERMINED`.
+  Omission produces the MORE confident verdict, in the function shipped to
+  prevent that. Three-line fix. **`DF_003`:** comparability is exact
+  string equality on free text, so two frames whose boundary differs only
+  in clause order come back NOT COMPARABLE — the inverse of
+  `measurement-fork/`'s classifier, which over-matched where this
+  under-matches. Under-matching is the safer direction and there is no
+  band for it; there is no string fix, since whether two free-text
+  boundaries denote the same accounting is a judgement. **`DF_004`:** `rc`
+  tracks whether the blocks are well-formed, not whether the results
+  compare, and does not say so — `check_frame.py a b && use_both` passes
+  on two results the tool has just called incomparable. **`DF_005`:** the
+  worked pair differs on all three core fields (panel excludes
+  fabrication/mining/smelting/transport/installation/maintenance/
+  decommission; leaf puts all of them inside the same photon budget), so
+  the efficiency ratio between them is a frame difference — which is
+  `measurement-fork/`'s VOID RATIO and `reasoning-gate/`'s `G-DIM` arriving
+  by a third route. **Three tools, three stages, one rule.** `DF_006`
+  UNVERIFIED: nothing has been attached to a real result, and the
+  load-bearing question — does declaring the frame change what anyone does
+  — is a claim about a process, measurable as whether two disagreeing
+  parties given both blocks locate the disagreement faster. Six claims
+  `DF_001..006`. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

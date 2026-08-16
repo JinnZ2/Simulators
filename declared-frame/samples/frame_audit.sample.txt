@@ -1,0 +1,121 @@
+
+NULL-TESTING THE COMPARABILITY VERDICTS
+subject: check_frame.py compare(), on frames/panel_conversion.json
+
+========================================================================
+1  omission produces a MORE confident verdict than unknown
+========================================================================
+  core field `horizon` on side B:
+
+    omitted      NOT DIRECTLY COMPARABLE      rc 1
+    'unknown'    UNDETERMINED                 rc 0
+
+  The doc: omission 'converts an open question into a settled one
+  by silence'. The tool does exactly that -- it settles it, and
+  reports NOT COMPARABLE where the same gap declared as `unknown`
+  correctly reports UNDETERMINED.
+
+  Mechanism: compare() reads `str(a.get(f, "")).strip()`, so a
+  missing field becomes "" and is compared as a value. The
+  unknown branch is checked first and never reached.
+
+  Fix, three lines: treat a missing core field as undetermined,
+  labelled as omitted rather than declared, so the block-level
+  OMITTED finding and the comparability verdict agree.
+
+========================================================================
+2  comparability is string equality on free text
+========================================================================
+  same boundary, two orderings of the same clause:
+
+    A: photon capture to product only. Excludes fabrication...
+    B: only photon capture to product. Excludes fabrication...
+
+    verdict  NOT DIRECTLY COMPARABLE   rc 0
+
+  This is the inverse of the failure in
+  ../measurement-fork/: there a token classifier OVER-matched and
+  marked questions covered that no probe reached. Here exact
+  equality UNDER-matches and marks frames different that are the
+  same.
+
+  Under-matching is the safer direction -- refusing a comparison
+  costs less than licensing a wrong one. But the tool has no band
+  for it. Two frames differing as written get NOT DIRECTLY
+  COMPARABLE, which reads as a substantive difference rather than
+  as an unresolved one.
+
+  There is no string fix. Whether two free-text boundaries denote
+  the same accounting is a judgement, and the honest verdict for
+  differing text is the one the doc already uses elsewhere: not
+  resolved here.
+
+========================================================================
+3  the exit code reports block validity, not comparability
+========================================================================
+  two complete blocks, genuinely different frames
+    verdict  NOT DIRECTLY COMPARABLE      rc 0
+
+  one block missing a field
+    rc 1
+
+  So rc tracks whether the BLOCKS are well-formed, not whether the
+  results compare. That is defensible -- incomparability is a
+  finding, not an error -- and it is undocumented. A caller
+  scripting `check_frame.py a b && use_both` gets a pass on two
+  results the tool has just said do not compare.
+
+  Either document rc, or add a distinct code for
+  NOT-COMPARABLE so the verdict is scriptable.
+
+========================================================================
+4  what the block does that nothing else here does
+========================================================================
+  The six fields are not interchangeable. Three are compared
+  (boundary, horizon, who_counts); logic is reported as a
+  separate mismatch; sign_source and observer_access are
+  recorded and not compared at all.
+
+  field              role in compare()
+  ----------------------------------------------------
+  boundary           core -- must match
+  horizon            core -- must match
+  who_counts         core -- must match
+  sign_source        recorded, never compared
+  logic              separate mismatch line
+  observer_access    recorded, never compared
+
+  That split is right and is worth stating. sign_source and
+  observer_access are not comparability conditions -- two results
+  can share a boundary and disagree about which direction is
+  better, and that disagreement is legible precisely because both
+  declared it.
+
+  On the worked pair the block does its job: the panel/leaf
+  comparison differs on all three core fields, so the efficiency
+  ratio between them is a frame difference reported as a finding.
+  That is the VOID RATIO check from ../measurement-fork/ arriving
+  by a different route -- a closed budget over an open one.
+
+========================================================================
+READING
+========================================================================
+
+  The block is the contribution and it holds. Six declared fields, three
+  of them comparability conditions, and UNKNOWN as a legal value are all
+  load-bearing and all correct.
+
+  The checker inverts the one rule the doc calls load-bearing. Omission is
+  supposed to be worse than `unknown`; in compare() it produces the more
+  confident verdict, because a missing field is read as the empty string
+  and compared as a value. Three lines.
+
+  Comparability is exact string equality on free text. That under-matches,
+  which is the safe direction, and there is no band for it -- two frames
+  that differ only in wording get a verdict that reads as substantive.
+  There is no string fix; the honest output for differing text is the
+  not-resolved-here the doc already uses for its own middle band.
+
+  The exit code reports whether the blocks are well-formed, not whether
+  the results compare, and does not say so.
+
