@@ -1,0 +1,10 @@
+{
+  "model_name": "Alpha-1B",
+  "criteria_artifact": "CodeBench",
+  "criteria_version": "v3.1-hard",
+  "score": 0.28,
+  "score_type": "accuracy",
+  "timestamp": "2025-06-01T00:00:00Z",
+  "source_url": "",
+  "notes": "Crashed on adversarial+efficiency"
+}

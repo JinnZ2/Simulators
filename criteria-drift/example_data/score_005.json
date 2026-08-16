@@ -1,0 +1,10 @@
+{
+  "model_name": "Beta-7B",
+  "criteria_artifact": "CodeBench",
+  "criteria_version": "v3.0",
+  "score": 0.62,
+  "score_type": "accuracy",
+  "timestamp": "2024-03-01T00:00:00Z",
+  "source_url": "",
+  "notes": ""
+}

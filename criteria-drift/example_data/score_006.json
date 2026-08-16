@@ -1,0 +1,10 @@
+{
+  "model_name": "Beta-7B",
+  "criteria_artifact": "CodeBench",
+  "criteria_version": "v3.1-hard",
+  "score": 0.58,
+  "score_type": "accuracy",
+  "timestamp": "2025-03-01T00:00:00Z",
+  "source_url": "",
+  "notes": "Slight drop on hard subset"
+}

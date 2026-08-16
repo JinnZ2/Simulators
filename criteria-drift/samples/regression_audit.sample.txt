@@ -1,0 +1,187 @@
+
+REGRESSION AUDIT -- criteria_drift_kit
+artifact CodeBench, 4 criteria versions, 4 models
+
+========================================================================
+1  every series begins with a fabricated point
+========================================================================
+  build_series(score_type='delta') sets imp = 0.0 at i == 0, and
+  pairs it with the drift INTO that version -- a real x against a
+  y that was not measured.
+
+  model        y series as built                      planted
+  --------------------------------------------------------------------
+  Alpha-1B     [0.0, -0.03, -0.07]                    1 of 3
+  Beta-7B      [0.0, 0.07, -0.04]                     1 of 3
+  Delta-350M   (empty)                                -
+  Gamma-70B    [0.0, 0.03]                            1 of 2
+
+  It is not padding. For Alpha-1B the head point REPLACES a real
+  measurement:
+
+      scores      v1.0 -> 0.42, v2.0 -> 0.38
+      real delta  -0.04
+      recorded    +0.00   at x = 0.2971
+
+========================================================================
+2  the baseline version is not in the series at all
+========================================================================
+  all criteria versions   ['v1.0', 'v2.0', 'v3.0', 'v3.1-hard']
+  regressor version_order ['v2.0', 'v3.0', 'v3.1-hard']
+
+  version_order = [p['to_version'] for p in pairs], so the FIRST
+  version never appears and any score attached to it is dropped
+  before the series is built.
+
+  model        scores on record                   usable n
+  ------------------------------------------------------------------
+  Alpha-1B     v1.0,v2.0,v3.0,v3.1-hard           3
+  Beta-7B      v2.0,v3.0,v3.1-hard                3
+  Delta-350M   v1.0,v3.1-hard                     0
+  Gamma-70B    v3.0,v3.1-hard                     2
+
+  Delta-350M holds scores at the FIRST and LAST version -- the
+  longest baseline in the dataset, and the only pair spanning
+  every criteria change. After filtering, one score survives,
+  len(ordered_scores) < 2, and the model returns ([], []).
+
+  The two defects push opposite ways on n: the planted head adds
+  a point, the dropped baseline removes one or more. They do not
+  cancel, because they are not the same point.
+
+========================================================================
+3  what the two defects cost, measured
+========================================================================
+  Corrected series: every transition whose BOTH endpoint scores
+  exist, no planted head, first version included.
+
+  model        as shipped                   corrected                   
+  ----------------------------------------------------------------------
+  Alpha-1B     n=3 slope=-0.0782            n=3 slope=+0.0526           
+  Beta-7B      n=3 slope=+0.2835            n=2 slope=+0.6482           
+  Delta-350M   n=0 (no fit)                 n=0 (below 2)               
+  Gamma-70B    n=2 slope=-0.1768            n=1 (below 2)               
+
+  SIGN FLIP on Alpha-1B.
+
+  The README's decision rule reads the sign:
+
+      beta1 > 0   criteria inflation explains some gain
+      beta1 < 0   stricter criteria masking real gains
+
+  Alpha-1B is the only model with three real transitions, and
+  the shipped and corrected series put it on opposite sides
+  of that rule. The verdict is set by the fabricated point.
+
+  After correction the demo supports one n=3 fit and one n=2.
+  Two models fall below two points. The shipped n column is
+  inflated by the planted head, not by having more data.
+
+========================================================================
+4  'significant' is in the decision rule and not in the code
+========================================================================
+  README.md:
+
+      If the slope is positive and significant, some fraction of
+      'progress' is the ruler stretching.
+      beta1 > 0, significant: Criteria inflation explains ...
+
+      regress.py contains 'signific'  False
+      regress.py contains 'p_value'   False
+      regress.py contains 'pvalue'    False
+      regress.py contains 't_stat'    False
+      regress.py contains 'ttest'     False
+
+  What the demo actually produces:
+
+  model        n      slope       se          t        df
+  ------------------------------------------------------------
+  Alpha-1B     3      -0.0782     0.2363      -0.33    1
+  Beta-7B      3      0.2835      0.2745      1.03     1
+  Delta-350M   0      (no fit)
+  Gamma-70B    2      -0.1768     inf         n/a      0
+
+  One degree of freedom on the fits that have any. No t is near
+  a conventional threshold, and the interpretation string reports
+  the sign and R-squared without either.
+
+  R-squared = 1.000 at n = 2 is arithmetic: two points define a
+  line. `_interpret()` guards it -- 'Insufficient data for
+  reliable inference' -- but `to_dict()` emits `r_squared: 1.0`
+  in the same object, so a consumer reading the FIELD rather than
+  the prose gets a perfect fit. The guard is in the sentence, not
+  in the data.
+
+========================================================================
+5  the term the regression does not have
+========================================================================
+  The research program states the model as:
+
+      reported = b0 + b1*actual_capability_gain
+               + b2*criteria_drift + e
+
+  regress.py runs:
+
+      delta_score = b0 + b1*composite_drift + e
+
+  The capability term is dropped, because it is unobservable.
+  Anything it shares with drift loads onto the reported slope.
+
+  And the two are not plausibly independent: a benchmark is
+  revised BECAUSE models saturated it. So drift is downstream of
+  capability, which is the reverse of the direction the slope is
+  read in.
+
+  ../anchor-interval/moving_reference.py puts a number on the
+  underlying problem: under `reported = a*c + b`, a capability
+  rising 117%% with a fixed ruler and a capability that never
+  moves under a ruler stretching 117%% produce the same published
+  series to 5.6e-17. One equation, two unknowns, per release.
+
+  THE REPAIR IS ALREADY EXPRESSIBLE IN THIS SCHEMA.
+
+      ModelScore keys on (model, artifact, VERSION)
+
+  so scoring every model on the FIRST version as well as its
+  contemporary one is a legal ingest today. The divergence
+  between the two series is the criteria term, isolated -- and
+  it identifies capability only up to the fixed version's own
+  unknown gain and offset, so what it buys is a SHARE, not a
+  capability (../anchor-interval/ ANC_006).
+
+  Nothing in the CLI asks for it. The example data has one score
+  per model per version and no model scored on a superseded
+  version, which is exactly the design that cannot separate the
+  two terms.
+
+  models in the demo with scores on more than one non-current
+  version: 2 of 4
+
+========================================================================
+READING
+========================================================================
+
+  Two mechanical defects in build_series(). It plants y = 0.0 at the head
+  of every series and pairs it with a real drift value -- for Alpha-1B that
+  fabricated point REPLACES a measured -0.04 -- and it builds version_order
+  from `to_version`, so the first criteria version and every score attached
+  to it is dropped before the series exists. Delta-350M holds the longest
+  baseline in the dataset, first version to last, and contributes nothing.
+
+  Together they flip a sign. Alpha-1B is the only model with three real
+  transitions, and shipped vs corrected put it on opposite sides of the
+  README's own decision rule -- criteria inflation against stricter
+  criteria masking gains.
+
+  'Significant' appears twice in README.md and zero times in regress.py.
+  The fits that exist have one degree of freedom, and R-squared = 1.000 at
+  n = 2 is emitted as a field next to an interpretation string that says
+  the data is insufficient.
+
+  The structural one: the capability term is in the stated model and not in
+  the code, because it is unobservable, so the drift slope absorbs it. The
+  repair is already expressible -- ModelScore keys on version, so scoring
+  every model on the first version alongside its contemporary one is a
+  legal ingest today. Nothing asks for it, and the example data is built
+  the one way that cannot separate the two terms.
+

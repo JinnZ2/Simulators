@@ -1,5 +1,5 @@
 
-UNINSTRUMENTED -- 7 entries, 7 mechanisms
+UNINSTRUMENTED -- 8 entries, 8 mechanisms
 every entry is a question until something measures it
 
 ========================================================================
@@ -58,6 +58,26 @@ THE REGISTER, sorted by mechanism
                     reference cannot be edited from inside.
     WORKED IN      ../anchor-interval/moving_reference.py ; ANC_005..008
 
+  PROXY_SUBSTITUTION -- enforceable measure displaces the target it stood in for
+
+    QUANTITY       recovery-permitting environment during the off-duty interval
+                    (posture change, standing, walking distance, temperature
+                    control, separation of work space from rest space)
+    VISIBLE AS     compliance
+    WOULD MEASURE  the environment, not the clock: floor area, standing height,
+                    walking distance available, temperature range, and whether the
+                    rest space is the work space. Then health outcome against
+                    those, not against hours off.
+    CONFIDENCE     high on the mechanism. The outcome data for the occupation is
+                    not ambiguous; the attribution is.
+    NOTE           hours-since-last-drive is a clock reading -- cheap, auditable,
+                    enforceable -- substituted for fitness to drive. Ten hours in
+                    a 4x6 sleeper scores identically to ten hours in conditions
+                    that permit recovery. The rule was written from a context
+                    where the missing variable arrived free with the arrangement:
+                    off-duty meant leaving a building. For one occupation it was
+                    removed structurally and nothing re-derived the rule.
+
   AUDIT_ASYMMETRY -- guard fires on one side only
 
     QUANTITY       reliability of an account
@@ -97,21 +117,21 @@ THE REGISTER, sorted by mechanism
   BUDGET_BOUNDARY        energy accounting                 
   AUTHORED_REFERENCE     ML evaluation                     
   SCORED_AS_WASTE        behavioural ecology / industrial skill
+  PROXY_SUBSTITUTION     transport regulation              
   AUDIT_ASYMMETRY        model behaviour                   
 
-  7 entries, 7 distinct fields, 7 distinct mechanisms
+  8 entries, 8 distinct fields, 8 distinct mechanisms
   mechanisms holding more than one field: 0
 
-  At one entry per mechanism the two partitions are identical and
-  the sort is UNTESTED, not confirmed. It buys nothing until a
-  second entry lands under an existing mechanism from a different
-  field.
+  The two partitions are still identical, so the sort remains
+  UNTESTED rather than confirmed. It buys nothing until a
+  second entry lands under an existing mechanism from a
+  different field.
 
   Nearest candidate already in the repo: MODALITY currently holds
   animal cognition. ../reasoning-dial/ RD_009's G-STATE gap -- a
   self-report from a miscalibrated observer is the quantity in
   question -- is a different field with arguably the same shape.
-  Filing it would be the first real test of the sort.
 
 ========================================================================
 2  the mechanisms are not mutually exclusive
@@ -150,13 +170,18 @@ THE REGISTER, sorted by mechanism
           the return falls outside the sampling window, which is a
           boundary placed in time rather than in space
 
+  [1 applicable] PROXY_SUBSTITUTION
+      recovery-permitting environment during the off-duty interval
+      (posture change, standing, walking distance, temperature
+      control, separation of work space from rest space)
+
   [2 applicable] AUDIT_ASYMMETRY
       reliability of an account
       also AUTHORED_REFERENCE:
           the corpus that sets what counts as a normal account was
           produced by the side that goes unaudited
 
-  4 of 7 entries have more than one mechanism with a claim.
+  4 of 8 entries have more than one mechanism with a claim.
 
   This is not a defect to resolve by tightening definitions. The
   filing decides what comparison case an entry sits next to, and
@@ -232,28 +257,25 @@ THE REGISTER, sorted by mechanism
   corpus is six cases chosen because they are well documented,
   not because they are near the boundary. The near-boundary test
   is a quantity a field believes it measures and does not, and
-  none of the seven entries is currently contested by anyone.
+  none of the delivered entries is currently contested by anyone.
 
 ========================================================================
 READING
 ========================================================================
 
-  The register holds. Seven mechanisms, a closed vocabulary, and the
+  The register holds. Eight mechanisms, a closed vocabulary, and the
   entry structure separates the stated confidence from the shape so the
   two can move independently.
 
   Three results on the register itself, none of them fatal and all of
   them structural:
 
-  The mechanism sort is UNTESTED rather than confirmed. At one entry per
-  mechanism the mechanism partition and the field partition are the same
-  partition, so nothing yet demonstrates the cross-domain grouping the
-  sort exists for.
+  The mechanism sort is UNTESTED rather than confirmed, and section 1
+  reports whether the latest entries have changed that.
 
-  The mechanisms are not mutually exclusive -- 4 of 7 entries have a
-  second mechanism with a claim. The filing decides which comparison case
-  an entry sits next to, so it is a choice and should carry a primary
-  plus a list.
+  The mechanisms are not mutually exclusive. The filing decides which
+  comparison case an entry sits next to, so it is a choice and should
+  carry a primary plus a list.
 
   On a known-null corpus of six externally graded instruments, nothing
   files that should not, including eDNA at fidelity 0.165. The line

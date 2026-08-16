@@ -2041,8 +2041,74 @@ underneath).
   no longer the corpus on disk. Both halves are stated in §5 rather than
   one being quietly true. Same loop as `anchor-interval/` `ANC_001..004` at
   three files and one script, visible only because two runs were diffed —
-  which is the scheduled anchor, not a triggered one. Ten claims
-  `UNI_001..010`. Stdlib only, CC0.
+  which is the scheduled anchor, not a triggered one.
+  **`UNI_011`:** entry 008 lands under `PROXY SUBSTITUTION`, closing
+  `UNI_007`'s falsifier — *recovery-permitting environment during the
+  off-duty interval*, excluded by proxy substitution, visible as
+  **compliance**. Not Goodhart: Goodhart describes a proxy degrading under
+  optimization pressure, and here the quantity was never in the proxy at
+  all — the arrangement supplied it free (off-duty meant leaving a
+  building), one occupation had it removed structurally, and nothing
+  re-derived the rule. A silent precondition, not a degrading measure. Ten
+  hours in a 4×6 sleeper and ten hours in conditions that permit recovery
+  are the same reading. **`UNI_002` is NOT closed by it** — at 8 entries /
+  8 fields / 8 mechanisms the two partitions are still identical.
+  **`UNI_012`:** the delivered README's own literature note names four
+  mechanisms (Goodhart/Campbell → proxy substitution, Polanyi → storage,
+  STS → undeclared frames, symptom-dismissal medicine → **affect
+  routing**) and only two are on the eight-item list. `undeclared frames`
+  has a whole folder (`declared-frame/`) instead of an entry; **`affect
+  routing` has neither** — a structural-mismatch reading, offered with its
+  transposition, classified as affect and routed to support rather than to
+  analysis, so the referent is dropped and nothing enters the record as a
+  measurement. Distinct from `AUDIT ASYMMETRY`, which is a guard firing on
+  one side; this is a channel reclassified at intake, so the reading never
+  reaches a guard. Twelve claims `UNI_001..012`. Stdlib only, CC0.
+- `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
+  files plus example data) for treating **evaluation criteria as a
+  time-series variable** — version the ruler, compute drift on its own
+  axis, regress reported model improvement against it. Stdlib-only,
+  SQLite-backed, and the **first real consumer of the declared-frame
+  block**: `Frame` is a dataclass in `schema.py`, `unknown` is legal,
+  omission is flagged, and drift is computed per frame field rather than on
+  a blob. Runs end to end on its own quick start. Two added audits.
+  **`CD_002`, the structural one:** every primitive in `DriftEngine`
+  returns a NON-NEGATIVE distance, and the README's decision rule separates
+  three verdicts by the SIGN of β₁ — so widening (0.3636) and narrowing
+  (0.5714) both read positive, `exemplar_count` 100→1000 and 1000→100 are
+  byte-identical at 0.9000, and every `observer_access` transition scores
+  1.0 including the loss of verification (an ordinal compared as a nominal,
+  `SCALAR DEMAND` inverted). The instrument cannot distinguish the two
+  readings it exists to distinguish; the honest reading of β₁ > 0 is "score
+  changes are larger when the criteria moved a lot, in either direction".
+  4 of 9 fields are signable from data already stored, 3 as one-line
+  changes; 3 need a declared `direction` field because widening vs
+  narrowing free text is a judgement the text does not contain
+  (`declared-frame/` `DF_007` arriving in a metric); 2 have no natural
+  direction. **`CD_003`/`CD_004`/`CD_005`, two mechanical defects that
+  compound:** `build_series()` plants a `y = 0.0` at the head of every
+  series and pairs it with a real drift value — for Alpha-1B it REPLACES a
+  measured −0.04 — and `version_order` is built from `to_version` so the
+  first criteria version and every score on it is dropped, which silently
+  zeroes Delta-350M, the model holding the longest baseline in the dataset
+  (first version to last). Corrected, **Alpha-1B's slope flips sign**
+  (−0.0782 → +0.0526), moving it between the two opposite readings the
+  README's rule offers, and the demo drops to one n=3 fit. **`CD_006`:**
+  the capability term is in the stated model and not in the code, so the
+  drift slope absorbs it — and drift is downstream of capability (a
+  benchmark is revised BECAUSE models saturated it), the reverse of the
+  direction the slope is read in. The repair is already expressible:
+  `ModelScore` keys on version, so scoring every model on the FIRST version
+  alongside its contemporary one is a legal ingest today, and the
+  divergence isolates the criteria term up to that version's own unknown
+  gain and offset — a SHARE, not a capability (`anchor-interval/`
+  `ANC_006`). 0 of 4 demo models carry scores on more than one non-current
+  version. **`CD_007`:** "significant" appears twice in `README.md` and
+  zero times in `regress.py`; the fits have one degree of freedom (t = 1.03
+  and −0.33), and `r_squared: 1.0` at n=2 is emitted as a field beside an
+  interpretation string saying the data is insufficient — the guard is in
+  the sentence, not in the data. Seven claims `CD_001..007`. Stdlib only,
+  CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

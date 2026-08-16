@@ -1,0 +1,10 @@
+{
+  "model_name": "Delta-350M",
+  "criteria_artifact": "CodeBench",
+  "criteria_version": "v1.0",
+  "score": 0.18,
+  "score_type": "accuracy",
+  "timestamp": "2022-03-01T00:00:00Z",
+  "source_url": "",
+  "notes": "Baseline small model"
+}

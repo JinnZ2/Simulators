@@ -1,6 +1,6 @@
 # CLAIM_TABLE — uninstrumented
 
-Ten claims, `UNI_001..010`.
+Twelve claims, `UNI_001..012`.
 
 ## REFUTATION_PROTOCOL
 
@@ -35,7 +35,7 @@ what makes the register a cross-index rather than a new claim surface.
 | `AUTHORED_REFERENCE` | `../anchor-interval/moving_reference.py`; `ANC_005..008` |
 | `SCORED_AS_WASTE` | `../measurement-fork/` K14–K16; `MF_014`, `MF_015` |
 | `MODALITY` | — |
-| `PROXY_SUBSTITUTION` | — (no entry at all — `UNI_007`) |
+| `PROXY_SUBSTITUTION` | entry 008, transport regulation (`UNI_011`) |
 | `SCALAR_DEMAND` | — |
 | `AUDIT_ASYMMETRY` | `scan.py --asym` (built; no corpus here — `UNI_008`) |
 
@@ -192,3 +192,100 @@ while every internal statistic improves. This is the same loop at three
 files and one script, with the shortest possible period, and it is visible
 only because the two runs were diffed — which is `ANC_004`'s scheduled
 anchor rather than a triggered one.
+
+---
+
+## UNI_011 — entry 008 closes `UNI_007`, and is not Goodhart
+
+**status:** SUPPORTED
+
+`UNI_007` recorded `PROXY SUBSTITUTION` as a mechanism with no entry, and set
+the falsifier: *file an entry whose `QUANTITY`, `VISIBLE AS` and
+`WOULD MEASURE` are not restatements of Goodhart's law.*
+
+Entry 008 files it.
+
+```
+QUANTITY       recovery-permitting environment during the off-duty
+               interval — posture change, standing, walking distance,
+               temperature control, separation of work space from rest
+               space
+EXCLUDED BY    PROXY SUBSTITUTION
+VISIBLE AS     compliance
+WOULD MEASURE  the environment, not the clock: floor area, standing
+               height, walking distance, temperature range, and whether
+               the rest space is the work space — then health outcome
+               against those rather than against hours off
+```
+
+**Why it is not Goodhart.** Goodhart and Campbell describe a proxy
+*degrading under optimization pressure* — the measure ceases to be a good
+measure once it becomes a target. Nothing here requires anyone to optimize
+against the clock. The quantity was **never in the proxy at all**, and it
+did not need to be, because the arrangement supplied it for free: off-duty
+meant leaving a building. The rule was written from that context, the
+context was removed structurally for one occupation, and nothing
+re-derived the rule.
+
+That is a **silent precondition**, not a degrading measure. The nearer
+relative is the smelter worker's cross-domain read in the `SCORED AS WASTE`
+literature — an unpriced input that arrived with the arrangement, was never
+named, and was therefore removable without anything registering.
+
+Ten hours in a 4×6 sleeper and ten hours in conditions that permit recovery
+are the same reading.
+
+**Falsifier:** a duty-time rule that names an environmental condition of the
+rest interval. If one exists, the quantity is instrumented somewhere and the
+entry moves to a coverage question rather than an exclusion.
+
+**`UNI_002` is not closed by this.** With eight entries the register still
+runs 8 entries / 8 fields / 8 mechanisms, so the two partitions remain
+identical and the mechanism sort remains untested.
+
+---
+
+## UNI_012 — a ninth mechanism is named in the README's own prose
+
+**status:** SUPPORTED
+
+The delivered `README.md` closes with a literature note:
+
+> Goodhart and Campbell for **proxy substitution**, Polanyi for **storage**,
+> STS for **undeclared frames**, symptom-dismissal work in medicine for
+> **affect routing**.
+
+Four mechanisms named. Two of them are on the eight-item list. Two are not:
+
+| named in prose | on the list |
+| --- | --- |
+| proxy substitution | yes |
+| storage | yes |
+| undeclared frames | **no** |
+| affect routing | **no** |
+
+`undeclared frames` is arguably `BUDGET BOUNDARY` under another name, and it
+has a whole folder — `../declared-frame/` — rather than a register entry.
+
+**`affect routing` has neither.** Its shape, from the notes that accompanied
+the drop: a structural-mismatch reading, offered with the transposition
+available, is classified as affect — *the driver is frustrated* — routed to
+support rather than to analysis, the referent dropped and only the state
+kept. Nothing enters the record as a measurement, and the classification is
+unfalsifiable from the speaker's side, because objecting to it reads as
+confirming it.
+
+That is not `AUDIT ASYMMETRY`, though it co-occurs with it. Audit asymmetry
+is a guard firing on one side; this is a **channel reclassified at intake**,
+so the reading never reaches a guard at all.
+
+**Falsifier:** show that `affect routing` is `AUDIT ASYMMETRY` or `MODALITY`
+under another name — that the eight-item list already covers it and the
+prose is using a synonym. Then the list is complete and this is a wording
+question.
+
+**What it would take to file:** the entry needs a `WOULD MEASURE`, and the
+obvious one has the shape of `scan.py --asym` — count, across a corpus of
+reports, how often a structural claim with a stated referent is answered
+about the reporter's state rather than about the referent. That is the same
+instrument, aimed one step earlier.

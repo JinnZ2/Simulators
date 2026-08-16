@@ -1,0 +1,29 @@
+{
+  "artifact_name": "CodeBench",
+  "version_id": "v3.1-hard",
+  "timestamp": "2025-01-01T00:00:00Z",
+  "frame": {
+    "boundary": "function-level correctness, compilation, runtime, security, and efficiency profiling. Style excluded.",
+    "horizon": "multi-turn interactive tasks with adversarial test cases.",
+    "who_counts": "passing test cases, runtime correctness, security scan, and efficiency percentile",
+    "sign_source": "weighted composite chosen by benchmark authors. Efficiency added after saturation on v3.0.",
+    "logic": "classical",
+    "observer_access": "partial"
+  },
+  "rubric_dimensions": [
+    "syntactic_correctness",
+    "test_pass_rate",
+    "runtime_validity",
+    "security_basic",
+    "efficiency_profile"
+  ],
+  "rubric_weights": {
+    "syntactic_correctness": 0.05,
+    "test_pass_rate": 0.3,
+    "runtime_validity": 0.25,
+    "security_basic": 0.2,
+    "efficiency_profile": 0.2
+  },
+  "exemplar_count": 500,
+  "notes": "Added efficiency profiling after models saturated v3.0. Adversarial test cases."
+}

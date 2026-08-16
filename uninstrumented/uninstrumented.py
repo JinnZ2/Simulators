@@ -44,6 +44,7 @@ MECHANISMS = (
     "SCALAR_DEMAND",        # function collapsed to a number
     "BUDGET_BOUNDARY",      # closed budget compared to open
     "AUTHORED_REFERENCE",   # reference produced by the measured party
+    "PROXY_SUBSTITUTION",   # enforceable measure displaces the target
     "AUDIT_ASYMMETRY",      # guard fires on one side only
     "SCORED_AS_WASTE",      # component read as cost by the instrument's own
                             # accounting
@@ -55,6 +56,8 @@ MECHANISM_GLOSS = {
     "SCALAR_DEMAND": "function collapsed to a number",
     "BUDGET_BOUNDARY": "closed budget compared to open",
     "AUTHORED_REFERENCE": "reference produced by the measured party",
+    "PROXY_SUBSTITUTION": "enforceable measure displaces the target it "
+                          "stood in for",
     "AUDIT_ASYMMETRY": "guard fires on one side only",
     "SCORED_AS_WASTE": "component read as cost by the instrument's own "
                        "accounting",
@@ -163,6 +166,30 @@ ENTRIES = (
         worked_in="../measurement-fork/ K14-K16, MF_014, MF_015",
     ),
     entry(
+        quantity=("recovery-permitting environment during the off-duty "
+                  "interval (posture change, standing, walking distance, "
+                  "temperature control, separation of work space from rest "
+                  "space)"),
+        excluded_by="PROXY_SUBSTITUTION",
+        visible_as="compliance",
+        would_measure=("the environment, not the clock: floor area, "
+                       "standing height, walking distance available, "
+                       "temperature range, and whether the rest space is "
+                       "the work space. Then health outcome against those, "
+                       "not against hours off."),
+        confidence=("high on the mechanism. The outcome data for the "
+                    "occupation is not ambiguous; the attribution is."),
+        field="transport regulation",
+        note=("hours-since-last-drive is a clock reading -- cheap, "
+              "auditable, enforceable -- substituted for fitness to drive. "
+              "Ten hours in a 4x6 sleeper scores identically to ten hours "
+              "in conditions that permit recovery. The rule was written "
+              "from a context where the missing variable arrived free with "
+              "the arrangement: off-duty meant leaving a building. For one "
+              "occupation it was removed structurally and nothing "
+              "re-derived the rule."),
+    ),
+    entry(
         quantity="reliability of an account",
         excluded_by="AUDIT_ASYMMETRY",
         visible_as="neutrality",
@@ -254,16 +281,25 @@ def check_cross_domain() -> None:
                           if e["excluded_by"] == m}) > 1]
     print("  mechanisms holding more than one field: %d" % len(collisions))
     print()
-    print("  At one entry per mechanism the two partitions are identical and")
-    print("  the sort is UNTESTED, not confirmed. It buys nothing until a")
-    print("  second entry lands under an existing mechanism from a different")
-    print("  field.")
+    if not collisions:
+        print("  The two partitions are still identical, so the sort remains")
+        print("  UNTESTED rather than confirmed. It buys nothing until a")
+        print("  second entry lands under an existing mechanism from a")
+        print("  different field.")
+    else:
+        print("  %d mechanism(s) now hold entries from more than one field."
+              % len(collisions))
+        for m in sorted(collisions):
+            fs = sorted({e["field"] for e in ENTRIES
+                         if e["excluded_by"] == m})
+            print("      %-22s %s" % (m, " | ".join(fs)))
+        print("  That is the first evidence the mechanism sort groups across")
+        print("  fields rather than restating the field partition.")
     print()
     print("  Nearest candidate already in the repo: MODALITY currently holds")
     print("  animal cognition. ../reasoning-dial/ RD_009's G-STATE gap -- a")
     print("  self-report from a miscalibrated observer is the quantity in")
     print("  question -- is a different field with arguably the same shape.")
-    print("  Filing it would be the first real test of the sort.")
 
 
 # ---------------------------------------------------------------------------
@@ -419,7 +455,7 @@ def check_null() -> None:
     print("  corpus is six cases chosen because they are well documented,")
     print("  not because they are near the boundary. The near-boundary test")
     print("  is a quantity a field believes it measures and does not, and")
-    print("  none of the seven entries is currently contested by anyone.")
+    print("  none of the delivered entries is currently contested by anyone.")
 
 
 # ---------------------------------------------------------------------------
@@ -438,22 +474,19 @@ def main() -> None:
 
     section("READING")
     print("""
-  The register holds. Seven mechanisms, a closed vocabulary, and the
+  The register holds. Eight mechanisms, a closed vocabulary, and the
   entry structure separates the stated confidence from the shape so the
   two can move independently.
 
   Three results on the register itself, none of them fatal and all of
   them structural:
 
-  The mechanism sort is UNTESTED rather than confirmed. At one entry per
-  mechanism the mechanism partition and the field partition are the same
-  partition, so nothing yet demonstrates the cross-domain grouping the
-  sort exists for.
+  The mechanism sort is UNTESTED rather than confirmed, and section 1
+  reports whether the latest entries have changed that.
 
-  The mechanisms are not mutually exclusive -- 4 of 7 entries have a
-  second mechanism with a claim. The filing decides which comparison case
-  an entry sits next to, so it is a choice and should carry a primary
-  plus a list.
+  The mechanisms are not mutually exclusive. The filing decides which
+  comparison case an entry sits next to, so it is a choice and should
+  carry a primary plus a list.
 
   On a known-null corpus of six externally graded instruments, nothing
   files that should not, including eDNA at fidelity 0.165. The line
