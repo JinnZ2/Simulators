@@ -25,10 +25,12 @@
 #
 # USAGE
 #   python3 photoperiod_claim_harness.py run-all
-#   python3 photoperiod_claim_harness.py run S2
-#   python3 photoperiod_claim_harness.py sweep S2
+#   python3 photoperiod_claim_harness.py run C2        # CLAIM id, not sim id
+#   python3 photoperiod_claim_harness.py sweep S2      # SIM id -- different
+#                                                      # registry, on purpose
 #   python3 photoperiod_claim_harness.py claims
 #   python3 photoperiod_claim_harness.py protocol      # bench measurements
+#   python3 photoperiod_claim_harness.py bench C1 ...  # record a MEASUREMENT
 #   python3 photoperiod_claim_harness.py hypothesis
 #   python3 photoperiod_claim_harness.py log           # provenance chain
 
@@ -53,6 +55,21 @@ SOURCE = {
     "SIM": "produced by code in this file from stated parameters",
     "BENCH": "produced by a physical measurement; empty until someone runs one",
 }
+
+
+def require(condition, why):
+    """
+    Guard for a predicate whose input may be empty. run_claim() catches a
+    raising predicate and records UNDECIDED, which is the correct third
+    verdict -- C1's `signature_spread < 1.5` used to return SUPPORTED from a
+    run in which zero cells reproduced the signature, because the spread of
+    an empty set was reported as 0.0. A pass an empty result set returns is
+    not a pass, and "the sim cannot produce the reported package at all" is
+    neither of the two verdicts on offer.
+    """
+    if not condition:
+        raise ValueError(why)
+    return True
 
 
 def sha(text):
@@ -89,12 +106,24 @@ CLAIM_TABLE = [
             "of ACTUAL energy-per-dry-gram? Narrow means the published metrics "
             "pin the real efficiency down. Wide means they do not."
         ),
-        "predicate": lambda o: o["signature_spread"] < 1.5,
+        "predicate": lambda o: (
+            require(o["signature_cells"] > 0,
+                    "no cell reproduces the reported signature: the sim "
+                    "cannot produce the package at all, which is neither "
+                    "verdict")
+            and o["signature_spread"] < 1.5
+        ),
         "reads": (
-            "TRUE  -> the reported metrics are diagnostic of real efficiency.\n"
-            "FALSE -> NON-DIAGNOSTIC: the same reported signature is produced "
-            "across a wide range of true per-photosynthate efficiencies. Dry "
-            "mass is the missing measurement, not a nitpick."
+            "TRUE  -> the reported metrics pin the real efficiency down.\n"
+            "FALSE -> NON-DIAGNOSTIC OF MAGNITUDE: the same reported "
+            "signature is produced across a wide range of true "
+            "per-photosynthate efficiencies. Read `signature_sign_agreement` "
+            "before reading this as 'the signature means nothing' -- on the "
+            "shipped parameters every signature cell also improves energy "
+            "per dry gram, so the package licenses the SIGN and not the "
+            "SIZE. Dry mass is the missing measurement; 68% is a size.\n"
+            "UNDECIDED -> zero signature cells. The sim did not reproduce "
+            "the reported package, so it has nothing to say about it."
         ),
     },
     {
@@ -287,10 +316,19 @@ def s1_mass_denominator(dli_scale=0.40, sae=0.8, sink_k=1.0, days=8, **kw):
     ref = _s1_run(dli_scale, sae, sink_k, days=days)
     sig_dry = [c["kWh_per_dry"] for c in grid if c["signature"]]
     spread = (max(sig_dry) / min(sig_dry)) if sig_dry else 0.0
+    # Separate readouts, deliberately not merged: how WIDE the true ratio
+    # ranges across signature cells, and whether they all sit on one side of
+    # 1.0. A wide spread with unanimous sign is non-diagnostic of magnitude
+    # and diagnostic of direction, which is a different finding from "the
+    # signature means nothing".
+    below = sum(1 for x in sig_dry if x < 1.0)
+    agreement = (below / len(sig_dry)) if sig_dry else None
     return {
         "signature_kWh_per_dry_min": min(sig_dry) if sig_dry else None,
         "signature_kWh_per_dry_max": max(sig_dry) if sig_dry else None,
         "signature_spread": spread,
+        "signature_sign_agreement": agreement,
+        "signature_cells_below_1": below,
         "base": base,
         "test": ref,
         "grid": grid,
@@ -322,6 +360,19 @@ def _pchlide_run(duty, dark_block_h, days=6, dt=0.1,
 
     Total photon dose is held CONSTANT across duty settings (I_eff = I_on/duty),
     so any difference is SCHEDULING, not dose.
+
+    INSTRUMENT EDIT -- readout only, no mechanism or parameter changed.
+
+    Chl is returned as the MEAN OVER THE FINAL COMPLETE PERIOD, not as the
+    value at the last integration step. The endpoint reading is sampled at
+    whatever phase the run happens to end on, and at duty=0.5 the period is
+    2*dark_block, so a 144 h run ends mid-cycle for every block that does
+    not divide it. Every arm that broke the monotonicity of the C3
+    dark-interval curve was one of those; the cycle average is monotone.
+
+    Registered as InstrumentEdit, not MechanismEdit: it removes a sampling
+    artifact and changes no mechanism. It changes no verdict either -- C3
+    tests for a sign flip and both readouts are negative throughout.
     """
     if duty <= 0.0:
         duty = 1e-6
@@ -329,7 +380,10 @@ def _pchlide_run(duty, dark_block_h, days=6, dt=0.1,
     period = dark_block_h / max(1e-9, (1.0 - duty)) if duty < 1.0 else 1.0
     P, Chl = P_max * 0.5, 0.10
     t = 0.0
-    for _ in range(int(days * 24 / dt)):
+    T = days * 24
+    avg_from = max(0.0, T - period)
+    acc, n = 0.0, 0
+    for _ in range(int(T / dt)):
         phase = math.fmod(t, period) / period if period > 0 else 0.0
         lit = phase < duty
         I = I_eff if lit else 0.0
@@ -337,7 +391,10 @@ def _pchlide_run(duty, dark_block_h, days=6, dt=0.1,
         P = max(0.0, P + (k_syn * (1.0 - P / P_max) - v) * dt)
         Chl = max(0.0, Chl + (v - (k_deg_light if lit else k_deg_dark) * Chl) * dt)
         t += dt
-    return {"Chl": Chl, "P_final": P}
+        if t >= avg_from:
+            acc += Chl
+            n += 1
+    return {"Chl": acc / max(n, 1), "Chl_endpoint": Chl, "P_final": P}
 
 
 def s2_pool_charging(days=6, **kw):
@@ -497,7 +554,12 @@ class MechanismEdit(object):
     """
 
     def __init__(self, sim_id, mechanism, basis, prediction, affects, reason=""):
-        low = (reason + " " + mechanism).lower()
+        # Screen EVERY free-text field the caller supplies. Screening only
+        # `reason` and `mechanism` left `basis` and `prediction` open, and
+        # those are the two fields that ask for justification -- which is
+        # where outcome reasoning goes when it is going anywhere.
+        low = " ".join(str(x) for x in
+                       (reason, mechanism, basis, prediction)).lower()
         for bad in FORBIDDEN_REASONS:
             if bad in low:
                 raise ValueError(
@@ -516,14 +578,85 @@ class MechanismEdit(object):
         }
         log(self.rec)
 
-    def settle(self, observed):
+    def settle(self, observed, held):
+        """
+        `held` is REQUIRED and must be a bool: did the registered prediction
+        hold. It used to default to None with a comment saying a human would
+        fill it in, and nothing ever did -- so a registered prediction could
+        be settled with the comparison never made, and the log would show a
+        complete-looking record.
+
+        Settling also requires that the file actually changed. The protocol
+        exists to gate sim edits; an edit registered, settled and never
+        performed was indistinguishable in the log from one carried out. Use
+        abandon() for the case where the edit was decided against.
+        """
+        if not isinstance(held, bool):
+            raise ValueError(
+                "REFUSED: settle(observed, held) requires held=True|False. "
+                "A registered prediction that is never adjudicated is not a "
+                "registered prediction.")
+        after = self_hash()
+        if after == self.rec["file_hash_before"]:
+            raise ValueError(
+                "REFUSED: file hash unchanged, so no sim edit was made. "
+                "Settling an edit that did not happen records it as one. "
+                "Use abandon(reason) if the edit was decided against.")
         rec = dict(self.rec)
         rec["kind"] = "MECHANISM_EDIT_SETTLED"
         rec["observed"] = observed
-        rec["file_hash_after"] = self_hash()
-        rec["prediction_held"] = None  # human or model fills this in, explicitly
+        rec["file_hash_after"] = after
+        rec["file_changed"] = True
+        rec["prediction_held"] = held
         log(rec)
         return rec
+
+    def abandon(self, reason):
+        """Registered, then decided against. Logged, so the trail is intact."""
+        rec = dict(self.rec)
+        rec["kind"] = "MECHANISM_EDIT_ABANDONED"
+        rec["abandon_reason"] = reason
+        rec["file_hash_after"] = self_hash()
+        rec["file_changed"] = rec["file_hash_after"] != rec["file_hash_before"]
+        log(rec)
+        return rec
+
+
+class InstrumentEdit(object):
+    """
+    The edit category MechanismEdit does not cover.
+
+    MechanismEdit gates changes to what the sim MODELS. A change to where a
+    number is READ -- sampling phase, integration step, which statistic is
+    returned -- changes sim output while changing no mechanism and no
+    parameter, and the protocol had no category for it. That gap is the same
+    one the provenance types already anticipate: REPORTED / PHYSICS / SIM /
+    BENCH separates where a number came from, and generator / physical /
+    instrument separates what a number is a property OF.
+
+    An instrument edit must name the artifact it removes and the quantity
+    that is unchanged by it. It does NOT take a prediction, because it is
+    not a claim about the world -- if it changes a verdict, that is a
+    finding about the old readout and goes in the claim table.
+    """
+
+    def __init__(self, sim_id, readout, artifact, unchanged, reason=""):
+        low = " ".join(str(x) for x in
+                       (reason, readout, artifact, unchanged)).lower()
+        for bad in FORBIDDEN_REASONS:
+            if bad in low:
+                raise ValueError(
+                    "REFUSED: readout change justified by outcome -> " + bad)
+        self.rec = {
+            "kind": "INSTRUMENT_EDIT",
+            "sim": sim_id,
+            "readout": readout,
+            "artifact_removed": artifact,
+            "unchanged_by_this": unchanged,
+            "registered_at": time.time(),
+            "file_hash_before": self_hash(),
+        }
+        log(self.rec)
 
 
 # ----------------------------------------------------------------------------
@@ -566,6 +699,14 @@ def run_claim(cid, params=None, reasoning=""):
         "reasoning": reasoning,
         "output": {k: v for k, v in out.items() if k not in ("trajectory",)},
     }
+    # The README puts the residual router in the pipeline --
+    #   run -> provenance record -> residual router -> hypothesis block
+    # -- and it was defined and never called. It attaches on the runs where
+    # it is the point: a claim that did not hold, or one the predicate could
+    # not decide. Four questions, unanswered by construction; the router
+    # routes, it does not resolve.
+    if held is not True:
+        rec["residual_route"] = residual_route(rec, out)
     log(rec)
     return rec, out, claim
 
@@ -588,6 +729,69 @@ def residual_route(rec, out):
     }
 
 
+def record_bench(claim_id, quantity, value, units, method, kit, note=""):
+    """
+    Ingest a MEASURED value. SOURCE declares four provenance types and three
+    of them had code paths; BENCH was declared and unreachable, so "empty
+    until someone runs one" was true by absence rather than by construction.
+
+    This does not merge with SIM. It is logged as its own kind, and
+    bench_records() reads them back so a hypothesis block can say which
+    claims have a physical exit and which do not.
+    """
+    if claim_id not in [c["id"] for c in CLAIM_TABLE]:
+        raise ValueError("unknown claim id: " + str(claim_id))
+    if not (isinstance(method, str) and method.strip()):
+        raise ValueError(
+            "REFUSED: a BENCH record needs a method. A number with no "
+            "method is SIM provenance wearing a BENCH label.")
+    return log({
+        "kind": "BENCH",
+        "claim": claim_id,
+        "quantity": quantity,
+        "value": value,
+        "units": units,
+        "method": method,
+        "kit": kit,
+        "note": note,
+        "file_hash": self_hash(),
+    })
+
+
+def bench_records(path=None):
+    """Every BENCH record in the log. Empty is the honest default."""
+    path = path or LOGPATH
+    out = []
+    if not os.path.exists(path):
+        return out
+    try:
+        with open(path) as f:
+            for line in f:
+                try:
+                    r = json.loads(line)
+                except Exception:
+                    continue
+                if r.get("kind") == "BENCH":
+                    out.append(r)
+    except Exception:
+        pass
+    return out
+
+
+def run_id(results):
+    """
+    Deterministic identifier for a set of runs: the file hash plus the claim
+    ids and statuses. hypothesis_block() used to stamp the wall clock into
+    its header, one line above the file hash it prints for provenance, so
+    two runs of the same file produced two different documents. The clock
+    belongs in the log, where every record already carries one.
+    """
+    parts = [self_hash(), VERSION]
+    for rec, _out, _claim in results:
+        parts.append(rec["claim"] + ":" + rec["status"])
+    return sha("|".join(parts))
+
+
 def hypothesis_block(results):
     """
     Output for a human. Trajectory, not verdict.
@@ -595,8 +799,10 @@ def hypothesis_block(results):
     left for whoever runs this to set; nothing here resolves them.
     """
     lines = []
-    lines.append("HYPOTHESIS BLOCK -- generated " + time.strftime("%Y-%m-%d %H:%M"))
+    lines.append("HYPOTHESIS BLOCK")
     lines.append("file hash: " + self_hash() + "   harness: " + VERSION)
+    lines.append("run id:    " + run_id(results)
+                 + "   (file hash + claim statuses; the clock is in the log)")
     lines.append("")
     lines.append("STATUS OF EACH CLAIM (from SIM only; no BENCH data exists yet)")
     KEY = {
@@ -614,6 +820,22 @@ def hypothesis_block(results):
             v = out.get(k)
             lines.append("        " + k + " = "
                          + (("%.4f" % v) if isinstance(v, float) else str(v)))
+    lines.append("")
+    bench = bench_records()
+    have = sorted({b["claim"] for b in bench})
+    lines.append("BENCH COVERAGE")
+    if not bench:
+        lines.append("  none. Every number above is SIM provenance.")
+        lines.append("  `protocol` lists what a person with plants and a "
+                     "scale would do;")
+        lines.append("  `bench` records the result when they have.")
+    else:
+        lines.append("  %d record(s) across claims: %s"
+                     % (len(bench), ", ".join(have)))
+        for c in [x["id"] for x in CLAIM_TABLE]:
+            mine = [b for b in bench if b["claim"] == c]
+            lines.append("    %s  %s" % (c, ("%d measurement(s)" % len(mine))
+                                         if mine else "no physical exit yet"))
     lines.append("")
     lines.append("WHAT THE SIM CANNOT SETTLE")
     lines.append("  Every number above is SIM provenance. A sim can show that an")
@@ -828,12 +1050,25 @@ def main(argv):
         print(hypothesis_block(res))
     elif cmd == "pending":
         cmd_pending()
+    elif cmd == "bench":
+        if len(argv) < 8:
+            print("usage: bench CLAIM QUANTITY VALUE UNITS METHOD KIT [NOTE]")
+            print("  e.g. bench C1 kWh_per_g_dry 0.42 kWh/g "
+                  "'65C to constant mass, 72h' 'scale 0.01g, kWh meter'")
+            print("")
+            print("A BENCH record is a MEASUREMENT. It never merges with SIM.")
+            return
+        r = record_bench(argv[2], argv[3], float(argv[4]), argv[5],
+                         argv[6], argv[7],
+                         argv[8] if len(argv) > 8 else "")
+        print("recorded BENCH for " + r["claim"] + ": "
+              + str(r["value"]) + " " + r["units"])
     elif cmd == "log":
         cmd_log()
     else:
         print(__doc__ or "")
-        print("commands: claims run-all run <id..> sweep S2 protocol "
-              "pending hypothesis log")
+        print("commands: claims run-all run <claim-id..> sweep S2 protocol "
+              "bench pending hypothesis log")
 
 
 if __name__ == "__main__":

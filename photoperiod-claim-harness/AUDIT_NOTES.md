@@ -8,7 +8,14 @@ verbatim. Added here: [`harness_audit.py`](harness_audit.py) and
 
 Every number the delivered README states was checked and holds — 75 grid
 cells, 58 with the signature, ~4.9× spread, and the five claim verdicts.
-One word does not: `PCH_007`.
+One word did not: `PCH_007`.
+
+**All seven findings are now repaired in the `.py`.** The `README.md` is
+unchanged, because the rule for what to fix was the README itself: *make the
+code do what the prose already says it does.* Five of the seven were the
+prose being ahead of the instrument. Details in
+[`CLAIM_TABLE.md`](CLAIM_TABLE.md); 29 tests in
+[`tests/`](tests/test_repairs.py) pin them.
 
 ---
 
@@ -114,13 +121,6 @@ each with a basis and a prediction registered before any run, all `UNRUN`.
 Provenance is separated at the type level and `BENCH` is declared with no
 code path that can emit it — the honest state, said out loud, with a bench
 protocol attached for producing one.
-
-## One more, minor
-
-`hypothesis_block()` stamps the wall clock into its header, one line above
-the file hash it prints for provenance. Two runs of the same file produce two
-different documents. A run id derived from the hash and the parameters would
-carry the same information and diff cleanly. See [`samples/README.md`](samples/README.md).
 
 ## Not audited here
 

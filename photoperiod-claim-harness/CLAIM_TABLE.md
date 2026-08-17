@@ -1,14 +1,28 @@
 # CLAIM_TABLE — photoperiod-claim-harness
 
-Seven claims, `PCH_001..007`, about the **harness**. The harness carries its
+Seven claims, `PCH_001..007`, about the **harness**. **All repaired.**
+
+Every repair is pinned by [`tests/test_repairs.py`](tests/test_repairs.py)
+(29 tests), which asserted the broken behaviour when it was written and
+asserts the fix now. The rule for what to fix was the delivered README:
+**make the code do what the prose already says it does.** The harness carries its
 own claim table (`C1..C5`) about a greenhouse result; that one is delivered
 and is not restated here.
 
 ## REFUTATION_PROTOCOL
 
-The delivered file is landed **verbatim** and is not modified. Claims here
-are about whether it can fail in the ways it says it can, checked by running
-it — `harness_audit.py` imports it and changes nothing.
+Claims here are about whether the harness can fail in the ways it says it
+can, checked by running it.
+
+The file landed **verbatim** and was audited in that state. It has since been
+**repaired** — the `.py` is modified; `README.md` is not. Each claim keeps the
+pre-repair evidence, because the finding is what the defect cost rather than
+that a line changed, and `harness_audit.py` reproduces the pre-repair
+predicate locally so the before/after stays computed rather than quoted.
+
+The repairs follow the harness's own rule. Where a sim output changed
+(`PCH_007`) it is registered as an `InstrumentEdit` and changes no mechanism.
+Where a claim was wrong (`PCH_002`) **the claim was updated, not the sim.**
 
 This folder has **no bench data**, and neither does the harness. Nothing
 here is a statement about wheat, chlorophyll, or any published result. The
@@ -21,13 +35,13 @@ A failed check updates the claim.
 
 | id | statement | status |
 | --- | --- | --- |
-| `PCH_001` | **`C1`'s predicate returns SUPPORTED when the sim produces nothing.** Zero signature cells gives `signature_spread = 0.0`, which passes `< 1.5`, and the `reads` line for TRUE is *"the reported metrics are diagnostic of real efficiency."* | SUPPORTED |
-| `PCH_002` | **`C1`'s own grid says something narrower and stronger than its `reads` line.** The signature appears in 58 cells spanning a 4.88× range of true energy-per-dry-gram, and **all 58 are below 1.0**. Non-diagnostic of magnitude, diagnostic of sign. | SUPPORTED |
-| `PCH_003` | **The `MechanismEdit` guard screens 2 of the 4 free-text fields it is given** — `reason` and `mechanism`. `basis` and `prediction` pass a forbidden reason unscreened, and they are the two fields that ask for justification. | SUPPORTED |
-| `PCH_004` | **`settle()` records a prediction and never adjudicates it**, and cannot tell whether the edit happened. `prediction_held` is set to `None` by construction, and `file_hash_before == file_hash_after` when nothing was edited. | SUPPORTED |
-| `PCH_005` | **The header's own usage example fails.** `run S2` passes a sim id to a command that looks up claim ids; `run_claim("S2")` raises an uncaught `StopIteration`. | SUPPORTED |
-| `PCH_006` | **The predicates are real and mostly deny.** Four of five come back REFUTED on the shipped run, including `C2`, which refutes its own stated hypothesis and explains the mechanism, then files the next candidate in `PENDING_EDITS` rather than retuning toward it. | SUPPORTED |
-| `PCH_007` | **Every number in the delivered README holds; one word does not.** `C3`'s dark-interval curve is negative throughout but **not monotone**, and every arm that breaks the ordering is one whose run ends mid-cycle. A cycle average instead of an endpoint makes it monotone — and changes no verdict. | SUPPORTED |
+| `PCH_001` | **`C1`'s predicate returns SUPPORTED when the sim produces nothing.** Zero signature cells gives `signature_spread = 0.0`, which passes `< 1.5`, and the `reads` line for TRUE is *"the reported metrics are diagnostic of real efficiency."* | REPAIRED |
+| `PCH_002` | **`C1`'s own grid says something narrower and stronger than its `reads` line.** The signature appears in 58 cells spanning a 4.88× range of true energy-per-dry-gram, and **all 58 are below 1.0**. Non-diagnostic of magnitude, diagnostic of sign. | REPAIRED (claim updated, not sim) |
+| `PCH_003` | **The `MechanismEdit` guard screens 2 of the 4 free-text fields it is given** — `reason` and `mechanism`. `basis` and `prediction` pass a forbidden reason unscreened, and they are the two fields that ask for justification. | REPAIRED |
+| `PCH_004` | **`settle()` records a prediction and never adjudicates it**, and cannot tell whether the edit happened. `prediction_held` is set to `None` by construction, and `file_hash_before == file_hash_after` when nothing was edited. | REPAIRED |
+| `PCH_005` | **The header's own usage example fails.** `run S2` passes a sim id to a command that looks up claim ids; `run_claim("S2")` raises an uncaught `StopIteration`. | REPAIRED |
+| `PCH_006` | **The predicates are real and mostly deny.** Four of five come back REFUTED on the shipped run, including `C2`, which refutes its own stated hypothesis and explains the mechanism, then files the next candidate in `PENDING_EDITS` rather than retuning toward it. | SUPPORTED — unchanged |
+| `PCH_007` | **Every number in the delivered README holds; one word does not.** `C3`'s dark-interval curve is negative throughout but **not monotone**, and every arm that breaks the ordering is one whose run ends mid-cycle. A cycle average instead of an endpoint makes it monotone — and changes no verdict. | REPAIRED |
 
 ---
 
@@ -264,3 +278,95 @@ wobble is mechanism, not sampling, and `C3`'s `reads` line for FALSE needs the
 opposite correction.
 
 **Evidence:** `harness_audit.py` §7.
+
+
+---
+
+## The repairs
+
+One rule for all of them: **make the code do what the delivered README
+already says it does.** Five of the seven were the prose being ahead of the
+instrument; two were the instrument being ahead of the prose.
+
+### `PCH_001` — a predicate that can fail
+
+```
+world                    cells    spread     pre-repair     now
+as shipped               58       4.8828     REFUTED        REFUTED
+no shade-avoidance       0        0.0000     SUPPORTED      UNDECIDED
+```
+
+`require(condition, why)` raises; `run_claim()` already caught a raising
+predicate and recorded `UNDECIDED:`. C1's predicate now requires a non-empty
+cell set first, so *"the sim cannot produce the reported package at all"*
+lands on the third verdict instead of on the one that reads as confirmation.
+
+The README's own extension rule is the invariant this restores: *"append to
+`CLAIM_TABLE` with a predicate that can fail."*
+
+### `PCH_002` — the claim was updated, not the sim
+
+Which is what the protocol says to do. Two new fields carry the finding:
+
+```
+signature_sign_agreement = 1.0
+signature_cells_below_1  = 58 of 58
+```
+
+`C1`'s `reads` line now separates **magnitude** from **sign** and names the
+field, and adds an `UNDECIDED` line for the empty case. `signature_sign_-
+agreement` is `None` when there is nothing to agree on, so it cannot be
+misread as unanimity in that case.
+
+### `PCH_003`, `PCH_004` — the edit protocol
+
+The screen reads the concatenation of all four free-text fields.
+
+```
+settle without a verdict               refused
+settle with a non-bool                 refused
+settle an edit that did not happen     refused  (file hash unchanged)
+abandon(reason)                        MECHANISM_EDIT_ABANDONED
+```
+
+`settle(observed, held)` requires `held` to be a bool, and refuses when the
+file hash has not moved — settling an edit that never happened records it as
+one. `abandon(reason)` is the path for an edit decided against, so the trail
+is intact either way.
+
+### `PCH_005` — the header
+
+`run C2` with `sweep S2` labelled as a different registry on purpose.
+`run_claim("S2")` still raises, unchanged: the two registries are separate by
+design and the defect was in the documentation.
+
+### `PCH_007` — the readout, and the edit category for it
+
+`_pchlide_run` returns the mean over the final complete period.
+`Chl_endpoint` is still returned — the repair adds a readout rather than
+removing one. The curve is monotone, and the README's `C3` sentence is true
+of the shipped output for the first time. **No verdict moved.**
+
+**A new class: `InstrumentEdit`.** The protocol gated `MechanismEdit` and had
+no category for a change to *where a number is read*, which alters sim output
+while altering no mechanism and no parameter. That axis was already implicit
+in the provenance types — `REPORTED / PHYSICS / SIM / BENCH` separates where a
+number came from — and is now explicit. It takes **no prediction**, because it
+is not a claim about the world; if it changes a verdict, that is a finding
+about the old readout and goes in the claim table.
+
+### Three promises with no implementation
+
+| README says | was | now |
+| --- | --- | --- |
+| `run -> provenance record -> residual router -> hypothesis block` | `residual_route()` defined, never called | attaches on `REFUTED` and `UNDECIDED` runs, not on `SUPPORTED` |
+| `BENCH is empty until someone runs one` | declared in `SOURCE`, producible by nothing | `record_bench()` / `bench_records()` / `bench` CLI; refuses a number with no method |
+| the block prints a file hash for provenance | and a wall clock one line above it | deterministic `run id` = file hash + claim statuses; the clock stays in the log |
+
+`BENCH` coverage is now a printed line per claim in the hypothesis block, so
+*"no physical exit yet"* is stated rather than left as an absence the reader
+has to notice. `run-all` is byte-reproducible.
+
+**Still true and unchanged:** this folder has no bench data, and nothing in
+it is a statement about wheat. What changed is that `BENCH` is now empty by
+construction rather than by there being no way to fill it.

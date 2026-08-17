@@ -4,34 +4,37 @@ subject: photoperiod_claim_harness.py, unmodified
 this file has no bench data and neither does the harness
 
 ========================================================================
-1  C1 passes when the sim produces nothing
+1  C1 used to pass when the sim produced nothing
 ========================================================================
-  predicate: signature_spread < 1.5
-  spread    = max/min over cells that reproduce the signature
-            = 0.0 when there are no such cells
+  was:  signature_spread < 1.5
+  spread = max/min over cells that reproduce the signature
+         = 0.0 when there are no such cells
 
-    as shipped   cells=58  spread=4.8828  -> REFUTED
-    no shade-avoidance   cells=0  spread=0.0000  -> SUPPORTED
-      signature_kWh_per_dry_min = None
-      signature_kWh_per_dry_max = None
+  world                    cells    spread     pre-repair     now
+  ------------------------------------------------------------------
+  as shipped               58       4.8828     REFUTED        REFUTED
+  no shade-avoidance       0        0.0000     SUPPORTED      UNDECIDED
 
-  C1's reads line for TRUE:
+    (min and max printed as None and None in the dead world)
+
+  C1's reads line for TRUE was:
 
       the reported metrics are diagnostic of real efficiency
 
-  A run in which the sim reproduces the reported signature ZERO
-  times returns that verdict, with min and max printed as None on
-  the line above it. The contradiction is visible in one output.
+  A run in which the sim reproduced the reported signature ZERO
+  times returned that verdict, with None for min and max on the
+  line above. A pass an empty result set returns is not a pass --
+  ../null-harness/ CONSTANT_SILENT one level up.
 
-  Not a modelling error -- a predicate that cannot tell 'tight
-  spread' from 'no observations'. Same shape as ../null-harness/
-  CONSTANT_SILENT, one level up: not a gate that never fires, but
-  a PASS that an empty result set returns.
+  REPAIRED with the harness's own vocabulary. run_claim() already
+  emitted `UNDECIDED:` when a predicate raises, so C1's predicate
+  calls require() on a non-empty cell set first, and the empty
+  case routes to the third verdict it always had a slot for:
 
-  Fix is one guard, and the harness's own vocabulary has a slot
-  for it: run_claim() already emits `UNDECIDED:` when a predicate
-  raises. `if not sig_dry: raise ValueError('no signature cells')`
-  routes the empty case there instead of to SUPPORTED.
+      UNDECIDED:no cell reproduces the reported signature: the sim cannot produce the package at all, which is neither verdict
+
+  The README's own extension rule is the invariant this restores:
+  'append to CLAIM_TABLE with a predicate that can fail'.
 
 ========================================================================
 2  C1's numbers are narrower than its reads line
@@ -62,6 +65,16 @@ this file has no bench data and neither does the harness
   survives the objection that the sim was rigged to find nothing.
   It found the effect and still cannot size it.
 
+  REPAIRED, by updating the CLAIM rather than the sim -- which is
+  what the protocol says to do. C1's reads line now separates
+  MAGNITUDE from SIGN and names the field that backs it:
+
+      signature_sign_agreement = 1.0
+      signature_cells_below_1  = 58 of 58
+
+  The field is None when there is nothing to agree on, so it
+  cannot be read as unanimity in the empty case section 1 covers.
+
 ========================================================================
 3  the edit guard reads 2 of 4 fields
 ========================================================================
@@ -73,15 +86,15 @@ this file has no bench data and neither does the harness
   --------------------------------------------------------------
   reason       refused
   mechanism    refused
-  basis        ACCEPTED   <-- not screened
-  prediction   ACCEPTED   <-- not screened
+  basis        refused
+  prediction   refused
 
   `basis` and `prediction` are the two fields a motivated editor
   would put the outcome reasoning in, because they are the two
   that ask for justification. The screen is on the two that ask
   what changed.
 
-  One-line fix: screen the concatenation of all four.
+  REPAIRED: the screen reads the concatenation of all four.
 
   Worth saying what the guard gets right: it is a PRE-registration
   gate, it fires at construction rather than at settle time, and
@@ -90,58 +103,61 @@ this file has no bench data and neither does the harness
   are not.
 
 ========================================================================
-4  settle() records a prediction and never adjudicates it
+4  settle() used to record a prediction and never adjudicate it
 ========================================================================
-  after settle():
+  Pre-repair, settle(observed) wrote:
 
-    prediction        'low duty is penalised further'
-    observed          {'best_duty': 1.0}
-    prediction_held   None        <-- set to None, by construction
-    hash before       4a587a7ab5a7
-    hash after        4a587a7ab5a7
-    equal             True        <-- nothing edited the file
+    prediction_held   None   # 'human or model fills this in'
+    file_hash_after   equal to file_hash_before, unremarked
 
-  Two gaps, and they are the same gap:
+  So a registered prediction could be settled with the
+  comparison never made, and the protocol -- which exists to gate
+  SIM EDITS -- could not tell whether the edit it gated had
+  happened. An edit registered, settled and never performed was
+  indistinguishable in the log from one carried out.
 
-  (a) `prediction_held = None  # human or model fills this in`.
-      Nothing requires it. A registered prediction can be settled
-      with the comparison never made, and the log will show a
-      complete-looking MECHANISM_EDIT_SETTLED record.
+  REPAIRED. Three behaviours, each demonstrated:
 
-  (b) the two hashes are equal because the file was not edited.
-      The protocol exists to gate sim edits, and it cannot tell
-      whether one happened. An edit registered, settled, and never
-      performed is indistinguishable in the log from one carried
-      out.
+    settle without a verdict               refused: REFUSED: settle(observed, held) re
+    settle with a non-bool                 refused: REFUSED: settle(observed, held) re
+    settle an edit that did not happen     refused: REFUSED: file hash unchanged, so n
+    abandon(reason)                        logged as MECHANISM_EDIT_ABANDONED
+      file_changed = False
 
-  Both are the shape ../reasoning-gate/ hit and repaired: a
-  declared control that is never scored. Its fix was to refuse an
-  empty observation and to write a record either way. Here the
-  equivalents are: settle(observed, held: bool) with `held`
-  required, and refusing to settle when the hash has not moved.
+  `abandon` is the path for an edit decided against, so the trail
+  stays intact either way -- registered, then not made, and the
+  log says which.
+
+  Same shape as ../reasoning-gate/'s declared control that was
+  never scored. Its repair was to refuse an empty observation and
+  write a record either way; this is that, on a prediction.
 
 ========================================================================
-5  the header's usage example fails
+5  the header's usage example used to fail
 ========================================================================
-  from the file header:
+  the file header now reads:
 
-     python3 photoperiod_claim_harness.py run S2
+     python3 photoperiod_claim_harness.py run C2        # CLAIM id, not sim id
 
-  `run` dispatches to run_claim(), which looks the argument up in
-  CLAIM_TABLE by claim id. S2 is a SIM id.
+  It used to document `run S2`. `run` dispatches to run_claim(),
+  which looks the argument up in CLAIM_TABLE by claim id, and S2
+  is a SIM id.
 
     claim ids : C1, C2, C3, C4, C5
     sim ids   : S1, S2, S3, S4
 
-    run_claim('S2') -> StopIteration, uncaught
+    run_claim('S2') -> StopIteration, uncaught (unchanged;
+                       the fix is to the documentation, since
+                       the two registries are separate on
+                       purpose)
 
   `sweep S2` takes a sim id and `run C1` takes a claim id, which
   is defensible -- they are different commands over different
   registries. The header documents `run S2`.
 
-  Same class as ../reasoning-gate/ D1, where the module docstring's
-  usage example denied at pre(). Fixed there by making the example
-  a working one and labelling the failing case separately.
+  REPAIRED: the header documents `run C2` and labels `sweep S2`
+  as a different registry on purpose. Same class as
+  ../reasoning-gate/ D1, and the same fix.
 
 ========================================================================
 6  what the harness gets right
@@ -206,30 +222,41 @@ this file has no bench data and neither does the harness
 
   block h  periods    endpoint       cycle-average 
   ----------------------------------------------------
-  0.5      144.00     -2.40738       -2.38494      
-  1.0      72.00      -2.43340       -2.39951      
-  2.0      36.00      -2.50337       -2.44496      
-  3.0      24.00      -2.59185       -2.50758      
-  4.0      18.00      -2.68504       -2.57430      
-  6.0      12.00      -2.88316       -2.72082      
-  8.0      9.00       -3.08040       -2.87045      
-  10.0     7.20       -2.77285       -3.00421         <- ends mid-cycle
-  12.0     6.00       -3.41745       -3.12255      
-  16.0     4.50       -2.66973       -3.34152         <- ends mid-cycle
-  20.0     3.60       -2.98122       -3.53345         <- ends mid-cycle
-  24.0     3.00       -4.17996       -3.69939      
+  0.5      144.00     -2.38494       -2.38494      
+  1.0      72.00      -2.39951       -2.39951      
+  2.0      36.00      -2.44496       -2.44496      
+  3.0      24.00      -2.50758       -2.50758      
+  4.0      18.00      -2.57430       -2.57430      
+  6.0      12.00      -2.72082       -2.72082      
+  8.0      9.00       -2.87045       -2.87045      
+  10.0     7.20       -3.00421       -3.00421         <- ends mid-cycle
+  12.0     6.00       -3.12255       -3.12255      
+  16.0     4.50       -3.34152       -3.34152         <- ends mid-cycle
+  20.0     3.60       -3.53345       -3.53345         <- ends mid-cycle
+  24.0     3.00       -3.69939       -3.69939      
 
-  endpoint curve monotone      False
+  endpoint curve monotone      True
   cycle-average monotone       True
-  arms that break monotonicity [10.0, 16.0]
+  arms that break monotonicity []
   arms that end mid-cycle      [10.0, 16.0, 20.0]
   every breaking arm ends mid-cycle: True
-  (the converse does not hold -- 20.0 ends mid-cycle and happens
+  (the converse does not hold -- 10.0, 16.0, 20.0 ends mid-cycle and happens
    not to break the ordering, so ending mid-cycle is necessary
    here and not sufficient)
 
-  So the README is right about the MECHANISM and the shipped
-  readout does not show it. `_pchlide_run` returns Chl at the last
+  REPAIRED. `_pchlide_run` now returns the mean over the final
+  complete period, and the shipped curve is monotone -- so the
+  README's sentence is true of the output for the first time.
+  `Chl_endpoint` is still returned, because the repair adds a
+  readout rather than removing one.
+
+  Registered as an InstrumentEdit, not a MechanismEdit. The
+  protocol governed MECHANISM changes and had no category for a
+  change to WHERE a number is read -- which alters sim output
+  while altering no mechanism and no parameter. That axis was
+  already implicit in the provenance types, and is now explicit.
+
+  Pre-repair, `_pchlide_run` returned Chl at the last
   integration step, and at duty=0.5 the period is 2 x dark_block,
   so a 144 h run ends mid-cycle for the blocks that do not divide
   it. Reading the mean over the final complete period
@@ -246,32 +273,84 @@ this file has no bench data and neither does the harness
   the fix is to read a quantity the grid cannot alias.
 
 ========================================================================
+8  three things the README described that the code did not do
+========================================================================
+  The repairs above were chosen by one rule: make the code do
+  what the delivered README already says it does. Three of them
+  were promises with no implementation at all.
+
+  (a) 'run -> provenance record -> RESIDUAL ROUTER -> hypothesis
+      block'. residual_route() was defined and never called.
+
+      C2 REFUTED    residual_route attached: True
+      C5 SUPPORTED  residual_route attached: False
+
+      It attaches where it is the point -- a claim that did not
+      hold, or one the predicate could not decide. Four questions,
+      unanswered by construction. The router routes; it does not
+      resolve.
+
+  (b) 'Provenance never merges: REPORTED, PHYSICS, SIM, BENCH.
+      BENCH is empty until someone runs one.' Three types had
+      code paths. BENCH was declared and unreachable, so 'empty'
+      was true by absence rather than by construction.
+
+      before: 0 BENCH record(s)
+      after:  1 BENCH record(s)
+      a number with no method: refused -- that is SIM
+                               provenance wearing a BENCH
+                               label
+
+      The hypothesis block now reports BENCH coverage per claim,
+      so 'no physical exit yet' is a printed line rather than an
+      absence the reader has to notice.
+
+  (c) the hypothesis block stamped the wall clock one line above
+      the file hash it printed for provenance, so two runs of the
+      same file produced two different documents.
+
+      identical across two calls: True
+      run id: d6b15e6cbe44
+
+      The id is the file hash plus the claim statuses, so it moves
+      when either does and not otherwise. The clock is in the log,
+      where every record already carries one.
+
+========================================================================
 READING
 ========================================================================
 
-  The one that matters: C1's predicate returns SUPPORTED -- "the reported
-  metrics are diagnostic of real efficiency" -- from a run in which the sim
-  reproduced the reported signature zero times, printing None for the min
-  and max on the line above. A pass that an empty result set returns is not
-  a pass. One guard fixes it, and run_claim() already has the UNDECIDED
-  branch to route it to.
+  REPAIRED, all of it, pinned by tests/test_repairs.py. The rule for what
+  to fix was the delivered README: make the code do what the prose already
+  says it does.
 
-  C1's own grid says something better than its reads line. The signature
-  appears in 58 cells spanning a 4.9x range of true energy-per-dry-gram,
-  and every one of them is below 1.0. Non-diagnostic of MAGNITUDE,
-  diagnostic of SIGN -- which is the stronger version of the finding,
-  because it survives the objection that the sim was built to find nothing.
+  C1's predicate returned SUPPORTED -- "the reported metrics are
+  diagnostic" -- from a run in which the sim reproduced the signature zero
+  times, because the spread of an empty set was 0.0. It now calls
+  require() and routes to UNDECIDED, the third verdict run_claim() always
+  had a branch for. The README's own extension rule is what this restores:
+  a predicate that can fail.
 
-  The edit protocol screens two of the four fields it is given, and the two
-  it skips are the two that ask for justification. settle() writes
-  prediction_held: None and nothing fills it, and the before/after hashes
-  are equal because nothing edited the file -- so a registered, settled,
-  never-performed edit is indistinguishable in the log from a real one.
-  Both are the declared-control-never-scored shape that ../reasoning-gate/
-  repaired by requiring the observation.
+  C1's reads line was updated rather than the sim, which is what the
+  protocol says to do. The grid finds the signature in 58 cells spanning a
+  4.9x range of true energy-per-dry-gram and ALL of them below 1.0, so it
+  is non-diagnostic of magnitude and diagnostic of sign. signature_sign_-
+  agreement carries that, and is None when there is nothing to agree on.
 
-  What holds is most of it. The predicates fire in both directions, four of
-  five come back REFUTED on the shipped run, C2 refutes its own hypothesis
-  and explains the mechanism, and PENDING_EDITS writes down the three
-  named-but-unrun alternatives instead of retuning toward them.
+  The edit guard screens all four fields it is given. settle() requires a
+  bool and refuses when the file hash has not moved, with abandon() as the
+  path for an edit decided against -- so a registered, settled,
+  never-performed edit is no longer indistinguishable in the log from a
+  real one.
+
+  The dark-interval readout is a cycle average, so the curve is monotone
+  and the README's C3 sentence is true of the output for the first time.
+  Registered as an InstrumentEdit: the protocol governed MECHANISM changes
+  and had no category for a change to where a number is READ, which alters
+  sim output while altering no mechanism. No verdict moved.
+
+  And three promises with no implementation: the residual router is in the
+  pipeline, BENCH has an ingest path that refuses a number with no method,
+  and the hypothesis block carries a deterministic run id instead of a wall
+  clock stamped one line above the hash it prints for provenance.
 

@@ -1,14 +1,20 @@
 """
 harness_audit.py -- grade the harness, not the greenhouse.
 
-CC0-1.0. Standard library only. Deterministic. Imports the delivered file;
-modifies nothing.
+CC0-1.0. Standard library only. Deterministic. Imports the harness and reads
+its source; changes nothing at run time.
 
 The delivered harness is a claim table with runnable predicates and a
 refutation protocol. Its subject is a published greenhouse result. THIS file
 does not touch that subject -- it has no plants and no bench data, and
 neither does the harness. What it checks is whether the harness can fail in
 the ways it says it can.
+
+REPAIRED. Every defect below is fixed in the harness and pinned by
+tests/test_repairs.py (29 tests). Each section reproduces the pre-repair
+behaviour where it can, so the cost stays measured rather than quoted, and
+says what the current code does. The repairs were chosen by one rule: make
+the code do what the delivered README already says it does.
 
 Six results, in the order they matter:
 
@@ -28,11 +34,12 @@ Six results, in the order they matter:
 
   6  what the harness gets right, and it is most of it.
 
-  7  the delivered README's numbers all check out except one word: the
-     dark-interval curve is always negative but NOT monotone, and every arm
-     that breaks the ordering is one that ends mid-cycle. Reading a cycle
-     average instead of the endpoint makes it monotone, and changes no
-     verdict.
+  7  the delivered README's numbers all check out. One word did not: the
+     dark-interval curve was negative but NOT monotone, because arms whose
+     run ends mid-cycle were sampled at a different phase. Repaired by
+     reading a cycle average; the curve is monotone and no verdict moved.
+
+  8  three things the README describes that the code did not do.
 """
 
 from __future__ import annotations
@@ -65,49 +72,58 @@ def claim(cid):
 
 
 def check_vacuous() -> None:
-    section("1  C1 passes when the sim produces nothing")
+    section("1  C1 used to pass when the sim produced nothing")
 
-    c1 = claim("C1")
-    print("  predicate: signature_spread < 1.5")
-    print("  spread    = max/min over cells that reproduce the signature")
-    print("            = 0.0 when there are no such cells\n")
+    # The pre-repair predicate, reproduced so the cost stays measured.
+    shipped = lambda o: o["signature_spread"] < 1.5   # noqa: E731
+
+    print("  was:  signature_spread < 1.5")
+    print("  spread = max/min over cells that reproduce the signature")
+    print("         = 0.0 when there are no such cells\n")
 
     live = H.s1_mass_denominator()
-    print("    as shipped   cells=%d  spread=%.4f  -> %s"
-          % (live["signature_cells"], live["signature_spread"],
-             "SUPPORTED" if c1["predicate"](live) else "REFUTED"))
 
-    # Remove the mechanism that drives the signature and rerun. Nothing about
-    # the predicate changes; only whether any cell qualifies.
     orig = H._s1_run
     H._s1_run = lambda scale, sae, sink_k, days=8, dt=0.5: orig(
         scale, 0.0, sink_k, days=days, dt=dt)
     try:
         dead = H.s1_mass_denominator()
+        dead_rec, _, _ = H.run_claim("C1")
     finally:
         H._s1_run = orig
+    live_rec, _, _ = H.run_claim("C1")
 
-    print("    no shade-avoidance   cells=%d  spread=%.4f  -> %s"
-          % (dead["signature_cells"], dead["signature_spread"],
-             "SUPPORTED" if c1["predicate"](dead) else "REFUTED"))
-    print("      signature_kWh_per_dry_min = %s" % dead["signature_kWh_per_dry_min"])
-    print("      signature_kWh_per_dry_max = %s" % dead["signature_kWh_per_dry_max"])
+    print("  %-24s %-8s %-10s %-14s %s"
+          % ("world", "cells", "spread", "pre-repair", "now"))
+    print("  " + "-" * 66)
+    print("  %-24s %-8d %-10.4f %-14s %s"
+          % ("as shipped", live["signature_cells"], live["signature_spread"],
+             "SUPPORTED" if shipped(live) else "REFUTED", live_rec["status"]))
+    print("  %-24s %-8d %-10.4f %-14s %s"
+          % ("no shade-avoidance", dead["signature_cells"],
+             dead["signature_spread"],
+             "SUPPORTED" if shipped(dead) else "REFUTED",
+             dead_rec["status"].split(":")[0]))
     print()
-    print("  C1's reads line for TRUE:\n")
+    print("    (min and max printed as %s and %s in the dead world)"
+          % (dead["signature_kWh_per_dry_min"],
+             dead["signature_kWh_per_dry_max"]))
+    print()
+    print("  C1's reads line for TRUE was:\n")
     print("      the reported metrics are diagnostic of real efficiency\n")
-    print("  A run in which the sim reproduces the reported signature ZERO")
-    print("  times returns that verdict, with min and max printed as None on")
-    print("  the line above it. The contradiction is visible in one output.")
+    print("  A run in which the sim reproduced the reported signature ZERO")
+    print("  times returned that verdict, with None for min and max on the")
+    print("  line above. A pass an empty result set returns is not a pass --")
+    print("  ../null-harness/ CONSTANT_SILENT one level up.")
     print()
-    print("  Not a modelling error -- a predicate that cannot tell 'tight")
-    print("  spread' from 'no observations'. Same shape as ../null-harness/")
-    print("  CONSTANT_SILENT, one level up: not a gate that never fires, but")
-    print("  a PASS that an empty result set returns.")
+    print("  REPAIRED with the harness's own vocabulary. run_claim() already")
+    print("  emitted `UNDECIDED:` when a predicate raises, so C1's predicate")
+    print("  calls require() on a non-empty cell set first, and the empty")
+    print("  case routes to the third verdict it always had a slot for:\n")
+    print("      %s" % dead_rec["status"])
     print()
-    print("  Fix is one guard, and the harness's own vocabulary has a slot")
-    print("  for it: run_claim() already emits `UNDECIDED:` when a predicate")
-    print("  raises. `if not sig_dry: raise ValueError('no signature cells')`")
-    print("  routes the empty case there instead of to SUPPORTED.")
+    print("  The README's own extension rule is the invariant this restores:")
+    print("  'append to CLAIM_TABLE with a predicate that can fail'.")
 
 
 def check_direction() -> None:
@@ -142,6 +158,17 @@ def check_direction() -> None:
     print("  That is a stronger claim than the one written, because it")
     print("  survives the objection that the sim was rigged to find nothing.")
     print("  It found the effect and still cannot size it.")
+    print()
+    print("  REPAIRED, by updating the CLAIM rather than the sim -- which is")
+    print("  what the protocol says to do. C1's reads line now separates")
+    print("  MAGNITUDE from SIGN and names the field that backs it:\n")
+    print("      signature_sign_agreement = %s"
+          % out["signature_sign_agreement"])
+    print("      signature_cells_below_1  = %d of %d"
+          % (out["signature_cells_below_1"], out["signature_cells"]))
+    print()
+    print("  The field is None when there is nothing to agree on, so it")
+    print("  cannot be read as unanimity in the empty case section 1 covers.")
 
 
 def check_guard_coverage() -> None:
@@ -173,7 +200,7 @@ def check_guard_coverage() -> None:
     print("  that ask for justification. The screen is on the two that ask")
     print("  what changed.")
     print()
-    print("  One-line fix: screen the concatenation of all four.")
+    print("  REPAIRED: the screen reads the concatenation of all four.")
     print()
     print("  Worth saying what the guard gets right: it is a PRE-registration")
     print("  gate, it fires at construction rather than at settle time, and")
@@ -183,55 +210,67 @@ def check_guard_coverage() -> None:
 
 
 def check_settle() -> None:
-    section("4  settle() records a prediction and never adjudicates it")
+    section("4  settle() used to record a prediction and never adjudicate it")
 
     e = H.MechanismEdit("S2", mechanism="add photoinhibition at high "
                                         "instantaneous irradiance",
                         basis="photoinhibition literature",
                         prediction="low duty is penalised further",
                         affects=["C2"], reason="mechanism addition")
-    rec = e.settle(observed={"best_duty": 1.0})
 
-    print("  after settle():\n")
-    print("    prediction        %r" % rec["prediction"])
-    print("    observed          %r" % rec["observed"])
-    print("    prediction_held   %r        <-- set to None, by construction"
-          % rec["prediction_held"])
-    print("    hash before       %s" % rec["file_hash_before"][:12])
-    print("    hash after        %s" % rec["file_hash_after"][:12])
-    print("    equal             %s        <-- nothing edited the file"
-          % (rec["file_hash_before"] == rec["file_hash_after"]))
+    print("  Pre-repair, settle(observed) wrote:\n")
+    print("    prediction_held   None   # 'human or model fills this in'")
+    print("    file_hash_after   equal to file_hash_before, unremarked\n")
+    print("  So a registered prediction could be settled with the")
+    print("  comparison never made, and the protocol -- which exists to gate")
+    print("  SIM EDITS -- could not tell whether the edit it gated had")
+    print("  happened. An edit registered, settled and never performed was")
+    print("  indistinguishable in the log from one carried out.")
     print()
-    print("  Two gaps, and they are the same gap:\n")
-    print("  (a) `prediction_held = None  # human or model fills this in`.")
-    print("      Nothing requires it. A registered prediction can be settled")
-    print("      with the comparison never made, and the log will show a")
-    print("      complete-looking MECHANISM_EDIT_SETTLED record.")
+    print("  REPAIRED. Three behaviours, each demonstrated:\n")
+
+    for label, call in (
+        ("settle without a verdict",
+         lambda: e.settle({"best_duty": 1.0}, None)),
+        ("settle with a non-bool",
+         lambda: e.settle({"best_duty": 1.0}, "yes")),
+        ("settle an edit that did not happen",
+         lambda: e.settle({"best_duty": 1.0}, True)),
+    ):
+        try:
+            call()
+            print("    %-38s ACCEPTED" % label)
+        except ValueError as exc:
+            print("    %-38s refused: %s"
+                  % (label, str(exc).splitlines()[0][:34]))
+
+    rec = e.abandon("photoinhibition needs an irradiance ceiling the spec "
+                    "does not declare")
+    print("    %-38s logged as %s"
+          % ("abandon(reason)", rec["kind"]))
+    print("      file_changed = %s" % rec["file_changed"])
     print()
-    print("  (b) the two hashes are equal because the file was not edited.")
-    print("      The protocol exists to gate sim edits, and it cannot tell")
-    print("      whether one happened. An edit registered, settled, and never")
-    print("      performed is indistinguishable in the log from one carried")
-    print("      out.")
+    print("  `abandon` is the path for an edit decided against, so the trail")
+    print("  stays intact either way -- registered, then not made, and the")
+    print("  log says which.")
     print()
-    print("  Both are the shape ../reasoning-gate/ hit and repaired: a")
-    print("  declared control that is never scored. Its fix was to refuse an")
-    print("  empty observation and to write a record either way. Here the")
-    print("  equivalents are: settle(observed, held: bool) with `held`")
-    print("  required, and refusing to settle when the hash has not moved.")
+    print("  Same shape as ../reasoning-gate/'s declared control that was")
+    print("  never scored. Its repair was to refuse an empty observation and")
+    print("  write a record either way; this is that, on a prediction.")
 
 
 def check_usage() -> None:
-    section("5  the header's usage example fails")
+    section("5  the header's usage example used to fail")
 
     line = [l for l in SRC.splitlines()
             if l.strip().startswith("#   python3") and " run " in l]
-    print("  from the file header:\n")
+    print("  the file header now reads:\n")
     for l in line:
         print("     " + l.strip("# ").rstrip())
     print()
-    print("  `run` dispatches to run_claim(), which looks the argument up in")
-    print("  CLAIM_TABLE by claim id. S2 is a SIM id.\n")
+    print("  It used to document `run S2`. `run` dispatches to run_claim(),")
+    print("  which looks the argument up in CLAIM_TABLE by claim id, and S2")
+    print("  is a SIM id.\n")
     ids = [c["id"] for c in H.CLAIM_TABLE]
     sims = sorted(H.SIMS)
     print("    claim ids : %s" % ", ".join(ids))
@@ -241,15 +280,18 @@ def check_usage() -> None:
         H.run_claim("S2")
         print("    run_claim('S2') -> returned")
     except StopIteration:
-        print("    run_claim('S2') -> StopIteration, uncaught")
+        print("    run_claim('S2') -> StopIteration, uncaught (unchanged;")
+        print("                       the fix is to the documentation, since")
+        print("                       the two registries are separate on")
+        print("                       purpose)")
     print()
     print("  `sweep S2` takes a sim id and `run C1` takes a claim id, which")
     print("  is defensible -- they are different commands over different")
     print("  registries. The header documents `run S2`.")
     print()
-    print("  Same class as ../reasoning-gate/ D1, where the module docstring's")
-    print("  usage example denied at pre(). Fixed there by making the example")
-    print("  a working one and labelling the failing case separately.")
+    print("  REPAIRED: the header documents `run C2` and labels `sweep S2`")
+    print("  as a different registry on purpose. Same class as")
+    print("  ../reasoning-gate/ D1, and the same fix.")
 
 
 def check_what_holds() -> None:
@@ -381,8 +423,19 @@ def check_readme() -> None:
     print("   not to break the ordering, so ending mid-cycle is necessary")
     print("   here and not sufficient)")
     print()
-    print("  So the README is right about the MECHANISM and the shipped")
-    print("  readout does not show it. `_pchlide_run` returns Chl at the last")
+    print("  REPAIRED. `_pchlide_run` now returns the mean over the final")
+    print("  complete period, and the shipped curve is monotone -- so the")
+    print("  README's sentence is true of the output for the first time.")
+    print("  `Chl_endpoint` is still returned, because the repair adds a")
+    print("  readout rather than removing one.")
+    print()
+    print("  Registered as an InstrumentEdit, not a MechanismEdit. The")
+    print("  protocol governed MECHANISM changes and had no category for a")
+    print("  change to WHERE a number is read -- which alters sim output")
+    print("  while altering no mechanism and no parameter. That axis was")
+    print("  already implicit in the provenance types, and is now explicit.")
+    print()
+    print("  Pre-repair, `_pchlide_run` returned Chl at the last")
     print("  integration step, and at duty=0.5 the period is 2 x dark_block,")
     print("  so a 144 h run ends mid-cycle for the blocks that do not divide")
     print("  it. Reading the mean over the final complete period")
@@ -399,6 +452,68 @@ def check_readme() -> None:
     print("  the fix is to read a quantity the grid cannot alias.")
 
 
+def check_prose() -> None:
+    section("8  three things the README described that the code did not do")
+
+    print("  The repairs above were chosen by one rule: make the code do")
+    print("  what the delivered README already says it does. Three of them")
+    print("  were promises with no implementation at all.\n")
+
+    print("  (a) 'run -> provenance record -> RESIDUAL ROUTER -> hypothesis")
+    print("      block'. residual_route() was defined and never called.\n")
+    ref, _, _ = H.run_claim("C2")
+    sup, _, _ = H.run_claim("C5")
+    print("      C2 %-10s residual_route attached: %s"
+          % (ref["status"], "residual_route" in ref))
+    print("      C5 %-10s residual_route attached: %s"
+          % (sup["status"], "residual_route" in sup))
+    print()
+    print("      It attaches where it is the point -- a claim that did not")
+    print("      hold, or one the predicate could not decide. Four questions,")
+    print("      unanswered by construction. The router routes; it does not")
+    print("      resolve.\n")
+
+    print("  (b) 'Provenance never merges: REPORTED, PHYSICS, SIM, BENCH.")
+    print("      BENCH is empty until someone runs one.' Three types had")
+    print("      code paths. BENCH was declared and unreachable, so 'empty'")
+    print("      was true by absence rather than by construction.\n")
+    import tempfile as _tf
+    log = os.path.join(_tf.mkdtemp(), "bench.jsonl")
+    old, H.LOGPATH = H.LOGPATH, log
+    try:
+        print("      before: %d BENCH record(s)" % len(H.bench_records(log)))
+        H.record_bench("C1", "kWh_per_g_dry", 0.42, "kWh/g",
+                       method="65 C to constant mass, 72 h",
+                       kit="scale 0.01 g, kWh meter on the lamp circuit")
+        print("      after:  %d BENCH record(s)" % len(H.bench_records(log)))
+        try:
+            H.record_bench("C1", "q", 1.0, "u", method="   ", kit="k")
+            print("      a number with no method: ACCEPTED")
+        except ValueError:
+            print("      a number with no method: refused -- that is SIM")
+            print("                               provenance wearing a BENCH")
+            print("                               label")
+    finally:
+        H.LOGPATH = old
+    print()
+    print("      The hypothesis block now reports BENCH coverage per claim,")
+    print("      so 'no physical exit yet' is a printed line rather than an")
+    print("      absence the reader has to notice.\n")
+
+    print("  (c) the hypothesis block stamped the wall clock one line above")
+    print("      the file hash it printed for provenance, so two runs of the")
+    print("      same file produced two different documents.\n")
+    res = [H.run_claim(c["id"]) for c in H.CLAIM_TABLE]
+    a = H.hypothesis_block(res)
+    b = H.hypothesis_block(res)
+    print("      identical across two calls: %s" % (a == b))
+    print("      run id: %s" % H.run_id(res))
+    print()
+    print("      The id is the file hash plus the claim statuses, so it moves")
+    print("      when either does and not otherwise. The clock is in the log,")
+    print("      where every record already carries one.")
+
+
 def main() -> int:
     print()
     print("AUDITING THE HARNESS")
@@ -412,34 +527,43 @@ def main() -> int:
     check_usage()
     check_what_holds()
     check_readme()
+    check_prose()
 
     section("READING")
     print("""
-  The one that matters: C1's predicate returns SUPPORTED -- "the reported
-  metrics are diagnostic of real efficiency" -- from a run in which the sim
-  reproduced the reported signature zero times, printing None for the min
-  and max on the line above. A pass that an empty result set returns is not
-  a pass. One guard fixes it, and run_claim() already has the UNDECIDED
-  branch to route it to.
+  REPAIRED, all of it, pinned by tests/test_repairs.py. The rule for what
+  to fix was the delivered README: make the code do what the prose already
+  says it does.
 
-  C1's own grid says something better than its reads line. The signature
-  appears in 58 cells spanning a 4.9x range of true energy-per-dry-gram,
-  and every one of them is below 1.0. Non-diagnostic of MAGNITUDE,
-  diagnostic of SIGN -- which is the stronger version of the finding,
-  because it survives the objection that the sim was built to find nothing.
+  C1's predicate returned SUPPORTED -- "the reported metrics are
+  diagnostic" -- from a run in which the sim reproduced the signature zero
+  times, because the spread of an empty set was 0.0. It now calls
+  require() and routes to UNDECIDED, the third verdict run_claim() always
+  had a branch for. The README's own extension rule is what this restores:
+  a predicate that can fail.
 
-  The edit protocol screens two of the four fields it is given, and the two
-  it skips are the two that ask for justification. settle() writes
-  prediction_held: None and nothing fills it, and the before/after hashes
-  are equal because nothing edited the file -- so a registered, settled,
-  never-performed edit is indistinguishable in the log from a real one.
-  Both are the declared-control-never-scored shape that ../reasoning-gate/
-  repaired by requiring the observation.
+  C1's reads line was updated rather than the sim, which is what the
+  protocol says to do. The grid finds the signature in 58 cells spanning a
+  4.9x range of true energy-per-dry-gram and ALL of them below 1.0, so it
+  is non-diagnostic of magnitude and diagnostic of sign. signature_sign_-
+  agreement carries that, and is None when there is nothing to agree on.
 
-  What holds is most of it. The predicates fire in both directions, four of
-  five come back REFUTED on the shipped run, C2 refutes its own hypothesis
-  and explains the mechanism, and PENDING_EDITS writes down the three
-  named-but-unrun alternatives instead of retuning toward them.
+  The edit guard screens all four fields it is given. settle() requires a
+  bool and refuses when the file hash has not moved, with abandon() as the
+  path for an edit decided against -- so a registered, settled,
+  never-performed edit is no longer indistinguishable in the log from a
+  real one.
+
+  The dark-interval readout is a cycle average, so the curve is monotone
+  and the README's C3 sentence is true of the output for the first time.
+  Registered as an InstrumentEdit: the protocol governed MECHANISM changes
+  and had no category for a change to where a number is READ, which alters
+  sim output while altering no mechanism. No verdict moved.
+
+  And three promises with no implementation: the residual router is in the
+  pipeline, BENCH has an ingest path that refuses a number with no method,
+  and the hypothesis block carries a deterministic run id instead of a wall
+  clock stamped one line above the hash it prints for provenance.
 """)
     return 0
 

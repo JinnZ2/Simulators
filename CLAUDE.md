@@ -2232,9 +2232,39 @@ underneath).
   reads line offers. The prose is ahead of the instrument, not behind it;
   same commensurability class as `aperiodic-order-sim-stack/`. Ending
   mid-cycle is necessary and not sufficient (the 20 h arm ends mid-cycle and
-  does not break the ordering), so the diagnosis is a containment. No bench
-  data exists in the folder and none is claimed; nothing here is a statement
-  about wheat. CC0.
+  does not break the ordering), so the diagnosis is a containment.
+  **ALL SEVEN REPAIRED**, pinned by `tests/test_repairs.py` (29 tests), under
+  one rule — *make the code do what the delivered README already says it
+  does*; the `.py` is modified and `README.md` is not. `PCH_001`: a
+  `require()` helper raises and `run_claim()`'s existing `UNDECIDED:` branch
+  catches it, so an empty signature set lands on the third verdict instead of
+  on the one reading as confirmation — restoring the README's own extension
+  rule, "a predicate that can fail". `PCH_002`: **the claim was updated, not
+  the sim**, which is the protocol's own instruction — `signature_sign_-
+  agreement` (1.0, 58 of 58 below 1.0) and `signature_cells_below_1` now back
+  a `reads` line that separates MAGNITUDE from SIGN, and the field is `None`
+  when there is nothing to agree on. `PCH_003`: the screen reads all four
+  free-text fields. `PCH_004`: `settle(observed, held)` requires a bool and
+  refuses when the file hash has not moved, with `abandon(reason)` as the
+  path for an edit decided against. `PCH_005`: the header documents `run C2`.
+  `PCH_007`: `_pchlide_run` returns the mean over the final complete period,
+  the curve is monotone, `Chl_endpoint` is still returned, and **no verdict
+  moved** — registered as a new **`InstrumentEdit`**, the edit category the
+  protocol lacked: it gated MECHANISM changes and had no slot for a change to
+  WHERE a number is read, which alters sim output while altering no mechanism
+  and no parameter. It takes no prediction, because it is not a claim about
+  the world. **Three prose promises that had no implementation** also close:
+  `residual_route()` was defined and never called and now attaches on
+  `REFUTED`/`UNDECIDED` runs and not on `SUPPORTED`; `BENCH` was declared in
+  `SOURCE` and producible by nothing and now has `record_bench()` /
+  `bench_records()` / a `bench` CLI that refuses a number with no method, with
+  per-claim coverage printed in the hypothesis block; and the block's wall
+  clock — stamped one line above the file hash it printed for provenance — is
+  replaced by a deterministic `run id` (file hash + claim statuses), making
+  `run-all` byte-reproducible. No bench data exists in the folder and none is
+  claimed; nothing here is a statement about wheat. What changed is that
+  `BENCH` is now empty by construction rather than for want of a way to fill
+  it. CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
