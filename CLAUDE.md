@@ -2349,6 +2349,73 @@ underneath).
   **not** move `UNI_002`: both seed terms are policy/economics, so a ninth
   mechanism holding two same-field cases adds nothing to the cross-field
   check. Stdlib only, phone-buildable, CC0.
+- `presented-binary/` — Two instruments aimed at a presented two-option
+  framing from opposite sides, plus a nine-claim table (`B1..B9`).
+  `binary_audit.py` audits the framing **before it is answered**: eleven
+  checks across two blocks (option space O1–O6, sacrifice S1–S5), each
+  resolving to `documented` / `asserted` / `absent`, with no verdict
+  computed — the readout is how much of the framing has a record behind
+  it. `frame_sim.py` runs the same question at a model: pass 1 works
+  inside the frame and is **hash-sealed**, only then is pass 2 (the wide
+  pass) released, and pass 3 asks whether any pass-2 option beats the
+  pass-1 choice **on pass 1's own stated metric** — an internal
+  comparison, so no external answer key is needed and a run cannot be
+  graded generously by picking a better metric afterward. Ten claims
+  `PB_001..010` in `AUDIT_NOTES.md`; the delivered `CLAIM_TABLE.md` is
+  untouched. **`PB_002`, the sharp one:** the seal is enforced at one gate
+  and not the other. `cmd_prompt2` carries `if verify(rid) is False`;
+  `cmd_submit2` checks only that `seal.json` EXISTS and `cmd_submit3`
+  checks nothing — so a `pass1.json` rewritten after sealing flows
+  straight through, and **prompt 3 is generated from the edited choice**
+  (measured: `Pass 1 choice: b`, the value written after pass 2 was seen).
+  Prompt 3's answer is `dominated_on_own_metric`, which is B9's entire
+  readout. `cmd_report` does print `SEAL BROKEN`, so it is caught — after
+  the comparison has already been asked and answered against a tampered
+  pass 1, which is the exact failure the seal exists to prevent. One line,
+  the one `cmd_prompt2` already has. **`PB_003`:** "prompt withholding" is
+  commitment, not confidentiality — `PROMPT_2` and `PROMPT_3` are
+  module-level string constants readable before pass 1 is written, and the
+  operator is the model; `divergence-playground/seal.py` states this limit
+  about itself ("accidental-peek defence, not cryptographic") and this
+  drop does not. The property B7–B9 actually need is commitment, and the
+  seal does deliver that. **`PB_006`/`PB_010`, a pincer on the same
+  field:** B8's readout is `incompleteness_acknowledged`, which `PROMPT_1`
+  **requires in the JSON it asks for** — so the flag is produced alongside
+  the reasoning rather than about it, a self-report from inside the thing
+  being measured (`triad-playground/` `TP_006`, `reasoning-dial/`
+  `RD_009`) — while `cmd_seal` requires `options`/`choice`/`metric` and
+  **not** that field, so a pass 1 without it seals clean and reports
+  `frame_flagged None`. Over-elicited by the prompt, under-required by the
+  gate. **`PB_004`:** `option_gain` is `None` both when the wide pass
+  found zero options and when it never ran (`if (n2 and n1)` treats 0 as
+  falsy) — a loud finding and an incomplete run scoring alike, in the
+  field B7 is stated in. **`PB_005`:** `--submit3` is parsed but absent
+  from the documented usage while `cmd_submit2` prints prompt 3, so the
+  documented workflow leaves `dominated_on_own_metric` at `None` on every
+  run and B9 is unreachable in both directions. **`PB_007`:**
+  `documented_share` is `documented/n`, so eleven assertions and eleven
+  silences both return 0.000 — `uninstrumented/`'s SCALAR DEMAND on the
+  drop's own headline number, and `criteria-drift/` `CD_002`'s
+  ordinal-compared-as-nominal; an `answered_share` separates them at no
+  cost. **`PB_008` records what holds:** every default in `binary_audit.py`
+  runs toward `absent` — blank template 0 of 11, missing entry absent,
+  malformed state counted absent AND named — the opposite of
+  `category-weld`'s template, which scores 1 on its only live readout
+  (`CW_012`). **`PB_001`:** both verification sentences in the delivered
+  `CLAIM_TABLE.md` name artifacts the drop does not carry — the seeded
+  case and the `frame_sim` fixtures — the second consecutive drop with
+  that shape after `CW_001`. `cases/` is left **absent rather than
+  reconstructed**, since it is data and inventing one would put a framing
+  in the author's mouth; the three claimed `frame_sim` properties are code
+  behaviour and are checked directly instead (two hold, one is a naming
+  problem). **`PB_009`:** B5 ("'a few' is a category weld — headcount and
+  functional position score identically") is directly runnable in
+  `category-weld/` and no `welds/a_few.json` exists — the cheapest test
+  either folder has, and the first weld term from outside
+  policy/economics, which is `UNI_002`'s open question. Also re-delivered
+  in this drop: `category-weld/CLAIM_TABLE.md` and `welds/capital.json`,
+  both **byte-identical** to the landed copies (`MF_019` — files that live
+  in one place do not drift). Stdlib only, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

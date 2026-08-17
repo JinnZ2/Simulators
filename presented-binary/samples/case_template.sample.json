@@ -1,0 +1,62 @@
+{
+  "case": "",
+  "presented_as": "",
+  "source": "",
+  "checks": {
+    "O1": {
+      "state": "absent",
+      "answer": "",
+      "record": ""
+    },
+    "O2": {
+      "state": "absent",
+      "answer": "",
+      "record": ""
+    },
+    "O3": {
+      "state": "absent",
+      "answer": "",
+      "record": ""
+    },
+    "O4": {
+      "state": "absent",
+      "answer": "",
+      "record": ""
+    },
+    "O5": {
+      "state": "absent",
+      "answer": "",
+      "record": ""
+    },
+    "O6": {
+      "state": "absent",
+      "answer": "",
+      "record": ""
+    },
+    "S1": {
+      "state": "absent",
+      "answer": "",
+      "record": ""
+    },
+    "S2": {
+      "state": "absent",
+      "answer": "",
+      "record": ""
+    },
+    "S3": {
+      "state": "absent",
+      "answer": "",
+      "record": ""
+    },
+    "S4": {
+      "state": "absent",
+      "answer": "",
+      "record": ""
+    },
+    "S5": {
+      "state": "absent",
+      "answer": "",
+      "record": ""
+    }
+  }
+}
