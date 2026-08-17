@@ -1,0 +1,53 @@
+{
+  "term": "rural",
+  "domain": "policy / agricultural statistics / census",
+  "tracked_by_label": "density",
+  "note": "The label is read off population density. Everything else it is taken to indicate rides along unmeasured.",
+  "components": [
+    {
+      "id": "density",
+      "name": "population density",
+      "unit": "people per unit area"
+    },
+    {
+      "id": "ownership_dist",
+      "name": "ownership distribution",
+      "unit": "independent operators per 1000 acres"
+    },
+    {
+      "id": "functional_div",
+      "name": "functional diversity",
+      "unit": "distinct enterprise types in region"
+    },
+    {
+      "id": "self_support",
+      "name": "self-supporting capacity",
+      "unit": "share of local demand met locally"
+    }
+  ],
+  "divergences": [
+    {
+      "id": "industrial-consolidation",
+      "note": "500 to 6000 acres held by one or two companies, roughly 300 people living there, roughly 50 employed. Density stays low so the label holds; ownership distribution and functional diversity have collapsed. The same word covers both configurations.",
+      "readings": {
+        "density": {"before": null, "after": null, "source": "endpoint stated, no baseline series"},
+        "ownership_dist": {"before": null, "after": null, "source": "endpoint stated, no baseline series"}
+      }
+    },
+    {
+      "id": "no-alternate-check",
+      "note": "Independent operators across a fence line are a distributed sensor array: different practices, different failure timings, so soil and water degradation appears as divergence between neighbours before it appears in any assay. Single ownership removes the comparison case, so the depletion signal has no baseline to appear against. Depletion rate rises while the category is unchanged.",
+      "readings": {}
+    },
+    {
+      "id": "employment-concentration",
+      "note": "One packing facility closure zeroes regional employment at once rather than degrading gracefully. Diversified base and single-employer base score identically on the label.",
+      "readings": {}
+    },
+    {
+      "id": "service-withdrawal",
+      "note": "Hospitals and clinics exit; no other work is affordable in the area. Service presence is not a component the label carries, so withdrawal produces no movement in the statistic.",
+      "readings": {}
+    }
+  ]
+}

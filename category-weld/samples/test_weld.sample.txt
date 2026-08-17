@@ -1,0 +1,51 @@
+relative_change
+  halving is -0.5                                      ok
+  half again is +0.5                                   ok
+  unmoved is 0.0                                       ok
+  denominator is abs(before)                           ok
+  before == 0 is undefined, not inf                    ok
+  missing before is undefined                          ok
+  missing after is undefined                           ok
+
+case_spread
+  0.5 against 0.1 is a spread of 5                     ok
+  equal magnitudes opposite directions spread 1        ok
+  one component is not a spread                        ok
+    and says why                                       ok
+  an exactly unmoved component gives no ratio          ok
+    and says why                                       ok
+
+the limit case the mechanism is built around
+  label unmoved, hidden component collapsed -- see AUDIT_NOTES CW_004
+    label 100.00 -> spread --
+    label  99.00 -> spread 50.0
+    label  99.90 -> spread 500.0
+    label  99.99 -> spread 5000.0
+
+bias
+  two divergences the same way is bias 1               ok
+  two divergences opposite ways is bias 0              ok
+  three down one up is bias 0.5                        ok
+  one observation is withheld, not 1.0                 ok
+    and the count is reported                          ok
+  an exact tie is dropped, not counted as agreement    ok
+    so two cases leave one observation, below the guard ok
+
+reference substitution
+  tracked component absent, first quantified stands in ok
+    and the observation is flagged                     ok
+
+score on an empty term
+  no cases is n_cases 0                                ok
+    max_spread undefined                               ok
+    bias undefined                                     ok
+
+score on the delivered terms
+  capital has 4 named cases                            ok
+    capital max_spread unquantified                    ok
+    capital bias unquantified                          ok
+  rural has 4 named cases                              ok
+    rural max_spread unquantified                      ok
+    rural bias unquantified                            ok
+
+all fixtures pass

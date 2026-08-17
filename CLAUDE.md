@@ -2265,6 +2265,73 @@ underneath).
   claimed; nothing here is a statement about wheat. What changed is that
   `BENCH` is now empty by construction rather than for want of a way to fill
   it. CC0.
+- `category-weld/` — Proposed **ninth exclusion mechanism** for
+  `uninstrumented/`. The first eight cover a quantity that cannot be
+  measured; this one covers a quantity that cannot be **separated** — two
+  or more independent quantities welded into one term, so a component can
+  move to either extreme without the record moving. Five files delivered
+  verbatim (`MECHANISM_09.md`, `README.md`, `CLAIM_TABLE.md` C1–C8, and
+  two seed terms under `welds/`: `rural` = density welded to ownership
+  distribution / functional diversity / self-supporting capacity;
+  `capital` = legal title welded to decision authority / risk bearing /
+  revenue claim / input supply, four named divergence cases each). Three
+  readouts per term — `n_cases`, `max_spread`, `bias`. **`weld.py` and
+  `test_weld.py` are named in the delivered README and did not arrive**,
+  so both are reconstructed from the four documented call sites with
+  `[CHOICE]` at each of nine points the prose leaves the arithmetic open
+  — same situation as `measurement-fork/widen.py` and `validate.py`.
+  Nine claims `CW_001..009` in `AUDIT_NOTES.md`; the delivered
+  `CLAIM_TABLE.md` is untouched. **`CW_001`** is the one the drop invites:
+  `CLAIM_TABLE.md` states `max_spread` and `bias` are "verified against
+  synthetic fixtures in `test_weld.py`", and that is the single statement
+  in the folder uncheckable from the folder — `UNVERIFIED`, a gap not a
+  defect. **`CW_004`, the sharp one:** `max_spread` is specified as a
+  *ratio* between component relative-changes, and the paradigm weld —
+  stated in `rural.json`'s own words, "density stays low so the label
+  holds; ownership distribution and functional diversity have collapsed" —
+  is the tracked component not moving. Measured with the hidden component
+  held at −0.5 and the label walked toward unmoved, the readout runs
+  1.0 → 5.0 → 50 → 500 → 5000 → undefined: **smallest where the weld is
+  weakest, unbounded where it is cleanest, undefined at the ideal case**,
+  so it is not comparable across terms and `max()` over cases selects the
+  case nearest a perfect weld rather than the largest divergence. A
+  difference of relative changes is bounded and orders the same cases the
+  same way away from the limit — recorded, **not applied**, since that is
+  a change to the readout and not to a claim. **`CW_002`, one word:** the
+  mechanism's test condition 2 ("the language provides no separate
+  handle") is refuted on the literal reading by the drop's own files —
+  all nine components carry an English name and a unit — and holds on the
+  *record* reading (no census field for ownership distribution under
+  `rural`, no balance-sheet line for decision authority under `capital`),
+  which is the reading `tracked_by_label` is written under. **`CW_008`**
+  shows the choice is load-bearing: C1's nearest competitor is the
+  register's existing `PROXY SUBSTITUTION`, which requires a *named*
+  target displaced by a *named* enforceable stand-in ("fitness to drive" ←
+  "hours since last drive"), and a weld is precisely the case with no
+  second name to point at — so on the English reading of condition 2 the
+  hidden components become named targets, PROXY SUBSTITUTION absorbs both
+  seed terms, and C1 falls. **`CW_003`:** two-condition test, three
+  readouts, all three measuring condition 1 — condition 2 has no readout
+  anywhere in the drop, so a term with real divergences and good separate
+  handles scores identically to a weld. **`CW_006`:** `bias` is
+  |Σ sign|/count, which is 1.0 on one observation whatever the datum
+  (`null-harness/` `CONSTANT_FIRES`), and the guard is load-bearing on the
+  next datum the folder expects — filling `capital`'s one null pair yields
+  exactly one directional observation, reading `bias = 1.000` unguarded.
+  **`CW_005`/`CW_007`:** both seed terms return `n_cases = 4` and `--`
+  for the other two, so the only live readout does not separate the two
+  terms it ships with (the drop's own C3, shown rather than argued); 2 of
+  8 named cases carry a readings block, 1 carries a usable pair, 0 carry
+  the two a spread needs — the folder is **one retrieved pair** from its
+  first non-`--` number, in the case whose own note says the divergence
+  between those two components "is the entire structure". **`CW_009`:**
+  C5 compares two rates with no denominator on either, while the
+  generation rule under it (a representation summarising contexts has no
+  gradient separating what the contexts never separate) is testable one
+  term at a time — split the claim, don't discard it. Does **not** move
+  `UNI_002`: both seed terms are policy/economics, so a ninth mechanism
+  holding two same-field cases adds nothing to the cross-field check.
+  Stdlib only, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

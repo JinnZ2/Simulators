@@ -1,0 +1,20 @@
+CATEGORY WELD -- 2 term(s)
+
+  term        comp  case  quan  max_spread    bias
+  --------------------------------------------------
+  capital        5     4     0          --      --
+  rural          4     4     0          --      --
+
+  quan = cases with two or more components carrying a usable
+  before/after pair. max_spread and bias read only those.
+
+  capital: bias withheld -- 0 directional observation(s), minimum 2
+  capital / intermediated-title: no spread -- fewer than two quantified components
+  capital / socialized-downside: no spread -- fewer than two quantified components
+  capital / subsidy-without-behaviour-change: no spread -- fewer than two quantified components
+  capital / input-supply-uncompensated: no spread -- fewer than two quantified components
+  rural: bias withheld -- 0 directional observation(s), minimum 2
+  rural / industrial-consolidation: no spread -- fewer than two quantified components
+  rural / no-alternate-check: no spread -- fewer than two quantified components
+  rural / employment-concentration: no spread -- fewer than two quantified components
+  rural / service-withdrawal: no spread -- fewer than two quantified components

@@ -54,6 +54,7 @@ underneath. Read those before running the corresponding script.
 | `uninstrumented/` | quantities excluded by an instrument's constitution | eight-mechanism register + `scan.py` text scanner, checks on both, twelve `UNI_*` claims |
 | `criteria-drift/` | benchmark and rubric versions over time | signed drift per frame field, anchor-version decomposition, a regression that refuses to run unidentified, nine `CD_*` claims |
 | `photoperiod-claim-harness/` | four inconsistencies in a published greenhouse result | runnable falsifiable sims + mechanism-edit protocol + bench protocol; six `PCH_*` claims on the harness |
+| `category-weld/` | terms that fuse independent quantities into one handle | ninth exclusion mechanism for `uninstrumented`, a three-readout scorer reconstructed from its own README, nine `CW_*` claims |
 | `tools/` | shared utilities | validators, substitution toolkits, gate-drift check |
 
 See [`SYNTHESIS.md`](SYNTHESIS.md) for the cross-folder reading and

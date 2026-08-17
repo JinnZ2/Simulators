@@ -1,0 +1,333 @@
+#!/usr/bin/env python3
+"""weld_audit.py -- checks on the category-weld drop.
+
+Added, not delivered. Imports weld.py and the term files; modifies nothing.
+Findings are recorded in AUDIT_NOTES.md as CW_001..CW_009.
+
+    python3 weld_audit.py
+
+stdlib only, deterministic. CC0.
+"""
+
+import json
+import os
+
+import weld
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+BAR = "=" * 70
+
+# The eight mechanisms already in ../uninstrumented/README.md, with the
+# structure each one requires. C1's falsifier is "showing any of the eight
+# already covers the two seed terms without adding a mechanism", so the
+# check has to be against the structure, not against the label.
+EIGHT = [
+    ("MODALITY", "apparatus is in a different channel from the quantity"),
+    ("STORAGE", "medium cannot hold the shape of the quantity"),
+    ("SCALAR DEMAND", "ONE quantity's variation over a domain flattened to a scalar"),
+    ("BUDGET BOUNDARY", "a closed budget compared against an open one"),
+    ("AUTHORED REFERENCE", "the reference is produced by the measured party"),
+    ("PROXY SUBSTITUTION", "a NAMED target displaced by a NAMED enforceable stand-in"),
+    ("AUDIT ASYMMETRY", "the guard fires on one side of a comparison only"),
+    ("SCORED AS WASTE", "a component enters the accounting as cost"),
+]
+
+
+def head(n, title):
+    print()
+    print(BAR)
+    print("%d  %s" % (n, title))
+    print(BAR)
+
+
+terms = weld.load_all()
+by_name = {t["term"]: t for t in terms}
+
+print("category-weld -- audit of the delivered drop")
+print("%d term file(s): %s" % (len(terms), ", ".join(sorted(by_name))))
+
+# ----------------------------------------------------------------- CW_001
+head(1, "CW_001  the verification claim rests on files that did not arrive")
+print("""
+CLAIM_TABLE.md, "Status of the readouts":
+
+    max_spread and bias "are implemented and verified against synthetic
+    fixtures in test_weld.py"
+
+README.md names both weld.py and test_weld.py under Files. Neither is in
+the drop. Both are reconstructed here from the four documented call sites
+and the three readout descriptions, with every arithmetic decision marked
+[CHOICE] at the point it was made.
+
+So the claim is not false and not confirmed. What is verified below is the
+RECONSTRUCTED arithmetic. A different reconstruction satisfying the same
+prose returns different numbers, and the sections that follow show three
+places where the prose leaves the number open.
+""".strip())
+choices = sum(
+    1
+    for line in open(os.path.join(HERE, "weld.py"), encoding="utf-8")
+    if "[CHOICE]" in line
+)
+print()
+print("  [CHOICE] marks in weld.py: %d" % choices)
+
+# ----------------------------------------------------------------- CW_002
+head(2, "CW_002  the mechanism's test condition 2, read two ways")
+print("""
+MECHANISM_09.md, Test:
+
+    2. The language provides no separate handle for the components that
+       diverged.
+
+Read as a statement about English, the drop's own files refute it: every
+component is named, in plain English, with a unit.
+""".strip())
+print()
+for name in sorted(by_name):
+    t = by_name[name]
+    print("  %s -- %d components, all with an English name and a unit:" % (
+        name, len(t["components"])))
+    for c in t["components"]:
+        print("      %-18s %s (%s)" % (c["id"], c["name"], c["unit"]))
+    print()
+print("""
+Read as a statement about the RECORD -- the statistic, the census category,
+the accounting line -- it holds: there is no census field for ownership
+distribution riding under `rural`, and no line on a balance sheet for
+decision authority riding under `capital`. Naming a component in a JSON
+file is not the same as the record carrying it.
+
+The second reading is the one the register is for, and it is the reading
+the seed files are written under (`tracked_by_label` is a field about what
+the record reads, not about what English can say). The doc states the
+first. One word -- "record" for "language" -- separates a refuted
+condition from a live one.
+""".strip())
+
+# ----------------------------------------------------------------- CW_003
+head(3, "CW_003  the two-part test has one part instrumented")
+print("""
+MECHANISM_09.md gives a two-condition test and three readouts. All three
+readouts measure condition 1 (divergence cases exist). Condition 2 (no
+separate handle) has no readout, in weld.py or anywhere in the drop.
+""".strip())
+print()
+print("  %-14s %-38s %s" % ("readout", "measures", "condition"))
+print("  " + "-" * 66)
+for r, m in [
+    ("n_cases", "how many divergences can be named"),
+    ("max_spread", "how far components moved apart"),
+    ("bias", "whether they moved apart consistently"),
+]:
+    print("  %-14s %-38s %s" % (r, m, "1"))
+print("  %-14s %-38s %s" % ("(none)", "whether the record carries a handle", "2"))
+print()
+print("""
+Consequence: a term with divergence cases and perfectly good separate
+handles in the record scores identically to a weld. By the doc's own test
+that term is "a summary, not a weld" -- and the scorer cannot tell them
+apart. The missing readout has a shape: count the components for which the
+record has an independently reportable field, over the total.
+""".strip())
+
+# ----------------------------------------------------------------- CW_004
+head(4, "CW_004  max_spread diverges at the case the mechanism is built around")
+print("""
+MECHANISM_09.md defines max_spread as "largest ratio between component
+relative-changes in any one case". The paradigm weld, stated in the drop's
+own rural.json:
+
+    "Density stays low so the label holds; ownership distribution and
+     functional diversity have collapsed."
+
+The tracked component does not move. A ratio whose denominator is the
+tracked component's relative change therefore runs to infinity as the weld
+gets cleaner, and is undefined at the limit.
+""".strip())
+print()
+print("  hidden component fixed at -0.5 (halved); label approaches unmoved")
+print()
+print("  %-16s %-14s %s" % ("label after", "label rel", "max_spread"))
+print("  " + "-" * 46)
+for after in (50.0, 90.0, 99.0, 99.9, 99.99, 100.0):
+    c = {
+        "id": "probe",
+        "readings": {
+            "label": {"before": 100.0, "after": after},
+            "hidden": {"before": 100.0, "after": 50.0},
+        },
+    }
+    s, why = weld.case_spread(c)
+    print("  %-16.2f %-+14.4f %s" % (
+        after, weld.relative_change(100.0, after), weld.fmt(s, "%.1f")))
+print()
+print("""
+The statistic is smallest where the weld is weakest and unbounded where it
+is strongest. It is not wrong -- it is a ratio, and it does what a ratio
+does -- but it cannot be compared across terms, and a max() over cases
+will always select whichever case came closest to the ideal weld rather
+than whichever divergence was largest.
+
+A difference of relative changes is bounded, is defined at the limit, and
+orders the same cases the same way away from it. That is a change to the
+readout, not to a claim, so it is recorded here rather than applied.
+""".strip())
+
+# ----------------------------------------------------------------- CW_005
+head(5, "CW_005  the only live readout does not separate the two seed terms")
+print()
+print("  %-10s %6s %6s %6s %10s %6s" % (
+    "term", "comp", "cases", "quant", "max_spread", "bias"))
+print("  " + "-" * 50)
+for name in sorted(by_name):
+    s = weld.score(by_name[name])
+    print("  %-10s %6d %6d %6d %10s %6s" % (
+        s["term"], s["n_components"], s["n_cases"], s["n_cases_quantified"],
+        weld.fmt(s["max_spread"]), weld.fmt(s["bias"])))
+print()
+print("""
+Both seed terms return n_cases = 4. The two other readouts return --. So
+on the set as delivered the scorer assigns the two terms an identical
+score, and the number it agrees on is the count of paragraphs someone
+wrote.
+
+This is C3 ("n_cases alone is insufficient") shown from the drop's own
+data rather than argued. It does not CLOSE C3 -- C3's stated falsifier
+needs a populated set, and there is none -- but it moves the claim from
+asserted to demonstrated on a set of size 2.
+""".strip())
+
+# ----------------------------------------------------------------- CW_006
+head(6, "CW_006  bias returns 1.0 on one observation, before seeing anything")
+print("""
+bias is |sum of signs| / count. On a single observation that is |+-1| / 1
+= 1.0 whatever the datum is -- the value the doc reads as "one component
+is systematically standing behind another", returned by a statistic that
+has seen one component move once.
+
+null-harness calls this CONSTANT_FIRES: a detector whose positive verdict
+is reachable without a signal. weld.py withholds bias below
+MIN_BIAS_OBS = %d and says how many observations it had. That guard is a
+[CHOICE]; the drop's spec names the range 0..1 and no floor.
+""".strip() % weld.MIN_BIAS_OBS)
+print()
+print("  the guard is load-bearing on the next datum this folder expects:")
+cap = json.loads(json.dumps(by_name["capital"]))
+sd = next(d for d in cap["divergences"] if d["id"] == "socialized-downside")
+print("    capital / socialized-downside has risk_bearing quantified and")
+print("    revenue_claim null. Fill revenue_claim and capital has exactly")
+print("    one quantified case -> exactly one directional observation.")
+sd["readings"]["revenue_claim"] = {"before": 1.0, "after": 1.2}
+s_guarded = weld.score(cap)
+old = weld.MIN_BIAS_OBS
+weld.MIN_BIAS_OBS = 1
+s_unguarded = weld.score(cap)
+weld.MIN_BIAS_OBS = old
+print()
+print("      with the guard      bias = %s  (%s)" % (
+    weld.fmt(s_guarded["bias"]), s_guarded["bias_note"]))
+print("      without the guard   bias = %s  on %d observation(s)" % (
+    weld.fmt(s_unguarded["bias"]), s_unguarded["bias_n_obs"]))
+print()
+print("""
+Without a floor, the first term anyone quantifies reports maximal
+directional work on its first pair of numbers.
+""".strip())
+
+# ----------------------------------------------------------------- CW_007
+head(7, "CW_007  the folder is one retrieved pair from its first readout")
+rows = []
+for name in sorted(by_name):
+    for d in weld.named_cases(by_name[name]):
+        r = d.get("readings") or {}
+        have = [k for k, v in r.items()
+                if v.get("before") is not None and v.get("after") is not None]
+        rows.append((name, d["id"], len(r), len(have)))
+print()
+print("  %-10s %-32s %8s %8s" % ("term", "case", "keys", "paired"))
+print("  " + "-" * 62)
+for t, c, k, h in rows:
+    print("  %-10s %-32s %8d %8d" % (t, c, k, h))
+print()
+n_any = sum(1 for _, _, k, _ in rows if k)
+n_usable = sum(1 for _, _, _, h in rows if h >= 1)
+print("  %d of %d named cases carry a readings block." % (n_any, len(rows)))
+print("  %d carry a usable before/after pair on any component." % n_usable)
+print("  %d carry two, which is what a spread needs." % sum(
+    1 for _, _, _, h in rows if h >= 2))
+print()
+print("""
+Two cases have a readings block and one has a usable number in it.
+rural / industrial-consolidation names density and ownership_dist and
+leaves all four values null. capital / socialized-downside is
+half-populated: risk_bearing 14.1 -> 2.5, revenue_claim before and after
+both null, with the file's own source line reading "reported as risen, no
+paired figure retrieved".
+
+The gap is not "no data". It is one retrieved pair, in a case whose own
+note says the divergence between those exact two components "is the entire
+structure".
+""".strip())
+
+# ----------------------------------------------------------------- CW_008
+head(8, "CW_008  C1 against the eight, by structure")
+print("""
+C1's falsifier: showing any of the eight already covers the two seed terms.
+The one that gets closest is PROXY SUBSTITUTION -- density is enforceable
+and stands where ownership distribution is not read.
+""".strip())
+print()
+for label, structure in EIGHT:
+    print("  %-20s %s" % (label, structure))
+print()
+print("""
+The separation is in what each requires to exist. PROXY SUBSTITUTION needs
+two named things and a substitution: "fitness to drive" is a phrase, and
+"hours since last drive" was written into a rule in its place. The register
+entry can name the target it lost.
+
+CATEGORY WELD is the case where there is no second name to point at. There
+is one word, and the components were never separately carried, so there is
+no substitution event to date and no displaced target to name. Under
+CW_002's second reading this is exactly the difference between a target
+absent from the record and a target the record replaced.
+
+SCALAR DEMAND is the other near miss and it is a different collapse: one
+quantity's variation over a domain flattened to a scalar. A weld flattens
+N quantities to one handle. Both lose a dimension; they lose different
+ones.
+
+C1 survives the check. What the check also shows is that the distinction
+runs through CW_002 -- if condition 2 is read as being about English
+rather than about the record, PROXY SUBSTITUTION absorbs both seed terms
+and C1 falls.
+""".strip())
+
+# ----------------------------------------------------------------- CW_009
+head(9, "CW_009  C5 has no denominator")
+print("""
+C5: "Language models are more prone to welds than to retrieval errors."
+
+That is a comparison of two rates. Neither rate has a denominator here:
+prone per what -- per term encountered, per query, per output? And the
+stated falsifier ("a model separating components on a term whose corpus
+never separates them, without external tooling") requires establishing
+that a corpus never separates them, which requires the corpus.
+
+The generation rule the claim rests on is separately statable and does not
+need the comparison: a representation summarising contexts of occurrence
+has no gradient pulling apart components the contexts never separate. That
+is a mechanism, and it is testable on one term at a time -- present a
+model a divergence case for a welded term and score whether the components
+are held apart without being handed the decomposition.
+
+C5 as written compares two rates with no null. The mechanism under it does
+not need the comparison to be checkable. Recorded as a claim that should
+be split, not as a claim that is wrong.
+""".strip())
+
+print()
+print(BAR)
+print("end of audit -- findings recorded in AUDIT_NOTES.md as CW_001..CW_009")
+print(BAR)
