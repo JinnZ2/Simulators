@@ -1,49 +1,37 @@
-capital -- economics / corporate ownership
-read off: ownership_title
-
-  Legal title is the component the term is read off. Decision authority, risk bearing and revenue claim ride along and are assumed to travel with it.
+TERM      capital
+DOMAIN    economics / corporate ownership
+TRACKED   ownership_title
 
 COMPONENTS
-  * ownership_title    legal title to the entity
-      unit: share of equity held
-    decision_authority authority over what gets built and toward what objective
-      unit: share of decisions determined
-    risk_bearing       who absorbs loss
-      unit: share of downside absorbed
-    revenue_claim      claim on returns
-      unit: share of returns claimable
-    input_supply       supply of the productive inputs themselves
-      unit: share of inputs contributed
+  ownership_title legal title to the entity [share of equity held]
+  decision_authority authority over what gets built and toward what objective [share of decisions determined]
+  risk_bearing   who absorbs loss [share of downside absorbed]
+  revenue_claim  claim on returns [share of returns claimable]
+  input_supply   supply of the productive inputs themselves [share of inputs contributed]
 
 DIVERGENCE CASES
-  [named only] intermediated-title
+  [unquantified] intermediated-title
       Title resolves through rotating stock into index and pension
       funds, into retirement and life insurance accounts, to hundreds of
       millions of people who made no decision about any of it and whose
       composition changes daily. Ownership title is maximally diffuse;
       decision authority is not. Same term covers both ends.
-
-  [readings present, fewer than two quantified components] socialized-downside
+  [unquantified] socialized-downside
       Risk bearing runs through public subsidy while revenue claim stays
       private. Divergence between the two components is the entire
       structure and the term carries neither separately.
-      risk_bearing       rel change -0.8227
-
-  [named only] subsidy-without-behaviour-change
+        risk_bearing   x0.177
+  [unquantified] subsidy-without-behaviour-change
       Roughly forty states subsidizing; Georgia FY2026 exemption cost
       revised up 664 percent to about 2.5 billion with a further 1.1
       billion at locality level, Texas above 1 billion a year, Virginia
       near 2 billion. Surveys indicate the builds would have happened
       anyway. Payment is attached to behaviour it does not purchase, so
       the transfer does not appear as a cost of anything.
-
-  [named only] input-supply-uncompensated
+  [unquantified] input-supply-uncompensated
       For a trained model the productive inputs are corpus authors,
       architecture lineage published openly, and rotating engineering
       labour. None of these hold title. The only component stable across
       versions is the one with the least causal contribution.
 
-READOUTS
-  n_cases      4
-  max_spread   --
-  bias         --  (0 directional observation(s), minimum 2)
+READOUTS  cases=4 quantified=0 spread=-- bias=--
