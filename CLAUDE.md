@@ -2580,6 +2580,92 @@ underneath).
   `deficit_cited_as_grounds` set true because the case was written to
   instance the loop — which is the `CONSTANT_FIRES` half of `GC_004`,
   reached independently. Stdlib only, CC0.
+- `moral-decomposer/` — Takes a disagreement presented as moral or
+  ethical and decomposes it into option-distribution claims plus the
+  frames those claims imply; the output is the **residue**, what still
+  disagrees once the lower stages are matched. Three stages: **option
+  layer** (per party — enters the tally, generates options or held fixed,
+  decides, plus what each side took out of the variable environment,
+  with divergence COMPUTED between sides rather than declared), **frame
+  layer** (the boundary criterion the assignments imply, whether
+  documented, whether acquired in development rather than selected), and
+  **cut count** (further boundary decisions the frame requires, and how
+  many are documented — a frame that terminates needs one cut, a frame
+  that orders needs a supply). Delivered verbatim: `README.md`,
+  `CLAIM_TABLE.md` (M1–M5 plus a DISCLOSED WEAKNESSES section), and two
+  cases (`animal-standing`, `means-to-save`). **`decompose.py` is named
+  five times in the README and did not arrive**, and is deliberately NOT
+  reconstructed — `category-weld` `CW_004` is what the one prior
+  reconstruction of this kind cost, and this README fixes far less of the
+  arithmetic. Six claims `MD_001..006`. **`MD_001`:** M5 ("zero live
+  residue is an absence, not a proof") has its entire status in the
+  missing file — "the selftest includes a fixture with a live residue
+  item, so a non-empty residue is representable and the instrument is not
+  rigged toward M1" — and on the delivered corpus **0 of 4** residue
+  candidates are live, so nothing in the folder shows the detector can
+  fire; fifth consecutive drop whose status sentence names an absent
+  artifact. **`MD_002`:** `reduces_to: null` carries two opposite
+  meanings — the README makes it *the finding* ("candidates that reduce
+  to neither are the case the instrument exists to find"), and
+  `means-to-save`'s last candidate is `reduces_to: null` **and**
+  `resolved: true`, because it is agreement between the sides routed to
+  `presented-binary` rather than residue between them. The reading is
+  right and is the most interesting cell in the drop; the cost is that
+  only an author-set boolean separates the finding from its opposite. A
+  third value (`routed`) fixes it. **`MD_003`:** M3's stated asymmetry —
+  3 undocumented cuts vs 0, both cases, opposite file positions — is
+  exact to the digit; `terminates` is a separate asserted field and
+  nothing checks it against the cut list, so a frame nobody enumerated
+  scores as terminating. **`MD_004`:** the README's RUN ORDER requires
+  welded terms decomposed first, and **4 named across 2 cases, 0 exist**
+  in `category-weld/welds/` — `the few` is `presented-binary` B5's "a
+  few" under a different article, so two folders now point at one missing
+  `welds/a_few.json`. **`MD_005` holds:** 0 of 22 distinct field names
+  carry a moral term; the schema is positional and directional
+  throughout, and the dispute's own language sits in free-text values
+  where it belongs. **`MD_006` holds:** the drop's first disclosed
+  weakness is the finding an auditor would lead with, with the mechanism
+  named — "the reductions here were produced by the same process that
+  predicts them" — and `animal-standing`'s source field records a
+  candidate counterexample that failed and was kept with its failure.
+  CC0.
+- `domain-ledger/` — One file, `ledger.py`, making a confidence readout
+  **derived instead of asserted** by recording the domain set the number
+  was taken over: "61 percent over one domain set is a different quantity
+  than 61 percent over another." Four readouts returned separately and
+  deliberately not combined — **coverage** (held / read), **cycle depth**
+  (holds that survived a return / holds), **adversarial** (read domains
+  where the shape was pushed against / read), **truncated** (reads cut
+  short at a discomfort threshold / read) — plus a **reservation**, a
+  standing fraction held as unknown. Selftest 13/13. No `shapes/`,
+  README or claim table delivered; nothing here invents a shape. Five
+  claims `DL_001..005`. **`DL_001` holds:** the identifiability argument
+  is `criteria-drift` `CD_008` / `anchor-interval` `ANC_006` restated for
+  a confidence readout, and the tool follows it — the docstring states
+  why coverage and cycle depth are different currencies, and the table
+  footer prints each column's denominator, so `measurement-fork`'s VOID
+  RATIO check is made unnecessary rather than enforced. This is the one
+  scorer in the family that refuses the single-headline-number reduction
+  up front. **`DL_002`:** the reservation is described as capping
+  reported headroom and nothing applies it — `ceiling = 1 - reservation`
+  is computed, returned and printed, and read by nothing, so ten
+  all-hold domains at reservation 0.20 give coverage 1.00 against a
+  ceiling of 0.80 with no readout saying so. The cap is stated as a
+  function and shipped as a constant. **`DL_003`:** `coverage` puts
+  `mixed` in the denominator only, so all-break and all-mixed both return
+  0.00 — `PB_007`'s shape on a fourth scalar, in a tool that avoided it
+  on the other three; the fix is a footer clause, not a fifth ratio.
+  **`DL_004`:** `detail()` reads `criterion_fixed_in_advance` and `open`
+  and `SKELETON` carries neither, so `--new` never prompts for the
+  pre-registration guard — `CW_015` repeated in a second folder, with the
+  guard promoted from prose-in-a-list to a first-class field. The tool
+  does deep-copy its skeleton, which `weld.py` and `capacity.py` do not.
+  **`DL_005`:** with no `shapes/` directory it prints a well-formed
+  report with zero rows and exits 0, where all three sibling scorers
+  refuse on stderr with rc 1 — a report whose denominator is zero,
+  rendered as though it had one, in the tool built about denominators.
+  The selftest covers the empty case at the `score()` level; the gap is
+  at the presentation layer it does not reach. CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

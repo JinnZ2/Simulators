@@ -1,0 +1,19 @@
+{
+  "shape": "example",
+  "statement": "",
+  "source": "",
+  "reservation": 0.2,
+  "asserted_coverage": null,
+  "domains": [
+    {
+      "domain": "",
+      "read": "not_read",
+      "depth": null,
+      "cycles_observed": null,
+      "channel": null,
+      "adversarial_run": false,
+      "truncated": false,
+      "note": ""
+    }
+  ]
+}

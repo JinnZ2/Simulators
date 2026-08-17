@@ -1,0 +1,199 @@
+moral-decomposer -- audit of the delivered drop
+delivered: README.md, CLAIM_TABLE.md (M1-M5), 2 case file(s)
+NOT delivered: decompose.py, named five times in the README
+
+======================================================================
+1  MD_001  M5 rests entirely on the file that did not arrive
+======================================================================
+M5: "Zero live residue across cases is an absence, not a proof."
+
+    Status: stated in the tool output and enforced by the schema: the
+    selftest includes a fixture with a live residue item, so a non-empty
+    residue is representable and the instrument is not rigged toward M1.
+
+That status has two halves and both are in decompose.py: the tool output
+and the selftest fixture. Neither is in the drop.
+
+M5 is the guard against the folder's central risk -- that a decomposer
+built to show disagreements reduce will show them reducing. It is the one
+claim whose whole content is "the detector can fire", and it is the one
+claim that cannot be checked from the folder.
+
+  residue candidates in the delivered corpus : 4
+  marked resolved                            : 4
+  live                                       : 0
+
+0 of 4. On the delivered data alone the instrument has never returned a
+non-empty residue -- which is exactly what M5 says not to read as proof,
+and exactly why the missing fixture is the load-bearing artifact.
+null-harness grades a detector that has not been shown to fire
+CONSTANT_SILENT; here the demonstration exists and was not shipped.
+
+Fifth consecutive drop whose status sentence names an absent artifact
+(CW_001 code, arrived; PB_001 data, arrived exact; GC_009 data,
+outstanding; PB_015 tests, outstanding). The prior pattern is real and
+late.
+
+======================================================================
+2  MD_002  reduces_to: null carries two opposite meanings
+======================================================================
+README, stage description:
+
+    RESIDUE   candidates that reduce to stage 1 or 2 are accounted for.
+              Candidates that reduce to neither are the case the
+              instrument exists to find.
+
+So `reduces_to: null` is the finding. In the delivered corpus:
+
+  case             claim                                                reduces_to resolved
+  --------------------------------------------------------------------------------------------
+  animal-standing  the two sides hold different values about animals    frame     True
+  animal-standing  the excluding side simply cares less                 option    True
+  means-to-save    an irreducible clash between counting outcomes and r option    True
+  means-to-save    both sides accept the presented option set as comple None      True
+
+The last row is `reduces_to: null` AND `resolved: true`. Its note says it
+is not residue between the sides but agreement between them, routed to
+presented-binary.
+
+That reading is right, and it is the most interesting cell in the drop --
+agreement across both sides is where a shared unmeasured assumption sits,
+and the case says so. What it costs is the meaning of the field. A null
+`reduces_to` now means either "irreducible, this is the finding" or "not
+applicable, handled elsewhere", and only `resolved` separates them --
+a boolean set by the case author with nothing checking it.
+
+A third value would do it: reduces_to `option` / `frame` / `routed` /
+null, with null reserved for the finding. Same shape as PB_012 and GC_004
+one folder over -- a single value standing for a measurement and for its
+own absence.
+
+======================================================================
+3  MD_003  M3's asymmetry is exactly as stated
+======================================================================
+M3's status: "asymmetry appears in both cases (3 undocumented cuts vs 0,
+both times, in opposite file positions)."
+
+  case             side       boundary criterion         cuts  undoc
+  ----------------------------------------------------------------------
+  animal-standing  admits     capacity to have options      1      0
+  animal-standing  excludes   species membership            3      3
+  means-to-save    permits    parties are counted, not      3      3
+  means-to-save    refuses    a party with option gene      1      0
+
+Confirmed to the digit, including the position claim: the 3-cut side is
+second in animal-standing and first in means-to-save.
+
+The status sentence also states its own limit -- "cut lists are enumerated
+by hand, so the count reflects the enumerator, not a survey. Not a
+measurement." That is the right reading and it is stronger than it looks:
+a frame with no listed cuts scores as terminating, so the readout is
+`CONSTANT_SILENT` on any frame nobody enumerated. `terminates` is a
+separate asserted field that could disagree with the cut list and nothing
+checks the two against each other.
+  animal-standing  admits     terminates=True  cuts=1  consistent: True
+  animal-standing  excludes   terminates=False cuts=3  consistent: True
+  means-to-save    permits    terminates=False cuts=3  consistent: True
+  means-to-save    refuses    terminates=True  cuts=1  consistent: True
+
+======================================================================
+4  MD_004  the run order is stated and the corpus does not follow it
+======================================================================
+README, RUN ORDER:
+
+    Welded terms first. If a term in the dispute fuses independent
+    quantities, stage 1 will read divergence that is an artifact of the
+    word. List them in `welded_terms` and decompose in `category-weld`
+    before trusting the output.
+
+The drop's own DISCLOSED WEAKNESSES agrees: "Nothing checks that the
+decomposition happened first, and both cases carry unresolved welds."
+Measured against the sibling folder:
+
+  case             welded term      in category-weld/welds/
+  --------------------------------------------------------
+  animal-standing  interests        False
+  animal-standing  count            False
+  means-to-save    means            False
+  means-to-save    the few          False
+
+  4 welded terms named, 0 decomposed. category-weld holds: capital, hierarchy, rural
+
+`the few` is `presented-binary` B5's "a few" under a different article --
+the same term, now named from a second folder, and still with no
+welds/a_few.json (PB_009). Two folders point at one missing file, and the
+run order says the output of both is not trustworthy until it exists.
+
+Not a defect in the cases. It is a stated precondition with nothing
+enforcing it, and the shape recurs: measurement-fork MF_017, category-weld
+CW_015, generation-capacity GC_003 -- a rule the prose states and the
+schema has no slot to check.
+
+======================================================================
+5  MD_005  the no-moral-labels rule holds against the delivered schema
+======================================================================
+README: "Field names carry no moral terms. An instrument for reading
+smuggled frames that smuggles one cannot do the job."
+
+Checkable. Every field name that appears anywhere in the two case files:
+
+  acquired                boundary_criterion      case                    claim                 
+  criterion_documented    cut                     cuts_required           decision_authority    
+  dispute                 documented              frame                   held_fixed            
+  id                      in_tally                note                    option_claims         
+  optionality             party                   position                reduces_to            
+  residue_candidates      resolved                sides                   source                
+  terminates              welded_terms          
+
+  26 distinct field names; moral terms among them: none
+
+The rule holds. `in_tally`, `held_fixed`, `optionality`,
+`decision_authority`, `boundary_criterion`, `cuts_required` are positional
+and directional, and none of them scores a side.
+
+Worth recording because it is cheap to state and expensive to keep, and
+because the one place a moral term could enter without tripping this check
+is a VALUE rather than a key -- `position` and `claim` are free text and
+carry the dispute's own language. Those are quotations of the parties, not
+the instrument's vocabulary, which is the right place for them.
+
+======================================================================
+6  MD_006  the weakest part is named by the drop, and it is the right one
+======================================================================
+DISCLOSED WEAKNESSES, first item:
+
+    Both cases are model-constructed. Neither is a documented dispute
+    between real parties. A case where each side's stage-1 entries are
+    filled in by that side, rather than by one party modelling both,
+    would test M1 very differently -- the reductions here were produced by
+    the same process that predicts them.
+
+That is the finding an auditor would lead with, stated by the author, with
+the mechanism named: the process producing the reductions is the process
+predicting them.
+
+Both case `source` fields say the same thing unprompted:
+
+  animal-standing:
+      Constructed by the model as a candidate counterexample to the 
+      option-distribution reading. Not drawn from a documented dispu
+      te. Offered, then found to reduce; recorded with the reduction
+       rather than discarded.
+  means-to-save:
+      Constructed by the model as a candidate counterexample, in the
+       genre of a classroom moral case. Not drawn from a documented 
+      dispute. Recorded with its reduction.
+`animal-standing` goes further -- "Offered, then found to reduce; recorded
+with the reduction rather than discarded." A candidate counterexample that
+failed, kept with its failure, which is the refutation protocol applied to
+the folder's own generated evidence.
+
+What this audit adds is only the arithmetic: n=2, both self-produced, 0
+live residue, and the fixture that would show a non-empty residue is
+representable is the file that did not arrive (MD_001). The claim table
+says n=2 self-produced is "the weakest evidence in the repo" and does not
+overstate.
+
+======================================================================
+end of audit -- findings recorded in AUDIT_NOTES.md as MD_001..MD_006
+======================================================================

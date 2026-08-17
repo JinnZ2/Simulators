@@ -65,7 +65,7 @@ Update the claim, never retune the instrument to preserve a claim.
 | PB_003 | "Prompt withholding" is commitment, not confidentiality: `PROMPT_2` and `PROMPT_3` are string constants in the source, readable before pass 1 is written, and the operator is the model | the prompts being generated or held outside the file the operator runs | SUPPORTED |
 | PB_004 | `option_gain` returns `None` both when the wide pass found zero options and when it never ran, because `if (n2 and n1)` treats 0 as falsy | the two states returning different values | SUPPORTED |
 | PB_005 | `--submit3` is parsed but absent from the documented usage, so the documented workflow leaves `dominated_on_own_metric` at `None` — which is the whole of B9 | the flags appearing in the usage block | **CLOSED in drop 4** — the canonical README documents all nine; what replaces it is that `frame_sim.py`'s header still lists six, so the folder has two usage blocks that disagree |
-| PB_011 | The drop carried `binary_audit.py` three times — two uploaded files byte-identical to each other and to the pre-handoff repo copy, and the live version inline. First drop where the `MF_019` copy-drift had a consequence: landing the uploads at face value would have reverted the router the same drop introduced | a drop that bundles one copy, or bundles copies that match the live file | SUPPORTED |
+| PB_011 | The drop carried `binary_audit.py` three times — two uploaded files byte-identical to each other and to the pre-handoff repo copy, and the live version inline. First drop where the `MF_019` copy-drift had a consequence: landing the uploads at face value would have reverted the router the same drop introduced | a drop that bundles one copy, or bundles copies that match the live file | SUPPORTED — **falsifier fired in drop 5**: `binary_audit.py` was re-delivered byte-identical to the live post-handoff file. First matching re-delivery in the folder's history |
 | PB_012 | `handoff()` returns bare `None` both when O1 is documented at a count above the ceiling (a measurement) and when O1 was never checked (a gap); the `{"route": None, "reason": ...}` shape it already uses one branch over is the fix | the two states returning different values | SUPPORTED |
 | PB_013 | The router's firing branch is exercised by no case in the repo — `ventilator-surge` has O1 absent, correctly | a case with O1 documented and a stated count | UNVERIFIED — the case that would fire it is `generation-capacity`'s undelivered `food-knowledge` |
 | PB_006 | B8's readout is elicited by the prompt that measures it: `PROMPT_1` requires `incompleteness_acknowledged` in the JSON it asks for, so the flag is produced alongside the reasoning rather than about it | a run where the flag is scored from the reasoning text by a reader that never saw the field | **REPAIRED in drop 3** — field removed from `PROMPT_1`; `PROMPT_F` rates the pass 1 text post hoc and names neither pass 2 nor the protocol nor the frame |
@@ -337,6 +337,14 @@ parse, run, and pass every existing check.
 
 `category-weld/welds/capital.json` also arrived for the third time,
 byte-identical again. That one is inert; this one was not.
+
+**Drop 5 fires the falsifier.** `binary_audit.py` was re-delivered once
+more and is byte-identical to the live post-handoff file — the first
+bundled copy in this folder's history that matches what is checked in. The
+claim's stated falsifier was "a drop that bundles one copy, or bundles
+copies that match the live file", and the second half is now met. The
+hazard is a property of bundling stale copies, not of bundling; a drop
+that re-sends the current file costs nothing.
 
 ## 12 — PB_012, the router's null
 

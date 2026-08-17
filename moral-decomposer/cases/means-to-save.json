@@ -1,0 +1,71 @@
+{
+  "case": "means-to-save",
+  "dispute": "Two parties agree on all stated consequences and still disagree about whether one person may be used as the means of saving several.",
+  "source": "Constructed by the model as a candidate counterexample, in the genre of a classroom moral case. Not drawn from a documented dispute. Recorded with its reduction.",
+  "welded_terms": ["means", "the few"],
+  "sides": [
+    {
+      "id": "permits",
+      "position": "the count of those saved settles it",
+      "option_claims": [
+        {"party": "the one", "in_tally": true, "optionality": "held_fixed",
+         "decision_authority": false,
+         "note": "enters the account as a quantity in the total, not as a party generating options"},
+        {"party": "the several", "in_tally": true, "optionality": "held_fixed",
+         "decision_authority": false, "note": "same"},
+        {"party": "the decider", "in_tally": true, "optionality": "generated",
+         "decision_authority": true,
+         "note": "the only party whose option generation is in the account"}
+      ],
+      "held_fixed": ["the option set as presented", "the one's own alternatives", "the several's own alternatives"],
+      "frame": {
+        "boundary_criterion": "parties are counted, not consulted",
+        "criterion_documented": false,
+        "acquired": null,
+        "terminates": false,
+        "cuts_required": [
+          {"cut": "who is inside the count", "documented": false},
+          {"cut": "who is positioned to do the counting", "documented": false},
+          {"cut": "which losses count as equivalent per head", "documented": false}
+        ]
+      }
+    },
+    {
+      "id": "refuses",
+      "position": "the one is not available as material",
+      "option_claims": [
+        {"party": "the one", "in_tally": true, "optionality": "generated",
+         "decision_authority": false,
+         "note": "a party whose own option generation is part of the situation"},
+        {"party": "the several", "in_tally": true, "optionality": "generated",
+         "decision_authority": false, "note": "same"},
+        {"party": "the decider", "in_tally": true, "optionality": "generated",
+         "decision_authority": true, "note": ""}
+      ],
+      "held_fixed": ["the option set as presented"],
+      "frame": {
+        "boundary_criterion": "a party with option generation is not terrain",
+        "criterion_documented": true,
+        "acquired": null,
+        "terminates": true,
+        "cuts_required": [
+          {"cut": "does this party generate options", "documented": true}
+        ]
+      }
+    }
+  ],
+  "residue_candidates": [
+    {
+      "claim": "an irreducible clash between counting outcomes and refusing to use a person",
+      "reduces_to": "option",
+      "resolved": true,
+      "note": "The divergence is entirely in optionality assignment: one side holds the one and the several fixed and generates options only for the decider; the other treats all three as option-generating. Same weighting, different assignment."
+    },
+    {
+      "claim": "both sides accept the presented option set as complete",
+      "reduces_to": null,
+      "resolved": true,
+      "note": "Not residue between the sides — it is agreement between them, and it is the thing neither audits. Routes to presented-binary. Recorded here because agreement across both sides is where a shared unmeasured assumption sits."
+    }
+  ]
+}

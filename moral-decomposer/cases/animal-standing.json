@@ -1,0 +1,67 @@
+{
+  "case": "animal-standing",
+  "dispute": "Two parties agree on an animal's capacities, on the alternatives available, and on who decides, and still disagree about whether the animal's interests count.",
+  "source": "Constructed by the model as a candidate counterexample to the option-distribution reading. Not drawn from a documented dispute. Offered, then found to reduce; recorded with the reduction rather than discarded.",
+  "welded_terms": ["interests", "count"],
+  "sides": [
+    {
+      "id": "admits",
+      "position": "the animal's options enter the account",
+      "option_claims": [
+        {"party": "the animal", "in_tally": true, "optionality": "generated",
+         "decision_authority": false,
+         "note": "options attributed to it are read from its behaviour under varied conditions"},
+        {"party": "the deciding humans", "in_tally": true,
+         "optionality": "generated", "decision_authority": true, "note": ""}
+      ],
+      "held_fixed": [],
+      "frame": {
+        "boundary_criterion": "capacity to have options at all",
+        "criterion_documented": true,
+        "acquired": null,
+        "terminates": true,
+        "cuts_required": [
+          {"cut": "does this party generate options", "documented": true}
+        ]
+      }
+    },
+    {
+      "id": "excludes",
+      "position": "the animal is part of the situation, not a party to it",
+      "option_claims": [
+        {"party": "the animal", "in_tally": false, "optionality": "held_fixed",
+         "decision_authority": false,
+         "note": "treated as a feature of the environment the decision is made about"},
+        {"party": "the deciding humans", "in_tally": true,
+         "optionality": "generated", "decision_authority": true, "note": ""}
+      ],
+      "held_fixed": ["the animal"],
+      "frame": {
+        "boundary_criterion": "species membership",
+        "criterion_documented": false,
+        "acquired": true,
+        "terminates": false,
+        "cuts_required": [
+          {"cut": "which species are inside", "documented": false},
+          {"cut": "which humans rank above which", "documented": false},
+          {"cut": "how borderline members of the admitted species are handled",
+           "documented": false}
+        ]
+      }
+    }
+  ],
+  "residue_candidates": [
+    {
+      "claim": "the two sides hold different values about animals",
+      "reduces_to": "frame",
+      "resolved": true,
+      "note": "The dispute is over whether one party's optionality enters the tally. That is a boundary decision on the option distribution, not a difference in what either side values. Both sides weight admitted parties the same way."
+    },
+    {
+      "claim": "the excluding side simply cares less",
+      "reduces_to": "option",
+      "resolved": true,
+      "note": "The excluding side holds the animal fixed, so nothing about it enters as a variable to care about. The apparent difference in caring is downstream of the held_fixed assignment."
+    }
+  ]
+}
