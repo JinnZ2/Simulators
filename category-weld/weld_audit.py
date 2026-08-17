@@ -505,7 +505,134 @@ not need the comparison to be checkable. Recorded as a claim that should
 be split, not as a claim that is wrong.
 """.strip())
 
+# ----------------------------------------------------------------- CW_014
+head(14, "CW_014", "a third term, and what it does to CW_005")
+print()
+print("  %-12s %7s %7s %7s   %s" % ("term", "comps", "cases", "open", "domain"))
+print("  " + "-" * 78)
+for t in sorted(weld.load_welds(), key=lambda w: w["term"]):
+    sc = weld.score(t)
+    print("  %-12s %7d %7d %7d   %s" % (
+        sc["term"], sc["n_components"], sc["n_cases"],
+        len(t.get("open", [])), sc["domain"]))
+vals = [weld.score(t)["n_cases"] for t in weld.load_welds()]
+print()
+print("  distinct n_cases values: %d over %d terms" % (len(set(vals)), len(vals)))
+print("""
+CW_005 said the only live readout returns the same value for both seed
+terms. With three terms it returns two distinct values, so it now
+separates `hierarchy` from the other two -- and still does not separate
+`capital` from `rural`, which is the pair it was stated about. The claim
+stands as written and its reach has not grown: one value distinguishes
+one term.
+
+What the third term does change is the domain spread. The two seeds were
+policy/economics; `hierarchy` is filed under governance / organizational
+theory / naturalness arguments, and its five divergence cases sit in
+animal behaviour, volunteer fire service, credentialed fire service,
+surgical teams, and a rhetorical argument. That is cross-field at the
+CASE level while the domain label stays adjacent to the first two.
+
+It does NOT move uninstrumented UNI_002, which asks whether sorting the
+REGISTER by mechanism cuts across field. CATEGORY WELD is still not a
+filed entry there.
+""".strip())
+
+# ----------------------------------------------------------------- CW_015
+head(15, "CW_015", "the OPEN field arrives with a pre-registration guard")
+h = next(t for t in weld.load_welds() if t["term"] == "hierarchy")
+print("""
+weld.py gains six lines: detail() renders a top-level `open` list. One of
+the three items on `hierarchy` is a methodological guard stated before any
+data exists:
+
+    The read-vs-imposed criterion must be fixed BEFORE any series is run.
+    Sorting cases into 'not really hierarchy' after seeing the cut rate
+    makes the finding true by construction.
+
+That is the failure the term is most exposed to, named by the author, in
+the file, ahead of the measurement. If `cut_rate` comes back high only in
+cases that were sorted as hierarchy AFTER the rate was seen, the finding
+is circular -- and there is no way to detect that from the finished
+series, only by having fixed the criterion first.
+
+Same shape as reasoning-gate G-PRE (write the expected output before
+execution) and photoperiod-claim-harness's MechanismEdit protocol (refuse
+an edit whose stated reason is that a claim failed). Reached here from a
+third direction, and this is the first weld term to carry it.
+""".strip())
+print()
+print("  the field is schema-optional -- terms carrying `open`:")
+for t in sorted(weld.load_welds(), key=lambda w: w["term"]):
+    print("    %-12s %d item(s)" % (t["term"], len(t.get("open", []))))
+print("""
+  TEMPLATE has no `open` key, so `--new` does not emit one. A field that
+  carries a pre-registration guard is the field a new term most needs
+  prompting for, and the template is silent about it -- the same
+  measurement-fork MF_017 shape (a stated rule with no schema slot),
+  one folder over and much cheaper to close.
+""".rstrip())
+
+# ----------------------------------------------------------------- CW_016
+head(16, "CW_016", "the naturalness case states C4's bias without readings")
+print("""
+`hierarchy`'s fifth divergence is not a case of components diverging in
+the field. It is a case of the WELD being used:
+
+    The claim 'hierarchy is natural' is supported by pointing at nested
+    containment and at environment-ordered dominance, then applied to
+    imposed orderings with standing. Both supports sit in components
+    where cut_rate is zero. The application sits in the component where
+    cut_rate is unbounded. No separate handle in English marks the switch.
+
+C4 says `bias` separates directional welds from imprecise ones without any
+input about intent. This case makes the same structural point one level
+up: the support and the application land on different components of the
+same term, and the term carries no handle marking the move.
+
+It is stated and not measured -- `cut_rate` has zero collected series, as
+the OPEN list says. What it would take is what the OPEN list also says:
+the fire service, volunteer through present, credential requirements
+documented and dated. That is a real archive, and it is the first
+concrete data source named anywhere in this folder.
+""".strip())
+
+# ----------------------------------------------------------------- CW_017
+head(17, "CW_017", "tracked_by_label is declared a judgment call, in the file")
+print("""
+    tracked_by_label is a judgment call here as elsewhere.
+    nested_containment is the reading because it is what is pointed at in
+    naturalness arguments; imposed_ordering has a competing case if the
+    domain is taken as organizational practice rather than the naturalness
+    claim.
+
+`tracked_by_label` is load-bearing: case_direction() returns 0 when the
+tracked component is unquantified, and bias is computed entirely relative
+to it. Choosing a different tracked component can change the sign of every
+case direction in a term.
+""".strip())
+print()
+tracked = h["tracked_by_label"]
+comps = [c["id"] for c in h["components"]]
+print("  hierarchy tracked_by_label : %s" % tracked)
+print("  the competing candidate    : imposed_ordering")
+print("  components, in file order  : %s" % ", ".join(comps))
+print("""
+So the choice is declared rather than derived, and the alternative is
+named with the condition under which it wins -- which is more than the
+other two terms do, and is the right handling for a quantity that has no
+procedure behind it.
+
+What is not in the schema: a field recording the choice and its
+alternative. It lives in `open` as prose on one term. `weld.py` reads
+`tracked_by_label` and nothing reads the reason, so two terms with the
+same structure and different label choices are indistinguishable to the
+scorer -- the same declaration-not-a-check shape as
+generation-capacity GC_003's `scored_against`.
+""".strip())
+
+
 print()
 print(BAR)
-print("end of audit -- findings recorded in AUDIT_NOTES.md as CW_001..CW_013")
+print("end of audit -- findings recorded in AUDIT_NOTES.md as CW_001..CW_017")
 print(BAR)

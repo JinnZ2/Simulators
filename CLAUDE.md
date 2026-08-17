@@ -2463,7 +2463,33 @@ underneath).
   `submit-flag` — so the documented workflow leaves BOTH B8 and B9
   unreachable). `PB_010` **dissolves**: the field is gone, so the seal gate
   has nothing to require, and the blind rating necessarily happens after
-  sealing. Stdlib only, phone-buildable, CC0.
+  sealing.
+  **Fourth drop lands the canonical README and a tenth claim.** The
+  README documents all nine `frame_sim` flags — **`PB_005` CLOSES**, every
+  parsed flag now has a documented invocation and the BLIND FRAME RATING
+  section explains why `--flag` exists rather than only listing it. What
+  replaces it is smaller: `frame_sim.py`'s header still lists six, so the
+  folder has two hand-maintained usage blocks that have already diverged
+  by three entries — the `reasoning-gate` `guards.json → GUARDS.md`
+  arrangement in reverse, where one source generates the doc and a test
+  asserts they match. **`PB_014` does not close and is confirmed from a
+  second direction:** the README documents `--flag` in its own section and
+  leaves it out of the main usage sequence, so both routes to the blind
+  rating are optional side paths — the code does not prompt for it on the
+  state that now occurs, and the documented sequence does not include it.
+  New **`B10`** claims a documented low option count is the mechanism-10
+  signature rather than evidence of an adequate search; its status
+  sentence gets the router's standing exactly right ("changes where the
+  case goes, computes no verdict, adds no state to the 11 checks") and
+  **discloses its own weak point** — `HANDOFF_CEILING` is a constant, and
+  nothing establishes that 3 or 4 generated options indicates intact
+  capacity. **`PB_015`:** "routing logic verified on 8 synthetic paths"
+  names a test file the folder does not carry (fourth instance of that
+  shape; the prior three were real and late), and the disclosed weak point
+  has a reachable next step the table does not name — R1 is an
+  option-generation ceiling by construction, so a populated `capacity.py`
+  gives the number the router's constant is currently guessing. Stdlib
+  only, phone-buildable, CC0.
 - `generation-capacity/` — Proposed **tenth exclusion mechanism** for
   `uninstrumented/`, one drop after `category-weld/`'s ninth.
   `MECHANISM_10.md` (delivered verbatim, a marker under exploration) names

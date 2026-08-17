@@ -128,30 +128,42 @@ present and the derived readout throws it away -- and option_gain is the
 field B7 is stated in.
 
 ======================================================================
-5  PB_005  --submit3 is parsed and not documented, so B9 has no readout
+5  PB_005  CLOSED by the README -- and the file header is now stale
 ======================================================================
+The first pass found --submit3 parsed and undocumented, so the documented
+workflow left B9's readout at None on every run. Drop 3 widened it to
+three, adding --flag and --submit-flag, which carry the PB_006 repair.
 
-  documented in the header : prompt2, report, report-all, seal, start, submit2
-  parsed by the CLI        : file, flag, jsonl, problem, prompt2, report, report-all, seal, start, submit-flag, submit2, submit3
-  parsed but undocumented  : flag, submit-flag, submit3
+Drop 4 delivers a canonical README and documents all three.
 
-cmd_submit2 PRINTS prompt 3 and the header gives no command for submitting
-its answer. Follow the documented workflow exactly and pass3.json is never
-written, so dominated_on_own_metric stays None on every run.
+  flag           frame_sim header README
+  --------------------------------------------
+  flag           False            True
+  prompt2        True             True
+  report         True             True
+  report-all     True             True
+  seal           True             True
+  start          True             True
+  submit-flag    False            True
+  submit2        True             True
+  submit3        False            True
 
-B9 -- "the wide pass finds an option that beats the constrained choice on
-the constrained run's own metric" -- is stated entirely in that field. Its
-falsifier is "runs where dominated_on_own_metric is consistently false";
-under the documented workflow it is consistently None, and None is not
-false. One line in the usage block.
+  undocumented in README : none
+  undocumented in header : ['flag', 'submit-flag', 'submit3']
 
-DROP 3 WIDENS THIS TOO. --flag and --submit-flag are added, parsed, and
-also absent from the header, so the undocumented count goes from one to
-three -- and two of the three carry the PB_006 repair the same drop made.
-The documented workflow now runs start -> seal -> prompt2 -> submit2 ->
-report and produces, on every run, dominated_on_own_metric None (B9) and
-frame_flagged source `none` (B8). Two of the three claims the instrument
-exists to test are unreachable by following its own usage block.
+PB_005 is CLOSED. Every parsed flag has a documented invocation, and the
+README's BLIND FRAME RATING section explains why --flag exists rather than
+only listing it.
+
+What replaces it is smaller and different: the folder now has TWO usage
+blocks and they disagree. frame_sim.py's header comment still lists six
+commands; the README lists nine. A reader who opens the file rather than
+the README gets drop 2's surface.
+
+That is the reasoning-gate guards.json arrangement in reverse -- there,
+one source of truth generates the doc and a test asserts they match. Here
+the two are hand-maintained and have already diverged by three entries in
+one drop.
 
 ======================================================================
 6  PB_006  REPAIRED -- the cue is out of the generating context
@@ -285,7 +297,7 @@ category-weld/ takes exactly this object: a term, a tracked_by_label, a
 component list with units, and named divergence cases. There is no
 welds/a_few.json.
 
-  ../category-weld/welds/ holds: capital, rural
+  ../category-weld/welds/ holds: capital, hierarchy, rural
 
 Writing it is the cheapest test either folder has available: components
 headcount and functional position, tracked_by_label headcount, and the
@@ -390,12 +402,26 @@ the repair creates. An operator following the documented workflow gets a
 report saying NOT valid for B8 with no indication that --flag exists --
 and --flag is not in the usage block either (PB_005).
 
-Two one-line changes, in different files: add the two commands to the
-header, and widen the nudge condition to source in ("cued", "none").
+DROP 4 DOES NOT CLOSE IT, and confirms it from a second direction. The
+new README documents --flag and --submit-flag in their own section -- but
+its main usage sequence, the one an operator follows top to bottom, does
+not include them:
 
 This is not the repair failing. The repair is correct and PB_006 closes on
 it. It is the second-order cost of a correct repair: the reminder to do
 the replacement step was written for the population being replaced.
+
+  README main usage sequence: prompt2, report, report-all, seal, start, submit2, submit3
+  --flag present in it      : False
+
+So both routes to the blind rating are optional side paths: the code does
+not prompt for it on the state that now occurs, and the README's main
+sequence does not include it. An operator who runs the documented sequence
+end to end produces a run whose B8 readout is `none` and is told, by the
+report, only that it is invalid.
+
+The fix stays two lines and is now three places rather than two: the nudge
+condition, the frame_sim header, and the README's main sequence.
 
 ======================================================================
 end of audit -- findings recorded in AUDIT_NOTES.md as PB_001..PB_014

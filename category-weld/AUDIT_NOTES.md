@@ -16,8 +16,9 @@ Everything in this file, and everything it points at, is audit content.
 | `README.md` | delivered, drop 1, verbatim |
 | `CLAIM_TABLE.md` | delivered, drop 1, verbatim |
 | `welds/rural.json` | delivered, drop 1, verbatim |
-| `welds/capital.json` | delivered, drop 1, verbatim |
-| `weld.py` | delivered, drop 2, verbatim |
+| `welds/capital.json` | delivered, drop 1, verbatim (re-delivered byte-identical ×3) |
+| `welds/hierarchy.json` | delivered, drop 3, verbatim — third term, first to carry an `open` list |
+| `weld.py` | delivered, verbatim — **drop 3 version**, six lines added so `detail()` renders a term's `open` list |
 | `test_weld.py` | delivered, drop 2, verbatim |
 | `reconstruction/weld.py` | superseded reconstruction, kept as the comparison object |
 | `reconstruction/test_weld.py` | superseded reconstruction |
@@ -52,6 +53,10 @@ Update the claim, never retune the scorer to preserve a claim.
 | CW_011 | `case_direction`'s docstring is inverted against its body; `test_weld.py`'s comments side with the body | reading the sign convention the other way and finding the docstring consistent | SUPPORTED |
 | CW_012 | The `--new` template carries a placeholder divergence with an empty id, which `score()` counts, so a blank file scores on the only live readout | `n_cases` counting only cases that have been named | SUPPORTED |
 | CW_013 | The delivered fixtures reach 2 of `rel_change`'s 6 exit branches, and the unreached set includes the branch that decides CW_010 | a fixture exercising the `after <= 0` branch | SUPPORTED |
+| CW_014 | A third term arrives. `n_cases` now returns two distinct values over three terms, separating `hierarchy` from the other two and still not separating `capital` from `rural` — the pair `CW_005` was stated about | either seed term acquiring a different case count | SUPPORTED — CW_005 stands, reach unchanged |
+| CW_015 | The new `open` field carries a pre-registration guard (fix the read-vs-imposed criterion before any series is run), and `TEMPLATE` has no `open` key, so `--new` never prompts for it | `open` appearing in `TEMPLATE` | SUPPORTED |
+| CW_016 | `hierarchy`'s `naturalness-argument` case states C4's directional-weld point structurally — support and application land on different components of one term with no handle marking the switch — and names the folder's first concrete data source (fire-service credential requirements, documented and dated) | a handle in general use that marks the switch | SUPPORTED, unmeasured |
+| CW_017 | `tracked_by_label` is declared a judgment call in `hierarchy`'s own `open` list, with the competing candidate and its condition named; nothing in the schema records the choice or its alternative, so two terms with the same structure and different label choices are indistinguishable to the scorer | a field carrying the choice and its reason | SUPPORTED |
 
 ## 1 — CW_001, closed by delivery
 
@@ -280,6 +285,98 @@ pulling apart components the contexts never separate. That is testable one
 term at a time — hand a model a divergence case for a welded term and
 score whether the components are held apart without being handed the
 decomposition. Split the claim, don't discard it.
+
+## 11 — CW_014, a third term
+
+    term           comps   cases    open   domain
+    capital            5       4       0   economics / corporate ownership
+    hierarchy          5       5       3   governance / organizational theory / naturalness arguments
+    rural              4       4       0   policy / agricultural statistics / census
+
+`CW_005` said the only live readout returns the same value for both seed
+terms. Over three terms it returns two distinct values, so it separates
+`hierarchy` from the other two — and still does not separate `capital`
+from `rural`, which is the pair the claim was stated about. The claim
+stands and its reach has not grown: one value distinguishes one term.
+
+The domain spread does change. The two seeds were policy/economics;
+`hierarchy`'s five divergence cases sit in animal behaviour, volunteer
+fire service, credentialed fire service, surgical teams, and a rhetorical
+argument. **Cross-field at the case level**, while the domain label stays
+adjacent to the first two.
+
+It does not move `uninstrumented/` `UNI_002`, which asks whether sorting
+the REGISTER by mechanism cuts across field. CATEGORY WELD is still not a
+filed entry there.
+
+## 12 — CW_015, the OPEN field and its guard
+
+`weld.py` gains six lines: `detail()` renders a top-level `open` list. One
+of `hierarchy`'s three items is a methodological guard stated before any
+data exists:
+
+> The read-vs-imposed criterion must be fixed BEFORE any series is run.
+> Sorting cases into 'not really hierarchy' after seeing the cut rate
+> makes the finding true by construction.
+
+That is the failure the term is most exposed to, named by the author, in
+the file, ahead of the measurement. If `cut_rate` comes back high only in
+cases sorted as hierarchy *after* the rate was seen, the finding is
+circular — and that is undetectable from the finished series. Only fixing
+the criterion first prevents it.
+
+Same shape as `reasoning-gate/` `G-PRE` and
+`photoperiod-claim-harness/`'s `MechanismEdit` protocol, reached here from
+a third direction, and the first weld term to carry it.
+
+The gap: `TEMPLATE` has no `open` key, so `--new` never emits one. A field
+carrying a pre-registration guard is the field a new term most needs
+prompting for. Same shape as `measurement-fork/` `MF_017` — a stated rule
+with no schema slot — one folder over and much cheaper to close.
+
+## 13 — CW_016, the naturalness case
+
+`hierarchy`'s fifth divergence is not components diverging in the field.
+It is the weld being *used*:
+
+> The claim 'hierarchy is natural' is supported by pointing at nested
+> containment and at environment-ordered dominance, then applied to
+> imposed orderings with standing. Both supports sit in components where
+> cut_rate is zero. The application sits in the component where cut_rate
+> is unbounded. No separate handle in English marks the switch.
+
+C4 says `bias` separates directional welds from imprecise ones with no
+input about intent. This case makes the same structural point one level
+up — support and application land on different components of one term,
+and the term carries no handle marking the move.
+
+Stated, not measured: `cut_rate` has zero collected series. What it would
+take is what the `open` list also says — the fire service, volunteer
+through present, credential requirements documented and dated. **That is
+the first concrete data source named anywhere in this folder.**
+
+## 14 — CW_017, a declared judgment call
+
+> `tracked_by_label` is a judgment call here as elsewhere.
+> `nested_containment` is the reading because it is what is pointed at in
+> naturalness arguments; `imposed_ordering` has a competing case if the
+> domain is taken as organizational practice rather than the naturalness
+> claim.
+
+`tracked_by_label` is load-bearing: `case_direction()` returns 0 when the
+tracked component is unquantified, and `bias` is computed entirely
+relative to it. A different tracked component can flip the sign of every
+case direction in a term.
+
+Declaring the choice, naming the alternative, and stating the condition
+under which the alternative wins is more than the other two terms do, and
+is the right handling for a quantity with no procedure behind it.
+
+What is not in the schema is a field for it. It lives in `open` as prose
+on one term; `weld.py` reads `tracked_by_label` and nothing reads the
+reason, so two terms with the same structure and different label choices
+are indistinguishable to the scorer — the same declaration-not-a-check
+shape as `generation-capacity/` `GC_003`'s `scored_against`.
 
 ## Relation to the rest of the repo
 

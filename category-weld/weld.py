@@ -173,6 +173,12 @@ def detail(weld):
     print()
     print("READOUTS  cases=%s quantified=%s spread=%s bias=%s" % (
         s["n_cases"], s["n_quantified"], fmt(s["max_spread"]), fmt(s["bias"])))
+    if weld.get("open"):
+        print()
+        print("OPEN")
+        for item in weld["open"]:
+            for i, line in enumerate(wrap(item, 64)):
+                print(("  - " if i == 0 else "    ") + line)
 
 
 def wrap(text, width):

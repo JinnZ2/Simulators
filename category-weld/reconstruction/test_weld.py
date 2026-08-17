@@ -135,9 +135,17 @@ eq(s["bias"], None, "  bias undefined")
 
 print()
 print("score on the delivered terms")
+# NOTE: an earlier version asserted n_cases == 4 for every term. That was a
+# property of the two seed terms at the time, not of the arithmetic, and the
+# third term (hierarchy, 5 cases) broke it. The fixture now checks what it
+# was actually for: every delivered term is named and none is quantified.
 for t in weld.load_all():
     s = weld.score(t)
-    is_(s["n_cases"], 4, "%s has 4 named cases" % s["term"])
+    named = len([d for d in t.get("divergences", []) if (d.get("id") or "").strip()])
+    is_(s["n_cases"], named, "%s: n_cases matches its named divergences (%d)" % (
+        s["term"], named))
+    ok_ = s["n_cases"] > 0
+    is_(ok_, True, "  %s has at least one named case" % s["term"])
     eq(s["max_spread"], None, "  %s max_spread unquantified" % s["term"])
     eq(s["bias"], None, "  %s bias unquantified" % s["term"])
 

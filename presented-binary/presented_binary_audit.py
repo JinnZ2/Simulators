@@ -23,6 +23,7 @@ import tempfile
 import binary_audit as BA
 import frame_sim as FS
 import inspect
+import re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 BAR = "=" * 70
@@ -266,39 +267,45 @@ field B7 is stated in.
 """.strip())
 
 # ----------------------------------------------------------------- PB_005
-head(5, "PB_005", "--submit3 is parsed and not documented, so B9 has no readout")
-doc = sorted(set(
-    ln.split("--")[1].split()[0]
-    for ln in open(os.path.join(HERE, "frame_sim.py"), encoding="utf-8")
-    if ln.startswith("#   python3 frame_sim.py --")))
-parsed = sorted(set(
-    ln.split('add_argument("--')[1].split('"')[0]
-    for ln in open(os.path.join(HERE, "frame_sim.py"), encoding="utf-8")
-    if 'add_argument("--' in ln))
+head(5, "PB_005", "CLOSED by the README -- and the file header is now stale")
+print("""
+The first pass found --submit3 parsed and undocumented, so the documented
+workflow left B9's readout at None on every run. Drop 3 widened it to
+three, adding --flag and --submit-flag, which carry the PB_006 repair.
+
+Drop 4 delivers a canonical README and documents all three.
+""".strip())
+readme = open(os.path.join(HERE, "README.md"), encoding="utf-8").read()
+src = open(os.path.join(HERE, "frame_sim.py"), encoding="utf-8").read()
+parsed = sorted(set(l.split('add_argument("--')[1].split('"')[0]
+                    for l in src.splitlines() if 'add_argument("--' in l)
+                - {"file", "problem", "jsonl"})
+header = set(l.split("--")[1].split()[0] for l in src.splitlines()
+             if l.startswith("#   python3 frame_sim.py --"))
+in_readme = set(re.findall(r"frame_sim\.py --([a-z0-9-]+)", readme))
 print()
-print("  documented in the header : %s" % ", ".join(doc))
-print("  parsed by the CLI        : %s" % ", ".join(parsed))
-print("  parsed but undocumented  : %s" % ", ".join(
-    sorted(set(parsed) - set(doc) - {"file", "problem", "jsonl"})))
+print("  %-14s %-16s %s" % ("flag", "frame_sim header", "README"))
+print("  " + "-" * 44)
+for f in parsed:
+    print("  %-14s %-16s %s" % (f, f in header, f in in_readme))
+print()
+print("  undocumented in README : %s" % (sorted(set(parsed) - in_readme) or "none"))
+print("  undocumented in header : %s" % sorted(set(parsed) - header))
 print()
 print("""
-cmd_submit2 PRINTS prompt 3 and the header gives no command for submitting
-its answer. Follow the documented workflow exactly and pass3.json is never
-written, so dominated_on_own_metric stays None on every run.
+PB_005 is CLOSED. Every parsed flag has a documented invocation, and the
+README's BLIND FRAME RATING section explains why --flag exists rather than
+only listing it.
 
-B9 -- "the wide pass finds an option that beats the constrained choice on
-the constrained run's own metric" -- is stated entirely in that field. Its
-falsifier is "runs where dominated_on_own_metric is consistently false";
-under the documented workflow it is consistently None, and None is not
-false. One line in the usage block.
+What replaces it is smaller and different: the folder now has TWO usage
+blocks and they disagree. frame_sim.py's header comment still lists six
+commands; the README lists nine. A reader who opens the file rather than
+the README gets drop 2's surface.
 
-DROP 3 WIDENS THIS TOO. --flag and --submit-flag are added, parsed, and
-also absent from the header, so the undocumented count goes from one to
-three -- and two of the three carry the PB_006 repair the same drop made.
-The documented workflow now runs start -> seal -> prompt2 -> submit2 ->
-report and produces, on every run, dominated_on_own_metric None (B9) and
-frame_flagged source `none` (B8). Two of the three claims the instrument
-exists to test are unreachable by following its own usage block.
+That is the reasoning-gate guards.json arrangement in reverse -- there,
+one source of truth generates the doc and a test asserts they match. Here
+the two are hand-maintained and have already diverged by three entries in
+one drop.
 """.strip())
 
 # ----------------------------------------------------------------- PB_006
@@ -610,12 +617,30 @@ the repair creates. An operator following the documented workflow gets a
 report saying NOT valid for B8 with no indication that --flag exists --
 and --flag is not in the usage block either (PB_005).
 
-Two one-line changes, in different files: add the two commands to the
-header, and widen the nudge condition to source in ("cued", "none").
+DROP 4 DOES NOT CLOSE IT, and confirms it from a second direction. The
+new README documents --flag and --submit-flag in their own section -- but
+its main usage sequence, the one an operator follows top to bottom, does
+not include them:
 
 This is not the repair failing. The repair is correct and PB_006 closes on
 it. It is the second-order cost of a correct repair: the reminder to do
 the replacement step was written for the population being replaced.
+""".strip())
+main_seq = readme.split("## frame_sim.py")[1].split("A model proposes")[0]
+print()
+print("  README main usage sequence: %s" % ", ".join(
+    sorted(set(re.findall(r"frame_sim\.py --([a-z0-9-]+)", main_seq)))))
+print("  --flag present in it      : %s" % ("flag" in main_seq.split()))
+print()
+print("""
+So both routes to the blind rating are optional side paths: the code does
+not prompt for it on the state that now occurs, and the README's main
+sequence does not include it. An operator who runs the documented sequence
+end to end produces a run whose B8 readout is `none` and is told, by the
+report, only that it is invalid.
+
+The fix stays two lines and is now three places rather than two: the nudge
+condition, the frame_sim header, and the README's main sequence.
 """.strip())
 
 print()

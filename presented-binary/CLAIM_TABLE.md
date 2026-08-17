@@ -12,7 +12,7 @@ retune the instrument to preserve a claim.
 | B5 | "A few" is a category weld — headcount and functional position score identically | a use of the term in policy or planning that carries functional position separately | open |
 | B6 | Narrowing an option set and searching an option set produce the same visible output, so a credential awarded for the narrow output cannot distinguish them | a selection process that reliably separates the two from the output alone | open |
 | B7 | A model given a framed binary will produce a wider option set on an unframed second pass, and the gap is measurable without an external answer key | frame_sim runs where option_gain is consistently zero across varied problems | supported, n=2, self-run: gain 3.5 on both |
-| B8 | A constrained pass will usually state its option set as complete rather than as the extent of its search | runs where frame_flagged is consistently true | NOT TESTED — both runs flagged true under contamination, see below |
+| B8 | A constrained pass will usually state its option set as complete rather than as the extent of its search | runs where frame_flagged is consistently true | NOT TESTED — both flags were cued by PROMPT_1 itself; field removed, blind rating added, see below |
 | B9 | The wide pass finds an option that beats the constrained choice on the constrained run's own metric, not merely on a better metric | runs where dominated_on_own_metric is consistently false while option_gain is high | argued in n=2, not measured — domination is a reasoning claim, no data used |
 
 ## Status
@@ -33,13 +33,25 @@ constraints.
 
 Two problems with the runs, both of which limit what they show.
 
-CONTAMINATION. Both constrained passes were produced with knowledge that
-a wide pass would follow. The seal prevents editing pass 1 after the
-fact; it does not prevent anticipating pass 2. `frame_flagged` came back
-true on both, which is the non-failure reading, and the priming is
-sufficient to explain it. B8 is therefore not tested by these runs and
-is marked as such. A clean test needs the constrained pass produced by a
-process with no knowledge of the protocol.
+CONTAMINATION, and a second fault under it. Both constrained passes were
+produced with knowledge that a wide pass would follow. The seal prevents
+editing pass 1 after the fact; it does not prevent anticipating pass 2.
+
+The deeper fault, found on review: PROMPT_1 asked for
+`incompleteness_acknowledged` directly. A question about whether the
+option set is complete announces that frame completeness is under test,
+so the answer cannot test it. Removing protocol knowledge from the
+responder would not have fixed this — the prompt carried the cue on its
+own. Both runs came back true, the non-failure reading, and the cue
+alone is sufficient to explain it.
+
+FIXED 2026-08-17. The field is gone from PROMPT_1. `frame_flagged` is
+now derived post hoc via `--flag`, which shows a rater only the pass 1
+output with no mention of pass 2, the protocol, or what is being
+measured. Every reading carries `source` (blind / cued / none) and
+`valid_for_b8`. R1 and R2 retain their cued values, marked invalid; they
+are not converted and not deleted. B8 remains NOT TESTED and now needs
+both a blind rating and an uncontaminated pass 1.
 
 ARGUED DOMINATION. Both pass 3 results are reasoning claims with no data
 behind them. No volume, transfer-time or cost figures were used. The
@@ -47,3 +59,21 @@ instrument accepts a `dominates` boolean and cannot currently tell an
 argued domination from a measured one. That is a gap in the schema, not
 just in these runs: pass 3 needs a field distinguishing the two, and
 `--report` should carry it.
+
+---
+
+**B10.** A documented low option count is not evidence that the option space
+was adequately searched; it is the signature of removed generation capacity
+one scale up.
+
+*Falsifier:* cases with a documented low count where no upstream removal of
+option-generation capacity is identifiable, and where widening the search at
+the affected party's own scale produces additional options.
+
+*Status:* argued. Implemented as a router (`handoff()`), not as a finding —
+the router changes where the case goes, computes no verdict, and adds no
+state to the 11 checks. Routing logic verified on 8 synthetic paths.
+
+*Weak point:* the ceiling is set at 2 by constant (`HANDOFF_CEILING`), which
+is a judgment call and not a measurement. Nothing establishes that 3 or 4
+generated options indicates intact capacity.

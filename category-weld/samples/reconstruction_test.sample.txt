@@ -41,10 +41,16 @@ score on an empty term
     bias undefined                                     ok
 
 score on the delivered terms
-  capital has 4 named cases                            ok
+  capital: n_cases matches its named divergences (4)   ok
+    capital has at least one named case                ok
     capital max_spread unquantified                    ok
     capital bias unquantified                          ok
-  rural has 4 named cases                              ok
+  hierarchy: n_cases matches its named divergences (5) ok
+    hierarchy has at least one named case              ok
+    hierarchy max_spread unquantified                  ok
+    hierarchy bias unquantified                        ok
+  rural: n_cases matches its named divergences (4)     ok
+    rural has at least one named case                  ok
     rural max_spread unquantified                      ok
     rural bias unquantified                            ok
 

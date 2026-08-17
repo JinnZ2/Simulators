@@ -32,9 +32,10 @@ Nine claims `B1..B9` delivered, three of them (`B7`–`B9`) marked
 
 | file | status |
 |------|--------|
+| `README.md` | delivered drop 4, verbatim — canonical; documents all nine flags including `--flag`/`--submit-flag`/`--submit3` |
+| `CLAIM_TABLE.md` | delivered, verbatim — **drop 4 version**, B8 status updated with the fix, new claim **B10** on the router with its own disclosed weak point |
 | `binary_audit.py` | delivered, verbatim — **drop 2 version**, the inline paste that adds `handoff()`; the two uploaded copies were the stale pre-handoff file (§11) |
 | `frame_sim.py` | delivered, verbatim — **drop 3 version**: `incompleteness_acknowledged` removed from `PROMPT_1`, blind rater `PROMPT_F` + `--flag`/`--submit-flag` added, `frame_flagged` now carries provenance |
-| `CLAIM_TABLE.md` | delivered, verbatim — **drop 2 version**, B7/B8/B9 statuses updated from two real self-runs |
 | `cases/ventilator-surge.json` | delivered drop 2, verbatim — scores 0 of 11 exactly as claimed |
 | fixtures for `frame_sim` | claimed in CLAIM_TABLE, still not delivered |
 | `presented_binary_audit.py` | added |
@@ -63,7 +64,7 @@ Update the claim, never retune the instrument to preserve a claim.
 | PB_002 | The seal is enforced at one gate and not the other: `cmd_prompt2` refuses a broken seal, `cmd_submit2` checks only that `seal.json` exists, and `cmd_submit3` checks nothing — so a pass 1 edited after sealing reaches prompt 3, which quotes the edited choice | a path from tampered pass 1 to a recorded pass 3 that is refused | SUPPORTED — **widened in drop 3**: `cmd_flag` and `cmd_submit_flag` also verify nothing, so 1 of 5 commands checks integrity |
 | PB_003 | "Prompt withholding" is commitment, not confidentiality: `PROMPT_2` and `PROMPT_3` are string constants in the source, readable before pass 1 is written, and the operator is the model | the prompts being generated or held outside the file the operator runs | SUPPORTED |
 | PB_004 | `option_gain` returns `None` both when the wide pass found zero options and when it never ran, because `if (n2 and n1)` treats 0 as falsy | the two states returning different values | SUPPORTED |
-| PB_005 | `--submit3` is parsed but absent from the documented usage, so the documented workflow leaves `dominated_on_own_metric` at `None` — which is the whole of B9 | the flags appearing in the usage block | SUPPORTED — **widened in drop 3** to three undocumented flags (`submit3`, `flag`, `submit-flag`); the documented workflow now leaves both B8 and B9 unreachable |
+| PB_005 | `--submit3` is parsed but absent from the documented usage, so the documented workflow leaves `dominated_on_own_metric` at `None` — which is the whole of B9 | the flags appearing in the usage block | **CLOSED in drop 4** — the canonical README documents all nine; what replaces it is that `frame_sim.py`'s header still lists six, so the folder has two usage blocks that disagree |
 | PB_011 | The drop carried `binary_audit.py` three times — two uploaded files byte-identical to each other and to the pre-handoff repo copy, and the live version inline. First drop where the `MF_019` copy-drift had a consequence: landing the uploads at face value would have reverted the router the same drop introduced | a drop that bundles one copy, or bundles copies that match the live file | SUPPORTED |
 | PB_012 | `handoff()` returns bare `None` both when O1 is documented at a count above the ceiling (a measurement) and when O1 was never checked (a gap); the `{"route": None, "reason": ...}` shape it already uses one branch over is the fix | the two states returning different values | SUPPORTED |
 | PB_013 | The router's firing branch is exercised by no case in the repo — `ventilator-surge` has O1 absent, correctly | a case with O1 documented and a stated count | UNVERIFIED — the case that would fire it is `generation-capacity`'s undelivered `food-knowledge` |
@@ -72,7 +73,8 @@ Update the claim, never retune the instrument to preserve a claim.
 | PB_008 | `binary_audit.py`'s template and defaults all fail closed — a blank file scores 0 of 11 and a malformed state is counted absent *and* named | a default that scores a blank or malformed case above zero | SUPPORTED (holds) |
 | PB_009 | B5 is directly runnable in `category-weld/` and no `welds/a_few.json` exists | the file existing | UNVERIFIED — unrun test, not a defect |
 | PB_010 | `cmd_seal` requires the three fields that feed `option_gain` and the pass-3 prompt, and not `incompleteness_acknowledged`, which is the whole of B8 | the seal refusing a pass 1 without the flag | **DISSOLVED in drop 3** — the field is gone, so there is nothing for the gate to require; the blind rating necessarily happens after sealing |
-| PB_014 | The nudge to run `--flag` fires only on `source == "cued"`, which is the state the repair eliminated; every run under the new `PROMPT_1` lands on `source == "none"`, prints "NOT valid for B8", and is told nothing | the condition widening to `source in ("cued", "none")` | SUPPORTED |
+| PB_014 | The nudge to run `--flag` fires only on `source == "cued"`, which is the state the repair eliminated; every run under the new `PROMPT_1` lands on `source == "none"`, prints "NOT valid for B8", and is told nothing | the condition widening to `source in ("cued", "none")`, or `--flag` entering the README's main sequence | SUPPORTED — **confirmed from a second direction in drop 4**: the README documents `--flag` in its own section and leaves it out of the main usage sequence |
+| PB_015 | B10's status says "routing logic verified on 8 synthetic paths" and no test file is in the folder | the test file arriving | UNVERIFIED — fourth instance of a status sentence naming an absent artifact; the prior three were real and late |
 
 ## 1 — PB_001, split: one arrived, one did not
 
@@ -415,6 +417,48 @@ condition to `source in ("cued", "none")`.
 Not the repair failing — the repair is correct and `PB_006` closes on it.
 The second-order cost of a correct repair: the reminder was written for
 the state that no longer occurs.
+
+## 15 — PB_015, B10 and its own disclosed weak point
+
+Drop 4 adds **B10** to the delivered claim table:
+
+> A documented low option count is not evidence that the option space was
+> adequately searched; it is the signature of removed generation capacity
+> one scale up.
+>
+> *Status:* argued. Implemented as a router (`handoff()`), not as a
+> finding — the router changes where the case goes, computes no verdict,
+> and adds no state to the 11 checks. Routing logic verified on 8
+> synthetic paths.
+>
+> *Weak point:* the ceiling is set at 2 by constant (`HANDOFF_CEILING`),
+> which is a judgment call and not a measurement. Nothing establishes that
+> 3 or 4 generated options indicates intact capacity.
+
+**The status sentence gets the router's standing exactly right** — it
+changes where a case goes, computes no verdict, adds no state — which is
+the distinction `GC_002` turned on, stated by the author without
+prompting. And the weak point is disclosed rather than found: the ceiling
+is a constant, and nothing in either folder establishes that 3 generated
+options means intact capacity.
+
+Two things about it.
+
+**"Verified on 8 synthetic paths" names an artifact the folder does not
+carry.** No test file for the router is in `presented-binary/`. Fourth
+instance of a status sentence naming an absent artifact —
+`category-weld` `CW_001` (arrived one drop later), `presented-binary`
+`PB_001` (arrived, exact), `generation-capacity` `GC_009` (outstanding).
+The prior three were real; recorded UNVERIFIED, not as a negative.
+
+**The disclosed weak point has a reachable next step and the claim table
+does not name it.** `HANDOFF_CEILING` is a threshold with no measurement
+behind it — but it is also the one parameter a populated `capacity.py`
+would constrain. R1 is an option-generation ceiling by construction, so a
+place with a measured recall ratio gives a count that the router's
+constant is currently guessing. The two folders already point at each
+other; the ceiling is the number the handoff should eventually read from
+the far side rather than hold as a constant.
 
 ## Relation to the rest of the repo
 

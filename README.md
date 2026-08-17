@@ -54,8 +54,8 @@ underneath. Read those before running the corresponding script.
 | `uninstrumented/` | quantities excluded by an instrument's constitution | eight-mechanism register + `scan.py` text scanner, checks on both, twelve `UNI_*` claims |
 | `criteria-drift/` | benchmark and rubric versions over time | signed drift per frame field, anchor-version decomposition, a regression that refuses to run unidentified, nine `CD_*` claims |
 | `photoperiod-claim-harness/` | four inconsistencies in a published greenhouse result | runnable falsifiable sims + mechanism-edit protocol + bench protocol; six `PCH_*` claims on the harness |
-| `category-weld/` | terms that fuse independent quantities into one handle | ninth exclusion mechanism for `uninstrumented`, a three-readout scorer, an audit finding refuted by the second drop, thirteen `CW_*` claims |
-| `presented-binary/` | a two-option framing, before it is answered | eleven documented/asserted/absent checks + a sealed two-pass frame simulator with a blind post-hoc rater + a handoff router to mechanism 10, fourteen `PB_*` claims |
+| `category-weld/` | terms that fuse independent quantities into one handle | ninth exclusion mechanism for `uninstrumented`, a three-readout scorer, three terms, an audit finding refuted by the second drop, seventeen `CW_*` claims |
+| `presented-binary/` | a two-option framing, before it is answered | eleven documented/asserted/absent checks + a sealed two-pass frame simulator with a blind post-hoc rater + a handoff router to mechanism 10, fifteen `PB_*` claims |
 | `generation-capacity/` | the option space a party can produce, not a value in it | tenth exclusion mechanism + R1/R2/R3 scorer with a place-vs-center calibration guard; a framing under it scores 11/11 on the audit next door; nine `GC_*` claims |
 | `tools/` | shared utilities | validators, substitution toolkits, gate-drift check |
 

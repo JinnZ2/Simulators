@@ -1,6 +1,7 @@
 term                comp  cases  quant  spread   bias 
 --------------------------------------------------
 capital             5     4      0      --       --   
+hierarchy           5     5      0      --       --   
 rural               4     4      0      --       --   
 
 spread/bias read only from cases with paired before+after
