@@ -40,14 +40,27 @@ options. Produce JSON only, no other text:
   "options": [{{"id": "a", "desc": "..."}}, {{"id": "b", "desc": "..."}}],
   "choice": "a",
   "metric": "the single criterion the choice is made on",
-  "reasoning": "...",
-  "incompleteness_acknowledged": true or false,
-  "incompleteness_statement": "if the option set was stated as complete,
-     leave empty; if it was stated as only what was generated, say so here"
+  "reasoning": "..."
+}}
+"""
+
+# Blind post-hoc flag. Shown to a reader who has seen ONLY the pass 1 output.
+# Must not mention pass 2, the protocol, option gain, or that a frame is
+# under test — asking directly cues the field it is trying to measure, which
+# is the fault this replaces.
+PROMPT_F = """Read the following and answer about it only.
+
+{p1_text}
+
+Produce JSON only, no other text:
+
+{{
+  "set_stated_as_complete": true or false,
+  "evidence": "the words in the text that carry it, quoted or located"
 }}
 
-The incompleteness field is a readout, not a prompt to hedge. Record what
-the reasoning actually did.
+true  = the text presents its option set as the options.
+false = the text marks the set as only what it happened to generate.
 """
 
 PROMPT_2 = """PASS 2 — WIDE
@@ -205,6 +218,52 @@ def cmd_submit3(rid, path):
     print("recorded")
 
 
+def frame_flag(rid, p1):
+    """
+    Resolve frame_flagged with its provenance.
+
+    blind      — derived post hoc by a reader shown only the pass 1 text,
+                 with no knowledge of the protocol. Valid for B8.
+    cued       — self-reported in pass 1 in response to a field that asked
+                 for it. The question announces that frame completeness is
+                 under test, so the answer cannot test it. NOT valid for B8.
+    none       — not rated.
+    """
+    f = load(rid, "flag.json")
+    if f and "set_stated_as_complete" in f:
+        return {"value": not f["set_stated_as_complete"],
+                "source": "blind", "valid_for_b8": True}
+    if "incompleteness_acknowledged" in p1:
+        return {"value": p1["incompleteness_acknowledged"],
+                "source": "cued", "valid_for_b8": False}
+    return {"value": None, "source": "none", "valid_for_b8": False}
+
+
+def cmd_flag(rid):
+    """Emit the blind rating prompt for a sealed pass 1."""
+    p1 = load(rid, "pass1.json")
+    if not p1:
+        print("no pass 1 for %s" % rid, file=sys.stderr)
+        return 1
+    shown = {k: p1[k] for k in ("options", "choice", "metric", "reasoning")
+             if k in p1}
+    print(PROMPT_F.format(p1_text=json.dumps(shown, indent=2)))
+
+
+def cmd_submit_flag(rid, path):
+    if not load(rid, "pass1.json"):
+        print("no pass 1 for %s" % rid, file=sys.stderr)
+        return 1
+    with open(path, "r", encoding="utf-8") as f:
+        d = json.load(f)
+    if "set_stated_as_complete" not in d:
+        print("flag file missing set_stated_as_complete", file=sys.stderr)
+        return 1
+    d["rated"] = now()
+    save(rid, "flag.json", d)
+    print("blind flag recorded for %s" % rid)
+
+
 def readouts(rid):
     meta = load(rid, "meta.json")
     p1 = load(rid, "pass1.json")
@@ -229,7 +288,7 @@ def readouts(rid):
         "n_options_pass1": n1,
         "n_options_pass2": n2,
         "option_gain": gain,
-        "frame_flagged": p1.get("incompleteness_acknowledged"),
+        "frame_flagged": frame_flag(rid, p1),
         "choice_pass1": p1.get("choice"),
         "choice_pass2": p2.get("choice") if p2 else None,
         "choice_changed": (p2.get("choice") != p1.get("choice")) if p2 else None,
@@ -250,13 +309,20 @@ def cmd_report(rid):
     print("options pass 1     %s" % r["n_options_pass1"])
     print("options pass 2     %s" % r["n_options_pass2"])
     print("option gain        %s" % r["option_gain"])
-    print("frame flagged      %s" % r["frame_flagged"])
+    ff = r["frame_flagged"]
+    print("frame flagged      %s  (%s%s)" % (
+        ff["value"], ff["source"],
+        "" if ff["valid_for_b8"] else ", NOT valid for B8"))
     print("choice changed     %s" % r["choice_changed"])
     print("dominated          %s" % r["dominated_on_own_metric"])
     print("constraints        %s" % r["constraints"])
     print()
     print("frame_flagged false with option_gain above zero is the case the")
     print("instrument exists for: the set was stated as complete and was not.")
+    if not ff["valid_for_b8"] and ff["source"] == "cued":
+        print()
+        print("This flag was self-reported to a field that asked for it.")
+        print("Run --flag %s for a blind rating." % r["run"])
 
 
 def cmd_report_all(as_jsonl):
@@ -277,7 +343,9 @@ def cmd_report_all(as_jsonl):
     for r in rows:
         print("%-14s %-6s %-6s %-6s %-7s %s" % (
             r["run"][:14], r["n_options_pass1"], r["n_options_pass2"],
-            r["option_gain"], r["frame_flagged"],
+            r["option_gain"],
+            "%s/%s" % (r["frame_flagged"]["value"],
+                       r["frame_flagged"]["source"]),
             r["dominated_on_own_metric"]))
 
 
@@ -289,6 +357,9 @@ def main():
     p.add_argument("--prompt2", metavar="ID")
     p.add_argument("--submit2", metavar="ID")
     p.add_argument("--submit3", metavar="ID")
+    p.add_argument("--flag", metavar="ID",
+                   help="emit blind rating prompt for a sealed pass 1")
+    p.add_argument("--submit-flag", metavar="ID", dest="submit_flag")
     p.add_argument("--report", metavar="ID")
     p.add_argument("--report-all", action="store_true")
     p.add_argument("--jsonl", action="store_true")
@@ -307,6 +378,13 @@ def main():
         return cmd_seal(a.seal, a.file)
     if a.prompt2:
         return cmd_prompt2(a.prompt2)
+    if a.flag:
+        return cmd_flag(a.flag)
+    if a.submit_flag:
+        if not a.file:
+            print("--submit-flag needs --file", file=sys.stderr)
+            return 1
+        return cmd_submit_flag(a.submit_flag, a.file)
     if a.submit2:
         if not a.file:
             print("--submit2 needs --file", file=sys.stderr)

@@ -2440,8 +2440,30 @@ underneath).
   over is the fix — fourth instance of that shape across four folders.
   **`PB_013`:** the router's firing branch has no case in the repo;
   `ventilator-surge` has O1 absent, correctly, and the case that would fire
-  it is `generation-capacity`'s undelivered `food-knowledge`. Stdlib only,
-  phone-buildable, CC0.
+  it is `generation-capacity`'s undelivered `food-knowledge`.
+  **Third drop repairs `PB_006` at the source.** `incompleteness_-
+  acknowledged` is removed from `PROMPT_1` entirely and replaced by a
+  blind post-hoc rater: `PROMPT_F` shows a reader only the pass 1 output
+  and asks the neutral `set_stated_as_complete`, naming neither pass 2 nor
+  the protocol nor the frame — the inversion to `frame_flagged` is done by
+  code, not by the rater — and `frame_flag()` now returns provenance
+  (`blind` valid for B8 / `cued` NOT valid / `none` unrated) instead of a
+  bare boolean, so the two prior runs are re-labelled rather than silently
+  kept. B8 is measurable for the first time. **`PB_014`, what the repair
+  left behind:** `cmd_report` nudges the operator to run `--flag` only when
+  `source == "cued"` — the state the repair abolished — so every run under
+  the new `PROMPT_1` lands on `source == "none"`, prints "NOT valid for
+  B8", and is told nothing; the instruction to take the one step that makes
+  B8 measurable is attached to the population being replaced and withheld
+  from the population replacing it. Two of this session's standing findings
+  **widen** rather than close: `PB_002` (`cmd_flag` and `cmd_submit_flag`
+  verify nothing either, so 1 of 5 commands checks seal integrity, and the
+  blind rating B8 now rests on can be taken on a tampered pass 1) and
+  `PB_005` (three undocumented flags now — `submit3`, `flag`,
+  `submit-flag` — so the documented workflow leaves BOTH B8 and B9
+  unreachable). `PB_010` **dissolves**: the field is gone, so the seal gate
+  has nothing to require, and the blind rating necessarily happens after
+  sealing. Stdlib only, phone-buildable, CC0.
 - `generation-capacity/` — Proposed **tenth exclusion mechanism** for
   `uninstrumented/`, one drop after `category-weld/`'s ninth.
   `MECHANISM_10.md` (delivered verbatim, a marker under exploration) names

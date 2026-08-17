@@ -22,6 +22,7 @@ import tempfile
 
 import binary_audit as BA
 import frame_sim as FS
+import inspect
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 BAR = "=" * 70
@@ -176,6 +177,26 @@ seal exists to prevent.
 One line in cmd_submit2 -- the same `if verify(rid) is False` cmd_prompt2
 already carries -- closes it. So does refusing in cmd_submit3.
 """.strip())
+print()
+print("  DROP 3 WIDENS THIS. Two new commands, neither verifying:")
+print()
+print("  %-18s %-18s %s" % ("command", "verify() called", "seal.json checked"))
+print("  " + "-" * 58)
+for name in ("cmd_prompt2", "cmd_submit2", "cmd_submit3",
+             "cmd_flag", "cmd_submit_flag"):
+    src = inspect.getsource(getattr(FS, name))
+    print("  %-18s %-18s %s" % (
+        name, "verify(" in src, "seal.json" in src))
+print()
+print("""
+cmd_prompt2 is still the only command that verifies. cmd_flag and
+cmd_submit_flag are new in drop 3 and check neither the seal nor its
+integrity, so a pass 1 edited after sealing can be blind-rated and the
+rating recorded -- and the blind rating is the readout B8 now rests on.
+
+The ratio of verifying to non-verifying commands went from 1:2 to 1:4
+while the repair was being made. Not a new defect; the same one, wider.
+""".strip())
 
 # ----------------------------------------------------------------- PB_003
 head(3, "PB_003", "'prompt withholding' is commitment, not confidentiality")
@@ -270,74 +291,116 @@ the constrained run's own metric" -- is stated entirely in that field. Its
 falsifier is "runs where dominated_on_own_metric is consistently false";
 under the documented workflow it is consistently None, and None is not
 false. One line in the usage block.
+
+DROP 3 WIDENS THIS TOO. --flag and --submit-flag are added, parsed, and
+also absent from the header, so the undocumented count goes from one to
+three -- and two of the three carry the PB_006 repair the same drop made.
+The documented workflow now runs start -> seal -> prompt2 -> submit2 ->
+report and produces, on every run, dominated_on_own_metric None (B9) and
+frame_flagged source `none` (B8). Two of the three claims the instrument
+exists to test are unreachable by following its own usage block.
 """.strip())
 
 # ----------------------------------------------------------------- PB_006
-head(6, "PB_006", "B8's readout is elicited by the prompt that measures it")
+head(6, "PB_006", "REPAIRED -- the cue is out of the generating context")
 print("""
-B8: "A constrained pass will usually state its option set as complete
-rather than as the extent of its search."
-Falsified by: "runs where frame_flagged is consistently true."
+The first pass recorded that B8's readout could not be measured by the
+instrument measuring it: PROMPT_1 required `incompleteness_acknowledged`
+in the JSON it asked for, so the flag was produced alongside the reasoning
+rather than about it. The drop's own CLAIM_TABLE reached the same place
+from the protocol-anticipation side and marked B8 NOT TESTED.
 
-frame_flagged is p1["incompleteness_acknowledged"], and PROMPT_1 requires
-that field in the JSON it asks for:
+Drop 3 repairs it at the source.
+""".strip())
+print()
+print("  'incompleteness' appears in PROMPT_1 : %s" % ("incompleteness" in FS.PROMPT_1))
+print("  PROMPT_F exists                      : %s" % hasattr(FS, "PROMPT_F"))
+print("  PROMPT_F mentions pass 2             : %s" % ("PASS 2" in FS.PROMPT_F))
+print("  PROMPT_F mentions 'frame'            : %s" % ("frame" in FS.PROMPT_F.lower()))
+print()
+print("""
+The field is gone from PROMPT_1 entirely, and a blind post-hoc rater
+replaces it: PROMPT_F shows a reader only the pass 1 output -- options,
+choice, metric, reasoning -- and asks a neutral question,
+`set_stated_as_complete`, with evidence located in the text. It names
+neither pass 2 nor the protocol nor the frame. The inversion to
+`frame_flagged` is done by code, not by the rater.
 
-    "incompleteness_acknowledged": true or false,
-    "incompleteness_statement": "if the option set was stated as complete,
-       leave empty; if it was stated as only what was generated, say so here"
+frame_flag() then carries provenance instead of a bare boolean:
+""".strip())
+with sandbox() as d:
+    new_p1 = {"options": [{"id": "a", "desc": "A"}, {"id": "b", "desc": "B"}],
+              "choice": "a", "metric": "cost",
+              "reasoning": "the two available options are A and B"}
+    old_p1 = dict(new_p1); old_p1["incompleteness_acknowledged"] = True
+    fl = {"set_stated_as_complete": True, "evidence": "\"the two available options\""}
+    for rid, p1 in (("BLIND", new_p1), ("LEGACY", old_p1), ("UNRATED", new_p1)):
+        quiet(FS.cmd_start, rid, "p")
+        quiet(FS.cmd_seal, rid, write(d, "p1_%s.json" % rid, p1))
+    quiet(FS.cmd_submit_flag, "BLIND", write(d, "flag.json", fl))
+    print()
+    print("  %-10s %-8s %-8s %-14s %s" % (
+        "run", "value", "source", "valid_for_b8", "report nudges --flag"))
+    print("  " + "-" * 66)
+    for rid in ("BLIND", "LEGACY", "UNRATED"):
+        ff = FS.readouts(rid)["frame_flagged"]
+        _, out = quiet(FS.cmd_report, rid)
+        print("  %-10s %-8s %-8s %-14s %s" % (
+            rid, ff["value"], ff["source"], ff["valid_for_b8"],
+            "--flag" in out))
+print()
+print("""
+PB_006 is REPAIRED. B8 is measurable for the first time, and the two
+prior runs are correctly re-labelled `cued` rather than silently kept.
 
-    The incompleteness field is a readout, not a prompt to hedge. Record
-    what the reasoning actually did.
+ONE THING THE REPAIR LEFT BEHIND, in the last row. cmd_report nudges the
+operator to run --flag only when the source is `cued`:
 
-The disclaimer is doing the work the schema undoes. The field is in the
-requested output, so the model sees the word "incompleteness" while it is
-generating the constrained pass -- it is not reporting on a pass that has
-already happened, it is producing both at once.
+    if not ff["valid_for_b8"] and ff["source"] == "cued":
 
-That makes frame_flagged a self-report from inside the thing being
-measured. triad-playground TP_006 is the same shape (three of four
-reasoning checks readable only by self-report); reasoning-dial RD_009
-names it as the G-STATE gap.
+`cued` is exactly the state the repair eliminated. A run produced under
+the new PROMPT_1 has no such field, lands on source `none`, prints
+"NOT valid for B8", and is told nothing about how to fix that. The only
+runs that get the instruction are the legacy ones the repair was written
+to replace.
 
-What would read it out without the contamination: drop the field from
-PROMPT_1's schema entirely, and have a separate pass -- or a separate
-reader -- score the `reasoning` text for whether the option set was
-presented as complete. That is a rating on an artifact rather than a
-question to the author, and it is the same move frame_sim already makes
-for pass 3, which asks about pass 1 rather than asking pass 1.
+One condition: source in ("cued", "none").
 """.strip())
 
 # ----------------------------------------------------------------- PB_010
-head(7, "PB_010", "the seal gate validates every field except B8's")
+head(7, "PB_010", "restated -- the gate now has nothing to require")
+print("""
+The first pass recorded that cmd_seal required options, choice and metric
+-- the three fields feeding option_gain and the pass 3 prompt -- and not
+`incompleteness_acknowledged`, the whole of B8. Over-elicited by the
+prompt, under-required by the gate.
+
+The repair removes the field from PROMPT_1, so half the finding dissolves:
+there is no longer a B8 field for the gate to require, and requiring one
+would now be wrong.
+
+What replaces it is a question about the blind rating, and the answer is
+that nothing requires it either:
+""".strip())
 with sandbox() as d:
-    noflag = dict(P1)
-    del noflag["incompleteness_acknowledged"]
-    p = write(d, "p1_noflag.json", noflag)
-    quiet(FS.cmd_start, "N1", "p")
-    rc, out = quiet(FS.cmd_seal, "N1", p)
-    r = FS.readouts("N1")
+    p1 = {"options": [{"id": "a", "desc": "A"}], "choice": "a",
+          "metric": "cost", "reasoning": "r"}
+    quiet(FS.cmd_start, "G1", "p")
+    rc, out = quiet(FS.cmd_seal, "G1", write(d, "p1.json", p1))
+    r = FS.readouts("G1")
     print()
-    print("  pass 1 submitted without incompleteness_acknowledged")
-    print("  seal            rc=%d  %s" % (rc, out.strip()))
-    print("  frame_flagged   %s" % r["frame_flagged"])
-    print()
-    print("  the fields the gate DOES require, each removed in turn:")
-    for missing in ("options", "choice", "metric"):
-        rid = "M_" + missing
-        quiet(FS.cmd_start, rid, "p")
-        broken = {k: v for k, v in P1.items() if k != missing}
-        rc, out = quiet(FS.cmd_seal, rid, write(d, "m_%s.json" % missing, broken))
-        print("    without %-8s seal rc=%d  %s" % (missing, rc, out.strip()))
+    print("  seal a pass 1 with no blind rating   rc=%d  %s" % (rc, out.strip()))
+    print("  frame_flagged                        %s" % r["frame_flagged"])
+    print("  report-all lists the run             %s" % (
+        quiet(FS.cmd_report_all, False)[1].count("G1") > 0))
 print()
 print("""
-cmd_seal requires options, choice and metric -- the three fields that feed
-option_gain and the pass 3 prompt. It does not require
-incompleteness_acknowledged, which is the whole of B8. A pass 1 without it
-seals clean and reports frame_flagged None.
+That is the right design, not a defect: the blind rating happens AFTER
+sealing by construction, so the seal gate cannot require it. The readout
+carries `valid_for_b8: False` and says so, which is the honest handling.
 
-So the one claim frame_sim can test on a single pass, with no second pass
-and no comparison, is the one field the gate lets through missing. Adding
-it to the required list is one string.
+The residue is PB_014's: an unrated run says it is invalid and does not
+say what to do about it.
 """.strip())
 
 # ----------------------------------------------------------------- PB_007
@@ -527,7 +590,35 @@ status and is not in the drop.
 """.strip())
 
 
+# ----------------------------------------------------------------- PB_014
+head(14, "PB_014", "the repair's own next step has no prompt")
+print("""
+Collecting the three states in one place, because the shape only shows
+when they sit together:
+
+  source   how a run gets there                       report says
+  blind    --flag then --submit-flag were run         valid, value usable
+  cued     pass 1 carried the OLD prompt's field      invalid + RUN --flag
+  none     pass 1 followed the NEW prompt, unrated    invalid, and nothing
+
+The middle row is the legacy path. The bottom row is what every future run
+lands on, because the repair removed the field that produces `cued`.
+
+So the instruction to take the one step that makes B8 measurable is
+attached to the state the repair abolished, and withheld from the state
+the repair creates. An operator following the documented workflow gets a
+report saying NOT valid for B8 with no indication that --flag exists --
+and --flag is not in the usage block either (PB_005).
+
+Two one-line changes, in different files: add the two commands to the
+header, and widen the nudge condition to source in ("cued", "none").
+
+This is not the repair failing. The repair is correct and PB_006 closes on
+it. It is the second-order cost of a correct repair: the reminder to do
+the replacement step was written for the population being replaced.
+""".strip())
+
 print()
 print(BAR)
-print("end of audit -- findings recorded in AUDIT_NOTES.md as PB_001..PB_013")
+print("end of audit -- findings recorded in AUDIT_NOTES.md as PB_001..PB_014")
 print(BAR)

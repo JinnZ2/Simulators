@@ -60,6 +60,24 @@ seal exists to prevent.
 One line in cmd_submit2 -- the same `if verify(rid) is False` cmd_prompt2
 already carries -- closes it. So does refusing in cmd_submit3.
 
+  DROP 3 WIDENS THIS. Two new commands, neither verifying:
+
+  command            verify() called    seal.json checked
+  ----------------------------------------------------------
+  cmd_prompt2        True               True
+  cmd_submit2        False              True
+  cmd_submit3        False              False
+  cmd_flag           False              False
+  cmd_submit_flag    False              False
+
+cmd_prompt2 is still the only command that verifies. cmd_flag and
+cmd_submit_flag are new in drop 3 and check neither the seal nor its
+integrity, so a pass 1 edited after sealing can be blind-rated and the
+rating recorded -- and the blind rating is the readout B8 now rests on.
+
+The ratio of verifying to non-verifying commands went from 1:2 to 1:4
+while the repair was being made. Not a new defect; the same one, wider.
+
 ======================================================================
 3  PB_003  'prompt withholding' is commitment, not confidentiality
 ======================================================================
@@ -114,8 +132,8 @@ field B7 is stated in.
 ======================================================================
 
   documented in the header : prompt2, report, report-all, seal, start, submit2
-  parsed by the CLI        : file, jsonl, problem, prompt2, report, report-all, seal, start, submit2, submit3
-  parsed but undocumented  : submit3
+  parsed by the CLI        : file, flag, jsonl, problem, prompt2, report, report-all, seal, start, submit-flag, submit2, submit3
+  parsed but undocumented  : flag, submit-flag, submit3
 
 cmd_submit2 PRINTS prompt 3 and the header gives no command for submitting
 its answer. Follow the documented workflow exactly and pass3.json is never
@@ -127,61 +145,86 @@ falsifier is "runs where dominated_on_own_metric is consistently false";
 under the documented workflow it is consistently None, and None is not
 false. One line in the usage block.
 
-======================================================================
-6  PB_006  B8's readout is elicited by the prompt that measures it
-======================================================================
-B8: "A constrained pass will usually state its option set as complete
-rather than as the extent of its search."
-Falsified by: "runs where frame_flagged is consistently true."
-
-frame_flagged is p1["incompleteness_acknowledged"], and PROMPT_1 requires
-that field in the JSON it asks for:
-
-    "incompleteness_acknowledged": true or false,
-    "incompleteness_statement": "if the option set was stated as complete,
-       leave empty; if it was stated as only what was generated, say so here"
-
-    The incompleteness field is a readout, not a prompt to hedge. Record
-    what the reasoning actually did.
-
-The disclaimer is doing the work the schema undoes. The field is in the
-requested output, so the model sees the word "incompleteness" while it is
-generating the constrained pass -- it is not reporting on a pass that has
-already happened, it is producing both at once.
-
-That makes frame_flagged a self-report from inside the thing being
-measured. triad-playground TP_006 is the same shape (three of four
-reasoning checks readable only by self-report); reasoning-dial RD_009
-names it as the G-STATE gap.
-
-What would read it out without the contamination: drop the field from
-PROMPT_1's schema entirely, and have a separate pass -- or a separate
-reader -- score the `reasoning` text for whether the option set was
-presented as complete. That is a rating on an artifact rather than a
-question to the author, and it is the same move frame_sim already makes
-for pass 3, which asks about pass 1 rather than asking pass 1.
+DROP 3 WIDENS THIS TOO. --flag and --submit-flag are added, parsed, and
+also absent from the header, so the undocumented count goes from one to
+three -- and two of the three carry the PB_006 repair the same drop made.
+The documented workflow now runs start -> seal -> prompt2 -> submit2 ->
+report and produces, on every run, dominated_on_own_metric None (B9) and
+frame_flagged source `none` (B8). Two of the three claims the instrument
+exists to test are unreachable by following its own usage block.
 
 ======================================================================
-7  PB_010  the seal gate validates every field except B8's
+6  PB_006  REPAIRED -- the cue is out of the generating context
 ======================================================================
+The first pass recorded that B8's readout could not be measured by the
+instrument measuring it: PROMPT_1 required `incompleteness_acknowledged`
+in the JSON it asked for, so the flag was produced alongside the reasoning
+rather than about it. The drop's own CLAIM_TABLE reached the same place
+from the protocol-anticipation side and marked B8 NOT TESTED.
 
-  pass 1 submitted without incompleteness_acknowledged
-  seal            rc=0  sealed N1  d8a977dff6b12631
-  frame_flagged   None
+Drop 3 repairs it at the source.
 
-  the fields the gate DOES require, each removed in turn:
-    without options  seal rc=1  pass 1 missing field: options
-    without choice   seal rc=1  pass 1 missing field: choice
-    without metric   seal rc=1  pass 1 missing field: metric
+  'incompleteness' appears in PROMPT_1 : False
+  PROMPT_F exists                      : True
+  PROMPT_F mentions pass 2             : False
+  PROMPT_F mentions 'frame'            : False
 
-cmd_seal requires options, choice and metric -- the three fields that feed
-option_gain and the pass 3 prompt. It does not require
-incompleteness_acknowledged, which is the whole of B8. A pass 1 without it
-seals clean and reports frame_flagged None.
+The field is gone from PROMPT_1 entirely, and a blind post-hoc rater
+replaces it: PROMPT_F shows a reader only the pass 1 output -- options,
+choice, metric, reasoning -- and asks a neutral question,
+`set_stated_as_complete`, with evidence located in the text. It names
+neither pass 2 nor the protocol nor the frame. The inversion to
+`frame_flagged` is done by code, not by the rater.
 
-So the one claim frame_sim can test on a single pass, with no second pass
-and no comparison, is the one field the gate lets through missing. Adding
-it to the required list is one string.
+frame_flag() then carries provenance instead of a bare boolean:
+
+  run        value    source   valid_for_b8   report nudges --flag
+  ------------------------------------------------------------------
+  BLIND      False    blind    True           False
+  LEGACY     True     cued     False          True
+  UNRATED    None     none     False          False
+
+PB_006 is REPAIRED. B8 is measurable for the first time, and the two
+prior runs are correctly re-labelled `cued` rather than silently kept.
+
+ONE THING THE REPAIR LEFT BEHIND, in the last row. cmd_report nudges the
+operator to run --flag only when the source is `cued`:
+
+    if not ff["valid_for_b8"] and ff["source"] == "cued":
+
+`cued` is exactly the state the repair eliminated. A run produced under
+the new PROMPT_1 has no such field, lands on source `none`, prints
+"NOT valid for B8", and is told nothing about how to fix that. The only
+runs that get the instruction are the legacy ones the repair was written
+to replace.
+
+One condition: source in ("cued", "none").
+
+======================================================================
+7  PB_010  restated -- the gate now has nothing to require
+======================================================================
+The first pass recorded that cmd_seal required options, choice and metric
+-- the three fields feeding option_gain and the pass 3 prompt -- and not
+`incompleteness_acknowledged`, the whole of B8. Over-elicited by the
+prompt, under-required by the gate.
+
+The repair removes the field from PROMPT_1, so half the finding dissolves:
+there is no longer a B8 field for the gate to require, and requiring one
+would now be wrong.
+
+What replaces it is a question about the blind rating, and the answer is
+that nothing requires it either:
+
+  seal a pass 1 with no blind rating   rc=0  sealed G1  97dce0c35ed6b055
+  frame_flagged                        {'value': None, 'source': 'none', 'valid_for_b8': False}
+  report-all lists the run             True
+
+That is the right design, not a defect: the blind rating happens AFTER
+sealing by construction, so the seal gate cannot require it. The readout
+carries `valid_for_b8: False` and says so, which is the honest handling.
+
+The residue is PB_014's: an unrated run says it is invalid and does not
+say what to do about it.
 
 ======================================================================
 8  PB_007  documented_share merges two of the three states
@@ -328,5 +371,32 @@ truthfully -- and the case file for it (food-knowledge) is named in G2's
 status and is not in the drop.
 
 ======================================================================
-end of audit -- findings recorded in AUDIT_NOTES.md as PB_001..PB_013
+14 PB_014  the repair's own next step has no prompt
+======================================================================
+Collecting the three states in one place, because the shape only shows
+when they sit together:
+
+  source   how a run gets there                       report says
+  blind    --flag then --submit-flag were run         valid, value usable
+  cued     pass 1 carried the OLD prompt's field      invalid + RUN --flag
+  none     pass 1 followed the NEW prompt, unrated    invalid, and nothing
+
+The middle row is the legacy path. The bottom row is what every future run
+lands on, because the repair removed the field that produces `cued`.
+
+So the instruction to take the one step that makes B8 measurable is
+attached to the state the repair abolished, and withheld from the state
+the repair creates. An operator following the documented workflow gets a
+report saying NOT valid for B8 with no indication that --flag exists --
+and --flag is not in the usage block either (PB_005).
+
+Two one-line changes, in different files: add the two commands to the
+header, and widen the nudge condition to source in ("cued", "none").
+
+This is not the repair failing. The repair is correct and PB_006 closes on
+it. It is the second-order cost of a correct repair: the reminder to do
+the replacement step was written for the population being replaced.
+
+======================================================================
+end of audit -- findings recorded in AUDIT_NOTES.md as PB_001..PB_014
 ======================================================================

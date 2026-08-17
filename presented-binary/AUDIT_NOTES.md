@@ -33,7 +33,7 @@ Nine claims `B1..B9` delivered, three of them (`B7`–`B9`) marked
 | file | status |
 |------|--------|
 | `binary_audit.py` | delivered, verbatim — **drop 2 version**, the inline paste that adds `handoff()`; the two uploaded copies were the stale pre-handoff file (§11) |
-| `frame_sim.py` | delivered drop 1, verbatim; not re-delivered |
+| `frame_sim.py` | delivered, verbatim — **drop 3 version**: `incompleteness_acknowledged` removed from `PROMPT_1`, blind rater `PROMPT_F` + `--flag`/`--submit-flag` added, `frame_flagged` now carries provenance |
 | `CLAIM_TABLE.md` | delivered, verbatim — **drop 2 version**, B7/B8/B9 statuses updated from two real self-runs |
 | `cases/ventilator-surge.json` | delivered drop 2, verbatim — scores 0 of 11 exactly as claimed |
 | fixtures for `frame_sim` | claimed in CLAIM_TABLE, still not delivered |
@@ -60,18 +60,19 @@ Update the claim, never retune the instrument to preserve a claim.
 | id | claim | falsified by | status |
 |----|-------|--------------|--------|
 | PB_001 | Both verification sentences in `CLAIM_TABLE.md` name artifacts the drop does not carry — the seeded case and the fixtures | the files arriving | **SPLIT**: seeded case CLOSED (arrived drop 2, 0 of 11 exact); fixtures still UNVERIFIED |
-| PB_002 | The seal is enforced at one gate and not the other: `cmd_prompt2` refuses a broken seal, `cmd_submit2` checks only that `seal.json` exists, and `cmd_submit3` checks nothing — so a pass 1 edited after sealing reaches prompt 3, which quotes the edited choice | a path from tampered pass 1 to a recorded pass 3 that is refused | SUPPORTED |
+| PB_002 | The seal is enforced at one gate and not the other: `cmd_prompt2` refuses a broken seal, `cmd_submit2` checks only that `seal.json` exists, and `cmd_submit3` checks nothing — so a pass 1 edited after sealing reaches prompt 3, which quotes the edited choice | a path from tampered pass 1 to a recorded pass 3 that is refused | SUPPORTED — **widened in drop 3**: `cmd_flag` and `cmd_submit_flag` also verify nothing, so 1 of 5 commands checks integrity |
 | PB_003 | "Prompt withholding" is commitment, not confidentiality: `PROMPT_2` and `PROMPT_3` are string constants in the source, readable before pass 1 is written, and the operator is the model | the prompts being generated or held outside the file the operator runs | SUPPORTED |
 | PB_004 | `option_gain` returns `None` both when the wide pass found zero options and when it never ran, because `if (n2 and n1)` treats 0 as falsy | the two states returning different values | SUPPORTED |
-| PB_005 | `--submit3` is parsed but absent from the documented usage, so the documented workflow leaves `dominated_on_own_metric` at `None` — which is the whole of B9 | `--submit3` appearing in the usage block | SUPPORTED — still, after drop 2's two real runs used it |
+| PB_005 | `--submit3` is parsed but absent from the documented usage, so the documented workflow leaves `dominated_on_own_metric` at `None` — which is the whole of B9 | the flags appearing in the usage block | SUPPORTED — **widened in drop 3** to three undocumented flags (`submit3`, `flag`, `submit-flag`); the documented workflow now leaves both B8 and B9 unreachable |
 | PB_011 | The drop carried `binary_audit.py` three times — two uploaded files byte-identical to each other and to the pre-handoff repo copy, and the live version inline. First drop where the `MF_019` copy-drift had a consequence: landing the uploads at face value would have reverted the router the same drop introduced | a drop that bundles one copy, or bundles copies that match the live file | SUPPORTED |
 | PB_012 | `handoff()` returns bare `None` both when O1 is documented at a count above the ceiling (a measurement) and when O1 was never checked (a gap); the `{"route": None, "reason": ...}` shape it already uses one branch over is the fix | the two states returning different values | SUPPORTED |
 | PB_013 | The router's firing branch is exercised by no case in the repo — `ventilator-surge` has O1 absent, correctly | a case with O1 documented and a stated count | UNVERIFIED — the case that would fire it is `generation-capacity`'s undelivered `food-knowledge` |
-| PB_006 | B8's readout is elicited by the prompt that measures it: `PROMPT_1` requires `incompleteness_acknowledged` in the JSON it asks for, so the flag is produced alongside the reasoning rather than about it | a run where the flag is scored from the reasoning text by a reader that never saw the field | SUPPORTED |
+| PB_006 | B8's readout is elicited by the prompt that measures it: `PROMPT_1` requires `incompleteness_acknowledged` in the JSON it asks for, so the flag is produced alongside the reasoning rather than about it | a run where the flag is scored from the reasoning text by a reader that never saw the field | **REPAIRED in drop 3** — field removed from `PROMPT_1`; `PROMPT_F` rates the pass 1 text post hoc and names neither pass 2 nor the protocol nor the frame |
 | PB_007 | `documented_share` merges `asserted` with `absent`, so a framing carried by eleven assertions and one carried by eleven silences return the same number | a second share separating them, or a reading on which the two are the same state | SUPPORTED |
 | PB_008 | `binary_audit.py`'s template and defaults all fail closed — a blank file scores 0 of 11 and a malformed state is counted absent *and* named | a default that scores a blank or malformed case above zero | SUPPORTED (holds) |
 | PB_009 | B5 is directly runnable in `category-weld/` and no `welds/a_few.json` exists | the file existing | UNVERIFIED — unrun test, not a defect |
-| PB_010 | `cmd_seal` requires the three fields that feed `option_gain` and the pass-3 prompt, and not `incompleteness_acknowledged`, which is the whole of B8 | the seal refusing a pass 1 without the flag | SUPPORTED |
+| PB_010 | `cmd_seal` requires the three fields that feed `option_gain` and the pass-3 prompt, and not `incompleteness_acknowledged`, which is the whole of B8 | the seal refusing a pass 1 without the flag | **DISSOLVED in drop 3** — the field is gone, so there is nothing for the gate to require; the blind rating necessarily happens after sealing |
+| PB_014 | The nudge to run `--flag` fires only on `source == "cued"`, which is the state the repair eliminated; every run under the new `PROMPT_1` lands on `source == "none"`, prints "NOT valid for B8", and is told nothing | the condition widening to `source in ("cued", "none")` | SUPPORTED |
 
 ## 1 — PB_001, split: one arrived, one did not
 
@@ -379,6 +380,41 @@ What closes it: a case whose O1 is documented *with* a count.
 someone asked how many alternatives were generated, answering two,
 truthfully — and its case file, `food-knowledge`, is named three times in
 that drop and is not in it (`GC_009`).
+
+## 14 — PB_014, the repair's own next step has no prompt
+
+Drop 3 repairs `PB_006` at the source: `incompleteness_acknowledged` is
+gone from `PROMPT_1`, and `PROMPT_F` rates the pass 1 text post hoc,
+naming neither pass 2 nor the protocol nor the frame. `frame_flag()`
+returns provenance instead of a bare boolean. B8 becomes measurable for
+the first time and the two prior runs are correctly re-labelled `cued`
+rather than silently kept.
+
+The three states, measured together, because the shape only shows there:
+
+    run        value    source   valid_for_b8   report nudges --flag
+    BLIND      False    blind    True           False
+    LEGACY     True     cued     False          True
+    UNRATED    None     none     False          False
+
+`cmd_report` nudges the operator to run `--flag` only when:
+
+    if not ff["valid_for_b8"] and ff["source"] == "cued":
+
+`cued` is exactly the state the repair abolished. A run produced under the
+new `PROMPT_1` has no such field, lands on `none`, prints *NOT valid for
+B8*, and is told nothing about how to fix it. **The instruction to take
+the one step that makes B8 measurable is attached to the population being
+replaced and withheld from the population replacing it.** And `--flag` is
+not in the usage block either (`PB_005`), so an operator following the
+documented workflow has no route to it at all.
+
+Two one-line changes: add the two commands to the header, and widen the
+condition to `source in ("cued", "none")`.
+
+Not the repair failing — the repair is correct and `PB_006` closes on it.
+The second-order cost of a correct repair: the reminder was written for
+the state that no longer occurs.
 
 ## Relation to the rest of the repo
 
