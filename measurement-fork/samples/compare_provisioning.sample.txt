@@ -1,0 +1,135 @@
+==================================================================
+MEASUREMENT FORK  --  provisioning_calibration
+==================================================================
+Organism developing under varying provisioning. Question is whether its own sensing apparatus gets validated against outcomes, and what reads out when it does not. Marker, not a claim.
+
+  arm conventional    7 probes
+  arm coupling       10 probes
+  arm widen          16 probes
+
+------------------------------------------------------------------
+SOLE REACH -- reached by exactly one arm
+------------------------------------------------------------------
+
+  [conventional]
+
+    cortisol_at_matched_stimulus  [organism]
+      reads    level of cortisol at matched stimulus in the organism at one point
+      blind to whether the level is a property of the organism or of its relation to the environment; no gradient, so a calibrated response and a degraded one return the same number
+
+    distress_markers  [organism]
+      reads    level of distress markers in the organism at one point
+      blind to whether the level is a property of the organism or of its relation to the environment; no gradient, so a calibrated response and a degraded one return the same number
+
+    health_endpoints  [organism]
+      reads    level of health endpoints in the organism at one point
+      blind to whether the level is a property of the organism or of its relation to the environment; no gradient, so a calibrated response and a degraded one return the same number
+
+    outcome_endpoint  [organism]
+      reads    endpoint incidence by exposure level
+      blind to anything that improves while endpoints improve; one column, so an allocation shift and a loss look identical
+
+    self_report  [organism]
+      reads    reported state at time of administration
+      blind to recall is state-modulated; the reported history is an instrument-level quantity reported as an organism-level one
+
+    task_accuracy  [organism]
+      reads    level of task accuracy in the organism at one point
+      blind to whether the level is a property of the organism or of its relation to the environment; no gradient, so a calibrated response and a degraded one return the same number
+
+    task_performance  [organism]
+      reads    performance relative to the reference population
+      blind to performance in the domain the organism actually calibrated to; items come from one side only, so domain mismatch reads as deficit
+
+  [coupling]
+
+    allocation / total_budget  [organism]
+      reads    whether a drop in one column is a shift or a loss
+      blind to the budget itself; only its distribution
+
+    autocorrelation  [environment]
+      reads    what the organism was calibrating TO
+      blind to the organism entirely; this measures the surround
+
+    confidence / accuracy  [coupling]
+      reads    decoupling of confidence from validity -- rises silently while every state variable reads nominal
+      blind to cases where the actor cannot report confidence
+
+    contingency_consistency  [coupling]
+      reads    whether the mapping is learnable at all
+      blind to magnitude of consequence; only its reliability
+
+    latency  [coupling]
+      reads    how tightly the loop can close
+      blind to whether the actor's own sensors were used to read it
+
+    response_magnitude / perturbation_size  [coupling]
+      reads    accumulated calibration error
+      blind to nothing about absolute response level; deliberately discards it
+
+    response_magnitude / stimulus_severity  [organism]
+      reads    discrimination gradient. Calibrated = graded. Degraded = flat.
+      blind to which mechanism produced a given slope, absent history
+
+    task_performance / domain_match  [coupling]
+      reads    whether apparent deficit is domain mismatch
+      blind to absolute capability; only the interaction
+
+  [widen] -- options, not quantities. mark applies yes|no|unclear:
+      ask who benefits from each possible answer
+      measure provisioning level on a population that was never exposed
+      measure the same quantity on the environment as well as the organism
+      measure the same thing twice on one subject, same session
+      rename or decompose: act consequence latency
+      rename or decompose: confidence accuracy gap
+      rename or decompose: coupling bandwidth
+      rename or decompose: discrimination gradient across severities
+      rename or decompose: domain match between calibrating environment and test items
+      rename or decompose: environmental autocorrelation
+      rename or decompose: response magnitude per perturbation size
+      rename or decompose: reversibility after regime shift
+      rename or decompose: whether trust in own sensing is a measurement or a belief
+      run the instrument on a case whose answer is already known
+      state what would change the number without changing the system
+      vary sample size by 4x and see which numbers move
+
+------------------------------------------------------------------
+VOID RATIO -- same name, different quantity
+------------------------------------------------------------------
+
+  base name: response_magnitude
+    response_magnitude / perturbation_size  [coupling]  coupling
+    response_magnitude / stimulus_severity  [organism]  coupling
+    -> these do not compare. A ratio or a disagreement between
+       them is undefined until the objects are matched.
+
+  base name: task_performance
+    task_performance  [organism]                    conventional
+    task_performance / domain_match  [coupling]     coupling
+    -> these do not compare. A ratio or a disagreement between
+       them is undefined until the objects are matched.
+
+------------------------------------------------------------------
+SAME QUANTITY, DIFFERENT ROUTE
+------------------------------------------------------------------
+
+  none -- the arms share no quantity at all.
+  That is itself a finding: the designs do not overlap,
+  so no existing result speaks to the coupling questions.
+
+------------------------------------------------------------------
+RESIDUAL -- open questions no arm reaches
+------------------------------------------------------------------
+  [COVERED coupling,widen]  confidence accuracy gap
+  [COVERED coupling,widen]  act consequence latency
+  [COVERED coupling,widen]  response magnitude per perturbation size
+  [COVERED coupling,widen]  discrimination gradient across severities
+  [COVERED widen       ]  domain match between calibrating environment and test items
+  [COVERED widen       ]  environmental autocorrelation
+  [COVERED widen       ]  coupling bandwidth
+  [COVERED widen       ]  whether trust in own sensing is a measurement or a belief
+  [COVERED widen       ]  reversibility after regime shift
+
+  all open questions reached by at least one arm.
+
+==================================================================

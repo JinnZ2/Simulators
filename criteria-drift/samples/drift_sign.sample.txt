@@ -1,0 +1,189 @@
+
+DRIFT SIGN -- can the metric carry the hypothesis?
+subject: DriftEngine, delivered
+
+========================================================================
+1  widening and narrowing both read as positive drift
+========================================================================
+  base      pass at 1 on held-out unit tests
+  wider     pass at 1 on held-out unit tests plus style and documentation
+  narrower  pass at 1
+
+    base -> wider     boundary drift 0.3636  composite 0.0428
+    base -> narrower  boundary drift 0.5714  composite 0.0672
+
+  Both positive. The magnitudes differ, and the difference is a
+  token-count artifact -- `narrower` deleted more words than
+  `wider` added -- not a reading of direction. A narrowing that
+  happened to be verbose would score below a widening that was
+  terse.
+
+========================================================================
+2  the one numeric field discards its sign explicitly
+========================================================================
+  exemplar_count is an integer. `_numeric_drift` takes abs():
+
+        100 -> 1000   0.9000
+       1000 -> 100    0.9000
+        100 -> 120    0.1667
+        120 -> 100    0.1667
+
+  100 -> 1000 and 1000 -> 100 are identical: True
+
+  A test set growing tenfold and a test set shrinking tenfold are
+  different events for the hypothesis under test, and the field
+  that could report which one happened is the only field with an
+  unambiguous direction available.
+
+========================================================================
+3  observer_access is an ordinal compared as a string
+========================================================================
+  schema.py declares the legal values, and they are ordered:
+
+      unknown  <  partial  <  verified
+
+  `_str_drift` compares them as token sets:
+
+      unknown   -> partial    1.0
+      partial   -> verified   1.0
+      unknown   -> verified   1.0
+      verified  -> unknown    1.0
+      verified  -> partial    1.0
+
+  Every transition scores 1.0. Gaining verification and losing
+  it are the same number, and a one-step move is the same number
+  as a two-step move.
+
+  This is the SCALAR DEMAND mechanism from ../uninstrumented/
+  turned inside out: not a function collapsed to a number, but an
+  ordered scale collapsed to a nominal one. Same loss, opposite
+  direction -- the structure was there and the instrument does
+  not read it.
+
+========================================================================
+4  free-text fields drift on rewording
+========================================================================
+  A  pass at 1 on held-out unit tests
+  B  on held-out unit tests, pass at 1
+
+    boundary drift  0.2500
+    composite       0.0294
+
+  Same clause, reordered. Token Jaccard is order-free, so this is
+  the words that changed rather than the order -- 'pass at 1 on
+  held-out unit tests' against 'on held-out unit tests, pass at
+  1' differ by punctuation attaching to a token.
+
+  ../declared-frame/ DF_003 recorded exact string equality as
+  UNDER-matching in the comparability checker -- two frames that
+  mean the same thing reported as different. Here the same
+  free-text field is the MEASURAND, so the same property becomes
+  a positive reading on the quantity being regressed. A checker
+  that under-matches refuses a comparison; a metric that
+  under-matches emits drift.
+
+========================================================================
+5  what a signed metric needs, field by field
+========================================================================
+  field              sign          
+  --------------------------------------------------------------------
+  exemplar_count     available     
+      drop abs(): (v2 - v1) / max(...). One character.
+  observer_access    available     
+      rank unknown=0, partial=1, verified=2; drift = rank2 -
+      rank1.
+  rubric_dimensions  available     
+      |added| - |removed| rather than Jaccard distance.
+  rubric_weights     available     
+      sum of signed weight changes on the shared keys.
+  boundary           NOT from text 
+      widening vs narrowing is a semantic judgement. Needs a
+      declared field -- `direction: widened|narrowed|lateral` --
+      supplied by whoever made the version.
+  horizon            NOT from text 
+      same. A longer horizon is not obviously 'more' or 'less'.
+  who_counts         NOT from text 
+      same.
+  sign_source        not applicable
+      a change of authority has no natural direction.
+  logic              not applicable
+      same.
+
+  Four of nine are signable from the data already stored, and
+  three of those are one-line changes. Three more need a declared
+  field, because widening and narrowing a free-text boundary is a
+  judgement the text does not contain -- which is the
+  ../declared-frame/ DF_007 shape: the block records declarations
+  and nothing in it evaluates.
+
+  Two are genuinely directionless and should stay unsigned, and
+  saying so is worth more than forcing a sign on them.
+
+  Until then the honest reading of a positive beta1 is:
+
+      score changes are larger when the criteria moved a lot,
+      in either direction
+
+  which is a real finding and is not the one the README states.
+
+========================================================================
+6  repaired -- the signed metrics, alongside the unsigned ones
+========================================================================
+  The unsigned primitives above are unchanged: a caller that
+  wants magnitude still has it. These are added, not swapped.
+
+                                 unsigned     signed      
+  ----------------------------------------------------------
+  boundary widened, declared     0.2222       +0.2222
+  boundary narrowed, declared    0.5714       -0.5714
+  boundary changed, undeclared   0.5714       +0.0000
+
+  exemplar 100 -> 1000           0.9000       +0.9000
+  exemplar 1000 -> 100           0.9000       -0.9000
+  access unknown -> verified     1.0000       +1.0000
+  access verified -> unknown     1.0000       -1.0000
+  access partial -> verified     1.0000       +0.5000
+
+  An UNDECLARED direction stays 0.0. That is the load-bearing
+  choice: it is not a lateral change, it is a change nobody said
+  the direction of, and collapsing those two would put the
+  original defect back one level down.
+
+  composite          0.0672
+  composite_signed   +0.0000
+  signed_coverage    0.00
+
+  `signed_coverage` is what stops the repair from creating a new
+  version of the same problem. Without it a caller cannot tell
+  'no net movement' from 'no direction declared', and a
+  composite_signed near zero would mean both.
+
+========================================================================
+READING
+========================================================================
+
+  The README separates three verdicts by the sign of a slope on
+  composite_drift, and every primitive in DriftEngine returns a
+  non-negative distance. Widening and narrowing both push drift up;
+  exemplar_count 100 -> 1000 and 1000 -> 100 are byte-identical at 0.9;
+  every observer_access transition scores 1.0 including the loss of
+  verification.
+
+  So the instrument cannot distinguish the two readings it exists to
+  distinguish. What a positive slope actually says is that score changes
+  are larger when the criteria moved a lot, in either direction -- a real
+  finding, and not the stated one.
+
+  Four of nine fields are signable from data already in the schema, three
+  of them as one-line changes. Three need a declared `direction` field,
+  because whether a free-text boundary widened or narrowed is a judgement
+  the text does not contain. Two have no natural direction and should stay
+  unsigned.
+
+  REPAIRED, section 6. All four signable fields now carry a sign, the
+  three free-text ones take a declared `direction`, and the two with no
+  natural direction stay at zero. `composite_signed` is reported beside
+  `composite`, never instead of it, and `signed_coverage` says how much of
+  the composite carries a direction at all -- without which a caller could
+  not tell "no net change" from "nobody declared one".
+

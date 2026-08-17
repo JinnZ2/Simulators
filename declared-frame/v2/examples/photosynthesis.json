@@ -1,0 +1,11 @@
+{
+  "result": "silicon PV converts ~22% of incident photons; leaf converts ~1-2%",
+  "frame": {
+    "boundary": "photon capture to electrical or fixed-carbon output at the device surface; fabrication, transport, install, and disposal outside",
+    "horizon": "instantaneous conversion rate",
+    "who_counts": "the energy consumer",
+    "sign_source": "set by the comparing field (photovoltaics); higher conversion is better",
+    "logic": "classical bivalent",
+    "observer_access": "verified"
+  }
+}

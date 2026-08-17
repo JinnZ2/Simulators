@@ -1,0 +1,4 @@
+SPEC INCOMPLETE -- run validate.py first
+
+  [expected] boundary -- Where does the organism end and the environment begin? Consequence delivery crosses this line, and which side a quantity sits on is the object_of field the whole comparator keys on.
+  [expected] actors -- Who is in the loop? A provisioning agent between organism and environment is a third actor, and quantities about it belong to neither of the other two.

@@ -1,0 +1,10 @@
+{
+  "model_name": "Gamma-70B",
+  "criteria_artifact": "CodeBench",
+  "criteria_version": "v3.0",
+  "score": 0.78,
+  "score_type": "accuracy",
+  "timestamp": "2024-09-01T00:00:00Z",
+  "source_url": "",
+  "notes": "Post-trained on CodeBench v3.0"
+}

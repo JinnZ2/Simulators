@@ -16,7 +16,7 @@ retro_sim_stack.py   second replay, declared differently. disagrees
                      with the first about SIM-B, on purpose.
 SIM_STACK_BACKTRACE.md  the audit these guards were back-traced from
 AUDIT_NOTES.md       what broke, what was fixed, what is a limit
-tests/               66 tests. run: python3 -m unittest discover tests
+tests/               69 tests. run: python3 -m unittest discover tests
 ```
 
 ```
@@ -42,6 +42,14 @@ POST  ratio across unlike objects -> void
       claim with no named support -> unsupported, excluded
       physical claim resting on generator-level support
         -> qualified, not supported
+      physical claim with NO physical-level support at all
+        -> qualified. a residual count is a property of the
+           classifier; an artifact floor a property of the
+           estimator. neither becomes a property of the
+           system by being counted.
+        -> does not fire when physical support is present:
+           "the separation exceeds the error bar" needs
+           the error bar
       convergence claim -> must name what the results share
       divergence -> the author's explicit call, or NOT ASSESSED.
         never inferred by comparing two prose strings
@@ -50,6 +58,18 @@ POST  ratio across unlike objects -> void
 Every denial writes `gate_<SIM>.denied.json` before raising. A guard
 that stops a run has to leave a record, or it reads as never having
 fired.
+
+There is one gate. Everything else imports it:
+
+```
+GATE_SRC = os.environ.get("GATE_SRC", ".../reasoning-gate")
+sys.path.insert(0, GATE_SRC)
+from gate import Gate, Resolution, Control
+```
+
+`../tools/check_gate_drift.py` finds any copy, drifted or not, and
+`../tests/test_gate_drift.py` fails the suite if one lands. Five
+pre-repair copies arrived across three drops before that existed.
 
 ## Status
 

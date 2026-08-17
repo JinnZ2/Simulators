@@ -1,0 +1,94 @@
+==========================================================================
+THE DIAL DROP, THROUGH THE GATE THE LAST DROP PRODUCED
+==========================================================================
+gate: /home/user/Simulators/reasoning-gate
+
+==========================================================================
+DIAL-KNEE   the knee locations
+==========================================================================
+  DENIED at pre().
+
+  [G-RES] resolution not declared or instrument coarser than feature: output is not admissible | shoulder-to-shoulder ambiguity vs the knee shift being read: instrument 3.55579 x margin 2 > feature 2.98526
+
+  The rule can land on either curvature extremum, so it
+  localises the knee no better than the 3.56 log-units between
+  them -- a factor of 35x in tokens. The shift it is being
+  used to detect is 2.99 log-units. The ambiguity is larger
+  than the effect before the margin is applied at all.
+
+  Note what did NOT catch this. G-FIT asks for a discrimination
+  argument and gets a sentence; it cannot check whether the
+  statistic actually names one point. The ambiguity only became
+  a denial once it was written as two numbers for G-RES. See
+  README 'Where the gate did not help'.
+
+==========================================================================
+DIAL-GRAD   the gradient and cross-gradient
+==========================================================================
+
+GATE DIAL-GRAD
+  expected : dQ/d(log B) at fixed budget peaks at intermediate D_r, so the cross-gradient changes sign there
+  observed : gradient peaks at D_r = 3.00 with an interior sign change in the cross-gradient, as predicted
+  diverged : no
+  control  : trivial limit                run
+  control  : saturated limit              run
+  resolve  : finite-difference step vs D_r scale ok
+  generator-level (no physical claim permitted): peak_D_r, peak_gradient
+  claim    : [supported] dQ/d(log B) at fixed budget peaks at intermediate difficulty, so the cross-gradient has an interior zero
+  claim    : [qualified] a reasoning model gains most from extra thinking on intermediate-difficulty problems
+             ^ physical scope claim resting on generator-level support: peak_D_r, peak_gradient
+  finding  : [G-LAYER] untagged quantity: cannot be recorded
+             ^ a reasoning model gains most from extra thinking on intermediate-difficulty problems | physical scope claim resting on generator-level support: peak_D_r, peak_gradient
+
+  Two claims on identical support. The generator-scoped one is
+  supported: it is a statement about the curve in dial_response.py,
+  and that curve is what was measured. The second says the same
+  thing about a reasoning model and is downgraded to qualified,
+  because every quantity under it is generator-level.
+
+  That gap is the whole finding. The maths is fine. What is missing
+  is a measured quality-vs-budget curve from a real model, which
+  would move peak_D_r from generator to physical and let the second
+  claim stand.
+
+==========================================================================
+DIAL-SYNTH   'the convergence point is interior visibility'
+==========================================================================
+
+GATE DIAL-SYNTH
+  expected : if the four are independent, agreement is evidence
+  observed : the four domains are surveyed by one writer to one thesis; the agreement is a property of the selection as much as of the literature
+  diverged : YES
+  control  : shared-source check          run
+  resolve  : survey granularity vs claimed convergence ok
+  claim    : [qualified] convergence across reasoning, learning, exploring, harnesses
+
+  G-IND does not refuse the claim. Interior visibility may well be
+  the right reading. It requires the shared input named, which
+  turns 'four domains converge' into a qualified claim about one
+  survey -- and that is the honest version.
+
+==========================================================================
+READING
+==========================================================================
+
+  Three declarations, three different outcomes, none of them "wrong drop".
+
+  DIAL-KNEE denies at pre() on G-RES. Writing the rule's positional
+  ambiguity as a number makes it 3.56 log-units -- a 35x span in tokens --
+  against a knee shift of 2.99 that it is meant to detect. The knee table
+  never gets recorded.
+
+  DIAL-GRAD passes and splits. The same two numbers support a
+  generator-scoped claim and fail to support the physical one, which G-LAYER
+  downgrades to qualified. This is the cheapest possible statement of what
+  the drop is missing: not better maths, a measurement.
+
+  DIAL-SYNTH passes with its convergence qualified. Four domains summarised
+  by one author to one thesis are not four independent witnesses.
+
+  The gate was built from an audit of a fractal-geometry drop. It transfers
+  to a survey of reasoning research without modification, which is one more
+  sample against its own n=1 caveat -- and the guard that fires hardest here,
+  G-RES on an ambiguous knee, is the same guard that fired on SIM-C's knee.
+

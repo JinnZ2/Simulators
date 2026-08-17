@@ -1,0 +1,178 @@
+
+CORPUS LOOP: COHERENCE UP, COUPLING DOWN
+substrate = 240 values the system did not author; seed 20260816
+
+========================================================================
+1  coherence and coupling separate
+========================================================================
+  lam = 0.12   initial corpus bias = 0.35   240 items, 24 gens
+
+  gen   coupling err     D1 coherence     D2 corpus shift
+  --------------------------------------------------------------
+  0     0.3604           0.0677           0.05203
+  4     0.3861           0.0574           0.01537
+  8     0.3945           0.0539           0.00902
+  12    0.4021           0.0517           0.00607
+  16    0.4070           0.0500           0.00475
+  20    0.4115           0.0489           0.00420
+  23    0.4141           0.0481           0.00353
+
+  coupling  0.3604 -> 0.4141   WORSE   (needs the substrate)
+  D1        0.0677 -> 0.0481   BETTER   (computable inside)
+  D2        0.05203 -> 0.00353  QUIETER   (computable inside)
+
+  Both statistics computable without the substrate improve or go
+  quiet. The one that needs an unauthored reference degrades.
+
+  Control, lam = 0 (fit is the identity on the corpus mean):
+    coupling  0.3557 -> 0.3620   drift +0.0063
+    the loop is a fixed point and the separation does not appear.
+    So the effect is carried by lam, not by feedback alone.
+
+========================================================================
+2  model-vs-corpus consistency: CONSTANT_SILENT, structurally
+========================================================================
+  detector D1: fire when the model departs from the corpus it was
+  fitted to. The cheapest available check, and the one a system
+  can always run on itself.
+
+  gen   D1               coupling err    
+  ----------------------------------------
+  0     0.06767          0.3604          
+  4     0.05744          0.3861          
+  8     0.05390          0.3945          
+  12    0.05167          0.4021          
+  16    0.05004          0.4070          
+  20    0.04888          0.4115          
+  23    0.04807          0.4141          
+
+  monotonically non-increasing: True
+  fell by 29.0% while coupling error rose by 14.9%
+
+  D1 = lam x (spread of corpus item means about their pooled
+  mean). Every generation shrinks that spread and re-injects the
+  shrunk values, so D1 decays -- slower than geometrically, since
+  the pool accumulates and old observations are not evicted. It is
+  not measuring drift. It is measuring how much of the corpus the
+  model has yet to write, and it falls BECAUSE the drift is
+  proceeding.
+
+  This is not an empirical result -- it is what the arithmetic
+  says. Cf. ../null-harness/ CONSTANT_SILENT: a gate whose fire
+  branch is unreachable by construction.
+
+========================================================================
+3  corpus-shift detector: fires, and does not discriminate
+========================================================================
+  detector D2: fire when the corpus moves between generations.
+  A real design -- this is what a distribution-shift monitor
+  does -- and unlike D1 its fire branch is reachable.
+
+  Run as a ../null-harness/ sweep:
+    known signal  degrade arm, coupling gets WORSE
+    known null    improve arm, coupling gets BETTER
+  identical in every line but the provenance of the injected
+  observations.
+
+  lam     coupling deg  coupling imp  D2 peak deg   D2 peak imp  
+  ----------------------------------------------------------------
+  0.02    0.3635        0.0234        0.03622       0.17753      
+  0.04    0.3690        0.0304        0.03826       0.17753      
+  0.08    0.3884        0.0493        0.04425       0.17753      
+  0.12    0.4141        0.0703        0.05203       0.17753      
+  0.20    0.4694        0.1138        0.07049       0.17753      
+  0.30    0.5300        0.1691        0.09605       0.17753      
+  0.45    0.5933        0.2526        0.13636       0.17753      
+
+  coupling direction is unambiguous: degrade ends worse than it
+  started in 7 of 7 rows, improve ends better in 7 of 7.
+
+  The null column is constant in lam because the improve arm
+  never receives a model output, so lam is not in its path. That
+  is the arms being identical except for provenance, not a bug.
+
+  Now sweep a threshold on D2 over all 168 signal and 168 null
+  samples and ask what any threshold can buy:
+
+  threshold      TP         FP         TP - FP   
+  ------------------------------------------------
+  0.00292        0.994      1.000      -0.006    
+  0.03784        0.060      0.083      -0.024    
+  0.07277        0.012      0.042      -0.030    
+  0.10769        0.006      0.042      -0.036    
+  0.14261        0.000      0.042      -0.042    
+  0.17753        0.000      0.000      0.000     
+
+  best separation anywhere on the sweep:
+    threshold 0.17753   TP 0.000   FP 0.000   TP-FP 0.000
+  FP >= TP at EVERY threshold on the sweep: True
+
+  verdict: NO_DISCRIMINATION
+
+  Stronger than undiscriminating: on this run D2 is
+  ANTI-correlated with what matters. The improving arm moves
+  the corpus MORE than the degrading one, because correcting a
+  0.35 bias is a bigger displacement than shrinking toward a
+  pooled mean. A monitor tuned to fire on real degradation
+  fires harder on real repair. The only threshold with
+  TP - FP = 0 is the one that fires on nothing.
+
+  D2 reports that the corpus moved. It does not report which way,
+  because it is computed entirely from quantities the loop
+  produced. The sign of the movement is the whole question, and
+  the sign requires a reference no actor inside the loop wrote.
+
+========================================================================
+4  scheduled anchoring recovers; triggered anchoring never runs
+========================================================================
+  no anchoring              final coupling err  0.4141
+
+  anchor every     frac       final coupling  
+  ----------------------------------------------
+  12               1.00       0.3867          
+  8                1.00       0.3572          
+  6                1.00       0.3280          
+  4                1.00       0.2747          
+  3                1.00       0.2296          
+  2                1.00       0.1629          
+
+  every 4, frac 0.25       final coupling  0.3655
+  every 4, frac 0.50       final coupling  0.3287
+  every 4, frac 1.00       final coupling  0.2747
+
+  Same anchoring, triggered by internal confidence instead of the
+  calendar. The trigger is D1 from section 2.
+
+    D1 at gen 0    0.06767
+    D1 at gen 23   0.04807
+    generations where D1 exceeds its gen-0 value: 0
+
+    So a confidence-triggered anchor interval never fires, and
+    its final coupling error is the no-anchoring number, 0.4141.
+
+  The schedule is not a convenience. It is the only form the
+  interval can take, because the statistic that would trigger it
+  is computed inside the layer it would be detecting.
+
+========================================================================
+READING
+========================================================================
+
+  The separation needs no bad actor. It needs a fit that is not an
+  identity map and a path from output back to input. At lam = 0 the loop
+  is a fixed point and nothing happens; every lam > 0 compounds.
+
+  D1 -- model against the corpus it was fitted to -- is CONSTANT_SILENT by
+  arithmetic, and its statistic IMPROVES as the drift completes, because it
+  is measuring how much of the corpus the model has yet to write.
+
+  D2 -- corpus now against corpus then -- is a real detector with a
+  reachable fire branch, and on the null-harness sweep it does not
+  discriminate: the degrading and improving arms are identical in every
+  line but the provenance of what is injected, and no threshold on D2
+  separates them. Direction is not in the signal.
+
+  So the interval has to be scheduled. A confidence-triggered anchor never
+  runs: the quantity that would trigger it is the quantity that goes quiet
+  as the drift finishes.
+

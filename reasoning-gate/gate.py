@@ -361,15 +361,29 @@ class Gate(object):
         A claim names the recorded quantities that support it. G-SUP, G-LAYER
 
         `scope` is what the claim is about: "physical" by default, or
-        "generator" for a claim explicitly about the code that produced the
-        data. A physical claim resting on generator-level support is
-        downgraded to "qualified" and a G-LAYER finding is recorded.
+        "generator" / "instrument" for a claim explicitly about the code that
+        produced the data or about the measuring apparatus.
 
-        Downgraded, not refused — the same shape G-IND uses for convergence
-        across shared inputs. The support is real; what it cannot carry is a
-        statement about the modelled system. Before this, summary() would
-        print "generator-level (no physical claim permitted)" directly above
-        a claim resting on one, recorded as supported, with no finding.
+        Two downgrades, both to "qualified" with a G-LAYER finding:
+
+          1. Any generator-level support under a non-generator-scope claim.
+             A parameter of the code is never about the modelled system.
+
+          2. A physical-scope claim with NO physical-level support at all.
+             Resting entirely on instrument and generator quantities is a
+             promotion without a step: a residual count is a property of the
+             classifier, an artifact floor a property of the estimator, and
+             neither becomes a property of the system by being divided or
+             counted.
+
+        Rule 2 does not fire when physical support is present. A physical
+        claim legitimately uses instrument quantities as bounds -- "the
+        separation exceeds the estimator's error bar" needs the error bar --
+        and downgrading those would be wrong.
+
+        Downgraded, not refused, which is the shape G-IND uses for
+        convergence across shared inputs. The support is real; what it
+        cannot carry is a statement about the modelled system.
         """
         self._require_open()
         supported_by = list(supported_by or [])
@@ -397,14 +411,19 @@ class Gate(object):
             "support_layers": layers,
             "status": "supported",
         }
+        note = None
         if "generator" in layers and scope != "generator":
             gen = sorted(q for q in supported_by
                          if self.quantities[q]["layer"] == "generator")
+            note = ("%s scope claim resting on generator-level support: %s"
+                    % (scope, ", ".join(gen)))
+        elif scope == "physical" and "physical" not in layers:
+            note = ("physical scope claim with no physical-level support: "
+                    "rests entirely on %s" % ", ".join(layers))
+        if note:
             entry["status"] = "qualified"
-            entry["layer_note"] = (
-                "%s scope claim resting on generator-level support: %s"
-                % (scope, ", ".join(gen)))
-            self._note("G-LAYER", "%s | %s" % (text, entry["layer_note"]))
+            entry["layer_note"] = note
+            self._note("G-LAYER", "%s | %s" % (text, note))
         self.claims.append(entry)
         return self
 

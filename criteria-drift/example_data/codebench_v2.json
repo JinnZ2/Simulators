@@ -1,0 +1,25 @@
+{
+  "artifact_name": "CodeBench",
+  "version_id": "v2.0",
+  "timestamp": "2023-01-01T00:00:00Z",
+  "frame": {
+    "boundary": "function-level correctness plus compilation and runtime. Excludes security and style.",
+    "horizon": "single-turn generation. No multi-step or interactive tasks.",
+    "who_counts": "passing test cases and runtime correctness",
+    "sign_source": "accuracy chosen by benchmark authors",
+    "logic": "classical",
+    "observer_access": "unknown"
+  },
+  "rubric_dimensions": [
+    "syntactic_correctness",
+    "test_pass_rate",
+    "runtime_validity"
+  ],
+  "rubric_weights": {
+    "syntactic_correctness": 0.2,
+    "test_pass_rate": 0.5,
+    "runtime_validity": 0.3
+  },
+  "exemplar_count": 164,
+  "notes": "Added runtime validation. Criteria got stricter."
+}

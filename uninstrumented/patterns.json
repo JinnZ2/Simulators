@@ -1,0 +1,130 @@
+{
+  "_note": "CC0-1.0. Triggers are surface tells, not classifiers. Every hit is a candidate for triage, not a finding. 'check' is the question a human answers to keep or discard the hit.",
+
+  "STORAGE": {
+    "reads": "medium cannot hold the shape; knowledge conditional on a body or a site",
+    "triggers": [
+      "no data (exist|exists|available)",
+      "understudied",
+      "anecdotal",
+      "hard to (quantify|measure|formalize)",
+      "difficult to (quantify|measure|formalize)",
+      "not well (understood|characterized|documented)",
+      "tacit",
+      "craft knowledge",
+      "rules? of thumb",
+      "learned on the job",
+      "(passed|handed) down"
+    ],
+    "check": "Is the quantity conditional on a specific body or site? If yes, absence is a property of the storage format, not of the knowledge."
+  },
+
+  "SCALAR DEMAND": {
+    "reads": "a function over situations collapsed to one number",
+    "triggers": [
+      "on a scale of",
+      "(rate|rated|rating) (yourself|your|their|his|her)",
+      "overall (level|score|rating|measure)",
+      "in general, how",
+      "composite (score|index|measure)",
+      "aggregate (score|index|measure)",
+      "(summed|averaged) across (items|domains|subscales)",
+      "single (score|number|metric|index)"
+    ],
+    "check": "Does the response vary by situation, target, or aspect? If yes, the mean discards the discrimination and calibration scores as mediocrity."
+  },
+
+  "AUTHORED REFERENCE": {
+    "reads": "the reference was produced by the party being measured",
+    "triggers": [
+      "state of the art",
+      "gold standard",
+      "benchmark",
+      "ground truth",
+      "human (preference|evaluation|rating|judgment)",
+      "expert (consensus|panel|annotation)",
+      "(annotation|labeling) guidelines",
+      "leaderboard"
+    ],
+    "check": "Who authored the reference, when was it last revised, and can the measured party edit it? If revised alongside the thing measured, the reported delta mixes two moving terms."
+  },
+
+  "BUDGET BOUNDARY": {
+    "reads": "a ratio comparing a closed budget to an open one",
+    "triggers": [
+      "more efficient than",
+      "less efficient than",
+      "(higher|greater|improved) efficiency",
+      "conversion efficiency",
+      "inefficien(t|cy|cies) (at|in|as)",
+      "outperforms",
+      "cost[- ]effective",
+      "(yield|output) per",
+      "orders of magnitude (better|more)",
+      "\\d+(?:\\.\\d+)?\\s*%[^.!?]{0,90}?\\d+(?:\\.\\d+)?\\s*%"
+    ],
+    "check": "Name every input and disposal path for both sides. Are both budgets closed at the same boundary, and who set the line?"
+  },
+
+  "SCORED AS WASTE": {
+    "reads": "a maintained channel priced as cost by the instrument's own accounting",
+    "triggers": [
+      "overhead",
+      "redundan(t|cy)",
+      "inefficien(t|cy|cies)",
+      "unnecessary",
+      "wasteful",
+      "idle (time|capacity)",
+      "slack",
+      "non[- ]?productive",
+      "downtime",
+      "eliminate waste",
+      "streamlin(e|ed|ing)",
+      "\\blean\\b"
+    ],
+    "check": "What does it return, and on what interval? If the return is conditional on a change that has not happened in the sampled range, the accounting cannot see it."
+  },
+
+  "PROXY SUBSTITUTION": {
+    "reads": "an enforceable measure displacing the target it stood in for",
+    "triggers": [
+      "compliance",
+      "(as a )?proxy for",
+      "surrogate (measure|endpoint|marker)",
+      "we (use|used) .{0,30} as a measure of",
+      "operationaliz(e|ed|ing)",
+      "(hours|minutes|counts?) of",
+      "self[- ]reported (adherence|compliance)"
+    ],
+    "check": "What was the proxy aimed at? Name a case where the proxy passes and the target fails. If one exists and is common, the proxy is the compliance object now."
+  },
+
+  "MODALITY": {
+    "reads": "apparatus built in a channel the subject does not use",
+    "triggers": [
+      "failed to (demonstrate|show|exhibit)",
+      "showed no (evidence|sign)",
+      "(lack|absence) of (evidence|ability|capacity)",
+      "were unable to",
+      "did not (learn|acquire|perform)",
+      "below chance",
+      "standardized (task|test|battery|protocol)",
+      "laboratory (task|setting|conditions)"
+    ],
+    "check": "Was the response channel one the subject uses? Absence of a reading in the wrong modality is a property of the apparatus."
+  },
+
+  "AUDIT ASYMMETRY": {
+    "reads": "hedges attached to one account type and absent from the other in the same document",
+    "triggers": [
+      "(anecdotal|self[- ]reported|subjective) (account|report|evidence)",
+      "(only|just) one (account|case|report|perspective)",
+      "should be interpreted with caution",
+      "may be biased",
+      "(unverified|uncorroborated)",
+      "critics (say|argue|claim)",
+      "(some|certain) (drivers|workers|patients|residents) (say|claim|report|complain)"
+    ],
+    "check": "Find the incumbent account in the same document. Is it hedged? Count hedges per account type; the ratio is the measurement."
+  }
+}

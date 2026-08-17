@@ -1,0 +1,144 @@
+
+CHECK_FRAME v1 -> v2
+both versions loaded side by side, neither modified
+
+========================================================================
+1  DF_002 -- repaired. Omission returns the OPEN verdict
+========================================================================
+  The rule the document calls load-bearing:
+
+      UNKNOWN is a legal value. OMISSION is not.
+      An unpopulated field is a visible gap. An omitted field
+      reads as absence of the issue.
+
+  So omission is the worse of the two, and the tool should treat
+  it at least as cautiously.
+
+  side B       v1 (delivered)             v2 repaired               
+  ----------------------------------------------------------------------
+  omitted      NOT DIRECTLY COMPARABLE    UNDETERMINED              
+  'unknown'    UNDETERMINED               UNDETERMINED              
+
+  Both now return the OPEN verdict. `unknowns()` reads
+  `str(frame.get(f, "")).strip().lower() == "unknown"`, so a
+  MISSING field became "", was not 'unknown', fell through to
+  the core diff and compared as a value -- the settled verdict
+  for the case the doc calls worse. `compare()` now checks
+  `omitted()` first and names the missing field.
+
+  The run that used to contradict itself:
+
+      a.json: all six fields declared
+      b.json: OMITTED field 'horizon'. Write 'unknown' instead -- omission reads as absence of the issue.
+      
+      VERDICT: UNDETERMINED
+               core field omitted: a=- b=['horizon'] -- an omitted field is a gap, not a value. Write 'unknown' to make it visible.
+
+  The OMITTED warning and the verdict now agree. Before the
+  repair the same stdout printed 'omission reads as absence of
+  the issue' and, three lines down, NOT DIRECTLY COMPARABLE on
+  that field -- the settled verdict, for the case the doc calls
+  the worse one.
+
+========================================================================
+2  DF_004 -- repaired. The exit code carries the verdict
+========================================================================
+  v1 returned rc=1 on a malformed block. v2 as delivered
+  returned 0 on every path except a missing argument, so
+  `check_frame.py a b && use_both` passed on two results the
+  tool had just said do not compare.
+
+    malformed block (field omitted)    rc = 2
+    well-formed, not comparable        rc = 1
+    identical frames                   rc = 0
+
+      DIRECTLY COMPARABLE      -> 0
+      LOGIC MISMATCH           -> 1
+      NOT DIRECTLY COMPARABLE  -> 1
+      UNDETERMINED             -> 2   (not resolved, not failed)
+
+  UNDETERMINED is deliberately not 1. It is neither a pass nor a
+  failure, and a caller that treats it as either has resolved a
+  gap the tool refused to resolve.
+
+  The repair is only REACHABLE because of the v2 rewrite:
+  compare() returns a value, so there is a verdict to route.
+  DF_008 called that the rewrite's real gain; this is it spent.
+
+========================================================================
+3  new in v2 -- a single verdict loses what v1 printed
+========================================================================
+  A pair that is BOTH undetermined on one core field and
+  genuinely different on another:
+
+      A.horizon = 'instantaneous conversion rate'
+      B.horizon = 'unknown'
+      A.boundary and B.boundary differ substantively
+
+    v2:  UNDETERMINED
+         unknown fields present: a=- b=['horizon']
+
+    v1:  UNDETERMINED + NOT DIRECTLY COMPARABLE
+
+  v2 checks `unknowns()` first and returns, so UNDETERMINED
+  preempts and the boundary difference is never reported. v1
+  printed both.
+
+  The precedence is RIGHT -- an unknown field should not be
+  resolved into a comparability claim -- and the loss is in the
+  return type, not the ordering. A verdict plus a findings list
+  keeps both, which is the shape ../../reasoning-gate/ already
+  uses: one status, and notes that do not change it.
+
+========================================================================
+4  DF_007 still holds -- nothing in the block adjudicates
+========================================================================
+  A  differ on a convention (who_counts)
+       v2: NOT DIRECTLY COMPARABLE
+  B  differ on a boundary that does not close -- an input that
+     physically crossed it entered the budget as zero
+       v2: NOT DIRECTLY COMPARABLE
+
+  same verdict: True
+
+  v2's Cost and Growth sections are new and both are layer-1
+  statements. Nothing added between versions evaluates anything,
+  so a frame whose budget does not close still gets the verdict a
+  frame that counts different people gets.
+
+  The Growth rule is worth stating because the drop already
+  follows it: 'the format grows by adding a declared field, never
+  by widening an existing one. Widening is the aggregation
+  failure.' patterns.json adds PROXY SUBSTITUTION as an EIGHTH
+  mechanism rather than widening one of the seven -- which is the
+  rule applied to a different artifact in the same drop.
+
+========================================================================
+READING
+========================================================================
+
+  v2 is a rewrite and its main gain is real: compare() returns a
+  (verdict, why) pair instead of printing, so the verdict is scriptable
+  for the first time.
+
+  DF_002 is repaired. A missing core field used to become the empty string,
+  fall through to the value comparison, and produce NOT DIRECTLY COMPARABLE
+  where the same gap declared as `unknown` correctly produced UNDETERMINED
+  -- the more confident verdict for the case the doc calls worse. compare()
+  now checks omitted() first and returns the open verdict, naming the field.
+
+  DF_004 is repaired. The verdict is routed into the exit code, with
+  UNDETERMINED at 2 rather than 1 because it is neither a pass nor a
+  failure. Only reachable because the v2 rewrite made compare() return a
+  value.
+
+  New in v2: the single-verdict return preempts. A pair that is
+  undetermined on one core field and substantively different on another
+  comes back UNDETERMINED with the difference unreported, where v1 printed
+  both. The precedence is right; the return type is what loses. A verdict
+  plus a findings list keeps both.
+
+  DF_007 still holds. Cost and Growth are both layer-1 additions, nothing
+  added evaluates anything, and a frame whose budget does not close still
+  scores identically to one that merely counts different people.
+

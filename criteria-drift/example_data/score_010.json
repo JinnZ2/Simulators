@@ -1,0 +1,10 @@
+{
+  "model_name": "Delta-350M",
+  "criteria_artifact": "CodeBench",
+  "criteria_version": "v3.1-hard",
+  "score": 0.05,
+  "score_type": "accuracy",
+  "timestamp": "2025-01-01T00:00:00Z",
+  "source_url": "",
+  "notes": "Retrospective evaluation on hard subset"
+}

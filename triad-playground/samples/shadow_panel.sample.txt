@@ -1,0 +1,113 @@
+
+SHADOW PANELS: WITH OR WITHOUT THE HUMAN
+A study of a proposed protocol. No shadow panel was run.
+
+==========================================================================
+1  what each panel composition buys
+==========================================================================
+  N_eff       independent shadows the panel actually contains
+  false-pass  P(shadows agree | panel mean is wrong by > tolerance)
+              -- the rate of confident wrong answers
+
+  panel                                      k   N_eff    spread  false-pass
+  v1 required: human + AI-low + AI-high      3    1.61     1.346       38.2%
+  v1 full: + human_degraded                  4    1.72     1.577       25.1%
+  v1 minus the human                         2    1.14     0.565       84.2%
+  no human, 4 shadows, one model             4    1.22     1.027       50.2%
+  no human, 3 model families                 3    1.93     1.596       26.8%
+  no human, 4 model families                 4    2.18     1.938       12.4%
+  human + 3 model families                   4    2.16     1.929       12.7%
+
+  Reading the table:
+
+  v1's required panel has k = 3 and N_eff = 1.61. Two of its three
+  shadows are one model at two thinking budgets, which share a
+  family bias and are close to one shadow wearing two hats.
+
+  DROP THE HUMAN and it collapses: N_eff 1.61 -> 1.14, false-pass
+  38.2% -> 84.2%. A panel that hands back a confident wrong
+  answer 84 times in a hundred is not a check.
+
+  REPLACE the human with three distinct model families and it is
+  STRONGER than v1's original: N_eff 2.18 vs 1.61, false-pass
+  12.4% vs 38.2%.
+
+  Adding the human back on top of that buys -0.02 in N_eff and
+  +0.3 points of false-pass -- inside the noise of this estimate.
+
+==========================================================================
+2  so: with or without the human?
+==========================================================================
+
+  WITHOUT is fine. WITHOUT DECORRELATION is not.
+
+  The human is not doing anything a human uniquely does. It is supplying an
+  independent failure mode, and in v1's required panel it is the only one
+  present -- because the other two shadows are one model at two budgets.
+
+  Three consequences for the spec:
+
+  1. `ai_low` and `ai_high` should not both be required as if they were two
+     shadows. On one model they are one shadow at two dial settings, which is
+     a reasoning-DIAL measurement, not a shadow-panel measurement. Both are
+     worth doing; they answer different questions.
+
+  2. What should be required is a minimum N_eff, not a minimum count. A panel
+     of four shadows can carry N_eff = 1.2. Counting shadows measures effort,
+     not independence.
+
+  3. If no human is available -- which is most of the time, and the reason
+     the question was asked -- the substitution is THREE MODEL FAMILIES, not
+     three budgets on one. That is a procurement fact, not an epistemics
+     problem: it needs three vendors, not three prompts.
+
+  What the human still uniquely supplies is embodied context: the
+  cold-stiffened proprioception in the first-experiment hypothesis is not a
+  failure mode any model has. That argues for keeping a human shadow on
+  physical measurements specifically, and it is a different argument from
+  the decorrelation one.
+
+
+==========================================================================
+3  does the ranking survive the constants?
+==========================================================================
+  The absolute rates depend on the three variance components. The
+  RANKING should not -- it follows from which shadows share which
+  bias. Sweeping the shared/family/independent split:
+
+  (shared, family, ind)  v1 required N_eff      4 families N_eff      
+  (1.0, 0.8, 0.5)        1.62                   2.19                    ok
+  (2.0, 0.4, 0.5)        1.12                   1.16                    ok
+  (0.5, 1.5, 0.5)        1.93                   3.91                    ok
+  (1.0, 0.8, 1.5)        2.52                   3.34                    ok
+  (0.2, 0.2, 1.0)        2.99                   3.98                    ok
+
+  ordering held in 5 of 5 sweeps.
+
+  The last row is the honest edge case: when almost all error is
+  independent, every panel is near-ideal and the composition stops
+  mattering. That is the regime the shadow pattern is unnecessary
+  in, and it is not the regime shadows reading one declaration
+  through one prompt are in.
+
+==========================================================================
+READING
+==========================================================================
+
+  The pattern works without the human, and v1's required panel is weaker than
+  it looks with one.
+
+  N_eff is the quantity the spec is missing. It already requires a minimum of
+  two controls; it should require a minimum N_eff over the shadow panel for
+  the same reason, and for the same kind of number. Counting shadows measures
+  how much work was done. The participation ratio measures how much of that
+  work was independent, and ../model-ecology/phylogeny.py already computes it
+  for a family of estimators -- fifteen of them turning out to carry
+  N_eff = 2.48.
+
+  None of this has been measured on a real panel. The variance components are
+  chosen, not fitted, and the ranking is what survives the sweep -- not the
+  rates. Fitting them needs the same thing every other open claim in this
+  folder needs: one measurement where several observers read one instrument
+  against an independently logged reference.
+

@@ -1,0 +1,337 @@
+
+UNINSTRUMENTED -- 8 entries, 8 mechanisms
+every entry is a question until something measures it
+
+========================================================================
+THE REGISTER, sorted by mechanism
+========================================================================
+
+  MODALITY -- apparatus in the wrong channel
+
+    QUANTITY       capability in a non-human configuration
+    VISIBLE AS     absence of capability
+    WOULD MEASURE  bidirectional protocol; each side sets tasks in its own
+                    modality
+    CONFIDENCE     high on the exclusion, unmeasured on magnitude
+
+  STORAGE -- medium cannot hold the shape
+
+    QUANTITY       calibration between one body and one environment (creek
+                    crossing: surface pattern -> force, at temperature, at season,
+                    plus the dry-arrival sequence)
+    VISIBLE AS     "no literature exists"
+    WOULD MEASURE  reconstruction-and-correction capture; the correction is the
+                    product
+    CONFIDENCE     high. The absence is a property of the medium, not of the
+                    knowledge.
+    WORKED IN      ../inverseminar/ ; ../anchor-interval/ ANC_011
+
+  SCALAR_DEMAND -- function collapsed to a number
+
+    [also, primary is MODALITY]
+                    capability in a non-human configuration
+                    the tasks are scored on a human-derived scale, so a different
+                    competence integrates to a low number rather than to no number
+
+    QUANTITY       response as a function over situations (empathy(framework,
+                    target, aspect))
+    VISIBLE AS     middling score, indistinguishable from flat moderate response
+    WOULD MEASURE  one added field: how determinate was this item for you, and
+                    what did you assume to answer it
+    CONFIDENCE     high on mechanism. Cognitive-interview work already
+                    demonstrates the discard.
+
+  BUDGET_BOUNDARY -- closed budget compared to open
+
+    QUANTITY       efficiency under a closed budget (tree: fabrication, repair,
+                    replication, disposal all inside)
+    VISIBLE AS     the tree is inefficient at photosynthesis
+    WOULD MEASURE  W14 BUDGET CLOSURE -- name every input and disposal path,
+                    which side of the line, and who set the line
+    CONFIDENCE     high
+    WORKED IN      ../declared-frame/ DF_005, DF_007 ; K18 in ../measurement-fork/
+
+    [also, primary is SCORED_AS_WASTE]
+                    practice rate during the stable interval (play, exploration,
+                    off-hours kinesthetic practice, the crossing when nothing is
+                    at stake)
+                    the return falls outside the sampling window, which is a
+                    boundary placed in time rather than in space
+
+  AUTHORED_REFERENCE -- reference produced by the measured party
+
+    QUANTITY       model drift
+    VISIBLE AS     a number attributed to the model
+    WOULD MEASURE  fixed old benchmark scored alongside the contemporary one;
+                    divergence isolates the criteria term
+    CONFIDENCE     high on structure. Sign unrecoverable from inside.
+    NOTE           seven terms move between releases; one is reported. Contrast
+                    case: CASP -- blind, periodic, externally referenced,
+                    reference cannot be edited from inside.
+    WORKED IN      ../anchor-interval/moving_reference.py ; ANC_005..008
+
+    [also, primary is AUDIT_ASYMMETRY]
+                    reliability of an account
+                    the corpus that sets what counts as a normal account was
+                    produced by the side that goes unaudited
+
+  PROXY_SUBSTITUTION -- enforceable measure displaces the target it stood in for
+
+    QUANTITY       recovery-permitting environment during the off-duty interval
+                    (posture change, standing, walking distance, temperature
+                    control, separation of work space from rest space)
+    VISIBLE AS     compliance
+    WOULD MEASURE  the environment, not the clock: floor area, standing height,
+                    walking distance available, temperature range, and whether the
+                    rest space is the work space. Then health outcome against
+                    those, not against hours off.
+    CONFIDENCE     high on the mechanism. The outcome data for the occupation is
+                    not ambiguous; the attribution is.
+    NOTE           hours-since-last-drive is a clock reading -- cheap, auditable,
+                    enforceable -- substituted for fitness to drive. Ten hours in
+                    a 4x6 sleeper scores identically to ten hours in conditions
+                    that permit recovery. The rule was written from a context
+                    where the missing variable arrived free with the arrangement:
+                    off-duty meant leaving a building. For one occupation it was
+                    removed structurally and nothing re-derived the rule.
+
+  AUDIT_ASYMMETRY -- guard fires on one side only
+
+    [also, primary is AUTHORED_REFERENCE]
+                    model drift
+                    the contemporary benchmark is not checked against the fixed
+                    one, only the reverse
+
+    QUANTITY       reliability of an account
+    VISIBLE AS     neutrality
+    WOULD MEASURE  count caveats issued per account type across a transcript
+                    corpus; the ratio is the measurement
+    CONFIDENCE     high. Observed directly, this session.
+    NOTE           the guard fires on surface features -- a named dispute, a
+                    person reporting. The institutional account presents no such
+                    surface, so it is absorbed uncaveated. Filter strength scales
+                    with distance from corpus, which is the same variable as
+                    novelty.
+
+  SCORED_AS_WASTE -- component read as cost by the instrument's own accounting
+
+    QUANTITY       practice rate during the stable interval (play, exploration,
+                    off-hours kinesthetic practice, the crossing when nothing is
+                    at stake)
+    VISIBLE AS     expenditure with zero return; rest reclassified from practice
+    WOULD MEASURE  K14 / K15 / K16 with the mediation prediction and lag order
+    CONFIDENCE     high on the mechanism. Decay rate unmeasured.
+    WORKED IN      ../measurement-fork/ K14-K16, MF_014, MF_015
+
+    [also, primary is PROXY_SUBSTITUTION]
+                    recovery-permitting environment during the off-duty interval
+                    (posture change, standing, walking distance, temperature
+                    control, separation of work space from rest space)
+                    the environment that permits recovery is an unpriced input
+                    that arrived with the arrangement; an efficiency instrument
+                    reads its removal as a saving
+
+========================================================================
+1  does sorting by mechanism cut across field?
+========================================================================
+  The register's stated reason for sorting by mechanism rather
+  than by field: it lets a case from evolutionary biology sit
+  next to one from survey methodology and be recognizably the
+  same failure. That is checkable.
+
+  mechanism              field                          role
+  ------------------------------------------------------------------
+  MODALITY               animal cognition               primary
+  STORAGE                tacit skill                    primary
+  SCALAR_DEMAND          animal cognition               also
+  SCALAR_DEMAND          survey methodology             primary
+  BUDGET_BOUNDARY        energy accounting              primary
+  BUDGET_BOUNDARY        behavioural ecology / industri also
+  AUTHORED_REFERENCE     ML evaluation                  primary
+  AUTHORED_REFERENCE     model behaviour                also
+  PROXY_SUBSTITUTION     transport regulation           primary
+  AUDIT_ASYMMETRY        ML evaluation                  also
+  AUDIT_ASYMMETRY        model behaviour                primary
+  SCORED_AS_WASTE        behavioural ecology / industri primary
+  SCORED_AS_WASTE        transport regulation           also
+
+  8 entries, 8 distinct fields, 8 mechanisms
+
+  UNI_003 landed: entries now sort under a PRIMARY plus a list,
+  so a mechanism can hold entries filed elsewhere. That is what
+  makes this check able to return anything but zero.
+
+  mechanisms holding more than one field: 5
+
+  5 mechanism(s) now hold entries from more than one field.
+      AUDIT_ASYMMETRY        ML evaluation | model behaviour
+      AUTHORED_REFERENCE     ML evaluation | model behaviour
+      BUDGET_BOUNDARY        behavioural ecology / industrial skill | energy accounting
+      SCALAR_DEMAND          animal cognition | survey methodology
+      SCORED_AS_WASTE        behavioural ecology / industrial skill | transport regulation
+
+  That is the first evidence the mechanism sort groups across
+  fields rather than restating the field partition -- and it
+  is WEAK evidence, because the secondary mechanisms were
+  hand-assigned in this file rather than arriving as separate
+  cases. The strong version is still UNI_002's original
+  expiry condition: a second entry, filed by someone else,
+  landing under an existing mechanism from a different field.
+
+  Nearest candidate already in the repo: MODALITY currently holds
+  animal cognition. ../reasoning-dial/ RD_009's G-STATE gap -- a
+  self-report from a miscalibrated observer is the quantity in
+  question -- is a different field with arguably the same shape.
+
+========================================================================
+2  the mechanisms are not mutually exclusive
+========================================================================
+
+  [2 applicable] MODALITY
+      capability in a non-human configuration
+      also SCALAR_DEMAND:
+          the tasks are scored on a human-derived scale, so a different
+          competence integrates to a low number rather than to no number
+
+  [1 applicable] STORAGE
+      calibration between one body and one environment (creek
+      crossing: surface pattern -> force, at temperature, at season,
+      plus the dry-arrival sequence)
+
+  [1 applicable] SCALAR_DEMAND
+      response as a function over situations (empathy(framework,
+      target, aspect))
+
+  [1 applicable] BUDGET_BOUNDARY
+      efficiency under a closed budget (tree: fabrication, repair,
+      replication, disposal all inside)
+
+  [2 applicable] AUTHORED_REFERENCE
+      model drift
+      also AUDIT_ASYMMETRY:
+          the contemporary benchmark is not checked against the fixed
+          one, only the reverse
+
+  [2 applicable] SCORED_AS_WASTE
+      practice rate during the stable interval (play, exploration,
+      off-hours kinesthetic practice, the crossing when nothing is
+      at stake)
+      also BUDGET_BOUNDARY:
+          the return falls outside the sampling window, which is a
+          boundary placed in time rather than in space
+
+  [1 applicable] PROXY_SUBSTITUTION
+      recovery-permitting environment during the off-duty interval
+      (posture change, standing, walking distance, temperature
+      control, separation of work space from rest space)
+
+  [2 applicable] AUDIT_ASYMMETRY
+      reliability of an account
+      also AUTHORED_REFERENCE:
+          the corpus that sets what counts as a normal account was
+          produced by the side that goes unaudited
+
+  4 of 8 entries have more than one mechanism with a claim.
+
+  This is not a defect to resolve by tightening definitions. The
+  filing decides what comparison case an entry sits next to, and
+  that is the register's whole function -- so the filing is a
+  CHOICE and should be visible as one. Two entries filed under
+  different mechanisms that share a second mechanism are a pair
+  the sort did not surface.
+
+  Minimal repair, and it changes the schema: carry excluded_by as
+  a PRIMARY plus a list, and sort under all of them. The cost is
+  that an entry then appears more than once, which is the correct
+  cost -- it is in more than one place.
+
+========================================================================
+3  known-null corpus: does anything file that should not?
+========================================================================
+  Every entry in the register states high confidence on the
+  exclusion. A list that only ever admits entries is
+  CONSTANT_FIRES in the ../null-harness/ sense, and the doc's own
+  first line -- 'not a gap log' -- is a rule the structure does
+  not enforce.
+
+  Null corpus: the six instruments graded in
+  ../instrument-epistemology/. Real apparatus, real chains,
+  three of them graded 'mostly assumed'. None should file here.
+
+  instrument                         fidelity   verdict there    files here?
+  ------------------------------------------------------------------------
+  broadband seismometer network      0.800      well grounded    no
+  satellite thermal IR radiometer    0.504      partially grounded no
+  airborne LiDAR biomass             0.514      partially grounded no
+  camera trap array                  0.293      mostly assumed   no
+  IRMS + isotopic mixing model       0.275      mostly assumed   no
+  eDNA metabarcoding assay           0.165      mostly assumed   no
+
+  false entries: 0 of 6
+
+    broadband seismometer network
+        measurand unobservable, chain long, model in the loop -- and
+        reached, via traceable standards. No mechanism fires.
+    satellite thermal IR radiometer
+        M3, heavily model-dependent. Model dependence is not on the
+        list and should not be.
+    airborne LiDAR biomass
+        allometry is a bridge model with known domain limits. Weak
+        grounding.
+    camera trap array
+        detection probability is estimated rather than measured. Weak
+        grounding.
+    IRMS + isotopic mixing model
+        mixing model underdetermined. Weak grounding, and the
+        underdetermination is REPORTED.
+    eDNA metabarcoding assay
+        fidelity 0.165, four blind spots. Still not excluded -- the
+        quantity is reached badly, and every step is named in its own
+        blindness map.
+
+  So the mechanism set discriminates on this corpus. The line it
+  holds is exactly the one the doc states:
+
+      weak grounding      the quantity is reached, badly
+      constitutive        the quantity cannot appear at all,
+      exclusion           and the apparatus is why
+
+  eDNA at 0.165 is the hardest case and it stays out. Every step
+  of its chain is named in its own blindness map, which is what a
+  reached-but-badly quantity looks like. An excluded one has no
+  blindness map, because the exclusion happens before the map is
+  drawn.
+
+  What this does NOT establish: that the register has a reachable
+  fire branch on a case someone would actually bring. The null
+  corpus is six cases chosen because they are well documented,
+  not because they are near the boundary. The near-boundary test
+  is a quantity a field believes it measures and does not, and
+  none of the delivered entries is currently contested by anyone.
+
+========================================================================
+READING
+========================================================================
+
+  The register holds. Eight mechanisms, a closed vocabulary, and the
+  entry structure separates the stated confidence from the shape so the
+  two can move independently.
+
+  Three results on the register itself, none of them fatal and all of
+  them structural:
+
+  The mechanism sort now groups across fields -- 5 mechanisms hold
+  entries from more than one field -- but only because UNI_003's primary-
+  plus-list filing landed and the secondaries were hand-assigned here.
+  Weak evidence. The strong version is a second entry filed independently.
+
+  The mechanisms are not mutually exclusive. The filing decides which
+  comparison case an entry sits next to, so it is a choice and should
+  carry a primary plus a list.
+
+  On a known-null corpus of six externally graded instruments, nothing
+  files that should not, including eDNA at fidelity 0.165. The line
+  between weak grounding and constitutive exclusion holds: a reached-
+  but-badly quantity has a blindness map, an excluded one does not,
+  because the exclusion happens before the map is drawn.
+

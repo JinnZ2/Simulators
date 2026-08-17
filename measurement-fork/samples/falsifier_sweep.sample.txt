@@ -1,0 +1,83 @@
+
+FALSIFIER SWEEP -- can the design fail?
+subject: provisioning_calibration
+
+========================================================================
+1  what the arms declare
+========================================================================
+  measuring probes across the three arms: 17
+  swept: 16    point probes: 1
+
+  swept variable               probes
+  --------------------------------------------------------------
+  perturbation_size            K05@3
+  provisioning_level           C01@2, C02@2, C03@2, C04@2, C05@2, C06@2, K01@2, K02@2, K03@2, K04@2, K06@2, K08@2, K09@2, K10@2
+  stimulus_severity            K07@4
+
+  point probe C07
+      present-day administration by design. The instrument reads one moment; running it across the regime variable would be a different probe, not this one swept.
+
+  MF_017 repaired: `sweep` is a field on quantities.probe(), it
+  defaults to the spec's regime variable, it refuses fewer than
+  two levels, and a point probe must say WHY. Before the repair
+  the field did not exist, so 0 of 17 could declare anything.
+
+========================================================================
+2  each declared falsifier against the swept variables
+========================================================================
+  falsifier          terms                          arms now     with K11-K16
+  --------------------------------------------------------------------------
+  ratio_flat         provisioning_level             yes          yes
+  tau_flat           provisioning_level             yes          yes
+  threshold_flat     time_since_clean_reference     NO           yes
+  mediation_broken   baseline_staleness, provisioni NO           yes
+  gradient_flat      stimulus_severity              yes          yes
+
+  arms as they stand: 3 of 5 falsifiers reachable
+  with K11-K16 added: 5 of 5
+
+========================================================================
+3  K13's `closes` tag now resolves
+========================================================================
+  spec declares falsifiers: gradient_flat, mediation_broken, ratio_flat, tau_flat, threshold_flat
+
+  K13    closes falsifier:ratio_flat         resolves
+
+  MF_020 repaired. Before, `falsifier:ratio_flat` resolved to
+  nothing in any file -- a reference to a registry that had
+  not been created. The spec carries it now, and validate.py
+  refuses a spec that declares no falsifiers at all.
+
+========================================================================
+4  the check can still fail
+========================================================================
+  A guard that cannot deny is not a guard. Two constructed
+  cases, neither of which is in the spec:
+
+    reachable    terms=provisioning_level                         reachable
+    unreachable  terms=ambient_temperature                        FLAGGED: ambient_temperature
+    partly       terms=ambient_temperature, provisioning_level    FLAGGED: ambient_temperature
+
+  So the check discriminates. Every falsifier in the spec being
+  reachable is a property of this spec, not of the check.
+
+========================================================================
+READING
+========================================================================
+
+  Both schema gaps are closed. `sweep` is a field on the probe, defaulting
+  to the spec's regime variable, refusing fewer than two levels, and
+  requiring a stated reason when a probe is a point. `falsifiers` is a
+  field on the spec, and validate.py asks for it.
+
+  With those, the check the drop asked compare.py to run is three lines and
+  needs no prose: for each declared falsifier, is every term in the union
+  of the swept variables.
+
+  K13's closes=["falsifier:ratio_flat"] resolved to nothing in any
+  delivered file. It resolves now.
+
+  Section 4 keeps the check honest: a falsifier naming a variable no arm
+  sweeps is still flagged, so every falsifier in this spec coming back
+  reachable is a property of the spec rather than of the check.
+

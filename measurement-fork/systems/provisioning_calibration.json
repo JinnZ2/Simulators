@@ -1,0 +1,76 @@
+{
+  "system_id": "provisioning_calibration",
+  "description": "Organism developing under varying provisioning. Question is whether its own sensing apparatus gets validated against outcomes, and what reads out when it does not. Marker, not a claim.",
+  "boundary": "organism periphery; environment outside it. Consequence delivery crosses this line.",
+  "actors": [
+    "organism",
+    "provisioning agent (parent, keeper, institution, buffer)",
+    "environment"
+  ],
+  "provisioned": [
+    "outcome delivery decoupled from the organism's own act",
+    "threat consequence absorbed before reaching the organism"
+  ],
+  "currently_measured": [
+    "distress markers",
+    "cortisol at matched stimulus",
+    "health endpoints",
+    "task accuracy"
+  ],
+  "regime": {
+    "variable": "provisioning level",
+    "range": "fully buffered -> unbuffered"
+  },
+  "test_items_source": "the measuring institution's own domain",
+  "known_latency": "unmeasured",
+  "open_questions": [
+    "confidence accuracy gap",
+    "act consequence latency",
+    "response magnitude per perturbation size",
+    "discrimination gradient across severities",
+    "domain match between calibrating environment and test items",
+    "environmental autocorrelation",
+    "coupling bandwidth",
+    "whether trust in own sensing is a measurement or a belief",
+    "reversibility after regime shift"
+  ],
+  "falsifiers": [
+    {
+      "id": "ratio_flat",
+      "statement": "response magnitude per perturbation size is flat across the provisioning gradient",
+      "terms": [
+        "provisioning level"
+      ]
+    },
+    {
+      "id": "tau_flat",
+      "statement": "relearn time constant after a regime shift does not rise with provisioning",
+      "terms": [
+        "provisioning level"
+      ]
+    },
+    {
+      "id": "threshold_flat",
+      "statement": "detection threshold does not rise with baseline staleness",
+      "terms": [
+        "time since clean reference"
+      ]
+    },
+    {
+      "id": "mediation_broken",
+      "statement": "practice rate predicts detection latency with baseline freshness controlled out",
+      "terms": [
+        "provisioning level",
+        "time since clean reference",
+        "baseline staleness"
+      ]
+    },
+    {
+      "id": "gradient_flat",
+      "statement": "discrimination gradient across severities is flat in the calibrated group",
+      "terms": [
+        "stimulus severity"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,169 @@
+
+SWEEP: WHICH VARIABLE, AT HOW MANY LEVELS
+subject: the delivered arms and the newly specified K11-K16
+
+========================================================================
+1  the delivered probes against the new rule
+========================================================================
+  34 probes emitted by the three arms, 17 of them measuring
+  (the widen arm emits design-directed options, not quantities --
+  MF_008 / MF_016 -- so the rule does not apply to it)
+
+  carrying a `sweep` declaration: 17 of 17  (16 swept, 1 point)
+
+  BEFORE THE REPAIR this read 0 of 17, and not because seventeen
+  probes were written badly. quantities.probe() had six fields --
+      arm  id  quantity  protocol  reads  blind_to
+  and `sweep` was not among them, so the rule was not expressible
+  in the schema the arms were written against. One schema gap,
+  not seventeen oversights.
+
+  MF_017 repaired. The field defaults to the spec's regime
+  variable, refuses fewer than 2 levels, and requires a stated
+  reason when a probe declares sweep=None:
+      C07  present-day administration by design. The instrument reads one moment; running it across the regime variable would be a different probe, not this one swept.
+
+  Why it is load-bearing rather than tidy: the spec's own
+  falsifiers are statements about a gradient.
+
+      regime variable declared in the spec: provisioning level
+      open question: confidence accuracy gap
+      open question: act consequence latency
+      open question: response magnitude per perturbation size
+
+  A probe run at one setting of the control parameter cannot
+  participate in a claim about a gradient. So the missing field
+  and MF_010's unreachable falsifier are one gap seen twice.
+
+========================================================================
+2  the newly specified probes against the same rule
+========================================================================
+  id     quantity               sweep                          levels   rule
+  ----------------------------------------------------------------------------
+  K11    information_rate       regime.variable                2        PASS
+  K12    reliance_weight        regime.variable                2        PASS
+  K13    tau                    provisioning_level             2        PASS
+  K14    practice_rate          provisioning_level             2        PASS
+  K15    baseline_freshness     time_since_clean_reference     3        PASS
+  K16    detection_latency      baseline_staleness             3        PASS
+
+  6 of 6 pass.
+
+  The spec's regime variable is 'provisioning level', which normalizes to 'provisioning_level'.
+  Resolving the default against it:
+
+      K11    regime.variable                -> provisioning_level
+      K12    regime.variable                -> provisioning_level
+      K13    provisioning_level             
+      K14    provisioning_level             
+      K15    time_since_clean_reference     
+      K16    baseline_staleness             
+
+  3 distinct sweep variables after resolution, and 4 of 6
+  probes sweep the regime variable -- 2 by default and 2 by
+  naming it directly. So the field carries information on 2 of 6,
+  not 4 of 6, and K13/K14 spelling out the default is a
+  redundancy the schema should collapse rather than a choice.
+
+  K15 and K16 sweep at 3 levels rather than 2. Both are on the
+  mediation chain, and 2 levels gives a slope with no curvature
+  and no way to see a threshold. That is the min being a MINIMUM
+  and the probe declaring above it.
+
+========================================================================
+3  K13 closes the gap MF_010 named
+========================================================================
+  MF_010 adjudicated `reversibility after regime shift` as
+  unreached, and named the shape of the missing instrument:
+
+      the predicted contrast is a RATE -- fast vs slow relearn
+      once the buffer is removed -- and no K-probe returns a
+      rate; every one measures a level, ratio, slope or variance
+      at fixed regime.
+
+  MF_014 then moved it to PARTIAL on K14: K14 supplied the
+  provisioning gradient the stated falsifier needed, but nothing
+  measured relearn rate AFTER the buffer is removed.
+
+  K13:
+
+      base       tau
+      protocol   error vs trials-since-shift, fit tau
+      sweep      provisioning_level at 2 levels
+      returns    time constant
+
+  `error vs trials-since-shift` is measured across a regime
+  change by construction -- trials-since-shift has no meaning
+  without one -- and fitting tau returns a time constant. Swept
+  across provisioning level, it supplies both halves the stated
+  falsifier needs: the rate, and the gradient to read it against.
+
+  Verdict change: PARTIAL -> CLOSED.
+
+  The prediction shipped with it is falsifiable in the direction
+  that costs something: tau RISES with provisioning, and a flat
+  tau falsifies. A flat tau is the null and it is reachable, so
+  this is not the ../null-harness/ CONSTANT_SILENT shape.
+
+  K12 carries the sharpest single line in the batch:
+
+      Trust is a measurement only if (b) was run.
+
+  which is `whether trust in own sensing is a measurement or a
+  belief` -- the gap MF_014 closed on K15 -- restated as a
+  precondition on reading K12 at all, rather than as a separate
+  probe. Two independent routes to the same distinction.
+
+========================================================================
+4  what is still open
+========================================================================
+  coupling bandwidth
+
+    MF_014 left this OPEN on the grounds that rate-of-use,
+    staleness and latency are three quantities and capacity is a
+    fourth. K11 `information_rate` is the fourth:
+
+      distinguishable environmental states registered per unit
+      time, by the actor's own sensors
+
+    and it is explicitly marked `not_` against K01 delay and K02
+    reliability -- 'This is channel capacity.'
+
+    Verdict change: OPEN -> CLOSED.
+
+    Its stated blind spot is the honest one: 'whether anything is
+    done with the states'. Capacity measured, use not measured,
+    and the probe says so.
+
+  So all three gaps MF_010 named are now reached. What is NOT
+  reached is anything that was measured: every probe here is a
+  specification, the mediation lags are still ordinal (MF_015),
+  and the `sweep` field is not in `quantities.probe()`.
+
+========================================================================
+READING
+========================================================================
+
+  `sweep` was a schema addition with teeth that no delivered probe could
+  satisfy, because `quantities.probe()` had no such field -- the rule was
+  not expressible in the schema the arms were written against. One gap,
+  not N oversights. REPAIRED: the field exists, defaults to the regime
+  variable, refuses a single level, and makes a point probe say why.
+
+  It is load-bearing rather than tidy because the spec's falsifiers are
+  statements about gradients, and a probe run at one setting of the
+  control parameter cannot participate in one. The missing field and
+  MF_010's unreachable falsifier are the same gap from two sides.
+
+  Of the six new probes, 2 of 6 use the default sweep variable, so the
+  field carries information rather than restating a default. K15 and K16
+  declare 3 levels rather than the minimum 2, which is what a minimum
+  looks like when it is working.
+
+  K13 `tau` closes `reversibility after regime shift`: error against
+  trials-since-shift is measured across a regime change by construction,
+  fitting tau returns a rate, and sweeping provisioning supplies the
+  gradient the stated falsifier needs. K11 closes `coupling bandwidth` as
+  the capacity term the other three were not. All three of MF_010's gaps
+  are now reached -- as specifications. Nothing has been run.
+

@@ -1,0 +1,23 @@
+{
+  "artifact_name": "CodeBench",
+  "version_id": "v1.0",
+  "timestamp": "2022-01-01T00:00:00Z",
+  "frame": {
+    "boundary": "function-level correctness only. Excludes compilation, runtime, security, style.",
+    "horizon": "single-turn generation. No multi-step or interactive tasks.",
+    "who_counts": "passing test cases",
+    "sign_source": "accuracy chosen by benchmark authors",
+    "logic": "classical",
+    "observer_access": "unknown"
+  },
+  "rubric_dimensions": [
+    "syntactic_correctness",
+    "test_pass_rate"
+  ],
+  "rubric_weights": {
+    "syntactic_correctness": 0.3,
+    "test_pass_rate": 0.7
+  },
+  "exemplar_count": 164,
+  "notes": "Initial release. Python only."
+}

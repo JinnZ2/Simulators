@@ -1,0 +1,98 @@
+
+NULL-TESTING THE RESIDUAL CLASSIFIER
+subject: compare.py coverage(), on variable_provisioning.json
+
+======================================================================
+1  known null: a question no probe answers, in the probes' words
+======================================================================
+  A word-salad question drawn from the probes' own vocabulary
+  should NOT be marked covered. If it is, the classifier is
+  measuring vocabulary rather than reach.
+
+  silent   does the organism report the environment coupling la
+  COVERED  measure the instrument organism environment conseque
+  silent   what colour is the apparatus
+
+  1 of 3 nulls fired.
+
+  The threshold does real work -- two of three are refused, and
+  the flat-vocabulary one is refused outright. But one clears it:
+  'measure the instrument organism environment consequence
+  variance' shares five of its six stems with the coupling arm's
+  autocorrelation probe, whose protocol reads 'measure the
+  environment's own variance structure ...'. Five of six is a
+  real overlap and the question is still nonsense.
+
+  So the classifier's failure mode is specific: a null built from
+  ONE probe's vocabulary beats it, while a null built from the
+  whole pool's does not. That is a bound on what COVERED means,
+  not a reason to discard it -- but it is why PARTIAL's 'not
+  resolved here' caution belongs on COVERED as well.
+
+======================================================================
+2  known signal: a question a named probe was written for
+======================================================================
+  A question a probe was explicitly designed to reach should be
+  marked covered by that arm.
+
+  ok       what does the environment's own variance struc the autocorrelation probe is written for this
+  ok       how tightly could the loop close, given the la the latency probe is written for this
+
+  PASSES.
+
+======================================================================
+3  arm pooling: does a non-measuring arm suppress the residual?
+======================================================================
+  compare.py pools every arm into `allp` and runs coverage over
+  all of it. But its own output says of the widen arm:
+
+      [widen] -- options, not quantities.
+
+  An option is not a measurement. Counting it toward coverage
+  lets a proposal to RENAME a question mark that question as
+  REACHED.
+
+  residual, widen included (compare.py as delivered) : 0 of 7
+  residual, measuring arms only                      : 1 of 7
+
+    [NO ARM] which measured differences reverse if the reference population is changed
+
+  FAILS. 1 open question(s) are hidden from the growth edge
+  by an arm that proposes no measurement.
+
+  HONEST NOTE. widen.py is reconstructed here, not delivered, and
+  the version in this folder emits one probe per open question
+  carrying that question's text -- so its overlap is total and
+  this effect is maximal. A widen arm that did not echo the
+  question would contribute less false coverage.
+
+  The structural point survives either way: an arm that proposes
+  no quantity should not appear in the denominator of a cell
+  about which quantities are missing. The fix is one line in
+  compare.py -- build the coverage pool from the measuring arms,
+  and report widen separately as it already is elsewhere.
+
+======================================================================
+READING
+======================================================================
+
+  The tokeniser is roughly as good as a tokeniser can be here, and its
+  limits are specific rather than general. It catches the questions its
+  probes were written for, refuses a null built from the whole pool's
+  vocabulary, and is beaten by a null built from ONE probe's -- five of six
+  stems shared with the autocorrelation probe is a real overlap attached to
+  a meaningless question. compare.py is already candid about the middle
+  band: PARTIAL is explicitly "not resolved here". That caution belongs on
+  COVERED too, because COVERED is the verdict that removes a question from
+  the list.
+
+  What fails is upstream of it. The coverage pool includes an arm that
+  emits no quantities, so a proposal to rename a question can mark that
+  question reached -- and RESIDUAL, the cell the docstring calls the
+  product, is the one cell where a false COVERED costs the most. A missing
+  measurement that never appears on the growth edge is not on any list at
+  all.
+
+  Neither result is about the domain. Both are about whether the harness
+  can see its own gaps, which is the only thing a fork like this is for.
+

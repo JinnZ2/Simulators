@@ -1,0 +1,27 @@
+{
+  "artifact_name": "CodeBench",
+  "version_id": "v3.0",
+  "timestamp": "2024-01-01T00:00:00Z",
+  "frame": {
+    "boundary": "function-level correctness, compilation, runtime, and basic security checks. Excludes style.",
+    "horizon": "single-turn and two-turn generation. Interactive tasks included.",
+    "who_counts": "passing test cases, runtime correctness, and security scan",
+    "sign_source": "weighted composite chosen by benchmark authors after community feedback",
+    "logic": "classical",
+    "observer_access": "partial"
+  },
+  "rubric_dimensions": [
+    "syntactic_correctness",
+    "test_pass_rate",
+    "runtime_validity",
+    "security_basic"
+  ],
+  "rubric_weights": {
+    "syntactic_correctness": 0.1,
+    "test_pass_rate": 0.4,
+    "runtime_validity": 0.3,
+    "security_basic": 0.2
+  },
+  "exemplar_count": 500,
+  "notes": "Added JavaScript and Go. Security scanning added. Interactive tasks. Major criteria expansion."
+}

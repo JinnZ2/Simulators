@@ -1,0 +1,11 @@
+{
+  "result": "engineered system achieves ~20% quantum yield vs ~1-2% for leaf tissue",
+  "frame": {
+    "boundary": "photon capture to product only. Excludes fabrication, mining, smelting, transport, installation, maintenance, decommission.",
+    "horizon": "steady-state operation. Excludes build and disposal intervals.",
+    "who_counts": "the conversion step",
+    "sign_source": "conversion efficiency chosen as the outcome column by the engineering discipline making the comparison",
+    "logic": "classical",
+    "observer_access": "unknown"
+  }
+}

@@ -1436,7 +1436,748 @@ underneath).
   FIRED because it worked`. `explore.py` finds `sim_id` in a report or a
   bare declaration. Section 1 (G-RES is only as strong as the declared
   pair) was NOT "fixed" — it is a limit on what the guard can promise,
-  not a defect. 66 tests green. Stdlib only, phone-buildable, CC0.
+  not a defect. **Fifth pass, from using the gate elsewhere:** `G-LAYER`
+  downgraded on generator-level support but said nothing about
+  instrument-only support, so `measurement-fork/gate_fork.py` recorded
+  `[supported] the measurement design has 3 unmeasured quantities` resting
+  entirely on two instrument-level quantities — the same category move one
+  layer over. Fixed: a physical-scope claim with **no physical-level
+  support at all** is now `qualified`, deliberately narrow so it does NOT
+  fire when physical support is present (a physical claim legitimately
+  uses instrument quantities as bounds — "the separation exceeds the
+  estimator's error bar" needs the error bar). And nothing had ever
+  detected the five stale copies; `tools/check_gate_drift.py` +
+  `tests/test_gate_drift.py` now do. 69 tests green. Stdlib only,
+  phone-buildable, CC0.
+- `reasoning-dial/` — A drop about how reasoning models allocate thinking,
+  put through the gate the previous drop produced. Two delivered parts in
+  `SOURCE_DROP.md` (verbatim): a 2026 survey of reasoning / learning /
+  exploring / harnesses, and a proposal to treat **thinking budget as a
+  measurable dimension** — an axis with gradients, cross-gradients and a
+  knee, read with the same machinery the repo uses for physical fields.
+  `dial_response.py` implements it (stdlib, deterministic) and checks the
+  numbers the drop published. **The gradient transfers; the knee does not.**
+  The delivered table (knee 26 / 910 / 66 tok for D_r 0.5 / 2.0 / 4.0)
+  contradicts its own prose — the hard problem's knee is 14× EARLIER than
+  the medium one's and its gradient twice as steep, where the text says
+  later and shallower. Root cause: **"maximum curvature" names two points.**
+  Any saturating curve has two curvature extrema, at `z = ±ln(2+√3)` on a
+  logistic, **exactly equal in magnitude** (measured tie: `0.000e+00`), so a
+  max-|curvature| rule chooses between tied candidates and the **sweep
+  window** decides which is reachable. An independent implementation with
+  different constants reproduces the small/large/small shape (76 / 716 / 38)
+  with the flip on the same row: the hard problem's saturation shoulder sits
+  at ~14,000 tok, outside a 10⁴ window, so only the take-off shoulder
+  survives. "A knee that moves when you change the plot range is a property
+  of the plot range" — `model-ecology/confound_sweep.py`'s window result on
+  a new substrate, and the same defect as `AOS_005`'s SIM-C knee detector.
+  **The fix is one word**: say which shoulder. Defining the knee as the
+  saturation shoulder gives 76 / 716 / 14,170 with gradients 0.247 / 0.124 /
+  0.074 — monotone in both columns, matching the prose. **The cross-gradient
+  survives** (`∂²Q/∂lnB∂D_r` changes sign at an interior peak, D_r ≈ 3 at
+  B = 1000) and is the drop's best idea, being the only part not requiring a
+  knee. **`RD_005`:** RND is described as "the agent tries to predict the
+  outcome of its actions" — that is the Intrinsic Curiosity Module (Pathak
+  2017); RND (Burda 2018) matches a fixed random target network on the
+  observation, and exists specifically to avoid the noisy-TV problem the
+  misdescription attributes to it. `gate_dial.py` is the repo's **second
+  cross-folder Python import** (after `msiaf-gdprf-bridge/`), pulling the
+  gate from `../reasoning-gate/` rather than copying: DIAL-KNEE **denies at
+  `pre()`** on G-RES (positional ambiguity 3.56 log-units vs a 2.99 knee
+  shift), DIAL-GRAD **passes and splits** — identical support yields a
+  `supported` generator-scoped claim and a `qualified` physical one, naming
+  the missing experiment exactly (a measured quality-vs-budget curve from a
+  real model would promote D_r from generator to physical) — and DIAL-SYNTH
+  **qualifies** "four independent domains converge", since they are four
+  sections of one survey written to a thesis stated before it. **Where the
+  gate did not help**, recorded as a limit: G-FIT should have caught the
+  knee ambiguity and could not — its rule is "name why the statistic can
+  discriminate", its implementation checks a string is non-empty, and a
+  wrong-but-fluent sentence satisfies it. That is `reasoning-gate/
+  AUDIT_NOTES.md` §1 in a second instance, on a worse guard. `RD_009` logs
+  the drop's proposed **G-STATE** (observer-state: am I cold, time-pressured,
+  invested in a diagnosis?) as a real gap deliberately NOT built — a
+  self-report from a miscalibrated observer is the quantity in question, so
+  the gate could record it but not check it; the falsifier names what would
+  make it buildable (tie it to cabin temperature, hours since sleep, a
+  timestamp, and it becomes a two-number guard like G-RES). Nine claims
+  `RD_001..009` including one `UNVERIFIED` (the survey's `cite
+  web_search:NN#M` markers point at results not included in the delivery;
+  Snell 2024, Titans, PRM800K, PURE min-form, Anthropic's backward
+  rhyme-planning and `circuit-tracer` do check out). CC0.
+  **Second drop** — a research landscape (`SOURCE_DROP_2.md`, verbatim)
+  placing the framework against 2026 adaptive-computation work: marginal
+  utility, BetaPRM, TRIM/R2R stepwise and token-level routing, metacognitive
+  self-governance, the Gap Function, T² scaling laws. It does three things,
+  all recorded internally since the citation markers again point outside the
+  delivery and the papers are dated Jan–May 2026 (`RD_015` UNVERIFIED).
+  **(1) It refutes MY response family, not the drop's.** The survey's central
+  reported finding is negative marginal utility — past some budget more
+  thinking flips correct answers to incorrect. A logistic is monotone
+  (gradient measured 1.0e-08..6.3e-03 across the three difficulties), so
+  `dial_response.py` **cannot produce overthinking at any parameter setting**;
+  `RD_003` reported the family behaves well while that family ruled out the
+  effect by construction (`RD_010`). **(2) It replaces the knee with a better
+  primitive.** `overthinking.py` rebuilds the response as a logistic rise
+  minus drift accruing per log-token; `argmax Q` — the zero of `dQ/d(log B)`
+  on the declining side — is then unique, interior and window-independent
+  (444 / 8194 / 224214 tokens, all passing an explicit `interior` guard
+  against the RD_002 failure). Every RD_002 objection dissolves because the
+  rule is **unnecessary**, the surveyed work's own primitive being marginal
+  utility crossing zero (`RD_011`). Keeping the knee is expensive: on this
+  shape it lands at **6–17% of the optimal budget, always early, error
+  growing with difficulty** — worst where budget matters most (`RD_012`).
+  **(3) It undercuts its own novelty claim.** The landscape closes "none of
+  these papers explicitly compute cross-gradients"; six sections earlier it
+  quotes one of them reporting that "easier problems reach negative marginal
+  utility earlier than hard problems" — which IS the mixed partial, measured
+  and stratified by difficulty, in prose. The quantity is already an object
+  of study; the notation is what is not standard (`RD_013`). Smaller than
+  claimed and still real: with drift held **problem-independent** the
+  ordering 444/8194/224214 falls out rather than being put in (an easy
+  problem finishes rising sooner so fixed drift overtakes it sooner), turning
+  an empirical fact into a derivable consequence with a falsifier attached
+  (`RD_014`). **The measurement that closes three claims at once** —
+  `RD_007`, `RD_014`, and DIAL-GRAD's generator/physical split — is one
+  experiment: estimate the drift rate on problems of different difficulty
+  from measured quality-vs-budget curves. Fifteen claims `RD_001..015`.
+  Shape-sibling to `equivalence-field/claim_lineage.py`: RD_010 is not wrong
+  arithmetic but a missing dimension, and RD_011 is the child claim the break
+  pointed at.
+- `triad-playground/` — Every experiment as a tuple of three agents
+  (physical system, measurement instrument, **reasoning agent**), each with
+  its own dial. "The claim is only as strong as the weakest calibration in
+  the chain." Delivered proposal verbatim in `SOURCE_DROP.md`; `triad.json`
+  is the authored schema (agents, dial vector, calibration checks, shadow
+  protocol, pedigree fields) and `CHECKLIST.md` is **generated** from it by
+  `make_checklist.py` — same source-of-truth arrangement as
+  `reasoning-gate/`'s `guards.json → GUARDS.md`. **The framing is the
+  contribution and it holds** (`TP_001`): `reasoning-gate/` tags quantities
+  `generator`/`physical`/`instrument` with no slot for the observer, and
+  `instrument-epistemology/` grades six instruments with the reader outside
+  the frame in all six; this supplies the missing fourth layer, with the rule
+  that a physical-scope claim resting on reasoning-level support is
+  `qualified` not `supported`. **The protocol as specified does not yet
+  measure it** — three design results, provable without data, each with a
+  cheap fix. **`TP_002`: step 5 forbids the design step 6 requires.** "Never
+  upgrade all three simultaneously" is one-factor-at-a-time; "cross-gradient:
+  did conclusion change with dial setting?" asks for an INTERACTION, and OFAT
+  cannot estimate one at any number of runs. Demonstrated on a planted
+  interaction: OFAT (4 runs) recovers the three main effects and predicts
+  y(P=1,R=1)=3.0 against a truth of 6.0 — the entire interaction, invisible;
+  a 2³ factorial (8 runs, ±1 contrasts) recovers everything exactly. The
+  stated reason for OFAT ("can't attribute variance") is backwards.
+  **`TP_003`: consensus is blind to the error shadows share.** The four
+  shadows read one physical declaration, one instrument output and (for the
+  AI shadows) one prompt written by a human shadow. Modelling each as
+  `truth + shared_bias + individual_noise`, spread stays flat at ~2.04 while
+  shared bias runs 0 → 20 and the error tracks it one-for-one: four shadows
+  agreeing tightly at 120 when truth is 100 reads as a pass. Fix is mostly
+  built — `divergence-playground/` is this protocol with the null attached
+  (hash-sealed readings, three declared spread axes, `null_ensemble.py`), and
+  its `agree_by_accident` flag is the cell the shadow pattern needs most.
+  **`TP_004`: the proposed first experiment cannot fail its own skip
+  condition.** A 1 m aluminium bar over 60 K moves 1.386 mm against a 0.01 mm
+  dial division (139×, easy) — but the experiment is about OBSERVER variance,
+  where reading spread ~0.005 mm sits at half the resolution, so four people
+  reading one mechanical dial agree within a division by construction.
+  `null-harness/` `CONSTANT_SILENT` plus `G-RES`. Fix needs no better bar:
+  the instrument must log independently of the observer reading it (digital
+  indicator + data log, or timestamped photo), making observer error a
+  measured residual `|observer − logged|` instead of a consensus inference.
+  **`TP_005`: the worked aluminium example shows physical mis-specification,
+  not observer variance** — run 3's "wrought, not cast" reports that runs 1
+  and 2 answered a question about a different specimen, so scoring it as a
+  reasoning-dial gradient means every physical error the reasoning agent
+  CATCHES inflates measured observer variance; `triad.json` check `P4`
+  separates `state_revised_during_run` from `state_declared`. **`TP_006`:**
+  three of four reasoning checks are self-report only (fatigue, emotional
+  investment, conflict of interest); only the AI one is externally readable —
+  `reasoning-dial/` `RD_009`'s G-STATE gap at system scale, with `readable`
+  marked per check so `CHECKLIST.md` renders `[DECLARED]` rather than hiding
+  it. **`TP_007` UNVERIFIED:** no triad experiment has been run, and the
+  load-bearing empirical question — does observer variance matter at any
+  scale worth measuring — is untouched. Falsifier: run it. Seven claims
+  `TP_001..007`. Stdlib only, CC0.
+  **Second drop: a generic v1 spec** (`SPEC_V1.md` + `spec_v1.json`,
+  verbatim) delivered for reuse, with the question sharpened to *does the
+  shadow pattern work with or without the human*. `shadow_panel.py` answers
+  it by modelling each shadow as `truth + b_shared + b_family + e_ind` and
+  reading the panel two ways — **N_eff** (participation ratio of the shadow
+  correlation spectrum, the statistic `model-ecology/phylogeny.py` already
+  computes) and **false-pass rate** (P(shadows agree | panel mean wrong by
+  more than tolerance)). **`TP_008`, the answer: yes without the human, but
+  the human's decorrelation must be REPLACED, not just removed.** Four model
+  families with no human reach N_eff 2.18 / false-pass 12.4%, *stronger* than
+  v1's required panel with a human (1.61 / 38.2%); adding the human back on
+  top moves N_eff by −0.02. Drop the human from v1's panel without
+  substituting and it collapses to N_eff 1.14 / false-pass **84%** — because
+  `ai_low` and `ai_high` **on one model** share a family bias and are close
+  to one shadow at two dial settings, leaving the human as the only
+  decorrelated element. The design variable is independent failure modes,
+  not human-vs-AI; the substitution is **three model families, not three
+  budgets** (a procurement fact, not an epistemics problem). What a human
+  still uniquely supplies is embodied context — cold-stiffened
+  proprioception is not a failure mode any model has — which argues for a
+  human shadow on *physical* measurements specifically, a different argument
+  from decorrelation. Ranking survives a 5-point sweep of the variance
+  components; absolute rates do not (`TP_013`). **`TP_009`:** the spec should
+  require a minimum **N_eff**, not a minimum shadow COUNT — a four-shadow
+  panel can carry N_eff 1.22, and counting shadows measures effort not
+  independence. **`TP_010`:** v1 improved the consensus denominator from zero
+  to *instrument resolution* and it is still wrong — instrument resolution
+  bounds what the INSTRUMENT can say, shadow spread is bounded by what an
+  OBSERVER can repeat, so the correct reference is same-observer repeat
+  variance (which is also `TP_003`'s missing null). **`TP_011`:** v1 §5 now
+  names `∂²/∂(physical)∂(reasoning)` explicitly while §2 rule 3 still says
+  "upgrade ONE dial at a time" — sharper contradiction, smaller fix: rule 4
+  ("never all three") would permit a 2² factorial over a pair, so replacing
+  only rule 3 with "vary dials in a 2² factorial over the pair whose
+  interaction is being tested" makes every mixed partial in §5 estimable at
+  four runs per pair. **`TP_012`:** v1 §6 assigns `G-DIM` the job "checks
+  that dial settings are actually different compute levels"; G-DIM voids
+  ratios across unlike objects and does not do this — and the job named is
+  real and unassigned, since **nothing verifies `ai_low` and `ai_high`
+  actually produced different reasoning effort**, so a model ignoring its
+  budget parameter collapses two declared shadows into one silently. The
+  check reads like a G-RES pair (declared budget separation vs observed
+  reasoning-token separation, with a margin). Thirteen claims `TP_001..013`.
+- `measurement-fork/` — Take one system and design the measurement three
+  ways at once, then diff the DESIGNS rather than the results. Four cells:
+  **SOLE REACH** (a quantity exactly one arm reaches), **VOID RATIO** (same
+  base name, different `object_of` or normalizer — they do not compare),
+  **SAME QUANTITY, DIFFERENT ROUTE** (convergent; the conventional number is
+  reusable as-is), **RESIDUAL** (open questions no arm reaches — the growth
+  edge, and the product). Three arms: `conventional.py` (the design a field
+  would actually run, written to be COMPETENT so gaps show up as gaps rather
+  than mistakes), `coupling.py` (when a quantity is a RELATION between
+  organism and environment, the standard instrument reads one side and
+  reports it as a property of the organism; this arm generates the missing
+  side and the ratio), and `widen.py` (options, not quantities; ranks
+  nothing — descendant of `reasoning-gate/explore.py`). **The delivered
+  package did not run**: `compare.py` imports `quantities`, `widen` and
+  `validate`, none of which were in the drop, so both arms failed on their
+  first import; all three are **reconstructed** here from the call sites,
+  with `[CHOICE]` marking anything the call sites did not fix (`MF_001`).
+  **The load-bearing design idea** is that a quantity is
+  `(base, object_of, normalizer)` and two are the same one only when all
+  three match — `reasoning-gate/`'s **G-DIM moved one stage earlier**, from
+  report time to design time, which is the only point at which a mismatch is
+  cheap to fix (`MF_002`). On the worked spec the `SAME QUANTITY` cell comes
+  back **empty** and `compare.py` handles it as a result rather than an
+  absence: the arms share no quantity at all, so no conventional result is
+  evidence for or against the coupling questions — they are not disagreeing,
+  they are not addressing the same quantities (`MF_003`). **Two defects,
+  both found by null-testing the classifier** (`coverage_check.py`, the
+  `null-harness/` known-null/known-signal invariant applied to a classifier):
+  `MF_004` — `compare.py` pools every arm into `allp` including the widen
+  arm, which its own output labels "options, not quantities", so a proposal
+  to RENAME a question marks that question REACHED and the residual goes
+  0-of-7 where measuring arms alone give 1-of-7; RESIDUAL is the one cell
+  where a false COVERED costs most, and the fix is one line. `MF_005` —
+  the 60%-of-distinct-stems threshold refuses two deliberate nulls and fires
+  on a third that shares five of six stems with a single probe, so the
+  failure mode is specific (a null built from ONE probe's vocabulary beats
+  it, one built from the pool's does not); `compare.py`'s "not resolved
+  here" caution on PARTIAL belongs on COVERED too, since COVERED is the
+  verdict that removes a question from the list. **`MF_006`:** the drop also
+  bundled `gate.py` + `guards.json`, both the **pre-repair** versions — a
+  170-line diff with all seven repairs absent and both stage bugs intact
+  (`G-FIT` still `post`, `G-CTRL` still `pre`). Neither is checked in; the
+  repo convention is to IMPORT the gate (`msiaf-gdprf-bridge/`,
+  `reasoning-dial/gate_dial.py`) precisely so it cannot drift, and this drop
+  is that drift arriving on schedule. `MF_007` records the untouched
+  question: on a real design, does the fork surface a quantity the designers
+  had not considered? Seven claims `MF_001..007`. Stdlib only, CC0.
+  **Second drop** delivers the canonical `quantities.py` and the real spec
+  `provisioning_calibration.json` (both verbatim), plus three more stale
+  `reasoning-gate/` copies. **`MF_008`:** the canonical schema enforces a
+  CLOSED vocabulary — `OBJECTS = (organism, environment, coupling,
+  instrument)` and `quantity()` raises on anything else — so a widen probe,
+  which is about the *design*, **cannot be constructed as a quantity at
+  all**. `MF_004` argued that from behaviour; the delivered schema reaches
+  it from the type system independently: the schema refuses what the
+  comparator then counts. `widen.py` now uses a local `option()` helper
+  tagged `object_of="design"` plus `is_quantity(p)`, so the exclusion is
+  mechanical. **`MF_009`, the sharp one:** on the real spec the classifier
+  is wrong in BOTH directions and the errors point opposite ways — five
+  questions marked COVERED by widen alone (false positive), and two
+  questions a coupling probe was explicitly written for scored as unreached
+  (false negative: `environmental` does not stem to `environment`, and
+  `domain match ...` misses 4-of-7 by one). **No single threshold fixes
+  both.** Three counts of the same cell: `0 of 9` as delivered, `5 of 9`
+  with widen excluded, **`3 of 9` adjudicated by reading protocols** —
+  zero understates, five overstates. **`MF_010`, the result:** the real
+  growth edge is `coupling bandwidth`, `whether trust in own sensing is a
+  measurement or a belief`, and `reversibility after regime shift`. The
+  third has a stated prediction and no instrument — the predicted contrast
+  is a RATE (fast vs slow relearn once the buffer is removed) and **no
+  K-probe returns a rate**; every one measures a level, ratio, slope or
+  variance at fixed regime. The stated falsifier ("ratio flat across the
+  provisioning gradient") has the same shape: it needs the gradient swept
+  and the probes sit at one point on it. One probe closes both — error
+  against trials-since-shift, fitted for a time constant, at two or more
+  provisioning levels. `residual_audit.py` is that adjudication.
+  **Third drop: K14-K18.** `proposed_probes.py` adjudicates the five newly
+  specified probes against the three gaps `MF_010` named, by reading
+  protocols — `coupling.py` stays unmodified. **`MF_014`:** `K14
+  practice_rate` is the **first probe in the arm that returns a rate**,
+  which is exactly what `MF_010` turned on. One gap CLOSES (`whether trust
+  in own sensing is a measurement or a belief`, via `K15`, because
+  injecting a small KNOWN deviation scores the sensing apparatus against
+  ground truth rather than against its own report); one goes PARTIAL
+  (`reversibility after regime shift` — K14 supplies the provisioning
+  gradient the stated falsifier needed, but nothing measures relearn rate
+  AFTER the buffer is removed, and K16 is a latency swept against
+  staleness at FIXED regime); one stays OPEN (`coupling bandwidth` —
+  rate-of-use, staleness and latency are three quantities, capacity is a
+  fourth). `K18`'s `object_of` is `design`, outside `quantities.OBJECTS`,
+  so by `MF_008` it is a widen move not a probe — as its own specification
+  says. **`MF_015`:** the mediation chain `K14 → K15 → K16` is the
+  strongest part of the specification — refutable by a partial correlation
+  on three measured series, with the direction of refutation named before
+  the data exist, and not dependent on the effect being large. Its one gap
+  is that **the lags are ordinal**: a mediation test sampled coarser than
+  its own lag returns the chain collapsed into a single step, which is
+  indistinguishable from the chain being wrong and would read as the
+  falsifier firing. Declare the units and it becomes a `G-RES` pair,
+  sampling interval against the lag being resolved.
+  **Fourth drop: the `sweep` field and K11-K13.** `sweep_check.py`.
+  **`MF_017`:** the stated rule — every probe declares which spec variable
+  it must be run across and at how many levels, default `regime.variable`,
+  min 2, point-probes declare `sweep=None` with a reason — is **not
+  expressible in the delivered schema**: `quantities.probe()` has six fields
+  and none is `sweep`, so **0 of 17** measuring probes across the three arms
+  satisfy it. One schema gap, not seventeen oversights. Load-bearing rather
+  than tidy, because the spec's own falsifiers are statements about a
+  gradient ("ratio flat across the provisioning gradient") and a probe run
+  at one setting of the control parameter cannot participate in one — **the
+  missing field and `MF_010`'s unreachable falsifier are the same gap seen
+  from two sides.** All six new probes pass; resolving the default against
+  the spec's declared regime variable, 4 of 6 sweep it (2 by default, 2 by
+  naming it), so the field carries information on 2 of 6 and K13/K14
+  spelling out the default is a redundancy the schema should collapse.
+  K15/K16 declare 3 levels against a minimum of 2, both being on the
+  mediation chain where 2 levels gives a slope with no curvature.
+  **`MF_018`:** the last two gaps `MF_010` named now close. `reversibility
+  after regime shift` PARTIAL → CLOSED on **K13 `tau`** — `error vs
+  trials-since-shift` is measured across a regime change by construction
+  (trials-since-shift has no meaning without one), fitting tau returns the
+  RATE `MF_010` said no probe returned, and sweeping provisioning supplies
+  the gradient the stated falsifier needs; the prediction "tau rises with
+  provisioning, flat tau falsifies" has a reachable null, so not the
+  `CONSTANT_SILENT` shape. `coupling bandwidth` OPEN → CLOSED on **K11
+  `information_rate`** — the capacity term the other three were not,
+  explicitly marked `not_` against K01 delay and K02 reliability, with the
+  honest blind spot "whether anything is done with the states". **K12
+  reaches `MF_014`'s K15 distinction by a second route**: "trust is a
+  measurement only if (b) was run" makes it a precondition on reading K12
+  at all rather than a separate probe. All three of `MF_010`'s gaps are now
+  reached — as specifications; nothing has been run, the mediation lags are
+  still ordinal, and `sweep` is still not in the schema.
+  **Fifth drop: canonical README + `PROBES_K11_K18.py`.** The delivered
+  `README.md` now heads the folder and the prior audit-authored one moved to
+  `AUDIT_NOTES.md` (the `reasoning-gate/` arrangement). **`MF_019`:** the
+  drop re-delivered `compare.py`, `conventional.py` and `coupling.py`
+  **byte-identical** to the repo copies — 0 differing lines each — while
+  also bundling `gate.py` (189 differing lines, all seven repairs absent)
+  and `GUARDS.md` (48 lines, both stage bugs intact): the **sixth and
+  seventh** stale gate copies, neither checked in. Files that live in one
+  place do not drift; files bundled into every drop do. **`MF_020`:** the
+  delivered `PROBES_K11_K18.py` header states the structural bug itself —
+  "coupling.py generated probes at a POINT while the stated falsifier is
+  about a GRADIENT; the generator could not emit a design capable of failing
+  its own falsifier" — and adds a requirement: *compare.py must flag any
+  falsifier whose terms are not swept by any arm*. `falsifier_sweep.py` is
+  that check (`compare.py` stays verbatim). Delivered arms reach **0 of 4**
+  stated falsifiers; K11–K16 reach **4 of 4** across three swept variables.
+  But the check needs a SECOND field that also does not exist: the spec
+  schema has no `falsifiers` list, so the four falsifiers are
+  hand-transcribed from prose, and K13's `closes=["falsifier:ratio_flat"]`
+  **resolves to nothing in any delivered file** — a reference to a registry
+  not yet created. Two schema gaps, one shape: a probe cannot say what it
+  must be run across and a spec cannot say what would refute it, and between
+  them a generator emits a well-formed design that is incapable of failing.
+  **REPAIRED:** `quantities.probe()` now takes `sweep=(variable, levels)`
+  defaulting to the regime variable, refuses fewer than two levels, and
+  requires a `point_reason` when a probe declares `sweep=None`; the spec
+  declares five `falsifiers` as `{id, statement, terms}` and `validate.py`
+  asks for them; `K13`'s `closes=["falsifier:ratio_flat"]` resolves.
+  `falsifier_sweep.py` reads both registries instead of hand-transcribing —
+  3 of 5 falsifiers reachable by the arms as written, 5 of 5 with K11-K16,
+  and a constructed-null section keeps the check's deny branch reachable.
+  Twenty claims `MF_001..020`.
+  **`MF_011`:** `make_docs.py` / `README.md` / `GUARDS.md` arrive as
+  pre-repair copies too (12 / 16 / 48 differing lines) — five bundled
+  files, five stale, across three drops, which is what copying instead of
+  importing produces. Eleven claims `MF_001..011`.
+- `declared-frame/` — A six-field block to attach to any measurement,
+  model or claim (`boundary` / `horizon` / `who_counts` / `sign_source` /
+  `logic` / `observer_access`), plus `check_frame.py`, which validates a
+  block and tests two of them for comparability. Both delivered verbatim
+  along with the worked panel-vs-leaf example. **The block holds**
+  (`DF_001`): the fields are not interchangeable and `compare()` treats
+  them three ways — `boundary`/`horizon`/`who_counts` are core and must
+  match, `logic` gets a separate mismatch line, and `sign_source` /
+  `observer_access` are recorded but never compared. That split is right:
+  two results can share a boundary and disagree about which direction is
+  better, and the disagreement is legible precisely because both declared
+  it. **`DF_002`, the sharp one: the checker inverts the rule the doc
+  calls load-bearing.** The doc says an omitted field "converts an open
+  question into a settled one by silence" and `unknown` preserves the gap
+  — so omission is the worse of the two. In `compare()` a missing core
+  field is read as `str(a.get(f, ""))`, becomes `""`, and is compared as a
+  VALUE: omitted → `NOT DIRECTLY COMPARABLE`, `unknown` → `UNDETERMINED`.
+  Omission produces the MORE confident verdict, in the function shipped to
+  prevent that. Three-line fix. **`DF_003`:** comparability is exact
+  string equality on free text, so two frames whose boundary differs only
+  in clause order come back NOT COMPARABLE — the inverse of
+  `measurement-fork/`'s classifier, which over-matched where this
+  under-matches. Under-matching is the safer direction and there is no
+  band for it; there is no string fix, since whether two free-text
+  boundaries denote the same accounting is a judgement. **`DF_004`:** `rc`
+  tracks whether the blocks are well-formed, not whether the results
+  compare, and does not say so — `check_frame.py a b && use_both` passes
+  on two results the tool has just called incomparable. **`DF_005`:** the
+  worked pair differs on all three core fields (panel excludes
+  fabrication/mining/smelting/transport/installation/maintenance/
+  decommission; leaf puts all of them inside the same photon budget), so
+  the efficiency ratio between them is a frame difference — which is
+  `measurement-fork/`'s VOID RATIO and `reasoning-gate/`'s `G-DIM` arriving
+  by a third route. **Three tools, three stages, one rule.** `DF_006`
+  UNVERIFIED: nothing has been attached to a real result, and the
+  load-bearing question — does declaring the frame change what anyone does
+  — is a claim about a process, measurable as whether two disagreeing
+  parties given both blocks locate the disagreement faster. **`DF_007`,
+  added from the `anchor-interval/` drop's layer-0 / layer-1 split:** every
+  one of the six fields is layer 1 — switchable, declared, none privileged
+  — so nothing in the block adjudicates. `layer_zero.py` puts two pairs
+  through the unmodified `compare()`: one differing on `who_counts` (a pure
+  convention) and one differing on a `boundary` that does not close (an
+  input that physically crossed it entered the budget as zero). **Same
+  verdict, `NOT DIRECTLY COMPARABLE`, for both** — so "this frame is
+  internally coherent and does not match the shape" is not a statable
+  verdict for the instrument built to make frames comparable. A seventh
+  free-text field inherits the problem, since comparability here is string
+  equality over declarations; the repair is an EVALUATED term rather than a
+  compared one — inputs/outputs with units and one closure check, which is
+  the `reasoning-gate/` `G-RES` shape, and which `measurement-fork/`'s
+  `K18` already specifies as a widen move.
+  **Second drop, landed verbatim in `v2/`** (v1 stays at the parent level
+  unmodified, so both are inspectable as delivered): a v2 `FRAME.md` adding
+  **Cost** and **Growth** sections, a REWRITTEN `check_frame.py`, and the
+  new `patterns.json` — the `uninstrumented/` register turned into regex
+  triggers over text, with a `check` question per mechanism and an eighth
+  mechanism `PROXY SUBSTITUTION`. No runner shipped, so `scan.py` is
+  reconstructed with `[CHOICE]` marks (case-insensitivity, word boundaries,
+  hit dedup). **`DF_009`, the result that needs no corpus:** the register's
+  canonical `BUDGET_BOUNDARY` case is leaf vs panel, this drop ships both
+  halves as declared-frame examples, and **the scanner returns ZERO on
+  both** — the triggers catch the RHETORIC of a comparison (`more efficient
+  than`, `outperforms`) and not the comparison, so two numbers side by side
+  with no comparative, which is the usual result-line form, is invisible to
+  all eight `BUDGET BOUNDARY` triggers; and the register's own `VISIBLE AS`
+  phrasing ("the tree is inefficient at photosynthesis") fires under the
+  WRONG mechanism, `SCORED AS WASTE` via `inefficient`, handing the reader
+  the wrong `check` question. Both repairs cheap: a bare-numbers trigger,
+  and letting mechanisms co-fire — which is `uninstrumented/` `UNI_003`
+  arriving in the scanner. **`DF_010`:** triage load is the quantity the
+  design turns on by its own statement ("every hit is a candidate for
+  triage, not a finding") and it is low — 276 candidates over 201 markdown
+  files / 306,635 words = **0.9 per 1000 words**, with `--raw` (no word
+  boundaries) costing +42% for no gain. **No precision figure is reported
+  and none is reportable from this repo**: this is a corpus ABOUT
+  measurement failure written in the triggers' own vocabulary — `UNVERIFIED`
+  is a claim-table status code here, so `(unverified|uncorroborated)` fires
+  52 times on the repo's own verdict vocabulary. 4 triggers produce 161 of
+  276 candidates (58%) and 45 of 69 never fire, both corpus-conditional and
+  neither grading the list (`SCALAR DEMAND` is 7-of-8 silent because there
+  are no survey instruments here). One trigger IS the list's own problem:
+  `slack`, a four-letter common noun with a proper-noun homograph.
+  **An expectation checked and failed:** use-mention was expected to
+  dominate — `uninstrumented/README.md` returns 2 hits in 986 words and
+  `v2/FRAME.md` returns none, because the triggers are written in the
+  vocabulary of the FAILING document, not of the mechanism, and the two
+  barely overlap. **`DF_008`:** the v2 rewrite's real gain is that
+  `compare()` RETURNS `(verdict, why)` instead of printing, making the
+  verdict scriptable for the first time; `DF_002`, `DF_003` and `DF_007`
+  all survive unchanged, and `DF_004` is WORSE (rc=0 on every path where v1
+  returned 1 on a malformed block) — with the repair now one line and only
+  reachable because of the rewrite. New in v2: the single-verdict return
+  PREEMPTS, so a pair both undetermined on one core field and substantively
+  different on another comes back `UNDETERMINED` with the difference
+  unreported where v1 printed both; the precedence is right and the loss is
+  in the return TYPE, arguing for verdict-plus-findings, the shape
+  `reasoning-gate/` already uses. v2's `Growth` rule ("the format grows by
+  adding a declared field, never by widening an existing one. Widening is
+  the aggregation failure") is followed by the drop itself — `PROXY
+  SUBSTITUTION` is an eighth mechanism, not a widened one. Ten claims
+  `DF_001..010`. Stdlib only, CC0.
+- `anchor-interval/` — A drop about a system fitted to a corpus it also
+  writes into. Notes verbatim in `SOURCE_DROP.md`; three of the structures
+  in them are runnable and this folder runs them. **`corpus_loop.py`:** the
+  loop `corpus → model → outputs → corpus` needs no adversary, only a fit
+  that is not an identity map (`lam` — the shrinkage any regularized or
+  capacity-limited estimator applies). Coupling to an unauthored substrate
+  degrades 0.3604 → 0.4141 while both statistics computable from inside
+  improve or go quiet (coherence 0.0677 → 0.0481, corpus shift 0.0520 →
+  0.0035); at `lam = 0` the loop is a fixed point and the drift falls from
+  +0.0537 to +0.0063, so the shrinkage carries it, not the feedback.
+  **Two detectors, graded by `null-harness/`.** `D1` (model vs the corpus
+  it was fitted to) is `CONSTANT_SILENT` structurally and gets QUIETER as
+  the drift proceeds — it fell 29.0% while coupling error rose 14.9%,
+  because it measures how much of the corpus the model has yet to write.
+  `D2` (corpus now vs corpus then) has a reachable fire branch and on the
+  known-null / known-signal sweep — the two arms identical in every line
+  but the provenance of what is injected — comes back `NO_DISCRIMINATION`,
+  and worse: **`FP ≥ TP` at every threshold**, since correcting a 0.35 bias
+  displaces the corpus more than shrinking toward a pooled mean does, so a
+  monitor tuned to fire on real degradation fires harder on real repair.
+  Hence the anchor interval must be SCHEDULED — confidence-triggered
+  anchoring fires in 0 of 24 generations and returns the no-anchoring
+  number exactly, while scheduled anchoring recovers monotonically in
+  frequency (0.3867 every-12 → 0.1629 every-2). **`moving_reference.py`:**
+  "the model drifted" is a difference between two moving things reported as
+  a property of one. Under `reported = a·c + b`, a capability rising 117%
+  with a fixed ruler and a capability that never moves under a ruler
+  stretching 117% produce the same published number to `5.6e-17` — a rank
+  problem, not a precision problem. A held-fixed benchmark IS the right
+  measurement and buys a SHARE, not a capability: it identifies capability
+  only up to its own unknown gain and offset, so ratios of differences are
+  identified (0.428571 exactly) and levels are not. Seven co-moving terms
+  and one published number give `N_eff = 1.22` at loading 0.95 against an
+  apparatus floor of 6.41 at loading 0 (participation ratio, the
+  `model-ecology/phylogeny.py` statistic on a new substrate); and the
+  co-movement is not removable by a better ablation because the
+  architectural term was SELECTED against the corpus — attention shapes to
+  language statistics, tokenizers to the writing system — so the covariance
+  predates the experiment. **`recoverability.py`:** the drift literature's
+  retrain remedy and the irrecoverability claim are not two opinions about
+  one regime but two regimes, separated by one measurable quantity `f`, the
+  fraction of the re-acquisition pool downstream of the system being
+  corrected. Regime I (independent provenance) is entirely about
+  scheduling — the optimal acquisition length is interior and finite and
+  moves with the shift interval (`t_acq` = 6 / 12 / 25 at `t_shift` = 20 /
+  60 / 200). Regime II (downstream provenance) floors at `f·b` and a
+  10,000× increase in sample count buys nothing; above `f = 0.143` at bias
+  0.35 and a stated tolerance of 0.05 the target is outside the reachable
+  set at any `n`. Both sides lose something on a measurement neither has
+  run: `f ≈ 0` collapses `measurement-fork/`'s `K15` into an ops step and
+  fails the mediation prediction resting on it; `f` above the floor means
+  the published remedy has a precondition it does not ask anyone to report.
+  Eleven claims `ANC_001..011`, two of them deliberately not closed —
+  `ANC_010` UNVERIFIED (the drop's own citation markers are unresolvable as
+  delivered and one venue attribution is flagged unconfirmed by the drop
+  itself, so no claim here rests on a literature fact) and `ANC_011` OPEN
+  (the creek-crossing case — "literature contains what survives removal of
+  the body" — with `inverseminar/`'s `CANNOT DERIVE` channel named as the
+  instrument and no round yet run). Stdlib only, deterministic, CC0.
+- `uninstrumented/` — Register of cases where a quantity exists and the
+  instrument's constitution prevents it from appearing. **Not a gap log —
+  a gap is an oversight; these are exclusions built into the apparatus
+  before the first reading is taken.** Five-field entry structure
+  (`QUANTITY` / `EXCLUDED BY` / `VISIBLE AS` / `WOULD MEASURE` /
+  `CONFIDENCE`, the last stated separately from the shape and recorded
+  verbatim rather than adjudicated) over a closed seven-mechanism
+  vocabulary — `MODALITY` (apparatus in the wrong channel), `STORAGE`
+  (medium cannot hold the shape), `SCALAR_DEMAND` (function collapsed to a
+  number), `BUDGET_BOUNDARY` (closed budget compared to open),
+  `AUTHORED_REFERENCE` (reference produced by the measured party),
+  `AUDIT_ASYMMETRY` (guard fires on one side only), `SCORED_AS_WASTE`
+  (component read as cost by the instrument's own accounting). Sorted by
+  mechanism, not by field, so a case from evolutionary biology sits next to
+  one from survey methodology. Seven entries; five have a worked instance
+  elsewhere in the repo, which makes this a cross-index rather than a new
+  claim surface. **`uninstrumented.py` does not only print the register —
+  it tests it, three ways.** (1) `UNI_002`: the mechanism sort is UNTESTED,
+  not confirmed — at 7 entries / 7 fields / 7 mechanisms the two partitions
+  are identical, so nothing yet demonstrates the cross-domain grouping the
+  sort exists for; the expiry condition is a second entry under an existing
+  mechanism from a different field, and `reasoning-dial/` `RD_009`'s
+  G-STATE gap is the nearest candidate already in the repo. (2) `UNI_003`:
+  the mechanisms are NOT mutually exclusive — 4 of 7 entries have a second
+  mechanism with a claim, so the filing is a CHOICE and should carry a
+  primary plus a list, accepting that an entry then appears more than once.
+  (3) `UNI_004`, the null test: every delivered entry states high confidence
+  on the exclusion, so a list that only ever admits entries is
+  `CONSTANT_FIRES` in `null-harness/` terms. Run against the six externally
+  graded instruments in `instrument-epistemology/` as a known-null corpus —
+  real apparatus, real chains, three graded "mostly assumed", the worst at
+  chain fidelity 0.165 — **0 of 6 file**. `UNI_005` names the line that
+  holds: **a reached-but-badly quantity has a blindness map; an excluded one
+  does not, because the exclusion happens before the map is drawn.**
+  `UNI_006` is the honest counterweight and is UNVERIFIED — all seven
+  entries are uncontested and the null corpus was chosen for being well
+  documented rather than for sitting near the boundary, so a classifier that
+  never fires on the null has not been shown to fire on the signal.
+  **Second drop: canonical README + `scan.py`.** The delivered README heads
+  the folder (audit content moved to `AUDIT_NOTES.md`) and carries **eight**
+  mechanisms — `PROXY SUBSTITUTION` (enforceable measure displaces the
+  target) is new. `scan.py` + `patterns.json` live here now; the
+  reconstructed scanner in `declared-frame/v2/` is deleted and that folder
+  IMPORTS this one, per the no-copies convention. **`UNI_007`:** `PROXY
+  SUBSTITUTION` is a mechanism with **no entry** — it arrived from the
+  scanner side rather than from a case, which every other mechanism did, so
+  the sort cannot yet group anything under it. **`UNI_008`:** `scan.py
+  --asym` IS the `AUDIT_ASYMMETRY` entry's own `WOULD MEASURE` (count
+  caveats per account type; the ratio is the measurement), so the
+  **instrument gap closes and the corpus gap does not** — across 932 files
+  the repo yields 10 files with any hedge, and every one hand-checked is an
+  artifact (`UNVERIFIED` as a status code, `claims to` in prose about a
+  model, `Self-reported` in a JSON spec string, and `anecdotal` inside
+  `patterns.json` itself, the scanner matching the file that defines the
+  trigger). Zero are a hedge attached to an account, so the 1.11 ratio is
+  computed on nothing; the entry is no longer unrun for want of a design but
+  for want of reportage. **`UNI_009`:** `scan.py` compiles triggers raw, and
+  the single most-fired trigger in the corpus is `lean` at ~193 hits of
+  which the bare word accounts for 7 — the rest is `clean`, `cleanly`,
+  `boolean`. One `\b` on that trigger removes ~24% of all candidates at no
+  cost; `slack` does NOT move the same way (the bare word is what matches;
+  the residue is a proper-noun homograph and a code identifier), so the
+  repair is per-trigger, not global. `scan_audit.py` grades the delivered
+  scanner and states up front the four ways it differs from the earlier
+  reconstruction (sentences not lines, one hit per mechanism per sentence,
+  eight file extensions not one, raw compile not word-bounded) — the
+  BUDGET_BOUNDARY zero-hit result survives the instrument change unchanged.
+  **`UNI_010`, the sharpest one:** `scan.py` reads `.txt` and
+  `scan_audit.py` writes its output to `samples/`, so run N+1 measures run
+  N and **two consecutive runs disagree before anything in the repo has
+  changed** (~16 candidates of drift, with the previous run's own output
+  appearing as the densest file). An `EXCLUDE` on `samples/` makes the
+  script converge — and it is a hand-broken loop, not a fix: anyone running
+  `scan.py` over the repo still sees those hits, so the reported corpus is
+  no longer the corpus on disk. Both halves are stated in §5 rather than
+  one being quietly true. Same loop as `anchor-interval/` `ANC_001..004` at
+  three files and one script, visible only because two runs were diffed —
+  which is the scheduled anchor, not a triggered one.
+  **`UNI_011`:** entry 008 lands under `PROXY SUBSTITUTION`, closing
+  `UNI_007`'s falsifier — *recovery-permitting environment during the
+  off-duty interval*, excluded by proxy substitution, visible as
+  **compliance**. Not Goodhart: Goodhart describes a proxy degrading under
+  optimization pressure, and here the quantity was never in the proxy at
+  all — the arrangement supplied it free (off-duty meant leaving a
+  building), one occupation had it removed structurally, and nothing
+  re-derived the rule. A silent precondition, not a degrading measure. Ten
+  hours in a 4×6 sleeper and ten hours in conditions that permit recovery
+  are the same reading. **`UNI_002` is NOT closed by it** — at 8 entries /
+  8 fields / 8 mechanisms the two partitions are still identical.
+  **`UNI_012`:** the delivered README's own literature note names four
+  mechanisms (Goodhart/Campbell → proxy substitution, Polanyi → storage,
+  STS → undeclared frames, symptom-dismissal medicine → **affect
+  routing**) and only two are on the eight-item list. `undeclared frames`
+  has a whole folder (`declared-frame/`) instead of an entry; **`affect
+  routing` has neither** — a structural-mismatch reading, offered with its
+  transposition, classified as affect and routed to support rather than to
+  analysis, so the referent is dropped and nothing enters the record as a
+  measurement. Distinct from `AUDIT ASYMMETRY`, which is a guard firing on
+  one side; this is a channel reclassified at intake, so the reading never
+  reaches a guard. **REPAIRED:** `UNI_003` (`entry()` takes a primary plus
+  an `also` list and the register sorts under every mechanism — which is
+  what lets check 1 return anything but zero: 5 mechanisms now hold entries
+  from more than one field, though weakly, since the secondaries were
+  hand-assigned rather than filed as cases, so `UNI_002` stays open);
+  `UNI_009` (`lean` → `\blean\b`, candidates ~845 → 676, `slack`
+  deliberately unchanged since `\b` does not touch a proper-noun homograph);
+  `UNI_010` (`--exclude` and a `.scanignore` honoured anywhere in the walked
+  tree, so the loop is closed in `scan.py` rather than in the caller and the
+  reported corpus is the corpus on disk). `DF_009`'s two scanner findings
+  land with them, at a cost of 2 candidates: a bare-numbers trigger that
+  fires on the delivered result string and is scored `weak` when no
+  comparative is present, and `inefficien(t|cy|cies) (at|in|as)` so the
+  register's own `VISIBLE AS` line fires under both mechanisms. **A
+  correction:** the earlier audit said the delivered `break` in `scan()`
+  enforced one mechanism per sentence — it does not, the `break` exits the
+  trigger loop and mechanisms already co-fire, so the wrong-mechanism
+  finding was a missing trigger rather than a blocked co-firing. Twelve
+  claims `UNI_001..012`. Stdlib only, CC0.
+- `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
+  files plus example data) for treating **evaluation criteria as a
+  time-series variable** — version the ruler, compute drift on its own
+  axis, regress reported model improvement against it. Stdlib-only,
+  SQLite-backed, and the **first real consumer of the declared-frame
+  block**: `Frame` is a dataclass in `schema.py`, `unknown` is legal,
+  omission is flagged, and drift is computed per frame field rather than on
+  a blob. Runs end to end on its own quick start. Two added audits.
+  **`CD_002`, the structural one:** every primitive in `DriftEngine`
+  returns a NON-NEGATIVE distance, and the README's decision rule separates
+  three verdicts by the SIGN of β₁ — so widening (0.3636) and narrowing
+  (0.5714) both read positive, `exemplar_count` 100→1000 and 1000→100 are
+  byte-identical at 0.9000, and every `observer_access` transition scores
+  1.0 including the loss of verification (an ordinal compared as a nominal,
+  `SCALAR DEMAND` inverted). The instrument cannot distinguish the two
+  readings it exists to distinguish; the honest reading of β₁ > 0 is "score
+  changes are larger when the criteria moved a lot, in either direction".
+  4 of 9 fields are signable from data already stored, 3 as one-line
+  changes; 3 need a declared `direction` field because widening vs
+  narrowing free text is a judgement the text does not contain
+  (`declared-frame/` `DF_007` arriving in a metric); 2 have no natural
+  direction. **`CD_003`/`CD_004`/`CD_005`, two mechanical defects that
+  compound:** `build_series()` plants a `y = 0.0` at the head of every
+  series and pairs it with a real drift value — for Alpha-1B it REPLACES a
+  measured −0.04 — and `version_order` is built from `to_version` so the
+  first criteria version and every score on it is dropped, which silently
+  zeroes Delta-350M, the model holding the longest baseline in the dataset
+  (first version to last). Corrected, **Alpha-1B's slope flips sign**
+  (−0.0782 → +0.0526), moving it between the two opposite readings the
+  README's rule offers, and the demo drops to one n=3 fit. **`CD_006`:**
+  the capability term is in the stated model and not in the code, so the
+  drift slope absorbs it — and drift is downstream of capability (a
+  benchmark is revised BECAUSE models saturated it), the reverse of the
+  direction the slope is read in. The repair is already expressible:
+  `ModelScore` keys on version, so scoring every model on the FIRST version
+  alongside its contemporary one is a legal ingest today, and the
+  divergence isolates the criteria term up to that version's own unknown
+  gain and offset — a SHARE, not a capability (`anchor-interval/`
+  `ANC_006`). 0 of 4 demo models carry scores on more than one non-current
+  version. **`CD_007`:** "significant" appears twice in `README.md` and
+  zero times in `regress.py`; the fits have one degree of freedom (t = 1.03
+  and −0.33), and `r_squared: 1.0` at n=2 is emitted as a field beside an
+  interpretation string saying the data is insufficient — the guard is in
+  the sentence, not in the data. **REPAIRED**, six of seven, each pinned by
+  `tests/test_repairs.py` (28 tests): signed metrics alongside the unsigned
+  ones (four fields signed from stored data, three taking a declared
+  `direction`, two staying at zero, plus `signed_coverage` so a caller can
+  tell "no net change" from "nobody declared one"); the planted head gone
+  and the baseline version back, with a multi-version gap paired against
+  `span_drift()` so Delta-350M returns to the series; a two-sided t-test
+  through a regularized incomplete beta (checked against four standard
+  critical values) with `r_squared` null below three points; and
+  `regress_pooled()` / `--pooled`, since drift is a property of the artifact
+  and four per-model fits ran against one x-vector. **`CD_006` is CORRECTED, then
+  repaired.** Its original evidence line said "0 of 4 demo models carry
+  scores on more than one non-current version"; the script that produced it
+  printed **2 of 4** and the prose said 0, and by the correct test — does a
+  model span two or more versions — it is **4 of 4**. The bridge was in the
+  shipped data the whole time and nothing used it, which is a smaller gap
+  and a worse one. `anchor.py` uses it: a model does not change, so a model
+  scored on two criteria versions IS a frozen instrument and every bit of
+  movement in its score is criteria movement at fixed capability. The demo's
+  last transition carries THREE frozen models, over-determining the affine
+  criteria change (two unknowns, three equations) → gain change +0.2198,
+  offset change −0.1549, crossing at capability 0.7046, largest residual
+  0.0214 against movements of order 0.05 — and **that residual is the error
+  budget the cross-domain map says alignment should carry**, existing only
+  because the transition is over-determined. The per-model signs disagreeing
+  (Alpha −0.07, Beta −0.04, Gamma +0.03 on one transition) is NOT evidence
+  against the affine form: a rising gain with a falling offset moves weak
+  models down and strong models up, and the crossing is where the two
+  cancel. **`CD_008`:** the criteria term is recovered EXACTLY from an
+  anchor series (max error 6.9e-17 — a subtraction, not a fit), and what it
+  buys is a SHARE not a capability, ratios of differences identified to
+  0.600000 and levels not; the constructive converse is a world where
+  capability rose 83% under a moving ruler and a world where capability
+  never moved, producing published series identical to 5.6e-17, separated
+  only by the anchor series. **`CD_009`** records the cross-domain map
+  (metrology / adaptive Kalman / Kuhn / semantic drift / HROs / panarchy /
+  predictive processing) as UNVERIFIED on the literature — citation markers
+  unresolvable as delivered — while the structural pattern it names holds
+  and is already in the repo twice independently (`anchor-interval/`
+  `ANC_006`, `instrument-epistemology/` traceability). Two borrowings
+  implemented rather than noted: **as-found / as-left** and a **Shewhart
+  chart on a frozen pair**, the latter not run on the example data because
+  no frozen model is repeatedly scored on a frozen version. `audit.py
+  regress` now refuses to run unidentified: no bridge, no slope. Nine claims
+  `CD_001..009`; 34 tests. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
@@ -1452,6 +2193,20 @@ underneath).
     CLAIM_TABLE and prints the grass/grasshopper substitution next
     to each claim. Structural enforcement for narrative-instinct
     bias.
+  - `check_gate_drift.py` — there is one gate. Finds every copy of the
+    `reasoning-gate/` family anywhere in the repo, matched on **content**
+    (two markers per file, one a code construct) rather than filename, so
+    a renamed copy is still caught. Reports each `IDENTICAL` or `DRIFTED`;
+    identical still gets reported, since the only reason a copy is ever
+    stale is that it started identical. Also verifies `GUARDS.md` is what
+    `make_docs.py` renders. Exit 1 on drift. Paired with
+    `tests/test_gate_drift.py`, which fails the repo suite if a copy lands
+    and plants a stale copy to prove the detector is not
+    `CONSTANT_SILENT`. Written after five pre-repair copies arrived across
+    three drops (`measurement-fork/` MF_006, MF_011) with nothing in the
+    repo noticing. The checker identifies itself by content, not by path —
+    a path-based skip breaks the one case it exists for, scanning a tree
+    that contains a copy of the tool.
   - `substrate_substitution_toolkit.py` — richer programmatic
     surface: seven categories from harsh (`pure_consumer`, the null
     hypothesis) to gentle (`mutualistic_scale`), each with multiple

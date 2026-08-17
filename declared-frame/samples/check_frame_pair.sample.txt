@@ -1,0 +1,39 @@
+==============================================================
+FRAME  frames/panel_conversion.json
+==============================================================
+  boundary         photon capture to product only. Excludes fabrication, mining, smelting, transport, installation, maintenance, decommission.
+  horizon          steady-state operation. Excludes build and disposal intervals.
+  who_counts       the conversion step
+  sign_source      conversion efficiency chosen as the outcome column by the engineering discipline making the comparison
+  logic            classical
+  observer_access  unknown
+
+  DECLARED UNKNOWN: observer_access
+  These are visible gaps. Legal, and explorable.
+
+==============================================================
+FRAME  frames/leaf_conversion.json
+==============================================================
+  boundary         photon capture to product, plus self-assembly from local materials, self-repair, self-replication, structural load-bearing, transpiration, soil formation. All fabrication, maintenance and disposal inside the same photon budget.
+  horizon          whole lifecycle including growth and decomposition
+  who_counts       the organism and the systems it substrates
+  sign_source      conversion efficiency, inherited from the comparison being answered
+  logic            classical
+  observer_access  unknown
+
+  DECLARED UNKNOWN: observer_access
+  These are visible gaps. Legal, and explorable.
+
+==============================================================
+COMPARABILITY
+
+  NOT DIRECTLY COMPARABLE
+    boundary     A: photon capture to product only. Excludes fabrication, mining, smelting, transport, installation, maintenance, decommission.
+                 B: photon capture to product, plus self-assembly from local materials, self-repair, self-replication, structural load-bearing, transpiration, soil formation. All fabrication, maintenance and disposal inside the same photon budget.
+    horizon      A: steady-state operation. Excludes build and disposal intervals.
+                 B: whole lifecycle including growth and decomposition
+    who_counts   A: the conversion step
+                 B: the organism and the systems it substrates
+  The difference between these results is a frame
+  difference. Reporting it as a finding is an error.
+

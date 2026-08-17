@@ -1,0 +1,139 @@
+
+MOVING REFERENCE: A DIFFERENCE BETWEEN TWO MOVING THINGS
+
+========================================================================
+1  capability and criteria are not separable from reported score
+========================================================================
+  gen   c (A)        a (A)        c (B)        a (B)        reported    
+  --------------------------------------------------------------------
+  0     0.3000       1.0000       0.3000       1.0000       0.3000      
+  1     0.3500       1.0000       0.3000       1.1667       0.3500      
+  2     0.4000       1.0000       0.3000       1.3333       0.4000      
+  3     0.4500       1.0000       0.3000       1.5000       0.4500      
+  4     0.5000       1.0000       0.3000       1.6667       0.5000      
+  5     0.5500       1.0000       0.3000       1.8333       0.5500      
+  6     0.6000       1.0000       0.3000       2.0000       0.6000      
+  7     0.6500       1.0000       0.3000       2.1667       0.6500      
+
+  max |reported_A - reported_B| = 5.551e-17
+
+  A: capability rose 117%, ruler fixed.
+  B: capability did not move at all, ruler stretched 117%.
+  The published number cannot tell them apart, and there is no
+  statistical remedy -- it is one equation and two unknowns per
+  release. Not a precision problem. A rank problem.
+
+========================================================================
+2  a held-fixed benchmark identifies shape, not level
+========================================================================
+  gen   contemporary     on fixed B_0     divergence      
+  --------------------------------------------------------
+  0     0.3000           0.3000           +0.0000
+  1     0.3775           0.3500           +0.0275
+  2     0.4600           0.4000           +0.0600
+  3     0.5475           0.4500           +0.0975
+  4     0.6400           0.5000           +0.1400
+  5     0.7375           0.5500           +0.1875
+  6     0.8400           0.6000           +0.2400
+  7     0.9475           0.6500           +0.2975
+
+  The divergence between the two curves is the criteria-drift
+  term, isolated: (a_k - a_0) c_k + (b_k - b_0).
+
+  What it does NOT give: c itself. Scores on B_0 are a_0 c_k + b_0
+  and a_0, b_0 are unknown. So ratios of DIFFERENCES are
+  identified and levels are not:
+
+    (B0_3 - B0_0)/(B0_7 - B0_0) = 0.428571
+    (c_3  - c_0 )/(c_7  - c_0 ) = 0.428571
+    identified: True
+
+  So the measurement is worth running and its output is a SHARE,
+  not a capability. And if the old benchmark reads as obsolete
+  rather than as a control, that judgment was made inside the
+  thing being measured.
+
+========================================================================
+3  how much of the reported improvement is the ruler moving
+========================================================================
+  Stated assumptions -- these are a worked illustration, not a
+  measurement. The point is the decomposition, not the numbers.
+
+  ruler steady         reported +0.3500   capability +0.3500   ruler share   0.0%
+  ruler +5%/gen        reported +0.6475   capability +0.3500   ruler share  45.9%
+  ruler +9%/gen        reported +0.8855   capability +0.3500   ruler share  60.5%
+
+  Nothing here needs anyone to cheat. Every benchmark revision
+  was made for a stated reason, by people who thought the old one
+  had stopped discriminating. The share is what it is regardless
+  of why the revisions happened.
+
+========================================================================
+4  seven terms moved, one number reported
+========================================================================
+  7 terms co-move between releases. The published delta is one
+  number, attributed to the first term.
+
+      model architecture
+      training corpus
+      curation criteria
+      eval benchmark
+      annotation guidelines
+      rater pool
+      definition of neutral
+
+  Effective number of independent directions in the design,
+  by participation ratio of the correlation spectrum:
+
+  co-movement    N_eff        top eigenvalue reading
+  --------------------------------------------------------------
+  0.00           6.409        1.548          terms separable
+  0.30           6.434        1.499          terms separable
+  0.50           5.500        2.184          terms separable
+  0.70           3.239        3.616          partly confounded
+  0.85           1.818        5.130          one direction
+  0.95           1.216        6.342          one direction
+
+  The load = 0 row reads 6.41 rather than 7: with 40 releases the
+  sample correlation matrix carries its own noise floor. That is
+  the apparatus reading, and every row below sits on it.
+
+  What makes the co-movement non-removable by better design:
+  the architectural term was CHOSEN against the corpus.
+
+      attention shapes fitted to language statistics
+      tokenizers fitted to the writing system
+      context lengths fitted to document lengths
+      objectives fitted to what the corpus can score
+
+  So the term and the data are not independent variables. Varying
+  the term while holding the corpus fixed does not separate them,
+  because the covariance was built in before the experiment
+  started. Ablations at small scale DO isolate -- and small-scale
+  results are known not to transfer reliably upward, so the
+  isolated result is not the one that ships.
+
+  Falsifier for the selection claim: an architectural term chosen
+  WITHOUT reference to the corpus -- transferred from another
+  modality, or fixed before the corpus existed -- decorrelates the
+  pair, and the load parameter above should drop for it.
+
+========================================================================
+READING
+========================================================================
+
+  From a contemporary score alone, capability and criteria are not
+  separable -- one equation, two unknowns, and section 1 exhibits a
+  flat-capability trajectory that reproduces a rising one exactly.
+
+  Holding one benchmark fixed across generations is the right measurement
+  and it buys a SHARE, not a capability: c is identified only up to the
+  fixed benchmark's own unknown gain and offset, so differences and their
+  ratios are identified and levels are not.
+
+  Seven terms move between releases and one number is published. At high
+  co-movement the design carries close to one independent direction, and
+  the co-movement is not a nuisance a better experiment removes: the
+  architecture was selected against the corpus, so the two were confounded
+  before any ablation was designed.
+
