@@ -51,7 +51,7 @@ STATUS: SUPPORTED
    bias_floor               0.1200
    notes                    error floors at the shared bias regardless of channel count. Independence is a property of the calibration path, not of N.
 
-HYPOTHESIS BLOCK -- generated 2026-08-17 11:50
+HYPOTHESIS BLOCK -- generated 2026-08-17 11:55
 file hash: 4a587a7ab5a7   harness: 0.1.0
 
 STATUS OF EACH CLAIM (from SIM only; no BENCH data exists yet)

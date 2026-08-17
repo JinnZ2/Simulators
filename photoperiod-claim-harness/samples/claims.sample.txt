@@ -1,0 +1,31 @@
+[C1] sim=S1  source=REPORTED
+   claim: Energy per unit output fell ~68% while biomass rate held, fiber fell, hydration rose, juice yield rose 20-25%.
+   test : Scan light reduction x shade-avoidance x sink strength. Across all cells that reproduce the reported signature, how wide is the range of ACTUAL energy-per-dry-gram? Narrow means the published metrics pin the real efficiency down. Wide means they do not.
+   reads: TRUE  -> the reported metrics are diagnostic of real efficiency.
+          FALSE -> NON-DIAGNOSTIC: the same reported signature is produced across a wide range of true per-photosynthate efficiencies. Dry mass is the missing measurement, not a nitpick.
+
+[C2] sim=S2  source=PHYSICS
+   claim: PREMISE (literature): wheat is an angiosperm; protochlorophyllide reduction is light-dependent, POR only, no DPOR. Net chlorophyll synthesis in darkness is not available.
+HYPOTHESIS UNDER TEST: dark intervals could still raise final chlorophyll at equal photon dose by recharging the Pchlide/POR/NADPH pool between pulses.
+   test : Can intermittent dark still raise final chlorophyll at EQUAL total photon dose, via dark regeneration of the Pchlide/POR/NADPH pool?
+   reads: TRUE  -> pool-charging is a live mechanism; the finding can be real without violating angiosperm biosynthesis.
+          FALSE -> continuous light dominates, because the FLU clamp acts on POOL SIZE: a full pool SLOWS synthesis, so draining it continuously maximises flux. The reported effect then needs a different mechanism. Named candidate, not yet simulated: shade acclimation (antenna investment per unit leaf area rises under low light). See PENDING_EDITS.
+
+[C3] sim=S2  source=PHYSICS
+   claim: Dark drives two opposed processes: substrate pool charging (gain) and senescence-linked chlorophyll degradation (loss). Different time constants imply a crossover in dark-interval length.
+   test : Sweep dark-interval length. Does the sign of dChl flip?
+   reads: TRUE  -> there is a finite optimal dark interval and 'long dark intervals' is an underspecified control setting.
+          FALSE -> no crossover in this regime; one process dominates throughout.
+
+[C4] sim=S3  source=PHYSICS
+   claim: Chlorophyll was read by multispectral reflectance. Reflectance indices move with leaf water content and thickness. The control strategy changes water content and thickness.
+   test : Run a controller that maximizes the INDEX. Does the index rise while chlorophyll-per-dry-gram falls?
+   reads: TRUE  -> the reported signature is reproducible from measurement artifact alone, so it is not diagnostic of physiology.
+          FALSE -> index and truth move together here; artifact does not explain the signature.
+
+[C5] sim=S4  source=PHYSICS
+   claim: A shared calibration bias is NOT cancelled by adding channels. Independence is a property of the calibration path, not of N.
+   test : Inject a common-mode calibration bias across all channels. Does channel count reduce the error in the derived quantity?
+   reads: TRUE  -> common-mode bias survives 49 channels; only a second, differently-calibrated instrument removes it.
+          FALSE -> channel count did reduce the error; the bias was not common-mode in this run.
+

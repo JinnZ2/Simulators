@@ -27,6 +27,12 @@ Six results, in the order they matter:
   5  the header's own usage example fails.
 
   6  what the harness gets right, and it is most of it.
+
+  7  the delivered README's numbers all check out except one word: the
+     dark-interval curve is always negative but NOT monotone, and every arm
+     that breaks the ordering is one that ends mid-cycle. Reading a cycle
+     average instead of the endpoint makes it monotone, and changes no
+     verdict.
 """
 
 from __future__ import annotations
@@ -289,6 +295,110 @@ def check_what_holds() -> None:
     print("  tables carry.")
 
 
+def _run_avg(duty, dark_block_h, days=6, dt=0.1, k_syn=0.06, P_max=1.0,
+             k_cat=0.50, Km=0.30, K_light=0.60, I_on=1.0,
+             k_deg_light=0.002, k_deg_dark=0.012):
+    """
+    _pchlide_run's integrator, unchanged, returning the mean over the FINAL
+    COMPLETE PERIOD instead of the value at the last step. Nothing about the
+    mechanism differs; only where the number is read.
+    """
+    import math
+    I_eff = I_on / duty
+    period = dark_block_h / max(1e-9, (1.0 - duty)) if duty < 1.0 else 1.0
+    P, Chl, t = P_max * 0.5, 0.10, 0.0
+    T = days * 24
+    start = period * (math.floor(T / period) - 1) + (
+        T - period * math.floor(T / period))
+    acc, n = 0.0, 0
+    for _ in range(int(T / dt)):
+        phase = math.fmod(t, period) / period if period > 0 else 0.0
+        lit = phase < duty
+        I = I_eff if lit else 0.0
+        v = k_cat * (P / (P + Km)) * (I / (I + K_light)) if lit else 0.0
+        P = max(0.0, P + (k_syn * (1.0 - P / P_max) - v) * dt)
+        Chl = max(0.0, Chl + (v - (k_deg_light if lit else k_deg_dark) * Chl) * dt)
+        t += dt
+        if t >= start:
+            acc += Chl
+            n += 1
+    return acc / max(n, 1)
+
+
+def check_readme() -> None:
+    section("7  the README's numbers hold; one word does not")
+
+    import math
+    out = H.s1_mass_denominator()
+    print("  %-38s %-10s %s" % ("delivered README says", "stated", "measured"))
+    print("  " + "-" * 66)
+    print("  %-38s %-10s %d" % ("grid cells", "75", len(out["grid"])))
+    print("  %-38s %-10s %d" % ("cells reproducing the signature", "58",
+                                out["signature_cells"]))
+    print("  %-38s %-10s %.4f" % ("spread of true kWh per dry gram", "~4.9x",
+                                  out["signature_spread"]))
+    for cid, want in (("C1", "REFUTED"), ("C2", "REFUTED"), ("C3", "REFUTED"),
+                      ("C4", "REFUTED"), ("C5", "SUPPORTED")):
+        rec, _, _ = H.run_claim(cid)
+        print("  %-38s %-10s %s" % (cid, want, rec["status"]))
+
+    print()
+    print("  The one that does not:\n")
+    print("      C3 REFUTED. No crossover in this regime; dark is")
+    print("      MONOTONICALLY WORSE under C2's mechanism set.\n")
+
+    s2 = H.s2_pool_charging()
+    dc = s2["dark_interval_curve"]
+    duty, days = 0.5, 6
+    print("  %-8s %-10s %-14s %-14s" % ("block h", "periods", "endpoint",
+                                        "cycle-average"))
+    print("  " + "-" * 52)
+    cont_avg = _run_avg(1.0, 4.0)
+    avg = []
+    for b, d in dc:
+        per = b / (1.0 - duty)
+        n = days * 24 / per
+        a = _run_avg(duty, b) - cont_avg
+        avg.append(a)
+        mark = "" if abs(n - round(n)) < 1e-9 else "   <- ends mid-cycle"
+        print("  %-8.1f %-10.2f %-14.5f %-14.5f%s" % (b, n, d, a, mark))
+
+    ep_mono = all(dc[i][1] <= dc[i - 1][1] for i in range(1, len(dc)))
+    av_mono = all(avg[i] <= avg[i - 1] for i in range(1, len(avg)))
+    breaks = [dc[i][0] for i in range(1, len(dc)) if dc[i][1] > dc[i - 1][1]]
+    partial = [b for b, _ in dc
+               if abs((days * 24 / (b / (1.0 - duty)))
+                      - round(days * 24 / (b / (1.0 - duty)))) > 1e-9]
+    print()
+    print("  endpoint curve monotone      %s" % ep_mono)
+    print("  cycle-average monotone       %s" % av_mono)
+    print("  arms that break monotonicity %s" % breaks)
+    print("  arms that end mid-cycle      %s" % partial)
+    print("  every breaking arm ends mid-cycle: %s"
+          % set(breaks).issubset(set(partial)))
+    print("  (the converse does not hold -- %s ends mid-cycle and happens"
+          % ", ".join(str(b) for b in sorted(set(partial) - set(breaks))))
+    print("   not to break the ordering, so ending mid-cycle is necessary")
+    print("   here and not sufficient)")
+    print()
+    print("  So the README is right about the MECHANISM and the shipped")
+    print("  readout does not show it. `_pchlide_run` returns Chl at the last")
+    print("  integration step, and at duty=0.5 the period is 2 x dark_block,")
+    print("  so a 144 h run ends mid-cycle for the blocks that do not divide")
+    print("  it. Reading the mean over the final complete period")
+    print("  instead of the endpoint makes the curve monotone.")
+    print()
+    print("  It changes no verdict. C3's predicate looks for a SIGN FLIP;")
+    print("  both curves are negative throughout, so `crossover_h` is None")
+    print("  either way. What the artifact costs is the ability to read the")
+    print("  curve's SHAPE as mechanism -- which is what C3's reads line")
+    print("  offers when it says 'one process dominates throughout'.")
+    print()
+    print("  Same class as ../aperiodic-order-sim-stack/: a commensurability")
+    print("  between the sampling grid and the structure being measured, and")
+    print("  the fix is to read a quantity the grid cannot alias.")
+
+
 def main() -> int:
     print()
     print("AUDITING THE HARNESS")
@@ -301,6 +411,7 @@ def main() -> int:
     check_settle()
     check_usage()
     check_what_holds()
+    check_readme()
 
     section("READING")
     print("""

@@ -186,6 +186,66 @@ this file has no bench data and neither does the harness
   tables carry.
 
 ========================================================================
+7  the README's numbers hold; one word does not
+========================================================================
+  delivered README says                  stated     measured
+  ------------------------------------------------------------------
+  grid cells                             75         75
+  cells reproducing the signature        58         58
+  spread of true kWh per dry gram        ~4.9x      4.8828
+  C1                                     REFUTED    REFUTED
+  C2                                     REFUTED    REFUTED
+  C3                                     REFUTED    REFUTED
+  C4                                     REFUTED    REFUTED
+  C5                                     SUPPORTED  SUPPORTED
+
+  The one that does not:
+
+      C3 REFUTED. No crossover in this regime; dark is
+      MONOTONICALLY WORSE under C2's mechanism set.
+
+  block h  periods    endpoint       cycle-average 
+  ----------------------------------------------------
+  0.5      144.00     -2.40738       -2.38494      
+  1.0      72.00      -2.43340       -2.39951      
+  2.0      36.00      -2.50337       -2.44496      
+  3.0      24.00      -2.59185       -2.50758      
+  4.0      18.00      -2.68504       -2.57430      
+  6.0      12.00      -2.88316       -2.72082      
+  8.0      9.00       -3.08040       -2.87045      
+  10.0     7.20       -2.77285       -3.00421         <- ends mid-cycle
+  12.0     6.00       -3.41745       -3.12255      
+  16.0     4.50       -2.66973       -3.34152         <- ends mid-cycle
+  20.0     3.60       -2.98122       -3.53345         <- ends mid-cycle
+  24.0     3.00       -4.17996       -3.69939      
+
+  endpoint curve monotone      False
+  cycle-average monotone       True
+  arms that break monotonicity [10.0, 16.0]
+  arms that end mid-cycle      [10.0, 16.0, 20.0]
+  every breaking arm ends mid-cycle: True
+  (the converse does not hold -- 20.0 ends mid-cycle and happens
+   not to break the ordering, so ending mid-cycle is necessary
+   here and not sufficient)
+
+  So the README is right about the MECHANISM and the shipped
+  readout does not show it. `_pchlide_run` returns Chl at the last
+  integration step, and at duty=0.5 the period is 2 x dark_block,
+  so a 144 h run ends mid-cycle for the blocks that do not divide
+  it. Reading the mean over the final complete period
+  instead of the endpoint makes the curve monotone.
+
+  It changes no verdict. C3's predicate looks for a SIGN FLIP;
+  both curves are negative throughout, so `crossover_h` is None
+  either way. What the artifact costs is the ability to read the
+  curve's SHAPE as mechanism -- which is what C3's reads line
+  offers when it says 'one process dominates throughout'.
+
+  Same class as ../aperiodic-order-sim-stack/: a commensurability
+  between the sampling grid and the structure being measured, and
+  the fix is to read a quantity the grid cannot alias.
+
+========================================================================
 READING
 ========================================================================
 

@@ -2219,8 +2219,22 @@ underneath).
   declared-control-never-scored shape `reasoning-gate/` repaired).
   **`PCH_005`:** the header's own usage example `run S2` passes a sim id to a
   command that looks up claim ids and raises an uncaught `StopIteration` —
-  same class as the gate's `D1`. No bench data exists in the folder and none
-  is claimed; nothing here is a statement about wheat. CC0.
+  same class as the gate's `D1`. **`PCH_007`, from the canonical README:**
+  every number it states holds — 75 grid cells, 58 with the signature, ~4.9×
+  spread, and all five verdicts — but one word does not. `C3`'s
+  dark-interval curve is negative throughout and **not monotone**, and every
+  arm that breaks the ordering is one whose 144 h run ends mid-cycle
+  (`_pchlide_run` reads `Chl` at the last integration step, and at duty 0.5
+  the period is 2 × dark_block). Reading the mean over the final complete
+  period makes the curve monotone. **It changes no verdict** — `C3` tests for
+  a sign flip and there is none either way — so what the artifact costs is
+  the ability to read the curve's SHAPE as mechanism, which is what `C3`'s
+  reads line offers. The prose is ahead of the instrument, not behind it;
+  same commensurability class as `aperiodic-order-sim-stack/`. Ending
+  mid-cycle is necessary and not sufficient (the 20 h arm ends mid-cycle and
+  does not break the ordering), so the diagnosis is a containment. No bench
+  data exists in the folder and none is claimed; nothing here is a statement
+  about wheat. CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
