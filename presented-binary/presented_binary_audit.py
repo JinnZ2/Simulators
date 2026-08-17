@@ -82,36 +82,38 @@ print("%d checks in binary_audit; %d claims in the delivered table" % (
     len(BA.CHECKS), 9))
 
 # ----------------------------------------------------------------- PB_001
-head(1, "PB_001", "both verification statements rest on files that did not arrive")
+head(1, "PB_001", "the seeded case arrived; the fixtures did not")
 print("""
-CLAIM_TABLE.md, "Status":
+CLAIM_TABLE.md made two statements about artifacts the first drop did not
+carry. One has now arrived and one has not.
 
-    binary_audit.py "has one seeded case, a generic framing rather than a
+    "binary_audit.py has one seeded case, a generic framing rather than a
     documented incident, scoring 0 documented of 11."
-
-    frame_sim.py "is verified end to end against synthetic fixtures --
-    seal enforcement, prompt withholding, and tamper detection all
-    confirmed."
-
-Neither the case file nor the fixtures are in the drop.
-""".strip())
+""".strip("\n"))
 print()
-casedir = BA.CASEDIR
-print("  binary_audit.CASEDIR = %s" % os.path.relpath(casedir, HERE))
-print("  exists: %s" % os.path.isdir(casedir))
-print("  case files: %d" % (len(BA.load_cases()) if os.path.isdir(casedir) else 0))
-print("  -> `python3 binary_audit.py` exits 1 with 'no case files'")
+cases = BA.load_cases()
+for c in cases:
+    sc = BA.score(c)
+    print("  %-20s documented %d of %d   asserted %d   absent %d   share %.3f" % (
+        sc["case"], sc["documented"], sc["n_checks"], sc["asserted"],
+        sc["absent"], sc["documented_share"]))
 print()
 print("""
-The seeded case is data. Inventing one would put a framing in the author's
-mouth, so cases/ is left absent and the gap stays visible. The frame_sim
-properties are different -- they are properties of code, checkable
-directly, and the sections below check all three.
+  ventilator-surge lands and the number is exact: 0 documented of 11, with
+  3 asserted and 8 absent. The claim held.
 
-This is the second consecutive drop where the claim table's verification
-sentence names a file the drop does not carry (category-weld CW_001 was
-the first, and there the files arrived one drop later).
-""".strip())
+    "frame_sim.py is verified end to end -- seal enforcement, prompt
+    withholding and tamper detection all confirmed against synthetic
+    fixtures -- and has two real self-runs, R1 and R2."
+
+The fixtures are still not in the drop, and frame_sim.py was not
+re-delivered. Sections 2-3 check the three named properties directly, as
+before; the runs R1 and R2 are reported in the claim table and their
+artifacts are not carried either.
+
+So PB_001 splits. The seeded case: CLOSED, and confirmed to the digit.
+The fixtures: still UNVERIFIED, third drop running.
+""".strip("\n"))
 
 # ----------------------------------------------------------------- PB_002
 head(2, "PB_002", "the seal is enforced at one gate and not at the other")
@@ -429,7 +431,103 @@ Recorded as an unrun test, not as a defect. B5 is stated in a claim table
 that says its status is open, which is accurate.
 """.strip())
 
+# ----------------------------------------------------------------- PB_011
+head(11, "PB_011", "three copies of this file arrived; two were stale")
+print("""
+The drop carried binary_audit.py three times: twice as uploaded files and
+once pasted inline. The two uploaded files are byte-identical to each
+other AND to the version already in the repo -- the one WITHOUT the
+handoff router. The inline paste is the live version.
+
+    uploaded copy A  vs  uploaded copy B     identical
+    uploaded copy A  vs  repo (pre-handoff)  identical
+    inline paste                             adds HANDOFF_CEILING,
+                                             handoff(), the O1 `count`
+                                             template field, the score()
+                                             key and the detail() block
+
+measurement-fork MF_019 recorded the rule: files that live in one place do
+not drift, files bundled into every drop do. This is the first drop where
+the drift had a consequence -- landing the uploaded files at face value
+would have reverted the router the same drop introduced.
+
+capital.json also arrived for the third time, byte-identical again. That
+one is inert; this one was not.
+""".strip())
+
+# ----------------------------------------------------------------- PB_012
+head(12, "PB_012", "the router's null collides a measurement with a gap")
+print()
+print("  %-44s %s" % ("O1 state", "handoff"))
+print("  " + "-" * 74)
+for label, st, count in [
+    ("documented, count 2 -- the signature", "documented", 2),
+    ("documented, count 1", "documented", 1),
+    ("documented, count 7 -- checked, does not match", "documented", 7),
+    ("documented, count not stated", "documented", None),
+    ("asserted", "asserted", None),
+    ("absent -- never checked", "absent", None),
+]:
+    ch = {i: {"state": "absent", "answer": "", "record": ""} for i in CHECK_IDS}
+    ch["O1"] = {"state": st, "answer": "", "record": ""}
+    if count is not None:
+        ch["O1"]["count"] = count
+    h = BA.score({"case": "probe", "checks": ch})["handoff"]
+    if h is None:
+        shown = "None"
+    elif h.get("route"):
+        shown = "-> %s (count %s)" % (h["route"], h["count"])
+    else:
+        shown = "not routed: %s" % h["reason"]
+    print("  %-44s %s" % (label, shown))
+print()
+print("""
+Row 3 and row 6 return the same value. "O1 documented at 7" is a
+measurement -- the count was recorded and does not carry the mechanism-10
+signature. "O1 absent" is a gap -- nobody established a count. Both are
+bare None, so a caller cannot tell a negative result from an unasked
+question.
+
+The vocabulary for the distinction already exists one row up. Row 4
+returns {"route": None, "reason": "O1 documented but count not stated"},
+which is exactly the right shape, and detail() already renders it as
+"HANDOFF not routed: <reason>". Routing the count>ceiling case through
+that same branch is two lines and needs no new concept.
+
+This is the fourth instance of the shape in four folders: option_gain
+(PB_004), R3's absent (generation-capacity GC_004), and the two here.
+""".strip())
+
+# ----------------------------------------------------------------- PB_013
+head(13, "PB_013", "the router ships with no case that fires it")
+print()
+for c in BA.load_cases():
+    o1 = (c.get("checks") or {}).get("O1") or {}
+    print("  %-20s O1 state %-12s count %-6s handoff %s" % (
+        c.get("case"), o1.get("state"), o1.get("count"),
+        BA.score(c)["handoff"]))
+print()
+print("""
+ventilator-surge has O1 absent -- the framing supplies two options and
+never states a generated count, which its own record field says plainly:
+"option count never stated; the framing supplies two and stops."
+
+So the handoff's firing branch is exercised by no case in the repo. It is
+not a defect: the router is correct to refuse, and refusing on the one
+delivered case is the honest outcome, because a framing that never states
+a count is not evidence of a low one. The gap is that the branch which
+carries the whole handoff has no worked instance -- the same state
+generation-capacity's own R1 is in.
+
+What would close it: a case whose O1 is documented WITH a count. The
+generation-capacity README's worked instance is written for exactly that
+-- someone asked how many alternatives were generated, answering two,
+truthfully -- and the case file for it (food-knowledge) is named in G2's
+status and is not in the drop.
+""".strip())
+
+
 print()
 print(BAR)
-print("end of audit -- findings recorded in AUDIT_NOTES.md as PB_001..PB_010")
+print("end of audit -- findings recorded in AUDIT_NOTES.md as PB_001..PB_013")
 print(BAR)

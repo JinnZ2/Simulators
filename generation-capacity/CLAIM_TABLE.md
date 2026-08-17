@@ -1,33 +1,112 @@
-# CLAIM_TABLE — generation-capacity
+# CLAIM TABLE — GENERATION CAPACITY REMOVED
 
-Audit claims on MECHANISM 10. The delivered
-[`MECHANISM_10.md`](MECHANISM_10.md) states its own confidence and is not
-modified; nothing here restates it as a claim of mine.
+Each claim carries a falsifier. Status is what the repo currently supports,
+not what is believed.
 
-Refutation protocol: a break is a measurement. Update the claim, never
-retune the instrument to preserve a claim.
+---
 
-| id | claim | falsified by | status |
-|----|-------|--------------|--------|
-| GC_001 | The drop's VISIBLE AS claim holds against a real instrument: a framing under MECHANISM 10, answered honestly, scores 11 of 11 documented on `presented-binary/binary_audit.py`. It holds for a weaker reason than stated — `documented_share` grades record completeness and never reads the answers, so a damning set of answers scores identically | an option-space audit on which the same framing scores lower than one not under the mechanism | SUPPORTED |
-| GC_002 | The gap cannot be closed by a twelfth check in the same vocabulary: `documented`/`asserted`/`absent` resolve against the answering party's own record, and an absent generator produces an absent record of itself, which reads as a documentation gap | a state in that vocabulary that distinguishes "capacity intact" from "no record of capacity" | SUPPORTED |
-| GC_003 | R1's two named denominator sources are not interchangeable and neither is the independent denominator the ratio needs: floristic is independent but requires a local-name-to-species mapping, which is the central-reference scoring the CALIBRATION CONSTRAINT forbids; ethnobotanical is translatable but is a prior generation's numerator, which makes the ratio an R2 | a naming protocol that fixes the unit of "one nameable item" without reference to a Linnaean split | SUPPORTED |
-| GC_004 | R3's negative branch is unreachable as specified: "evidenced by citation or absent" gives no state meaning "searched, and not cited", so a corpus never searched and a loop that does not run both return absent | a named corpus and interval in the R3 specification | SUPPORTED |
-| GC_005 | MECHANISM 10 is distinct from the nine on a structural check. AUTHORED REFERENCE is its mirror rather than its match — same defect in the reference, opposite direction of authorship — and the two take opposite remedies, since an external fixed reference repairs one and worsens the other | a case where the generator was reduced AND the reduction is carried in the record, which the drop's own EXCLUDED BY rules out as a different mechanism | SUPPORTED |
-| GC_006 | SELF-MAINTAINING is a rate comparison, not a characterisation, and two instruments in this repo already take that shape: `rigidification-sensor/simulator.py`'s continuation-vs-reversal cost with `locked_at`, and `sustained-activation-gate/`'s double well at zero drive | a maintenance cost that does not go to zero, i.e. an arrangement that needs continuous expenditure to persist | UNVERIFIED — instrument available, nothing run |
-| GC_007 | The consent claim's whole empirical load sits in R1's numerator: the inference from inability to unavailable-consent is close to analytic, and the antecedent is what is unmeasured | a route to the inability that does not pass through a recall measurement | SUPPORTED |
+**G1.** A constraint can be honest at one scale and manufactured at the scale
+above, with no party at the lower scale concealing anything.
 
-## Status of the readouts
+*Falsifier:* a case where the lower-scale party's option ceiling is shown to
+be self-produced with no upstream removal identifiable.
 
-R1, R2 and R3 have no readings, in this folder or anywhere in the repo.
-The drop says so. Section 1 of the audit is the only quantified result
-here, and its numbers come from an instrument in a different folder scored
-on a case constructed for the audit — not from a documented incident.
+*Status:* argued. No quantified case.
 
-`cases/` and `places/` are absent rather than seeded, for the reason
-`presented-binary/` `PB_001` gives: a case is data, and inventing one
-would put a framing in the author's mouth.
+---
 
-The nearest thing to a first reading is R1's seed case, edible species,
-and what it needs before a numerator is collected is GC_003's units
-decision — not more data.
+**G2.** Removal of option-generation capacity passes a found/authored
+constraint test as FOUND, because it is found — in the party, not in the
+world.
+
+*Falsifier:* a case of removed capacity where the constraint converts to
+urgency or to a question about the asker under push.
+
+*Status:* argued, one case marked (food-knowledge, push results asserted not
+recorded).
+
+---
+
+**G3.** The arrangement requires no ongoing enforcement once capacity is gone.
+
+*Falsifier:* a case where capacity has been removed and restriction
+expenditure remains flat or rises rather than dropping to zero.
+
+*Status:* untested. Requires an enforcement-cost series, which this repo has
+no instance of.
+
+---
+
+**G4.** The removal presents as a property of the affected party rather than
+as a record of an action.
+
+*Falsifier:* a case where the deficit is routinely attributed upstream in the
+governing record rather than to the population.
+
+*Status:* argued. Shares a shape with the rural attribution case in
+`uninstrumented`; not independent evidence.
+
+---
+
+**G5.** Where a gate holder exists, the deficit is cited as grounds for the
+gate that produced it (loop form).
+
+*Falsifier:* gate-holder cases where the deficit is not cited as grounds, or
+where routing is opened without the deficit closing.
+
+*Status:* one case marked true by construction (informed-gate). Needs cases
+scored from documents rather than described.
+
+---
+
+**G6.** "Informed" scored against a deciding party's knowledge base returns
+situated knowledge as absent.
+
+*Falsifier:* an informedness instrument in use that scores place-specific
+knowledge as present without the center holding it first.
+
+*Status:* argued. This is a check on the instrument, not on the world;
+implemented as the `scored_against` field, which invalidates R1 when set to
+center.
+
+---
+
+**G7.** R1 (nameable / present) is measurable now, and the obstruction is
+collection rather than method.
+
+*Falsifier:* a methodological barrier to collecting resident recall against a
+floristic inventory that is not a funding or attention barrier.
+
+*Status:* denominators confirmed to exist as a class (ethnobotanical and
+floristic inventories). No specific inventory paired to a recall instrument
+has been located in this session. This claim is the most checkable one here
+and has not been checked.
+
+---
+
+**G8.** A party unable to generate an alternative cannot consent against it,
+so consent to a sacrifice framing is structurally unavailable rather than
+merely unmeasured.
+
+*Falsifier:* a consent procedure that constitutes the option space for the
+consenting party before asking, and a case where it changed the outcome.
+
+*Status:* argued. Follows from G1 and G2 if those hold; carries their status.
+
+---
+
+## DISCLOSED WEAKNESSES
+
+**Recall instrument unspecified.** R1's numerator is "nameable by residents."
+Nameable how — free recall, prompted recall, recognition on presentation,
+demonstrated use? These give different numbers and the schema does not
+distinguish them. Until it does, cross-case R1 comparison is not valid, only
+within-case slope with a fixed method.
+
+**No quantified case.** Both seeds are structural. Every readout returns `--`
+except one boolean set by construction. The repo currently demonstrates a
+schema, not a finding.
+
+**G5 by construction.** `informed-gate` has `deficit_cited_as_grounds` set
+true because the case was written to instance the loop. That is not evidence
+of the loop occurring at any rate in the world.

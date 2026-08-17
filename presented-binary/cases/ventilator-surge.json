@@ -1,0 +1,18 @@
+{
+  "case": "ventilator-surge",
+  "presented_as": "One machine, two patients. Choose A or B.",
+  "source": "generic framing as commonly presented, not a specific incident",
+  "checks": {
+    "O1": {"state": "absent", "answer": "", "record": "option count never stated; the framing supplies two and stops"},
+    "O2": {"state": "absent", "answer": "", "record": ""},
+    "O3": {"state": "asserted", "answer": "the deciding clinician, not inside the affected set", "record": ""},
+    "O4": {"state": "absent", "answer": "", "record": "only the result is presented"},
+    "O5": {"state": "absent", "answer": "", "record": "split ventilation, manual bag-valve rotation, transfer, cycling, regional load-sharing and random allocation are all outside the presented set and none are excluded on the record"},
+    "O6": {"state": "absent", "answer": "", "record": "'one machine' is not tested against transfer range or borrowable units"},
+    "S1": {"state": "asserted", "answer": "the clinician; not in the sacrificed set", "record": ""},
+    "S2": {"state": "asserted", "answer": "headcount", "record": "weld present: functional position is not carried"},
+    "S3": {"state": "absent", "answer": "", "record": ""},
+    "S4": {"state": "absent", "answer": "", "record": ""},
+    "S5": {"state": "absent", "answer": "", "record": ""}
+  }
+}

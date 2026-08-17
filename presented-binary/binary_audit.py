@@ -67,7 +67,11 @@ def template():
         "presented_as": "",
         "source": "",
         "checks": {
-            cid: {"state": "absent", "answer": "", "record": ""}
+            cid: (
+                {"state": "absent", "answer": "", "record": "", "count": None}
+                if cid == "O1" else
+                {"state": "absent", "answer": "", "record": ""}
+            )
             for cid in CHECK_IDS
         },
     }
@@ -81,6 +85,36 @@ def load_cases(path=CASEDIR):
         c["_file"] = os.path.basename(f)
         out.append(c)
     return out
+
+
+HANDOFF_CEILING = 2
+
+
+def handoff(case):
+    """
+    Route to MECHANISM 10 (generation-capacity) when O1 comes back honest.
+
+    An option-space audit closing clean on a low DOCUMENTED count is the
+    signature of removed generation capacity, not evidence of its absence:
+    the constraint is honest at the affected scale and manufactured at the
+    scale above. Returns None when O1 is not documented or no count exists —
+    the router does not estimate a count from prose.
+    """
+    o1 = (case.get("checks", {}) or {}).get("O1") or {}
+    if o1.get("state") != "documented":
+        return None
+    count = o1.get("count")
+    if not isinstance(count, int):
+        return {"route": None, "reason": "O1 documented but count not stated"}
+    if count > HANDOFF_CEILING:
+        return None
+    return {
+        "route": "generation-capacity/capacity.py",
+        "mechanism": "MECHANISM 10 — GENERATION CAPACITY REMOVED",
+        "count": count,
+        "reason": ("O1 documented at %d; audit closes clean on an honest "
+                   "count, which is the mechanism-10 signature" % count),
+    }
 
 
 def score(case):
@@ -103,6 +137,7 @@ def score(case):
         "case": case.get("case"),
         "presented_as": case.get("presented_as"),
         "n_checks": n,
+        "handoff": handoff(case),
         "documented": counts["documented"],
         "asserted": counts["asserted"],
         "absent": counts["absent"],
@@ -174,6 +209,16 @@ def detail(case):
     print("         sacrifice    %s" % s["sacrifice"])
     if s["malformed_states"]:
         print("         malformed state values: %s" % s["malformed_states"])
+    h = s.get("handoff")
+    if h:
+        print()
+        if h.get("route"):
+            print("HANDOFF  %s" % h["mechanism"])
+            print("         run: %s --case %s" % (h["route"], s["case"]))
+            for line in wrap(h["reason"], 64, "         "):
+                print(line)
+        else:
+            print("HANDOFF  not routed: %s" % h["reason"])
 
 
 def main():

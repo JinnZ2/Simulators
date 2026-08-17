@@ -2412,10 +2412,36 @@ underneath).
   functional position score identically") is directly runnable in
   `category-weld/` and no `welds/a_few.json` exists — the cheapest test
   either folder has, and the first weld term from outside
-  policy/economics, which is `UNI_002`'s open question. Also re-delivered
-  in this drop: `category-weld/CLAIM_TABLE.md` and `welds/capital.json`,
-  both **byte-identical** to the landed copies (`MF_019` — files that live
-  in one place do not drift). Stdlib only, phone-buildable, CC0.
+  policy/economics, which is `UNI_002`'s open question.
+  **Second drop** closes `PB_001`'s first half and adds a router.
+  `cases/ventilator-surge.json` lands and scores **0 documented of 11**
+  exactly as the claim table said (3 asserted, 8 absent); its O5 record
+  names six alternatives — split ventilation, manual bag-valve rotation,
+  transfer, cycling, regional load-sharing, random allocation — none
+  refused on the record, which is B1 and B2 instanced rather than argued.
+  `binary_audit.py` gains `handoff()`: O1 documented at a count ≤ 2 routes
+  the case to `generation-capacity/capacity.py`, on the stated reasoning
+  that "an option-space audit closing clean on a low DOCUMENTED count is
+  the signature of removed generation capacity, not evidence of its
+  absence" — the answer to `GC_002`, and it refuses to estimate a count
+  from prose. B7 moves to supported at n=2 (gain 3.5 both runs), and the
+  drop marks **B8 NOT TESTED under contamination** on its own initiative,
+  reaching `PB_006` from the protocol-anticipation side; the clean test it
+  proposes does not fix `PB_006`'s channel, since `PROMPT_1` still asks for
+  the field. **`PB_011`, the one with a consequence:** the drop carried
+  `binary_audit.py` **three times** — two uploaded files byte-identical to
+  each other and to the pre-handoff repo copy, plus the live version
+  inline. First time `MF_019`'s copy-drift mattered: landing the uploads at
+  face value would have silently reverted the router the same drop
+  introduced, since both stale copies parse, run and pass every existing
+  check. **`PB_012`:** `handoff()` returns bare `None` both for a count
+  above the ceiling (a measurement) and for O1 never checked (a gap), while
+  the `{"route": None, "reason": ...}` shape it already uses one branch
+  over is the fix — fourth instance of that shape across four folders.
+  **`PB_013`:** the router's firing branch has no case in the repo;
+  `ventilator-surge` has O1 absent, correctly, and the case that would fire
+  it is `generation-capacity`'s undelivered `food-knowledge`. Stdlib only,
+  phone-buildable, CC0.
 - `generation-capacity/` — Proposed **tenth exclusion mechanism** for
   `uninstrumented/`, one drop after `category-weld/`'s ninth.
   `MECHANISM_10.md` (delivered verbatim, a marker under exploration) names
@@ -2473,7 +2499,39 @@ underneath).
   load sits in R1's numerator — the step from inability to
   unavailable-consent is close to analytic, and the antecedent is what is
   unmeasured. Does **not** move `UNI_002`: it arrives with a seed case and
-  no filed entry. Stdlib only, CC0.
+  no filed entry.
+  **Second drop** fills the folder: canonical `README.md`, the `capacity.py`
+  scorer, `CLAIM_TABLE.md` (G1–G8 plus a DISCLOSED WEAKNESSES section), and
+  `cases/informed-gate.json`. `--selftest` passes 8/8 as the README states.
+  **`GC_002` is ANSWERED, not refuted** — the argument was that the repair
+  is a second instrument beside `binary_audit` rather than a twelfth check,
+  and the repair delivered is a second instrument plus a router.
+  **`GC_003` sharpens against the code:** `capacity.py` implements the
+  CALIBRATION CONSTRAINT as a `scored_against` field that flags
+  center-scored readings invalid and drops them from the slope — which
+  closes the case the constraint names, and is a **declaration rather than
+  a unit check**. Nothing reads `source_present`/`source_nameable`, so a
+  case declaring `place` with a Linnaean denominator and a local-name
+  numerator returns a clean slope (−0.23, `invalid_scoring 0`). The drop's
+  DISCLOSED WEAKNESSES names the numerator half (free vs prompted vs
+  recognition vs demonstrated use); the denominator half is unnamed and is
+  the half the constraint is about. **The check the schema can already
+  make:** R1 cannot exceed 1 when the units match, and `present 40,
+  nameable 55 → ratio 1.375, valid True, no warning` — a unit-mismatch
+  detector computable from two fields already present. **`GC_008`:** G3's
+  status says an enforcement-cost series is an instrument "this repo has no
+  instance of", and `rigidification-sensor/simulator.py`'s `run()` returns
+  exactly that per tick as `continuation`; what is missing is a MEASURED
+  series, which changes the next step from build-a-simulator to
+  collect-a-series. **`GC_009`:** the second seed case, `food-knowledge`, is
+  named in the README's STATE, in DISCLOSED WEAKNESSES and in G2's status,
+  and did not arrive — third consecutive drop with that shape, and the one
+  case that would fire the new handoff router. Left absent rather than
+  reconstructed, on the `CW_004` lesson. The drop's own DISCLOSED WEAKNESSES
+  names `G5 by construction` — `informed-gate` has
+  `deficit_cited_as_grounds` set true because the case was written to
+  instance the loop — which is the `CONSTANT_FIRES` half of `GC_004`,
+  reached independently. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

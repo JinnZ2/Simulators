@@ -6,7 +6,8 @@
     "O1": {
       "state": "absent",
       "answer": "",
-      "record": ""
+      "record": "",
+      "count": null
     },
     "O2": {
       "state": "absent",

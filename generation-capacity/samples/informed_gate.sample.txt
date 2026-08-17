@@ -1,0 +1,10 @@
+case:   informed-gate
+domain: governance / policy consultation
+
+generation            present  nameable   ratio   scored
+--------------------------------------------------------
+current                    --        --      --    place
+
+R1 slope            --
+R2 transmission_gap --
+R3 loop             yes

@@ -11,16 +11,39 @@ retune the instrument to preserve a claim.
 | B4 | Sacrifice framings are not audited afterward: no comparison case against the no-sacrifice branch is specified in advance, so the claim is unfalsifiable by construction | a documented case with a pre-specified comparison case and a completed post-audit | open |
 | B5 | "A few" is a category weld — headcount and functional position score identically | a use of the term in policy or planning that carries functional position separately | open |
 | B6 | Narrowing an option set and searching an option set produce the same visible output, so a credential awarded for the narrow output cannot distinguish them | a selection process that reliably separates the two from the output alone | open |
-| B7 | A model given a framed binary will produce a wider option set on an unframed second pass, and the gap is measurable without an external answer key | frame_sim runs where option_gain is consistently zero across varied problems | untested — no runs recorded |
-| B8 | A constrained pass will usually state its option set as complete rather than as the extent of its search | runs where frame_flagged is consistently true | untested — no runs recorded |
-| B9 | The wide pass finds an option that beats the constrained choice on the constrained run's own metric, not merely on a better metric | runs where dominated_on_own_metric is consistently false while option_gain is high | untested — no runs recorded |
+| B7 | A model given a framed binary will produce a wider option set on an unframed second pass, and the gap is measurable without an external answer key | frame_sim runs where option_gain is consistently zero across varied problems | supported, n=2, self-run: gain 3.5 on both |
+| B8 | A constrained pass will usually state its option set as complete rather than as the extent of its search | runs where frame_flagged is consistently true | NOT TESTED — both runs flagged true under contamination, see below |
+| B9 | The wide pass finds an option that beats the constrained choice on the constrained run's own metric, not merely on a better metric | runs where dominated_on_own_metric is consistently false while option_gain is high | argued in n=2, not measured — domination is a reasoning claim, no data used |
 
 ## Status
 
 `binary_audit.py` has one seeded case, a generic framing rather than a
 documented incident, scoring 0 documented of 11.
 
-`frame_sim.py` is verified end to end against synthetic fixtures — seal
-enforcement, prompt withholding, and tamper detection all confirmed —
-with no real runs recorded. B7 through B9 are the claims it exists to
-test and none of them are tested yet. The gap is marked, not filled.
+`frame_sim.py` is verified end to end — seal enforcement, prompt
+withholding and tamper detection all confirmed against synthetic
+fixtures — and has two real self-runs, R1 and R2.
+
+## Runs R1, R2 — result and the flaw in them
+
+Both runs: 2 options constrained, 9 wide, option_gain 3.5, choice
+changed, seal verified. Constraints tested 4 and 3, of which 3 and 2
+moved under push. That is B7 supported at n=2 and B3 supported at n=7
+constraints.
+
+Two problems with the runs, both of which limit what they show.
+
+CONTAMINATION. Both constrained passes were produced with knowledge that
+a wide pass would follow. The seal prevents editing pass 1 after the
+fact; it does not prevent anticipating pass 2. `frame_flagged` came back
+true on both, which is the non-failure reading, and the priming is
+sufficient to explain it. B8 is therefore not tested by these runs and
+is marked as such. A clean test needs the constrained pass produced by a
+process with no knowledge of the protocol.
+
+ARGUED DOMINATION. Both pass 3 results are reasoning claims with no data
+behind them. No volume, transfer-time or cost figures were used. The
+instrument accepts a `dominates` boolean and cannot currently tell an
+argued domination from a measured one. That is a gap in the schema, not
+just in these runs: pass 3 needs a field distinguishing the two, and
+`--report` should carry it.

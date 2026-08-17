@@ -33,6 +33,7 @@ def _load(name, path):
 
 
 BA = _load("binary_audit", os.path.join(ROOT, "presented-binary", "binary_audit.py"))
+import capacity as CAP  # the delivered scorer, arrived in drop 2
 
 # The nine mechanisms already in play: eight in uninstrumented/README.md
 # plus category-weld's proposed ninth. Each with what it requires to exist,
@@ -165,29 +166,47 @@ answering party has no access to. An audit of the episode cannot reach it.
 """.strip())
 
 # ------------------------------------------------------------------ GC_002
-head(2, "GC_002", "the check that is missing, and why it cannot be a twelfth")
+head(2, "GC_002", "ANSWERED -- the drop built a router, not a twelfth check")
 print("""
-The obvious repair is a twelfth check in the option_space block. It does
-not work, and the drop says why:
+The first pass argued the gap cannot be closed by adding a check to
+binary_audit's option_space block, because documented / asserted / absent
+resolve against the answering party's own record and an absent generator
+produces an absent record of itself. The conclusion was that MECHANISM 10
+needs a second instrument beside binary_audit rather than another row.
 
-    Therefore recall must be scored against what is PRESENT IN THE PLACE,
-    never against what the center knows. Any implementation scoring
-    against a central reference reproduces the mechanism it is measuring.
+The drop built exactly that: capacity.py, plus a handoff() router in
+binary_audit that hands a case across when O1 comes back honest at a low
+count. Measured, on the delivered router:
+""".strip("\n"))
+print()
+print("  %-42s %s" % ("O1 state", "handoff"))
+print("  " + "-" * 72)
+for label, st, count in [
+    ("documented, count 2 -- the signature", "documented", 2),
+    ("documented, count not stated", "documented", None),
+    ("absent", "absent", None),
+]:
+    ch = {i: {"state": "absent", "answer": "", "record": ""}
+          for i in [c[0] for c in BA.CHECKS]}
+    ch["O1"] = {"state": st, "answer": "", "record": ""}
+    if count is not None:
+        ch["O1"]["count"] = count
+    h = BA.score({"case": "probe", "checks": ch})["handoff"]
+    shown = ("-> %s" % h["route"]) if (h and h.get("route")) else (
+        ("not routed: %s" % h["reason"]) if h else "None")
+    print("  %-42s %s" % (label, shown))
+print()
+print("""
+The router's docstring states the reasoning the first pass reached
+independently: "An option-space audit closing clean on a low DOCUMENTED
+count is the signature of removed generation capacity, not evidence of its
+absence." And it refuses to estimate -- O1 documented without a stated
+count returns not-routed with a reason rather than a guess.
 
-Every existing check resolves to documented / asserted / absent against
-the answering party's own record. A twelfth check of the same type --
-"was generation capacity intact?" -- would be scored against that same
-record, which is the record of a party whose generator was reduced.
-Absent generation capacity produces an absent record of it. The check
-returns `absent` and reads as a gap in documentation.
-
-So the readout cannot be a state in this vocabulary. R1 is a RATIO with an
-external denominator, which is a different kind of instrument: it needs
-what is present in the place, not what the party can say about itself.
-
-That is a real structural point in the drop's favour, and it also means
-binary_audit.py cannot be extended to cover MECHANISM 10 -- the mechanism
-needs a second instrument beside it, not another row.
+GC_002 is ANSWERED rather than refuted: the argument was that the repair
+is a second instrument, and the repair delivered is a second instrument.
+What the router does with its own negative branch is a separate matter,
+recorded in presented-binary PB_012.
 """.strip())
 
 # ------------------------------------------------------------------ GC_003
@@ -228,6 +247,63 @@ under collection is a method question about what counts as one nameable
 item, and it has to be settled before a numerator is collected, not after.
 The drop's own constraint is what surfaces it.
 """.strip("\n"))
+print()
+print("""
+AGAINST THE DELIVERED CODE. capacity.py implements the calibration
+constraint as a `scored_against` field: set to `center`, the reading is
+flagged invalid and dropped from the slope. That closes the case the
+CALIBRATION CONSTRAINT names explicitly, and the selftest covers it.
+
+It is a DECLARATION, not a unit check. Nothing reads source_present or
+source_nameable, so a case can declare `place` and still count its
+denominator in Linnaean species and its numerator in local names:
+""".strip())
+mixed = {"name": "mixed-units", "domain": "probe", "generations": [
+    {"label": "g1", "present": 120, "nameable": 40, "scored_against": "place",
+     "source_present": "floristic inventory, Linnaean species",
+     "source_nameable": "resident free recall, local names"},
+    {"label": "g2", "present": 120, "nameable": 12, "scored_against": "place",
+     "source_present": "floristic inventory, Linnaean species",
+     "source_nameable": "resident free recall, local names"},
+]}
+sm = CAP.score(mixed)
+print()
+print("  declared place, mismatched units -> slope %s, invalid_scoring %d" % (
+    CAP.fmt(sm["r1_slope"]), sm["invalid_scoring"]))
+print()
+print("""
+The drop's DISCLOSED WEAKNESSES names the numerator half of this -- free
+recall against prompted against recognition against demonstrated use give
+different numbers and the schema does not distinguish them. The
+denominator half is not named, and it is the half the CALIBRATION
+CONSTRAINT is actually about: what counts as ONE present item is a
+question the center answers.
+
+THE CHECK THE SCHEMA CAN ALREADY MAKE. R1 is nameable / present and cannot
+exceed 1 when the two are counted in the same units. Local categories
+splitting finer than the inventory, or an incomplete inventory, push it
+over:
+""".strip())
+over = {"name": "over-one", "domain": "probe", "generations": [
+    {"label": "g1", "present": 40, "nameable": 55, "scored_against": "place"}]}
+r = CAP.r1(over)[0]
+print()
+print("  present 40, nameable 55 -> ratio %.3f, valid %s, no warning" % (
+    r["ratio"], r["valid"]))
+print()
+print("""
+A ratio above 1 is a unit mismatch, computable from the two fields the
+schema already carries, and it needs no new concept -- detail() already
+prints a WARNING block for center-scored readings and could carry this in
+the same place.
+
+G7's stated falsifier is "a methodological barrier to collecting resident
+recall against a floristic inventory that is not a funding or attention
+barrier". The name-mapping problem is proposed as one. Whether it fires
+G7's falsifier turns on whether settling the unit of a nameable item
+counts as methodological or as part of collection -- a question for the
+author, not one this audit settles.
+""".strip())
 
 # ------------------------------------------------------------------ GC_004
 head(4, "GC_004", "R3's two outcomes are 'yes' and 'not found'")
@@ -351,7 +427,77 @@ denominator and a collectable numerator, and the collection is a survey,
 not an experiment. What it does not have yet is GC_003's units decision.
 """.strip("\n"))
 
+# ------------------------------------------------------------------ GC_008
+head(8, "GC_008", "G3's status names an instrument this repo has")
+print("""
+    G3. The arrangement requires no ongoing enforcement once capacity is
+    gone.
+    Status: untested. Requires an enforcement-cost series, which this
+    repo has no instance of.
+
+GC_006 in the first pass named two instruments for exactly this rate
+comparison, and one of them produces the series G3 says is absent.
+rigidification-sensor/simulator.py, run():
+
+    continuation   : current total imbalance -- the bill this tick
+    reversal       : cumulative eroded regen -- capacity you'd rebuild to undo
+    d_continuation : change in continuation vs last tick
+    d_reversal     : change in reversal vs last tick
+    locked_at      : first tick where reversal outpaces continuation AND
+                     exceeds it
+
+`continuation` IS an enforcement-cost series: the per-tick bill for
+holding the arrangement where it is. G3 says that bill drops to zero once
+capacity is gone, and G3's falsifier says a case where it stays flat or
+rises refutes the claim. That is a statement about the shape of a series
+run() already returns.
+
+What the repo does not have is a MEASURED series -- a real arrangement
+with a real enforcement cost per interval. The simulator produces one from
+declared node parameters, so wiring MECHANISM 10's loop form into it would
+test the claim's internal consistency, not the world.
+
+So G3's status is right in substance and wrong in its reason. Not
+"requires an instrument this repo has no instance of" but "requires a
+measured series; the instrument is in rigidification-sensor/". The
+distinction matters because it changes what the next step is -- collect an
+enforcement-cost series, rather than build a simulator.
+""".strip())
+
+# ------------------------------------------------------------------ GC_009
+head(9, "GC_009", "the second seed case is named three times and absent")
+print("""
+    README STATE:          "Two seed cases, zero quantified readings."
+    CLAIM_TABLE weakness:  "Both seeds are structural."
+    G2 status:             "argued, one case marked (food-knowledge, push
+                            results asserted not recorded)."
+""".strip("\n"))
+print()
+files = sorted(f for f in os.listdir(os.path.join(HERE, "cases"))
+               if f.endswith(".json"))
+print("  cases/ holds %d: %s" % (len(files), ", ".join(files)))
+print()
+print("""
+food-knowledge is the case the README's worked instance is written about
+-- "someone who can name what is edible around them ... never faced two
+options" -- and it is the case G2's status reports a reading from. It is
+also the case that would fire the handoff router, which currently has no
+worked instance (presented-binary PB_013).
+
+Third consecutive drop in which a claim table's status sentence names a
+file the drop does not carry: category-weld CW_001 (weld.py, test_weld.py
+-- arrived one drop later), presented-binary PB_001 (the seeded case --
+arrived this drop, exact), and this. The pattern so far is that the named
+files are real and arrive late, so this is recorded as UNVERIFIED rather
+than as a negative.
+
+It is left absent rather than reconstructed. G2's status says its push
+results are "asserted not recorded", which is a judgement about a specific
+case, and writing one here would put that judgement in the author's mouth.
+""".strip())
+
+
 print()
 print(BAR)
-print("end of audit -- findings recorded in AUDIT_NOTES.md as GC_001..GC_007")
+print("end of audit -- findings recorded in AUDIT_NOTES.md as GC_001..GC_009")
 print(BAR)

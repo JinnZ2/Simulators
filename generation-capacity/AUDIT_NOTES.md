@@ -33,14 +33,22 @@ defense.
 
 | file | status |
 |------|--------|
-| `MECHANISM_10.md` | delivered, verbatim |
+| `MECHANISM_10.md` | delivered drop 1, verbatim |
+| `README.md` | delivered drop 2, verbatim |
+| `capacity.py` | delivered drop 2, verbatim |
+| `CLAIM_TABLE.md` | delivered drop 2 (G1–G8), verbatim |
+| `cases/informed-gate.json` | delivered drop 2, verbatim |
+| `cases/food-knowledge.json` | **named three times in drop 2, did not arrive** |
 | `mechanism_10_audit.py` | added |
-| `CLAIM_TABLE.md` | added |
 | `AUDIT_NOTES.md` | added |
 | `samples/` | added |
-| `cases/`, `places/` | absent — no case has readings, and none invented |
 
-Seven claims `GC_001..007` in [`CLAIM_TABLE.md`](CLAIM_TABLE.md).
+Nine claims `GC_001..009` below. The delivered `CLAIM_TABLE.md` (G1–G8)
+is untouched; these are audit claims about it.
+
+Drop 2 verified: `capacity.py --selftest` passes 8/8 as the README states,
+and the delivered scorer's `--new`, `--case`, `--jsonl` and table paths
+all run.
 
 ## 1 — GC_001, the claim is checkable and it holds
 
@@ -96,30 +104,34 @@ Either way it is not a defect in any check. All eleven ask about the
 decision episode; the removal happened before it, on a clock the answering
 party has no access to.
 
-## 2 — GC_002, why the repair is not a twelfth check
+## 2 — GC_002, ANSWERED: the drop built a router, not a check
 
-The obvious move is to add a check to the option_space block. It does not
-work, and the drop supplies the reason four paragraphs earlier:
+The first pass argued that adding a check to `binary_audit`'s
+option_space block cannot work, because `documented`/`asserted`/`absent`
+resolve against the answering party's own record and **an absent generator
+produces an absent record of itself** — so the check returns `absent` and
+reads as a documentation gap. The conclusion was that MECHANISM 10 needs a
+second instrument beside `binary_audit`, not another row.
 
-> Any implementation scoring against a central reference reproduces the
-> mechanism it is measuring.
+Drop 2 delivered exactly that: `capacity.py`, plus a `handoff()` router in
+`binary_audit` that hands a case across when O1 comes back honest at a low
+count. Measured on the delivered router:
 
-Every existing check resolves to `documented` / `asserted` / `absent`
-against the answering party's own record. A twelfth of the same type —
-*was generation capacity intact?* — is scored against the record of a
-party whose generator was reduced. **An absent generator produces an
-absent record of itself**, and `absent` in that vocabulary reads as a
-documentation gap.
+    documented, count 2 -- the signature   -> generation-capacity/capacity.py
+    documented, count not stated           not routed: O1 documented but count not stated
+    absent                                 None
 
-So the readout cannot be a state in this vocabulary at all. R1 is a
-*ratio* with an external denominator — a different kind of instrument,
-one that reads what is present in the place rather than what the party can
-say about itself.
+The router's docstring states the reasoning independently: *"An
+option-space audit closing clean on a low DOCUMENTED count is the
+signature of removed generation capacity, not evidence of its absence."*
+And it refuses to estimate — O1 documented without a stated count returns
+not-routed **with a reason** rather than a guess, which is the branch that
+does the most work in the design.
 
-That is a structural point in the drop's favour, and it also settles
-something about `presented-binary/`: it cannot be extended to cover
-MECHANISM 10. The mechanism needs a second instrument beside it, not
-another row.
+GC_002 is ANSWERED rather than refuted: the argument was that the repair
+is a second instrument, and the repair delivered is a second instrument.
+What the router does with its own negative branch is separate, and is
+recorded in `presented-binary/` `PB_012`.
 
 ## 3 — GC_003, the denominator fork
 
@@ -152,6 +164,42 @@ This does not sink R1. It **relocates the gap**: part of what the drop
 files under collection is a method question — what counts as one nameable
 item — and it has to be settled before a numerator is collected, not
 after. The drop's own constraint is what surfaces it.
+
+**Against the delivered code.** `capacity.py` implements the calibration
+constraint as a `scored_against` field: set to `center`, the reading is
+flagged invalid and dropped from the slope, and the selftest covers it.
+That closes the case the CALIBRATION CONSTRAINT names explicitly.
+
+It is a **declaration, not a unit check**. Nothing reads `source_present`
+or `source_nameable`, so a case can declare `place` and still count its
+denominator in Linnaean species and its numerator in local names:
+
+    declared place, mismatched units -> slope -0.23, invalid_scoring 0
+
+The drop's DISCLOSED WEAKNESSES names the **numerator** half of this — free
+recall against prompted against recognition against demonstrated use give
+different numbers and the schema does not distinguish them. The
+**denominator** half is not named, and it is the half the CALIBRATION
+CONSTRAINT is actually about: what counts as ONE present item is a
+question the center answers.
+
+**The check the schema can already make.** R1 is nameable / present and
+cannot exceed 1 when both are counted in the same units. Local categories
+splitting finer than the inventory, or an incomplete inventory, push it
+over:
+
+    present 40, nameable 55 -> ratio 1.375, valid True, no warning
+
+A ratio above 1 is a unit mismatch, computable from two fields the schema
+already carries, needing no new concept — `detail()` already prints a
+WARNING block for center-scored readings and could carry this beside it.
+
+G7's stated falsifier is *"a methodological barrier to collecting resident
+recall against a floristic inventory that is not a funding or attention
+barrier"*. The name-mapping problem is proposed as one. Whether it fires
+that falsifier turns on whether settling the unit of a nameable item
+counts as methodological or as part of collection — a question for the
+author, not one this audit settles.
 
 ## 4 — GC_004, R3 can confirm and cannot disconfirm
 
@@ -258,6 +306,65 @@ The seed case is chosen well for that: edible species has an existing
 denominator and a collectable numerator, and the collection is a survey
 rather than an experiment. What it does not have yet is §3's units
 decision.
+
+## 8 — GC_008, G3 names an instrument the repo has
+
+> **G3.** The arrangement requires no ongoing enforcement once capacity is
+> gone.
+> *Status:* untested. Requires an enforcement-cost series, which this repo
+> has no instance of.
+
+§6 named two instruments for this rate comparison, and one of them returns
+the series G3 says is absent. `rigidification-sensor/simulator.py`,
+`run()`, records per tick:
+
+    continuation   : current total imbalance -- the bill this tick
+    reversal       : cumulative eroded regen -- capacity you'd rebuild to undo
+    d_continuation, d_reversal
+    locked_at      : first tick where reversal outpaces continuation AND exceeds it
+
+`continuation` **is** an enforcement-cost series: the per-tick bill for
+holding the arrangement where it is. G3 says that bill drops to zero once
+capacity is gone; G3's falsifier says a case where it stays flat or rises
+refutes the claim. That is a statement about the shape of a series `run()`
+already produces.
+
+What the repo does not have is a **measured** series — a real arrangement
+with a real enforcement cost per interval. The simulator derives one from
+declared node parameters, so wiring the LOOP FORM into it would test the
+claim's internal consistency, not the world.
+
+G3's status is right in substance and wrong in its reason: not *"requires
+an instrument this repo has no instance of"* but *"requires a measured
+series; the instrument is in `rigidification-sensor/`"*. The distinction
+changes the next step — collect a series, rather than build a simulator.
+
+## 9 — GC_009, the second seed case
+
+    README STATE:          "Two seed cases, zero quantified readings."
+    CLAIM_TABLE weakness:  "Both seeds are structural."
+    G2 status:             "argued, one case marked (food-knowledge, push
+                            results asserted not recorded)."
+
+    cases/ holds 1: informed-gate.json
+
+`food-knowledge` is the case the README's worked instance is written about
+— *"someone who can name what is edible around them ... never faced two
+options"* — the case G2's status reports a reading from, and the case that
+would fire the handoff router, which currently has no worked instance
+(`presented-binary/` `PB_013`).
+
+Third consecutive drop in which a claim table's status sentence names a
+file the drop does not carry: `category-weld` `CW_001` (code, arrived one
+drop later), `presented-binary` `PB_001` (data, arrived this drop, exact),
+and this. The named files have so far been real and late, so this is
+recorded UNVERIFIED rather than as a negative.
+
+Left absent rather than reconstructed. G2's status says its push results
+are *"asserted not recorded"*, a judgement about a specific case, and
+writing one here would put that judgement in the author's mouth — the
+`CW_004` lesson, which cost a false finding the one time a reconstruction
+filled a gap of this kind.
 
 ## Relation to the rest of the repo
 

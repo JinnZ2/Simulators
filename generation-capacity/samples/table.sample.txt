@@ -1,0 +1,6 @@
+case                       gens  quant   slope   r2    r3
+---------------------------------------------------------
+informed-gate                 1      0      --   --   yes
+
+slope: change in recall ratio, first valid reading to last.
+'--' means no reading exists. Not zero, not an estimate.
