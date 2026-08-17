@@ -56,6 +56,7 @@ underneath. Read those before running the corresponding script.
 | `photoperiod-claim-harness/` | four inconsistencies in a published greenhouse result | runnable falsifiable sims + mechanism-edit protocol + bench protocol; six `PCH_*` claims on the harness |
 | `category-weld/` | terms that fuse independent quantities into one handle | ninth exclusion mechanism for `uninstrumented`, a three-readout scorer, an audit finding refuted by the second drop, thirteen `CW_*` claims |
 | `presented-binary/` | a two-option framing, before it is answered | eleven documented/asserted/absent checks + a sealed two-pass frame simulator, ten `PB_*` claims |
+| `generation-capacity/` | the option space a party can produce, not a value in it | proposed tenth exclusion mechanism; a framing under it scores 11/11 on the option-space audit next door; seven `GC_*` claims |
 | `tools/` | shared utilities | validators, substitution toolkits, gate-drift check |
 
 See [`SYNTHESIS.md`](SYNTHESIS.md) for the cross-folder reading and
