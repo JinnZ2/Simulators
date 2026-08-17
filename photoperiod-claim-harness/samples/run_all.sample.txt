@@ -1,0 +1,86 @@
+====================================================================
+C1  [REPORTED]  sim S1 -- mass / denominator swap
+STATUS: REFUTED
+   signature_kWh_per_dry_min 0.1439
+   signature_kWh_per_dry_max 0.7027
+   signature_spread         4.8828
+   signature_cells          58
+   signature_no_dry_gain_cells 0
+   example_hit              None
+   kWh_per_g_dry_ratio      0.3613
+   kWh_per_g_fresh_ratio    0.2599
+   kWh_per_L_juice_ratio    0.2385
+   notes                    ratio < 1.0 means the test regime is cheaper in that denominator
+   base: V_mL=40.8152, dry_g=4.2996, fresh_g=38.7744, water_g=34.4748, water_frac=0.8891, fiber_frac_dry=0.7399, wall_density=0.0779, juice_L=0.0291, kWh=38.4000
+   test: V_mL=62.8102, dry_g=4.7600, fresh_g=59.6697, water_g=54.9097, water_frac=0.9202, fiber_frac_dry=0.7342, wall_density=0.0556, juice_L=0.0488, kWh=15.3600
+
+====================================================================
+C2  [PHYSICS]  sim S2 -- Pchlide pool charging + dark crossover
+STATUS: REFUTED
+   best_duty                1.0000
+   best_chl                 7.3780
+   continuous_chl           7.3780
+   gain_vs_continuous       0.0000
+   crossover_h              None
+   notes                    best_duty < 1.0 means intermittent dark beats continuous light at EQUAL total photon dose. crossover_h is where dark stops paying.
+
+====================================================================
+C3  [PHYSICS]  sim S2 -- Pchlide pool charging + dark crossover
+STATUS: REFUTED
+   best_duty                1.0000
+   best_chl                 7.3780
+   continuous_chl           7.3780
+   gain_vs_continuous       0.0000
+   crossover_h              None
+   notes                    best_duty < 1.0 means intermittent dark beats continuous light at EQUAL total photon dose. crossover_h is where dark stops paying.
+
+====================================================================
+C4  [PHYSICS]  sim S3 -- reflectance index artifact, closed loop
+STATUS: REFUTED
+   final_dark_frac          0.1150
+   index_gain               0.0124
+   true_chl_gain            0.0083
+   notes                    index_gain > 0 with true_chl_gain < 0 is proxy divergence: the controller improved its own reading and degraded the quantity.
+
+====================================================================
+C5  [PHYSICS]  sim S4 -- channel count vs common-mode bias
+STATUS: SUPPORTED
+   err_1ch                  0.1192
+   err_49ch                 0.1199
+   reduction                -0.0055
+   bias_floor               0.1200
+   notes                    error floors at the shared bias regardless of channel count. Independence is a property of the calibration path, not of N.
+
+HYPOTHESIS BLOCK -- generated 2026-08-17 11:50
+file hash: 4a587a7ab5a7   harness: 0.1.0
+
+STATUS OF EACH CLAIM (from SIM only; no BENCH data exists yet)
+  C1 [REPORTED] -> REFUTED
+        signature_cells = 58
+        signature_spread = 4.8828
+        signature_kWh_per_dry_min = 0.1439
+        signature_kWh_per_dry_max = 0.7027
+  C2 [PHYSICS] -> REFUTED
+        best_duty = 1.0000
+        gain_vs_continuous = 0.0000
+  C3 [PHYSICS] -> REFUTED
+        crossover_h = None
+  C4 [PHYSICS] -> REFUTED
+        index_gain = 0.0124
+        true_chl_gain = 0.0083
+  C5 [PHYSICS] -> SUPPORTED
+        err_1ch = 0.1192
+        err_49ch = 0.1199
+        reduction = -0.0055
+
+WHAT THE SIM CANNOT SETTLE
+  Every number above is SIM provenance. A sim can show that an
+  artifact is SUFFICIENT to produce a reported signature. It
+  cannot show that the artifact is what happened.
+
+CONFIDENCE READOUT (fill separately, do not merge)
+  shape match:        ____ %
+  comfort threshold:  ____ %
+  state independently; a gradient is not a commitment.
+
+MEASUREMENTS THAT WOULD MOVE THIS -- see: protocol

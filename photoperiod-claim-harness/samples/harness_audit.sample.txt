@@ -1,0 +1,217 @@
+
+AUDITING THE HARNESS
+subject: photoperiod_claim_harness.py, unmodified
+this file has no bench data and neither does the harness
+
+========================================================================
+1  C1 passes when the sim produces nothing
+========================================================================
+  predicate: signature_spread < 1.5
+  spread    = max/min over cells that reproduce the signature
+            = 0.0 when there are no such cells
+
+    as shipped   cells=58  spread=4.8828  -> REFUTED
+    no shade-avoidance   cells=0  spread=0.0000  -> SUPPORTED
+      signature_kWh_per_dry_min = None
+      signature_kWh_per_dry_max = None
+
+  C1's reads line for TRUE:
+
+      the reported metrics are diagnostic of real efficiency
+
+  A run in which the sim reproduces the reported signature ZERO
+  times returns that verdict, with min and max printed as None on
+  the line above it. The contradiction is visible in one output.
+
+  Not a modelling error -- a predicate that cannot tell 'tight
+  spread' from 'no observations'. Same shape as ../null-harness/
+  CONSTANT_SILENT, one level up: not a gate that never fires, but
+  a PASS that an empty result set returns.
+
+  Fix is one guard, and the harness's own vocabulary has a slot
+  for it: run_claim() already emits `UNDECIDED:` when a predicate
+  raises. `if not sig_dry: raise ValueError('no signature cells')`
+  routes the empty case there instead of to SUPPORTED.
+
+========================================================================
+2  C1's numbers are narrower than its reads line
+========================================================================
+  signature cells                      58
+  kWh per dry gram, ratio to control   0.1439 .. 0.7027
+  cells with ratio >= 1.0              0
+  signature_no_dry_gain_cells          0
+
+  The S1 docstring names the cell it is hunting for:
+
+      A cell where (a) is TRUE and (b) is FALSE is a configuration
+      in which the whole reported package appears with no gain per
+      unit photosynthate.
+
+  It finds none. Every one of the 58 cells that reproduces the
+  signature also improves energy per dry gram -- the whole range
+  sits below 1.0.
+
+  So the reads line for FALSE overstates by one word. It says the
+  signature is NON-DIAGNOSTIC. What the grid shows is that it is
+  non-diagnostic of MAGNITUDE -- a 4.9x range in the true ratio --
+  and diagnostic of SIGN. On this mechanism set the reported
+  package does license 'cheaper per dry gram'; it does not license
+  any particular number, and 68% is a number.
+
+  That is a stronger claim than the one written, because it
+  survives the objection that the sim was rigged to find nothing.
+  It found the effect and still cannot size it.
+
+========================================================================
+3  the edit guard reads 2 of 4 fields
+========================================================================
+  MechanismEdit takes four free-text fields:  reason, mechanism, basis, prediction
+
+  and screens `reason + " " + mechanism` against FORBIDDEN_REASONS.
+
+  field        outcome when it carries a forbidden reason
+  --------------------------------------------------------------
+  reason       refused
+  mechanism    refused
+  basis        ACCEPTED   <-- not screened
+  prediction   ACCEPTED   <-- not screened
+
+  `basis` and `prediction` are the two fields a motivated editor
+  would put the outcome reasoning in, because they are the two
+  that ask for justification. The screen is on the two that ask
+  what changed.
+
+  One-line fix: screen the concatenation of all four.
+
+  Worth saying what the guard gets right: it is a PRE-registration
+  gate, it fires at construction rather than at settle time, and
+  the refusal message names the protocol. Refusing on a substring
+  is crude and it is a real deny branch, which most such rules
+  are not.
+
+========================================================================
+4  settle() records a prediction and never adjudicates it
+========================================================================
+  after settle():
+
+    prediction        'low duty is penalised further'
+    observed          {'best_duty': 1.0}
+    prediction_held   None        <-- set to None, by construction
+    hash before       4a587a7ab5a7
+    hash after        4a587a7ab5a7
+    equal             True        <-- nothing edited the file
+
+  Two gaps, and they are the same gap:
+
+  (a) `prediction_held = None  # human or model fills this in`.
+      Nothing requires it. A registered prediction can be settled
+      with the comparison never made, and the log will show a
+      complete-looking MECHANISM_EDIT_SETTLED record.
+
+  (b) the two hashes are equal because the file was not edited.
+      The protocol exists to gate sim edits, and it cannot tell
+      whether one happened. An edit registered, settled, and never
+      performed is indistinguishable in the log from one carried
+      out.
+
+  Both are the shape ../reasoning-gate/ hit and repaired: a
+  declared control that is never scored. Its fix was to refuse an
+  empty observation and to write a record either way. Here the
+  equivalents are: settle(observed, held: bool) with `held`
+  required, and refusing to settle when the hash has not moved.
+
+========================================================================
+5  the header's usage example fails
+========================================================================
+  from the file header:
+
+     python3 photoperiod_claim_harness.py run S2
+
+  `run` dispatches to run_claim(), which looks the argument up in
+  CLAIM_TABLE by claim id. S2 is a SIM id.
+
+    claim ids : C1, C2, C3, C4, C5
+    sim ids   : S1, S2, S3, S4
+
+    run_claim('S2') -> StopIteration, uncaught
+
+  `sweep S2` takes a sim id and `run C1` takes a claim id, which
+  is defensible -- they are different commands over different
+  registries. The header documents `run S2`.
+
+  Same class as ../reasoning-gate/ D1, where the module docstring's
+  usage example denied at pre(). Fixed there by making the example
+  a working one and labelling the failing case separately.
+
+========================================================================
+6  what the harness gets right
+========================================================================
+  The predicates are real. Every claim in the table is a function
+  of a sim output and can come back either way -- and four of the
+  five come back REFUTED on the shipped run, including two the
+  file's own framing would have preferred to support.
+
+    C1   [REPORTED] REFUTED
+    C2   [PHYSICS ] REFUTED
+    C3   [PHYSICS ] REFUTED
+    C4   [PHYSICS ] REFUTED
+    C5   [PHYSICS ] SUPPORTED
+
+  C2 is the sharpest thing in the file. It states a PREMISE from
+  the literature (angiosperms have POR only, no DPOR), then a
+  HYPOTHESIS that dark could still help by recharging the pool,
+  then refutes its own hypothesis -- and the reads line for FALSE
+  explains WHY in mechanism terms: the FLU clamp acts on pool
+  SIZE, so a full pool slows synthesis and draining it
+  continuously maximises flux. Then it NAMES the next candidate
+  (shade acclimation) and files it in PENDING_EDITS rather than
+  retuning.
+
+  PENDING_EDITS is the part with no equivalent elsewhere in this
+  repository. Three mechanisms named, each with a basis and a
+  prediction registered BEFORE any run, all marked UNRUN. That is
+  the alternative to quietly retuning a sim that came out the
+  wrong way, written down as a data structure.
+
+  Provenance is separated at the type level -- REPORTED, PHYSICS,
+  SIM, BENCH -- and the hypothesis block says plainly that every
+  number in it is SIM, that a sim can show an artifact is
+  SUFFICIENT to produce a signature and not that it happened, and
+  that the confidence and comfort readouts are separate and are
+  not filled in by the file.
+
+  BENCH is declared and no code path can emit it. That is the
+  honest state and the file says so; the protocol section is the
+  instructions for producing one, which is more than most claim
+  tables carry.
+
+========================================================================
+READING
+========================================================================
+
+  The one that matters: C1's predicate returns SUPPORTED -- "the reported
+  metrics are diagnostic of real efficiency" -- from a run in which the sim
+  reproduced the reported signature zero times, printing None for the min
+  and max on the line above. A pass that an empty result set returns is not
+  a pass. One guard fixes it, and run_claim() already has the UNDECIDED
+  branch to route it to.
+
+  C1's own grid says something better than its reads line. The signature
+  appears in 58 cells spanning a 4.9x range of true energy-per-dry-gram,
+  and every one of them is below 1.0. Non-diagnostic of MAGNITUDE,
+  diagnostic of SIGN -- which is the stronger version of the finding,
+  because it survives the objection that the sim was built to find nothing.
+
+  The edit protocol screens two of the four fields it is given, and the two
+  it skips are the two that ask for justification. settle() writes
+  prediction_held: None and nothing fills it, and the before/after hashes
+  are equal because nothing edited the file -- so a registered, settled,
+  never-performed edit is indistinguishable in the log from a real one.
+  Both are the declared-control-never-scored shape that ../reasoning-gate/
+  repaired by requiring the observation.
+
+  What holds is most of it. The predicates fire in both directions, four of
+  five come back REFUTED on the shipped run, C2 refutes its own hypothesis
+  and explains the mechanism, and PENDING_EDITS writes down the three
+  named-but-unrun alternatives instead of retuning toward them.
+

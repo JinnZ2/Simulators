@@ -2178,6 +2178,49 @@ underneath).
   no frozen model is repeatedly scored on a frozen version. `audit.py
   regress` now refuses to run unidentified: no bridge, no slope. Nine claims
   `CD_001..009`; 34 tests. Stdlib only, CC0.
+- `photoperiod-claim-harness/` — Single delivered file (verbatim,
+  stdlib-only, phone-buildable) encoding four inconsistencies in a published
+  closed-loop-LLM greenhouse result as **runnable falsifiable sims**, with a
+  claim table (`C1..C5`), a mechanism-edit protocol, a bench protocol, and a
+  provenance log. Four sims: `S1` mass/denominator swap run as a 75-cell
+  regime map, `S2` Pchlide pool charging at equal photon dose plus a
+  dark-interval crossover sweep, `S3` reflectance-index artifact in a closed
+  loop, `S4` channel count vs common-mode bias. **Four of five claims come
+  back REFUTED on the shipped run**, including two the file's own framing
+  would have preferred to support. The load-bearing design move is the
+  refutation protocol as CODE: `MechanismEdit` refuses any sim change whose
+  stated reason is that a claim failed, and `PENDING_EDITS` holds three named
+  alternative mechanisms with a basis and a prediction registered before any
+  run, all marked `UNRUN` — the alternative to quietly retuning a sim that
+  came out the wrong way, written down as a data structure, and with no
+  equivalent elsewhere in this repo. Provenance is separated at the type
+  level (`REPORTED` / `PHYSICS` / `SIM` / `BENCH`) and `BENCH` is declared
+  with no code path that can emit it — stated openly, with the bench protocol
+  attached for producing one. **Audit** in `harness_audit.py` (imports the
+  delivered file, modifies nothing) and `CLAIM_TABLE.md` (`PCH_001..006`).
+  **`PCH_001`, the one that matters:** `C1`'s predicate is
+  `signature_spread < 1.5`, and `signature_spread` is `max/min` over
+  qualifying cells and **`0.0` when there are none** — so a run reproducing
+  the reported signature ZERO times returns SUPPORTED, whose `reads` line is
+  "the reported metrics are diagnostic of real efficiency", with `None`
+  printed for min and max on the line above. A pass an empty result set
+  returns; `null-harness/` `CONSTANT_SILENT` one level up, and `run_claim()`
+  already has the `UNDECIDED:` branch to route it to. **`PCH_002`:** `C1`'s
+  own grid is narrower and stronger than its `reads` line — the signature
+  appears in 58 cells spanning a **4.88× range** of true energy-per-dry-gram
+  and **all 58 sit below 1.0**, so it is non-diagnostic of MAGNITUDE and
+  diagnostic of SIGN; the reported package does license "cheaper per dry
+  gram" on this mechanism set and does not license 68%. **`PCH_003`/
+  `PCH_004`:** the edit guard screens `reason + mechanism` and not `basis` or
+  `prediction` — the two fields that ask for justification — and `settle()`
+  writes `prediction_held: None` that nothing fills while
+  `file_hash_before == file_hash_after`, so a registered, settled,
+  never-performed edit is indistinguishable in the log from a real one (the
+  declared-control-never-scored shape `reasoning-gate/` repaired).
+  **`PCH_005`:** the header's own usage example `run S2` passes a sim id to a
+  command that looks up claim ids and raises an uncaught `StopIteration` —
+  same class as the gate's `D1`. No bench data exists in the folder and none
+  is claimed; nothing here is a statement about wheat. CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
