@@ -12,7 +12,7 @@ iterations     : 2
    1  ACL_drift_resolves       SUPPORTED    unresolved = 0 of 157
 
   responses admitted : 1
-    INSTRUMENT_EDIT  ACL_drift_neutral
+    RESOLUTION_EDIT  ACL_drift_neutral
   responses refused  : 0
 
 A refutation is a result. The loop stops on `converged`,

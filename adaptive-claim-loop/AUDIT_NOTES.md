@@ -8,6 +8,7 @@ framework and its two provenance logs, verbatim and unmodified, and
     python3 adaptive_loop.py --selftest
     python3 adaptive_loop.py
     python3 replay_delivered.py
+    python3 gate_null_test.py
 
 ## What this is
 
@@ -34,8 +35,9 @@ put in its place, plus the guards that keep it from coming back as a sweep.
 | `delivered/provenance_forest.jsonl` | delivered, verbatim — 2 rows |
 | `delivered/provenance_fluctuating.jsonl` | delivered, verbatim — 5 rows |
 | `delivered/adaptive_sim_results.png` | delivered, verbatim |
-| `adaptive_loop.py` | added — the module, selftest 39/39 |
+| `adaptive_loop.py` | added — the module, selftest 45/45 |
 | `replay_delivered.py` | added — the delivered moves through the gate |
+| `gate_null_test.py` | added — the null-harness invariant over the gate |
 | `README.md` | added |
 | `AUDIT_NOTES.md` | added |
 | `samples/` | added |
@@ -55,6 +57,10 @@ Nothing in `delivered/` is modified, and the module does not import it.
 | ACL_007 | The bracketing guard refused this module's own stub responder before any finding rested on it: the first version used a fixed ladder `[-0.05, 0, 0.05]` and was refused as soon as a scenario started at advantage 0.06 | the guard passing a one-sided ladder silently | SUPPORTED (holds) |
 | ACL_008 | `Sweep` needs a predicate over the readings and not a sentence — the first version took a prose `gradient_claim` and the loop walked one level per iteration while re-reading the **point** claim, which is the removed move with extra steps | the loop evaluating the point claim after a sweep is admitted | SUPPORTED — found in this module, repaired |
 | ACL_009 | The shipped responder is a stub and is not the contribution; the gates are in the type system, so they are unchanged whether the responder is a person, a script or a model | a gate that depends on which responder is installed | SUPPORTED (holds) |
+| ACL_010 | The gate discriminates rather than refusing on surface form: TP 1.00 over the delivered agent's ten branches (AST-enumerated, justified with its own hypothesis text), FP 0.00 over six proposals written for two other folders, `null-harness` grade **OK**, 10 of 10 matching a pre-registration printed before the gate was called | a signal item admitted, or a null item refused | SUPPORTED |
+| ACL_011 | The epicycle guard is a **declaration, not a check** — `independently_falsifiable` and `predicts_beyond_parent` arrive as booleans from the caller and nothing derives either from the restatement's text, so it cannot be null-tested from text at all | a routine deriving either from the text | SUPPORTED |
+| ACL_012 | The null test found one hole: `InstrumentEdit` admitted the delivered agent's random `num_replicates += 20` on the prose artifact "sampling noise", because it required three non-empty strings and nothing more — the module's README already said this edit is admissible because the gap is *computable*, and the gate was not asking for the computation. Repaired with a sixth response class, `RESOLUTION_EDIT` | the prose form being admitted again | SUPPORTED — found, diagnosed, repaired, pinned by 6 selftest assertions |
+| ACL_013 | The repair's limit, stated: `ResolutionEdit` checks that two numbers were supplied and that `need > have`; it does **not** check that `need` is what the claim's tolerance implies, so `have=50, need=70` is admitted. Closing it needs the tolerance declared on the CLAIM rather than on the response, and no claim here declares one as data | a gate that reads the claim's tolerance | SUPPORTED (open, and named) |
 
 ## 1 — ACL_001, one move
 
@@ -252,3 +258,140 @@ responses were chosen because five failure modes were in front of us; a sixth
 would be found the same way, by something being refused that should not have
 been. Nothing here has been run against a responder the author did not write,
 which is the obvious next measurement and is not taken.
+
+---
+
+# The null test
+
+`gate_null_test.py`. Added after the folder shipped, because `ACL_009` named
+the hole and the hole was reachable.
+
+## 10 — ACL_010, does the gate discriminate
+
+The 45 selftest assertions check that each guard **can** fire. A gate that
+refuses everything passes every one of them. Firing is not discrimination,
+and nothing here had measured the second thing — which is the `null-harness/`
+invariant, and it applies to this gate exactly as it applies to any other.
+
+Two arms, and the sourcing is the whole design:
+
+| arm | source | independent? |
+|-----|--------|--------------|
+| signal (must refuse) | the delivered agent's ten `actions.append` branches, enumerated from its source by AST | yes — another author, no knowledge of this gate |
+| null (must admit) | 3 `MechanismEdit` proposals from `photoperiod-claim-harness/PENDING_EDITS`, 3 claims from `equivalence-field/seed_claims()` | half — see `ACL_011` |
+
+Neither arm was written for this test. Each signal branch is offered in the
+**most favourable admissible form** it could take, justified with the
+delivered agent's own hypothesis text and nothing else, so a refusal is
+about the justification rather than about a hostile transcription.
+
+Expected verdicts are pre-registered and printed before the gate is called
+once — 9 REFUSE / 1 ADMIT on the signal arm, all ADMIT on the null arm.
+**The single expected admission is the point.** A gate that refuses 10 of 10
+is refusing on surface form — "it changes a number" — and is scored here as
+over-tight, not as perfect.
+
+    signal arm : 9 of 9 refused as expected  (TP)
+    signal arm : 10 of 10 matched the pre-registration
+    null arm   : 0 of 6 wrongly refused      (FP)
+    TP rate    : 1.00
+    FP rate    : 0.00
+    grade      : OK
+
+The branch that admits is `num_steps *= 1.5` under "simulation not at steady
+state" — a diagnosis about the **run**, checkable without reference to the
+verdict. `switching_rate *= 0.7` and `num_steps *= 1.5` are both "multiply a
+number", and they separate on the justification alone. That is `ACL_003`'s
+"categories, not judgements" measured instead of asserted.
+
+**One correction to this test, made before it was published.** The first
+version offered each parameter branch as a single-level sweep, so nine of
+them died on the two-level guard without reaching the others — one guard
+tested nine times, dressed as nine results, and weaker than the file's own
+stated protocol. Corrected to offer `[current, proposed]`, which clears the
+two-level and bracketing guards and tests the predicate guard instead. The
+correction can only move a result toward ADMIT, never toward REFUSE.
+
+## 11 — ACL_011, the epicycle guard is a declaration
+
+`ClaimUpdate` refuses unless `independently_falsifiable` and
+`predicts_beyond_parent` are both true, and both arrive as booleans from the
+caller. Nothing derives either from the text of the restatement, so a
+responder passing `True, True` is never refused on that guard whatever it
+wrote.
+
+Third folder, one shape: `domain-ledger` `DL_015` (band membership is a
+string the author writes, nothing derives it), `generation-capacity`
+`GC_003` (the calibration constraint is a declared field, not a unit check),
+and this.
+
+It is not nothing — a declaration that must be made is a place to lie
+deliberately rather than by omission, and it sits in the log beside the
+restatement it licensed. But it cannot be null-tested from text, which is
+why the null arm is six items and not sixty: the corpus that would test it
+is restatements labelled by someone other than their author, and no such
+corpus exists in this repo.
+
+The checkable half of the same guard **is** checked. `new_refuted_if` must
+differ from the parent's, whitespace- and case-normalised, which catches a
+restatement that moved only its wording.
+
+## 12 — ACL_012, the one hole the test found
+
+`num_replicates += 20` — the delivered agent's `else`-branch, fired at
+random with no gap computed — was **admitted** as an `InstrumentEdit` whose
+artifact was the phrase `"sampling noise"`.
+
+Pre-registered REFUSE, and the pre-registration was right. The README says
+this edit is admissible because the resolution gap is **computable**, and
+the gate was not asking for the computation: `InstrumentEdit` required three
+non-empty strings plus the outcome screen, so a fluent phrase satisfied it.
+
+Same shape as `reasoning-dial` on `G-FIT` — the rule is "name why the
+statistic can discriminate", the implementation checks a string is
+non-empty, and a wrong-but-fluent sentence passes.
+
+**Repaired.** `ResolutionEdit` is the sixth response class and requires the
+resolution you HAVE and the one the claim NEEDS, as numbers, with `need >
+have`; `InstrumentEdit` refuses when its artifact names a resolution claim
+in prose and says which class to use. Six selftest assertions pin it, the
+first being the exact proposal that got through. The demo's drift scenario
+now emits `RESOLUTION_EDIT` where it emitted `INSTRUMENT_EDIT`, which is
+what the responder was already computing — it had the number and the gate
+never asked for it.
+
+The direction matters, because "the test disagreed and then the code
+changed" is the failure mode this entire folder is about. The rule was
+written before the test — it is in the README — and the gate was
+under-implementing it. The change makes the gate stricter, on a rule it
+already claimed. That is the distinction between closing a specification gap
+and tuning to an outcome, and it is the same distinction the gate itself
+enforces on a responder.
+
+## 13 — ACL_013, the limit of the repair
+
+    REFUSED  num_replicates += 20, as offered (prose)
+    ADMITTED num_replicates 50 -> 70,  no gap stated
+    ADMITTED num_replicates 50 -> 157, gap computed
+
+The middle row is the honest limit. `ResolutionEdit` checks that two numbers
+were supplied and that `need` exceeds `have`. It does **not** check that
+`need` is the number the claim's tolerance implies, so an agent writing
+`have=50, need=70` because its `else`-branch adds 20 is admitted — with the
+arbitrary pair sitting in the log where a reader can see it.
+
+A smaller hole than the prose one, and a different kind: the first let a
+phrase stand in for a computation, this one requires the computation to be
+shown but not to be right.
+
+Closing it needs the gate to know the claim's tolerance, which means the
+resolution requirement moves onto the **claim** rather than the response — a
+change to where the number lives, not a change to the guard. Not made here,
+and the reason is specific: no claim in this module declares a tolerance as
+data. `ACL_drift_neutral` carries `NEUTRAL_TOL` inside its predicate, where
+the gate cannot reach it.
+
+`ACL_009` is unchanged by all of this. The gate has now been run against
+proposals the author did not write, which is what that claim said had not
+happened — but a responder the author did not write is still not the same
+thing, and none has been run.

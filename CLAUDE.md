@@ -3126,8 +3126,44 @@ underneath).
   `ACL_006` and `ACL_009` are the honest counterweights — the delivered
   framework carries real spatially explicit models, claim generation and
   figures that this does not, and the shipped responder is a stub that is
-  explicitly not the contribution, never yet run against a responder the
-  author did not write. Stdlib only, CC0.
+  explicitly not the contribution. **The gate is then null-tested**
+  (`gate_null_test.py`), because 45 selftest assertions check that each
+  guard CAN fire and a gate that refuses everything passes all of them —
+  firing is not discrimination. Two arms, neither written for the test:
+  **signal** is the delivered agent's ten `actions.append` branches
+  enumerated by AST and justified with its own hypothesis text, **null** is
+  three `MechanismEdit` proposals from `photoperiod-claim-harness/
+  PENDING_EDITS` plus three claims from `equivalence-field/seed_claims()`.
+  Expected verdicts pre-registered and printed before the gate is called
+  once — **9 REFUSE / 1 ADMIT**, because a gate refusing 10 of 10 is
+  refusing on surface form and is scored over-tight, not perfect. Result
+  **TP 1.00 / FP 0.00, grade OK, 10 of 10 matching**; the branch that
+  admits is `num_steps *= 1.5` under "not at steady state", a diagnosis
+  about the RUN, so it and `switching_rate *= 0.7` separate on
+  justification alone — `ACL_003` measured rather than asserted.
+  **`ACL_012`, the one hole it found:** `InstrumentEdit` admitted the
+  agent's random `num_replicates += 20` on the prose artifact "sampling
+  noise", since it required three non-empty strings and nothing more — the
+  README already said the edit is admissible because the gap is COMPUTABLE
+  and the gate was not asking for the computation (the `reasoning-dial`
+  G-FIT shape: the rule says "name why", the implementation checks a string
+  is non-empty). Repaired with a sixth response class, `RESOLUTION_EDIT`,
+  requiring HAVE and NEED as numbers with need beyond have, pinned by six
+  selftest assertions whose first is the exact proposal that got through —
+  and the repair direction is stated, since "the test disagreed and the
+  code changed" is this folder's own subject: the rule predated the test,
+  the gate was under-implementing it, and the change makes the gate
+  stricter on a rule it already claimed. **`ACL_013`** names the repair's
+  limit — the gate now requires the computation to be SHOWN, not to be
+  right, so `have=50, need=70` is admitted; closing it moves the tolerance
+  onto the CLAIM rather than the response, and no claim here declares one
+  as data. **`ACL_011`:** the epicycle guard is a declaration, not a check
+  — both booleans come from the caller and nothing derives them from the
+  restatement's text, so it cannot be null-tested from text at all; third
+  folder with that shape after `DL_015` and `GC_003`. `ACL_009` survives
+  the test: the gate has now been run against proposals the author did not
+  write, which is not the same as a responder the author did not write, and
+  none has been run. Selftest 45/45. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

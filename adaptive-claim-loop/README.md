@@ -6,7 +6,7 @@ The same architecture as an adaptive simulation framework — provenance log,
 claim system, an agent that reads results and proposes a change, a loop that
 iterates — with one move removed.
 
-CC0. Stdlib only. Selftest 39/39.
+CC0. Stdlib only. Selftest 45/45.
 
 ## THE MOVE THAT IS REMOVED
 
@@ -19,10 +19,10 @@ observation, hypothesis, action, expected outcome, one row per step — reads as
 a chain of reasoning. Nothing about the system is learned, and the record
 looks like diligence.
 
-This module has no vocabulary for it. `Response` has five subclasses and none
-of them takes a bare parameter and a direction.
+This module has no vocabulary for it. `Response` has six subclasses and none of
+them takes a bare parameter and a direction.
 
-## FIVE RESPONSES TO A FAILURE
+## SIX RESPONSES TO A FAILURE
 
     CLAIM_UPDATE     the claim was wrong. Restate it. Needs a break condition
                      that is not the old one, and must pass the epicycle
@@ -37,6 +37,10 @@ of them takes a bare parameter and a direction.
                      statistic, integration step. Needs the artifact removed
                      and a quantity unchanged by the change. Takes no
                      prediction: it is not a claim about the world.
+
+    RESOLUTION_EDIT  the readout is right and the error bar is too wide.
+                     Needs the resolution you HAVE and the one the claim
+                     NEEDS, as numbers, with need beyond have.
 
     SWEEP            a parameter is varied across levels declared before the
                      run, and the claim is restated over the gradient. See
@@ -123,6 +127,29 @@ No real models. The two demos are sized to make the gates visible, not to
 model anything. A parameter walk under a good model still tells you nothing
 and a gate over a toy model still refuses the walk, so the two are separable
 — and this folder only holds one of them.
+
+## THE NULL TEST
+
+`gate_null_test.py` runs the `null-harness/` invariant over the gate,
+because the selftest does not: 45 assertions check that each guard **can**
+fire, and a gate that refuses everything passes every one of them.
+
+Two arms, neither written for this test. **Signal** — the delivered agent's
+ten action branches, enumerated from its source by AST and justified with
+its own hypothesis text. **Null** — three `MechanismEdit` proposals from
+`photoperiod-claim-harness/PENDING_EDITS` and three claims from
+`equivalence-field/seed_claims()`, written for other folders before this one
+existed. Expected verdicts are pre-registered and printed before the gate is
+called once.
+
+    TP 1.00   FP 0.00   grade OK   10 of 10 matched the pre-registration
+
+It found one thing, and it is in `ACL_012`: `InstrumentEdit` admitted a
+random replicate bump whose artifact was the phrase "sampling noise",
+because it required three non-empty strings and nothing more. `RESOLUTION_-
+EDIT` is the repair and it is the sixth response class. The limit of the
+repair is stated in `ACL_013` — the gate now requires the computation to be
+shown, not to be right.
 
 ## THE DELIVERED FRAMEWORK
 

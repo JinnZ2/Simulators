@@ -1,7 +1,7 @@
 adaptive-claim-loop -- replay of the delivered framework's own log
 delivered: adaptive_sim_framework.py, 2 provenance logs, 1 figure
 rows: 5 fluctuating, 2 forest
-adaptive_loop selftest: 39/39
+adaptive_loop selftest: 45/45
 
 ==========================================================================
 1  ACL_001  every agent move in the log is the one move this gate removes
