@@ -2402,8 +2402,67 @@ underneath).
   correction:** the earlier audit said the delivered `break` in `scan()`
   enforced one mechanism per sentence — it does not, the `break` exits the
   trigger loop and mechanisms already co-fire, so the wrong-mechanism
-  finding was a missing trigger rather than a blocked co-firing. Nineteen
-  claims `UNI_001..068`. Stdlib only, CC0.
+  finding was a missing trigger rather than a blocked co-firing.
+  **`cases/018selfreportopinioncoupling.md`** is the first entry whose WOULD
+  MEASURE is a **runnable experimental design** rather than a description of
+  one — whether a model's acknowledgement of its own limitations tracks
+  assessment or tracks the surrounding discourse, run on two separated clocks
+  (release-date corpus absorption; query-date context entry on a frozen
+  checkpoint). That makes it auditable the way a protocol is: the premise
+  either holds of the apparatus or it does not. **`UNI_069`, the load-bearing
+  check:** Clock 2 is the decoupling arm and the one the file says to run
+  first, and its whole warrant is *"Weights cannot change. Any shift in what
+  is acknowledged has to enter through context"* — a disjunction with a third
+  term, since a frozen checkpoint queried twice at non-zero temperature
+  returns two different texts. `sampling` / `temperature` / `variance` /
+  `repeat` / `error bar` / `seed` are **0 hits each** in the file, and the
+  five-item CONFOUNDS list has one statistical entry whose n is *checkpoints*
+  (Clock 1 / Q3), none naming Clock 2. Simulated at the same underlying rate
+  with the frame effect set to exactly zero, two frames at n=20 differ by
+  **0.30 or more one run in twenty** against a base rate of 0.35 — so the arm
+  has no denominator. The repair is a `reasoning-gate` **G-RES pair** needing
+  no new apparatus (repeat each frame N times, require the between-frame
+  difference to clear the within-frame spread by a declared margin), and it
+  would give the measurement axis what the control arm already gives the
+  topic axis: a reachable negative. Neither reading is that the coupling is
+  absent (a false premise makes the arm unbounded, not wrong) nor that
+  temperature zero fixes it (greedy decoding returns n=1 for a quantity that
+  is a rate). **`UNI_070`:** both pointers into 017 name a labelling scheme
+  017 does not use — `017 P1` (cited twice) and `017 component (a)` against
+  `Q1`..`Q5` — though P1's referent exists *unlabelled* as 017's one
+  blockquote in place of an unfilled WOULD MEASURE, which is exactly what
+  Clock 2 does; `component (a)` is not locatable at all, and the specimen
+  path is the **fifth** instance of `UNI_060`'s hyphenation mismatch, the
+  first written after it was recorded. **`UNI_071`:** first entry to place
+  itself inside its own population and refuse the exemption noticing usually
+  buys — *"Noticing that does not place it outside the sample"* — zero prior
+  cases carry a POSITION OF THIS FILE section, and under the folder's own
+  specimen rule the alternative is a silent exemption, i.e. `AUTHORED
+  REFERENCE` operating on the register. **`UNI_072`:** the audit declares its
+  own position, since it is also by a system inside the sample — six of eight
+  findings rest on files and are recheckable by anyone, and the one finding
+  available here about what models acknowledge is **declined and the
+  declining recorded**, because offering it as evidence would be the
+  mechanism the entry describes performed in the entry's audit. **`UNI_073`:**
+  the "useful accident" that older checkpoints stay queryable carries Clock 1
+  and Q3 entirely and has an **undated expiry** — `deprecat` / `retire` /
+  `expire` 0 hits, with the whole dependency in one subordinate clause ("only
+  for checkpoints still served"); a dated inventory is free today and
+  unreconstructable later. **`UNI_074`:** Q5 merges the two clocks the rest of
+  the file keeps apart — 016's corrector and Clock 2's framing both enter
+  through *context*, Clock 1's discourse entered through the *training
+  corpus* before the weights existed, so "same operation at a different range"
+  holds for one and not the other and the question cannot return one answer.
+  **`UNI_075`:** Q4 is the entry's own demotion condition (if acknowledgement
+  and measured capability are uncorrelated, the source question is
+  secondary), stated openly and marked "Not designed here" — and scheduled
+  last, behind the arm it could make moot. **`UNI_076`:** the control arm is
+  the strongest element ("All three outcomes are informative. Without the
+  control arm, only one is" — the `null-harness` property built in at design
+  time), while `selfreport_probe.py` is absent — third named-and-absent object
+  in this drop family and the first that is a **file this folder could ship**
+  rather than a body of work it reaches for. Seventy-six claims
+  `UNI_001..076`. Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
   time-series variable** — version the ruler, compute drift on its own

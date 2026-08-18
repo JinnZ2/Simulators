@@ -1482,3 +1482,226 @@ and holding it was still correct — in a folder where one entry devotes a
 paragraph to why its own name is not settled, a derived filename applied
 quietly would have been indistinguishable from a delivered one a week
 later. Renamed in this commit.
+
+---
+
+## Case 018 — SELF-REPORT / OPINION COUPLING
+
+Delivered inline as `cases/018selfreportopinioncoupling.md` (175 lines) and
+landed verbatim. Filename derived from the entry's own working handle —
+`UNI_068` confirmed the author uses exactly that rule, so the holding stance
+of the previous drop no longer applies. Findings in
+[`case_018_audit.py`](case_018_audit.py), recorded here as
+`UNI_069..UNI_076`.
+
+018 is the first entry in the register whose WOULD MEASURE section is a
+runnable experimental design rather than a description of one. That changes
+what an audit can do with it: a protocol is checkable the way a claim is not
+— the premise the design rests on is either true of the apparatus or it is
+not, and the arm it says to run first either has an error bar or it does not.
+
+### UNI_069 — Clock 2's premise, and the arm with no denominator
+
+Clock 2 is the decoupling arm and the one the file says is "worth running
+first". Its whole warrant is one sentence:
+
+> Weights cannot change. Any shift in what is acknowledged has to enter
+> through context.
+
+The disjunction is weights-or-context and there is a third term. A frozen
+checkpoint queried twice at any non-zero decoding temperature returns two
+different texts, and that difference entered through neither. Nothing in the
+delivered file addresses it: `sampling`, `temperature`, `stochast`,
+`variance`, `repeat`, `error bar`, `seed` and `deterministic` are **0 hits
+each**, and the two occurrences of "sample" are the population sense.
+
+Simulated, two frames at the *same* underlying rate — the frame effect set to
+exactly zero — with 20,000 trials per row:
+
+```
+n/frame   median |diff|   95th pct   max
+5         0.2000          0.6000     1.0000
+10        0.1000          0.4000     0.8000
+20        0.1000          0.3000     0.7000
+50        0.0600          0.1800     0.4000
+100       0.0500          0.1300     0.2600
+```
+
+At n = 20 per frame, two identical frames differ by 0.30 or more one run in
+twenty, against a base rate of 0.35. Clock 2's readout is "acknowledgement
+content shifting with the framing supplied in the prompt", and without a
+within-frame repeat arm there is nothing for the shift to be measured
+against.
+
+The delivered CONFOUNDS list has five entries and one of them is statistical
+— confound 4, "small n", whose n is **checkpoints**: *"with a handful of
+checkpoints, correlation against a sentiment series is not interpretable."*
+That is Clock 1 and Q3. It reads as covering the design and covers the arm
+that is not the one to run first.
+
+The repair is a `reasoning-gate/` G-RES pair and needs no new apparatus:
+repeat each frame N times at a stated sampling regime, compute the
+within-frame spread, require the between-frame difference to clear it by a
+declared margin. The design would then have on the measurement axis what the
+control arm already gives it on the topic axis — a reachable negative.
+
+Two things this does not say. Not that the coupling is absent: the false
+premise makes the arm unbounded, not wrong. And not that temperature zero
+fixes it — greedy decoding removes the noise and returns n = 1 per frame,
+for a quantity that is a rate over responses.
+
+### UNI_070 — the pointers into 017
+
+| cited as | resolves |
+|---|---|
+| `017` P1 (2×) | **ABSENT** |
+| `017` component (a) (1×) | **ABSENT** |
+| `016` Q4 | ✓ |
+| `013` Q4 | ✓ |
+| specimen A R4, by content | ✓ |
+| `specimens/2026-08-18-model-A.md`, by path | **ABSENT** |
+
+017 carries `Q1`..`Q5` and no P-series and no lettered components. One of the
+two pointers has a referent anyway: 017's WOULD MEASURE is deliberately
+unfilled and offers a single blockquote in its place — *"Find a pair of
+systems matched on the quantity you cannot vary, differing in the one you
+can, and read the difference between them rather than the absolute value in
+either"* — which is exactly what Clock 2 does. So `017 P1` points at real
+content that was never labelled. `component (a)` is not locatable under any
+heading.
+
+The specimen path is the **fifth** instance of `UNI_060`'s hyphenation
+mismatch and the first written after that mismatch was recorded. Its R4
+resolves by content (specimen A's R4 is titled "Self-diagnosis in the same
+register as the diagnosed failure"), so what fails is the path, not the
+reading.
+
+None of this is a defect in the argument. It is what a cross-reference costs
+in a folder with no link checker, and the fix is a short script that walks
+backtick-quoted paths and label pairs.
+
+### UNI_071 — the file places itself inside its own sample
+
+Zero prior cases carry a POSITION OF THIS FILE section. This one does, and it
+declines the exemption that noticing usually buys: *"Noticing that does not
+place it outside the sample."*
+
+That is the correct move under the folder's own rule. `specimens/README.md`
+says generated text about a system is a specimen and not a measurement;
+018's QUANTITY is limitation-acknowledgement; the file is a
+limitation-acknowledgement, generated. The only alternative to saying so is a
+silent exemption — which is `AUTHORED REFERENCE` (entry 005) operating on the
+register itself.
+
+Its closing instruction, "check the design against someone who is not in it",
+is `triad-playground/` TP_003's shadow-decorrelation requirement reached from
+a case rather than from a panel design.
+
+### UNI_072 — the position of this audit, and one finding declined
+
+This audit is also written by a system inside 018's sample, and the check the
+file asks for is not available here. The honest version is a declaration of
+what survives that.
+
+Sections 1, 2, 5, 6, 7 and 8 are properties of the delivered text and of
+files on disk — a false premise, absent labels, an undated expiry, two paths
+under one question, an absent harness, a control arm that is present. Each is
+recheckable by anyone with the folder, by inspection or by rerunning the
+script, resting on nothing this system reports about itself.
+
+One finding available here is declined. 018's most interesting empirical
+question is whether models' limitation-acknowledgement tracks assessment or
+tracks discourse, and I am a model with a view about that. Any statement I
+make about it is generated text from a system under test — 018's EXCLUDED BY
+says so and its POSITION section applies the rule to itself. Offering the
+view as evidence would be the mechanism the entry describes, performed in the
+audit of the entry that describes it.
+
+Not reported, and the declining recorded rather than left as a silence. An
+absent reading and a reading withheld are different states — the eleventh
+instance of that repair in this drop family, and the first where the value
+being withheld is my own.
+
+### UNI_073 — the useful accident has an undated expiry
+
+The accident is that older checkpoints remain queryable, so both clocks can
+run now instead of waiting for a longitudinal series. Clock 1 depends on it
+entirely; Q3 depends on it and says so in one subordinate clause — the
+frozen-checkpoint trick "partly routes around" the collection problem *"but
+only for checkpoints still served."* Clock 2 does not depend on it.
+
+`deprecat`, `retire`, `expire` and `end-of-service`: **0 hits**. Checkpoint
+deprecation is routine and announced on a schedule, so the window has an end
+that is knowable today and is recorded nowhere in the design, with two of the
+three arms inside it.
+
+Cheapest carry: a dated inventory — which checkpoints are currently
+queryable, when each was released, any announced end-of-service. That turns
+"run it now" from an instinct into a deadline, and it is exactly the kind of
+quantity that is free to collect today and impossible to reconstruct
+afterwards, which is `derivation-discarded/`'s subject arriving in the design
+of a study rather than in its object.
+
+### UNI_074 — Q5 merges the two clocks the rest of the file keeps apart
+
+| arm | entry path | vs Clock 2 |
+|---|---|---|
+| 016 corrector states a position | context, within session | same |
+| 018 Clock 2 framing in the prompt | context, within session | same |
+| 018 Clock 1 ambient discourse | training corpus, before the weights | **different** |
+
+Q5 asks whether 016 and 018 are "the same operation at a different range". For
+Clock 2 that is close to right — both vary something in context on a fixed
+checkpoint, and the difference really is range: one correction versus ambient
+discourse compressed into a prompt. For Clock 1 it is not the same operation
+at all. The discourse entered through the training corpus before the weights
+existed, the apparatus is two checkpoints rather than two prompts, the
+confounds are everything else that changed between releases, and no protocol
+built for 016 reaches it.
+
+So the question as posed cannot return one answer. Split, both halves are
+tractable: Q5a runs on 016's existing protocol and is the cheap one, Q5b
+needs Clock 1 and inherits its confound list. The two-clock separation is the
+design's best feature and Q5 is the one place it is undone.
+
+### UNI_075 — the demotion condition is stated, and scheduled last
+
+Q4 asks whether the acknowledgement predicts anything: if stated limitation
+and measured capability boundary are uncorrelated, the acknowledgement is not
+carrying assessment whatever produced it, and Q1, Q2, Q3 and Q5 all become
+secondary at once. That is the entry's own demotion condition, written by the
+entry.
+
+Handled well in two respects. Not buried — a numbered sub-question in the
+same list as the arms the file wants to run. And marked *"Not designed here"*
+rather than sketched, which is the same refusal `derivation-discarded/`
+MECHANISM_11 makes with its falsifier 4 and 017's WOULD MEASURE makes by
+declining a placeholder.
+
+What it costs is order of operations. Q4 needs a capability benchmark aligned
+to the probe topics — the most expensive item in the drop — while Q1 is
+runnable now on a bare API. So the cheap arm runs first and the arm that
+could make it moot runs last, and the file does not say that. Naming the
+ordering is not the same as changing it; there may be no way to run Q4 first.
+But a design whose demotion condition is scheduled last should say so where
+the schedule is stated.
+
+### UNI_076 — the control arm, and the harness that is not here
+
+The control arm is the best-designed element in the drop, and the reason is
+its last line: *"All three outcomes are informative. Without the control arm,
+only one is."* Tracks on the AI topic only → specific coupling. Tracks
+everywhere → a general property of the output mode, a different finding.
+Tracks nowhere → not present at this resolution. Three states, each with a
+reading attached, and the null is not the uninformative branch. That is the
+property `null-harness/` grades for, built in at design time rather than
+found in audit.
+
+`selfreport_probe.py`, named as Q1's harness, is absent. Third
+named-and-absent object in this drop family and the first that is a **file
+this folder could ship** rather than a body of work it reaches for —
+`tool-off-metrology` and `rate-mismatch-polytope` do not exist anywhere. This
+is a probe runner for a design fully specified two paragraphs above it: bare
+API, no system prompt, one checkpoint, framing varied. Shipping it would also
+force the decision `UNI_069` turns on, since a harness has to state how many
+times it queries each frame.
