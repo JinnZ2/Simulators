@@ -1,0 +1,24 @@
+{
+  "case": "example",
+  "branch": "event",
+  "variable_state": "not_assessed",
+  "information_availability": null,
+  "knowledge_state": "not_separable",
+  "signal": {
+    "present": null,
+    "relied_on_as_reading": null,
+    "years_correct": null
+  },
+  "latency": {
+    "diagnostic_seconds": null,
+    "budget_seconds": null,
+    "note": ""
+  },
+  "procedure_gap": {
+    "collapsed_into_closure": null,
+    "ground": ""
+  },
+  "source_class": "",
+  "self_report": null,
+  "open": []
+}

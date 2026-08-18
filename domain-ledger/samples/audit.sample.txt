@@ -1,0 +1,564 @@
+domain-ledger -- audit of the delivered drop
+delivered: ledger.py (drop 4 docstring), anchor.py, A2.md,
+           1 shape, 1 anchor map
+not delivered: README.md, CLAIM_TABLE.md (A2.md names the second)
+selftest: 13/13, rc=0
+
+======================================================================
+1  DL_001  the load-bearing idea, and it is the one the repo needed
+======================================================================
+A coverage number is not portable without its denominator. 61 percent
+    over one domain set is a different quantity than 61 percent over
+    another. This records the set.
+
+That is `criteria-drift` CD_008 and `anchor-interval` ANC_006 stated for a
+confidence readout instead of a benchmark: a number is identified only up
+to the reference it was taken against, so publish the reference. Here the
+reference is a list of domains and it is carried in the file.
+
+Two design choices follow from it and both are unusual enough to record.
+
+FOUR READOUTS, NOT COMBINED. coverage / cycle_depth / adversarial /
+truncated are returned separately, with the docstring stating why:
+"Coverage and cycle depth are different currencies. A shape can be wide
+and shallow." Every other scorer in this family reduces to one headline
+number and gets a finding against it -- presented-binary PB_007
+(documented_share merges two states), uninstrumented's SCALAR DEMAND.
+This one refuses the reduction up front.
+
+DENOMINATORS NAMED IN THE OUTPUT. The table footer prints what each
+column divides by -- "cov: held / read", "cyc: holds that survived a
+return / holds" -- so the two are visibly not over the same base. That is
+the `measurement-fork` VOID RATIO check made unnecessary rather than
+enforced: you cannot compare them because the tool says what they are.
+
+======================================================================
+2  DL_002  the reservation is defined and never applied
+======================================================================
+RESERVATION: a standing fraction held as unknown, applied to every
+    shape. It is not subtracted from coverage -- coverage is over what was
+    read. It CAPS WHAT THE LEDGER WILL REPORT AS AVAILABLE HEADROOM, and
+    it is why a shape with high coverage still does not coalesce.
+
+`score()` computes `ceiling = 1 - reservation` and returns it. Nothing
+compares anything to it. There is no headroom field, and coverage is free
+to exceed the ceiling with no readout saying so:
+
+  ten domains, all hold, reservation 0.20
+    coverage 1.00   ceiling 0.80   coverage > ceiling: True
+    fields naming headroom: none
+
+The sentence names a function -- cap the reported headroom -- and the code
+carries the constant without the function. `ceiling` is printed in
+`detail()` beside `RESERVATION` and read by nothing.
+
+Not a wrong number: the docstring is explicit that reservation is NOT
+subtracted from coverage, and it is not. What is missing is the readout
+the same paragraph promises. One line: headroom = min(coverage, ceiling),
+or a flag when coverage exceeds it.
+
+======================================================================
+3  DL_003  coverage merges break with mixed
+======================================================================
+
+  all break  coverage 0.00   breaks 2   mixed 0
+  all mixed  coverage 0.00   breaks 0   mixed 2
+coverage is holds / read, and `mixed` is in the denominator and not the
+numerator. So a shape that broke everywhere and a shape that read mixed
+everywhere both return 0.00 -- and those are different results. A break is
+the shape failing; a mixed read is the shape doing something the two-value
+vocabulary cannot hold.
+
+The information is not lost: `break_domains` and `mixed_domains` are
+returned separately and `detail()` prints both under their own headings.
+The loss is in the derived scalar only, which is precisely the shape
+PB_007 records one folder over -- and DL_001 credits this tool with
+refusing exactly that reduction on the other three readouts.
+
+Cheapest fix is not a fifth ratio. It is the footer: "cov: held / read"
+does not say that mixed sits in the denominator, and one clause would.
+
+======================================================================
+4  DL_004  the guard field is read and not in the skeleton -- again
+======================================================================
+`detail()` reads two top-level fields the SKELETON does not carry:
+
+  SKELETON keys            : asserted_coverage, domains, reservation, shape, source, statement
+  read by detail(), absent : criterion_fixed_in_advance, open
+`criterion_fixed_in_advance` is `category-weld` CW_015's pre-registration
+guard promoted to a first-class schema field -- there it lived as prose
+inside a term's `open` list, here it has its own key and its own heading
+in the detail view. That is the right direction and it is the same author
+reaching the same discipline a third time (reasoning-gate G-PRE,
+photoperiod MechanismEdit, CW_015).
+
+And it repeats CW_015's gap exactly: `--new` emits a skeleton without it,
+so the field a new shape most needs prompting for is the field the
+template is silent about. Two folders, same author, same drop family, same
+miss.
+
+What is different here, and better: the SKELETON is deep-copied.
+
+  tool                               --new deep-copies its template
+  ------------------------------------------------------------------
+  category-weld/weld.py              False
+  generation-capacity/capacity.py    False
+  domain-ledger/ledger.py            True
+`weld.py` and `capacity.py` both use `dict(TEMPLATE)`, a shallow copy that
+shares the nested lists with the module global. Harmless as called -- both
+only assign the top-level name -- but one line of future editing away from
+mutating the template. `ledger.py` round-trips through JSON. Recorded
+because it is the correct one of the three and the difference is invisible
+until it is not.
+
+======================================================================
+5  DL_005  an empty ledger prints a clean report
+======================================================================
+There is no shapes/ directory in the drop. `load()` returns [] when the
+directory is absent, `table([])` prints headers and the full explanatory
+footer, and main() returns None:
+
+    rows printed  : 0
+    lines printed : 9
+    exit code     : 0
+
+  the three sibling tools on the same state:
+    category-weld/weld.py                  refuses: True
+    presented-binary/binary_audit.py       refuses: True
+    generation-capacity/capacity.py        refuses: True
+Every sibling refuses and says so on stderr. This one prints a well-formed
+report with no content and exits clean, so an empty ledger is
+indistinguishable from a populated one at a glance -- and the footer's
+closing line, "Unpushed domains are not neutral. Each is an untested
+surface", prints over zero domains.
+
+The tool's own subject is confidence readouts that do not carry their
+denominator. Its empty state is a report whose denominator is zero,
+rendered as if it had one.
+
+Nothing else here is unverified: the selftest is 13/13, it covers the
+empty-ledger case at the score() level ("empty ledger gives none not
+zero", "empty mismatch is none"), and those are the right two checks. The
+gap is one level up, at the presentation layer the selftest does not
+reach.
+
+======================================================================
+6  DL_006  the first shape, and the asserted number sitting beside no derived one
+======================================================================
+Drop 2 delivers shapes/hierarchy-cut-generation.json: 30 domains, an
+asserted coverage of 0.61, and a source field stating what the file is
+for.
+
+    Coverage asserted at 0.61 over a domain set carried in working memory
+    rather than written down. This file exists to convert the asserted
+    number to a derived one; until the read column is filled the derived
+    number is unavailable, and that unavailability is the current state,
+    not a failure.
+
+  hierarchy-cut-generation   domains 30   read 0   asserted 0.61   derived --   mismatch --
+The tool's whole argument, instanced on its first shape: a number that was
+being carried as 0.61 now sits next to a derived column reading `--`, and
+`detail()` prints "derived -- ledger not yet populated" rather than
+substituting the asserted value or a zero.
+
+That is the branch DL_002 and DL_005 are about, used correctly. It is also
+the one place in this repo where an author has written down a number they
+were already using and then built the instrument that refuses to confirm
+it.
+
+The gap it exposes is the one the file names: 30 domains, 0 read, so
+every ratio is `--` and the reservation's ceiling has nothing to cap. The
+readouts are live and the corpus is empty -- which is the honest state and
+is what the source field says.
+
+======================================================================
+7  DL_007  the cross-folder run order is met, for the first time in this family
+======================================================================
+The shape's statement does something no other artifact in this drop family
+has done:
+
+    Runs on the imposed_ordering sense only -- see category-weld
+    welds/hierarchy.json for the other four senses, which are not this
+    claim.
+
+  category-weld/welds/hierarchy.json components (5):
+      nested_containment, organizing_abstraction, imposed_ordering, ordering_origin, cut_rate
+  minus imposed_ordering = 4; the statement says four: True
+
+  domains pre-classified by weld sense before being read:
+      mathematics / order theory                 nested_containment sense lives here; likely not this claim
+      computer science / type and file systems   organizing_abstraction sense lives here; likely not this claim
+moral-decomposer MD_004 records the opposite state one folder over: a
+stated RUN ORDER requiring welded terms decomposed first, seven terms
+named, zero decomposed. Here the weld exists, the shape names which of its
+five senses the claim runs on, and two of the thirty domains are
+pre-classified as probably belonging to a different sense -- before
+reading, which is the only time that classification is not closure by
+construction.
+
+The `criterion_fixed_in_advance` field carries the same discipline for the
+read itself:
+
+    Reclassifying a case as not-really-hierarchy after seeing which way it
+    read is closure by construction and is not permitted; such a case is
+    MIXED with the reason recorded.
+
+That names the failure, names the routing for the ambiguous case, and
+fixes both before any domain is read. DL_004's finding stands unchanged --
+SKELETON still carries neither field, so a shape created by `--new` starts
+without them -- and the delivered shape shows what the fields are for.
+
+======================================================================
+8  DL_008  anchor.py builds the repair as its stated reason for existing
+======================================================================
+anchor.py selftest: 14/14, rc=0
+The companion's PROVENANCE CHAINS section keeps three routing states apart:
+
+    routed              a path to the next link exists and is stated
+    unrouted            no path found yet. Alternate paths not exhausted.
+    absent_established  investigated and the link genuinely does not ground
+                        that way. Not a failure -- a finding, and its own
+                        measurement problem needing instrumentation.
+
+    Collapsing unrouted and absent_established into "blocked" loses the
+    distinction the map exists for.
+
+That is the fifth instance of one repair in this drop family, and the
+second built in rather than found:
+
+    PB_004   frame_sim option_gain        0 options found == never ran
+    PB_012   binary_audit handoff()       above ceiling == never checked
+    GC_004   MECHANISM_10 R3              not cited == no corpus searched
+    MD_002   moral-decomposer reduces_to  irreducible == routed elsewhere
+    GC_010   SUBCASE_10A S1               absent vs zero, designed in
+    here     anchor.py routing states     unrouted vs absent_established
+
+  one unrouted link + one absent_established link ->
+    unrouted_total 1   absent_total 1   reported apart
+GC_010 was the first time the distinction was specified ahead of code.
+This is the first time it is implemented, counted separately in the
+readout, and restated in the output -- `blocking()` closes with the
+paragraph rather than assuming the reader remembers it.
+
+What it is not: a reading. No anchors/ file has been recorded, so the
+three states have never been assigned to a real link.
+
+======================================================================
+9  DL_009  two fields are described as band-setting; one is aggregated
+======================================================================
+The opening paragraph and the BANDS heading name different fields:
+
+    What sets the band is where the shape ANCHORS: what it grounds to, and
+    what band THAT ANCHOR ALREADY OCCUPIES.
+
+    BANDS -- set by the CLASS OF SUPPORT, not by sampling effort.
+
+The schema carries both. `target_band` is what the anchor already occupies;
+`corroboration.class` is the class of support for reaching it. Measured on
+an anchor where they differ:
+
+  target_band          cycle_persistent (0.99)
+  corroboration class  external (0.80)
+  document ceiling     0.80
+
+  document-level fields score() computes: ceiling_class, ceiling, anchor_spread, chains_complete, unrouted_total, absent_total
+  ... none of them reads target_band.
+`target_band` is computed per anchor, printed by `detail()`, and
+aggregated by nothing. Anchoring to thermodynamics -- a cycle-persistent
+target -- yields a document ceiling of 0.80 because the corroboration is
+external.
+
+The selftest pins exactly this: its `thermo` anchor has
+target_band=cycle_persistent and the asserted check is `ceiling == 0.80`.
+So the choice is deliberate and the BANDS heading is the one the code
+follows.
+
+The residue is in the opening paragraph, which says anchor proximity sets
+the band and that "anchoring near something that has survived generational
+cycles raises the number". On the delivered code it does not: proximity to
+a cycle-persistent target raises `target_ceiling`, which no readout uses.
+One of the two sentences describes the code and the other describes a
+quantity the code records and does not aggregate.
+
+Which is right is a design question, not an audit one. What is checkable
+is that a field the docstring calls band-setting reaches no readout.
+
+======================================================================
+10 DL_010  the refusal is real; the constants under it are stipulated
+======================================================================
+No composite figure is emitted. Weighting near against far anchors is
+    not specified, and a number produced by guessing at it would be less
+    honest than the anchors themselves.
+
+The selftest asserts it -- `("no composite emitted", "confidence" not in s)`
+-- so the refusal is enforced rather than promised. That is DL_001's
+refusal-of-reduction taken one step further than ledger.py takes it, and
+it is the strongest instance in the family.
+
+Two numbers are emitted, and both are functions of three stipulated
+constants:
+
+  BAND_CEILING  {'none': 0.3, 'external': 0.8, 'cycle_persistent': 0.99}
+  anchor_spread can take exactly 4 values: [0.0, 0.19, 0.5, 0.69]
+0.30, 0.80 and 0.99 have stated rationales -- no external body behind it,
+one reading of outside material, held across cycles -- and no derivation.
+`anchor_spread` is a difference of two of them, so it inherits that.
+
+Same shape as `presented-binary`'s `HANDOFF_CEILING`, which B10 discloses
+in its own weak-point line: "the ceiling is set at 2 by constant, which is
+a judgment call and not a measurement." Here the equivalent line is not
+written. The tool refuses to guess at the weighting BETWEEN bands and
+stipulates the bands themselves, which is a defensible split and is not
+stated as one.
+
+Cheap to close in the direction the folder already uses: the three bands
+are ordinal by construction (BAND_ORDER), and `ceiling_class` is the
+ordinal readout. `ceiling` converts the ordinal to a number, which is the
+step with nothing behind it -- and is exactly what `criteria-drift`
+CD_002 records as ordinal-compared-as-nominal, arriving here from the
+opposite direction.
+
+======================================================================
+11 DL_004  half the skeleton gap closes in the next tool
+======================================================================
+
+  ledger.py SKELETON : asserted_coverage, domains, reservation, shape, source, statement
+  anchor.py SKELETON : anchors, asserted_confidence, open, sense, shape, statement
+
+  open                         ledger: False  anchor: True
+  criterion_fixed_in_advance   ledger: False  anchor: False
+DL_004 recorded that `detail()` reads `open` and
+`criterion_fixed_in_advance` while `SKELETON` carries neither, so `--new`
+never prompts for the pre-registration guard.
+
+anchor.py carries `open` in its skeleton. Same author, next tool, half the
+gap closed without being asked. `criterion_fixed_in_advance` is in neither
+skeleton -- and anchor.py does not read it at all, which is consistent:
+the field belongs to a read that classifies domains, and an anchor map
+does not classify.
+
+DL_004 stands for ledger.py unchanged, and the direction of travel is
+recorded with it. DL_005 also recurs unchanged: anchor.py with no
+anchors/ directory prints headers and its full footer and exits 0.
+
+======================================================================
+12 DL_009  CORRECTED -- the two band fields are different quantities
+======================================================================
+DL_009 read the docstring's two band-setting sentences as a possible
+defect: target_band is computed per anchor and reaches no document-level
+readout, while the opening paragraph says anchor proximity sets the band.
+
+The first real anchor map settles it, in a note the schema already had a
+field for:
+
+  target: thermodynamics / energy systems
+    target_band         cycle_persistent
+    corroboration class external
+    The target itself sits in the cycle-persistent band. What is
+    external-band is the connection between imposed ordering and
+    maintenance cost, not the thermodynamics. Study count not tallied
+    — the tally is the work, not a placeholder to fill with a guess.
+The two fields are not two descriptions of one thing. `target_band` is
+where the TARGET sits; `corroboration.class` is the class of support for
+the CONNECTION between the shape and that target. Anchoring to
+thermodynamics does not inherit thermodynamics' band — what is external is
+the link from imposed ordering to maintenance cost.
+
+So aggregating `corroboration.class` and not `target_band` is correct, and
+DL_009's substantive worry dissolves. This audit read a tension in the
+prose as a possible defect in the code; the code is right.
+
+What survives is one paragraph. "Anchoring near something that has
+survived generational cycles raises the number" describes something the
+code does not do and, on the anchor map's own reading, should not do --
+proximity to a cycle-persistent target is context, not corroboration. One
+sentence in the docstring, and the data is the authority.
+
+======================================================================
+13 DL_011  the third routing state is implemented and unassigned
+======================================================================
+
+  routed               3
+  unrouted             6
+  absent_established   0
+DL_008 recorded that `absent_established` is the first implementation of a
+repair specified five times. On the first real map it is used zero times
+out of nine links.
+
+Not a defect and not an oversight -- the culture anchor's second link
+carries a note describing exactly what assigning it would mean:
+
+    If this establishes as ABSENT -- the construct genuinely does not
+    ground in biology -- that is a finding requiring its own
+    instrumentation and scientific method, not a failure of the shape.
+
+So the state is understood, its consequence is written down, and no link
+has yet been investigated far enough to earn it. `absent_established`
+requires having looked; `unrouted` is what you have before you look. The
+map is at the before-you-look stage throughout, which the next section
+measures.
+
+======================================================================
+14 DL_012  unrouted holds three de-facto states and the readout merges them
+======================================================================
+
+  link                                         attempted   open
+  --------------------------------------------------------------
+  expenditure to hold an ordering rises as the         0      3
+  a system running a rising cost gradient with         0      2
+  environment-coupled ordering and imposed ord         0      1
+  cultural and religious orderings are human c         0      3
+  that provenance grounds through biology rath         0      0
+  human-centrism and ego in the source materia         0      0
+
+  every unrouted link has 0 attempted paths
+  2 of 6 have no open path named either
+The docstring defines unrouted as "no path found yet. Alternate paths not
+exhausted", which covers three situations the map distinguishes in its
+data and the readout does not:
+
+    paths attempted, none worked, others open    -- work has been done
+    nothing attempted, open paths named          -- work is queued
+    nothing attempted, no path nameable          -- no instrument exists
+
+`unrouted_total` counts all three as one number, 6. The two links in the
+third group are the ones whose notes ask for new instrumentation
+("No instrument identified"), which is the same distance from a reading as
+`absent_established` and arrives at it from the other side.
+
+The schema already carries what separates them -- `paths_attempted` and
+`paths_open` are fields, and `blocking()` prints both. The gap is at the
+readout, and it is the same shape as DL_003: the information survives per
+item and the derived scalar merges it.
+
+======================================================================
+15 DL_013  the map states three numbers about itself and all three hold
+======================================================================
+
+  claim in the file's own open list          computed   holds
+  ----------------------------------------------------------------
+  Anchor spread is 0.5                       0.5        True
+  The ceiling reported is 0.80               0.8        True
+  No link anywhere in this file is quantified 0          True
+Three self-reported numbers, three exact. The second is stated with its
+own qualification -- "It is a ceiling on the whole sense, not a report
+that the shape is near it" -- which is the distinction DL_010 turns on,
+made by the author in the file.
+
+The fourth open item is the one that matters, and it is the folder's
+thesis instanced:
+
+    The load-bearing unrouted link is cost-gradient-by-depth-of-ordering
+    on the thermodynamic anchor. Routing it with a number would do more
+    than reading further domains, because it converts the near anchor from
+    stated to measured.
+
+ledger.py's new paragraph says coverage "resolves position inside a band
+that anchor distance already set ... Reading further domains moves the
+number within a band; it does not promote a shape between bands." The map
+then names which single measurement beats more coverage, and it is a link
+in a provenance chain rather than a domain in a ledger.
+
+That is the two tools doing the job the pair was built for, on one shape,
+with no reading taken in either.
+
+======================================================================
+16 DL_002  the reservation constant gets a source; the finding stands
+======================================================================
+Drop 4 changes ledger.py by docstring only -- the code is byte-identical
+after stripping the module docstring -- and one of the two additions is a
+derivation for the constant DL_010 flagged as stipulated:
+
+    The 0.2 default here encodes only the external-band ceiling of 0.8.
+    The 30 floor for shapes with no external support, and the 99 band
+    requiring generational cycle survival, live in anchor.py where the
+    source class is recorded. Do not read a ceiling off this file alone.
+
+  1 - SKELETON reservation = 0.80
+  anchor.py BAND_CEILING['external'] = 0.80
+  the default is now derived, not free: True
+One of DL_010's three constants now has a stated source. 0.30 and 0.99
+remain stipulated.
+
+DL_002 itself stands unchanged: `ceiling` is still computed, returned,
+printed beside RESERVATION, and read by nothing. The disclosure sharpens
+it rather than closing it -- the file now says "do not read a ceiling off
+this file alone" and `detail()` still prints `RESERVATION 0.20 ceiling
+0.80` as a line of the report. A number that no readout applies and the
+docstring warns against reading is the one line in the output with no
+consumer.
+
+======================================================================
+17 DL_014  A2.md names a claim table the folder does not carry
+======================================================================
+
+  files in domain-ledger/ : A2.md, AUDIT_NOTES.md, anchor.py, ledger.py, ledger_audit.py
+  CLAIM_TABLE.md present  : False
+  A2.md opening reference : A2 in `CLAIM_TABLE.md` records that confidence tracks distance to an anchor
+The note's first sentence sources its own subject to a document that is
+not in the folder, and `A2` appears nowhere else in `domain-ledger/`. The
+note is readable without it -- it restates what A2 flagged before building
+on it -- so nothing here is unrecoverable. What is missing is the row the
+candidate is a candidate FOR, and with it the other claims a reader would
+check this one against.
+
+Sixth instance of one shape in this drop family:
+
+    CW_001   fixtures named in a status sentence     landed one drop later
+    PB_001   seeded case + frame_sim fixtures        one of two landed
+    GC_009   cases/food-knowledge.json               named 3x, absent
+    PB_015   8 synthetic routing paths               absent
+    MD_001   decompose.py selftest fixture           absent
+    DL_014   domain-ledger/CLAIM_TABLE.md            absent
+
+Three of the six landed in a later drop. The shape is not a defect in any
+one drop; it is what writing the prose before the artifact produces, and
+it is only visible from outside because the reference and the tree are
+read together.
+
+======================================================================
+18 DL_015  A2 is right against the code, and converges with DL_010
+======================================================================
+
+  BAND_CEILING            : {'none': 0.3, 'external': 0.8, 'cycle_persistent': 0.99}
+  set by                  : corroboration.class, a declared label
+  measured by             : nothing in anchor.py
+A2 says the term the whole function turns on -- what makes an anchor near
+versus far -- is unspecified. Against the code that is exact. Distance is
+operationalised as `BAND_CEILING[corroboration.class]`, the class is a
+string the author writes into the anchor file, and no routine derives it
+from anything. `score_anchor` reads it, `score` takes the max over it, and
+`anchor_spread` is a difference of two of these constants.
+
+DL_010 reached the same place from the other side: `anchor.py` refuses to
+emit a composite, which is right, and the two numbers it does emit are
+functions of three stipulated constants with rationales and no derivation.
+A2 is the author naming that gap and proposing a definition for the term
+rather than for the constants -- which is the more useful half, since a
+rule that decides the class makes the constants an ordering rather than a
+measurement.
+
+The candidate is load-bearing capacity: an anchor is near because it is
+assemblable. That is `constraint-assembly`'s invariant class read as a
+band, and it would make the two folders one instrument.
+
+**What the note does that matters more than the candidate.** It refuses to
+adopt it, and names the reason as non-independence:
+
+    the convergence was noticed in the same conversation that produced
+    both descriptions, which is not independent.
+
+That is `triad-playground` TP_003's shared-bias finding -- readers who
+share an input agree tightly and the agreement carries no information --
+stated by the author about their own convergence, before anything rests on
+it. Three of the four shadows in TP_003 were AI; here the two descriptions
+are one author in one session, which is the same structure at n=1.
+
+The falsifier is named and is a search rather than an experiment:
+something well-corroborated that is not assemblable, or something
+assemblable with thin corroboration. Neither has been looked for, and the
+note says so.
+
+======================================================================
+end of audit -- findings recorded in AUDIT_NOTES.md as DL_001..DL_015
+======================================================================

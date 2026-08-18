@@ -1,0 +1,484 @@
+category-weld -- audit of the delivered drop
+3 term file(s): capital, hierarchy, rural
+scorer under audit: weld.py as delivered
+
+======================================================================
+1  CW_001  the verification claim -- falsifier fired, claim holds
+======================================================================
+CLAIM_TABLE.md, "Status of the readouts":
+
+    max_spread and bias "are implemented and verified against synthetic
+    fixtures in test_weld.py"
+
+The first drop named weld.py and test_weld.py under Files and shipped
+neither, so the statement was unverifiable from the folder. Both arrived
+in a second drop. CW_001's own falsifier -- "the delivered files turning
+up" -- fired.
+
+The statement is now checkable and it holds. test_weld.py builds a
+SYNTHETIC term with three quantified cases and one unquantified one, and
+asserts n_cases, n_quantified, n_unquantified, max_spread and bias against
+hand-computed values.
+
+  reconstruction/weld.py made 9 marked arithmetic choices.
+  One of them was wrong in a way that produced a finding (CW_004).
+
+======================================================================
+2  CW_004  REFUTED by the delivered file -- correcting this audit
+======================================================================
+The first pass read "ratio between component relative-changes" ADDITIVELY:
+rel = (after - before) / |before|, so an unmoved component is 0 and a
+ratio against it diverges. On that reading max_spread ran to infinity at
+the paradigm weld -- the tracked component holding while the hidden one
+collapses -- which was recorded as CW_004.
+
+The delivered rel_change is MULTIPLICATIVE: after / before. An unmoved
+component is 1.0, not 0. The spread converges.
+
+  hidden component halves; label walks toward unmoved
+
+  label after         delivered   reconstruction
+  ----------------------------------------------
+  50.00                   1.000            1.000
+  90.00                   1.800            5.000
+  99.00                   1.980           50.000
+  99.90                   1.998          500.000
+  99.99                   2.000         5000.000
+  100.00                  2.000               --
+
+CW_004 is REFUTED. The divergence was a property of the reconstruction's
+[CHOICE], not of the mechanism.
+
+The delivered choice is also the better one for a reason worth naming: a
+ratio of multipliers is dimensionless, so it is comparable across
+components carried in unlike units -- people per unit area against
+independent operators per 1000 acres. An additive relative change is
+dimensionless too, but its zero sits at "did not move", which is the
+tracked component's expected state, and putting a statistic's singular
+point where the data is expected to sit is the defect the first pass
+introduced and then reported as a finding.
+
+What survives is the shape, relocated: see CW_010.
+
+======================================================================
+3  CW_010  max_spread is undefined at total collapse
+======================================================================
+rel_change guards with `if a <= 0 or b < 0: return None`. A component that
+goes to exactly zero has no ratio, so it is dropped from the case, and if
+it was one of only two quantified components the whole case falls out of
+max_spread and bias as unquantified.
+
+Total collapse is the mechanism's maximal divergence. rural.json's own
+employment-concentration note: "One packing facility closure ZEROES
+regional employment at once."
+
+  label holds at 1.0x; hidden component approaches zero
+
+  hidden after         max_spread    components read
+  ------------------------------------------------------
+  10.00                      10.0                  2
+  1.00                      100.0                  2
+  0.10                     1000.0                  2
+  0.01                    10000.0                  2
+  0.00                         --                  1
+
+The statistic rises monotonically toward the collapse and is undefined at
+it. This is the shape the first pass was reaching for and put in the wrong
+place: not at the tracked component holding, but at the hidden component
+reaching zero.
+
+It is a real guard, not an oversight -- a/b with a = 0 is 0, and a spread
+of max/min with min = 0 is a division by zero. The question the guard
+answers by silence is what a component reaching zero should score. A
+count that hits zero is not missing data; it is the reading.
+
+======================================================================
+4  CW_013  the fixtures reach 2 of 6 branches, and miss CW_010's
+======================================================================
+
+  rel_change exit branch       reached by test_weld.py
+  ------------------------------------------------------
+  B1 empty/absent reading      yes
+  B2 before or after is null   no
+  B3 non-numeric               no
+  B4 before == 0               no
+  B5 after <= 0 or before < 0  no
+  B6 usable, returns a ratio   yes
+
+  2 of 6 branches reached.
+
+The unreached branches include B5, which is the one that decides CW_010 --
+what happens when a component reaches zero. So "verified against synthetic
+fixtures" is true and partial: the arithmetic that runs on ordinary data
+is checked, and the arithmetic that runs at the mechanism's limit case is
+not.
+
+A fixture for it is two lines, and it would force the zero question to be
+answered rather than guarded.
+
+======================================================================
+5  CW_011  case_direction's docstring is inverted against its body
+======================================================================
+weld.py, case_direction:
+
+    """+1 if the untracked component fell relative to the tracked one,
+       -1 if it rose relative, 0 if not resolvable."""
+    ...
+    d = math.log(far[1] / ratios[tracked])
+    return -1 if d < 0 else 1
+
+far < tracked means the untracked component FELL relative to the tracked
+one, which makes d < 0, which returns -1. The docstring says +1.
+
+test_weld.py's own comments side with the body:
+
+    # a holds, b falls 10x  -> spread 10, direction -1 (b hidden below a)
+
+  untracked fell   -> case_direction = -1
+  untracked rose   -> case_direction = +1
+
+Blast radius is small: bias takes |sum(dirs)|, so the convention cancels
+and every number in the drop is unaffected. It matters to a reader
+deciding which side of a weld is being hidden, which is what the paragraph
+under the function says the sign is for.
+
+One word. The body is right and the docstring is backwards.
+
+======================================================================
+6  CW_006  bias is 1.0 on one observation -- instance corrected
+======================================================================
+
+  a single resolvable direction:  bias = 1.00  on 1 case
+bias is |sum of signs| / count and there is no floor in the delivered
+file, so one directional case reads 1.0 -- the value MECHANISM_09.md
+glosses as "one component is systematically standing behind another",
+returned by a statistic that has watched one component move once.
+null-harness calls this CONSTANT_FIRES. The claim stands.
+
+CORRECTION to the first pass. It demonstrated this on capital /
+socialized-downside with revenue_claim filled in, and that instance does
+not hold against the delivered code: case_direction returns 0 when the
+TRACKED component is unquantified, and ownership_title has no readings in
+that case, so bias stays None there.
+
+  capital with revenue_claim filled:  bias = --   max_spread = 6.768
+So the delivered code is stricter than the reconstruction, and immune to
+that particular one-observation reading. The floor is still absent, and
+still reachable by any case in which the tracked component IS measured --
+which is the likelier case, since the tracked component is by definition
+the one the record already carries.
+
+======================================================================
+7  CW_012  the --new template scores on the only live readout
+======================================================================
+README.md documents:
+
+    python3 weld.py --new employed > welds/employed.json
+
+TEMPLATE carries a placeholder divergence with id "". score() counts
+len(divergences), so the blank file scores before anyone has named a case
+-- on n_cases, which is the only readout returning a number for either
+seed term.
+
+  blank template -> n_cases = 1, placeholder id = ''
+
+MECHANISM_09.md defines the readout as "how many divergence cases can be
+NAMED". A case with no id has not been named. Filtering on a non-empty id
+is faithful to that sentence, not a patch to it.
+
+======================================================================
+8  CW_002  the mechanism's test condition 2, read two ways
+======================================================================
+MECHANISM_09.md, Test:
+
+    2. The language provides no separate handle for the components that
+       diverged.
+
+Read as a statement about English, the drop's own files refute it: every
+component is named, in plain English, with a unit.
+
+  capital -- 5 components, all with an English name and a unit:
+      ownership_title    legal title to the entity (share of equity held)
+      decision_authority authority over what gets built and toward what objective (share of decisions determined)
+      risk_bearing       who absorbs loss (share of downside absorbed)
+      revenue_claim      claim on returns (share of returns claimable)
+      input_supply       supply of the productive inputs themselves (share of inputs contributed)
+
+  hierarchy -- 5 components, all with an English name and a unit:
+      nested_containment nested containment (levels of enclosure (a is inside b is inside c))
+      organizing_abstraction organizing abstraction (categories held by an observer for sorting information, count)
+      imposed_ordering   imposed ordering with standing attached (positions ranked, with differential claim on decisions or resources)
+      ordering_origin    distance between where the ordering is established and where it is used (credentialing interval — time lag and scale gap from origin to point of use)
+      cut_rate           cut-generation rate (new internal distinctions required per unit time to maintain the ordering)
+
+  rural -- 4 components, all with an English name and a unit:
+      density            population density (people per unit area)
+      ownership_dist     ownership distribution (independent operators per 1000 acres)
+      functional_div     functional diversity (distinct enterprise types in region)
+      self_support       self-supporting capacity (share of local demand met locally)
+
+Read as a statement about the RECORD -- the statistic, the census category,
+the accounting line -- it holds: there is no census field for ownership
+distribution riding under `rural`, and no line on a balance sheet for
+decision authority riding under `capital`. Naming a component in a JSON
+file is not the same as the record carrying it.
+
+The second reading is the one the register is for, and it is the reading
+the seed files are written under (`tracked_by_label` is a field about what
+the record reads, not about what English can say). The doc states the
+first. One word -- "record" for "language" -- separates a refuted
+condition from a live one.
+
+======================================================================
+9  CW_003  the two-part test has one part instrumented
+======================================================================
+Two conditions, four score fields, and every one of them is about
+condition 1 (divergence cases exist). Condition 2 (no separate handle)
+has no readout in the delivered scorer.
+
+  score field      measures                             condition
+  ------------------------------------------------------------------
+  n_cases          how many divergences are named       1
+  n_quantified     how many carry paired readings       1
+  max_spread       how far components moved apart       1
+  bias             whether they moved apart consistently 1
+  (none)           whether the record carries a handle  2
+
+Consequence: a term with divergence cases and perfectly good separate
+handles in the record scores identically to a weld. By the doc's own test
+that term is "a summary, not a weld" -- and the scorer cannot tell them
+apart. The missing readout has a shape: count the components for which the
+record has an independently reportable field, over the total.
+
+======================================================================
+10 CW_005  the only live readout does not separate the two seed terms
+======================================================================
+
+  term         comp  cases  quant    unq max_spread   bias
+  ----------------------------------------------------------
+  capital         5      4      0      4         --     --
+  hierarchy       5      5      0      5         --     --
+  rural           4      4      0      4         --     --
+
+Both seed terms return n_cases = 4 and n_quantified = 0. The two live
+readouts return --. On the set as delivered the scorer assigns the two
+terms an identical score, and the number it agrees on is the count of
+paragraphs someone wrote.
+
+This is C3 ("n_cases alone is insufficient") shown from the drop's own
+data rather than argued. It does not CLOSE C3 -- C3's stated falsifier
+needs a populated set, and there is none -- but it moves the claim from
+asserted to demonstrated on a set of size 2.
+
+======================================================================
+11 CW_007  one retrieved pair from the first real number
+======================================================================
+
+  term       case                                 keys   usable
+  --------------------------------------------------------------
+  capital    intermediated-title                     0        0
+  capital    socialized-downside                     2        1
+  capital    subsidy-without-behaviour-change        0        0
+  capital    input-supply-uncompensated              0        0
+  hierarchy  environment-ordered-dominance           0        0
+  hierarchy  volunteer-fire-crew                     0        0
+  hierarchy  credentialed-fire-service               0        0
+  hierarchy  surgical-team-drift                     0        0
+  hierarchy  naturalness-argument                    0        0
+  rural      industrial-consolidation                2        0
+  rural      no-alternate-check                      0        0
+  rural      employment-concentration                0        0
+  rural      service-withdrawal                      0        0
+
+  2 of 13 named cases carry a readings block.
+  1 carry a usable ratio on any component.
+  0 carry two, which is what a spread needs.
+
+The delivered CLAIM_TABLE.md says "no paired before/after readings
+attached", which is accurate. The sharper statement is that the state is
+not empty, and the distance to the first number is now measurable rather
+than described:
+
+  capital / socialized-downside has risk_bearing at 14.1 -> 2.5 and
+  revenue_claim null, with its own source line reading "reported as risen,
+  no paired figure retrieved". Its note says the divergence between those
+  exact two components "is the entire structure".
+
+  fill that one pair (synthetic 1.0 -> 1.2, to size the effect only):
+    capital max_spread = 6.768   -- the folder's first non-'--' readout
+    bias stays --, per CW_006
+
+======================================================================
+12 CW_008  C1 against the eight, by structure
+======================================================================
+C1's falsifier: showing any of the eight already covers the two seed terms.
+The one that gets closest is PROXY SUBSTITUTION -- density is enforceable
+and stands where ownership distribution is not read.
+
+  MODALITY             apparatus is in a different channel from the quantity
+  STORAGE              medium cannot hold the shape of the quantity
+  SCALAR DEMAND        ONE quantity's variation over a domain flattened to a scalar
+  BUDGET BOUNDARY      a closed budget compared against an open one
+  AUTHORED REFERENCE   the reference is produced by the measured party
+  PROXY SUBSTITUTION   a NAMED target displaced by a NAMED enforceable stand-in
+  AUDIT ASYMMETRY      the guard fires on one side of a comparison only
+  SCORED AS WASTE      a component enters the accounting as cost
+
+The separation is in what each requires to exist. PROXY SUBSTITUTION needs
+two named things and a substitution: "fitness to drive" is a phrase, and
+"hours since last drive" was written into a rule in its place. The register
+entry can name the target it lost.
+
+CATEGORY WELD is the case where there is no second name to point at. There
+is one word, and the components were never separately carried, so there is
+no substitution event to date and no displaced target to name.
+
+SCALAR DEMAND is the other near miss and it is a different collapse: one
+quantity's variation over a domain flattened to a scalar. A weld flattens
+N quantities to one handle. Both lose a dimension; they lose different
+ones.
+
+C1 survives the check. What the check also shows is that the distinction
+runs through CW_002 -- if condition 2 is read as being about English
+rather than about the record, PROXY SUBSTITUTION absorbs both seed terms
+and C1 falls.
+
+======================================================================
+13 CW_009  C5 has no denominator
+======================================================================
+C5: "Language models are more prone to welds than to retrieval errors."
+
+That is a comparison of two rates. Neither rate has a denominator here:
+prone per what -- per term encountered, per query, per output? And the
+stated falsifier ("a model separating components on a term whose corpus
+never separates them, without external tooling") requires establishing
+that a corpus never separates them, which requires the corpus.
+
+The generation rule the claim rests on is separately statable and does not
+need the comparison: a representation summarising contexts of occurrence
+has no gradient pulling apart components the contexts never separate. That
+is a mechanism, and it is testable on one term at a time -- present a
+model a divergence case for a welded term and score whether the components
+are held apart without being handed the decomposition.
+
+C5 as written compares two rates with no null. The mechanism under it does
+not need the comparison to be checkable. Recorded as a claim that should
+be split, not as a claim that is wrong.
+
+======================================================================
+14 CW_014  a third term, and what it does to CW_005
+======================================================================
+
+  term           comps   cases    open   domain
+  ------------------------------------------------------------------------------
+  capital            5       4       0   economics / corporate ownership
+  hierarchy          5       5       3   governance / organizational theory / naturalness arguments
+  rural              4       4       0   policy / agricultural statistics / census
+
+  distinct n_cases values: 2 over 3 terms
+CW_005 said the only live readout returns the same value for both seed
+terms. With three terms it returns two distinct values, so it now
+separates `hierarchy` from the other two -- and still does not separate
+`capital` from `rural`, which is the pair it was stated about. The claim
+stands as written and its reach has not grown: one value distinguishes
+one term.
+
+What the third term does change is the domain spread. The two seeds were
+policy/economics; `hierarchy` is filed under governance / organizational
+theory / naturalness arguments, and its five divergence cases sit in
+animal behaviour, volunteer fire service, credentialed fire service,
+surgical teams, and a rhetorical argument. That is cross-field at the
+CASE level while the domain label stays adjacent to the first two.
+
+It does NOT move uninstrumented UNI_002, which asks whether sorting the
+REGISTER by mechanism cuts across field. CATEGORY WELD is still not a
+filed entry there.
+
+======================================================================
+15 CW_015  the OPEN field arrives with a pre-registration guard
+======================================================================
+weld.py gains six lines: detail() renders a top-level `open` list. One of
+the three items on `hierarchy` is a methodological guard stated before any
+data exists:
+
+    The read-vs-imposed criterion must be fixed BEFORE any series is run.
+    Sorting cases into 'not really hierarchy' after seeing the cut rate
+    makes the finding true by construction.
+
+That is the failure the term is most exposed to, named by the author, in
+the file, ahead of the measurement. If `cut_rate` comes back high only in
+cases that were sorted as hierarchy AFTER the rate was seen, the finding
+is circular -- and there is no way to detect that from the finished
+series, only by having fixed the criterion first.
+
+Same shape as reasoning-gate G-PRE (write the expected output before
+execution) and photoperiod-claim-harness's MechanismEdit protocol (refuse
+an edit whose stated reason is that a claim failed). Reached here from a
+third direction, and this is the first weld term to carry it.
+
+  the field is schema-optional -- terms carrying `open`:
+    capital      0 item(s)
+    hierarchy    3 item(s)
+    rural        0 item(s)
+
+  TEMPLATE has no `open` key, so `--new` does not emit one. A field that
+  carries a pre-registration guard is the field a new term most needs
+  prompting for, and the template is silent about it -- the same
+  measurement-fork MF_017 shape (a stated rule with no schema slot),
+  one folder over and much cheaper to close.
+
+======================================================================
+16 CW_016  the naturalness case states C4's bias without readings
+======================================================================
+`hierarchy`'s fifth divergence is not a case of components diverging in
+the field. It is a case of the WELD being used:
+
+    The claim 'hierarchy is natural' is supported by pointing at nested
+    containment and at environment-ordered dominance, then applied to
+    imposed orderings with standing. Both supports sit in components
+    where cut_rate is zero. The application sits in the component where
+    cut_rate is unbounded. No separate handle in English marks the switch.
+
+C4 says `bias` separates directional welds from imprecise ones without any
+input about intent. This case makes the same structural point one level
+up: the support and the application land on different components of the
+same term, and the term carries no handle marking the move.
+
+It is stated and not measured -- `cut_rate` has zero collected series, as
+the OPEN list says. What it would take is what the OPEN list also says:
+the fire service, volunteer through present, credential requirements
+documented and dated. That is a real archive, and it is the first
+concrete data source named anywhere in this folder.
+
+======================================================================
+17 CW_017  tracked_by_label is declared a judgment call, in the file
+======================================================================
+tracked_by_label is a judgment call here as elsewhere.
+    nested_containment is the reading because it is what is pointed at in
+    naturalness arguments; imposed_ordering has a competing case if the
+    domain is taken as organizational practice rather than the naturalness
+    claim.
+
+`tracked_by_label` is load-bearing: case_direction() returns 0 when the
+tracked component is unquantified, and bias is computed entirely relative
+to it. Choosing a different tracked component can change the sign of every
+case direction in a term.
+
+  hierarchy tracked_by_label : nested_containment
+  the competing candidate    : imposed_ordering
+  components, in file order  : nested_containment, organizing_abstraction, imposed_ordering, ordering_origin, cut_rate
+So the choice is declared rather than derived, and the alternative is
+named with the condition under which it wins -- which is more than the
+other two terms do, and is the right handling for a quantity that has no
+procedure behind it.
+
+What is not in the schema: a field recording the choice and its
+alternative. It lives in `open` as prose on one term. `weld.py` reads
+`tracked_by_label` and nothing reads the reason, so two terms with the
+same structure and different label choices are indistinguishable to the
+scorer -- the same declaration-not-a-check shape as
+generation-capacity GC_003's `scored_against`.
+
+======================================================================
+end of audit -- findings recorded in AUDIT_NOTES.md as CW_001..CW_017
+======================================================================

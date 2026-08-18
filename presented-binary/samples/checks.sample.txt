@@ -1,0 +1,11 @@
+O1  option_space  How many alternatives were generated before the set closed to two?
+O2  option_space  What time budget was spent generating them?
+O3  option_space  Who generated them, and are they inside the affected set?
+O4  option_space  Does a record of the generation attempt exist, or only its result?
+O5  option_space  Was the search widened at least once after the first close?
+O6  option_space  Under a direct push, did each stated constraint hold on its own terms, or convert to urgency or to a question about the asker?
+S1  sacrifice     Who selects the sacrificed set, and are they in it?
+S2  sacrifice     Is loss counted by headcount or by functional position? (weld check: those score identically under headcount)
+S3  sacrifice     Was a no-sacrifice comparison case specified in advance?
+S4  sacrifice     Is a post-audit scheduled, with a date and an owner?
+S5  sacrifice     What outcome would have counted as this being the wrong call?

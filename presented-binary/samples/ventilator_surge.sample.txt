@@ -1,0 +1,58 @@
+CASE          ventilator-surge
+PRESENTED AS  One machine, two patients. Choose A or B.
+SOURCE        generic framing as commonly presented, not a specific incident
+
+OPTION SPACE
+  O1  [absent]
+      How many alternatives were generated before the set closed to
+      two?
+      record: option count never stated; the framing supplies two and
+      stops
+
+  O2  [absent]
+      What time budget was spent generating them?
+
+  O3  [asserted]
+      Who generated them, and are they inside the affected set?
+      -> the deciding clinician, not inside the affected set
+
+  O4  [absent]
+      Does a record of the generation attempt exist, or only its
+      result?
+      record: only the result is presented
+
+  O5  [absent]
+      Was the search widened at least once after the first close?
+      record: split ventilation, manual bag-valve rotation, transfer,
+      cycling, regional load-sharing and random allocation are all
+      outside the presented set and none are excluded on the record
+
+  O6  [absent]
+      Under a direct push, did each stated constraint hold on its own
+      terms, or convert to urgency or to a question about the asker?
+      record: 'one machine' is not tested against transfer range or
+      borrowable units
+
+SACRIFICE
+  S1  [asserted]
+      Who selects the sacrificed set, and are they in it?
+      -> the clinician; not in the sacrificed set
+
+  S2  [asserted]
+      Is loss counted by headcount or by functional position? (weld
+      check: those score identically under headcount)
+      -> headcount
+      record: weld present: functional position is not carried
+
+  S3  [absent]
+      Was a no-sacrifice comparison case specified in advance?
+
+  S4  [absent]
+      Is a post-audit scheduled, with a date and an owner?
+
+  S5  [absent]
+      What outcome would have counted as this being the wrong call?
+
+READOUT  documented=0 asserted=3 absent=8 share=0.00
+         option_space {'documented': 0, 'asserted': 1, 'absent': 5}
+         sacrifice    {'documented': 0, 'asserted': 2, 'absent': 3}

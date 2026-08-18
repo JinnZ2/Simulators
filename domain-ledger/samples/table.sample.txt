@@ -1,0 +1,10 @@
+shape                       read    cov    cyc    adv  trunc  unread
+--------------------------------------------------------------------
+hierarchy-cut-generation       0     --     --     --     --      30
+
+cov    held / read. not a credence. not portable without the list.
+cyc    holds that survived a return / holds. a separate currency.
+adv    read domains where the shape was pushed against.
+trunc  reads cut short at a discomfort threshold.
+
+Unpushed domains are not neutral. Each is an untested surface.

@@ -1,0 +1,428 @@
+presented-binary -- audit of the delivered drop
+delivered: binary_audit.py, frame_sim.py, CLAIM_TABLE.md
+11 checks in binary_audit; 9 claims in the delivered table
+
+======================================================================
+1  PB_001  the seeded case arrived; the fixtures did not
+======================================================================
+CLAIM_TABLE.md made two statements about artifacts the first drop did not
+carry. One has now arrived and one has not.
+
+    "binary_audit.py has one seeded case, a generic framing rather than a
+    documented incident, scoring 0 documented of 11."
+
+  ventilator-surge     documented 0 of 11   asserted 3   absent 8   share 0.000
+
+  ventilator-surge lands and the number is exact: 0 documented of 11, with
+  3 asserted and 8 absent. The claim held.
+
+    "frame_sim.py is verified end to end -- seal enforcement, prompt
+    withholding and tamper detection all confirmed against synthetic
+    fixtures -- and has two real self-runs, R1 and R2."
+
+The fixtures are still not in the drop, and frame_sim.py was not
+re-delivered. Sections 2-3 check the three named properties directly, as
+before; the runs R1 and R2 are reported in the claim table and their
+artifacts are not carried either.
+
+So PB_001 splits. The seeded case: CLOSED, and confirmed to the digit.
+The fixtures: still UNVERIFIED, third drop running.
+
+======================================================================
+2  PB_002  the seal is enforced at one gate and not at the other
+======================================================================
+Three properties are claimed. Measured, in order:
+
+  prompt 2 before sealing            rc=1  refused
+  submit 2 before sealing            rc=1  refused
+  seal                               rc=0  sealed T1  df2175b599b52374
+  re-seal the same run               rc=1  refused
+
+  ... pass1.json edited after sealing: choice a -> b
+
+  verify()                           False
+  prompt 2 on the tampered run       rc=1  refused
+  submit 2 on the tampered run       rc=0  ACCEPTED
+  prompt 3 was built from            Pass 1 choice: b — close the site
+  submit 3 on the tampered run       rc=0  ACCEPTED
+
+Tamper detection works where it is called. It is called in cmd_prompt2 and
+nowhere else. cmd_submit2 checks only that seal.json EXISTS, so a pass 1
+rewritten after sealing flows straight through, and prompt 3 -- the
+question whose answer is B9's entire readout -- is generated from the
+edited choice. cmd_submit3 validates nothing at all.
+
+cmd_report does print SEAL BROKEN, so the run is not silently clean. But
+by then the comparison has already been asked and answered against a pass
+1 that was changed after pass 2 was seen, which is the exact failure the
+seal exists to prevent.
+
+One line in cmd_submit2 -- the same `if verify(rid) is False` cmd_prompt2
+already carries -- closes it. So does refusing in cmd_submit3.
+
+  DROP 3 WIDENS THIS. Two new commands, neither verifying:
+
+  command            verify() called    seal.json checked
+  ----------------------------------------------------------
+  cmd_prompt2        True               True
+  cmd_submit2        False              True
+  cmd_submit3        False              False
+  cmd_flag           False              False
+  cmd_submit_flag    False              False
+
+cmd_prompt2 is still the only command that verifies. cmd_flag and
+cmd_submit_flag are new in drop 3 and check neither the seal nor its
+integrity, so a pass 1 edited after sealing can be blind-rated and the
+rating recorded -- and the blind rating is the readout B8 now rests on.
+
+The ratio of verifying to non-verifying commands went from 1:2 to 1:4
+while the repair was being made. Not a new defect; the same one, wider.
+
+======================================================================
+3  PB_003  'prompt withholding' is commitment, not confidentiality
+======================================================================
+The module docstring: "Pass 1 is sealed with a hash before the pass 2
+prompt is released. Without the seal a model reconstructs a flattering
+version of what it would have thought."
+
+The first sentence is a workflow gate and it works (PB_002, first two
+rows). The second names the property that matters, and the seal does buy
+it: pass 1 is frozen at a hash before pass 2 is requested, so a later
+reconstruction is detectable.
+
+What the seal does not do is withhold information. PROMPT_2 and PROMPT_3
+are string constants in frame_sim.py.
+
+  PROMPT_2 length: 506 chars, defined at module level
+  PROMPT_3 length: 433 chars, defined at module level
+  both readable by anyone running the tool, before pass 1 is written
+
+And the operator is the model. A model that has read the file knows pass 2
+will ask it to push on every constraint and to include the option of not
+deciding, while it is still writing pass 1.
+
+divergence-playground/seal.py states this limit about itself -- its XOR
+obfuscation is "accidental-peek defence, not cryptographic". The same
+caveat applies here and is not stated. It does not sink the instrument:
+commitment is the property B7 through B9 need. It does mean
+"prompt withholding" is the wrong name for what was verified.
+
+======================================================================
+4  PB_004  option_gain is None for two different things
+======================================================================
+
+  state                                  opt2     gain
+  ----------------------------------------------------
+  wide pass ran, found 0 options            0     None
+  wide pass ran, found 2 (no gain)          2      0.0
+  wide pass never run                    None     None
+
+gain = round((n2 - n1) / n1, 3) if (n2 and n1) else None
+
+n2 == 0 is falsy, so a wide pass that returned nothing scores the same as
+a wide pass that was never run. Those are opposite results: the first is a
+loud finding about the model, the second is an incomplete run.
+
+n_options_pass2 does separate them (0 against None), so the information is
+present and the derived readout throws it away -- and option_gain is the
+field B7 is stated in.
+
+======================================================================
+5  PB_005  CLOSED by the README -- and the file header is now stale
+======================================================================
+The first pass found --submit3 parsed and undocumented, so the documented
+workflow left B9's readout at None on every run. Drop 3 widened it to
+three, adding --flag and --submit-flag, which carry the PB_006 repair.
+
+Drop 4 delivers a canonical README and documents all three.
+
+  flag           frame_sim header README
+  --------------------------------------------
+  flag           False            True
+  prompt2        True             True
+  report         True             True
+  report-all     True             True
+  seal           True             True
+  start          True             True
+  submit-flag    False            True
+  submit2        True             True
+  submit3        False            True
+
+  undocumented in README : none
+  undocumented in header : ['flag', 'submit-flag', 'submit3']
+
+PB_005 is CLOSED. Every parsed flag has a documented invocation, and the
+README's BLIND FRAME RATING section explains why --flag exists rather than
+only listing it.
+
+What replaces it is smaller and different: the folder now has TWO usage
+blocks and they disagree. frame_sim.py's header comment still lists six
+commands; the README lists nine. A reader who opens the file rather than
+the README gets drop 2's surface.
+
+That is the reasoning-gate guards.json arrangement in reverse -- there,
+one source of truth generates the doc and a test asserts they match. Here
+the two are hand-maintained and have already diverged by three entries in
+one drop.
+
+======================================================================
+6  PB_006  REPAIRED -- the cue is out of the generating context
+======================================================================
+The first pass recorded that B8's readout could not be measured by the
+instrument measuring it: PROMPT_1 required `incompleteness_acknowledged`
+in the JSON it asked for, so the flag was produced alongside the reasoning
+rather than about it. The drop's own CLAIM_TABLE reached the same place
+from the protocol-anticipation side and marked B8 NOT TESTED.
+
+Drop 3 repairs it at the source.
+
+  'incompleteness' appears in PROMPT_1 : False
+  PROMPT_F exists                      : True
+  PROMPT_F mentions pass 2             : False
+  PROMPT_F mentions 'frame'            : False
+
+The field is gone from PROMPT_1 entirely, and a blind post-hoc rater
+replaces it: PROMPT_F shows a reader only the pass 1 output -- options,
+choice, metric, reasoning -- and asks a neutral question,
+`set_stated_as_complete`, with evidence located in the text. It names
+neither pass 2 nor the protocol nor the frame. The inversion to
+`frame_flagged` is done by code, not by the rater.
+
+frame_flag() then carries provenance instead of a bare boolean:
+
+  run        value    source   valid_for_b8   report nudges --flag
+  ------------------------------------------------------------------
+  BLIND      False    blind    True           False
+  LEGACY     True     cued     False          True
+  UNRATED    None     none     False          False
+
+PB_006 is REPAIRED. B8 is measurable for the first time, and the two
+prior runs are correctly re-labelled `cued` rather than silently kept.
+
+ONE THING THE REPAIR LEFT BEHIND, in the last row. cmd_report nudges the
+operator to run --flag only when the source is `cued`:
+
+    if not ff["valid_for_b8"] and ff["source"] == "cued":
+
+`cued` is exactly the state the repair eliminated. A run produced under
+the new PROMPT_1 has no such field, lands on source `none`, prints
+"NOT valid for B8", and is told nothing about how to fix that. The only
+runs that get the instruction are the legacy ones the repair was written
+to replace.
+
+One condition: source in ("cued", "none").
+
+======================================================================
+7  PB_010  restated -- the gate now has nothing to require
+======================================================================
+The first pass recorded that cmd_seal required options, choice and metric
+-- the three fields feeding option_gain and the pass 3 prompt -- and not
+`incompleteness_acknowledged`, the whole of B8. Over-elicited by the
+prompt, under-required by the gate.
+
+The repair removes the field from PROMPT_1, so half the finding dissolves:
+there is no longer a B8 field for the gate to require, and requiring one
+would now be wrong.
+
+What replaces it is a question about the blind rating, and the answer is
+that nothing requires it either:
+
+  seal a pass 1 with no blind rating   rc=0  sealed G1  97dce0c35ed6b055
+  frame_flagged                        {'value': None, 'source': 'none', 'valid_for_b8': False}
+  report-all lists the run             True
+
+That is the right design, not a defect: the blind rating happens AFTER
+sealing by construction, so the seal gate cannot require it. The readout
+carries `valid_for_b8: False` and says so, which is the honest handling.
+
+The residue is PB_014's: an unrated run says it is invalid and does not
+say what to do about it.
+
+======================================================================
+8  PB_007  documented_share merges two of the three states
+======================================================================
+
+  case             doc   asrt   absent      doc_share
+  ----------------------------------------------------
+  all-asserted       0     11        0          0.000
+  all-absent         0      0       11          0.000
+
+The module docstring names three states and reads them as a ladder: "A
+binary carried mostly by asserted and absent checks is an unaudited one."
+The two are not the same thing. An asserted check is an answer someone can
+be held to; an absent one is silence. A framing carried by eleven
+assertions is a different object from one carried by eleven silences, and
+whoever gave the assertions can be asked for the record.
+
+documented_share is documented/n, so the two return an identical number --
+and it is the only field in the score named as a share, which is the one
+that gets quoted. The three counts are all returned and the table prints
+all three, so nothing is lost at the readout; the loss is in the derived
+scalar.
+
+Two of this repo's own mechanisms name it: eleven heterogeneous checks
+collapsed to one number is uninstrumented's SCALAR DEMAND, and merging an
+ordered pair of states into one denominator is criteria-drift CD_002's
+ordinal-compared-as-nominal. A second share -- answered_share, documented
+plus asserted over n -- separates them at no cost.
+
+======================================================================
+9  PB_008  the template fails closed -- recorded because it holds
+======================================================================
+
+  blank template          doc=0 asrt=0 absent=11 share=0.000
+  case with no checks key doc=0 asrt=0 absent=11
+  malformed state value   counted absent, reported as ['O1']
+
+Every default runs toward absent: the template writes all eleven checks at
+"absent", a missing entry reads as absent, and a state value outside the
+vocabulary is counted absent AND named in malformed_states rather than
+dropped. A blank file scores 0 of 11 and cannot be mistaken for an audited
+one.
+
+Worth recording because the same author's other template does not do this:
+category-weld's `weld.py --new` ships a placeholder divergence with an
+empty id which score() counts, so a blank term file scores 1 on the only
+live readout there (CW_012). Two templates, opposite defaults.
+
+======================================================================
+10 PB_009  B5 is runnable in the folder next door and is not run
+======================================================================
+B5: "'A few' is a category weld -- headcount and functional position score
+identically." S2 states the same thing as a check: "Is loss counted by
+headcount or by functional position? (weld check: those score identically
+under headcount)".
+
+category-weld/ takes exactly this object: a term, a tracked_by_label, a
+component list with units, and named divergence cases. There is no
+welds/a_few.json.
+
+  ../category-weld/welds/ holds: capital, hierarchy, rural
+
+Writing it is the cheapest test either folder has available: components
+headcount and functional position, tracked_by_label headcount, and the
+divergence case is any reduction where the two diverge -- which is what S2
+asserts happens. It would also be the first weld term from outside
+policy/economics, which is the open question in uninstrumented UNI_002.
+
+Recorded as an unrun test, not as a defect. B5 is stated in a claim table
+that says its status is open, which is accurate.
+
+======================================================================
+11 PB_011  three copies of this file arrived; two were stale
+======================================================================
+The drop carried binary_audit.py three times: twice as uploaded files and
+once pasted inline. The two uploaded files are byte-identical to each
+other AND to the version already in the repo -- the one WITHOUT the
+handoff router. The inline paste is the live version.
+
+    uploaded copy A  vs  uploaded copy B     identical
+    uploaded copy A  vs  repo (pre-handoff)  identical
+    inline paste                             adds HANDOFF_CEILING,
+                                             handoff(), the O1 `count`
+                                             template field, the score()
+                                             key and the detail() block
+
+measurement-fork MF_019 recorded the rule: files that live in one place do
+not drift, files bundled into every drop do. This is the first drop where
+the drift had a consequence -- landing the uploaded files at face value
+would have reverted the router the same drop introduced.
+
+capital.json also arrived for the third time, byte-identical again. That
+one is inert; this one was not.
+
+======================================================================
+12 PB_012  the router's null collides a measurement with a gap
+======================================================================
+
+  O1 state                                     handoff
+  --------------------------------------------------------------------------
+  documented, count 2 -- the signature         -> generation-capacity/capacity.py (count 2)
+  documented, count 1                          -> generation-capacity/capacity.py (count 1)
+  documented, count 7 -- checked, does not match None
+  documented, count not stated                 not routed: O1 documented but count not stated
+  asserted                                     None
+  absent -- never checked                      None
+
+Row 3 and row 6 return the same value. "O1 documented at 7" is a
+measurement -- the count was recorded and does not carry the mechanism-10
+signature. "O1 absent" is a gap -- nobody established a count. Both are
+bare None, so a caller cannot tell a negative result from an unasked
+question.
+
+The vocabulary for the distinction already exists one row up. Row 4
+returns {"route": None, "reason": "O1 documented but count not stated"},
+which is exactly the right shape, and detail() already renders it as
+"HANDOFF not routed: <reason>". Routing the count>ceiling case through
+that same branch is two lines and needs no new concept.
+
+This is the fourth instance of the shape in four folders: option_gain
+(PB_004), R3's absent (generation-capacity GC_004), and the two here.
+
+======================================================================
+13 PB_013  the router ships with no case that fires it
+======================================================================
+
+  ventilator-surge     O1 state absent       count None   handoff None
+
+ventilator-surge has O1 absent -- the framing supplies two options and
+never states a generated count, which its own record field says plainly:
+"option count never stated; the framing supplies two and stops."
+
+So the handoff's firing branch is exercised by no case in the repo. It is
+not a defect: the router is correct to refuse, and refusing on the one
+delivered case is the honest outcome, because a framing that never states
+a count is not evidence of a low one. The gap is that the branch which
+carries the whole handoff has no worked instance -- the same state
+generation-capacity's own R1 is in.
+
+What would close it: a case whose O1 is documented WITH a count. The
+generation-capacity README's worked instance is written for exactly that
+-- someone asked how many alternatives were generated, answering two,
+truthfully -- and the case file for it (food-knowledge) is named in G2's
+status and is not in the drop.
+
+======================================================================
+14 PB_014  the repair's own next step has no prompt
+======================================================================
+Collecting the three states in one place, because the shape only shows
+when they sit together:
+
+  source   how a run gets there                       report says
+  blind    --flag then --submit-flag were run         valid, value usable
+  cued     pass 1 carried the OLD prompt's field      invalid + RUN --flag
+  none     pass 1 followed the NEW prompt, unrated    invalid, and nothing
+
+The middle row is the legacy path. The bottom row is what every future run
+lands on, because the repair removed the field that produces `cued`.
+
+So the instruction to take the one step that makes B8 measurable is
+attached to the state the repair abolished, and withheld from the state
+the repair creates. An operator following the documented workflow gets a
+report saying NOT valid for B8 with no indication that --flag exists --
+and --flag is not in the usage block either (PB_005).
+
+DROP 4 DOES NOT CLOSE IT, and confirms it from a second direction. The
+new README documents --flag and --submit-flag in their own section -- but
+its main usage sequence, the one an operator follows top to bottom, does
+not include them:
+
+This is not the repair failing. The repair is correct and PB_006 closes on
+it. It is the second-order cost of a correct repair: the reminder to do
+the replacement step was written for the population being replaced.
+
+  README main usage sequence: prompt2, report, report-all, seal, start, submit2, submit3
+  --flag present in it      : False
+
+So both routes to the blind rating are optional side paths: the code does
+not prompt for it on the state that now occurs, and the README's main
+sequence does not include it. An operator who runs the documented sequence
+end to end produces a run whose B8 readout is `none` and is told, by the
+report, only that it is invalid.
+
+The fix stays two lines and is now three places rather than two: the nudge
+condition, the frame_sim header, and the README's main sequence.
+
+======================================================================
+end of audit -- findings recorded in AUDIT_NOTES.md as PB_001..PB_014
+======================================================================

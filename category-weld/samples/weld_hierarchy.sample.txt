@@ -1,0 +1,62 @@
+TERM      hierarchy
+DOMAIN    governance / organizational theory / naturalness arguments
+TRACKED   nested_containment
+
+COMPONENTS
+  nested_containment nested containment [levels of enclosure (a is inside b is inside c)]
+  organizing_abstraction organizing abstraction [categories held by an observer for sorting information, count]
+  imposed_ordering imposed ordering with standing attached [positions ranked, with differential claim on decisions or resources]
+  ordering_origin distance between where the ordering is established and where it is used [credentialing interval — time lag and scale gap from origin to point of use]
+  cut_rate       cut-generation rate [new internal distinctions required per unit time to maintain the ordering]
+
+DIVERGENCE CASES
+  [unquantified] environment-ordered-dominance
+      Dominance in some fish and reptile groups: traits favoured in that
+      environment produce the dominance, and when the environment
+      changes, which being is dominant changes to suit it. The ordering
+      is read off the environment rather than held by anyone. Nested
+      containment reads present, imposed ordering is absent, cut rate is
+      zero. Same word covers this and a credentialed command structure.
+  [unquantified] volunteer-fire-crew
+      Roles assigned by who was available, necessary, and trained — most
+      skilled for the environment. Training director and field-team
+      director were sometimes the same person when that person could be
+      on call. Ordering established at the point of use by conditions.
+      ordering_origin near zero.
+  [unquantified] credentialed-fire-service
+      Same function, ordering now established off-site and instantiated
+      on arrival. Hierarchies outside the instance are initiated inside
+      it. ordering_origin large; cut rate has only gone up. Nested
+      containment unchanged between this and the volunteer case — the
+      label does not move while ordering_origin and cut_rate move to the
+      opposite end.
+  [unquantified] surgical-team-drift
+      1900s surgical teams had little hierarchical ranking; 1960s-70s
+      markedly different from present. Now surgical nurses hold certain
+      credentials, support nurses hold other credentials, surgeons
+      another, with more added over time. The transient in-theatre
+      ordering looks unchanged; the credentialing structure it imports
+      has grown continuously.
+  [unquantified] naturalness-argument
+      The claim 'hierarchy is natural' is supported by pointing at
+      nested containment and at environment-ordered dominance, then
+      applied to imposed orderings with standing. Both supports sit in
+      components where cut_rate is zero. The application sits in the
+      component where cut_rate is unbounded. No separate handle in
+      English marks the switch.
+
+READOUTS  cases=5 quantified=0 spread=-- bias=--
+
+OPEN
+  - cut_rate and ordering_origin are proposed measurements with zero
+    collected series. The fire service is where data plausibly
+    exists — volunteer through present, credential requirements
+    documented and dated.
+  - The read-vs-imposed criterion must be fixed BEFORE any series is
+    run. Sorting cases into 'not really hierarchy' after seeing the
+    cut rate makes the finding true by construction.
+  - tracked_by_label is a judgment call here as elsewhere.
+    nested_containment is the reading because it is what is pointed
+    at in naturalness arguments; imposed_ordering has a competing
+    case if the domain is taken as organizational practice rather
+    than the naturalness claim.

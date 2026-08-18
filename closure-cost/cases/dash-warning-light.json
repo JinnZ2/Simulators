@@ -1,0 +1,25 @@
+{
+  "case": "dash-warning-light",
+  "branch": "instrument",
+  "variable_state": "not_assessed",
+  "information_availability": "present",
+  "knowledge_state": "not_separable",
+  "signal": {
+    "present": true,
+    "relied_on_as_reading": true,
+    "years_correct": null,
+    "note": "The failure mode is the reverse of the event branch. Nothing about the occurrence is closed; the underlying quantity simply stops being sampled directly because a reliable intermediary reports it. The intermediary being correct for a long time is what builds the reliance, so the hazard accumulates with reliability rather than against it."
+  },
+  "latency": {"diagnostic_seconds": null, "budget_seconds": null, "note": ""},
+  "procedure_gap": {
+    "collapsed_into_closure": null,
+    "ground": "Not applicable on this branch. Procedure is not the missing quantity; direct sampling is."
+  },
+  "source_class": "not collected",
+  "self_report": null,
+  "open": [
+    "Nothing is quantified. Included because the branch needs a case that is purely instrument-side, with no event closure mixed in, to keep the two apart.",
+    "The prediction that distinguishes this branch: failures cluster on instruments with long correct records, not on unfamiliar situations. This inverts how instrument reliability is normally scored.",
+    "The rail-crossing signal is the same branch with better data available. It is a separate case file and is not yet written."
+  ]
+}

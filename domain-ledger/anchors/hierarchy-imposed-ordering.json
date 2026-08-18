@@ -1,0 +1,129 @@
+{
+  "shape": "hierarchy-cut-generation",
+  "sense": "imposed_ordering",
+  "statement": "Imposed ordering does not terminate: it has to keep generating further orderings in order to exist, and does so until it eats itself. Runs on the imposed_ordering sense only. The other four senses in category-weld welds/hierarchy.json are not this claim and would need their own anchor maps.",
+  "asserted_confidence": 0.61,
+  "anchors": [
+    {
+      "target": "thermodynamics / energy systems",
+      "target_band": "cycle_persistent",
+      "corroboration": {
+        "class": "external",
+        "study_count": null,
+        "note": "The target itself sits in the cycle-persistent band. What is external-band is the connection between imposed ordering and maintenance cost, not the thermodynamics. Study count not tallied — the tally is the work, not a placeholder to fill with a guess."
+      },
+      "chain": [
+        {
+          "link": "an imposed ordering must be maintained against the configuration it displaced",
+          "state": "routed",
+          "quantified": false,
+          "paths_attempted": [],
+          "paths_open": [],
+          "note": "Stated, not measured. Routed means a path exists, not that a number does."
+        },
+        {
+          "link": "maintenance requires continuous expenditure, whereas the displaced configuration does not",
+          "state": "routed",
+          "quantified": false,
+          "paths_attempted": [],
+          "paths_open": ["mechanism 10 self-maintenance argument: a removed generator costs nothing to keep removed, an active restriction does"],
+          "note": "This is the same asymmetry mechanism 10 uses. If it holds there it is the same link, and a break here breaks there."
+        },
+        {
+          "link": "expenditure to hold an ordering rises as the ordering is extended, so extension is not free and the system runs a cost gradient",
+          "state": "unrouted",
+          "quantified": false,
+          "paths_attempted": [],
+          "paths_open": [
+            "organisational overhead as a fraction of throughput, by depth of ordering",
+            "energy-per-transaction in systems with documented layer counts",
+            "fire service: cut rate and credentialing interval, volunteer through present"
+          ],
+          "note": "This is the load-bearing unrouted link on the near anchor. Everything above it is qualitative until this one carries a number."
+        },
+        {
+          "link": "a system running a rising cost gradient with no termination condition consumes its own substrate",
+          "state": "unrouted",
+          "quantified": false,
+          "paths_attempted": [],
+          "paths_open": ["dissipative structure literature", "collapse sequences with documented administrative expansion"],
+          "note": "Depends on the link above. Cannot be routed before it."
+        }
+      ]
+    },
+    {
+      "target": "biology / animal behaviour",
+      "target_band": "cycle_persistent",
+      "corroboration": {
+        "class": "external",
+        "study_count": null,
+        "note": "Large external literature exists. Its bearing on imposed ordering specifically is the disputed part, not its existence."
+      },
+      "chain": [
+        {
+          "link": "observed dominance in non-human systems is coupling to environment: traits the environment favours produce the ordering, and the ordering reassigns when the environment changes",
+          "state": "routed",
+          "quantified": false,
+          "paths_attempted": [],
+          "paths_open": [],
+          "note": "Held. This is a reading of the ethological material, not a claim it is uncontested."
+        },
+        {
+          "link": "environment-coupled ordering and imposed ordering are different quantities, not two magnitudes of one",
+          "state": "unrouted",
+          "quantified": false,
+          "paths_attempted": [],
+          "paths_open": [
+            "ordering_origin and cut_rate columns in category-weld welds/hierarchy.json — the two components added because volunteer and credentialed fire service read identically on the other three"
+          ],
+          "note": "If this link routes, the ethological material stops being evidence for naturalness of imposed ordering and becomes evidence against the category. If it establishes as absent, the shape takes a real hit."
+        }
+      ]
+    },
+    {
+      "target": "culture / religion / incentivised imposition",
+      "target_band": "none",
+      "corroboration": {
+        "class": "none",
+        "study_count": null,
+        "note": "Material exists in quantity. What is absent is provenance work connecting these constructs down to base — fragmented, unquantified, high variable count, and carrying human-centrism and ego that are themselves unmeasured. Quantity of writing is not corroboration of the chain."
+      },
+      "chain": [
+        {
+          "link": "cultural and religious orderings are human constructs with a traceable provenance",
+          "state": "unrouted",
+          "quantified": false,
+          "paths_attempted": [],
+          "paths_open": [
+            "archaeological sequences with dated ordering changes",
+            "linguistic reconstruction of ordering terms",
+            "comparative council and kinship systems"
+          ],
+          "note": "Not blocked. The expected route through animal behaviour is one path among several; alternate routes to provenance have not been exhausted."
+        },
+        {
+          "link": "that provenance grounds through biology rather than originating at the construct layer",
+          "state": "unrouted",
+          "quantified": false,
+          "paths_attempted": [],
+          "paths_open": [],
+          "note": "The branch that matters. If this establishes as ABSENT — the construct genuinely does not ground in biology — that is a finding requiring its own instrumentation and scientific method, not a failure of the shape. It would move this anchor out of the provenance frame entirely and into a new measurement problem."
+        },
+        {
+          "link": "human-centrism and ego in the source material are measurable and correctable for",
+          "state": "unrouted",
+          "quantified": false,
+          "paths_attempted": [],
+          "paths_open": [],
+          "note": "Named as a required measurement before this anchor can move. No instrument identified."
+        }
+      ]
+    }
+  ],
+  "open": [
+    "Anchor spread is 0.5 — the near anchors sit in the external band and the construct anchor sits at none. The composite is not computed. How near and far anchors weight against each other is unspecified, and a figure produced by guessing at the weighting would be worse than no figure.",
+    "The ceiling reported is 0.80 because at least one anchor has external corroboration. It is a ceiling on the whole sense, not a report that the shape is near it.",
+    "No link anywhere in this file is quantified. Chain routing says a path exists; it does not say a number was taken along it.",
+    "The load-bearing unrouted link is cost-gradient-by-depth-of-ordering on the thermodynamic anchor. Routing it with a number would do more than reading further domains, because it converts the near anchor from stated to measured."
+  ]
+}

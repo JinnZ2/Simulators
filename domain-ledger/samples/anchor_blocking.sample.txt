@@ -1,0 +1,62 @@
+hierarchy-cut-generation / imposed_ordering
+
+ANCHOR thermodynamics / energy systems
+  LINK expenditure to hold an ordering rises as the ordering
+  is extended, so extension is not free and the system runs
+  a cost gradient
+  attempted: none
+  open:      organisational overhead as a fraction of throughput, by depth of ordering, energy-per-transaction in systems with documented layer counts, fire service: cut rate and credentialing interval, volunteer through present
+  This is the load-bearing unrouted link on the near anchor.
+  Everything above it is qualitative until this one carries
+  a number.
+
+ANCHOR thermodynamics / energy systems
+  LINK a system running a rising cost gradient with no
+  termination condition consumes its own substrate
+  attempted: none
+  open:      dissipative structure literature, collapse sequences with documented administrative expansion
+  Depends on the link above. Cannot be routed before it.
+
+ANCHOR biology / animal behaviour
+  LINK environment-coupled ordering and imposed ordering are
+  different quantities, not two magnitudes of one
+  attempted: none
+  open:      ordering_origin and cut_rate columns in category-weld welds/hierarchy.json — the two components added because volunteer and credentialed fire service read identically on the other three
+  If this link routes, the ethological material stops being
+  evidence for naturalness of imposed ordering and becomes
+  evidence against the category. If it establishes as
+  absent, the shape takes a real hit.
+
+ANCHOR culture / religion / incentivised imposition
+  LINK cultural and religious orderings are human constructs
+  with a traceable provenance
+  attempted: none
+  open:      archaeological sequences with dated ordering changes, linguistic reconstruction of ordering terms, comparative council and kinship systems
+  Not blocked. The expected route through animal behaviour
+  is one path among several; alternate routes to provenance
+  have not been exhausted.
+
+ANCHOR culture / religion / incentivised imposition
+  LINK that provenance grounds through biology rather than
+  originating at the construct layer
+  attempted: none
+  open:      none
+  The branch that matters. If this establishes as ABSENT —
+  the construct genuinely does not ground in biology — that
+  is a finding requiring its own instrumentation and
+  scientific method, not a failure of the shape. It would
+  move this anchor out of the provenance frame entirely and
+  into a new measurement problem.
+
+ANCHOR culture / religion / incentivised imposition
+  LINK human-centrism and ego in the source material are
+  measurable and correctable for
+  attempted: none
+  open:      none
+  Named as a required measurement before this anchor can
+  move. No instrument identified.
+
+Unrouted is not blocked. An unrouted link means alternate paths
+have not been exhausted. A link that has been investigated and
+does not ground that way is marked absent_established, which is a
+finding requiring its own instrumentation, not a dead end.

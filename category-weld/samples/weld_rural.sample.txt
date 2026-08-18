@@ -1,0 +1,33 @@
+TERM      rural
+DOMAIN    policy / agricultural statistics / census
+TRACKED   density
+
+COMPONENTS
+  density        population density [people per unit area]
+  ownership_dist ownership distribution [independent operators per 1000 acres]
+  functional_div functional diversity [distinct enterprise types in region]
+  self_support   self-supporting capacity [share of local demand met locally]
+
+DIVERGENCE CASES
+  [unquantified] industrial-consolidation
+      500 to 6000 acres held by one or two companies, roughly 300 people
+      living there, roughly 50 employed. Density stays low so the label
+      holds; ownership distribution and functional diversity have
+      collapsed. The same word covers both configurations.
+  [unquantified] no-alternate-check
+      Independent operators across a fence line are a distributed sensor
+      array: different practices, different failure timings, so soil and
+      water degradation appears as divergence between neighbours before
+      it appears in any assay. Single ownership removes the comparison
+      case, so the depletion signal has no baseline to appear against.
+      Depletion rate rises while the category is unchanged.
+  [unquantified] employment-concentration
+      One packing facility closure zeroes regional employment at once
+      rather than degrading gracefully. Diversified base and
+      single-employer base score identically on the label.
+  [unquantified] service-withdrawal
+      Hospitals and clinics exit; no other work is affordable in the
+      area. Service presence is not a component the label carries, so
+      withdrawal produces no movement in the statistic.
+
+READOUTS  cases=4 quantified=0 spread=-- bias=--

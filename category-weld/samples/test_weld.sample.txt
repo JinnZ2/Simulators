@@ -1,0 +1,8 @@
+ok  n_cases                got=4 want=4
+ok  n_quantified           got=3 want=3
+ok  n_unquantified         got=1 want=1
+ok  max_spread             got=1000.0 want=1000.0
+ok  bias                   got=0.3333 want=0.3333
+ok  bias (aligned)         got=1.0 want=1.0
+
+FAILURES: 0

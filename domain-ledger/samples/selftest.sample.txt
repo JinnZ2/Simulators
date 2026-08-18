@@ -1,0 +1,15 @@
+PASS read excludes not_read
+PASS coverage is held over read
+PASS mixed is not a hold
+PASS cycle depth over holds not read
+PASS adversarial over read
+PASS truncated counted
+PASS ceiling from reservation
+PASS mismatch computed
+PASS break domains listed
+PASS unpushed excludes unread
+PASS unpushed lists b and d
+PASS empty ledger gives none not zero
+PASS empty mismatch is none
+
+13/13

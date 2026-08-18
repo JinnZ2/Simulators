@@ -1,0 +1,14 @@
+case                      used  inv  cons  soft  comp  rej  grnd
+----------------------------------------------------------------
+flood-ground                 3    2     1     0   yes    0    no
+grade-stop                   4    2     2     0   yes    4   yes
+
+used  components used in the assembled solution
+inv   invariant terms. hold regardless of use, cannot be spent
+cons  consumable terms. finite, destroyed by spending
+soft  terms that do not hold under load
+comp  every used component insufficient alone, two or more
+rej   options rejected, with the constraint that ruled each out
+grnd  every rejection names a constraint
+
+A case with rej 0 is selection, not assembly.

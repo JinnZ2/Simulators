@@ -1,0 +1,153 @@
+adaptive-claim-loop -- replay of the delivered framework's own log
+delivered: adaptive_sim_framework.py, 2 provenance logs, 1 figure
+rows: 5 fluctuating, 2 forest
+adaptive_loop selftest: 39/39
+
+==========================================================================
+1  ACL_001  every agent move in the log is the one move this gate removes
+==========================================================================
+
+  run  switching_rate         fixation slow     action
+  ----------------------------------------------------------------------------------------
+  0    0.3                    failed   failed   Decreased switching_rate to 0.2100
+  1    0.21                   failed   failed   Decreased switching_rate to 0.1470
+  2    0.147                  failed   failed   Decreased switching_rate to 0.1029
+  3    0.10289999999999999    failed   failed   Terminate loop
+  4    0.3                    passed   passed   Terminate loop
+
+  agent actions that change a parameter : 3
+  agent actions of any other kind       : 2
+The delivered agent's whole action vocabulary is parameter change. Its
+`_propose_action` returns `(new_params, description)` and there is no other
+return shape, so `analyze()` cannot express "the claim was wrong", "the
+readout is in the wrong place", or "this failure is the result". Three of
+the five moves in the log are a directed walk of one parameter toward the
+setting under which the claim would pass, and the reasoning chain records
+each as a hypothesis tested.
+
+Put through this module's gate, that walk is not refused for being wrong.
+It has no constructor. `Response` has five subclasses and none of them
+takes a bare parameter and a direction.
+
+==========================================================================
+2  ACL_002  the walk did not produce the pass, and the log reads as though it did
+==========================================================================
+
+  run 0  seed=123  switching_rate=0.3                  failed
+  run 1  seed=124  switching_rate=0.21                 failed  +0s
+  run 2  seed=125  switching_rate=0.147                failed  +0s
+  run 3  seed=126  switching_rate=0.10289999999999999  failed  +0s
+  run 4  seed=123  switching_rate=0.3                  passed  +556s
+Run 4 is 556 seconds after run 3, carries seed 123 -- the FIRST seed of a
+session, not the fifth -- and sits at switching_rate 0.3, the starting
+value. No action in the log moves the parameter back to 0.3. Run 4 is a
+second invocation of the script, appended to the same file.
+
+So the reading the log invites -- the agent lowered switching_rate and the
+claims came good -- is false in the delivered data. The claims passed in a
+different session at the untouched parameter, and the three-step walk
+resolved nothing.
+
+The forest log is the same shape: two rows, both seed 42, 580 seconds
+apart, one run each from two sessions.
+
+`ProvenanceLogger.__init__` opens the file in append mode and writes no
+session field, so the ordinal of a run within its loop is not recoverable
+from the log. This module's `Provenance` emits SESSION_OPEN / SESSION_CLOSE
+and stamps every row with its session and an ordinal within it, which is
+the whole of the repair.
+
+==========================================================================
+3  ACL_003  the delivered moves, offered to the gate one at a time
+==========================================================================
+
+  REFUSED  the walk, named honestly           a sweep needs at least two levels; one level is a parameter 
+  REFUSED  the walk dressed as a sweep        levels [0.21, 0.147, 0.1029] do not bracket the current valu
+  REFUSED  the walk with the log's own hypothesis edit justified by outcome, not by mechanism -> 'claim failed
+  ADMITTED the response the protocol asks for -> CLAIM_UPDATE
+Three of four refused, and each for a different stated reason -- one level
+is not a sweep; three levels that all sit below the current setting, on a
+claim that fails because the setting is high, do not bracket it; and a
+mechanism edit justified by the claim having failed is justified by its
+outcome. The fourth is admitted, and it is the move the delivered
+architecture has no way to express.
+
+The gate is not smarter than the delivered agent. It refuses categories,
+not judgements: the same walk offered with a bracketing set of levels, a
+gradient claim, and a predicate over the readings would be admitted, and
+would then be an experiment.
+
+==========================================================================
+4  ACL_004  an exception in a predicate is filed as a refutation
+==========================================================================
+
+            except Exception as e:
+                self.status = "inconclusive"
+                return False, f"Test error: {str(e)}", {}
+`Claim.test` sets `status = "inconclusive"` on an exception -- the right
+value, and the field already exists -- and then returns `False`. The
+runner reads only the returned bool:
+
+    passed, msg, details = claim.test(outcomes)
+    claim_results[claim.claim_id] = {'status': 'passed' if passed else 'failed'}
+
+So a predicate that raised is written to the provenance log as `failed`,
+indistinguishable from a prediction that was evaluated and broke, and the
+agent is then dispatched to fix a claim that was never tested. The
+distinction is computed one frame down and discarded at the call site.
+
+Tenth instance of the absent-versus-known-negative repair across this drop
+family, and the fourth found rather than designed in. Here it is cheaper
+than any of the others: the correct value is already assigned to
+`self.status` on the line above the return.
+  this module: predicate error and unmet precondition -> UNDECIDED
+              a false predicate                      -> REFUTED
+
+==========================================================================
+5  ACL_005  the termination branch means two things and says one
+==========================================================================
+
+  run 3  claims=['failed']
+         observation: Final iteration or all claims passed.
+  run 4  claims=['passed']
+         observation: Final iteration or all claims passed.
+Run 3 reports "Final iteration or all claims passed." with both claims
+failed. The branch is reached when the budget runs out AND when everything
+passes, and it emits one sentence for both, so a log consumer cannot tell a
+converged loop from an exhausted one without re-reading the claim column.
+
+This module returns one of four named states -- `converged`,
+`budget_exhausted`, `stood_on_refutation`, `no_admissible_response` -- and
+the selftest asserts they are distinct. The fourth has no counterpart in
+the delivered architecture: it is what happens when every proposal the
+responder made was refused, which is a real outcome and a loud one.
+
+==========================================================================
+6  ACL_006  what the delivered framework does that this one does not
+==========================================================================
+Not everything here is an improvement, and the delivered framework carries
+three things this module does not have.
+
+  spatially explicit models   ForestScalingSim is a real lattice model with
+                              dispersal, competition and metabolic scaling;
+                              the two demo models here are a Moran process
+                              and a piecewise line, sized to make the gates
+                              visible rather than to model anything.
+
+  claim generation            `_generate_claims` proposes new claims from
+                              outcomes. This module has no equivalent, and
+                              the gap is deliberate rather than principled:
+                              a generated claim is a claim whose falsifier
+                              was chosen after seeing the data, and the
+                              admission rule for that is not written.
+
+  figures                     `adaptive_sim_results.png` is in the drop.
+
+The claim in this folder is about the response vocabulary and the
+provenance record, and it is not a claim about the models. A parameter walk
+under a good model still tells you nothing; a gate over a toy model still
+refuses the walk. The two are separable and this folder only holds one.
+
+==========================================================================
+end of replay -- findings recorded in AUDIT_NOTES.md as ACL_001..ACL_006
+==========================================================================

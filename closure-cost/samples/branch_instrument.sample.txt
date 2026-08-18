@@ -1,0 +1,15 @@
+case                          branch           var    info  rules  spend  sep
+-----------------------------------------------------------------------------
+dash-warning-light        instrument  not_assessed     yes     no     --   no
+
+var    was the variable carried live before the event
+info   was information about the event available. local = a
+       documented instance in the same place, memorialised
+rules  availability rules out the procedure-gap rival
+spend  time spent categorising / time available. >=1 means the
+       whole budget went to working out what this was
+sep    can the record separate not-taught from not-retained
+       from not-executed
+
+No case here quantifies the mechanism. These are properties of
+the records, and the records were not built to ask this.

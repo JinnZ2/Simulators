@@ -1,0 +1,41 @@
+PASS no PARAMETER_MOVE response kind exists
+PASS screen catches rationale
+PASS screen catches basis
+PASS screen catches prediction
+PASS clean mechanism edit admitted
+PASS settle requires a bool
+PASS settle records a false
+PASS epicycle guard on measurability
+PASS epicycle guard on reach
+PASS restatement with the same break condition refused
+PASS clean claim update admitted
+PASS one level refused
+PASS duplicate levels refused
+PASS sweep without a gradient claim refused
+PASS sweep without a gradient predicate refused
+PASS one-sided sweep refused without a reason
+PASS one-sided sweep flagged as one-sided
+PASS bracketing sweep flagged
+PASS the callable is not serialised into the log
+PASS instrument edit carries no prediction
+PASS standing needs a stated reason
+PASS stand admitted
+PASS predicate error is UNDECIDED
+PASS unmet precondition is UNDECIDED
+PASS a false predicate is REFUTED
+PASS not-evaluated is a distinct verdict
+PASS session opens and closes in the log
+PASS every row carries its session
+PASS runs are ordinal within the session
+PASS a refused proposal is logged
+PASS drift is seed-determined
+PASS threshold model collapses above the tip
+PASS sweep evaluated at every declared level in one iteration
+PASS the gradient predicate produced the verdict, not the point claim
+PASS the gradient claim replaced the point claim it was raised against
+PASS an undecided claim is routed to the responder
+PASS claim is undecidable when 2 SE exceeds its tolerance
+PASS same claim is decidable once the error bar fits inside the tolerance
+PASS four distinct termination states
+
+39/39

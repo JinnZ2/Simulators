@@ -1,0 +1,29 @@
+{
+  "name": "informed-gate",
+  "domain": "governance / policy consultation",
+  "quantity": "option space available to a consulted population",
+  "generations": [
+    {
+      "label": "current",
+      "present": null,
+      "nameable": null,
+      "scored_against": "place",
+      "source_present": "options technically available under the governing instrument",
+      "source_nameable": "options routed to the affected population before the decision"
+    }
+  ],
+  "transmission_gap": null,
+  "loop": {
+    "gate_holder": "deciding body holding the information set",
+    "excluded_party": "population being decided about",
+    "routing_blocked": true,
+    "deficit_cited_as_grounds": true,
+    "citation": "population characterized as not informed enough to choose; characterization used as grounds for the deciding body retaining the decision"
+  },
+  "found_constraint_tests": {
+    "holds_under_push": null,
+    "converts_to_urgency": null,
+    "converts_to_asker_question": null
+  },
+  "notes": "Loop form fully instanced: gate produces the deficit, deficit justifies the gate. Calibration constraint is live here — 'informed' scored against the deciding body's knowledge base returns situated knowledge as absent, so residents holding place-specific knowledge score zero on a test built from the excluded set. R1 requires scoring against options present in the instrument, never against what the center knows."
+}

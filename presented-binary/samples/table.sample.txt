@@ -1,0 +1,6 @@
+case                    doc   asrt   absent   doc_share
+--------------------------------------------------------
+ventilator-surge        0     3      8        0.00     
+
+11 checks per case. No verdict is computed. documented_share is
+the share of the framing that has a record behind it.

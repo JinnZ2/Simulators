@@ -1,0 +1,362 @@
+closure-cost -- audit of the delivered drop
+delivered: closure.py
+delivered drop 2: README.md, CLAIM_TABLE.md (C1-C5), 3 cases
+selftest: 15/15, rc=0
+
+======================================================================
+1  CC_001  the vocabulary carries a named rival hypothesis
+======================================================================
+The shape: response failure tracks whether a variable was carried as live,
+not whether the event was severe and not whether information was
+available. The delay when it fires is categorisation, not reaction.
+
+Two things in the docstring are unusual enough to record before anything
+else.
+
+A NAMED RIVAL, IN THE SCHEMA.
+
+    Missing procedure is the obvious competing account of non-response. It
+    is not independent: nobody acquires a protocol for an event they have
+    closed. So procedure absence can be a downstream readout of the closed
+    prior rather than an alternative to it. That collapse is not
+    automatic. It is asserted per case, with the ground stated, and the
+    field records which.
+
+`procedure_gap.collapsed_into_closure` plus `procedure_gap.ground` carry
+it. This is the first folder in the drop family to hold its competing
+explanation as a schema field rather than as prose, and the first to state
+that the rival is not independent of the shape -- which is the harder
+admission, because a non-independent rival cannot be ruled out by finding
+the shape.
+
+FOUR-VALUED KNOWLEDGE STATE.
+
+    not_taught              never delivered
+    taught_not_retained     delivered, did not attach
+    retained_not_executed   present, not run under load
+    not_separable           the record cannot tell them apart
+
+Three failures with different signatures and different remedies, plus an
+explicit state for the record being unable to separate them -- and the
+docstring says why: "Most disaster self-report cannot separate them, and
+the field says so rather than guessing."
+
+That is the sixth instance of one repair across this drop family and the
+third designed in rather than found:
+
+  PB_004   frame_sim option_gain          0 options found == never ran
+  PB_012   binary_audit handoff()         above ceiling == never checked
+  GC_004   MECHANISM_10 R3                not cited == no corpus searched
+  MD_002   moral-decomposer reduces_to    irreducible == routed elsewhere
+  GC_010   SUBCASE_10A S1                 absent vs zero -- specified
+  DL_008   anchor.py routing states       unrouted vs absent -- implemented
+  CC_001   closure.py knowledge_state     three failures vs not_separable
+
+`knowledge_separable` reports it, and `detail()` prints "The record cannot
+separate the three failures" when it fires. Sections 2 and 3 are about the
+two places in the same file where the discipline is not applied.
+
+======================================================================
+2  CC_002  the discriminator collapses unknown with checked-and-absent
+======================================================================
+rules_out = bool(avail in (PRESENT, PRESENT_LOCAL) and var == CLOSED)
+
+`availability_rules_out_procedure_gap` is the field that decides between
+the shape and its rival. The docstring says so: "If the information was
+absent, procedure gap stands on its own. If the information was present
+... then availability is ruled out and the procedure gap needs a different
+explanation."
+
+`AVAILABILITY` includes `None` as a legal value, meaning not recorded.
+Measured:
+
+  state                                  information_availability rules_out
+  --------------------------------------------------------------------------
+  checked, information was absent        absent                   False
+  never recorded (None is legal)         None                     False
+  checked, information present           present                  True
+  checked, local memorialised instance   present_local_instance   True
+Rows 1 and 2 are different states and return the same value. "We looked and
+the information was not there, so the procedure gap stands on its own" and
+"nobody recorded whether the information was there" are the measurement and
+its absence, and `bool()` merges them into False.
+
+What makes this the sharp one rather than a routine instance: the same
+function keeps the distinction two lines away, and the selftest asserts it.
+
+  budget_consumed on an unfilled case : None
+    selftest check: "budget flag none not false"
+  rules_out       on an unfilled case : False
+    no selftest check for the unrecorded case
+`budget_consumed` is `None if spend is None else spend >= 1.0` -- correct,
+deliberate, and pinned. `rules_out` is `bool(...)` -- and it is the field
+that adjudicates the rival the whole design is built around.
+
+Same repair, same file, one applied and one not. A three-valued return
+(None / False / True) needs no new vocabulary: `None` when availability was
+not recorded, `False` when it was recorded absent.
+
+======================================================================
+3  CC_003  knowledge_separable fails open on an omitted field
+======================================================================
+"knowledge_separable": c.get("knowledge_state") != NOT_SEPARABLE
+
+  case                     knowledge_state      separable
+  --------------------------------------------------------
+  states not_separable     not_separable        False
+  states not_taught        not_taught           True
+  omits the field          None                 True
+A case that omits `knowledge_state` reads as SEPARABLE -- the informative
+state. The default runs toward the claim rather than away from it, which
+is the opposite of what presented-binary's `binary_audit` does with every
+one of its eleven checks (PB_008: every default runs toward `absent`).
+
+`SKELETON` defaults the field to `not_separable`, so anything from `--new`
+is safe. A hand-written case is not, and the selftest covers the stated
+values and not the omitted one.
+
+Small fix, same shape as section 2: compare against the vocabulary rather
+than against one member of it -- separable only when the value is one of
+the three named failures.
+
+======================================================================
+4  CC_004  argument handling regresses against both sibling tools
+======================================================================
+
+  tool                             bounds-checked lookup after a flag
+  --------------------------------------------------------------------
+  domain-ledger/ledger.py          True
+  domain-ledger/anchor.py          True
+  closure-cost/closure.py          False
+
+  measured exit codes:
+    closure.py --case            IndexError, rc 1
+    closure.py --case unknown    'no case named unknown', rc 1
+    closure.py --branch unknown  empty table, rc 0
+Both sibling tools in this family guard the lookup after a flag;
+closure.py does not, so `--case` with no argument raises IndexError
+instead of a message. `--new` in the same file IS guarded, so the pattern
+is known to the author and applied once of three times.
+
+The second asymmetry is between the two lookups. An unknown case name
+errors on stderr with rc 1; an unknown branch name prints an empty table
+and exits 0. A typo in a branch name is indistinguishable from a branch
+with no cases in it -- which is the same shape as section 2 one layer out,
+at the CLI.
+
+======================================================================
+5  CC_005  the instrument branch is mechanism 6 with a rate on it
+======================================================================
+instrument   a reliable intermediary exists and becomes the reading.
+                 The underlying quantity stops being sampled directly.
+                 Failure clusters where the intermediary has been correct
+                 for a long time, which is the inverse of how reliability
+                 is usually scored.
+
+`uninstrumented/`'s sixth mechanism, PROXY SUBSTITUTION, is "an
+enforceable measure displaces the target it stood in for" -- the register's
+worked entry being hours-since-last-drive standing in for fitness to drive.
+That is the first sentence here.
+
+The second sentence is not in the register. PROXY SUBSTITUTION as filed
+has no time term: it says the displacement happened, not that the risk
+accumulates with the proxy's track record. `signal.years_correct` is that
+term, and the claim on it is directional -- a longer correct record is a
+larger exposure, because reliance grew with it and direct sampling stopped.
+
+That is a real addition to an existing mechanism rather than a new
+mechanism, and it is checkable in principle without any new vocabulary:
+across recorded instrument failures, is time-since-last-direct-sample
+correlated with response delay. The field exists; no case does.
+
+======================================================================
+6  CC_006  an empty corpus prints a clean report -- third tool
+======================================================================
+
+  rows printed  : 0
+  lines printed : 14
+  exit code     : 0
+
+  siblings on the same state:
+    category-weld/weld.py                  refuses on empty: True
+    presented-binary/binary_audit.py       refuses on empty: True
+    generation-capacity/capacity.py        refuses on empty: True
+    domain-ledger/ledger.py                refuses on empty: False
+    domain-ledger/anchor.py                refuses on empty: False
+    closure-cost/closure.py                refuses on empty: False
+Three tools refuse, three print. The split is by drop family rather than
+by design intent -- the three that refuse are the older ones.
+
+closure.py does better than the other two on one point: its table footer
+states the corpus condition rather than only the column meanings.
+
+    No case here quantifies the mechanism. These are properties of the
+    records, and the records were not built to ask this.
+
+That sentence is true of an empty run and of a full one, and it is the
+honest framing for a folder whose readouts are all properties of records
+that were written for another purpose. DL_005 stands for all three: the
+line prints over zero cases and reads the same.
+
+======================================================================
+7  CC_007  the tool refuses to fill its central field, and names the mechanism
+======================================================================
+README, WHAT THE TOOL DOES NOT DO:
+
+    It does not estimate diagnostic spend where the source lacks the
+    numbers. Hawaii's 38 minutes is the duration of the ERROR, not of
+    anyone's decision, and substituting it would be PROXY SUBSTITUTION.
+
+`diagnostic_spend` is the readout the folder exists for. A 38-minute
+number is sitting in every account of the incident, it would fill the
+cell, and the author names why it must not: it measures a different
+quantity, and putting it there would be `uninstrumented/`'s sixth
+mechanism -- an enforceable measure displacing the target it stood in for.
+
+The refusal is specific rather than blanket. The denominator IS filled:
+
+  hawaii latency.budget_seconds     900
+  hawaii latency.diagnostic_seconds None
+  resulting diagnostic_spend        --
+Budget is flight time under a real threat, which is a property of the
+physics and is knowable. The numerator is a per-respondent
+time-to-first-protective-action distribution, which nobody published. One
+half filled, one half refused, and the note says which and why.
+
+That is the strongest single move in the drop. Elsewhere in this repo the
+register's mechanisms are used to diagnose an instrument after the fact;
+here one is used ahead of time as a reason not to produce a number.
+
+======================================================================
+8  CC_008  the schema has a mixed branch and the mixed case is not coded mixed
+======================================================================
+
+  instrument   1
+  event        2
+  mixed        0
+closure.py's docstring states the rule:
+
+    A case that mixes them is recorded as mixed rather than forced into
+    one.
+
+The corpus contains exactly one case that mixes them, and it is coded
+`event`. From hawaii-missile-alert's own signal note:
+
+    A second signal was relied on in the opposite direction: some
+    discounted the alert because air-raid sirens were not sounding,
+    treating silence on a different instrument as evidence of no threat.
+    That fragment is an instrument-branch reading sitting inside an
+    event-branch case.
+
+And from its open list, and from C4's status in the claim table, in the
+same words: whether it should be split out is unsettled.
+
+So the rule and the open question point different ways. The docstring says
+record it mixed; the case holds the decision open between splitting it
+into a separate instrument case and leaving it. Those are both reasonable
+and neither is what the stated rule prescribes.
+
+Related to DL_011 and distinct from it. There, `absent_established` was
+unused because no link had been investigated far enough to earn it -- the
+state was unearned. Here the state is earned, acknowledged twice in the
+delivery, and a different value is recorded.
+
+======================================================================
+9  CC_009  CC_002 instanced: the instrument case needs a third value
+======================================================================
+
+  dash-warning-light
+    variable_state           not_assessed
+    information_availability present
+    rules_out                False
+    procedure_gap collapsed  None
+    ground                   Not applicable on this branch. Procedure is not the missing quantity; direct sampling is.
+CC_002 recorded that `availability_rules_out_procedure_gap` merges
+"checked, information absent" with "never recorded". The instrument case
+adds a third state the same boolean cannot hold: NOT APPLICABLE.
+
+The procedure-gap rival is an event-branch object. On the instrument
+branch the missing quantity is direct sampling, not procedure, and the
+case says so in the field the readout carries:
+
+    Not applicable on this branch. Procedure is not the missing quantity;
+    direct sampling is.
+
+`collapsed_into_closure` correctly reads `None` here. `rules_out` reads
+`False` -- the same value an event case returns when the information was
+checked and found absent, which is a substantive finding on that branch.
+
+So the field now needs three distinctions, not two: applicable and ruled
+out, applicable and not ruled out, not applicable. The information is in
+the record and prints in `detail()`; the derived boolean is the only place
+it collapses. Same shape as DL_003 and DL_012 -- the per-item text
+survives and the scalar merges.
+
+======================================================================
+10 CC_010  two circularities, both disclosed before use
+======================================================================
+DISCLOSED WEAKNESSES, first item:
+
+    `variable_state` is inferred, never measured. Nothing in any source
+    recorded a prior probability before the event. In Hawaii it is
+    inferred from the procedure-knowledge finding, which is the same
+    evidence C3 uses -- so C3 and the coding of that case are not
+    independent.
+
+Checkable, and it holds: hawaii's `variable_state: closed` and its
+`procedure_gap.ground` both rest on the survey finding about never having
+heard a recommendation, and C3's status cites that same case.
+
+  hawaii variable_state       closed   (inferred, per the disclosure)
+  hawaii procedure_gap ground rests on the same survey finding
+  C3 status                   'supported in one direction by the Hawaii case'
+C5's status discloses a second one, about a series not yet used:
+
+    The rail-crossing data is the nearest available series and the
+    exposure denominator there is modelled per warning-device category,
+    which is circular for this purpose.
+
+A denominator modelled per device category cannot test a claim about which
+device categories fail, and the claim table says so before the series is
+touched. That is the `generation-capacity` GC_003 shape -- a denominator
+that does not survive the question being asked of it -- caught in advance
+rather than in audit.
+
+Both disclosures cost the drop something. C3's support is one case whose
+coding is not independent of it, and C5's nearest data is unusable as
+constituted. Neither is softened.
+
+What is left unmeasured: `signal.years_correct` is the rate term that
+distinguishes the instrument branch and makes C5 invert standard scoring.
+
+  breakdown-cones        branch=event       years_correct=--
+  dash-warning-light     branch=instrument  years_correct=--
+  hawaii-missile-alert   branch=event       years_correct=--
+0 of 3, including the one case on the branch it defines. The case names
+where the number would come from -- "the rail-crossing signal is the same
+branch with better data available. It is a separate case file and is not
+yet written" -- which is a statement of intent, not a verification claim
+about a file that should exist. Different shape from CW_001 / PB_001 /
+GC_009, and worth keeping apart from them.
+
+======================================================================
+11 CC_003  not tripped by the delivered corpus, which is the point
+======================================================================
+
+  breakdown-cones        knowledge_state=not_separable    separable=False
+  dash-warning-light     knowledge_state=not_separable    separable=False
+  hawaii-missile-alert   knowledge_state=not_separable    separable=False
+All three cases state `not_separable` explicitly, so the fail-open default
+CC_003 records is never exercised by the delivered data. The README says
+this is "the honest state of the published record rather than a gap in the
+transcription", and the table confirms it.
+
+That is exactly why the defect survives. A default that runs toward the
+informative state is invisible on data written by someone who knows the
+schema, and fires on the first case written by someone who does not --
+which, for a folder whose README invites others to add cases, is the
+population it will meet.
+
+======================================================================
+end of audit -- findings recorded in AUDIT_NOTES.md as CC_001..CC_010
+======================================================================

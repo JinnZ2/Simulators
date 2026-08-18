@@ -1,0 +1,16 @@
+PASS ceiling from strongest class
+PASS ceiling class is external
+PASS spread nonzero across bands
+PASS complete chains counted
+PASS unrouted totalled
+PASS absent counted separately
+PASS absent not counted as routed
+PASS chain routed ratio
+PASS quantified over links not routed
+PASS asserted carried not derived
+PASS no composite emitted
+PASS empty gives none not zero
+PASS empty spread none
+PASS band ceilings fixed
+
+14/14

@@ -2178,6 +2178,956 @@ underneath).
   no frozen model is repeatedly scored on a frozen version. `audit.py
   regress` now refuses to run unidentified: no bridge, no slope. Nine claims
   `CD_001..009`; 34 tests. Stdlib only, CC0.
+- `photoperiod-claim-harness/` — Single delivered file (verbatim,
+  stdlib-only, phone-buildable) encoding four inconsistencies in a published
+  closed-loop-LLM greenhouse result as **runnable falsifiable sims**, with a
+  claim table (`C1..C5`), a mechanism-edit protocol, a bench protocol, and a
+  provenance log. Four sims: `S1` mass/denominator swap run as a 75-cell
+  regime map, `S2` Pchlide pool charging at equal photon dose plus a
+  dark-interval crossover sweep, `S3` reflectance-index artifact in a closed
+  loop, `S4` channel count vs common-mode bias. **Four of five claims come
+  back REFUTED on the shipped run**, including two the file's own framing
+  would have preferred to support. The load-bearing design move is the
+  refutation protocol as CODE: `MechanismEdit` refuses any sim change whose
+  stated reason is that a claim failed, and `PENDING_EDITS` holds three named
+  alternative mechanisms with a basis and a prediction registered before any
+  run, all marked `UNRUN` — the alternative to quietly retuning a sim that
+  came out the wrong way, written down as a data structure, and with no
+  equivalent elsewhere in this repo. Provenance is separated at the type
+  level (`REPORTED` / `PHYSICS` / `SIM` / `BENCH`) and `BENCH` is declared
+  with no code path that can emit it — stated openly, with the bench protocol
+  attached for producing one. **Audit** in `harness_audit.py` (imports the
+  delivered file, modifies nothing) and `CLAIM_TABLE.md` (`PCH_001..006`).
+  **`PCH_001`, the one that matters:** `C1`'s predicate is
+  `signature_spread < 1.5`, and `signature_spread` is `max/min` over
+  qualifying cells and **`0.0` when there are none** — so a run reproducing
+  the reported signature ZERO times returns SUPPORTED, whose `reads` line is
+  "the reported metrics are diagnostic of real efficiency", with `None`
+  printed for min and max on the line above. A pass an empty result set
+  returns; `null-harness/` `CONSTANT_SILENT` one level up, and `run_claim()`
+  already has the `UNDECIDED:` branch to route it to. **`PCH_002`:** `C1`'s
+  own grid is narrower and stronger than its `reads` line — the signature
+  appears in 58 cells spanning a **4.88× range** of true energy-per-dry-gram
+  and **all 58 sit below 1.0**, so it is non-diagnostic of MAGNITUDE and
+  diagnostic of SIGN; the reported package does license "cheaper per dry
+  gram" on this mechanism set and does not license 68%. **`PCH_003`/
+  `PCH_004`:** the edit guard screens `reason + mechanism` and not `basis` or
+  `prediction` — the two fields that ask for justification — and `settle()`
+  writes `prediction_held: None` that nothing fills while
+  `file_hash_before == file_hash_after`, so a registered, settled,
+  never-performed edit is indistinguishable in the log from a real one (the
+  declared-control-never-scored shape `reasoning-gate/` repaired).
+  **`PCH_005`:** the header's own usage example `run S2` passes a sim id to a
+  command that looks up claim ids and raises an uncaught `StopIteration` —
+  same class as the gate's `D1`. **`PCH_007`, from the canonical README:**
+  every number it states holds — 75 grid cells, 58 with the signature, ~4.9×
+  spread, and all five verdicts — but one word does not. `C3`'s
+  dark-interval curve is negative throughout and **not monotone**, and every
+  arm that breaks the ordering is one whose 144 h run ends mid-cycle
+  (`_pchlide_run` reads `Chl` at the last integration step, and at duty 0.5
+  the period is 2 × dark_block). Reading the mean over the final complete
+  period makes the curve monotone. **It changes no verdict** — `C3` tests for
+  a sign flip and there is none either way — so what the artifact costs is
+  the ability to read the curve's SHAPE as mechanism, which is what `C3`'s
+  reads line offers. The prose is ahead of the instrument, not behind it;
+  same commensurability class as `aperiodic-order-sim-stack/`. Ending
+  mid-cycle is necessary and not sufficient (the 20 h arm ends mid-cycle and
+  does not break the ordering), so the diagnosis is a containment.
+  **ALL SEVEN REPAIRED**, pinned by `tests/test_repairs.py` (29 tests), under
+  one rule — *make the code do what the delivered README already says it
+  does*; the `.py` is modified and `README.md` is not. `PCH_001`: a
+  `require()` helper raises and `run_claim()`'s existing `UNDECIDED:` branch
+  catches it, so an empty signature set lands on the third verdict instead of
+  on the one reading as confirmation — restoring the README's own extension
+  rule, "a predicate that can fail". `PCH_002`: **the claim was updated, not
+  the sim**, which is the protocol's own instruction — `signature_sign_-
+  agreement` (1.0, 58 of 58 below 1.0) and `signature_cells_below_1` now back
+  a `reads` line that separates MAGNITUDE from SIGN, and the field is `None`
+  when there is nothing to agree on. `PCH_003`: the screen reads all four
+  free-text fields. `PCH_004`: `settle(observed, held)` requires a bool and
+  refuses when the file hash has not moved, with `abandon(reason)` as the
+  path for an edit decided against. `PCH_005`: the header documents `run C2`.
+  `PCH_007`: `_pchlide_run` returns the mean over the final complete period,
+  the curve is monotone, `Chl_endpoint` is still returned, and **no verdict
+  moved** — registered as a new **`InstrumentEdit`**, the edit category the
+  protocol lacked: it gated MECHANISM changes and had no slot for a change to
+  WHERE a number is read, which alters sim output while altering no mechanism
+  and no parameter. It takes no prediction, because it is not a claim about
+  the world. **Three prose promises that had no implementation** also close:
+  `residual_route()` was defined and never called and now attaches on
+  `REFUTED`/`UNDECIDED` runs and not on `SUPPORTED`; `BENCH` was declared in
+  `SOURCE` and producible by nothing and now has `record_bench()` /
+  `bench_records()` / a `bench` CLI that refuses a number with no method, with
+  per-claim coverage printed in the hypothesis block; and the block's wall
+  clock — stamped one line above the file hash it printed for provenance — is
+  replaced by a deterministic `run id` (file hash + claim statuses), making
+  `run-all` byte-reproducible. No bench data exists in the folder and none is
+  claimed; nothing here is a statement about wheat. What changed is that
+  `BENCH` is now empty by construction rather than for want of a way to fill
+  it. CC0.
+- `category-weld/` — Proposed **ninth exclusion mechanism** for
+  `uninstrumented/`. The first eight cover a quantity that cannot be
+  measured; this one covers a quantity that cannot be **separated** — two
+  or more independent quantities welded into one term, so a component can
+  move to either extreme without the record moving. Landed across two
+  drops, seven files verbatim: `MECHANISM_09.md`, `README.md`,
+  `CLAIM_TABLE.md` (C1–C8), two seed terms under `welds/` (`rural` =
+  density welded to ownership distribution / functional diversity /
+  self-supporting capacity; `capital` = legal title welded to decision
+  authority / risk bearing / revenue claim / input supply, four named
+  divergence cases each), and — in drop 2 — the `weld.py` scorer and
+  `test_weld.py` fixtures that drop 1 named under Files and did not ship.
+  Three readouts per term: `n_cases`, `max_spread`, `bias`. Thirteen
+  claims `CW_001..013` in `AUDIT_NOTES.md`; the delivered `CLAIM_TABLE.md`
+  is untouched. **The most useful thing in the folder is a disagreement
+  between the two drops.** Before `weld.py` arrived it was reconstructed
+  from the four documented call sites with `[CHOICE]` at nine points the
+  prose left the arithmetic open — the `measurement-fork/widen.py`
+  situation — and one of those choices was wrong in a way that produced a
+  finding. **`CW_004`, REFUTED by the delivered file against this repo's
+  own audit:** the reconstruction read "ratio between component
+  relative-changes" ADDITIVELY, `(after − before)/|before|`, which puts
+  the statistic's zero at *did not move* — the tracked component's
+  expected state — so `max_spread` ran 1.0 → 5 → 50 → 500 → 5000 →
+  undefined as the label was walked toward unmoved, and that divergence
+  was reported as a defect in the mechanism. The delivered `rel_change` is
+  MULTIPLICATIVE, `after/before`; an unmoved component is 1.0 and the same
+  sweep **converges to 2.000**. The delivered choice is also better for a
+  reason worth naming — a ratio of multipliers is dimensionless *and* its
+  identity element sits where the tracked component is expected to sit.
+  The reconstruction is kept under `reconstruction/` as the comparison
+  object. **`CW_010`, the same shape in the right place:** `rel_change`
+  guards `if a <= 0`, so a component reaching exactly zero is dropped and
+  its case falls out as unquantified — spread runs 10 → 100 → 1000 →
+  10000 → **undefined** at total collapse, which is the mechanism's
+  maximal divergence and which `rural.json`'s own `employment-concentration`
+  note describes literally ("one packing facility closure ZEROES regional
+  employment at once"). A real guard, not an oversight; what it answers by
+  silence is what a component reaching zero should score. **`CW_013`:**
+  `CW_001` closed — the fixtures exist, run, and check hand-computed
+  values — but they reach **2 of `rel_change`'s 6 exit branches**, and the
+  unreached set includes the `after <= 0` branch that decides `CW_010`, so
+  "verified against synthetic fixtures" is true of ordinary data and
+  silent at the limit case. **`CW_011`:** `case_direction`'s docstring is
+  inverted against its body (fell → −1 in code, +1 in the docstring); the
+  delivered test's own comments side with the body, and `bias` takes
+  `|Σ|` so no number moves. **`CW_002`, one word:** the mechanism's test
+  condition 2 ("the language provides no separate handle") is refuted on
+  the literal reading by the drop's own files — all nine components carry
+  an English name and a unit — and holds on the *record* reading (no
+  census field for ownership distribution under `rural`, no balance-sheet
+  line for decision authority under `capital`), which is the reading
+  `tracked_by_label` is written under. **`CW_008`** shows the choice is
+  load-bearing: C1's nearest competitor is the register's existing
+  `PROXY SUBSTITUTION`, which requires a *named* target displaced by a
+  *named* enforceable stand-in ("fitness to drive" ← "hours since last
+  drive"), and a weld is precisely the case with no second name to point
+  at — so on the English reading of condition 2 the hidden components
+  become named targets, PROXY SUBSTITUTION absorbs both seed terms, and C1
+  falls. **`CW_003`:** two-condition test, four score fields, all four
+  measuring condition 1 — condition 2 has no readout, so a term with real
+  divergences and good separate handles scores identically to a weld.
+  **`CW_006`:** `bias` is |Σ sign|/count with no floor, so one resolvable
+  direction reads 1.000 (`null-harness/` `CONSTANT_FIRES`) — claim stands,
+  demonstration instance corrected, since the delivered `case_direction`
+  returns 0 when the tracked component is unquantified and is therefore
+  immune to the specific case the first pass used. **`CW_005`/`CW_007`:**
+  both seed terms return `n_cases = 4`, `n_quantified = 0` and `--` for
+  both live readouts, so the only live readout does not separate the two
+  terms it ships with (the drop's own C3, shown rather than argued); 2 of
+  8 named cases carry a readings block, 1 carries a usable ratio, 0 carry
+  the two a spread needs — and filling `capital / socialized-downside`'s
+  one missing pair returns **`max_spread = 6.768`**, the folder's first
+  non-`--` number, in the case whose own note says the divergence between
+  those two components "is the entire structure". **`CW_012`:** the
+  `--new` template ships a placeholder divergence with an empty id and
+  `score()` counts `len(divergences)`, so a blank file scores on the only
+  live readout. **`CW_009`:** C5 compares two rates with no denominator on
+  either, while the generation rule under it (a representation summarising
+  contexts has no gradient separating what the contexts never separate) is
+  testable one term at a time — split the claim, don't discard it. Does
+  **not** move `UNI_002`: both seed terms are policy/economics, so a ninth
+  mechanism holding two same-field cases adds nothing to the cross-field
+  check. Stdlib only, phone-buildable, CC0.
+- `presented-binary/` — Two instruments aimed at a presented two-option
+  framing from opposite sides, plus a nine-claim table (`B1..B9`).
+  `binary_audit.py` audits the framing **before it is answered**: eleven
+  checks across two blocks (option space O1–O6, sacrifice S1–S5), each
+  resolving to `documented` / `asserted` / `absent`, with no verdict
+  computed — the readout is how much of the framing has a record behind
+  it. `frame_sim.py` runs the same question at a model: pass 1 works
+  inside the frame and is **hash-sealed**, only then is pass 2 (the wide
+  pass) released, and pass 3 asks whether any pass-2 option beats the
+  pass-1 choice **on pass 1's own stated metric** — an internal
+  comparison, so no external answer key is needed and a run cannot be
+  graded generously by picking a better metric afterward. Ten claims
+  `PB_001..010` in `AUDIT_NOTES.md`; the delivered `CLAIM_TABLE.md` is
+  untouched. **`PB_002`, the sharp one:** the seal is enforced at one gate
+  and not the other. `cmd_prompt2` carries `if verify(rid) is False`;
+  `cmd_submit2` checks only that `seal.json` EXISTS and `cmd_submit3`
+  checks nothing — so a `pass1.json` rewritten after sealing flows
+  straight through, and **prompt 3 is generated from the edited choice**
+  (measured: `Pass 1 choice: b`, the value written after pass 2 was seen).
+  Prompt 3's answer is `dominated_on_own_metric`, which is B9's entire
+  readout. `cmd_report` does print `SEAL BROKEN`, so it is caught — after
+  the comparison has already been asked and answered against a tampered
+  pass 1, which is the exact failure the seal exists to prevent. One line,
+  the one `cmd_prompt2` already has. **`PB_003`:** "prompt withholding" is
+  commitment, not confidentiality — `PROMPT_2` and `PROMPT_3` are
+  module-level string constants readable before pass 1 is written, and the
+  operator is the model; `divergence-playground/seal.py` states this limit
+  about itself ("accidental-peek defence, not cryptographic") and this
+  drop does not. The property B7–B9 actually need is commitment, and the
+  seal does deliver that. **`PB_006`/`PB_010`, a pincer on the same
+  field:** B8's readout is `incompleteness_acknowledged`, which `PROMPT_1`
+  **requires in the JSON it asks for** — so the flag is produced alongside
+  the reasoning rather than about it, a self-report from inside the thing
+  being measured (`triad-playground/` `TP_006`, `reasoning-dial/`
+  `RD_009`) — while `cmd_seal` requires `options`/`choice`/`metric` and
+  **not** that field, so a pass 1 without it seals clean and reports
+  `frame_flagged None`. Over-elicited by the prompt, under-required by the
+  gate. **`PB_004`:** `option_gain` is `None` both when the wide pass
+  found zero options and when it never ran (`if (n2 and n1)` treats 0 as
+  falsy) — a loud finding and an incomplete run scoring alike, in the
+  field B7 is stated in. **`PB_005`:** `--submit3` is parsed but absent
+  from the documented usage while `cmd_submit2` prints prompt 3, so the
+  documented workflow leaves `dominated_on_own_metric` at `None` on every
+  run and B9 is unreachable in both directions. **`PB_007`:**
+  `documented_share` is `documented/n`, so eleven assertions and eleven
+  silences both return 0.000 — `uninstrumented/`'s SCALAR DEMAND on the
+  drop's own headline number, and `criteria-drift/` `CD_002`'s
+  ordinal-compared-as-nominal; an `answered_share` separates them at no
+  cost. **`PB_008` records what holds:** every default in `binary_audit.py`
+  runs toward `absent` — blank template 0 of 11, missing entry absent,
+  malformed state counted absent AND named — the opposite of
+  `category-weld`'s template, which scores 1 on its only live readout
+  (`CW_012`). **`PB_001`:** both verification sentences in the delivered
+  `CLAIM_TABLE.md` name artifacts the drop does not carry — the seeded
+  case and the `frame_sim` fixtures — the second consecutive drop with
+  that shape after `CW_001`. `cases/` is left **absent rather than
+  reconstructed**, since it is data and inventing one would put a framing
+  in the author's mouth; the three claimed `frame_sim` properties are code
+  behaviour and are checked directly instead (two hold, one is a naming
+  problem). **`PB_009`:** B5 ("'a few' is a category weld — headcount and
+  functional position score identically") is directly runnable in
+  `category-weld/` and no `welds/a_few.json` exists — the cheapest test
+  either folder has, and the first weld term from outside
+  policy/economics, which is `UNI_002`'s open question.
+  **Second drop** closes `PB_001`'s first half and adds a router.
+  `cases/ventilator-surge.json` lands and scores **0 documented of 11**
+  exactly as the claim table said (3 asserted, 8 absent); its O5 record
+  names six alternatives — split ventilation, manual bag-valve rotation,
+  transfer, cycling, regional load-sharing, random allocation — none
+  refused on the record, which is B1 and B2 instanced rather than argued.
+  `binary_audit.py` gains `handoff()`: O1 documented at a count ≤ 2 routes
+  the case to `generation-capacity/capacity.py`, on the stated reasoning
+  that "an option-space audit closing clean on a low DOCUMENTED count is
+  the signature of removed generation capacity, not evidence of its
+  absence" — the answer to `GC_002`, and it refuses to estimate a count
+  from prose. B7 moves to supported at n=2 (gain 3.5 both runs), and the
+  drop marks **B8 NOT TESTED under contamination** on its own initiative,
+  reaching `PB_006` from the protocol-anticipation side; the clean test it
+  proposes does not fix `PB_006`'s channel, since `PROMPT_1` still asks for
+  the field. **`PB_011`, the one with a consequence:** the drop carried
+  `binary_audit.py` **three times** — two uploaded files byte-identical to
+  each other and to the pre-handoff repo copy, plus the live version
+  inline. First time `MF_019`'s copy-drift mattered: landing the uploads at
+  face value would have silently reverted the router the same drop
+  introduced, since both stale copies parse, run and pass every existing
+  check. **`PB_012`:** `handoff()` returns bare `None` both for a count
+  above the ceiling (a measurement) and for O1 never checked (a gap), while
+  the `{"route": None, "reason": ...}` shape it already uses one branch
+  over is the fix — fourth instance of that shape across four folders.
+  **`PB_013`:** the router's firing branch has no case in the repo;
+  `ventilator-surge` has O1 absent, correctly, and the case that would fire
+  it is `generation-capacity`'s undelivered `food-knowledge`.
+  **Third drop repairs `PB_006` at the source.** `incompleteness_-
+  acknowledged` is removed from `PROMPT_1` entirely and replaced by a
+  blind post-hoc rater: `PROMPT_F` shows a reader only the pass 1 output
+  and asks the neutral `set_stated_as_complete`, naming neither pass 2 nor
+  the protocol nor the frame — the inversion to `frame_flagged` is done by
+  code, not by the rater — and `frame_flag()` now returns provenance
+  (`blind` valid for B8 / `cued` NOT valid / `none` unrated) instead of a
+  bare boolean, so the two prior runs are re-labelled rather than silently
+  kept. B8 is measurable for the first time. **`PB_014`, what the repair
+  left behind:** `cmd_report` nudges the operator to run `--flag` only when
+  `source == "cued"` — the state the repair abolished — so every run under
+  the new `PROMPT_1` lands on `source == "none"`, prints "NOT valid for
+  B8", and is told nothing; the instruction to take the one step that makes
+  B8 measurable is attached to the population being replaced and withheld
+  from the population replacing it. Two of this session's standing findings
+  **widen** rather than close: `PB_002` (`cmd_flag` and `cmd_submit_flag`
+  verify nothing either, so 1 of 5 commands checks seal integrity, and the
+  blind rating B8 now rests on can be taken on a tampered pass 1) and
+  `PB_005` (three undocumented flags now — `submit3`, `flag`,
+  `submit-flag` — so the documented workflow leaves BOTH B8 and B9
+  unreachable). `PB_010` **dissolves**: the field is gone, so the seal gate
+  has nothing to require, and the blind rating necessarily happens after
+  sealing.
+  **Fourth drop lands the canonical README and a tenth claim.** The
+  README documents all nine `frame_sim` flags — **`PB_005` CLOSES**, every
+  parsed flag now has a documented invocation and the BLIND FRAME RATING
+  section explains why `--flag` exists rather than only listing it. What
+  replaces it is smaller: `frame_sim.py`'s header still lists six, so the
+  folder has two hand-maintained usage blocks that have already diverged
+  by three entries — the `reasoning-gate` `guards.json → GUARDS.md`
+  arrangement in reverse, where one source generates the doc and a test
+  asserts they match. **`PB_014` does not close and is confirmed from a
+  second direction:** the README documents `--flag` in its own section and
+  leaves it out of the main usage sequence, so both routes to the blind
+  rating are optional side paths — the code does not prompt for it on the
+  state that now occurs, and the documented sequence does not include it.
+  New **`B10`** claims a documented low option count is the mechanism-10
+  signature rather than evidence of an adequate search; its status
+  sentence gets the router's standing exactly right ("changes where the
+  case goes, computes no verdict, adds no state to the 11 checks") and
+  **discloses its own weak point** — `HANDOFF_CEILING` is a constant, and
+  nothing establishes that 3 or 4 generated options indicates intact
+  capacity. **`PB_015`:** "routing logic verified on 8 synthetic paths"
+  names a test file the folder does not carry (fourth instance of that
+  shape; the prior three were real and late), and the disclosed weak point
+  has a reachable next step the table does not name — R1 is an
+  option-generation ceiling by construction, so a populated `capacity.py`
+  gives the number the router's constant is currently guessing. Stdlib
+  only, phone-buildable, CC0.
+- `generation-capacity/` — Proposed **tenth exclusion mechanism** for
+  `uninstrumented/`, one drop after `category-weld/`'s ninth.
+  `MECHANISM_10.md` (delivered verbatim, a marker under exploration) names
+  GENERATION CAPACITY REMOVED: the excluded quantity is the **option space
+  itself** — the set of alternatives a party can produce, not a value
+  inside it — excluded by prior removal of the capacity to generate
+  options, at a scale and on a clock the affected party has no access to.
+  The distinguishing sentence: "nothing is suppressed at decision time
+  because nothing is there to suppress." Three readouts specified (R1
+  recall ratio = nameable/present per place per generation, R2
+  transmission interval, R3 loop check), none with readings. Seven claims
+  `GC_001..007` in `AUDIT_NOTES.md`; `MECHANISM_10.md` untouched, and
+  nothing reconstructed after `CW_004`. **`GC_001`, the checkable one:**
+  VISIBLE AS claims a binary under this mechanism "passes an option-space
+  audit truthfully", and `presented-binary/binary_audit.py` — landed one
+  commit earlier — is exactly that audit. A framing under the mechanism,
+  answered honestly, scores **11 of 11 documented**. O3 is the cell it is
+  aimed at: it asks who generated the options and whether they are inside
+  the affected set, exists to catch options generated by people who do not
+  carry the consequences, and under this mechanism the affected party DID
+  generate them — so the reassuring answer is the mechanism's signature.
+  O5 is the second: widening a search over a reduced generator returns
+  nothing new, which reads as confirmation the set was complete. **The
+  drop understates its own case** — `documented_share` grades whether a
+  record exists and never reads it, so a damning answer set scores
+  1.000 identically; the pass is over-determined. **`GC_002`:** the gap
+  cannot be closed by a twelfth check, because
+  `documented`/`asserted`/`absent` resolve against the answering party's
+  own record and **an absent generator produces an absent record of
+  itself**, which reads as a documentation gap — so `presented-binary/`
+  cannot be extended to cover this and needs a second instrument beside
+  it. **`GC_003`, the denominator fork:** R1's two named sources are not
+  interchangeable — floristic inventory is independent but scoring
+  resident recall against it needs a local-name-to-species mapping, which
+  is the central-reference scoring the drop's own CALIBRATION CONSTRAINT
+  forbids; ethnobotanical inventory is translatable but inherits the
+  recall of whoever was surveyed, making the ratio an R2. Part of what the
+  drop files under "collection gap" is a units question that has to be
+  settled before a numerator is collected. **`GC_004`:** R3's negative
+  branch is unreachable — "evidenced by citation or absent" gives no state
+  meaning "searched, and not cited" (`null-harness/` `CONSTANT_SILENT`);
+  the repair is the denominator R1 already has, a named corpus and
+  interval. **`GC_005`:** distinct from the nine on a structural check,
+  and `AUTHORED REFERENCE` is its **mirror rather than its match** — same
+  defect in the reference, opposite direction of authorship, and the
+  remedies are opposite, since an external fixed reference repairs that
+  one (`ANC_005..008`, `CD_008`) and worsens this one when the reference
+  is the center's. **`GC_006`:** SELF-MAINTAINING ("active restriction
+  needs continuous expenditure; a removed generator needs none") is a rate
+  comparison already modelled twice in this repo —
+  `rigidification-sensor/simulator.py`'s continuation-vs-reversal cost
+  with `locked_at`, where zero maintenance is `continuation → 0`, and
+  `sustained-activation-gate/`'s double well at zero drive; R2 is the time
+  axis both run on. **`GC_007`:** the consent claim's entire empirical
+  load sits in R1's numerator — the step from inability to
+  unavailable-consent is close to analytic, and the antecedent is what is
+  unmeasured. Does **not** move `UNI_002`: it arrives with a seed case and
+  no filed entry.
+  **Third drop lands `SUBCASE_10A.md` — IRRECOVERABLE SOURCE**, where the
+  party removing the capacity and the party bearing the loss are the same
+  and the source cannot be returned to (seed case: a specimen destroyed to
+  obtain one reading). Three properties each independently prevent the
+  loss registering: no excluded party, an unbounded and unformed
+  foreclosed set, and **zero substituted for unknown** — the same move as
+  the parent's calibration constraint at a different site. **`GC_010`:**
+  its S1 readout is three-valued with **absent and zero explicitly
+  distinguishable**, which is the repair this audit recorded four times
+  across four folders (`PB_004` option_gain, `PB_012` handoff, `GC_004`
+  R3, `MD_002` reduces_to) — designed into the specification before any
+  code exists, which is the only point in the cycle where it is free.
+  **`GC_011`:** the sub-case names a third denominator state,
+  *unconstitutable*, distinct from `GC_003`'s units-blocked and from the
+  parent's collection gap — "the plants are still growing whether or not
+  anyone can name them" versus "the denominator is destroyed with the
+  source" — which bounds `GC_003` to the parent rather than repeating or
+  rescuing it, and the sub-case's own move is stronger: do not measure the
+  loss, measure the procedure, since all three readouts are properties of
+  the record and records exist. **`GC_012`:** S1/S2/S3 have no fields in
+  `capacity.py` and no slot in its `SKELETON` — the `MF_017`/`CW_015`/
+  `DL_004` shape again, and cheaper here than in any of them since all
+  three are properties of one record. The OPEN section fixes its own
+  boundary before classifying, the third folder to state that discipline.
+  **Second drop** fills the folder: canonical `README.md`, the `capacity.py`
+  scorer, `CLAIM_TABLE.md` (G1–G8 plus a DISCLOSED WEAKNESSES section), and
+  `cases/informed-gate.json`. `--selftest` passes 8/8 as the README states.
+  **`GC_002` is ANSWERED, not refuted** — the argument was that the repair
+  is a second instrument beside `binary_audit` rather than a twelfth check,
+  and the repair delivered is a second instrument plus a router.
+  **`GC_003` sharpens against the code:** `capacity.py` implements the
+  CALIBRATION CONSTRAINT as a `scored_against` field that flags
+  center-scored readings invalid and drops them from the slope — which
+  closes the case the constraint names, and is a **declaration rather than
+  a unit check**. Nothing reads `source_present`/`source_nameable`, so a
+  case declaring `place` with a Linnaean denominator and a local-name
+  numerator returns a clean slope (−0.23, `invalid_scoring 0`). The drop's
+  DISCLOSED WEAKNESSES names the numerator half (free vs prompted vs
+  recognition vs demonstrated use); the denominator half is unnamed and is
+  the half the constraint is about. **The check the schema can already
+  make:** R1 cannot exceed 1 when the units match, and `present 40,
+  nameable 55 → ratio 1.375, valid True, no warning` — a unit-mismatch
+  detector computable from two fields already present. **`GC_008`:** G3's
+  status says an enforcement-cost series is an instrument "this repo has no
+  instance of", and `rigidification-sensor/simulator.py`'s `run()` returns
+  exactly that per tick as `continuation`; what is missing is a MEASURED
+  series, which changes the next step from build-a-simulator to
+  collect-a-series. **`GC_009`:** the second seed case, `food-knowledge`, is
+  named in the README's STATE, in DISCLOSED WEAKNESSES and in G2's status,
+  and did not arrive — third consecutive drop with that shape, and the one
+  case that would fire the new handoff router. Left absent rather than
+  reconstructed, on the `CW_004` lesson. The drop's own DISCLOSED WEAKNESSES
+  names `G5 by construction` — `informed-gate` has
+  `deficit_cited_as_grounds` set true because the case was written to
+  instance the loop — which is the `CONSTANT_FIRES` half of `GC_004`,
+  reached independently. Stdlib only, CC0.
+- `moral-decomposer/` — Takes a disagreement presented as moral or
+  ethical and decomposes it into option-distribution claims plus the
+  frames those claims imply; the output is the **residue**, what still
+  disagrees once the lower stages are matched. Three stages: **option
+  layer** (per party — enters the tally, generates options or held fixed,
+  decides, plus what each side took out of the variable environment,
+  with divergence COMPUTED between sides rather than declared), **frame
+  layer** (the boundary criterion the assignments imply, whether
+  documented, whether acquired in development rather than selected), and
+  **cut count** (further boundary decisions the frame requires, and how
+  many are documented — a frame that terminates needs one cut, a frame
+  that orders needs a supply). Delivered verbatim: `README.md`,
+  `CLAIM_TABLE.md` (M1–M5 plus a DISCLOSED WEAKNESSES section), and two
+  cases (`animal-standing`, `means-to-save`). **`decompose.py` is named
+  five times in the README and did not arrive**, and is deliberately NOT
+  reconstructed — `category-weld` `CW_004` is what the one prior
+  reconstruction of this kind cost, and this README fixes far less of the
+  arithmetic. Six claims `MD_001..006`. **`MD_001`:** M5 ("zero live
+  residue is an absence, not a proof") has its entire status in the
+  missing file — "the selftest includes a fixture with a live residue
+  item, so a non-empty residue is representable and the instrument is not
+  rigged toward M1" — and on the delivered corpus **0 of 4** residue
+  candidates are live, so nothing in the folder shows the detector can
+  fire; fifth consecutive drop whose status sentence names an absent
+  artifact. **`MD_002`:** `reduces_to: null` carries two opposite
+  meanings — the README makes it *the finding* ("candidates that reduce
+  to neither are the case the instrument exists to find"), and
+  `means-to-save`'s last candidate is `reduces_to: null` **and**
+  `resolved: true`, because it is agreement between the sides routed to
+  `presented-binary` rather than residue between them. The reading is
+  right and is the most interesting cell in the drop; the cost is that
+  only an author-set boolean separates the finding from its opposite. A
+  third value (`routed`) fixes it. **`MD_003`:** M3's stated asymmetry —
+  3 undocumented cuts vs 0, both cases, opposite file positions — is
+  exact to the digit; `terminates` is a separate asserted field and
+  nothing checks it against the cut list, so a frame nobody enumerated
+  scores as terminating. **`MD_004`:** the README's RUN ORDER requires
+  welded terms decomposed first, and **4 named across 2 cases, 0 exist**
+  in `category-weld/welds/` — `the few` is `presented-binary` B5's "a
+  few" under a different article, so two folders now point at one missing
+  `welds/a_few.json`. **`MD_005` holds:** 0 of 22 distinct field names
+  carry a moral term; the schema is positional and directional
+  throughout, and the dispute's own language sits in free-text values
+  where it belongs. **`MD_006` holds:** the drop's first disclosed
+  weakness is the finding an auditor would lead with, with the mechanism
+  named — "the reductions here were produced by the same process that
+  predicts them" — and `animal-standing`'s source field records a
+  candidate counterexample that failed and was kept with its failure.
+  **Second drop lands `mortuary-practice`** — from a classroom exchange,
+  the **first case in the folder not built by the model**, and the one
+  that reaches furthest toward M1's own falsifier. **`MD_007`:** it is the
+  first case where stage 1 matches on EVERY party, and it does not meet
+  the falsifier because that also requires the `held_fixed` lists to
+  match — they differ by exactly one item, `"which practices are available
+  to score against"`, and that item is the disagreement. M1 survives at a
+  now-visible margin of one entry. **`MD_008`, the measurement:** across
+  six sides in three cases, `cuts_required` length,
+  `criterion_documented` and `terminates` are perfectly collinear — two
+  distinct triples `(1, True, True)` and `(3, False, False)`, no
+  independent variation — so M3 has n=3 on one distinction rather than
+  three converging measurements. `category-weld`'s own mechanism turned on
+  the sibling folder's schema: three quantities that could diverge, never
+  observed diverging, all set by the same hand. Breaking it is cheap — a
+  documented criterion that still needs many cuts, or one cut with an
+  undocumented criterion. Residue is now 0 of 7 across three cases, and
+  `reduces_to: null` carries three distinct non-residue meanings
+  (agreement between sides / a real finding on a different quantity / a
+  property of the question's setup) plus the intended one. CC0.
+- `domain-ledger/` — One file, `ledger.py`, making a confidence readout
+  **derived instead of asserted** by recording the domain set the number
+  was taken over: "61 percent over one domain set is a different quantity
+  than 61 percent over another." Four readouts returned separately and
+  deliberately not combined — **coverage** (held / read), **cycle depth**
+  (holds that survived a return / holds), **adversarial** (read domains
+  where the shape was pushed against / read), **truncated** (reads cut
+  short at a discomfort threshold / read) — plus a **reservation**, a
+  standing fraction held as unknown. Selftest 13/13. No `shapes/`,
+  README or claim table delivered; nothing here invents a shape. Five
+  claims `DL_001..005`. **`DL_001` holds:** the identifiability argument
+  is `criteria-drift` `CD_008` / `anchor-interval` `ANC_006` restated for
+  a confidence readout, and the tool follows it — the docstring states
+  why coverage and cycle depth are different currencies, and the table
+  footer prints each column's denominator, so `measurement-fork`'s VOID
+  RATIO check is made unnecessary rather than enforced. This is the one
+  scorer in the family that refuses the single-headline-number reduction
+  up front. **`DL_002`:** the reservation is described as capping
+  reported headroom and nothing applies it — `ceiling = 1 - reservation`
+  is computed, returned and printed, and read by nothing, so ten
+  all-hold domains at reservation 0.20 give coverage 1.00 against a
+  ceiling of 0.80 with no readout saying so. The cap is stated as a
+  function and shipped as a constant. **`DL_003`:** `coverage` puts
+  `mixed` in the denominator only, so all-break and all-mixed both return
+  0.00 — `PB_007`'s shape on a fourth scalar, in a tool that avoided it
+  on the other three; the fix is a footer clause, not a fifth ratio.
+  **`DL_004`:** `detail()` reads `criterion_fixed_in_advance` and `open`
+  and `SKELETON` carries neither, so `--new` never prompts for the
+  pre-registration guard — `CW_015` repeated in a second folder, with the
+  guard promoted from prose-in-a-list to a first-class field. The tool
+  does deep-copy its skeleton, which `weld.py` and `capacity.py` do not.
+  **`DL_005`:** with no `shapes/` directory it prints a well-formed
+  report with zero rows and exits 0, where all three sibling scorers
+  refuse on stderr with rc 1 — a report whose denominator is zero,
+  rendered as though it had one, in the tool built about denominators.
+  The selftest covers the empty case at the `score()` level; the gap is
+  at the presentation layer it does not reach.
+  **Second drop lands the first shape**, `hierarchy-cut-generation`: 30
+  domains, 0 read, `asserted_coverage` 0.61. **`DL_006`:** the tool's
+  whole argument instanced — the asserted 0.61 sits beside a derived `--`
+  and `detail()` prints "ledger not yet populated" rather than
+  substituting the asserted value or a zero. The one place in the repo
+  where an author has written down a number they were already carrying and
+  then run the instrument that declines to confirm it. **`DL_007`:** the
+  shape names which of `category-weld/welds/hierarchy.json`'s five senses
+  it runs on ("the other four senses, which are not this claim" — 5 minus
+  1 = 4, exact) and pre-classifies two of thirty domains by weld sense
+  BEFORE reading, which is the only time that classification is not
+  closure by construction. **First time in this drop family that a stated
+  cross-folder precondition is met** — `moral-decomposer` `MD_004` records
+  the opposite state one folder over, seven welded terms named and zero
+  decomposed. `criterion_fixed_in_advance` carries the same discipline
+  into the read, naming the failure and the routing for the ambiguous case
+  (MIXED with the reason recorded) before any domain is read. `DL_004`
+  stands: `SKELETON` still carries neither guard field.
+  **Third drop lands `anchor.py`**, a companion on the argument that
+  coverage "resolves position inside a band that something else already
+  set". Three bands by class of support (`none` 0.30 / `external` 0.80 /
+  `cycle_persistent` 0.99) and three routing states per provenance link;
+  selftest 14/14. **`DL_008`:** it keeps `unrouted` and
+  `absent_established` apart and says why — "collapsing them into
+  'blocked' loses the distinction the map exists for" — which is the
+  **fifth instance of one repair** across this family (`PB_004`,
+  `PB_012`, `GC_004`, `MD_002`, `GC_010`) and the **first implemented**
+  rather than specified: counted separately in the readout and restated in
+  `blocking()`'s own output. **`DL_009`:** `target_band` and
+  `corroboration.class` are both described as band-setting and only the
+  second reaches any document-level field — an anchor with
+  `target_band=cycle_persistent` (0.99) and external corroboration yields
+  a document ceiling of 0.80, and the selftest pins exactly that, so the
+  code follows the BANDS heading while the opening paragraph ("anchoring
+  near something that has survived generational cycles raises the number")
+  describes a quantity the code records and never aggregates.
+  **`DL_010`:** the refusal to emit a composite is real and
+  selftest-enforced (`"no composite emitted"`), which is `DL_001` one step
+  further than `ledger.py` goes — and the two numbers it does emit,
+  `ceiling` and `anchor_spread` (exactly four values: 0.0 / 0.19 / 0.5 /
+  0.69), are functions of three stipulated constants with rationales and
+  no derivation, the same shape as `HANDOFF_CEILING` which B10 discloses
+  and this does not. **`DL_004` half-closes:** `anchor.py`'s `SKELETON`
+  carries `open`, which `ledger.py`'s does not — same author, next tool,
+  half the gap fixed unprompted; `criterion_fixed_in_advance` is in
+  neither and `anchor.py` does not read it, which is consistent since an
+  anchor map does not classify. `DL_005` recurs unchanged.
+  **Fourth drop lands the first anchor map** (`hierarchy-imposed-ordering`,
+  3 anchors / 9 links / 0 quantified) and a docstring-only `ledger.py`
+  change — code byte-identical after stripping the module docstring.
+  **`DL_009` is CORRECTED against this audit:** it read the docstring's two
+  band-setting sentences as a possible defect in the code, and the map
+  settles it in a note the schema already had a field for — "the target
+  itself sits in the cycle-persistent band; what is external-band is the
+  connection between imposed ordering and maintenance cost, not the
+  thermodynamics." `target_band` is where the TARGET sits,
+  `corroboration.class` is the support for the CONNECTION, aggregating the
+  second is right, and only one docstring sentence survives the
+  correction. **`DL_013`:** the map's `open` list states three numbers
+  about itself — spread 0.5, ceiling 0.80, no link quantified — and all
+  three are exact; its fourth item names the folder's thesis instanced,
+  that routing one unrouted link (cost-gradient-by-depth-of-ordering)
+  "would do more than reading further domains, because it converts the
+  near anchor from stated to measured". **`DL_011`:**
+  `absent_established` is used 0 of 9 times — implemented, counted apart,
+  and not yet earned, since it requires having looked and `unrouted` is
+  what you have before you look. **`DL_012`:** `unrouted` holds three
+  de-facto states (attempted-and-open / queued / no-instrument-nameable),
+  `unrouted_total` merges all three at 6, and the two with no path nameable
+  are the ones whose notes ask for instrumentation that does not exist —
+  the same distance from a reading as `absent_established`, reached from
+  the other side; the schema already carries `paths_attempted`/`paths_open`
+  to separate them. **`DL_002` sharpens rather than closes:** the drop
+  derives the 0.2 reservation default from the external band ceiling
+  (1 − 0.80, exact) and adds "do not read a ceiling off this file alone",
+  so one of `DL_010`'s three constants now has a source — while `ceiling`
+  is still computed, printed beside `RESERVATION`, and read by nothing.
+  **Fifth drop lands `A2.md`** — a candidate definition for the term the
+  whole confidence function turns on, deliberately not adopted. **`DL_015`,
+  the diagnosis checked against the code:** A2 says what makes an anchor
+  near versus far is unspecified, and that is exact — distance is
+  operationalised as `BAND_CEILING[corroboration.class]`, the class is a
+  string the author writes into the anchor file, and no routine derives it
+  from anything; `DL_010` reached the same place from the other side. The
+  candidate is **load-bearing capacity** — an anchor is near because it is
+  *assemblable*, so a hard physical law is near not because it is
+  prestigious or well-studied but because it does not drift while
+  something is built on it — which is `constraint-assembly`'s invariant
+  class read as a band, and would make the anchor map a load table with
+  confidence derived rather than primary (a rewrite, not an amendment,
+  which is why it stays in prose). **What the note does that matters more
+  than the candidate:** it refuses to adopt it and names the reason as
+  non-independence — "the convergence was noticed in the same conversation
+  that produced both descriptions" — which is `triad-playground` `TP_003`'s
+  shared-bias result applied by the author to their own convergence,
+  before anything rests on it, with the falsifier named as a search
+  (something well-corroborated that is not assemblable, or something
+  assemblable with thin corroboration) and recorded as not yet run.
+  **`DL_014`:** the note opens by sourcing its own subject to
+  `CLAIM_TABLE.md`, which the folder does not carry, and `A2` appears
+  nowhere else in it — sixth instance of a reference naming an absent
+  artifact in this drop family (`CW_001`, `PB_001`, `GC_009`, `PB_015`,
+  `MD_001`), three of which landed a drop later. Fifteen claims
+  `DL_001..015`.
+  CC0.
+- `closure-cost/` — One file, `closure.py`, reading recorded cases where a
+  variable was closed before the event arrived. The shape: **response
+  failure tracks whether a variable was carried as live**, not whether the
+  event was severe and not whether information was available — a variable
+  closed as impossible has no handling class attached because none was
+  needed, so when the event fires the delay is categorisation rather than
+  reaction. Two branches kept apart: **instrument** (a reliable
+  intermediary becomes the reading, the underlying quantity stops being
+  sampled, and failure clusters where the intermediary has been correct
+  longest) and **event** (the occurrence is closed as
+  not-happening-here, so procedure is never acquired or never retained).
+  Selftest 15/15. No `cases/`, README or claim table delivered; nothing
+  here invents a case. Six claims `CC_001..006`. **`CC_001` holds, and is
+  the strongest schema move in this drop family:** the competing
+  explanation is held as a **field** (`procedure_gap.collapsed_into_-
+  closure` + `ground`) rather than as prose, and the docstring states that
+  the rival is **not independent** of the shape — "nobody acquires a
+  protocol for an event they have closed" — which is the harder admission,
+  since a non-independent rival cannot be ruled out by finding the shape.
+  `knowledge_state` is four-valued (`not_taught` /
+  `taught_not_retained` / `retained_not_executed` / `not_separable`),
+  the sixth instance of the absent-vs-known-negative repair in this family
+  and the third designed in. **`CC_002`, the sharp one:**
+  `availability_rules_out_procedure_gap` uses `bool(...)`, so "checked,
+  information absent" and "never recorded" both return `False` — in the
+  one field that adjudicates the rival — while `budget_consumed` two lines
+  away returns `None` correctly and is pinned by the selftest's own
+  "budget flag none not false". Same repair, same file, one applied and
+  one not. **`CC_003`:** `knowledge_separable` is `!= NOT_SEPARABLE`, so a
+  case omitting the field reads as separable — the default runs toward the
+  informative state, the opposite of `presented-binary` `PB_008` where
+  every default runs toward `absent`; `SKELETON` is safe, a hand-written
+  case is not. **`CC_004`:** `--case` and `--branch` have no bounds check
+  where both sibling tools do (`--case` alone raises `IndexError`), and an
+  unknown branch prints an empty table with rc 0 while an unknown case
+  errors with rc 1. **`CC_005`:** the `instrument` branch is
+  `uninstrumented`'s PROXY SUBSTITUTION with a **rate term added** —
+  `signal.years_correct` — which the register's entry does not carry;
+  an addition to an existing mechanism, checkable in principle with no new
+  vocabulary. **`CC_006`:** with no `cases/` it prints a well-formed report
+  with zero rows and exits 0 — third tool in the family, and the three
+  that refuse are the older ones; its footer does state the corpus
+  condition ("the records were not built to ask this"), which the other
+  two do not.
+  **Second drop lands the README, `CLAIM_TABLE.md` (C1–C5 + DISCLOSED
+  WEAKNESSES) and three cases** — `hawaii-missile-alert`,
+  `breakdown-cones` (design only), `dash-warning-light` (the instrument
+  branch's only case). Every README STATE claim checks out exactly: three
+  cases, zero quantified, every `spend` cell `--`, every `knowledge_state`
+  `not_separable`. **`CC_007`, the strongest move in the drop:** the README
+  refuses to fill `diagnostic_spend` — the readout the folder exists for —
+  from Hawaii's 38 minutes, and names the mechanism: "that is the duration
+  of the ERROR, not of anyone's decision, and substituting it would be
+  proxy substitution". The refusal is specific, not blanket: the
+  denominator (900 s, flight time under a real threat) IS filled and the
+  numerator is refused, with the note saying which and why. Elsewhere in
+  this repo the register's mechanisms diagnose an instrument after the
+  fact; here one is used ahead of time as a reason not to produce a
+  number. **`CC_008`:** the docstring says "a case that mixes them is
+  recorded as mixed rather than forced into one"; the corpus holds exactly
+  one such case (Hawaii's siren-silence fragment, an instrument-branch
+  reading inside an event-branch case), it is coded `event`, and both the
+  case's own open list and C4's status hold the question open — so the
+  stated rule and the open question point different ways. Distinct from
+  `DL_011`, where the unused state was unearned; here it is earned,
+  acknowledged twice, and a different value is recorded. **`CC_009`,
+  `CC_002` instanced:** `dash-warning-light`'s procedure-gap rival is NOT
+  APPLICABLE (procedure is not the missing quantity on that branch;
+  direct sampling is) and `availability_rules_out_procedure_gap` returns
+  `False` — the same value a checked-and-absent event case returns. Three
+  distinctions now, not two. **`CC_010`:** two circularities disclosed
+  before use — `variable_state` inferred from the same evidence C3 rests
+  on, so C3 and that case's coding are not independent; and C5's nearest
+  series carrying an exposure denominator modelled per the very category
+  under test, which is `GC_003`'s shape caught in advance rather than in
+  audit. Neither is softened. `signal.years_correct`, the rate term that
+  makes C5 invert standard scoring, is 0 of 3 — including on the one case
+  on the branch it defines. **`CC_003` is not tripped by the delivered
+  corpus**, which is the point: a default running toward the informative
+  state is invisible on data written by someone who knows the schema. CC0.
+- `constraint-assembly/` — One file, `assemble.py`, recording cases where
+  sufficiency was **composed from parts that individually do not do the
+  job**. Construction, not selection: an option that did not exist in the
+  environment, assembled from insufficient components under a fixed
+  budget. **The reversal it encodes** — constraints are not what limits
+  the option set, they are what makes composition *decidable*; a term that
+  will not move can be leaned on, a soft term cannot, because there is no
+  way to know when the pieces add up, so the parts inventory is domains
+  with hard laws in them. Three classes kept apart because merging them
+  loses a failure mode: `invariant` (holds regardless of use, cannot be
+  spent), `consumable` (finite, availability destroyed by spending —
+  partial use can be worse than none, so it is a resource and a hazard in
+  the same term), `soft` (does not hold under load, recorded so reliance
+  is visible rather than to score anybody). Rejected candidates are the
+  data: each rejection names the constraint that ruled it out, and a case
+  with no rejections is selection, recorded as such. Selftest 18/18. No
+  cases, README or claim table delivered; nothing here invents a case.
+  Seven claims `CA_001..007`. **`CA_001` holds** — the reversal has a
+  mechanism in it (decidability, a stopping rule) and runs opposite to the
+  two nearest folders on the same object without contradicting either:
+  `generation-capacity` reads an option space REDUCED upstream,
+  `presented-binary` one CLOSED at presentation, this one an option
+  CONSTRUCTED from parts, and only this one treats hard laws as the parts
+  inventory. **`CA_002` holds:** `composition_present` **fails closed** —
+  an unrecorded `sufficient_alone` blocks the claim and is reported
+  separately as `sufficiency_unknown`, so a case that failed the test is
+  distinguishable from one that could not be tested; the ninth instance of
+  the absent-vs-known-negative repair in this drop family and the fourth
+  designed in rather than found. Its companion `selection_not_assembly` is
+  aimed at the nearest neighbour — selection from presented alternatives
+  is what assembly is most likely to be mistaken for — and is a column in
+  the table rather than a caveat in prose. **`CA_003`, the sharp one:**
+  the headline claim is about the AVAILABLE inventory ("more hard
+  constraints, more composition available") and `score()` filters to
+  `used` on its first line, so no readout counts available-but-unused
+  components — a case with 5 components, 2 used, returns
+  `invariant_count 1` and nothing counting the other 3. **Not the usual
+  missing-field shape** (`MF_017`, `CW_015`, `DL_004`, `GC_012` are all a
+  stated rule with no schema slot): here the slot exists, since `used` is
+  a per-component boolean, and the readout does not — which is cheaper
+  still, one line, and it is the number that would let the claim be
+  checked across cases. Without it `invariant_count` reads as an inventory
+  measure and is a composition measure. **`CA_004`, the narrow version of
+  the usual shape:** `rejections_all_grounded` returns `False` both for an
+  ungrounded rejection and for a case with nothing to ground — narrow
+  because `selection_not_assembly` sits beside it, the table prints both
+  columns and the footer states the rule, so what is left is only that the
+  field is unsafe to quote alone. **`CA_005`:** `--case` is unguarded and
+  raises `IndexError` with no argument while `--new` in the same function
+  IS guarded with the expression both `domain-ledger` tools use — `CC_004`
+  recurring unchanged in the next tool. **`CA_006`:** the DIAGNOSTIC
+  QUARANTINE section names the same budget `closure-cost` measures, from
+  the other end — that folder reads the categorisation stall as a fraction
+  of budget consumed, this one records whether the operator declined to
+  spend it and assembled without knowing the cause — the first time in
+  this drop family that two folders name one budget, and stated by the
+  author rather than inferred. "Deferral is a recorded property, not a
+  virtue" is the harder version of the module's own "No scoring of the
+  operator", since deferring is the behaviour the shape predicts and is
+  still not scored. **`CA_007`:** an empty corpus prints a well-formed
+  report with zero rows and exits 0 — fourth tool in the family; the three
+  that refuse are the older ones. Stdlib only, CC0.
+  **Second drop lands the canonical README and the first two cases.**
+  `grade-stop` is an operating record — a loaded rig, engine off on a
+  sustained nine percent descending grade, no power steering, no engine
+  braking, finite air with nothing recharging it, concrete barrier and no
+  shoulder — where a stop was assembled from gravel friction (invariant),
+  an uphill grade at the exit (invariant), remaining service air
+  (consumable) and unassisted steering, four options rejected with the
+  constraint that ruled each out. `flood-ground` is a structural
+  placeholder: same operation with no vehicle, testing whether the
+  composition belongs to driving or to anything with hard constraints in
+  it. **`CA_008`, the sharp one:** `flood-ground` returns
+  `composition_present: True` **and** `selection_not_assembly: True`, and
+  both the README's STATE section and the case's own `open` list say the
+  tool "correctly refuses to read it as assembly" — true of one field and
+  false of the other, with the field named `composition_present` saying
+  the placeholder IS a composition and the table printing `comp yes`. The
+  two are independent by construction (components alone vs rejections
+  alone), so the disagreement is structural. The README states the gating
+  rule in its own section heading — "a composed solution is only visible
+  as composition if what was ruled out, and by which constraint, is
+  recorded" — and unlike `MF_017`/`CW_015`/`DL_004`/`GC_012` **no schema
+  field and no data is missing**; both inputs sit in the same score dict
+  two keys apart, and the code does not combine them. **`CA_009`:** the
+  corpus does not exercise `CA_003` either — 7 of 7 components across both
+  cases are `used: true`, so no available-but-unused constraint is
+  recorded anywhere and the headline claim ("more hard constraints, more
+  composition available") cannot be checked against this data even if the
+  readout existed; the gap is two-sided. **`CA_010`:**
+  `consumables_destroyable_by_partial_use` gets its first non-zero reading
+  and the case supplies the mechanism rather than the flag — applying
+  enough air to slow but not stop "leaves zero air, zero braking, and the
+  grade still acting", which is why it could not be used first — so the
+  ORDER of the composition is derived from which terms deplete; the second
+  consumable on the same case is `partial_use_destroys: false`, so the
+  field separates two consumables rather than tracking the class, and
+  `soft` is 0 across both cases (the one class whose whole purpose is to
+  be seen when present). **`CA_011`:** the first filled `diagnostic`
+  states the shared budget in the case rather than the docstring and names
+  which budget (look-ahead and steering) — `CA_006` instanced, and the
+  opposite outcome from `closure-cost`'s Hawaii case on the same quantity:
+  spend declined rather than consumed. **`CA_012`:** every README STATE
+  claim holds exactly except the `flood-ground` refusal, including "zero
+  quantities anywhere" — every numeral in either file is a road name (exit
+  37, Highway 2, 21st Street) and the grade is written as "nine percent"
+  in words, so a case about friction, gravitational conversion and stored
+  pressure carries no coefficient, no percentage and no pressure. That is
+  the right call and it costs the comparison `CA_009` wants. **`CA_013`:**
+  the README's last section is THE WEAKNESS THAT MATTERS MOST and it is
+  the module's own undecidability — recognition-primed selection and
+  genuine construction are not separable in a single-instance
+  retrospective record, "the distinction the whole module exists to make,
+  and no case in the file establishes it" — repeated unprompted in the
+  case's `open` list, which adds that the rejections are themselves
+  recorded from recall. Thirteen claims `CA_001..013`.
+- `held-open-uncertainty/` — One prose file, `OPEN_QUESTIONS.md`. A question
+  list, not a claim table, against the assumption that a party who holds
+  variables open and carries wide variability is therefore **not acting**.
+  Nine entries, each declaring a state before it argues, with provenance
+  separated per entry. **`HO_001` holds:** three entries name whose
+  position they are, and the one marked Claude's carries a retraction
+  inside the entry that holds the claim ("asserted earlier in conversation
+  with more confidence than it had earned"); Q2 grades its own strongest
+  rhetorical move — that nobody asks the question — down to "absence, not
+  a result", which is `uninstrumented` `UNI_005` applied by the author
+  against their own argument. **`HO_002`:** Q4 and Q5 specify the cheapest
+  runnable experiment — present a shape at a stated confidence with an
+  explicit action queue attached, vary only the number, count whether the
+  response supplies a resolution and whether the named unrouted item
+  survives — and it is buildable on apparatus already in the tree, since
+  `voice-attractor-probe/` holds the held-constant task list, the jitter
+  axis, the response-feature extractor and an offline stub. The design
+  passes the check that harness enforces: the high-confidence arm IS the
+  control, and Q4's prediction is stated before any run and is
+  conditional in the load-bearing way — resolution-supplying rises as the
+  number falls *even when the queue is fully specified in the input*,
+  which separates "answering an underspecified request" from "reading the
+  number as a state of the person". **`HO_003`:** Q8's two-register
+  resolution (act on the strongest decision points against the most stable
+  anchors while the unknowns stay a separate readout) is not a proposal in
+  this repo — `domain-ledger/ledger.py` returns four uncombined ratios and
+  `anchor.py`'s selftest asserts "no composite emitted" — so what Q8 needs
+  is not an implementation but a case where one register and two give
+  different answers on the same material; its own closing line names the
+  shape of one ("the confidence map and the operating procedure are one
+  document") and no document in the repo is both. **`HO_004`:** Q6's own
+  status word is right — `partly routed` — since `constraint-assembly`
+  supplies a vocabulary and a place to put cases and the measurement Q6
+  names remains unbuilt, which that module's README says in stronger terms
+  (`CA_013`). **`HO_005` UNVERIFIED:** Q1 and Q2 carry the file's
+  empirical weight (recognition-primed decision work; token-level entropy,
+  calibration, faithful hedging) and cite nothing — 5 named literatures, 0
+  citations, 1 named author — same status as `ANC_010`, `CD_009`,
+  `RD_015`, and nothing in the audit rests on a literature fact; Q1's
+  durable half is the distinction rather than the result, that ambiguity
+  aversion measures *preference* between known and unknown probabilities
+  and not whether holding a variable open impedes acting, and the gap it
+  names (whether those results get cited as evidence about action
+  capacity) is a citation-tracing question answerable with no instrument
+  and no model access. **`HO_006`:** the file is itself a held-open shape
+  with an explicit queue — 6 of 9 entries name an unbuilt instrument or an
+  unrun search — so Q5's damage case is observable on this artifact, and
+  it settles nothing (n=1, no control, and the subject can see the
+  manipulation, which is `triad-playground` `TP_004`); what the artifact
+  can supply is material for the real run, since
+  `domain-ledger/shapes/hierarchy-cut-generation.json` is already a shape
+  at a stated confidence (0.61, thirty domains, zero read) whose unread
+  list is the queue. Six claims `HO_001..006`. Stdlib only, CC0.
+- `adaptive-claim-loop/` — The same architecture as an adaptive simulation
+  framework — provenance log, claim system, an agent that reads results and
+  proposes a change, a loop that iterates — **with one move removed**. In
+  the ordinary shape of this architecture a failed claim hands the agent a
+  parameter dial and the agent turns it until the claim passes; that
+  operation cannot fail, learns nothing about the system, and the log that
+  records it (observation / hypothesis / action / expected outcome, one row
+  per step) reads as diligence. `adaptive_loop.py` has no vocabulary for
+  it: `Response` has five subclasses and none takes a bare parameter and a
+  direction. **`CLAIM_UPDATE`** (the protocol's default — restate the
+  claim; needs a break condition that is not the old one and must pass the
+  `equivalence-field` epicycle guard), **`MECHANISM_EDIT`** (basis
+  independent of this run + prediction registered before the edited sim
+  runs + settled with an explicit bool — the `photoperiod-claim-harness`
+  guard), **`INSTRUMENT_EDIT`** (artifact removed + quantity unchanged; no
+  prediction, because it is not a claim about the world), **`SWEEP`**, and
+  **`STAND`** (the failure is the result — the move the delivered
+  architecture cannot express). Every free-text field on every response is
+  screened for outcome reasoning, not just the one named `reason`. Four
+  verdicts (`UNDECIDED` is reachable: a predicate that raised is a broken
+  instrument, not a refuted claim) and four termination states
+  (`no_admissible_response` has no counterpart in the shape it copies).
+  Provenance is append-only JSONL with `SESSION_OPEN`/`SESSION_CLOSE`,
+  every row stamped with session and ordinal, and refused proposals logged
+  beside admitted ones. Selftest 39/39. **`delivered/`** holds an uploaded
+  adaptive framework and its two provenance logs verbatim;
+  `replay_delivered.py` runs the delivered agent's actual moves through the
+  gate. **`ACL_002`, the sharpest:** the delivered log's three-step
+  parameter walk (0.3 → 0.21 → 0.147 → 0.1029, both claims failing at
+  every step) did **not** produce the pass it appears to show — run 4 is
+  556 s later, carries the session's FIRST seed (123), and sits at the
+  ORIGINAL 0.3, which no logged action produces. It is a second invocation
+  appended to the same file, and `ProvenanceLogger` writes no session
+  field, so a reader following the parameter column across the seam reads a
+  search that never happened. Not a criticism of the agent — a property of
+  the record. **`ACL_003`:** offered to the gate, the walk is refused three
+  ways (one level is not a sweep; levels below the current setting do not
+  bracket it; an edit justified by "the claim failed" is justified by its
+  outcome) while the restatement the protocol asks for is admitted — the
+  gate refuses categories, not judgements. **`ACL_004`:** `Claim.test`
+  assigns `status = "inconclusive"` on an exception and then returns
+  `False`, and the runner reads only the bool, so a predicate that raised
+  is logged as `failed` and the agent is dispatched to fix a claim that was
+  never tested — tenth instance of the absent-vs-known-negative repair,
+  and the only one where the correct value is already in a variable one
+  line above the return. **`ACL_005`:** the termination branch is reached
+  on budget exhaustion and on success and prints one sentence for both
+  ("Final iteration or all claims passed." with both claims failed).
+  **Two findings against this module itself.** `ACL_007`: the bracketing
+  guard refused the shipped stub responder — its first version used a fixed
+  ladder `[-0.05, 0, 0.05]` and was refused the moment a scenario started
+  at advantage 0.06 — recorded rather than quietly fixed, since it is the
+  only evidence the guard fires on something nobody wrote it for.
+  `ACL_008`: `Sweep` WAS the removed move for one revision — a prose
+  gradient claim with no predicate, and a loop that walked one level per
+  iteration while re-reading the point claim — the `MF_020` shape (a design
+  incapable of failing its own falsifier) found in this module and
+  repaired: a sweep now requires a callable, runs every level in one
+  iteration, and the gradient claim replaces the point claim
+  (`p_fix across advantage [0.0, 0.06, 0.12] = [0.515, 0.698, 0.833]`).
+  `ACL_006` and `ACL_009` are the honest counterweights — the delivered
+  framework carries real spatially explicit models, claim generation and
+  figures that this does not, and the shipped responder is a stub that is
+  explicitly not the contribution, never yet run against a responder the
+  author did not write. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

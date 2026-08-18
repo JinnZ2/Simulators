@@ -1,0 +1,10 @@
+PASS  declining slope negative
+PASS  declining quantified 2
+PASS  declining r3 true
+PASS  empty slope none
+PASS  empty r2 none
+PASS  empty r3 none
+PASS  center scoring flagged
+PASS  center scoring no slope
+
+8/8

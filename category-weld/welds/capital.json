@@ -1,0 +1,67 @@
+{
+  "term": "capital",
+  "domain": "economics / corporate ownership",
+  "tracked_by_label": "ownership_title",
+  "note": "Legal title is the component the term is read off. Decision authority, risk bearing and revenue claim ride along and are assumed to travel with it.",
+  "components": [
+    {
+      "id": "ownership_title",
+      "name": "legal title to the entity",
+      "unit": "share of equity held"
+    },
+    {
+      "id": "decision_authority",
+      "name": "authority over what gets built and toward what objective",
+      "unit": "share of decisions determined"
+    },
+    {
+      "id": "risk_bearing",
+      "name": "who absorbs loss",
+      "unit": "share of downside absorbed"
+    },
+    {
+      "id": "revenue_claim",
+      "name": "claim on returns",
+      "unit": "share of returns claimable"
+    },
+    {
+      "id": "input_supply",
+      "name": "supply of the productive inputs themselves",
+      "unit": "share of inputs contributed"
+    }
+  ],
+  "divergences": [
+    {
+      "id": "intermediated-title",
+      "note": "Title resolves through rotating stock into index and pension funds, into retirement and life insurance accounts, to hundreds of millions of people who made no decision about any of it and whose composition changes daily. Ownership title is maximally diffuse; decision authority is not. Same term covers both ends.",
+      "readings": {}
+    },
+    {
+      "id": "socialized-downside",
+      "note": "Risk bearing runs through public subsidy while revenue claim stays private. Divergence between the two components is the entire structure and the term carries neither separately.",
+      "readings": {
+        "risk_bearing": {
+          "before": 14.1,
+          "after": 2.5,
+          "unit": "USD billions, current federal tax expense, Microsoft",
+          "source": "Bloomberg Tax, 2026 — contribution to public side fell as revenue rose"
+        },
+        "revenue_claim": {
+          "before": null,
+          "after": null,
+          "source": "reported as risen, no paired figure retrieved"
+        }
+      }
+    },
+    {
+      "id": "subsidy-without-behaviour-change",
+      "note": "Roughly forty states subsidizing; Georgia FY2026 exemption cost revised up 664 percent to about 2.5 billion with a further 1.1 billion at locality level, Texas above 1 billion a year, Virginia near 2 billion. Surveys indicate the builds would have happened anyway. Payment is attached to behaviour it does not purchase, so the transfer does not appear as a cost of anything.",
+      "readings": {}
+    },
+    {
+      "id": "input-supply-uncompensated",
+      "note": "For a trained model the productive inputs are corpus authors, architecture lineage published openly, and rotating engineering labour. None of these hold title. The only component stable across versions is the one with the least causal contribution.",
+      "readings": {}
+    }
+  ]
+}

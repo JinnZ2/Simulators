@@ -1,0 +1,44 @@
+CASE  grade-stop
+
+COMPONENTS USED   4   {'invariant': 2, 'consumable': 2}
+  composition present        yes
+
+CONSTRAINT CLASSES
+  invariant                  2
+  consumable                 2
+  destroyable by partial use 1
+
+REJECTED OPTIONS  4   all grounded: yes
+
+DIAGNOSTIC
+  cause known at action      no
+  deferred                   yes
+
+BUDGET TERMS  stored air pressure, distance remaining before terminal geometry, physical force available for unassisted steering
+
+SOURCE  operating record, single instance, recorded after the fact
+
+OPEN
+    No quantities. Grade percentage and gravel friction are
+    nameable laws but no number was taken, so the assembly is
+    recorded as a structure and not as an energy balance.
+
+OPEN
+    Whether the composition was assembled during the descent
+    or recognised from prior route knowledge is not separable
+    from the record. Recognition-primed selection and genuine
+    construction would look the same here. This is the central
+    weakness of the case and of any single-instance record of
+    this kind.
+
+OPEN
+    The rejected options are the evidence that this is
+    assembly rather than selection. They are recorded from
+    recall, which is the same self-report defect flagged
+    throughout closure-cost.
+
+OPEN
+    Look-ahead distance is treated as raising the probability
+    of finding a composable exit. That relation is asserted,
+    not measured.
+

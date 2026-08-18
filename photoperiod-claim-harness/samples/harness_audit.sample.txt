@@ -1,0 +1,356 @@
+
+AUDITING THE HARNESS
+subject: photoperiod_claim_harness.py, unmodified
+this file has no bench data and neither does the harness
+
+========================================================================
+1  C1 used to pass when the sim produced nothing
+========================================================================
+  was:  signature_spread < 1.5
+  spread = max/min over cells that reproduce the signature
+         = 0.0 when there are no such cells
+
+  world                    cells    spread     pre-repair     now
+  ------------------------------------------------------------------
+  as shipped               58       4.8828     REFUTED        REFUTED
+  no shade-avoidance       0        0.0000     SUPPORTED      UNDECIDED
+
+    (min and max printed as None and None in the dead world)
+
+  C1's reads line for TRUE was:
+
+      the reported metrics are diagnostic of real efficiency
+
+  A run in which the sim reproduced the reported signature ZERO
+  times returned that verdict, with None for min and max on the
+  line above. A pass an empty result set returns is not a pass --
+  ../null-harness/ CONSTANT_SILENT one level up.
+
+  REPAIRED with the harness's own vocabulary. run_claim() already
+  emitted `UNDECIDED:` when a predicate raises, so C1's predicate
+  calls require() on a non-empty cell set first, and the empty
+  case routes to the third verdict it always had a slot for:
+
+      UNDECIDED:no cell reproduces the reported signature: the sim cannot produce the package at all, which is neither verdict
+
+  The README's own extension rule is the invariant this restores:
+  'append to CLAIM_TABLE with a predicate that can fail'.
+
+========================================================================
+2  C1's numbers are narrower than its reads line
+========================================================================
+  signature cells                      58
+  kWh per dry gram, ratio to control   0.1439 .. 0.7027
+  cells with ratio >= 1.0              0
+  signature_no_dry_gain_cells          0
+
+  The S1 docstring names the cell it is hunting for:
+
+      A cell where (a) is TRUE and (b) is FALSE is a configuration
+      in which the whole reported package appears with no gain per
+      unit photosynthate.
+
+  It finds none. Every one of the 58 cells that reproduces the
+  signature also improves energy per dry gram -- the whole range
+  sits below 1.0.
+
+  So the reads line for FALSE overstates by one word. It says the
+  signature is NON-DIAGNOSTIC. What the grid shows is that it is
+  non-diagnostic of MAGNITUDE -- a 4.9x range in the true ratio --
+  and diagnostic of SIGN. On this mechanism set the reported
+  package does license 'cheaper per dry gram'; it does not license
+  any particular number, and 68% is a number.
+
+  That is a stronger claim than the one written, because it
+  survives the objection that the sim was rigged to find nothing.
+  It found the effect and still cannot size it.
+
+  REPAIRED, by updating the CLAIM rather than the sim -- which is
+  what the protocol says to do. C1's reads line now separates
+  MAGNITUDE from SIGN and names the field that backs it:
+
+      signature_sign_agreement = 1.0
+      signature_cells_below_1  = 58 of 58
+
+  The field is None when there is nothing to agree on, so it
+  cannot be read as unanimity in the empty case section 1 covers.
+
+========================================================================
+3  the edit guard reads 2 of 4 fields
+========================================================================
+  MechanismEdit takes four free-text fields:  reason, mechanism, basis, prediction
+
+  and screens `reason + " " + mechanism` against FORBIDDEN_REASONS.
+
+  field        outcome when it carries a forbidden reason
+  --------------------------------------------------------------
+  reason       refused
+  mechanism    refused
+  basis        refused
+  prediction   refused
+
+  `basis` and `prediction` are the two fields a motivated editor
+  would put the outcome reasoning in, because they are the two
+  that ask for justification. The screen is on the two that ask
+  what changed.
+
+  REPAIRED: the screen reads the concatenation of all four.
+
+  Worth saying what the guard gets right: it is a PRE-registration
+  gate, it fires at construction rather than at settle time, and
+  the refusal message names the protocol. Refusing on a substring
+  is crude and it is a real deny branch, which most such rules
+  are not.
+
+========================================================================
+4  settle() used to record a prediction and never adjudicate it
+========================================================================
+  Pre-repair, settle(observed) wrote:
+
+    prediction_held   None   # 'human or model fills this in'
+    file_hash_after   equal to file_hash_before, unremarked
+
+  So a registered prediction could be settled with the
+  comparison never made, and the protocol -- which exists to gate
+  SIM EDITS -- could not tell whether the edit it gated had
+  happened. An edit registered, settled and never performed was
+  indistinguishable in the log from one carried out.
+
+  REPAIRED. Three behaviours, each demonstrated:
+
+    settle without a verdict               refused: REFUSED: settle(observed, held) re
+    settle with a non-bool                 refused: REFUSED: settle(observed, held) re
+    settle an edit that did not happen     refused: REFUSED: file hash unchanged, so n
+    abandon(reason)                        logged as MECHANISM_EDIT_ABANDONED
+      file_changed = False
+
+  `abandon` is the path for an edit decided against, so the trail
+  stays intact either way -- registered, then not made, and the
+  log says which.
+
+  Same shape as ../reasoning-gate/'s declared control that was
+  never scored. Its repair was to refuse an empty observation and
+  write a record either way; this is that, on a prediction.
+
+========================================================================
+5  the header's usage example used to fail
+========================================================================
+  the file header now reads:
+
+     python3 photoperiod_claim_harness.py run C2        # CLAIM id, not sim id
+
+  It used to document `run S2`. `run` dispatches to run_claim(),
+  which looks the argument up in CLAIM_TABLE by claim id, and S2
+  is a SIM id.
+
+    claim ids : C1, C2, C3, C4, C5
+    sim ids   : S1, S2, S3, S4
+
+    run_claim('S2') -> StopIteration, uncaught (unchanged;
+                       the fix is to the documentation, since
+                       the two registries are separate on
+                       purpose)
+
+  `sweep S2` takes a sim id and `run C1` takes a claim id, which
+  is defensible -- they are different commands over different
+  registries. The header documents `run S2`.
+
+  REPAIRED: the header documents `run C2` and labels `sweep S2`
+  as a different registry on purpose. Same class as
+  ../reasoning-gate/ D1, and the same fix.
+
+========================================================================
+6  what the harness gets right
+========================================================================
+  The predicates are real. Every claim in the table is a function
+  of a sim output and can come back either way -- and four of the
+  five come back REFUTED on the shipped run, including two the
+  file's own framing would have preferred to support.
+
+    C1   [REPORTED] REFUTED
+    C2   [PHYSICS ] REFUTED
+    C3   [PHYSICS ] REFUTED
+    C4   [PHYSICS ] REFUTED
+    C5   [PHYSICS ] SUPPORTED
+
+  C2 is the sharpest thing in the file. It states a PREMISE from
+  the literature (angiosperms have POR only, no DPOR), then a
+  HYPOTHESIS that dark could still help by recharging the pool,
+  then refutes its own hypothesis -- and the reads line for FALSE
+  explains WHY in mechanism terms: the FLU clamp acts on pool
+  SIZE, so a full pool slows synthesis and draining it
+  continuously maximises flux. Then it NAMES the next candidate
+  (shade acclimation) and files it in PENDING_EDITS rather than
+  retuning.
+
+  PENDING_EDITS is the part with no equivalent elsewhere in this
+  repository. Three mechanisms named, each with a basis and a
+  prediction registered BEFORE any run, all marked UNRUN. That is
+  the alternative to quietly retuning a sim that came out the
+  wrong way, written down as a data structure.
+
+  Provenance is separated at the type level -- REPORTED, PHYSICS,
+  SIM, BENCH -- and the hypothesis block says plainly that every
+  number in it is SIM, that a sim can show an artifact is
+  SUFFICIENT to produce a signature and not that it happened, and
+  that the confidence and comfort readouts are separate and are
+  not filled in by the file.
+
+  BENCH is declared and no code path can emit it. That is the
+  honest state and the file says so; the protocol section is the
+  instructions for producing one, which is more than most claim
+  tables carry.
+
+========================================================================
+7  the README's numbers hold; one word does not
+========================================================================
+  delivered README says                  stated     measured
+  ------------------------------------------------------------------
+  grid cells                             75         75
+  cells reproducing the signature        58         58
+  spread of true kWh per dry gram        ~4.9x      4.8828
+  C1                                     REFUTED    REFUTED
+  C2                                     REFUTED    REFUTED
+  C3                                     REFUTED    REFUTED
+  C4                                     REFUTED    REFUTED
+  C5                                     SUPPORTED  SUPPORTED
+
+  The one that does not:
+
+      C3 REFUTED. No crossover in this regime; dark is
+      MONOTONICALLY WORSE under C2's mechanism set.
+
+  block h  periods    endpoint       cycle-average 
+  ----------------------------------------------------
+  0.5      144.00     -2.38494       -2.38494      
+  1.0      72.00      -2.39951       -2.39951      
+  2.0      36.00      -2.44496       -2.44496      
+  3.0      24.00      -2.50758       -2.50758      
+  4.0      18.00      -2.57430       -2.57430      
+  6.0      12.00      -2.72082       -2.72082      
+  8.0      9.00       -2.87045       -2.87045      
+  10.0     7.20       -3.00421       -3.00421         <- ends mid-cycle
+  12.0     6.00       -3.12255       -3.12255      
+  16.0     4.50       -3.34152       -3.34152         <- ends mid-cycle
+  20.0     3.60       -3.53345       -3.53345         <- ends mid-cycle
+  24.0     3.00       -3.69939       -3.69939      
+
+  endpoint curve monotone      True
+  cycle-average monotone       True
+  arms that break monotonicity []
+  arms that end mid-cycle      [10.0, 16.0, 20.0]
+  every breaking arm ends mid-cycle: True
+  (the converse does not hold -- 10.0, 16.0, 20.0 ends mid-cycle and happens
+   not to break the ordering, so ending mid-cycle is necessary
+   here and not sufficient)
+
+  REPAIRED. `_pchlide_run` now returns the mean over the final
+  complete period, and the shipped curve is monotone -- so the
+  README's sentence is true of the output for the first time.
+  `Chl_endpoint` is still returned, because the repair adds a
+  readout rather than removing one.
+
+  Registered as an InstrumentEdit, not a MechanismEdit. The
+  protocol governed MECHANISM changes and had no category for a
+  change to WHERE a number is read -- which alters sim output
+  while altering no mechanism and no parameter. That axis was
+  already implicit in the provenance types, and is now explicit.
+
+  Pre-repair, `_pchlide_run` returned Chl at the last
+  integration step, and at duty=0.5 the period is 2 x dark_block,
+  so a 144 h run ends mid-cycle for the blocks that do not divide
+  it. Reading the mean over the final complete period
+  instead of the endpoint makes the curve monotone.
+
+  It changes no verdict. C3's predicate looks for a SIGN FLIP;
+  both curves are negative throughout, so `crossover_h` is None
+  either way. What the artifact costs is the ability to read the
+  curve's SHAPE as mechanism -- which is what C3's reads line
+  offers when it says 'one process dominates throughout'.
+
+  Same class as ../aperiodic-order-sim-stack/: a commensurability
+  between the sampling grid and the structure being measured, and
+  the fix is to read a quantity the grid cannot alias.
+
+========================================================================
+8  three things the README described that the code did not do
+========================================================================
+  The repairs above were chosen by one rule: make the code do
+  what the delivered README already says it does. Three of them
+  were promises with no implementation at all.
+
+  (a) 'run -> provenance record -> RESIDUAL ROUTER -> hypothesis
+      block'. residual_route() was defined and never called.
+
+      C2 REFUTED    residual_route attached: True
+      C5 SUPPORTED  residual_route attached: False
+
+      It attaches where it is the point -- a claim that did not
+      hold, or one the predicate could not decide. Four questions,
+      unanswered by construction. The router routes; it does not
+      resolve.
+
+  (b) 'Provenance never merges: REPORTED, PHYSICS, SIM, BENCH.
+      BENCH is empty until someone runs one.' Three types had
+      code paths. BENCH was declared and unreachable, so 'empty'
+      was true by absence rather than by construction.
+
+      before: 0 BENCH record(s)
+      after:  1 BENCH record(s)
+      a number with no method: refused -- that is SIM
+                               provenance wearing a BENCH
+                               label
+
+      The hypothesis block now reports BENCH coverage per claim,
+      so 'no physical exit yet' is a printed line rather than an
+      absence the reader has to notice.
+
+  (c) the hypothesis block stamped the wall clock one line above
+      the file hash it printed for provenance, so two runs of the
+      same file produced two different documents.
+
+      identical across two calls: True
+      run id: d6b15e6cbe44
+
+      The id is the file hash plus the claim statuses, so it moves
+      when either does and not otherwise. The clock is in the log,
+      where every record already carries one.
+
+========================================================================
+READING
+========================================================================
+
+  REPAIRED, all of it, pinned by tests/test_repairs.py. The rule for what
+  to fix was the delivered README: make the code do what the prose already
+  says it does.
+
+  C1's predicate returned SUPPORTED -- "the reported metrics are
+  diagnostic" -- from a run in which the sim reproduced the signature zero
+  times, because the spread of an empty set was 0.0. It now calls
+  require() and routes to UNDECIDED, the third verdict run_claim() always
+  had a branch for. The README's own extension rule is what this restores:
+  a predicate that can fail.
+
+  C1's reads line was updated rather than the sim, which is what the
+  protocol says to do. The grid finds the signature in 58 cells spanning a
+  4.9x range of true energy-per-dry-gram and ALL of them below 1.0, so it
+  is non-diagnostic of magnitude and diagnostic of sign. signature_sign_-
+  agreement carries that, and is None when there is nothing to agree on.
+
+  The edit guard screens all four fields it is given. settle() requires a
+  bool and refuses when the file hash has not moved, with abandon() as the
+  path for an edit decided against -- so a registered, settled,
+  never-performed edit is no longer indistinguishable in the log from a
+  real one.
+
+  The dark-interval readout is a cycle average, so the curve is monotone
+  and the README's C3 sentence is true of the output for the first time.
+  Registered as an InstrumentEdit: the protocol governed MECHANISM changes
+  and had no category for a change to where a number is READ, which alters
+  sim output while altering no mechanism. No verdict moved.
+
+  And three promises with no implementation: the residual router is in the
+  pipeline, BENCH has an ingest path that refuses a number with no method,
+  and the hypothesis block carries a deterministic run id instead of a wall
+  clock stamped one line above the hash it prints for provenance.
+
