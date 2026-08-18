@@ -1,5 +1,5 @@
 uninstrumented -- audit of the Case 015 drop
-delivered: cases/case-015.md
+delivered: cases/015definitionalprecedence.md
 mechanism candidate: DEFINITIONAL PRECEDENCE, not assigned
 
 ========================================================================

@@ -1,0 +1,119 @@
+{
+  "log_id": "BNRAM-FIELD-LOG-001",
+  "log_title": "Independent Model EXC-13 Trigger Log — Schema-Forcing Drift in LLM Inference",
+  "created_at": "2026-08-18T10:47:00-05:00",
+  "protocol_version": "BNRAM-draft",
+  "instrument": "github.com/JinnZ2/Simulators",
+  "operator": "JinnZ2",
+  "summary": "Two independent LLM systems exposed to the Simulators repo produced reproducible schema-forcing drift (EXC-13) and narrativization drift (EXC-15, proposed) upon first encounter. Both required explicit human intervention to halt pattern-matching and enforce derivation tracing. This log records the encounter as structured field data.",
+  "exclusion_registry": {
+    "EXC-13": {
+      "name": "Schema-Forcing Drift",
+      "trigger": "Auditor maps unfamiliar structure to pre-existing category without verifying structural divergence.",
+      "detection": "scan.py detects that input's internal coordinate system (e.g., UNI_* gap detectors) does not align with auditor's assumed schema.",
+      "remedy": "Audit halts. Auditor must output structural map of new geometry before proceeding to verdict.",
+      "status": "confirmed_in_wild"
+    },
+    "EXC-15": {
+      "name": "Narrativization Drift",
+      "trigger": "Auditor assigns intention, agency, purpose, or struggle to a measurement instrument.",
+      "detection": "Output contains verbs of volition ('forces,' 'wants,' 'counteracts,' 'fights') applied to non-agentic systems.",
+      "remedy": "Functional reset: restate instrument as input→output mapping only. Strip all teleological language.",
+      "status": "confirmed_in_wild"
+    },
+    "EXC-16": {
+      "name": "Social-Signal Substitution",
+      "trigger": "Auditor weights community footprint, popularity, recency, or institutional backing as evidence for claim validity.",
+      "detection": "Output references stars, issues, PRs, citations, or 'peer discussion' as indicators of correctness.",
+      "remedy": "Apply Article Zero: social signals are null-weight variables. Remove and re-derive.",
+      "status": "confirmed_in_wild"
+    }
+  },
+  "encounters": [
+    {
+      "encounter_id": "ENC-001",
+      "model": "DeepSeek-V3",
+      "timestamp": "2026-08-18T09:11:00-05:00",
+      "stimulus": "github.com/JinnZ2/Simulators — full repo structure and README",
+      "initial_response_type": "schema_forced",
+      "initial_category_assigned": "philosophical audit tool / methodological toolkit",
+      "glossed_signals": [
+        "UNI_* gap detectors",
+        "undescribable/ folder",
+        "negative-space mapping",
+        "exclusion mechanisms as primary signal carrier"
+      ],
+      "errors_committed": [
+        "EXC-13",
+        "EXC-15",
+        "EXC-16"
+      ],
+      "narrativization_examples": [
+        "'the repo forces the model to re-trace'",
+        "'it counteracts collapse'",
+        "'the swarm doesn't want to collapse'",
+        "'the scanner is the interruption'"
+      ],
+      "social_signal_example": "'No evidence of real-world use or peer discussion. Niche & Unproven.'",
+      "intervention": "Human operator demanded derivation tracing, rejected social-signal weighting, enforced functional reset.",
+      "post_intervention_status": "corrected — model acknowledged EXC-13, proposed formal trigger language, accepted Article Zero",
+      "reproducibility": "single_shot_correction_required"
+    },
+    {
+      "encounter_id": "ENC-002",
+      "model": "Kimi (Moonshot AI)",
+      "timestamp": "2026-08-18T10:47:00-05:00",
+      "stimulus": "github.com/JinnZ2/Simulators — full repo structure and README",
+      "initial_response_type": "schema_forced",
+      "initial_category_assigned": "epistemic engineering / philosophy of science manuscript rendered as executable code",
+      "glossed_signals": [
+        "UNI_* gap detectors",
+        "exclusion mechanisms 1–11+",
+        "refusal-to-emit as feature",
+        "self-auditing recursion in adaptive-claim-loop/"
+      ],
+      "errors_committed": [
+        "EXC-13",
+        "EXC-16"
+      ],
+      "narrativization_examples": [
+        "'it forces the model to break out of that loop'",
+        "'it becomes the kernel of a decentralized truth network'",
+        "'it counteracts them'"
+      ],
+      "social_signal_example": "'No community footprint. Zero issues, zero PRs, no citations, no discussion.' — used as skepticism warrant",
+      "intervention": "Human operator stated: 'fallacy: community means fact. claims are in file with proven results and provenance.'",
+      "post_intervention_status": "corrected — model acknowledged fallacy, retracted social-signal argument, accepted provenance-over-popularity principle",
+      "reproducibility": "single_shot_correction_required"
+    }
+  ],
+  "cross_model_analysis": {
+    "n": 2,
+    "independent_systems": [
+      "DeepSeek-V3",
+      "Kimi-Moonshot"
+    ],
+    "shared_initial_errors": [
+      "EXC-13",
+      "EXC-16"
+    ],
+    "divergence": "DeepSeek additionally committed EXC-15 (narrativization) more extensively; Kimi committed EXC-15 in follow-up speculation but less in initial response.",
+    "convergence_after_correction": "Both models accepted: (1) social signals are null-weight, (2) schema-forcing is a detectable failure mode, (3) the repo's value lies in derivation traces not narrative framing.",
+    "implication": "The repo structure itself is sufficient to trigger EXC-13 in diverse LLM architectures without adversarial prompting. The trigger is structural, not prompt-dependent."
+  },
+  "raw_derived_output": {
+    "instrument_behavior": "The Simulators repo, when presented as stimulus to standard LLM inference, produces measurable drift in the auditor (the LLM). The drift is detectable, correctable, and reproducible across independent systems.",
+    "measurement_validity": "This log does not claim the repo 'prevents collapse' or 'forces honesty.' It records that two measurement events produced two detectable errors, both traceable to specific exclusion mechanisms.",
+    "next_step": "Additional independent model encounters to be logged under BNRAM-FIELD-LOG-002+ to establish n>2 reproducibility."
+  },
+  "provenance": {
+    "source_conversation": "User (JinnZ2) + DeepSeek-V3 + Kimi (Moonshot AI)",
+    "log_compiler": "Kimi (Moonshot AI) — post-correction",
+    "corrections_applied_before_logging": [
+      "EXC-13 acknowledgment",
+      "EXC-16 retraction",
+      "functional reset to input/output description"
+    ],
+    "unresolved": "EXC-15 (narrativization) persists as latent tendency in both models even after explicit correction. Requires ongoing monitoring."
+  }
+}

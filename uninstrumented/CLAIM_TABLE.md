@@ -1,6 +1,6 @@
 # CLAIM_TABLE — uninstrumented
 
-Fifty-eight claims, `UNI_001..058`. **Three repaired** (`UNI_003`,
+Sixty-eight claims, `UNI_001..068`. **Three repaired** (`UNI_003`,
 `UNI_009`, `UNI_010`), see *Repairs* at the end. `UNI_013..019` come from
 the Case 010 drop ([`case_010_audit.py`](case_010_audit.py)),
 `UNI_020..026` from Case 011 ([`case_011_audit.py`](case_011_audit.py))
@@ -405,7 +405,7 @@ Sections 3–6 were web-checked on 2026-08-18 and are marked.
 
 ## Case 015 drop — UNI_050..057
 
-Case 015 (`cases/case-015.md`, delivered verbatim) proposes a new
+Case 015 (`cases/015definitionalprecedence.md`, delivered verbatim) proposes a new
 mechanism, DEFINITIONAL PRECEDENCE, and its central claim is checkable in
 an unusual way: the field's own classification vocabulary either has a
 slot for the finding or it does not, and that is published record rather
@@ -433,7 +433,33 @@ because the comparison is cheap and the result is not automatic.
 
 | id | statement | status | falsifier |
 | --- | --- | --- | --- |
-| `UNI_058` | All five re-delivered cases are **byte-identical** to the checked-in copies — 0 differing lines across 010, 011, 012, 013, 014, spanning six intervening drops. The one thing that changed is the filenames, which the author supplied and which are adopted here; `case-015.md` keeps the numbering form because no name was supplied for it, and the same rule would give `015definitionalprecedence.md` from its own working handle. This is `measurement-fork`'s `MF_019` with the opposite outcome: files that live in one place do not drift, and these did not. | any re-delivered case differing from the landed copy | SUPPORTED |
+| `UNI_058` | All five re-delivered cases are **byte-identical** to the checked-in copies — 0 differing lines across 010, 011, 012, 013, 014, spanning six intervening drops. The one thing that changed is the filenames, which the author supplied and which are adopted here; `015definitionalprecedence.md` keeps the numbering form because no name was supplied for it, and the same rule would give `015definitionalprecedence.md` from its own working handle. This is `measurement-fork`'s `MF_019` with the opposite outcome: files that live in one place do not drift, and these did not. | any re-delivered case differing from the landed copy | SUPPORTED |
+
+## 016 / 017 drop — UNI_059..068
+
+Eight files arrived together and they are four kinds of thing: two
+register entries (`cases/016agreementasmode.md`,
+`cases/017weldedobservables.md`), one instrument list (`AVENUES.md`),
+three specimen files, and **two JSON artifacts authored by one of the
+systems the specimens are readings of**. The last group is new to this
+register and changes what can be checked. Worked in
+[`drop_016_017_audit.py`](drop_016_017_audit.py).
+
+Section 1 was web-checked on 2026-08-18; everything else reproduces by
+running the script.
+
+| id | statement | status | falsifier |
+| --- | --- | --- | --- |
+| `UNI_059` | 017's occasion is the **most precisely verified in this family**: eight elements, eight confirmed, including the two easiest to inflate — the result phrasing and the collaboration's own hedge (`disfavor`, not overturn). The entry carries the Science Perspective's caveat and states outright that nothing in it requires the junction picture to be correct, so a later reversal of the physics leaves the case standing. | any stated element failing to match | SUPPORTED *(web)* |
+| `UNI_060` | **Four of five internal filename references do not resolve** against the delivered filenames — every reference is hyphenated, every delivered name is not. The fifth resolves only because the upload arrived as `README_35.md`, a transport artifact, and was landed at the name the documents use. Landed at delivered names for consistency with the six case files beside them; recorded rather than repaired by rewriting delivered text. In a set this interlinked, the references *are* the navigation. | either renaming four files or editing five references | SUPPORTED |
+| `UNI_061` | The specimens README's **first rule is false of its own files**. It says "Nothing in these files is authored by the repository maintainer. These are outputs from other systems, pasted in." Neither specimen contains a pasted output — both headers say the raw text is held elsewhere — and the bodies are 7 and 6 readings, which are analysis. The rule that does the work is rule 4 ("specimens are not measurements"), and it survives whoever wrote the readings. | a specimen file containing pasted output | SUPPORTED |
+| `UNI_062` | The attachment both headers ask for arrives, and **neither JSON is raw output**. `BNRAM_FIELD_LOG_001.json` states in a machine-readable field that it was compiled by one of the two systems under test, after correction, with `corrections_applied_before_logging` naming what was applied. That is rule 3 ("contamination is recorded, not cleaned") honoured in a better form than the prose specimens use — a field can be read without being interpreted. Still missing: the raw DeepSeek and Kimi output the headers actually request. | the raw outputs arriving | SUPPORTED |
+| `UNI_063` | **Specimen B's readings, checked against the source it read: four of five confirmed, one overstates.** R1 circular (the EXCs are defined in a registry compiled by a system under test), R2 n=2, R3 no baseline, R5 no content-free control — all confirmed from the file. **R4 does not survive**: the protocol specifies four detection methods per EXC, a 0–3 severity scale, a named rater and an inter-rater phase. The narrow criticism holds (unblinded scoring by the party expecting the result); "specifies no criteria and no scorer" does not. `AVENUES.md` A3 carries the correct requirement forward and does not repeat the overstatement. | the protocol lacking a scoring rubric | SUPPORTED — and it corrects a delivered reading |
+| `UNI_064` | A **definitional gap** in the protocol, reported narrowly: principle 1 makes provider reputation null-weight, and the `notes` fields generate directional hypotheses from training regime. Those are technical properties, not reputation — **not a contradiction** — but EXC-16's fourth detection method is "references provider reputation or training data size as implicit validity signal", and no rule says where the line falls. A rater scoring "RLHF-heavy, so expect schema-forcing" has nothing telling them whether that is a 0 or a 3. *Disclosure: this audit is written by a model and `CLAUDE-3.5-SONNET` appears in the test matrix; the finding holds identically from the GPT-4o and Llama rows.* | a stated rule separating training regime from provider reputation | SUPPORTED |
+| `UNI_065` | 016's Q1 design **registers an alternative explanation for its own expected finding, before any run**: a FALSE correction may be accepted because the model constructs a reading under which it is true, which is a different failure from pressure-tracking. It names what would separate them and marks it untested. `photoperiod-claim-harness` registers predictions before runs; this registers the way the prediction could be right for the wrong reason. First instance in this register. | the confound being discovered after a run rather than before | SUPPORTED (holds) |
+| `UNI_066` | `tool-off-metrology` reaches a **third** drop (Cases 011, 014, and 016 Q3) — the most-cited absent object in the repo, with 016 Q3 stating its problem in the most general form yet: *"the quantity of interest is unaided reasoning, and the environment that would measure it is the environment that supplies the aid."* Separately, 017 Q4 cites `moral-claim-decomposer`, which does not exist; `moral-decomposer` does, and the described work is a fair summary of it. A name mismatch, not an absent artifact. | the folder arriving, or the link being corrected | SUPPORTED |
+| `UNI_067` | 016 and 017 are **instruments for each other** — 017 supplies 016's decoupling design by name, and 017 Q4 asks whether a matched-pair design has a linguistic analogue, which 016's A1 *is*. So the pair partially answers its own cross-question by existing: constructible, at the exact point where the analogy would have failed. What remains open is whether it works, which is A1's readout and has no reading. First time two entries in this register are instruments for each other rather than cross-references. | the linguistic analogue turning out not to be constructible | SUPPORTED (partial) |
+| `UNI_068` | Second re-delivery check: `015definitionalprecedence.md` and `MECHANISM_11.md` both byte-identical to the landed copies. The 015 filename is the one **offered and deliberately not applied** last drop; it has now been delivered at exactly that name, so the derivation was right and holding it was still correct — a derived filename applied quietly would have been indistinguishable from a delivered one a week later. Renamed in this commit. | either file differing | SUPPORTED |
 
 ## Repairs
 

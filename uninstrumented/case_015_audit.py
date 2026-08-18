@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """case_015_audit.py -- checks on the Case 015 drop.
 
-Added, not delivered. `cases/case-015.md` is the entry as received and is
+Added, not delivered. `cases/015definitionalprecedence.md` is the entry as received and is
 not modified. Findings recorded in AUDIT_NOTES.md as UNI_050..UNI_057.
 
     python3 case_015_audit.py
@@ -25,7 +25,7 @@ import re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-CASE = io.open(os.path.join(HERE, "cases", "case-015.md"),
+CASE = io.open(os.path.join(HERE, "cases", "015definitionalprecedence.md"),
                encoding="utf-8").read()
 BAR = "=" * 72
 
@@ -42,7 +42,7 @@ def block(t):
 
 
 print("uninstrumented -- audit of the Case 015 drop")
-print("delivered: cases/case-015.md")
+print("delivered: cases/015definitionalprecedence.md")
 print("mechanism candidate: DEFINITIONAL PRECEDENCE, not assigned")
 
 # ---------------------------------------------------------------- UNI_050

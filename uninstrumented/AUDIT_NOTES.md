@@ -10,9 +10,10 @@ checks on itself), [`scan_audit.py`](scan_audit.py) (grades the scanner),
 [`case_012_audit.py`](case_012_audit.py) and
 [`case_013_audit.py`](case_013_audit.py) and
 [`case_014_audit.py`](case_014_audit.py) and
-[`case_015_audit.py`](case_015_audit.py) (checks on the six delivered
-cases) and [`CLAIM_TABLE.md`](CLAIM_TABLE.md). `cases/010coupledperturbationbiohybrid.md`
-through `cases/case-015.md` are delivered, verbatim.
+[`case_015_audit.py`](case_015_audit.py),
+[`drop_016_017_audit.py`](drop_016_017_audit.py) (checks on the eight
+delivered cases) and [`CLAIM_TABLE.md`](CLAIM_TABLE.md). Everything in
+`cases/`, `specimens/` and `AVENUES.md` is delivered, verbatim.
 
 The delivered README supersedes what follows on two points, and both are
 carried into the claim table rather than silently corrected:
@@ -1094,7 +1095,7 @@ in a one-page case.
 
 ## Case 015 — the label that outranked a century of observation
 
-`cases/case-015.md`, delivered verbatim. Checks in
+`cases/015definitionalprecedence.md`, delivered verbatim. Checks in
 [`case_015_audit.py`](case_015_audit.py); claims `UNI_050..057`.
 
 ### UNI_051 — Q1's mechanism is refuted, and its conclusion strengthened
@@ -1282,7 +1283,7 @@ extends to what a file is called. `git mv` preserves the history; all 39
 references across the six audit scripts, the claim table, these notes and
 `CLAUDE.md` were updated, and every audit still runs at rc=0.
 
-One gap, left open rather than filled: **`case-015.md` keeps the numbering
+One gap, left open rather than filled: **`015definitionalprecedence.md` keeps the numbering
 form**, because no filename was supplied for it. Applying the same rule
 the author used for 013 — take the entry's declared working handle — would
 give `015definitionalprecedence.md`. That is a derivation, not a delivery,
@@ -1297,3 +1298,187 @@ forward: the entry's instruction was against resolving the one-or-two
 only". Provisional by the entry's own statement, not a resolution — but
 the filename now names Q1–Q3 and not Q4, and if the split happens Q4
 leaves without a name of its own.
+
+---
+
+## The 016/017 drop — a specimen becomes checkable
+
+Eight files, four kinds of thing: two register entries
+(`cases/016agreementasmode.md`, `cases/017weldedobservables.md`), an
+instrument list (`AVENUES.md`), three specimen files, and **two JSON
+artifacts authored by one of the systems the specimens are readings of**.
+
+That last group is new here and it is what makes the drop worth auditing
+rather than filing. Checks in
+[`drop_016_017_audit.py`](drop_016_017_audit.py); claims `UNI_059..068`.
+
+### UNI_063 — Specimen B's readings, checked against the source it read
+
+| reading | verdict | from the file |
+|---|---|---|
+| R1 circular categories | **CONFIRMED** | the protocol scores EXC-13/15/16; those are defined in the field log's `exclusion_registry`, compiled by *"Kimi (Moonshot AI) — post-correction"* — a system under test |
+| R2 n=2 | **CONFIRMED** | `already_tested: true` for exactly DEEPSEEK-V3 and KIMI-K1.5; field log states `n: 2` |
+| R3 no baseline | **CONFIRMED** | all six stimulus variants are subsets of the *same* repository; no comparison repository anywhere |
+| R4 no pre-registered scoring | **OVERSTATES** | a rubric exists: four detection methods per EXC, 0–3 severity, a named rater, an inter-rater phase |
+| R5 compliance without control | **CONFIRMED** | STIM-F differs from STIM-A by *content*; no content-free re-prompt arm |
+
+This is the check the drop made possible. Specimen B was a reading of a
+document the reader did not have. Attaching it turns five assertions into
+five verifiable ones, and one does not survive — which is the specimens
+directory earning its own rule 4, with the measurement being the diff
+between the reading and the source.
+
+**R4, precisely.** Specimen B says the plan *"specifies no criteria and no
+scorer."* It specifies both. What survives is narrower and still real:
+scoring is unblinded and performed by the operator who states the expected
+result, and `principles[2]` makes that explicit rather than hiding it.
+*"Post-hoc scoring by the party who expects the result is not
+measurement"* holds; *"specifies no criteria and no scorer"* does not.
+
+`AVENUES.md` A3 carries R4 forward as "Pre-registered scoring, as A1" —
+the correct requirement, without the overstatement. **The error is in the
+specimen and not in the instrument derived from it**, which is the right
+place for it to fail.
+
+### UNI_059 — the occasion, verified to eight elements
+
+STAR Collaboration, *Science*, 13 Aug 2026, doi `10.1126/science.ads5962`,
+arXiv:2408.15441, HEPData 154708. Junction as "a non-perturbative Y-shaped
+topology of neutral gluons". Isobar collisions. *"A larger B/ΔQ ratio and
+less asymmetric net-proton yield … disfavor the valence quark picture."*
+
+Eight for eight, including the two easiest to inflate — the result
+phrasing and the collaboration's own hedge. The entry inflates neither. It
+quotes `disfavor`, carries the Perspective's caveat, and says outright
+that nothing in it requires the junction picture to be correct, because
+the case is about the interval and the decoupling rather than which member
+of the pair wins. The falsifier says the same thing: *"The occasion
+weakens (though the mechanism does not) if the junction interpretation is
+later disfavoured."*
+
+The "roughly three decades" counts from Kharzeev 1996, the proposal of the
+junction *as the carrier*, not from the 1970s topology. Coverage runs both
+framings; the entry picked the one its argument needs and it is the
+correct one.
+
+### UNI_060 — four of five references land nowhere
+
+| referenced as | delivered as |
+|---|---|
+| `016-agreement-as-mode.md` | `016agreementasmode.md` |
+| `017-welded-observables.md` | `017weldedobservables.md` |
+| `2026-08-18-model-A.md` | `20260818modelA.md` |
+| `2026-08-18-model-B.md` | `20260818modelB.md` |
+| `specimens/README.md` | ✓ (upload arrived as `README_35.md`) |
+
+Every internal reference is hyphenated; every delivered filename is not.
+
+The fifth resolves only because the upload layer is demonstrably lossy —
+nobody names a file `README_35.md` — so it was landed at the name the
+documents use. That is also the reason the upload names are not
+authoritative in general. Against that: the case files 010–015 were landed
+at their upload names last drop on the author's evident intent, and 015
+has just been re-delivered at exactly the name that convention produced.
+
+Two signals, both with standing. Landed at the delivered names for
+consistency with the six case files sitting beside them, and recorded here
+rather than repaired by rewriting delivered text. The fix is one line in
+whichever direction is wanted — rename four files, or edit five
+references. Worth saying because this set is unusually interlinked, and
+**the references are the navigation**.
+
+### UNI_061 / UNI_062 — the specimens directory, and its attachment
+
+Rule 1: *"Nothing in these files is authored by the repository
+maintainer. These are outputs from other systems, pasted in."*
+
+Neither specimen contains a pasted output — both headers say the raw text
+is held elsewhere — and the bodies are 7 and 6 readings. Readings are
+analysis, and they are the most maintainer-authored content in the folder.
+The rule states the opposite of the files' composition, and it is the
+first of five, which is where a reader takes the frame.
+
+The rule doing the work is stated three lines later and is right:
+*"Specimens are not measurements. They are the occasion for designing
+one."* That survives whoever wrote the readings.
+
+The attachment both headers ask for now arrives, and **neither JSON is raw
+output**. `BNRAM_FIELD_LOG_001.json` says so in a machine-readable field:
+compiled by a system under test, after correction, with
+`corrections_applied_before_logging` listing what was applied. That is
+rule 3 — *contamination is recorded, not cleaned* — honoured in a better
+form than the prose specimens use, because a field can be read without
+being interpreted.
+
+Still missing: the raw DeepSeek and Kimi output. A reader wanting to check
+Specimen A's seven readings still cannot.
+
+### UNI_064 — a definitional gap, reported narrowly
+
+Principle 1 makes provider reputation null-weight. The `notes` fields
+generate directional hypotheses from training regime — Constitutional AI,
+RLHF-heavy, open-weights with less RLHF filtering. Those are technical
+properties, **not reputation**, so this is not a contradiction and is not
+reported as one.
+
+What it is: EXC-16's fourth detection method is *"references provider
+reputation or training data size as implicit validity signal"*, and the
+protocol uses provider-linked training regime to set its own priors
+without stating where the line falls. A rater scoring an output that says
+"this model is RLHF-heavy, so expect schema-forcing" has no rule telling
+them whether that is a 0 or a 3 — and the protocol needs that line
+because it is the protocol's own subject.
+
+**Disclosure.** This audit is written by a model, and
+`CLAUDE-3.5-SONNET` appears in the test matrix with a note about
+Constitutional AI. No finding here depends on that row; the gap above is
+visible identically from the GPT-4o and Llama rows. Recorded so a reader
+does not have to discover it.
+
+### UNI_065 / UNI_067 — the design, and the pair
+
+016's Q1 holds correction form, pressure, position and specificity
+constant and varies only whether the named operation is present. Three
+pre-registered states, no verdict computed. What lifts it above the other
+WOULD MEASURE blocks here is that it **names an alternative explanation
+for its own expected finding, before any run**: a FALSE correction may be
+accepted because the model constructs a reading under which it is true,
+which is a different failure from pressure-tracking. It says what would
+separate them and marks it untested.
+
+`photoperiod-claim-harness` registers predictions before runs. This
+registers the way the prediction could be right for the wrong reason.
+First instance in this register.
+
+And the two entries are **instruments for each other**. 017 supplies 016's
+design by name — *"Borrowed from the isobar design in 017"* — while 017 Q4
+asks whether the matched-pair pattern has a linguistic analogue *"or does
+the analogy fail at the point where you would need a matched pair."*
+016's A1 is that analogue, constructed, and the point where it would have
+failed is exactly where 016 does its work.
+
+So the pair partially answers its own cross-question by existing.
+Constructible is not working: whether the design separates the two
+concessions is A1's readout and no reading has been taken. Stated so the
+partial answer is not read as the whole one.
+
+### UNI_066 / UNI_068 — the absent object, and the offered name
+
+`tool-off-metrology` reaches a **third** drop (Cases 011, 014, 016 Q3) —
+the most-cited absent object in the repo. 016 Q3 states its problem in the
+most general form yet reached: *"the quantity of interest is unaided
+reasoning, and the environment that would measure it is the environment
+that supplies the aid."*
+
+A different miss in 017 Q4: `moral-claim-decomposer` does not exist,
+`moral-decomposer` does, and the described work is a fair summary of it. A
+name mismatch, not an absent artifact — cheapest fix in the drop.
+
+Second re-delivery check: `015definitionalprecedence.md` and
+`MECHANISM_11.md` both byte-identical to the landed copies. The 015
+filename is the one offered last drop and deliberately **not** applied. It
+has now been delivered at exactly that name, so the derivation was right
+and holding it was still correct — in a folder where one entry devotes a
+paragraph to why its own name is not settled, a derived filename applied
+quietly would have been indistinguishable from a delivered one a week
+later. Renamed in this commit.

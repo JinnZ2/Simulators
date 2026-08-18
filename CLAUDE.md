@@ -2295,7 +2295,7 @@ underneath).
   an artifact of its own isolation, and the isolation is a property of the
   instrument" — while NOT CLAIMED HERE pre-empts the intent reading, which
   is `rigidification-sensor`'s no-actor discipline in a one-page case.
-  **`cases/case-015.md`** proposes a new mechanism, DEFINITIONAL
+  **`cases/015definitionalprecedence.md`** proposes a new mechanism, DEFINITIONAL
   PRECEDENCE — a label converting disconfirming evidence into a methods
   problem — occasioned by Albright et al., *J. Bacteriology* 2026
   reclassifying *Prevotella melaninogenica* after a century as a strict
@@ -2331,7 +2331,61 @@ underneath).
   problem. **`UNI_050`/`UNI_057`:** occasion verifies with one pointed
   drift (preprint "lung commensal", published version "lung symbiont" — a
   categorical relabeling inside the paper about a categorical relabeling),
-  and four of four cross-links resolve. **REPAIRED:** `UNI_003` (`entry()` takes a primary plus
+  and four of four cross-links resolve.
+  **The 016/017 drop** adds two register entries
+  (`016agreementasmode.md`, `017weldedobservables.md`), `AVENUES.md`, a
+  `specimens/` directory (README + two readings of other models' output),
+  and **two JSON artifacts authored by one of the systems the specimens
+  are readings of** — which is what makes it auditable rather than
+  filable. **`UNI_063`, the load-bearing check:** Specimen B's five
+  readings of a research protocol are now checkable against the protocol
+  itself, and **four of five confirm** (circular categories — the EXCs
+  are defined in a registry compiled by a system under test; n=2; no
+  baseline repository among six same-repo variants; no content-free
+  control on the intervention arm) while **R4 overstates** — the protocol
+  does specify four detection methods per EXC, a 0–3 severity scale, a
+  named rater and an inter-rater phase, so "specifies no criteria and no
+  scorer" fails and only the unblinded-scoring criticism survives.
+  `AVENUES.md` A3 carries the correct requirement forward without the
+  overstatement, so the error is in the specimen and not in the
+  instrument derived from it. **`UNI_059`:** 017's occasion is the most
+  precisely verified in the family — STAR Collaboration, *Science* 13 Aug
+  2026, doi 10.1126/science.ads5962, arXiv:2408.15441, HEPData 154708,
+  eight elements confirmed including the collaboration's own hedge
+  (`disfavor`, not overturn), and the entry states outright that nothing
+  in it requires the junction picture to be correct. **`UNI_060`:** four
+  of five internal filename references do not resolve — every reference
+  hyphenated, every delivered name not — and the fifth resolves only
+  because the upload arrived as `README_35.md`, a transport artifact;
+  landed at delivered names for consistency with the six case files
+  beside them, recorded rather than repaired by rewriting delivered text.
+  **`UNI_061`:** the specimens README's first rule is false of its own
+  files ("outputs from other systems, pasted in" — neither specimen
+  contains a pasted output; both are readings, 7 and 6), while rule 4
+  ("specimens are not measurements") is the one doing the work.
+  **`UNI_062`:** the attachment arrives and neither JSON is raw output —
+  the field log states in a machine-readable field that it was compiled
+  by a system under test after correction, with
+  `corrections_applied_before_logging` naming what was applied, which is
+  rule 3 honoured in a better form than the prose specimens use.
+  **`UNI_064`:** a definitional gap reported narrowly — principle 1 makes
+  provider reputation null-weight while the notes set priors from
+  training regime, which is a technical property and **not** a
+  contradiction, but EXC-16 scores "provider reputation or training data
+  size as implicit validity signal" and no rule says where the line
+  falls; disclosed that this audit is model-written and Claude appears in
+  the test matrix, with the finding holding identically from the other
+  rows. **`UNI_065`:** 016's Q1 registers an alternative explanation for
+  its own expected finding before any run (a FALSE correction accepted
+  because the model constructs a reading under which it is true) — first
+  instance in this register. **`UNI_067`:** 016 and 017 are instruments
+  for each other, and the pair partially answers its own cross-question
+  by existing. **`UNI_066`:** `tool-off-metrology` reaches a third drop,
+  the most-cited absent object in the repo; `moral-claim-decomposer` is a
+  name mismatch for `moral-decomposer`. **`UNI_068`:** second
+  re-delivery check — 015 and MECHANISM_11 byte-identical, and 015
+  arrives at exactly the filename offered and deliberately not applied
+  last drop. **REPAIRED:** `UNI_003` (`entry()` takes a primary plus
   an `also` list and the register sorts under every mechanism — which is
   what lets check 1 return anything but zero: 5 mechanisms now hold entries
   from more than one field, though weakly, since the secondaries were
@@ -2349,7 +2403,7 @@ underneath).
   enforced one mechanism per sentence — it does not, the `break` exits the
   trigger loop and mechanisms already co-fire, so the wrong-mechanism
   finding was a missing trigger rather than a blocked co-firing. Nineteen
-  claims `UNI_001..058`. Stdlib only, CC0.
+  claims `UNI_001..068`. Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
   time-series variable** — version the ruler, compute drift on its own

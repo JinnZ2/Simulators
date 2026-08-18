@@ -69,10 +69,10 @@ GRADING scan.py + patterns.json
   binding constraint is not precision but how many `check`
   questions a human must answer per unit of text.
 
-  corpus: 1105 files (.txt .md .rst .org .csv .json .jsonl .py), 1053690 words
-    all candidates        875   0.8 per 1000 words
-    strength=candidate    497   0.5 per 1000 words
-    strength=weak         378
+  corpus: 1114 files (.txt .md .rst .org .csv .json .jsonl .py), 1066920 words
+    all candidates        887   0.8 per 1000 words
+    strength=candidate    506   0.5 per 1000 words
+    strength=weak         381
 
   The `weak` band is the delivered scanner's own confidence
   gradient -- reported, never used to filter, which is the same
@@ -83,25 +83,25 @@ GRADING scan.py + patterns.json
 
   Densest files:
 
-    CLAUDE.md                                            34277 w   44 hits   1.3 /1000
+    CLAUDE.md                                            34810 w   44 hits   1.3 /1000
     legacy/Organize3.md                                  17643 w   29 hits   1.6 /1000
     grounding-layers/l5_human_construct.py                1926 w   22 hits  11.4 /1000
-    uninstrumented/CLAIM_TABLE.md                         7761 w   21 hits   2.7 /1000
+    uninstrumented/CLAIM_TABLE.md                         8807 w   21 hits   2.4 /1000
     fragility-cascade/CLAIM_TABLE.md                     19662 w   18 hits   0.9 /1000
     uninstrumented/scan_audit.py                          2516 w   18 hits   7.2 /1000
 
 ========================================================================
 3  concentration and coverage
 ========================================================================
-  875 candidates, 8 mechanisms, 71 triggers defined
+  887 candidates, 8 mechanisms, 71 triggers defined
 
     mechanism                  hits    share
     ----------------------------------------
-    SCORED AS WASTE             207    23.7%
-    AUTHORED REFERENCE          175    20.0%
-    BUDGET BOUNDARY             165    18.9%
-    AUDIT ASYMMETRY             133    15.2%
-    PROXY SUBSTITUTION          125    14.3%
+    SCORED AS WASTE             207    23.3%
+    AUTHORED REFERENCE          176    19.8%
+    BUDGET BOUNDARY             165    18.6%
+    AUDIT ASYMMETRY             136    15.3%
+    PROXY SUBSTITUTION          133    15.0%
     STORAGE                      37     4.2%
     SCALAR DEMAND                20     2.3%
     MODALITY                     13     1.5%
@@ -109,13 +109,13 @@ GRADING scan.py + patterns.json
   Top matched strings:
 
     AUTHORED REFERENCE     benchmark                       123
-    AUDIT ASYMMETRY        unverified                      116
+    AUDIT ASYMMETRY        unverified                      119
     SCORED AS WASTE        slack                            86
-    PROXY SUBSTITUTION     compliance                       54
-    AUTHORED REFERENCE     ground truth                     49
-    PROXY SUBSTITUTION     count of                         35
+    PROXY SUBSTITUTION     compliance                       59
+    AUTHORED REFERENCE     ground truth                     50
+    PROXY SUBSTITUTION     count of                         38
 
-  4 matched strings produce 379 of 875 candidates (43%).
+  4 matched strings produce 387 of 887 candidates (44%).
 
   Corpus-conditional, and neither number grades the list.
   SCALAR DEMAND is near-silent because this corpus contains no
@@ -139,7 +139,7 @@ GRADING scan.py + patterns.json
 
   `lean` is the most-fired trigger in the corpus and nearly all
   of it is `clean`, `cleanly` and `boolean`. Adding word
-  boundaries to that one trigger removes ~13 of 875 candidates
+  boundaries to that one trigger removes ~13 of 887 candidates
   (1%) at no cost, because the bare word is rare here.
 
   `slack` is the harder case and stays: the bare word IS what
@@ -158,10 +158,10 @@ GRADING scan.py + patterns.json
   and CLAIM_TABLE.md calls it the cheapest of the three
   unworked entries to run. scan.py --asym is that measurement.
 
-    files with an account mention   434
+    files with an account mention   441
     files with ANY hedge at all     16
-    outside    hedged   7 of  574   0.0122
-    incumbent  hedged  16 of  861   0.0186
+    outside    hedged   7 of  582   0.0120
+    incumbent  hedged  16 of  878   0.0182
     ratio (outside/incumbent)       0.66
 
   Every hedge in the corpus, hand-checked:
@@ -211,8 +211,8 @@ GRADING scan.py + patterns.json
   patterns.json holds the trigger strings, and the scanner reads
   .json. So the definition file is in the corpus:
 
-    candidates from the scanner's own files: 45 of 875
-      uninstrumented/AUDIT_NOTES.md                16
+    candidates from the scanner's own files: 46 of 887
+      uninstrumented/AUDIT_NOTES.md                17
       uninstrumented/patterns.json                 10
       uninstrumented/scan.py                       1
       uninstrumented/scan_audit.py                 18
