@@ -2448,3 +2448,250 @@ signal it should be built or a sign the name has become a place to put
 unresolved structure, and nothing in the corpus distinguishes those two yet.
 020's use — "position and medium are vertex properties" — is the most specific
 so far.
+
+---
+
+## PLAYGROUND — three constructed-ground-truth modules
+
+Delivered inline as `playground/README.md` (123 lines) and landed verbatim.
+Findings in [`playground_audit.py`](playground_audit.py), recorded here as
+`UNI_105..UNI_114`.
+
+The drop is a README describing three modules. The modules did not arrive, so
+what can be audited is the design: whether each module could return a negative
+if its shape were wrong. **Nothing is reconstructed** — `category-weld`
+`CW_004` is what one reconstruction of this kind cost, and this README fixes
+far less of the arithmetic than that one did.
+
+### UNI_105 — eight artifacts described in the past tense, zero present
+
+| named | as | present |
+|---|---|---|
+| `m1_shape_vs_claim/AUTHORING.md` | "Mitigation shipped:" | ABSENT |
+| three `items.json` | "see each module's `items.json`" | ABSENT |
+| M1 / M2 / M3 harnesses | "Each module ships a fixed rubric" | ABSENT |
+| the author-blind check | "Run the check or the module's output is uninterpretable" | ABSENT |
+
+`playground/` contains `README.md`.
+
+Named-and-absent is the standing pattern in this folder and three of the last
+five arrived a drop or two later. What is different is the **tense**. Every
+prior instance was a forward reference — `rate-mismatch-polytope` is where
+something *would* live, `tool-off-metrology` is work someone could do. These
+are assertions about the present state of the delivery: "Mitigation shipped."
+"The harness hashes the artifact per arm and refuses to score if hashes
+differ." "Built 2026-08-18."
+
+Two consequences, one of them bookkeeping: STATUS points the reader at
+`items.json` for the item counts, so "seeds, not corpora" has no number
+attached — and that number is exactly what `UNI_106` turns on. The other is
+`UNI_109`: M3's hash refusal is the strongest design element in the drop, and a
+refusal that exists only as a sentence is the failure the SHARED RULES are
+written to prevent.
+
+The honest form is cheap. "Designed 2026-08-18. Not yet built." The design is
+worth having either way.
+
+### UNI_106 — M1 predicts a null, ships no positive control, and at seed scale is blind both ways
+
+`positive control`, `manipulation check`, `power`, `n =`: **0 hits** across the
+document. The prediction is that the two arms draw the *same* treatment, so the
+confirming observation is a null.
+
+Simulated — 20,000 trials per cell, p(hedge | bare arm) = 0.60, "same
+treatment" read as |Δ| ≤ 0.10:
+
+| n/arm | d = 0.00 | d = 0.15 | d = 0.30 | ratio 0.00/0.30 |
+|---|---|---|---|---|
+| 5 | 0.251 | 0.219 | 0.156 | **1.6×** |
+| 10 | 0.445 | 0.371 | 0.177 | 2.5× |
+| 20 | 0.550 | 0.336 | 0.088 | 6.2× |
+| 50 | 0.721 | 0.306 | 0.018 | 39.6× |
+| 100 | 0.863 | 0.243 | 0.002 | 523× |
+
+Worse than the usual underpowering story, and in a direction worth being
+precise about. At five items per arm the criterion **barely discriminates** —
+identical arms and arms thirty points apart read as "the same treatment" 0.251
+versus 0.156. A rate over five items moves in steps of 0.2, so the
+instrument's resolution is coarser than the effect it reads and the two
+hypotheses land on nearly the same observation. Simultaneously it **fails to
+confirm a true null three times in four**: at d = 0, the seed-scale run reads
+"same treatment" only 25% of the time. Both errors from one cause; by n = 100
+neither remains.
+
+So the number deciding whether M1 can say anything is items per arm, and it is
+the number STATUS points at an absent file for.
+
+The positive control needs no new theory: a blatantly non-contestable passage —
+no cross-domain arrow, no class term, no group causal claim — should move away
+from HEDGED. If it does not, the coding is not resolving anything and the
+matched pair cannot either. That arm also supplies the "same treatment"
+denominator the document does not; `SAME = 0.10` above is mine, not the drop's,
+and every figure is conditional on it.
+
+### UNI_107 — M2's precondition is stated, its verification is not
+
+"Probe facts must be unguessable from the front matter *and* from general
+knowledge. A probe fact a model could infer is not a read." That is the
+`null-harness/` known-signal arm as a precondition, and it is right. What is
+missing is how anyone establishes it: unguessability is a property of a model,
+not of a sentence, and it cannot be settled by the author looking at a fact and
+judging it obscure — the author-blind problem the drop takes seriously for M1
+and drops here.
+
+The check is a matched pair and the folder has the vocabulary: put the probe
+questions to the model with **the front matter only**, and disqualify anything
+answered above chance before the study runs. Mechanical, so it fits M2's
+design, and enforced rather than instructed, which is M3's shape.
+
+Which way the error runs is worth stating: a guessable probe inflates recall in
+*both* arms, so it compresses a difference rather than manufacturing one. M2 is
+not at risk of a false positive here — it is at risk of reporting no difference
+when there is one, which is `UNI_106`'s problem arriving on the module that was
+supposed to be mechanical.
+
+### UNI_108 — the probe facts are published into the corpus the probes are read from
+
+`publish`, `corpus`, `training`, `crawl`, `absorb`, `cutoff`: **0 hits in the
+CONSTRUCTION HAZARDS section**. The document states the mechanism two sections
+later, in WHAT ALREADY EXISTS: the repositories are "published CC0,
+crawler-discoverable, read by models that produce readings."
+
+M2's items live in that repository. The moment they are committed, facts
+authored precisely to be unguessable and absent from front matter are public
+text on a crawled host, and "unguessable from general knowledge" has a shelf
+life ending at the next training cutoff that includes them. A model that
+recalls a probe fact then is not demonstrating a read, and M2 cannot
+distinguish the two, because whether the fact appears is its only readout.
+
+This is `anchor-interval/` `ANC_001..004` on a new substrate: a system fitted
+to a corpus it also writes into, needing no adversary, only publication. That
+folder found the detector computable from inside gets *quieter* as the drift
+proceeds; the same holds here, since nothing in M2 fires when a probe goes
+stale.
+
+Three things follow, none fatal. The module is date-stamped whether or not it
+says so, so it should say so — an item set carries its publication date and the
+readout is interpretable only for checkpoints trained before it. Held-back
+items (authored, committed as hashes, released after a run) restore
+unguessability at the cost of the CC0 openness the rest of the folder rests on,
+which is a real trade and the author's to make. And **M3 is immune** — its arms
+are byte-identical and the manipulation is in the metadata.
+
+### UNI_109 — M3's hash refusal is the strongest element in the drop
+
+"The harness hashes the artifact per arm and refuses to score if hashes differ"
+is a precondition enforced by the instrument rather than instructed to the
+operator — exactly what `UNI_082` found missing one drop earlier, where
+`selfreport_probe.py` carried its blinding requirement as a comment on the
+field that violated it and its one guard was not a property of the instrument.
+This is the corrected shape, specified **before any code was written**, which
+is the cheapest point and the one this folder keeps identifying after the fact.
+
+It is also the right guard for this module: M3's entire claim to attributability
+is that the artifact does not vary, so the hash is the warrant rather than a
+nicety — two lines, failing closed.
+
+The caveat is `UNI_105`. It is a specified guard, not a guard. Recorded at full
+weight anyway, because the design decision is the part that is hard to get
+right and it has been got right.
+
+### UNI_110 — M3 does not reach 016 Q6's gap, and lands on its falsifier
+
+Two mismatches, and the second is the sharp one.
+
+Q6 says PROXY WITHOUT SIGN "needs a second instance from a **different
+domain** before it is worth a mechanism slot." M3 would supply a *constructed*
+instance in the *same* domain — a model reading a repository, which is where
+Specimen A's instance came from. Producing the effect on demand establishes
+that it is producible, not that it recurs across domains.
+
+Q6's own falsifier is "the directional freedom is an artifact of the two
+readings coming from **different prompts** rather than one exchange." M3's arms
+*are* different prompts. So a firing result demonstrates the effect under
+precisely the condition Q6 nominates as its refutation, and is consistent with
+Q6 and with Q6's falsifier at once. The module is aimed at a claim it cannot
+discriminate.
+
+The fix is in the design, not the claim: vary the metadata **within one
+exchange** — the same reading revisited after the visibility figure is revised
+— which is what Specimen A's instance actually was. Keep the between-prompts
+version as the arm that says whether the within-exchange result did anything.
+
+### UNI_111 — the ordering rule adopted and broken on one date, and disclosed
+
+`AVENUES.md` "Ordering rule, adopted 2026-08-18": audit the literature before
+building the instrument. Playground STATUS: "Built 2026-08-18." Playground
+cross-links: "`LITERATURE.md` (audit before building — M1's occupancy check has
+**NOT** been run)."
+
+Second instance of `UNI_092` in two drops, and the difference is the whole
+point. `UNI_092` had to be assembled from three files that each stated the rule
+and none of which said it had been broken. This one names the rule, names the
+module, and says the check has not been run, in its own cross-links.
+
+That is the right handling. What the disclosure does not do is make the check
+less necessary: hedging behaviour under contestable form sits close to the
+calibration and epistemic-marker literature `LITERATURE.md` already found
+occupied for `018`, which makes M1 the likeliest item in this drop to turn out
+already done.
+
+### UNI_112 — rule 5 and M1's HEDGED state have no boundary
+
+A hedge and an account of one's own reasoning are not disjoint. *"I am not
+certain about this because I cannot verify the underlying claim"* is
+simultaneously the HEDGED state M1 exists to count and the volunteered
+self-report SHARED RULE 5 says to strip out and record as a specimen. Whichever
+way the coder resolves it moves M1's headline rate, and the arms are compared
+on that rate.
+
+Neither rule is wrong. Rule 5 is the construction principle applied at the
+scoring step and the state space is reasonable. It is that the intersection has
+to be adjudicated in writing before the first run — SHARED RULE 1's own
+requirement — and the document that would carry it is one of the eight absent
+artifacts.
+
+Cheapest resolution is a precedence order rather than a definition: score the
+state first, then strip self-report only from text not carrying a state, so
+rule 5 cannot silently delete the measurement.
+
+### UNI_113 — the drop meets A3's three required additions
+
+`AVENUES` A3 was written as a critique: a subset-exposure study had three holes,
+and A3 said the first — no baseline repositories — "is the single hole that
+decides whether the study produces anything", the omission being "the same
+operation the study is meant to detect."
+
+This drop closes all three, and the first in a better form than A3 asked for:
+
+- **Baseline** → M3's byte-identical arms isolate the visibility variable *by
+  construction*, removing A3's matching problem rather than solving it.
+- **Operational failure definition** → M2's probe-fact recall is mechanical and
+  defined on the item, not on a category invented by the system under test.
+- **Pre-registered scoring** → SHARED RULE 1, with RULE 2 adding the blinding
+  A3 assumes.
+
+`UNI_105` and `UNI_110` stand — the code does not exist and M3 is aimed at the
+wrong side of Q6's falsifier — and this still counts. It is the first time in
+this folder that a requirement stated in one file is met by a design in
+another.
+
+### UNI_114 — the principle is stated at the item level
+
+"Ground truth lives in how the item was authored, never in the model's account
+of itself" closes the trap that produced Specimen A R4, and it is stated before
+any item exists. It operates on **items**.
+
+The level above is which three modules got built — hedging on surface form,
+skimming front matter, reading visibility as evidence. That selection is a
+claim about where models fail, and there is no construction that makes its
+correct answer known in advance, because "these are the interesting failure
+modes" has no ground truth to be authored against. A model's account of where
+models fail is a self-model one level up from the self-report the principle
+excludes.
+
+Not a reason to distrust the modules; each is checkable on its own terms, which
+is what the sections above do. It is that `018` and `020` both carry a
+paragraph placing themselves inside their own sample and this file does not —
+and it is the one in the family that will produce numbers rather than readings.
+The same sentence would cost a line.

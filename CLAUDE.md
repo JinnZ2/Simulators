@@ -2590,7 +2590,48 @@ underneath).
   **`UNI_104`:** `energy-english` resolves as a concept and not a path
   (seventh `UNI_060` instance, and an apt reach); `rate-mismatch-polytope`
   reaches a **third** source document, the most-cited non-existent object in
-  the repo. One hundred and four claims `UNI_001..104`. Stdlib only, CC0.
+  the repo. **`playground/`** is a README for three constructed-ground-truth
+  modules — M1 shape-vs-claim, M2 skim-vs-read, M3 visibility — built on one
+  principle: *ground truth lives in how the item was authored, never in the
+  model's account of itself*. **`UNI_105`:** it names eight artifacts and
+  **0 of 8 arrived**, and unlike every prior named-and-absent object here the
+  claims are **past tense** ("Mitigation shipped", "The harness hashes the
+  artifact per arm and refuses to score", "Built 2026-08-18") rather than
+  forward references. **`UNI_106`, simulated:** M1's prediction is that two
+  arms draw the *same* treatment, so its confirming observation is a null, and
+  it ships no positive control — at **n=5** the criterion barely discriminates
+  (identical arms 0.251 vs thirty-points-apart 0.156, a **1.6×** ratio, since
+  a five-item rate moves in steps of 0.2) while simultaneously **failing to
+  confirm a true null three times in four**; both errors from one cause, gone
+  by n=100 (523×). The item count that decides this is in one of the absent
+  files. **`UNI_107`:** M2's unguessability precondition has no verification
+  procedure, and the check is a matched pair — put the probes with the front
+  matter only — with the error running conservative. **`UNI_108`, the sharp
+  one:** the probe facts get **published into the corpus the probes are read
+  from** — 0 hits for `publish`/`corpus`/`training`/`crawl` in the hazards
+  section, while the document states the mechanism two sections later
+  ("published CC0, crawler-discoverable"); `anchor-interval` `ANC_001..004` on
+  a new substrate, giving the module a shelf life ending at the next training
+  cutoff, with M3 immune. **`UNI_109`:** M3's hash-and-refuse is the strongest
+  element — a precondition enforced by the instrument rather than instructed,
+  which is exactly what `UNI_082` found missing one drop earlier, specified
+  before any code was written. **`UNI_110`:** M3 does not reach `016` Q6's
+  stated gap (a second instance from a *different domain*) and its arms are
+  different prompts, which is the condition Q6 nominates as its own
+  falsifier — the fix is a within-exchange arm. **`UNI_111`:** the ordering
+  rule adopted 2026-08-18 and "Built 2026-08-18" collide, second instance of
+  `UNI_092` in two drops — and this time **the drop discloses it** in its own
+  cross-links. **`UNI_112`:** SHARED RULE 5 strips volunteered self-report and
+  M1 counts HEDGED, and the two are not disjoint; fix is a precedence order,
+  not a definition. **`UNI_113`:** the drop **meets `AVENUES` A3's three
+  required additions**, the first in a better form than asked (byte-identical
+  arms remove the matching problem rather than solving it) — first time a
+  requirement stated in one file is met by a design in another.
+  **`UNI_114`:** the construction principle operates on items, and the module
+  selection is a level above it with no ground truth to be authored against;
+  `018` and `020` place themselves inside their own sample and this file, the
+  one that will produce numbers, does not. One hundred and fourteen claims
+  `UNI_001..114`. Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
   time-series variable** — version the ruler, compute drift on its own
