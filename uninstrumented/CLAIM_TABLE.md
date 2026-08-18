@@ -1,11 +1,12 @@
 # CLAIM_TABLE — uninstrumented
 
-Thirty-three claims, `UNI_001..033`. **Three repaired** (`UNI_003`,
+Forty-one claims, `UNI_001..041`. **Three repaired** (`UNI_003`,
 `UNI_009`, `UNI_010`), see *Repairs* at the end. `UNI_013..019` come from
 the Case 010 drop ([`case_010_audit.py`](case_010_audit.py)),
 `UNI_020..026` from Case 011 ([`case_011_audit.py`](case_011_audit.py))
-and `UNI_027..033` from Case 012
-([`case_012_audit.py`](case_012_audit.py)).
+`UNI_027..033` from Case 012
+([`case_012_audit.py`](case_012_audit.py)) and `UNI_034..041` from Case 013
+([`case_013_audit.py`](case_013_audit.py)).
 
 ## REFUTATION_PROTOCOL
 
@@ -357,6 +358,28 @@ marked. `UNI_027` is arithmetic and is reproducible by running the script.
 | `UNI_031` | The rate figure **does not check out as stated**. Entry: flatbed "roughly $0.70–$1.20/mile above dry van, 2026 spot data". Located: $0.48/mile (March 2026, stated directly), and early-2026 averages of $2.47 dry van vs $2.95 flatbed give the same $0.48 independently. No matched-date pair located for late 2026. **Does not touch Q1**, which is an identity — it halves a downstream magnitude, not the structure. | SUPPORTED | A matched-date 2026 spot pair in the stated range. |
 | `UNI_032` | Q4 splits three ways. Its falsifier **partially fires** — BLS publishes the hedonic category list and its share, ~2.9% of the CPI ex-shelter. The **asymmetry is confirmed by that list** (PCs, TVs, audio, camcorders, DVD players, apparel, appliances, textbooks, broadband; neither food nor electricity). But the **magnitude constrains the mechanism**: "the aggregate can be held level by hedonic credit" now has a published upper bound and it is small. And there is a **denominator switch** — Q4 is about GDP real output (BEA), the located share is CPI (BLS), which is `measurement-fork`'s VOID RATIO inside a falsifier. | SUPPORTED (narrows the entry) | A published BEA adjustable-vs-non-adjustable real-output decomposition. |
 | `UNI_033` | Q3's two halves have **opposite epistemic status**. The non-linearity is a hypothesis with the sharpest falsifier in the drop and no data either way (reachable negative, so not `CONSTANT_SILENT`); the accounting claim is **true by construction** — household food is final consumption expenditure, labour is a primary input with no row in the intermediate matrix, so the calories sustaining it are intermediate consumption of no industry. The half marked "WOULD MEASURE: unclear" is the established one; the instrument is missing because the framework has no slot for the quantity, which makes Q3 the entry's best candidate for a filed mechanism. | SUPPORTED | An input-output framework carrying calories as intermediate consumption. |
+
+## Case 013 drop — UNI_034..041
+
+Case 013 (`cases/case-013.md`, delivered verbatim) is the fourth
+consecutive case the schema cannot hold, and the first that does not know
+whether it is one entry or two. Worked in
+[`case_013_audit.py`](case_013_audit.py).
+
+Sections 3, 4 and the NIST citation in 5 were web-checked on 2026-08-18
+and are marked. **The simulations in section 5 are stdlib, seeded and
+reproduce by running the script.**
+
+| id | statement | status | falsifier |
+| --- | --- | --- | --- |
+| `UNI_034` | A **fourth** refusal, and the first about the entry's own identity rather than a field: 010 declines to name its mechanism, 011 to be one quantity, 012 to carry one confidence, 013 **to be one entry or two**. The `UNI_020` sub-entry repair does not reach it — sub-entries presume the parent is one thing. The drop's instruction that the question "should not be resolved to get a cleaner filename" was honored: landed as `case-013.md`, which takes no position. | SUPPORTED | A representation for "this may be two entries, and which is open". |
+| `UNI_035` | `[stated by Kavik]` is the **first provenance tag inside a register entry**, and it is attached to one sub-question — the half the SPLIT IS OPEN section says may leave as a separate case, so it would leave with its attribution attached. `entry()` has nine fields and none carries who said it; 0 of 8 existing entries carry an attribution. | SUPPORTED | A provenance field on entries or sub-questions. |
+| `UNI_036` | The anchor is **fresher and more concrete than stated**: 5-digit SATCAT exhausted 2026-07-11 (Saramago), now at 100365, Alpha-5 explicitly a *stopgap* capped at 339,999 with I and O omitted to avoid confusion with 1 and 0, 9-digit GP/OMM since 2020, legacy TLE still in use alongside both. Q1's denominator therefore starts six weeks ago rather than decades — a better measurement position than claimed. And the compensation layer is **itself a fixed-width scheme with a population assumption**, so Q2's asymmetry recurs one level up rather than resolving. | SUPPORTED *(web, 2026-08-18)* | Existing objects being renumbered on overflow. |
+| `UNI_037` | "Objects recategorised" is **not what was located**. New objects get 100000+; Alpha-5 changes the *encoding*, not the assignment of existing objects — so for the existing population the analysed key does not move, which is Q3's own falsifier met from a direction the entry does not consider. Reassignments do occur, for merged/split objects from refined sensor observations — a physical-resolution event, not an overflow event. **Two sources of key movement, and the entry attributes to overflow what is documented for resolution.** Q1 would need to separate them, since only one is caused by the design-time omission. | SUPPORTED (corrects the entry) | Documented renumbering of existing objects at the overflow. |
+| `UNI_038` | Q3's transfer, simulated in three regimes. **All three flatten toward zero — the direction claim survives everywhere tested**, including regime 3, which was built expecting it to fail. What does not transfer is the mechanism: regime 1 is classical errors-in-variables (attenuation = the reliability ratio, matched to 3 dp), regime 2 non-differential misclassification (exactly `1−2p`), regime 3 variance inflation from a block remap (down to **1%** of the true slope, against 50% for a classical error). "Structurally the same as the NIST dimming effect" is true of the direction and nothing else, and the catalog cases are **worse** than the nanoparticle case. Caution the entry omits: regime 3 assumes the key is a numeric covariate; the strongest form of Q3 is regime 2, mis-joins across reconciled schemes. | SUPPORTED *(reproducible)* — strengthens Q3 | A regime where a key remap inflates rather than attenuates. |
+| `UNI_039` | The Case 010 cross-link **lands, and corrects `UNI_019`**. A periodic scaffold has interchangeable positions; a sequence-addressed one does not, so matched pitch is not a matched control if the contribution depends on distinguishability. Consequence is a specific **false negative**: Case 010's flat branch ("the organic layer is functioning as a geometric ruler") would also fire when addressing is everything, because the comparator cannot express it. `UNI_019`'s assessment holds on the organic-vs-inorganic axis and was too generous on the addressing axis. Repair is one arm — matched pitch *and* aperiodic position-distinguishable structure. | SUPPORTED — corrects a prior finding | The two-arm design separating pitch from addressing. |
+| `UNI_040` | Q4's comparison class **survives in a narrower form**. A DNA sequence of length L addresses 4^L states, so "no block to overflow" is not literally true; the statable version is that **capacity scales with the object rather than being fixed by a register** — one more base multiplies capacity by four, where widening a counter rewrites every consumer of the field. The middle term was already in the anchor's own records and goes unmentioned: the COSPAR designator is compositional, so its year field is open-ended and capacity grows with time. | SUPPORTED (narrows the entry) | An object-carried scheme with a fixed capacity that cannot grow with the object. |
+| `UNI_041` | Four of four cross-links resolve — first drop in this sequence with no dangling reference (`rate-mismatch-polytope` is not cited here). Confidence is a **fifth** state of the one string field: an absence with a stated unlock condition ("Q3 alone could take a gradient once Q1's data exists"), which is a dependency between sub-questions. `entry()` still cannot tell any of the five from an omission (`UNI_021`). | SUPPORTED | A confidence field carrying an unlock condition. |
 
 ## Repairs
 

@@ -7,9 +7,10 @@ Everything below is added analysis. The delivered files are
 checks on itself), [`scan_audit.py`](scan_audit.py) (grades the scanner),
 [`case_010_audit.py`](case_010_audit.py),
 [`case_011_audit.py`](case_011_audit.py) and
-[`case_012_audit.py`](case_012_audit.py) (checks on the three delivered
-cases) and [`CLAIM_TABLE.md`](CLAIM_TABLE.md). `cases/case-010.md`,
-`cases/case-011.md` and `cases/case-012.md` are delivered, verbatim.
+[`case_012_audit.py`](case_012_audit.py) and
+[`case_013_audit.py`](case_013_audit.py) (checks on the four delivered
+cases) and [`CLAIM_TABLE.md`](CLAIM_TABLE.md). `cases/case-010.md`
+through `cases/case-013.md` are delivered, verbatim.
 
 The delivered README supersedes what follows on two points, and both are
 carried into the claim table rather than silently corrected:
@@ -677,3 +678,213 @@ instrument is missing not because the fact is uncertain but because the
 framework has no slot for the quantity — which is this register's own
 subject, and makes Q3 the entry's best candidate for a filed mechanism if
 one had to be chosen today.
+
+---
+
+## Case 013 — the case that does not know if it is one case
+
+`cases/case-013.md`, delivered verbatim. Checks in
+[`case_013_audit.py`](case_013_audit.py); claims `UNI_034..041`.
+
+The simulations in §5 are stdlib, seeded, and reproduce by running the
+script — the first time in this register that a delivered entry's
+load-bearing technical claim could be settled by running something rather
+than by searching.
+
+### UNI_034 — a fourth refusal, about the record rather than a field
+
+| case | declines | schema field |
+|---|---|---|
+| 010 | to name its mechanism | `excluded_by`, closed vocabulary |
+| 011 | to be one quantity | `quantity`, scalar |
+| 012 | to carry one confidence | `confidence`, one string |
+| **013** | **to be one entry, or two** | **the entry itself** |
+
+`entry()` returns one dict, and the `UNI_020` sub-entry repair does not
+reach this — sub-entries let a cluster hold several questions under one
+parent, which presumes the parent is one thing.
+
+The drop anticipates the pressure a filename applies and says so directly:
+the one-or-two question "should not be resolved to get a cleaner
+filename". Honored — landed as `case-013.md`, the register's own
+numbering, which takes no position. A name drawn from either half would
+have.
+
+### UNI_035 — provenance inside an entry
+
+`[stated by Kavik]`, attached to Q4. First provenance tag inside a
+register entry, and it is at sub-question granularity rather than entry
+granularity — which is the right level here, because Q4 is the half the
+SPLIT IS OPEN section says may leave as its own case, and it would leave
+with the attribution attached.
+
+`../held-open-uncertainty/OPEN_QUESTIONS.md` does this per entry
+(`HO_001`). `entry()` has nine fields; none carries who said it, and 0 of
+8 existing entries carry an attribution.
+
+### UNI_036 / UNI_037 — the anchor, and what it does not say
+
+Located, all dated:
+
+    5-digit SATCAT exhausted 2026-07-11 with the addition of Saramago
+    official USSF SATCAT now at 100365; new objects get 100000+
+    Alpha-5: alphanumeric first character, called a STOPGAP by its
+      publisher, capacity 339,999, letters I and O omitted to avoid
+      confusion with the digits 1 and 0
+    9-digit catalogue numbers in GP/OMM formats, introduced 2020
+    legacy fixed-width TLE/3LE still in use alongside both
+
+Three coexisting representations is the "parallel schemes, reconciliation
+routines between them" the entry names — running now, documented. And the
+overflow is **six weeks old**, so Q1's "per year since the overflow"
+denominator starts essentially now rather than being reconstructed. That
+is a better measurement position than the entry claims for itself.
+
+Two details the entry does not extract. Alpha-5 gives up capacity (I and
+O) to prevent a legibility failure it introduced. And it is a stopgap with
+a stated ceiling — so **the compensation layer is itself a fixed-width
+scheme with a design-time population assumption**, which is Q2's asymmetry
+recurring one level up rather than resolving.
+
+**The correction.** The entry says high number blocks are opened "and
+objects recategorised", and treats that as the event that moves the key.
+What was located is narrower: new objects get 100000+, and Alpha-5 changes
+the **encoding** of numbers ≥100000 so they fit five characters. Neither
+renumbers an existing object. If existing numbers do not move, the
+analysed key does not move for the existing population — Q3's own
+falsifier, met from a direction the entry does not consider.
+
+Reassignments *do* occur, for a different reason: corrections when
+tracking data reveals merged or split objects from refined sensor
+observations. That is a physical-resolution event, not an overflow event.
+**Two distinct sources of key movement, and the entry attributes to
+overflow what is documented for resolution.** Q1's measurement would have
+to separate them, because only one is caused by the design-time omission
+the case is about.
+
+The falsifier's other half also partly fires: the COSPAR International
+Designator (launch year, launch number, piece letter) is published
+alongside the NORAD number and does not overflow on a fixed field width,
+so a population analysed by COSPAR ID is stable against the overflow
+source. It is not stable against the resolution source — a split adds a
+piece letter.
+
+### UNI_038 — Q3's transfer, simulated
+
+Citation checks out: Adam Pintar and Samuel Stavis, NIST, August 2026, the
+"dimming effect" in nanoparticle sizing with a correction that reverses
+it. The entry's one-line characterisation is accurate.
+
+The transfer is checkable by simulation, so it was simulated. Three
+regimes, because a catalog number is used in more than one way and those
+are not the same statistics.
+
+| regime | mechanism | measured attenuation |
+|---|---|---|
+| 1 — continuous X, random additive error (the NIST case) | classical errors-in-variables | ratio = reliability ratio, matched to 3 dp (0.998 / 0.797 / 0.500 / 0.198) |
+| 2 — grouping key, records mis-attached (the join case) | non-differential misclassification | exactly `1−2p` (1.02 / 0.78 / 0.52 / 0.18) |
+| 3 — subset moved to a distant block (the overflow case) | variance inflation | 0.099 / 0.010 / 0.021 — down to **1%** of the true slope |
+
+**All three flatten toward zero.** Q3's direction claim survives in every
+regime tested — including regime 3, which was built expecting it to fail.
+An order-preserving remap looked like it could bias either way; it does
+not, because moving a subset into a distant block inflates `var(X)` far
+more than it adds covariance. Recorded because the expectation was wrong
+and the simulation is what settled it.
+
+What does not transfer is the **mechanism**. Three distinct derivations
+with one shared direction. "Structurally the same as the NIST dimming
+effect" is true of the direction and of nothing else — and the catalog
+cases are *worse* than the nanoparticle case (1% versus 50%), which
+strengthens Q3 rather than weakening it.
+
+One caution the entry omits: regime 3 assumes the key is used as a numeric
+covariate, and regressing an outcome on a catalog number is rarely
+meaningful. **The strongest form of Q3 is regime 2** — mis-joins across
+reconciled schemes — because that is the operation the compensation layer
+performs constantly.
+
+### UNI_039 — the Case 010 cross-link corrects UNI_019
+
+Case 013 says Case 010 "reads it as a geometric constraint on silver
+placement; that reading may be incomplete", because the sequence is the
+address.
+
+**It lands, and it corrects a finding recorded in this file.** `UNI_019`
+called Case 010's comparator the load-bearing element and a known-null in
+`../null-harness/` terms, because matched spacing and matched Ag loading
+isolate *organic* from *periodic scaffold with silver in it*. That holds
+on the organic-versus-inorganic axis and was too generous on a second axis
+the comparator does not control.
+
+A periodic scaffold has one spacing repeated and its positions are
+interchangeable. A sequence-addressed scaffold has positions
+distinguishable from one another — that is what "the structure is the
+address" means. If the DNA layer's contribution depends on
+distinguishability rather than on pitch, matched pitch is not a matched
+control: the comparator differs from the hybrid in the dimension under
+test.
+
+The consequence is a specific **false negative**. Case 010's flat branch
+reads *"the organic layer is functioning as a geometric ruler and any
+periodic scaffold of matched pitch substitutes"*. Under the addressing
+reading, a flat margin is also what you get when addressing is everything
+and the comparator cannot express it — so the branch meant to say
+"geometry was enough" fires in both cases.
+
+Repair is one arm: a comparator with matched pitch **and** aperiodic,
+position-distinguishable structure — same spacing statistics, same Ag
+loading, sequence scrambled. That separates pitch from addressing, which
+the delivered two-arm design cannot.
+
+The entry's "do not collapse them" is right for the reason it gives:
+evidence propagates both ways. This finding is an instance — a claim in
+Case 013 changed the reading of a claim about Case 010.
+
+### UNI_040 — Q4's comparison class, narrowed
+
+Its falsifier — "fails if object-carried identification schemes turn out
+to have their own bounded capacity under a different name" — does not
+fail, and the class does not survive as stated either.
+
+A DNA sequence of length L over four letters addresses 4^L states, which
+is bounded, so "no block to overflow" is not literally true. The statable
+version is that **capacity scales with the object rather than being fixed
+by a register**: one more base multiplies capacity by four at the cost of
+one base, where widening a fixed counter rewrites every consumer of the
+field — which is exactly the compensation load Q1 is about.
+
+The middle term was already in the anchor's own records and goes
+unmentioned. The COSPAR designator is **compositional** — launch year,
+launch number within the year, piece letter — so its year field is
+open-ended and capacity grows with time rather than being drawn from a
+fixed pool. It sits between the sequential counter and the
+sequence-as-address family, in the same records as the counter. That is
+the cheapest next step for Q4: the comparison class does not have to be
+reached for across substrates, because a partial instance is published
+alongside the anchor.
+
+### UNI_041 — cross-links and a fifth confidence state
+
+    Case 010        resolves
+    Case 011        resolves
+    Case 012        resolves
+    Mechanism 11    resolves
+
+First drop in this sequence with **no dangling reference**;
+`rate-mismatch-polytope` (`UNI_026`, `DD_008`) is not cited here.
+
+Confidence is a fifth state of one string field: an absence with a stated
+**unlock condition** — "Q3 alone could take a gradient once Q1's data
+exists" — which is a dependency between sub-questions rather than a value.
+
+| state | first seen |
+|---|---|
+| `high` | the eight originals |
+| a gradient | Case 010 |
+| a reasoned absence | Case 011 |
+| a split across sub-questions | Case 012 |
+| an absence with an unlock condition | Case 013 |
+
+`entry()` stores a string and cannot tell any of the five from an omission
+(`UNI_021`).

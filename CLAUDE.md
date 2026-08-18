@@ -2203,7 +2203,53 @@ underneath).
   intermediate matrix, so the calories sustaining it are intermediate
   consumption of no industry. The half marked "WOULD MEASURE: unclear" is
   the established one, which inverts the register's usual pattern and makes
-  Q3 the entry's best candidate for a filed mechanism. **REPAIRED:** `UNI_003` (`entry()` takes a primary plus
+  Q3 the entry's best candidate for a filed mechanism.
+  **`cases/case-013.md`** is the fourth case the schema cannot hold and the
+  first whose refusal is about the record rather than a field: compensation
+  load from design-time dimension omission, anchored on satellite
+  cataloging. **`UNI_034`:** 010 declines to name its mechanism, 011 to be
+  one quantity, 012 to carry one confidence, **013 to be one entry or two**
+  — and the `UNI_020` sub-entry repair does not reach it, since sub-entries
+  presume the parent is one thing; the drop's instruction that the question
+  "should not be resolved to get a cleaner filename" was honored by landing
+  it under the register's own numbering. **`UNI_038`, the load-bearing
+  check:** Q3 claims the NIST dimming effect (Pintar, Stavis, NIST Aug 2026
+  — citation verified) transfers to a discontinuously reassigned sorting
+  key, and that is simulable, so it was simulated in three regimes.
+  **All three flatten toward zero** — including the one built expecting it
+  to fail, because moving a subset into a distant block inflates `var(X)`
+  far more than it adds covariance. What does not transfer is the
+  MECHANISM: classical errors-in-variables (attenuation = reliability
+  ratio, matched to 3 dp), non-differential misclassification (exactly
+  `1−2p`), and variance inflation from a block remap (down to **1%** of the
+  true slope against 50% for a classical error). "Structurally the same as
+  the NIST dimming effect" is true of the direction and nothing else, and
+  the catalog cases are *worse* than the nanoparticle case — which
+  strengthens Q3. The strongest form is the join case, not the covariate
+  case. **`UNI_039`:** the Case 010 cross-link lands and **corrects
+  `UNI_019`** — a periodic scaffold has interchangeable positions, a
+  sequence-addressed one does not, so matched pitch is not a matched
+  control if the contribution depends on distinguishability; Case 010's
+  flat branch would fire both when geometry was enough and when addressing
+  is everything, a specific false negative, repaired by one more arm
+  (matched pitch AND aperiodic position-distinguishable structure).
+  **`UNI_036`/`UNI_037`:** the anchor is fresher than stated — 5-digit
+  SATCAT exhausted **2026-07-11**, now at 100365, Alpha-5 a self-declared
+  *stopgap* capped at 339,999 with I and O dropped to avoid confusion with
+  1 and 0, three representations coexisting — so Q1's denominator starts
+  six weeks ago; but "objects recategorised" is not what was located, since
+  Alpha-5 changes the ENCODING and does not renumber existing objects,
+  and the documented reassignments are merged/split objects from refined
+  sensor observations, a resolution event rather than an overflow event.
+  **`UNI_040`:** Q4's comparison class narrows — 4^L is bounded, so the
+  statable version is that capacity scales with the object rather than
+  being fixed by a register, and the middle term (the compositional COSPAR
+  designator, open-ended in its year field) was already in the anchor's own
+  records. **`UNI_035`:** `[stated by Kavik]` is the first provenance tag
+  inside an entry, at sub-question granularity, on the half that would
+  leave if the split happens. **`UNI_041`:** first drop in the sequence
+  with no dangling cross-link, and a fifth state of the confidence field —
+  an absence with a stated unlock condition. **REPAIRED:** `UNI_003` (`entry()` takes a primary plus
   an `also` list and the register sorts under every mechanism — which is
   what lets check 1 return anything but zero: 5 mechanisms now hold entries
   from more than one field, though weakly, since the secondaries were
@@ -2221,7 +2267,7 @@ underneath).
   enforced one mechanism per sentence — it does not, the `break` exits the
   trigger loop and mechanisms already co-fire, so the wrong-mechanism
   finding was a missing trigger rather than a blocked co-firing. Nineteen
-  claims `UNI_001..033`. Stdlib only, CC0.
+  claims `UNI_001..041`. Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
   time-series variable** — version the ruler, compute drift on its own
