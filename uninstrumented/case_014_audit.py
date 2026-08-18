@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """case_014_audit.py -- checks on the Case 014 drop.
 
-Added, not delivered. `cases/case-014.md` is the entry as received and is
+Added, not delivered. `cases/014offloadingevolutionaryframing.md` is the entry as received and is
 not modified. Findings recorded in AUDIT_NOTES.md as UNI_042..UNI_049.
 
     python3 case_014_audit.py
@@ -25,7 +25,7 @@ import re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-CASE = io.open(os.path.join(HERE, "cases", "case-014.md"),
+CASE = io.open(os.path.join(HERE, "cases", "014offloadingevolutionaryframing.md"),
                encoding="utf-8").read()
 README = io.open(os.path.join(HERE, "README.md"), encoding="utf-8").read()
 BAR = "=" * 72
@@ -44,7 +44,7 @@ def block(t):
 
 subq = re.findall(r"^## (Q\d) — (.*)$", CASE, re.M)
 print("uninstrumented -- audit of the Case 014 drop")
-print("delivered: cases/case-014.md")
+print("delivered: cases/014offloadingevolutionaryframing.md")
 print("cluster   : %d sub-questions, mechanism unassigned" % len(subq))
 
 # ---------------------------------------------------------------- UNI_042
@@ -102,9 +102,9 @@ print("  wiki-style references in this entry: %s" % ", ".join(sorted(set(refs)))
 print("  cited %d times" % len(refs))
 print("  folder ../%s exists: %s"
       % (refs[0], os.path.isdir(os.path.join(ROOT, refs[0]))))
-c011 = io.open(os.path.join(HERE, "cases", "case-011.md"),
+c011 = io.open(os.path.join(HERE, "cases", "011rebuildabandonmentcycles.md"),
                encoding="utf-8").read()
-print("  also named in case-011.md Q4: %s"
+print("  also named in 011rebuildabandonmentcycles.md Q4: %s"
       % ("tool-off" in c011 or "competence-residual" in c011))
 block("""
 `tool-off-metrology` does not exist anywhere in the tree. It is named
@@ -305,9 +305,9 @@ free text.
 
 head(8, "UNI_049", "the withheld slot, third instance -- and Q3 states the register's thesis")
 print()
-for src in ("../uninstrumented/cases/case-011.md  Q5",
+for src in ("../uninstrumented/cases/011rebuildabandonmentcycles.md  Q5",
             "../derivation-discarded/MECHANISM_11.md  sub-question 4",
-            "cases/case-014.md  Q3"):
+            "cases/014offloadingevolutionaryframing.md  Q3"):
     print("    %s" % src)
 block("""
 Third instance in three drops. `DD_007` recorded it as "a recurring

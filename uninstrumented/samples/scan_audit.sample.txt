@@ -69,10 +69,10 @@ GRADING scan.py + patterns.json
   binding constraint is not precision but how many `check`
   questions a human must answer per unit of text.
 
-  corpus: 960 files (.txt .md .rst .org .csv .json .jsonl .py), 834503 words
-    all candidates        744   0.9 per 1000 words
-    strength=candidate    422   0.5 per 1000 words
-    strength=weak         322
+  corpus: 1105 files (.txt .md .rst .org .csv .json .jsonl .py), 1053690 words
+    all candidates        875   0.8 per 1000 words
+    strength=candidate    497   0.5 per 1000 words
+    strength=weak         378
 
   The `weak` band is the delivered scanner's own confidence
   gradient -- reported, never used to filter, which is the same
@@ -83,39 +83,39 @@ GRADING scan.py + patterns.json
 
   Densest files:
 
-    CLAUDE.md                                            19275 w   33 hits   1.7 /1000
+    CLAUDE.md                                            34277 w   44 hits   1.3 /1000
     legacy/Organize3.md                                  17643 w   29 hits   1.6 /1000
     grounding-layers/l5_human_construct.py                1926 w   22 hits  11.4 /1000
+    uninstrumented/CLAIM_TABLE.md                         7761 w   21 hits   2.7 /1000
     fragility-cascade/CLAIM_TABLE.md                     19662 w   18 hits   0.9 /1000
     uninstrumented/scan_audit.py                          2516 w   18 hits   7.2 /1000
-    uninstrumented/CLAIM_TABLE.md                         2919 w   15 hits   5.1 /1000
 
 ========================================================================
 3  concentration and coverage
 ========================================================================
-  744 candidates, 8 mechanisms, 71 triggers defined
+  875 candidates, 8 mechanisms, 71 triggers defined
 
     mechanism                  hits    share
     ----------------------------------------
-    SCORED AS WASTE             200    26.9%
-    AUTHORED REFERENCE          157    21.1%
-    BUDGET BOUNDARY             113    15.2%
-    AUDIT ASYMMETRY             103    13.8%
-    PROXY SUBSTITUTION          101    13.6%
-    STORAGE                      37     5.0%
-    SCALAR DEMAND                20     2.7%
-    MODALITY                     13     1.7%
+    SCORED AS WASTE             207    23.7%
+    AUTHORED REFERENCE          175    20.0%
+    BUDGET BOUNDARY             165    18.9%
+    AUDIT ASYMMETRY             133    15.2%
+    PROXY SUBSTITUTION          125    14.3%
+    STORAGE                      37     4.2%
+    SCALAR DEMAND                20     2.3%
+    MODALITY                     13     1.5%
 
   Top matched strings:
 
-    AUTHORED REFERENCE     benchmark                       106
-    AUDIT ASYMMETRY        unverified                       86
-    SCORED AS WASTE        slack                            85
-    PROXY SUBSTITUTION     compliance                       52
-    AUTHORED REFERENCE     ground truth                     48
-    SCORED AS WASTE        redundancy                       34
+    AUTHORED REFERENCE     benchmark                       123
+    AUDIT ASYMMETRY        unverified                      116
+    SCORED AS WASTE        slack                            86
+    PROXY SUBSTITUTION     compliance                       54
+    AUTHORED REFERENCE     ground truth                     49
+    PROXY SUBSTITUTION     count of                         35
 
-  4 matched strings produce 329 of 744 candidates (44%).
+  4 matched strings produce 379 of 875 candidates (43%).
 
   Corpus-conditional, and neither number grades the list.
   SCALAR DEMAND is near-silent because this corpus contains no
@@ -134,13 +134,13 @@ GRADING scan.py + patterns.json
 
     `lean`     13 hits   surrounding forms: lean x15, clean x4, boolean x4, cleanly x3
              the bare word appears 15 time(s)
-    `slack`    85 hits   surrounding forms: slack x109, slack_radius x31, slack_monitor x2, slacken x2
-             the bare word appears 109 time(s)
+    `slack`    86 hits   surrounding forms: slack x110, slack_radius x31, slack_monitor x2, slacken x2
+             the bare word appears 110 time(s)
 
   `lean` is the most-fired trigger in the corpus and nearly all
   of it is `clean`, `cleanly` and `boolean`. Adding word
-  boundaries to that one trigger removes ~13 of 744 candidates
-  (2%) at no cost, because the bare word is rare here.
+  boundaries to that one trigger removes ~13 of 875 candidates
+  (1%) at no cost, because the bare word is rare here.
 
   `slack` is the harder case and stays: the bare word IS what
   mostly matches, and the noise is a proper-noun homograph and a
@@ -158,26 +158,36 @@ GRADING scan.py + patterns.json
   and CLAIM_TABLE.md calls it the cheapest of the three
   unworked entries to run. scan.py --asym is that measurement.
 
-    files with an account mention   363
-    files with ANY hedge at all     10
-    outside    hedged   6 of  480   0.0125
-    incumbent  hedged   7 of  631   0.0111
-    ratio (outside/incumbent)       1.13
+    files with an account mention   434
+    files with ANY hedge at all     16
+    outside    hedged   7 of  574   0.0122
+    incumbent  hedged  16 of  861   0.0186
+    ratio (outside/incumbent)       0.66
 
   Every hedge in the corpus, hand-checked:
 
     CLAUDE.md                                'claims to'
     CLAUDE.md                                'UNVERIFIED'
+    CLAUDE.md                                'UNVERIFIED'
+    CLAUDE.md                                'UNVERIFIED'
+    CLAUDE.md                                'UNVERIFIED'
     anchor-interval/CLAIM_TABLE.md           'UNVERIFIED'
     anchor-interval/README.md                'UNVERIFIED'
+    criteria-drift/CLAIM_TABLE.md            'UNVERIFIED'
     fragility-cascade/THERMO_PM.md           'unverified'
     fragility-cascade/THERMO_PM.md           'unverified'
     grounding-layers/scope_profile.py        'claim to'
+    held-open-uncertainty/AUDIT_NOTES.md     'UNVERIFIED'
     incentive-blindspot-sim/README.md        'claims to'
     incentive-blindspot-sim/REORG_REPORT.md  'unverified'
     incentive-blindspot-sim/REORG_REPORT.md  'unverified'
     incentive-blindspot-sim/sim/incentive_bl 'claims to'
+    presented-binary/AUDIT_NOTES.md          'UNVERIFIED'
     triad-playground/spec_v1.json            'Self-reported'
+    uninstrumented/AUDIT_NOTES.md            'UNVERIFIED'
+    uninstrumented/AUDIT_NOTES.md            'UNVERIFIED'
+    uninstrumented/case_010_audit.py         'UNVERIFIED'
+    uninstrumented/case_012_audit.py         'UNVERIFIED'
     uninstrumented/patterns.json             'anecdotal'
 
   All of them are artifacts: `UNVERIFIED` and `unverified` as
@@ -201,8 +211,8 @@ GRADING scan.py + patterns.json
   patterns.json holds the trigger strings, and the scanner reads
   .json. So the definition file is in the corpus:
 
-    candidates from the scanner's own files: 32 of 744
-      uninstrumented/AUDIT_NOTES.md                3
+    candidates from the scanner's own files: 45 of 875
+      uninstrumented/AUDIT_NOTES.md                16
       uninstrumented/patterns.json                 10
       uninstrumented/scan.py                       1
       uninstrumented/scan_audit.py                 18

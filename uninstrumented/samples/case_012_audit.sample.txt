@@ -1,5 +1,5 @@
 uninstrumented -- audit of the Case 012 drop
-delivered: cases/case-012.md
+delivered: cases/012fuelincidencesubstrategoods.md
 cluster   : 5 sub-questions, mechanism candidates named not assigned
 
 ========================================================================

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """case_011_audit.py -- checks on the Case 011 drop.
 
-Added, not delivered. `cases/case-011.md` is the entry as received and is
+Added, not delivered. `cases/011rebuildabandonmentcycles.md` is the entry as received and is
 not modified. Findings recorded in AUDIT_NOTES.md as UNI_020..UNI_026.
 
     python3 case_011_audit.py
@@ -30,7 +30,7 @@ import uninstrumented as U
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-CASE = io.open(os.path.join(HERE, "cases", "case-011.md"),
+CASE = io.open(os.path.join(HERE, "cases", "011rebuildabandonmentcycles.md"),
                encoding="utf-8").read()
 BAR = "=" * 72
 
@@ -49,7 +49,7 @@ def block(t):
 subq = re.findall(r"^### (Q\d) — (.*)$", CASE, re.M)
 
 print("uninstrumented -- audit of the Case 011 drop")
-print("delivered: cases/case-011.md")
+print("delivered: cases/011rebuildabandonmentcycles.md")
 print("register  : %d entries, %d mechanisms" % (len(U.ENTRIES),
                                                  len(U.MECHANISMS)))
 print("cluster   : %d sub-questions" % len(subq))
@@ -282,7 +282,7 @@ links = [
     ("generation-capacity", os.path.isdir(os.path.join(ROOT, "generation-capacity"))),
     ("rural-conflation case", os.path.exists(os.path.join(
         ROOT, "category-weld", "welds", "rural.json"))),
-    ("Case 010", os.path.exists(os.path.join(HERE, "cases", "case-010.md"))),
+    ("Case 010", os.path.exists(os.path.join(HERE, "cases", "010coupledperturbationbiohybrid.md"))),
 ]
 for name, ok in links:
     print("    %-26s %s" % (name, "resolves" if ok else "ABSENT"))

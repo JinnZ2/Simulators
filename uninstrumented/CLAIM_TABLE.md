@@ -1,6 +1,6 @@
 # CLAIM_TABLE — uninstrumented
 
-Fifty-seven claims, `UNI_001..057`. **Three repaired** (`UNI_003`,
+Fifty-eight claims, `UNI_001..058`. **Three repaired** (`UNI_003`,
 `UNI_009`, `UNI_010`), see *Repairs* at the end. `UNI_013..019` come from
 the Case 010 drop ([`case_010_audit.py`](case_010_audit.py)),
 `UNI_020..026` from Case 011 ([`case_011_audit.py`](case_011_audit.py))
@@ -302,7 +302,7 @@ instrument, aimed one step earlier.
 
 ## Case 010 drop — UNI_013..019
 
-Case 010 (`cases/case-010.md`, delivered verbatim) is the first entry
+Case 010 (`cases/010coupledperturbationbiohybrid.md`, delivered verbatim) is the first entry
 that declines to name its mechanism, states a confidence below the
 ceiling, and carries a live external occasion with a DOI. Worked in
 [`case_010_audit.py`](case_010_audit.py).
@@ -323,7 +323,7 @@ which does no network access.
 
 ## Case 011 drop — UNI_020..026
 
-Case 011 (`cases/case-011.md`, delivered verbatim) is the second
+Case 011 (`cases/011rebuildabandonmentcycles.md`, delivered verbatim) is the second
 consecutive delivered case the schema cannot hold, and it strains it in a
 different place: Case 010 declined to name its mechanism, Case 011 declines
 to be one quantity. Worked in [`case_011_audit.py`](case_011_audit.py).
@@ -343,7 +343,7 @@ marked; they are not reproducible by running the audit script.
 
 ## Case 012 drop — UNI_027..033
 
-Case 012 (`cases/case-012.md`, delivered verbatim) is the third
+Case 012 (`cases/012fuelincidencesubstrategoods.md`, delivered verbatim) is the third
 consecutive delivered case the schema cannot hold, and the **first whose
 stated confidence is checkable by computation** rather than recorded
 verbatim. Worked in [`case_012_audit.py`](case_012_audit.py).
@@ -363,7 +363,7 @@ marked. `UNI_027` is arithmetic and is reproducible by running the script.
 
 ## Case 013 drop — UNI_034..041
 
-Case 013 (`cases/case-013.md`, delivered verbatim) is the fourth
+Case 013 (`cases/013compensationloadunattributed.md`, delivered verbatim) is the fourth
 consecutive case the schema cannot hold, and the first that does not know
 whether it is one entry or two. Worked in
 [`case_013_audit.py`](case_013_audit.py).
@@ -374,7 +374,7 @@ reproduce by running the script.**
 
 | id | statement | status | falsifier |
 | --- | --- | --- | --- |
-| `UNI_034` | A **fourth** refusal, and the first about the entry's own identity rather than a field: 010 declines to name its mechanism, 011 to be one quantity, 012 to carry one confidence, 013 **to be one entry or two**. The `UNI_020` sub-entry repair does not reach it — sub-entries presume the parent is one thing. The drop's instruction that the question "should not be resolved to get a cleaner filename" was honored: landed as `case-013.md`, which takes no position. | SUPPORTED | A representation for "this may be two entries, and which is open". |
+| `UNI_034` | A **fourth** refusal, and the first about the entry's own identity rather than a field: 010 declines to name its mechanism, 011 to be one quantity, 012 to carry one confidence, 013 **to be one entry or two**. The `UNI_020` sub-entry repair does not reach it — sub-entries presume the parent is one thing. On naming: it first landed as `case-013.md` (the register's numbering, no position), and the author's later file delivery supplies `013compensationloadunattributed.md` — the entry's **own** working handle, which the entry labels as naming "the first half only", so provisional by the entry's own statement. The filename now names Q1–Q3 and not Q4. | SUPPORTED | A representation for "this may be two entries, and which is open". |
 | `UNI_035` | `[stated by Kavik]` is the **first provenance tag inside a register entry**, and it is attached to one sub-question — the half the SPLIT IS OPEN section says may leave as a separate case, so it would leave with its attribution attached. `entry()` has nine fields and none carries who said it; 0 of 8 existing entries carry an attribution. | SUPPORTED | A provenance field on entries or sub-questions. |
 | `UNI_036` | The anchor is **fresher and more concrete than stated**: 5-digit SATCAT exhausted 2026-07-11 (Saramago), now at 100365, Alpha-5 explicitly a *stopgap* capped at 339,999 with I and O omitted to avoid confusion with 1 and 0, 9-digit GP/OMM since 2020, legacy TLE still in use alongside both. Q1's denominator therefore starts six weeks ago rather than decades — a better measurement position than claimed. And the compensation layer is **itself a fixed-width scheme with a population assumption**, so Q2's asymmetry recurs one level up rather than resolving. | SUPPORTED *(web, 2026-08-18)* | Existing objects being renumbered on overflow. |
 | `UNI_037` | "Objects recategorised" is **not what was located**. New objects get 100000+; Alpha-5 changes the *encoding*, not the assignment of existing objects — so for the existing population the analysed key does not move, which is Q3's own falsifier met from a direction the entry does not consider. Reassignments do occur, for merged/split objects from refined sensor observations — a physical-resolution event, not an overflow event. **Two sources of key movement, and the entry attributes to overflow what is documented for resolution.** Q1 would need to separate them, since only one is caused by the design-time omission. | SUPPORTED (corrects the entry) | Documented renumbering of existing objects at the overflow. |
@@ -385,7 +385,7 @@ reproduce by running the script.**
 
 ## Case 014 drop — UNI_042..049
 
-Case 014 (`cases/case-014.md`, delivered verbatim) is the fifth
+Case 014 (`cases/014offloadingevolutionaryframing.md`, delivered verbatim) is the fifth
 consecutive case the schema cannot hold, and the first whose EXCLUDED BY
 says that nothing excludes it. Worked in
 [`case_014_audit.py`](case_014_audit.py).
@@ -424,6 +424,16 @@ in §5 reproduces by running the script.
 | `UNI_055` | **The headline number rests on a figure that was not located.** At 0.05% the arithmetic is exact (5/0.05 = 100, two orders). The 0.05% figure was not located; the located category description gives **0.5%** as the low end — an order of magnitude above, which would halve the exponent. The entry may be quoting a Prevotella-specific threshold from the source, a different quantity from the category's general low end. Recorded as NOT LOCATED, not as wrong. | the source paper's stated historical threshold | NOT LOCATED (the one number the headline depends on) |
 | `UNI_056` | DEFINITIONAL PRECEDENCE is a **fourth state** against the register's founding binary (`UNI_042`), and differs in kind from the third: not "nobody looked" but "somebody looked, published it in the same field, and the category converted it into a methods problem." **It names an operation, not an absence** — the other mechanism candidates name a quantity with no register; this one names something that runs on data that did arrive, and it has the best-instanced anchor of the four. | an instance where the category admitted the observation as evidence | SUPPORTED (holds) |
 | `UNI_057` | Four of four cross-links resolve — second drop with no dangling reference, after Case 013. The `presented-binary` link is accurate to that folder, with the twist `UNI_051` supplies: the option space was not in fact constrained to two, so the alternatives were present, documented, and not reached for. Confidence is split across the cluster again (Case 012's state, second appearance); five states of the one string field are now in the wild. | a dangling link, or an unsplit confidence | SUPPORTED |
+
+## Re-delivery — UNI_058
+
+The five cases 010–014 were re-delivered as files with descriptive
+filenames after all five had already landed from inline text. Recorded
+because the comparison is cheap and the result is not automatic.
+
+| id | statement | status | falsifier |
+| --- | --- | --- | --- |
+| `UNI_058` | All five re-delivered cases are **byte-identical** to the checked-in copies — 0 differing lines across 010, 011, 012, 013, 014, spanning six intervening drops. The one thing that changed is the filenames, which the author supplied and which are adopted here; `case-015.md` keeps the numbering form because no name was supplied for it, and the same rule would give `015definitionalprecedence.md` from its own working handle. This is `measurement-fork`'s `MF_019` with the opposite outcome: files that live in one place do not drift, and these did not. | any re-delivered case differing from the landed copy | SUPPORTED |
 
 ## Repairs
 

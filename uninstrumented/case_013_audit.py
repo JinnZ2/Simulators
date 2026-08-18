@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """case_013_audit.py -- checks on the Case 013 drop.
 
-Added, not delivered. `cases/case-013.md` is the entry as received and is
+Added, not delivered. `cases/013compensationloadunattributed.md` is the entry as received and is
 not modified. Findings recorded in AUDIT_NOTES.md as UNI_034..UNI_041.
 
     python3 case_013_audit.py
@@ -26,9 +26,9 @@ import re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-CASE = io.open(os.path.join(HERE, "cases", "case-013.md"),
+CASE = io.open(os.path.join(HERE, "cases", "013compensationloadunattributed.md"),
                encoding="utf-8").read()
-C010 = io.open(os.path.join(HERE, "cases", "case-010.md"),
+C010 = io.open(os.path.join(HERE, "cases", "010coupledperturbationbiohybrid.md"),
                encoding="utf-8").read()
 BAR = "=" * 72
 
@@ -53,9 +53,10 @@ def ols(xs, ys):
 
 
 print("uninstrumented -- audit of the Case 013 drop")
-print("delivered: cases/case-013.md")
-print("landed as case-013.md: the drop instructs that the one-or-two")
-print("question must not be resolved to get a cleaner filename")
+print("delivered: cases/013compensationloadunattributed.md")
+print("filename supplied by the author in a later delivery; the drop")
+print("instructs that the one-or-two question must not be RESOLVED to get")
+print("a cleaner filename, and the name used is its own working handle")
 
 # ---------------------------------------------------------------- UNI_034
 
@@ -86,9 +87,21 @@ under one parent, which presumes the parent is one thing.
 
 The drop also anticipates the pressure the filename itself applies, and
 says so in its second paragraph -- the one-or-two question "should not be
-resolved to get a cleaner filename". Honored: this landed as
-`case-013.md`, which is the register's own numbering and takes no
-position. A name drawn from either half would have.
+resolved to get a cleaner filename".
+
+It first landed here as `case-013.md` -- the register's own numbering,
+which takes no position. The author then re-delivered all five cases as
+files, with descriptive filenames, and this one arrives as
+`013compensationloadunattributed.md`. That is the entry's own declared
+working handle, which the entry itself labels as naming "the first half
+only", so the name is provisional by the entry's own statement rather
+than a resolution of the split. The instruction was against resolving the
+QUESTION for filename convenience, not against using the provisional
+handle, and the author supplied the name.
+
+Worth stating because the difference is easy to lose: the filename now
+names Q1-Q3 and not Q4, and if the split happens Q4 leaves without a name
+of its own.
 """)
 
 # ---------------------------------------------------------------- UNI_035
@@ -379,9 +392,9 @@ of it is already published alongside the anchor.
 head(8, "UNI_041", "the cross-links, and the confidence")
 print()
 links = [
-    ("Case 010", os.path.exists(os.path.join(HERE, "cases", "case-010.md"))),
-    ("Case 011", os.path.exists(os.path.join(HERE, "cases", "case-011.md"))),
-    ("Case 012", os.path.exists(os.path.join(HERE, "cases", "case-012.md"))),
+    ("Case 010", os.path.exists(os.path.join(HERE, "cases", "010coupledperturbationbiohybrid.md"))),
+    ("Case 011", os.path.exists(os.path.join(HERE, "cases", "011rebuildabandonmentcycles.md"))),
+    ("Case 012", os.path.exists(os.path.join(HERE, "cases", "012fuelincidencesubstrategoods.md"))),
     ("Mechanism 11", os.path.exists(os.path.join(
         ROOT, "derivation-discarded", "MECHANISM_11.md"))),
 ]

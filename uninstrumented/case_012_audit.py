@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """case_012_audit.py -- checks on the Case 012 drop.
 
-Added, not delivered. `cases/case-012.md` is the entry as received and is
+Added, not delivered. `cases/012fuelincidencesubstrategoods.md` is the entry as received and is
 not modified. Findings recorded in AUDIT_NOTES.md as UNI_027..UNI_033.
 
     python3 case_012_audit.py
@@ -26,7 +26,7 @@ import uninstrumented as U
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-CASE = io.open(os.path.join(HERE, "cases", "case-012.md"),
+CASE = io.open(os.path.join(HERE, "cases", "012fuelincidencesubstrategoods.md"),
                encoding="utf-8").read()
 BAR = "=" * 72
 
@@ -44,7 +44,7 @@ def block(t):
 
 subq = re.findall(r"^## (Q\d) — (.*)$", CASE, re.M)
 print("uninstrumented -- audit of the Case 012 drop")
-print("delivered: cases/case-012.md")
+print("delivered: cases/012fuelincidencesubstrategoods.md")
 print("cluster   : %d sub-questions, mechanism candidates named not assigned"
       % len(subq))
 

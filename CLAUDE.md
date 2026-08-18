@@ -2071,7 +2071,7 @@ underneath).
   analysis, so the referent is dropped and nothing enters the record as a
   measurement. Distinct from `AUDIT ASYMMETRY`, which is a guard firing on
   one side; this is a channel reclassified at intake, so the reading never
-  reaches a guard. **`cases/case-010.md`** is the first delivered case that
+  reaches a guard. **`cases/010coupledperturbationbiohybrid.md`** is the first delivered case that
   declines to name its mechanism — coupled-perturbation response of a
   bio-hybrid memristor, candidate bins SCALAR DEMAND or a proposed new
   PROTOCOL ORTHOGONALITY, with the reason for leaving it open stated
@@ -2112,7 +2112,7 @@ underneath).
   one way at once; the three-way discriminator names its own discard branch
   so it is not `CONSTANT_SILENT`. Missing: any power calculation — a
   `G-RES` pair of variability spread against the margin claimed.
-  **`cases/case-011.md`** is the second delivered case the schema cannot
+  **`cases/011rebuildabandonmentcycles.md`** is the second delivered case the schema cannot
   hold, refused in a different place: Case 010 declines to name its
   mechanism, Case 011 declines to be one quantity. A five-question cluster
   on rebuild cycles before abandonment, occasioned by Kiss/Viglione/Blöschl
@@ -2158,7 +2158,7 @@ underneath).
   here under other names, in `rigidification-sensor/simulator.py`'s
   `locked_at` and `sustained-activation-gate/`'s restore-vs-coupling
   trade-off.
-  **`cases/case-012.md`** is the third case the schema cannot hold and the
+  **`cases/012fuelincidencesubstrategoods.md`** is the third case the schema cannot hold and the
   first whose stated confidence is **settled by computation rather than
   recorded**. Fuel-cost incidence on low-value-density freight, against the
   published finding that diesel pass-through is ~50% immediate / ~100%
@@ -2204,15 +2204,18 @@ underneath).
   consumption of no industry. The half marked "WOULD MEASURE: unclear" is
   the established one, which inverts the register's usual pattern and makes
   Q3 the entry's best candidate for a filed mechanism.
-  **`cases/case-013.md`** is the fourth case the schema cannot hold and the
+  **`cases/013compensationloadunattributed.md`** is the fourth case the schema cannot hold and the
   first whose refusal is about the record rather than a field: compensation
   load from design-time dimension omission, anchored on satellite
   cataloging. **`UNI_034`:** 010 declines to name its mechanism, 011 to be
   one quantity, 012 to carry one confidence, **013 to be one entry or two**
   — and the `UNI_020` sub-entry repair does not reach it, since sub-entries
   presume the parent is one thing; the drop's instruction that the question
-  "should not be resolved to get a cleaner filename" was honored by landing
-  it under the register's own numbering. **`UNI_038`, the load-bearing
+  "should not be resolved to get a cleaner filename" was first honored by
+  landing it under the register's own numbering, and the author's later
+  file delivery supplies `013compensationloadunattributed.md` — the
+  entry's own working handle, which it labels as naming the first half
+  only, so provisional by the entry's own statement. **`UNI_038`, the load-bearing
   check:** Q3 claims the NIST dimming effect (Pintar, Stavis, NIST Aug 2026
   — citation verified) transfers to a discontinuously reassigned sorting
   key, and that is simulable, so it was simulated in three regimes.
@@ -2250,7 +2253,7 @@ underneath).
   leave if the split happens. **`UNI_041`:** first drop in the sequence
   with no dangling cross-link, and a fifth state of the confidence field —
   an absence with a stated unlock condition.
-  **`cases/case-014.md`** is the fifth case the schema cannot hold, and
+  **`cases/014offloadingevolutionaryframing.md`** is the fifth case the schema cannot hold, and
   the first whose EXCLUDED BY says nothing excludes it. Cognitive
   offloading, evolutionary framing and channel separability, occasioned by
   Fellers & Storm, *JEPLMC* 2026 — reminder users fell **below** the
@@ -2346,7 +2349,7 @@ underneath).
   enforced one mechanism per sentence — it does not, the `break` exits the
   trigger loop and mechanisms already co-fire, so the wrong-mechanism
   finding was a missing trigger rather than a blocked co-firing. Nineteen
-  claims `UNI_001..057`. Stdlib only, CC0.
+  claims `UNI_001..058`. Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
   time-series variable** — version the ruler, compute drift on its own

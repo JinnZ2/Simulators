@@ -302,8 +302,8 @@ links = [
     ("presented-binary", os.path.isdir(os.path.join(ROOT, "presented-binary"))),
     ("Mechanism 11", os.path.exists(os.path.join(
         ROOT, "derivation-discarded", "MECHANISM_11.md"))),
-    ("Case 013", os.path.exists(os.path.join(HERE, "cases", "case-013.md"))),
-    ("Case 014", os.path.exists(os.path.join(HERE, "cases", "case-014.md"))),
+    ("Case 013", os.path.exists(os.path.join(HERE, "cases", "013compensationloadunattributed.md"))),
+    ("Case 014", os.path.exists(os.path.join(HERE, "cases", "014offloadingevolutionaryframing.md"))),
 ]
 for name, ok in links:
     print("    %-20s %s" % (name, "resolves" if ok else "ABSENT"))

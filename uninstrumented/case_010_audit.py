@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """case_010_audit.py -- checks on the Case 010 drop.
 
-Added, not delivered. `cases/case-010.md` is the entry as received and is
+Added, not delivered. `cases/010coupledperturbationbiohybrid.md` is the entry as received and is
 not modified. Findings recorded in AUDIT_NOTES.md as UNI_013..UNI_019.
 
     python3 case_010_audit.py
@@ -28,7 +28,7 @@ from collections import Counter
 import uninstrumented as U
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-CASE = io.open(os.path.join(HERE, "cases", "case-010.md"),
+CASE = io.open(os.path.join(HERE, "cases", "010coupledperturbationbiohybrid.md"),
                encoding="utf-8").read()
 BAR = "=" * 72
 
@@ -45,7 +45,7 @@ def block(t):
 
 
 print("uninstrumented -- audit of the Case 010 drop")
-print("delivered: cases/case-010.md")
+print("delivered: cases/010coupledperturbationbiohybrid.md")
 print("register  : %d entries, %d mechanisms" % (len(U.ENTRIES),
                                                  len(U.MECHANISMS)))
 

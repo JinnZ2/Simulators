@@ -1,5 +1,5 @@
 uninstrumented -- audit of the Case 010 drop
-delivered: cases/case-010.md
+delivered: cases/010coupledperturbationbiohybrid.md
 register  : 8 entries, 8 mechanisms
 
 ========================================================================

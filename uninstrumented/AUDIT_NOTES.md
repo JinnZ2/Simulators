@@ -11,7 +11,7 @@ checks on itself), [`scan_audit.py`](scan_audit.py) (grades the scanner),
 [`case_013_audit.py`](case_013_audit.py) and
 [`case_014_audit.py`](case_014_audit.py) and
 [`case_015_audit.py`](case_015_audit.py) (checks on the six delivered
-cases) and [`CLAIM_TABLE.md`](CLAIM_TABLE.md). `cases/case-010.md`
+cases) and [`CLAIM_TABLE.md`](CLAIM_TABLE.md). `cases/010coupledperturbationbiohybrid.md`
 through `cases/case-015.md` are delivered, verbatim.
 
 The delivered README supersedes what follows on two points, and both are
@@ -183,7 +183,7 @@ CC0.
 
 ## Case 010 — the near-boundary case the schema will not take
 
-`cases/case-010.md`, delivered verbatim. Checks in
+`cases/010coupledperturbationbiohybrid.md`, delivered verbatim. Checks in
 [`case_010_audit.py`](case_010_audit.py); claims `UNI_013..019`.
 
 Three firsts in one entry: it declines to name its mechanism and says why,
@@ -340,7 +340,7 @@ against the margin being claimed.
 
 ## Case 011 — the second case the schema cannot hold, refused differently
 
-`cases/case-011.md`, delivered verbatim. Checks in
+`cases/011rebuildabandonmentcycles.md`, delivered verbatim. Checks in
 [`case_011_audit.py`](case_011_audit.py); claims `UNI_020..026`.
 
 ### UNI_020 — two cases, two different refusals by one schema
@@ -500,7 +500,7 @@ is a repair rate against an arrival rate, which is that crossing.
 
 ## Case 012 — the first entry whose confidence can be checked
 
-`cases/case-012.md`, delivered verbatim. Checks in
+`cases/012fuelincidencesubstrategoods.md`, delivered verbatim. Checks in
 [`case_012_audit.py`](case_012_audit.py); claims `UNI_027..033`.
 
 Third consecutive case the schema cannot hold. It is also the first where
@@ -685,7 +685,7 @@ one had to be chosen today.
 
 ## Case 013 — the case that does not know if it is one case
 
-`cases/case-013.md`, delivered verbatim. Checks in
+`cases/013compensationloadunattributed.md`, delivered verbatim. Checks in
 [`case_013_audit.py`](case_013_audit.py); claims `UNI_034..041`.
 
 The simulations in §5 are stdlib, seeded, and reproduce by running the
@@ -708,9 +708,19 @@ parent, which presumes the parent is one thing.
 
 The drop anticipates the pressure a filename applies and says so directly:
 the one-or-two question "should not be resolved to get a cleaner
-filename". Honored — landed as `case-013.md`, the register's own
-numbering, which takes no position. A name drawn from either half would
-have.
+filename".
+
+It first landed here as `case-013.md` — the register's own numbering,
+taking no position. The author then re-delivered the five cases as files
+with descriptive names, and this one arrives as
+`013compensationloadunattributed.md`: the entry's **own declared working
+handle**, which the entry labels as naming "the first half only". So the
+name is provisional by the entry's own statement rather than a resolution
+of the split, and the instruction was against resolving the *question*
+for filename convenience.
+
+The difference is easy to lose, so: the filename now names Q1–Q3 and not
+Q4, and if the split happens Q4 leaves without a name of its own.
 
 ### UNI_035 — provenance inside an entry
 
@@ -895,7 +905,7 @@ exists" — which is a dependency between sub-questions rather than a value.
 
 ## Case 014 — the entry whose EXCLUDED BY says nothing excludes it
 
-`cases/case-014.md`, delivered verbatim. Checks in
+`cases/014offloadingevolutionaryframing.md`, delivered verbatim. Checks in
 [`case_014_audit.py`](case_014_audit.py); claims `UNI_042..049`.
 
 ### UNI_042 — the founding binary is two-valued and three states have arrived
@@ -934,7 +944,7 @@ instrument, the second needs someone to turn one.
 
     wiki-style references in this entry : tool-off-metrology, cited 2x
     ../tool-off-metrology exists        : False
-    also reached for in case-011.md Q4  : True
+    also reached for in 011rebuildabandonmentcycles.md Q4  : True
 
 Two distinct named-but-absent artifacts now, each load-bearing across two
 drops:
@@ -1050,9 +1060,9 @@ doing real work. `entry()` still has no field for it.
 
 ### UNI_049 — third instance of the withheld slot, and Q3's sentence
 
-    ../uninstrumented/cases/case-011.md         Q5
+    ../uninstrumented/cases/011rebuildabandonmentcycles.md         Q5
     ../derivation-discarded/MECHANISM_11.md     sub-question 4
-    cases/case-014.md                           Q3
+    cases/014offloadingevolutionaryframing.md                           Q3
 
 `DD_007` recorded this as "a recurring device" at two instances. At three
 it is a construct with a stable form, and still no schema slot anywhere in
@@ -1246,3 +1256,44 @@ Confidence is split across the cluster again — "Q2 is high as an audit.
 Q1's magnitude unknown until the denominator is pulled" — which is Case
 012's state (`UNI_028`) on its second appearance. Five states of the one
 string field are in the wild; `entry()` stores a string (`UNI_021`).
+
+---
+
+## UNI_058 — the re-delivery, and the filenames
+
+Cases 010–014 were re-delivered as files after all five had already landed
+from inline text, across six intervening drops.
+
+    010coupledperturbationbiohybrid.md    IDENTICAL
+    011rebuildabandonmentcycles.md        IDENTICAL
+    012fuelincidencesubstrategoods.md     IDENTICAL
+    013compensationloadunattributed.md    IDENTICAL
+    014offloadingevolutionaryframing.md   IDENTICAL
+
+Zero differing lines, five for five. Worth recording because the check is
+cheap and the result is not automatic — `measurement-fork`'s `MF_019`
+found the opposite on a drop that bundled the same files repeatedly, and
+concluded that files which live in one place do not drift while files
+bundled into every drop do. These live in one place, and they did not.
+
+**What changed is the filenames**, and they are adopted here — the author
+supplied them, and this repo lands what is delivered as delivered, which
+extends to what a file is called. `git mv` preserves the history; all 39
+references across the six audit scripts, the claim table, these notes and
+`CLAUDE.md` were updated, and every audit still runs at rc=0.
+
+One gap, left open rather than filled: **`case-015.md` keeps the numbering
+form**, because no filename was supplied for it. Applying the same rule
+the author used for 013 — take the entry's declared working handle — would
+give `015definitionalprecedence.md`. That is a derivation, not a delivery,
+and in a folder where one entry devotes a paragraph to why its own name is
+not settled, deriving a filename for another entry is not something to do
+quietly. It is offered and not applied.
+
+The Case 013 naming prose in `UNI_034` is corrected rather than carried
+forward: the entry's instruction was against resolving the one-or-two
+*question* for filename convenience, and the supplied name is the entry's
+**own** working handle, which the entry labels as naming "the first half
+only". Provisional by the entry's own statement, not a resolution — but
+the filename now names Q1–Q3 and not Q4, and if the split happens Q4
+leaves without a name of its own.

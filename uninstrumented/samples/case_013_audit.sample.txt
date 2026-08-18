@@ -1,7 +1,8 @@
 uninstrumented -- audit of the Case 013 drop
-delivered: cases/case-013.md
-landed as case-013.md: the drop instructs that the one-or-two
-question must not be resolved to get a cleaner filename
+delivered: cases/013compensationloadunattributed.md
+filename supplied by the author in a later delivery; the drop
+instructs that the one-or-two question must not be RESOLVED to get
+a cleaner filename, and the name used is its own working handle
 
 ========================================================================
 1  UNI_034  a fourth refusal, and the first about the entry's own identity
@@ -28,9 +29,21 @@ under one parent, which presumes the parent is one thing.
 
 The drop also anticipates the pressure the filename itself applies, and
 says so in its second paragraph -- the one-or-two question "should not be
-resolved to get a cleaner filename". Honored: this landed as
-`case-013.md`, which is the register's own numbering and takes no
-position. A name drawn from either half would have.
+resolved to get a cleaner filename".
+
+It first landed here as `case-013.md` -- the register's own numbering,
+which takes no position. The author then re-delivered all five cases as
+files, with descriptive filenames, and this one arrives as
+`013compensationloadunattributed.md`. That is the entry's own declared
+working handle, which the entry itself labels as naming "the first half
+only", so the name is provisional by the entry's own statement rather
+than a resolution of the split. The instruction was against resolving the
+QUESTION for filename convenience, not against using the provisional
+handle, and the author supplied the name.
+
+Worth stating because the difference is easy to lose: the filename now
+names Q1-Q3 and not Q4, and if the split happens Q4 leaves without a name
+of its own.
 
 ========================================================================
 2  UNI_035  per-item attribution inside an entry, with no field for it
