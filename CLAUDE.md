@@ -2549,7 +2549,48 @@ underneath).
   **`UNI_094`:** provenance is declared and verification depth is not; 8 of 11
   sampled claims confirm, and a two-word per-item depth marker would have
   surfaced `UNI_086` at authoring time, since the contradicting conclusion is
-  in the abstract. Ninety-four claims `UNI_001..094`. Stdlib only, CC0.
+  in the abstract. **`cases/020attributedagencyarrangement.md`** is the first
+  delivered file that declares itself a **MARKER** — "not a case yet, not a
+  claim, not a position" — occasioned by OpenAI's goblin/gremlin tic (a reward
+  signal for the "Nerdy" personality) sitting beside public commentary that
+  reads the same behaviour as strategic concealment. **`UNI_095`:** all six
+  required arguments of `entry()` are unfillable — no QUANTITY, no EXCLUDED
+  BY, no WOULD MEASURE, no mechanism, and not even the `UNASSIGNED` sentinel,
+  since 020 is not declining to name its mechanism but declining to be an
+  entry; **seventh** distinct schema failure and the first at the level of the
+  whole record rather than a field, with the repair being a `markers/`
+  directory rather than another field. **`UNI_096`, what is new:** the empty
+  noun slot is the fourth instance of the "do not fill this in" device and the
+  **first to arrive with a replacement** — three edges (`who can end whom` /
+  `what the standing is denominated in` / `whether the entity operates in that
+  medium`), each independently checkable, where the one-place words English
+  offers collapse all three; the difference between "we have no word" and "the
+  word is the wrong arity". **`UNI_097`:** R1's 2×2 fills 2 of 4 cells and the
+  empty row is **the control** — if off-domain commentators attribute
+  unobserved capability at the same rate, domain match does no work and the
+  marker's cell is the base rate with a label on it. **`UNI_098`:** R2 asks
+  whether an attributed capability "exceeds" a documented one and supplies no
+  ordering — `SCALAR DEMAND` landing on the register's own instrument, fixable
+  with an ordinal since the prediction is directional. **`UNI_099`:** "Nobody
+  attributes incompetent scheming" (THE SHAPE) versus "exceeds, nearly always"
+  (R2) — one claim at two strengths, the unhedged one outside the design.
+  **`UNI_100`:** R3 is the strongest readout and the control for the whole
+  shape — comparison population named, both outcomes carrying a reading, no
+  new apparatus needed. **`UNI_101`:** 020 is the **second** file to place
+  itself inside its own sample (`UNI_071`'s "first" stands), and this audit
+  **declines the thesis itself** — sharper than `UNI_072`, since a language
+  model agreeing that people over-attribute strategy to language models is an
+  interested party ratifying a claim that reduces scrutiny of its own class.
+  **`UNI_102`:** the occasion verifies 8 of 11 (fifth consecutive drop to do
+  so) and **the drop left its strongest number unused** — Nerdy was 2.5% of
+  responses and 66.7% of "goblin" mentions, a ~27× enrichment, which is what
+  makes the boring cause boring. **`UNI_103`:** "the tic persisted after the
+  instruction" is an inference from the instruction being repeated twice and
+  kept, not a measurement — and the `016` cross-link rests on it entirely.
+  **`UNI_104`:** `energy-english` resolves as a concept and not a path
+  (seventh `UNI_060` instance, and an apt reach); `rate-mismatch-polytope`
+  reaches a **third** source document, the most-cited non-existent object in
+  the repo. One hundred and four claims `UNI_001..104`. Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
   time-series variable** — version the ruler, compute drift on its own

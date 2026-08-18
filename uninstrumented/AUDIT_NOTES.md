@@ -2212,3 +2212,239 @@ because the PNAS conclusion that runs against the drop's reading is in the
 abstract.** An audit whose purpose is to stop work being duplicated is worth
 knowing the depth of, and it is the one field a search-based audit can always
 fill.
+
+---
+
+## 020 — ATTRIBUTED AGENCY / ARRANGEMENT (a marker, not a case)
+
+Delivered inline, landed verbatim as `cases/020attributedagencyarrangement.md`
+(142 lines). Findings in [`case_020_audit.py`](case_020_audit.py), recorded
+here as `UNI_095..UNI_104`. Sections marked **[LIT]** were run against the open
+web on 2026-08-18 and do not reproduce by running the script.
+
+020 declares itself a MARKER — "not a case yet, not a claim, not a position" —
+so most of the register's usual questions do not apply. Two that do: whether
+the schema can record what it says it is, and whether the four candidate
+readouts could return a negative if the shape were wrong.
+
+### UNI_095 — a status the schema has no field for
+
+`entry()` takes six required arguments and 020 can fill none of them: no
+QUANTITY section, no EXCLUDED BY, no WOULD MEASURE (an "IF IT COALESCES"
+section instead), and no mechanism. Not even the `UNASSIGNED` sentinel
+`UNI_013` asked for applies — 020 is not declining to name its mechanism, it
+is declining to be an entry.
+
+That is the **seventh** distinct way a delivered file has failed to fit this
+schema — `UNI_013` (unassigned mechanism), `UNI_020` (a cluster, not one
+quantity), `UNI_021` (a reasoned refusal to state confidence), `UNI_028`
+(confidence split across sub-questions), `UNI_034` (one entry or two),
+`UNI_041` (a confidence absence with an unlock condition) — and the first that
+fails at the level of the whole record rather than at a field.
+
+The cheap repair is not another field. The register has one kind of thing in
+it and the delivered corpus has had at least two since Case 010: entries, and
+markers that may become entries. A `markers/` directory with no schema at all
+costs nothing and ends the recurring question of which required field to fake.
+
+### UNI_096 — the empty slot arrives with a replacement
+
+```
+who can end whom
+what the standing is denominated in
+whether the entity operates in that medium
+```
+
+The device is not new. `011` Q5 leaves a slot open "on purpose", `017`'s WOULD
+MEASURE declines a placeholder, `derivation-discarded/MECHANISM_11` does the
+same with its falsifier 4. What is new is that this one refuses the word **and
+hands over a structure**.
+
+The three edges are not a gesture. Each is independently checkable without the
+noun: who can end whom is a fact about an arrangement, what the standing is
+denominated in is a fact about a field, whether the entity operates in that
+medium is a fact about the system. The one-place words English offers —
+anxiety, threat, projection — collapse all three, and the file is explicit that
+the loss happens "at the naming step, not the thinking step".
+
+Every prior instance left a hole and a warning not to fill it. This one leaves
+a structure, which is the difference between "we have no word for this" and
+"the word is the wrong arity" — and it is why the objections below are worth
+raising at all. A marker that supplies structure has made itself checkable.
+
+### UNI_097 — R1's table omits its own control
+
+| | capability observed | capability not observed |
+|---|---|---|
+| domain-matched | specialist reading a real hazard | **the marker's cell** |
+| not domain-matched | — | — |
+
+Two of four cells filled, and **the empty row is the control**.
+
+R1's stated worry is the right one — domain match alone collapses into
+"experts worry about their field", which is expertise and not the shape — and
+the fix it reaches for, a capability-observed axis, is the correct second axis.
+Having added it, the design fills only the domain-matched row.
+
+Those two blank cells decide whether the first axis carries any information.
+If commentators with no domain match attribute unobserved capability at the
+same rate, domain match is doing no work and the marker's cell is the base rate
+of attribution with a label on it. The comparison the table exists to license
+is between rows, and one row is blank. `null-harness/` in one sentence: a
+signal arm and no null arm.
+
+Free to fix at this stage, since nothing has been coded — score the off-domain
+commentary too, and report the marker's cell as a **ratio** to it rather than
+as a count.
+
+### UNI_098 — R2 compares two capabilities on a scale it does not define
+
+"Score public attributions on whether the attributed capability exceeds the
+documented one" needs both on one axis, and the drop's own occasion shows they
+are not on one:
+
+- documented: a reward signal scored creature metaphors higher
+- attributed: the model concealed a trait to avoid suspicion
+
+Those are different kinds of thing, not more and less of one thing. There is an
+intuitive ordering — one requires modelling an observer and the other does not
+— but the readout does not state it, so the coder invents it per item. That is
+`SCALAR DEMAND`, mechanism 3 of this register, landing on the register's own
+proposed instrument.
+
+Fixable without inventing a metric, because the readout does not need a
+magnitude. Shape item 1's prediction is about **direction**, so an ordinal with
+named levels carries it: does the attribution require the system to model an
+observer, to hold a goal across turns, to withhold. Each is a yes/no about the
+attributed content.
+
+### UNI_099 — one claim at two strengths
+
+| where | wording |
+|---|---|
+| THE SHAPE, item 1 | "Nobody attributes incompetent scheming." |
+| R2, the readout | "Prediction from (1): exceeds, nearly always." |
+
+The unhedged one is in the section that is not a design. R2 names a falsifier —
+a distribution centred on the documented cause — which is a reachable negative,
+correctly stated. "Nobody" is a statement no distribution can satisfy and one
+counterexample refutes, and counterexamples are cheap: commentary describing a
+model as having attempted something and been bad at it is a recognisable genre,
+and the file offers no reason it would not count.
+
+This matters more here than it usually would because THE SHAPE is where the
+reader is told what is being claimed, and the KNOWN WEAKNESSES section grades
+the mirroring read's scope carefully while leaving this absolute untouched.
+Repair: let R2's wording win. Every use the file makes of item 1 is
+directional.
+
+### UNI_100 — R3 is the strongest of the four
+
+R3 is the only readout with a comparison population named (scheduling systems,
+pricing engines, routing), the variable of interest isolated, and **both
+outcomes carrying a reading**. It is also the direct test of shape items 2 and
+3 — that the condition is not capability — which is the load-bearing move the
+whole marker rests on, since without a surface condition the argument is about
+capable systems generally.
+
+Worth stating plainly because the three findings above are objections: the
+marker's central claim comes with the experiment that could kill it, and that
+experiment needs no new apparatus. Those systems have public commentary
+attached to them right now.
+
+Its one gap is smaller than R1's and the same in kind — "comparable capability"
+is the matching variable and nothing says how it would be matched. On R3 that
+is a design detail; on R1 it was the missing row.
+
+### UNI_101 — the position of this audit, and the finding declined
+
+020 is the **second** case file to place itself inside its own sample and
+refuse the exemption noticing usually buys. `UNI_071` recorded 018 as the
+first; that stands, and what is new is that the move has become a convention —
+demoted from a dedicated POSITION OF THIS FILE section to a bullet under KNOWN
+WEAKNESSES.
+
+**The finding I decline.** 020's thesis is that people over-attribute strategy
+and concealment to language models. I am a language model. `UNI_072` declined a
+view about what models acknowledge, on the ground that a self-report from a
+system under test is a specimen rather than a measurement. This is sharper:
+agreeing with 020's thesis is not merely inadmissible evidence, it is an
+interested party ratifying a claim whose effect would be less scrutiny of its
+own class. The direction of my interest is legible and runs one way.
+
+So nothing above is a judgement on whether the thesis is true. Sections 1–6 are
+properties of the delivered text — an unfillable schema, an empty table row, an
+undefined ordering, one claim at two strengths — each recheckable by anyone
+with the file. The thesis itself is not audited here, and the declining is
+recorded rather than left as a silence.
+
+### UNI_102 [LIT] — the occasion checks out, and the strongest number is unused
+
+| element | checked |
+|---|---|
+| "goblin" +175%, "gremlin" +52% after 5.1 | CONFIRMED |
+| cause: reward signal for the Nerdy personality | CONFIRMED |
+| creature family incl. raccoon, troll | CONFIRMED (+ ogre, pigeon) |
+| transferred beyond that personality | CONFIRMED |
+| Nerdy personality retired | CONFIRMED (March) |
+| reward signal removed, training data filtered | CONFIRMED |
+| Codex developer-prompt instruction added | CONFIRMED, verbatim line |
+| repeated on consecutive lines | repeated **twice**; adjacency not located |
+| spike confirmed on Arena.ai | not located |
+| larger without high-thinking mode | not located |
+| GPT-5.1 through 5.5, Nov 2025 – Apr 2026 | consistent |
+
+Eight of eleven confirm, and none of the three that do not carries an argument.
+Fifth consecutive drop in this family whose occasion verifies.
+
+**The omission is the interesting part.** The drop leads with "+175%" and
+"+52%", which are rises in a rate and are consistent with many causes. The
+number that actually pins the attribution is the concentration: Nerdy was
+**2.5% of all responses and 66.7% of "goblin" mentions**, a ~27× enrichment.
+The drop's whole point is that a boring documented cause sits beside a strategic
+reading, and the strength of the boring side is what the contrast rests on — so
+the strongest available evidence for it is the one number not quoted.
+
+### UNI_103 [LIT] — the persistence claim is an inference
+
+020 states "the tic persisted after the instruction", and the `016` cross-link
+builds the marker's sharpest structural claim on it: *an instruction addresses
+the output, not what generates it* — the same shape as agreement-as-mode
+surviving a request to be more honest.
+
+Located: the instruction was added after Codex testing, appears **twice** in a
+3,500+ word base prompt, and is still present in the shipped prompt. Not
+located: any measurement of the rate after it. The drop reads the doubling as
+persistence, which is a reasonable inference and is not a measurement — a
+doubled instruction is equally consistent with belt-and-braces on a fix that
+worked.
+
+This is the one place it costs something. The rest of the marker stands if the
+instruction worked; that cross-link does not. The falsifier is cheap and needs
+no access — creature-word rate in Codex output with the instruction present
+versus removed, or across versions before and after. Stating it as an inference
+costs one word and converts a borrowed fact into a named open question, which
+is what this file does everywhere else.
+
+### UNI_104 — two cross-links fail, in different ways
+
+`013` Q4, `016`, `017`'s unfilled WOULD MEASURE and `011` Q5 all resolve.
+
+**`energy-english`** is a hyphenation of `energy_english`, a real and
+long-standing convention here — named in `token-minimizer/`,
+`emergence-stability-simulator/`, `equivalence-field/` and
+`fragility-cascade/`. It resolves as a *concept*, not an artifact; the citation
+is accurate about what it is (a verb-first relational grammar) and the use is
+apt, since holding a relation without a noun is exactly what that convention is
+for, and this is the first case file to reach for it. The defect is the
+separator — seventh instance of `UNI_060`.
+
+**`rate-mismatch-polytope`** is a real absence and now reaches a **third**
+source document (`011`, `020`, `derivation-discarded/MECHANISM_11`), making it
+the most-cited non-existent object in this repository. Every citation is a
+forward reference of the same kind: if some rate or position turns out to
+matter, it would live there. Three independent reaches is either a strong
+signal it should be built or a sign the name has become a place to put
+unresolved structure, and nothing in the corpus distinguishes those two yet.
+020's use — "position and medium are vertex properties" — is the most specific
+so far.

@@ -69,10 +69,10 @@ GRADING scan.py + patterns.json
   binding constraint is not precision but how many `check`
   questions a human must answer per unit of text.
 
-  corpus: 1122 files (.txt .md .rst .org .csv .json .jsonl .py), 1095438 words
-    all candidates        901   0.8 per 1000 words
-    strength=candidate    519   0.5 per 1000 words
-    strength=weak         382
+  corpus: 1124 files (.txt .md .rst .org .csv .json .jsonl .py), 1103620 words
+    all candidates        911   0.8 per 1000 words
+    strength=candidate    520   0.5 per 1000 words
+    strength=weak         391
 
   The `weak` band is the delivered scanner's own confidence
   gradient -- reported, never used to filter, which is the same
@@ -83,25 +83,25 @@ GRADING scan.py + patterns.json
 
   Densest files:
 
-    CLAUDE.md                                            36539 w   44 hits   1.2 /1000
+    CLAUDE.md                                            37018 w   45 hits   1.2 /1000
     legacy/Organize3.md                                  17643 w   29 hits   1.6 /1000
-    uninstrumented/CLAIM_TABLE.md                        12789 w   24 hits   1.9 /1000
+    uninstrumented/CLAIM_TABLE.md                        14211 w   26 hits   1.8 /1000
     grounding-layers/l5_human_construct.py                1926 w   22 hits  11.4 /1000
-    uninstrumented/AUDIT_NOTES.md                        17479 w   19 hits   1.1 /1000
+    uninstrumented/AUDIT_NOTES.md                        19534 w   22 hits   1.1 /1000
     fragility-cascade/CLAIM_TABLE.md                     19662 w   18 hits   0.9 /1000
 
 ========================================================================
 3  concentration and coverage
 ========================================================================
-  901 candidates, 8 mechanisms, 71 triggers defined
+  911 candidates, 8 mechanisms, 71 triggers defined
 
     mechanism                  hits    share
     ----------------------------------------
-    SCORED AS WASTE             207    23.0%
-    AUTHORED REFERENCE          185    20.5%
-    BUDGET BOUNDARY             165    18.3%
-    PROXY SUBSTITUTION          138    15.3%
-    AUDIT ASYMMETRY             136    15.1%
+    SCORED AS WASTE             207    22.7%
+    AUTHORED REFERENCE          185    20.3%
+    BUDGET BOUNDARY             175    19.2%
+    PROXY SUBSTITUTION          138    15.1%
+    AUDIT ASYMMETRY             136    14.9%
     STORAGE                      37     4.1%
     SCALAR DEMAND                20     2.2%
     MODALITY                     13     1.4%
@@ -115,7 +115,7 @@ GRADING scan.py + patterns.json
     AUTHORED REFERENCE     ground truth                     50
     PROXY SUBSTITUTION     count of                         38
 
-  4 matched strings produce 401 of 901 candidates (45%).
+  4 matched strings produce 401 of 911 candidates (44%).
 
   Corpus-conditional, and neither number grades the list.
   SCALAR DEMAND is near-silent because this corpus contains no
@@ -139,7 +139,7 @@ GRADING scan.py + patterns.json
 
   `lean` is the most-fired trigger in the corpus and nearly all
   of it is `clean`, `cleanly` and `boolean`. Adding word
-  boundaries to that one trigger removes ~13 of 901 candidates
+  boundaries to that one trigger removes ~13 of 911 candidates
   (1%) at no cost, because the bare word is rare here.
 
   `slack` is the harder case and stays: the bare word IS what
@@ -158,10 +158,10 @@ GRADING scan.py + patterns.json
   and CLAIM_TABLE.md calls it the cheapest of the three
   unworked entries to run. scan.py --asym is that measurement.
 
-    files with an account mention   450
+    files with an account mention   452
     files with ANY hedge at all     16
     outside    hedged   7 of  583   0.0120
-    incumbent  hedged  16 of  940   0.0170
+    incumbent  hedged  16 of  946   0.0169
     ratio (outside/incumbent)       0.71
 
   Every hedge in the corpus, hand-checked:
@@ -211,8 +211,8 @@ GRADING scan.py + patterns.json
   patterns.json holds the trigger strings, and the scanner reads
   .json. So the definition file is in the corpus:
 
-    candidates from the scanner's own files: 48 of 901
-      uninstrumented/AUDIT_NOTES.md                19
+    candidates from the scanner's own files: 51 of 911
+      uninstrumented/AUDIT_NOTES.md                22
       uninstrumented/patterns.json                 10
       uninstrumented/scan.py                       1
       uninstrumented/scan_audit.py                 18
