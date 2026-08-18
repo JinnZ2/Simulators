@@ -142,5 +142,71 @@ gap is one level up, at the presentation layer the selftest does not
 reach.
 
 ======================================================================
-end of audit -- findings recorded in AUDIT_NOTES.md as DL_001..DL_005
+6  DL_006  the first shape, and the asserted number sitting beside no derived one
+======================================================================
+Drop 2 delivers shapes/hierarchy-cut-generation.json: 30 domains, an
+asserted coverage of 0.61, and a source field stating what the file is
+for.
+
+    Coverage asserted at 0.61 over a domain set carried in working memory
+    rather than written down. This file exists to convert the asserted
+    number to a derived one; until the read column is filled the derived
+    number is unavailable, and that unavailability is the current state,
+    not a failure.
+
+  hierarchy-cut-generation   domains 30   read 0   asserted 0.61   derived --   mismatch --
+The tool's whole argument, instanced on its first shape: a number that was
+being carried as 0.61 now sits next to a derived column reading `--`, and
+`detail()` prints "derived -- ledger not yet populated" rather than
+substituting the asserted value or a zero.
+
+That is the branch DL_002 and DL_005 are about, used correctly. It is also
+the one place in this repo where an author has written down a number they
+were already using and then built the instrument that refuses to confirm
+it.
+
+The gap it exposes is the one the file names: 30 domains, 0 read, so
+every ratio is `--` and the reservation's ceiling has nothing to cap. The
+readouts are live and the corpus is empty -- which is the honest state and
+is what the source field says.
+
+======================================================================
+7  DL_007  the cross-folder run order is met, for the first time in this family
+======================================================================
+The shape's statement does something no other artifact in this drop family
+has done:
+
+    Runs on the imposed_ordering sense only -- see category-weld
+    welds/hierarchy.json for the other four senses, which are not this
+    claim.
+
+  category-weld/welds/hierarchy.json components (5):
+      nested_containment, organizing_abstraction, imposed_ordering, ordering_origin, cut_rate
+  minus imposed_ordering = 4; the statement says four: True
+
+  domains pre-classified by weld sense before being read:
+      mathematics / order theory                 nested_containment sense lives here; likely not this claim
+      computer science / type and file systems   organizing_abstraction sense lives here; likely not this claim
+moral-decomposer MD_004 records the opposite state one folder over: a
+stated RUN ORDER requiring welded terms decomposed first, seven terms
+named, zero decomposed. Here the weld exists, the shape names which of its
+five senses the claim runs on, and two of the thirty domains are
+pre-classified as probably belonging to a different sense -- before
+reading, which is the only time that classification is not closure by
+construction.
+
+The `criterion_fixed_in_advance` field carries the same discipline for the
+read itself:
+
+    Reclassifying a case as not-really-hierarchy after seeing which way it
+    read is closure by construction and is not permitted; such a case is
+    MIXED with the reason recorded.
+
+That names the failure, names the routing for the ambiguous case, and
+fixes both before any domain is read. DL_004's finding stands unchanged --
+SKELETON still carries neither field, so a shape created by `--new` starts
+without them -- and the delivered shape shows what the fields are for.
+
+======================================================================
+end of audit -- findings recorded in AUDIT_NOTES.md as DL_001..DL_007
 ======================================================================

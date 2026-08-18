@@ -1,0 +1,35 @@
+SHAPE  hierarchy-cut-generation
+
+UNREAD (30)
+  ethology / non-human dominance
+  ecology
+  anthropology
+  archaeology
+  history
+  linguistics
+  music theory
+  poetry / literary form
+  visual art and craft traditions
+  geology
+  physics
+  thermodynamics
+  microbiology / colony organisation
+  mycology / fungal networks
+  soil systems
+  hydrology
+  medicine / surgical teams
+  fire service
+  military organisation
+  corporate structure
+  trucking and freight operations
+  law and regulation
+  governance systems
+  religious institutions
+  theology
+  psychology
+  economics
+  kinship and council systems
+  mathematics / order theory
+  computer science / type and file systems
+
+READ, NOT PUSHED (0)

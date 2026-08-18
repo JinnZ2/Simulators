@@ -1,0 +1,59 @@
+SHAPE     hierarchy-cut-generation
+STATEMENT Imposed ordering does not terminate: it has to keep
+          generating further orderings in order to exist, and does
+          so until it eats itself. Runs on the imposed_ordering
+          sense only — see category-weld welds/hierarchy.json for
+          the other four senses, which are not this claim.
+
+DOMAINS   total=30 read=0 unread=30
+READS     hold=0 break=0 mixed=0
+
+COVERAGE      --   (held / read)
+  asserted    0.61
+  derived     -- ledger not yet populated
+CYCLE DEPTH   --   (0 holds survived a return)
+ADVERSARIAL   --
+TRUNCATED     --
+RESERVATION   0.20   ceiling 0.80
+
+UNREAD
+    ethology / non-human dominance, ecology, anthropology,
+    archaeology, history, linguistics, music theory, poetry /
+    literary form, visual art and craft traditions, geology,
+    physics, thermodynamics, microbiology / colony
+    organisation, mycology / fungal networks, soil systems,
+    hydrology, medicine / surgical teams, fire service,
+    military organisation, corporate structure, trucking and
+    freight operations, law and regulation, governance
+    systems, religious institutions, theology, psychology,
+    economics, kinship and council systems, mathematics /
+    order theory, computer science / type and file systems
+
+CRITERION FIXED IN ADVANCE
+    A domain counts as a HOLD only if an imposed ordering in
+    that domain is observed generating further orderings over
+    time. A domain counts as a BREAK if an imposed ordering
+    persists without generating further ones. Reclassifying a
+    case as not-really-hierarchy after seeing which way it
+    read is closure by construction and is not permitted; such
+    a case is MIXED with the reason recorded.
+
+OPEN
+    The environment-coupled cases (dominance that tracks
+    environmental conditions and reassigns when conditions
+    change) are candidates for MIXED rather than BREAK,
+    because they may not be instances of imposed ordering at
+    all. Deciding which before reading them is required, or
+    the criterion moves under the data.
+
+OPEN
+    Depth is currently unrecorded for every domain. Cycle
+    depth cannot be computed until at least one domain is read
+    through a return.
+
+OPEN
+    Domains reached only through live conversation carry a
+    truncation bias that is not random with respect to this
+    shape: frames least willing to be examined are plausibly
+    the ones holding the most undocumented cuts. Mark channel
+    and truncated on every live read.

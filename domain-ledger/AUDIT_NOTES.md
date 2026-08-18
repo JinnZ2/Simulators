@@ -25,7 +25,7 @@ Selftest passes 13/13.
 | file | status |
 |------|--------|
 | `ledger.py` | delivered, verbatim |
-| `shapes/` | not delivered — no shape has been recorded |
+| `shapes/hierarchy-cut-generation.json` | delivered drop 2, verbatim — 30 domains, 0 read, asserted coverage 0.61 |
 | `README.md`, `CLAIM_TABLE.md` | not delivered |
 | `ledger_audit.py` | added |
 | `AUDIT_NOTES.md` | added |
@@ -43,6 +43,8 @@ in the author's mouth.
 | DL_002 | The reservation is defined as capping reported headroom and nothing applies it: `ceiling` is computed, returned, printed, and read by nothing; coverage may exceed it with no readout saying so | a headroom field, or a flag when coverage exceeds the ceiling | SUPPORTED |
 | DL_003 | `coverage` puts `mixed` in the denominator and not the numerator, so all-break and all-mixed both return 0.00 | a footer clause naming what the denominator includes, or a separate ratio | SUPPORTED |
 | DL_004 | `detail()` reads `criterion_fixed_in_advance` and `open`; `SKELETON` carries neither, so `--new` never prompts for the pre-registration guard — `CW_015` repeated in a second folder | either field entering `SKELETON` | SUPPORTED |
+| DL_006 | The first shape instances the tool's own argument: an asserted 0.61 sits beside a derived `--`, and `detail()` prints "ledger not yet populated" rather than substituting the asserted value or a zero | the derived column filling in and disagreeing with 0.61 | SUPPORTED (holds) |
+| DL_007 | The shape names which of `category-weld/welds/hierarchy.json`'s five senses it runs on, and pre-classifies two domains by sense before reading — the first time in this drop family that a stated cross-folder precondition is met | — | SUPPORTED (holds) |
 | DL_005 | With no `shapes/` directory the tool prints a well-formed report with zero rows and exits 0, where all three sibling scorers refuse on stderr with rc 1 | the empty state refusing, or saying it is empty | SUPPORTED |
 
 ## 1 — DL_001, the idea and two choices that follow
@@ -155,6 +157,61 @@ The selftest does cover the empty case at the `score()` level — *"empty
 ledger gives none not zero"*, *"empty mismatch is none"* — and those are
 the right two checks. The gap is one level up, at a presentation layer the
 selftest does not reach.
+
+## 6 — DL_006, an asserted number with no derived one beside it
+
+    hierarchy-cut-generation   domains 30   read 0
+                               asserted 0.61   derived --   mismatch --
+
+The shape's source field states the file's purpose:
+
+> Coverage asserted at 0.61 over a domain set carried in working memory
+> rather than written down. This file exists to convert the asserted
+> number to a derived one; until the read column is filled the derived
+> number is unavailable, and that unavailability is the current state, not
+> a failure.
+
+`detail()` prints `derived -- ledger not yet populated` rather than
+substituting the asserted value or a zero — the branch `DL_002` and
+`DL_005` are about, used correctly.
+
+This is the one place in the repo where an author has written down a
+number they were already carrying and then run the instrument that
+declines to confirm it. Thirty domains, none read, every ratio `--`, and
+the reservation's ceiling with nothing yet to cap.
+
+## 7 — DL_007, the run order met
+
+> Runs on the imposed_ordering sense only — see category-weld
+> welds/hierarchy.json for the other four senses, which are not this
+> claim.
+
+    category-weld/welds/hierarchy.json components (5):
+        nested_containment, organizing_abstraction, imposed_ordering,
+        ordering_origin, cut_rate
+    minus imposed_ordering = 4; the statement says four: True
+
+    domains pre-classified by weld sense, before being read:
+        mathematics / order theory      nested_containment sense lives here
+        computer science / type systems organizing_abstraction sense lives here
+
+`moral-decomposer` `MD_004` records the opposite state one folder over — a
+stated RUN ORDER requiring welded terms decomposed first, seven named,
+zero decomposed. Here the weld exists, the shape names which of its five
+senses the claim runs on, and two of thirty domains are pre-classified as
+probably belonging to a different sense **before** reading, which is the
+only time that classification is not closure by construction.
+
+`criterion_fixed_in_advance` carries the same discipline into the read:
+
+> Reclassifying a case as not-really-hierarchy after seeing which way it
+> read is closure by construction and is not permitted; such a case is
+> MIXED with the reason recorded.
+
+Names the failure, names the routing for the ambiguous case, fixes both
+before any domain is read. `DL_004` stands unchanged — `SKELETON` carries
+neither field, so a shape from `--new` starts without them — and the
+delivered shape shows what they are for.
 
 ## Relation to the rest of the repo
 

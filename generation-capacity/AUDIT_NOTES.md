@@ -34,6 +34,7 @@ defense.
 | file | status |
 |------|--------|
 | `MECHANISM_10.md` | delivered drop 1, verbatim |
+| `SUBCASE_10A.md` | delivered drop 3, verbatim — IRRECOVERABLE SOURCE, readouts S1/S2/S3 |
 | `README.md` | delivered drop 2, verbatim |
 | `capacity.py` | delivered drop 2, verbatim |
 | `CLAIM_TABLE.md` | delivered drop 2 (G1–G8), verbatim |
@@ -43,7 +44,7 @@ defense.
 | `AUDIT_NOTES.md` | added |
 | `samples/` | added |
 
-Nine claims `GC_001..009` below. The delivered `CLAIM_TABLE.md` (G1–G8)
+Twelve claims `GC_001..012` below. The delivered `CLAIM_TABLE.md` (G1–G8)
 is untouched; these are audit claims about it.
 
 Drop 2 verified: `capacity.py --selftest` passes 8/8 as the README states,
@@ -365,6 +366,98 @@ are *"asserted not recorded"*, a judgement about a specific case, and
 writing one here would put that judgement in the author's mouth — the
 `CW_004` lesson, which cost a false finding the one time a reconstruction
 filled a gap of this kind.
+
+## 10 — GC_010, the repair, designed in
+
+`SUBCASE_10A.md`'s S1:
+
+> is the set of foreclosed future readings (a) absent, (b) entered as zero
+> or negligible, or (c) entered as unknown and unbounded? ... **Absent and
+> zero are distinguishable**: absent means the term never appeared, zero
+> means it appeared and was discounted.
+
+That last sentence is the repair this audit has recorded four times, in
+four folders, against instruments that shipped without it:
+
+    PB_004   frame_sim option_gain        0 options found == never ran
+    PB_012   binary_audit handoff()       above ceiling == never checked
+    GC_004   MECHANISM_10 R3              not cited == no corpus searched
+    MD_002   moral-decomposer reduces_to  irreducible == routed elsewhere
+
+Each is one value standing for a measurement and for the absence of the
+measurement. S1 separates them in the specification and says why in the
+same sentence.
+
+Precisely what this does and does not show: S1 has no implementation and
+no reading, so it is not evidence the distinction survives contact with a
+record. What it shows is that the distinction was designed in rather than
+retrofitted — the only point in the cycle where it is free.
+
+S2 and S3 carry the shape too. S2's negative branch is a finding rather
+than a gap — *"a record that does not state this cannot have weighed it"*
+— and S3 is three-valued on the same axis, routing its third value to
+`presented-binary`.
+
+## 11 — GC_011, a third denominator state
+
+`GC_003` found R1's denominator problem in the parent: floristic inventory
+is independent but needs a local-name-to-species mapping the CALIBRATION
+CONSTRAINT forbids; ethnobotanical inventory is translatable but is a
+previous generation's numerator.
+
+The sub-case names a different failure at the same site, and distinguishes
+the two correctly:
+
+> In the parent case the denominator survives: the plants are still
+> growing whether or not anyone can name them, so the ratio is recoverable
+> in principle and the gap is a collection gap.
+>
+> Here the denominator is destroyed with the source. ... **A readout is not
+> merely uncollected; it is unconstitutable.**
+
+Three states, not two:
+
+    collectable        the denominator exists, nobody counted it
+    units-blocked      the denominator exists, does not share units with
+                       the numerator                    (GC_003, parent)
+    unconstitutable    the denominator does not exist and cannot be made
+                       to                               (SUBCASE 10A)
+
+`GC_003` stands and is now bounded — a statement about the parent, where a
+denominator exists to have a units problem. It does not transfer to the
+sub-case, and the sub-case does not rescue it.
+
+The sub-case's own move is the stronger one and it is stated plainly: do
+not measure the loss, measure the procedure. *"Any tool claiming to
+quantify it is producing a number where none exists."* All three readouts
+are properties of the record, and records exist.
+
+## 12 — GC_012, three readouts with no schema slot
+
+    foreclosed         in capacity.py: False
+    reversibility      in capacity.py: False
+    non_destructive    in capacity.py: False
+    source_survives    in capacity.py: False
+
+`capacity.py` scores R1, R2 and R3; its `SKELETON` carries `generations`,
+`transmission_gap`, `loop` and `found_constraint_tests`, and nothing holds
+a record-level three-valued answer.
+
+The sub-case declares this state — *"No case in this file has quantified
+readings. This is a schema, not a finding"* — and it is the same shape as
+`MF_017`, `CW_015` and `DL_004`: a rule stated in prose with no schema
+slot to express it.
+
+Cheaper here than in any of those. S1 and S3 are three-valued enumerations
+over fixed vocabularies and S2 is a boolean with a named negative branch;
+all three are properties of one record, so a sub-case entry is flat and
+needs no generational structure. The distinguishing work — absent versus
+zero — is already done in the specification.
+
+The OPEN section fixes its own boundary before classifying, the third
+folder to state that discipline: *"Whether the sub-case extends to sources
+that are not objects ... the boundary has not been tested and should be
+fixed before cases are classified, not after."*
 
 ## Relation to the rest of the repo
 

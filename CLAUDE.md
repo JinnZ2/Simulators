@@ -2548,6 +2548,30 @@ underneath).
   unavailable-consent is close to analytic, and the antecedent is what is
   unmeasured. Does **not** move `UNI_002`: it arrives with a seed case and
   no filed entry.
+  **Third drop lands `SUBCASE_10A.md` — IRRECOVERABLE SOURCE**, where the
+  party removing the capacity and the party bearing the loss are the same
+  and the source cannot be returned to (seed case: a specimen destroyed to
+  obtain one reading). Three properties each independently prevent the
+  loss registering: no excluded party, an unbounded and unformed
+  foreclosed set, and **zero substituted for unknown** — the same move as
+  the parent's calibration constraint at a different site. **`GC_010`:**
+  its S1 readout is three-valued with **absent and zero explicitly
+  distinguishable**, which is the repair this audit recorded four times
+  across four folders (`PB_004` option_gain, `PB_012` handoff, `GC_004`
+  R3, `MD_002` reduces_to) — designed into the specification before any
+  code exists, which is the only point in the cycle where it is free.
+  **`GC_011`:** the sub-case names a third denominator state,
+  *unconstitutable*, distinct from `GC_003`'s units-blocked and from the
+  parent's collection gap — "the plants are still growing whether or not
+  anyone can name them" versus "the denominator is destroyed with the
+  source" — which bounds `GC_003` to the parent rather than repeating or
+  rescuing it, and the sub-case's own move is stronger: do not measure the
+  loss, measure the procedure, since all three readouts are properties of
+  the record and records exist. **`GC_012`:** S1/S2/S3 have no fields in
+  `capacity.py` and no slot in its `SKELETON` — the `MF_017`/`CW_015`/
+  `DL_004` shape again, and cheaper here than in any of them since all
+  three are properties of one record. The OPEN section fixes its own
+  boundary before classifying, the third folder to state that discipline.
   **Second drop** fills the folder: canonical `README.md`, the `capacity.py`
   scorer, `CLAIM_TABLE.md` (G1–G8 plus a DISCLOSED WEAKNESSES section), and
   `cases/informed-gate.json`. `--selftest` passes 8/8 as the README states.
@@ -2628,7 +2652,26 @@ underneath).
   named — "the reductions here were produced by the same process that
   predicts them" — and `animal-standing`'s source field records a
   candidate counterexample that failed and was kept with its failure.
-  CC0.
+  **Second drop lands `mortuary-practice`** — from a classroom exchange,
+  the **first case in the folder not built by the model**, and the one
+  that reaches furthest toward M1's own falsifier. **`MD_007`:** it is the
+  first case where stage 1 matches on EVERY party, and it does not meet
+  the falsifier because that also requires the `held_fixed` lists to
+  match — they differ by exactly one item, `"which practices are available
+  to score against"`, and that item is the disagreement. M1 survives at a
+  now-visible margin of one entry. **`MD_008`, the measurement:** across
+  six sides in three cases, `cuts_required` length,
+  `criterion_documented` and `terminates` are perfectly collinear — two
+  distinct triples `(1, True, True)` and `(3, False, False)`, no
+  independent variation — so M3 has n=3 on one distinction rather than
+  three converging measurements. `category-weld`'s own mechanism turned on
+  the sibling folder's schema: three quantities that could diverge, never
+  observed diverging, all set by the same hand. Breaking it is cheap — a
+  documented criterion that still needs many cuts, or one cut with an
+  undocumented criterion. Residue is now 0 of 7 across three cases, and
+  `reduces_to: null` carries three distinct non-residue meanings
+  (agreement between sides / a real finding on a different quantity / a
+  property of the question's setup) plus the intended one. CC0.
 - `domain-ledger/` — One file, `ledger.py`, making a confidence readout
   **derived instead of asserted** by recording the domain set the number
   was taken over: "61 percent over one domain set is a different quantity
@@ -2665,7 +2708,25 @@ underneath).
   refuse on stderr with rc 1 — a report whose denominator is zero,
   rendered as though it had one, in the tool built about denominators.
   The selftest covers the empty case at the `score()` level; the gap is
-  at the presentation layer it does not reach. CC0.
+  at the presentation layer it does not reach.
+  **Second drop lands the first shape**, `hierarchy-cut-generation`: 30
+  domains, 0 read, `asserted_coverage` 0.61. **`DL_006`:** the tool's
+  whole argument instanced — the asserted 0.61 sits beside a derived `--`
+  and `detail()` prints "ledger not yet populated" rather than
+  substituting the asserted value or a zero. The one place in the repo
+  where an author has written down a number they were already carrying and
+  then run the instrument that declines to confirm it. **`DL_007`:** the
+  shape names which of `category-weld/welds/hierarchy.json`'s five senses
+  it runs on ("the other four senses, which are not this claim" — 5 minus
+  1 = 4, exact) and pre-classifies two of thirty domains by weld sense
+  BEFORE reading, which is the only time that classification is not
+  closure by construction. **First time in this drop family that a stated
+  cross-folder precondition is met** — `moral-decomposer` `MD_004` records
+  the opposite state one folder over, seven welded terms named and zero
+  decomposed. `criterion_fixed_in_advance` carries the same discipline
+  into the read, naming the failure and the routing for the ambiguous case
+  (MIXED with the reason recorded) before any domain is read. `DL_004`
+  stands: `SKELETON` still carries neither guard field. CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

@@ -357,5 +357,111 @@ results are "asserted not recorded", which is a judgement about a specific
 case, and writing one here would put that judgement in the author's mouth.
 
 ======================================================================
-end of audit -- findings recorded in AUDIT_NOTES.md as GC_001..GC_009
+10 GC_010  SUBCASE 10A builds the repair five folders have needed
+======================================================================
+SUBCASE_10A.md specifies three readouts. S1:
+
+    S1 -- ledger check. In the documented justification for a destructive
+    reading, is the set of foreclosed future readings (a) absent,
+    (b) entered as zero or negligible, or (c) entered as unknown and
+    unbounded? Three-valued, evidenced by citation from the record.
+    ABSENT AND ZERO ARE DISTINGUISHABLE: absent means the term never
+    appeared, zero means it appeared and was discounted.
+
+That last sentence is the repair this audit has recorded four times, in
+four folders, against instruments that shipped without it:
+
+  PB_004   frame_sim option_gain        wide pass found 0 options == wide pass never ran
+  PB_012   binary_audit handoff()       count above ceiling == O1 never checked
+  GC_004   MECHANISM_10 R3              no citation found == no corpus searched
+  MD_002   moral-decomposer reduces_to  irreducible residue == routed elsewhere
+
+Each of those is one value standing for a measurement and for the absence
+of the measurement. S1 separates them in the specification, before any
+code exists, and says why in the same sentence.
+
+It is worth being precise about what this does and does not show. S1 has
+no implementation and no reading, so this is not evidence that the
+distinction survives contact with a record. What it shows is that the
+distinction was designed in rather than retrofitted, which is the only
+point in the cycle where it is free.
+
+S2 and S3 carry the same shape. S2 is binary but its negative branch is
+"the record does not state whether the source survives", which is a
+finding rather than a gap -- "a record that does not state this cannot
+have weighed it". S3 is three-valued on the same absent/rejected/not-
+enumerated axis and routes its third value to presented-binary.
+
+======================================================================
+11 GC_011  the sub-case sharpens GC_003 rather than repeating it
+======================================================================
+GC_003 found R1's denominator problem in the parent: floristic inventory
+is independent but needs a local-name-to-species mapping the CALIBRATION
+CONSTRAINT forbids; ethnobotanical inventory is translatable but is a
+previous generation's numerator. A units question inside what the drop
+filed as a collection gap.
+
+SUBCASE_10A names a different failure at the same site and distinguishes
+the two correctly:
+
+    In the parent case the denominator survives: the plants are still
+    growing whether or not anyone can name them, so the ratio is
+    recoverable in principle and the gap is a collection gap.
+
+    Here the denominator is destroyed with the source. There is no later
+    count that could establish what was lost. A readout is not merely
+    uncollected; it is unconstitutable.
+
+Three states, not two, and the sub-case is the third:
+
+    collectable        the denominator exists and nobody has counted it
+    units-blocked      the denominator exists and does not share units
+                       with the numerator            (GC_003, parent)
+    unconstitutable    the denominator does not exist and cannot be made
+                       to                            (SUBCASE 10A)
+
+GC_003 stands and is now bounded: it is a statement about the parent
+mechanism, where a denominator exists to have a units problem. It does not
+transfer to the sub-case, and the sub-case does not rescue it.
+
+The sub-case's own move is the stronger one and it is stated plainly --
+do not measure the loss, measure the procedure. "Not the loss -- the loss
+is unmeasurable by construction, and any tool claiming to quantify it is
+producing a number where none exists." All three readouts are properties
+of the record, and records exist.
+
+======================================================================
+12 GC_012  S1, S2 and S3 have no fields in the scorer
+======================================================================
+
+  foreclosed         appears in capacity.py: False
+  reversibility      appears in capacity.py: False
+  non_destructive    appears in capacity.py: False
+  source_survives    appears in capacity.py: False
+  destructive        appears in capacity.py: False
+  ledger_check       appears in capacity.py: False
+
+capacity.py scores R1, R2 and R3 and has no slot for any of the three
+sub-case readouts. The SKELETON emitted by `--new` carries `generations`,
+`transmission_gap`, `loop` and `found_constraint_tests`; nothing there
+holds a record-level three-valued answer.
+
+That is the state the sub-case declares -- "No case in this file has
+quantified readings. This is a schema, not a finding" -- and the same
+shape as measurement-fork MF_017, category-weld CW_015 and domain-ledger
+DL_004: a rule stated in prose with no schema slot to express it.
+
+It is cheaper here than in any of those. S1 and S3 are three-valued
+enumerations over a fixed vocabulary and S2 is a boolean with a named
+negative branch; all three are properties of one record, so a sub-case
+entry is flat and needs no generational structure. The distinguishing
+work -- absent versus zero -- is already done in the specification.
+
+The OPEN section also fixes its own boundary before classifying, which is
+the third folder to state that discipline: "Whether the sub-case extends
+to sources that are not objects ... the boundary has not been tested and
+should be fixed before cases are classified, not after."
+
+======================================================================
+end of audit -- findings recorded in AUDIT_NOTES.md as GC_001..GC_012
 ======================================================================

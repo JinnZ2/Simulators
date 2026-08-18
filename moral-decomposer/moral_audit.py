@@ -3,7 +3,7 @@
 
 Added, not delivered. README.md, CLAIM_TABLE.md and both files under
 cases/ are the drop as received and are not modified. Findings are
-recorded in AUDIT_NOTES.md as MD_001..MD_006.
+recorded in AUDIT_NOTES.md as MD_001..MD_008.
 
     python3 moral_audit.py
 
@@ -279,7 +279,117 @@ says n=2 self-produced is "the weakest evidence in the repo" and does not
 overstate.
 """.strip())
 
+# ------------------------------------------------------------------ MD_007
+head(7, "MD_007", "the first case not built by the model, and what it reaches")
+print("""
+DISCLOSED WEAKNESSES, first item: "Both cases are model-constructed."
+MD_006 recorded it as the finding an auditor would lead with. Drop 2
+answers it.
+""".strip())
+print()
+for c in CASES:
+    origin = ("EXTERNAL" if "not constructed by the model" in c.get("source", "")
+              else "model-constructed")
+    print("  %-18s %s" % (c["case"], origin))
+print()
+print("""
+mortuary-practice is from a classroom exchange, and its source field says
+what makes it different: "the smuggled content sits in the question's
+setup rather than in either side's position."
+
+It also reaches something none of the others do. M1's falsifier:
+
+    a case where both sides' stage-1 readings match on every party AND
+    every held-fixed variable, and a disagreement remains
+""".strip())
+print()
+print("  %-18s %-16s %-18s %s" % ("case", "parties match", "held_fixed match", "live residue"))
+print("  " + "-" * 66)
+
+
+def _sig(side):
+    return sorted((o["party"], o["in_tally"], o["optionality"],
+                   o["decision_authority"]) for o in side["option_claims"])
+
+
+for c in CASES:
+    a, b = c["sides"]
+    pm = _sig(a) == _sig(b)
+    hm = sorted(a.get("held_fixed", [])) == sorted(b.get("held_fixed", []))
+    live = sum(1 for r in c["residue_candidates"] if not r.get("resolved"))
+    print("  %-18s %-16s %-18s %d" % (c["case"], pm, hm, live))
+print()
+mp = next(c for c in CASES if c["case"] == "mortuary-practice")
+a, b = mp["sides"]
+extra = [x for x in a["held_fixed"] if x not in b["held_fixed"]]
+print("  mortuary-practice held_fixed differs by exactly %d item:" % len(extra))
+for x in extra:
+    print("      %s: %s" % (a["id"], x))
+print()
+print("""
+So the case gets closer to M1's falsifier than anything else in the
+corpus -- first case where stage 1 matches on EVERY party -- and does not
+meet it, because the falsifier also requires the held_fixed lists to
+match, and they differ by one item: "which practices are available to
+score against".
+
+That one item is the disagreement. The case's own note says as much:
+"the divergence is entirely at stage 2 -- what the practice is scored
+against." M1 survives, and the margin is now visible and small: one
+held_fixed entry between the corpus and the claim's stated falsifier.
+
+Whether the falsifier is well-drawn is a separate question this audit
+does not settle. Requiring held_fixed to match makes a stage-2 divergence
+insufficient to refute a claim about stage 1 -- which is either the right
+boundary or a boundary that puts the falsifier out of reach, and the two
+readings are not distinguishable from three cases.
+""".strip())
+
+# ------------------------------------------------------------------ MD_008
+head(8, "MD_008", "M3's three fields never vary independently")
+print()
+print("  %-18s %-11s %6s %-12s %s" % (
+    "case", "side", "cuts", "crit_doc", "terminates"))
+print("  " + "-" * 60)
+_triples = []
+for c in CASES:
+    for side in c["sides"]:
+        f = side["frame"]
+        n = len(f.get("cuts_required", []))
+        _triples.append((n, f.get("criterion_documented"), f.get("terminates")))
+        print("  %-18s %-11s %6d %-12s %s" % (
+            c["case"], side["id"], n, f.get("criterion_documented"),
+            f.get("terminates")))
+print()
+print("  distinct (cuts, criterion_documented, terminates) triples: %d"
+      % len(set(_triples)))
+for t in sorted(set(_triples)):
+    print("      %s" % (t,))
+print("""
+Across six sides in three cases the three fields are perfectly collinear:
+cuts=3 always with criterion_documented=False and terminates=False,
+cuts=1 always with True and True. Two triples, no independent variation.
+
+M3's status reads the cut asymmetry as evidence. On this corpus the cut
+count, the documentation flag and the termination flag are one variable
+reported three ways -- so M3 has n=3 on a single distinction, not three
+converging measurements.
+
+This is `category-weld`'s own mechanism applied to the sibling folder's
+schema: three quantities that could diverge, never observed diverging,
+all set by the same hand in the same file. The weld test asks whether a
+divergence case can be named; here the divergence is not merely unnamed,
+it is unrepresented across the whole corpus.
+
+What would separate them, and it is cheap: a side whose criterion IS
+documented and which still requires many cuts (a well-specified ordering
+that keeps ordering), or a side with one cut and an undocumented
+criterion (a terminating frame nobody wrote down). Either breaks the
+collinearity and turns M3 from one reading into two.
+""".strip())
+
+
 print()
 print(BAR)
-print("end of audit -- findings recorded in AUDIT_NOTES.md as MD_001..MD_006")
+print("end of audit -- findings recorded in AUDIT_NOTES.md as MD_001..MD_008")
 print(BAR)

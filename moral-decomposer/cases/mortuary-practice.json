@@ -1,0 +1,82 @@
+{
+  "case": "mortuary-practice",
+  "dispute": "Posed as: can a people who consume their dead be said to care about them as much as a people who bury theirs. Raised as a challenge to the option-distribution reading.",
+  "source": "From a classroom exchange. First case in this repo not constructed by the model. Diverges from the other two: the smuggled content sits in the question's setup rather than in either side's position.",
+  "welded_terms": ["care", "respect for the dead", "disposal"],
+  "sides": [
+    {
+      "id": "asker",
+      "position": "burial indicates care; its absence indicates less care",
+      "option_claims": [
+        {"party": "the dead", "in_tally": true, "optionality": "held_fixed",
+         "decision_authority": false,
+         "note": "present in the account as an object of treatment"},
+        {"party": "the burying community", "in_tally": true,
+         "optionality": "generated", "decision_authority": true, "note": ""},
+        {"party": "the consuming community", "in_tally": true,
+         "optionality": "generated", "decision_authority": true,
+         "note": "granted option generation, but the options are scored against the asker's practice set"}
+      ],
+      "held_fixed": [
+        "the mapping from practice to interior disposition",
+        "which practices are available to score against"
+      ],
+      "frame": {
+        "boundary_criterion": "the practice the asker recognises is the definition of the category",
+        "criterion_documented": false,
+        "acquired": true,
+        "terminates": false,
+        "cuts_required": [
+          {"cut": "which practices indicate care", "documented": false},
+          {"cut": "how an unfamiliar practice is classified", "documented": false},
+          {"cut": "how much care each recognised practice indicates", "documented": false}
+        ]
+      }
+    },
+    {
+      "id": "practising",
+      "position": "consuming the dead is the practice by which the dead are kept with the living",
+      "option_claims": [
+        {"party": "the dead", "in_tally": true, "optionality": "held_fixed",
+         "decision_authority": false, "note": "same position as in the asker's account"},
+        {"party": "the burying community", "in_tally": true,
+         "optionality": "generated", "decision_authority": true, "note": ""},
+        {"party": "the consuming community", "in_tally": true,
+         "optionality": "generated", "decision_authority": true,
+         "note": "options scored against its own practice set"}
+      ],
+      "held_fixed": [
+        "the mapping from practice to interior disposition"
+      ],
+      "frame": {
+        "boundary_criterion": "the practice is read against the frame that assigns it meaning",
+        "criterion_documented": true,
+        "acquired": true,
+        "terminates": true,
+        "cuts_required": [
+          {"cut": "which frame assigns this practice its meaning", "documented": true}
+        ]
+      }
+    }
+  ],
+  "residue_candidates": [
+    {
+      "claim": "one people cares about its dead less than the other",
+      "reduces_to": "frame",
+      "resolved": true,
+      "note": "Stage 1 matches on every party: same tally, same optionality, same decision authority. The divergence is entirely at stage 2 — what the practice is scored against. This is the first case in the repo where the option layer matches and the disagreement is still accounted for."
+    },
+    {
+      "claim": "the practice carries a transmission risk",
+      "reduces_to": null,
+      "resolved": true,
+      "note": "A public-health quantity, independently measurable, and not evidence about interior disposition. Recorded as separate rather than as residue: it is a real finding on a different quantity that the original framing welds into one verdict. Kept in the file so the separation is visible."
+    },
+    {
+      "claim": "the question presupposes its own answer",
+      "reduces_to": null,
+      "resolved": true,
+      "note": "Not residue between the sides — a property of the setup. The asker's premise is the disputed mapping, so the question cannot be answered without granting it. Nearest structural relative of the shared-assumption item in means-to-save, but located in the question rather than in the two positions."
+    }
+  ]
+}

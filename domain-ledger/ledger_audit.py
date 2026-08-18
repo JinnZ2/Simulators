@@ -210,7 +210,93 @@ gap is one level up, at the presentation layer the selftest does not
 reach.
 """.strip())
 
+# ------------------------------------------------------------------ DL_006
+head(6, "DL_006", "the first shape, and the asserted number sitting beside no derived one")
+shapes = L.load()
+print("""
+Drop 2 delivers shapes/hierarchy-cut-generation.json: 30 domains, an
+asserted coverage of 0.61, and a source field stating what the file is
+for.
+
+    Coverage asserted at 0.61 over a domain set carried in working memory
+    rather than written down. This file exists to convert the asserted
+    number to a derived one; until the read column is filled the derived
+    number is unavailable, and that unavailability is the current state,
+    not a failure.
+""".strip())
+print()
+for sh in shapes:
+    sc = L.score(sh)
+    print("  %-26s domains %d   read %d   asserted %s   derived %s   mismatch %s" % (
+        sc["shape"], sc["domains_total"], sc["read"],
+        L.fmt(sc["asserted_coverage"]), L.fmt(sc["coverage"]),
+        L.fmt(sc["coverage_mismatch"])))
+print("""
+The tool's whole argument, instanced on its first shape: a number that was
+being carried as 0.61 now sits next to a derived column reading `--`, and
+`detail()` prints "derived -- ledger not yet populated" rather than
+substituting the asserted value or a zero.
+
+That is the branch DL_002 and DL_005 are about, used correctly. It is also
+the one place in this repo where an author has written down a number they
+were already using and then built the instrument that refuses to confirm
+it.
+
+The gap it exposes is the one the file names: 30 domains, 0 read, so
+every ratio is `--` and the reservation's ceiling has nothing to cap. The
+readouts are live and the corpus is empty -- which is the honest state and
+is what the source field says.
+""".strip())
+
+# ------------------------------------------------------------------ DL_007
+head(7, "DL_007", "the cross-folder run order is met, for the first time in this family")
+print("""
+The shape's statement does something no other artifact in this drop family
+has done:
+
+    Runs on the imposed_ordering sense only -- see category-weld
+    welds/hierarchy.json for the other four senses, which are not this
+    claim.
+""".strip())
+weld_path = os.path.join(ROOT, "category-weld", "welds", "hierarchy.json")
+import json
+weld = json.load(open(weld_path, encoding="utf-8"))
+comps = [c["id"] for c in weld["components"]]
+print()
+print("  category-weld/welds/hierarchy.json components (%d):" % len(comps))
+print("      %s" % ", ".join(comps))
+print("  minus imposed_ordering = %d; the statement says four: %s" % (
+    len(comps) - 1, len(comps) - 1 == 4))
+print()
+print("  domains pre-classified by weld sense before being read:")
+for sh in shapes:
+    for d in sh.get("domains", []):
+        if "sense lives here" in (d.get("note") or ""):
+            print("      %-42s %s" % (d["domain"], d["note"]))
+print("""
+moral-decomposer MD_004 records the opposite state one folder over: a
+stated RUN ORDER requiring welded terms decomposed first, seven terms
+named, zero decomposed. Here the weld exists, the shape names which of its
+five senses the claim runs on, and two of the thirty domains are
+pre-classified as probably belonging to a different sense -- before
+reading, which is the only time that classification is not closure by
+construction.
+
+The `criterion_fixed_in_advance` field carries the same discipline for the
+read itself:
+
+    Reclassifying a case as not-really-hierarchy after seeing which way it
+    read is closure by construction and is not permitted; such a case is
+    MIXED with the reason recorded.
+
+That names the failure, names the routing for the ambiguous case, and
+fixes both before any domain is read. DL_004's finding stands unchanged --
+SKELETON still carries neither field, so a shape created by `--new` starts
+without them -- and the delivered shape shows what the fields are for.
+""".strip())
+
+
 print()
 print(BAR)
-print("end of audit -- findings recorded in AUDIT_NOTES.md as DL_001..DL_005")
+print("end of audit -- findings recorded in AUDIT_NOTES.md as DL_001..DL_007")
 print(BAR)

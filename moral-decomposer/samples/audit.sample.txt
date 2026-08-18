@@ -1,5 +1,5 @@
 moral-decomposer -- audit of the delivered drop
-delivered: README.md, CLAIM_TABLE.md (M1-M5), 2 case file(s)
+delivered: README.md, CLAIM_TABLE.md (M1-M5), 3 case file(s)
 NOT delivered: decompose.py, named five times in the README
 
 ======================================================================
@@ -19,11 +19,11 @@ built to show disagreements reduce will show them reducing. It is the one
 claim whose whole content is "the detector can fire", and it is the one
 claim that cannot be checked from the folder.
 
-  residue candidates in the delivered corpus : 4
-  marked resolved                            : 4
+  residue candidates in the delivered corpus : 7
+  marked resolved                            : 7
   live                                       : 0
 
-0 of 4. On the delivered data alone the instrument has never returned a
+0 of 7. On the delivered data alone the instrument has never returned a
 non-empty residue -- which is exactly what M5 says not to read as proof,
 and exactly why the missing fixture is the load-bearing artifact.
 null-harness grades a detector that has not been shown to fire
@@ -51,6 +51,9 @@ So `reduces_to: null` is the finding. In the delivered corpus:
   animal-standing  the excluding side simply cares less                 option    True
   means-to-save    an irreducible clash between counting outcomes and r option    True
   means-to-save    both sides accept the presented option set as comple None      True
+  mortuary-practice one people cares about its dead less than the other  frame     True
+  mortuary-practice the practice carries a transmission risk             None      True
+  mortuary-practice the question presupposes its own answer              None      True
 
 The last row is `reduces_to: null` AND `resolved: true`. Its note says it
 is not residue between the sides but agreement between them, routed to
@@ -80,6 +83,8 @@ both times, in opposite file positions)."
   animal-standing  excludes   species membership            3      3
   means-to-save    permits    parties are counted, not      3      3
   means-to-save    refuses    a party with option gene      1      0
+  mortuary-practice asker      the practice the asker r      3      3
+  mortuary-practice practising the practice is read aga      1      0
 
 Confirmed to the digit, including the position claim: the 3-cut side is
 second in animal-standing and first in means-to-save.
@@ -95,6 +100,8 @@ checks the two against each other.
   animal-standing  excludes   terminates=False cuts=3  consistent: True
   means-to-save    permits    terminates=False cuts=3  consistent: True
   means-to-save    refuses    terminates=True  cuts=1  consistent: True
+  mortuary-practice asker      terminates=False cuts=3  consistent: True
+  mortuary-practice practising terminates=True  cuts=1  consistent: True
 
 ======================================================================
 4  MD_004  the run order is stated and the corpus does not follow it
@@ -116,8 +123,11 @@ Measured against the sibling folder:
   animal-standing  count            False
   means-to-save    means            False
   means-to-save    the few          False
+  mortuary-practice care             False
+  mortuary-practice respect for the dead False
+  mortuary-practice disposal         False
 
-  4 welded terms named, 0 decomposed. category-weld holds: capital, hierarchy, rural
+  7 welded terms named, 0 decomposed. category-weld holds: capital, hierarchy, rural
 
 `the few` is `presented-binary` B5's "a few" under a different article --
 the same term, now named from a second folder, and still with no
@@ -183,6 +193,11 @@ Both case `source` fields say the same thing unprompted:
       Constructed by the model as a candidate counterexample, in the
        genre of a classroom moral case. Not drawn from a documented 
       dispute. Recorded with its reduction.
+  mortuary-practice:
+      From a classroom exchange. First case in this repo not constru
+      cted by the model. Diverges from the other two: the smuggled c
+      ontent sits in the question's setup rather than in either side
+      's position.
 `animal-standing` goes further -- "Offered, then found to reduce; recorded
 with the reduction rather than discarded." A candidate counterexample that
 failed, kept with its failure, which is the refutation protocol applied to
@@ -195,5 +210,88 @@ says n=2 self-produced is "the weakest evidence in the repo" and does not
 overstate.
 
 ======================================================================
-end of audit -- findings recorded in AUDIT_NOTES.md as MD_001..MD_006
+7  MD_007  the first case not built by the model, and what it reaches
+======================================================================
+DISCLOSED WEAKNESSES, first item: "Both cases are model-constructed."
+MD_006 recorded it as the finding an auditor would lead with. Drop 2
+answers it.
+
+  animal-standing    model-constructed
+  means-to-save      model-constructed
+  mortuary-practice  EXTERNAL
+
+mortuary-practice is from a classroom exchange, and its source field says
+what makes it different: "the smuggled content sits in the question's
+setup rather than in either side's position."
+
+It also reaches something none of the others do. M1's falsifier:
+
+    a case where both sides' stage-1 readings match on every party AND
+    every held-fixed variable, and a disagreement remains
+
+  case               parties match    held_fixed match   live residue
+  ------------------------------------------------------------------
+  animal-standing    False            False              0
+  means-to-save      False            False              0
+  mortuary-practice  True             False              0
+
+  mortuary-practice held_fixed differs by exactly 1 item:
+      asker: which practices are available to score against
+
+So the case gets closer to M1's falsifier than anything else in the
+corpus -- first case where stage 1 matches on EVERY party -- and does not
+meet it, because the falsifier also requires the held_fixed lists to
+match, and they differ by one item: "which practices are available to
+score against".
+
+That one item is the disagreement. The case's own note says as much:
+"the divergence is entirely at stage 2 -- what the practice is scored
+against." M1 survives, and the margin is now visible and small: one
+held_fixed entry between the corpus and the claim's stated falsifier.
+
+Whether the falsifier is well-drawn is a separate question this audit
+does not settle. Requiring held_fixed to match makes a stage-2 divergence
+insufficient to refute a claim about stage 1 -- which is either the right
+boundary or a boundary that puts the falsifier out of reach, and the two
+readings are not distinguishable from three cases.
+
+======================================================================
+8  MD_008  M3's three fields never vary independently
+======================================================================
+
+  case               side          cuts crit_doc     terminates
+  ------------------------------------------------------------
+  animal-standing    admits           1 True         True
+  animal-standing    excludes         3 False        False
+  means-to-save      permits          3 False        False
+  means-to-save      refuses          1 True         True
+  mortuary-practice  asker            3 False        False
+  mortuary-practice  practising       1 True         True
+
+  distinct (cuts, criterion_documented, terminates) triples: 2
+      (1, True, True)
+      (3, False, False)
+Across six sides in three cases the three fields are perfectly collinear:
+cuts=3 always with criterion_documented=False and terminates=False,
+cuts=1 always with True and True. Two triples, no independent variation.
+
+M3's status reads the cut asymmetry as evidence. On this corpus the cut
+count, the documentation flag and the termination flag are one variable
+reported three ways -- so M3 has n=3 on a single distinction, not three
+converging measurements.
+
+This is `category-weld`'s own mechanism applied to the sibling folder's
+schema: three quantities that could diverge, never observed diverging,
+all set by the same hand in the same file. The weld test asks whether a
+divergence case can be named; here the divergence is not merely unnamed,
+it is unrepresented across the whole corpus.
+
+What would separate them, and it is cheap: a side whose criterion IS
+documented and which still requires many cuts (a well-specified ordering
+that keeps ordering), or a side with one cut and an undocumented
+criterion (a terminating frame nobody wrote down). Either breaks the
+collinearity and turns M3 from one reading into two.
+
+======================================================================
+end of audit -- findings recorded in AUDIT_NOTES.md as MD_001..MD_008
 ======================================================================
