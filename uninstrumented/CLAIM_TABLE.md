@@ -1,13 +1,14 @@
 # CLAIM_TABLE — uninstrumented
 
-Forty-nine claims, `UNI_001..049`. **Three repaired** (`UNI_003`,
+Fifty-seven claims, `UNI_001..057`. **Three repaired** (`UNI_003`,
 `UNI_009`, `UNI_010`), see *Repairs* at the end. `UNI_013..019` come from
 the Case 010 drop ([`case_010_audit.py`](case_010_audit.py)),
 `UNI_020..026` from Case 011 ([`case_011_audit.py`](case_011_audit.py))
 `UNI_027..033` from Case 012
 ([`case_012_audit.py`](case_012_audit.py)) `UNI_034..041` from Case 013
-([`case_013_audit.py`](case_013_audit.py)) and `UNI_042..049` from Case 014
-([`case_014_audit.py`](case_014_audit.py)).
+([`case_013_audit.py`](case_013_audit.py)) `UNI_042..049` from Case 014
+([`case_014_audit.py`](case_014_audit.py)) and `UNI_050..057` from Case 015
+([`case_015_audit.py`](case_015_audit.py)).
 
 ## REFUTATION_PROTOCOL
 
@@ -401,6 +402,28 @@ Sections 3–6 were web-checked on 2026-08-18 and are marked.
 | `UNI_047` | Q2 makes **two** claims and attaches **one** falsifier. The falsifier tests the smuggle (claim A); the claim the entry leans on — that the reference-population error has no name in the literature (claim B) — has no falsifier. Claim B is consistent with the corpus reached: the evolution-education literature studies populations of *learners*, not the implicit reference population of the narrative. Named as the cheapest next check and not searched here: the history-of-science and decolonial-paleoanthropology literature. | a named critique of reference-population smuggling in human-origins narratives | SUPPORTED (structural) |
 | `UNI_048` | Three `[stated by Kavik]` tags, up from one in Case 013 — the device is now used at scale, and its distribution is informative: the single **untagged** question is the one with an independent runnable instrument and a stated high confidence, and instrumentability falls off across the tagged ones (Q2 depends on Q1, Q3 "unclear", Q4 "no instrument proposed"). The tag marks what is a position rather than a procedure, in an entry whose protocol says it holds markers not positions. | a tagged question with an independent instrument | SUPPORTED |
 | `UNI_049` | "Do not fill this in with an approximation" reaches a **third** instance in three drops (`DD_007` recorded it at two) — a construct with a stable form and still no schema slot. Q3 adds the sharpest sentence in the drop: *"any study isolating one is measuring an artifact of its own isolation, and the isolation is a property of the instrument"* — the register's own thesis stated in general form, as a conditional with the condition named. The NOT CLAIMED HERE section pre-empts the intent reading, which is `rigidification-sensor`'s no-actor discipline arriving in a one-page case. | the device appearing without a withheld slot behind it | SUPPORTED (holds) |
+
+## Case 015 drop — UNI_050..057
+
+Case 015 (`cases/case-015.md`, delivered verbatim) proposes a new
+mechanism, DEFINITIONAL PRECEDENCE, and its central claim is checkable in
+an unusual way: the field's own classification vocabulary either has a
+slot for the finding or it does not, and that is published record rather
+than judgement. Worked in [`case_015_audit.py`](case_015_audit.py).
+
+Sections 1–5 were web-checked on 2026-08-18 and are marked; the arithmetic
+in §5 reproduces by running the script.
+
+| id | statement | status | falsifier |
+| --- | --- | --- | --- |
+| `UNI_050` | The occasion verifies across five authors, the DOI, the bioRxiv ID, the institution, the "100-year-old classification" (the source's own phrase), the bracketed 5–8% growth limit and the 21% aerotolerance. One drift: the preprint says "lung **commensal**", the published version says "lung **symbiont**" — a categorical relabeling inside the paper whose subject is a categorical relabeling. Also located and stronger than the entry claims: >10% of microbial populations in healthy and diseased lungs. | any stated detail failing to match | SUPPORTED *(web)* |
+| `UNI_051` | **Q1's mechanism is refuted and its conclusion strengthened.** The field's oxygen vocabulary is **five-valued**, not two — and one of the five, *aerotolerant anaerobe*, is named for exactly the phenomenon reported. Further, the obligate-anaerobe category's own published range reaches **8% oxygen**, so the measured growth limit sits *inside* the range of the category it was assigned to; only the 21% aerotolerance exceeds it. The label held not because the vocabulary lacked a slot but **despite** having one named for this — a worse failure, and better evidence for DEFINITIONAL PRECEDENCE. | the five-category vocabulary post-dating the classification | SUPPORTED (refutes the stated mechanism) |
+| `UNI_052` | Q1's falsifier partly fires, and the refinement beats the claim. The standard assay — thioglycollate broth, position in the tube reflecting oxygen preference — **is a gradient method**. What it does not do is quantify: it returns a position that maps to a category *name*, never a concentration. The sharper exclusion: **the numeric threshold attached to the label was never measured by the assay that assigns the label.** The sensor platform matters because it quantifies, not because it is a gradient. | classification numbers being produced by the standard assay | SUPPORTED (narrows and sharpens) |
+| `UNI_053` | The VISIBLE AS titling claim verifies **verbatim**: *"Oxygen induces mutation in a strict anaerobe, Prevotella melaninogenica"* (2008), 18 years before the 2026 paper. The 2008 study measured decreased survival and increased oxidative damage under oxygen exposure — an oxygen-response measurement with the label retained in the title of the paper doing the measuring. The proposed mechanism instanced in five words. | the paper not existing, or not carrying that phrase | SUPPORTED *(web)* |
+| `UNI_054` | Q3's either/or needs an edit: **the two branches are not exclusive and the 2008 paper shows both operating.** It is evidence on the *category* branch (oxygen experiments 18 years before the sensor) and does not settle the *instrument* branch, because its readout — mutation frequency and survival — could not produce a growth-limit number however carefully run. The joint reading makes Q3's underlying question worse, not better: it requires both a missing quantifier and a holding label. | a pre-sensor study measuring growth across intermediate concentrations | SUPPORTED |
+| `UNI_055` | **The headline number rests on a figure that was not located.** At 0.05% the arithmetic is exact (5/0.05 = 100, two orders). The 0.05% figure was not located; the located category description gives **0.5%** as the low end — an order of magnitude above, which would halve the exponent. The entry may be quoting a Prevotella-specific threshold from the source, a different quantity from the category's general low end. Recorded as NOT LOCATED, not as wrong. | the source paper's stated historical threshold | NOT LOCATED (the one number the headline depends on) |
+| `UNI_056` | DEFINITIONAL PRECEDENCE is a **fourth state** against the register's founding binary (`UNI_042`), and differs in kind from the third: not "nobody looked" but "somebody looked, published it in the same field, and the category converted it into a methods problem." **It names an operation, not an absence** — the other mechanism candidates name a quantity with no register; this one names something that runs on data that did arrive, and it has the best-instanced anchor of the four. | an instance where the category admitted the observation as evidence | SUPPORTED (holds) |
+| `UNI_057` | Four of four cross-links resolve — second drop with no dangling reference, after Case 013. The `presented-binary` link is accurate to that folder, with the twist `UNI_051` supplies: the option space was not in fact constrained to two, so the alternatives were present, documented, and not reached for. Confidence is split across the cluster again (Case 012's state, second appearance); five states of the one string field are now in the wild. | a dangling link, or an unsplit confidence | SUPPORTED |
 
 ## Repairs
 

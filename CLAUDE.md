@@ -2291,7 +2291,44 @@ underneath).
   in general form as a conditional — "any study isolating one is measuring
   an artifact of its own isolation, and the isolation is a property of the
   instrument" — while NOT CLAIMED HERE pre-empts the intent reading, which
-  is `rigidification-sensor`'s no-actor discipline in a one-page case. **REPAIRED:** `UNI_003` (`entry()` takes a primary plus
+  is `rigidification-sensor`'s no-actor discipline in a one-page case.
+  **`cases/case-015.md`** proposes a new mechanism, DEFINITIONAL
+  PRECEDENCE — a label converting disconfirming evidence into a methods
+  problem — occasioned by Albright et al., *J. Bacteriology* 2026
+  reclassifying *Prevotella melaninogenica* after a century as a strict
+  obligate anaerobe. **`UNI_051`, the load-bearing check:** Q1 says
+  "aerobe / anaerobe is a two-state classification" and it is **five**-state
+  — obligate aerobe / facultative anaerobe / microaerophile /
+  **aerotolerant anaerobe** / obligate anaerobe — with category 4 named for
+  exactly the phenomenon reported, and the obligate-anaerobe category's own
+  published range reaching **8% oxygen**, so the measured 5–8% growth limit
+  sits INSIDE the category it was assigned to and only the 21%
+  aerotolerance exceeds it. **That refutes the stated mechanism and
+  strengthens the conclusion**: the label held not because the vocabulary
+  lacked a slot but despite having one named for this. **`UNI_052`:** the
+  falsifier partly fires and the refinement beats the claim — the standard
+  thioglycollate assay IS a gradient method; what it does not do is
+  quantify, returning a position that maps to a category name, so **the
+  numeric threshold attached to the label was never measured by the assay
+  that assigns the label**, and the sensor platform matters because it
+  quantifies rather than because it is a gradient. **`UNI_053`/`UNI_054`:**
+  the titling claim verifies verbatim — "Oxygen induces mutation in a
+  strict anaerobe, Prevotella melaninogenica" (2008), 18 years earlier,
+  measuring survival and mutation under oxygen with the label in the title
+  — which lands on Q3's *category* branch while leaving the *instrument*
+  branch open, since that readout could not produce a growth-limit number;
+  the two branches are not exclusive and the 2008 paper shows both.
+  **`UNI_055`:** the 0.05% historical threshold was **not located** and the
+  headline "two orders of magnitude" depends on it exactly (5/0.05 = 100),
+  while the located category low end is 0.5% — an order of magnitude above,
+  which halves the exponent. **`UNI_056`:** DEFINITIONAL PRECEDENCE is a
+  **fourth state** against the founding binary (`UNI_042`) and the first to
+  name an **operation** rather than an absence — somebody looked, published
+  it in the same field, and the category converted it into a methods
+  problem. **`UNI_050`/`UNI_057`:** occasion verifies with one pointed
+  drift (preprint "lung commensal", published version "lung symbiont" — a
+  categorical relabeling inside the paper about a categorical relabeling),
+  and four of four cross-links resolve. **REPAIRED:** `UNI_003` (`entry()` takes a primary plus
   an `also` list and the register sorts under every mechanism — which is
   what lets check 1 return anything but zero: 5 mechanisms now hold entries
   from more than one field, though weakly, since the secondaries were
@@ -2309,7 +2346,7 @@ underneath).
   enforced one mechanism per sentence — it does not, the `break` exits the
   trigger loop and mechanisms already co-fire, so the wrong-mechanism
   finding was a missing trigger rather than a blocked co-firing. Nineteen
-  claims `UNI_001..049`. Stdlib only, CC0.
+  claims `UNI_001..057`. Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
   time-series variable** — version the ruler, compute drift on its own

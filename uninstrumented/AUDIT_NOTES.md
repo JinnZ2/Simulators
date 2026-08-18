@@ -9,9 +9,10 @@ checks on itself), [`scan_audit.py`](scan_audit.py) (grades the scanner),
 [`case_011_audit.py`](case_011_audit.py) and
 [`case_012_audit.py`](case_012_audit.py) and
 [`case_013_audit.py`](case_013_audit.py) and
-[`case_014_audit.py`](case_014_audit.py) (checks on the five delivered
+[`case_014_audit.py`](case_014_audit.py) and
+[`case_015_audit.py`](case_015_audit.py) (checks on the six delivered
 cases) and [`CLAIM_TABLE.md`](CLAIM_TABLE.md). `cases/case-010.md`
-through `cases/case-014.md` are delivered, verbatim.
+through `cases/case-015.md` are delivered, verbatim.
 
 The delivered README supersedes what follows on two points, and both are
 carried into the claim table rather than silently corrected:
@@ -1078,3 +1079,170 @@ Q4 into a claim about somebody's plan, by naming what the argument does
 **not** need — the same discipline `../rigidification-sensor/` states
 about itself ("names no actor, motive, or plan by construction"), arriving
 in a one-page case.
+
+---
+
+## Case 015 — the label that outranked a century of observation
+
+`cases/case-015.md`, delivered verbatim. Checks in
+[`case_015_audit.py`](case_015_audit.py); claims `UNI_050..057`.
+
+### UNI_051 — Q1's mechanism is refuted, and its conclusion strengthened
+
+Q1 opens: *"Aerobe / anaerobe is a two-state classification."*
+
+It is five-state, and has been as long as the textbook categories have
+existed:
+
+| # | category | |
+|---|---|---|
+| 1 | obligate aerobe | requires O₂, survives atmospheric |
+| 2 | facultative anaerobe | uses O₂ if present, otherwise not |
+| 3 | microaerophile | requires O₂ at ~1–10%, harmed at 21% |
+| 4 | **aerotolerant anaerobe** | **survives O₂, does not use it for growth** |
+| 5 | obligate anaerobe | does not survive normal atmospheric O₂ |
+
+Category 4 is named for exactly the phenomenon the 2026 paper reports.
+
+**And that makes the entry's conclusion stronger.** If the vocabulary had
+been binary, the label holding would be partly a tooling failure — nowhere
+to file the result. With five categories and one named for the finding,
+the label held **despite** an available slot. Worse failure, better
+evidence for the mechanism the case proposes.
+
+A second published figure cuts the same way: the obligate-anaerobe
+category's own documented range reaches **8% oxygen** — *"some obligate
+anaerobes can survive in up to 8% oxygen, while others cannot survive
+unless the oxygen concentration is less than 0.5%."* The measured growth
+limit, between 5% and 8%, sits **inside** the range already published for
+the category it was assigned to. Only the 21% aerotolerance exceeds it.
+
+So the finding is not "an organism was outside its category by two orders
+of magnitude". It is closer to: *an organism sat at the documented top of
+its own category, and in a neighbouring category on a second axis, and
+neither was checked for a century.*
+
+### UNI_052 — the falsifier partly fires, and the refinement beats the claim
+
+The standard assay is a **thioglycollate broth tube**, and the categories
+"can be distinguished experimentally using thioglycollate broth tubes,
+where position in the tube reflects the organism's oxygen preference."
+
+A thioglycollate tube *is* an oxygen gradient. So "standard anaerobic
+culture reproduces the binary, not the gradient" is not right about the
+protocol.
+
+What the assay does not do is **quantify**. It returns a position, which
+maps to a category *name*. It never returns a concentration. The sharper
+exclusion, and a better statement of the entry's own case:
+
+> the numeric threshold attached to the label was never measured by the
+> assay that assigns the label
+
+A number like 0.05% cannot come out of reading a band's depth in a tube.
+It has to come from somewhere else, attach to the category name, and then
+travel with every organism the assay assigns that name — an assay which
+could not have produced it. **The sensor platform matters because it
+quantifies, not because it is a gradient**; the gradient was already
+there.
+
+### UNI_053 / UNI_054 — the title, and what it settles
+
+The VISIBLE AS claim verifies verbatim: **"Oxygen induces mutation in a
+strict anaerobe, *Prevotella melaninogenica*"** (2008) — eighteen years
+before the 2026 paper. The study measured decreased survival, increased
+oxidative DNA damage and raised mutation frequency under oxygen exposure.
+
+An oxygen-response measurement on the organism, published, with the label
+retained in the title of the paper doing the measuring. The proposed
+mechanism instanced in five words.
+
+Q3 asks whether the binding constraint was the instrument or the category
+and leaves it open. The 2008 paper lands on the **category** branch —
+oxygen experiments ran 18 years before the sensor and the classification
+survived them. It does **not** settle the instrument branch: its readout
+was mutation frequency and survival, not growth across intermediate
+concentrations, and a study of that design cannot produce a growth-limit
+number however carefully run.
+
+**The branches are not exclusive, and the 2008 paper shows both
+operating.** Q3's either/or is what needs editing; the question underneath
+— how many other cases sit in this state — is unaffected, and the joint
+reading makes it worse, since it needs both a missing quantifier and a
+holding label rather than either alone.
+
+### UNI_055 — the headline number was not located
+
+    threshold 0.05%  ->  5% is 100x   8% is 160x   (2.0 orders at 5%)
+    threshold 0.50%  ->  5% is  10x   8% is  16x   (1.0 orders at 5%)
+
+At 0.05% the arithmetic is exact: two orders of magnitude on the nose.
+
+The 0.05% figure itself was **not located**. What was located is the
+category description giving **0.5%** as the low end — an order of
+magnitude above, which would halve the exponent and turn "a wrong number
+that stood for approximately 100 years" into a smaller wrong number.
+
+The entry may well be quoting a Prevotella-specific threshold from the
+source paper, which is a different quantity from the category's general
+low end. Recorded as NOT LOCATED rather than as wrong — but it is the one
+number the headline claim depends on, and the neighbouring published
+figure differs from it by exactly the amount that matters. Cheapest check
+for anyone with the paper: the threshold the source attributes to the
+historical classification.
+
+### UNI_056 — a fourth state, and the first that names an operation
+
+| state | named where |
+|---|---|
+| an oversight | README: *gap* |
+| built into the apparatus before the first reading | README: *exclusion* |
+| apparatus exists, works, points elsewhere | Case 013 Q4, Case 014 Q1 (`UNI_042`) |
+| **observation made, recorded, re-explained by the label** | **Case 015** |
+
+`UNI_042` recorded three states against a two-valued founding
+distinction. This is a fourth, and it differs in kind from the third: not
+*nobody looked*, but **somebody looked, published it in the same field,
+and the category converted it into a methods problem**.
+
+> Once an organism is inside the category, an observation of it in oxygen
+> does not read as evidence against the category — it reads as
+> contamination, a handling error, or a bad sample.
+
+Strongest candidate for an actual new mechanism to come through this drop
+family, and the reason is structural. The other candidates name an
+**absence** — capacity removed, derivation discarded, a quantity with no
+register. This one names an **operation** that runs on data that did
+arrive. Subject, verb, object, and the object is evidence that exists.
+
+It also has the best-instanced anchor of the four (`UNI_053`).
+
+### UNI_050 / UNI_057 — the occasion, and the links
+
+Everything in OCCASION checks: five authors, DOI, bioRxiv ID, Michigan,
+the source's own "100-year-old classification", the bracketed 5–8% limit
+(correct as an inference — growth at 2% and 5%, 8% the next level tested),
+robust aerotolerance at 21%.
+
+One drift, small and pointed: the preprint says *"Lung **Commensal**"*,
+the Journal of Bacteriology version says *"lung **symbiont**"*. The entry
+cites the JB DOI and uses the preprint's word — a categorical relabeling
+inside the paper whose subject is a categorical relabeling that took a
+century. Nothing turns on it, except that the entry's QUANTITY line says
+"oxygen tolerance of a commensal organism" and the published version no
+longer uses that word.
+
+Also located and stronger than the entry claims: P. melaninogenica is
+reported at **more than 10%** of microbial populations in both healthy and
+diseased lungs, which sharpens the contradiction the paper names.
+
+Four of four cross-links resolve — second drop with no dangling reference,
+after Case 013 (`UNI_041`). The `presented-binary` link is accurate to
+that folder, with the twist `UNI_051` supplies: the option space was not
+in fact constrained to two, so the alternatives were present, documented,
+and not reached for.
+
+Confidence is split across the cluster again — "Q2 is high as an audit.
+Q1's magnitude unknown until the denominator is pulled" — which is Case
+012's state (`UNI_028`) on its second appearance. Five states of the one
+string field are in the wild; `entry()` stores a string (`UNI_021`).
