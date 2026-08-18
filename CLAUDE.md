@@ -2071,7 +2071,264 @@ underneath).
   analysis, so the referent is dropped and nothing enters the record as a
   measurement. Distinct from `AUDIT ASYMMETRY`, which is a guard firing on
   one side; this is a channel reclassified at intake, so the reading never
-  reaches a guard. **REPAIRED:** `UNI_003` (`entry()` takes a primary plus
+  reaches a guard. **`cases/case-010.md`** is the first delivered case that
+  declines to name its mechanism — coupled-perturbation response of a
+  bio-hybrid memristor, candidate bins SCALAR DEMAND or a proposed new
+  PROTOCOL ORTHOGONALITY, with the reason for leaving it open stated
+  ("assigning the bin before the measurement exists closes a variable that
+  has not been read out"). **`UNI_013`:** that move is **not
+  constructible** — `entry()` validates `excluded_by` against the closed
+  eight-tuple and raises on `UNASSIGNED` and on the proposed bin alike;
+  fifth instance of the `MF_017`/`CW_015`/`DL_004`/`GC_012`/`CA_003` shape
+  and the first where the vocabulary is closed *on purpose*, so the schema
+  can obey the argument or be edited but cannot record it (repair: an
+  `UNASSIGNED` sentinel with `candidates` and a required `why_open`).
+  **`UNI_014`:** first entry whose confidence is below the ceiling — 8 of 8
+  existing entries open with "high", this states "not above ~40%, not
+  sufficient to act on" — so `UNI_004`'s `CONSTANT_FIRES` reading of the
+  field no longer holds, while `UNI_006` is untouched since the register
+  has still never refused an entry. **`UNI_015`/`UNI_016`:** the occasion
+  checks out — six stated details confirmed against Keremane et al., *Adv.
+  Funct. Mater.* 36(34) 2026, DOI 10.1002/adfm.202530539, the first
+  literature claim in this drop family that was checkable at all against
+  `ANC_010`/`CD_009`/`RD_015`/`HO_005` — and two of the four "not located"
+  items ARE locatable (endurance 1000 cycles, retention > 4×10³ s),
+  **both scalars**, so the correction supports the SCALAR DEMAND candidate
+  bin rather than undercutting it. **`UNI_017`:** the field-wide falsifier
+  partially fires — THB (temperature-humidity-bias), TB, temperature
+  cycling, IEEE P1817 and JEDEC JC-42.4 exist, so "none across the field"
+  is refuted — but those hold several variables at simultaneous *constant
+  setpoints*, a factorial corner, while ARM B specifies co-varying **drift
+  at matched integrated dose** compared on distribution shape; the entry
+  survives narrowed and should say so. **`UNI_018`** is UNVERIFIED (the
+  supplement was unreachable through this environment's egress proxy) and
+  is the cheapest falsifier for anyone with access. **`UNI_019`:** Case 010
+  is exactly the near-boundary case `check_null()` says the register lacks
+  — a quantity a field believes it measures, with a live paper and a
+  confidence low enough to be wrong — **and it cannot file**. Its
+  comparator (synthetic periodic scaffold, matched spacing and matched Ag
+  loading) is a `null-harness` known-null and the load-bearing element,
+  since the hybrid differs from DNA-alone and perovskite-alone in more than
+  one way at once; the three-way discriminator names its own discard branch
+  so it is not `CONSTANT_SILENT`. Missing: any power calculation — a
+  `G-RES` pair of variability spread against the margin claimed.
+  **`cases/case-011.md`** is the second delivered case the schema cannot
+  hold, refused in a different place: Case 010 declines to name its
+  mechanism, Case 011 declines to be one quantity. A five-question cluster
+  on rebuild cycles before abandonment, occasioned by Kiss/Viglione/Blöschl
+  *Nature* 12 Aug 2026 reconstructing the 1342 Magdalenenflut as **16
+  distinct flood events** — "a sequence was transmitted as a singularity".
+  **`UNI_020`:** `entry()` takes one `quantity`, one `excluded_by` and one
+  `would_measure`; the cluster carries five sub-questions, four with their
+  own WOULD MEASURE, so **the schema fits the eight entries written to fit
+  it and neither real case delivered since** (`UNI_002` from a new
+  direction). The `UNASSIGNED` sentinel does not cover it — a cluster needs
+  sub-entries, since Q1 and Q3 both *narrow without closing*, the one state
+  a scalar entry cannot record. **`UNI_021`:** `confidence` accepts `""`
+  and `None` silently, so Case 011's reasoned refusal to state one ("a
+  scalar over a cluster would not carry usable information") lands in the
+  same cell as an omission — eleventh instance of the
+  absent-vs-known-negative repair, in the one field the register calls
+  recorded-not-adjudicated; three states now exist in the wild and the
+  schema tells apart two. **`UNI_022`:** Q5 is NOT YET ARTICULABLE with
+  "do not fill this in with an approximation" — the register's own thesis
+  applied to its own vocabulary, no slot, and the cheapest instruction in
+  the drop to violate. **`UNI_024`:** Q1's falsifier fires on one of the
+  three things its own sentence bundles — antecedent moisture is
+  instrumented and dramatic (saturated soil turns a 7-year rainfall into a
+  100-year flood; dry soil a 200-year rainfall into a 15-year flood) and
+  compound-hazard modelling is active, while no design-standard variable
+  for unrepaired works or spent response capacity was located, so the
+  sharper statement is **the field instruments the antecedent state of the
+  HAZARD and not of the SYSTEM**. **`UNI_025`:** Q3 narrows along the
+  boundary of whoever keeps the record — FEMA HMGP acquisitions are
+  required to be voluntary and the administering authority's property
+  selection is recorded, so two of four pathways have attribution, while
+  insurer withdrawal and lender refusal are decisions by parties the
+  program does not administer and cannot appear in its record; "voluntary"
+  truthfully attributes the final step over an option set generated
+  upstream, which instances `generation-capacity` exactly. **`UNI_023`:**
+  the occasion checks out, with one drift inherited from the paper's title
+  — the entry says "roughly 18 months" where coverage spans late 1341 to
+  1343, which matters because Q2 nominates 1342–1343 as its corpus and a
+  start at 1342 drops the first inter-event interval, the one that sets the
+  arrival rate. **`UNI_026`:** three of four cross-links resolve and
+  `rate-mismatch-polytope` does not exist anywhere in the tree (seventh
+  instance of that shape) — while Q2's hypothesis is already modelled twice
+  here under other names, in `rigidification-sensor/simulator.py`'s
+  `locked_at` and `sustained-activation-gate/`'s restore-vs-coupling
+  trade-off.
+  **`cases/case-012.md`** is the third case the schema cannot hold and the
+  first whose stated confidence is **settled by computation rather than
+  recorded**. Fuel-cost incidence on low-value-density freight, against the
+  published finding that diesel pass-through is ~50% immediate / ~100%
+  within a week while the consumer-price effect is "limited" because
+  transport is a small share of product cost. **`UNI_027`:** the entry
+  rates Q1 "high — arithmetic, not hypothesis" and that is exactly right,
+  provably — the aggregate freight-to-value ratio is identically a
+  **value-weighted** mean of per-class ratios, `F/V = Σ(n_i·v_i/V)·(f_i/v_i)`,
+  so it reports whichever class carries the dollars. Demonstrated on a
+  plausible mix: one class at 87% of the dollar weight pulls the aggregate
+  to 1.46% while the worst-affected class sits at 12.50%, an 8.5×
+  understatement, and the identity holds to machine precision. First entry
+  whose confidence field is adjudicable, and it adjudicates in the entry's
+  favour — Q1 needs no freight data to be right. **`UNI_028`:** a fourth
+  confidence state, **split across the cluster** (Q1 high, Q2–Q4 not
+  stated, with the reason), so three cases have now produced three distinct
+  failures of one string field — too coarse, cannot record a reasoned
+  absence, cannot record a split. **`UNI_029`:** the NOTE ON A CIRCULATING
+  NUMBER is a **negative-provenance record** with no precedent here and no
+  schema slot — it marks two circulating figures and a 3PL claim *before*
+  anyone builds on them, which is the inverse of `ANC_010`/`CD_009`/
+  `RD_015`/`HO_005`, all caught afterwards by an auditor; verified that
+  none of the flagged numbers appears in the entry's own reasoning.
+  **`UNI_030`/`UNI_031`:** the pass-through result checks out in full
+  (third consecutive verifying occasion), and the rate figure does not —
+  the entry cites flatbed "$0.70–$1.20/mile above dry van, 2026 spot" where
+  the located premium is **$0.48**, reached two independent ways; it halves
+  a downstream magnitude and does not touch Q1, which is an identity.
+  **`UNI_032`:** Q4 splits three ways — its falsifier partially fires (BLS
+  publishes the hedonic category list and its share, ~2.9% of CPI
+  ex-shelter), the **asymmetry is confirmed by that list** (PCs, TVs,
+  apparel, appliances, broadband; neither food nor electricity), and the
+  **magnitude runs against the mechanism**, since "the aggregate can be
+  held level by hedonic credit" now has a published upper bound and it is
+  small — plus a denominator switch, since Q4 is about GDP real output
+  (BEA) and the located share is CPI (BLS), which is `measurement-fork`'s
+  VOID RATIO inside a falsifier. **`UNI_033`:** Q3's two halves have
+  opposite status — the non-linearity is open with the sharpest falsifier
+  in the drop (reachable negative, not `CONSTANT_SILENT`), while the
+  accounting claim is **true by construction**: household food is final
+  consumption expenditure and labour is a primary input with no row in the
+  intermediate matrix, so the calories sustaining it are intermediate
+  consumption of no industry. The half marked "WOULD MEASURE: unclear" is
+  the established one, which inverts the register's usual pattern and makes
+  Q3 the entry's best candidate for a filed mechanism.
+  **`cases/case-013.md`** is the fourth case the schema cannot hold and the
+  first whose refusal is about the record rather than a field: compensation
+  load from design-time dimension omission, anchored on satellite
+  cataloging. **`UNI_034`:** 010 declines to name its mechanism, 011 to be
+  one quantity, 012 to carry one confidence, **013 to be one entry or two**
+  — and the `UNI_020` sub-entry repair does not reach it, since sub-entries
+  presume the parent is one thing; the drop's instruction that the question
+  "should not be resolved to get a cleaner filename" was honored by landing
+  it under the register's own numbering. **`UNI_038`, the load-bearing
+  check:** Q3 claims the NIST dimming effect (Pintar, Stavis, NIST Aug 2026
+  — citation verified) transfers to a discontinuously reassigned sorting
+  key, and that is simulable, so it was simulated in three regimes.
+  **All three flatten toward zero** — including the one built expecting it
+  to fail, because moving a subset into a distant block inflates `var(X)`
+  far more than it adds covariance. What does not transfer is the
+  MECHANISM: classical errors-in-variables (attenuation = reliability
+  ratio, matched to 3 dp), non-differential misclassification (exactly
+  `1−2p`), and variance inflation from a block remap (down to **1%** of the
+  true slope against 50% for a classical error). "Structurally the same as
+  the NIST dimming effect" is true of the direction and nothing else, and
+  the catalog cases are *worse* than the nanoparticle case — which
+  strengthens Q3. The strongest form is the join case, not the covariate
+  case. **`UNI_039`:** the Case 010 cross-link lands and **corrects
+  `UNI_019`** — a periodic scaffold has interchangeable positions, a
+  sequence-addressed one does not, so matched pitch is not a matched
+  control if the contribution depends on distinguishability; Case 010's
+  flat branch would fire both when geometry was enough and when addressing
+  is everything, a specific false negative, repaired by one more arm
+  (matched pitch AND aperiodic position-distinguishable structure).
+  **`UNI_036`/`UNI_037`:** the anchor is fresher than stated — 5-digit
+  SATCAT exhausted **2026-07-11**, now at 100365, Alpha-5 a self-declared
+  *stopgap* capped at 339,999 with I and O dropped to avoid confusion with
+  1 and 0, three representations coexisting — so Q1's denominator starts
+  six weeks ago; but "objects recategorised" is not what was located, since
+  Alpha-5 changes the ENCODING and does not renumber existing objects,
+  and the documented reassignments are merged/split objects from refined
+  sensor observations, a resolution event rather than an overflow event.
+  **`UNI_040`:** Q4's comparison class narrows — 4^L is bounded, so the
+  statable version is that capacity scales with the object rather than
+  being fixed by a register, and the middle term (the compositional COSPAR
+  designator, open-ended in its year field) was already in the anchor's own
+  records. **`UNI_035`:** `[stated by Kavik]` is the first provenance tag
+  inside an entry, at sub-question granularity, on the half that would
+  leave if the split happens. **`UNI_041`:** first drop in the sequence
+  with no dangling cross-link, and a fifth state of the confidence field —
+  an absence with a stated unlock condition.
+  **`cases/case-014.md`** is the fifth case the schema cannot hold, and
+  the first whose EXCLUDED BY says nothing excludes it. Cognitive
+  offloading, evolutionary framing and channel separability, occasioned by
+  Fellers & Storm, *JEPLMC* 2026 — reminder users fell **below** the
+  no-reminder baseline, not merely level with it. **`UNI_042`, the sharp
+  one:** the README opens "Not a gap log. A gap is an oversight. These are
+  exclusions built into the apparatus", and Q1's EXCLUDED BY is "nothing
+  prevents it. It has not been assembled" — a gap by that rule, except the
+  entry argues a **third** state, the apparatus exists, is competent, and
+  is aimed elsewhere ("the target moved; the instrument did not follow").
+  Case 013 Q4 named the same state one drop earlier, so two states have
+  now been delivered against a two-valued founding distinction, and
+  admitting the third widens the register's subject from what an
+  instrument cannot see to what an existing instrument is not pointed at.
+  **`UNI_045`, the actionable one:** Q1 says its corpus "has not been
+  assembled" and a meta-analysis of cognitive offloading exists whose
+  enumerated included-studies list IS that denominator, built for another
+  question by people with no stake in this one — Q1's cost drops from
+  defining a corpus to scoring a published list, with the statable bias
+  that a performance meta-analysis selects for performance-reporting
+  studies. **`UNI_043`:** `tool-off-metrology` is absent and cited twice
+  here plus once in Case 011 Q4, so there are now **two** named-but-absent
+  artifacts each load-bearing across two drops (with
+  `rate-mismatch-polytope`), and both are the same object from different
+  ends — a rate or a baseline the measurement destroys. **`UNI_046`:**
+  Pobiner 2016 and Kelemen's promiscuous teleology both verify, and one
+  attribution runs broader than located — the three-item negative list
+  (not parental explanation, religiosity, or storybook convention) was not
+  confirmed item by item, and universality alone does not carry the use
+  the entry makes of it. **`UNI_047`:** Q2 makes two claims and attaches
+  one falsifier; the half the entry leans on (the error has no name in the
+  literature) has none, and the decolonial-paleoanthropology literature
+  where it might exist under another name was not searched. **`UNI_048`:**
+  three `[stated by Kavik]` tags, and the distribution is the finding —
+  the single UNTAGGED question is the one with an independent runnable
+  instrument, and instrumentability falls off across the tagged ones.
+  **`UNI_049`:** "do not fill this in with an approximation" reaches a
+  third instance in three drops, and Q3 states the register's own thesis
+  in general form as a conditional — "any study isolating one is measuring
+  an artifact of its own isolation, and the isolation is a property of the
+  instrument" — while NOT CLAIMED HERE pre-empts the intent reading, which
+  is `rigidification-sensor`'s no-actor discipline in a one-page case.
+  **`cases/case-015.md`** proposes a new mechanism, DEFINITIONAL
+  PRECEDENCE — a label converting disconfirming evidence into a methods
+  problem — occasioned by Albright et al., *J. Bacteriology* 2026
+  reclassifying *Prevotella melaninogenica* after a century as a strict
+  obligate anaerobe. **`UNI_051`, the load-bearing check:** Q1 says
+  "aerobe / anaerobe is a two-state classification" and it is **five**-state
+  — obligate aerobe / facultative anaerobe / microaerophile /
+  **aerotolerant anaerobe** / obligate anaerobe — with category 4 named for
+  exactly the phenomenon reported, and the obligate-anaerobe category's own
+  published range reaching **8% oxygen**, so the measured 5–8% growth limit
+  sits INSIDE the category it was assigned to and only the 21%
+  aerotolerance exceeds it. **That refutes the stated mechanism and
+  strengthens the conclusion**: the label held not because the vocabulary
+  lacked a slot but despite having one named for this. **`UNI_052`:** the
+  falsifier partly fires and the refinement beats the claim — the standard
+  thioglycollate assay IS a gradient method; what it does not do is
+  quantify, returning a position that maps to a category name, so **the
+  numeric threshold attached to the label was never measured by the assay
+  that assigns the label**, and the sensor platform matters because it
+  quantifies rather than because it is a gradient. **`UNI_053`/`UNI_054`:**
+  the titling claim verifies verbatim — "Oxygen induces mutation in a
+  strict anaerobe, Prevotella melaninogenica" (2008), 18 years earlier,
+  measuring survival and mutation under oxygen with the label in the title
+  — which lands on Q3's *category* branch while leaving the *instrument*
+  branch open, since that readout could not produce a growth-limit number;
+  the two branches are not exclusive and the 2008 paper shows both.
+  **`UNI_055`:** the 0.05% historical threshold was **not located** and the
+  headline "two orders of magnitude" depends on it exactly (5/0.05 = 100),
+  while the located category low end is 0.5% — an order of magnitude above,
+  which halves the exponent. **`UNI_056`:** DEFINITIONAL PRECEDENCE is a
+  **fourth state** against the founding binary (`UNI_042`) and the first to
+  name an **operation** rather than an absence — somebody looked, published
+  it in the same field, and the category converted it into a methods
+  problem. **`UNI_050`/`UNI_057`:** occasion verifies with one pointed
+  drift (preprint "lung commensal", published version "lung symbiont" — a
+  categorical relabeling inside the paper about a categorical relabeling),
+  and four of four cross-links resolve. **REPAIRED:** `UNI_003` (`entry()` takes a primary plus
   an `also` list and the register sorts under every mechanism — which is
   what lets check 1 return anything but zero: 5 mechanisms now hold entries
   from more than one field, though weakly, since the secondaries were
@@ -2088,8 +2345,8 @@ underneath).
   correction:** the earlier audit said the delivered `break` in `scan()`
   enforced one mechanism per sentence — it does not, the `break` exits the
   trigger loop and mechanisms already co-fire, so the wrong-mechanism
-  finding was a missing trigger rather than a blocked co-firing. Twelve
-  claims `UNI_001..012`. Stdlib only, CC0.
+  finding was a missing trigger rather than a blocked co-firing. Nineteen
+  claims `UNI_001..057`. Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
   time-series variable** — version the ruler, compute drift on its own
@@ -3195,6 +3452,71 @@ underneath).
   narrower and still not closed: the adversary is author-written, and what
   it does not try is bounded by what occurred to whoever wrote it.
   Selftest 53/53. Stdlib only, CC0.
+- `derivation-discarded/` — Proposed **eleventh exclusion mechanism** for
+  `uninstrumented/`, after CATEGORY WELD (9) and GENERATION CAPACITY
+  REMOVED (10). `MECHANISM_11.md` delivered verbatim; alternate handle
+  UNPRICED PRECONDITION, name not settled. **The statement:** a structure
+  that has persisted is a record of every constraint that had to be
+  satisfied simultaneously for it to exist, and the structure is the only
+  copy of that derivation — so removing it removes a readout, and the
+  computation cannot be rerun because the inputs are gone. The accounting
+  books the structure at extraction or replacement price, has no line for
+  the discarded derivation, and is therefore *arithmetically correct and
+  structurally blind*: the removal registers as a gain. Eight claims
+  `DD_001..008`. **`DD_001`:** the three distinctions hold and the one
+  worth keeping is against mechanism 10 — that one is a future that cannot
+  be generated, this one a past that cannot be re-derived, same direction
+  of loss, opposite side of the clock — but the distinguishing test is
+  **modal** ("uncountable in principle rather than uncounted in
+  practice"), settled by failing to think of a recovery route, which is
+  `UNI_005`'s absence-not-result; the decidable form is already in the
+  document, in falsifier 4 (*is the constraint set documented anywhere
+  outside the structure?*). **`DD_003`, the sharp one:** the anchor case
+  is EIA post-auditing, and the published literature reports **three**
+  narrowings where the drop names one — all impacts → predictions made,
+  predictions made → auditable (**56%**, and non-random: the stated
+  reasons are lack of data, vague or ambiguous predictions, time
+  dependency), and 'accurate' → *unqualifiedly close* (**~30%**, "with
+  almost as many rated accurate principally by virtue of the vagueness of
+  the forecasts"). Headline ~79%; unqualifiedly-close ≈17% of predictions
+  made, a 4.6× spread. The second narrowing selects against exactly the
+  predictions most likely to be scored wrong, since the same vagueness
+  either removes a prediction at step 2 or earns it a pass at step 3. **So
+  the gap is not invisible — it is published in pieces that are never
+  multiplied**, which is `thermal-sensor-degradation-audit/`'s
+  `corruption(trend) = corruption(measurement) × corruption(framework)` on
+  a different substrate, and it makes the anchor case stronger than the
+  drop states it for a different reason than stated. **`DD_004`:**
+  falsifier 1 does not fire (no post-audit scoring against total observed
+  impacts located), but R1's numerator is less missing than claimed — one
+  study reports **six unpredicted impacts** in 865 predictions — and the
+  literature's own words answer falsifier 3 ambiguously ("the reported
+  incidence of such impacts varies greatly across studies"), which is the
+  signature of a quantity set by search intensity, so **R1-small is not
+  yet evidence that unanticipated impacts are rare; it is evidence that R1
+  is not yet a measurement**. **`DD_005`:** R2 is correctly identified as
+  the runnable seed and does a second job the drop does not claim — it is
+  the **positive control** for THE NULL TEST, since a structural null has
+  `UNI_006`'s problem and R2 asks the same corpus for something that does
+  exist in some documents. **`DD_002`:** the anchor practice verifies
+  (post-auditing is named, published, decades of review literature,
+  accuracy in a 73–79% band) while the specific triple quoted — 152
+  accurate, ~73%, 38–92% by project type — was **not located**; fourth
+  consecutive occasion in this drop family whose practice checks out and
+  the first whose attached numbers did not. **`DD_006`:** R3's calibration
+  constraint arrives before any code, the cheapest point, and is a real
+  sequencing improvement on mechanism 10 where `GC_003` found the same
+  constraint implemented as a declaration rather than a unit check — the
+  limit is inherited unchanged. **`DD_007`:** "do not fill in with an
+  approximation" is now a recurring device, second appearance in two
+  drops, still with no schema slot (`UNI_022`) — though this instance sits
+  in a numbered list so the axis is at least counted. **`DD_008`:**
+  `rate-mismatch-polytope` is absent for the second time, now cited by two
+  drops for two different arguments, which makes it load-bearing rather
+  than a forward pointer; three existing pieces aim at its subject
+  (`rigidification-sensor`'s `locked_at`, `sustained-activation-gate`'s
+  restore-vs-coupling, `grounding-layers/temporal_dysrhythmia`'s six
+  timescales) and none is what either drop asked for. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

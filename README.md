@@ -51,7 +51,7 @@ underneath. Read those before running the corresponding script.
 | `measurement-fork/` | one system, three measurement designs | four-cell design diff, adjudicated growth edge, twenty `MF_*` claims |
 | `declared-frame/` | any measurement, model, or claim | six-field frame block + comparability check, a v2 rewrite, ten `DF_*` claims |
 | `anchor-interval/` | a system fitted to a corpus it writes into | coherence-up/coupling-down loop, two graded detectors, provenance regimes, eleven `ANC_*` claims |
-| `uninstrumented/` | quantities excluded by an instrument's constitution | eight-mechanism register + `scan.py` text scanner, checks on both, twelve `UNI_*` claims |
+| `uninstrumented/` | quantities excluded by an instrument's constitution | eight-mechanism register + `scan.py` text scanner, checks on both, and six delivered cases the schema cannot hold — the sixth proposing a mechanism that names an operation rather than an absence; fifty-seven `UNI_*` claims |
 | `criteria-drift/` | benchmark and rubric versions over time | signed drift per frame field, anchor-version decomposition, a regression that refuses to run unidentified, nine `CD_*` claims |
 | `photoperiod-claim-harness/` | four inconsistencies in a published greenhouse result | runnable falsifiable sims + mechanism-edit protocol + bench protocol; six `PCH_*` claims on the harness |
 | `category-weld/` | terms that fuse independent quantities into one handle | ninth exclusion mechanism for `uninstrumented`, a three-readout scorer, three terms, an audit finding refuted by the second drop, seventeen `CW_*` claims |
@@ -63,6 +63,7 @@ underneath. Read those before running the corresponding script.
 | `constraint-assembly/` | cases where sufficiency was composed from parts that individually do not do the job | three constraint classes (invariant / consumable / soft), rejected candidates as the data, a fail-closed composition test and a diagnostic-quarantine field; two cases, zero quantities, two readouts that disagree on one of them; thirteen `CA_*` claims |
 | `held-open-uncertainty/` | the assumption that holding variables open means not acting | nine questions with per-entry provenance, one retraction inside the entry that carries the claim, and the cheapest runnable experiment specified against a harness already in the tree; six `HO_*` claims |
 | `adaptive-claim-loop/` | an adaptive simulation framework, and the one move it usually has | five typed responses to a refutation with the parameter walk removed from the vocabulary, four verdicts, four termination states, session-stamped provenance; the delivered framework's own log replayed through the gate, the gate null-tested against two corpora written for other folders (TP 1.00 / FP 0.00), and an adversarial responder that got a parameter walk admitted in five attempts before the repair; seventeen `ACL_*` claims |
+| `derivation-discarded/` | a persisted structure as the only copy of its own derivation | eleventh exclusion mechanism; the anchor case is EIA post-auditing, where the accuracy figure is scored against the prediction list — three published narrowings that are never multiplied; eight `DD_*` claims |
 | `tools/` | shared utilities | validators, substitution toolkits, gate-drift check |
 
 See [`SYNTHESIS.md`](SYNTHESIS.md) for the cross-folder reading and
