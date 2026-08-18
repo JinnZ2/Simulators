@@ -5,7 +5,7 @@ nothing reconstructed; the modules are left absent
 ========================================================================
 1  UNI_105  the document describes artifacts in the past tense, and none of them arrived
 ========================================================================
-    m1_shape_vs_claim/AUTHORING.md   ABSENT    "Mitigation shipped:"
+    m1_shape_vs_claim/AUTHORING.md   present   "Mitigation shipped:"
     m1_shape_vs_claim/items.json     ABSENT    "see each module's items.json"
     m2_skim_vs_read/items.json       ABSENT    "see each module's items.json"
     m3_visibility/items.json         ABSENT    "see each module's items.json"
@@ -14,8 +14,9 @@ nothing reconstructed; the modules are left absent
     M3 harness                       ABSENT    "The harness hashes the artifact per arm"
     the author-blind check           ABSENT    "Run the check or the module's output is uninterpretable"
 
-    present: 0 of 8
-    files actually in playground/: README.md
+    present: 1 of 8  (paths only -- the harnesses landed under
+     module subdirectories and are inventoried in playground_modules_audit.py)
+    files actually in playground/: README.md, m1_shape_vs_claim, m2_skim_vs_read, m3_visibility
 
     STATUS says: Built 2026-08-18. **Zero runs.** Item sets are seeds, not corpora — see each module's `items.json` for counts. Everything here is a design plus a scoring harness.
 Zero of eight. That is not by itself unusual in this folder -- named-and-absent
@@ -39,6 +40,13 @@ prevent.
 
 The honest form is cheap: "Designed 2026-08-18. Not yet built." The design is
 worth having either way, and the sentence costs nothing to correct.
+
+STATE CHANGE, detected by the inventory above rather than asserted here:
+AUTHORING.md and all three harnesses have since landed. Four of the eight are
+now present and the past-tense problem is resolved for them. The three
+items.json did not arrive and something better did -- seeds inline in the
+harness source. check_m1.py is the one real remaining absence. See
+`playground_modules_audit.py` and UNI_115.
 
 ========================================================================
 2  UNI_106  M1 predicts a null and ships no positive control
@@ -168,7 +176,7 @@ metadata rather than in the artifact.
     names the precondition         yes
     states the enforcement         yes
     enforcement is mechanical      yes
-    the code exists                NO
+    the code exists                yes
 "The harness hashes the artifact per arm and refuses to score if hashes
 differ" is a precondition enforced by the instrument rather than instructed to
 the operator, and it is the exact thing `UNI_082` found missing one drop ago:
@@ -185,6 +193,11 @@ a nicety; it is the whole warrant, checkable in two lines, failing closed.
 The caveat is `UNI_105`: it is a specified guard, not a guard. Nothing hashes
 anything yet. Recorded here at full weight anyway, because the design decision
 is the part that is hard to get right and it has been got right.
+
+STATE CHANGE, detected by the line above: the guard is now built. `hash_gate()`
+exists, `--score` calls it before reading any codes, and it refuses -- and it
+is WIDER than this specification, since it also requires the NONE control arm.
+The caveat is withdrawn. See UNI_120.
 
 ========================================================================
 6  UNI_110  M3 does not reach 016 Q6's stated gap, and lands on its falsifier instead

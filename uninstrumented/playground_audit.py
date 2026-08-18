@@ -77,7 +77,10 @@ for name, why in NAMED:
     present += ok
     print("    %-32s %-9s %s" % (name, "present" if ok else "ABSENT", why))
 print()
-print("    present: %d of %d" % (present, len(NAMED)))
+print("    present: %d of %d  (paths only -- the harnesses landed under"
+      % (present, len(NAMED)))
+print("     module subdirectories and are inventoried in"
+      " playground_modules_audit.py)")
 print("    files actually in playground/: %s"
       % ", ".join(sorted(os.listdir(PG))))
 print()
@@ -106,6 +109,13 @@ prevent.
 
 The honest form is cheap: "Designed 2026-08-18. Not yet built." The design is
 worth having either way, and the sentence costs nothing to correct.
+
+STATE CHANGE, detected by the inventory above rather than asserted here:
+AUTHORING.md and all three harnesses have since landed. Four of the eight are
+now present and the past-tense problem is resolved for them. The three
+items.json did not arrive and something better did -- seeds inline in the
+harness source. check_m1.py is the one real remaining absence. See
+`playground_modules_audit.py` and UNI_115.
 """)
 
 # ---------------------------------------------------------------- 2
@@ -285,6 +295,11 @@ a nicety; it is the whole warrant, checkable in two lines, failing closed.
 The caveat is `UNI_105`: it is a specified guard, not a guard. Nothing hashes
 anything yet. Recorded here at full weight anyway, because the design decision
 is the part that is hard to get right and it has been got right.
+
+STATE CHANGE, detected by the line above: the guard is now built. `hash_gate()`
+exists, `--score` calls it before reading any codes, and it refuses -- and it
+is WIDER than this specification, since it also requires the NONE control arm.
+The caveat is withdrawn. See UNI_120.
 """)
 
 # ---------------------------------------------------------------- 6

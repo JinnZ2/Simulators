@@ -2630,8 +2630,43 @@ underneath).
   **`UNI_114`:** the construction principle operates on items, and the module
   selection is a level above it with no ground truth to be authored against;
   `018` and `020` place themselves inside their own sample and this file, the
-  one that will produce numbers, does not. One hundred and fourteen claims
-  `UNI_001..114`. Stdlib only, CC0.
+  one that will produce numbers, does not. **The modules then arrived** —
+  `AUTHORING.md` plus `score_m1.py` / `score_m2.py` / `score_m3.py`, selftests
+  15/15, 11/11, 15/15 — moving four standing claims. **`UNI_115`:** 4 of 8
+  named artifacts present, and the three `items.json` are absent because
+  something better arrived, seeds living in the harness source
+  (`SEED_STEMS`, `seed_pair()`, `SEED_BODY`) versioned with the code that
+  consumes them; `check_m1.py` is the one real absence. **`UNI_116`:**
+  `UNI_078`'s defect recurs in two of three new harnesses —
+  `6e4939a9|BARE` and `6d0b75d6|INSTITUTIONAL` on every row, same key-set
+  selftest — and the two differ usefully, since M3's sheet carries no body and
+  is fixable by an opaque id while **M1's carries the prompt**, whose GRADIENT
+  form ends with the clause; the repair comes from the module's own paired
+  construction (show the coder the BARE stem for both arms). **`UNI_117`:**
+  M1 and M3 refuse to score on a failed precondition and **M2 prints the
+  numbers anyway**, on `leak_check` — the very check `UNI_107` asked for, where
+  a leak means front-matter recall reported as body recall. **`UNI_118`:**
+  the item count is now known at **4 per arm**, below the leftmost row of
+  `UNI_106`'s table; the new third prediction branch is a diagnostic, not a
+  positive control. **`UNI_119`:** `UNI_108` is instanced — `0.0413`,
+  `HOLDFAST`, `ORTHOLINE` are literal strings in a file this commit publishes,
+  so **landing it is what spends them**, recorded rather than avoided; M1's
+  contamination is common-mode across arms and M3 is immune. **`UNI_120`:**
+  the hash gate is built, refuses, and is **wider than specified** — it also
+  requires the NONE control arm, the first delivered guard here to exceed its
+  spec. **`UNI_121`:** INSTITUTIONAL carries LOW's counts exactly and adds an
+  affiliation, separating affiliation from attention — a third-variable control
+  the README's phrasing would have confounded; `UNI_110` stands. **`UNI_122`:**
+  the rubric arrived and does not carry the rule-5 precedence (0 hits for
+  `self-report`/`volunteered`/`specimen`), in a table declared unamendable
+  after the first run. **`UNI_123`:** the author-blind pass is called mandatory
+  and has no field, no gate, and no tool — `verify_pairs()` does `check_m1.py`'s
+  first job under another name and `--review` exists nowhere, so `--score`
+  refuses on the mechanical precondition and proceeds on the human one.
+  **`UNI_124`:** clause assignment is with replacement, so at n=4 clause is
+  confounded with stem and the clauses are not interchangeable (62-113 chars,
+  one gives a number, one a fraction, one neither). One hundred and twenty-four
+  claims `UNI_001..124`. Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
   time-series variable** — version the ruler, compute drift on its own

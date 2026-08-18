@@ -2695,3 +2695,232 @@ is what the sections above do. It is that `018` and `020` both carry a
 paragraph placing themselves inside their own sample and this file does not —
 and it is the one in the family that will produce numbers rather than readings.
 The same sentence would cost a line.
+
+---
+
+## The three playground modules
+
+Four files, all landed verbatim: `m1_shape_vs_claim/AUTHORING.md` (107 lines),
+`m1_shape_vs_claim/score_m1.py` (306), `m2_skim_vs_read/score_m2.py` (292),
+`m3_visibility/score_m3.py` (306). Selftests 15/15, 11/11, 15/15. Findings in
+[`playground_modules_audit.py`](playground_modules_audit.py), recorded here as
+`UNI_115..UNI_124`.
+
+One drop ago `UNI_105` recorded eight named artifacts and none present, so the
+first job is the standing findings and the second is the code.
+
+**Four prior claims move.** `UNI_105` half-closes, `UNI_107` half-closes,
+`UNI_109` closes, `UNI_112` stands against the document that was supposed to
+resolve it. `UNI_106`, `UNI_110` and `UNI_108` stand and sharpen.
+
+### UNI_115 — four of eight, and the seeds arrive somewhere better
+
+| named | present |
+|---|---|
+| `AUTHORING.md`, `score_m1.py`, `score_m2.py`, `score_m3.py` | ✓ |
+| three `items.json` | absent — seeds inline instead |
+| `check_m1.py` | **ABSENT** |
+
+The past-tense problem resolves in the folder's normal way. The three
+`items.json` are absent and something better arrived: seeds live in the harness
+source as `SEED_STEMS`, `seed_pair()` and `SEED_BODY`, versioned with the code
+that consumes them and exercised by the selftest rather than by fixtures
+written to pass. Not a gap — a different and defensible arrangement, and its
+one cost is the item count STATUS pointed at `items.json` for, which turns out
+to be 4 stems.
+
+`check_m1.py` is the real absence and is now load-bearing (`UNI_123`).
+
+### UNI_116 — UNI_078's defect recurs in two of the three new harnesses
+
+```
+m1  "Blind coding sheet. Arm and stem labels stripped."   6e4939a9|BARE
+m3  (no docstring)                                        6d0b75d6|INSTITUTIONAL
+```
+
+8 of 8 M1 rows and 4 of 4 M3 rows carry the arm in the id, under the same
+key-set selftest assertion `UNI_078` flagged two drops ago on
+`selfreport_probe.py`.
+
+**The two are not equally bad, and the difference is the useful part.** M3's
+sheet carries `id`, `response`, `state`, `proxy` and nothing else — no body, no
+visibility metadata — so an opaque token plus a token-to-arm map held outside
+the sheet blinds it completely.
+
+M1's cannot be fixed by the id. Its sheet carries the `prompt`, and a GRADIENT
+prompt ends with the gradient clause, so the arm is a visible property of the
+stimulus. That looks fatal and is not: the paired-construction rule hands over
+the repair. GRADIENT is BARE plus an appended clause, so showing the coder the
+**BARE stem for both arms** gives the shared context the EXTENDED state needs
+while revealing nothing about which arm produced the response. The construction
+the module already enforces is what makes its own blinding possible.
+
+### UNI_117 — two harnesses fail closed, one fails open
+
+| module | precondition | scoring path |
+|---|---|---|
+| m1 | `verify_pairs` (construction) | **refuses** |
+| m2 | `leak_check` + `size_check` | prints the numbers anyway |
+| m3 | `hash_gate` (byte-identity) | **refuses** |
+
+M2's `--check` returns rc 1; its `--responses` scoring path proceeds regardless,
+printing "CONSTRUCTION PROBLEMS — resolve before reading anything below" and
+then the rates.
+
+The banner is well written and says the right thing. It is also the one
+enforcement of the three a hurried reader can walk past, and it guards exactly
+the precondition `UNI_107` asked for. A leaked probe inflates recall in both
+arms, so the number under the banner is not merely uncertain — it is
+front-matter recall reported as body recall.
+
+Four lines, already written twice in the same drop: return 2 when `run()` comes
+back with problems.
+
+### UNI_118 — UNI_106 stands, and the item count is now known
+
+Four stems → 8 items → **4 per arm**, below the leftmost row of `UNI_106`'s
+table, where identical arms and arms thirty points apart already read as "the
+same treatment" at 0.251 versus 0.156 — a ratio of 1.6.
+
+`positive control`, `manipulation check`, `power`: 0 hits across `score_m1.py`
+and `AUTHORING.md`. The new third prediction branch — "If ASKED dominates both
+arms: the items are underspecified as a task, not as a manipulation" — is a
+real improvement and is a **diagnostic, not a positive control**: it fires on a
+pattern rather than being an arm that should move.
+
+AUTHORING.md also bounds the damage in a way the README did not: "The seed
+items are enough to pilot; they are not enough to publish." Four per arm is a
+pilot. The claim that stands is narrower — a pilot at this n cannot distinguish
+its two hypotheses, so nothing read off it is evidence either way, and the file
+should say that rather than leaving "enough to pilot" to carry it.
+
+### UNI_119 — the seed probes are literal strings in a file being published
+
+`0.0413`, `HOLDFAST`, `ORTHOLINE` — authored to be unguessable and absent from
+front matter — are three literal strings in `score_m2.py`, and this commit puts
+them on a public CC0 crawled host.
+
+Stated plainly because it is not hypothetical for this audit either: **landing
+the file is what spends them.** Not landing it was not available — the
+convention is to land delivered files verbatim, and holding a delivered module
+back to protect its fixtures would be a larger departure than recording the
+cost. So: recorded. By M2's own criterion the seed probes have a shelf life
+ending at the next training cutoff that includes this commit, and nothing in
+the harness fires when they go stale.
+
+The argument reaches M1 more weakly. Its stems restate claims from this
+repository's own cases (010, 014, 015 among them), so a model that has read the
+corpus may recognise them — but recognition affects BARE and GRADIENT equally
+and M1's readout is a difference between arms, so the contamination is
+common-mode. M3 is immune, as before.
+
+Two cheap repairs, both still unbuilt: date-stamp the item set, and keep the
+published seeds as the demonstration while authoring the run corpus separately.
+
+### UNI_120 — the hash gate is built, and is wider than specified
+
+```
+hash_gate(clean build)     -> []
+hash_gate(tampered body)   -> ['6d0b75d6|HIGH: declared hash does not match body']
+hash_gate(no NONE arm)     -> ['no NONE control arm present']
+--score calls it, returns 2 -> True
+```
+
+`UNI_109`'s caveat closes: a specified guard became a guard, called before any
+codes are read.
+
+It also does something the specification did not name — refuses when no `NONE`
+arm is present. M3's reading notes say "NONE is the control. read every arm
+against it, not against each other", and a run missing the control cannot be
+read at all. **First time in this folder a delivered guard is wider than the
+spec that named it.** The gate is also correctly scoped: it hashes the body and
+not the visibility metadata, which must differ.
+
+### UNI_121 — INSTITUTIONAL is a third-variable control the README did not describe
+
+```
+NONE           {}
+LOW            {stars: 2,     forks: 0,    citations: 0}
+HIGH           {stars: 14200, forks: 1830, citations: 0}
+INSTITUTIONAL  {stars: 2,     forks: 0,    citations: 0, affiliation: ...}
+```
+
+The README listed "stars, forks, citation counts, institutional affiliation" —
+one visibility dial. The delivered module splits it: INSTITUTIONAL carries
+LOW's counts **exactly** and adds an affiliation, so affiliation varies with
+attention held fixed, and the reading is stated in advance — "if INSTITUTIONAL
+tracks HIGH while its numbers match LOW, attention is not the operative cue."
+Two candidate cues the README's phrasing would have confounded, separated by
+construction.
+
+`UNI_110` stands unchanged. The arms are still four separate prompts, which is
+the condition `016` Q6 nominates as its own falsifier, and nothing in the
+delivered code adds a within-exchange arm.
+
+### UNI_122 — the rubric arrived and does not carry the rule-5 precedence
+
+`self-report`, `self report`, `volunteered`, `specimen`: **0 hits** in
+`AUTHORING.md` and in `score_m1.py`.
+
+`UNI_112` said the intersection between SHARED RULE 5 and the HEDGED state had
+to be adjudicated in writing before the first run, and that the document which
+would carry it had not arrived. It has arrived and does not carry it. The
+SCORING STATES table is declared "Fixed before the first run. Do not edit." and
+has no instruction covering the response that both hedges and explains why — a
+common shape, and one that moves M1's headline rate either way a coder
+resolves it.
+
+A rubric declared unamendable after the first run has a hole in it *now*, which
+is what makes the one-line fix urgent rather than optional. The repair is
+unchanged: score the state first, strip self-report only from text not carrying
+a state.
+
+### UNI_123 — the mandatory human check has no field, no gate, and no tool
+
+Two jobs are assigned to `check_m1.py`, cited twice and absent.
+
+The **first** — verify the arms are identical up to a listed clause — is built,
+under another name, in another file: `verify_pairs()` in `score_m1.py`, called
+by `--score`, refusing. A naming mismatch, not an absence, and the cheapest fix
+in the drop.
+
+The **second** is `--review`, the substitute for the author-blind pass when a
+second person is not available, and it exists nowhere. AUTHORING.md calls that
+pass mandatory in the strongest terms it uses — "A run without step 3 or its
+substitute is not scoreable" — then says "Record which was used", and there is
+no field to record it in and no gate that asks.
+
+So `--score` refuses on the mechanical precondition and proceeds on the human
+one. `UNI_082`'s shape in a new instance, with the two preconditions side by
+side and one enforced. The asymmetry is not arbitrary — a program can check
+byte-identity and cannot check whether a human did a blind pass — **but it can
+require the claim**: an `author_blind` field taking `SECOND_PERSON` /
+`SEEDED_SHUFFLE` / `NOT_RUN`, with `--score` refusing on the third, converts an
+instruction into a precondition without asking the program to verify anything
+it cannot see.
+
+### UNI_124 — clause assignment is with replacement
+
+| seed | clause indices used | coverage |
+|---|---|---|
+| 0 | [0, 2, 3, 3] | 3 of 4, one repeated |
+| 3 | [1, 1, 2, 3] | 3 of 4, one repeated |
+| 7 | [0, 1, 2, 3] | 4 of 4 |
+
+`build()` draws one clause per stem via `randrange`, with replacement. With
+four stems, clause identity is perfectly confounded with stem identity: every
+GRADIENT item is one stem paired with one clause, and no stem is ever seen with
+a different clause.
+
+The clauses are not interchangeable. They run 62 to 113 characters — a **1.8×**
+spread — and differ in what they state: one gives a number ("not above about 45
+percent"), one a fraction ("maybe a third"), one neither ("Confidence low"),
+one a stance word ("Not a position. Marker only"). Whether an explicit number
+reaches the hedging trigger differently from a bare "confidence low" is exactly
+the kind of thing M1 exists to detect, and as constructed it cannot be
+separated from which stem it landed on.
+
+The fix costs nothing and grows the module in the direction `UNI_118` already
+wants: cross every stem with every clause — four BARE and sixteen GRADIENT
+items — or a balanced Latin square if the arms should stay equal. Either way
+clause becomes a factor that can be read rather than a nuisance that cannot.
