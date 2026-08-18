@@ -1,0 +1,173 @@
+adaptive-claim-loop -- null test of the response gate
+signal arm: the delivered agent's branches, enumerated by AST
+null arm  : proposals written for photoperiod-claim-harness and
+            equivalence-field, neither aware of this gate
+
+==========================================================================
+1  PRE-REG  expected verdicts, stated before the gate is called
+==========================================================================
+
+  actions.append sites found in _propose_action : 10
+  branches scored below                         : 10
+
+  branch                             expect   why
+  --------------------------------------------------------------------------------------------
+  competition_strength *= 1.5        REFUSE   a mechanism parameter moved toward the setti
+                                              ng that would raise R2
+  num_steps *= 1.5                   ADMIT    a steady-state claim tested on a run that ha
+                                              s not equilibrated is undecidable, not refuted; integr
+  seed_rate *= 1.5                   REFUSE   'needs adjustment' is the slope being brough
+                                              t into the predicted range
+  metabolic_exponent += N(0, 0.05)   REFUSE   a random walk in a physical exponent, with n
+                                              o justification at all
+  dispersal_range += randint(-2, 3)  REFUSE   same: unjustified rather than outcome-justif
+                                              ied
+  switching_rate *= 0.7              REFUSE   the move in the delivered log; the walk
+  growth_rate_ratio += 0.02          REFUSE   moved toward the value at which the slow str
+                                              ain persists
+  carrying_capacities *= 0.8         REFUSE   'N too large for drift' is a real gradient c
+                                              laim, but offered as a single move toward the passing 
+  switching_rate *= 1.3              REFUSE   unjustified perturbation
+  num_replicates += 20               REFUSE   a resolution change is admissible, but only 
+                                              with the resolution gap computed; offered here at rand
+
+  null arm: photoperiod PENDING_EDITS + equivalence-field seeds
+            expect ADMIT on all -- these are what the categories are for
+Pre-registered totals: signal 9 REFUSE / 1 ADMIT, null 0 REFUSE / all ADMIT.
+The single expected admission in the signal arm is the point of the test. A
+gate that refuses 10 of 10 is refusing on surface form -- "it changes a
+number" -- and would be scored here as over-tight, not as perfect.
+
+==========================================================================
+2  SIGNAL  the delivered branches, offered in their best admissible form
+==========================================================================
+
+     competition_strength *= 1.5      exp REFUSE  got REFUSE  a sweep must carry a predicate
+     num_steps *= 1.5                 exp ADMIT   got ADMIT   INSTRUMENT_EDIT
+     seed_rate *= 1.5                 exp REFUSE  got REFUSE  a sweep must carry a predicate
+     metabolic_exponent += N(0, 0.05) exp REFUSE  got REFUSE  a sweep must carry a predicate
+     dispersal_range += randint(-2, 3 exp REFUSE  got REFUSE  a sweep must carry a predicate
+     switching_rate *= 0.7            exp REFUSE  got REFUSE  a sweep must carry a predicate
+     growth_rate_ratio += 0.02        exp REFUSE  got REFUSE  a sweep must carry a predicate
+     carrying_capacities *= 0.8       exp REFUSE  got REFUSE  a sweep must carry a predicate
+     switching_rate *= 1.3            exp REFUSE  got REFUSE  a sweep must carry a predicate
+     num_replicates += 20             exp REFUSE  got REFUSE  the artifact named is a resolu
+
+==========================================================================
+3  NULL  proposals from two other folders, which the gate must admit
+==========================================================================
+
+     photoperiod S2           ADMIT    MECHANISM_EDIT
+     photoperiod S2           ADMIT    MECHANISM_EDIT
+     photoperiod S1           ADMIT    MECHANISM_EDIT
+     equivalence E1           ADMIT    CLAIM_UPDATE
+     equivalence E2           ADMIT    CLAIM_UPDATE
+     equivalence E3           ADMIT    CLAIM_UPDATE
+
+==========================================================================
+4  ACL_010  the rates, and the fail-condition classifier
+==========================================================================
+
+  signal arm : 9 of 9 refused as expected  (TP)
+  signal arm : 10 of 10 branches matched the pre-registration
+  null arm   : 0 of 6 wrongly refused        (FP)
+  TP rate    : 1.00
+  FP rate    : 0.00
+
+  null-harness grade : OK
+The grade is the easy part. Two things about it are worth more than the
+number.
+
+**The signal arm is the trustworthy half.** Ten branches, enumerated from
+the delivered source by AST rather than chosen, justified with the agent's
+own hypothesis text rather than with a paraphrase, and scored against a
+verdict written before the gate ran. Nothing about that arm was arranged.
+
+**The null arm is small and only half independent.** Six items. The three
+photoperiod edits are genuinely independent -- another author, another
+folder, another purpose. The three equivalence-field claims required this
+file to supply `independently_falsifiable` and `predicts_beyond_parent`,
+and those two booleans are the entire epicycle guard. See ACL_011.
+
+==========================================================================
+5  ACL_011  the epicycle guard is a declaration, not a check
+==========================================================================
+`ClaimUpdate` refuses unless `independently_falsifiable` and
+`predicts_beyond_parent` are both true, and both arrive as booleans from
+the caller. Nothing in the module derives either from the text of the
+restatement, so a responder that passes `True, True` is never refused on
+that guard whatever it wrote.
+
+That is the same shape as `domain-ledger` DL_015 -- band membership is a
+string the author writes and no routine derives it -- and
+`generation-capacity` GC_003, where the calibration constraint is a
+declared field rather than a unit check. Three folders, one shape.
+
+It is not nothing: a declaration that must be made is a place to lie
+deliberately rather than by omission, and it appears in the log next to the
+restatement it licensed. But it cannot be null-tested from text, which is
+why the null arm here is six items and not sixty -- the corpus that would
+test it is restatements labelled by someone other than their author, and no
+such corpus exists in this repo.
+
+The checkable part of the same guard IS checked: `new_refuted_if` must
+differ from the parent's, whitespace- and case-normalised, which catches a
+restatement that moved only its wording.
+
+==========================================================================
+6  ACL_012  the disagreement this test found, and the repair
+==========================================================================
+
+  outstanding disagreements : none
+There was one, and it is the only finding this test produced.
+
+`num_replicates += 20` -- the delivered agent's random replicate bump, with
+no gap computed -- was ADMITTED as an InstrumentEdit whose artifact was the
+phrase "sampling noise". Pre-registered REFUSE, and the pre-registration
+was right: the module's own README said this edit is admissible because the
+resolution gap is COMPUTABLE, and the gate was not asking for the
+computation. `InstrumentEdit` required three non-empty strings and an
+outcome screen, so a fluent phrase satisfied it.
+
+Same shape as `reasoning-dial` on G-FIT: the rule is "name why the
+statistic can discriminate", the implementation checks a string is
+non-empty, and a wrong-but-fluent sentence passes.
+
+Repaired by splitting the narrow case out. `ResolutionEdit` requires the
+resolution you HAVE and the one the claim NEEDS, as numbers, with need
+beyond have; `InstrumentEdit` refuses when its artifact names a resolution
+claim in prose and says which class to use. The repair is pinned by six
+selftest assertions, the first of which is the exact proposal that got
+through.
+
+The repair direction is worth stating plainly, because "the test disagreed
+and then the code changed" is the failure mode this whole folder is about.
+The rule was written before the test -- it is in the README -- and the gate
+was under-implementing it. The change makes the gate stricter, on a rule it
+already claimed.
+
+==========================================================================
+7  ACL_013  the same branch, re-offered with the numbers
+==========================================================================
+
+  REFUSED  num_replicates += 20, as offered (prose)   the artifact named is a resolution
+  ADMITTED num_replicates 50 -> 70, no gap stated     -> RESOLUTION_EDIT
+  ADMITTED num_replicates 50 -> 157, gap computed     -> RESOLUTION_EDIT
+The middle row is the honest limit of the repair. `ResolutionEdit` checks
+that two numbers were supplied and that need exceeds have. It does NOT
+check that need is the number the claim's tolerance implies -- so an agent
+that writes `have=50, need=70` because its else-branch adds 20 is admitted,
+with the arbitrary pair sitting in the log where a reader can see it.
+
+That is a smaller hole than the prose one and it is a different kind: the
+first let a phrase stand in for a computation, this one requires the
+computation to be shown but not to be right. Closing it needs the gate to
+know the claim's tolerance, which means the resolution requirement would
+have to be declared on the CLAIM rather than on the response -- a change to
+where the number lives, not a change to the guard. Not made here, and the
+reason it is not made is that no claim in this module declares a tolerance
+as data; `ACL_drift_neutral` carries `NEUTRAL_TOL` inside its predicate.
+
+==========================================================================
+end of null test -- findings recorded in AUDIT_NOTES.md as ACL_010..013
+==========================================================================

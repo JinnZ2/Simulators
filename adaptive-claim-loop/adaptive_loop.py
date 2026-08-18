@@ -12,7 +12,7 @@ under which the prediction is true, reported as a chain of reasoning. It
 cannot fail, it learns nothing about the system, and the provenance log
 that records it reads as diligence.
 
-This module has no vocabulary for it. A failure admits exactly five
+This module has no vocabulary for it. A failure admits exactly six
 responses, each with its own admission requirements:
 
   CLAIM_UPDATE     the claim was wrong. Restate it. Requires a new break
@@ -28,6 +28,13 @@ responses, each with its own admission requirements:
                    phase, statistic, integration step. Requires the artifact
                    removed and a quantity that is unchanged by the change.
                    Takes no prediction: it is not a claim about the world.
+
+  RESOLUTION_EDIT  the readout is right and the error bar is too wide.
+                   Requires the resolution you HAVE and the one the claim
+                   NEEDS, as numbers, with need beyond have. Split out of
+                   INSTRUMENT_EDIT after gate_null_test.py showed a random
+                   replicate bump getting through as the prose "sampling
+                   noise".
 
   SWEEP            a parameter is varied across levels declared before the
                    run, and the claim is restated as a statement about the
@@ -170,7 +177,7 @@ class Claim(object):
 # ---------------------------------------------------------------------------
 # responses
 #
-# Five constructors. Each raises Refused rather than returning a flag, so an
+# Six constructors. Each raises Refused rather than returning a flag, so an
 # inadmissible proposal cannot reach the log at all.
 # ---------------------------------------------------------------------------
 
@@ -268,8 +275,65 @@ class InstrumentEdit(Response):
                           ("unchanged", unchanged)):
             if not str(val).strip():
                 raise Refused("an instrument edit needs a %s" % name)
+        low = (str(artifact) + " " + str(readout)).lower()
+        for w in RESOLUTION_WORDS:
+            if w in low:
+                raise Refused(
+                    "the artifact named is a resolution claim (%r), which "
+                    "needs the two numbers. Use ResolutionEdit." % w)
         self.readout = readout
         self.artifact = artifact
+        self.unchanged = unchanged
+        self.rationale = rationale
+
+
+# Phrasings that mean "the error bar is too wide", which is a claim about a
+# NUMBER and belongs in ResolutionEdit where the number is required. A
+# keyword screen catches the phrasings it lists and no others -- the same
+# mechanism and the same limit as FORBIDDEN_REASONS above.
+RESOLUTION_WORDS = (
+    "sampling noise", "sample noise", "too few", "not enough samples",
+    "error bar", "standard error", "precision", "resolution", "noisy",
+    "insufficient replicate", "small sample",
+)
+
+
+class ResolutionEdit(Response):
+    """
+    The narrow case InstrumentEdit was letting through as prose.
+
+    An instrument edit that says "there is too much noise" is a claim about
+    a number, and the number is what separates closing a stated gap from
+    raising the sample size until a verdict moves. So it is required: what
+    the resolution IS, what the claim NEEDS, and the quantity that does not
+    change when you take more of it.
+
+    Found by gate_null_test.py: the delivered agent's `num_replicates += 20`
+    branch, offered at random with no gap computed, was admitted as an
+    InstrumentEdit whose artifact was the phrase "sampling noise". The
+    README already said this edit is admissible because the gap is
+    COMPUTABLE; the gate was not asking for the computation.
+    """
+    kind = "RESOLUTION_EDIT"
+
+    def __init__(self, quantity, have, need, unchanged, rationale=""):
+        screen(quantity=quantity, unchanged=unchanged, rationale=rationale)
+        for name, val in (("quantity", quantity), ("unchanged", unchanged)):
+            if not str(val).strip():
+                raise Refused("a resolution edit needs a %s" % name)
+        for name, val in (("have", have), ("need", need)):
+            if not isinstance(val, (int, float)) or isinstance(val, bool):
+                raise Refused(
+                    "a resolution edit needs %s as a number. 'there is too "
+                    "much noise' is the claim; the number is the evidence."
+                    % name)
+        if not need > have:
+            raise Refused(
+                "need (%s) is not beyond have (%s), so no resolution gap is "
+                "being closed" % (need, have))
+        self.quantity = quantity
+        self.have = have
+        self.need = need
         self.unchanged = unchanged
         self.rationale = rationale
 
@@ -551,7 +615,7 @@ class Loop(object):
             if resp.kind == "SWEEP":
                 # the sweep already ran at every level; params do not move.
                 pass
-            elif resp.kind == "INSTRUMENT_EDIT":
+            elif resp.kind == "RESOLUTION_EDIT":
                 need = getattr(self.responder, "raise_to", None)
                 if need and "replicates" in getattr(self.model,
                                                     "parameters", ()):
@@ -816,14 +880,13 @@ class ConservativeResponder(object):
                          "undecidable for a reason the replicate count does "
                          "not fix")
         self.raise_to = need
-        return InstrumentEdit(
-            readout="p_fix estimated from %d replicates" % n,
-            artifact="a standard error wider than the tolerance the claim is "
-                     "written at, which makes the verdict a draw from noise",
+        return ResolutionEdit(
+            quantity="replicates behind the p_fix estimate",
+            have=n, need=need,
             unchanged="the expectation of p_fix, which does not depend on "
                       "how many replicates estimate it",
-            rationale="resolution gap is computable: %d replicates are "
-                      "needed for 2 SE to fall inside the tolerance" % need)
+            rationale="2 SE at %d replicates is wider than the tolerance the "
+                      "claim is written at; %d closes it" % (n, need))
 
 
 # ---------------------------------------------------------------------------
@@ -939,6 +1002,29 @@ def selftest():
         "bracketing sweep flagged")
     is_("gradient_predicate" not in s.record(),
         "the callable is not serialised into the log")
+
+    # --- resolution edits need the two numbers
+    #
+    # These pin the gate_null_test.py finding: the first version of this
+    # module admitted the delivered agent's random `num_replicates += 20`
+    # as an InstrumentEdit whose artifact was the phrase "sampling noise".
+    # The first assertion here is that exact proposal, and it now refuses.
+    refuses(lambda: InstrumentEdit(
+        readout="probability estimated from the current replicate count",
+        artifact="sampling noise",
+        unchanged="the expectation of the estimate"),
+        "a resolution claim in prose is routed to ResolutionEdit")
+    refuses(lambda: ResolutionEdit("p_fix replicates", "not enough", 400, "u"),
+            "resolution edit refuses a non-numeric have")
+    refuses(lambda: ResolutionEdit("p_fix replicates", 120, None, "u"),
+            "resolution edit refuses a missing need")
+    refuses(lambda: ResolutionEdit("p_fix replicates", 400, 120, "u"),
+            "resolution edit refuses need that is not beyond have")
+    refuses(lambda: ResolutionEdit("q", True, 400, "u"),
+            "a bool is not a resolution")
+    is_(ResolutionEdit("p_fix replicates", 120, 157,
+                       "the expectation of p_fix").kind == "RESOLUTION_EDIT",
+        "resolution edit admitted with both numbers")
 
     # --- instrument edit takes no prediction
     is_(not hasattr(InstrumentEdit("r", "a", "u"), "prediction"),

@@ -17,6 +17,12 @@ PASS one-sided sweep refused without a reason
 PASS one-sided sweep flagged as one-sided
 PASS bracketing sweep flagged
 PASS the callable is not serialised into the log
+PASS a resolution claim in prose is routed to ResolutionEdit
+PASS resolution edit refuses a non-numeric have
+PASS resolution edit refuses a missing need
+PASS resolution edit refuses need that is not beyond have
+PASS a bool is not a resolution
+PASS resolution edit admitted with both numbers
 PASS instrument edit carries no prediction
 PASS standing needs a stated reason
 PASS stand admitted
@@ -38,4 +44,4 @@ PASS claim is undecidable when 2 SE exceeds its tolerance
 PASS same claim is decidable once the error bar fits inside the tolerance
 PASS four distinct termination states
 
-39/39
+45/45
