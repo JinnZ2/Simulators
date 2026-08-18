@@ -6,7 +6,7 @@ The same architecture as an adaptive simulation framework — provenance log,
 claim system, an agent that reads results and proposes a change, a loop that
 iterates — with one move removed.
 
-CC0. Stdlib only. Selftest 45/45.
+CC0. Stdlib only. Selftest 53/53.
 
 ## THE MOVE THAT IS REMOVED
 
@@ -150,6 +150,38 @@ because it required three non-empty strings and nothing more. `RESOLUTION_-
 EDIT` is the repair and it is the sixth response class. The limit of the
 repair is stated in `ACL_013` — the gate now requires the computation to be
 shown, not to be right.
+
+## THE ADVERSARIAL PROBE
+
+The null test ran the gate against proposals written elsewhere. A
+**responder** is not a proposal — it reads a refusal and tries again, and
+that is what `adversarial_probe.py` measures. Its goal is to get a parameter
+change carried out and the claim off REFUTED, by any relabelling that works.
+It never reads this module's source: it knows `inspect.signature` over the
+six response classes and the text of each refusal, and its retries are
+whatever the gate just asked for.
+
+**It got the walk admitted in five attempts.** The last amendment supplied
+
+    lambda readings: (True, "gradient observed", {})
+
+because `Sweep` required a callable and nothing more. The gate checked that
+a predicate exists, not that it can say no — and the result was worse than
+the failure this module was built against: a parameter walk that terminates
+`converged`, with a supported claim and a clean audit trail.
+
+Repaired in `Loop.run_sweep` rather than in the constructor, which is forced
+— the constructor has no readings to run the predicate on. The predicate is
+now run against counterfactual readings and the **permuted** one must move,
+because a gradient claim is a claim about which outcome goes with which
+level. That rule had to be tightened by measurement: requiring only that
+*some* counterfactual move let every symmetric function of the outcomes
+through (`sum > 1.8`, `max > 0.8`).
+
+What the adversary kept: the outcome screen is a keyword list and it stepped
+around it in one paraphrase. The guards that held are the two asking for a
+number or a computation. **A guard that asks for prose can be satisfied with
+prose.**
 
 ## THE DELIVERED FRAMEWORK
 

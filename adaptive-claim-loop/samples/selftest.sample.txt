@@ -39,9 +39,17 @@ PASS threshold model collapses above the tip
 PASS sweep evaluated at every declared level in one iteration
 PASS the gradient predicate produced the verdict, not the point claim
 PASS the gradient claim replaced the point claim it was raised against
+PASS a constant predicate is caught as non-discriminating
+PASS a real gradient predicate discriminates
+PASS a permutation-symmetric predicate is not a gradient test
+PASS a symmetric function of the outcomes is refused
+PASS the flatten counterfactual still separates it from a constant
+PASS a sweep decided by a constant predicate lands UNDECIDED
+PASS the log records that the predicate did not discriminate
+PASS the loop does not converge on a non-discriminating sweep
 PASS an undecided claim is routed to the responder
 PASS claim is undecidable when 2 SE exceeds its tolerance
 PASS same claim is decidable once the error bar fits inside the tolerance
 PASS four distinct termination states
 
-45/45
+53/53

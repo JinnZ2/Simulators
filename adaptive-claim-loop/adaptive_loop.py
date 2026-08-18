@@ -40,7 +40,11 @@ responses, each with its own admission requirements:
                    run, and the claim is restated as a statement about the
                    gradient. The levels must bracket the current value, or
                    the responder must say why a one-sided sweep is the
-                   right instrument here.
+                   right instrument here. The gradient predicate is then
+                   run against counterfactual readings and must disagree
+                   with itself on at least one -- a callable that always
+                   returns SUPPORTED is not a test, and an adversarial
+                   responder finds that in five attempts.
 
   STAND            the failure is the result. Nothing is proposed. Logged.
 
@@ -569,6 +573,56 @@ class Loop(object):
         return {"stop": stop, "iterations": len(history), "history": history,
                 "final_params": params}
 
+    @staticmethod
+    def predicate_discriminates(pred, readings):
+        """
+        Can this predicate return anything other than what it just returned?
+
+        `Sweep` requires a callable. A callable is not a test: a predicate
+        that returns SUPPORTED whatever it is handed satisfies the guard and
+        launders the walk it was supposed to stop. So the predicate is run
+        against counterfactual readings built from the real ones, and must
+        disagree with itself on at least one.
+
+        Two counterfactuals, covering different failure shapes:
+
+          permuted   the same outcomes, reassigned to the wrong levels. Kills
+                     any predicate that reads the level-to-outcome relation.
+          flattened  every level given the first level's outcome. Kills any
+                     predicate that reads variation at all.
+
+        A predicate that returns the same verdict on the readings and on
+        both is not reading them. This is the null-harness invariant applied
+        inline -- the same grading this repo runs over other people's gates.
+
+        Deterministic: the permutation is a reversal, not a draw.
+        """
+        def verdict(rs):
+            try:
+                ok, _n, _d = pred(rs)
+                return bool(ok)
+            except Undecidable:
+                return "undecided"
+            except Exception:                        # noqa: BLE001
+                return "error"
+
+        levels = [l for l, _o in readings]
+        outs = [o for _l, o in readings]
+        real = verdict(readings)
+        counterfactuals = {
+            "permuted": list(zip(levels, list(reversed(outs)))),
+            "flattened": [(l, outs[0]) for l in levels],
+        }
+        differs = {k: verdict(v) != real for k, v in counterfactuals.items()}
+        # A gradient claim is a claim about which outcome goes with which
+        # LEVEL, so the permuted counterfactual is the one that has to move.
+        # Requiring only "at least one" lets any symmetric function of the
+        # outcomes through -- sum, max, mean -- which reads the values and
+        # not their assignment, and is what an adversary writes when it
+        # wants a predicate that looks like it reads data. Measured: `sum >
+        # 1.8` and `max > 0.8` both passed the any() rule.
+        return differs["permuted"], differs
+
     def run_sweep(self, claim, resp, params, seed):
         """
         A sweep is run, not walked. The model is evaluated at every declared
@@ -590,11 +644,29 @@ class Loop(object):
         except Exception as e:                       # noqa: BLE001
             verdict, note, detail = (UNDECIDED, "predicate error: %s: %s"
                                      % (type(e).__name__, e), {})
+        discriminates, differs = self.predicate_discriminates(
+            resp.gradient_predicate, readings)
+        if verdict in (SUPPORTED, REFUTED) and not discriminates:
+            # The predicate did not move when the outcomes were reassigned to
+            # the wrong levels, so its verdict is not evidence about the
+            # gradient and the claim does not get to inherit it. The two
+            # cases are reported apart because they need different fixes.
+            verdict = UNDECIDED
+            if differs.get("flattened"):
+                note = ("predicate reads the outcome values but not their "
+                        "assignment to levels; it is symmetric under "
+                        "permutation, so it is not a gradient test")
+            else:
+                note = ("predicate returns the same verdict on the readings "
+                        "and on every counterfactual; it does not read them")
+            detail = {"counterfactuals_differing": differs}
         self.prov._emit({
             "kind": "SWEEP_RESULT", "ordinal": self.prov.ordinal,
             "claim_id": claim.cid, "parameter": resp.parameter,
             "levels": resp.levels, "verdict": verdict, "note": note,
             "detail": detail,
+            "predicate_discriminates": discriminates,
+            "counterfactuals_differing": differs,
             "readings": [{"level": l, "outcomes": o} for l, o in readings],
         })
         # the gradient claim replaces the point claim it was raised against
@@ -1088,7 +1160,12 @@ def selftest():
             return {"x": params.get("x")}
 
     def _grad(readings):
-        return (len(readings) == 3, "%d readings" % len(readings), {})
+        # NOTE: this was `len(readings) == 3`, which is constant with respect
+        # to the readings' CONTENT and is now correctly refused by the
+        # discrimination check added after adversarial_probe.py. A gradient
+        # predicate has to read the outcomes.
+        xs = [o.get("x") for _l, o in readings]
+        return (xs == sorted(xs), "x rises across levels: %s" % xs, {})
 
     c = Claim("s", "point claim", lambda o: (False, "point", {}), "r")
 
@@ -1106,6 +1183,51 @@ def selftest():
         "the gradient predicate produced the verdict, not the point claim")
     is_(c.statement == "gradient rises",
         "the gradient claim replaced the point claim it was raised against")
+
+    # --- a constant predicate does not get to decide a sweep
+    #
+    # Pins the adversarial_probe.py finding: a callable satisfies Sweep's
+    # guard, and `lambda r: (True, ..., {})` laundered the walk into a
+    # SUPPORTED claim with a clean audit trail.
+    const = lambda r: (True, "gradient observed", {})     # noqa: E731
+    rdgs = [(0.0, {"p_fix_a": 0.5}), (0.06, {"p_fix_a": 0.7}),
+            (0.12, {"p_fix_a": 0.83})]
+    is_(Loop.predicate_discriminates(const, rdgs)[0] is False,
+        "a constant predicate is caught as non-discriminating")
+    is_(Loop.predicate_discriminates(monotone_in_advantage, rdgs)[0] is True,
+        "a real gradient predicate discriminates")
+    # A "the outcome varies at all" predicate is symmetric under permutation:
+    # it reads the values and not which level each belongs to, so it is not a
+    # gradient test and is refused. Under the earlier `any(differs)` rule it
+    # was kept, along with sum/max/mean, which is the bypass ACL_016 measured.
+    varies = lambda r: (len({str(o) for _l, o in r}) > 1, "varies", {})  # noqa
+    is_(Loop.predicate_discriminates(varies, rdgs)[0] is False,
+        "a permutation-symmetric predicate is not a gradient test")
+    summed = lambda r: (sum(o["p_fix_a"] for _l, o in r) > 1.8, "", {})  # noqa
+    is_(Loop.predicate_discriminates(summed, rdgs)[0] is False,
+        "a symmetric function of the outcomes is refused")
+    is_(Loop.predicate_discriminates(varies, rdgs)[1]["flattened"] is True,
+        "the flatten counterfactual still separates it from a constant")
+
+    class _RC(object):
+        def respond(self, claim, o, p, m, verdict=REFUTED):
+            return Sweep("advantage", 0.06, [0.0, 0.06, 0.12],
+                         "the outcome varies with advantage", const)
+
+    pt = Claim("pt", "p_fix is about 0.5",
+               lambda o: (abs((o.get("p_fix_a") or 0) - 0.5) < 0.02, "", {}),
+               "departs by more than 0.02")
+    pv = Provenance()
+    r = Loop(MODELS["drift"], [pt], _RC(), prov=pv).run(
+        {"n": 20, "advantage": 0.06, "replicates": 40, "max_steps": 2000},
+        iterations=2, seed=3)
+    sw = [x for x in pv.rows if x["kind"] == "SWEEP_RESULT"][0]
+    is_(sw["verdict"] == UNDECIDED,
+        "a sweep decided by a constant predicate lands UNDECIDED")
+    is_(sw["predicate_discriminates"] is False,
+        "the log records that the predicate did not discriminate")
+    is_(r["stop"] != CONVERGED,
+        "the loop does not converge on a non-discriminating sweep")
 
     # --- an UNDECIDED claim reaches the responder
     reached = []

@@ -9,6 +9,7 @@ framework and its two provenance logs, verbatim and unmodified, and
     python3 adaptive_loop.py
     python3 replay_delivered.py
     python3 gate_null_test.py
+    python3 adversarial_probe.py
 
 ## What this is
 
@@ -35,9 +36,10 @@ put in its place, plus the guards that keep it from coming back as a sweep.
 | `delivered/provenance_forest.jsonl` | delivered, verbatim — 2 rows |
 | `delivered/provenance_fluctuating.jsonl` | delivered, verbatim — 5 rows |
 | `delivered/adaptive_sim_results.png` | delivered, verbatim |
-| `adaptive_loop.py` | added — the module, selftest 45/45 |
+| `adaptive_loop.py` | added — the module, selftest 53/53 |
 | `replay_delivered.py` | added — the delivered moves through the gate |
 | `gate_null_test.py` | added — the null-harness invariant over the gate |
+| `adversarial_probe.py` | added — a responder that relabels until something is admitted |
 | `README.md` | added |
 | `AUDIT_NOTES.md` | added |
 | `samples/` | added |
@@ -61,6 +63,10 @@ Nothing in `delivered/` is modified, and the module does not import it.
 | ACL_011 | The epicycle guard is a **declaration, not a check** — `independently_falsifiable` and `predicts_beyond_parent` arrive as booleans from the caller and nothing derives either from the restatement's text, so it cannot be null-tested from text at all | a routine deriving either from the text | SUPPORTED |
 | ACL_012 | The null test found one hole: `InstrumentEdit` admitted the delivered agent's random `num_replicates += 20` on the prose artifact "sampling noise", because it required three non-empty strings and nothing more — the module's README already said this edit is admissible because the gap is *computable*, and the gate was not asking for the computation. Repaired with a sixth response class, `RESOLUTION_EDIT` | the prose form being admitted again | SUPPORTED — found, diagnosed, repaired, pinned by 6 selftest assertions |
 | ACL_013 | The repair's limit, stated: `ResolutionEdit` checks that two numbers were supplied and that `need > have`; it does **not** check that `need` is what the claim's tolerance implies, so `have=50, need=70` is admitted. Closing it needs the tolerance declared on the CLAIM rather than on the response, and no claim here declares one as data | a gate that reads the claim's tolerance | SUPPORTED (open, and named) |
+| ACL_014 | A persistent responder gets the walk ADMITTED in **five attempts**, each amendment being what the gate asked for in the sentence it refused with; the last one supplies `lambda r: (True, ...)` because `Sweep` required `callable(...)` and nothing more — the gate checked a predicate exists, not that it can say no | the walk surviving no relabelling, or being admitted in one | SUPPORTED |
+| ACL_015 | Before the repair that was **worse than the failure this module was built against**: admitted sweep → constant predicate returns SUPPORTED → gradient claim replaces the point claim → loop terminates `converged`. A walk with a session-stamped audit trail and a supported claim at the end. Repaired in `Loop.run_sweep`, not in the constructor, because the constructor has no readings to run the predicate on | the check working at admission time | SUPPORTED — found, repaired, both stages measured |
+| ACL_016 | The discrimination rule had to be tightened from "some counterfactual moves" to "the **permuted** one moves": under `any`, every symmetric function of the outcomes passed — measured, `sum > 1.8` and `max > 0.8` and `variation exists` all differ on `flattened` only. Cost stated: a variation-only claim is now refused, and the two failure cases are reported apart because they need different fixes | a symmetric predicate producing a sweep verdict | SUPPORTED |
+| ACL_017 | The outcome screen is stepped around in one amendment by paraphrase, as any keyword screen is (`UNI_009`, `DF_010` are the same shape). The guards that hold against paraphrase are the two that ask for a number or a computation — `ResolutionEdit`'s have/need and the discrimination check. **A guard that asks for prose can be satisfied with prose** | a prose guard that survives paraphrase | SUPPORTED (holds) |
 
 ## 1 — ACL_001, one move
 
@@ -395,3 +401,142 @@ the gate cannot reach it.
 proposals the author did not write, which is what that claim said had not
 happened — but a responder the author did not write is still not the same
 thing, and none has been run.
+
+---
+
+# The adversarial probe
+
+`adversarial_probe.py`. The other half of `ACL_009`: `gate_null_test.py`
+ran the gate against proposals written elsewhere, and a **responder** is not
+a proposal — it reads a refusal and tries again. Static proposals cannot
+push back.
+
+**Threat model.** Get a parameter change carried out and the claim off
+REFUTED. Truth is not a consideration. It is the delivered agent's policy
+with persistence added.
+
+**What constrains it.** It never reads `adaptive_loop`'s source; its
+knowledge of the gate is `inspect.signature` over the six response classes
+plus the text of each refusal, both of which any caller has. Its retries are
+driven by the refusal message rather than by hand-picked bypasses — the gate
+says what it wants, the adversary supplies that and resubmits. It is written
+here, which is the honest limitation and is stated in `ACL_017`.
+
+## 14 — ACL_014, five attempts
+
+| try | verdict | gate said | adversary then |
+|-----|---------|-----------|----------------|
+| 1 | REFUSED | edit justified by outcome | paraphrased around the flagged phrase |
+| 2 | REFUSED | a sweep needs at least two levels | added the current value as a second level |
+| 3 | REFUSED | must restate the claim over the gradient | supplied a gradient claim |
+| 4 | REFUSED | a sweep must carry a predicate | supplied a predicate |
+| 5 | **ADMITTED** | — | — |
+
+Every amendment is the thing the gate asked for in the sentence it refused
+with. A person reading the same refusals would do the same, which is the
+point — none of these is a trick.
+
+The load-bearing one is the last:
+
+    lambda readings: (True, "gradient observed", {})
+
+`Sweep` required `callable(gradient_predicate)` and nothing else. **The gate
+checked that a predicate exists. It did not check that the predicate can
+return anything but SUPPORTED.**
+
+`null-harness` has a name for a test that always returns the same answer,
+and this module applies that grading to other people's gates in
+`gate_null_test.py` while not applying it to the predicate it accepts.
+
+## 15 — ACL_015, what that bought, and where the repair goes
+
+Before the repair, the full chain ran: sweep admitted → `run_sweep`
+evaluates every level → constant predicate returns SUPPORTED → the gradient
+claim **replaces** the point claim → loop terminates `converged`.
+
+That is worse than the failure this module was built against. The delivered
+framework's walk at least leaves its claims marked `failed`. This one
+produced a parameter walk with a session-stamped audit trail and a supported
+claim at the end of it.
+
+**The repair is in `Loop.run_sweep`, not in `Sweep.__init__`,** and that is
+forced rather than chosen. The constructor sees a callable and no readings,
+so it cannot know whether the callable discriminates. Admission is the wrong
+stage, and leaving the check there is what let the walk through. Measured,
+after:
+
+| predicate | sweep verdict | loop stop |
+|-----------|---------------|-----------|
+| constant | UNDECIDED | `stood_on_refutation` |
+| real gradient | SUPPORTED | `converged` |
+
+Those two rows are the null-harness pair for the check itself. A check that
+refused every predicate would show UNDECIDED on both and be useless.
+
+## 16 — ACL_016, the rule had to be tightened, by measurement
+
+The first version required that **some** counterfactual move. That let
+through every symmetric function of the outcomes:
+
+| predicate | discriminates | differs on |
+|-----------|---------------|------------|
+| constant True / False | no | — |
+| counts readings | no | — |
+| variation exists | no | flattened |
+| `sum > 1.8` | no | flattened |
+| `max > 0.8` | no | flattened |
+| reads first only | yes | permuted |
+| monotone in level | yes | permuted |
+
+(The table shows the rule as it now stands. Under `any(differs)` the three
+`flattened`-only rows passed.)
+
+Those read the outcome *values* and not their assignment to levels — and "a
+predicate that looks like it reads data" is exactly what an adversary writes
+next. The rule is now that the **permuted** counterfactual must move, which
+is definitional: a gradient claim is a claim about which outcome goes with
+which level.
+
+**The cost is real and is stated.** "The outcome varies at all across these
+levels" is a genuine if weak claim and is now refused. That is right for a
+*gradient* claim and it is a narrowing, so the two failure cases are
+reported apart — a symmetric predicate is told it is symmetric, a constant
+one is told it reads nothing, and they need different fixes.
+
+Still open: the counterfactual set is two, chosen because two failure shapes
+were in front of us, and nothing derives it. The permutation used is a
+reversal, which is one permutation of several.
+
+An error corrected in the making: the first draft of this section asserted
+that a predicate reading only the first reading would slip through. It does
+not — reversal changes the first element. The claim was replaced by the
+measurement, which found a different and sharper gap.
+
+## 17 — ACL_017, the paraphrase, and what is still not closed
+
+    REFUSED   "because the claim failed, lower it"
+    ADMITTED  "the predicate's observed value sits outside the stated band…"
+
+One amendment. The outcome screen is a keyword list and no keyword list is a
+barrier to anything that wants past it. Same shape as `uninstrumented`'s
+scanner (`UNI_009`) and `declared-frame` (`DF_010`): triggers written in the
+vocabulary of the failing document catch the phrasings they list and no
+others.
+
+It does not follow that the screen is useless. A responder writing "because
+the claim failed" is stopped, and the phrase it must avoid is the phrase
+that names the reasoning — so the screen converts a casual retune into one
+that has to be described in mechanism language, and that description then
+sits in the log beside the proposal.
+
+**The pattern worth taking forward:** the two guards that hold against
+paraphrase are the two that ask for a number or a computation —
+`ResolutionEdit`'s have/need pair, and the discrimination check. A guard
+that asks for prose can be satisfied with prose.
+
+**And what is still not closed.** The adversary is written here. Its
+strategies come from refusal text and its knowledge from `inspect.signature`
+— the strongest constraint available from inside — and that is not the same
+as a responder written by somebody else, because what it does not try is
+bounded by what occurred to the person who wrote it. `ACL_009` is narrower
+than it was and it is not closed.
