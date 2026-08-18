@@ -1,0 +1,27 @@
+{
+  "case": "example",
+  "components": [
+    {
+      "name": "",
+      "constraint_class": "invariant",
+      "law": "",
+      "sufficient_alone": false,
+      "used": true,
+      "partial_use_destroys": null
+    }
+  ],
+  "rejected": [
+    {
+      "option": "",
+      "ruled_out_by": ""
+    }
+  ],
+  "budget_terms": [],
+  "diagnostic": {
+    "cause_known": null,
+    "deferred": null,
+    "note": ""
+  },
+  "source_class": "",
+  "open": []
+}

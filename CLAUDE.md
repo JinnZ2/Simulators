@@ -2867,6 +2867,68 @@ underneath).
   on the branch it defines. **`CC_003` is not tripped by the delivered
   corpus**, which is the point: a default running toward the informative
   state is invisible on data written by someone who knows the schema. CC0.
+- `constraint-assembly/` — One file, `assemble.py`, recording cases where
+  sufficiency was **composed from parts that individually do not do the
+  job**. Construction, not selection: an option that did not exist in the
+  environment, assembled from insufficient components under a fixed
+  budget. **The reversal it encodes** — constraints are not what limits
+  the option set, they are what makes composition *decidable*; a term that
+  will not move can be leaned on, a soft term cannot, because there is no
+  way to know when the pieces add up, so the parts inventory is domains
+  with hard laws in them. Three classes kept apart because merging them
+  loses a failure mode: `invariant` (holds regardless of use, cannot be
+  spent), `consumable` (finite, availability destroyed by spending —
+  partial use can be worse than none, so it is a resource and a hazard in
+  the same term), `soft` (does not hold under load, recorded so reliance
+  is visible rather than to score anybody). Rejected candidates are the
+  data: each rejection names the constraint that ruled it out, and a case
+  with no rejections is selection, recorded as such. Selftest 18/18. No
+  cases, README or claim table delivered; nothing here invents a case.
+  Seven claims `CA_001..007`. **`CA_001` holds** — the reversal has a
+  mechanism in it (decidability, a stopping rule) and runs opposite to the
+  two nearest folders on the same object without contradicting either:
+  `generation-capacity` reads an option space REDUCED upstream,
+  `presented-binary` one CLOSED at presentation, this one an option
+  CONSTRUCTED from parts, and only this one treats hard laws as the parts
+  inventory. **`CA_002` holds:** `composition_present` **fails closed** —
+  an unrecorded `sufficient_alone` blocks the claim and is reported
+  separately as `sufficiency_unknown`, so a case that failed the test is
+  distinguishable from one that could not be tested; the ninth instance of
+  the absent-vs-known-negative repair in this drop family and the fourth
+  designed in rather than found. Its companion `selection_not_assembly` is
+  aimed at the nearest neighbour — selection from presented alternatives
+  is what assembly is most likely to be mistaken for — and is a column in
+  the table rather than a caveat in prose. **`CA_003`, the sharp one:**
+  the headline claim is about the AVAILABLE inventory ("more hard
+  constraints, more composition available") and `score()` filters to
+  `used` on its first line, so no readout counts available-but-unused
+  components — a case with 5 components, 2 used, returns
+  `invariant_count 1` and nothing counting the other 3. **Not the usual
+  missing-field shape** (`MF_017`, `CW_015`, `DL_004`, `GC_012` are all a
+  stated rule with no schema slot): here the slot exists, since `used` is
+  a per-component boolean, and the readout does not — which is cheaper
+  still, one line, and it is the number that would let the claim be
+  checked across cases. Without it `invariant_count` reads as an inventory
+  measure and is a composition measure. **`CA_004`, the narrow version of
+  the usual shape:** `rejections_all_grounded` returns `False` both for an
+  ungrounded rejection and for a case with nothing to ground — narrow
+  because `selection_not_assembly` sits beside it, the table prints both
+  columns and the footer states the rule, so what is left is only that the
+  field is unsafe to quote alone. **`CA_005`:** `--case` is unguarded and
+  raises `IndexError` with no argument while `--new` in the same function
+  IS guarded with the expression both `domain-ledger` tools use — `CC_004`
+  recurring unchanged in the next tool. **`CA_006`:** the DIAGNOSTIC
+  QUARANTINE section names the same budget `closure-cost` measures, from
+  the other end — that folder reads the categorisation stall as a fraction
+  of budget consumed, this one records whether the operator declined to
+  spend it and assembled without knowing the cause — the first time in
+  this drop family that two folders name one budget, and stated by the
+  author rather than inferred. "Deferral is a recorded property, not a
+  virtue" is the harder version of the module's own "No scoring of the
+  operator", since deferring is the behaviour the shape predicts and is
+  still not scored. **`CA_007`:** an empty corpus prints a well-formed
+  report with zero rows and exits 0 — fourth tool in the family; the three
+  that refuse are the older ones. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

@@ -1,0 +1,20 @@
+PASS composition detected
+PASS single sufficient blocks composition
+PASS single sufficient flagged
+PASS unknown sufficiency blocks composition
+PASS unknown sufficiency flagged
+PASS class counts split
+PASS soft counted separately
+PASS soft reliance flagged
+PASS partial-use destruction counted
+PASS grounded rejections
+PASS ungrounded rejection caught
+PASS no rejections is selection
+PASS rejections present not selection
+PASS diagnostic fields carried
+PASS diagnostic none when unstated
+PASS empty case no crash
+PASS empty composition false
+PASS no verdict field
+
+18/18

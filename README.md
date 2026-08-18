@@ -60,6 +60,7 @@ underneath. Read those before running the corresponding script.
 | `moral-decomposer/` | a disagreement presented as moral or ethical | three-stage decomposition to option-distribution claims + frames; the readout is the residue; three cases, one external; eight `MD_*` claims |
 | `domain-ledger/` | a confidence readout, the domain set behind it, and what it anchors to | four uncombined ratios with their denominators printed + a three-band anchor map that refuses to emit a composite; one shape and one anchor map, both unread; thirteen `DL_*` claims |
 | `closure-cost/` | recorded cases where a variable was closed before the event arrived | instrument vs event branches, a named rival hypothesis held as a schema field, three cases and zero quantified, ten `CC_*` claims |
+| `constraint-assembly/` | cases where sufficiency was composed from parts that individually do not do the job | three constraint classes (invariant / consumable / soft), rejected candidates as the data, a fail-closed composition test and a diagnostic-quarantine field; no cases delivered; seven `CA_*` claims |
 | `tools/` | shared utilities | validators, substitution toolkits, gate-drift check |
 
 See [`SYNTHESIS.md`](SYNTHESIS.md) for the cross-folder reading and
