@@ -2,12 +2,13 @@
 """assembly_audit.py -- checks on the constraint-assembly drop.
 
 Added, not delivered. assemble.py is the drop as received and is not
-modified. Findings are recorded in AUDIT_NOTES.md as CA_001..CA_007.
+modified. Findings are recorded in AUDIT_NOTES.md as CA_001..CA_013.
 
     python3 assembly_audit.py
 
-The drop is one file: a scorer with a selftest, no cases/, no README and
-no claim table. Nothing here invents a case.
+Drop 1 was one file: a scorer with a selftest, no cases/, no README and
+no claim table. Drop 2 adds the canonical README and two cases. Nothing
+here invents a case.
 
 stdlib only, deterministic. CC0.
 """
@@ -37,8 +38,8 @@ def probe(comps, rejected=None):
 
 
 print("constraint-assembly -- audit of the delivered drop")
-print("delivered: assemble.py")
-print("not delivered: cases/, README.md, CLAIM_TABLE.md")
+print("delivered: assemble.py, README.md, 2 cases")
+print("not delivered: CLAIM_TABLE.md")
 buf = io.StringIO()
 with contextlib.redirect_stdout(buf):
     rc = A.selftest()
@@ -285,7 +286,211 @@ assembly" -- which is the right footer for a populated run and says
 nothing about an empty one.
 """.strip())
 
+# ---------------------------------------------------------------- drop 2
+
+import json
+
+CASEDIR = os.path.join(HERE, "cases")
+CASES = {}
+for fn in sorted(os.listdir(CASEDIR)):
+    if fn.endswith(".json"):
+        CASES[fn[:-5]] = json.load(io.open(os.path.join(CASEDIR, fn),
+                                           encoding="utf-8"))
+SC = {k: A.score(v) for k, v in CASES.items()}
+
+head(8, "CA_008", "two readouts disagree on flood-ground, and the doc")
+print("""
+The README's STATE section says:
+
+    `flood-ground` is a structural placeholder with no rejections, and the
+    tool correctly refuses to read it as assembly.
+
+The case's own `open` list says the same thing:
+
+    No rejections recorded, so the tool correctly reads this as selection
+    rather than assembly.
+
+Both are true of one field and false of the other.
+""".strip("\n"))
+print()
+print("  %-16s %-20s %-24s" % ("case", "composition_present", "selection_not_assembly"))
+print("  " + "-" * 62)
+for k in sorted(SC):
+    print("  %-16s %-20s %-24s" % (k, SC[k]["composition_present"],
+                                   SC[k]["selection_not_assembly"]))
+print("""
+`flood-ground` returns True on both. The field named `composition_present`
+-- the module's central per-case claim -- says the placeholder IS a
+composition, and the table prints `comp yes` for it.
+
+The two are independent by construction. `composition_present` is computed
+from components alone; `selection_not_assembly` from rejections alone. So
+any case with two or more insufficient components and no rejections gets
+both, and the disagreement is structural rather than particular to this
+case.
+
+The README states the gating rule that would resolve it, in its own
+section heading:
+
+    WHAT MAKES A CASE READABLE. Rejected options with their grounds. A
+    composed solution is only visible as composition if what was ruled
+    out, and by which constraint, is recorded.
+
+That is the statement that `composition_present` should require
+rejections. Unlike MF_017 / CW_015 / DL_004 / GC_012, no schema field is
+missing and no data is missing -- both inputs are already in the same
+score dict, two keys apart. What the code does not do is combine them.
+
+The reading the README wants is available at no cost: `composition_-
+visible` = `composition_present and not selection_not_assembly`, leaving
+`composition_present` as the components-only reading it already is.
+""".strip("\n"))
+
+head(9, "CA_009", "CA_003's quantity has no instance in the corpus either")
+comps = [(k, c) for k, v in CASES.items() for c in v.get("components", [])]
+used = [c for _, c in comps if c.get("used")]
+unused = [c for _, c in comps if not c.get("used")]
+print()
+print("  components across both cases : %d" % len(comps))
+print("  recorded used                : %d" % len(used))
+print("  recorded available and unused: %d" % len(unused))
+print("""
+CA_003 recorded that the reversal's headline claim -- "more hard
+constraints, more composition available" -- is about the available
+inventory, and that `score()` filters to `used` on its first line so no
+readout counts what was available and not taken.
+
+The corpus now arrives and does not exercise it. Every component in both
+cases is `used: true`, so there is no available-but-unused constraint
+anywhere in the folder, and the claim cannot be checked against this data
+even if the readout existed.
+
+The gap is two-sided: no readout, and no case recording the quantity the
+readout would count. The second half is the cheaper one to close, and it
+is a property of how a case is written rather than of the schema -- the
+grade-stop record names four terms that were used and does not name what
+else was on the grade and was not reached for.
+""".strip("\n"))
+
+head(10, "CA_010", "the consumable hazard reads for the first time")
+print()
+print("  %-16s %-6s %-6s %-6s %s" % ("case", "inv", "cons", "soft", "partial_destroys"))
+print("  " + "-" * 58)
+for k in sorted(SC):
+    s = SC[k]
+    print("  %-16s %-6d %-6d %-6d %d" % (
+        k, s["invariant_count"], s["consumable_count"], s["soft_count"],
+        s["consumables_destroyable_by_partial_use"]))
+print("""
+`consumables_destroyable_by_partial_use` returns 1 on grade-stop -- the
+first non-zero reading of the field the docstring's sharpest sentence is
+about, and the case supplies the mechanism rather than only the flag:
+
+    Applying enough to slow but not stop leaves zero air, zero braking,
+    and the grade still acting. That is worse than not applying, which is
+    why it could not be used first and had to be composed with terms that
+    do not deplete.
+
+That is the invariant/consumable split doing work: the ordering of the
+composition is derived from which terms deplete. Note the second
+consumable on the same case, steering input, is marked
+`partial_use_destroys: false` -- it declines with duration but partial use
+does not remove it -- so the field separates two consumables rather than
+tracking the class.
+
+`soft` is 0 across both cases. One of the three classes has no instance,
+and it is the one recorded "so that reliance on one is visible" -- a class
+whose whole purpose is to be seen when present, and which the corpus does
+not yet show being present.
+""".strip("\n"))
+
+head(11, "CA_011", "the shared budget, instanced from the case side")
+d = CASES["grade-stop"]["diagnostic"]
+print()
+print("  cause_known : %s" % d.get("cause_known"))
+print("  deferred    : %s" % d.get("deferred"))
+print()
+print("  note: %s" % d.get("note"))
+print("""
+CA_006 recorded that the DIAGNOSTIC QUARANTINE section names the same
+budget `closure-cost` measures, from the other end. The first filled
+diagnostic record states the coupling in the case rather than in the
+docstring -- the diagnostic and the assembly draw on one budget, and the
+case names which budget (look-ahead and steering).
+
+`closure-cost`'s Hawaii case refused to fill `diagnostic_spend` from the
+error duration because that would be proxy substitution (CC_007). This
+case is the other outcome on the same quantity: the spend was declined
+rather than consumed, and `deferred: true` records the decision without
+scoring it. Two folders, one budget, one case each, neither quantified.
+""".strip("\n"))
+
+head(12, "CA_012", "the README's STATE claims, checked")
+import re
+nums = []
+for k, v in CASES.items():
+    # ensure_ascii=False so the em-dash does not arrive as the escape \u2014
+    # and get counted as a numeral. the point of the check is real digits.
+    nums += re.findall(r"[0-9]+[a-z ]{0,12}",
+                       json.dumps(v, ensure_ascii=False))
+print()
+print("  two cases                          : %s" % (len(CASES) == 2))
+print("  grade-stop components              : %d" % SC["grade-stop"]["components_used"])
+print("  grade-stop rejections, all grounded: %d, %s" % (
+    SC["grade-stop"]["rejected_count"], SC["grade-stop"]["rejections_all_grounded"]))
+print("  flood-ground rejections            : %d" % SC["flood-ground"]["rejected_count"])
+print("  numerals present                   : %s" % ", ".join(
+    sorted(set(n.strip() for n in nums))))
+print("""
+Every STATE claim holds exactly except the flood-ground refusal, which is
+CA_008.
+
+"Zero quantities anywhere" holds, and holds deliberately. Every numeral in
+either file is a road name -- exit 37, Highway 2, 21st Street -- and the
+grade is written as "nine percent" in words rather than as a number. A
+case describing a stop assembled from friction, gravitational conversion
+and stored pressure contains no coefficient, no percentage and no
+pressure, and says so in its own `open` list: "the assembly is recorded as
+a structure and not as an energy balance."
+
+That is the right call for this module and it costs the thing the module
+would most want next. Two cases with no numbers cannot be compared on
+whether a larger hard-law inventory composed more, which is CA_009 from
+the other direction.
+""".strip("\n"))
+
+head(13, "CA_013", "the module's own undecidability, named before use")
+print("""
+The README's last section is THE WEAKNESS THAT MATTERS MOST:
+
+    Recognition-primed selection and genuine construction look identical
+    in a single-instance retrospective record. [...] That is not a detail.
+    It is the distinction the whole module exists to make, and no case in
+    the file establishes it.
+
+The case repeats it in its own `open` list, unprompted, and adds the
+self-report defect on the rejections -- which are the evidence that the
+case is assembly at all, and are recorded from recall.
+
+So the folder ships with its load-bearing distinction declared
+unestablished by its own corpus, and names the two things that would
+separate them: a novel constraint set the operator has no prior exposure
+to, or a during-event record.
+
+That is the `photoperiod-claim-harness` posture -- state the gap where the
+verdict would go -- and it is stated in the README rather than only in the
+claim table, where a reader meets it before the cases rather than after.
+
+What it leaves open is that neither route is a small collection job. A
+during-event record of an unassisted stop on a nine percent grade is not
+something anyone will schedule, and the novel-constraint route needs a
+constructed situation, which is a different instrument from a case file.
+`flood-ground` is aimed at a third route -- same operation, no machinery
+-- and is explicitly a skeleton: it tests domain-independence, not the
+recognition-vs-construction split.
+""".strip("\n"))
+
 print()
 print(BAR)
-print("end of audit -- findings recorded in AUDIT_NOTES.md as CA_001..CA_007")
+print("end of audit -- findings recorded in AUDIT_NOTES.md as CA_001..CA_013")
 print(BAR)

@@ -1,0 +1,18 @@
+{
+  "case": "flood-ground",
+  "description": "Placeholder for the same operation with no vehicle in it: moving water, terrain, and a person on foot. Included because it tests whether the composition operation belongs to driving or to anything with hard constraints in it.",
+  "components": [
+    {"name": "water momentum and depth-velocity product", "constraint_class": "invariant", "law": "fluid momentum, indifferent to narrative", "sufficient_alone": false, "used": true, "partial_use_destroys": false},
+    {"name": "terrain elevation gradient", "constraint_class": "invariant", "law": "gravitational, fixed", "sufficient_alone": false, "used": true, "partial_use_destroys": false},
+    {"name": "time before arrival", "constraint_class": "consumable", "law": "finite and spent by deliberation", "sufficient_alone": false, "used": true, "partial_use_destroys": false}
+  ],
+  "rejected": [],
+  "budget_terms": ["time before water arrival"],
+  "diagnostic": {"cause_known": null, "deferred": null, "note": ""},
+  "source_class": "not collected — structural placeholder",
+  "open": [
+    "No rejections recorded, so the tool correctly reads this as selection rather than assembly. That is accurate: this is a skeleton, not a case.",
+    "Its only current function is to show that every component term here is a physical law with no vehicle involved. If the operation is real it should record identically in a domain with no machinery in it.",
+    "Needs an actual recorded instance before it carries any weight."
+  ]
+}

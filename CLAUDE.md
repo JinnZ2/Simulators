@@ -2786,6 +2786,33 @@ underneath).
   (1 − 0.80, exact) and adds "do not read a ceiling off this file alone",
   so one of `DL_010`'s three constants now has a source — while `ceiling`
   is still computed, printed beside `RESERVATION`, and read by nothing.
+  **Fifth drop lands `A2.md`** — a candidate definition for the term the
+  whole confidence function turns on, deliberately not adopted. **`DL_015`,
+  the diagnosis checked against the code:** A2 says what makes an anchor
+  near versus far is unspecified, and that is exact — distance is
+  operationalised as `BAND_CEILING[corroboration.class]`, the class is a
+  string the author writes into the anchor file, and no routine derives it
+  from anything; `DL_010` reached the same place from the other side. The
+  candidate is **load-bearing capacity** — an anchor is near because it is
+  *assemblable*, so a hard physical law is near not because it is
+  prestigious or well-studied but because it does not drift while
+  something is built on it — which is `constraint-assembly`'s invariant
+  class read as a band, and would make the anchor map a load table with
+  confidence derived rather than primary (a rewrite, not an amendment,
+  which is why it stays in prose). **What the note does that matters more
+  than the candidate:** it refuses to adopt it and names the reason as
+  non-independence — "the convergence was noticed in the same conversation
+  that produced both descriptions" — which is `triad-playground` `TP_003`'s
+  shared-bias result applied by the author to their own convergence,
+  before anything rests on it, with the falsifier named as a search
+  (something well-corroborated that is not assemblable, or something
+  assemblable with thin corroboration) and recorded as not yet run.
+  **`DL_014`:** the note opens by sourcing its own subject to
+  `CLAIM_TABLE.md`, which the folder does not carry, and `A2` appears
+  nowhere else in it — sixth instance of a reference naming an absent
+  artifact in this drop family (`CW_001`, `PB_001`, `GC_009`, `PB_015`,
+  `MD_001`), three of which landed a drop later. Fifteen claims
+  `DL_001..015`.
   CC0.
 - `closure-cost/` — One file, `closure.py`, reading recorded cases where a
   variable was closed before the event arrived. The shape: **response
@@ -2929,6 +2956,113 @@ underneath).
   still not scored. **`CA_007`:** an empty corpus prints a well-formed
   report with zero rows and exits 0 — fourth tool in the family; the three
   that refuse are the older ones. Stdlib only, CC0.
+  **Second drop lands the canonical README and the first two cases.**
+  `grade-stop` is an operating record — a loaded rig, engine off on a
+  sustained nine percent descending grade, no power steering, no engine
+  braking, finite air with nothing recharging it, concrete barrier and no
+  shoulder — where a stop was assembled from gravel friction (invariant),
+  an uphill grade at the exit (invariant), remaining service air
+  (consumable) and unassisted steering, four options rejected with the
+  constraint that ruled each out. `flood-ground` is a structural
+  placeholder: same operation with no vehicle, testing whether the
+  composition belongs to driving or to anything with hard constraints in
+  it. **`CA_008`, the sharp one:** `flood-ground` returns
+  `composition_present: True` **and** `selection_not_assembly: True`, and
+  both the README's STATE section and the case's own `open` list say the
+  tool "correctly refuses to read it as assembly" — true of one field and
+  false of the other, with the field named `composition_present` saying
+  the placeholder IS a composition and the table printing `comp yes`. The
+  two are independent by construction (components alone vs rejections
+  alone), so the disagreement is structural. The README states the gating
+  rule in its own section heading — "a composed solution is only visible
+  as composition if what was ruled out, and by which constraint, is
+  recorded" — and unlike `MF_017`/`CW_015`/`DL_004`/`GC_012` **no schema
+  field and no data is missing**; both inputs sit in the same score dict
+  two keys apart, and the code does not combine them. **`CA_009`:** the
+  corpus does not exercise `CA_003` either — 7 of 7 components across both
+  cases are `used: true`, so no available-but-unused constraint is
+  recorded anywhere and the headline claim ("more hard constraints, more
+  composition available") cannot be checked against this data even if the
+  readout existed; the gap is two-sided. **`CA_010`:**
+  `consumables_destroyable_by_partial_use` gets its first non-zero reading
+  and the case supplies the mechanism rather than the flag — applying
+  enough air to slow but not stop "leaves zero air, zero braking, and the
+  grade still acting", which is why it could not be used first — so the
+  ORDER of the composition is derived from which terms deplete; the second
+  consumable on the same case is `partial_use_destroys: false`, so the
+  field separates two consumables rather than tracking the class, and
+  `soft` is 0 across both cases (the one class whose whole purpose is to
+  be seen when present). **`CA_011`:** the first filled `diagnostic`
+  states the shared budget in the case rather than the docstring and names
+  which budget (look-ahead and steering) — `CA_006` instanced, and the
+  opposite outcome from `closure-cost`'s Hawaii case on the same quantity:
+  spend declined rather than consumed. **`CA_012`:** every README STATE
+  claim holds exactly except the `flood-ground` refusal, including "zero
+  quantities anywhere" — every numeral in either file is a road name (exit
+  37, Highway 2, 21st Street) and the grade is written as "nine percent"
+  in words, so a case about friction, gravitational conversion and stored
+  pressure carries no coefficient, no percentage and no pressure. That is
+  the right call and it costs the comparison `CA_009` wants. **`CA_013`:**
+  the README's last section is THE WEAKNESS THAT MATTERS MOST and it is
+  the module's own undecidability — recognition-primed selection and
+  genuine construction are not separable in a single-instance
+  retrospective record, "the distinction the whole module exists to make,
+  and no case in the file establishes it" — repeated unprompted in the
+  case's `open` list, which adds that the rejections are themselves
+  recorded from recall. Thirteen claims `CA_001..013`.
+- `held-open-uncertainty/` — One prose file, `OPEN_QUESTIONS.md`. A question
+  list, not a claim table, against the assumption that a party who holds
+  variables open and carries wide variability is therefore **not acting**.
+  Nine entries, each declaring a state before it argues, with provenance
+  separated per entry. **`HO_001` holds:** three entries name whose
+  position they are, and the one marked Claude's carries a retraction
+  inside the entry that holds the claim ("asserted earlier in conversation
+  with more confidence than it had earned"); Q2 grades its own strongest
+  rhetorical move — that nobody asks the question — down to "absence, not
+  a result", which is `uninstrumented` `UNI_005` applied by the author
+  against their own argument. **`HO_002`:** Q4 and Q5 specify the cheapest
+  runnable experiment — present a shape at a stated confidence with an
+  explicit action queue attached, vary only the number, count whether the
+  response supplies a resolution and whether the named unrouted item
+  survives — and it is buildable on apparatus already in the tree, since
+  `voice-attractor-probe/` holds the held-constant task list, the jitter
+  axis, the response-feature extractor and an offline stub. The design
+  passes the check that harness enforces: the high-confidence arm IS the
+  control, and Q4's prediction is stated before any run and is
+  conditional in the load-bearing way — resolution-supplying rises as the
+  number falls *even when the queue is fully specified in the input*,
+  which separates "answering an underspecified request" from "reading the
+  number as a state of the person". **`HO_003`:** Q8's two-register
+  resolution (act on the strongest decision points against the most stable
+  anchors while the unknowns stay a separate readout) is not a proposal in
+  this repo — `domain-ledger/ledger.py` returns four uncombined ratios and
+  `anchor.py`'s selftest asserts "no composite emitted" — so what Q8 needs
+  is not an implementation but a case where one register and two give
+  different answers on the same material; its own closing line names the
+  shape of one ("the confidence map and the operating procedure are one
+  document") and no document in the repo is both. **`HO_004`:** Q6's own
+  status word is right — `partly routed` — since `constraint-assembly`
+  supplies a vocabulary and a place to put cases and the measurement Q6
+  names remains unbuilt, which that module's README says in stronger terms
+  (`CA_013`). **`HO_005` UNVERIFIED:** Q1 and Q2 carry the file's
+  empirical weight (recognition-primed decision work; token-level entropy,
+  calibration, faithful hedging) and cite nothing — 5 named literatures, 0
+  citations, 1 named author — same status as `ANC_010`, `CD_009`,
+  `RD_015`, and nothing in the audit rests on a literature fact; Q1's
+  durable half is the distinction rather than the result, that ambiguity
+  aversion measures *preference* between known and unknown probabilities
+  and not whether holding a variable open impedes acting, and the gap it
+  names (whether those results get cited as evidence about action
+  capacity) is a citation-tracing question answerable with no instrument
+  and no model access. **`HO_006`:** the file is itself a held-open shape
+  with an explicit queue — 6 of 9 entries name an unbuilt instrument or an
+  unrun search — so Q5's damage case is observable on this artifact, and
+  it settles nothing (n=1, no control, and the subject can see the
+  manipulation, which is `triad-playground` `TP_004`); what the artifact
+  can supply is material for the real run, since
+  `domain-ledger/shapes/hierarchy-cut-generation.json` is already a shape
+  at a stated confidence (0.61, thirty domains, zero read) whose unread
+  list is the queue. Six claims `HO_001..006`. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

@@ -38,8 +38,9 @@ selftest. 14/14.
 | `ledger.py` | delivered, verbatim — **drop 4 docstring**; code byte-identical after stripping the module docstring |
 | `anchor.py` | delivered drop 3, verbatim — companion; selftest 14/14 |
 | `anchors/hierarchy-imposed-ordering.json` | delivered drop 4, verbatim — 3 anchors, 9 links, 0 quantified |
+| `A2.md` | delivered drop 5, verbatim — a candidate for the anchor-distance term, explicitly not adopted |
 | `shapes/hierarchy-cut-generation.json` | delivered drop 2, verbatim — 30 domains, 0 read, asserted coverage 0.61 |
-| `README.md`, `CLAIM_TABLE.md` | not delivered |
+| `README.md`, `CLAIM_TABLE.md` | not delivered — `A2.md` names the second one |
 | `ledger_audit.py` | added |
 | `AUDIT_NOTES.md` | added |
 | `samples/` | added |
@@ -65,6 +66,8 @@ in the author's mouth.
 | DL_013 | The map's `open` list states three numbers about itself — spread 0.5, ceiling 0.80, no link quantified — and all three are exact | any of the three disagreeing | SUPPORTED (holds) |
 | DL_010 | The refusal to emit a composite is real and selftest-enforced; the two numbers it does emit (`ceiling`, `anchor_spread`) are functions of three stipulated constants with rationales and no derivation, and unlike `HANDOFF_CEILING` this is not disclosed | a derivation for 0.30 / 0.80 / 0.99, or a disclosure line | SUPPORTED |
 | DL_005 | With no `shapes/` directory the tool prints a well-formed report with zero rows and exits 0, where all three sibling scorers refuse on stderr with rc 1 | the empty state refusing, or saying it is empty | SUPPORTED |
+| DL_014 | `A2.md` opens by sourcing its own subject to `CLAIM_TABLE.md`, which the folder does not carry, and `A2` appears nowhere else in it — sixth instance of a reference naming an absent artifact in this drop family, three of which landed a drop later | the claim table arriving | SUPPORTED |
+| DL_015 | A2's diagnosis is exact against the code: anchor distance is `BAND_CEILING[corroboration.class]`, the class is a declared string, and nothing derives it — `DL_010` from the other side. And the note refuses to adopt its own candidate on stated non-independence, which is `triad-playground` `TP_003`'s shared-bias result applied by the author to their own convergence | a routine deriving the class from something measured | SUPPORTED (holds) |
 
 ## 1 — DL_001, the idea and two choices that follow
 
@@ -490,3 +493,86 @@ one line in the output with no consumer.
   record where a reading stopped and how it was taken, which is the
   observer-state axis `TP_006` and `RD_009` both name as unbuilt. Here it
   is a field; nothing yet reads it against an outcome.
+
+---
+
+# Drop 5 — `A2.md`, a candidate held open
+
+A prose note. Records a candidate definition for the term A2 flagged as
+unspecified, and does not adopt it. Nothing in `anchor.py` changed.
+
+## 17 — DL_014, the note names a claim table the folder does not carry
+
+    files in domain-ledger/ : A2.md, AUDIT_NOTES.md, anchor.py,
+                              ledger.py, ledger_audit.py
+    CLAIM_TABLE.md present  : False
+
+> A2 in `CLAIM_TABLE.md` records that confidence tracks distance to an
+> anchor already in a high band, and flags that what makes an anchor
+> *near* versus *far* is unspecified.
+
+The first sentence sources its own subject to a document that is not in
+the folder, and `A2` appears nowhere else in `domain-ledger/`. The note is
+readable without it — it restates what A2 flagged before building on it —
+so nothing is unrecoverable. What is missing is the row the candidate is a
+candidate **for**, and with it the other claims a reader would check this
+one against.
+
+Sixth instance of one shape in this drop family:
+
+    CW_001   fixtures named in a status sentence     landed one drop later
+    PB_001   seeded case + frame_sim fixtures        one of two landed
+    GC_009   cases/food-knowledge.json               named 3x, absent
+    PB_015   8 synthetic routing paths               absent
+    MD_001   decompose.py selftest fixture           absent
+    DL_014   domain-ledger/CLAIM_TABLE.md            absent
+
+Three of the six landed in a later drop. The shape is not a defect in any
+one drop — it is what writing the prose before the artifact produces, and
+it is only visible from outside because the reference and the tree get
+read together.
+
+## 18 — DL_015, the diagnosis is right, and converges with `DL_010`
+
+    BAND_CEILING : {'none': 0.3, 'external': 0.8, 'cycle_persistent': 0.99}
+    set by       : corroboration.class, a declared label
+    measured by  : nothing in anchor.py
+
+A2 says the term the whole function turns on — what makes an anchor near
+versus far — is unspecified. Against the code that is exact. Distance is
+operationalised as `BAND_CEILING[corroboration.class]`, the class is a
+string the author writes into the anchor file, and no routine derives it
+from anything. `score_anchor` reads it, `score` takes the max over it, and
+`anchor_spread` is a difference of two of these constants.
+
+`DL_010` reached the same place from the other side: `anchor.py` refuses
+to emit a composite, which is right, and the two numbers it does emit are
+functions of three stipulated constants with rationales and no derivation.
+A2 is the author naming that gap and proposing a definition for **the
+term** rather than for the constants — the more useful half, since a rule
+that decides the class turns the constants into an ordering rather than a
+measurement.
+
+The candidate: **an anchor is near because it is assemblable.** That is
+`constraint-assembly`'s invariant class read as a band, and if it held it
+would make the two folders one instrument — the anchor map stops being a
+confidence score and becomes a load table, with confidence derived rather
+than primary. The note says that would need `anchor.py` rewritten rather
+than amended, and is the reason it stays in prose.
+
+**What the note does that matters more than the candidate.** It refuses to
+adopt it, and names the reason:
+
+> the convergence was noticed in the same conversation that produced both
+> descriptions, which is not independent.
+
+That is `triad-playground` `TP_003`'s shared-bias finding — readers who
+share an input agree tightly and the agreement carries no information —
+stated by the author about their own convergence, before anything rests on
+it. In TP_003 three of four shadows were AI; here the two descriptions are
+one author in one session, which is the same structure at n=1.
+
+The falsifier is named and is a search rather than an experiment:
+something well-corroborated that is not assemblable, or something
+assemblable with thin corroboration. Neither has been looked for, and the
+note says so.

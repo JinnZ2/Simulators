@@ -31,18 +31,20 @@ Selftest 18/18.
 
 | file | status |
 |------|--------|
-| `assemble.py` | delivered, verbatim |
-| `cases/` | not delivered |
-| `README.md` | not delivered |
+| `assemble.py` | delivered drop 1, verbatim |
+| `README.md` | delivered drop 2, verbatim — heads the folder |
+| `cases/grade-stop.json` | delivered drop 2, verbatim — the operating record |
+| `cases/flood-ground.json` | delivered drop 2, verbatim — structural placeholder, no rejections |
 | `CLAIM_TABLE.md` | not delivered |
 | `assembly_audit.py` | added |
 | `AUDIT_NOTES.md` | added |
 | `samples/` | added |
 
-Nothing is reconstructed. The docstring fixes the vocabulary and the
-readouts, and fixes no case — inventing one would put a situation in the
-author's mouth, which is what `category-weld` `CW_004` cost when the
-arithmetic was reconstructed from prose that did not fix it.
+Nothing is reconstructed. Drop 1's docstring fixed the vocabulary and the
+readouts and fixed no case — inventing one would have put a situation in
+the author's mouth, which is what `category-weld` `CW_004` cost when the
+arithmetic was reconstructed from prose that did not fix it. Drop 2
+delivers the cases, and they are the first data the tool has ever run on.
 
 ## Claims
 
@@ -54,7 +56,13 @@ arithmetic was reconstructed from prose that did not fix it.
 | CA_004 | `rejections_all_grounded` returns `False` both for an ungrounded rejection and for a case with nothing to ground — the narrow version of the usual shape, since `selection_not_assembly` sits beside it and the footer states the rule | returning `None` when `rejected` is empty, the way `budget_consumed` does one folder over | SUPPORTED (narrow) |
 | CA_005 | `--case` has no bounds check and raises `IndexError` with no argument, while `--new` in the same function IS guarded with the expression both `domain-ledger` tools use throughout — `CC_004` recurring unchanged in the next tool | the same guard applied to both flags | SUPPORTED |
 | CA_006 | The DIAGNOSTIC QUARANTINE section names the same budget `closure-cost` measures, from the other end — that folder measures the categorisation stall, this one records whether the operator declined to spend it — and the pairing is stated by the author, not inferred here | the two budgets being different quantities | SUPPORTED (holds) |
-| CA_007 | With no `cases/` directory the tool prints a well-formed report with zero rows and exits 0 — fourth tool in the family to do so; three refuse and they are the older ones | the empty state refusing, or saying it is empty | SUPPORTED |
+| CA_007 | With no `cases/` directory the tool prints a well-formed report with zero rows and exits 0 — fourth tool in the family to do so; three refuse and they are the older ones | the empty state refusing, or saying it is empty | SUPPORTED (no longer exercised — the corpus arrived) |
+| CA_008 | `flood-ground` returns `composition_present: True` **and** `selection_not_assembly: True`; the README and the case's own `open` list both say the tool "correctly refuses to read it as assembly", and the field named `composition_present` says the opposite. The README states the gating rule (*"only visible as composition if what was ruled out … is recorded"*) and the code does not apply it | the two fields being combined, which needs no new field and no new data | SUPPORTED |
+| CA_009 | The corpus does not exercise `CA_003` either: 7 of 7 components across both cases are `used: true`, so no available-but-unused constraint is recorded anywhere and the headline claim cannot be checked against this data even if the readout existed | a case naming a constraint that was available and not reached for | SUPPORTED |
+| CA_010 | `consumables_destroyable_by_partial_use` gets its first non-zero reading (1, the air term) and the case supplies the mechanism, deriving the ORDER of the composition from which terms deplete; `soft` is 0 across both cases — the class recorded "so that reliance is visible" has nothing to show | a soft term appearing in a case | SUPPORTED |
+| CA_011 | The first filled `diagnostic` states the shared budget in the case rather than the docstring — `CA_006` instanced, and the opposite outcome from `closure-cost`'s Hawaii case on the same quantity: spend declined rather than consumed | the two budgets being different quantities | SUPPORTED |
+| CA_012 | Every README STATE claim holds exactly except the `flood-ground` refusal (`CA_008`); "zero quantities anywhere" holds deliberately — every numeral in either file is a road name and the grade is written as "nine percent" in words | a coefficient, percentage or pressure appearing in a case | SUPPORTED |
+| CA_013 | The README puts the module's own undecidability last and calls it the weakness that matters most — recognition-primed selection and genuine construction are not separable in a single-instance retrospective record, and no case establishes the difference | a case built on a novel constraint set, or a during-event record | SUPPORTED (holds) |
 
 ## 1 — CA_001, the reversal and where it sits
 
@@ -246,3 +254,178 @@ instance and adds nothing new except the count.
 Unlike `closure.py`, this table's footer does not state a corpus
 condition. It states a reading rule, which is the right footer for a
 populated run and says nothing about an empty one.
+
+---
+
+# Drop 2 — the README and the first two cases
+
+`README.md` heads the folder; this file is the audit layer, per the
+`reasoning-gate/` arrangement. Drop 2 also delivers the first data the
+tool has ever scored.
+
+    case                      used  inv  cons  soft  comp  rej  grnd
+    ----------------------------------------------------------------
+    flood-ground                 3    2     1     0   yes    0    no
+    grade-stop                   4    2     2     0   yes    4   yes
+
+## 8 — CA_008, two readouts disagree on flood-ground, and so does the doc
+
+The README's STATE section:
+
+> `flood-ground` is a structural placeholder with no rejections, and the
+> tool correctly refuses to read it as assembly.
+
+The case's own `open` list:
+
+> No rejections recorded, so the tool correctly reads this as selection
+> rather than assembly.
+
+Both are true of one field and false of the other.
+
+| case | `composition_present` | `selection_not_assembly` |
+|------|----------------------|--------------------------|
+| `flood-ground` | **True** | **True** |
+| `grade-stop` | True | False |
+
+`flood-ground` returns True on both. The field named
+`composition_present` — the module's central per-case claim — says the
+placeholder **is** a composition, and the table prints `comp yes` for it.
+
+The two are independent by construction: `composition_present` is computed
+from components alone, `selection_not_assembly` from rejections alone. Any
+case with two or more insufficient components and no rejections gets both,
+so the disagreement is structural rather than particular to this case.
+
+The README states the gating rule that would resolve it, as its own
+section heading:
+
+> **WHAT MAKES A CASE READABLE.** Rejected options with their grounds. A
+> composed solution is only visible as composition if what was ruled out,
+> and by which constraint, is recorded.
+
+That is the statement that `composition_present` should require
+rejections. Unlike `MF_017` / `CW_015` / `DL_004` / `GC_012`, **no schema
+field is missing and no data is missing** — both inputs are already in the
+same score dict, two keys apart. What the code does not do is combine
+them. `composition_visible = composition_present and not
+selection_not_assembly` is the reading the README wants, and leaves
+`composition_present` as the components-only reading it already is.
+
+## 9 — CA_009, `CA_003`'s quantity has no instance either
+
+    components across both cases : 7
+    recorded used                : 7
+    recorded available and unused: 0
+
+`CA_003` recorded that the reversal's headline claim — *"more hard
+constraints, more composition available"* — is about the **available**
+inventory, and that `score()` filters to `used` on its first line.
+
+The corpus now arrives and does not exercise it. Every component in both
+cases is `used: true`, so there is no available-but-unused constraint
+anywhere in the folder, and the claim cannot be checked against this data
+even if the readout existed.
+
+The gap is two-sided: no readout, and no case recording the quantity the
+readout would count. The second half is cheaper to close and is a property
+of how a case is written rather than of the schema — `grade-stop` names
+four terms that were used and does not name what else was on that grade
+and was not reached for.
+
+## 10 — CA_010, the consumable hazard reads for the first time
+
+| case | inv | cons | soft | partial-use destroys |
+|------|-----|------|------|----------------------|
+| `flood-ground` | 2 | 1 | 0 | 0 |
+| `grade-stop` | 2 | 2 | 0 | 1 |
+
+First non-zero reading of the field the docstring's sharpest sentence is
+about, and the case supplies the mechanism rather than only the flag:
+
+> Applying enough to slow but not stop leaves zero air, zero braking, and
+> the grade still acting. That is worse than not applying, which is why it
+> could not be used first and had to be composed with terms that do not
+> deplete.
+
+That is the invariant/consumable split doing work: **the ordering of the
+composition is derived from which terms deplete.** The second consumable
+on the same case — steering input — is marked `partial_use_destroys:
+false`; it declines with duration but partial use does not remove it. So
+the field separates two consumables rather than tracking the class.
+
+`soft` is 0 across both cases. One of the three classes has no instance,
+and it is the one recorded *"so that reliance on one is visible"* — a
+class whose whole purpose is to be seen when present, which the corpus
+does not yet show being present.
+
+## 11 — CA_011, the shared budget, instanced from the case side
+
+    cause_known : False
+    deferred    : True
+
+> Cause of the engine shutdown was unknown throughout and was explicitly
+> quarantined until the vehicle stopped. Establishing what class of
+> failure this was would have drawn on the same look-ahead and steering
+> budget the assembly required.
+
+`CA_006` recorded the shared budget from the docstring. The first filled
+diagnostic states it in the case, and names which budget.
+
+`closure-cost`'s Hawaii case refused to fill `diagnostic_spend` from the
+error duration because that would be proxy substitution (`CC_007`). This
+case is the other outcome on the same quantity: the spend was **declined**
+rather than consumed, and `deferred: true` records the decision without
+scoring it. Two folders, one budget, one case each, neither quantified.
+
+## 12 — CA_012, the README's STATE claims
+
+    two cases                          : True
+    grade-stop components              : 4
+    grade-stop rejections, all grounded: 4, True
+    flood-ground rejections            : 0
+    numerals present                   : 2 exit, 21st, 37
+
+Every STATE claim holds exactly except the `flood-ground` refusal, which
+is `CA_008`.
+
+"Zero quantities anywhere" holds, and holds deliberately. Every numeral in
+either file is a road name — exit 37, Highway 2, 21st Street — and the
+grade is written as "nine percent" in words rather than as a number. A
+case describing a stop assembled from friction, gravitational conversion
+and stored pressure contains no coefficient, no percentage and no
+pressure, and says so in its own `open` list: *"the assembly is recorded
+as a structure and not as an energy balance."*
+
+That is the right call for this module and it costs the thing the module
+would most want next. Two cases with no numbers cannot be compared on
+whether a larger hard-law inventory composed more — `CA_009` from the
+other direction.
+
+## 13 — CA_013, the undecidability, named before use
+
+The README's last section is THE WEAKNESS THAT MATTERS MOST:
+
+> Recognition-primed selection and genuine construction look identical in
+> a single-instance retrospective record. […] That is not a detail. It is
+> the distinction the whole module exists to make, and no case in the file
+> establishes it.
+
+The case repeats it in its own `open` list, unprompted, and adds the
+self-report defect on the rejections — which are the evidence that the
+case is assembly at all, and are recorded from recall.
+
+So the folder ships with its load-bearing distinction declared
+unestablished by its own corpus, and names the two things that would
+separate them: a novel constraint set the operator has no prior exposure
+to, or a during-event record. That is the `photoperiod-claim-harness`
+posture — state the gap where the verdict would go — and it is in the
+README rather than only in a claim table, so a reader meets it before the
+cases rather than after.
+
+What it leaves open is that neither route is a small collection job. A
+during-event record of an unassisted stop on a nine percent grade is not
+something anyone will schedule, and the novel-constraint route needs a
+constructed situation, which is a different instrument from a case file.
+`flood-ground` is aimed at a third route — same operation, no machinery —
+and is explicitly a skeleton: it tests domain-independence, not the
+recognition-versus-construction split.

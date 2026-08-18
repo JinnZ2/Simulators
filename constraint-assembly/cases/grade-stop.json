@@ -1,0 +1,58 @@
+{
+  "case": "grade-stop",
+  "description": "Loaded rig, engine off on a sustained nine percent descending grade. No power assist to the steering, no engine braking. Air is finite with nothing recharging it. Concrete barrier, no shoulder, traffic behind and alongside. A stop was assembled from three terms, none of which stops the vehicle alone.",
+  "components": [
+    {
+      "name": "gravel shoulder friction",
+      "constraint_class": "invariant",
+      "law": "coefficient of friction at a loose-aggregate surface, higher than pavement and available regardless of vehicle state",
+      "sufficient_alone": false,
+      "used": true,
+      "partial_use_destroys": false
+    },
+    {
+      "name": "uphill grade at the exit",
+      "constraint_class": "invariant",
+      "law": "gravitational conversion of kinetic energy on positive grade. Acts whether the engine runs or not, which is the property that makes it usable here",
+      "sufficient_alone": false,
+      "used": true,
+      "partial_use_destroys": false
+    },
+    {
+      "name": "remaining service air",
+      "constraint_class": "consumable",
+      "law": "finite stored pressure with no compressor running. Each application draws down the reservoir and it does not return",
+      "sufficient_alone": false,
+      "used": true,
+      "partial_use_destroys": true,
+      "note": "The load-bearing property of this term is that spending it wrong removes it. Applying enough to slow but not stop leaves zero air, zero braking, and the grade still acting. That is worse than not applying, which is why it could not be used first and had to be composed with terms that do not deplete."
+    },
+    {
+      "name": "steering input",
+      "constraint_class": "consumable",
+      "law": "unassisted, so available control is bounded by physical force available and declines with duration",
+      "sufficient_alone": false,
+      "used": true,
+      "partial_use_destroys": false
+    }
+  ],
+  "rejected": [
+    {"option": "exit 37", "ruled_out_by": "stop sign mid-road, narrow geometry, and a further downhill beyond it — the exit does not remove the grade term"},
+    {"option": "Highway 2 exit", "ruled_out_by": "geometry and speed carried into it"},
+    {"option": "21st Street exit", "ruled_out_by": "vehicles backed up on the ramp — the exit terminates in stationary mass"},
+    {"option": "full brake application on the roadway", "ruled_out_by": "insufficient air to complete the stop, and a following semi with no gap. Spends the consumable and leaves nothing"}
+  ],
+  "budget_terms": ["stored air pressure", "distance remaining before terminal geometry", "physical force available for unassisted steering"],
+  "diagnostic": {
+    "cause_known": false,
+    "deferred": true,
+    "note": "Cause of the engine shutdown was unknown throughout and was explicitly quarantined until the vehicle stopped. Establishing what class of failure this was would have drawn on the same look-ahead and steering budget the assembly required."
+  },
+  "source_class": "operating record, single instance, recorded after the fact",
+  "open": [
+    "No quantities. Grade percentage and gravel friction are nameable laws but no number was taken, so the assembly is recorded as a structure and not as an energy balance.",
+    "Whether the composition was assembled during the descent or recognised from prior route knowledge is not separable from the record. Recognition-primed selection and genuine construction would look the same here. This is the central weakness of the case and of any single-instance record of this kind.",
+    "The rejected options are the evidence that this is assembly rather than selection. They are recorded from recall, which is the same self-report defect flagged throughout closure-cost.",
+    "Look-ahead distance is treated as raising the probability of finding a composable exit. That relation is asserted, not measured."
+  ]
+}

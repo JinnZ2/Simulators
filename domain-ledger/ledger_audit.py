@@ -2,7 +2,7 @@
 """ledger_audit.py -- checks on the domain-ledger drop.
 
 Added, not delivered. ledger.py is the drop as received and is not
-modified. Findings are recorded in AUDIT_NOTES.md as DL_001..DL_005.
+modified. Findings are recorded in AUDIT_NOTES.md as DL_001..DL_015.
 
     python3 ledger_audit.py
 
@@ -50,8 +50,9 @@ def head(n, cid, title):
 
 
 print("domain-ledger -- audit of the delivered drop")
-print("delivered: ledger.py (drop 4 docstring), anchor.py, 1 shape, 1 anchor map")
-print("not delivered: shapes/, README.md, CLAIM_TABLE.md")
+print("delivered: ledger.py (drop 4 docstring), anchor.py, A2.md,")
+print("           1 shape, 1 anchor map")
+print("not delivered: README.md, CLAIM_TABLE.md (A2.md names the second)")
 buf = io.StringIO()
 with contextlib.redirect_stdout(buf):
     rc = L.selftest()
@@ -650,8 +651,85 @@ docstring warns against reading is the one line in the output with no
 consumer.
 """.strip())
 
+# ---------------------------------------------------------------- A2 drop
+
+head(17, "DL_014", "A2.md names a claim table the folder does not carry")
+present = sorted(f for f in os.listdir(HERE) if not f.startswith(("_", ".")))
+print()
+print("  files in domain-ledger/ : %s" % ", ".join(
+    f for f in present if os.path.isfile(os.path.join(HERE, f))))
+print("  CLAIM_TABLE.md present  : %s" % os.path.exists(
+    os.path.join(HERE, "CLAIM_TABLE.md")))
+a2 = io.open(os.path.join(HERE, "A2.md"), encoding="utf-8").read()
+print("  A2.md opening reference : %s" % a2.splitlines()[2].strip())
+print("""
+The note's first sentence sources its own subject to a document that is
+not in the folder, and `A2` appears nowhere else in `domain-ledger/`. The
+note is readable without it -- it restates what A2 flagged before building
+on it -- so nothing here is unrecoverable. What is missing is the row the
+candidate is a candidate FOR, and with it the other claims a reader would
+check this one against.
+
+Sixth instance of one shape in this drop family:
+
+    CW_001   fixtures named in a status sentence     landed one drop later
+    PB_001   seeded case + frame_sim fixtures        one of two landed
+    GC_009   cases/food-knowledge.json               named 3x, absent
+    PB_015   8 synthetic routing paths               absent
+    MD_001   decompose.py selftest fixture           absent
+    DL_014   domain-ledger/CLAIM_TABLE.md            absent
+
+Three of the six landed in a later drop. The shape is not a defect in any
+one drop; it is what writing the prose before the artifact produces, and
+it is only visible from outside because the reference and the tree are
+read together.
+""".strip("\n"))
+
+head(18, "DL_015", "A2 is right against the code, and converges with DL_010")
+print()
+print("  BAND_CEILING            : %s" % dict(A.BAND_CEILING))
+print("  set by                  : corroboration.class, a declared label")
+print("  measured by             : nothing in anchor.py")
+print("""
+A2 says the term the whole function turns on -- what makes an anchor near
+versus far -- is unspecified. Against the code that is exact. Distance is
+operationalised as `BAND_CEILING[corroboration.class]`, the class is a
+string the author writes into the anchor file, and no routine derives it
+from anything. `score_anchor` reads it, `score` takes the max over it, and
+`anchor_spread` is a difference of two of these constants.
+
+DL_010 reached the same place from the other side: `anchor.py` refuses to
+emit a composite, which is right, and the two numbers it does emit are
+functions of three stipulated constants with rationales and no derivation.
+A2 is the author naming that gap and proposing a definition for the term
+rather than for the constants -- which is the more useful half, since a
+rule that decides the class makes the constants an ordering rather than a
+measurement.
+
+The candidate is load-bearing capacity: an anchor is near because it is
+assemblable. That is `constraint-assembly`'s invariant class read as a
+band, and it would make the two folders one instrument.
+
+**What the note does that matters more than the candidate.** It refuses to
+adopt it, and names the reason as non-independence:
+
+    the convergence was noticed in the same conversation that produced
+    both descriptions, which is not independent.
+
+That is `triad-playground` TP_003's shared-bias finding -- readers who
+share an input agree tightly and the agreement carries no information --
+stated by the author about their own convergence, before anything rests on
+it. Three of the four shadows in TP_003 were AI; here the two descriptions
+are one author in one session, which is the same structure at n=1.
+
+The falsifier is named and is a search rather than an experiment:
+something well-corroborated that is not assemblable, or something
+assemblable with thin corroboration. Neither has been looked for, and the
+note says so.
+""".strip("\n"))
+
 
 print()
 print(BAR)
-print("end of audit -- findings recorded in AUDIT_NOTES.md as DL_001..DL_013")
+print("end of audit -- findings recorded in AUDIT_NOTES.md as DL_001..DL_015")
 print(BAR)
