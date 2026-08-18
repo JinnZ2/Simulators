@@ -1,8 +1,9 @@
 # CLAIM_TABLE — uninstrumented
 
-Nineteen claims, `UNI_001..019`. **Three repaired** (`UNI_003`, `UNI_009`,
-`UNI_010`), see *Repairs* at the end. `UNI_013..019` come from the Case 010
-drop and are worked in [`case_010_audit.py`](case_010_audit.py).
+Twenty-six claims, `UNI_001..026`. **Three repaired** (`UNI_003`,
+`UNI_009`, `UNI_010`), see *Repairs* at the end. `UNI_013..019` come from
+the Case 010 drop ([`case_010_audit.py`](case_010_audit.py)) and
+`UNI_020..026` from Case 011 ([`case_011_audit.py`](case_011_audit.py)).
 
 ## REFUTATION_PROTOCOL
 
@@ -314,6 +315,26 @@ which does no network access.
 | `UNI_017` | The field-wide falsifier **partially fires**. Combined-stress protocols exist and are named (THB, TB, temperature cycling, IEEE P1817, JEDEC JC-42.4), so "none across the field" is refuted — but those hold several variables at simultaneous *constant setpoints*, a factorial corner, while ARM B specifies co-varying **drift at matched integrated dose** compared on distribution shape. The entry survives narrowed, and should say "co-varying drift at matched dose" wherever it says "co-varying". | SUPPORTED (narrows the entry) | A located protocol that co-varies drift at matched integrated dose. |
 | `UNI_018` | The supplement falsifier — "the paper's supplementary data contains a multi-variable arm" — **could not be checked**: publisher and every news mirror located are blocked by this environment's egress proxy. Cheapest of the three falsifiers for anyone with access, and the only one that would close the case outright rather than narrow it. | UNVERIFIED | One look at the supplementary methods. |
 | `UNI_019` | Case 010 is the near-boundary case `check_null()` says the register lacks — "a quantity a field believes it measures and does not", with a live paper and a confidence low enough to be wrong — **and it cannot file** (`UNI_013`). Its comparator (synthetic periodic scaffold, matched spacing and matched Ag loading) is a known-null in `../null-harness/` terms and is the load-bearing element; the three-way discriminator names its own discard branch, so it is not `CONSTANT_SILENT`. Missing: any power calculation — a `G-RES` pair of variability spread against the margin claimed. | SUPPORTED (holds) | A stated device count and resolvable margin, which would close the gap. |
+
+## Case 011 drop — UNI_020..026
+
+Case 011 (`cases/case-011.md`, delivered verbatim) is the second
+consecutive delivered case the schema cannot hold, and it strains it in a
+different place: Case 010 declined to name its mechanism, Case 011 declines
+to be one quantity. Worked in [`case_011_audit.py`](case_011_audit.py).
+
+Four of these were checked against the open web on 2026-08-18 and are
+marked; they are not reproducible by running the audit script.
+
+| id | statement | status | falsifier |
+| --- | --- | --- | --- |
+| `UNI_020` | The cluster is not constructible: `entry()` takes one `quantity`, one `excluded_by` and one `would_measure`, and Case 011 carries five sub-questions, four with their own WOULD MEASURE and one with its own EXCLUDED BY. With `UNI_013` this makes **two delivered cases, two different refusals by the same schema** — which fits the eight entries written to fit it and neither real case since. The `UNASSIGNED` sentinel does not cover this; a cluster needs sub-entries, so a question can close individually while the cluster stays open. | SUPPORTED | A `questions=[...]` parent entry, each with its own `excluded_by` and `would_measure`. |
+| `UNI_021` | `entry()` accepts `confidence=""` and `confidence=None` silently, so Case 011's **reasoned refusal** to state one ("a scalar over a cluster would not carry usable information") is stored in the same cell as a field somebody forgot. Three states now exist in the wild — high, a gradient, deliberately absent — and the schema can tell apart two. Eleventh instance of the absent-vs-known-negative repair, in the one field the register calls recorded-not-adjudicated. | SUPPORTED | A three-valued confidence, or `None` being illegal. |
+| `UNI_022` | Q5 — "NOT YET ARTICULABLE… Do not fill this in with an approximation" — is the register's own thesis applied to its own vocabulary, and has no slot. `note` would file it as a remark rather than as an open axis with a count, so nothing in any sort would show the cluster has an unnamed member. | SUPPORTED (holds) | An open-axis field the sort can count. |
+| `UNI_023` | The occasion checks out — Kiss/Viglione/Blöschl, *Nature*, 12 Aug 2026, DOI 10.1038/s41586-026-10888-8, title exact, 16 events, sequences implication. One drift: the entry says "roughly 18 months" where coverage describes late 1341 to 1343, about two years — inherited from the paper's title window, not introduced. Matters because Q2 proposes 1342–1343 as its corpus and a start at 1342 drops the first inter-event interval, which is the one that sets the arrival rate. | SUPPORTED *(web, 2026-08-18)* | The published window matching 18 months. |
+| `UNI_024` | Q1's falsifier fires on one of the three things its own sentence bundles. **Antecedent moisture is instrumented and dramatic** — saturated soil turns a 7-year rainfall into a 100-year flood; dry soil turns a 200-year rainfall into a 15-year flood — and compound-hazard modelling is an active quantified field. No design-standard variable for **unrepaired works or spent response capacity** was located. The sharper statement: the field instruments the antecedent state of the **hazard** and not of the **system**. | SUPPORTED (narrows the entry) | A design standard carrying a pre-event repair-completion term. |
+| `UNI_025` | Q3's falsifier partially fires, **along the boundary of whoever keeps the record**. FEMA HMGP acquisitions are required to be voluntary (owner consent attributed, eminent domain excluded) and the administering authority's property selection is recorded — so two of the four pathways have attribution. Insurer withdrawal and lender refusal are decisions by parties the program does not administer and cannot appear in its record. The entry's own `generation-capacity` link is instanced: "voluntary" truthfully attributes the final step over an option set generated upstream. | SUPPORTED (narrows the entry) | A record carrying insurer- or lender-initiated non-reoccupation. |
+| `UNI_026` | Three of four cross-links resolve. `rural` is not only present but accurately characterised — tracked by `density`, with `self_support` among the welded components, which is the entry's "counts headcount, not what is holding". **`rate-mismatch-polytope` does not exist anywhere in the tree** — seventh instance of a reference naming an absent artifact. Nearest existing kin: `rigidification-sensor/` runs Q2's comparison already (`locked_at` is the tick where reversal cost passes continuation cost) and `sustained-activation-gate/` holds the restore-vs-coupling trade-off. | SUPPORTED | The folder arriving, as three of the six prior instances did. |
 
 ## Repairs
 

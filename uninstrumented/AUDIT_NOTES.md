@@ -5,9 +5,10 @@ Everything below is added analysis. The delivered files are
 [`scan.py`](scan.py), all verbatim. Added here:
 [`uninstrumented.py`](uninstrumented.py) (the register as code, three
 checks on itself), [`scan_audit.py`](scan_audit.py) (grades the scanner),
-[`case_010_audit.py`](case_010_audit.py) (checks on the Case 010 drop) and
-[`CLAIM_TABLE.md`](CLAIM_TABLE.md). `cases/case-010.md` is delivered,
-verbatim.
+[`case_010_audit.py`](case_010_audit.py) and
+[`case_011_audit.py`](case_011_audit.py) (checks on the two delivered
+cases) and [`CLAIM_TABLE.md`](CLAIM_TABLE.md). `cases/case-010.md` and
+`cases/case-011.md` are delivered, verbatim.
 
 The delivered README supersedes what follows on two points, and both are
 carried into the claim table rather than silently corrected:
@@ -330,3 +331,163 @@ how many devices or what margin would be resolvable against
 device-to-device variability — which is one of the two items still not
 located. That is a `G-RES` pair waiting to be declared: variability spread
 against the margin being claimed.
+
+---
+
+## Case 011 — the second case the schema cannot hold, refused differently
+
+`cases/case-011.md`, delivered verbatim. Checks in
+[`case_011_audit.py`](case_011_audit.py); claims `UNI_020..026`.
+
+### UNI_020 — two cases, two different refusals by one schema
+
+| case | what it declines | schema field that refuses it |
+|------|------------------|------------------------------|
+| 010 | to name its mechanism | `excluded_by` is a closed vocabulary |
+| 011 | to be one quantity | `quantity`, `excluded_by`, `would_measure` are each scalar |
+
+Case 011 carries five sub-questions; four have their own WOULD MEASURE and
+one its own EXCLUDED BY. (Q4's WOULD MEASURE is the word "unclear" — a
+filled field, not an empty one: it records that the instrument is not
+obvious, which is different from not having looked.)
+
+Stated plainly: **the schema fits the eight entries written to fit it, and
+neither of the two real cases delivered to it since.** That is `UNI_002`'s
+open question reached from a different direction — a schema tested only
+against its own examples is not yet tested.
+
+The `UNI_013` repair does not cover this. An `UNASSIGNED` sentinel gives an
+unfiled entry a state; a cluster needs **sub-entries** — a parent with
+`questions=[...]`, each carrying its own `excluded_by` (possibly
+`UNASSIGNED`) and its own `would_measure`. Q1 and Q3 below both *narrow
+without closing*, which is precisely the state a scalar entry cannot
+record.
+
+### UNI_021 — a reasoned refusal, stored as an omission
+
+    entry(confidence='')   -> accepted, stored as ''
+    entry(confidence=None) -> accepted, stored as None
+
+> Not stated. This is a cluster of open questions, and a scalar over a
+> cluster would not carry usable information.
+
+Three states now exist in the wild — `high` (8 of 8 original entries), a
+gradient (`~40%`, Case 010), and deliberately absent with the reason given
+(Case 011). The schema can tell apart two.
+
+Eleventh instance of the absent-versus-known-negative repair in this drop
+family, and it lands in the one field the register singles out as *recorded
+verbatim and not adjudicated*. Case 010 made the field non-constant
+(`UNI_014`); Case 011 shows it needs three states rather than a wider range
+of one.
+
+### UNI_022 — Q5, and the only defence a document has
+
+> Do not fill this in with an approximation. It is left open on purpose.
+
+This is the register's own thesis turned on the register's own vocabulary.
+`uninstrumented` exists because forcing a quantity through an apparatus
+that cannot represent it is the operation that removes it. Q5 says the same
+about forcing an observation into the eight bins before it has a shape, and
+refuses.
+
+It is also the cheapest instruction in the drop to violate. Every
+downstream reader is under pressure to produce a name, and "political and
+ownership structure of the affected area" sits close enough to several
+existing mechanisms that a plausible bin is easy to supply. A direct
+instruction is the only defence available to a document — and there is no
+schema slot behind it, so `note` would file the open axis as a remark and
+nothing in any sort would show the cluster has an unnamed member.
+
+### UNI_023 — the occasion
+
+Five of six exact: authors, journal, 12 Aug 2026, DOI, the title verbatim,
+16 events, and the stated implication about sequences. Second consecutive
+occasion in this register that checks out (`UNI_015` was the first).
+
+One drift, inherited rather than introduced: the entry says *"within
+roughly 18 months"* where coverage describes the sequence as spanning late
+1341 to 1343, about two years. The entry is quoting the paper's own title
+window. It matters because **Q2 nominates 1342–1343 as its corpus**, and a
+reconstruction starting at 1342 drops the first inter-event interval —
+which is the one that establishes the arrival rate Q2's whole hypothesis
+turns on.
+
+### UNI_024 — Q1 narrows: hazard antecedent yes, system antecedent no
+
+Q1 bundles three things in one sentence, and they do not have the same
+status:
+
+> A second event arrives into **saturated ground**, **unrepaired works**,
+> and **spent response capacity**.
+
+| term | status |
+|------|--------|
+| saturated ground | **instrumented, and dramatic** — antecedent moisture is standard in flood frequency analysis; saturated soil turns a 7-year rainfall into a 100-year flood, dry soil turns a 200-year rainfall into a 15-year flood |
+| compound / sequence hazard | an active quantified field, with published flooded-area figures by return period |
+| unrepaired works, spent response capacity | no design-standard variable located |
+
+So the entry's own mechanism — *the second event is not the first one
+scaled up* — is already measured on the catchment side, and measured to
+matter more than the rainfall return period does.
+
+The sharper statement worth taking from Q1: **the field instruments the
+antecedent state of the hazard and not the antecedent state of the
+system.** Catchment wetness carries forward between events; the condition
+of the works, and of the people who operate them, does not.
+
+Same shape as `UNI_017` one case earlier — the strong reading of the
+falsifier fires, the narrow one survives, and the edit is to split the
+sentence.
+
+### UNI_025 — Q3 narrows along the boundary of whoever keeps the record
+
+| pathway | status |
+|---------|--------|
+| residents decide | **attributed** — FEMA HMGP acquisitions are required to be voluntary; the owner agrees to sell and eminent domain is excluded |
+| state declines to fund works | **attributed** — state and local governments decide which properties to acquire under federal restriction, and that selection is recorded |
+| insurer withdraws coverage | not located |
+| lender declines to finance rebuild | not located |
+
+The split is not random: **the two pathways with attribution are the two
+inside the institution that keeps the record, and the two without are the
+two outside it.** An insurer's withdrawal and a lender's refusal are
+decisions by parties the program does not administer, so they cannot appear
+in its record whatever anyone intends — and the site still ends up
+unoccupied, logged the same way. A boundary result, not an oversight, and
+the register's own subject.
+
+The entry's own cross-link is instanced by the same fact. **"Voluntary" is
+a truthful attribution of the final step**, and the option set that step
+ranges over is generated elsewhere — which properties the administering
+authority chose to fund, under federal restriction. That is
+`../generation-capacity/MECHANISM_10.md` exactly: the choice is real, the
+record is honest, and the generation happened upstream on a clock the
+choosing party has no access to.
+
+### UNI_026 — the cross-links
+
+    rate-mismatch-polytope     ABSENT
+    generation-capacity        resolves
+    rural-conflation case      resolves
+    Case 010                   resolves
+
+The rural link is not only present but accurately characterised: `rural` is
+tracked by `density` — a headcount per area — with `self_support` among the
+welded components, which is exactly *"counts headcount, not what is
+holding"*.
+
+`rate-mismatch-polytope` does not exist anywhere in the tree; the two
+apparent hits under `../declared-frame/` are the unrelated phrase "separate
+mismatch line". Seventh instance of a reference naming an absent artifact
+(`CW_001`, `PB_001`, `GC_009`, `PB_015`, `MD_001`, `DL_014`), three of
+which landed a drop later.
+
+Worth naming the kin that do exist, because **Q2's hypothesis is already
+modelled twice here in a different vocabulary**.
+`../rigidification-sensor/simulator.py` runs exactly Q2's comparison —
+variance suppressed faster than it regenerates, with `locked_at` recording
+the tick where the cost of reversal passes the cost of continuation — and
+`../sustained-activation-gate/` holds the restore-versus-coupling
+trade-off. Q2's *"same total water across 40 years versus across 4 years"*
+is a repair rate against an arrival rate, which is that crossing.

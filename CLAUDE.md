@@ -2111,7 +2111,53 @@ underneath).
   since the hybrid differs from DNA-alone and perovskite-alone in more than
   one way at once; the three-way discriminator names its own discard branch
   so it is not `CONSTANT_SILENT`. Missing: any power calculation — a
-  `G-RES` pair of variability spread against the margin claimed. **REPAIRED:** `UNI_003` (`entry()` takes a primary plus
+  `G-RES` pair of variability spread against the margin claimed.
+  **`cases/case-011.md`** is the second delivered case the schema cannot
+  hold, refused in a different place: Case 010 declines to name its
+  mechanism, Case 011 declines to be one quantity. A five-question cluster
+  on rebuild cycles before abandonment, occasioned by Kiss/Viglione/Blöschl
+  *Nature* 12 Aug 2026 reconstructing the 1342 Magdalenenflut as **16
+  distinct flood events** — "a sequence was transmitted as a singularity".
+  **`UNI_020`:** `entry()` takes one `quantity`, one `excluded_by` and one
+  `would_measure`; the cluster carries five sub-questions, four with their
+  own WOULD MEASURE, so **the schema fits the eight entries written to fit
+  it and neither real case delivered since** (`UNI_002` from a new
+  direction). The `UNASSIGNED` sentinel does not cover it — a cluster needs
+  sub-entries, since Q1 and Q3 both *narrow without closing*, the one state
+  a scalar entry cannot record. **`UNI_021`:** `confidence` accepts `""`
+  and `None` silently, so Case 011's reasoned refusal to state one ("a
+  scalar over a cluster would not carry usable information") lands in the
+  same cell as an omission — eleventh instance of the
+  absent-vs-known-negative repair, in the one field the register calls
+  recorded-not-adjudicated; three states now exist in the wild and the
+  schema tells apart two. **`UNI_022`:** Q5 is NOT YET ARTICULABLE with
+  "do not fill this in with an approximation" — the register's own thesis
+  applied to its own vocabulary, no slot, and the cheapest instruction in
+  the drop to violate. **`UNI_024`:** Q1's falsifier fires on one of the
+  three things its own sentence bundles — antecedent moisture is
+  instrumented and dramatic (saturated soil turns a 7-year rainfall into a
+  100-year flood; dry soil a 200-year rainfall into a 15-year flood) and
+  compound-hazard modelling is active, while no design-standard variable
+  for unrepaired works or spent response capacity was located, so the
+  sharper statement is **the field instruments the antecedent state of the
+  HAZARD and not of the SYSTEM**. **`UNI_025`:** Q3 narrows along the
+  boundary of whoever keeps the record — FEMA HMGP acquisitions are
+  required to be voluntary and the administering authority's property
+  selection is recorded, so two of four pathways have attribution, while
+  insurer withdrawal and lender refusal are decisions by parties the
+  program does not administer and cannot appear in its record; "voluntary"
+  truthfully attributes the final step over an option set generated
+  upstream, which instances `generation-capacity` exactly. **`UNI_023`:**
+  the occasion checks out, with one drift inherited from the paper's title
+  — the entry says "roughly 18 months" where coverage spans late 1341 to
+  1343, which matters because Q2 nominates 1342–1343 as its corpus and a
+  start at 1342 drops the first inter-event interval, the one that sets the
+  arrival rate. **`UNI_026`:** three of four cross-links resolve and
+  `rate-mismatch-polytope` does not exist anywhere in the tree (seventh
+  instance of that shape) — while Q2's hypothesis is already modelled twice
+  here under other names, in `rigidification-sensor/simulator.py`'s
+  `locked_at` and `sustained-activation-gate/`'s restore-vs-coupling
+  trade-off. **REPAIRED:** `UNI_003` (`entry()` takes a primary plus
   an `also` list and the register sorts under every mechanism — which is
   what lets check 1 return anything but zero: 5 mechanisms now hold entries
   from more than one field, though weakly, since the secondaries were
@@ -2129,7 +2175,7 @@ underneath).
   enforced one mechanism per sentence — it does not, the `break` exits the
   trigger loop and mechanisms already co-fire, so the wrong-mechanism
   finding was a missing trigger rather than a blocked co-firing. Nineteen
-  claims `UNI_001..019`. Stdlib only, CC0.
+  claims `UNI_001..026`. Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
   time-series variable** — version the ruler, compute drift on its own

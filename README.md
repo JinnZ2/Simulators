@@ -51,7 +51,7 @@ underneath. Read those before running the corresponding script.
 | `measurement-fork/` | one system, three measurement designs | four-cell design diff, adjudicated growth edge, twenty `MF_*` claims |
 | `declared-frame/` | any measurement, model, or claim | six-field frame block + comparability check, a v2 rewrite, ten `DF_*` claims |
 | `anchor-interval/` | a system fitted to a corpus it writes into | coherence-up/coupling-down loop, two graded detectors, provenance regimes, eleven `ANC_*` claims |
-| `uninstrumented/` | quantities excluded by an instrument's constitution | eight-mechanism register + `scan.py` text scanner, checks on both, and a delivered case that declines to name its mechanism and cannot be filed; nineteen `UNI_*` claims |
+| `uninstrumented/` | quantities excluded by an instrument's constitution | eight-mechanism register + `scan.py` text scanner, checks on both, and two delivered cases the schema cannot hold — one declining to name its mechanism, one declining to be a single quantity; twenty-six `UNI_*` claims |
 | `criteria-drift/` | benchmark and rubric versions over time | signed drift per frame field, anchor-version decomposition, a regression that refuses to run unidentified, nine `CD_*` claims |
 | `photoperiod-claim-harness/` | four inconsistencies in a published greenhouse result | runnable falsifiable sims + mechanism-edit protocol + bench protocol; six `PCH_*` claims on the harness |
 | `category-weld/` | terms that fuse independent quantities into one handle | ninth exclusion mechanism for `uninstrumented`, a three-readout scorer, three terms, an audit finding refuted by the second drop, seventeen `CW_*` claims |
