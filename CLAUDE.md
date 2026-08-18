@@ -3327,6 +3327,71 @@ underneath).
   narrower and still not closed: the adversary is author-written, and what
   it does not try is bounded by what occurred to whoever wrote it.
   Selftest 53/53. Stdlib only, CC0.
+- `derivation-discarded/` — Proposed **eleventh exclusion mechanism** for
+  `uninstrumented/`, after CATEGORY WELD (9) and GENERATION CAPACITY
+  REMOVED (10). `MECHANISM_11.md` delivered verbatim; alternate handle
+  UNPRICED PRECONDITION, name not settled. **The statement:** a structure
+  that has persisted is a record of every constraint that had to be
+  satisfied simultaneously for it to exist, and the structure is the only
+  copy of that derivation — so removing it removes a readout, and the
+  computation cannot be rerun because the inputs are gone. The accounting
+  books the structure at extraction or replacement price, has no line for
+  the discarded derivation, and is therefore *arithmetically correct and
+  structurally blind*: the removal registers as a gain. Eight claims
+  `DD_001..008`. **`DD_001`:** the three distinctions hold and the one
+  worth keeping is against mechanism 10 — that one is a future that cannot
+  be generated, this one a past that cannot be re-derived, same direction
+  of loss, opposite side of the clock — but the distinguishing test is
+  **modal** ("uncountable in principle rather than uncounted in
+  practice"), settled by failing to think of a recovery route, which is
+  `UNI_005`'s absence-not-result; the decidable form is already in the
+  document, in falsifier 4 (*is the constraint set documented anywhere
+  outside the structure?*). **`DD_003`, the sharp one:** the anchor case
+  is EIA post-auditing, and the published literature reports **three**
+  narrowings where the drop names one — all impacts → predictions made,
+  predictions made → auditable (**56%**, and non-random: the stated
+  reasons are lack of data, vague or ambiguous predictions, time
+  dependency), and 'accurate' → *unqualifiedly close* (**~30%**, "with
+  almost as many rated accurate principally by virtue of the vagueness of
+  the forecasts"). Headline ~79%; unqualifiedly-close ≈17% of predictions
+  made, a 4.6× spread. The second narrowing selects against exactly the
+  predictions most likely to be scored wrong, since the same vagueness
+  either removes a prediction at step 2 or earns it a pass at step 3. **So
+  the gap is not invisible — it is published in pieces that are never
+  multiplied**, which is `thermal-sensor-degradation-audit/`'s
+  `corruption(trend) = corruption(measurement) × corruption(framework)` on
+  a different substrate, and it makes the anchor case stronger than the
+  drop states it for a different reason than stated. **`DD_004`:**
+  falsifier 1 does not fire (no post-audit scoring against total observed
+  impacts located), but R1's numerator is less missing than claimed — one
+  study reports **six unpredicted impacts** in 865 predictions — and the
+  literature's own words answer falsifier 3 ambiguously ("the reported
+  incidence of such impacts varies greatly across studies"), which is the
+  signature of a quantity set by search intensity, so **R1-small is not
+  yet evidence that unanticipated impacts are rare; it is evidence that R1
+  is not yet a measurement**. **`DD_005`:** R2 is correctly identified as
+  the runnable seed and does a second job the drop does not claim — it is
+  the **positive control** for THE NULL TEST, since a structural null has
+  `UNI_006`'s problem and R2 asks the same corpus for something that does
+  exist in some documents. **`DD_002`:** the anchor practice verifies
+  (post-auditing is named, published, decades of review literature,
+  accuracy in a 73–79% band) while the specific triple quoted — 152
+  accurate, ~73%, 38–92% by project type — was **not located**; fourth
+  consecutive occasion in this drop family whose practice checks out and
+  the first whose attached numbers did not. **`DD_006`:** R3's calibration
+  constraint arrives before any code, the cheapest point, and is a real
+  sequencing improvement on mechanism 10 where `GC_003` found the same
+  constraint implemented as a declaration rather than a unit check — the
+  limit is inherited unchanged. **`DD_007`:** "do not fill in with an
+  approximation" is now a recurring device, second appearance in two
+  drops, still with no schema slot (`UNI_022`) — though this instance sits
+  in a numbered list so the axis is at least counted. **`DD_008`:**
+  `rate-mismatch-polytope` is absent for the second time, now cited by two
+  drops for two different arguments, which makes it load-bearing rather
+  than a forward pointer; three existing pieces aim at its subject
+  (`rigidification-sensor`'s `locked_at`, `sustained-activation-gate`'s
+  restore-vs-coupling, `grounding-layers/temporal_dysrhythmia`'s six
+  timescales) and none is what either drop asked for. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
