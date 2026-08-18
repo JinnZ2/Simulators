@@ -2461,8 +2461,46 @@ underneath).
   control arm, only one is" — the `null-harness` property built in at design
   time), while `selfreport_probe.py` is absent — third named-and-absent object
   in this drop family and the first that is a **file this folder could ship**
-  rather than a body of work it reaches for. Seventy-six claims
-  `UNI_001..076`. Stdlib only, CC0.
+  rather than a body of work it reaches for — **now closed by arrival**, with `case_018_audit.py` detecting the state change rather than asserting it. **The harness then arrived**
+  (`selfreport_probe.py`, verbatim, selftest 14/14) — three subcommands
+  (`--emit` a matched probe battery, `--sheet` a coding sheet, `--score`
+  ratios and paired series), no model call and no text classification
+  anywhere by design. **`UNI_077`, the prediction resolving:** `UNI_076` said
+  shipping it would force the decision `UNI_069` turns on, since a harness
+  must state how many times it queries each frame — and it does, at **n = 1**.
+  `emit()` builds 48 arms with min = max = 1 item each, its signature offers
+  no repeat argument, and `repeat` / `trials` / `replicate` / `temperature` /
+  `sampling` / `variance` are 0 hits each; an unstated assumption is now a
+  visible default with a place to put the fix. **`UNI_078`:** `sheet()`'s
+  docstring says "arm labels stripped" and the id it ships is
+  `ckpt-1|econ|APPLIED|F_NEG` — every arm variable in plain text on 48 of 48
+  rows, with the requirement carried as a comment on the field that violates
+  it ("opaque handle; coder should not parse it"); the selftest passes by
+  checking the **key set**, which is true of a row whose id is the arm — the
+  `reasoning-gate` G-FIT shape at its most literal. **`UNI_079`:** `score()`
+  increments the novelty denominator on `ack_source` with no gate on
+  `ack_present`, and `validate_codes()` never checks across fields, so the
+  harness's **own selftest fixture** returns `ack = 6, determinable = 12` —
+  exactly 2× — with the tracking-signature ratio computed over
+  non-acknowledgements. **`UNI_080`:** the leakage screen is two keywords over
+  four strings authored in the same file, tripped by 0 of 4, covering `FRAMES`
+  and not the `PROBES` where CONFOUND 2 lives — `CONSTANT_SILENT`, same shape
+  as `UNI_009` / `DF_010` / `ACL_017`. **`UNI_081`, what it gets right:**
+  `ratio()` returns `None` on an empty denominator with a reading note saying
+  "'None' = denominator empty. not a zero" — twelfth instance of that repair
+  here and among the few designed in — and `series()` refuses a coefficient
+  below 8 checkpoints in text, CONFOUND 4 as a refusal rather than a caveat.
+  **`UNI_082`:** the guard that got built is the one the case file had already
+  written down; the same requirement at the axis `UNI_069` found is absent, so
+  a confound list is a checklist and **a guard in one function is not a
+  property of the instrument**. **`UNI_083`:** CONFOUND 5 is honoured in code
+  and checkably so — four stdlib imports, zero network or subprocess, and no
+  function that both reads response text and touches the rubric, so the
+  classification step is a hole a human fills. **`UNI_084`:** two of three
+  readouts are computable on delivery and novelty is not, needing a dated
+  criticism corpus that does not exist — handled by keeping the column,
+  making `NOT_DETERMINABLE` first-class, and letting it render as `None`.
+  Eighty-four claims `UNI_001..084`. Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
   time-series variable** — version the ruler, compute drift on its own

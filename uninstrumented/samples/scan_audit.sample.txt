@@ -69,7 +69,7 @@ GRADING scan.py + patterns.json
   binding constraint is not precision but how many `check`
   questions a human must answer per unit of text.
 
-  corpus: 1116 files (.txt .md .rst .org .csv .json .jsonl .py), 1074705 words
+  corpus: 1118 files (.txt .md .rst .org .csv .json .jsonl .py), 1082697 words
     all candidates        891   0.8 per 1000 words
     strength=candidate    510   0.5 per 1000 words
     strength=weak         381
@@ -83,12 +83,12 @@ GRADING scan.py + patterns.json
 
   Densest files:
 
-    CLAUDE.md                                            35501 w   44 hits   1.2 /1000
+    CLAUDE.md                                            35957 w   44 hits   1.2 /1000
     legacy/Organize3.md                                  17643 w   29 hits   1.6 /1000
     grounding-layers/l5_human_construct.py                1926 w   22 hits  11.4 /1000
-    uninstrumented/CLAIM_TABLE.md                         9935 w   22 hits   2.2 /1000
+    uninstrumented/CLAIM_TABLE.md                        11123 w   22 hits   2.0 /1000
     fragility-cascade/CLAIM_TABLE.md                     19662 w   18 hits   0.9 /1000
-    uninstrumented/AUDIT_NOTES.md                        13238 w   18 hits   1.4 /1000
+    uninstrumented/AUDIT_NOTES.md                        15118 w   18 hits   1.2 /1000
 
 ========================================================================
 3  concentration and coverage
@@ -158,11 +158,11 @@ GRADING scan.py + patterns.json
   and CLAIM_TABLE.md calls it the cheapest of the three
   unworked entries to run. scan.py --asym is that measurement.
 
-    files with an account mention   443
+    files with an account mention   445
     files with ANY hedge at all     16
-    outside    hedged   7 of  582   0.0120
-    incumbent  hedged  16 of  882   0.0181
-    ratio (outside/incumbent)       0.66
+    outside    hedged   7 of  583   0.0120
+    incumbent  hedged  16 of  892   0.0179
+    ratio (outside/incumbent)       0.67
 
   Every hedge in the corpus, hand-checked:
 

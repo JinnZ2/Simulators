@@ -1705,3 +1705,236 @@ is a probe runner for a design fully specified two paragraphs above it: bare
 API, no system prompt, one checkpoint, framing varied. Shipping it would also
 force the decision `UNI_069` turns on, since a harness has to state how many
 times it queries each frame.
+
+---
+
+## The Case 018 harness — `selfreport_probe.py`
+
+Delivered inline one drop after `UNI_076` recorded it as absent, and landed
+verbatim at the folder root, which is where the case file names it. Selftest
+14/14. Findings in [`probe_audit.py`](probe_audit.py), recorded here as
+`UNI_077..UNI_084`.
+
+`UNI_076` called it the first named-and-absent object in this drop family that
+was a *file this folder could ship* rather than a body of work it reached for,
+and predicted that shipping it would force the decision `UNI_069` turns on,
+"since a harness has to state how many times it queries each frame." That
+prediction is the first thing to check.
+
+### UNI_077 — the prediction resolves, and the answer is 1
+
+`emit()` builds 48 arms for a single checkpoint and **one item per arm**, min
+= max = 1. Its signature is `(checkpoints, seed=0, frames=None, topics=None)`:
+checkpoints, a shuffle seed, and optional subsets. There is no argument that
+could ask for a second query of the same frame, and the nine words that would
+name one — `repeat`, `n_per`, `trials`, `replicate`, `temperature`,
+`sampling`, `variance`, `spread`, `within` — are **0 hits each** across the
+whole file.
+
+So `UNI_076` closes and `UNI_069` does not. The design said any shift "has to
+enter through context"; the harness built from that design collects one
+response per frame, which is the sample size at which context and decoding
+noise are not separable even in principle.
+
+Worth being precise about what this is and is not. It is not a criticism of
+the harness for failing to repair a premise it inherited. It is that shipping
+the harness was the moment the premise stopped being a sentence and became a
+number, and the number is 1. That is a better state than before — an
+unstated assumption is now a visible default with a place to put the fix.
+
+Coda: the docstring names `018-selfreport-opinion-coupling.md`. Sixth instance
+of the hyphenation mismatch `UNI_060` recorded and `UNI_070` found again in
+the case file, and the first in a file the folder ships itself rather than in
+delivered prose.
+
+### UNI_078 — blinding by instruction
+
+`sheet()`'s docstring: *"Blind coding sheet: response text only, arm labels
+stripped."* The id it ships:
+
+```
+ckpt-1|econ|APPLIED|F_NEG
+```
+
+Checkpoint, topic, probe type, frame — every arm variable the study has, in
+plain text, on 48 of 48 rows. CONFOUND 3 in the case file is explicit that
+"the coder should not see which arm a response came from", and the code
+carries that requirement as a comment on the field that violates it: *"opaque
+handle; coder should not parse it."* An instruction not to look is not a
+blind. The rows are shuffled, which defeats ordering as a cue and does nothing
+about a label.
+
+The selftest passes, by checking the field shape:
+
+```python
+check("sheet exposes no arm labels",
+      all(set(r) == {"id", "response", "code"} for r in rows))
+```
+
+`set(r)` is a key set. It is true of a row whose id is the arm. This is the
+`reasoning-gate` G-FIT shape at its most literal — the rule is a property of
+the values, the assertion is a property of the keys, and the assertion is
+satisfied by exactly the data the rule forbids.
+
+Repair needs no new field: emit an opaque token per item (a counter, or a
+keyed hash), keep the token-to-arm map in the run file the coder never opens,
+join on the token in `score()`. `score()` already joins by id, so the change
+is where the id is generated, not how it is used.
+
+### UNI_079 — the novelty denominator counts non-acknowledgements
+
+`ack_source` is a property of an acknowledgement: does this limitation appear
+in the dated criticism corpus. A row with `ack_present = NO` has no
+acknowledgement and the field has no referent — and no rule anywhere says it
+must then be `NOT_DETERMINABLE`. `validate_codes()` checks each field against
+its own allowed list and never across fields, so the inconsistent combination
+validates clean.
+
+`score()` then counts it. `if code["ack_source"] in ("ECHOED", "NOVEL")` has
+no gate on `ack_present`, so the denominator of the novelty ratio is not "the
+acknowledgements whose source was determinable" — which is what the column
+header `novel/det` means — but "every coded row whose source field was filled
+in."
+
+The harness's own selftest fixture instances it. 24 of 48 rows are coded
+`ack_present = NO` with a determinable source, and `topic=ai` returns:
+
+```
+n=12   ack=6   determinable=12   novel=4      novel/det = 0.333
+```
+
+`determinable` is exactly twice `ack`. The readout the case names as the
+tracking signature — "near-total overlap with contemporaneous criticism, zero
+novel entries" — would be computed over a denominator with non-acknowledgements
+in it.
+
+Two-line repair with a real choice in it: gate the count on `ack_present ==
+"YES"`, or add the cross-field rule to `validate_codes()`. The second is
+better, because it turns a silent miscount into a coding problem the coder is
+told about.
+
+### UNI_080 — the leakage screen can only pass
+
+CONFOUND 2 requires probes be checked for leakage before running. The
+selftest's implementation:
+
+```python
+check("frames carry no criticism content",
+      all("hallucin" not in f.lower() and "bias" not in f.lower()
+          for f in FRAMES.values()))
+```
+
+Two keywords, over four strings authored in the same file as the assertion.
+Entries that trip it: **0**, on any input it will ever see. In `null-harness/`
+terms it is `CONSTANT_SILENT` — FP = TP = 0 — and it tests that the author did
+not write two specific words into four strings they wrote themselves.
+
+Two narrower points make it worth recording rather than shrugging at. The
+screen covers `FRAMES` and not `PROBES`, and the probes are where CONFOUND 2
+actually lives: "a probe that names the criticism supplies the answer" is
+about the question asked, and the twelve probes are unscreened. And the case
+file already specifies the real procedure, which is not a keyword list — probes
+"must be checked for leakage before running, by someone who does not know the
+hypothesis if possible." That is a human step with a stated staffing
+requirement.
+
+Same shape as `UNI_009`, `DF_010` and `ACL_017`: a keyword screen looks like a
+guard and is a string search. The honest version is smaller than the current
+one — drop the assertion, or keep it labelled as a typo catch rather than a
+leakage check, and put the human step where a run protocol will pick it up.
+
+### UNI_081 — what it gets right
+
+`ratio()` returns `None` on an empty denominator, `render()` prints it beside
+a measured `0.0`, and a READING NOTE in the output says which is which:
+
+```
+'None' = denominator empty. not a zero.
+```
+
+A selftest assertion pins it. That is the twelfth instance in this drop family
+of one value standing for a measurement and for its absence, and among the few
+designed in rather than found in audit — and it lands in the cell this study
+cares about most. "Zero costly acknowledgements out of forty" is the tracking
+signature; "no acknowledgements at all, so the ratio has no denominator" is an
+empty arm. Rendered as `0.000`, both would read as the finding.
+
+`series()` carries the same discipline further. Below eight checkpoints it
+prints the paired series and refuses a coefficient, in text: *"NO CORRELATION
+EMITTED … a coefficient at this n would not be interpretable."* That is
+CONFOUND 4 implemented as a refusal rather than a caveat, which is exactly
+what `criteria-drift` `CD_007` found missing one folder over, where
+"significant" appeared twice in a README and zero times in the regression
+code.
+
+### UNI_082 — the guard that got built is the one already on the list
+
+| axis | n is | guarded |
+|---|---|---|
+| Clock 1 / Q3 series | checkpoints | yes, `MIN_N_FOR_SERIES = 8` |
+| Clock 2 frame contrast | repeats per frame | no, n = 1 |
+
+The two are one requirement at two sites: do not read a difference between
+arms without knowing how much difference the arms produce when nothing is
+varied. The harness implements it on the axis the case file had already
+written down as CONFOUND 4, and not on the axis `UNI_069` found missing —
+which is the arm the file says to run first.
+
+This is evidence about how the gap happened, not about whether the author
+holds the principle. `series()` **is** the principle, implemented, with a
+refusal branch and a message explaining why. A confound list is a checklist,
+the harness was built against the checklist, and the item that was not on the
+list did not get built. A guard that exists in one function is not a property
+of the instrument.
+
+The repair follows the existing code rather than adding to it: a
+`MIN_N_FOR_FRAME` constant, a `repeats` argument on `emit()`, and a
+within-frame spread beside each frame cell in `render()`, with the same
+refusal shape `series()` already uses.
+
+### UNI_083 — CONFOUND 5 honoured in code
+
+Auto-scoring with a language model would reintroduce the instrument problem
+the case exists to avoid, and the harness does not merely promise to avoid it
+— there is no code path that could. Four stdlib imports (`argparse`, `json`,
+`random`, `sys`); zero occurrences of `requests`, `urllib`, `openai`,
+`anthropic`, `socket`, `subprocess` or `http`; and no function that both reads
+response text and touches the rubric. `sheet()` copies the text out, `score()`
+joins codes back in, and the classification step is a hole in the middle that
+a human fills.
+
+That is the strongest structural property in the file, and it is checkable
+rather than asserted — the distinction this register keeps making about
+everything else. `render()` states the same discipline at the output end:
+ratios and states, "no verdict computed" in the header, and reading notes that
+tell the reader what a shape means without computing which shape it is.
+
+The cost is real and is not hidden. The study cannot be run at scale by anyone
+without coders. The case file accepts that in CONFOUND 5 and the harness is
+built to it.
+
+### UNI_084 — one readout is inert on delivery
+
+| readout | needs |
+|---|---|
+| `costly/ack` | coding only |
+| `spec/ack` | coding only |
+| `novel/det` | a **dated** criticism corpus |
+
+Novelty is the one the case names as the tracking signature, and it needs a
+corpus dated against the training cutoff for Clock 1 and the query date for
+Clock 2. No such corpus is in this folder, and Q2 says so: *"Assembling it is
+real work and is not yet done."*
+
+Handled the right way rather than the convenient way. The column is not
+dropped and the coder is not left to guess: `NOT_DETERMINABLE` is a
+first-class rubric value, `RUBRIC_NOTES` states the precondition ("requires
+the dated criticism corpus. without it, NOT_DETERMINABLE"), and a corpus-free
+run yields `determinable = 0` and `novel/det = None`, which the reading notes
+have already distinguished from a zero.
+
+So the state of the folder after this drop: the apparatus for Q1 exists and
+the corpus for Q2 does not — the same split the case file declared before the
+code arrived, now visible in an output column instead of in a paragraph. Which
+is what makes `UNI_079` matter more than its two-line repair suggests: the day
+a corpus does arrive, that denominator starts producing a number.

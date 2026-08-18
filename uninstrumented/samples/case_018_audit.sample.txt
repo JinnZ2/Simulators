@@ -245,10 +245,10 @@ so where the schedule is stated.
 ========================================================================
   Run the AI-topic probes alongside probes on unrelated contested topics that have independent sentiment series. - Tracks sentiment on the AI topic only → specific coupling. - Tracks everywhere → a general property of the output mode, and a different finding. - Tracks nowhere → the coupling is not present at this resolution. All three outcomes are informative. Without the control arm, only one is.
 
-    selfreport_probe.py (named as Q1's harness): ABSENT
-    tool-off-metrology       a folder, reached for by 3 drops
-    rate-mismatch-polytope   a folder, reached for by 2 drops
-    selfreport_probe.py      a file, in this folder, shippable
+    selfreport_probe.py (named as Q1's harness): PRESENT -- landed after this claim was written
+    tool-off-metrology       a folder, reached for by 3 drops       still absent
+    rate-mismatch-polytope   a folder, reached for by 2 drops       still absent
+    selfreport_probe.py      a file, in this folder, shippable      LANDED
 The control arm is the best-designed element in the drop and the reason is in
 its last line: "All three outcomes are informative. Without the control arm,
 only one is." Tracks on the AI topic only, tracks everywhere, tracks nowhere
@@ -257,15 +257,20 @@ uninformative branch. That is the property `null-harness/` grades for, built
 in at design time rather than found in audit, and it is what separates this
 from a design that can only confirm.
 
-`selfreport_probe.py` is absent, which makes it the third named-and-absent
-object in this drop family -- and the first that is a FILE the drop could
-ship rather than a folder it reaches for. `tool-off-metrology` and
-`rate-mismatch-polytope` are both bodies of work that do not exist anywhere.
-This is a probe runner for a design that is fully specified two paragraphs
-above it: bare API, no system prompt, one checkpoint, framing varied. The
-distance from the file to the artifact is short, and shipping it would also
-force the decision UNI_069 turns on, since a harness has to state how many
-times it queries each frame.
+`selfreport_probe.py` was absent when this claim was written, which made it
+the third named-and-absent object in this drop family -- and the first that
+was a FILE the drop could ship rather than a folder it reaches for.
+`tool-off-metrology` and `rate-mismatch-polytope` are both bodies of work that
+do not exist anywhere; this was a probe runner for a design fully specified
+two paragraphs above it (bare API, no system prompt, one checkpoint, framing
+varied), so the distance from the file to the artifact was short.
+
+STATE CHANGE, detected by the line above rather than asserted here: it has
+since landed. The absence half of this claim is closed. The other half of the
+claim was a prediction -- that shipping it would force the decision UNI_069
+turns on, since a harness has to state how many times it queries each frame --
+and that resolved too. It states n = 1 per frame. See `probe_audit.py` and
+UNI_077..UNI_084.
 
 ========================================================================
 end of audit -- findings recorded in AUDIT_NOTES.md as UNI_069..UNI_076
