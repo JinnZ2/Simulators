@@ -32,14 +32,18 @@ Selftest 15/15.
 | file | status |
 |------|--------|
 | `closure.py` | delivered, verbatim |
-| `cases/` | not delivered — no case has been recorded |
-| `README.md`, `CLAIM_TABLE.md` | not delivered |
+| `README.md` | delivered drop 2, verbatim |
+| `CLAIM_TABLE.md` | delivered drop 2 (C1–C5 + DISCLOSED WEAKNESSES), verbatim |
+| `cases/hawaii-missile-alert.json` | delivered drop 2, verbatim |
+| `cases/breakdown-cones.json` | delivered drop 2, verbatim — design only, no data |
+| `cases/dash-warning-light.json` | delivered drop 2, verbatim — the instrument branch's only case |
 | `closure_audit.py` | added |
 | `AUDIT_NOTES.md` | added |
 | `samples/` | added |
 
-Nothing here invents a case. A case is a record of an incident, and
-writing one would put an account in the author's mouth.
+Drop 2 delivered three cases. The README's STATE claims check out exactly:
+three cases, zero quantified, every `spend` cell `--` and every
+`knowledge_state` `not_separable`.
 
 ## Claims
 
@@ -50,6 +54,10 @@ writing one would put an account in the author's mouth.
 | CC_003 | `knowledge_separable` is `!= NOT_SEPARABLE`, so a case omitting `knowledge_state` reads as separable — the default runs toward the informative state | comparing against the vocabulary instead of one member of it | SUPPORTED |
 | CC_004 | `--case` and `--branch` have no bounds check where both sibling tools do, so `--case` with no argument raises `IndexError`; and an unknown branch prints an empty table with rc 0 while an unknown case errors with rc 1 | the guard `--new` already uses being applied to both | SUPPORTED |
 | CC_005 | The `instrument` branch is `uninstrumented`'s PROXY SUBSTITUTION with a rate term added — `signal.years_correct` — which the register's entry does not carry | the register's entry already carrying a time term | SUPPORTED |
+| CC_007 | The README refuses to fill `diagnostic_spend` from Hawaii's 38 minutes and names the mechanism — *"substituting it would be proxy substitution"* — while filling the denominator, which is knowable | the field being filled from the error duration | SUPPORTED (holds) |
+| CC_008 | The docstring says a case that mixes branches is recorded as `mixed`; the corpus has one such case, it is coded `event`, and both the case and C4 hold the question open | the case being recoded, or the rule being restated | SUPPORTED |
+| CC_009 | `availability_rules_out_procedure_gap` needs a third value: the instrument case's rival is NOT APPLICABLE and the boolean returns `False`, the same value a checked-and-absent event case returns | a three-valued return | SUPPORTED — `CC_002` instanced |
+| CC_010 | Two circularities are disclosed before use — `variable_state` inferred from the same evidence C3 rests on, and C5's nearest series carrying a denominator modelled per the category under test — and `signal.years_correct` is 0 of 3 filled, including on the branch it defines | either circularity being softened, or a filled rate term | SUPPORTED (holds) |
 | CC_006 | With no `cases/` directory the tool prints a well-formed report with zero rows and exits 0 — third tool in the family to do so, and the three that refuse are the older ones | the empty state refusing, or saying it is empty | SUPPORTED |
 
 ## 1 — CC_001, a rival held as a field
@@ -203,6 +211,140 @@ whose readouts are all properties of records written for another purpose.
 `DL_005` stands for all three: the line prints over zero cases and reads
 the same.
 
+## 7 — CC_007, a refusal with the mechanism named
+
+> It does not estimate diagnostic spend where the source lacks the
+> numbers. Hawaii's 38 minutes is the duration of the **error**, not of
+> anyone's decision, and substituting it would be **proxy substitution**.
+
+`diagnostic_spend` is the readout the folder exists for. A 38-minute
+number sits in every account of the incident and would fill the cell. The
+author names why it must not: it measures a different quantity, and
+putting it there would be `uninstrumented/`'s sixth mechanism — an
+enforceable measure displacing the target it stood in for.
+
+The refusal is specific rather than blanket:
+
+    hawaii latency.budget_seconds     900
+    hawaii latency.diagnostic_seconds None
+    resulting diagnostic_spend        --
+
+Budget is flight time under a real threat — a property of the physics, and
+knowable. The numerator is a per-respondent time-to-first-protective-action
+distribution, which nobody published. One half filled, one half refused,
+with the note saying which and why.
+
+Elsewhere in this repo the register's mechanisms diagnose an instrument
+after the fact. Here one is used ahead of time as a reason not to produce
+a number.
+
+## 8 — CC_008, the mixed branch
+
+    instrument   1
+    event        2
+    mixed        0
+
+> A case that mixes them is recorded as mixed rather than forced into one.
+
+The corpus contains exactly one case that mixes them, and it is coded
+`event`. From `hawaii-missile-alert`'s own signal note:
+
+> some discounted the alert because air-raid sirens were not sounding,
+> treating silence on a different instrument as evidence of no threat.
+> **That fragment is an instrument-branch reading sitting inside an
+> event-branch case.**
+
+Its open list and C4's status say the same thing in the same words:
+whether it should be split out is unsettled.
+
+So the rule and the open question point different ways. The docstring says
+record it `mixed`; the case holds open between splitting it into a
+separate instrument case and leaving it. Both are reasonable; neither is
+what the stated rule prescribes.
+
+Related to `DL_011` and distinct from it. There `absent_established` was
+unused because no link had been investigated far enough to earn it — the
+state was unearned. Here the state is earned, acknowledged twice in the
+delivery, and a different value is recorded.
+
+## 9 — CC_009, the third value the boolean needs
+
+    dash-warning-light
+      variable_state           not_assessed
+      information_availability present
+      rules_out                False
+      procedure_gap collapsed  None
+      ground                   Not applicable on this branch. Procedure is
+                               not the missing quantity; direct sampling is.
+
+`CC_002` recorded that the field merges "checked, information absent" with
+"never recorded". The instrument case adds a third state it cannot hold:
+**not applicable**. The procedure-gap rival is an event-branch object; on
+the instrument branch the missing quantity is direct sampling.
+
+`collapsed_into_closure` reads `None` here, correctly. `rules_out` reads
+`False` — the same value an event case returns when the information was
+checked and found absent, which on that branch is a substantive finding.
+
+Three distinctions now, not two. The information is in the record and
+prints in `detail()`; the derived boolean is the only place it collapses —
+`DL_003` and `DL_012`'s shape, where the per-item text survives and the
+scalar merges.
+
+## 10 — CC_010, two circularities, disclosed
+
+> `variable_state` is inferred, never measured. ... In Hawaii it is
+> inferred from the procedure-knowledge finding, which is the same
+> evidence C3 uses — so C3 and the coding of that case are not
+> independent.
+
+It holds: hawaii's `variable_state: closed` and its `procedure_gap.ground`
+both rest on the survey finding, and C3's status cites that same case.
+
+C5 discloses a second one about a series not yet used:
+
+> The rail-crossing data is the nearest available series and the exposure
+> denominator there is modelled per warning-device category, which is
+> circular for this purpose.
+
+A denominator modelled per device category cannot test a claim about which
+device categories fail. That is `GC_003`'s shape — a denominator that does
+not survive the question asked of it — caught in advance rather than in
+audit.
+
+Both cost the drop something and neither is softened: C3's support is one
+case whose coding is not independent of it, and C5's nearest data is
+unusable as constituted.
+
+    breakdown-cones        branch=event       years_correct=--
+    dash-warning-light     branch=instrument  years_correct=--
+    hawaii-missile-alert   branch=event       years_correct=--
+
+`signal.years_correct` is the rate term that makes C5 invert standard
+scoring, and it is 0 of 3 — including on the one case on the branch it
+defines. The case names where the number would come from ("the
+rail-crossing signal ... is a separate case file and is not yet written"),
+which is a statement of intent rather than a verification claim about a
+file that should exist. Different shape from `CW_001` / `PB_001` /
+`GC_009`, and worth keeping apart from them.
+
+## 11 — CC_003, not tripped, which is the point
+
+    breakdown-cones        knowledge_state=not_separable   separable=False
+    dash-warning-light     knowledge_state=not_separable   separable=False
+    hawaii-missile-alert   knowledge_state=not_separable   separable=False
+
+All three cases state `not_separable` explicitly, so the fail-open default
+`CC_003` records is never exercised by the delivered data — and the README
+says this is *"the honest state of the published record rather than a gap
+in the transcription"*, which the table confirms.
+
+That is why the defect survives. A default running toward the informative
+state is invisible on data written by someone who knows the schema, and
+fires on the first case written by someone who does not — which, for a
+folder whose README invites others to add cases, is the population it will
+meet.
+
 ## Relation to the rest of the repo
 
 - `uninstrumented/` — §5. The `instrument` branch is PROXY SUBSTITUTION
@@ -213,6 +355,9 @@ the same.
   `absent`; this one runs the other way.
 - `null-harness/` — §2 and §3 are both fail-open defaults in a tool whose
   vocabulary is built to keep unknown apart from known-negative.
+- `generation-capacity/` — §10. `GC_003`'s denominator shape, disclosed in
+  advance here; and the README names the shared recall-method defect with
+  R1 explicitly.
 - `thermal-sensor-degradation-audit/` — the `instrument` branch is the
   same object from the other side: there the package degrades during the
   event it records, here the intermediary is trusted because it has not.

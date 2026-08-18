@@ -1,0 +1,21 @@
+{
+  "case": "breakdown-cones",
+  "branch": "event",
+  "variable_state": "closed",
+  "information_availability": "present",
+  "knowledge_state": "not_separable",
+  "signal": {"present": false, "relied_on_as_reading": null, "years_correct": null},
+  "latency": {"diagnostic_seconds": null, "budget_seconds": null, "note": ""},
+  "procedure_gap": {
+    "collapsed_into_closure": true,
+    "ground": "Warning-device placement after a roadside breakdown is in the driving safety material and is examinable. Drivers who did not place devices report not having been told the procedure. Delivery is documented at the population level, so the report is a retention failure being reported as a delivery failure — which is the signature of a procedure attaching to an event the person had closed."
+  },
+  "source_class": "field observation, not collected",
+  "self_report": true,
+  "open": [
+    "This case is the highest-value one in the file and is currently unmeasured. Base rate is ordinary rather than remote, delivery is documented, and knowledge is checkable cold in a parking lot with no event required. That makes all three knowledge states separable here, which they are not in the Hawaii case.",
+    "The series that would route it: procedure recall against self-rated likelihood of personally breaking down, in drivers matched on years and training source. Prediction is that recall tracks the likelihood rating and not the training record.",
+    "Recall method is unspecified — free, prompted, recognition, and demonstrated give different numbers. Same defect flagged in generation-capacity R1. Must be fixed before any cross-case comparison.",
+    "No data collected. Everything above is a design, not a reading."
+  ]
+}

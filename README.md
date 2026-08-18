@@ -59,7 +59,7 @@ underneath. Read those before running the corresponding script.
 | `generation-capacity/` | the option space a party can produce, not a value in it | tenth exclusion mechanism + sub-case 10A + R1/R2/R3 scorer with a place-vs-center calibration guard; a framing under it scores 11/11 on the audit next door; twelve `GC_*` claims |
 | `moral-decomposer/` | a disagreement presented as moral or ethical | three-stage decomposition to option-distribution claims + frames; the readout is the residue; three cases, one external; eight `MD_*` claims |
 | `domain-ledger/` | a confidence readout, the domain set behind it, and what it anchors to | four uncombined ratios with their denominators printed + a three-band anchor map that refuses to emit a composite; one shape and one anchor map, both unread; thirteen `DL_*` claims |
-| `closure-cost/` | recorded cases where a variable was closed before the event arrived | instrument vs event branches, a named rival hypothesis held as a schema field, four-valued knowledge state, six `CC_*` claims |
+| `closure-cost/` | recorded cases where a variable was closed before the event arrived | instrument vs event branches, a named rival hypothesis held as a schema field, three cases and zero quantified, ten `CC_*` claims |
 | `tools/` | shared utilities | validators, substitution toolkits, gate-drift check |
 
 See [`SYNTHESIS.md`](SYNTHESIS.md) for the cross-folder reading and

@@ -1,0 +1,30 @@
+{
+  "case": "hawaii-missile-alert",
+  "branch": "event",
+  "variable_state": "closed",
+  "information_availability": "present_local_instance",
+  "knowledge_state": "not_separable",
+  "signal": {
+    "present": true,
+    "relied_on_as_reading": false,
+    "years_correct": null,
+    "note": "The alert was the strongest available form of the signal: official state emergency channel, explicit not-a-drill wording, delivered to every phone. Signal weakness cannot account for non-response. A second signal was relied on in the opposite direction: some discounted the alert because air-raid sirens were not sounding, treating silence on a different instrument as evidence of no threat. That fragment is an instrument-branch reading sitting inside an event-branch case."
+  },
+  "latency": {
+    "diagnostic_seconds": null,
+    "budget_seconds": 900,
+    "note": "Budget is the approximate flight time under a real threat, roughly fifteen minutes. Diagnostic time is NOT quantified: multiple studies report information-seeking as the dominant activity across the 38-minute window, but none published a per-respondent time-to-first-protective-action distribution. The ratio is left unfilled rather than estimated from the 38-minute window, which is the duration of the error and not of anyone's decision."
+  },
+  "procedure_gap": {
+    "collapsed_into_closure": true,
+    "ground": "The survey finding that a large majority of Americans had never heard any recommendation about what to do in a nuclear attack is not independent of the closed prior: protocol is not acquired for an event rated as not-happening-here. Two things support the collapse rather than leaving it as a rival. First, information availability is at the local-instance level here — Pearl Harbor is documented, memorialised, and visited year-round in the same place, so the information was not distant or absent. Second, of those who did think the threat might be real, few acted, and those were largely people who had been told what to do. Procedure present, action absent."
+  },
+  "source_class": "post-event survey and content analysis, multiple independent teams",
+  "self_report": true,
+  "open": [
+    "Diagnostic spend is the readout this case exists for and it is not in the literature. Time from receipt to first protective action, distributed, is the missing series.",
+    "Retrospective self-report throughout. Risk estimates are revised after the fact, so variable_state = closed is inferred from the procedure-knowledge finding rather than measured before the event.",
+    "Deciding the alert was false is a different response from failing to categorise it. Some fraction of non-responders correctly inferred an error. The published work does not cleanly separate those two populations, and the case cannot carry weight on the mechanism until it does.",
+    "The siren-silence fragment belongs to the instrument branch. Whether it should be split into its own case is unsettled."
+  ]
+}

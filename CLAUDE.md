@@ -2830,7 +2830,43 @@ underneath).
   with zero rows and exits 0 — third tool in the family, and the three
   that refuse are the older ones; its footer does state the corpus
   condition ("the records were not built to ask this"), which the other
-  two do not. CC0.
+  two do not.
+  **Second drop lands the README, `CLAIM_TABLE.md` (C1–C5 + DISCLOSED
+  WEAKNESSES) and three cases** — `hawaii-missile-alert`,
+  `breakdown-cones` (design only), `dash-warning-light` (the instrument
+  branch's only case). Every README STATE claim checks out exactly: three
+  cases, zero quantified, every `spend` cell `--`, every `knowledge_state`
+  `not_separable`. **`CC_007`, the strongest move in the drop:** the README
+  refuses to fill `diagnostic_spend` — the readout the folder exists for —
+  from Hawaii's 38 minutes, and names the mechanism: "that is the duration
+  of the ERROR, not of anyone's decision, and substituting it would be
+  proxy substitution". The refusal is specific, not blanket: the
+  denominator (900 s, flight time under a real threat) IS filled and the
+  numerator is refused, with the note saying which and why. Elsewhere in
+  this repo the register's mechanisms diagnose an instrument after the
+  fact; here one is used ahead of time as a reason not to produce a
+  number. **`CC_008`:** the docstring says "a case that mixes them is
+  recorded as mixed rather than forced into one"; the corpus holds exactly
+  one such case (Hawaii's siren-silence fragment, an instrument-branch
+  reading inside an event-branch case), it is coded `event`, and both the
+  case's own open list and C4's status hold the question open — so the
+  stated rule and the open question point different ways. Distinct from
+  `DL_011`, where the unused state was unearned; here it is earned,
+  acknowledged twice, and a different value is recorded. **`CC_009`,
+  `CC_002` instanced:** `dash-warning-light`'s procedure-gap rival is NOT
+  APPLICABLE (procedure is not the missing quantity on that branch;
+  direct sampling is) and `availability_rules_out_procedure_gap` returns
+  `False` — the same value a checked-and-absent event case returns. Three
+  distinctions now, not two. **`CC_010`:** two circularities disclosed
+  before use — `variable_state` inferred from the same evidence C3 rests
+  on, so C3 and that case's coding are not independent; and C5's nearest
+  series carrying an exposure denominator modelled per the very category
+  under test, which is `GC_003`'s shape caught in advance rather than in
+  audit. Neither is softened. `signal.years_correct`, the rate term that
+  makes C5 invert standard scoring, is 0 of 3 — including on the one case
+  on the branch it defines. **`CC_003` is not tripped by the delivered
+  corpus**, which is the point: a default running toward the informative
+  state is invisible on data written by someone who knows the schema. CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
