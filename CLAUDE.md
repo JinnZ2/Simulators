@@ -2071,7 +2071,47 @@ underneath).
   analysis, so the referent is dropped and nothing enters the record as a
   measurement. Distinct from `AUDIT ASYMMETRY`, which is a guard firing on
   one side; this is a channel reclassified at intake, so the reading never
-  reaches a guard. **REPAIRED:** `UNI_003` (`entry()` takes a primary plus
+  reaches a guard. **`cases/case-010.md`** is the first delivered case that
+  declines to name its mechanism — coupled-perturbation response of a
+  bio-hybrid memristor, candidate bins SCALAR DEMAND or a proposed new
+  PROTOCOL ORTHOGONALITY, with the reason for leaving it open stated
+  ("assigning the bin before the measurement exists closes a variable that
+  has not been read out"). **`UNI_013`:** that move is **not
+  constructible** — `entry()` validates `excluded_by` against the closed
+  eight-tuple and raises on `UNASSIGNED` and on the proposed bin alike;
+  fifth instance of the `MF_017`/`CW_015`/`DL_004`/`GC_012`/`CA_003` shape
+  and the first where the vocabulary is closed *on purpose*, so the schema
+  can obey the argument or be edited but cannot record it (repair: an
+  `UNASSIGNED` sentinel with `candidates` and a required `why_open`).
+  **`UNI_014`:** first entry whose confidence is below the ceiling — 8 of 8
+  existing entries open with "high", this states "not above ~40%, not
+  sufficient to act on" — so `UNI_004`'s `CONSTANT_FIRES` reading of the
+  field no longer holds, while `UNI_006` is untouched since the register
+  has still never refused an entry. **`UNI_015`/`UNI_016`:** the occasion
+  checks out — six stated details confirmed against Keremane et al., *Adv.
+  Funct. Mater.* 36(34) 2026, DOI 10.1002/adfm.202530539, the first
+  literature claim in this drop family that was checkable at all against
+  `ANC_010`/`CD_009`/`RD_015`/`HO_005` — and two of the four "not located"
+  items ARE locatable (endurance 1000 cycles, retention > 4×10³ s),
+  **both scalars**, so the correction supports the SCALAR DEMAND candidate
+  bin rather than undercutting it. **`UNI_017`:** the field-wide falsifier
+  partially fires — THB (temperature-humidity-bias), TB, temperature
+  cycling, IEEE P1817 and JEDEC JC-42.4 exist, so "none across the field"
+  is refuted — but those hold several variables at simultaneous *constant
+  setpoints*, a factorial corner, while ARM B specifies co-varying **drift
+  at matched integrated dose** compared on distribution shape; the entry
+  survives narrowed and should say so. **`UNI_018`** is UNVERIFIED (the
+  supplement was unreachable through this environment's egress proxy) and
+  is the cheapest falsifier for anyone with access. **`UNI_019`:** Case 010
+  is exactly the near-boundary case `check_null()` says the register lacks
+  — a quantity a field believes it measures, with a live paper and a
+  confidence low enough to be wrong — **and it cannot file**. Its
+  comparator (synthetic periodic scaffold, matched spacing and matched Ag
+  loading) is a `null-harness` known-null and the load-bearing element,
+  since the hybrid differs from DNA-alone and perovskite-alone in more than
+  one way at once; the three-way discriminator names its own discard branch
+  so it is not `CONSTANT_SILENT`. Missing: any power calculation — a
+  `G-RES` pair of variability spread against the margin claimed. **REPAIRED:** `UNI_003` (`entry()` takes a primary plus
   an `also` list and the register sorts under every mechanism — which is
   what lets check 1 return anything but zero: 5 mechanisms now hold entries
   from more than one field, though weakly, since the secondaries were
@@ -2088,8 +2128,8 @@ underneath).
   correction:** the earlier audit said the delivered `break` in `scan()`
   enforced one mechanism per sentence — it does not, the `break` exits the
   trigger loop and mechanisms already co-fire, so the wrong-mechanism
-  finding was a missing trigger rather than a blocked co-firing. Twelve
-  claims `UNI_001..012`. Stdlib only, CC0.
+  finding was a missing trigger rather than a blocked co-firing. Nineteen
+  claims `UNI_001..019`. Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
   time-series variable** — version the ruler, compute drift on its own

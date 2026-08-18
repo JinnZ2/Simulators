@@ -1,7 +1,8 @@
 # CLAIM_TABLE — uninstrumented
 
-Twelve claims, `UNI_001..012`. **Three repaired** (`UNI_003`, `UNI_009`,
-`UNI_010`), see *Repairs* at the end.
+Nineteen claims, `UNI_001..019`. **Three repaired** (`UNI_003`, `UNI_009`,
+`UNI_010`), see *Repairs* at the end. `UNI_013..019` come from the Case 010
+drop and are worked in [`case_010_audit.py`](case_010_audit.py).
 
 ## REFUTATION_PROTOCOL
 
@@ -292,6 +293,27 @@ about the reporter's state rather than about the referent. That is the same
 instrument, aimed one step earlier.
 
 ---
+
+## Case 010 drop — UNI_013..019
+
+Case 010 (`cases/case-010.md`, delivered verbatim) is the first entry
+that declines to name its mechanism, states a confidence below the
+ceiling, and carries a live external occasion with a DOI. Worked in
+[`case_010_audit.py`](case_010_audit.py).
+
+Three of these claims were checked against the open web on 2026-08-18
+and are marked; they are not reproducible by running the audit script,
+which does no network access.
+
+| id | statement | status | falsifier |
+| --- | --- | --- | --- |
+| `UNI_013` | Case 010's central move — mechanism deliberately unassigned, with the reason stated — is **not constructible**: `entry()` validates `excluded_by` against a closed eight-tuple and raises on `UNASSIGNED` and on the proposed new bin alike. Unlike `MF_017`/`CW_015`/`DL_004`/`GC_012`/`CA_003` this is not a missing field but a vocabulary closed on purpose, and Case 010 is the first delivery to argue the closure is premature for one case. | SUPPORTED | An `UNASSIGNED` sentinel with `candidates` and a required `why_open`, so an unfiled entry is a state the sort can count. |
+| `UNI_014` | Case 010 is the **first entry whose confidence is below the ceiling** — 8 of 8 existing entries open with "high", this one states "not above ~40%. Not sufficient to act on." `UNI_004`'s `CONSTANT_FIRES` reading of the field no longer holds; `UNI_006` is untouched, because admission is a different question from the field's value. | SUPPORTED | A second sub-ceiling entry, or the register refusing one. |
+| `UNI_015` | The OCCASION checks out. Six stated details, six confirmed against the published record — author, journal, volume/issue, DOI, device stack, sub-0.1 V operation, forming-free switching. First literature claim in this drop family that was checkable at all, against `ANC_010`, `CD_009`, `RD_015`, `HO_005`. | SUPPORTED *(web, 2026-08-18)* | Any stated detail failing to match the article. |
+| `UNI_016` | Two of the four items the entry lists as "not located in open sources" **are locatable** — endurance 1000 cycles, retention > 4×10³ s — and **both are scalars**, so the correction supports the SCALAR DEMAND candidate bin rather than undercutting it. Temperature range and variability distributions were not located here either. | SUPPORTED *(web, 2026-08-18)* | The two found metrics turning out to be co-varying measurements. |
+| `UNI_017` | The field-wide falsifier **partially fires**. Combined-stress protocols exist and are named (THB, TB, temperature cycling, IEEE P1817, JEDEC JC-42.4), so "none across the field" is refuted — but those hold several variables at simultaneous *constant setpoints*, a factorial corner, while ARM B specifies co-varying **drift at matched integrated dose** compared on distribution shape. The entry survives narrowed, and should say "co-varying drift at matched dose" wherever it says "co-varying". | SUPPORTED (narrows the entry) | A located protocol that co-varies drift at matched integrated dose. |
+| `UNI_018` | The supplement falsifier — "the paper's supplementary data contains a multi-variable arm" — **could not be checked**: publisher and every news mirror located are blocked by this environment's egress proxy. Cheapest of the three falsifiers for anyone with access, and the only one that would close the case outright rather than narrow it. | UNVERIFIED | One look at the supplementary methods. |
+| `UNI_019` | Case 010 is the near-boundary case `check_null()` says the register lacks — "a quantity a field believes it measures and does not", with a live paper and a confidence low enough to be wrong — **and it cannot file** (`UNI_013`). Its comparator (synthetic periodic scaffold, matched spacing and matched Ag loading) is a known-null in `../null-harness/` terms and is the load-bearing element; the three-way discriminator names its own discard branch, so it is not `CONSTANT_SILENT`. Missing: any power calculation — a `G-RES` pair of variability spread against the margin claimed. | SUPPORTED (holds) | A stated device count and resolvable margin, which would close the gap. |
 
 ## Repairs
 
