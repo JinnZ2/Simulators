@@ -1,0 +1,61 @@
+==============================================================================
+SCENARIO  drift   (model: drift)
+==============================================================================
+stop condition : converged
+iterations     : 2
+
+  it  claim                    verdict      note
+  --------------------------------------------------------------------------
+   0  ACL_drift_neutral        UNDECIDED    precondition not met: toleranc
+   0  ACL_drift_resolves       SUPPORTED    unresolved = 0 of 120
+   1  ACL_drift_neutral        SUPPORTED    p_fix(A) = 0.490 +/- 0.040 aga
+   1  ACL_drift_resolves       SUPPORTED    unresolved = 0 of 157
+
+  responses admitted : 1
+    INSTRUMENT_EDIT  ACL_drift_neutral
+  responses refused  : 0
+
+A refutation is a result. The loop stops on `converged`,
+`budget_exhausted`, `stood_on_refutation` or
+`no_admissible_response` -- never on one branch that means two.
+
+==============================================================================
+SCENARIO  drift-selected   (model: drift)
+==============================================================================
+stop condition : converged
+iterations     : 2
+
+  it  claim                    verdict      note
+  --------------------------------------------------------------------------
+   0  ACL_drift_neutral        REFUTED      p_fix(A) = 0.698 +/- 0.025 aga
+   0  ACL_drift_resolves       SUPPORTED    unresolved = 0 of 400
+   1  ACL_drift_neutral        SUPPORTED    swept: p_fix across advantage 
+   1  ACL_drift_resolves       SUPPORTED    unresolved = 0 of 400
+
+  responses admitted : 1
+    SWEEP            ACL_drift_neutral
+  responses refused  : 0
+
+A refutation is a result. The loop stops on `converged`,
+`budget_exhausted`, `stood_on_refutation` or
+`no_admissible_response` -- never on one branch that means two.
+
+==============================================================================
+SCENARIO  threshold   (model: threshold)
+==============================================================================
+stop condition : stood_on_refutation
+iterations     : 2
+
+  it  claim                    verdict      note
+  --------------------------------------------------------------------------
+   0  ACL_thresh_linear        REFUTED      |yield - linear| = 0.1200
+   1  ACL_thresh_linear        REFUTED      |yield - linear| = 0.1200
+
+  responses admitted : 2
+    CLAIM_UPDATE     ACL_thresh_linear
+    STAND            ACL_thresh_linear
+  responses refused  : 0
+
+A refutation is a result. The loop stops on `converged`,
+`budget_exhausted`, `stood_on_refutation` or
+`no_admissible_response` -- never on one branch that means two.

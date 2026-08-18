@@ -3063,6 +3063,71 @@ underneath).
   `domain-ledger/shapes/hierarchy-cut-generation.json` is already a shape
   at a stated confidence (0.61, thirty domains, zero read) whose unread
   list is the queue. Six claims `HO_001..006`. Stdlib only, CC0.
+- `adaptive-claim-loop/` — The same architecture as an adaptive simulation
+  framework — provenance log, claim system, an agent that reads results and
+  proposes a change, a loop that iterates — **with one move removed**. In
+  the ordinary shape of this architecture a failed claim hands the agent a
+  parameter dial and the agent turns it until the claim passes; that
+  operation cannot fail, learns nothing about the system, and the log that
+  records it (observation / hypothesis / action / expected outcome, one row
+  per step) reads as diligence. `adaptive_loop.py` has no vocabulary for
+  it: `Response` has five subclasses and none takes a bare parameter and a
+  direction. **`CLAIM_UPDATE`** (the protocol's default — restate the
+  claim; needs a break condition that is not the old one and must pass the
+  `equivalence-field` epicycle guard), **`MECHANISM_EDIT`** (basis
+  independent of this run + prediction registered before the edited sim
+  runs + settled with an explicit bool — the `photoperiod-claim-harness`
+  guard), **`INSTRUMENT_EDIT`** (artifact removed + quantity unchanged; no
+  prediction, because it is not a claim about the world), **`SWEEP`**, and
+  **`STAND`** (the failure is the result — the move the delivered
+  architecture cannot express). Every free-text field on every response is
+  screened for outcome reasoning, not just the one named `reason`. Four
+  verdicts (`UNDECIDED` is reachable: a predicate that raised is a broken
+  instrument, not a refuted claim) and four termination states
+  (`no_admissible_response` has no counterpart in the shape it copies).
+  Provenance is append-only JSONL with `SESSION_OPEN`/`SESSION_CLOSE`,
+  every row stamped with session and ordinal, and refused proposals logged
+  beside admitted ones. Selftest 39/39. **`delivered/`** holds an uploaded
+  adaptive framework and its two provenance logs verbatim;
+  `replay_delivered.py` runs the delivered agent's actual moves through the
+  gate. **`ACL_002`, the sharpest:** the delivered log's three-step
+  parameter walk (0.3 → 0.21 → 0.147 → 0.1029, both claims failing at
+  every step) did **not** produce the pass it appears to show — run 4 is
+  556 s later, carries the session's FIRST seed (123), and sits at the
+  ORIGINAL 0.3, which no logged action produces. It is a second invocation
+  appended to the same file, and `ProvenanceLogger` writes no session
+  field, so a reader following the parameter column across the seam reads a
+  search that never happened. Not a criticism of the agent — a property of
+  the record. **`ACL_003`:** offered to the gate, the walk is refused three
+  ways (one level is not a sweep; levels below the current setting do not
+  bracket it; an edit justified by "the claim failed" is justified by its
+  outcome) while the restatement the protocol asks for is admitted — the
+  gate refuses categories, not judgements. **`ACL_004`:** `Claim.test`
+  assigns `status = "inconclusive"` on an exception and then returns
+  `False`, and the runner reads only the bool, so a predicate that raised
+  is logged as `failed` and the agent is dispatched to fix a claim that was
+  never tested — tenth instance of the absent-vs-known-negative repair,
+  and the only one where the correct value is already in a variable one
+  line above the return. **`ACL_005`:** the termination branch is reached
+  on budget exhaustion and on success and prints one sentence for both
+  ("Final iteration or all claims passed." with both claims failed).
+  **Two findings against this module itself.** `ACL_007`: the bracketing
+  guard refused the shipped stub responder — its first version used a fixed
+  ladder `[-0.05, 0, 0.05]` and was refused the moment a scenario started
+  at advantage 0.06 — recorded rather than quietly fixed, since it is the
+  only evidence the guard fires on something nobody wrote it for.
+  `ACL_008`: `Sweep` WAS the removed move for one revision — a prose
+  gradient claim with no predicate, and a loop that walked one level per
+  iteration while re-reading the point claim — the `MF_020` shape (a design
+  incapable of failing its own falsifier) found in this module and
+  repaired: a sweep now requires a callable, runs every level in one
+  iteration, and the gradient claim replaces the point claim
+  (`p_fix across advantage [0.0, 0.06, 0.12] = [0.515, 0.698, 0.833]`).
+  `ACL_006` and `ACL_009` are the honest counterweights — the delivered
+  framework carries real spatially explicit models, claim generation and
+  figures that this does not, and the shipped responder is a stub that is
+  explicitly not the contribution, never yet run against a responder the
+  author did not write. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
