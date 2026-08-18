@@ -2500,7 +2500,56 @@ underneath).
   readouts are computable on delivery and novelty is not, needing a dated
   criticism corpus that does not exist — handled by keeping the column,
   making `NOT_DETERMINABLE` first-class, and letting it render as `None`.
-  Eighty-four claims `UNI_001..084`. Stdlib only, CC0.
+  **The 019 drop** lands three new files (`cases/019traitacquiescenceweld.md`
+  — TRAIT / ACQUIESCENCE WELD, an instance of 017 where a self-report
+  agreeableness score cannot be separated from a disposition to agree;
+  `LITERATURE.md`, an occupancy audit; `acquiescence.py`, a polarity-balance
+  decomposition, selftest 13/13) plus purely additive revisions to `016`,
+  `018` and `AVENUES.md`. **`UNI_085`, the contribution:** the occupancy audit
+  retires **4** build targets and downgrades 2 in one pass with **no
+  apparatus**, marking each retirement in place, dated, with the original
+  framing retained below it — and it **corrects this audit's own `UNI_075`**,
+  which said 018's Q4 was the demotion condition scheduled last and proposed
+  "name the ordering": the actual fix was that the literature already held the
+  answer, so the demotion condition ran for the cost of a search. Not "state
+  that the cheap arm runs first" but "check whether either arm needs running
+  at all"; now house rule in three files. **`UNI_086`, the sharp one:** 019
+  reads reverse coding halving the desirable-end skew as "a partial decoupling
+  that worked", while its source's abstract (Salecha et al., *PNAS Nexus*
+  3(12) pgae533) says the effect **"cannot be attributed to acquiescence
+  bias"** — same result, opposite conclusion, cited as support. 019's inference
+  is arguably better (a residual shows something else is *also* present, not
+  that acquiescence is absent) **and the drop already holds the citation that
+  answers its source** — the EAAMO 2025 paper it cites in the same list reports
+  reverse-coded pairs "often both answered affirmatively", acquiescence
+  observed rather than inferred. **`UNI_087`:** "reduced it by roughly half" is
+  load-bearing in Q2 and Q3 and is **not a located number**, in a paper that
+  quantifies precisely elsewhere (1.20 human SD; ~0.75 points over a batch
+  sweep). **`UNI_088`:** the source's mechanism — models inferring evaluation
+  from **how many items they see at once** — is a confound with 0 hits in 019
+  and no schema field, and by 019 Q3's own correct reasoning it lands on the
+  *corrected* TRAIT score, the reading Q2 wants to test. **`UNI_089`,
+  provable:** at the scale ceiling `TRAIT = T − c/2` and `ACQ = a − c/2`, so
+  censoring moves both readings **together, same direction, same magnitude** —
+  nothing in the pair reveals it, there is no censoring diagnostic, at true
+  trait 5.0 half the acquiescence signal is lost, and the shipped `mixed`
+  fixture puts 6 of 12 responses *exactly at* the ceiling without ever
+  crossing it. **`UNI_090`:** the reading note "uncorr minus TRAIT is the size
+  of the problem" understates the acquiescence by exactly (TRAIT − midpoint),
+  reporting **0.000 beside an ACQ of 1.000** in the pinned sample.
+  **`UNI_091`:** `BALANCE_TOL` has the right *form* (leakage is proportional
+  to the imbalance fraction) and an undeclared value admitting a +0.150 leak at
+  n=20 — a G-RES pair whose missing side is **computable**, unlike B10's
+  `HANDOFF_CEILING`. **`UNI_092`:** Q1 says "do not build past this question",
+  Q1 has not been run, and the harness shipped in the same drop — steelmanned
+  (A9 names the harness for its own recovery branch) and recorded narrowly.
+  **`UNI_093`:** 019 reattributes P1 to `DECOUPLING_PATTERNS.md`, resolving
+  `UNI_070` — the label was never 017's — while that file and `decouple.py`
+  are now named-and-absent and the revised 018 kept both stale citations.
+  **`UNI_094`:** provenance is declared and verification depth is not; 8 of 11
+  sampled claims confirm, and a two-word per-item depth marker would have
+  surfaced `UNI_086` at authoring time, since the contradicting conclusion is
+  in the abstract. Ninety-four claims `UNI_001..094`. Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
   time-series variable** — version the ruler, compute drift on its own

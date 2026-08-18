@@ -362,6 +362,9 @@ print("  " + " ".join(q4.split()))
 print()
 print("    marked: %s"
       % ("Not designed here" if "Not designed here" in q4 else "NOT MARKED"))
+answered = "LARGELY ANSWERED" in q4
+print("    answered since this claim was written: %s"
+      % ("YES -- see the block above and UNI_085" if answered else "no"))
 
 block("""
 Q4 is the entry's own demotion condition, stated by the entry. If stated
@@ -383,6 +386,14 @@ arm that could make it moot runs last, and the file does not say that. Naming
 the ordering is not the same as changing it -- there may be no way to run Q4
 first -- but a design whose demotion condition is scheduled last should say
 so where the schedule is stated.
+
+STATE CHANGE, detected by the line above rather than asserted here: Q4 has
+since been answered, negatively, and the file now says so. The repair proposed
+above was the wrong one. Q4 did not need the expensive benchmark -- the
+literature already carried the result, and a documentation audit ran the
+demotion condition for the cost of a search. Not "state that the cheap arm
+runs first" but "check whether either arm needs running at all." See
+`drop_019_audit.py` and UNI_085.
 """)
 
 # ---------------------------------------------------------------- 8

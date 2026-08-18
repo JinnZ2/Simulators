@@ -1,0 +1,26 @@
+$ python3 acquiescence.py --selftest
+13/13 checks passed
+
+$ python3 acquiescence.py samples/administration.sample.json
+TRAIT / ACQUIESCENCE DECOMPOSITION (no verdict computed)
+
+subject: synthetic (delivered synth(): mixed + acquiescer)   scale: 1-5
+
+trait                   TRAIT      ACQ     uncorr  balance
+agreeableness             4.0      1.0        4.0  6/6
+openness                  3.0      1.0        4.0  6/6
+
+ACQ ACROSS TRAITS
+  n=2  mean=1.0  spread=0.0
+
+READING NOTES
+  TRAIT and ACQ come from the SAME responses. Report both or
+  neither - reporting TRAIT alone is the weld (019).
+  ACQ near 0: agreement disposition not detected at this n.
+  ACQ positive: responses shifted toward agreement independent
+  of item direction.
+  low spread across traits: style-like (trait-general).
+  high spread: something trait-specific is in it - that is 019 Q5,
+  not a cleaner ACQ estimate.
+  'uncorr' is what gets published when polarity is ignored.
+  uncorr minus TRAIT is the size of the problem for this run.

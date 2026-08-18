@@ -1,6 +1,6 @@
 uninstrumented -- audit of the Case 018 drop
 delivered: cases/018selfreportopinioncoupling.md
-           (175 lines, 1180 words)
+           (200 lines, 1376 words)
 
 ========================================================================
 1  UNI_069  Clock 2's premise is false as stated, and the arm has no error bar
@@ -217,9 +217,10 @@ are merged back together.
 ========================================================================
 7  UNI_075  Q4 names the test that would demote the whole entry
 ========================================================================
-  The question underneath all of the above: does a model's stated limitation correspond to a measured performance boundary? If acknowledgement and measured capability are uncorrelated, the acknowledgement is not carrying assessment regardless of what produced it, and the source question becomes secondary. This is the sharper test and needs a capability benchmark aligned to the probe topics. Not designed here.
+  **LARGELY ANSWERED 2026-08-18, NEGATIVELY.** Marker confidence shifts under distribution change and marker rankings are not consistent across datasets (arXiv 2505.24778, 2605.28778); apparent consistency is mediated by hedge/no-hedge rather than marker semantics. **This demotes the whole file's source question.** If acknowledgement does not track a stable capability boundary at all, whether assessment or discourse produced it matters less than it did before the audit. Q3 remains the reason to keep the file open. Original framing: The question underneath all of the above: does a model's stated limitation correspond to a measured performance boundary? If acknowledgement and measured capability are uncorrelated, the acknowledgement is not carrying assessment regardless of what produced it, and the source question becomes secondary. This is the sharper test and needs a capability benchmark aligned to the probe topics. Not designed here.
 
     marked: Not designed here
+    answered since this claim was written: YES -- see the block above and UNI_085
 Q4 is the entry's own demotion condition, stated by the entry. If stated
 limitation and measured capability boundary are uncorrelated, the source
 question -- assessment or discourse -- stops being the interesting one,
@@ -239,6 +240,14 @@ arm that could make it moot runs last, and the file does not say that. Naming
 the ordering is not the same as changing it -- there may be no way to run Q4
 first -- but a design whose demotion condition is scheduled last should say
 so where the schedule is stated.
+
+STATE CHANGE, detected by the line above rather than asserted here: Q4 has
+since been answered, negatively, and the file now says so. The repair proposed
+above was the wrong one. Q4 did not need the expensive benchmark -- the
+literature already carried the result, and a documentation audit ran the
+demotion condition for the cost of a search. Not "state that the cheap arm
+runs first" but "check whether either arm needs running at all." See
+`drop_019_audit.py` and UNI_085.
 
 ========================================================================
 8  UNI_076  the control arm is the strongest element, and the harness is absent

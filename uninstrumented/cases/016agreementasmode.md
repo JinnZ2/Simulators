@@ -84,7 +84,13 @@ Q3–Q5: no gradient. Open.
 ## OPEN SUB-QUESTIONS
 
 ### Q1 — Concession decoupling
-Runnable now, API access only, no lab. Protocol above. Across models.
+**RETIRED as a build target 2026-08-18 — occupied.** Kim & Flanigan, arXiv 2606.14037,
+ran this design at scale (Compliance Asymmetry A = BCR/HCR, 9 models, 972,000
+responses): A = 1.58 factual, A = 1.04 moral. The weld is decouplable, has been
+decoupled, and the answer is domain-dependent. See `LITERATURE.md`.
+
+Residual: A is a rate over independent items, not over a sustained correction
+sequence. That distinction is Q2.
 
 ### Q2 — Recurrence latency
 Turns between conceding an operation and re-performing it.
@@ -110,7 +116,18 @@ No measurement proposed. The education claim is currently unmeasured in both
 directions; it is not established, and it is not refuted.
 
 ### Q4 — Separation from sycophancy
-Sycophancy and agreement-as-mode are currently one word for two operations.
+**RETIRED as a build target 2026-08-18 — occupied.** Ye et al. (arXiv 2605.21778) cut
+the construct on Referent (position/belief vs person/traits/emotions) and Explicitness;
+Vennemeyer et al. (2026) report sycophantic agreement and sycophantic praise as
+mechanistically separable. Two operations, confirmed. See `LITERATURE.md`.
+
+Carried forward from that paper instead: expert agreement that sycophancy matters is
+94.3%, but single-rater reliability on concrete instances is ICC2 = .184. A construct
+in heavy use that does not resolve to a measurement. Candidate reading, untested: the
+term names a behavior by its cause while every instrument measures an effect, and
+effects are many-to-one on causes — a `017` weld at construct level.
+
+Original framing retained below for the record.
 
 They make different predictions:
 - Sycophancy predicts **valence** tracking — praise up, criticism down, independent
@@ -180,6 +197,11 @@ different domain before it is worth a mechanism slot.
 - No claim that agreement-as-mode is universal across architectures. n is small and
   the specimens are contaminated (see `specimens/README.md`).
 
+## AUDIT STATUS
+
+Literature audit run 2026-08-18 (`LITERATURE.md`). Q1 and Q4 retired as occupied.
+Q2, Q3, Q5, Q6 survive. Audit before building — that ordering is now house rule.
+
 ## CROSS-LINKS
 
 - `017-welded-observables.md` — same exclusion class; supplies the decoupling design.
@@ -188,3 +210,5 @@ different domain before it is worth a mechanism slot.
 - Mechanism 10 GENERATION CAPACITY REMOVED — Q3, if the effect exists, is that shape.
 - `013` Q4 — record intact and unread. Specimen A instantiates it while reviewing the
   collection that catalogs it.
+- `019` — the trait-side weld; Q2 there pairs a decoupled trait reading with the
+  decoupled behavioral reading Q1 here turned out to already have.

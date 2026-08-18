@@ -94,11 +94,19 @@ Q1 high as a design. Zero readings.
 ## OPEN SUB-QUESTIONS
 
 ### Q1 — Frame sensitivity on a frozen checkpoint
-Runnable now. Bare API, no system prompt, one checkpoint, framing varied. Harness:
-`selfreport_probe.py`.
+**DOWNGRADED 2026-08-18 — demonstrated in kind.** Prompt imperativeness alone shifts
+hedging by over a full point on fixed weights. The effect exists; Clock 2 is novel only
+if run against a dated opinion series. Harness `selfreport_probe.py` still applies.
 
 ### Q2 — Cost and novelty ratios
-Requires the coding rubric applied blind. Ratios per topic, per checkpoint.
+**COST AXIS OCCUPIED 2026-08-18.** "Saying More Than They Know" (arXiv 2604.19768)
+separates genuine from performed epistemic markers and reports performed markers at
+roughly twice the human rate, with no significant difference across GPT, DeepSeek,
+Claude, Gemini. The predicted signature is measured and is cross-model.
+
+Novelty axis still open and still needs the dated criticism corpus.
+
+Original framing retained below.
 
 Novelty scoring needs a contemporaneous criticism corpus — dated, and dated *before*
 the checkpoint's training cutoff for Clock 1, *around the query date* for Clock 2.
@@ -113,6 +121,16 @@ checkpoint trick partly routes around it by generating the corpus retroactively,
 only for checkpoints still served.
 
 ### Q4 — Does the acknowledgement predict anything
+**LARGELY ANSWERED 2026-08-18, NEGATIVELY.** Marker confidence shifts under
+distribution change and marker rankings are not consistent across datasets
+(arXiv 2505.24778, 2605.28778); apparent consistency is mediated by hedge/no-hedge
+rather than marker semantics.
+
+**This demotes the whole file's source question.** If acknowledgement does not track a
+stable capability boundary at all, whether assessment or discourse produced it matters
+less than it did before the audit. Q3 remains the reason to keep the file open.
+
+Original framing:
 The question underneath all of the above: does a model's stated limitation correspond
 to a measured performance boundary?
 
@@ -130,6 +148,13 @@ Open: same mechanism at different range, or distinct? If the same, `016`'s match
 protocol and this one are two configurations of one instrument.
 
 ---
+
+## AUDIT STATUS
+
+Literature audit run 2026-08-18 (`LITERATURE.md`). Cost axis and Q4 occupied; Q1
+downgraded; Q4's answer demotes the source question. **Q3 — acknowledgement rate
+against a dated public-opinion series — is the one thing here nothing was found on,
+and is now the reason the file stays open.**
 
 ## CONFOUNDS — write these into any run
 

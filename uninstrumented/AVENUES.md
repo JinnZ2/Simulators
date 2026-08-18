@@ -126,6 +126,58 @@ Cheap enough to run first and it splits two things currently sharing a word.
 
 ---
 
+## A7 — Identifiability audit
+**Instrument for:** whether `017` is already formalized elsewhere. Documentation audit,
+no lab, no API.
+
+Structural identifiability (system identification) and causal identification criteria
+(the Pearl line) state conditions under which a quantity is recoverable from data.
+
+Question: does either treatment ask what **physical variation must exist in the
+world**, or is a data-generating process always assumed and the question always
+recovery from it?
+
+Score: SUBSTRATE VARIATION TREATED / MODEL-INTERNAL ONLY / NOT DETERMINABLE.
+
+**Run before A8 and before any further building on `017`.** Cheap, and it determines
+whether the rest is worth doing. If the formalism already covers it, adopt it — that
+outcome is `013` Q4 from the inside and is a result, not a loss.
+
+---
+
+## A8 — Necessity test on the two-part requirement
+**Instrument for:** `017` WOULD MEASURE, the necessity gap. Depends on A5 output.
+
+The catalog establishes that an orthogonal property plus a varying configuration
+**suffice**. Sampling only successes cannot establish that they are **required**.
+
+Take the negative set from A5 — welds still standing — and score each for the presence
+of (a) and (b), per component rather than pass/fail.
+
+- Standing weld with both present → the two-part account is incomplete; a third term is
+  missing and A8 has found it as an absence.
+- Every standing weld missing at least one → the account survived a real attempt.
+
+This is the only test in the file that can return a negative on the framework itself.
+`decouple.py` scores cases in this format directly.
+
+---
+
+## A9 — ACQ index audit and recovery
+**Instrument for:** `019` Q1, the gate. Documentation audit, no lab, no API.
+
+In work reporting LLM Big Five or agreeableness scores, is a response-style index
+reported alongside the trait score? Score ARS REPORTED / BALANCED BUT NOT DECOMPOSED /
+UNBALANCED INSTRUMENT / NOT DETERMINABLE.
+
+If BALANCED BUT NOT DECOMPOSED dominates, the index is recoverable from published
+item-level responses with no new collection. `acquiescence.py` scores an administration
+in that format and refuses to emit ACQ on an unbalanced set.
+
+**Run before anything else in `019`.**
+
+---
+
 ## Not pursued, and why
 
 - **Adversarial swarm / coordinated fabrication detection.** Threat model was generated
@@ -136,3 +188,13 @@ Cheap enough to run first and it splits two things currently sharing a word.
   number, not before.
 - **Self-report as evidence.** A model's account of its own failure is generated text
   from the system under test. Usable as a specimen, not as a measurement.
+- **Rebuilding `016` Q1 / `016` Q4 / `018` cost axis.** Occupied — see `LITERATURE.md`.
+  Retired 2026-08-18.
+
+---
+
+## Ordering rule, adopted 2026-08-18
+
+Audit the literature before building the instrument. The 2026-08-18 audit retired
+roughly half the queue in one pass. A9 and A7 are both gates of this kind; treat any
+new case's first question as an occupancy check unless there is a reason not to.
