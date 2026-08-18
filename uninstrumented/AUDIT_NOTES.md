@@ -5,10 +5,11 @@ Everything below is added analysis. The delivered files are
 [`scan.py`](scan.py), all verbatim. Added here:
 [`uninstrumented.py`](uninstrumented.py) (the register as code, three
 checks on itself), [`scan_audit.py`](scan_audit.py) (grades the scanner),
-[`case_010_audit.py`](case_010_audit.py) and
-[`case_011_audit.py`](case_011_audit.py) (checks on the two delivered
-cases) and [`CLAIM_TABLE.md`](CLAIM_TABLE.md). `cases/case-010.md` and
-`cases/case-011.md` are delivered, verbatim.
+[`case_010_audit.py`](case_010_audit.py),
+[`case_011_audit.py`](case_011_audit.py) and
+[`case_012_audit.py`](case_012_audit.py) (checks on the three delivered
+cases) and [`CLAIM_TABLE.md`](CLAIM_TABLE.md). `cases/case-010.md`,
+`cases/case-011.md` and `cases/case-012.md` are delivered, verbatim.
 
 The delivered README supersedes what follows on two points, and both are
 carried into the claim table rather than silently corrected:
@@ -491,3 +492,188 @@ the tick where the cost of reversal passes the cost of continuation — and
 `../sustained-activation-gate/` holds the restore-versus-coupling
 trade-off. Q2's *"same total water across 40 years versus across 4 years"*
 is a repair rate against an arrival rate, which is that crossing.
+
+---
+
+## Case 012 — the first entry whose confidence can be checked
+
+`cases/case-012.md`, delivered verbatim. Checks in
+[`case_012_audit.py`](case_012_audit.py); claims `UNI_027..033`.
+
+Third consecutive case the schema cannot hold. It is also the first where
+the stated confidence is not a string to be recorded but a claim that can
+be settled, and settling it is the first section.
+
+### UNI_027 — Q1 is arithmetic, and it holds
+
+The entry rates Q1 "high — arithmetic, not hypothesis". That is checkable,
+so it is checked rather than recorded.
+
+Let class *i* deliver `n_i` loads of value `v_i` each at freight cost `f_i`
+each. The published aggregate is total freight over total value, and it
+rearranges:
+
+    F / V  =  Σ n_i f_i / Σ n_i v_i  =  Σ ( n_i v_i / V ) · ( f_i / v_i )
+
+The aggregate **is** a mean of the per-class ratios, weighted by each
+class's share of total **value**. Not a summary of freight burden across
+classes — a summary tilted toward whichever class carries the dollars.
+
+| illustrative class | value/load | freight | ratio | $ weight |
+|---|---|---|---|---|
+| electronics, dry van | 500,000 | 2,000 | 0.40% | 87.11% |
+| produce, reefer | 45,000 | 3,200 | 7.11% | 7.84% |
+| structural steel, flatbed | 20,000 | 2,500 | 12.50% | 3.48% |
+| transformer, oversize | 180,000 | 14,000 | 7.78% | 1.57% |
+
+    aggregate F/V                    =  1.463%
+    same, as the weighted mean above =  1.463%   (identity exact)
+    worst class's own ratio          = 12.500%
+    understatement factor            =    8.5x
+
+The numbers are illustrative and are not data. What they show is the
+mechanism, and the mechanism is exact: **Q1 is right in a stronger sense
+than it claims for itself.** It does not need any freight figure to be
+correct. Any mix in which value-density varies across classes produces the
+effect, and it is largest exactly where the entry says the interesting
+classes are.
+
+This makes Case 012 the first entry whose confidence field is adjudicable
+rather than merely recorded (`UNI_014`, `UNI_021`) — and it adjudicates in
+the entry's favour.
+
+### UNI_028 — a fourth confidence state
+
+> Q1: high — arithmetic, not hypothesis.
+> Q2, Q3, Q4 as causal chains: not stated. Each needs Q1's data to exist
+> before a gradient means anything.
+
+| state | first seen |
+|---|---|
+| `high`, one string | 8 of 8 original entries |
+| one gradient (~40%) | Case 010 |
+| deliberately absent, with the reason | Case 011 |
+| **split across sub-questions** | Case 012 |
+
+`entry()` takes one string. Three cases, three distinct failures of that
+one field: too coarse (`UNI_014`), cannot record a reasoned absence
+(`UNI_021`), cannot record a split (here). The `UNI_020` sub-entry repair
+reaches a second field, and for the same reason — the questions close at
+different times, on different evidence.
+
+### UNI_029 — a negative-provenance record
+
+No precedent in this register, no slot in the schema, and the strongest
+methodological move in the drop.
+
+Every prior literature finding in this drop family runs the other
+direction. `ANC_010`, `CD_009`, `RD_015` and `HO_005` are citation markers
+that pointed outside the delivery, caught afterwards by an auditor and
+marked UNVERIFIED. Case 012 marks the numbers **before** anyone builds on
+them — names them, names where they circulate, states that no
+peer-reviewed origin was located, and says why the note exists: *"recorded
+so the next reader does not mistake them for literature."*
+
+An entry carrying its own do-not-use list does the auditor's job at the
+point where it is cheap: at authoring time, by the person who knows which
+numbers were tempting. Doing it afterwards is what costs.
+
+Checked, not assumed — none of `4.75`, `5.25` or the jet-fuel claim
+appears anywhere in the entry's reasoning outside the note itself. The
+jet-fuel item is filed the same way: attributed to a source class ("at
+least one large 3PL"), marked unverified, listed as a check rather than as
+a finding.
+
+### UNI_030 / UNI_031 — one occasion verifies, one figure does not
+
+The pass-through result checks out in full: ~50% immediate, ~100% within a
+week, carriers unable to absorb it on thin margins in a competitive
+market — including the mechanism the entry attributes it to. Third
+consecutive occasion in this register that verifies, after `UNI_015` and
+`UNI_023`.
+
+The rate figure does not.
+
+| | |
+|---|---|
+| entry states | flatbed roughly **$0.70–$1.20/mile** above dry van, 2026 spot data |
+| located | **$0.48/mile** (March 2026, stated directly) |
+| located | early-2026 averages: dry van $2.47, flatbed $2.95 → **$0.48** independently |
+| located | late July 2026: flatbed $3.72, reefer $3.39, no matched dry van figure |
+
+The stated range sits above everything located, and two independent routes
+give the same $0.48. No matched-date pair was found for late 2026, when
+flatbed alone is quoted much higher, so the range may hold at some date or
+on some lanes — but not in the 2026 spot data the entry cites.
+
+**It does not touch Q1.** Q1 is the identity above and holds for any mix
+with varying value-density; the premium is one input to the numerator Q1's
+WOULD MEASURE asks for, and it appears to be about half the stated size.
+A magnitude correction, not a structural one.
+
+### UNI_032 — Q4 splits three ways
+
+**The falsifier partially fires.** BLS publishes which item categories use
+hedonic quality adjustment and publishes the share: excluding shelter,
+approximately **2.9% of the CPI**. The adjusted set is enumerable and
+weighted, which is most of what Q4 asks for.
+
+**The asymmetry is confirmed by that same list.** Personal computers,
+televisions, consumer audio, VCRs, camcorders, DVD players, apparel,
+microwave ovens, refrigerators, college textbooks, broadband for PPI —
+the high-value-density consumer set, exactly as predicted. Neither food
+nor electricity appears, so *"a calorie has no new features. A
+kilowatt-hour has no new features"* is borne out by which categories the
+method is actually applied to.
+
+**The magnitude constrains the mechanism.** Q4's test is that "the
+aggregate can be held level by hedonic credit accruing to deniable-quality
+goods while substrate goods degrade in real terms". At ~2.9% ex-shelter
+that channel has a published upper bound on its leverage, and the bound is
+small. The claim is now quantitative, and the number is against it.
+
+**And there is a denominator switch.** Q4 is about **GDP real output**
+(BEA, via deflators); the located share is the **CPI** (BLS). Related, not
+the same aggregate — so the bound applies to one and leaves the other
+unchecked. That is `../measurement-fork/`'s VOID RATIO shape arriving
+inside a falsifier rather than inside a result.
+
+Not checked: whether "the quality dimensions come largely from the
+producer's own account of what improved". BLS hedonic models use product
+characteristics data whose provenance was not established here.
+
+### UNI_033 — Q3's halves have opposite status
+
+**The non-linearity is open, with the sharpest falsifier in the drop.** It
+fails "if reefer loads past viability are in practice rerouted or
+downgraded at a rate that smooths the discontinuity" — a specific industry
+practice that either happens at a measurable rate or does not, and either
+answer is informative. A reachable negative, so not `CONSTANT_SILENT`.
+
+The methodological line under it is stronger than the claim and stands
+alone: *"Smooth elasticity models do not generate discontinuities — the
+functional form is wrong before any parameter is estimated."* That is
+`../climate-modeling/`'s cascade-speed result in a third domain, and this
+repo already holds it twice (`PhaseChangeAudit`, and
+`../sustained-activation-gate/`'s double well).
+
+**The accounting claim is true by construction and needs no search.**
+Household food purchases are final consumption expenditure — they enter
+GDP on the output side, as C. Labour is a *primary* input rather than a
+produced one, so it has no row in the intermediate input-output matrix,
+and the calories that sustain it are intermediate consumption of no
+industry. The entry's sentence —
+
+> The one input without which no other input can be produced is recorded
+> as a consumption category
+
+— is a correct description of the framework, not a contested reading of
+it.
+
+That inverts this register's usual pattern. The half carrying "WOULD
+MEASURE: unclear, flagged as needing an instrument" is the **established**
+half; the half with a clean falsifier is the one still open. The
+instrument is missing not because the fact is uncertain but because the
+framework has no slot for the quantity — which is this register's own
+subject, and makes Q3 the entry's best candidate for a filed mechanism if
+one had to be chosen today.

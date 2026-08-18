@@ -1,9 +1,11 @@
 # CLAIM_TABLE — uninstrumented
 
-Twenty-six claims, `UNI_001..026`. **Three repaired** (`UNI_003`,
+Thirty-three claims, `UNI_001..033`. **Three repaired** (`UNI_003`,
 `UNI_009`, `UNI_010`), see *Repairs* at the end. `UNI_013..019` come from
-the Case 010 drop ([`case_010_audit.py`](case_010_audit.py)) and
-`UNI_020..026` from Case 011 ([`case_011_audit.py`](case_011_audit.py)).
+the Case 010 drop ([`case_010_audit.py`](case_010_audit.py)),
+`UNI_020..026` from Case 011 ([`case_011_audit.py`](case_011_audit.py))
+and `UNI_027..033` from Case 012
+([`case_012_audit.py`](case_012_audit.py)).
 
 ## REFUTATION_PROTOCOL
 
@@ -335,6 +337,26 @@ marked; they are not reproducible by running the audit script.
 | `UNI_024` | Q1's falsifier fires on one of the three things its own sentence bundles. **Antecedent moisture is instrumented and dramatic** — saturated soil turns a 7-year rainfall into a 100-year flood; dry soil turns a 200-year rainfall into a 15-year flood — and compound-hazard modelling is an active quantified field. No design-standard variable for **unrepaired works or spent response capacity** was located. The sharper statement: the field instruments the antecedent state of the **hazard** and not of the **system**. | SUPPORTED (narrows the entry) | A design standard carrying a pre-event repair-completion term. |
 | `UNI_025` | Q3's falsifier partially fires, **along the boundary of whoever keeps the record**. FEMA HMGP acquisitions are required to be voluntary (owner consent attributed, eminent domain excluded) and the administering authority's property selection is recorded — so two of the four pathways have attribution. Insurer withdrawal and lender refusal are decisions by parties the program does not administer and cannot appear in its record. The entry's own `generation-capacity` link is instanced: "voluntary" truthfully attributes the final step over an option set generated upstream. | SUPPORTED (narrows the entry) | A record carrying insurer- or lender-initiated non-reoccupation. |
 | `UNI_026` | Three of four cross-links resolve. `rural` is not only present but accurately characterised — tracked by `density`, with `self_support` among the welded components, which is the entry's "counts headcount, not what is holding". **`rate-mismatch-polytope` does not exist anywhere in the tree** — seventh instance of a reference naming an absent artifact. Nearest existing kin: `rigidification-sensor/` runs Q2's comparison already (`locked_at` is the tick where reversal cost passes continuation cost) and `sustained-activation-gate/` holds the restore-vs-coupling trade-off. | SUPPORTED | The folder arriving, as three of the six prior instances did. |
+
+## Case 012 drop — UNI_027..033
+
+Case 012 (`cases/case-012.md`, delivered verbatim) is the third
+consecutive delivered case the schema cannot hold, and the **first whose
+stated confidence is checkable by computation** rather than recorded
+verbatim. Worked in [`case_012_audit.py`](case_012_audit.py).
+
+Four of these were checked against the open web on 2026-08-18 and are
+marked. `UNI_027` is arithmetic and is reproducible by running the script.
+
+| id | statement | status | falsifier |
+| --- | --- | --- | --- |
+| `UNI_027` | Q1's "high — arithmetic, not hypothesis" **holds, and holds more strongly than claimed**. The aggregate freight-to-value ratio is identically a value-weighted mean of per-class ratios: `F/V = Σ (n_i·v_i/V)·(f_i/v_i)`. It is algebra, not a model, and needs no freight data to be right. Demonstrated on a plausible mix: one class at 87% of the dollar weight pulls the aggregate to 1.46% while the worst-affected class sits at 12.50% — 8.5× understatement. First entry whose confidence field is adjudicable, and it adjudicates in the entry's favour. | SUPPORTED *(reproducible)* | An arrangement of classes where the identity fails. |
+| `UNI_028` | A **fourth** confidence state: split across the cluster (Q1 high, Q2–Q4 not stated, with the reason). `entry()` takes one string. Three cases, three distinct failures of that one field — too coarse (`UNI_014`), cannot record a reasoned absence (`UNI_021`), cannot record a split (here). The `UNI_020` sub-entry repair reaches a second field. | SUPPORTED | Per-question `confidence` on a cluster entry. |
+| `UNI_029` | The NOTE ON A CIRCULATING NUMBER is a **negative-provenance record** — no precedent in this register, no slot in the schema, and the inverse of every prior literature finding here (`ANC_010`, `CD_009`, `RD_015`, `HO_005` are all markers found by an auditor afterwards). It names the numbers, where they circulate, that no peer-reviewed origin was located, and why the note exists. Verified: none of `4.75`, `5.25` or the jet-fuel claim appears anywhere in the entry's reasoning. | SUPPORTED (holds) | A reasoning step depending on one of the flagged numbers. |
+| `UNI_030` | The published finding checks out: ~50% immediate pass-through, ~100% within a week, carriers unable to absorb it on thin margins in a competitive market — including the mechanism the entry attributes the result to. Third consecutive occasion in this register that verifies. | SUPPORTED *(web, 2026-08-18)* | The pass-through figures failing to match. |
+| `UNI_031` | The rate figure **does not check out as stated**. Entry: flatbed "roughly $0.70–$1.20/mile above dry van, 2026 spot data". Located: $0.48/mile (March 2026, stated directly), and early-2026 averages of $2.47 dry van vs $2.95 flatbed give the same $0.48 independently. No matched-date pair located for late 2026. **Does not touch Q1**, which is an identity — it halves a downstream magnitude, not the structure. | SUPPORTED | A matched-date 2026 spot pair in the stated range. |
+| `UNI_032` | Q4 splits three ways. Its falsifier **partially fires** — BLS publishes the hedonic category list and its share, ~2.9% of the CPI ex-shelter. The **asymmetry is confirmed by that list** (PCs, TVs, audio, camcorders, DVD players, apparel, appliances, textbooks, broadband; neither food nor electricity). But the **magnitude constrains the mechanism**: "the aggregate can be held level by hedonic credit" now has a published upper bound and it is small. And there is a **denominator switch** — Q4 is about GDP real output (BEA), the located share is CPI (BLS), which is `measurement-fork`'s VOID RATIO inside a falsifier. | SUPPORTED (narrows the entry) | A published BEA adjustable-vs-non-adjustable real-output decomposition. |
+| `UNI_033` | Q3's two halves have **opposite epistemic status**. The non-linearity is a hypothesis with the sharpest falsifier in the drop and no data either way (reachable negative, so not `CONSTANT_SILENT`); the accounting claim is **true by construction** — household food is final consumption expenditure, labour is a primary input with no row in the intermediate matrix, so the calories sustaining it are intermediate consumption of no industry. The half marked "WOULD MEASURE: unclear" is the established one; the instrument is missing because the framework has no slot for the quantity, which makes Q3 the entry's best candidate for a filed mechanism. | SUPPORTED | An input-output framework carrying calories as intermediate consumption. |
 
 ## Repairs
 

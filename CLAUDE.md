@@ -2157,7 +2157,53 @@ underneath).
   instance of that shape) — while Q2's hypothesis is already modelled twice
   here under other names, in `rigidification-sensor/simulator.py`'s
   `locked_at` and `sustained-activation-gate/`'s restore-vs-coupling
-  trade-off. **REPAIRED:** `UNI_003` (`entry()` takes a primary plus
+  trade-off.
+  **`cases/case-012.md`** is the third case the schema cannot hold and the
+  first whose stated confidence is **settled by computation rather than
+  recorded**. Fuel-cost incidence on low-value-density freight, against the
+  published finding that diesel pass-through is ~50% immediate / ~100%
+  within a week while the consumer-price effect is "limited" because
+  transport is a small share of product cost. **`UNI_027`:** the entry
+  rates Q1 "high — arithmetic, not hypothesis" and that is exactly right,
+  provably — the aggregate freight-to-value ratio is identically a
+  **value-weighted** mean of per-class ratios, `F/V = Σ(n_i·v_i/V)·(f_i/v_i)`,
+  so it reports whichever class carries the dollars. Demonstrated on a
+  plausible mix: one class at 87% of the dollar weight pulls the aggregate
+  to 1.46% while the worst-affected class sits at 12.50%, an 8.5×
+  understatement, and the identity holds to machine precision. First entry
+  whose confidence field is adjudicable, and it adjudicates in the entry's
+  favour — Q1 needs no freight data to be right. **`UNI_028`:** a fourth
+  confidence state, **split across the cluster** (Q1 high, Q2–Q4 not
+  stated, with the reason), so three cases have now produced three distinct
+  failures of one string field — too coarse, cannot record a reasoned
+  absence, cannot record a split. **`UNI_029`:** the NOTE ON A CIRCULATING
+  NUMBER is a **negative-provenance record** with no precedent here and no
+  schema slot — it marks two circulating figures and a 3PL claim *before*
+  anyone builds on them, which is the inverse of `ANC_010`/`CD_009`/
+  `RD_015`/`HO_005`, all caught afterwards by an auditor; verified that
+  none of the flagged numbers appears in the entry's own reasoning.
+  **`UNI_030`/`UNI_031`:** the pass-through result checks out in full
+  (third consecutive verifying occasion), and the rate figure does not —
+  the entry cites flatbed "$0.70–$1.20/mile above dry van, 2026 spot" where
+  the located premium is **$0.48**, reached two independent ways; it halves
+  a downstream magnitude and does not touch Q1, which is an identity.
+  **`UNI_032`:** Q4 splits three ways — its falsifier partially fires (BLS
+  publishes the hedonic category list and its share, ~2.9% of CPI
+  ex-shelter), the **asymmetry is confirmed by that list** (PCs, TVs,
+  apparel, appliances, broadband; neither food nor electricity), and the
+  **magnitude runs against the mechanism**, since "the aggregate can be
+  held level by hedonic credit" now has a published upper bound and it is
+  small — plus a denominator switch, since Q4 is about GDP real output
+  (BEA) and the located share is CPI (BLS), which is `measurement-fork`'s
+  VOID RATIO inside a falsifier. **`UNI_033`:** Q3's two halves have
+  opposite status — the non-linearity is open with the sharpest falsifier
+  in the drop (reachable negative, not `CONSTANT_SILENT`), while the
+  accounting claim is **true by construction**: household food is final
+  consumption expenditure and labour is a primary input with no row in the
+  intermediate matrix, so the calories sustaining it are intermediate
+  consumption of no industry. The half marked "WOULD MEASURE: unclear" is
+  the established one, which inverts the register's usual pattern and makes
+  Q3 the entry's best candidate for a filed mechanism. **REPAIRED:** `UNI_003` (`entry()` takes a primary plus
   an `also` list and the register sorts under every mechanism — which is
   what lets check 1 return anything but zero: 5 mechanisms now hold entries
   from more than one field, though weakly, since the secondaries were
@@ -2175,7 +2221,7 @@ underneath).
   enforced one mechanism per sentence — it does not, the `break` exits the
   trigger loop and mechanisms already co-fire, so the wrong-mechanism
   finding was a missing trigger rather than a blocked co-firing. Nineteen
-  claims `UNI_001..026`. Stdlib only, CC0.
+  claims `UNI_001..033`. Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
   time-series variable** — version the ruler, compute drift on its own
