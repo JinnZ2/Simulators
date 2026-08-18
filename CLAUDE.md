@@ -2726,7 +2726,36 @@ underneath).
   decomposed. `criterion_fixed_in_advance` carries the same discipline
   into the read, naming the failure and the routing for the ambiguous case
   (MIXED with the reason recorded) before any domain is read. `DL_004`
-  stands: `SKELETON` still carries neither guard field. CC0.
+  stands: `SKELETON` still carries neither guard field.
+  **Third drop lands `anchor.py`**, a companion on the argument that
+  coverage "resolves position inside a band that something else already
+  set". Three bands by class of support (`none` 0.30 / `external` 0.80 /
+  `cycle_persistent` 0.99) and three routing states per provenance link;
+  selftest 14/14. **`DL_008`:** it keeps `unrouted` and
+  `absent_established` apart and says why — "collapsing them into
+  'blocked' loses the distinction the map exists for" — which is the
+  **fifth instance of one repair** across this family (`PB_004`,
+  `PB_012`, `GC_004`, `MD_002`, `GC_010`) and the **first implemented**
+  rather than specified: counted separately in the readout and restated in
+  `blocking()`'s own output. **`DL_009`:** `target_band` and
+  `corroboration.class` are both described as band-setting and only the
+  second reaches any document-level field — an anchor with
+  `target_band=cycle_persistent` (0.99) and external corroboration yields
+  a document ceiling of 0.80, and the selftest pins exactly that, so the
+  code follows the BANDS heading while the opening paragraph ("anchoring
+  near something that has survived generational cycles raises the number")
+  describes a quantity the code records and never aggregates.
+  **`DL_010`:** the refusal to emit a composite is real and
+  selftest-enforced (`"no composite emitted"`), which is `DL_001` one step
+  further than `ledger.py` goes — and the two numbers it does emit,
+  `ceiling` and `anchor_spread` (exactly four values: 0.0 / 0.19 / 0.5 /
+  0.69), are functions of three stipulated constants with rationales and
+  no derivation, the same shape as `HANDOFF_CEILING` which B10 discloses
+  and this does not. **`DL_004` half-closes:** `anchor.py`'s `SKELETON`
+  carries `open`, which `ledger.py`'s does not — same author, next tool,
+  half the gap fixed unprompted; `criterion_fixed_in_advance` is in
+  neither and `anchor.py` does not read it, which is consistent since an
+  anchor map does not classify. `DL_005` recurs unchanged. CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

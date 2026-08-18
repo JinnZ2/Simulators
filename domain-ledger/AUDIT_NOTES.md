@@ -6,9 +6,14 @@ is not modified.
     python3 ledger.py --selftest
     python3 ledger_audit.py
 
-## What the drop is
+## What the folder is
 
-One file. A ledger that makes a confidence readout **derived instead of
+Two files. `ledger.py` records how much of a domain space a shape was read
+across; `anchor.py` records what the shape grounds to and what band that
+support already occupies. The companion's framing: coverage "resolves
+position inside a band that something else already set."
+
+`ledger.py` — A ledger that makes a confidence readout **derived instead of
 asserted**, by recording the domain set a coverage number was taken over.
 
 Four readouts, deliberately not combined: **coverage** (domains where the
@@ -18,13 +23,21 @@ domains read), **truncated** (reads cut short at a discomfort threshold /
 domains read). Plus a **reservation** — a standing fraction held as
 unknown.
 
-Selftest passes 13/13.
+Selftest 13/13.
+
+`anchor.py` — three bands set by the class of support (`none` 0.30,
+`external` 0.80, `cycle_persistent` 0.99) and three routing states per
+provenance link (`routed` / `unrouted` / `absent_established`). Emits no
+composite confidence figure, by design and by assertion in its own
+selftest. 14/14.
 
 ## File status
 
 | file | status |
 |------|--------|
 | `ledger.py` | delivered, verbatim |
+| `anchor.py` | delivered drop 3, verbatim — companion; selftest 14/14 |
+| `anchors/` | not delivered — no anchor map has been recorded |
 | `shapes/hierarchy-cut-generation.json` | delivered drop 2, verbatim — 30 domains, 0 read, asserted coverage 0.61 |
 | `README.md`, `CLAIM_TABLE.md` | not delivered |
 | `ledger_audit.py` | added |
@@ -45,6 +58,9 @@ in the author's mouth.
 | DL_004 | `detail()` reads `criterion_fixed_in_advance` and `open`; `SKELETON` carries neither, so `--new` never prompts for the pre-registration guard — `CW_015` repeated in a second folder | either field entering `SKELETON` | SUPPORTED |
 | DL_006 | The first shape instances the tool's own argument: an asserted 0.61 sits beside a derived `--`, and `detail()` prints "ledger not yet populated" rather than substituting the asserted value or a zero | the derived column filling in and disagreeing with 0.61 | SUPPORTED (holds) |
 | DL_007 | The shape names which of `category-weld/welds/hierarchy.json`'s five senses it runs on, and pre-classifies two domains by sense before reading — the first time in this drop family that a stated cross-folder precondition is met | — | SUPPORTED (holds) |
+| DL_008 | `anchor.py` keeps `unrouted` and `absent_established` apart and states that collapsing them "loses the distinction the map exists for" — the fifth instance of this repair in the family and the first implemented, counted separately and restated in the output | the two collapsing anywhere in the readout | SUPPORTED (holds) |
+| DL_009 | `target_band` and `corroboration.class` are both described as band-setting; only the second reaches any document-level readout, and `target_band` is computed, printed per anchor, and aggregated by nothing | `target_band` entering a document-level field | SUPPORTED |
+| DL_010 | The refusal to emit a composite is real and selftest-enforced; the two numbers it does emit (`ceiling`, `anchor_spread`) are functions of three stipulated constants with rationales and no derivation, and unlike `HANDOFF_CEILING` this is not disclosed | a derivation for 0.30 / 0.80 / 0.99, or a disclosure line | SUPPORTED |
 | DL_005 | With no `shapes/` directory the tool prints a well-formed report with zero rows and exits 0, where all three sibling scorers refuse on stderr with rc 1 | the empty state refusing, or saying it is empty | SUPPORTED |
 
 ## 1 — DL_001, the idea and two choices that follow
@@ -213,6 +229,122 @@ before any domain is read. `DL_004` stands unchanged — `SKELETON` carries
 neither field, so a shape from `--new` starts without them — and the
 delivered shape shows what they are for.
 
+## 8 — DL_008, the repair, implemented
+
+`anchor.py`'s PROVENANCE CHAINS section:
+
+> **routed** — a path to the next link exists and is stated
+> **unrouted** — no path found yet. Alternate paths not exhausted.
+> **absent_established** — investigated and the link genuinely does not
+> ground that way. Not a failure — a finding, and its own measurement
+> problem needing instrumentation.
+>
+> Collapsing unrouted and absent_established into "blocked" loses the
+> distinction the map exists for.
+
+Fifth instance of one repair across this drop family, and the second built
+in rather than found:
+
+    PB_004   frame_sim option_gain        0 options found == never ran
+    PB_012   binary_audit handoff()       above ceiling == never checked
+    GC_004   MECHANISM_10 R3              not cited == no corpus searched
+    MD_002   moral-decomposer reduces_to  irreducible == routed elsewhere
+    GC_010   SUBCASE_10A S1               absent vs zero, designed in
+    DL_008   anchor.py routing states     unrouted vs absent_established
+
+    one unrouted + one absent_established -> unrouted_total 1, absent_total 1
+
+`GC_010` was the first time the distinction was specified ahead of code.
+This is the first time it is **implemented** — counted separately in the
+readout, and restated in `blocking()`'s output rather than left to the
+reader's memory.
+
+What it is not: a reading. No `anchors/` file exists, so the three states
+have never been assigned to a real link.
+
+## 9 — DL_009, one of two band-setting fields is aggregated
+
+The opening paragraph and the BANDS heading name different fields:
+
+> What sets the band is where the shape ANCHORS: what it grounds to, and
+> what band **that anchor already occupies**.
+
+> BANDS — set by the **class of support**, not by sampling effort.
+
+The schema carries both, and on an anchor where they differ:
+
+    target_band          cycle_persistent (0.99)
+    corroboration class  external (0.80)
+    document ceiling     0.80
+
+`target_band` is computed per anchor, printed by `detail()`, and
+aggregated by nothing — `ceiling_class`, `ceiling`, `anchor_spread`,
+`chains_complete`, `unrouted_total` and `absent_total` all ignore it.
+Anchoring to thermodynamics, a cycle-persistent target, gives a document
+ceiling of 0.80 because the corroboration is external.
+
+**The selftest pins exactly this**: its `thermo` anchor has
+`target_band=cycle_persistent` and the asserted check is `ceiling == 0.80`.
+The choice is deliberate and the BANDS heading is the one the code follows.
+
+The residue is the opening paragraph, which says anchor proximity sets the
+band and that "anchoring near something that has survived generational
+cycles raises the number". On the delivered code it does not — proximity
+raises `target_ceiling`, which no readout uses. Which of the two sentences
+is right is a design question; what is checkable is that a field the
+docstring calls band-setting reaches no readout.
+
+## 10 — DL_010, a real refusal over stipulated constants
+
+> No composite figure is emitted. Weighting near against far anchors is
+> not specified, and a number produced by guessing at it would be less
+> honest than the anchors themselves.
+
+The selftest asserts it — `("no composite emitted", "confidence" not in s)`
+— so the refusal is enforced, not promised. That is `DL_001`'s
+refusal-of-reduction one step past where `ledger.py` takes it, and the
+strongest instance in the family.
+
+Two numbers are emitted and both are functions of three stipulated
+constants:
+
+    BAND_CEILING   {none: 0.30, external: 0.80, cycle_persistent: 0.99}
+    anchor_spread  takes exactly four values: 0.0, 0.19, 0.5, 0.69
+
+The three have stated rationales — no external body behind it, one reading
+of outside material, held across cycles — and no derivation.
+`anchor_spread` is a difference of two of them and inherits that.
+
+Same shape as `presented-binary`'s `HANDOFF_CEILING`, which B10 discloses
+in its own weak-point line. Here the equivalent line is not written. The
+tool refuses to guess at the weighting *between* bands and stipulates the
+bands themselves — a defensible split, not stated as one.
+
+The bands are ordinal by construction (`BAND_ORDER`) and `ceiling_class`
+is the ordinal readout. `ceiling` converts the ordinal to a number, which
+is the step with nothing behind it — `criteria-drift` `CD_002`'s
+ordinal-compared-as-nominal, arriving from the opposite direction.
+
+## 11 — DL_004, half the gap closes in the next tool
+
+    ledger.py SKELETON : asserted_coverage, domains, reservation, shape,
+                         source, statement
+    anchor.py SKELETON : anchors, asserted_confidence, open, sense, shape,
+                         statement
+
+    open                        ledger: False   anchor: True
+    criterion_fixed_in_advance  ledger: False   anchor: False
+
+`anchor.py` carries `open` in its skeleton. Same author, next tool, half
+the gap closed without being asked. `criterion_fixed_in_advance` is in
+neither — and `anchor.py` does not read it at all, which is consistent:
+the field belongs to a read that classifies domains, and an anchor map
+does not classify.
+
+`DL_004` stands for `ledger.py` unchanged, with the direction of travel
+recorded beside it. `DL_005` recurs unchanged too — `anchor.py` with no
+`anchors/` directory prints headers and its full footer and exits 0.
+
 ## Relation to the rest of the repo
 
 - `criteria-drift/`, `anchor-interval/` — §1. Same identifiability
@@ -222,6 +354,8 @@ delivered shape shows what they are for.
   with a schema slot, and the template gap comes with it.
 - `presented-binary/` — §3 is `PB_007`'s shape on a different scalar, in
   a tool that avoided it on three others.
+- `presented-binary/` — §10. `HANDOFF_CEILING` and `BAND_CEILING` are the
+  same kind of constant; B10 discloses its one, `anchor.py` does not.
 - `triad-playground/`, `reasoning-dial/` — `truncated` and `channel`
   record where a reading stopped and how it was taken, which is the
   observer-state axis `TP_006` and `RD_009` both name as unbuilt. Here it

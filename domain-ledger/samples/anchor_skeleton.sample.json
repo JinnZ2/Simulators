@@ -1,0 +1,28 @@
+{
+  "shape": "example",
+  "sense": "",
+  "statement": "",
+  "asserted_confidence": null,
+  "anchors": [
+    {
+      "target": "",
+      "target_band": "none",
+      "corroboration": {
+        "class": "none",
+        "study_count": null,
+        "note": ""
+      },
+      "chain": [
+        {
+          "link": "",
+          "state": "unrouted",
+          "quantified": false,
+          "paths_attempted": [],
+          "paths_open": [],
+          "note": ""
+        }
+      ]
+    }
+  ],
+  "open": []
+}

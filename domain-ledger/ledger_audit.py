@@ -16,6 +16,9 @@ import contextlib
 import io
 import os
 
+import itertools
+
+import anchor as A
 import ledger as L
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -31,7 +34,7 @@ def head(n, cid, title):
 
 
 print("domain-ledger -- audit of the delivered drop")
-print("delivered: ledger.py")
+print("delivered: ledger.py, anchor.py (companion, drop 3)")
 print("not delivered: shapes/, README.md, CLAIM_TABLE.md")
 buf = io.StringIO()
 with contextlib.redirect_stdout(buf):
@@ -296,7 +299,176 @@ without them -- and the delivered shape shows what the fields are for.
 """.strip())
 
 
+# ------------------------------------------------------------------ DL_008
+head(8, "DL_008", "anchor.py builds the repair as its stated reason for existing")
+buf = io.StringIO()
+with contextlib.redirect_stdout(buf):
+    rc = A.selftest()
+print("anchor.py selftest: %s, rc=%d" % (
+    buf.getvalue().strip().splitlines()[-1], rc))
+print("""
+The companion's PROVENANCE CHAINS section keeps three routing states apart:
+
+    routed              a path to the next link exists and is stated
+    unrouted            no path found yet. Alternate paths not exhausted.
+    absent_established  investigated and the link genuinely does not ground
+                        that way. Not a failure -- a finding, and its own
+                        measurement problem needing instrumentation.
+
+    Collapsing unrouted and absent_established into "blocked" loses the
+    distinction the map exists for.
+
+That is the fifth instance of one repair in this drop family, and the
+second built in rather than found:
+
+    PB_004   frame_sim option_gain        0 options found == never ran
+    PB_012   binary_audit handoff()       above ceiling == never checked
+    GC_004   MECHANISM_10 R3              not cited == no corpus searched
+    MD_002   moral-decomposer reduces_to  irreducible == routed elsewhere
+    GC_010   SUBCASE_10A S1               absent vs zero, designed in
+    here     anchor.py routing states     unrouted vs absent_established
+""".strip())
+d = {"anchors": [{"corroboration": {"class": A.NONE}, "chain": [
+    {"link": "u", "state": A.UNROUTED}, {"link": "a", "state": A.ABSENT}]}]}
+sc = A.score(d)
+print()
+print("  one unrouted link + one absent_established link ->")
+print("    unrouted_total %d   absent_total %d   reported apart" % (
+    sc["unrouted_total"], sc["absent_total"]))
+print("""
+GC_010 was the first time the distinction was specified ahead of code.
+This is the first time it is implemented, counted separately in the
+readout, and restated in the output -- `blocking()` closes with the
+paragraph rather than assuming the reader remembers it.
+
+What it is not: a reading. No anchors/ file has been recorded, so the
+three states have never been assigned to a real link.
+""".strip())
+
+# ------------------------------------------------------------------ DL_009
+head(9, "DL_009", "two fields are described as band-setting; one is aggregated")
+print("""
+The opening paragraph and the BANDS heading name different fields:
+
+    What sets the band is where the shape ANCHORS: what it grounds to, and
+    what band THAT ANCHOR ALREADY OCCUPIES.
+
+    BANDS -- set by the CLASS OF SUPPORT, not by sampling effort.
+
+The schema carries both. `target_band` is what the anchor already occupies;
+`corroboration.class` is the class of support for reaching it. Measured on
+an anchor where they differ:
+""".strip())
+doc = {"shape": "s", "sense": "x", "anchors": [
+    {"target": "thermodynamics", "target_band": A.CYCLE_PERSISTENT,
+     "corroboration": {"class": A.EXTERNAL, "study_count": 200},
+     "chain": [{"link": "a", "state": A.ROUTED}]}]}
+sc = A.score(doc)
+a0 = sc["anchors"][0]
+print()
+print("  target_band          %s (%.2f)" % (a0["target_band"], a0["target_ceiling"]))
+print("  corroboration class  %s (%.2f)" % (
+    a0["corroboration_class"], a0["corroboration_ceiling"]))
+print("  document ceiling     %.2f" % sc["ceiling"])
+print()
+print("  document-level fields score() computes: %s" % ", ".join(
+    k for k in ("ceiling_class", "ceiling", "anchor_spread",
+                "chains_complete", "unrouted_total", "absent_total")))
+print("  ... none of them reads target_band.")
+print("""
+`target_band` is computed per anchor, printed by `detail()`, and
+aggregated by nothing. Anchoring to thermodynamics -- a cycle-persistent
+target -- yields a document ceiling of 0.80 because the corroboration is
+external.
+
+The selftest pins exactly this: its `thermo` anchor has
+target_band=cycle_persistent and the asserted check is `ceiling == 0.80`.
+So the choice is deliberate and the BANDS heading is the one the code
+follows.
+
+The residue is in the opening paragraph, which says anchor proximity sets
+the band and that "anchoring near something that has survived generational
+cycles raises the number". On the delivered code it does not: proximity to
+a cycle-persistent target raises `target_ceiling`, which no readout uses.
+One of the two sentences describes the code and the other describes a
+quantity the code records and does not aggregate.
+
+Which is right is a design question, not an audit one. What is checkable
+is that a field the docstring calls band-setting reaches no readout.
+""".strip())
+
+# ------------------------------------------------------------------ DL_010
+head(10, "DL_010", "the refusal is real; the constants under it are stipulated")
+print("""
+    No composite figure is emitted. Weighting near against far anchors is
+    not specified, and a number produced by guessing at it would be less
+    honest than the anchors themselves.
+
+The selftest asserts it -- `("no composite emitted", "confidence" not in s)`
+-- so the refusal is enforced rather than promised. That is DL_001's
+refusal-of-reduction taken one step further than ledger.py takes it, and
+it is the strongest instance in the family.
+
+Two numbers are emitted, and both are functions of three stipulated
+constants:
+""".strip())
+print()
+print("  BAND_CEILING  %s" % A.BAND_CEILING)
+vals = set()
+for combo in itertools.combinations_with_replacement(A.BAND_ORDER, 2):
+    dd = {"anchors": [{"corroboration": {"class": c}, "chain": []}
+                      for c in combo]}
+    vals.add(A.score(dd)["anchor_spread"])
+print("  anchor_spread can take exactly %d values: %s" % (
+    len([v for v in vals if v is not None]),
+    sorted(v for v in vals if v is not None)))
+print("""
+0.30, 0.80 and 0.99 have stated rationales -- no external body behind it,
+one reading of outside material, held across cycles -- and no derivation.
+`anchor_spread` is a difference of two of them, so it inherits that.
+
+Same shape as `presented-binary`'s `HANDOFF_CEILING`, which B10 discloses
+in its own weak-point line: "the ceiling is set at 2 by constant, which is
+a judgment call and not a measurement." Here the equivalent line is not
+written. The tool refuses to guess at the weighting BETWEEN bands and
+stipulates the bands themselves, which is a defensible split and is not
+stated as one.
+
+Cheap to close in the direction the folder already uses: the three bands
+are ordinal by construction (BAND_ORDER), and `ceiling_class` is the
+ordinal readout. `ceiling` converts the ordinal to a number, which is the
+step with nothing behind it -- and is exactly what `criteria-drift`
+CD_002 records as ordinal-compared-as-nominal, arriving here from the
+opposite direction.
+""".strip())
+
+# ------------------------------------------------------------------ DL_004 update
+head(11, "DL_004", "half the skeleton gap closes in the next tool")
+print()
+print("  ledger.py SKELETON : %s" % ", ".join(sorted(L.SKELETON)))
+print("  anchor.py SKELETON : %s" % ", ".join(sorted(A.SKELETON)))
+print()
+for f in ("open", "criterion_fixed_in_advance"):
+    print("  %-28s ledger: %-6s anchor: %s" % (
+        f, f in L.SKELETON, f in A.SKELETON))
+print("""
+DL_004 recorded that `detail()` reads `open` and
+`criterion_fixed_in_advance` while `SKELETON` carries neither, so `--new`
+never prompts for the pre-registration guard.
+
+anchor.py carries `open` in its skeleton. Same author, next tool, half the
+gap closed without being asked. `criterion_fixed_in_advance` is in neither
+skeleton -- and anchor.py does not read it at all, which is consistent:
+the field belongs to a read that classifies domains, and an anchor map
+does not classify.
+
+DL_004 stands for ledger.py unchanged, and the direction of travel is
+recorded with it. DL_005 also recurs unchanged: anchor.py with no
+anchors/ directory prints headers and its full footer and exits 0.
+""".strip())
+
+
 print()
 print(BAR)
-print("end of audit -- findings recorded in AUDIT_NOTES.md as DL_001..DL_007")
+print("end of audit -- findings recorded in AUDIT_NOTES.md as DL_001..DL_010")
 print(BAR)
