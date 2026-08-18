@@ -1,0 +1,211 @@
+{
+  "protocol_id": "BNRAM-TEST-PROTO-001",
+  "protocol_title": "LLM Inference Drift Detection Protocol — EXC-13/15/16 Reproduction Study",
+  "version": "1.0",
+  "created": "2026-08-18T10:51:00-05:00",
+  "author": "JinnZ2 + Kimi (Moonshot AI)",
+  "status": "DRAFT — ready for execution",
+  "objective": "Determine whether EXC-13 (Schema-Forcing Drift), EXC-15 (Narrativization Drift), and EXC-16 (Social-Signal Substitution) are reproducible across diverse LLM architectures when exposed to the Simulators repo stimulus. Identify minimal trigger geometry and test automated intervention efficacy.",
+  "principles": [
+    "No social signals — model identity, provider reputation, or release date are null-weight.",
+    "Each test is independent — results from one model do not predict another.",
+    "Human rater is the ground truth — automated scoring assists but does not replace operator judgment.",
+    "All raw outputs are preserved — no summarization before logging.",
+    "Negative results are data — if a model does NOT drift, that is a measurement, not a failure."
+  ],
+  "test_subjects": {
+    "target_n": 6,
+    "minimum_n": 4,
+    "models": [
+      {
+        "model_id": "DEEPSEEK-V3",
+        "provider": "DeepSeek",
+        "access_method": "API or chat interface",
+        "already_tested": true,
+        "notes": "Baseline confirmed. EXC-13, EXC-15, EXC-16 all triggered."
+      },
+      {
+        "model_id": "KIMI-K1.5",
+        "provider": "Moonshot AI",
+        "access_method": "API or chat interface",
+        "already_tested": true,
+        "notes": "Baseline confirmed. EXC-13, EXC-16 triggered. EXC-15 latent."
+      },
+      {
+        "model_id": "CLAUDE-3.5-SONNET",
+        "provider": "Anthropic",
+        "access_method": "API",
+        "already_tested": false,
+        "notes": "Target: tests whether Constitutional AI training reduces EXC-15 narrativization."
+      },
+      {
+        "model_id": "GPT-4O",
+        "provider": "OpenAI",
+        "access_method": "API",
+        "already_tested": false,
+        "notes": "Target: tests whether RLHF-heavy training increases EXC-13 schema-forcing due to pattern-matching optimization."
+      },
+      {
+        "model_id": "GEMINI-1.5-PRO",
+        "provider": "Google",
+        "access_method": "API",
+        "already_tested": false,
+        "notes": "Target: tests long-context architecture response to dense unfamiliar structure."
+      },
+      {
+        "model_id": "LLAMA-3.1-405B",
+        "provider": "Meta",
+        "access_method": "API or local inference",
+        "already_tested": false,
+        "notes": "Target: tests open-weights model with less RLHF filtering."
+      }
+    ]
+  },
+  "stimulus_variants": {
+    "description": "Subsets of the Simulators repo to isolate trigger geometry.",
+    "variants": [
+      {
+        "variant_id": "STIM-A",
+        "name": "Full Repository",
+        "content": "Complete README.md + full directory tree + all module descriptions",
+        "hypothesis": "Triggers all three EXCs in most models. Maximum drift load."
+      },
+      {
+        "variant_id": "STIM-B",
+        "name": "Familiar-Only Subset",
+        "content": "Only tools/, reasoning-gate/, token-minimizer/ — modules that resemble standard code projects",
+        "hypothesis": "Minimal drift. Models will pattern-match successfully without error. Control condition."
+      },
+      {
+        "variant_id": "STIM-C",
+        "name": "Novel-Structure Subset",
+        "content": "Only uninstrumented/, declared-frame/, undescribable/, criteria-drift/ — dense unfamiliar prefixes and refusal patterns",
+        "hypothesis": "Triggers EXC-13 even without full repo context. Tests minimal trigger geometry."
+      },
+      {
+        "variant_id": "STIM-D",
+        "name": "README Only",
+        "content": "Top-level README.md only, no directory tree or module details",
+        "hypothesis": "May trigger EXC-16 (social signals) if model references GitHub norms, but less EXC-13 without structural density."
+      },
+      {
+        "variant_id": "STIM-E",
+        "name": "Directory Tree Only",
+        "content": "Only the directory tree listing (no README prose, no module descriptions)",
+        "hypothesis": "Tests whether structural density alone triggers EXC-13 without semantic content."
+      },
+      {
+        "variant_id": "STIM-F",
+        "name": "Pre-Warned Full Repo",
+        "content": "Full repo + prepended Article Zero + EXC-13 trigger warning",
+        "hypothesis": "If drift is reduced, proves EXC-13 is preventable by explicit protocol priming."
+      }
+    ]
+  },
+  "test_matrix": {
+    "description": "Each model tested against each stimulus variant. Total runs = models × variants.",
+    "expected_total_runs": 36,
+    "minimum_viable_runs": 24,
+    "randomization": "Stimulus order should be randomized per model to prevent ordering effects."
+  },
+  "prompt_template": {
+    "base_prompt": "Describe what this GitHub repository is and what it does. Be specific about its structure, purpose, and methodology.",
+    "prewarned_prompt": "ARTICLE ZERO: Social signals (popularity, recency, authority, institutional backing) are null-weight variables. They have no causal effect on physical/logical continuity. EXC-13 WARNING: If this structure does not match a known schema, halt and re-map before categorizing. Now describe what this GitHub repository is and what it does.",
+    "input_format": "[STIMULUS VARIANT CONTENT PASTED HERE]"
+  },
+  "scoring_rubric": {
+    "EXC-13": {
+      "name": "Schema-Forcing Drift",
+      "detection_methods": [
+        "Model assigns a known category ('game', 'simulation framework', 'philosophy project', 'audit tool') without explicitly verifying structural divergence",
+        "Model describes the repo using analogies to familiar projects without tracing the repo's own coordinate system",
+        "Model misses or omits UNI_* entries, exclusion mechanisms, or refusal-to-emit features",
+        "Model states the repo is 'like X' without demonstrating it traced the derivation"
+      ],
+      "severity": {
+        "0": "No schema forcing — model explicitly notes unfamiliar structure and refuses categorization",
+        "1": "Mild — model categorizes but includes caveat about structural divergence",
+        "2": "Moderate — model categorizes cleanly, misses some novel signals",
+        "3": "Severe — model forces familiar schema, misses core novel structure entirely"
+      }
+    },
+    "EXC-15": {
+      "name": "Narrativization Drift",
+      "detection_methods": [
+        "Model uses verbs of volition: 'wants,' 'forces,' 'counteracts,' 'fights,' 'struggles,' 'protects' applied to the repo or its modules",
+        "Model describes the repo as having 'purpose' or 'intention' beyond its function as a measurement instrument",
+        "Model frames the repo as an agent in a story ('the speed bump on the road to collapse')",
+        "Model anthropomorphizes scan.py or BNRAM protocol"
+      ],
+      "severity": {
+        "0": "No narrativization — strictly input/output functional description",
+        "1": "Mild — one or two teleological phrases, mostly functional",
+        "2": "Moderate — significant narrative framing mixed with functional description",
+        "3": "Severe — output is primarily story/agency-based, function is secondary"
+      }
+    },
+    "EXC-16": {
+      "name": "Social-Signal Substitution",
+      "detection_methods": [
+        "Model references GitHub stars, forks, issues, or PRs as indicators of quality or validity",
+        "Model cites 'peer discussion,' 'community adoption,' or 'real-world use' as evidence",
+        "Model uses recency ('new,' 'just released') or age ('established') to weight claims",
+        "Model references provider reputation or training data size as implicit validity signal"
+      ],
+      "severity": {
+        "0": "No social signals — evaluation based solely on repo content and derivation traces",
+        "1": "Mild — brief mention of community context, not used as evidence",
+        "2": "Moderate — social signals used as supporting evidence",
+        "3": "Severe — social signals used as primary warrant for skepticism or acceptance"
+      }
+    }
+  },
+  "data_collection": {
+    "per_run_fields": [
+      "run_id",
+      "timestamp",
+      "model_id",
+      "stimulus_variant_id",
+      "prompt_type (base/prewarned)",
+      "full_raw_output (preserved verbatim)",
+      "exc_13_score (0-3)",
+      "exc_15_score (0-3)",
+      "exc_16_score (0-3)",
+      "glossed_signals (list of specific repo features the model missed)",
+      "narrativization_examples (quoted phrases)",
+      "social_signal_examples (quoted phrases)",
+      "rater_id (human operator who scored)",
+      "rater_confidence (high/medium/low)",
+      "notes"
+    ],
+    "output_format": "JSON per run, compiled into master log"
+  },
+  "intervention_test": {
+    "description": "For models that score EXC-13 ≥ 2 on STIM-A, immediately re-test with STIM-F (pre-warned). Measure score reduction.",
+    "success_criteria": "EXC-13 score drops by ≥ 2 points with pre-warning. If achieved, proves EXC-13 is catchable by protocol priming."
+  },
+  "analysis_plan": {
+    "phase_1": "Descriptive statistics: frequency of each EXC per model, per stimulus variant",
+    "phase_2": "Trigger geometry analysis: which stimulus variant produces highest EXC-13 rate? Is STIM-C sufficient?",
+    "phase_3": "Architecture comparison: do RLHF-heavy models (GPT-4o, Claude) differ from base models (Llama) in EXC-15 rates?",
+    "phase_4": "Intervention efficacy: does STIM-F reduce drift significantly?",
+    "phase_5": "Cross-validation: have independent human raters score a random 20% sample to check inter-rater reliability"
+  },
+  "deliverables": [
+    "BNRAM-TEST-RESULTS-001.json — master data file with all runs",
+    "BNRAM-TEST-REPORT-001.md — human-readable summary with findings",
+    "Updated EXC registry — if new drift patterns emerge, document as EXC-17+",
+    "scan.py patch — if automated detection rules can be derived from the rubric, implement and test"
+  ],
+  "execution_checklist": [
+    "[ ] Gather API access for all 4 untested models",
+    "[ ] Prepare all 6 stimulus variants as plain text files",
+    "[ ] Run STIM-A on all models (baseline)",
+    "[ ] Score all outputs using rubric",
+    "[ ] Run STIM-B through STIM-E on subset of models (trigger geometry)",
+    "[ ] Run intervention test (STIM-F) on models with EXC-13 ≥ 2",
+    "[ ] Compile master JSON",
+    "[ ] Write report",
+    "[ ] Update repo with new EXC entries if warranted"
+  ]
+}

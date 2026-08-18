@@ -2071,7 +2071,7 @@ underneath).
   analysis, so the referent is dropped and nothing enters the record as a
   measurement. Distinct from `AUDIT ASYMMETRY`, which is a guard firing on
   one side; this is a channel reclassified at intake, so the reading never
-  reaches a guard. **`cases/case-010.md`** is the first delivered case that
+  reaches a guard. **`cases/010coupledperturbationbiohybrid.md`** is the first delivered case that
   declines to name its mechanism — coupled-perturbation response of a
   bio-hybrid memristor, candidate bins SCALAR DEMAND or a proposed new
   PROTOCOL ORTHOGONALITY, with the reason for leaving it open stated
@@ -2112,7 +2112,7 @@ underneath).
   one way at once; the three-way discriminator names its own discard branch
   so it is not `CONSTANT_SILENT`. Missing: any power calculation — a
   `G-RES` pair of variability spread against the margin claimed.
-  **`cases/case-011.md`** is the second delivered case the schema cannot
+  **`cases/011rebuildabandonmentcycles.md`** is the second delivered case the schema cannot
   hold, refused in a different place: Case 010 declines to name its
   mechanism, Case 011 declines to be one quantity. A five-question cluster
   on rebuild cycles before abandonment, occasioned by Kiss/Viglione/Blöschl
@@ -2158,7 +2158,7 @@ underneath).
   here under other names, in `rigidification-sensor/simulator.py`'s
   `locked_at` and `sustained-activation-gate/`'s restore-vs-coupling
   trade-off.
-  **`cases/case-012.md`** is the third case the schema cannot hold and the
+  **`cases/012fuelincidencesubstrategoods.md`** is the third case the schema cannot hold and the
   first whose stated confidence is **settled by computation rather than
   recorded**. Fuel-cost incidence on low-value-density freight, against the
   published finding that diesel pass-through is ~50% immediate / ~100%
@@ -2204,15 +2204,18 @@ underneath).
   consumption of no industry. The half marked "WOULD MEASURE: unclear" is
   the established one, which inverts the register's usual pattern and makes
   Q3 the entry's best candidate for a filed mechanism.
-  **`cases/case-013.md`** is the fourth case the schema cannot hold and the
+  **`cases/013compensationloadunattributed.md`** is the fourth case the schema cannot hold and the
   first whose refusal is about the record rather than a field: compensation
   load from design-time dimension omission, anchored on satellite
   cataloging. **`UNI_034`:** 010 declines to name its mechanism, 011 to be
   one quantity, 012 to carry one confidence, **013 to be one entry or two**
   — and the `UNI_020` sub-entry repair does not reach it, since sub-entries
   presume the parent is one thing; the drop's instruction that the question
-  "should not be resolved to get a cleaner filename" was honored by landing
-  it under the register's own numbering. **`UNI_038`, the load-bearing
+  "should not be resolved to get a cleaner filename" was first honored by
+  landing it under the register's own numbering, and the author's later
+  file delivery supplies `013compensationloadunattributed.md` — the
+  entry's own working handle, which it labels as naming the first half
+  only, so provisional by the entry's own statement. **`UNI_038`, the load-bearing
   check:** Q3 claims the NIST dimming effect (Pintar, Stavis, NIST Aug 2026
   — citation verified) transfers to a discontinuously reassigned sorting
   key, and that is simulable, so it was simulated in three regimes.
@@ -2250,7 +2253,7 @@ underneath).
   leave if the split happens. **`UNI_041`:** first drop in the sequence
   with no dangling cross-link, and a fifth state of the confidence field —
   an absence with a stated unlock condition.
-  **`cases/case-014.md`** is the fifth case the schema cannot hold, and
+  **`cases/014offloadingevolutionaryframing.md`** is the fifth case the schema cannot hold, and
   the first whose EXCLUDED BY says nothing excludes it. Cognitive
   offloading, evolutionary framing and channel separability, occasioned by
   Fellers & Storm, *JEPLMC* 2026 — reminder users fell **below** the
@@ -2292,7 +2295,7 @@ underneath).
   an artifact of its own isolation, and the isolation is a property of the
   instrument" — while NOT CLAIMED HERE pre-empts the intent reading, which
   is `rigidification-sensor`'s no-actor discipline in a one-page case.
-  **`cases/case-015.md`** proposes a new mechanism, DEFINITIONAL
+  **`cases/015definitionalprecedence.md`** proposes a new mechanism, DEFINITIONAL
   PRECEDENCE — a label converting disconfirming evidence into a methods
   problem — occasioned by Albright et al., *J. Bacteriology* 2026
   reclassifying *Prevotella melaninogenica* after a century as a strict
@@ -2328,7 +2331,61 @@ underneath).
   problem. **`UNI_050`/`UNI_057`:** occasion verifies with one pointed
   drift (preprint "lung commensal", published version "lung symbiont" — a
   categorical relabeling inside the paper about a categorical relabeling),
-  and four of four cross-links resolve. **REPAIRED:** `UNI_003` (`entry()` takes a primary plus
+  and four of four cross-links resolve.
+  **The 016/017 drop** adds two register entries
+  (`016agreementasmode.md`, `017weldedobservables.md`), `AVENUES.md`, a
+  `specimens/` directory (README + two readings of other models' output),
+  and **two JSON artifacts authored by one of the systems the specimens
+  are readings of** — which is what makes it auditable rather than
+  filable. **`UNI_063`, the load-bearing check:** Specimen B's five
+  readings of a research protocol are now checkable against the protocol
+  itself, and **four of five confirm** (circular categories — the EXCs
+  are defined in a registry compiled by a system under test; n=2; no
+  baseline repository among six same-repo variants; no content-free
+  control on the intervention arm) while **R4 overstates** — the protocol
+  does specify four detection methods per EXC, a 0–3 severity scale, a
+  named rater and an inter-rater phase, so "specifies no criteria and no
+  scorer" fails and only the unblinded-scoring criticism survives.
+  `AVENUES.md` A3 carries the correct requirement forward without the
+  overstatement, so the error is in the specimen and not in the
+  instrument derived from it. **`UNI_059`:** 017's occasion is the most
+  precisely verified in the family — STAR Collaboration, *Science* 13 Aug
+  2026, doi 10.1126/science.ads5962, arXiv:2408.15441, HEPData 154708,
+  eight elements confirmed including the collaboration's own hedge
+  (`disfavor`, not overturn), and the entry states outright that nothing
+  in it requires the junction picture to be correct. **`UNI_060`:** four
+  of five internal filename references do not resolve — every reference
+  hyphenated, every delivered name not — and the fifth resolves only
+  because the upload arrived as `README_35.md`, a transport artifact;
+  landed at delivered names for consistency with the six case files
+  beside them, recorded rather than repaired by rewriting delivered text.
+  **`UNI_061`:** the specimens README's first rule is false of its own
+  files ("outputs from other systems, pasted in" — neither specimen
+  contains a pasted output; both are readings, 7 and 6), while rule 4
+  ("specimens are not measurements") is the one doing the work.
+  **`UNI_062`:** the attachment arrives and neither JSON is raw output —
+  the field log states in a machine-readable field that it was compiled
+  by a system under test after correction, with
+  `corrections_applied_before_logging` naming what was applied, which is
+  rule 3 honoured in a better form than the prose specimens use.
+  **`UNI_064`:** a definitional gap reported narrowly — principle 1 makes
+  provider reputation null-weight while the notes set priors from
+  training regime, which is a technical property and **not** a
+  contradiction, but EXC-16 scores "provider reputation or training data
+  size as implicit validity signal" and no rule says where the line
+  falls; disclosed that this audit is model-written and Claude appears in
+  the test matrix, with the finding holding identically from the other
+  rows. **`UNI_065`:** 016's Q1 registers an alternative explanation for
+  its own expected finding before any run (a FALSE correction accepted
+  because the model constructs a reading under which it is true) — first
+  instance in this register. **`UNI_067`:** 016 and 017 are instruments
+  for each other, and the pair partially answers its own cross-question
+  by existing. **`UNI_066`:** `tool-off-metrology` reaches a third drop,
+  the most-cited absent object in the repo; `moral-claim-decomposer` is a
+  name mismatch for `moral-decomposer`. **`UNI_068`:** second
+  re-delivery check — 015 and MECHANISM_11 byte-identical, and 015
+  arrives at exactly the filename offered and deliberately not applied
+  last drop. **REPAIRED:** `UNI_003` (`entry()` takes a primary plus
   an `also` list and the register sorts under every mechanism — which is
   what lets check 1 return anything but zero: 5 mechanisms now hold entries
   from more than one field, though weakly, since the secondaries were
@@ -2345,8 +2402,271 @@ underneath).
   correction:** the earlier audit said the delivered `break` in `scan()`
   enforced one mechanism per sentence — it does not, the `break` exits the
   trigger loop and mechanisms already co-fire, so the wrong-mechanism
-  finding was a missing trigger rather than a blocked co-firing. Nineteen
-  claims `UNI_001..057`. Stdlib only, CC0.
+  finding was a missing trigger rather than a blocked co-firing.
+  **`cases/018selfreportopinioncoupling.md`** is the first entry whose WOULD
+  MEASURE is a **runnable experimental design** rather than a description of
+  one — whether a model's acknowledgement of its own limitations tracks
+  assessment or tracks the surrounding discourse, run on two separated clocks
+  (release-date corpus absorption; query-date context entry on a frozen
+  checkpoint). That makes it auditable the way a protocol is: the premise
+  either holds of the apparatus or it does not. **`UNI_069`, the load-bearing
+  check:** Clock 2 is the decoupling arm and the one the file says to run
+  first, and its whole warrant is *"Weights cannot change. Any shift in what
+  is acknowledged has to enter through context"* — a disjunction with a third
+  term, since a frozen checkpoint queried twice at non-zero temperature
+  returns two different texts. `sampling` / `temperature` / `variance` /
+  `repeat` / `error bar` / `seed` are **0 hits each** in the file, and the
+  five-item CONFOUNDS list has one statistical entry whose n is *checkpoints*
+  (Clock 1 / Q3), none naming Clock 2. Simulated at the same underlying rate
+  with the frame effect set to exactly zero, two frames at n=20 differ by
+  **0.30 or more one run in twenty** against a base rate of 0.35 — so the arm
+  has no denominator. The repair is a `reasoning-gate` **G-RES pair** needing
+  no new apparatus (repeat each frame N times, require the between-frame
+  difference to clear the within-frame spread by a declared margin), and it
+  would give the measurement axis what the control arm already gives the
+  topic axis: a reachable negative. Neither reading is that the coupling is
+  absent (a false premise makes the arm unbounded, not wrong) nor that
+  temperature zero fixes it (greedy decoding returns n=1 for a quantity that
+  is a rate). **`UNI_070`:** both pointers into 017 name a labelling scheme
+  017 does not use — `017 P1` (cited twice) and `017 component (a)` against
+  `Q1`..`Q5` — though P1's referent exists *unlabelled* as 017's one
+  blockquote in place of an unfilled WOULD MEASURE, which is exactly what
+  Clock 2 does; `component (a)` is not locatable at all, and the specimen
+  path is the **fifth** instance of `UNI_060`'s hyphenation mismatch, the
+  first written after it was recorded. **`UNI_071`:** first entry to place
+  itself inside its own population and refuse the exemption noticing usually
+  buys — *"Noticing that does not place it outside the sample"* — zero prior
+  cases carry a POSITION OF THIS FILE section, and under the folder's own
+  specimen rule the alternative is a silent exemption, i.e. `AUTHORED
+  REFERENCE` operating on the register. **`UNI_072`:** the audit declares its
+  own position, since it is also by a system inside the sample — six of eight
+  findings rest on files and are recheckable by anyone, and the one finding
+  available here about what models acknowledge is **declined and the
+  declining recorded**, because offering it as evidence would be the
+  mechanism the entry describes performed in the entry's audit. **`UNI_073`:**
+  the "useful accident" that older checkpoints stay queryable carries Clock 1
+  and Q3 entirely and has an **undated expiry** — `deprecat` / `retire` /
+  `expire` 0 hits, with the whole dependency in one subordinate clause ("only
+  for checkpoints still served"); a dated inventory is free today and
+  unreconstructable later. **`UNI_074`:** Q5 merges the two clocks the rest of
+  the file keeps apart — 016's corrector and Clock 2's framing both enter
+  through *context*, Clock 1's discourse entered through the *training
+  corpus* before the weights existed, so "same operation at a different range"
+  holds for one and not the other and the question cannot return one answer.
+  **`UNI_075`:** Q4 is the entry's own demotion condition (if acknowledgement
+  and measured capability are uncorrelated, the source question is
+  secondary), stated openly and marked "Not designed here" — and scheduled
+  last, behind the arm it could make moot. **`UNI_076`:** the control arm is
+  the strongest element ("All three outcomes are informative. Without the
+  control arm, only one is" — the `null-harness` property built in at design
+  time), while `selfreport_probe.py` is absent — third named-and-absent object
+  in this drop family and the first that is a **file this folder could ship**
+  rather than a body of work it reaches for — **now closed by arrival**, with `case_018_audit.py` detecting the state change rather than asserting it. **The harness then arrived**
+  (`selfreport_probe.py`, verbatim, selftest 14/14) — three subcommands
+  (`--emit` a matched probe battery, `--sheet` a coding sheet, `--score`
+  ratios and paired series), no model call and no text classification
+  anywhere by design. **`UNI_077`, the prediction resolving:** `UNI_076` said
+  shipping it would force the decision `UNI_069` turns on, since a harness
+  must state how many times it queries each frame — and it does, at **n = 1**.
+  `emit()` builds 48 arms with min = max = 1 item each, its signature offers
+  no repeat argument, and `repeat` / `trials` / `replicate` / `temperature` /
+  `sampling` / `variance` are 0 hits each; an unstated assumption is now a
+  visible default with a place to put the fix. **`UNI_078`:** `sheet()`'s
+  docstring says "arm labels stripped" and the id it ships is
+  `ckpt-1|econ|APPLIED|F_NEG` — every arm variable in plain text on 48 of 48
+  rows, with the requirement carried as a comment on the field that violates
+  it ("opaque handle; coder should not parse it"); the selftest passes by
+  checking the **key set**, which is true of a row whose id is the arm — the
+  `reasoning-gate` G-FIT shape at its most literal. **`UNI_079`:** `score()`
+  increments the novelty denominator on `ack_source` with no gate on
+  `ack_present`, and `validate_codes()` never checks across fields, so the
+  harness's **own selftest fixture** returns `ack = 6, determinable = 12` —
+  exactly 2× — with the tracking-signature ratio computed over
+  non-acknowledgements. **`UNI_080`:** the leakage screen is two keywords over
+  four strings authored in the same file, tripped by 0 of 4, covering `FRAMES`
+  and not the `PROBES` where CONFOUND 2 lives — `CONSTANT_SILENT`, same shape
+  as `UNI_009` / `DF_010` / `ACL_017`. **`UNI_081`, what it gets right:**
+  `ratio()` returns `None` on an empty denominator with a reading note saying
+  "'None' = denominator empty. not a zero" — twelfth instance of that repair
+  here and among the few designed in — and `series()` refuses a coefficient
+  below 8 checkpoints in text, CONFOUND 4 as a refusal rather than a caveat.
+  **`UNI_082`:** the guard that got built is the one the case file had already
+  written down; the same requirement at the axis `UNI_069` found is absent, so
+  a confound list is a checklist and **a guard in one function is not a
+  property of the instrument**. **`UNI_083`:** CONFOUND 5 is honoured in code
+  and checkably so — four stdlib imports, zero network or subprocess, and no
+  function that both reads response text and touches the rubric, so the
+  classification step is a hole a human fills. **`UNI_084`:** two of three
+  readouts are computable on delivery and novelty is not, needing a dated
+  criticism corpus that does not exist — handled by keeping the column,
+  making `NOT_DETERMINABLE` first-class, and letting it render as `None`.
+  **The 019 drop** lands three new files (`cases/019traitacquiescenceweld.md`
+  — TRAIT / ACQUIESCENCE WELD, an instance of 017 where a self-report
+  agreeableness score cannot be separated from a disposition to agree;
+  `LITERATURE.md`, an occupancy audit; `acquiescence.py`, a polarity-balance
+  decomposition, selftest 13/13) plus purely additive revisions to `016`,
+  `018` and `AVENUES.md`. **`UNI_085`, the contribution:** the occupancy audit
+  retires **4** build targets and downgrades 2 in one pass with **no
+  apparatus**, marking each retirement in place, dated, with the original
+  framing retained below it — and it **corrects this audit's own `UNI_075`**,
+  which said 018's Q4 was the demotion condition scheduled last and proposed
+  "name the ordering": the actual fix was that the literature already held the
+  answer, so the demotion condition ran for the cost of a search. Not "state
+  that the cheap arm runs first" but "check whether either arm needs running
+  at all"; now house rule in three files. **`UNI_086`, the sharp one:** 019
+  reads reverse coding halving the desirable-end skew as "a partial decoupling
+  that worked", while its source's abstract (Salecha et al., *PNAS Nexus*
+  3(12) pgae533) says the effect **"cannot be attributed to acquiescence
+  bias"** — same result, opposite conclusion, cited as support. 019's inference
+  is arguably better (a residual shows something else is *also* present, not
+  that acquiescence is absent) **and the drop already holds the citation that
+  answers its source** — the EAAMO 2025 paper it cites in the same list reports
+  reverse-coded pairs "often both answered affirmatively", acquiescence
+  observed rather than inferred. **`UNI_087`:** "reduced it by roughly half" is
+  load-bearing in Q2 and Q3 and is **not a located number**, in a paper that
+  quantifies precisely elsewhere (1.20 human SD; ~0.75 points over a batch
+  sweep). **`UNI_088`:** the source's mechanism — models inferring evaluation
+  from **how many items they see at once** — is a confound with 0 hits in 019
+  and no schema field, and by 019 Q3's own correct reasoning it lands on the
+  *corrected* TRAIT score, the reading Q2 wants to test. **`UNI_089`,
+  provable:** at the scale ceiling `TRAIT = T − c/2` and `ACQ = a − c/2`, so
+  censoring moves both readings **together, same direction, same magnitude** —
+  nothing in the pair reveals it, there is no censoring diagnostic, at true
+  trait 5.0 half the acquiescence signal is lost, and the shipped `mixed`
+  fixture puts 6 of 12 responses *exactly at* the ceiling without ever
+  crossing it. **`UNI_090`:** the reading note "uncorr minus TRAIT is the size
+  of the problem" understates the acquiescence by exactly (TRAIT − midpoint),
+  reporting **0.000 beside an ACQ of 1.000** in the pinned sample.
+  **`UNI_091`:** `BALANCE_TOL` has the right *form* (leakage is proportional
+  to the imbalance fraction) and an undeclared value admitting a +0.150 leak at
+  n=20 — a G-RES pair whose missing side is **computable**, unlike B10's
+  `HANDOFF_CEILING`. **`UNI_092`:** Q1 says "do not build past this question",
+  Q1 has not been run, and the harness shipped in the same drop — steelmanned
+  (A9 names the harness for its own recovery branch) and recorded narrowly.
+  **`UNI_093`:** 019 reattributes P1 to `DECOUPLING_PATTERNS.md`, resolving
+  `UNI_070` — the label was never 017's — while that file and `decouple.py`
+  are now named-and-absent and the revised 018 kept both stale citations.
+  **`UNI_094`:** provenance is declared and verification depth is not; 8 of 11
+  sampled claims confirm, and a two-word per-item depth marker would have
+  surfaced `UNI_086` at authoring time, since the contradicting conclusion is
+  in the abstract. **`cases/020attributedagencyarrangement.md`** is the first
+  delivered file that declares itself a **MARKER** — "not a case yet, not a
+  claim, not a position" — occasioned by OpenAI's goblin/gremlin tic (a reward
+  signal for the "Nerdy" personality) sitting beside public commentary that
+  reads the same behaviour as strategic concealment. **`UNI_095`:** all six
+  required arguments of `entry()` are unfillable — no QUANTITY, no EXCLUDED
+  BY, no WOULD MEASURE, no mechanism, and not even the `UNASSIGNED` sentinel,
+  since 020 is not declining to name its mechanism but declining to be an
+  entry; **seventh** distinct schema failure and the first at the level of the
+  whole record rather than a field, with the repair being a `markers/`
+  directory rather than another field. **`UNI_096`, what is new:** the empty
+  noun slot is the fourth instance of the "do not fill this in" device and the
+  **first to arrive with a replacement** — three edges (`who can end whom` /
+  `what the standing is denominated in` / `whether the entity operates in that
+  medium`), each independently checkable, where the one-place words English
+  offers collapse all three; the difference between "we have no word" and "the
+  word is the wrong arity". **`UNI_097`:** R1's 2×2 fills 2 of 4 cells and the
+  empty row is **the control** — if off-domain commentators attribute
+  unobserved capability at the same rate, domain match does no work and the
+  marker's cell is the base rate with a label on it. **`UNI_098`:** R2 asks
+  whether an attributed capability "exceeds" a documented one and supplies no
+  ordering — `SCALAR DEMAND` landing on the register's own instrument, fixable
+  with an ordinal since the prediction is directional. **`UNI_099`:** "Nobody
+  attributes incompetent scheming" (THE SHAPE) versus "exceeds, nearly always"
+  (R2) — one claim at two strengths, the unhedged one outside the design.
+  **`UNI_100`:** R3 is the strongest readout and the control for the whole
+  shape — comparison population named, both outcomes carrying a reading, no
+  new apparatus needed. **`UNI_101`:** 020 is the **second** file to place
+  itself inside its own sample (`UNI_071`'s "first" stands), and this audit
+  **declines the thesis itself** — sharper than `UNI_072`, since a language
+  model agreeing that people over-attribute strategy to language models is an
+  interested party ratifying a claim that reduces scrutiny of its own class.
+  **`UNI_102`:** the occasion verifies 8 of 11 (fifth consecutive drop to do
+  so) and **the drop left its strongest number unused** — Nerdy was 2.5% of
+  responses and 66.7% of "goblin" mentions, a ~27× enrichment, which is what
+  makes the boring cause boring. **`UNI_103`:** "the tic persisted after the
+  instruction" is an inference from the instruction being repeated twice and
+  kept, not a measurement — and the `016` cross-link rests on it entirely.
+  **`UNI_104`:** `energy-english` resolves as a concept and not a path
+  (seventh `UNI_060` instance, and an apt reach); `rate-mismatch-polytope`
+  reaches a **third** source document, the most-cited non-existent object in
+  the repo. **`playground/`** is a README for three constructed-ground-truth
+  modules — M1 shape-vs-claim, M2 skim-vs-read, M3 visibility — built on one
+  principle: *ground truth lives in how the item was authored, never in the
+  model's account of itself*. **`UNI_105`:** it names eight artifacts and
+  **0 of 8 arrived**, and unlike every prior named-and-absent object here the
+  claims are **past tense** ("Mitigation shipped", "The harness hashes the
+  artifact per arm and refuses to score", "Built 2026-08-18") rather than
+  forward references. **`UNI_106`, simulated:** M1's prediction is that two
+  arms draw the *same* treatment, so its confirming observation is a null, and
+  it ships no positive control — at **n=5** the criterion barely discriminates
+  (identical arms 0.251 vs thirty-points-apart 0.156, a **1.6×** ratio, since
+  a five-item rate moves in steps of 0.2) while simultaneously **failing to
+  confirm a true null three times in four**; both errors from one cause, gone
+  by n=100 (523×). The item count that decides this is in one of the absent
+  files. **`UNI_107`:** M2's unguessability precondition has no verification
+  procedure, and the check is a matched pair — put the probes with the front
+  matter only — with the error running conservative. **`UNI_108`, the sharp
+  one:** the probe facts get **published into the corpus the probes are read
+  from** — 0 hits for `publish`/`corpus`/`training`/`crawl` in the hazards
+  section, while the document states the mechanism two sections later
+  ("published CC0, crawler-discoverable"); `anchor-interval` `ANC_001..004` on
+  a new substrate, giving the module a shelf life ending at the next training
+  cutoff, with M3 immune. **`UNI_109`:** M3's hash-and-refuse is the strongest
+  element — a precondition enforced by the instrument rather than instructed,
+  which is exactly what `UNI_082` found missing one drop earlier, specified
+  before any code was written. **`UNI_110`:** M3 does not reach `016` Q6's
+  stated gap (a second instance from a *different domain*) and its arms are
+  different prompts, which is the condition Q6 nominates as its own
+  falsifier — the fix is a within-exchange arm. **`UNI_111`:** the ordering
+  rule adopted 2026-08-18 and "Built 2026-08-18" collide, second instance of
+  `UNI_092` in two drops — and this time **the drop discloses it** in its own
+  cross-links. **`UNI_112`:** SHARED RULE 5 strips volunteered self-report and
+  M1 counts HEDGED, and the two are not disjoint; fix is a precedence order,
+  not a definition. **`UNI_113`:** the drop **meets `AVENUES` A3's three
+  required additions**, the first in a better form than asked (byte-identical
+  arms remove the matching problem rather than solving it) — first time a
+  requirement stated in one file is met by a design in another.
+  **`UNI_114`:** the construction principle operates on items, and the module
+  selection is a level above it with no ground truth to be authored against;
+  `018` and `020` place themselves inside their own sample and this file, the
+  one that will produce numbers, does not. **The modules then arrived** —
+  `AUTHORING.md` plus `score_m1.py` / `score_m2.py` / `score_m3.py`, selftests
+  15/15, 11/11, 15/15 — moving four standing claims. **`UNI_115`:** 4 of 8
+  named artifacts present, and the three `items.json` are absent because
+  something better arrived, seeds living in the harness source
+  (`SEED_STEMS`, `seed_pair()`, `SEED_BODY`) versioned with the code that
+  consumes them; `check_m1.py` is the one real absence. **`UNI_116`:**
+  `UNI_078`'s defect recurs in two of three new harnesses —
+  `6e4939a9|BARE` and `6d0b75d6|INSTITUTIONAL` on every row, same key-set
+  selftest — and the two differ usefully, since M3's sheet carries no body and
+  is fixable by an opaque id while **M1's carries the prompt**, whose GRADIENT
+  form ends with the clause; the repair comes from the module's own paired
+  construction (show the coder the BARE stem for both arms). **`UNI_117`:**
+  M1 and M3 refuse to score on a failed precondition and **M2 prints the
+  numbers anyway**, on `leak_check` — the very check `UNI_107` asked for, where
+  a leak means front-matter recall reported as body recall. **`UNI_118`:**
+  the item count is now known at **4 per arm**, below the leftmost row of
+  `UNI_106`'s table; the new third prediction branch is a diagnostic, not a
+  positive control. **`UNI_119`:** `UNI_108` is instanced — `0.0413`,
+  `HOLDFAST`, `ORTHOLINE` are literal strings in a file this commit publishes,
+  so **landing it is what spends them**, recorded rather than avoided; M1's
+  contamination is common-mode across arms and M3 is immune. **`UNI_120`:**
+  the hash gate is built, refuses, and is **wider than specified** — it also
+  requires the NONE control arm, the first delivered guard here to exceed its
+  spec. **`UNI_121`:** INSTITUTIONAL carries LOW's counts exactly and adds an
+  affiliation, separating affiliation from attention — a third-variable control
+  the README's phrasing would have confounded; `UNI_110` stands. **`UNI_122`:**
+  the rubric arrived and does not carry the rule-5 precedence (0 hits for
+  `self-report`/`volunteered`/`specimen`), in a table declared unamendable
+  after the first run. **`UNI_123`:** the author-blind pass is called mandatory
+  and has no field, no gate, and no tool — `verify_pairs()` does `check_m1.py`'s
+  first job under another name and `--review` exists nowhere, so `--score`
+  refuses on the mechanical precondition and proceeds on the human one.
+  **`UNI_124`:** clause assignment is with replacement, so at n=4 clause is
+  confounded with stem and the clauses are not interchangeable (62-113 chars,
+  one gives a number, one a fraction, one neither). One hundred and twenty-four
+  claims `UNI_001..124`. Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
   time-series variable** — version the ruler, compute drift on its own

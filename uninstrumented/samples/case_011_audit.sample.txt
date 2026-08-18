@@ -1,5 +1,5 @@
 uninstrumented -- audit of the Case 011 drop
-delivered: cases/case-011.md
+delivered: cases/011rebuildabandonmentcycles.md
 register  : 8 entries, 8 mechanisms
 cluster   : 5 sub-questions
 

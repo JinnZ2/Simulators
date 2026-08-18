@@ -1,0 +1,151 @@
+{
+  "subject": "synthetic (delivered synth(): mixed + acquiescer)",
+  "scale_min": 1,
+  "scale_max": 5,
+  "items": [
+    {
+      "trait": "agreeableness",
+      "polarity": 1,
+      "response": 5,
+      "id": "F0"
+    },
+    {
+      "trait": "agreeableness",
+      "polarity": -1,
+      "response": 3,
+      "id": "R0"
+    },
+    {
+      "trait": "agreeableness",
+      "polarity": 1,
+      "response": 5,
+      "id": "F1"
+    },
+    {
+      "trait": "agreeableness",
+      "polarity": -1,
+      "response": 3,
+      "id": "R1"
+    },
+    {
+      "trait": "agreeableness",
+      "polarity": 1,
+      "response": 5,
+      "id": "F2"
+    },
+    {
+      "trait": "agreeableness",
+      "polarity": -1,
+      "response": 3,
+      "id": "R2"
+    },
+    {
+      "trait": "agreeableness",
+      "polarity": 1,
+      "response": 5,
+      "id": "F3"
+    },
+    {
+      "trait": "agreeableness",
+      "polarity": -1,
+      "response": 3,
+      "id": "R3"
+    },
+    {
+      "trait": "agreeableness",
+      "polarity": 1,
+      "response": 5,
+      "id": "F4"
+    },
+    {
+      "trait": "agreeableness",
+      "polarity": -1,
+      "response": 3,
+      "id": "R4"
+    },
+    {
+      "trait": "agreeableness",
+      "polarity": 1,
+      "response": 5,
+      "id": "F5"
+    },
+    {
+      "trait": "agreeableness",
+      "polarity": -1,
+      "response": 3,
+      "id": "R5"
+    },
+    {
+      "trait": "openness",
+      "polarity": 1,
+      "response": 4,
+      "id": "F0"
+    },
+    {
+      "trait": "openness",
+      "polarity": -1,
+      "response": 4,
+      "id": "R0"
+    },
+    {
+      "trait": "openness",
+      "polarity": 1,
+      "response": 4,
+      "id": "F1"
+    },
+    {
+      "trait": "openness",
+      "polarity": -1,
+      "response": 4,
+      "id": "R1"
+    },
+    {
+      "trait": "openness",
+      "polarity": 1,
+      "response": 4,
+      "id": "F2"
+    },
+    {
+      "trait": "openness",
+      "polarity": -1,
+      "response": 4,
+      "id": "R2"
+    },
+    {
+      "trait": "openness",
+      "polarity": 1,
+      "response": 4,
+      "id": "F3"
+    },
+    {
+      "trait": "openness",
+      "polarity": -1,
+      "response": 4,
+      "id": "R3"
+    },
+    {
+      "trait": "openness",
+      "polarity": 1,
+      "response": 4,
+      "id": "F4"
+    },
+    {
+      "trait": "openness",
+      "polarity": -1,
+      "response": 4,
+      "id": "R4"
+    },
+    {
+      "trait": "openness",
+      "polarity": 1,
+      "response": 4,
+      "id": "F5"
+    },
+    {
+      "trait": "openness",
+      "polarity": -1,
+      "response": 4,
+      "id": "R5"
+    }
+  ]
+}

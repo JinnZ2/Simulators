@@ -1,5 +1,5 @@
 uninstrumented -- audit of the Case 014 drop
-delivered: cases/case-014.md
+delivered: cases/014offloadingevolutionaryframing.md
 cluster   : 4 sub-questions, mechanism unassigned
 
 ========================================================================
@@ -50,7 +50,7 @@ is not pointed at.
   wiki-style references in this entry: tool-off-metrology
   cited 2 times
   folder ../tool-off-metrology exists: False
-  also named in case-011.md Q4: True
+  also named in 011rebuildabandonmentcycles.md Q4: True
 `tool-off-metrology` does not exist anywhere in the tree. It is named
 twice in this entry -- once as the BRIDGE under Q4 and once in
 CROSS-LINKS -- and Case 011's Q4 already reached for it as "the tool-off /
@@ -219,9 +219,9 @@ free text.
 8  UNI_049  the withheld slot, third instance -- and Q3 states the register's thesis
 ========================================================================
 
-    ../uninstrumented/cases/case-011.md  Q5
+    ../uninstrumented/cases/011rebuildabandonmentcycles.md  Q5
     ../derivation-discarded/MECHANISM_11.md  sub-question 4
-    cases/case-014.md  Q3
+    cases/014offloadingevolutionaryframing.md  Q3
 Third instance in three drops. `DD_007` recorded it as "a recurring
 device" at two; at three it is a construct with a stable form and still no
 schema slot anywhere in the family.

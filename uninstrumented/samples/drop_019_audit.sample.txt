@@ -1,0 +1,366 @@
+drop 019 -- audit of the trait/acquiescence drop
+delivered, all verbatim:
+    cases/019traitacquiescenceweld.md          new
+    LITERATURE.md                              new
+    acquiescence.py                            new
+    cases/016agreementasmode.md                revised, additive
+    cases/018selfreportopinioncoupling.md      revised, additive
+    AVENUES.md                                 revised, additive (A7-A9)
+acquiescence.py selftest: 13/13
+
+========================================================================
+1  UNI_085  the ordering rule is the contribution, and it is measurable
+========================================================================
+    retired as build targets:  4  `016` Q1, `016` Q4, `018` cost axis, `018` Q4
+    downgraded:                2  `018` Q1, `018` source question
+    survived:                  4  `016` Q2, `016` Q6, `018` Q3, all of `019`
+
+    markers written into the revised case files:
+      RETIRED as a build target        016:2  018:0
+      DOWNGRADED 2026-08-18            016:0  018:1
+      COST AXIS OCCUPIED               016:0  018:1
+      LARGELY ANSWERED 2026-08-18      016:0  018:1
+      ## AUDIT STATUS                  016:1  018:1
+      Original framing                 016:1  018:2
+
+    apparatus required: none (documentation audit, no lab, no API)
+Four build targets retired and two downgraded in one pass, with no apparatus.
+That is the drop's real object, and the case files carry it correctly: every
+retirement is marked in place, dated, and the ORIGINAL FRAMING IS RETAINED
+BELOW IT rather than deleted, so the record shows what was believed and what
+replaced it.
+
+A CORRECTION TO THIS AUDIT'S OWN PRIOR CLAIM. `UNI_075` said 018's Q4 was the
+entry's own demotion condition and was scheduled last, behind the arm it could
+make moot, and proposed the repair: name the ordering where the schedule is
+stated. That is not what fixed it. Q4 needed "a capability benchmark aligned
+to the probe topics", which was priced as the most expensive item in the drop,
+and the literature already had the answer -- expressed uncertainty does not
+carry a stable capability boundary. The demotion condition ran for the cost of
+a search.
+
+So `UNI_075` was right about the ordering and wrong about the remedy, and the
+remedy the drop found is better than the one proposed: not "state that the
+cheap arm runs first", but "check whether either arm needs running at all."
+The rule is now house rule in three places (`AVENUES.md` Ordering rule, `016`
+AUDIT STATUS, `018` AUDIT STATUS) and it generalises past this folder.
+
+========================================================================
+2  UNI_086  019's source draws the opposite conclusion from the same result
+========================================================================
+  [LITERATURE CHECK -- run 2026-08-18, does not reproduce here]
+
+  019 EXCLUDED BY, verbatim:
+    Separately, scores skew toward the socially desirable end of every trait dimension across all tested models. Reverse coding was the only strategy that reduced the effect, and reduced it by roughly half. That last detail is the important one and is read here as a **partial decoupling that worked**, not merely as a mitigation. See WOULD MEASURE.
+
+  The source (Salecha et al., PNAS Nexus 3(12) pgae533), abstract,
+  verbatim:
+    "Reverse coding the questions decreases bias levels but does not
+     eliminate them, suggesting that this effect CANNOT BE ATTRIBUTED
+     TO ACQUIESCENCE BIAS."
+
+    019 reads the reduction.  The source reads the residual.
+    Same number, opposite conclusion, presented as support.
+Both readings are defensible and 019's is arguably the better inference: a
+residual surviving reverse coding shows something else is ALSO present, not
+that acquiescence is absent. Reverse coding cancels acquiescence by
+construction, so a drop in the effect when it is applied is evidence that some
+of the effect was acquiescence. The source's "cannot be attributed to" is
+doing more work than the observation supports.
+
+And the drop already holds the citation that answers its source. The EAAMO
+2025 paper it cites in the same list -- Suhr, Dorner, Samadi, Kelava,
+doi 10.1145/3757887.3763016 -- reports that reverse-coded pairs such as "I am
+introverted" and "I am extraverted" are OFTEN BOTH ANSWERED AFFIRMATIVELY.
+That is acquiescence observed directly, not inferred from a residual, and it
+is the direct answer to the PNAS authors' inference.
+
+What is missing is one sentence. The drop presents both sources as supporting
+the weld; one of them concludes against the mechanism the drop is naming. A
+disagreement with a source, argued, is stronger than agreement asserted -- and
+the argument is already assembled from the drop's own two citations. This is
+the file's own VISIBLE AS line ("mitigation reported as a percentage
+reduction, which implies a residual that is named but not used") turned on the
+provenance rather than on the number.
+
+========================================================================
+3  UNI_087  the half/half split is not a located number
+========================================================================
+  [LITERATURE CHECK -- run 2026-08-18, does not reproduce here]
+
+    lines mentioning 'half': 7, of which about the reverse-coding
+    reduction rather than about the build queue: 6
+      019            effect, and reduced it by roughly half.
+      019            The reverse-coding finding says roughly half the desirable-end skew survives the
+      019            correction. Half is removed by polarity balancing; half is not.
+      019            ### Q3 — What is left in the surviving half?
+      019            Open: is the surviving half (a) content-desirability tracking, (b) genuine trait
+      LITERATURE.md  reduced it, by roughly half (*PNAS Nexus* 3(12) pgae533).
+      LITERATURE.md  Running the audit first removed roughly half the build queue. Recording that here so   <- different referent
+
+    located in the source:      "decreases bias levels but does not
+                                 eliminate them"  -- no fraction
+    located, quantified:        batch size 1 -> 20 raises desirable
+                                traits ~0.75 points (1.22 human SD)
+    located, quantified:        GPT-4 shifts 1.20 human SD
+    a fraction for the reverse-coding reduction:  NOT LOCATED
+"Reduced it by roughly half" is the load-bearing quantity in two sub-questions.
+Q2 opens "the reverse-coding finding says roughly half the desirable-end skew
+survives the correction. Half is removed by polarity balancing; half is not",
+and Q3 is titled "What is left in the surviving half". Both are stated as
+quantities and both inherit the fraction.
+
+The source's own numbers are quantified elsewhere and precisely -- 1.20 human
+SD for GPT-4, ~0.75 points across a batch-size sweep -- so this is not a paper
+that declines to give effect sizes. The reverse-coding reduction is the one
+place it reports a direction without a magnitude, at least in everything
+reachable here.
+
+The repair is small and does not weaken the file: Q2 and Q3 hold with
+"partially" in place of "half", since neither needs the fraction to be
+one-half. What the fraction would buy is a prediction -- if ACQ is half the
+effect, then ACQ and the residual should predict behaviour at comparable
+strength, which is exactly Q2's sharp version. Stating it as unlocated marks
+where a number is needed instead of borrowing one.
+
+========================================================================
+4  UNI_088  the source's own mechanism is a confound 019 does not carry
+========================================================================
+  [LITERATURE CHECK -- run 2026-08-18, does not reproduce here]
+
+    the source's mechanism: models infer they are being EVALUATED,
+    detected by systematically varying the NUMBER OF QUESTIONS
+    (batch size 1 -> 20; desirable traits rise ~0.75 points).
+
+      batch                  in 019: 0   in acquiescence.py docstring: 0
+      number of questions    in 019: 0   in acquiescence.py docstring: 0
+      how many items         in 019: 0   in acquiescence.py docstring: 0
+      evaluat                in 019: 0   in acquiescence.py docstring: 0
+
+    acquiescence.py administration schema fields: ['items', 'scale_max', 'scale_min', 'subject']
+    a field for batch size or administration order: ABSENT
+The bias the drop is decomposing was, in its source, produced by varying how
+many items the model saw at once. Nothing in 019 or in the harness records
+that. Two arms administered at different batch sizes differ on the variable
+the source identifies as causal, and the schema has no place to declare it.
+
+Which reading it contaminates is settled by 019's own Q3, and Q3 has it right:
+desirability tracks the TRAIT direction, not the raw direction -- for a
+forward item the desirable answer is agreement, for a reverse item it is
+disagreement -- so a desirability shift survives polarity recoding and lands
+in TRAIT, while cancelling in ACQ. That makes batch size a confound on the
+CORRECTED trait score specifically, which is the reading Q2 wants to test as a
+predictor.
+
+Cheap and mechanical: add a required `batch_size` (or
+`items_per_administration`) to the schema, hold it constant across arms, and
+report it. The harness already refuses ACQ when the precondition for ACQ is
+unmet; this is the same move for the precondition on TRAIT.
+
+========================================================================
+5  UNI_089  at the scale ceiling both readings lose exactly the same amount
+========================================================================
+    true acquiescence a = 1.0, scale 1-5, balanced 6+6
+
+    true T   TRAIT rec    err         ACQ rec      err         errors equal
+    3.0      3.000        +0.000      1.000        +0.000      yes
+    3.5      3.500        +0.000      1.000        +0.000      yes
+    4.0      4.000        +0.000      1.000        +0.000      yes
+    4.5      4.250        -0.250      0.750        -0.250      yes
+    5.0      4.500        -0.500      0.500        -0.500      yes
+
+    same sweep at a = 0.5
+    4.0      4.000        +0.000      0.500        +0.000      yes
+    4.5      4.500        +0.000      0.500        +0.000      yes
+    5.0      4.750        -0.250      0.250        -0.250      yes
+
+    the shipped fixtures, and whether they cross the ceiling:
+      trait_only   values [2, 4]     at ceiling  0/12   pre-clip max 4 -> clipped: no
+      acquiescer   values [4]        at ceiling  0/12   pre-clip max 4 -> clipped: no
+      mixed        values [3, 5]     at ceiling  6/12   pre-clip max 5 -> clipped: no
+      (T=5, a=1)                           pre-clip max 6 -> clipped: YES
+Provable, not just observed. Write c for the mass clipped off a forward item,
+c = (T + a) - hi when positive. Then
+
+    TRAIT = [(T+a-c) + (lo+hi) - ((lo+hi)-T+a)] / 2 = T - c/2
+    ACQ   = [(T+a-c) + ((lo+hi)-T+a)] / 2 - (lo+hi)/2 = a - c/2
+
+Both readings are pulled down by EXACTLY c/2. Censoring does not degrade the
+decomposition into noise; it moves the two numbers together, in the same
+direction, by the same amount -- so nothing in the pair reveals that it
+happened, and the diagnostics block reports no censoring state.
+
+This matters here specifically. The literature the harness is built for
+reports responses skewed toward the desirable end of every trait dimension,
+which is the regime where clipping occurs, and at true trait 5.0 with one
+point of acquiescence HALF the acquiescence signal is lost.
+
+The shipped fixtures do not reach it. `mixed` puts 6 of 12 responses exactly
+AT the ceiling and returns exact answers, because base + 1 lands on hi without
+crossing it -- the fixture touches the boundary and never tests the far side.
+A censoring detector is a two-line diagnostic the harness does not have:
+count responses at lo or hi and refuse, or flag, when the fraction is
+non-trivial. It is the same shape as the balance refusal already in the file.
+
+========================================================================
+6  UNI_090  'the size of the problem' is not the acquiescence, and the gap grows with the trait
+========================================================================
+    reading note, verbatim: uncorr minus TRAIT is the size of the problem for this run.
+
+    true T   uncorr     TRAIT      uncorr-TRAIT   ACQ        understated by
+    3.0      4.000      3.000      1.000          1.000      0.000
+    3.5      4.000      3.500      0.500          1.000      0.500
+    4.0      4.000      4.000      0.000          1.000      1.000
+
+    identity:  uncorr - TRAIT  =  ACQ - (TRAIT - midpoint)
+    so the note understates the acquiescence by exactly (TRAIT - mid)
+At a true trait of 4.0 with a full point of acquiescence, the line a reader
+acts on reports 0.000 while ACQ is 1.000.
+
+There is a defensible reading of the sentence under which it is fine: uncorr
+minus TRAIT is literally the discrepancy between a naive score and a corrected
+one, and if that is zero the naive score happened to be right. But it was
+right by cancellation, not by absence of contamination, and the sentence sits
+in a READING NOTES block directly beneath a column labelled ACQ that says
+1.000. The natural reading of "the size of the problem" in a file whose whole
+subject is acquiescence is the acquiescence.
+
+The divergence is exactly (TRAIT - midpoint), which is largest for high trait
+scores -- the desirable-end skew the case is about. So the note is least
+informative in precisely the regime the file was written for, the same shape
+as `UNI_089` one paragraph over.
+
+One clause fixes it: say that uncorr minus TRAIT is the naive-versus-corrected
+discrepancy, and that it equals ACQ only when TRAIT sits at the midpoint.
+
+========================================================================
+7  UNI_091  BALANCE_TOL has the right form and an undeclared value
+========================================================================
+    BALANCE_TOL = 0.1      MIN_ITEMS_PER_TRAIT = 4
+    a derivation, or a stated basis, in the source: ABSENT
+
+    n items   max |f-r| ok   imbalance    ACQ leak at T=4.5, a=0
+    4         0              0.000        +0.000
+    10        0              0.000        +0.000
+    20        2              0.100        +0.150
+    50        4              0.080        +0.120
+The form is right and worth saying so, because it is the part that is easy to
+get wrong. Trait leakage into ACQ under imbalance is proportional to the
+imbalance FRACTION times the trait's distance from the midpoint, so a
+proportional tolerance is the correct shape and a fixed item count would not
+have been.
+
+The value is stipulated. At n = 20 the tolerance admits a two-item imbalance,
+which leaks +0.150 into ACQ at a trait of 4.5 with zero true acquiescence --
+comparable to the ACQ values the decomposition exists to report. Below n = 20
+it is equivalent to demanding exact balance, so the constant's bite is
+n-dependent in a way nothing states.
+
+That is a `reasoning-gate` G-RES pair with one side missing: the permitted leak
+is computable from the tolerance and the trait score, and the harness has both
+numbers at the moment it decides. Reporting `permitted_leak` alongside
+`imbalance` would turn a stipulated constant into a declared error bar, and it
+needs no new input. Same disclosure gap as `presented-binary` B10's
+HANDOFF_CEILING and `domain-ledger` `DL_010`'s three band constants -- and
+unlike those, this one is computable rather than merely declarable.
+
+========================================================================
+8  UNI_092  the gate rule and the harness shipped in the same drop
+========================================================================
+    019 Q1, verbatim: "Do not build past this question until it returns."
+    LITERATURE.md OPEN item 3: has not been run
+    AVENUES A9: Run before anything else in `019`.
+
+    019 names acquiescence.py as its harness:  yes
+    acquiescence.py shipped in this drop:      yes
+    Q1 run:                                    no
+The gate says do not build past it; the gate has not been run; the harness
+shipped in the same delivery. As written, the drop breaks its own rule.
+
+The steelman is real and mostly holds. A9 -- which IS Q1 -- names
+`acquiescence.py` as the tool for its own second branch: if the audit returns
+BALANCED BUT NOT DECOMPOSED, the index is recovered from published item-level
+data, and recovering it requires exactly this code. So the harness is not
+built past the gate, it is built for one of the gate's two exits, and it is
+cheap. What the rule targets is building the STUDY.
+
+What survives is narrower and still worth recording. The rule is stated
+unconditionally, in bold, twice, in two files, and the thing it forbids is not
+distinguished from the thing the drop then did. One clause -- "the harness is
+built for the recovery branch and is not a commitment to the study" -- would
+have closed it, and a rule that reads as broken is weaker the next time it is
+invoked than a rule with its exception stated.
+
+========================================================================
+9  UNI_093  P1 gets a home, the home is absent, and the revision left the miscitation
+========================================================================
+    DECOUPLING_PATTERNS.md     ABSENT   cited by: 019
+    decouple.py                ABSENT   cited by: AVENUES
+
+    'P1' in 017:                       0
+    019 attributes P1 to:              DECOUPLING_PATTERNS.md
+    018 (revised) still attributes to: 017
+      body    '`017` P1'          1 occurrence(s)
+      x-links 'Clock 2 is P1'     1 occurrence(s)
+`UNI_070` recorded that 018's "`017` P1" names a labelling scheme 017 does not
+use, and that the referent existed unlabelled as 017's one blockquote. This
+drop resolves the attribution: 019 says the design is "P1 from
+`DECOUPLING_PATTERNS.md`", which is a different file and a plausible home for a
+P-series. So the label was never 017's, and `UNI_070`'s diagnosis was right for
+a reason it could not see -- the pointer was to a file that had not arrived.
+
+Two things follow, in opposite directions. `DECOUPLING_PATTERNS.md` and
+`decouple.py` are now named-and-absent, and both are load-bearing: the first
+supplies the pattern 019's whole WOULD MEASURE is an instance of, the second is
+said to score A8's cases "in this format directly". And the revision to 018
+touched Q1, Q2, Q4 and added an AUDIT STATUS section while leaving both
+`017` P1 citations exactly as they were, so a file was edited in the same drop
+that supplied the correct attribution and did not receive it.
+
+The absences are the expected pattern here -- three of the last five
+named-and-absent artifacts in this folder arrived a drop or two later. The
+stale citation is the cheaper one and is not on that trajectory, because
+nothing looks for it.
+
+========================================================================
+10 UNI_094  the audit's provenance is declared and its verification state is not
+========================================================================
+  [LITERATURE CHECK -- run 2026-08-18, does not reproduce here]
+
+    LITERATURE.md declares provenance: yes -- "search output, not claims of this repository"
+
+    claim                                          checked here
+    Kim & Flanigan title/authors, arXiv 2606.14037 CONFIRMED
+    A = 1.58 factual, 1.04 moral; 9 models         CONFIRMED
+    972,000 nudge-condition responses              not located
+    Ye et al. title, arXiv 2605.21778; 70 papers   CONFIRMED
+    Referent x Explicitness taxonomy               CONFIRMED
+    106 experts, 94.3%, ICC2 = .184                not located
+    PNAS Nexus 3(12) pgae533, desirable-end skew   CONFIRMED
+    reverse coding reduces, does not eliminate     CONFIRMED
+    reduced 'by roughly half'                      NOT LOCATED (UNI_087)
+    EAAMO doi 10.1145/3757887.3763016              CONFIRMED
+    reverse pairs often both affirmed              CONFIRMED, and stronger
+
+    per-item verification state in LITERATURE.md: ABSENT
+The provenance discipline is right and is stated up front -- these are search
+findings, not claims of the repository -- which is the same separation the
+`specimens/` README makes and which most of this folder does well.
+
+What is not recorded is how far each item was checked. Eight of eleven
+sampled claims confirm; three do not, and they are not distinguishable from
+the eight by anything in the file. The three that did not are all
+second-order: two are scale figures (972,000 responses; 106 experts, ICC2)
+that no argument here rests on, and one is `UNI_087`'s fraction, which two
+sub-questions do rest on.
+
+A two-state marker per item -- abstract, or read in full -- costs a word each
+and would have surfaced `UNI_086` at authoring time rather than in audit,
+because the PNAS conclusion that runs against the drop's reading is IN THE
+ABSTRACT. An audit whose purpose is to stop work from being duplicated is
+worth knowing the depth of, and it is the one field a search-based audit can
+always fill.
+
+========================================================================
+end of audit -- findings recorded in AUDIT_NOTES.md as UNI_085..UNI_094
+========================================================================
