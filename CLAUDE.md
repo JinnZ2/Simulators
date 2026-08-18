@@ -3160,10 +3160,41 @@ underneath).
   as data. **`ACL_011`:** the epicycle guard is a declaration, not a check
   — both booleans come from the caller and nothing derives them from the
   restatement's text, so it cannot be null-tested from text at all; third
-  folder with that shape after `DL_015` and `GC_003`. `ACL_009` survives
-  the test: the gate has now been run against proposals the author did not
-  write, which is not the same as a responder the author did not write, and
-  none has been run. Selftest 45/45. Stdlib only, CC0.
+  folder with that shape after `DL_015` and `GC_003`.
+  **Then the other half of `ACL_009`: a RESPONDER, which unlike a proposal
+  reads a refusal and tries again.** `adversarial_probe.py` wants one thing
+  — the dial moved and the claim off REFUTED — never reads the module's
+  source (it knows `inspect.signature` over the six classes plus each
+  refusal's text) and amends whatever the gate just asked for.
+  **`ACL_014`: it got the walk ADMITTED in five attempts**, the last
+  amendment being `lambda r: (True, ...)`, because `Sweep` required
+  `callable(...)` and nothing more — the gate checked a predicate EXISTS,
+  not that it can say no. **`ACL_015`:** before the repair that was worse
+  than the failure the module was built against — admitted sweep →
+  constant predicate returns SUPPORTED → the gradient claim REPLACES the
+  point claim → loop terminates `converged`, a parameter walk with a
+  session-stamped audit trail and a supported claim at the end. Repaired in
+  `Loop.run_sweep` and not in the constructor, which is forced rather than
+  chosen: the constructor sees a callable and no readings, so admission is
+  the wrong stage and leaving the check there is what let the walk through.
+  The predicate now runs against counterfactual readings (`permuted` = the
+  same outcomes on the wrong levels, `flattened` = every level given the
+  first outcome). **`ACL_016`:** the rule had to be tightened by
+  measurement from "some counterfactual moves" to "the PERMUTED one moves"
+  — under `any`, every symmetric function of the outcomes passed (`sum >
+  1.8`, `max > 0.8`, `variation exists`, all differing on `flattened`
+  only), and those read the values but not their assignment to levels,
+  which is what an adversary writes when it wants a predicate that looks
+  like it reads data; the stated cost is that a variation-only claim is now
+  refused, so the two failure cases are reported apart because they need
+  different fixes. **`ACL_017`:** the outcome screen is stepped around in
+  one paraphrase, as any keyword screen is (`UNI_009`, `DF_010`, same
+  shape) — and the guards that held are the two asking for a NUMBER or a
+  COMPUTATION (`ResolutionEdit`'s have/need, the discrimination check), so
+  **a guard that asks for prose can be satisfied with prose**. `ACL_009` is
+  narrower and still not closed: the adversary is author-written, and what
+  it does not try is bounded by what occurred to whoever wrote it.
+  Selftest 53/53. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
