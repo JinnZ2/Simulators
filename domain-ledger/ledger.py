@@ -7,6 +7,11 @@ A coverage number is not portable without its denominator. 61 percent over
 one domain set is a different quantity than 61 percent over another. This
 records the set.
 
+COVERAGE IS NOT THE PRIMARY TERM. It resolves position inside a band that
+anchor distance already set — see anchor.py. Reading further domains moves
+the number within a band; it does not promote a shape between bands. Both
+tools are needed to read a figure, and neither emits one alone.
+
 Four readouts, deliberately not combined into one:
 
   coverage     domains where the shape held / domains read
@@ -22,6 +27,11 @@ RESERVATION: a standing fraction held as unknown, applied to every shape.
 It is not subtracted from coverage — coverage is over what was read. It caps
 what the ledger will report as available headroom, and it is why a shape
 with high coverage still does not coalesce.
+
+The 0.2 default here encodes only the external-band ceiling of 0.8. The
+30 floor for shapes with no external support, and the 99 band requiring
+generational cycle survival, live in anchor.py where the source class is
+recorded. Do not read a ceiling off this file alone.
 
 Usage:
   ledger.py                    table over shapes/

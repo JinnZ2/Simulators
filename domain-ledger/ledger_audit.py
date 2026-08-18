@@ -21,6 +21,22 @@ import itertools
 import anchor as A
 import ledger as L
 
+import json
+
+
+def wrap_local(t, w, ind=""):
+    words, lines, cur = str(t).split(), [], ""
+    for word in words:
+        if len(cur) + len(word) + 1 > w:
+            lines.append(ind + cur)
+            cur = word
+        else:
+            cur = (cur + " " + word).strip()
+    if cur:
+        lines.append(ind + cur)
+    return lines
+
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 BAR = "=" * 70
@@ -34,7 +50,7 @@ def head(n, cid, title):
 
 
 print("domain-ledger -- audit of the delivered drop")
-print("delivered: ledger.py, anchor.py (companion, drop 3)")
+print("delivered: ledger.py (drop 4 docstring), anchor.py, 1 shape, 1 anchor map")
 print("not delivered: shapes/, README.md, CLAIM_TABLE.md")
 buf = io.StringIO()
 with contextlib.redirect_stdout(buf):
@@ -468,7 +484,174 @@ anchors/ directory prints headers and its full footer and exits 0.
 """.strip())
 
 
+# ------------------------------------------------------------------ DL_009 corrected
+head(12, "DL_009", "CORRECTED -- the two band fields are different quantities")
+adoc = json.load(open(os.path.join(HERE, "anchors",
+                                   "hierarchy-imposed-ordering.json"),
+                      encoding="utf-8"))
+print("""
+DL_009 read the docstring's two band-setting sentences as a possible
+defect: target_band is computed per anchor and reaches no document-level
+readout, while the opening paragraph says anchor proximity sets the band.
+
+The first real anchor map settles it, in a note the schema already had a
+field for:
+""".strip())
+print()
+a0 = adoc["anchors"][0]
+print("  target: %s" % a0["target"])
+print("    target_band         %s" % a0["target_band"])
+print("    corroboration class %s" % a0["corroboration"]["class"])
+for line in wrap_local(a0["corroboration"]["note"], 66, "    "):
+    print(line)
+print("""
+The two fields are not two descriptions of one thing. `target_band` is
+where the TARGET sits; `corroboration.class` is the class of support for
+the CONNECTION between the shape and that target. Anchoring to
+thermodynamics does not inherit thermodynamics' band — what is external is
+the link from imposed ordering to maintenance cost.
+
+So aggregating `corroboration.class` and not `target_band` is correct, and
+DL_009's substantive worry dissolves. This audit read a tension in the
+prose as a possible defect in the code; the code is right.
+
+What survives is one paragraph. "Anchoring near something that has
+survived generational cycles raises the number" describes something the
+code does not do and, on the anchor map's own reading, should not do --
+proximity to a cycle-persistent target is context, not corroboration. One
+sentence in the docstring, and the data is the authority.
+""".strip())
+
+# ----------------------------------------------------------------- DL_011
+head(13, "DL_011", "the third routing state is implemented and unassigned")
+from collections import Counter
+states = Counter(l["state"] for a in adoc["anchors"] for l in a["chain"])
+print()
+for st in A.STATES:
+    print("  %-20s %d" % (st, states.get(st, 0)))
+print("""
+DL_008 recorded that `absent_established` is the first implementation of a
+repair specified five times. On the first real map it is used zero times
+out of nine links.
+
+Not a defect and not an oversight -- the culture anchor's second link
+carries a note describing exactly what assigning it would mean:
+
+    If this establishes as ABSENT -- the construct genuinely does not
+    ground in biology -- that is a finding requiring its own
+    instrumentation and scientific method, not a failure of the shape.
+
+So the state is understood, its consequence is written down, and no link
+has yet been investigated far enough to earn it. `absent_established`
+requires having looked; `unrouted` is what you have before you look. The
+map is at the before-you-look stage throughout, which the next section
+measures.
+""".strip())
+
+# ----------------------------------------------------------------- DL_012
+head(14, "DL_012", "unrouted holds three de-facto states and the readout merges them")
+unr = [(a["target"], l) for a in adoc["anchors"] for l in a["chain"]
+       if l["state"] == A.UNROUTED]
+print()
+print("  %-44s %9s %6s" % ("link", "attempted", "open"))
+print("  " + "-" * 62)
+for _, l in unr:
+    print("  %-44s %9d %6d" % (
+        l["link"][:44], len(l.get("paths_attempted") or []),
+        len(l.get("paths_open") or [])))
+noopen = [l for _, l in unr if not (l.get("paths_open") or [])]
+print()
+print("  every unrouted link has 0 attempted paths")
+print("  %d of %d have no open path named either" % (len(noopen), len(unr)))
+print("""
+The docstring defines unrouted as "no path found yet. Alternate paths not
+exhausted", which covers three situations the map distinguishes in its
+data and the readout does not:
+
+    paths attempted, none worked, others open    -- work has been done
+    nothing attempted, open paths named          -- work is queued
+    nothing attempted, no path nameable          -- no instrument exists
+
+`unrouted_total` counts all three as one number, 6. The two links in the
+third group are the ones whose notes ask for new instrumentation
+("No instrument identified"), which is the same distance from a reading as
+`absent_established` and arrives at it from the other side.
+
+The schema already carries what separates them -- `paths_attempted` and
+`paths_open` are fields, and `blocking()` prints both. The gap is at the
+readout, and it is the same shape as DL_003: the information survives per
+item and the derived scalar merges it.
+""".strip())
+
+# ----------------------------------------------------------------- DL_013
+head(15, "DL_013", "the map states three numbers about itself and all three hold")
+sc = A.score(adoc)
+nq = [l for a in adoc["anchors"] for l in a["chain"] if l.get("quantified")]
+print()
+print("  %-42s %-10s %s" % ("claim in the file's own open list", "computed", "holds"))
+print("  " + "-" * 64)
+print("  %-42s %-10s %s" % ("Anchor spread is 0.5", sc["anchor_spread"],
+                            sc["anchor_spread"] == 0.5))
+print("  %-42s %-10s %s" % ("The ceiling reported is 0.80", sc["ceiling"],
+                            sc["ceiling"] == 0.80))
+print("  %-42s %-10s %s" % ("No link anywhere in this file is quantified",
+                            len(nq), not nq))
+print("""
+Three self-reported numbers, three exact. The second is stated with its
+own qualification -- "It is a ceiling on the whole sense, not a report
+that the shape is near it" -- which is the distinction DL_010 turns on,
+made by the author in the file.
+
+The fourth open item is the one that matters, and it is the folder's
+thesis instanced:
+
+    The load-bearing unrouted link is cost-gradient-by-depth-of-ordering
+    on the thermodynamic anchor. Routing it with a number would do more
+    than reading further domains, because it converts the near anchor from
+    stated to measured.
+
+ledger.py's new paragraph says coverage "resolves position inside a band
+that anchor distance already set ... Reading further domains moves the
+number within a band; it does not promote a shape between bands." The map
+then names which single measurement beats more coverage, and it is a link
+in a provenance chain rather than a domain in a ledger.
+
+That is the two tools doing the job the pair was built for, on one shape,
+with no reading taken in either.
+""".strip())
+
+# ----------------------------------------------------------------- DL_002 update
+head(16, "DL_002", "the reservation constant gets a source; the finding stands")
+print("""
+Drop 4 changes ledger.py by docstring only -- the code is byte-identical
+after stripping the module docstring -- and one of the two additions is a
+derivation for the constant DL_010 flagged as stipulated:
+
+    The 0.2 default here encodes only the external-band ceiling of 0.8.
+    The 30 floor for shapes with no external support, and the 99 band
+    requiring generational cycle survival, live in anchor.py where the
+    source class is recorded. Do not read a ceiling off this file alone.
+""".strip())
+print()
+print("  1 - SKELETON reservation = %.2f" % (1 - L.SKELETON["reservation"]))
+print("  anchor.py BAND_CEILING['external'] = %.2f" % A.BAND_CEILING[A.EXTERNAL])
+print("  the default is now derived, not free: %s" % (
+    abs((1 - L.SKELETON["reservation"]) - A.BAND_CEILING[A.EXTERNAL]) < 1e-9))
+print("""
+One of DL_010's three constants now has a stated source. 0.30 and 0.99
+remain stipulated.
+
+DL_002 itself stands unchanged: `ceiling` is still computed, returned,
+printed beside RESERVATION, and read by nothing. The disclosure sharpens
+it rather than closing it -- the file now says "do not read a ceiling off
+this file alone" and `detail()` still prints `RESERVATION 0.20 ceiling
+0.80` as a line of the report. A number that no readout applies and the
+docstring warns against reading is the one line in the output with no
+consumer.
+""".strip())
+
+
 print()
 print(BAR)
-print("end of audit -- findings recorded in AUDIT_NOTES.md as DL_001..DL_010")
+print("end of audit -- findings recorded in AUDIT_NOTES.md as DL_001..DL_013")
 print(BAR)

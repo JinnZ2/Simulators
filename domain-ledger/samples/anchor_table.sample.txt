@@ -1,0 +1,14 @@
+shape / sense                   anch  ceil  sprd  done  unrt  asrt
+------------------------------------------------------------------
+hierarchy-cut-generation / imp     3  0.80  0.50     0     6  0.61
+
+ceil  band ceiling from the strongest corroboration class present.
+sprd  gap between nearest and furthest anchor. non-zero means the
+      number is a composite of anchors at different distances.
+done  anchors whose provenance chain is fully routed.
+unrt  links with no path found yet. Not blockages — unrouted.
+asrt  confidence asserted in the file. Not derived here.
+
+No composite figure is emitted. Weighting near against far anchors
+is not specified, and a number produced by guessing at it would be
+less honest than the anchors themselves.

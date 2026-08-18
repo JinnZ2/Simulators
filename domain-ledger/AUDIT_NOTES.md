@@ -35,9 +35,9 @@ selftest. 14/14.
 
 | file | status |
 |------|--------|
-| `ledger.py` | delivered, verbatim |
+| `ledger.py` | delivered, verbatim — **drop 4 docstring**; code byte-identical after stripping the module docstring |
 | `anchor.py` | delivered drop 3, verbatim — companion; selftest 14/14 |
-| `anchors/` | not delivered — no anchor map has been recorded |
+| `anchors/hierarchy-imposed-ordering.json` | delivered drop 4, verbatim — 3 anchors, 9 links, 0 quantified |
 | `shapes/hierarchy-cut-generation.json` | delivered drop 2, verbatim — 30 domains, 0 read, asserted coverage 0.61 |
 | `README.md`, `CLAIM_TABLE.md` | not delivered |
 | `ledger_audit.py` | added |
@@ -53,13 +53,16 @@ in the author's mouth.
 | id | claim | falsified by | status |
 |----|-------|--------------|--------|
 | DL_001 | The load-bearing idea — a coverage number is not portable without its denominator — is `CD_008`/`ANC_006` restated for a confidence readout, and the tool follows it: four readouts returned separately with their denominators named in the output | a reading on which the four are combinable | SUPPORTED (holds) |
-| DL_002 | The reservation is defined as capping reported headroom and nothing applies it: `ceiling` is computed, returned, printed, and read by nothing; coverage may exceed it with no readout saying so | a headroom field, or a flag when coverage exceeds the ceiling | SUPPORTED |
+| DL_002 | The reservation is defined as capping reported headroom and nothing applies it: `ceiling` is computed, returned, printed, and read by nothing; coverage may exceed it with no readout saying so | a headroom field, or a flag when coverage exceeds the ceiling | SUPPORTED — drop 4 gives the constant a source (0.2 = 1 − the external band ceiling) and does not apply it |
 | DL_003 | `coverage` puts `mixed` in the denominator and not the numerator, so all-break and all-mixed both return 0.00 | a footer clause naming what the denominator includes, or a separate ratio | SUPPORTED |
 | DL_004 | `detail()` reads `criterion_fixed_in_advance` and `open`; `SKELETON` carries neither, so `--new` never prompts for the pre-registration guard — `CW_015` repeated in a second folder | either field entering `SKELETON` | SUPPORTED |
 | DL_006 | The first shape instances the tool's own argument: an asserted 0.61 sits beside a derived `--`, and `detail()` prints "ledger not yet populated" rather than substituting the asserted value or a zero | the derived column filling in and disagreeing with 0.61 | SUPPORTED (holds) |
 | DL_007 | The shape names which of `category-weld/welds/hierarchy.json`'s five senses it runs on, and pre-classifies two domains by sense before reading — the first time in this drop family that a stated cross-folder precondition is met | — | SUPPORTED (holds) |
 | DL_008 | `anchor.py` keeps `unrouted` and `absent_established` apart and states that collapsing them "loses the distinction the map exists for" — the fifth instance of this repair in the family and the first implemented, counted separately and restated in the output | the two collapsing anywhere in the readout | SUPPORTED (holds) |
-| DL_009 | `target_band` and `corroboration.class` are both described as band-setting; only the second reaches any document-level readout, and `target_band` is computed, printed per anchor, and aggregated by nothing | `target_band` entering a document-level field | SUPPORTED |
+| DL_009 | ~~`target_band` and `corroboration.class` are both described as band-setting; only the second reaches a readout~~ | the first anchor map, which shows they are different quantities and the code aggregates the right one | **CORRECTED** — the code is right; one docstring sentence survives |
+| DL_011 | `absent_established` is used 0 times of 9 links on the first real map — implemented, counted separately, and not yet earned by any link | a link assigned the state | SUPPORTED (state of the data, not a defect) |
+| DL_012 | `unrouted` holds three de-facto states — attempted-and-open, queued, and no-instrument-nameable — and `unrouted_total` merges all three; the schema already carries `paths_attempted`/`paths_open` to separate them | a readout separating them | SUPPORTED |
+| DL_013 | The map's `open` list states three numbers about itself — spread 0.5, ceiling 0.80, no link quantified — and all three are exact | any of the three disagreeing | SUPPORTED (holds) |
 | DL_010 | The refusal to emit a composite is real and selftest-enforced; the two numbers it does emit (`ceiling`, `anchor_spread`) are functions of three stipulated constants with rationales and no derivation, and unlike `HANDOFF_CEILING` this is not disclosed | a derivation for 0.30 / 0.80 / 0.99, or a disclosure line | SUPPORTED |
 | DL_005 | With no `shapes/` directory the tool prints a well-formed report with zero rows and exits 0, where all three sibling scorers refuse on stderr with rc 1 | the empty state refusing, or saying it is empty | SUPPORTED |
 
@@ -344,6 +347,133 @@ does not classify.
 `DL_004` stands for `ledger.py` unchanged, with the direction of travel
 recorded beside it. `DL_005` recurs unchanged too — `anchor.py` with no
 `anchors/` directory prints headers and its full footer and exits 0.
+
+## 12 — DL_009, CORRECTED
+
+`DL_009` read the docstring's two band-setting sentences as a possible
+defect: `target_band` is computed per anchor and reaches no document-level
+readout, while the opening paragraph says anchor proximity sets the band.
+
+The first real anchor map settles it, in a note the schema already had a
+field for:
+
+> The target itself sits in the cycle-persistent band. **What is
+> external-band is the connection between imposed ordering and maintenance
+> cost, not the thermodynamics.**
+
+The two fields are not two descriptions of one thing. `target_band` is
+where the *target* sits; `corroboration.class` is the class of support for
+the *connection* between the shape and that target. Anchoring to
+thermodynamics does not inherit thermodynamics' band.
+
+So aggregating `corroboration.class` and not `target_band` is correct.
+**This audit read a tension in the prose as a possible defect in the code;
+the code is right.**
+
+What survives is one paragraph — *"anchoring near something that has
+survived generational cycles raises the number"* describes something the
+code does not do and, on the map's own reading, should not. Proximity to a
+cycle-persistent target is context, not corroboration.
+
+## 13 — DL_011, the third state, unassigned
+
+    routed               3
+    unrouted             6
+    absent_established   0
+
+`DL_008` recorded `absent_established` as the first implementation of a
+repair specified five times. On the first real map it is used zero times
+of nine links.
+
+Not a defect. The culture anchor's second link writes down exactly what
+assigning it would mean:
+
+> If this establishes as ABSENT — the construct genuinely does not ground
+> in biology — that is a finding requiring its own instrumentation and
+> scientific method, not a failure of the shape.
+
+The state is understood, its consequence is recorded, and no link has been
+investigated far enough to earn it. `absent_established` requires having
+looked; `unrouted` is what you have before you look, and the map is at the
+before-you-look stage throughout.
+
+## 14 — DL_012, three states inside one
+
+    link                                          attempted   open
+    expenditure to hold an ordering rises ...             0      3
+    a system running a rising cost gradient ...           0      2
+    environment-coupled vs imposed ordering               0      1
+    cultural and religious orderings ...                  0      3
+    that provenance grounds through biology               0      0
+    human-centrism and ego in the source material         0      0
+
+Every unrouted link has 0 attempted paths; 2 of 6 have no open path named
+either. The docstring's definition — *"no path found yet. Alternate paths
+not exhausted"* — covers three situations the data distinguishes and the
+readout does not:
+
+    paths attempted, none worked, others open   work has been done
+    nothing attempted, open paths named         work is queued
+    nothing attempted, no path nameable         no instrument exists
+
+`unrouted_total` counts all three as 6. The two in the third group are the
+ones whose notes ask for new instrumentation (*"No instrument
+identified"*) — the same distance from a reading as `absent_established`,
+reached from the other side.
+
+The schema already carries what separates them, and `blocking()` prints
+both fields. The gap is at the readout — the same shape as `DL_003`: the
+information survives per item and the derived scalar merges it.
+
+## 15 — DL_013, the map's own numbers
+
+    Anchor spread is 0.5                          0.5   exact
+    The ceiling reported is 0.80                  0.80  exact
+    No link anywhere in this file is quantified   0     exact
+
+Three self-reported numbers, three exact. The second carries its own
+qualification — *"It is a ceiling on the whole sense, not a report that
+the shape is near it"* — which is the distinction `DL_010` turns on, made
+by the author in the file.
+
+The fourth open item is the folder's thesis instanced:
+
+> The load-bearing unrouted link is cost-gradient-by-depth-of-ordering on
+> the thermodynamic anchor. Routing it with a number would do more than
+> reading further domains, because it converts the near anchor from stated
+> to measured.
+
+`ledger.py`'s new paragraph says coverage *"resolves position inside a
+band that anchor distance already set ... Reading further domains moves
+the number within a band; it does not promote a shape between bands."* The
+map then names which single measurement beats more coverage — and it is a
+link in a provenance chain, not a domain in a ledger.
+
+That is the pair doing the job it was built for, on one shape, with no
+reading taken in either.
+
+## 16 — DL_002, a source for the constant
+
+Drop 4 changes `ledger.py` by docstring only (code byte-identical after
+stripping the module docstring). One addition derives the constant
+`DL_010` flagged:
+
+> The 0.2 default here encodes only the external-band ceiling of 0.8. The
+> 30 floor ... and the 99 band ... live in anchor.py where the source class
+> is recorded. **Do not read a ceiling off this file alone.**
+
+    1 - SKELETON reservation           = 0.80
+    anchor.py BAND_CEILING['external'] = 0.80
+
+One of `DL_010`'s three constants now has a stated source; 0.30 and 0.99
+remain stipulated.
+
+`DL_002` stands unchanged — `ceiling` is still computed, returned, printed
+beside `RESERVATION`, and read by nothing. The disclosure sharpens it: the
+file now says *do not read a ceiling off this file alone* and `detail()`
+still prints `RESERVATION 0.20 ceiling 0.80` as a line of the report. A
+number no readout applies and the docstring warns against reading is the
+one line in the output with no consumer.
 
 ## Relation to the rest of the repo
 

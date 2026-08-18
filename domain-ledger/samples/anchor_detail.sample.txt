@@ -1,0 +1,70 @@
+SHAPE     hierarchy-cut-generation
+SENSE     imposed_ordering
+STATEMENT Imposed ordering does not terminate: it has to keep
+          generating further orderings in order to exist, and does
+          so until it eats itself. Runs on the imposed_ordering
+          sense only. The other four senses in category-weld
+          welds/hierarchy.json are not this claim and would need
+          their own anchor maps.
+
+CEILING   0.80  (class: external)
+ASSERTED  0.61
+SPREAD    0.50
+
+ANCHOR    thermodynamics / energy systems
+    band          cycle_persistent (0.99)
+    corroboration external (ceiling 0.80, studies --)
+    chain         4 links: 2 routed, 2 unrouted, 0 absent
+    routed        0.50   quantified 0.00
+      UNROUTED expenditure to hold an ordering rises as the
+      ordering is extended, so extension is not free and the
+      system runs a cost gradient
+      UNROUTED a system running a rising cost gradient with
+      no termination condition consumes its own substrate
+
+ANCHOR    biology / animal behaviour
+    band          cycle_persistent (0.99)
+    corroboration external (ceiling 0.80, studies --)
+    chain         2 links: 1 routed, 1 unrouted, 0 absent
+    routed        0.50   quantified 0.00
+      UNROUTED environment-coupled ordering and imposed
+      ordering are different quantities, not two magnitudes
+      of one
+
+ANCHOR    culture / religion / incentivised imposition
+    band          none (0.30)
+    corroboration none (ceiling 0.30, studies --)
+    chain         3 links: 0 routed, 3 unrouted, 0 absent
+    routed        0.00   quantified 0.00
+      UNROUTED cultural and religious orderings are human
+      constructs with a traceable provenance
+      UNROUTED that provenance grounds through biology
+      rather than originating at the construct layer
+      UNROUTED human-centrism and ego in the source material
+      are measurable and correctable for
+
+OPEN
+    Anchor spread is 0.5 — the near anchors sit in the
+    external band and the construct anchor sits at none. The
+    composite is not computed. How near and far anchors weight
+    against each other is unspecified, and a figure produced
+    by guessing at the weighting would be worse than no
+    figure.
+
+OPEN
+    The ceiling reported is 0.80 because at least one anchor
+    has external corroboration. It is a ceiling on the whole
+    sense, not a report that the shape is near it.
+
+OPEN
+    No link anywhere in this file is quantified. Chain routing
+    says a path exists; it does not say a number was taken
+    along it.
+
+OPEN
+    The load-bearing unrouted link is
+    cost-gradient-by-depth-of-ordering on the thermodynamic
+    anchor. Routing it with a number would do more than
+    reading further domains, because it converts the near
+    anchor from stated to measured.
+

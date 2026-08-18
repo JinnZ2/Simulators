@@ -2755,7 +2755,38 @@ underneath).
   carries `open`, which `ledger.py`'s does not — same author, next tool,
   half the gap fixed unprompted; `criterion_fixed_in_advance` is in
   neither and `anchor.py` does not read it, which is consistent since an
-  anchor map does not classify. `DL_005` recurs unchanged. CC0.
+  anchor map does not classify. `DL_005` recurs unchanged.
+  **Fourth drop lands the first anchor map** (`hierarchy-imposed-ordering`,
+  3 anchors / 9 links / 0 quantified) and a docstring-only `ledger.py`
+  change — code byte-identical after stripping the module docstring.
+  **`DL_009` is CORRECTED against this audit:** it read the docstring's two
+  band-setting sentences as a possible defect in the code, and the map
+  settles it in a note the schema already had a field for — "the target
+  itself sits in the cycle-persistent band; what is external-band is the
+  connection between imposed ordering and maintenance cost, not the
+  thermodynamics." `target_band` is where the TARGET sits,
+  `corroboration.class` is the support for the CONNECTION, aggregating the
+  second is right, and only one docstring sentence survives the
+  correction. **`DL_013`:** the map's `open` list states three numbers
+  about itself — spread 0.5, ceiling 0.80, no link quantified — and all
+  three are exact; its fourth item names the folder's thesis instanced,
+  that routing one unrouted link (cost-gradient-by-depth-of-ordering)
+  "would do more than reading further domains, because it converts the
+  near anchor from stated to measured". **`DL_011`:**
+  `absent_established` is used 0 of 9 times — implemented, counted apart,
+  and not yet earned, since it requires having looked and `unrouted` is
+  what you have before you look. **`DL_012`:** `unrouted` holds three
+  de-facto states (attempted-and-open / queued / no-instrument-nameable),
+  `unrouted_total` merges all three at 6, and the two with no path nameable
+  are the ones whose notes ask for instrumentation that does not exist —
+  the same distance from a reading as `absent_established`, reached from
+  the other side; the schema already carries `paths_attempted`/`paths_open`
+  to separate them. **`DL_002` sharpens rather than closes:** the drop
+  derives the 0.2 reservation default from the external band ceiling
+  (1 − 0.80, exact) and adds "do not read a ceiling off this file alone",
+  so one of `DL_010`'s three constants now has a source — while `ceiling`
+  is still computed, printed beside `RESERVATION`, and read by nothing.
+  CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

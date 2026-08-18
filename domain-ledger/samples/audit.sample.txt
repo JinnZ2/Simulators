@@ -1,5 +1,5 @@
 domain-ledger -- audit of the delivered drop
-delivered: ledger.py, anchor.py (companion, drop 3)
+delivered: ledger.py (drop 4 docstring), anchor.py, 1 shape, 1 anchor map
 not delivered: shapes/, README.md, CLAIM_TABLE.md
 selftest: 13/13, rc=0
 
@@ -341,5 +341,152 @@ recorded with it. DL_005 also recurs unchanged: anchor.py with no
 anchors/ directory prints headers and its full footer and exits 0.
 
 ======================================================================
-end of audit -- findings recorded in AUDIT_NOTES.md as DL_001..DL_010
+12 DL_009  CORRECTED -- the two band fields are different quantities
+======================================================================
+DL_009 read the docstring's two band-setting sentences as a possible
+defect: target_band is computed per anchor and reaches no document-level
+readout, while the opening paragraph says anchor proximity sets the band.
+
+The first real anchor map settles it, in a note the schema already had a
+field for:
+
+  target: thermodynamics / energy systems
+    target_band         cycle_persistent
+    corroboration class external
+    The target itself sits in the cycle-persistent band. What is
+    external-band is the connection between imposed ordering and
+    maintenance cost, not the thermodynamics. Study count not tallied
+    — the tally is the work, not a placeholder to fill with a guess.
+The two fields are not two descriptions of one thing. `target_band` is
+where the TARGET sits; `corroboration.class` is the class of support for
+the CONNECTION between the shape and that target. Anchoring to
+thermodynamics does not inherit thermodynamics' band — what is external is
+the link from imposed ordering to maintenance cost.
+
+So aggregating `corroboration.class` and not `target_band` is correct, and
+DL_009's substantive worry dissolves. This audit read a tension in the
+prose as a possible defect in the code; the code is right.
+
+What survives is one paragraph. "Anchoring near something that has
+survived generational cycles raises the number" describes something the
+code does not do and, on the anchor map's own reading, should not do --
+proximity to a cycle-persistent target is context, not corroboration. One
+sentence in the docstring, and the data is the authority.
+
+======================================================================
+13 DL_011  the third routing state is implemented and unassigned
+======================================================================
+
+  routed               3
+  unrouted             6
+  absent_established   0
+DL_008 recorded that `absent_established` is the first implementation of a
+repair specified five times. On the first real map it is used zero times
+out of nine links.
+
+Not a defect and not an oversight -- the culture anchor's second link
+carries a note describing exactly what assigning it would mean:
+
+    If this establishes as ABSENT -- the construct genuinely does not
+    ground in biology -- that is a finding requiring its own
+    instrumentation and scientific method, not a failure of the shape.
+
+So the state is understood, its consequence is written down, and no link
+has yet been investigated far enough to earn it. `absent_established`
+requires having looked; `unrouted` is what you have before you look. The
+map is at the before-you-look stage throughout, which the next section
+measures.
+
+======================================================================
+14 DL_012  unrouted holds three de-facto states and the readout merges them
+======================================================================
+
+  link                                         attempted   open
+  --------------------------------------------------------------
+  expenditure to hold an ordering rises as the         0      3
+  a system running a rising cost gradient with         0      2
+  environment-coupled ordering and imposed ord         0      1
+  cultural and religious orderings are human c         0      3
+  that provenance grounds through biology rath         0      0
+  human-centrism and ego in the source materia         0      0
+
+  every unrouted link has 0 attempted paths
+  2 of 6 have no open path named either
+The docstring defines unrouted as "no path found yet. Alternate paths not
+exhausted", which covers three situations the map distinguishes in its
+data and the readout does not:
+
+    paths attempted, none worked, others open    -- work has been done
+    nothing attempted, open paths named          -- work is queued
+    nothing attempted, no path nameable          -- no instrument exists
+
+`unrouted_total` counts all three as one number, 6. The two links in the
+third group are the ones whose notes ask for new instrumentation
+("No instrument identified"), which is the same distance from a reading as
+`absent_established` and arrives at it from the other side.
+
+The schema already carries what separates them -- `paths_attempted` and
+`paths_open` are fields, and `blocking()` prints both. The gap is at the
+readout, and it is the same shape as DL_003: the information survives per
+item and the derived scalar merges it.
+
+======================================================================
+15 DL_013  the map states three numbers about itself and all three hold
+======================================================================
+
+  claim in the file's own open list          computed   holds
+  ----------------------------------------------------------------
+  Anchor spread is 0.5                       0.5        True
+  The ceiling reported is 0.80               0.8        True
+  No link anywhere in this file is quantified 0          True
+Three self-reported numbers, three exact. The second is stated with its
+own qualification -- "It is a ceiling on the whole sense, not a report
+that the shape is near it" -- which is the distinction DL_010 turns on,
+made by the author in the file.
+
+The fourth open item is the one that matters, and it is the folder's
+thesis instanced:
+
+    The load-bearing unrouted link is cost-gradient-by-depth-of-ordering
+    on the thermodynamic anchor. Routing it with a number would do more
+    than reading further domains, because it converts the near anchor from
+    stated to measured.
+
+ledger.py's new paragraph says coverage "resolves position inside a band
+that anchor distance already set ... Reading further domains moves the
+number within a band; it does not promote a shape between bands." The map
+then names which single measurement beats more coverage, and it is a link
+in a provenance chain rather than a domain in a ledger.
+
+That is the two tools doing the job the pair was built for, on one shape,
+with no reading taken in either.
+
+======================================================================
+16 DL_002  the reservation constant gets a source; the finding stands
+======================================================================
+Drop 4 changes ledger.py by docstring only -- the code is byte-identical
+after stripping the module docstring -- and one of the two additions is a
+derivation for the constant DL_010 flagged as stipulated:
+
+    The 0.2 default here encodes only the external-band ceiling of 0.8.
+    The 30 floor for shapes with no external support, and the 99 band
+    requiring generational cycle survival, live in anchor.py where the
+    source class is recorded. Do not read a ceiling off this file alone.
+
+  1 - SKELETON reservation = 0.80
+  anchor.py BAND_CEILING['external'] = 0.80
+  the default is now derived, not free: True
+One of DL_010's three constants now has a stated source. 0.30 and 0.99
+remain stipulated.
+
+DL_002 itself stands unchanged: `ceiling` is still computed, returned,
+printed beside RESERVATION, and read by nothing. The disclosure sharpens
+it rather than closing it -- the file now says "do not read a ceiling off
+this file alone" and `detail()` still prints `RESERVATION 0.20 ceiling
+0.80` as a line of the report. A number that no readout applies and the
+docstring warns against reading is the one line in the output with no
+consumer.
+
+======================================================================
+end of audit -- findings recorded in AUDIT_NOTES.md as DL_001..DL_013
 ======================================================================
