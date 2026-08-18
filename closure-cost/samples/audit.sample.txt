@@ -1,0 +1,203 @@
+closure-cost -- audit of the delivered drop
+delivered: closure.py
+not delivered: cases/, README.md, CLAIM_TABLE.md
+selftest: 15/15, rc=0
+
+======================================================================
+1  CC_001  the vocabulary carries a named rival hypothesis
+======================================================================
+The shape: response failure tracks whether a variable was carried as live,
+not whether the event was severe and not whether information was
+available. The delay when it fires is categorisation, not reaction.
+
+Two things in the docstring are unusual enough to record before anything
+else.
+
+A NAMED RIVAL, IN THE SCHEMA.
+
+    Missing procedure is the obvious competing account of non-response. It
+    is not independent: nobody acquires a protocol for an event they have
+    closed. So procedure absence can be a downstream readout of the closed
+    prior rather than an alternative to it. That collapse is not
+    automatic. It is asserted per case, with the ground stated, and the
+    field records which.
+
+`procedure_gap.collapsed_into_closure` plus `procedure_gap.ground` carry
+it. This is the first folder in the drop family to hold its competing
+explanation as a schema field rather than as prose, and the first to state
+that the rival is not independent of the shape -- which is the harder
+admission, because a non-independent rival cannot be ruled out by finding
+the shape.
+
+FOUR-VALUED KNOWLEDGE STATE.
+
+    not_taught              never delivered
+    taught_not_retained     delivered, did not attach
+    retained_not_executed   present, not run under load
+    not_separable           the record cannot tell them apart
+
+Three failures with different signatures and different remedies, plus an
+explicit state for the record being unable to separate them -- and the
+docstring says why: "Most disaster self-report cannot separate them, and
+the field says so rather than guessing."
+
+That is the sixth instance of one repair across this drop family and the
+third designed in rather than found:
+
+  PB_004   frame_sim option_gain          0 options found == never ran
+  PB_012   binary_audit handoff()         above ceiling == never checked
+  GC_004   MECHANISM_10 R3                not cited == no corpus searched
+  MD_002   moral-decomposer reduces_to    irreducible == routed elsewhere
+  GC_010   SUBCASE_10A S1                 absent vs zero -- specified
+  DL_008   anchor.py routing states       unrouted vs absent -- implemented
+  CC_001   closure.py knowledge_state     three failures vs not_separable
+
+`knowledge_separable` reports it, and `detail()` prints "The record cannot
+separate the three failures" when it fires. Sections 2 and 3 are about the
+two places in the same file where the discipline is not applied.
+
+======================================================================
+2  CC_002  the discriminator collapses unknown with checked-and-absent
+======================================================================
+rules_out = bool(avail in (PRESENT, PRESENT_LOCAL) and var == CLOSED)
+
+`availability_rules_out_procedure_gap` is the field that decides between
+the shape and its rival. The docstring says so: "If the information was
+absent, procedure gap stands on its own. If the information was present
+... then availability is ruled out and the procedure gap needs a different
+explanation."
+
+`AVAILABILITY` includes `None` as a legal value, meaning not recorded.
+Measured:
+
+  state                                  information_availability rules_out
+  --------------------------------------------------------------------------
+  checked, information was absent        absent                   False
+  never recorded (None is legal)         None                     False
+  checked, information present           present                  True
+  checked, local memorialised instance   present_local_instance   True
+Rows 1 and 2 are different states and return the same value. "We looked and
+the information was not there, so the procedure gap stands on its own" and
+"nobody recorded whether the information was there" are the measurement and
+its absence, and `bool()` merges them into False.
+
+What makes this the sharp one rather than a routine instance: the same
+function keeps the distinction two lines away, and the selftest asserts it.
+
+  budget_consumed on an unfilled case : None
+    selftest check: "budget flag none not false"
+  rules_out       on an unfilled case : False
+    no selftest check for the unrecorded case
+`budget_consumed` is `None if spend is None else spend >= 1.0` -- correct,
+deliberate, and pinned. `rules_out` is `bool(...)` -- and it is the field
+that adjudicates the rival the whole design is built around.
+
+Same repair, same file, one applied and one not. A three-valued return
+(None / False / True) needs no new vocabulary: `None` when availability was
+not recorded, `False` when it was recorded absent.
+
+======================================================================
+3  CC_003  knowledge_separable fails open on an omitted field
+======================================================================
+"knowledge_separable": c.get("knowledge_state") != NOT_SEPARABLE
+
+  case                     knowledge_state      separable
+  --------------------------------------------------------
+  states not_separable     not_separable        False
+  states not_taught        not_taught           True
+  omits the field          None                 True
+A case that omits `knowledge_state` reads as SEPARABLE -- the informative
+state. The default runs toward the claim rather than away from it, which
+is the opposite of what presented-binary's `binary_audit` does with every
+one of its eleven checks (PB_008: every default runs toward `absent`).
+
+`SKELETON` defaults the field to `not_separable`, so anything from `--new`
+is safe. A hand-written case is not, and the selftest covers the stated
+values and not the omitted one.
+
+Small fix, same shape as section 2: compare against the vocabulary rather
+than against one member of it -- separable only when the value is one of
+the three named failures.
+
+======================================================================
+4  CC_004  argument handling regresses against both sibling tools
+======================================================================
+
+  tool                             bounds-checked lookup after a flag
+  --------------------------------------------------------------------
+  domain-ledger/ledger.py          True
+  domain-ledger/anchor.py          True
+  closure-cost/closure.py          False
+
+  measured exit codes:
+    closure.py --case            IndexError, rc 1
+    closure.py --case unknown    'no case named unknown', rc 1
+    closure.py --branch unknown  empty table, rc 0
+Both sibling tools in this family guard the lookup after a flag;
+closure.py does not, so `--case` with no argument raises IndexError
+instead of a message. `--new` in the same file IS guarded, so the pattern
+is known to the author and applied once of three times.
+
+The second asymmetry is between the two lookups. An unknown case name
+errors on stderr with rc 1; an unknown branch name prints an empty table
+and exits 0. A typo in a branch name is indistinguishable from a branch
+with no cases in it -- which is the same shape as section 2 one layer out,
+at the CLI.
+
+======================================================================
+5  CC_005  the instrument branch is mechanism 6 with a rate on it
+======================================================================
+instrument   a reliable intermediary exists and becomes the reading.
+                 The underlying quantity stops being sampled directly.
+                 Failure clusters where the intermediary has been correct
+                 for a long time, which is the inverse of how reliability
+                 is usually scored.
+
+`uninstrumented/`'s sixth mechanism, PROXY SUBSTITUTION, is "an
+enforceable measure displaces the target it stood in for" -- the register's
+worked entry being hours-since-last-drive standing in for fitness to drive.
+That is the first sentence here.
+
+The second sentence is not in the register. PROXY SUBSTITUTION as filed
+has no time term: it says the displacement happened, not that the risk
+accumulates with the proxy's track record. `signal.years_correct` is that
+term, and the claim on it is directional -- a longer correct record is a
+larger exposure, because reliance grew with it and direct sampling stopped.
+
+That is a real addition to an existing mechanism rather than a new
+mechanism, and it is checkable in principle without any new vocabulary:
+across recorded instrument failures, is time-since-last-direct-sample
+correlated with response delay. The field exists; no case does.
+
+======================================================================
+6  CC_006  an empty corpus prints a clean report -- third tool
+======================================================================
+
+  rows printed  : 0
+  lines printed : 14
+  exit code     : 0
+
+  siblings on the same state:
+    category-weld/weld.py                  refuses on empty: True
+    presented-binary/binary_audit.py       refuses on empty: True
+    generation-capacity/capacity.py        refuses on empty: True
+    domain-ledger/ledger.py                refuses on empty: False
+    domain-ledger/anchor.py                refuses on empty: False
+    closure-cost/closure.py                refuses on empty: False
+Three tools refuse, three print. The split is by drop family rather than
+by design intent -- the three that refuse are the older ones.
+
+closure.py does better than the other two on one point: its table footer
+states the corpus condition rather than only the column meanings.
+
+    No case here quantifies the mechanism. These are properties of the
+    records, and the records were not built to ask this.
+
+That sentence is true of an empty run and of a full one, and it is the
+honest framing for a folder whose readouts are all properties of records
+that were written for another purpose. DL_005 stands for all three: the
+line prints over zero cases and reads the same.
+
+======================================================================
+end of audit -- findings recorded in AUDIT_NOTES.md as CC_001..CC_006
+======================================================================

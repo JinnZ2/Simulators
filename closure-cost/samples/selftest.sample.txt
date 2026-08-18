@@ -1,0 +1,17 @@
+PASS local instance flagged
+PASS availability rules out rival
+PASS absent info does not rule out rival
+PASS spend ratio computed
+PASS full budget flagged
+PASS partial budget not flagged
+PASS spend none without budget
+PASS budget flag none not false
+PASS knowledge separable true
+PASS not_separable detected
+PASS collapse carried with ground
+PASS collapse none when unstated
+PASS signal fields absent stay none
+PASS branches distinct
+PASS no verdict field
+
+15/15

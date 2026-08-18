@@ -2787,6 +2787,50 @@ underneath).
   so one of `DL_010`'s three constants now has a source — while `ceiling`
   is still computed, printed beside `RESERVATION`, and read by nothing.
   CC0.
+- `closure-cost/` — One file, `closure.py`, reading recorded cases where a
+  variable was closed before the event arrived. The shape: **response
+  failure tracks whether a variable was carried as live**, not whether the
+  event was severe and not whether information was available — a variable
+  closed as impossible has no handling class attached because none was
+  needed, so when the event fires the delay is categorisation rather than
+  reaction. Two branches kept apart: **instrument** (a reliable
+  intermediary becomes the reading, the underlying quantity stops being
+  sampled, and failure clusters where the intermediary has been correct
+  longest) and **event** (the occurrence is closed as
+  not-happening-here, so procedure is never acquired or never retained).
+  Selftest 15/15. No `cases/`, README or claim table delivered; nothing
+  here invents a case. Six claims `CC_001..006`. **`CC_001` holds, and is
+  the strongest schema move in this drop family:** the competing
+  explanation is held as a **field** (`procedure_gap.collapsed_into_-
+  closure` + `ground`) rather than as prose, and the docstring states that
+  the rival is **not independent** of the shape — "nobody acquires a
+  protocol for an event they have closed" — which is the harder admission,
+  since a non-independent rival cannot be ruled out by finding the shape.
+  `knowledge_state` is four-valued (`not_taught` /
+  `taught_not_retained` / `retained_not_executed` / `not_separable`),
+  the sixth instance of the absent-vs-known-negative repair in this family
+  and the third designed in. **`CC_002`, the sharp one:**
+  `availability_rules_out_procedure_gap` uses `bool(...)`, so "checked,
+  information absent" and "never recorded" both return `False` — in the
+  one field that adjudicates the rival — while `budget_consumed` two lines
+  away returns `None` correctly and is pinned by the selftest's own
+  "budget flag none not false". Same repair, same file, one applied and
+  one not. **`CC_003`:** `knowledge_separable` is `!= NOT_SEPARABLE`, so a
+  case omitting the field reads as separable — the default runs toward the
+  informative state, the opposite of `presented-binary` `PB_008` where
+  every default runs toward `absent`; `SKELETON` is safe, a hand-written
+  case is not. **`CC_004`:** `--case` and `--branch` have no bounds check
+  where both sibling tools do (`--case` alone raises `IndexError`), and an
+  unknown branch prints an empty table with rc 0 while an unknown case
+  errors with rc 1. **`CC_005`:** the `instrument` branch is
+  `uninstrumented`'s PROXY SUBSTITUTION with a **rate term added** —
+  `signal.years_correct` — which the register's entry does not carry;
+  an addition to an existing mechanism, checkable in principle with no new
+  vocabulary. **`CC_006`:** with no `cases/` it prints a well-formed report
+  with zero rows and exits 0 — third tool in the family, and the three
+  that refuse are the older ones; its footer does state the corpus
+  condition ("the records were not built to ask this"), which the other
+  two do not. CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
