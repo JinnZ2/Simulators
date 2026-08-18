@@ -1,12 +1,13 @@
 # CLAIM_TABLE — uninstrumented
 
-Forty-one claims, `UNI_001..041`. **Three repaired** (`UNI_003`,
+Forty-nine claims, `UNI_001..049`. **Three repaired** (`UNI_003`,
 `UNI_009`, `UNI_010`), see *Repairs* at the end. `UNI_013..019` come from
 the Case 010 drop ([`case_010_audit.py`](case_010_audit.py)),
 `UNI_020..026` from Case 011 ([`case_011_audit.py`](case_011_audit.py))
 `UNI_027..033` from Case 012
-([`case_012_audit.py`](case_012_audit.py)) and `UNI_034..041` from Case 013
-([`case_013_audit.py`](case_013_audit.py)).
+([`case_012_audit.py`](case_012_audit.py)) `UNI_034..041` from Case 013
+([`case_013_audit.py`](case_013_audit.py)) and `UNI_042..049` from Case 014
+([`case_014_audit.py`](case_014_audit.py)).
 
 ## REFUTATION_PROTOCOL
 
@@ -380,6 +381,26 @@ reproduce by running the script.**
 | `UNI_039` | The Case 010 cross-link **lands, and corrects `UNI_019`**. A periodic scaffold has interchangeable positions; a sequence-addressed one does not, so matched pitch is not a matched control if the contribution depends on distinguishability. Consequence is a specific **false negative**: Case 010's flat branch ("the organic layer is functioning as a geometric ruler") would also fire when addressing is everything, because the comparator cannot express it. `UNI_019`'s assessment holds on the organic-vs-inorganic axis and was too generous on the addressing axis. Repair is one arm — matched pitch *and* aperiodic position-distinguishable structure. | SUPPORTED — corrects a prior finding | The two-arm design separating pitch from addressing. |
 | `UNI_040` | Q4's comparison class **survives in a narrower form**. A DNA sequence of length L addresses 4^L states, so "no block to overflow" is not literally true; the statable version is that **capacity scales with the object rather than being fixed by a register** — one more base multiplies capacity by four, where widening a counter rewrites every consumer of the field. The middle term was already in the anchor's own records and goes unmentioned: the COSPAR designator is compositional, so its year field is open-ended and capacity grows with time. | SUPPORTED (narrows the entry) | An object-carried scheme with a fixed capacity that cannot grow with the object. |
 | `UNI_041` | Four of four cross-links resolve — first drop in this sequence with no dangling reference (`rate-mismatch-polytope` is not cited here). Confidence is a **fifth** state of the one string field: an absence with a stated unlock condition ("Q3 alone could take a gradient once Q1's data exists"), which is a dependency between sub-questions. `entry()` still cannot tell any of the five from an omission (`UNI_021`). | SUPPORTED | A confidence field carrying an unlock condition. |
+
+## Case 014 drop — UNI_042..049
+
+Case 014 (`cases/case-014.md`, delivered verbatim) is the fifth
+consecutive case the schema cannot hold, and the first whose EXCLUDED BY
+says that nothing excludes it. Worked in
+[`case_014_audit.py`](case_014_audit.py).
+
+Sections 3–6 were web-checked on 2026-08-18 and are marked.
+
+| id | statement | status | falsifier |
+| --- | --- | --- | --- |
+| `UNI_042` | **The register's founding binary cannot hold Q1.** The README says "Not a gap log. A gap is an oversight. These are exclusions built into the apparatus"; Q1's EXCLUDED BY is "nothing prevents it. It has not been assembled." By that rule it is a gap — except the entry argues a **third** state: the apparatus exists, is competent, and is aimed elsewhere ("the target moved; the instrument did not follow"). Case 013 Q4 named the same state one drop earlier. Two-valued distinction, three states delivered. | a third term in the README, or a mechanism for it | SUPPORTED |
+| `UNI_043` | `tool-off-metrology` does not exist in the tree and is cited twice here plus once in Case 011 Q4 — so there are now **two** named-but-absent artifacts each load-bearing across two drops (`rate-mismatch-polytope` is the other). Both are about the same thing from different ends: a rate or a baseline the measurement destroys. The `[[...]]` syntax is new and nothing in the repo resolves it. | either folder arriving | SUPPORTED |
+| `UNI_044` | The occasion verifies four for four, including the load-bearing detail — Fellers & Storm, JEPLMC, and *"falling below the baseline levels of performance observed for participants who never used reminders"*, which is the difference between a tool that does not help you learn and one that leaves you worse than not having used it. Fifth consecutive verifying occasion. | the baseline comparison failing to match | SUPPORTED *(web, 2026-08-18)* |
+| `UNI_045` | **Q1's corpus already exists.** A meta-analysis of cognitive offloading (PubMed 40500483) ships an enumerated included-studies list with stated inclusion criteria — the denominator Q1 says "has not been assembled", built by people with no stake in this question. Changes Q1's cost from defining a corpus to scoring a published list. Caveat that must travel with it: a meta-analysis on memory-based *performance* selects for performance-reporting studies, which is not the same population as "instances described in evolutionary terms". | the list turning out to have no evolutionary-language instances | SUPPORTED *(web, 2026-08-18)* |
+| `UNI_046` | Pobiner (2016) verifies exactly (AJPA, title and year), and so does the attribution — the acquired-traits-are-heritable misconception is documented in that literature. Kelemen's "promiscuous teleology" verifies as a conceptual default all peoples share, tamped down by enculturation. **One item runs ahead of what was located:** the three-item negative list (not parental explanation, religiosity, or storybook convention) was not confirmed item by item, and universality alone does not carry the entry's use of it, since a universally-taught thing is also universal. | the negative list surfacing in Kelemen's own work | SUPPORTED, with one attribution BROADER THAN LOCATED |
+| `UNI_047` | Q2 makes **two** claims and attaches **one** falsifier. The falsifier tests the smuggle (claim A); the claim the entry leans on — that the reference-population error has no name in the literature (claim B) — has no falsifier. Claim B is consistent with the corpus reached: the evolution-education literature studies populations of *learners*, not the implicit reference population of the narrative. Named as the cheapest next check and not searched here: the history-of-science and decolonial-paleoanthropology literature. | a named critique of reference-population smuggling in human-origins narratives | SUPPORTED (structural) |
+| `UNI_048` | Three `[stated by Kavik]` tags, up from one in Case 013 — the device is now used at scale, and its distribution is informative: the single **untagged** question is the one with an independent runnable instrument and a stated high confidence, and instrumentability falls off across the tagged ones (Q2 depends on Q1, Q3 "unclear", Q4 "no instrument proposed"). The tag marks what is a position rather than a procedure, in an entry whose protocol says it holds markers not positions. | a tagged question with an independent instrument | SUPPORTED |
+| `UNI_049` | "Do not fill this in with an approximation" reaches a **third** instance in three drops (`DD_007` recorded it at two) — a construct with a stable form and still no schema slot. Q3 adds the sharpest sentence in the drop: *"any study isolating one is measuring an artifact of its own isolation, and the isolation is a property of the instrument"* — the register's own thesis stated in general form, as a conditional with the condition named. The NOT CLAIMED HERE section pre-empts the intent reading, which is `rigidification-sensor`'s no-actor discipline arriving in a one-page case. | the device appearing without a withheld slot behind it | SUPPORTED (holds) |
 
 ## Repairs
 

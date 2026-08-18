@@ -8,9 +8,10 @@ checks on itself), [`scan_audit.py`](scan_audit.py) (grades the scanner),
 [`case_010_audit.py`](case_010_audit.py),
 [`case_011_audit.py`](case_011_audit.py) and
 [`case_012_audit.py`](case_012_audit.py) and
-[`case_013_audit.py`](case_013_audit.py) (checks on the four delivered
+[`case_013_audit.py`](case_013_audit.py) and
+[`case_014_audit.py`](case_014_audit.py) (checks on the five delivered
 cases) and [`CLAIM_TABLE.md`](CLAIM_TABLE.md). `cases/case-010.md`
-through `cases/case-013.md` are delivered, verbatim.
+through `cases/case-014.md` are delivered, verbatim.
 
 The delivered README supersedes what follows on two points, and both are
 carried into the claim table rather than silently corrected:
@@ -888,3 +889,192 @@ exists" — which is a dependency between sub-questions rather than a value.
 
 `entry()` stores a string and cannot tell any of the five from an omission
 (`UNI_021`).
+
+---
+
+## Case 014 — the entry whose EXCLUDED BY says nothing excludes it
+
+`cases/case-014.md`, delivered verbatim. Checks in
+[`case_014_audit.py`](case_014_audit.py); claims `UNI_042..049`.
+
+### UNI_042 — the founding binary is two-valued and three states have arrived
+
+The README's opening rule:
+
+> Not a gap log. A gap is an oversight. These are exclusions built into
+> the apparatus before the first reading is taken.
+
+Q1's EXCLUDED BY, in full: *"nothing prevents it. It has not been
+assembled."*
+
+By that rule it is a gap. But the entry does not leave it there, and the
+next paragraph is the one that matters — the checking apparatus exists in
+a neighbouring field and is closed on its own inputs; *"the target moved;
+the instrument did not follow."*
+
+| state | the README has a name for it |
+|---|---|
+| an oversight | gap |
+| built into the apparatus before the first reading | exclusion |
+| **the apparatus exists, works, and points elsewhere** | **no** |
+
+Case 013's Q4 named the same state one drop earlier — *"there, a record is
+destroyed. Here the record is intact and unread"* — and Case 014's own
+cross-links point at it. Delivered twice now, against a two-valued
+distinction.
+
+Whether it belongs in this register is a real question and it is the
+register's own: admitting it widens the subject from *what an instrument
+cannot see* to *what an existing instrument is not pointed at*. Those are
+different objects with different remedies — the first needs a new
+instrument, the second needs someone to turn one.
+
+### UNI_043 — a second absent artifact, and a pattern
+
+    wiki-style references in this entry : tool-off-metrology, cited 2x
+    ../tool-off-metrology exists        : False
+    also reached for in case-011.md Q4  : True
+
+Two distinct named-but-absent artifacts now, each load-bearing across two
+drops:
+
+    rate-mismatch-polytope   Case 011 Q2, Mechanism 11 sub-q 4   UNI_026, DD_008
+    tool-off-metrology       Case 011 Q4, Case 014 Q4 + links    UNI_043
+
+Worth naming separately from either instance. A forward reference cited
+once is a note to self; two references, each cited by two drops for two
+different arguments, is a set of folders this drop family keeps needing
+and has not written. And both are the same object from different ends: **a
+rate or a baseline that the measurement destroys.**
+
+The `[[...]]` syntax is new — prior cases name cross-links in prose, and
+nothing in the repo resolves that form, so it reads as a link and behaves
+as text.
+
+### UNI_044 / UNI_046 — what the citations do and do not carry
+
+The occasion verifies four for four: Fellers & Storm, *JEPLMC*, reminder
+users impaired when reminders are removed, attributed to desirable
+difficulties — and the load-bearing detail, *"falling below the baseline
+levels of performance observed for participants who never used
+reminders."* The entry's "below the no-reminder baseline, not merely level
+with it" is exact, and that is the difference between a tool that does not
+help you learn and one that leaves you worse than not having used it.
+
+Fifth consecutive verifying occasion in this register.
+
+The critique literature verifies too. Pobiner (2016) is exactly
+*"Accepting, understanding, teaching, and learning (human) evolution:
+Obstacles and opportunities"*, AJPA; the acquired-traits-are-heritable
+misconception is documented there, which is what the entry uses it for.
+Kelemen's "promiscuous teleology" is a conceptual default all peoples
+share, tamped down by enculturation.
+
+**One attribution runs broader than what was located.** "Not the product
+of parental explanation, religiosity, or storybook convention" is a
+three-item rule-out; the located framing is universality plus
+enculturation. Compatible, not identical — and the distinction is
+load-bearing for the use the entry makes of it, since "a default reading
+mode, which is why it survives in people who would disavow it" needs the
+rule-out. A universally *taught* thing is also universal.
+
+### UNI_045 — Q1's corpus already exists
+
+Q1: *"EXCLUDED BY: nothing prevents it. It has not been assembled."*
+
+The second sentence is the expensive one and it is less true than it
+looks. A meta-analysis of cognitive offloading exists — *"Meta-analytic
+investigations of the effect of cognitive offloading on memory-based task
+performance and interindividual variability"* — and a meta-analysis ships
+an enumerated included-studies list with stated inclusion criteria.
+
+**That list is the denominator Q1 needs**, built for a different question
+by people with no stake in this one, which is better provenance for a
+denominator than building it to fit the audit. Q1's cost drops from
+"define a corpus and defend the definition" to "run three-way scoring over
+a published list."
+
+The caveat travels with it: a meta-analysis on memory-based *performance*
+selects for studies reporting a performance effect, which is not the same
+population as "instances where offloading is described in evolutionary
+terms". A starting corpus with a statable bias, not the frame Q1 would
+ideally draw.
+
+Same shape as `DD_005` on Mechanism 11's R2, and concrete rather than
+structural.
+
+### UNI_047 — Q2 has two claims and one falsifier
+
+| | |
+|---|---|
+| claim A | the reference population is smuggled — unstated rather than misstated |
+| claim B | this error has **no name** in the sources, unlike the pinnacle error |
+| falsifier | "fails if reference populations are stated in the sources and the generalization is explicit rather than smuggled" |
+
+The falsifier tests A. B — the one the entry leans on ("only one is
+documented", "the one with no name in the sources found") — has none.
+
+On the corpus reached: the evolution-education literature studies
+populations of **learners** (religiosity, education, age, political
+affiliation as predictors of acceptance), not the implicit reference
+population of the narrative being taught. So B is consistent with what was
+located.
+
+Named as the cheapest next check and **not searched here**: the
+history-of-science and decolonial-paleoanthropology literature, where a
+critique of Eurocentric framing in human-origins narratives plausibly
+exists under a different name. B is a negative about a literature, and a
+negative about a literature is only as good as the search behind it —
+`UNI_006`'s rule applied to a claim instead of to a register.
+
+### UNI_048 — the attribution tag at scale
+
+| q | attributed | instrument |
+|---|---|---|
+| Q1 — is a transmission channel ever specified | — | stated, independent, runnable |
+| Q2 — the reference population | yes | stated, depends on Q1 |
+| Q3 — are the channels separable | yes | "unclear" |
+| Q4 — coupling value as a function of difference | yes | "no instrument proposed" |
+
+Three tags, up from one in Case 013 (`UNI_035`). The distribution is the
+finding: **the single untagged question is the one with an independent
+runnable instrument and a stated high confidence**, and instrumentability
+falls off across the tagged ones.
+
+Not a criticism of the tagged questions — a description of what the tag
+does. It marks the parts of the entry that are somebody's position rather
+than a procedure, inside a document whose reading protocol says it holds
+markers and not positions. The tag is how those two coexist, and it is
+doing real work. `entry()` still has no field for it.
+
+### UNI_049 — third instance of the withheld slot, and Q3's sentence
+
+    ../uninstrumented/cases/case-011.md         Q5
+    ../derivation-discarded/MECHANISM_11.md     sub-question 4
+    cases/case-014.md                           Q3
+
+`DD_007` recorded this as "a recurring device" at two instances. At three
+it is a construct with a stable form, and still no schema slot anywhere in
+the family.
+
+Q3 adds what the prior two did not:
+
+> the non-separability may be the finding rather than the obstacle. If the
+> channels are not separable in the system, any study isolating one is
+> measuring an artifact of its own isolation, and the isolation is a
+> property of the instrument.
+
+That is `uninstrumented`'s own thesis stated in general form, by an entry,
+about a domain — and stated as a **conditional with the condition named**,
+not as an assertion. It also supplies its own falsifier's shape from the
+other side: a design that separates the channels "without assuming their
+independence" is exactly a design whose isolation is not a property of the
+instrument.
+
+The NOT CLAIMED HERE section belongs beside it. *"No intent. The drift
+direction is arguable from evidence; a party steering it is not, and the
+case does not require one."* That pre-empts the reading that would convert
+Q4 into a claim about somebody's plan, by naming what the argument does
+**not** need — the same discipline `../rigidification-sensor/` states
+about itself ("names no actor, motive, or plan by construction"), arriving
+in a one-page case.

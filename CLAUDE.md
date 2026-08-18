@@ -2249,7 +2249,49 @@ underneath).
   inside an entry, at sub-question granularity, on the half that would
   leave if the split happens. **`UNI_041`:** first drop in the sequence
   with no dangling cross-link, and a fifth state of the confidence field —
-  an absence with a stated unlock condition. **REPAIRED:** `UNI_003` (`entry()` takes a primary plus
+  an absence with a stated unlock condition.
+  **`cases/case-014.md`** is the fifth case the schema cannot hold, and
+  the first whose EXCLUDED BY says nothing excludes it. Cognitive
+  offloading, evolutionary framing and channel separability, occasioned by
+  Fellers & Storm, *JEPLMC* 2026 — reminder users fell **below** the
+  no-reminder baseline, not merely level with it. **`UNI_042`, the sharp
+  one:** the README opens "Not a gap log. A gap is an oversight. These are
+  exclusions built into the apparatus", and Q1's EXCLUDED BY is "nothing
+  prevents it. It has not been assembled" — a gap by that rule, except the
+  entry argues a **third** state, the apparatus exists, is competent, and
+  is aimed elsewhere ("the target moved; the instrument did not follow").
+  Case 013 Q4 named the same state one drop earlier, so two states have
+  now been delivered against a two-valued founding distinction, and
+  admitting the third widens the register's subject from what an
+  instrument cannot see to what an existing instrument is not pointed at.
+  **`UNI_045`, the actionable one:** Q1 says its corpus "has not been
+  assembled" and a meta-analysis of cognitive offloading exists whose
+  enumerated included-studies list IS that denominator, built for another
+  question by people with no stake in this one — Q1's cost drops from
+  defining a corpus to scoring a published list, with the statable bias
+  that a performance meta-analysis selects for performance-reporting
+  studies. **`UNI_043`:** `tool-off-metrology` is absent and cited twice
+  here plus once in Case 011 Q4, so there are now **two** named-but-absent
+  artifacts each load-bearing across two drops (with
+  `rate-mismatch-polytope`), and both are the same object from different
+  ends — a rate or a baseline the measurement destroys. **`UNI_046`:**
+  Pobiner 2016 and Kelemen's promiscuous teleology both verify, and one
+  attribution runs broader than located — the three-item negative list
+  (not parental explanation, religiosity, or storybook convention) was not
+  confirmed item by item, and universality alone does not carry the use
+  the entry makes of it. **`UNI_047`:** Q2 makes two claims and attaches
+  one falsifier; the half the entry leans on (the error has no name in the
+  literature) has none, and the decolonial-paleoanthropology literature
+  where it might exist under another name was not searched. **`UNI_048`:**
+  three `[stated by Kavik]` tags, and the distribution is the finding —
+  the single UNTAGGED question is the one with an independent runnable
+  instrument, and instrumentability falls off across the tagged ones.
+  **`UNI_049`:** "do not fill this in with an approximation" reaches a
+  third instance in three drops, and Q3 states the register's own thesis
+  in general form as a conditional — "any study isolating one is measuring
+  an artifact of its own isolation, and the isolation is a property of the
+  instrument" — while NOT CLAIMED HERE pre-empts the intent reading, which
+  is `rigidification-sensor`'s no-actor discipline in a one-page case. **REPAIRED:** `UNI_003` (`entry()` takes a primary plus
   an `also` list and the register sorts under every mechanism — which is
   what lets check 1 return anything but zero: 5 mechanisms now hold entries
   from more than one field, though weakly, since the secondaries were
@@ -2267,7 +2309,7 @@ underneath).
   enforced one mechanism per sentence — it does not, the `break` exits the
   trigger loop and mechanisms already co-fire, so the wrong-mechanism
   finding was a missing trigger rather than a blocked co-firing. Nineteen
-  claims `UNI_001..041`. Stdlib only, CC0.
+  claims `UNI_001..049`. Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
   time-series variable** — version the ruler, compute drift on its own
