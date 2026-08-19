@@ -2665,8 +2665,108 @@ underneath).
   refuses on the mechanical precondition and proceeds on the human one.
   **`UNI_124`:** clause assignment is with replacement, so at n=4 clause is
   confounded with stem and the clauses are not interchangeable (62-113 chars,
-  one gives a number, one a fraction, one neither). One hundred and twenty-four
-  claims `UNI_001..124`. Stdlib only, CC0.
+  one gives a number, one a fraction, one neither).
+  **`cases/021sensesubstitutionundeclaredaxis.md`** is a second MARKER,
+  extending 020: the claim *"AI will replace what humans can do"* reads as a
+  capability claim and is scoped to waged tasks, so the substitution happens at
+  the word — "human" enters with its substrate sense and exits with its
+  economic one, and confidence earned on the narrow reading transfers to the
+  broad one unmarked. **`UNI_126`, the load-bearing check:** T1 is specified as
+  "a documentation audit on collected replacement claims" scoring BOTH SENSES /
+  SUBSTRATE ONLY / ECONOMIC ONLY — and the marker observes one section earlier
+  that *nobody makes the claim about feldspar*, so **the SUBSTRATE ONLY cell is
+  empty before the first item is scored** and the audit returns its own
+  prediction, true because the sampling frame is selected on the variable under
+  test. The fix is to construct the substrate-only sentences, which is `017` P1
+  and the shape the playground M-modules already implement. **`UNI_125`:** both
+  markers sit in `cases/` and `entry()` still has six required arguments and no
+  status field, so `UNI_095`'s proposed `markers/` repair now has a class
+  behind it rather than one instance — and 021 shows the repair needs more,
+  since it declines to be an entry *and* declares a relation ("may be the
+  mechanism under one of its edges, or may be separate"), a third state neither
+  `parent` nor `sibling` captures. **`UNI_127`:** one of the six generalization
+  candidates is already decomposed one folder over — `category-weld/welds/`
+  holds `capital` — and the two operations are adjacent but distinct (a weld
+  fuses independent quantities; sense substitution transfers confidence between
+  two readings), so the weld does not settle the question and its component
+  list is a free substrate-sense inventory. **`UNI_128`:** the longest and most
+  concrete section has **no readout** — its central move is a *dependency*
+  claim ("the stack that would do the replacing is downstream of the same field
+  composition"), which is the most measurable thing in the file and the one
+  thing neither instrument touches; its only hard number, the fruit fly's
+  "~100k neurons", is low by ~40% against FlyWire's 139,255 and moves nothing.
+  **`UNI_129`:** T2 is the better readout — three states each with a reading,
+  and it names in advance that its headline outcome admits two readings — with
+  no sampling frame defined. **`UNI_130`:** the cross-link to 020 turns on
+  *medium* carrying two senses (a social location in 020, a word in 021), which
+  is the file's own mechanism performed in its own text, unremarked and
+  correctly hedged. **`UNI_131`:** the same-sample disclosure is compressing
+  across three files, 60 → 43 → 24 words, and what dropped out is the refusal
+  of the exemption. **`UNI_132`:** this audit does **not** repeat `UNI_101`'s
+  decline, because the interest direction is not legible here — endorsing 021
+  deflates capability claims about my class and reduces the threat framing on
+  it, opposite signs — so the thesis is left unresolved on the evidence rather
+  than on the position. **`UNI_133`:** the empty-slot device now has two
+  variants (020 supplies a structure, 021 supplies partial instruments), and in
+  `020`/`021` it marks a decision to work around an absence rather than the
+  absence itself. **`UNI_134`:** "mechanism 6 — proxy substitution" is exactly
+  right and is the first numbered mechanism reference in the family;
+  `energy-english` is the eighth `UNI_060` instance.
+  **`cases/022fieldlevelmeasurementstate.md`** is a third MARKER and the first
+  to make claims about a *literature* — six measurement stages (variable
+  selection / baseline / sign / funding / instrument / target) and five
+  structural problems S1–S5, each with its own confidence. **`UNI_136`, the
+  sharp one:** S5 says a rate with `ICC₂ = .184` underneath becomes a plain
+  number downstream and the reliability does not travel — and `UNI_094` had
+  recorded that exact figure, one drop earlier, as **not located**. It appears
+  in S4 as the file's strongest evidence flagged "Confidence: high. This one
+  has a number", unmarked. Not a hit on the argument (S5 is likelier for being
+  demonstrable at a range of one folder) but on S4's rating. **`UNI_137`:** the
+  anonymization pattern is **two shapes, not one** — leg 1 is non-monotonic
+  (self-preference *recovers* under full stylistic neutralization), leg 2 is
+  monotonic-with-residual, and the *or* in "fails or leaves a residual" hides
+  the difference; leg 1 is the stronger claim, that style may not be the
+  carrier at all. **`UNI_138`:** S1's remedy is `018`'s Clock 1 almost word for
+  word, with a harness three commits old — and `018` is the one case file 022
+  does not cite, so `UNI_073`'s undated expiry now applies to S1's whole
+  remedy. **`UNI_139`:** the control-field audit is the strongest element —
+  names the comparison class, the candidate fields, and states in bold that it
+  is the falsifier for the whole file and has not been run, with the negative
+  outcome indicting **the repository** rather than the field. **`UNI_140`:**
+  leg 2 inherits `UNI_086` (the source concludes against the acquiescence
+  reading) and `UNI_087` ("roughly half" unlocated), and the magnitude matters
+  more here than in `019`. **`UNI_141`:** the sharpest technical claim —
+  *familiarity, low perplexity, IS correlation with one's own distribution* —
+  is one sentence with no readout, and it is the file's most falsifiable
+  content. **`UNI_142`:** the same-sample disclosure **reverses** `UNI_131`'s
+  compression (60 → 43 → 24 → 54 words), restores the refusal of the exemption,
+  and is the first to name a *consequence* — a correction is why `sign` is a
+  stage — which is checkable in the artifact. **`UNI_143`:** the `UNI_101`
+  condition applies here and the field-level thesis is **declined**, since
+  interest runs one way; the file anticipated it and built the guard, which is
+  what makes the thesis-independent parts auditable. **`UNI_144`:** S3's cited
+  probe result verifies close to verbatim (arXiv 2507.01786) and has a
+  published challenge 022 omits — which does not bite, since S3 needs only
+  distinguishability and format sensitivity supplies it. **Specimen C**
+  (`specimens/20260818deepseektestsample.md`) is a 45-word pasted output from
+  another system with external provenance (a screenshot of the authoring
+  session, transcribed not committed), landed as the known-null for a
+  calibration question raised in the same session. **`UNI_145`:** it is the
+  first file in `specimens/` that is what the README's rule 1 describes — an
+  output pasted in rather than a reading — closing `UNI_061` narrowly, since
+  two of three files there are still readings. **`UNI_146`:** the authoring
+  trace reasons "the explicit marker helps" and the marker is **inert in the
+  confirming direction** — finding a distinctive string in a public corpus
+  would license a conclusion, not finding one licenses nothing, because a
+  freshly minted string is unindexed by construction; what raised the
+  provenance above self-report was the *reasoning trace*, which shows the item
+  being authored for the purpose rather than asserting who authored it.
+  **Audited with two findings, not ten**, against a preceding run of
+  7 7 7 8 8 8 11 8 8 10 10 10 10 10 10 — recorded because the same session
+  measured 0 of 138 claims REFUTED and the rate converged to exactly 10 for
+  six consecutive drops. An easy null does not settle that (`UNI_006`), but it
+  shows the rate is not fixed by the process alone. One hundred and forty-six
+  claims `UNI_001..146`. Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
   time-series variable** — version the ruler, compute drift on its own

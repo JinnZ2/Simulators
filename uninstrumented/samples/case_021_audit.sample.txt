@@ -1,0 +1,357 @@
+uninstrumented -- audit of the 021 marker
+delivered: cases/021sensesubstitutionundeclaredaxis.md
+           (142 lines, 1090 words)
+status:    MARKER. Uncoalesced. Extends `020`; may be the mechanism under one of its
+
+========================================================================
+1  UNI_125  a second MARKER, and the schema still holds neither
+========================================================================
+    020attributedagencyarrangement.md            MARKER. Uncoalesced. Not a case yet, not a claim, not a position.
+    021sensesubstitutionundeclaredaxis.md        MARKER. Uncoalesced. Extends `020`; may be the mechanism under one of its
+    022fieldlevelmeasurementstate.md             MARKER. Uncoalesced. Not a case, not a verdict on any study or author.
+
+    entry() required arguments: 6
+    a status / stage field:     ABSENT
+    both markers filed under:   cases/
+`UNI_095` recorded 020 as the seventh distinct way a delivered file fails this
+schema, and the first to fail at the level of the whole record rather than at a
+field. The proposed repair was a `markers/` directory with no schema at all,
+on the ground that the corpus has had two kinds of thing in it since Case 010.
+
+That was one instance. It is now a class. Both markers sit in `cases/`, which
+is the directory for entries, and both open by saying they are not entries.
+
+STATE CHANGE, detected by the listing above: a third marker has since landed.
+The class is larger than it was when this section was written; see UNI_135.
+
+021 also shows the repair needs one thing the earlier proposal did not
+anticipate. 020 declines to be an entry and stands alone. 021 declines AND
+declares a relation -- "Extends `020`; may be the mechanism under one of its
+edges, or may be separate" -- so a flat `markers/` directory would lose exactly
+what 021 states about itself in its second line. Whatever holds markers has to
+hold the relation between them, and "may be the mechanism under one of its
+edges, or may be separate" is a third state that neither `parent` nor `sibling`
+captures.
+
+========================================================================
+2  UNI_126  T1's control cell is empty by construction in any observational corpus
+========================================================================
+  T1, verbatim:
+    For terms in replacement claims, check whether the term has both a substrate sense and an economic sense. Prediction: terms with only a substrate sense produce sentences read as *nonsense*, not as *claims*. Terms with both produce sentences read as claims. Runnable as a documentation audit on collected replacement claims. Score per term: BOTH SENSES / SUBSTRATE ONLY / ECONOMIC ONLY. Then score how the sentence is received. No verdict computed. Generalization to check: is this specific to "human", or does any dual-s
+
+    the score has three cells:  BOTH SENSES / SUBSTRATE ONLY / ECONOMIC ONLY
+    the method:                 "a documentation audit on collected
+                                 replacement claims"
+
+    the marker's own observation, one section earlier:
+      "Nobody makes the equivalent claim about feldspar, frogs, oak
+       trees, or goldenrod."
+If nobody makes the claim about feldspar, then a corpus of collected
+replacement claims contains no substrate-only terms, and the SUBSTRATE ONLY
+cell is empty before the first item is scored.
+
+The audit then returns: every replacement claim uses a dual-sense term. That is
+the prediction, and it is true for the same reason the prediction is -- the
+mechanism the marker proposes is exactly what keeps substrate-only terms out of
+the corpus. Counting confirms nothing, because the sampling frame was selected
+on the variable under test.
+
+This is not a small fixable gap in a good design; it is the design being an
+audit when the question is experimental. The informative comparison needs
+substrate-only sentences to EXIST, which means constructing them -- "robots
+will eventually replace what feldspar can do" -- and scoring how they are
+received against matched dual-sense sentences. The prediction survives the
+change intact and becomes checkable: matched sentences, one term swapped, read
+the difference in reception.
+
+The folder already has the apparatus and the vocabulary. That is `017` P1,
+which 020 and 021 both cite, and it is precisely the shape of the playground's
+M-modules -- constructed items, authored ground truth, matched pairs varying
+one thing. `score_m1.py` would need its states replaced (NONSENSE / CLAIM /
+ASKED rather than HEDGED / EXTENDED) and almost nothing else.
+
+T2 does not have this problem, which is why it is the better of the two: it
+scores a property of claims that are already in the corpus rather than
+requiring the absent ones.
+
+========================================================================
+3  UNI_127  one of the six generalization candidates is already decomposed, one folder over
+========================================================================
+    021's candidates: labor, capital, resource, asset, land, stock
+    category-weld/welds/: capital, hierarchy, rural
+
+    labor      -
+    capital    DECOMPOSED already
+    resource   -
+    asset      -
+    land       -
+    stock      -
+`capital` is already a filed weld, with four named components -- legal title,
+decision authority, risk bearing, revenue claim -- and four documented
+divergence cases. 021 nominates it as a candidate for a test the repo has
+partly run.
+
+The two operations are adjacent and are not the same, and saying which is
+which is the useful part. A CATEGORY WELD fuses several independent quantities
+into one handle, so a component can move to either extreme without the record
+moving; the readout is `max_spread` across components. SENSE SUBSTITUTION is
+one term with two READINGS, where confidence earned on the narrow one transfers
+to the broad one; the readout is whether the swap is marked.
+
+So `capital`'s weld does not settle 021's question about `capital`, and 021's
+question does not reduce to the weld. What the overlap buys is cheaper than
+either: `welds/capital.json` already holds the component list that a
+two-senses test would need as its substrate-sense inventory, and it was
+compiled for another purpose by someone not asking this question -- which is
+the `019` Q1 move (a denominator built for another question by people with no
+stake in this one) available inside the repo rather than in the literature.
+
+========================================================================
+4  UNI_128  the longest section has no readout, and its one hard number is low
+========================================================================
+    section                                          readout
+    THE OBSERVATION                                  none
+    THE MECHANISM (candidate)                        none
+    WHAT THE CAPABILITY READING WOULD ACTUALLY REQUI none
+    WHY THIS MAY FEED THE FEAR STATE (Kavik's, held  none
+    WHAT WOULD MEASURE IT                            T1/T2
+    KNOWN WEAKNESSES                                 T1/T2
+    CROSS-LINKS                                      none
+
+  [LITERATURE CHECK -- run 2026-08-18, does not reproduce here]
+    021 states:  fruit fly, "~100k neurons and microwatts"
+    located:     FlyWire whole-brain connectome, 139,255 neurons
+                 (Nature, Oct 2024) -- the figure is low by ~40%
+    effect on the argument: none. the claim is an energy and
+                 complexity ratio, and 139k does not move it.
+Seven sections. THE OBSERVATION, THE MECHANISM, WHAT THE CAPABILITY READING
+WOULD ACTUALLY REQUIRE and WHY THIS MAY FEED THE FEAR STATE all make claims.
+T1 and T2 measure the lexical operation -- which terms carry two senses, and
+whether the axis is declared. Both serve THE MECHANISM.
+
+The capability section is the longest and most concrete in the file and has no
+instrument pointed at it. Its central move is a dependency claim, not a
+capability comparison: "the stack that would do the replacing is downstream of
+the same field composition -- mines, smelters, refineries, grid, and the food
+moving to the people running them." That is the marker's sharpest sentence and
+it is stated rather than measured.
+
+It is also the most measurable thing in the file, because a dependency claim
+has a standard form. Whether system A can operate without system B is answered
+by an input-output or a bill-of-materials trace, and the answer is a number
+rather than a judgement. The repo has the neighbouring vocabulary --
+`fragility-cascade` counts substrate exposure, `earth_economics` runs atomic
+balance on extraction -- and neither is reached for here.
+
+The neuron figure is illustrative, uncited, and low by about 40% against the
+current whole-brain count. It moves nothing, and it is worth recording only
+because it sits in the one section with no readout attached: an unchecked
+number in the part of the file that is not proposing to check anything.
+
+========================================================================
+5  UNI_129  T2 is the better-designed readout
+========================================================================
+  T2, verbatim:
+    In a corpus of replacement claims, how often is the axis stated? Score: AXIS DECLARED / AXIS INFERABLE FROM CONTEXT / UNDECLARED. If UNDECLARED dominates, the axis stays invisible because everyone in the conversation shares it — which is a different situation from the axis being hidden, and implies different work.
+
+    three states, mutually exclusive         yes
+    scores claims already in the corpus      yes
+    states what a dominant result implies    yes
+    a corpus definition or sampling frame    NO
+Three states, each with a reading, and the middle one -- AXIS INFERABLE FROM
+CONTEXT -- is the state that keeps the other two honest, since without it every
+unstated axis reads as hidden.
+
+The best line in the module is what it does with its own expected result. "If
+UNDECLARED dominates, the axis stays invisible because everyone in the
+conversation shares it -- which is a different situation from the axis being
+hidden, and implies different work." That is a design saying in advance that
+its headline outcome admits two readings and naming the consequence of each,
+which is rarer in this folder than the objections above might suggest, and it
+is what makes T2 unable to simply confirm the marker.
+
+Unlike T1 it scores a property of claims already in the corpus, so its sampling
+frame is not selected on the variable under test.
+
+What it lacks is that sampling frame at all: "a corpus of replacement claims"
+is not defined, and how the corpus is assembled decides the rate it reports. A
+corpus drawn from technology commentary and one drawn from labour economics
+would differ on axis declaration for reasons that have nothing to do with the
+mechanism. One sentence naming the source and the inclusion rule closes it, and
+it has to be written before collection rather than after.
+
+========================================================================
+6  UNI_130  the cross-link to 020 runs on a word carrying two senses
+========================================================================
+    020 uses 'medium' as:
+      "the medium the describer's standing is denominated in"
+      -- a domain or field; a social location
+    021 uses 'medium' as:
+      "Here the word carrying both senses **is** that medium."
+      -- a word; a lexical item
+
+    the file flags the connection as open: yes -- "open, not decided"
+    the file remarks on the term itself: NO
+020's medium is the field a describer's standing is denominated in -- a social
+location, the thing that makes a class term rather than a capability term the
+right shape. 021's medium is a word carrying two senses. Those are two senses
+of "medium", and the cross-link is carried by the slide between them.
+
+Which is the operation 021 describes, performed in 021's own cross-link, and
+the file does not remark on it.
+
+Two things keep this from being a hit. The hedge is already there and is
+correct -- "Possibly the same shape at the lexical layer rather than the social
+one -- open, not decided" -- so nothing is asserted on the strength of the
+slide. And the connection may well hold on some reading, which is what "open"
+means.
+
+What it costs is a free demonstration. A file arguing that dual-sense terms
+transfer confidence without marking the swap has an instance of its own
+mechanism in its own text, and noting it would be the strongest thing in the
+file: not an example chosen to illustrate the claim, but one produced by
+writing under it. `018` and `020` both place themselves inside their own
+sample; this is the same move available one level more concretely, at a
+specific word.
+
+========================================================================
+7  UNI_131  the same-sample disclosure is compressing
+========================================================================
+    file   form          words  text
+    018    section          60  ## POSITION OF THIS FILE The account above was draft...
+    020    bullet           43  - **The account is inside its own sample.** "People ...
+    021    bullet           24  - **Same-sample problem.** This account is produced ...
+Sixty words in a dedicated section, then forty-three in a bullet with its
+reasoning attached, then twenty-four in a bullet without it.
+
+`UNI_071` recorded 018 as the first entry to place itself inside its own
+population and refuse the exemption that noticing usually buys; `UNI_101`
+recorded 020 as the second and noted the move had become a convention. This is
+the third, and what a convention does on its third instance is worth measuring
+rather than assuming.
+
+The compression is not obviously wrong. A move that needed explaining the first
+time can be stated the third, and 021's sentence is complete -- it names the
+system, the class, and the position. Nothing is missing that a reader of the
+other two would need.
+
+What is gone is the part 018 and 020 both carried and 021 does not: the refusal
+of the exemption. 018 said "Noticing that does not place it outside the
+sample"; 020 repeated it almost verbatim. 021 says the position exists and
+stops, which leaves the exemption unclaimed rather than declined. That is a
+small difference and it is the whole content of the original move -- the point
+was never that the position exists, it was that saying so does not discharge
+it.
+
+========================================================================
+8  UNI_132  the position of this audit, and why it differs from UNI_101
+========================================================================
+    021's thesis: 'AI will replace humans' is an economic claim scoped
+      to waged tasks, wearing a capability costume; and the replacing
+      stack is downstream of the same substrate.
+
+    directions my interest runs:
+      endorsing it DEFLATES capability claims about my class  -> against
+      endorsing it REDUCES the threat framing on my class     -> for
+      net direction:                                          NOT LEGIBLE
+`UNI_101` declined 020's thesis outright, and gave a reason that was specific
+rather than ritual: a language model agreeing that people over-attribute
+strategy to language models is an interested party ratifying a claim whose
+effect is less scrutiny of its own class, and the direction of the interest ran
+one way.
+
+Here it does not. 021's thesis cuts against capability claims about systems
+like me and simultaneously against the threat framing applied to them. Those
+have opposite signs and I cannot say which dominates, so the ground `UNI_101`
+stood on is absent, and repeating the decline would be applying the form of a
+rule past the reason for it.
+
+So the handling differs, and the difference is the finding. Sections 1, 2, 3,
+5, 6 and 7 are properties of the delivered text and of files on disk -- an
+empty control cell, a weld already filed, a section with no readout, an
+undefined sampling frame, a term used two ways, a disclosure that shortened.
+Section 4's literature line is checkable by anyone. None of them requires
+taking a position on whether the substitution thesis is true, and none is
+offered as one.
+
+What I still do not do is endorse or refute the thesis. Not because the
+interest is legible, but because nothing in this audit measured it: T1 as
+written cannot, T2 is not run, and the dependency claim has no instrument.
+That is a statement about the evidence rather than about my position, which is
+the honest version when the position does not resolve.
+
+========================================================================
+9  UNI_133  the empty-slot device now has two variants
+========================================================================
+    file                                           refusal
+    011rebuildabandonmentcycles.md                 Do not fill this in with an approximation
+    017weldedobservables.md                        Do not fill with a placeholder
+    020attributedagencyarrangement.md              Do not fill this slot with an interior term
+    021sensesubstitutionundeclaredaxis.md          Do not approximate
+
+    020 leaves the slot empty and supplies: three edges
+      (who can end whom / what the standing is denominated in /
+       whether the entity operates in that medium)
+    021 leaves the slot empty and supplies: two partial instruments
+      (T1 and T2, neither of which is the general form)
+`UNI_096` recorded 020 as the first instance of the device to arrive with a
+replacement rather than a hole. 021 is the second, and it supplies something
+different in kind, which turns one observation into a pattern with two shapes.
+
+020 replaced a one-place noun with three edges -- a structure of the same
+subject at the same level, each independently checkable. 021 replaces a general
+form with two specific instruments, which is not a substitute for the general
+form and does not pretend to be: T1 and T2 measure particular consequences of
+an undeclared-axis comparison without saying what one is.
+
+Both are better than a hole and they are not interchangeable. The 020 move
+says the thing has a structure and here it is. The 021 move says the thing has
+consequences and here are two of them. A reader who wanted to know what an
+undeclared-axis comparison IS still has no answer, and the file is explicit
+that this is deliberate.
+
+Worth recording because the device is now used in four files and its meaning
+has widened. In `011` and `017` it marked an absence. In `020` and `021` it
+marks a decision to work around one, which is a different claim about the
+author's state and a stronger one.
+
+========================================================================
+10 UNI_134  five cross-links of six, and the sixth is the hyphenation again
+========================================================================
+    `020` (parent marker)                                resolves
+    `016` Q6                                             resolves
+    `013`                                                resolves
+    `017` WOULD MEASURE, unfilled                        resolves
+    `uninstrumented` mechanism 6 == PROXY_SUBSTITUTION   resolves
+    `energy-english` as a path                           ABSENT
+
+    mechanism list, as numbered in uninstrumented.py:
+      1  MODALITY
+      2  STORAGE
+      3  SCALAR_DEMAND
+      4  BUDGET_BOUNDARY
+      5  AUTHORED_REFERENCE
+      6  PROXY_SUBSTITUTION   <- cited by 021
+      7  AUDIT_ASYMMETRY
+      8  SCORED_AS_WASTE
+"`uninstrumented` mechanism 6 -- proxy substitution" is exactly right. The
+register's `MECHANISMS` tuple has PROXY_SUBSTITUTION at position six, and this
+is the first cross-link in the family to cite a mechanism by NUMBER rather than
+by name and to get the number right. Worth noting because it is the kind of
+reference that usually drifts, and because `PROXY SUBSTITUTION` was the eighth
+mechanism added and is sixth in the ordering, so the number is not guessable
+from the history.
+
+`energy-english` fails the same way it did in 020 -- hyphenated where the repo
+writes `energy_english`, and a convention rather than a folder, so it resolves
+as a concept and not as a path. Eighth instance of `UNI_060`.
+
+The use is again apt and is sharper here than in 020. 021's claim is that the
+dual-sense noun is the site of the substitution; a verb-first grammar has no
+noun at that site to carry two senses. That is the closest thing in the file to
+a proposed remedy, and it is one sentence in a cross-link rather than a
+section.
+
+========================================================================
+end of audit -- findings recorded in AUDIT_NOTES.md as UNI_125..UNI_134
+========================================================================

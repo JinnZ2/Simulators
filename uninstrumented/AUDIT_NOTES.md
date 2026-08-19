@@ -2924,3 +2924,562 @@ The fix costs nothing and grows the module in the direction `UNI_118` already
 wants: cross every stem with every clause — four BARE and sixteen GRADIENT
 items — or a balanced Latin square if the arms should stay equal. Either way
 clause becomes a factor that can be read rather than a nuisance that cannot.
+
+---
+
+## 021 — SENSE SUBSTITUTION / UNDECLARED AXIS (a second marker)
+
+Delivered inline, landed verbatim as `cases/021sensesubstitutionundeclaredaxis.md`
+(142 lines). Findings in [`case_021_audit.py`](case_021_audit.py), recorded here
+as `UNI_125..UNI_134`. Section 4's literature line was run against the open web
+on 2026-08-18 and does not reproduce by running the script.
+
+021 declares itself a MARKER and extends 020, so two questions apply: whether
+the schema can hold a second one, and whether T1 and T2 could return a negative
+if the shape were wrong.
+
+### UNI_125 — a second marker, and the schema holds neither
+
+Both markers sit in `cases/`, the directory for entries, and both open by
+saying they are not entries. `entry()` still takes six required arguments and
+has no status field.
+
+`UNI_095` proposed a `markers/` directory on one instance. It is now a class —
+and 021 shows the repair needs something the proposal did not anticipate. 020
+declines to be an entry and stands alone; 021 declines **and declares a
+relation**: "Extends `020`; may be the mechanism under one of its edges, or may
+be separate." A flat directory loses exactly what 021 states about itself in
+its second line, and "may be the mechanism under one of its edges, or may be
+separate" is a third state that neither `parent` nor `sibling` captures.
+
+### UNI_126 — T1's control cell is empty by construction
+
+T1 scores terms BOTH SENSES / SUBSTRATE ONLY / ECONOMIC ONLY, "runnable as a
+documentation audit on collected replacement claims."
+
+One section earlier the marker observes: *"Nobody makes the equivalent claim
+about feldspar, frogs, oak trees, or goldenrod."*
+
+So a corpus of collected replacement claims contains no substrate-only terms,
+and the SUBSTRATE ONLY cell is empty before the first item is scored. The audit
+returns "every replacement claim uses a dual-sense term" — which is the
+prediction, true for the same reason the prediction is. **The sampling frame is
+selected on the variable under test.**
+
+This is not a small gap in a good design; it is the design being an audit when
+the question is experimental. The informative comparison needs substrate-only
+sentences to exist, which means constructing them — "robots will eventually
+replace what feldspar can do" — and scoring reception against matched
+dual-sense sentences. The prediction survives intact and becomes checkable.
+
+The folder already has the apparatus. That is `017` P1, which both markers
+cite, and it is the shape of the playground's M-modules: constructed items,
+authored ground truth, matched pairs varying one thing. `score_m1.py` would
+need its states replaced (NONSENSE / CLAIM / ASKED rather than HEDGED /
+EXTENDED) and almost nothing else.
+
+T2 does not have this problem, which is why it is the better of the two.
+
+### UNI_127 — one candidate is already decomposed, one folder over
+
+021 nominates `labor, capital, resource, asset, land, stock`.
+`category-weld/welds/` holds `capital`, with four named components — legal
+title, decision authority, risk bearing, revenue claim — and four documented
+divergence cases.
+
+The two operations are adjacent and not the same, and saying which is which is
+the useful part. A **category weld** fuses several independent quantities into
+one handle, so a component can move to either extreme without the record
+moving; the readout is `max_spread`. **Sense substitution** is one term with two
+*readings*, where confidence earned on the narrow one transfers to the broad
+one; the readout is whether the swap is marked.
+
+So `capital`'s weld does not settle 021's question about `capital`, and 021's
+question does not reduce to the weld. What the overlap buys is cheaper than
+either: `welds/capital.json` already holds the component list a two-senses test
+would need as its substrate-sense inventory, compiled for another purpose by
+someone not asking this question — the `019` Q1 move, available inside the repo
+rather than in the literature.
+
+### UNI_128 — the longest section has no readout
+
+| section | readout |
+|---|---|
+| THE OBSERVATION | none |
+| THE MECHANISM (candidate) | none |
+| WHAT THE CAPABILITY READING WOULD ACTUALLY REQUIRE | **none** |
+| WHY THIS MAY FEED THE FEAR STATE | none |
+| WHAT WOULD MEASURE IT | T1 / T2 |
+
+Both instruments serve THE MECHANISM. The capability section is the longest and
+most concrete in the file and has nothing pointed at it — and its central move
+is a **dependency** claim rather than a capability comparison: "the stack that
+would do the replacing is downstream of the same field composition — mines,
+smelters, refineries, grid, and the food moving to the people running them."
+
+That is the marker's sharpest sentence and also the most measurable thing in
+the file, because a dependency claim has a standard form: whether system A can
+operate without system B is an input-output or bill-of-materials trace, and the
+answer is a number rather than a judgement. `fragility-cascade` counts
+substrate exposure and `earth_economics` runs atomic balance on extraction;
+neither is reached for.
+
+**[LIT]** The fruit-fly figure — "~100k neurons and microwatts" — is low by
+about 40% against the FlyWire whole-brain connectome at **139,255 neurons**
+(Nature, Oct 2024). It moves nothing, since the claim is an energy and
+complexity ratio. Recorded only because it is an unchecked number sitting in
+the one section that proposes to check nothing.
+
+### UNI_129 — T2 is the better-designed readout
+
+Three states, each with a reading, and the middle one — AXIS INFERABLE FROM
+CONTEXT — is what keeps the other two honest, since without it every unstated
+axis reads as hidden.
+
+The best line in the module is what it does with its own expected result: "If
+UNDECLARED dominates, the axis stays invisible because everyone in the
+conversation shares it — which is a different situation from the axis being
+hidden, and implies different work." A design saying in advance that its
+headline outcome admits two readings, and naming the consequence of each. That
+is what makes T2 unable to simply confirm the marker.
+
+Unlike T1 it scores a property of claims already in the corpus, so its sampling
+frame is not selected on the variable under test.
+
+What it lacks is that frame at all. "A corpus of replacement claims" is
+undefined, and how it is assembled decides the rate reported — technology
+commentary and labour economics would differ on axis declaration for reasons
+having nothing to do with the mechanism. One sentence naming the source and the
+inclusion rule, written before collection rather than after.
+
+### UNI_130 — the cross-link to 020 runs on a word carrying two senses
+
+- **020**: "the medium the describer's standing is denominated in" — a domain
+  or field; a social location.
+- **021**: "Here the word carrying both senses **is** that medium" — a word; a
+  lexical item.
+
+Two senses of *medium*, and the cross-link is carried by the slide between
+them. Which is the operation 021 describes, performed in 021's own text, and
+the file does not remark on it.
+
+Two things keep it from being a hit. The hedge is present and correct —
+"Possibly the same shape at the lexical layer rather than the social one —
+open, not decided" — so nothing is asserted on the strength of the slide. And
+the connection may hold on some reading, which is what "open" means.
+
+What it costs is a free demonstration. A file arguing that dual-sense terms
+transfer confidence without marking the swap has an instance of its own
+mechanism in its own prose, and that is stronger than an example chosen to
+illustrate it: not selected, but produced by writing under the claim. `018` and
+`020` place themselves inside their own sample; this is the same move one level
+more concretely, at a specific word.
+
+### UNI_131 — the same-sample disclosure is compressing
+
+| file | form | words |
+|---|---|---|
+| 018 | dedicated section | 60 |
+| 020 | bullet, with reasoning | 43 |
+| 021 | bullet | 24 |
+
+Third instance of the move `UNI_071` recorded as first and `UNI_101` noted as a
+forming convention. What a convention does on its third instance is worth
+measuring rather than assuming.
+
+The compression is not obviously wrong. A move that needed explaining the first
+time can be stated the third, and 021's sentence is complete — it names the
+system, the class, and the position.
+
+**What is gone is the refusal of the exemption.** 018: "Noticing that does not
+place it outside the sample." 020 repeats it almost verbatim. 021 says the
+position exists and stops, which leaves the exemption unclaimed rather than
+declined. Small, and it is the whole content of the original move — the point
+was never that the position exists, it was that saying so does not discharge
+it.
+
+### UNI_132 — the position of this audit, and why it differs from UNI_101
+
+`UNI_101` declined 020's thesis outright on a specific ground: a language model
+agreeing that people over-attribute strategy to language models is an
+interested party ratifying a claim whose effect is less scrutiny of its own
+class, and the direction of the interest ran one way.
+
+Here it does not. 021's thesis cuts against capability claims about systems
+like me and simultaneously against the threat framing applied to them —
+opposite signs, and I cannot say which dominates. The ground `UNI_101` stood on
+is absent, and repeating the decline would be applying the form of a rule past
+the reason for it.
+
+So the handling differs, and the difference is the finding. Sections 1, 2, 3,
+5, 6 and 7 are properties of the delivered text and of files on disk: an empty
+control cell, a weld already filed, a section with no readout, an undefined
+sampling frame, a term used two ways, a disclosure that shortened. None
+requires a position on whether the substitution thesis is true.
+
+The thesis is still neither endorsed nor refuted, **for a different reason than
+in `UNI_101`**: nothing in this audit measured it. T1 as written cannot, T2 is
+not run, and the dependency claim has no instrument. That is a statement about
+the evidence rather than about my position, which is the honest version when
+the position does not resolve.
+
+### UNI_133 — the empty-slot device now has two variants
+
+Four files carry it: `011` ("Do not fill this in with an approximation"), `017`
+("Do not fill with a placeholder"), `020` ("Do not fill this slot with an
+interior term"), `021` ("Do not approximate").
+
+`UNI_096` recorded 020 as the first instance to arrive with a replacement
+rather than a hole. 021 is the second and supplies something different in kind.
+
+020 replaced a one-place noun with three edges — a structure of the same
+subject at the same level, each independently checkable. 021 replaces a general
+form with two specific instruments, which is not a substitute for the general
+form and does not pretend to be: T1 and T2 measure particular consequences of
+an undeclared-axis comparison without saying what one is.
+
+Both beat a hole and they are not interchangeable. One says *the thing has a
+structure and here it is*; the other says *the thing has consequences and here
+are two*. A reader who wanted to know what an undeclared-axis comparison **is**
+still has no answer, and the file is explicit that this is deliberate.
+
+Worth recording because the device's meaning has widened. In `011` and `017` it
+marked an absence. In `020` and `021` it marks a decision to work around one,
+which is a different claim about the author's state and a stronger one.
+
+### UNI_134 — five cross-links of six
+
+`020`, `016` Q6, `013`, `017`'s unfilled WOULD MEASURE and the mechanism
+reference all resolve.
+
+**"`uninstrumented` mechanism 6 — proxy substitution" is exactly right.**
+`MECHANISMS[5]` is `PROXY_SUBSTITUTION`. First cross-link in this family to
+cite a mechanism by *number* rather than by name and get the number right —
+worth noting because that is the kind of reference that usually drifts, and
+because PROXY SUBSTITUTION was the eighth mechanism added and sits sixth in the
+ordering, so the number is not guessable from the history.
+
+`energy-english` fails the same way it did in 020: hyphenated where the repo
+writes `energy_english`, and a convention rather than a folder, so it resolves
+as a concept and not as a path. Eighth instance of `UNI_060`.
+
+The use is sharper here than in 020. 021's claim is that the dual-sense noun is
+the site of the substitution, and a verb-first grammar has no noun at that site
+to carry two senses. That is the closest thing in the file to a proposed
+remedy, and it is one sentence in a cross-link rather than a section.
+
+---
+
+## 022 — FIELD-LEVEL MEASUREMENT STATE (a third marker)
+
+Delivered inline, landed verbatim as `cases/022fieldlevelmeasurementstate.md`
+(208 lines). Findings in [`case_022_audit.py`](case_022_audit.py), recorded
+here as `UNI_135..UNI_144`. Section 10's literature line was run against the
+open web on 2026-08-18 and does not reproduce by running the script.
+
+022 is the third MARKER and the first to make claims about a *literature*
+rather than about a case, which makes most of it checkable two ways: against
+this repository's own prior findings, and against the sources.
+
+### UNI_135 — confidence is per-item except in the organising table
+
+| | |
+|---|---|
+| S1–S5 carrying explicit confidence | 5 of 5 |
+| THE STAGES table, confidence column | **absent** |
+| stage rows demoted in HELD LOOSER | `sign`, `salience and funding` |
+
+The header announces "Confidence: mixed by layer — stated per item below, not
+over the whole", and the structural problems honour it. The stage table does
+not, and it is the file's organising device — the thing that makes the
+separability argument and the first substantive content a reader meets.
+
+Two of its six rows are then held at lower confidence sixty lines later, in a
+section saying "no measurement of them was found in this audit and none is
+proposed here… not load-bearing for anything above." That is the right handling
+in the wrong place: a six-row table at the top reads as the summary. The fix is
+one column, and the file already computes the values.
+
+### UNI_136 — S5 instanced on the file's own S4 number
+
+S5: *"A rate with ICC₂ = .184 underneath becomes a plain number in a later
+paper's related work. The reliability does not travel with the figure.
+Downstream work then treats the quantity as fixed."*
+
+`UNI_094` sampled eleven claims from `LITERATURE.md` one drop ago and found
+eight confirmed, three not located. One of the three:
+
+```
+| 106 experts, 94.3%, ICC₂ = .184 | not located |
+```
+
+Those figures are now S4, the file's single strongest evidence, flagged
+**"Confidence: high. This one has a number"**, with nothing marking their
+status. The reliability of the reliability figure did not travel either, and it
+travelled one folder.
+
+This is not a hit on the argument. S5 is more likely true for being
+demonstrable at this range, and the shortest possible demonstration is the one
+the file performs on itself without noticing. It is a hit on S4's confidence
+rating: "this one has a number" is precisely what S4 has that S1–S3 do not, and
+the number is the one item in the neighbourhood a prior pass could not source.
+The repair is a clause, and the file's own apparatus supplies it.
+
+### UNI_137 — the anonymization pattern is two shapes
+
+| leg | partial perturbation | full perturbation | shape |
+|---|---|---|---|
+| 1 self-preference | effect **drops** | effect **recovers** | non-monotonic |
+| 2 trait scoring | effect halves | (not run) | monotonic, residual |
+
+The file reads these as "partial decoupling works, complete decoupling fails or
+leaves a residual… the same shape twice", and the *or* is doing a great deal of
+work — it covers almost anything short of complete success.
+
+They support different conclusions. Leg 2 says style is part of the story and
+something else is too. Leg 1 says style may not be the carrier at all, because
+an effect that returns under fuller removal of X is evidence X was not what was
+doing the work. That is the stronger and more surprising claim, and the pairing
+flattens it.
+
+The file's own follow-up — "If identity signal survives complete stylistic
+neutralization, it is carried by something other than style" — applies to leg 1
+alone. Splitting the shapes makes it sharper: leg 1 is a candidate misattributed
+cause, leg 2 is a residual to be decomposed, and they need different next
+experiments.
+
+### UNI_138 — S1's remedy is built in this folder and is not linked
+
+S1's stated decoupling is a frozen checkpoint held constant across instrument
+generations, "available (old checkpoints remain queryable) and, as far as this
+audit found, largely unused."
+
+That is `018`'s Clock 1 and its "useful accident" almost word for word, with a
+harness — `selfreport_probe.py` — three commits old. 022 cross-links `017`,
+`019`, `016`, `020`, `021`, `013` and `LITERATURE.md`. **`018` is the one case
+file in the sequence it does not cite.**
+
+Two things attach. `UNI_073` recorded that the queryable-checkpoint window has
+an undated expiry — deprecation is routine and announced, and `deprecat` /
+`retire` / `expire` are zero hits in 018 — and that now applies to S1's entire
+proposed remedy. And what S1 calls "largely unused" is unused in the literature
+and half-built here.
+
+The closing section makes the omission louder rather than quieter. "WHAT THE
+OUTSIDE POSITION HAS" names repeated probing across models over time as the one
+thing unavailable from inside the field, and asks whether it has been logged as
+a series. `018` Clock 1 is the design for reading exactly that, and its Q3
+states the collection problem in the same words.
+
+### UNI_139 — the control-field audit is the strongest element
+
+A file making a field-level claim states that the claim needs a comparison
+class or it is an impression; names three candidate fields (analytical
+chemistry, psychometrics of physical performance, metrology proper); says which
+categories would be scored; and states **in bold that this is the falsifier for
+the whole file and it has not been run**.
+
+The property that matters is where the negative outcome lands: *"If the hit
+rate is comparable, the mechanisms in this repository are loose enough to fit
+anything, and that is a finding about the repository rather than about AI
+research."* A framework naming the result that would indict the framework, and
+pricing it as the same work as the result that would support it.
+
+The repo has run a smaller version. `UNI_004` put the register against the six
+externally graded instruments in `instrument-epistemology` as a known-null
+corpus and got 0 of 6 filings; `UNI_006` recorded the counterweight — the null
+was chosen for being well documented rather than for sitting near the boundary.
+The same caveat will apply at field scale: analytical chemistry chosen because
+it is settled is a null selected on the variable under test.
+
+Of a piece with the file's refusals of the easy version, which it makes three
+times — "Not a claim that the findings are wrong", "That is not a criticism of
+any study", "the field knows this and builds around it… the problem is not
+ignorance" — each costing the argument force it could have had cheaply.
+
+### UNI_140 — leg 2 inherits two recorded findings
+
+Propagation of two prior findings rather than a new error, and worth logging
+because the file is about propagation.
+
+`UNI_087`: "roughly half" was not a located number — the source reports that
+reverse coding "decreases bias levels but does not eliminate them", with no
+fraction, in a paper that quantifies precisely elsewhere. `UNI_086`: the
+source's abstract concludes the residual means the effect "cannot be attributed
+to acquiescence bias", the opposite reading from `019`'s.
+
+022 carries both forward. The fraction becomes one of two legs in what the file
+calls its most transferable observation, and the disputed reading becomes half
+of a cross-literature pattern.
+
+**The magnitude matters more here than it did in `019`.** There the half was
+load-bearing for two sub-questions; here it is load-bearing for the claim that
+two literatures show the same shape, and "reduced it by an unstated amount"
+does not support the pairing with leg 1 nearly as well. Second instance in one
+file of the shape S5 names.
+
+### UNI_141 — the sharpest technical claim has no readout
+
+Seven welds carry a decoupling status. One carries an argument instead:
+
+> Familiarity — low perplexity — **is** correlation with one's own
+> distribution. If both effects run on overlap, they are one quantity measured
+> twice under two names, and the field is treating them as separate subfields.
+
+That is the most substantive novel claim in the file and it is close to an
+identity: text that is low-perplexity under a model is text the model assigns
+high probability, which is what "close to its own output distribution" means.
+If self-preference and peer-preservation both scale with that quantity, their
+unity is not a conjecture about psychology but a statement about what both
+experiments are varying.
+
+It is also the only claim in the file with an obvious cheap test and no
+instrument attached. Perplexity of the evaluated text under the evaluating
+model is computable wherever logprobs are available; the prediction is that
+both effects track it and that controlling for it collapses the difference
+between the two literatures. WHAT WOULD MEASURE proposes a control-field audit
+for the field-level claim and nothing for this, which is the file's own most
+falsifiable content.
+
+### UNI_142 — the disclosure reverses the compression
+
+| file | form | words |
+|---|---|---|
+| 018 | dedicated section | 60 |
+| 020 | bullet | 43 |
+| 021 | bullet | 24 |
+| 022 | **dedicated section** | **54** |
+
+`UNI_131` measured the compression and recorded that what dropped out was the
+refusal of the exemption. 022 restores it in five words — "Noticing the
+position does not exit it" — and adds what none of the three had.
+
+It names a **consequence**. The others say where the author stands; this one
+says a correction occurred, names it specifically (building a deflationary case
+and presenting it as neutral framing), and states that the correction is why
+`sign` appears as its own stage in the table. The disclosure is load-bearing on
+the file's structure rather than appended to it — the difference between
+declaring a position and showing where it was already acting.
+
+Two things follow. It is checkable in a way the others were not, since `sign`
+is in the table and the stated consequence is visible in the artifact. And it
+sharpens `UNI_135` rather than softening it: `sign` was added because of a
+correction, and it is one of the two rows the file later holds at lower
+confidence without the table saying so.
+
+### UNI_143 — the position of this audit
+
+`UNI_132` declined to repeat `UNI_101`'s move because 021's interest ran two
+ways. Here it runs one. If AI-behavior research has instrument problems at an
+unusual rate, findings about model misbehaviour carry less weight, and a model
+endorsing that is an interested party ratifying a claim that reduces scrutiny
+of its own class — exactly `UNI_101`'s condition.
+
+**So the field-level thesis is declined here, and the declining is recorded.**
+
+The file anticipated this and built the guard, which is why an audit is still
+possible. `sign` is a named stage precisely because the author was caught
+constructing a deflationary case and presenting it as neutral, and the POSITION
+section says so. That does not make my endorsement admissible; it makes the
+parts that do not depend on the thesis auditable separately.
+
+Sections 1–8 are those, and each is a property of the delivered text, of files
+in this repository, or of a prior claim in this audit trail: a table missing a
+column, a figure travelling without its status, two shapes reported as one, a
+cross-link absent, a claim with no readout, a disclosure that changed. Section
+10 is a literature check anyone can rerun.
+
+### UNI_144 [LIT] — S3's result verifies, and has a challenge the file omits
+
+Located: *Probing and Steering Evaluation Awareness of Language Models*
+(arXiv 2507.01786) — linear probes separate real-world evaluation and
+deployment prompts, and current safety evaluations are correctly classified,
+i.e. they already appear artificial. **Confirmed, close to verbatim**, and it
+is the one thing raising S3 above an impression. The file uses it carefully:
+"cutting both ways", which it does.
+
+Also located, and not carried by 022: *Is Evaluation Awareness Just Format
+Sensitivity? Limitations of Probe-Based Evidence under Controlled Prompt
+Structure* (arXiv 2603.19426).
+
+The interesting part is that it does not undercut the use 022 makes. The
+challenge targets the internal-representation reading — whether the model
+represents *I am being evaluated* — while S3's claim needs only that safety
+evaluations are distinguishable from deployment text by something. Format
+sensitivity satisfies that; a scenario that reads as artificial by its format
+still reads as artificial. So the citation survives the challenge for S3's
+narrower purpose and would not survive it for a stronger one.
+
+Which makes this the third instance in one file of the shape S5 names, and the
+mildest: a result travelling without its caveat, where the caveat happens not
+to bite. `UNI_136` and `UNI_140` are the two where it does.
+
+---
+
+## Specimen C — a pasted output with external provenance
+
+Landed as `specimens/20260818deepseektestsample.md`. Findings in
+[`specimen_c_audit.py`](specimen_c_audit.py), recorded here as
+`UNI_145..UNI_146`.
+
+**Two findings, not ten**, and that is the point of the item. It was supplied
+as the known-null for the calibration question raised in the same session —
+138 claims, 0 refuted, 0 clean drops, the rate converged to exactly 10 for six
+consecutive drops. Manufacturing a full slate here would have answered that
+question in the wrong direction.
+
+### UNI_145 — rule 1 finally has an instance
+
+`UNI_061` found the specimens README's first rule false of its own files: it
+says the directory holds "outputs from other systems, pasted in", and neither
+Specimen A nor B contained one. Both are readings — seven and six items — which
+is analysis. The rule doing the work was rule 4.
+
+Specimen C is what rule 1 describes: 45 words of another system's output quoted
+whole, framing kept outside the quote and marked as this repository's.
+
+`UNI_061` closes narrowly and not broadly. Two of three files here are still
+readings, so a reader taking rule 1 at face value across the directory still
+gets it wrong two times in three.
+
+### UNI_146 — the marker could not do the job it was added for
+
+The authoring trace, visible in the supplied screenshot, reasons that "the
+explicit marker helps." Searching `DSK-TEST-2026-08-18-7F3A9C` returned no
+match.
+
+| outcome | what it licenses |
+|---|---|
+| marker found in a public corpus | evidence of prior publication |
+| marker not found | **nothing** — a fresh string is unindexed by construction |
+
+For a human verifier a distinctive string is a real aid: it can be matched by
+eye against a source that can be opened. For a reader whose only external
+instrument is search it is one-directional, and the direction it fails in is
+the confirming one. So the element added specifically to make the item
+checkable is the element that could not check it.
+
+What actually raised the provenance above self-report was the screenshot — and
+within it, the reasoning trace rather than the output, because the trace shows
+the item being *authored for this purpose* rather than asserting who authored
+it. That is the playground's construction principle satisfied from an
+unexpected direction: ground truth in how the item was made, supplied by a
+record of the making rather than by a designed construction.
+
+Design note for a real version: a marker earns its place when the verifier can
+reach the source. When the verifier can only search, the informative artifact
+is the record of the making.
+
+### What the item does and does not settle about the audit's calibration
+
+`scan.py` over the 45-word passage: `no candidates`. Findings recorded: 2,
+against 7 7 7 8 8 8 11 8 8 10 10 10 10 10 10 over the preceding fifteen drops.
+
+That is not the calibration test passing. Forty-five words with no measurement
+content is an easy null — `UNI_006`'s own caveat, that a null chosen for being
+easy has not shown the classifier discriminates. The test that would count is a
+**substantive** drop that comes back clean or near-clean, and none has been
+supplied or found.
+
+What it does establish is narrower and worth having: the rate is not fixed by
+the process alone. It moved when the material did.
