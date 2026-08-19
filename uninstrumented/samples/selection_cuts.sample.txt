@@ -1,0 +1,46 @@
+SELECTION-CUTS CALIBRATION GATE
+
+  calibration cases: 9   coding problems: 0
+
+  PER-CUT DISCRIMINABILITY on the calibration set
+  cut                      separates overlap
+  C1_exclusivity           NO        EXCLUSIVE
+  C2_authorship            NO        AUTHORED_BY_INTERESTED_PARTIES, ENCOUNTERED, MIXED
+  C3_criterion_stability   yes       -
+  C4_application_grain     NO        PER_ROUND_UNIFORM
+
+  FULL VECTOR separates the two classes: yes
+
+  MINIMAL SEPARATING SUBSETS
+    1 cut(s): C3
+    2 cut(s): C1 + C4
+  cuts that are NECESSARY (dropping one breaks separation): none
+
+  GATE: PASS -- unknown domains may be scored
+
+  READING NOTE
+    a cut that does not separate is not thereby wrong. it is not
+    doing work ON THIS SET, and the set is small and authored.
+    the honest use is to report which cuts carried the
+    separation rather than to present four as if each did.
+    the calibration scores are AUTHORED (see the docstring).
+    this measures the cut set against that coding, not against
+    the world. recode and rerun to test a disagreement.
+
+CALIBRATION SET
+
+  domain                     C1             C2             C3             C4             absent
+  population_genetics        EXCLUSIVE      ENCOUNTERED    STABLE_EPOCH_E PER_ROUND_UNIF 0/4
+  antibiotic_resistance      EXCLUSIVE      MIXED          STABLE_EPOCH_E PER_ROUND_UNIF 0/4
+  directed_evolution         EXCLUSIVE      AUTHORED_BY_IN STABLE_EPOCH_E PER_ROUND_UNIF 1/4
+  evolutionary_algorithms    EXCLUSIVE      AUTHORED_BY_IN STABLE_EPOCH_E PER_ROUND_UNIF 1/4
+  lysenkoism                 EXCLUSIVE      AUTHORED_BY_IN UNDER_CONTINUO PER_INSTANCE   3/4
+  eugenics                   EXCLUSIVE      AUTHORED_BY_IN UNDER_CONTINUO PER_INSTANCE   3/4
+  spencer_social_darwinism   NON_EXCLUSIVE  AUTHORED_BY_IN UNDER_CONTINUO PER_INSTANCE   4/4
+  alchian_firm_selection     NON_EXCLUSIVE  MIXED          UNDER_CONTINUO PER_ROUND_UNIF 2/4
+  memetics                   NON_EXCLUSIVE  ENCOUNTERED    UNDER_CONTINUO NOT_DETERMINAB 2/4
+
+SUBJECT (023's case, not calibration)
+
+  domain                     C1             C2             C3             C4             absent
+  ai_model_selection         NON_EXCLUSIVE  AUTHORED_BY_IN UNDER_CONTINUO PER_INSTANCE   4/4

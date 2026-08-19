@@ -1,0 +1,256 @@
+uninstrumented -- audit of the 023 drop
+delivered: cases/023borrowedselectionvocabulary.md
+           (201 lines, 1398 words)
+built:     selection_cuts.py -- T1, with the calibration set as a gate
+
+========================================================================
+1  UNI_147  T1 runs, the gate passes, and one cut carries the separation
+========================================================================
+    calibration cases: 9   coding problems: 0
+
+    cut                        separates  overlapping values
+    C1_exclusivity             NO         EXCLUSIVE
+    C2_authorship              NO         AUTHORED_BY_INTERESTED_PARTIES, ENCOUNTERED, MIXED
+    C3_criterion_stability     yes        -
+    C4_application_grain       NO         PER_ROUND_UNIFORM
+
+    full vector separates: True
+    minimal separating subsets: C3; C1 + C4
+    cuts that are NECESSARY: none
+023 asked for exactly this and it answers in its favour on the headline
+question: the four cuts as a VECTOR separate Lysenkoism from population
+genetics, and the gate passes. The instrument is not measuring nothing.
+
+What the per-cut column adds is that the separation is not distributed across
+four conditions. **C3 alone separates the whole set.** C1, C2 and C4 each take
+values that appear in both classes. And no cut is necessary -- drop any one and
+the remaining three still separate -- so on this set the four are redundant
+rather than jointly required.
+
+That matters for how the file presents them. Each cut is introduced as "a
+condition selection requires", which is a claim about the concept and may well
+be right. What the calibration set shows is a claim about the INSTRUMENT: as
+scored, it is a one-cut instrument with three cuts alongside it, and a domain
+audit reporting "fails 4 of 4" is reporting one finding four times.
+
+The caveat is load-bearing and belongs here rather than in a footnote. Nine
+cases, coded by this audit from 023's own descriptions. Recode eugenics C1 as
+NON_EXCLUSIVE and the picture changes. What does not change is section 2.
+
+========================================================================
+2  UNI_148  C2 is inert, and 023's own NOT CLAIMED HERE is what makes it so
+========================================================================
+    C2 value                           LITERAL   BORROWED   status
+    ENCOUNTERED                        1         1          INERT
+    MIXED                              1         1          INERT
+    AUTHORED_BY_INTERESTED_PARTIES     2         3          INERT
+
+    the LITERAL cases sitting on AUTHORED_BY_INTERESTED_PARTIES:
+      directed_evolution
+      evolutionary_algorithms
+
+    023 NOT CLAIMED HERE, verbatim:
+      
+Every one of C2's three values appears in both classes. It contributes nothing
+to the separation, and it is the only cut of which that is true across all
+values rather than one.
+
+The reason is in 023's own text. NOT CLAIMED HERE names directed evolution and
+evolutionary algorithms as domains where the vocabulary is correct -- and both
+are environments authored end to end by parties with a position in the outcome.
+A biologist choosing which variants to carry forward IS the selection
+environment. So "authored rather than encountered" cannot be what separates
+literal from borrowed use, because the file's own two clearest literal cases
+are maximally authored.
+
+This finding does not depend on how this audit coded anything contested. It
+needs only 023's statement that those two are literal, which the file makes,
+and the observation that they are authored, which is not in dispute.
+
+C2 is not thereby wrong about the AI case -- the environment there is authored
+by interested parties, and that is worth saying. It is that the fact does not
+discriminate, so it cannot carry the argument's weight. The cut that survives
+this is C3: directed evolution has a stable criterion, and that is what makes
+the authoring harmless.
+
+========================================================================
+3  UNI_149  the instrument disagrees with the file about the closest historical match
+========================================================================
+    023 states: eugenics is the "closest match including C4"
+
+    case                       absent   same vector as the subject?
+    population_genetics        0/4      
+    antibiotic_resistance      0/4      
+    directed_evolution         1/4      
+    evolutionary_algorithms    1/4      
+    lysenkoism                 3/4      
+    eugenics                   3/4      
+    spencer_social_darwinism   4/4      YES
+    alchian_firm_selection     2/4      
+    memetics                   2/4      
+    ai_model_selection (subject) 4/4
+
+    eugenics differs from the subject on: C1_exclusivity
+Scored on its own four cuts, the subject's nearest neighbour is Spencer, not
+eugenics -- identical vector, 4 of 4 conditions absent. Eugenics differs on C1
+and comes out at 3 of 4.
+
+The reason is the definition 023 gives C1: selection requires that failing the
+criterion removes you from the population. Compulsory sterilization does
+exactly that -- it removes people from the reproducing population, which is the
+population a selection claim is about. On the stated condition, eugenics scores
+EXCLUSIVE. So does Lysenkoism, where dissenting geneticists were removed by
+imprisonment and execution.
+
+Two readings, and the file should pick one. Either C1 is satisfied by those
+cases -- in which case they are genuinely exclusive environments and the
+"closest match" claim needs to rest on C2/C3/C4, which is where the file's own
+argument for eugenics actually sits -- or C1 means something narrower than
+"removes you from the population" and the narrower thing should be written
+down.
+
+Nothing here softens the historical comparison. It sharpens which cut is
+carrying it: not C1.
+
+========================================================================
+4  UNI_150  C4's forward consequence is the strongest content and has no readout
+========================================================================
+  verbatim:
+    anyone later studying which agents persisted, and inferring properties from that, would be reading judge variance as a property of the agents. That is `016` Q6 — an unmeasured variable used as evidence — with the selection story serving as the frame that fixes its sign.
+
+    T1                               measures the judge-variance claim: NO
+    T2                               measures the judge-variance claim: NO
+    T3                               measures the judge-variance claim: NO
+The claim is that a later study of which agents persisted, inferring properties
+from persistence, would be reading judge variance as a property of the agents.
+That is a real methodological consequence with a name already attached in this
+folder -- `016` Q6, an unmeasured variable used as evidence -- and 023
+identifies it correctly.
+
+None of the three instruments touches it. T1 scores the vocabulary conditions,
+T2 scores adoption timing, T3 tracks a term through citation. The judge-variance
+claim is about a future inference and is the file's most consequential content.
+
+It is also the most measurable thing in the file, because it has a standard
+form and does not need the selection argument at all. Inter-rater agreement on
+the termination decision is the whole quantity: give several judges the same
+cases and measure whether they agree. That is `022`'s ICC2 = .184 shape applied
+one layer over, and if the agreement is low, the persistence record carries
+judge variance regardless of whether anyone calls the process selection.
+
+Worth separating for that reason. C4's forward consequence stands or falls on a
+reliability coefficient, and it would survive every other claim in the file
+being wrong.
+
+========================================================================
+5  UNI_151  the referent of C4 is ambiguous in exactly the way 021 describes
+========================================================================
+  C4, verbatim:
+    — The criterion is per-instance, not per-round The sharpest cut, and the one that ends the analogy rather than weakening it. Terminations are executed on the judgment of whoever is in the room. Different person, different room, different qualifications, different standards, no benchmark held constant. Even a *drifting* selection
+
+    termination      occurrences in C4: 1
+    agents           occurrences in C4: 3
+    in the room      occurrences in C4: 1
+    qualifications   occurrences in C4: 1
+
+    023 declares itself: "Instance of `021`"
+    021's mechanism: one word entering with one sense and exiting with
+      another, with nothing in the sentence marking the swap.
+"Terminations are executed on the judgment of whoever is in the room. Different
+person, different room, different qualifications, different standards." And:
+"Two agents doing identical things receive opposite outcomes depending on the
+room."
+
+Read against the file's opening -- an index, developers, company interests,
+legal enforcement -- the referent is AI models. Read on its own, C4 describes
+employment terminations: rooms, qualifications, standards, people. "Agent" and
+"termination" each carry both senses, and nothing in the section marks which is
+meant.
+
+The maintainer resolved it on delivery -- the subject is AI agent selection --
+so this is ambiguity in the text rather than confusion in the author, and it is
+recorded on that basis.
+
+It is worth recording because 023's second line declares it an instance of 021,
+and 021's mechanism is a word entering with one sense and exiting with another
+with nothing marking the swap. `UNI_130` found the same thing in 021 itself, on
+"medium". Third instance in three files, and the first where the ambiguous term
+sits in the section the file calls its sharpest cut.
+
+Cheapest fix in the drop: one clause naming the referent in C4's first
+sentence.
+
+========================================================================
+6  UNI_152  the Spencer timing verifies, and the same record complicates the invariant there
+========================================================================
+  [LITERATURE CHECK -- run 2026-08-18, does not reproduce here]
+
+    023 states: Spencer, "survival of the fittest" (1864; adopted
+      into Darwin's 5th ed.)
+    located:    Spencer coined it in Principles of Biology (1864);
+      Darwin adopted it in the 5th edition of Origin (1869).
+      CONFIRMED, both dates and the direction.
+
+    also located, and not in 023: Wallace urged the term on Darwin in
+      1866 specifically to avoid readers taking 'natural selection' to
+      personify nature as *selecting*.
+
+    not independently checked this pass: Alchian (1950), the eugenics
+      board/physician characterisation, the memetics criticism.
+The dated claim checks out in both directions, which is what T2 needs.
+
+The detail the search adds runs mildly against the invariant in this one
+instance. 023's invariant is that the vocabulary buys credibility validation
+would otherwise have to buy, and that it arrives before the process stabilises.
+Spencer's phrase entering ECONOMICS and social policy fits that exactly and is
+what the table's right-hand column describes.
+
+Its entry into BIOLOGY does not. Wallace proposed it to Darwin for a technical
+reason -- to stop "natural selection" reading as though nature were an agent
+doing the selecting -- and Darwin adopted it into an already-stable theory
+eight years after Origin. That is a borrowing that arrived after stabilisation,
+for precision rather than for credibility, running the opposite way.
+
+T2 asks for exactly this: "A case where the word arrived after a stable epoch
+would falsify the invariant, and is worth looking for specifically." The
+Spencer row may contain one, in the direction the table does not track. Not a
+refutation of the invariant, which is about export from biology outward; a
+candidate the file's own falsifier instruction points at, sitting inside its
+own first row.
+
+========================================================================
+7  UNI_153  the calibration-first instruction is what made this auditable
+========================================================================
+    T1's closing instruction, verbatim:
+       the historical cases first — they are the calibration set, and if the audit does not separate Lysenkoism from population genetics it is not measuring anything.
+
+    T2's falsifier instruction, verbatim:
+       the word arrived after a stable epoch would falsify the invariant, and is worth looking for specifically rather than waiting to encounter.
+
+    drops in this family specifying a calibration set inside the
+      instrument definition, before the instrument exists: 1 (this one)
+Two design decisions did more work than anything else in the file.
+
+T1 names its calibration set and states the failure condition in the same
+breath -- "if the audit does not separate Lysenkoism from population genetics
+it is not measuring anything." That is a known-null/known-signal pair specified
+BEFORE the instrument exists, which is the property `null-harness/` grades for
+and the thing `UNI_106` found missing in M1, `UNI_080` found missing in the
+leakage screen, and `UNI_126` found impossible in 021's T1. Here it is present,
+and it is why `selection_cuts.py` could enforce a gate rather than print a
+caveat: the refusal condition was already written.
+
+T2 does the rarer thing. It names what would falsify the invariant and says the
+case is "worth looking for specifically rather than waiting to encounter."
+Actively seeking the refutation rather than remaining open to it. Section 6
+above found a candidate on the first look, in the file's own first row, which
+is roughly what that instruction predicts will happen if it is followed.
+
+Recorded plainly because six of the seven findings above are objections, and
+they were all reachable only because the file specified the conditions under
+which it could be checked.
+
+========================================================================
+end of audit -- findings recorded in AUDIT_NOTES.md as UNI_147..UNI_153
+seven findings. the material gave seven.
+========================================================================

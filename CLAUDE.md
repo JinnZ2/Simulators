@@ -2765,8 +2765,43 @@ underneath).
   7 7 7 8 8 8 11 8 8 10 10 10 10 10 10 — recorded because the same session
   measured 0 of 138 claims REFUTED and the rate converged to exactly 10 for
   six consecutive drops. An easy null does not settle that (`UNI_006`), but it
-  shows the rate is not fixed by the process alone. One hundred and forty-six
-  claims `UNI_001..146`. Stdlib only, CC0.
+  shows the rate is not fixed by the process alone.
+  **`cases/023borrowedselectionvocabulary.md`** proposes four checkable
+  conditions selection vocabulary names (C1 exclusivity / C2 authored-vs-
+  encountered / C3 criterion stability / C4 per-round-vs-per-instance) with a
+  documented historical comparison class, and instructs that the audit be run
+  against the historical cases FIRST — "if it does not separate Lysenkoism from
+  population genetics it is not measuring anything." **That instruction made
+  the drop the first in the family whose audit findings were computed rather
+  than read.** T1 is built as `selection_cuts.py` (stdlib, selftest 13/13),
+  with the calibration set enforced as a gate: `score()` raises `GateNotRun`
+  until `calibrate()` has run and passed. **`UNI_147`:** the gate PASSES — the
+  four cuts as a vector separate the calibration set — but per cut, **C3
+  separates alone**, C1/C2/C4 each take values appearing in both classes,
+  minimal separating subsets are `C3` and `C1+C4`, and **no cut is necessary**;
+  so as scored it is a one-cut instrument with three alongside, and "fails 4 of
+  4" reports one finding four times. **`UNI_148`, which depends on no contested
+  coding:** C2 is inert across *all three* of its values, and 023's own NOT
+  CLAIMED HERE section is why — it names directed evolution and evolutionary
+  algorithms as literal, and both are environments authored end to end, so
+  "authored rather than encountered" cannot separate literal from borrowed use.
+  **`UNI_149`:** scored on its own cuts the subject's nearest neighbour is
+  **Spencer** (identical vector, 4/4) rather than eugenics (3/4), because
+  compulsory sterilization satisfies C1 as stated — removal from the
+  reproducing population. **`UNI_150`:** C4's forward consequence (a later
+  study of which agents persisted would read judge variance as a property of
+  the agents) is the strongest content, correctly identified as `016` Q6, and
+  no instrument reaches it — though it needs none of the selection argument,
+  being an inter-rater agreement measurement. **`UNI_151`:** *agent* and
+  *termination* each carry two senses in C4, third instance of `021`'s own
+  mechanism after `UNI_130`. **`UNI_152`:** the Spencer/Darwin dating verifies
+  (1864 / 5th ed. 1869) and the same record supplies a candidate falsifier for
+  the invariant, since Wallace urged the term on Darwin to *avoid*
+  personification, into an already-stable theory. **`UNI_153`:** six of seven
+  findings are objections and all were reachable only because the file
+  specified its calibration set and its falsifier in advance. Seven findings;
+  the material gave seven. One hundred and fifty-three claims `UNI_001..153`.
+  Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
   time-series variable** — version the ruler, compute drift on its own
