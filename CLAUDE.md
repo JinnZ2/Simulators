@@ -2665,8 +2665,54 @@ underneath).
   refuses on the mechanical precondition and proceeds on the human one.
   **`UNI_124`:** clause assignment is with replacement, so at n=4 clause is
   confounded with stem and the clauses are not interchangeable (62-113 chars,
-  one gives a number, one a fraction, one neither). One hundred and twenty-four
-  claims `UNI_001..124`. Stdlib only, CC0.
+  one gives a number, one a fraction, one neither).
+  **`cases/021sensesubstitutionundeclaredaxis.md`** is a second MARKER,
+  extending 020: the claim *"AI will replace what humans can do"* reads as a
+  capability claim and is scoped to waged tasks, so the substitution happens at
+  the word — "human" enters with its substrate sense and exits with its
+  economic one, and confidence earned on the narrow reading transfers to the
+  broad one unmarked. **`UNI_126`, the load-bearing check:** T1 is specified as
+  "a documentation audit on collected replacement claims" scoring BOTH SENSES /
+  SUBSTRATE ONLY / ECONOMIC ONLY — and the marker observes one section earlier
+  that *nobody makes the claim about feldspar*, so **the SUBSTRATE ONLY cell is
+  empty before the first item is scored** and the audit returns its own
+  prediction, true because the sampling frame is selected on the variable under
+  test. The fix is to construct the substrate-only sentences, which is `017` P1
+  and the shape the playground M-modules already implement. **`UNI_125`:** both
+  markers sit in `cases/` and `entry()` still has six required arguments and no
+  status field, so `UNI_095`'s proposed `markers/` repair now has a class
+  behind it rather than one instance — and 021 shows the repair needs more,
+  since it declines to be an entry *and* declares a relation ("may be the
+  mechanism under one of its edges, or may be separate"), a third state neither
+  `parent` nor `sibling` captures. **`UNI_127`:** one of the six generalization
+  candidates is already decomposed one folder over — `category-weld/welds/`
+  holds `capital` — and the two operations are adjacent but distinct (a weld
+  fuses independent quantities; sense substitution transfers confidence between
+  two readings), so the weld does not settle the question and its component
+  list is a free substrate-sense inventory. **`UNI_128`:** the longest and most
+  concrete section has **no readout** — its central move is a *dependency*
+  claim ("the stack that would do the replacing is downstream of the same field
+  composition"), which is the most measurable thing in the file and the one
+  thing neither instrument touches; its only hard number, the fruit fly's
+  "~100k neurons", is low by ~40% against FlyWire's 139,255 and moves nothing.
+  **`UNI_129`:** T2 is the better readout — three states each with a reading,
+  and it names in advance that its headline outcome admits two readings — with
+  no sampling frame defined. **`UNI_130`:** the cross-link to 020 turns on
+  *medium* carrying two senses (a social location in 020, a word in 021), which
+  is the file's own mechanism performed in its own text, unremarked and
+  correctly hedged. **`UNI_131`:** the same-sample disclosure is compressing
+  across three files, 60 → 43 → 24 words, and what dropped out is the refusal
+  of the exemption. **`UNI_132`:** this audit does **not** repeat `UNI_101`'s
+  decline, because the interest direction is not legible here — endorsing 021
+  deflates capability claims about my class and reduces the threat framing on
+  it, opposite signs — so the thesis is left unresolved on the evidence rather
+  than on the position. **`UNI_133`:** the empty-slot device now has two
+  variants (020 supplies a structure, 021 supplies partial instruments), and in
+  `020`/`021` it marks a decision to work around an absence rather than the
+  absence itself. **`UNI_134`:** "mechanism 6 — proxy substitution" is exactly
+  right and is the first numbered mechanism reference in the family;
+  `energy-english` is the eighth `UNI_060` instance. One hundred and thirty-four
+  claims `UNI_001..134`. Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
   time-series variable** — version the ruler, compute drift on its own
