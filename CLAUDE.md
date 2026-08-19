@@ -2711,8 +2711,44 @@ underneath).
   `020`/`021` it marks a decision to work around an absence rather than the
   absence itself. **`UNI_134`:** "mechanism 6 — proxy substitution" is exactly
   right and is the first numbered mechanism reference in the family;
-  `energy-english` is the eighth `UNI_060` instance. One hundred and thirty-four
-  claims `UNI_001..134`. Stdlib only, CC0.
+  `energy-english` is the eighth `UNI_060` instance.
+  **`cases/022fieldlevelmeasurementstate.md`** is a third MARKER and the first
+  to make claims about a *literature* — six measurement stages (variable
+  selection / baseline / sign / funding / instrument / target) and five
+  structural problems S1–S5, each with its own confidence. **`UNI_136`, the
+  sharp one:** S5 says a rate with `ICC₂ = .184` underneath becomes a plain
+  number downstream and the reliability does not travel — and `UNI_094` had
+  recorded that exact figure, one drop earlier, as **not located**. It appears
+  in S4 as the file's strongest evidence flagged "Confidence: high. This one
+  has a number", unmarked. Not a hit on the argument (S5 is likelier for being
+  demonstrable at a range of one folder) but on S4's rating. **`UNI_137`:** the
+  anonymization pattern is **two shapes, not one** — leg 1 is non-monotonic
+  (self-preference *recovers* under full stylistic neutralization), leg 2 is
+  monotonic-with-residual, and the *or* in "fails or leaves a residual" hides
+  the difference; leg 1 is the stronger claim, that style may not be the
+  carrier at all. **`UNI_138`:** S1's remedy is `018`'s Clock 1 almost word for
+  word, with a harness three commits old — and `018` is the one case file 022
+  does not cite, so `UNI_073`'s undated expiry now applies to S1's whole
+  remedy. **`UNI_139`:** the control-field audit is the strongest element —
+  names the comparison class, the candidate fields, and states in bold that it
+  is the falsifier for the whole file and has not been run, with the negative
+  outcome indicting **the repository** rather than the field. **`UNI_140`:**
+  leg 2 inherits `UNI_086` (the source concludes against the acquiescence
+  reading) and `UNI_087` ("roughly half" unlocated), and the magnitude matters
+  more here than in `019`. **`UNI_141`:** the sharpest technical claim —
+  *familiarity, low perplexity, IS correlation with one's own distribution* —
+  is one sentence with no readout, and it is the file's most falsifiable
+  content. **`UNI_142`:** the same-sample disclosure **reverses** `UNI_131`'s
+  compression (60 → 43 → 24 → 54 words), restores the refusal of the exemption,
+  and is the first to name a *consequence* — a correction is why `sign` is a
+  stage — which is checkable in the artifact. **`UNI_143`:** the `UNI_101`
+  condition applies here and the field-level thesis is **declined**, since
+  interest runs one way; the file anticipated it and built the guard, which is
+  what makes the thesis-independent parts auditable. **`UNI_144`:** S3's cited
+  probe result verifies close to verbatim (arXiv 2507.01786) and has a
+  published challenge 022 omits — which does not bite, since S3 needs only
+  distinguishability and format sensitivity supplies it. One hundred and
+  forty-four claims `UNI_001..144`. Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
   time-series variable** — version the ruler, compute drift on its own

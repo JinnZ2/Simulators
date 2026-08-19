@@ -218,17 +218,21 @@ head(3, "UNI_071", "the first entry to place itself inside its own sample "
 pos = CASE.split("## POSITION OF THIS FILE", 1)[1].split("## CROSS-LINKS")[0]
 print(pos.strip())
 print()
-prior = 0
+earlier, later = [], []
 for fn in sorted(os.listdir(CASES)):
     if fn == "018selfreportopinioncoupling.md":
         continue
     t = readfile(CASES, fn) or ""
     if "POSITION OF THIS FILE" in t:
-        prior += 1
-print("    prior cases carrying a POSITION OF THIS FILE section: %d" % prior)
+        (earlier if fn < "018" else later).append(fn[:3])
+print("    cases BEFORE 018 carrying a POSITION OF THIS FILE section: %d"
+      % len(earlier))
+print("    cases AFTER 018 carrying one: %d  %s"
+      % (len(later), ", ".join(later) if later else ""))
 
 block("""
-Zero. The section is new and it does one thing that is not standard practice
+Zero before it. The section is new and it does one thing that is not standard
+practice
 anywhere in this repo: it names the exemption that noticing usually buys and
 declines to take it. "Noticing that does not place it outside the sample."
 
@@ -243,6 +247,12 @@ operating on the register itself.
 The instruction it ends on -- "check the design against someone who is not in
 it" -- is `triad-playground/` TP_003's shadow-decorrelation requirement,
 reached from a case rather than from a panel design.
+
+STATE CHANGE, detected by the counts above: the move has recurred in later
+cases. UNI_071's claim is unaffected -- 018 was first -- but the section is no
+longer a one-off, and UNI_142 measures what it has done since. A correction to
+this script rather than to the finding: the line above used to say "prior
+cases" while counting every other case, including ones written afterwards.
 """)
 
 # ---------------------------------------------------------------- 4

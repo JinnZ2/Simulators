@@ -89,6 +89,9 @@ on the ground that the corpus has had two kinds of thing in it since Case 010.
 That was one instance. It is now a class. Both markers sit in `cases/`, which
 is the directory for entries, and both open by saying they are not entries.
 
+STATE CHANGE, detected by the listing above: a third marker has since landed.
+The class is larger than it was when this section was written; see UNI_135.
+
 021 also shows the repair needs one thing the earlier proposal did not
 anticipate. 020 declines to be an entry and stands alone. 021 declines AND
 declares a relation -- "Extends `020`; may be the mechanism under one of its

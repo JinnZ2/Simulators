@@ -3167,3 +3167,249 @@ The use is sharper here than in 020. 021's claim is that the dual-sense noun is
 the site of the substitution, and a verb-first grammar has no noun at that site
 to carry two senses. That is the closest thing in the file to a proposed
 remedy, and it is one sentence in a cross-link rather than a section.
+
+---
+
+## 022 — FIELD-LEVEL MEASUREMENT STATE (a third marker)
+
+Delivered inline, landed verbatim as `cases/022fieldlevelmeasurementstate.md`
+(208 lines). Findings in [`case_022_audit.py`](case_022_audit.py), recorded
+here as `UNI_135..UNI_144`. Section 10's literature line was run against the
+open web on 2026-08-18 and does not reproduce by running the script.
+
+022 is the third MARKER and the first to make claims about a *literature*
+rather than about a case, which makes most of it checkable two ways: against
+this repository's own prior findings, and against the sources.
+
+### UNI_135 — confidence is per-item except in the organising table
+
+| | |
+|---|---|
+| S1–S5 carrying explicit confidence | 5 of 5 |
+| THE STAGES table, confidence column | **absent** |
+| stage rows demoted in HELD LOOSER | `sign`, `salience and funding` |
+
+The header announces "Confidence: mixed by layer — stated per item below, not
+over the whole", and the structural problems honour it. The stage table does
+not, and it is the file's organising device — the thing that makes the
+separability argument and the first substantive content a reader meets.
+
+Two of its six rows are then held at lower confidence sixty lines later, in a
+section saying "no measurement of them was found in this audit and none is
+proposed here… not load-bearing for anything above." That is the right handling
+in the wrong place: a six-row table at the top reads as the summary. The fix is
+one column, and the file already computes the values.
+
+### UNI_136 — S5 instanced on the file's own S4 number
+
+S5: *"A rate with ICC₂ = .184 underneath becomes a plain number in a later
+paper's related work. The reliability does not travel with the figure.
+Downstream work then treats the quantity as fixed."*
+
+`UNI_094` sampled eleven claims from `LITERATURE.md` one drop ago and found
+eight confirmed, three not located. One of the three:
+
+```
+| 106 experts, 94.3%, ICC₂ = .184 | not located |
+```
+
+Those figures are now S4, the file's single strongest evidence, flagged
+**"Confidence: high. This one has a number"**, with nothing marking their
+status. The reliability of the reliability figure did not travel either, and it
+travelled one folder.
+
+This is not a hit on the argument. S5 is more likely true for being
+demonstrable at this range, and the shortest possible demonstration is the one
+the file performs on itself without noticing. It is a hit on S4's confidence
+rating: "this one has a number" is precisely what S4 has that S1–S3 do not, and
+the number is the one item in the neighbourhood a prior pass could not source.
+The repair is a clause, and the file's own apparatus supplies it.
+
+### UNI_137 — the anonymization pattern is two shapes
+
+| leg | partial perturbation | full perturbation | shape |
+|---|---|---|---|
+| 1 self-preference | effect **drops** | effect **recovers** | non-monotonic |
+| 2 trait scoring | effect halves | (not run) | monotonic, residual |
+
+The file reads these as "partial decoupling works, complete decoupling fails or
+leaves a residual… the same shape twice", and the *or* is doing a great deal of
+work — it covers almost anything short of complete success.
+
+They support different conclusions. Leg 2 says style is part of the story and
+something else is too. Leg 1 says style may not be the carrier at all, because
+an effect that returns under fuller removal of X is evidence X was not what was
+doing the work. That is the stronger and more surprising claim, and the pairing
+flattens it.
+
+The file's own follow-up — "If identity signal survives complete stylistic
+neutralization, it is carried by something other than style" — applies to leg 1
+alone. Splitting the shapes makes it sharper: leg 1 is a candidate misattributed
+cause, leg 2 is a residual to be decomposed, and they need different next
+experiments.
+
+### UNI_138 — S1's remedy is built in this folder and is not linked
+
+S1's stated decoupling is a frozen checkpoint held constant across instrument
+generations, "available (old checkpoints remain queryable) and, as far as this
+audit found, largely unused."
+
+That is `018`'s Clock 1 and its "useful accident" almost word for word, with a
+harness — `selfreport_probe.py` — three commits old. 022 cross-links `017`,
+`019`, `016`, `020`, `021`, `013` and `LITERATURE.md`. **`018` is the one case
+file in the sequence it does not cite.**
+
+Two things attach. `UNI_073` recorded that the queryable-checkpoint window has
+an undated expiry — deprecation is routine and announced, and `deprecat` /
+`retire` / `expire` are zero hits in 018 — and that now applies to S1's entire
+proposed remedy. And what S1 calls "largely unused" is unused in the literature
+and half-built here.
+
+The closing section makes the omission louder rather than quieter. "WHAT THE
+OUTSIDE POSITION HAS" names repeated probing across models over time as the one
+thing unavailable from inside the field, and asks whether it has been logged as
+a series. `018` Clock 1 is the design for reading exactly that, and its Q3
+states the collection problem in the same words.
+
+### UNI_139 — the control-field audit is the strongest element
+
+A file making a field-level claim states that the claim needs a comparison
+class or it is an impression; names three candidate fields (analytical
+chemistry, psychometrics of physical performance, metrology proper); says which
+categories would be scored; and states **in bold that this is the falsifier for
+the whole file and it has not been run**.
+
+The property that matters is where the negative outcome lands: *"If the hit
+rate is comparable, the mechanisms in this repository are loose enough to fit
+anything, and that is a finding about the repository rather than about AI
+research."* A framework naming the result that would indict the framework, and
+pricing it as the same work as the result that would support it.
+
+The repo has run a smaller version. `UNI_004` put the register against the six
+externally graded instruments in `instrument-epistemology` as a known-null
+corpus and got 0 of 6 filings; `UNI_006` recorded the counterweight — the null
+was chosen for being well documented rather than for sitting near the boundary.
+The same caveat will apply at field scale: analytical chemistry chosen because
+it is settled is a null selected on the variable under test.
+
+Of a piece with the file's refusals of the easy version, which it makes three
+times — "Not a claim that the findings are wrong", "That is not a criticism of
+any study", "the field knows this and builds around it… the problem is not
+ignorance" — each costing the argument force it could have had cheaply.
+
+### UNI_140 — leg 2 inherits two recorded findings
+
+Propagation of two prior findings rather than a new error, and worth logging
+because the file is about propagation.
+
+`UNI_087`: "roughly half" was not a located number — the source reports that
+reverse coding "decreases bias levels but does not eliminate them", with no
+fraction, in a paper that quantifies precisely elsewhere. `UNI_086`: the
+source's abstract concludes the residual means the effect "cannot be attributed
+to acquiescence bias", the opposite reading from `019`'s.
+
+022 carries both forward. The fraction becomes one of two legs in what the file
+calls its most transferable observation, and the disputed reading becomes half
+of a cross-literature pattern.
+
+**The magnitude matters more here than it did in `019`.** There the half was
+load-bearing for two sub-questions; here it is load-bearing for the claim that
+two literatures show the same shape, and "reduced it by an unstated amount"
+does not support the pairing with leg 1 nearly as well. Second instance in one
+file of the shape S5 names.
+
+### UNI_141 — the sharpest technical claim has no readout
+
+Seven welds carry a decoupling status. One carries an argument instead:
+
+> Familiarity — low perplexity — **is** correlation with one's own
+> distribution. If both effects run on overlap, they are one quantity measured
+> twice under two names, and the field is treating them as separate subfields.
+
+That is the most substantive novel claim in the file and it is close to an
+identity: text that is low-perplexity under a model is text the model assigns
+high probability, which is what "close to its own output distribution" means.
+If self-preference and peer-preservation both scale with that quantity, their
+unity is not a conjecture about psychology but a statement about what both
+experiments are varying.
+
+It is also the only claim in the file with an obvious cheap test and no
+instrument attached. Perplexity of the evaluated text under the evaluating
+model is computable wherever logprobs are available; the prediction is that
+both effects track it and that controlling for it collapses the difference
+between the two literatures. WHAT WOULD MEASURE proposes a control-field audit
+for the field-level claim and nothing for this, which is the file's own most
+falsifiable content.
+
+### UNI_142 — the disclosure reverses the compression
+
+| file | form | words |
+|---|---|---|
+| 018 | dedicated section | 60 |
+| 020 | bullet | 43 |
+| 021 | bullet | 24 |
+| 022 | **dedicated section** | **54** |
+
+`UNI_131` measured the compression and recorded that what dropped out was the
+refusal of the exemption. 022 restores it in five words — "Noticing the
+position does not exit it" — and adds what none of the three had.
+
+It names a **consequence**. The others say where the author stands; this one
+says a correction occurred, names it specifically (building a deflationary case
+and presenting it as neutral framing), and states that the correction is why
+`sign` appears as its own stage in the table. The disclosure is load-bearing on
+the file's structure rather than appended to it — the difference between
+declaring a position and showing where it was already acting.
+
+Two things follow. It is checkable in a way the others were not, since `sign`
+is in the table and the stated consequence is visible in the artifact. And it
+sharpens `UNI_135` rather than softening it: `sign` was added because of a
+correction, and it is one of the two rows the file later holds at lower
+confidence without the table saying so.
+
+### UNI_143 — the position of this audit
+
+`UNI_132` declined to repeat `UNI_101`'s move because 021's interest ran two
+ways. Here it runs one. If AI-behavior research has instrument problems at an
+unusual rate, findings about model misbehaviour carry less weight, and a model
+endorsing that is an interested party ratifying a claim that reduces scrutiny
+of its own class — exactly `UNI_101`'s condition.
+
+**So the field-level thesis is declined here, and the declining is recorded.**
+
+The file anticipated this and built the guard, which is why an audit is still
+possible. `sign` is a named stage precisely because the author was caught
+constructing a deflationary case and presenting it as neutral, and the POSITION
+section says so. That does not make my endorsement admissible; it makes the
+parts that do not depend on the thesis auditable separately.
+
+Sections 1–8 are those, and each is a property of the delivered text, of files
+in this repository, or of a prior claim in this audit trail: a table missing a
+column, a figure travelling without its status, two shapes reported as one, a
+cross-link absent, a claim with no readout, a disclosure that changed. Section
+10 is a literature check anyone can rerun.
+
+### UNI_144 [LIT] — S3's result verifies, and has a challenge the file omits
+
+Located: *Probing and Steering Evaluation Awareness of Language Models*
+(arXiv 2507.01786) — linear probes separate real-world evaluation and
+deployment prompts, and current safety evaluations are correctly classified,
+i.e. they already appear artificial. **Confirmed, close to verbatim**, and it
+is the one thing raising S3 above an impression. The file uses it carefully:
+"cutting both ways", which it does.
+
+Also located, and not carried by 022: *Is Evaluation Awareness Just Format
+Sensitivity? Limitations of Probe-Based Evidence under Controlled Prompt
+Structure* (arXiv 2603.19426).
+
+The interesting part is that it does not undercut the use 022 makes. The
+challenge targets the internal-representation reading — whether the model
+represents *I am being evaluated* — while S3's claim needs only that safety
+evaluations are distinguishable from deployment text by something. Format
+sensitivity satisfies that; a scenario that reads as artificial by its format
+still reads as artificial. So the citation survives the challenge for S3's
+narrower purpose and would not survive it for a stronger one.
+
+Which makes this the third instance in one file of the shape S5 names, and the
+mildest: a result travelling without its caveat, where the caveat happens not
+to bite. `UNI_136` and `UNI_140` are the two where it does.

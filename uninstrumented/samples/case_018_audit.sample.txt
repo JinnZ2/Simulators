@@ -113,8 +113,10 @@ the quantity in question (`specimens/2026-08-18-model-A.md` R4). Noticing that d
 place it outside the sample. Treat this file as a specimen-adjacent artifact and check
 the design against someone who is not in it.
 
-    prior cases carrying a POSITION OF THIS FILE section: 0
-Zero. The section is new and it does one thing that is not standard practice
+    cases BEFORE 018 carrying a POSITION OF THIS FILE section: 0
+    cases AFTER 018 carrying one: 1  022
+Zero before it. The section is new and it does one thing that is not standard
+practice
 anywhere in this repo: it names the exemption that noticing usually buys and
 declines to take it. "Noticing that does not place it outside the sample."
 
@@ -129,6 +131,12 @@ operating on the register itself.
 The instruction it ends on -- "check the design against someone who is not in
 it" -- is `triad-playground/` TP_003's shadow-decorrelation requirement,
 reached from a case rather than from a panel design.
+
+STATE CHANGE, detected by the counts above: the move has recurred in later
+cases. UNI_071's claim is unaffected -- 018 was first -- but the section is no
+longer a one-off, and UNI_142 measures what it has done since. A correction to
+this script rather than to the finding: the line above used to say "prior
+cases" while counting every other case, including ones written afterwards.
 
 ========================================================================
 4  UNI_072  the position of THIS audit, and one finding declined
