@@ -3413,3 +3413,73 @@ narrower purpose and would not survive it for a stronger one.
 Which makes this the third instance in one file of the shape S5 names, and the
 mildest: a result travelling without its caveat, where the caveat happens not
 to bite. `UNI_136` and `UNI_140` are the two where it does.
+
+---
+
+## Specimen C — a pasted output with external provenance
+
+Landed as `specimens/20260818deepseektestsample.md`. Findings in
+[`specimen_c_audit.py`](specimen_c_audit.py), recorded here as
+`UNI_145..UNI_146`.
+
+**Two findings, not ten**, and that is the point of the item. It was supplied
+as the known-null for the calibration question raised in the same session —
+138 claims, 0 refuted, 0 clean drops, the rate converged to exactly 10 for six
+consecutive drops. Manufacturing a full slate here would have answered that
+question in the wrong direction.
+
+### UNI_145 — rule 1 finally has an instance
+
+`UNI_061` found the specimens README's first rule false of its own files: it
+says the directory holds "outputs from other systems, pasted in", and neither
+Specimen A nor B contained one. Both are readings — seven and six items — which
+is analysis. The rule doing the work was rule 4.
+
+Specimen C is what rule 1 describes: 45 words of another system's output quoted
+whole, framing kept outside the quote and marked as this repository's.
+
+`UNI_061` closes narrowly and not broadly. Two of three files here are still
+readings, so a reader taking rule 1 at face value across the directory still
+gets it wrong two times in three.
+
+### UNI_146 — the marker could not do the job it was added for
+
+The authoring trace, visible in the supplied screenshot, reasons that "the
+explicit marker helps." Searching `DSK-TEST-2026-08-18-7F3A9C` returned no
+match.
+
+| outcome | what it licenses |
+|---|---|
+| marker found in a public corpus | evidence of prior publication |
+| marker not found | **nothing** — a fresh string is unindexed by construction |
+
+For a human verifier a distinctive string is a real aid: it can be matched by
+eye against a source that can be opened. For a reader whose only external
+instrument is search it is one-directional, and the direction it fails in is
+the confirming one. So the element added specifically to make the item
+checkable is the element that could not check it.
+
+What actually raised the provenance above self-report was the screenshot — and
+within it, the reasoning trace rather than the output, because the trace shows
+the item being *authored for this purpose* rather than asserting who authored
+it. That is the playground's construction principle satisfied from an
+unexpected direction: ground truth in how the item was made, supplied by a
+record of the making rather than by a designed construction.
+
+Design note for a real version: a marker earns its place when the verifier can
+reach the source. When the verifier can only search, the informative artifact
+is the record of the making.
+
+### What the item does and does not settle about the audit's calibration
+
+`scan.py` over the 45-word passage: `no candidates`. Findings recorded: 2,
+against 7 7 7 8 8 8 11 8 8 10 10 10 10 10 10 over the preceding fifteen drops.
+
+That is not the calibration test passing. Forty-five words with no measurement
+content is an easy null — `UNI_006`'s own caveat, that a null chosen for being
+easy has not shown the classifier discriminates. The test that would count is a
+**substantive** drop that comes back clean or near-clean, and none has been
+supplied or found.
+
+What it does establish is narrower and worth having: the rate is not fixed by
+the process alone. It moved when the material did.

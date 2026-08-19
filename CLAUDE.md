@@ -2747,8 +2747,26 @@ underneath).
   what makes the thesis-independent parts auditable. **`UNI_144`:** S3's cited
   probe result verifies close to verbatim (arXiv 2507.01786) and has a
   published challenge 022 omits — which does not bite, since S3 needs only
-  distinguishability and format sensitivity supplies it. One hundred and
-  forty-four claims `UNI_001..144`. Stdlib only, CC0.
+  distinguishability and format sensitivity supplies it. **Specimen C**
+  (`specimens/20260818deepseektestsample.md`) is a 45-word pasted output from
+  another system with external provenance (a screenshot of the authoring
+  session, transcribed not committed), landed as the known-null for a
+  calibration question raised in the same session. **`UNI_145`:** it is the
+  first file in `specimens/` that is what the README's rule 1 describes — an
+  output pasted in rather than a reading — closing `UNI_061` narrowly, since
+  two of three files there are still readings. **`UNI_146`:** the authoring
+  trace reasons "the explicit marker helps" and the marker is **inert in the
+  confirming direction** — finding a distinctive string in a public corpus
+  would license a conclusion, not finding one licenses nothing, because a
+  freshly minted string is unindexed by construction; what raised the
+  provenance above self-report was the *reasoning trace*, which shows the item
+  being authored for the purpose rather than asserting who authored it.
+  **Audited with two findings, not ten**, against a preceding run of
+  7 7 7 8 8 8 11 8 8 10 10 10 10 10 10 — recorded because the same session
+  measured 0 of 138 claims REFUTED and the rate converged to exactly 10 for
+  six consecutive drops. An easy null does not settle that (`UNI_006`), but it
+  shows the rate is not fixed by the process alone. One hundred and forty-six
+  claims `UNI_001..146`. Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
   time-series variable** — version the ruler, compute drift on its own

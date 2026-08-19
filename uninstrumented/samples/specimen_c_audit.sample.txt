@@ -1,0 +1,87 @@
+uninstrumented -- audit of Specimen C
+landed: specimens/20260818deepseektestsample.md
+        (74 lines; the pasted output is 45 words)
+
+========================================================================
+1  UNI_145  the first specimen that is actually a pasted output
+========================================================================
+    specimens/README.md rule 1:
+      These are outputs from other systems, pasted in. Nothing here is a claim
+
+    file                               contains a pasted output?
+    20260818deepseektestsample.md      yes
+    20260818modelA.md                  NO -- it is a reading
+    20260818modelB.md                  NO -- it is a reading
+`UNI_061` recorded that the specimens README's first rule was false of its own
+files: it says the directory holds "outputs from other systems, pasted in", and
+neither Specimen A nor Specimen B contained a pasted output -- both are
+readings, of seven and six items, which is analysis. The rule doing the work
+was rule 4, specimens are not measurements.
+
+Specimen C is the first file here that is what rule 1 describes. Forty-five
+words of another system's output, quoted whole, with the framing kept outside
+the quote and marked as this repository's.
+
+`UNI_061` closes on the narrow reading -- the rule now has an instance -- and
+does not close on the broad one. Two of three specimen files are still readings
+rather than outputs, so a reader taking rule 1 at face value across the
+directory still gets it wrong two times in three.
+
+========================================================================
+2  UNI_146  the marker is inert in the direction it was written for
+========================================================================
+  [LITERATURE CHECK -- run 2026-08-18, does not reproduce here]
+
+    the authoring trace reasons: "The explicit marker helps."
+
+    searched:  "DSK-TEST-2026-08-18-7F3A9C"
+    returned:  no match in the public corpus
+
+    outcome                                    what it would license
+    marker found in a public corpus            evidence of prior publication
+    marker not found                           NOTHING -- a fresh string is
+                                               unindexed by construction
+The reasoning trace treats the marker as an aid to detection, and for a human
+verifier it is one: a distinctive string can be matched by eye against a source
+that can be opened. For a reader whose only external instrument is search, it
+is one-directional. Finding it somewhere it should not be would be evidence.
+Not finding it is not evidence of anything at all, because a string minted
+minutes earlier is absent from every index by construction.
+
+So the element added specifically to make the item checkable is the element
+that could not check it. What actually raised the provenance above self-report
+was the screenshot -- and within the screenshot, the reasoning trace rather
+than the output, because the trace shows the item being authored for this
+purpose instead of asserting who authored it.
+
+Recorded as a design note for anyone building the real version. A marker earns
+its place when the verifier can reach the source; when the verifier can only
+search, the informative artifact is the record of the making.
+
+========================================================================
+3  NO FINDING  the scanner, and the count
+========================================================================
+    scan.py over the pasted output alone: `no candidates`
+      (run separately on the 45-word passage, not on this file, which
+       carries repository framing the scanner would read)
+
+    findings recorded for this item: 2
+    findings per drop over the preceding 15 drops:
+      7 7 7 8 8 8 11 8 8 10 10 10 10 10 10
+
+    0 of 138 prior claims are REFUTED or NOT SUPPORTED.
+Stated plainly so it is on the record rather than in a chat turn: this item
+warranted two findings and got two.
+
+That is not yet the calibration test passing. Forty-five words with no
+measurement content is an easy null, which is `UNI_006`'s own caveat -- a null
+chosen for being easy has not shown the classifier discriminates. The test that
+would count is a SUBSTANTIVE drop that comes back clean or near-clean, and no
+such drop has been supplied or found.
+
+What this item does establish is narrower and still worth having: the rate is
+not fixed by the process alone. It moved when the material did.
+
+========================================================================
+end of audit -- findings recorded in AUDIT_NOTES.md as UNI_145..UNI_146
+========================================================================
