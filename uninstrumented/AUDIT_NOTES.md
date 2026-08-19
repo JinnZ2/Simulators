@@ -3647,3 +3647,87 @@ will happen if it is followed.
 Recorded plainly because six of the seven findings above are objections, and
 every one was reachable only because the file specified the conditions under
 which it could be checked.
+
+---
+
+## Two proposed additions to 023's cut set, tested
+
+The maintainer proposed a fifth cut in session and offered a case with it.
+Tested by [`cuts_c5_probe.py`](cuts_c5_probe.py), which imports
+`selection_cuts.py` and does not modify it. Recorded as `UNI_154..UNI_156`.
+
+The proposal: *"the selection is based upon the structure not on the
+environment, and tested in only one exclusive environment with all other
+environments withheld as non options… selection or evolution cannot apply
+realistically if other environments, alternatives, interactions have been
+actively excluded as structure."* Offered case: *"it would be like saying that
+gasoline engines are evolution or have been environmentally selected."*
+
+**The objection lands. It lands one step over from where it was aimed.**
+
+### UNI_154 — C5 as stated does not separate
+
+Scored across the calibration set, environment multiplicity takes all three of
+its values in both classes.
+
+The reason is `UNI_148`'s reason. `directed_evolution` and
+`evolutionary_algorithms` are single authored environments with alternatives
+excluded by construction — a binding assay admits one condition and no other —
+and 023's NOT CLAIMED HERE names both as domains where the vocabulary is
+correct. "One exclusive environment, alternatives withheld" is a property
+shared by the clearest literal cases and by the subject.
+
+### UNI_155 — re-scored as arbitration, it separates cleanly
+
+| case | arbitration | class |
+|---|---|---|
+| population_genetics | WORLD_RETURNS_READING | LITERAL |
+| antibiotic_resistance | WORLD_RETURNS_READING | LITERAL |
+| directed_evolution | WORLD_RETURNS_READING | LITERAL |
+| evolutionary_algorithms | WORLD_RETURNS_READING | LITERAL |
+| lysenkoism | PARTY_RETURNS_DECISION | BORROWED |
+| eugenics | PARTY_RETURNS_DECISION | BORROWED |
+| spencer_social_darwinism | PARTY_RETURNS_DECISION | BORROWED |
+| alchian_firm_selection | MIXED | BORROWED |
+| memetics | MIXED | BORROWED |
+
+No overlap. 023's C2 asks who *authored* the environment and comes back inert;
+its own next sentence asks the discriminating question — "The criterion does
+not return a reading. It returns a decision someone made" — and that separates.
+
+So the problem is not that the environment is singular, or authored. Directed
+evolution is both and the word holds there. The problem is that in a
+directed-evolution assay the molecule either binds or it does not, and nobody
+decides that: **the authoring stops at the environment and the arbitration is
+physical.**
+
+Restated as a condition: *selection requires that the criterion be settled by
+the world rather than by a party.* That is what C2 was reaching for and is not
+what C2 measures.
+
+### UNI_156 — the gasoline engine calibrates, and damages C4
+
+Added as offered. Clearly BORROWED — nobody says gasoline engines were
+environmentally selected, though the iterated refinement is real — and it
+scores **identically to the subject** on both proposed cuts, which is the
+comparison drawn. It survives the delivered four without breaking them.
+
+What it costs is C4. The gasoline engine scores **PER_ROUND_UNIFORM**: engines
+competed against reasonably uniform criteria within an era. So a case can be
+plainly borrowed while satisfying C4 — the second reason, after `UNI_149`, not
+to read C4 as "the sharpest cut, and the one that ends the analogy."
+
+On the ten-case set, minimal separating subsets are `C3`, `C2prime`, and
+`C1 + C4`. **C5 appears in none.**
+
+### The shape the instrument now has
+
+Two conditions carry the discrimination, not four or six:
+
+- **C3** — the criterion holds still long enough for anything to accumulate.
+- **ARBITRATION** — the criterion is settled by the world rather than by a party.
+
+C1, C2-as-authorship, C4 and C5 all take values appearing in both classes, on
+ten cases coded from 023's own descriptions plus the maintainer's offered one.
+Not a claim that they are wrong about the AI case — a claim about which are
+carrying the discrimination, which is what a calibration set is for.
