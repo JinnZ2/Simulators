@@ -98,52 +98,116 @@ This is the same shape the audit tests for: the difference between a fixed
 draw and a supply-coupled one is not a refinement of the coefficient, it is a
 different kind of term.
 
-## 6. UNRESOLVED — anthropological/archaeological precedent (open, one search only, not a literature review)
+## 6. Precedent in anthropology and archaeology (open; two searches, not a literature review)
 
-*Delivered text, landed as written.*
+*Delivered text, landed as written. Supersedes the one-search version of this
+section; see `LOG.md`.*
 
-The coupling variable is established in this literature under the name
-PROVISIONING REGIME:
+The coupling variable is established under other names. In anthropology it is
+called a provisioning regime; in zooarchaeology, foddering or seasonal fodder
+supplementation. Neither literature frames it as a coupling variable applied
+across species, and neither is routed to the resource-allocation models
+audited in `entries.py`.
 
 - **Lupo 2019, J. Anthropological Archaeology** ("Hounds follow those who feed
   them"): working dogs in cold biomes supportable only after intentional
   provisioning emerged and was incorporated into the subsistence system —
-  provisioning as a paid-for constraint on capability
-- **Mitchell 2025, "First Dogs" (Routledge)**: thematic chapter on how dogs
-  have been fed and cared for across hunter-gatherer populations;
-  domestication as plural, long-duration, environment-dependent
-- **Pacheco-Cobos & Winterhalder, Belize lowlands**: village dogs, crop
-  protection and subsistence hunting, behavioral-ecology framing
-- **Mesoamerica, quoted**: "a household's use of dogs affects its investment
-  in them" — the coupling relation, stated at household level
-- **Arctic stable-isotope work**: some ancient dog diets track diets of nearby
-  people (marine signal in coastal groups) — the coupling is measurable in
-  bone collagen
+  provisioning treated as a paid-for constraint on capability.
+- **Mitchell 2025, First Dogs (Routledge)**: thematic chapter on how dogs have
+  been fed and cared for across hunter-gatherer populations; domestication as
+  plural, long-duration, environment-dependent.
+- **Pacheco-Cobos and Winterhalder, Belize lowlands**: village dogs, crop
+  protection and subsistence hunting, behavioral-ecology framing.
+- **Mesoamerica, quoted in the ethnographic literature**: "a household's use
+  of dogs affects its investment in them" — the coupling relation stated as a
+  household-level variable.
 
-**ROUTING**: provisioning is a variable regime with a cost in this literature,
-and a fixed coefficient or absent term in the footprint, hunger, and water
-models. Third silo, same routing failure.
+**Not found: the reverse direction.** The literature is weighted toward
+provisioning enabling capability. De-provisioning under seasonal scarcity —
+the animal re-coupled to its own foraging envelope and re-imported when supply
+returns, with protection held constant through the switch — was not found
+named as a reversible regime. Open, and possibly ahead of the record. **Not a
+finding.**
 
-**GAP, unresolved**: the literature found is weighted toward provisioning
-ENABLING capability. The reverse — de-provisioning under seasonal scarcity,
-animal re-coupled to its own foraging envelope, re-imported when supply
-returns — was not found named as a regime. Existing instruments could detect
-it: a seasonal signal in dog bone collagen from a group with variable supply.
-The Arctic diet-tracking method is one step from it.
+## 7. Candidate anomalies already published (open)
 
-**Status: not searched to exhaustion. Do not record as absent from the
-literature — record as not found in one pass.**
+Within-site isotopic spread in archaeological dogs is documented repeatedly
+and absorbed under three explanations, none tested against variable coupling:
 
-### 6a. UNRESOLVED — the sampled tissue decides whether the question is askable
+- **Harris et al. 2020, Labrador Inuit sled dogs** (n=35 bone, n=4 dentine):
+  Double Mer Point dogs the most heterogeneous of any site; explained as
+  long-distance movement of people and/or animals. Variable coupling predicts
+  the same spread with no movement.
+- **Arroyo Hondo Pueblo** ("What Makes a Dog?"): values "similarly varied, but
+  not in ways that one might expect"; one specimen genetically *Canis latrans*
+  returned isotope values in the domestic-dog range. The taxonomic category
+  failed to predict the draw. The paper's own conclusion is that isotopes
+  reflect variability in human-canid relationships and do not track genetics.
+- **Canine Surrogacy Approach generally**: the method assumes dogs ate what
+  humans ate, i.e. that the coupling is fixed. Hudson Bay Thule dogs are
+  isotopically similar to humans but mixing models put them on a different
+  intake. The standing offset is currently absorbed as method caution.
 
-Follow-on to item 6, and the reason `provisioning.py` exists in this folder.
+## 8. Discriminating test (open, runs on existing collections)
 
-The three standing explanations for isotopic spread in archaeological dog
-assemblages and the coupling hypothesis are **not distinguished by the tissue
-most of the data sits in**. Bone collagen averages years, so a within-year
-switch is averaged away before the sample is taken, and the resulting spread
-presents as *between*-individual. Incremental dentine and sequential enamel
-resolve sub-annually and separate the three.
+Three hypotheses predict different signal geometry:
 
-This is a resolution pairing, not a disagreement about the data: see
-`provisioning.py --resolution`.
+- **mobility** → spatial signal; strontium should co-vary with the carbon and
+  nitrogen spread
+- **breed or status class** → between-individual spread, each individual
+  internally consistent
+- **variable coupling** → within-individual spread, sequential, phased to
+  season, same animal switching
+
+Bone collagen averages years and cannot separate these, which is why the
+spread reads as between-animal. Incremental dentine can. Published dentine n
+for dogs is approximately 4. **No new excavation required.**
+
+## 9. Transferable instrument: intra-tooth amplitude (open)
+
+Sequential sampling of enamel (δ18O, δ13C) and dentine collagen (δ13C, δ15N)
+along a single tooth yields a time series of one individual's intake during
+tooth formation. The method is mature in cattle and caprines and
+experimentally calibrated: **Balasse et al.** recovered a known C3-to-C4 diet
+switch and weaning from intra-tooth variation in a controlled feeding study.
+
+Published applications measuring the switch directly:
+
+- **Tana del Barletta, Ligurian Prealps**: intra-tooth series in cattle and
+  sheep/goat, Late Neolithic to Early Bronze Age
+- **Vinča-Belo brdo (PLOS One)**: cattle intra-tooth δ13C amplitude 0.7 to 2.4
+  permil — some individuals nearly flat, others roughly three times the range,
+  within one assemblage
+- **Schipluiden, Netherlands**: δ13C lower than expected in some cattle but
+  not in red deer or suids from the same site; read as leafy fodder rather
+  than grazing
+- **Indus Civilisation herds; Ksizovo-1 forest-steppe**: sequential
+  multi-isotope husbandry and seasonal mobility
+- **Perdigões, southern Portugal**: seasonal fodder supplementation invoked to
+  explain sheep and goat patterns
+
+**What transfers to this audit**: intra-tooth amplitude is a
+coupling-variability measurement with a unit. Flat implies a fixed draw; high
+amplitude implies a supply-coupled draw. For archaeological cases this
+**replaces** the boolean `coupling_machinery_present` field with a magnitude.
+
+**Design element worth extracting**: Schipluiden sampled wild animals from the
+same site as a baseline. The domesticates deviate and the wild taxa do not,
+which attributes the deviation to household provisioning rather than to
+environment. This is a working coupling-strength instrument. It has not been
+pointed at dogs with a wild-canid control from the same site — which is the
+comparison Arroyo Hondo arrived at accidentally.
+
+**Caveat, carry it with the number**: a 2024 *Journal of Archaeological
+Science* paper finds dentine sample geometry changes the intra-tooth isotope
+pattern. Amplitude is therefore partly a protocol artifact, and cross-study
+comparison requires the sampling geometry to be stated. **Do not compare
+amplitudes across studies without it.**
+
+## 10. Cross-species extension (stated by the author, untested)
+
+The same coupling is predicted for chickens, cattle, yak, and buffalo: the
+household draw tracks surplus, while protection is held constant through the
+switch. In species with a commodity output the switching is already measured
+seasonally per individual, **because no one had to argue about whether the
+animal counted.**

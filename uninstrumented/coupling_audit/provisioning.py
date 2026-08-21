@@ -203,6 +203,86 @@ def amplitude_reading(permil_range, geometry=None):
                    "calibrated against a controlled feeding experiment here."}
 
 
+# --- the calibration, and what the method has already been pointed at ------
+
+CALIBRATION = {
+    "study": "Balasse et al., controlled feeding experiment",
+    "what_was_known": "a C3-to-C4 diet switch, plus weaning",
+    "recovered_from_intra_tooth_variation": True,
+    "why_it_matters": "the discriminator is not merely plausible -- a known "
+                      "switch was recovered from intra-tooth variation under "
+                      "controlled conditions. That is a positive control in "
+                      "the null-harness sense, and it exists for caprines "
+                      "and cattle and not for dogs.",
+}
+
+# Published applications measuring the switch directly, as delivered.
+# `commodity_species` is the field the cross-species extension turns on.
+PUBLISHED_APPLICATIONS = [
+    {"site": "Tana del Barletta, Ligurian Prealps",
+     "taxa": ["cattle", "sheep/goat"], "commodity_species": True,
+     "what": "intra-tooth series, Late Neolithic to Early Bronze Age"},
+    {"site": "Vinca-Belo brdo (PLOS One)",
+     "taxa": ["cattle"], "commodity_species": True,
+     "what": "cattle intra-tooth d13C amplitude 0.7 to 2.4 permil within one "
+             "assemblage -- some nearly flat, others roughly 3x the range"},
+    {"site": "Schipluiden, Netherlands",
+     "taxa": ["cattle", "red deer", "suids"], "commodity_species": True,
+     "what": "d13C lower than expected in some cattle but not in red deer or "
+             "suids from the same site; read as leafy fodder"},
+    {"site": "Indus Civilisation herds",
+     "taxa": ["cattle", "caprines"], "commodity_species": True,
+     "what": "sequential multi-isotope husbandry and seasonal mobility"},
+    {"site": "Ksizovo-1 forest-steppe",
+     "taxa": ["herd animals"], "commodity_species": True,
+     "what": "sequential multi-isotope husbandry and seasonal mobility"},
+    {"site": "Perdigoes, southern Portugal",
+     "taxa": ["sheep", "goat"], "commodity_species": True,
+     "what": "seasonal fodder supplementation invoked to explain the "
+             "patterns"},
+]
+
+
+def cross_species_readout():
+    """The author's stated extension, and what the corpus does and does not say.
+
+    STATED BY THE AUTHOR, UNTESTED: the same coupling is predicted for
+    chickens, cattle, yak and buffalo -- household draw tracks surplus while
+    protection is held constant through the switch -- and in species with a
+    commodity output the switching is ALREADY measured seasonally per
+    individual, "because no one had to argue about whether the animal
+    counted."
+
+    The count below is consistent with that and does NOT establish it. A
+    correlation between commodity status and measurement maturity has other
+    live explanations -- sample availability, tooth size and enamel thickness,
+    which agricultural-research funding lines exist. What the count does show
+    is that the asymmetry is real and large, which is the part that was in
+    question.
+
+    Worth naming: this is the same gate as the FAO LEAP / GLEAM entry in
+    entries.py, seen from the other side. There the gate is `market_output`
+    and it keeps companion animals out of the water accounting. Here the same
+    line is why the measurement exists at all for cattle.
+    """
+    apps = PUBLISHED_APPLICATIONS
+    commodity = [a for a in apps if a["commodity_species"]]
+    dog_seq = sum(c["n_sequential"] or 0 for c in CASES
+                  if "dog" in c["case_id"].lower()
+                  or "canid" in c["case_id"].lower()
+                  or "Arroyo" in c["case_id"])
+    return {
+        "published_applications": len(apps),
+        "on_commodity_species": len(commodity),
+        "on_companion_species": len(apps) - len(commodity),
+        "dog_sequential_individuals": dog_seq,
+        "claim_status": "STATED_BY_AUTHOR_UNTESTED",
+        "count_establishes": "that the asymmetry is real and large",
+        "count_does_not_establish": "that commodity status is its cause",
+        "same_gate_as": "entries.py -- FAO LEAP / GLEAM, gate market_output",
+    }
+
+
 # --- the delivered cases ---------------------------------------------------
 #
 # MODEL_SEEDED. Delivered material, one pass, not independently verified here.
@@ -240,6 +320,23 @@ CASES = [
         "also_fits": ["VARIABLE_COUPLING"],
         "tested_against_each_other": False,
         "same_site_wild_control": True,
+        "amplitude_permil": None,
+        "geometry_declared": None,
+    },
+    {
+        "case_id": "Canine Surrogacy Approach -- Hudson Bay Thule",
+        "n": None,
+        "n_sequential": 0,
+        "tissue": "bone_collagen",
+        "observation": "dogs isotopically similar to humans, but mixing "
+                       "models put them on a different intake -- a "
+                       "systematic offset",
+        "standing_explanation": "absorbed as CSA method caution; the "
+                                "approach assumes dogs ate what humans ate, "
+                                "i.e. that the coupling is fixed",
+        "also_fits": ["VARIABLE_COUPLING"],
+        "tested_against_each_other": False,
+        "same_site_wild_control": False,
         "amplitude_permil": None,
         "geometry_declared": None,
     },
@@ -319,6 +416,45 @@ def corpus_readout():
         else None,
         "denominator_state": "AMBIGUOUS_IN_DELIVERED_TEXT",
     }
+
+
+# --- the field replacement -------------------------------------------------
+
+def coupling_field_for(case):
+    """For archaeological cases, amplitude REPLACES the boolean.
+
+    audit.py records coupling_machinery_present as Y/N, which is the right
+    field for a published model: a model either carries a coupling term or it
+    does not. For an archaeological case the question is different -- the
+    coupling is a property of the animal's intake, not of a document -- and
+    intra-tooth amplitude measures it directly. So the boolean is not
+    supplemented here, it is replaced, per OPEN.md item 9.
+
+    The replacement has a hard scope. It requires an incremental tissue AND a
+    declared geometry, and returns an explicit non-value otherwise, so
+    "cannot be measured in this evidence" and "measured and flat" never share
+    a value. There is no tooth in a national carbon inventory; entries.py
+    keeps the boolean, and that is a scope limit rather than an inconsistency.
+    """
+    if not TISSUES[case["tissue"]]["sequential"]:
+        return {"field": "amplitude", "value": None,
+                "state": "NOT_APPLICABLE_TISSUE",
+                "why": "amplitude requires an incremental tissue. bone "
+                       "collagen returns one value per individual, and one "
+                       "value has no amplitude"}
+    if not case.get("geometry_declared"):
+        return {"field": "amplitude", "value": None,
+                "state": "GEOMETRY_NOT_DECLARED",
+                "why": "amplitude is partly a protocol artifact; without a "
+                       "stated sampling geometry it is not comparable"}
+    try:
+        r = amplitude_reading(case["amplitude_permil"],
+                              geometry=case["geometry_declared"])
+    except GeometryNotDeclared:
+        return {"field": "amplitude", "value": None,
+                "state": "GEOMETRY_NOT_DECLARED", "why": "see above"}
+    return {"field": "amplitude", "value": r["amplitude_permil"],
+            "state": r["reading"], "why": r["why"]}
 
 
 # --- report ----------------------------------------------------------------
@@ -474,6 +610,11 @@ def amplitude_report():
     A("COUPLING STRENGTH AS A NUMBER")
     A("=" * 72)
     A("")
+    A("  CALIBRATION -- the positive control exists, for other species")
+    A("    %s" % CALIBRATION["study"])
+    A("    known: %s" % CALIBRATION["what_was_known"])
+    L.extend(_wrap(CALIBRATION["why_it_matters"], "    "))
+    A("")
     L.extend(_wrap(
         "Intra-tooth amplitude is a coupling-variability measurement: flat "
         "means a fixed draw, high amplitude means supply-coupled. That "
@@ -491,7 +632,7 @@ def amplitude_report():
     A("")
     A("  THE CAVEAT IS ENFORCED, NOT NOTED.")
     L.extend(_wrap(
-        "Dentine sample geometry changes the intra-tooth pattern, so "
+        "A 2024 Journal of Archaeological Science paper finds that dentine sample geometry changes the intra-tooth pattern, so "
         "amplitude is partly a methods artifact and a cross-study "
         "comparison that does not state geometry is comparing two "
         "instruments. amplitude_reading() raises GeometryNotDeclared "
@@ -500,13 +641,72 @@ def amplitude_report():
         "unnamed instrument is not yet a reading.",
         "    "))
     A("")
-    A("  The thresholds are CONVENTIONAL. They are scaled against the")
+    A("  THE FIELD REPLACEMENT, per OPEN.md item 9")
+    L.extend(_wrap(
+        "For archaeological cases amplitude REPLACES audit.py's boolean "
+        "coupling_machinery_present rather than sitting beside it: the "
+        "coupling there is a property of an animal's intake, not of a "
+        "document. The scope is hard -- it needs an incremental tissue AND "
+        "a declared geometry, and returns an explicit non-value otherwise, "
+        "so 'cannot be measured in this evidence' and 'measured and flat' "
+        "never share a value. There is no tooth in a national carbon "
+        "inventory, so entries.py keeps the boolean. That is a scope limit, "
+        "not an inconsistency.",
+        "    "))
+    A("")
+    for c in CASES:
+        L.extend(_wrap(c["case_id"], "    "))
+        A("      -> %s" % coupling_field_for(c)["state"])
+    A("")
+    A("  THE THRESHOLDS ARE CONVENTIONAL. They are scaled against the")
     A("  delivered Vinca-Belo brdo range (0.7-2.4 permil within one herd)")
     A("  and are not calibrated against a controlled feeding experiment")
     A("  here. The delivered material names one that exists -- Balasse et")
     A("  al., a known C3->C4 switch plus weaning, both recovered from")
     A("  intra-tooth variation -- which is where a real calibration would")
     A("  come from.")
+    A("")
+    A("-" * 72)
+    A("")
+    x = cross_species_readout()
+    A("  CROSS-SPECIES EXTENSION -- %s" % x["claim_status"])
+    A("")
+    L.extend(_wrap(
+        "The same coupling is predicted for chickens, cattle, yak and "
+        "buffalo: the household draw tracks surplus while protection is "
+        "held constant through the switch. In species with a commodity "
+        "output the switching is already measured seasonally per "
+        "individual, because nobody had to argue about whether the animal "
+        "counted.",
+        "    "))
+    A("")
+    A("    published applications of the method       %d"
+      % x["published_applications"])
+    A("      on commodity species                     %d"
+      % x["on_commodity_species"])
+    A("      on companion species                     %d"
+      % x["on_companion_species"])
+    A("    dog individuals sampled sequentially       %d"
+      % x["dog_sequential_individuals"])
+    A("")
+    L.extend(_wrap(
+        "The count is consistent with the stated claim and does NOT "
+        "establish it. A correlation between commodity status and "
+        "measurement maturity has other live explanations -- sample "
+        "availability, tooth size and enamel thickness, which "
+        "agricultural-research funding lines exist. What the count does "
+        "show is that the asymmetry is real and large, which is the part "
+        "that was in question.",
+        "    "))
+    A("")
+    L.extend(_wrap(
+        "This is the same gate as the FAO LEAP / GLEAM entry in entries.py, "
+        "seen from the other side. There the gate is `market_output` and it "
+        "keeps companion animals out of the water accounting. Here the same "
+        "line is why the measurement exists at all for cattle. One "
+        "criterion, two consequences: the animal that sells gets both the "
+        "ledger entry and the instrument.",
+        "    "))
     return "\n".join(L)
 
 
@@ -570,9 +770,9 @@ def selftest():
        _raises(lambda: amplitude_reading(-1.0, geometry="g"), ValueError))
 
     r = corpus_readout()
-    ck("four delivered cases", r["cases"] == 4)
-    ck("half the delivered cases are blind by tissue",
-       r["blind_by_tissue"] == 2)
+    ck("five delivered cases", r["cases"] == 5)
+    ck("three of five delivered cases are blind by tissue",
+       r["blind_by_tissue"] == 3)
     ck("no delivered case tested the hypotheses against each other",
        r["hypotheses_never_tested_against_each_other"] == r["cases"])
     ck("two delivered cases carry a same-site wild control",
@@ -591,7 +791,47 @@ def selftest():
        "the point -- two hypotheses fitting one observation is not agreement",
        all("VARIABLE_COUPLING" in c["also_fits"] for c in CASES))
 
+    x = cross_species_readout()
+    ck("every published application of the method is on a commodity species",
+       x["on_commodity_species"] == x["published_applications"]
+       and x["on_companion_species"] == 0)
+    ck("the asymmetry against dog sequential n is large",
+       x["published_applications"] > x["dog_sequential_individuals"])
+    ck("the cross-species claim is marked stated-and-untested, not adopted",
+       x["claim_status"] == "STATED_BY_AUTHOR_UNTESTED")
+    ck("the readout separates what the count shows from what it does not",
+       x["count_establishes"] != x["count_does_not_establish"])
+
+    bone_case = [c for c in CASES if c["tissue"] == "bone_collagen"][0]
+    ck("amplitude is NOT_APPLICABLE_TISSUE on a bone-collagen case, not "
+       "False and not zero",
+       coupling_field_for(bone_case)["state"] == "NOT_APPLICABLE_TISSUE")
+    seq_no_geo = dict(CASES[0])
+    seq_no_geo.update({"tissue": "incremental_dentine",
+                       "geometry_declared": None, "amplitude_permil": 2.0})
+    ck("amplitude refuses a sequential case with no declared geometry",
+       coupling_field_for(seq_no_geo)["state"] == "GEOMETRY_NOT_DECLARED")
+    vinca = [c for c in CASES if "Vinca" in c["case_id"]][0]
+    ck("the one case with an amplitude and a geometry reads as coupled",
+       coupling_field_for(vinca)["state"] == "HIGH_SUPPLY_COUPLED")
+    ck("a sequential case with a geometry but no amplitude reads "
+       "NOT_MEASURED, distinct from flat",
+       coupling_field_for(
+           [c for c in CASES if "Schipluiden" in c["case_id"]][0])["state"]
+       == "NOT_MEASURED")
+    ck("the replacement returns four distinct states across the corpus and "
+       "the constructed case, so it is not one value repeated",
+       len({coupling_field_for(c)["state"] for c in CASES}
+           | {coupling_field_for(seq_no_geo)["state"]}) == 4)
+
+    ck("the calibration is a positive control and is recorded as existing "
+       "for caprines and cattle, not for dogs",
+       CALIBRATION["recovered_from_intra_tooth_variation"] is True
+       and "not for dogs" in CALIBRATION["why_it_matters"])
+
     ck("report renders", "UNASKABLE_IN_THIS_TISSUE" in report())
+    ck("report carries the cross-species readout",
+       "STATED_BY_AUTHOR_UNTESTED" in report())
     print("%d/%d checks passed" % (k - f, k))
     return 1 if f else 0
 

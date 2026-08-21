@@ -71,6 +71,20 @@ THE DELIVERED CASES
     same-site wild control yes
     coupling separable     UNASKABLE_IN_THIS_TISSUE
 
+  Canine Surrogacy Approach -- Hudson Bay Thule
+    tissue                 bone_collagen
+    n / sequential n       -- / 0
+    observation
+      dogs isotopically similar to humans, but mixing models put them
+      on a different intake -- a systematic offset
+    standing explanation
+      absorbed as CSA method caution; the approach assumes dogs ate
+      what humans ate, i.e. that the coupling is fixed
+    also fits              VARIABLE_COUPLING
+    tested against each other  NO
+    same-site wild control no
+    coupling separable     UNASKABLE_IN_THIS_TISSUE
+
   Vinca-Belo brdo -- cattle intra-tooth (PLOS One)
     tissue                 sequential_enamel
     n / sequential n       -- / --
@@ -99,11 +113,11 @@ THE DELIVERED CASES
 
 ------------------------------------------------------------------------
 
-  READOUT ON 4 DELIVERED CASES -- four cases, not a survey
+  READOUT ON 5 DELIVERED CASES -- four cases, not a survey
 
-    blind by tissue                          2 of 4
-    hypotheses never tested against each other  4 of 4
-    cases with a same-site wild control       2 of 4
+    blind by tissue                          3 of 5
+    hypotheses never tested against each other  5 of 5
+    cases with a same-site wild control       2 of 5
 
     canid individuals, bone collagen         42
     canid individuals, sequential dentine    4
@@ -139,6 +153,14 @@ THE DELIVERED CASES
 COUPLING STRENGTH AS A NUMBER
 ========================================================================
 
+  CALIBRATION -- the positive control exists, for other species
+    Balasse et al., controlled feeding experiment
+    known: a C3-to-C4 diet switch, plus weaning
+    the discriminator is not merely plausible -- a known switch was
+    recovered from intra-tooth variation under controlled conditions.
+    That is a positive control in the null-harness sense, and it exists
+    for caprines and cattle and not for dogs.
+
   Intra-tooth amplitude is a coupling-variability measurement: flat
   means a fixed draw, high amplitude means supply-coupled. That turns
   audit.py's coupling field from Y/N into a quantity for archaeological
@@ -155,18 +177,71 @@ COUPLING STRENGTH AS A NUMBER
   series is a measurement; no series is not.
 
   THE CAVEAT IS ENFORCED, NOT NOTED.
-    Dentine sample geometry changes the intra-tooth pattern, so
-    amplitude is partly a methods artifact and a cross-study comparison
-    that does not state geometry is comparing two instruments.
+    A 2024 Journal of Archaeological Science paper finds that dentine
+    sample geometry changes the intra-tooth pattern, so amplitude is
+    partly a methods artifact and a cross-study comparison that does
+    not state geometry is comparing two instruments.
     amplitude_reading() raises GeometryNotDeclared without one. Same
     shape as audit.py refusing coupling machinery that is not named in
     the model's own vocabulary: a number from an unnamed instrument is
     not yet a reading.
 
-  The thresholds are CONVENTIONAL. They are scaled against the
+  THE FIELD REPLACEMENT, per OPEN.md item 9
+    For archaeological cases amplitude REPLACES audit.py's boolean
+    coupling_machinery_present rather than sitting beside it: the
+    coupling there is a property of an animal's intake, not of a
+    document. The scope is hard -- it needs an incremental tissue AND a
+    declared geometry, and returns an explicit non-value otherwise, so
+    'cannot be measured in this evidence' and 'measured and flat' never
+    share a value. There is no tooth in a national carbon inventory, so
+    entries.py keeps the boolean. That is a scope limit, not an
+    inconsistency.
+
+    Harris et al. 2020 -- Labrador Inuit sled dogs
+      -> NOT_APPLICABLE_TISSUE
+    Arroyo Hondo Pueblo -- 'What Makes a Dog?'
+      -> NOT_APPLICABLE_TISSUE
+    Canine Surrogacy Approach -- Hudson Bay Thule
+      -> NOT_APPLICABLE_TISSUE
+    Vinca-Belo brdo -- cattle intra-tooth (PLOS One)
+      -> HIGH_SUPPLY_COUPLED
+    Schipluiden -- cattle vs red deer and suids, same site
+      -> NOT_MEASURED
+
+  THE THRESHOLDS ARE CONVENTIONAL. They are scaled against the
   delivered Vinca-Belo brdo range (0.7-2.4 permil within one herd)
   and are not calibrated against a controlled feeding experiment
   here. The delivered material names one that exists -- Balasse et
   al., a known C3->C4 switch plus weaning, both recovered from
   intra-tooth variation -- which is where a real calibration would
   come from.
+
+------------------------------------------------------------------------
+
+  CROSS-SPECIES EXTENSION -- STATED_BY_AUTHOR_UNTESTED
+
+    The same coupling is predicted for chickens, cattle, yak and
+    buffalo: the household draw tracks surplus while protection is held
+    constant through the switch. In species with a commodity output the
+    switching is already measured seasonally per individual, because
+    nobody had to argue about whether the animal counted.
+
+    published applications of the method       6
+      on commodity species                     6
+      on companion species                     0
+    dog individuals sampled sequentially       4
+
+    The count is consistent with the stated claim and does NOT
+    establish it. A correlation between commodity status and
+    measurement maturity has other live explanations -- sample
+    availability, tooth size and enamel thickness, which
+    agricultural-research funding lines exist. What the count does show
+    is that the asymmetry is real and large, which is the part that was
+    in question.
+
+    This is the same gate as the FAO LEAP / GLEAM entry in entries.py,
+    seen from the other side. There the gate is `market_output` and it
+    keeps companion animals out of the water accounting. Here the same
+    line is why the measurement exists at all for cattle. One
+    criterion, two consequences: the animal that sells gets both the
+    ledger entry and the instrument.

@@ -2908,9 +2908,44 @@ underneath).
   calibrated here. One ambiguity is **left open rather than resolved**:
   "n=35 dogs, plus dentine n=4" reads either as subset or additional, so
   both denominators are reported and neither is picked — the two differ
-  by under a percentage point, which is why it can stay open. Marker
-  under exploration. 21 + 14 + 25 selftests green. Stdlib only, parses
-  under Python 3.9, CC0.
+  by under a percentage point, which is why it can stay open.
+  **A canonical rewrite of the precedent material then superseded the
+  one-search version** and lands as `OPEN.md` items 6–10: two searches
+  not one; the zooarchaeology name supplied (**foddering / seasonal
+  fodder supplementation**, so two literatures with two names and
+  neither framing it as a coupling variable applied across species); the
+  geometry caveat sourced to a **2024 *Journal of Archaeological
+  Science*** paper; the reverse direction recorded as "open, and possibly
+  ahead of the record. Not a finding."; and the instruction that
+  amplitude **replaces** the boolean rather than supplementing it — which
+  **corrected a LOG entry that had recorded the opposite**.
+  `coupling_field_for()` implements the replacement with a hard scope
+  (incremental tissue AND declared geometry, four distinct non-value
+  states so "cannot be measured here" and "measured and flat" never
+  share one), and `entries.py` keeps the boolean because there is no
+  tooth in a national carbon inventory. Added with it: the **Balasse**
+  controlled-feeding calibration as a first-class object (a positive
+  control that exists for caprines and cattle and not for dogs), six
+  `PUBLISHED_APPLICATIONS`, and a fifth case — the Canine Surrogacy
+  Approach / Hudson Bay Thule systematic offset, absorbed as method
+  caution, where the method's validity *depends on* the coupling being
+  fixed. Corpus counts move to **3 of 5 blind by tissue, 5 of 5 never
+  tested against the coupling hypothesis, 2 of 5 with a same-site wild
+  control**. **The one computable thing in the new material:** 6 of 6
+  published applications of the intra-tooth method are on commodity
+  species and 0 on companion species, against a dog sequential n of
+  about 4 — consistent with the author's stated explanation ("no one had
+  to argue about whether the animal counted") and explicitly **not
+  establishing** it, since sample availability, tooth size and funding
+  lines are live alternatives; the readout separates
+  `count_establishes` from `count_does_not_establish`. What it does
+  establish is that the asymmetry is real and large. **Cross-link:** this
+  is entry 3's `market_output` gate seen from the other side — there it
+  keeps companion animals out of the water accounting, here the same
+  criterion is why the instrument exists for cattle. One line, two
+  consequences: the animal that sells gets both the ledger entry and the
+  instrument. Marker under exploration. 21 + 14 + 36 selftests green.
+  Stdlib only, parses under Python 3.9, CC0.
   Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a

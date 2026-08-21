@@ -107,10 +107,15 @@ which is not support for it: it is `CONSTANT_SILENT` by construction. G-RES
 pairing: bone collagen is **12.2× too coarse** for a seasonal feature at a
 margin of 2; incremental dentine and sequential enamel resolve it.
 
-On the four delivered cases: 2 of 4 blind by tissue, **4 of 4** never tested
-the standing explanation against the coupling hypothesis, 2 of 4 carry a
+On the five delivered cases: **3 of 5 blind by tissue, 5 of 5** never tested
+the standing explanation against the coupling hypothesis, 2 of 5 carry a
 same-site wild control. Roughly a tenth of the canid individuals sit in a
-tissue that can ask the question.
+tissue that can ask the question, and published dentine *n* for dogs is about
+**4**. No new excavation required.
+
+The method itself is not in doubt: **Balasse et al.** recovered a known
+C3→C4 diet switch and weaning from intra-tooth variation in a *controlled
+feeding study*. The positive control exists — for caprines and cattle.
 
 **The cheapest next step is already a working design elsewhere.** Schipluiden
 sampled *wild* animals from the *same site* as a baseline — domesticates
@@ -120,17 +125,48 @@ household provisioning rather than to environment. That is a control in the
 control at the same site. Arroyo Hondo stumbled into one by accident when a
 coyote came back with domestic-dog values.
 
-## A unit, not a Y/N
+## A unit that replaces the boolean
 
 Intra-tooth amplitude is a coupling-variability measurement — flat means a
-fixed draw, high amplitude means supply-coupled. That is the first real unit
-this audit has. `amplitude_reading()` **raises without a declared sampling
-geometry**, because geometry changes the intra-tooth pattern and a cross-study
-comparison that does not state it is comparing two instruments. Same shape as
-`audit.py` refusing coupling machinery that is not named in the model's own
-vocabulary: a number from an unnamed instrument is not yet a reading. The
-thresholds are conventional, scaled to one delivered herd range, and are not
-calibrated against a controlled feeding experiment here.
+fixed draw, high amplitude means supply-coupled. **For archaeological cases it
+replaces `coupling_machinery_present` rather than sitting beside it**
+(`OPEN.md` item 9): the coupling there is a property of an animal's intake,
+not of a document. `coupling_field_for()` implements that, with a hard scope —
+it needs an incremental tissue *and* a declared geometry, and returns an
+explicit non-value otherwise, so `NOT_APPLICABLE_TISSUE`,
+`GEOMETRY_NOT_DECLARED`, `NOT_MEASURED` and a real reading never share a
+value. There is no tooth in a national carbon inventory, so `entries.py` keeps
+the boolean — a scope limit, not an inconsistency.
+
+`amplitude_reading()` **raises without a declared sampling geometry**, because
+a 2024 *Journal of Archaeological Science* paper finds dentine geometry
+changes the intra-tooth pattern, so a cross-study comparison that does not
+state it is comparing two instruments. Same shape as `audit.py` refusing
+coupling machinery not named in the model's own vocabulary: a number from an
+unnamed instrument is not yet a reading. Thresholds are conventional, scaled
+to one delivered herd range, not calibrated here.
+
+## The gate, seen from the other side
+
+The cross-species extension (`OPEN.md` item 10, **stated by the author,
+untested**) predicts the same coupling for chickens, cattle, yak and buffalo —
+household draw tracks surplus, protection held constant through the switch —
+and notes that in species with a commodity output the switching *is already
+measured*, seasonally, per individual, "because no one had to argue about
+whether the animal counted."
+
+The corpus is consistent with that: **6 of 6 published applications of the
+method are on commodity species, 0 on companion species**, against a dog
+sequential *n* of about 4. The count does **not** establish the cause —
+sample availability, tooth size and enamel thickness, and which
+agricultural-research funding lines exist are all live alternatives. What it
+shows is that the asymmetry is real and large.
+
+Worth naming: this is **the same gate as entry 3**, seen from the other side.
+There `market_output` keeps companion animals out of the water accounting.
+Here the same line is why the instrument exists at all for cattle. One
+criterion, two consequences — the animal that sells gets both the ledger entry
+*and* the instrument.
 
 ## Reading the entries
 

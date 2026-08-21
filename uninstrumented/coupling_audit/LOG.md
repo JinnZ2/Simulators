@@ -85,3 +85,49 @@ Nothing in `audit.py` or `entries.py` was modified. The entries' `Y/N`
 coupling field is unchanged; `provisioning.py` supplies a unit alongside it
 rather than replacing it, since the unit exists only for cases with an
 incremental tissue.
+
+## 2026-08-21 — canonical `OPEN.md` sections 6–10; amplitude replaces the boolean
+
+A cleaner version of the anthropology/archaeology material was delivered and
+**supersedes** the one-search version landed earlier the same day. Items 6–10
+are the delivered text as written. Differences that mattered:
+
+- **two searches, not one** — the status line changed, and the reverse
+  direction is now recorded as *"open, and possibly ahead of the record. Not a
+  finding."*
+- the zooarchaeology name is supplied: **foddering / seasonal fodder
+  supplementation**. Two literatures, two names, neither framing it as a
+  coupling variable applied across species.
+- the caveat is sourced to a **2024 *Journal of Archaeological Science***
+  paper, not to an unnamed one.
+- the instruction is **replaces**, not *supplements*. The previous LOG entry
+  recorded the opposite and was wrong: it said the unit "supplies a unit
+  alongside [the boolean] rather than replacing it." `coupling_field_for()`
+  now implements the replacement for archaeological cases, with the scope
+  limit stated — an incremental tissue and a declared geometry are both
+  required, `entries.py` keeps the boolean because there is no tooth in a
+  national carbon inventory.
+
+**Added to `provisioning.py`:** the Balasse controlled-feeding calibration as
+a first-class object (a positive control that exists for caprines and cattle
+and not for dogs); `PUBLISHED_APPLICATIONS` (six sites); a fifth case, the
+Canine Surrogacy Approach / Hudson Bay Thule systematic offset absorbed as
+method caution; and `cross_species_readout()`.
+
+**The one computable thing in the new material**: 6 of 6 published
+applications of the method are on commodity species, 0 on companion species,
+against a dog sequential n of about 4. That is consistent with the author's
+stated explanation and does not establish it — sample availability, tooth size
+and enamel thickness, and funding lines are live alternatives, and the readout
+says so in the field names (`count_establishes` /
+`count_does_not_establish`). What it does establish is that the asymmetry is
+real and large.
+
+**Cross-link worth keeping**: this is entry 3's `market_output` gate seen from
+the other side. There it keeps companion animals out of the water accounting;
+here the same criterion is why the instrument exists for cattle. One line, two
+consequences.
+
+Corpus counts moved with the fifth case: 3 of 5 blind by tissue, **5 of 5**
+never tested against the coupling hypothesis, 2 of 5 with a same-site wild
+control. Selftest 25/25 → 36/36.
