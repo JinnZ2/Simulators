@@ -18,7 +18,8 @@ checked where it makes claims about this folder. stdlib, selftest 18/18.
 Earth against Lloyd's ceiling, checked. stdlib, selftest 20/20.
 `scaling_classes.py` — the delivered
 [`SCALING_CLASSES.md`](SCALING_CLASSES.md), eight computational loads against
-the same ceiling, checked. stdlib, selftest 20/20. CC0.
+the same ceiling, checked and then corrected by its author on three counts.
+stdlib, selftest 27/27. CC0.
 
 ```
 python3 budget.py            # full report
@@ -471,13 +472,30 @@ document.
 **The quantum row doesn't retract the same way, and that asymmetry is the
 result.** The three `EXCEEDS` rows price three different objects: an
 **algorithm** (retracted), an **event count** (the drifted one), and a
-**substrate**. `d^N` is the genuine dimension of the state space — a classical
-simulator must carry it, a quantum one need not, because the system is its own
-simulator. **So that row bounds classical simulation of quantum systems —
-Feynman 1982 — not simulation as such.** It's the only row that constrains the
-hypothesis rather than our method, and it constrains it in one direction:
-against a classical substrate. The drop doesn't state this, and it's what
-makes the row worth keeping.
+**substrate**. That row bounds classical simulation — Feynman 1982 — not
+simulation as such. It's the only row that constrains the hypothesis rather
+than our method.
+
+**But my version of it overstated, and the correction is large.** "A classical
+simulator must carry `d^N`" holds only for **volume-law** entangled states.
+**Area-law** states are classically representable in *polynomial* resources —
+MPS / tensor networks, DMRG — and ground states of local gapped Hamiltonians
+obey an area law, covering most ground-state chemistry, folding and condensed
+matter. So the row bounds the **worst-case entangled subset**, and the
+tractable class is where most of Earth sits. What the correction buys is better
+than what it removes: **the discriminator is entanglement scaling, which is
+measurable rather than assumed**, so the row becomes a bound with a stated
+domain instead of a blanket one — the move this folder makes everywhere else
+and didn't make here.
+
+**Three corrections to this audit, from the party holding the source.** The
+N-body retag above; the Barnes-Hut figure (`N log N` = 10^32 is *per step*, so
+the saving is **28 decades, not 35** — and I dropped the timestep factor in
+the same paragraph where I objected to it being unstated); and the
+entanglement narrowing. Verdicts unchanged in all three; magnitudes and domains
+corrected. `SHB_035`'s falsifier also turned out to be written too narrowly to
+fire on the failure that occurred — second instance of that shape here, after
+`SHB_020`.
 
 **Read through its own resolution, the headline inverts.** Every row priced by
 what the physical system actually *does* is polynomial or a plain event count,

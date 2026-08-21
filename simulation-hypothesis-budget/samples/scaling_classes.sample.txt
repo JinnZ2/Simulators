@@ -8,7 +8,7 @@ SCALING CLASSES -- the delivered table, checked
      all Earth fluid dynamics, 4.5e9 yr
        stated 10^100    checked --       NEEDS_UNSTATED_CONSTRUCTION
      N-body accretion, 1e30 bodies
-       stated 10^67     checked 10^67.0  CONSTRUCTION_FITTED
+       stated 10^67     checked 10^67.0  LABEL_TRUNCATED_IN_TRANSFER
      quantum many-body, N=100
        stated 10^30     checked 10^30.1  REPRODUCES
      quantum many-body, N=300
@@ -26,18 +26,33 @@ SCALING CLASSES -- the delivered table, checked
      construction the table does not give: no Reynolds number, grid
      count or timestep is printed for the two fluid rows.
 
-     The N-body row is marked CONSTRUCTION_FITTED and not counted among
-     the reproductions. Direct O(N^2) on 10^30 bodies is 10^60, and
-     10^67 follows only if there are about 10^7 timesteps -- a number
-     chosen HERE to match the stated value, not printed in the table. A
-     construction reverse-engineered from the answer is not a check,
-     and counting it as one would have inflated the reproduction count
-     from four to five.
+     The N-body row is LABEL_TRUNCATED_IN_TRANSFER and not counted
+     among the reproductions. Direct O(N^2) on 10^30 bodies is 10^60
+     and 10^67 needs about 10^7 timesteps -- which the first pass
+     called a number chosen HERE to match. H1, delivered: it was
+     printed in the SOURCE row label and lost in transfer into
+     SCALING_CLASSES.md. So the construction is stated, the row
+     reproduces exactly once the term is restored, and the tag was
+     wrong. The NOT-COUNTING stands: this folder audits the document as
+     delivered, and as delivered the term is absent. Four reproductions
+     here, five in the source, both reported.
 
-     Worth naming on the same row: a Barnes-Hut tree makes the same
-     physics 10^32, thirty-five decades cheaper. The VERDICT is robust
-     and the NUMBER is a property of the method -- SHB_021 arriving
-     inside a single row.
+     AND THE FIRST PASS IS ITSELF A DATUM ON THE QUESTION. Faced with a
+     row whose terms did not add up, it reached for 'the construction
+     was fitted' and not for 'a term was lost in transfer'. Truncation
+     was not the first hypothesis. It was not any hypothesis until the
+     party holding the source said so -- which is the checkable version
+     of the missing-record finding, instanced on this audit rather than
+     argued about.
+
+     H2, delivered, on the same row: the first pass said a Barnes-Hut
+     tree makes the same physics 10^32, thirty-five decades cheaper. N
+     log N = 10^32 is PER STEP. Times 10^7 steps it is 10^39, so the
+     saving is TWENTY-EIGHT decades, not thirty-five -- and the
+     timestep factor was dropped in the same paragraph that objected to
+     it being unstated. Verdict unchanged, magnitude off by 10^7. The
+     point that survives: the VERDICT is robust and the NUMBER is a
+     property of the method -- SHB_021 inside a single row.
 
      EXCEEDS columns, checked as total minus ceiling:
        quantum many-body, N=1000              181    consistent
@@ -112,18 +127,48 @@ SCALING CLASSES -- the delivered table, checked
 
      quantum many-body, N=1000
        prices: SUBSTRATE    retracted by the text: no
-       d^N is the genuine dimension of the state space, not a search
-       strategy. A CLASSICAL simulator must carry it; a quantum
-       substrate does not, because the system is its own simulator. So
-       the row bounds classical simulation of quantum systems --
-       Feynman 1982 -- and not simulation as such. That makes it the
-       strongest row in the table, for a reason the table does not
-       give.
+       d^N is the dimension of the state space, not a search strategy,
+       so a CLASSICAL simulator carrying the full state must pay it
+       while a quantum substrate need not -- the system is its own
+       simulator. NARROWED per the delivered H3: 'a classical simulator
+       must carry d^N' holds only for VOLUME-LAW entangled states.
+       AREA-LAW states are classically representable in polynomial
+       resources -- MPS / tensor networks, DMRG -- and ground states of
+       local gapped Hamiltonians obey an area law, which covers most
+       ground-state chemistry, folding and condensed matter. So the row
+       bounds classical simulation of the WORST-CASE ENTANGLED SUBSET,
+       not of quantum systems generally. It is still the only row
+       pricing a substrate rather than a method, and its class is much
+       smaller than the first pass said.
 
      of 3 EXCEEDS rows, 1 is retracted by the text's own
      resolution. Still binding:
        nested phase transitions, 4 classes
        quantum many-body, N=1000
+
+     H3, DELIVERED -- the substrate row was overstated, and the
+     overstatement was load-bearing
+
+       class          classical cost     row binds
+       area-law       polynomial         no
+       volume-law     exponential in N   YES
+
+       first pass said: classical simulation of quantum systems.
+       corrected to: classical simulation of volume-law entangled
+       quantum systems.
+
+       Area-law states are classically representable in polynomial
+       resources (MPS / tensor networks, DMRG), and ground states of
+       local gapped Hamiltonians obey an area law -- which covers most
+       ground-state chemistry, folding and condensed matter. So the row
+       bounds the WORST-CASE ENTANGLED SUBSET, not quantum systems
+       generally, and the tractable class is where most of Earth sits.
+
+       What it buys: the discriminator is ENTANGLEMENT SCALING, which
+       is measurable rather than assumed. That converts the row from a
+       blanket bound into a bound with a stated domain -- the move this
+       folder makes everywhere else, and the first pass did not make it
+       here.
 
      THE ASYMMETRY IS THE RESULT. The protein row prices an ALGORITHM
      and the funnelling argument removes it. The quantum row prices a
@@ -132,9 +177,11 @@ SCALING CLASSES -- the delivered table, checked
      and a quantum one need not because the system is its own
      simulator. So the quantum row is the only one in the table that
      bounds the hypothesis rather than bounding our method -- and it
-     bounds it in a specific direction, against a CLASSICAL substrate.
-     That is Feynman's 1982 argument, and it is the strongest thing in
-     the drop, for a reason the drop does not state.
+     bounds it in a specific direction, against a CLASSICAL substrate
+     carrying a VOLUME-LAW state. That is Feynman's 1982 argument with
+     H3's domain attached, and it is the strongest thing in the drop,
+     for a reason the drop's first version did not state and its second
+     does.
 
 ------------------------------------------------------------------------
 

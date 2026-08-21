@@ -59,11 +59,13 @@ ROWS = [
      "note": "same gap. the figure is plausible and is not reproducible"},
     {"row": "N-body accretion, 1e30 bodies", "stated_log10": 67.0,
      "construction": ("direct O(N^2) pairwise = 1e60, times ~1e7 timesteps",
-                      60.0 + 7.0), "fitted": True, "verdict": "fits",
-     "note": "reproducible under an INFERRED construction. Note the "
-             "algorithm choice: a Barnes-Hut tree is N log N = 1e32, "
-             "35 decades cheaper. The verdict is robust; the number is a "
-             "property of the method"},
+                      60.0 + 7.0), "transfer_truncated": True,
+     "verdict": "fits",
+     "note": "construction printed in the SOURCE label and lost in "
+             "transfer (H1). Algorithm choice, corrected per H2: a "
+             "Barnes-Hut tree is N log N = 1e32 PER STEP, so 1e39 over 1e7 "
+             "steps -- 28 decades cheaper, not 35. The verdict is robust; "
+             "the number is a property of the method"},
     {"row": "quantum many-body, N=100", "stated_log10": 30.0,
      "construction": ("2^100", 100 * math.log10(2)), "verdict": "fits"},
     {"row": "quantum many-body, N=300", "stated_log10": 90.0,
@@ -89,15 +91,23 @@ def reproduce():
             d["state"] = "NEEDS_UNSTATED_CONSTRUCTION"
             d["computed_log10"] = None
             d["error_decades"] = None
-        elif r.get("fitted"):
-            # A construction reverse-engineered from the stated value is not
-            # a reproduction: the free parameter (here the timestep count)
-            # was chosen to match. Kept separate so the count of genuine
-            # reproductions is not inflated by my own back-fitting.
+        elif r.get("transfer_truncated"):
+            # H1, delivered correction. The first pass tagged this
+            # CONSTRUCTION_FITTED, on the reasoning that the ~1e7 timestep
+            # count was chosen HERE to match the stated value. It was not
+            # chosen here: it was printed in the source row label ("N-body
+            # accretion, 1e30 bodies, 1e7 steps") and lost in transfer into
+            # SCALING_CLASSES.md. So the construction is stated, in the
+            # source, and the correct tag is LABEL_TRUNCATED_IN_TRANSFER.
+            #
+            # THE NOT-COUNTING DECISION STANDS. This folder audits the
+            # document as delivered, and as delivered the term is absent.
+            # In the source the row reproduces exactly (60 + 7 = 67), so the
+            # count is 4 here and 5 there, and both are reported.
             name, val = r["construction"]
-            d["state"] = "CONSTRUCTION_FITTED"
+            d["state"] = "LABEL_TRUNCATED_IN_TRANSFER"
             d["computed_log10"] = val
-            d["error_decades"] = 0.0
+            d["error_decades"] = val - r["stated_log10"]
         else:
             name, val = r["construction"]
             d["state"] = ("REPRODUCES"
@@ -214,14 +224,57 @@ def algorithm_vs_physics():
         {"row": "quantum many-body, N=1000",
          "prices": "SUBSTRATE",
          "retracted_by_the_text": False,
-         "why": "d^N is the genuine dimension of the state space, not a "
-                "search strategy. A CLASSICAL simulator must carry it; a "
-                "quantum substrate does not, because the system is its own "
-                "simulator. So the row bounds classical simulation of "
-                "quantum systems -- Feynman 1982 -- and not simulation as "
-                "such. That makes it the strongest row in the table, for a "
-                "reason the table does not give."},
+         "narrowed_by": "H3",
+         "why": "d^N is the dimension of the state space, not a search "
+                "strategy, so a CLASSICAL simulator carrying the full state "
+                "must pay it while a quantum substrate need not -- the "
+                "system is its own simulator. NARROWED per the delivered "
+                "H3: 'a classical simulator must carry d^N' holds only for "
+                "VOLUME-LAW entangled states. AREA-LAW states are "
+                "classically representable in polynomial resources -- MPS / "
+                "tensor networks, DMRG -- and ground states of local gapped "
+                "Hamiltonians obey an area law, which covers most "
+                "ground-state chemistry, folding and condensed matter. So "
+                "the row bounds classical simulation of the WORST-CASE "
+                "ENTANGLED SUBSET, not of quantum systems generally. It is "
+                "still the only row pricing a substrate rather than a "
+                "method, and its class is much smaller than the first pass "
+                "said."},
     ]
+
+
+ENTANGLEMENT_CLASSES = [
+    {"class": "area-law", "classical_cost": "polynomial",
+     "representation": "MPS / tensor networks, DMRG",
+     "covers": "ground states of local gapped Hamiltonians -- most "
+               "ground-state chemistry, protein folding, condensed matter",
+     "row_binds": False},
+    {"class": "volume-law", "classical_cost": "exponential in N",
+     "representation": "no known sub-exponential exact representation",
+     "covers": "generic highly entangled states; thermal states at high "
+               "energy density; deep random circuits",
+     "row_binds": True},
+]
+
+
+def entanglement_discriminator():
+    """H3's contribution: the discriminator is measurable, not assumed.
+
+    The first pass treated d^N as the cost of classical simulation of quantum
+    systems. It is the cost for one entanglement class and not the other, and
+    which class a state is in is a measurable property rather than a
+    stipulation. That converts the row from a blanket bound into a bound with
+    a stated domain -- and it is the same move this folder makes everywhere
+    else, so the first pass should have made it here.
+    """
+    binds = [c for c in ENTANGLEMENT_CLASSES if c["row_binds"]]
+    return {"classes": len(ENTANGLEMENT_CLASSES),
+            "classes_the_row_binds": len(binds),
+            "discriminator": "entanglement scaling -- area law vs volume law",
+            "measurable": True,
+            "first_pass_said": "classical simulation of quantum systems",
+            "corrected_to": "classical simulation of volume-law entangled "
+                            "quantum systems"}
 
 
 def surviving_bound():
@@ -278,19 +331,35 @@ def report():
         % (len(ok), len(rep), len(need)), "     "))
     A("")
     L.extend(_wrap(
-        "The N-body row is marked CONSTRUCTION_FITTED and not counted among "
-        "the reproductions. Direct O(N^2) on 10^30 bodies is 10^60, and "
-        "10^67 follows only if there are about 10^7 timesteps -- a number "
-        "chosen HERE to match the stated value, not printed in the table. A "
-        "construction reverse-engineered from the answer is not a check, and "
-        "counting it as one would have inflated the reproduction count from "
-        "four to five.", "     "))
+        "The N-body row is LABEL_TRUNCATED_IN_TRANSFER and not counted among "
+        "the reproductions. Direct O(N^2) on 10^30 bodies is 10^60 and "
+        "10^67 needs about 10^7 timesteps -- which the first pass called a "
+        "number chosen HERE to match. H1, delivered: it was printed in the "
+        "SOURCE row label and lost in transfer into SCALING_CLASSES.md. So "
+        "the construction is stated, the row reproduces exactly once the "
+        "term is restored, and the tag was wrong. The NOT-COUNTING stands: "
+        "this folder audits the document as delivered, and as delivered the "
+        "term is absent. Four reproductions here, five in the source, both "
+        "reported.", "     "))
     A("")
     L.extend(_wrap(
-        "Worth naming on the same row: a Barnes-Hut tree makes the same "
-        "physics 10^32, thirty-five decades cheaper. The VERDICT is robust "
-        "and the NUMBER is a property of the method -- SHB_021 arriving "
-        "inside a single row.", "     "))
+        "AND THE FIRST PASS IS ITSELF A DATUM ON THE QUESTION. Faced with a "
+        "row whose terms did not add up, it reached for 'the construction "
+        "was fitted' and not for 'a term was lost in transfer'. Truncation "
+        "was not the first hypothesis. It was not any hypothesis until the "
+        "party holding the source said so -- which is the checkable version "
+        "of the missing-record finding, instanced on this audit rather than "
+        "argued about.", "     "))
+    A("")
+    L.extend(_wrap(
+        "H2, delivered, on the same row: the first pass said a Barnes-Hut "
+        "tree makes the same physics 10^32, thirty-five decades cheaper. "
+        "N log N = 10^32 is PER STEP. Times 10^7 steps it is 10^39, so the "
+        "saving is TWENTY-EIGHT decades, not thirty-five -- and the "
+        "timestep factor was dropped in the same paragraph that objected to "
+        "it being unstated. Verdict unchanged, magnitude off by 10^7. The "
+        "point that survives: the VERDICT is robust and the NUMBER is a "
+        "property of the method -- SHB_021 inside a single row.", "     "))
     A("")
     ec = excess_column_check()
     A("     EXCEEDS columns, checked as total minus ceiling:")
@@ -375,6 +444,36 @@ def report():
     for r in sb["still_binding"]:
         A("       %s" % r)
     A("")
+    ed = entanglement_discriminator()
+    A("     H3, DELIVERED -- the substrate row was overstated, and the")
+    A("     overstatement was load-bearing")
+    A("")
+    A("       %-14s %-18s %s" % ("class", "classical cost", "row binds"))
+    for c in ENTANGLEMENT_CLASSES:
+        A("       %-14s %-18s %s"
+          % (c["class"], c["classical_cost"],
+             "YES" if c["row_binds"] else "no"))
+    A("")
+    L.extend(_wrap(
+        "first pass said: %s. corrected to: %s."
+        % (ed["first_pass_said"], ed["corrected_to"]), "       "))
+    A("")
+    L.extend(_wrap(
+        "Area-law states are classically representable in polynomial "
+        "resources (MPS / tensor networks, DMRG), and ground states of local "
+        "gapped Hamiltonians obey an area law -- which covers most "
+        "ground-state chemistry, folding and condensed matter. So the row "
+        "bounds the WORST-CASE ENTANGLED SUBSET, not quantum systems "
+        "generally, and the tractable class is where most of Earth sits.",
+        "       "))
+    A("")
+    L.extend(_wrap(
+        "What it buys: the discriminator is ENTANGLEMENT SCALING, which is "
+        "measurable rather than assumed. That converts the row from a "
+        "blanket bound into a bound with a stated domain -- the move this "
+        "folder makes everywhere else, and the first pass did not make it "
+        "here.", "       "))
+    A("")
     L.extend(_wrap(
         "THE ASYMMETRY IS THE RESULT. The protein row prices an ALGORITHM "
         "and the funnelling argument removes it. The quantum row prices a "
@@ -383,9 +482,11 @@ def report():
         "and a quantum one need not because the system is its own simulator. "
         "So the quantum row is the only one in the table that bounds the "
         "hypothesis rather than bounding our method -- and it bounds it in a "
-        "specific direction, against a CLASSICAL substrate. That is "
-        "Feynman's 1982 argument, and it is the strongest thing in the drop, "
-        "for a reason the drop does not state.", "     "))
+        "specific direction, against a CLASSICAL substrate carrying a "
+        "VOLUME-LAW state. That is Feynman's 1982 argument with H3's domain "
+        "attached, and it is the strongest thing in the drop, for a reason "
+        "the drop's first version did not state and its second does.",
+        "     "))
     A("")
     A("-" * 72)
     A("")
@@ -430,10 +531,17 @@ def selftest():
     ck("every reproducing row is within a third of a decade -- the "
        "residuals are the table rounding to whole decades",
        all(abs(d["error_decades"]) < 0.35 for d in ok))
-    ck("the N-body row is marked CONSTRUCTION_FITTED, not REPRODUCES, "
-       "because its free parameter was chosen to match the stated value",
-       [d for d in rep if d["row"].startswith("N-body")][0]["state"]
-       == "CONSTRUCTION_FITTED")
+    nb = [d for d in rep if d["row"].startswith("N-body")][0]
+    ck("the N-body row is LABEL_TRUNCATED_IN_TRANSFER per H1, not "
+       "CONSTRUCTION_FITTED -- the timestep count was printed in the source "
+       "label and lost in transfer",
+       nb["state"] == "LABEL_TRUNCATED_IN_TRANSFER")
+    ck("and it reproduces exactly once the truncated term is restored, "
+       "which is why the retag matters",
+       abs(nb["error_decades"]) < 1e-9)
+    ck("it is still not counted among the reproductions, because this "
+       "folder audits the document as delivered",
+       nb["state"] not in ("REPRODUCES",))
     ck("no row DISAGREES -- the ones that do not reproduce are missing a "
        "construction, which is a different finding",
        not any(d["state"] == "DISAGREES" for d in rep))
@@ -480,7 +588,21 @@ def selftest():
     ck("two rows still bind after the retraction, so the finding is not "
        "that the whole table dissolves", len(sb["still_binding"]) == 2)
 
+    ed = entanglement_discriminator()
+    ck("the substrate row binds one entanglement class and not the other, "
+       "per H3", ed["classes_the_row_binds"] == 1 and ed["classes"] == 2)
+    ck("the discriminator is measurable rather than stipulated",
+       ed["measurable"] is True)
+    ck("the correction narrows the claim rather than restating it",
+       ed["corrected_to"] != ed["first_pass_said"]
+       and ed["first_pass_said"] in ed["corrected_to"].replace(
+           "volume-law entangled ", ""))
+    ck("the quantum row is recorded as narrowed, not retracted",
+       [r for r in algorithm_vs_physics()
+        if r["prices"] == "SUBSTRATE"][0].get("narrowed_by") == "H3")
+
     ck("report renders", "THE ASYMMETRY IS THE RESULT" in report())
+    ck("report carries the H3 correction", "volume-law" in report())
     print("%d/%d checks passed" % (k - f, k))
     return 1 if f else 0
 

@@ -4399,8 +4399,41 @@ underneath).
   answer; which meets `SHB_030` from the other side — a content count
   binds any architecture that must produce its own observation record,
   but an *exponential* content count does not unless the exponential is
-  in the physics rather than in the method. Thirty-six claims
-  `SHB_001..036`, one REFUTED, four external audits run by someone who
+  in the physics rather than in the method. **The author then replaced
+  the document's opening with the transmissible core** — *"the
+  exponential is a property of the representation, not of the system.
+  Check which one you are pricing"* — and delivered **three corrections
+  to this audit**, all landing. **`SHB_037` (H1):** the N-body tag was
+  wrong — `CONSTRUCTION_FITTED` → **`LABEL_TRUNCATED_IN_TRANSFER`**,
+  since the ~10^7 timestep count *was* printed, in the source row label,
+  and was lost in transfer; the row reproduces exactly once restored and
+  the not-counting stands, so four reproductions here and five in the
+  source. **And this audit's first pass is itself a datum on the
+  question the material poses** — asked whether truncation is ever the
+  *first* hypothesis when a result is off, it reached for "the
+  construction was fitted" and not for "a term was lost in transfer",
+  and truncation was not any hypothesis until the party holding the
+  source said so. **`SHB_038` (H2):** the Barnes-Hut saving is **28
+  decades, not 35** — `N log N` = 10^32 is *per step*, 10^39 over 10^7
+  steps — and the timestep factor was dropped **in the same paragraph
+  that objected to it being unstated**; verdict unchanged, magnitude off
+  by exactly that 10^7. **`SHB_039` (H3), the largest:** `SHB_035`
+  overstated the substrate bound — "a classical simulator must carry
+  `d^N`" holds only for **volume-law** entangled states, while
+  **area-law** states are classically representable in *polynomial*
+  resources (MPS / tensor networks, DMRG) and ground states of local
+  gapped Hamiltonians obey an area law, covering most ground-state
+  chemistry, folding and condensed matter; so the row bounds the
+  **worst-case entangled subset** and the tractable class is where most
+  of Earth sits. What the correction buys beats what it removes: **the
+  discriminator is entanglement scaling, measurable rather than
+  assumed**, converting a blanket bound into one with a stated domain —
+  the move this folder makes everywhere else and did not make here.
+  **`SHB_040`:** `SHB_035`'s falsifier was written too narrowly to fire
+  on the failure that occurred ("without approximation" makes it nearly
+  unfireable), the **second instance** of the `SHB_020` shape, and the
+  clause is deliberately NOT used to rescue the claim. Forty claims
+  `SHB_001..040`, one REFUTED, four external audits run by someone who
   did not write the claims. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
