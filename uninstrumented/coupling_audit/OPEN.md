@@ -97,3 +97,53 @@ the two regimes.
 This is the same shape the audit tests for: the difference between a fixed
 draw and a supply-coupled one is not a refinement of the coefficient, it is a
 different kind of term.
+
+## 6. UNRESOLVED — anthropological/archaeological precedent (open, one search only, not a literature review)
+
+*Delivered text, landed as written.*
+
+The coupling variable is established in this literature under the name
+PROVISIONING REGIME:
+
+- **Lupo 2019, J. Anthropological Archaeology** ("Hounds follow those who feed
+  them"): working dogs in cold biomes supportable only after intentional
+  provisioning emerged and was incorporated into the subsistence system —
+  provisioning as a paid-for constraint on capability
+- **Mitchell 2025, "First Dogs" (Routledge)**: thematic chapter on how dogs
+  have been fed and cared for across hunter-gatherer populations;
+  domestication as plural, long-duration, environment-dependent
+- **Pacheco-Cobos & Winterhalder, Belize lowlands**: village dogs, crop
+  protection and subsistence hunting, behavioral-ecology framing
+- **Mesoamerica, quoted**: "a household's use of dogs affects its investment
+  in them" — the coupling relation, stated at household level
+- **Arctic stable-isotope work**: some ancient dog diets track diets of nearby
+  people (marine signal in coastal groups) — the coupling is measurable in
+  bone collagen
+
+**ROUTING**: provisioning is a variable regime with a cost in this literature,
+and a fixed coefficient or absent term in the footprint, hunger, and water
+models. Third silo, same routing failure.
+
+**GAP, unresolved**: the literature found is weighted toward provisioning
+ENABLING capability. The reverse — de-provisioning under seasonal scarcity,
+animal re-coupled to its own foraging envelope, re-imported when supply
+returns — was not found named as a regime. Existing instruments could detect
+it: a seasonal signal in dog bone collagen from a group with variable supply.
+The Arctic diet-tracking method is one step from it.
+
+**Status: not searched to exhaustion. Do not record as absent from the
+literature — record as not found in one pass.**
+
+### 6a. UNRESOLVED — the sampled tissue decides whether the question is askable
+
+Follow-on to item 6, and the reason `provisioning.py` exists in this folder.
+
+The three standing explanations for isotopic spread in archaeological dog
+assemblages and the coupling hypothesis are **not distinguished by the tissue
+most of the data sits in**. Bone collagen averages years, so a within-year
+switch is averaged away before the sample is taken, and the resulting spread
+presents as *between*-individual. Incremental dentine and sequential enamel
+resolve sub-annually and separate the three.
+
+This is a resolution pairing, not a disagreement about the data: see
+`provisioning.py --resolution`.

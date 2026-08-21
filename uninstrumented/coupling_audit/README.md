@@ -77,7 +77,60 @@ were new.
   `--template`, `--mechanisms`, `--selftest`.
 - [`entries.py`](entries.py) — three seed entries (IPC, per-capita carbon
   footprint, FAO LEAP/GLEAM), all `MODEL_SEEDED`.
+- [`provisioning.py`](provisioning.py) — the discriminating test, and the
+  audit's first real unit. `--resolution`, `--cases`, `--amplitude`,
+  `--selftest`.
 - [`FALSIFIER.md`](FALSIFIER.md) · [`OPEN.md`](OPEN.md) · [`LOG.md`](LOG.md)
+
+## The coupling is already measured — under other names
+
+`audit.py` asks whether a model applies its coupling machinery evenly.
+`provisioning.py` is about the other end: whether the coupling is *measurable*
+in a given body of evidence, and what separates it from the explanations
+already standing in the literature.
+
+Three hypotheses account for isotopic spread in an archaeological assemblage,
+and they predict different signatures:
+
+| hypothesis | within-individual | between-individual | Sr co-varies | seasonal |
+|---|---|---|---|---|
+| `MOBILITY` | no | yes | **yes** | no |
+| `BREED_OR_STATUS` | no | yes | no | no |
+| `VARIABLE_COUPLING` | **yes** | yes | no | **yes** |
+
+**The within-individual column is the only one that separates the coupling
+hypothesis from the other two — and it is exactly the column a years-averaging
+tissue removes.** Bone collagen integrates years, so a within-year switch is
+averaged away before the sample is taken and the spread can only present as
+between-individual. In that tissue the coupling hypothesis **cannot fail**,
+which is not support for it: it is `CONSTANT_SILENT` by construction. G-RES
+pairing: bone collagen is **12.2× too coarse** for a seasonal feature at a
+margin of 2; incremental dentine and sequential enamel resolve it.
+
+On the four delivered cases: 2 of 4 blind by tissue, **4 of 4** never tested
+the standing explanation against the coupling hypothesis, 2 of 4 carry a
+same-site wild control. Roughly a tenth of the canid individuals sit in a
+tissue that can ask the question.
+
+**The cheapest next step is already a working design elsewhere.** Schipluiden
+sampled *wild* animals from the *same site* as a baseline — domesticates
+deviate, red deer and suids do not, so the deviation is attributable to
+household provisioning rather than to environment. That is a control in the
+`null-harness` sense, and nobody has pointed it at dogs with a wild-canid
+control at the same site. Arroyo Hondo stumbled into one by accident when a
+coyote came back with domestic-dog values.
+
+## A unit, not a Y/N
+
+Intra-tooth amplitude is a coupling-variability measurement — flat means a
+fixed draw, high amplitude means supply-coupled. That is the first real unit
+this audit has. `amplitude_reading()` **raises without a declared sampling
+geometry**, because geometry changes the intra-tooth pattern and a cross-study
+comparison that does not state it is comparing two instruments. Same shape as
+`audit.py` refusing coupling machinery that is not named in the model's own
+vocabulary: a number from an unnamed instrument is not yet a reading. The
+thresholds are conventional, scaled to one delivered herd range, and are not
+calibrated against a controlled feeding experiment here.
 
 ## Reading the entries
 
