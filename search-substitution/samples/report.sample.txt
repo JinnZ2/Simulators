@@ -1,0 +1,36 @@
+SEARCH SUBSTITUTION
+ceiling: 1e120 operations (Lloyd 1999)
+
+CROSSOVERS -- where a method exceeds the ceiling
+  2**k   exceeds at k = 399 components
+  3**k   exceeds at k = 252 residues
+  N**2   exceeds at N = 1e60 bodies
+  N**3   exceeds at N = 1e40 bodies
+  Earth carries ~1e50 atoms: N**2 fits, N**3 does not, at one N.
+  The exponent decides, not the size.
+
+PHYSARUM -- occupancy instead of enumeration
+  Tero 2010 ran 36 terminals.
+  Exact Steiner DP carries 3**36 = 1.5e+17 subproblem splits.
+  Plasmodium cost has no terminal term at all: it is arena held
+  for a duration. A 100 cm2 arena for 26 h is 9.36e+06 cm2-seconds,
+  and that figure does not move when terminals are added.
+
+CORVID -- storage instead of search
+  5000 caches over 10000 candidate sites.
+  Recovered by search:   2.5e+07 probes
+  Recovered by memory:   5e+03 probes
+  Ratio: 5e+03. The cost did not vanish -- it moved to the ledger,
+  3.2e+05 bits at 64 bits per cache, carried the whole interval.
+  Species are not interchangeable here; see --sources.
+
+ORNITHORHYNCHUS -- coupling instead of representation
+    50 mm of range  ->    33.8 us of arrival offset
+   100 mm of range  ->    67.6 us of arrival offset
+   200 mm of range  ->   135.1 us of arrival offset
+  Recovered by one multiplication: 0.099 m from 67.0 us.
+  A map-then-query approach would carry 2.62e+08 cells at 1 mm over
+  a 0.5 m hemisphere. The animal carries none of them.
+
+The exponential is a property of the representation, not of the
+system. Check which one you are pricing.

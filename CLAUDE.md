@@ -4197,6 +4197,36 @@ underneath).
     surface: seven categories from harsh (`pure_consumer`, the null
     hypothesis) to gentle (`mutualistic_scale`), each with multiple
     ecological pairs and a balanced-view walkthrough.
+- `search-substitution/` — Three organisms that produce an answer without
+  searching for it, priced against the search they do not perform. Physarum
+  occupies the whole arena at once and prunes by throughput, so its cost
+  expression carries no terminal-count term where the exact Steiner DP
+  carries 3^k (1.5×10^17 at Tero 2010's 36 sources). A corvid stores cache
+  locations in advance, which is a **transfer and not a saving** — the
+  storage is paid across the whole interval, for caches never recovered, by
+  an animal that cannot know in advance which those are. A platypus reads
+  range from the offset between electrical and pressure arrivals (~68 µs at
+  100 mm in fresh water), with no intermediate map. The three are kept apart
+  because they substitute different resources — area-seconds, stored bits,
+  one multiplication — and a single efficiency story covering all three
+  would be describing the observer's surprise rather than the biology.
+  Reproduces the crossover arithmetic against Lloyd's 10^120 ceiling (2^k at
+  399, 3^k at 252, N^2 at 10^60, N^3 at 10^40) so the biology reads against
+  it, and no organism here sits anywhere near those lines — the lines belong
+  to methods. **Three figures are stipulations, not measurements** (64 bits
+  per cache, the arena dimensions, the site count) and `AUDIT_NOTES.md` says
+  so rather than letting them be quoted. The platypus case is flagged as the
+  weakest: range-from-offset is Pettigrew's proposal, and "no intermediate
+  representation" is a claim about an absence the cited work did not
+  measure. Species conflation in the source material is undone — the
+  cache-volume, what-where-when and observer-tracking results come from
+  *Nucifraga columbiana*, *Aphelocoma californica* and *Corvus corax*
+  respectively, three species in two genera, no result obtained in the same
+  animal. The organising cut: an exponential in a formalism reports on the
+  formalism, and its provenance is worth asking before its difficulty is.
+  Eight claims `C1..C8`, `C1` resting on the model rather than an
+  observation because the terminal-count sweep that would settle it is
+  absent from the cited literature. Stdlib only, selftest 23/23, CC0.
 - `SYNTHESIS.md` — Top-level synthesis describing how the three folders
   fit together, how claims flow between them, and how to read the
   artifacts in order.

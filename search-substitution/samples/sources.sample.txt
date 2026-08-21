@@ -1,0 +1,29 @@
+SOURCES
+
+  physarum / maze
+    Nakagaki, Yamada & Toth 2000, Nature 407:470. Plasmodium of Physarum polycephalum selects the shortest of several connecting paths.
+
+  physarum / network
+    Tero et al. 2010, Science 327:439. Plasmodium over 36 food sources positioned as Tokyo-area stations; resulting network compared to rail.
+
+  steiner / enumeration
+    Dreyfus & Wagner 1971, Networks 1:195. Exact Steiner-tree DP, the 3**k term. Steiner tree in graphs is NP-hard (Karp 1972).
+
+  corvid / cache volume
+    Vander Wall & Balda 1977, Ecol Monogr 47:89; Vander Wall 1982, Anim Behav 30:84. Clark's nutcracker, NUCIFRAGA COLUMBIANA -- thousands of caches, tens of thousands of seeds. NOT genus Corvus.
+
+  corvid / what-where-when
+    Clayton & Dickinson 1998, Nature 395:272. Western scrub-jay, APHELOCOMA CALIFORNICA. NOT genus Corvus.
+
+  corvid / observer tracking
+    Bugnyar & Heinrich 2005, Proc R Soc B 272:1641; Bugnyar, Reber & Buckner 2016, Nat Commun 7:10506. Common raven, CORVUS CORAX -- re-caching conditioned on whether a competitor could observe.
+
+  platypus / receptors
+    Scheich et al. 1986, Nature 319:401; Manger & Pettigrew 1995, Phil Trans R Soc B 347:423. Bill carries electroreceptors and mechanoreceptors in striped arrangement.
+
+  platypus / time-offset range
+    Pettigrew 1999, J Exp Biol 202:1447 -- proposes range from the electrical/mechanical arrival difference. A MODEL, not a measured mechanism. See AUDIT_NOTES.md.
+
+  ceiling
+    Lloyd 1999, Phys Rev Lett 88:237901. ~1e120 operations. Used here only to locate crossovers, not as a claim about any organism.
+
