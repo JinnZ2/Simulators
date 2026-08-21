@@ -1,0 +1,48 @@
+QRNG PAIR SEARCH
+unit of search = (source, bath_set), not (source, name)
+
+SOURCES -- effective bath is source | readout
+  avalanche_diode  src=TH           readout=EM,PWR,TH          eff=EM,PWR,TH  [PARTIAL]
+  decay_alpha      src=COS          readout=EM,PWR,TH          eff=COS,EM,PWR,TH
+  johnson_noise    src=TH           readout=EM,PWR,TH          eff=EM,PWR,TH  [CLASSICAL]
+  nv_spin          src=EM,OPT       readout=EM,OPT,PWR,TH      eff=EM,OPT,PWR,TH
+  photon_split     src=OPT          readout=EM,PWR,TH          eff=EM,OPT,PWR,TH
+  rtd_tunnel       src=TH           readout=EM,PWR,TH          eff=EM,PWR,TH
+  vacuum_homodyne  src=OPT          readout=EM,PWR,TH          eff=EM,OPT,PWR,TH
+
+ADMISSIBLE PAIRS -- quantum on both legs
+  pair                               structural fielded                rate cap
+  decay_alpha x nv_spin              -          welded:EM,PWR,TH       1e+05
+  decay_alpha x photon_split         -          welded:EM,PWR,TH       1e+05
+  decay_alpha x rtd_tunnel           -          welded:EM,PWR,TH       1e+05
+  decay_alpha x vacuum_homodyne      -          welded:EM,PWR,TH       1e+05
+  nv_spin x rtd_tunnel               -          welded:EM,PWR,TH       1e+06
+  photon_split x rtd_tunnel          -          welded:EM,PWR,TH       1e+09
+  rtd_tunnel x vacuum_homodyne       -          welded:EM,PWR,TH       1e+09
+  nv_spin x photon_split             OPT        welded:EM,OPT,PWR,TH   1e+06
+  nv_spin x vacuum_homodyne          OPT        welded:EM,OPT,PWR,TH   1e+06
+  photon_split x vacuum_homodyne     OPT        welded:EM,OPT,PWR,TH   1e+09
+
+  Every pair is welded at TH/PWR/EM once the readout chain is
+  counted. None is CLEAN as fielded. The pairs worth building are
+  the ones with an EMPTY STRUCTURAL overlap, where the weld is an
+  engineering fact rather than a physics one -- and where the
+  separation is therefore measurable.
+
+  separable pairs (structural empty, fielded non-empty): 7 of 10
+
+SAMPLE COUNTS -- what a correlation sweep can actually resolve
+  r >= 5e-03    needs 1.00e+06 samples at 5 sigma, 1 lag
+                  1.40e+06 samples across 100 lags
+  r >= 1e-03    needs 2.50e+07 samples at 5 sigma, 1 lag
+                  3.51e+07 samples across 100 lags
+  r >= 1e-04    needs 2.50e+09 samples at 5 sigma, 1 lag
+                  3.51e+09 samples across 100 lags
+
+ENTROPY -- min-entropy, not Shannon
+  two legs at 0.8 and 0.6 bits per sample:
+    XOR floor          0.80 bits  (guaranteed, needs independence)
+    two-source target  1.40 bits  (budget, needs a named extractor)
+    same, with 0.3 bits of measured coupling: 1.10
+  Secrecy of the combiner appears in none of these lines, because
+  it contributes to none of them.

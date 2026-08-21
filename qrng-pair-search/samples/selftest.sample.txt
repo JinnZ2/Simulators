@@ -1,0 +1,35 @@
+  ok    classical source is never admissible
+  ok    partial-quantum source is never admissible
+  ok    quantum pair is admissible
+  ok    decay x rtd has NO structural overlap
+  ok    decay x rtd IS welded once readout is counted
+  ok    the delivered CLEAN verdict does not survive
+  ok    decay x rtd is separable, not clean
+  ok    shared-laser pair is structurally welded on OPT
+  ok    a structurally welded pair is not separable
+  ok    effective bath is the union
+  ok    no admissible pair is clean as fielded
+  ok    some admissible pairs are separable
+  ok    rate cap takes the slower leg
+  ok    conservative floor is below the optimistic cap
+  ok    XOR floor is the better leg
+  ok    XOR floor is symmetric
+  ok    two-source target is the sum when uncoupled
+  ok    measured coupling is subtracted
+  ok    target never goes negative
+  ok    target is at least the XOR floor when uncoupled
+  ok    negative entropy is rejected
+  ok    1e6 samples resolves 5e-3 and no better
+  ok    resolving 1e-3 costs 2.5e7 samples
+  ok    scanning lags raises the sample count
+  ok    r_target outside (0,1) is rejected
+  ok    identical series correlate at 1
+  ok    inverted series correlate at -1
+  ok    a constant series correlates at 0
+  ok    lag shifts the comparison window
+  ok    negative lag is rejected
+  ok    obscurity is named as not a mitigation
+  ok    protocol ends on the quiet-bench warning
+  ok    every bath key is documented
+
+selftest 33/33
