@@ -1,0 +1,157 @@
+SCALING CLASSES -- the delivered table, checked
+========================================================================
+
+  1. REPRODUCING THE ROWS
+
+     turbulence, one ocean, 1e8 yr
+       stated 10^45     checked --       NEEDS_UNSTATED_CONSTRUCTION
+     all Earth fluid dynamics, 4.5e9 yr
+       stated 10^100    checked --       NEEDS_UNSTATED_CONSTRUCTION
+     N-body accretion, 1e30 bodies
+       stated 10^67     checked 10^67.0  CONSTRUCTION_FITTED
+     quantum many-body, N=100
+       stated 10^30     checked 10^30.1  REPRODUCES
+     quantum many-body, N=300
+       stated 10^90     checked 10^90.3  REPRODUCES
+     quantum many-body, N=1000
+       stated 10^301    checked 10^301.0 REPRODUCES
+     ONE protein, exhaustive fold search
+       stated 10^143    checked 10^143.1 REPRODUCES
+     nested phase transitions, 4 classes
+       stated 10^152    checked --       NEEDS_UNSTATED_CONSTRUCTION
+
+     4 of 8 rows reproduce exactly from the terms printed in them --
+     2^100, 2^300, 2^1000 and 3^300 -- with residuals under a third of
+     a decade, which is the table rounding to whole decades. 3 need a
+     construction the table does not give: no Reynolds number, grid
+     count or timestep is printed for the two fluid rows.
+
+     The N-body row is marked CONSTRUCTION_FITTED and not counted among
+     the reproductions. Direct O(N^2) on 10^30 bodies is 10^60, and
+     10^67 follows only if there are about 10^7 timesteps -- a number
+     chosen HERE to match the stated value, not printed in the table. A
+     construction reverse-engineered from the answer is not a check,
+     and counting it as one would have inflated the reproduction count
+     from four to five.
+
+     Worth naming on the same row: a Barnes-Hut tree makes the same
+     physics 10^32, thirty-five decades cheaper. The VERDICT is robust
+     and the NUMBER is a property of the method -- SHB_021 arriving
+     inside a single row.
+
+     EXCEEDS columns, checked as total minus ceiling:
+       quantum many-body, N=1000              181    consistent
+       ONE protein, exhaustive fold search    23     consistent
+       nested phase transitions, 4 classes    32     consistent
+
+------------------------------------------------------------------------
+
+  2. ONE ROW HAS DRIFTED TEN DECADES, UNREMARKED
+
+     nested phase transitions, this table    10^152
+     the same object, previous drop          10^162.5
+     drift                                   10.5 decades
+     this folder: event-driven, nested      10^103.0
+     this folder: uniform Planck stepping   10^110.5
+     matches any coherent model here         False
+
+     the EXCEEDS column is total minus ceiling, so it moves with the
+     total and the row stays internally consistent at any value. A
+     second reader is the only thing that catches it
+
+------------------------------------------------------------------------
+
+  3. THE STRUCTURAL CLAIM -- right in direction, one qualification
+
+     'everything polynomial FITS' is not general:
+       N = 10^50, N^2 = 10^100   fits
+       N = 10^50, N^3 = 10^150   EXCEEDS
+
+     Same N, same polynomial class, opposite verdicts. Pairwise
+     interactions among Earth's atoms fit; triple-wise do not. So the
+     cut is scaling class CROSSED WITH N, and the claim holds for the
+     N's in the table rather than in general.
+
+     The exact form is the CROSSOVER, and it is sharper:
+
+       form                               crosses 10^120 at
+       2^N  (quantum many-body, d=2)      399 components
+       3^n  (conformation search)         252 residues
+       N^2  (pairwise)                    1.0e+60 bodies
+       N^3  (triple-wise)                 1.0e+40 bodies
+
+     Stated that way the delivered claim is exact and stronger. A
+     quantum system of 399 two-state components exhausts the universe's
+     entire compute budget. A 252-residue protein does. Pairwise
+     interactions need 10^60 bodies before they do -- twenty decades
+     above Earth's atom count -- and that gap between 399 and 10^60 is
+     the structural result, quantified.
+
+------------------------------------------------------------------------
+
+  4. THE CLOSING PARAGRAPH RETRACTS ONE OF ITS OWN EXCEEDS ROWS
+
+     The text ends: folding is funnelled, not searched; nature never
+     pays the exponential; it is in a configuration where the
+     exponential does not arise. That is correct, and it is not applied
+     back to the table. Applied:
+
+     ONE protein, exhaustive fold search
+       prices: ALGORITHM    retracted by the text: YES
+       the row's own name is 'exhaustive fold search', and the closing
+       paragraph states that folding is funnelled rather than searched.
+       So the row prices a brute-force method nobody claims the physics
+       uses. It exceeds and it does not bind.
+
+     nested phase transitions, 4 classes
+       prices: EVENT COUNT  retracted by the text: no
+       not an algorithm -- a count of transitions that occurred. It is
+       not retracted by the funnelling argument, and it is the row that
+       drifted; see drift_check() and SHB_028, where the previous
+       drop's version needed a double-count.
+
+     quantum many-body, N=1000
+       prices: SUBSTRATE    retracted by the text: no
+       d^N is the genuine dimension of the state space, not a search
+       strategy. A CLASSICAL simulator must carry it; a quantum
+       substrate does not, because the system is its own simulator. So
+       the row bounds classical simulation of quantum systems --
+       Feynman 1982 -- and not simulation as such. That makes it the
+       strongest row in the table, for a reason the table does not
+       give.
+
+     of 3 EXCEEDS rows, 1 is retracted by the text's own
+     resolution. Still binding:
+       nested phase transitions, 4 classes
+       quantum many-body, N=1000
+
+     THE ASYMMETRY IS THE RESULT. The protein row prices an ALGORITHM
+     and the funnelling argument removes it. The quantum row prices a
+     SUBSTRATE and the same argument does not touch it: d^N is the real
+     dimension of the state space, a classical simulator must carry it,
+     and a quantum one need not because the system is its own
+     simulator. So the quantum row is the only one in the table that
+     bounds the hypothesis rather than bounding our method -- and it
+     bounds it in a specific direction, against a CLASSICAL substrate.
+     That is Feynman's 1982 argument, and it is the strongest thing in
+     the drop, for a reason the drop does not state.
+
+------------------------------------------------------------------------
+
+  WHAT SURVIVES
+
+     Every row priced by what the physical system actually does is
+     polynomial or a plain event count, and fits. The exponentials
+     enter through SEARCH, which nature does not perform, or through
+     CLASSICAL REPRESENTATION of quantum state, which nature does not
+     perform either. Read that way the table's headline inverts: it is
+     not that three loads exceed the budget, it is that the two ways of
+     exceeding it are both artifacts of how WE would compute the answer
+     -- with one exception, which is a claim about the simulator's
+     substrate and not about its budget.
+
+     That connects to SHB_030 from the other side. A content count
+     binds any architecture that must produce its own observation
+     record. An EXPONENTIAL content count does not, unless the
+     exponential is in the physics rather than in the method -- and the
+     delivered text's own last line says it is not.

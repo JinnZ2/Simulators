@@ -15,7 +15,10 @@ selftest 16/16.
 checked where it makes claims about this folder. stdlib, selftest 18/18.
 `earth_transitions.py` — the delivered
 [`EARTH_TRANSITIONS.md`](EARTH_TRANSITIONS.md), a phase-transition count for
-Earth against Lloyd's ceiling, checked. stdlib, selftest 20/20. CC0.
+Earth against Lloyd's ceiling, checked. stdlib, selftest 20/20.
+`scaling_classes.py` — the delivered
+[`SCALING_CLASSES.md`](SCALING_CLASSES.md), eight computational loads against
+the same ceiling, checked. stdlib, selftest 20/20. CC0.
 
 ```
 python3 budget.py            # full report
@@ -419,5 +422,69 @@ the hypothesis — both operands are our physics about a simulator in our
 physics, so `SHB_003` applies unchanged — and "four classes" is a floor
 enumerated by us, `SHB_021` on a second substrate. The delivered text reaches
 that itself, in its closing line: the eight-label count is a map artifact.
+
+## Scaling classes — a fourth audit, and the sharpest row in it
+
+[`SCALING_CLASSES.md`](SCALING_CLASSES.md) itemises eight computational loads
+against the 10^120 ceiling and concludes that **the cut is not size, it is
+scaling class**: polynomial fits with room, exponential blows the ceiling. It
+closes on Levinthal — one 300-residue protein searched exhaustively exceeds
+the universe's budget by 23 decades, a cell folds thousands per second, so the
+physics isn't doing the search.
+
+**Four rows reproduce exactly** from their own printed terms: `2^100` =
+10^30.10, `2^300` = 10^90.31, `2^1000` = 10^301.03, `3^300` = 10^143.14, all
+within a third of a decade. Three can't be rebuilt from what's printed. **The
+N-body row was fitted by this audit and is not counted** — direct `O(N²)` on
+10^30 bodies is 10^60, and 10^67 follows only under ~10^7 timesteps, a number
+chosen here to match. A construction reverse-engineered from the answer isn't
+a check.
+
+**One row drifted ten decades between drops.** `nested phase transitions`
+reads 10^152 here and 10^162.5 in `EARTH_TRANSITIONS.md` for the same object.
+Neither matches a coherent model in this folder (10^103.0 event-driven-nested,
+10^110.5 stepping). The `EXCEEDS` column is total − ceiling, so it moves with
+the total and **the row stays self-consistent at any value** — nothing inside
+the table can catch it.
+
+**"Everything polynomial fits" isn't general, and the fix makes it sharper.**
+At Earth's atom count, `N²` = 10^100 fits and `N³` = 10^150 doesn't — same N,
+same class. The exact form is the **crossover**:
+
+| form | crosses 10^120 at |
+|---|---|
+| `2^N` (quantum many-body, d=2) | **399 components** |
+| `3^n` (conformation search) | **252 residues** |
+| `N²` (pairwise) | 10^60 bodies |
+| `N³` (triple-wise) | 10^40 bodies |
+
+A quantum system of **399** two-state components exhausts the universe's
+entire compute budget; pairwise interactions need 10^60 bodies, twenty decades
+above Earth's atom count. That gap is the structural result, quantified.
+
+**The closing paragraph retracts one of its own `EXCEEDS` rows.** The row is
+named "exhaustive fold search", and the same text ends "folding is funnelled,
+not searched." So it prices a brute-force **algorithm** nobody claims the
+physics uses — `SHB_021` inside a single row, visible without leaving the
+document.
+
+**The quantum row doesn't retract the same way, and that asymmetry is the
+result.** The three `EXCEEDS` rows price three different objects: an
+**algorithm** (retracted), an **event count** (the drifted one), and a
+**substrate**. `d^N` is the genuine dimension of the state space — a classical
+simulator must carry it, a quantum one need not, because the system is its own
+simulator. **So that row bounds classical simulation of quantum systems —
+Feynman 1982 — not simulation as such.** It's the only row that constrains the
+hypothesis rather than our method, and it constrains it in one direction:
+against a classical substrate. The drop doesn't state this, and it's what
+makes the row worth keeping.
+
+**Read through its own resolution, the headline inverts.** Every row priced by
+what the physical system actually *does* is polynomial or a plain event count,
+and fits. Both routes to exceeding the budget are artifacts of how *we* would
+compute the answer — with the one substrate exception. Which connects to
+`SHB_030` from the other side: a content count binds any architecture that
+must produce its own observation record, but an *exponential* content count
+does not, unless the exponential is in the physics rather than in the method.
 
 See [`CLAIM_TABLE.md`](CLAIM_TABLE.md) for the falsifiers.

@@ -4354,9 +4354,54 @@ underneath).
   lazy architecture too; what it does not reach is the hypothesis
   (`SHB_003` unchanged), and "four classes" is a floor enumerated by us,
   `SHB_021` on a second substrate — which the delivered text reaches
-  itself in its closing line. Thirty claims `SHB_001..030`, one REFUTED,
-  three external audits run by someone who did not write the claims.
-  Stdlib only, CC0.
+  itself in its closing line. **`SCALING_CLASSES.md`** is a fourth
+  outside audit, checked in `scaling_classes.py` (selftest 20/20): eight
+  computational loads against the same ceiling, concluding that the cut
+  is **scaling class** rather than size, and closing on Levinthal.
+  **`SHB_031`:** four rows reproduce exactly from their own printed terms
+  (`2^100` = 10^30.10, `2^300` = 10^90.31, `2^1000` = 10^301.03, `3^300`
+  = 10^143.14, residuals under a third of a decade), three cannot be
+  rebuilt from what is printed, and the N-body row is marked
+  `CONSTRUCTION_FITTED` and **not counted** — 10^67 follows from direct
+  `O(N²)` only under ~10^7 timesteps, a number chosen *here* to match,
+  and a construction reverse-engineered from the answer is not a check.
+  **`SHB_032`:** the `nested phase transitions` row reads **10^152** here
+  and **10^162.5** in the previous drop for the same object, matching no
+  coherent model in the folder (10^103.0 / 10^110.5) — and because the
+  `EXCEEDS` column is total − ceiling it **moves with the total**, so the
+  row stays self-consistent at any value and a second reader is the only
+  detector. **`SHB_033`:** "everything polynomial FITS" is not general
+  (at Earth's 10^50 atoms, `N²` fits at 10^100 and `N³` exceeds at
+  10^150 — same N, same class), so the cut is scaling class **crossed
+  with N**, and the exact form is the **crossover**: `2^N` at **399
+  components**, `3^n` at **252 residues**, `N²` at 10^60 bodies, `N³` at
+  10^40 — a quantum system of 399 two-state components exhausts the
+  universe's entire compute budget while pairwise interactions need
+  twenty decades more than Earth has atoms, and that gap is the
+  structural result quantified. **`SHB_034`:** the closing paragraph
+  retracts one of its own `EXCEEDS` rows — the row is named "exhaustive
+  fold search" and the text ends "folding is funnelled, not searched", so
+  it prices a brute-force **algorithm** nobody claims the physics uses;
+  `SHB_021` inside a single row, visible without leaving the document.
+  **`SHB_035`, the strongest thing in the drop:** the three `EXCEEDS`
+  rows price three different objects — an **algorithm** (retracted), an
+  **event count** (the drifted one), and a **substrate**. `d^N` is the
+  genuine dimension of the state space, so a *classical* simulator must
+  carry it and a *quantum* one need not, the system being its own
+  simulator; the row therefore bounds **classical simulation of quantum
+  systems** (Feynman 1982) and not simulation as such, making it the only
+  row that constrains the hypothesis rather than our method — in one
+  direction, against a classical substrate — for a reason the drop does
+  not state. **`SHB_036`:** read through its own resolution the headline
+  inverts, since every row priced by what the physical system actually
+  *does* is polynomial or a plain event count and fits, both routes to
+  exceeding the budget being artifacts of how *we* would compute the
+  answer; which meets `SHB_030` from the other side — a content count
+  binds any architecture that must produce its own observation record,
+  but an *exponential* content count does not unless the exponential is
+  in the physics rather than in the method. Thirty-six claims
+  `SHB_001..036`, one REFUTED, four external audits run by someone who
+  did not write the claims. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
