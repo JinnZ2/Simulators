@@ -10,7 +10,9 @@ selftest 13/13, imports `budget.py` and does not modify it.
 costs. stdlib, selftest 17/17, imports both and modifies neither.
 `ladder_audit.py` — the delivered [`LADDER.md`](LADDER.md), an audit of this
 folder from outside it, checked rung by rung against the code. stdlib,
-selftest 16/16. CC0.
+selftest 16/16.
+`era_metaphor_audit.py` — the delivered [`ERA_METAPHOR.md`](ERA_METAPHOR.md),
+checked where it makes claims about this folder. stdlib, selftest 18/18. CC0.
 
 ```
 python3 budget.py            # full report
@@ -284,5 +286,68 @@ a statement about the fixtures, and it now says so.
 *claim*. No number in `budget.py`, `multiscale.py` or `consequence_frame.py`
 changed — which is what "an audit of standing" means, and what the ladder's own
 first word already said.
+
+## The era metaphor — a second audit from outside
+
+[`ERA_METAPHOR.md`](ERA_METAPHOR.md) places the simulation hypothesis as the
+current instance of a recurring pattern: an era's dominant artifact becomes its
+cosmology (clockwork → Laplace's demon; steam → heat death; telegraph →
+switchboard mind; computer → mind-as-program). Its value is explicitly *not* a
+verdict on the content — `METHOD_AS_STATED` says "claim content: none.
+suspicion + gradient" — but a source of **gap structure**: the shape of what
+each metaphor could not see, recoverable now because the instance closed.
+
+It makes two pointers into this folder. `era_metaphor_audit.py` checks both.
+
+| gap | verdict | where |
+|---|---|---|
+| **G1** missing slot | honest, unfalsifiable-until-superseded — *and a narrower transfer is reachable now* | `SHB_024` |
+| **G2** imported boundary | lands; pointer `SHB_002` → **`SHB_001`** | `SHB_019`, `SHB_020` |
+| **G3** ceiling from substrate | lands, on `SHB_010`, and carries it further | `SHB_021` |
+| **G4** unlocatable exterior | "two routes, same hole" confirmed; pointer layer 3 → **layer 2** | `SHB_022` |
+
+**Both pointers were off by one, in the same direction, and both corrections
+made the delivered case stronger.** `SHB_002` is the downstream consequence;
+`SHB_001` is the claim that actually catches an imported boundary — additivity
+over volume, refuted by the area law at 61 decades. And layer 3 is the
+resolution knob, while the unlocatable exterior is layer 2, `VOID`, where
+`cross_frame_ratio()` *raises* — a refusal enforced in code is a stronger form
+of "cannot locate" than a knob is.
+
+**G2's "all three" is three different situations.** Additive capacity: caught
+natively. Discrete cells: caught **only under external audit**, at `SHB_014`,
+after `LADDER.md` arrived. Finite state: taken in **two steps with only the
+first marked** — finite *entropy* is a physics result out of black-hole
+thermodynamics, and reading it as finite *state in bits* is a further step this
+folder takes at `SHB_001` without marking it. That is a **fourth** interpretive
+step; `SHB_014` had said three. Its falsifier did not fire, because it asks for
+a Planck-length measurement while the failure that actually happened — one more
+unnamed step, supplied by the next reader — had no falsifier attached. G-FIT.
+
+**G3 is the sharpest landing, and the module convicts itself.** `multiscale.py`
+sources its architecture set to computing practice in its own docstring —
+adaptive mesh refinement, level-of-detail, lazy evaluation. `SHB_010`'s 216
+decades is therefore a spread over **what our machines do**, not over what is
+possible. That doesn't weaken it; it carries it further than `SHB_010` claimed:
+the space a level stack would be drawn from **is not enumerable from inside**,
+because every member of it is an artifact of ours.
+
+**Where the table is weaker than the method.** Four instances, four superseded
+— a sample selected on the outcome under test, so no base rate is recoverable,
+and the document names a counterexample itself (clockwork mechanism, "partly
+right about orbits"). The **method survives this and the table does not**:
+`METHOD_AS_STATED` disclaims content, and a gradient over hindsight cases needs
+no base rate. Reading "4 for 4" off the table asserts something the method
+already refused.
+
+**G1, made operational.** The gears case wasn't resolved by waiting — the slot
+for irreversibility came from one anomaly, the efficiency ceiling of heat
+engines, which the mechanical account could state and not explain. So the
+transferable move is narrower: **look where the current apparatus returns a
+term it cannot fill.** This folder already produces four —
+`consistency under lazy evaluation` = UNMEASURED, `memory-reuse factor` =
+UNDECLARED, `recurrence of the framing` = NOT_COLLECTED, `why any party states
+it` = UNREACHABLE. A candidate list, not the slot; whether the slot is among
+them is exactly what G1 says can't be known from here.
 
 See [`CLAIM_TABLE.md`](CLAIM_TABLE.md) for the falsifiers.

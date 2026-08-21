@@ -68,6 +68,13 @@ OPERANDS = [
     ("T_PLANCK (as a tick)", B.T_PLANCK, "INTERPRETED",
      "that time advances in ticks of this size is untested",
      math.log10(SHORTEST_RESOLVED_TIME / B.T_PLANCK)),
+    ("holographic bits as state", None, "INTERPRETED",
+     "Bekenstein/holographic gives finite ENTROPY, a black-hole\n"
+     "        thermodynamics result. Reading that entropy as finite STATE\n"
+     "        IN BITS is a further step, taken at SHB_001. Not a range\n"
+     "        extrapolation -- a category step, so no decade count.\n"
+     "        Added after ERA_METAPHOR.md G2; see era_metaphor_audit.py",
+     0.0),
     ("kT ln2 per cell-step", None, "INTERPRETED",
      "Landauer is validated on erasure at lab temperature; that a cell-step\n"
      "        IS an erasure is the assumption, not the formula",
@@ -210,12 +217,12 @@ def report():
     A("  VERDICT: LANDS. Sharpened, because the rung is broader than the")
     A("  defect and the narrower form is harder to wave off.")
     A("")
-    A("    %-24s %-12s %s" % ("operand", "kind", "decades extrapolated"))
+    A("    %-26s %-12s %s" % ("operand", "kind", "decades extrapolated"))
     for name, _, kind, note, dec in OPERANDS:
-        A("    %-24s %-12s %s"
+        A("    %-26s %-12s %s"
           % (name, kind, ("--" if dec == 0.0 else "%.1f" % abs(dec))))
     A("")
-    A("    the three that are not measurements:")
+    A("    the %d that are not measurements:" % len(oa["interpreted"]))
     for name, _, kind, note, dec in oa["interpreted"]:
         A("      %s" % name)
         A("        %s" % note)
@@ -224,12 +231,16 @@ def report():
       % (oa["n_numeric_in_range"], len(OPERANDS)))
     A("    are measured or exactly derived and used at their own scale.")
     A("    The extrapolation is not spread across them -- it is")
-    A("    CONCENTRATED IN THREE INTERPRETIVE STEPS: Planck length as a cell")
+    A("    CONCENTRATED IN FOUR INTERPRETIVE STEPS: Planck length as a cell")
     A("    (%.1f decades below the shortest length ever probed), Planck time"
       % abs(OPERANDS[9][4]))
     A("    as a tick (%.1f decades below the shortest interval ever"
       % abs(OPERANDS[10][4]))
-    A("    resolved), and kT ln2 per cell-step.")
+    A("    resolved), kT ln2 per cell-step, and holographic entropy read")
+    A("    as bits of state. The fourth was NOT in this table when it was")
+    A("    written -- ERA_METAPHOR.md G2 supplied it. Three named steps")
+    A("    became four under one more external audit, which is the")
+    A("    reachable failure mode SHB_014's falsifier does not ask for.")
     A("")
     A("    That is a stronger objection than the broad one, because it")
     A("    survives someone checking the constants: the constants are fine.")
@@ -355,8 +366,9 @@ def selftest():
     oa = operand_audit()
     ck("most numeric operands are measured or exactly derived, so 'every "
        "operand' overstates", oa["n_numeric_in_range"] >= 9)
-    ck("the interpretive steps are the extrapolation, and there are three",
-       len(oa["interpreted"]) == 3)
+    ck("the interpretive steps carry the extrapolation, and there are four "
+       "-- the fourth arrived from ERA_METAPHOR.md, after this table said "
+       "three", len(oa["interpreted"]) == 4)
     ck("Planck length as a cell sits >15 decades below the shortest probed "
        "length", abs(OPERANDS[9][4]) > 15.0)
     ck("Planck time as a tick sits >20 decades below the shortest resolved "

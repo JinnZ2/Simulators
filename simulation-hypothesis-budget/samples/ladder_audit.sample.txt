@@ -11,36 +11,47 @@ LADDER AUDIT -- the delivered rungs, checked against the code
   VERDICT: LANDS. Sharpened, because the rung is broader than the
   defect and the narrower form is harder to wave off.
 
-    operand                  kind         decades extrapolated
-    C                        MEASURED     --
-    HBAR                     MEASURED     --
-    KB                       MEASURED     --
-    G                        MEASURED     --
-    R_OBS                    MEASURED     --
-    AGE                      MEASURED     --
-    T_CMB                    MEASURED     --
-    RHO_CRIT                 MEASURED     --
-    L_PLANCK (number)        DERIVED      --
-    L_PLANCK (as a cell)     INTERPRETED  15.8
-    T_PLANCK (as a tick)     INTERPRETED  22.3
-    kT ln2 per cell-step     INTERPRETED  2.0
+    operand                    kind         decades extrapolated
+    C                          MEASURED     --
+    HBAR                       MEASURED     --
+    KB                         MEASURED     --
+    G                          MEASURED     --
+    R_OBS                      MEASURED     --
+    AGE                        MEASURED     --
+    T_CMB                      MEASURED     --
+    RHO_CRIT                   MEASURED     --
+    L_PLANCK (number)          DERIVED      --
+    L_PLANCK (as a cell)       INTERPRETED  15.8
+    T_PLANCK (as a tick)       INTERPRETED  22.3
+    holographic bits as state  INTERPRETED  --
+    kT ln2 per cell-step       INTERPRETED  2.0
 
-    the three that are not measurements:
+    the 4 that are not measurements:
       L_PLANCK (as a cell)
         that spacetime is discretised at this length is untested
       T_PLANCK (as a tick)
         that time advances in ticks of this size is untested
+      holographic bits as state
+        Bekenstein/holographic gives finite ENTROPY, a black-hole
+        thermodynamics result. Reading that entropy as finite STATE
+        IN BITS is a further step, taken at SHB_001. Not a range
+        extrapolation -- a category step, so no decade count.
+        Added after ERA_METAPHOR.md G2; see era_metaphor_audit.py
       kT ln2 per cell-step
         Landauer is validated on erasure at lab temperature; that a cell-step
         IS an erasure is the assumption, not the formula
 
-    'Every operand' is not what the table shows. 9 of 12 entries
+    'Every operand' is not what the table shows. 9 of 13 entries
     are measured or exactly derived and used at their own scale.
     The extrapolation is not spread across them -- it is
-    CONCENTRATED IN THREE INTERPRETIVE STEPS: Planck length as a cell
+    CONCENTRATED IN FOUR INTERPRETIVE STEPS: Planck length as a cell
     (15.8 decades below the shortest length ever probed), Planck time
     as a tick (22.3 decades below the shortest interval ever
-    resolved), and kT ln2 per cell-step.
+    resolved), kT ln2 per cell-step, and holographic entropy read
+    as bits of state. The fourth was NOT in this table when it was
+    written -- ERA_METAPHOR.md G2 supplied it. Three named steps
+    became four under one more external audit, which is the
+    reachable failure mode SHB_014's falsifier does not ask for.
 
     That is a stronger objection than the broad one, because it
     survives someone checking the constants: the constants are fine.

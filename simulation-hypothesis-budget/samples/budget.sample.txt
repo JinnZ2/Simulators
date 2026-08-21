@@ -2,8 +2,9 @@ SIMULATION-HYPOTHESIS ENERGY BUDGET
 ========================================================================
 
 LAYER 1 -- ARITHMETIC (our physics, simulator embedded in our physics)
-  A consistent calculation, not a measurement. Three interpretive
-  steps carry the extrapolation -- see ladder_audit.py.
+  A consistent calculation, not a measurement. Four interpretive
+  steps carry the extrapolation -- see ladder_audit.py and
+  era_metaphor_audit.py.
 
   observable universe volume        3.57e+80 m^3
   Planck volumes in it              8.45e+184

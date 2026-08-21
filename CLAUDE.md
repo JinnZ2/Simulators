@@ -4115,8 +4115,55 @@ underneath).
   one relabel answers both. **Nothing was retuned**: every rung that
   landed landed on a *label* or a *claim*, and no number in any of the
   three modules changed, which is what the ladder's own first word
-  ("arithmetic") already said. Eighteen claims `SHB_001..018`, one
-  REFUTED. Stdlib only, CC0.
+  ("arithmetic") already said. **`ERA_METAPHOR.md`** is a second
+  outside audit, landed verbatim and checked in `era_metaphor_audit.py`
+  (selftest 18/18): it places the simulation hypothesis as the current
+  instance of artifact-becomes-cosmology (clockwork → Laplace's demon,
+  steam → heat death, telegraph → switchboard mind, computer →
+  mind-as-program) and is explicit that this reaches the hypothesis'
+  **selection** and not its truth value. **`SHB_019`/`SHB_022`: both of
+  its pointers into the claim table are off by one, in the same
+  direction, and both corrections make the auditor's case stronger** —
+  `SHB_002` → `SHB_001` (the downstream consequence vs the claim that
+  actually catches an imported boundary, additivity refuted by the area
+  law), and "Layer 3" → layer 2 `VOID` (the resolution knob vs the
+  cross-frame ratio that *raises* in code, a stronger form of "cannot
+  locate" than a knob). **`SHB_019`, the sharp decomposition:** "all
+  three imported boundaries" is three different situations — additive
+  capacity CAUGHT NATIVELY, discrete cells CAUGHT ONLY UNDER EXTERNAL
+  AUDIT (`SHB_014`, after `LADDER.md`), finite state taken in TWO STEPS
+  with only the first marked, since finite *entropy* is a black-hole
+  thermodynamics result and reading it as finite *state in bits* is a
+  further step taken at `SHB_001` unmarked. **`SHB_020`:** that is a
+  FOURTH interpretive step where `SHB_014` said three, and **`SHB_014`'s
+  falsifier did not fire** — it asks for a Planck-length measurement
+  while the failure that occurred (one more unnamed step, supplied by
+  the next external reader) had no falsifier attached at all; G-FIT, and
+  the count is amended 3 → 4 in `budget.py` and `ladder_audit.py`.
+  **`SHB_021`, the sharpest landing, where the module convicts itself:**
+  `multiscale.py` sources its architecture set to computing practice *in
+  its own docstring* (AMR, level-of-detail, lazy evaluation), so
+  `SHB_010`'s 216 decades is a spread over **what our machines do** —
+  which carries `SHB_010` further than it claimed, since the space a
+  level stack would be drawn from **is not enumerable from inside**,
+  every member of it being an artifact of ours. **`SHB_023`:** the
+  reference class is selected on the dependent variable (4 instances, 4
+  superseded; the non-superseded ones are outside the frame and the
+  document names a candidate itself, clockwork mechanism "partly right
+  about orbits") — so **the METHOD survives and the TABLE does not**,
+  since `METHOD_AS_STATED` disclaims content outright and a gradient over
+  hindsight cases needs no base rate; third instance of the
+  frame-selected-on-the-variable shape after `UNI_126` and
+  `presented-binary`. **`SHB_024`:** G1 is unfalsifiable-until-superseded
+  as stated and says so, but the gears case was not resolved by waiting —
+  the slot for irreversibility came from one anomaly the mechanical
+  account could state and not explain — so the narrower transferable move
+  is *look where the apparatus returns a term it cannot fill*, and this
+  folder already produces four (`UNMEASURED`, `UNDECLARED`,
+  `NOT_COLLECTED`, `UNREACHABLE`); a candidate list, not the slot, with
+  the verdict left UNKNOWN per G1. Twenty-four claims `SHB_001..024`, one
+  REFUTED, two external audits run by someone who did not write the
+  claims. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
