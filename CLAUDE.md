@@ -4306,9 +4306,57 @@ underneath).
   is *look where the apparatus returns a term it cannot fill*, and this
   folder already produces four (`UNMEASURED`, `UNDECLARED`,
   `NOT_COLLECTED`, `UNREACHABLE`); a candidate list, not the slot, with
-  the verdict left UNKNOWN per G1. Twenty-four claims `SHB_001..024`, one
-  REFUTED, two external audits run by someone who did not write the
-  claims. Stdlib only, CC0.
+  the verdict left UNKNOWN per G1. **`EARTH_TRANSITIONS.md`** is a
+  third outside audit, checked in `earth_transitions.py` (selftest
+  20/20): a phase-transition count for Earth against Lloyd's 10^120 ops,
+  arriving with its own correction that the "eight major transitions"
+  are LABELS, each a coarse-grained envelope. **`SHB_025`, the first
+  independent confirmation of a number in this folder:** `budget.py`'s
+  Margolus–Levitin machinery on the universe's mass-energy over its age
+  gives **10^122.9** against the delivered 10^120, the 2.9-decade
+  residual being the mass-energy convention `SHB_006`(a) already names —
+  and the direction matters, since the two prior external audits landed
+  on labels and claims while this one lands on arithmetic and agrees.
+  **`SHB_026`:** the delivered 10^110 reproduces as atoms (10^50.1) ×
+  Planck ticks (10^60.4) = **10^110.5**, while `labels × atoms` is
+  10^51.0, sixty decades short — so **the factor of 8 contributes 0.9
+  decades to a 110-decade number** and the first pass was a *stepping*
+  count all along, which is `SHB_004` on a new substrate and *sharpens*
+  the delivered self-correction (the correction is worth 52 decades, the
+  thing corrected 0.9). **`SHB_027`:** 110 + 52 − 120 = **42** exactly,
+  so `1e52` is a multiplier and not the total it is presented as; read
+  as a total the count sits **68 decades under** the ceiling and the two
+  readings disagree on the sign. **`SHB_028`, the one that reverses the
+  headline:** multiplying a per-timestep stepping cost by a
+  per-transition count prices the same physics twice — a stepping model
+  already computes every transition that occurs — and under **every**
+  internally coherent model Planck-resolved Earth FITS (event-driven
+  labels-only 10^51.0 with 69 decades spare, event-driven nested 10^103.0
+  with 17, uniform Planck stepping 10^110.5 with 9), the overshoot
+  appearing only in the mixed one at 10^162.5. `SHB_010` landing on the
+  delivered result: the level stack was not specified and two stacks got
+  multiplied. **`SHB_029`:** the constructive version needs no
+  double-count — the delivered text says "four classes only, not
+  exhaustive", and the event-driven model breaks when the full nesting
+  reaches **69 decades** rather than 52, a reachable falsifier. Turning
+  the resolution knob **ran against expectation and the check is kept**:
+  pure stepping affords a timestep **9.5 decades finer than Planck
+  time**, headroom in the direction nobody asks for, which is the
+  delivered first pass's own "it FITS" from this side; with the nesting
+  as a multiplier the affordable timestep is **~0.2 seconds**,
+  human-scale, making the double-count visible without arithmetic.
+  **`SHB_030`:** the strongest thing in it is the thing it does not
+  claim — a count over the world's own **contents** rather than over
+  cells is architecture-independent where the cell counts are not, since
+  under `SHB_011` every consequence leaving a record must be computed by
+  any architecture that produces its own observation record and mineral
+  grains, ice cores and fossils are records, so a content count binds the
+  lazy architecture too; what it does not reach is the hypothesis
+  (`SHB_003` unchanged), and "four classes" is a floor enumerated by us,
+  `SHB_021` on a second substrate — which the delivered text reaches
+  itself in its closing line. Thirty claims `SHB_001..030`, one REFUTED,
+  three external audits run by someone who did not write the claims.
+  Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

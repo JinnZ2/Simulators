@@ -12,7 +12,10 @@ costs. stdlib, selftest 17/17, imports both and modifies neither.
 folder from outside it, checked rung by rung against the code. stdlib,
 selftest 16/16.
 `era_metaphor_audit.py` — the delivered [`ERA_METAPHOR.md`](ERA_METAPHOR.md),
-checked where it makes claims about this folder. stdlib, selftest 18/18. CC0.
+checked where it makes claims about this folder. stdlib, selftest 18/18.
+`earth_transitions.py` — the delivered
+[`EARTH_TRANSITIONS.md`](EARTH_TRANSITIONS.md), a phase-transition count for
+Earth against Lloyd's ceiling, checked. stdlib, selftest 20/20. CC0.
 
 ```
 python3 budget.py            # full report
@@ -349,5 +352,72 @@ term it cannot fill.** This folder already produces four —
 UNDECLARED, `recurrence of the framing` = NOT_COLLECTED, `why any party states
 it` = UNREACHABLE. A candidate list, not the slot; whether the slot is among
 them is exactly what G1 says can't be known from here.
+
+## Earth's transitions — a third audit, and the first confirmation
+
+[`EARTH_TRANSITIONS.md`](EARTH_TRANSITIONS.md) counts Earth's phase
+transitions against **Lloyd's ceiling of 10^120 ops** and arrives carrying its
+own correction: the "eight major transitions" are *labels*, each a
+coarse-grained envelope over nested transitions at every scale inside it.
+**That structural point is right and nothing here disputes it.** The
+arithmetic is what gets checked, because the arithmetic produces the headline.
+
+**The ceiling checks out — the first number in this folder confirmed from
+outside it.** `budget.py`'s Margolus–Levitin machinery on the universe's
+mass-energy over its age gives **10^122.9** against Lloyd's **10^120**, and
+the 2.9-decade residual is the mass-energy convention `SHB_006`(a) already
+names. Two prior external audits landed on labels and claims; this one lands
+on arithmetic and agrees.
+
+**The eight labels are not what produce 10^110.** Earth atoms = 10^50.1,
+Planck ticks in 4.54 Gyr = 10^60.4, product = **10^110.5**. `labels × atoms`
+alone is 10^51.0 — sixty decades short. **The factor of 8 contributes 0.9
+decades to a 110-decade number**, so the first pass was a *stepping* count all
+along and the resolution assumption supplied more than half of it. That
+*sharpens* the delivered self-correction: the correction is worth 52 decades
+and the thing corrected was worth 0.9.
+
+**`1e52` has to be a multiplier.** 110 + 52 − 120 = **42**, exactly. Read as a
+total — which is how "nested transitions, FOUR classes only: 1e52" presents it
+— the count sits 68 decades *under* the ceiling instead. The arithmetic is
+right and one label is wrong.
+
+**But multiplying prices the same physics twice.**
+
+| cost model | log₁₀ ops | coherent | verdict |
+|---|---|---|---|
+| event-driven, labels only | 51.0 | yes | fits, 69 decades spare |
+| event-driven, nested | 103.0 | yes | fits, 17 spare |
+| uniform Planck stepping | 110.5 | yes | fits, 9 spare |
+| stepping × nesting (as delivered) | 162.5 | **no** | **over by 43** |
+
+A stepping model already computes every transition that occurs; nesting adds
+nothing to its cost. An event-driven model pays per transition and does not
+step. **Under every internally coherent model, Planck-resolved Earth fits.**
+This is `SHB_010` landing on the delivered result — the level stack was not
+specified, and two stacks got multiplied.
+
+**The constructive version needs no double-count.** The delivered text says
+"four classes only — not exhaustive." Under the event-driven model the ceiling
+is reached when the full nesting is **69 decades** rather than 52. Enumerate
+17 more decades of transition classes and the claim becomes true on its own.
+
+Turning the resolution knob ran **against expectation**, and the check is
+kept: pure stepping affords a timestep **9.5 decades finer than Planck time**
+— headroom in the direction nobody asks for, which is the delivered first
+pass's own "it FITS" arriving from this side. With the nesting applied as a
+multiplier the affordable timestep is **~0.2 seconds**, human-scale, which
+makes the double-count visible without any arithmetic.
+
+**The strongest thing in it is the thing it does not claim.** A count over the
+world's own *contents* rather than over cells is architecture-independent in a
+way the cell counts are not: under `SHB_011` every consequence that leaves a
+record must be computed by any architecture that can produce its own
+observation record, and mineral grains, ice cores and fossils are records. So
+a content count binds the lazy architecture too. What it does *not* reach is
+the hypothesis — both operands are our physics about a simulator in our
+physics, so `SHB_003` applies unchanged — and "four classes" is a floor
+enumerated by us, `SHB_021` on a second substrate. The delivered text reaches
+that itself, in its closing line: the eight-label count is a map artifact.
 
 See [`CLAIM_TABLE.md`](CLAIM_TABLE.md) for the falsifiers.
