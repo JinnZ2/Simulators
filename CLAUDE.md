@@ -2864,8 +2864,53 @@ underneath).
   average. `LOG.md` records that it was added as a subfolder to be
   promoted only if the entry count grows, and that the audit was run
   against three models with three hits **before** the schema was written —
-  so the corpus is three cases and not a survey. Marker under exploration.
-  21 + 14 selftests green. Stdlib only, parses under Python 3.9, CC0.
+  so the corpus is three cases and not a survey.
+  **`OPEN.md` item 6** lands the anthropological/archaeological precedent
+  verbatim — the coupling variable is established in that literature
+  under the name **PROVISIONING REGIME** (Lupo 2019 "Hounds follow those
+  who feed them"; Mitchell 2025 *First Dogs*; Pacheco-Cobos &
+  Winterhalder, Belize; Mesoamerica's "a household's use of dogs affects
+  its investment in them"; Arctic isotope work where dog diets track
+  nearby human diets) — so provisioning is a variable regime with a cost
+  in one literature and a fixed coefficient or absent term in the
+  footprint, hunger and water models: **third silo, same routing
+  failure**, with the reverse direction (de-provisioning under seasonal
+  scarcity, animal re-coupled to its own foraging envelope, re-imported
+  when supply returns) recorded as **not found in one pass** rather than
+  absent. **`provisioning.py`** (selftest 25/25) builds what item 6
+  points at. Three hypotheses for isotopic spread — `MOBILITY`,
+  `BREED_OR_STATUS`, `VARIABLE_COUPLING` — and **the within-individual
+  axis is the only one separating the third from the first two, which is
+  exactly the axis a years-averaging tissue destroys**: bone collagen is
+  **12.2× too coarse** for a seasonal feature at a G-RES margin of 2, so
+  in the tissue holding most of the delivered dog evidence the coupling
+  hypothesis *cannot fail* — `CONSTANT_SILENT` by construction, reported
+  as `UNASKABLE_IN_THIS_TISSUE` rather than as refuted; incremental
+  dentine and sequential enamel resolve it. On four delivered cases
+  (Harris et al. 2020 Labrador sled dogs, site heterogeneity explained by
+  coastal mobility; Arroyo Hondo, where a genetic *Canis latrans* returns
+  domestic-dog values so the category fails to predict the draw;
+  Vinca-Belo brdo cattle at 0.7–2.4‰ intra-tooth within one herd;
+  Schipluiden, where cattle deviate and same-site red deer and suids do
+  not): **2 of 4 blind by tissue, 4 of 4 never tested the standing
+  explanation against the coupling hypothesis, 2 of 4 carry a same-site
+  wild control**. Two hypotheses fitting one observation is held as a
+  field (`also_fits`), not as agreement. The cheapest next step is
+  Schipluiden's design pointed at dogs with a wild-canid control at the
+  same site — which Arroyo Hondo stumbled into by accident. **The audit's
+  first real unit:** intra-tooth amplitude is a coupling-strength
+  measurement (flat = fixed draw, high = supply-coupled), turning the Y/N
+  field into a quantity for archaeological cases — and
+  `amplitude_reading()` **raises `GeometryNotDeclared`** without a stated
+  sampling geometry, since dentine geometry changes the pattern and a
+  cross-study comparison without it compares two instruments; thresholds
+  are conventional, scaled to one delivered herd range, explicitly not
+  calibrated here. One ambiguity is **left open rather than resolved**:
+  "n=35 dogs, plus dentine n=4" reads either as subset or additional, so
+  both denominators are reported and neither is picked — the two differ
+  by under a percentage point, which is why it can stay open. Marker
+  under exploration. 21 + 14 + 25 selftests green. Stdlib only, parses
+  under Python 3.9, CC0.
   Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
