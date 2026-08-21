@@ -3,7 +3,9 @@
 What a Planck-resolution simulation of the observable universe would cost in
 energy, and which of those numbers mean anything.
 
-`budget.py` — stdlib only, deterministic, selftest 15/15. CC0.
+`budget.py` — uniform resolution. stdlib, selftest 15/15.
+`multiscale.py` — the same budget when resolution is *not* uniform. stdlib,
+selftest 13/13, imports `budget.py` and does not modify it. CC0.
 
 ```
 python3 budget.py            # full report
@@ -104,5 +106,48 @@ worked instance of arithmetic losing an argument that holds symbolically.
 - **Irreversibility.** Landauer only bites on *erasure*. A fully reversible
   simulator pays no Landauer cost at all — which is why Margolus–Levitin is
   reported alongside it, since the rate bound applies regardless.
+
+## Multiple resolution scales
+
+`budget.py` assumes one resolution everywhere. No real simulation does —
+adaptive mesh refinement, level-of-detail, lazy evaluation. `multiscale.py`
+computes the same budget when the level stack varies, with cost per level
+`f_i · V · T · c / L_i⁴` and the timestep tied to the cell.
+
+Volume fractions are derived from densities rather than assumed
+(`f = ρ_mean / ρ_local`): nuclear density is **1.81×10⁻⁴⁵** of the volume,
+condensed matter **4.17×10⁻³¹**.
+
+| architecture | cells | vs uniform Planck |
+|---|---|---|
+| uniform Planck | 6.82×10²⁴⁵ | 1 |
+| Planck inside nucleons only | 1.23×10²⁰¹ | 10⁻⁴⁵ |
+| coarse with fine patches at detectors | 6.82×10²⁰⁵ | 10⁻⁴⁰ |
+| atomic in matter, metre-scale elsewhere | 2.47×10¹¹⁷ | 10⁻¹²⁹ |
+| **render on observation only** | 1.29×10³⁰ events | **10⁻²¹⁶** |
+
+**Every architecture is dominated by one level** — the finest resolution times
+the volume fraction needing it. Neither factor is constrained by anything
+measurable from inside.
+
+The lazy limit is worth stating in units anyone can hold: the Landauer floor on
+rendering *every observation ever made, by everyone who has ever lived*, is
+**34 MJ — about a litre of gasoline.**
+
+That is not a result about simulation being cheap. `consistency_cost()` returns
+**UNMEASURED** and refuses to estimate: lazy evaluation is only sound if what
+gets rendered stays consistent with everything retrospectively checkable, and
+nobody has a bound on that. Quoting the event count alone would set that term
+to zero silently.
+
+**The spread is the result.** 216 decades across four architectures nobody has
+argued against. `SHB_004` found the answer moving 10¹¹⁴ under one undefended
+*parameter*; multi-scale moves it 216 decades under an undefended
+*architecture*. So the energy cost is not an underdetermined quantity — it is
+not a well-posed one until the level stack is specified, and no version of the
+hypothesis specifies one.
+
+What survives unchanged is the self-simulation result, because that argument is
+about state capacity rather than cost.
 
 See [`CLAIM_TABLE.md`](CLAIM_TABLE.md) for the falsifiers.

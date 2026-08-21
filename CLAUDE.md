@@ -4006,7 +4006,25 @@ underneath).
   names the three assumptions that are choices rather than physics,
   including irreversibility: Landauer bites only on erasure, so a fully
   reversible simulator pays none of it, which is why the rate bound is
-  reported alongside. Six claims `SHB_001..006`. Stdlib only, CC0.
+  reported alongside. **`multiscale.py`** (selftest 13/13, imports
+  `budget.py` unmodified) redoes it with a non-uniform level stack, cost
+  per level `f_i · V · T · c / L_i⁴` and volume fractions derived from
+  densities rather than assumed — nuclear is 1.81e-45 of the volume,
+  condensed matter 4.17e-31. **`SHB_007`:** across four plausible
+  architectures **every one is dominated by a single level**, the finest
+  resolution times the fraction of volume needing it, and neither factor
+  is constrained from inside. **`SHB_009`:** the render-on-observation
+  floor is ~1.29e30 measurement events → **34 MJ, about a litre of
+  gasoline**, 10^-216 of uniform Planck — and `consistency_cost()`
+  returns **UNMEASURED** rather than estimating, since lazy evaluation is
+  sound only if what is rendered stays consistent with everything
+  retrospectively checkable and no bound exists; quoting the event count
+  alone would set that term to zero silently. **`SHB_010`:** the answer
+  spans **216 decades** across architectures nobody has argued against,
+  so "the energy cost of simulating the universe" is not underdetermined
+  but **ill-posed** until the level stack is specified — while `SHB_005`
+  survives unchanged, being about state capacity and not cost. Ten claims
+  `SHB_001..010`. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
