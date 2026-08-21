@@ -3972,6 +3972,41 @@ underneath).
   (`rigidification-sensor`'s `locked_at`, `sustained-activation-gate`'s
   restore-vs-coupling, `grounding-layers/temporal_dysrhythmia`'s six
   timescales) and none is what either drop asked for. Stdlib only, CC0.
+- `simulation-hypothesis-budget/` — What a Planck-resolution
+  simulation of the observable universe would cost in energy, and which
+  of those numbers mean anything. `budget.py` (stdlib, selftest 15/15)
+  keeps three layers apart. **DECIDABLE:** 8.45×10¹⁸⁴ Planck volumes ×
+  8.07×10⁶⁰ Planck times = 6.82×10²⁴⁵ spacetime cells; two independent
+  floors on stepping them once each — Landauer (`k_B T ln2` against the
+  CMB at 2.725 K, the coldest sink *inside* this universe) at 1.78×10²²³ J,
+  and Margolus–Levitin (`2E/πℏ` ops/s, so a deadline implies an energy)
+  at 2.60×10¹⁹⁴ J — against a universe holding 2.73×10⁷¹ J.
+  **`SHB_001`, the correction:** information goes as AREA, so the
+  observable universe holds at most **3.36×10¹²³ bits** and the
+  Planck-volume count overshoots by **2.5×10⁶¹** before any energy is
+  assigned; redone holographically the floors fall by 60-odd decades and
+  the conclusion does not move. **`SHB_003`, the refusal:** the ratio
+  everyone wants — energy required over energy the simulator has — puts
+  our `ℏ`/`k_B`/`T_CMB`/`ℓ_P` in the numerator and a parent universe's
+  unknown budget in the denominator, so `cross_frame_ratio()` raises
+  unless the caller declares same-frame — `reasoning-gate` G-DIM enforced
+  in code. Layer 1 is therefore **not** an argument against the
+  simulation hypothesis; it measures whether *this* universe could host a
+  full-resolution simulation of itself, which it could not by ~150
+  decades. **`SHB_004`, where the argument actually lives:** cost scales
+  `L⁻⁴`, so Planck → visible light is ~114 decades cheaper, nothing
+  requires Planck resolution, and the resolution only has to beat what is
+  *measured* — the shortest length ever probed is ~10⁻¹⁹ m.
+  **`SHB_005`, the only frame-independent result:** no system can
+  simulate itself at full fidelity, since a copy plus one distinguishing
+  bit does not fit inside the copy's own state — and it is **decided
+  exactly, not numerically**, because at 10¹²³ bits float addition gives
+  `x + 1 == x` and reports the impossibility as possible, a bug caught by
+  the module's own selftest and kept as a worked instance. `SHB_006`
+  names the three assumptions that are choices rather than physics,
+  including irreversibility: Landauer bites only on erasure, so a fully
+  reversible simulator pays none of it, which is why the rate bound is
+  reported alongside. Six claims `SHB_001..006`. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
