@@ -4024,7 +4024,7 @@ underneath).
   so "the energy cost of simulating the universe" is not underdetermined
   but **ill-posed** until the level stack is specified — while `SHB_005`
   survives unchanged, being about state capacity and not cost.
-  **`consequence_frame.py`** (selftest 16/16, imports both, modifies
+  **`consequence_frame.py`** (selftest 17/17, imports both, modifies
   neither) turns from what the hypothesis would COST to what it would
   LICENSE, which is the question the idea actually gets used for. The
   inference under test is stated as an inference and not as anyone's
@@ -4071,8 +4071,99 @@ underneath).
   value — level stack (`SHB_010`), consistency term (`SHB_009`), frame of
   the ratio (`SHB_003`) — all three established here and none stated in
   any version of the hypothesis, so **a figure quoted without them is not
-  a disputed number but a quantity with no value yet**. Thirteen claims
-  `SHB_001..013`. Stdlib only, CC0.
+  a disputed number but a quantity with no value yet**. **`LADDER.md`**
+  is a four-rung audit of the folder **delivered from outside it**,
+  landed verbatim and checked rung by rung in `ladder_audit.py`
+  (selftest 16/16) rather than agreed with in prose; three verdicts were
+  possible and all three occurred. **`SHB_014`, rung 1 LANDS and the
+  sharpened form is stronger than the delivered one:** "every operand is
+  applied past its validated range" is not what the table shows — **9 of
+  12 entries are measured or exactly derived and used at their own
+  scale**, and the extrapolation is *concentrated in three interpretive
+  steps*, Planck length as a **cell** (15.8 decades below the shortest
+  length ever probed), Planck time as a **tick** (22.3 decades below the
+  shortest interval ever resolved), and `kT ln2` per cell-step; harder to
+  wave off, because it survives someone checking the constants, and **the
+  folder already held the refuting number** (`SHB_004` quotes 10⁻¹⁹ m
+  against the *resolution* assumption and never turned it back on its own
+  layer label). Layer 1 relabelled `DECIDABLE` → **`ARITHMETIC`**.
+  **`SHB_015`, rung 2 LANDS and it is standard physics rather than a
+  doubt:** Landauer bounds **erasure**, and Bennett's resolution of
+  Maxwell's demon is that **measurement can be reversible** — the demon
+  does not pay to look, it pays to forget — so pricing 1.29×10³⁰
+  measurement outcomes at `kT ln2` each prices the one operation Bennett
+  showed need not cost anything; the steelman (finite *reused* memory
+  must erase each outcome, so the count transfers unchanged) is exactly
+  what is never declared, and write-once storage pays **0 J** for the same
+  events, so one event count admits both 0 J and 3.37×10⁷ J.
+  **`SHB_013` is therefore REFUTED by its own falsifier** ("a fourth
+  required term") — the **first refuted claim in the folder**, arriving
+  from an auditor who did not write it, with the "may grow" hedge
+  deliberately NOT used to rescue it since that is the epicycle
+  `equivalence-field/claim_lineage.py` refuses; child `SHB_016` carries
+  four terms and the same falsifier, which can fire again. **`SHB_017`,
+  rung 3 does NOT land where aimed — checked in the code, not conceded in
+  prose:** `consistency_cost()` returns `UNMEASURED` with
+  `estimated_here=None` and multiscale's own selftest pins it, so the
+  retracted move is not the move this folder made; it lands one module
+  over, on `SHB_011` reading a 2×2 cell as EMPTY over **six consequences
+  the module authored itself** — not `CONSTANT_SILENT`, since the
+  opposite branch fires in 3 of 5 architectures, but a statement about
+  the fixtures, which the report now says. **`SHB_018`:** rung 4 is
+  already held by `SHB_003` in code, and its residue is rung 1's residue
+  reached from the other end — two of four rungs converge on one word, so
+  one relabel answers both. **Nothing was retuned**: every rung that
+  landed landed on a *label* or a *claim*, and no number in any of the
+  three modules changed, which is what the ladder's own first word
+  ("arithmetic") already said. **`ERA_METAPHOR.md`** is a second
+  outside audit, landed verbatim and checked in `era_metaphor_audit.py`
+  (selftest 18/18): it places the simulation hypothesis as the current
+  instance of artifact-becomes-cosmology (clockwork → Laplace's demon,
+  steam → heat death, telegraph → switchboard mind, computer →
+  mind-as-program) and is explicit that this reaches the hypothesis'
+  **selection** and not its truth value. **`SHB_019`/`SHB_022`: both of
+  its pointers into the claim table are off by one, in the same
+  direction, and both corrections make the auditor's case stronger** —
+  `SHB_002` → `SHB_001` (the downstream consequence vs the claim that
+  actually catches an imported boundary, additivity refuted by the area
+  law), and "Layer 3" → layer 2 `VOID` (the resolution knob vs the
+  cross-frame ratio that *raises* in code, a stronger form of "cannot
+  locate" than a knob). **`SHB_019`, the sharp decomposition:** "all
+  three imported boundaries" is three different situations — additive
+  capacity CAUGHT NATIVELY, discrete cells CAUGHT ONLY UNDER EXTERNAL
+  AUDIT (`SHB_014`, after `LADDER.md`), finite state taken in TWO STEPS
+  with only the first marked, since finite *entropy* is a black-hole
+  thermodynamics result and reading it as finite *state in bits* is a
+  further step taken at `SHB_001` unmarked. **`SHB_020`:** that is a
+  FOURTH interpretive step where `SHB_014` said three, and **`SHB_014`'s
+  falsifier did not fire** — it asks for a Planck-length measurement
+  while the failure that occurred (one more unnamed step, supplied by
+  the next external reader) had no falsifier attached at all; G-FIT, and
+  the count is amended 3 → 4 in `budget.py` and `ladder_audit.py`.
+  **`SHB_021`, the sharpest landing, where the module convicts itself:**
+  `multiscale.py` sources its architecture set to computing practice *in
+  its own docstring* (AMR, level-of-detail, lazy evaluation), so
+  `SHB_010`'s 216 decades is a spread over **what our machines do** —
+  which carries `SHB_010` further than it claimed, since the space a
+  level stack would be drawn from **is not enumerable from inside**,
+  every member of it being an artifact of ours. **`SHB_023`:** the
+  reference class is selected on the dependent variable (4 instances, 4
+  superseded; the non-superseded ones are outside the frame and the
+  document names a candidate itself, clockwork mechanism "partly right
+  about orbits") — so **the METHOD survives and the TABLE does not**,
+  since `METHOD_AS_STATED` disclaims content outright and a gradient over
+  hindsight cases needs no base rate; third instance of the
+  frame-selected-on-the-variable shape after `UNI_126` and
+  `presented-binary`. **`SHB_024`:** G1 is unfalsifiable-until-superseded
+  as stated and says so, but the gears case was not resolved by waiting —
+  the slot for irreversibility came from one anomaly the mechanical
+  account could state and not explain — so the narrower transferable move
+  is *look where the apparatus returns a term it cannot fill*, and this
+  folder already produces four (`UNMEASURED`, `UNDECLARED`,
+  `NOT_COLLECTED`, `UNREACHABLE`); a candidate list, not the slot, with
+  the verdict left UNKNOWN per G1. Twenty-four claims `SHB_001..024`, one
+  REFUTED, two external audits run by someone who did not write the
+  claims. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

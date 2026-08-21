@@ -90,6 +90,19 @@ class Consequence(object):
 
 
 def consequences():
+    """SIX HAND-PLACED CASES, authored by this module. Not a survey.
+
+    SHB_011 reads a cell of a 2x2 as EMPTY over this list, and an empty cell
+    over an authored fixture set is a statement about the fixtures. What keeps
+    it from being a null reported as an instrument: the opposite branch is
+    reachable and fires -- 3 of 5 architectures DO fill the cell -- so the
+    check is not CONSTANT_SILENT. What it is not: a claim that no such
+    consequence exists. Adding one that is observed, and uncomputed under an
+    architecture that can still produce its own observation record, would
+    refute SHB_011. Recorded after the delivered LADDER.md rung 3, which
+    retracts that move at a site this folder did not make it (see
+    ladder_audit.py) and lands here instead.
+    """
     return [
         Consequence("a sentence spoken and heard", 1.0e-2, "diffuse_gas",
                     True, "acoustic wavelength; the listener is the record"),
@@ -245,7 +258,9 @@ def report():
     A("")
     A("-" * 72)
     A("")
-    A("  CONSEQUENCES USED (ordinary ones, placed by scale and region)")
+    A("  CONSEQUENCES USED -- %d hand-placed cases authored by this module,"
+      % len(consequences()))
+    A("  not a survey. The empty cell below is a statement about these.")
     for c in consequences():
         A("    %-40s %-9s %-17s %s"
           % (c.name, B.sci(c.length_m, 1), c.region,
@@ -393,6 +408,10 @@ def selftest():
     ck("the population grain is NOT_COLLECTED, not UNREACHABLE -- a "
        "collection limit, not a reachability one",
        g["per_population_over_time"]["state"] == "NOT_COLLECTED")
+
+    ck("the report says the consequence list is authored and not a survey, "
+       "so SHB_011's empty cell is not presented as a survey result",
+       "not a survey" in report())
     ck("every required term names an existing claim id",
        all(cid.startswith("SHB_") for _, cid, _ in terms_required()))
 

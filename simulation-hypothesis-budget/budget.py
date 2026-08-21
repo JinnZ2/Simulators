@@ -8,8 +8,19 @@ would cost, and which of those numbers mean anything.
 
 Three layers, kept apart on purpose:
 
-  DECIDABLE      counts and energy floors computed in our own physics, about
-                 a simulator embedded in our own physics. Real numbers.
+  ARITHMETIC     counts and energy floors computed in our own physics, about
+                 a simulator embedded in our own physics. A consistent
+                 calculation -- NOT a measurement of anything. The constants
+                 are measured and used at their own scale; FOUR interpretive
+                 steps are not: Planck length as a cell (~15.8 decades below
+                 the shortest length ever probed), Planck time as a tick
+                 (~22.3 decades below the shortest interval ever resolved),
+                 kT ln2 per cell-step, and holographic entropy read as bits
+                 of state. Relabelled from DECIDABLE after the delivered
+                 LADDER.md; the fourth step was added after the delivered
+                 ERA_METAPHOR.md. Three named steps became four under one
+                 more external audit. See ladder_audit.py and
+                 era_metaphor_audit.py. No number moved.
   VOID           the ratio "energy required / energy available to a simulator"
                  when the simulator is in a parent universe. Both operands must
                  be properties of ONE object; they are not. Refused, not
@@ -70,7 +81,7 @@ def sci(x, sig=3):
     return "%.*fe%+d" % (sig - 1, m, e)
 
 
-# --- layer 1: DECIDABLE ----------------------------------------------------
+# --- layer 1: ARITHMETIC ---------------------------------------------------
 
 def counts():
     """Planck cells in the observable universe over its history."""
@@ -204,7 +215,11 @@ def report():
     A("SIMULATION-HYPOTHESIS ENERGY BUDGET")
     A("=" * 72)
     A("")
-    A("LAYER 1 -- DECIDABLE (our physics, simulator embedded in our physics)")
+    A("LAYER 1 -- ARITHMETIC (our physics, simulator embedded in our "
+      "physics)")
+    A("  A consistent calculation, not a measurement. Four interpretive")
+    A("  steps carry the extrapolation -- see ladder_audit.py and")
+    A("  era_metaphor_audit.py.")
     A("")
     A("  observable universe volume        %s m^3" % sci(c["volume_m3"]))
     A("  Planck volumes in it              %s" % sci(c["n_planck_volumes"]))

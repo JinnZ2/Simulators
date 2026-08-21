@@ -1,0 +1,152 @@
+LADDER AUDIT -- the delivered rungs, checked against the code
+========================================================================
+
+  Nothing here retunes a number. Every rung that lands lands on a
+  LABEL or on a CLAIM. The ladder's own first word is 'arithmetic',
+  and the arithmetic is not in dispute.
+
+------------------------------------------------------------------------
+
+  RUNG 1 -- 'a consistent calculation with unverified operands'
+  VERDICT: LANDS. Sharpened, because the rung is broader than the
+  defect and the narrower form is harder to wave off.
+
+    operand                    kind         decades extrapolated
+    C                          MEASURED     --
+    HBAR                       MEASURED     --
+    KB                         MEASURED     --
+    G                          MEASURED     --
+    R_OBS                      MEASURED     --
+    AGE                        MEASURED     --
+    T_CMB                      MEASURED     --
+    RHO_CRIT                   MEASURED     --
+    L_PLANCK (number)          DERIVED      --
+    L_PLANCK (as a cell)       INTERPRETED  15.8
+    T_PLANCK (as a tick)       INTERPRETED  22.3
+    holographic bits as state  INTERPRETED  --
+    kT ln2 per cell-step       INTERPRETED  2.0
+
+    the 4 that are not measurements:
+      L_PLANCK (as a cell)
+        that spacetime is discretised at this length is untested
+      T_PLANCK (as a tick)
+        that time advances in ticks of this size is untested
+      holographic bits as state
+        Bekenstein/holographic gives finite ENTROPY, a black-hole
+        thermodynamics result. Reading that entropy as finite STATE
+        IN BITS is a further step, taken at SHB_001. Not a range
+        extrapolation -- a category step, so no decade count.
+        Added after ERA_METAPHOR.md G2; see era_metaphor_audit.py
+      kT ln2 per cell-step
+        Landauer is validated on erasure at lab temperature; that a cell-step
+        IS an erasure is the assumption, not the formula
+
+    'Every operand' is not what the table shows. 9 of 13 entries
+    are measured or exactly derived and used at their own scale.
+    The extrapolation is not spread across them -- it is
+    CONCENTRATED IN FOUR INTERPRETIVE STEPS: Planck length as a cell
+    (15.8 decades below the shortest length ever probed), Planck time
+    as a tick (22.3 decades below the shortest interval ever
+    resolved), kT ln2 per cell-step, and holographic entropy read
+    as bits of state. The fourth was NOT in this table when it was
+    written -- ERA_METAPHOR.md G2 supplied it. Three named steps
+    became four under one more external audit, which is the
+    reachable failure mode SHB_014's falsifier does not ask for.
+
+    That is a stronger objection than the broad one, because it
+    survives someone checking the constants: the constants are fine.
+    What is unverified is one physical READING of them. And the
+    folder already had the refuting number -- SHB_004 quotes 10^-19 m
+    as the shortest probed length, against the resolution assumption,
+    and never turned it back on its own layer label.
+
+    WHAT CHANGES: the label. 'DECIDABLE ... Real numbers' becomes
+    'a consistent calculation, with the interpretive steps named'.
+    No number moves.
+
+------------------------------------------------------------------------
+
+  RUNG 2 -- 'nobody has an energy cost for a measurement outcome'
+  VERDICT: LANDS, and it is standard physics rather than a doubt.
+
+    Landauer bounds ERASURE at kT ln2. Bennett's resolution of
+    Maxwell's demon is that MEASUREMENT can be done reversibly --
+    the demon does not pay to look, it pays to forget.
+
+    validated on   erasure in a thermal reservoir, ~kT, lab T
+    applied to     production of a measurement outcome
+
+    events counted                        1.29e+30
+    if every event is eventually erased   3.37e+7 J
+    if written once and never reclaimed   0 J
+    memory-reuse factor                   UNDECLARED
+
+    The steelman is why this is a missing declaration and not an
+    arithmetic error: a simulator with finite reused memory must
+    erase each outcome to make room, and then the count transfers
+    unchanged. Nothing states that. Its negation pays zero.
+
+    So the litre of gasoline is a floor on a DIFFERENT OPERATION
+    than the one it is named for.
+
+------------------------------------------------------------------------
+
+  RUNG 3 -- 'I upgraded a null result into an instrument. Retract.'
+  VERDICT: LANDS_ELSEWHERE.
+
+    Checked, not conceded. At the site the rung names:
+      multiscale.consistency_cost  UNMEASURED
+      estimated_here               None
+      rung lands here: NO
+    The consistency term is returned as UNMEASURED and refuses to
+    estimate, and multiscale's own selftest pins that. The retracted
+    move is not the move this folder made.
+
+    It does land one module over, in a weaker form. SHB_011 reports
+    a 2x2 cell as EMPTY, which is an absence reported as a result.
+      fixtures in the consequence list   6, authored by the module
+      opposite branch reachable          True (3 of 5 architectures
+                                         fill the cell)
+    So it is not CONSTANT_SILENT -- the branch fires. But an empty
+    cell over an authored fixture set is a statement about the
+    fixtures, and SHB_011 does not say so. It should.
+
+------------------------------------------------------------------------
+
+  RUNG 4 -- "'is it possible' NOT DONE, and can't be done from
+  inside with current instruments"
+  VERDICT: ALREADY_HELD.
+
+    cross_frame_ratio refuses across frames: True
+    SHB_003 already states that layer 1 is not an argument about whether
+    the hypothesis is true -- it measures whether THIS universe could
+    host a full-resolution simulation of itself.
+
+    Residue: the layer label. 'DECIDABLE ... Real numbers' reads as
+    standing that rung 1 shows layer 1 does not have.
+    Same residue as rung 1, reached from the other end. Two of four
+    rungs converge on one word.
+
+------------------------------------------------------------------------
+
+  CONSEQUENCE: SHB_013 IS REFUTED BY ITS OWN FALSIFIER
+
+    SHB_013 listed three terms required before a cost figure has a
+    value, and its falsifier read: 'a fourth required term'. Rung 2
+    supplies one. SHB_013 also hedged 'may grow' -- and rescuing the
+    claim with that hedge is the epicycle equivalence-field's
+    claim_lineage.py refuses, so the falsifier is honored as written.
+
+    term                     claim     why
+    the level stack          SHB_010   the answer spans 216 decades acros
+    the consistency term     SHB_009   UNMEASURED under lazy evaluation; 
+    the frame of the ratio   SHB_003   required/available is VOID across 
+    the erasure count        SHB_015   Landauer prices erasure; the event
+
+    SHB_013 -> REFUTED. Child claim SHB_016 carries four terms and
+    the same falsifier, which can fire again.
+
+    This is the first REFUTED claim in this folder, and it arrived
+    from outside it -- written by someone who did not write the
+    claims. Worth stating plainly rather than filing quietly: the
+    two rungs that land, land. One claim did not survive them.

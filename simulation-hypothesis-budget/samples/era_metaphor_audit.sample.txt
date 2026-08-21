@@ -1,0 +1,144 @@
+ERA METAPHOR AUDIT -- the delivered gaps, where they are checkable
+========================================================================
+
+  The delivered text is careful about its own scope: REACHES the
+  hypothesis' selection, DOESN'T reach its truth value, and
+  METHOD_AS_STATED disclaims content outright. Nothing below
+  disputes that scoping. What is checked is the two pointers the
+  document makes into this folder, and one property of its table.
+
+------------------------------------------------------------------------
+
+  G2 -- IMPORTED BOUNDARY. 'discrete cells, finite state, additive
+  capacity ... my audit half-caught at SHB_002 and stopped.'
+
+  POINTER: SHB_002 -> SHB_001. Off by one, and the correction helps the gap.
+
+    SHB_002 is the downstream consequence (two floors still exceed
+    the universe's energy). SHB_001 is the claim that actually
+    catches an imported boundary -- additivity over volume, refuted
+    by the area law. The correction makes the gap's own case better:
+    the catch was real and it was one of three.
+
+  And 'all three' covers three different situations:
+
+    additive capacity    CAUGHT NATIVELY, and refuted by 61 decades
+      at SHB_001
+        claim text says information is bounded by area, not
+        volume
+      checked against the published claim text: holds
+
+    discrete cells       CAUGHT ONLY UNDER EXTERNAL AUDIT
+      at SHB_014
+        named as an interpretive step, but only after LADDER.md
+        arrived from outside the folder
+      checked against the published claim text: holds
+
+    finite state         TWO STEPS, and the folder marks only the first
+      at SHB_001 (partly)
+        finite ENTROPY is a physics result (Bekenstein /
+        holographic, from black-hole thermodynamics, not from
+        computing). reading that entropy as finite STATE IN BITS
+        is a further interpretive step, and the folder takes it
+        at SHB_001 without marking it
+      checked against the published claim text: holds
+
+    So: 1 caught natively, 1 only after an external audit arrived,
+    1 taken in two steps with only the first marked.
+    'Half-caught and stopped' is right, and it is three different
+    halves.
+
+    CONSEQUENCE: SHB_014 named THREE interpretive steps. Finite
+    entropy -> finite state in bits is a FOURTH, and SHB_014's
+    falsifier does not fire on it -- that falsifier asks for a
+    Planck-length measurement or a demonstration that the steps are
+    forced. The reachable failure mode (one more unnamed step) has
+    no falsifier attached and the unreachable one does. G-FIT again.
+
+------------------------------------------------------------------------
+
+  G3 -- CEILING FROM SUBSTRATE. 'the universe does what our best
+  machine does, and no more.'
+
+  VERDICT: LANDS, on SHB_010, and the module says it itself.
+
+    multiscale.py sources its architecture set to computing practice
+    in its own docstring:
+      adaptive mesh refinement, level-of-detail, lazy evaluation
+    architectures compared: 4, plus the lazy limit
+      uniform_planck, planck_in_nucleons, atomic_in_matter,
+      coarse_with_fine_patches, lazy_on_observation
+
+    SHB_010 reports 216 decades 'across architectures nobody has argued
+    against'. Those are architectures WE BUILD. So the spread is a
+    spread over what our machines do, not over what is possible.
+
+    This does not weaken SHB_010. It carries it past what SHB_010
+    claims: the quantity is not merely ill-posed pending a level
+    stack -- the SPACE the level stack would be drawn from is not
+    enumerable from inside, because every member of it is an
+    artifact of ours. A ceiling read off our own repertoire.
+
+------------------------------------------------------------------------
+
+  G4 -- UNLOCATABLE EXTERIOR. 'Layer 3 in the repo is exactly this
+  gap ... two routes, same hole.'
+
+  POINTER: layer 3 -> layer 2 (VOID). Off by one, same direction as
+  G2, and again the correction is the sharper match.
+    layers, in order: ARITHMETIC, VOID, DOMINANT KNOB
+    the unlocatable exterior is the parent universe, and the layer
+    that refuses to reach it is VOID -- cross_frame_ratio() raising
+    because the denominator is a property of an object we cannot
+    measure. Layer 3 is the resolution knob, a different gap. The
+    corrected pointer is a sharper match: VOID is a refusal in code,
+    which is a stronger form of 'cannot locate' than a knob is.
+
+    TWO ROUTES, SAME HOLE: CONFIRMED. True
+    Arrived at from arithmetic here (a ratio whose denominator is a
+    property of an object we cannot measure) and from the pattern
+    there (every prior metaphor smuggled its exterior back in).
+
+------------------------------------------------------------------------
+
+  THE REFERENCE CLASS -- 4 instances, 4 superseded
+
+    A rate is not readable from this: selected on the dependent variable.
+    Metaphors that were NOT superseded are not in the frame, and the
+    document names a candidate itself -- clockwork mechanism,
+    granted partly right about orbits.
+
+    THE METHOD SURVIVES THIS AND THE TABLE DOES NOT.
+    METHOD_AS_STATED says 'prior instances are not evidence against
+    the current one' and 'claim content: none'. That disclaimer is
+    exactly what makes the selection harmless -- a gradient over
+    hindsight cases needs no base rate. Anyone reading '4 for 4' off
+    the table is reading something the method already refused.
+
+    third instance in this repo of a frame selected on the variable
+    under test -- uninstrumented UNI_126 on case 021's T1, and
+    presented-binary's option-space audit
+
+------------------------------------------------------------------------
+
+  G1 -- MISSING SLOT. 'the metaphor can't name it, by construction.'
+
+  VERDICT: honest, and unfalsifiable-until-superseded as stated.
+  A NARROWER TRANSFER IS REACHABLE NOW.
+
+    The gears case was not resolved by waiting. The slot for
+    irreversibility was supplied by attention to one anomaly -- the
+    efficiency ceiling of heat engines, which the mechanical account
+    could state and not explain. So the transferable move is
+    narrower than 'wait for a successor': look where the current
+    apparatus RETURNS A TERM IT CANNOT FILL.
+
+    That is answerable from inside. This folder already produces 4:
+      consistency under lazy evaluation      UNMEASURED     multiscale
+      memory-reuse factor / erasure count    UNDECLARED     ladder_audit
+      recurrence of the framing over time    NOT_COLLECTED  consequence_frame
+      why any party states the hypothesis    UNREACHABLE    consequence_frame
+
+    A candidate list, not the slot. Whether the slot is in it is
+    exactly what G1 says cannot be known from here -- so the list
+    is the deliverable and the verdict is UNKNOWN, and G1 says it must be.
