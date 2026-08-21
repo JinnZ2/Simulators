@@ -2801,6 +2801,71 @@ underneath).
   findings are objections and all were reachable only because the file
   specified its calibration set and its falsifier in advance. Seven findings;
   the material gave seven. One hundred and fifty-three claims `UNI_001..153`.
+  **`coupling_audit/`** is a subfolder added alongside the register's
+  material, asking a **different question** and deliberately not adding a
+  mechanism. The register asks whether an instrument's constitution
+  prevents a quantity from appearing at all; this asks whether a
+  coupling-variability capability a model **already has, and names in its
+  own vocabulary**, is applied evenly across the agents drawing on the
+  flow it measures — the quantity can be registered, the machinery
+  exists, and it runs on some agents and not others, so an exclusion
+  register finds nothing there. Four verdicts (`ABSENT_NO_MACHINERY` /
+  `ABSENT_MACHINERY_PRESENT` / `PRESENT_FIXED` / `PRESENT_COUPLED`) and
+  four gate types (`species` / `market_output` / `unstated` / `other`),
+  each recorded with whether the rule is stated or falls out of a
+  definition. Three `MODEL_SEEDED` seed entries: **IPC** (the rCSI *is* a
+  condition-dependent consumption term, run on humans only; companion
+  animals absent, livestock present as price and asset terms and never as
+  caloric draw; gate species, unstated → `ABSENT_MACHINERY_PRESENT`),
+  **per-capita consumption-based carbon footprint** (pet spending captured
+  inside COICOP domains and attributed to the human purchaser; OECD
+  equivalence scales weight non-identical household members and carry a
+  **child** term and no animal term; gate is the denominator, implicit →
+  `PRESENT_FIXED`, misattributed), and **FAO LEAP / GLEAM** (drinking +
+  service + feed water with breed- and climate-level variation — the most
+  developed coupling machinery of the three, built for animals — and
+  companion animals absent because the system boundary is production
+  systems and supply chains; gate stated → `ABSENT_MACHINERY_PRESENT`,
+  **the sharpest of the three because the exclusion criterion is
+  salability, not calories, water or biology**). `score()` **derives** the
+  verdict from the fields and reports agreement with the declared one,
+  which required one schema addition beyond the specified field list
+  (`agents_coupled`) — without it an entry cannot disagree with itself,
+  and `PRESENT_FIXED` is not distinguishable from `ABSENT_*`. Gate types
+  run against `MECHANISMS` by **importing** the tuple rather than copying
+  it: `species` → **`AUDIT_ASYMMETRY`**, STRONG ("guard fires on one side
+  only", one level up — the asymmetry in a model's machinery rather than
+  in an audit's hedging), so **no candidate ninth is claimed**;
+  `market_output` → `PROXY_SUBSTITUTION` and `unstated` →
+  `BUDGET_BOUNDARY` are recorded PARTIAL and left unresolved, and the
+  ordinal is taken regardless since `MECHANISM_09`/`_10`/`_11` are
+  proposed in sibling folders against the same eight. `FALSIFIER.md`
+  states that a **stated, quantity-justified gate is a pass, not a hit** —
+  a species or market-category gate does not qualify however clearly it is
+  written. `OPEN.md` records five unresolved items and picks no number:
+  the companion-animal population spread (dogs ~470M–990M, cats
+  ~370M–600M, from pet-industry surveys counting owners or households
+  rather than animals, with **no global figure at all** for rabbits,
+  guinea pigs, birds, reptiles or fish); the peer-reviewed biomass series
+  cited rather than restated (Greenspoon et al., PNAS 2023 — wild
+  terrestrial mammals ≈20 Mt (95% CI 13–38), domestic dogs ≈20 Mt, cats
+  ≈2 Mt, cattle ≈420 Mt, humans ≈390 Mt; Nature Communications 2025 for
+  the ≈200 Mt 1850 baseline); the **routing failure** rather than
+  measurement gap (Okin 2017 PLOS One — US dogs and cats consume 19%±2% of
+  the dietary energy humans do and 33%±9% of the animal-derived energy;
+  Alexander et al. 2020 — global pet food land, GHG and freshwater:
+  published in petajoules and not entering the models that allocate under
+  constraint); by-product allocation by economic value rather than caloric
+  content, which lets the same calories be waste in one ledger and food in
+  another; and the **single-coefficient failure** — a fixed per-animal
+  draw must be wrong for at least one of the US pet-food case and the
+  free-ranging scavenger case, since trophic position is set by local
+  conditions, so what is needed is a condition variable and not a better
+  average. `LOG.md` records that it was added as a subfolder to be
+  promoted only if the entry count grows, and that the audit was run
+  against three models with three hits **before** the schema was written —
+  so the corpus is three cases and not a survey. Marker under exploration.
+  21 + 14 selftests green. Stdlib only, parses under Python 3.9, CC0.
   Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
