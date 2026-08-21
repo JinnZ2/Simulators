@@ -1,0 +1,25 @@
+  ok    2**k crosses at 399
+  ok    3**k crosses at 252
+  ok    N**2 crosses at 1e60
+  ok    N**3 crosses at 1e40
+  ok    crossover is the FIRST integer over the ceiling
+  ok    3**k crossover is tight
+  ok    base must exceed 1
+  ok    steiner DP is 3**k
+  ok    steiner DP at 36 terminals exceeds 1e17
+  ok    occupancy carries no terminal term
+  ok    occupancy rejects a zero arena
+  ok    search recovery averages (sites+1)/2 per cache
+  ok    memory recovery is one probe per cache
+  ok    memory beats search at these magnitudes
+  ok    ledger is caches times bits
+  ok    100 mm gives ~68 us offset
+  ok    offset and range invert
+  ok    range scales linearly with offset
+  ok    grid cells grow as the cube of resolution
+  ok    grid rejects a zero resolution
+  ok    every source carries a citation
+  ok    species caveat is carried in the sources
+  ok    platypus range is flagged as a model
+
+selftest 23/23
