@@ -1,0 +1,247 @@
+WHICH TISSUE CAN ASK THE QUESTION
+========================================================================
+
+  G-RES pairing: instrument averaging x margin (2.0) must not exceed
+  the feature being resolved -- one season, 180 days.
+
+  tissue                 averages  x margin  seq    resolves
+  bone_collagen          1095 d    2190 d    no     NO, 12.2x too coarse
+  incremental_dentine    30 d      60 d      yes    yes
+  sequential_enamel      30 d      60 d      yes    yes
+
+  bone_collagen          UNASKABLE_IN_THIS_TISSUE
+    the within-individual axis is averaged away before sampling; the
+    spread can only present as between-individual, so the coupling
+    hypothesis cannot fail here. Not refuted -- unasked.
+
+  incremental_dentine    SEPARABLE
+    sequential sampling resolves the within-individual axis
+
+  sequential_enamel      SEPARABLE
+    sequential sampling resolves the within-individual axis
+
+------------------------------------------------------------------------
+
+  THE THREE SIGNATURES
+
+  hypothesis         within   between  Sr       seasonal
+  MOBILITY           no       yes      yes      no
+  BREED_OR_STATUS    no       yes      no       no
+  VARIABLE_COUPLING  yes      yes      no       yes
+
+  The `within` column is the only one that separates
+  VARIABLE_COUPLING from the other two, and it is exactly the column
+  a years-averaging tissue removes. In bone collagen the coupling
+  hypothesis cannot fail -- which is not support for it. It is
+  CONSTANT_SILENT, in the null-harness sense, by construction.
+
+
+
+THE DELIVERED CASES
+========================================================================
+
+  MODEL_SEEDED throughout. One search pass, not independently
+  verified here, and no isotope value computed here.
+
+  Harris et al. 2020 -- Labrador Inuit sled dogs
+    tissue                 bone_collagen
+    n / sequential n       35 / 4
+    observation
+      Double Mer Point dogs the most heterogeneous of any site
+    standing explanation
+      MOBILITY -- long-distance movement of people and/or animals along
+      the coast
+    also fits              VARIABLE_COUPLING
+    tested against each other  NO
+    same-site wild control no
+    coupling separable     UNASKABLE_IN_THIS_TISSUE
+
+  Arroyo Hondo Pueblo -- 'What Makes a Dog?'
+    tissue                 bone_collagen
+    n / sequential n       7 / 0
+    observation
+      values similarly varied but not in ways one might expect; all
+      seven canids from domestic contexts; one specimen genetically
+      Canis latrans with isotope values in the domestic dog range
+    standing explanation
+      isotopes reflect variability in human-canid relationships, which
+      do not track genetics
+    also fits              VARIABLE_COUPLING
+    tested against each other  NO
+    same-site wild control yes
+    coupling separable     UNASKABLE_IN_THIS_TISSUE
+
+  Canine Surrogacy Approach -- Hudson Bay Thule
+    tissue                 bone_collagen
+    n / sequential n       -- / 0
+    observation
+      dogs isotopically similar to humans, but mixing models put them
+      on a different intake -- a systematic offset
+    standing explanation
+      absorbed as CSA method caution; the approach assumes dogs ate
+      what humans ate, i.e. that the coupling is fixed
+    also fits              VARIABLE_COUPLING
+    tested against each other  NO
+    same-site wild control no
+    coupling separable     UNASKABLE_IN_THIS_TISSUE
+
+  Vinca-Belo brdo -- cattle intra-tooth (PLOS One)
+    tissue                 sequential_enamel
+    n / sequential n       -- / --
+    observation
+      intra-tooth amplitude 0.7 to 2.4 permil within one herd -- some
+      individuals nearly flat, others with roughly 3x the range
+    standing explanation
+      husbandry variation within the herd
+    also fits              VARIABLE_COUPLING
+    tested against each other  NO
+    same-site wild control no
+    coupling separable     SEPARABLE
+
+  Schipluiden -- cattle vs red deer and suids, same site
+    tissue                 sequential_enamel
+    n / sequential n       -- / --
+    observation
+      d13C lower than expected in some cattle, NOT in red deer or suids
+      from the same site
+    standing explanation
+      leafy fodder rather than grazing
+    also fits              VARIABLE_COUPLING
+    tested against each other  NO
+    same-site wild control yes
+    coupling separable     SEPARABLE
+
+------------------------------------------------------------------------
+
+  READOUT ON 5 DELIVERED CASES -- four cases, not a survey
+
+    blind by tissue                          3 of 5
+    hypotheses never tested against each other  5 of 5
+    cases with a same-site wild control       2 of 5
+
+    canid individuals, bone collagen         42
+    canid individuals, sequential dentine    4
+    share that can ask it, if a subset       9.5%
+    share that can ask it, if additional     8.7%
+    denominator                              AMBIGUOUS_IN_DELIVERED_TEXT
+    The delivered text reads 'n=35 dogs, plus dentine n=4', which reads
+    either way. Both denominators are reported rather than one being
+    picked -- a share on an ambiguous denominator is the failure this
+    folder audits for. Here the two readings differ by less than a
+    percentage point, which is why the ambiguity can be left open
+    instead of resolved.
+
+    So on the delivered dog corpus the discriminating axis exists for
+    roughly a tenth of the individuals. Every standing explanation
+    above is compatible with the coupling hypothesis and none was
+    tested against it -- not because anyone declined to, but because
+    the tissue carrying most of the data cannot hold the difference.
+
+    THE CHEAPEST NEXT STEP, and it is already a working design
+    elsewhere: Schipluiden sampled WILD animals from the SAME SITE as a
+    baseline -- domesticates deviate, red deer and suids do not, so the
+    deviation is attributable to household provisioning rather than to
+    environment. That is a control, in the null-harness sense. Nobody
+    has pointed it at dogs with a wild-canid control at the same site.
+    Arroyo Hondo stumbled into one accidentally when a coyote came back
+    with domestic-dog values, and read it as evidence that
+    relationships do not track genetics -- which is the same finding
+    from the other side.
+
+
+
+COUPLING STRENGTH AS A NUMBER
+========================================================================
+
+  CALIBRATION -- the positive control exists, for other species
+    Balasse et al., controlled feeding experiment
+    known: a C3-to-C4 diet switch, plus weaning
+    the discriminator is not merely plausible -- a known switch was
+    recovered from intra-tooth variation under controlled conditions.
+    That is a positive control in the null-harness sense, and it exists
+    for caprines and cattle and not for dogs.
+
+  Intra-tooth amplitude is a coupling-variability measurement: flat
+  means a fixed draw, high amplitude means supply-coupled. That turns
+  audit.py's coupling field from Y/N into a quantity for archaeological
+  cases -- the first unit this audit has.
+
+  permil       reading
+  0.5          FLAT_FIXED_DRAW
+  0.7          FLAT_FIXED_DRAW
+  1.5          INTERMEDIATE
+  2.4          HIGH_SUPPLY_COUPLED
+  3.0          HIGH_SUPPLY_COUPLED
+
+  NOT_MEASURED is a separate value from FLAT_FIXED_DRAW. A flat
+  series is a measurement; no series is not.
+
+  THE CAVEAT IS ENFORCED, NOT NOTED.
+    A 2024 Journal of Archaeological Science paper finds that dentine
+    sample geometry changes the intra-tooth pattern, so amplitude is
+    partly a methods artifact and a cross-study comparison that does
+    not state geometry is comparing two instruments.
+    amplitude_reading() raises GeometryNotDeclared without one. Same
+    shape as audit.py refusing coupling machinery that is not named in
+    the model's own vocabulary: a number from an unnamed instrument is
+    not yet a reading.
+
+  THE FIELD REPLACEMENT, per OPEN.md item 9
+    For archaeological cases amplitude REPLACES audit.py's boolean
+    coupling_machinery_present rather than sitting beside it: the
+    coupling there is a property of an animal's intake, not of a
+    document. The scope is hard -- it needs an incremental tissue AND a
+    declared geometry, and returns an explicit non-value otherwise, so
+    'cannot be measured in this evidence' and 'measured and flat' never
+    share a value. There is no tooth in a national carbon inventory, so
+    entries.py keeps the boolean. That is a scope limit, not an
+    inconsistency.
+
+    Harris et al. 2020 -- Labrador Inuit sled dogs
+      -> NOT_APPLICABLE_TISSUE
+    Arroyo Hondo Pueblo -- 'What Makes a Dog?'
+      -> NOT_APPLICABLE_TISSUE
+    Canine Surrogacy Approach -- Hudson Bay Thule
+      -> NOT_APPLICABLE_TISSUE
+    Vinca-Belo brdo -- cattle intra-tooth (PLOS One)
+      -> HIGH_SUPPLY_COUPLED
+    Schipluiden -- cattle vs red deer and suids, same site
+      -> NOT_MEASURED
+
+  THE THRESHOLDS ARE CONVENTIONAL. They are scaled against the
+  delivered Vinca-Belo brdo range (0.7-2.4 permil within one herd)
+  and are not calibrated against a controlled feeding experiment
+  here. The delivered material names one that exists -- Balasse et
+  al., a known C3->C4 switch plus weaning, both recovered from
+  intra-tooth variation -- which is where a real calibration would
+  come from.
+
+------------------------------------------------------------------------
+
+  CROSS-SPECIES EXTENSION -- STATED_BY_AUTHOR_UNTESTED
+
+    The same coupling is predicted for chickens, cattle, yak and
+    buffalo: the household draw tracks surplus while protection is held
+    constant through the switch. In species with a commodity output the
+    switching is already measured seasonally per individual, because
+    nobody had to argue about whether the animal counted.
+
+    published applications of the method       6
+      on commodity species                     6
+      on companion species                     0
+    dog individuals sampled sequentially       4
+
+    The count is consistent with the stated claim and does NOT
+    establish it. A correlation between commodity status and
+    measurement maturity has other live explanations -- sample
+    availability, tooth size and enamel thickness, which
+    agricultural-research funding lines exist. What the count does show
+    is that the asymmetry is real and large, which is the part that was
+    in question.
+
+    This is the same gate as the FAO LEAP / GLEAM entry in entries.py,
+    seen from the other side. There the gate is `market_output` and it
+    keeps companion animals out of the water accounting. Here the same
+    line is why the measurement exists at all for cattle. One
+    criterion, two consequences: the animal that sells gets both the
+    ledger entry and the instrument.

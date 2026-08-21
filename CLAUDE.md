@@ -2801,6 +2801,151 @@ underneath).
   findings are objections and all were reachable only because the file
   specified its calibration set and its falsifier in advance. Seven findings;
   the material gave seven. One hundred and fifty-three claims `UNI_001..153`.
+  **`coupling_audit/`** is a subfolder added alongside the register's
+  material, asking a **different question** and deliberately not adding a
+  mechanism. The register asks whether an instrument's constitution
+  prevents a quantity from appearing at all; this asks whether a
+  coupling-variability capability a model **already has, and names in its
+  own vocabulary**, is applied evenly across the agents drawing on the
+  flow it measures — the quantity can be registered, the machinery
+  exists, and it runs on some agents and not others, so an exclusion
+  register finds nothing there. Four verdicts (`ABSENT_NO_MACHINERY` /
+  `ABSENT_MACHINERY_PRESENT` / `PRESENT_FIXED` / `PRESENT_COUPLED`) and
+  four gate types (`species` / `market_output` / `unstated` / `other`),
+  each recorded with whether the rule is stated or falls out of a
+  definition. Three `MODEL_SEEDED` seed entries: **IPC** (the rCSI *is* a
+  condition-dependent consumption term, run on humans only; companion
+  animals absent, livestock present as price and asset terms and never as
+  caloric draw; gate species, unstated → `ABSENT_MACHINERY_PRESENT`),
+  **per-capita consumption-based carbon footprint** (pet spending captured
+  inside COICOP domains and attributed to the human purchaser; OECD
+  equivalence scales weight non-identical household members and carry a
+  **child** term and no animal term; gate is the denominator, implicit →
+  `PRESENT_FIXED`, misattributed), and **FAO LEAP / GLEAM** (drinking +
+  service + feed water with breed- and climate-level variation — the most
+  developed coupling machinery of the three, built for animals — and
+  companion animals absent because the system boundary is production
+  systems and supply chains; gate stated → `ABSENT_MACHINERY_PRESENT`,
+  **the sharpest of the three because the exclusion criterion is
+  salability, not calories, water or biology**). `score()` **derives** the
+  verdict from the fields and reports agreement with the declared one,
+  which required one schema addition beyond the specified field list
+  (`agents_coupled`) — without it an entry cannot disagree with itself,
+  and `PRESENT_FIXED` is not distinguishable from `ABSENT_*`. Gate types
+  run against `MECHANISMS` by **importing** the tuple rather than copying
+  it: `species` → **`AUDIT_ASYMMETRY`**, STRONG ("guard fires on one side
+  only", one level up — the asymmetry in a model's machinery rather than
+  in an audit's hedging), so **no candidate ninth is claimed**;
+  `market_output` → `PROXY_SUBSTITUTION` and `unstated` →
+  `BUDGET_BOUNDARY` are recorded PARTIAL and left unresolved, and the
+  ordinal is taken regardless since `MECHANISM_09`/`_10`/`_11` are
+  proposed in sibling folders against the same eight. `FALSIFIER.md`
+  states that a **stated, quantity-justified gate is a pass, not a hit** —
+  a species or market-category gate does not qualify however clearly it is
+  written. `OPEN.md` records five unresolved items and picks no number:
+  the companion-animal population spread (dogs ~470M–990M, cats
+  ~370M–600M, from pet-industry surveys counting owners or households
+  rather than animals, with **no global figure at all** for rabbits,
+  guinea pigs, birds, reptiles or fish); the peer-reviewed biomass series
+  cited rather than restated (Greenspoon et al., PNAS 2023 — wild
+  terrestrial mammals ≈20 Mt (95% CI 13–38), domestic dogs ≈20 Mt, cats
+  ≈2 Mt, cattle ≈420 Mt, humans ≈390 Mt; Nature Communications 2025 for
+  the ≈200 Mt 1850 baseline); the **routing failure** rather than
+  measurement gap (Okin 2017 PLOS One — US dogs and cats consume 19%±2% of
+  the dietary energy humans do and 33%±9% of the animal-derived energy;
+  Alexander et al. 2020 — global pet food land, GHG and freshwater:
+  published in petajoules and not entering the models that allocate under
+  constraint); by-product allocation by economic value rather than caloric
+  content, which lets the same calories be waste in one ledger and food in
+  another; and the **single-coefficient failure** — a fixed per-animal
+  draw must be wrong for at least one of the US pet-food case and the
+  free-ranging scavenger case, since trophic position is set by local
+  conditions, so what is needed is a condition variable and not a better
+  average. `LOG.md` records that it was added as a subfolder to be
+  promoted only if the entry count grows, and that the audit was run
+  against three models with three hits **before** the schema was written —
+  so the corpus is three cases and not a survey.
+  **`OPEN.md` item 6** lands the anthropological/archaeological precedent
+  verbatim — the coupling variable is established in that literature
+  under the name **PROVISIONING REGIME** (Lupo 2019 "Hounds follow those
+  who feed them"; Mitchell 2025 *First Dogs*; Pacheco-Cobos &
+  Winterhalder, Belize; Mesoamerica's "a household's use of dogs affects
+  its investment in them"; Arctic isotope work where dog diets track
+  nearby human diets) — so provisioning is a variable regime with a cost
+  in one literature and a fixed coefficient or absent term in the
+  footprint, hunger and water models: **third silo, same routing
+  failure**, with the reverse direction (de-provisioning under seasonal
+  scarcity, animal re-coupled to its own foraging envelope, re-imported
+  when supply returns) recorded as **not found in one pass** rather than
+  absent. **`provisioning.py`** (selftest 25/25) builds what item 6
+  points at. Three hypotheses for isotopic spread — `MOBILITY`,
+  `BREED_OR_STATUS`, `VARIABLE_COUPLING` — and **the within-individual
+  axis is the only one separating the third from the first two, which is
+  exactly the axis a years-averaging tissue destroys**: bone collagen is
+  **12.2× too coarse** for a seasonal feature at a G-RES margin of 2, so
+  in the tissue holding most of the delivered dog evidence the coupling
+  hypothesis *cannot fail* — `CONSTANT_SILENT` by construction, reported
+  as `UNASKABLE_IN_THIS_TISSUE` rather than as refuted; incremental
+  dentine and sequential enamel resolve it. On four delivered cases
+  (Harris et al. 2020 Labrador sled dogs, site heterogeneity explained by
+  coastal mobility; Arroyo Hondo, where a genetic *Canis latrans* returns
+  domestic-dog values so the category fails to predict the draw;
+  Vinca-Belo brdo cattle at 0.7–2.4‰ intra-tooth within one herd;
+  Schipluiden, where cattle deviate and same-site red deer and suids do
+  not): **2 of 4 blind by tissue, 4 of 4 never tested the standing
+  explanation against the coupling hypothesis, 2 of 4 carry a same-site
+  wild control**. Two hypotheses fitting one observation is held as a
+  field (`also_fits`), not as agreement. The cheapest next step is
+  Schipluiden's design pointed at dogs with a wild-canid control at the
+  same site — which Arroyo Hondo stumbled into by accident. **The audit's
+  first real unit:** intra-tooth amplitude is a coupling-strength
+  measurement (flat = fixed draw, high = supply-coupled), turning the Y/N
+  field into a quantity for archaeological cases — and
+  `amplitude_reading()` **raises `GeometryNotDeclared`** without a stated
+  sampling geometry, since dentine geometry changes the pattern and a
+  cross-study comparison without it compares two instruments; thresholds
+  are conventional, scaled to one delivered herd range, explicitly not
+  calibrated here. One ambiguity is **left open rather than resolved**:
+  "n=35 dogs, plus dentine n=4" reads either as subset or additional, so
+  both denominators are reported and neither is picked — the two differ
+  by under a percentage point, which is why it can stay open.
+  **A canonical rewrite of the precedent material then superseded the
+  one-search version** and lands as `OPEN.md` items 6–10: two searches
+  not one; the zooarchaeology name supplied (**foddering / seasonal
+  fodder supplementation**, so two literatures with two names and
+  neither framing it as a coupling variable applied across species); the
+  geometry caveat sourced to a **2024 *Journal of Archaeological
+  Science*** paper; the reverse direction recorded as "open, and possibly
+  ahead of the record. Not a finding."; and the instruction that
+  amplitude **replaces** the boolean rather than supplementing it — which
+  **corrected a LOG entry that had recorded the opposite**.
+  `coupling_field_for()` implements the replacement with a hard scope
+  (incremental tissue AND declared geometry, four distinct non-value
+  states so "cannot be measured here" and "measured and flat" never
+  share one), and `entries.py` keeps the boolean because there is no
+  tooth in a national carbon inventory. Added with it: the **Balasse**
+  controlled-feeding calibration as a first-class object (a positive
+  control that exists for caprines and cattle and not for dogs), six
+  `PUBLISHED_APPLICATIONS`, and a fifth case — the Canine Surrogacy
+  Approach / Hudson Bay Thule systematic offset, absorbed as method
+  caution, where the method's validity *depends on* the coupling being
+  fixed. Corpus counts move to **3 of 5 blind by tissue, 5 of 5 never
+  tested against the coupling hypothesis, 2 of 5 with a same-site wild
+  control**. **The one computable thing in the new material:** 6 of 6
+  published applications of the intra-tooth method are on commodity
+  species and 0 on companion species, against a dog sequential n of
+  about 4 — consistent with the author's stated explanation ("no one had
+  to argue about whether the animal counted") and explicitly **not
+  establishing** it, since sample availability, tooth size and funding
+  lines are live alternatives; the readout separates
+  `count_establishes` from `count_does_not_establish`. What it does
+  establish is that the asymmetry is real and large. **Cross-link:** this
+  is entry 3's `market_output` gate seen from the other side — there it
+  keeps companion animals out of the water accounting, here the same
+  criterion is why the instrument exists for cattle. One line, two
+  consequences: the animal that sells gets both the ledger entry and the
+  instrument. Marker under exploration. 21 + 14 + 36 selftests green.
+  Stdlib only, parses under Python 3.9, CC0.
   Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
@@ -4161,9 +4306,135 @@ underneath).
   is *look where the apparatus returns a term it cannot fill*, and this
   folder already produces four (`UNMEASURED`, `UNDECLARED`,
   `NOT_COLLECTED`, `UNREACHABLE`); a candidate list, not the slot, with
-  the verdict left UNKNOWN per G1. Twenty-four claims `SHB_001..024`, one
-  REFUTED, two external audits run by someone who did not write the
-  claims. Stdlib only, CC0.
+  the verdict left UNKNOWN per G1. **`EARTH_TRANSITIONS.md`** is a
+  third outside audit, checked in `earth_transitions.py` (selftest
+  20/20): a phase-transition count for Earth against Lloyd's 10^120 ops,
+  arriving with its own correction that the "eight major transitions"
+  are LABELS, each a coarse-grained envelope. **`SHB_025`, the first
+  independent confirmation of a number in this folder:** `budget.py`'s
+  Margolus–Levitin machinery on the universe's mass-energy over its age
+  gives **10^122.9** against the delivered 10^120, the 2.9-decade
+  residual being the mass-energy convention `SHB_006`(a) already names —
+  and the direction matters, since the two prior external audits landed
+  on labels and claims while this one lands on arithmetic and agrees.
+  **`SHB_026`:** the delivered 10^110 reproduces as atoms (10^50.1) ×
+  Planck ticks (10^60.4) = **10^110.5**, while `labels × atoms` is
+  10^51.0, sixty decades short — so **the factor of 8 contributes 0.9
+  decades to a 110-decade number** and the first pass was a *stepping*
+  count all along, which is `SHB_004` on a new substrate and *sharpens*
+  the delivered self-correction (the correction is worth 52 decades, the
+  thing corrected 0.9). **`SHB_027`:** 110 + 52 − 120 = **42** exactly,
+  so `1e52` is a multiplier and not the total it is presented as; read
+  as a total the count sits **68 decades under** the ceiling and the two
+  readings disagree on the sign. **`SHB_028`, the one that reverses the
+  headline:** multiplying a per-timestep stepping cost by a
+  per-transition count prices the same physics twice — a stepping model
+  already computes every transition that occurs — and under **every**
+  internally coherent model Planck-resolved Earth FITS (event-driven
+  labels-only 10^51.0 with 69 decades spare, event-driven nested 10^103.0
+  with 17, uniform Planck stepping 10^110.5 with 9), the overshoot
+  appearing only in the mixed one at 10^162.5. `SHB_010` landing on the
+  delivered result: the level stack was not specified and two stacks got
+  multiplied. **`SHB_029`:** the constructive version needs no
+  double-count — the delivered text says "four classes only, not
+  exhaustive", and the event-driven model breaks when the full nesting
+  reaches **69 decades** rather than 52, a reachable falsifier. Turning
+  the resolution knob **ran against expectation and the check is kept**:
+  pure stepping affords a timestep **9.5 decades finer than Planck
+  time**, headroom in the direction nobody asks for, which is the
+  delivered first pass's own "it FITS" from this side; with the nesting
+  as a multiplier the affordable timestep is **~0.2 seconds**,
+  human-scale, making the double-count visible without arithmetic.
+  **`SHB_030`:** the strongest thing in it is the thing it does not
+  claim — a count over the world's own **contents** rather than over
+  cells is architecture-independent where the cell counts are not, since
+  under `SHB_011` every consequence leaving a record must be computed by
+  any architecture that produces its own observation record and mineral
+  grains, ice cores and fossils are records, so a content count binds the
+  lazy architecture too; what it does not reach is the hypothesis
+  (`SHB_003` unchanged), and "four classes" is a floor enumerated by us,
+  `SHB_021` on a second substrate — which the delivered text reaches
+  itself in its closing line. **`SCALING_CLASSES.md`** is a fourth
+  outside audit, checked in `scaling_classes.py` (selftest 20/20): eight
+  computational loads against the same ceiling, concluding that the cut
+  is **scaling class** rather than size, and closing on Levinthal.
+  **`SHB_031`:** four rows reproduce exactly from their own printed terms
+  (`2^100` = 10^30.10, `2^300` = 10^90.31, `2^1000` = 10^301.03, `3^300`
+  = 10^143.14, residuals under a third of a decade), three cannot be
+  rebuilt from what is printed, and the N-body row is marked
+  `CONSTRUCTION_FITTED` and **not counted** — 10^67 follows from direct
+  `O(N²)` only under ~10^7 timesteps, a number chosen *here* to match,
+  and a construction reverse-engineered from the answer is not a check.
+  **`SHB_032`:** the `nested phase transitions` row reads **10^152** here
+  and **10^162.5** in the previous drop for the same object, matching no
+  coherent model in the folder (10^103.0 / 10^110.5) — and because the
+  `EXCEEDS` column is total − ceiling it **moves with the total**, so the
+  row stays self-consistent at any value and a second reader is the only
+  detector. **`SHB_033`:** "everything polynomial FITS" is not general
+  (at Earth's 10^50 atoms, `N²` fits at 10^100 and `N³` exceeds at
+  10^150 — same N, same class), so the cut is scaling class **crossed
+  with N**, and the exact form is the **crossover**: `2^N` at **399
+  components**, `3^n` at **252 residues**, `N²` at 10^60 bodies, `N³` at
+  10^40 — a quantum system of 399 two-state components exhausts the
+  universe's entire compute budget while pairwise interactions need
+  twenty decades more than Earth has atoms, and that gap is the
+  structural result quantified. **`SHB_034`:** the closing paragraph
+  retracts one of its own `EXCEEDS` rows — the row is named "exhaustive
+  fold search" and the text ends "folding is funnelled, not searched", so
+  it prices a brute-force **algorithm** nobody claims the physics uses;
+  `SHB_021` inside a single row, visible without leaving the document.
+  **`SHB_035`, the strongest thing in the drop:** the three `EXCEEDS`
+  rows price three different objects — an **algorithm** (retracted), an
+  **event count** (the drifted one), and a **substrate**. `d^N` is the
+  genuine dimension of the state space, so a *classical* simulator must
+  carry it and a *quantum* one need not, the system being its own
+  simulator; the row therefore bounds **classical simulation of quantum
+  systems** (Feynman 1982) and not simulation as such, making it the only
+  row that constrains the hypothesis rather than our method — in one
+  direction, against a classical substrate — for a reason the drop does
+  not state. **`SHB_036`:** read through its own resolution the headline
+  inverts, since every row priced by what the physical system actually
+  *does* is polynomial or a plain event count and fits, both routes to
+  exceeding the budget being artifacts of how *we* would compute the
+  answer; which meets `SHB_030` from the other side — a content count
+  binds any architecture that must produce its own observation record,
+  but an *exponential* content count does not unless the exponential is
+  in the physics rather than in the method. **The author then replaced
+  the document's opening with the transmissible core** — *"the
+  exponential is a property of the representation, not of the system.
+  Check which one you are pricing"* — and delivered **three corrections
+  to this audit**, all landing. **`SHB_037` (H1):** the N-body tag was
+  wrong — `CONSTRUCTION_FITTED` → **`LABEL_TRUNCATED_IN_TRANSFER`**,
+  since the ~10^7 timestep count *was* printed, in the source row label,
+  and was lost in transfer; the row reproduces exactly once restored and
+  the not-counting stands, so four reproductions here and five in the
+  source. **And this audit's first pass is itself a datum on the
+  question the material poses** — asked whether truncation is ever the
+  *first* hypothesis when a result is off, it reached for "the
+  construction was fitted" and not for "a term was lost in transfer",
+  and truncation was not any hypothesis until the party holding the
+  source said so. **`SHB_038` (H2):** the Barnes-Hut saving is **28
+  decades, not 35** — `N log N` = 10^32 is *per step*, 10^39 over 10^7
+  steps — and the timestep factor was dropped **in the same paragraph
+  that objected to it being unstated**; verdict unchanged, magnitude off
+  by exactly that 10^7. **`SHB_039` (H3), the largest:** `SHB_035`
+  overstated the substrate bound — "a classical simulator must carry
+  `d^N`" holds only for **volume-law** entangled states, while
+  **area-law** states are classically representable in *polynomial*
+  resources (MPS / tensor networks, DMRG) and ground states of local
+  gapped Hamiltonians obey an area law, covering most ground-state
+  chemistry, folding and condensed matter; so the row bounds the
+  **worst-case entangled subset** and the tractable class is where most
+  of Earth sits. What the correction buys beats what it removes: **the
+  discriminator is entanglement scaling, measurable rather than
+  assumed**, converting a blanket bound into one with a stated domain —
+  the move this folder makes everywhere else and did not make here.
+  **`SHB_040`:** `SHB_035`'s falsifier was written too narrowly to fire
+  on the failure that occurred ("without approximation" makes it nearly
+  unfireable), the **second instance** of the `SHB_020` shape, and the
+  clause is deliberately NOT used to rescue the claim. Forty claims
+  `SHB_001..040`, one REFUTED, four external audits run by someone who
+  did not write the claims. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

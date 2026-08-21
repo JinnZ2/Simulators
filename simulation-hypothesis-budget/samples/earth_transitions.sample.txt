@@ -1,0 +1,150 @@
+EARTH TRANSITIONS -- the delivered count, checked
+========================================================================
+
+  The structural point is right and nothing below disputes it: the
+  eight 'major transitions' are labels, each a coarse-grained envelope,
+  and pricing the labels is not pricing the transitions. What is
+  checked is the arithmetic, because the arithmetic is what produces
+  the headline.
+
+------------------------------------------------------------------------
+
+  1. THE CEILING, CHECKED FROM INSIDE THIS FOLDER
+
+     universe mass-energy      2.73e+71 J
+     Margolus-Levitin rate     1.65e+105 ops/s
+     ops since t=0             7.16e+122  (10^122.9)
+     Lloyd, as delivered       10^120
+     agreement                 within 2.9 decades
+     budget.py uses all components at rho_crit; Lloyd uses matter-only.
+     SHB_006(a) already names that convention as a choice worth ~1.3
+     decades, and the rest is accounting detail. Order-of-magnitude
+     agreement by a second route is the check.
+
+     The ceiling holds. It is the one number in the delivered result
+     this folder can confirm by a route it did not take.
+
+------------------------------------------------------------------------
+
+  2. WHAT PRODUCES 10^110 -- and it is not the eight
+
+     Earth atoms                1.19e+50
+     Planck ticks in 4.54 Gyr   2.66e+60
+
+     construction               ops          log10
+     labels x atoms             9.6e+50      51.0
+     atoms x Planck ticks       3.2e+110     110.5
+     labels x atoms x ticks     2.5e+111     111.4
+
+     reproduces ~10^110 to within a decade: atoms x Planck ticks
+
+     The eight labels contribute 0.9 decades to a 110-decade number.
+     The count is atoms (50.1 decades) times PLANCK TICKS (60.4
+     decades). So the first pass was never really a transition count --
+     it was a stepping count, and the resolution assumption supplied
+     more than half of it.
+
+     That is SHB_004 on a new substrate: the resolution assumption does
+     more work than anything else in the argument. It also sharpens the
+     delivered self-correction rather than undercutting it -- the
+     correction is worth 52 decades and the thing corrected was worth
+     0.9.
+
+------------------------------------------------------------------------
+
+  3. THE HEADLINE NEEDS 1e52 TO BE A MULTIPLIER
+
+     1e52 is a MULTIPLIER on the stepping count
+       total 10^162.5, over ceiling by 43 decades
+       <- reproduces the delivered 1e42
+     1e52 is the TOTAL nested transition count
+       total 10^52.0, under ceiling by 68 decades
+
+     110 + 52 - 120 = 42, exactly. So the delivered arithmetic is
+     consistent under the multiplier reading and 68 decades out under
+     the other. The text presents 1e52 next to 'nested transitions,
+     FOUR classes only', which reads as a total. One label is wrong and
+     the arithmetic is right.
+
+------------------------------------------------------------------------
+
+  4. BUT MULTIPLYING PRICES THE SAME PHYSICS TWICE
+
+     A STEPPING model pays per degree of freedom per timestep, and
+     every transition that occurs is already inside that cost --
+     nesting adds nothing. An EVENT-DRIVEN model pays per transition
+     and does not step. They are alternative architectures, and the
+     product of the two is not a cost.
+
+     cost model                           log10   cohr  verdict (decades)
+     event-driven, labels only            51.0    yes   fits, 69 spare
+     event-driven, nested                 103.0   yes   fits, 17 spare
+     uniform Planck stepping              110.5   yes   fits, 9 spare
+     stepping x nesting (as delivered)    162.5   NO    OVER by 43
+
+     Under every internally coherent model, Planck-resolved Earth
+     FITS. The overshoot appears only in the mixed one.
+
+------------------------------------------------------------------------
+
+  5. THE CONSTRUCTIVE VERSION -- what would make it true
+
+     event-driven base (labels x atoms)   10^51.0
+     nesting used, four classes           52 decades
+     nesting at which the model breaks    69 decades
+     headroom remaining                   17 decades
+
+     The delivered text says four classes only, not exhaustive. So the
+     claim becomes true, without any double-count, if the full nesting
+     is 69 decades rather than 52. That is a reachable falsifier and a
+     better form of the delivered result: enumerate more transition
+     classes and the event-driven model breaks on its own.
+
+  6. THE KNOB, TURNED UNTIL IT FITS
+     -- and this one ran against expectation
+
+     stepping every atom, no nesting, budget 10^120:
+       timestep affordable      1.71e-53 s
+       Planck time              5.39e-44 s
+       knob                     9.5 decades FINER than Planck
+
+     Stepping every Earth atom for 4.54 Gyr inside the universe's whole
+     ops budget affords a timestep 9.5 decades BELOW Planck time. The
+     knob has headroom in the direction nobody asks for. That is the
+     delivered first pass's own result -- 'uses 10^-10 of the budget.
+     it FITS' -- arriving from this side, and it is not what turning
+     the knob was expected to show.
+
+     with the delivered nesting applied as a multiplier:
+       timestep affordable      1.71e-1 s
+       knob                     43 decades COARSER than Planck
+
+     Under the mixed model the picture reverses and the affordable
+     timestep lands at about 0.2 of a second -- not Planck time, not
+     the 10^-21 s anything has ever resolved, but human-scale. So the
+     delivered claim is equivalently a statement about the CLOCK: it
+     says a Planck-stepped Earth carrying its full nested transition
+     count would need a sub-second tick to fit, which is a
+     contradiction in terms. Stated that way the double-count is
+     visible without any arithmetic.
+
+------------------------------------------------------------------------
+
+  WHAT IT REACHES, AND WHAT IT DOES NOT
+
+     Reaches: this is a count over the world's own CONTENTS rather than
+     over cells, and that is a different kind of bound. Under SHB_011,
+     every transition that leaves a record must be computed by any
+     architecture that can produce its own observation record --
+     mineral grains, ice cores and fossils are records -- so a content
+     count is architecture-independent in a way the cell counts of
+     budget.py are not. That is the strongest thing in the delivered
+     result and it is not what the delivered result claims.
+
+     Does not reach: the hypothesis. Both operands are computed in our
+     physics about a simulator embedded in our physics, so SHB_003's
+     frame refusal applies unchanged and this measures self-hosting.
+     And 'four classes' is a floor enumerated by us -- SHB_021 on a
+     second substrate, the reference class being ours again. The
+     delivered text reaches that itself: the eight-label count is a map
+     artifact.

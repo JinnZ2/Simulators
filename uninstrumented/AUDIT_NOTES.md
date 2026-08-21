@@ -3731,3 +3731,33 @@ C1, C2-as-authorship, C4 and C5 all take values appearing in both classes, on
 ten cases coded from 023's own descriptions plus the maintainer's offered one.
 Not a claim that they are wrong about the AI case — a claim about which are
 carrying the discrimination, which is what a calibration set is for.
+
+---
+
+## Cross-reference — `coupling_audit/`
+
+A subfolder, added alongside this register's material and asking a **different
+question**. This register asks whether an instrument's constitution prevents a
+quantity from appearing at all. `coupling_audit/` asks whether a
+coupling-variability capability a model already has, and names in its own
+vocabulary, is applied evenly across the agents drawing on the flow it
+measures — the quantity *can* be registered, the machinery exists, and it runs
+on some agents and not others.
+
+An exclusion register finds nothing there, because nothing is excluded from
+the apparatus. The apparatus is pointed at a subset.
+
+**It does not add a mechanism.** Its three gate types were run against
+`MECHANISMS` by importing the tuple rather than copying it, and one — `species`
+— matches **`AUDIT_ASYMMETRY`** strongly: "guard fires on one side only", one
+level up, with the asymmetry in a model's machinery rather than in an audit's
+hedging. `market_output` → `PROXY_SUBSTITUTION` and `unstated` →
+`BUDGET_BOUNDARY` are recorded PARTIAL and left unresolved. No candidate ninth
+is claimed, and the ordinal is taken regardless — `MECHANISM_09` / `_10` /
+`_11` are proposed in `category-weld/`, `generation-capacity/` and
+`derivation-discarded/` against this same register of eight.
+
+Worth noting against `UNI_002`, which is still open: the subfolder's three
+entries are food security, national carbon accounting and livestock water
+accounting — three fields — but they are entries in a *different* schema, not
+in `ENTRIES`, so they do not move the register's cross-field check either way.

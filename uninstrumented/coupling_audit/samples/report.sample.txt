@@ -1,0 +1,165 @@
+COUPLING AUDIT
+========================================================================
+
+  Does the model's own coupling-variability machinery get applied
+  evenly to every agent drawing on the measured flow, or is it gated?
+
+------------------------------------------------------------------------
+
+  IPC -- Integrated Food Security Phase Classification
+    flow                 human dietary energy (kcal/person/day, plus
+                         consumption and coping indices)
+    drawing on it        humans (household members), companion animals
+                         in the household, livestock as a caloric draw
+    represented          humans (household members)
+    coupling machinery   reduced Coping Strategy Index (rCSI),
+                         alongside Livelihood Coping Strategies
+    coupling applied to  humans (household members)
+    gate                 species (implicit)
+    justified in units   no
+    even                 no
+    verdict declared     ABSENT_MACHINERY_PRESENT
+    verdict derived      ABSENT_MACHINERY_PRESENT
+    agrees               yes
+    note
+      The outcome indicators are Household Dietary Diversity Score,
+      Food Consumption Score, Household Hunger Score, reduced Coping
+      Strategy Index, and Livelihood Coping Strategies. All five are
+      scored on human consumption and human behaviour. The coupling
+      machinery is present and named in the model's own vocabulary: the
+      rCSI formalises condition-dependent consumption behaviour -- it
+      is a measure of how a draw changes under scarcity, which is
+      exactly the term the audit is looking for. It is applied to
+      humans only. Companion animals are absent. Livestock enters the
+      analysis repeatedly, as prices, herd dynamics and livelihood
+      assets -- that is, as economic and asset terms, never as a
+      caloric draw. The gate is unstated: the unit of analysis is
+      defined as human food consumption and nutrition outcome, so no
+      exclusion is ever written. There is no slot for the animal term
+      to be excluded from. That is an unstated boundary rather than a
+      stated exclusion, and it is why the entry scores
+      ABSENT_MACHINERY_PRESENT rather than ABSENT_NO_MACHINERY: the
+      capability exists in the model.
+    MODEL_SEEDED         True
+
+  per-capita consumption-based carbon footprint (COICOP expenditure
+  accounting)
+    flow                 CO2e (t/capita/yr)
+    drawing on it        adults, children, companion animals in the
+                         household
+    represented          adults, children, companion animals in the
+                         household
+    coupling machinery   OECD equivalence scales
+    coupling applied to  adults, children
+    gate                 unstated (implicit)
+    justified in units   no
+    even                 no
+    verdict declared     PRESENT_FIXED
+    verdict derived      PRESENT_FIXED
+    agrees               yes
+    note
+      MISATTRIBUTED, which is why the entry is PRESENT_FIXED rather
+      than ABSENT. Pet food and veterinary spending are captured inside
+      COICOP expenditure domains, so the emissions do enter the
+      national total -- attributed to the human purchaser as a
+      purchase, never resolved as a consumer with a draw of its own.
+      The coupling machinery is present and named: OECD equivalence
+      scales weight non-identical household members and include a child
+      term. There is no animal term. So the model already has the
+      apparatus for saying that two members of one household are not
+      the same size of draw. The gate is the denominator: 'per capita'
+      divides by human population. It is implicit -- an arithmetic
+      convention nobody restates as an exclusion rule. This entry is
+      the reason agents_represented and agents_coupled are separate
+      fields. Represented-but-uncoupled is a distinct state from
+      absent, and collapsing them would lose it.
+    MODEL_SEEDED         True
+
+  FAO LEAP / GLEAM livestock water accounting
+    flow                 freshwater (m3, resolved to river-basin scale,
+                         trade-adjusted)
+    drawing on it        livestock in production systems, companion
+                         animals
+    represented          livestock in production systems
+    coupling machinery   drinking water + service water + feed water,
+                         with breed-level and climate-level variation
+    coupling applied to  livestock in production systems
+    gate                 market_output (stated)
+    justified in units   no
+    even                 no
+    verdict declared     ABSENT_MACHINERY_PRESENT
+    verdict derived      ABSENT_MACHINERY_PRESENT
+    agrees               yes
+    note
+      THE SHARPEST OF THE THREE GATES, for a reason that has nothing to
+      do with how well it is documented. The coupling machinery here is
+      not merely present, it is highly developed: drinking water plus
+      service water plus feed water, with breed-level and climate-level
+      variation modelled -- drought-adapted goats and camels, reduced
+      drinking water on high-moisture feed. That is genuine
+      condition-dependent coupling, built for animals, and it is the
+      most developed instance of the machinery in any of these three
+      entries. Companion animals are absent. The gate is STATED: the
+      system boundary is production systems and supply chains, so an
+      animal enters the accounting only if it yields a priced
+      commodity. The exclusion criterion is SALABILITY -- not calories,
+      not water, not biology. A stated gate is better than an implicit
+      one, and it is still not a justification in the units being
+      measured: nothing about a cubic metre of freshwater distinguishes
+      the animal that drinks it by whether the animal's output has a
+      price. See FALSIFIER.md: stated-and-justified-in-units would be a
+      pass. Stated-and-justified-by-market-category is not.
+    MODEL_SEEDED         True
+
+------------------------------------------------------------------------
+
+  COUNTS
+    ABSENT_NO_MACHINERY          0
+    ABSENT_MACHINERY_PRESENT     2
+    PRESENT_FIXED                1
+    PRESENT_COUPLED              0
+
+    entries meeting the falsifier (PRESENT_COUPLED)   0
+    entries with a stated, units-justified gate       0
+
+    Either would refute the marker. See FALSIFIER.md.
+
+------------------------------------------------------------------------
+
+  GATE TYPES AGAINST THE PARENT REGISTER
+    register imported, not copied: True
+    mechanisms in the register:    8
+
+    gate species        nearest AUDIT_ASYMMETRY      STRONG
+      the register's gloss is 'guard fires on one side only'. Here a
+      capability the model already has -- a coupling-variability term
+      -- runs on one class of agent and not on another drawing on the
+      same flow. Same shape, one level up: the asymmetry is in the
+      MODEL's machinery rather than in an audit's hedging. This is
+      close enough that a new mechanism should not be claimed for it.
+
+    gate market_output  nearest PROXY_SUBSTITUTION   PARTIAL
+      the register's gloss is 'enforceable measure displaces the target
+      it stood in for'. Salability is enforceable and it does displace
+      the biological criterion. But proxy substitution names a measure
+      standing in for a QUANTITY, and this is a criterion standing in
+      for MEMBERSHIP -- what enters the ledger at all, rather than what
+      value it is given. The difference may not survive scrutiny; it is
+      recorded rather than resolved.
+
+    gate unstated       nearest BUDGET_BOUNDARY      PARTIAL
+      the register's gloss is 'closed budget compared to open'. A
+      per-capita denominator is a boundary imported from an accounting
+      convention: the numerator is open (all emissions from the
+      expenditure) and the denominator is closed to one species. The
+      gate is not a separate exclusion so much as an arithmetic choice
+      nobody restates as one.
+
+    CANDIDATE NINTH CLAIMED: False
+      at least one gate type (species) matches an existing mechanism
+      strongly, so a new mechanism is not claimed here. Separately, the
+      ordinal is already taken: MECHANISM_09, MECHANISM_10 and
+      MECHANISM_11 are proposed in sibling folders (category-weld,
+      generation-capacity, derivation-discarded) against this same
+      register of eight, so 'a candidate ninth' would collide even if
+      the shape were new.

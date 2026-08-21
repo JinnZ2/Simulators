@@ -1,0 +1,37 @@
+{
+  "register_available": true,
+  "register_size": 8,
+  "notes": [
+    {
+      "gate": "species",
+      "nearest": "AUDIT_ASYMMETRY",
+      "strength": "STRONG",
+      "why": "the register's gloss is 'guard fires on one side only'. Here a capability the model already has -- a coupling-variability term -- runs on one class of agent and not on another drawing on the same flow. Same shape, one level up: the asymmetry is in the MODEL's machinery rather than in an audit's hedging. This is close enough that a new mechanism should not be claimed for it.",
+      "in_register": true,
+      "gloss": "guard fires on one side only"
+    },
+    {
+      "gate": "market_output",
+      "nearest": "PROXY_SUBSTITUTION",
+      "strength": "PARTIAL",
+      "why": "the register's gloss is 'enforceable measure displaces the target it stood in for'. Salability is enforceable and it does displace the biological criterion. But proxy substitution names a measure standing in for a QUANTITY, and this is a criterion standing in for MEMBERSHIP -- what enters the ledger at all, rather than what value it is given. The difference may not survive scrutiny; it is recorded rather than resolved.",
+      "in_register": true,
+      "gloss": "enforceable measure displaces the target it stood in for"
+    },
+    {
+      "gate": "unstated",
+      "nearest": "BUDGET_BOUNDARY",
+      "strength": "PARTIAL",
+      "why": "the register's gloss is 'closed budget compared to open'. A per-capita denominator is a boundary imported from an accounting convention: the numerator is open (all emissions from the expenditure) and the denominator is closed to one species. The gate is not a separate exclusion so much as an arithmetic choice nobody restates as one.",
+      "in_register": true,
+      "gloss": "closed budget compared to open"
+    }
+  ],
+  "candidate_ninth": {
+    "claimed": false,
+    "why": "at least one gate type (species) matches an existing mechanism strongly, so a new mechanism is not claimed here. Separately, the ordinal is already taken: MECHANISM_09, MECHANISM_10 and MECHANISM_11 are proposed in sibling folders (category-weld, generation-capacity, derivation-discarded) against this same register of eight, so 'a candidate ninth' would collide even if the shape were new.",
+    "strong_matches": [
+      "species"
+    ]
+  }
+}
