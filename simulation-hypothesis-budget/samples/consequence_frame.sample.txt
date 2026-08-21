@@ -1,0 +1,127 @@
+CONSEQUENCE FRAME -- what the hypothesis licenses, not what it costs
+========================================================================
+
+  THE INFERENCE UNDER TEST
+    P1  this universe is a simulation
+    P2  therefore a consequence propagating inside it is not real
+    C   therefore the party producing it does not carry it
+
+  P2 is the load-bearing line. 'Not real' cashes out as 'not
+  computed', and multiscale.py already fixes what each architecture
+  computes. So P2 needs ONE cell of a 2x2 to be non-empty:
+  a consequence that is OBSERVED and NOT COMPUTED.
+
+------------------------------------------------------------------------
+
+  CONSEQUENCES USED (ordinary ones, placed by scale and region)
+    a sentence spoken and heard              1e-2      diffuse_gas       observed
+    a tree felled, the clearing after        1e+0      condensed_matter  observed
+    a neuron firing in a decision            1e-6      condensed_matter  observed
+    a detector click                         1e-19     lab               observed
+    one CO2 molecule, taken alone            1e-10     diffuse_gas       unobserved
+    a photon absorbed by an unvisited rock   1e-10     condensed_matter  unobserved
+
+------------------------------------------------------------------------
+
+  UNIFORM PLANCK
+    observed + computed      4
+    observed + UNCOMPUTED    0  <-- the cell P2 needs
+    unobserved + computed    2
+    unobserved + uncomputed  0
+    admissible: yes -- no observation goes uncomputed
+
+  PLANCK IN NUCLEONS
+    observed + computed      3
+    observed + UNCOMPUTED    1  <-- the cell P2 needs
+        a detector click
+    unobserved + computed    2
+    unobserved + uncomputed  0
+    admissible: NO -- cannot produce the record of the
+      observations listed above. Refuted by an observation
+      already made, not by cost.
+
+  ATOMIC IN MATTER
+    observed + computed      3
+    observed + UNCOMPUTED    1  <-- the cell P2 needs
+        a detector click
+    unobserved + computed    1
+    unobserved + uncomputed  1
+    admissible: NO -- cannot produce the record of the
+      observations listed above. Refuted by an observation
+      already made, not by cost.
+
+  COARSE WITH FINE PATCHES
+    observed + computed      3
+    observed + UNCOMPUTED    1  <-- the cell P2 needs
+        a sentence spoken and heard
+    unobserved + computed    1
+    unobserved + uncomputed  1
+    admissible: NO -- cannot produce the record of the
+      observations listed above. Refuted by an observation
+      already made, not by cost.
+
+  LAZY ON OBSERVATION
+    observed + computed      4
+    observed + UNCOMPUTED    0  <-- the cell P2 needs
+    unobserved + computed    0
+    unobserved + uncomputed  2
+    admissible: yes -- no observation goes uncomputed
+
+------------------------------------------------------------------------
+
+  RESULT
+
+    In every architecture that can produce its own observation
+    record, the cell P2 needs is EMPTY. It is empty for a different
+    reason in each: in the refined stacks because the region is
+    resolved, in the lazy stack because observation is the trigger.
+
+    3 of 5 architectures do have an observed-and-uncomputed
+    consequence, and each is thereby inadmissible: a listener who
+    heard the sentence is a record the architecture cannot produce.
+    Cheapness does not buy the cell. Contradiction does.
+
+    The uncomputed consequences that remain are the unobserved ones
+    -- a single molecule taken alone, a photon on an unvisited rock.
+    Those are not the ripple effects the inference is deployed
+    against; nobody is held to a consequence nothing registers.
+
+    So P2 fails on every admissible architecture, at every cost,
+    INDEPENDENTLY of whether P1 is true. The conclusion does not
+    follow from the premise even if the premise holds.
+
+    SHB_005 says the same thing from the other side: within-frame
+    physics is unchanged by being hosted. A simulated fall breaks a
+    simulated leg with the same arithmetic.
+
+------------------------------------------------------------------------
+
+  WHAT IS NOT MEASURED HERE
+    measured:     whether P2 holds under any architecture
+    not measured: why any party states P1
+    state:        OUT_OF_SCOPE, with reason
+
+    TWO GRAINS, and only one of them is a motive question:
+      per_statement              UNREACHABLE    motive is not in the statement; a register would be CONSTANT_FIRES
+      per_population_over_time   NOT_COLLECTED  no corpus, no dated sampling frame, and the DF_010 use-mention problem -- not a reachability limit
+
+    Motive is not reachable from a statement, and a register that
+    inferred it would fire on every statement of the hypothesis
+    including the honest ones -- CONSTANT_FIRES. That argument is at
+    n=1. It does not reach the recurrence question, which is a rate
+    and is out of scope here for collection reasons instead.
+    The author of this
+    file is also not a disinterested party to the conclusion; the
+    interest direction is stated in declined() and left unresolved
+    rather than being resolved in the comfortable direction.
+
+------------------------------------------------------------------------
+
+  WHAT A COST FIGURE NEEDS BEFORE IT HAS A VALUE
+    the level stack        SHB_010   the answer spans 216 decades across architectures nobody has argued against
+    the consistency term   SHB_009   UNMEASURED under lazy evaluation; quoting the event count alone sets it to zero silently
+    the frame of the ratio SHB_003   required/available is VOID across frames; the numerator uses our constants and the denominator would not
+
+    All three are established in this folder and none is stated in
+    any version of the hypothesis. A figure quoted without them is
+    not a disputed number. It is a quantity with no value yet.

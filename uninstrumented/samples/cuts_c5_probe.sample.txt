@@ -1,0 +1,116 @@
+cuts_c5_probe -- two proposed additions to 023's cut set
+selection_cuts.py is imported and not modified
+
+========================================================================
+1  does C5 separate on its own?
+========================================================================
+    cut                                separates  overlapping values
+    C1_exclusivity                     NO         EXCLUSIVE
+    C2_authorship                      NO         AUTHORED_BY_INTERESTED_PARTIES, ENCOUNTERED, MIXED
+    C3_criterion_stability             yes        -
+    C4_application_grain               NO         PER_ROUND_UNIFORM
+    C5_environment_multiplicity        NO         MIXED, PLURAL_UNCONTROLLED, SINGLE_ALTERNATIVES_EXCLUDED
+    C2prime_arbitration                yes        -
+C5 as the maintainer states it does NOT separate the calibration set, and it
+fails on the same case C2 failed on.
+
+`directed_evolution` and `evolutionary_algorithms` are single authored
+environments with alternatives excluded by construction -- a binding assay
+admits one condition and no other -- and 023's NOT CLAIMED HERE names both as
+domains where the vocabulary is CORRECT. So "one exclusive environment,
+alternatives withheld" is a property shared by the clearest literal cases and
+the subject.
+
+That is `UNI_148` again with a different label, which is worth knowing before
+anything is built on C5.
+
+========================================================================
+2  does the ARBITRATION re-scoring separate where authorship did not?
+========================================================================
+    C2  as authorship  -- overlapping values: AUTHORED_BY_INTERESTED_PARTIES, ENCOUNTERED, MIXED
+    C2' as arbitration -- overlapping values: none: SEPARATES
+
+    case                       arbitration                      class
+    population_genetics        WORLD_RETURNS_READING            LITERAL
+    antibiotic_resistance      WORLD_RETURNS_READING            LITERAL
+    directed_evolution         WORLD_RETURNS_READING            LITERAL
+    evolutionary_algorithms    WORLD_RETURNS_READING            LITERAL
+    lysenkoism                 PARTY_RETURNS_DECISION           BORROWED
+    eugenics                   PARTY_RETURNS_DECISION           BORROWED
+    spencer_social_darwinism   PARTY_RETURNS_DECISION           BORROWED
+    alchian_firm_selection     MIXED                            BORROWED
+    memetics                   MIXED                            BORROWED
+It separates. Every LITERAL case has the world returning the reading; every
+BORROWED case has a party returning a decision, or is mixed on the borrowed
+side only.
+
+This is the substantive result of the probe. 023's C2 asks who AUTHORED the
+environment and comes back inert. Its own next sentence asks the discriminating
+question -- "The criterion does not return a reading. It returns a decision
+someone made" -- and that separates cleanly.
+
+So the maintainer's objection lands, one step over from where it was aimed. The
+problem is not that the environment is singular or authored; directed evolution
+is both and the word holds there. The problem is that in a directed-evolution
+assay the molecule either binds or it does not, and nobody decides that. The
+authoring stops at the environment and the arbitration is physical.
+
+Restated as a condition: **selection requires that the criterion be settled by
+the world rather than by a party.** That is what C2 was reaching for and is not
+what C2 measures.
+
+========================================================================
+3  the gasoline engine, added as a calibration case
+========================================================================
+    with gasoline_engine added (10 cases):
+      C1_exclusivity                     overlap: EXCLUSIVE
+      C2_authorship                      overlap: AUTHORED_BY_INTERESTED_PARTIES, ENCOUNTERED, MIXED
+      C3_criterion_stability             separates
+      C4_application_grain               overlap: PER_ROUND_UNIFORM
+      C5_environment_multiplicity        overlap: MIXED, PLURAL_UNCONTROLLED, SINGLE_ALTERNATIVES_EXCLUDED
+      C2prime_arbitration                separates
+
+    delivered four, as a vector, still separate: True
+    arbitration alone still separates:           True
+
+    gasoline_engine vs the subject on the two proposed cuts:
+      gasoline: ('SINGLE_ALTERNATIVES_EXCLUDED', 'PARTY_RETURNS_DECISION')
+      subject:  ('SINGLE_ALTERNATIVES_EXCLUDED', 'PARTY_RETURNS_DECISION')
+      identical: True
+The offered case behaves as offered. It is BORROWED -- nobody says gasoline
+engines were environmentally selected -- and it scores identically to the
+subject on both proposed cuts, which is the comparison the maintainer drew.
+
+It also survives the delivered four without breaking them, so adding it costs
+the existing instrument nothing.
+
+Worth noting what it does to C4. The gasoline engine scores PER_ROUND_UNIFORM:
+engines competed against reasonably uniform criteria within an era. So a case
+can be clearly borrowed while satisfying C4, which is a second reason -- after
+`UNI_149` -- not to read C4 as the cut that ends the analogy.
+
+========================================================================
+4  minimal separating subsets, delivered four vs delivered + arbitration
+========================================================================
+    delivered four                 C3; C1 + C4
+    delivered + C5 + arbitration   C3; C2prime; C1 + C4
+On the ten-case set including the gasoline engine, arbitration separates alone
+and so does C3. C5 appears in no minimal subset.
+
+Read together with `UNI_147`, the honest shape of the instrument is two
+conditions rather than four or six:
+
+  - C3, the criterion holds still long enough for anything to accumulate
+  - ARBITRATION, the criterion is settled by the world rather than by a party
+
+Each separates the calibration set alone. C1, C2-as-authorship, C4 and C5 all
+take values that appear in both classes, on ten cases coded from 023's own
+descriptions plus the maintainer's offered one.
+
+Not a claim that the others are wrong about the AI case. A claim about which
+of them are carrying the discrimination, which is what a calibration set is
+for.
+
+========================================================================
+end of probe -- recorded in AUDIT_NOTES.md as UNI_154..UNI_156
+========================================================================

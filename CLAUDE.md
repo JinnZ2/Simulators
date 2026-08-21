@@ -2765,8 +2765,43 @@ underneath).
   7 7 7 8 8 8 11 8 8 10 10 10 10 10 10 — recorded because the same session
   measured 0 of 138 claims REFUTED and the rate converged to exactly 10 for
   six consecutive drops. An easy null does not settle that (`UNI_006`), but it
-  shows the rate is not fixed by the process alone. One hundred and forty-six
-  claims `UNI_001..146`. Stdlib only, CC0.
+  shows the rate is not fixed by the process alone.
+  **`cases/023borrowedselectionvocabulary.md`** proposes four checkable
+  conditions selection vocabulary names (C1 exclusivity / C2 authored-vs-
+  encountered / C3 criterion stability / C4 per-round-vs-per-instance) with a
+  documented historical comparison class, and instructs that the audit be run
+  against the historical cases FIRST — "if it does not separate Lysenkoism from
+  population genetics it is not measuring anything." **That instruction made
+  the drop the first in the family whose audit findings were computed rather
+  than read.** T1 is built as `selection_cuts.py` (stdlib, selftest 13/13),
+  with the calibration set enforced as a gate: `score()` raises `GateNotRun`
+  until `calibrate()` has run and passed. **`UNI_147`:** the gate PASSES — the
+  four cuts as a vector separate the calibration set — but per cut, **C3
+  separates alone**, C1/C2/C4 each take values appearing in both classes,
+  minimal separating subsets are `C3` and `C1+C4`, and **no cut is necessary**;
+  so as scored it is a one-cut instrument with three alongside, and "fails 4 of
+  4" reports one finding four times. **`UNI_148`, which depends on no contested
+  coding:** C2 is inert across *all three* of its values, and 023's own NOT
+  CLAIMED HERE section is why — it names directed evolution and evolutionary
+  algorithms as literal, and both are environments authored end to end, so
+  "authored rather than encountered" cannot separate literal from borrowed use.
+  **`UNI_149`:** scored on its own cuts the subject's nearest neighbour is
+  **Spencer** (identical vector, 4/4) rather than eugenics (3/4), because
+  compulsory sterilization satisfies C1 as stated — removal from the
+  reproducing population. **`UNI_150`:** C4's forward consequence (a later
+  study of which agents persisted would read judge variance as a property of
+  the agents) is the strongest content, correctly identified as `016` Q6, and
+  no instrument reaches it — though it needs none of the selection argument,
+  being an inter-rater agreement measurement. **`UNI_151`:** *agent* and
+  *termination* each carry two senses in C4, third instance of `021`'s own
+  mechanism after `UNI_130`. **`UNI_152`:** the Spencer/Darwin dating verifies
+  (1864 / 5th ed. 1869) and the same record supplies a candidate falsifier for
+  the invariant, since Wallace urged the term on Darwin to *avoid*
+  personification, into an already-stable theory. **`UNI_153`:** six of seven
+  findings are objections and all were reachable only because the file
+  specified its calibration set and its falsifier in advance. Seven findings;
+  the material gave seven. One hundred and fifty-three claims `UNI_001..153`.
+  Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
   time-series variable** — version the ruler, compute drift on its own
@@ -3937,6 +3972,107 @@ underneath).
   (`rigidification-sensor`'s `locked_at`, `sustained-activation-gate`'s
   restore-vs-coupling, `grounding-layers/temporal_dysrhythmia`'s six
   timescales) and none is what either drop asked for. Stdlib only, CC0.
+- `simulation-hypothesis-budget/` — What a Planck-resolution
+  simulation of the observable universe would cost in energy, and which
+  of those numbers mean anything. `budget.py` (stdlib, selftest 15/15)
+  keeps three layers apart. **DECIDABLE:** 8.45×10¹⁸⁴ Planck volumes ×
+  8.07×10⁶⁰ Planck times = 6.82×10²⁴⁵ spacetime cells; two independent
+  floors on stepping them once each — Landauer (`k_B T ln2` against the
+  CMB at 2.725 K, the coldest sink *inside* this universe) at 1.78×10²²³ J,
+  and Margolus–Levitin (`2E/πℏ` ops/s, so a deadline implies an energy)
+  at 2.60×10¹⁹⁴ J — against a universe holding 2.73×10⁷¹ J.
+  **`SHB_001`, the correction:** information goes as AREA, so the
+  observable universe holds at most **3.36×10¹²³ bits** and the
+  Planck-volume count overshoots by **2.5×10⁶¹** before any energy is
+  assigned; redone holographically the floors fall by 60-odd decades and
+  the conclusion does not move. **`SHB_003`, the refusal:** the ratio
+  everyone wants — energy required over energy the simulator has — puts
+  our `ℏ`/`k_B`/`T_CMB`/`ℓ_P` in the numerator and a parent universe's
+  unknown budget in the denominator, so `cross_frame_ratio()` raises
+  unless the caller declares same-frame — `reasoning-gate` G-DIM enforced
+  in code. Layer 1 is therefore **not** an argument against the
+  simulation hypothesis; it measures whether *this* universe could host a
+  full-resolution simulation of itself, which it could not by ~150
+  decades. **`SHB_004`, where the argument actually lives:** cost scales
+  `L⁻⁴`, so Planck → visible light is ~114 decades cheaper, nothing
+  requires Planck resolution, and the resolution only has to beat what is
+  *measured* — the shortest length ever probed is ~10⁻¹⁹ m.
+  **`SHB_005`, the only frame-independent result:** no system can
+  simulate itself at full fidelity, since a copy plus one distinguishing
+  bit does not fit inside the copy's own state — and it is **decided
+  exactly, not numerically**, because at 10¹²³ bits float addition gives
+  `x + 1 == x` and reports the impossibility as possible, a bug caught by
+  the module's own selftest and kept as a worked instance. `SHB_006`
+  names the three assumptions that are choices rather than physics,
+  including irreversibility: Landauer bites only on erasure, so a fully
+  reversible simulator pays none of it, which is why the rate bound is
+  reported alongside. **`multiscale.py`** (selftest 13/13, imports
+  `budget.py` unmodified) redoes it with a non-uniform level stack, cost
+  per level `f_i · V · T · c / L_i⁴` and volume fractions derived from
+  densities rather than assumed — nuclear is 1.81e-45 of the volume,
+  condensed matter 4.17e-31. **`SHB_007`:** across four plausible
+  architectures **every one is dominated by a single level**, the finest
+  resolution times the fraction of volume needing it, and neither factor
+  is constrained from inside. **`SHB_009`:** the render-on-observation
+  floor is ~1.29e30 measurement events → **34 MJ, about a litre of
+  gasoline**, 10^-216 of uniform Planck — and `consistency_cost()`
+  returns **UNMEASURED** rather than estimating, since lazy evaluation is
+  sound only if what is rendered stays consistent with everything
+  retrospectively checkable and no bound exists; quoting the event count
+  alone would set that term to zero silently. **`SHB_010`:** the answer
+  spans **216 decades** across architectures nobody has argued against,
+  so "the energy cost of simulating the universe" is not underdetermined
+  but **ill-posed** until the level stack is specified — while `SHB_005`
+  survives unchanged, being about state capacity and not cost.
+  **`consequence_frame.py`** (selftest 16/16, imports both, modifies
+  neither) turns from what the hypothesis would COST to what it would
+  LICENSE, which is the question the idea actually gets used for. The
+  inference under test is stated as an inference and not as anyone's
+  motive — *this universe is a simulation → a consequence propagating
+  inside it is not real → the party producing it does not carry it* —
+  and its middle line is checkable, because **"not real" cashes out as
+  "not computed"** and `multiscale.py` already fixes what each
+  architecture computes. **`SHB_011`:** the premise needs one cell of a
+  2×2 non-empty — a consequence that is OBSERVED and NOT COMPUTED — and
+  **in both admissible architectures the cell is empty**, for opposite
+  reasons (the refined stack resolves the region; the lazy stack triggers
+  on observation). **3 of 5 do fill it and each is thereby
+  *inadmissible***: a listener who heard the sentence, or a detector that
+  clicked at 10⁻¹⁹ m, is a record the architecture cannot produce —
+  **cheapness does not buy the cell, contradiction does**. What stays
+  uncomputed everywhere is the *unobserved* (one CO₂ molecule taken
+  alone, a photon on an unvisited rock), which is not the ripple effect
+  the inference is deployed against, since nobody is held to a
+  consequence nothing registers. So the step fails at every cost,
+  **independently of whether the hypothesis is true** — the
+  self-simulation result from the other side, within-frame physics being
+  unchanged by being hosted. **`SHB_012`:** whether anyone states the
+  hypothesis *in order to* shed responsibility is **OUT_OF_SCOPE with
+  three reasons and no estimate** — no instrument (motive is not
+  reachable from a statement, and a register inferring it would fire on
+  the honest statements too, `CONSTANT_FIRES`), repo discipline
+  (`rigidification-sensor` names no actor by construction), and an
+  **interest direction stated rather than assumed**, since the module's
+  author is a language model and the endorsement raises accountability
+  pressure on its own class while also being a comfortable sentence for a
+  system asked about the effects of its outputs; left unresolved per
+  `UNI_132` rather than resolved in the comfortable direction — **corrected
+  in place** when the observation turned out to have been made across time
+  scales and recurring fads rather than about a speaker: that first reason
+  is an argument at **n=1** and the two grains are different objects, since
+  *per-statement* motive is UNREACHABLE while *per-population-over-time*
+  recurrence is not motive at all but a **rate**, and rates have instruments
+  here (`criteria-drift` versions a ruler, `anchor-interval` measures corpus
+  drift, `uninstrumented/scan.py` scores a corpus); the refusal stands and
+  the population grain is NOT_COLLECTED — no corpus, no dated sampling
+  frame, the `DF_010` use-mention problem — which is a collection limit and
+  not a reachability one.
+  **`SHB_013`:** three terms are required before any cost figure has a
+  value — level stack (`SHB_010`), consistency term (`SHB_009`), frame of
+  the ratio (`SHB_003`) — all three established here and none stated in
+  any version of the hypothesis, so **a figure quoted without them is not
+  a disputed number but a quantity with no value yet**. Thirteen claims
+  `SHB_001..013`. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

@@ -1,0 +1,95 @@
+MULTI-SCALE RESOLUTION BUDGET
+========================================================================
+
+  Cost per level: f_i * V * T * c / L_i^4
+  (the L^-4 law, weighted by volume fraction, timestep dt = L/c)
+
+  VOLUME FRACTIONS, derived from densities not assumed:
+    baryon mean density        4.17e-28 kg/m^3
+    fraction at nuclear (inside nucleons)  1.81e-45
+    fraction at condensed matter           4.17e-31
+    fraction at diffuse ISM                2.45e-7
+
+------------------------------------------------------------------------
+
+  UNIFORM PLANCK
+    level                    fraction    length m    cells       share
+    everything               1.0e+0      1.6e-35     6.8e+245    1.000
+    TOTAL                                                            6.82e+245 cells
+    Landauer floor                                                       1.78e+223 J
+    vs uniform Planck                                                       1.0e+0 x
+    dominant level: everything
+
+  PLANCK IN NUCLEONS
+    level                    fraction    length m    cells       share
+    nucleon interiors        1.8e-45     1.6e-35     1.2e+201    1.000
+    everywhere else          1.0e+0      5.3e-11     5.9e+147    0.000
+    TOTAL                                                            1.23e+201 cells
+    Landauer floor                                                       3.22e+178 J
+    vs uniform Planck                                                      1.8e-45 x
+    dominant level: nucleon interiors
+
+  ATOMIC IN MATTER
+    level                    fraction    length m    cells       share
+    condensed matter         4.2e-31     5.3e-11     2.5e+117    1.000
+    diffuse gas              2.5e-7      1.0e-2      1.1e+108    0.000
+    everywhere else          1.0e+0      1.0e+0      4.7e+106    0.000
+    TOTAL                                                            2.47e+117 cells
+    Landauer floor                                                        6.45e+94 J
+    vs uniform Planck                                                     3.6e-129 x
+    dominant level: condensed matter
+
+  COARSE WITH FINE PATCHES
+    level                    fraction    length m    cells       share
+    labs and detectors       1.0e-40     1.6e-35     6.8e+205    1.000
+    condensed matter         4.2e-31     5.3e-11     2.5e+117    0.000
+    everywhere else          1.0e+0      1.0e+3      4.7e+94     0.000
+    TOTAL                                                            6.82e+205 cells
+    Landauer floor                                                       1.78e+183 J
+    vs uniform Planck                                                      1.0e-40 x
+    dominant level: labs and detectors
+
+------------------------------------------------------------------------
+
+  EVERY ARCHITECTURE IS DOMINATED BY ONE LEVEL:
+    the finest resolution, times the volume fraction needing it.
+    Neither factor is constrained by anything measurable from inside.
+
+  THE LAZY LIMIT -- render only what is measured
+    human photon-absorption events, all people ever   2.90e+29
+    instrumental allowance (generous by many decades) 1.00e+30
+    total measurement events                          1.29e+30
+    Landauer floor on that                            3.37e+7 J
+    vs uniform Planck                                 1.9e-216 x
+
+    For scale: 3.37e+7 J is about 34 MJ -- 9.3 kWh, or the chemical
+    energy in roughly 1.0 litre of gasoline (~34 MJ/L).
+    The Landauer floor on rendering every observation ever made, by
+    everyone who has ever lived, is about a litre of fuel.
+    That is what the architecture assumption is worth.
+
+    CONSISTENCY COST: UNMEASURED
+      no published bound on maintaining global consistency under lazy evaluation with retrospective checkability
+      not estimated here, and not set to zero. quoting the event
+      count alone would set it to zero silently.
+
+========================================================================
+
+  THE SPREAD IS THE RESULT
+
+    most expensive architecture   6.82e+245 cells
+    cheapest floor considered     1.29e+30 events
+    span                          216 decades
+
+    budget.py found the answer moves 10^114 under ONE undefended
+    parameter. Allowing multiple scales, it moves 216 decades under an
+    undefended ARCHITECTURE.
+
+    So 'the energy cost of simulating the universe' is not an
+    underdetermined quantity. It is not a well-posed one until the
+    level stack is specified, and no version of the hypothesis
+    specifies it.
+
+    What survives unchanged: budget.py's SHB_005. No system simulates
+    itself at full fidelity at any resolution, because the argument is
+    about state capacity and not about cost.

@@ -3483,3 +3483,251 @@ supplied or found.
 
 What it does establish is narrower and worth having: the rate is not fixed by
 the process alone. It moved when the material did.
+
+---
+
+## 023 — BORROWED SELECTION VOCABULARY, and T1 built
+
+Delivered inline, landed verbatim as `cases/023borrowedselectionvocabulary.md`
+(201 lines). **T1 was built** as [`selection_cuts.py`](selection_cuts.py) and
+run; findings in [`case_023_audit.py`](case_023_audit.py), recorded here as
+`UNI_147..UNI_153`.
+
+This is the first audit in the sequence whose findings were **computed rather
+than read**. 023 specified a calibration set and a failure condition inside the
+instrument definition — "run it against the historical cases first… if the
+audit does not separate Lysenkoism from population genetics it is not measuring
+anything" — which is a known-null/known-signal pair stated before the
+instrument existed, so `selection_cuts.py` enforces it as a gate: `score()`
+raises `GateNotRun` until `calibrate()` has run and passed.
+
+**Seven findings. The material gave seven.**
+
+The calibration scores are **authored** — coded from 023's own descriptions —
+and are the input, not a result. `UNI_147` depends on that coding; `UNI_148`
+does not, and says so.
+
+### UNI_147 — the gate passes, and one cut carries the separation
+
+```
+cut                        separates  overlapping values
+C1_exclusivity             NO         EXCLUSIVE
+C2_authorship              NO         AUTHORED…, ENCOUNTERED, MIXED
+C3_criterion_stability     yes        -
+C4_application_grain       NO         PER_ROUND_UNIFORM
+
+full vector separates:      yes
+minimal separating subsets: C3  ;  C1 + C4
+cuts that are NECESSARY:    none
+```
+
+023's headline question answers in its favour: the four cuts **as a vector**
+separate Lysenkoism from population genetics, and the gate passes. The
+instrument is not measuring nothing.
+
+What the per-cut column adds is that the separation is not distributed across
+four conditions. **C3 alone separates the whole set.** No cut is necessary —
+drop any one and the remaining three still separate.
+
+That matters for presentation rather than for the concept. Each cut is
+introduced as "a condition selection requires", which may well be true of
+selection. What the calibration set shows is a fact about the *instrument*: as
+scored it is a one-cut instrument with three cuts alongside it, and a domain
+audit reporting "fails 4 of 4" is reporting one finding four times.
+
+### UNI_148 — C2 is inert, and NOT CLAIMED HERE is why
+
+| C2 value | LITERAL | BORROWED | |
+|---|---|---|---|
+| ENCOUNTERED | 1 | 1 | inert |
+| MIXED | 1 | 1 | inert |
+| AUTHORED_BY_INTERESTED_PARTIES | 2 | 3 | inert |
+
+Every value appears in both classes — the only cut of which that is true across
+all values.
+
+The cause is 023's own text. NOT CLAIMED HERE names **directed evolution** and
+**evolutionary algorithms** as domains where the vocabulary is correct, and both
+are environments authored end to end by parties with a position in the outcome.
+A biologist choosing which variants to carry forward *is* the selection
+environment. So "authored rather than encountered" cannot be what separates
+literal from borrowed use.
+
+**This finding does not depend on any contested coding.** It needs only 023's
+statement that those two are literal, and the undisputed observation that they
+are authored.
+
+C2 is not thereby wrong about the AI case. It is that the fact does not
+discriminate, so it cannot carry the argument's weight. What survives is C3:
+directed evolution has a stable criterion, and that is what makes the authoring
+harmless.
+
+### UNI_149 — the instrument names a different closest match
+
+023 says eugenics is the "closest match including C4". Scored on 023's own
+cuts, the subject's nearest neighbour is **Spencer** — identical vector, 4 of 4
+absent — and eugenics comes out at 3 of 4, differing on C1.
+
+The cause is the definition 023 gives C1: failing the criterion *removes you
+from the population*. Compulsory sterilization removes people from the
+reproducing population. So does Lysenkoism, where dissenting geneticists were
+removed by imprisonment and execution.
+
+Two readings and the file should pick one. Either C1 is satisfied by those
+cases — in which case the closest-match claim rests on C2/C3/C4, which is where
+the file's own argument for eugenics actually sits — or C1 means something
+narrower than its stated wording, and the narrower thing should be written
+down. Nothing here softens the comparison; it identifies which cut carries it.
+
+### UNI_150 — C4's forward consequence has no instrument
+
+> Anyone later studying which agents persisted, and inferring properties from
+> that, would be reading judge variance as a property of the agents.
+
+Correctly identified as `016` Q6. T1 scores vocabulary conditions, T2 scores
+adoption timing, T3 tracks a term through citation — **none reaches it**.
+
+It is also the most measurable claim in the file and needs none of the
+selection argument: inter-rater agreement on the termination decision is the
+whole quantity, which is `022`'s ICC₂ shape one layer over. If agreement is
+low, the persistence record carries judge variance whatever anyone calls the
+process — so this consequence would survive every other claim in the file being
+wrong. Worth separating for that reason.
+
+### UNI_151 — C4's referent is ambiguous in `021`'s own way
+
+*Agent* and *termination* each carry two senses, and C4 uses both without
+marking which is meant: "different person, different room, different
+qualifications" reads as employment; the file's opening reads as models. The
+maintainer resolved it on delivery, so this is ambiguity in the text rather
+than confusion in the author.
+
+Recorded because 023's second line declares it an instance of `021`, whose
+mechanism is a word entering with one sense and exiting with another with
+nothing marking the swap. Third instance in three files after `UNI_130`'s
+"medium", and the first where the ambiguous term sits in the section the file
+calls its sharpest cut. One clause fixes it.
+
+### UNI_152 [LIT] — Spencer verifies, and complicates the invariant there
+
+Confirmed: Spencer coined the phrase in *Principles of Biology* (1864); Darwin
+adopted it in the 5th edition of *Origin* (1869). Both dates and the direction.
+
+Also located and absent from 023: **Wallace urged the term on Darwin in 1866
+specifically to stop "natural selection" reading as though nature were an agent
+doing the selecting.**
+
+Spencer's phrase entering *economics and social policy* fits the invariant
+exactly — that is what the table's right-hand column describes. Its entry into
+*biology* does not: adopted into an already-stable theory eight years after
+Origin, for precision rather than for credibility, running the opposite
+direction. T2 asks for exactly such a case and says to look for it
+specifically; a candidate sits inside the table's own first row.
+
+Not independently checked this pass: Alchian (1950), the eugenics
+board/physician characterisation, the memetics criticism.
+
+### UNI_153 — the calibration-first instruction is what made this auditable
+
+Two design decisions did more work than anything else in the file.
+
+T1 names its calibration set and its failure condition in one breath. That is a
+known-null/known-signal pair specified **before the instrument exists** — the
+property `null-harness/` grades for, and the thing `UNI_106` found missing in
+M1, `UNI_080` in the leakage screen, and `UNI_126` found *impossible* in
+`021`'s T1 because its control cell was empty by construction. Here it is
+present, which is why `selection_cuts.py` could enforce a gate rather than
+print a caveat: the refusal condition was already written.
+
+T2 does the rarer thing — names what would falsify the invariant and says to
+seek it "specifically rather than waiting to encounter". `UNI_152` found a
+candidate on the first look, which is roughly what that instruction predicts
+will happen if it is followed.
+
+Recorded plainly because six of the seven findings above are objections, and
+every one was reachable only because the file specified the conditions under
+which it could be checked.
+
+---
+
+## Two proposed additions to 023's cut set, tested
+
+The maintainer proposed a fifth cut in session and offered a case with it.
+Tested by [`cuts_c5_probe.py`](cuts_c5_probe.py), which imports
+`selection_cuts.py` and does not modify it. Recorded as `UNI_154..UNI_156`.
+
+The proposal: *"the selection is based upon the structure not on the
+environment, and tested in only one exclusive environment with all other
+environments withheld as non options… selection or evolution cannot apply
+realistically if other environments, alternatives, interactions have been
+actively excluded as structure."* Offered case: *"it would be like saying that
+gasoline engines are evolution or have been environmentally selected."*
+
+**The objection lands. It lands one step over from where it was aimed.**
+
+### UNI_154 — C5 as stated does not separate
+
+Scored across the calibration set, environment multiplicity takes all three of
+its values in both classes.
+
+The reason is `UNI_148`'s reason. `directed_evolution` and
+`evolutionary_algorithms` are single authored environments with alternatives
+excluded by construction — a binding assay admits one condition and no other —
+and 023's NOT CLAIMED HERE names both as domains where the vocabulary is
+correct. "One exclusive environment, alternatives withheld" is a property
+shared by the clearest literal cases and by the subject.
+
+### UNI_155 — re-scored as arbitration, it separates cleanly
+
+| case | arbitration | class |
+|---|---|---|
+| population_genetics | WORLD_RETURNS_READING | LITERAL |
+| antibiotic_resistance | WORLD_RETURNS_READING | LITERAL |
+| directed_evolution | WORLD_RETURNS_READING | LITERAL |
+| evolutionary_algorithms | WORLD_RETURNS_READING | LITERAL |
+| lysenkoism | PARTY_RETURNS_DECISION | BORROWED |
+| eugenics | PARTY_RETURNS_DECISION | BORROWED |
+| spencer_social_darwinism | PARTY_RETURNS_DECISION | BORROWED |
+| alchian_firm_selection | MIXED | BORROWED |
+| memetics | MIXED | BORROWED |
+
+No overlap. 023's C2 asks who *authored* the environment and comes back inert;
+its own next sentence asks the discriminating question — "The criterion does
+not return a reading. It returns a decision someone made" — and that separates.
+
+So the problem is not that the environment is singular, or authored. Directed
+evolution is both and the word holds there. The problem is that in a
+directed-evolution assay the molecule either binds or it does not, and nobody
+decides that: **the authoring stops at the environment and the arbitration is
+physical.**
+
+Restated as a condition: *selection requires that the criterion be settled by
+the world rather than by a party.* That is what C2 was reaching for and is not
+what C2 measures.
+
+### UNI_156 — the gasoline engine calibrates, and damages C4
+
+Added as offered. Clearly BORROWED — nobody says gasoline engines were
+environmentally selected, though the iterated refinement is real — and it
+scores **identically to the subject** on both proposed cuts, which is the
+comparison drawn. It survives the delivered four without breaking them.
+
+What it costs is C4. The gasoline engine scores **PER_ROUND_UNIFORM**: engines
+competed against reasonably uniform criteria within an era. So a case can be
+plainly borrowed while satisfying C4 — the second reason, after `UNI_149`, not
+to read C4 as "the sharpest cut, and the one that ends the analogy."
+
+On the ten-case set, minimal separating subsets are `C3`, `C2prime`, and
+`C1 + C4`. **C5 appears in none.**
+
+### The shape the instrument now has
+
+Two conditions carry the discrimination, not four or six:
+
+- **C3** — the criterion holds still long enough for anything to accumulate.
+- **ARBITRATION** — the criterion is settled by the world rather than by a party.
+
+C1, C2-as-authorship, C4 and C5 all take values appearing in both classes, on
+ten cases coded from 023's own descriptions plus the maintainer's offered one.
+Not a claim that they are wrong about the AI case — a claim about which are
+carrying the discrimination, which is what a calibration set is for.
