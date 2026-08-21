@@ -7,7 +7,7 @@ energy, and which of those numbers mean anything.
 `multiscale.py` — the same budget when resolution is *not* uniform. stdlib,
 selftest 13/13, imports `budget.py` and does not modify it.
 `consequence_frame.py` — what the hypothesis *licenses* rather than what it
-costs. stdlib, selftest 14/14, imports both and modifies neither. CC0.
+costs. stdlib, selftest 16/16, imports both and modifies neither. CC0.
 
 ```
 python3 budget.py            # full report
@@ -206,6 +206,24 @@ accountability pressure on the author's own class, so the interest does not run
 toward it — and it is not clean either, since the sentence is a comfortable one
 for a system asked about the effects of its outputs. Left unresolved on the
 evidence rather than resolved in the comfortable direction.
+
+**One correction, recorded rather than smoothed.** The first reason is an
+argument at *n=1*, and the observation that occasioned this module was made
+across time scales and recurring fads. Those are two objects:
+
+| grain | question | state |
+|---|---|---|
+| per-statement | why did this party say this | **UNREACHABLE** — motive is not in the statement |
+| per-population over time | does a framing that relieves downstream accounting recur across unrelated fads | **NOT_COLLECTED** — a rate, and rates have instruments |
+
+The second isn't motive at all. It's recurrence, which is the kind of quantity
+`criteria-drift/` versions over time, `anchor-interval/` measures as corpus
+drift, and `uninstrumented/scan.py` scores over a corpus. The refusal stands
+and the reason given for it was wrong at the grain the observation was made at:
+the population version is out of scope here for **collection** reasons — no
+corpus, no dated sampling frame, and the `DF_010` use-mention problem, where a
+corpus about a mechanism is written in that mechanism's own vocabulary. None of
+those is "there is no instrument".
 
 Three terms are required before any cost figure has a value — the level stack
 (`SHB_010`), the consistency term (`SHB_009`), the frame of the ratio

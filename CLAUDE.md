@@ -4024,7 +4024,7 @@ underneath).
   so "the energy cost of simulating the universe" is not underdetermined
   but **ill-posed** until the level stack is specified — while `SHB_005`
   survives unchanged, being about state capacity and not cost.
-  **`consequence_frame.py`** (selftest 14/14, imports both, modifies
+  **`consequence_frame.py`** (selftest 16/16, imports both, modifies
   neither) turns from what the hypothesis would COST to what it would
   LICENSE, which is the question the idea actually gets used for. The
   inference under test is stated as an inference and not as anyone's
@@ -4056,7 +4056,17 @@ underneath).
   author is a language model and the endorsement raises accountability
   pressure on its own class while also being a comfortable sentence for a
   system asked about the effects of its outputs; left unresolved per
-  `UNI_132` rather than resolved in the comfortable direction.
+  `UNI_132` rather than resolved in the comfortable direction — **corrected
+  in place** when the observation turned out to have been made across time
+  scales and recurring fads rather than about a speaker: that first reason
+  is an argument at **n=1** and the two grains are different objects, since
+  *per-statement* motive is UNREACHABLE while *per-population-over-time*
+  recurrence is not motive at all but a **rate**, and rates have instruments
+  here (`criteria-drift` versions a ruler, `anchor-interval` measures corpus
+  drift, `uninstrumented/scan.py` scores a corpus); the refusal stands and
+  the population grain is NOT_COLLECTED — no corpus, no dated sampling
+  frame, the `DF_010` use-mention problem — which is a collection limit and
+  not a reachability one.
   **`SHB_013`:** three terms are required before any cost figure has a
   value — level stack (`SHB_010`), consistency term (`SHB_009`), frame of
   the ratio (`SHB_003`) — all three established here and none stated in

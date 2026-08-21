@@ -101,9 +101,16 @@ CONSEQUENCE FRAME -- what the hypothesis licenses, not what it costs
     not measured: why any party states P1
     state:        OUT_OF_SCOPE, with reason
 
+    TWO GRAINS, and only one of them is a motive question:
+      per_statement              UNREACHABLE    motive is not in the statement; a register would be CONSTANT_FIRES
+      per_population_over_time   NOT_COLLECTED  no corpus, no dated sampling frame, and the DF_010 use-mention problem -- not a reachability limit
+
     Motive is not reachable from a statement, and a register that
     inferred it would fire on every statement of the hypothesis
-    including the honest ones -- CONSTANT_FIRES. The author of this
+    including the honest ones -- CONSTANT_FIRES. That argument is at
+    n=1. It does not reach the recurrence question, which is a rate
+    and is out of scope here for collection reasons instead.
+    The author of this
     file is also not a disinterested party to the conclusion; the
     interest direction is stated in declined() and left unresolved
     rather than being resolved in the comfortable direction.

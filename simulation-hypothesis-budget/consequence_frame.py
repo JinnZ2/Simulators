@@ -165,11 +165,47 @@ def declined():
          its outputs. Recorded as unresolved on the evidence, per UNI_132.
 
     What IS measurable, and is measured above: whether the inference works.
+
+    CORRECTION, recorded rather than smoothed. The observation that occasioned
+    this file was made across TIME SCALES AND RECURRING FADS, not about any
+    one speaker. Reason 1 above is an argument at n=1 -- it is correct that
+    motive is not reachable from a single statement -- and it was applied to a
+    claim that was never at n=1. Those are two objects:
+
+      per-statement    why did this party say this      UNREACHABLE. reason 1
+                                                        holds; a motive
+                                                        register fires on the
+                                                        honest ones too.
+      per-population   does a framing that relieves      A RATE. rates have
+      over time        downstream accounting recur       instruments, and this
+                       across unrelated fads             repo has several.
+
+    The second is not motive at all. It is recurrence, and it is the kind of
+    quantity criteria-drift versions over time, anchor-interval measures as
+    corpus drift, and uninstrumented/scan.py scores over a corpus.
+
+    So the refusal stands and the reason given for it was wrong at the grain
+    the observation was made at. The population version is out of scope HERE
+    for different reasons, and they are collection reasons rather than
+    reachability ones: no corpus, no dated sampling frame, and the use-mention
+    problem DF_010 already measured -- a corpus about a mechanism is written in
+    that mechanism's own vocabulary, so the trigger fires on the discussion and
+    not on the instance. None of those is "there is no instrument".
     """
     return {"measured": "whether P2 holds under any architecture",
             "not_measured": "why any party states P1",
             "state": "OUT_OF_SCOPE, with reason",
-            "estimated_here": None}
+            "estimated_here": None,
+            "grain": {
+                "per_statement": {"state": "UNREACHABLE",
+                                  "why": "motive is not in the statement; a "
+                                         "register would be CONSTANT_FIRES"},
+                "per_population_over_time": {"state": "NOT_COLLECTED",
+                                             "why": "no corpus, no dated "
+                                                    "sampling frame, and the "
+                                                    "DF_010 use-mention "
+                                                    "problem -- not a "
+                                                    "reachability limit"}}}
 
 
 def terms_required():
@@ -276,9 +312,16 @@ def report():
     A("    not measured: %s" % d["not_measured"])
     A("    state:        %s" % d["state"])
     A("")
+    A("    TWO GRAINS, and only one of them is a motive question:")
+    for g, v in d["grain"].items():
+        A("      %-26s %-14s %s" % (g, v["state"], v["why"]))
+    A("")
     A("    Motive is not reachable from a statement, and a register that")
     A("    inferred it would fire on every statement of the hypothesis")
-    A("    including the honest ones -- CONSTANT_FIRES. The author of this")
+    A("    including the honest ones -- CONSTANT_FIRES. That argument is at")
+    A("    n=1. It does not reach the recurrence question, which is a rate")
+    A("    and is out of scope here for collection reasons instead.")
+    A("    The author of this")
     A("    file is also not a disinterested party to the conclusion; the")
     A("    interest direction is stated in declined() and left unresolved")
     A("    rather than being resolved in the comfortable direction.")
@@ -343,6 +386,13 @@ def selftest():
     ck("the declined half is OUT_OF_SCOPE and not estimated",
        declined()["estimated_here"] is None
        and declined()["state"].startswith("OUT_OF_SCOPE"))
+    g = declined()["grain"]
+    ck("the two grains are kept apart and carry DIFFERENT states, so the "
+       "refusal is not one blanket reason",
+       g["per_statement"]["state"] != g["per_population_over_time"]["state"])
+    ck("the population grain is NOT_COLLECTED, not UNREACHABLE -- a "
+       "collection limit, not a reachability one",
+       g["per_population_over_time"]["state"] == "NOT_COLLECTED")
     ck("every required term names an existing claim id",
        all(cid.startswith("SHB_") for _, cid, _ in terms_required()))
 
