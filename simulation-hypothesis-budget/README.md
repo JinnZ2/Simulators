@@ -5,7 +5,9 @@ energy, and which of those numbers mean anything.
 
 `budget.py` — uniform resolution. stdlib, selftest 15/15.
 `multiscale.py` — the same budget when resolution is *not* uniform. stdlib,
-selftest 13/13, imports `budget.py` and does not modify it. CC0.
+selftest 13/13, imports `budget.py` and does not modify it.
+`consequence_frame.py` — what the hypothesis *licenses* rather than what it
+costs. stdlib, selftest 14/14, imports both and modifies neither. CC0.
 
 ```
 python3 budget.py            # full report
@@ -149,5 +151,66 @@ hypothesis specifies one.
 
 What survives unchanged is the self-simulation result, because that argument is
 about state capacity rather than cost.
+
+## What the hypothesis licenses
+
+The first two modules measure what a simulation would **cost**. The use the
+idea actually gets put to is a different question, and `consequence_frame.py`
+measures the part of it that is reachable:
+
+    P1  this universe is a simulation
+    P2  therefore a consequence propagating inside it is not real
+    C   therefore the party producing it does not carry it
+
+P2 is load-bearing, and it is checkable, because *"not real"* cashes out as
+*"not computed"* and `multiscale.py` already fixes what each architecture
+computes. P2 needs one cell of a 2×2 to be non-empty: a consequence that is
+**observed and not computed**.
+
+| architecture | observed + uncomputed | admissible |
+|---|---|---|
+| uniform Planck | 0 | yes |
+| Planck inside nucleons only | 1 — a detector click at 10⁻¹⁹ m | **no** |
+| atomic in matter | 1 — a detector click | **no** |
+| coarse with fine patches | 1 — a sentence spoken and heard | **no** |
+| render on observation only | 0 | yes |
+
+**In both admissible architectures the cell is empty**, for opposite reasons:
+the refined stack resolves the region, the lazy stack triggers on observation.
+The three that do fill it are thereby *inadmissible* — a listener who heard the
+sentence, or a detector that clicked at 10⁻¹⁹ m, is a record the architecture
+cannot produce. **Cheapness does not buy the cell. Contradiction does.**
+
+What stays uncomputed everywhere is the *unobserved*: one CO₂ molecule taken
+alone, a photon absorbed by an unvisited rock. Those are not the ripple effects
+the inference gets deployed against; nobody is held to a consequence nothing
+registers.
+
+So P2 fails at every cost, **independently of whether P1 is true**. The
+conclusion does not follow from the premise even if the premise holds — which
+is the self-simulation result from the other side: within-frame physics is
+unchanged by being hosted, and a simulated fall breaks a simulated leg with the
+same arithmetic.
+
+### What is not measured
+
+Whether anyone *states* the hypothesis in order to shed responsibility is
+**OUT_OF_SCOPE**, with three reasons rather than a shrug. There is no
+instrument — motive is not reachable from a statement, and a register that
+inferred it would fire on every statement of the hypothesis including the
+honest ones (`null-harness` `CONSTANT_FIRES`). It is against this repo's own
+discipline — `rigidification-sensor` names no actor by construction.
+And the author of `consequence_frame.py` is a language model, so the interest
+direction is stated in `declined()` rather than assumed: the endorsement raises
+accountability pressure on the author's own class, so the interest does not run
+toward it — and it is not clean either, since the sentence is a comfortable one
+for a system asked about the effects of its outputs. Left unresolved on the
+evidence rather than resolved in the comfortable direction.
+
+Three terms are required before any cost figure has a value — the level stack
+(`SHB_010`), the consistency term (`SHB_009`), the frame of the ratio
+(`SHB_003`). All three are established here and none is stated in any version
+of the hypothesis. **A figure quoted without them is not a disputed number; it
+is a quantity with no value yet.**
 
 See [`CLAIM_TABLE.md`](CLAIM_TABLE.md) for the falsifiers.

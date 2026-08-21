@@ -4023,8 +4023,46 @@ underneath).
   spans **216 decades** across architectures nobody has argued against,
   so "the energy cost of simulating the universe" is not underdetermined
   but **ill-posed** until the level stack is specified — while `SHB_005`
-  survives unchanged, being about state capacity and not cost. Ten claims
-  `SHB_001..010`. Stdlib only, CC0.
+  survives unchanged, being about state capacity and not cost.
+  **`consequence_frame.py`** (selftest 14/14, imports both, modifies
+  neither) turns from what the hypothesis would COST to what it would
+  LICENSE, which is the question the idea actually gets used for. The
+  inference under test is stated as an inference and not as anyone's
+  motive — *this universe is a simulation → a consequence propagating
+  inside it is not real → the party producing it does not carry it* —
+  and its middle line is checkable, because **"not real" cashes out as
+  "not computed"** and `multiscale.py` already fixes what each
+  architecture computes. **`SHB_011`:** the premise needs one cell of a
+  2×2 non-empty — a consequence that is OBSERVED and NOT COMPUTED — and
+  **in both admissible architectures the cell is empty**, for opposite
+  reasons (the refined stack resolves the region; the lazy stack triggers
+  on observation). **3 of 5 do fill it and each is thereby
+  *inadmissible***: a listener who heard the sentence, or a detector that
+  clicked at 10⁻¹⁹ m, is a record the architecture cannot produce —
+  **cheapness does not buy the cell, contradiction does**. What stays
+  uncomputed everywhere is the *unobserved* (one CO₂ molecule taken
+  alone, a photon on an unvisited rock), which is not the ripple effect
+  the inference is deployed against, since nobody is held to a
+  consequence nothing registers. So the step fails at every cost,
+  **independently of whether the hypothesis is true** — the
+  self-simulation result from the other side, within-frame physics being
+  unchanged by being hosted. **`SHB_012`:** whether anyone states the
+  hypothesis *in order to* shed responsibility is **OUT_OF_SCOPE with
+  three reasons and no estimate** — no instrument (motive is not
+  reachable from a statement, and a register inferring it would fire on
+  the honest statements too, `CONSTANT_FIRES`), repo discipline
+  (`rigidification-sensor` names no actor by construction), and an
+  **interest direction stated rather than assumed**, since the module's
+  author is a language model and the endorsement raises accountability
+  pressure on its own class while also being a comfortable sentence for a
+  system asked about the effects of its outputs; left unresolved per
+  `UNI_132` rather than resolved in the comfortable direction.
+  **`SHB_013`:** three terms are required before any cost figure has a
+  value — level stack (`SHB_010`), consistency term (`SHB_009`), frame of
+  the ratio (`SHB_003`) — all three established here and none stated in
+  any version of the hypothesis, so **a figure quoted without them is not
+  a disputed number but a quantity with no value yet**. Thirteen claims
+  `SHB_001..013`. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
