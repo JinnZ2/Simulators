@@ -13,7 +13,8 @@ CONSEQUENCE FRAME -- what the hypothesis licenses, not what it costs
 
 ------------------------------------------------------------------------
 
-  CONSEQUENCES USED (ordinary ones, placed by scale and region)
+  CONSEQUENCES USED -- 6 hand-placed cases authored by this module,
+  not a survey. The empty cell below is a statement about these.
     a sentence spoken and heard              1e-2      diffuse_gas       observed
     a tree felled, the clearing after        1e+0      condensed_matter  observed
     a neuron firing in a decision            1e-6      condensed_matter  observed

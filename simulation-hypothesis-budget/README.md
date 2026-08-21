@@ -7,7 +7,10 @@ energy, and which of those numbers mean anything.
 `multiscale.py` — the same budget when resolution is *not* uniform. stdlib,
 selftest 13/13, imports `budget.py` and does not modify it.
 `consequence_frame.py` — what the hypothesis *licenses* rather than what it
-costs. stdlib, selftest 16/16, imports both and modifies neither. CC0.
+costs. stdlib, selftest 17/17, imports both and modifies neither.
+`ladder_audit.py` — the delivered [`LADDER.md`](LADDER.md), an audit of this
+folder from outside it, checked rung by rung against the code. stdlib,
+selftest 16/16. CC0.
 
 ```
 python3 budget.py            # full report
@@ -25,7 +28,7 @@ The module keeps three layers apart, because they have different standing:
 
 | layer | what it is | standing |
 |---|---|---|
-| **DECIDABLE** | counts and floors computed in our physics, about a simulator embedded in our physics | real numbers |
+| **ARITHMETIC** | counts and floors computed in our physics, about a simulator embedded in our physics | a consistent calculation — **not a measurement**. Relabelled from DECIDABLE; see [`LADDER.md`](LADDER.md) |
 | **VOID** | "energy required / energy the simulator has", when the simulator is in a parent universe | **refused** |
 | **KNOB** | the resolution assumption | does more work than any physics here |
 
@@ -225,10 +228,61 @@ corpus, no dated sampling frame, and the `DF_010` use-mention problem, where a
 corpus about a mechanism is written in that mechanism's own vocabulary. None of
 those is "there is no instrument".
 
-Three terms are required before any cost figure has a value — the level stack
+Terms are required before any cost figure has a value — the level stack
 (`SHB_010`), the consistency term (`SHB_009`), the frame of the ratio
-(`SHB_003`). All three are established here and none is stated in any version
-of the hypothesis. **A figure quoted without them is not a disputed number; it
-is a quantity with no value yet.**
+(`SHB_003`), and the erasure count (`SHB_015`). All four are established here
+and none is stated in any version of the hypothesis. **A figure quoted without
+them is not a disputed number; it is a quantity with no value yet.**
+
+## The ladder — an audit of this folder, from outside it
+
+[`LADDER.md`](LADDER.md) was delivered as a four-rung verdict on what is
+actually established here. It is landed verbatim, and `ladder_audit.py` checks
+each rung against the code instead of agreeing with it in prose. Three
+verdicts were possible and all three occurred.
+
+| rung | verdict | where it lands |
+|---|---|---|
+| Planck-scale: *"a consistent calculation with unverified operands"* | **LANDS** | the label, not the arithmetic — sharpened below |
+| QM level: *"nobody has an energy cost for a measurement outcome"* | **LANDS** | `SHB_009`'s litre of gasoline prices erasure, not measurement |
+| consistency term: *"I upgraded a null into an instrument. Retract."* | **LANDS_ELSEWHERE** | not at the site named — checked in code — but at `SHB_011` |
+| *"is it possible"*: not doable from inside | **ALREADY_HELD** | `SHB_003`; residue is rung 1's residue again |
+
+**Rung 1, sharpened.** "Every operand" is not what the table shows: 9 of 12
+entries are measured or exactly derived and used at their own scale. The
+extrapolation is *concentrated in three interpretive steps* — Planck length as
+a **cell** (15.8 decades below the shortest length ever probed), Planck time as
+a **tick** (22.3 decades below the shortest interval ever resolved), and
+`kT ln2` per cell-step. That's the harder objection, because it survives
+someone checking the constants: the constants are fine, one physical *reading*
+of them is not. The folder already held the refuting number — `SHB_004` quotes
+10⁻¹⁹ m — and never turned it back on its own layer label. Layer 1 is
+relabelled `DECIDABLE` → **`ARITHMETIC`**.
+
+**Rung 2, and it refutes one of these claims.** Landauer bounds **erasure**;
+Bennett's resolution of Maxwell's demon is that **measurement can be
+reversible** — the demon doesn't pay to look, it pays to forget. Pricing
+1.29×10³⁰ measurement outcomes at `kT ln2` each prices the operation Bennett
+showed need not cost anything. The steelman: a simulator with finite, *reused*
+memory must erase each outcome to make room, and then the count transfers
+unchanged — but nothing states that, and write-once storage pays **0 J** for
+the same events. So the same count admits both 0 J and 3.37×10⁷ J, and the
+erasure count is a **fourth required term**. `SHB_013`'s falsifier read "a
+fourth required term". It fired. `SHB_013` is **REFUTED**, and its "may grow"
+hedge is not used to rescue it — that's the epicycle
+`equivalence-field/claim_lineage.py` refuses.
+
+**Rung 3 was checked rather than conceded.** `consistency_cost()` returns
+`UNMEASURED` with `estimated_here=None` and the selftest pins it; the retracted
+move isn't the move this folder made. It lands one module over: `SHB_011` reads
+a 2×2 cell as EMPTY over **six consequences the module wrote itself**. The
+opposite branch is reachable and fires (3 of 5 architectures fill the cell), so
+it isn't `CONSTANT_SILENT` — but an empty cell over an authored fixture set is
+a statement about the fixtures, and it now says so.
+
+**Nothing was retuned.** Every rung that landed landed on a *label* or a
+*claim*. No number in `budget.py`, `multiscale.py` or `consequence_frame.py`
+changed — which is what "an audit of standing" means, and what the ladder's own
+first word already said.
 
 See [`CLAIM_TABLE.md`](CLAIM_TABLE.md) for the falsifiers.
