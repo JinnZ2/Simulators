@@ -35,37 +35,52 @@ assumed independence that is not there, here to establish one you need.
 
 ## THREE CORRECTIONS TO THE DELIVERED TABLE
 
-**1. A bath set assigned to the source is not the bath set of the leg.**
+**1. A source bath set and a leg bath set are two different quantities, and
+the original table was carrying the first.**
 
 Alpha decay is genuinely near-immune to substrate temperature and rail drift.
-The nucleus does not care. **The detector cares.** A PIN diode's leakage
-roughly doubles every 7 °C, a PMT or Geiger tube needs a high-voltage rail,
-and both sit on the board with everything else. Pricing `decay_alpha` at
-`baths={"COS"}` prices the physics and drops the readout chain.
+The nucleus does not care. The detector does — a PIN diode's leakage roughly
+doubles every 7 °C, a PMT or Geiger tube needs a high-voltage rail, and both
+sit on the board with everything else.
 
-So the delivered verdict —
+The first reading of `decay_alpha` at `baths={"COS"}` was that the readout
+chain had been dropped. **That reading does not survive measurement.** The
+readout baths are identical across all seven sources — TH, PWR and EM appear
+in every one — so they are a constant, and a constant cannot separate pairs:
 
-    decay_alpha x rtd_tunnel   overlap {}   CLEAN
+    distinct overlap sets, source baths only    2
+    distinct overlap sets, source | readout     2      same partition
 
-— is **false as fielded**. Every source here carries `source_baths` and
-`readout_baths` separately, and pair verdicts use the union. Under that
-accounting **no admissible pair is clean**: all ten are welded at TH/PWR/EM
-through their readouts.
+Adding the readout chain changes no pair ranking. A table built to rank pairs
+by independence has a reason to carry the discriminating bath set and drop the
+constant, and that reason was present in the original and not recovered on
+first reading.
 
-The source material names this failure mode in its own prose — "if both are on
-the same board, same temperature, same power rail, the environment couples
-them" — and the table beside it exempts `decay_alpha` from exactly those
-baths. The prose and the table disagree. No authorship is assigned to either:
-the material is co-produced and the layers are not separable from here. What
-is audited is the table, because the table is what a pair verdict is computed
-from.
+What the split does buy, and why it is kept: it makes the constant explicit
+rather than implicit, which is what produces the three-state verdict below.
+The word `CLEAN` is what fails — `overlap {}` on source baths is true and
+means *no shared source bath*, but it reads as *no shared bath*, and no pair
+is that. The correction is to the verdict vocabulary, not to the bath
+assignment.
 
-**2. The correlation rule is not where entropy hides.**
+**2. The correlation rule is not where entropy hides — unless it carries key
+material, which is a defined construction and was not recovered on first
+reading.**
 
-"The correlation rule is where you can hide the actual entropy" is security
-through obscurity. The rule is an algorithm; Kerckhoffs says price it as
-public. Hiding the combiner adds no min-entropy, and an attacker who
-compromises both legs is not additionally slowed by not knowing the XOR.
+Read as a secret *algorithm*, "the correlation rule is where you can hide the
+actual entropy" is security through obscurity: the rule is public under
+Kerckhoffs, and hiding the combiner adds no min-entropy.
+
+Read as a secret *seed*, it names a **seeded extractor** — a standard,
+formally defined construction where the seed is key material and its secrecy
+is priced as key, not as obscurity. That reading is legitimate and the first
+audit of this folder did not recover it. Which reading applies is decided by
+where the secret sits, and that is a design question the folder does not
+settle.
+
+What holds under both readings: the security is in the min-entropy, and the
+independence measurement is what licenses the two-source construction that
+needs no seed at all.
 
 What the two-source structure actually buys is better than what it was being
 credited with: **a two-source extractor needs no seed and no secrecy — it

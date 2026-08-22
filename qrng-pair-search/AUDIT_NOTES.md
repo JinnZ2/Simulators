@@ -36,17 +36,30 @@ case for the pair, not the fielded rate. `rate_floor_conservative` is reported
 beside it so the spread is visible rather than a single optimistic number
 standing alone.
 
-## What was corrected, and a note on attribution
+## A correction this folder made, then withdrew
 
-Three corrections went into this folder, and one of them matters beyond this
-table. The source material's prose names the failure mode — same board, same
-temperature, same rail — and its table exempts `decay_alpha` from exactly
-those baths. The correction is not that the physics was wrong; alpha decay
-really is insensitive. It is that **the bath set was assigned to the source
-and the readout chain was dropped in transfer**, which is the same shape as
-`simulation-hypothesis-budget/`'s `LABEL_TRUNCATED_IN_TRANSFER`: a term
-present upstream and absent downstream, with everything after it inheriting
-the truncation as if it were the number.
+The first version of this folder read `decay_alpha`'s `baths={"COS"}` as a
+dropped readout chain — the same shape as
+`simulation-hypothesis-budget/`'s `LABEL_TRUNCATED_IN_TRANSFER`, a term
+present upstream and absent downstream. **That reading is withdrawn.**
+
+Measured: the readout baths are identical across all seven sources, so they
+form a constant across every pair, and the pair partition is the same with or
+without them — two distinct overlap sets either way. A table whose purpose is
+to rank pairs by independence has a reason to carry only the discriminating
+bath set. The reason was in the original table and was not recovered on first
+reading; absence of a legible reason was treated as absence of a reason.
+
+The split between `source_baths` and `readout_baths` is kept, because making
+the constant explicit is what produces the `separable` category. What was
+actually wrong is narrower than first claimed: the verdict word `CLEAN`.
+`overlap {}` over source baths is true and means *no shared source bath*; it
+reads as *no shared bath*, which no pair satisfies.
+
+This is the second finding in this folder of the same shape as the folder's
+own subject — a quantity that is constant across all cases carries no
+information about differences between them, and including it looks like rigour
+while adding nothing.
 
 **No authorship is assigned to any part of the source material.** It arrived
 co-produced, prose and table together, and the layers are not separable from

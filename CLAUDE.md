@@ -2,6 +2,15 @@
 
 Repository for different simulations and supporting tooling.
 
+## Report form
+
+`AUDIT_CONTRACT.md` governs how work is reported across this ecosystem:
+structure first, gap analysis as deliverable, a score without its support
+count is not a score, wording is not a decision, a free-text discriminator
+carrying structural load is a flagged defect, and co-produced documents are
+layer-separated before audit rather than audited as a composite. Read it
+before reporting.
+
 ## Meta-spine (read first)
 
 The methodology spine sits in four root-level files. Every simulator
