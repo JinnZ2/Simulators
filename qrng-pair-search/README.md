@@ -52,9 +52,13 @@ So the delivered verdict —
 accounting **no admissible pair is clean**: all ten are welded at TH/PWR/EM
 through their readouts.
 
-This is the same shape as the failure the drop itself names — "if both are on
+The source material names this failure mode in its own prose — "if both are on
 the same board, same temperature, same power rail, the environment couples
-them" — arriving inside the table that was written to avoid it.
+them" — and the table beside it exempts `decay_alpha` from exactly those
+baths. The prose and the table disagree. No authorship is assigned to either:
+the material is co-produced and the layers are not separable from here. What
+is audited is the table, because the table is what a pair verdict is computed
+from.
 
 **2. The correlation rule is not where entropy hides.**
 

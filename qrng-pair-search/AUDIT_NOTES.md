@@ -36,17 +36,23 @@ case for the pair, not the fielded rate. `rate_floor_conservative` is reported
 beside it so the spread is visible rather than a single optimistic number
 standing alone.
 
-## What was corrected and what that implies about the source
+## What was corrected, and a note on attribution
 
 Three corrections went into this folder, and one of them matters beyond this
-table. The delivered drop stated the failure mode — same board, same
-temperature, same rail — and then produced a table whose `decay_alpha` row
-exempted itself from exactly those baths. The correction is not that the
-physics was wrong; alpha decay really is insensitive. It is that **the bath
-set was assigned to the source and the readout chain was dropped in
-transfer**, which is the same shape as `simulation-hypothesis-budget/`'s
-`LABEL_TRUNCATED_IN_TRANSFER`: a term present upstream and absent downstream,
-with everything after it inheriting the truncation as if it were the number.
+table. The source material's prose names the failure mode — same board, same
+temperature, same rail — and its table exempts `decay_alpha` from exactly
+those baths. The correction is not that the physics was wrong; alpha decay
+really is insensitive. It is that **the bath set was assigned to the source
+and the readout chain was dropped in transfer**, which is the same shape as
+`simulation-hypothesis-budget/`'s `LABEL_TRUNCATED_IN_TRANSFER`: a term
+present upstream and absent downstream, with everything after it inheriting
+the truncation as if it were the number.
+
+**No authorship is assigned to any part of the source material.** It arrived
+co-produced, prose and table together, and the layers are not separable from
+inside this folder. Crediting a claim to a person, or a mistake to a person,
+requires knowing which layer produced it, and that is not knowable here. The
+corrections stand on the physics; the attribution does not exist.
 
 ## The extractor is not chosen and that is the largest gap
 
