@@ -56,12 +56,20 @@ by independence has a reason to carry the discriminating bath set and drop the
 constant, and that reason was present in the original and not recovered on
 first reading.
 
-What the split does buy, and why it is kept: it makes the constant explicit
-rather than implicit, which is what produces the three-state verdict below.
-The word `CLEAN` is what fails — `overlap {}` on source baths is true and
-means *no shared source bath*, but it reads as *no shared bath*, and no pair
-is that. The correction is to the verdict vocabulary, not to the bath
-assignment.
+The readout chain does belong in the accounting — it was on the wrong object
+twice. What discriminates is not which baths a source's readout touches, but
+which readout elements two legs **share**, and sharing is a property of the
+deployment:
+
+    single board, one ADC              0 of 10 pairs clean
+    split rail/clock/ADC, same board   0 of 10 pairs clean
+    fully separate chains              7 of 10 pairs clean
+
+`decay_alpha × rtd_tunnel` is source-disjoint and welds at the ADC. The
+original `CLEAN` verdict is therefore recoverable rather than wrong: true for
+a deployment nobody described, false for the compact one this folder is about.
+Compactness forces the sharing, which is the squeeze — now priced rather than
+asserted.
 
 **2. The correlation rule is not where entropy hides — unless it carries key
 material, which is a defined construction and was not recovered on first

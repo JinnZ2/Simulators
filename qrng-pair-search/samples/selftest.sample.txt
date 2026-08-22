@@ -8,7 +8,12 @@
   ok    shared-laser pair is structurally welded on OPT
   ok    a structurally welded pair is not separable
   ok    effective bath is the union
-  ok    no admissible pair is clean as fielded
+  ok    no admissible pair is clean on a single shared board
+  ok    separate chains make source-disjoint pairs clean
+  ok    sharing only the board leaves TH and nothing else
+  ok    a shared ADC welds a source-disjoint pair
+  ok    sharing cannot clear a structural weld
+  ok    unknown readout element is rejected
   ok    some admissible pairs are separable
   ok    rate cap takes the slower leg
   ok    conservative floor is below the optimistic cap
@@ -32,4 +37,4 @@
   ok    protocol ends on the quiet-bench warning
   ok    every bath key is documented
 
-selftest 33/33
+selftest 38/38

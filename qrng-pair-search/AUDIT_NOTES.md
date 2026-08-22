@@ -61,6 +61,27 @@ own subject — a quantity that is constant across all cases carries no
 information about differences between them, and including it looks like rigour
 while adding nothing.
 
+**Third pass, and the withdrawal was also incomplete.** The readout chain does
+belong in the accounting; it was on the wrong object twice. Baths on the
+SOURCE make it a constant (original table, and this folder's first
+correction). What discriminates is which readout elements two legs SHARE, and
+sharing is a property of the deployment, not of either source. `pair_score`
+now takes that as a parameter:
+
+    single board, one ADC              0 of 10 pairs clean
+    split rail/clock/ADC, same board   0 of 10 pairs clean
+    fully separate chains              7 of 10 pairs clean
+
+`decay_alpha x rtd_tunnel` is source-disjoint and welds at the ADC. So the
+original `CLEAN` verdict is recoverable rather than wrong: it is true for a
+deployment nobody described, and false for the compact one the folder is
+about. Compactness forces the sharing — that is the squeeze, and it is now
+priced rather than asserted.
+
+Three readings of the same field, in order: constant dropped by design;
+term dropped in transfer; right term, wrong object. The third is the one
+that computes something.
+
 **No authorship is assigned to any part of the source material.** It arrived
 co-produced, prose and table together, and the layers are not separable from
 inside this folder. Crediting a claim to a person, or a mistake to a person,

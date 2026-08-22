@@ -126,6 +126,36 @@ SOURCES = {
 }
 
 
+# Which readout resources two legs share is a property of the DEPLOYMENT, not
+# of either source. Assigning readout baths to a source makes them a constant
+# across every pair -- measured: identical for all seven sources here -- and a
+# constant cannot separate pairs. Assigning SHARING to the pair is what
+# discriminates. Both the original table (baths on the source) and this
+# folder's first correction (readout_baths on the source) put it on the wrong
+# object.
+READOUT_SHARING = {
+    "board": {"TH"},          # one substrate, one temperature
+    "rail": {"PWR"},          # one supply, one bias drift
+    "clock": {"EM"},          # one oscillator, one pickup path
+    "adc": {"EM", "PWR"},     # one converter carries both
+}
+
+# Compact single-board is the worst case and the case the squeeze is about.
+FULLY_SHARED = frozenset(READOUT_SHARING)
+
+
+def shared_readout_baths(shared):
+    """Baths introduced by the readout elements two legs actually share."""
+
+    unknown = set(shared) - set(READOUT_SHARING)
+    if unknown:
+        raise ValueError("unknown readout element(s): %s" % sorted(unknown))
+    out = set()
+    for element in shared:
+        out |= READOUT_SHARING[element]
+    return out
+
+
 def effective_baths(name):
     """What the fielded leg actually couples to: source plus readout."""
 
@@ -133,21 +163,25 @@ def effective_baths(name):
     return set(source["source_baths"]) | set(source["readout_baths"])
 
 
-def pair_score(a, b):
+def pair_score(a, b, shared=FULLY_SHARED):
     """Score a candidate pair on independence, admissibility and rate.
 
     Two overlaps are reported and they are not interchangeable.
 
       structural  the baths the SOURCES share. Irreducible without changing
                   the physics of one leg.
-      fielded     the baths the LEGS share once the readout chain is counted.
-                  Reducible by engineering, and only by engineering that is
-                  then MEASURED -- see independence_protocol().
+      fielded     structural, plus the baths introduced by the readout
+                  elements the two legs actually share. `shared` is a
+                  deployment choice, so this moves with the build -- which is
+                  the whole point: it is the only part a designer controls.
+
+    Passing shared=frozenset() prices two legs on fully separate chains. That
+    is the bound, not a description of any real board.
     """
 
     A, B = SOURCES[a], SOURCES[b]
     structural = set(A["source_baths"]) & set(B["source_baths"])
-    fielded = effective_baths(a) & effective_baths(b)
+    fielded = structural | shared_readout_baths(shared)
     return dict(
         pair=(a, b),
         admissible=A["quantum"] == QUANTUM and B["quantum"] == QUANTUM,
@@ -161,10 +195,10 @@ def pair_score(a, b):
     )
 
 
-def admissible_pairs():
+def admissible_pairs(shared=FULLY_SHARED):
     """Every quantum-quantum pair, ordered by how little the legs share."""
 
-    scored = [pair_score(a, b)
+    scored = [pair_score(a, b, shared)
               for a, b in itertools.combinations(sorted(SOURCES), 2)]
     scored = [s for s in scored if s["admissible"]]
     return sorted(scored, key=lambda s: (len(s["structural_overlap"]),
@@ -303,7 +337,18 @@ def report(stream=sys.stdout):
             flag,
         ))
 
-    write("\nADMISSIBLE PAIRS -- quantum on both legs\n")
+    write("\nREADOUT SHARING IS A DEPLOYMENT CHOICE, NOT A SOURCE PROPERTY\n")
+    for label, shared in (("single board, one ADC", FULLY_SHARED),
+                          ("split rail/clock/ADC, same board",
+                           frozenset({"board"})),
+                          ("fully separate chains", frozenset())):
+        pairs = admissible_pairs(shared)
+        clean = len([p for p in pairs if not p["fielded_overlap"]])
+        write("  %-34s %d of %d pairs clean\n" % (label, clean, len(pairs)))
+    write("  decay_alpha x rtd_tunnel is source-disjoint and welds at the ADC.\n")
+    write("  Compactness forces sharing: that is the squeeze, priced.\n")
+
+    write("\nADMISSIBLE PAIRS -- quantum on both legs, single shared board\n")
     write("  %-34s %-10s %-22s %s\n"
           % ("pair", "structural", "fielded", "rate cap"))
     for score in admissible_pairs():
@@ -314,11 +359,11 @@ def report(stream=sys.stdout):
             score["rate_cap_optimistic"],
         ))
 
-    write("\n  Every pair is welded at TH/PWR/EM once the readout chain is\n")
-    write("  counted. None is CLEAN as fielded. The pairs worth building are\n")
-    write("  the ones with an EMPTY STRUCTURAL overlap, where the weld is an\n")
-    write("  engineering fact rather than a physics one -- and where the\n")
-    write("  separation is therefore measurable.\n")
+    write("\n  On one shared board every pair welds at TH/PWR/EM. The pairs\n")
+    write("  worth building are those with an EMPTY STRUCTURAL overlap, where\n")
+    write("  the weld is an engineering fact rather than a physics one -- and\n")
+    write("  where separating the chains is therefore both possible and\n")
+    write("  measurable. A structural weld survives any chain separation.\n")
 
     separable = [s for s in admissible_pairs() if s["separable"]]
     write("\n  separable pairs (structural empty, fielded non-empty): %d of %d\n"
@@ -393,8 +438,22 @@ def selftest(stream=sys.stdout):
 
     check("effective bath is the union",
           effective_baths("decay_alpha") == {"COS", "TH", "PWR", "EM"})
-    check("no admissible pair is clean as fielded",
+    check("no admissible pair is clean on a single shared board",
           all(s["fielded_overlap"] for s in admissible_pairs()))
+    check("separate chains make source-disjoint pairs clean",
+          len([s for s in admissible_pairs(frozenset())
+               if not s["fielded_overlap"]]) == 7)
+    check("sharing only the board leaves TH and nothing else",
+          pair_score("decay_alpha", "rtd_tunnel",
+                     frozenset({"board"}))["fielded_overlap"] == {"TH"})
+    check("a shared ADC welds a source-disjoint pair",
+          pair_score("decay_alpha", "rtd_tunnel",
+                     frozenset({"adc"}))["fielded_overlap"] == {"EM", "PWR"})
+    check("sharing cannot clear a structural weld",
+          pair_score("photon_split", "vacuum_homodyne",
+                     frozenset())["fielded_overlap"] == {"OPT"})
+    check("unknown readout element is rejected",
+          _raises(shared_readout_baths, {"nonsense"}))
     check("some admissible pairs are separable",
           any(s["separable"] for s in admissible_pairs()))
     check("rate cap takes the slower leg",

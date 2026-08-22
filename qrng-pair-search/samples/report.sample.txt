@@ -10,7 +10,14 @@ SOURCES -- effective bath is source | readout
   rtd_tunnel       src=TH           readout=EM,PWR,TH          eff=EM,PWR,TH
   vacuum_homodyne  src=OPT          readout=EM,PWR,TH          eff=EM,OPT,PWR,TH
 
-ADMISSIBLE PAIRS -- quantum on both legs
+READOUT SHARING IS A DEPLOYMENT CHOICE, NOT A SOURCE PROPERTY
+  single board, one ADC              0 of 10 pairs clean
+  split rail/clock/ADC, same board   0 of 10 pairs clean
+  fully separate chains              7 of 10 pairs clean
+  decay_alpha x rtd_tunnel is source-disjoint and welds at the ADC.
+  Compactness forces sharing: that is the squeeze, priced.
+
+ADMISSIBLE PAIRS -- quantum on both legs, single shared board
   pair                               structural fielded                rate cap
   decay_alpha x nv_spin              -          welded:EM,PWR,TH       1e+05
   decay_alpha x photon_split         -          welded:EM,PWR,TH       1e+05
@@ -23,11 +30,11 @@ ADMISSIBLE PAIRS -- quantum on both legs
   nv_spin x vacuum_homodyne          OPT        welded:EM,OPT,PWR,TH   1e+06
   photon_split x vacuum_homodyne     OPT        welded:EM,OPT,PWR,TH   1e+09
 
-  Every pair is welded at TH/PWR/EM once the readout chain is
-  counted. None is CLEAN as fielded. The pairs worth building are
-  the ones with an EMPTY STRUCTURAL overlap, where the weld is an
-  engineering fact rather than a physics one -- and where the
-  separation is therefore measurable.
+  On one shared board every pair welds at TH/PWR/EM. The pairs
+  worth building are those with an EMPTY STRUCTURAL overlap, where
+  the weld is an engineering fact rather than a physics one -- and
+  where separating the chains is therefore both possible and
+  measurable. A structural weld survives any chain separation.
 
   separable pairs (structural empty, fielded non-empty): 7 of 10
 
