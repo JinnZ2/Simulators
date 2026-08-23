@@ -100,6 +100,18 @@ Naming the shapes from here would be easy — the categories a contempt
 taxonomy would use are guessable — and it would be this module writing the
 finding and then confirming it against its own fixtures.
 
+## Task 1 (seed sets) — done
+
+[`TASK1_SEEDS.md`](TASK1_SEEDS.md). Seed file landed verbatim at
+[`seeds/dimension-words.txt`](seeds/dimension-words.txt), md5
+`de5cdbb44650e9b88c015737b1170ce2`, from
+`github.com/wenhaojiangsoc/devaluation @ c22a643`. All four requested sets
+present. The `moral` dimension referenced in `embeddings.py` has **no seed
+lists in the package** — the paper's "moral standing" is the `evaluation`
+axis (good/bad, Osgood E). Task 2 is blocked: the embeddings live on
+Dropbox, which the egress policy refuses, and the HistWords fallback host is
+refused too.
+
 ## Two things needing your decision
 
 1. **The shape-index format is inferred.** No such format exists in this
