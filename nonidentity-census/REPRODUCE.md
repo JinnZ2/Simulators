@@ -22,6 +22,13 @@ python3 t2_window.py --selftest           # D7 instrument, incl. two controls
 python3 t2_window.py --proposal           # the three examples, classified
 python3 t2_window.py --controls           # constructed known-truth pair
 python3 t2_window.py --seed               # seed claims; STIPULATED banner
+
+python3 t6_window_declaration.py --selftest  # incl. the welded-column gate
+python3 t6_window_declaration.py --null      # the 2x2, run before any real run
+python3 t6_window_declaration.py --table     # the 12 rows, all columns
+python3 t6_window_declaration.py --matched   # matched set + the confound figure
+python3 t6_window_declaration.py --exit      # the two association tables
+python3 t6_window_declaration.py --run       # real run: 0 eligible papers
 ```
 
 Expected, and pinned in `samples/`:
@@ -41,6 +48,13 @@ Expected, and pinned in `samples/`:
 | `t2_window --proposal` | `W_dissolve 1 of 3   W_measure 2 of 3` |
 | `t2_window --controls` | `N-coarse ratio=20`, `N-fine ratio=0.05` |
 | `t2_window --seed` | `P-1 RESOLVES_IT`, `P-2` and `P-3` `UNDECIDABLE`, with the STIPULATED banner |
+| `t6 --selftest` | `SELFTEST PASS (0 checks failed)` |
+| `t6 --null` | four cells at 3; `the two columns are not welded. T6 may proceed.`; rc 0 |
+| `t6 --matched` | `as-specified null set 5 of 12`, `matched null set 0 of 12` |
+| `t6 --run` | `eligible papers: 0` |
+
+`t6 --null` exits 1 and prints `STOP:` if an off-diagonal cell is empty. It
+does not, on this data.
 
 `t2_window.distribution()` raises `WindowGateError` on stipulated input
 unless `allow_stipulated=True`. Every window in the seed is stipulated; no

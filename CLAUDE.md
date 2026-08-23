@@ -4792,8 +4792,43 @@ underneath).
   more paywalls than abstracts, not fewer — so T2 becomes hand-runnable at
   small n and stays not runnable at the eight-field stratified scale, a scope
   change rather than an unblocking, with the work order's stated output
-  (proportion non-identity per field) replaced and left unproduced. Stdlib
-  only, parses under 3.9, CC0.
+  (proportion non-identity per field) replaced and left unproduced.
+  **T6 — window declaration vs entity reading** (`t6_window_declaration.py`,
+  selftest PASS), testing whether identity claims correlate with an
+  *undeclared* measurement window, mechanism omission and not belief, with no
+  column coding intent. Two instruments supply two columns so the exit check
+  can mean something: `reading` from D6, `decided_by` carried verbatim from
+  T1's classifier (T1's `TABLE` renamed to `LEXICAL`, recorded not applied
+  silently). **`T6-1`: the null test passes** — three rows per cell, and the
+  off-diagonals that decide whether the two columns are welded are both
+  built (`YES × ENTITY` 3, `NO × PROCESS` 3), so the STOP condition does not
+  fire; `T6-2` notes neither off-diagonal needed a strained construction,
+  which is what makes the test worth running. **`T6-3`, the finding against
+  my own build:** in the null set as specified, `decided_by` needs **5 of
+  12** rows moved to make the two window arms identical — the `NO` rows
+  reused T1's fixture sentences whose head nouns are all in the D3 table and
+  the `YES` rows were typed fresh with terms that are not, so the instrument
+  column was tracking which rows were copied. A matched set with the same
+  head nouns in both window arms takes it to **0 of 12**; both ship, and the
+  as-specified set cannot deliver a readable baseline. **`T6-4`:** the first
+  association metric took the majority label per arm and **read 0.83 on a set
+  whose true association is 0**, the same failure class as `T1-2`'s `OK` at
+  6 of 12 and found the same way; replaced by a count of rows-to-move, with
+  the wrong number recorded rather than dropped. **`T6-5`:** one `UNDECIDABLE`
+  is an extraction defect — `participants who relocated` extracts `who` — and
+  the extractor is left unpatched mid-run, since patching an instrument whose
+  output is being measured changes the measurement. **`T6-6`:** `AMBIGUOUS`
+  and `UNDETERMINED` never fire, because the specified 2×2 has no cell for
+  them — `CONSTANT_SILENT` on two schema values in a work order that named
+  them terminal; printed, not repaired. **`T6-7`:** the real run has **0
+  eligible papers** and not for T2's reason — T1's items are authored
+  sentences with no methods section, so `window_declared` would be `NO` for
+  all twelve by construction, the welded-column failure arriving from the
+  sample side; the permitted `CONVENIENCE` label is declined because a
+  convenience sample still has to vary the exposure. **`T6-8`:** the exit
+  condition is therefore unevaluable on constructed data and is stated rather
+  than answered. Field is recorded per row and not adjusted for. Stdlib only,
+  parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

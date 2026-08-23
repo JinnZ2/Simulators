@@ -1,0 +1,13 @@
+NULL TEST -- 3 rows per cell, hand-built, none is a paper
+
+window       reading         n   LEXICAL  PREDICATE  UNDECIDABLE  fields
+YES          ENTITY          3   1        0          2            ecology:1, economics:1, sociology:1
+YES          PROCESS         3   0        0          3            organizational_theory:1, systems_control:1, thermodynamics:1
+NO           ENTITY          3   3        0          0            ecology:1, law:1, sociology:1
+NO           PROCESS         3   3        0          0            ecology:1, economics:1, thermodynamics:1
+
+off-diagonal cells built: YES x ENTITY = 3, NO x PROCESS = 3
+the two columns are not welded. T6 may proceed.
+
+NOT EXERCISED by the null test as specified: AMBIGUOUS, UNDETERMINED.
+The design is a 2x2 and these are terminal values outside it, so nothing here shows the instrument can emit them. Recorded, not repaired -- repairing it means changing the null test the work order specified.

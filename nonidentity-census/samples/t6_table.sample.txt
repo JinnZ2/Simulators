@@ -1,0 +1,14 @@
+| paper_id | main_term | window_declared | window_value | window_source | reading | decided_by | field |
+|---|---|---|---|---|---|---|---|
+| N-A1 | firms | YES | quarterly | METHODS | ENTITY | LEXICAL | economics |
+| N-A2 | who | YES | 5-year follow-up | METHODS | ENTITY | UNDECIDABLE | sociology |
+| N-A3 | colonies | YES | 30 Hz | FIGURE_AXIS | ENTITY | UNDECIDABLE | ecology |
+| N-B1 | allocation | NO | -- | NONE | PROCESS | LEXICAL | economics |
+| N-B2 | diffusion | NO | -- | NONE | PROCESS | LEXICAL | thermodynamics |
+| N-B3 | selection | NO | -- | NONE | PROCESS | LEXICAL | ecology |
+| N-C1 | transport | YES | 30 Hz | METHODS | PROCESS | UNDECIDABLE | thermodynamics |
+| N-C2 | turnover | YES | monthly | METHODS | PROCESS | UNDECIDABLE | organizational_theory |
+| N-C3 | mixing | YES | 1 s | FIGURE_AXIS | PROCESS | UNDECIDABLE | systems_control |
+| N-D1 | populations | NO | -- | NONE | ENTITY | LEXICAL | ecology |
+| N-D2 | institutions | NO | -- | NONE | ENTITY | LEXICAL | sociology |
+| N-D3 | norm | NO | -- | NONE | ENTITY | LEXICAL | law |

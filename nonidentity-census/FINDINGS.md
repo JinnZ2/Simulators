@@ -433,6 +433,157 @@ is not reachable from here.
 
 ---
 
+## T6 — WINDOW DECLARATION vs ENTITY READING
+
+`t6_window_declaration.py`, selftest PASS. Boundary file reused, not
+re-derived. No column codes intent, and none is inferred anywhere in the
+module.
+
+Two instruments supply two columns, kept apart so the EXIT check means
+something: `reading` comes from D6 (`BEARER_REQUIRED` → ENTITY,
+`READS_WITHOUT` / `VERB_CARRIES_IT` → PROCESS, `BOTH_READINGS` →
+UNDETERMINED); `decided_by` is carried forward verbatim from T1's own
+classifier. T1's `TABLE` is this work order's `LEXICAL` — the rename is
+recorded, not applied silently.
+
+### T6-1 — the null test passes; the columns are not welded
+
+Three rows per cell, hand-built, none is a paper.
+
+```
+window       reading         n   LEXICAL  PREDICATE  UNDECIDABLE
+YES          ENTITY          3   1        0          2
+YES          PROCESS         3   0        0          3
+NO           ENTITY          3   3        0          0
+NO           PROCESS         3   3        0          0
+```
+
+**Off-diagonals built: `YES × ENTITY` = 3, `NO × PROCESS` = 3.** The STOP
+condition did not fire. T6 may proceed.
+
+### T6-2 — the off-diagonals are ordinary, which is what makes the test worth running
+
+They were not contrived. A methods section stating quarterly surveys, with
+`firms` as the main term and `reducing investment` requiring a bearer, is an
+unremarkable economics paper. `Allocation proceeds without any central
+coordinator`, with no interval stated anywhere, is an unremarkable
+theoretical one. Had either cell needed a strained construction, the
+hypothesis would have been measuring one variable twice; neither did.
+
+### T6-3 — the null set as specified is confounded, and the confound is mine
+
+`decided_by` needs **5 of 12** rows moved to make the two window arms carry
+identical distributions:
+
+```
+NO   arm  {LEXICAL: 6}
+YES  arm  {LEXICAL: 1, UNDECIDABLE: 5}
+```
+
+The cause is construction, not the world. The `NO` rows were built by reusing
+T1's own fixture sentences, whose head nouns (`populations`, `institutions`,
+`allocation`, `diffusion`) are all in the D3 table. The `YES` rows were
+written fresh, with terms (`transport`, `turnover`, `mixing`, `colonies`)
+that are not. So `decided_by` was tracking which rows were copied and which
+were typed.
+
+A matched set — the **same three head nouns in both window arms of each
+reading** — takes it to **0 of 12**:
+
+```
+NO   arm  {LEXICAL: 5, UNDECIDABLE: 1}
+YES  arm  {LEXICAL: 5, UNDECIDABLE: 1}
+```
+
+**Consequence for the EXIT check:** the null set as specified cannot deliver
+a readable `decided_by` baseline, because its exposure and its instrument
+column move together for a reason that has nothing to do with the
+hypothesis. The fix is a matched design, not more rows. Both sets ship;
+`--null` runs the specified one, `--matched` runs the corrected one.
+
+### T6-4 — the first association metric was wrong and reported 0.83 where the truth is 0
+
+The first version took the majority `decided_by` label per window arm over
+the total. That returns the **marginal majority rate**, so on the matched
+set — where the two arms are identical by construction and the association
+is exactly zero — it read `10/12 = 0.83`.
+
+Replaced with a count of rows that would have to change `decided_by` to make
+the arms identical: 5 of 12 as-specified, 0 of 12 matched. No coefficient, no
+p-value, per the work order.
+
+The wrong number is recorded here rather than dropped, and the module's
+docstring carries it too. A metric that reads high on a set built to read
+zero is the same failure class as a gate that returns `OK` at 6 of 12
+(T1-2), found the same way — by running it on something whose answer was
+known in advance.
+
+### T6-5 — one of the UNDECIDABLE values is an extraction defect, not a vocabulary gap
+
+`N-A2`, *"We show that participants who relocated earned more"*, extracts
+`main_term = who`. The subject extractor takes the relative pronoun rather
+than `participants`, and `who` is in T1's `PRONOUN` set, so the row scores
+`UNDECIDABLE`.
+
+So the 5-of-12 in T6-3 is part construction choice and part bug. The bug is
+in `t1_predicate_unit.subject_span`, inherited by everything downstream, and
+it is left in place rather than patched mid-run — patching the extractor
+under an instrument whose output is being measured changes the measurement.
+
+### T6-6 — `AMBIGUOUS` and `UNDETERMINED` never fire
+
+The specified null design is a 2×2 and both are terminal values outside it.
+Nothing in the run shows the instrument can emit either — `null-harness`
+`CONSTANT_SILENT` on two of the schema's own values, in a work order that
+named them terminal precisely so they would not be resolved away.
+
+Recorded, not repaired. Repairing means changing the null test the work order
+specified, and the module prints the gap at the end of `--null` rather than
+adding cells nobody asked for.
+
+### T6-7 — the real run has zero eligible papers, and not for T2's reason
+
+`eligible_sample()` returns `[]`.
+
+T1's twelve items are authored sentences written in this repo. They have no
+methods section and no figure axis, so every row would take `window_source =
+NONE` and `window_declared = NO` by construction — **one column constant
+across the entire sample**. That is the welded-column failure arriving from
+the sample side rather than the concept side, and running it would produce a
+2×2 with two empty columns that looked like a result.
+
+The work order permits a `CONVENIENCE` label. Not taken: a convenience sample
+still has to be able to vary the exposure, and this one cannot. Bulk sources
+remain refused by egress (T2-1), and a snippet sample is refused for the
+reason T2 refused it.
+
+### T6-8 — the EXIT condition is unevaluable on constructed data, stated rather than answered
+
+On the matched set:
+
+```
+reading x window_declared     3 / 3 / 3 / 3     balanced BY CONSTRUCTION
+reading x decided_by          LEXICAL-ENTITY 6, LEXICAL-PROCESS 4,
+                              UNDECIDABLE-PROCESS 2
+```
+
+The first table carries no information by design and is printed to show that
+it does not. The second is measured but sits on rows whose readings were
+assigned when the rows were built, so it reports the vocabulary of the
+constructed set and not a finding about papers.
+
+The EXIT check — *if reading correlates with decided_by more strongly than
+with window_declared, the instrument is the finding again* — needs a sample
+where neither column was set by the person building it. That is T6-7's
+blocker, unchanged.
+
+**Field is recorded per row and not adjusted for**, per the confound rule.
+In the as-specified set the eight fields spread one-per-cell rather than
+clustering, which is also a construction property and not evidence about
+field convention.
+
+---
+
 ## T3 — MARGIN CHECK
 
 ```
