@@ -4752,7 +4752,48 @@ underneath).
   one D1/D6 disagreement is the niche: a slot with a state predicated on it,
   which neither test settles. Cost of D6, stated: the discriminator is now one
   judgement per item with no second reader — a different weakness than a word
-  list, not a smaller one. Stdlib only, parses under 3.9, CC0.
+  list, not a smaller one.
+  **Third instrument, relayed after D6:** `BOUNDARY.md` D7, **dissolution
+  windows** — every claim has a window at which its main term stops reading
+  as a thing, so the output is a *distribution* rather than a count of
+  identity vs non-identity papers. Accepted in its first half and it is a
+  better finding than the original T2 rate: D3's table dissolves entirely
+  (every term becomes claim-level, which D2 argued only `market` was), no
+  citation API is needed, and — the part that matters most here — **the
+  discriminator comes off the reader**, since a measurement interval is
+  printed in a methods section and is not a judgement at all, which is
+  exactly D6's stated cost. **`T2-4`, the split:** the proposal names one
+  window and uses two — `W_dissolve` (when the term stops denoting a
+  persistent individuated thing; a property of the world) and `W_measure`
+  (sampling frequency, follow-up, x-axis units; a property of the study) —
+  and **two of its own three worked examples are `W_measure`** (`firm:
+  quarters` is a reporting interval, `market: the window it's priced at`
+  says so outright), so its attached requirement *"the window has to come
+  from the claim's own measurement interval"* is that conflation written as
+  a rule. **`T2-5`, the readout:** the ratio `W_measure / W_dissolve` is a
+  `reasoning-gate` G-RES pair, and `CANNOT_HAVE_SEEN_IT` says the identity
+  framing **could not have failed** at that resolution — `null-harness`
+  `CONSTANT_SILENT` at field scale, the same shape as
+  `coupling_audit/provisioning.py`'s 12.2×-too-coarse tissue; constructed
+  controls separate at ratio 20 and 0.05. **`T2-6`:** the scale-relative
+  reading (`W = W_measure` by construction) is coherent and **cannot return
+  a negative**, the `MF_020` shape, so both readings are stated and the
+  two-number one is built. **`T2-7`:** `generation` is refused as a unit
+  until a referent is named — the module's own referents span **5.82 orders
+  of magnitude** (human 25 y against *E. coli* 20 min), a figure computed
+  from the table with a selftest check after a first draft asserted "about
+  seven orders" and was wrong by more than an order — plus a window with no
+  basis is refused, `NOT_LOCATED` and `UNBOUNDED` are separate and neither
+  carries a value, and `MARGIN = 2.0` is disclosed as a stipulated constant
+  with no basis. On the seed the two reclassified examples come back
+  `UNDECIDABLE` with `W_dissolve` left `NOT_LOCATED` rather than back-filled
+  from the interval, which is the error under audit. **`T2-8`:** it removes
+  T2's bulk requirement and adds a depth one — methods sections sit behind
+  more paywalls than abstracts, not fewer — so T2 becomes hand-runnable at
+  small n and stays not runnable at the eight-field stratified scale, a scope
+  change rather than an unblocking, with the work order's stated output
+  (proportion non-identity per field) replaced and left unproduced. Stdlib
+  only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

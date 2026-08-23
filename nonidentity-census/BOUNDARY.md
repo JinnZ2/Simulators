@@ -211,3 +211,56 @@ T1-7 and T1-8.
 
 **Not decided here.** Whether D6's answers agree with D2 and D3. That is
 measured, not assumed — see FINDINGS T1-5.
+
+
+---
+
+## D7 — dissolution windows, and the two windows in the proposal
+
+**Relayed by the operator after D6 had run.** Same ordering discipline as D6:
+recorded as arriving late, not folded back into D1.
+
+**The proposal:**
+
+> Every claim gets a window at which its main term stops reading as a thing.
+> population: months to years, and it dissolves at generational rate. firm:
+> quarters. market: the window it's priced at. The output is a distribution
+> of windows across a field, not a count of identity vs non-identity papers.
+> One thing it needs that the word-list version didn't: the window has to
+> come from the claim's own measurement interval — sampling frequency,
+> follow-up period, the units on the x-axis. Which is recoverable from
+> methods sections, not abstracts.
+
+**Accepted.** Identity-bearing-ness is scale-relative, so the output is a
+distribution and not a count. This dissolves D3's table entirely: every term
+becomes claim-level, the way D2 argued only `market` was. It also moves the
+discriminator off D6's single-reader judgement, which is D6's stated cost.
+
+**Split.** The proposal names one window and uses two:
+
+| | what it is | whose property |
+|---|---|---|
+| `W_dissolve` | when the term stops denoting a persistent individuated thing | the world and the concept |
+| `W_measure` | sampling frequency, follow-up period, x-axis units | the study |
+
+`population ... dissolves at generational rate` is the first. `firm:
+quarters` is a reporting interval and `market: the window it's priced at`
+says so outright, so both are the second. Two of the three worked examples
+are `W_measure`, and the requirement — *the window has to come from the
+claim's own measurement interval* — is that conflation written as a rule.
+
+**Both are recorded; the ratio is the readout.** `W_measure / W_dissolve`
+is a `reasoning-gate` G-RES pair. A study sampling far coarser than its unit
+dissolves could not have watched the term come apart, so its identity
+framing could not have failed at that resolution.
+
+**Margin.** Declared at 2.0, with no basis. It is a stipulated constant of
+the same kind `presented-binary`'s `HANDOFF_CEILING` discloses, and it is
+disclosed here rather than defended.
+
+**`generation` is not a unit until a referent is named.** The referents in
+the module's table span 5.82 orders of magnitude, and the proposal's
+`generational rate` names none. Refused, not defaulted.
+
+**Not decided here.** Whether the ratio distributes differently across
+fields. That needs methods sections, and none was read — see FINDINGS T2-8.

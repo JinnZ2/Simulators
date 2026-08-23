@@ -1,0 +1,10 @@
+The proposal's three worked examples, classified
+
+  population  W_dissolve     months to years, and it dissolves at generational rate
+              names when the term stops denoting the same thing; a property of the world, not of a study
+  firm        W_measure      quarters
+              a quarter is a reporting interval. Firms do not dissolve quarterly; they are observed quarterly
+  market      W_measure      the window it's priced at
+              stated as a measurement interval in the proposal's own words
+
+  W_dissolve 1 of 3   W_measure 2 of 3

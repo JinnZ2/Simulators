@@ -309,6 +309,128 @@ prediction holds when T2 runs, it will hold with ecology's dominant unit
 scored against it, which makes it a stronger result than it would have been.
 If it fails, D2 is the first thing to check.
 
+### T2-3 — the proposal replaces T2's output, and the first half of it holds
+
+`BOUNDARY.md` D7, relayed after D6 had run. Implemented as `t2_window.py`,
+selftest PASS.
+
+A distribution of windows instead of a count of papers. Three things it buys,
+and the third is the one that matters most here:
+
+1. **D3's table dissolves.** Every term becomes claim-level, which is what
+   D2 argued only `market` was and what T1-1 measured the cost of.
+2. **No citation API.** The blocker on the original T2 was bulk abstracts for
+   a base rate. A window distribution needs fewer, deeper reads.
+3. **The discriminator comes off the reader.** T1-10 recorded D6's cost as a
+   single judgement per item with no second reader. A measurement interval is
+   printed in a methods section; it is not a judgement at all.
+
+**This is a change to the work order.** T2 as delivered says "Report
+proportion non-identity PER FIELD." That output is replaced, not
+supplemented, and the original remains unproduced. Flagged rather than
+absorbed.
+
+### T2-4 — it names one window and uses two, and its own examples split 2-1
+
+| example, as given | which window | why |
+|---|---|---|
+| `population ... dissolves at generational rate` | `W_dissolve` | when the term stops denoting the same thing. A property of the world |
+| `firm: quarters` | `W_measure` | a quarter is a reporting interval. Firms are not observed to dissolve quarterly, they are observed quarterly |
+| `market: the window it's priced at` | `W_measure` | stated as a measurement interval in the proposal's own words |
+
+**Two of three are `W_measure`.** And the requirement attached to the
+proposal — *the window has to come from the claim's own measurement
+interval* — is that conflation stated as a rule rather than caught by it.
+
+The seed run shows the consequence directly: `P-2` and `P-3` come back
+`UNDECIDABLE` because their `W_dissolve` is `NOT_LOCATED`, and it is left
+`NOT_LOCATED` rather than back-filled from the interval, which is the error
+under audit.
+
+### T2-5 — the ratio is the finding, not the window
+
+`W_measure / W_dissolve`, a `reasoning-gate` G-RES pair:
+
+| verdict | condition | reading |
+|---|---|---|
+| `CANNOT_HAVE_SEEN_IT` | ratio >= margin | the study is too coarse to have watched the term dissolve. Its identity framing **could not have failed** at this resolution |
+| `RESOLVES_IT` | ratio <= 1/margin | sampling well inside the stable regime; the framing is licensed by the apparatus |
+| `MARGINAL` | between | inside the declared margin either way |
+| `UNDECIDABLE` | either window missing or unbounded | no ratio is computed |
+
+Constructed known-truth pair, and they separate:
+
+```
+N-coarse   CANNOT_HAVE_SEEN_IT  ratio=20
+N-fine     RESOLVES_IT          ratio=0.05
+```
+
+A field where most papers sample far coarser than their unit's dissolution
+window is a field where the identity premise is unfalsifiable by the
+apparatus in use. That is `null-harness` `CONSTANT_SILENT` at field scale,
+and it is a sharper claim than either the original count or a raw window
+distribution — it says per claim whether the assumption was *testable*, not
+whether it was *made*.
+
+Same shape as `uninstrumented/coupling_audit/provisioning.py`, where bone
+collagen is 12.2x too coarse for a seasonal feature, so the coupling
+hypothesis cannot fail in that tissue and is reported
+`UNASKABLE_IN_THIS_TISSUE` rather than refuted.
+
+### T2-6 — the other reading is coherent and cannot fail
+
+The proposal can be read scale-relatively: the window is the term *as used in
+this paper*, so `W = W_measure` by construction. That reading is defensible
+and it makes the instrument incapable of returning a negative — every claim
+satisfies it, and a paper sampling at the wrong scale for its own unit is
+undetectable.
+
+`MF_020`'s shape: a design that cannot emit a result capable of failing its
+own falsifier. Both readings are stated in the module; the two-number one is
+built because it can.
+
+### T2-7 — two refusals and one disclosed constant
+
+`window()` refuses rather than defaulting, in three places:
+
+- **`generation` is not a unit until a referent is named.** The referents in
+  the module's own table span **5.82 orders of magnitude** (human 25 y
+  against *E. coli* 20 min, a factor of 657,450). The proposal's
+  `generational rate` names none. The figure in the error message is computed
+  from the table and `--selftest` fails if the two drift apart — a first
+  draft asserted "about seven orders" and was wrong by more than an order.
+- **A window with no basis is refused.** A number with no stated source is
+  what the module exists to stop.
+- **`NOT_LOCATED` and `UNBOUNDED` are separate**, and neither carries a
+  value. A term nobody looked up and a term that does not dissolve are
+  different findings. Thirteenth instance of that repair in this drop family.
+
+The disclosed constant: `MARGIN = 2.0`, with no basis. It is the same kind of
+stipulated threshold `presented-binary`'s `B10` discloses about
+`HANDOFF_CEILING`, and it is disclosed here rather than defended. Nothing
+establishes that 2x is where "could not have seen it" begins.
+
+`distribution()` additionally refuses stipulated input unless the caller asks
+for it, and prints a banner when it does. Every window in the seed is
+`STIPULATED`; no methods section was read.
+
+### T2-8 — what it unblocks, and what it does not
+
+**Removes** T2's bulk requirement: no citation API, no stratified thousands.
+
+**Adds** a depth requirement: methods sections, which sit behind more
+paywalls than abstracts, not fewer. The egress gate that refused Crossref,
+OpenAlex and arXiv would refuse publisher full text at least as often.
+
+**Net:** T2 becomes runnable by hand at small n and remains **not runnable**
+at the eight-field stratified scale the work order specifies. A scope change,
+not an unblocking, and the work order's stated output stays unproduced either
+way.
+
+What would run it: fifty methods sections, eight fields, two numbers and a
+basis string each. That is an afternoon for someone with library access and
+is not reachable from here.
+
 ---
 
 ## T3 — MARGIN CHECK

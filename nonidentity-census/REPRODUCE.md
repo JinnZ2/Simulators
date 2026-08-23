@@ -17,6 +17,11 @@ python3 t1_verb_first.py --front          # steps 1-2 only, the residues
 python3 t1_verb_first.py --score          # six-option tally + read_on split
 python3 t1_verb_first.py --proxy          # morphological proxy vs the rule
 python3 t1_verb_first.py --compare        # D1/D3 against D6, item by item
+
+python3 t2_window.py --selftest           # D7 instrument, incl. two controls
+python3 t2_window.py --proposal           # the three examples, classified
+python3 t2_window.py --controls           # constructed known-truth pair
+python3 t2_window.py --seed               # seed claims; STIPULATED banner
 ```
 
 Expected, and pinned in `samples/`:
@@ -32,6 +37,14 @@ Expected, and pinned in `samples/`:
 | `verb_first --score` | `BEARER_REQUIRED 5 / READS_WITHOUT 2 / VERB_CARRIES_IT 3 / BOTH_READINGS 2`; read_on `RESIDUE 8 / CLAIM 1 / DROPPED_SUBJECT 3` |
 | `verb_first --proxy` | `agreement 4/12` |
 | `verb_first --compare` | `agree 9   DISAGREE 1   CONTESTED 2` |
+| `t2_window --selftest` | `SELFTEST PASS (0 checks failed)` |
+| `t2_window --proposal` | `W_dissolve 1 of 3   W_measure 2 of 3` |
+| `t2_window --controls` | `N-coarse ratio=20`, `N-fine ratio=0.05` |
+| `t2_window --seed` | `P-1 RESOLVES_IT`, `P-2` and `P-3` `UNDECIDABLE`, with the STIPULATED banner |
+
+`t2_window.distribution()` raises `WindowGateError` on stipulated input
+unless `allow_stipulated=True`. Every window in the seed is stipulated; no
+methods section was read.
 
 `t1_verb_first.py --score` raises `JudgementNotSupplied` for any item with no
 step-3 judgement. The rule's discriminator is the judgement, so there is
