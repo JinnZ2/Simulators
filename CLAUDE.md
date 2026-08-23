@@ -23,7 +23,7 @@ CC0 simulators and audits grounded in physics. **Index only** — detail in
 - `incentive-blindspot-sim/` — incentives gate visibility
 - `antifungal-mechanism-sim/` — coupling beats additive
 - `AMOC/` — regime-shift trajectories for one
-- `thermal-sensor-degradation-audit/` — sensor degrades in event
+- `thermal-sensor-degradation-audit/` — sensor degrades
 - `play-sims/` — 17 visualisation sketches *(non-stdlib)*
 - `grounding-layers/` — seven-layer grounding stack *(non-stdlib)*
 - `earth_economics/` — physics–economics–accountability
@@ -55,9 +55,9 @@ CC0 simulators and audits grounded in physics. **Index only** — detail in
 - `gdprf-framework/` — gradient-driven proxy reasoning
 - `msiaf-gdprf-bridge/` — MSIAF cascades as GDPRF
 - `proxy-investigation-lab/` — grounds a proxy as far as it goes
-- `instrument-epistemology/` — same method on scientific
+- `instrument-epistemology/` — same method, scientific
 - `extraction-blindness-sim/` — no error signal = safety
-- `aperiodic-order-sim-stack/` — delivered results + audit
+- `aperiodic-order-sim-stack/` — delivered results, audit
 - `reasoning-gate/` — fail-closed gate between a sim and
 - `reasoning-dial/` — thinking budget as a measurable
 - `triad-playground/` — system, instrument, reasoner
@@ -79,19 +79,20 @@ CC0 simulators and audits grounded in physics. **Index only** — detail in
 - `derivation-discarded/` — structure is the only copy
 - `simulation-hypothesis-budget/` — Planck-sim cost
 - `instrument-bias-sims/` — nine sims + a module set
-- `handoff-provenance/` — channel between talk and code
+- `handoff-provenance/` — talk-to-code channel
 - `operator-structure-echo/` — instrument recurs to builder's
 - `scope-bound-shapes/` — one shape, FROZEN declared per binding
 - `term-drift-citation/` — does a citation still attach
 - `stop-authority/` — a zero, and the two states it fits
 - `condition-scoped-authority/` — rank has no condition col
-- `predicate-difference/` — set difference, support rule
+- `predicate-difference/` — set difference + support rule
+- `supplement-placement/` — direction vs placement
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
 ## Reconciliation and conventions
 
-Checked 2026-08-23: all 74 folders above exist and are pushed on this
+Checked 2026-08-23: all 75 folders above exist and are pushed on this
 branch, so there is no `docs/ARCHIVE_NOTES.md`. Branch
 `claude/new-folder-um2xra`. Stdlib only; folders marked *(non-stdlib)*
 ship a `requirements.txt`. Each folder ships `samples/`.

@@ -1,0 +1,138 @@
+SUPPLEMENT PLACEMENT -- does direction predict where it lands
+========================================================================
+
+  Jiang 2025, American Sociological Review, doi
+  10.1177/00031224251362351; main text 41pp, online appendix 40pp
+
+  CENSUS
+
+                   n      by kind
+    MAIN         10  
+      THEORY=1, DESCRIPTIVE=2, VALIDATION=3, PRIMARY=2, ROBUSTNESS=2
+    SUPPLEMENT   28  
+      DESCRIPTIVE=6, METHOD=5, VALIDATION=4, ROBUSTNESS=13
+
+    MAIN           SUPPORTS=7, NEUTRAL=3
+    SUPPLEMENT     SUPPORTS=11, WEAKENS=1, NEUTRAL=11, UNDETERMINED=5
+
+------------------------------------------------------------------------
+
+  THE TEST, RESTRICTED TO ELEMENTS THAT COULD GO EITHER WAY
+
+    restricted to VALIDATION and ROBUSTNESS. Comparing every main-text
+    element against every supplement element measures genre, not
+    filtering: a primary figure cannot come out against its own finding
+
+                   SUPPORTS     WEAKENS
+    MAIN           5            0
+    SUPPLEMENT     11           1
+
+    main supporting rate       1.000
+    supplement supporting rate 0.917
+    Fisher exact (two-tailed)  1.000
+    undetermined, held out     5
+
+    VERDICT: NOT_ESTABLISHED
+    n = 1 paper. Fisher exact p = 1.000 on a table whose main-text
+    weakening cell is 0. The direction of the difference is nominally
+    consistent with the hypothesis and the test does not separate it
+    from chance, and would not at this n whichever way the cells fell
+
+------------------------------------------------------------------------
+
+  STEP 4 -- THE REACHABILITY COST
+
+    item                 paywall    machine  in pkg
+    main text PDF        True       True     True
+    online appendix      False      True     True
+    replication code     False      True     True
+    trained embeddings   False      None     False
+
+    VERDICT: NOT_REPRODUCIBLE_AS_SHIPPED
+    the vectors are the instrument's state and they are not in the
+    package. Retraining from the corpora would be a different training
+    run, not a replication. Separately, the seed file that IS shipped
+    does not match the appendix's documented lists
+
+    nothing here was blocked by a paywall. The main text is behind one
+    at the publisher and the author posts a copy; what is actually
+    unreachable is a Dropbox link
+
+    SHIPPED SEEDS vs DOCUMENTED SEEDS: SHIPPED_DIFFERS_FROM_DOCUMENTED
+      Activity absent from shipped:
+        hot/cold, burning/freezing, active/inactive, ...
+      Evaluation absent from shipped:
+        pure/impure, holy/unholy, valiant/fiendish, ...
+      Potency absent from shipped:
+        deep/shallow, thick/thin, large/small, ...
+
+    the appendix documents the dimensions as bipolar PAIRS and the
+    shipped file carries two flat pole lists that do not contain many
+    of the documented words. A run from the shipped file uses different
+    centroids from the ones the paper describes. Neither is thereby
+    wrong; they are not the same instrument
+
+------------------------------------------------------------------------
+
+  THE CITATION HALF
+
+    state: NOT_RUNNABLE   finding: None
+    indices needed and refused: 4 of 4
+    all four citation indices are refused by this session's egress
+    policy (CONNECT tunnel failed on each). Without a citation graph
+    there is no set of citing papers to read, and the question is not
+    answerable from the two documents alone
+
+  CONFIDENCE, reported separately and not resolved
+    classification
+      this module's, made after seeing placement. Direction is the
+      author's stated result where the text states one, UNDETERMINED
+      where it does not, and never inferred from placement
+    extraction
+      text pulled from the PDFs by a hand-written stream decoder. Five
+      comparable-class elements carry UNDETERMINED because the extract
+      did not state a direction, not because none exists
+    n
+      one paper. The instrument runs; the sample is a single article
+      and the claim is about a practice
+    resolved
+      False
+    the_restriction
+      to VALIDATION and ROBUSTNESS. Without it the test measures genre
+      rather than filtering
+
+  WHERE IT BREAKS
+    - THE TEST RETURNS p = 1.000 AND THAT IS NOT EVIDENCE THE FILTER IS
+    ABSENT. Five of five comparable main-text elements support the
+    finding; eleven of twelve in the supplement do. With exactly ONE
+    weakening element in the whole paper there is no power to detect
+    anything, and the same table would have returned p = 1.000 under a
+    strong filter as well. The instrument ran. The sample cannot answer
+    - THE TEST AS FIRST SPECIFIED WOULD HAVE 'WORKED', AND WOULD HAVE
+    MEASURED THE WRONG THING. Comparing all ten main-text elements
+    against all twenty-eight supplement ones gives 7/7 supporting in
+    the main text against 11/12 in the supplement, which looks like a
+    result. It is an artefact: a paper's primary figure cannot come out
+    against its own finding, so 'supporting' and 'primary' are not
+    independent. The restriction to elements that could have gone
+    either way is what makes the comparison a comparison
+    - FIVE OF THE THIRTEEN SUPPLEMENT ROBUSTNESS ELEMENTS ARE
+    UNDETERMINED, AND THEY ARE UNDETERMINED IN THE DIRECTION THAT
+    MATTERS. Tables S6, S7, S8 and Figures S11, S13 carry no stated
+    direction in the extracted text. If any is weakening, the
+    supplement cell moves and the main-text cell cannot -- so the
+    missing data can only move the result toward the hypothesis, never
+    away. That asymmetry is a property of this extraction, not a
+    finding
+    - CLASSIFICATION WAS DONE AFTER SEEING PLACEMENT AND BY THE PARTY
+    REPORTING THE RESULT. The criteria are stated and the direction
+    column quotes the author, which limits the room but does not close
+    it. A blind classification -- captions stripped of location, sorted
+    by someone else -- is what this would need, and n=1 would still
+    sink it
+    - ONE PAPER, AND IT IS THE PAPER WHOSE REPLICATION PACKAGE THIS
+    WORK ALREADY DEPENDS ON. The corpus for tasks 1 through 5 is
+    Jiang's instrument. Auditing the placement decisions of the same
+    author whose seed file is being used is not independent, and a
+    practice-level claim needs a sample of papers drawn without
+    reference to which ones were already in hand

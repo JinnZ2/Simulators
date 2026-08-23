@@ -57,11 +57,31 @@ the word lists:
 **Caveat, and it matters for how these get described.** The three EPA
 dimensions carry Osgood's names and poles, but the shipped word lists are
 **not Osgood's scale items** — Osgood's instrument is bipolar adjective
-*rating scales*, these are expanded centroid vocabularies. The package
-contains **no citation** for where the words came from: no reference in
-`dimension-words.txt`, none in `embeddings.py`, none in the notebook. So
-"Osgood original" is accurate for the *dimensions* and not for the *words*,
-and the words' provenance is unattributed in the package.
+*rating scales*, these are expanded centroid vocabularies.
+
+**Provenance, from the appendix — this corrects my first reading.** The
+replication *repository* carries no citation for the words: none in
+`dimension-words.txt`, `embeddings.py` or the notebook. The **appendix
+does**, at B.1 / Table S2:
+
+> "When compiling the list, I mainly refer to the work of Kozlowski et al.
+> (2019) and Van Loon and Freese (2023), who relied on multiple thesauri,
+> including three contemporary thesauri: Bartlett's Roget's Thesaurus,
+> Oxford Thesaurus, and Webster's Collegiate Thesaurus; and two historical
+> thesauri (Roget 1911; Smith 1910). I also expand the list of words that
+> may encode cultural association with women or men..."
+
+The words descend from **Kozlowski et al. 2019 and Van Loon & Freese 2023
+via thesauri, plus Jiang's own expansions** — not from Osgood. "Osgood
+original" holds for the *dimensions* and for nothing else. My earlier line
+that the provenance was unattributed was true of the repository and wrong
+about the package as a whole.
+
+**And the shipped lists do not match the appendix's.** Appendix Tables
+S2–S4 document pairs — `pure/impure`, `holy/unholy`, `deep/shallow`,
+`hot/cold` among others — that are **absent from `dimension-words.txt`**. A
+run from the shipped file uses different centroids from the ones the paper
+describes. See [`../supplement-placement/`](../supplement-placement/).
 
 ---
 
