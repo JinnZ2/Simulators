@@ -2801,6 +2801,65 @@ underneath).
   findings are objections and all were reachable only because the file
   specified its calibration set and its falsifier in advance. Seven findings;
   the material gave seven. One hundred and fifty-three claims `UNI_001..153`.
+  **`specimens/INSTANCE_LOG_SURVEY.md`** answers the standing question on
+  rows 3-4 of `BNRAM_TEST_PROTO_001.json`'s test-subject table
+  (`CLAUDE-3.5-SONNET`, `GPT-4O`, both `already_tested: false`): the records
+  exist, logged at the time, in other repos in the same org. 89 public JinnZ2
+  repos cloned shallow and grepped plus 2 private ones attached — GitHub code
+  search returned 0 for a string present on disk and was not trusted. **29
+  instance records located**, 27 involving a model, across
+  `thermodynamic-accountability-framework/calibration/logs/`,
+  `ai-human-audit-protocol/logs/`, the `JinnZ2` profile repo,
+  `AI-Consciousness-Sensors/`, `Emotions-as-Sensors/logs/` and
+  `Symbolic-sensor-suite/`, plus 8 derived structures. Schemas reported as-is
+  per file; a mapping is proposed and **not applied** — nothing migrated, no
+  delivered file modified, `already_tested` unchanged. **Rows 3-4 read `SEE
+  uninstrumented/specimens/INSTANCE_LOG_SURVEY.md`, pending**, and deliberately
+  do not flip: no located record matches either row's stated checkpoint (the
+  Claude records are Sonnet 4 / opus-4-7 / opus-4-8 / unversioned, the OpenAI
+  ones GPT-5 and unversioned ChatGPT), none was produced under a `STIM-*`
+  variant, and none was scored against the 0-3 EXC rubric — so the rows are
+  satisfied at *provider* granularity and at no finer one. **Two target
+  schemas, not one**: the field log's realized `encounters[]` (13 keys) and the
+  protocol's specified `per_run_fields` (15), disagreeing on four axes before
+  any older log is considered — T1 records which EXCs fired, T2 records how
+  hard, and no conversion exists between them. **What the older logs record
+  that neither target can hold**, in order of loss: consent plus the model's
+  own framing conditions, with no way to distinguish "version unknown" from
+  "version withheld at the subject's request" — the state
+  `JinnZ2/floating-head/CONVERGENCE_TABLE.md` already carries as
+  `sacred-do-not-publish`, a row recorded as existing with its content kept
+  out; `prior_score`/`shift`/`band_shift` and an `is_trajectory_point` flag, so
+  a model that improved across three sessions and one that did not produce
+  identical rows; `detection_latency` + `correction_held`, the difference
+  between a correction accepted and a correction still holding; a **symmetric**
+  reading giving human and AI the same five keys with a `convergence` field and
+  a `verdict_persisted: false`; the operator's verbatim reply per invalidation;
+  ordinal time (`T1..T4`, order without clock); a declared external
+  failure-mode vocabulary (`failure_mode_source: architecture_mismatch.py`)
+  where the EXC ids carry no registry version; running regex detectors against
+  a `detection` field that is an English sentence describing a `scan.py`
+  capability that does not exist; and `gate_log.md`'s `UNRECORDED` state with
+  its anti-inference rule ("a guessed gate is worse than an empty row") — the
+  absent-vs-known-negative repair this repo has now recorded a dozen times,
+  already implemented one repo over. **`ai_calibration_events.py` is the
+  strongest prior art**: 15 `CalibrationEvent`s in four independent
+  model-family catalogs (GPT 2 / CLD 6 / DSK 3 / COMMON 4), each with regex
+  detectors, a correction rule, severity and `cross_model_observed`, under the
+  rule that no catalog validates another — BNRAM's `exclusion_registry`, built,
+  per-family, and runnable. **One finding needs no migration to state:**
+  EXC-16 (social-signal substitution) fired in both BNRAM encounters and has no
+  equivalent anywhere in the prior corpus — zero hits for stars/PRs/citations/
+  reputation, and the nearest neighbour `CLD-002` is epistemic authority, not
+  social. The likeliest reason is that EXC-16 needs an **artifact** to
+  social-signal about and every prior record is a conversation, which is the
+  first evidence for the protocol's own stimulus-variant hypothesis, reached
+  from records never run under it. Two source defects reported not repaired:
+  `aiards-log.json` and `logs/pattern-logs.json` share `log_id
+  claude_2025-10-04a` and have diverged (the first adds a `math_block`), and
+  `Emotions-as-Sensors/logs/sensor-log-2.md` will not parse (missing opening
+  quote). Rows 5-6 (Gemini, Llama) return nothing first-party and stay as
+  delivered.
   **`coupling_audit/`** is a subfolder added alongside the register's
   material, asking a **different question** and deliberately not adding a
   mechanism. The register asks whether an instrument's constitution
