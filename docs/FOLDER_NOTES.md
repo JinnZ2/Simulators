@@ -4689,6 +4689,81 @@ is pushed on this branch — see the reconciliation note in `CLAUDE.md`.
   code written to satisfy the ledger. Zero [K~] and zero re-reads on the
   seed ledger is NOT_YET_OBSERVED, not zero. 138 selftest
   checks green. Stdlib only, parses under Python 3.9, phone-buildable, CC0.
+- `operator-structure-echo/` — **Marker under exploration.**
+  `SPEC_ECHO.md` delivered verbatim. The observation: instruments built
+  in this ecosystem recur to the same structural shape the operator uses
+  to process the domain by hand — **not a defect claim, not a discipline
+  failure, a property of a single-builder instrument that cannot be
+  removed by effort, only counted.** Built standalone rather than folded
+  into `handoff-provenance/` (the spec left the choice open) on three
+  grounds: that folder scopes itself to the channel between conversation
+  and code while this is the channel between builder and instrument; the
+  register is repo-wide at one row per module; and `handoff-provenance/`
+  is itself one of the rows, so nesting would put the register inside its
+  own subject population. One `git mv` reverses it.
+  **`echo_register.py`** obeys the instruction — *do not correct, log* —
+  keeping the delivered question per module: does this shape match a
+  procedure the operator already runs unaided, YES / NO / UNEXAMINED. The
+  module list is read off the filesystem rather than hardcoded, since
+  this repo has already had one partial copy of its own index go stale,
+  and `mark()` refuses a row outside the tree. **Only the operator can
+  fill it, enforced rather than stated:** `mark()` refuses a YES or NO
+  without operator attribution, because the downstream model cannot
+  answer a question about someone else's unaided procedure and a register
+  it could fill itself would be a register of its guesses. **UNEXAMINED
+  is not NO** — the load-bearing line in both modules, since the default
+  is UNEXAMINED everywhere and folding it into NO makes every module read
+  independent, the shared generator vanish, and the readout invert while
+  looking unchanged. **Two kinds, because the delivered list holds two**
+  and the spec separates them itself: OMISSION (the instrument missing a
+  case, the case the operator's own frame omits) and REPRODUCTION (the
+  instrument reproducing the operator's processing structure in a domain
+  not intended to be modelled), the latter being what the spec says
+  raises this from a per-repo note to a subject. A YES without a kind is
+  refused. **The three delivered instances are not three independent
+  observations, and this is checked by importing
+  `instrument-bias-sims/excluded_subject.py` rather than restating it:**
+  s4's missing doe is already logged there as S4, allocation_coupling's
+  missing untenured continuous observer as S10, and only the allocation
+  ledger's cost accounting — the REPRODUCTION one — is new. **The split
+  lands exactly on the kind**, which the spec asserted and this checks
+  mechanically. All three also sit inside `instrument-bias-sims`, one row
+  in a per-module register, so the count of three is a count of two kinds
+  across one module spanning two registers — two registers agreeing about
+  S4 is one observation counted twice, which is the spec's own inherited-
+  agreement concern arriving inside the register built to track it. That
+  module is also the one audited hardest here, so **the instance list is
+  a map of where someone looked.** The base rate is **REFUSED on a
+  selection effect, not for want of n**: every examined row is there
+  because someone noticed an echo, and noticing one is the same act as
+  finding one, so three YES of three examined is what that selection
+  produces whether the true rate is nine in ten or three in a hundred —
+  only examining modules chosen *before* looking would fix it.
+  **`corroboration.py`** makes the spec's consequence runnable on pairs
+  and returns a state, never a number: INHERITED (both YES, agreement
+  expected from the shared generator), MIXED, INDEPENDENT (both NO as far
+  as examined), UNKNOWN (either UNEXAMINED — not independent, not
+  inherited). No discount factor, because a numeric weight needs the
+  refused base rate and would be it laundered through arithmetic.
+  **Read correctly the live register gives ZERO pairs established
+  independent of 2211; folding UNEXAMINED into NO gives 2145 from
+  identical data** — one module carries a verdict and every other row is
+  UNEXAMINED, so zero is the register reporting that the work has not
+  been done, not a finding about modules, and the inversion needs no bad
+  faith and leaves no trace in the result. **What a YES costs is the
+  independence of two readings, not the correctness of either:** an
+  instrument matching its builder's manual procedure may be matching it
+  because the procedure is right, and separability from ordinary domain
+  expertise is left open per the spec — from a pair table, "echoed the
+  procedure" and "was simply correct" are the same row. Also left open
+  and disclosed: no method for detecting this from inside, and this
+  module is inside; the register is per module while instances are per
+  file, so three collapse into one row and a module with one echo and one
+  with twelve are the same YES; and **this module has its own row, and it
+  is UNEXAMINED** — a register of single-builder echoes built by the same
+  single builder is subject to its own subject. Samples are a snapshot of
+  the tree, by design, and repin when folders are added. 42 selftest
+  checks green. Stdlib only, parses under Python 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

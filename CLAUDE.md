@@ -15,15 +15,15 @@ CC0 simulators and audits grounded in physics. **Index only** — detail in
 ## Folders
 
 - `token-minimizer/` — compressed-query format, working
-- `emergence-stability-simulator/` — stable vs parasitic agent dynamics
+- `emergence-stability-simulator/` — stable vs parasitic agents
 - `research-stability-audit/` — falsifiable claims on model
 - `continuity-audit/` — incentive field on a diversity field
 - `substrate-emergence/` — the architecture the ground wants
-- `neural-augmentation-audit/` — what each augmentation borrows
+- `neural-augmentation-audit/` — what augmentation borrows
 - `incentive-blindspot-sim/` — incentives gate visibility
 - `antifungal-mechanism-sim/` — coupling topology beats additive
 - `AMOC/` — regime-shift trajectories for one
-- `thermal-sensor-degradation-audit/` — the sensor degrades during the event
+- `thermal-sensor-degradation-audit/` — sensor degrades in event
 - `play-sims/` — 17 visualisation sketches *(non-stdlib)*
 - `grounding-layers/` — seven-layer grounding stack *(non-stdlib)*
 - `earth_economics/` — physics–economics–accountability
@@ -31,7 +31,7 @@ CC0 simulators and audits grounded in physics. **Index only** — detail in
 - `fragility-cascade/` — value substrates, barrel to promised
 - `exploration-playground/` — hunts surprises, not correctness
 - `voice-attractor-probe/` — same loop, substrate is LLM output
-- `open-instrumentation-project/` — five private institutional sensors
+- `open-instrumentation-project/` — five private inst. sensors
 - `climate-modeling/` — cascade-speed blindness *(non-stdlib)*
 - `vector-field-explorer/` — channels as vectors; the angle
 - `exploration-engine/` — cross-domain cascade-regime chassis
@@ -45,19 +45,19 @@ CC0 simulators and audits grounded in physics. **Index only** — detail in
 - `engine-boiler-guide/` — offline field triage, engines and
 - `field-fabrication-guide/` — precision tools from scratch
 - `fuel-independence-guide/` — engines when the fuel chain stops
-- `cold-weather-battery-guide/` — sleeper-cab Li-ion, −60 F to 125 F
+- `cold-weather-battery-guide/` — sleeper-cab Li-ion, −60 to 125 F
 - `inverseminar/` — one artifact, one reconstruction
 - `energy/` — dark energy: metrology stack + audit *(non-stdlib)*
 - `crossdomain-eval/` — symbolic/numerical toolkit *(non-stdlib)*
 - `fourd-municipal-engine/` — 4D language lens + municipal code
-- `fourd-municipal-engine-v2/` — same core plus persistence, ETL, API
+- `fourd-municipal-engine-v2/` — same core plus ETL, API
 - `msiaf-framework/` — four-dimension incident cascade
 - `gdprf-framework/` — gradient-driven proxy reasoning
 - `msiaf-gdprf-bridge/` — MSIAF cascades as GDPRF claims
 - `proxy-investigation-lab/` — grounds a proxy as far as it grounds
 - `instrument-epistemology/` — the same method on scientific
-- `extraction-blindness-sim/` — no error signal read as safety
-- `aperiodic-order-sim-stack/` — delivered results, plus an audit of
+- `extraction-blindness-sim/` — no error signal = safety
+- `aperiodic-order-sim-stack/` — delivered results, plus audit
 - `reasoning-gate/` — fail-closed gate between a sim and
 - `reasoning-dial/` — thinking budget as a measurable
 - `triad-playground/` — system, instrument, reasoner
@@ -66,7 +66,7 @@ CC0 simulators and audits grounded in physics. **Index only** — detail in
 - `anchor-interval/` — a system fitted to a corpus it
 - `uninstrumented/` — excluded before the first reading is
 - `criteria-drift/` — evaluation criteria as a time series
-- `photoperiod-claim-harness/` — inconsistencies as runnable sims
+- `photoperiod-claim-harness/` — inconsistencies as sims
 - `category-weld/` — independent quantities welded into
 - `presented-binary/` — audits a two-option framing before
 - `generation-capacity/` — the excluded quantity is the option
@@ -77,15 +77,16 @@ CC0 simulators and audits grounded in physics. **Index only** — detail in
 - `held-open-uncertainty/` — holding open is not failing to act
 - `adaptive-claim-loop/` — the same loop, parameter-dial move
 - `derivation-discarded/` — the structure is the only copy of
-- `simulation-hypothesis-budget/` — what a Planck sim would cost
+- `simulation-hypothesis-budget/` — what a Planck sim costs
 - `instrument-bias-sims/` — nine sims + a module set on
 - `handoff-provenance/` — the channel between talk and code
+- `operator-structure-echo/` — instrument recurs to the builder's
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — validators, gate-drift check
 
 ## Reconciliation and conventions
 
-Checked 2026-08-23: all 68 folders above exist and are pushed on this
+Checked 2026-08-23: all 69 folders above exist and are pushed on this
 branch, so there is no `docs/ARCHIVE_NOTES.md`. Branch
 `claude/new-folder-um2xra`. Stdlib only; folders marked *(non-stdlib)*
 ship a `requirements.txt`. Each folder ships `samples/`.

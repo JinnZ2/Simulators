@@ -1,0 +1,98 @@
+CORROBORATION -- what agreement between two modules is worth
+========================================================================
+
+  'If YES is frequent, results across modules are not
+  independent -- they share a generator. Any agreement
+  between two modules is then weaker evidence than it
+  appears, because agreement may be inherited rather
+  than found.'
+
+  FOUR STATES, NO NUMBER
+
+    INHERITED
+      both YES: agreement is expected from the shared generator and is
+      not independent evidence
+    MIXED
+      one YES, one NO: the generator is in one arm and the weight is
+      unquantified
+    INDEPENDENT
+      both NO, as far as examined
+    UNKNOWN
+      at least one is UNEXAMINED. Not independent, not inherited, and
+      not to be read as either
+
+    discount factor: None   NOT_DERIVABLE
+    a numeric weight needs a base rate, and the base rate is refused on
+    a selection effect rather than on n. Every examined row exists
+    because someone noticed an echo, so the numerator and the
+    denominator are the same act
+
+------------------------------------------------------------------------
+
+  THE SAME REGISTER, READ TWO WAYS
+
+                           correct      UNEXAMINED as NO
+    INHERITED              0            0
+    MIXED                  0            66
+    INDEPENDENT            0            2145
+    UNKNOWN                2211         0
+    pairs                  2211         2211
+
+    pairs established INDEPENDENT:
+      correctly   0
+      if misread  2145
+
+    identical data. UNEXAMINED is the default for every module that
+    nobody has looked at, and reading it as NO converts 'not looked at'
+    into 'looked at and clear'
+
+    Identical data. Nothing in this repo is established
+    independent, and that is the register reporting that the
+    work has not been done -- not a finding about modules.
+
+------------------------------------------------------------------------
+
+  CONFIDENCE, reported separately and not resolved
+    UNEXAMINED
+      a third state everywhere, never folded into NO. Folding it
+      inverts the readout while leaving it looking the same
+    current_table
+      every pair is UNKNOWN. One module has a verdict and it has no
+      examined partner, so nothing here establishes independence or
+      inheritance for any pair
+    pair_states
+      four states, no number. A discount factor would be the refused
+      base rate laundered through arithmetic
+    resolved
+      False
+    what_YES_costs
+      the independence of two readings, not the correctness of either.
+      An instrument matching its builder's procedure may be matching it
+      because the procedure is right
+
+  WHERE IT BREAKS
+    - NOTHING IN THIS REPO IS ESTABLISHED INDEPENDENT AND THE TABLE
+    SAYS SO IN ONE NUMBER: zero pairs. One module carries a verdict,
+    every other row is UNEXAMINED, so every pair is UNKNOWN. That is
+    not a finding about the modules -- it is the register reporting
+    that the work has not been done, and it is the correct output for a
+    register nobody has filled
+    - READ UNEXAMINED AS NO AND THE SAME DATA SAYS ALMOST EVERYTHING IS
+    INDEPENDENT. misread() prints both. The failure needs no bad faith
+    and leaves no trace in the result: a default silently becomes an
+    answer, and the table looks identical in shape
+    - the pair states are about the REGISTER, not about the modules.
+    Two modules marked NO are independent only in the sense that the
+    operator examined both and reported no match to an unaided
+    procedure, which is one person's introspective report about their
+    own habits and is not otherwise checkable
+    - SEPARABILITY FROM DOMAIN EXPERTISE IS UNRESOLVED AND THIS MODULE
+    CANNOT RESOLVE IT. The spec lists it open. An expert's instrument
+    matching their manual procedure may echo the procedure or may
+    simply be correct, and from a pair table those are the same row.
+    YES is logged as a fact about shared structure, never as a fact
+    about quality
+    - the register is per module and the delivered instances are per
+    file: three instances collapse into one row, and a module with one
+    echo and a module with twelve are the same YES. The pair table
+    inherits that flattening
