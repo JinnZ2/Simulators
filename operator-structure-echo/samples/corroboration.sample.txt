@@ -33,14 +33,14 @@ CORROBORATION -- what agreement between two modules is worth
 
                            correct      UNEXAMINED as NO
     INHERITED              0            0
-    MIXED                  0            66
-    INDEPENDENT            0            2145
-    UNKNOWN                2211         0
-    pairs                  2211         2211
+    MIXED                  0            67
+    INDEPENDENT            0            2211
+    UNKNOWN                2278         0
+    pairs                  2278         2278
 
     pairs established INDEPENDENT:
       correctly   0
-      if misread  2145
+      if misread  2211
 
     identical data. UNEXAMINED is the default for every module that
     nobody has looked at, and reading it as NO converts 'not looked at'

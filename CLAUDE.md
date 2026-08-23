@@ -31,7 +31,7 @@ CC0 simulators and audits grounded in physics. **Index only** — detail in
 - `fragility-cascade/` — value substrates, barrel to promised
 - `exploration-playground/` — hunts surprises, not correctness
 - `voice-attractor-probe/` — same loop, substrate is LLM output
-- `open-instrumentation-project/` — five private inst. sensors
+- `open-instrumentation-project/` — five private sensors
 - `climate-modeling/` — cascade-speed blindness *(non-stdlib)*
 - `vector-field-explorer/` — channels as vectors; the angle
 - `exploration-engine/` — cross-domain cascade-regime chassis
@@ -42,10 +42,10 @@ CC0 simulators and audits grounded in physics. **Index only** — detail in
 - `null-harness/` — can a gate fire, can it stay silent
 - `divergence-playground/` — N readers, one fork; spread is the
 - `relational/` — pain-as-sensor, triadic correlation
-- `engine-boiler-guide/` — offline field triage, engines and
+- `engine-boiler-guide/` — offline field triage
 - `field-fabrication-guide/` — precision tools from scratch
-- `fuel-independence-guide/` — engines when the fuel chain stops
-- `cold-weather-battery-guide/` — sleeper-cab Li-ion, −60 to 125 F
+- `fuel-independence-guide/` — engines when fuel stops
+- `cold-weather-battery-guide/` — sleeper-cab Li-ion, cold
 - `inverseminar/` — one artifact, one reconstruction
 - `energy/` — dark energy: metrology stack + audit *(non-stdlib)*
 - `crossdomain-eval/` — symbolic/numerical toolkit *(non-stdlib)*
@@ -54,10 +54,10 @@ CC0 simulators and audits grounded in physics. **Index only** — detail in
 - `msiaf-framework/` — four-dimension incident cascade
 - `gdprf-framework/` — gradient-driven proxy reasoning
 - `msiaf-gdprf-bridge/` — MSIAF cascades as GDPRF claims
-- `proxy-investigation-lab/` — grounds a proxy as far as it grounds
-- `instrument-epistemology/` — the same method on scientific
+- `proxy-investigation-lab/` — grounds a proxy as far as it goes
+- `instrument-epistemology/` — same method on scientific
 - `extraction-blindness-sim/` — no error signal = safety
-- `aperiodic-order-sim-stack/` — delivered results, plus audit
+- `aperiodic-order-sim-stack/` — delivered results, audit
 - `reasoning-gate/` — fail-closed gate between a sim and
 - `reasoning-dial/` — thinking budget as a measurable
 - `triad-playground/` — system, instrument, reasoner
@@ -77,16 +77,17 @@ CC0 simulators and audits grounded in physics. **Index only** — detail in
 - `held-open-uncertainty/` — holding open is not failing to act
 - `adaptive-claim-loop/` — the same loop, parameter-dial move
 - `derivation-discarded/` — the structure is the only copy of
-- `simulation-hypothesis-budget/` — what a Planck sim costs
+- `simulation-hypothesis-budget/` — Planck-sim cost
 - `instrument-bias-sims/` — nine sims + a module set on
 - `handoff-provenance/` — the channel between talk and code
 - `operator-structure-echo/` — instrument recurs to the builder's
+- `scope-bound-shapes/` — one shape, FROZEN declared per binding
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
 ## Reconciliation and conventions
 
-Checked 2026-08-23: all 69 folders above exist and are pushed on this
+Checked 2026-08-23: all 70 folders above exist and are pushed on this
 branch, so there is no `docs/ARCHIVE_NOTES.md`. Branch
 `claude/new-folder-um2xra`. Stdlib only; folders marked *(non-stdlib)*
 ship a `requirements.txt`. Each folder ships `samples/`.

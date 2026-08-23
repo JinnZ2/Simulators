@@ -56,11 +56,11 @@ underneath. Read those before running the corresponding script.
 
 ## Layout
 
-Sixty-nine folders. The complete index — one line each — is in
+Seventy folders. The complete index — one line each — is in
 [`CLAUDE.md`](CLAUDE.md); full per-folder notes are in
 [`docs/FOLDER_NOTES.md`](docs/FOLDER_NOTES.md).
 
-This section used to carry a second, partial copy of that list (30 of 69
+This section used to carry a second, partial copy of that list (30 of 70
 folders). It was removed rather than completed: two lists drift, and the one
 that drifted was this one.
 

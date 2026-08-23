@@ -4781,7 +4781,7 @@ is pushed on this branch — see the reconciliation note in `CLAUDE.md`.
   inherited). No discount factor, because a numeric weight needs the
   refused base rate and would be it laundered through arithmetic.
   **Read correctly the live register gives ZERO pairs established
-  independent of 2211; folding UNEXAMINED into NO gives 2145 from
+  independent of 2278; folding UNEXAMINED into NO gives 2211 from
   identical data** — one module carries a verdict and every other row is
   UNEXAMINED, so zero is the register reporting that the work has not
   been done, not a finding about modules, and the inversion needs no bad
@@ -4799,6 +4799,66 @@ is pushed on this branch — see the reconciliation note in `CLAUDE.md`.
   single builder is subject to its own subject. Samples are a snapshot of
   the tree, by design, and repin when folders are added. 42 selftest
   checks green. Stdlib only, parses under Python 3.9, phone-buildable, CC0.
+- `scope-bound-shapes/` — **Marker under exploration.**
+  `SPEC_SHAPES.md` delivered verbatim. A SHAPE is a structural sequence
+  recurring across domains, defined by its sequence and its selection
+  rule and **not by its materials**; a SCOPE BINDING is that shape
+  instantiated with a declared FROZEN list; scoping out releases entries
+  from FROZEN and **is not a model swap**; and domain names are scope
+  bindings that acquired names rather than different subjects.
+  **The CONSTRAINT forces a third state.** FROZEN entries are declared by
+  the builder and never inferred, since an inferred list would be the
+  tool asserting scope it did not measure — take that seriously and a
+  variable is LIVE, FROZEN, or **UNDECLARED**, and the delivered worked
+  example has two of the third kind: `aggregate` and `moisture gradient`
+  are in neither list for metamorphic_rock. The arithmetic to remove the
+  state is two lines (`frozen := universe − live`), completes the table,
+  and is exactly the forbidden inference, so `infer_frozen()` exists
+  **only to refuse** and prints what it would have returned, making the
+  refusal inspectable rather than asserted. UNDECLARED is not FROZEN: one
+  is a claim the builder made, the other a claim nobody made.
+  **The worked example collides totally, in both directions.**
+  `compare()` returns SCOPE_COLLISION on five variables: all four of
+  slab_concrete's frozen entries (T range, chemistry, creep, lithostatic
+  load) are live in metamorphic_rock, and metamorphic_rock's single
+  frozen entry (cure age) is live in slab_concrete — **4 of 4 and 1 of
+  1**, so there is nothing the two bindings both hold still, and
+  `restraint` is the only variable live in both, the entire overlap. The
+  spec's consequence therefore applies at full strength: two modules
+  claiming this shape at these bindings are not corroborating each other.
+  Recorded as a statement about what agreement is worth, **not** as a
+  contradiction or a defect — bindings that collide hold different things
+  still, which is coverage rather than confirmation, and the module
+  reports without grading. **"No collision" is never "corroborates":**
+  `compare()` returns corroborate=False on a collision and None
+  otherwise, never True. **Scoping out demonstrates the constraint
+  biting:** releasing every declared FROZEN entry on both sides drives
+  collisions 5 → 1 → 0 with the shape and selection rule unchanged, and
+  still does not reach COMPATIBLE, because the two UNDECLARED variables
+  never resolve and only the builder can declare them.
+  **`markers.py`** carries the four-column table with the spec's rule —
+  stability without bindings_tested is not a claim — enforced in **two**
+  places rather than stated once: `set_stability()` guards the write and
+  `row()` guards the read, so a value written straight past the first
+  guard is still refused on its way to a reader. `MIN_BINDINGS_FOR_
+  STABILITY` is 2, on the reasoning that one binding is where a marker
+  was found rather than where it was tested. **Every delivered row is
+  UNTESTED** — four markers, zero stability claims, zero bindings tested
+  — because the material gives a shape, a rule and two bindings and no
+  test record, and **zero known exceptions beside zero bindings reads
+  NOT_LOOKED, never NONE_FOUND**, with an explicit state on every row so
+  the distinction never rests on an empty list. Disclosed: the shape is
+  taken on the spec's word, so if it is wrong every collision here is
+  between bindings of a shape that does not exist; the markers are
+  derived from the shape's own sequence and rule, the only source
+  available and **also circular**, since a marker restating a step cannot
+  fail when the shape holds; the two-binding floor is arbitrary and worse
+  — the only two bindings delivered collide totally, so even a
+  floor-clearing claim would sit on a non-corroborating pair; the double
+  guard checks that the columns move together, not that the bindings were
+  really tested; and `compare()` is pairwise, so nothing here says what a
+  shape with nine bindings looks like. 48 selftest checks green. Stdlib
+  only, parses under Python 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
