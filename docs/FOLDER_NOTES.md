@@ -4994,8 +4994,58 @@ is pushed on this branch — see the reconciliation note in `CLAUDE.md`.
   with `extraction-blindness-sim/` — same reading error, extra loop,
   since there the sensor fails to see the damage while here the
   hollowness causes the silence — is INHERITED by
-  `operator-structure-echo/corroboration.py`, not found. 49 selftest
-  checks green. Stdlib only, parses under Python 3.9, phone-buildable, CC0.
+  `operator-structure-echo/corroboration.py`, not found.
+  **`SPEC_ADDENDUM.md` adds a witnessed transition-period case and five
+  open items.** A late reorganisation from distributed-function to
+  CEO-led structure; pressure to run subpar material; QC reading it out
+  of spec; stated rationale *ship it, and returns will identify the
+  problems*; the floor refused and the refusal held.
+  **`relocation.py`: nobody argued the inspectors were wrong.** The
+  measurement point moved from pre-shipment inspection to post-shipment
+  return and the upstream reading — still correct — was made non-binding,
+  so `upstream_status()` returns NOT_DISPROVEN_MADE_NONBINDING, never
+  REFUTED and never SUPERSEDED; a reading that still holds and no longer
+  binds is the shape of the case. Same material, same threshold,
+  **opposite decisions**: pre-shipment 0.072 REFUSE, post-shipment 0.016
+  SHIP, the proxy understating by **4.55×** as a product of three
+  unobserved terms (manifests × noticed × returned = 0.198). **The
+  missing denominator is not an error bar** — 480 defective units over
+  six periods, 48 returned, **385 silent**, 80% producing no record
+  anywhere, and 240 defective units shipping before the lag elapses and
+  any signal exists. The module explicitly does NOT claim returns detect
+  nothing: `can_the_proxy_carry_the_decision()` keeps *does it detect
+  anything* (yes, and the budget office's rationale is not false) apart
+  from *can it carry this decision* (no), answering only the second.
+  **`pressure_record.py`: documented pressure is zero on both sides of
+  the peak and the two zeros mean opposite things.** Before, the decision
+  sat with the function so nothing needed pressing; after, if refusal no
+  longer holds nothing requires pressure, so the negotiation never
+  happens and is never recorded — identical observable, opposite states,
+  counts 0/1/0, non-monotonic, with the crossing the only period
+  producing an observation and a later-period survey reading zero as
+  improvement. Recorded as **one finding with the stop count, not two**,
+  since both are the observable running non-monotonic in the thing it is
+  read as measuring, by one builder in one repo. A pressure event
+  establishes cleanly that a boundary existed to press against, and
+  `held_afterwards` is **None, not False**. **All five open items are
+  carried and none closed.** Item 5 ships a harness and no survey: the
+  spec's "if none do, that absence is itself the finding" would hold, but
+  establishing it needs published programs this side cannot read, so the
+  registry carries the one available row (executions reported, attempts
+  not) at state NOT_RUN — ABSENT being a different state and unavailable
+  — with `ProgramRecord` refusing a row whose reporting was never
+  examined, since None is not False. Item 3 is CANNOT_DISCRIMINATE: the
+  test is one facility with both axes recorded, and three cases from
+  three facilities with one axis each are consistent with one move and
+  with two. Item 4 may not be solvable as stated, every proposed
+  collection mechanism requiring the reviewing party to admit the count
+  matters — the same authority question one level up, since the party who
+  would collect the denominator is the party a stop binds against.
+  Disclosed: **n=1, and three modules now rest on that one account**,
+  which is not three observations; and the relocation's lag and survival
+  fractions are this module's construction, chosen to land the proxy
+  under the line. 96 selftest checks green. Stdlib only, parses under
+  Python 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

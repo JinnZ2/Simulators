@@ -15,10 +15,15 @@
 ```
 python3 stop_authority.py    # the count, the three numbers, the suppression loop
 python3 binding.py           # what it can bind; who holds it; what it cost
+python3 relocation.py        # the measurement point moved, not the reading
+python3 pressure_record.py   # why the crossing is the only period that shows it
 ```
 
-Both take `--selftest`. 26 / 23 checks, 49 in all, green. Samples pinned in
-`samples/`, byte-reproducible.
+All take `--selftest`. 26 / 23 / 21 / 26 checks, 96 in all, green. Samples
+pinned in `samples/`, byte-reproducible.
+
+The last two come from [`SPEC_ADDENDUM.md`](SPEC_ADDENDUM.md) — a witnessed
+transition-period case, and the open work it leaves.
 
 **This module does not flip the error.** Treating zero as evidence of B would
 be the published mistake pointing the other way. Every readout returns
@@ -135,12 +140,110 @@ claim rested on nothing it could read. Recording that conversations fail to be
 a measurement is also different from establishing that the conversations did
 nothing, and nothing here does the second.
 
+## The addendum: moving the measurement point instead of arguing with it
+
+CEO pressure to run subpar material; QC read it out of spec; the stated
+rationale was **ship it, and returns will identify the problems**. The floor
+refused and the refusal held.
+
+**Nobody argued the inspectors were wrong.** The measurement point was
+relocated from pre-shipment inspection to post-shipment return, and the
+upstream reading — still correct — was made non-binding. `upstream_status()`
+returns `NOT_DISPROVEN_MADE_NONBINDING`, never `REFUTED` and never
+`SUPERSEDED`. A reading that still holds and no longer binds is the whole
+shape of the case.
+
+Same material, same threshold:
+
+| point | reads | decision |
+| --- | --- | --- |
+| pre-shipment | 0.072 | **REFUSE** |
+| post-shipment return | 0.016 | **SHIP** |
+
+The proxy understates by **4.55×** — a product of three unobserved terms
+(defect manifests × customer notices × customer returns = 0.198). Not noisier
+than the inspection: biased low by a factor nobody reading it can measure.
+
+**The missing denominator is not an error bar.** Over six periods, 480
+defective units, 48 returned, **385 silent** — 80% producing no record
+anywhere. Not a noisy record; no record. And 240 defective units ship before
+the lag elapses and any signal exists at all.
+
+What the module does *not* claim: that returns detect nothing. They do — some
+problems, later, after harm, at an unknown fraction. The budget office's stated
+rationale is not false. `can_the_proxy_carry_the_decision()` keeps "does it
+detect anything" (yes) apart from "can it carry this decision" (no), and
+answers only the second.
+
+## Why the pressure event is the only observation available
+
+| period | documented pressure | boundary |
+| --- | --- | --- |
+| BEFORE | 0 | INTACT_UNAPPROACHED |
+| TRANSITION | **1** | CONTESTED |
+| AFTER | 0 | UNKNOWN_POSSIBLY_GONE |
+
+**Zero on both sides of the peak, meaning opposite things.** Before, the
+decision sat with the function and nothing needed pressing. After, if refusal
+no longer holds, nothing requires pressure — so the negotiation never happens
+and is never recorded. Identical observable, opposite states, and the count
+separates neither. A survey sampling later periods finds zero and reads it as
+an improvement on the transition.
+
+That is the same shape as the stop count, and it is **one finding, not two** —
+the observable running non-monotonic in the thing it is read as measuring, in
+one repo by one builder. Counting them as two independent results would be the
+inherited-agreement error `operator-structure-echo/` exists to catch.
+
+A documented pressure event establishes one thing cleanly: **a boundary existed
+to press against.** Someone had to be pushed, so something was in the way. It
+does not establish the boundary held afterwards — `held_afterwards` is `None`,
+not `False`, because no later test is recorded and no later pressure is either.
+
+## Open work, carried and not closed
+
+| item | state |
+| --- | --- |
+| collect additional transition-period accounts | OPEN (n=1) |
+| recover pressure events after the boundary is gone | NO_METHOD_PROPOSED |
+| is hollowing the same move as scope contraction | CANNOT_DISCRIMINATE |
+| collection mechanism for WARRANTED-IN-REVIEW | NO_METHOD_PROPOSED |
+| do published SWA programs report attempts separately | **NOT_RUN** |
+
+**Item 5 has a harness and no survey.** The spec says that if no published
+program reports attempts separately from executions, *that absence is itself
+the finding*. It would be. Establishing it requires reading published programs;
+this side has no access to a corpus of them, and inventing rows would be worse
+than an empty table. The harness ships with the one row available — the prior
+art case, which reports executions and not attempts — and state `NOT_RUN`.
+`ABSENT` is a different state and is not available. `ProgramRecord` refuses a
+row where the reporting was never examined: `None` is not `False`.
+
+**Item 3 cannot be discriminated.** The test is one facility with both axes
+recorded. Three cases are available, from three facilities, with one axis each
+— consistent with one move and with two. Cases cannot be pooled: the facility
+is the unit.
+
+**Item 4 may not be solvable in the form stated.** Every mechanism proposed for
+collecting `warranted-in-review` requires the reviewing party to admit the count
+matters — which is the same authority question one level up, since the party
+who would collect the denominator is the party a stop binds against. Recording
+that recursion is not progress on it.
+
 ## What is not established
 
 - **Nothing here measures a facility.** Two of three binding rows are
   stipulated to make the axes move; the third is the operator's documented case
   carried without independent check. This is a set of refusals with a worked
   example, not a survey.
+- **n=1, and three modules now rest on that one account.** `relocation.py`,
+  `pressure_record.py` and the open-work register all take their structure from
+  a single witnessed transition. Three readouts on one observation is not three
+  observations, and the spec's own open work leads with collecting more.
+- **The relocation numbers are invented.** The relocation is witnessed; the
+  three-period return lag and the manifest/notice/return fractions are this
+  module's construction, chosen to land the proxy under the line. They show the
+  mechanism is arithmetically available and measure nothing that happened.
 - **`warranted-in-review` is itself a judgement made after the fact**, possibly
   by the parties a stop would have cost. The spec places it outside the
   worker's suppressed judgement, which replaces it with a reviewer's. Nothing
