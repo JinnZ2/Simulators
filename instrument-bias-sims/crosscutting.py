@@ -33,11 +33,17 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import _shared as SH                                            # noqa: E402
 
+SUBFOLDERS = ["allocation_coupling"]
+for _sf in SUBFOLDERS:
+    sys.path.insert(0, os.path.join(HERE, _sf))
+
 MODULES = ["s1_encounter_denominator", "s2_symmetric_anchor",
            "s3_rubric_backcast", "s4_antler_calibration",
            "s5_adversarial_prior", "s6_foreclosure_rate",
            "s7_hardship_threshold", "s8_recognition_to_delivery",
-           "s9_corpus_position_filter"]
+           "s9_corpus_position_filter",
+           "m1_tenure_budget", "m2_coupling_readout", "m3_energy_ledger",
+           "m4_assessment_record", "run_all"]
 
 # Rule 1. Tokens that would make a data structure carry a verdict about worth
 # rather than a quantity. Deliberately excludes words with technical uses
@@ -128,6 +134,7 @@ def check_rule_3(mod):
 
 
 def check_rule_4(readme_path):
+    """Also checks every subfolder README carries the phrase."""
     if not os.path.exists(readme_path):
         return {"rule": "README states marker under exploration",
                 "problems": ["README.md not found"], "pass": False}
@@ -222,7 +229,8 @@ def report():
 def selftest():
     ck, done = SH.checker()
     a = audit()
-    ck("all nine sims are audited", len(a["rows"]) == 9)
+    ck("nine sims plus the five S10 modules are audited",
+       len(a["rows"]) == 14)
     ck("rule 1 passes on every module",
        all(r["r1"]["pass"] for r in a["rows"]))
     ck("rule 2 passes on every module",

@@ -4435,7 +4435,8 @@ underneath).
   clause is deliberately NOT used to rescue the claim. Forty claims
   `SHB_001..040`, one REFUTED, four external audits run by someone who
   did not write the claims. Stdlib only, CC0.
-- `instrument-bias-sims/` — Nine sims from delivered work orders,
+- `instrument-bias-sims/` — Nine sims plus one module set, from
+  delivered work orders,
   each testing one way an instrument's own construction shapes what it
   reports. **Marker under exploration, not a thesis**; the delivered
   instruction was "test fit, extend, or report where it breaks", so
@@ -4525,19 +4526,57 @@ underneath).
   form of the spec's second-order point. Also: interrelation is **not**
   the most-suppressed category once a three-condition category is on the
   list, and the ranking is a property of the enumeration.
+**S10** (`allocation_coupling/`, five files plus a README) is a module
+  set with a runner rather than one model, on the spec's stated reasoning
+  that "the finding is in the cross-terms" — and **that reasoning is
+  what defeats the deliverable it asks for**: a per-link attribution
+  table is exactly the object that cannot hold a cross-term.
+  Leave-one-in gives −0.20 / −1.26 / −0.00 summing to **−1.45** against
+  a true effect of **−0.81**, so the **residual is 79% of the effect**,
+  and a table printed without it would assign the interaction to
+  whichever link was listed last; it is reported alongside and never
+  distributed, with leave-one-out and Shapley named as decompositions
+  that would give different per-link numbers on the same model. The
+  spec's own prediction holds — deep observations are **zero for every
+  position** in the coupled run, since positions with hours left have
+  them in many short blocks and positions with long blocks have no hours
+  left. **M4 returns something stronger than the spec predicted**: not a
+  merit gradient that is really a writing-time gradient but an
+  **inverted merit gradient**, assessed contribution correlating
+  **−0.85** with observations generated — and it **cannot be fixed at
+  the assessor**, since generation and writing probability are
+  anti-correlated at −0.99 in the mapping, so no rule reading only the
+  record can separate them (S2's one-arm identifiability limit, second
+  instance). M4 **imports** S9's `p_write` rather than re-deriving it,
+  per the spec and the repo's anti-drift convention. M2's fragmentation
+  penalty is unmeasured and swept, and the sweep shows the two halves of
+  its prediction failing for **different reasons** — deep types die from
+  the window requirement, which does not involve the penalty exponent at
+  all. M3's wage-vs-kcal sign is a property of the position list and two
+  added positions flip it, and its **sensory-integration term is `None`
+  for 5 of 5 positions**, rendering `[BLANK]` rather than estimated,
+  with the located neuroimaging literature sampling pianists, racing
+  drivers, pilots and air traffic controllers and no farm, fabrication,
+  animal handling or freight. The **blank agent is enumerated**, which
+  the spec asked for and which is a stronger form of the S4 rule: five
+  parties named, the load-bearing one being that presence is derived
+  from tenure in M1, so **a continuous observer without tenure cannot
+  exist in this model at all** — the position most likely to hold the
+  knowledge the set is about.
   **`crosscutting.py`** enforces the four cross-cutting rules over all
-  nine rather than
+  fourteen modules rather than
   restating them — moral tokens and intent phrases scanned, the separate
   unresolved `confidence()` and non-empty `breaks()` structurally
   enforced, the README phrase checked — and is null-tested on a planted
   violation so none of the checks is silent by construction; its own
   limit (a keyword scan is stepped around by any paraphrase) is stated
-  at the top of the file rather than the bottom. **Five results ran
+  at the top of the file rather than the bottom. **Six results ran
   against the drafted prose** (S3's flat column, S6's more-levels-is-
-  better, S8's sign flip, S9's conjunction excess and S9's content
-  crossover) and are recorded in place rather than smoothed. No module
+  better, S8's sign flip, S9's conjunction excess, S9's content
+  crossover, and M4's sign-losing |r| comparison) and are recorded in
+  place rather than smoothed. No module
   reads real data and every literature claim carried from a work order
-  is marked carried-not-verified. 197 selftest
+  is marked carried-not-verified. 273 selftest
   checks green. Stdlib only, parses under Python 3.9, phone-buildable,
   CC0.
 - `legacy/` — Archived source drops. The repo root reserves one

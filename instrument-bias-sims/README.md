@@ -4,7 +4,7 @@ SPDX-License-Identifier: CC0-1.0
 
 # instrument-bias-sims
 
-**Marker under exploration, not a thesis.** Nine sims from delivered work
+**Marker under exploration, not a thesis.** Nine sims plus one module set, from delivered work
 orders, each testing one way an instrument's own construction shapes what it
 reports. Nothing here is a position under defense, and the correct response to
 any of it is to test the fit, extend it, or report where it breaks.
@@ -24,10 +24,11 @@ Stdlib only. Phone-buildable. CC0.
 | S7 | `s7_hardship_threshold.py` | unanchored thresholds slide to the labeller's baseline | observer-dependence is near-analytic; the cost readout is a **consequence of a stipulation** and says so |
 | S8 | `s8_recognition_to_delivery.py` | time as an excuse vs time as a variable | the normalisers agree on the sign and disagree **4286×** about what would count as parity |
 | S9 | `s9_corpus_position_filter.py` | a corpus samples observer positions non-uniformly, with nothing filtering | the spec's reason is the two **marginals**; coupling drives the conjunction's excess **above** 1.0, so the multiplicative reading **overstates** suppression by up to 1.85× |
+| S10 | [`allocation_coupling/`](allocation_coupling/) | tenure → hours → coupling → record, as four modules with a runner | the **residual is 79% of the total effect** — a per-link table cannot hold the cross-term the spec says the finding is in |
 
 Every module exposes `report()`, `confidence()`, `breaks()` and `--selftest`.
 
-## Five results that ran against the draft
+## Six results that ran against the draft
 
 Recorded rather than smoothed, because a sim that only ever confirms the prose
 around it is not being run.
@@ -54,6 +55,10 @@ around it is not being run.
   is a **typicality** measure, so middling items score highest and the content
   correlation stays under **0.2 at every mix**. What the sweep locates is where
   the score stops tracking *position* — it never starts tracking quality.
+- **S10 / M4.** The readout compared |r| only and reported "tracks generated
+  observations" for a correlation of **−0.85**. The sign was the finding and the
+  magnitude comparison lost it. The assessed gradient doesn't track generation —
+  it **inverts** it, which is stronger than the spec predicted.
 
 ## Structural rule, adopted from the S4 patch
 

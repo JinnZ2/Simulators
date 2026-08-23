@@ -11,6 +11,11 @@ CROSS-CUTTING RULES, ENFORCED
   s7_hardship_threshold            pass     pass     pass
   s8_recognition_to_delivery       pass     pass     pass
   s9_corpus_position_filter        pass     pass     pass
+  m1_tenure_budget                 pass     pass     pass
+  m2_coupling_readout              pass     pass     pass
+  m3_energy_ledger                 pass     pass     pass
+  m4_assessment_record             pass     pass     pass
+  run_all                          pass     pass     pass
 
   r4 README: pass
   all rules pass: True
