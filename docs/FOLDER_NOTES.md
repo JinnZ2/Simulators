@@ -4781,7 +4781,7 @@ is pushed on this branch — see the reconciliation note in `CLAUDE.md`.
   inherited). No discount factor, because a numeric weight needs the
   refused base rate and would be it laundered through arithmetic.
   **Read correctly the live register gives ZERO pairs established
-  independent of 2485; folding UNEXAMINED into NO gives 2415 from
+  independent of 2556; folding UNEXAMINED into NO gives 2485 from
   identical data** — one module carries a verdict and every other row is
   UNEXAMINED, so zero is the register reporting that the work has not
   been done, not a finding about modules, and the inversion needs no bad
@@ -5120,6 +5120,64 @@ is pushed on this branch — see the reconciliation note in `CLAUDE.md`.
   unregulated instances being the size of the search rather than of the
   population; and the spec's conditional finding is well-formed with an
   unestablished antecedent, so the consequent is not available. 55
+  selftest checks green. Stdlib only, parses under Python 3.9,
+  phone-buildable, CC0.
+- `predicate-difference/` — **Marker under exploration.**
+  `SPEC_METHOD.md` delivered verbatim; `FINDINGS.md` is the deliverable.
+  The method: hold a work domain constant for a corpus decade, extract
+  every predicate attaching to the subject class doing that work and to
+  the reference class doing the same work, and take the **set
+  difference** — at a rate the corpus size can support. **That last
+  clause is the whole instrument.** A set difference is trivial and
+  almost always wrong, because "never appears for the other class" is a
+  claim about an absence, and an absence is a measurement only when the
+  sample was large enough for the thing to have shown up; with a thin
+  reference sample the difference returns the subject class's entire
+  vocabulary. `support()` computes the count the predicate WOULD have had
+  in the reference class at the subject's own rate and refuses below
+  MIN_EXPECTED, returning **NOT_ENOUGH_TEXT** — a distinct state from
+  ABSENT, never folded into it, the repo's recurring repair arriving at
+  the denominator of a set difference. Demonstrated on two fixtures
+  carrying the **same real difference**: with a 20 000-token reference
+  the instrument reports 3 markers, with a 300-token reference it reports
+  **0 markers and 2 NOT_ENOUGH_TEXT**, where a plain set subtraction
+  reports the same three for both. MIN_EXPECTED 3.0 and MIN_OBSERVED 5
+  are chosen floors, printed beside every readout, and the result moves
+  with them. **Valence is not switched off, it is absent:** no valence
+  field, argument or attribute, with `check_no_valence()` walking the
+  module's own AST over identifiers — not strings, so the word can appear
+  in prose explaining its absence without satisfying its own check — and
+  failing the selftest if a channel appears. Disclosed limit: that
+  prevents a valence *field*, not valence, since a taxonomy whose
+  category names carry the judgement passes untouched, and a contempt
+  taxonomy is where that is tempting. **`shape_index.py`** runs the
+  four-class extension — women, enslaved and formerly enslaved people,
+  ethnic groups typed as lower, disabled people — in a format **inferred**
+  from `scope-bound-shapes/` (a shape defined by its structure and not its
+  materials, which fits same-shape-different-vocabulary closely) and
+  flagged as an inference, deliberately not importing that module's
+  Binding, since forcing a predicate shape into a LIVE/FROZEN variable
+  list would fit the object to the nearest available class. **Disjoint
+  vocabulary is treated as a requirement, not an incidental:** FX_1 and
+  FX_2 are both present in all four classes and differ only in whether one
+  word is shared, so a test that counts bindings returns four-of-four for
+  both — and shared words are consistent with the four literatures being
+  one, the hypothesis the extension exists to rule out. Hence
+  STRUCTURAL_SIGNATURE only on disjoint vocabulary, SHARED_VOCABULARY
+  otherwise, and **full presence with shared vocabulary is weaker than
+  partial presence with disjoint vocabulary**. A class never checked is
+  reported separately from a class found empty. **No corpus is acquired:**
+  all four delivered targets (Freud, period psychology and medicine,
+  household management texts, labor economics of the era) are
+  NOT_ACQUIRED, every readout over real classes is NOT_RUN, and the shape
+  index holds zero shapes — **empty being the size of the work done, not a
+  finding that no shape recurs**. Naming the shapes from here would be
+  easy and would be the module writing the finding then confirming it
+  against its own fixtures. Both instruments are graded on synthetic
+  fixtures marked as such before use. Open and needing the operator: the
+  shape-index format is a guess, and **no reference class is settled** —
+  the difference needs one per comparison, the four classes as delivered
+  are not defined against a stated reference, and they overlap. 50
   selftest checks green. Stdlib only, parses under Python 3.9,
   phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one

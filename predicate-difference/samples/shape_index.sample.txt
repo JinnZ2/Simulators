@@ -1,0 +1,154 @@
+SHAPE INDEX -- one shape, four bindings, different vocabulary
+========================================================================
+
+  If the same predicate shape recurs across all four subject
+  classes with different vocabulary, that confirms it is a
+  structural signature and not four separate literatures.
+
+  subject classes:
+    women
+    enslaved and formerly enslaved people
+    ethnic groups typed as lower
+    disabled people
+
+------------------------------------------------------------------------
+
+  THE INDEX
+
+    shapes recorded: 0
+    corpus:          NONE_ACQUIRED
+    state:           NOT_RUN
+
+    a predicate shape taxonomy is derived from the corpus. None is
+    acquired, so the index is empty -- and empty here is the size of
+    the work done, not a finding that no shape recurs
+
+------------------------------------------------------------------------
+
+  THE RECURRENCE TEST, GRADED ON FIXTURES
+
+  SYNTHETIC_FIXTURE -- invented to grade the recurrence test
+
+  SHAPE FX_1
+    fixture shape, all four classes, no shared words
+    bindings:              4 of 4
+    vocabulary disjoint:   True
+    per binding:
+      women                                    w_a1, w_a2
+      enslaved and formerly enslaved people    w_b1
+      ethnic groups typed as lower             w_c1, w_c2
+      disabled people                          w_d1
+    VERDICT: STRUCTURAL_SIGNATURE
+      present in all 4 classes with disjoint vocabulary. The shape
+      recurs and the words do not, which is what separates a structural
+      signature from a shared literature
+
+  SHAPE FX_2
+    fixture shape, all four classes, one shared word
+    bindings:              4 of 4
+    vocabulary disjoint:   False
+    shared words:          w_common
+    per binding:
+      women                                    w_a2, w_common
+      enslaved and formerly enslaved people    w_common
+      ethnic groups typed as lower             w_c2, w_common
+      disabled people                          w_common
+    VERDICT: SHARED_VOCABULARY
+      present in all 4 classes and the vocabulary overlaps: w_common.
+      Shared words are consistent with four literatures being one,
+      which is the hypothesis the extension exists to rule out
+
+  SHAPE FX_3
+    fixture shape, two classes only, disjoint
+    bindings:              2 of 4
+    vocabulary disjoint:   True
+    per binding:
+      women                                    w_a1
+      enslaved and formerly enslaved people    w_b1
+      ethnic groups typed as lower             (checked, none)
+      disabled people                          (checked, none)
+    VERDICT: NOT_ESTABLISHED
+      present in 2 of 4 classes. The extension's claim is recurrence
+      across all four
+
+  SHAPE FX_4
+    fixture shape, all present but two classes never checked
+    bindings:              2 of 4
+    vocabulary disjoint:   True
+    NOT CHECKED:           2 class(es)
+    per binding:
+      women                                    w_a1
+      enslaved and formerly enslaved people    w_b1
+      ethnic groups typed as lower             NOT_CHECKED
+      disabled people                          NOT_CHECKED
+    VERDICT: NOT_ESTABLISHED
+      2 of 4 subject classes were not checked (disabled people, ethnic
+      groups typed as lower). Presence in the rest cannot establish
+      recurrence across all four
+
+  GRADE: OK   distinct verdicts: 3
+
+  FX_1 and FX_2 differ only in whether one word is shared across
+  bindings. A test that counts bindings returns the same verdict for
+  both, and the difference between them is the whole extension
+
+------------------------------------------------------------------------
+
+  CONFIDENCE, reported separately and not resolved
+    disjointness
+      treated as a requirement, on the method's own words. A shape
+      recurring in shared vocabulary is reported as weaker, not as
+      absent
+    resolved
+      False
+    the_format
+      INFERRED from scope-bound-shapes, where a shape is defined by its
+      structure and not its materials. No shape-index format exists in
+      this repo, so if the delivered one differs this is the wrong file
+      shape and the contents transfer
+    the_grade
+      over four synthetic fixtures that separate three verdicts. It
+      grades the test, not the extension
+    the_index
+      empty of real shapes. A taxonomy comes from the corpus and none
+      is acquired
+    unchecked_classes
+      a class never checked is never counted as absent. FX_4 exists to
+      hold that case
+
+  WHERE IT BREAKS
+    - FULL PRESENCE WITH SHARED VOCABULARY IS WEAKER THAN PARTIAL
+    PRESENCE WITH DISJOINT VOCABULARY, AND A BINDING COUNT LOSES THAT.
+    FX_1 and FX_2 both appear in all four classes and differ only in
+    whether one word is common across them. A test that counts bindings
+    returns four-of-four for both. Shared words are consistent with the
+    four literatures being one literature -- quotation, a shared
+    source, a single tradition restating itself -- which is precisely
+    the hypothesis the extension was added to rule out, so the shared
+    case returns SHARED_VOCABULARY and not a signature
+    - THE INDEX IS EMPTY AND THAT IS THE SIZE OF THE WORK DONE, NOT A
+    FINDING. Zero shapes recorded does not mean no shape recurs across
+    the four classes. It means no corpus has been read. Naming the
+    shapes from here would be easy and would be this module writing the
+    finding and then confirming it against its own fixtures
+    - THE OUTPUT FORMAT IS AN INFERENCE. The delivered instruction
+    names a shape-index format that does not exist in this repository.
+    The format used is built from scope-bound-shapes' distinction
+    between a shape and its materials, which fits the extension's own
+    same-shape-different-vocabulary claim closely. It is still a guess
+    at what was asked for, and it is not imported from that module
+    because its Binding is a LIVE/FROZEN variable list and forcing a
+    predicate shape into it would fit the object to the nearest
+    available class
+    - A CLASS NEVER CHECKED IS NOT A CLASS FOUND EMPTY, AND THE ENTRY
+    SCHEMA IS THE ONLY THING ENFORCING IT. ShapeEntry refuses a
+    realisation for a class not in checked_classes, and reports
+    unchecked classes separately from absent ones. Nothing stops a
+    caller declaring all four checked when two were skimmed -- the
+    field records a claim about what was examined, not the examination
+    - THE FOUR SUBJECT CLASSES ARE CARRIED AS DELIVERED AND ARE NOT
+    PARTITIONS OF ANYTHING. They overlap: a disabled woman is in two,
+    and the classes as named are not defined against a stated reference
+    class here at all. The predicate difference needs a reference class
+    per comparison, and which reference each of the four is measured
+    against is not settled by this index

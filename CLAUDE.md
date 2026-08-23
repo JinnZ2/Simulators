@@ -6,15 +6,15 @@ CC0 simulators and audits grounded in physics. **Index only** — detail in
 ## Spine — read in order
 
 - `PREAMBLE.md` — physics baseline; TERM COLLISION note
-- `PROTOCOL.md` — the baseline as a protocol; Model/Reality Dissonance
-- `BNRAM_STRICT.md` — Bias-Neutralization & Reality-Audit Module v2.0
+- `PROTOCOL.md` — the baseline as a protocol; Dissonance
+- `BNRAM_STRICT.md` — Bias-Neutralization & Reality-Audit v2.0
 - `PVL.md` — Phenomenological Validation Layer; inverse audit
-- `CASE_STUDY_NARRATIVE_INSTINCT.md` — substitution test, empirical record
+- `CASE_STUDY_NARRATIVE_INSTINCT.md` — substitution test, record
 - `SYNTHESIS.md` — cross-folder reading order
 
 ## Folders
 
-- `token-minimizer/` — compressed-query format
+- `token-minimizer/` — compressed-query fmt
 - `emergence-stability-simulator/` — stable vs parasitic
 - `research-stability-audit/` — falsifiable claims
 - `continuity-audit/` — incentive on a diversity field
@@ -48,13 +48,13 @@ CC0 simulators and audits grounded in physics. **Index only** — detail in
 - `cold-weather-battery-guide/` — sleeper-cab Li-ion
 - `inverseminar/` — one artifact, one reconstruction
 - `energy/` — dark energy: metrology + audit *(non-stdlib)*
-- `crossdomain-eval/` — symbolic/numerical toolkit *(non-stdlib)*
+- `crossdomain-eval/` — symbolic/numeric kit *(non-stdlib)*
 - `fourd-municipal-engine/` — 4D lens + municipal code
 - `fourd-municipal-engine-v2/` — same core + ETL, API
 - `msiaf-framework/` — 4D incident cascade
 - `gdprf-framework/` — gradient-driven proxy reasoning
 - `msiaf-gdprf-bridge/` — MSIAF cascades as GDPRF
-- `proxy-investigation-lab/` — grounds a proxy, as far as it goes
+- `proxy-investigation-lab/` — grounds a proxy as far as it goes
 - `instrument-epistemology/` — same method on scientific
 - `extraction-blindness-sim/` — no error signal = safety
 - `aperiodic-order-sim-stack/` — delivered results + audit
@@ -78,19 +78,20 @@ CC0 simulators and audits grounded in physics. **Index only** — detail in
 - `adaptive-claim-loop/` — the same loop, parameter-dial move
 - `derivation-discarded/` — structure is the only copy
 - `simulation-hypothesis-budget/` — Planck-sim cost
-- `instrument-bias-sims/` — nine sims + a module set on
-- `handoff-provenance/` — the channel between talk and code
-- `operator-structure-echo/` — instrument recurs to the builder's
+- `instrument-bias-sims/` — nine sims + a module set
+- `handoff-provenance/` — channel between talk and code
+- `operator-structure-echo/` — instrument recurs to builder's
 - `scope-bound-shapes/` — one shape, FROZEN declared per binding
 - `term-drift-citation/` — does a citation still attach
 - `stop-authority/` — a zero, and the two states it fits
 - `condition-scoped-authority/` — rank has no condition col
+- `predicate-difference/` — set difference, support rule
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
 ## Reconciliation and conventions
 
-Checked 2026-08-23: all 73 folders above exist and are pushed on this
+Checked 2026-08-23: all 74 folders above exist and are pushed on this
 branch, so there is no `docs/ARCHIVE_NOTES.md`. Branch
 `claude/new-folder-um2xra`. Stdlib only; folders marked *(non-stdlib)*
 ship a `requirements.txt`. Each folder ships `samples/`.

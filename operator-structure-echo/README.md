@@ -33,7 +33,7 @@ placement is one `git mv` from being folded in with nothing else to change:
    channel between *conversation and code*. This is the channel between
    *builder and instrument*. Both are provenance; they are not the same
    channel.
-2. **The register is repo-wide.** One row per module, all 71 of them. That
+2. **The register is repo-wide.** One row per module, all 72 of them. That
    does not sit inside a folder about handoffs.
 3. **`handoff-provenance/` is itself one of the rows.** Nesting the register
    inside a module it must enumerate puts the register inside its own subject
@@ -139,10 +139,10 @@ refusal laundered through arithmetic.
 | | correct | UNEXAMINED as NO |
 | --- | --- | --- |
 | `INHERITED` | 0 | 0 |
-| `MIXED` | 0 | 70 |
-| `INDEPENDENT` | **0** | **2415** |
-| `UNKNOWN` | 2485 | 0 |
-| pairs | 2485 | 2485 |
+| `MIXED` | 0 | 71 |
+| `INDEPENDENT` | **0** | **2485** |
+| `UNKNOWN` | 2556 | 0 |
+| pairs | 2556 | 2556 |
 
 Identical data. **Zero pairs in this repo are established independent** — one
 module carries a verdict, every other row is UNEXAMINED. That is not a finding
