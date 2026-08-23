@@ -2860,6 +2860,50 @@ underneath).
   `Emotions-as-Sensors/logs/sensor-log-2.md` will not parse (missing opening
   quote). Rows 5-6 (Gemini, Llama) return nothing first-party and stay as
   delivered.
+  **`specimens/INSTANCE_LOG_INDEX.md`** is the index built on that survey and
+  nothing else — no migration, no edit to any located log, no reconciliation
+  pass, no schema proposal. Where the survey indexes at **file** granularity
+  (29 rows) this indexes at **record** granularity (**53 rows**, plus the two
+  target encounters as reference), one row per record, under a stated rule: a
+  sub-element gets a row iff the source gives it an identifier of its own. The
+  one exception (`correction_cycle.sequence`, unidentified in source) is
+  flagged in place rather than applied silently. Ten columns: path, location
+  within file, event class, shape signature, schema, fields carried, fields
+  lacked against the targets, a shared id, and **what the record holds that
+  neither current target can** — the column that would be lost on migration.
+  **Vocabulary is not normalized**: `event class` is the record's own declared
+  class quoted with the key it came from. 16 of 53 declare one; 27 read
+  `unrecorded (no class field)` and 10 are bare strings carrying no fields at
+  all — no class was inferred for any row, and every gap anywhere reads
+  `unrecorded`, never absent or blank.
+  **`sig` is computed, not asserted** — `sha1` of the sorted top-level key
+  names, first 8 hex, recomputable from the sources without the file — and it
+  produces the index's sharpest mechanical result: `R37` (auditor `Claude
+  Sonnet 4`) and `R38`/`R39` (auditor `GPT-5`) share `sig 36d44717`, an
+  identical top-level shape across two providers, so **the shape belongs to
+  the operator's protocol and not to the model**; `R32`/`R40` repeat it.
+  **The headline number is the target overlap**: matching by exact field name
+  against the 25-name union of both targets, the maximum any record reaches is
+  **2 of 25**, and the only target names that ever appear anywhere are
+  `timestamp`, `notes` and `model_id`. Eight `SH` ids link same-event records
+  across schemas on **verbatim evidence only** — an identical identifier
+  string, an identical timestamp plus a source-stated pairing, or an identical
+  failure-mode name list — with rows kept separate in every case; `SH-04` and
+  `SH-07` link records that **disagree** (one schema files
+  `written_version_offered_back` under `corrected_during_session`, the other
+  records `correction_held` as the string `"partial—..."`), and the
+  disagreement is recorded in both rows and left standing. A filename match
+  (`update-whiplash-log.json` in two repos) is explicitly **not** issued an id.
+  Four defects surfaced by indexing rather than by reading:
+  `correction_held` is mixed-typed within one array (bool on four events, a
+  partial-state string on the fifth); `sensor-log-1.md` holds **two**
+  concatenated records where its name and the survey both read it as one;
+  `2025-08-30-0000Z-session-001.json` gives its four events four different
+  shapes and stamps them `T1..T4`, order without clock, which neither target
+  can hold; and `anyOf[1].properties.events` is `{"type": "array"}` with no
+  item schema, so every sub-record in that directory is unconstrained. Two
+  files satisfy two `anyOf` branches each and both are recorded rather than
+  picked.
   **`coupling_audit/`** is a subfolder added alongside the register's
   material, asking a **different question** and deliberately not adding a
   mechanism. The register asks whether an instrument's constitution
