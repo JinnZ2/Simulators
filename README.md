@@ -28,6 +28,13 @@ this order before running any simulator:
    correlation (persistence over volume), opaque-source flagging.
    Integrates with BNRAM Shadow-Variable Handling.
 
+5. **[`CASE_STUDY_NARRATIVE_INSTINCT.md`](CASE_STUDY_NARRATIVE_INSTINCT.md)** —
+   the empirical record the spine rests on: a multi-round correction sequence
+   in which the framing of scale_builder / narrative claims was repeatedly
+   inverted and repeatedly caught. Documents the substitution-test
+   methodology and is the evidence for `EMRG_009` — a narrative-only system
+   cannot self-correct narrative instinct from inside its own scope.
+
 Each simulator-specific folder may also ship an aperture document
 (e.g. [`incentive-blindspot-sim/00_APERTURE.md`](incentive-blindspot-sim/00_APERTURE.md))
 that pins its variables to physical functions and the conservation laws
@@ -35,47 +42,80 @@ underneath. Read those before running the corresponding script.
 
 ## Layout
 
-| Folder | Substrate | What it produces |
-| --- | --- | --- |
-| `token-minimizer/` | natural-language queries | compressed energy_english + geometry refs |
-| `emergence-stability-simulator/` | multi-agent dynamics | Monte Carlo claims (`EMRG_*`, `SENS_*`) |
-| `research-stability-audit/` | published research + models | falsifiable claims about field-level drift |
-| `continuity-audit/` | incentive field × diversity field | continuity verdict + falsifier + trajectory |
-| `substrate-emergence/` | material substrate profile | architecture-the-ground-wants |
-| `neural-augmentation-audit/` | proposed augmentation channels | cost-accounting scaffold with `[E]`/`[I]`/`[S]` confidence |
-| `incentive-blindspot-sim/` | institutional incentive structure | coupled-state model + four falsifiable claims under REFUTATION_PROTOCOL |
-| `aperiodic-order-sim-stack/` | a delivered results drop (report + figures) | audit of it: estimator-disagreement finding, matched-N control, eight `AOS_*` claims |
-| `reasoning-gate/` | a simulation's declarations and claims | fail-closed deny, eight guards across three stages, a per-run JSON report |
-| `reasoning-dial/` | two drops on thinking-budget as a dimension | dial gradients, a knee-rule defect, an overthinking branch, fifteen `RD_*` claims |
-| `triad-playground/` | (physical, instrument, reasoning) triads | triad schema + generated checklist, shadow-panel N_eff analysis, thirteen `TP_*` claims |
-| `measurement-fork/` | one system, three measurement designs | four-cell design diff, adjudicated growth edge, twenty `MF_*` claims |
-| `declared-frame/` | any measurement, model, or claim | six-field frame block + comparability check, a v2 rewrite, ten `DF_*` claims |
-| `anchor-interval/` | a system fitted to a corpus it writes into | coherence-up/coupling-down loop, two graded detectors, provenance regimes, eleven `ANC_*` claims |
-| `simulation-hypothesis-budget/` | what a Planck-resolution simulation of the observable universe would cost | two energy floors (Landauer, Margolus–Levitin); the Planck-volume count is wrong by ~61 decades against the holographic bound; the cross-frame ratio is **refused** in code (G-DIM); cost scales `L⁻⁴` so the undefended resolution assumption moves the answer by 10¹¹⁴; the only frame-independent result is that no system can simulate itself; plus `multiscale.py`, where allowing several resolution levels spreads the answer over **216 decades** and the render-on-observation floor is ~34 MJ, about a litre of gasoline; and `consequence_frame.py`, which measures what the idea *licenses* rather than what it costs — the "it is a simulation, so the ripples do not count" inference needs one 2×2 cell (observed **and** uncomputed) and that cell is empty in every architecture that can produce its own observation record, so the step fails at every cost independently of whether the hypothesis is true, while *why* anyone states it is held OUT_OF_SCOPE with the author's own interest direction declared; plus `LADDER.md`, a four-rung audit of the folder **delivered from outside it** and checked rung by rung in `ladder_audit.py` — two rungs land (layer 1 is a consistent calculation with three unverified interpretive steps, relabelled `DECIDABLE` → `ARITHMETIC`; and Landauer prices **erasure** while Bennett showed **measurement** can be reversible, so the litre of gasoline prices a different operation), one lands somewhere other than where it is aimed, one was already held — and `SHB_013` is **REFUTED by its own falsifier**, the first refuted claim in the folder, without a single number being retuned; and `ERA_METAPHOR.md`, a second outside audit placing the hypothesis as the current instance of artifact-becomes-cosmology (clockwork → Laplace's demon, steam → heat death, telegraph → switchboard mind) and checked in `era_metaphor_audit.py` — **both documents' pointers into the claim table were off by one and both corrections made the auditor's case stronger**; the ceiling gap lands on `SHB_010`, since `multiscale.py` sources its architecture set to computing practice *in its own docstring*, so 216 decades is a spread over what our machines do and the architecture space is not enumerable from inside; plus `EARTH_TRANSITIONS.md`, a third outside audit counting Earth's phase transitions against Lloyd's 10^120 ops — it supplies the **first independent confirmation of a number here** (the Margolus–Levitin route reproduces the ceiling at 10^122.9), its 10^110 turns out to be a *stepping* count where the eight labels contribute 0.9 decades, and its 10^42 overshoot needs a **double-count**: a per-timestep cost multiplied by a per-transition count, where every internally coherent model instead FITS; plus `SCALING_CLASSES.md`, a fourth outside audit itemising eight computational loads against the same ceiling — four rows reproduce exactly, one drifted ten decades between drops in a column that stays self-consistent at any value, "everything polynomial fits" needs one clause (`N³` at Earth's atom count is 10^150) and the exact form is the **crossover**: `2^N` at **399 components**, `3^n` at **252 residues**, `N²` at 10^60 bodies — and the drop's own closing argument (folding is funnelled, not searched) retracts one of its three EXCEEDS rows while the quantum row survives for a reason it does not state, pricing a **substrate** rather than a method (Feynman 1982), which makes it the only row that constrains the hypothesis rather than our algorithm; its opening then replaced by the author with the transmissible core — **"the exponential is a property of the representation, not of the system; check which one you are pricing"** — together with three corrections to this audit: the N-body tag (`CONSTRUCTION_FITTED` → `LABEL_TRUNCATED_IN_TRANSFER`, the term was in the source label and lost in transfer), the Barnes-Hut saving (28 decades not 35, since `N log N` is *per step* — dropped in the same paragraph that objected to the missing timestep factor), and the substrate row **narrowed to volume-law entanglement**, since area-law states are polynomially representable in tensor-network form and cover most ground-state chemistry and condensed matter; forty `SHB_*` claims, one REFUTED |
-| `uninstrumented/` | quantities excluded by an instrument's constitution | eight-mechanism register + `scan.py` text scanner, checks on both, nine delivered cases the schema cannot hold, plus a `specimens/` directory and `AVENUES.md`; the first case whose WOULD MEASURE is a runnable design, whose decoupling arm rests on a premise that is false and carries no error bar, and which places itself inside its own sample; plus its `selfreport_probe.py` harness, where that missing error bar becomes a number (n=1 per frame) and blinding turns out to be by instruction rather than by construction; a literature-occupancy audit that retires four build targets without apparatus, alongside a trait/acquiescence case whose own source concludes against it; a first MARKER the schema cannot hold at all, whose deliberately empty noun slot is the first to arrive with a replacement structure; and a `playground/` of three constructed-ground-truth modules — the harnesses landed a drop after being described in the past tense while absent, with a blinding defect recurring in two of three and the seed probe facts spent by their own publication; a second MARKER whose own control cell is empty by construction, and a third that names its own falsifier and then instances its own compounding mechanism on its own strongest number; a third specimen that is the first to actually contain a pasted output; and a fourth whose T1 was actually **built and run** (`selection_cuts.py`), returning that three of its four cuts do not separate its own calibration set; one hundred and fifty-three `UNI_*` claims |
-| `criteria-drift/` | benchmark and rubric versions over time | signed drift per frame field, anchor-version decomposition, a regression that refuses to run unidentified, nine `CD_*` claims |
-| `photoperiod-claim-harness/` | four inconsistencies in a published greenhouse result | runnable falsifiable sims + mechanism-edit protocol + bench protocol; six `PCH_*` claims on the harness |
-| `category-weld/` | terms that fuse independent quantities into one handle | ninth exclusion mechanism for `uninstrumented`, a three-readout scorer, three terms, an audit finding refuted by the second drop, seventeen `CW_*` claims |
-| `presented-binary/` | a two-option framing, before it is answered | eleven documented/asserted/absent checks + a sealed two-pass frame simulator with a blind post-hoc rater + a handoff router to mechanism 10, fifteen `PB_*` claims |
-| `generation-capacity/` | the option space a party can produce, not a value in it | tenth exclusion mechanism + sub-case 10A + R1/R2/R3 scorer with a place-vs-center calibration guard; a framing under it scores 11/11 on the audit next door; twelve `GC_*` claims |
-| `moral-decomposer/` | a disagreement presented as moral or ethical | three-stage decomposition to option-distribution claims + frames; the readout is the residue; three cases, one external; eight `MD_*` claims |
-| `domain-ledger/` | a confidence readout, the domain set behind it, and what it anchors to | four uncombined ratios with their denominators printed + a three-band anchor map that refuses to emit a composite, and a candidate definition for the term it turns on, held open on stated non-independence; fifteen `DL_*` claims |
-| `closure-cost/` | recorded cases where a variable was closed before the event arrived | instrument vs event branches, a named rival hypothesis held as a schema field, three cases and zero quantified, ten `CC_*` claims |
-| `constraint-assembly/` | cases where sufficiency was composed from parts that individually do not do the job | three constraint classes (invariant / consumable / soft), rejected candidates as the data, a fail-closed composition test and a diagnostic-quarantine field; two cases, zero quantities, two readouts that disagree on one of them; thirteen `CA_*` claims |
-| `held-open-uncertainty/` | the assumption that holding variables open means not acting | nine questions with per-entry provenance, one retraction inside the entry that carries the claim, and the cheapest runnable experiment specified against a harness already in the tree; six `HO_*` claims |
-| `adaptive-claim-loop/` | an adaptive simulation framework, and the one move it usually has | five typed responses to a refutation with the parameter walk removed from the vocabulary, four verdicts, four termination states, session-stamped provenance; the delivered framework's own log replayed through the gate, the gate null-tested against two corpora written for other folders (TP 1.00 / FP 0.00), and an adversarial responder that got a parameter walk admitted in five attempts before the repair; seventeen `ACL_*` claims |
-| `derivation-discarded/` | a persisted structure as the only copy of its own derivation | eleventh exclusion mechanism; the anchor case is EIA post-auditing, where the accuracy figure is scored against the prediction list — three published narrowings that are never multiplied; eight `DD_*` claims |
-| `instrument-bias-sims/` | nine sims plus one module set, from delivered work orders, each testing one way an instrument's own construction shapes what it reports | marker under exploration, not a thesis. S1 event-sampled observation reconstructs a false baseline, and the distortion is a **product** of event triggering and cost weighting; S2 a one-arm anchoring protocol is **underdetermined, not merely biased** — the extra arms are the second equation; S3 the false-null rate is **not computable** from a list selected on later concession, and the column *varies*, tracking permissiveness rather than accuracy; S4 (patched) engagement rate separates the two models only at particular parameter values, and the patch found two defects in the module's own code — a `rank_prospect` series hardcoded from the antler-rank model, so model A was fitted to its own conclusion, and an antler model carrying mass only, so the annual delta went to zero at maturity; plus a **structural rule now adopted folder-wide: the AGENTS section comes first and a missing agent is a visible `[BLANK]`**, earned because the pre-patch file had no doe in it at all; S5 the genetic-conflict criterion is **not empty** — it is a prediction, and the case it excluded is the case that tests it; S6 the stated uniformity statistic is a **range**, so adding difficulty levels inverts it and a slope does not; S7 observer-dependence is near-analytic and the cost readout is a consequence of a stipulation; S8 the normalisers agree on the sign and disagree **4286×** about what would count as parity. `crosscutting.py` enforces the four cross-cutting rules over all eight and is null-tested on a planted violation. S9 a corpus samples observer positions non-uniformly with **no filtering agent anywhere in the chain** — the slot renders `[BLANK]` and the blank is the finding — and the spec's multiplicative reading **overstates** the suppression, since coupling drives the conjunction's excess to **1.85** rather than below 1.0. S10 `allocation_coupling/` is a module set whose own reasoning defeats the deliverable it asks for — the finding is in the cross-terms and a per-link table cannot hold one, with the **residual at 79% of the total effect**; M4 returns an **inverted merit gradient** (−0.85 against observations generated) that cannot be fixed at the assessor, since generation and writing probability are anti-correlated at −0.99. **Six results ran against the draft** and are recorded rather than smoothed |
-| `tools/` | shared utilities | validators, substitution toolkits, gate-drift check |
+Sixty-seven folders. The complete index — one line each — is in
+[`CLAUDE.md`](CLAUDE.md); full per-folder notes are in
+[`docs/FOLDER_NOTES.md`](docs/FOLDER_NOTES.md).
 
-See [`SYNTHESIS.md`](SYNTHESIS.md) for the cross-folder reading and
-[`CLAUDE.md`](CLAUDE.md) for the layout reference.
+This section used to carry a second, partial copy of that list (30 of 67
+folders). It was removed rather than completed: two lists drift, and the one
+that drifted was this one.
+
+Two further root documents sit outside the spine and outside `docs/`:
+`KEYWORDS.md` and `REVIEW.md`. They are listed here rather than moved,
+because moving a file is a decision about it and this pass was a
+reorganisation, not a triage.
+
+### Entry point for an AI reading the repo
+
+[`grounding-layers/`](grounding-layers/) is the stack to start from. One call
+returns all seven layers:
+
+```python
+import sys; sys.path.insert(0, '<repo>/grounding-layers')
+from entry import audit
+
+audit("I can lift 200 kg.", ontological_scope='any_WEIRD_human')
+audit({'L4': {'lift_mass': 200.0}}, ontological_scope='any_WEIRD_human')
+```
+
+`python3 entry.py` from inside the folder runs the same thing as a demo.
+**Requires `numpy`** (`grounding-layers/requirements.txt`) — it is one of the
+non-stdlib folders, and the command was not executable in the environment this
+README was last edited in.
+
+The layers, each with a deterministic and a probabilistic inspector:
+
+| layer | inspector | what bounds it |
+| --- | --- | --- |
+| L0 | `l0_physics_causality` | physics and causality |
+| L1 | `l1_thermodynamics_entropy` | thermodynamics, entropy |
+| L2 | `l2_planetary_mass_balance` | planetary mass balance |
+| L3 | `l3_ecological_homeostasis` | ecological homeostasis |
+| L4 | `l4_biomechanical_sensorimotor` | biomechanics; category-error guard on non-human scopes |
+| L5 | `l5_human_construct` | human constructs; pluralistic frames |
+| Lε | `l_epsilon_epistemic` | epistemic state; two-axis category-error guard |
+
+**Any layer above L0 is bounded by every layer below it.** SCOPE-annotated
+guards refuse to score a claim outside a layer's ontology rather than
+returning a number for it. Read
+[`grounding-layers/USAGE.md`](grounding-layers/USAGE.md) first.
 
 ## Running
 
-Each simulator runs with `python3 <module>.py` from inside its folder. No
-dependencies. Tests in each `tests/` directory run with
-`python3 -m unittest discover tests`.
+Each simulator runs with `python3 <module>.py` from inside its folder.
+
+Most folders are standard library only. The exceptions are marked
+*(non-stdlib)* in [`CLAUDE.md`](CLAUDE.md), and where they declare their
+dependencies varies — checked, not assumed:
+
+| folder | declared in |
+| --- | --- |
+| `grounding-layers/` | `requirements.txt` |
+| `climate-modeling/` | `requirements.txt` |
+| `energy/` | `requirements.txt` |
+| `play-sims/` | one `requirements.txt` per sub-folder (5 of them) |
+| `crossdomain-eval/` | `pyproject.toml` |
+| `relational/` | `arch_garden/requirements.txt`; `geometric_rag/` declares numpy in its docstring only |
+
+There is **one** test directory, at the repo root, not one per folder. From
+the repository root:
+
+```
+python3 -m unittest discover tests
+```
+
+Individual folders self-test through their own modules, e.g.
+`python3 instrument-bias-sims/crosscutting.py --selftest`.
 
 ## License
 
