@@ -4435,7 +4435,7 @@ underneath).
   clause is deliberately NOT used to rescue the claim. Forty claims
   `SHB_001..040`, one REFUTED, four external audits run by someone who
   did not write the claims. Stdlib only, CC0.
-- `instrument-bias-sims/` — Eight sims from a delivered work order,
+- `instrument-bias-sims/` — Nine sims from delivered work orders,
   each testing one way an instrument's own construction shapes what it
   reports. **Marker under exploration, not a thesis**; the delivered
   instruction was "test fit, extend, or report where it breaks", so
@@ -4499,18 +4499,45 @@ underneath).
   on the sign at the declared placeholder, and they disagree **4286×**
   about what present-day interval would count as parity — plus the work
   order's own "value, uncertainty, endpoint" criterion turned on the
-  module's own figures, which fail it on uncertainty. **`crosscutting.py`**
-  enforces the four cross-cutting rules over all eight rather than
+  module's own figures, which fail it on uncertainty. **S9** a corpus
+  samples observer positions non-uniformly with **no filtering agent
+  anywhere in the chain** — the `filtering_agent` slot renders as
+  `[BLANK]` and the blank is the finding, which is the case the S4
+  structural rule was adopted for: the file is named
+  `...position_filter` and there is no filter in it. Sampling density
+  rises with supply assumption and with proximity to a writing station,
+  in the direction the spec predicts, and nothing in the chain reads
+  position. **Two results ran against the draft.** (1) The
+  two-condition conjunction was expected to be suppressed *more* than
+  the product of its marginals; it is suppressed **less** — excess 1.01
+  at zero coupling rising to **1.85** at coupling 0.9 — because when
+  remoteness drives both axes, "low supply assumption" and "residence"
+  select nearly the same people while the product keeps multiplying as
+  though they were independent. The spec's claim survives in direction
+  and **the multiplicative reading, which is the one a reader reaches
+  for, overstates the suppression**. (2) Content was expected to take
+  over as the surface mix rose; it never does, because a relevance score
+  defined as closeness to the corpus mean is a **typicality** measure —
+  middling items score highest, the relationship with quality is
+  non-monotone, and the content correlation stays under 0.2 at every
+  mix. What the sweep locates is where the score stops tracking
+  *position*; it never starts tracking quality, which is the sharper
+  form of the spec's second-order point. Also: interrelation is **not**
+  the most-suppressed category once a three-condition category is on the
+  list, and the ranking is a property of the enumeration.
+  **`crosscutting.py`** enforces the four cross-cutting rules over all
+  nine rather than
   restating them — moral tokens and intent phrases scanned, the separate
   unresolved `confidence()` and non-empty `breaks()` structurally
   enforced, the README phrase checked — and is null-tested on a planted
   violation so none of the checks is silent by construction; its own
   limit (a keyword scan is stepped around by any paraphrase) is stated
-  at the top of the file rather than the bottom. **Three results ran
+  at the top of the file rather than the bottom. **Five results ran
   against the drafted prose** (S3's flat column, S6's more-levels-is-
-  better, S8's sign flip) and are recorded in place rather than
-  smoothed. No module reads real data and every literature claim carried
-  from the work order is marked carried-not-verified. 164 selftest
+  better, S8's sign flip, S9's conjunction excess and S9's content
+  crossover) and are recorded in place rather than smoothed. No module
+  reads real data and every literature claim carried from a work order
+  is marked carried-not-verified. 197 selftest
   checks green. Stdlib only, parses under Python 3.9, phone-buildable,
   CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
