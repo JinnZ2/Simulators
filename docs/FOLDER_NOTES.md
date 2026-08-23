@@ -4781,7 +4781,7 @@ is pushed on this branch — see the reconciliation note in `CLAUDE.md`.
   inherited). No discount factor, because a numeric weight needs the
   refused base rate and would be it laundered through arithmetic.
   **Read correctly the live register gives ZERO pairs established
-  independent of 2346; folding UNEXAMINED into NO gives 2278 from
+  independent of 2415; folding UNEXAMINED into NO gives 2346 from
   identical data** — one module carries a verdict and every other row is
   UNEXAMINED, so zero is the register reporting that the work has not
   been done, not a finding about modules, and the inversion needs no bad
@@ -4926,6 +4926,75 @@ is pushed on this branch — see the reconciliation note in `CLAUDE.md`.
   quantity with a sign, and filling the field from it would be this
   module deciding what counts as a formal definition in ecology.
   UNASSESSED is not "no", and it is still not loadable. 50 selftest
+  checks green. Stdlib only, parses under Python 3.9, phone-buildable, CC0.
+- `stop-authority/` — **Marker under exploration.**
+  `SPEC_STOP_AUTHORITY.md` delivered verbatim. "Stop work authority
+  exists" is evidenced by policy text and stop COUNT, both unsigned, and
+  a count of zero is consistent with two opposite states: **A**, no
+  condition warranted a stop, and **B**, the authority is not honored so
+  none were attempted — with non-use under B *produced by* the
+  hollowness and reading as safety. **The module does not flip the
+  error:** treating zero as evidence of B would be the published mistake
+  pointing the other way, so every readout returns INDISTINGUISHABLE
+  where the record cannot separate them, and the work is identifying
+  which extra number would. **The count is not weak evidence, it is
+  ordered against the thing it measures:** A and B both publish zero,
+  and C — hollow, with stops attempted and refused four times in five —
+  publishes the **highest** count of the three, so the facility
+  demonstrably not binding looks like the healthiest. **Exactly one
+  field separates A from B at zero attempts.** The honor ratio is
+  UNDEFINED_NO_ATTEMPTS in both (0/0 is not 1.0 and not 0.0) and the
+  attempt count is zero in both; only `warranted_in_review` differs.
+  That makes the spec's "denominator the other two are missing" exact —
+  **the two numbers that look like the authority measurement go blind
+  first, and blind precisely in the state that most needs measuring**,
+  leaving only the number determined outside the mechanism by
+  post-incident review. **`suppression_run()` shows the measurement
+  eating its own denominator:** with hazard held constant at three
+  warranted states per step and an honor rate of 0.15, attempts fall
+  3→2→1→1→1→0 and stay silent from t=6, after which the ratio has no
+  denominator permanently — **30 warranted-and-available prior states
+  producing 0 published stops with the hazard rate never moving**, and
+  a stop count that stops rising, which under the count-alone reading is
+  the record improving. Stipulated: the learning rule was chosen and
+  0.15 picked for legibility, so the loop is arithmetically available
+  rather than observed. **`binding.py`** takes the structural question —
+  authority is defined by what it can bind, not who holds it — across
+  three axes: highest level bound, reversal record, and whether the
+  holder reports to a party whose objectives the stop can cost.
+  **FUNCTIONING is not a value the module returns**, there being no such
+  field on the summary by construction: an untested authority is
+  UNTESTED_ABOVE, a tested one has a binding record to read, and
+  collapsing both into one flag is the move the instrument exists to
+  refuse. **No reversal recorded is not no reversal** — with zero stops
+  the record reads NOT_LOOKED, and NONE_FOUND beside real stops is a
+  different fact, distinguished by the count and never by the emptiness
+  of the list. **On distribution the module records and does not
+  grade:** authority in everyone has no named position holding it and
+  nobody to be reversed against, both recorded, with no
+  expansion-or-contraction verdict because the spec says MAY — and the
+  cost of that refusal is stated rather than hidden. **The documented
+  case returns a measurement on zero axes.** Ten years, no stop
+  recalled, evidence offered being that workers had CONVERSATIONS about
+  safety: no stop executed so nothing bound and no reversal record;
+  authority in everyone so no named holder and nobody to reverse
+  against; conflict UNASSESSED; no review denominator so the count is
+  INDISTINGUISHABLE. Published as working with every axis empty. A
+  conversation is not a stop attempted, not a stop honored and not a
+  reviewed warranted state — offering it as evidence of function
+  substitutes an activity for a measurement — and **the instrument still
+  does not say the authority was hollow**, only that the published claim
+  rested on nothing it could read. Disclosed: nothing here measures a
+  facility, two of three binding rows being stipulated;
+  warranted-in-review is itself an after-the-fact judgement possibly by
+  the parties a stop would have cost, and a review run by the party a
+  stop binds against is the same structure one level up;
+  UNTESTED_ABOVE compares two declared levels, so the ordering is real
+  and the placement in it is a declaration; and the folder's agreement
+  with `extraction-blindness-sim/` — same reading error, extra loop,
+  since there the sensor fails to see the damage while here the
+  hollowness causes the silence — is INHERITED by
+  `operator-structure-echo/corroboration.py`, not found. 49 selftest
   checks green. Stdlib only, parses under Python 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
