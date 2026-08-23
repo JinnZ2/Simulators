@@ -18,9 +18,9 @@ OPERATOR-STRUCTURE ECHO -- the register
 
     YES          1
     NO           0
-    UNEXAMINED   69
+    UNEXAMINED   70
 
-    of 70 modules read off the tree.
+    of 71 modules read off the tree.
 
     instrument-bias-sims     YES  REPRODUCTION
       attributed to: operator, delivered spec
@@ -69,7 +69,7 @@ OPERATOR-STRUCTURE ECHO -- the register
 
   THE BASE RATE IS REFUSED, AND NOT FOR WANT OF n
 
-    modules   70
+    modules   71
     examined  1
     YES       1
     rate      None   REFUSED_SELECTION_EFFECT

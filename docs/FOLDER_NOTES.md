@@ -4781,7 +4781,7 @@ is pushed on this branch — see the reconciliation note in `CLAUDE.md`.
   inherited). No discount factor, because a numeric weight needs the
   refused base rate and would be it laundered through arithmetic.
   **Read correctly the live register gives ZERO pairs established
-  independent of 2415; folding UNEXAMINED into NO gives 2346 from
+  independent of 2485; folding UNEXAMINED into NO gives 2415 from
   identical data** — one module carries a verdict and every other row is
   UNEXAMINED, so zero is the register reporting that the work has not
   been done, not a finding about modules, and the inversion needs no bad
@@ -5046,6 +5046,82 @@ is pushed on this branch — see the reconciliation note in `CLAUDE.md`.
   fractions are this module's construction, chosen to land the proxy
   under the line. 96 selftest checks green. Stdlib only, parses under
   Python 3.9, phone-buildable, CC0.
+- `condition-scoped-authority/` — **Marker under exploration.**
+  `SPEC_CONDITION_SCOPE.md` delivered verbatim; companion to
+  `stop-authority/`. Authority is held by a position **for a class of
+  condition**, and the claim that a single ranking cannot represent
+  scope is **checkable rather than arguable**: a total order either
+  reproduces a condition-scoped table or it does not, so `rank_search()`
+  enumerates EVERY total order and scores each — a complete search at
+  these sizes, not a sample. On the delivered protective-detail
+  partition, **both of the two possible orders fail**: principal-on-top
+  misses one class of five, bodyguard-on-top misses four, zero exact
+  matches, verdict NO_RANK_REPRESENTS_IT. **And the best ranking fails
+  exactly where the stakes are** — 4 of 5 classes correct reads as 80%
+  accuracy, and the one class missed is the live threat, where the spec
+  says the specialist holds total authority including physical force
+  against the principal's stated preference; averaging over
+  non-interchangeable classes is the same move as scoring a facility on
+  the variables still read. **Adding scoped domains makes a rank fit
+  worse:** a third scoped position (marked an extension, not delivered)
+  gives all six orders checked, still zero exact, best wrong on two
+  classes — every domain with its own reading capacity is another class
+  the ranking must miss, so the representation degrades with the thing
+  that makes the structure work. **Rank does not invert**, so `holds()`
+  returns DECIDES or NOT_IN_DOMAIN and never a smaller quantity of the
+  same thing; `Partition` refuses a table where one position holds every
+  class (a ranking written as a table) and one where a position holds
+  none (not a party to the arrangement), enforcing the spec's symmetry
+  structurally while being unable to check whether the assigned domains
+  match where reading capacity actually sits. `collapsed_claim()` writes
+  out what a rank-only structure states silently — *principal holds the
+  reading capacity for all 5 condition classes simultaneously* — and
+  names the overclaim. **BOUND vs ADVISORY: the offered evidence
+  discriminates nothing.** Applying the stated criterion (an item
+  discriminates only if it would be FALSE under advisory), all three EHS
+  indicators — visibility, a seat at executive meetings, influence on
+  strategy — are true of an advisor, so **3 offered, 0 discriminating**:
+  not weak evidence for BOUND but indicators that do not vary between
+  the cases, making a high-scoring configuration unmeasured rather than
+  strong. What would discriminate is named beside them, with the note
+  that an ABSENT reversal record is not it (see
+  `stop-authority/binding.py`, where empty beside zero findings reads
+  NOT_LOOKED). `AuthorityClaim` refuses to measure an UNSTATED claim
+  rather than defaulting the sign. **`organ.py`** takes the organ error:
+  `Body` refuses a coordinator whose sense channels are a superset of
+  the others' (a hierarchy in anatomy vocabulary) or that has no channel
+  of its own. **Failure 1, reassignment by decree, produces
+  NON_FUNCTIONING and not degraded** — the reassigned task outputs
+  exactly 0.0 with state CANNOT_SENSE_THE_INPUT, there being no partial
+  reading of an undetectable input for a degradation to start from — and
+  **the aggregate is itself the degradation illusion**, capacity 0.67
+  presenting as a 33% shortfall when degraded and non-functioning differ
+  in whether a required channel is absent, a property of the worst task
+  and precisely what a mean removes. **The decree cannot observe its own
+  consequence:** the coordinator's task is untouched, so
+  `observable_at_the_decree` is False — the failure sits in a channel
+  the coordinator does not have, which is why the task looked
+  reassignable. **Failure 2: the coordinator's score does not move at
+  all** between a healthy body (system 1.00, coordinator 1.00) and a
+  broken one (system 0.67, coordinator 1.00), so reporting it as system
+  capacity gives not a biased estimate but a number with **zero
+  sensitivity** — a measurement that cannot fail, which is what makes it
+  attractive. Recorded as the **third instance of one shape and not
+  three findings** (narrow safety metric, stop count, coordinator
+  score), INHERITED per `operator-structure-echo/corroboration.py`.
+  Carried and not tested: the partition is taken on the spec's word, so
+  if it is wrong the search is a complete proof about a table nobody
+  should have written; and the spec's link to the centralized-executive
+  prior in consciousness and intelligence rubrics — *org chart and
+  measurement instrument, one shape* — is carried with no rubric corpus
+  to test it against. Open work carried and not closed: no method for
+  restoring scope-partition to a structure collapsed to rank; whether
+  BOUND survives outside regulated domains is **NOT_SEARCHED**, zero
+  unregulated instances being the size of the search rather than of the
+  population; and the spec's conditional finding is well-formed with an
+  unestablished antecedent, so the consequent is not available. 55
+  selftest checks green. Stdlib only, parses under Python 3.9,
+  phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
