@@ -18,7 +18,7 @@ Stdlib only. Phone-buildable. CC0.
 | S1 | `s1_encounter_denominator.py` | event-sampled observation reconstructs a false baseline | claim holds; and the distortion is a **product** of event triggering and cost weighting, neither alone |
 | S2 | `s2_symmetric_anchor.py` | welfare-interview anchoring has no null case | the extra arms are not a robustness check, they are **the second equation** — one arm is underdetermined, not merely biased |
 | S3 | `s3_rubric_backcast.py` | instrument error rate, without settling what the property is | the rate is **not computable** — and the column varies, which is worse than flat, because what it tracks is permissiveness |
-| S4 | `s4_antler_calibration.py` | competition vs motor learning | rate alone separates the models **only for particular parameter values**, which an observer cannot know they have |
+| S4 | `s4_antler_calibration.py` | competition vs motor learning | **patched.** the pre-patch rank series was the antler-rank model's own output, so model A was fitted to its own conclusion; the doe was absent entirely; and the doe-choice arms are **not identified** by paternity share alone |
 | S5 | `s5_adversarial_prior.py` | does collective computation require competing agents | the criterion is **not empty** — it is a prediction, and the case it excluded is the case that tests it |
 | S6 | `s6_foreclosure_rate.py` | trained responses are terminal, not wrong | the stated uniformity statistic is a **range**, so adding difficulty levels makes it *worse*; a slope does not invert |
 | S7 | `s7_hardship_threshold.py` | unanchored thresholds slide to the labeller's baseline | observer-dependence is near-analytic; the cost readout is a **consequence of a stipulation** and says so |
@@ -42,6 +42,42 @@ around it is not being run.
 - **S8.** The normalisers were expected to disagree on the sign. They don't, at
   the declared placeholder. They disagree about **where the sign flips**, by
   4286× — which is the same finding one step further back.
+
+## Structural rule, adopted from the S4 patch
+
+**The AGENTS section comes first, before any equations, and a missing agent
+must be a visible `[BLANK]` — never an omission buried in prose.**
+
+S4 is where this was earned. The pre-patch version had no doe in it at all —
+not as a blank, as an *absence* — so access was a function of the buck alone in
+both models and the question of what a doe tracks could not be posed. The
+omission lived in prose, so nothing rendered it and nothing could check for it.
+`agent_table()` now renders blanks; `PRE_PATCH_OMISSION` records the state
+before rather than quietly fixing it.
+
+## What the S4 patch turned up
+
+- **B2 was a defect in my code.** `rank_prospect` was hardcoded
+  `{1: 0.25, 2: 0.60, 3: 0.85}` — derived from the antler-rank model, so
+  model A was fitted to its own conclusion and could not fail. Both arms now
+  run: A's trend is **9.3× steeper** under the circular arm, and under the
+  paternity-derived arm it predicts a nearly flat rate, so **any** observed
+  year-trend refutes it. The pre-patch code could not produce that test.
+- **B3 is not identified by the stated test.** `arm_size` carries a free
+  selectivity exponent and reaches the observed young-buck paternity share at
+  k ≈ 2, so "which arm reproduces the observed distribution" has more than one
+  answer. The second observable that would identify it: **paternity against
+  antler size within an age class**, which separates size selection from
+  anything merely correlated with age.
+- **B1's phrase checks out in one sense of two.** "floor = 0 is model A in
+  disguise" — on the mature-buck observable the two predict *opposite* things,
+  which is maximal separability. What floor 0 does share with model A is the
+  structural assumption that competence is acquired once and then fixed.
+- **Adding the floor exposed another defect.** `hardware()` modelled antler
+  *mass* only, which plateaus — so the annual delta went to zero at maturity
+  and the floor would have multiplied zero, contradicting the premise it
+  encodes. Geometry changes annually where mass does not; `GEOMETRY_DELTA` is
+  now separate and stipulated.
 
 ## Cross-cutting rules, enforced
 

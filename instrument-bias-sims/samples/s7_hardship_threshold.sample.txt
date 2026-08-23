@@ -48,10 +48,14 @@ S7 -- HARDSHIP THRESHOLD
 ------------------------------------------------------------------------
 
   CONFIDENCE, reported separately and not resolved
-    cost_asymmetry                       CONSEQUENCE OF THE STIPULATED COST TABLE. Not a measurement and not evidence about any real labelling practice
-    observer_dependence                  arithmetic consequence of an unanchored threshold; holds for any severity values
-    resolved                             False
-    severity_values                      stipulated. only the ordering is used
+    cost_asymmetry
+      CONSEQUENCE OF THE STIPULATED COST TABLE. Not a measurement and
+      not evidence about any real labelling practice
+    observer_dependence
+      arithmetic consequence of an unanchored threshold; holds for any
+      severity values
+    resolved                       False
+    severity_values                stipulated. only the ordering is used
 
   WHERE IT BREAKS
     - IMPLIED_COST IS STIPULATED BY THE MODULE, so the cost-asymmetry

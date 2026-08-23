@@ -74,10 +74,14 @@ S8 -- RECOGNITION TO DELIVERY
 ------------------------------------------------------------------------
 
   CONFIDENCE, reported separately and not resolved
-    figures                              ALL DECLARED, none verified here. the present-day interval is an explicit placeholder
-    normaliser_sensitivity               arithmetic, given the declared figures
-    resolved                             False
-    the_comparison_itself                NOT_WELL_POSED until the binding constraint per era is established
+    figures
+      ALL DECLARED, none verified here. the present-day interval is an
+      explicit placeholder
+    normaliser_sensitivity         arithmetic, given the declared figures
+    resolved                       False
+    the_comparison_itself
+      NOT_WELL_POSED until the binding constraint per era is
+      established
 
   WHERE IT BREAKS
     - THE NORMALISATION IS CIRCULAR AS STATED. Dividing by

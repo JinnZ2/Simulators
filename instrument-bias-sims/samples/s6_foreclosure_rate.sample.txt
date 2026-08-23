@@ -69,10 +69,11 @@ S6 -- FORECLOSURE RATE
 ------------------------------------------------------------------------
 
   CONFIDENCE, reported separately and not resolved
-    any_real_measurement                 NONE. no response text is read or scored anywhere in this file
-    diagnostic_power                     simulated under stipulated generators
-    harness                              runs, and grades itself on known inputs
-    resolved                             False
+    any_real_measurement
+      NONE. no response text is read or scored anywhere in this file
+    diagnostic_power               simulated under stipulated generators
+    harness                        runs, and grades itself on known inputs
+    resolved                       False
 
   WHERE IT BREAKS
     - THE CLASSIFICATION STEP IS THE WHOLE INSTRUMENT AND IT IS NOT

@@ -32,7 +32,13 @@ def tail(mod):
     L = ["", "-" * 72, "", "  CONFIDENCE, reported separately and not resolved"]
     c = mod.confidence()
     for k in sorted(c):
-        L.append("    %-36s %s" % (k, c[k]))
+        v = str(c[k])
+        head = "    %-30s " % k
+        if len(head) + len(v) <= 74:
+            L.append(head + v)
+        else:
+            L.append("    %s" % k)
+            L.extend(wrap(v, "      "))
     L.append("")
     L.append("  WHERE IT BREAKS")
     for b in mod.breaks():

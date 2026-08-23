@@ -71,10 +71,15 @@ S3 -- RUBRIC BACKCAST
 ------------------------------------------------------------------------
 
   CONFIDENCE, reported separately and not resolved
-    false_null_rate                      NOT_COMPUTABLE from this list -- see denominator_problem()
-    grid_cells                           HAND CODED judgement about what a stated criterion would have returned; not a measurement
-    resolved                             False
-    revision_axis                        computable in principle; the entries here are hand coded from summary knowledge and are not sourced
+    false_null_rate
+      NOT_COMPUTABLE from this list -- see denominator_problem()
+    grid_cells
+      HAND CODED judgement about what a stated criterion would have
+      returned; not a measurement
+    resolved                       False
+    revision_axis
+      computable in principle; the entries here are hand coded from
+      summary knowledge and are not sourced
 
   WHERE IT BREAKS
     - THE CASE LIST IS SELECTED ON THE OUTCOME UNDER TEST. Cases are

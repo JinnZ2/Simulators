@@ -1,66 +1,164 @@
-S4 -- ANTLER CALIBRATION
+S4 -- ANTLER CALIBRATION (patched)
 ========================================================================
 
-  1. WHAT THE EXISTING MEASUREMENT CANNOT DO
+  B0. AGENTS -- declared before any equation
 
-    year   rank prospect  novelty    A rate     B rate
-    1      0.25           1.000      0.246      0.999
-    2      0.60           0.660      0.600      0.663
-    3      0.85           0.272      0.851      0.273
+    agent              capabilities
+    buck_yearling      sparring, escalation, concession
+    buck_mature        sparring, escalation, concession
+    doe                PARTNER SELECTION
+    environment        constraint on resource distribution
 
-    A trend +0.605   B trend -0.726   same sign False
-    separable on rate alone: True
+    Structural rule adopted for all future sim specs here: the AGENTS
+    section comes first, and a missing agent is a visible [BLANK],
+    never an omission buried in prose.
 
-    Here the trends happen to run opposite ways, which is the ONE case
-    where rate alone would separate them -- and it depends entirely on
-    the stipulated novelty decay outpacing the stipulated rank rise.
-    Move either constant and the signs agree. So rate alone separates
-    the models only for particular parameter values, which means an
-    observer reading a real rate series cannot know whether it does.
+    PRE-PATCH STATE OF THIS FILE
+      doe: ABSENT -- not a blank, an absence
+      access was a function of the buck alone in both models, so
+      neither model contained a selecting agent and the question of
+      what a doe tracks could not be posed
+      the omission lived in prose, not in a declared structure, so
+      nothing rendered it and nothing could check for it
 
 ------------------------------------------------------------------------
 
-  2. THE MEASUREMENT THAT DOES -- year two, matched mass
+  B1. NOVELTY FLOOR
+
+    Mass plateaus at maturity and GEOMETRY does not, so the annual
+    delta stays non-zero. The pre-patch hardware() carried mass alone,
+    which sent the delta to zero after year three and would have made
+    the floor multiply zero -- caught by the selftest when the floor
+    was added, and it contradicted the premise the floor encodes.
+
+    annual delta at year 8: 0.35  (mass change 0.00, geometry 0.35)
+
+    floor    mature novelty   frac of delta    predicts
+    0.00     0.00533          0.0152           sparring -> 0
+    0.10     0.03980          0.1137           holds at a floor
+    0.25     0.09150          0.2614           holds at a floor
+    0.50     0.17766          0.5076           holds at a floor
+
+    The patch calls floor = 0 'model A in disguise'. Checked: model A's
+    rate RISES with rank and model B at floor 0 FALLS to zero, so on
+    the mature-buck observable they are opposite, which is the most
+    separable a pair can be. What the phrase does hold of is the
+    assumption underneath -- competence acquired once and then fixed --
+    which is a claim about the animal rather than about the observable,
+    and is what the floor parameter exists to test.
+
+------------------------------------------------------------------------
+
+  B2. RANK PROSPECT AS AN INPUT SERIES, NOT A CONSTANT
+
+    arm_lit   circular for model A: True
+      literature / dominance-derived. This is the pre-patch hardcoded
+      series and it is the antler-rank model's own output
+    arm_pat   circular for model A: False
+      paternity-derived, DECLARED from the patch's ~1/3 of fawns to
+      yearlings and young bucks and normalised to a comparable scale.
+      Not verified here
+
+    arm        A trend y1->y3   A spread
+    arm_lit    0.605            0.605
+    arm_pat    0.065            0.065
+
+    A's trend is 9.3x steeper under the circular arm
+    A survives arm_pat as a trend explanation: False
+
+    under the dominance-derived series model A predicts a steep rise
+    across years. Under the paternity-derived series it predicts a
+    nearly flat rate, so ANY observed year-trend refutes it. The
+    pre-patch code could not produce that test, because the series it
+    was given was the model's own output
+
+------------------------------------------------------------------------
+
+  B3. DOE-CHOICE ARM
+
+    observed young-buck paternity share (declared): 0.333
+
+    arm          young share      error
+    arm_null     0.650            +0.317
+    arm_size     0.198            -0.135
+    arm_other    0.545            +0.212
+
+    closest arm: arm_size
+    observation lies between the arms: True
+
+    BUT arm_size carries a free parameter:
+
+    selectivity    young share
+    0.0            0.650
+    1.0            0.453
+    2.0            0.300
+    3.0            0.198
+    4.0            0.132
+    6.0            0.060
+
+    observed value reachable by arm_size: True (at k = 2.0)
+
+    one summary statistic cannot separate three arms when one of them
+    carries a free parameter. A second observable is needed --
+    paternity against antler size WITHIN an age class separates size
+    selection from anything merely correlated with age
+
+------------------------------------------------------------------------
+
+  THE COHORT EXPERIMENT -- year two, matched mass
 
     cohort                       prior    mass     motor error    social deficit
     wild                         1        2.2      0.248          0.201
     supplemented_no_year_one     0        2.2      0.448          0.400
 
-    motor gap  +0.201
-    social gap +0.199
-
+    motor gap +0.201    social gap +0.199
     A predicts: social gap, no motor gap
     B predicts: motor gap at equal mass, no necessary social gap
-
-    Both gaps are non-zero in this sim because both mechanisms were
-    switched on. On real animals they are measured separately -- a
-    control-error assay at matched mass, and a rank assay -- and the
-    models disagree about which one carries the deficit. That
-    disagreement is the experiment.
 
 ------------------------------------------------------------------------
 
   CONFIDENCE, reported separately and not resolved
-    model_separation                     structural: the two models are functions of different variables, so a design varying one at fixed other separates them
-    parameter_values                     all stipulated. novelty decay, motor-error base and per-season factors are round numbers, not measurements
-    prior_art_claim                      CARRIED FROM THE WORK ORDER, not verified here
-    resolved                             False
+    agents_declared
+      B0 applied. the doe was ABSENT before this patch, not blank --
+      see PRE_PATCH_OMISSION
+    doe_arms
+      not identified by the paternity share alone -- arm_size reaches
+      the observed value at some selectivity
+    novelty_floor
+      a free parameter with a stated observable (mature-buck sparring
+      rate) and existing footage; not measured here
+    rank_prospect
+      arm_lit is the antler-rank model's own output and is CIRCULAR for
+      model A; arm_pat is declared from the patch and not verified
+    resolved                       False
 
   WHERE IT BREAKS
+    - B2 IS A DEFECT IN THE PRE-PATCH CODE AND IT WAS MINE. The
+    rank_prospect series was hardcoded from the antler-rank model, so
+    model A was fitted to its own conclusion and could not fail. Both
+    arms now run and the arm labels carry circular_for_model_A
+    - B3 IS NOT IDENTIFIED BY THE STATED TEST. arm_size carries a free
+    selectivity exponent and reaches the observed young-buck paternity
+    share at some value of it, so 'which arm reproduces the observed
+    distribution' has more than one answer. A second observable is
+    needed: paternity against antler size WITHIN an age class
+    - the pre-patch hardware() modelled MASS only, so the annual delta
+    went to zero at maturity and a novelty floor would have multiplied
+    zero. GEOMETRY_DELTA is stipulated at 0.35 and every mature-buck
+    number moves with it
+    - the floor parameter has a real observable behind it -- does
+    mature sparring go to zero or hold -- and nothing here measures it.
+    The patch says trail-camera footage exists; none is read
+    - the patch's phrase 'floor = 0 is model A in disguise' is checked
+    in floor_zero_check() and holds only in one sense. On the
+    mature-buck observable the two models predict OPPOSITE things,
+    which is maximal separability. What floor 0 shares with model A is
+    the structural assumption that competence is acquired once and then
+    fixed
     - the cohort contrast is confounded. 'supplemented / rehab, no
-    year-one testing' selects animals that differ in nutrition,
-    handling, disease history and human exposure, any of which moves
-    motor error. The design needs the deficit to be specific to the
-    practice variable and nothing here establishes that
-    - the sim puts the separation in by construction: engage_A ignores
-    novelty and engage_B ignores rank, so of course a design varying
-    one at fixed other separates them. What the module shows is that
-    the EXISTING measurement -- engagement rate over years -- does not,
-    which is the part worth having
-    - motor_error decays with seasons SPARRED and not with seasons
-    CARRIED. That is model B's content and it is assumed here rather
-    than derived; if carrying alone calibrates, both cohorts converge
-    and the design returns nothing
+    year-one testing' selects animals differing in nutrition, handling
+    and human exposure, any of which moves motor error
+    - AGE_CLASSES population shares, antler values and familiarity
+    weights are all stipulated, and the doe-arm comparison moves with
+    every one of them
     - no cervid data of any kind is used in this file
-    - the fawn-play prior art is carried from the work order
-    unverified, and the whole design leans on it being real

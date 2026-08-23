@@ -4455,10 +4455,36 @@ underneath).
   instrument grants, since nothing in the list penalises granting, and
   an instrument granting every case takes the best score. The revision
   axis needs no base rate (a count against zero) and is the half that
-  separates the instruments. **S4** engagement rate separates the two
-  models only at particular parameter values, which an observer reading
-  a real series cannot know they have; the cohort × year design does
-  separate them and is disclosed as confounded. **S5** the
+  separates the instruments. **S4** (patched) engagement rate separates the two
+  models only at particular parameter values, and the patch turned up
+  two defects in the module's own code plus one narrowing. **B2 was
+  mine**: `rank_prospect` was hardcoded from the antler-rank model, so
+  model A was fitted to its own conclusion and could not fail — both
+  arms now run, A's trend is **9.3× steeper** under the circular arm and
+  nearly flat under the paternity-derived one, so any observed
+  year-trend refutes it there. **B3 is not identified by the stated
+  test**: `arm_size` carries a free selectivity exponent and reaches the
+  observed young-buck paternity share at k ≈ 2, so "which arm reproduces
+  the observed distribution" has more than one answer, and the second
+  observable that would identify it is named (paternity against antler
+  size *within* an age class). **B1's phrase** — "floor = 0 is model A
+  in disguise" — holds in one sense of two: on the mature-buck
+  observable the models predict *opposite* things, which is maximal
+  separability; what floor 0 shares with A is the structural assumption
+  that competence is acquired once and then fixed. **Adding the floor
+  exposed a third defect**: `hardware()` modelled antler *mass* only,
+  which plateaus, so the annual delta went to zero at maturity and the
+  floor would have multiplied zero — caught by the selftest, and
+  geometry is now a separate stipulated term. The cohort × year design
+  still separates the models and is still disclosed as confounded.
+  **Structural rule adopted from the patch and stated for all future sim
+  specs here: the AGENTS section comes first, before any equations, and
+  a missing agent is a visible `[BLANK]`, never an omission buried in
+  prose.** S4 earned it — the pre-patch file had no doe *at all*, not as
+  a blank but as an absence, so access was a function of the buck alone
+  in both models and the question of what a doe tracks could not be
+  posed; `PRE_PATCH_OMISSION` records that rather than quietly fixing
+  it. **S5** the
   genetic-conflict criterion is **not empty** — it is a prediction, and
   the case it was used to exclude (a clonal root system) is the
   intervention that tests it; reported against the framing the work
@@ -4484,7 +4510,7 @@ underneath).
   against the drafted prose** (S3's flat column, S6's more-levels-is-
   better, S8's sign flip) and are recorded in place rather than
   smoothed. No module reads real data and every literature claim carried
-  from the work order is marked carried-not-verified. 148 selftest
+  from the work order is marked carried-not-verified. 164 selftest
   checks green. Stdlib only, parses under Python 3.9, phone-buildable,
   CC0.
 - `legacy/` — Archived source drops. The repo root reserves one

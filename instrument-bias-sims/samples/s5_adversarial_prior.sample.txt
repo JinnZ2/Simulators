@@ -68,10 +68,14 @@ S5 -- ADVERSARIAL PRIOR
 ------------------------------------------------------------------------
 
   CONFIDENCE, reported separately and not resolved
-    literature_instance                  CARRIED FROM THE WORK ORDER, not verified here
-    non_identifiability                  demonstrated on a constructed pair, and the construction is disclosed
-    resolved                             False
-    separator_list                       enumerated by the module's author and not exhaustive
+    literature_instance
+      CARRIED FROM THE WORK ORDER, not verified here
+    non_identifiability
+      demonstrated on a constructed pair, and the construction is
+      disclosed
+    resolved                       False
+    separator_list
+      enumerated by the module's author and not exhaustive
 
   WHERE IT BREAKS
     - two models built by one author to fit the same data will fit the
