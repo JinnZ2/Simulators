@@ -126,6 +126,139 @@ and the classifier were written here, in one sitting. This is
 adding cases — only by ground truth from a party that did not write the
 detector.
 
+### T1-5 — the verb-first test, run against the first instrument
+
+`BOUNDARY.md` D6, supplied by the operator after `t1_predicate_unit.py` had
+run and after T1-1 was reported. Implemented as
+`t1_verb_first.py`, selftest PASS. Both instruments run; neither was edited to
+match the other.
+
+```
+D1/D3 instrument vs D6 verb-first test, n=12
+agree 9   DISAGREE 1   CONTESTED 2
+```
+
+Six-option tally, and the arms it maps to:
+
+```
+BEARER_REQUIRED  5      identity        5
+READS_WITHOUT    2      process         5
+VERB_CARRIES_IT  3      own arm         2
+BOTH_READINGS    2      no observation  0
+NO_FRONTING      0
+UNGRAMMATICAL    0
+```
+
+**The one disagreement is `KS-09`, the niche.** `the niche remained
+unoccupied for three seasons`. D1's three-part test fails it on *predicated
+on* — the niche is the slot, the occupant is the carrier — so the first
+instrument scores it non-identity. D6 fronts it to `remaining unoccupied for
+three seasons` and the residue asks *what* remained, so the second instrument
+scores it bearer-required.
+
+Both instruments are internally consistent and they disagree about one thing:
+whether a slot with a state predicated on it is a carrier. That is a real
+question and neither test settles it. Recorded, not resolved.
+
+### T1-6 — a prediction of mine failed, and the data cannot test it either way
+
+Before running the comparison I predicted that the disagreements would fall on
+the rows the first instrument decided by word list, and that the rows it
+decided by predicate structure would agree. That is the shape T1-1 would
+imply.
+
+Measured:
+
+| how the first instrument decided | n | not agreeing |
+|---|---|---|
+| by table | 10 | 2 (20%) |
+| by predicate | 2 | 1 (50%) |
+
+The by-predicate share is **worse**, not better. At n=2 that figure supports
+nothing in either direction — which is the actual finding: the prediction was
+stated as though the run would test it, and the run cannot. Kept rather than
+dropped, because a prediction that turns out untestable by the data it was
+made about is information about the design, not about the world.
+
+### T1-7 — a third of the judgements were not made on what the instrument produced
+
+`read_on` was added after the first scored run, when inspecting the residues
+showed some answers could not have come from them.
+
+```
+judged on RESIDUE          8
+judged on CLAIM            1
+judged on DROPPED_SUBJECT  3
+```
+
+`KS-01` is the `CLAIM` row: `firms with concentrated ownership reduce
+investment following the reform` fronts to `concentrating ownership reduce
+investment following the reform`, which is not English. The fronter takes its
+main verb from `t1_predicate_unit.subject_span`, which read `concentrated` as
+the finite verb. The judgement was made on the original claim, which is the
+right answer reached by not using the instrument.
+
+So the instrument was used as specified on 8 of its own 12 items. That number
+exists only because the field was added; before it, the run looked clean.
+
+### T1-8 — `VERB_CARRIES_IT` is not an option of the verb-first test
+
+All three of its judgements read `DROPPED_SUBJECT`, and that is not an
+accident of who judged. **The operation deletes the subject. This option is a
+claim about the subject.** `the rate of transmission fell` fronts to `falling
+after the intervention`; nothing in that residue says the deleted subject was
+a nominalization of `transmit`. You have to look at what was thrown away.
+
+This is the option argued for hardest in the module docstring, on the grounds
+that folding it into `READS_WITHOUT` hides an identity framing wearing a noun.
+That argument still holds. What does not hold is calling it an option of this
+test.
+
+Relocation, not deletion — two forms available and neither taken here:
+
+- a **pre-step**, asked of the subject before fronting, leaving five
+  post-fronting options;
+- a **conjunction** — residue reads without one AND the dropped subject was an
+  event nominalization — which makes it explicitly two observations.
+
+Enforced meanwhile: `--selftest` now fails if any `VERB_CARRIES_IT` judgement
+claims to have been read off the residue.
+
+### T1-9 — the morphological proxy recovers a third of the rule
+
+Suffix shape is a property of a token's form rather than membership in a list,
+so a proxy built on `-tion` / `-ment` / `-ance` / `-ing` is one step less
+lexical than the D3 table. Measured against the recorded judgements:
+
+```
+agreement 4/12
+```
+
+The two decisive misses are `populations` and `institutions`. Both carry
+`-tion`; both require a bearer. Running the other way, `flux`, `rate`,
+`market` and `loop` carry no nominalizing suffix and three of the four are
+process.
+
+So the rule is not recoverable from word shape either. Elicitation is the
+honest implementation, not a fallback taken for want of effort.
+
+### T1-10 — what D6 buys, and what it costs
+
+**Buys:** the lexically-decided share goes from **10 of 12 to 0 of 12**. No
+word list is consulted at any point. That is the actual repair to T1-1, and it
+came from the operator, not from the instrument.
+
+**Costs:** the discriminator is now one judgement per item, made by one reader
+with no second reader and no blind condition. That is not a smaller weakness
+than a word list, it is a different one — a word list is at least inspectable
+by someone who was not there. `reasoning-dial` `RD_009`'s G-STATE gap now sits
+on the load-bearing step.
+
+**And it produces a number the first instrument could not:** `BOTH_READINGS`
+at **2 of 12** is the first measure here of how often the question is
+genuinely undecidable rather than merely unanswered. Under the binary rule as
+given, those two would have gone wherever the reader leaned, unrecorded.
+
 ---
 
 ## T2 — BASE RATE

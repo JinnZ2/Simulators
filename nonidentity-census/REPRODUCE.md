@@ -11,6 +11,12 @@ python3 t1_predicate_unit.py --null       # known-signal / known-null, fail clas
 python3 t1_predicate_unit.py --demo       # per-row labels and decided_by
 python3 t2_sample.py --selftest           # aggregation path, inline fixture
 python3 t2_sample.py --fixture            # per-field table, n=6, NOT a corpus
+
+python3 t1_verb_first.py --selftest       # D6 instrument
+python3 t1_verb_first.py --front          # steps 1-2 only, the residues
+python3 t1_verb_first.py --score          # six-option tally + read_on split
+python3 t1_verb_first.py --proxy          # morphological proxy vs the rule
+python3 t1_verb_first.py --compare        # D1/D3 against D6, item by item
 ```
 
 Expected, and pinned in `samples/`:
@@ -22,6 +28,14 @@ Expected, and pinned in `samples/`:
 | `t1 --demo` | `decided by predicate: 2  by table: 10  undecidable: 0` |
 | `t2 --selftest` | `SELFTEST PASS (0 checks failed)` |
 | `t2 --fixture` | 4 fields, law row `undec 1.000` |
+| `verb_first --selftest` | `SELFTEST PASS (0 checks failed)` |
+| `verb_first --score` | `BEARER_REQUIRED 5 / READS_WITHOUT 2 / VERB_CARRIES_IT 3 / BOTH_READINGS 2`; read_on `RESIDUE 8 / CLAIM 1 / DROPPED_SUBJECT 3` |
+| `verb_first --proxy` | `agreement 4/12` |
+| `verb_first --compare` | `agree 9   DISAGREE 1   CONTESTED 2` |
+
+`t1_verb_first.py --score` raises `JudgementNotSupplied` for any item with no
+step-3 judgement. The rule's discriminator is the judgement, so there is
+nothing to fall back on and the module does not invent one.
 
 `--selftest` on T1 fails if `BOUNDARY.md`'s D3 table and the code's
 `UNIT_TABLE` / `BIGRAM_TABLE` disagree. Editing a boundary decision after a

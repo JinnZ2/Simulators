@@ -1,0 +1,18 @@
+D1/D3 instrument vs D6 verb-first test, n=12
+id      D1/D3             decided_by D6 option        verdict   residue
+KS-01   IDENTITY_BEARING  TABLE      BEARER_REQUIRED  agree     concentrating ownership reduce investment following the reform
+KS-02   IDENTITY_BEARING  TABLE      BEARER_REQUIRED  agree     declining across all sampled sites
+KS-03   IDENTITY_BEARING  TABLE      BOTH_READINGS    CONTESTED smoothing consumption across shocks
+KS-04   IDENTITY_BEARING  TABLE      BEARER_REQUIRED  agree     eroding once enforcement lapsed
+KS-05   IDENTITY_BEARING  TABLE      BEARER_REQUIRED  agree     persisting long after the conditions that produced them
+KS-06   NON_IDENTITY      TABLE      VERB_CARRIES_IT  agree     increasing with surface roughness
+KS-07   NON_IDENTITY      TABLE      READS_WITHOUT    agree     stabilizing at moderate gain
+KS-08   NON_IDENTITY      TABLE      VERB_CARRIES_IT  agree     proceeding without any central coordinator
+KS-09   NON_IDENTITY      TABLE      BEARER_REQUIRED  DISAGREE  remaining unoccupied for three seasons
+KS-10   NON_IDENTITY      TABLE      VERB_CARRIES_IT  agree     falling after the intervention
+KS-11   IDENTITY_BEARING  PREDICATE  BOTH_READINGS    CONTESTED tightening over the following two quarters
+KS-12   NON_IDENTITY      PREDICATE  READS_WITHOUT    agree     allocating scarce goods without a designer
+
+agree 9   DISAGREE 1   CONTESTED 2
+of the 10 the first instrument decided BY TABLE, 2 do not agree
+of the 2 it decided BY PREDICATE, 1 do not agree

@@ -140,3 +140,74 @@ wrongly by the question the work order asks.
 
 That gap is not closable from abstracts. Naming it is not a hedge on the
 result; it is the size of what the result is about.
+
+---
+
+## D6 — the verb-first test
+
+**Supplied by the operator AFTER D1 ran and after T1's first results were
+reported.** Recorded with that ordering rather than folded in, because a rule
+that arrives after a run is not the rule the run used, and rewriting D1 to
+match would erase the disagreement that makes it worth having.
+
+**The rule, as given:**
+
+> Rewrite the main claim verb-first. If you must supply a bearer to make it
+> grammatical, it's identity-bearing. If it reads without one, it's process.
+
+**What it is.** An operation performed on the claim, and an observation of
+what the operation forces. Not a property looked up on a noun.
+
+**What it replaces.** D1's three-part test (individuated / persistent /
+predicated on) asks three questions about a unit and needs a unit already in
+hand, which is why `t1_predicate_unit.py` step 3 fell back to a table of
+nouns. D6 asks one question about a transformation. The unit never has to be
+named, so there is nothing to look up.
+
+**Procedure.**
+
+1. Take the main claim by D0, unchanged.
+2. Front the verb and drop the subject. `S V X` becomes `V-ing X`.
+3. Read the residue. Record whether completing it requires supplying a
+   noun that the residue does not already carry.
+
+| claim | verb-first residue | completing it requires a noun? |
+|---|---|---|
+| populations declined across all sampled sites | declining across all sampled sites | YES — declining what |
+| allocation proceeds without any central coordinator | allocating, without any central coordinator | NO |
+
+**Status of step 3.** It is a judgement, and it is recorded as an input with
+provenance, not computed. `t1_verb_first.py` performs steps 1 and 2 and
+refuses to score without step 3 supplied.
+
+**Known cost.** The judgement is the whole discriminator, so a run is only as
+good as who made it and under what state. That is
+`reasoning-dial` `RD_009`'s G-STATE gap sitting on the load-bearing step, and
+D6 does not close it. What D6 buys over D1 is that the gap is now in one
+place and visible, instead of distributed across sixty table rows nobody
+would re-examine.
+
+**Six options, not two.** The rule as given is binary. The operator asked
+whether there should be more, and working the twelve-item set produced four
+states a binary has no room for:
+
+| option | what it records |
+|---|---|
+| `BEARER_REQUIRED` | completing the residue needs a noun it does not carry |
+| `READS_WITHOUT` | residue complete, no noun wanted |
+| `VERB_CARRIES_IT` | residue complete BECAUSE the fronted verb is what the subject named |
+| `BOTH_READINGS` | residue complete AND a bearer is natural; two readings, both grammatical, and they are different claims |
+| `NO_FRONTING` | the operation could not be performed |
+| `UNGRAMMATICAL` | fronting yields non-English regardless of any bearer |
+
+The last two are not readings. They record that the instrument produced no
+observation, which is not the same as observing that no bearer is needed.
+
+**`read_on`, added after the first scored run.** Each judgement records what
+was actually read to answer it — the residue, the original claim, or the noun
+the operation deleted. Added because inspecting the residues showed that a
+third of the judgements could not have come from the residue. See FINDINGS
+T1-7 and T1-8.
+
+**Not decided here.** Whether D6's answers agree with D2 and D3. That is
+measured, not assumed — see FINDINGS T1-5.

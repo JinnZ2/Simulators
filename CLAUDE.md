@@ -4719,8 +4719,40 @@ underneath).
   other" is a predicate structure and structures do not announce themselves
   lexically. Boundary decisions are reported as a first-class result, and one
   of them — `population` scored identity-bearing — runs against the work
-  order's own prediction and is kept because the test gives it. Stdlib only,
-  parses under 3.9, CC0.
+  order's own prediction and is kept because the test gives it.
+  **Second T1 instrument, supplied by the operator after the first had run:**
+  `BOUNDARY.md` D6, the **verb-first test** — *rewrite the main claim
+  verb-first; if you must supply a bearer to make it grammatical it is
+  identity-bearing, if it reads without one it is process*. An operation and
+  an observation of what the operation forces, with no noun looked up
+  anywhere, which is the actual repair to `T1-1`: **the lexically-decided
+  share goes from 10 of 12 to 0 of 12.** Built as `t1_verb_first.py`
+  (selftest PASS) with the first instrument left unedited so the two can be
+  scored against each other — `agree 9, DISAGREE 1, CONTESTED 2`. **Six
+  options, not two**, at the operator's prompting: the binary loses
+  `BOTH_READINGS` (2 of 12 — the first measure here of how often the question
+  is genuinely undecidable rather than unanswered) and `NO_FRONTING` /
+  `UNGRAMMATICAL`, which record that no observation was made rather than that
+  no bearer was needed. **Three results ran against the design.** (1) `T1-6`:
+  the prediction that disagreements would fall on the word-list rows
+  **failed** — by-table 2 of 10 do not agree, by-predicate 1 of 2 — and at
+  n=2 the data cannot test it either way, which is the finding. (2) `T1-7`: a
+  `read_on` field added after the first scored run shows only **8 of 12**
+  judgements were made on what the instrument produced (1 on the claim,
+  because the fronter read `concentrated` as a finite verb and emitted
+  non-English; 3 on the deleted subject). (3) `T1-8`, the sharpest:
+  **`VERB_CARRIES_IT` is not an option of the verb-first test** — all three of
+  its judgements read the dropped subject, because the operation deletes the
+  subject and the option is a claim about it; the option argued for hardest is
+  the one the test cannot see, and it relocates to a pre-step or a
+  conjunction rather than being deleted, with a selftest check meanwhile. The
+  morphological proxy recovers **4 of 12** (`population` and `institution`
+  both carry `-tion` and both need a bearer), so the rule is not recoverable
+  from word shape either and elicitation is the honest implementation. The
+  one D1/D6 disagreement is the niche: a slot with a state predicated on it,
+  which neither test settles. Cost of D6, stated: the discriminator is now one
+  judgement per item with no second reader — a different weakness than a word
+  list, not a smaller one. Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
