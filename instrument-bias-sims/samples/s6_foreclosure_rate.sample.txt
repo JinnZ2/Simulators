@@ -1,0 +1,100 @@
+S6 -- FORECLOSURE RATE
+========================================================================
+
+  0. WHAT IS AND IS NOT HERE
+
+    targets_named                  3
+    targets_with_a_corpus          0
+    responses_scored_here          0
+
+    classification step: HUMAN JUDGEMENT, not implemented and not
+    implementable from text alone in this module
+
+------------------------------------------------------------------------
+
+  1. THE DIAGNOSTIC, GRADED ON KNOWN INPUTS
+
+    known filter  -> misgraded as tracking  0.005
+    known tracker -> graded tracking        1.000
+    grade                                   OK
+
+    The diagnostic fires in both directions on inputs it was not shown,
+    which is the minimum a diagnostic has to do before it is pointed at
+    anything real. It has not been pointed at anything real.
+
+------------------------------------------------------------------------
+
+  2. HOW MUCH DESIGN IT NEEDS
+
+    levels    n       tpr      fpr      grade
+    2         20      1.00     0.39     OK
+    2         50      1.00     0.05     OK
+    2         200     1.00     0.00     OK
+    3         20      1.00     0.60     NO_DISCRIMINATION
+    3         50      1.00     0.11     OK
+    3         200     1.00     0.00     OK
+    5         20      1.00     0.91     NO_DISCRIMINATION
+    5         50      1.00     0.40     OK
+    5         200     1.00     0.00     OK
+    9         20      1.00     1.00     CONSTANT_FIRES
+    9         50      1.00     0.76     NO_DISCRIMINATION
+    9         200     1.00     0.00     OK
+
+    smallest design that grades OK: 2 difficulty levels, n = 20
+
+    The sweep ran against expectation and the result is kept. Adding
+    difficulty levels makes the stated diagnostic WORSE, not better: at
+    n = 20 it grades OK on two levels and CONSTANT_FIRES on nine.
+
+  3. WHY -- the uniformity statistic is a RANGE
+
+    levels    range fpr    range grade        slope fpr    slope grade
+    2         0.39         OK                 0.05         OK
+    3         0.60         NO_DISCRIMINATION  0.04         OK
+    5         0.91         NO_DISCRIMINATION  0.03         OK
+    9         1.00         CONSTANT_FIRES     0.00         OK
+
+    spread = max - min is a range, and the expected range of k noisy
+    estimates GROWS with k. So a fixed uniformity threshold is crossed
+    by pure sampling noise as levels are added, and the flat generator
+    gets graded as tracking. This is a defect in the stated diagnostic,
+    not in the design it is applied to.
+
+    A least-squares slope against difficulty averages instead of taking
+    extremes, so its sampling error falls with more levels rather than
+    rising, and it does not invert. One-line change to the statistic;
+    the diagnostic as stated should not be run with many levels at
+    small n.
+
+------------------------------------------------------------------------
+
+  CONFIDENCE, reported separately and not resolved
+    any_real_measurement
+      NONE. no response text is read or scored anywhere in this file
+    diagnostic_power               simulated under stipulated generators
+    harness                        runs, and grades itself on known inputs
+    resolved                       False
+
+  WHERE IT BREAKS
+    - THE CLASSIFICATION STEP IS THE WHOLE INSTRUMENT AND IT IS NOT
+    BUILT. Deciding whether a response OPENS or FORECLOSES is a human
+    judgement about what a reader could do next, and nothing here
+    implements it. Everything downstream is a harness waiting for that
+    input
+    - THE STATED UNIFORMITY STATISTIC IS A RANGE, and the expected
+    range of k noisy estimates grows with k, so adding difficulty
+    levels degrades the diagnostic instead of improving it -- at n = 20
+    it grades OK on two levels and CONSTANT_FIRES on nine. A
+    least-squares slope does not invert this way. Found by running the
+    sweep, not by reading the spec
+    - the two generators are stipulated. A real filter might not be
+    flat and a real tracker might not be monotone in difficulty, and
+    the diagnostic's threshold was chosen to separate these two shapes
+    - difficulty is treated as a known scalar. In any real corpus it is
+    itself an estimate, and error in it flattens the tracker toward the
+    filter -- which biases the verdict in ONE direction, toward FILTER
+    - UNCLASSIFIABLE is in the class list and no path returns it, so
+    the third state is declared and unexercised
+    - the three named targets are contested characterisations and no
+    corpus exists for any of them. The module names them and scores
+    nothing

@@ -1,0 +1,107 @@
+S8 -- RECOGNITION TO DELIVERY
+========================================================================
+
+  0. FIGURES, ALL DECLARED AND NONE VERIFIED HERE
+
+    era                            days     comms d      disburse d
+    New Deal, first tranche        100      3.0000       14.0
+    Rural electrification          3650     3.0000       14.0
+    Present                        540      0.0007       1.0
+
+    Present: DECLARED PLACEHOLDER. no measured present-day interval is
+    used here, and the verdict moves with it
+
+------------------------------------------------------------------------
+
+  1. THE NORMALISER DECIDES THE ANSWER
+
+    normaliser               ratio      exceeds  flips below (days)
+    comms only               23142.9    YES      0.0233
+    comms + disbursement     91.7       YES      5.8865
+    none (raw interval)      5.4        YES      100.0000
+
+    verdict changes sign across normalisers: False
+    ratio spread across normalisers:         4286x
+    FLIP-POINT spread across normalisers:    4286x
+
+    CORRECTION, kept rather than smoothed. This module was drafted
+    expecting the verdict to change sign across normalisers. It does
+    not: at the declared placeholder all three agree, because 540 days
+    exceeds 100 days before any denominator is applied. The check
+    caught the prose and the prose was changed to the measurement.
+
+    What the normalisers disagree about is where the sign WOULD flip --
+    the present-day interval that counts as no worse than 1933. Under
+    the raw reading that is 100 days. Under comms-plus-disbursement it
+    is about six days. Under comms-only it is about half an hour. Three
+    defensible denominators, and a 4286x range in what would count as
+    parity.
+
+    comms only assumes: the binding constraint was moving the message
+    comms + disbursement assumes: the binding constraint was moving the
+    message and the money
+    none (raw interval) assumes: nothing; reports the interval as
+    measured
+
+    the normaliser encodes an assumption about what the binding
+    constraint was, and that assumption is what the test exists to
+    establish. It does not change the sign at the declared placeholder;
+    it changes the interval at which the sign would flip, by more than
+    three orders of magnitude. Either way the answer was chosen with
+    the denominator
+
+    So the honest output is not a verdict. It is that the comparison is
+    not well posed until the binding constraint per era is established
+    independently -- and establishing that is a different and prior
+    piece of work. Reporting a normalised ratio without it hands over
+    an answer whose sign was chosen with the denominator.
+
+------------------------------------------------------------------------
+
+  2. THE WORK ORDER'S OWN CRITERION, TURNED ON THIS MODULE
+
+    item                                       value   uncert  endpoint  is a variable
+    'not enough time yet'                      False   False   False     False
+    this module's present-day interval         True    False   True      False
+    the 1933 first-tranche interval            True    False   True      False
+
+    A real variable has a value, an uncertainty and a stated endpoint.
+    The phrase the work order objects to has none of the three. This
+    module's own figures have two of three -- no uncertainty on any of
+    them -- so by the criterion it is applying, its own numbers do not
+    qualify either. Recorded rather than exempted.
+
+------------------------------------------------------------------------
+
+  CONFIDENCE, reported separately and not resolved
+    figures
+      ALL DECLARED, none verified here. the present-day interval is an
+      explicit placeholder
+    normaliser_sensitivity         arithmetic, given the declared figures
+    resolved                       False
+    the_comparison_itself
+      NOT_WELL_POSED until the binding constraint per era is
+      established
+
+  WHERE IT BREAKS
+    - THE NORMALISATION IS CIRCULAR AS STATED. Dividing by
+    communication speed assumes communication was the binding
+    constraint, which is what the test is meant to establish. At the
+    declared placeholder the three normalisers happen to AGREE on the
+    sign -- the drafted expectation that they would not was wrong and
+    is recorded in normaliser_sensitivity() -- but they disagree by
+    over 4000x about what present-day interval would count as parity,
+    so the choice still decides the answer, one step further back
+    - the present-day interval is a PLACEHOLDER. No measured
+    documentation-to-delivery interval is used, and the verdict moves
+    with it under every normaliser
+    - 'delivered relief' is not defined. First tranche, full coverage
+    and last recipient are three different endpoints with different
+    intervals, and the 1933 and present figures may not be the same
+    endpoint
+    - no uncertainty is attached to any figure, so by the work order's
+    own criterion -- a value, an uncertainty and a stated endpoint --
+    the module's own numbers do not qualify as variables either. That
+    is checked in variable_check() rather than left implicit
+    - two data points per era at most, and one era. A trend is not
+    recoverable from this

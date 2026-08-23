@@ -1,0 +1,34 @@
+CROSS-CUTTING RULES, ENFORCED
+========================================================================
+
+  module                           r1 data  r2 output r3 readouts
+  s1_encounter_denominator         pass     pass     pass
+  s2_symmetric_anchor              pass     pass     pass
+  s3_rubric_backcast               pass     pass     pass
+  s4_antler_calibration            pass     pass     pass
+  s5_adversarial_prior             pass     pass     pass
+  s6_foreclosure_rate              pass     pass     pass
+  s7_hardship_threshold            pass     pass     pass
+  s8_recognition_to_delivery       pass     pass     pass
+  s9_corpus_position_filter        pass     pass     pass
+
+  r4 README: pass
+  all rules pass: True
+
+  s7_hardship_threshold uses graded terms: incentive direction, cost asymmetry, steers, aggregate steers
+
+------------------------------------------------------------------------
+
+  THE CHECKER, NULL-TESTED ON A PLANTED VIOLATION
+    planted_moral_caught             True
+    planted_intent_caught            True
+    planted_confidence_caught        True
+
+    a keyword scan is stepped around by any paraphrase. A PASS on rules
+    1 and 2 means no listed token was found, not that the rule holds
+
+    A rule stated in a README and never checked is a rule that drifts.
+    Rules 1 and 2 are scanned, which is a floor. Rules 3 and 4 are
+    structural and are actually enforced: a module without a separate
+    unresolved confidence readout, or without a non-empty breaks list,
+    fails here and turns the folder's test red.

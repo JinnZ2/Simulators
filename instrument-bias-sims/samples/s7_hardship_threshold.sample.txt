@@ -1,0 +1,79 @@
+S7 -- HARDSHIP THRESHOLD
+========================================================================
+
+  1. THE SAME CONDITION, FROM FOUR BASELINES
+
+    condition                                            sev    0.20 0.40 0.55 0.75
+    negative net worth, high earned income               0.45   YES  YES  no   no  
+    cattle, feedlot, continuous confinement              0.70   YES  YES  YES  no  
+    continuously-running compute system, no idle state   0.55   YES  YES  no   no  
+    truck cab, long-haul sleeper, off-duty interval      0.60   YES  YES  YES  no  
+    housed, food-secure, fixed hours                     0.10   no   no   no   no  
+
+    conditions where observers disagree: 4 of 5
+
+    with no anchor the threshold is the observer's baseline, so the
+    label is a function of two arguments where the instrument reports
+    one
+
+    ANCHORED COMPARISON -- one stated threshold for everyone
+      negative net worth, high earned income               DOES_NOT_ATTACH
+      cattle, feedlot, continuous confinement              ATTACHES
+      continuously-running compute system, no idle state   ATTACHES
+      truck cab, long-haul sleeper, off-duty interval      ATTACHES
+      housed, food-secure, fixed hours                     DOES_NOT_ATTACH
+
+    With an anchor the label is a function of the condition alone.
+    Whether 0.50 is the right anchor is a separate question and a
+    harder one; what changes is that it becomes a question with an
+    answer.
+
+------------------------------------------------------------------------
+
+  2. COST ASYMMETRY -- graded terms only
+
+    correlation, attachment share vs implied cost   +0.712
+    incentive direction                             toward attaching where implied cost is high
+    aggregate steers                                True
+    consequence of stipulation                      True
+    intent attributed                               False
+
+    This number is a consequence of the stipulated cost table and is
+    printed with that attached. It is not evidence about any real
+    labelling practice, and no mechanism is named. The three readouts
+    the work order permits -- incentive direction, cost asymmetry,
+    whether the aggregate steers -- are what is reported, and nothing
+    beyond them is inferred.
+
+------------------------------------------------------------------------
+
+  CONFIDENCE, reported separately and not resolved
+    cost_asymmetry
+      CONSEQUENCE OF THE STIPULATED COST TABLE. Not a measurement and
+      not evidence about any real labelling practice
+    observer_dependence
+      arithmetic consequence of an unanchored threshold; holds for any
+      severity values
+    resolved                       False
+    severity_values                stipulated. only the ordering is used
+
+  WHERE IT BREAKS
+    - IMPLIED_COST IS STIPULATED BY THE MODULE, so the cost-asymmetry
+    correlation is a consequence of the stipulation rather than a
+    finding. Any correlation can be produced by rewriting that table,
+    and nothing here measures what a label actually obliges
+    - severity is a single scalar standing in for whatever an anchored
+    instrument would return, which is precisely the collapse the work
+    order objects to elsewhere. Only the ordering is used, but a scalar
+    is still assumed to exist
+    - the observer-dependence result is near-analytic: an unanchored
+    threshold IS the baseline, so of course the label moves with it.
+    The non-trivial part is how many conditions split at plausible
+    baseline spreads, which is a fact about the condition list
+    - the condition list is short and hand-picked, and it was picked to
+    span the interesting range. A different list gives a different
+    split count
+    - no intent is attributed anywhere and none can be. A correlation
+    between attachment and implied cost is compatible with many
+    mechanisms including none, and the module reports incentive
+    direction and whether the aggregate steers, and stops there
