@@ -2904,6 +2904,40 @@ underneath).
   item schema, so every sub-record in that directory is unconstrained. Two
   files satisfy two `anyOf` branches each and both are recorded rather than
   picked.
+  **`cases/024refusalfalsepositiverate.md`** is the first case delivered with a
+  **spec attached as its own file** — `specs/SCOPED_REFUSAL.md`, four
+  requirements and a falsification condition, citing the case as its motivating
+  instance rather than the reverse. The quantity: the rate at which safety
+  classifiers stop legitimate work, and the identity of what stopped. Why it is
+  unmeasured: refusals are logged as events, not outcomes, so a true positive
+  and a false positive are the same record; the operator who could adjudicate
+  has no channel and no matched span to point at. **`UNI_160`, the load-bearing
+  check:** the spec's falsifier ("if refusals cannot be attributed to an
+  artifact even in principle, requirement one is unbuildable") was tested from
+  inside the session and **does not fire** — the network egress classifier ran
+  a working instance of requirements one, two and three at 22:57Z on
+  2026-08-23, classifying per host, continuing the session through three
+  refusals, and returning `{"error_type":"EGRESS_BLOCKED","domain":...}` as a
+  locator, with a retained `recentRelayFailures` log carrying ts/kind/detail/
+  host. **`UNI_161`/`UNI_162` bound it in both directions**: the egress gate's
+  artifact boundary is *handed to it by the protocol* (a CONNECT names a host),
+  which is the whole of requirement one where the boundary is the problem; and
+  the one requirement it lacks is the fourth, the contested mark — so the
+  architecture demonstrably supports the three requirements that do not produce
+  the missing rate and not the one that does, and `recentRelayFailures` has
+  case 024's own property at smaller scope. **`UNI_157`:** the entry
+  *constructs* under `entry()` only after four of six required arguments are
+  supplied by the auditor — `confidence` appears nowhere in the delivered
+  entry — and the constructor guards exactly one field, the mechanism token, so
+  constructibility reports on the auditor's willingness to fill rather than on
+  fit. **`UNI_158`:** `Cost location` is a new field with no slot and it is the
+  load-bearing one — the reason nothing counts false refusals is not that
+  counting is hard but that the count would be paid for by the party not
+  bearing the cost. **`UNI_159`:** the cited comparand, the peer review gate,
+  **has no entry in this register** — apt comparison, absent neighbour.
+  **`UNI_163`:** the observed instance is left unadjudicated because this
+  session cannot see the matched span either (requirement three's absence from
+  the other end), with the interest direction stated as running both ways.
   **`coupling_audit/`** is a subfolder added alongside the register's
   material, asking a **different question** and deliberately not adding a
   mechanism. The register asks whether an instrument's constitution
@@ -4643,6 +4677,50 @@ underneath).
   is marked carried-not-verified. 197 selftest
   checks green. Stdlib only, parses under Python 3.9, phone-buildable,
   CC0.
+- `nonidentity-census/` — Work order: measure how much documented work
+  models systems **without a persistent identity-bearing unit**. Delivered
+  `WORK_ORDER.md` verbatim; `BOUNDARY.md` written before the detector and
+  parsed by it, so a decision changed after a run turns the selftest red.
+  **T1 built** (`t1_predicate_unit.py`, stdlib, 3.9, selftest PASS): claim
+  selection by an ordered verb-class rule, subject extraction, then
+  classification. **`T1-1`, the headline: the detector built to escape lexical
+  detection decides 10 of 12 of its own best case by word list** — only
+  `market`, the one unit `BOUNDARY` D2 resolves at the claim, is decided by
+  predicate, and it is decided twice from the same noun, once each way. Every
+  row reports `decided_by`, so the lexical share is a number rather than a
+  caveat. **`T1-2`:** the first null-test run scored **6 of 12** and both
+  causes were defects, not limits — `[a-z]+(?:s|ed)` matched plural nouns so
+  `firms`/`populations`/`households` were read as verbs, and head nouns were
+  taken from inside prepositional phrases; fixed to 12/12, with the first
+  number kept because it is evidence about how the instrument was built.
+  `null-harness`'s classifier returns `OK` on **both** rows, so it does not
+  discriminate a gate that is half wrong — recorded against the harness.
+  **`T1-3`:** the BOUNDARY-to-code transcription check found `state` carrying
+  two opposite calls (nation-state vs steady state) — case `021`'s sense
+  substitution inside this instrument's own vocabulary. **T2 NOT RUN**, and
+  deliberately not approximated: Crossref, OpenAlex and arXiv are all refused
+  by the environment's egress policy (403 CONNECT, timestamps in FINDINGS),
+  and a sample built from search snippets is a frame selected on
+  searchability — `UNI_126`'s failure. The aggregation path is still tested
+  against an inline fixture, and `t2_sample.py --openalex` ships labelled
+  NEVER EXECUTED, warning on stderr. **T3** has no command: it iterates over
+  T2's output. **T4** tested the candidate against all eleven existing
+  mechanisms and **filed nothing**, because its antecedent rests on the
+  unmeasured T2 rate — with the register-relevant result being that
+  **`STORAGE` is the closest fit and is refuted by the detector's own
+  output**, since a non-identity claim in ordinary English classifies fine, so
+  the medium holds the shape. The ordinal is also taken: this would be a
+  **twelfth**, not a ninth. **T5**, separate thread: the answer is not "no
+  such comparison exists" — it exists at **material effect held constant at
+  zero** (minimal-group merger experiments manipulating identity continuity),
+  which is the degenerate case, while the design at matched *non-zero*
+  material loss did not surface in five searches; the negative is weak
+  evidence for the same reason T1 exists, since "hold one term fixed, vary the
+  other" is a predicate structure and structures do not announce themselves
+  lexically. Boundary decisions are reported as a first-class result, and one
+  of them — `population` scored identity-bearing — runs against the work
+  order's own prediction and is kept because the test gives it. Stdlib only,
+  parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

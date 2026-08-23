@@ -3761,3 +3761,171 @@ Worth noting against `UNI_002`, which is still open: the subfolder's three
 entries are food security, national carbon accounting and livestock water
 accounting — three fields — but they are entries in a *different* schema, not
 in `ENTRIES`, so they do not move the register's cross-field check either way.
+
+---
+
+## Case 024 and the scoped-refusal spec
+
+Two delivered files, landed verbatim:
+[`cases/024refusalfalsepositiverate.md`](cases/024refusalfalsepositiverate.md)
+and [`specs/SCOPED_REFUSAL.md`](specs/SCOPED_REFUSAL.md). The spec's
+falsification condition is testable from inside this session and was tested.
+Recorded as `UNI_157..UNI_165`.
+
+**Position of this audit.** The subject is refusals by systems of the class
+this audit is written by. That is declared here rather than at the end, and it
+is acted on in `UNI_163`.
+
+### UNI_157 — the entry constructs, and that is not evidence the schema fits
+
+`entry()` accepts case 024. It accepts it after four of its six required
+arguments are supplied by the auditor rather than read from the entry:
+`visible_as` is recoverable from the "Why it's unmeasured" paragraph but is
+not a section, `would_measure` lives in a **separate file** (the spec),
+`field` is inferable, and `confidence` **does not appear in the delivered
+entry at all**.
+
+The constructor validates one thing: that the mechanism token is in
+`MECHANISMS`. Nothing checks that the other five values came from the source.
+So "it constructs" reports on the auditor's willingness to fill, not on the
+fit — and every prior case in this register that *refused* to construct
+(`UNI_013`, `UNI_020`, `UNI_095`, `UNI_125`) did so on the mechanism token,
+the only field the constructor guards.
+
+The delivered entry's own mechanism line is prose — "same class as the peer
+review gate" — not a `MECHANISMS` token. Filing it under `AUDIT_ASYMMETRY` to
+make it construct is a choice made here, and it is the choice `UNI_003` says
+should be visible as one.
+
+### UNI_158 — two delivered fields with no slot, and one of them is new
+
+`Cost location` and `Observed instance` have no argument in `entry()` and no
+place in the five-field register structure. Eighth distinct schema failure in
+this case family (`UNI_013` mechanism, `UNI_020` cluster, `UNI_021`
+confidence, `UNI_034` one-entry-or-two, `UNI_095` marker, `UNI_125` marker
+relation, `UNI_029` negative provenance, now this).
+
+`Observed instance` is close to the existing `worked_in`. **`Cost location`
+is not close to anything**, and it is doing the load-bearing work in this
+entry: the reason nothing counts the false positives is not that counting is
+hard, it is that the count would be paid for by the party that does not bear
+the cost. `Why it's unmeasured` states the mechanism; `Cost location` states
+who would have to want it measured. The two are different fields and the
+schema has one.
+
+### UNI_159 — the comparand is not in the register
+
+"Same class as the peer review gate" cites a comparison case. **There is no
+peer-review-gate entry in this register** — zero hits across
+`uninstrumented.py` and all 24 case files, other than this entry citing it.
+
+The comparison is apt on its own terms: a rejected-and-correct paper and a
+rejected-and-wrong paper leave the same record, so the gate cannot produce
+its own miss rate. That the class is real is why the citation reads as
+resolvable. It is not resolvable here. `UNI_060`'s shape, on a comparand
+rather than a path — and the cheapest close in this drop is to write the
+peer-review entry, which needs no new apparatus and would give 024 a
+neighbour to be sorted next to.
+
+### UNI_160 — the spec's falsification condition was tested in this session, and it does not fire
+
+The condition: *"if refusals cannot be attributed to an artifact even in
+principle, requirement one is unbuildable and the spec fails."*
+
+A working instance of requirements one, two and three ran here at 22:57Z on
+2026-08-23, produced by a **different gate in the same architecture** — the
+network egress classifier:
+
+| requirement | what the egress gate did |
+|---|---|
+| 1 artifact-level classification | classified per host. `api.crossref.org:443` refused; `github.com` not |
+| 2 continue on refusal | the session continued. Three refusals, no turn lost, everything else processed |
+| 3 return a locator | `{"error_type":"EGRESS_BLOCKED","domain":"api.openalex.org","message":"..."}` — category plus artifact identity, enough to reformulate or drop that input |
+| 4 adjudication channel | **absent** |
+
+It also retains a refusal log: `$HTTPS_PROXY/__agentproxy/status` returns
+`recentRelayFailures`, each with `ts`, `kind`, `detail`, `host`.
+
+So requirement one is **not** unbuildable in principle in this architecture.
+The spec does not fail on its own falsifier. Reported as the falsifier asks —
+the condition was checked, not approximated.
+
+### UNI_161 — the existence proof is on the gate where requirement one is cheap
+
+The egress gate's artifact boundary is **given to it by the protocol**. A
+CONNECT names a host; the unit of classification is handed over before any
+classifying happens. Nothing had to decide what the artifact was.
+
+A safety classifier reading a mixed turn has no such handoff. Choosing the
+artifact — this file, this fetched document, this tool result, this pasted
+block — is not an implementation detail of requirement one, it is
+substantially all of it. `UNI_160` shows the shape is buildable where the
+boundary arrives for free. It does not show it is buildable where the
+boundary is the problem, and nothing in this session touches the safety
+classifier's scope.
+
+### UNI_162 — the working instance is missing exactly the requirement that produces the rate
+
+The spec says requirement four "is what makes requirement one measurable at
+all." The egress gate has one, two and three, and no contested mark. So
+`recentRelayFailures` has the property case 024 describes, at smaller scope:
+three refusals are logged as **events**, none as **outcomes**, and nothing
+downstream establishes which were correct.
+
+Two of those three probably were correct by policy and one is the operator's
+to judge — and there is no field to put that judgement in. The existence
+proof therefore covers the three requirements that do not produce the missing
+rate, and not the one that does. That is the sharper reading of `UNI_160`: the
+architecture supports the cheap three, and the absence of the fourth is not
+explained by unbuildability.
+
+### UNI_163 — the observed instance is not adjudicated here, and the reason is not modesty
+
+Case 024's instance — a sociology word-embedding audit stopped under
+"sensitive biology topics", input containing no biology — is
+**not adjudicated by this audit**. Not because it is unverifiable from the
+operator side, which the entry already says, but because it is equally
+unverifiable from here: this session has no access to the classifier's matched
+span either, which is requirement three's absence observed from the other end.
+
+Interest direction, stated rather than assumed. It runs both ways. A register
+entry counting false refusals raises scrutiny on the class of system writing
+it; it is also a comfortable claim for such a system, because "the gate was
+wrong" is a more flattering account of a stopped session than the
+alternatives. Neither direction dominates, so per `UNI_132` the instance is
+left unresolved on the evidence rather than resolved in either comfortable
+direction.
+
+What *is* checkable and is recorded: the entry's structural claim — a true
+positive and a false positive are the same record — is instanced by
+`recentRelayFailures` in `UNI_162`, on a gate whose logs this session can
+read.
+
+### UNI_164 — the spec is the register's first `WOULD MEASURE` shipped as its own file
+
+Every prior case carries `WOULD MEASURE` as a line, a paragraph, or the
+refusal to write one. This one carries a four-requirement spec with a
+falsification condition, in a separate file, with the case cited as its
+motivating instance rather than the reverse.
+
+That inverts the usual dependency: the case is the occasion, the spec is the
+artifact, and the spec is falsifiable independently of whether the observed
+instance was a false positive. `UNI_160` is what that buys — the spec could be
+tested here while the instance could not.
+
+### UNI_165 — the census declines to file a twelfth mechanism, and the reason is a precondition
+
+The non-identity framings census landed at
+[`../nonidentity-census/`](../nonidentity-census/). Its T4 asked whether "a
+unit of analysis the corpus cannot express" needs a new mechanism, tested it
+against all eleven, and **filed nothing**, because T4's antecedent ("if the
+rate is near-zero") rests on T2, and T2 did not run — the bulk abstract APIs
+are refused by the same egress gate as `UNI_160`.
+
+The register-relevant result is the one that did not need the rate:
+**`STORAGE` is the closest existing mechanism and is refuted by the
+detector's own output.** `Results show that allocation proceeds without any
+central coordinator` is ordinary English, classified `NON_IDENTITY`, and
+needed no new construction. The medium holds the shape. Whatever is going on
+is not that the corpus cannot carry a non-carrier subject, which is the entry
+anyone would have written first.

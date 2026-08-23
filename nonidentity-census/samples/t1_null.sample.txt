@@ -1,0 +1,7 @@
+NULL TEST
+  known-signal recovered : 12/12
+  known-null fired       : 0/5
+  fail class             : OK
+  ground truth authored by the same party as the classifier;
+  this is internal consistency, not validity (TP_003).
+SELFTEST PASS (0 checks failed)
