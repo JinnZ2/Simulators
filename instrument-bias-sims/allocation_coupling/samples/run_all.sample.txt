@@ -66,26 +66,30 @@ S10 -- ALLOCATION COUPLING (runner)
 
 ------------------------------------------------------------------------
 
-  PHASE 3 -- difference attributed per link
+  PHASE 3 -- the residual first
 
-  uncoupled total assessed 3.77
-  coupled total assessed   2.96
-  total effect             -0.81
+  RESIDUAL (interaction)      +0.64
+  as a share of the effect    0.791
+  total effect                -0.81
+  uncoupled / coupled         3.77 / 2.96
+  decomposition is additive   False
 
-  link                         contribution alone
-  M1 hours -> M2               -0.20
-  M1 blocks -> M2              -1.26
-  position -> M4 writing       -0.00
-  sum of the three             -1.45
-  RESIDUAL (interaction)       +0.64
-  residual as share of effect  0.791
-  decomposition is additive    False
+  PER-LINK TABLE: REFUSED
+    The residual exceeds these links individually: M1 hours -> M2,
+    position -> M4 writing. A per-link table is not printed. An
+    annotation under a table does not undo the table -- the rows are
+    the claim, and rows whose sum is further from the truth than the
+    truth is from zero mislead in a way a footnote cannot repair.
+
+    link magnitudes, unranked, for the record:
+      |M1 blocks -> M2| = 1.26
+      |M1 hours -> M2| = 0.20
+      |position -> M4 writing| = 0.00
 
   the spec asks for per-link attribution BECAUSE the finding is in the
   cross-terms, and a per-link table is exactly the object that cannot
-  hold a cross-term. The residual is reported alongside; a table
-  without it would assign the interaction to whichever link was listed
-  last
+  hold one. Where the residual exceeds any single link the table is not
+  printed at all
 
 ------------------------------------------------------------------------
 
@@ -113,11 +117,11 @@ S10 -- ALLOCATION COUPLING (runner)
 
   WHERE IT BREAKS
     - A PER-LINK TABLE CANNOT REPRESENT A CROSS-TERM, which is the
-    thing the spec says the finding is in. Leave-one-in contributions
-    sum to the additive part only; the residual is the interaction and
-    it is reported separately rather than distributed across the links.
-    Any attribution that omits it silently assigns the interaction to
-    whichever link is listed last
+    thing the spec says the finding is in -- so where the residual
+    exceeds any single link, THE TABLE IS NOT PRINTED. The first
+    version printed it with an annotation underneath; an annotation
+    does not undo a table, because the rows are the claim. The residual
+    now prints first and the links only as unranked magnitudes
     - leave-one-in is one of several decompositions and they disagree.
     Leave-one-OUT would give different per-link numbers on the same
     model, and a Shapley value a third set. None is more correct; they

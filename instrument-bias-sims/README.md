@@ -96,9 +96,30 @@ before rather than quietly fixing it.
   encodes. Geometry changes annually where mass does not; `GEOMETRY_DELTA` is
   now separate and stipulated.
 
+## The excluded subject
+
+[`excluded_subject.py`](excluded_subject.py) — its own entry, not a note per
+module, because it is four instances of one shape. A sim built to measure how
+a position is excluded turns out to have **no representation for the position
+it is about**. Not a wrong value — no slot.
+
+| sim | missing | excluded at |
+|---|---|---|
+| S4 | the doe | derivation |
+| S9 | the filtering agent | derivation *(declared; the blank is the finding)* |
+| S10 | the untenured continuous observer | derivation |
+| S10/M4 | a position high on generation **and** writing | the five-row list |
+
+**A declared blank is a disclosure. An unreachable agent is the failure.** S9's
+blank is correct and is its point; S10's is a limit on what the module set can
+say. Same rendering, two states, and the entry keeps them apart. Three of the
+four were found by an outside reader, not by the scan — which is the scan's own
+limit, since it detects *declared* blanks and every instance started as an
+absence nobody had declared.
+
 ## Cross-cutting rules, enforced
 
-`crosscutting.py` checks the four rules over the eight modules rather than
+`crosscutting.py` checks five rules over fifteen modules rather than
 restating them:
 
 1. no moral labels in any data structure — **scanned**
@@ -106,6 +127,15 @@ restating them:
    cost asymmetry, whether the aggregate steers) — **scanned**
 3. confidence as a separate readout, not resolved — **structural, enforced**
 4. this README states *marker under exploration* — **checked**
+5. a readout comparing correlations compares **signed** values, never
+   `abs()` — **AST check, structural**
+
+Rule 5 was earned from S10/M4, where a readout compared |r| only and reported
+"tracks generated observations" for a correlation of **−0.85**. Added as an AST
+check, it immediately found **a second instance in S9** that nobody had
+noticed. Rule 2 then rejected the first draft of `excluded_subject.py` — the
+module written to catalogue this class of defect — for the phrase "built that
+way on purpose".
 
 The checker is null-tested on a planted violation, so none of the three module
 checks is silent by construction. Its own limit is stated at the top of the

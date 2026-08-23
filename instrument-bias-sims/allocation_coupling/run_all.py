@@ -109,6 +109,12 @@ def phase3():
                          "alone": total_assessed(run(**kw)) - b})
     additive = sum(c["alone"] for c in contribs)
     residual = total_effect - additive
+    # The table is REFUSED when |residual| exceeds any single link. An
+    # annotation under a table does not undo the table: the rows are the
+    # claim, and a residual larger than a link makes them misleading in a
+    # way a footnote cannot repair.
+    exceeded = [c["link"] for c in contribs
+                if abs(residual) > abs(c["alone"])]
     return {"baseline": b, "coupled": f, "total_effect": total_effect,
             "contributions": contribs, "additive_sum": additive,
             "residual": residual,
@@ -116,11 +122,13 @@ def phase3():
             if total_effect else None,
             "additive": abs(residual) < 0.1 * abs(total_effect)
             if total_effect else True,
+            "table_refused": bool(exceeded),
+            "links_smaller_than_residual": exceeded,
             "why": "the spec asks for per-link attribution BECAUSE the "
                    "finding is in the cross-terms, and a per-link table is "
-                   "exactly the object that cannot hold a cross-term. The "
-                   "residual is reported alongside; a table without it would "
-                   "assign the interaction to whichever link was listed last"}
+                   "exactly the object that cannot hold one. Where the "
+                   "residual exceeds any single link the table is not "
+                   "printed at all"}
 
 
 def confidence():
@@ -136,11 +144,11 @@ def confidence():
 def breaks():
     return [
         "A PER-LINK TABLE CANNOT REPRESENT A CROSS-TERM, which is the thing "
-        "the spec says the finding is in. Leave-one-in contributions sum to "
-        "the additive part only; the residual is the interaction and it is "
-        "reported separately rather than distributed across the links. Any "
-        "attribution that omits it silently assigns the interaction to "
-        "whichever link is listed last",
+        "the spec says the finding is in -- so where the residual exceeds "
+        "any single link, THE TABLE IS NOT PRINTED. The first version "
+        "printed it with an annotation underneath; an annotation does not "
+        "undo a table, because the rows are the claim. The residual now "
+        "prints first and the links only as unranked magnitudes",
         "leave-one-in is one of several decompositions and they disagree. "
         "Leave-one-OUT would give different per-link numbers on the same "
         "model, and a Shapley value a third set. None is more correct; they "
@@ -216,20 +224,34 @@ def report():
     L.append("-" * 72)
     L.append("")
     p3 = phase3()
-    L.append("  PHASE 3 -- difference attributed per link")
+    L.append("  PHASE 3 -- the residual first")
     L.append("")
-    L.append("  uncoupled total assessed %.2f" % p3["baseline"])
-    L.append("  coupled total assessed   %.2f" % p3["coupled"])
-    L.append("  total effect             %+.2f" % p3["total_effect"])
+    L.append("  RESIDUAL (interaction)      %+.2f" % p3["residual"])
+    L.append("  as a share of the effect    %.3f" % p3["residual_share"])
+    L.append("  total effect                %+.2f" % p3["total_effect"])
+    L.append("  uncoupled / coupled         %.2f / %.2f"
+             % (p3["baseline"], p3["coupled"]))
+    L.append("  decomposition is additive   %s" % p3["additive"])
     L.append("")
-    L.append("  %-28s %s" % ("link", "contribution alone"))
-    for c in p3["contributions"]:
-        L.append("  %-28s %+.2f" % (c["link"], c["alone"]))
-    L.append("  %-28s %+.2f" % ("sum of the three", p3["additive_sum"]))
-    L.append("  %-28s %+.2f" % ("RESIDUAL (interaction)", p3["residual"]))
-    L.append("  %-28s %.3f" % ("residual as share of effect",
-                               p3["residual_share"]))
-    L.append("  %-28s %s" % ("decomposition is additive", p3["additive"]))
+    if p3["table_refused"]:
+        L.append("  PER-LINK TABLE: REFUSED")
+        L.extend(SH.wrap("The residual exceeds these links individually: %s. "
+                         "A per-link table is not printed. An annotation "
+                         "under a table does not undo the table -- the rows "
+                         "are the claim, and rows whose sum is further from "
+                         "the truth than the truth is from zero mislead in a "
+                         "way a footnote cannot repair."
+                         % ", ".join(p3["links_smaller_than_residual"]),
+                         "    "))
+        L.append("")
+        L.append("    link magnitudes, unranked, for the record:")
+        for c in sorted(p3["contributions"], key=lambda c: -abs(c["alone"])):
+            L.append("      |%s| = %.2f" % (c["link"], abs(c["alone"])))
+    else:
+        L.append("  %-28s %s" % ("link", "contribution alone"))
+        for c in p3["contributions"]:
+            L.append("  %-28s %+.2f" % (c["link"], c["alone"]))
+        L.append("  %-28s %+.2f" % ("sum of the links", p3["additive_sum"]))
     L.append("")
     L.extend(SH.wrap(p3["why"], "  "))
     L.append("")
@@ -282,8 +304,16 @@ def selftest():
        "the spec says the finding is in", p3["additive"] is False)
     ck("and the residual is a material share of the effect",
        p3["residual_share"] > 0.1)
-    ck("the residual is reported rather than distributed across the links",
-       "residual" in p3 and "reported separately" in breaks()[0])
+    ck("the table is REFUSED, because the residual exceeds at least one "
+       "link", p3["table_refused"] is True)
+    ck("and the links it exceeds are named",
+       len(p3["links_smaller_than_residual"]) > 0)
+    flat0 = " ".join(report().split())
+    ck("no per-link contribution table is printed when refused",
+       "PER-LINK TABLE: REFUSED" in flat0
+       and "contribution alone" not in flat0)
+    ck("the residual prints before any link number",
+       flat0.index("RESIDUAL") < flat0.index("link magnitudes"))
     ck("the decomposition choice is disclosed as one of several",
        any("Leave-one-OUT" in b for b in breaks()))
 

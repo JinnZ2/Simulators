@@ -97,6 +97,9 @@ def gradient(hours_worked=8.0):
     t = table(hours_worked)
     r = _corr([x["wage"] for x in t], [x["kcal_expended"] for x in t])
     return {"correlation_wage_vs_kcal": r,
+            "n": len(t),
+            "weighting": "UNWEIGHTED",
+            "labelled": "%+.3f (n=%d, UNWEIGHTED)" % (r, len(t)),
             "direction": "against energy draw" if r < 0
             else "with energy draw" if r > 0 else "flat",
             "cognitive_share_range":
@@ -171,9 +174,12 @@ def breaks():
         "left None rather than estimated, because an estimate would enter "
         "the correlation and could not be told apart from a measurement",
         "THE CORRELATION SIGN IS A PROPERTY OF THE POSITION LIST. Adding two "
-        "high-wage high-expenditure positions flips it. What would settle it "
-        "is the population weight of such positions, which is not "
-        "represented here",
+        "high-wage high-expenditure positions flips it, and population "
+        "weight is unrepresented -- so this is not a result about "
+        "compensation, it is a result about which five positions were typed "
+        "in. B3, applied: n and UNWEIGHTED now print on the same line as the "
+        "correlation so the number cannot travel without them. The fix is "
+        "labelling, not modelling",
         "kcal_replaced_by_wage uses a flat conversion, so the replacement "
         "ratio is a restatement of the wage and carries no information the "
         "wage column does not",
@@ -204,9 +210,15 @@ def report():
                     else r["sensory_integration_load"]))
     L.append("")
     g = gradient()
-    L.append("  correlation, wage vs kcal expended: %+.3f"
-             % g["correlation_wage_vs_kcal"])
+    L.append("  correlation, wage vs kcal expended: %s" % g["labelled"])
     L.append("  the compensation gradient runs %s" % g["direction"])
+    L.append("")
+    L.extend(SH.wrap("B3: n and UNWEIGHTED print on the same line as the "
+                     "number, so it cannot travel without them. This is a "
+                     "result about which five positions were typed in, not "
+                     "about compensation. The [BLANK] handling on the "
+                     "sensory term below is the template the rest of this "
+                     "module should follow.", "  "))
     L.append("  cognitive share of daily total: %.2f%% to %.2f%%"
              % (100 * g["cognitive_share_range"][0],
                 100 * g["cognitive_share_range"][1]))
@@ -261,6 +273,10 @@ def selftest():
     g = gradient()
     ck("the compensation gradient runs against energy draw on this list",
        g["correlation_wage_vs_kcal"] < -0.5)
+    ck("B3: n and the weighting travel with the number, on one line",
+       "n=5" in g["labelled"] and "UNWEIGHTED" in g["labelled"])
+    ck("B3: and the labelled form appears in the report",
+       g["labelled"] in report())
     ck("and the direction is reported as a graded term, not a verdict",
        g["direction"] in ("against energy draw", "with energy draw", "flat"))
 

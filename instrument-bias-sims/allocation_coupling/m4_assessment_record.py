@@ -30,6 +30,17 @@ import s9_corpus_position_filter as S9                          # noqa: E402
 
 # Position vectors in S9's axis space, one per M1 position. Stipulated, and
 # the mapping is the join between the two modules.
+#
+# B1, checked. p_write IS specified on its own axes -- supply_assumption,
+# time_to_writing_station, reward_structure -- and does NOT read the wage or
+# block count that drive generation. So this is not S4's rank dictionary: the
+# two mappings are separate functions of separate inputs.
+#
+# It fails the separator anyway. Both dictionaries were hand-assigned in the
+# same position ordering, so the mapping admits NO position with high
+# generation and high writing probability, and the -0.99 is a CONSTRAINT that
+# was typed in rather than a correlation the model produced. See
+# admissibility_check() and RESIDENT_WRITER.
 S9_POSITION = {
     "desk_professional": {"supply_assumption": 0.92,
                           "time_to_writing_station": 0.95,
@@ -47,6 +58,53 @@ S9_POSITION = {
                    "time_to_writing_station": 0.15,
                    "reward_structure": 0.08},
 }
+
+
+# The position the five-row mapping cannot express: someone resident (low
+# supply assumption, continuous presence, so high generation) who is ALSO
+# compensated to write and near a station. A station scientist, a resident
+# researcher, a paid observer. Not exotic -- absent.
+RESIDENT_WRITER = {"supply_assumption": 0.25,
+                   "time_to_writing_station": 0.85,
+                   "reward_structure": 0.85}
+
+
+def admissibility_check(demo, threshold_gen=100.0, threshold_p=0.5):
+    """B1's separator: does the mapping admit high generation AND high
+    p_write?
+
+    If it does not, the -0.99 is a constraint and should print as one.
+    """
+    hi_gen = [n for n, g in demo.items() if g >= threshold_gen]
+    both = [n for n in hi_gen if writing_probability(n) >= threshold_p]
+    return {"high_generation_positions": hi_gen,
+            "of_those_also_high_p_write": both,
+            "max_p_write_among_high_generation":
+                max([writing_probability(n) for n in hi_gen] or [0.0]),
+            "mapping_admits_the_separator": bool(both),
+            "reads_the_same_inputs_as_generation": False,
+            "verdict": "CONSTRAINT, not a correlation" if not both
+                       else "correlation; the separator is admitted",
+            "why": "p_write is a function of supply assumption, station "
+                   "distance and reward. Generation is a function of wage "
+                   "and block count. Different inputs, so this is not the "
+                   "S4 rank-dictionary defect -- but both dictionaries were "
+                   "hand-assigned in one ordering, so no row is high on "
+                   "both and the anti-correlation was assembled rather than "
+                   "measured"}
+
+
+def with_resident_writer(demo, generation=125.0):
+    """Add the missing position and re-run. Does the inversion survive?"""
+    rows = [assess(p["position"], demo[p["position"]]) for p in M1.POSITIONS]
+    p = S9.p_write(RESIDENT_WRITER)
+    rows = rows + [{"position": "resident_writer",
+                    "observations_generated": generation,
+                    "writing_probability": p,
+                    "record_present": generation * p,
+                    "assessed_contribution": generation * p,
+                    "assessment_ratio": p}]
+    return {"rows": rows, "readout": merit_vs_writing_time(rows)}
 
 
 def writing_probability(position_name):
@@ -121,12 +179,18 @@ def breaks():
         "M1 positions are hand-assigned three S9 axis values each, and every "
         "downstream number moves with those fifteen stipulated numbers. "
         "Nothing measures them and nothing constrains them beyond ordering",
-        "GENERATION AND WRITING PROBABILITY ARE ANTI-CORRELATED AT -0.99 "
-        "IN THIS MAPPING, so the assessed score cannot separate them and no "
-        "scoring rule reading only the record could. That is an "
-        "identifiability limit, not an assessor defect, and it means the "
-        "module cannot distinguish the spec's mechanism from any other "
-        "mechanism producing the same anti-correlation",
+        "THE -0.99 IS A CONSTRAINT THAT WAS TYPED IN, NOT A CORRELATION "
+        "THAT WAS MEASURED. p_write is a function of supply assumption, "
+        "station distance and reward; generation is a function of wage and "
+        "block count -- different inputs, so this is NOT the S4 "
+        "rank-dictionary defect. But both dictionaries were hand-assigned "
+        "in one ordering, the mapping admits no position that is high on "
+        "both, and adding one such position moves the number materially. "
+        "The inversion is a property of which five rows were typed in",
+        "and the row that breaks it -- a resident who is also compensated "
+        "to write -- is one the mapping had no slot for. Same shape as the "
+        "blank agent, one level down: the five-row list excluded the "
+        "position that would have refuted the finding",
         "the assessor is generated x p_write, so 'the assessment tracks "
         "writing probability' is partly definitional. What is not "
         "definitional is the SIGN against generation, which is what the "
@@ -159,6 +223,24 @@ def report():
                     r["writing_probability"], r["record_present"],
                     r["assessment_ratio"]))
     L.append("")
+    ac = admissibility_check(demo)
+    L.append("  B1 -- IS THE ANTI-CORRELATION MEASURED OR TYPED IN?")
+    L.append("")
+    L.append("    p_write reads the same inputs as generation : %s"
+             % ac["reads_the_same_inputs_as_generation"])
+    L.append("    high-generation positions                   : %s"
+             % ", ".join(ac["high_generation_positions"]))
+    L.append("    of those, also high p_write                 : %s"
+             % (", ".join(ac["of_those_also_high_p_write"]) or "NONE"))
+    L.append("    max p_write among them                      : %.3f"
+             % ac["max_p_write_among_high_generation"])
+    L.append("    verdict                                     : %s"
+             % ac["verdict"])
+    L.append("")
+    L.extend(SH.wrap(ac["why"], "    "))
+    L.append("")
+    L.append("-" * 72)
+    L.append("")
     mv = merit_vs_writing_time(rows)
     L.append("  correlation with generated observations : %+.3f"
              % mv["corr_with_generated"])
@@ -182,6 +264,35 @@ def report():
                      "correlation of minus 0.85. The sign is the finding and "
                      "the magnitude comparison lost it; three states are now "
                      "separated.", "  "))
+    L.append("")
+    wr = with_resident_writer(demo)
+    L.append("  ADDING THE POSITION THE MAPPING CANNOT EXPRESS")
+    L.append("")
+    L.extend(SH.wrap("A resident writer: low supply assumption and "
+                     "continuous presence, so high generation, AND "
+                     "compensated and near a station, so high p_write. A "
+                     "station scientist or a paid resident observer. Not "
+                     "exotic -- absent from the five rows.", "    "))
+    L.append("")
+    L.append("    p_write for that position               : %.3f"
+             % S9.p_write(RESIDENT_WRITER))
+    L.append("    corr with generation, 5 rows            : %+.3f"
+             % mv["corr_with_generated"])
+    L.append("    corr with generation, 6 rows            : %+.3f"
+             % wr["readout"]["corr_with_generated"])
+    L.append("    generation vs p_write, 5 rows           : %+.3f"
+             % mv["corr_generation_vs_writing"])
+    L.append("    generation vs p_write, 6 rows           : %+.3f"
+             % wr["readout"]["corr_generation_vs_writing"])
+    L.append("    readout, 6 rows                         : %s"
+             % wr["readout"]["tracks"])
+    L.append("")
+    L.extend(SH.wrap("One added row moves the constraint materially. The "
+                     "inversion is therefore a property of WHICH FIVE "
+                     "POSITIONS WERE TYPED IN, not of the coupling -- and "
+                     "the row that breaks it is one the five-row mapping "
+                     "had no slot for, which is the same shape as the blank "
+                     "agent in agents.py.", "    "))
     L.append("")
     L.extend(SH.wrap(mv["note"] + ". So the assessor is not the thing to "
                      "fix here -- with generation and writing probability "
@@ -229,8 +340,26 @@ def selftest():
        "writing probability",
        mv["corr_with_generated"] < 0 < mv["corr_with_writing_probability"])
     ck("generation and writing probability are themselves strongly "
-       "anti-correlated, which is why the two cannot be separated here",
+       "anti-correlated on the five rows",
        mv["corr_generation_vs_writing"] < -0.8)
+
+    # B1
+    ac = admissibility_check(demo)
+    ck("B1: p_write does NOT read the inputs that drive generation, so this "
+       "is not the S4 rank-dictionary defect",
+       ac["reads_the_same_inputs_as_generation"] is False)
+    ck("B1: and the mapping admits NO position high on both, so the -0.99 "
+       "is a constraint that was typed in",
+       ac["mapping_admits_the_separator"] is False
+       and ac["verdict"].startswith("CONSTRAINT"))
+    wr = with_resident_writer(demo)
+    ck("B1: one added position that IS high on both flips the sign of the "
+       "correlation with generation",
+       mv["corr_with_generated"] < -0.5
+       < wr["readout"]["corr_with_generated"])
+    ck("B1: so the inversion is a property of which five rows were typed "
+       "in, not of the coupling",
+       wr["readout"]["tracks"] != "INVERTS generation")
     ck("and that is reported as an identifiability limit rather than as an "
        "assessor defect", mv["identifiable"] is False)
 

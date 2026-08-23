@@ -43,19 +43,18 @@ The spec's own reason for splitting into modules is that *"the finding is in
 the cross-terms"* — and a per-link table is exactly the object that cannot
 represent a cross-term.
 
-| link | contribution alone |
+| | |
 |---|---|
-| M1 hours → M2 | −0.20 |
-| M1 blocks → M2 | −1.26 |
-| position → M4 writing | −0.00 |
-| **sum of the three** | **−1.45** |
-| **total effect** | **−0.81** |
 | **RESIDUAL (interaction)** | **+0.64** |
+| as a share of the effect | **0.791** |
+| total effect | −0.81 |
+| per-link table | **REFUSED** |
 
-**The residual is 79% of the total effect.** The three links sum to nearly
-twice the actual difference. A table printed without the residual row would
-assign that interaction to whichever link was listed last. Reported alongside,
-never distributed.
+**The residual is 79% of the total effect**, and the table is now **refused**
+rather than annotated. Where `|residual|` exceeds any single link, no per-link
+table prints — the residual comes first and the links appear only as unranked
+magnitudes. An annotation under a table does not undo the table: the rows are
+the claim.
 
 Leave-one-in is also one decomposition among several — leave-one-out and
 Shapley give different per-link numbers on the same model. None is more
@@ -72,20 +71,34 @@ correct; they answer different questions, and the spec doesn't say which.
   compared |r| only and reported "tracks generated observations" for a
   correlation of minus 0.85. The sign was the finding and the magnitude
   comparison lost it.)*
-- **And it cannot be fixed at the assessor.** Generation and writing
-  probability are anti-correlated at **−0.99** in this mapping, so no scoring
-  rule reading only the record can separate them. An identifiability limit of
-  the same shape as S2's one-arm protocol: the fix is a second observable, not
-  a better estimator.
+- **CORRECTED — the −0.99 was a constraint, not a correlation.** Checked
+  against the separator: `p_write` is a function of supply assumption, station
+  distance and reward, while generation is a function of wage and block count.
+  Different inputs, so this is **not** S4's rank-dictionary defect. But both
+  dictionaries were hand-assigned in one ordering, so **the mapping admits no
+  position high on both** — and adding one (a resident who is also compensated
+  to write; a station scientist) moves the correlation with generation from
+  **−0.853 to +0.107**. The inversion was a property of which five rows were
+  typed in. The row that breaks it is one the mapping had no slot for, which is
+  the blank-agent shape one level down.
 - **M2's prediction is a parameter band, not a fact.** The fragmentation
-  penalty is unmeasured, as the spec says. Swept, it turns out the two halves
-  of the prediction fail for *different reasons*: deep types die from the
-  **window requirement**, which doesn't involve the penalty exponent at all,
-  while level survival is what the exponent controls.
-- **M3's correlation sign is a property of the position list.** Wage runs
-  against energy draw at −0.93 here; adding two high-wage high-expenditure
-  positions flips it. What would settle it is the population weight of such
-  positions, which nothing here represents.
+  penalty is unmeasured, as the spec says. Swept, the two halves fail for
+  *different reasons*: deep types die from the **window requirement**, which
+  doesn't involve the penalty exponent at all.
+- **The zero-everywhere result now has a null.** Scaling the window
+  requirement down, deep observations become nonzero at **scale 0.25** — so the
+  window is meetable and the zero is a property of the setting, not a
+  hard-coded gate. Grade `OK`, not `CONSTANT_SILENT`.
+- **Equal-block splitting is now swept, not just disclosed — and it is what
+  *produces* the zero.** At the same total hours and the same block count,
+  putting a fraction into one long stretch makes `sequence` reachable at
+  unevenness 0.25 and all four types at 0.95. Not a small bias toward the
+  prediction; the mechanism behind it.
+- **M3's correlation sign is a property of the position list**, and now says
+  so on the same line as the number: **−0.883 (n=5, UNWEIGHTED)**. Adding two
+  high-wage high-expenditure positions flips it. This is not a result about
+  compensation; it is a result about which five positions were typed in. The
+  fix is labelling, not modelling.
 
 ## Known gaps, left visible
 
