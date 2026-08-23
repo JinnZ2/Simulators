@@ -1,8 +1,7 @@
 # Simulators
 
 CC0 simulators and audits grounded in physics. **Index only** — detail in
-[`docs/FOLDER_NOTES.md`](docs/FOLDER_NOTES.md) (kept, not loaded) and each
-folder's `README.md`.
+[`docs/FOLDER_NOTES.md`](docs/FOLDER_NOTES.md) and each folder's `README.md`.
 
 ## Spine — read in order
 
@@ -10,7 +9,7 @@ folder's `README.md`.
 - `PROTOCOL.md` — the baseline as a protocol; Model/Reality Dissonance
 - `BNRAM_STRICT.md` — Bias-Neutralization & Reality-Audit Module v2.0
 - `PVL.md` — Phenomenological Validation Layer; inverse audit
-- `CASE_STUDY_NARRATIVE_INSTINCT.md` — the substitution test, empirical record
+- `CASE_STUDY_NARRATIVE_INSTINCT.md` — substitution test, empirical record
 - `SYNTHESIS.md` — cross-folder reading order
 
 ## Folders
@@ -80,12 +79,13 @@ folder's `README.md`.
 - `derivation-discarded/` — the structure is the only copy of
 - `simulation-hypothesis-budget/` — what a Planck sim would cost
 - `instrument-bias-sims/` — nine sims + a module set on
+- `handoff-provenance/` — the channel between talk and code
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — validators, gate-drift check
 
 ## Reconciliation and conventions
 
-Checked 2026-08-23: all 67 folders above exist and are pushed on this branch,
-so there is no `docs/ARCHIVE_NOTES.md`. Working branch
-`claude/new-folder-um2xra`. Standard library only; folders marked
-*(non-stdlib)* ship a `requirements.txt`. Each folder ships `samples/`.
+Checked 2026-08-23: all 68 folders above exist and are pushed on this
+branch, so there is no `docs/ARCHIVE_NOTES.md`. Branch
+`claude/new-folder-um2xra`. Stdlib only; folders marked *(non-stdlib)*
+ship a `requirements.txt`. Each folder ships `samples/`.

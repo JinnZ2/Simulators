@@ -1,0 +1,45 @@
+HANDOFF DIFF -- carried, dropped, added
+========================================================================
+
+  THE MATCHER, GRADED BEFORE IT IS USED
+
+  threshold    true carried     false carried    grade
+  0.20         1.00             0.00             OK
+  0.35         1.00             0.00             OK
+  0.50         1.00             0.00             OK
+  0.55         1.00             0.00             OK
+  0.70         0.50             0.00             OK
+  0.85         0.25             0.00             NO_DISCRIMINATION
+
+  shipped threshold 0.55 -> OK
+
+  A DROPPED count from an ungraded matcher is not a
+  measurement. The grade prints beside the count, always.
+
+------------------------------------------------------------------------
+
+  CARRIED IS SPLIT BY CONFIRMATION STATE
+
+    CARRIED              [K] entry found in the code
+    CARRIED_UNCONFIRMED  [K?] entry found in the code
+
+    The second is not evidence. The voice-layer failure mode
+    is a ledger holding a mangled transcription while the
+    diff reads CARRIED, and no matcher can see that. The
+    split does not detect it; it refuses to count it.
+
+------------------------------------------------------------------------
+
+  A NEGATED ENTRY IS REFUSED, NOT SCORED
+
+    true negated 1.00   false negated 0.00   OK
+
+    the real case that produced this:
+      'remove unused rng and statistics import'
+      share 1.00   matched None   state NEGATED
+
+    Maximum share, and the import it asks to remove is
+    absent. For an entry asking for an absence, presence of
+    its stems is evidence AGAINST it. matched is None -- the
+    instrument could not read the entry, which is a
+    different state from reading it and finding nothing.

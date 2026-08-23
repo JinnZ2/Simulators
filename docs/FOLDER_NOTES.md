@@ -4561,6 +4561,74 @@ is pushed on this branch — see the reconciliation note in `CLAUDE.md`.
   is marked carried-not-verified. 273 selftest
   checks green. Stdlib only, parses under Python 3.9, phone-buildable,
   CC0.
+- `handoff-provenance/` — **Marker under exploration.** The object under
+  test is the **channel between conversation and code**, not either
+  endpoint: loss across it is currently silent, because a variable
+  stated aloud and absent from the code is indistinguishable from one
+  never stated. `SPEC_V0_1.md` delivered verbatim; four stdlib modules
+  audit it. **`provenance.py`** holds six tags — `[K]` operator-stated,
+  `[K?]` operator-stated per the ledger but NOT confirmed, `[R]`
+  repo-derived with a path, `[C]` proposed and not objected to, `[A]`
+  proposed and explicitly accepted, `[X]` the downstream model's own
+  addition — with `[C]`/`[A]` separate because **silence is not
+  acceptance**, the same rule as `inverseminar/`'s `unprobed` verdict.
+  The spec's "written BEFORE the spec prose, not extracted after" is
+  **enforced rather than stated**: `seal()` freezes a ledger and `add()`
+  afterwards raises `SealError`, because a ledger extracted from
+  finished prose cannot fail. **`diff.py`** grades its own matcher
+  before trusting it — a DROPPED count from an ungraded matcher is not
+  a measurement, and `measurement-fork/` already showed a stem matcher
+  failing in opposite directions on two real corpora — and **splits
+  CARRIED**, since a matched `[K?]` is the spec's fourth failure mode
+  (mangled transcription, wrong version in both ledger and code, diff
+  reads CARRIED) which no matcher can see; the split does not detect
+  it, it refuses to count it. **`excluded_register.py`** logs
+  EXCLUDED-BY-CONSTRUCTION in one place per the spec, **importing**
+  `instrument-bias-sims/excluded_subject.py` rather than duplicating —
+  and finds that **the spec's count of three is reached by two routes
+  naming different instances**: derivation-level gives S4/S9/S10,
+  ontology-refusal gives S4/S10/S10-M4, S9 dropping out because nothing
+  filters there by design and its empty slot is a correct
+  representation rather than a refusal. Both printed; neither picked,
+  since picking would settle a question about what the category means
+  by arithmetic. **`ledgers/seed.py`, the headline it cannot
+  establish:** the spec names S4's doe-choice arm DROPPED, DROPPED
+  requires the item to have been stated upstream, and **this side of
+  the channel has no access to the conversation upstream of a delivered
+  work order** — the received S4 order contained no doe and the patch
+  said "was missing entirely", which is consistent with DROPPED and
+  equally with never-stated. So every operator-stated seed entry lands
+  `[K?]`, `drop_rate` is `None` rather than zero, and the fourth
+  failure mode is **instanced on the first real data rather than
+  avoided**. **The sixth entry broke the matcher.** `remove unused rng
+  and statistics import` matched the delivered S4 code at share
+  **1.00**, the matcher's maximum, while `import statistics` is
+  **absent** from that file — the words survive in the prose describing
+  the removal. For an entry asking that something be taken OUT,
+  presence of its stems is evidence it was DROPPED, so the matcher does
+  not mis-score a negated entry, it **inverts** it, at full confidence.
+  The entry was left unchanged and the instrument changed instead:
+  `match()` returns `matched=None` with state `NEGATED` and `diff()`
+  routes it to `UNSCORABLE_NEGATED`, out of both counts and out of the
+  rate denominator — `None` is not `False`, "the instrument cannot read
+  this entry" being a different state from "the item is absent from the
+  code". That is the repo's recurring absent-vs-known-negative repair,
+  whose running count stood at twelve, forced here by **one real ledger
+  line out of six** after all eight hand-written matcher fixtures had
+  been positive entries. The negation detector is itself graded on four
+  and four, since one that never fires restores the inversion silently,
+  and its limit is disclosed: it is a cue list, and *"the module runs
+  on two arms rather than a constant"* asks for a removal, carries no
+  cue, and is scored as positive. Not measured, per the spec's own
+  OPEN: no baseline drop rate (zero confirmed `[K]`, so no
+  denominator — the first several runs ARE the baseline), no
+  measurement of whether tagging changes the rate, `ADDED` supplied by
+  the caller rather than detected (so the `[X]` column is only as
+  complete as whoever filled it in, and attribution creep is precisely
+  the case where they did not), and the seed ledger written after the
+  code existed, which is the ordering rule backwards. Confidence a
+  separate unresolved readout on every module. 73 selftest checks
+  green. Stdlib only, parses under Python 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

@@ -1,0 +1,27 @@
+HANDOFF PROVENANCE -- tags and ledger
+========================================================================
+
+  TAGS
+    [K  ] operator-stated, in conversation
+    [K? ] operator-stated per the ledger, NOT CONFIRMED
+    [R  ] repo-derived; path cited
+    [C  ] Claude-proposed, operator did not object
+    [A  ] Claude-proposed, operator ACCEPTED explicitly
+    [X  ] Claude Code's own addition, not in the spec
+
+  ground truth for the DROPPED measurement: [K]
+  excluded from it:                         [K?]
+
+  [C] and [A] are separate because silence is not acceptance.
+  Same rule as inverseminar's `unprobed` verdict: an unprobed
+  line is logged as a miss, never as a confirmation.
+
+------------------------------------------------------------------------
+
+  THE ORDERING RULE, ENFORCED
+
+    seal: 42c44b593ff79e42...
+    add after seal: REFUSED
+
+    A ledger extracted from finished prose cannot fail, which
+    is why the rule is enforced rather than stated.
