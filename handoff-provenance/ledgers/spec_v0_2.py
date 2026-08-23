@@ -34,6 +34,11 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 FOLDER = os.path.dirname(HERE)
 sys.path.insert(0, FOLDER)
 import provenance as P                                          # noqa: E402
+import diff as D                                                # noqa: E402
+
+# The code this ledger was written against, and committed ahead of.
+IMPL = [os.path.join(FOLDER, "provenance.py"),
+        os.path.join(FOLDER, "diff.py")]
 
 # Delivered verbatim, in-session:
 #
@@ -77,6 +82,52 @@ def ledger():
     return lg
 
 
+def impl_code():
+    """The implementing code, with prose and the disclosure surface stripped.
+
+    Matched against raw source, this ledger scores against files that quote
+    its own entries -- in docstrings, in report() demos, in selftest
+    fixtures -- so a CARRIED can be earned by the code that PRINTS the entry
+    rather than the code that implements it. Stripping reduces that. It does
+    not remove it: ledger and code came from one party in one pass.
+    """
+    out = []
+    for path in IMPL:
+        if os.path.exists(path):
+            out.append(D.implementation_surface(open(path).read()))
+    return "\n".join(out)
+
+
+def verdict():
+    """Diff the sealed ledger against the code, twice.
+
+    Once with the matcher as it stood when the ledger was first run, and
+    once with the coverage refusal that the first run forced. Both are
+    reported: the second number is the better one and it was reached by
+    changing the instrument after seeing the first, which is a thing to
+    disclose rather than present as a clean result.
+    """
+    code = impl_code()
+    lg = ledger()
+    saved = D.MIN_COVERAGE
+    try:
+        D.MIN_COVERAGE = 0.0                      # the matcher as first run
+        before = D.diff(lg, code)
+        before = {"drop_rate": before["drop_rate"],
+                  "n_ground_truth": before["n_ground_truth"],
+                  "DROPPED": list(before["DROPPED"]),
+                  "reportable": before["rate_reportable"]}
+    finally:
+        D.MIN_COVERAGE = saved
+    after = D.diff(ledger(), code)
+    return {"before": before, "after": after,
+            "code_available": bool(code)}
+
+
+# The entry that broke it, and the words the matcher could not see.
+FALSE_DROPPED = "[K~] is a tag, added to the existing tag set"
+
+
 def confidence():
     return {"tag_is_K_not_K_question": "the operator's statement is "
                                        "in-session and quotable. That is a "
@@ -88,11 +139,59 @@ def confidence():
                                  "judgement and this file made it",
             "ordering": "git history, not the seal. Evidence an outside "
                         "reader can check, and rewritable",
+            "drop_rate": "0.00 over 10 scorable entries, and the instrument "
+                         "was changed after the first run to get there. The "
+                         "first number, 0.09, was one false DROPPED",
+            "self_diff": "this ledger scores code written to satisfy it, "
+                         "by the same party, in the same pass. Prose and "
+                         "the disclosure surface are stripped before "
+                         "matching, which cuts the obvious route and does "
+                         "not make the number a measurement. Read 0.00 as "
+                         "an upper bound on carriage",
+            "the_fix": "MIN_COVERAGE was set on a principle -- a majority of "
+                       "an entry's content words must survive the length "
+                       "floor -- and not at the value that rescues the entry "
+                       "that exposed it. That is the defence available and "
+                       "it is not the same as having chosen it beforehand",
             "resolved": False}
 
 
 def breaks():
     return [
+        "THE FIRST REPORTABLE DROP RATE THIS MODULE EVER PRODUCED WAS WRONG. "
+        "Eleven [K] entries cleared the ten-entry floor, the diff returned "
+        "0.09, and the single DROPPED item -- '[K~] is a tag, added to the "
+        "existing tag set' -- is plainly carried: [K~] is in TAGS. The "
+        "matcher scored that entry on 'added' and 'existing' alone, because "
+        "'tag' and 'set', the two words carrying the claim, are three "
+        "letters and the length floor is four. The share was 0.5 against a "
+        "0.55 threshold, so a false DROPPED arrived by two hundredths",
+        "THE INSTRUMENT WAS CHANGED AFTER SEEING THE RESULT, WHICH IS THE "
+        "FITTING MOVE THIS REPO AUDITS ELSEWHERE. MIN_COVERAGE refuses an "
+        "entry when the length floor eats most of its content words. It is "
+        "set at a majority, on the principle that a share over the minority "
+        "of an entry is not a reading of the entry, and deliberately not at "
+        "the value that would rescue this one line. The matcher grade on the "
+        "eight fixtures is unchanged. None of that makes it a rule chosen "
+        "before the data, and the before number is reported beside the after",
+        "THE COVERAGE RULE DOES NOT FIX THE UNDERLYING BLINDNESS, AND THE "
+        "SPEC'S OWN HEADLINE INSTANCE IS STILL SCORED WITHOUT ITS SUBJECT. "
+        "'the doe performs partner selection' loses only 'doe' to the floor "
+        "-- one content word of four, under the majority line -- so it is "
+        "scored, and it is scored on 'performs partner selection' with the "
+        "doe invisible. The spec's flagship DROPPED instance is a doe-choice "
+        "arm and the instrument measuring it cannot see the token. Any "
+        "three-letter subject is in the same position: arm, gap, key, ice",
+        "A SELF-DIFF IS NOT A MEASUREMENT OF THE CHANNEL. Ledger and code "
+        "here came from one party in one pass, and the first attempt scored "
+        "against raw source -- where provenance.py's docstring and diff.py's "
+        "report both quote these entries verbatim, so a CARRIED could be "
+        "earned by the code that PRINTS an item rather than the code that "
+        "implements it. It surfaced as an instability: the 0.09 run stopped "
+        "reproducing once the report was written. Matching now runs against "
+        "implementation_surface(), docstrings and disclosure functions "
+        "stripped, and the before/after numbers are stable again. That "
+        "removes the obvious route and not the contamination",
         "THE SPLIT FROM PROSE INTO LINES IS THIS FILE'S JUDGEMENT AND IT "
         "SETS THE DENOMINATOR. The delivered text is six lines of prose; "
         "rendering it as eleven ledger entries is a choice, and a coarser "
@@ -122,7 +221,14 @@ def report():
     L.append("  seal: %s..." % lg.sealed[:16])
     L.append("")
     for e in lg.entries:
-        L.append("  [%-3s] %s" % (e["tag"], e["text"]))
+        first = True
+        for line in _wrap(e["text"], "        "):
+            if first:
+                L.append("  [%-3s]%s" % (e["tag"], line[7:].rstrip()
+                                         and " " + line.strip()))
+                first = False
+            else:
+                L.append(line)
     L.append("")
     L.append("  tag counts: %s"
              % ", ".join("%s=%d" % (t, n) for t, n in lg.counts().items()
@@ -131,6 +237,56 @@ def report():
     L.append("  These are [K], not [K?]. The operator's statement is")
     L.append("  in-session and quotable, so 'was this stated upstream' is")
     L.append("  answerable from here. seed.py could not answer it.")
+    L.append("")
+    L.append("-" * 72)
+    L.append("")
+    L.append("  THE DIFF AGAINST THE IMPLEMENTATION")
+    L.append("")
+    v = verdict()
+    b, a = v["before"], v["after"]
+    L.append("    code available: %s" % v["code_available"])
+    L.append("")
+    L.append("    %-10s %-9s %-9s %s"
+             % ("", "scorable", "dropped", "drop rate"))
+    L.append("    %-10s %-9d %-9d %.2f"
+             % ("first run", b["n_ground_truth"], len(b["DROPPED"]),
+                b["drop_rate"]))
+    L.append("    %-10s %-9d %-9d %.2f"
+             % ("now", a["n_ground_truth"], len(a["DROPPED"]),
+                a["drop_rate"]))
+    L.append("")
+    L.append("    the first run's single DROPPED:")
+    for line in _wrap(FALSE_DROPPED, "      "):
+        L.append(line)
+    L.append("")
+    cov = D.coverage(FALSE_DROPPED)
+    L.append("    it is carried -- [K~] is in TAGS. The matcher scored it")
+    L.append("    on %d of its %d content words; the floor ate %s."
+             % (cov["n_kept"], cov["n_content"], ", ".join(cov["lost"])))
+    L.append("    Share 0.50 against a 0.55 threshold: a false DROPPED by")
+    L.append("    two hundredths, and it cleared the reportability floor.")
+    L.append("")
+    L.append("    matched against implementation_surface(): docstrings,")
+    L.append("    comments and the disclosure functions stripped. Against")
+    L.append("    raw source these entries score partly on the prose that")
+    L.append("    quotes them, and that showed up as the 0.09 run ceasing")
+    L.append("    to reproduce once the report was written.")
+    L.append("")
+    L.append("    The instrument was changed after seeing that. The")
+    L.append("    coverage rule is set at a majority on principle, not at")
+    L.append("    the value that rescues this line, and the eight-fixture")
+    L.append("    matcher grade is unchanged -- but it was still chosen")
+    L.append("    after the data, and both numbers print.")
+    L.append("")
+    doe = D.coverage("the doe performs partner selection")
+    L.append("    and it does not fix the blindness. The entry")
+    L.append("    'the doe performs partner selection' loses only %s --"
+             % ", ".join(doe["lost"]))
+    L.append("    %d of %d content words, under the line --"
+             % (doe["n_content"] - doe["n_kept"], doe["n_content"]))
+    L.append("    so it is scored, without its subject. The spec's headline")
+    L.append("    instance is a doe-choice arm and the matcher cannot see")
+    L.append("    the token.")
     L.append("")
     L.append("-" * 72)
     L.append("")
@@ -185,8 +341,48 @@ def selftest():
     ck("the two-distinct-entries instruction is itself an entry",
        any("two distinct entries, not one" in e["text"]
            for e in lg.entries))
-    ck("the split-into-lines judgement is disclosed first",
-       "THIS FILE'S JUDGEMENT" in breaks()[0])
+    v = verdict()
+    ck("the implementation was found and read", v["code_available"])
+    b, a = v["before"], v["after"]
+    ck("the first run produced a reportable drop rate -- eleven [K] "
+       "entries clear the ten-entry floor",
+       b["reportable"] is True and b["n_ground_truth"] == 11)
+    ck("and it was wrong: one DROPPED, and it is the [K~]-is-a-tag line",
+       len(b["DROPPED"]) == 1 and b["DROPPED"][0] == FALSE_DROPPED)
+    ck("which is plainly carried -- [K~] is in the shipped tag set",
+       "K~" in P.TAGS)
+    cov = D.coverage(FALSE_DROPPED)
+    ck("the cause is the length floor eating the words that carry it",
+       "tag" in cov["lost"] and "set" in cov["lost"]
+       and cov["n_kept"] == 2 and cov["n_content"] == 6)
+    ck("after the coverage refusal the entry is not scored at all",
+       len(a["DROPPED"]) == 0 and a["n_ground_truth"] == 10
+       and len(a["UNSCORABLE_COVERAGE"]) == 1)
+    ck("the fixture grade did not move when the rule was added",
+       D.grade_matcher()["grade"] == "OK")
+    ck("the doe entry is still scored, and still without its subject",
+       D.coverage("the doe performs partner selection")["lost"] == ["doe"]
+       and D.match("the doe performs partner selection",
+                   "weighted_choice partner selection performs")["state"]
+       == "OK")
+    ck("matching runs against the stripped surface, not raw source",
+       "[K~] is a tag, added to the existing tag set" not in impl_code())
+    ck("and the entries that carry, carry on the implementation itself",
+       len(a["CARRIED"]) == 10)
+    ck("the self-diff contamination is disclosed",
+       any("SELF-DIFF IS NOT A MEASUREMENT" in b2 for b2 in breaks()))
+    ck("and the rate is reported as an upper bound on carriage",
+       "upper bound" in confidence()["self_diff"])
+
+    ck("the false drop rate leads the breaks list",
+       "WAS WRONG" in breaks()[0])
+    ck("changing the instrument after seeing the result is disclosed",
+       any("FITTING MOVE" in b2 for b2 in breaks()))
+    ck("and so is the blindness the rule does not fix",
+       any("STILL SCORED WITHOUT ITS SUBJECT" in b2 for b2 in breaks()))
+
+    ck("the split-into-lines judgement is disclosed",
+       any("THIS FILE'S JUDGEMENT" in b2 for b2 in breaks()))
     ck("git-history-as-evidence-not-proof is disclosed",
        any("evidence and not proof" in b for b in breaks()))
     ck("confidence unresolved", confidence()["resolved"] is False)

@@ -71,7 +71,12 @@ def s4_ledger():
 
 S4_PATH = os.path.join(REPO, "instrument-bias-sims",
                        "s4_antler_calibration.py")
-S4_CODE = open(S4_PATH).read() if os.path.exists(S4_PATH) else ""
+S4_RAW = open(S4_PATH).read() if os.path.exists(S4_PATH) else ""
+# Matched against the implementation surface -- docstrings, comments and the
+# disclosure functions stripped -- so a CARRIED cannot be earned by prose
+# describing the code. On this ledger the verdicts are the same either way,
+# which is a robustness result and is checked rather than assumed.
+S4_CODE = D.implementation_surface(S4_RAW) if S4_RAW else ""
 
 # [X] items: this session's own additions to S4, not in the delivered patch.
 S4_ADDED = [
@@ -123,6 +128,13 @@ def breaks():
         "instrument was changed instead: it now lands in UNSCORABLE_NEGATED. "
         "One real ledger line of six was enough to invert the readout, and "
         "the eight matcher fixtures had all been positive entries",
+        "ZERO RE-READS AND ZERO [K~] ON THIS LEDGER IS NOT EVIDENCE THE "
+        "TRANSLATION LAYER IS CLEAN. Nothing here has been read a second "
+        "time and nothing was flagged lossy when spoken, so both columns "
+        "are empty for want of observation, not for want of loss. A RETRANS "
+        "count is a lower bound on voice-layer mangling at the best of "
+        "times; a count of zero from a ledger nobody re-read is not a bound "
+        "on anything",
         "three entries, one denominator of zero. Nothing here is a rate and "
         "the spec says so: the first several runs ARE the baseline",
     ]
@@ -148,7 +160,8 @@ def report():
     L.append("  DIFF")
     L.append("")
     for key in ("CARRIED", "DROPPED", "CARRIED_UNCONFIRMED",
-                "DROPPED_UNCONFIRMED", "UNSCORABLE_NEGATED", "ADDED"):
+                "DROPPED_UNCONFIRMED", "UNSCORABLE_NEGATED",
+                "UNSCORABLE_TRANSLATION", "UNSCORABLE_COVERAGE", "ADDED"):
         L.append("    %-22s %d" % (key, len(d[key])))
         for x in d[key]:
             L.append("      %s" % x[:64])
@@ -161,6 +174,14 @@ def report():
     L.append("")
     for line in _wrap(d["why_unscorable"], "    "):
         L.append(line)
+    L.append("")
+    L.append("    n_stated   %d   n_scorable %d   footprint %d"
+             % (d["n_stated"], d["n_scorable"],
+                d["translation_footprint"]["n_unreadable"]))
+    L.append("")
+    L.append("    no [K~] on this ledger and no re-reads: NOT_YET_OBSERVED,")
+    L.append("    not zero. Nothing here has been read a second time, so a")
+    L.append("    count of zero says nothing about the translation layer.")
     L.append("")
     L.append("-" * 72)
     L.append("")
@@ -227,6 +248,21 @@ def selftest():
     ck("the doe entry is CARRIED_UNCONFIRMED -- the patch put it in the "
        "code, and that says nothing about whether it was stated upstream",
        any("doe" in x for x in d["CARRIED_UNCONFIRMED"]))
+
+    ck("the verdicts do not change when prose is stripped from the code -- "
+       "no CARRIED here was earned by a docstring",
+       [sorted(D.diff(s4_ledger(), c, added_items=S4_ADDED)[k])
+        for k in ("CARRIED_UNCONFIRMED", "DROPPED_UNCONFIRMED")
+        for c in (S4_RAW,)]
+       == [sorted(D.diff(s4_ledger(), c, added_items=S4_ADDED)[k])
+           for k in ("CARRIED_UNCONFIRMED", "DROPPED_UNCONFIRMED")
+           for c in (S4_CODE,)])
+    ck("no [K~] entries here, and that is NOT_YET_OBSERVED rather than a "
+       "clean translation layer",
+       len(s4_ledger().by_tag("K~")) == 0
+       and len(d["UNSCORABLE_TRANSLATION"]) == 0)
+    ck("and no re-reads: nothing has been read a second time",
+       s4_ledger().reread_counts() == {"SHIFT": 0, "RETRANS": 0})
 
     ck("the negated entry is refused, not counted as carried",
        len(d["UNSCORABLE_NEGATED"]) == 1

@@ -27,6 +27,8 @@ SEED LEDGER -- s4_antler_calibration
     DROPPED_UNCONFIRMED    0
     UNSCORABLE_NEGATED     1
       remove unused rng and statistics import
+    UNSCORABLE_TRANSLATION 0
+    UNSCORABLE_COVERAGE    0
     ADDED                  3
       GEOMETRY_DELTA as a separate term from antler mass
       mature-novelty reported as a fraction of the annual delta
@@ -42,6 +44,12 @@ SEED LEDGER -- s4_antler_calibration
     an entry asking for an absence is read backwards by a presence
     matcher, at full confidence. It is refused rather than scored, and
     it is out of the rate denominator as well as out of both counts
+
+    n_stated   0   n_scorable 0   footprint 0
+
+    no [K~] on this ledger and no re-reads: NOT_YET_OBSERVED,
+    not zero. Nothing here has been read a second time, so a
+    count of zero says nothing about the translation layer.
 
 ------------------------------------------------------------------------
 
@@ -94,5 +102,12 @@ SEED LEDGER -- s4_antler_calibration
     instrument was changed instead: it now lands in UNSCORABLE_NEGATED.
     One real ledger line of six was enough to invert the readout, and
     the eight matcher fixtures had all been positive entries
+    - ZERO RE-READS AND ZERO [K~] ON THIS LEDGER IS NOT EVIDENCE THE
+    TRANSLATION LAYER IS CLEAN. Nothing here has been read a second
+    time and nothing was flagged lossy when spoken, so both columns are
+    empty for want of observation, not for want of loss. A RETRANS
+    count is a lower bound on voice-layer mangling at the best of
+    times; a count of zero from a ledger nobody re-read is not a bound
+    on anything
     - three entries, one denominator of zero. Nothing here is a rate
     and the spec says so: the first several runs ARE the baseline

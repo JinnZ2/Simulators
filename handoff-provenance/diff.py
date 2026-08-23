@@ -25,6 +25,30 @@ mode nothing else catches, and the split is the only handling available from
 this side: it cannot detect the mangling, but it refuses to count it as
 evidence.
 
+AND AN ENTRY THE LENGTH FLOOR GUTS IS NOT SCORED AT ALL. Content words under
+MIN_STEM characters are invisible to the matcher, so an entry whose claim
+rests on short words is scored on whatever long words happen to sit beside
+it. The first reportable drop rate this module produced -- 0.09 over eleven
+entries -- was one false DROPPED of exactly that kind: "[K~] is a tag, added
+to the existing tag set" scored on `added` and `existing` while `tag` and
+`set` fell under the floor. `coverage()` measures the loss and `match()`
+refuses the entry when most of its content words go, because a share over the
+minority that survived is not a reading of the entry. The rule was added
+after that result, which is disclosed in `breaks()` rather than smoothed, and
+it does not restore the words: an entry losing one content word of four is
+still scored with that one unseen.
+
+A [K~] ENTRY IS NOT SCORED EITHER, FOR A DIFFERENT REASON. Its English was
+flagged lossy by the operator at the time of speaking, and the matcher reads
+English stems. A non-match on such an entry is ambiguous between "absent from
+the code" and "the English was wrong, so the stems miss code that does
+implement the shape", and nothing here separates those. It lands in
+UNSCORABLE_TRANSLATION -- but unlike a NEGATED entry it stays inside
+n_stated, because it WAS said. Two denominators come out of that: n_stated,
+the population the channel loses things from, and n_scorable, what the
+matcher can be trusted on. The drop rate runs over the smaller one and the
+gap between them is the translation layer's footprint.
+
 A NEGATED ENTRY IS NOT SCORED, BECAUSE THE MATCHER READS IT BACKWARDS. The
 first real ledger written against this module carried the line "remove unused
 rng and statistics import", and it matched the delivered S4 code at share
@@ -43,9 +67,12 @@ stdlib only, parses under Python 3.9. CC0.
 """
 
 import argparse
+import ast
+import io
 import os
 import re
 import sys
+import tokenize
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -74,9 +101,93 @@ def negated(entry_text):
     return any(c in t for c in NEGATION_CUES)
 
 
+# Every module in this folder carries the same disclosure surface: a report,
+# a selftest, and the breaks/confidence readouts. Those functions QUOTE ledger
+# entries in order to display them, so leaving them in the matched text lets
+# an entry match the code that prints it. They are stripped with the prose.
+REPORTING_FUNCTIONS = ("report", "selftest", "breaks", "confidence", "main",
+                       "_wrap")
+
+
+def implementation_surface(source, drop_reporting=True):
+    """Source with docstrings, comments and the disclosure surface removed.
+
+    A ledger entry says what the code should DO. Matching it against a file's
+    prose matches it against a DESCRIPTION of the code, and a docstring
+    repeating the entry earns a CARRIED with nothing implemented. That is a
+    false-CARRIED generator and it fires hardest exactly where the ledger and
+    the code were written by the same party in the same pass.
+
+    String literals in expressions are kept: a gloss table mapping SHIFT to
+    "the station" IS the implementation of "SHIFT is data about the station".
+    A docstring saying the same sentence is not. The line is between a value
+    the program carries and prose about the program.
+
+    This REDUCES the contamination; it does not remove it. A self-diff --
+    ledger and code written by one party in one pass -- is not a measurement
+    whatever surface it runs against, and the caller is told so.
+    """
+    try:
+        tree = ast.parse(source)
+    except SyntaxError:
+        return source
+    drop = set()
+    for node in ast.walk(tree):
+        if (drop_reporting
+                and isinstance(node, ast.FunctionDef)
+                and node.name in REPORTING_FUNCTIONS):
+            end = getattr(node, "end_lineno", node.lineno)
+            for ln in range(node.lineno, end + 1):
+                drop.add(ln)
+            continue
+        body = getattr(node, "body", None)
+        if not isinstance(body, list):
+            continue
+        for stmt in body:
+            # A bare string expression: a docstring, or prose standing alone.
+            if (isinstance(stmt, ast.Expr)
+                    and isinstance(stmt.value, ast.Constant)
+                    and isinstance(stmt.value.value, str)):
+                end = getattr(stmt, "end_lineno", stmt.lineno)
+                for ln in range(stmt.lineno, end + 1):
+                    drop.add(ln)
+    lines = source.splitlines()
+    kept = [ln for i, ln in enumerate(lines, 1) if i not in drop]
+    body_text = "\n".join(kept)
+    out = []
+    try:
+        for tok in tokenize.generate_tokens(io.StringIO(body_text).readline):
+            if tok.type == tokenize.COMMENT:
+                continue
+            out.append(tok.string)
+    except (tokenize.TokenError, IndentationError):
+        return body_text
+    return " ".join(out)
+
+
 def stems(text):
     words = re.findall(r"[a-z]+", text.lower())
     return set(w[:6] for w in words if len(w) >= MIN_STEM and w not in STOP)
+
+
+# An entry's content words below MIN_STEM are invisible to the matcher. When
+# the floor eats MOST of them, the share being computed is a share of the
+# minority of the entry that survived, and it is not about the entry any more.
+# The line is a majority, chosen as a principle rather than fitted: it is not
+# set where it happens to rescue the entry that exposed this.
+MIN_COVERAGE = 0.5
+
+
+def coverage(text):
+    """What share of an entry's content words the length floor keeps."""
+    words = re.findall(r"[a-z]+", text.lower())
+    content = [w for w in words if w not in STOP]
+    if not content:
+        return {"n_content": 0, "n_kept": 0, "share": 0.0, "lost": []}
+    kept = [w for w in content if len(w) >= MIN_STEM]
+    return {"n_content": len(content), "n_kept": len(kept),
+            "share": len(kept) / len(content),
+            "lost": sorted(set(w for w in content if len(w) < MIN_STEM))}
 
 
 def match(entry_text, code_text, threshold=MATCH_THRESHOLD):
@@ -90,6 +201,16 @@ def match(entry_text, code_text, threshold=MATCH_THRESHOLD):
     if not a:
         return {"share": None, "matched": None, "n_stems": 0,
                 "state": "NO_STEMS"}
+    cov = coverage(entry_text)
+    if cov["share"] < MIN_COVERAGE:
+        return {"share": None, "matched": None, "n_stems": len(a),
+                "state": "LOW_COVERAGE", "coverage": cov,
+                "why": "the length floor discards %d of this entry's %d "
+                       "content words (%s). What is left is a minority of "
+                       "the entry, so a share over it is not a reading of "
+                       "the entry"
+                       % (cov["n_content"] - cov["n_kept"], cov["n_content"],
+                          ", ".join(cov["lost"]))}
     if negated(entry_text):
         b = stems(code_text)
         return {"share": len(a & b) / len(a), "matched": None,
@@ -111,14 +232,26 @@ def diff(ledger, code_text, added_items=()):
             "cannot distinguish 'written before the spec' from 'extracted "
             "after the code', which is the whole ordering rule")
     carried, dropped, carried_unconf, dropped_unconf = [], [], [], []
-    unscorable = []
+    unscorable, untranslatable, uncovered = [], [], []
+    scored = (P.GROUND_TRUTH + P.GROUND_TRUTH_UNCONFIRMED
+              + P.GROUND_TRUTH_UNSCORABLE)
     for e in ledger.entries:
-        if e["tag"] not in P.GROUND_TRUTH + P.GROUND_TRUTH_UNCONFIRMED:
+        if e["tag"] not in scored:
+            continue
+        if e["tag"] in P.GROUND_TRUTH_UNSCORABLE:
+            # [K~]: the operator flagged this entry's English when speaking,
+            # and the matcher reads English stems. A non-match is ambiguous
+            # between "absent from the code" and "the English was wrong so
+            # the stems miss code that does implement the shape", and nothing
+            # here separates those. Refused, not scored -- the same repair as
+            # NEGATED, one layer up.
+            untranslatable.append(e["text"])
             continue
         m = match(e["text"], code_text)
         confirmed = e["tag"] in P.GROUND_TRUTH
         if m["matched"] is None:
-            unscorable.append(e["text"])
+            (uncovered if m["state"] == "LOW_COVERAGE"
+             else unscorable).append(e["text"])
         elif m["matched"]:
             (carried if confirmed else carried_unconf).append(e["text"])
         else:
@@ -129,7 +262,12 @@ def diff(ledger, code_text, added_items=()):
         "DROPPED": dropped,
         "DROPPED_UNCONFIRMED": dropped_unconf,
         "UNSCORABLE_NEGATED": unscorable,
+        "UNSCORABLE_TRANSLATION": untranslatable,
+        "UNSCORABLE_COVERAGE": uncovered,
         "ADDED": list(added_items),
+        "n_stated": len(ledger.by_tag(*P.STATED)),
+        "n_scorable": len(ledger.by_tag(*P.MATCHER_SCORABLE)),
+        "translation_footprint": ledger.translation_footprint(),
         "n_ground_truth": len(carried) + len(dropped),
         "drop_rate": (len(dropped) / (len(carried) + len(dropped)))
         if (carried or dropped) else None,
@@ -143,6 +281,23 @@ def diff(ledger, code_text, added_items=()):
                           "by a presence matcher, at full confidence. It is "
                           "refused rather than scored, and it is out of the "
                           "rate denominator as well as out of both counts",
+        "why_untranslatable": "a [K~] entry's English was flagged lossy by "
+                              "the operator when speaking, and the matcher "
+                              "reads English. A non-match cannot be told "
+                              "from bad English missing code that does "
+                              "implement the shape, so it is refused. It "
+                              "stays in n_stated, because it WAS said",
+        "why_uncovered": "the length floor discards content words shorter "
+                         "than %d characters. When it eats most of an "
+                         "entry's content words, the share is computed over "
+                         "the minority that survived and is not a reading "
+                         "of the entry" % MIN_STEM,
+        "stated_vs_scorable": "n_stated is the population the channel loses "
+                              "things from; n_scorable is what the matcher "
+                              "can be trusted on. The gap is the "
+                              "translation layer's footprint on this "
+                              "ledger, and the drop rate runs over the "
+                              "smaller number",
     }
 
 
@@ -244,6 +399,26 @@ def confidence():
                                    "matching mangled code would land here "
                                    "and the diff cannot tell",
             "drop_rate": "UNMEASURED. first runs are the baseline",
+            "K_tilde": "refused by the matcher and still counted in "
+                       "n_stated. Those are two different questions and "
+                       "[K~] is the tag that made the module ask them "
+                       "separately",
+            "translation_footprint": "a count of stated entries the matcher "
+                                     "cannot read. A property of this "
+                                     "ledger and its flagger, not a rate "
+                                     "for the translation layer at large",
+            "self_diff": "a ledger diffed against code the same party "
+                         "wrote in the same pass is contaminated whatever "
+                         "surface it runs against. Stripping prose reduces "
+                         "it; nothing here removes it",
+            "coverage_rule": "a majority line on principle, added AFTER a "
+                             "false DROPPED exposed the floor. The fixture "
+                             "grade is unchanged and that is not the same "
+                             "as having chosen the rule beforehand",
+            "short_content_words": "still invisible below %d characters. "
+                                   "The rule refuses entries the floor "
+                                   "guts; it does not restore the words"
+                                   % MIN_STEM,
             "negation_detector": "a cue list, graded on 4 and 4. It fires on "
                                  "the surface form of a negation and any "
                                  "paraphrase steps around it, the same limit "
@@ -266,6 +441,33 @@ def breaks():
         "the threshold is a single number over a share of stems, and the "
         "sweep shows the grade moving with it. Nothing here establishes "
         "0.55 beyond it working on these eight",
+        "A DOCSTRING CAN EARN A CARRIED. Matched against raw source, a "
+        "ledger entry scores against any prose in the file that repeats it, "
+        "so a module documenting an item it never implemented reads as "
+        "having carried it -- and the effect is strongest exactly where "
+        "ledger and code came from one party in one pass. "
+        "implementation_surface() strips docstrings, comments and the "
+        "disclosure functions, which cuts the obvious route. It does not "
+        "make a self-diff a measurement: the ledger's own v0.2 run scores "
+        "code written to satisfy it, and that number is an upper bound on "
+        "carriage rather than a reading of the channel",
+        "THE LENGTH FLOOR MAKES SHORT CONTENT WORDS INVISIBLE AND THE "
+        "COVERAGE RULE DOES NOT GIVE THEM BACK. Below %d characters a word "
+        "is dropped, so 'doe', 'arm', 'gap', 'key' and 'ice' are not read "
+        "at all. MIN_COVERAGE refuses an entry when MOST of its content "
+        "words go that way; an entry losing one of four is still scored, "
+        "with that one invisible. The spec's headline instance -- the S4 "
+        "doe-choice arm -- is exactly that case, and it is scored on "
+        "'performs partner selection' with the doe unseen. The rule was "
+        "also added after a false DROPPED, not before" % MIN_STEM,
+        "A [K~] ENTRY IS REFUSED BY THE MATCHER, WHICH MEANS FLAGGING AN "
+        "ENTRY LOSSY REMOVES IT FROM THE MEASUREMENT. That is correct -- a "
+        "non-match on flagged English is genuinely ambiguous -- and it has a "
+        "cost with no defence here: an operator who flags liberally shrinks "
+        "n_scorable until the drop rate runs over almost nothing, and the "
+        "readout looks the same as a clean channel. The footprint count is "
+        "printed beside it for exactly that reason, and reading one without "
+        "the other is the misread this arrangement invites",
         "THE NEGATION DETECTOR IS A CUE LIST AND AN ENTRY CAN BE PHRASED "
         "PAST IT. 'the module runs on two arms rather than a constant' asks "
         "for a removal and contains no cue, so it is scored as a positive "
@@ -307,6 +509,53 @@ def report():
     L.append("    is a ledger holding a mangled transcription while the")
     L.append("    diff reads CARRIED, and no matcher can see that. The")
     L.append("    split does not detect it; it refuses to count it.")
+    L.append("")
+    L.append("-" * 72)
+    L.append("")
+    L.append("  THE LENGTH FLOOR, AND WHAT IT MAKES INVISIBLE")
+    L.append("")
+    L.append("    content words under %d characters are not read." % MIN_STEM)
+    L.append("")
+    L.append("    %-46s %-8s %s" % ("entry", "kept", "lost"))
+    for t in ("[K~] is a tag, added to the existing tag set",
+              "the doe performs partner selection"):
+        c = coverage(t)
+        L.append("    %-46s %d of %-3d %s"
+                 % (t[:46], c["n_kept"], c["n_content"],
+                    ", ".join(c["lost"])))
+    L.append("")
+    L.append("    the first is refused: most of it is gone, so a share")
+    L.append("    over the rest is not a reading of the entry. The second")
+    L.append("    is scored -- and scored without its subject.")
+    L.append("")
+    L.append("-" * 72)
+    L.append("")
+    L.append("  TWO DENOMINATORS, AND A [K~] SITS BETWEEN THEM")
+    L.append("")
+    kt = P.Ledger("k-tilde demo")
+    kt.add("doe performs partner selection", "K")
+    kt.add("novelty has a floor set by the annual delta", "K~",
+           note="operator flagged the rendering when speaking")
+    kt.seal()
+    dk = diff(kt, CODE_FIXTURE)
+    m = match("novelty has a floor set by the annual delta", CODE_FIXTURE)
+    L.append("    n_stated    %d   the population the channel loses from"
+             % dk["n_stated"])
+    L.append("    n_scorable  %d   what the matcher can be trusted on"
+             % dk["n_scorable"])
+    L.append("    footprint   %d   stated entries the matcher cannot read"
+             % dk["translation_footprint"]["n_unreadable"])
+    L.append("")
+    L.append("    the [K~] entry above matches at share %.2f and is still"
+             % m["share"])
+    L.append("    refused. A non-match on flagged English cannot be told")
+    L.append("    from bad English missing code that does implement the")
+    L.append("    shape, so a match on it is not evidence either.")
+    L.append("")
+    L.append("    Flagging an entry lossy removes it from the measurement.")
+    L.append("    An operator who flags liberally shrinks n_scorable until")
+    L.append("    the rate runs over almost nothing, and that reads exactly")
+    L.append("    like a clean channel. The footprint prints beside it.")
     L.append("")
     L.append("-" * 72)
     L.append("")
@@ -406,6 +655,62 @@ def selftest():
        dn["n_ground_truth"] == 1)
     ck("an empty-stem entry is also None, not False",
        match("", CODE_FIXTURE)["matched"] is None)
+
+    src = open(os.path.join(HERE, "provenance.py")).read() \
+        if os.path.exists(os.path.join(HERE, "provenance.py")) else ""
+    if src:
+        surf = implementation_surface(src)
+        ck("the implementation surface drops docstring prose",
+           "silence is not acceptance" in src
+           and "silence is not acceptance" not in surf)
+        ck("and keeps the values the program carries -- a gloss table IS "
+           "the implementation of the sentence it glosses",
+           "the station" in surf and "K~" in surf)
+        ck("and drops the disclosure functions, which quote entries to "
+           "print them",
+           "REFUSED (shape question is upstream)" not in surf)
+        ck("stripping is a reduction, not a removal, and says so",
+           "does not remove it" in implementation_surface.__doc__)
+
+    cov = coverage("[K~] is a tag, added to the existing tag set")
+    ck("coverage counts the content words the length floor discards",
+       cov["n_content"] == 6 and cov["n_kept"] == 2
+       and cov["lost"] == ["k", "set", "tag"])
+    mlc = match("[K~] is a tag, added to the existing tag set", "added "
+                "to the existing set of tags")
+    ck("a low-coverage entry is refused, not scored: the share would be "
+       "over the minority of the entry that survived the floor",
+       mlc["matched"] is None and mlc["state"] == "LOW_COVERAGE")
+    ck("and share is None there, not a number to be read anyway",
+       mlc["share"] is None)
+    ck("the rule is a majority, not the value that rescues one entry",
+       MIN_COVERAGE == 0.5)
+    ck("an entry losing a minority of its content words is still scored",
+       match("the doe performs partner selection",
+             CODE_FIXTURE)["state"] == "OK")
+    ck("adding the rule did not move the matcher grade on the fixtures",
+       grade_matcher()["grade"] == "OK"
+       and grade_matcher()["true_carried_rate"] == 1.0)
+
+    kt = P.Ledger("k-tilde")
+    kt.add("doe performs partner selection", "K")
+    kt.add("novelty has a floor set by the annual delta", "K~",
+           note="operator flagged the rendering when speaking")
+    kt.seal()
+    dk = diff(kt, CODE_FIXTURE)
+    ck("a [K~] entry is refused by the matcher even when its stems match",
+       len(dk["UNSCORABLE_TRANSLATION"]) == 1
+       and match("novelty has a floor set by the annual delta",
+                 CODE_FIXTURE)["matched"] is True)
+    ck("and it is out of the drop-rate denominator",
+       dk["n_ground_truth"] == 1)
+    ck("but it stays in n_stated, because it WAS said",
+       dk["n_stated"] == 2 and dk["n_scorable"] == 1)
+    ck("the gap between the two denominators is the footprint, as a count",
+       dk["translation_footprint"]["n_unreadable"] == 1
+       and dk["translation_footprint"]["share"] is None)
+    ck("liberal flagging shrinking the denominator is disclosed",
+       any("flags liberally shrinks" in b for b in breaks()))
 
     ck("the undetectable fourth failure mode leads the breaks list",
        "CANNOT SEE THE FOURTH FAILURE MODE" in breaks()[0])

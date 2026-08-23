@@ -30,6 +30,38 @@ HANDOFF DIFF -- carried, dropped, added
 
 ------------------------------------------------------------------------
 
+  THE LENGTH FLOOR, AND WHAT IT MAKES INVISIBLE
+
+    content words under 4 characters are not read.
+
+    entry                                          kept     lost
+    [K~] is a tag, added to the existing tag set   2 of 6   k, set, tag
+    the doe performs partner selection             3 of 4   doe
+
+    the first is refused: most of it is gone, so a share
+    over the rest is not a reading of the entry. The second
+    is scored -- and scored without its subject.
+
+------------------------------------------------------------------------
+
+  TWO DENOMINATORS, AND A [K~] SITS BETWEEN THEM
+
+    n_stated    2   the population the channel loses from
+    n_scorable  1   what the matcher can be trusted on
+    footprint   1   stated entries the matcher cannot read
+
+    the [K~] entry above matches at share 1.00 and is still
+    refused. A non-match on flagged English cannot be told
+    from bad English missing code that does implement the
+    shape, so a match on it is not evidence either.
+
+    Flagging an entry lossy removes it from the measurement.
+    An operator who flags liberally shrinks n_scorable until
+    the rate runs over almost nothing, and that reads exactly
+    like a clean channel. The footprint prints beside it.
+
+------------------------------------------------------------------------
+
   A NEGATED ENTRY IS REFUSED, NOT SCORED
 
     true negated 1.00   false negated 0.00   OK

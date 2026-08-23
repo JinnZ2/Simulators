@@ -4627,8 +4627,68 @@ is pushed on this branch — see the reconciliation note in `CLAUDE.md`.
   complete as whoever filled it in, and attribution creep is precisely
   the case where they did not), and the seed ledger written after the
   code existed, which is the ordering rule backwards. Confidence a
-  separate unresolved readout on every module. 73 selftest checks
-  green. Stdlib only, parses under Python 3.9, phone-buildable, CC0.
+  separate unresolved readout on every module. **v0.2 added [K~] and the
+  RE-READ column, and both landed on structure rather than vocabulary.**
+  [K~] -- operator-stated, translation flagged lossy AT TIME OF SPEAKING,
+  shape present and English suspect -- split two axes one constant had
+  been answering at once: STATED ([K] [K~]), the population the channel
+  loses things from, and MATCHER_SCORABLE ([K]), what the matcher can be
+  trusted on. For [K] and [K?] those move together, so the conflation
+  never showed. A [K~] that fails to match cannot be read as DROPPED,
+  since bad English missing code that DOES implement the shape is a live
+  alternative, so it is refused and stays inside n_stated because it WAS
+  said; **the gap between the two denominators is the translation
+  layer's footprint** and it stays a count. The cost is printed with no
+  defence offered: flagging liberally shrinks n_scorable until the rate
+  runs over nothing, which reads exactly like a clean channel. The
+  RE-READ column takes two entries that are never summed -- **SHIFT**
+  (item reads differently; the observing position moved; data about the
+  station; leaves a prior diff STALE_NOT_WRONG) and **RETRANS** (item
+  reads the same, the English was wrong first time; data about the
+  translation layer; leaves a prior verdict POSSIBLY_FALSE_CARRIED).
+  Both produce ONE observable -- the line changed -- and the
+  discriminator is whether the SHAPE moved, which is upstream, so
+  `reread()` requires operator attribution, refuses to infer the kind,
+  refuses an unchanged re-read as a confirmation rather than an event,
+  and cannot check the attribution it was handed. RETRANS is the only
+  route by which the spec's fourth failure mode ever surfaces here, and
+  it surfaces as a **lower bound**: only what the operator re-read and
+  caught. A RETRANS does NOT promote [K~] to [K] without an explicit
+  still_lossy=False, because the tempting default reads silence as
+  acceptance -- the rule the [C]/[A] split exists to enforce, applied to
+  the module itself. **`ledgers/spec_v0_2.py` is the first ledger here
+  written before its implementation and committed ahead of it**, git
+  history standing as evidence an outside reader can falsify where the
+  seal cannot; its eleven in-session entries are the folder's first
+  honest [K]. **The first reportable drop rate this module ever produced
+  was 0.09 and it was wrong.** The single DROPPED -- "[K~] is a tag,
+  added to the existing tag set" -- is plainly carried, and was scored
+  on `added` and `existing` alone because `tag` and `set` are three
+  letters against a four-character floor: share 0.50 versus a 0.55
+  threshold, a false DROPPED by two hundredths, over the ten-entry
+  reportability floor. `coverage()` and a MIN_COVERAGE majority line now
+  refuse an entry the floor guts, set on principle rather than at the
+  value rescuing the line that exposed it, fixture grade unchanged, and
+  **disclosed as an instrument changed after seeing the result**, with
+  both numbers printed. It does not fix the blindness: an entry losing
+  one content word of four is still scored, so "the doe performs partner
+  selection" loses only `doe` and **the spec's flagship instance is a
+  doe-choice arm the matcher cannot see the token of** -- as with any
+  three-letter subject. The 0.09 run then stopped reproducing once the
+  report was written, exposing a larger defect: **matched against raw
+  source, a ledger entry scores against prose repeating it, so a
+  docstring can earn a CARRIED** with nothing implemented, hardest where
+  ledger and code came from one party in one pass.
+  `implementation_surface()` strips docstrings, comments and the
+  disclosure functions while keeping string literals in expressions --
+  a gloss table mapping SHIFT to "the station" IS the implementation of
+  that sentence, a docstring saying it is not. On the stripped surface
+  v0.2 reads 0.00 over ten and the seed verdicts are unchanged, checked
+  rather than assumed, so nothing it carried was earned by prose; the
+  number is still an upper bound on carriage, because a self-diff scores
+  code written to satisfy the ledger. Zero [K~] and zero re-reads on the
+  seed ledger is NOT_YET_OBSERVED, not zero. 138 selftest
+  checks green. Stdlib only, parses under Python 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
