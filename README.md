@@ -28,6 +28,20 @@ this order before running any simulator:
    correlation (persistence over volume), opaque-source flagging.
    Integrates with BNRAM Shadow-Variable Handling.
 
+`PREAMBLE.md` also carries a **NOTE TO READERS — TERM COLLISION**. Two
+phrases in this repo each name two distinct objects, and the difference is
+**provenance, not sincerity**: a *change of mind* is REVISION when the cause is
+named and the criterion move is logged, ASSERTION when nothing records that the
+criterion moved. *Self-questioning* and *constant re-evaluation* mean continuous
+calibration running alongside operation — instrumented as an expertise marker in
+the surgical and aviation literature, **not** a confidence deficit. A model
+arriving from the general corpus will mis-type it as anxiety and answer with
+reassurance. Reassurance suppresses the channel doing the work. Read the note
+before the modules.
+
+`criteria-drift/unlogged_move.py` runs that first distinction as a sim, and
+`tools/check_term_collision.py` reports which files use the terms.
+
 5. **[`CASE_STUDY_NARRATIVE_INSTINCT.md`](CASE_STUDY_NARRATIVE_INSTINCT.md)** —
    the empirical record the spine rests on: a multi-round correction sequence
    in which the framing of scale_builder / narrative claims was repeatedly
@@ -112,6 +126,13 @@ the repository root:
 
 ```
 python3 -m unittest discover tests
+```
+
+Two repo-wide validators live in `tools/`:
+
+```
+python3 tools/check_gate_drift.py        # one gate, no stale copies
+python3 tools/check_term_collision.py    # who uses the colliding terms
 ```
 
 Individual folders self-test through their own modules, e.g.

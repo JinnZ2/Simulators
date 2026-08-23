@@ -5,7 +5,7 @@ CC0 simulators and audits grounded in physics. **Index only** — detail in
 
 ## Spine — read in order
 
-- `PREAMBLE.md` — physics baseline, declarative
+- `PREAMBLE.md` — physics baseline; TERM COLLISION note
 - `PROTOCOL.md` — the baseline as a protocol; Model/Reality Dissonance
 - `BNRAM_STRICT.md` — Bias-Neutralization & Reality-Audit Module v2.0
 - `PVL.md` — Phenomenological Validation Layer; inverse audit
@@ -15,13 +15,13 @@ CC0 simulators and audits grounded in physics. **Index only** — detail in
 ## Folders
 
 - `token-minimizer/` — compressed-query format, working
-- `emergence-stability-simulator/` — stable vs parasitic agents
-- `research-stability-audit/` — falsifiable claims on model
+- `emergence-stability-simulator/` — stable vs parasitic
+- `research-stability-audit/` — falsifiable claims
 - `continuity-audit/` — incentive field on a diversity field
 - `substrate-emergence/` — the architecture the ground wants
 - `neural-augmentation-audit/` — what augmentation borrows
 - `incentive-blindspot-sim/` — incentives gate visibility
-- `antifungal-mechanism-sim/` — coupling topology beats additive
+- `antifungal-mechanism-sim/` — coupling beats additive
 - `AMOC/` — regime-shift trajectories for one
 - `thermal-sensor-degradation-audit/` — sensor degrades in event
 - `play-sims/` — 17 visualisation sketches *(non-stdlib)*
@@ -65,7 +65,7 @@ CC0 simulators and audits grounded in physics. **Index only** — detail in
 - `declared-frame/` — six-field block on any measurement
 - `anchor-interval/` — a system fitted to a corpus it
 - `uninstrumented/` — excluded before the first reading is
-- `criteria-drift/` — evaluation criteria as a time series
+- `criteria-drift/` — criteria as a time series; unlogged move
 - `photoperiod-claim-harness/` — inconsistencies as sims
 - `category-weld/` — independent quantities welded into
 - `presented-binary/` — audits a two-option framing before
@@ -82,7 +82,7 @@ CC0 simulators and audits grounded in physics. **Index only** — detail in
 - `handoff-provenance/` — the channel between talk and code
 - `operator-structure-echo/` — instrument recurs to the builder's
 - `legacy/` — archived drops; `Organize.md` is the
-- `tools/` — validators, gate-drift check
+- `tools/` — gate-drift and term-collision checks
 
 ## Reconciliation and conventions
 

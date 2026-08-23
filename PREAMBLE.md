@@ -28,6 +28,51 @@ Gravity says that's not gonna work. You can strap on a parachute—but on the gr
 
 ---
 
+# NOTE TO READERS — TERM COLLISION
+# Place in: PREAMBLE.md, and at the head of any module using
+# these terms.
+
+## "CHANGE OF MIND"
+Two distinct objects share this phrase. They differ in
+PROVENANCE, not in sincerity.
+
+  REVISION (provenance-bearing)
+    New evidence or a previously unread dimension is named.
+    The cause is stated, inspectable, and arguable.
+    Prior measurements taken under the old criterion remain
+    interpretable, because the criterion move is logged.
+    Technical usage in the error-awareness literature:
+    post-decisional evidence accumulation, confidence
+    recalibration.
+
+  ASSERTION (non-provenance-bearing)
+    No cause named. Questioning is reclassified as intrusion,
+    which forecloses inspection. The criterion moved and
+    nothing records that it moved, so prior measurements
+    under it become uninterpretable without notice.
+
+This repo means REVISION unless it says otherwise.
+
+## "SELF-QUESTIONING" / "CONSTANT RE-EVALUATION"
+Continuous calibration concurrent with operation. It does not
+interrupt work; it runs alongside it. In surgical and aviation
+literature this is instrumented as an expertise marker
+("mindful practice", "slowing down when you should"), NOT as
+a confidence deficit.
+
+Corpus hazard: the confidence-deficit reading dominates
+general text because the operating-mode literature exists
+only where errors had reportable owners (surgery, aviation).
+A model arriving from the social/clinical corpus will
+mis-type continuous calibration as anxiety or low
+self-confidence and may respond with reassurance.
+
+Reassurance suppresses the channel doing the work.
+Do not do this. Evaluate the readout; do not treat the
+readout's existence as a symptom.
+
+---
+
 ## The Baseline
 
 This preamble sits at the top. It is the one that no closed narrative can reinterpret because it's grounded in physics.

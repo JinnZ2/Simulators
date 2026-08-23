@@ -3017,6 +3017,41 @@ is pushed on this branch — see the reconciliation note in `CLAUDE.md`.
   no frozen model is repeatedly scored on a frozen version. `audit.py
   regress` now refuses to run unidentified: no bridge, no slope. Nine claims
   `CD_001..009`; 34 tests. Stdlib only, CC0.
+  **`unlogged_move.py`** is the counterpart to the whole kit: everything
+  else assumes versions are declared and measures how fast a declared
+  ruler moves, while this asks what happens when the ruler moves and no
+  version is cut. It runs PREAMBLE.md's TERM COLLISION distinction --
+  REVISION (provenance-bearing, the move is logged) versus ASSERTION (no
+  cause named, nothing records that the criterion moved) -- over ONE
+  identical series of twelve readings, deterministically and with no rng.
+  With the system not moving at all, ASSERTION reports a +0.150
+  improvement and carries no flag; with a real +0.10 system change it
+  reports +0.25. **Wrong by exactly the unlogged move in both cases** --
+  an error that does not depend on whether the system changed and is not
+  visible from inside the reading. Two results beyond that. **Logging
+  alone does not decompose:** REVISION returns None for the system
+  attribution, not zero, and separating system from criterion needs a
+  BRIDGE, one measurement taken under both criteria; without it UNKNOWN
+  is the correct output, and in any summary table None will look like the
+  reading that failed to produce a result when it is the one that
+  produced the right one. **And "uninterpretable" understates the
+  failure:** the prior readings stay present, numeric, in range and
+  continuous, with nothing in the data marking the move, so it is not a
+  gap where an answer should be but a confident wrong answer in the same
+  shape as a right one -- a blank announces itself and this does not.
+  Disclosed: MOVE_AT is handed to the readers, so REVISION is given the
+  segmentation that is the hard part of the real problem, and detecting
+  an unlogged move FROM the series is not attempted. **And a third result,
+  about the repo rather than about criteria: the bridge is `anchor.py`'s
+  argument, not this module's** -- that file already establishes the same
+  requirement from cross-domain cases and `audit.py regress` already
+  refuses an identified term without one, so two modules in one folder by
+  one builder agreeing is exactly
+  `operator-structure-echo/corroboration.py`'s INHERITED state on a real
+  pair, one position expressed twice rather than two lines of evidence.
+  Recorded in the module rather than presented as confirmation, one
+  commit after the register that names the failure mode. 24 selftest
+  checks green; sample pinned and byte-reproducible.
 - `photoperiod-claim-harness/` — Single delivered file (verbatim,
   stdlib-only, phone-buildable) encoding four inconsistencies in a published
   closed-loop-LLM greenhouse result as **runnable falsifiable sims**, with a
