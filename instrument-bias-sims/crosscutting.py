@@ -36,7 +36,8 @@ import _shared as SH                                            # noqa: E402
 MODULES = ["s1_encounter_denominator", "s2_symmetric_anchor",
            "s3_rubric_backcast", "s4_antler_calibration",
            "s5_adversarial_prior", "s6_foreclosure_rate",
-           "s7_hardship_threshold", "s8_recognition_to_delivery"]
+           "s7_hardship_threshold", "s8_recognition_to_delivery",
+           "s9_corpus_position_filter"]
 
 # Rule 1. Tokens that would make a data structure carry a verdict about worth
 # rather than a quantity. Deliberately excludes words with technical uses
@@ -221,7 +222,7 @@ def report():
 def selftest():
     ck, done = SH.checker()
     a = audit()
-    ck("all eight sims are audited", len(a["rows"]) == 8)
+    ck("all nine sims are audited", len(a["rows"]) == 9)
     ck("rule 1 passes on every module",
        all(r["r1"]["pass"] for r in a["rows"]))
     ck("rule 2 passes on every module",

@@ -10,6 +10,7 @@ CROSS-CUTTING RULES, ENFORCED
   s6_foreclosure_rate              pass     pass     pass
   s7_hardship_threshold            pass     pass     pass
   s8_recognition_to_delivery       pass     pass     pass
+  s9_corpus_position_filter        pass     pass     pass
 
   r4 README: pass
   all rules pass: True

@@ -4,14 +4,14 @@ SPDX-License-Identifier: CC0-1.0
 
 # instrument-bias-sims
 
-**Marker under exploration, not a thesis.** Eight sims from a delivered work
-order, each testing one way an instrument's own construction shapes what it
+**Marker under exploration, not a thesis.** Nine sims from delivered work
+orders, each testing one way an instrument's own construction shapes what it
 reports. Nothing here is a position under defense, and the correct response to
 any of it is to test the fit, extend it, or report where it breaks.
 
 Stdlib only. Phone-buildable. CC0.
 
-## The eight
+## The nine
 
 | | module | what it tests | what it returned |
 |---|---|---|---|
@@ -23,10 +23,11 @@ Stdlib only. Phone-buildable. CC0.
 | S6 | `s6_foreclosure_rate.py` | trained responses are terminal, not wrong | the stated uniformity statistic is a **range**, so adding difficulty levels makes it *worse*; a slope does not invert |
 | S7 | `s7_hardship_threshold.py` | unanchored thresholds slide to the labeller's baseline | observer-dependence is near-analytic; the cost readout is a **consequence of a stipulation** and says so |
 | S8 | `s8_recognition_to_delivery.py` | time as an excuse vs time as a variable | the normalisers agree on the sign and disagree **4286×** about what would count as parity |
+| S9 | `s9_corpus_position_filter.py` | a corpus samples observer positions non-uniformly, with nothing filtering | the spec's reason is the two **marginals**; coupling drives the conjunction's excess **above** 1.0, so the multiplicative reading **overstates** suppression by up to 1.85× |
 
 Every module exposes `report()`, `confidence()`, `breaks()` and `--selftest`.
 
-## Three results that ran against the draft
+## Five results that ran against the draft
 
 Recorded rather than smoothed, because a sim that only ever confirms the prose
 around it is not being run.
@@ -42,6 +43,17 @@ around it is not being run.
 - **S8.** The normalisers were expected to disagree on the sign. They don't, at
   the declared placeholder. They disagree about **where the sign flips**, by
   4286× — which is the same finding one step further back.
+- **S9, interaction.** The conjunction was expected to be suppressed *more*
+  than the product of its marginals. It's suppressed **less** — excess rises to
+  **1.85** at high coupling, because when remoteness drives both axes the two
+  conditions select nearly the same people while the product keeps multiplying
+  as though they were independent. The multiplicative reading, which is the one
+  a reader reaches for, **overstates** the suppression.
+- **S9, second-order.** Content was expected to take over as the surface mix
+  rose. It never does: a relevance score defined as closeness to the corpus mean
+  is a **typicality** measure, so middling items score highest and the content
+  correlation stays under **0.2 at every mix**. What the sweep locates is where
+  the score stops tracking *position* — it never starts tracking quality.
 
 ## Structural rule, adopted from the S4 patch
 

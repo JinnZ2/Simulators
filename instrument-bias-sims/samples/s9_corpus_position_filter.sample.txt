@@ -1,0 +1,204 @@
+S9 -- CORPUS POSITION FILTER
+========================================================================
+
+  B0. AGENTS -- declared before any equation
+
+    agent                capabilities
+    observer             occupies a position, holds knowledge, may write
+    corpus_assembler     collects written text, deduplicates
+    model                trained on the corpus, scores relevance
+    filtering_agent      [BLANK]
+
+    THE BLANK IS THE POINT. no agent selects on position anywhere in
+    this model. The corpus_assembler cannot see position; the observer
+    is not excluded from anything; the model reads what it was given.
+    The non-uniformity is a consequence of a cost gradient and a
+    population structure, and it needs nobody to have wanted it
+
+    the file is named ...position_filter and there is no filter in it.
+    Under the folder rule that has to render as a [BLANK] rather than
+    be argued in prose, because the absence is the finding
+
+------------------------------------------------------------------------
+
+  POSITION AXES -- direction stated so later signs are readable
+
+    supply_assumption          0 = absence assumed, work around it    1 = delivery expected
+    substitution               0 = fabricated or done without         1 = part orderable
+    failure_horizon            0 = must hold until next repair        1 = repair is scheduled
+    observation_mode           0 = residence / continuous             1 = visitation / event-sampled
+    time_to_writing_station    0 = prohibitive                        1 = near zero
+    reward_structure           0 = writing costs unpaid hours         1 = writing is compensated
+
+------------------------------------------------------------------------
+
+  1. SAMPLING DENSITY -- population vs corpus
+
+    corpus is 53.5% of the population
+
+    supply_assumption
+      bin            pop share    corpus share   ratio
+      0.00-0.25      0.1570       0.0573         0.37
+      0.25-0.50      0.3502       0.2579         0.74
+      0.50-0.75      0.3450       0.4436         1.29
+      0.75-1.00      0.1478       0.2411         1.63
+
+    time_to_writing_station
+      bin            pop share    corpus share   ratio
+      0.00-0.25      0.1523       0.0567         0.37
+      0.25-0.50      0.3522       0.2483         0.71
+      0.50-0.75      0.3478       0.4558         1.31
+      0.75-1.00      0.1477       0.2393         1.62
+
+    observation_mode
+      bin            pop share    corpus share   ratio
+      0.00-0.25      0.1547       0.0660         0.43
+      0.25-0.50      0.3542       0.2498         0.71
+      0.50-0.75      0.3400       0.4442         1.31
+      0.75-1.00      0.1512       0.2399         1.59
+
+    Sampling density rises with supply assumption and with proximity to
+    a writing station, in the direction the spec predicts. No step in
+    the chain reads position.
+
+------------------------------------------------------------------------
+
+  2. WHAT SURVIVES, BY KNOWLEDGE CATEGORY
+
+    category                   conds  survival   vs base
+    facts                      0      0.5350     1.000
+    procedure_under_supply     1      0.7433     1.389
+    fabrication_practice       1      0.3352     0.627
+    interrelation              2      0.2954     0.552
+    hold_until_next_repair     3      0.2793     0.522
+
+    most suppressed: hold_until_next_repair
+    interrelation ranks 2 of 5
+
+    the ranking is a property of the category list, which is enumerated
+    by this module. Adding a category with more conditions moves
+    interrelation down it
+
+------------------------------------------------------------------------
+
+  3. THE INTERACTION -- what the spec's reason does not supply
+
+    coupling   supply only  residence    both       product      excess
+    0.0        0.799        0.992        0.798      0.792        1.01
+    0.3        0.800        0.937        0.758      0.750        1.01
+    0.5        0.755        0.801        0.673      0.605        1.11
+    0.7        0.622        0.621        0.552      0.386        1.43
+    0.9        0.521        0.525        0.506      0.274        1.85
+
+    At coupling 0 the conjunction's suppression is the PRODUCT of the
+    two marginals -- excess 1.01, no interaction, nothing the two
+    conditions do together that they do not do apart.
+
+    RAN AGAINST THE DRAFT. This section was written expecting excess to
+    fall BELOW 1.0 as coupling rose -- the conjunction being rarer than
+    the product. It goes the other way, to 1.85. The measurement is
+    kept and the prose was changed.
+
+    The reason is visible once measured: when remoteness drives both
+    axes, low supply assumption and residence select nearly the same
+    people, so the conjunction is barely rarer than either condition
+    alone while the product keeps multiplying as though they were
+    independent. Treating the two conditions multiplicatively
+    OVERSTATES the suppression, by up to 1.85x here.
+
+    So the spec's claim survives in direction and its stated reason
+    needs correcting in mechanism. Interrelation is suppressed -- but
+    because it sits in the remote region at all, not because two
+    independent penalties compound. The compounding version is the one
+    a reader would reach for, and it is too strong.
+
+------------------------------------------------------------------------
+
+  4. SECOND-ORDER -- does relevance track position or content?
+
+    content mix    corr with position     corr with content
+    0.0            +0.486                 -0.023
+    0.2            +0.384                 +0.069
+    0.4            +0.224                 +0.152
+    0.5            +0.143                 +0.169
+    0.6            +0.078                 +0.162
+    0.8            -0.001                 +0.098
+    1.0            -0.015                 +0.001
+
+    position stops dominating at mix >= 0.5
+    peak content correlation at any mix: 0.169
+
+    the crossing is not a handover to content. It is the point where
+    the score stops tracking position, and the content correlation
+    never exceeds 0.17 at any mix -- because closeness to a corpus mean
+    rewards being average, not being good
+
+    RAN AGAINST THE DRAFT. This was written expecting content to take
+    over as the mix rose. It does not. The score is closeness to the
+    corpus mean -- a TYPICALITY measure -- and content quality is
+    uniform, so the mean sits mid-range and middling items score
+    highest. The relationship with quality is non-monotone and reads as
+    a correlation near zero at every mix.
+
+    What the sweep shows is the score STOPPING to track position. It
+    never starts tracking content. That is the sharper form of the
+    spec's second-order point: a typicality-calibrated relevance score
+    cannot reward quality at any surface mix, it can only stop
+    penalising position. Content quality is generated independently of
+    position here, so below the crossing the score is not a judgement
+    about the item at all.
+
+------------------------------------------------------------------------
+
+  CONFIDENCE, reported separately and not resolved
+    any_real_corpus
+      NONE. no corpus is read, sampled or measured anywhere in this
+      file
+    first_order
+      a consequence of the stipulated P(write) and the stipulated
+      population coupling. Direction is structural, magnitude is not
+    interaction_result
+      the zero-coupling identity is algebraic; the excess above it is a
+      function of the coupling parameter
+    ranking
+      a property of the enumerated category list, not of the world
+    resolved                       False
+    second_order
+      the crossover is real but its location moves with the stipulated
+      surface-feature mix
+
+  WHERE IT BREAKS
+    - THE SPEC'S STATED REASON IS INCOMPLETE AND THE MODULE MEASURES
+    THE GAP. 'Because those two conditions are anti-correlated with
+    writing' gives the two marginals. At zero coupling between the
+    position axes the conjunction's suppression is EXACTLY their
+    product -- no interaction at all. Everything above that is supplied
+    by the coupling, which is a fact about the population and not about
+    either condition
+    - INTERRELATION IS NOT ALWAYS THE MOST-SUPPRESSED CATEGORY. Adding
+    a three-condition category moves it down the ranking, and the
+    ranking is a property of the list this module enumerates. 'Most
+    strongly suppressed' is a statement about the enumeration until the
+    category set comes from somewhere else
+    - P(write | position) is stipulated as a logistic in three axes
+    with chosen coefficients. The first-order result is a consequence
+    of it. What is not a consequence of it is the interaction, which is
+    why that is the reported finding
+    - THE MULTIPLICATIVE READING OF THE SPEC'S REASON IS TOO STRONG,
+    AND THIS MODULE'S DRAFT MADE IT. Coupling drives the excess ABOVE
+    1.0, not below: when remoteness moves both axes, the two conditions
+    select nearly the same people and the conjunction is barely rarer
+    than either alone. A product-of-marginals estimate overstates the
+    suppression by up to 1.85x here
+    - the second-order test is downstream of the first: corpus
+    membership is position-driven by construction, so a scorer
+    calibrated on the corpus tracking position is close to a
+    restatement. And the crossing is NOT a handover to content -- a
+    typicality score rewards being average, so the content correlation
+    stays under 0.2 at every mix. What the sweep locates is where
+    position stops dominating, which is a weaker statement than the one
+    drafted
+    - position_typicality is operationalised as P(write), which makes
+    the second-order correlation partly definitional. A corpus study
+    would need an independent positional marker
+    - no corpus is read anywhere. Every number here is generated
