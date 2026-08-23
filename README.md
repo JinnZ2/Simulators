@@ -42,6 +42,15 @@ before the modules.
 `criteria-drift/unlogged_move.py` runs that first distinction as a sim, and
 `tools/check_term_collision.py` reports which files use the terms.
 
+`PREAMBLE.md` carries a second note, the **TERM-DRIFT CITATION CHECK**: a
+citation carries a measurement forward under a word, and is valid only if the
+word's referent held between the measurement and the use. Three questions —
+what was the referent when it was measured, what was load-bearing in it, is
+that element present now — with the rule that **does-not-transfer is not
+refuted** and **absence of retest is not refutation**.
+`term-drift-citation/` runs the check and tallies the asymmetry it warns
+about.
+
 5. **[`CASE_STUDY_NARRATIVE_INSTINCT.md`](CASE_STUDY_NARRATIVE_INSTINCT.md)** —
    the empirical record the spine rests on: a multi-round correction sequence
    in which the framing of scale_builder / narrative claims was repeatedly
@@ -56,11 +65,11 @@ underneath. Read those before running the corresponding script.
 
 ## Layout
 
-Seventy folders. The complete index — one line each — is in
+Seventy-one folders. The complete index — one line each — is in
 [`CLAUDE.md`](CLAUDE.md); full per-folder notes are in
 [`docs/FOLDER_NOTES.md`](docs/FOLDER_NOTES.md).
 
-This section used to carry a second, partial copy of that list (30 of 70
+This section used to carry a second, partial copy of that list (30 of 71
 folders). It was removed rather than completed: two lists drift, and the one
 that drifted was this one.
 

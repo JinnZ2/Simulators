@@ -1,0 +1,133 @@
+REVISION ASYMMETRY -- does the direction ever cost the reviser
+========================================================================
+
+  'Refutations of older work land as they were uninformed.
+   They do not land as we may be measuring a different
+   object. Check whether the revision direction ever costs
+   the reviser. If it never does, the revision is a routing
+   rule.'
+
+  Two populations. Only the second is what the test is of.
+
+------------------------------------------------------------------------
+
+  SELF_REVISION  (4)
+
+    CONTESTED  SELF_ATTRIBUTED   
+      7eac4ad, handoff-provenance/diff.py
+      MIN_COVERAGE added to the matcher after a false DROPPED
+        -> drop rate 0.09 -> 0.00; the one DROPPED became
+        UNSCORABLE_COVERAGE
+        removed the module's only reportable drop rate, which is a
+        finding lost; and it moved the headline toward a cleaner
+        channel. Both directions are real and this row does not pick
+
+    COST       SELF_ATTRIBUTED   
+      7eac4ad, handoff-provenance diff.match()
+      NEGATED state added; a CARRIED at share 1.00 was refused
+        -> one CARRIED removed from the count
+        the entry had scored at the matcher's maximum; refusing it
+        removed a favourable data point
+
+    COST       SELF_ATTRIBUTED   
+      7eac4ad, handoff-provenance/diff.py
+      implementation_surface() strips prose before matching
+        -> CARRIED became harder to earn; a docstring no longer counts
+
+    COST       SELF_ATTRIBUTED   
+      00855d4, tools/check_term_collision.py
+      word boundary added to the term-collision scanner
+        -> 8 reported hits -> 3
+        shrank this work's own reported finding count by five
+
+    CONTESTED=1, COST=3
+
+------------------------------------------------------------------------
+
+  PREDECESSOR_REVISION  (1)
+
+    FREE       UNINFORMED        
+      4491ecc then de5a3bd (correction H1)
+      N-body 'reproduction' in SCALING_CLASSES marked
+      CONSTRUCTION_FITTED, attributing the deficiency to the source
+        -> the source's figure was treated as not independently
+        reproduced
+        THE CORRECT READING WAS DIFFERENT_OBJECT. The term was printed
+        in the source label and lost in transfer; retagged
+        LABEL_TRUNCATED_IN_TRANSFER. The revision landed as 'the source
+        was deficient' when the object had changed between measurement
+        and use, it cost nothing until an outside party caught it, and
+        the outside party was the operator
+
+    FREE=1
+
+------------------------------------------------------------------------
+
+  THE CONTRAST
+
+                               n          COST
+    own work, in progress      4          3
+    someone else's, earlier    1          0
+
+    matches the spec's shape: True
+
+    the contrast is the shape the spec describes and the sample size
+    establishes nothing. One predecessor revision is an anecdote about
+    one revision
+
+    routing-rule test (predecessor population only)
+      n = 1, costing = 0
+      verdict: ROUTING_RULE   state: COMPUTED_AT_TINY_N
+      one row. 'Never' is falsified by a single counterexample and
+      confirmed by nothing, so a ROUTING_RULE verdict off n=1 is a
+      description of one revision and not a finding about a practice
+
+  CONFIDENCE, reported separately and not resolved
+    assessment
+      self-assessed by the reviser, which is the weakest instrument
+      available for this question. A party motivated to look
+      even-handed produces this same ledger
+    completeness
+      the rows are the revisions the reviser remembered and chose to
+      log. A revision that went unnoticed is not here, and going
+      unnoticed is what a free revision does
+    defence
+      every row carries a commit or a location, so an outside reader
+      can check it. That is not an outside assessment
+    n_predecessor
+      one. The routing-rule test runs on it and the verdict is a
+      description of that one revision
+    resolved
+      False
+
+  WHERE IT BREAKS
+    - THE ONE PREDECESSOR REVISION IN THIS LEDGER COST NOTHING AND WAS
+    FRAMED AS 'THEY WERE DEFICIENT', WHICH IS THE ASYMMETRY THE SPEC
+    DESCRIBES. The N-body figure in SCALING_CLASSES was marked
+    CONSTRUCTION_FITTED against the source. The correct reading was
+    DIFFERENT_OBJECT -- the term was printed in the source label and
+    lost in transfer -- and it was the operator who caught it, not the
+    reviser. Meanwhile all four self-revisions in the same session cost
+    the reviser something. The contrast is the shape the spec names
+    - AND n=1 ESTABLISHES NOTHING. The routing-rule verdict runs over a
+    single predecessor revision. 'Never costs' is falsified by one
+    counterexample and confirmed by no number of non-counterexamples,
+    so ROUTING_RULE here is a description of one revision, not a
+    property of a practice. The contrast between the two populations is
+    4 rows against 1
+    - THE LEDGER IS ASSESSED BY THE PARTY IT IS ABOUT AND NOTHING
+    INSIDE IT FIXES THAT. Whether a revision cost the reviser is judged
+    here by the reviser, and a reviser wanting to look even-handed
+    would produce a ledger that looks like this one -- self-revisions
+    costing, the awkward row disclosed. The commits are the only check,
+    and checking them requires someone else
+    - THE ROWS ARE THE REVISIONS THE REVISER NOTICED. A revision that
+    cost nothing and drew no correction leaves no trace to log, so the
+    sampling is biased toward exactly the rows that got caught. The one
+    FREE row is here because the operator objected; a FREE revision
+    nobody objected to would not have been written down
+    - 'COST' IS NOT DEFINED IN A UNIT. The column records a judgement
+    that a revision moved against the reviser's interest, with no scale
+    and no way to compare two rows. CONTESTED exists because one row
+    moved both ways at once and forcing it either way would have been a
+    number invented to complete a table

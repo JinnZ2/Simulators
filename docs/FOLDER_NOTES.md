@@ -4781,7 +4781,7 @@ is pushed on this branch — see the reconciliation note in `CLAUDE.md`.
   inherited). No discount factor, because a numeric weight needs the
   refused base rate and would be it laundered through arithmetic.
   **Read correctly the live register gives ZERO pairs established
-  independent of 2278; folding UNEXAMINED into NO gives 2211 from
+  independent of 2346; folding UNEXAMINED into NO gives 2278 from
   identical data** — one module carries a verdict and every other row is
   UNEXAMINED, so zero is the register reporting that the work has not
   been done, not a finding about modules, and the inversion needs no bad
@@ -4859,6 +4859,74 @@ is pushed on this branch — see the reconciliation note in `CLAUDE.md`.
   really tested; and `compare()` is pairwise, so nothing here says what a
   shape with nine bindings looks like. 48 selftest checks green. Stdlib
   only, parses under Python 3.9, phone-buildable, CC0.
+- `term-drift-citation/` — **Marker under exploration.**
+  `SPEC_CITATION.md` delivered verbatim and also placed in `PREAMBLE.md`.
+  A citation carries a measurement forward under a word and is valid only
+  if the word's referent held between measurement and use, which nothing
+  in a citation records. Three questions — the referent at time of
+  measurement, what was load-bearing in it, whether that element is
+  present now. **The module's real work is holding three things apart
+  that a single score would merge:** the transfer verdict, an
+  `original_result` field permanently reading NOT_ASSESSED_HERE because
+  nothing here measures the original, and a retest state whose values are
+  RETESTED / NOT_RETESTED / **NOT_INSTANTIABLE** with REFUTED absent from
+  the set. **DOES_NOT_TRANSFER is not REFUTED** — the result may be
+  correct and still not attach — and **absence of retest is not
+  refutation**, with Holling NOT_INSTANTIABLE because testing it needs a
+  system with slack and where slack was optimised away there is no retest
+  for the absence to be an absence of. All three delivered cases return
+  DOES_NOT_TRANSFER and **the module could not have returned anything
+  else**, since each arrived with its status already naming the removal:
+  the verdict is the input restated in a type, and there is no negative
+  control, every worked example having drifted. **The safety case is run
+  rather than restated:** "frozen variables do not stop existing; they
+  stop being read, metric can improve while facility degrades" is
+  arithmetic, and one facility with five of six variables dropped from
+  scope gives a narrow metric climbing **+0.250 to a perfect 1.000 while
+  the whole facility falls −0.125** — the narrow metric is not wrong, it
+  is correct about what it reads. Stipulated, with the decay rate chosen
+  for legibility: the mechanism is available, not observed.
+  **A term collision inside the operator's own two specs is surfaced and
+  not reconciled:** SPEC_SHAPES.md says FROZEN entries are declared by
+  the builder and never inferred, SPEC_CITATION.md says frozen variables
+  stop being read, and the safety case's unread variables were declared
+  by nobody — so under the first spec they are UNDECLARED and calling
+  them FROZEN is the inference it forbids. Three readings printed
+  (UNDECLARED, ASSUMED_FROZEN, SAME_WORD_LOOSELY) and **none picked**,
+  since which holds is a question about what was meant and PREAMBLE.md's
+  own TERM COLLISION rule is that senses get named, not merged.
+  **`asymmetry.py` tallies the spec's asymmetry test and it does not
+  flatter this session.** Two populations counted apart, because revising
+  your own work in progress and revising a predecessor's are different
+  objects and only the second is what the test is of: **four
+  self-revisions, three COST and one CONTESTED, none free** — the NEGATED
+  state removed a CARRIED scoring at the matcher's maximum,
+  implementation_surface() made carrying harder to earn, the
+  word-boundary fix shrank this work's own finding count from eight to
+  three. **The one predecessor revision cost nothing:** the N-body figure
+  in SCALING_CLASSES marked CONSTRUCTION_FITTED against the source, framed
+  as *the source was deficient*, when the correct reading was
+  DIFFERENT_OBJECT — the term was printed in the source label and lost in
+  transfer — costing the reviser nothing until an outside party caught
+  it, **and the outside party was the operator**. That is the asymmetry
+  the spec describes with this session on the wrong side. **And n=1
+  establishes nothing:** "never costs" is falsified by one counterexample
+  and confirmed by no number of non-counterexamples, so ROUTING_RULE
+  describes one revision rather than a practice. The ledger is
+  **self-assessed by the party it is about** — a reviser wanting to look
+  even-handed would produce this same ledger — with a commit on every row
+  as the only check, and the sampling biased toward rows that got caught,
+  since the FREE row is here because the operator objected and a free
+  revision nobody objected to would leave nothing to log.
+  **A word is not a measurement, and the module does not decide which
+  words are:** quantity, sign and formal-definition default to UNASSESSED
+  and `carries_a_measurement()` refuses rather than guessing, holding even
+  where the delivered text arguably supplies the answer — Holling's
+  "magnitude of disturbance absorbable before state shift" reads like a
+  quantity with a sign, and filling the field from it would be this
+  module deciding what counts as a formal definition in ecology.
+  UNASSESSED is not "no", and it is still not loadable. 50 selftest
+  checks green. Stdlib only, parses under Python 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

@@ -35,23 +35,23 @@ CC0 simulators and audits grounded in physics. **Index only** — detail in
 - `climate-modeling/` — cascade-speed blindness *(non-stdlib)*
 - `vector-field-explorer/` — channels as vectors; the angle
 - `exploration-engine/` — cross-domain cascade-regime chassis
-- `sustained-activation-gate/` — bistable hysteresis, FIRM vs SOFT
+- `sustained-activation-gate/` — bistable, FIRM vs SOFT
 - `equivalence-field/` — falsification as pointer; intensive
 - `rigidification-sensor/` — variance suppressed faster than
 - `claim-audits/` — external documents, eight verdict
 - `null-harness/` — can a gate fire, can it stay silent
-- `divergence-playground/` — N readers, one fork; spread is the
+- `divergence-playground/` — N readers, one fork; spread
 - `relational/` — pain-as-sensor, triadic correlation
-- `engine-boiler-guide/` — offline field triage
-- `field-fabrication-guide/` — precision tools from scratch
+- `engine-boiler-guide/` — offline triage
+- `field-fabrication-guide/` — precision tools, scratch
 - `fuel-independence-guide/` — engines when fuel stops
-- `cold-weather-battery-guide/` — sleeper-cab Li-ion, cold
+- `cold-weather-battery-guide/` — sleeper-cab Li-ion
 - `inverseminar/` — one artifact, one reconstruction
 - `energy/` — dark energy: metrology stack + audit *(non-stdlib)*
 - `crossdomain-eval/` — symbolic/numerical toolkit *(non-stdlib)*
-- `fourd-municipal-engine/` — 4D language lens + municipal code
+- `fourd-municipal-engine/` — 4D lens + municipal code
 - `fourd-municipal-engine-v2/` — same core plus ETL, API
-- `msiaf-framework/` — four-dimension incident cascade
+- `msiaf-framework/` — 4D incident cascade
 - `gdprf-framework/` — gradient-driven proxy reasoning
 - `msiaf-gdprf-bridge/` — MSIAF cascades as GDPRF claims
 - `proxy-investigation-lab/` — grounds a proxy as far as it goes
@@ -82,12 +82,13 @@ CC0 simulators and audits grounded in physics. **Index only** — detail in
 - `handoff-provenance/` — the channel between talk and code
 - `operator-structure-echo/` — instrument recurs to the builder's
 - `scope-bound-shapes/` — one shape, FROZEN declared per binding
+- `term-drift-citation/` — does a citation still attach
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
 ## Reconciliation and conventions
 
-Checked 2026-08-23: all 70 folders above exist and are pushed on this
+Checked 2026-08-23: all 71 folders above exist and are pushed on this
 branch, so there is no `docs/ARCHIVE_NOTES.md`. Branch
 `claude/new-folder-um2xra`. Stdlib only; folders marked *(non-stdlib)*
 ship a `requirements.txt`. Each folder ships `samples/`.
