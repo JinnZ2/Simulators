@@ -1,0 +1,66 @@
+S4 -- ANTLER CALIBRATION
+========================================================================
+
+  1. WHAT THE EXISTING MEASUREMENT CANNOT DO
+
+    year   rank prospect  novelty    A rate     B rate
+    1      0.25           1.000      0.246      0.999
+    2      0.60           0.660      0.600      0.663
+    3      0.85           0.272      0.851      0.273
+
+    A trend +0.605   B trend -0.726   same sign False
+    separable on rate alone: True
+
+    Here the trends happen to run opposite ways, which is the ONE case
+    where rate alone would separate them -- and it depends entirely on
+    the stipulated novelty decay outpacing the stipulated rank rise.
+    Move either constant and the signs agree. So rate alone separates
+    the models only for particular parameter values, which means an
+    observer reading a real rate series cannot know whether it does.
+
+------------------------------------------------------------------------
+
+  2. THE MEASUREMENT THAT DOES -- year two, matched mass
+
+    cohort                       prior    mass     motor error    social deficit
+    wild                         1        2.2      0.248          0.201
+    supplemented_no_year_one     0        2.2      0.448          0.400
+
+    motor gap  +0.201
+    social gap +0.199
+
+    A predicts: social gap, no motor gap
+    B predicts: motor gap at equal mass, no necessary social gap
+
+    Both gaps are non-zero in this sim because both mechanisms were
+    switched on. On real animals they are measured separately -- a
+    control-error assay at matched mass, and a rank assay -- and the
+    models disagree about which one carries the deficit. That
+    disagreement is the experiment.
+
+------------------------------------------------------------------------
+
+  CONFIDENCE, reported separately and not resolved
+    model_separation                     structural: the two models are functions of different variables, so a design varying one at fixed other separates them
+    parameter_values                     all stipulated. novelty decay, motor-error base and per-season factors are round numbers, not measurements
+    prior_art_claim                      CARRIED FROM THE WORK ORDER, not verified here
+    resolved                             False
+
+  WHERE IT BREAKS
+    - the cohort contrast is confounded. 'supplemented / rehab, no
+    year-one testing' selects animals that differ in nutrition,
+    handling, disease history and human exposure, any of which moves
+    motor error. The design needs the deficit to be specific to the
+    practice variable and nothing here establishes that
+    - the sim puts the separation in by construction: engage_A ignores
+    novelty and engage_B ignores rank, so of course a design varying
+    one at fixed other separates them. What the module shows is that
+    the EXISTING measurement -- engagement rate over years -- does not,
+    which is the part worth having
+    - motor_error decays with seasons SPARRED and not with seasons
+    CARRIED. That is model B's content and it is assumed here rather
+    than derived; if carrying alone calibrates, both cohorts converge
+    and the design returns nothing
+    - no cervid data of any kind is used in this file
+    - the fawn-play prior art is carried from the work order
+    unverified, and the whole design leans on it being real

@@ -4435,6 +4435,58 @@ underneath).
   clause is deliberately NOT used to rescue the claim. Forty claims
   `SHB_001..040`, one REFUTED, four external audits run by someone who
   did not write the claims. Stdlib only, CC0.
+- `instrument-bias-sims/` — Eight sims from a delivered work order,
+  each testing one way an instrument's own construction shapes what it
+  reports. **Marker under exploration, not a thesis**; the delivered
+  instruction was "test fit, extend, or report where it breaks", so
+  every module ships `report()`, `confidence()` (separate readout, never
+  resolved) and `breaks()`. **S1** event-sampled observation: the claim
+  holds, and the distortion is a **product** of event triggering and
+  cost weighting — a `duty_cycle` knob makes B converge on A, which is
+  the check that the finding is about the sampling rule and not a class
+  of observer. **S2** the one-arm anchoring protocol is
+  **underdetermined, not merely biased** — two constructed worlds
+  (latent 10 with strong deference, latent 8 with none) agree on the
+  DOWN arm to within noise and separate by two units on NONE and UP, so
+  the extra arms are the second equation; plus a power floor the stated
+  discriminator lacks. **S3** the false-null rate is **not computable**
+  from a list selected on later concession, and the column *varies*
+  0.12–1.00, which is worse than flat: what it tracks is how readily an
+  instrument grants, since nothing in the list penalises granting, and
+  an instrument granting every case takes the best score. The revision
+  axis needs no base rate (a count against zero) and is the half that
+  separates the instruments. **S4** engagement rate separates the two
+  models only at particular parameter values, which an observer reading
+  a real series cannot know they have; the cohort × year design does
+  separate them and is disclosed as confounded. **S5** the
+  genetic-conflict criterion is **not empty** — it is a prediction, and
+  the case it was used to exclude (a clonal root system) is the
+  intervention that tests it; reported against the framing the work
+  order offers. **S6** the stated uniformity statistic is a **range**,
+  and the expected range of k noisy estimates grows with k, so adding
+  difficulty levels *inverts* the diagnostic (OK at 2 levels,
+  `CONSTANT_FIRES` at 9, n=20); a least-squares slope does not. **S7**
+  observer-dependence is near-analytic and the cost-asymmetry readout is
+  a **consequence of a stipulated table**, flagged as such in the data
+  structure; graded terms only, no intent attributed anywhere. **S8**
+  the normalisation is circular as stated, the three normalisers *agree*
+  on the sign at the declared placeholder, and they disagree **4286×**
+  about what present-day interval would count as parity — plus the work
+  order's own "value, uncertainty, endpoint" criterion turned on the
+  module's own figures, which fail it on uncertainty. **`crosscutting.py`**
+  enforces the four cross-cutting rules over all eight rather than
+  restating them — moral tokens and intent phrases scanned, the separate
+  unresolved `confidence()` and non-empty `breaks()` structurally
+  enforced, the README phrase checked — and is null-tested on a planted
+  violation so none of the checks is silent by construction; its own
+  limit (a keyword scan is stepped around by any paraphrase) is stated
+  at the top of the file rather than the bottom. **Three results ran
+  against the drafted prose** (S3's flat column, S6's more-levels-is-
+  better, S8's sign flip) and are recorded in place rather than
+  smoothed. No module reads real data and every literature claim carried
+  from the work order is marked carried-not-verified. 148 selftest
+  checks green. Stdlib only, parses under Python 3.9, phone-buildable,
+  CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

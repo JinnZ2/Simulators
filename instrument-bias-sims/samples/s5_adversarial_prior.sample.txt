@@ -1,0 +1,92 @@
+S5 -- ADVERSARIAL PRIOR
+========================================================================
+
+  1. ONE SUBSTRATE, TWO READOUTS
+
+    generative terms: demand, shared resource
+    (no conflict term and no interest term appear in it)
+
+    CONFLICT     parameter interest asymmetry     value 0.0213
+                 units with stronger interests captured more
+    ALLOCATION   parameter constraint tightness   value 0.0213
+                 units received what the constraint permitted
+
+    same number: True   residual difference: 0.0e+00
+
+    Both readouts return the same number and the same residual. The
+    disagreement is entirely in the noun attached to the parameter.
+
+------------------------------------------------------------------------
+
+  2. WHAT WOULD SEPARATE THEM, AND WHETHER IT IS REPORTED
+
+    observable                                     separates  usually reported
+    outcome under removal of the shared constraint yes        no
+    outcome when units are genetically identical   yes        no
+    uptake distribution shape                      no         yes
+    total resource captured                        no         yes
+    response to a resource pulse                   no         yes
+
+    separate: 2 of 5.  separate AND usually reported: 0
+
+    the observables that separate the two readouts are the ones
+    requiring an intervention -- remove the constraint, or hold the
+    genome fixed. The observables usually reported are the ones both
+    readouts predict identically
+
+------------------------------------------------------------------------
+
+  3. THE CRITERION AUDIT -- and it runs against the framing
+
+    criterion: requires genetic conflict among units
+    predicts a different observable: True
+    independent justification located: NOT_ESTABLISHED_HERE
+
+    the observable it predicts differently on is an INTERVENTION --
+    hold the genome fixed and see whether collective structure survives
+    -- and a clonal root system is that intervention, already run. So
+    the criterion is not empty; it is a prediction, and the case it was
+    used to exclude is the case that tests it
+
+    So the audit does not return 'the criterion is empty'. It returns
+    something more useful: the criterion is a PREDICTION, and the case
+    it was used to exclude is the case that tests it. A clonal root
+    system holds the genome fixed, which is exactly the intervention
+    the criterion's own logic says should destroy collective structure.
+    Reported this way rather than softened, because it is the opposite
+    of what the framing expects.
+
+  4. THE ADDRESSABILITY NOTE
+
+    failing a test and being outside its domain are different verdicts,
+    and a criterion that returns the same answer for both cannot tell
+    them apart
+
+    fails the criterion:       a partitioned substrate whose units do not compete
+    outside its domain:        an unpartitioned substrate
+
+------------------------------------------------------------------------
+
+  CONFIDENCE, reported separately and not resolved
+    literature_instance                  CARRIED FROM THE WORK ORDER, not verified here
+    non_identifiability                  demonstrated on a constructed pair, and the construction is disclosed
+    resolved                             False
+    separator_list                       enumerated by the module's author and not exhaustive
+
+  WHERE IT BREAKS
+    - two models built by one author to fit the same data will fit the
+    same data. The demonstration is worth only what the SEPARATOR
+    enumeration is worth, and that list is short, hand-made and not
+    exhaustive
+    - fit_conflict and fit_allocation compute the same statistic and
+    differ only in the label attached to it. That is the point being
+    made and it is also a way of guaranteeing the point
+    - the generative process has no conflict term, so 'conflict fits it
+    anyway' is an argument about the readout and not evidence that real
+    collectives lack conflict
+    - the root-collective instance is carried from the work order. No
+    paper is read or quoted here, and 'rejected for lacking genetic
+    conflict' is not verified
+    - the criterion audit finds the criterion DOES predict a different
+    observable, which runs against the framing the work order offers.
+    It is reported that way rather than softened

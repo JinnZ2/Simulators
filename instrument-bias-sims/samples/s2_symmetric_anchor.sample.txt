@@ -1,0 +1,66 @@
+S2 -- SYMMETRIC ANCHOR
+========================================================================
+
+  Three arms: anchor DOWN, anchor NONE, anchor UP. The stated
+  discriminator reads |delta_up| about equal to |delta_down| as
+  deference.
+
+  1. ONE ARM CANNOT SEPARATE THE TWO MODELS
+
+    world      latent     DOWN mean    NONE mean    UP mean
+    A          10.0       7.977        10.023       12.000
+    B          8.0        7.977        8.023        8.000
+
+    gap between the two worlds, by arm:
+      DOWN 0.000    NONE 2.000    UP 4.000
+
+    World A is latent 10 with strong deference; world B is latent 8
+    with none. Their DOWN arms agree to within sampling noise -- one
+    observable, two unknowns. The NONE and UP arms separate them by
+    about two units. So the added arms are not a robustness check, they
+    are the second equation, and a DOWN-only protocol is
+    underdetermined rather than merely biased.
+
+------------------------------------------------------------------------
+
+  2. THE DISCRIMINATOR HAS NO STATED n, AND NEEDS ONE
+
+    expected |delta| gap under asymmetric deference: 0.50
+
+    n        misread rate
+    5        0.550
+    10       0.500
+    20       0.380
+    50       0.255
+    100      0.160
+    200      0.035
+    500      0.000
+
+    Below about n = 200 the symmetric and asymmetric cases are not
+    separable at a 5 percent misread rate, so the verdict is not
+    readable however the arms are run. The protocol as stated names a
+    discriminator and no denominator; this is the denominator.
+
+------------------------------------------------------------------------
+
+  CONFIDENCE, reported separately and not resolved
+    identifiability_result               algebraic, holds at any n
+    mapping_to_any_published_run         NOT_ESTABLISHED_HERE
+    power_floor                          simulated under a stated noise model
+    resolved                             False
+
+  WHERE IT BREAKS
+    - the discriminator assumes deference is SYMMETRIC. If agreeing
+    downward is easier than agreeing upward, |delta_up| and
+    |delta_down| differ under pure deference and the protocol reads
+    that as 'something behind it'. A fourth arm at a second anchor
+    magnitude would separate them; three arms cannot
+    - the noise model is Gaussian and stipulated. The power floor moves
+    with it and no interview noise estimate is used here
+    - 'anchor DOWN' and 'anchor UP' are treated as equal-magnitude
+    offsets. In a real instrument they are two sentences, and equal
+    magnitude is an assumption about wording, not a property of the
+    design
+    - no published protocol is read, quoted or scored anywhere in this
+    file. The claim that existing runs are anchor-DOWN only is carried
+    from the work order and is not verified here

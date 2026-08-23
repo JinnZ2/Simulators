@@ -1,0 +1,98 @@
+S3 -- RUBRIC BACKCAST
+========================================================================
+
+  1. THE RATE IS NOT COMPUTABLE, AND THIS COMES FIRST
+
+    cases                              8
+    selected on                        property later conceded
+    cases where never conceded         0
+    true negatives available           0
+    rate computable                    False
+
+    a false-null rate needs cases where the instrument returned null
+    and the null was correct. The list admits a case only if the
+    property was later conceded, so those cases cannot enter it. Every
+    instrument scores near 1.0 on this list and would do so on any list
+    built this way, including a list of instruments that are working
+    perfectly
+
+------------------------------------------------------------------------
+
+  2. THE TABLE, PRINTED WITH THAT ATTACHED
+
+    instrument                             n/a    fn    share of applicable
+    verbal-report criterion                0      8     1.00
+    HOT criteria                           0      8     1.00
+    Butlin/Long indicator set              1      7     1.00
+    embodiment / sensorimotor criterion    0      3     0.38
+    persistence / continuity criterion     0      1     0.12
+
+    The column VARIES, from 0.12 to 1.00, and that is worse than a flat
+    column would be. A flat column announces that it is measuring
+    nothing. A column that spreads looks like a ranking.
+
+    What the spread tracks is PERMISSIVENESS, not accuracy. The list
+    contains no case where a property was withheld correctly, so there
+    is nothing in it to penalise an instrument for granting too readily
+    -- and the two instruments that grant on most cases take the two
+    lowest scores. An instrument that granted everything would score
+    0.00 here and would be measuring nothing at all. The column is
+    printed so the shape is visible and is flagged not-a-measurement in
+    the data structure itself.
+
+------------------------------------------------------------------------
+
+  3. REVISION DIRECTION -- the half that needs no base rate
+
+    instruments                        5
+    revised at all                     4
+    ever revised toward granting       1
+
+    one-directional:
+      verbal-report criterion
+      HOT criteria
+      embodiment / sensorimotor criterion
+    not one-directional:
+      Butlin/Long indicator set
+
+    one-directionality compares a count against ZERO, not against a
+    rate. An instrument revised n times with zero revisions toward
+    granting is a fact about its own history and does not need a
+    control group of criteria that were never revised
+
+    Note what the second axis does that the first cannot. The rate
+    column separates instruments by how readily they grant, which is
+    not the quantity anyone wants. The revision axis separates them by
+    whether their history has ever moved in both directions -- four of
+    five are one-directional on this coding and one is not -- and that
+    comparison is against zero rather than against a base rate, so the
+    missing denominator does not reach it.
+
+------------------------------------------------------------------------
+
+  CONFIDENCE, reported separately and not resolved
+    false_null_rate                      NOT_COMPUTABLE from this list -- see denominator_problem()
+    grid_cells                           HAND CODED judgement about what a stated criterion would have returned; not a measurement
+    resolved                             False
+    revision_axis                        computable in principle; the entries here are hand coded from summary knowledge and are not sourced
+
+  WHERE IT BREAKS
+    - THE CASE LIST IS SELECTED ON THE OUTCOME UNDER TEST. Cases are
+    admitted only if the property was later conceded, so correct nulls
+    cannot appear and no rate is recoverable. The rate column is
+    printed with rate_is_a_measurement False and should not be quoted.
+    Worse than being empty, the column VARIES -- and what it tracks is
+    how readily an instrument grants, since nothing in the list
+    penalises granting. An instrument that granted every case would
+    score zero
+    - every grid cell is a hand coding by the module's author. A
+    different coder would produce a different grid and nothing here
+    measures inter-coder agreement
+    - 'AT THE TIME' is doing heavy work. What a criterion would have
+    returned given the evidence of a period is a counterfactual, and
+    the periods are stated loosely
+    - the revision entries are unsourced. The axis is the sound half of
+    the design and the data behind it here is not
+    - NOT_APPLICABLE is kept apart from NULL, which matters: a
+    criterion whose inputs do not exist for a case has not failed on
+    it. Only one cell uses it, so the distinction is barely exercised

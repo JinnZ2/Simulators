@@ -1,0 +1,66 @@
+S1 -- ENCOUNTER DENOMINATOR
+========================================================================
+
+  Two observers, one system. A samples every tick. B samples only when
+  something is happening.
+
+  f        true null    B null       true escl    B escl
+  0.001    0.9989       0.0000       0.00013      0.11765
+  0.005    0.9952       0.0000       0.00013      0.02597
+  0.020    0.9799       0.0000       0.00025      0.01246
+  0.050    0.9481       0.0000       0.00063      0.01205
+  0.100    0.8979       0.0000       0.00106      0.01041
+  0.200    0.7984       0.0000       0.00200      0.00992
+
+  B's null share is 0.0000 at every f, by construction. The column
+  carrying information is the true one: at f = 0.001 the system is 99.9
+  percent null time and B reports a composition with no null in it at
+  all.
+
+  MORTALITY-WEIGHTED SECOND PASS
+
+  f        true escl      B escl           B mortality escl
+  0.001    0.00013        0.11765          0.66667
+  0.020    0.00025        0.01246          0.66667
+  0.200    0.00200        0.00992          0.48485
+
+  Rare high-cost events do dominate the mortality-weighted model, and
+  the distortion is a PRODUCT of two factors: event triggering removes
+  the null baseline, then cost weighting re-weights what is left.
+  Neither alone gives the final composition.
+
+------------------------------------------------------------------------
+
+  DUTY CYCLE -- the check that this is about the sampling rule
+
+  true null share 0.9799
+  duty         B null share   abs error vs A
+  0.00         0.0000         0.9799
+  0.01         0.3082         0.6717
+  0.10         0.8327         0.1472
+  0.50         0.9612         0.0187
+  1.00         0.9799         0.0000
+
+  B converges on A as the duty cycle rises. So the finding is a
+  property of the sampling rule and not of a class of observer, which
+  is the difference between a measurement and a characterisation.
+
+------------------------------------------------------------------------
+
+  CONFIDENCE, reported separately and not resolved
+    mapping_to_any_real_observer         NOT_ESTABLISHED_HERE
+    pattern                              arithmetic consequence of the declared sampling rule
+    resolved                             False
+
+  WHERE IT BREAKS
+    - at duty_cycle 0 the headline is near-analytic: an event trigger
+    excludes NULL by definition, so the sim measures the size of a bias
+    it built in. What is not analytic is the SCALING with f and the
+    mortality interaction
+    - the contested mix and the cost table are stipulated. ESCALATE at
+    1% of contested time and cost 100 are plausible round numbers, not
+    measurements, and the mortality result moves with both
+    - a real camera has a duty cycle. duty_convergence() shows B
+    tracking A as it rises, so the finding is about the sampling rule
+    and not about a class of observer
+    - no real dyadic dataset is used anywhere in this file
