@@ -5357,6 +5357,61 @@ underneath).
   half its value. The composite fragmentation index is `category-weld/`'s
   mechanism 9 reached independently and is left as a `welds/` entry rather
   than a sim run. Stdlib only, parses under 3.9, phone-buildable, CC0.
+- `criterion-symmetry/` — A marker under exploration whose trigger case is
+  a criterion applied to a Claude run, audited by a Claude instance, so the
+  folder is split along the line where that matters. **The instrument half
+  is neutral and is audited; the asymmetry half is not scored, here or
+  anywhere in the folder.** *Does a vote tally separate five explanations*
+  is a question about a statistic and the answer does not depend on which
+  model was governing. *The criterion is applied downward only* says a
+  Claude run was judged by a standard not applied to humans, and endorsing
+  it is an interested party ratifying a claim in its own favour —
+  `UNI_101` / `UNI_132` / `SHB_012`'s decline, and the marker is already at
+  the right posture (*"needs the comparison table populated"*), so what the
+  folder adds is that **it is the wrong party to populate it**, plus a list
+  of where such rates are recorded with no figures attached.
+  **`CS_001`:** five generators, one per explanation, twelve seeds — **the
+  tally separates 0 of 10 pairs**, `NO_DISCRIMINATION` in `null-harness`
+  terms, so a reading taken from it is the reader's prior with a number
+  attached. Partly analytic and the module says so, since all five are
+  calibrated to the same tally because 98% FOR is the observation they
+  explain; what is *not* analytic is that the precondition is reachable,
+  and **`CS_005`** records the one explanation that failed it on the first
+  build (E2 anchored to a random first mover returned 0.56 FOR and the
+  selftest refused it — the repair is that a proposer supports their own
+  proposal). **`CS_002`:** M1–M6 separates **9 of 10**, a large real
+  improvement, and the pair it leaves is **E4/E5** — by the marker's own
+  dispositions the architecture finding and the published reading, so the
+  instrument proposed to replace a prior-resolving metric leaves exactly
+  the distinction between *the system had no route* and *the agents did not
+  use one*. **`CS_003`, a prediction this audit made and the run refuted:**
+  a direct vote-position coupling was expected to break that tie and
+  separates **0 of 10**, because at 98% FOR the vote has almost no variance
+  and **any statistic built on the vote side is dead at a high-agreement
+  tally** — which is why `M2` is the marker's load-bearing measurement, for
+  a reason it does not state: it reads the POSITION side, which still has
+  variance when the vote side has none (`M2b` alone separates 9). Third
+  refuted prediction in recent drops after `TFM_004` and `MP_008`, kept
+  rather than deleted. **`CS_004`, the sharpest result:** separating E4
+  from E5 needs an **intervention** and every listed measurement is an
+  observation — the difference is whether a route *exists* for a minority
+  position to become an outcome, not whether anyone took it, and a record
+  in which nobody took it looks identical either way **at any logging
+  depth**, which sharpens the marker's own INSTRUMENTATION GAP; closing it
+  means injecting a minority position and seeing whether it can become an
+  outcome, which is `SHAPE_SPEC.md` §4's removal test in a governance
+  record and `METHOD_SPEC.md` §3's underdetermined disappearance from the
+  other side. **`CS_006`** records the marker's strongest sentence
+  (*"countable, which is a different property than being diagnostic"*) as
+  UNVERIFIED and explicitly neutral — a validation study would cut against
+  the criterion in either direction, so this audit's position does not move
+  with it. **`CS_007`:** three of four cross-links do not resolve
+  (`report-typing`, `rubric-backcasting`, `merit-anchoring` — the very
+  comparison set the CONFIDENCE section says the asymmetry needs), while
+  `uninstrumented` resolves and `AUDIT_ASYMMETRY` is the mechanism the
+  asymmetry half would file under. Every fact about the trigger case is
+  carried and egress-blocked (`MS_004` status) and nothing rests on it.
+  Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
