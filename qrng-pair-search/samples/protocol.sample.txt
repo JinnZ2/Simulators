@@ -1,0 +1,15 @@
+INDEPENDENCE PROTOCOL
+
+  cross_corr       XCF(a,b) at lags 0..L. Sample count set by samples_for_correlation() for the smallest r that would matter, NOT by a round number.
+  common_perturb   sweep the suspected shared bath and watch both legs at once:
+    temp             ramp substrate 0->60 C, measure dP(bit=1) per leg, correlate
+    rail             sag and ripple the supply, same readout
+    mech             vibration sweep -- couples through alignment, not electronics
+    em               RF injection sweep across the readout band
+  verdict          coupling shows up under perturbation that is invisible at rest. A quiet-bench cross-correlation of zero is not evidence of independence; it is evidence the bath was not moving.
+
+MITIGATIONS
+
+  bath_separation    split the pump: independent lasers, independent rails, thermal isolation. This converts an OPT/TH/PWR overlap from structural to engineered -- and an engineered separation must then be MEASURED, not asserted. That is what separates `separable` from `clean`.
+  not_a_mitigation   keeping the combiner secret. The rule is an algorithm; price it as public. Secrecy of the combiner adds no min-entropy.
+  rate_extension     the slow leg keys a namespace or partition layer; the fast leg carries payload entropy under it. Offset-as-namespace, not offset-as-key.
