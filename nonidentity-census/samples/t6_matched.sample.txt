@@ -1,0 +1,38 @@
+MATCHED NULL SET -- same head nouns in both window arms
+
+window       reading         n   LEXICAL  PREDICATE  UNDECIDABLE  fields
+YES          ENTITY          3   3        0          0            ecology:1, economics:1, sociology:1
+YES          PROCESS         3   2        0          1            economics:1, thermodynamics:2
+NO           ENTITY          3   3        0          0            ecology:1, economics:1, sociology:1
+NO           PROCESS         3   2        0          1            economics:1, thermodynamics:2
+
+rows whose decided_by would have to change to make the two
+window arms identical:
+  as-specified null set  5 of 12
+      NO   {'LEXICAL': 6}
+      YES  {'LEXICAL': 1, 'UNDECIDABLE': 5}
+  matched null set       0 of 12
+      NO   {'LEXICAL': 5, 'UNDECIDABLE': 1}
+      YES  {'LEXICAL': 5, 'UNDECIDABLE': 1}
+
+The first figure is a property of how the rows were built,
+not of the hypothesis. The matched set removes it by using
+the same head nouns in both window arms.
+
+reading x window_declared
+  NO           ENTITY       3
+  NO           PROCESS      3
+  YES          ENTITY       3
+  YES          PROCESS      3
+
+reading x decided_by  (T1's self-report)
+  LEXICAL      ENTITY       6
+  LEXICAL      PROCESS      4
+  UNDECIDABLE  PROCESS      2
+
+On the null rows `window_declared` is balanced 6/6 against
+`reading` BY CONSTRUCTION, so the first table carries no
+information and is printed to show that it does not. The
+second is measured. If a real run ever shows reading
+tracking decided_by more tightly than window_declared, the
+instrument is the finding again.

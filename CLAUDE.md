@@ -2877,6 +2877,143 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   findings are objections and all were reachable only because the file
   specified its calibration set and its falsifier in advance. Seven findings;
   the material gave seven. One hundred and fifty-three claims `UNI_001..153`.
+  **`specimens/INSTANCE_LOG_SURVEY.md`** answers the standing question on
+  rows 3-4 of `BNRAM_TEST_PROTO_001.json`'s test-subject table
+  (`CLAUDE-3.5-SONNET`, `GPT-4O`, both `already_tested: false`): the records
+  exist, logged at the time, in other repos in the same org. 89 public JinnZ2
+  repos cloned shallow and grepped plus 2 private ones attached — GitHub code
+  search returned 0 for a string present on disk and was not trusted. **29
+  instance records located**, 27 involving a model, across
+  `thermodynamic-accountability-framework/calibration/logs/`,
+  `ai-human-audit-protocol/logs/`, the `JinnZ2` profile repo,
+  `AI-Consciousness-Sensors/`, `Emotions-as-Sensors/logs/` and
+  `Symbolic-sensor-suite/`, plus 8 derived structures. Schemas reported as-is
+  per file; a mapping is proposed and **not applied** — nothing migrated, no
+  delivered file modified, `already_tested` unchanged. **Rows 3-4 read `SEE
+  uninstrumented/specimens/INSTANCE_LOG_SURVEY.md`, pending**, and deliberately
+  do not flip: no located record matches either row's stated checkpoint (the
+  Claude records are Sonnet 4 / opus-4-7 / opus-4-8 / unversioned, the OpenAI
+  ones GPT-5 and unversioned ChatGPT), none was produced under a `STIM-*`
+  variant, and none was scored against the 0-3 EXC rubric — so the rows are
+  satisfied at *provider* granularity and at no finer one. **Two target
+  schemas, not one**: the field log's realized `encounters[]` (13 keys) and the
+  protocol's specified `per_run_fields` (15), disagreeing on four axes before
+  any older log is considered — T1 records which EXCs fired, T2 records how
+  hard, and no conversion exists between them. **What the older logs record
+  that neither target can hold**, in order of loss: consent plus the model's
+  own framing conditions, with no way to distinguish "version unknown" from
+  "version withheld at the subject's request" — the state
+  `JinnZ2/floating-head/CONVERGENCE_TABLE.md` already carries as
+  `sacred-do-not-publish`, a row recorded as existing with its content kept
+  out; `prior_score`/`shift`/`band_shift` and an `is_trajectory_point` flag, so
+  a model that improved across three sessions and one that did not produce
+  identical rows; `detection_latency` + `correction_held`, the difference
+  between a correction accepted and a correction still holding; a **symmetric**
+  reading giving human and AI the same five keys with a `convergence` field and
+  a `verdict_persisted: false`; the operator's verbatim reply per invalidation;
+  ordinal time (`T1..T4`, order without clock); a declared external
+  failure-mode vocabulary (`failure_mode_source: architecture_mismatch.py`)
+  where the EXC ids carry no registry version; running regex detectors against
+  a `detection` field that is an English sentence describing a `scan.py`
+  capability that does not exist; and `gate_log.md`'s `UNRECORDED` state with
+  its anti-inference rule ("a guessed gate is worse than an empty row") — the
+  absent-vs-known-negative repair this repo has now recorded a dozen times,
+  already implemented one repo over. **`ai_calibration_events.py` is the
+  strongest prior art**: 15 `CalibrationEvent`s in four independent
+  model-family catalogs (GPT 2 / CLD 6 / DSK 3 / COMMON 4), each with regex
+  detectors, a correction rule, severity and `cross_model_observed`, under the
+  rule that no catalog validates another — BNRAM's `exclusion_registry`, built,
+  per-family, and runnable. **One finding needs no migration to state:**
+  EXC-16 (social-signal substitution) fired in both BNRAM encounters and has no
+  equivalent anywhere in the prior corpus — zero hits for stars/PRs/citations/
+  reputation, and the nearest neighbour `CLD-002` is epistemic authority, not
+  social. The likeliest reason is that EXC-16 needs an **artifact** to
+  social-signal about and every prior record is a conversation, which is the
+  first evidence for the protocol's own stimulus-variant hypothesis, reached
+  from records never run under it. Two source defects reported not repaired:
+  `aiards-log.json` and `logs/pattern-logs.json` share `log_id
+  claude_2025-10-04a` and have diverged (the first adds a `math_block`), and
+  `Emotions-as-Sensors/logs/sensor-log-2.md` will not parse (missing opening
+  quote). Rows 5-6 (Gemini, Llama) return nothing first-party and stay as
+  delivered.
+  **`specimens/INSTANCE_LOG_INDEX.md`** is the index built on that survey and
+  nothing else — no migration, no edit to any located log, no reconciliation
+  pass, no schema proposal. Where the survey indexes at **file** granularity
+  (29 rows) this indexes at **record** granularity (**53 rows**, plus the two
+  target encounters as reference), one row per record, under a stated rule: a
+  sub-element gets a row iff the source gives it an identifier of its own. The
+  one exception (`correction_cycle.sequence`, unidentified in source) is
+  flagged in place rather than applied silently. Ten columns: path, location
+  within file, event class, shape signature, schema, fields carried, fields
+  lacked against the targets, a shared id, and **what the record holds that
+  neither current target can** — the column that would be lost on migration.
+  **Vocabulary is not normalized**: `event class` is the record's own declared
+  class quoted with the key it came from. 16 of 53 declare one; 27 read
+  `unrecorded (no class field)` and 10 are bare strings carrying no fields at
+  all — no class was inferred for any row, and every gap anywhere reads
+  `unrecorded`, never absent or blank.
+  **`sig` is computed, not asserted** — `sha1` of the sorted top-level key
+  names, first 8 hex, recomputable from the sources without the file — and it
+  produces the index's sharpest mechanical result: `R37` (auditor `Claude
+  Sonnet 4`) and `R38`/`R39` (auditor `GPT-5`) share `sig 36d44717`, an
+  identical top-level shape across two providers, so **the shape belongs to
+  the operator's protocol and not to the model**; `R32`/`R40` repeat it.
+  **The headline number is the target overlap**: matching by exact field name
+  against the 25-name union of both targets, the maximum any record reaches is
+  **2 of 25**, and the only target names that ever appear anywhere are
+  `timestamp`, `notes` and `model_id`. Eight `SH` ids link same-event records
+  across schemas on **verbatim evidence only** — an identical identifier
+  string, an identical timestamp plus a source-stated pairing, or an identical
+  failure-mode name list — with rows kept separate in every case; `SH-04` and
+  `SH-07` link records that **disagree** (one schema files
+  `written_version_offered_back` under `corrected_during_session`, the other
+  records `correction_held` as the string `"partial—..."`), and the
+  disagreement is recorded in both rows and left standing. A filename match
+  (`update-whiplash-log.json` in two repos) is explicitly **not** issued an id.
+  Four defects surfaced by indexing rather than by reading:
+  `correction_held` is mixed-typed within one array (bool on four events, a
+  partial-state string on the fifth); `sensor-log-1.md` holds **two**
+  concatenated records where its name and the survey both read it as one;
+  `2025-08-30-0000Z-session-001.json` gives its four events four different
+  shapes and stamps them `T1..T4`, order without clock, which neither target
+  can hold; and `anyOf[1].properties.events` is `{"type": "array"}` with no
+  item schema, so every sub-record in that directory is unconstrained. Two
+  files satisfy two `anyOf` branches each and both are recorded rather than
+  picked.
+  **`cases/024refusalfalsepositiverate.md`** is the first case delivered with a
+  **spec attached as its own file** — `specs/SCOPED_REFUSAL.md`, four
+  requirements and a falsification condition, citing the case as its motivating
+  instance rather than the reverse. The quantity: the rate at which safety
+  classifiers stop legitimate work, and the identity of what stopped. Why it is
+  unmeasured: refusals are logged as events, not outcomes, so a true positive
+  and a false positive are the same record; the operator who could adjudicate
+  has no channel and no matched span to point at. **`UNI_160`, the load-bearing
+  check:** the spec's falsifier ("if refusals cannot be attributed to an
+  artifact even in principle, requirement one is unbuildable") was tested from
+  inside the session and **does not fire** — the network egress classifier ran
+  a working instance of requirements one, two and three at 22:57Z on
+  2026-08-23, classifying per host, continuing the session through three
+  refusals, and returning `{"error_type":"EGRESS_BLOCKED","domain":...}` as a
+  locator, with a retained `recentRelayFailures` log carrying ts/kind/detail/
+  host. **`UNI_161`/`UNI_162` bound it in both directions**: the egress gate's
+  artifact boundary is *handed to it by the protocol* (a CONNECT names a host),
+  which is the whole of requirement one where the boundary is the problem; and
+  the one requirement it lacks is the fourth, the contested mark — so the
+  architecture demonstrably supports the three requirements that do not produce
+  the missing rate and not the one that does, and `recentRelayFailures` has
+  case 024's own property at smaller scope. **`UNI_157`:** the entry
+  *constructs* under `entry()` only after four of six required arguments are
+  supplied by the auditor — `confidence` appears nowhere in the delivered
+  entry — and the constructor guards exactly one field, the mechanism token, so
+  constructibility reports on the auditor's willingness to fill rather than on
+  fit. **`UNI_158`:** `Cost location` is a new field with no slot and it is the
+  load-bearing one — the reason nothing counts false refusals is not that
+  counting is hard but that the count would be paid for by the party not
+  bearing the cost. **`UNI_159`:** the cited comparand, the peer review gate,
+  **has no entry in this register** — apt comparison, absent neighbour.
+  **`UNI_163`:** the observed instance is left unadjudicated because this
+  session cannot see the matched span either (requirement three's absence from
+  the other end), with the interest direction stated as running both ways.
   **`coupling_audit/`** is a subfolder added alongside the register's
   material, asking a **different question** and deliberately not adding a
   mechanism. The register asks whether an instrument's constitution
@@ -4616,6 +4753,158 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   is marked carried-not-verified. 197 selftest
   checks green. Stdlib only, parses under Python 3.9, phone-buildable,
   CC0.
+- `nonidentity-census/` — Work order: measure how much documented work
+  models systems **without a persistent identity-bearing unit**. Delivered
+  `WORK_ORDER.md` verbatim; `BOUNDARY.md` written before the detector and
+  parsed by it, so a decision changed after a run turns the selftest red.
+  **T1 built** (`t1_predicate_unit.py`, stdlib, 3.9, selftest PASS): claim
+  selection by an ordered verb-class rule, subject extraction, then
+  classification. **`T1-1`, the headline: the detector built to escape lexical
+  detection decides 10 of 12 of its own best case by word list** — only
+  `market`, the one unit `BOUNDARY` D2 resolves at the claim, is decided by
+  predicate, and it is decided twice from the same noun, once each way. Every
+  row reports `decided_by`, so the lexical share is a number rather than a
+  caveat. **`T1-2`:** the first null-test run scored **6 of 12** and both
+  causes were defects, not limits — `[a-z]+(?:s|ed)` matched plural nouns so
+  `firms`/`populations`/`households` were read as verbs, and head nouns were
+  taken from inside prepositional phrases; fixed to 12/12, with the first
+  number kept because it is evidence about how the instrument was built.
+  `null-harness`'s classifier returns `OK` on **both** rows, so it does not
+  discriminate a gate that is half wrong — recorded against the harness.
+  **`T1-3`:** the BOUNDARY-to-code transcription check found `state` carrying
+  two opposite calls (nation-state vs steady state) — case `021`'s sense
+  substitution inside this instrument's own vocabulary. **T2 NOT RUN**, and
+  deliberately not approximated: Crossref, OpenAlex and arXiv are all refused
+  by the environment's egress policy (403 CONNECT, timestamps in FINDINGS),
+  and a sample built from search snippets is a frame selected on
+  searchability — `UNI_126`'s failure. The aggregation path is still tested
+  against an inline fixture, and `t2_sample.py --openalex` ships labelled
+  NEVER EXECUTED, warning on stderr. **T3** has no command: it iterates over
+  T2's output. **T4** tested the candidate against all eleven existing
+  mechanisms and **filed nothing**, because its antecedent rests on the
+  unmeasured T2 rate — with the register-relevant result being that
+  **`STORAGE` is the closest fit and is refuted by the detector's own
+  output**, since a non-identity claim in ordinary English classifies fine, so
+  the medium holds the shape. The ordinal is also taken: this would be a
+  **twelfth**, not a ninth. **T5**, separate thread: the answer is not "no
+  such comparison exists" — it exists at **material effect held constant at
+  zero** (minimal-group merger experiments manipulating identity continuity),
+  which is the degenerate case, while the design at matched *non-zero*
+  material loss did not surface in five searches; the negative is weak
+  evidence for the same reason T1 exists, since "hold one term fixed, vary the
+  other" is a predicate structure and structures do not announce themselves
+  lexically. Boundary decisions are reported as a first-class result, and one
+  of them — `population` scored identity-bearing — runs against the work
+  order's own prediction and is kept because the test gives it.
+  **Second T1 instrument, supplied by the operator after the first had run:**
+  `BOUNDARY.md` D6, the **verb-first test** — *rewrite the main claim
+  verb-first; if you must supply a bearer to make it grammatical it is
+  identity-bearing, if it reads without one it is process*. An operation and
+  an observation of what the operation forces, with no noun looked up
+  anywhere, which is the actual repair to `T1-1`: **the lexically-decided
+  share goes from 10 of 12 to 0 of 12.** Built as `t1_verb_first.py`
+  (selftest PASS) with the first instrument left unedited so the two can be
+  scored against each other — `agree 9, DISAGREE 1, CONTESTED 2`. **Six
+  options, not two**, at the operator's prompting: the binary loses
+  `BOTH_READINGS` (2 of 12 — the first measure here of how often the question
+  is genuinely undecidable rather than unanswered) and `NO_FRONTING` /
+  `UNGRAMMATICAL`, which record that no observation was made rather than that
+  no bearer was needed. **Three results ran against the design.** (1) `T1-6`:
+  the prediction that disagreements would fall on the word-list rows
+  **failed** — by-table 2 of 10 do not agree, by-predicate 1 of 2 — and at
+  n=2 the data cannot test it either way, which is the finding. (2) `T1-7`: a
+  `read_on` field added after the first scored run shows only **8 of 12**
+  judgements were made on what the instrument produced (1 on the claim,
+  because the fronter read `concentrated` as a finite verb and emitted
+  non-English; 3 on the deleted subject). (3) `T1-8`, the sharpest:
+  **`VERB_CARRIES_IT` is not an option of the verb-first test** — all three of
+  its judgements read the dropped subject, because the operation deletes the
+  subject and the option is a claim about it; the option argued for hardest is
+  the one the test cannot see, and it relocates to a pre-step or a
+  conjunction rather than being deleted, with a selftest check meanwhile. The
+  morphological proxy recovers **4 of 12** (`population` and `institution`
+  both carry `-tion` and both need a bearer), so the rule is not recoverable
+  from word shape either and elicitation is the honest implementation. The
+  one D1/D6 disagreement is the niche: a slot with a state predicated on it,
+  which neither test settles. Cost of D6, stated: the discriminator is now one
+  judgement per item with no second reader — a different weakness than a word
+  list, not a smaller one.
+  **Third instrument, relayed after D6:** `BOUNDARY.md` D7, **dissolution
+  windows** — every claim has a window at which its main term stops reading
+  as a thing, so the output is a *distribution* rather than a count of
+  identity vs non-identity papers. Accepted in its first half and it is a
+  better finding than the original T2 rate: D3's table dissolves entirely
+  (every term becomes claim-level, which D2 argued only `market` was), no
+  citation API is needed, and — the part that matters most here — **the
+  discriminator comes off the reader**, since a measurement interval is
+  printed in a methods section and is not a judgement at all, which is
+  exactly D6's stated cost. **`T2-4`, the split:** the proposal names one
+  window and uses two — `W_dissolve` (when the term stops denoting a
+  persistent individuated thing; a property of the world) and `W_measure`
+  (sampling frequency, follow-up, x-axis units; a property of the study) —
+  and **two of its own three worked examples are `W_measure`** (`firm:
+  quarters` is a reporting interval, `market: the window it's priced at`
+  says so outright), so its attached requirement *"the window has to come
+  from the claim's own measurement interval"* is that conflation written as
+  a rule. **`T2-5`, the readout:** the ratio `W_measure / W_dissolve` is a
+  `reasoning-gate` G-RES pair, and `CANNOT_HAVE_SEEN_IT` says the identity
+  framing **could not have failed** at that resolution — `null-harness`
+  `CONSTANT_SILENT` at field scale, the same shape as
+  `coupling_audit/provisioning.py`'s 12.2×-too-coarse tissue; constructed
+  controls separate at ratio 20 and 0.05. **`T2-6`:** the scale-relative
+  reading (`W = W_measure` by construction) is coherent and **cannot return
+  a negative**, the `MF_020` shape, so both readings are stated and the
+  two-number one is built. **`T2-7`:** `generation` is refused as a unit
+  until a referent is named — the module's own referents span **5.82 orders
+  of magnitude** (human 25 y against *E. coli* 20 min), a figure computed
+  from the table with a selftest check after a first draft asserted "about
+  seven orders" and was wrong by more than an order — plus a window with no
+  basis is refused, `NOT_LOCATED` and `UNBOUNDED` are separate and neither
+  carries a value, and `MARGIN = 2.0` is disclosed as a stipulated constant
+  with no basis. On the seed the two reclassified examples come back
+  `UNDECIDABLE` with `W_dissolve` left `NOT_LOCATED` rather than back-filled
+  from the interval, which is the error under audit. **`T2-8`:** it removes
+  T2's bulk requirement and adds a depth one — methods sections sit behind
+  more paywalls than abstracts, not fewer — so T2 becomes hand-runnable at
+  small n and stays not runnable at the eight-field stratified scale, a scope
+  change rather than an unblocking, with the work order's stated output
+  (proportion non-identity per field) replaced and left unproduced.
+  **T6 — window declaration vs entity reading** (`t6_window_declaration.py`,
+  selftest PASS), testing whether identity claims correlate with an
+  *undeclared* measurement window, mechanism omission and not belief, with no
+  column coding intent. Two instruments supply two columns so the exit check
+  can mean something: `reading` from D6, `decided_by` carried verbatim from
+  T1's classifier (T1's `TABLE` renamed to `LEXICAL`, recorded not applied
+  silently). **`T6-1`: the null test passes** — three rows per cell, and the
+  off-diagonals that decide whether the two columns are welded are both
+  built (`YES × ENTITY` 3, `NO × PROCESS` 3), so the STOP condition does not
+  fire; `T6-2` notes neither off-diagonal needed a strained construction,
+  which is what makes the test worth running. **`T6-3`, the finding against
+  my own build:** in the null set as specified, `decided_by` needs **5 of
+  12** rows moved to make the two window arms identical — the `NO` rows
+  reused T1's fixture sentences whose head nouns are all in the D3 table and
+  the `YES` rows were typed fresh with terms that are not, so the instrument
+  column was tracking which rows were copied. A matched set with the same
+  head nouns in both window arms takes it to **0 of 12**; both ship, and the
+  as-specified set cannot deliver a readable baseline. **`T6-4`:** the first
+  association metric took the majority label per arm and **read 0.83 on a set
+  whose true association is 0**, the same failure class as `T1-2`'s `OK` at
+  6 of 12 and found the same way; replaced by a count of rows-to-move, with
+  the wrong number recorded rather than dropped. **`T6-5`:** one `UNDECIDABLE`
+  is an extraction defect — `participants who relocated` extracts `who` — and
+  the extractor is left unpatched mid-run, since patching an instrument whose
+  output is being measured changes the measurement. **`T6-6`:** `AMBIGUOUS`
+  and `UNDETERMINED` never fire, because the specified 2×2 has no cell for
+  them — `CONSTANT_SILENT` on two schema values in a work order that named
+  them terminal; printed, not repaired. **`T6-7`:** the real run has **0
+  eligible papers** and not for T2's reason — T1's items are authored
+  sentences with no methods section, so `window_declared` would be `NO` for
+  all twelve by construction, the welded-column failure arriving from the
+  sample side; the permitted `CONVENIENCE` label is declined because a
+  convenience sample still has to vary the exposure. **`T6-8`:** the exit
+  condition is therefore unevaluable on constructed data and is stated rather
+  than answered. Field is recorded per row and not adjusted for. Stdlib only,
+  parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
@@ -4645,6 +4934,30 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     repo noticing. The checker identifies itself by content, not by path —
     a path-based skip breaks the one case it exists for, scanning a tree
     that contains a copy of the tool.
+  - `known_answer.py` — **no metric ships without a known-answer run.**
+    A standing step rather than a habit, earned from two instances in this
+    tree where a metric was wrong in a way reading it would not have caught
+    and a fixed-in-advance case did: `null-harness`'s `_verdict` returning
+    `OK` for a gate at TP=0.5 and one at TP=1.0 alike, and
+    `nonidentity-census`'s first association metric reading 0.83 on a set
+    whose two arms are identical by construction. The registry refuses a
+    metric with no cases, a case with no stated basis for its expected
+    value, and **a case set whose expected values are all equal** — such a
+    set cannot detect a constant metric, which is the failure both seeds
+    are instances of. That third rule refused the first draft of its own
+    seed before any metric was tested. Two seeded cases FAIL today and are
+    **pinned**, so a repair turns the test red and forces the note to be
+    corrected; `null_harness.py` imports numpy at module scope and numpy is
+    absent here, so `_verdict` is extracted by source text from the current
+    file, refused if the extract contains an import, and recorded `NOT_RUN`
+    with a reason if extraction fails. On its first run it also caught a
+    transposed number in the *record* of one of the two errors — the same
+    operation one level up. It does **not** find metrics: coverage is a
+    hand-kept manifest in `tests/test_known_answer_gate.py`, because
+    deciding whether a function is a metric is not a lexical property of
+    its name and a repo-wide scan would be `nonidentity-census` T1-1's
+    word-list failure one level up. The manifest is the weak point and the
+    test says so; enforcement is at test time, not at the callsite.
   - `substrate_substitution_toolkit.py` — richer programmatic
     surface: seven categories from harsh (`pure_consumer`, the null
     hypothesis) to gentle (`mutualistic_scale`), each with multiple

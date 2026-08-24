@@ -1,0 +1,39 @@
+D6 verb-first, n=12   judge: model, in-session, 2026-08-23, no second reader
+
+KS-01   BEARER_REQUIRED  [CLAIM] concentrating ownership reduce investment following the reform
+        reducing investment -- reducing by whom
+KS-02   BEARER_REQUIRED  [RESIDUE] declining across all sampled sites
+        declining -- declining what
+KS-03   BOTH_READINGS    [RESIDUE] smoothing consumption across shocks
+        consumption smoothing is a named process and reads alone; the claim also attributes the smoothing to someone
+KS-04   BEARER_REQUIRED  [RESIDUE] eroding once enforcement lapsed
+        eroding -- eroding what
+KS-05   BEARER_REQUIRED  [RESIDUE] persisting long after the conditions that produced them
+        persisting -- and `them` has no antecedent once the subject is dropped
+KS-06   VERB_CARRIES_IT  [DROPPED_SUBJECT] increasing with surface roughness
+        `flux` is the flowing; the subject was already the verb
+KS-07   READS_WITHOUT    [RESIDUE] stabilizing at moderate gain
+        stabilizing at moderate gain reads alone
+KS-08   VERB_CARRIES_IT  [DROPPED_SUBJECT] proceeding without any central coordinator
+        `allocation` is the allocating
+KS-09   BEARER_REQUIRED  [RESIDUE] remaining unoccupied for three seasons
+        remaining unoccupied -- what remained; the state needs a thing in it
+KS-10   VERB_CARRIES_IT  [DROPPED_SUBJECT] falling after the intervention
+        `the rate of transmission` is the transmitting
+KS-11   BOTH_READINGS    [RESIDUE] tightening over the following two quarters
+        tightening reads alone as a process; `what tightened` is also natural
+KS-12   READS_WITHOUT    [RESIDUE] allocating scarce goods without a designer
+        allocating scarce goods without a designer reads alone
+
+  BEARER_REQUIRED  5
+  READS_WITHOUT    2
+  VERB_CARRIES_IT  3
+  BOTH_READINGS    2
+  NO_FRONTING      0
+  UNGRAMMATICAL    0
+
+  judged on RESIDUE         8
+  judged on CLAIM           1
+  judged on DROPPED_SUBJECT 3
+
+  arms: identity 5  process 5  own arm 2  no observation 0

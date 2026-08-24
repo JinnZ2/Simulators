@@ -1,0 +1,18 @@
+REAL RUN
+
+  eligible papers: 0
+
+  T1's twelve items are authored sentences, not papers. They
+  have no methods section and no figure axis, so every row
+  would take window_source NONE and window_declared NO by
+  construction -- one column constant across the whole
+  sample. That is the welded-column failure arriving from
+  the sample side rather than the concept side, and running
+  it would produce a 2x2 with two empty columns that looked
+  like a result.
+
+  Bulk sources remain refused by egress (FINDINGS T2-1) and
+  a snippet sample is refused for the reason T2 refused it.
+  Not labelled CONVENIENCE and run anyway: a convenience
+  sample still has to be able to vary the exposure, and this
+  one cannot.

@@ -1,0 +1,6 @@
+constructed known-truth pair
+
+  N-coarse   CANNOT_HAVE_SEEN_IT  ratio=20
+             sampling 20x the dissolution window; the identity framing could not have failed at this resolution
+  N-fine     RESOLVES_IT          ratio=0.05
+             sampling 0.05x the dissolution window; well inside the stable regime
