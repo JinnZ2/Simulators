@@ -4,6 +4,14 @@ Repository for different simulations and supporting tooling.
 
 ## Report form
 
+`SHAPE_SPEC.md` is upstream of everything in this repository that uses the
+word SHAPE. It defines a shape as the constraint set a geometry is a solution
+to — not the geometry, not the picture, not the field's name for it. Point at
+it rather than restating it. Section 2 blocks the misread that the method is
+"matching geometries across domains"; section 4 gives the removal test that
+makes a shape read falsifiable; section 9 says use DISSIPATION rather than
+cost, because cost imports a pricing model that is not part of the system.
+
 `AUDIT_CONTRACT.md` governs how work is reported across this ecosystem:
 structure first, gap analysis as deliverable, a score without its support
 count is not a score, wording is not a decision, a free-text discriminator

@@ -91,6 +91,28 @@ from the drop, so it was re-appended rather than dropped, and a selftest now
 asserts it is present. A gap that came from measurement should not be removed
 by a document that predates the measurement.
 
+## SHAPE_SPEC section 2 describes B7 verbatim
+
+"Branching form applied to a system with no flux and no dissipation term looks
+like insight and carries no information."
+
+`branching.py` computes area-preserving and space-filling ratios and contains
+no flux term and no dissipation term. It is pure geometry. Under SHAPE_SPEC
+section 1 the shape is the constraint set and the geometry is only its readout,
+so nothing in this folder licenses the step from vessel branching to economic
+layers — the geometry was ported without checking whether the constraints came
+with it.
+
+Section 4 supplies the test this claim was recorded as lacking: name the
+constraint whose removal changes the geometry, find a case where it is genuinely
+absent, check the form differs. Not run. Section 4 also says a failed transfer
+is a measurement rather than an embarrassment, so running it and getting a
+different form would be output, not a retraction.
+
+Section 9's note on cost lands on nothing here: the dissipation/enclosure group
+is not computed in this folder, so there is no cost framing to replace. That is
+the same absence stated from the other side.
+
 ## Nothing here rests on a source yet
 
 Twenty-nine sources: five located, twenty-four untouched, none extracted. Every

@@ -103,9 +103,24 @@ not yet a readout.
 **B7.** Physical branching geometry licenses an inference about economic
 layers.
 
-*Falsifier:* none stated, and that is the problem.
+*Falsifier:* SHAPE_SPEC section 4 supplies the one this claim lacked. State
+which constraint, if REMOVED, changes the geometry; then find a case where it
+is genuinely absent and check the form differs.
 
-*Status:* **ASSERTED, NOT ARGUED.** The physics is checked; the transfer from
-vessels to layers is not, and nothing in this folder measures it. See
-`gaps.md` G-REGIME. This is the largest unsupported step in the folder and is
-recorded here rather than left implicit in the anchor block.
+*Status:* **ASSERTED, NOT ARGUED — and SHAPE_SPEC section 2 names this exact
+failure.** "Branching form applied to a system with no flux and no dissipation
+term looks like insight and carries no information." `branching.py` contains
+no flux term and no dissipation term; it computes geometry ratios only. The
+transfer from vessels to layers ports a geometry without checking whether the
+constraints came with it.
+
+Under SHAPE_SPEC section 1 the shape is the constraint set, not the geometry,
+so the ratios are the readout and the transfer is unlicensed until the
+constraint set is enumerated on both sides and shown to be shared. Under
+section 4 a failed transfer would be a MEASUREMENT — port it, get a different
+form, and a differing constraint has been located. That has not been run
+either.
+
+The folder therefore has no shape read here, only a geometry note. Recorded as
+such rather than left implicit in the anchor block where it reads as physics.
+See `gaps.md` G-REGIME.
