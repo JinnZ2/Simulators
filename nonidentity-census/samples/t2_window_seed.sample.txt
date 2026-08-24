@@ -1,0 +1,13 @@
+seed claims -- EVERY WINDOW STIPULATED, no methods section read
+
+  P-1   population  RESOLVES_IT    W_diss=STIPULATED   W_meas=STIPULATED
+        sampling 0.04x the dissolution window; well inside the stable regime
+  P-2   firm        UNDECIDABLE    W_diss=NOT_LOCATED  W_meas=STIPULATED
+        missing: W_dissolve (NOT_LOCATED)
+  P-3   market      UNDECIDABLE    W_diss=NOT_LOCATED  W_meas=STIPULATED
+        missing: W_dissolve (NOT_LOCATED)
+
+!! 3 of 3 windows are STIPULATED. This is the report's SHAPE, not a result.
+field             n   coarse resolves marginal    undec   ratios
+ecology           1        0        1        0        0   0.04
+economics         2        0        0        0        2   --

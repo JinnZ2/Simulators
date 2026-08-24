@@ -1,0 +1,14 @@
+T1 over the authored known-signal set (NOT a corpus)
+  KS-01   IDENTITY_BEARING TABLE     head=firms          D3 unit table
+  KS-02   IDENTITY_BEARING TABLE     head=populations    D3 unit table
+  KS-03   IDENTITY_BEARING TABLE     head=households     D3 unit table
+  KS-04   IDENTITY_BEARING TABLE     head=norm           D3 unit table
+  KS-05   IDENTITY_BEARING TABLE     head=institutions   D3 unit table
+  KS-06   NON_IDENTITY     TABLE     head=flux           D3 unit table
+  KS-07   NON_IDENTITY     TABLE     head=loop           D3 two-token unit 'feedback loop'
+  KS-08   NON_IDENTITY     TABLE     head=allocation     D3 unit table
+  KS-09   NON_IDENTITY     TABLE     head=niche          D3 unit table
+  KS-10   NON_IDENTITY     TABLE     head=rate           D3 unit table
+  KS-11   IDENTITY_BEARING PREDICATE head=market         claim-level noun, carrier predicate
+  KS-12   NON_IDENTITY     PREDICATE head=market         claim-level noun, mechanism predicate
+  decided by predicate: 2  by table: 10  undecidable: 0
