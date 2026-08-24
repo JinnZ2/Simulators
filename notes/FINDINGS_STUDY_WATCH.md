@@ -4,26 +4,81 @@
 `.github/workflows/study-watch.yml`. Suite at `tests/test_study_watch.py`,
 81 tests green. Stage 1 has never executed from here.
 
-## 1. The match target and the candidates are different kinds of thing
+## 1. CORRECTION — the earlier claim here was wrong
 
-**All eight `uninstrumented.ENTRIES` WOULD MEASURE strings return
-`UNDECIDABLE` under the verb-first test.** Not most — all of them.
+This section previously said all eight `uninstrumented.ENTRIES` WOULD MEASURE
+strings return `UNDECIDABLE` **"because a WOULD MEASURE is a design and a
+candidate is a claim — different grammatical kinds of thing"**.
 
-A WOULD MEASURE is a design: *"bidirectional protocol; each side sets tasks
-in its own modality"*. A candidate is a claim with a main causal claim and a
-subject. The verb-first test reads claims. Applied to a design it returns
-nothing, by construction.
+Checked, after the operator asked what changing the noun to a verb would do:
+**seven of eight carry a verb.** The `UNDECIDABLE` verdicts were mostly
+extraction failures, not absent verbs:
 
-So `matches_would_measure` cannot be filled mechanically, and it is emitted
-`UNADJUDICATED` on every row with the entry's WOULD MEASURE quoted beside it.
-That is a `CONSTANT_SILENT` on the match column, established **before the
-first run** — which is where a null test is supposed to catch things.
+| entry | verb present | why T1 returned UNDECIDABLE |
+|---|---|---|
+| 1 | `sets` | head extracted as `side`, from "each side" |
+| 2 | `is` | head `correction`, not in the D3 table |
+| 3 | `added` | head extracted as `one`, a pronoun |
+| 4 | `name` (imperative) | no subject; imperatives have none by construction |
+| 5 | `scored` | head `benchmark`, not in the D3 table |
+| 6 | none | genuinely verbless — a list of probe ids |
+| 7 | `sets` in the text | D0 rule 3 picked the wrong sentence entirely |
+| 8 | `count` (imperative) | no subject; head extracted as `count` |
 
-What stage 2 *can* decide is assessability: a candidate whose main claim has
-no frontable verb or no extractable subject returns no reading and is
-recorded `NOT_ASSESSABLE` with the reason. That is its only mechanical
-reject, and it is a much smaller claim than "filters on predicate structure"
-sounds.
+The right statement is narrower and more useful: **a WOULD MEASURE written as
+an instruction is already in verb-first form.** `count caveats issued per
+account type` IS the residue — verb leading, bearer dropped, operator
+implied. Nothing needs transforming for those; they are recognised.
+
+## 1a. What changing the noun to a verb buys, measured
+
+`verbalize()` recognises an instruction and refuses everything else.
+
+```
+IMPERATIVE                1
+IMPERATIVE_AFTER_MARKER   2
+NOT_VERBALIZABLE         19
+```
+
+**3 of 22** watchable WOULD MEASURE strings across `ENTRIES` and `cases/`
+are written as instructions: `ENTRIES[4]` (*name every input and disposal
+path*), `ENTRIES[8]` (*count caveats issued per account type*), and
+`016agreementasmode` (*hold the form and pressure of the correction
+constant, vary only...*).
+
+**Why the other nineteen are refused rather than transformed.** Fronting
+them mechanically produced `seting tasks in its own modality`, `houring off`
+and `being the product` — non-English or vacuous. A reader asked whether a
+residue needs a bearer **cannot judge a residue that is not a sentence**, so
+emitting one would put a malformed string in front of a reviewer and call it
+a test. `verbalize()` returns `NOT_VERBALIZABLE` with the reason instead.
+
+**So the repair is at the entry, not at the parser.** A WOULD MEASURE
+written imperative is readable by this pipeline as written, and three
+already are. That is a recommendation about how the field is authored — and
+it is the repo's own verb-first stance (`substrate-emergence`'s verb-first
+axes, `energy_english`, D6 itself) arriving in the register's own schema.
+
+**What the reading buys is limited, and the limit is structural.** Every
+verbalizable WOULD MEASURE reads `PROCESS`, because an instruction is
+grammatical with no bearer supplied. That is a property of instructions, not
+a discovery about these entries. At n=3 the match column does not
+discriminate *between* entries, so the reading is reported with its route
+attached and `matches_would_measure` stays `UNADJUDICATED` — a reviewer
+still decides in the pull request.
+
+## 1b. A defect fixed on the way: `_to_ing` had no doubling rule
+
+`seting`, `runing`, `stoping`, `begining`, `occuring`, `refering`,
+`planing`. All wrong, and all produced by
+`nonidentity-census/t1_verb_first.py::_to_ing`, which is what builds the
+residue a D6 judgement is made on.
+
+Correctness, not polish: **a residue that is not English cannot be judged
+for whether it needs a bearer**, so the defect silently degrades every
+judgement made on a fronted irregular. Repaired with a monosyllable-CVC rule
+plus a stated list for the stress-final polysyllables (`occur`, `begin`,
+`admit`, ...), and sixteen known answers pinned in that module's selftest.
 
 ## 2. The null test builds, and its second arm is constructible on three nouns
 

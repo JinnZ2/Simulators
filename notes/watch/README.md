@@ -53,13 +53,26 @@ composes is checked.
 | `decided_by` | `LEXICAL` or `PREDICATE`, carried from T1. The filter's self-report |
 | `notes` | the verb-first residue a reviewer reads to make the call |
 
-`matches_would_measure` is never filled mechanically. All eight
-`uninstrumented.ENTRIES` WOULD MEASURE strings return `UNDECIDABLE` under the
-verb-first test, because a WOULD MEASURE is a **design** — an instrument, an
-interval, a comparison — and a candidate is a **claim**. They are different
-grammatical kinds of thing and nothing here compares them. A reviewer decides
-in the pull request. Filling the column would be inventing a matcher the work
-order did not specify.
+`matches_would_measure` is never filled mechanically, and the reason is
+narrower than an earlier version of this file claimed. Seven of the eight
+`uninstrumented.ENTRIES` WOULD MEASURE strings **do** carry a verb; the
+`UNDECIDABLE` verdicts were mostly extraction failures.
+
+What holds: **a WOULD MEASURE written as an instruction is already in
+verb-first form** — verb leading, bearer dropped, operator implied — and
+`verbalize()` reads those. **3 of 22** across `ENTRIES` and `cases/` are
+written that way. The rest are refused rather than transformed, because
+fronting them mechanically yields a residue that is not a sentence, and a
+residue that is not a sentence cannot be judged for whether it needs a
+bearer.
+
+So the repair is at the entry rather than at the parser: write a WOULD
+MEASURE verb-first and this pipeline reads it as written.
+
+Even then the column stays `UNADJUDICATED`. Every verbalizable WOULD MEASURE
+reads `PROCESS`, because an instruction is grammatical with no bearer — a
+property of instructions, not a finding about these entries. A reviewer
+decides in the pull request.
 
 `decided_by` is worth reading before `matches_would_measure`. A `LEXICAL`
 value means a word list proposed that reading, which is the failure

@@ -1,0 +1,35 @@
+VERBALIZE -- WOULD MEASURE read as an instruction
+
+  ENTRIES[1]                         NOT_VERBALIZABLE         --
+  ENTRIES[2]                         NOT_VERBALIZABLE         --
+  ENTRIES[3]                         NOT_VERBALIZABLE         --
+  ENTRIES[4]                         IMPERATIVE_AFTER_MARKER  name every input and disposal path, which side of the line, and 
+  ENTRIES[5]                         NOT_VERBALIZABLE         --
+  ENTRIES[6]                         NOT_VERBALIZABLE         --
+  ENTRIES[7]                         NOT_VERBALIZABLE         --
+  ENTRIES[8]                         IMPERATIVE               count caveats issued per account type across a transcript corpus
+  010coupledperturbationbiohybrid    NOT_VERBALIZABLE         --
+  011rebuildabandonmentcycles        NOT_VERBALIZABLE         --
+  012fuelincidencesubstrategoods     NOT_VERBALIZABLE         --
+  013compensationloadunattributed    NOT_VERBALIZABLE         --
+  014offloadingevolutionaryframing   NOT_VERBALIZABLE         --
+  015definitionalprecedence          NOT_VERBALIZABLE         --
+  016agreementasmode                 IMPERATIVE_AFTER_MARKER  hold the form and pressure of the correction constant, vary only
+  017weldedobservables               NOT_VERBALIZABLE         --
+  018selfreportopinioncoupling       NOT_VERBALIZABLE         --
+  019traitacquiescenceweld           NOT_VERBALIZABLE         --
+  020attributedagencyarrangement     NOT_VERBALIZABLE         --
+  021sensesubstitutionundeclaredaxis NOT_VERBALIZABLE         --
+  022fieldlevelmeasurementstate      NOT_VERBALIZABLE         --
+  023borrowedselectionvocabulary     NOT_VERBALIZABLE         --
+
+  IMPERATIVE               1
+  IMPERATIVE_AFTER_MARKER  2
+  NOT_VERBALIZABLE         19
+
+  Verbalizable WOULD MEASURE strings all read PROCESS, because
+  an instruction is grammatical with no bearer supplied. That is
+  a property of instructions and not a finding about these
+  entries, so the reading is reported with its route attached.
+  The match column stays UNADJUDICATED either way; a reviewer
+  decides in the pull request.

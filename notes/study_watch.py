@@ -44,16 +44,35 @@ WHAT STAGE 2 CAN AND CANNOT DECIDE, established before the first run:
           NOT_ASSESSABLE with the reason. That is stage 2's only mechanical
           reject.
 
-  CANNOT  match against WOULD MEASURE. All eight `uninstrumented.ENTRIES`
-          WOULD MEASURE strings return UNDECIDABLE under the same test,
-          because a WOULD MEASURE is a DESIGN -- an instrument, an interval,
-          a comparison -- and not a causal claim with a subject to read. The
-          match target and the candidates are different grammatical kinds of
-          thing. `matches_would_measure` is therefore emitted
-          `UNADJUDICATED` for every candidate, with the entry's WOULD
-          MEASURE quoted beside it so the reviewer can decide in the PR.
-          Filling that column mechanically would be inventing a matcher the
-          work order did not specify.
+  CANNOT  match against WOULD MEASURE, for most entries -- and the reason
+          is narrower than an earlier version of this docstring claimed.
+
+          THAT CLAIM WAS WRONG AND IS CORRECTED HERE. It said all eight
+          `uninstrumented.ENTRIES` WOULD MEASURE strings return UNDECIDABLE
+          "because a WOULD MEASURE is a DESIGN and not a causal claim with
+          a subject to read". Checked: SEVEN OF EIGHT CARRY A VERB. The
+          UNDECIDABLE verdicts were mostly extraction failures, not absent
+          verbs -- head nouns outside the D3 table (`side`, `correction`,
+          `benchmark`, `count`), and imperatives, which have no subject by
+          construction and are what the extractor needs.
+
+          What is true, and is the useful form: a WOULD MEASURE written as
+          an INSTRUCTION is already in verb-first form. "count caveats
+          issued per account type" IS the residue -- verb leading, bearer
+          dropped, operator implied. Nothing needs transforming. Two of the
+          eight are written that way and `verbalize()` reads them.
+
+          The other six are not rescued by a transform. Fronting them
+          mechanically produced `seting tasks`, `houring off` and `being the
+          product` -- non-English or vacuous -- and a reader asked whether a
+          residue needs a bearer cannot judge a residue that is not a
+          sentence. `verbalize()` therefore returns NOT_VERBALIZABLE with a
+          reason rather than emitting a mangled residue.
+
+          So `matches_would_measure` stays `UNADJUDICATED` for those six,
+          with the reason recorded per entry, and the fix is at the ENTRY
+          rather than at the parser: a WOULD MEASURE written imperative is
+          readable by this pipeline as written.
 
 Stdlib only. Parses under Python 3.9. ASCII only. CC0.
 """
@@ -77,6 +96,18 @@ import t1_predicate_unit as t1          # noqa: E402
 import t1_verb_first as vf              # noqa: E402
 
 ENTITY, PROCESS = "ENTITY", "PROCESS"
+
+IMPERATIVE = "IMPERATIVE"
+IMPERATIVE_AFTER_MARKER = "IMPERATIVE_AFTER_MARKER"
+NOT_VERBALIZABLE = "NOT_VERBALIZABLE"
+
+# Operator instructions a WOULD MEASURE is written with. A list, and it says
+# so: whether a sentence is an instruction is not recoverable from spelling.
+_INSTRUCTION = re.compile(
+    r"^\s*(name|count|run|record|measure|compare|score|log|sample|ask|"
+    r"collect|report|track|observe|test|check|list|rate|note|capture|"
+    r"pair|hold|vary|sweep|fit|estimate|derive|extract|classify|state|"
+    r"time|weigh|photograph|survey|interview|repeat)\b", re.I)
 NOT_ASSESSABLE = "NOT_ASSESSABLE"
 UNADJUDICATED = "UNADJUDICATED"
 NOT_WATCHABLE = "NOT_WATCHABLE"
@@ -138,6 +169,59 @@ def _would_measure_from_markdown(path):
         return None
     body = " ".join(m.group(1).split())
     return body or None
+
+
+def verbalize(would_measure):
+    """
+    Change the noun to a verb before running -- the operator's suggestion,
+    and the measurement of what it buys.
+
+    An instruction is ALREADY the verb-first residue: verb leading, bearer
+    dropped, operator implied. Nothing is transformed for those; they are
+    recognised.
+
+    Everything else returns NOT_VERBALIZABLE with a reason. Fronting them
+    mechanically produced non-English (`seting tasks`, `houring off`) or a
+    vacuous residue (`being the product`), and a residue that is not a
+    sentence cannot be judged for whether it needs a bearer. Refusing beats
+    emitting.
+    """
+    s_ = (would_measure or "").strip()
+    if not s_:
+        return {"route": NOT_VERBALIZABLE, "form": None,
+                "why": "empty WOULD MEASURE"}
+    if _INSTRUCTION.match(s_):
+        return {"route": IMPERATIVE, "form": s_.split(";")[0].strip(),
+                "why": "already verb-first; operator is the implied bearer"}
+    for sep in ("--", ":", ";"):
+        for part in s_.split(sep):
+            if _INSTRUCTION.match(part.strip()):
+                return {"route": IMPERATIVE_AFTER_MARKER,
+                        "form": part.strip(),
+                        "why": "verb-first after a leading marker"}
+    return {"route": NOT_VERBALIZABLE, "form": None,
+            "why": ("not written as an instruction. Fronting it "
+                    "mechanically yields a residue that is not a sentence, "
+                    "which cannot be judged for a bearer. The repair is at "
+                    "the entry: write the WOULD MEASURE verb-first.")}
+
+
+def would_measure_reading(entry):
+    """
+    The reading of an entry's WOULD MEASURE, where one is available.
+    An instruction needs no bearer -- the operator supplies it -- so a
+    verbalizable WOULD MEASURE reads PROCESS. That is a property of
+    instructions, not a discovery about these entries, and it is why the
+    column below is reported with its route attached.
+    """
+    v = verbalize(entry.get("would_measure"))
+    if v["route"] == NOT_VERBALIZABLE:
+        return {"reading": None, "route": v["route"], "why": v["why"],
+                "form": None}
+    return {"reading": PROCESS, "route": v["route"], "form": v["form"],
+            "why": "an instruction is grammatical with no bearer supplied; "
+                   "the implied bearer is the operator, not the system "
+                   "under study"}
 
 
 def load_entries():
@@ -484,12 +568,28 @@ def selftest():
         fails.append("operators/D2 carries no WOULD MEASURE and must be "
                      "listed NOT WATCHABLE")
     import uninstrumented as U
-    undec = [e for e in U.ENTRIES
-             if t1.classify(e["would_measure"])["label"] == t1.UNDECIDABLE]
-    if len(undec) != len(U.ENTRIES):
-        fails.append("the docstring says every ENTRIES WOULD MEASURE reads "
-                     "UNDECIDABLE; that is no longer true and the claim "
-                     "about what stage 2 cannot decide must be restated")
+    with_verb = [e for e in U.ENTRIES
+                 if t1.classify(e["would_measure"])["verb"] or
+                 verbalize(e["would_measure"])["route"] != NOT_VERBALIZABLE]
+    if len(with_verb) < 7:
+        fails.append("the corrected claim says 7 of 8 WOULD MEASURE strings "
+                     "carry a verb; got %d. Restate it." % len(with_verb))
+    verbal = [e for e in U.ENTRIES
+              if verbalize(e["would_measure"])["route"] != NOT_VERBALIZABLE]
+    if len(verbal) != 2:
+        fails.append("2 of 8 WOULD MEASURE strings are written as "
+                     "instructions; got %d. The count is quoted in the "
+                     "docstring and in FINDINGS." % len(verbal))
+    for e in verbal:
+        r = would_measure_reading({"would_measure": e["would_measure"]})
+        if r["reading"] != PROCESS:
+            fails.append("a verbalizable WOULD MEASURE must read PROCESS")
+    if verbalize("K14 / K15 / K16 with the mediation prediction and lag "
+                 "order")["route"] != NOT_VERBALIZABLE:
+        fails.append("a verbless WOULD MEASURE must not be verbalized")
+    if verbalize("count caveats issued per account type")["route"] \
+            != IMPERATIVE:
+        fails.append("the worked instruction case regressed")
     r = stage2("We show that populations declined across all sampled sites.")
     if r["reading"] != ENTITY:
         fails.append("stage2 lost the worked ENTITY case: %r" % r["reading"])
@@ -522,6 +622,32 @@ def selftest():
     for f in fails:
         print("  " + f)
     return 1 if fails else 0
+
+
+def cmd_verbalize():
+    """What changing the noun to a verb buys, measured."""
+    entries = load_entries()
+    watchable, _ = split_watchable(entries)
+    routes = {}
+    print("VERBALIZE -- WOULD MEASURE read as an instruction\n")
+    for e in watchable:
+        r = would_measure_reading(e)
+        routes[r["route"]] = routes.get(r["route"], 0) + 1
+        print("  %-34s %-24s %s"
+              % (e["entry_id"], r["route"],
+                 (r["form"] or "--")[:64]))
+    print()
+    for k in (IMPERATIVE, IMPERATIVE_AFTER_MARKER, NOT_VERBALIZABLE):
+        if k in routes:
+            print("  %-24s %d" % (k, routes[k]))
+    print()
+    print("  Verbalizable WOULD MEASURE strings all read PROCESS, because")
+    print("  an instruction is grammatical with no bearer supplied. That is")
+    print("  a property of instructions and not a finding about these")
+    print("  entries, so the reading is reported with its route attached.")
+    print("  The match column stays UNADJUDICATED either way; a reviewer")
+    print("  decides in the pull request.")
+    return 0
 
 
 def cmd_entries():
@@ -587,13 +713,15 @@ def main(argv):
     if "--null" in argv:
         null_test()
         return 0
+    if "--verbalize" in argv:
+        return cmd_verbalize()
     if "--entries" in argv:
         return cmd_entries()
     if "--run" in argv:
         return cmd_run(argv)
     print(__doc__.strip())
-    print("\nusage: study_watch.py [--selftest | --null | --entries | "
-          "--run [--live]]")
+    print("\nusage: study_watch.py [--selftest | --null | --verbalize | "
+          "--entries | --run [--live]]")
     return 0
 
 

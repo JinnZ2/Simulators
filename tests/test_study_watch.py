@@ -118,6 +118,27 @@ class SkipPathIsExercised(unittest.TestCase):
         row = sw.stage2("We show that populations declined at all sites.")
         self.assertEqual(row["matches_would_measure"], sw.UNADJUDICATED)
 
+    def test_an_instruction_is_recognised_not_transformed(self):
+        v = sw.verbalize("count caveats issued per account type")
+        self.assertEqual(v["route"], sw.IMPERATIVE)
+        self.assertIn("count caveats", v["form"])
+
+    def test_a_non_instruction_is_refused_not_mangled(self):
+        """
+        Fronting these produced `seting tasks` and `houring off`. A residue
+        that is not a sentence cannot be judged for whether it needs a
+        bearer, so verbalize() returns a reason instead of a string.
+        """
+        v = sw.verbalize("bidirectional protocol; each side sets tasks in "
+                         "its own modality")
+        self.assertEqual(v["route"], sw.NOT_VERBALIZABLE)
+        self.assertIsNone(v["form"])
+
+    def test_verbalizable_would_measure_reads_process(self):
+        r = sw.would_measure_reading(
+            {"would_measure": "count caveats issued per account type"})
+        self.assertEqual(r["reading"], sw.PROCESS)
+
     def test_null_test_arms_build_and_match(self):
         r = sw.null_test(verbose=False)
         self.assertTrue(r["assessability_arms_ok"])

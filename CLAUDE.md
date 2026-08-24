@@ -4868,6 +4868,56 @@ underneath).
   (`{"type": "array"}` against a file holding `{"type":"array"}`, and
   `CD_007` filed under the wrong file) and both were caught by running it,
   which is D2's operation applied to the reading of D2. Stdlib only, CC0.
+- `notes/study_watch.py` — Retrieval notification for entries carrying a
+  WOULD MEASURE, run from a GitHub Actions runner because the runner network
+  reaches Crossref, OpenAlex and arXiv — the three the local egress gate
+  refuses. That reach is the point; the schedule is incidental. Opens a pull
+  request and **merges nothing**, with no auto-merge path and no model as a
+  standing approver — asserted by `tests/test_study_watch.py` against the
+  workflow with comments stripped, because a naive substring check finds
+  `gh pr merge` and `--auto` **in the sentence forbidding them**.
+  **NOTIFICATION ONLY is a guard, not a note:** `assert_no_metric()` refuses
+  a count, percentage, rate word or per-interval figure at write time, and
+  the suite asserts the refusal fires. It fired twice during the build, both
+  on legitimate text — the run-file preamble saying *"No count, rate or trend
+  is emitted"* (refused on `rate`) and a NIL RESULT line carrying an entry's
+  own query *"practice rate during stable interval play"* — and the second
+  fixed the exemption boundary: entry-derived queries and retrieved titles
+  are data and exempt, everything the module composes is checked, by line and
+  not by section. Left strict, with the use/mention limit pinned by a test.
+  **A governing finding stated here was wrong and is corrected:** it read
+  that all eight `ENTRIES` WOULD MEASURE strings return `UNDECIDABLE`
+  *because a WOULD MEASURE is a design and a candidate is a claim*. Checked
+  after the operator asked what changing the noun to a verb would do —
+  **seven of eight carry a verb**, and the `UNDECIDABLE` verdicts were mostly
+  extraction failures (head nouns outside the D3 table, plus imperatives,
+  which have no subject by construction). The narrower true statement is
+  better: **a WOULD MEASURE written as an instruction is already in
+  verb-first form** — verb leading, bearer dropped, operator implied — so
+  `verbalize()` recognises those rather than transforming anything, and
+  **3 of 22** watchable entries are written that way. The other nineteen are
+  refused rather than fronted, because fronting produced `seting tasks`,
+  `houring off` and `being the product`, and a residue that is not a sentence
+  cannot be judged for whether it needs a bearer. **The repair is at the
+  entry, not the parser** — the repo's own verb-first stance arriving in the
+  register's own schema. `matches_would_measure` stays `UNADJUDICATED` either
+  way, since every verbalizable WOULD MEASURE reads `PROCESS` (a property of
+  instructions, not a finding about these entries) and a reviewer decides in
+  the PR. **A defect fixed on the way:** `t1_verb_first._to_ing` had no
+  consonant-doubling rule, emitting `seting` / `runing` / `begining` /
+  `occuring` — correctness rather than polish, since a residue that is not
+  English silently degrades every D6 judgement made on it; repaired with a
+  monosyllable-CVC rule plus a stated stress-final list, sixteen known
+  answers pinned. **The null test builds and its second arm does not, for a
+  reason worth having:** arms separating on the *reading* while matched on
+  head noun are constructible for `market` and not for `population` or
+  `allocation`, because where T1 decides by word list the head noun fixes the
+  reading and the arms collapse — `T1-1` inside the null test's own
+  construction requirement. Three entries are `NOT WATCHABLE` and none was
+  invented, case `024` among them **because it shipped its WOULD MEASURE as a
+  separate spec file** (`UNI_164`). Stage 1 has never executed from here; a
+  first run on the runner is a first run of untested code and the workflow
+  gates it behind the selftest and the null test. 84 tests green.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
