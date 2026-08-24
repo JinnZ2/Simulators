@@ -172,3 +172,80 @@ duration label.
 who answer a sleep-duration question with time in bed rather than time
 asleep. A validation sub-study against actigraphy would give it directly,
 and every number in the sweep depends on it.
+
+---
+
+# ADDENDUM — the three-column test, 2026-08-24
+
+`notes/datasets/mesa_sof.md` and `sim-span/NOTES_INSTRUMENT.md` name real
+cohorts and a test. Run against the sim that proposed the question, in
+`three_column.py`. Full output in `samples/three_column.sample.txt`.
+
+## The stated form is additive and the quantity is a product
+
+`gap = frag × wake_cost` by construction, so `gap ~ count + duration`
+cannot represent it. Both fitted on the same data:
+
+| true `p` | slope (product) | intercept | R² | `b_count` | `b_dur` | R² |
+|---|---|---|---|---|---|---|
+| 0.00 | −0.0022 | 0.0008 | 0.000 | −0.0005 | −0.0005 | 0.000 |
+| 0.50 | 0.5036 | −0.0011 | 0.292 | +0.1281 | +1.0066 | 0.254 |
+| 1.00 | **0.9983** | −0.0009 | **0.916** | +0.2505 | +1.9922 | 0.781 |
+
+At `p = 1.0` the product form explains 0.916 of the variance and the
+additive form 0.781. The additive coefficients scale with `p` and neither
+of them *is* `p`.
+
+## The slope estimates `p`
+
+Max error across five levels: **0.0085**. Intercept at zero throughout, as
+it must be if true-reporters contribute a gap of zero.
+
+`E[gap | product] = p × product` exactly. A span-reporter's gap **is**
+their WASO; a true-reporter's is zero; the mixture's conditional mean is
+`p` times the product. So the test does not only confirm or deny — **it
+measures the quantity this file said nobody reports.**
+
+**This corrects `notes/FINDINGS_DATASETS.md` finding 1**, which said the
+gap regression gives the gap and not the fraction and that `p` needs a
+three-way classification. It does not. The slope is the estimator, and the
+note's own two-column test was already the right one.
+
+## The note's "one flag" is worth a factor of two
+
+A self-report is a person's **usual**; a single night is one draw.
+Regressing on one night's fragmentation is errors-in-variables in the
+**predictor**, which attenuates toward zero.
+
+| true `p` | 1 night | 7 nights |
+|---|---|---|
+| 0.25 | 0.1230 (**49%** of `p`) | 0.2025 (81%) |
+| 0.50 | 0.2519 (**50%**) | 0.4169 (83%) |
+| 1.00 | 0.5156 (**52%**) | 0.8776 (88%) |
+
+One night recovers about **half** of `p`. The note offers the seven days
+as something you can *"also check"*; they are load-bearing on the headline
+number, and a single-night design would report `p` at half its value.
+
+Seven nights still attenuate by 12–19%, which is finite-`k` errors in
+variables and is correctable if the within-person variance is estimated
+from the same seven nights.
+
+## Two items carried and not tested here
+
+The note's **fragmentation index is a composite** — *"movement index plus
+fragmentation index, so it's a composite you'd want to decompose rather
+than use whole."* That is `category-weld/`'s mechanism 9 exactly: two
+independent quantities fused into one term, so a component can move
+without the record moving. The note reached it independently and the
+repair it names is the register's own. Not tested here, and it would be a
+`welds/` entry rather than a sim run.
+
+**Awakening duration is `wake_cost`, measured.** That closes the gap
+`notes/FINDINGS_DATASETS.md` finding 2 left open — WASO alone is not the
+axis because the U's location moves 1.79 h at fixed WASO, and actigraphy
+reports count and duration **separately**, so both axes are available.
+
+`WITHIN_SD = 0.7 h` and `FRAG_BETWEEN_SD = 1.2` are invented, and the
+attenuation figures move with them. What does not move with them is the
+direction and the mechanism.

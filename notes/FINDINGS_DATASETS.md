@@ -25,11 +25,22 @@ One design answers both. The note claims the first. The second it
 describes without naming — *"measured sleep, measured awakenings, and what
 they said when asked"* **is** the validation sub-study `p` needs.
 
-**One step is missing from the specification.** The note says *"you can
-compute the span-versus-sleep gap directly."* That gives the gap, not the
-fraction. `p` is a **three-way** comparison: self-report against total
-sleep time *and* against time in bed, per person, classified by which it
-is nearer. Two-way against sleep alone gives a continuous gap and no `p`.
+**CORRECTED by the follow-up note and by measurement.** This finding
+originally read: *"the note says you can compute the span-versus-sleep gap
+directly. That gives the gap, not the fraction. `p` is a three-way
+comparison… Two-way against sleep alone gives a continuous gap and no
+`p`."*
+
+That is wrong. The two-way gap does give `p`, in its **slope**.
+`E[gap | frag × wake_cost] = p × (frag × wake_cost)` exactly — a
+span-reporter's gap *is* their WASO and a true-reporter's is zero, so the
+mixture's conditional mean is `p` times the product. Measured in
+`sim-span/three_column.py` across five levels: max error **0.0085**,
+intercept at zero throughout.
+
+The three-way classification would also work and is not needed. The
+follow-up note's own test is the better route and it was already the
+right one when this said otherwise.
 
 ## 2. The sim's two swept parameters are one PSG readout, and its shape is not
 

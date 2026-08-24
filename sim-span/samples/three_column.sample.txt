@@ -1,0 +1,46 @@
+THE THREE-COLUMN TEST, run against the sim that proposed it
+
+1  the stated form is additive; the quantity is a product
+   gap = frag * wake_cost by construction, so `gap ~ count +
+   duration` cannot represent it. Both fitted, same data:
+
+   true p   | slope     intercept  R2       | b_count   b_dur     R2
+   --------------------------------------------------------------------
+   0.00     | -0.0022   0.0008     0.0001   | -0.0005   -0.0005   0.0000
+   0.25     | 0.2436    0.0018     0.1096   | +0.0622   +0.4836   0.0951
+   0.50     | 0.5036    -0.0011    0.2923   | +0.1281   +1.0066   0.2535
+   0.75     | 0.7415    0.0014     0.5296   | +0.1874   +1.4823   0.4557
+   1.00     | 0.9983    -0.0009    0.9164   | +0.2505   +1.9922   0.7805
+
+   At p=1.0 the product form explains 0.916 and the additive form
+   0.781 of the variance. The additive coefficients scale with p
+   and neither of them IS p.
+
+2  the slope of the product form estimates p
+   max error across the five levels: 0.0085
+   intercept stays at zero throughout, as it must if the
+   true-reporters contribute a gap of zero.
+
+   E[gap | product] = p * product exactly: a span-reporter's gap
+   IS their WASO and a true-reporter's is zero, so the mixture's
+   conditional mean is p times the product. The test does not
+   only confirm or deny -- it MEASURES the quantity RESULTS.md
+   said nobody reports.
+
+3  the note's 'one flag' is worth a factor of two
+   A self-report is a person's USUAL. A single night is one draw.
+   Regressing on one night's fragmentation is errors-in-variables
+   in the PREDICTOR, which attenuates toward zero.
+
+   true p   1 night      7 nights     1-night      7-night
+   --------------------------------------------------------------
+   0.25     0.1230       0.2025       49% of p     81% of p
+   0.50     0.2519       0.4169       50% of p     83% of p
+   0.75     0.3733       0.6457       50% of p     86% of p
+   1.00     0.5156       0.8776       52% of p     88% of p
+
+   One night recovers about HALF of p. Seven recover most of it.
+   The note offers the seven days as something you can 'also
+   check'; they are load-bearing on the headline number, and a
+   single-night design would report p at half its value.
+

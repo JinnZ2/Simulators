@@ -234,6 +234,16 @@ def _marginal_majority(which):
     return round(hit / float(tot), 2)
 
 
+def _three_column_ols(which):
+    """sim-span/three_column.py::ols, imported. Exact fits only."""
+    import importlib.util
+    path = os.path.join(ROOT, "sim-span", "three_column.py")
+    spec = importlib.util.spec_from_file_location("_three_column", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.ols_coef(which)
+
+
 def _sim_span_quad_fit(which):
     """sim-span/sim_span.py::quad_fit, imported. Returns the a coefficient."""
     import importlib.util
@@ -310,6 +320,30 @@ def seed():
                  "arm all LEXICAL, YES arm 5 of 6 UNDECIDABLE"),
         ],
         note="the replacement metric. Passes.",
+    )
+    register(
+        "sim-span/three_column.py::ols",
+        _three_column_ols,
+        [
+            case("exact slope", ("slope",), 3.0,
+                 "y = 2 + 3x sampled at five points has slope 3 by "
+                 "construction. The slope of this regression is the "
+                 "estimator of p, so a fitter with a scale error would "
+                 "misreport the one quantity the design exists to measure",
+                 tol=1e-9),
+            case("exact intercept", ("intercept",), 2.0,
+                 "same line, intercept 2. The intercept must sit at zero on "
+                 "real data if true-reporters contribute a gap of zero, so a "
+                 "fitter that cannot recover a known intercept cannot "
+                 "support that reading", tol=1e-9),
+            case("constant data", ("flat",), 0.0,
+                 "a horizontal line has slope 0. A fitter that invents one "
+                 "would report a non-zero p on a population where nobody "
+                 "reports span", tol=1e-9),
+        ],
+        note=("the three-column test's fitter. The slope IS the estimate of "
+              "p, so this is the one metric in the folder whose output is "
+              "read as a quantity rather than a sign."),
     )
     register(
         "sim-span/sim_span.py::quad_fit",

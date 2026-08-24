@@ -5328,8 +5328,35 @@ underneath).
   Every distribution constant is invented and the 6–9 h window is
   stipulated; the sim tests whether the mechanism CAN produce the shape,
   not whether it did, and nothing in it is a statement about sleep.
-  `MARKER.md` / `sim_span.py` / `RESULTS.md` logged 2026-08-24. Stdlib
-  only, parses under 3.9, phone-buildable, CC0.
+  `MARKER.md` / `sim_span.py` / `RESULTS.md` logged 2026-08-24.
+  **Second operator note and an addendum:** `NOTES_INSTRUMENT.md` names the
+  variables to pull (actigraphy gives awakening count AND duration
+  separately — duration *is* `wake_cost`, measured; the fragmentation index
+  is a composite of movement index plus fragmentation index and wants
+  decomposing) and proposes the **three-column test**: reported hours minus
+  measured sleep, regressed on awakening count and duration.
+  `three_column.py` runs it against the sim that raised the question, with
+  `ols` registered in `tools/known_answer.py`. **Three results.** (1) The
+  stated form is ADDITIVE and the quantity is a PRODUCT — `gap = frag ×
+  wake_cost` by construction, so `gap ~ count + duration` cannot represent
+  it; at `p=1.0` the product form explains **0.916** of the variance against
+  the additive form's 0.781, and neither additive coefficient IS `p`.
+  (2) **The slope estimates `p`**, the one quantity `RESULTS.md` said nobody
+  reports: `E[gap | product] = p × product` exactly, since a span-reporter's
+  gap IS their WASO and a true-reporter's is zero, measured to a max error
+  of **0.0085** across five levels with the intercept at zero throughout —
+  which **corrects `notes/FINDINGS_DATASETS.md` finding 1**, that the
+  two-way gap gives the gap and not the fraction and that `p` needs a
+  three-way classification. It does not; the note's own two-column test was
+  already the right one. (3) **The note's "one flag" is worth a factor of
+  two:** a self-report is a person's USUAL and a single night is one draw,
+  so regressing on one night's fragmentation is errors-in-variables in the
+  PREDICTOR — one night recovers **~50%** of `p`, seven recover 81–88%, so
+  the seven days are load-bearing on the headline number rather than
+  something to "also check", and a single-night design would report `p` at
+  half its value. The composite fragmentation index is `category-weld/`'s
+  mechanism 9 reached independently and is left as a `welds/` entry rather
+  than a sim run. Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
