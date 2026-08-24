@@ -1,0 +1,46 @@
+CHECKS ON RESULTS_RUN_1.md -- generators not delivered
+
+SIM-D  the derived constraint, as an identity
+  cases tested                : 120
+  identity AS STATED holds in : 24
+  CORRECTED form holds in     : 120
+  cases with s = 0            : 24  (the two forms agree only here)
+  STATED     temper(quench(p,s),T) == temper(p, T*(1+s))  -- FALSE for s > 0
+  CORRECTED  temper(quench(p,s),T) == temper(p, T/(1+s))  -- holds
+
+  the undo temperature the corrected form makes explicit
+    s=0.25  T_undo=1.25  recovers p exactly: True
+    s=0.50  T_undo=1.50  recovers p exactly: True
+    s=1.00  T_undo=2.00  recovers p exactly: True
+    s=2.00  T_undo=3.00  recovers p exactly: True
+    s=4.00  T_undo=5.00  recovers p exactly: True
+  the drop's prose says 'EXACTLY UNDONE by raising temperature'
+  and is right. The formula beside it is not, and the corrected
+  one names the temperature: T = 1+s.
+
+SIM-C  the reported outputs against the intact grid
+  5x5 grid: nodes 25  edges 40  cycle rank 16
+  reported: alive_edges 40  loops 16
+  match: True -- the sim returned the INTACT grid at every sigma,
+  so the pruning step had no effect at all, not a small one.
+
+  uniform damping followed by max-normalisation:
+    identical to no damping in 200 of 200 random vectors
+    (d*C)/max(d*C) == C/max(C). `damp=0.85` is a free parameter
+    with zero effect -- sharper than the stated cause.
+
+SIM-B  what the printed table alone supports
+  dH == H_end - H_start to printed precision: True
+    residuals: 1e-03, 0e+00, 0e+00, 0e+00, 0e+00, 0e+00, 1e-03
+    largest is 1e-03, which is rounding of three-decimal columns
+  anchor grid: 7 points, gaps 0.010 to 0.200, ratio 20x
+  'GRADUAL, not steplike' is read on this grid. A transition
+  narrower than the LOCAL spacing is invisible to it, and the
+  spacing varies by 20x across the range. The negative is as
+  strong as the grid and no stronger.
+
+  the tail_mass inference does not follow from tail_mass alone:
+  constant tail MASS does not locate the entropy loss, because
+  the tail's INTERNAL entropy can collapse at fixed mass. The
+  drop's 'inside the head' reading needs the head's and tail's
+  entropies reported separately, and neither is in the table.
