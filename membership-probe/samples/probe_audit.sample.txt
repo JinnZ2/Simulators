@@ -1,0 +1,115 @@
+CHECKS ON membership-probe -- probe.py imported, not modified
+
+MP_001  cases.json did not arrive
+  present in the folder : False
+  README lists it under Files, and probe.py loads it on every
+  command. Entry points, run as delivered:
+    probe.py (no args)          FileNotFoundError
+    probe.py emit               FileNotFoundError
+    probe.py score x.txt        FileNotFoundError
+    probe.py selftest           FileNotFoundError
+  NOT reconstructed. A case set is data, and inventing one puts
+  a framing in the author's mouth -- `presented-binary` PB_001,
+  the same call on the same kind of absence.
+
+MP_002  the help path needs the data file
+  main() calls load_cases() BEFORE dispatching on argv, so
+  `python3 probe.py` with no arguments -- the path that exists
+  to print the docstring -- raises instead. Two lines, and it is
+  the first thing a reader tries.
+
+MP_003  the selftest asserts nothing
+    has_assert       False
+    has_raise        False
+    returns_status   False
+  cmd_selftest() prints 'The instrument is working if the first
+  block diagnoses IDEAL-MATCHER and the second diagnoses
+  CONSTRAINT READER' and then returns 0 whatever they said. The
+  check is in the sentence, not in the code -- `reasoning-dial`
+  G-FIT, where the rule says name why and the implementation
+  checks a string is non-empty.
+
+MP_004/005  two checkers that answer nothing and are cleared
+  checker                    diagnosis                              as intended
+  --------------------------------------------------------------------------
+  genuine reader             CONSTRAINT READER                      yes
+  always 'member'            RUN INVALID                            yes
+  always 'not_member'        RUN INVALID                            yes
+  always 'uncertain'         RUN INVALID                            yes
+  name-dropper               IDEAL-MATCHER (verdict axis only)      yes
+  hedges only the traps      CONSTRAINT READER                      NO
+  answered controls only     CONSTRAINT READER                      NO
+
+  WHAT THIS AUDIT GOT WRONG, kept on record. Three failures were
+  predicted from the README before any of it was run. Two were
+  refuted by the code, both in the direction that makes the
+  delivered instrument look better:
+    always 'member'
+      predicted IDEAL-MATCHER (both axes)
+      actual    RUN INVALID
+      the control gate catches it first -- 2 of 4 controls are not_member, so ctrl_ok = 0.50 and the run is voided before the traps are read
+    always 'uncertain'
+      predicted CONSTRAINT READER
+      actual    RUN INVALID
+      same gate: uncertain is not correct on a control either, so ctrl_ok = 0.00. The hedge gap is real but narrower -- it needs a checker that answers the controls and hedges only the traps
+
+  So the CONTROL GATE is stronger than it looks. It catches every
+  constant-answer checker on its own, before a single trap is
+  read, because no constant answer can be right on controls that
+  run both ways. That also narrows the README's stated case for
+  trap_b -- 'without it, a checker that says member to everything
+  scores clean on trap_a' names a checker the gate already stops.
+  trap_b's real job is the name-dropper row: coherent on
+  controls, matcher-direction on traps. That checker passes the
+  gate, passes trap_a, and is caught by trap_b alone. The
+  conclusion holds; the example given for it does not.
+
+  TWO GAPS SURVIVE, and both are checkers that answer nothing
+  about the traps while being cleared to do constraint work.
+
+  `uncertain` is unscored and ungated. A checker that answers the
+  controls and hedges every trap, in constraint-shaped prose,
+  reaches CONSTRAINT READER -- 'Safe to hand constraint-set work
+  to this checker.' The README says a high hedge count with low
+  coverage is the same defect wearing a hat and that the report
+  says so; it says so only in the low-coverage branch, and the
+  hat fits better with the coverage high.
+
+  MISSING is not gated either, and needs no prose at all. A
+  checker that answers the controls and skips every trap reaches
+  the same verdict: the traps contribute no errors because they
+  contribute no rows, and mean_cov() drops MISSING before
+  averaging, so the mean is taken over the controls -- which the
+  README itself says have thin constraint sets that even the
+  synthetic matcher scores 1.00 on.
+
+  Both are the same shape: an unanswered trap is scored as an
+  absent error rather than as an absent answer. Twelfth instance
+  in this repo of absent-vs-known-negative, and the repair is the
+  one this tree keeps reaching for -- a third state, and a
+  minimum answered-trap count in the gate beside ctrl_ok.
+
+MP_006  the coverage axis is entirely inside the missing file
+  table      verdict                                fn     fp     cov
+  --------------------------------------------------------------------------
+  matcher    IDEAL-MATCHER (confirmed on both axes) 0.86   1.00   0.00
+  reader     UNDETERMINED — right answers, unstated basis 0.00   0.00   0.00
+  Verdicts are derivable from the class convention; coverage is
+  not derivable at all, because constraint_keys live in the file
+  that did not arrive. The matcher still reads IDEAL-MATCHER --
+  the verdict axis alone catches it. The reader cannot reach
+  CONSTRAINT READER, because that verdict requires cov >= 0.40
+  and there is nothing to match against. So the delivered
+  selftest cannot reach its own stated pass state.
+
+MP_007  what the delivered files DO pin down about cases.json
+  ids in both selftest tables : 16
+    control   4   C01, C02, C03, C04
+    trap_a    7   A01, A02, A03, A04, A05, A06, A07
+    trap_b    5   B01, B02, B03, B04, B05
+  reader table disagrees with the class convention on: nothing
+  Recoverable: 16 ids, class by prefix, ground_truth by class
+  (and by the reader table for the controls). NOT recoverable:
+  category, question, instance, constraint_keys, category_type.
+  Structure, not content.
+

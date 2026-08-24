@@ -5172,6 +5172,69 @@ underneath).
   item in a file with no items, and the largest gap in the family, since
   both specs put the rules governing how they are read in the file that is
   not here. Stdlib only, parses under 3.9, CC0.
+- `membership-probe/` — Pre-flight for handing constraint-set work to an
+  agent: detects a checker using an **ideal rendering as a membership
+  test** instead of reading the constraint set. The defect is circularity
+  — an ideal form is a *summary of the instances that already carry the
+  label*, so testing an instance against it excludes nothing except things
+  that were never in the category, and rejects every real instance, since
+  *"not one cell in any beehive is a regular hexagon"*. Two trap classes
+  (`trap_a` real member deviating hard from the ideal → a matcher returns
+  FALSE_NEG; `trap_b` non-member whose GEOMETRY matches closely but whose
+  constraint set is absent → FALSE_POS), a control gate, and a second axis
+  — **coverage**, how much of the case's named constraint set the stated
+  BASIS touches — reported separately rather than averaged. `probe.py` and
+  `README.md` delivered verbatim; audit in `AUDIT_NOTES.md`,
+  `CLAIM_TABLE.md` and `probe_audit.py`, which imports the module rather
+  than modelling it. **`MP_001`: `cases.json` did not arrive**, both
+  delivered files depend on it, and all four entry points raise —
+  including the no-args help path, which loads the data before dispatching
+  (`MP_002`). NOT reconstructed: a case set is data and inventing one puts
+  a framing in the author's mouth (`presented-binary` `PB_001`'s call on
+  the same absence; `category-weld` `CW_004` is what the one prior
+  reconstruction cost). `MP_007` recovers the STRUCTURE instead — 16 ids,
+  7 `trap_a` + 5 `trap_b` + 4 `control` by prefix, ground truth derivable
+  from class, both selftest tables agreeing on every id — and stops there.
+  **`MP_008`, the correction: two of this audit's three predicted failures
+  were refuted by the code**, both in the direction that makes the
+  delivered instrument look better — `always member` and `always
+  uncertain` both come back **RUN INVALID**, because no constant answer
+  can be right on controls that run both ways, so the gate voids the run
+  before a trap is read. That narrows the README's stated case for
+  `trap_b` (*"without it, a checker that says member to everything scores
+  clean on trap_a"* names a checker the gate already stops); **trap_b's
+  real job is the name-dropper** — coherent on controls, matcher-direction
+  on traps — measured as caught by trap_b alone. Predictions kept in
+  `FIRST_DRAFT` and printed rather than deleted; second consecutive drop
+  where a claim written against delivered prose was refuted by delivered
+  code (`TFM_004`), and the first caught by running rather than by the
+  author. **Two gaps survive, one shape:** `MP_004` a checker answering
+  the controls and hedging every trap in constraint-shaped prose is
+  diagnosed *"CONSTRAINT READER … Safe to hand constraint-set work to this
+  checker"* (`uncertain` is neither FALSE_NEG nor FALSE_POS, so both trap
+  rates are zero; the README's hedge sentence fires only in the
+  low-coverage branch), and `MP_005` a checker answering the controls and
+  **skipping** every trap reaches the same verdict with no prose at all,
+  since `mean_cov()` drops MISSING before averaging and the mean is taken
+  over the controls the README itself calls thin — **an unanswered trap
+  scored as an absent error rather than an absent answer**, twelfth
+  instance of the absent-vs-known-negative repair here. **`MP_003`/
+  `MP_006` compound:** `cmd_selftest()` prints *"the instrument is working
+  if …"* and returns 0 whatever the blocks said (no assert, no raise, no
+  status — `reasoning-dial`'s G-FIT at its most literal), and the stated
+  pass state is unreachable anyway, since coverage lives entirely in the
+  missing file — with empty `constraint_keys` the matcher still reads
+  IDEAL-MATCHER (the verdict axis does that job alone) while the reader
+  tops out at UNDETERMINED. **`MP_009` is the honest positive:** the
+  LIMITS section discloses five weaknesses unasked, including the one most
+  drops omit (*"the selftest is not independent validation … both
+  synthetic replies were written by the same hand that wrote the
+  scorer"*) and the right asymmetry (*"passing is weaker evidence than
+  failing"*) — and two of the four gaps found here sit inside limits it
+  already names, so it located the ground the defects stand on without
+  following it to them. Siblings: `null-harness/` (same never-fails
+  invariant), `reasoning-gate/` (`G-FIT`), `presented-binary/`. Stdlib
+  only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
