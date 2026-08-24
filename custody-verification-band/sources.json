@@ -1,0 +1,36 @@
+{
+  "_schema": {
+    "note": "Archive corpus. Worked through over months, not sessions. `read` is whether a person has read the source; `arithmetic_checked` is whether a number taken from it has been recomputed here.",
+    "fields": ["id", "cite", "anchors", "read", "arithmetic_checked", "note"]
+  },
+  "sources": [
+    {
+      "id": "west-brown-enquist-1997",
+      "cite": "West, Brown & Enquist 1997, Science 276:122, A General Model for the Origin of Allometric Scaling Laws in Biology",
+      "anchors": ["area-preserving radius ratio", "space-filling length ratio", "3/4 metabolic exponent"],
+      "read": false, "arithmetic_checked": true,
+      "note": "3/4 reproduces to 0.750000 in branching.py from beta=n^-1/2 and gamma=n^-1/3. Two labels in the delivered anchor block are wrong; see AUDIT_NOTES.md."
+    },
+    {
+      "id": "katifori-2010",
+      "cite": "Katifori, Szollosi & Magnasco 2010, Phys Rev Lett 104:048704, Damage and Fluctuations Induce Loops in Optimal Transport Networks",
+      "anchors": ["pure-efficiency optimum is loopless", "damage or fluctuation induces loops"],
+      "read": false, "arithmetic_checked": false,
+      "note": "Anchor statement matches the title claim. Not independently checked."
+    },
+    {
+      "id": "kaiser-2020",
+      "cite": "Kaiser, Ronellenfitsch & Witthaut 2020, Nature Communications 11:5796, Discontinuous transition to loop formation in optimal supply networks",
+      "anchors": ["loop transition is discontinuous", "threshold below which zero loops"],
+      "read": false, "arithmetic_checked": false,
+      "note": "Anchor statement matches the title claim. The discontinuity is the only anchor that argues FOR a binary criterion rather than a graded one."
+    },
+    {
+      "id": "preferential-attachment",
+      "cite": "Yule 1925, Phil Trans R Soc B 213:21; Simon 1955, Biometrika 42:425; Barabasi & Albert 1999, Science 286:509",
+      "anchors": ["accumulation rate proportional to current holdings", "exponent set by structure"],
+      "read": false, "arithmetic_checked": false,
+      "note": "Three independent derivations of the same mechanism, which is itself the kind of recurrence shape-index records. 'Exponent set by structure' holds for pure BA; fitness and initial-attractiveness variants move it."
+    }
+  ]
+}

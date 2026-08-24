@@ -1,0 +1,71 @@
+{
+  "_schema": {
+    "note": "Incremental. Cases are added one at a time and are not evidence until status is CITED. SEED cases are structural placeholders written to exercise the criterion, not observations.",
+    "cuts": {
+      "custody": ["SELF", "MIXED", "EXTERNAL", "UNKNOWN"],
+      "verification": ["LOCAL", "REMOTE", "OPAQUE", "UNKNOWN"],
+      "parallel_path": ["PRESENT", "ABSENT", "UNKNOWN"],
+      "slack": ["PRESENT", "ABSENT", "UNKNOWN"],
+      "horizon": ["WILLED", "RATCHETED", "UNKNOWN"]
+    },
+    "favourable": {
+      "custody": "SELF",
+      "verification": "LOCAL",
+      "parallel_path": "PRESENT",
+      "slack": "PRESENT",
+      "horizon": "WILLED"
+    },
+    "criterion_cuts": ["custody", "verification"],
+    "status": ["SEED", "CITED", "BROKEN"]
+  },
+  "cases": [
+    {
+      "id": "friendly_society_local",
+      "status": "SEED", "confidence": 0.5, "source": null,
+      "custody": "SELF", "verification": "LOCAL", "parallel_path": "PRESENT",
+      "slack": "PRESENT", "horizon": "WILLED",
+      "measured_by": "residual distribution records; whether a member can inspect the book they subscribe to",
+      "note": "The proximity case named in the README. Q-PORT applies here first."
+    },
+    {
+      "id": "owner_operator_trucking",
+      "status": "SEED", "confidence": 0.6, "source": null,
+      "custody": "SELF", "verification": "LOCAL", "parallel_path": "PRESENT",
+      "slack": "ABSENT", "horizon": "RATCHETED",
+      "measured_by": "who books the margin on a good year; uncommitted hours per week; whether equipment finance sets the horizon",
+      "note": "Passes the criterion on custody and verification, fails slack and horizon. This is the case that shows the criterion covers two of five cuts."
+    },
+    {
+      "id": "cooperative_member",
+      "status": "SEED", "confidence": 0.4, "source": null,
+      "custody": "MIXED", "verification": "LOCAL", "parallel_path": "PRESENT",
+      "slack": "PRESENT", "horizon": "WILLED",
+      "measured_by": "patronage dividend versus retained earnings; member access to the ledger",
+      "note": "Fails the criterion on custody alone while four of five cuts are favourable. Over-rejection, the mirror of owner_operator_trucking."
+    },
+    {
+      "id": "franchise_operator",
+      "status": "SEED", "confidence": 0.5, "source": null,
+      "custody": "EXTERNAL", "verification": "LOCAL", "parallel_path": "PRESENT",
+      "slack": "ABSENT", "horizon": "RATCHETED",
+      "measured_by": "royalty and supply margin as a share of unit surplus; whether the operator sees unit-level books",
+      "note": null
+    },
+    {
+      "id": "platform_gig_driver",
+      "status": "SEED", "confidence": 0.6, "source": null,
+      "custody": "EXTERNAL", "verification": "OPAQUE", "parallel_path": "PRESENT",
+      "slack": "ABSENT", "horizon": "RATCHETED",
+      "measured_by": "take rate; whether the allocation rule is inspectable by the contributor",
+      "note": "Verification is the cut doing the work here, not custody."
+    },
+    {
+      "id": "index_fund_holder",
+      "status": "SEED", "confidence": 0.3, "source": null,
+      "custody": "SELF", "verification": "OPAQUE", "parallel_path": "PRESENT",
+      "slack": "UNKNOWN", "horizon": "RATCHETED",
+      "measured_by": "who holds the residual claim; whether the holder can inspect any node they are committed to",
+      "note": "Custody favourable, verification not. Tests whether the AND in the criterion is load-bearing."
+    }
+  ]
+}

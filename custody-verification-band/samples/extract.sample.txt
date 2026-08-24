@@ -1,0 +1,28 @@
+CUSTODY VERIFICATION BAND
+criterion reads custody, verification; CUTS names 5
+
+  case                     verdict  cuts   conf  unfavourable
+  friendly_society_local   BUFFER   5/5    0.50  -
+  owner_operator_trucking  BUFFER   3/5    0.60  horizon,slack
+  cooperative_member       BELT     4/5    0.40  custody
+  franchise_operator       BELT     2/5    0.50  custody,horizon,slack
+  platform_gig_driver      BELT     1/5    0.60  custody,horizon,slack,verification
+  index_fund_holder        BELT     2/5    0.30  horizon,slack,verification
+
+DISAGREEMENTS -- criterion against the full cut set
+  owner_operator_trucking  PASSES_CRITERION_FAILS_CUTS    3/5  horizon,slack
+  cooperative_member       FAILS_CRITERION_PASSES_CUTS    4/5  custody
+
+  A disagreement in either direction says the one-line criterion and
+  the five-cut reading are not the same instrument. Both are kept and
+  reported separately rather than one being folded into the other.
+
+CORPUS
+  west-brown-enquist-1997      read=False arithmetic_checked=True
+  katifori-2010                read=False arithmetic_checked=False
+  kaiser-2020                  read=False arithmetic_checked=False
+  preferential-attachment      read=False arithmetic_checked=False
+  4 of 4 unread. No case in cases.json is CITED.
+
+  6 of 6 cases are SEED: structural placeholders written to exercise
+  the criterion, not observations. None is evidence.
