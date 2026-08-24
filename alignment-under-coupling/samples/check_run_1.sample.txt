@@ -1,0 +1,70 @@
+CHECKS ON RESULTS_RUN_1.md -- generators now present, imported
+
+TFM_001/002  SIM-D's derived constraint, against the real
+             quench() and temper()
+  cases                      : 120
+  identity AS STATED holds in: 24   (cases with s=0: 24)
+  CORRECTED form holds in    : 120
+  STATED    temper(quench(p,s),T) == temper(p, T*(1+s))  FALSE
+  CORRECTED temper(quench(p,s),T) == temper(p, T/(1+s))  holds
+  undo temperature T = 1+s recovers p in 20 of 20 cases
+  The drop's prose is right and its formula is not. The
+  correction names a temperature the stated version cannot.
+
+TFM_003  SIM-C returned the intact grid
+  5x5: nodes 25  edges 40  cycle rank 16
+  reported alive_edges 40  loops 16  -> match True
+
+TFM_004  CORRECTED. My claim was wrong; the code says so.
+  a UNIFORM scaling is cancelled by max-normalisation in 200 of 200
+  the code's ACTUAL update, 0.85*C + 0.15*target, is cancelled
+  in 0 of 200. It is a convex combination, not a scaling.
+
+  the real reason nothing prunes -- where the floor sits:
+  sigma    min C       median      max C       min / floor
+  0.00     4.167e-02   1.335e-01   1.000e+00   42x
+  0.40     4.710e-02   1.332e-01   1.000e+00   47x
+  1.60     4.568e-02   1.237e-01   1.000e+00   46x
+  The floor is 1e-3 and the SMALLEST conductance is ~4.6e-2, so
+  the floor sits ~46x below anything the dynamics produce. The
+  conductances span about one decade and the spread barely moves
+  with sigma. Nothing can reach the floor -- a G-RES failure,
+  the threshold outside the range of the quantity it tests.
+
+TFM_009  the loop count is not cycle rank unless the alive
+         subgraph is connected and spanning, and nothing checks
+  alive=40  -> reported loops = 16
+  alive=30  -> reported loops = 6
+  alive=24  -> reported loops = 0
+  alive=12  -> reported loops = 0
+  at alive=12 no subgraph can span 25 nodes, and the formula
+  still returns 0 rather than flagging a disconnected result.
+
+TFM_005  CORRECTED. The drop's UNRESOLVED reading is inverted.
+  true distribution: H_head 3.197  H_tail 7.064  tail_mass 0.4499
+  anchor   H_total   tail_mass   dH_head     dH_tail
+  0.00     4.429     0.4000      -0.120      -2.289
+  0.05     4.737     0.4247      -0.022      -1.817
+  0.40     5.255     0.4593      +0.013      -0.903
+  decomposition identity holds: True
+
+  The drop read near-constant tail MASS against a falling H as
+  showing the loss is 'INSIDE the head', contradicting the
+  reported mechanism. Unanchored, the head loses 0.12 nats and
+  the tail loses 2.29. The loss is almost entirely in the tail,
+  which keeps its mass while concentrating it onto fewer tokens.
+  Anchoring cuts the tail loss to 0.90 and leaves the head flat.
+  The reported mechanism is REPRODUCED, not contradicted, and
+  the drop's own UNRESOLVED contradiction dissolves.
+
+TFM_006  the gradual-not-steplike negative, and its grid
+  7 points, gaps 0.010 to 0.200, ratio 20x
+
+TFM_007  the entropy unit, now checkable in the code
+  SIM-B uses math.log -> nats. H of the true Zipf = 5.625,
+  which is the reported H_start of 5.625. ln(vocab)=7.601,
+  log2(vocab)=10.966. Confirmed nats; still absent from the table.
+
+TFM_010  run_all.py's --quick flag does nothing
+  body of the branch: [x for x in a]
+  that is a copy of the same list, so the flag is inert: True

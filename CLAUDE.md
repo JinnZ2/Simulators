@@ -4918,48 +4918,79 @@ underneath).
   separate spec file** (`UNI_164`). Stage 1 has never executed from here; a
   first run on the runner is a first run of untested code and the workflow
   gates it behind the selftest and the null test. 84 tests green.
-- `transition-family-marker/` — A delivered results drop plus checks on it.
-  `RESULTS_RUN_1.md` is verbatim as delivered and unmodified; all added
-  content sits in `check_run_1.py`, `CLAIM_TABLE.md` and the README — the
-  `aperiodic-order-sim-stack/` arrangement, and the nearest precedent, since
-  the generators were not delivered either. The marker: three phenomena
-  (alignment homogenization, entropy depletion under recursive training, a
-  loop/tree threshold in adaptive flow networks) proposed as one family of
-  discontinuous transitions under an Ising-style mapping, tested by four
-  sims. Confidence `~0.40` before run 1 and `~0.40` after — *"the marker is
-  not stronger. It is better specified."* **Three of the drop's claims need
-  no generator, being algebra or graph invariants.** **`TFM_001`, the load-
-  bearing one:** SIM-D's derived constraint states
-  `temper(quench(p,s),T) == temper(p, T*(1+s))`, which holds in **24 of 120
-  tested cases — exactly the 24 where `s = 0`**. Tempering composes
-  multiplicatively and a quench by `s` *is* a tempering at `1/(1+s)`, so the
-  composite is **`T/(1+s)`**. **`TFM_002`:** the prose beside the formula
-  (*"EXACTLY UNDONE by raising temperature"*) is right and the conclusion is
-  untouched — and the corrected identity yields a number the stated one
-  cannot, since `temper(quench(p,s), T) = p` exactly at **`T = 1+s`**,
-  verified at s = 0.25 … 4. The correction sharpens the argument rather than
-  weakening it: the undo temperature becomes a quantity a rewritten
-  `quench()` can be tested against. **`TFM_003`:** SIM-C's reported
-  `loops=16, alive_edges=40` are exactly a 5×5 grid's `E = 40` and
-  `E − V + 1 = 16`, so the sim returned the **intact** grid at every sigma —
-  no pruning at all, not weak pruning, and the outputs are computable from
-  the grid dimensions without running anything. **`TFM_004` extends the
-  delivered diagnosis:** uniform damping followed by max-normalisation is
-  algebraically cancelled, `(d·C)/max(d·C) ≡ C/max(C)`, identical in 200 of
-  200 random vectors — so `damp=0.85` has zero effect and there is no slow
-  decay failing to reach the floor, there is no decay; removing the
-  max-normalisation is necessary rather than advisable. Two more read off
-  the delivered table: **`TFM_005`**, the tail-mass inference is
-  under-determined, since constant tail *mass* does not locate the entropy
-  loss when the tail's *internal* entropy can collapse at fixed mass — one
-  more column, not a re-run; and **`TFM_006`**, the *"gradual, not
-  steplike"* negative is bounded by a 7-point grid whose spacing varies 20×
-  and is coarsest where the curve is steepest, a `G-RES` statement about the
-  grid rather than a claim about the response. **`TFM_008` is the honest
-  counterweight and is UNVERIFIED:** the `NOT TUNED` discipline is the
-  drop's strongest feature and cannot be confirmed from outside, because a
-  drop that had searched parameters and one that had not produce identical
-  results files. Stdlib only, parses under 3.9, CC0.
+- `alignment-under-coupling/` — A marker under exploration delivered at
+  confidence `~0.40`, plus its first run's results, plus all four sim
+  generators — landed in that order, which is the interesting part.
+  `MARKER.md`, `RESULTS_RUN_1.md`, `sim_a..sim_d` and `run_all.py` are
+  verbatim as delivered; all added content sits in `check_run_1.py`,
+  `CLAIM_TABLE.md` and the README. The shape: three phenomena (model
+  consensus following popularity, domain alignment under an external field,
+  the loop-formation threshold in optimal transport networks) proposed as one
+  formal family — local coupling plus a weak global field, with a critical
+  point — tested by four sims of which SIM-D is the declared discriminator
+  and is run first. Confidence `~0.40` before run 1 and `~0.40` after: *"the
+  marker is not stronger. It is better specified."* **`TFM_001`–`TFM_008`
+  were written against the results alone, in a folder called
+  `transition-family-marker/`; the generators arrived afterwards, that folder
+  was merged in so the checks could import the code instead of modelling it,
+  and two verdicts inverted.** Ids kept rather than renumbered.
+  **`TFM_001`, which survives:** SIM-D's derived constraint states
+  `temper(quench(p,s),T) == temper(p, T*(1+s))`, which holds in **24 of 120**
+  cases — exactly the 24 where `s = 0`. Tempering composes multiplicatively
+  and a quench by `s` *is* a tempering at `1/(1+s)`, so the composite is
+  **`T/(1+s)`**, 120 of 120. **`TFM_002`:** the prose beside the formula
+  (*"EXACTLY UNDONE by raising temperature"*) is right, the downstream
+  conclusion is untouched, and the corrected identity yields a number the
+  stated one cannot — `temper(quench(p,s), T) = p` exactly at **`T = 1+s`**,
+  verified at `s = 0.25 … 4`, so the undo temperature becomes a quantity a
+  rewritten support-truncating `quench()` can be tested against.
+  **`TFM_003`:** SIM-C's reported `loops=16, alive_edges=40` are exactly a
+  5×5 grid's `E = 40` and `E − V + 1 = 16` — the **intact** grid at every
+  sigma, no pruning at all, and computable from the grid dimensions without
+  running anything. **`TFM_004` was mine and the code refuted it.** Written
+  against the delivered prose (*"renormalized by max each iteration, and
+  damped at 0.85"*) it read the update as a uniform scaling, which
+  max-normalisation cancels algebraically; the code is
+  `0.85*C[i] + 0.15*target`, a **convex combination toward the adaptation
+  target**. Measured: a uniform scaling is cancelled in **200 of 200** random
+  vectors, the actual update in **0 of 200**. The real reason nothing prunes
+  is a `reasoning-gate` **`G-RES`** failure — the floor is `1e-3`, the
+  smallest conductance the dynamics ever produce is `~4.6e-2`, so the
+  threshold sits **~46× below the bottom of the range it tests** while the
+  conductances span barely one decade with the spread almost unmoved by
+  sigma; removing the max-normalisation (the delivered NEXT line) changes the
+  scale and does not by itself put the floor inside the range. **`TFM_005`
+  inverted, and settles the drop's own UNRESOLVED contradiction.** The
+  results document logged that tail *mass* stays near 0.4–0.46 while total
+  entropy falls 1.2 nats, reading it as loss *inside the head* and therefore
+  against the reported mechanism. Splitting the entropy — two more columns,
+  no re-run — gives unanchored `dH_head −0.120` against `dH_tail −2.289`, a
+  factor of **nineteen**: the tail keeps its mass while concentrating it onto
+  far fewer tokens, which is exactly the state a mass fraction cannot
+  distinguish, and anchoring at 0.40 cuts the tail loss to `−0.903` and
+  leaves the head flat at `+0.013`. **So the reported mechanism — anchoring
+  preserves long-tail tokens — is REPRODUCED, not contradicted.** The
+  decomposition `H = H(mass split) + head_m·H_head + tail_m·H_tail` closes to
+  1e-9; `uninstrumented/`'s SCALAR DEMAND, one number standing in for a
+  two-dimensional state. **`TFM_006`:** the *"gradual, not steplike"*
+  negative is bounded by a 7-point grid whose spacing varies **20×** and is
+  coarsest where the curve is steepest — `G-RES` about the grid, not a claim
+  about the response. **`TFM_007`:** the entropy unit is confirmed nats
+  (`math.log`, and `H` of the true Zipf is 5.625 which is the reported
+  `H_start`) and is still absent from the table. **`TFM_009`:**
+  `loops = alive - (nodes - 1)` is cycle rank only if the surviving subgraph
+  is connected and spanning, and nothing checks — at `alive = 12` no subgraph
+  can span 25 nodes and the formula still returns `0`; inert on this run
+  because nothing pruned, load-bearing the moment the floor is repaired.
+  **`TFM_010`:** `run_all.py --quick` is `a = [x for x in a]`, documented in
+  the usage block and inert. **`TFM_008` is the honest counterweight and
+  stays UNVERIFIED:** the `NOT TUNED` discipline is the drop's strongest
+  feature — failures logged as failures, the defective sim labelled defective
+  in its own runner's `PLAN` table, SIM-A skipped rather than run for a
+  number — and it cannot be confirmed from outside, because a run that
+  searched parameters and one that did not leave identical files and the sims
+  arrive without history. Narrowed by the code's arrival, not closed. Stdlib
+  only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
