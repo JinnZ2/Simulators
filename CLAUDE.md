@@ -4,6 +4,16 @@ Repository for different simulations and supporting tooling.
 
 ## Report form
 
+`METHOD_SPEC.md` is upstream of `SHAPE_SPEC.md` and states the epistemic class:
+constraint-set reasoning is a METHOD, in the class of the scientific method and
+dimensional analysis. A method is not falsifiable and does not need to be — the
+falsifiable layer is the individual read, via the removal test. Demanding a
+falsifier of the procedure rather than of a read is a category error, and the
+file exists to block it. Section 5: a read is a MARKER, confidence is reported
+separately from the pattern with a comfort threshold, and a read is NOT upgraded
+by more instances sharing the geometry without a checked constraint set. File
+order is `METHOD_SPEC.md`, `SHAPE_SPEC.md`, `READING_PROTOCOL.md`.
+
 `SHAPE_SPEC.md` is upstream of everything in this repository that uses the
 word SHAPE. It defines a shape as the constraint set a geometry is a solution
 to — not the geometry, not the picture, not the field's name for it. Point at

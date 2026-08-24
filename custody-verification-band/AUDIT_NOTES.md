@@ -113,6 +113,29 @@ Section 9's note on cost lands on nothing here: the dissipation/enclosure group
 is not computed in this folder, so there is no cost framing to replace. That is
 the same absence stated from the other side.
 
+## METHOD_SPEC section 5 against this folder
+
+Confidence is carried per case and aggregated nowhere, which is what section 5
+asks for. `comfort_threshold` — the level at which an operator would act — is
+declared in the schema and populated on none of the eleven cases, which
+`extract.py check` already reports as `B9`. Section 5 names it as part of the
+readout, so the gap is now required rather than merely noticed.
+
+Section 5's upgrade table applies directly to `B7`. It says a read is NOT
+upgraded by more instances sharing the geometry without a checked constraint
+set, and is upgraded by passing a removal test or by surviving transfer to a
+domain it was not built from. `B7` is a transfer that has never been run in
+either direction, so it sits at neither: not upgraded, not downgraded, and not
+tested. Adding more branching literature would not move it.
+
+Section 3's UNDERDETERMINED DISAPPEARANCE is the correct reading of the
+conversion cases. `C07`, `C08`, `C09` and `C10` all record a shape that was
+present and is absent. Section 3: a shape disappearing tells you at least one
+constraint was removed but not which, and a timestamped intervention bounds the
+candidate set. Each of those cases carries a date range and a named shock, so
+the bound exists and has not been used to narrow anything. That is the next
+move available on this corpus without reading a single source.
+
 ## Nothing here rests on a source yet
 
 Twenty-nine sources: five located, twenty-four untouched, none extracted. Every
