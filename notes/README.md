@@ -13,6 +13,8 @@ to the entries — an operator entry describes an operation, not a result.
 |---|---|
 | `operators/` | entries, delivered verbatim. One file per operator. |
 | `check_*.py` | one checker per entry, run against this tree. Reads the entry, does not modify it. |
+| `study_watch.py` | retrieval notification for entries carrying a WOULD MEASURE. Runs on a GitHub Actions runner, which reaches the three sources the local egress gate refuses. Opens a pull request; merges nothing. |
+| `watch/` | one file per run, `YYYY-MM-DD.md`. Read `watch/README.md` first — silence from that action is not evidence of absence. |
 | `samples/` | pinned output |
 
 ## The one rule
@@ -33,5 +35,13 @@ checker's output and the entry stays as written — same arrangement
 The catalogue this is filed into — the A and D families, D1, A3, A4, the
 compound field-modifier — is not in this repo. `D2.md` references them and
 they do not resolve here. Recorded rather than reconstructed.
+
+## study-watch, in one line
+
+Notification only. No count, rate or trend appears in a run file, because a
+keyword query selects its frame on searchability and any number computed over
+its results measures the query. `assert_no_metric()` enforces that at write
+time and `tests/test_study_watch.py` asserts the refusal fires. Findings from
+the build are in `FINDINGS_STUDY_WATCH.md`.
 
 CC0.
