@@ -4829,6 +4829,45 @@ underneath).
   condition is therefore unevaluable on constructed data and is stated rather
   than answered. Field is recorded per row and not adjusted for. Stdlib only,
   parses under 3.9, CC0.
+- `notes/` — Storage, mundanely named on purpose. Operator entries live
+  here so they do not have to be carried in session. No claim table; the
+  `REFUTATION_PROTOCOL` convention does not apply, because an entry
+  describes an operation rather than a result. One rule: an entry is stored
+  as delivered, a checker never edits the entry it checks, and a
+  disagreement goes in the checker's output — the `uninstrumented/` cases /
+  `AUDIT_NOTES.md` arrangement. First entry `operators/D2.md`,
+  **stated-vs-actual divergence reading**: two representations of one thing
+  checked against each other, detection preceding identification, filed
+  under D (comparison operators) provisionally, and explicitly unable to
+  read cause — benign drift and deliberate concealment present identically.
+  The catalogue it is filed into (A and D families, D1, A3, A4, the compound
+  field-modifier) is **not in this repo** and is recorded as unresolved
+  rather than reconstructed. `check_d2.py` (selftest PASS) runs the entry
+  against this tree and returns four readings, none of them a verdict on it.
+  **(1)** Resolution is a file plus a literal marker checked at run time:
+  **5 of 7 instances VERIFIED**, 1 `NOT_IN_TREE` (the eval-awareness studies,
+  carried at `UNI_166` status), 1 `AMBIGUOUS` with three live candidates
+  (`reasoning-gate`'s `G-FIT` staged `post` but enforced in `pre()`,
+  `aperiodic-order-sim-stack`'s unmentioned sandbox figures,
+  `criteria-drift` `CD_007`) and no pick made. **(2)** The entry requires two
+  representations and never says of what kind, and across six readable
+  instances they are **five distinct pair kinds** — artifact/artifact,
+  schema/data, stated-rule/measured-behaviour, output/known-answer,
+  declared-values/reachable-states — so wide applicability and an undeclared
+  parameter are one fact. **(3)** The stated signature, *the instrument
+  reverts to the channel it was built to avoid*, **holds cleanly on 1 of 6,
+  arguably on 1, and fails on 4** — and two of the four fail together,
+  being the cannot-refuse and cannot-emit directions of `UNI_166`, where
+  nothing reverts and a branch is unreachable. So the entry bundles at least
+  three operations and the signature generalizes from its strongest instance
+  rather than across them. **(4)** The STANDING CHECK says it was *derived
+  from two of the above* and only one of its two sources is in the list; the
+  other, `null-harness`'s `_verdict` returning `OK` at `TP=0.5` and `TP=1.0`
+  alike, is absent — the check is right and its stated provenance is one
+  short. Two of the checker's own recorded paths were wrong when written
+  (`{"type": "array"}` against a file holding `{"type":"array"}`, and
+  `CD_007` filed under the wrong file) and both were caught by running it,
+  which is D2's operation applied to the reading of D2. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

@@ -1,0 +1,63 @@
+D2 instances checked against this tree, n=7
+
+- published instrument diverging from its own documented appendix
+    resolution : AMBIGUOUS      3 candidates in tree: reasoning-gate/AUDIT_NOTES.md (guards.json stages G-FIT post; gate.py enforces it in pre()); aperiodic-order-sim-stack/CLAIM_TABLE.md (figures shipped that the report does not mention); criteria-drift/CLAIM_TABLE.md ('significant' twice in README, zero times in regress.py)
+    pair kind  : artifact vs artifact
+    signature  : FAILS     a document and a program drifting apart is not a reversion to an avoided channel; nothing reverts
+
+- realized record schema vs specified field list, four axes apart
+    resolution : VERIFIED       uninstrumented/specimens/INSTANCE_LOG_SURVEY.md
+    pair kind  : artifact vs artifact
+    signature  : FAILS     drift between a realized and a specified schema. No channel was avoided and none was returned to
+
+- studies varying a CUE and reporting on the CONDITION
+    resolution : NOT_IN_TREE    not in this repo
+    signature  : --        not checked; the material is not in this repo and the literature claim was not verified. Same status as UNI_166 records for it
+
+- schema accepting anything while appearing to validate
+    resolution : VERIFIED       uninstrumented/specimens/INSTANCE_LOG_INDEX.md
+    pair kind  : schema vs the data it admits
+    signature  : FAILS     the schema does not revert to an avoided channel; its rejection branch is unreachable. UNI_166's cannot-refuse direction
+
+- predicate detector deciding 10 of 12 by word list
+    resolution : VERIFIED       nonidentity-census/FINDINGS.md
+    pair kind  : stated rule vs measured behaviour
+    signature  : HOLDS     built to escape lexical detection, decides 10 of 12 by word list. The avoided channel is named in the module docstring and is the one it returns to
+
+- metric returning 0.83 where true association is zero
+    resolution : VERIFIED       tools/known_answer.py
+    pair kind  : output vs a known answer
+    signature  : ARGUABLE  an association metric returning a marginal rate is a reversion to the base rate it was meant to look past, but no avoided channel was declared in advance, so the fit is read backwards
+
+- null test unable to emit two of its own declared terminal values
+    resolution : VERIFIED       nonidentity-census/FINDINGS.md
+    pair kind  : declared value set vs reachable states
+    signature  : FAILS     two declared values with no path to them. UNI_166's cannot-emit direction. Nothing reverts
+
+RESOLUTION   AMBIGUOUS 1  NOT_IN_TREE 1  VERIFIED 5
+
+PAIR KINDS   5 distinct across 6 readable instances:
+    artifact vs artifact             2
+    declared value set vs reachable states 1
+    output vs a known answer         1
+    schema vs the data it admits     1
+    stated rule vs measured behaviour 1
+    The entry requires two representations and does not say of
+    what kind. Two runs of D2 can therefore compare very
+    different things without the difference being declared.
+
+SIGNATURE    'the instrument reverts to the channel it was built
+             to avoid', per instance:
+    HOLDS     1
+    ARGUABLE  1
+    FAILS     4
+    Holds cleanly on 1 of 6, arguably on 1, fails on 4.
+    The two it fails on as a pair -- schema accepting anything,
+    null test unable to emit -- are the two directions of
+    UNI_166, reached here from a different side.
+
+STANDING CHECK provenance -- 'derived from two of the above':
+    [in]     metric returning 0.83 where true association is zero
+    [out]    null-harness _verdict returning OK at TP=0.5 and TP=1.0 alike
+    One of the two sources is not in the instance list. The
+    check is right and its stated derivation is one short.
