@@ -2,6 +2,15 @@
 
 Repository for different simulations and supporting tooling.
 
+## Report form
+
+`AUDIT_CONTRACT.md` governs how work is reported across this ecosystem:
+structure first, gap analysis as deliverable, a score without its support
+count is not a score, wording is not a decision, a free-text discriminator
+carrying structural load is a flagged defect, and co-produced documents are
+layer-separated before audit rather than audited as a composite. Read it
+before reporting.
+
 ## Meta-spine (read first)
 
 The methodology spine sits in four root-level files. Every simulator
@@ -4603,6 +4612,44 @@ underneath).
   Eight claims `C1..C8`, `C1` resting on the model rather than an
   observation because the terminal-count sweep that would settle it is
   absent from the cited literature. Stdlib only, selftest 23/23, CC0.
+- `qrng-pair-search/` — Candidate axes for two-source joint keying where the
+  unit of search is `(source, bath_set)` and not `(source, name)`: two sources
+  coupled to different baths beats two sources with different names. This is
+  `category-weld/` run backwards — a weld fuses quantities independent in the
+  world into one handle, and here the shared bath is the welder, so the same
+  instrument that exposes an assumed independence is used to establish a
+  needed one. **Three corrections to the delivered table, all load-bearing.**
+  (1) A bath set assigned to the SOURCE does not price the fielded LEG: alpha
+  decay really is insensitive to substrate temperature and rail drift, but the
+  detector is not — PIN leakage roughly doubles every 7 °C and a PMT or Geiger
+  tube needs an HV rail — so `decay_alpha × rtd_tunnel → CLEAN, overlap {}` is
+  **false as fielded**, and under source-plus-readout accounting *no*
+  admissible pair is clean; all ten weld at TH/PWR/EM. The drop stated that
+  failure mode ("same board, same temperature, same power rail") and then
+  produced a table exempting `decay_alpha` from exactly those baths — the same
+  shape as `simulation-hypothesis-budget/`'s `LABEL_TRUNCATED_IN_TRANSFER`, a
+  term present upstream and dropped downstream. (2) "The correlation rule is
+  where you can hide the actual entropy" is **security through obscurity**;
+  the rule is an algorithm and Kerckhoffs prices it public. What the structure
+  actually buys is stronger than what it was credited with: a two-source
+  extractor needs no seed and no secrecy, only independence — the measurable
+  thing. (3) **Min-entropy, not Shannon** — correlated drift halves the
+  min-entropy of a pair whose average is barely dented. Replaces the two-state
+  clean/welded verdict with three: `structural weld` (sources share a bath,
+  irreducible — shared pump laser), `separable` (sources share nothing, legs
+  weld through their readouts, removable by engineering that must then be
+  MEASURED), `clean` (no pair reaches it). Seven of ten admissible pairs are
+  separable. Also corrects the protocol's sample count: 1e6 samples resolves
+  |r| ≥ 5e-3 at 5σ and is blind below, where 1e-3 costs 2.5e7 — the count
+  should be set by the smallest correlation that would matter, not a round
+  number. The verdict line that survives unchanged: **a quiet-bench
+  cross-correlation of zero is not evidence of independence, it is evidence
+  the bath was not moving.** Nine claims `Q1..Q9`, `Q3` load-bearing and
+  UNTESTED because it asserts a coupling nobody has measured is removable.
+  **No measurements in the folder**, the extractor is deliberately unchosen,
+  `MECH` is assigned to no source and that is a gap rather than a decision,
+  and nothing here addresses SP 800-90B or AIS 31 health testing. Stdlib only,
+  selftest 33/33, CC0.
 - `SYNTHESIS.md` — Top-level synthesis describing how the three folders
   fit together, how claims flow between them, and how to read the
   artifacts in order.
