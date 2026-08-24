@@ -4953,6 +4953,51 @@ underneath).
   separate spec file** (`UNI_164`). Stage 1 has never executed from here; a
   first run on the runner is a first run of untested code and the workflow
   gates it behind the selftest and the null test. 84 tests green.
+  **`notes/datasets/mesa_sof.md`** is the second entry kind — candidate
+  instruments named by the operator for the question `sim-span/RESULTS.md`
+  left open: MESA Sleep (PSG + 7-day actigraphy + questionnaire on the same
+  person) for the instrument question, SOF for a parity question, with the
+  age caveat stated. `check_datasets.py` returns five readings and imports
+  the sim rather than modelling it. **The note answers both halves of what
+  the sim asked and claims one** — *"measured sleep, measured awakenings,
+  and what they said when asked"* IS the validation sub-study `p` needs,
+  and `p` is a **three-way** comparison (self-report against total sleep
+  time AND against time in bed, per person) where the note specifies a
+  two-way gap. **The sim's two swept parameters are one PSG readout:**
+  `frag × wake_cost` is **WASO**, and the measured mean excess matches the
+  product to 0.02 h — but the U's *location* does not, moving **1.79 h**
+  across four equal-product pairs at 2 h of WASO, with many short
+  awakenings pushing it DOWN toward the published window, so WASO alone is
+  not the axis and the awakening count is a second one; MESA reports both,
+  which is more than the note claims for it, and it lets the sim be
+  calibrated rather than swept. **`parity` resolves 16 times in this tree
+  and zero times in the note's sense** — every repo use is the *equality*
+  sense (`parity()` as a comparison function), the note means *pregnancies*
+  — third instance of case 021's sense substitution after
+  `nonidentity-census` T1-3's `state`. **A defect committed three drops
+  after it was recorded:** the first `resolve()` was a bare substring scan
+  returning `parity` 17 / `SOF` 81 / `MESA` 3, matching inside *disparity*
+  and inside other words — `UNI_009`'s `lean`/"clean" failure — and word
+  boundaries fix substring bleed while doing nothing about sense, so only
+  hand-reading got the right number (T1-1 one level up). Every dataset fact
+  is carried and unchecked, the egress gate refusing the sources
+  (`MS_004` status), and `study_watch.py` is explicitly NOT the instrument,
+  since it reads `uninstrumented.ENTRIES` and this is not a register entry.
+  **The stated age caveat reaches further, in the note's favour:** sim-span
+  assumes `frag` and `true_sleep` are independent and flags it as probably
+  wrong, and in a 45–84 cohort they are near-certainly correlated — so MESA
+  measures the sim's own weakest assumption for free, making it the hard
+  case rather than a convenient one. **And a second defect, in the same
+  file:** writing `MESA` into `CLAUDE.md` to describe the finding put MESA
+  into the tree, so the next run reported it as resolving and the selftest
+  went red — `UNI_010`'s self-reference loop arriving in `notes/`, found
+  the same way, by running twice. Broken with a seven-path `EXCLUDE` list
+  that is stated as a hand-broken loop rather than a fix (anyone grepping
+  the tree for MESA still finds the commentary), with the principled
+  version named and not built: compare against the git tree as of the
+  note's own commit. It moved `parity` 16 → 14. Two defects in one file,
+  both previously recorded in this repo, both committed anyway, and
+  neither caught by reading the code.
 - `alignment-under-coupling/` — A marker under exploration delivered at
   confidence `~0.40`, plus its first run's results, plus all four sim
   generators — landed in that order, which is the interesting part.

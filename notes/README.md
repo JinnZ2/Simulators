@@ -12,6 +12,7 @@ to the entries — an operator entry describes an operation, not a result.
 | path | what |
 |---|---|
 | `operators/` | entries, delivered verbatim. One file per operator. |
+| `datasets/` | candidate instruments named by the operator, delivered verbatim. |
 | `check_*.py` | one checker per entry, run against this tree. Reads the entry, does not modify it. |
 | `study_watch.py` | retrieval notification for entries carrying a WOULD MEASURE. Runs on a GitHub Actions runner, which reaches the three sources the local egress gate refuses. Opens a pull request; merges nothing. |
 | `watch/` | one file per run, `YYYY-MM-DD.md`. Read `watch/README.md` first — silence from that action is not evidence of absence. |
@@ -31,6 +32,15 @@ checker's output and the entry stays as written — same arrangement
   readings in `FINDINGS_D2.md`. Five of its seven instances resolve in this
   tree, its stated signature holds on one of them, and its two
   representations turn out to be five different kinds of pair.
+- `datasets/mesa_sof.md` — MESA Sleep and SOF as candidate instruments for
+  the question `sim-span/RESULTS.md` left open. Checked by
+  `check_datasets.py`; five readings in `FINDINGS_DATASETS.md`. The note
+  answers both halves of what the sim asked and claims one; the sim's two
+  swept parameters turn out to be WASO, a PSG readout, though the U's
+  location depends on the awakening/duration split at fixed WASO, so both
+  are needed and the cohort has both. `parity` resolves 16 times in this
+  tree and zero times in the note's sense. Every dataset fact is carried,
+  not checked — the egress gate refuses the sources.
 
 The catalogue this is filed into — the A and D families, D1, A3, A4, the
 compound field-modifier — is not in this repo. `D2.md` references them and
