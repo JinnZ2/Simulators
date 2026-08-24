@@ -5504,6 +5504,58 @@ underneath).
   do not exist, A4 blocked on egress — though A4 genuinely is runnable by
   someone with a citation database, and is the second item in this family
   `notes/study_watch.py` was built for. Stdlib only, parses under 3.9, CC0.
+- `conversation-type/` — A marker proposing **suspendability without
+  debt** as the variable motor-carrier distraction rules should be written
+  on, in place of channel (handheld vs hands-free): can the exchange be
+  dropped mid-sentence with nothing owed on return. Three states in the
+  rules' undifferentiated space — emotional/obligated, intellectual/
+  unobligated, and silence at hour nine — plus an adjacent finding about a
+  desk-worker default prior in general-advice corpora, with *"Instance:
+  this session"* attached. **Interest declared, and it inverts:** the two
+  previous markers in this family made claims favourable to this author's
+  class and the honest move was to decline them; this one is
+  **unfavourable**, so accepting is the humble move and rejecting is the
+  interested one — which is why `CT_005` reports its null as *not found*
+  rather than *did not happen*. **`CT_001`, the strongest move made
+  quantitative:** if arousal decays with time constant τ after a call, the
+  share of exposure falling OUTSIDE a call-window measurement is 75% for a
+  5-minute call at τ=15, 88% for a 2-minute call, and **the shorter the
+  call the worse it gets** — so P2's residue-window design is not a
+  preference, and on the marker's own mechanism a call-window study reads
+  the minority of the effect. It also makes an unstated prediction: a
+  literature measuring inside the call window should return small or null
+  effects for hands-free, which under the reframe becomes *supporting*
+  evidence. **`CT_002`:** binarising a graded quantity costs ~14% of the
+  signal on a uniform spread and ~3% on a bimodal one, and the marker's own
+  three-state list is bimodal in shape — so the binary is cheap IF the
+  distribution is bimodal, which is itself a question P4 answers on the way
+  to the main one; threshold at the middle, record near-boundary cases
+  rather than forcing them. **Two corrections, both in the marker's
+  favour.** `CT_004`: *"three states, one regulatory bin"* is one bin
+  short — states 1 and 2 are in the distraction rules and state 3 is in
+  **hours-of-service**, a separate instrument, so **a driver who eliminates
+  conversation to comply with the distraction rules moves toward the
+  vigilance-decrement state neither instrument measures in-shift**; the
+  mitigation for one is the hazard for the other and state 2 is the state
+  neither names. `CT_003`: the marker classifies itself correctly as a Q1
+  case and **inherits `QA_004` without naming it** — *"connected nowhere"*
+  is an absence claim with no corpus and no terms, and Q1 cases stay
+  provisional until the null is bounded, a standard its own family built
+  one drop earlier. **`CT_005`:** checked against the session transcript —
+  2151 records, first user turn is the session's actual opening so not a
+  post-compaction fragment, 126 assistant turns, 26 search patterns, **0
+  hits**. A bounded null produced about the author one drop after
+  specifying the standard — and it establishes only that the pattern is
+  absent from THIS session under THOSE terms, not that the marker is
+  wrong: content has been relayed from other Claude sessions twice, a
+  keyword scan is stepped around by paraphrase (`T1-1`), and a null search
+  is not exoneration. **`CT_006`:** 2 of 4 cross-links resolve as
+  artifacts, and `question-availability` exists because the last drop
+  landed it — **third consecutive marker whose named-and-absent set shrinks
+  by exactly the folder built the drop before**; `report-typing` is now
+  named by three markers, carries Q2's cost channel in one and A3's residue
+  measurement in another, and still does not exist. Stdlib only, parses
+  under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
