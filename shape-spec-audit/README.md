@@ -1,7 +1,10 @@
 # shape-spec-audit
 
-Checks on [`../SHAPE_SPEC.md`](../SHAPE_SPEC.md), which is delivered
-verbatim at the repo root and is not modified by anything here.
+Checks on the root spec family — [`../METHOD_SPEC.md`](../METHOD_SPEC.md)
+and [`../SHAPE_SPEC.md`](../SHAPE_SPEC.md) — both delivered verbatim and
+modified by nothing here. The folder keeps its original name because links
+point at it; it covers both specs and will cover `READING_PROTOCOL.md`
+when that arrives.
 
 The spec declares itself **definition, not claim** — *"the definition is a
 tool; whether any particular shape read is correct is an empirical
@@ -11,13 +14,117 @@ examples, or already contradicted by the tree it claims to be upstream of.
 Four sections make checkable statements and those are what carry verdicts.
 
 ```
-python3 shape_spec_audit.py            # full report
-python3 shape_spec_audit.py --selftest # every falsifier as an assertion
+python3 shape_spec_audit.py    # SHAPE_SPEC: the four checkable sections
+python3 method_spec_audit.py   # METHOD_SPEC, and what it does to the SS claims
+python3 shadow_read.py         # METHOD_SPEC section 4, made decidable
 ```
 
-Ten claims `SS_001`–`SS_010` in [`CLAIM_TABLE.md`](CLAIM_TABLE.md).
+Each takes `--selftest`, which runs every falsifier as an assertion.
+Seventeen claims in [`CLAIM_TABLE.md`](CLAIM_TABLE.md): `SS_001`–`SS_010`
+on SHAPE_SPEC, `MS_001`–`MS_007` on METHOD_SPEC.
 
-## What holds
+## METHOD_SPEC arrived aimed at this folder
+
+Its §1 blocks a misapplication *"observed in AI review of this work, more
+than once, including in the session this file was written in"* — the
+session that produced the SS claims. That charge is run against them
+(`MS_001`) before anything else here.
+
+The blocked error has a stated signature: it applies a **claim-level**
+criterion, falsifiability, to a **method-level** object. Classifying the
+ten by what their criticism ranges over gives **0 of 10** ranging over the
+method — two rules, one worked example, one read, one evidence question,
+two facts, three not objections at all. `SS_004`, the closest, aims at
+exactly the layer §1 names as the falsifiable one: *"The falsifiable layer
+is the INDIVIDUAL READ … See SHAPE_SPEC.md section 4 (removal test)."*
+
+This audit is grading itself against a charge aimed at it and has an
+interest in the outcome. The object of each claim is quoted rather than
+summarised so a reader who disagrees has something to disagree with, and
+nothing in it establishes the charge is wrong about other reviews — it is
+a claim about ten claims in one file, and the file is the one being graded.
+
+**§1's central move is correct and is not contested anywhere here.** A
+method is not falsifiable and does not need to be; the parallel objection
+§1 constructs against the scientific method is indeed one nobody accepts.
+
+## What METHOD_SPEC changes
+
+**`MS_002` confirms `SS_005` in the author's own words, and in stronger
+form.** §5 lists what a read is *"NOT upgraded by"*: **"more instances
+sharing the geometry without a checked constraint set."** §3 of the same
+file then offers seven instances, qualified *"separate runs, no shared
+ancestry, same geometry"*, with no constraint set checked for any. `SS_005`
+reached this by regrouping the list into three families, which is
+hand-assigned; this needs no regrouping — both halves are quoted from one
+delivered file and the rule is the author's.
+
+The steelman is real and worth stating: under §2's framing the process ran
+the trial, so lightning and dendritic solidification *are* separate trials,
+and three replications of one protocol are three trials. The list does two
+jobs. For *"does this constraint set reliably produce this geometry"*,
+seven is honest. For *"are these the same shape"*, it is not — that is the
+thing being claimed.
+
+**`MS_003` sharpens `SS_004` using METHOD_SPEC's own machinery, and the
+result is better than what it replaces.** §4's removal test has two
+branches, and each spec discounts the one the other leaves standing:
+
+| branch | what it does | discounted by | determinacy |
+|---|---|---|---|
+| form **differs** — shape disappears | **confirms** | `METHOD_SPEC` §3 | **open set** — "at least one was removed, but not which" |
+| form **unchanged** — shape persists | **refutes** | `SHAPE_SPEC` §7 | **bounded** — equifinality, and it must be exhibited |
+
+Disappearance ranges over an open candidate set, by §3's own words.
+Persistence ranges over a bounded one: for a shape to survive without its
+named constraint, some substitute must be doing that constraint's work,
+and a substitute has to be exhibited to be claimed. **So §7's default falls
+on the better-determined branch.** The repair is one clause — scope §7 to
+disappearance reads, where §3 justifies it, and exclude persistence, where
+§4's falsifier lives.
+
+**`MS_007` escalates `SS_008`.** `READING_PROTOCOL.md` is now cited three
+times in METHOD_SPEC and once in SHAPE_SPEC, is third in §6's stated read
+order, and is referenced **by ordinal** — *"third blocked conflation"* — a
+pointer to a numbered item in a file with no items. Both specs are careful
+about their own contents; the third file is where both put the rules
+governing how they are read, and it is the one not in the tree.
+
+## §4's shadow read, made decidable
+
+The best thing in METHOD_SPEC is §4, and its metaphor is exact enough to
+compute with. A tangent to a convex body is a supporting half-plane
+`x·u ≤ h`; *"what they are all tangent to"* is the intersection; for a
+convex body the intersection over all directions recovers it exactly.
+`shadow_read.py` does that, registered in `tools/known_answer.py` under the
+standing rule that no metric ships without a known-answer run:
+
+| statements | state | area | known answer |
+|---|---|---|---|
+| four tangents at distance 1 | `OUTLINED` | 4.000000 | 4, a 2×2 square |
+| six tangents about the unit circle | `OUTLINED` | 3.464102 | `2√3`, circumscribed hexagon |
+| two opposing statements | `UNDER_OUTLINED` | — | vertical direction unconstrained |
+| `x ≤ 0` and `x ≥ 1` | `INCONSISTENT` | — | no object is tangent to both |
+
+Two things fall out that the prose lacks. **A failure mode:** §4 offers one
+reading of statements that appear to conflict — *"separate tangents to one
+boundary, not competing claims"* — and half-planes can have empty
+intersection, in which case there is no boundary and the statements really
+are inconsistent. §4 has no cell for that, so every apparent conflict
+routes to the reassuring reading. `SS_010`'s shape a second time. **A
+completion number:** *"complete when the gaps constrain the object to one
+form"* is boundedness, and how far from complete is the **area** — so
+under-outlined becomes measured rather than stated.
+
+And one limit the formalisation makes visible rather than creates:
+**tangents recover a convex hull and nothing finer.** An L-shape and its
+hull have identical support values in **72 of 72** directions, true area
+3.0 against hull area 3.5. If the object is non-convex, §4's completion
+condition can never be met — by construction, not for want of statements.
+Worth knowing before an outline that will not close is read as the reader
+not having said enough.
+
+## SHAPE_SPEC — what holds
 
 **§1 is the contribution.** `SHAPE = the constraint set a geometry is a
 solution to` makes a previously-unnameable error nameable: porting a
@@ -56,7 +163,7 @@ Lagrange multiplier on a physical constraint.** That makes §9's
 instruction satisfiable rather than merely preferable, and makes §4's
 enclosure framing the better statement of the same physics.
 
-## Where it breaks
+## SHAPE_SPEC — where it breaks
 
 **`SS_002` — §10's "a repo that says SHAPE means section 1" is refuted
 here, by §1's own second consequence.** 964 occurrences across 249 files;

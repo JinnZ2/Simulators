@@ -11,8 +11,14 @@ two rules — and those are what carries a verdict. §1, §2, §3, §5 and §8
 are read as argument, and where the reading is favourable it is recorded
 as favourable.
 
+`METHOD_SPEC.md` arrived after `SS_001`–`SS_010` were written, and §1 of
+it blocks a misapplication it says was observed *"in the session this file
+was written in"* — this one. `MS_001` runs the ten claims against the
+stated criterion and is declared as self-grading. Three SS claims move on
+contact with the second spec and all three are marked in place.
+
 REFUTATION_PROTOCOL: a claim that needs a computation is settled by
-`shape_spec_audit.py`. A claim about a document's internal consistency is
+`shape_spec_audit.py` or `shadow_read.py`. A claim about a document's internal consistency is
 settled by quoting both halves. Nothing here is settled by preference.
 
 ---
@@ -148,7 +154,15 @@ attack*. §7 states a prior and does not mark it as one.
 **Falsifier:** a reading of §7 on which some contradicting read is routed
 to the shape rather than the instrument.
 
-**Status: SUPPORTED.**
+**SHARPENED BY `MS_003` on `METHOD_SPEC.md`'s arrival.** That spec supplies
+the asymmetry this claim was missing, and it runs the other way from §7's
+default: §3's UNDERDETERMINED DISAPPEARANCE discounts *disappearance*,
+which is §4's **confirming** branch, while §7 discounts *persistence*,
+which is §4's **refuting** branch. Persistence is the better-determined of
+the two. Read `MS_003` for the current form; this claim's substance is
+unchanged and its statement is superseded.
+
+**Status: SUPPORTED, superseded in form by `MS_003`.**
 
 ---
 
@@ -198,8 +212,15 @@ nothing here bounds it from below.
 to one another *and* that within-family members differ in a load-bearing
 constraint.
 
+**CONFIRMED BY THE AUTHOR'S OWN LATER RULE.** `METHOD_SPEC.md` §5 lists
+what a read is *"NOT upgraded by"*: **"more instances sharing the geometry
+without a checked constraint set."** That is this claim as a rule. §3 of
+the same file then offers the same seven items, qualified *"separate runs,
+no shared ancestry, same geometry"*, with no constraint set checked for
+any of them. See `MS_002`.
+
 **Status: SUPPORTED. The direction of §6's argument survives; the count
-overstates it.**
+overstates it, and §5 of the companion spec says so.**
 
 ---
 
@@ -279,6 +300,11 @@ than on a measurement. §10 routes the reader to it for the rule that a
 repo is a marker rather than a position, and that rule is what makes an
 audit like this one welcome rather than adversarial.
 
+**ESCALATED.** `METHOD_SPEC.md` cites it three more times, makes it third
+in §6's stated read order, and references it **by ordinal** — *"See
+READING_PROTOCOL.md, third blocked conflation"* — a pointer to a numbered
+item in a file with no items. See `MS_007`.
+
 **Falsifier:** its arrival.
 
 **Status: UNVERIFIED — a gap, not a defect.**
@@ -341,3 +367,283 @@ that is empty, which is §2.
 is correctly labelled a geometry note.
 
 **Status: SUPPORTED.**
+
+---
+---
+
+# `MS_001`–`MS_007` — claims about `METHOD_SPEC.md`
+
+The file is delivered verbatim at the repo root and is modified by
+nothing here. It declares itself a statement of **epistemic class**, and
+§1's central move — *a method is not falsifiable and does not need to be*
+— is correct and is not contested anywhere below. The scientific method,
+syllogistic logic and dimensional analysis are indeed not falsifiable, and
+the parallel objection §1 constructs (*"the scientific method always
+resolves to 'the experiment was confounded'"*) is indeed one nobody
+accepts.
+
+What follows is about the two specs' fit with each other, plus one
+instrument the file's own §4 turns out to specify.
+
+---
+
+### MS_001 — none of the ten SS claims ranges over the method; declared as self-grading
+
+§1 blocks a misapplication *"observed in AI review of this work, more than
+once, including in the session this file was written in"* — the session
+that produced `SS_001`–`SS_010`. The charge has a stated signature: it
+applies a **claim-level** criterion (falsifiability) to a **method-level**
+object. So the test is what each claim's criticism ranges over.
+
+| claim | ranges over | object |
+|---|---|---|
+| `SS_001` | not an objection | records §1's distinction as the contribution |
+| `SS_002` | a rule | §10's naming rule, measured on this repo |
+| `SS_003` | an example | §4's lung/delta worked example |
+| `SS_004` | **a read** | §7's default, against §4's refuting branch |
+| `SS_005` | evidence | §6's recurrence list, as evidence |
+| `SS_006` | not an objection | computes that §9 is right |
+| `SS_007` | not an objection | records §3 step 3 and §2 as sound |
+| `SS_008` | a fact | whether a named file is on disk |
+| `SS_009` | a fact | key sets on four JSON entries |
+| `SS_010` | a rule | §10's two-state outcome |
+
+**Ranging over the method: 0 of 10.**
+
+`SS_004` is the one to look at, and it aims at exactly the layer §1 names
+as the falsifiable one: *"The falsifiable layer is the INDIVIDUAL READ,
+not the method. See SHAPE_SPEC.md section 4 (removal test)."* `SS_004`
+says §7 discounts §4's refuting branch — a claim **about the removal
+test**, not a demand that the method refute itself. METHOD_SPEC makes it
+heavier rather than lighter, by placing all the refutation weight there.
+
+**Declared:** this audit is grading itself against a charge aimed at it and
+has an interest in the outcome. The object of each claim is quoted rather
+than summarised so a reader who disagrees has something to disagree with,
+and the classification is hand-coded, which `--selftest` states rather
+than hides. **Nothing here establishes the charge is wrong about other
+reviews** — it is a claim about ten claims in one file, and the file is
+the one being graded.
+
+**Falsifier:** any SS claim whose criticism ranges over the method.
+`--selftest` fails if the classification finds one.
+
+**Status: SUPPORTED, with the interest declared.**
+
+---
+
+### MS_002 — §5 forbids what §3 does, which confirms `SS_005` in the author's own words
+
+§5, under WHAT A READ IS WORTH:
+
+> **NOT upgraded by** more instances sharing the geometry without a
+> checked constraint set
+
+§3, under n=1 ON SOME DOMAINS:
+
+> recurrence ACROSS SUBSTRATES inside that one instance is what carries
+> the weight — vasculature, rivers, lightning, roots, mycelium, cracks,
+> dendritic solidification: **separate runs, no shared ancestry, same
+> geometry.**
+
+Seven instances, qualified by *same geometry*, with no constraint set
+checked for any of them. §5's rule disqualifies §3's evidence.
+
+`SS_005` reached this by regrouping the list into three constraint
+families and is the weaker statement, because the regrouping is
+hand-assigned. This one needs no regrouping: both halves are quoted from
+one delivered file and the rule is the author's.
+
+**The steelman, which is real.** Under §2's own framing — the process ran
+the trial, n enormous — lightning and dendritic solidification *are*
+separate trials, and three replications of one protocol are three trials,
+not one. That is right, and it means the list does two different jobs
+needing two different counts. For *"does this constraint set reliably
+produce this geometry"*, seven is the honest count. For *"are these the
+same shape"*, it is not, because that is the thing being claimed and
+counting instances of it assumes the conclusion. §3 and §6 use the list
+for the second job.
+
+**Falsifier:** a constraint set checked and stated for two items §3 lists
+under different substrates.
+
+**Status: SUPPORTED.**
+
+---
+
+### MS_003 — the two specs' asymmetries run opposite, and §7's default falls on the better-determined branch
+
+`SHAPE_SPEC` §4's removal test has two branches:
+
+| branch | what it does | discounted by | determinacy |
+|---|---|---|---|
+| form **differs** — the shape disappears | **confirms** the read | `METHOD_SPEC` §3 | **open set** — "at least one was removed, but not which" |
+| form **unchanged** — the shape persists | **refutes** the read | `SHAPE_SPEC` §7 | **bounded** — the alternative is equifinality, and it has to be exhibited |
+
+`METHOD_SPEC` §3: *"A shape DISAPPEARING tells you at least one was
+removed, but not which. Disappearance is informative and
+underdetermined."* That discounts §4's **confirming** branch, and it is
+correct.
+
+`SHAPE_SPEC` §7: *"Where the read contradicts the shape, the default
+reading is instrument error."* That discounts §4's **refuting** branch.
+
+So each spec discounts the branch the other leaves standing — and the two
+branches are not equally determined. Disappearance ranges over an open
+set of candidate removals, by §3's own words. Persistence ranges over a
+**bounded** set: for a shape to survive without its named constraint,
+some substitute must be doing that constraint's work, and a substitute has
+to be exhibited to be claimed. **§7's default therefore falls on the
+better-determined of the two.**
+
+This is the sharpened form of `SS_004`, and it is sharper because
+`METHOD_SPEC` supplied the machinery. `SS_004` could say only that §6
+disclaims the prior §7 spends; this says which branch the discount belongs
+on.
+
+**The repair is one clause:** scope §7's default to **disappearance**
+reads, where §3 supplies the justification, and exclude **persistence**
+reads, where §4's falsifier lives. `rigidification-sensor/` §0 remains the
+precedent for the second half — state the prior and mark it open to attack.
+
+**Falsifier:** an argument that persistence-under-removal is at least as
+underdetermined as disappearance — which would need the substitute
+constraint's candidate set to be unbounded in the way the removed one's is.
+
+**Status: SUPPORTED, and supersedes `SS_004`'s statement.**
+
+---
+
+### MS_004 — §2's natural-experiment argument is sound and has a literature this session cannot reach
+
+> the difference between this method and conventional experiment is WHO
+> RAN THE TRIAL, not whether a trial was run.
+
+The structural argument holds as stated, and the trade it names —
+control against trial count, in opposite directions, *"neither is the
+mature form of the other"* — is the right shape. Nothing here contests it.
+
+It is also not novel, which strengthens it: this is the standing position
+of the **historical sciences** (geology, paleontology, evolutionary
+biology, cosmology), and the argument that they are not epistemically
+inferior to experimental science is a developed one — Carol Cleland's work
+on historical vs experimental method is the nearest match carried in
+memory, with a *smoking gun* asymmetry that would bear directly on
+`MS_003`: traces of a past event tend to be **over**determined, many
+traces to one cause, which is why historical science can be decisive.
+
+**Not verified from here.** The egress gate refuses the sources that would
+check it, and this repo's standing convention on unreachable literature
+(`ANC_010`, `CD_009`, `RD_015`, `HO_005`) is to mark it rather than assert
+it. Nothing in this audit rests on the attribution.
+
+**It is watchable rather than merely unverified.** `notes/study_watch.py`
+runs on a GitHub Actions runner precisely because the runner reaches
+Crossref, OpenAlex and arXiv. §2's claim is a literature question with a
+retrievable answer, and it is the first item in this drop family that the
+watcher was built for.
+
+**Falsifier:** the retrieval. Either the historical-science literature says
+this, or it does not.
+
+**Status: UNVERIFIED — a gap with a named instrument pointed at it.**
+
+---
+
+### MS_005 — §4's shadow read supplies the test it says it lacks, and one limit it does not mention
+
+> the shape is not pointed at directly. It is described by the GAPS IT
+> CASTS. Each statement is one gap. The object is what they are all
+> tangent to.
+
+The metaphor is exact enough to compute with. A tangent to a convex body
+is a supporting half-plane `x·u ≤ h`; *"what they are all tangent to"* is
+the intersection; and for a convex body the intersection over all
+directions recovers it exactly. `shadow_read.py` does this, registered in
+`tools/known_answer.py` under the standing rule:
+
+| statements | state | area | known answer |
+|---|---|---|---|
+| four tangents at distance 1 | `OUTLINED` | 4.000000 | 4, a 2×2 square |
+| six tangents about the unit circle | `OUTLINED` | 3.464102 | `2√3`, circumscribed hexagon |
+| two opposing statements | `UNDER_OUTLINED` | — | vertical direction unconstrained |
+| `x ≤ 0` and `x ≥ 1` | `INCONSISTENT` | — | no object is tangent to both |
+
+**Two things fall out that the prose lacks.**
+
+*A failure mode.* §4 offers one reading of statements that appear to
+conflict — *"separate tangents to one boundary, not competing claims"* —
+and a set of half-planes can have empty intersection, in which case there
+is no boundary and the statements really are inconsistent. §4 has no cell
+for that, so every apparent conflict routes to the reassuring reading.
+This is `SS_010`'s shape a second time: a two-state classification whose
+missing third state is the unflattering one.
+
+*A completion number.* *"Complete when the gaps constrain the object to
+one form"* is the intersection being bounded; how far from complete is its
+**area**. Under-outlined stops being a stated state and becomes a measured
+one — which is what §5's confidence readout would need to move a marker on
+this read path.
+
+**And one limit the formalisation makes visible rather than creates.**
+Tangents recover a **convex hull** and nothing finer. Demonstrated: an
+L-shape and its hull have identical support values in **72 of 72**
+directions, true area 3.0 against hull area 3.5. So if the object is
+non-convex, §4's completion condition can **never** be met — not for want
+of statements, by construction. Worth knowing before an outline that will
+not close is read as the reader not having said enough.
+
+**Falsifier:** a formalisation of "gaps cast" on which two statements
+cannot be jointly unsatisfiable. `--selftest` fails if `INCONSISTENT`
+becomes unreachable in the fixtures.
+
+**Status: SUPPORTED. The section is right that the read path exists and
+does not state what closes it or what breaks it.**
+
+---
+
+### MS_006 — §3's SUBSTRATE EXCLUSION cross-reference lands, on a subfolder rather than the mechanism list
+
+> Human exceptionalism is exactly this defect: humans excluded as an
+> admissible domain … Cross-references the exclusion mechanisms in the
+> `uninstrumented` repo.
+
+It resolves, and to something more specific than the eight-mechanism list.
+`uninstrumented/coupling_audit/` already runs a **`species` gate** mapped
+to **`AUDIT_ASYMMETRY`**, with three seed entries — and §3's example is
+the same gate pointed the other way. There, companion animals are excluded
+from a human food-security accounting. Here, humans are excluded from a
+cross-species density comparison. One gate type, two directions, and
+neither side notices because the exclusion is upstream of the reading in
+both.
+
+The termite comparison §3 names is the coupling audit's own open question
+in a different substrate: a quantity that could be registered, machinery
+that exists, and an agent it is not run on.
+
+**Falsifier:** a reading on which human exceptionalism is one of the eight
+named mechanisms rather than the subfolder's `species` gate.
+
+**Status: SUPPORTED.**
+
+---
+
+### MS_007 — `READING_PROTOCOL.md` is now load-bearing on two specs and referenced by ordinal
+
+Cited **three times** in `METHOD_SPEC.md` and once in `SHAPE_SPEC.md`.
+Third in §6's stated read order. And §4 references it by **ordinal** —
+*"See READING_PROTOCOL.md, third blocked conflation"* — a pointer to a
+numbered item in a file with no items.
+
+Escalated from `SS_008`. It now carries: marker status (§5's *"a read is a
+MARKER, not a result … Do not resolve it in either direction on its
+behalf"* is attributed to it), the blocked conflations (§4 depends on the
+third one), and the ecosystem-wide scope claim.
+
+The two specs delivered so far are careful about their own contents. The
+third file is where both put the rules governing how they are read, and it
+is the one not in the tree.
+
+**Falsifier:** its arrival.
+
+**Status: UNVERIFIED. A gap, and the largest one in the family.**

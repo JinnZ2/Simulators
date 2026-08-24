@@ -234,6 +234,16 @@ def _marginal_majority(which):
     return round(hit / float(tot), 2)
 
 
+def _shadow_outline_area(name):
+    """shape-spec-audit/shadow_read.py::outline_area, imported."""
+    import importlib.util
+    path = os.path.join(ROOT, "shape-spec-audit", "shadow_read.py")
+    spec = importlib.util.spec_from_file_location("_shadow_read", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.outline_area(name)
+
+
 def seed():
     """Registers the two instances the rule was earned from."""
     fn, detail = _extract_verdict()
@@ -280,6 +290,33 @@ def seed():
                  "arm all LEXICAL, YES arm 5 of 6 UNDECIDABLE"),
         ],
         note="the replacement metric. Passes.",
+    )
+    register(
+        "shape-spec-audit/shadow_read.py::outline_area",
+        _shadow_outline_area,
+        [
+            case("square", ("square",), 4.0,
+                 "four tangents at distance 1 bound a 2x2 square, whose "
+                 "area is exactly 4 by construction and not by measurement",
+                 tol=1e-6),
+            case("hexagon", ("hexagon",), 2.0 * 1.7320508075688772,
+                 "six tangents at distance 1 about the unit circle give the "
+                 "circumscribed regular hexagon, area 6*tan(pi/6) = "
+                 "2*sqrt(3)", tol=1e-6),
+            case("strip", ("strip",), "UNDER_OUTLINED",
+                 "two opposing statements leave the vertical direction "
+                 "unconstrained, so no bounded object is tangent to both "
+                 "and no area exists to report"),
+            case("contradiction", ("contradiction",), "INCONSISTENT",
+                 "x <= 0 and x >= 1 cannot both hold, so there is no "
+                 "boundary the statements are tangent to. This is the "
+                 "state METHOD_SPEC section 4 has no cell for"),
+        ],
+        note=("METHOD_SPEC section 4's shadow read, made decidable. The "
+              "case set spans all three states on purpose: a fixture set "
+              "in which INCONSISTENT never occurs cannot detect an "
+              "instrument that has quietly lost the failure branch, which "
+              "is the branch the section lacks."),
     )
     register(
         "nonidentity-census/t6_window_declaration.py::"

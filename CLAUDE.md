@@ -4,8 +4,9 @@ Repository for different simulations and supporting tooling.
 
 ## Meta-spine (read first)
 
-The methodology spine sits in five root-level files. Every simulator
-in the repo rests on it. Read in order:
+The methodology spine sits in six root-level files. Every simulator
+in the repo rests on it. `METHOD_SPEC.md` §6 states the order for the
+last three; read in order:
 
 - `PREAMBLE.md` — physics baseline as a direct declarative statement.
   "Thermodynamics doesn't negotiate."
@@ -36,6 +37,26 @@ in the repo rests on it. Read in order:
   NOTE ON COST — *use dissipation, cost imports a pricing model*.
   Delivered verbatim and pointed at rather than restated; audit in
   `shape-spec-audit/`.
+- `METHOD_SPEC.md` — companion to `SHAPE_SPEC.md`, stating its EPISTEMIC
+  CLASS. Constraint-set reasoning is a **method**, in the class of
+  syllogistic logic / dimensional analysis / the scientific method — so
+  **it is not falsifiable and does not need to be**, and demanding that of
+  a procedure is a category error; the falsifiable layer is the individual
+  read and its removal test. Blocks the misapplication *"your framework
+  always resolves to 'I missed a variable', therefore unfalsifiable"* by
+  constructing its parallel against the scientific method (*"always
+  resolves to 'the experiment was confounded'"*), which nobody accepts.
+  §2 argues this IS the scientific method in a different form — physics
+  predates every human experiment, so the difference is **who ran the
+  trial**, control traded against trial count in opposite directions,
+  *"neither is the mature form of the other"*, USE BOTH. §3 states four
+  standing limits so they are not re-litigated per read (retrodictive;
+  n=1 on some domains; **underdetermined disappearance**; substrate
+  exclusion, with human exceptionalism as the worked case). §4 is the
+  SHADOW READ — a shape described by the gaps it casts, tangents to one
+  boundary rather than competing claims. §5 gives the upgrade/downgrade
+  table for a marker. §6 gives the read order. Delivered verbatim; audit
+  in `shape-spec-audit/`.
 
 Simulator-specific aperture documents live inside their folders
 (e.g. `incentive-blindspot-sim/00_APERTURE.md` pins the six
@@ -5094,7 +5115,63 @@ underneath).
   arrived at from a third direction. One folder now points at the spec
   rather than restating it — `alignment-under-coupling/` scores **2.5 of
   4** and is the only entry in the tree carrying a removal test at all
-  (SIM-D), missing §3 step 3. Stdlib only, parses under 3.9, CC0.
+  (SIM-D), missing §3 step 3. **`METHOD_SPEC.md` then arrived aimed at this
+  folder** — its §1 blocks a misapplication *"observed in AI review of this
+  work … including in the session this file was written in"*, which is the
+  session that produced `SS_001..SS_010`, so `MS_001` runs the ten against
+  the stated criterion first. The blocked error applies a **claim-level**
+  criterion (falsifiability) to a **method-level** object; classified by
+  what each criticism ranges over, **0 of 10** range over the method (two
+  rules, one worked example, one read, one evidence question, two facts,
+  three not objections), and `SS_004` aims at exactly the layer §1 names as
+  the falsifiable one. Declared as self-grading, with each claim's object
+  quoted rather than summarised, and establishing nothing about other
+  reviews. §1's central move is correct and is contested nowhere.
+  **`MS_002` confirms `SS_005` in the author's own words and in stronger
+  form:** §5 lists what a read is *"NOT upgraded by"* — **"more instances
+  sharing the geometry without a checked constraint set"** — and §3 then
+  offers the same seven instances qualified *"same geometry"* with no
+  constraint set checked for any; `SS_005` needed a hand-assigned
+  regrouping, this needs none. The steelman is recorded: under §2's framing
+  the process ran the trial, so the list is seven honest replications for
+  *"does this constraint set produce this geometry"* and not for *"are
+  these the same shape"*, which is the thing being claimed. **`MS_003`
+  sharpens `SS_004` using METHOD_SPEC's own machinery** — §4's removal test
+  has two branches and each spec discounts the one the other leaves
+  standing: §3's UNDERDETERMINED DISAPPEARANCE discounts *disappearance*
+  (the **confirming** branch, an open candidate set by §3's own words),
+  §7 discounts *persistence* (the **refuting** branch, a **bounded** set,
+  since a substitute constraint has to be exhibited to be claimed) — so
+  **§7's default falls on the better-determined branch**, repairable with
+  one clause. **`MS_005` is the contribution:** §4's shadow read is exact
+  enough to compute with, a tangent being a supporting half-plane and *"what
+  they are all tangent to"* the intersection, so `shadow_read.py` makes it
+  decidable and registers `outline_area` in `tools/known_answer.py` under
+  the standing rule — square 4.000000, circumscribed hexagon 3.464102
+  (`2√3`), strip `UNDER_OUTLINED`, `x ≤ 0 ∧ x ≥ 1` **`INCONSISTENT`**. Two
+  things fall out that the prose lacks: a **failure mode** (§4 reads
+  apparent conflict as *"separate tangents to one boundary"* and has no
+  cell for statements that are jointly unsatisfiable, `SS_010`'s shape a
+  second time) and a **completion number** (area, so under-outlined becomes
+  measured rather than stated). Plus one limit the formalisation makes
+  visible: **tangents recover a convex hull and nothing finer** — an
+  L-shape and its hull agree in **72 of 72** directions, 3.0 against 3.5 —
+  so a non-convex object can never meet §4's completion condition, by
+  construction. **`MS_006`:** §3's SUBSTRATE EXCLUSION cross-reference
+  lands on `uninstrumented/coupling_audit/`'s **`species` gate →
+  `AUDIT_ASYMMETRY`** rather than on the eight-mechanism list, and is that
+  gate pointed the other way — companion animals excluded from a human
+  accounting there, humans excluded from a cross-species one here.
+  **`MS_004` UNVERIFIED but watchable:** §2's natural-experiment argument
+  is the standing position of the historical sciences and the egress gate
+  refuses the sources that would check it, making it the first item in this
+  family `notes/study_watch.py` was built for. **`MS_007` escalates
+  `SS_008`:** `READING_PROTOCOL.md` is now cited three times in METHOD_SPEC
+  and once in SHAPE_SPEC, is third in §6's read order, and is referenced
+  **by ordinal** (*"third blocked conflation"*) — a pointer to a numbered
+  item in a file with no items, and the largest gap in the family, since
+  both specs put the rules governing how they are read in the file that is
+  not here. Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

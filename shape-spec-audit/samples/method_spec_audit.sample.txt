@@ -1,0 +1,95 @@
+CHECKS ON METHOD_SPEC.md -- neither spec is modified here
+
+MS_001  section 1's charge, run against this audit's own claims
+  SS claims in CLAIM_TABLE.md : 10
+  classified here             : 10
+  the blocked error applies a CLAIM-level criterion
+  (falsifiability) to a METHOD-level object. What each claim's
+  criticism ranges over:
+    SS_001   not-an-objection sec 1's geometry/constraint distinction
+    SS_002   rule         sec 10's naming rule, measured on this repo
+    SS_003   example      sec 4's worked example
+    SS_004   read         sec 7's default, against sec 4's refuting branch
+    SS_005   evidence     sec 6's recurrence list, as evidence
+    SS_006   not-an-objection sec 9's NOTE ON COST
+    SS_007   not-an-objection sec 3 step 3 and sec 2's BLOCK THIS MISREAD
+    SS_008   fact         a named file's presence in the tree
+    SS_009   fact         schema fields on four JSON entries
+    SS_010   rule         sec 10's two-state outcome
+  claims ranging over the METHOD: 0
+
+  SS_004 is the one to look at, and it aims at the layer
+  section 1 itself names as the falsifiable one:
+    'The falsifiable layer is the INDIVIDUAL READ, not the
+     method. See SHAPE_SPEC.md section 4 (removal test).'
+  SS_004 says section 7 discounts section 4's refuting branch.
+  That is a claim ABOUT the removal test, not a demand that the
+  method refute itself -- and METHOD_SPEC makes it heavier, by
+  placing all the refutation weight there.
+
+  DECLARED: this audit is grading itself against a charge aimed
+  at it, and has an interest in the answer. The object of each
+  claim is quoted above rather than summarised so a reader who
+  disagrees has something to disagree with. Nothing here
+  establishes that the charge is wrong about other reviews.
+
+MS_002  section 5 forbids what section 3 does
+  sec 5 rule present in the file  : True
+  sec 3 list present in the file  : True
+  what qualifies the list         : ': separate runs, no shared ancestry, same geometry. UNDERDETERMINED DISAPPEARANC'
+  Section 5: 'NOT upgraded by more instances sharing the
+  GEOMETRY without a checked constraint set.' Section 3 offers
+  seven instances, qualified by 'same geometry', with no
+  constraint set checked for any of them. The rule in section 5
+  disqualifies the evidence in section 3.
+  This is SS_005 restated by the author, in stronger form than
+  SS_005 stated it.
+
+MS_003  the two asymmetries run opposite
+  quote holds: sec3_disappearance     True
+  quote holds: sec4_refuting_branch   True
+  quote holds: sec7                   True
+
+  removal-test branch              what it does           determinacy
+  --------------------------------------------------------------------------
+  form DIFFERS (shape disappears)  CONFIRMS the read      open set: which constraint went is unbounded
+      discounted by METHOD_SPEC sec 3
+      not addressed by SHAPE_SPEC sec 7
+  form UNCHANGED (shape persists)  REFUTES the read       bounded: the alternative is equifinality, and it must be exhibited
+      not addressed by METHOD_SPEC sec 3
+      discounted by SHAPE_SPEC sec 7 as instrument error
+
+  Each spec discounts the branch the other leaves standing, and
+  the one both should leave standing is PERSISTENCE: a shape
+  surviving the removal of its named constraint has a BOUNDED
+  alternative set, since equifinality has to be exhibited,
+  while disappearance ranges over an open set by section 3's
+  own words. So section 7's default falls on the better-
+  determined branch.
+  REPAIR, one clause: scope section 7's default to
+  DISAPPEARANCE reads, where section 3 supplies the
+  justification, and exclude persistence, where section 4's
+  falsifier lives.
+
+MS_006  section 3's SUBSTRATE EXCLUSION cross-reference
+    AUDIT_ASYMMETRY    uninstrumented/coupling_audit/LOG.md, uninstrumented/coupling_audit/README.md
+    market_output      uninstrumented/coupling_audit/LOG.md, uninstrumented/coupling_audit/README.md
+    species            uninstrumented/coupling_audit/FALSIFIER.md, uninstrumented/coupling_audit/LOG.md
+  The cross-reference lands, and on a subfolder rather than
+  on the eight-mechanism list. coupling_audit already runs a
+  SPECIES gate mapped to AUDIT_ASYMMETRY. Section 3's human
+  exceptionalism example is the same gate pointed the other
+  way: there companion animals are excluded from a human
+  accounting, here humans are excluded from a cross-species
+  one. One gate type, two directions.
+
+MS_007  READING_PROTOCOL.md
+  on disk                : NOT IN TREE
+  cited by               : METHOD_SPEC.md x3, SHAPE_SPEC.md x1
+  numbered reference into it: True
+  It was ninth named-and-absent when SHAPE_SPEC arrived. It is
+  now cited by both specs, third in section 6's stated read
+  order, and referenced by ORDINAL -- 'third blocked
+  conflation' -- which is a reference to a numbered item in a
+  file with no items.
+
