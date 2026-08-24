@@ -127,6 +127,26 @@ surviving subgraph is connected and spanning, and nothing checks. At
 `TFM_010`: `run_all.py --quick` is `a = [x for x in a]`. Documented in the
 usage block, inert.
 
+## Against SHAPE_SPEC
+
+`MARKER.md`'s "SHAPE BEING TESTED" is the word in
+[`../SHAPE_SPEC.md`](../SHAPE_SPEC.md) §1's sense — a constraint set
+(local coupling plus a weak global field, with a critical point), not a
+geometry. Scored against §10's four required fields, which is the spec's
+own test:
+
+| field | here |
+|---|---|
+| solving-for | partial — "ordering", the quantity is not stated as a quantity |
+| constraint list | present — local coupling, weak global field, critical point |
+| why-not-the-other-shape | absent |
+| removal test | **present** — SIM-D is one: the literature says temperature does not move homogenization, so if it moves it in the model the mapping is wrong |
+
+2.5 of 4, and it is the only entry in this tree that carries a removal
+test at all (`shape-spec-audit/` `SS_009`). What it is missing is §3
+step 3 — no rival geometry is stated that would also solve the same
+problem, which is the step the spec calls the instrument.
+
 ## Cross-repo
 
 - `reasoning-gate/` — `TFM_004` and `TFM_006` are both `G-RES`, a floor

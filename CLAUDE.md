@@ -4,7 +4,7 @@ Repository for different simulations and supporting tooling.
 
 ## Meta-spine (read first)
 
-The methodology spine sits in four root-level files. Every simulator
+The methodology spine sits in five root-level files. Every simulator
 in the repo rests on it. Read in order:
 
 - `PREAMBLE.md` — physics baseline as a direct declarative statement.
@@ -22,6 +22,20 @@ in the repo rests on it. Read in order:
   (physical-state query before literature search), cross-temporal
   correlation (persistence over documentation volume), opaque-source
   flagging. Integrates with BNRAM Shadow-Variable Handling.
+- `SHAPE_SPEC.md` — definition spec, upstream of every folder that uses
+  the word SHAPE. **`SHAPE = the constraint set a geometry is a solution
+  to`** — not the geometry, not the picture, not the name the field gave
+  it. Cross-domain recurrence is therefore the same problem solved twice
+  rather than analogy, and it is checkable. Ships a BLOCK THIS MISREAD
+  against "matching geometries across domains", a three-step read order
+  whose third step (*why not the other shape*) is the instrument, a
+  removal-test falsification handle, an internal/uniform vs
+  external/heterogeneous split (the second is *"a transcript of terrain"*,
+  never an optimum), an explicitly retrodictive epistemic position
+  (`n = 1` on biospheres), scale indexing, and nondimensional form with a
+  NOTE ON COST — *use dissipation, cost imports a pricing model*.
+  Delivered verbatim and pointed at rather than restated; audit in
+  `shape-spec-audit/`.
 
 Simulator-specific aperture documents live inside their folders
 (e.g. `incentive-blindspot-sim/00_APERTURE.md` pins the six
@@ -4991,6 +5005,96 @@ underneath).
   searched parameters and one that did not leave identical files and the sims
   arrive without history. Narrowed by the code's arrival, not closed. Stdlib
   only, parses under 3.9, CC0.
+- `shape-spec-audit/` — Checks on the root `SHAPE_SPEC.md`, which is
+  delivered verbatim and modified by nothing here. The spec declares
+  itself **definition, not claim**, and that is honoured — a definition is
+  found unusable, inconsistent with its own worked examples, or already
+  contradicted by the tree it claims to be upstream of, never refuted.
+  Four sections make checkable statements and carry the verdicts; ten
+  claims `SS_001..SS_010`. **`SS_006`, the one that computes:** §9's NOTE
+  ON COST (*"cost is an abstraction with no fundamental basis in the
+  physics … use dissipation"*) is right, and the proof is a duality the
+  spec does not state. The published derivation of §4's own exponent
+  minimises `dissipation + K·volume` with `K` a metabolic cost — the term
+  §9 rejects — so whether the exponent survives its removal is a real
+  question. Computed on a symmetric Poiseuille bifurcation: `2^(-1/3)` =
+  **0.793701**, minimising dissipation at **fixed volume with no cost
+  anywhere** = **0.793701**, minimising `dissipation + K·volume` =
+  0.793701; while pure dissipation with no second term is strictly
+  decreasing in radius (`W` 1.53e+01 → 1.53e-11 as `r` runs 1 → 1000) and
+  has no interior optimum at all. The second term is load-bearing **and
+  the de-costed form returns the same number**, because minimising
+  dissipation subject to a fixed volume and minimising dissipation plus a
+  price on volume are one stationarity problem — **the cost coefficient is
+  the Lagrange multiplier on a physical constraint**. §9 is satisfiable
+  rather than merely preferable, and §4's enclosure framing is the better
+  statement of the same physics. **`SS_002`:** §10's *"a repo that says
+  SHAPE means section 1"* is refuted on this repo **by §1's own second
+  consequence** — 964 occurrences across 249 files, and a hand-coded
+  sample of seven uses returns **six distinct senses** of which §1's is
+  one (`shape signature` = sha1 of sorted key names; `shape ∈ {NEW, FLAT,
+  WALKING}` = an enum tag; `domain-ledger/shapes/` = a coverage ledger
+  over a claim). §1 predicts exactly this (*the names diverge by field*)
+  and §10's enforcement clause assumes the convergence §1 denies. The
+  count is **raw**: no sense was assigned mechanically, because a keyword
+  scan deciding word sense is `nonidentity-census` T1-1's failure, so the
+  sample is n=7 and is not a rate. **`SS_003`, the sharpest internal
+  one:** §4's removal test is the spec's instrument and **its worked
+  example is not a matched pair** — §4 compares a lung to a river delta
+  and attributes the difference to enclosure, while §5 uses *the same two
+  examples* and assigns them to different constraint classes, calling the
+  second *"a transcript of terrain"* that must not be read as an optimum;
+  a second variable moved with the named one, and §4 asks for a case where
+  the constraint is *genuinely absent*. **The repair is already in the
+  document one section below** — §5's own delta, *"branches while it can,
+  routes around what it cannot cut"*, is a within-case matched pair at
+  fixed enclosure with local substrate varying. Same failure as
+  `nonidentity-census` T6-3. **`SS_004`:** §4 has exactly one branch that
+  refutes a read (constraint removed, form unchanged), reaching it
+  requires an observation contradicting the shape, and §7 defaults such
+  observations to instrument error — so the falsifier survives for
+  interventions and **none of the spec's three worked examples is one**,
+  while §6 disclaims the prior §7 spends (*"a fit to a residue"*,
+  alternatives *"not in the record"*, `n = 1` on biospheres).
+  `uninstrumented/` mechanism 6 AUDIT ASYMMETRY landing on the spec's
+  calibration section; repair is one line, and `rigidification-sensor/`
+  §0 is the precedent — state the prior openly and mark it open to attack.
+  **`SS_005`:** §6's seven-item recurrence list is grouped by SUBSTRATE
+  and regroups into **three constraint families** (laplacian-growth:
+  lightning + crack propagation + dendritic solidification;
+  transport-under-volume-constraint: vasculature + root systems +
+  mycelium; erosional-minimum-dissipation: river networks) — and the
+  tension is with §1 rather than with the evidence, since §1 says systems
+  sharing a constraint set *share a shape*, so two items in one family are
+  one shape seen twice. Historical independence is real and is not the
+  quantity that licenses "separate runs converging". The family assignment
+  is **hand-assigned and is the weak point**, with a measured precedent
+  pointing one way: `model-ecology`'s **P2 came back REFUTED**, a
+  hand-assigned tree predicting 9.07 independent votes against a spectrum
+  showing 2.48 — so 3 bounds the list from above and nothing here bounds
+  it from below. **`SS_009`/`SS_010`:** four shape entries found by two
+  structural routes (under a `shapes/` dir, or a top-level `shape` key —
+  neither a word list), and **all four score 0 of §10's four required
+  fields**; worse, §10 offers two outcomes (shape entry / geometry note)
+  and the entry found is neither, having no geometry to note — so the
+  classification returns the *reassuring* wrong label, "geometry note"
+  reading as an incomplete shape entry when the entry is not on the scale.
+  Twelfth instance of the absent-vs-known-negative repair here and the
+  first where the missing third state is *"this is a different sense of
+  the word"*. **`SS_007` is the honest positive** (§3 step 3 is a real
+  instrument, and §2's BLOCK THIS MISREAD registers the failure mode
+  before anyone commits it — the `photoperiod-claim-harness`
+  `PENDING_EDITS` shape), and **`SS_008` is UNVERIFIED**:
+  `READING_PROTOCOL.md`, named in §10's see-also, is not in the tree —
+  ninth named-and-absent artifact in this drop family, and the first
+  load-bearing on the *stance* rather than on a measurement. Two items
+  routed rather than claimed: §8's scale-invariance question points at
+  `grounding-layers/temporal_dysrhythmia`, and §6's survivorship point is
+  `DD_003`'s EIA narrowing and `UNI_126`'s frame-selected-on-the-variable
+  arrived at from a third direction. One folder now points at the spec
+  rather than restating it — `alignment-under-coupling/` scores **2.5 of
+  4** and is the only entry in the tree carrying a removal test at all
+  (SIM-D), missing §3 step 3. Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
