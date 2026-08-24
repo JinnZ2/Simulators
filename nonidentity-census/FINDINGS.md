@@ -582,6 +582,78 @@ In the as-specified set the eight fields spread one-per-cell rather than
 clustering, which is also a construction property and not evidence about
 field convention.
 
+### T6-9 — the spec error is accepted, and the shape it belongs to has two directions
+
+The relaying instance attributes `AMBIGUOUS` / `UNDETERMINED` never firing to
+the specification rather than the implementation: two terminal values named,
+then a 2×2 with no cell for either. Accepted — nothing in the module could
+have emitted them without adding cells the work order did not ask for.
+
+The shape it is placed in needs one distinction kept. The named neighbour,
+`anyOf[1].properties.events` being `{"type": "array"}` with no item schema
+(`INSTANCE_LOG_INDEX` R26), is a schema that **cannot refuse** anything: its
+rejection branch is unreachable. T6's is a schema that **cannot emit** a
+value it declares: its emission branch is unreachable. Duals, not the same
+shape, and collapsing them loses which end is broken — the fix for one is a
+tighter constraint, for the other a wider design.
+
+The shape both belong to: **a declared state with no path to it.** Two
+directions, and the direction is part of the finding.
+
+**Third instance not verified here.** The eval-awareness papers "varying the
+cue and reporting the condition" are carried as the relaying instance states
+them. No such material is in this tree and the literature claim was not
+checked, so it is recorded at the same status as `ANC_010` and `HO_005` —
+carried, not confirmed, and nothing here rests on it. Two of the three are
+verified in this repo; the count of three is theirs.
+
+### T6-10 — the standing step, built, and what it caught on its first run
+
+*"No metric ships without a known-answer run"* is now `tools/known_answer.py`
+plus `tests/test_known_answer_gate.py`, in the pairing
+`tools/check_gate_drift.py` and `tests/test_gate_drift.py` already use. 67
+tests green.
+
+The registry refuses three things, so it is not decorative: a metric with no
+cases; a case with no stated basis for its expected value; and **a case set
+whose expected values are all equal**, since such a set cannot detect a
+constant metric, which is the failure both seeds are instances of.
+
+Three catches on the first run, and none came from reading:
+
+1. **It refused its own seed.** The first `_verdict` case set had two cases
+   and both expected `True`. `register()` raised `BadCaseSet` on its own
+   rule before any metric was tested. The third case — two constant-fires
+   gates, expected `False` — exists because of that refusal and is recorded
+   as such in the note.
+2. **It pins the real defect in the canonical file.**
+   `null-harness/null_harness.py::_verdict` returns `OK` for `TP=0.5` and
+   `TP=1.0` alike. `null_harness.py` imports numpy at module scope and numpy
+   is not installed here, so `_verdict` is extracted by source text from the
+   current file, refused if the extracted source contains an import, and
+   recorded `NOT_RUN` with the reason if extraction fails. It extracted, and
+   the case fails, pinned.
+3. **It caught a transposed number in my own record of an error.** The
+   replaced metric's as-specified case was written as `0.83`, which is the
+   *matched* set's figure; the real value is `0.92`. Corrected. This is the
+   third catch in this exchange and the first on a *record* of an error
+   rather than on a metric — the same operation, one level up.
+
+**What it does not do**, stated rather than left to be discovered:
+
+- **It does not find metrics.** Coverage is a hand-kept manifest in the
+  test. Deciding whether a function is a metric is not a lexical property of
+  its name, and a repo-wide scan for metric-shaped functions would be
+  `T1-1`'s word-list failure one level up. The manifest is therefore the
+  weak point and is named as one.
+- **Enforcement is at test time, not use time.** Nothing in the repo calls
+  `require()` in anger, so the gate fires when the suite runs and not while
+  a metric is being used. It catches an unregistered metric; it does not
+  catch an unrun one at the callsite.
+- **The replaced metric is kept runnable** rather than deleted, so its error
+  stays checkable rather than only described, and its matched-set case fails
+  by design.
+
 ---
 
 ## T3 — MARGIN CHECK

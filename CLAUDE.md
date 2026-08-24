@@ -4858,6 +4858,30 @@ underneath).
     repo noticing. The checker identifies itself by content, not by path —
     a path-based skip breaks the one case it exists for, scanning a tree
     that contains a copy of the tool.
+  - `known_answer.py` — **no metric ships without a known-answer run.**
+    A standing step rather than a habit, earned from two instances in this
+    tree where a metric was wrong in a way reading it would not have caught
+    and a fixed-in-advance case did: `null-harness`'s `_verdict` returning
+    `OK` for a gate at TP=0.5 and one at TP=1.0 alike, and
+    `nonidentity-census`'s first association metric reading 0.83 on a set
+    whose two arms are identical by construction. The registry refuses a
+    metric with no cases, a case with no stated basis for its expected
+    value, and **a case set whose expected values are all equal** — such a
+    set cannot detect a constant metric, which is the failure both seeds
+    are instances of. That third rule refused the first draft of its own
+    seed before any metric was tested. Two seeded cases FAIL today and are
+    **pinned**, so a repair turns the test red and forces the note to be
+    corrected; `null_harness.py` imports numpy at module scope and numpy is
+    absent here, so `_verdict` is extracted by source text from the current
+    file, refused if the extract contains an import, and recorded `NOT_RUN`
+    with a reason if extraction fails. On its first run it also caught a
+    transposed number in the *record* of one of the two errors — the same
+    operation one level up. It does **not** find metrics: coverage is a
+    hand-kept manifest in `tests/test_known_answer_gate.py`, because
+    deciding whether a function is a metric is not a lexical property of
+    its name and a repo-wide scan would be `nonidentity-census` T1-1's
+    word-list failure one level up. The manifest is the weak point and the
+    test says so; enforcement is at test time, not at the callsite.
   - `substrate_substitution_toolkit.py` — richer programmatic
     surface: seven categories from harsh (`pure_consumer`, the null
     hypothesis) to gentle (`mutualistic_scale`), each with multiple

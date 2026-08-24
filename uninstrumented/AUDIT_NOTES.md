@@ -3929,3 +3929,87 @@ central coordinator` is ordinary English, classified `NON_IDENTITY`, and
 needed no new construction. The medium holds the shape. Whatever is going on
 is not that the corpus cannot carry a non-carrier subject, which is the entry
 anyone would have written first.
+
+---
+
+## A declared state with no path to it
+
+Three findings, `UNI_166..UNI_168`, from a relayed exchange about
+`nonidentity-census` T6. The register-relevant part is a shape; the rest is
+in `../nonidentity-census/FINDINGS.md` T6-9 and T6-10.
+
+### UNI_166 — the shape has two directions, and the direction is the finding
+
+T6 named `AMBIGUOUS` and `UNDETERMINED` as terminal values and then specified
+a 2x2 with no cell for either, so nothing in the run could emit them. The
+relaying instance placed that with `anyOf[1].properties.events` being
+`{"type": "array"}` with no item schema — recorded in
+`specimens/INSTANCE_LOG_INDEX.md` R26 — as one shape.
+
+They are duals, not one shape:
+
+| instance | unreachable branch | what it cannot do |
+|---|---|---|
+| `anyOf[1].properties.events` | rejection | **cannot refuse**. Every sub-record in that directory validates |
+| T6 `AMBIGUOUS` / `UNDETERMINED` | emission | **cannot emit**. Two declared values no run can produce |
+
+The unifying shape is **a declared state with no path to it**, and the
+direction is load-bearing: the first is repaired by a tighter constraint, the
+second by a wider design. Collapsing them names the family and loses which
+end is broken.
+
+This is `null-harness`'s `CONSTANT_SILENT` generalized off gates. A gate that
+never fires is the emission case at n=1 value; a schema that never refuses is
+the same defect with the arrow reversed.
+
+**A third instance is claimed and is not verified here.** The relaying
+instance names "the eval-awareness papers varying the cue and reporting the
+condition" as the third of three today. No such material is in this tree and
+the literature claim was not checked, so it is carried at `ANC_010` /
+`HO_005` status — stated, not confirmed, and nothing here rests on it. Two of
+the three are verified in this repo; the count of three is theirs.
+
+### UNI_167 — the standing step exists, and its first action was to refuse its own seed
+
+*"No metric ships without a known-answer run"* is now
+[`../tools/known_answer.py`](../tools/known_answer.py) and
+[`../tests/test_known_answer_gate.py`](../tests/test_known_answer_gate.py),
+in the pairing `check_gate_drift.py` / `test_gate_drift.py` already uses.
+
+What makes it not decorative is that it refuses three things, and the first
+one it refused was mine. The seed case set for
+`null-harness/null_harness.py::_verdict` had two cases and both expected
+`True`, so it could not have detected a metric that always returns `True` —
+which is the exact failure the registry exists for. `register()` raised
+before any metric was tested. The third case exists because of that refusal
+and the note in the file says so.
+
+Two of the registered cases **fail today and are pinned**: `_verdict`
+returning `OK` at both `TP=0.5` and `TP=1.0`, and the replaced
+marginal-majority metric returning `0.83` where the true association is `0`.
+A pinned case that starts passing turns the test red, because the defect was
+then repaired and the note recording it is wrong. A registry seeded only with
+metrics that pass is a registry nobody has tested.
+
+Third catch, and the one worth naming separately: the run caught a
+**transposed number in the record of an error** — the replaced metric's
+as-specified case was written as `0.83`, the matched set's figure, against a
+true `0.92`. The same operation one level up, on the account of the defect
+rather than the defect.
+
+### UNI_168 — what it does not do, and the limit is the same one T1 measured
+
+**It does not find metrics.** Coverage is a hand-kept manifest in the test.
+Deciding whether a function is a metric is not a lexical property of its
+name, and a repo-wide scan for metric-shaped functions would be
+`nonidentity-census` T1-1's word-list failure one level up — the same reason
+`tools/check_gate_drift.py` matches gate copies on *content* and not on
+filename. The manifest is the weak point and is named as one in the test's
+own docstring rather than found later.
+
+**Enforcement is at test time, not use time.** Nothing in this repo calls
+`require()` in anger, so the gate fires when the suite runs and not while a
+metric is being used. It catches an unregistered metric; it does not catch an
+unrun one at the callsite. That is `UNI_082` — a guard in one function is not
+a property of the instrument — with the guard placed at the suite instead,
+which is a different position and not a stronger one.

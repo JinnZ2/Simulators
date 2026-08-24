@@ -1,0 +1,25 @@
+nonidentity-census/t6_window_declaration.py::decided_by_tracks_window
+  note: the replacement metric. Passes.
+  matched set                  PASS           got=0 want=0
+      known because: the two window arms carry the same head nouns by construction, so the association is exactly zero
+  as-specified set             PASS           got=5 want=5
+      known because: hand-counted from the printed per-arm distributions: NO arm all LEXICAL, YES arm 5 of 6 UNDECIDABLE
+
+nonidentity-census/t6_window_declaration.py::marginal_majority (REPLACED)
+  note: the metric that was replaced, kept runnable. Its matched-set case FAILS by design: it returns 0.83 where the answer is 0. Its as-specified case passes at 0.92, which is what it returns and not what it should.
+  matched set                  FAIL (pinned)  got=0.83 want=0.0
+      known because: same construction as above: the true association is zero, so any honest association metric must return zero here
+  as-specified set             PASS           got=0.92 want=0.92
+      known because: what the replaced metric actually returned: 11 of 12. This case was first written as 0.83, which is the MATCHED set's figure -- the two were transposed while recording them, and the known-answer run caught it. Third catch in this exchange, and the first on a record of an error rather than on a metric
+
+null-harness/null_harness.py::_verdict
+  note: extracted by source from the current file, sha1 5e32f544. FAILS today: `OK` is returned for TP=0.5 and TP=1.0 alike. Found while grading nonidentity-census T1. The first version of this seed had two cases and both expected True; register() refused it on its own rule, which is why the third case exists.
+  half-signal vs full-signal   FAIL (pinned)  got=False want=True
+      known because: a gate recovering half its known signal and one recovering all of it are not the same gate, so a fail-condition classifier must not return one string for both
+  silent vs full-signal        PASS           got=True want=True
+      known because: a gate that never fires and one that always finds the signal must differ; this is the case the classifier was built for and it passes
+  two constant-fires gates     PASS           got=False want=False
+      known because: both fire on everything, so they are the same kind of non-gate and the classifier is right NOT to separate them. Present because the registry refused this case set when every case expected True -- see the note
+
+metrics registered: 3
+cases disagreeing with the registry: 0
