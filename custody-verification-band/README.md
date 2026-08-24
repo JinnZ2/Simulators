@@ -9,11 +9,15 @@ Correct response to this repo: test fit, extend it, or report where it breaks.
 LICENSE: CC0. stdlib only. No deps.
 
 ```
-python3 extract.py             # cases, criterion vs cuts, corpus state
-python3 extract.py --cut custody --value SELF
-python3 branching.py           # the physics anchors, recomputed
-python3 extract.py --selftest  # 17/17
-python3 branching.py --selftest # 13/13
+python3 extract.py table                 # the discriminator table
+python3 extract.py cases --custody self  # CURRENT state
+python3 extract.py cases --was self      # state before transition
+python3 extract.py queue --status untouched
+python3 extract.py strip                 # the strip protocol
+python3 extract.py check                 # integrity, cut independence
+python3 branching.py                     # the physics anchors, recomputed
+python3 extract.py --selftest            # 19/19
+python3 branching.py --selftest          # 13/13
 ```
 
 ---
@@ -31,17 +35,25 @@ python3 branching.py --selftest # 13/13
     slack        : uncommitted hours attached to local knowledge
     horizon      : is the long return externally ratcheted or willed
 
-**The criterion reads two of these five.** That is not obviously wrong —
-three may be diagnostics rather than criteria — but it is decidable, and
-`extract.py` decides it by looking for cases where the two readings part
-company. Both directions are present in the seed set:
+**Three of these five are recorded per case.** `cases.json` carries custody,
+verification_scope and parallel_path. Slack and horizon are not case fields —
+they are open measurables, at `gaps.md` G-SLACK and G-HORIZON. That is a
+coherent split, not an inconsistency: two of the five cuts have no case-level
+coding yet and are queued as measurements rather than guessed at.
 
-    owner_operator_trucking   BUFFER by criterion, 3/5 cuts   slack, horizon fail
-    cooperative_member        BELT by criterion,   4/5 cuts   custody alone fails
+**The criterion reads two of the three recorded cuts, and on the current
+corpus that omission costs nothing.** Across all eleven cases the two-cut
+criterion and the three-cut reading agree everywhere — zero disagreements.
+An earlier version of this folder reported a disagreement in both directions;
+that was computed over six invented SEED cases and did not survive their
+replacement by the real eleven. Withdrawn, and recorded in `AUDIT_NOTES.md`.
 
-So the one-line criterion and the five-cut reading are not the same
-instrument. Both are kept and reported separately rather than one folded into
-the other.
+**The reason it costs nothing is the finding.** `parallel_path` is a
+deterministic function of `custody` across all eleven cases —
+`routed→no, mixed→partial, self→yes` — so it carries no information custody
+does not already carry. Whether that is a real regularity or the same
+judgement entered twice under two names is `gaps.md` G-COLLINEAR, and
+`extract.py check` reports it on every run.
 
 ## ENTRY POINT (not a claim being defended)
 
@@ -114,10 +126,22 @@ about which error is more probable given n=1 and no comparison case.
 
 ## STATE
 
-Six cases, all SEED — structural placeholders written to exercise the
-criterion, none an observation. Four sources, none read. No case is CITED.
-Nothing in this folder is evidence yet, and `extract.py` prints that count
-every run so it cannot be forgotten.
+Eleven cases. Twenty-two sources: five located, seventeen untouched, none
+extracted. No source has been worked through, so no case rests on a source in
+this corpus yet — every case is a structural reading with a confidence
+attached and an `evidence_needed` list. `extract.py check` prints the counts
+and the open data problems on every run.
+
+Open data problems as of now:
+
+    schema declares 'comfort_threshold'; no case carries it
+    field 'measurable' has mixed types across cases: list, str
+    no evidence_needed: C08, C11
+
+`comfort_threshold` is the interesting one. It is declared as a second readout
+— the level at which an operator would act — separate from confidence, and it
+is populated nowhere. A second readout that is never taken is not yet a
+readout.
 
 ## ELSEWHERE
 

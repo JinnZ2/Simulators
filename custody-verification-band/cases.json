@@ -1,71 +1,182 @@
 {
-  "_schema": {
-    "note": "Incremental. Cases are added one at a time and are not evidence until status is CITED. SEED cases are structural placeholders written to exercise the criterion, not observations.",
-    "cuts": {
-      "custody": ["SELF", "MIXED", "EXTERNAL", "UNKNOWN"],
-      "verification": ["LOCAL", "REMOTE", "OPAQUE", "UNKNOWN"],
-      "parallel_path": ["PRESENT", "ABSENT", "UNKNOWN"],
-      "slack": ["PRESENT", "ABSENT", "UNKNOWN"],
-      "horizon": ["WILLED", "RATCHETED", "UNKNOWN"]
-    },
-    "favourable": {
-      "custody": "SELF",
-      "verification": "LOCAL",
-      "parallel_path": "PRESENT",
-      "slack": "PRESENT",
-      "horizon": "WILLED"
-    },
-    "criterion_cuts": ["custody", "verification"],
-    "status": ["SEED", "CITED", "BROKEN"]
+  "schema": {
+    "custody": ["self", "routed", "mixed"],
+    "verification_scope": ["local", "remote", "none"],
+    "parallel_path": ["yes", "no", "partial"],
+    "outcome": ["deleted", "degraded_recoalesced", "migrated", "revolt", "converted", "open"],
+    "confidence": "0.0-1.0, gradient only, not a commitment",
+    "comfort_threshold": "0.0-1.0, level at which operator would act on it",
+    "note": "confidence is a separate readout from the pattern. Do not resolve in either direction."
   },
+
   "cases": [
     {
-      "id": "friendly_society_local",
-      "status": "SEED", "confidence": 0.5, "source": null,
-      "custody": "SELF", "verification": "LOCAL", "parallel_path": "PRESENT",
-      "slack": "PRESENT", "horizon": "WILLED",
-      "measured_by": "residual distribution records; whether a member can inspect the book they subscribe to",
-      "note": "The proximity case named in the README. Q-PORT applies here first."
+      "id": "C01",
+      "case": "Hittite empire",
+      "shock": "Late Bronze Age collapse",
+      "date": "~1177 BCE",
+      "custody": "routed",
+      "verification_scope": "remote",
+      "parallel_path": "no",
+      "structure": "palace-tree; central grain storage at Hattusa, redistribution outward, elite-only literacy, single capital",
+      "outcome": "deleted",
+      "confidence": 0.7,
+      "evidence_needed": [
+        "grave-good distribution: bimodal vs spread",
+        "house-size variance by period",
+        "literacy artifacts outside palace contexts",
+        "storage capacity distribution: central vs household"
+      ]
     },
     {
-      "id": "owner_operator_trucking",
-      "status": "SEED", "confidence": 0.6, "source": null,
-      "custody": "SELF", "verification": "LOCAL", "parallel_path": "PRESENT",
-      "slack": "ABSENT", "horizon": "RATCHETED",
-      "measured_by": "who books the margin on a good year; uncommitted hours per week; whether equipment finance sets the horizon",
-      "note": "Passes the criterion on custody and verification, fails slack and horizon. This is the case that shows the criterion covers two of five cuts."
+      "id": "C02",
+      "case": "Ugarit",
+      "shock": "Late Bronze Age collapse",
+      "date": "~1185 BCE",
+      "custody": "routed",
+      "verification_scope": "remote",
+      "parallel_path": "no",
+      "structure": "palace-tree, same shape as C01",
+      "outcome": "deleted",
+      "confidence": 0.65,
+      "evidence_needed": ["same battery as C01"]
     },
     {
-      "id": "cooperative_member",
-      "status": "SEED", "confidence": 0.4, "source": null,
-      "custody": "MIXED", "verification": "LOCAL", "parallel_path": "PRESENT",
-      "slack": "PRESENT", "horizon": "WILLED",
-      "measured_by": "patronage dividend versus retained earnings; member access to the ledger",
-      "note": "Fails the criterion on custody alone while four of five cuts are favourable. Over-rejection, the mirror of owner_operator_trucking."
+      "id": "C03",
+      "case": "Mycenaean palaces",
+      "shock": "Late Bronze Age collapse",
+      "date": "~1200-1150 BCE",
+      "custody": "routed",
+      "verification_scope": "remote",
+      "parallel_path": "no",
+      "structure": "palace-tree; Linear B is administrative-only, no non-palace literate layer",
+      "outcome": "deleted",
+      "confidence": 0.7,
+      "evidence_needed": ["same battery as C01", "post-collapse settlement continuity"]
     },
     {
-      "id": "franchise_operator",
-      "status": "SEED", "confidence": 0.5, "source": null,
-      "custody": "EXTERNAL", "verification": "LOCAL", "parallel_path": "PRESENT",
-      "slack": "ABSENT", "horizon": "RATCHETED",
-      "measured_by": "royalty and supply margin as a share of unit surplus; whether the operator sees unit-level books",
-      "note": null
+      "id": "C04",
+      "case": "Egypt (Intermediate Periods)",
+      "shock": "Late Bronze Age collapse + prior central failures",
+      "date": "First IP ~2181, Second IP ~1650, and ~1177",
+      "custody": "mixed",
+      "verification_scope": "local",
+      "parallel_path": "partial",
+      "structure": "second attractor present. Annual Nile flood = distributed input to every household. Subsistence did not route through palace even where accounting did. Fragmented to nomes, kept functioning, recoalesced.",
+      "outcome": "degraded_recoalesced",
+      "confidence": 0.7,
+      "evidence_needed": [
+        "nome-level administrative continuity records",
+        "provincial elite tomb investment during IP vs unified periods",
+        "household granary evidence"
+      ]
     },
     {
-      "id": "platform_gig_driver",
-      "status": "SEED", "confidence": 0.6, "source": null,
-      "custody": "EXTERNAL", "verification": "OPAQUE", "parallel_path": "PRESENT",
-      "slack": "ABSENT", "horizon": "RATCHETED",
-      "measured_by": "take rate; whether the allocation rule is inspectable by the contributor",
-      "note": "Verification is the cut doing the work here, not custody."
+      "id": "C05",
+      "case": "Phoenician city-states",
+      "shock": "Late Bronze Age collapse",
+      "date": "~1177 BCE onward",
+      "custody": "self",
+      "verification_scope": "local",
+      "parallel_path": "yes",
+      "structure": "loopy extreme. Tyre/Sidon/Byblos/Arwad as parallel nodes, no single capital. Alphabetic script cheap enough to escape scribal monopoly. Merchant-held rather than palace-held capital. Lose Sidon, function migrates to Tyre.",
+      "outcome": "migrated",
+      "confidence": 0.7,
+      "evidence_needed": [
+        "alphabet diffusion rate vs cuneiform/Linear B",
+        "capital ownership: private vs palace, from contract evidence",
+        "node substitution: trade volume shift on individual city loss"
+      ]
     },
     {
-      "id": "index_fund_holder",
-      "status": "SEED", "confidence": 0.3, "source": null,
-      "custody": "SELF", "verification": "OPAQUE", "parallel_path": "PRESENT",
-      "slack": "UNKNOWN", "horizon": "RATCHETED",
-      "measured_by": "who holds the residual claim; whether the holder can inspect any node they are committed to",
-      "note": "Custody favourable, verification not. Tests whether the AND in the criterion is load-bearing."
+      "id": "C06",
+      "case": "English serf tenure -> revolt",
+      "shock": "post-plague labor scarcity + legislative override",
+      "date": "1348-1381",
+      "custody": "self -> routed",
+      "verification_scope": "local",
+      "parallel_path": "no",
+      "structure": "SQUEEZE case, not poverty case. Customary tenure (heritable use right, FIXED obligation) is a different position than tenancy-at-will with obligation revisable by one party. Same word 'serf' covers both. Scarcity should have moved terms toward the tenant; wage caps and movement restriction held terms against the scarcity signal.",
+      "outcome": "revolt",
+      "confidence": 0.75,
+      "measurable": "is the obligation fixed or unilaterally renegotiable; who holds the residual on a good year",
+      "evidence_needed": [
+        "manorial court rolls: tenure type by decade",
+        "Statute of Labourers enforcement density vs revolt geography"
+      ]
+    },
+    {
+      "id": "C07",
+      "case": "US rural / farming / lumber communities",
+      "shock": "consumer-role reassignment, two-earner necessity, priced access",
+      "date": "~1950-1980",
+      "custody": "self -> routed",
+      "verification_scope": "local -> remote",
+      "parallel_path": "yes -> no",
+      "structure": "middle band as uncommitted labor time attached to local knowledge, not as a wealth bracket. Free-entry shared space (lodges, YMCA, women's clubs, farmers markets, granary, feed store) = the parallel paths. Conversion mechanism: access became priced (building has to make rent) -> loop becomes trunk WITHOUT any decision to dismantle. State/NGO substitute is a trunk: single path, externally funded, revocable.",
+      "outcome": "converted",
+      "confidence": 0.6,
+      "measurable": [
+        "uncommitted hours per household",
+        "count of local functions with exactly ONE provider",
+        "free-entry vs priced-entry shared square footage per capita"
+      ],
+      "evidence_needed": ["see sources.json group PROCEDURAL and group INSTRUMENT"]
+    },
+    {
+      "id": "C08",
+      "case": "Vehicle ownership -> subscription",
+      "shock": "electronic control, sealed units, proprietary diagnostics, part pairing",
+      "date": "~1985-present",
+      "custody": "self -> routed",
+      "verification_scope": "local -> none",
+      "parallel_path": "yes -> no",
+      "structure": "DISTINCT failure class. Foxfire-type procedures still execute if read. Repair knowledge can be INTACT and still not execute, because the object stopped accepting it. Repairability was in the machine, not only in the person. Cash for a used vehicle from someone local = fully self-custodied position, same shape as C09.",
+      "outcome": "converted",
+      "confidence": 0.75,
+      "measurable": "fraction of failure modes serviceable with hand tools + published manual, by model year"
+    },
+    {
+      "id": "C09",
+      "case": "Metal/jewelry as household savings instrument",
+      "shock": "reclassification to sentiment",
+      "date": "pre-1970 practice",
+      "custody": "self",
+      "verification_scope": "local",
+      "parallel_path": "yes",
+      "structure": "self-custodied (no counterparty), inflation-indifferent, DIVISIBLE under emergency (sell three pieces not the set), carries transmission with it (object arrives with knowledge of its function). Period writing treats it as a mechanism of transferring savings, not as bragging.",
+      "outcome": "converted",
+      "confidence": 0.6,
+      "failure_mode": "OBJECT PERSISTS, FUNCTION RECLASSIFIED. Later reader files the same objects as heirlooms and loses the function. Same overwrite as C07 lodge shells and the nostalgia case.",
+      "evidence_needed": ["probate/estate inventories", "insurance riders", "pawn ledgers", "period correspondence"]
+    },
+    {
+      "id": "C10",
+      "case": "Illiquid small-increment savings instruments",
+      "shock": "credit substitution",
+      "date": "~1900-1980 practice",
+      "custody": "self",
+      "verification_scope": "local",
+      "parallel_path": "yes",
+      "structure": "Christmas clubs, passbook accounts, war-bond payroll deduction, building-and-loan share plans. MECHANISM IS THE INSTRUMENT, NOT THE VIRTUE: deliberately illiquid, small fixed increment, EXTERNAL RATCHET. Long horizon is the default rather than something sustained by will. Credit inverts: converts horizon into a present object, moves the ratchet to the other side.",
+      "outcome": "converted",
+      "confidence": 0.7,
+      "note": "horizon is readable off the INSTRUMENT, not off anyone's account of their outlook. Passbooks have entries.",
+      "evidence_needed": ["building-and-loan share plan terms", "Christmas club terms", "passbook artifacts"]
+    },
+    {
+      "id": "C11",
+      "case": "Present-day distrust of long-horizon institutions",
+      "shock": "S&L collapse, pension->market conversion, 2008",
+      "date": "1980-present",
+      "custody": "routed",
+      "verification_scope": "remote",
+      "parallel_path": "no",
+      "structure": "distrust is a CORRECT READING of current instruments, not a mindset defect. Someone refusing a 20-year commitment has evidence. Old instruments were locally held and locally visible: a building-and-loan lent to people in the same town. Trust was VERIFIABLE AT WALKING DISTANCE, not extended on faith.",
+      "outcome": "open",
+      "confidence": 0.7,
+      "still_working": "credit unions, rotating savings clubs (ROSCAs) — work for exactly this reason, require no belief in anything uncheckable",
+      "links": "same discriminator as C05: function verifiable locally vs routed through a node you cannot see"
     }
   ]
 }

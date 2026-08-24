@@ -1,0 +1,86 @@
+
+== PROCEDURAL ==
+   records HOW TO DO IT while it was working. Survives the status overwrite because it does not depend on anyone claiming the practice.
+ * S01   [untouched] Foxfire books + Foxfire magazine archive
+           - seed saving
+           - food preservation
+           - building
+           - surplus generation
+           - self-classification statements
+   S02   [untouched] County agent / cooperative extension bulletins
+           - household storage volumes
+           - canning/preservation throughput
+           - community garden organization
+   S03   [untouched] WPA / Federal Writers' Project interviews
+           - procedure where present
+           - self-classification
+   S04   [untouched] Owner shop manuals by model year
+           - fraction of failure modes serviceable with hand tools
+           - parts interchange across model years
+           - diagnostic access
+
+== INSTITUTIONAL_PROCEDURE ==
+   operating manuals, not advocacy. Money moved through these so it got written down.
+   S05   [untouched] Union LOCAL records — bylaws, dues schedules, benefit administration
+           - mutual aid fund administration
+           - burial society terms
+           - apprenticeship pipeline structure
+           - hall scheduling
+           - expected member time contribution
+   S06   [untouched] Fraternal order mutual-insurance apparatus (Moose, Elks, Odd Fellows, Woodmen)
+           - actuarial basis at small scale
+           - solvency mechanism
+           - default visibility mechanism
+           - free-entry vs priced-entry over time
+   S07   [untouched] YMCA / women's club / grange charters and fee structures over time
+           - date access became priced
+           - rent pressure as conversion driver
+           - membership age distribution over time
+
+== INSTRUMENT ==
+   horizon readable off the instrument rather than off anyone's outlook
+   S08   [untouched] Building-and-loan share plan terms
+           - increment size
+           - illiquidity terms
+           - ratchet mechanism
+           - geographic lending radius
+   S09   [untouched] Christmas club / passbook account terms and artifacts
+           - increment
+           - withdrawal penalty
+           - term length
+   S10   [untouched] War bond payroll deduction program structure
+           - external ratchet design
+           - participation rate
+   S11   [untouched] Probate and estate inventories; insurance riders; pawn ledgers
+           - metal/jewelry holdings by household
+           - divisibility
+           - transfer events
+   S12   [untouched] Credit union and ROSCA operating structure — CURRENT, still functioning
+           - inspectability by contributor
+           - enforcement mechanism
+           - whether proximity is load-bearing — see G-PORT
+
+== ARCHAEOLOGICAL ==
+   middle-band presence leaves signatures independent of narrative
+   S13   [untouched] Grave-good distribution studies, LBA sites
+           - spread vs bimodal, by period
+   S14   [untouched] House-size variance datasets (Gini-type on floor area)
+           - variance by period, palace vs non-palace settlements
+   S15   [untouched] Literacy/numeracy artifacts outside palace contexts
+           - presence/absence; alphabet diffusion rate vs cuneiform and Linear B
+   S16   [untouched] Low-denomination coinage presence
+           - denomination range in circulation, by period
+   S17   [untouched] Manorial court rolls; Statute of Labourers enforcement records
+           - tenure type by decade; enforcement density vs revolt geography
+
+== PHYSICS_REFS ==
+   S18   [located  ] West, Brown, Enquist 1997, Science 276:122
+           - branching ratios, area-preserving junction condition, terminal unit invariance
+   S19   [located  ] Katifori, Szollosi, Magnasco 2010, PRL 104:048704
+           - damage/fluctuation-induced loops; loopless = pure efficiency optimum
+   S20   [located  ] Corson 2010, PRL 104:048703
+           - fluctuations and redundancy in optimal transport networks
+   S21   [located  ] Kaiser, Ronellenfitsch, Witthaut 2020, Nat Commun 11:5796
+           - DISCONTINUOUS transition to loop formation; threshold value
+   S22   [located  ] Ronellenfitsch & Katifori 2019, PRL 123:248101
+           - phenotypes of vascular flow networks; efficiency/cost/robustness Pareto set

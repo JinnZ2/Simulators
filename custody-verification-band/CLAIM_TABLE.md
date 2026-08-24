@@ -36,16 +36,17 @@ the stated route to it does not.
 
 ---
 
-**B4.** The one-line criterion and the five-cut reading are different
+**B4.** The one-line criterion and the recorded-cut reading are different
 instruments.
 
 *Falsifier:* no case where they disagree.
 
-*Status:* SUPPORTED on the seed set, in both directions —
-`owner_operator_trucking` passes the criterion with two cuts unfavourable,
-`cooperative_member` fails it with four of five favourable. **Both cases are
-SEED**, written to exercise the criterion. A constructed disagreement shows
-the two instruments CAN differ; it does not show they differ on anything real.
+*Status:* **WITHDRAWN.** It was SUPPORTED over six invented SEED cases, two
+of which were written to disagree. Those cases were replaced by the eleven
+real ones and the disagreement did not survive: the two-cut criterion and the
+three recorded cuts agree on all eleven, zero disagreements. The earlier
+result measured the seeds, not the world — which is what its own caveat said
+it might. Asserted by test in `extract.py --selftest`.
 
 ---
 
@@ -67,6 +68,35 @@ buffers.
 
 *Status:* UNTESTED, and currently an artifact of how the seed cases were
 written. Listed because it is the sharpest prediction the criterion makes.
+
+---
+
+**B8.** `parallel_path` carries no information that `custody` does not
+already carry.
+
+*Falsifier:* a case with routed custody and a working parallel path — a
+system where the contributor holds no residual and function survives node
+loss. Municipal utilities and open-source infrastructure are the obvious
+candidates and neither is in the corpus.
+
+*Status:* SUPPORTED across all eleven cases: `routed→no, mixed→partial,
+self→yes`, with no exception. Reported by `extract.py check` on every run.
+**Whether this is a regularity or a coding artifact is undetermined** — the
+same judgement may have been entered twice under two names. `gaps.md`
+G-COLLINEAR states what would separate them. If it is a regularity it is the
+strongest structural result here and belongs in this table rather than in the
+schema; if it is an artifact the three-cut table is a two-cut table.
+
+---
+
+**B9.** `comfort_threshold` — the level at which an operator would act — is a
+second readout distinct from confidence.
+
+*Falsifier:* cases where the two move together, making the second redundant.
+
+*Status:* UNTESTABLE as it stands. The field is declared in the schema and
+carried by none of the eleven cases. A second readout that is never taken is
+not yet a readout.
 
 ---
 
