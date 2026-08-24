@@ -52,9 +52,48 @@ normalising content across both keys and by parsing `a -> b` into a state
 pair, so `--custody` reads the current state and `--was` reads the origin.
 `table` marks transition rows with `>`.
 
+## LIVE_CULTURES is a different corpus and the status vocabulary does not fit it
+
+Seven sources added under a group whose method is observation, not reading:
+practice still executing under current conditions. The status vocabulary —
+`untouched / located / partial / extracted / dead_end` — is reading-shaped.
+"Extracted" does not name what happens when you observe a system that is
+still running, and nothing in the schema distinguishes a source you can read
+from one you would have to go and watch. Left unfixed and recorded: the
+vocabulary failing visibly is worth more than a term invented from one group.
+
+The group carries two group-level keys the reader could not print —
+`seed_bank_framing` and `strip`. Same defect class as the `measure` key: prose
+attached to the data and invisible to the tool that reads it. `queue` now
+prints every group-level key rather than only `why`.
+
+## Gap coverage is thin and now counted
+
+    4 of 9 gaps have a source pointing at them
+
+    G-KNOWLEDGE-STATE   no source; its measures are residue, and residue
+                        sits where nothing was logged
+    G-SLACK             no source; measurable with current data, per its own
+                        entry, but nothing in the corpus is aimed at it
+    G-THRESHOLD         no source, and no candidate observable — uncoalesced
+    G-REPAIRABILITY     S04 is aimed at case C08 but carries no for_gap link
+    G-COLLINEAR         no source; it is a question about the coding, not
+                        about the world, so it may never have one
+
+`extract.py check` resolves every `for_gap` reference against the headings in
+`gaps.md` and reports the uncovered gaps, so a gap cannot quietly acquire or
+lose its evidence.
+
+## G-COLLINEAR nearly vanished
+
+The delivered `gaps.md` did not carry it. It came from the data rather than
+from the drop, so it was re-appended rather than dropped, and a selftest now
+asserts it is present. A gap that came from measurement should not be removed
+by a document that predates the measurement.
+
 ## Nothing here rests on a source yet
 
-Twenty-two sources: five located, seventeen untouched, none extracted. Every
+Twenty-nine sources: five located, twenty-four untouched, none extracted. Every
 case is a structural reading with a confidence and an `evidence_needed` list,
 not a claim resting on the corpus. `extract.py check` prints the counts and
 the open data problems every run.

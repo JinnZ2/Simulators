@@ -126,14 +126,18 @@ about which error is more probable given n=1 and no comparison case.
 
 ## STATE
 
-Eleven cases. Twenty-two sources: five located, seventeen untouched, none
-extracted. No source has been worked through, so no case rests on a source in
+Eleven cases. Twenty-nine sources in six groups: five located, twenty-four
+untouched, none extracted. `LIVE_CULTURES` is a different corpus from the
+archives — practice still executing, so the method is observation rather than
+reading, and it carries procedure and enforcement mechanism together because
+it is running now. No source has been worked through, so no case rests on a source in
 this corpus yet — every case is a structural reading with a confidence
 attached and an `evidence_needed` list. `extract.py check` prints the counts
 and the open data problems on every run.
 
 Open data problems as of now:
 
+    4 of 9 gaps have a source pointing at them
     schema declares 'comfort_threshold'; no case carries it
     field 'measurable' has mixed types across cases: list, str
     no evidence_needed: C08, C11

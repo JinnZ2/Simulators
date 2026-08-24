@@ -124,8 +124,8 @@ def queue(argv):
         if want and gname != want:
             continue
         print("\n== %s ==" % gname)
-        if "why" in g:
-            print("   %s" % g["why"])
+        for key in sorted(k for k in g if k != "items"):
+            print("   [%s] %s" % (key, g[key]))
         for it in g["items"]:
             if st and it["status"] != st:
                 continue
@@ -203,6 +203,18 @@ def check(argv):
             if deterministic:
                 collinear.append((a, b, mapping))
 
+    gaps = gap_ids()
+    referenced = {}
+    for g in s["groups"].values():
+        for it in g["items"]:
+            for gid in it.get("for_gap", []):
+                referenced.setdefault(gid, []).append(it["id"])
+    for gid, ids in sorted(referenced.items()):
+        if gid not in gaps:
+            problems.append("source(s) %s point at %s, which is not in gaps.md"
+                            % (",".join(ids), gid))
+    uncovered = [g for g in gaps if g not in referenced]
+
     missing_ev = [c["id"] for c in cs if "evidence_needed" not in c]
     if missing_ev:
         problems.append("no evidence_needed: %s" % ",".join(missing_ev))
@@ -228,6 +240,12 @@ def check(argv):
         print("  %s DETERMINES %s across all cases: %s" % (a, b, mapping))
     if not collinear:
         print("  every pair of cuts varies independently")
+    print("GAP COVERAGE -- gaps with no source pointing at them")
+    for gid in uncovered:
+        print("  %s" % gid)
+    if not uncovered:
+        print("  every gap has at least one source")
+    print("  %d of %d gaps covered" % (len(gaps) - len(uncovered), len(gaps)))
     print()
     if not problems:
         print("no problems found")
@@ -247,8 +265,9 @@ def selftest(argv=None):
     cs = d["cases"]
 
     ck("eleven cases load", len(cs) == 11)
-    ck("twenty-two sources load",
-       sum(len(g["items"]) for g in s["groups"].values()) == 22)
+    ck("twenty-nine sources load",
+       sum(len(g["items"]) for g in s["groups"].values()) == 29)
+    ck("LIVE_CULTURES is a separate corpus", "LIVE_CULTURES" in s["groups"])
 
     ck("transition splits into two readings",
        state("self -> routed") == ("self", "routed"))
@@ -284,6 +303,16 @@ def selftest(argv=None):
        or _collinear_present())
     ck("the 2-cut criterion and the 3 recorded cuts agree on every case",
        _criterion_disagreements() == 0)
+    ck("gaps.md declares nine gaps", len(gap_ids()) == 9)
+    ck("G-COLLINEAR survived the gaps.md replacement",
+       "G-COLLINEAR" in gap_ids())
+    ck("every for_gap reference resolves to a real gap",
+       all(gid in gap_ids()
+           for g in s["groups"].values() for it in g["items"]
+           for gid in it.get("for_gap", [])))
+    ck("LIVE_CULTURES group-level prose is printable",
+       all(isinstance(v, str) for k, v in s["groups"]["LIVE_CULTURES"].items()
+           if k != "items"))
     ck("outcomes are all in vocabulary",
        all(c["outcome"] in d["schema"]["outcome"] for c in cs))
     ck("confidences are in range",
@@ -297,6 +326,17 @@ def selftest(argv=None):
         print("  %s  %s" % ("ok  " if ok else "FAIL", name))
     print("\nselftest %d/%d" % (passed, len(checks)))
     return passed == len(checks)
+
+
+def gap_ids():
+    """Gap identifiers declared in gaps.md, read from the headings."""
+    path = os.path.join(HERE, "gaps.md")
+    out = []
+    with open(path) as fh:
+        for line in fh:
+            if line.startswith("## G-"):
+                out.append(line[3:].split()[0].strip())
+    return out
 
 
 def _collinear_present():
@@ -365,4 +405,11 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except BrokenPipeError:
+        # piping into head/less closes the pipe early; that is not an error.
+        try:
+            sys.stdout.close()
+        finally:
+            os._exit(0)

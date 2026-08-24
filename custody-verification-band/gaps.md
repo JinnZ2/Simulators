@@ -23,6 +23,16 @@ it that has not been recovered.
     STATUS : open. No candidate substitute identified.
     NOTE   : this is the one gap where "recoverable from documents" has NOT
              been established. Procedures are recoverable. This may not be.
+    UPDATE : LIVE_CULTURES corpus supplies direct data on this — the
+             mechanism is running NOW in several places, so it can be
+             observed rather than reconstructed.
+             S23 LDS ward-level assessment: a local person determines need,
+                 not a form. Proximity verification, at scale, currently.
+             S26 ROSCAs: member dispersion vs solvency is a direct read on
+                 whether the verification radius is strictly bounded.
+             S29 Amish/Mennonite: same question, different substrate.
+             This does NOT close the gap. It converts it from unmeasurable
+             to measurable.
 
 ## G-HORIZON — partially closed
 

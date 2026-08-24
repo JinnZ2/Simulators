@@ -1,6 +1,6 @@
 
 == PROCEDURAL ==
-   records HOW TO DO IT while it was working. Survives the status overwrite because it does not depend on anyone claiming the practice.
+   [why] records HOW TO DO IT while it was working. Survives the status overwrite because it does not depend on anyone claiming the practice.
  * S01   [untouched] Foxfire books + Foxfire magazine archive
            - seed saving
            - food preservation
@@ -20,7 +20,7 @@
            - diagnostic access
 
 == INSTITUTIONAL_PROCEDURE ==
-   operating manuals, not advocacy. Money moved through these so it got written down.
+   [why] operating manuals, not advocacy. Money moved through these so it got written down.
    S05   [untouched] Union LOCAL records — bylaws, dues schedules, benefit administration
            - mutual aid fund administration
            - burial society terms
@@ -38,7 +38,7 @@
            - membership age distribution over time
 
 == INSTRUMENT ==
-   horizon readable off the instrument rather than off anyone's outlook
+   [why] horizon readable off the instrument rather than off anyone's outlook
    S08   [untouched] Building-and-loan share plan terms
            - increment size
            - illiquidity terms
@@ -61,7 +61,7 @@
            - whether proximity is load-bearing — see G-PORT
 
 == ARCHAEOLOGICAL ==
-   middle-band presence leaves signatures independent of narrative
+   [why] middle-band presence leaves signatures independent of narrative
    S13   [untouched] Grave-good distribution studies, LBA sites
            - spread vs bimodal, by period
    S14   [untouched] House-size variance datasets (Gini-type on floor area)
@@ -84,3 +84,41 @@
            - DISCONTINUOUS transition to loop formation; threshold value
    S22   [located  ] Ronellenfitsch & Katifori 2019, PRL 123:248101
            - phenotypes of vascular flow networks; efficiency/cost/robustness Pareto set
+
+== LIVE_CULTURES ==
+   [seed_bank_framing] knowledge behaves like a plant going extinct. Question is not how to store it but which sites still support the practice, and what nutrient those sites are supplying, until conditions allow recovery.
+   [strip] doctrinal, political, and identity framing is NOT load-bearing for the mechanism. Extract the assessment step, the retention rule, the increment, the enforcement mechanism. Trajectory of an organization does not retract its early structural data point.
+   [why] DIFFERENT CORPUS FROM THE ARCHIVES. Not preserved knowledge — practice still being EXECUTED under current conditions. Method is observation, not reading. Carries procedure AND enforcement mechanism together because it is running now.
+ * S23   [untouched] LDS welfare system
+           - ward-level assessment step: a LOCAL person determines need, not a form. This is proximity-based verification, still operating, at scale.
+           - fast offering: small fixed increment, external ratchet (cf. C10)
+           - storehouse / cannery / welfare farm: production capacity held inside the mutual structure, not purchased
+           - labor contribution expectation and how it is scheduled
+           - how solvency holds at ward scale
+   S24   [untouched] Farm cooperatives — historical structure and surviving locals
+           - patronage dividend: residual on a good year returns to members — RETENTION RULE, cf. C06 measurable
+           - member-owned capital structure
+           - one-member-one-vote vs share-weighted
+           - what changed in the ones that converted to investor-owned
+   S25   [untouched] Early-phase mutual aid orgs, urban — e.g. Black Panther Party breakfast/clinic/escort programs at founding
+           - food distribution logistics at neighborhood scale
+           - clinic staffing and supply
+           - escort/patrol scheduling
+           - how it ran with zero funding
+   S26   [untouched] ROSCAs / rotating savings clubs in immigrant communities (tanda, susu, hui, chit, committee)
+           - increment and rotation order
+           - default handling
+           - what makes default visible
+           - member dispersion vs solvency — DIRECT G-PORT DATA
+   S27   [untouched] Church burial societies and benevolent funds, currently operating
+           - actuarial basis at congregation scale
+           - assessment step
+           - continuity with S06 fraternal apparatus
+   S28   [untouched] Tenant organizing mutual aid networks; informal childcare rotations; repair collectives / tool libraries
+           - gap coverage mechanism
+           - contribution scheduling without paid staff
+           - point at which priced access appears (cf. C07 conversion)
+   S29   [untouched] Amish/Mennonite barn raising and mutual aid funds
+           - labor mobilization without money transfer
+           - insurance substitute structure
+           - proximity requirement — is it strictly bounded

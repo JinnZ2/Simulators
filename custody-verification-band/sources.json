@@ -1,7 +1,12 @@
 {
   "note": "Worked incrementally over months, not in one session. status field is the work queue.",
-  "status_values": ["untouched", "located", "partial", "extracted", "dead_end"],
-
+  "status_values": [
+    "untouched",
+    "located",
+    "partial",
+    "extracted",
+    "dead_end"
+  ],
   "strip_protocol": {
     "why": "self-report is unreliable in BOTH directions for this corpus",
     "overwrite_1": "status devaluation — holders were taught the knowledge marked them as primitive/broke. Retrieval fails even for the holder. Nostalgia reports the STATE, not the METHOD.",
@@ -11,9 +16,7 @@
     "role_bindings": "era assigned functions by sex and age. Role bindings are SUBSTITUTABLE SUBSTRATE — strip them. The function (contribution scheduling, rotation, gap coverage, small-scale fund solvency, transmission-by-doing) is the extraction target. Extract mechanism and ratios, drop role bindings. Same as reading branching rules off the lung without importing the lung.",
     "labor_note": "what went into it was unpaid and largely women's and children's hours. Therefore residue sits where nothing was logged: kitchen equipment, storage volume, outbuildings. NOT in records or membership rolls."
   },
-
   "groups": {
-
     "PROCEDURAL": {
       "why": "records HOW TO DO IT while it was working. Survives the status overwrite because it does not depend on anyone claiming the practice.",
       "items": [
@@ -23,31 +26,47 @@
           "status": "untouched",
           "strongest_lead": true,
           "why": "procedural interviews, not sentiment. Also captures SELF-CLASSIFICATION at the time (region considered itself middle, not poor) which is the part later rewritten. Contains the surplus mechanism: regional production competence with exportable margin — NOT frugality, NOT poverty adaptation.",
-          "extract": ["seed saving", "food preservation", "building", "surplus generation", "self-classification statements"]
+          "extract": [
+            "seed saving",
+            "food preservation",
+            "building",
+            "surplus generation",
+            "self-classification statements"
+          ]
         },
         {
           "id": "S02",
           "name": "County agent / cooperative extension bulletins",
           "status": "untouched",
           "why": "written by people documenting a working system while it worked",
-          "extract": ["household storage volumes", "canning/preservation throughput", "community garden organization"]
+          "extract": [
+            "household storage volumes",
+            "canning/preservation throughput",
+            "community garden organization"
+          ]
         },
         {
           "id": "S03",
           "name": "WPA / Federal Writers' Project interviews",
           "status": "untouched",
-          "extract": ["procedure where present", "self-classification"]
+          "extract": [
+            "procedure where present",
+            "self-classification"
+          ]
         },
         {
           "id": "S04",
           "name": "Owner shop manuals by model year",
           "status": "untouched",
           "for_case": "C08",
-          "extract": ["fraction of failure modes serviceable with hand tools", "parts interchange across model years", "diagnostic access"]
+          "extract": [
+            "fraction of failure modes serviceable with hand tools",
+            "parts interchange across model years",
+            "diagnostic access"
+          ]
         }
       ]
     },
-
     "INSTITUTIONAL_PROCEDURE": {
       "why": "operating manuals, not advocacy. Money moved through these so it got written down.",
       "items": [
@@ -56,25 +75,39 @@
           "name": "Union LOCAL records — bylaws, dues schedules, benefit administration",
           "status": "untouched",
           "strip": "today's idea of what a union represents AND the era's own solidarity framing. Load-bearing content is bylaws, dues schedules, benefit-administration records.",
-          "extract": ["mutual aid fund administration", "burial society terms", "apprenticeship pipeline structure", "hall scheduling", "expected member time contribution"]
+          "extract": [
+            "mutual aid fund administration",
+            "burial society terms",
+            "apprenticeship pipeline structure",
+            "hall scheduling",
+            "expected member time contribution"
+          ]
         },
         {
           "id": "S06",
           "name": "Fraternal order mutual-insurance apparatus (Moose, Elks, Odd Fellows, Woodmen)",
           "status": "untouched",
           "why": "documented mutual-insurance system predating state provision",
-          "extract": ["actuarial basis at small scale", "solvency mechanism", "default visibility mechanism", "free-entry vs priced-entry over time"]
+          "extract": [
+            "actuarial basis at small scale",
+            "solvency mechanism",
+            "default visibility mechanism",
+            "free-entry vs priced-entry over time"
+          ]
         },
         {
           "id": "S07",
           "name": "YMCA / women's club / grange charters and fee structures over time",
           "status": "untouched",
           "for_case": "C07",
-          "extract": ["date access became priced", "rent pressure as conversion driver", "membership age distribution over time"]
+          "extract": [
+            "date access became priced",
+            "rent pressure as conversion driver",
+            "membership age distribution over time"
+          ]
         }
       ]
     },
-
     "INSTRUMENT": {
       "why": "horizon readable off the instrument rather than off anyone's outlook",
       "items": [
@@ -82,19 +115,31 @@
           "id": "S08",
           "name": "Building-and-loan share plan terms",
           "status": "untouched",
-          "extract": ["increment size", "illiquidity terms", "ratchet mechanism", "geographic lending radius"]
+          "extract": [
+            "increment size",
+            "illiquidity terms",
+            "ratchet mechanism",
+            "geographic lending radius"
+          ]
         },
         {
           "id": "S09",
           "name": "Christmas club / passbook account terms and artifacts",
           "status": "untouched",
-          "extract": ["increment", "withdrawal penalty", "term length"]
+          "extract": [
+            "increment",
+            "withdrawal penalty",
+            "term length"
+          ]
         },
         {
           "id": "S10",
           "name": "War bond payroll deduction program structure",
           "status": "untouched",
-          "extract": ["external ratchet design", "participation rate"]
+          "extract": [
+            "external ratchet design",
+            "participation rate"
+          ]
         },
         {
           "id": "S11",
@@ -102,7 +147,11 @@
           "status": "untouched",
           "for_case": "C09",
           "why": "records holdings AS ASSETS without framing them as sentiment",
-          "extract": ["metal/jewelry holdings by household", "divisibility", "transfer events"]
+          "extract": [
+            "metal/jewelry holdings by household",
+            "divisibility",
+            "transfer events"
+          ]
         },
         {
           "id": "S12",
@@ -110,11 +159,14 @@
           "status": "untouched",
           "for_case": "C11",
           "why": "live instance of the criterion still working; contains the verification mechanism in operating form",
-          "extract": ["inspectability by contributor", "enforcement mechanism", "whether proximity is load-bearing — see G-PORT"]
+          "extract": [
+            "inspectability by contributor",
+            "enforcement mechanism",
+            "whether proximity is load-bearing — see G-PORT"
+          ]
         }
       ]
     },
-
     "ARCHAEOLOGICAL": {
       "why": "middle-band presence leaves signatures independent of narrative",
       "items": [
@@ -152,14 +204,142 @@
         }
       ]
     },
-
     "PHYSICS_REFS": {
       "items": [
-        {"id": "S18", "name": "West, Brown, Enquist 1997, Science 276:122", "status": "located", "extract": "branching ratios, area-preserving junction condition, terminal unit invariance"},
-        {"id": "S19", "name": "Katifori, Szollosi, Magnasco 2010, PRL 104:048704", "status": "located", "extract": "damage/fluctuation-induced loops; loopless = pure efficiency optimum"},
-        {"id": "S20", "name": "Corson 2010, PRL 104:048703", "status": "located", "extract": "fluctuations and redundancy in optimal transport networks"},
-        {"id": "S21", "name": "Kaiser, Ronellenfitsch, Witthaut 2020, Nat Commun 11:5796", "status": "located", "extract": "DISCONTINUOUS transition to loop formation; threshold value"},
-        {"id": "S22", "name": "Ronellenfitsch & Katifori 2019, PRL 123:248101", "status": "located", "extract": "phenotypes of vascular flow networks; efficiency/cost/robustness Pareto set"}
+        {
+          "id": "S18",
+          "name": "West, Brown, Enquist 1997, Science 276:122",
+          "status": "located",
+          "extract": "branching ratios, area-preserving junction condition, terminal unit invariance"
+        },
+        {
+          "id": "S19",
+          "name": "Katifori, Szollosi, Magnasco 2010, PRL 104:048704",
+          "status": "located",
+          "extract": "damage/fluctuation-induced loops; loopless = pure efficiency optimum"
+        },
+        {
+          "id": "S20",
+          "name": "Corson 2010, PRL 104:048703",
+          "status": "located",
+          "extract": "fluctuations and redundancy in optimal transport networks"
+        },
+        {
+          "id": "S21",
+          "name": "Kaiser, Ronellenfitsch, Witthaut 2020, Nat Commun 11:5796",
+          "status": "located",
+          "extract": "DISCONTINUOUS transition to loop formation; threshold value"
+        },
+        {
+          "id": "S22",
+          "name": "Ronellenfitsch & Katifori 2019, PRL 123:248101",
+          "status": "located",
+          "extract": "phenotypes of vascular flow networks; efficiency/cost/robustness Pareto set"
+        }
+      ]
+    },
+    "LIVE_CULTURES": {
+      "why": "DIFFERENT CORPUS FROM THE ARCHIVES. Not preserved knowledge — practice still being EXECUTED under current conditions. Method is observation, not reading. Carries procedure AND enforcement mechanism together because it is running now.",
+      "seed_bank_framing": "knowledge behaves like a plant going extinct. Question is not how to store it but which sites still support the practice, and what nutrient those sites are supplying, until conditions allow recovery.",
+      "strip": "doctrinal, political, and identity framing is NOT load-bearing for the mechanism. Extract the assessment step, the retention rule, the increment, the enforcement mechanism. Trajectory of an organization does not retract its early structural data point.",
+      "items": [
+        {
+          "id": "S23",
+          "name": "LDS welfare system",
+          "status": "untouched",
+          "strongest_lead": true,
+          "why": "mechanically documented AND running at scale right now. Contains a live instance of the G-PORT mechanism.",
+          "extract": [
+            "ward-level assessment step: a LOCAL person determines need, not a form. This is proximity-based verification, still operating, at scale.",
+            "fast offering: small fixed increment, external ratchet (cf. C10)",
+            "storehouse / cannery / welfare farm: production capacity held inside the mutual structure, not purchased",
+            "labor contribution expectation and how it is scheduled",
+            "how solvency holds at ward scale"
+          ],
+          "for_gap": [
+            "G-PORT",
+            "G-HORIZON"
+          ]
+        },
+        {
+          "id": "S24",
+          "name": "Farm cooperatives — historical structure and surviving locals",
+          "status": "untouched",
+          "why": "retention question formalized in readable bylaws",
+          "extract": [
+            "patronage dividend: residual on a good year returns to members — RETENTION RULE, cf. C06 measurable",
+            "member-owned capital structure",
+            "one-member-one-vote vs share-weighted",
+            "what changed in the ones that converted to investor-owned"
+          ],
+          "for_gap": [
+            "G-RATE"
+          ]
+        },
+        {
+          "id": "S25",
+          "name": "Early-phase mutual aid orgs, urban — e.g. Black Panther Party breakfast/clinic/escort programs at founding",
+          "status": "untouched",
+          "why": "unpaid, no notoriety, free-entry, locally verifiable. Same shape as the lodge, different substrate. URBAN instance where the rural forms do not transfer.",
+          "extract": [
+            "food distribution logistics at neighborhood scale",
+            "clinic staffing and supply",
+            "escort/patrol scheduling",
+            "how it ran with zero funding"
+          ],
+          "note": "later trajectory is a separate question and does not retract the founding-phase structure"
+        },
+        {
+          "id": "S26",
+          "name": "ROSCAs / rotating savings clubs in immigrant communities (tanda, susu, hui, chit, committee)",
+          "status": "untouched",
+          "why": "live instance of horizon instrument + proximity enforcement together",
+          "extract": [
+            "increment and rotation order",
+            "default handling",
+            "what makes default visible",
+            "member dispersion vs solvency — DIRECT G-PORT DATA"
+          ],
+          "for_gap": [
+            "G-PORT",
+            "G-BELIEF",
+            "G-HORIZON"
+          ]
+        },
+        {
+          "id": "S27",
+          "name": "Church burial societies and benevolent funds, currently operating",
+          "status": "untouched",
+          "extract": [
+            "actuarial basis at congregation scale",
+            "assessment step",
+            "continuity with S06 fraternal apparatus"
+          ]
+        },
+        {
+          "id": "S28",
+          "name": "Tenant organizing mutual aid networks; informal childcare rotations; repair collectives / tool libraries",
+          "status": "untouched",
+          "why": "urban forms nobody funded; free-entry still intact in some instances",
+          "extract": [
+            "gap coverage mechanism",
+            "contribution scheduling without paid staff",
+            "point at which priced access appears (cf. C07 conversion)"
+          ]
+        },
+        {
+          "id": "S29",
+          "name": "Amish/Mennonite barn raising and mutual aid funds",
+          "status": "untouched",
+          "extract": [
+            "labor mobilization without money transfer",
+            "insurance substitute structure",
+            "proximity requirement — is it strictly bounded"
+          ],
+          "for_gap": [
+            "G-PORT"
+          ]
+        }
       ]
     }
   }
