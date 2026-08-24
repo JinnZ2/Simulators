@@ -130,6 +130,51 @@ the asymmetry needs. `[[uninstrumented]]` resolves and is the right
 neighbour: **`AUDIT_ASYMMETRY`, a guard firing on one side only**, is the
 mechanism the asymmetry half would file under if it were filed.
 
+## The scan — built 2026-08-24
+
+`SCAN_SPEC` asked for the instrument that would populate the comparison
+table: `cases.json`, `scan.py`, `RESULTS.md`. Built. **Building an
+instrument and running it is not scoring its subject**, and the split
+above holds: the scan computes, it does not conclude, and the asymmetry
+is still not scored here.
+
+What made that possible is one design decision the spec did not make.
+**`criterion_disposition` is computed from the criterion's threshold and
+the case's value, never hand-assigned.** No case carries that field and
+`--selftest` fails if one appears. Hand-assigning `defect` to the human
+cases would have produced the marker's conclusion from the marker's
+assumption, and the scan would have reported the answer it was given.
+
+**The result is that the fired set is empty and 6 of 6 human seed cases
+return `UNDETERMINED`** — for two reasons, either sufficient: none carries
+a numeric agreement value, and their quantity type is a cross-body
+adoption fraction where C reads a within-body agreement rate.
+
+**This refutes the marker's strongest phrasing.** *"Two dispositions, one
+measurement"* is not right — there are two measurements, and `SCAN_SPEC`'s
+own limits section says so independently. The weaker statement survives:
+one criterion form, applied to one subject class and not another. G-DIM
+voids the ratio and leaves the comparison legal.
+
+Three further findings in `RESULTS.md`: the threshold was not in the spec
+and without one the scoring rule fires by construction; the inverse branch
+is `CONSTANT_SILENT` because every seed case is a high-agreement case, so
+one branch cannot fire and the set cannot separate asymmetry from
+selection on the variable under test; and `retention_basis`, the mechanism
+the argument runs on, carries **zero sourced entries of seven**.
+
+`P1` is landed as the *shape* of an inverse case with every value
+unstated rather than invented, because populating it is the cheapest thing
+that could refute the asymmetry reading — if low agreement in a
+legislature is scored a defect and high agreement would be too, the
+criterion returns defect at both ends for one class, which is a different
+failure and not the marker's claim.
+
+**No agreement figures for human institutions are supplied from memory**,
+here or in `RESULTS.md`. Where such rates are recorded is named; the
+retrieval is not done. That is the same line as above, held at the point
+where it would have been easiest to cross.
+
 ## Where it sits
 
 Nearest siblings: `null-harness/` (`NO_DISCRIMINATION` is the verdict

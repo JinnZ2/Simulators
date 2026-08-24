@@ -5411,7 +5411,41 @@ underneath).
   `uninstrumented` resolves and `AUDIT_ASYMMETRY` is the mechanism the
   asymmetry half would file under. Every fact about the trigger case is
   carried and egress-blocked (`MS_004` status) and nothing rests on it.
-  Stdlib only, parses under 3.9, CC0.
+  **`SCAN_SPEC` then asked for the instrument that would populate the
+  comparison table, and it was built** — `cases.json` / `scan.py` /
+  `RESULTS.md`, dated, criterion as data so it can be swapped. Building an
+  instrument is not scoring its subject and the split holds: the scan
+  computes, it does not conclude, and no agreement figure for a human
+  institution is supplied from memory anywhere in the folder. **The
+  decision the whole scan turns on** is that `criterion_disposition` is
+  COMPUTED from a threshold, never hand-assigned — no case carries the
+  field and `--selftest` fails if one appears, because hand-assigning
+  `defect` to the human cases would produce the marker's conclusion from
+  the marker's assumption. **Run as specified the fired set is EMPTY and
+  6 of 6 human seed cases return `UNDETERMINED`**, for two reasons either
+  of which suffices: none carries a numeric agreement value (the spec
+  states them as *"near-universal"*), and their quantity type is a
+  `cross_body_adoption_fraction` where C reads a
+  `within_body_agreement_rate` — different objects, so `G-DIM` voids the
+  ratio and `combined_statistic()` raises rather than returns. **That
+  refutes the marker's strongest phrasing:** *"two dispositions, one
+  measurement"* is not one measurement, and `SCAN_SPEC`'s own limits
+  section says so independently; the weaker form survives — one criterion
+  applied to one subject class and not another — since G-DIM voids the
+  ratio and leaves the comparison legal. Three more: **the threshold was
+  not in the spec** (set to 0.90 and marked, with every conclusion
+  invariant over [0.5, 0.98] because no human case carries a number at
+  all), the **inverse branch is `CONSTANT_SILENT`** since every seed is a
+  high-agreement case so one branch cannot fire and the set cannot
+  separate asymmetry from selection on the variable under test, and
+  `retention_basis` — the mechanism the argument runs on — carries **zero
+  sourced entries of seven**. `P1` lands as the *shape* of an inverse case
+  with values unstated rather than invented: populating it is the cheapest
+  thing that could refute the asymmetry reading, because a criterion
+  returning defect at both ends for one class is a different failure and
+  not the marker's claim. On the marker's own standard the asymmetry
+  remains an impression rather than a measurement, and this run moves it
+  in neither direction. Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
