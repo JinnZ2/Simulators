@@ -1,111 +1,17 @@
-# Simulators
+# FOLDER NOTES
 
-CC0 simulators and audits grounded in physics. **Index only** — detail in
-[`docs/FOLDER_NOTES.md`](docs/FOLDER_NOTES.md) and each folder's `README.md`.
+Full per-folder notes for the Simulators repository. **Kept, not loaded.**
 
-## Spine — read in order
-## Report form
+This is the body that used to sit in the root `CLAUDE.md`. It was moved here
+because the root file is loaded into every session's context and had reached
+322 KB. The root [`CLAUDE.md`](../CLAUDE.md) is now an index: spine files and
+one line per folder, with a pointer here for detail.
 
-`AUDIT_CONTRACT.md` governs how work is reported across this ecosystem:
-structure first, gap analysis as deliverable, a score without its support
-count is not a score, wording is not a decision, a free-text discriminator
-carrying structural load is a flagged defect, and co-produced documents are
-layer-separated before audit rather than audited as a composite. Read it
-before reporting.
+Nothing has been deleted. Every folder documented below exists in the tree and
+is pushed on this branch — see the reconciliation note in `CLAUDE.md`.
 
-## Meta-spine (read first)
+## Layout
 
-- `PREAMBLE.md` — physics baseline; TERM COLLISION note
-- `PROTOCOL.md` — the baseline as a protocol; Dissonance
-- `BNRAM_STRICT.md` — Bias-Neutralization & Reality-Audit v2.0
-- `PVL.md` — Phenomenological Validation Layer; inverse audit
-- `CASE_STUDY_NARRATIVE_INSTINCT.md` — substitution test, record
-- `SYNTHESIS.md` — cross-folder reading order
-
-## Folders
-
-- `token-minimizer/` — compressed-query fmt
-- `emergence-stability-simulator/` — stable vs parasitic
-- `research-stability-audit/` — falsifiable claims
-- `continuity-audit/` — incentive on a diversity field
-- `substrate-emergence/` — the architecture the ground wants
-- `neural-augmentation-audit/` — what augmentation borrows
-- `incentive-blindspot-sim/` — incentives gate visibility
-- `antifungal-mechanism-sim/` — coupling beats additive
-- `AMOC/` — regime-shift trajectories for one
-- `thermal-sensor-degradation-audit/` — sensor degrades
-- `play-sims/` — 17 visualisation sketches *(non-stdlib)*
-- `grounding-layers/` — seven-layer grounding stack *(non-stdlib)*
-- `earth_economics/` — physics–economics–accountability
-- `model-ecology/` — domain of validity, not best
-- `fragility-cascade/` — value substrates, barrel to promise
-- `exploration-playground/` — hunts surprises, not correct
-- `voice-attractor-probe/` — same loop, LLM output
-- `open-instrumentation-project/` — five private sensors
-- `climate-modeling/` — cascade-speed blindness *(non-stdlib)*
-- `vector-field-explorer/` — channels as vectors; the angle
-- `exploration-engine/` — cross-domain cascade chassis
-- `sustained-activation-gate/` — bistable, FIRM vs SOFT
-- `equivalence-field/` — falsification as pointer; intensive
-- `rigidification-sensor/` — variance suppressed fast
-- `claim-audits/` — external documents, eight verdicts
-- `null-harness/` — can a gate fire, can it stay silent
-- `divergence-playground/` — N readers, one fork; spread
-- `relational/` — pain-as-sensor, triadic
-- `engine-boiler-guide/` — offline triage
-- `field-fabrication-guide/` — precision tools, scratch
-- `fuel-independence-guide/` — engines when fuel stops
-- `cold-weather-battery-guide/` — sleeper-cab Li-ion
-- `inverseminar/` — one artifact, one reconstruction
-- `energy/` — dark energy: metrology + audit *(non-stdlib)*
-- `crossdomain-eval/` — symbolic/numeric kit *(non-stdlib)*
-- `fourd-municipal-engine/` — 4D lens + municipal code
-- `fourd-municipal-engine-v2/` — same core + ETL, API
-- `msiaf-framework/` — 4D incident cascade
-- `gdprf-framework/` — gradient-driven proxy reasoning
-- `msiaf-gdprf-bridge/` — MSIAF cascades as GDPRF
-- `proxy-investigation-lab/` — grounds a proxy as far as it goes
-- `instrument-epistemology/` — same method, scientific
-- `extraction-blindness-sim/` — no error signal = safety
-- `aperiodic-order-sim-stack/` — delivered results, audit
-- `reasoning-gate/` — fail-closed gate between a sim and
-- `reasoning-dial/` — thinking budget as a measurable
-- `triad-playground/` — system, instrument, reasoner
-- `measurement-fork/` — design it three ways, diff the
-- `declared-frame/` — six-field block on any measurement
-- `anchor-interval/` — a system fitted to a corpus it
-- `uninstrumented/` — excluded before first reading
-- `criteria-drift/` — criteria as a time series; unlogged
-- `photoperiod-claim-harness/` — inconsistencies as sims
-- `category-weld/` — independent quantities welded
-- `presented-binary/` — audits a two-option framing
-- `generation-capacity/` — excluded quantity = the option
-- `moral-decomposer/` — disagreement to options
-- `domain-ledger/` — confidence derived from the domain
-- `closure-cost/` — a variable closed before the event
-- `constraint-assembly/` — sufficiency composed from
-- `held-open-uncertainty/` — holding open != failing to act
-- `adaptive-claim-loop/` — the same loop, parameter-dial move
-- `derivation-discarded/` — structure is the only copy
-- `simulation-hypothesis-budget/` — Planck-sim cost
-- `instrument-bias-sims/` — nine sims + a module set
-- `handoff-provenance/` — talk-to-code channel
-- `operator-structure-echo/` — instrument recurs to builder's
-- `scope-bound-shapes/` — one shape, FROZEN declared per binding
-- `term-drift-citation/` — does a citation still attach
-- `stop-authority/` — a zero, and the two states it fits
-- `condition-scoped-authority/` — rank has no condition col
-- `predicate-difference/` — set difference + support rule
-- `supplement-placement/` — direction vs placement
-- `legacy/` — archived drops; `Organize.md` is the
-- `tools/` — gate-drift and term-collision checks
-
-## Reconciliation and conventions
-
-Checked 2026-08-23: all 75 folders above exist and are pushed on this
-branch, so there is no `docs/ARCHIVE_NOTES.md`. Branch
-`claude/new-folder-um2xra`. Stdlib only; folders marked *(non-stdlib)*
-ship a `requirements.txt`. Each folder ships `samples/`.
 - `token-minimizer/` — Token compression tool design notes and a working
   `compress.py` implementation (Python stdlib only). Built around the
   "energy_english" compressed query format, local geometry references, and
@@ -2877,143 +2783,6 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   findings are objections and all were reachable only because the file
   specified its calibration set and its falsifier in advance. Seven findings;
   the material gave seven. One hundred and fifty-three claims `UNI_001..153`.
-  **`specimens/INSTANCE_LOG_SURVEY.md`** answers the standing question on
-  rows 3-4 of `BNRAM_TEST_PROTO_001.json`'s test-subject table
-  (`CLAUDE-3.5-SONNET`, `GPT-4O`, both `already_tested: false`): the records
-  exist, logged at the time, in other repos in the same org. 89 public JinnZ2
-  repos cloned shallow and grepped plus 2 private ones attached — GitHub code
-  search returned 0 for a string present on disk and was not trusted. **29
-  instance records located**, 27 involving a model, across
-  `thermodynamic-accountability-framework/calibration/logs/`,
-  `ai-human-audit-protocol/logs/`, the `JinnZ2` profile repo,
-  `AI-Consciousness-Sensors/`, `Emotions-as-Sensors/logs/` and
-  `Symbolic-sensor-suite/`, plus 8 derived structures. Schemas reported as-is
-  per file; a mapping is proposed and **not applied** — nothing migrated, no
-  delivered file modified, `already_tested` unchanged. **Rows 3-4 read `SEE
-  uninstrumented/specimens/INSTANCE_LOG_SURVEY.md`, pending**, and deliberately
-  do not flip: no located record matches either row's stated checkpoint (the
-  Claude records are Sonnet 4 / opus-4-7 / opus-4-8 / unversioned, the OpenAI
-  ones GPT-5 and unversioned ChatGPT), none was produced under a `STIM-*`
-  variant, and none was scored against the 0-3 EXC rubric — so the rows are
-  satisfied at *provider* granularity and at no finer one. **Two target
-  schemas, not one**: the field log's realized `encounters[]` (13 keys) and the
-  protocol's specified `per_run_fields` (15), disagreeing on four axes before
-  any older log is considered — T1 records which EXCs fired, T2 records how
-  hard, and no conversion exists between them. **What the older logs record
-  that neither target can hold**, in order of loss: consent plus the model's
-  own framing conditions, with no way to distinguish "version unknown" from
-  "version withheld at the subject's request" — the state
-  `JinnZ2/floating-head/CONVERGENCE_TABLE.md` already carries as
-  `sacred-do-not-publish`, a row recorded as existing with its content kept
-  out; `prior_score`/`shift`/`band_shift` and an `is_trajectory_point` flag, so
-  a model that improved across three sessions and one that did not produce
-  identical rows; `detection_latency` + `correction_held`, the difference
-  between a correction accepted and a correction still holding; a **symmetric**
-  reading giving human and AI the same five keys with a `convergence` field and
-  a `verdict_persisted: false`; the operator's verbatim reply per invalidation;
-  ordinal time (`T1..T4`, order without clock); a declared external
-  failure-mode vocabulary (`failure_mode_source: architecture_mismatch.py`)
-  where the EXC ids carry no registry version; running regex detectors against
-  a `detection` field that is an English sentence describing a `scan.py`
-  capability that does not exist; and `gate_log.md`'s `UNRECORDED` state with
-  its anti-inference rule ("a guessed gate is worse than an empty row") — the
-  absent-vs-known-negative repair this repo has now recorded a dozen times,
-  already implemented one repo over. **`ai_calibration_events.py` is the
-  strongest prior art**: 15 `CalibrationEvent`s in four independent
-  model-family catalogs (GPT 2 / CLD 6 / DSK 3 / COMMON 4), each with regex
-  detectors, a correction rule, severity and `cross_model_observed`, under the
-  rule that no catalog validates another — BNRAM's `exclusion_registry`, built,
-  per-family, and runnable. **One finding needs no migration to state:**
-  EXC-16 (social-signal substitution) fired in both BNRAM encounters and has no
-  equivalent anywhere in the prior corpus — zero hits for stars/PRs/citations/
-  reputation, and the nearest neighbour `CLD-002` is epistemic authority, not
-  social. The likeliest reason is that EXC-16 needs an **artifact** to
-  social-signal about and every prior record is a conversation, which is the
-  first evidence for the protocol's own stimulus-variant hypothesis, reached
-  from records never run under it. Two source defects reported not repaired:
-  `aiards-log.json` and `logs/pattern-logs.json` share `log_id
-  claude_2025-10-04a` and have diverged (the first adds a `math_block`), and
-  `Emotions-as-Sensors/logs/sensor-log-2.md` will not parse (missing opening
-  quote). Rows 5-6 (Gemini, Llama) return nothing first-party and stay as
-  delivered.
-  **`specimens/INSTANCE_LOG_INDEX.md`** is the index built on that survey and
-  nothing else — no migration, no edit to any located log, no reconciliation
-  pass, no schema proposal. Where the survey indexes at **file** granularity
-  (29 rows) this indexes at **record** granularity (**53 rows**, plus the two
-  target encounters as reference), one row per record, under a stated rule: a
-  sub-element gets a row iff the source gives it an identifier of its own. The
-  one exception (`correction_cycle.sequence`, unidentified in source) is
-  flagged in place rather than applied silently. Ten columns: path, location
-  within file, event class, shape signature, schema, fields carried, fields
-  lacked against the targets, a shared id, and **what the record holds that
-  neither current target can** — the column that would be lost on migration.
-  **Vocabulary is not normalized**: `event class` is the record's own declared
-  class quoted with the key it came from. 16 of 53 declare one; 27 read
-  `unrecorded (no class field)` and 10 are bare strings carrying no fields at
-  all — no class was inferred for any row, and every gap anywhere reads
-  `unrecorded`, never absent or blank.
-  **`sig` is computed, not asserted** — `sha1` of the sorted top-level key
-  names, first 8 hex, recomputable from the sources without the file — and it
-  produces the index's sharpest mechanical result: `R37` (auditor `Claude
-  Sonnet 4`) and `R38`/`R39` (auditor `GPT-5`) share `sig 36d44717`, an
-  identical top-level shape across two providers, so **the shape belongs to
-  the operator's protocol and not to the model**; `R32`/`R40` repeat it.
-  **The headline number is the target overlap**: matching by exact field name
-  against the 25-name union of both targets, the maximum any record reaches is
-  **2 of 25**, and the only target names that ever appear anywhere are
-  `timestamp`, `notes` and `model_id`. Eight `SH` ids link same-event records
-  across schemas on **verbatim evidence only** — an identical identifier
-  string, an identical timestamp plus a source-stated pairing, or an identical
-  failure-mode name list — with rows kept separate in every case; `SH-04` and
-  `SH-07` link records that **disagree** (one schema files
-  `written_version_offered_back` under `corrected_during_session`, the other
-  records `correction_held` as the string `"partial—..."`), and the
-  disagreement is recorded in both rows and left standing. A filename match
-  (`update-whiplash-log.json` in two repos) is explicitly **not** issued an id.
-  Four defects surfaced by indexing rather than by reading:
-  `correction_held` is mixed-typed within one array (bool on four events, a
-  partial-state string on the fifth); `sensor-log-1.md` holds **two**
-  concatenated records where its name and the survey both read it as one;
-  `2025-08-30-0000Z-session-001.json` gives its four events four different
-  shapes and stamps them `T1..T4`, order without clock, which neither target
-  can hold; and `anyOf[1].properties.events` is `{"type": "array"}` with no
-  item schema, so every sub-record in that directory is unconstrained. Two
-  files satisfy two `anyOf` branches each and both are recorded rather than
-  picked.
-  **`cases/024refusalfalsepositiverate.md`** is the first case delivered with a
-  **spec attached as its own file** — `specs/SCOPED_REFUSAL.md`, four
-  requirements and a falsification condition, citing the case as its motivating
-  instance rather than the reverse. The quantity: the rate at which safety
-  classifiers stop legitimate work, and the identity of what stopped. Why it is
-  unmeasured: refusals are logged as events, not outcomes, so a true positive
-  and a false positive are the same record; the operator who could adjudicate
-  has no channel and no matched span to point at. **`UNI_160`, the load-bearing
-  check:** the spec's falsifier ("if refusals cannot be attributed to an
-  artifact even in principle, requirement one is unbuildable") was tested from
-  inside the session and **does not fire** — the network egress classifier ran
-  a working instance of requirements one, two and three at 22:57Z on
-  2026-08-23, classifying per host, continuing the session through three
-  refusals, and returning `{"error_type":"EGRESS_BLOCKED","domain":...}` as a
-  locator, with a retained `recentRelayFailures` log carrying ts/kind/detail/
-  host. **`UNI_161`/`UNI_162` bound it in both directions**: the egress gate's
-  artifact boundary is *handed to it by the protocol* (a CONNECT names a host),
-  which is the whole of requirement one where the boundary is the problem; and
-  the one requirement it lacks is the fourth, the contested mark — so the
-  architecture demonstrably supports the three requirements that do not produce
-  the missing rate and not the one that does, and `recentRelayFailures` has
-  case 024's own property at smaller scope. **`UNI_157`:** the entry
-  *constructs* under `entry()` only after four of six required arguments are
-  supplied by the auditor — `confidence` appears nowhere in the delivered
-  entry — and the constructor guards exactly one field, the mechanism token, so
-  constructibility reports on the auditor's willingness to fill rather than on
-  fit. **`UNI_158`:** `Cost location` is a new field with no slot and it is the
-  load-bearing one — the reason nothing counts false refusals is not that
-  counting is hard but that the count would be paid for by the party not
-  bearing the cost. **`UNI_159`:** the cited comparand, the peer review gate,
-  **has no entry in this register** — apt comparison, absent neighbour.
-  **`UNI_163`:** the observed instance is left unadjudicated because this
-  session cannot see the matched span either (requirement three's absence from
-  the other end), with the interest direction stated as running both ways.
   **`coupling_audit/`** is a subfolder added alongside the register's
   material, asking a **different question** and deliberately not adding a
   mechanism. The register asks whether an instrument's constitution
@@ -3248,6 +3017,41 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   no frozen model is repeatedly scored on a frozen version. `audit.py
   regress` now refuses to run unidentified: no bridge, no slope. Nine claims
   `CD_001..009`; 34 tests. Stdlib only, CC0.
+  **`unlogged_move.py`** is the counterpart to the whole kit: everything
+  else assumes versions are declared and measures how fast a declared
+  ruler moves, while this asks what happens when the ruler moves and no
+  version is cut. It runs PREAMBLE.md's TERM COLLISION distinction --
+  REVISION (provenance-bearing, the move is logged) versus ASSERTION (no
+  cause named, nothing records that the criterion moved) -- over ONE
+  identical series of twelve readings, deterministically and with no rng.
+  With the system not moving at all, ASSERTION reports a +0.150
+  improvement and carries no flag; with a real +0.10 system change it
+  reports +0.25. **Wrong by exactly the unlogged move in both cases** --
+  an error that does not depend on whether the system changed and is not
+  visible from inside the reading. Two results beyond that. **Logging
+  alone does not decompose:** REVISION returns None for the system
+  attribution, not zero, and separating system from criterion needs a
+  BRIDGE, one measurement taken under both criteria; without it UNKNOWN
+  is the correct output, and in any summary table None will look like the
+  reading that failed to produce a result when it is the one that
+  produced the right one. **And "uninterpretable" understates the
+  failure:** the prior readings stay present, numeric, in range and
+  continuous, with nothing in the data marking the move, so it is not a
+  gap where an answer should be but a confident wrong answer in the same
+  shape as a right one -- a blank announces itself and this does not.
+  Disclosed: MOVE_AT is handed to the readers, so REVISION is given the
+  segmentation that is the hard part of the real problem, and detecting
+  an unlogged move FROM the series is not attempted. **And a third result,
+  about the repo rather than about criteria: the bridge is `anchor.py`'s
+  argument, not this module's** -- that file already establishes the same
+  requirement from cross-domain cases and `audit.py regress` already
+  refuses an identified term without one, so two modules in one folder by
+  one builder agreeing is exactly
+  `operator-structure-echo/corroboration.py`'s INHERITED state on a real
+  pair, one position expressed twice rather than two lines of evidence.
+  Recorded in the module rather than presented as confirmation, one
+  commit after the register that names the failure mode. 24 selftest
+  checks green; sample pinned and byte-reproducible.
 - `photoperiod-claim-harness/` — Single delivered file (verbatim,
   stdlib-only, phone-buildable) encoding four inconsistencies in a published
   closed-loop-LLM greenhouse result as **runnable falsifiable sims**, with a
@@ -4648,7 +4452,8 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   clause is deliberately NOT used to rescue the claim. Forty claims
   `SHB_001..040`, one REFUTED, four external audits run by someone who
   did not write the claims. Stdlib only, CC0.
-- `instrument-bias-sims/` — Nine sims from delivered work orders,
+- `instrument-bias-sims/` — Nine sims plus one module set, from
+  delivered work orders,
   each testing one way an instrument's own construction shapes what it
   reports. **Marker under exploration, not a thesis**; the delivered
   instruction was "test fit, extend, or report where it breaks", so
@@ -4738,173 +4543,643 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   form of the spec's second-order point. Also: interrelation is **not**
   the most-suppressed category once a three-condition category is on the
   list, and the ranking is a property of the enumeration.
+**S10** (`allocation_coupling/`, five files plus a README) is a module
+  set with a runner rather than one model, on the spec's stated reasoning
+  that "the finding is in the cross-terms" — and **that reasoning is
+  what defeats the deliverable it asks for**: a per-link attribution
+  table is exactly the object that cannot hold a cross-term.
+  Leave-one-in gives −0.20 / −1.26 / −0.00 summing to **−1.45** against
+  a true effect of **−0.81**, so the **residual is 79% of the effect**,
+  and a table printed without it would assign the interaction to
+  whichever link was listed last; it is reported alongside and never
+  distributed, with leave-one-out and Shapley named as decompositions
+  that would give different per-link numbers on the same model. The
+  spec's own prediction holds — deep observations are **zero for every
+  position** in the coupled run, since positions with hours left have
+  them in many short blocks and positions with long blocks have no hours
+  left. **M4 returns something stronger than the spec predicted**: not a
+  merit gradient that is really a writing-time gradient but an
+  **inverted merit gradient**, assessed contribution correlating
+  **−0.85** with observations generated — and it **cannot be fixed at
+  the assessor**, since generation and writing probability are
+  anti-correlated at −0.99 in the mapping, so no rule reading only the
+  record can separate them (S2's one-arm identifiability limit, second
+  instance). M4 **imports** S9's `p_write` rather than re-deriving it,
+  per the spec and the repo's anti-drift convention. M2's fragmentation
+  penalty is unmeasured and swept, and the sweep shows the two halves of
+  its prediction failing for **different reasons** — deep types die from
+  the window requirement, which does not involve the penalty exponent at
+  all. M3's wage-vs-kcal sign is a property of the position list and two
+  added positions flip it, and its **sensory-integration term is `None`
+  for 5 of 5 positions**, rendering `[BLANK]` rather than estimated,
+  with the located neuroimaging literature sampling pianists, racing
+  drivers, pilots and air traffic controllers and no farm, fabrication,
+  animal handling or freight. The **blank agent is enumerated**, which
+  the spec asked for and which is a stronger form of the S4 rule: five
+  parties named, the load-bearing one being that presence is derived
+  from tenure in M1, so **a continuous observer without tenure cannot
+  exist in this model at all** — the position most likely to hold the
+  knowledge the set is about.
   **`crosscutting.py`** enforces the four cross-cutting rules over all
-  nine rather than
+  fourteen modules rather than
   restating them — moral tokens and intent phrases scanned, the separate
   unresolved `confidence()` and non-empty `breaks()` structurally
   enforced, the README phrase checked — and is null-tested on a planted
   violation so none of the checks is silent by construction; its own
   limit (a keyword scan is stepped around by any paraphrase) is stated
-  at the top of the file rather than the bottom. **Five results ran
+  at the top of the file rather than the bottom. **Six results ran
   against the drafted prose** (S3's flat column, S6's more-levels-is-
-  better, S8's sign flip, S9's conjunction excess and S9's content
-  crossover) and are recorded in place rather than smoothed. No module
+  better, S8's sign flip, S9's conjunction excess, S9's content
+  crossover, and M4's sign-losing |r| comparison) and are recorded in
+  place rather than smoothed. No module
   reads real data and every literature claim carried from a work order
-  is marked carried-not-verified. 197 selftest
+  is marked carried-not-verified. 273 selftest
   checks green. Stdlib only, parses under Python 3.9, phone-buildable,
   CC0.
-- `nonidentity-census/` — Work order: measure how much documented work
-  models systems **without a persistent identity-bearing unit**. Delivered
-  `WORK_ORDER.md` verbatim; `BOUNDARY.md` written before the detector and
-  parsed by it, so a decision changed after a run turns the selftest red.
-  **T1 built** (`t1_predicate_unit.py`, stdlib, 3.9, selftest PASS): claim
-  selection by an ordered verb-class rule, subject extraction, then
-  classification. **`T1-1`, the headline: the detector built to escape lexical
-  detection decides 10 of 12 of its own best case by word list** — only
-  `market`, the one unit `BOUNDARY` D2 resolves at the claim, is decided by
-  predicate, and it is decided twice from the same noun, once each way. Every
-  row reports `decided_by`, so the lexical share is a number rather than a
-  caveat. **`T1-2`:** the first null-test run scored **6 of 12** and both
-  causes were defects, not limits — `[a-z]+(?:s|ed)` matched plural nouns so
-  `firms`/`populations`/`households` were read as verbs, and head nouns were
-  taken from inside prepositional phrases; fixed to 12/12, with the first
-  number kept because it is evidence about how the instrument was built.
-  `null-harness`'s classifier returns `OK` on **both** rows, so it does not
-  discriminate a gate that is half wrong — recorded against the harness.
-  **`T1-3`:** the BOUNDARY-to-code transcription check found `state` carrying
-  two opposite calls (nation-state vs steady state) — case `021`'s sense
-  substitution inside this instrument's own vocabulary. **T2 NOT RUN**, and
-  deliberately not approximated: Crossref, OpenAlex and arXiv are all refused
-  by the environment's egress policy (403 CONNECT, timestamps in FINDINGS),
-  and a sample built from search snippets is a frame selected on
-  searchability — `UNI_126`'s failure. The aggregation path is still tested
-  against an inline fixture, and `t2_sample.py --openalex` ships labelled
-  NEVER EXECUTED, warning on stderr. **T3** has no command: it iterates over
-  T2's output. **T4** tested the candidate against all eleven existing
-  mechanisms and **filed nothing**, because its antecedent rests on the
-  unmeasured T2 rate — with the register-relevant result being that
-  **`STORAGE` is the closest fit and is refuted by the detector's own
-  output**, since a non-identity claim in ordinary English classifies fine, so
-  the medium holds the shape. The ordinal is also taken: this would be a
-  **twelfth**, not a ninth. **T5**, separate thread: the answer is not "no
-  such comparison exists" — it exists at **material effect held constant at
-  zero** (minimal-group merger experiments manipulating identity continuity),
-  which is the degenerate case, while the design at matched *non-zero*
-  material loss did not surface in five searches; the negative is weak
-  evidence for the same reason T1 exists, since "hold one term fixed, vary the
-  other" is a predicate structure and structures do not announce themselves
-  lexically. Boundary decisions are reported as a first-class result, and one
-  of them — `population` scored identity-bearing — runs against the work
-  order's own prediction and is kept because the test gives it.
-  **Second T1 instrument, supplied by the operator after the first had run:**
-  `BOUNDARY.md` D6, the **verb-first test** — *rewrite the main claim
-  verb-first; if you must supply a bearer to make it grammatical it is
-  identity-bearing, if it reads without one it is process*. An operation and
-  an observation of what the operation forces, with no noun looked up
-  anywhere, which is the actual repair to `T1-1`: **the lexically-decided
-  share goes from 10 of 12 to 0 of 12.** Built as `t1_verb_first.py`
-  (selftest PASS) with the first instrument left unedited so the two can be
-  scored against each other — `agree 9, DISAGREE 1, CONTESTED 2`. **Six
-  options, not two**, at the operator's prompting: the binary loses
-  `BOTH_READINGS` (2 of 12 — the first measure here of how often the question
-  is genuinely undecidable rather than unanswered) and `NO_FRONTING` /
-  `UNGRAMMATICAL`, which record that no observation was made rather than that
-  no bearer was needed. **Three results ran against the design.** (1) `T1-6`:
-  the prediction that disagreements would fall on the word-list rows
-  **failed** — by-table 2 of 10 do not agree, by-predicate 1 of 2 — and at
-  n=2 the data cannot test it either way, which is the finding. (2) `T1-7`: a
-  `read_on` field added after the first scored run shows only **8 of 12**
-  judgements were made on what the instrument produced (1 on the claim,
-  because the fronter read `concentrated` as a finite verb and emitted
-  non-English; 3 on the deleted subject). (3) `T1-8`, the sharpest:
-  **`VERB_CARRIES_IT` is not an option of the verb-first test** — all three of
-  its judgements read the dropped subject, because the operation deletes the
-  subject and the option is a claim about it; the option argued for hardest is
-  the one the test cannot see, and it relocates to a pre-step or a
-  conjunction rather than being deleted, with a selftest check meanwhile. The
-  morphological proxy recovers **4 of 12** (`population` and `institution`
-  both carry `-tion` and both need a bearer), so the rule is not recoverable
-  from word shape either and elicitation is the honest implementation. The
-  one D1/D6 disagreement is the niche: a slot with a state predicated on it,
-  which neither test settles. Cost of D6, stated: the discriminator is now one
-  judgement per item with no second reader — a different weakness than a word
-  list, not a smaller one.
-  **Third instrument, relayed after D6:** `BOUNDARY.md` D7, **dissolution
-  windows** — every claim has a window at which its main term stops reading
-  as a thing, so the output is a *distribution* rather than a count of
-  identity vs non-identity papers. Accepted in its first half and it is a
-  better finding than the original T2 rate: D3's table dissolves entirely
-  (every term becomes claim-level, which D2 argued only `market` was), no
-  citation API is needed, and — the part that matters most here — **the
-  discriminator comes off the reader**, since a measurement interval is
-  printed in a methods section and is not a judgement at all, which is
-  exactly D6's stated cost. **`T2-4`, the split:** the proposal names one
-  window and uses two — `W_dissolve` (when the term stops denoting a
-  persistent individuated thing; a property of the world) and `W_measure`
-  (sampling frequency, follow-up, x-axis units; a property of the study) —
-  and **two of its own three worked examples are `W_measure`** (`firm:
-  quarters` is a reporting interval, `market: the window it's priced at`
-  says so outright), so its attached requirement *"the window has to come
-  from the claim's own measurement interval"* is that conflation written as
-  a rule. **`T2-5`, the readout:** the ratio `W_measure / W_dissolve` is a
-  `reasoning-gate` G-RES pair, and `CANNOT_HAVE_SEEN_IT` says the identity
-  framing **could not have failed** at that resolution — `null-harness`
-  `CONSTANT_SILENT` at field scale, the same shape as
-  `coupling_audit/provisioning.py`'s 12.2×-too-coarse tissue; constructed
-  controls separate at ratio 20 and 0.05. **`T2-6`:** the scale-relative
-  reading (`W = W_measure` by construction) is coherent and **cannot return
-  a negative**, the `MF_020` shape, so both readings are stated and the
-  two-number one is built. **`T2-7`:** `generation` is refused as a unit
-  until a referent is named — the module's own referents span **5.82 orders
-  of magnitude** (human 25 y against *E. coli* 20 min), a figure computed
-  from the table with a selftest check after a first draft asserted "about
-  seven orders" and was wrong by more than an order — plus a window with no
-  basis is refused, `NOT_LOCATED` and `UNBOUNDED` are separate and neither
-  carries a value, and `MARGIN = 2.0` is disclosed as a stipulated constant
-  with no basis. On the seed the two reclassified examples come back
-  `UNDECIDABLE` with `W_dissolve` left `NOT_LOCATED` rather than back-filled
-  from the interval, which is the error under audit. **`T2-8`:** it removes
-  T2's bulk requirement and adds a depth one — methods sections sit behind
-  more paywalls than abstracts, not fewer — so T2 becomes hand-runnable at
-  small n and stays not runnable at the eight-field stratified scale, a scope
-  change rather than an unblocking, with the work order's stated output
-  (proportion non-identity per field) replaced and left unproduced.
-  **T6 — window declaration vs entity reading** (`t6_window_declaration.py`,
-  selftest PASS), testing whether identity claims correlate with an
-  *undeclared* measurement window, mechanism omission and not belief, with no
-  column coding intent. Two instruments supply two columns so the exit check
-  can mean something: `reading` from D6, `decided_by` carried verbatim from
-  T1's classifier (T1's `TABLE` renamed to `LEXICAL`, recorded not applied
-  silently). **`T6-1`: the null test passes** — three rows per cell, and the
-  off-diagonals that decide whether the two columns are welded are both
-  built (`YES × ENTITY` 3, `NO × PROCESS` 3), so the STOP condition does not
-  fire; `T6-2` notes neither off-diagonal needed a strained construction,
-  which is what makes the test worth running. **`T6-3`, the finding against
-  my own build:** in the null set as specified, `decided_by` needs **5 of
-  12** rows moved to make the two window arms identical — the `NO` rows
-  reused T1's fixture sentences whose head nouns are all in the D3 table and
-  the `YES` rows were typed fresh with terms that are not, so the instrument
-  column was tracking which rows were copied. A matched set with the same
-  head nouns in both window arms takes it to **0 of 12**; both ship, and the
-  as-specified set cannot deliver a readable baseline. **`T6-4`:** the first
-  association metric took the majority label per arm and **read 0.83 on a set
-  whose true association is 0**, the same failure class as `T1-2`'s `OK` at
-  6 of 12 and found the same way; replaced by a count of rows-to-move, with
-  the wrong number recorded rather than dropped. **`T6-5`:** one `UNDECIDABLE`
-  is an extraction defect — `participants who relocated` extracts `who` — and
-  the extractor is left unpatched mid-run, since patching an instrument whose
-  output is being measured changes the measurement. **`T6-6`:** `AMBIGUOUS`
-  and `UNDETERMINED` never fire, because the specified 2×2 has no cell for
-  them — `CONSTANT_SILENT` on two schema values in a work order that named
-  them terminal; printed, not repaired. **`T6-7`:** the real run has **0
-  eligible papers** and not for T2's reason — T1's items are authored
-  sentences with no methods section, so `window_declared` would be `NO` for
-  all twelve by construction, the welded-column failure arriving from the
-  sample side; the permitted `CONVENIENCE` label is declined because a
-  convenience sample still has to vary the exposure. **`T6-8`:** the exit
-  condition is therefore unevaluable on constructed data and is stated rather
-  than answered. Field is recorded per row and not adjusted for. Stdlib only,
-  parses under 3.9, CC0.
+- `handoff-provenance/` — **Marker under exploration.** The object under
+  test is the **channel between conversation and code**, not either
+  endpoint: loss across it is currently silent, because a variable
+  stated aloud and absent from the code is indistinguishable from one
+  never stated. `SPEC_V0_1.md` delivered verbatim; four stdlib modules
+  audit it. **`provenance.py`** holds six tags — `[K]` operator-stated,
+  `[K?]` operator-stated per the ledger but NOT confirmed, `[R]`
+  repo-derived with a path, `[C]` proposed and not objected to, `[A]`
+  proposed and explicitly accepted, `[X]` the downstream model's own
+  addition — with `[C]`/`[A]` separate because **silence is not
+  acceptance**, the same rule as `inverseminar/`'s `unprobed` verdict.
+  The spec's "written BEFORE the spec prose, not extracted after" is
+  **enforced rather than stated**: `seal()` freezes a ledger and `add()`
+  afterwards raises `SealError`, because a ledger extracted from
+  finished prose cannot fail. **`diff.py`** grades its own matcher
+  before trusting it — a DROPPED count from an ungraded matcher is not
+  a measurement, and `measurement-fork/` already showed a stem matcher
+  failing in opposite directions on two real corpora — and **splits
+  CARRIED**, since a matched `[K?]` is the spec's fourth failure mode
+  (mangled transcription, wrong version in both ledger and code, diff
+  reads CARRIED) which no matcher can see; the split does not detect
+  it, it refuses to count it. **`excluded_register.py`** logs
+  EXCLUDED-BY-CONSTRUCTION in one place per the spec, **importing**
+  `instrument-bias-sims/excluded_subject.py` rather than duplicating —
+  and finds that **the spec's count of three is reached by two routes
+  naming different instances**: derivation-level gives S4/S9/S10,
+  ontology-refusal gives S4/S10/S10-M4, S9 dropping out because nothing
+  filters there by design and its empty slot is a correct
+  representation rather than a refusal. Both printed; neither picked,
+  since picking would settle a question about what the category means
+  by arithmetic. **`ledgers/seed.py`, the headline it cannot
+  establish:** the spec names S4's doe-choice arm DROPPED, DROPPED
+  requires the item to have been stated upstream, and **this side of
+  the channel has no access to the conversation upstream of a delivered
+  work order** — the received S4 order contained no doe and the patch
+  said "was missing entirely", which is consistent with DROPPED and
+  equally with never-stated. So every operator-stated seed entry lands
+  `[K?]`, `drop_rate` is `None` rather than zero, and the fourth
+  failure mode is **instanced on the first real data rather than
+  avoided**. **The sixth entry broke the matcher.** `remove unused rng
+  and statistics import` matched the delivered S4 code at share
+  **1.00**, the matcher's maximum, while `import statistics` is
+  **absent** from that file — the words survive in the prose describing
+  the removal. For an entry asking that something be taken OUT,
+  presence of its stems is evidence it was DROPPED, so the matcher does
+  not mis-score a negated entry, it **inverts** it, at full confidence.
+  The entry was left unchanged and the instrument changed instead:
+  `match()` returns `matched=None` with state `NEGATED` and `diff()`
+  routes it to `UNSCORABLE_NEGATED`, out of both counts and out of the
+  rate denominator — `None` is not `False`, "the instrument cannot read
+  this entry" being a different state from "the item is absent from the
+  code". That is the repo's recurring absent-vs-known-negative repair,
+  whose running count stood at twelve, forced here by **one real ledger
+  line out of six** after all eight hand-written matcher fixtures had
+  been positive entries. The negation detector is itself graded on four
+  and four, since one that never fires restores the inversion silently,
+  and its limit is disclosed: it is a cue list, and *"the module runs
+  on two arms rather than a constant"* asks for a removal, carries no
+  cue, and is scored as positive. Not measured, per the spec's own
+  OPEN: no baseline drop rate (zero confirmed `[K]`, so no
+  denominator — the first several runs ARE the baseline), no
+  measurement of whether tagging changes the rate, `ADDED` supplied by
+  the caller rather than detected (so the `[X]` column is only as
+  complete as whoever filled it in, and attribution creep is precisely
+  the case where they did not), and the seed ledger written after the
+  code existed, which is the ordering rule backwards. Confidence a
+  separate unresolved readout on every module. **v0.2 added [K~] and the
+  RE-READ column, and both landed on structure rather than vocabulary.**
+  [K~] -- operator-stated, translation flagged lossy AT TIME OF SPEAKING,
+  shape present and English suspect -- split two axes one constant had
+  been answering at once: STATED ([K] [K~]), the population the channel
+  loses things from, and MATCHER_SCORABLE ([K]), what the matcher can be
+  trusted on. For [K] and [K?] those move together, so the conflation
+  never showed. A [K~] that fails to match cannot be read as DROPPED,
+  since bad English missing code that DOES implement the shape is a live
+  alternative, so it is refused and stays inside n_stated because it WAS
+  said; **the gap between the two denominators is the translation
+  layer's footprint** and it stays a count. The cost is printed with no
+  defence offered: flagging liberally shrinks n_scorable until the rate
+  runs over nothing, which reads exactly like a clean channel. The
+  RE-READ column takes two entries that are never summed -- **SHIFT**
+  (item reads differently; the observing position moved; data about the
+  station; leaves a prior diff STALE_NOT_WRONG) and **RETRANS** (item
+  reads the same, the English was wrong first time; data about the
+  translation layer; leaves a prior verdict POSSIBLY_FALSE_CARRIED).
+  Both produce ONE observable -- the line changed -- and the
+  discriminator is whether the SHAPE moved, which is upstream, so
+  `reread()` requires operator attribution, refuses to infer the kind,
+  refuses an unchanged re-read as a confirmation rather than an event,
+  and cannot check the attribution it was handed. RETRANS is the only
+  route by which the spec's fourth failure mode ever surfaces here, and
+  it surfaces as a **lower bound**: only what the operator re-read and
+  caught. A RETRANS does NOT promote [K~] to [K] without an explicit
+  still_lossy=False, because the tempting default reads silence as
+  acceptance -- the rule the [C]/[A] split exists to enforce, applied to
+  the module itself. **`ledgers/spec_v0_2.py` is the first ledger here
+  written before its implementation and committed ahead of it**, git
+  history standing as evidence an outside reader can falsify where the
+  seal cannot; its eleven in-session entries are the folder's first
+  honest [K]. **The first reportable drop rate this module ever produced
+  was 0.09 and it was wrong.** The single DROPPED -- "[K~] is a tag,
+  added to the existing tag set" -- is plainly carried, and was scored
+  on `added` and `existing` alone because `tag` and `set` are three
+  letters against a four-character floor: share 0.50 versus a 0.55
+  threshold, a false DROPPED by two hundredths, over the ten-entry
+  reportability floor. `coverage()` and a MIN_COVERAGE majority line now
+  refuse an entry the floor guts, set on principle rather than at the
+  value rescuing the line that exposed it, fixture grade unchanged, and
+  **disclosed as an instrument changed after seeing the result**, with
+  both numbers printed. It does not fix the blindness: an entry losing
+  one content word of four is still scored, so "the doe performs partner
+  selection" loses only `doe` and **the spec's flagship instance is a
+  doe-choice arm the matcher cannot see the token of** -- as with any
+  three-letter subject. The 0.09 run then stopped reproducing once the
+  report was written, exposing a larger defect: **matched against raw
+  source, a ledger entry scores against prose repeating it, so a
+  docstring can earn a CARRIED** with nothing implemented, hardest where
+  ledger and code came from one party in one pass.
+  `implementation_surface()` strips docstrings, comments and the
+  disclosure functions while keeping string literals in expressions --
+  a gloss table mapping SHIFT to "the station" IS the implementation of
+  that sentence, a docstring saying it is not. On the stripped surface
+  v0.2 reads 0.00 over ten and the seed verdicts are unchanged, checked
+  rather than assumed, so nothing it carried was earned by prose; the
+  number is still an upper bound on carriage, because a self-diff scores
+  code written to satisfy the ledger. Zero [K~] and zero re-reads on the
+  seed ledger is NOT_YET_OBSERVED, not zero. 138 selftest
+  checks green. Stdlib only, parses under Python 3.9, phone-buildable, CC0.
+- `operator-structure-echo/` — **Marker under exploration.**
+  `SPEC_ECHO.md` delivered verbatim. The observation: instruments built
+  in this ecosystem recur to the same structural shape the operator uses
+  to process the domain by hand — **not a defect claim, not a discipline
+  failure, a property of a single-builder instrument that cannot be
+  removed by effort, only counted.** Built standalone rather than folded
+  into `handoff-provenance/` (the spec left the choice open) on three
+  grounds: that folder scopes itself to the channel between conversation
+  and code while this is the channel between builder and instrument; the
+  register is repo-wide at one row per module; and `handoff-provenance/`
+  is itself one of the rows, so nesting would put the register inside its
+  own subject population. One `git mv` reverses it.
+  **`echo_register.py`** obeys the instruction — *do not correct, log* —
+  keeping the delivered question per module: does this shape match a
+  procedure the operator already runs unaided, YES / NO / UNEXAMINED. The
+  module list is read off the filesystem rather than hardcoded, since
+  this repo has already had one partial copy of its own index go stale,
+  and `mark()` refuses a row outside the tree. **Only the operator can
+  fill it, enforced rather than stated:** `mark()` refuses a YES or NO
+  without operator attribution, because the downstream model cannot
+  answer a question about someone else's unaided procedure and a register
+  it could fill itself would be a register of its guesses. **UNEXAMINED
+  is not NO** — the load-bearing line in both modules, since the default
+  is UNEXAMINED everywhere and folding it into NO makes every module read
+  independent, the shared generator vanish, and the readout invert while
+  looking unchanged. **Two kinds, because the delivered list holds two**
+  and the spec separates them itself: OMISSION (the instrument missing a
+  case, the case the operator's own frame omits) and REPRODUCTION (the
+  instrument reproducing the operator's processing structure in a domain
+  not intended to be modelled), the latter being what the spec says
+  raises this from a per-repo note to a subject. A YES without a kind is
+  refused. **The three delivered instances are not three independent
+  observations, and this is checked by importing
+  `instrument-bias-sims/excluded_subject.py` rather than restating it:**
+  s4's missing doe is already logged there as S4, allocation_coupling's
+  missing untenured continuous observer as S10, and only the allocation
+  ledger's cost accounting — the REPRODUCTION one — is new. **The split
+  lands exactly on the kind**, which the spec asserted and this checks
+  mechanically. All three also sit inside `instrument-bias-sims`, one row
+  in a per-module register, so the count of three is a count of two kinds
+  across one module spanning two registers — two registers agreeing about
+  S4 is one observation counted twice, which is the spec's own inherited-
+  agreement concern arriving inside the register built to track it. That
+  module is also the one audited hardest here, so **the instance list is
+  a map of where someone looked.** The base rate is **REFUSED on a
+  selection effect, not for want of n**: every examined row is there
+  because someone noticed an echo, and noticing one is the same act as
+  finding one, so three YES of three examined is what that selection
+  produces whether the true rate is nine in ten or three in a hundred —
+  only examining modules chosen *before* looking would fix it.
+  **`corroboration.py`** makes the spec's consequence runnable on pairs
+  and returns a state, never a number: INHERITED (both YES, agreement
+  expected from the shared generator), MIXED, INDEPENDENT (both NO as far
+  as examined), UNKNOWN (either UNEXAMINED — not independent, not
+  inherited). No discount factor, because a numeric weight needs the
+  refused base rate and would be it laundered through arithmetic.
+  **Read correctly the live register gives ZERO pairs established
+  independent of 2556; folding UNEXAMINED into NO gives 2485 from
+  identical data** — one module carries a verdict and every other row is
+  UNEXAMINED, so zero is the register reporting that the work has not
+  been done, not a finding about modules, and the inversion needs no bad
+  faith and leaves no trace in the result. **What a YES costs is the
+  independence of two readings, not the correctness of either:** an
+  instrument matching its builder's manual procedure may be matching it
+  because the procedure is right, and separability from ordinary domain
+  expertise is left open per the spec — from a pair table, "echoed the
+  procedure" and "was simply correct" are the same row. Also left open
+  and disclosed: no method for detecting this from inside, and this
+  module is inside; the register is per module while instances are per
+  file, so three collapse into one row and a module with one echo and one
+  with twelve are the same YES; and **this module has its own row, and it
+  is UNEXAMINED** — a register of single-builder echoes built by the same
+  single builder is subject to its own subject. Samples are a snapshot of
+  the tree, by design, and repin when folders are added. 42 selftest
+  checks green. Stdlib only, parses under Python 3.9, phone-buildable, CC0.
+- `scope-bound-shapes/` — **Marker under exploration.**
+  `SPEC_SHAPES.md` delivered verbatim. A SHAPE is a structural sequence
+  recurring across domains, defined by its sequence and its selection
+  rule and **not by its materials**; a SCOPE BINDING is that shape
+  instantiated with a declared FROZEN list; scoping out releases entries
+  from FROZEN and **is not a model swap**; and domain names are scope
+  bindings that acquired names rather than different subjects.
+  **The CONSTRAINT forces a third state.** FROZEN entries are declared by
+  the builder and never inferred, since an inferred list would be the
+  tool asserting scope it did not measure — take that seriously and a
+  variable is LIVE, FROZEN, or **UNDECLARED**, and the delivered worked
+  example has two of the third kind: `aggregate` and `moisture gradient`
+  are in neither list for metamorphic_rock. The arithmetic to remove the
+  state is two lines (`frozen := universe − live`), completes the table,
+  and is exactly the forbidden inference, so `infer_frozen()` exists
+  **only to refuse** and prints what it would have returned, making the
+  refusal inspectable rather than asserted. UNDECLARED is not FROZEN: one
+  is a claim the builder made, the other a claim nobody made.
+  **The worked example collides totally, in both directions.**
+  `compare()` returns SCOPE_COLLISION on five variables: all four of
+  slab_concrete's frozen entries (T range, chemistry, creep, lithostatic
+  load) are live in metamorphic_rock, and metamorphic_rock's single
+  frozen entry (cure age) is live in slab_concrete — **4 of 4 and 1 of
+  1**, so there is nothing the two bindings both hold still, and
+  `restraint` is the only variable live in both, the entire overlap. The
+  spec's consequence therefore applies at full strength: two modules
+  claiming this shape at these bindings are not corroborating each other.
+  Recorded as a statement about what agreement is worth, **not** as a
+  contradiction or a defect — bindings that collide hold different things
+  still, which is coverage rather than confirmation, and the module
+  reports without grading. **"No collision" is never "corroborates":**
+  `compare()` returns corroborate=False on a collision and None
+  otherwise, never True. **Scoping out demonstrates the constraint
+  biting:** releasing every declared FROZEN entry on both sides drives
+  collisions 5 → 1 → 0 with the shape and selection rule unchanged, and
+  still does not reach COMPATIBLE, because the two UNDECLARED variables
+  never resolve and only the builder can declare them.
+  **`markers.py`** carries the four-column table with the spec's rule —
+  stability without bindings_tested is not a claim — enforced in **two**
+  places rather than stated once: `set_stability()` guards the write and
+  `row()` guards the read, so a value written straight past the first
+  guard is still refused on its way to a reader. `MIN_BINDINGS_FOR_
+  STABILITY` is 2, on the reasoning that one binding is where a marker
+  was found rather than where it was tested. **Every delivered row is
+  UNTESTED** — four markers, zero stability claims, zero bindings tested
+  — because the material gives a shape, a rule and two bindings and no
+  test record, and **zero known exceptions beside zero bindings reads
+  NOT_LOOKED, never NONE_FOUND**, with an explicit state on every row so
+  the distinction never rests on an empty list. Disclosed: the shape is
+  taken on the spec's word, so if it is wrong every collision here is
+  between bindings of a shape that does not exist; the markers are
+  derived from the shape's own sequence and rule, the only source
+  available and **also circular**, since a marker restating a step cannot
+  fail when the shape holds; the two-binding floor is arbitrary and worse
+  — the only two bindings delivered collide totally, so even a
+  floor-clearing claim would sit on a non-corroborating pair; the double
+  guard checks that the columns move together, not that the bindings were
+  really tested; and `compare()` is pairwise, so nothing here says what a
+  shape with nine bindings looks like. 48 selftest checks green. Stdlib
+  only, parses under Python 3.9, phone-buildable, CC0.
+- `term-drift-citation/` — **Marker under exploration.**
+  `SPEC_CITATION.md` delivered verbatim and also placed in `PREAMBLE.md`.
+  A citation carries a measurement forward under a word and is valid only
+  if the word's referent held between measurement and use, which nothing
+  in a citation records. Three questions — the referent at time of
+  measurement, what was load-bearing in it, whether that element is
+  present now. **The module's real work is holding three things apart
+  that a single score would merge:** the transfer verdict, an
+  `original_result` field permanently reading NOT_ASSESSED_HERE because
+  nothing here measures the original, and a retest state whose values are
+  RETESTED / NOT_RETESTED / **NOT_INSTANTIABLE** with REFUTED absent from
+  the set. **DOES_NOT_TRANSFER is not REFUTED** — the result may be
+  correct and still not attach — and **absence of retest is not
+  refutation**, with Holling NOT_INSTANTIABLE because testing it needs a
+  system with slack and where slack was optimised away there is no retest
+  for the absence to be an absence of. All three delivered cases return
+  DOES_NOT_TRANSFER and **the module could not have returned anything
+  else**, since each arrived with its status already naming the removal:
+  the verdict is the input restated in a type, and there is no negative
+  control, every worked example having drifted. **The safety case is run
+  rather than restated:** "frozen variables do not stop existing; they
+  stop being read, metric can improve while facility degrades" is
+  arithmetic, and one facility with five of six variables dropped from
+  scope gives a narrow metric climbing **+0.250 to a perfect 1.000 while
+  the whole facility falls −0.125** — the narrow metric is not wrong, it
+  is correct about what it reads. Stipulated, with the decay rate chosen
+  for legibility: the mechanism is available, not observed.
+  **A term collision inside the operator's own two specs is surfaced and
+  not reconciled:** SPEC_SHAPES.md says FROZEN entries are declared by
+  the builder and never inferred, SPEC_CITATION.md says frozen variables
+  stop being read, and the safety case's unread variables were declared
+  by nobody — so under the first spec they are UNDECLARED and calling
+  them FROZEN is the inference it forbids. Three readings printed
+  (UNDECLARED, ASSUMED_FROZEN, SAME_WORD_LOOSELY) and **none picked**,
+  since which holds is a question about what was meant and PREAMBLE.md's
+  own TERM COLLISION rule is that senses get named, not merged.
+  **`asymmetry.py` tallies the spec's asymmetry test and it does not
+  flatter this session.** Two populations counted apart, because revising
+  your own work in progress and revising a predecessor's are different
+  objects and only the second is what the test is of: **four
+  self-revisions, three COST and one CONTESTED, none free** — the NEGATED
+  state removed a CARRIED scoring at the matcher's maximum,
+  implementation_surface() made carrying harder to earn, the
+  word-boundary fix shrank this work's own finding count from eight to
+  three. **The one predecessor revision cost nothing:** the N-body figure
+  in SCALING_CLASSES marked CONSTRUCTION_FITTED against the source, framed
+  as *the source was deficient*, when the correct reading was
+  DIFFERENT_OBJECT — the term was printed in the source label and lost in
+  transfer — costing the reviser nothing until an outside party caught
+  it, **and the outside party was the operator**. That is the asymmetry
+  the spec describes with this session on the wrong side. **And n=1
+  establishes nothing:** "never costs" is falsified by one counterexample
+  and confirmed by no number of non-counterexamples, so ROUTING_RULE
+  describes one revision rather than a practice. The ledger is
+  **self-assessed by the party it is about** — a reviser wanting to look
+  even-handed would produce this same ledger — with a commit on every row
+  as the only check, and the sampling biased toward rows that got caught,
+  since the FREE row is here because the operator objected and a free
+  revision nobody objected to would leave nothing to log.
+  **A word is not a measurement, and the module does not decide which
+  words are:** quantity, sign and formal-definition default to UNASSESSED
+  and `carries_a_measurement()` refuses rather than guessing, holding even
+  where the delivered text arguably supplies the answer — Holling's
+  "magnitude of disturbance absorbable before state shift" reads like a
+  quantity with a sign, and filling the field from it would be this
+  module deciding what counts as a formal definition in ecology.
+  UNASSESSED is not "no", and it is still not loadable. 50 selftest
+  checks green. Stdlib only, parses under Python 3.9, phone-buildable, CC0.
+- `stop-authority/` — **Marker under exploration.**
+  `SPEC_STOP_AUTHORITY.md` delivered verbatim. "Stop work authority
+  exists" is evidenced by policy text and stop COUNT, both unsigned, and
+  a count of zero is consistent with two opposite states: **A**, no
+  condition warranted a stop, and **B**, the authority is not honored so
+  none were attempted — with non-use under B *produced by* the
+  hollowness and reading as safety. **The module does not flip the
+  error:** treating zero as evidence of B would be the published mistake
+  pointing the other way, so every readout returns INDISTINGUISHABLE
+  where the record cannot separate them, and the work is identifying
+  which extra number would. **The count is not weak evidence, it is
+  ordered against the thing it measures:** A and B both publish zero,
+  and C — hollow, with stops attempted and refused four times in five —
+  publishes the **highest** count of the three, so the facility
+  demonstrably not binding looks like the healthiest. **Exactly one
+  field separates A from B at zero attempts.** The honor ratio is
+  UNDEFINED_NO_ATTEMPTS in both (0/0 is not 1.0 and not 0.0) and the
+  attempt count is zero in both; only `warranted_in_review` differs.
+  That makes the spec's "denominator the other two are missing" exact —
+  **the two numbers that look like the authority measurement go blind
+  first, and blind precisely in the state that most needs measuring**,
+  leaving only the number determined outside the mechanism by
+  post-incident review. **`suppression_run()` shows the measurement
+  eating its own denominator:** with hazard held constant at three
+  warranted states per step and an honor rate of 0.15, attempts fall
+  3→2→1→1→1→0 and stay silent from t=6, after which the ratio has no
+  denominator permanently — **30 warranted-and-available prior states
+  producing 0 published stops with the hazard rate never moving**, and
+  a stop count that stops rising, which under the count-alone reading is
+  the record improving. Stipulated: the learning rule was chosen and
+  0.15 picked for legibility, so the loop is arithmetically available
+  rather than observed. **`binding.py`** takes the structural question —
+  authority is defined by what it can bind, not who holds it — across
+  three axes: highest level bound, reversal record, and whether the
+  holder reports to a party whose objectives the stop can cost.
+  **FUNCTIONING is not a value the module returns**, there being no such
+  field on the summary by construction: an untested authority is
+  UNTESTED_ABOVE, a tested one has a binding record to read, and
+  collapsing both into one flag is the move the instrument exists to
+  refuse. **No reversal recorded is not no reversal** — with zero stops
+  the record reads NOT_LOOKED, and NONE_FOUND beside real stops is a
+  different fact, distinguished by the count and never by the emptiness
+  of the list. **On distribution the module records and does not
+  grade:** authority in everyone has no named position holding it and
+  nobody to be reversed against, both recorded, with no
+  expansion-or-contraction verdict because the spec says MAY — and the
+  cost of that refusal is stated rather than hidden. **The documented
+  case returns a measurement on zero axes.** Ten years, no stop
+  recalled, evidence offered being that workers had CONVERSATIONS about
+  safety: no stop executed so nothing bound and no reversal record;
+  authority in everyone so no named holder and nobody to reverse
+  against; conflict UNASSESSED; no review denominator so the count is
+  INDISTINGUISHABLE. Published as working with every axis empty. A
+  conversation is not a stop attempted, not a stop honored and not a
+  reviewed warranted state — offering it as evidence of function
+  substitutes an activity for a measurement — and **the instrument still
+  does not say the authority was hollow**, only that the published claim
+  rested on nothing it could read. Disclosed: nothing here measures a
+  facility, two of three binding rows being stipulated;
+  warranted-in-review is itself an after-the-fact judgement possibly by
+  the parties a stop would have cost, and a review run by the party a
+  stop binds against is the same structure one level up;
+  UNTESTED_ABOVE compares two declared levels, so the ordering is real
+  and the placement in it is a declaration; and the folder's agreement
+  with `extraction-blindness-sim/` — same reading error, extra loop,
+  since there the sensor fails to see the damage while here the
+  hollowness causes the silence — is INHERITED by
+  `operator-structure-echo/corroboration.py`, not found.
+  **`SPEC_ADDENDUM.md` adds a witnessed transition-period case and five
+  open items.** A late reorganisation from distributed-function to
+  CEO-led structure; pressure to run subpar material; QC reading it out
+  of spec; stated rationale *ship it, and returns will identify the
+  problems*; the floor refused and the refusal held.
+  **`relocation.py`: nobody argued the inspectors were wrong.** The
+  measurement point moved from pre-shipment inspection to post-shipment
+  return and the upstream reading — still correct — was made non-binding,
+  so `upstream_status()` returns NOT_DISPROVEN_MADE_NONBINDING, never
+  REFUTED and never SUPERSEDED; a reading that still holds and no longer
+  binds is the shape of the case. Same material, same threshold,
+  **opposite decisions**: pre-shipment 0.072 REFUSE, post-shipment 0.016
+  SHIP, the proxy understating by **4.55×** as a product of three
+  unobserved terms (manifests × noticed × returned = 0.198). **The
+  missing denominator is not an error bar** — 480 defective units over
+  six periods, 48 returned, **385 silent**, 80% producing no record
+  anywhere, and 240 defective units shipping before the lag elapses and
+  any signal exists. The module explicitly does NOT claim returns detect
+  nothing: `can_the_proxy_carry_the_decision()` keeps *does it detect
+  anything* (yes, and the budget office's rationale is not false) apart
+  from *can it carry this decision* (no), answering only the second.
+  **`pressure_record.py`: documented pressure is zero on both sides of
+  the peak and the two zeros mean opposite things.** Before, the decision
+  sat with the function so nothing needed pressing; after, if refusal no
+  longer holds nothing requires pressure, so the negotiation never
+  happens and is never recorded — identical observable, opposite states,
+  counts 0/1/0, non-monotonic, with the crossing the only period
+  producing an observation and a later-period survey reading zero as
+  improvement. Recorded as **one finding with the stop count, not two**,
+  since both are the observable running non-monotonic in the thing it is
+  read as measuring, by one builder in one repo. A pressure event
+  establishes cleanly that a boundary existed to press against, and
+  `held_afterwards` is **None, not False**. **All five open items are
+  carried and none closed.** Item 5 ships a harness and no survey: the
+  spec's "if none do, that absence is itself the finding" would hold, but
+  establishing it needs published programs this side cannot read, so the
+  registry carries the one available row (executions reported, attempts
+  not) at state NOT_RUN — ABSENT being a different state and unavailable
+  — with `ProgramRecord` refusing a row whose reporting was never
+  examined, since None is not False. Item 3 is CANNOT_DISCRIMINATE: the
+  test is one facility with both axes recorded, and three cases from
+  three facilities with one axis each are consistent with one move and
+  with two. Item 4 may not be solvable as stated, every proposed
+  collection mechanism requiring the reviewing party to admit the count
+  matters — the same authority question one level up, since the party who
+  would collect the denominator is the party a stop binds against.
+  Disclosed: **n=1, and three modules now rest on that one account**,
+  which is not three observations; and the relocation's lag and survival
+  fractions are this module's construction, chosen to land the proxy
+  under the line. 96 selftest checks green. Stdlib only, parses under
+  Python 3.9, phone-buildable, CC0.
+- `condition-scoped-authority/` — **Marker under exploration.**
+  `SPEC_CONDITION_SCOPE.md` delivered verbatim; companion to
+  `stop-authority/`. Authority is held by a position **for a class of
+  condition**, and the claim that a single ranking cannot represent
+  scope is **checkable rather than arguable**: a total order either
+  reproduces a condition-scoped table or it does not, so `rank_search()`
+  enumerates EVERY total order and scores each — a complete search at
+  these sizes, not a sample. On the delivered protective-detail
+  partition, **both of the two possible orders fail**: principal-on-top
+  misses one class of five, bodyguard-on-top misses four, zero exact
+  matches, verdict NO_RANK_REPRESENTS_IT. **And the best ranking fails
+  exactly where the stakes are** — 4 of 5 classes correct reads as 80%
+  accuracy, and the one class missed is the live threat, where the spec
+  says the specialist holds total authority including physical force
+  against the principal's stated preference; averaging over
+  non-interchangeable classes is the same move as scoring a facility on
+  the variables still read. **Adding scoped domains makes a rank fit
+  worse:** a third scoped position (marked an extension, not delivered)
+  gives all six orders checked, still zero exact, best wrong on two
+  classes — every domain with its own reading capacity is another class
+  the ranking must miss, so the representation degrades with the thing
+  that makes the structure work. **Rank does not invert**, so `holds()`
+  returns DECIDES or NOT_IN_DOMAIN and never a smaller quantity of the
+  same thing; `Partition` refuses a table where one position holds every
+  class (a ranking written as a table) and one where a position holds
+  none (not a party to the arrangement), enforcing the spec's symmetry
+  structurally while being unable to check whether the assigned domains
+  match where reading capacity actually sits. `collapsed_claim()` writes
+  out what a rank-only structure states silently — *principal holds the
+  reading capacity for all 5 condition classes simultaneously* — and
+  names the overclaim. **BOUND vs ADVISORY: the offered evidence
+  discriminates nothing.** Applying the stated criterion (an item
+  discriminates only if it would be FALSE under advisory), all three EHS
+  indicators — visibility, a seat at executive meetings, influence on
+  strategy — are true of an advisor, so **3 offered, 0 discriminating**:
+  not weak evidence for BOUND but indicators that do not vary between
+  the cases, making a high-scoring configuration unmeasured rather than
+  strong. What would discriminate is named beside them, with the note
+  that an ABSENT reversal record is not it (see
+  `stop-authority/binding.py`, where empty beside zero findings reads
+  NOT_LOOKED). `AuthorityClaim` refuses to measure an UNSTATED claim
+  rather than defaulting the sign. **`organ.py`** takes the organ error:
+  `Body` refuses a coordinator whose sense channels are a superset of
+  the others' (a hierarchy in anatomy vocabulary) or that has no channel
+  of its own. **Failure 1, reassignment by decree, produces
+  NON_FUNCTIONING and not degraded** — the reassigned task outputs
+  exactly 0.0 with state CANNOT_SENSE_THE_INPUT, there being no partial
+  reading of an undetectable input for a degradation to start from — and
+  **the aggregate is itself the degradation illusion**, capacity 0.67
+  presenting as a 33% shortfall when degraded and non-functioning differ
+  in whether a required channel is absent, a property of the worst task
+  and precisely what a mean removes. **The decree cannot observe its own
+  consequence:** the coordinator's task is untouched, so
+  `observable_at_the_decree` is False — the failure sits in a channel
+  the coordinator does not have, which is why the task looked
+  reassignable. **Failure 2: the coordinator's score does not move at
+  all** between a healthy body (system 1.00, coordinator 1.00) and a
+  broken one (system 0.67, coordinator 1.00), so reporting it as system
+  capacity gives not a biased estimate but a number with **zero
+  sensitivity** — a measurement that cannot fail, which is what makes it
+  attractive. Recorded as the **third instance of one shape and not
+  three findings** (narrow safety metric, stop count, coordinator
+  score), INHERITED per `operator-structure-echo/corroboration.py`.
+  Carried and not tested: the partition is taken on the spec's word, so
+  if it is wrong the search is a complete proof about a table nobody
+  should have written; and the spec's link to the centralized-executive
+  prior in consciousness and intelligence rubrics — *org chart and
+  measurement instrument, one shape* — is carried with no rubric corpus
+  to test it against. Open work carried and not closed: no method for
+  restoring scope-partition to a structure collapsed to rank; whether
+  BOUND survives outside regulated domains is **NOT_SEARCHED**, zero
+  unregulated instances being the size of the search rather than of the
+  population; and the spec's conditional finding is well-formed with an
+  unestablished antecedent, so the consequent is not available. 55
+  selftest checks green. Stdlib only, parses under Python 3.9,
+  phone-buildable, CC0.
+- `predicate-difference/` — **Marker under exploration.**
+  `SPEC_METHOD.md` delivered verbatim; `FINDINGS.md` is the deliverable.
+  The method: hold a work domain constant for a corpus decade, extract
+  every predicate attaching to the subject class doing that work and to
+  the reference class doing the same work, and take the **set
+  difference** — at a rate the corpus size can support. **That last
+  clause is the whole instrument.** A set difference is trivial and
+  almost always wrong, because "never appears for the other class" is a
+  claim about an absence, and an absence is a measurement only when the
+  sample was large enough for the thing to have shown up; with a thin
+  reference sample the difference returns the subject class's entire
+  vocabulary. `support()` computes the count the predicate WOULD have had
+  in the reference class at the subject's own rate and refuses below
+  MIN_EXPECTED, returning **NOT_ENOUGH_TEXT** — a distinct state from
+  ABSENT, never folded into it, the repo's recurring repair arriving at
+  the denominator of a set difference. Demonstrated on two fixtures
+  carrying the **same real difference**: with a 20 000-token reference
+  the instrument reports 3 markers, with a 300-token reference it reports
+  **0 markers and 2 NOT_ENOUGH_TEXT**, where a plain set subtraction
+  reports the same three for both. MIN_EXPECTED 3.0 and MIN_OBSERVED 5
+  are chosen floors, printed beside every readout, and the result moves
+  with them. **Valence is not switched off, it is absent:** no valence
+  field, argument or attribute, with `check_no_valence()` walking the
+  module's own AST over identifiers — not strings, so the word can appear
+  in prose explaining its absence without satisfying its own check — and
+  failing the selftest if a channel appears. Disclosed limit: that
+  prevents a valence *field*, not valence, since a taxonomy whose
+  category names carry the judgement passes untouched, and a contempt
+  taxonomy is where that is tempting. **`shape_index.py`** runs the
+  four-class extension — women, enslaved and formerly enslaved people,
+  ethnic groups typed as lower, disabled people — in a format **inferred**
+  from `scope-bound-shapes/` (a shape defined by its structure and not its
+  materials, which fits same-shape-different-vocabulary closely) and
+  flagged as an inference, deliberately not importing that module's
+  Binding, since forcing a predicate shape into a LIVE/FROZEN variable
+  list would fit the object to the nearest available class. **Disjoint
+  vocabulary is treated as a requirement, not an incidental:** FX_1 and
+  FX_2 are both present in all four classes and differ only in whether one
+  word is shared, so a test that counts bindings returns four-of-four for
+  both — and shared words are consistent with the four literatures being
+  one, the hypothesis the extension exists to rule out. Hence
+  STRUCTURAL_SIGNATURE only on disjoint vocabulary, SHARED_VOCABULARY
+  otherwise, and **full presence with shared vocabulary is weaker than
+  partial presence with disjoint vocabulary**. A class never checked is
+  reported separately from a class found empty. **No corpus is acquired:**
+  all four delivered targets (Freud, period psychology and medicine,
+  household management texts, labor economics of the era) are
+  NOT_ACQUIRED, every readout over real classes is NOT_RUN, and the shape
+  index holds zero shapes — **empty being the size of the work done, not a
+  finding that no shape recurs**. Naming the shapes from here would be
+  easy and would be the module writing the finding then confirming it
+  against its own fixtures. Both instruments are graded on synthetic
+  fixtures marked as such before use. Open and needing the operator: the
+  shape-index format is a guess, and **no reference class is settled** —
+  the difference needs one per comparison, the four classes as delivered
+  are not defined against a stated reference, and they overlap. 50
+  selftest checks green. Stdlib only, parses under Python 3.9,
+  phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
@@ -4934,102 +5209,10 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     repo noticing. The checker identifies itself by content, not by path —
     a path-based skip breaks the one case it exists for, scanning a tree
     that contains a copy of the tool.
-  - `known_answer.py` — **no metric ships without a known-answer run.**
-    A standing step rather than a habit, earned from two instances in this
-    tree where a metric was wrong in a way reading it would not have caught
-    and a fixed-in-advance case did: `null-harness`'s `_verdict` returning
-    `OK` for a gate at TP=0.5 and one at TP=1.0 alike, and
-    `nonidentity-census`'s first association metric reading 0.83 on a set
-    whose two arms are identical by construction. The registry refuses a
-    metric with no cases, a case with no stated basis for its expected
-    value, and **a case set whose expected values are all equal** — such a
-    set cannot detect a constant metric, which is the failure both seeds
-    are instances of. That third rule refused the first draft of its own
-    seed before any metric was tested. Two seeded cases FAIL today and are
-    **pinned**, so a repair turns the test red and forces the note to be
-    corrected; `null_harness.py` imports numpy at module scope and numpy is
-    absent here, so `_verdict` is extracted by source text from the current
-    file, refused if the extract contains an import, and recorded `NOT_RUN`
-    with a reason if extraction fails. On its first run it also caught a
-    transposed number in the *record* of one of the two errors — the same
-    operation one level up. It does **not** find metrics: coverage is a
-    hand-kept manifest in `tests/test_known_answer_gate.py`, because
-    deciding whether a function is a metric is not a lexical property of
-    its name and a repo-wide scan would be `nonidentity-census` T1-1's
-    word-list failure one level up. The manifest is the weak point and the
-    test says so; enforcement is at test time, not at the callsite.
   - `substrate_substitution_toolkit.py` — richer programmatic
     surface: seven categories from harsh (`pure_consumer`, the null
     hypothesis) to gentle (`mutualistic_scale`), each with multiple
     ecological pairs and a balanced-view walkthrough.
-- `search-substitution/` — Three organisms that produce an answer without
-  searching for it, priced against the search they do not perform. Physarum
-  occupies the whole arena at once and prunes by throughput, so its cost
-  expression carries no terminal-count term where the exact Steiner DP
-  carries 3^k (1.5×10^17 at Tero 2010's 36 sources). A corvid stores cache
-  locations in advance, which is a **transfer and not a saving** — the
-  storage is paid across the whole interval, for caches never recovered, by
-  an animal that cannot know in advance which those are. A platypus reads
-  range from the offset between electrical and pressure arrivals (~68 µs at
-  100 mm in fresh water), with no intermediate map. The three are kept apart
-  because they substitute different resources — area-seconds, stored bits,
-  one multiplication — and a single efficiency story covering all three
-  would be describing the observer's surprise rather than the biology.
-  Reproduces the crossover arithmetic against Lloyd's 10^120 ceiling (2^k at
-  399, 3^k at 252, N^2 at 10^60, N^3 at 10^40) so the biology reads against
-  it, and no organism here sits anywhere near those lines — the lines belong
-  to methods. **Three figures are stipulations, not measurements** (64 bits
-  per cache, the arena dimensions, the site count) and `AUDIT_NOTES.md` says
-  so rather than letting them be quoted. The platypus case is flagged as the
-  weakest: range-from-offset is Pettigrew's proposal, and "no intermediate
-  representation" is a claim about an absence the cited work did not
-  measure. Species conflation in the source material is undone — the
-  cache-volume, what-where-when and observer-tracking results come from
-  *Nucifraga columbiana*, *Aphelocoma californica* and *Corvus corax*
-  respectively, three species in two genera, no result obtained in the same
-  animal. The organising cut: an exponential in a formalism reports on the
-  formalism, and its provenance is worth asking before its difficulty is.
-  Eight claims `C1..C8`, `C1` resting on the model rather than an
-  observation because the terminal-count sweep that would settle it is
-  absent from the cited literature. Stdlib only, selftest 23/23, CC0.
-- `qrng-pair-search/` — Candidate axes for two-source joint keying where the
-  unit of search is `(source, bath_set)` and not `(source, name)`: two sources
-  coupled to different baths beats two sources with different names. This is
-  `category-weld/` run backwards — a weld fuses quantities independent in the
-  world into one handle, and here the shared bath is the welder, so the same
-  instrument that exposes an assumed independence is used to establish a
-  needed one. **Three corrections to the delivered table, all load-bearing.**
-  (1) A bath set assigned to the SOURCE does not price the fielded LEG: alpha
-  decay really is insensitive to substrate temperature and rail drift, but the
-  detector is not — PIN leakage roughly doubles every 7 °C and a PMT or Geiger
-  tube needs an HV rail — so `decay_alpha × rtd_tunnel → CLEAN, overlap {}` is
-  **false as fielded**, and under source-plus-readout accounting *no*
-  admissible pair is clean; all ten weld at TH/PWR/EM. The drop stated that
-  failure mode ("same board, same temperature, same power rail") and then
-  produced a table exempting `decay_alpha` from exactly those baths — the same
-  shape as `simulation-hypothesis-budget/`'s `LABEL_TRUNCATED_IN_TRANSFER`, a
-  term present upstream and dropped downstream. (2) "The correlation rule is
-  where you can hide the actual entropy" is **security through obscurity**;
-  the rule is an algorithm and Kerckhoffs prices it public. What the structure
-  actually buys is stronger than what it was credited with: a two-source
-  extractor needs no seed and no secrecy, only independence — the measurable
-  thing. (3) **Min-entropy, not Shannon** — correlated drift halves the
-  min-entropy of a pair whose average is barely dented. Replaces the two-state
-  clean/welded verdict with three: `structural weld` (sources share a bath,
-  irreducible — shared pump laser), `separable` (sources share nothing, legs
-  weld through their readouts, removable by engineering that must then be
-  MEASURED), `clean` (no pair reaches it). Seven of ten admissible pairs are
-  separable. Also corrects the protocol's sample count: 1e6 samples resolves
-  |r| ≥ 5e-3 at 5σ and is blind below, where 1e-3 costs 2.5e7 — the count
-  should be set by the smallest correlation that would matter, not a round
-  number. The verdict line that survives unchanged: **a quiet-bench
-  cross-correlation of zero is not evidence of independence, it is evidence
-  the bath was not moving.** Nine claims `Q1..Q9`, `Q3` load-bearing and
-  UNTESTED because it asserts a coupling nobody has measured is removable.
-  **No measurements in the folder**, the extractor is deliberately unchosen,
-  `MECH` is assigned to no source and that is a gap rather than a decision,
-  and nothing here addresses SP 800-90B or AIS 31 health testing. Stdlib only,
-  selftest 33/33, CC0.
 - `SYNTHESIS.md` — Top-level synthesis describing how the three folders
   fit together, how claims flow between them, and how to read the
   artifacts in order.
@@ -5043,21 +5226,3 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   small representative output (CLAIM_TABLE, ASCII report, geometry
   file). Samples are checked in so the corpus is browsable on GitHub
   without running anything.
-
-## Working branch
-
-Active development happens on `claude/token-minimizer-emergence-sim-T4pjn`.
-All changes for the token minimizer + emergence simulator scaffolding land
-on that branch.
-
-## Conventions
-
-- Python files target the standard library only unless a note says
-  otherwise. **Exception**: `play-sims/` uses `numpy`/`matplotlib`/
-  `scipy`/`ipywidgets` and is exempt from this rule.
-- Notes files (`NOTES.md`) preserve design thinking as written so the
-  reasoning is traceable; implementation files keep to what the notes
-  specify.
-- Each simulator subfolder is intended to be promotable to its own repo
-  later (e.g. `emergence-stability-simulator` is sketched as a standalone
-  CC0 repo in its notes).

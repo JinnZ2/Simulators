@@ -343,8 +343,15 @@ def relevance_crossover(ws=(0.0, 0.2, 0.4, 0.5, 0.6, 0.8, 1.0)):
     """
     rows = [relevance_test(w) for w in ws]
     rows = [r for r in rows if r]
+    # SIGNED comparison, not abs. Flagged by crosscutting rule 5, which was
+    # earned from the same defect in S10/M4 and found this one immediately.
+    # An abs comparison would read a strongly NEGATIVE position correlation
+    # -- the score anti-tracking position -- as "position still dominates",
+    # which is a different phenomenon reported as the same one. The crossover
+    # is unchanged at w = 0.5; what changes is what the readout would do if
+    # the sign moved.
     over = [r for r in rows
-            if abs(r["corr_with_content"]) > abs(r["corr_with_position"])]
+            if r["corr_with_content"] > r["corr_with_position"]]
     peak_content = max(abs(r["corr_with_content"]) for r in rows)
     return {"rows": rows,
             "content_overtakes_at": over[0]["w_content"] if over else None,
@@ -626,16 +633,17 @@ def selftest():
        "enumerated by this module" in rk["caveat"])
 
     rc = relevance_crossover()
-    ck("at zero content mix relevance tracks position, not content",
-       abs(rc["rows"][0]["corr_with_position"])
-       > abs(rc["rows"][0]["corr_with_content"]))
+    ck("at zero content mix relevance tracks position, not content "
+       "(signed, per crosscutting rule 5)",
+       rc["rows"][0]["corr_with_position"]
+       > rc["rows"][0]["corr_with_content"])
     ck("but content NEVER becomes strongly tracked -- the draft expected it "
        "to, and the measurement is kept",
        rc["content_ever_strong"] is False)
     ck("at full content mix both correlations are near zero, because "
        "closeness to a corpus mean rewards being average",
-       abs(rc["rows"][-1]["corr_with_content"]) < 0.1
-       and abs(rc["rows"][-1]["corr_with_position"]) < 0.1)
+       max(abs(rc["rows"][-1]["corr_with_content"]),
+           abs(rc["rows"][-1]["corr_with_position"])) < 0.1)
     ck("a crossing exists and is located, and it is a crossing between two "
        "weak correlations rather than a handover",
        rc["content_overtakes_at"] is not None

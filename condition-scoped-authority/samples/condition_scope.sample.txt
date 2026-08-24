@@ -1,0 +1,169 @@
+CONDITION-SCOPED AUTHORITY -- rank has no condition column
+========================================================================
+
+  Authority is held by a position FOR A CLASS OF CONDITION.
+  Rank and scope are different objects.
+
+  THE PARTITION, AS DELIVERED
+
+    condition class      decides
+    clientele            principal
+    finances             principal
+    politics             principal
+    schedule             principal
+    threat_live          bodyguard
+
+    the bodyguard in 'schedule': NOT_IN_DOMAIN
+    the principal in 'threat_live': NOT_IN_DOMAIN
+
+    NOT_IN_DOMAIN, not a smaller number. Rank does not
+    invert -- inside the partition the principal was never
+    the decider.
+
+    symmetric: True
+      each position is excluded from the others' classes, which
+      constrains both equally
+
+------------------------------------------------------------------------
+
+  EVERY TOTAL ORDER, CHECKED
+
+    orders checked 2 of 2 possible -- complete: True
+
+    order                      wrong
+    principal > bodyguard      1
+      misses: threat_live
+    bodyguard > principal      4
+      misses: clientele, finances, politics, schedule
+
+    exact matches: 0      VERDICT: NO_RANK_REPRESENTS_IT
+
+    a total order has no condition column, so it names one decider and
+    names them in every class. The table names different deciders in
+    different classes, and no reordering changes that
+
+    best available ranking: principal > bodyguard
+    accuracy over classes:  0.80
+    class it misses:        threat_live
+
+    the best available ranking is the one that puts the principal on
+    top, and the single class it gets wrong is the live threat -- the
+    class in which the spec says the specialist holds total authority
+    including physical force against the principal's stated preference.
+    The approximation fails exactly where the stakes are
+
+    80% of condition classes correct reads as a good approximation. The
+    classes are not interchangeable and averaging over them is the same
+    move as scoring a facility on the variables still being read
+
+------------------------------------------------------------------------
+
+  DOES ADDING SCOPED DOMAINS HELP A RANK FIT
+
+    partition                                      orders   best wrong
+    2 positions (delivered)                        2        1 of 5
+    3 positions (extension)                        6        2 of 6
+
+    exact matches in the extension: 0
+    Every domain with its own reading capacity is another
+    class the single ranking must get wrong.
+
+------------------------------------------------------------------------
+
+  WHAT THE COLLAPSED STRUCTURE STATES SILENTLY
+
+    principal holds the reading capacity for all 5 condition classes
+    simultaneously: clientele, finances, politics, schedule,
+    threat_live
+
+    classes actually held by that position: 4 of 5
+    overclaimed: threat_live
+
+    rank has no condition column, so a rank-only structure says the
+    same thing in every class. Written out, the claim is about reading
+    capacity in domains the position does not read
+
+------------------------------------------------------------------------
+
+  BOUND vs ADVISORY -- THE OFFERED EVIDENCE
+
+    criterion: an item discriminates only if it would be FALSE under an
+    advisory arrangement
+
+    offered item                       true under advisory
+    visibility                         True
+    seat at executive meetings         True
+    influence on strategy              True
+
+    offered: 3   discriminating: 0
+    VERDICT: EVERY_OFFERED_ITEM_IS_SATISFIABLE_BY_ADVISORY
+
+    the strong configuration is evidenced entirely by indicators an
+    advisory arrangement also produces. That is not weak evidence for
+    BOUND, it is no evidence either way -- the indicators do not vary
+    between the two cases
+
+    what would discriminate:
+      - a finding that stood against a party who sought its reversal
+      - a documented reversal, and by whom
+
+    an UNSTATED claim: measurable=False, state=UNSIGNED
+      BOUND and ADVISORY are both called authority. A measurement using
+      the word without saying which is unsigned, and defaulting it
+      either way invents the sign
+
+  CONFIDENCE, reported separately and not resolved
+    resolved
+      False
+    the_evidence_audit
+      applies a stated criterion -- would the item be FALSE under
+      advisory -- to the three items the spec lists. It is a reading of
+      three phrases, not a survey of the EHS literature
+    the_extension
+      the third position is this module's, marked as such. It tests
+      whether more scoped domains help a rank fit, and they do not
+    the_search
+      complete, not sampled. Every one of n! total orders is enumerated
+      and scored, so 'no rank represents it' is established for THIS
+      table rather than argued
+    the_table
+      the delivered worked case, carried as stated. Whether protective
+      details actually partition this way is the operator's claim and
+      is not checked here
+
+  WHERE IT BREAKS
+    - NO TOTAL ORDER REPRODUCES THE DELIVERED TABLE, AND THE BEST ONE
+    FAILS EXACTLY WHERE THE STAKES ARE. Both of the two possible
+    rankings are wrong: principal-on-top misses one class of five,
+    bodyguard-on-top misses four. The one class the better ranking
+    misses is the live threat -- the class in which the spec says the
+    specialist holds total authority including physical force against
+    the principal's stated preference. 80% of classes correct is not a
+    good approximation when the classes are not interchangeable
+    - ADDING SCOPED DOMAINS MAKES A RANK FIT WORSE, NOT BETTER. With a
+    third scoped position the search checks all six orders and the best
+    is wrong on two classes of six. Every domain with its own reading
+    capacity is another class the single ranking must get wrong, so the
+    representation degrades with exactly the thing that makes the
+    structure work
+    - EVERY ITEM IN THE OFFERED EVIDENCE LIST IS SATISFIABLE BY AN
+    ADVISORY ARRANGEMENT, WHICH MAKES IT NO EVIDENCE EITHER WAY.
+    Visibility, a seat at executive meetings, influence on strategy: an
+    advisor has all three. These are not weak indicators of BOUND, they
+    are indicators that do not vary between BOUND and ADVISORY, so a
+    configuration scoring high on all three is unmeasured rather than
+    strong. What would discriminate is named beside them, and the
+    absence of a reversal record is not it -- see
+    stop-authority/binding.py, where an empty reversal record beside
+    zero findings reads NOT_LOOKED
+    - THE PARTITION IS TAKEN ON THE SPEC'S WORD AND THE MODULE COMPUTES
+    OVER IT. Whether a bodyguard really holds total authority in a live
+    threat, and really holds none over clientele, is a claim about how
+    protective details work. If the partition is wrong then the search
+    is a complete proof about a table nobody should have written
+    - SYMMETRY IS CHECKED STRUCTURALLY AND CANNOT BE CHECKED IN
+    SUBSTANCE. Partition refuses a table where one position holds every
+    class, and refuses a position with no class at all. It cannot tell
+    whether the domains assigned actually match where reading capacity
+    sits -- which is the spec's whole justification and is a claim
+    about competence that no arrangement of the table verifies

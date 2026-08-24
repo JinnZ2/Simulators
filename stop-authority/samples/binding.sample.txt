@@ -1,0 +1,149 @@
+STOP AUTHORITY -- what it can bind
+========================================================================
+
+  Authority is defined by what it can bind, not by who
+  holds it. A stop authority that has never bound upward
+  has not been tested. Untested is not the same as
+  functioning.
+
+------------------------------------------------------------------------
+
+  facility                       binding              tested
+  prior art: SWA as core program NO_STOPS_AT_ALL      False
+  named holder, stops only at pe UNTESTED_ABOVE       False
+  named holder, one stop bound a BOUND_ABOVE_HOLDER   True
+
+                                 reversals    named    conflict
+  prior art: SWA as core program NOT_LOOKED   False    UNASSESSED
+  named holder, stops only at pe NONE_FOUND   True     YES
+  named holder, one stop bound a FOUND        True     YES
+
+  functioning: None on every row -- there is no such field.
+    FUNCTIONING is not a value this module returns. An untested
+    authority is untested; a tested one has a binding record to read
+    directly. Collapsing both into a single functioning flag is the
+    move the whole instrument exists to refuse
+
+------------------------------------------------------------------------
+
+  EACH AXIS
+
+  prior art: SWA as core program element
+    binds      NO_STOPS_AT_ALL
+      no stop has been executed, so nothing has been bound and nothing
+      has been refused. The authority has produced no trial in either
+      direction
+    reversals  NOT_LOOKED
+      with no stops there is nothing that could have been reversed. An
+      empty reversal record here is an empty record, not a clean one
+    holder     EVERYONE
+      enforced by: no identified holder
+      someone to reverse against: False
+    conflict   UNASSESSED
+
+  named holder, stops only at peer level
+    binds      UNTESTED_ABOVE
+      stops have bound only at or below the holder's own level
+      (SUPERVISOR). An authority that has never bound upward has not
+      been tested, which is not the same as its having failed
+    reversals  NONE_FOUND
+      4 stops executed and none reversed
+    holder     NAMED_POSITION
+      enforced by: line safety officer
+      someone to reverse against: True
+    conflict   YES
+
+  named holder, one stop bound at executive level
+    binds      BOUND_ABOVE_HOLDER
+      a stop has bound at EXECUTIVE, above the holder at SUPERVISOR
+    reversals  FOUND
+      reversed by: plant manager
+    holder     NAMED_POSITION
+      enforced by: line safety officer
+      someone to reverse against: True
+    conflict   YES
+
+------------------------------------------------------------------------
+
+  ON DISTRIBUTION -- RECORDED, NOT GRADED
+
+    verdict on expansion: None
+    authority located in everyone is enforced by no one and has no
+    identified holder to be reversed against. Whether that is expansion
+    or contraction depends on the facility, and the spec says MAY. The
+    structural facts are recorded; the grade is not
+
+------------------------------------------------------------------------
+
+  THE DOCUMENTED CASE
+
+    evidence offered of function:
+      workers reported having CONVERSATIONS about safety
+
+    is that a measurement? False
+      a conversation is not a stop attempted, not a stop honored and
+      not a reviewed warranted state. It is not one of the three
+      numbers, and offering it as evidence of function substitutes an
+      activity for a measurement
+
+    axes returning a measurement: 0
+    count diagnosis:              INDISTINGUISHABLE
+    VERDICT:                      UNTESTED_ON_EVERY_AXIS
+
+    no stop executed, so nothing bound and nothing was reversed;
+    authority in everyone, so no named holder and nobody to reverse
+    against; conflict unassessed; and no review denominator, so the
+    count is INDISTINGUISHABLE. Published as working, with every axis
+    empty
+
+  CONFIDENCE, reported separately and not resolved
+    UNTESTED
+      returned wherever the authority has produced no trial. It is not
+      a soft HOLLOW and not a soft FUNCTIONING
+    conflict_axis
+      carried as declared. Nothing here checks a reporting line, and
+      UNASSESSED is not NO
+    distribution
+      the structural facts are recorded and the
+      expansion-or-contraction grade is not made. The spec says MAY,
+      and which it is depends on a facility this module does not
+      measure
+    functioning
+      never returned. There is no such field on the summary, by
+      construction
+    resolved
+      False
+    the_facilities
+      one delivered case and two stipulated contrasts. The contrasts
+      exist to show the axes moving and are not observations
+
+  WHERE IT BREAKS
+    - THE DOCUMENTED CASE RETURNS UNTESTED ON EVERY AXIS AND THAT IS
+    THE WHOLE READOUT. No stop executed, so nothing bound and no
+    reversal record to read; authority located in everyone, so no named
+    position holds it and there is nobody to reverse against; conflict
+    unassessed; no review denominator, so the count is
+    INDISTINGUISHABLE. Published as working with every axis empty. The
+    instrument does not say the authority was hollow -- it says the
+    published claim rested on nothing it could read
+    - 'CONVERSATIONS ABOUT SAFETY' IS NOT ON ANY AXIS, AND THE MODULE
+    CAN ONLY SAY THAT. It is not a stop attempted, not a stop honored,
+    not a reviewed warranted state, and not a binding event. Recording
+    that it fails to be a measurement is different from establishing
+    that the conversations did nothing, and nothing here does the
+    second
+    - UNTESTED_ABOVE IS RETURNED BY A COMPARISON OF TWO DECLARED LEVELS
+    AND BOTH ARE SUPPLIED BY WHOEVER FILLS THE RECORD. highest_bound
+    and holder_level are inputs, so a facility that files its holder at
+    PEER makes any supervisor-level stop read as upward binding. The
+    ordering is real and the placement in it is a declaration
+    - THE MODULE REFUSES TO GRADE DISTRIBUTION AND THAT REFUSAL HAS A
+    COST. It records that authority in everyone has no identified
+    holder and nobody to reverse against, then declines to say whether
+    that is contraction. A reader wanting a verdict gets two structural
+    facts and no number, which is correct under the spec's MAY and is
+    less useful than the verdict would be if the verdict were earned
+    - NOTHING HERE MEASURES A FACILITY. Two of the three rows are
+    stipulated to make the axes move, and the third is the operator's
+    documented case carried without independent check. The instrument
+    is a set of refusals with a worked example, not a survey

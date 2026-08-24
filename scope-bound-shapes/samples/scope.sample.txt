@@ -1,0 +1,146 @@
+SCOPE-BOUND SHAPES -- one shape, two bindings
+========================================================================
+
+  SHAPE: strain release
+    1. strain accumulates
+    2. passes limit
+    3. releases along weakest available path
+
+  invariant: the sequence, and the path-selection rule
+    rule: release follows the weakest available path
+
+  The materials are not part of the shape. Domain names are
+  scope bindings that acquired names, not different subjects.
+
+------------------------------------------------------------------------
+
+  BINDINGS -- LIVE and FROZEN both explicit, no defaults
+
+  slab_concrete
+    live: restraint, moisture gradient, aggregate, cure age
+    frozen: creep, chemistry, T range, lithostatic load
+
+  metamorphic_rock
+    live: creep, chemistry, T range, lithostatic load, restraint
+    frozen: cure age
+
+  every variable named, and its state in each binding:
+
+    variable             slab         metamorphic
+    T range              FROZEN       LIVE
+    aggregate            LIVE         UNDECLARED
+    chemistry            FROZEN       LIVE
+    creep                FROZEN       LIVE
+    cure age             LIVE         FROZEN
+    lithostatic load     FROZEN       LIVE
+    moisture gradient    LIVE         UNDECLARED
+    restraint            LIVE         LIVE
+
+    UNDECLARED is a third state. It is not FROZEN: one is a
+    claim the builder made, the other is a claim nobody made.
+
+------------------------------------------------------------------------
+
+  compare(slab_concrete, metamorphic_rock)
+
+    verdict: SCOPE_COLLISION
+
+    frozen in slab, live in metamorphic  4 of 4
+        T range
+        chemistry
+        creep
+        lithostatic load
+    frozen in metamorphic, live in slab  1 of 1
+        cure age
+
+    THE COLLISION IS TOTAL IN BOTH DIRECTIONS. Four of four,
+    and one of one. There is nothing these two bindings both
+    hold still.
+
+    corroborate: False
+    two modules claiming the same shape at incompatible bindings are
+    not corroborating each other
+
+------------------------------------------------------------------------
+
+  SCOPING OUT IS NOT A MODEL SWAP
+
+                                       verdict            collisions
+    as delivered                       SCOPE_COLLISION    5
+    slab releases its frozen           SCOPE_COLLISION    1
+    both release their frozen          UNDECLARED_OVERLAP 0
+
+    Same shape and same selection rule throughout -- only the
+    live set widened. Releasing every declared FROZEN entry on
+    both sides drives collisions to zero and STILL does not
+    reach COMPATIBLE: aggregate, moisture gradient stay
+    UNDECLARED in metamorphic_rock, and only the builder can
+    declare them.
+
+------------------------------------------------------------------------
+
+  INFERRING THE FROZEN LIST: REFUSED
+
+    infer_frozen(metamorphic_rock)  ->  None
+    state: REFUSED_BY_CONSTRAINT
+    would have returned: aggregate, moisture gradient
+
+    FROZEN entries are declared by the builder, not inferred. These
+    variables are UNDECLARED in this binding, which is a claim nobody
+    made, and calling them FROZEN would be a claim this tool made
+    instead
+
+    The arithmetic works and is shown, so the refusal is
+    inspectable rather than merely stated.
+
+  CONFIDENCE, reported separately and not resolved
+    FROZEN_lists
+      declared by the operator in the worked example and carried
+      verbatim. Their correctness is not checkable from here
+    UNDECLARED
+      two variables in metamorphic_rock. Left undeclared, never
+      inferred, and counted apart from both other states
+    collision_is_not_a_grade
+      a collision says agreement between two bindings is not
+      corroboration. It does not say either binding is wrong, and
+      holding different things still is coverage
+    resolved
+      False
+    the_shape
+      stipulated by the spec. Nothing here tests whether strain release
+      IS one shape across these bindings; the module takes the claim
+      and works out what follows
+
+  WHERE IT BREAKS
+    - THE WORKED EXAMPLE COLLIDES TOTALLY, IN BOTH DIRECTIONS, AND THAT
+    IS THE WHOLE RESULT. Every one of slab_concrete's four frozen
+    variables is live in metamorphic_rock, and metamorphic_rock's
+    single frozen variable is live in slab_concrete. Four of four and
+    one of one. The two named domains sharing this shape agree about
+    nothing they both hold still, because there is nothing they both
+    hold still -- so their agreement about the shape is worth zero as
+    corroboration and the spec's consequence applies at full strength
+    - 'NO COLLISION' IS NOT 'CORROBORATES'. compare() returns
+    corroborate=False on a collision and None otherwise, never True.
+    Absence of conflict between two declared lists is not evidence that
+    two bindings test the shape independently; it means the
+    declarations do not contradict, with every UNDECLARED variable
+    still unmeasured on both sides
+    - UNDECLARED IS A THIRD STATE AND THE ARITHMETIC TO REMOVE IT IS
+    SITTING RIGHT THERE. universe minus live minus frozen is two lines,
+    it completes the table, and it is the inference the CONSTRAINT
+    forbids. infer_frozen() refuses and prints what it would have
+    returned. Nothing stops a caller doing the subtraction themselves,
+    and a downstream table with no UNDECLARED column would hide that it
+    had been done
+    - THE SHAPE IS TAKEN ON THE SPEC'S WORD. Whether strain
+    accumulation in curing concrete and in metamorphic rock really are
+    one sequence with one selection rule is a claim about the world,
+    and this module assumes it in order to compute over it. If the
+    shape is wrong, every collision reported here is a collision
+    between two bindings of a shape that does not exist
+    - TWO BINDINGS IS NOT A LIST OF BINDINGS. The spec asks for a shape
+    record with a list of bindings; the delivered example has two, and
+    compare() is pairwise. Nothing here says what a shape with nine
+    bindings looks like, or whether collisions across such a set
+    partition into groups that could corroborate within themselves

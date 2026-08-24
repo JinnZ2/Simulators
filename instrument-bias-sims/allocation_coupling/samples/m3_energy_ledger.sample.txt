@@ -1,0 +1,94 @@
+M3 -- ENERGY LEDGER
+========================================================================
+
+  cognitive increment: 18.0 kcal/day (1800 x 0.20 x 0.05)
+
+  position             wage     kcal exp    cog share   replaced    sensory load
+  desk_professional    40.0     2018        0.0089      640         [BLANK]
+  freight_driver       22.0     2518        0.0071      352         [BLANK]
+  fabrication          18.0     3918        0.0046      288         [BLANK]
+  animal_handling      13.0     3718        0.0048      208         [BLANK]
+  farm_labor           11.0     4618        0.0039      176         [BLANK]
+
+  correlation, wage vs kcal expended: -0.883 (n=5, UNWEIGHTED)
+  the compensation gradient runs against energy draw
+
+  B3: n and UNWEIGHTED print on the same line as the number, so it
+  cannot travel without them. This is a result about which five
+  positions were typed in, not about compensation. The [BLANK] handling
+  on the sensory term below is the template the rest of this module
+  should follow.
+  cognitive share of daily total: 0.39% to 0.89%
+
+  The cognitive increment lands near one percent of the daily total,
+  which is what the spec's reference points imply and is small enough
+  to be irrelevant to the correlation. So the gradient here is set
+  almost entirely by physical expenditure.
+
+------------------------------------------------------------------------
+
+  ROBUSTNESS -- the sign is a property of the position list
+
+  added                      n      correlation
+  none                       5      -0.883
+  surgeon                    6      -0.541
+  professional_athlete       7      +0.396
+
+  sign flips: True
+  one high-wage high-expenditure position is enough to move the
+  correlation materially, and the second flips the sign. The population
+  weight of such positions is not represented here at all, which is
+  what would decide it
+
+------------------------------------------------------------------------
+
+  KNOWN GAP, LEFT VISIBLE
+
+    missing term        multi-channel sensory integration load under vibration and noise
+    positions with a value  0 of 5
+    instrument exists   True
+    sampled             pianists, racing drivers, pilots, air traffic controllers
+    not located         farm, fabrication, animal handling, freight
+
+    the instrument is field-deployable and the sampled occupations are
+    sport and prestige. The gap has the same shape as the thing this
+    module set is about, and it is left as None rather than estimated
+    -- an estimated value would enter the correlation and could not be
+    told apart from a measured one
+
+------------------------------------------------------------------------
+
+  CONFIDENCE, reported separately and not resolved
+    cognitive_increment
+      derived from the spec's reference points, which are carried and
+      not verified here
+    correlation_sign
+      a property of the position list, and the robustness sweep says
+      how much of one
+    physical_values
+      stipulated against the spec's 2000 / 4000-5000 kcal anchors
+    resolved                       False
+    sensory_integration_term       ABSENT. see known_gap()
+
+  WHERE IT BREAKS
+    - THE SENSORY INTEGRATION TERM IS ABSENT for every position, and
+    the positions it would most affect -- freight, fabrication, animal
+    handling -- are exactly the ones no located study samples. It is
+    left None rather than estimated, because an estimate would enter
+    the correlation and could not be told apart from a measurement
+    - THE CORRELATION SIGN IS A PROPERTY OF THE POSITION LIST. Adding
+    two high-wage high-expenditure positions flips it, and population
+    weight is unrepresented -- so this is not a result about
+    compensation, it is a result about which five positions were typed
+    in. B3, applied: n and UNWEIGHTED now print on the same line as the
+    correlation so the number cannot travel without them. The fix is
+    labelling, not modelling
+    - kcal_replaced_by_wage uses a flat conversion, so the replacement
+    ratio is a restatement of the wage and carries no information the
+    wage column does not
+    - physical expenditure is position-fixed. Within-position variation
+    is larger than some between-position gaps in any real data
+    - the cognitive increment comes out near 1 percent of daily total,
+    which makes it almost irrelevant to the correlation. If the spec's
+    reference points are wrong in that direction the whole readout
+    changes, and nothing here checks them

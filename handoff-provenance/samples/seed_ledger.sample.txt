@@ -1,0 +1,113 @@
+SEED LEDGER -- s4_antler_calibration
+========================================================================
+
+  code available: True
+  ledger sealed:  5f4dc0116952e9bb...
+
+  tag    entry
+  [K? ] the doe performs partner selection
+  [K? ] novelty has a floor set by the annual delta, not a decay to 
+  [K? ] rank_prospect is an input series with at least two arms, not
+  [R  ] engagement rate proportional to expected doe access
+  [A  ] AGENTS section comes first, missing agent a visible blank
+  [K? ] remove unused rng and statistics import
+
+  tag counts: K?=4, R=1, A=1
+
+------------------------------------------------------------------------
+
+  DIFF
+
+    CARRIED                0
+    DROPPED                0
+    CARRIED_UNCONFIRMED    3
+      the doe performs partner selection
+      novelty has a floor set by the annual delta, not a decay to zero
+      rank_prospect is an input series with at least two arms, not a c
+    DROPPED_UNCONFIRMED    0
+    UNSCORABLE_NEGATED     1
+      remove unused rng and statistics import
+    UNSCORABLE_TRANSLATION 0
+    UNSCORABLE_COVERAGE    0
+    ADDED                  3
+      GEOMETRY_DELTA as a separate term from antler mass
+      mature-novelty reported as a fraction of the annual delta
+      admissibility_check and RESIDENT_WRITER (added under an outside 
+
+    drop rate      None
+    reportable     False
+
+    the drop rate is over CONFIRMED [K] entries only. With none
+    confirmed there is no denominator, and the spec's own note applies:
+    the first several runs ARE the baseline
+
+    an entry asking for an absence is read backwards by a presence
+    matcher, at full confidence. It is refused rather than scored, and
+    it is out of the rate denominator as well as out of both counts
+
+    n_stated   0   n_scorable 0   footprint 0
+
+    no [K~] on this ledger and no re-reads: NOT_YET_OBSERVED,
+    not zero. Nothing here has been read a second time, so a
+    count of zero says nothing about the translation layer.
+
+------------------------------------------------------------------------
+
+  WHAT THIS SIDE CAN VERIFY, PER ENTRY
+    doe-choice arm
+      the S4 work order as received contains no doe; the delivered
+      patch says 'was missing entirely'. Consistent with DROPPED and
+      with never-stated
+    novelty floor
+      absent from the original S4 spec, present in the patch.
+      Consistent with DROPPED and with never-stated, the same way
+    rank_prospect as a series
+      absent from the original spec, present in the patch, and the
+      original hardcoded dict is in the repo at
+      instrument-bias-sims/s4_antler_calibration.py
+
+  CONFIDENCE, reported separately and not resolved
+    drop_rate
+      None. there are zero confirmed [K] entries, so there is no
+      denominator
+    every_K_entry
+      [K?]. this side has no access to the conversation upstream of a
+      delivered spec
+    resolved
+      False
+    what_is_verifiable
+      only that an item is absent from the received spec and present in
+      the patch, which is consistent with DROPPED and with never-stated
+
+  WHERE IT BREAKS
+    - THE SEED DATA CANNOT ESTABLISH ITS OWN HEADLINE. The spec names
+    S4's doe-choice arm as DROPPED, and DROPPED requires that the item
+    was stated upstream. This side cannot see upstream, so the entry is
+    [K?] and the diff reports it in the unconfirmed column with no drop
+    rate attached. One operator confirmation converts it; nothing else
+    does
+    - the ledger was written AFTER the S4 code existed, which is the
+    opposite of the ordering rule. It is seed data reconstructed from a
+    finished artifact, and the seal proves only that nothing was added
+    after seal() was called in this program
+    - [X] items are listed by the party that added them, which is the
+    attribution-creep failure mode's other side: a model that forgot an
+    addition would simply not list it, and nothing detects that
+    - THE SIXTH ENTRY BROKE THE MATCHER AND THAT IS HOW THE MATCHER GOT
+    A NEGATION STATE. 'remove unused rng and statistics import' matched
+    the delivered S4 code at share 1.00, its maximum, while 'import
+    statistics' is absent from that file -- the words survive in the
+    prose about the removal. It was reported as CARRIED at full
+    confidence, exactly backwards. The entry is unchanged and the
+    instrument was changed instead: it now lands in UNSCORABLE_NEGATED.
+    One real ledger line of six was enough to invert the readout, and
+    the eight matcher fixtures had all been positive entries
+    - ZERO RE-READS AND ZERO [K~] ON THIS LEDGER IS NOT EVIDENCE THE
+    TRANSLATION LAYER IS CLEAN. Nothing here has been read a second
+    time and nothing was flagged lossy when spoken, so both columns are
+    empty for want of observation, not for want of loss. A RETRANS
+    count is a lower bound on voice-layer mangling at the best of
+    times; a count of zero from a ledger nobody re-read is not a bound
+    on anything
+    - three entries, one denominator of zero. Nothing here is a rate
+    and the spec says so: the first several runs ARE the baseline

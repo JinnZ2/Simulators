@@ -1,0 +1,120 @@
+M2 -- COUPLING READOUT
+========================================================================
+
+  WINDOW REQUIRED PER OBSERVATION TYPE (stipulated, ordered)
+
+    level             4 hours unbroken
+    sequence         60 hours unbroken
+    lag             160 hours unbroken
+    threshold       320 hours unbroken
+
+------------------------------------------------------------------------
+
+  FRAGMENTATION SWEEP -- 400 hours, split into N blocks
+
+  blocks   mean window   C        level     sequence   lag      threshold
+  1        400.0         1.000    1.00      0.50       0.25     0.10
+  2        200.0         0.625    1.25      0.62       0.31     0.00
+  4        100.0         0.312    1.25      0.62       0.00     0.00
+  8        50.0          0.156    1.25      0.00       0.00     0.00
+  13       30.8          0.096    1.25      0.00       0.00     0.00
+  20       20.0          0.062    1.25      0.00       0.00     0.00
+  40       10.0          0.031    1.25      0.00       0.00     0.00
+
+  Total hours are constant down the table. Only the split changes, and
+  the deep observation types go to zero while level rises with the
+  block count -- more separate visits, more level readings. C is not
+  linear in total hours because total hours are not moving.
+
+------------------------------------------------------------------------
+
+  PREDICTION BAND over the UNMEASURED penalty exponent
+
+  exponent     level ratio    level survives   deep die         prediction holds
+  0.25         10.00          True             True             True
+  0.50         5.00           True             True             True
+  1.00         1.25           True             True             True
+  2.00         0.08           False            True             False
+  4.00         0.00           False            True             False
+
+  holds at exponents: [0.25, 0.5, 1.0]
+  holds everywhere:   False
+  holds everywhere:   False
+
+  the deep types die from the WINDOW REQUIREMENT, which is independent
+  of the penalty exponent, while level survival depends on the
+  exponent. So the two halves of the prediction fail for different
+  reasons and at different parameters
+
+------------------------------------------------------------------------
+
+  B2 -- THE NULL THE ZERO-EVERYWHERE RESULT NEEDED
+
+  scale      mean window      sequence needs     deep total   nonzero
+  1.00       20.0             60.0               0.00         False
+  0.50       20.0             30.0               0.00         False
+  0.25       20.0             15.0               2.50         True
+  0.10       20.0             6.0                9.38         True
+  0.05       20.0             3.0                17.00        True
+  0.02       20.0             1.2                17.00        True
+  0.01       20.0             0.6                17.00        True
+
+  grade: OK   first scale reaching deep > 0: 0.25
+
+  at the coupled run's fragmentation the mean window is 20.0 hours.
+  Deep types become reachable once the requirement is scaled to about
+  that, which is the null the zero-everywhere result needed: the zero
+  is a property of the window setting and the setting is meetable, so
+  it is a gate that CAN open
+
+------------------------------------------------------------------------
+
+  D1 -- EQUAL-BLOCK SPLITTING, SWEPT NOT ONLY DISCLOSED
+
+  unevenness     longest window     C        types reachable
+  0.00           21.1               0.066    level
+  0.25           100.0              0.312    level, sequence
+  0.50           200.0              0.625    level, sequence, lag
+  0.75           300.0              0.938    level, sequence, lag
+  0.95           380.0              1.000    level, sequence, lag, threshold
+
+  deep types reachable from unevenness 0.25 onward
+  the equal split hides it: True
+
+  one long window is enough. Under an equal split the deep types are
+  unreachable at this block count; putting a fraction of the same total
+  hours into a single stretch makes them reachable without changing the
+  total. So the equal-split assumption is not a small bias -- it is
+  what produces the zero
+
+------------------------------------------------------------------------
+
+  CONFIDENCE, reported separately and not resolved
+    any_real_observation_data      NONE
+    non_linearity
+      structural: window length gates observation type, so C cannot be
+      linear in total hours
+    penalty_exponent               UNMEASURED, as the spec states. Swept
+    resolved                       False
+    window_requirements
+      STIPULATED. 4 / 60 / 160 / 320 hours are ordered guesses, and the
+      ordering is the only part doing work
+
+  WHERE IT BREAKS
+    - THE FRAGMENTATION PENALTY IS UNMEASURED and every magnitude here
+    moves with it. The sweep is the honest form; a single exponent
+    would be a number with nothing behind it
+    - THE TWO HALVES OF THE PREDICTION FAIL FOR DIFFERENT REASONS. Deep
+    observation types die from the WINDOW REQUIREMENT, which does not
+    involve the penalty exponent at all; level survival is what the
+    exponent controls. So 'the prediction holds' is really two claims
+    with different parameter dependencies, and the band reported is the
+    intersection
+    - D1, NOW SWEPT RATHER THAN ONLY DISCLOSED. Equal-block splitting
+    is not a small bias toward the prediction -- uneven_blocks_sweep()
+    shows it is what PRODUCES the zero. Putting a fraction of the same
+    total hours into one stretch makes deep types reachable at the same
+    block count. Real interruption patterns are not equal
+    - consecutive_seasons enters as a linear factor capped at three.
+    Nothing behind the three
+    - no real observation record of any kind is used
