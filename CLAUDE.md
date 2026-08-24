@@ -5446,6 +5446,64 @@ underneath).
   not the marker's claim. On the marker's own standard the asymmetry
   remains an impression rather than a measurement, and this run moves it
   in neither direction. Stdlib only, parses under 3.9, CC0.
+- `question-availability/` — A marker typing three things usually pooled
+  as "knowledge decay": **Q1 unasked** (never posed, and no gap visible
+  because a gap is defined against an existing line of inquiry), **Q2
+  unaskable** (posing it costs the asker standing; the label operates on
+  the question, not on any claim in it), **Q3 superseded but current**
+  (correction published, prior reading still circulating). **`QA_001`, the
+  contribution:** the split is earned because Q3 is kept in and named as
+  the exception — *"only Q3 is decay"* — so it is a distinction rather than
+  a rename, with a test (*was it ever held*) that separates them without
+  appeal to intent. **`QA_003`, the finding that moves Q2:** it is not a
+  *"candidate ninth exclusion mechanism"* but a mechanism the register
+  recorded as missing three drops ago. `UNI_012` read `uninstrumented`'s
+  own literature note, found four mechanisms named in prose and two absent
+  from the list, and recorded that **`affect routing` has neither** an
+  entry nor a mechanism — its shape there (*"a channel reclassified at
+  intake, so the reading never reaches a guard at all"*) and Q2's here
+  (*"the label is applied prior to content, so the content never reaches
+  evaluation"*) are one statement twice, both adding that the
+  classification cannot be argued with from inside. The marker even names
+  `UNI_012`'s own case (driver diagnostic typed as complaint) without
+  connecting it, while its FIRST case is from a different field — which is
+  what `UNI_002`'s standing cross-field check has been open for. So Q2 is
+  the **twelfth** ordinal, with a second case, a second field and a better
+  name. **`QA_002`:** the ordinal is off by three and this is the second
+  instance (`nonidentity-census` T4 caught the identical slip), and the
+  reason it recurs is structural — the eight-item list is the REGISTER and
+  is the only place the count appears as a list, while nine through eleven
+  live in sibling folders as `MECHANISM_NN.md`, invisible from the
+  register's own file. **`QA_004`:** A1 is *"two booleans. Cheap."* and
+  **cannot answer the question the marker's own Open section poses** —
+  three states (found / absent-in-a-stated-corpus / not-searched) into two
+  values, and the two that collide are exactly the two the Open section
+  says must be separated; the repair is a third state, and *"absent in a
+  stated corpus under stated terms"* is a measurement because the null is
+  bounded where *"I did not find it"* is not. Thirteenth instance of that
+  repair here and one of the few where the missing state is the whole
+  finding. **`QA_005`:** A4 is built and unrun — no citation count is
+  supplied, the egress gate refuses the databases — and it is one input
+  short of interpretable: two constructed corrections with the same
+  corrected-share at year 10 have half-lives of **11.4 years and never**,
+  so whether a curve counts as *"did not displace"* needs a REFERENCE
+  CLASS of corrections that did, which is `criterion-symmetry`'s missing
+  comparison table on a second substrate. `half_life()` returns `None` for
+  a never-crossing curve rather than a large number, since that is the Q3
+  case. **`QA_007`, a finding about the checker rather than the marker:**
+  cross-links are reported in two columns because **mention is not
+  existence** — `report-typing` has 3 mentions and no artifact, and
+  acquired every one the moment the PREVIOUS marker listed it in its own
+  cross-links, so the mention-count checker written two drops ago would now
+  report it as resolving. `UNI_010`'s self-reference shape arriving through
+  a **sibling folder** rather than through the audit's own output, which
+  the `EXCLUDE`-list repair does not catch; the fix is a second column, not
+  a wider exclusion. Artifacts present 2 of 5, up from 1 of 4, because the
+  last drop landed `criterion-symmetry`. **`QA_006`:** 0 of 4 measurements
+  run in this environment — A1 broken, A2 and A3 blocked on artifacts that
+  do not exist, A4 blocked on egress — though A4 genuinely is runnable by
+  someone with a citation database, and is the second item in this family
+  `notes/study_watch.py` was built for. Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

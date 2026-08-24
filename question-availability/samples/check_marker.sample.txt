@@ -1,0 +1,118 @@
+CHECKS ON MARKER.md -- the marker is not edited
+
+1  the ordinal
+   register MECHANISMS tuple : 8   MODALITY, STORAGE, SCALAR_DEMAND, BUDGET_BOUNDARY, AUTHORED_REFERENCE, PROXY_SUBSTITUTION, AUDIT_ASYMMETRY, SCORED_AS_WASTE
+   MECHANISM_09              : MECHANISM 09 — CATEGORY WELD
+   MECHANISM_10              : MECHANISM 10 — GENERATION CAPACITY REMOVED
+   MECHANISM_11              : Mechanism 11 — DERIVATION DISCARDED
+   next unused ordinal       : 12
+   marker says               : 'candidate ninth exclusion
+                               mechanism', and 'eight exclusion
+                               mechanisms' in Related
+   Off by three. Nine, ten and eleven are taken -- CATEGORY WELD,
+   GENERATION CAPACITY REMOVED, DERIVATION DISCARDED. Second
+   instance of this exact slip: `nonidentity-census` T4 caught
+   the same one and recorded 'this would be a twelfth, not a
+   ninth'. The eight-item list is the REGISTER; the numbered
+   mechanisms live in sibling folders and are easy to miss from
+   outside.
+
+2  is Q2 a new mechanism?
+   affect_routing_filed     False
+   q2_shape                 True
+   q2_unfalsifiable         True
+   register_present         True
+   uni_012_shape            True
+   uni_012_unfalsifiable    True
+
+   UNI_012, on the register's own literature note:
+     '...a channel reclassified at intake, so the reading never reaches a guard at all'
+     'the classification is unfalsifiable from the speaker's side, because objecting to it reads as confirming it'
+   MARKER.md Q2:
+     'the label is applied prior to content, so the content never reaches evaluation'
+     'Answering the label does not clear it; the pre-emptive denial imports the frame'
+
+   Same mechanism, two statements. UNI_012 recorded `affect
+   routing` as named in the register's literature note and filed
+   NOWHERE -- 'affect routing has neither', neither an entry nor
+   a mechanism. Q2 is that mechanism arriving with a name and a
+   second case. So Q2 is not a candidate ninth; it is the twelfth
+   ordinal for a mechanism the register already knew was missing.
+
+   And Q2's own second case IS UNI_012's case -- 'driver
+   diagnostic question typed as complaint by reporter position'.
+   The marker names it and does not connect it. Its FIRST case,
+   'why is this arrangement retained' filed as conspiracy-
+   adjacent, is from a different field, which is what UNI_002's
+   open cross-field check has been waiting for.
+
+3  cross-links
+   link                   mentions  artifact  where
+   uninstrumented         80        yes       METHOD_SPEC.md, adaptive-claim-loop/AUDIT_NOTES.md (+78)
+   report-typing          3         NO        criterion-symmetry/AUDIT_NOTES.md, criterion-symmetry/CLAIM_TABLE.md (+1)
+   criterion-symmetry     4         yes       criterion-symmetry/AUDIT_NOTES.md, criterion-symmetry/CLAIM_TABLE.md (+2)
+   rubric-backcasting     3         NO        criterion-symmetry/AUDIT_NOTES.md, criterion-symmetry/CLAIM_TABLE.md (+1)
+   merit-anchoring        3         NO        criterion-symmetry/AUDIT_NOTES.md, criterion-symmetry/CLAIM_TABLE.md (+1)
+   artifacts present: 2 of 5
+   `criterion-symmetry` exists because the last drop landed it,
+   so the named-and-absent set converges as drops arrive.
+   MENTION IS NOT EXISTENCE, and the two columns disagree.
+   `report-typing` has mentions and no artifact, and it acquired
+   them the moment the PREVIOUS marker named it in its own
+   cross-link list. A mention count would now report it as
+   resolving. That is UNI_010's self-reference shape reaching
+   this audit through a sibling folder rather than through its
+   own output, and the fix is a second column, not an exclusion.
+
+4  A1: 'two booleans. Cheap.'
+   The marker's Open section says Q1 needs 'a criterion for
+   distinguishing not asked from asked and not found by me.'
+   A1's second boolean is the result of a search. Three states:
+     comparison_found                               -> (True, True)
+     absent_in_a_stated_corpus_under_stated_terms   -> (True, False)
+     not_searched                                   -> (True, False)
+   collisions: [['absent_in_a_stated_corpus_under_stated_terms', 'not_searched']]
+   A1 encodes three states in two values, so two of them share a
+   cell -- and they are exactly the two the Open section says
+   must be separated. **A1 cannot answer the question its own
+   marker poses about Q1.**
+   The repair is the one this repo keeps reaching for: a third
+   state. 'Absent in a stated corpus under stated terms' is a
+   measurement; 'I did not find it' is not, and 'not searched'
+   is neither. Bounding the null is what makes Q1 enterable.
+
+5  A4: 'the cheapest real measurement in the set and runnable now'
+   case      : captive-wolf alpha hierarchy
+   corrected : NOT_FETCHED
+   superseded: NOT_FETCHED
+   why       : citation databases are refused by this environment's egress gate; notes/study_watch.py runs on a runner that reaches them
+   The computation is built and the data is not fetched. No
+   citation count is supplied from memory.
+
+   And it needs one thing beyond the data. Two corrections with
+   the SAME corrected-share at year 10 and opposite fates:
+     displaced  [(1, 0.1), (5, 0.3), (10, 0.45), (20, 0.8)]
+     stalled    [(1, 0.25), (5, 0.4), (10, 0.45), (20, 0.44)]
+     same value at year 10: True
+     half-life  displaced 11.4 y   stalled None
+   The trajectory separates them and a single year's ratio does
+   not -- which the marker already gets right by asking for it
+   'by year since correction'. What it does not say is that the
+   trajectory is still uninterpretable alone: whether a given
+   curve counts as 'did not displace' needs a REFERENCE CLASS of
+   corrections that did. `criterion-symmetry`'s missing
+   comparison table, on a second substrate.
+   `half_life` returns None for a curve that never crosses --
+   the Q3 case -- rather than a large number.
+
+6  runnability of A1-A4 from here
+   A1   broken by the marker's own Open section (finding 4)
+   A2   needs a venue-typed corpus; none exists in this tree
+   A3   is report-typing's residue measurement; that folder is not in this tree
+   A4   built here; data refused by the egress gate
+   0 of 4 runnable in this environment. The marker says one is
+   'runnable now', and A4 IS runnable -- by someone with a
+   citation database. notes/study_watch.py runs on a runner that
+   reaches them, and A4 is the second item in this drop family
+   the watcher exists for, after shape-spec-audit MS_004.
+
