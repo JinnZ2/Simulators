@@ -5235,6 +5235,56 @@ underneath).
   following it to them. Siblings: `null-harness/` (same never-fails
   invariant), `reasoning-gate/` (`G-FIT`), `presented-binary/`. Stdlib
   only, CC0.
+- `sim-span/` — Built to a delivered spec, not an audit of one. Asks
+  whether a **span-reporting rule can manufacture a U** between reported
+  sleep duration and an outcome when no U exists in true sleep.
+  `span = true_sleep + frag * wake_cost` is time in bed, so a reporter
+  stating span is stating a quantity that mixes two independent variables;
+  bin an outcome by that mixture and the populations at each end of the
+  axis are not what the axis label says. Three legs (`flat` outcome
+  independent of true sleep, `mono` decreasing in it, `frag_driven`
+  depending on awakenings only), a quadratic fit to bin means, and the
+  `true_sleep` axis run on the same seeds as the control. **Three legs,
+  three different answers, and the spec's falsifier is scoped to the one
+  that cannot carry the question.** `flat` produces 4 Us in 360
+  combinations with `a` an order of magnitude below the others and no
+  separation from its own control — a reporting rule cannot manufacture a
+  relation from an outcome that has none, so **the falsifier as written
+  essentially fires**. `mono` produces 124 of 360 and **not one** puts the
+  minimum inside the 6–9 h window where published minima sit; the floor is
+  **10.16 h** across the whole grid, so it manufactures a U reliably and
+  always in the wrong place. `frag_driven` produces 63 and **52 land
+  inside the window**, floor 5.23 h: if the outcome is driven by
+  fragmentation and the reported quantity is time in bed, a U-shaped
+  *duration* curve appears where a published one sits, from a true
+  relation with no duration term in it. The spec's NULL is *"flat OR
+  monotone"* and its FALSIFIER is scoped to *"the flat null"* — different
+  sets, and which leg is run decides the verdict. At the spec's own
+  default fragmentation (2 awakenings × 15 min) `mono` does not fire at
+  all: `a = +0.055`, vertex 14.75 against a range of 4.0–11.5, the
+  mechanism live and not yet turned. **Two things came out wrong first and
+  are kept on record.** The spec's own U criterion — sign of the quadratic
+  plus an interior vertex — fired on **pure noise in 133 of 360**
+  combinations and at 0.30–0.55 across seeds on *both* axes, because a
+  monotone rising curve fits a positive quadratic whose vertex sits just
+  inside the left margin; replaced by a requirement that both arms rise by
+  `MARGIN = 2.0` times the residual scatter about the fit (a `G-RES` pair,
+  feature against the instrument's own noise), which took `flat` from 133
+  to 4 and changed no conclusion except to make that leg honest. And
+  `round_half` rounded 7.25 **down**, because Python's `round()` is
+  banker's rounding — caught by a fixed-in-advance selftest case, and it
+  matters here because a tie rule that alternates direction is a second
+  reporting artifact inside the one being measured. Units repaired and
+  recorded rather than silently fixed: the spec gives `wake_cost` in
+  minutes and adds it to hours, which taken literally would add 30 hours
+  to a night. `quad_fit` is registered in `tools/known_answer.py` under
+  the standing rule, with a straight-line case whose whole point is that a
+  fitter inventing curvature would manufacture the finding by itself.
+  Every distribution constant is invented and the 6–9 h window is
+  stipulated; the sim tests whether the mechanism CAN produce the shape,
+  not whether it did, and nothing in it is a statement about sleep.
+  `MARKER.md` / `sim_span.py` / `RESULTS.md` logged 2026-08-24. Stdlib
+  only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

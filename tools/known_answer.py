@@ -234,6 +234,26 @@ def _marginal_majority(which):
     return round(hit / float(tot), 2)
 
 
+def _sim_span_quad_fit(which):
+    """sim-span/sim_span.py::quad_fit, imported. Returns the a coefficient."""
+    import importlib.util
+    path = os.path.join(ROOT, "sim-span", "sim_span.py")
+    spec = importlib.util.spec_from_file_location("_sim_span", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    xs = [-2.0, -1.0, 0.0, 1.0, 2.0]
+    if which == "parabola":
+        ys = [2.0 * x * x - 3.0 * x + 5.0 for x in xs]
+    elif which == "line":
+        ys = [3.0 * x + 1.0 for x in xs]
+    elif which == "flat":
+        ys = [4.0 for _x in xs]
+    else:
+        raise ValueError(which)
+    fit = mod.quad_fit(xs, ys)
+    return None if fit is None else round(fit[0], 12)
+
+
 def _shadow_outline_area(name):
     """shape-spec-audit/shadow_read.py::outline_area, imported."""
     import importlib.util
@@ -290,6 +310,30 @@ def seed():
                  "arm all LEXICAL, YES arm 5 of 6 UNDECIDABLE"),
         ],
         note="the replacement metric. Passes.",
+    )
+    register(
+        "sim-span/sim_span.py::quad_fit",
+        _sim_span_quad_fit,
+        [
+            case("exact parabola", ("parabola",), 2.0,
+                 "y = 2x^2 - 3x + 5 sampled at five points has a = 2 by "
+                 "construction; a least-squares quadratic through points "
+                 "that lie on a parabola must return its own coefficient",
+                 tol=1e-9),
+            case("straight line", ("line",), 0.0,
+                 "y = 3x + 1 has no quadratic term. A fitter that invents "
+                 "curvature here would manufacture the U this sim exists "
+                 "to detect -- the failure mode inside the instrument",
+                 tol=1e-9),
+            case("constant", ("flat",), 0.0,
+                 "a horizontal line has no quadratic term either. Present "
+                 "because the line case alone shares an expected value "
+                 "with it and the registry needs the pair to differ from "
+                 "the parabola", tol=1e-9),
+        ],
+        note=("the U detector's fitter. The sim's whole claim is about the "
+              "SIGN of a, so a fitter with a curvature bias would produce "
+              "the finding by itself."),
     )
     register(
         "shape-spec-audit/shadow_read.py::outline_area",
