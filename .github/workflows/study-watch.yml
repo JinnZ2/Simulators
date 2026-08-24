@@ -1,0 +1,101 @@
+# SPDX-License-Identifier: CC0-1.0
+#
+# study-watch. Opens a pull request. Merges nothing.
+#
+# WHY IT EXISTS: the runner network reaches Crossref, OpenAlex and arXiv --
+# keyless, free, and all three refused by the local egress gate this repo is
+# otherwise developed behind. That reach is the point. The schedule is
+# incidental and can be removed without changing what the action is for.
+#
+# APPROVAL: the pull request IS the gate. There is deliberately no
+# auto-merge path, no `gh pr merge`, no `--auto`, and no model configured as
+# a standing approver. A human merges or nothing lands.
+
+name: study-watch
+
+on:
+  schedule:
+    # Monthly. The interval carries no meaning; it is not a sampling rate
+    # and nothing downstream reads it as one.
+    - cron: "17 4 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # Gate 1. A red selftest stops the job before any network call.
+      - name: selftest
+        run: python3 notes/study_watch.py --selftest
+
+      # Gate 2. The null test runs BEFORE the first real run, every run.
+      # It prints STOP if the arms cannot be built or matched.
+      - name: null test
+        run: |
+          out=$(python3 notes/study_watch.py --null)
+          echo "$out"
+          if echo "$out" | grep -q '^STOP:'; then
+            echo "::error::null test STOP condition fired; not retrieving"
+            exit 1
+          fi
+
+      - name: entries and queries
+        run: python3 notes/study_watch.py --entries
+
+      # Stage 1 has never executed from the development machine. This is
+      # the only place it runs.
+      - name: retrieve and filter
+        run: python3 notes/study_watch.py --run --live
+
+      - name: open a pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if [ -z "$(git status --porcelain notes/watch)" ]; then
+            echo "no run file produced; nothing to open"
+            exit 0
+          fi
+          stamp="$(date -u +%Y-%m-%d)"
+          branch="study-watch/${stamp}"
+          git config user.name  "study-watch"
+          git config user.email "study-watch@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add notes/watch
+          git commit -m "study-watch ${stamp}: notification run" \
+                     -m "Notification only. Nothing computed over what the
+queries returned. matches_would_measure is UNADJUDICATED for every
+candidate; a reviewer decides in this pull request.
+
+Silence from this action is not evidence of absence. Anything the coarse
+query never returned is invisible here and the size of that set is not
+measurable from inside it."
+          git push -u origin "$branch"
+          gh pr create \
+            --title "study-watch ${stamp}" \
+            --body "Notification run. Merges nothing on its own.
+
+**Read before merging.** \`matches_would_measure\` is \`UNADJUDICATED\` on
+every row by design: an entry's WOULD MEASURE is a design and a candidate is
+a claim, so nothing here compares them mechanically. The \`decided_by\`
+column reports how each proposed reading was reached; a \`LEXICAL\` value
+means a word list decided it.
+
+**Not evidence of absence.** Anything the coarse query never returned is
+invisible to this pipeline, and the size of that set is not measurable from
+inside it.
+
+No auto-merge is configured and none should be added." \
+            --base "${{ github.event.repository.default_branch }}" \
+            --head "$branch"
+          # Deliberately nothing after this. No merge step exists.

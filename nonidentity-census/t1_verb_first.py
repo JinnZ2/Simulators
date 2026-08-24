@@ -98,6 +98,44 @@ IRREG_ING = {
 }
 
 
+# Verbs of two or more syllables that still double the final consonant,
+# because the stress falls on the last syllable. Not derivable from spelling,
+# so it is a list and says so.
+_STRESS_FINAL = {
+    "occur", "refer", "prefer", "defer", "infer", "confer", "deter",
+    "begin", "forget", "regret", "admit", "permit", "commit", "submit",
+    "omit", "emit", "transmit", "allot", "control", "patrol", "compel",
+    "expel", "rebel", "propel", "repel", "upset", "reset", "offset",
+    "prefer", "equip", "unwrap",
+}
+
+_VOWEL_GROUP = re.compile(r"[aeiouy]+")
+
+
+def _doubles(stem):
+    """
+    English doubles a final consonant before -ing when the last syllable is
+    stressed and ends consonant-vowel-consonant. Approximated: any
+    monosyllable ending CVC, plus a list for the polysyllables.
+
+    Added after `--front` emitted `seting`, `runing` and `begining`. The
+    first version had no doubling rule at all, which is a defect and not a
+    limit: the residues it produced were not English, and a reader asked to
+    judge whether a residue needs a bearer cannot judge a residue that is
+    not a sentence.
+    """
+    if len(stem) < 3:
+        return False
+    a, b, c = stem[-3], stem[-2], stem[-1]
+    cvc = (a not in "aeiou" and b in "aeiou" and
+           c not in "aeiouwxy")
+    if not cvc:
+        return False
+    if len(_VOWEL_GROUP.findall(stem)) == 1:
+        return True
+    return stem in _STRESS_FINAL
+
+
 def _to_ing(verb):
     """Mechanical, and wrong on irregulars not in the table above."""
     v = verb.lower()
@@ -116,6 +154,8 @@ def _to_ing(verb):
         v = v[:-1]
     if v.endswith("e") and not v.endswith(("ee", "ye", "oe")):
         return v[:-1] + "ing"
+    if _doubles(v):
+        return v + v[-1] + "ing"
     return v + "ing"
 
 
@@ -358,6 +398,19 @@ def selftest():
     if not f2["residue"].startswith("proceeding"):
         fails.append("fronting failed on the second D6 example: %r"
                      % (f2["residue"],))
+    # Known answers for the doubling rule. A residue that is not English
+    # cannot be judged, so these are correctness and not polish.
+    for verb, want in (("set", "setting"), ("sets", "setting"),
+                       ("run", "running"), ("stop", "stopping"),
+                       ("begin", "beginning"), ("occur", "occurring"),
+                       ("refer", "referring"), ("plan", "planning"),
+                       ("count", "counting"), ("name", "naming"),
+                       ("open", "opening"), ("visit", "visiting"),
+                       ("offer", "offering"), ("fix", "fixing"),
+                       ("row", "rowing"), ("proceeds", "proceeding")):
+        got = _to_ing(verb)
+        if got != want:
+            fails.append("_to_ing(%r) = %r, want %r" % (verb, got, want))
     on = {}
     for r in rows:
         on[r["read_on"]] = on.get(r["read_on"], 0) + 1
