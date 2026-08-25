@@ -2,13 +2,13 @@
 
 Read against `notes/memory-export/files/`, which is stored verbatim. Nothing
 here is a verdict on the export, and no stored file was modified. Counts are
-recomputed each batch and are a delivery state, not a result — 11 tier-1 files
+recomputed each batch and are a delivery state, not a result — 10 tier-1 files
 are still outstanding.
 
 ## 1. Cross-references, and what "unresolved" means
 
 ```
-53 files   74 links   35 distinct names   27 resolve in folder   8 do not
+54 files   78 links   36 distinct names   28 resolve in folder   8 do not
 ```
 
 "Not in the folder" covers three different situations, and the distinction was
@@ -483,6 +483,56 @@ understood before it was made. Nothing further is owed to that finding.
 What changes for a reader: `SCRUB_RULES.md` describes the seven tier-2 files
 and no longer describes the folder. Findings 9 and 10, which read the scrub's
 consistency off the files, apply only to files stored before this point.
+
+## 23. A limit named against a folder in this repo, and not recorded in it
+
+`sensing-spine` cites Nisbett & Wilson 1977 — verbal reports on one's own
+process are reconstructions from causal theories rather than read-outs — and
+calls it "a hard limit on `inverseminar`'s tacit-capture approach."
+
+Checked against `inverseminar/`. The folder guards the other direction well:
+provenance is split at capture ("Reconstruction = model-authored.
+Correction/answers = yours, verbatim"), and silence is never scored as
+agreement. What it does not carry is any caveat on the correction channel
+itself. Its stated design is "The correction is the product", and `delta =
+tacit` is computed from corrections treated as veridical. Zero hits for the
+limit or anything like it across `inverseminar.py` and its README.
+
+So the limit is accurate about the folder as it stands: named in the memory
+set, absent from the tool it bounds. Whether it should be recorded there is an
+authoring call, not a storage one.
+
+## 24. The one file in the export built with its own falsifier paid
+
+Most stored files declare marker status. `sensing-spine` goes further and pays
+for its principle in both directions:
+
+- A **required standing counter-case**, "or the principle is unfalsifiable" —
+  the konenki case, where a strong cultural-difference finding lives in
+  self-report and vanishes under skin-conductance measurement.
+- A **required negative**, kept rather than routed around: for
+  magnetoreception the trained-carrier search came back empty, on the stated
+  reasoning that "a principle that never returns a negative is an escape
+  hatch."
+- A **correction to its own stronger earlier draft**: generalizability theory
+  already decomposes rater variance, so "the tooling is not missing" — the
+  accurate claim is narrower, that the instrument exists, is in routine use,
+  and has no time axis on the observer.
+- A **cut-do-not-readmit list**, naming the von Neumann measurement-chain
+  analogy as the overreach most likely to get the section dismissed on sight.
+
+That is the `null-harness` invariant applied to a prose principle rather than
+to a gate, and it is the counterweight to the general worry about frameworks
+that cannot return a negative.
+
+**Not checked here:** the file is the most citation-dense in the export —
+Rosenthal & Fode 1963 with volume and page range, Barber & Silver 1968, Doyen
+et al. 2012, Khalsa 2008 and 2020, Kahneman & Klein 2009, Nisbett & Wilson
+1977, a 2022 synchrony review at ~75%. None was verified. This environment's
+egress refuses the citation sources `nonidentity-census` T2 already recorded
+as blocked, and prior literature claims across the corpus are carried at the
+same status (`ANC_010`, `CD_009`, `RD_015`, `HO_005`). It is the best
+candidate in the export for a verification pass by someone with access.
 
 ## What was not checked, deliberately
 
