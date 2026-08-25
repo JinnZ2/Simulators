@@ -31,8 +31,24 @@
     "outside_this": "UNTESTED. Row-axis groups were not checked this way."
   },
   "clock": {
-    "holds_for": "as long as the file and CHOICE 5 are unchanged",
-    "next_check": "2026-11-25"
+    "measured_on": "2026-08-25",
+    "neglected_term": {
+      "name": "normalization rule",
+      "held_fixed": "CHOICE 5, parentheticals kept"
+    },
+    "time_constant": {
+      "state": "UNMEASURED",
+      "why": "not measured; the revision rate of this instrument has not been recorded"
+    },
+    "rate_ceiling": {
+      "state": "UNMEASURED",
+      "why": "no rate of instrument change at which the claim stops holding has been established"
+    },
+    "coupling": {
+      "value": 0.0,
+      "units": "1",
+      "basis": "the domain of validity pins the instrument revision, so the claim does not move when that revision does. Coupling zero by construction, not by measurement."
+    }
   },
   "derivation": {
     "parents": [

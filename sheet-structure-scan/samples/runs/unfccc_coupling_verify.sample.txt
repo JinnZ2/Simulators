@@ -1,0 +1,5 @@
+evaluator against Excel's own cached values
+  reproduced      631
+  disagreed       0
+  not computable  0
+  no cached value 194

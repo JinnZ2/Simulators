@@ -22,6 +22,7 @@ python3 scans.py --selftest
 | `sheetmodel.py` | reader and precedent graph. `--selftest` |
 | `scans.py` | scan two, scan three, ranking, table. `--selftest` |
 | `no_severity.py` | the output constraint, enforced. `--selftest` |
+| `coupling.py` | sensitivity by perturbation, and the ranking. `--selftest` |
 | `patterns.json` | companion patterns for scan two. Swap this, not the code |
 | `fixture.py` | the demo workbook, written as a readable table |
 | `targets/TARGETS.md` | five workbooks, predictions registered before the data |
@@ -74,6 +75,38 @@ record. The shape is a cross instead: the whole row, the column within
 Written down because it was a design decision that a fixture overturned,
 and the fixture is checked in.
 
+## Coupling: the ranking, from what moves rather than from what is wired
+
+`rank = deps x ddepth` measures wiring. `coupling.py` replaces the first
+factor with a **dimensionless elasticity** measured by perturbing the
+constant and reading the output cells, falling back to the count where a
+formula is not evaluable and naming the mode per row.
+
+The evaluator is checked against **Excel's own cached values** — every
+derived cell carries the number Excel last computed — and reproduces
+**631 of 631 on the UNFCCC workbook, with zero disagreements.** That is
+a known-answer run on a file nobody here wrote.
+
+Three things it took to get there, each recorded:
+
+- **Coupling is a property of the workbook AND a case.** The first run
+  returned 0 of 789 in coupling mode, because the workbook is an
+  unfilled template: `F6 = D6*E6` with `E6` empty moves nothing under
+  any perturbation. `--input Sheet!A1=VALUE` supplies the case and every
+  report prints it.
+- **The evaluator was not re-entrant.** Parser state lived on the
+  instance, so a nested formula resumed the outer one inside itself. It
+  cost every rollup in the workbook, and no depth-1 fixture could show
+  it.
+- **Coverage of a perturbation is a terminal property.** At one point
+  627 of 631 formulas evaluated and 0 of 789 constants got a coupling
+  number: nearly every constant terminates at one grand total, and two
+  `SUMIF` cells in it gated the whole workbook.
+
+And the result the substitution is for. Under a stated case, **3
+constants have non-zero coupling and 781 have exactly zero — and every
+one of those 781 ranks non-zero under dependent count, up to 380.**
+
 ## Targets
 
 `targets/TARGETS.md` pre-registers sixteen predictions across five
@@ -125,7 +158,7 @@ definition, has a default, and is printed into the report header when it
 is in force — an absence measured at radius 2 and one measured at radius
 6 are different readings. `SPEC.md` §5 is the table.
 
-101 selftest checks across four modules: `sheetmodel` 26, `no_severity`
-11, `scans` 35, `targets/epa_check` 29.
+133 selftest checks across five modules: `sheetmodel` 26,
+`no_severity` 11, `scans` 35, `targets/epa_check` 29, `coupling` 32.
 
 CC0. Stdlib only. Parses under Python 3.9.

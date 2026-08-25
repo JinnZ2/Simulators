@@ -1,9 +1,13 @@
 next-check status on 2026-08-25
-claim     next_check  state  
---------  ----------  -------
-SSS_017   2026-11-25  CURRENT
-SSS_019   2026-11-25  CURRENT
-SSS_020   2026-11-25  CURRENT
-SSS_021   2026-11-25  CURRENT
-SSS_022a  2026-11-25  CURRENT
-SSS_022b  2026-11-25  CURRENT
+shelf life = time constant / |coupling|, both derived
+claim          clock                   shelf_yr  next_check  state         
+-------------  ----------------------  --------  ----------  --------------
+SSS_017        UNBOUNDED_BY_THIS_TERM  -         -           REGIME_UNKNOWN
+SSS_019        UNDERIVABLE             -         -           REGIME_UNKNOWN
+SSS_020        UNDERIVABLE             -         -           REGIME_UNKNOWN
+SSS_021        UNDERIVABLE             -         -           REGIME_UNKNOWN
+SSS_022a       UNDERIVABLE             -         -           REGIME_UNKNOWN
+SSS_022b       UNDERIVABLE             -         -           REGIME_UNKNOWN
+UNF_GRID_IRAQ  DERIVED                 3.40      2030-01-18  CURRENT
+UNF_HOTEL_AR   UNDERIVABLE             -         -           REGIME_UNKNOWN
+UNF_PALESTINE  UNDERIVABLE             -         -           REGIME_UNKNOWN

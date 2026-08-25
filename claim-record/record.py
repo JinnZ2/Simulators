@@ -43,6 +43,14 @@ import os
 import re
 import sys
 
+# One screen, imported rather than copied. sheet-structure-scan owns it,
+# the repository convention is to import the shared instrument so the two
+# copies cannot drift, and MF_019 is what copying costs.
+sys.path.insert(0, os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+    "sheet-structure-scan"))
+import no_severity  # noqa: E402
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 RECORDS = os.path.join(HERE, "records")
 
@@ -53,8 +61,9 @@ FIELDS = ("assertion", "measurement", "instrument", "domain_of_validity",
 # EXACT, and an interval is illegal under EXACT. See _check_collapse.
 NOT_COLLAPSED = "NOT_COLLAPSED"
 COLLAPSED = "COLLAPSED"
+COLLAPSED_UPSTREAM = "COLLAPSED_UPSTREAM"
 EXACT = "EXACT"
-COLLAPSE_STATES = (NOT_COLLAPSED, COLLAPSED, EXACT)
+COLLAPSE_STATES = (NOT_COLLAPSED, COLLAPSED, COLLAPSED_UPSTREAM, EXACT)
 
 # Closed vocabulary for WHICH point, with a named escape. Closed, because
 # "a statistic" as free text is how the upper quartile disappears into
@@ -84,6 +93,114 @@ _HEDGE_PATTERNS = [(w, re.compile(r"\b%s\b" % re.escape(w), re.I))
 
 VALID = "VALID"
 INVALID = "INVALID"
+
+# Field 5 states. UNDERIVABLE and UNBOUNDED_BY_THIS_TERM are both "no
+# date", and they are not the same thing: the first is a term nobody
+# measured, the second is a term the result does not depend on.
+DERIVED_CLOCK = "DERIVED"
+UNDERIVABLE = "UNDERIVABLE"
+UNBOUNDED = "UNBOUNDED_BY_THIS_TERM"
+ADIABATIC = "ADIABATIC"
+SUDDEN = "SUDDEN"
+REGIME_UNKNOWN = "REGIME_UNKNOWN"
+
+# A sub-field is either a measured quantity or a stated absence.
+UNMEASURED = "UNMEASURED"
+
+# [CHOICE] below this the neglected term is treated as uncoupled and the
+# shelf life is UNBOUNDED_BY_THIS_TERM rather than a very large number.
+# A number would sort; a state does not pretend to.
+COUPLING_FLOOR = 1e-6
+
+
+def _quantity(d, name, out, field, units_expected):
+    """A sub-field is a value with a basis, or UNMEASURED with a reason.
+
+    Returns the float, or None when it is a stated absence, and appends
+    a finding when it is neither.
+    """
+    q = d.get(name)
+    if not isinstance(q, dict):
+        out.append(Finding("MISSING_FIELD", "%s.%s" % (field, name),
+                           "a value with a basis, or state UNMEASURED "
+                           "with a why"))
+        return None
+    if q.get("state") == UNMEASURED:
+        if not str(q.get("why", "")).strip():
+            out.append(Finding(
+                "CLOCK_NOT_DERIVED", "%s.%s.why" % (field, name),
+                "UNMEASURED is a stated value and carries its reason"))
+        return None
+    v = q.get("value")
+    if not isinstance(v, (int, float)):
+        out.append(Finding("CLOCK_NOT_DERIVED", "%s.%s.value" % (field, name),
+                           "not a number, and not stated UNMEASURED"))
+        return None
+    if not str(q.get("basis", "")).strip():
+        out.append(Finding(
+            "CLOCK_NOT_DERIVED", "%s.%s.basis" % (field, name),
+            "a derived sub-field carries what it was derived from; "
+            "without it the clock is asserted one level down"))
+    if units_expected and q.get("units") != units_expected:
+        out.append(Finding("CLOCK_NOT_DERIVED", "%s.%s.units" % (field, name),
+                           "expected %r, got %r"
+                           % (units_expected, q.get("units"))))
+    return float(v)
+
+
+def derive_clock(rec):
+    """Field 5, computed from its three sub-fields. Never asserted.
+
+    shelf_life = time_constant / |coupling|
+
+    The coupling is a DIMENSIONLESS elasticity, and it has to be: a raw
+    partial derivative carries the units of the result over the units of
+    the neglected term, and a time divided by that is not a time. So the
+    weighting quantity is (dY/Y)/(dX/X), which is what coupling.py
+    measures by perturbation.
+
+    Weak coupling means a fast-moving neglected term does not shorten
+    the shelf life, and at zero coupling it does not bound it at all --
+    reported as a state, not as a large number.
+    """
+    c = rec.get("clock")
+    if not isinstance(c, dict):
+        return {"state": UNDERIVABLE, "why": "no clock field"}
+    out = []
+    tau = _quantity(c, "time_constant", out, "clock", "years")
+    ceil = _quantity(c, "rate_ceiling", out, "clock", "per_year")
+    coup = _quantity(c, "coupling", out, "clock", "1")
+
+    regime = REGIME_UNKNOWN
+    if tau is not None and ceil is not None and tau > 0:
+        regime = ADIABATIC if (1.0 / tau) <= ceil else SUDDEN
+
+    if tau is None or coup is None:
+        missing = [n for n, v in (("time_constant", tau), ("coupling", coup))
+                   if v is None]
+        return {"state": UNDERIVABLE, "regime": regime, "findings": out,
+                "missing": missing, "shelf_life_years": None,
+                "next_check": None,
+                "why": "no date is emitted; %s is not measured"
+                       % " and ".join(missing)}
+    if abs(coup) < COUPLING_FLOOR:
+        return {"state": UNBOUNDED, "regime": regime, "findings": out,
+                "shelf_life_years": None, "next_check": None,
+                "why": "the result does not depend on the neglected term, "
+                       "so that term does not date the claim"}
+    shelf = tau / abs(coup)
+    nc = None
+    m = c.get("measured_on")
+    try:
+        d0 = datetime.date.fromisoformat(str(m))
+        nc = (d0 + datetime.timedelta(days=shelf * 365.2425)).isoformat()
+    except (ValueError, TypeError):
+        out.append(Finding("CLOCK_NOT_DERIVED", "clock.measured_on",
+                           "%r is not an ISO date, so no next check can be "
+                           "computed from the shelf life" % m))
+    return {"state": DERIVED_CLOCK, "regime": regime, "findings": out,
+            "shelf_life_years": shelf, "next_check": nc,
+            "why": "time constant %g years / coupling %g" % (tau, abs(coup))}
 
 
 class Finding(object):
@@ -213,24 +330,28 @@ def _check_domain(rec, out):
 
 
 def _check_clock(rec, out):
+    """Rule 3: a clock asserted rather than derived does not validate."""
     c = rec.get("clock")
     if not isinstance(c, dict):
         out.append(Finding("EMPTY_VALUE", "clock", "not a mapping"))
         return
-    if not str(c.get("holds_for", "")).strip():
-        out.append(Finding("CLOCK_UNPARSEABLE", "clock.holds_for",
-                           "the timescale over which the claim is expected "
-                           "to hold"))
-    nc = c.get("next_check")
-    if not nc:
-        out.append(Finding("NEXT_CHECK_MISSING", "clock.next_check",
-                           "no claim without one"))
-        return
-    try:
-        datetime.date.fromisoformat(str(nc))
-    except ValueError:
-        out.append(Finding("CLOCK_UNPARSEABLE", "clock.next_check",
-                           "%r is not an ISO date" % nc))
+    for banned in ("holds_for", "next_check", "shelf_life", "shelf_life_years"):
+        if banned in c:
+            out.append(Finding(
+                "CLOCK_ASSERTED", "clock.%s" % banned,
+                "the clock is derived from time_constant, rate_ceiling and "
+                "coupling; a literal here is the field the schema exists to "
+                "protect being written by hand"))
+    n = c.get("neglected_term")
+    if not isinstance(n, dict) or not str(n.get("held_fixed", "")).strip():
+        out.append(Finding(
+            "CLOCK_NOT_DERIVED", "clock.neglected_term.held_fixed",
+            "what did this claim hold fixed; the time constant is a "
+            "property of that thing and cannot be stated without it"))
+    if "measured_on" not in c:
+        out.append(Finding("MISSING_FIELD", "clock.measured_on",
+                           "the anchor a next check is computed from"))
+    out.extend(derive_clock(rec).get("findings", []))
 
 
 def _check_derivation(rec, out):
@@ -279,6 +400,19 @@ def _check_collapse(rec, out):
         if not str(c.get("why", "")).strip():
             out.append(Finding("COLLAPSE_POINT_UNNAMED", "collapse_record.why",
                                "why that point and not another"))
+    if state == COLLAPSED_UPSTREAM:
+        # A point that arrived as a point from a source that did not say
+        # what it collapsed. Distinct from COLLAPSED, where the statistic
+        # is known, and from EXACT, where there was nothing to collapse.
+        # The three fixtures separate exactly here: the hotel source
+        # states "upper quartile", the Palestine value is a mean computed
+        # in the workbook itself, and the grid dataset says neither.
+        for k in ("source", "what_is_unstated"):
+            if not str(c.get(k, "")).strip():
+                out.append(Finding(
+                    "COLLAPSE_POINT_UNNAMED", "collapse_record.%s" % k,
+                    "a point taken from a source that did not state its "
+                    "statistic names the source and what is unstated"))
     if state == EXACT and not str(c.get("basis", "")).strip():
         out.append(Finding("COLLAPSE_POINT_UNNAMED", "collapse_record.basis",
                            "why the quantity is exact rather than estimated"))
@@ -293,6 +427,8 @@ def _check_collapse(rec, out):
                 "the measurement is a point and field 7 says nothing was "
                 "collapsed and nothing is exact; a point arrives either "
                 "from a distribution or from a count"))
+        if lo == hi and state == COLLAPSED_UPSTREAM:
+            pass  # legal: that is what an upstream point is
         if lo != hi and state == EXACT:
             out.append(Finding(
                 "INTERVAL_MARKED_EXACT", "collapse_record.state",
@@ -386,16 +522,23 @@ class Registry(object):
         return rows
 
     def due(self, on):
-        """Field 5 made operative: which claims are past their next check."""
+        """Field 5 made operative, from the DERIVED clock.
+
+        A record whose clock is underivable gets no date and is reported
+        as such. Emitting a default here is the failure the whole field
+        exists to prevent, so there is no branch that can produce one.
+        """
         out = []
         for cid, rec in sorted(self.records.items()):
-            nc = (rec.get("clock") or {}).get("next_check")
-            try:
-                d = datetime.date.fromisoformat(str(nc))
-            except (ValueError, TypeError):
-                out.append((cid, str(nc), "UNPARSEABLE"))
+            d = derive_clock(rec)
+            shelf = d.get("shelf_life_years")
+            nc = d.get("next_check")
+            if d["state"] != DERIVED_CLOCK or not nc:
+                out.append((cid, d["state"], "-", "-", d.get("regime", "-")))
                 continue
-            out.append((cid, str(nc), "DUE" if d <= on else "CURRENT"))
+            got = datetime.date.fromisoformat(nc)
+            out.append((cid, d["state"], "%.2f" % shelf, nc,
+                        "DUE" if got <= on else "CURRENT"))
         return out
 
 
@@ -416,6 +559,13 @@ def table(headers, rows):
 
 def render_validate(reg):
     lines = ["claim records -- validation",
+             "",
+             "Every verdict below is about CONFORMANCE TO THE RECORD",
+             "SCHEMA. No column states whether a claim is true, how much",
+             "weight a measurement carries, or what to do next, and none",
+             "of those is computed here. The reading stays with the",
+             "operator, which is the detector's rule.",
+             "",
              "records   %d" % len(reg.records),
              "rule 1    a claim with an unresolvable parent does not validate",
              "rule 2    no field is optional; a sentinel carries its reason",
@@ -456,8 +606,16 @@ def _complete():
             "conditions": [{"name": "file", "value": "one workbook"}],
             "outside_this": "UNTESTED",
         },
-        "clock": {"holds_for": "as long as the file is unchanged",
-                  "next_check": "2027-01-01"},
+        "clock": {
+            "measured_on": "2026-08-25",
+            "neglected_term": {"name": "reader revision",
+                               "held_fixed": "the parser that produced the count"},
+            "time_constant": {"value": 1.0, "units": "years",
+                              "basis": "one revision per year, stipulated here"},
+            "rate_ceiling": {"value": 2.0, "units": "per_year",
+                             "basis": "stipulated here"},
+            "coupling": {"value": 0.5, "units": "1",
+                         "basis": "stipulated here"}},
         "derivation": {"parents": [], "root_reason": "a direct count"},
         "collapse_record": {"state": EXACT, "basis": "a count of elements"},
     }
@@ -532,6 +690,14 @@ def _selftest():
        "COLLAPSE_POINT_UNNAMED" in codes(variant(
            collapse_record={"state": COLLAPSED, "from": "x", "why": "y"})),
        True)
+    ck("an upstream point without its source is caught",
+       "COLLAPSE_POINT_UNNAMED" in codes(variant(
+           collapse_record={"state": COLLAPSED_UPSTREAM})), True)
+    ck("an upstream point that names the source and the gap validates",
+       variant(collapse_record={
+           "state": COLLAPSED_UPSTREAM,
+           "source": "a published dataset",
+           "what_is_unstated": "which statistic the point is"})[0], VALID)
     ck("'other' has to name the statistic",
        "COLLAPSE_POINT_UNNAMED" in codes(variant(
            collapse_record={"state": COLLAPSED, "from": "x",
@@ -559,12 +725,64 @@ def _selftest():
        variant(domain_of_validity={"conditions": [{"name": "a", "value": "b"}],
                                    "outside_this": "UNTESTED"})[0], VALID)
 
-    ck("a missing next_check is caught",
-       "NEXT_CHECK_MISSING" in codes(variant(
-           clock={"holds_for": "a year"})), True)
-    ck("an unparseable next_check is caught",
-       "CLOCK_UNPARSEABLE" in codes(variant(
-           clock={"holds_for": "a year", "next_check": "soon"})), True)
+    # Rule 3. The field the whole thing exists to protect.
+    hand = copy.deepcopy(base["clock"])
+    hand["next_check"] = "2027-01-01"
+    ck("a hand-written next_check does not validate",
+       "CLOCK_ASSERTED" in codes(variant(clock=hand)), True)
+    hand2 = copy.deepcopy(base["clock"])
+    hand2["holds_for"] = "a year"
+    ck("a hand-written holds_for does not validate",
+       "CLOCK_ASSERTED" in codes(variant(clock=hand2)), True)
+    noterm = copy.deepcopy(base["clock"])
+    del noterm["neglected_term"]
+    ck("a clock with nothing held fixed does not validate",
+       "CLOCK_NOT_DERIVED" in codes(variant(clock=noterm)), True)
+    nobasis = copy.deepcopy(base["clock"])
+    nobasis["time_constant"] = {"value": 1.0, "units": "years"}
+    ck("a sub-field with no basis does not validate",
+       "CLOCK_NOT_DERIVED" in codes(variant(clock=nobasis)), True)
+
+    # The derivation itself.
+    d = derive_clock(base)
+    ck("shelf life is the time constant weighted by coupling",
+       (d["state"], round(d["shelf_life_years"], 6)), (DERIVED_CLOCK, 2.0))
+    ck("and the next check follows from it",
+       d["next_check"], "2028-08-24")
+    ck("regime is adiabatic when the term moves below the ceiling",
+       d["regime"], ADIABATIC)
+
+    fast = copy.deepcopy(base["clock"])
+    fast["time_constant"] = {"value": 0.1, "units": "years",
+                             "basis": "stipulated"}
+    d2 = derive_clock({"clock": fast})
+    ck("a faster term shortens the shelf life",
+       round(d2["shelf_life_years"], 6), 0.2)
+    ck("and crossing the ceiling makes it sudden", d2["regime"], SUDDEN)
+
+    # The rule the drop states outright.
+    weak = copy.deepcopy(base["clock"])
+    weak["time_constant"] = {"value": 0.01, "units": "years",
+                             "basis": "very fast"}
+    weak["coupling"] = {"value": 0.0, "units": "1", "basis": "pinned"}
+    d3 = derive_clock({"clock": weak})
+    ck("weak coupling: a fast term does not shorten the shelf life",
+       (d3["state"], d3["next_check"]), (UNBOUNDED, None))
+
+    # The Palestine shape: no clock, and no default emitted.
+    nomeas = copy.deepcopy(base["clock"])
+    nomeas["time_constant"] = {"state": UNMEASURED,
+                               "why": "nobody measured how fast it changes"}
+    d4 = derive_clock({"clock": nomeas})
+    ck("an unmeasured sub-field yields no date and says why",
+       (d4["state"], d4["next_check"], d4["missing"]),
+       (UNDERIVABLE, None, ["time_constant"]))
+    ck("and the record still validates, because the absence is stated",
+       variant(clock=nomeas)[0], VALID)
+    nowhy = copy.deepcopy(base["clock"])
+    nowhy["time_constant"] = {"state": UNMEASURED}
+    ck("UNMEASURED without a reason does not validate",
+       "CLOCK_NOT_DERIVED" in codes(variant(clock=nowhy)), True)
 
     ck("an empty parent list with no reason is caught",
        "ROOT_UNEXPLAINED" in codes(variant(derivation={"parents": []})), True)
@@ -600,12 +818,18 @@ def _selftest():
        reg2.path("T-CHILD")[-1][2] != "UNRESOLVED", True)
 
     on = datetime.date(2026, 8, 25)
-    ck("a future next_check is CURRENT",
-       Registry({base["id"]: base}).due(on)[0][2], "CURRENT")
+    ck("a derived future check is CURRENT",
+       Registry({base["id"]: base}).due(on)[0][4], "CURRENT")
     past = copy.deepcopy(base)
-    past["clock"] = {"holds_for": "a week", "next_check": "2026-01-01"}
-    ck("a passed next_check is DUE",
-       Registry({"T-OK": past}).due(on)[0][2], "DUE")
+    past["clock"] = copy.deepcopy(base["clock"])
+    past["clock"]["measured_on"] = "2020-01-01"
+    ck("a derived past check is DUE",
+       Registry({"T-OK": past}).due(on)[0][4], "DUE")
+    nod = copy.deepcopy(base)
+    nod["clock"] = nomeas
+    ck("an underivable clock reports no date, never a default",
+       Registry({"T-OK": nod}).due(on)[0][1:4],
+       (UNDERIVABLE, "-", "-"))
     ck("an empty registry refuses rather than printing an empty table",
        main(["record.py", "due", os.path.join(HERE, "no_such_dir")]), 2)
     ck("--on's value is not read as a directory",
@@ -619,6 +843,15 @@ def _selftest():
     ck("'mayor' is not 'may'", hedges_in("The mayor signed it"), [])
     ck("'somewhere' is not 'some'", hedges_in("somewhere"), [])
     ck("'abouts' is not 'about'", hedges_in("thereabouts"), [])
+
+    # The reported constraint: the tool reports structure and does not
+    # label a record as wrong. Screened over the emitted report, with the
+    # same word list the detector uses.
+    rep = render_validate(Registry({base["id"]: base}))
+    ck("the emitted report carries no screened word",
+       no_severity.check(rep)[0], True)
+    ck("and the screen would fire if it drifted",
+       no_severity.check(rep + "\nthis record is wrong")[0], False)
 
     print("SELFTEST %s (%d checks failed)"
           % ("PASS" if not fails else "FAIL", len(fails)))
@@ -660,7 +893,13 @@ def main(argv):
             sys.stderr.write("no records found in %s\n"
                              % (rest[0] if rest else RECORDS))
             return 2
-        print(render_validate(reg))
+        out = render_validate(reg)
+        print(out)
+        clean, _h = no_severity.check(out)
+        if not clean:
+            sys.stderr.write("\n" + no_severity.report(out, "emitted report")
+                             + "\n")
+            return 1
         return 0
     if cmd == "path":
         if not rest:
@@ -680,7 +919,9 @@ def main(argv):
                              % (rest[0] if rest else RECORDS))
             return 2
         print("next-check status on %s" % on.isoformat())
-        print(table(["claim", "next_check", "state"], reg.due(on)))
+        print("shelf life = time constant / |coupling|, both derived")
+        print(table(["claim", "clock", "shelf_yr", "next_check", "state"],
+                    reg.due(on)))
         return 0
     print(USAGE)
     return 2

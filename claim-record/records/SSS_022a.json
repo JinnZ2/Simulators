@@ -31,8 +31,24 @@
     "outside_this": "UNTESTED at other radii. A larger radius can only raise the present count, so 22 of 22 is stable upward and not downward."
   },
   "clock": {
-    "holds_for": "as long as the file, the radius and patterns.json are unchanged",
-    "next_check": "2026-11-25"
+    "measured_on": "2026-08-25",
+    "neglected_term": {
+      "name": "pattern file",
+      "held_fixed": "patterns.json as of the run"
+    },
+    "time_constant": {
+      "state": "UNMEASURED",
+      "why": "not measured; the revision rate of this instrument has not been recorded"
+    },
+    "rate_ceiling": {
+      "state": "UNMEASURED",
+      "why": "no rate of instrument change at which the claim stops holding has been established"
+    },
+    "coupling": {
+      "value": 0.0,
+      "units": "1",
+      "basis": "the domain of validity pins the instrument revision, so the claim does not move when that revision does. Coupling zero by construction, not by measurement."
+    }
   },
   "derivation": {
     "parents": [

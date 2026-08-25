@@ -31,8 +31,24 @@
     "outside_this": "UNTESTED. Whether the Home Office factors are computed rather than looked up for a reason a domain reader would accept is not a property this instrument reads."
   },
   "clock": {
-    "holds_for": "the life of this version of the workbook",
-    "next_check": "2026-11-25"
+    "measured_on": "2026-08-25",
+    "neglected_term": {
+      "name": "label model",
+      "held_fixed": "CHOICE 4, one label row per sheet"
+    },
+    "time_constant": {
+      "state": "UNMEASURED",
+      "why": "not measured; the revision rate of this instrument has not been recorded"
+    },
+    "rate_ceiling": {
+      "state": "UNMEASURED",
+      "why": "no rate of instrument change at which the claim stops holding has been established"
+    },
+    "coupling": {
+      "value": 0.0,
+      "units": "1",
+      "basis": "the domain of validity pins the instrument revision, so the claim does not move when that revision does. Coupling zero by construction, not by measurement."
+    }
   },
   "derivation": {
     "parents": [

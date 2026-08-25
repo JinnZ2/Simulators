@@ -14,6 +14,8 @@ record selftest
   an interval marked exact is caught                         PASS got=True want=True
   a point from a named statistic validates                   PASS got='VALID' want='VALID'
   a collapse with no named point is caught                   PASS got=True want=True
+  an upstream point without its source is caught             PASS got=True want=True
+  an upstream point that names the source and the gap validates PASS got='VALID' want='VALID'
   'other' has to name the statistic                          PASS got=True want=True
   an uncharacterised error is caught                         PASS got=True want=True
   UNQUANTIFIED without a reason is caught                    PASS got=True want=True
@@ -21,30 +23,49 @@ record selftest
   no conditions is caught                                    PASS got=True want=True
   a missing outside_this is caught                           PASS got=True want=True
   UNTESTED outside_this validates                            PASS got='VALID' want='VALID'
-  a missing next_check is caught                             PASS got=True want=True
-  an unparseable next_check is caught                        PASS got=True want=True
+  a hand-written next_check does not validate                PASS got=True want=True
+  a hand-written holds_for does not validate                 PASS got=True want=True
+  a clock with nothing held fixed does not validate          PASS got=True want=True
+  a sub-field with no basis does not validate                PASS got=True want=True
+  shelf life is the time constant weighted by coupling       PASS got=('DERIVED', 2.0) want=('DERIVED', 2.0)
+  and the next check follows from it                         PASS got='2028-08-24' want='2028-08-24'
+  regime is adiabatic when the term moves below the ceiling  PASS got='ADIABATIC' want='ADIABATIC'
+  a faster term shortens the shelf life                      PASS got=0.2 want=0.2
+  and crossing the ceiling makes it sudden                   PASS got='SUDDEN' want='SUDDEN'
+  weak coupling: a fast term does not shorten the shelf life PASS got=('UNBOUNDED_BY_THIS_TERM', None) want=('UNBOUNDED_BY_THIS_TERM', None)
+  an unmeasured sub-field yields no date and says why        PASS got=('UNDERIVABLE', None, ['time_constant']) want=('UNDERIVABLE', None, ['time_constant'])
+  and the record still validates, because the absence is stated PASS got='VALID' want='VALID'
+  UNMEASURED without a reason does not validate              PASS got=True want=True
   an empty parent list with no reason is caught              PASS got=True want=True
   an unresolvable parent does not validate                   PASS got=('INVALID', True) want=('INVALID', True)
   a resolvable parent validates                              PASS got='VALID' want='VALID'
   a cycle is reported as a cycle, not as recursion           PASS got=('INVALID', True) want=('INVALID', True)
   the load path walks upward                                 PASS got=['T-CHILD', 'T-OK'] want=['T-CHILD', 'T-OK']
   an unresolved parent shows in the path                     PASS got=True want=True
-  a future next_check is CURRENT                             PASS got='CURRENT' want='CURRENT'
-  a passed next_check is DUE                                 PASS got='DUE' want='DUE'
+  a derived future check is CURRENT                          PASS got='CURRENT' want='CURRENT'
+  a derived past check is DUE                                PASS got='DUE' want='DUE'
+  an underivable clock reports no date, never a default      PASS got=('UNDERIVABLE', '-', '-') want=('UNDERIVABLE', '-', '-')
+no records found in /home/user/Simulators/claim-record/no_such_dir
   an empty registry refuses rather than printing an empty table PASS got=2 want=2
 next-check status on 2026-08-25
-claim     next_check  state  
---------  ----------  -------
-SSS_017   2026-11-25  CURRENT
-SSS_019   2026-11-25  CURRENT
-SSS_020   2026-11-25  CURRENT
-SSS_021   2026-11-25  CURRENT
-SSS_022a  2026-11-25  CURRENT
-SSS_022b  2026-11-25  CURRENT
+shelf life = time constant / |coupling|, both derived
+claim          clock                   shelf_yr  next_check  state         
+-------------  ----------------------  --------  ----------  --------------
+SSS_017        UNBOUNDED_BY_THIS_TERM  -         -           REGIME_UNKNOWN
+SSS_019        UNDERIVABLE             -         -           REGIME_UNKNOWN
+SSS_020        UNDERIVABLE             -         -           REGIME_UNKNOWN
+SSS_021        UNDERIVABLE             -         -           REGIME_UNKNOWN
+SSS_022a       UNDERIVABLE             -         -           REGIME_UNKNOWN
+SSS_022b       UNDERIVABLE             -         -           REGIME_UNKNOWN
+UNF_GRID_IRAQ  DERIVED                 3.40      2030-01-18  CURRENT
+UNF_HOTEL_AR   UNDERIVABLE             -         -           REGIME_UNKNOWN
+UNF_PALESTINE  UNDERIVABLE             -         -           REGIME_UNKNOWN
   --on's value is not read as a directory                    PASS got=0 want=0
   a hedge-free assertion is clean                            PASS got=[] want=[]
   'maybe' style hedges are caught                            PASS got=True want=True
   'mayor' is not 'may'                                       PASS got=[] want=[]
   'somewhere' is not 'some'                                  PASS got=[] want=[]
   'abouts' is not 'about'                                    PASS got=[] want=[]
+  the emitted report carries no screened word                PASS got=True want=True
+  and the screen would fire if it drifted                    PASS got=False want=False
 SELFTEST PASS (0 checks failed)

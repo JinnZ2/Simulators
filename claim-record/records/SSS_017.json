@@ -31,8 +31,25 @@
     "outside_this": "UNTESTED on any other workbook. The mechanism is a property of the OOXML shared-formula encoding, not of this file, so the direction is expected to carry; the magnitude is not."
   },
   "clock": {
-    "holds_for": "as long as both the file and that reader revision are unchanged; the file is fixed, the reader is not",
-    "next_check": "2026-11-25"
+    "measured_on": "2026-08-25",
+    "neglected_term": {
+      "name": "reader revision",
+      "held_fixed": "the parser revision that produced the count"
+    },
+    "time_constant": {
+      "value": 0.003,
+      "units": "years",
+      "basis": "sheetmodel.py was revised twice on 2026-08-25; taken as 0.003 years and measured only over one day"
+    },
+    "rate_ceiling": {
+      "state": "UNMEASURED",
+      "why": "no rate of instrument change at which the claim stops holding has been established"
+    },
+    "coupling": {
+      "value": 0.0,
+      "units": "1",
+      "basis": "the claim names the commit in its domain of validity, so a later reader revision does not move it"
+    }
   },
   "derivation": {
     "parents": [],

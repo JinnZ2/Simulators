@@ -659,3 +659,163 @@ the screen.
 **Falsifier:** a third output path that prints without screening.
 
 **Status: REPAIRED.**
+
+---
+
+## Claims from the coupling integration
+
+`coupling.py`, built to section 4 of the 2026-08-25 order: replace
+dependent count with coupling strength where it is computable from the
+workbook, by perturbing the constant and measuring movement in the
+output cells.
+
+---
+
+### SSS_025 — the evaluator reproduces 631 of 631 cached values, and that is a known-answer run on real data
+
+Every derived cell in an `.xlsx` carries the value Excel last computed
+for it. `coupling.py verify` recomputes each one and compares.
+
+| run | reproduced | disagreed | not computable |
+|---|---|---|---|
+| arithmetic only | 475 | 0 | 156 |
+| + lazy `IF`, comparisons, BLANK | 608 | 0 | 23 |
+| + re-entrancy repair (`SSS_027`) | 627 | 0 | 4 |
+| + `SUMIF` | 629 | 0 | 2 |
+| + Excel's range semantics (`SSS_028`) | **631** | **0** | **0** |
+| + `VLOOKUP` exact | 631 | 0 | 0 |
+
+**Zero disagreements at every stage.** This is the discipline
+`tools/known_answer.py` states, run against a file nobody here wrote,
+and it is stronger evidence than any fixture: the answers were fixed by
+Excel before the evaluator existed.
+
+`verify` is itself null-tested in both directions on a fixture carrying
+one right cached value and one deliberately wrong one, because a verify
+that reported everything as matching would pass a one-armed test.
+
+**Falsifier:** a workbook where the evaluator reproduces fewer than it
+claims, or disagrees.
+
+**Status: SUPPORTED, n=1 workbook.**
+
+---
+
+### SSS_026 — coupling is a property of the workbook AND a case, not of the workbook alone
+
+The first run returned **0 of 789 constants in the coupling mode.** The
+cause was not a missing function: the workbook is an unfilled template,
+every activity cell is empty, `F6 = D6*E6` evaluates to zero on both
+sides of any perturbation, and **nothing moves because nothing flows.**
+
+So `elasticity()` takes `inputs` — the case the coupling is measured
+under — and the case is printed into every report. Without one the
+header says so: *"none given — an unfilled template moves nothing."*
+
+A distinct state came with it. `NO_LIVE_PATH` (terminals evaluate, base
+is zero) is not `NOT_COMPUTABLE` (no terminal could be evaluated), and
+neither is an elasticity of zero, which would read as *measured, and it
+does not matter*.
+
+**Falsifier:** a workbook whose coupling is stable across every case,
+which would make the case parameter decoration.
+
+**Status: SUPPORTED.**
+
+---
+
+### SSS_027 — the evaluator was not re-entrant, and only a nested formula could show it
+
+Parser state lived on the instance. Evaluating a referenced cell
+re-enters `_eval` and overwrites `_s`, `_i` and `_sheet`, so the outer
+formula resumed parsing inside the inner one.
+
+It cost `SUM(E3:E24)` over derived cells — **every rollup in the
+workbook** — and the fixture could not show it, because every formula in
+the fixture was one level deep. Repaired by saving and restoring parser
+state across nesting, with a fixture that sums three derived cells and
+then continues the outer expression.
+
+Same lesson as `SSS_017`: a fixture written by the author of the code
+exercises the depths the author thought of.
+
+**Falsifier:** a nesting shape the save does not cover.
+
+**Status: REPAIRED, pinned.**
+
+---
+
+### SSS_028 — the workbook's grand total sums from a header row, and the evaluator had to match Excel to see it
+
+`Report!E23` is `SUM(Food!E5:E16)`. **Every sibling row starts at row 6**
+— `'WTT- fuels'!F6:F30`, `'Material use'!E6:E43`, `'Home Office'!J6:J36`
+— and this one starts at 5, which is the column header cell containing
+the text `kg CO2e`.
+
+Excel ignores text inside a range aggregate, so the workbook computes
+correctly and the off-by-one is invisible in use. The evaluator raised
+on it, which is how it was found; matching Excel's rule was the repair,
+and the observation is the finding.
+
+**Falsifier:** another sheet whose report row also starts at the header,
+making it a convention rather than an outlier.
+
+**Status: SUPPORTED. Reported as structure; what it means for the
+workbook is the operator's reading.**
+
+---
+
+### SSS_029 — coverage of a perturbation is a property of the terminals, not of the formula population
+
+At one point the evaluator reproduced **627 of 631** formulas and **0 of
+789** constants reached a coupling number.
+
+The reason is structural: almost every constant in the workbook
+terminates at one cell, `Report!E25`, the grand total. That cell summed
+two `SUMIF` rows, and **two unsupported cells gated the coupling mode
+for the entire workbook.**
+
+So formula coverage and coupling coverage are different quantities and
+the first does not imply the second. A tool reporting only the first
+would have looked 99.4% complete while measuring nothing.
+
+**Falsifier:** a workbook with many independent terminals, where partial
+formula coverage buys proportional coupling coverage.
+
+**Status: SUPPORTED.**
+
+---
+
+### SSS_030 — replacing dependent count with coupling changes the answer, not the presentation
+
+Under the stated case `Fuels!E6=1000, Your organisation!C6=Iraq,
+Electricity, heat, cooling!E7=1000`:
+
+| | constants |
+|---|---|
+| ranked | 789 |
+| coupling mode | 784 |
+| **coupling > 0** | **3** |
+| coupling exactly 0 | 781 |
+| count-mode fallback | 5 |
+
+**Every one of the 781 zero-coupling constants ranks non-zero under
+dependent count, from 3 up to 380.** Dependent count measures *wiring*;
+coupling measures *what moves given a case*. On a workbook where most
+lines have no activity data, those are opposite answers.
+
+The top row is the Iraq grid factor at coupling 0.6215 and rank 3.107 —
+and the number is interpretable: the elasticity of a sum with respect to
+one of its terms is that term's **share of the total**, which the
+`Fuels!D6` case confirms to four figures (0.44327 / 0.56877 = 0.7794
+against a measured 0.7793).
+
+**The two modes are not on one scale** and the report says so, sorting
+within mode rather than merging them — a column mixing `coupling × depth`
+with `deps × depth` is a ratio across unlike objects.
+
+**Falsifier:** a fully populated case where the two orderings agree,
+which would make the substitution cosmetic.
+
+**Status: SUPPORTED under the stated case. Coupling is case-dependent by
+construction and the case is printed with every run.**

@@ -76,11 +76,49 @@ At least one condition, each a `name` and a `value`. Plus
 `outside_this`: what is known to happen outside the conditions.
 `UNTESTED` is a legal value; an omission is not.
 
-### 5 — the clock
+### 5 — the clock, DERIVED and never asserted
 
-`holds_for`, and a `next_check` that parses as an ISO date. No claim
-without one. `record.py due --on DATE` turns the field into a state:
-`CURRENT`, `DUE`, or `UNPARSEABLE`.
+Three sub-fields, plus what the claim held fixed and when it was
+measured. Nothing else, and in particular **no date**.
+
+| sub-field | is | units |
+|---|---|---|
+| `neglected_term.held_fixed` | what this claim held fixed | — |
+| `time_constant` | how fast that thing changes | `years` |
+| `rate_ceiling` | the fastest background change the claim survives | `per_year` |
+| `coupling` | sensitivity of the result to the neglected term | `1` |
+
+Each is a value **with a `basis`**, or `UNMEASURED` **with a `why`**. A
+value with no basis is refused: a number typed in with nothing behind it
+is the clock asserted one level down.
+
+**Derived, not stored:**
+
+    shelf_life = time_constant / |coupling|
+    next_check = measured_on + shelf_life
+    regime     = ADIABATIC if 1/time_constant <= rate_ceiling else SUDDEN
+
+**The coupling has to be dimensionless.** A raw partial `dY/dX` carries
+the units of the result over the units of the term, and years divided by
+that is not a duration. The quantity that works is the elasticity
+`(dY/Y)/(dX/X)`, which is what `sheet-structure-scan/coupling.py`
+measures by perturbing the constant and reading the output cells — so
+for a claim about a workbook the third sub-field is **a measurement, not
+a judgement.** `units` must be `"1"`.
+
+**Weak coupling does not shorten the shelf life, and at zero it does not
+bound it.** That is a state, `UNBOUNDED_BY_THIS_TERM`, not a large
+number — a number would sort.
+
+**A clock that cannot be derived emits nothing.** If the time constant
+or the coupling is `UNMEASURED`, the state is `UNDERIVABLE`,
+`next_check` is `None`, and there is no branch that can produce a date.
+That is the Palestine case and it is the reason the field exists.
+
+**The rate ceiling refines the reading and does not gate the date.**
+It gives the regime; the shelf life needs only the time constant and the
+coupling. Forcing it would make `UNDERIVABLE` the common case for a
+reason section 2 does not give.
 
 ### 6 — derivation
 
@@ -98,7 +136,8 @@ Three states, and the choice among them is the field's whole content:
 | state | means | requires |
 |---|---|---|
 | `NOT_COLLAPSED` | the measurement is an interval as measured | — |
-| `COLLAPSED` | a distribution was reduced | `from`, `point`, `why` |
+| `COLLAPSED` | a distribution was reduced, and the statistic is known | `from`, `point`, `why` |
+| `COLLAPSED_UPSTREAM` | a point arrived as a point, and the source did not say what it collapsed | `source`, `what_is_unstated` |
 | `EXACT` | a count or a definition, so a point *is* the measurement | `basis` |
 
 `point` comes from a **closed vocabulary** — `mean`, `median`, `mode`,
@@ -126,6 +165,12 @@ Both directions are pinned in the selftest.
 
 ## 2. THE TWO HARD RULES, AND HOW THEY ARE TESTED
 
+**Rule 3 — a clock asserted rather than derived does not validate.**
+`holds_for`, `next_check`, `shelf_life` and `shelf_life_years` are
+refused as literals in the clock. So is a sub-field with a value and no
+basis, and `UNMEASURED` with no reason — the two ways to assert it one
+level down.
+
 **Rule 1 — a claim with an unresolvable parent does not validate.**
 Enforced against the registry, not against the file. A cycle is reported
 as `PARENT_CYCLE` with the loop printed, not as recursion.
@@ -144,6 +189,18 @@ resolvable parent.
 39 checks, both directions on every rule that has two.
 
 ---
+
+## 2b. THE CONSTRAINT ON OUTPUT
+
+The tool reports structure and never labels a record as wrong. `VALID`
+and `INVALID` are about **conformance to the record schema** — never
+about whether a claim is true, how much weight a measurement carries, or
+what to do next, and none of those is computed. The report says so above
+the table.
+
+Enforced with the same screen the detector uses, **imported** from
+`sheet-structure-scan/no_severity.py` rather than copied, and run over
+the emitted report on every invocation.
 
 ## 3. WHAT THE SCHEMA DOES NOT HOLD
 
@@ -170,4 +227,6 @@ inspection. See `CLAIM_TABLE.md` for the measurements.
 | F2 | a claim that validates while a reader would say a field is missing in substance — the sentinel accepted where a real value existed |
 | F3 | a hedge that survives field 1 and changes what the assertion licenses |
 | F4 | a load path that misses a real dependency, because field 6 records what the author remembered rather than what the claim rests on |
-| F5 | a corpus where `COLLAPSED` never occurs, making field 7's stated purpose untested — **this one has already fired, see `CR_006`** |
+| F5 | a corpus where `COLLAPSED` never occurs, making field 7's stated purpose untested — **fired at `CR_006`, closed at `CR_016` by the hotel factor** |
+| F6 | a corpus where no record carries a measured `rate_ceiling`, making the adiabatic/sudden distinction untested — **currently firing, see `CR_017`** |
+| F7 | a way to get a date out of the schema without three derived sub-fields behind it |

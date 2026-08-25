@@ -282,3 +282,211 @@ and no record here is one.
 instrument does not.
 
 **Status: SUPPORTED.**
+
+---
+
+## Claims from section 2, the derived clock
+
+Delivered 2026-08-25: three sub-fields, all derived rather than
+asserted; shelf life is the time constant weighted by coupling; a clock
+asserted rather than derived does not validate.
+
+---
+
+### CR_012 — the coupling has to be a dimensionless elasticity, or the shelf life is not a time
+
+Section 2 calls the third sub-field *the partial derivative*. Taken
+literally, `dY/dX` carries the units of the result over the units of the
+neglected term, and
+
+    shelf_life = time_constant / coupling
+
+is then years divided by (kg CO2e per kWh per kWh), which is not a
+duration and does not compare between two claims.
+
+The quantity that works is the **elasticity**, `(dY/Y)/(dX/X)`:
+dimensionless, comparable across claims, and exactly what
+`sheet-structure-scan/coupling.py` measures by perturbation. So the
+schema requires `clock.coupling.units == "1"` and refuses anything else.
+
+This is `reasoning-gate`'s `G-DIM` applied before the number is produced
+rather than after it is quoted.
+
+**Falsifier:** a coupling with units that still divides a time correctly.
+
+**Status: SUPPORTED. The sub-field is enforced dimensionless.**
+
+---
+
+### CR_013 — all three behaviours the order names are realized on real records
+
+| record | clock | shelf life | next check |
+|---|---|---|---|
+| `UNF_GRID_IRAQ` | **DERIVED** | **3.40 yr** | 2030-01-18 |
+| `UNF_PALESTINE` | **UNDERIVABLE** | — | — |
+| `SSS_017` | **UNBOUNDED_BY_THIS_TERM** | — | — |
+
+**The grid factor: derived and short**, as predicted. It holds the
+generation mix fixed; the mix time constant is 3 years and the coupling
+is **0.8815, measured by perturbation** on the file rather than
+asserted — `+0.1%` on `Electricity, heat, cooling!B193`, elasticity of
+`Report!E25` under a stated case.
+
+**The Palestine factor: no clock, and no default emitted.** It holds
+fixed that five neighbours resemble the target. That resemblance was
+never measured, so `time_constant` is `UNMEASURED` with the reason, and
+the derivation returns `UNDERIVABLE` with `next_check: None`. There is
+no branch in `derive_clock` that can produce a date from an unmeasured
+sub-field.
+
+**`SSS_017`: the weak-coupling rule, instanced.** Its neglected term is
+the reader revision, which moved **twice in one day** — a time constant
+of 0.003 years, the fastest in the registry. Its `domain_of_validity`
+names the commit, so the claim does not move when the reader does:
+coupling 0, and the state is `UNBOUNDED_BY_THIS_TERM`. *Weak coupling
+means a fast-moving neglected term doesn't shorten it* — the fastest
+term in the corpus dates nothing.
+
+**Falsifier:** a record whose derived clock a reader judges wrong in
+direction.
+
+**Status: SUPPORTED, three of three.**
+
+---
+
+### CR_014 — rule 3 is enforced against the literal, and the sub-fields are enforced one level down
+
+`holds_for`, `next_check`, `shelf_life` and `shelf_life_years` are
+**refused as literals** in the clock — `CLOCK_ASSERTED`. That is rule 3
+directly.
+
+The rule is also enforced where it would otherwise be evaded: a
+sub-field carrying a value with **no `basis`** is refused, because a
+number typed in with nothing behind it is the clock asserted one level
+down. `UNMEASURED` without a `why` is refused for the same reason.
+
+**Falsifier:** a way to get a date out of the schema without three
+derived sub-fields behind it.
+
+**Status: SUPPORTED. Four literal names, both sub-field evasions.**
+
+---
+
+### CR_015 — the rate ceiling refines the reading and does not gate the date
+
+`rate_ceiling` gives the regime — `ADIABATIC` when the neglected term
+moves slower than the ceiling, `SUDDEN` when faster — and it is **not**
+required for the shelf life, which needs only the time constant and the
+coupling.
+
+That split is deliberate: a claim whose ceiling nobody has established
+still has a derivable shelf life, and forcing the ceiling would make
+`UNDERIVABLE` the common case for a reason section 2 does not give.
+**8 of 9 records carry `rate_ceiling: UNMEASURED`** and the one derived
+clock still derives.
+
+**Falsifier:** a case where the regime changes what the shelf life
+should be, making the split wrong.
+
+**Status: SUPPORTED. `REGIME_UNKNOWN` on 9 of 9, which is a corpus
+statement — see `CR_017`.**
+
+---
+
+### CR_016 — `COLLAPSED_UPSTREAM`, the fourth state the three fixtures forced
+
+The three worked cases separate on exactly one axis, and the schema had
+only two boxes for three answers:
+
+| record | state | which point | stated by |
+|---|---|---|---|
+| `UNF_HOTEL_AR` | `COLLAPSED` | **`upper_quartile`** | the workbook, at `Info and sources!E19` |
+| `UNF_PALESTINE` | `COLLAPSED` | **`mean`** | computed in the workbook, verified to **1.1e-16** |
+| `UNF_GRID_IRAQ` | **`COLLAPSED_UPSTREAM`** | **unstated** | nobody |
+
+The grid factor arrived as a point from a cited dataset that the
+workbook does not describe. That is not `COLLAPSED` (the statistic is
+unknown), not `EXACT` (there was plainly something to collapse), and not
+`NOT_COLLAPSED`. The new state requires `source` and `what_is_unstated`,
+so the gap is named rather than defaulted into one of the other three.
+
+The hotel case is `CR_006` closed: **field 7's stated purpose, the
+upper-quartile field, now has an instance**, and it is a real one — the
+workbook says so in its own words.
+
+**Falsifier:** a fifth arrangement these four cannot hold.
+
+**Status: SUPPORTED. Field 7 has 4 states and the corpus now uses 3.**
+
+---
+
+### CR_017 — the corpus is still uniform in the fields the sentinels cover
+
+| field | 9 records |
+|---|---|
+| `clock.rate_ceiling` | `UNMEASURED` **8** |
+| `clock` regime | `REGIME_UNKNOWN` **9** |
+| `domain_of_validity.outside_this` | contains `UNTESTED` **9** |
+| `collapse_record.state` | `EXACT` 6, `COLLAPSED` 2, `COLLAPSED_UPSTREAM` 1 |
+
+`CR_006` is closed and `CR_007` is not. **No record in the registry
+carries a measured rate ceiling**, so the adiabatic-versus-sudden
+distinction section 2 asks for has been implemented, is exercised in the
+selftest in both directions, and has never fired on a real record.
+
+That is the same shape `CR_006` had one drop earlier, one field over,
+and it is stated before anyone reads nine validating records as nine
+tests of the clock.
+
+**Falsifier:** a record with a measured `rate_ceiling`.
+
+**Status: SUPPORTED. The regime column is untested by the corpus.**
+
+---
+
+### CR_018 — the coupling sub-field is measured on the file, which is the join between sections 2 and 4
+
+`UNF_GRID_IRAQ` and `UNF_HOTEL_AR` both carry a coupling produced by
+`sheet-structure-scan/coupling.py` — 0.8815 and 0.9247 — with the
+perturbation, the target and the case written into `basis`.
+
+That is what makes rule 3 more than a formatting rule: for a claim about
+a workbook, **the third sub-field is not a judgement at all.** It is a
+measurement anyone can repeat by running the named command against the
+named file.
+
+Both were `NOT_COMPUTABLE` until `VLOOKUP` was implemented, because both
+worked cases in the delivery are consumed by a lookup. The order's two
+sections failed at the same cell for the same reason, and unblocking one
+unblocked the other.
+
+**Falsifier:** a claim whose coupling cannot be measured on any
+instrument, making the sub-field a judgement again.
+
+**Status: SUPPORTED for workbook claims. For the six `SSS_*` records the
+coupling is 0 by construction and says so in its basis.**
+
+---
+
+### CR_019 — the no-labelling constraint is imported, not re-implemented
+
+The order states it: the tool reports structure and never labels a
+record as wrong. `record.py` imports `no_severity` from
+`sheet-structure-scan/` rather than copying it — one screen, and
+`MF_019` is what copying costs — and screens its own emitted report,
+returning non-zero if a word lands.
+
+It fired immediately, on this file's own disclaimer prose (*"a record
+should have been written"*, then *"what anyone ought to do"*). Reworded
+twice rather than loosening the screen. Second instance of `SSS_024`'s
+use-and-mention boundary, in the second tool.
+
+The verdict vocabulary is stated rather than assumed: **`VALID` and
+`INVALID` are about conformance to the record schema**, never about
+whether a claim is true or how much weight a measurement carries, and
+the report says so above the table.
+
+**Falsifier:** a labelling reaching the report in words the screen does
+not hold — open by construction, as `CR_009` states.
+
+**Status: SUPPORTED.**

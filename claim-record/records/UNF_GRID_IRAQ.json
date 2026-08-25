@@ -1,0 +1,63 @@
+{
+  "id": "UNF_GRID_IRAQ",
+  "assertion": "The workbook's electricity grid emission factor for Iraq is 0.93391 kg CO2e per kWh.",
+  "measurement": {
+    "lo": 0.9339101550061591,
+    "hi": 0.9339101550061591,
+    "units": "kg CO2e per kWh"
+  },
+  "instrument": {
+    "name": "cell read from Electricity, heat, cooling!B193, sourced in the workbook to the UNFCCC Harmonized Grid Emission factor (GEF) data set",
+    "error": {
+      "kind": "UNQUANTIFIED",
+      "why": "the workbook cites the dataset by name at Info and sources!D10 and carries no interval, no vintage and no method for it"
+    }
+  },
+  "domain_of_validity": {
+    "conditions": [
+      {
+        "name": "file",
+        "value": "UNFCCC GHG emissions calculator ver01.1, md5 57d3ffd78a9f5f9980e15feb65f8d986"
+      },
+      {
+        "name": "country",
+        "value": "Iraq"
+      },
+      {
+        "name": "generation mix",
+        "value": "whatever mix the source dataset averaged over"
+      }
+    ],
+    "outside_this": "UNTESTED. The factor is a national average and says nothing about a particular site, hour or supplier."
+  },
+  "clock": {
+    "measured_on": "2026-08-25",
+    "neglected_term": {
+      "name": "generation mix",
+      "held_fixed": "that the country's generation mix is the one the factor was computed over"
+    },
+    "time_constant": {
+      "value": 3.0,
+      "units": "years",
+      "basis": "stated in the delivery as a few years and taken as 3; NOT measured here, and the basis is the delivery rather than a source"
+    },
+    "rate_ceiling": {
+      "state": "UNMEASURED",
+      "why": "no rate of mix change at which this factor stops tracking has been established"
+    },
+    "coupling": {
+      "value": 0.8815378544305833,
+      "units": "1",
+      "basis": "measured by perturbation: sheet-structure-scan/coupling.py of, +0.1% on the cell, elasticity of Report!E25 under the case Your organisation!C6=Iraq, Electricity, heat, cooling!E7=1000"
+    }
+  },
+  "derivation": {
+    "parents": [],
+    "root_reason": "a cell read from a delivered file, resting on no other claim here"
+  },
+  "collapse_record": {
+    "state": "COLLAPSED_UPSTREAM",
+    "source": "UNFCCC Harmonized Grid Emission factor (GEF) data set",
+    "what_is_unstated": "which statistic of the generation mix the single number is. The workbook cites the dataset and reproduces one value per country; nothing in the file states whether it is a mean, a median or something else, nor over what period."
+  }
+}

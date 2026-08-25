@@ -5803,6 +5803,40 @@ underneath).
   no evidence about any EPA product. One contingency named: a target
   shipping as legacy `.xls` makes `read()` raise, and **that** is when
   the one-reader slot gets spent — the test `SSS_001` sets for itself.
+  **`coupling.py` then replaced the ranking's first factor**, per the
+  integration order: a **dimensionless elasticity** measured by
+  perturbing a constant and reading the output cells, falling back to
+  dependent count where a formula is not evaluable, with the mode named
+  per row because `coupling x depth` and `deps x depth` are not on one
+  scale. **`SSS_025`:** the evaluator is checked against **Excel's own
+  cached values** and reproduces **631 of 631 with zero disagreements** —
+  a known-answer run on a file nobody here wrote — and `verify` is
+  itself null-tested on a fixture carrying one right cache and one
+  deliberately wrong one. **`SSS_026`:** the first run returned **0 of
+  789** in coupling mode because the workbook is an unfilled template
+  (`F6 = D6*E6` with `E6` empty moves nothing), so **coupling is a
+  property of the workbook AND a case**, `--input` supplies it and every
+  report prints it, with `NO_LIVE_PATH` kept apart from
+  `NOT_COMPUTABLE` and from an elasticity of zero. **`SSS_027`:** the
+  evaluator was **not re-entrant** — parser state lived on the instance,
+  so a nested formula resumed the outer one inside itself, costing every
+  rollup in the workbook, and no depth-1 fixture could show it.
+  **`SSS_029`:** at one point 627 of 631 formulas evaluated and 0 of 789
+  constants got a coupling number, because nearly every constant
+  terminates at one grand total and **two `SUMIF` cells gated the whole
+  workbook** — coverage of a perturbation is a property of the
+  TERMINALS, not of the formula population. **`SSS_028`:** `Report!E23`
+  sums `Food!E5:E16`, starting on the **header row** where every sibling
+  row starts at 6; Excel ignores text in a range so the workbook
+  computes correctly and the off-by-one is invisible in use.
+  **`SSS_030`, the result the substitution is for:** under a stated case
+  **3 constants have non-zero coupling and 781 have exactly zero, and
+  every one of those 781 ranks non-zero under dependent count, up to
+  380** — count measures wiring, coupling measures what moves. The top
+  row is the Iraq grid factor at coupling 0.6215, and the number is
+  interpretable, since the elasticity of a sum with respect to one term
+  is that term's share of the total, confirmed to four figures on
+  `Fuels!D6`.
   **Then two real workbooks arrived and `SSS_010` closed.** The UNFCCC
   calculator holds 3 of 3 — **but not on the first run**: `UNF-P1` came
   back `0.037` against a registered `> 0.20`, and the cause was the
@@ -5854,8 +5888,8 @@ underneath).
   is installed, fails on the file, and **fails identically on a control
   this tool parses**, so the install is broken here and says nothing
   about the `.xls`. **`SSS_024`:** the output screen ran in one of two
-  CLIs and the gap surfaced on a real run. 101 selftest checks green
-  across four modules. Stdlib only, parses under 3.9, CC0.
+  CLIs and the gap surfaced on a real run. 133 selftest checks green
+  across five modules. Stdlib only, parses under 3.9, CC0.
 - `claim-record/` — Seven fields per claim, two hard rules, and a
   validator that refuses. Delivered spoken (`SOURCE_DROP.md`, verbatim):
   assertion without hedges / measurement as an interval / instrument plus
@@ -5912,7 +5946,41 @@ underneath).
   stated at the top of the file rather than the bottom. The load path is
   the payoff and is walkable: every claim in the corpus traces to
   `SSS_017`, the reader repair, so refuting it exposes five claims above
-  it visibly rather than by memory. Stdlib only, parses under 3.9, CC0.
+  it visibly rather than by memory. **Section 2 then replaced field 5
+  with three DERIVED sub-fields** — time constant of the nearest
+  neglected term, rate ceiling on the background, coupling — with
+  `shelf_life = time_constant / |coupling|` and **no date stored**;
+  rule 3 refuses `holds_for`/`next_check`/`shelf_life` as literals, and
+  refuses a sub-field with a value and no basis or `UNMEASURED` with no
+  reason, those being the two ways to assert it one level down.
+  **`CR_012`:** the coupling must be a **dimensionless elasticity** — a
+  raw partial `dY/dX` carries units and years divided by that is not a
+  duration — so `units` must be `"1"`, which is `G-DIM` applied before
+  the number is produced. **`CR_013`, all three behaviours realized on
+  real records from the UNFCCC file:** `UNF_GRID_IRAQ` **DERIVED, 3.40
+  years**, holding the generation mix fixed with coupling **0.8815
+  measured by perturbation** rather than asserted; `UNF_PALESTINE`
+  **UNDERIVABLE** — it holds fixed that five neighbours resemble the
+  target, never measured, and no branch can produce a date; `SSS_017`
+  **UNBOUNDED_BY_THIS_TERM**, its neglected term the reader revision
+  which moved **twice in one day** while the domain of validity pins the
+  commit, so coupling 0 and *the fastest term in the corpus dates
+  nothing*. **`CR_016`:** the three fixtures forced a **fourth collapse
+  state** — the hotel factor's statistic is stated in the workbook
+  (`upper quartile`, `Info and sources!E19`), the Palestine value is a
+  mean computed in the file and verified to **1.1e-16**, and the grid
+  factor arrived as a point from a cited dataset the workbook does not
+  describe, so `COLLAPSED_UPSTREAM` names the source and the gap rather
+  than defaulting into one of the other three; that closes `CR_006`.
+  **`CR_017` replaces it:** `rate_ceiling` is `UNMEASURED` on 8 of 9 and
+  the regime is `REGIME_UNKNOWN` on 9 of 9, so adiabatic-versus-sudden
+  is implemented, selftested both ways, and has never fired on a real
+  record — the same shape one field over. **`CR_019`:** the
+  no-labelling constraint is honoured by **importing** the detector's
+  screen rather than copying it, and it fired on this tool's own
+  disclaimer prose twice; `VALID`/`INVALID` are stated to be about
+  conformance to the schema and never about whether a claim is true.
+  55 selftest checks. Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

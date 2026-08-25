@@ -1,0 +1,65 @@
+{
+  "id": "UNF_PALESTINE",
+  "assertion": "The State of Palestine grid factor in this workbook is the arithmetic mean of the factors for Iraq, Jordan, Lebanon, the Syrian Arab Republic and Turkey.",
+  "measurement": {
+    "lo": 0.5693617090850457,
+    "hi": 0.5693617090850457,
+    "units": "kg CO2e per kWh"
+  },
+  "instrument": {
+    "name": "the five neighbour cells recomputed and compared to Electricity, heat, cooling!B296",
+    "error": {
+      "kind": "random",
+      "magnitude": "1.1e-16 absolute, the difference between the recomputed mean and the cell; float round-off"
+    }
+  },
+  "domain_of_validity": {
+    "conditions": [
+      {
+        "name": "file",
+        "value": "UNFCCC GHG emissions calculator ver01.1, md5 57d3ffd78a9f5f9980e15feb65f8d986"
+      },
+      {
+        "name": "the five",
+        "value": "Iraq, Jordan, Lebanon, Syrian Arab Republic, Turkey, as named at Info and sources!E10"
+      },
+      {
+        "name": "operation",
+        "value": "unweighted arithmetic mean"
+      }
+    ],
+    "outside_this": "UNTESTED, and the claim is about the arithmetic only. Whether the mean of those five is an estimate of Palestine's grid is a different claim with a different instrument, and this record makes none."
+  },
+  "clock": {
+    "measured_on": "2026-08-25",
+    "neglected_term": {
+      "name": "resemblance of the five neighbours to the target",
+      "held_fixed": "that a country's grid factor is estimated by the mean of five neighbours"
+    },
+    "time_constant": {
+      "state": "UNMEASURED",
+      "why": "never measured. The workbook states the substitution at Info and sources!E10 and gives no basis for it, so there is no measured rate at which the resemblance decays and none can be derived from the file."
+    },
+    "rate_ceiling": {
+      "state": "UNMEASURED",
+      "why": "follows the time constant: with no measured rate there is no ceiling to compare it to"
+    },
+    "coupling": {
+      "value": 0.8815378544305833,
+      "units": "1",
+      "basis": "measured by perturbation on the neighbouring Iraq cell under the same case; the Palestine row is consumed by the same lookup and carries the same elasticity to the reported total"
+    }
+  },
+  "derivation": {
+    "parents": [
+      "UNF_GRID_IRAQ"
+    ],
+    "root_reason": ""
+  },
+  "collapse_record": {
+    "state": "COLLAPSED",
+    "from": "the five neighbour factors",
+    "point": "mean",
+    "why": "the workbook states the substitution at Info and sources!E10 and the cell reproduces the unweighted mean to 1.1e-16"
+  }
+}

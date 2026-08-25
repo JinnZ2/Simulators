@@ -29,8 +29,14 @@ CC0. stdlib only. Parses under Python 3.9.
 import sys
 import zipfile
 
-# sheet -> {address: (kind, value)}
+# sheet -> {address: (kind, value)} or, for a formula, (kind, value, cached)
 # kind: 't' inline text, 'n' number, 'd' date serial, 'f' formula
+#
+# A formula cell may carry a THIRD element: the value Excel would have
+# cached for it. Without one the writer emits <v>0</v>, which is fine for
+# reading formulas and useless for checking an evaluator -- coupling.py's
+# verify() compares against exactly that cache, so a fixture with a fake
+# one cannot test it in either direction.
 SHEETS = [
     ("Inputs", {
         "A1": ("t", "item"),      "B1": ("t", "unit price (USD)"),
@@ -92,24 +98,29 @@ def _esc(s):
 
 def _sheet_xml(cellmap):
     rows = {}
-    for addr, (kind, val) in cellmap.items():
+    for addr, spec in cellmap.items():
+        kind, val = spec[0], spec[1]
+        cached = spec[2] if len(spec) > 2 else 0
         i = 0
         while i < len(addr) and addr[i].isalpha():
             i += 1
-        rows.setdefault(int(addr[i:]), []).append((addr[:i], addr, kind, val))
+        rows.setdefault(int(addr[i:]), []).append(
+            (addr[:i], addr, kind, val, cached))
     out = ['<?xml version="1.0" encoding="UTF-8" standalone="yes"?>',
            '<worksheet xmlns="http://schemas.openxmlformats.org/'
            'spreadsheetml/2006/main"><sheetData>']
     for r in sorted(rows):
         out.append('<row r="%d">' % r)
-        for col, addr, kind, val in sorted(rows[r], key=lambda t: (len(t[0]), t[0])):
+        for col, addr, kind, val, cached in sorted(
+                rows[r], key=lambda t: (len(t[0]), t[0])):
             if kind == "t":
                 out.append('<c r="%s" t="inlineStr"><is><t>%s</t></is></c>'
                            % (addr, _esc(val)))
             elif kind == "d":
                 out.append('<c r="%s" s="1"><v>%s</v></c>' % (addr, val))
             elif kind == "f":
-                out.append('<c r="%s"><f>%s</f><v>0</v></c>' % (addr, _esc(val)))
+                out.append('<c r="%s"><f>%s</f><v>%s</v></c>'
+                           % (addr, _esc(val), cached))
             else:
                 out.append('<c r="%s"><v>%s</v></c>' % (addr, val))
         out.append("</row>")

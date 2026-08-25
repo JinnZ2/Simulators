@@ -1,0 +1,67 @@
+{
+  "id": "UNF_HOTEL_AR",
+  "assertion": "The workbook's hotel emission factor for Argentina is 77.08 kg CO2e per occupied room-night and is the upper quartile of its source distribution.",
+  "measurement": {
+    "lo": 77.0804243080567,
+    "hi": 77.0804243080567,
+    "units": "kg CO2e per occupied room-night"
+  },
+  "instrument": {
+    "name": "cell read from Flight and Accommodation!X7, with the statistic read from Info and sources!E19",
+    "error": {
+      "kind": "systematic",
+      "magnitude": "an upper quartile sits above the median of its own distribution by construction, so a total built from it is biased high against a median-built one by an amount the workbook does not state"
+    }
+  },
+  "domain_of_validity": {
+    "conditions": [
+      {
+        "name": "file",
+        "value": "UNFCCC GHG emissions calculator ver01.1, md5 57d3ffd78a9f5f9980e15feb65f8d986"
+      },
+      {
+        "name": "country",
+        "value": "Argentina"
+      },
+      {
+        "name": "source",
+        "value": "2020 Cornell Hotel Sustainability Benchmarking Index, per Info and sources!D19"
+      },
+      {
+        "name": "statistic",
+        "value": "all hotels upper quartile, per Info and sources!E19"
+      }
+    ],
+    "outside_this": "UNTESTED. A hotel at the median of the same distribution is not described by this number, and the file gives no spread."
+  },
+  "clock": {
+    "measured_on": "2026-08-25",
+    "neglected_term": {
+      "name": "the distribution of per-room emissions across hotels in the country",
+      "held_fixed": "that the 2020 upper quartile still describes the stock"
+    },
+    "time_constant": {
+      "state": "UNMEASURED",
+      "why": "the workbook names the source and its year and gives no republication interval, no earlier edition to difference against, and no spread; nothing in the file measures how fast the distribution moves"
+    },
+    "rate_ceiling": {
+      "state": "UNMEASURED",
+      "why": "follows the time constant"
+    },
+    "coupling": {
+      "value": 0.9247199561144961,
+      "units": "1",
+      "basis": "measured by perturbation: +0.1% on the cell, elasticity of Report!E25 under the case Flight and Accommodation!G6=Argentina, H6=10, I6=2"
+    }
+  },
+  "derivation": {
+    "parents": [],
+    "root_reason": "a cell read from a delivered file"
+  },
+  "collapse_record": {
+    "state": "COLLAPSED",
+    "from": "the distribution of Hotel Carbon Footprint Per Occupied Room across all hotels in the index",
+    "point": "upper_quartile",
+    "why": "the workbook states it at Info and sources!E19: 'All hotels upper quartile emission factor value'. The statistic is documented in the file, which is what separates this record from UNF_GRID_IRAQ."
+  }
+}

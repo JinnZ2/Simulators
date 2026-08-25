@@ -8,7 +8,7 @@ claims in [`CLAIM_TABLE.md`](CLAIM_TABLE.md).
 
 ```
 python3 record.py validate            every record, with findings
-python3 record.py path SSS_022b       the load path, walked upward
+python3 record.py path UNF_PALESTINE  the load path, walked upward
 python3 record.py due --on 2026-08-25 whose next-check has passed
 python3 record.py --selftest
 ```
@@ -38,7 +38,36 @@ A point arrives either from a distribution or from a count, and saying
 which **is** the field. Without the coupling a record can satisfy both
 fields independently and still be the failure the drop describes.
 
-## What the six real records showed
+## The clock, derived
+
+Three sub-fields — the time constant of the nearest neglected term, the
+rate ceiling on the background, and the coupling — and **no date is
+stored**:
+
+    shelf_life = time_constant / |coupling|
+
+The coupling is a **dimensionless elasticity**, and it has to be: a raw
+partial derivative carries units, and a time divided by that is not a
+time. For a claim about a workbook it is **measured, not asserted** —
+`coupling.py` perturbs the constant and reads the output cells.
+
+All three behaviours the order names are realized on real records:
+
+| record | clock | shelf life |
+|---|---|---|
+| `UNF_GRID_IRAQ` | **DERIVED** | **3.40 yr**, next check 2030-01-18 |
+| `UNF_PALESTINE` | **UNDERIVABLE** | no date, and no default emitted |
+| `SSS_017` | **UNBOUNDED_BY_THIS_TERM** | the fastest term in the corpus dates nothing |
+
+The grid factor holds the generation mix fixed; coupling **0.8815**,
+measured on the file. The Palestine factor holds fixed that five
+neighbours resemble the target — never measured, so there is no branch
+that can produce a date. `SSS_017`'s neglected term moved **twice in one
+day** and its domain of validity pins the commit, so coupling is 0 and
+the term does not date the claim: *weak coupling means a fast-moving
+neglected term doesn't shorten it*, instanced.
+
+## What the real records showed
 
 Filled with claims from the `sheet-structure-scan/` run earlier the same
 day, where the provenance is known. All six validate — and the useful
@@ -46,18 +75,26 @@ part is what came back uniform:
 
 | field | corpus |
 |---|---|
-| `collapse_record.state` | **`EXACT` 6, `COLLAPSED` 0** |
+| `collapse_record.state` | `EXACT` 6, `COLLAPSED` 2, `COLLAPSED_UPSTREAM` 1 |
+| `clock.rate_ceiling` | **`UNMEASURED` 8 of 9** |
 | `instrument.error.kind` | `systematic` 6 |
 | `domain_of_validity.outside_this` | contains `UNTESTED` 6 |
 | `measurement` units carrying a denominator | **6** |
 
-**Field 7's stated purpose — the upper-quartile field — has zero
-instances** (`CR_006`). Not carelessness: every instrument here is
-deterministic and every artifact a fixed file, so every measurement is an
-exact count and `EXACT` is correct in all six. Fields 2 and 7 are aimed
-at measurements with sampling error and this folder has not made one. The
-selftest exercises the branch; the corpus does not, and those are
-different things.
+**`CR_006` is closed and `CR_017` replaces it.** Field 7's
+upper-quartile branch now has a real instance — the hotel factor, whose
+statistic the workbook states in its own words at `Info and sources!E19`.
+But **no record carries a measured `rate_ceiling`**, so the
+adiabatic-versus-sudden distinction is implemented, exercised in the
+selftest both ways, and has never fired on a real record. Same shape,
+one field over.
+
+The three fixtures forced a fourth collapse state (`CR_016`): the hotel
+source names its statistic, the Palestine value is a mean computed in the
+workbook and verified to **1.1e-16**, and the grid factor arrived as a
+point from a dataset the workbook does not describe —
+`COLLAPSED_UPSTREAM`, which names the source and the gap rather than
+defaulting into one of the other three.
 
 **There is no denominator field** (`CR_005`), so `129 of 825`, `22 of 22`
 and `1 of 11` all put the population in a free-text `units` string —
@@ -85,7 +122,7 @@ Every claim traces to `SSS_017`, the reader repair. Refute that and five
 claims above it are exposed — visibly, rather than because somebody
 remembered.
 
-39 selftest checks. Rule two gets seven null arms, one per field, and the
+55 selftest checks. Rule two gets seven null arms, one per field, and the
 **positive control comes first**: a validator that refuses everything
 passes all seven.
 
