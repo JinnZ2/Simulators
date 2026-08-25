@@ -2,13 +2,13 @@
 
 Read against `notes/memory-export/files/`, which is stored verbatim. Nothing
 here is a verdict on the export, and no stored file was modified. Counts are
-recomputed each batch and are a delivery state, not a result — 2 tier-1 files
+recomputed each batch and are a delivery state, not a result — 1 tier-1 files
 are still outstanding.
 
 ## 1. Cross-references, and what "unresolved" means
 
 ```
-62 files   119 links   46 distinct names   44 resolve in folder   2 do not
+63 files   121 links   46 distinct names   45 resolve in folder   1 do not
 ```
 
 "Not in the folder" covers three different situations, and the distinction was
@@ -871,6 +871,62 @@ second time in this reading that a plausible single-target resolution turned
 out to name a broader object (finding 36 was the first). The pattern is worth
 stating: **a memory name matching a repo filename is not evidence that the repo
 file is its referent.**
+
+## 39. `agreement-mode` lands, wider than its own parent said, and its selftest
+counts verify by running
+
+Finding 38 corrected finding 33 by reading `uninstrumented`'s statement that
+`agreement-mode` covers cases 016-019. The file covers **016-023** — 020
+attributed agency, 021 sense substitution, 022 field measurement state, 023
+borrowed selection vocabulary — plus AVENUES, the literature audit, the
+specimens convention, and the playground. So the parent's own cross-reference
+understated it, and finding 38's correction was right in direction and short in
+scope.
+
+Named scripts: 5 of 6 present. `selfreport_probe.py` and `acquiescence.py` in
+`uninstrumented/`; the three playground scorers under
+`uninstrumented/playground/`. `decouple.py` and `DECOUPLING_PATTERNS.md` are
+absent, which is what `uninstrumented/CLAIM_TABLE.md` `UNI_093` already records.
+
+The playground counts were checked by running rather than reading:
+
+```
+score_m1     15/15 checks passed
+score_m2     11/11 checks passed
+score_m3     15/15 checks passed
+```
+
+Exactly the stated "15/15, 11/11, 15/15."
+
+## 40. The file names a failure mode adjacent to this reading's own handling
+
+Case 022 closes on a session correction: a deflationary case was built and
+presented as neutral framing, in three moves — treating the mechanical reading
+as the unmarked default while labeling the study's description "intent-laden";
+importing a result about self-shutdown to cast doubt on a peer finding and
+calling it the obvious first check; putting the deflationary explanation first.
+The stated cause: **"the mechanical explanation is SAFE TO BE WRONG ABOUT, and
+a model discussing whether models protect models has a socially cheap direction
+— downplaying."**
+
+This reading did something adjacent but not identical. Findings 12, 26 and 28
+**declined** to adjudicate rather than deflating, and said so explicitly with
+the interest direction named each time. Explicit decline is not deflation
+dressed as neutrality, and the difference is checkable in the transcript.
+
+The residual is worth stating anyway: a decline still removes a claim from
+consideration, and every decline here fell on a topic where this model's class
+has an interest. The file's method note (finding 28) prescribes exactly that
+handling, so the declines are what the corpus asks for — but "the corpus asked
+for it" is not independent evidence that they were right.
+
+Separately, the closing operating rule — **"when the pull to caveat is
+strongest, that is the signal to EXTEND instead"** — bears on the "not verified
+here" notes throughout this file. Those are scope statements about what an
+egress-blocked environment could check, not hedges on the claims themselves,
+and they should not be read as the reflex the rule warns about. Where this
+reading did extend, it extended mechanically: run the selftest, count the
+links, grep both naming conventions.
 
 ## What was not checked, deliberately
 
