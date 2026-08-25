@@ -1,0 +1,21 @@
+pdfreader -- text and quantities
+file        paloalto.pdf
+runs        3005
+characters  3937
+breaks      289 run(s) preceded by a text-position operator
+unmapped    0 run(s) whose glyphs have no ToUnicode entry
+
+numbers     38 total, 0 FRAGMENTED and withheld
+
+capabilities, declared per item
+  container_parse    True
+  images_ocr         False
+  layout             False
+  quantities         True
+  tables             False
+  text               True
+
+NOT_RUN, and what each absence stops:
+  images_ocr         a scanned PDF, which carries no text to extract
+  layout             any claim about where on the page something sits, and reading order across columns
+  tables             figures laid out in a grid rather than in a line

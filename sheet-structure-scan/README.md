@@ -25,7 +25,9 @@ python3 scans.py --selftest
 | `coupling.py` | sensitivity by perturbation, and the ranking. `--selftest` |
 | `scan4.py` | stated-relationship maintenance, and the cross-file emission. `--selftest` |
 | `xlsreader.py` | legacy .xls (BIFF8), stdlib. `--selftest` |
-| `docreader.py` | legacy .doc container triage and capability declaration. `--selftest` |
+| `docreader.py` | legacy .doc container triage and text. `--selftest` |
+| `pdfreader.py` | PDF text and quantities, stdlib. `--selftest` |
+| `PDF_KNOWN_ANSWERS.md` | the answer key, registered before the reader worked |
 | `selection.py` | the WO7 eligibility screen and reject log. `--selftest` |
 | `frozen_wo6.json` | the parameter values S2 freezes, written before screening |
 | `PREDICTIONS_WO6.md` | H1's predictions, committed before the run |
@@ -316,6 +318,56 @@ caught: reading scope off the share's denominator calls a workbook whose
 relationship **is** enforced by a formula out of scope — MAINTAINED
 counts.
 
+## The PDF reader: not a renderer
+
+Scope stated before building and held — no layout, no glyphs, no images.
+Text and quantities with enough position awareness to know when digits
+belong together.
+
+**The known-answer test passes**, and the key came from outside the
+reader: the operator pasted the document's text and the reader had to
+recover it from the PDF. **13 of 13 prose probes, 4 of 4 figures whole,
+0 unmapped glyphs.** None of the four appears in the inflated bytes as
+ASCII or UTF-16BE — they live in the Identity-H font as glyph ids, so
+recovering them takes the `/ToUnicode` CMap and the naive extractor
+scored **0 of 4**.
+
+Two registered probes are **not extraction failures**: the PDF says
+*"zero trust architecture"* and *"ransomware attacks"* in lower case
+mid-sentence, and the paste has them as capitalised headings. **The paste
+is a reworded version of the document, not a transcription** — a fact
+about the paste that only a working reader could establish.
+
+## The rule it shipped with is not the rule it was specified with
+
+The design said: intra-number kerning tops out at 1.4, word gaps start at
+78, a `G-RES` pair with a 55× margin. **Measured across the whole
+document that is false.** 2699 kerns, median 8.2, 99th percentile 36.5,
+max 90.7, only 24 above 40 — no bimodal structure, so no threshold
+separates a word break from letter spacing. At 40 it split `COMPANY` into
+`C O M PA N Y`. The two samples the rule came from were real and
+unrepresentative: `model-ecology`'s window result on a third substrate.
+
+What replaced it: **spaces are literal characters** in the runs, so
+nothing needs inserting, and a **text-position operator** is the break
+signal. But bare presence is not the test either — Word emits a
+horizontal `Td` between a currency mark and its own digits, so presence
+flags **27 of 38** numbers including all four known-good figures. Narrowed
+to a **line** break inside the number.
+
+**The residual is a column, not a caveat:** two numbers on one line
+separated by a jump and no space would still fuse, and
+`horizontal_breaks_inside` counts it per number — 9 of 38 carry one.
+
+Three defects the real file produced and no fixture could: a lexer that
+could **return without advancing** (an unhandled delimiter spun every
+container loop, and the first two runs hit the timeout with no output);
+a number pattern whose optional space **matched a newline**, turning
+eighteen list markers into FRAGMENTED numbers; and `OMPANY:` — a field
+label missing its first letter, with **no `C` run in the file at all**,
+which is a defect in the source reproduced rather than repaired and
+pinned so a future fix that invents the `C` turns red.
+
 ## Targets
 
 `targets/TARGETS.md` pre-registers sixteen predictions across five
@@ -367,8 +419,9 @@ definition, has a default, and is printed into the report header when it
 is in force — an absence measured at radius 2 and one measured at radius
 6 are different readings. `SPEC.md` §5 is the table.
 
-247 selftest checks across nine modules: `sheetmodel` 27,
+276 selftest checks across ten modules: `sheetmodel` 27,
 `no_severity` 12, `scans` 36, `targets/epa_check` 30, `coupling` 36,
-`scan4` 32, `xlsreader` 24, `selection` 26, `docreader` 24.
+`scan4` 32, `xlsreader` 24, `selection` 26, `docreader` 24,
+`pdfreader` 29.
 
 CC0. Stdlib only. Parses under Python 3.9.

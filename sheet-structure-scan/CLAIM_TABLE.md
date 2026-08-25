@@ -1651,3 +1651,114 @@ run the order asked for.
 
 **Status: NOT_RUN on the files. The capability declaration is
 SUPPORTED.**
+
+---
+
+### SSS_058 — the PDF reader is built, and the design it shipped with is not the design it was specified with
+
+Scope, stated before building and held: **not a renderer.** No layout, no
+glyphs, no images — text and quantities with enough position awareness to
+know when digits belong together.
+
+**The known-answer test passes.** The answer key came from outside the
+reader: the operator pasted the document's text and the reader had to
+recover it from the PDF.
+
+| | |
+|---|---|
+| prose probes shared with the file | **13 of 13** |
+| the four figures | **4 of 4**, whole |
+| runs with unmapped glyphs | **0** |
+| numbers FRAGMENTED | 0 of 38 |
+
+`374.83`, `122.04`, `7.52`, `227.7` — none of which appears in the
+inflated bytes as literal ASCII or UTF-16BE, because they live in the
+Identity-H font as glyph ids. Recovering them takes the `/ToUnicode`
+CMap, so a reader that skips CMaps cannot pass this test and the naive
+extractor scored **0 of 4**.
+
+Two of the nineteen registered probes — `Zero Trust`, `Ransomware` — are
+**not extraction failures**. The PDF says *"zero trust architecture"* and
+*"ransomware attacks"* in lower case mid-sentence; the paste has them as
+capitalised bullet headings. **So the paste is a reworded version of the
+document, not a transcription of it**, which is a fact about the paste
+that only a working reader could establish.
+
+**Falsifier:** a figure in this document the reader gets wrong.
+
+**Status: SUPPORTED. `FM_032`'s failed cross-check is closed.**
+
+---
+
+### SSS_059 — the safety rule was specified from two data points and the distribution refuted it
+
+The design stated up front: *intra-number kerning tops out at 1.4, word
+gaps start at 78, a G-RES pair with a 55× margin, so join digits only
+when the gap stays under a threshold.*
+
+**Measured across the whole document, that is false.** 2699 non-zero
+kerns: median 8.2, 99th percentile 36.5, maximum 90.7, and only 24 above
+40. **No bimodal structure — the values run continuously**, so no
+threshold separates a word break from letter spacing.
+
+Set at 40 it split the label `COMPANY` into `C O M PA N Y`. The two
+samples the rule was built from — one figure's internal kerning and one
+word gap — were real and unrepresentative, which is the
+`model-ecology/confound_sweep` window result and `RD_002`'s knee on a
+third substrate: **a threshold read off a narrow sample is a property of
+the sample.**
+
+Two things replaced it, and the first made the second smaller than
+planned:
+
+**Spaces are literal characters in the runs**, so nothing needs
+inserting; inserting them is what did the damage. **A text-POSITION
+operator is the break signal**, not a kerning magnitude.
+
+**And bare position-operator presence is not the test either.** Word
+emits a horizontal `Td` at every formatting boundary — including between
+a currency mark and its own digits — so presence flags **27 of 38**
+numbers here, all four known-good figures among them. A flag firing on
+two thirds of a document's numbers cannot be read. The test narrowed to a
+**line** break inside the number, which is a vertical move.
+
+**The residual is emitted rather than assumed away:** two numbers on one
+line separated by a horizontal jump and no space character would still
+fuse. `horizontal_breaks_inside` counts it per number — 9 of 38 carry
+one — so the limit is a column in the output.
+
+**Falsifier:** a document whose kerning distribution IS bimodal, which
+would make the original rule right there and this one unnecessary.
+
+**Status: the specified rule REFUTED, the replacement SUPPORTED with its
+residual stated.**
+
+---
+
+### SSS_060 — an infinite loop, a dropped character that was not ours, and a regex that ate a line break
+
+Three defects the real file produced, none reachable from a fixture.
+
+**The lexer could return without advancing.** An unhandled delimiter — a
+stray `)` or `>` — produced an empty token and left the position where it
+was, so every dictionary and array loop spun forever. The first two runs
+hit the command timeout with no output. The invariant is now explicit:
+`obj()` always moves or reports end, and a `_SKIP` sentinel distinguishes
+*advanced past something uninteresting* from *finished*.
+
+**`OMPANY:` is in the document.** The extracted text carries a field
+label missing its first letter, and the runs confirm it: `'O' 'M' 'PA'
+'N' 'Y'` with **no `C` run at all**, while the title two lines above has
+its `C` as run 0. A defect in the source, reproduced rather than
+repaired, and asserted in the selftest so a future "fix" that invents the
+`C` turns it red.
+
+**The number pattern let its optional space match a newline**, so the
+line break before each list marker joined to the digit and produced
+eighteen FRAGMENTED "numbers" — `\n1`, `\n2`, `\n3` — that were never one
+number. Narrowed to a literal space or tab. `FRAGMENTED` went 18 → 0,
+and the flag became readable.
+
+**Falsifier:** a container the lexer hangs on.
+
+**Status: REPAIRED, each pinned.**

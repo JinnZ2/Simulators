@@ -517,6 +517,15 @@ def read(path):
         # formulas included.
         import xlsreader
         return xlsreader.read_xls(path)
+    if ext == ".pdf":
+        # A document, not a workbook -- same refusal as .doc. Text and
+        # quantities come from pdfreader.read/numbers, which is built.
+        raise NotImplementedError(
+            "PDF is a document, not a workbook: no cells, no formulas, no "
+            "precedent graph. Text and quantities are built and live in "
+            "pdfreader.text() / pdfreader.numbers(); this reader refuses "
+            "rather than returning an empty Workbook a caller could "
+            "misread.")
     if ext == ".doc":
         # Legacy binary Word. A document is not a workbook, so this
         # reader refuses it -- it has no cells, no formulas and no
