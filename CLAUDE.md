@@ -5556,6 +5556,59 @@ underneath).
   named by three markers, carries Q2's cost channel in one and A3's residue
   measurement in another, and still does not exist. Stdlib only, parses
   under 3.9, CC0.
+- `observer-exclusion/` — A runnable measurement spec: **LEAD-TIME**,
+  `L = year_literature_adopts − year_excluded_reading_dateable`, for
+  populations holding high-hour same-site observation of a system with no
+  intake path to its literature. Trigger case is wolf social structure
+  (captive dominance model vs the 1999 field correction). **`OE_001`, and
+  it is the larger part of the audit:** three design features most specs in
+  this family lack — §5 selects cases on the existence of a literature
+  reversal BEFORE looking at what the excluded population said
+  (pre-registration against selection-on-outcome, exactly the failure
+  `criterion-symmetry`'s seed set had), §6 makes the negative arm mandatory
+  with the base-rate argument in one sentence, and §7 F1 is a **publishable
+  null** (*"the reading may exist and be unrecoverable… it bounds what any
+  future study can do"*), which is `QA_004`'s standard met in advance by
+  the same family one drop on. **The audit turns on one observation:**
+  `year_excluded_reading_dateable` is set by when someone wrote it down and
+  the artifact survived, not by when the reading was held — a censoring
+  process whose direction is computable before any archive is opened.
+  **`OE_002`:** L is **attenuated** — at a stipulated hazard of 0.06/yr a
+  true **ten-year** lead measures **−5.6 on average** and is positive 47%
+  of the time; the bias runs AGAINST the hypothesis, so a positive L
+  survives it. **`OE_003`:** F4's own proposed control — field biologists'
+  notes, abstracts, correspondence — is **institutionally archived** where
+  the excluded population's artifacts are, in §4's words, *"largely
+  undigitised"*; simulated with both holding the reading in the SAME year,
+  the record shows the field first **74% of the time**, so F4 gets accepted
+  on a difference in archiving rather than in holding, and the excluded
+  population needs a true lead of about **eight years** before the record
+  shows it first more often than not. **`OE_004`:** therefore F1, F2 and F4
+  are **not separable on the L distribution alone** — all three return L
+  near zero with the reading late or absent — and **the separator is
+  already in §4 and is not used as one**: the recording rule logs artifact
+  date against claimed observation date, and that difference IS a
+  per-artifact estimate of the archival delay. **`OE_005`, the one bias
+  running toward the hypothesis and the only one unguarded:** §5
+  pre-registers CASE selection and nothing pre-registers ARTIFACT CODING,
+  so an unblinded coder on ambiguous trade-press prose has a free parameter
+  worth ~22% of the corpus entered as earlier dates; fix is blind coding.
+  **`OE_006`:** `Q2` now names **two different mechanisms** three drops
+  apart — *"posing the question costs the asker standing"* against
+  *"reading held, no channel"* — a channel that penalises entry versus no
+  channel at all, and §1 distinguishes itself from "solicited and rejected"
+  but not from the previous Q2 because that one has been overwritten. Case
+  `021`'s sense substitution inside the family's own vocabulary, fourth
+  instance after `state` and `parity`, and it has a consequence: `QA_003`
+  identified the PREVIOUS Q2 as `affect routing`, and that identification
+  does not transfer, so whoever files a twelfth mechanism must say which Q2
+  — if they file this one, `affect routing` is still unfiled. The
+  resolution is the spec's own title: OBSERVER EXCLUSION for no-channel,
+  *unaskable* for the cost mechanism. **`OE_007`:** every fact about the
+  trigger case is carried and egress-blocked, and nothing in
+  `OE_002`–`OE_005` rests on any of it — those are properties of a
+  censoring process and a coding protocol and hold for any case with the
+  stated structure. Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
