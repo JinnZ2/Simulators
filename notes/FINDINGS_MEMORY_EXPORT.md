@@ -2,13 +2,13 @@
 
 Read against `notes/memory-export/files/`, which is stored verbatim. Nothing
 here is a verdict on the export, and no stored file was modified. Counts are
-recomputed each batch and are a delivery state, not a result — 5 tier-1 files
+recomputed each batch and are a delivery state, not a result — 4 tier-1 files
 are still outstanding.
 
 ## 1. Cross-references, and what "unresolved" means
 
 ```
-59 files   94 links   39 distinct names   35 resolve in folder   4 do not
+60 files   103 links   44 distinct names   40 resolve in folder   4 do not
 ```
 
 "Not in the folder" covers three different situations, and the distinction was
@@ -746,6 +746,47 @@ Third file in the export to pay for its own claims this way, after
 `sensing-spine` and `calibration-gap-log` (finding 24). Its citations —
 Rafferty, Araki, StatCan, arXiv 2602.21369, the Belzer/Viscelli pair — were not
 verified here, same egress limit as before.
+
+## 33. A memory link resolving to a repo *case file*, under a compressed name
+
+`merit-anchoring`'s G6 says "See `[[agreement-mode]]` on welded observables."
+`uninstrumented/cases/016agreementasmode.md` exists — the hyphens dropped, the
+same name. It carries the concept (6 mentions of weld), though the file named
+for it is `017weldedobservables.md` (16). So the citation lands, on the paired
+case rather than the nearest one; `UNI_067` in the repo records that 016 and
+017 "are instruments for each other."
+
+New resolution class: previous links resolved to stored memory files, repo
+folders, repo modules, or repositories. This one resolves to a **case file
+inside a repo folder**, under a name compressed past the hyphen convention that
+tripped this reading twice already (findings 1, and the "what this reading got
+wrong" list).
+
+## 34. Two files reach the same measurement result from opposite ends, and one
+uses it to dissent from its own source
+
+`merit-anchoring`'s closing section argues that **a dimension reading FLAT
+across a long window is the least trustworthy**, because flat is also the
+signature of probe and referent co-moving — so dimensions that moved at least
+prove the probe was not dragged along.
+
+`anchor-interval` in this repo reaches the same structure from the drift side:
+"the model drifted" is a difference between two moving things reported as a
+property of one, and a held-fixed benchmark identifies capability only up to
+its own unknown gain and offset.
+
+Same result, one from psychometrics over a 120-year corpus, one from model
+evaluation. Neither cites the other.
+
+What `merit-anchoring` then does with it is the part worth recording: it uses
+the source's own wage-penalty figure (22.4–25.9% of the female-typing penalty,
+Jiang 2025) while **dissenting from that source's moral-standing null**, and
+gives the methodological reason for the split rather than the disagreement
+alone — a fixed word list cannot hold a moving referent, and the flat dimension
+is the one the method is least able to certify.
+
+Fourth file to pay for its own claims this way (findings 24, 32). Citations
+unverified here as before.
 
 ## What was not checked, deliberately
 
