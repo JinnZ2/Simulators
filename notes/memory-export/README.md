@@ -26,7 +26,7 @@ is not true of the folder. Corrected rather than narrowed.)
 
 | tier | named in the manifest | landed |
 |---|---|---|
-| 1 — exported unchanged | 57 | 5 |
+| 1 — exported unchanged | 57 | 6 |
 | 2 — scrubbed and exported | 7 | 7 |
 | 3 — held back | 12 | 0, and none expected |
 
@@ -37,7 +37,7 @@ seven named in the manifest, all seven stored.
 
 Tier 1, landed: `criterion-symmetry`, `rosetta-shape-core`,
 `force-expression-model`, `alignment-under-coupling`,
-`diversity-collapse-model`. Filed as tier 1 by elimination — each was exported,
+`diversity-collapse-model`, `emergence-stability-simulator`. Filed as tier 1 by elimination — each was exported,
 so none is tier 3, and none is in the manifest's tier-2 table. The manifest
 does not label files individually, so tier is inferred here and not carried in
 the files.
@@ -92,10 +92,21 @@ threshold as h\* ≈ 0.385 and says the apex-broadcast multiplier crosses it;
 value. Each carries what the other omits, and both report hysteresis confirmed.
 Noted, not merged.
 
-`[[uninstrumented]]` stays ambiguous rather than settled: a folder of that name
-is in this tree, the memory set has a file of that name, and the shared
-namespace makes the collision more likely to matter, not less. The link was not
-repointed.
+**A memory file can be a summary of a repo folder under the same name.**
+`emergence-stability-simulator` is one, and it checks out against
+`Simulators/emergence-stability-simulator/`: all 18 ids EMRG_001–018 are
+present in the folder; `samples/CLAIM_TABLE.sample.json` carries 22 claims of
+which 14 are confirmed-family and 3 refuted, matching "several confirmed and
+several refuted"; and the tool-vs-identity framing is there as
+"Substrate using narrative as a tool" — in `sim_engine.py`, not in the docs.
+The one item not located in that folder is the maxim as worded, "update the
+claim, never modify the simulation" — the folder practices it (refuted claims
+carry a `refutation_basis` and stay refuted) and states it in those words
+elsewhere in the tree, not here.
+
+That makes `[[uninstrumented]]` more likely to denote a memory file summarizing
+`Simulators/uninstrumented/` than to denote the folder — but likely is not
+established, and one same-name case is n=1. Still not repointed.
 
 ## The cost, visible in the files
 
