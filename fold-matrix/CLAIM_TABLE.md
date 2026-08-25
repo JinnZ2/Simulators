@@ -632,3 +632,108 @@ read *"no cells"* as a fact about the file.
 **Falsifier:** a `.doc` whose text this reader gets wrong.
 
 **Status: SUPPORTED, pinned against the real file.**
+
+---
+
+### FM_023 — Andrew's plan arrives, and the replication is worth less than it looks
+
+Second upload: `Sample_Business_Plan__Wooden_Grain_Toy_Company.doc`,
+author line **"Andrew Robertson, Owner"** — evidence it is the file the
+order called *Andrew's Plan*, recorded as evidence. 6188 characters, one
+compressed piece. Still no blank template.
+
+It behaves exactly as Rebecca's does: stops at *"How to Sell"*, no
+Funding Request, no Financial Projections, `forecast` 0, `projection` 0,
+`cash flow` 0, `break-even` 0, `loan` 0, `budget` 0, and every upward
+cell `+ / ABSENT / ABSENT`.
+
+**And that replication is one observation, not two.** The two documents
+share **26 headings**, including an identical *"Created on December 29,
+2016"* — one template filled twice on one day. A structural finding that
+holds across both is a finding about the template.
+
+This is `TP_003`'s shared-bias shape in a two-document corpus: agreement
+between two readings of one source is not two independent confirmations,
+and reporting "2 of 2 filled plans" without the template overlap would
+have doubled the apparent evidence.
+
+**Falsifier:** a filled SBA traditional plan not built from this
+template.
+
+**Status: SUPPORTED. n = 2 documents, n = 1 template, and the second
+number is the one that governs.**
+
+---
+
+### FM_024 — P2 is refuted on both filled plans, and the dollar figures divide by whose quantity they are
+
+Across the two plans: **18 dollar figures, zero computed quantities.**
+
+Andrew's ten divide three ways, and the division is the finding:
+
+| figure | whose quantity | computed here |
+|---|---|---|
+| `$5`–`$35` by product | the company's own **stated tariff** | no |
+| `$35,000`–`$80,000` a year | a **third party's** property (target customer income) | no |
+| `$1.2 million` Q2 2012 | an **external statistic** (industry revenues) | no |
+
+Rebecca's eight are all the first kind, an hourly rate card.
+
+So P2's antecedent — *dollar figures exist* — holds twice over, and its
+consequent fails twice: `unmeasured_span_min` is `not computable` on both.
+Nothing in either document derives a figure or derives anything from one;
+no line multiplies a rate by an hour count or a price by a volume.
+
+**This sharpens `FM_020`.** S1a's axis is *computed* against *physically
+existing but uncalculated*, and none of these three kinds is either. The
+second and third add something the rate card alone did not show: a
+quantity can be **about someone else entirely** — a customer's income, an
+industry's revenue — and still sit in the plan's own downward arm as a
+number nobody here computed. The question S1a's floor turns on is not
+only *was it calculated* but *whose quantity is it*.
+
+Per `FM_023`, this is one template and the count of 18 is not 18
+independent observations.
+
+**Falsifier:** a computed quantity in either document.
+
+**Status: P2 REFUTED on both. `FM_020`'s gap widened, still not patched
+by adding values to a delivered vocabulary.**
+
+---
+
+### FM_025 — across four terms and three sources, not one upward cell carries a magnitude or a unit
+
+| | upward cells |
+|---|---|
+| `measured` | **0** |
+| `derived` | **0** |
+| `ASSERTED` | 8 |
+| `ABSENT` | 3 |
+
+| field | ABSENT on | of |
+|---|---|---|
+| sign | 5 | 11 |
+| **magnitude** | **11** | **11** |
+| **unit** | **11** | **11** |
+
+Eleven upward cells across a published UN emissions calculator, a
+repo-internal scan reading, and two SBA business plans. **Six carry a
+stated direction. None carries a size. None carries a unit.**
+
+P1 holds (11 soft, 0 hard), P3 holds (6 cells split rather than failing
+together), P4 holds (no magnitude anywhere).
+
+The sources are three, not four, since `FM_023` collapses the two plans
+to one template — and one of the three is this repository, which is not
+an independent observer of its own claims.
+
+**What this does not say:** that the documents are uninformative. Both
+plans carry prices, market descriptions and a named growth strategy. The
+claim is about the **upward arm only** — the relation between what the
+organisation does and the goal it states — and there the format is
+uniform: a direction, and nothing else.
+
+**Falsifier:** an upward cell carrying a magnitude, anywhere.
+
+**Status: SUPPORTED, at n = 3 sources with the dependence stated.**

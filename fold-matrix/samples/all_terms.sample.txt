@@ -1,5 +1,5 @@
 fold matrix -- work order 8
-terms: 5
+terms: 6
 
 term   H1_grid_emission_factor
 name   grid emission factor
@@ -246,24 +246,72 @@ downward  ABSENT  ABSENT [ABSENT]                     no level carries a quantit
 
 ------------------------------------------------------------------
 
+term   S3_woodengrain_mission
+name   the toy sold
+source SBA sample business plan, 'Wooden Grain Toy Company', authored line 'Andrew Robertson, Owner', created 2016-12-29. Uploaded as d66069ff-Sample_Business_Plan__Wooden_Grain_Toy_Company.doc. Read with sheet-structure-scan/docreader.py: 6188 characters, one compressed piece.
+
+S3 scope        EVALUABLE -- not an efficiency-class term; no scope required
+
+S1 grid
+level  severed                                       still_acting                                  clock   basis   
+-----  --------------------------------------------  --------------------------------------------  ------  --------
+-2     unit cost against unit price                  hardwood, tooling and hours are consumed pe…  ABSENT  ABSENT  
+-1     price times volume, i.e. any revenue quanti…  toys are priced and sold; no line multiplie…  ABSENT  ABSENT  
+ 0     -- the term as used --                        the plan is read as a description of the bu…  ABSENT  ASSERTED
++1     the relation between build quality and whet…  the toys wear or survive on their own         ABSENT  ASSERTED
++2     the relation between the toy and a child's …  children play or do not                       ABSENT  ASSERTED
++3     the relation between a toy's moving parts a…  whatever creativity does                      ABSENT  ASSERTED
++4     the relation between a child's creativity a…  -                                             ABSENT  ABSENT  
+
+S2 upward cells
+level  goal                                          basis     sign    magnitude  unit    cite                    
+-----  --------------------------------------------  --------  ------  ---------  ------  ------------------------
++1     toys cherished and handed down from generat…  ASSERTED  +       ABSENT     ABSENT  Mission Statement: 'To …
++2     entertain children and stand the test of ti…  ASSERTED  +       ABSENT     ABSENT  Future of the Company: …
++3     foster the child's creativity                 ASSERTED  +       ABSENT     ABSENT  Customers: a toy that i…
++4     not stated                                    ABSENT    ABSENT  ABSENT     ABSENT                          
+
+   The three fields do not fail together on 3 cell(s).
+   A stated direction with no size is the ordinary shape
+   of a purpose claim, and one free-text field recorded
+   it as identical to a cell nobody wrote anything in.
+
+S1a stops, from the document set
+stop      level   what                                why                                             
+--------  ------  ----------------------------------  ------------------------------------------------
+upward    +3      Customers, Wooden Grain Toy Compa…  highest level with a stated artifact; 1 level(s…
+downward  ABSENT  ABSENT [ABSENT]                     no level carries a quantity the organisation co…
+
+   unmeasured_span_min: not computable
+   enumeration_basis:   document_named
+   not computable: no computed quantity
+   Emitted, not scored (S1a). The name is the reading: a floor,
+   not a measurement of the world.
+
+   plan_exists yes | practice_tracks_plan UNREAD
+   Its own column. It is not a basis and does not enter one.
+   the document IS the plan; whether practice tracks it is not r…
+
+------------------------------------------------------------------
+
 S2, across the terms a comparison may include
 
 basis     upward cells
 --------  ------------
 measured  0           
 derived   0           
-ASSERTED  5           
-ABSENT    2           
+ASSERTED  8           
+ABSENT    3           
 
 value_string, per field
 field      ABSENT on  of cells
 ---------  ---------  --------
-sign       4          7       
-magnitude  7          7       
-unit       7          7       
+sign       5          11      
+magnitude  11         11      
+unit       11         11      
 
-cells: 7   all three ABSENT: 4   split: 3
-ASSERTED + ABSENT: 7   measured + derived: 0
+cells: 11   all three ABSENT: 5   split: 6
+ASSERTED + ABSENT: 11   measured + derived: 0
 P1 (soft majority): True
 P3 (at least one cell splits): True
 P4 (no magnitude anywhere): True

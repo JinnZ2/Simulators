@@ -6460,16 +6460,28 @@ underneath).
   blind on H1** and says so — `Disclaimer!A3` was already read in this
   session during the v1 run, so P3 and P4 are registered because the
   format is new rather than because the source was unread. **The SBA run
-  landed one file of three** (`FM_019`), not one of the three named —
-  author line *"Rebecca Champ, Owner"*, recorded as evidence rather than
-  asserted as identity, n = 1, predictions committed before any fetch.
-  **P2 splits and that is the result:** eight dollar figures exist
-  (`$75`–`$150`, an hourly rate card) and the downward stop still does not
-  resolve, because the plan **stops before Funding Request and Financial
-  Projections** — `revenue` 0, `forecast` 0, `projection` 0, `cash flow`
-  0, `break-even` 0, `loan` 0, `budget` 0 across the whole text — so
-  `unmeasured_span_min` reads `not computable` on a filled business plan
-  carrying eight dollar figures. **`FM_020`: S1a's downward rule has two
+  landed two files of three** (`FM_019`, `FM_023`), neither under the name
+  the order gave — author lines *"Rebecca Champ, Owner"* and *"Andrew
+  Robertson, Owner"*, recorded as evidence rather than asserted as
+  identity, no blank template, predictions committed before any fetch.
+  **`FM_023`: n = 2 documents is n = 1 template** — the two share 26
+  headings and an identical *"Created on December 29, 2016"*, so a finding
+  replicating across them is a finding about the template and not two
+  independent confirmations (`TP_003`'s shared-bias shape in a
+  two-document corpus).
+  **P2 is REFUTED on both:** **eighteen dollar figures across the two
+  plans and zero computed quantities**, because both stop before Funding
+  Request and Financial Projections — `forecast` 0, `projection` 0, `cash
+  flow` 0, `break-even` 0, `loan` 0, `budget` 0 — so
+  `unmeasured_span_min` reads `not computable` on both. **`FM_024`:
+  Andrew's ten divide three ways by WHOSE quantity they are** — the
+  company's own stated tariff, a third party's property (target customer
+  income `$35,000`–`$80,000`), and an external statistic (industry
+  revenues up `$1.2 million` in Q2 2012) — none computed here, and the
+  last two show a quantity can be about someone else entirely and still
+  sit in the plan's own downward arm. **`FM_025`: across four terms and
+  three sources, 11 upward cells carry 6 stated directions, 0 magnitudes
+  and 0 units.** **`FM_020`: S1a's downward rule has two
   states and needed three** — it distinguishes *computed* from
   *physically existing but uncalculated*, and a rate card is neither, a
   number the organisation produced and stated, underived in both

@@ -11,7 +11,7 @@ not one number.
 | `terms/` | the four S6 fixtures, as data |
 | `PREDICTIONS_WO8.md` | S2's v1 prediction |
 | `PREDICTIONS_WO8_V2.md` | the revised prediction, and what is not blind about it |
-| `CLAIM_TABLE.md` | `FM_001..022` |
+| `CLAIM_TABLE.md` | `FM_001..025` |
 | `PREDICTIONS_SBA.md` | the SBA run's predictions, registered before any fetch |
 | `samples/` | one pinned run of each |
 
@@ -119,12 +119,18 @@ registered because the format is new and the split had not been computed.
 format on a workbook nobody here has opened, and `SSS_053` is why there
 is not one.
 
-## The SBA run: one file of three
+## The SBA run: two files of three
 
-`sba.gov` refuses CONNECT, and one file was uploaded — and **it is not
-one of the three the order named.** Its author line reads *"Rebecca
-Champ, Owner"*, evidence it may be the file called *Rebecca's Plan*,
-recorded as evidence rather than asserted as identity. **n = 1.**
+`sba.gov` refuses CONNECT, and two files were uploaded — **neither under
+the name the order gave.** Their author lines read *"Rebecca Champ,
+Owner"* and *"Andrew Robertson, Owner"*, evidence they are the files
+called *Rebecca's Plan* and *Andrew's Plan*, recorded as evidence rather
+than asserted as identity. **No blank template.**
+
+**And n = 2 documents is n = 1 template.** The two share **26 headings**
+and an identical *"Created on December 29, 2016"* — one form filled twice
+on one day — so a finding replicating across them is a finding about the
+template, not two independent confirmations.
 
 Predictions were registered and committed **before any fetch and before
 any document was opened** (`466b252`), including the operator's own note
@@ -133,18 +139,24 @@ that the SBA search results had been read and the documents had not.
 | | outcome |
 |---|---|
 | P1, P4 (blank template) | **NOT ADDRESSABLE** — none arrived |
-| P2 (dollar figures → downward stop resolves) | **SPLIT** |
-| P3 (upward triple `+ / ABSENT / ABSENT`) | **HOLDS**, 2 of 2 cells |
+| P2 (dollar figures → downward stop resolves) | **REFUTED on both** |
+| P3 (upward triple `+ / ABSENT / ABSENT`) | **HOLDS on both** |
 
 **P2's antecedent holds and its consequent does not**, which is sharper
-than the empty case P1 was written for. Eight dollar figures exist —
-`$75`–`$150`, an hourly rate card by role — and the downward stop still
-does not resolve, because the plan **stops before Funding Request and
-Financial Projections**. In the full text: `revenue` 0, `forecast` 0,
+than the empty case P1 was written for. **Eighteen dollar figures across
+the two plans, zero computed quantities.** Both stop before Funding
+Request and Financial Projections; across both, `forecast` 0,
 `projection` 0, `cash flow` 0, `break-even` 0, `loan` 0, `budget` 0.
-Nothing derives the rates and nothing is derived from them. So
-`unmeasured_span_min` reads `not computable` on a filled business plan
-carrying eight dollar figures.
+Nothing derives a figure and nothing is derived from one — no line
+multiplies a rate by an hour count or a price by a volume — so
+`unmeasured_span_min` reads `not computable` on both.
+
+**Andrew's ten divide three ways, by whose quantity they are:** the
+company's own stated tariff (`$5`–`$35` by product), a **third party's**
+property (target customer income `$35,000`–`$80,000`), and an **external
+statistic** (industry revenues up `$1.2 million` in Q2 2012). None is
+computed here, and the last two show that a quantity can be about someone
+else entirely and still sit in the plan's own downward arm.
 
 **And S1a's rule needed a third state.** It distinguishes *computed* from
 *physically existing but uncalculated*. A rate card is neither: a number
@@ -154,11 +166,16 @@ evidence in the `by` string — because one boolean moves the whole
 downward arm: `True` gives a stop at −1 and a span of 1, `False` gives no
 stop and no span.
 
-**P3 holds and its comparison has one side.** Both upward cells are
-`+ / ABSENT / ABSENT` — the same triple `FM_011` found in the UNFCCC
-disclaimer. The registered reading was *filled plan purpose statements
-carry no more information than the blank form*, and the blank form is
-exactly what did not arrive.
+**P3 holds on both and its comparison has one side.** Every upward cell
+in both plans is `+ / ABSENT / ABSENT` — the same triple `FM_011` found in
+the UNFCCC disclaimer. The registered reading was *filled plan purpose
+statements carry no more information than the blank form*, and the blank
+form is exactly what did not arrive.
+
+**Across four terms and three sources: 11 upward cells, 6 with a stated
+direction, 0 with a magnitude, 0 with a unit** (`FM_025`). Three sources,
+not four, since the two plans are one template — and one of the three is
+this repository, which is not an independent observer of its own claims.
 
 ## The arm this extends is not here
 

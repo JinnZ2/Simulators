@@ -129,3 +129,35 @@ on has one side. What holds is the weaker half: this filled plan's
 purpose statements carry sign and nothing else.
 
 Upload the blank template and the comparison becomes available.
+
+
+---
+
+# OUTCOME, updated — two files of three
+
+`Sample_Business_Plan__Wooden_Grain_Toy_Company.doc` arrived, author line
+**"Andrew Robertson, Owner"** — evidence it is the file the order called
+*Andrew's Plan*. **Still no blank template.** n = 2 documents.
+
+| | prediction | outcome |
+|---|---|---|
+| P1 | blank template | **NOT ADDRESSABLE** — none arrived |
+| P2 | filled plans: dollar figures → downward stop resolves | **REFUTED on both** |
+| P3 | upward triple `+ / ABSENT / ABSENT` | **HOLDS on both** |
+| P4 | blank template upward cells ABSENT | **NOT ADDRESSABLE** |
+
+**P2 is now refuted rather than split.** Eighteen dollar figures across
+the two plans, zero computed quantities, `unmeasured_span_min` not
+computable on both. Andrew's ten divide three ways by *whose quantity
+they are* — the company's stated tariff, a target customer's income, an
+industry statistic — and none of the three is computed here.
+
+**P3 holds on both**, and its registered reading still has one side:
+*filled plan purpose statements carry no more information than the blank
+form* needs the blank form.
+
+**And n = 2 documents is n = 1 template.** The two share 26 headings and
+an identical *"Created on December 29, 2016"*. A finding replicating
+across them is a finding about the template, so the second file confirms
+less than its arrival suggests — recorded as `FM_023` rather than counted
+as a second observation.
