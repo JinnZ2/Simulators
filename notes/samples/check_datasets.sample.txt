@@ -15,10 +15,10 @@ CHECKS ON notes/datasets/mesa_sof.md -- the note is not edited
    Two-way against sleep alone gives the gap, not the fraction.
 
 2  do the note's cross-references resolve in this tree?
-   G-SPAN   0   NOT IN TREE
-   parity   14  fragility-cascade/CLAIM_TABLE.md, fragility-cascade/EXPERIMENT_register.md (+12)
-   MESA     0   NOT IN TREE
-   SOF      0   NOT IN TREE
+   G-SPAN   2   sim-span/NOTES_INSTRUMENT.md, sim-span/three_column.py
+   parity   18  fragility-cascade/CLAIM_TABLE.md, fragility-cascade/EXPERIMENT_register.md (+16)
+   MESA     1   sim-span/RESULTS.md
+   SOF      1   sim-span/RESULTS.md
    Scanned with this audit's own products excluded (7 paths).
    Without that exclusion the scan measures its own previous
    run: writing MESA into CLAUDE.md to describe the finding put
@@ -26,17 +26,22 @@ CHECKS ON notes/datasets/mesa_sof.md -- the note is not edited
    UNI_010's loop in notes/, found the same way -- by running
    twice. Excluding by path is a hand-broken loop, not a fix.
 
-   G-SPAN does not resolve. The folder is `sim-span/` and the
-   module SIM-SPAN. Recorded, not normalised -- the note is
-   stored as delivered and vocabulary is not harmonised across
-   entries.
-   `parity` resolves 16 times and NOT ONCE in the note's sense.
+   G-SPAN, MESA and SOF resolved ZERO times when this check
+   was written and resolve now -- every hit under sim-span/,
+   which is work written AFTER the note, using its vocabulary.
+   The note was written into the tree it is checked against:
+   ANC_001..004 at repo scale, reaching this checker through a
+   sibling folder, which is the route an EXCLUDE list does not
+   close (QA_007). The assertion was changed rather than the
+   list widened -- these must resolve ONLY under sim-span/, so
+   a hit elsewhere still fires. Finding 8.
+   `parity` resolves 18 times and NOT ONCE in the note's sense.
    Every repo use is the equality sense -- `parity()` as a
    comparison function in the divergence log, 'what would count
    as parity' as equivalence. The note means the obstetric
    sense: number of pregnancies. One word, two senses, and a
    resolver that counts occurrences reports a reference as
-   resolving 16 times when it resolves zero times.
+   resolving 18 times when it resolves zero times.
    That is `uninstrumented` case 021's sense substitution and
    `nonidentity-census` T1-3's `state` finding (nation-state vs
    steady state), third instance in this tree -- and it is a

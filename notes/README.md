@@ -12,7 +12,7 @@ to the entries — an operator entry describes an operation, not a result.
 | path | what |
 |---|---|
 | `operators/` | entries, delivered verbatim. One file per operator. |
-| `datasets/` | candidate instruments named by the operator, delivered verbatim. |
+| `datasets/` | candidate instruments named by the operator. `mesa_sof.md` is delivered verbatim; `uploads_2026_08_25.md` is an index over delivered *bytes* that are not in the tree, and says so at the top. |
 | `check_*.py` | one checker per entry, run against this tree. Reads the entry, does not modify it. |
 | `study_watch.py` | retrieval notification for entries carrying a WOULD MEASURE. Runs on a GitHub Actions runner, which reaches the three sources the local egress gate refuses. Opens a pull request; merges nothing. |
 | `watch/` | one file per run, `YYYY-MM-DD.md`. Read `watch/README.md` first — silence from that action is not evidence of absence. |

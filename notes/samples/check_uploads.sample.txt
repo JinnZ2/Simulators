@@ -1,0 +1,35 @@
+Two runs, pinned together. The first is the one chance to check the
+recorded numbers against the bytes; the second is what every later
+reader gets once the container holding them is reclaimed, and it is
+deliberately not a pass.
+
+CHECK UPLOADS
+entry:     notes/datasets/uploads_2026_08_25.md
+directory: <the upload directory, 2026-08-25>
+
+id                               state            detail
+------------------------------------------------------------------------------
+practice_datasets_for_excel      PRESENT_MATCH    bytes and shape as recorded
+epa_safer_choice_dfe             PRESENT_MATCH    bytes and shape as recorded
+uci_mechanical_analysis          PRESENT_MATCH    bytes and shape as recorded
+world_bank_data_catalog          PRESENT_MATCH    bytes and shape as recorded
+
+n = 4   PRESENT_MATCH 4
+
+NOT_PRESENT is not a pass. It reports that this run had
+nothing to compare, which is a fact about the directory.
+CHECK UPLOADS
+entry:     notes/datasets/uploads_2026_08_25.md
+directory: <an empty directory>
+
+id                               state            detail
+------------------------------------------------------------------------------
+practice_datasets_for_excel      NOT_PRESENT      no candidate matched
+epa_safer_choice_dfe             NOT_PRESENT      no candidate matched
+uci_mechanical_analysis          NOT_PRESENT      no candidate matched
+world_bank_data_catalog          NOT_PRESENT      no candidate matched
+
+n = 4   NOT_PRESENT 4
+
+NOT_PRESENT is not a pass. It reports that this run had
+nothing to compare, which is a fact about the directory.

@@ -5108,7 +5108,72 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   version named and not built: compare against the git tree as of the
   note's own commit. It moved `parity` 16 → 14. Two defects in one file,
   both previously recorded in this repo, both committed anyway, and
-  neither caught by reading the code.
+  neither caught by reading the code. **The loop then closed from the
+  other side, and the assertion was changed rather than the exclude list
+  widened.** `G-SPAN`, `MESA` and `SOF` resolved zero times when finding
+  3's table was written and resolve 2 / 1 / 1 now — every hit under
+  `sim-span/`, which is work written AFTER the note using its vocabulary,
+  so the note was written into the tree it is checked against. That is
+  `anchor-interval` `ANC_001..004` at repository scale arriving through a
+  **sibling folder**, the route `question-availability` `QA_007` said an
+  `EXCLUDE` list does not close. The check now asserts these resolve
+  **only** under `sim-span/`, which keeps a reachable negative (a hit
+  elsewhere means an antecedent independent of the note) while no longer
+  firing on the tree having used the words the note supplied. Recorded as
+  finding 8; the failure was standing at `HEAD` and was found by running
+  the suite, not by reading it.
+  **`notes/datasets/uploads_2026_08_25.md`** is the third entry kind and
+  the first that is NOT delivered prose — the operator delivered *bytes*
+  ("also have some files for different datasets to file for future") and
+  this is an index over them. **The bytes are not in the tree**: 16.6 MB
+  across four files, 16.1 MB binary, against a repository that is text by
+  construction (`sheet-structure-scan/fixture.py` writes its own `.xlsx`
+  at run time precisely so no workbook binary is checked in) and CC0
+  against a third party's MIT terms. The decision is recorded with its
+  cost stated — the container is ephemeral, so when it is reclaimed the
+  bytes are gone and the index is what survives — which is why every
+  entry carries a sha256 and `check_uploads.py` exists: a re-obtained copy
+  is checkable against the recorded hash, size and shape, and one that
+  differs is reported as differing. Three states, `PRESENT_MATCH` /
+  `PRESENT_DIFFERS` / `NOT_PRESENT`, with **`NOT_PRESENT` explicitly not a
+  pass** — the absent-vs-known-negative repair designed in, since a
+  checker returning clean on an empty directory would return clean
+  forever once the bytes are gone. Six readings in `FINDINGS_UPLOADS.md`.
+  **`U1`, and it became a claim one folder over:** `Practice-Datasets-for-
+  Excel` is 26 `.xlsx` files, a formula scan returns **3**, and all three
+  are Airbnb listing titles beginning with `=` in `AB_NYC_2019.xlsx` —
+  written `t="e"` with a cached `#VALUE!`, so the true formula count
+  across the corpus is **zero** and every file fails WO7 criterion (c)
+  without the screen being run. `sheetmodel.py` does not read the `t`
+  attribute at all, so such a cell reads DERIVED and enters the precedent
+  graph with a formula that is not one — `SSS_061`, **declared in that
+  module's WHAT IS NOT READ and not repaired**, because no target workbook
+  is checked in and whether any published number here moves is not
+  re-checkable from this tree: the effect is UNKNOWN, not zero. Same class
+  as `SSS_048`. A first draft of U1 asserted the cells "carry no `<v>`",
+  which was wrong — they carry an error value — and the correction is
+  recorded in place. **`U3`, the only live use of the four:** UCI
+  `mechanical-analysis` (Bergadano/Giordana/Saitta, Torino, donated 1990;
+  209 instances) gives each component `mis` and `misr`, the same quantity
+  measured twice on the same component — a **repeat-measure pair**, which
+  is exactly the null `triad-playground` `TP_010` says every shadow-panel
+  and consensus statistic here is missing and `TP_003` names from the
+  other side. Unusable until the interval between the two is bounded (a
+  `G-RES` pair with one side missing, the `provisioning.py` /
+  `nonidentity-census` `T2-5` shape), so recorded as a candidate.
+  **`U4`:** the World Bank Data Catalog CSV is not data but a catalogue of
+  160 collections — a **target list** for the third workbook
+  `sheet-structure-scan` `WO7` could not reach (it does not touch the
+  egress fact; it removes selection as the bottleneck) and a **clock
+  corpus**, since `Periodicity` / `Update Frequency` / `Update Schedule` /
+  `Last Revision Date` are four fields about one thing published side by
+  side 160 times, computable with no egress at all. **`U6`:** on its first
+  run the checker caught an error in its own record — six UCI members
+  recorded against seven derived, the dropped one being
+  `mechanical-analysis.notused-instances`, the file the index spends a
+  paragraph on — which is what `check_d2.py` did on its first run too.
+  Three checkers in this folder, three first runs, three errors in the
+  checker's own record, none found by reading. 28 selftest checks.
 - `alignment-under-coupling/` — A marker under exploration delivered at
   confidence `~0.40`, plus its first run's results, plus all four sim
   generators — landed in that order, which is the interesting part.

@@ -26,6 +26,14 @@ WHAT IS NOT READ, stated rather than discovered later:
     real workbook's 476 formula cells into constants.
   - merged regions: the anchor carries the value, the covered cells read
     empty. Scan two reports that as NOT_SEARCHED, not as absent.
+  - the cell type attribute. A cell whose formula never parsed is
+    written t="e" with a cached error, and this reader counts it DERIVED
+    like any other. Real instance in notes/FINDINGS_UPLOADS.md U1: three
+    Airbnb listing titles beginning with "=" became three formula cells
+    in a corpus that computes nothing. Declared rather than repaired --
+    no target workbook here is checked in, so whether any published
+    number in this folder moves is not re-checkable from this tree.
+    SSS_061.
 
 CC0. stdlib only. Parses under Python 3.9.
 """

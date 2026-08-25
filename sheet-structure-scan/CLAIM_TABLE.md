@@ -1762,3 +1762,45 @@ and the flag became readable.
 **Falsifier:** a container the lexer hangs on.
 
 **Status: REPAIRED, each pinned.**
+
+---
+
+### SSS_061 — a cell type this reader does not read, and three false formulas in a corpus that computes nothing
+
+`sheetmodel.py` reads `<f>` elements and never reads the `t` attribute
+beside them. Excel writes `t="e"` on a cell whose formula did not parse
+and caches the error text as the value:
+
+    <c r="B33569" s="0" t="e"><f aca="false">= modern, a/c, easy check-in
+      / book instantly ==</f><v>#VALUE!</v></c>
+
+That cell reads DERIVED here and enters the precedent graph with a
+formula that is not one.
+
+Found while filing a dataset upload rather than while scanning: the
+`Practice-Datasets-for-Excel` corpus is twenty-six `.xlsx` files, a
+formula scan over it returns three hits, and all three are Airbnb listing
+titles beginning with `=` in `AB_NYC_2019.xlsx`. The true formula count
+across the corpus is **zero**. Full reading in
+`notes/FINDINGS_UPLOADS.md` U1.
+
+Same class as SSS_048 (`often times` matched as multiplication, caught by
+the operand requirement rather than by the operator match): a token
+matched by shape rather than by role, and the error runs toward
+manufacturing structure.
+
+**Declared, not repaired.** The gap is now listed in `sheetmodel.py`'s
+WHAT IS NOT READ. Behaviour is unchanged for one reason stated rather
+than glossed: none of this folder's target workbooks is checked in, so
+whether the UNFCCC or LGO numbers published here contain any `t="e"`
+cell cannot be re-checked from this tree. **The effect on published
+numbers is unknown, not zero.** A repair written now would be validated
+against a fixture, and this folder's own record — SSS_017 (shared
+formulas), SSS_041 (deferred masters, relative areas), SSS_060 (three
+defects in the PDF reader) — is that fixtures written by the code's
+author do not show what real files show.
+
+**Falsifier:** re-obtain either target workbook and count its `t="e"`
+formula cells. Zero on both, and no published number here moves.
+
+**Status: DECLARED. Effect on published numbers UNKNOWN.**
