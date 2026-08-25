@@ -15,6 +15,7 @@ to the entries — an operator entry describes an operation, not a result.
 | `check_*.py` | one checker per entry, run against this tree. Reads the entry, does not modify it. |
 | `study_watch.py` | retrieval notification for entries carrying a WOULD MEASURE. Runs on a GitHub Actions runner, which reaches the three sources the local egress gate refuses. Opens a pull request; merges nothing. |
 | `watch/` | one file per run, `YYYY-MM-DD.md`. Read `watch/README.md` first — silence from that action is not evidence of absence. |
+| `memory-export/` | backup storage for a memory set exported out of session. Stored as delivered. |
 | `samples/` | pinned output |
 
 ## The one rule
@@ -32,9 +33,20 @@ checker's output and the entry stays as written — same arrangement
   tree, its stated signature holds on one of them, and its two
   representations turn out to be five different kinds of pair.
 
-The catalogue this is filed into — the A and D families, D1, A3, A4, the
-compound field-modifier — is not in this repo. `D2.md` references them and
-they do not resolve here. Recorded rather than reconstructed.
+- `memory-export/` — backup of a memory set exported out of session.
+  `SCRUB_RULES.md` carries the scrub rules and tier assignment: 57 files
+  exported unchanged, 7 scrubbed, 12 held back, with a cost note saying that a
+  finding grounded in a specific case is generic once the case is lifted.
+  `files/` holds the exported files as they arrive — 64 files, the full delivery. Forty-two readings in `FINDINGS_MEMORY_EXPORT.md`, including four
+  first-pass searches of my own that were too narrow and what they cost.
+
+The catalogue `D2.md` is filed into has since arrived, in
+`memory-export/files/unnamed-instruments.md`: the A family (A1-A4), the B and D
+families, D1, and the compound field-modifier are all in it, and D2 appears
+there as Column D's second entry with the same seven instances `check_d2.py`
+checks. The references in `D2.md` resolve now. Nothing in `D2.md` or
+`check_d2.py` was changed — this note records the arrival, per finding 35 in
+`FINDINGS_MEMORY_EXPORT.md`.
 
 ## study-watch, in one line
 
