@@ -819,3 +819,74 @@ which would make the substitution cosmetic.
 
 **Status: SUPPORTED under the stated case. Coupling is case-dependent by
 construction and the case is printed with every run.**
+
+---
+
+### SSS_031 — the aggregate hid a distinction a dependent count cannot make: structural versus live
+
+`coupling.py cells` perturbs one constant and walks the whole workbook
+under both states. On the Iraq grid factor, under
+`Your organisation!C6=Iraq, Electricity, heat, cooling!E7=1000`:
+
+| | |
+|---|---|
+| cells that moved | **26** |
+| structural dependents (graph edges) | **33** |
+| of those, did **not** move | **31** |
+| moved without being a direct dependent | **24** |
+
+**Both halves are the finding.** 31 of 33 graph edges are dead under
+this case, because `Electricity, heat, cooling!A84:B332` is a `VLOOKUP`
+range: every cell in it is a structural dependent of every consumer, and
+only the row the key selects is a live one. And 24 cells moved that have
+no edge from the perturbed cell at all — they sit further down the
+chain.
+
+So the dependent-count fallback and the coupling measurement are not
+approximations of each other. A count of 33 on a lookup range is a count
+of the range's height.
+
+The propagation is correct modelling, not a leak: everything routes
+through `Your organisation!D6`, the lookup that resolves the selected
+country to its grid factor, and the electric-vehicle and
+electric-commuting rows multiply their activity by it — `Owned
+vehicles!D33` is `IF('Your organisation'!$C$6<>"",G33*'Your
+organisation'!$D$6,0)`. Charging an electric vehicle from a national
+grid is what that edge means.
+
+Every moved cell has elasticity **exactly 1.0** except the grand total
+at **0.881538**, which is the share result again: a pure product chain
+passes a relative change through unchanged, and only the sum dilutes it.
+
+**Falsifier:** a case where the structural and live sets coincide,
+making the distinction free.
+
+**Status: SUPPORTED.**
+
+---
+
+### SSS_032 — the Palestine value is a hardcoded constant, so the stated derivation is not live
+
+Asked directly whether any Palestine cell moved under the Iraq
+perturbation. **None did, and none can.**
+
+`Electricity, heat, cooling!B296` is a `CONSTANT_NUMBER`. Row 296 holds
+exactly two cells — `A296` the country name and `B296` the number — and
+neither is a formula. Checked exhaustively: no moved cell is on row 296,
+and no cell anywhere in the workbook whose text mentions Palestine
+appears in the moved set. The only two such cells are `A296` and the
+prose note at `Info and sources!E10`.
+
+**The consequence is about the workbook, not about the scan.** The note
+at `Info and sources!E10` states that the Palestine factor is the
+average of Iraq, Jordan, Lebanon, the Syrian Arab Republic and Turkey,
+and the cell reproduces that mean to 1.1e-16 — but as a **value**, not
+as a formula. The relationship is a record of how the number was once
+produced. It is not maintained: if any of the five is revised upstream,
+this cell does not follow, and nothing in the workbook would show that
+it had stopped being the mean.
+
+**Falsifier:** a formula anywhere that recomputes B296 from the five.
+
+**Status: SUPPORTED. Reported as structure; what it means for the
+workbook is the operator's reading.**

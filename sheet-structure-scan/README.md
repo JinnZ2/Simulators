@@ -103,6 +103,17 @@ Three things it took to get there, each recorded:
   number: nearly every constant terminates at one grand total, and two
   `SUMIF` cells in it gated the whole workbook.
 
+**Per-cell, not aggregate.** `coupling.py cells` walks the whole
+workbook under both states and lists what moved. On the Iraq grid factor
+it separates two things a dependent count cannot: **26 cells moved, 33
+structural dependents, 31 of which did not move** — a `VLOOKUP` range
+makes every cell in it a graph edge and only the selected row a live one
+— and **24 cells moved that are not direct dependents at all.**
+
+Every moved cell has elasticity exactly 1.0 except the grand total at
+0.881538: a product chain passes a relative change through unchanged,
+and only the sum dilutes it.
+
 And the result the substitution is for. Under a stated case, **3
 constants have non-zero coupling and 781 have exactly zero — and every
 one of those 781 ranks non-zero under dependent count, up to 380.**

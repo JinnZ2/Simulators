@@ -5836,7 +5836,22 @@ underneath).
   row is the Iraq grid factor at coupling 0.6215, and the number is
   interpretable, since the elasticity of a sum with respect to one term
   is that term's share of the total, confirmed to four figures on
-  `Fuels!D6`.
+  `Fuels!D6`. **`SSS_031`:** `coupling.py cells` reports per-cell
+  movement and separates **structural** from **live** dependence — on
+  the Iraq grid factor, 26 cells moved against **33 structural
+  dependents of which 31 did not**, because a `VLOOKUP` range makes
+  every cell in it a graph edge and only the selected row a live one,
+  while **24 cells moved that are not direct dependents at all**; every
+  moved cell carries elasticity exactly 1.0 except the grand total at
+  0.881538, a product chain passing a relative change through unchanged
+  and only the sum diluting it. **`SSS_032`:** asked whether any
+  Palestine cell moved — **none did and none can**, since
+  `Electricity, heat, cooling!B296` is a `CONSTANT_NUMBER` and row 296
+  holds only a country name and a number, so the mean-of-five
+  relationship the workbook states in prose at `Info and sources!E10`
+  is a record of how the number was produced and **is not maintained by
+  any formula**: revise a neighbour upstream and this cell does not
+  follow.
   **Then two real workbooks arrived and `SSS_010` closed.** The UNFCCC
   calculator holds 3 of 3 — **but not on the first run**: `UNF-P1` came
   back `0.037` against a registered `> 0.20`, and the cause was the
@@ -6028,8 +6043,18 @@ underneath).
   in this schema to carry that repair. **`CR_028`:** the uninterpretable
   state is a record-layer function both sides call, and its middle case
   matters — unknown history WITH a lean is readable, because a lean that
-  survived an adjustment is still a lean. 93 selftest checks across two
-  modules. Stdlib only, parses under 3.9, CC0.
+  survived an adjustment is still a lean. **`CR_029`:** a coupling in
+  this registry was **transferred rather than measured, and it was
+  wrong** — `UNF_PALESTINE` carried 0.8815 taken from the neighbouring
+  Iraq cell on reasoning about the shared lookup, where the measured
+  value on the Palestine cell itself is **0.8194**; the elasticity of a
+  sum with respect to one term is that term's share of the total, and
+  the two factors differ (0.569 against 0.934), so no argument about
+  shared consumption makes the shares equal. Corrected in the `basis`
+  field rather than in a commit message; it changes no verdict, since
+  that record's time constant is `UNMEASURED` and its clock was and
+  remains `UNDERIVABLE`. 93 selftest checks across two modules. Stdlib
+  only, parses under 3.9, CC0.
 - `residual-direction/` — Work order 3, delivered verbatim: read a miss
   history and name the folded term. Companion to the fold detector,
   which finds unbound numbers, and the claim record, which defines a

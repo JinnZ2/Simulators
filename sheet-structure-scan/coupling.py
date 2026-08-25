@@ -689,6 +689,61 @@ def elasticity(wb, key, eps=EPS, inputs=None):
             "zero_base": zero_base}
 
 
+def moved(wb, key, eps=EPS, inputs=None):
+    """Every cell that changes when one constant is perturbed.
+
+    The aggregate elasticity is a maximum over terminals and hides which
+    cells carry it. This walks the whole workbook under both states and
+    reports each cell that moved, with its own elasticity.
+
+    It also separates two things a dependent count cannot:
+      STRUCTURAL dependence -- the cell appears in a range some formula
+        reads, so the graph has an edge;
+      LIVE dependence -- the value actually changes under the stated
+        case.
+    A lookup range makes every cell in it a structural dependent of every
+    consumer, while only the row the key selects is a live one.
+    """
+    cell = wb.cells.get(key)
+    if cell is None or cell.kind != CONSTANT_NUMBER:
+        return {"state": "NOT_A_CONSTANT", "rows": []}
+    base = as_number(cell.value)
+    if abs(base) < ZERO_FLOOR:
+        return {"state": "BASE_IS_ZERO", "rows": []}
+
+    ev = Evaluator(wb)
+    given = dict(inputs or {})
+    bumped = dict(given)
+    bumped[key] = base * (1.0 + eps)
+    given.setdefault(key, base)
+
+    rows, unevaluable = [], 0
+    for k, c in sorted(wb.cells.items()):
+        if k == key or c.kind != DERIVED:
+            continue
+        try:
+            y0 = as_number(ev.value(k, given))
+            y1 = as_number(ev.value(k, bumped))
+        except (NotComputable, RecursionError, ValueError, OverflowError,
+                ZeroDivisionError):
+            unevaluable += 1
+            continue
+        if y0 == y1:
+            continue
+        e = (((y1 - y0) / y0) / eps) if abs(y0) >= ZERO_FLOOR else None
+        rows.append({"cell": "%s!%s" % k, "before": y0, "after": y1,
+                     "delta": y1 - y0, "elasticity": e,
+                     "pdepth": wb.precedent_depth(k)})
+    deps = wb.dependents().get(key, ())
+    live = set(r["cell"] for r in rows)
+    structural = set("%s!%s" % d for d in deps)
+    return {"state": "OK", "rows": rows, "unevaluable": unevaluable,
+            "structural_dependents": sorted(structural),
+            "structural_not_live": sorted(structural - live),
+            "live_not_structural": sorted(live - structural),
+            "perturbed": "%s!%s" % key, "base": base}
+
+
 # ------------------------------------------------------------- ranking
 
 def ranked(wb, eps=EPS, inputs=None):
@@ -928,6 +983,7 @@ USAGE = """usage:
   coupling.py verify BOOK.xlsx
   coupling.py of     BOOK.xlsx Sheet!A1 [--input Sheet!B1=1000 ...]
   coupling.py rank   BOOK.xlsx [--top N] [--input Sheet!B1=1000 ...]
+  coupling.py cells  BOOK.xlsx Sheet!A1 [--input ...]   per-cell movement
   coupling.py --selftest"""
 
 
@@ -963,6 +1019,41 @@ def main(argv):
                       for k, v in sorted(ins.items())) or "none given"))
         for k in ("state", "elasticity", "evaluated", "terminals"):
             print("%-12s %s" % (k, r[k]))
+        return 0
+    if cmd == "cells":
+        if len(argv) < 4:
+            print(USAGE)
+            return 2
+        sh, addr = argv[3].rsplit("!", 1)
+        ins = parse_inputs([argv[i + 1] for i, a in enumerate(argv)
+                            if a == "--input"])
+        r = moved(wb, (sh, addr.upper()), inputs=ins)
+        if r["state"] != "OK":
+            print("state %s" % r["state"])
+            return 1
+        print("perturbed      %s = %.17g, +%g relative"
+              % (r["perturbed"], r["base"], EPS))
+        print("case           %s" % (
+            ", ".join("%s!%s=%s" % (k[0], k[1], v)
+                      for k, v in sorted(ins.items())) or "none given"))
+        print("cells moved    %d" % len(r["rows"]))
+        print("unevaluable    %d" % r["unevaluable"])
+        print("")
+        print(table(["cell", "pdepth", "before", "after", "delta",
+                     "elasticity"],
+                    [[x["cell"], x["pdepth"], "%.10g" % x["before"],
+                      "%.10g" % x["after"], "%.4g" % x["delta"],
+                      "-" if x["elasticity"] is None
+                      else "%.6g" % x["elasticity"]]
+                     for x in sorted(r["rows"],
+                                     key=lambda x: (x["pdepth"], x["cell"]))]))
+        print("")
+        print("structural dependents (graph edges):        %d"
+              % len(r["structural_dependents"]))
+        print("of those, did NOT move under this case:     %d"
+              % len(r["structural_not_live"]))
+        print("moved without being a direct dependent:     %d"
+              % len(r["live_not_structural"]))
         return 0
     if cmd == "rank":
         top = 20

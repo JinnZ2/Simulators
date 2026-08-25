@@ -715,3 +715,40 @@ read a series that has something to say.
 judges unreadable.
 
 **Status: SUPPORTED.**
+
+---
+
+### CR_029 — a coupling in this registry was transferred rather than measured, and it was wrong
+
+`UNF_PALESTINE` carried **0.8815** with the basis *"measured by
+perturbation on the neighbouring Iraq cell under the same case; the
+Palestine row is consumed by the same lookup and carries the same
+elasticity to the reported total."*
+
+Measured on the Palestine cell itself, under a case that selects
+Palestine, it is **0.8194**.
+
+The transfer reasoning was about the **lookup**, not about the cell. The
+elasticity of a sum with respect to one term is that term's share of the
+total; Palestine's factor is 0.569 against Iraq's 0.934, so the shares
+differ and no argument about shared consumption makes them equal.
+
+The word *measured* in that basis was doing work it had not earned. The
+record is corrected with the real number, the command that produced it,
+and the correction stated in the field rather than in a commit message.
+
+**It changes no verdict.** `UNF_PALESTINE`'s time constant is
+`UNMEASURED`, so its clock was and remains `UNDERIVABLE` — which is
+worth saying, because a correction that moved nothing is still a
+correction, and the alternative was leaving a wrong number in a field
+whose whole purpose is that it be measured.
+
+The record also gains a condition recording what the per-cell run
+established: **`B296` is a hardcoded constant**, so the mean-of-five
+relationship the workbook states in prose is not maintained by any
+formula.
+
+**Falsifier:** a case under which the two cells do carry the same
+elasticity, which would make the transfer sound after all.
+
+**Status: CORRECTED. The error was mine and it was in a `basis` field.**

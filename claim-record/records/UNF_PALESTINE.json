@@ -30,6 +30,10 @@
       {
         "name": "adjustment history",
         "value": "the mean is computed in the workbook and that arithmetic is unadjusted, but the five inputs are the same published grid factors as UNF_GRID_IRAQ and inherit its unknown history"
+      },
+      {
+        "name": "liveness of the stated derivation",
+        "value": "Electricity, heat, cooling!B296 is a hardcoded constant, not a formula. The mean-of-five relationship stated at Info and sources!E10 is a record of how the number was produced and is not maintained by the workbook: perturbing any of the five neighbour cells leaves this one unchanged."
       }
     ],
     "outside_this": "UNTESTED, and the claim is about the arithmetic only. Whether the mean of those five is an estimate of Palestine's grid is a different claim with a different instrument, and this record makes none."
@@ -50,9 +54,9 @@
       "why": "follows the time constant: with no measured rate there is no ceiling to compare it to"
     },
     "coupling": {
-      "value": 0.8815378544305833,
+      "value": 0.8193885224077908,
       "units": "1",
-      "basis": "measured by perturbation on the neighbouring Iraq cell under the same case; the Palestine row is consumed by the same lookup and carries the same elasticity to the reported total"
+      "basis": "measured by perturbation on the Palestine cell itself: sheet-structure-scan/coupling.py cells, +0.1% on Electricity, heat, cooling!B296, elasticity of Report!E25 under the case Your organisation!C6=State of Palestine, Electricity, heat, cooling!E7=1000. CORRECTED 2026-08-25: an earlier version of this record carried 0.8815, transferred from the neighbouring Iraq cell on the reasoning that the Palestine row is consumed by the same lookup. That reasoning is about the lookup and not about this cell. The elasticity of a sum with respect to one term is that term's share of the total, and Palestine's factor is lower than Iraq's, so the shares differ."
     }
   },
   "derivation": {
