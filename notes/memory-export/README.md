@@ -26,7 +26,7 @@ is not true of the folder. Corrected rather than narrowed.)
 
 | tier | named in the manifest | landed |
 |---|---|---|
-| 1 — exported unchanged | 57 | 7 |
+| 1 — exported unchanged | 57 | 8 |
 | 2 — scrubbed and exported | 7 | 7 |
 | 3 — held back | 12 | 0, and none expected |
 
@@ -38,7 +38,7 @@ seven named in the manifest, all seven stored.
 Tier 1, landed: `criterion-symmetry`, `rosetta-shape-core`,
 `force-expression-model`, `alignment-under-coupling`,
 `diversity-collapse-model`, `emergence-stability-simulator`,
-`fairmont-ecological-recovery`. Filed as tier 1 by elimination — each was exported,
+`fairmont-ecological-recovery`, `food-grain-monitor`. Filed as tier 1 by elimination — each was exported,
 so none is tier 3, and none is in the manifest's tier-2 table. The manifest
 does not label files individually, so tier is inferred here and not carried in
 the files.
