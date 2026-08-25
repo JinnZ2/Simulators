@@ -60,5 +60,8 @@
   "collapse_record": {
     "state": "EXACT",
     "basis": "a count of occurrences, hand-checkable from the printed table"
-  }
+  },
+  "correction_status": "unadjusted",
+  "correction_method": null,
+  "correction_depth": 0
 }

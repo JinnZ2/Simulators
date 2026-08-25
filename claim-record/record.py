@@ -57,7 +57,16 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 RECORDS = os.path.join(HERE, "records")
 
 FIELDS = ("assertion", "measurement", "instrument", "domain_of_validity",
-          "clock", "derivation", "collapse_record")
+          "clock", "derivation", "collapse_record",
+          "correction_status", "correction_method", "correction_depth")
+
+# Field 8. Work order 3 S5 names these `raw | corrected | unknown`; S6 of
+# the same order replaces the state vocabulary with adjusted /
+# unadjusted, and S6 governs. Both S5 spellings load as aliases so a
+# record written to the letter of S5 still validates.
+UNADJUSTED, ADJUSTED, STATUS_UNKNOWN = "unadjusted", "adjusted", "unknown"
+STATUSES = (UNADJUSTED, ADJUSTED, STATUS_UNKNOWN)
+STATUS_ALIASES = {"raw": UNADJUSTED, "corrected": ADJUSTED}
 
 # Field 7 states. A point measurement is legal only under COLLAPSED or
 # EXACT, and an interval is illegal under EXACT. See _check_collapse.
@@ -394,6 +403,78 @@ def _check_derivation(rec, out):
             "never recorded"))
 
 
+def _status_of(rec):
+    v = str(rec.get("correction_status", "")).lower()
+    return STATUS_ALIASES.get(v, v)
+
+
+def _check_correction_status(rec, out):
+    """Field 8. `unknown` is legal and expected, not a gap."""
+    st = _status_of(rec)
+    if st not in STATUSES:
+        out.append(Finding(
+            "CORRECTION_STATUS_INVALID", "correction_status",
+            "one of %s. S5's `raw` and `corrected` load as aliases; "
+            "anything else does not." % ", ".join(STATUSES)))
+
+
+def _check_correction_method(rec, out):
+    """Field 9. Same structure as field 7: what, by whom, on what decision.
+
+    S5's validation rule: adjusted with no method does not validate.
+    """
+    st = _status_of(rec)
+    m = rec.get("correction_method")
+    if st == ADJUSTED:
+        if not isinstance(m, dict):
+            out.append(Finding(
+                "CORRECTION_METHOD_MISSING", "correction_method",
+                "a series recorded as %s states what was subtracted, by "
+                "whom, and on what decision" % ADJUSTED))
+            return
+        for k in ("what_was_subtracted", "by_whom", "on_what_decision"):
+            if not str(m.get(k, "")).strip():
+                out.append(Finding("CORRECTION_METHOD_MISSING",
+                                   "correction_method.%s" % k, "blank"))
+    elif m is not None and not isinstance(m, dict):
+        out.append(Finding("CORRECTION_METHOD_MISSING", "correction_method",
+                           "null, or the same shape as field 7"))
+
+
+def _check_correction_depth(rec, out):
+    """Field 10. Generations of adjustment inherited by what is now noise."""
+    d = rec.get("correction_depth")
+    if isinstance(d, int) and d >= 0:
+        return
+    if isinstance(d, dict) and d.get("state") == "UNKNOWN":
+        if not str(d.get("why", "")).strip():
+            out.append(Finding(
+                "CORRECTION_DEPTH_UNSTATED", "correction_depth.why",
+                "UNKNOWN is a stated value and carries its reason"))
+        return
+    out.append(Finding(
+        "CORRECTION_DEPTH_UNSTATED", "correction_depth",
+        "a count of generations, or state UNKNOWN with a why. Zero and "
+        "unknown are different: the first says nothing was inherited, the "
+        "second says nobody looked."))
+
+
+def interpretable(rec, lean_present):
+    """S5's uninterpretable state, at the record layer.
+
+    A symmetric residual set whose adjustment history is unknown cannot
+    be read: a claim that left no lean and one whose lean was removed
+    are the same artifact. The schema emits this rather than defaulting
+    to clean.
+    """
+    if _status_of(rec) == STATUS_UNKNOWN and not lean_present:
+        return False, ("adjustment history is %s and no lean is present; "
+                       "a series with no lean and one whose lean was "
+                       "removed are the same artifact from here"
+                       % STATUS_UNKNOWN)
+    return True, None
+
+
 def _check_collapse(rec, out):
     c = rec.get("collapse_record")
     m = rec.get("measurement") if isinstance(rec.get("measurement"), dict) \
@@ -459,6 +540,9 @@ def _check_collapse(rec, out):
 
 
 _CHECKS = {
+    "correction_status": _check_correction_status,
+    "correction_method": _check_correction_method,
+    "correction_depth": _check_correction_depth,
     "assertion": _check_assertion,
     "measurement": _check_measurement,
     "instrument": _check_instrument,
@@ -773,6 +857,9 @@ def _complete():
                          "basis": "stipulated here"}},
         "derivation": {"parents": [], "root_reason": "a direct count"},
         "collapse_record": {"state": EXACT, "basis": "a count of elements"},
+        "correction_status": UNADJUSTED,
+        "correction_method": None,
+        "correction_depth": 0,
     }
 
 
@@ -1003,6 +1090,52 @@ def _selftest():
     ck("'mayor' is not 'may'", hedges_in("The mayor signed it"), [])
     ck("'somewhere' is not 'some'", hedges_in("somewhere"), [])
     ck("'abouts' is not 'about'", hedges_in("thereabouts"), [])
+
+    # Fields 8-10, work order 3 S5.
+    ck("an unknown adjustment history validates; it is not a gap",
+       variant(correction_status="unknown",
+               correction_depth={"state": "UNKNOWN",
+                                 "why": "the source says nothing"})[0], VALID)
+    ck("S5's own spellings load as aliases",
+       (variant(correction_status="raw")[0],
+        _status_of({"correction_status": "corrected"})), (VALID, ADJUSTED))
+    ck("an unrecognised status is caught",
+       "CORRECTION_STATUS_INVALID" in codes(variant(
+           correction_status="cleaned")), True)
+
+    # The S5 validation rule, both directions.
+    ck("adjusted with no method does not validate",
+       "CORRECTION_METHOD_MISSING" in codes(variant(
+           correction_status="adjusted")), True)
+    ck("adjusted with a full method does",
+       variant(correction_status="adjusted",
+               correction_method={
+                   "what_was_subtracted": "a per-site offset",
+                   "by_whom": "the publishing agency",
+                   "on_what_decision": "a 2019 methods note"})[0], VALID)
+    ck("a partial method is caught",
+       "CORRECTION_METHOD_MISSING" in codes(variant(
+           correction_status="adjusted",
+           correction_method={"what_was_subtracted": "an offset"})), True)
+
+    # Field 10: zero and unknown are different.
+    ck("depth zero validates", variant(correction_depth=0)[0], VALID)
+    ck("depth UNKNOWN without a reason is caught",
+       "CORRECTION_DEPTH_UNSTATED" in codes(variant(
+           correction_depth={"state": "UNKNOWN"})), True)
+    ck("a missing depth is caught, and is not read as zero",
+       "CORRECTION_DEPTH_UNSTATED" in codes(variant(correction_depth=None)),
+       True)
+
+    # The uninterpretable state, at the record layer.
+    unk = copy.deepcopy(base)
+    unk["correction_status"] = "unknown"
+    ck("unknown history plus no lean is uninterpretable",
+       interpretable(unk, False)[0], False)
+    ck("unknown history plus a lean is readable",
+       interpretable(unk, True)[0], True)
+    ck("a known history plus no lean is readable",
+       interpretable(base, False)[0], True)
 
     # Principles 1-3 and the acceptance test, run as part of the suite
     # rather than as a command someone remembers.

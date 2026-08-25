@@ -162,6 +162,24 @@ written as a parent before it was caught: two claims measured in one run
 were given a parent-child edge, in the file, by the author of the schema,
 minutes after writing rule one.
 
+## Fields 8, 9, 10 — the adjustment history
+
+Added by work order 3. `correction_status` is
+`unadjusted / adjusted / unknown` — **S5 spells the first two
+`raw / corrected` and S6 replaces the state vocabulary; S6 governs and
+both spellings load as aliases.**
+
+`unknown` is legal and expected, not a gap. A symmetric residual set
+whose history is unknown is **uninterpretable**: a claim that left no
+lean and one whose lean was removed are the same artifact from the
+record.
+
+**Field 8 is the first column in this registry that varies** — 6
+`unadjusted`, 3 `unknown`. The six are counts computed here; the three
+are values read from a dataset and an index whose own production the
+workbook does not describe. `CR_007`'s standing finding narrows rather
+than closing.
+
 ## The load path
 
 Field 6's purpose, on the real corpus:
@@ -179,7 +197,7 @@ Every claim traces to `SSS_017`, the reader repair. Refute that and five
 claims above it are exposed — visibly, rather than because somebody
 remembered.
 
-78 selftest checks across two modules. Rule two gets seven null arms, one per field, and the
+93 selftest checks across two modules. Rule two gets seven null arms, one per field, and the
 **positive control comes first**: a validator that refuses everything
 passes all seven.
 

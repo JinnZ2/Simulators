@@ -6015,8 +6015,73 @@ underneath).
   the fault was the harness validating each record in a one-record
   registry, so rule 1 could not see a parent by construction — recorded
   because it is a way an acceptance test reports a failure belonging to
-  itself. 78 selftest checks across two modules. Stdlib only, parses
-  under 3.9, CC0.
+  itself. **Work order 3 then added fields 8-10**, the adjustment history:
+  `correction_status` (`unadjusted`/`adjusted`/`unknown`, with S5's
+  `raw`/`corrected` as aliases since S6 governs the state vocabulary),
+  `correction_method` in field 7's shape, and `correction_depth`.
+  **`CR_026`:** field 8 is the **first column in this registry that
+  varies** — 6 `unadjusted` against 3 `unknown` — so `CR_007`'s standing
+  finding narrows rather than closing; the six are counts computed here
+  and the three are values read from a dataset and an index whose own
+  production the workbook does not describe. **`CR_027`:** field 10 keeps
+  `0` and `UNKNOWN` apart and refuses a missing field, the fourth field
+  in this schema to carry that repair. **`CR_028`:** the uninterpretable
+  state is a record-layer function both sides call, and its middle case
+  matters — unknown history WITH a lean is readable, because a lean that
+  survived an adjustment is still a lean. 93 selftest checks across two
+  modules. Stdlib only, parses under 3.9, CC0.
+- `residual-direction/` — Work order 3, delivered verbatim: read a miss
+  history and name the folded term. Companion to the fold detector,
+  which finds unbound numbers, and the claim record, which defines a
+  bound one. **`RDD_001`, the counterexample the design exists for:** on
+  fixture F1 — overpredict small, underpredict large — the pooled sign
+  test returns fraction positive **0.5083, no lean**, while the
+  conditional slope of residual against predicted magnitude fires at
+  standardized **0.868**; both halves of the order's stated PASS
+  condition hold, and pooled sign is retained as one printed row rather
+  than the verdict. **`RDD_002`:** the ranked list has to be on the
+  **standardized** slope, since raw slopes against predictors with
+  different units are not on one scale and sorting them is a comparison
+  across unlike objects — `G-DIM` in the one place a sorted column looks
+  like one quantity. **`RDD_003`, found by reading the output:** in F1
+  the predicted values rise with the time index, which is the common
+  real shape, so S2(a) and S2(c) carry **identical** standardized slopes
+  and a ranked list cannot say which the residual leans with; the order
+  asks for the term to be NAMED rather than inferred, and naming one of
+  a collinear pair is a specific wrong answer rather than an absent one,
+  so the report emits `NOT SEPARABLE` with the group and states what
+  would separate them. **`RDD_004`:** all four cells of the S3 2x2 are
+  reachable and a **missing coupling is a fifth state**, not weak —
+  treating it as weak would route a case to LOG AND LEAVE on an absence;
+  `LOG_AND_LEAVE` on F2 names no term, because there the lean is a
+  pooled offset and no conditional row leans. **`RDD_005`:** S4's
+  stable-versus-growing verdicts print as three distinct reports across
+  F1/F2/F3, asserted rather than trusted, since two findings that print
+  the same are the same finding. **`RDD_006`:** F4 returns
+  `UNINTERPRETABLE` and the identical series with a known history returns
+  a readable cell — the difference is entirely in the record.
+  **`RDD_007`:** S5 names field 8's values `raw | corrected | unknown`
+  and S6 replaces the state vocabulary with `adjusted / unadjusted`;
+  **S6 governs** and S5's spellings load as aliases, recorded rather than
+  resolved quietly, because an internal tension in a delivered order is a
+  fact about the order. **`RDD_008`:** the S6 screen composes its
+  patterns from tokens so the banned phrase never appears in its own
+  source, which lets `naming.py --source .` scan the folder **including
+  itself** with no skipped region — avoiding a second instance of
+  `UNI_010`'s hand-broken loop — and the one exemption, the delivered
+  order, is **measured**: the selftest checks both that the tool is clean
+  with the specification excluded and that the specification is the only
+  file that fires without it. **`RDD_009`:** field 8 is the **first
+  non-uniform column** in the claim registry (6 `unadjusted`, 3
+  `unknown`), narrowing `CR_007`/`CR_017` rather than closing them — the
+  six are counts computed in-session, the three are values read from
+  sources that describe neither, which is `COLLAPSED_UPSTREAM` from a
+  second side. **`RDD_010`:** S3's coupling is **imported** from the
+  claim record rather than reimplemented, so the number the
+  discriminator responds to is the same object the clock divides a time
+  constant by — and it was measured by perturbing a cell in a real
+  workbook, not stipulated anywhere in the chain. 49 selftest checks
+  across two modules. Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

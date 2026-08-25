@@ -88,6 +88,9 @@ claim rather than re-expressing it.
 | 5 | `clock` | `holds_for`, and a parseable `next_check` |
 | 6 | `derivation` | `parents`, a list; empty needs a `root_reason` |
 | 7 | `collapse_record` | a `state`, and what that state requires |
+| 8 | `correction_status` | `unadjusted` / `adjusted` / `unknown` |
+| 9 | `correction_method` | what was subtracted, by whom, on what decision |
+| 10 | `correction_depth` | generations of adjustment inherited, or `UNKNOWN` with a why |
 
 ### 1 — assertion, stated without hedges
 
@@ -206,6 +209,32 @@ free text is exactly how an upper quartile becomes "the value". With an
 `uninstrumented/UNI_013` recorded what a vocabulary closed on purpose
 costs when a real case does not fit, and the repair it asked for was
 this one.
+
+### 8, 9, 10 — the adjustment history
+
+Added by work order 3, S5.
+
+**Field 8 vocabulary.** S5 names the values `raw | corrected | unknown`;
+S6 of the same order replaces the state vocabulary with
+`adjusted / unadjusted`. **S6 governs** — it is the naming constraint —
+and S5's two spellings load as aliases, so a record written to the letter
+of S5 still validates and nothing is renamed underneath its author.
+
+**`unknown` is legal and expected.** It is not a gap. A symmetric
+residual set whose adjustment history is `unknown` is **uninterpretable**:
+a claim that left no lean and one whose lean was removed are the same
+artifact from the record, and the schema emits that rather than
+defaulting to clean. `interpretable(record, lean_present)` is where it
+lives.
+
+**Field 9 has field 7's shape**: what was subtracted, by whom, on what
+decision. S5's validation rule — **`adjusted` with a null method does not
+validate** — plus each of the three parts required individually, because
+a method naming only what was subtracted leaves the decision unrecorded.
+
+**Field 10 keeps zero and unknown apart.** `0` says nothing was
+inherited; `{"state": "UNKNOWN", "why": ...}` says nobody looked. A
+missing field is neither and is refused.
 
 ### THE COUPLING BETWEEN 2 AND 7
 

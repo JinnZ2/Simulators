@@ -26,6 +26,10 @@
       {
         "name": "operation",
         "value": "unweighted arithmetic mean"
+      },
+      {
+        "name": "adjustment history",
+        "value": "the mean is computed in the workbook and that arithmetic is unadjusted, but the five inputs are the same published grid factors as UNF_GRID_IRAQ and inherit its unknown history"
       }
     ],
     "outside_this": "UNTESTED, and the claim is about the arithmetic only. Whether the mean of those five is an estimate of Palestine's grid is a different claim with a different instrument, and this record makes none."
@@ -62,5 +66,11 @@
     "from": "the five neighbour factors",
     "point": "mean",
     "why": "the workbook states the substitution at Info and sources!E10 and the cell reproduces the unweighted mean to 1.1e-16"
+  },
+  "correction_status": "unknown",
+  "correction_method": null,
+  "correction_depth": {
+    "state": "UNKNOWN",
+    "why": "the mean is computed in the workbook and that arithmetic is unadjusted, but the five inputs are the same published grid factors as UNF_GRID_IRAQ and inherit its unknown history"
   }
 }

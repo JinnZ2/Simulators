@@ -60,5 +60,8 @@
   "collapse_record": {
     "state": "EXACT",
     "basis": "a ratio of two exact counts, 825 over 3656"
-  }
+  },
+  "correction_status": "unadjusted",
+  "correction_method": null,
+  "correction_depth": 0
 }

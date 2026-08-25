@@ -61,5 +61,8 @@
   "collapse_record": {
     "state": "EXACT",
     "basis": "a count of cells"
-  }
+  },
+  "correction_status": "unadjusted",
+  "correction_method": null,
+  "correction_depth": 0
 }

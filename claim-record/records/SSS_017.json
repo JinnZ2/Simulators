@@ -59,5 +59,8 @@
   "collapse_record": {
     "state": "EXACT",
     "basis": "a count of <f> elements, not an estimate of one"
-  }
+  },
+  "correction_status": "unadjusted",
+  "correction_method": null,
+  "correction_depth": 0
 }

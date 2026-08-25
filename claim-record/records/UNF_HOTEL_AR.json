@@ -30,6 +30,10 @@
       {
         "name": "statistic",
         "value": "all hotels upper quartile, per Info and sources!E19"
+      },
+      {
+        "name": "adjustment history",
+        "value": "the workbook names the 2020 Cornell index and the statistic taken from it, and states nothing about how the index's own values were produced"
       }
     ],
     "outside_this": "UNTESTED. A hotel at the median of the same distribution is not described by this number, and the file gives no spread."
@@ -64,5 +68,11 @@
     "from": "the distribution of Hotel Carbon Footprint Per Occupied Room across all hotels in the index",
     "point": "upper_quartile",
     "why": "the workbook states it at Info and sources!E19: 'All hotels upper quartile emission factor value'. The statistic is documented in the file, which is what separates this record from UNF_GRID_IRAQ."
+  },
+  "correction_status": "unknown",
+  "correction_method": null,
+  "correction_depth": {
+    "state": "UNKNOWN",
+    "why": "the workbook names the 2020 Cornell index and the statistic taken from it, and states nothing about how the index's own values were produced"
   }
 }

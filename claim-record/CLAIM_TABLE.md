@@ -642,3 +642,76 @@ leak in six records that did not have one.
 failure.
 
 **Status: REPAIRED. The test now validates against the full registry.**
+
+---
+
+## Claims from work order 3, S5 — the adjustment history
+
+Fields 8, 9 and 10 amend the schema. The discriminator that reads them
+is in `residual-direction/`.
+
+---
+
+### CR_026 — field 8 is the first column in this registry that varies
+
+`CR_007` and `CR_017` recorded that every sentinel-bearing field came
+back single-valued. Field 8 does not:
+
+| value | records |
+|---|---|
+| `unadjusted` | **6** |
+| `unknown` | **3** |
+
+The six are counts this session computed from a file, where nothing was
+subtracted and the history is known. The three are values read from a
+published dataset and a published index whose own production the
+workbook does not describe — which is `COLLAPSED_UPSTREAM` seen from a
+second side, and the same three records carry both.
+
+Field 10 splits with it: depth `0` on six, `UNKNOWN` with a reason on
+three.
+
+So the standing finding narrows rather than closing. `outside_this` and
+`rate_ceiling` are still uniform; field 8 is not, and it is the first
+field whose values say something about the corpus rather than about the
+schema.
+
+**Falsifier:** a record whose status a reader would assign differently.
+
+**Status: SUPPORTED.**
+
+---
+
+### CR_027 — zero and unknown are different in field 10, and a missing field is neither
+
+`correction_depth: 0` says nothing was inherited. `{"state": "UNKNOWN",
+"why": ...}` says nobody looked. An absent field is refused rather than
+read as zero.
+
+The absent-versus-known-negative repair, now designed in at the fourth
+field of this schema — `error.kind`, `outside_this`, the clock
+sub-fields, and now this one. It costs one branch at construction and is
+unrecoverable later, which is why it keeps being worth writing down.
+
+**Falsifier:** a third state these two conflate.
+
+**Status: SUPPORTED.**
+
+---
+
+### CR_028 — the uninterpretable state is a record-layer function, not a report string
+
+`interpretable(record, lean_present)` returns a boolean and a reason, and
+the discriminator in `residual-direction/` calls the same logic on the
+series side. Both arms are checked: unknown history with no lean is
+uninterpretable, unknown history **with** a lean is readable — because a
+lean that survived an adjustment is still a lean — and a known history
+with no lean is readable.
+
+That middle case matters. A blanket rule on `unknown` would refuse to
+read a series that has something to say.
+
+**Falsifier:** an unknown-history series with a lean that a reader
+judges unreadable.
+
+**Status: SUPPORTED.**

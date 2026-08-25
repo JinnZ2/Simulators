@@ -26,6 +26,10 @@
       {
         "name": "generation mix",
         "value": "whatever mix the source dataset averaged over"
+      },
+      {
+        "name": "adjustment history",
+        "value": "the workbook cites the UNFCCC Harmonized GEF dataset at Info and sources!D10 and states nothing about how the published factor was produced, so whether anything was subtracted upstream is not readable from this artifact"
       }
     ],
     "outside_this": "UNTESTED. The factor is a national average and says nothing about a particular site, hour or supplier."
@@ -60,5 +64,11 @@
     "state": "COLLAPSED_UPSTREAM",
     "source": "UNFCCC Harmonized Grid Emission factor (GEF) data set",
     "what_is_unstated": "which statistic of the generation mix the single number is. The workbook cites the dataset and reproduces one value per country; nothing in the file states whether it is a mean, a median or something else, nor over what period."
+  },
+  "correction_status": "unknown",
+  "correction_method": null,
+  "correction_depth": {
+    "state": "UNKNOWN",
+    "why": "the workbook cites the UNFCCC Harmonized GEF dataset at Info and sources!D10 and states nothing about how the published factor was produced, so whether anything was subtracted upstream is not readable from this artifact"
   }
 }
