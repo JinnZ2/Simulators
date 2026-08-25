@@ -1,0 +1,11 @@
+{
+  "id": "proleptic_gregorian_date",
+  "version": "1.0.0",
+  "quantity": "instant",
+  "unit": "iso_date",
+  "base": "second",
+  "epoch": "1970-01-01",
+  "impl": "proleptic_gregorian_date",
+  "basis": "a date in the proleptic Gregorian calendar, counted in SI seconds from a declared epoch. The calendar is a frame like any other and names its implementation; an unregistered implementation raises rather than defaulting.",
+  "supersedes": null
+}

@@ -26,6 +26,57 @@ times, which is the only point in the cycle where it is free.
 
 ---
 
+## 0b. THREE BASE PRINCIPLES
+
+Stated plainly, because the file is the place for them.
+
+**1. No privileged frame.** The format does not treat any frame as the
+default, **including the one every current record uses.** `years` is a
+registered transform on the same terms as `sols`; nothing falls back to
+it, an unregistered unit raises rather than resolving by assumption, and
+a reader that wants a duration in a frame has to name the frame. Even
+the identity transform is registered — leaving `1` implicit would have
+made it the one unit the format resolved without asking.
+
+**2. Transforms are first-class objects.** They live in `frames/` as
+versioned records beside the claims, not as conversion code inside an
+application. Each names its base, its rate, and the basis for that rate.
+A rate frame carries no rate of its own: it names the duration frame it
+inverts, so a correction to that frame reaches it without an edit.
+Adding a frame is adding a file.
+
+**3. Derived at read time, never at write time.** A stored duration is a
+cached conversion, and caching the conversion is what makes it legacy.
+Nothing is written back converted. `shelf_life`, `next_check`,
+`holds_for` and every `shelf_life_<unit>` name are **refused as literals
+in a record**; the derivation returns base units and the reader renders
+them in the frame it asked for.
+
+### The acceptance test
+
+> Add a second frame with a different rate, and no existing record needs
+> editing. If any record needs editing, the frame leaked into the data.
+
+`frames.py --acceptance` runs it. It adds `venus_days` — deliberately
+**not** one of the files in `frames/`, since adding a frame already
+registered tests nothing — re-reads all nine records, and checks that
+none changed on disk and all still validate.
+
+**And it runs a control beside it**, because a test that adds a frame
+nothing reads would pass on a format that had leaked everywhere. The
+control writes the same claim in the added frame and requires three
+things: it validates under the frame-aware implementation, it is
+**refused** by an implementation with `years` welded in, and it derives
+the **same shelf life in base units** — or the second frame changed the
+claim rather than re-expressing it.
+
+### The reasoning, verbatim from the order
+
+> this is being specified before it's needed because retrofit cost is
+> the entire reason the fold detector exists. Building the fold in now,
+> knowing it's a fold, would be the same error the tool was written to
+> find.
+
 ## 1. THE SEVEN FIELDS
 
 | # | field | required shape |
@@ -84,9 +135,16 @@ measured. Nothing else, and in particular **no date**.
 | sub-field | is | units |
 |---|---|---|
 | `neglected_term.held_fixed` | what this claim held fixed | — |
-| `time_constant` | how fast that thing changes | `years` |
-| `rate_ceiling` | the fastest background change the claim survives | `per_year` |
-| `coupling` | sensitivity of the result to the neglected term | `1` |
+| `measured_on` + `measured_on_frame` | the anchor, and the calendar it is written in | an `instant` frame |
+| `time_constant` | how fast that thing changes | any `duration` frame |
+| `rate_ceiling` | the fastest background change the claim survives | any `rate` frame |
+| `coupling` | sensitivity of the result to the neglected term | the `dimensionless` frame |
+
+**No unit is named in the code.** Each sub-field declares its frame and
+the registry resolves it; the derivation works in base units throughout,
+so a rate in `per_year` and a time constant in `sols` compare without
+either being converted into the other's frame. The calendar is a frame
+too and names its own implementation.
 
 Each is a value **with a `basis`**, or `UNMEASURED` **with a `why`**. A
 value with no basis is refused: a number typed in with nothing behind it
@@ -166,8 +224,9 @@ Both directions are pinned in the selftest.
 ## 2. THE TWO HARD RULES, AND HOW THEY ARE TESTED
 
 **Rule 3 — a clock asserted rather than derived does not validate.**
-`holds_for`, `next_check`, `shelf_life` and `shelf_life_years` are
-refused as literals in the clock. So is a sub-field with a value and no
+`holds_for`, `next_check`, `shelf_life`, `shelf_life_years`,
+`shelf_life_base`, `shelf_life_days` and `shelf_life_sols` are refused as
+literals in the clock — principle 3, enforced by name. So is a sub-field with a value and no
 basis, and `UNMEASURED` with no reason — the two ways to assert it one
 level down.
 
@@ -230,3 +289,5 @@ inspection. See `CLAIM_TABLE.md` for the measurements.
 | F5 | a corpus where `COLLAPSED` never occurs, making field 7's stated purpose untested — **fired at `CR_006`, closed at `CR_016` by the hotel factor** |
 | F6 | a corpus where no record carries a measured `rate_ceiling`, making the adiabatic/sudden distinction untested — **currently firing, see `CR_017`** |
 | F7 | a way to get a date out of the schema without three derived sub-fields behind it |
+| F8 | a frame added to the registry that requires any existing record to be edited — the acceptance test, and it is run inside both selftests rather than left as a command someone remembers |
+| F9 | a unit that resolves without being registered, or a reader that gets a duration without naming a frame |

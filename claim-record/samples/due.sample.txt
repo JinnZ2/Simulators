@@ -1,13 +1,14 @@
 next-check status on 2026-08-25
 shelf life = time constant / |coupling|, both derived
-claim          clock                   shelf_yr  next_check  state         
--------------  ----------------------  --------  ----------  --------------
-SSS_017        UNBOUNDED_BY_THIS_TERM  -         -           REGIME_UNKNOWN
-SSS_019        UNDERIVABLE             -         -           REGIME_UNKNOWN
-SSS_020        UNDERIVABLE             -         -           REGIME_UNKNOWN
-SSS_021        UNDERIVABLE             -         -           REGIME_UNKNOWN
-SSS_022a       UNDERIVABLE             -         -           REGIME_UNKNOWN
-SSS_022b       UNDERIVABLE             -         -           REGIME_UNKNOWN
-UNF_GRID_IRAQ  DERIVED                 3.40      2030-01-18  CURRENT
-UNF_HOTEL_AR   UNDERIVABLE             -         -           REGIME_UNKNOWN
-UNF_PALESTINE  UNDERIVABLE             -         -           REGIME_UNKNOWN
+read in 'years'; no frame is the default and nothing is stored converted
+claim          clock                   shelf(years)  next_check  state         
+-------------  ----------------------  ------------  ----------  --------------
+SSS_017        UNBOUNDED_BY_THIS_TERM  -             -           REGIME_UNKNOWN
+SSS_019        UNDERIVABLE             -             -           REGIME_UNKNOWN
+SSS_020        UNDERIVABLE             -             -           REGIME_UNKNOWN
+SSS_021        UNDERIVABLE             -             -           REGIME_UNKNOWN
+SSS_022a       UNDERIVABLE             -             -           REGIME_UNKNOWN
+SSS_022b       UNDERIVABLE             -             -           REGIME_UNKNOWN
+UNF_GRID_IRAQ  DERIVED                 3.403         2030-01-18  CURRENT
+UNF_HOTEL_AR   UNDERIVABLE             -             -           REGIME_UNKNOWN
+UNF_PALESTINE  UNDERIVABLE             -             -           REGIME_UNKNOWN

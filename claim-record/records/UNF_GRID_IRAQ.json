@@ -32,6 +32,7 @@
   },
   "clock": {
     "measured_on": "2026-08-25",
+    "measured_on_frame": "iso_date",
     "neglected_term": {
       "name": "generation mix",
       "held_fixed": "that the country's generation mix is the one the factor was computed over"

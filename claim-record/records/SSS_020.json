@@ -32,6 +32,7 @@
   },
   "clock": {
     "measured_on": "2026-08-25",
+    "measured_on_frame": "iso_date",
     "neglected_term": {
       "name": "label model",
       "held_fixed": "CHOICE 4, one label row per sheet"

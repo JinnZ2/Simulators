@@ -32,6 +32,7 @@
   },
   "clock": {
     "measured_on": "2026-08-25",
+    "measured_on_frame": "iso_date",
     "neglected_term": {
       "name": "pattern file",
       "held_fixed": "patterns.json as of the run"

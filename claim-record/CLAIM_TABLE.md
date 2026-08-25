@@ -490,3 +490,155 @@ the report says so above the table.
 not hold — open by construction, as `CR_009` states.
 
 **Status: SUPPORTED.**
+
+---
+
+## Claims from the frame layer
+
+Three base principles and an acceptance test, delivered 2026-08-25.
+Implemented in `frames.py` and `frames/*.json`. The reasoning is
+recorded verbatim in both, and is the reason the work happened before
+anything needed it:
+
+> this is being specified before it's needed because retrofit cost is
+> the entire reason the fold detector exists. Building the fold in now,
+> knowing it's a fold, would be the same error the tool was written to
+> find.
+
+---
+
+### CR_020 — the format had four frame leaks and every one was in the code, not the records
+
+Found by grep, before the principles were implemented:
+
+| leak | where |
+|---|---|
+| `units_expected="years"` | the time-constant check |
+| `units_expected="per_year"` | the rate-ceiling check |
+| `365.2425` | inside the next-check derivation |
+| `shelf_life_years` | the **name** of the returned field |
+
+Not one was in a record. Every record already declared its unit, so the
+data was frame-tagged and the **code** was frame-welded — which is why
+the acceptance test passes without editing any of them, and why it would
+have failed against the implementation of an hour earlier.
+
+**Falsifier:** a frame token in a record that the registry cannot
+resolve, which would put a leak in the data.
+
+**Status: REPAIRED. No unit is named in `record.py` outside the
+deliberately-leaked control and the selftest's explicit frame arguments.**
+
+---
+
+### CR_021 — the identity transform had to be registered, and it turned up as a break
+
+Principle 1 says no frame is the default. The obvious reading is about
+`years`. The implementation showed a second one: `coupling` declares
+`units: "1"`, and until `frames/dimensionless.json` existed, **all nine
+records went `UNDERIVABLE` at once.**
+
+Leaving `1` implicit would have made it the one unit the format resolved
+without asking — a privileged frame wearing a unit string. It is now a
+versioned object like the rest, and its `basis` records that it arrived
+as a failure rather than as a design note.
+
+**Falsifier:** another quantity the registry resolves without a frame
+object behind it.
+
+**Status: SUPPORTED. Six frames registered, no special cases.**
+
+---
+
+### CR_022 — the acceptance test passes, and the control is what makes that mean anything
+
+```
+added                    venus_days (10087200.0 s per unit), not on disk
+records read             9
+records needing an edit  0
+records still validating 9 of 9
+errors                   0
+```
+
+The added frame is **deliberately not one of the files in `frames/`**,
+because adding a frame that is already registered tests nothing.
+
+**The control is the load-bearing half.** A test that adds a frame
+nothing reads would pass on a format that had leaked everywhere, so the
+same claim is written in the added frame and must clear three bars:
+
+| | |
+|---|---|
+| validates under the frame-aware implementation | **True** |
+| refused by an implementation with `years` welded in | **True** |
+| derives the same shelf life in base units | **True** |
+
+The third is not decoration: without it, a second frame that silently
+changed the quantity would pass the first two.
+
+Run inside **both** selftests rather than left as a command someone
+remembers.
+
+**Falsifier:** a frame whose addition requires an edit — F8.
+
+**Status: SUPPORTED.**
+
+---
+
+### CR_023 — principle 1 reaches the reader, not only the format
+
+`due` has **no default frame**. A reader that did not have to name its
+frame would make one of them the default in everything but the
+specification, so `record.py due` without `--in` refuses and lists what
+is registered.
+
+The same applies inside a record: `measured_on` now requires
+`measured_on_frame`, because an instant with no declared calendar is the
+Gregorian one by assumption. All nine records were edited to declare it —
+**that is a schema tightening, not a frame addition**, and it is the
+distinction the acceptance test turns on. Adding `venus_days` needed no
+edit; requiring every instant to name its calendar needed nine.
+
+**Falsifier:** a path that yields a duration or an instant without a
+frame being named.
+
+**Status: SUPPORTED. `FRAME_UNDECLARED` and `FRAME_UNREGISTERED` are
+separate codes, because a frame nobody named and a frame nobody
+registered are different repairs.**
+
+---
+
+### CR_024 — working in base units makes the regime comparison frame-free
+
+`rate_ceiling` and `time_constant` are converted to base on the way in,
+so `1/tau <= ceiling` compares a rate in `per_year` against a time
+constant in `sols` **without either being expressed in the other's
+frame.**
+
+That falls out of principle 3 rather than being designed: if nothing is
+stored converted, everything is converted once at read time, and the
+comparison happens where both are in the same base.
+
+**Falsifier:** a comparison in the derivation that needs one operand
+rendered in the other's frame.
+
+**Status: SUPPORTED.**
+
+---
+
+### CR_025 — the first run of the acceptance test failed on the harness, not the format
+
+Arm A reported **3 of 9 validating** with six `PARENT_UNRESOLVED`
+findings. The cause was that the harness validated each record in a
+one-record registry, so rule 1 could not see any parent by construction.
+
+Recorded rather than quietly fixed, because it is a specific way an
+acceptance test can report a failure that belongs to itself: the
+test-time registry was not the registry the format uses, and a reader who
+took the first output at face value would have gone looking for a frame
+leak in six records that did not have one.
+
+**Falsifier:** another harness-level state the test reports as a format
+failure.
+
+**Status: REPAIRED. The test now validates against the full registry.**

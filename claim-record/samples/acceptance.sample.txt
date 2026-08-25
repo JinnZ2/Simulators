@@ -1,0 +1,17 @@
+ACCEPTANCE TEST -- add a second frame with a different rate
+
+  added                    venus_days (10087200.0 s per unit), not on disk
+  records read             9
+  records needing an edit  0 
+  records still validating 9 of 9
+  errors                   0
+
+CONTROL -- a record written in the added frame
+
+  validates under the frame-aware implementation   True
+  refused by an implementation with years welded in True
+  derives the same shelf life in base units         True
+
+PASSES
+No existing record needed editing, and the control
+shows the test is not passing by reading nothing.

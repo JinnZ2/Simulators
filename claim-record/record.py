@@ -51,6 +51,8 @@ sys.path.insert(0, os.path.join(
     "sheet-structure-scan"))
 import no_severity  # noqa: E402
 
+import frames  # noqa: E402
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 RECORDS = os.path.join(HERE, "records")
 
@@ -113,11 +115,13 @@ UNMEASURED = "UNMEASURED"
 COUPLING_FLOOR = 1e-6
 
 
-def _quantity(d, name, out, field, units_expected):
+def _quantity(d, name, out, field, quantity, reg):
     """A sub-field is a value with a basis, or UNMEASURED with a reason.
 
-    Returns the float, or None when it is a stated absence, and appends
-    a finding when it is neither.
+    Returns the value IN BASE UNITS, or None when it is a stated
+    absence. The unit is resolved through the frame registry and no unit
+    is privileged: an unregistered one raises there and is reported
+    here, rather than being assumed to be the one every record uses.
     """
     q = d.get(name)
     if not isinstance(q, dict):
@@ -141,14 +145,15 @@ def _quantity(d, name, out, field, units_expected):
             "CLOCK_NOT_DERIVED", "%s.%s.basis" % (field, name),
             "a derived sub-field carries what it was derived from; "
             "without it the clock is asserted one level down"))
-    if units_expected and q.get("units") != units_expected:
-        out.append(Finding("CLOCK_NOT_DERIVED", "%s.%s.units" % (field, name),
-                           "expected %r, got %r"
-                           % (units_expected, q.get("units"))))
-    return float(v)
+    try:
+        return reg.to_base(float(v), q.get("units"))
+    except frames.UnknownFrame as exc:
+        out.append(Finding("FRAME_UNREGISTERED",
+                           "%s.%s.units" % (field, name), str(exc)))
+        return None
 
 
-def derive_clock(rec):
+def derive_clock(rec, reg=None):
     """Field 5, computed from its three sub-fields. Never asserted.
 
     shelf_life = time_constant / |coupling|
@@ -163,14 +168,18 @@ def derive_clock(rec):
     the shelf life, and at zero coupling it does not bound it at all --
     reported as a state, not as a large number.
     """
+    reg = reg if reg is not None else frames.Registry.load()
     c = rec.get("clock")
     if not isinstance(c, dict):
         return {"state": UNDERIVABLE, "why": "no clock field"}
     out = []
-    tau = _quantity(c, "time_constant", out, "clock", "years")
-    ceil = _quantity(c, "rate_ceiling", out, "clock", "per_year")
-    coup = _quantity(c, "coupling", out, "clock", "1")
+    tau = _quantity(c, "time_constant", out, "clock", "duration", reg)
+    ceil = _quantity(c, "rate_ceiling", out, "clock", "rate", reg)
+    coup = _quantity(c, "coupling", out, "clock", "dimensionless", reg)
 
+    # Both are already in base units, so this comparison is frame-free:
+    # a rate in per_sols and a time constant in years compare without
+    # either being converted into the other's frame.
     regime = REGIME_UNKNOWN
     if tau is not None and ceil is not None and tau > 0:
         regime = ADIABATIC if (1.0 / tau) <= ceil else SUDDEN
@@ -179,28 +188,39 @@ def derive_clock(rec):
         missing = [n for n, v in (("time_constant", tau), ("coupling", coup))
                    if v is None]
         return {"state": UNDERIVABLE, "regime": regime, "findings": out,
-                "missing": missing, "shelf_life_years": None,
+                "missing": missing, "shelf_life_base": None,
                 "next_check": None,
                 "why": "no date is emitted; %s is not measured"
                        % " and ".join(missing)}
     if abs(coup) < COUPLING_FLOOR:
         return {"state": UNBOUNDED, "regime": regime, "findings": out,
-                "shelf_life_years": None, "next_check": None,
+                "shelf_life_base": None, "next_check": None,
                 "why": "the result does not depend on the neglected term, "
                        "so that term does not date the claim"}
-    shelf = tau / abs(coup)
+    shelf = tau / abs(coup)          # base units; nothing here is stored
     nc = None
     m = c.get("measured_on")
+    m_unit = c.get("measured_on_frame")
+    if not m_unit:
+        out.append(Finding(
+            "FRAME_UNDECLARED", "clock.measured_on_frame",
+            "an instant names the frame it is written in. There is no "
+            "default calendar here, including the one every record uses."))
+        return {"state": UNDERIVABLE, "regime": regime, "findings": out,
+                "missing": ["measured_on_frame"], "shelf_life_base": None,
+                "next_check": None,
+                "why": "no date is emitted; the instant names no frame"}
     try:
-        d0 = datetime.date.fromisoformat(str(m))
-        nc = (d0 + datetime.timedelta(days=shelf * 365.2425)).isoformat()
-    except (ValueError, TypeError):
-        out.append(Finding("CLOCK_NOT_DERIVED", "clock.measured_on",
-                           "%r is not an ISO date, so no next check can be "
-                           "computed from the shelf life" % m))
+        t0 = reg.to_base(m, m_unit)
+        nc = reg.from_base(t0 + shelf, m_unit)
+    except (frames.UnknownFrame, ValueError, TypeError) as exc:
+        out.append(Finding(
+            "CLOCK_NOT_DERIVED", "clock.measured_on",
+            "%r in frame %r does not resolve to an instant, so no next "
+            "check can be computed: %s" % (m, m_unit, exc)))
     return {"state": DERIVED_CLOCK, "regime": regime, "findings": out,
-            "shelf_life_years": shelf, "next_check": nc,
-            "why": "time constant %g years / coupling %g" % (tau, abs(coup))}
+            "shelf_life_base": shelf, "next_check": nc,
+            "why": "time constant / coupling %g, in base units" % abs(coup)}
 
 
 class Finding(object):
@@ -329,13 +349,15 @@ def _check_domain(rec, out):
                            "blank; write UNTESTED"))
 
 
-def _check_clock(rec, out):
+def _check_clock(rec, out, reg=None):
     """Rule 3: a clock asserted rather than derived does not validate."""
     c = rec.get("clock")
     if not isinstance(c, dict):
         out.append(Finding("EMPTY_VALUE", "clock", "not a mapping"))
         return
-    for banned in ("holds_for", "next_check", "shelf_life", "shelf_life_years"):
+    for banned in ("holds_for", "next_check", "shelf_life",
+                   "shelf_life_years", "shelf_life_base", "shelf_life_days",
+                   "shelf_life_sols"):
         if banned in c:
             out.append(Finding(
                 "CLOCK_ASSERTED", "clock.%s" % banned,
@@ -351,7 +373,7 @@ def _check_clock(rec, out):
     if "measured_on" not in c:
         out.append(Finding("MISSING_FIELD", "clock.measured_on",
                            "the anchor a next check is computed from"))
-    out.extend(derive_clock(rec).get("findings", []))
+    out.extend(derive_clock(rec, reg).get("findings", []))
 
 
 def _check_derivation(rec, out):
@@ -450,11 +472,8 @@ _CHECKS = {
 # ------------------------------------------------------------- registry
 
 class Registry(object):
-    def __init__(self, records=None):
-        self.records = dict(records or {})
-
     @classmethod
-    def load(cls, directory=None):
+    def load(cls, directory=None, reg=None):
         directory = directory or RECORDS
         recs = {}
         if os.path.isdir(directory):
@@ -464,7 +483,11 @@ class Registry(object):
                 with open(os.path.join(directory, fn)) as fh:
                     r = json.load(fh)
                 recs[r.get("id", fn)] = r
-        return cls(recs)
+        return cls(recs, reg)
+
+    def __init__(self, records=None, reg=None):
+        self.records = dict(records or {})
+        self.reg = reg if reg is not None else frames.Registry.load()
 
     def validate(self, cid):
         """Rule two field by field, then rule one against the registry."""
@@ -475,7 +498,10 @@ class Registry(object):
                                      "%s is not in the registry" % cid)]
         for f in FIELDS:
             if _need(rec, f, out):
-                _CHECKS[f](rec, out)
+                if f == "clock":
+                    _check_clock(rec, out, self.reg)
+                else:
+                    _CHECKS[f](rec, out)
 
         # Rule one. An unresolvable parent does not validate, and a cycle
         # is reported as a cycle rather than as recursion.
@@ -521,7 +547,10 @@ class Registry(object):
             rows.extend(self.path(p, depth + 1, seen))
         return rows
 
-    def due(self, on):
+    def due(self, on, unit):
+        """`unit` has no default. A reader that did not have to name its
+        frame would make one of them the default in everything but the
+        specification."""
         """Field 5 made operative, from the DERIVED clock.
 
         A record whose clock is underivable gets no date and is reported
@@ -530,15 +559,19 @@ class Registry(object):
         """
         out = []
         for cid, rec in sorted(self.records.items()):
-            d = derive_clock(rec)
-            shelf = d.get("shelf_life_years")
+            d = derive_clock(rec, self.reg)
+            shelf = d.get("shelf_life_base")
             nc = d.get("next_check")
             if d["state"] != DERIVED_CLOCK or not nc:
                 out.append((cid, d["state"], "-", "-", d.get("regime", "-")))
                 continue
-            got = datetime.date.fromisoformat(nc)
-            out.append((cid, d["state"], "%.2f" % shelf, nc,
-                        "DUE" if got <= on else "CURRENT"))
+            # Rendered at read time, in whatever frame the reader asked
+            # for. Nothing converted is written back.
+            shown = self.reg.from_base(shelf, unit)
+            got = self.reg.to_base(nc, "iso_date")
+            out.append((cid, d["state"], "%.4g" % shown, nc,
+                        "DUE" if got <= self.reg.to_base(on, "iso_date")
+                        else "CURRENT"))
         return out
 
 
@@ -588,6 +621,127 @@ def render_validate(reg):
     return "\n".join(lines)
 
 
+# ---------------------------------------------------------- acceptance
+
+def _leaked_derive(rec, reg):
+    """A deriver with the frame welded in, as the code was before frames.
+
+    The positive control. An acceptance test that adds a frame nothing
+    reads would pass on a format that had leaked everywhere, so the same
+    test is run against an implementation that HAS leaked, and it has to
+    fail there.
+    """
+    c = rec.get("clock") or {}
+    for name, want in (("time_constant", "years"), ("rate_ceiling",
+                                                    "per_year")):
+        q = c.get(name) or {}
+        if q.get("state") == UNMEASURED:
+            continue
+        if q.get("units") != want:
+            raise ValueError(
+                "%s.units is %r and this implementation reads %r"
+                % (name, q.get("units"), want))
+    return True
+
+
+def _frame_derive(rec, reg):
+    d = derive_clock(rec, reg)
+    return d
+
+
+def _frame_validate_in(full):
+    """Validate against the FULL registry.
+
+    A per-record harness breaks rule 1 by construction: every parent is
+    unresolvable when the registry holds one record. The first run of
+    the acceptance test failed on exactly that and the fault was the
+    harness, not the format.
+    """
+    def go(rec, reg):
+        return full.validate(rec.get("id"))
+    return go
+
+
+def _in_new_frame(rec, reg):
+    """The same claim, written in the added frame. A NEW record, not an edit.
+
+    The value is converted here, at authoring time, by the same registry
+    a reader would use -- and the result is a different record, which is
+    what principle 3 permits. What it forbids is writing a converted
+    value back onto the original.
+    """
+    import copy
+    out = copy.deepcopy(rec)
+    out["id"] = rec["id"] + "_IN_" + frames.SECOND_FRAME["unit"].upper()
+    tc = out["clock"]["time_constant"]
+    if "value" in tc:
+        base = reg.to_base(float(tc["value"]), tc["units"])
+        tc["value"] = reg.from_base(base, frames.SECOND_FRAME["unit"])
+        tc["units"] = frames.SECOND_FRAME["unit"]
+        tc["basis"] = (tc.get("basis", "") +
+                       " Re-expressed in a second frame for the acceptance "
+                       "test; the quantity is unchanged.")
+    return out
+
+
+def acceptance_report():
+    """Add a second frame with a different rate. No record may need editing."""
+    reg = frames.Registry.load().add(frames.SECOND_FRAME)
+    full = Registry.load(RECORDS, reg)
+    arm_a = frames.acceptance(RECORDS, derive=_frame_derive,
+                              validate=_frame_validate_in(full))
+
+    # Arm B, the control. A record written in the added frame must
+    # validate under the frame-aware implementation and must NOT under
+    # the leaked one.
+    src = json.load(open(os.path.join(RECORDS, "UNF_GRID_IRAQ.json")))
+    newrec = _in_new_frame(src, reg)
+    withnew = Registry(dict(full.records, **{newrec["id"]: newrec}), reg)
+    b_ok = withnew.validate(newrec["id"])[0] == VALID
+    try:
+        _leaked_derive(newrec, reg)
+        b_leak_caught = False
+    except ValueError:
+        b_leak_caught = True
+
+    # And the same-quantity check: the two records must derive the same
+    # shelf life in base units, or the second frame changed the claim.
+    d1 = derive_clock(src, reg)["shelf_life_base"]
+    d2 = derive_clock(newrec, reg)["shelf_life_base"]
+    same = d1 is not None and d2 is not None and abs(d1 - d2) / d1 < 1e-9
+
+    lines = [
+        "ACCEPTANCE TEST -- add a second frame with a different rate",
+        "",
+        "  added                    %s (%s s per unit), not on disk"
+        % (frames.SECOND_FRAME["unit"],
+           frames.SECOND_FRAME["base_per_unit"]),
+        "  records read             %d" % arm_a["records"],
+        "  records needing an edit  %d %s"
+        % (len(arm_a["edited"]), arm_a["edited"] or ""),
+        "  records still validating %d of %d"
+        % (sum(1 for v in arm_a["states"].values() if v == VALID),
+           arm_a["records"]),
+        "  errors                   %d" % len(arm_a["errors"]),
+        "",
+        "CONTROL -- a record written in the added frame",
+        "",
+        "  validates under the frame-aware implementation   %s" % b_ok,
+        "  refused by an implementation with years welded in %s"
+        % b_leak_caught,
+        "  derives the same shelf life in base units         %s" % same,
+        "",
+    ]
+    for cid, errs in arm_a["errors"]:
+        lines.append("  %s: %s" % (cid, "; ".join(errs)[:120]))
+    ok = (arm_a["passes"] and b_ok and b_leak_caught and same)
+    lines.append("PASSES" if ok else "DOES NOT PASS")
+    if ok:
+        lines.append("No existing record needed editing, and the control")
+        lines.append("shows the test is not passing by reading nothing.")
+    return "\n".join(lines)
+
+
 # ------------------------------------------------------------- selftest
 
 def _complete():
@@ -608,6 +762,7 @@ def _complete():
         },
         "clock": {
             "measured_on": "2026-08-25",
+            "measured_on_frame": "iso_date",
             "neglected_term": {"name": "reader revision",
                                "held_fixed": "the parser that produced the count"},
             "time_constant": {"value": 1.0, "units": "years",
@@ -746,7 +901,8 @@ def _selftest():
     # The derivation itself.
     d = derive_clock(base)
     ck("shelf life is the time constant weighted by coupling",
-       (d["state"], round(d["shelf_life_years"], 6)), (DERIVED_CLOCK, 2.0))
+       (d["state"], round(frames.Registry.load().from_base(
+           d["shelf_life_base"], "years"), 6)), (DERIVED_CLOCK, 2.0))
     ck("and the next check follows from it",
        d["next_check"], "2028-08-24")
     ck("regime is adiabatic when the term moves below the ceiling",
@@ -757,7 +913,8 @@ def _selftest():
                              "basis": "stipulated"}
     d2 = derive_clock({"clock": fast})
     ck("a faster term shortens the shelf life",
-       round(d2["shelf_life_years"], 6), 0.2)
+       round(frames.Registry.load().from_base(
+           d2["shelf_life_base"], "years"), 6), 0.2)
     ck("and crossing the ceiling makes it sudden", d2["regime"], SUDDEN)
 
     # The rule the drop states outright.
@@ -817,23 +974,26 @@ def _selftest():
     ck("an unresolved parent shows in the path",
        reg2.path("T-CHILD")[-1][2] != "UNRESOLVED", True)
 
-    on = datetime.date(2026, 8, 25)
+    on = "2026-08-25"
     ck("a derived future check is CURRENT",
-       Registry({base["id"]: base}).due(on)[0][4], "CURRENT")
+       Registry({base["id"]: base}).due(on, "years")[0][4], "CURRENT")
     past = copy.deepcopy(base)
     past["clock"] = copy.deepcopy(base["clock"])
     past["clock"]["measured_on"] = "2020-01-01"
     ck("a derived past check is DUE",
-       Registry({"T-OK": past}).due(on)[0][4], "DUE")
+       Registry({"T-OK": past}).due(on, "years")[0][4], "DUE")
     nod = copy.deepcopy(base)
     nod["clock"] = nomeas
     ck("an underivable clock reports no date, never a default",
-       Registry({"T-OK": nod}).due(on)[0][1:4],
+       Registry({"T-OK": nod}).due(on, "years")[0][1:4],
        (UNDERIVABLE, "-", "-"))
     ck("an empty registry refuses rather than printing an empty table",
-       main(["record.py", "due", os.path.join(HERE, "no_such_dir")]), 2)
+       main(["record.py", "due", os.path.join(HERE, "no_such_dir"),
+             "--in", "years"]), 2)
     ck("--on's value is not read as a directory",
-       main(["record.py", "due", "--on", "2026-08-25"]), 0)
+       main(["record.py", "due", "--on", "2026-08-25", "--in", "years"]), 0)
+    ck("and a reader that names no frame is refused",
+       main(["record.py", "due", "--on", "2026-08-25"]), 2)
 
     # The hedge screen, both directions and against substring bleed.
     ck("a hedge-free assertion is clean", hedges_in(
@@ -843,6 +1003,37 @@ def _selftest():
     ck("'mayor' is not 'may'", hedges_in("The mayor signed it"), [])
     ck("'somewhere' is not 'some'", hedges_in("somewhere"), [])
     ck("'abouts' is not 'about'", hedges_in("thereabouts"), [])
+
+    # Principles 1-3 and the acceptance test, run as part of the suite
+    # rather than as a command someone remembers.
+    rep = acceptance_report()
+    ck("the acceptance test passes", "PASSES" in rep, True)
+    ck("no existing record needs editing",
+       "records needing an edit  0" in rep, True)
+    ck("and the leaked control is refused",
+       "welded in True" in rep, True)
+
+    # Principle 1, at the record layer: an unregistered unit is a
+    # finding, not a value read in the frame every other record uses.
+    unreg = copy.deepcopy(base["clock"])
+    unreg["time_constant"] = {"value": 1.0, "units": "fortnights",
+                              "basis": "stipulated"}
+    ck("an unregistered unit does not resolve by default",
+       "FRAME_UNREGISTERED" in codes(variant(clock=unreg)), True)
+
+    # Principle 3: nothing converted is stored, so a derived shelf life
+    # is only ever a reading, and the same record reads differently in
+    # two frames without changing.
+    nof = copy.deepcopy(base["clock"])
+    del nof["measured_on_frame"]
+    ck("an instant with no declared frame yields no date",
+       derive_clock({"clock": nof})["state"], UNDERIVABLE)
+    r_yr = Registry({base["id"]: base}).due("2026-08-25", "years")[0][2]
+    r_dy = Registry({base["id"]: base}).due("2026-08-25", "days")[0][2]
+    ck("one record reads differently in two frames", r_yr != r_dy, True)
+    ck("and a stored converted duration is refused",
+       "CLOCK_ASSERTED" in codes(variant(
+           clock=dict(base["clock"], shelf_life_days=730))), True)
 
     # The reported constraint: the tool reports structure and does not
     # label a record as wrong. Screened over the emitted report, with the
@@ -863,7 +1054,7 @@ def _selftest():
 USAGE = """usage:
   record.py validate [DIR]
   record.py path CLAIM_ID [DIR]
-  record.py due [DIR] [--on YYYY-MM-DD]
+  record.py due [DIR] [--on YYYY-MM-DD] [--in years|days|sols|...]
   record.py --selftest"""
 
 
@@ -884,7 +1075,7 @@ def main(argv):
             skip = False
             continue
         if a.startswith("--"):
-            skip = a in ("--on",)
+            skip = a in ("--on", "--in")
             continue
         rest.append(a)
     if cmd == "validate":
@@ -910,18 +1101,27 @@ def main(argv):
             print("%s%s  %s" % ("  " * depth, cid, note))
         return 0
     if cmd == "due":
-        on = datetime.date.today()
+        on = datetime.date.today().isoformat()
         if "--on" in argv:
-            on = datetime.date.fromisoformat(argv[argv.index("--on") + 1])
+            on = argv[argv.index("--on") + 1]
+        if "--in" not in argv:
+            sys.stderr.write(
+                "due needs --in UNIT. No frame is the default, so the "
+                "reader names the one it wants.\nregistered: %s\n"
+                % ", ".join(frames.Registry.load().units("duration")))
+            return 2
+        unit = argv[argv.index("--in") + 1]
         reg = Registry.load(rest[0] if rest else None)
         if not reg.records:
             sys.stderr.write("no records found in %s\n"
                              % (rest[0] if rest else RECORDS))
             return 2
-        print("next-check status on %s" % on.isoformat())
+        print("next-check status on %s" % on)
         print("shelf life = time constant / |coupling|, both derived")
-        print(table(["claim", "clock", "shelf_yr", "next_check", "state"],
-                    reg.due(on)))
+        print("read in %r; no frame is the default and nothing is stored "
+              "converted" % unit)
+        print(table(["claim", "clock", "shelf(%s)" % unit, "next_check",
+                     "state"], reg.due(on, unit)))
         return 0
     print(USAGE)
     return 2

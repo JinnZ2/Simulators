@@ -1,0 +1,10 @@
+{
+  "id": "per_gregorian_year",
+  "version": "1.0.0",
+  "quantity": "rate",
+  "unit": "per_year",
+  "base": "per_second",
+  "reciprocal_of_unit": "years",
+  "basis": "the reciprocal of the gregorian_year frame. A rate frame carries no rate of its own: it names the duration frame it inverts, so a correction to that frame reaches this one without editing it.",
+  "supersedes": null
+}

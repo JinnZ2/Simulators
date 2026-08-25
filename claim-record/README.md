@@ -9,7 +9,9 @@ claims in [`CLAIM_TABLE.md`](CLAIM_TABLE.md).
 ```
 python3 record.py validate            every record, with findings
 python3 record.py path UNF_PALESTINE  the load path, walked upward
-python3 record.py due --on 2026-08-25 whose next-check has passed
+python3 record.py due --on 2026-08-25 --in sols   whose check has passed
+python3 frames.py list                           the registered transforms
+python3 frames.py --acceptance                   add a frame, check nothing moves
 python3 record.py --selftest
 ```
 
@@ -37,6 +39,61 @@ the exception, and the two are coupled:
 A point arrives either from a distribution or from a count, and saying
 which **is** the field. Without the coupling a record can satisfy both
 fields independently and still be the failure the drop describes.
+
+## Three base principles
+
+**1. No privileged frame.** Not even the one every record uses. `years`
+is a registered transform like `sols`; an unregistered unit raises rather
+than resolving by assumption, and `due` has **no default frame** — the
+reader names the one it wants. Even the identity transform is registered,
+because leaving `1` implicit would have made it the one unit the format
+resolved without asking. That turned up as a break rather than as a
+design note, which is the check working.
+
+**2. Transforms are first-class objects.** `frames/*.json`, versioned,
+beside the records. A rate frame carries no rate of its own — it names
+the duration frame it inverts, so a correction reaches it without an
+edit. Adding a frame is adding a file.
+
+**3. Derived at read time, never at write time.** A stored duration is a
+cached conversion, and caching the conversion is what makes it legacy.
+`shelf_life`, `next_check` and every `shelf_life_<unit>` name are refused
+as literals in a record; the derivation returns base units and the reader
+renders them:
+
+```
+claim          clock    shelf(years)  next_check
+UNF_GRID_IRAQ  DERIVED  3.403         2030-01-18
+claim          clock    shelf(days)   next_check
+UNF_GRID_IRAQ  DERIVED  1243          2030-01-18
+claim          clock    shelf(sols)   next_check
+UNF_GRID_IRAQ  DERIVED  1210          2030-01-18
+```
+
+One record, three frames, nothing stored converted.
+
+### The acceptance test
+
+> Add a second frame with a different rate, and no existing record needs
+> editing. If any record needs editing, the frame leaked into the data.
+
+`frames.py --acceptance` adds `venus_days` — deliberately not one of the
+files on disk — and reports **9 records read, 0 needing an edit, 9 still
+validating.** Beside it runs a control, because a test that adds a frame
+nothing reads would pass on a format that had leaked everywhere: the same
+claim written in the added frame must validate here, must be **refused**
+by an implementation with `years` welded in, and must derive the **same
+shelf life in base units**.
+
+Both selftests run it, rather than leaving it a command someone
+remembers.
+
+### Why now
+
+> this is being specified before it's needed because retrofit cost is
+> the entire reason the fold detector exists. Building the fold in now,
+> knowing it's a fold, would be the same error the tool was written to
+> find.
 
 ## The clock, derived
 
@@ -122,7 +179,7 @@ Every claim traces to `SSS_017`, the reader repair. Refute that and five
 claims above it are exposed — visibly, rather than because somebody
 remembered.
 
-55 selftest checks. Rule two gets seven null arms, one per field, and the
+78 selftest checks across two modules. Rule two gets seven null arms, one per field, and the
 **positive control comes first**: a validator that refuses everything
 passes all seven.
 

@@ -32,6 +32,7 @@
   },
   "clock": {
     "measured_on": "2026-08-25",
+    "measured_on_frame": "iso_date",
     "neglected_term": {
       "name": "resemblance of the five neighbours to the target",
       "held_fixed": "that a country's grid factor is estimated by the mean of five neighbours"

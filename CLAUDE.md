@@ -5980,7 +5980,43 @@ underneath).
   screen rather than copying it, and it fired on this tool's own
   disclaimer prose twice; `VALID`/`INVALID` are stated to be about
   conformance to the schema and never about whether a claim is true.
-  55 selftest checks. Stdlib only, parses under 3.9, CC0.
+  **Three base principles then landed, with an acceptance test.**
+  `frames.py` + `frames/*.json`: **(1) no privileged frame**, not even
+  the one every record uses — `years` is a registered transform like
+  `sols`, an unregistered unit raises rather than resolving by
+  assumption, and `due` has **no default frame**, so the reader names
+  one; **(2) transforms are first-class versioned objects** beside the
+  records, with a rate frame carrying no rate of its own but naming the
+  duration frame it inverts; **(3) derived at read time, never at write
+  time** — `shelf_life`, `next_check` and every `shelf_life_<unit>` name
+  are refused as literals, the derivation returns base units, and the
+  reader renders (one record reads 3.403 years / 1243 days / 1210 sols,
+  nothing stored converted). **`CR_020`:** the format had four frame
+  leaks — `"years"`, `"per_year"`, a hardcoded `365.2425`, and the field
+  name `shelf_life_years` — and **not one was in a record**: the data
+  was frame-tagged and the CODE was frame-welded, which is why the
+  acceptance test passes without editing anything. **`CR_021`:** the
+  **identity transform had to be registered** and turned up as a break,
+  not a design note — `coupling` declares `units: "1"` and all nine
+  records went `UNDERIVABLE` at once until `frames/dimensionless.json`
+  existed; leaving `1` implicit would have made it the one unit the
+  format resolved without asking. **`CR_022`, the acceptance test:**
+  adds `venus_days`, deliberately **not** a file on disk since adding a
+  registered frame tests nothing — **9 records read, 0 needing an edit,
+  9 still validating** — and beside it a **control**, because a test
+  that adds a frame nothing reads would pass on a format that had leaked
+  everywhere: the same claim written in the added frame must validate
+  here, be **refused** by an implementation with `years` welded in, and
+  derive the **same shelf life in base units**. Run inside both
+  selftests. **`CR_023`:** requiring `measured_on_frame` edited all nine
+  records, and that is a **schema tightening, not a frame addition** —
+  the distinction the test turns on. **`CR_025`:** the first run
+  reported 3 of 9 validating on six `PARENT_UNRESOLVED` findings, and
+  the fault was the harness validating each record in a one-record
+  registry, so rule 1 could not see a parent by construction — recorded
+  because it is a way an acceptance test reports a failure belonging to
+  itself. 78 selftest checks across two modules. Stdlib only, parses
+  under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

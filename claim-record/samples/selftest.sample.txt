@@ -49,23 +49,52 @@ no records found in /home/user/Simulators/claim-record/no_such_dir
   an empty registry refuses rather than printing an empty table PASS got=2 want=2
 next-check status on 2026-08-25
 shelf life = time constant / |coupling|, both derived
-claim          clock                   shelf_yr  next_check  state         
--------------  ----------------------  --------  ----------  --------------
-SSS_017        UNBOUNDED_BY_THIS_TERM  -         -           REGIME_UNKNOWN
-SSS_019        UNDERIVABLE             -         -           REGIME_UNKNOWN
-SSS_020        UNDERIVABLE             -         -           REGIME_UNKNOWN
-SSS_021        UNDERIVABLE             -         -           REGIME_UNKNOWN
-SSS_022a       UNDERIVABLE             -         -           REGIME_UNKNOWN
-SSS_022b       UNDERIVABLE             -         -           REGIME_UNKNOWN
-UNF_GRID_IRAQ  DERIVED                 3.40      2030-01-18  CURRENT
-UNF_HOTEL_AR   UNDERIVABLE             -         -           REGIME_UNKNOWN
-UNF_PALESTINE  UNDERIVABLE             -         -           REGIME_UNKNOWN
+read in 'years'; no frame is the default and nothing is stored converted
+claim          clock                   shelf(years)  next_check  state         
+-------------  ----------------------  ------------  ----------  --------------
+SSS_017        UNBOUNDED_BY_THIS_TERM  -             -           REGIME_UNKNOWN
+SSS_019        UNDERIVABLE             -             -           REGIME_UNKNOWN
+SSS_020        UNDERIVABLE             -             -           REGIME_UNKNOWN
+SSS_021        UNDERIVABLE             -             -           REGIME_UNKNOWN
+SSS_022a       UNDERIVABLE             -             -           REGIME_UNKNOWN
+SSS_022b       UNDERIVABLE             -             -           REGIME_UNKNOWN
+UNF_GRID_IRAQ  DERIVED                 3.403         2030-01-18  CURRENT
+UNF_HOTEL_AR   UNDERIVABLE             -             -           REGIME_UNKNOWN
+UNF_PALESTINE  UNDERIVABLE             -             -           REGIME_UNKNOWN
   --on's value is not read as a directory                    PASS got=0 want=0
+due needs --in UNIT. No frame is the default, so the reader names the one it wants.
+registered: days, sols, years
+  and a reader that names no frame is refused                PASS got=2 want=2
   a hedge-free assertion is clean                            PASS got=[] want=[]
   'maybe' style hedges are caught                            PASS got=True want=True
   'mayor' is not 'may'                                       PASS got=[] want=[]
   'somewhere' is not 'some'                                  PASS got=[] want=[]
   'abouts' is not 'about'                                    PASS got=[] want=[]
+  the acceptance test passes                                 PASS got=True want=True
+  no existing record needs editing                           PASS got=True want=True
+  and the leaked control is refused                          PASS got=True want=True
+  an unregistered unit does not resolve by default           PASS got=True want=True
+  an instant with no declared frame yields no date           PASS got='UNDERIVABLE' want='UNDERIVABLE'
+  one record reads differently in two frames                 PASS got=True want=True
+  and a stored converted duration is refused                 PASS got=True want=True
   the emitted report carries no screened word                PASS got=True want=True
   and the screen would fire if it drifted                    PASS got=False want=False
+SELFTEST PASS (0 checks failed)
+
+frames selftest
+  duration frames are registered                           PASS got=True want=True
+  and so is the one nothing here uses                      PASS got=True want=True
+  a year in base units                                     PASS got=31556952.0 want=31556952.0
+  a day in base units                                      PASS got=86400.0 want=86400.0
+  round trip                                               PASS got=3.0 want=3.0
+  years to days                                            PASS got=365.2425 want=365.2425
+  a rate is the reciprocal of its duration frame           PASS got=3.168873850681143e-08 want=3.168873850681143e-08
+  an unregistered unit raises rather than defaulting       PASS got=True want=True
+  a unit of the wrong quantity raises                      PASS got=True want=True
+  a frame added at run time resolves                       PASS got=14.0 want=14.0
+  an instant converts to base                              PASS got=86400.0 want=86400.0
+  and back                                                 PASS got='1970-01-02' want='1970-01-02'
+  an unregistered calendar raises                          PASS got=True want=True
+  the acceptance test passes                               PASS got=True want=True
+  the frame it adds is not one on disk                     PASS got=False want=False
 SELFTEST PASS (0 checks failed)

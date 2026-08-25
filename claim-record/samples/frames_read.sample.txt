@@ -1,0 +1,7 @@
+=== read in years, days and sols: one record, three frames, nothing stored ===
+claim          clock                   shelf(years)  next_check  state         
+UNF_GRID_IRAQ  DERIVED                 3.403         2030-01-18  CURRENT
+claim          clock                   shelf(days)  next_check  state         
+UNF_GRID_IRAQ  DERIVED                 1243         2030-01-18  CURRENT
+claim          clock                   shelf(sols)  next_check  state         
+UNF_GRID_IRAQ  DERIVED                 1210         2030-01-18  CURRENT
