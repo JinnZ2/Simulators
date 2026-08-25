@@ -2,13 +2,13 @@
 
 Read against `notes/memory-export/files/`, which is stored verbatim. Nothing
 here is a verdict on the export, and no stored file was modified. Counts are
-recomputed each batch and are a delivery state, not a result — 17 tier-1 files
+recomputed each batch and are a delivery state, not a result — 16 tier-1 files
 are still outstanding.
 
 ## 1. Cross-references, and what "unresolved" means
 
 ```
-47 files   60 links   30 distinct names   20 resolve in folder   10 do not
+48 files   60 links   30 distinct names   20 resolve in folder   10 do not
 ```
 
 "Not in the folder" covers three different situations, and the distinction was
@@ -364,6 +364,48 @@ Where a memory file's numbers match a *delivered artifact* rather than an
 audit — the four D_f values here, the selftest counts in finding 3, the
 unknowns register in finding 4 — the check is still independent, because those
 artifacts were checked in as received.
+
+## 19. The reading protocol arrived, and it governs this file
+
+`ecosystem-conventions` states an ecosystem-wide reading protocol: every repo
+is a marker for a sensed shape, the correct reader response is to test fit,
+extend, or report where it breaks — "a break is a MEASUREMENT and goes in the
+claim table, not an objection to be answered" — and the wrong response is to
+accept or reject it as a claim, because "a reader who defends or attacks a repo
+is not participating in it." 19 of the 41 stored files open with that marker
+line themselves.
+
+Re-reading this findings file against it:
+
+- The mechanical findings are the permitted response. A selftest returning
+  18/18, a key named `rejected` not `rejections`, four D_f values matching a
+  delivered report — those are measurements, recorded here rather than raised
+  as objections.
+- Two theses were declined rather than adjudicated (finding 12, and the
+  transmitted material under "what was not checked"). Under this protocol that
+  was the right call for a second reason: accepting or rejecting either would
+  have been the wrong reader response regardless of interest direction.
+- **Conflation 3 does not rescue finding 15.** The protocol says apparent
+  contradictions are opposite-side impressions of one boundary and that a later
+  statement bracketing an earlier one is not a reversal. That covers prose
+  tangent to a shape. Finding 15 is two values for one metric in a summary of a
+  specific measurement — 12/12 against the source's 5 of 12, paired with a
+  0/12 that matches. Numbers reported as measurements are not impressions, so
+  the finding stands as a measurement of the summary, not as an objection to
+  the work.
+- **Conflation 1 bears on how confidently-worded files were read here.**
+  Legibility is not confidence; where confidence matters it is stated. Several
+  stored files do state it — `moral-claim-decomposer` at ~61%,
+  `diversity-collapse-model` with a claim table. Nothing in this findings file
+  treats a clearly-written passage as a strongly-held one.
+
+**Finding 18 is not a discovery of mine.** `ecosystem-conventions` states the
+same mechanism independently and more generally: "function 3 contaminates
+function 1", the repos enter the corpus once crawled, so a later model may
+score better because it read them rather than because it can derive. It also
+names two handlings this reading did not have — hold some stimuli unpublished,
+or accept the leakage and measure it by vocabulary signature. Finding 18 is one
+instance of a contamination the author had already identified.
 
 ## What was not checked, deliberately
 

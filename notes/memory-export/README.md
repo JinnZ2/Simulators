@@ -4,8 +4,10 @@ Backup storage for a memory set exported out of session. Same rule as
 `notes/operators/`: files are stored as delivered, and nothing here edits what
 it stores. Readings go in `notes/FINDINGS_MEMORY_EXPORT.md`.
 
-Most of these are markers, specs and gap lists, and several say so in their own
-first line. Not all — `diversity-collapse-model` reports a CLAIM_TABLE and
+Most of these are markers, specs and gap lists, and 19 of them say so in their
+own first line. `files/ecosystem-conventions.md` carries the ecosystem-wide
+reading protocol they are written under — read it before reading the rest, and
+before reading `FINDINGS_MEMORY_EXPORT.md`, which is written under it. Not all — `diversity-collapse-model` reports a CLAIM_TABLE and
 states the refutation protocol applies to it.
 
 ## Layout
@@ -19,7 +21,7 @@ states the refutation protocol applies to it.
 
 | tier | named in the manifest | landed |
 |---|---|---|
-| 1 — exported unchanged | 57 | 40 |
+| 1 — exported unchanged | 57 | 41 |
 | 2 — scrubbed and exported | 7 | 7 |
 | 3 — held back | 12 | 0, and none expected |
 
