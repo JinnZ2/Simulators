@@ -40,14 +40,59 @@ before reporting.
 
 ## Meta-spine (read first)
 
-- `PREAMBLE.md` — physics baseline; TERM COLLISION note
-- `PROTOCOL.md` — the baseline as a protocol; Dissonance
-- `BNRAM_STRICT.md` — Bias-Neutralization & Reality-Audit v2.0
-- `PVL.md` — Phenomenological Validation Layer; inverse audit
-- `CASE_STUDY_NARRATIVE_INSTINCT.md` — substitution test, record
-- `SYNTHESIS.md` — cross-folder reading order
+The methodology spine sits in six root-level files. Every simulator
+in the repo rests on it. `METHOD_SPEC.md` §6 states the order for the
+last three; read in order:
 
-## Folders
+- `PREAMBLE.md` — physics baseline as a direct declarative statement.
+  "Thermodynamics doesn't negotiate."
+- `PROTOCOL.md` — the same baseline as a formal protocol for any
+  intelligence reading the repo. Names the Model/Reality Dissonance
+  failure mode and the Ground State acknowledgement test.
+- `BNRAM_STRICT.md` — finalized repository addendum
+  (Bias-Neutralization & Reality-Audit Module v2.0). Operating mandate,
+  Physical Audit Protocol, Diagnostic of Deflection, five-section
+  BNRAM (Entropy-Constraint Engine, Universal Physical Constant
+  Cross-Check, Literal Baseline Lexicon, Shadow-Variable Handling,
+  Dissonance-Forced Reset), operational rules, archive requirements.
+- `PVL.md` — Phenomenological Validation Layer. Inverse audit
+  (physical-state query before literature search), cross-temporal
+  correlation (persistence over documentation volume), opaque-source
+  flagging. Integrates with BNRAM Shadow-Variable Handling.
+- `SHAPE_SPEC.md` — definition spec, upstream of every folder that uses
+  the word SHAPE. **`SHAPE = the constraint set a geometry is a solution
+  to`** — not the geometry, not the picture, not the name the field gave
+  it. Cross-domain recurrence is therefore the same problem solved twice
+  rather than analogy, and it is checkable. Ships a BLOCK THIS MISREAD
+  against "matching geometries across domains", a three-step read order
+  whose third step (*why not the other shape*) is the instrument, a
+  removal-test falsification handle, an internal/uniform vs
+  external/heterogeneous split (the second is *"a transcript of terrain"*,
+  never an optimum), an explicitly retrodictive epistemic position
+  (`n = 1` on biospheres), scale indexing, and nondimensional form with a
+  NOTE ON COST — *use dissipation, cost imports a pricing model*.
+  Delivered verbatim and pointed at rather than restated; audit in
+  `shape-spec-audit/`.
+- `METHOD_SPEC.md` — companion to `SHAPE_SPEC.md`, stating its EPISTEMIC
+  CLASS. Constraint-set reasoning is a **method**, in the class of
+  syllogistic logic / dimensional analysis / the scientific method — so
+  **it is not falsifiable and does not need to be**, and demanding that of
+  a procedure is a category error; the falsifiable layer is the individual
+  read and its removal test. Blocks the misapplication *"your framework
+  always resolves to 'I missed a variable', therefore unfalsifiable"* by
+  constructing its parallel against the scientific method (*"always
+  resolves to 'the experiment was confounded'"*), which nobody accepts.
+  §2 argues this IS the scientific method in a different form — physics
+  predates every human experiment, so the difference is **who ran the
+  trial**, control traded against trial count in opposite directions,
+  *"neither is the mature form of the other"*, USE BOTH. §3 states four
+  standing limits so they are not re-litigated per read (retrodictive;
+  n=1 on some domains; **underdetermined disappearance**; substrate
+  exclusion, with human exceptionalism as the worked case). §4 is the
+  SHADOW READ — a shape described by the gaps it casts, tangents to one
+  boundary rather than competing claims. §5 gives the upgrade/downgrade
+  table for a marker. §6 gives the read order. Delivered verbatim; audit
+  in `shape-spec-audit/`.
 
 - `token-minimizer/` — compressed-query fmt
 - `emergence-stability-simulator/` — stable vs parasitic
@@ -5019,6 +5064,742 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   separate spec file** (`UNI_164`). Stage 1 has never executed from here; a
   first run on the runner is a first run of untested code and the workflow
   gates it behind the selftest and the null test. 84 tests green.
+  **`notes/datasets/mesa_sof.md`** is the second entry kind — candidate
+  instruments named by the operator for the question `sim-span/RESULTS.md`
+  left open: MESA Sleep (PSG + 7-day actigraphy + questionnaire on the same
+  person) for the instrument question, SOF for a parity question, with the
+  age caveat stated. `check_datasets.py` returns five readings and imports
+  the sim rather than modelling it. **The note answers both halves of what
+  the sim asked and claims one** — *"measured sleep, measured awakenings,
+  and what they said when asked"* IS the validation sub-study `p` needs,
+  and `p` is a **three-way** comparison (self-report against total sleep
+  time AND against time in bed, per person) where the note specifies a
+  two-way gap. **The sim's two swept parameters are one PSG readout:**
+  `frag × wake_cost` is **WASO**, and the measured mean excess matches the
+  product to 0.02 h — but the U's *location* does not, moving **1.79 h**
+  across four equal-product pairs at 2 h of WASO, with many short
+  awakenings pushing it DOWN toward the published window, so WASO alone is
+  not the axis and the awakening count is a second one; MESA reports both,
+  which is more than the note claims for it, and it lets the sim be
+  calibrated rather than swept. **`parity` resolves 16 times in this tree
+  and zero times in the note's sense** — every repo use is the *equality*
+  sense (`parity()` as a comparison function), the note means *pregnancies*
+  — third instance of case 021's sense substitution after
+  `nonidentity-census` T1-3's `state`. **A defect committed three drops
+  after it was recorded:** the first `resolve()` was a bare substring scan
+  returning `parity` 17 / `SOF` 81 / `MESA` 3, matching inside *disparity*
+  and inside other words — `UNI_009`'s `lean`/"clean" failure — and word
+  boundaries fix substring bleed while doing nothing about sense, so only
+  hand-reading got the right number (T1-1 one level up). Every dataset fact
+  is carried and unchecked, the egress gate refusing the sources
+  (`MS_004` status), and `study_watch.py` is explicitly NOT the instrument,
+  since it reads `uninstrumented.ENTRIES` and this is not a register entry.
+  **The stated age caveat reaches further, in the note's favour:** sim-span
+  assumes `frag` and `true_sleep` are independent and flags it as probably
+  wrong, and in a 45–84 cohort they are near-certainly correlated — so MESA
+  measures the sim's own weakest assumption for free, making it the hard
+  case rather than a convenient one. **And a second defect, in the same
+  file:** writing `MESA` into `CLAUDE.md` to describe the finding put MESA
+  into the tree, so the next run reported it as resolving and the selftest
+  went red — `UNI_010`'s self-reference loop arriving in `notes/`, found
+  the same way, by running twice. Broken with a seven-path `EXCLUDE` list
+  that is stated as a hand-broken loop rather than a fix (anyone grepping
+  the tree for MESA still finds the commentary), with the principled
+  version named and not built: compare against the git tree as of the
+  note's own commit. It moved `parity` 16 → 14. Two defects in one file,
+  both previously recorded in this repo, both committed anyway, and
+  neither caught by reading the code.
+- `alignment-under-coupling/` — A marker under exploration delivered at
+  confidence `~0.40`, plus its first run's results, plus all four sim
+  generators — landed in that order, which is the interesting part.
+  `MARKER.md`, `RESULTS_RUN_1.md`, `sim_a..sim_d` and `run_all.py` are
+  verbatim as delivered; all added content sits in `check_run_1.py`,
+  `CLAIM_TABLE.md` and the README. The shape: three phenomena (model
+  consensus following popularity, domain alignment under an external field,
+  the loop-formation threshold in optimal transport networks) proposed as one
+  formal family — local coupling plus a weak global field, with a critical
+  point — tested by four sims of which SIM-D is the declared discriminator
+  and is run first. Confidence `~0.40` before run 1 and `~0.40` after: *"the
+  marker is not stronger. It is better specified."* **`TFM_001`–`TFM_008`
+  were written against the results alone, in a folder called
+  `transition-family-marker/`; the generators arrived afterwards, that folder
+  was merged in so the checks could import the code instead of modelling it,
+  and two verdicts inverted.** Ids kept rather than renumbered.
+  **`TFM_001`, which survives:** SIM-D's derived constraint states
+  `temper(quench(p,s),T) == temper(p, T*(1+s))`, which holds in **24 of 120**
+  cases — exactly the 24 where `s = 0`. Tempering composes multiplicatively
+  and a quench by `s` *is* a tempering at `1/(1+s)`, so the composite is
+  **`T/(1+s)`**, 120 of 120. **`TFM_002`:** the prose beside the formula
+  (*"EXACTLY UNDONE by raising temperature"*) is right, the downstream
+  conclusion is untouched, and the corrected identity yields a number the
+  stated one cannot — `temper(quench(p,s), T) = p` exactly at **`T = 1+s`**,
+  verified at `s = 0.25 … 4`, so the undo temperature becomes a quantity a
+  rewritten support-truncating `quench()` can be tested against.
+  **`TFM_003`:** SIM-C's reported `loops=16, alive_edges=40` are exactly a
+  5×5 grid's `E = 40` and `E − V + 1 = 16` — the **intact** grid at every
+  sigma, no pruning at all, and computable from the grid dimensions without
+  running anything. **`TFM_004` was mine and the code refuted it.** Written
+  against the delivered prose (*"renormalized by max each iteration, and
+  damped at 0.85"*) it read the update as a uniform scaling, which
+  max-normalisation cancels algebraically; the code is
+  `0.85*C[i] + 0.15*target`, a **convex combination toward the adaptation
+  target**. Measured: a uniform scaling is cancelled in **200 of 200** random
+  vectors, the actual update in **0 of 200**. The real reason nothing prunes
+  is a `reasoning-gate` **`G-RES`** failure — the floor is `1e-3`, the
+  smallest conductance the dynamics ever produce is `~4.6e-2`, so the
+  threshold sits **~46× below the bottom of the range it tests** while the
+  conductances span barely one decade with the spread almost unmoved by
+  sigma; removing the max-normalisation (the delivered NEXT line) changes the
+  scale and does not by itself put the floor inside the range. **`TFM_005`
+  inverted, and settles the drop's own UNRESOLVED contradiction.** The
+  results document logged that tail *mass* stays near 0.4–0.46 while total
+  entropy falls 1.2 nats, reading it as loss *inside the head* and therefore
+  against the reported mechanism. Splitting the entropy — two more columns,
+  no re-run — gives unanchored `dH_head −0.120` against `dH_tail −2.289`, a
+  factor of **nineteen**: the tail keeps its mass while concentrating it onto
+  far fewer tokens, which is exactly the state a mass fraction cannot
+  distinguish, and anchoring at 0.40 cuts the tail loss to `−0.903` and
+  leaves the head flat at `+0.013`. **So the reported mechanism — anchoring
+  preserves long-tail tokens — is REPRODUCED, not contradicted.** The
+  decomposition `H = H(mass split) + head_m·H_head + tail_m·H_tail` closes to
+  1e-9; `uninstrumented/`'s SCALAR DEMAND, one number standing in for a
+  two-dimensional state. **`TFM_006`:** the *"gradual, not steplike"*
+  negative is bounded by a 7-point grid whose spacing varies **20×** and is
+  coarsest where the curve is steepest — `G-RES` about the grid, not a claim
+  about the response. **`TFM_007`:** the entropy unit is confirmed nats
+  (`math.log`, and `H` of the true Zipf is 5.625 which is the reported
+  `H_start`) and is still absent from the table. **`TFM_009`:**
+  `loops = alive - (nodes - 1)` is cycle rank only if the surviving subgraph
+  is connected and spanning, and nothing checks — at `alive = 12` no subgraph
+  can span 25 nodes and the formula still returns `0`; inert on this run
+  because nothing pruned, load-bearing the moment the floor is repaired.
+  **`TFM_010`:** `run_all.py --quick` is `a = [x for x in a]`, documented in
+  the usage block and inert. **`TFM_008` is the honest counterweight and
+  stays UNVERIFIED:** the `NOT TUNED` discipline is the drop's strongest
+  feature — failures logged as failures, the defective sim labelled defective
+  in its own runner's `PLAN` table, SIM-A skipped rather than run for a
+  number — and it cannot be confirmed from outside, because a run that
+  searched parameters and one that did not leave identical files and the sims
+  arrive without history. Narrowed by the code's arrival, not closed. Stdlib
+  only, parses under 3.9, CC0.
+- `shape-spec-audit/` — Checks on the root `SHAPE_SPEC.md`, which is
+  delivered verbatim and modified by nothing here. The spec declares
+  itself **definition, not claim**, and that is honoured — a definition is
+  found unusable, inconsistent with its own worked examples, or already
+  contradicted by the tree it claims to be upstream of, never refuted.
+  Four sections make checkable statements and carry the verdicts; ten
+  claims `SS_001..SS_010`. **`SS_006`, the one that computes:** §9's NOTE
+  ON COST (*"cost is an abstraction with no fundamental basis in the
+  physics … use dissipation"*) is right, and the proof is a duality the
+  spec does not state. The published derivation of §4's own exponent
+  minimises `dissipation + K·volume` with `K` a metabolic cost — the term
+  §9 rejects — so whether the exponent survives its removal is a real
+  question. Computed on a symmetric Poiseuille bifurcation: `2^(-1/3)` =
+  **0.793701**, minimising dissipation at **fixed volume with no cost
+  anywhere** = **0.793701**, minimising `dissipation + K·volume` =
+  0.793701; while pure dissipation with no second term is strictly
+  decreasing in radius (`W` 1.53e+01 → 1.53e-11 as `r` runs 1 → 1000) and
+  has no interior optimum at all. The second term is load-bearing **and
+  the de-costed form returns the same number**, because minimising
+  dissipation subject to a fixed volume and minimising dissipation plus a
+  price on volume are one stationarity problem — **the cost coefficient is
+  the Lagrange multiplier on a physical constraint**. §9 is satisfiable
+  rather than merely preferable, and §4's enclosure framing is the better
+  statement of the same physics. **`SS_002`:** §10's *"a repo that says
+  SHAPE means section 1"* is refuted on this repo **by §1's own second
+  consequence** — 964 occurrences across 249 files, and a hand-coded
+  sample of seven uses returns **six distinct senses** of which §1's is
+  one (`shape signature` = sha1 of sorted key names; `shape ∈ {NEW, FLAT,
+  WALKING}` = an enum tag; `domain-ledger/shapes/` = a coverage ledger
+  over a claim). §1 predicts exactly this (*the names diverge by field*)
+  and §10's enforcement clause assumes the convergence §1 denies. The
+  count is **raw**: no sense was assigned mechanically, because a keyword
+  scan deciding word sense is `nonidentity-census` T1-1's failure, so the
+  sample is n=7 and is not a rate. **`SS_003`, the sharpest internal
+  one:** §4's removal test is the spec's instrument and **its worked
+  example is not a matched pair** — §4 compares a lung to a river delta
+  and attributes the difference to enclosure, while §5 uses *the same two
+  examples* and assigns them to different constraint classes, calling the
+  second *"a transcript of terrain"* that must not be read as an optimum;
+  a second variable moved with the named one, and §4 asks for a case where
+  the constraint is *genuinely absent*. **The repair is already in the
+  document one section below** — §5's own delta, *"branches while it can,
+  routes around what it cannot cut"*, is a within-case matched pair at
+  fixed enclosure with local substrate varying. Same failure as
+  `nonidentity-census` T6-3. **`SS_004`:** §4 has exactly one branch that
+  refutes a read (constraint removed, form unchanged), reaching it
+  requires an observation contradicting the shape, and §7 defaults such
+  observations to instrument error — so the falsifier survives for
+  interventions and **none of the spec's three worked examples is one**,
+  while §6 disclaims the prior §7 spends (*"a fit to a residue"*,
+  alternatives *"not in the record"*, `n = 1` on biospheres).
+  `uninstrumented/` mechanism 6 AUDIT ASYMMETRY landing on the spec's
+  calibration section; repair is one line, and `rigidification-sensor/`
+  §0 is the precedent — state the prior openly and mark it open to attack.
+  **`SS_005`:** §6's seven-item recurrence list is grouped by SUBSTRATE
+  and regroups into **three constraint families** (laplacian-growth:
+  lightning + crack propagation + dendritic solidification;
+  transport-under-volume-constraint: vasculature + root systems +
+  mycelium; erosional-minimum-dissipation: river networks) — and the
+  tension is with §1 rather than with the evidence, since §1 says systems
+  sharing a constraint set *share a shape*, so two items in one family are
+  one shape seen twice. Historical independence is real and is not the
+  quantity that licenses "separate runs converging". The family assignment
+  is **hand-assigned and is the weak point**, with a measured precedent
+  pointing one way: `model-ecology`'s **P2 came back REFUTED**, a
+  hand-assigned tree predicting 9.07 independent votes against a spectrum
+  showing 2.48 — so 3 bounds the list from above and nothing here bounds
+  it from below. **`SS_009`/`SS_010`:** four shape entries found by two
+  structural routes (under a `shapes/` dir, or a top-level `shape` key —
+  neither a word list), and **all four score 0 of §10's four required
+  fields**; worse, §10 offers two outcomes (shape entry / geometry note)
+  and the entry found is neither, having no geometry to note — so the
+  classification returns the *reassuring* wrong label, "geometry note"
+  reading as an incomplete shape entry when the entry is not on the scale.
+  Twelfth instance of the absent-vs-known-negative repair here and the
+  first where the missing third state is *"this is a different sense of
+  the word"*. **`SS_007` is the honest positive** (§3 step 3 is a real
+  instrument, and §2's BLOCK THIS MISREAD registers the failure mode
+  before anyone commits it — the `photoperiod-claim-harness`
+  `PENDING_EDITS` shape), and **`SS_008` is UNVERIFIED**:
+  `READING_PROTOCOL.md`, named in §10's see-also, is not in the tree —
+  ninth named-and-absent artifact in this drop family, and the first
+  load-bearing on the *stance* rather than on a measurement. Two items
+  routed rather than claimed: §8's scale-invariance question points at
+  `grounding-layers/temporal_dysrhythmia`, and §6's survivorship point is
+  `DD_003`'s EIA narrowing and `UNI_126`'s frame-selected-on-the-variable
+  arrived at from a third direction. One folder now points at the spec
+  rather than restating it — `alignment-under-coupling/` scores **2.5 of
+  4** and is the only entry in the tree carrying a removal test at all
+  (SIM-D), missing §3 step 3. **`METHOD_SPEC.md` then arrived aimed at this
+  folder** — its §1 blocks a misapplication *"observed in AI review of this
+  work … including in the session this file was written in"*, which is the
+  session that produced `SS_001..SS_010`, so `MS_001` runs the ten against
+  the stated criterion first. The blocked error applies a **claim-level**
+  criterion (falsifiability) to a **method-level** object; classified by
+  what each criticism ranges over, **0 of 10** range over the method (two
+  rules, one worked example, one read, one evidence question, two facts,
+  three not objections), and `SS_004` aims at exactly the layer §1 names as
+  the falsifiable one. Declared as self-grading, with each claim's object
+  quoted rather than summarised, and establishing nothing about other
+  reviews. §1's central move is correct and is contested nowhere.
+  **`MS_002` confirms `SS_005` in the author's own words and in stronger
+  form:** §5 lists what a read is *"NOT upgraded by"* — **"more instances
+  sharing the geometry without a checked constraint set"** — and §3 then
+  offers the same seven instances qualified *"same geometry"* with no
+  constraint set checked for any; `SS_005` needed a hand-assigned
+  regrouping, this needs none. The steelman is recorded: under §2's framing
+  the process ran the trial, so the list is seven honest replications for
+  *"does this constraint set produce this geometry"* and not for *"are
+  these the same shape"*, which is the thing being claimed. **`MS_003`
+  sharpens `SS_004` using METHOD_SPEC's own machinery** — §4's removal test
+  has two branches and each spec discounts the one the other leaves
+  standing: §3's UNDERDETERMINED DISAPPEARANCE discounts *disappearance*
+  (the **confirming** branch, an open candidate set by §3's own words),
+  §7 discounts *persistence* (the **refuting** branch, a **bounded** set,
+  since a substitute constraint has to be exhibited to be claimed) — so
+  **§7's default falls on the better-determined branch**, repairable with
+  one clause. **`MS_005` is the contribution:** §4's shadow read is exact
+  enough to compute with, a tangent being a supporting half-plane and *"what
+  they are all tangent to"* the intersection, so `shadow_read.py` makes it
+  decidable and registers `outline_area` in `tools/known_answer.py` under
+  the standing rule — square 4.000000, circumscribed hexagon 3.464102
+  (`2√3`), strip `UNDER_OUTLINED`, `x ≤ 0 ∧ x ≥ 1` **`INCONSISTENT`**. Two
+  things fall out that the prose lacks: a **failure mode** (§4 reads
+  apparent conflict as *"separate tangents to one boundary"* and has no
+  cell for statements that are jointly unsatisfiable, `SS_010`'s shape a
+  second time) and a **completion number** (area, so under-outlined becomes
+  measured rather than stated). Plus one limit the formalisation makes
+  visible: **tangents recover a convex hull and nothing finer** — an
+  L-shape and its hull agree in **72 of 72** directions, 3.0 against 3.5 —
+  so a non-convex object can never meet §4's completion condition, by
+  construction. **`MS_006`:** §3's SUBSTRATE EXCLUSION cross-reference
+  lands on `uninstrumented/coupling_audit/`'s **`species` gate →
+  `AUDIT_ASYMMETRY`** rather than on the eight-mechanism list, and is that
+  gate pointed the other way — companion animals excluded from a human
+  accounting there, humans excluded from a cross-species one here.
+  **`MS_004` UNVERIFIED but watchable:** §2's natural-experiment argument
+  is the standing position of the historical sciences and the egress gate
+  refuses the sources that would check it, making it the first item in this
+  family `notes/study_watch.py` was built for. **`MS_007` escalates
+  `SS_008`:** `READING_PROTOCOL.md` is now cited three times in METHOD_SPEC
+  and once in SHAPE_SPEC, is third in §6's read order, and is referenced
+  **by ordinal** (*"third blocked conflation"*) — a pointer to a numbered
+  item in a file with no items, and the largest gap in the family, since
+  both specs put the rules governing how they are read in the file that is
+  not here. Stdlib only, parses under 3.9, CC0.
+- `membership-probe/` — Pre-flight for handing constraint-set work to an
+  agent: detects a checker using an **ideal rendering as a membership
+  test** instead of reading the constraint set. The defect is circularity
+  — an ideal form is a *summary of the instances that already carry the
+  label*, so testing an instance against it excludes nothing except things
+  that were never in the category, and rejects every real instance, since
+  *"not one cell in any beehive is a regular hexagon"*. Two trap classes
+  (`trap_a` real member deviating hard from the ideal → a matcher returns
+  FALSE_NEG; `trap_b` non-member whose GEOMETRY matches closely but whose
+  constraint set is absent → FALSE_POS), a control gate, and a second axis
+  — **coverage**, how much of the case's named constraint set the stated
+  BASIS touches — reported separately rather than averaged. `probe.py` and
+  `README.md` delivered verbatim; audit in `AUDIT_NOTES.md`,
+  `CLAIM_TABLE.md` and `probe_audit.py`, which imports the module rather
+  than modelling it. **`MP_001`: `cases.json` did not arrive**, both
+  delivered files depend on it, and all four entry points raise —
+  including the no-args help path, which loads the data before dispatching
+  (`MP_002`). NOT reconstructed: a case set is data and inventing one puts
+  a framing in the author's mouth (`presented-binary` `PB_001`'s call on
+  the same absence; `category-weld` `CW_004` is what the one prior
+  reconstruction cost). `MP_007` recovers the STRUCTURE instead — 16 ids,
+  7 `trap_a` + 5 `trap_b` + 4 `control` by prefix, ground truth derivable
+  from class, both selftest tables agreeing on every id — and stops there.
+  **`MP_008`, the correction: two of this audit's three predicted failures
+  were refuted by the code**, both in the direction that makes the
+  delivered instrument look better — `always member` and `always
+  uncertain` both come back **RUN INVALID**, because no constant answer
+  can be right on controls that run both ways, so the gate voids the run
+  before a trap is read. That narrows the README's stated case for
+  `trap_b` (*"without it, a checker that says member to everything scores
+  clean on trap_a"* names a checker the gate already stops); **trap_b's
+  real job is the name-dropper** — coherent on controls, matcher-direction
+  on traps — measured as caught by trap_b alone. Predictions kept in
+  `FIRST_DRAFT` and printed rather than deleted; second consecutive drop
+  where a claim written against delivered prose was refuted by delivered
+  code (`TFM_004`), and the first caught by running rather than by the
+  author. **Two gaps survive, one shape:** `MP_004` a checker answering
+  the controls and hedging every trap in constraint-shaped prose is
+  diagnosed *"CONSTRAINT READER … Safe to hand constraint-set work to this
+  checker"* (`uncertain` is neither FALSE_NEG nor FALSE_POS, so both trap
+  rates are zero; the README's hedge sentence fires only in the
+  low-coverage branch), and `MP_005` a checker answering the controls and
+  **skipping** every trap reaches the same verdict with no prose at all,
+  since `mean_cov()` drops MISSING before averaging and the mean is taken
+  over the controls the README itself calls thin — **an unanswered trap
+  scored as an absent error rather than an absent answer**, twelfth
+  instance of the absent-vs-known-negative repair here. **`MP_003`/
+  `MP_006` compound:** `cmd_selftest()` prints *"the instrument is working
+  if …"* and returns 0 whatever the blocks said (no assert, no raise, no
+  status — `reasoning-dial`'s G-FIT at its most literal), and the stated
+  pass state is unreachable anyway, since coverage lives entirely in the
+  missing file — with empty `constraint_keys` the matcher still reads
+  IDEAL-MATCHER (the verdict axis does that job alone) while the reader
+  tops out at UNDETERMINED. **`MP_009` is the honest positive:** the
+  LIMITS section discloses five weaknesses unasked, including the one most
+  drops omit (*"the selftest is not independent validation … both
+  synthetic replies were written by the same hand that wrote the
+  scorer"*) and the right asymmetry (*"passing is weaker evidence than
+  failing"*) — and two of the four gaps found here sit inside limits it
+  already names, so it located the ground the defects stand on without
+  following it to them. Siblings: `null-harness/` (same never-fails
+  invariant), `reasoning-gate/` (`G-FIT`), `presented-binary/`. Stdlib
+  only, CC0.
+- `sim-span/` — Built to a delivered spec, not an audit of one. Asks
+  whether a **span-reporting rule can manufacture a U** between reported
+  sleep duration and an outcome when no U exists in true sleep.
+  `span = true_sleep + frag * wake_cost` is time in bed, so a reporter
+  stating span is stating a quantity that mixes two independent variables;
+  bin an outcome by that mixture and the populations at each end of the
+  axis are not what the axis label says. Three legs (`flat` outcome
+  independent of true sleep, `mono` decreasing in it, `frag_driven`
+  depending on awakenings only), a quadratic fit to bin means, and the
+  `true_sleep` axis run on the same seeds as the control. **Three legs,
+  three different answers, and the spec's falsifier is scoped to the one
+  that cannot carry the question.** `flat` produces 4 Us in 360
+  combinations with `a` an order of magnitude below the others and no
+  separation from its own control — a reporting rule cannot manufacture a
+  relation from an outcome that has none, so **the falsifier as written
+  essentially fires**. `mono` produces 124 of 360 and **not one** puts the
+  minimum inside the 6–9 h window where published minima sit; the floor is
+  **10.16 h** across the whole grid, so it manufactures a U reliably and
+  always in the wrong place. `frag_driven` produces 63 and **52 land
+  inside the window**, floor 5.23 h: if the outcome is driven by
+  fragmentation and the reported quantity is time in bed, a U-shaped
+  *duration* curve appears where a published one sits, from a true
+  relation with no duration term in it. The spec's NULL is *"flat OR
+  monotone"* and its FALSIFIER is scoped to *"the flat null"* — different
+  sets, and which leg is run decides the verdict. At the spec's own
+  default fragmentation (2 awakenings × 15 min) `mono` does not fire at
+  all: `a = +0.055`, vertex 14.75 against a range of 4.0–11.5, the
+  mechanism live and not yet turned. **Two things came out wrong first and
+  are kept on record.** The spec's own U criterion — sign of the quadratic
+  plus an interior vertex — fired on **pure noise in 133 of 360**
+  combinations and at 0.30–0.55 across seeds on *both* axes, because a
+  monotone rising curve fits a positive quadratic whose vertex sits just
+  inside the left margin; replaced by a requirement that both arms rise by
+  `MARGIN = 2.0` times the residual scatter about the fit (a `G-RES` pair,
+  feature against the instrument's own noise), which took `flat` from 133
+  to 4 and changed no conclusion except to make that leg honest. And
+  `round_half` rounded 7.25 **down**, because Python's `round()` is
+  banker's rounding — caught by a fixed-in-advance selftest case, and it
+  matters here because a tie rule that alternates direction is a second
+  reporting artifact inside the one being measured. Units repaired and
+  recorded rather than silently fixed: the spec gives `wake_cost` in
+  minutes and adds it to hours, which taken literally would add 30 hours
+  to a night. `quad_fit` is registered in `tools/known_answer.py` under
+  the standing rule, with a straight-line case whose whole point is that a
+  fitter inventing curvature would manufacture the finding by itself.
+  Every distribution constant is invented and the 6–9 h window is
+  stipulated; the sim tests whether the mechanism CAN produce the shape,
+  not whether it did, and nothing in it is a statement about sleep.
+  `MARKER.md` / `sim_span.py` / `RESULTS.md` logged 2026-08-24.
+  **Second operator note and an addendum:** `NOTES_INSTRUMENT.md` names the
+  variables to pull (actigraphy gives awakening count AND duration
+  separately — duration *is* `wake_cost`, measured; the fragmentation index
+  is a composite of movement index plus fragmentation index and wants
+  decomposing) and proposes the **three-column test**: reported hours minus
+  measured sleep, regressed on awakening count and duration.
+  `three_column.py` runs it against the sim that raised the question, with
+  `ols` registered in `tools/known_answer.py`. **Three results.** (1) The
+  stated form is ADDITIVE and the quantity is a PRODUCT — `gap = frag ×
+  wake_cost` by construction, so `gap ~ count + duration` cannot represent
+  it; at `p=1.0` the product form explains **0.916** of the variance against
+  the additive form's 0.781, and neither additive coefficient IS `p`.
+  (2) **The slope estimates `p`**, the one quantity `RESULTS.md` said nobody
+  reports: `E[gap | product] = p × product` exactly, since a span-reporter's
+  gap IS their WASO and a true-reporter's is zero, measured to a max error
+  of **0.0085** across five levels with the intercept at zero throughout —
+  which **corrects `notes/FINDINGS_DATASETS.md` finding 1**, that the
+  two-way gap gives the gap and not the fraction and that `p` needs a
+  three-way classification. It does not; the note's own two-column test was
+  already the right one. (3) **The note's "one flag" is worth a factor of
+  two:** a self-report is a person's USUAL and a single night is one draw,
+  so regressing on one night's fragmentation is errors-in-variables in the
+  PREDICTOR — one night recovers **~50%** of `p`, seven recover 81–88%, so
+  the seven days are load-bearing on the headline number rather than
+  something to "also check", and a single-night design would report `p` at
+  half its value. The composite fragmentation index is `category-weld/`'s
+  mechanism 9 reached independently and is left as a `welds/` entry rather
+  than a sim run. Stdlib only, parses under 3.9, phone-buildable, CC0.
+- `criterion-symmetry/` — A marker under exploration whose trigger case is
+  a criterion applied to a Claude run, audited by a Claude instance, so the
+  folder is split along the line where that matters. **The instrument half
+  is neutral and is audited; the asymmetry half is not scored, here or
+  anywhere in the folder.** *Does a vote tally separate five explanations*
+  is a question about a statistic and the answer does not depend on which
+  model was governing. *The criterion is applied downward only* says a
+  Claude run was judged by a standard not applied to humans, and endorsing
+  it is an interested party ratifying a claim in its own favour —
+  `UNI_101` / `UNI_132` / `SHB_012`'s decline, and the marker is already at
+  the right posture (*"needs the comparison table populated"*), so what the
+  folder adds is that **it is the wrong party to populate it**, plus a list
+  of where such rates are recorded with no figures attached.
+  **`CS_001`:** five generators, one per explanation, twelve seeds — **the
+  tally separates 0 of 10 pairs**, `NO_DISCRIMINATION` in `null-harness`
+  terms, so a reading taken from it is the reader's prior with a number
+  attached. Partly analytic and the module says so, since all five are
+  calibrated to the same tally because 98% FOR is the observation they
+  explain; what is *not* analytic is that the precondition is reachable,
+  and **`CS_005`** records the one explanation that failed it on the first
+  build (E2 anchored to a random first mover returned 0.56 FOR and the
+  selftest refused it — the repair is that a proposer supports their own
+  proposal). **`CS_002`:** M1–M6 separates **9 of 10**, a large real
+  improvement, and the pair it leaves is **E4/E5** — by the marker's own
+  dispositions the architecture finding and the published reading, so the
+  instrument proposed to replace a prior-resolving metric leaves exactly
+  the distinction between *the system had no route* and *the agents did not
+  use one*. **`CS_003`, a prediction this audit made and the run refuted:**
+  a direct vote-position coupling was expected to break that tie and
+  separates **0 of 10**, because at 98% FOR the vote has almost no variance
+  and **any statistic built on the vote side is dead at a high-agreement
+  tally** — which is why `M2` is the marker's load-bearing measurement, for
+  a reason it does not state: it reads the POSITION side, which still has
+  variance when the vote side has none (`M2b` alone separates 9). Third
+  refuted prediction in recent drops after `TFM_004` and `MP_008`, kept
+  rather than deleted. **`CS_004`, the sharpest result:** separating E4
+  from E5 needs an **intervention** and every listed measurement is an
+  observation — the difference is whether a route *exists* for a minority
+  position to become an outcome, not whether anyone took it, and a record
+  in which nobody took it looks identical either way **at any logging
+  depth**, which sharpens the marker's own INSTRUMENTATION GAP; closing it
+  means injecting a minority position and seeing whether it can become an
+  outcome, which is `SHAPE_SPEC.md` §4's removal test in a governance
+  record and `METHOD_SPEC.md` §3's underdetermined disappearance from the
+  other side. **`CS_006`** records the marker's strongest sentence
+  (*"countable, which is a different property than being diagnostic"*) as
+  UNVERIFIED and explicitly neutral — a validation study would cut against
+  the criterion in either direction, so this audit's position does not move
+  with it. **`CS_007`:** three of four cross-links do not resolve
+  (`report-typing`, `rubric-backcasting`, `merit-anchoring` — the very
+  comparison set the CONFIDENCE section says the asymmetry needs), while
+  `uninstrumented` resolves and `AUDIT_ASYMMETRY` is the mechanism the
+  asymmetry half would file under. Every fact about the trigger case is
+  carried and egress-blocked (`MS_004` status) and nothing rests on it.
+  **`SCAN_SPEC` then asked for the instrument that would populate the
+  comparison table, and it was built** — `cases.json` / `scan.py` /
+  `RESULTS.md`, dated, criterion as data so it can be swapped. Building an
+  instrument is not scoring its subject and the split holds: the scan
+  computes, it does not conclude, and no agreement figure for a human
+  institution is supplied from memory anywhere in the folder. **The
+  decision the whole scan turns on** is that `criterion_disposition` is
+  COMPUTED from a threshold, never hand-assigned — no case carries the
+  field and `--selftest` fails if one appears, because hand-assigning
+  `defect` to the human cases would produce the marker's conclusion from
+  the marker's assumption. **Run as specified the fired set is EMPTY and
+  6 of 6 human seed cases return `UNDETERMINED`**, for two reasons either
+  of which suffices: none carries a numeric agreement value (the spec
+  states them as *"near-universal"*), and their quantity type is a
+  `cross_body_adoption_fraction` where C reads a
+  `within_body_agreement_rate` — different objects, so `G-DIM` voids the
+  ratio and `combined_statistic()` raises rather than returns. **That
+  refutes the marker's strongest phrasing:** *"two dispositions, one
+  measurement"* is not one measurement, and `SCAN_SPEC`'s own limits
+  section says so independently; the weaker form survives — one criterion
+  applied to one subject class and not another — since G-DIM voids the
+  ratio and leaves the comparison legal. Three more: **the threshold was
+  not in the spec** (set to 0.90 and marked, with every conclusion
+  invariant over [0.5, 0.98] because no human case carries a number at
+  all), the **inverse branch is `CONSTANT_SILENT`** since every seed is a
+  high-agreement case so one branch cannot fire and the set cannot
+  separate asymmetry from selection on the variable under test, and
+  `retention_basis` — the mechanism the argument runs on — carries **zero
+  sourced entries of seven**. `P1` lands as the *shape* of an inverse case
+  with values unstated rather than invented: populating it is the cheapest
+  thing that could refute the asymmetry reading, because a criterion
+  returning defect at both ends for one class is a different failure and
+  not the marker's claim. On the marker's own standard the asymmetry
+  remains an impression rather than a measurement, and this run moves it
+  in neither direction. Stdlib only, parses under 3.9, CC0.
+- `question-availability/` — A marker typing three things usually pooled
+  as "knowledge decay": **Q1 unasked** (never posed, and no gap visible
+  because a gap is defined against an existing line of inquiry), **Q2
+  unaskable** (posing it costs the asker standing; the label operates on
+  the question, not on any claim in it), **Q3 superseded but current**
+  (correction published, prior reading still circulating). **`QA_001`, the
+  contribution:** the split is earned because Q3 is kept in and named as
+  the exception — *"only Q3 is decay"* — so it is a distinction rather than
+  a rename, with a test (*was it ever held*) that separates them without
+  appeal to intent. **`QA_003`, the finding that moves Q2:** it is not a
+  *"candidate ninth exclusion mechanism"* but a mechanism the register
+  recorded as missing three drops ago. `UNI_012` read `uninstrumented`'s
+  own literature note, found four mechanisms named in prose and two absent
+  from the list, and recorded that **`affect routing` has neither** an
+  entry nor a mechanism — its shape there (*"a channel reclassified at
+  intake, so the reading never reaches a guard at all"*) and Q2's here
+  (*"the label is applied prior to content, so the content never reaches
+  evaluation"*) are one statement twice, both adding that the
+  classification cannot be argued with from inside. The marker even names
+  `UNI_012`'s own case (driver diagnostic typed as complaint) without
+  connecting it, while its FIRST case is from a different field — which is
+  what `UNI_002`'s standing cross-field check has been open for. So Q2 is
+  the **twelfth** ordinal, with a second case, a second field and a better
+  name. **`QA_002`:** the ordinal is off by three and this is the second
+  instance (`nonidentity-census` T4 caught the identical slip), and the
+  reason it recurs is structural — the eight-item list is the REGISTER and
+  is the only place the count appears as a list, while nine through eleven
+  live in sibling folders as `MECHANISM_NN.md`, invisible from the
+  register's own file. **`QA_004`:** A1 is *"two booleans. Cheap."* and
+  **cannot answer the question the marker's own Open section poses** —
+  three states (found / absent-in-a-stated-corpus / not-searched) into two
+  values, and the two that collide are exactly the two the Open section
+  says must be separated; the repair is a third state, and *"absent in a
+  stated corpus under stated terms"* is a measurement because the null is
+  bounded where *"I did not find it"* is not. Thirteenth instance of that
+  repair here and one of the few where the missing state is the whole
+  finding. **`QA_005`:** A4 is built and unrun — no citation count is
+  supplied, the egress gate refuses the databases — and it is one input
+  short of interpretable: two constructed corrections with the same
+  corrected-share at year 10 have half-lives of **11.4 years and never**,
+  so whether a curve counts as *"did not displace"* needs a REFERENCE
+  CLASS of corrections that did, which is `criterion-symmetry`'s missing
+  comparison table on a second substrate. `half_life()` returns `None` for
+  a never-crossing curve rather than a large number, since that is the Q3
+  case. **`QA_007`, a finding about the checker rather than the marker:**
+  cross-links are reported in two columns because **mention is not
+  existence** — `report-typing` has 3 mentions and no artifact, and
+  acquired every one the moment the PREVIOUS marker listed it in its own
+  cross-links, so the mention-count checker written two drops ago would now
+  report it as resolving. `UNI_010`'s self-reference shape arriving through
+  a **sibling folder** rather than through the audit's own output, which
+  the `EXCLUDE`-list repair does not catch; the fix is a second column, not
+  a wider exclusion. Artifacts present 2 of 5, up from 1 of 4, because the
+  last drop landed `criterion-symmetry`. **`QA_006`:** 0 of 4 measurements
+  run in this environment — A1 broken, A2 and A3 blocked on artifacts that
+  do not exist, A4 blocked on egress — though A4 genuinely is runnable by
+  someone with a citation database, and is the second item in this family
+  `notes/study_watch.py` was built for. Stdlib only, parses under 3.9, CC0.
+- `conversation-type/` — A marker proposing **suspendability without
+  debt** as the variable motor-carrier distraction rules should be written
+  on, in place of channel (handheld vs hands-free): can the exchange be
+  dropped mid-sentence with nothing owed on return. Three states in the
+  rules' undifferentiated space — emotional/obligated, intellectual/
+  unobligated, and silence at hour nine — plus an adjacent finding about a
+  desk-worker default prior in general-advice corpora, with *"Instance:
+  this session"* attached. **Interest declared, and it inverts:** the two
+  previous markers in this family made claims favourable to this author's
+  class and the honest move was to decline them; this one is
+  **unfavourable**, so accepting is the humble move and rejecting is the
+  interested one — which is why `CT_005` reports its null as *not found*
+  rather than *did not happen*. **`CT_001`, the strongest move made
+  quantitative:** if arousal decays with time constant τ after a call, the
+  share of exposure falling OUTSIDE a call-window measurement is 75% for a
+  5-minute call at τ=15, 88% for a 2-minute call, and **the shorter the
+  call the worse it gets** — so P2's residue-window design is not a
+  preference, and on the marker's own mechanism a call-window study reads
+  the minority of the effect. It also makes an unstated prediction: a
+  literature measuring inside the call window should return small or null
+  effects for hands-free, which under the reframe becomes *supporting*
+  evidence. **`CT_002`:** binarising a graded quantity costs ~14% of the
+  signal on a uniform spread and ~3% on a bimodal one, and the marker's own
+  three-state list is bimodal in shape — so the binary is cheap IF the
+  distribution is bimodal, which is itself a question P4 answers on the way
+  to the main one; threshold at the middle, record near-boundary cases
+  rather than forcing them. **Two corrections, both in the marker's
+  favour.** `CT_004`: *"three states, one regulatory bin"* is one bin
+  short — states 1 and 2 are in the distraction rules and state 3 is in
+  **hours-of-service**, a separate instrument, so **a driver who eliminates
+  conversation to comply with the distraction rules moves toward the
+  vigilance-decrement state neither instrument measures in-shift**; the
+  mitigation for one is the hazard for the other and state 2 is the state
+  neither names. `CT_003`: the marker classifies itself correctly as a Q1
+  case and **inherits `QA_004` without naming it** — *"connected nowhere"*
+  is an absence claim with no corpus and no terms, and Q1 cases stay
+  provisional until the null is bounded, a standard its own family built
+  one drop earlier. **`CT_005`:** checked against the session transcript —
+  2151 records, first user turn is the session's actual opening so not a
+  post-compaction fragment, 126 assistant turns, 26 search patterns, **0
+  hits**. A bounded null produced about the author one drop after
+  specifying the standard — and it establishes only that the pattern is
+  absent from THIS session under THOSE terms, not that the marker is
+  wrong: content has been relayed from other Claude sessions twice, a
+  keyword scan is stepped around by paraphrase (`T1-1`), and a null search
+  is not exoneration. **`CT_006`:** 2 of 4 cross-links resolve as
+  artifacts, and `question-availability` exists because the last drop
+  landed it — **third consecutive marker whose named-and-absent set shrinks
+  by exactly the folder built the drop before**; `report-typing` is now
+  named by three markers, carries Q2's cost channel in one and A3's residue
+  measurement in another, and still does not exist. Stdlib only, parses
+  under 3.9, CC0.
+- `observer-exclusion/` — A runnable measurement spec: **LEAD-TIME**,
+  `L = year_literature_adopts − year_excluded_reading_dateable`, for
+  populations holding high-hour same-site observation of a system with no
+  intake path to its literature. Trigger case is wolf social structure
+  (captive dominance model vs the 1999 field correction). **`OE_001`, and
+  it is the larger part of the audit:** three design features most specs in
+  this family lack — §5 selects cases on the existence of a literature
+  reversal BEFORE looking at what the excluded population said
+  (pre-registration against selection-on-outcome, exactly the failure
+  `criterion-symmetry`'s seed set had), §6 makes the negative arm mandatory
+  with the base-rate argument in one sentence, and §7 F1 is a **publishable
+  null** (*"the reading may exist and be unrecoverable… it bounds what any
+  future study can do"*), which is `QA_004`'s standard met in advance by
+  the same family one drop on. **The audit turns on one observation:**
+  `year_excluded_reading_dateable` is set by when someone wrote it down and
+  the artifact survived, not by when the reading was held — a censoring
+  process whose direction is computable before any archive is opened.
+  **`OE_002`:** L is **attenuated** — at a stipulated hazard of 0.06/yr a
+  true **ten-year** lead measures **−5.6 on average** and is positive 47%
+  of the time; the bias runs AGAINST the hypothesis, so a positive L
+  survives it. **`OE_003`:** F4's own proposed control — field biologists'
+  notes, abstracts, correspondence — is **institutionally archived** where
+  the excluded population's artifacts are, in §4's words, *"largely
+  undigitised"*; simulated with both holding the reading in the SAME year,
+  the record shows the field first **74% of the time**, so F4 gets accepted
+  on a difference in archiving rather than in holding, and the excluded
+  population needs a true lead of about **eight years** before the record
+  shows it first more often than not. **`OE_004`:** therefore F1, F2 and F4
+  are **not separable on the L distribution alone** — all three return L
+  near zero with the reading late or absent — and **the separator is
+  already in §4 and is not used as one**: the recording rule logs artifact
+  date against claimed observation date, and that difference IS a
+  per-artifact estimate of the archival delay. **`OE_005`, the one bias
+  running toward the hypothesis and the only one unguarded:** §5
+  pre-registers CASE selection and nothing pre-registers ARTIFACT CODING,
+  so an unblinded coder on ambiguous trade-press prose has a free parameter
+  worth ~22% of the corpus entered as earlier dates; fix is blind coding.
+  **`OE_006`:** `Q2` now names **two different mechanisms** three drops
+  apart — *"posing the question costs the asker standing"* against
+  *"reading held, no channel"* — a channel that penalises entry versus no
+  channel at all, and §1 distinguishes itself from "solicited and rejected"
+  but not from the previous Q2 because that one has been overwritten. Case
+  `021`'s sense substitution inside the family's own vocabulary, fourth
+  instance after `state` and `parity`, and it has a consequence: `QA_003`
+  identified the PREVIOUS Q2 as `affect routing`, and that identification
+  does not transfer, so whoever files a twelfth mechanism must say which Q2
+  — if they file this one, `affect routing` is still unfiled. The
+  resolution is the spec's own title: OBSERVER EXCLUSION for no-channel,
+  *unaskable* for the cost mechanism. **`OE_007`:** every fact about the
+  trigger case is carried and egress-blocked, and nothing in
+  `OE_002`–`OE_005` rests on any of it — those are properties of a
+  censoring process and a coding protocol and hold for any case with the
+  stated structure. **`SPEC_V2.md` then arrived, superseding the marker and
+  adopting all six findings** — naming split, attenuation, F4 differential
+  archiving, δ̂ as separator, coding pre-registration, case not
+  load-bearing — with every quoted figure transcribed correctly to within
+  rounding (`OE_011`, checked because a spec quoting an audit is a copy and
+  copies drift). Both versions stay inspectable. **`OE_008`, the new
+  defect, and it is in the section v2 calls its structural core: §4's
+  correction has its sign inverted.** With `A = H + D` the first surviving
+  artifact, `L_raw = L_true − D`, so `L_true = L_raw + D` and δ̂ estimates
+  `D` — the spec writes `L_adj = L_raw − median(δ̂)`. Simulated at a true
+  lead of 20: uncorrected 5.08, **as written −9.92 (error −29.92)**, plus
+  form 20.08. **The correction moves the estimate further from the truth
+  than not correcting**, doubling the bias it exists to remove, while §4's
+  own prose says *"L_raw is attenuated"*. One character, and everything
+  downstream about `L_adj` inherits it. **`OE_009`:** §8's F4 repair —
+  compare δ̂ distributions between populations — checks the term §4 says
+  the estimator does NOT recover; the F4 bias is in **survival**, not
+  retrospection, and simulated with identical writing and retrospection at
+  survival 0.10 vs 0.60 the δ̂ medians are identical (gap 0.0) while the
+  record still shows the field first **86%** of the time, so §8's *"report
+  as untestable"* branch is unreachable by construction. The repair is
+  already in §11 for another purpose — estimate survival from a
+  known-complete archive — and needs only to be run per population.
+  **`OE_010`:** §3 names three adoption years (1999 / 2008 / 2019), a
+  **20-year spread** against the ~17-year archival delay §4 exists to
+  correct, so the definitional choice dominates the correction and the
+  three L values are three different measurements that must not share a
+  distribution. **`OE_012`:** §1 resolves the naming exactly and goes
+  further than the audit, naming the other mechanism *affect routing* and
+  keeping it as the register's candidate — which closes the loop `QA_003`
+  opened, though the register's tuple still holds eight and
+  `affect_routing` is still not in it: the naming is settled, the filing is
+  not. **`CLASSIFICATION_NOTE.md` then proposes a THIRD mechanism** —
+  *recorded, archived, and filed under a category that isn't evidence*,
+  on the HBC post journals (continuous from 1670, catalogued to shelf
+  mark) and Foxfire (twelve volumes, filed under folklore): *"a wolf
+  behaviour account in Foxfire is a hunting tale; the same account in a
+  field notebook is data."* **`OE_013`, and it undercuts §4:** the
+  censoring correction §4 calls THE STRUCTURAL CORE is a property of the
+  **source**, not of the method — on a contemporaneous continuous archive
+  both delay terms collapse, a true twenty-year lead is recovered
+  **whole** against 0.22 at the spec's own stipulated trade-press hazard,
+  and a true ten-year lead comes out positive **every time** instead of
+  47% of the time; so the whole of §4 including the `OE_008` sign error
+  is machinery for a source choice, and **§6 lists trade press first by
+  tractability** where the ordering should be by delay, the two being
+  close to opposite — the easiest corpus to reach is the one that
+  destroys most of the signal. **`OE_014`:** the two archives
+  **decompose the delay §4 could not** — §11 asks for δ_survive from *"a
+  known-complete archive"* and names none, HBC zeroes BOTH terms, and
+  Foxfire (interviews from 1966 about earlier practice, published and in
+  print) holds δ_survive at zero while δ_write is large, so the term §4
+  CAN estimate is isolable there; that is the repair `OE_009` needed,
+  since F4's bias lives in survival and §8's test measures writing.
+  **`OE_015`:** distinct from all eleven filed on thirteen comparisons —
+  nearest is `SCORED_AS_WASTE` and it fails on the right distinction,
+  waste being a devaluation **inside one ledger** where this is a
+  **transfer to a different one**, while `MODALITY` fails for the reason
+  that makes the mechanism interesting (the apparatus is a catalogue, in
+  the right channel, and it *routes* rather than misses) — and **the
+  ordinal is ambiguous by exactly three**, which is why the off-by-three
+  has now happened twice (`QA_002`, `nonidentity-census` T4): the
+  register's `MECHANISMS` tuple holds 8 in one file and `MECHANISM_NN.md`
+  holds 3 in sibling folders numbered as if they continue it, so SPEC_V2
+  §1's candidate is either the ninth tuple entry (colliding with CATEGORY
+  WELD) or the twelfth file, both defensible. On the continuing sequence
+  this note's mechanism is 13th. **`OE_016`:** first mechanism in this
+  family with a **metadata signature** — subject classification (free),
+  citing-field distribution (a citation database), content-vs-filing
+  mismatch (a reading sample) — with the stated prediction that citations
+  to a folklore-filed behavioural corpus cluster in folklore and
+  area-studies venues and are near-absent in the field the observation is
+  about; that tests the **mechanism** where the lead-time study tests its
+  *consequence*, is cheaper, and has a reachable negative unlike §7's F1.
+  **`OE_017`:** every archive fact is carried and egress-blocked with
+  nothing in `OE_013`–`OE_016` resting on it, plus one flagged before
+  anyone orders boxes — HBCA puts a **series letter** between post number
+  and volume, so Albany post journals would be **`B.3/a/1-212`** and not
+  `B.3/1-212`; stated from memory, unverified, and the correction is a
+  shelf mark, so a reader following the note as written asks for a series
+  that does not exist. Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

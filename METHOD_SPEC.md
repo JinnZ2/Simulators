@@ -1,6 +1,3 @@
-<!-- SPDX-License-Identifier: CC0-1.0 -->
-<!-- This file is dedicated to the public domain under CC0 1.0. -->
-
 # METHOD_SPEC — constraint-set reasoning
 
 Companion to SHAPE_SPEC.md. This file states the EPISTEMIC CLASS of that

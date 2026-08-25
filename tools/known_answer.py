@@ -234,6 +234,46 @@ def _marginal_majority(which):
     return round(hit / float(tot), 2)
 
 
+def _three_column_ols(which):
+    """sim-span/three_column.py::ols, imported. Exact fits only."""
+    import importlib.util
+    path = os.path.join(ROOT, "sim-span", "three_column.py")
+    spec = importlib.util.spec_from_file_location("_three_column", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.ols_coef(which)
+
+
+def _sim_span_quad_fit(which):
+    """sim-span/sim_span.py::quad_fit, imported. Returns the a coefficient."""
+    import importlib.util
+    path = os.path.join(ROOT, "sim-span", "sim_span.py")
+    spec = importlib.util.spec_from_file_location("_sim_span", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    xs = [-2.0, -1.0, 0.0, 1.0, 2.0]
+    if which == "parabola":
+        ys = [2.0 * x * x - 3.0 * x + 5.0 for x in xs]
+    elif which == "line":
+        ys = [3.0 * x + 1.0 for x in xs]
+    elif which == "flat":
+        ys = [4.0 for _x in xs]
+    else:
+        raise ValueError(which)
+    fit = mod.quad_fit(xs, ys)
+    return None if fit is None else round(fit[0], 12)
+
+
+def _shadow_outline_area(name):
+    """shape-spec-audit/shadow_read.py::outline_area, imported."""
+    import importlib.util
+    path = os.path.join(ROOT, "shape-spec-audit", "shadow_read.py")
+    spec = importlib.util.spec_from_file_location("_shadow_read", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.outline_area(name)
+
+
 def seed():
     """Registers the two instances the rule was earned from."""
     fn, detail = _extract_verdict()
@@ -280,6 +320,81 @@ def seed():
                  "arm all LEXICAL, YES arm 5 of 6 UNDECIDABLE"),
         ],
         note="the replacement metric. Passes.",
+    )
+    register(
+        "sim-span/three_column.py::ols",
+        _three_column_ols,
+        [
+            case("exact slope", ("slope",), 3.0,
+                 "y = 2 + 3x sampled at five points has slope 3 by "
+                 "construction. The slope of this regression is the "
+                 "estimator of p, so a fitter with a scale error would "
+                 "misreport the one quantity the design exists to measure",
+                 tol=1e-9),
+            case("exact intercept", ("intercept",), 2.0,
+                 "same line, intercept 2. The intercept must sit at zero on "
+                 "real data if true-reporters contribute a gap of zero, so a "
+                 "fitter that cannot recover a known intercept cannot "
+                 "support that reading", tol=1e-9),
+            case("constant data", ("flat",), 0.0,
+                 "a horizontal line has slope 0. A fitter that invents one "
+                 "would report a non-zero p on a population where nobody "
+                 "reports span", tol=1e-9),
+        ],
+        note=("the three-column test's fitter. The slope IS the estimate of "
+              "p, so this is the one metric in the folder whose output is "
+              "read as a quantity rather than a sign."),
+    )
+    register(
+        "sim-span/sim_span.py::quad_fit",
+        _sim_span_quad_fit,
+        [
+            case("exact parabola", ("parabola",), 2.0,
+                 "y = 2x^2 - 3x + 5 sampled at five points has a = 2 by "
+                 "construction; a least-squares quadratic through points "
+                 "that lie on a parabola must return its own coefficient",
+                 tol=1e-9),
+            case("straight line", ("line",), 0.0,
+                 "y = 3x + 1 has no quadratic term. A fitter that invents "
+                 "curvature here would manufacture the U this sim exists "
+                 "to detect -- the failure mode inside the instrument",
+                 tol=1e-9),
+            case("constant", ("flat",), 0.0,
+                 "a horizontal line has no quadratic term either. Present "
+                 "because the line case alone shares an expected value "
+                 "with it and the registry needs the pair to differ from "
+                 "the parabola", tol=1e-9),
+        ],
+        note=("the U detector's fitter. The sim's whole claim is about the "
+              "SIGN of a, so a fitter with a curvature bias would produce "
+              "the finding by itself."),
+    )
+    register(
+        "shape-spec-audit/shadow_read.py::outline_area",
+        _shadow_outline_area,
+        [
+            case("square", ("square",), 4.0,
+                 "four tangents at distance 1 bound a 2x2 square, whose "
+                 "area is exactly 4 by construction and not by measurement",
+                 tol=1e-6),
+            case("hexagon", ("hexagon",), 2.0 * 1.7320508075688772,
+                 "six tangents at distance 1 about the unit circle give the "
+                 "circumscribed regular hexagon, area 6*tan(pi/6) = "
+                 "2*sqrt(3)", tol=1e-6),
+            case("strip", ("strip",), "UNDER_OUTLINED",
+                 "two opposing statements leave the vertical direction "
+                 "unconstrained, so no bounded object is tangent to both "
+                 "and no area exists to report"),
+            case("contradiction", ("contradiction",), "INCONSISTENT",
+                 "x <= 0 and x >= 1 cannot both hold, so there is no "
+                 "boundary the statements are tangent to. This is the "
+                 "state METHOD_SPEC section 4 has no cell for"),
+        ],
+        note=("METHOD_SPEC section 4's shadow read, made decidable. The "
+              "case set spans all three states on purpose: a fixture set "
+              "in which INCONSISTENT never occurs cannot detect an "
+              "instrument that has quietly lost the failure branch, which "
+              "is the branch the section lacks."),
     )
     register(
         "nonidentity-census/t6_window_declaration.py::"

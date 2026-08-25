@@ -1,0 +1,85 @@
+CHECKS ON SHAPE_SPEC.md -- the spec is not modified here
+
+SS_009/010  section 10's four required fields, applied to
+            every shape entry in this tree
+  domain-ledger/anchors/hierarchy-imposed-ordering.json   (top-level `shape` key)
+    solving_for      ABSENT
+    constraints      ABSENT
+    why_not_other    ABSENT
+    removal_test     ABSENT
+    score            0 of 4
+    keys it has      anchors, asserted_confidence, open, sense, shape, statement
+  domain-ledger/samples/anchor_skeleton.sample.json   (top-level `shape` key)
+    solving_for      ABSENT
+    constraints      ABSENT
+    why_not_other    ABSENT
+    removal_test     ABSENT
+    score            0 of 4
+    keys it has      anchors, asserted_confidence, open, sense, shape, statement
+  domain-ledger/samples/skeleton.sample.json   (top-level `shape` key)
+    solving_for      ABSENT
+    constraints      ABSENT
+    why_not_other    ABSENT
+    removal_test     ABSENT
+    score            0 of 4
+    keys it has      asserted_coverage, domains, reservation, shape, source, statement
+  domain-ledger/shapes/hierarchy-cut-generation.json   (under shapes/)
+    solving_for      ABSENT
+    constraints      ABSENT
+    why_not_other    ABSENT
+    removal_test     ABSENT
+    score            0 of 4
+    keys it has      asserted_coverage, criterion_fixed_in_advance, domains, open, reservation, shape, source, statement
+  Section 10 offers two outcomes: a shape entry, or a geometry
+  note missing the removal test. The entry found is neither --
+  it has no geometry to note. A third state, with no label.
+
+SS_002  'a repo that says SHAPE means section 1', measured
+  files using the word : 251
+  occurrences          : 1012
+  senses in a hand-coded sample of 7:
+    shape signature                    data-structure fingerprint
+    the same shape as                  pattern-across-cases
+    distribution shape                 geometry (section 1's readout)
+    shape in {NEW, FLAT, WALKING}      enum tag
+    shapes/ directory                  claim-with-a-domain-set
+    the barrier SHAPE is universal     geometry (section 1's readout)
+    SHAPE BEING TESTED                 constraint set (section 1)
+  distinct senses in the sample: 6
+  The count above is RAW. No sense was assigned mechanically:
+  a keyword scan deciding word sense is T1-1's failure. The
+  sample is hand-coded, n=7, and is not a rate.
+
+SS_006  section 9's NOTE ON COST, against section 4's exponent
+  Murray exponent 2^(-1/3)                = 0.793701
+  min dissipation at FIXED VOLUME, no cost = 0.793701
+  min dissipation + K*volume (a cost)      = 0.793701
+  pure dissipation, nothing else -- W as radius scales:
+    r = 1.0      W = 1.527887e+01
+    r = 10.0     W = 1.527887e-03
+    r = 100.0    W = 1.527887e-07
+    r = 1000.0   W = 1.527887e-11
+  strictly decreasing, so no interior optimum and no exponent.
+  The second term is load-bearing. But the de-costed form
+  returns the SAME exponent, because minimising dissipation at
+  fixed volume and minimising dissipation plus a price on
+  volume are one stationarity problem: the cost coefficient IS
+  the Lagrange multiplier on a physical constraint.
+  Section 9 is right, and this is the proof it does not state.
+
+SS_005  section 6's recurrence list, counted by constraint set
+  items listed as independent : 7
+  distinct constraint families: 3  (upper bound on N_eff)
+    erosional-minimum-dissipation          river networks
+    laplacian-growth                       lightning, crack propagation, dendritic solidification
+    transport-under-volume-constraint      vasculature, root systems, mycelium
+  The list is grouped by SUBSTRATE. Section 1 says systems
+  sharing a constraint set share a shape -- so two items in one
+  family are not two confirmations, they are one shape seen
+  twice. The family assignment here is HAND-ASSIGNED and is the
+  weak point; it is stated per item so it can be argued with.
+
+SS_008  section 10's 'see also'
+  READING_PROTOCOL.md : NOT IN TREE
+  SHAPE_SPEC.md       : present
+

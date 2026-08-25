@@ -1,0 +1,102 @@
+CHECKS ON notes/datasets/mesa_sof.md -- the note is not edited
+
+1  does the note answer what sim-span/RESULTS.md asked?
+   outcome fit    quote in RESULTS.md: True 
+      PSG gives true_sleep and awakenings on the same person
+   the fraction p quote in RESULTS.md: True 
+      the note names a questionnaire alongside PSG and actigraphy on the same person, which is that sub-study -- but it does not claim this
+   Both halves are answered by one design. The note claims the
+   first and not the second: it says 'measured sleep, measured
+   awakenings, and what they said when asked', which IS the
+   validation sub-study `p` needs, and then does not say so.
+   `p` needs a THREE-way comparison the note stops short of
+   specifying: self-report against total sleep time AND against
+   time in bed, per person, classified by which it is nearer.
+   Two-way against sleep alone gives the gap, not the fraction.
+
+2  do the note's cross-references resolve in this tree?
+   G-SPAN   0   NOT IN TREE
+   parity   14  fragility-cascade/CLAIM_TABLE.md, fragility-cascade/EXPERIMENT_register.md (+12)
+   MESA     0   NOT IN TREE
+   SOF      0   NOT IN TREE
+   Scanned with this audit's own products excluded (7 paths).
+   Without that exclusion the scan measures its own previous
+   run: writing MESA into CLAUDE.md to describe the finding put
+   MESA into the tree, and the next run reported it resolving.
+   UNI_010's loop in notes/, found the same way -- by running
+   twice. Excluding by path is a hand-broken loop, not a fix.
+
+   G-SPAN does not resolve. The folder is `sim-span/` and the
+   module SIM-SPAN. Recorded, not normalised -- the note is
+   stored as delivered and vocabulary is not harmonised across
+   entries.
+   `parity` resolves 16 times and NOT ONCE in the note's sense.
+   Every repo use is the equality sense -- `parity()` as a
+   comparison function in the divergence log, 'what would count
+   as parity' as equivalence. The note means the obstetric
+   sense: number of pregnancies. One word, two senses, and a
+   resolver that counts occurrences reports a reference as
+   resolving 16 times when it resolves zero times.
+   That is `uninstrumented` case 021's sense substitution and
+   `nonidentity-census` T1-3's `state` finding (nation-state vs
+   steady state), third instance in this tree -- and it is a
+   limit of THIS checker, not of the note: word boundaries fix
+   substring bleed and do nothing about sense. Only hand-reading
+   the sixteen got the right number, which is T1-1 one level up.
+   So the SOF half is a thread from outside this repo, and
+   nothing here can say what question it answers.
+
+3  what the sim's swept parameters are, in PSG terms
+     sim   span = true_sleep + frag * wake_cost
+     PSG   TIB  = TST + WASO + onset latency
+   so `frag * wake_cost` is WASO, and the sim's span excess is
+   WASO plus onset latency. Both are PSG readouts.
+
+   frag    wake    product_h  excess_h   a          vertex   is_u
+   1.0     120     2.00       1.99       +0.0284    14.63    True
+   2.0     60      2.00       1.99       +0.0414    13.46    True
+   4.0     30      2.00       1.99       +0.0532    13.00    True
+   8.0     15      2.00       1.98       +0.0659    12.84    True
+
+   mean excess equals the product : True (max error 0.021 h)
+   vertex spread at fixed product : 1.79 h
+   the four disagree on is_u      : False
+
+   The MEAN is the product exactly. The SHAPE is not: at a fixed
+   two hours of WASO the manufactured minimum moves 1.79 h as the
+   split runs from few-long awakenings to many-short, and many
+   short ones push it DOWN the axis, toward the window where a
+   published minimum sits.
+   So WASO alone is not the axis. The awakening count is a second
+   one -- and the note's instrument reports both, which is more
+   than the note claims for it.
+
+4  carried from the note, not checked here
+   - MESA Sleep n = 2,237
+   - MESA has PSG + 7-day actigraphy + questionnaire on the same person
+   - MESA ages 45-84 at baseline, sleep exam roughly a decade in
+   - SOF is all women, older, with PSG and actigraphy
+   - SOF carries mortality and incident disease outcomes
+   The egress gate refuses the sources that would confirm any of
+   these. Same status as `shape-spec-audit` MS_004. Nothing in
+   this file rests on a dataset fact being right; the readings
+   above are about the note's fit to this repo and about the
+   sim's own arithmetic.
+
+   `notes/study_watch.py` is NOT the instrument for these. It
+   reads `uninstrumented.ENTRIES`, and this is an operator note,
+   not a register entry. Filing it as one to make it watchable
+   would be filing it under a mechanism it does not claim.
+
+5  the caveat the note states, and how far it reaches
+   Stated: ages 45-84, no young cohort, no ageing clocks,
+   mortality is the outcome you get.
+   It reaches further than that, in the note's favour. sim-span
+   assumes frag and true_sleep are INDEPENDENT and flags the
+   assumption as probably wrong. In a 45-84 cohort they are
+   near-certainly correlated. So MESA does not only test the
+   finding -- it measures the sim's own weakest assumption,
+   because both quantities are recorded per person. That makes
+   it the hard case rather than a convenient one, which is the
+   right way round for a test that could refute.
+

@@ -1,0 +1,34 @@
+THE SHADOW READ, MADE DECIDABLE
+METHOD_SPEC.md section 4. The spec is not modified.
+
+statements       state            area         known
+------------------------------------------------------------------
+square           OUTLINED         4.000000     4.000000
+hexagon          OUTLINED         3.464102     3.464102
+strip            UNDER_OUTLINED   --           UNDER_OUTLINED
+contradiction    INCONSISTENT     --           INCONSISTENT
+one_statement    UNDER_OUTLINED   --           UNDER_OUTLINED
+
+Section 4 names ONE of these three states. It offers
+UNDER_OUTLINED, and reads apparent conflict as 'separate
+tangents to one boundary, not competing claims'. But
+INCONSISTENT is reachable and is what a genuine conflict looks
+like: no point satisfies every statement, so there is no
+boundary they are all tangent to. Without that state every
+apparent conflict routes to the reassuring reading.
+
+And OUTLINED carries a NUMBER. 'Complete when the gaps
+constrain the object to one form' is the area going to zero;
+until then the area is how much is still open. Under-outlined
+stops being a stated state and becomes a measured one.
+
+THE LIMIT THE FORMALISATION MAKES VISIBLE
+  an L-shape and its convex hull, support value compared in
+  72 directions: identical in 72 of 72
+  true area 3.0 vs hull area 3.5
+  Tangents recover a convex hull and nothing finer. If the
+  object is non-convex, section 4's completion condition can
+  NEVER be met -- not for want of statements, by construction.
+  Worth knowing before an outline that will not close is read
+  as the reader not having said enough.
+

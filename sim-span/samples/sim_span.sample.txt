@@ -1,0 +1,101 @@
+SIM-SPAN   can a span-reporting rule manufacture a U?
+N=20000 per run, 40 seeds per rate, p=1.0 unless swept
+
+LEG  flat
+  reported  bins 16   a +0.0014    vertex 4.82    convex, interior, but does not turn: arms 0.00/0.06 vs 2.0x scatter 0.02
+  true_sleep bins 14   a +0.0113    vertex 7.66    convex, interior, but does not turn: arms 0.20/0.06 vs 2.0x scatter 0.08
+  U rate over 40 seeds:  reported 0.03   true 0.05
+
+LEG  mono
+  reported  bins 16   a +0.0547    vertex 14.75   minimum outside the range
+  true_sleep bins 14   a +0.0109    vertex 52.90   minimum outside the range
+  U rate over 40 seeds:  reported 0.00   true 0.00
+
+LEG  frag_driven
+  reported  bins 16   a +0.0804    vertex 4.22    minimum outside the range
+  true_sleep bins 14   a +0.0113    vertex 8.79    convex, interior, but does not turn: arms 0.32/0.02 vs 2.0x scatter 0.20
+  U rate over 40 seeds:  reported 0.00   true 0.10
+
+------------------------------------------------------------------
+SWEEPS
+
+  sweep p (fraction reporting span), leg=flat
+    p      U rate rep   U rate true
+    0.00   0.10         0.10
+    0.25   0.00         0.10
+    0.50   0.00         0.10
+    0.75   0.10         0.10
+    1.00   0.00         0.10
+
+  sweep p (fraction reporting span), leg=mono
+    p      U rate rep   U rate true
+    0.00   0.00         0.00
+    0.25   0.00         0.00
+    0.50   0.00         0.00
+    0.75   0.00         0.00
+    1.00   0.00         0.00
+
+  sweep p (fraction reporting span), leg=frag_driven
+    p      U rate rep   U rate true
+    0.00   0.15         0.15
+    0.25   0.25         0.15
+    0.50   0.30         0.15
+    0.75   0.10         0.15
+    1.00   0.00         0.15
+
+  sweep mean frag, leg=mono, p=1.0
+    frag   U rate rep   U rate true
+    0.0    0.00         0.00
+    0.5    0.00         0.00
+    1.0    0.00         0.00
+    2.0    0.00         0.00
+    4.0    0.00         0.00
+    8.0    0.85         0.00
+
+  sweep mean wake_cost (min), leg=mono, p=1.0
+    wake   U rate rep   U rate true
+    0      0.00         0.00
+    5      0.00         0.00
+    15     0.00         0.00
+    30     0.35         0.00
+    60     1.00         0.00
+    120    0.65         0.00
+
+------------------------------------------------------------------
+WHERE THE MANUFACTURED U LANDS
+  360 parameter combinations per leg (frag x wake x p).
+  A U at the wrong place on the axis does not explain a U at the
+  right one, so the vertex is reported, not just the sign.
+
+  leg           U found  in 6-9 h window  lowest vertex
+  ------------------------------------------------------------
+  flat          4        4                7.15 h
+  mono          124      0                10.16 h
+  frag_driven   63       52               5.23 h
+
+  flat -- lowest three:
+    v=7.15    frag=1.0   wake=10    p=1.00  a=+0.0119  range 4.0-11.0
+    v=7.17    frag=2.0   wake=10    p=0.25  a=+0.0167  range 3.5-10.5
+    v=7.32    frag=1.0   wake=10    p=0.75  a=+0.0092  range 4.0-11.0
+  mono -- lowest three:
+    v=10.16   frag=2.0   wake=45    p=0.10  a=+0.1207  range 3.5-12.5
+    v=10.25   frag=1.0   wake=120   p=0.10  a=+0.1173  range 4.0-14.0
+    v=10.29   frag=1.0   wake=90    p=0.10  a=+0.1189  range 4.0-13.5
+  frag_driven -- lowest three:
+    v=5.23    frag=0.5   wake=20    p=0.75  a=+0.0394  range 3.5-10.5
+    v=5.44    frag=0.5   wake=45    p=0.75  a=+0.0750  range 3.5-11.5
+    v=5.67    frag=0.5   wake=20    p=0.50  a=+0.0352  range 3.5-10.5
+
+------------------------------------------------------------------
+FALSIFIER, as the spec states it
+  'If no combination produces a U on the reported axis under the
+   flat null, the reporting artifact cannot explain the published
+   U on its own, and the finding survives this objection.'
+
+  flat        U rate on reported: 0.03
+  mono        U rate on reported: 0.00
+  frag_driven U rate on reported: 0.00
+
+  The spec's NULL is 'flat OR monotone'. Its FALSIFIER is scoped
+  to FLAT alone. Those are different sets, and the legs disagree,
+  so which one is run decides the answer. See RESULTS.md.

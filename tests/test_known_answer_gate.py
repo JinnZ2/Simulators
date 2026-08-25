@@ -40,6 +40,9 @@ MANIFEST = (
     "nonidentity-census/t6_window_declaration.py::decided_by_tracks_window",
     "nonidentity-census/t6_window_declaration.py::"
     "marginal_majority (REPLACED)",
+    "shape-spec-audit/shadow_read.py::outline_area",
+    "sim-span/sim_span.py::quad_fit",
+    "sim-span/three_column.py::ols",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so

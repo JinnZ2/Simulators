@@ -1,0 +1,105 @@
+ARCHIVAL BIAS IN L -- computed before any archive is opened
+
+1  L is attenuated by the archival delay
+   The excluded reading is dated by when someone WROTE IT DOWN
+   and the artifact survived, not by when it was held.
+   Stipulated archival hazard 0.06/yr (mean delay 16.7 y):
+
+   true lead    observed mean    recovered    P(observed > 0)
+   ----------------------------------------------------------
+   5            -10.6            -2.11        0.27
+   10           -5.6             -0.56        0.47
+   20           4.4              0.22         0.71
+   30           14.4             0.48         0.84
+   50           34.4             0.69         0.95
+
+   A true 20-year lead measures as 4.4 and shows positive in
+   71% of cases. A true 10-year lead measures NEGATIVE on
+   average (-5.6) and is positive 47% of the time -- a coin
+   flip on a real effect twice the mean archival delay.
+   The bias runs AGAINST the hypothesis, which is the good
+   direction: a positive L survives it. A null does not -- F2
+   and F1 become the same observation, and the spec lists them
+   as different falsifiers.
+
+2  F4 is biased toward acceptance by differential archiving
+   The spec's own control is field biologists' notes,
+   abstracts and correspondence -- institutionally archived.
+   Stipulated hazard 0.18/yr against 0.06/yr for trade press.
+
+   true excluded lead     field appears  tie      excluded appears
+   --------------------------------------------------------------
+   0                      0.74           0.05     0.21
+   5                      0.54           0.03     0.43
+   10                     0.40           0.03     0.58
+   20                     0.21           0.01     0.77
+   40                     0.06           0.00     0.93
+
+   At a TRUE lead of zero -- both held it the same year -- the
+   record shows the field first in 74% of cases. F4 would be
+   accepted on a difference in archiving, not in holding.
+   The excluded population needs a true lead of about 8 years
+   before the record shows it first more often than not.
+   Also conservative. Also collapses F4 into F1.
+
+3  what this means for reading a result
+   Both principal biases run against the hypothesis, so:
+     L > 0 survives them        -> the finding is strengthened
+     L ~ 0 does not discriminate -> F1, F2 and F4 return the
+                                    same observation
+   The spec lists F1, F2 and F4 as separate falsifiers. Under
+   archival censoring they are not separable on the L
+   distribution alone. Separating them needs the archival
+   hazard ESTIMATED -- which is doable from the same corpus,
+   by dating artifacts against claimed observation dates. §4
+   already says to record both. That field is the control.
+
+4  the one bias that runs the other way, and is unguarded
+   §5 pre-registers CASE selection. Nothing pre-registers
+   ARTIFACT CODING. If 40% of artifacts are ambiguous and a
+   coder who knows which way the literature moved accepts
+   80% of them where a blind coder accepts 25%, the
+   difference is 22% of the whole corpus -- entered as
+   earlier dates, which inflates L directly.
+   Fix is standard and cheap: code artifacts blind to the
+   direction of the reversal. The spec guards selection and
+   not coding, and coding is where the leniency lives.
+
+5  the label
+   new_q2             True
+   new_q2_mech        True
+   prev_q2            True
+   prev_q2_mech       True
+   previous_present   True
+
+   question-availability, three drops back:
+     Q2 unaskable -- 'Posing the question costs the asker standing'
+     'the label is applied prior to content, so the content never reaches evaluation'
+   here:
+     'Q2 is: reading held, no channel'
+     'no instrument was pointed at them'
+
+   Two different mechanisms under one label. The first is a
+   channel that exists and penalises entry; the second is no
+   channel at all. This spec's §1 distinguishes itself from
+   'solicited and rejected' and not from the previous Q2,
+   because the previous Q2 has been overwritten.
+   Case 021's sense substitution inside the family's own
+   vocabulary -- fourth instance in this tree after `state`,
+   `parity` and 021's own cases.
+
+   It has a consequence. `QA_003` identified the PREVIOUS Q2
+   as `affect routing`, the mechanism uninstrumented recorded
+   as named-in-prose and filed nowhere. That identification
+   does not transfer to this Q2, so whoever files a twelfth
+   mechanism has to say which one -- and if they file this
+   one, `affect routing` is still unfiled.
+   This spec's own title is the better name for what it
+   describes: OBSERVER EXCLUSION, not 'unaskable'.
+
+6  cross-links
+   question-availability      yes
+   uninstrumented             yes
+   report-typing              NO
+   median-case-calibration    NO
+

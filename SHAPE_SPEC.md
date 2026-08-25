@@ -1,6 +1,3 @@
-<!-- SPDX-License-Identifier: CC0-1.0 -->
-<!-- This file is dedicated to the public domain under CC0 1.0. -->
-
 # SHAPE_SPEC
 
 Definition spec. Upstream of every repo that uses the word SHAPE.

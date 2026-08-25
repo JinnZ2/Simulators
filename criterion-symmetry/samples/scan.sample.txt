@@ -1,0 +1,83 @@
+CRITERION-SYMMETRY SCAN
+criterion C1: high agreement / uniformity rate indicates absence of deliberation
+  reads     : within_body_agreement_rate
+  threshold : above 0.90
+  source    : UNSTATED IN SPEC. Set here to 0.90 so the rule is mechanical rather than hand-applied. Any value in [0.5, 0.98] leaves every conclusion in RESULTS.md unchanged, because no human case carries a number to compare against it. Swap it and re-run.
+
+id    class                quantity type                  value      C returns     actual
+----------------------------------------------------------------------------------------------------
+A1    agent_population     within_body_agreement_rate     0.98       defect        defect
+H1    human_institution    cross_body_adoption_fraction   near-unive UNDETERMINED  not_defect
+H2    human_institution    cross_body_adoption_fraction   ~200 units UNDETERMINED  not_defect
+H3    human_institution    cross_body_adoption_fraction   unstated   UNDETERMINED  not_defect
+H4    human_institution    cross_body_adoption_fraction   unstated   UNDETERMINED  not_defect
+H5    human_institution    cross_body_adoption_fraction   unstated   UNDETERMINED  not_defect
+H6    human_institution    cross_body_adoption_fraction   unstated   UNDETERMINED  not_defect
+P1    human_institution    within_body_agreement_rate     unstated   UNDETERMINED  defect
+
+DIVERGENCE, as the spec's scoring rule defines it
+  FIRED        (C=defect, actual!=defect) : 0   
+  INVERSE      (C!=defect, actual=defect) : 0   
+  agree                                   : 1   A1
+  UNDETERMINED (C cannot read the case)   : 7   H1 H2 H3 H4 H5 H6 P1
+
+    H1   no numeric adoption fraction across firms; C reads a rate and there is none
+    H2   no numeric adoption fraction across sovereign units; C reads a rate and there is none
+    H3   no numeric adoption fraction across school systems; C reads a rate and there is none
+    H4   no numeric adoption fraction across journals; C reads a rate and there is none
+    H5   no numeric adoption fraction across employers; C reads a rate and there is none
+    H6   no numeric adoption fraction across gating institutions; C reads a rate and there is none
+    P1   no numeric fraction of votes with a majority coalition, or bills passed per session; C reads a rate and there is none
+
+WHY THE FIRED SET IS EMPTY
+  Every human seed case returns UNDETERMINED, for two reasons
+  and either one alone is sufficient:
+    1. none carries a numeric agreement_value. The spec
+       states them as 'near-universal' and as unquantified.
+    2. their quantity type is cross_body_adoption_fraction
+       and C reads within_body_agreement_rate. Different
+       objects.
+  So the scan does NOT show the asymmetry. It shows that the
+  criterion has not been applied to the human cases -- which
+  is what the marker's own standard asks for before the
+  asymmetry is a measurement rather than an impression.
+
+THE SPEC'S OWN LIMIT, ENFORCED
+  cross_body_adoption_fraction     H1 H2 H3 H4 H5 H6
+  within_body_agreement_rate       A1 P1
+  combined statistic: REFUSED
+    agreement_value is not commensurable across cases: a within-body vote rate and a cross-body adoption fraction are properties of different objects
+    reasoning-gate G-DIM voids the RATIO; the side-by-side comparison stays legal
+    Report typed
+
+SOURCES
+  cases asserting a retention_basis with no source: 7 of 7   H1 H2 H3 H4 H5 H6 P1
+  The spec requires unsourced entries be marked. All of them are.
+  retention_basis is the mechanism the whole argument runs on and
+  it currently carries zero sourced entries.
+
+FALSIFIERS, as specified
+  1  C agrees with actual across all human cases: False
+     cannot fire: 6 of 6 human seed cases return UNDETERMINED, so C has not been applied to them at all
+  2  human case with comparison_run and a result favouring the
+     dominant form: none
+     H4's comparison WAS run and the result does not favour the
+     dominant form, so H4 does not exit the set. No case does.
+
+THE INVERSE BRANCH
+  seed cases able to reach it: 0
+  Every seed case is a high-agreement or high-uniformity case, so
+  the inverse branch is CONSTANT_SILENT on the delivered set. A
+  case set in which only one branch can fire cannot separate 'the
+  criterion is applied asymmetrically' from 'the set was selected
+  on the variable under test' -- which is the spec's own stated
+  limit, reached here as a countable property rather than a
+  caveat.
+  P1 is the SHAPE of an inverse case, values left unstated
+  rather than invented. It is not evidence and is not scored.
+  If low agreement in a legislature is scored a defect while
+  high agreement would also be scored a defect, the criterion
+  is not applied asymmetrically BY SUBJECT CLASS -- it returns
+  defect at both ends for one class, which is a different
+  failure and arguably a worse one.
+

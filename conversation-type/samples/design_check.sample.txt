@@ -1,0 +1,94 @@
+CHECKS ON MARKER.md -- the marker is not edited
+
+1  the residue window, quantified
+   The marker's central design move: measure the 30 min AFTER
+   the call, not during. If arousal decays with time constant
+   tau after the call ends, the share of total excess exposure
+   that falls OUTSIDE a call-window measurement is:
+
+   call (min) tau=5   tau=15  tau=30
+   ----------------------------------
+   2             71%    88%    94%
+   5             50%    75%    86%
+   10            33%    60%    75%
+   20            20%    43%    60%
+   45            10%    25%    40%
+
+   A 5-minute call with a 15-minute decay puts 75% of the
+   exposure outside the window a call-window study measures.
+   The marker's design choice is not a preference; on its own
+   stated mechanism a call-window measurement is looking at the
+   minority of the effect, and the shorter the call the worse
+   it gets. tau is unmeasured -- P1 and P3 are what would
+   estimate it -- and no value here is data.
+
+   It also makes a PREDICTION the marker does not state: a
+   literature that measures inside the call window should
+   return small or null effects for hands-free, and finding
+   that would be consistent with the mechanism rather than
+   against it. Not checked here; the egress gate refuses.
+
+2  'binary, and easy to type per call class'
+   If suspendability is graded and typed as a binary, the cost
+   is attenuation. Recovered correlation vs using the graded
+   quantity itself:
+
+   threshold    uniform    bimodal    reading
+   ----------------------------------------------------
+   0.3          0.784      0.939      
+   0.4          0.834      0.969      
+   0.5          0.858      0.969      best
+   0.6          0.848      0.968      
+   0.7          0.825      0.938      
+
+   Two readings, and the second is the marker's defence.
+   On a UNIFORM spread of call types the binary recovers about
+   85% of the graded signal at the best threshold -- a real but
+   modest loss. On a BIMODAL spread, where most calls are
+   clearly one kind or the other, it recovers nearly all of it.
+   The marker's own three-state list is bimodal in shape:
+   obligated calls and podcasts are not near a boundary.
+   So the binary is cheap IF the distribution is bimodal, and
+   whether it is, is itself an empirical question P4 answers on
+   the way to answering the main one.
+
+3  'Instance: this session. Applied twice, corrected twice.'
+   corpus         : this session's complete transcript
+   records        : 2157
+   first user turn: 'ROWS 3-4: RECORDS EXIST Logged at the time, in files inside '
+   assistant turns: 126
+   search terms   : 26 patterns (listed in TERMS_ADVICE)
+   HITS           : 0
+
+   The corpus runs from the session's first user turn to
+   now, so this is not a post-compaction fragment.
+
+   WHAT THIS ESTABLISHES: the pattern is absent from this
+   session's record under these terms. That is a bounded
+   null, which is exactly what question-availability
+   QA_004 says a Q1 absence needs to be a measurement --
+   produced here about the author, one drop after being
+   specified.
+
+   WHAT IT DOES NOT ESTABLISH, and this matters more:
+     - the marker may not mean this Claude Code session.
+       Content has been relayed from other Claude sessions
+       in this one, twice, marked 'from claude:'.
+     - a keyword scan is stepped around by any paraphrase.
+       nonidentity-census T1-1 measured exactly that
+       failure in a detector built to avoid it.
+     - a null search is not exoneration, and here the
+       direction of interest runs toward reading it as
+       one. Reported as not-found, not as did-not-happen.
+
+4  cross-links
+   link                         mentions   artifact
+   median-case-calibration      0          NO
+   uninstrumented               84         yes
+   question-availability        3          yes
+   report-typing                7          NO
+   `question-availability` exists because the last drop landed
+   it -- third consecutive marker whose named-and-absent set
+   shrinks by exactly the folder built the drop before.
+   `median-case-calibration` is new and absent.
+
