@@ -26,7 +26,7 @@ is not true of the folder. Corrected rather than narrowed.)
 
 | tier | named in the manifest | landed |
 |---|---|---|
-| 1 — exported unchanged | 57 | 16 |
+| 1 — exported unchanged | 57 | 20 |
 | 2 — scrubbed and exported | 7 | 7 |
 | 3 — held back | 12 | 0, and none expected |
 
@@ -41,7 +41,8 @@ Tier 1, landed: `criterion-symmetry`, `rosetta-shape-core`,
 `fairmont-ecological-recovery`, `food-grain-monitor`,
 `semantic-drift-sim`, `geometric-manifold`, `adversarial-prior`,
 `constraint-assembly`, `closure-cost`, `buffer-counted-as-supply`,
-`cross-model-calibration-toolkit`, `energy-english`. Filed as tier 1 by elimination — each was exported,
+`cross-model-calibration-toolkit`, `energy-english`, `earth-systems-physics`,
+`operator-kit`, `voice-cloud-orchestrator`, `coupled-decoupled-verification`. Filed as tier 1 by elimination — each was exported,
 so none is tier 3, and none is in the manifest's tier-2 table. The manifest
 does not label files individually, so tier is inferred here and not carried in
 the files.
@@ -51,12 +52,9 @@ recorded upstream, not a gap here.
 
 ## Cross-refs that do not resolve
 
-The twenty-three files carry 31 links across 22 distinct names. Seven resolve
-to stored files — `refusal-false-positive-log`, `criterion-symmetry`,
-`diversity-collapse-model`, `facility-risk-index`, `alignment-under-coupling`,
-`closure-cost`, `cross-model-calibration-toolkit`, the last of which was on the
-unresolved list until it arrived as a file. Fifteen do not resolve inside the
-folder, but "not in the folder" is not the same as "does not exist",
+The twenty-seven files carry 34 links across 24 distinct names. Ten resolve to
+stored files, including the mutual pair `energy-english` ↔
+`voice-cloud-orchestrator`. Fourteen do not resolve inside the folder, but "not in the folder" is not the same as "does not exist",
 and three kinds sit under that heading.
 
 **Resolves elsewhere in this repo, under the underscore convention.**
@@ -73,17 +71,36 @@ under a near-name: `META_INDEX.md` lists `github.com/JinnZ2/geometric-to-binary`
 and `JinnZ2/CLAUDE.md` calls it Geometric-to-Binary-Computational-Bridge, so one
 artifact carries three name variants and the link matches none exactly.
 
-**Genuinely absent.** `merit-anchoring`, `unnamed-instruments`,
-`question-availability`, `report-typing`, `median-case-calibration`,
-`identity-model-monoculture`, `voice-cloud-orchestrator` — zero hits under
+**Not found anywhere yet** — which is not the same as absent, and the heading
+used to say "genuinely absent" until `voice-cloud-orchestrator` was filed under
+it and arrived in the next batch. With 37 tier-1 files still outstanding, this
+list is a delivery state, not a finding: `merit-anchoring`,
+`unnamed-instruments`, `question-availability`, `report-typing`,
+`median-case-calibration`, `identity-model-monoculture` — zero hits under
 either naming convention. (`emotions-as-sensors` is not absent: it is the
-Emotions-as-Sensors repository, carried in `JinnZ2`.) `tool-off-metrology` is absent too, at 15
+Emotions-as-Sensors repository, carried in `JinnZ2`.)
+
+`tool-off-metrology` is the one name that has held this position across many
+batches at high citation count, so it is the only one worth treating as a real
+gap rather than a pending delivery — which is also what
+`uninstrumented/CLAIM_TABLE.md` concluded independently. `tool-off-metrology` is absent too, at 15
 citations, matching `uninstrumented/CLAIM_TABLE.md` `UNI_043`/`UNI_066`.
 `shape-index` is the interesting one: `predicate-difference/shape_index.py`
 exists and states in its own header that *no shape-index format exists in this
 repository* — a file named for the absent object, inferring the format because
 it is missing, and flagging the inference. So the cited object is absent and
 the repo says so itself.
+
+**One file matches repo content under a different name.**
+`earth-systems-physics` gives as its core equation
+`corruption(trend) = corruption(measurement) × corruption(framework)`, which is
+the L7 headline of `thermal-sensor-degradation-audit/` in this repo — where it
+has spread to `extraction-blindness-sim/`, `model-ecology/`,
+`instrument-epistemology/` and `derivation-discarded/`. Nothing in either name
+points at the other. The file is *also* a repository,
+`github.com/JinnZ2/earth-systems-physics`, cited from `earth_economics/` here
+as the physical engine. So one memory file resolves two ways at once, by name
+to a repo and by content to a folder, and neither route finds the other.
 
 **`energy-english` closes a reference the repo had already flagged as broken.**
 `uninstrumented/CLAIM_TABLE.md` `UNI_104` records it as a failing cross-link —
