@@ -2,13 +2,13 @@
 
 Read against `notes/memory-export/files/`, which is stored verbatim. Nothing
 here is a verdict on the export, and no stored file was modified. Counts are
-recomputed each batch and are a delivery state, not a result — 10 tier-1 files
+recomputed each batch and are a delivery state, not a result — 9 tier-1 files
 are still outstanding.
 
 ## 1. Cross-references, and what "unresolved" means
 
 ```
-54 files   78 links   36 distinct names   28 resolve in folder   8 do not
+55 files   82 links   37 distinct names   29 resolve in folder   8 do not
 ```
 
 "Not in the folder" covers three different situations, and the distinction was
@@ -525,6 +525,19 @@ That is the `null-harness` invariant applied to a prose principle rather than
 to a gate, and it is the counterweight to the general worry about frameworks
 that cannot return a negative.
 
+`calibration-gap-log` is the second, and goes further in one respect: its G3
+section refutes the author's own most attractive leads — the contemporary Red
+Tent as an invented tradition from a 1997 novel, the generic moon lodge as
+modern syncretism, menstrual synchrony as refuted — and then states outright
+that the strongest hormone-verified case in the record is read by its own
+investigator as paternity surveillance, so "the prior framing does NOT survive
+this." It also softens its own sharpest claim against a second source
+(Zimprich 2020 against the heartbeat-counting critique) and keeps the narrower
+version. And its discipline note is the general rule: "the memorable number is
+repeatedly the one that did not replicate."
+
+Same non-verification caveat applies — none of its citations was checked here.
+
 **Not checked here:** the file is the most citation-dense in the export —
 Rosenthal & Fode 1963 with volume and page range, Barber & Silver 1968, Doyen
 et al. 2012, Khalsa 2008 and 2020, Kahneman & Klein 2009, Nisbett & Wilson
@@ -533,6 +546,33 @@ egress refuses the citation sources `nonidentity-census` T2 already recorded
 as blocked, and prior literature claims across the corpus are carried at the
 same status (`ANC_010`, `CD_009`, `RD_015`, `HO_005`). It is the best
 candidate in the export for a verification pass by someone with access.
+
+## 25. The one file that never arrives now has an itemised citation load
+
+`tool-off-metrology` is cited from four stored memory files and three
+`uninstrumented/` cases, and exists in neither repo under either naming
+convention. It has held that position across every batch.
+
+What is new is that `calibration-gap-log` routes its interoception result to it
+**"as its third instance"** — an ordinal. Something is maintaining a count in a
+file nothing here contains.
+
+The citation inventory, quoted rather than synthesised:
+
+| citing file | what it routes there |
+|---|---|
+| `recent-work` | "Position carried into" — micro-skill decay; competence collapse when the tool set is removed |
+| `median-case-calibration` | operator skill has no composition assay; nearest proxy is events that did not occur, unmeasurable by construction |
+| `sensing-spine` | "Same engine as" — thresholds measured in untrained populations, recorded as species limits |
+| `calibration-gap-log` | "third instance" — heartbeat counting passable with zero interoception; the task rewards population-norm knowledge over sensing |
+| `uninstrumented/` cases 011, 014, 016 | competence-residual; unaided baseline; the baseline destroyed by the thing being measured |
+
+**Deliberately not reconstructed.** The one prior reconstruction attempted in
+this repo family — `category-weld`'s scorer, rebuilt from its call sites —
+was wrong in a way that produced a finding against the mechanism, which the
+delivered file then refuted (`CW_004`). An inventory of what cites a file is a
+measurement; a synthesis of what it must therefore contain is authorship, and
+it would be authorship of the one file every other file defers to.
 
 ## What was not checked, deliberately
 
