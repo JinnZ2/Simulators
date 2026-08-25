@@ -2,13 +2,13 @@
 
 Read against `notes/memory-export/files/`, which is stored verbatim. Nothing
 here is a verdict on the export, and no stored file was modified. Counts are
-recomputed each batch and are a delivery state, not a result — 26 tier-1 files
+recomputed each batch and are a delivery state, not a result — 24 tier-1 files
 are still outstanding.
 
 ## 1. Cross-references, and what "unresolved" means
 
 ```
-38 files   40 links   26 distinct names   13 resolve in folder   13 do not
+40 files   47 links   26 distinct names   13 resolve in folder   13 do not
 ```
 
 "Not in the folder" covers three different situations, and the distinction was
@@ -226,6 +226,48 @@ using output alone.
 
 More access and no access, both declining injection-plus-scoring as the
 instrument. Neither file points at the other.
+
+## 13. A `NOT_IN_TREE` in the sibling findings file now has its referent — and
+its checker cannot see it
+
+`notes/FINDINGS_D2.md` records one instance of seven as `NOT_IN_TREE`:
+*studies varying a CUE and reporting on the CONDITION. Not in this repo,
+literature claim not checked.*
+
+`observation-condition` is that material. Its INSTRUMENT GAP section reads
+"evaluation-awareness studies vary the CUE — verbalized awareness: inject,
+remove, resample — and report on the CONDITION. Cue off, condition still on."
+It is now in this repo, two directories from the checker.
+
+Re-running `check_d2.py` still prints `NOT_IN_TREE`, and the reason is
+structural: that row is hardcoded `"resolution": NOT_IN_TREE, "path": None,
+"marker": None`. `notes/README.md` says resolution is "a file plus a literal
+marker inside it, checked at run time" — true of the VERIFIED rows, and this
+row is an assertion in the shape of a check. It will keep reporting
+`NOT_IN_TREE` whatever lands in the tree.
+
+Not repaired here. `check_d2.py` is another checker's instrument, and the
+folder rule is that a checker's disagreements go in its own output. The change
+needed is one row's `path` and `marker`; whether to make it is the operator's
+call.
+
+The second half of that row still stands either way — the literature claim is
+not verified. `observation-condition` cites arXiv 2505.23836 and arXiv
+2605.05835, and neither was checked here.
+
+## 14. Two more names the repo recorded as broken now have referents
+
+`uninstrumented/CLAIM_TABLE.md` `UNI_066` records that "017 Q4 cites
+`moral-claim-decomposer`, which does not exist; `moral-decomposer` does, and
+the described work is a fair summary". The memory file `moral-claim-decomposer`
+has now arrived, and its "Built" section checks out against
+`category-weld/welds/hierarchy.json` — 5 components, 5 divergences, and the
+component ids match its list exactly: `nested_containment`,
+`organizing_abstraction`, `imposed_ordering`, `ordering_origin`, `cut_rate`.
+
+Same shape as `energy-english` at `UNI_104` (finding 6). Both times the repo's
+audit was right that the reference failed and had no way to see its referent.
+Three such names have now resolved from the memory side.
 
 ## What was not checked, deliberately
 
