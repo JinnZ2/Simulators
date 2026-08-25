@@ -6509,7 +6509,26 @@ underneath).
   sources, 14 upward cells carry 8 stated directions, 0 magnitudes and 0
   units**, with the blank template the strongest single case since its
   purpose statements are what a form *asks for* rather than what one
-  company wrote. **`FM_020`: S1a's downward rule has two
+  company wrote. **A third-party company brief then arrived as a PDF
+  plus a separate paste, and `FM_032`: the cross-check FAILED** — a stdlib
+  extraction recovers 6 of 19 distinctive strings and **0 of the 4
+  figures**, because PDF splits text runs for kerning inside `TJ` arrays
+  (`[($)-0.6 (1)]TJ`), so a first pass produced `$754`/`$32`/`$00`, which
+  are **artifacts and were never reported as content**; the document
+  enters on the paste alone, and a naive PDF extractor would have produced
+  numbers that look like data and are wrong. **`FM_033`, the first empty
+  upward arm in the corpus:** every prior source states a purpose and this
+  one states none, so `upward_stop` is **ABSENT** — the document is not
+  purposeless (it is career-preparation material) but **its use is a
+  property of where it is filed**, and a copy of the text carries none of
+  it. **`FM_034`:** the downward arm is four third-party figures, none
+  computed, **none with a source named**, no relation stated between any
+  two — while the one economic relation it does state (*"carry the highest
+  margins"*) is `+ / ABSENT / ABSENT` about someone else's economics, and
+  the arithmetic it declines to do is available from its own numbers (net
+  margin **3.03%**, P/S 16.2, P/E 536). **`FM_035`: sixteen upward cells,
+  five sources, zero magnitudes, zero units** — and the first source to
+  grow the ABSENT column rather than the ASSERTED one. **`FM_020`: S1a's downward rule has two
   states and needed three** — it distinguishes *computed* from
   *physically existing but uncalculated*, and a rate card is neither, a
   number the organisation produced and stated, underived in both
