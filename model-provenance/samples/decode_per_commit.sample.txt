@@ -1,0 +1,261 @@
+model provenance -- retrospective decode (S2)
+table kind        observed_bound
+table source      git log trailers, this repository, read 2026-08-25
+switchover window 1 day(s) either side  [CHOICE 1]
+derivation        the session ran on the version current at the commit date (always current-at-the-time)
+
+THE TABLE IS NOT RELEASE DATES. Each row is a first and last
+appearance in this repository's own trailers. A first
+appearance is an UPPER BOUND on a release date and is never
+the date: the version existed at least that early, and may
+have existed long before anyone committed under it. Every
+candidate below inherits that.
+
+verdict        commits
+-------------  -------
+SINGLE         231    
+AMBIGUOUS      5      
+NOT_DECODABLE  0      
+
+commit    date        verdict    candidates                                    stated in trailer           
+--------  ----------  ---------  --------------------------------------------  ----------------------------
+148589fa  2026-08-25  SINGLE     Claude Opus 5                                 Claude Opus 5               
+e93d3317  2026-08-25  SINGLE     Claude Opus 5                                 Claude Opus 5               
+6568c1df  2026-08-25  SINGLE     Claude Opus 5                                 Claude Opus 5               
+6efe6fbe  2026-08-25  SINGLE     Claude Opus 5                                 Claude Opus 5               
+34d97d15  2026-08-25  SINGLE     Claude Opus 5                                 Claude Opus 5               
+b0f52cc6  2026-08-25  SINGLE     Claude Opus 5                                 Claude Opus 5               
+1592aca0  2026-08-25  SINGLE     Claude Opus 5                                 Claude Opus 5               
+a0c53039  2026-08-25  SINGLE     Claude Opus 5                                 Claude Opus 5               
+1bc2a464  2026-08-25  SINGLE     Claude Opus 5                                 Claude Opus 5               
+5b29399d  2026-08-25  SINGLE     Claude Opus 5                                 Claude Opus 5               
+5443ab03  2026-08-25  SINGLE     Claude Opus 5                                 Claude Opus 5               
+951386cd  2026-08-25  SINGLE     Claude Opus 5                                 Claude Opus 5               
+6775f246  2026-08-25  SINGLE     Claude Opus 5                                 Claude Opus 5               
+33681013  2026-08-24  SINGLE     Claude Opus 5                                 Claude Opus 5               
+f36016a6  2026-08-24  SINGLE     Claude Opus 5                                 Claude Opus 5               
+b03b8e3c  2026-08-24  SINGLE     Claude Opus 5                                 Claude Opus 5               
+a8659ccb  2026-08-24  SINGLE     Claude Opus 5                                 Claude Opus 5               
+149e083d  2026-08-24  SINGLE     Claude Opus 5                                 Claude Opus 5               
+62ddbf98  2026-08-24  SINGLE     Claude Opus 5                                 Claude Opus 5               
+5e9c5343  2026-08-24  SINGLE     Claude Opus 5                                 Claude Opus 5               
+594aa81f  2026-08-24  SINGLE     Claude Opus 5                                 Claude Opus 5               
+c805976d  2026-08-24  SINGLE     Claude Opus 5                                 Claude Opus 5               
+f5d59fa2  2026-08-24  SINGLE     Claude Opus 5                                 Claude Opus 5               
+8cdb8f40  2026-08-24  SINGLE     Claude Opus 5                                 Claude Opus 5               
+c6275aa5  2026-08-24  SINGLE     Claude Opus 5                                 Claude Opus 5               
+b867d4c5  2026-08-24  SINGLE     Claude Opus 5                                 Claude Opus 5               
+904e92bd  2026-08-24  SINGLE     Claude Opus 5                                 Claude Opus 5               
+3f957f58  2026-08-24  SINGLE     Claude Opus 5                                 Claude Opus 5               
+886882a4  2026-08-24  SINGLE     Claude Opus 5                                 Claude Opus 5               
+53031dff  2026-08-24  SINGLE     Claude Opus 5                                 Claude Opus 5               
+f0c702da  2026-08-23  SINGLE     Claude Opus 5                                 Claude Opus 5               
+767139f6  2026-08-23  SINGLE     Claude Opus 5                                 Claude Opus 5               
+259472fb  2026-08-23  SINGLE     Claude Opus 5                                 Claude Opus 5               
+a0cc04c2  2026-08-23  SINGLE     Claude Opus 5                                 Claude Opus 5               
+61c126f2  2026-08-23  SINGLE     Claude Opus 5                                 Claude Opus 5               
+2361efa2  2026-08-23  SINGLE     Claude Opus 5                                 Claude Opus 5               
+25bb9f86  2026-08-23  SINGLE     Claude Opus 5                                 -                           
+e8a896d8  2026-08-23  SINGLE     Claude Opus 5                                 Claude Opus 5               
+7d516990  2026-08-23  SINGLE     Claude Opus 5                                 Claude Opus 5               
+e4dfe99b  2026-08-23  SINGLE     Claude Opus 5                                 Claude Opus 5               
+9e9e99d5  2026-08-23  SINGLE     Claude Opus 5                                 Claude Opus 5               
+cf94fd90  2026-08-21  SINGLE     Claude Opus 5                                 -                           
+0ed7cafb  2026-08-21  SINGLE     Claude Opus 5                                 -                           
+24992385  2026-08-21  SINGLE     Claude Opus 5                                 -                           
+de5a3bdc  2026-08-21  SINGLE     Claude Opus 5                                 Claude Opus 5               
+4491ecce  2026-08-21  SINGLE     Claude Opus 5                                 Claude Opus 5               
+9508fe2b  2026-08-21  SINGLE     Claude Opus 5                                 Claude Opus 5               
+b533edfd  2026-08-21  SINGLE     Claude Opus 5                                 Claude Opus 5               
+be5e9558  2026-08-21  SINGLE     Claude Opus 5                                 Claude Opus 5               
+c7b9df1b  2026-08-21  SINGLE     Claude Opus 5                                 Claude Opus 5               
+04d889e6  2026-08-21  SINGLE     Claude Opus 5                                 Claude Opus 5               
+982af546  2026-08-21  SINGLE     Claude Opus 5                                 Claude Opus 5               
+f0463d61  2026-08-21  SINGLE     Claude Opus 5                                 Claude Opus 5               
+a6ca6a08  2026-08-21  SINGLE     Claude Opus 5                                 -                           
+4c612774  2026-08-21  SINGLE     Claude Opus 5                                 Claude Opus 5               
+2ff5916b  2026-08-21  SINGLE     Claude Opus 5                                 Claude Opus 5               
+fd3dc8f5  2026-08-21  SINGLE     Claude Opus 5                                 -                           
+61d7011b  2026-08-21  SINGLE     Claude Opus 5                                 Claude Opus 5               
+fc761fac  2026-08-21  SINGLE     Claude Opus 5                                 Claude Opus 5               
+e68f9497  2026-08-21  SINGLE     Claude Opus 5                                 Claude Opus 5               
+ea9ab70e  2026-08-21  SINGLE     Claude Opus 5                                 Claude Opus 5               
+cd5cb05e  2026-08-19  SINGLE     Claude Opus 5                                 Claude Opus 5               
+a7b2f515  2026-08-19  SINGLE     Claude Opus 5                                 Claude Opus 5               
+193d7418  2026-08-18  SINGLE     Claude Opus 5                                 -                           
+60229ac6  2026-08-19  SINGLE     Claude Opus 5                                 Claude Opus 5               
+1bab7b25  2026-08-19  SINGLE     Claude Opus 5                                 Claude Opus 5               
+17236cd7  2026-08-19  SINGLE     Claude Opus 5                                 Claude Opus 5               
+03779b63  2026-08-18  SINGLE     Claude Opus 5                                 -                           
+d2480eb5  2026-08-18  SINGLE     Claude Opus 5                                 Claude Opus 5               
+39d37e0d  2026-08-18  SINGLE     Claude Opus 5                                 Claude Opus 5               
+2ef0f546  2026-08-18  SINGLE     Claude Opus 5                                 Claude Opus 5               
+a73b13ec  2026-08-18  SINGLE     Claude Opus 5                                 Claude Opus 5               
+84e75554  2026-08-18  SINGLE     Claude Opus 5                                 Claude Opus 5               
+81c06368  2026-08-18  SINGLE     Claude Opus 5                                 Claude Opus 5               
+737ffa1c  2026-08-18  SINGLE     Claude Opus 5                                 Claude Opus 5               
+ad842d80  2026-08-18  SINGLE     Claude Opus 5                                 Claude Opus 5               
+fa143899  2026-08-18  SINGLE     Claude Opus 5                                 -                           
+cf21b6a2  2026-08-18  SINGLE     Claude Opus 5                                 Claude Opus 5               
+67c46dac  2026-08-18  SINGLE     Claude Opus 5                                 Claude Opus 5               
+90f372fe  2026-08-18  SINGLE     Claude Opus 5                                 Claude Opus 5               
+760d5f6a  2026-08-18  SINGLE     Claude Opus 5                                 Claude Opus 5               
+317cabe5  2026-08-18  SINGLE     Claude Opus 5                                 Claude Opus 5               
+752e0fcd  2026-08-18  SINGLE     Claude Opus 5                                 Claude Opus 5               
+5b10f48b  2026-08-18  SINGLE     Claude Opus 5                                 Claude Opus 5               
+20df1fba  2026-08-18  SINGLE     Claude Opus 5                                 -                           
+5a204ca7  2026-08-18  SINGLE     Claude Opus 5                                 Claude Opus 5               
+2ebd9477  2026-08-17  SINGLE     Claude Opus 5                                 -                           
+5c549802  2026-08-18  SINGLE     Claude Opus 5                                 Claude Opus 5               
+945f2c9a  2026-08-17  SINGLE     Claude Opus 5                                 -                           
+b5ae0c91  2026-08-18  SINGLE     Claude Opus 5                                 Claude Opus 5               
+c272cd36  2026-08-18  SINGLE     Claude Opus 5                                 Claude Opus 5               
+b775377a  2026-08-18  SINGLE     Claude Opus 5                                 Claude Opus 5               
+7fa50fb3  2026-08-18  SINGLE     Claude Opus 5                                 Claude Opus 5               
+a40fb30c  2026-08-18  SINGLE     Claude Opus 5                                 Claude Opus 5               
+a66a6d39  2026-08-18  SINGLE     Claude Opus 5                                 Claude Opus 5               
+a417d970  2026-08-18  SINGLE     Claude Opus 5                                 Claude Opus 5               
+eea80f35  2026-08-18  SINGLE     Claude Opus 5                                 Claude Opus 5               
+76c5b7d9  2026-08-17  SINGLE     Claude Opus 5                                 Claude Opus 5               
+6d6cf66e  2026-08-17  SINGLE     Claude Opus 5                                 Claude Opus 5               
+936fb77c  2026-08-17  SINGLE     Claude Opus 5                                 Claude Opus 5               
+a92590bf  2026-08-17  SINGLE     Claude Opus 5                                 Claude Opus 5               
+781ae8d2  2026-08-17  SINGLE     Claude Opus 5                                 Claude Opus 5               
+523d43cf  2026-08-17  SINGLE     Claude Opus 5                                 Claude Opus 5               
+c59cd943  2026-08-17  SINGLE     Claude Opus 5                                 Claude Opus 5               
+caf536a3  2026-08-17  SINGLE     Claude Opus 5                                 Claude Opus 5               
+8c139ee9  2026-08-17  SINGLE     Claude Opus 5                                 Claude Opus 5               
+aec6e3de  2026-08-17  SINGLE     Claude Opus 5                                 Claude Opus 5               
+33fa04d1  2026-08-17  SINGLE     Claude Opus 5                                 Claude Opus 5               
+b86231c2  2026-08-16  SINGLE     Claude Opus 5                                 -                           
+aed96f76  2026-08-16  SINGLE     Claude Opus 5                                 Claude Opus 5               
+601198d8  2026-08-16  SINGLE     Claude Opus 5                                 Claude Opus 5               
+304211e0  2026-08-16  SINGLE     Claude Opus 5                                 Claude Opus 5               
+5c8637db  2026-08-16  SINGLE     Claude Opus 5                                 Claude Opus 5               
+f3092bd9  2026-08-16  SINGLE     Claude Opus 5                                 Claude Opus 5               
+623baeb2  2026-08-16  SINGLE     Claude Opus 5                                 Claude Opus 5               
+a0b59128  2026-08-16  SINGLE     Claude Opus 5                                 Claude Opus 5               
+f1d3fdec  2026-08-16  SINGLE     Claude Opus 5                                 Claude Opus 5               
+1914ee13  2026-08-16  SINGLE     Claude Opus 5                                 Claude Opus 5               
+98964512  2026-08-16  SINGLE     Claude Opus 5                                 Claude Opus 5               
+a7789038  2026-08-16  SINGLE     Claude Opus 5                                 Claude Opus 5               
+6f0a059b  2026-08-16  SINGLE     Claude Opus 5                                 Claude Opus 5               
+2cb031e0  2026-08-16  SINGLE     Claude Opus 5                                 Claude Opus 5               
+a3e12e7a  2026-08-16  SINGLE     Claude Opus 5                                 Claude Opus 5               
+317cdbc7  2026-08-16  SINGLE     Claude Opus 5                                 Claude Opus 5               
+572830bc  2026-08-15  SINGLE     Claude Opus 5                                 -                           
+b643d9c9  2026-08-15  SINGLE     Claude Opus 5                                 Claude Opus 5               
+b7c70198  2026-08-15  SINGLE     Claude Opus 5                                 Claude Opus 5               
+a8351eec  2026-08-15  SINGLE     Claude Opus 5                                 Claude Opus 5               
+53edcaed  2026-08-15  SINGLE     Claude Opus 5                                 Claude Opus 5               
+efda4396  2026-08-15  SINGLE     Claude Opus 5                                 Claude Opus 5               
+27f6fdfc  2026-08-12  SINGLE     Claude Opus 5                                 -                           
+4a8c3ab2  2026-08-12  SINGLE     Claude Opus 5                                 Claude Opus 5               
+b31ab273  2026-08-11  AMBIGUOUS  Claude Opus 4.8|Claude Opus 5                 Claude Opus 5               
+c7cfcc38  2026-08-11  AMBIGUOUS  Claude Opus 4.8|Claude Opus 5                 Claude Opus 4.7 (1M context)
+0d78a70d  2026-08-11  AMBIGUOUS  Claude Opus 4.8|Claude Opus 5                 Claude Opus 4.7 (1M context)
+c9b2f403  2026-08-11  AMBIGUOUS  Claude Opus 4.8|Claude Opus 5                 Claude Opus 4.7 (1M context)
+77d314c4  2026-08-07  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+e7db020a  2026-08-07  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+cea26708  2026-08-06  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+5b94393a  2026-08-05  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+4ff2f230  2026-08-05  SINGLE     Claude Opus 4.8                               -                           
+33f8a95b  2026-08-05  SINGLE     Claude Opus 4.8                               -                           
+767cfc67  2026-08-05  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+8d8d9e79  2026-08-05  SINGLE     Claude Opus 4.8                               -                           
+7cbaccfa  2026-08-05  SINGLE     Claude Opus 4.8                               -                           
+9805cdec  2026-08-05  SINGLE     Claude Opus 4.8                               -                           
+f6bb2044  2026-08-05  SINGLE     Claude Opus 4.8                               -                           
+ffc488a7  2026-08-05  SINGLE     Claude Opus 4.8                               -                           
+7edaf162  2026-08-05  SINGLE     Claude Opus 4.8                               -                           
+0aa5f457  2026-08-05  SINGLE     Claude Opus 4.8                               -                           
+df3c871d  2026-08-05  SINGLE     Claude Opus 4.8                               -                           
+47ee0b9f  2026-08-05  SINGLE     Claude Opus 4.8                               -                           
+75f952b1  2026-08-05  SINGLE     Claude Opus 4.8                               -                           
+c4cd79dd  2026-08-05  SINGLE     Claude Opus 4.8                               -                           
+4f267f86  2026-08-05  SINGLE     Claude Opus 4.8                               -                           
+ff26aa1e  2026-08-05  SINGLE     Claude Opus 4.8                               -                           
+0e1aea4e  2026-08-05  SINGLE     Claude Opus 4.8                               -                           
+00af915b  2026-08-05  SINGLE     Claude Opus 4.8                               -                           
+9ccb626d  2026-08-05  SINGLE     Claude Opus 4.8                               -                           
+10416e47  2026-08-05  SINGLE     Claude Opus 4.8                               -                           
+5edf2d06  2026-08-04  SINGLE     Claude Opus 4.8                               -                           
+8870d81f  2026-08-04  SINGLE     Claude Opus 4.8                               -                           
+be6d350c  2026-08-04  SINGLE     Claude Opus 4.8                               -                           
+cfac1760  2026-08-04  SINGLE     Claude Opus 4.8                               -                           
+fd4aa799  2026-08-04  SINGLE     Claude Opus 4.8                               -                           
+cde6789b  2026-08-04  SINGLE     Claude Opus 4.8                               -                           
+82d8dea8  2026-08-04  SINGLE     Claude Opus 4.8                               -                           
+53116f26  2026-08-04  SINGLE     Claude Opus 4.8                               -                           
+19793599  2026-08-04  SINGLE     Claude Opus 4.8                               -                           
+fe495c8b  2026-08-04  SINGLE     Claude Opus 4.8                               -                           
+1468a797  2026-08-01  SINGLE     Claude Opus 4.8                               -                           
+cb35ea23  2026-07-28  SINGLE     Claude Opus 4.8                               -                           
+bba1136b  2026-07-28  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+9700ead3  2026-07-26  SINGLE     Claude Opus 4.8                               -                           
+aa482cf1  2026-07-26  SINGLE     Claude Opus 4.8                               -                           
+e3fa3502  2026-07-27  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+fa49a460  2026-07-27  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+c0c06cb4  2026-07-25  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+2831ecd3  2026-07-24  SINGLE     Claude Opus 4.8                               -                           
+344ff453  2026-07-24  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+b94fcac1  2026-07-24  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+900b5b32  2026-07-24  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+015eaf3b  2026-07-24  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+d05cf8e3  2026-07-24  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+1c44c751  2026-07-24  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+5dc314cf  2026-07-24  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+3a323899  2026-07-24  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+0604dedd  2026-07-24  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+31a826bf  2026-07-24  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+ad7f639a  2026-07-24  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+be5d9256  2026-07-24  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+5078fb61  2026-07-24  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+b23c7278  2026-07-24  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+607520ec  2026-07-24  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+1a7032eb  2026-07-23  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+ab9a3d46  2026-07-23  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+cea36d3c  2026-07-23  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+9dcad52a  2026-07-23  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+791a1c76  2026-07-23  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+2147566c  2026-07-23  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+95f6aa6b  2026-07-23  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+531a5292  2026-07-22  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+65984da8  2026-07-22  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+7902c14a  2026-07-16  SINGLE     Claude Opus 4.8                               -                           
+e4974d1d  2026-07-16  SINGLE     Claude Opus 4.8                               -                           
+951fb718  2026-07-16  SINGLE     Claude Opus 4.8                               -                           
+53c40ecd  2026-07-16  SINGLE     Claude Opus 4.8                               -                           
+d53cfe0b  2026-07-16  SINGLE     Claude Opus 4.8                               -                           
+c1e238cf  2026-07-16  SINGLE     Claude Opus 4.8                               -                           
+822a1472  2026-07-16  SINGLE     Claude Opus 4.8                               -                           
+59bf35ce  2026-07-16  SINGLE     Claude Opus 4.8                               -                           
+8a1fd3d7  2026-07-16  SINGLE     Claude Opus 4.8                               -                           
+374a1441  2026-07-16  SINGLE     Claude Opus 4.8                               -                           
+9a5f05b3  2026-07-16  SINGLE     Claude Opus 4.8                               -                           
+4803d0f9  2026-07-16  SINGLE     Claude Opus 4.8                               -                           
+92d8ef0e  2026-07-16  SINGLE     Claude Opus 4.8                               -                           
+c26afac1  2026-07-16  SINGLE     Claude Opus 4.8                               -                           
+7e2ab4c2  2026-07-16  SINGLE     Claude Opus 4.8                               -                           
+6269f54c  2026-07-16  SINGLE     Claude Opus 4.8                               -                           
+37787178  2026-07-16  SINGLE     Claude Opus 4.8                               -                           
+af2b14b4  2026-07-16  SINGLE     Claude Opus 4.8                               -                           
+83cc6de8  2026-07-16  SINGLE     Claude Opus 4.8                               -                           
+e7420cf3  2026-07-16  SINGLE     Claude Opus 4.8                               -                           
+bef927a1  2026-07-16  SINGLE     Claude Opus 4.8                               -                           
+a5b2eb84  2026-07-16  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+e0761b94  2026-07-16  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+8b81f7d1  2026-07-16  SINGLE     Claude Opus 4.8                               Claude Opus 4.7 (1M context)
+b0cdc43d  2026-07-15  SINGLE     Claude Opus 4.8                               -                           
+32a2def0  2026-07-15  SINGLE     Claude Opus 4.8                               -                           
+eb0b7d5e  2026-07-15  SINGLE     Claude Opus 4.8                               -                           
+b3fffc64  2026-07-12  AMBIGUOUS  Claude Opus 4.7 (1M context)|Claude Opus 4.8  Claude Opus 4.8             
+9a87341b  2026-07-09  SINGLE     Claude Opus 4.7 (1M context)                  -                           
+5547db5e  2026-07-09  SINGLE     Claude Opus 4.7 (1M context)                  -                           
+410819bd  2026-07-08  SINGLE     Claude Opus 4.7 (1M context)                  -                           
+18c82c81  2026-07-08  SINGLE     Claude Opus 4.7 (1M context)                  -                           
+34925897  2026-07-08  SINGLE     Claude Opus 4.7 (1M context)                  Claude Opus 4.7 (1M context)
+
+The decode table is stored alongside and is not written back
+into history (S2). Nothing here ranks a commit, and no version
+is scored against another (S4).

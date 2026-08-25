@@ -1,0 +1,53 @@
+{
+  "_note": [
+    "S2 asks for 'the release-date table for the model line'. That table",
+    "is NOT AVAILABLE in this environment: the egress policy is an",
+    "allowlist and the publisher's release notes are not reachable, and a",
+    "table carried from memory is the status this repository records as",
+    "ANC_010 / CD_009 / RD_015 / HO_005 -- carried, unverified, and not",
+    "load-bearing.",
+    "",
+    "So this file ships the substitute the repository can produce itself,",
+    "and labels it as one. Each row is an OBSERVED BOUND, taken from the",
+    "Co-Authored-By trailers already in this repo's git history. An",
+    "observed first appearance is an UPPER BOUND on a release date and is",
+    "never the release date: the model existed at least that early, and",
+    "may have existed much earlier with nobody committing under it.",
+    "",
+    "Every decode produced from this table inherits that. The decoder",
+    "prints the inheritance on every run rather than in a footnote.",
+    "",
+    "To use real release dates: replace the rows, set kind to",
+    "'release_date' and source to the publisher's page. The decoder reads",
+    "kind and changes what it says about the result; it does not need any",
+    "other change."
+  ],
+  "table_kind": "observed_bound",
+  "source": "git log trailers, this repository, read 2026-08-25",
+  "rows": [
+    {
+      "version": "Claude Opus 4.7 (1M context)",
+      "first_seen": "2026-07-08",
+      "last_seen": "2026-08-11",
+      "n_commits": 40,
+      "kind": "observed_bound",
+      "source": "Co-Authored-By trailer"
+    },
+    {
+      "version": "Claude Opus 4.8",
+      "first_seen": "2026-07-12",
+      "last_seen": "2026-07-12",
+      "n_commits": 1,
+      "kind": "observed_bound",
+      "source": "Co-Authored-By trailer"
+    },
+    {
+      "version": "Claude Opus 5",
+      "first_seen": "2026-08-11",
+      "last_seen": "2026-08-25",
+      "n_commits": 118,
+      "kind": "observed_bound",
+      "source": "Co-Authored-By trailer"
+    }
+  ]
+}

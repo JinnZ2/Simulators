@@ -1,0 +1,30 @@
+provenance selftest
+  a stated model is recorded as self-reported                PASS got=('Some Model 9', 'self_reported') want=('Some Model 9', 'self_reported')
+  no model gives UNKNOWN, not a blank                        PASS got=('UNKNOWN', 'NO_BUILD_STRING') want=('UNKNOWN', 'NO_BUILD_STRING')
+  withheld is a different state from unavailable             PASS got='WITHHELD' want='WITHHELD'
+  a bare UNKNOWN with no reason is refused                   PASS got='refused' want='refused'
+  there is no inference path and asking for one raises       PASS got='raised' want='raised'
+  an empty model string is not a self-report                 PASS got='UNKNOWN' want='UNKNOWN'
+  a date inside one span decodes SINGLE                      PASS got=('SINGLE', ['A']) want=('SINGLE', ['A'])
+  a date on a boundary decodes AMBIGUOUS with both, no pick  PASS got=('AMBIGUOUS', ['A', 'B']) want=('AMBIGUOUS', ['A', 'B'])
+  a date before the table is NOT_DECODABLE                   PASS got='NOT_DECODABLE' want='NOT_DECODABLE'
+  and NOT_DECODABLE emits no candidate rather than a guess   PASS got=[] want=[]
+  a single candidate is still a list                         PASS got=True want=True
+  every verdict carries the assumption as its derivation     PASS got=[True, True, True] want=[True, True, True]
+  widening the window moves a SINGLE to AMBIGUOUS            PASS got=('SINGLE', 'AMBIGUOUS') want=('SINGLE', 'AMBIGUOUS')
+  day arithmetic: one day apart                              PASS got=1 want=1
+  day arithmetic: across a month                             PASS got=1 want=1
+  day arithmetic: 2026 is not a leap year                    PASS got=365 want=365
+  a trailer states a model                                   PASS got='Claude Opus 5' want='Claude Opus 5'
+  a parenthetical survives                                   PASS got='Claude Opus 4.7 (1M context)' want='Claude Opus 4.7 (1M context)'
+  a human co-author is not a model                           PASS got=None want=None
+  an empty trailer is None, not a string                     PASS got=None want=None
+  verify separates its five outcomes                         PASS got=(1, 2, 1, 1) want=(1, 2, 1, 1)
+  a same-day switchover in order is not a counterexample     PASS got=0 want=0
+  and reversing the clock within the day is one              PASS got=1 want=1
+  the emitted report is clean under the declared exemption   PASS got=True want=True
+  and only the declared vocabulary fires without the mask    PASS got=True want=True
+  a planted grading word is caught through the exemption     PASS got=False want=False
+  the only git verb in this module is a read                 PASS got=['log'] want=['log']
+  an empty forward log says so rather than rendering blank   PASS got=True want=True
+SELFTEST PASS (0 checks failed)

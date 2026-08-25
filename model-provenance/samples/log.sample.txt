@@ -1,0 +1,15 @@
+model provenance -- forward log (S1)
+records  1
+
+Self-report only. This module has no path that derives a model
+identifier from behaviour, output, timing or history; the
+function that would is infer_model(), which raises.
+
+date        model as self-reported  source   reason    repo               branch                                    
+----------  ----------------------  -------  --------  -----------------  ------------------------------------------
+2026-08-25  UNKNOWN                 UNKNOWN  WITHHELD  JinnZ2/Simulators  claude/instance-logs-schema-mapping-s8qb5p
+
+state          records
+-------------  -------
+self-reported  0      
+UNKNOWN        1      

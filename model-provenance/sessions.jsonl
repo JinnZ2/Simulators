@@ -1,0 +1,11 @@
+# S1 forward log. One JSON object per line, appended at session open by
+# `provenance.py open`. Never edited in place; a correction is a new row.
+#
+# The first row is UNKNOWN with reason WITHHELD, and that is a state
+# rather than a failure. This session operates under a standing
+# instruction against writing a model identifier into any artifact
+# pushed to a repository. S1 says: if the build string is unavailable,
+# write UNKNOWN. Unavailable is not what happened here -- the string was
+# available and was not written -- so the schema separates the two and
+# the row says which. See AUDIT_NOTES.md MP_006.
+{"branch": "claude/instance-logs-schema-mapping-s8qb5p", "date": "2026-08-25", "model_self_reported": "UNKNOWN", "repo": "JinnZ2/Simulators", "source": "UNKNOWN", "unknown_reason": "WITHHELD"}

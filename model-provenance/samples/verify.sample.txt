@@ -1,0 +1,102 @@
+model provenance -- retrospective decode (S2)
+table kind        observed_bound
+table source      git log trailers, this repository, read 2026-08-25
+switchover window 1 day(s) either side  [CHOICE 1]
+derivation        the session ran on the version current at the commit date (always current-at-the-time)
+
+THE TABLE IS NOT RELEASE DATES. Each row is a first and last
+appearance in this repository's own trailers. A first
+appearance is an UPPER BOUND on a release date and is never
+the date: the version existed at least that early, and may
+have existed long before anyone committed under it. Every
+candidate below inherits that.
+
+S2 scored against the commits that state a version.
+The statement comes from the Co-Authored-By trailer, which is
+S1's self-report arriving through a channel nobody designed for
+it. Where a decode is AMBIGUOUS no pick is made, so the two
+ambiguous rows below are reported apart from the single ones.
+
+outcome                              commits
+-----------------------------------  -------
+decode SINGLE, matches trailer       118    
+decode SINGLE, differs from trailer  36     
+decode AMBIGUOUS, contains trailer   2      
+decode AMBIGUOUS, excludes trailer   3      
+no version stated                    77     
+
+S3 -- the assumption scored rather than presumed.
+
+quantity                                      value
+--------------------------------------------  -----
+commits stating a table version               159  
+stating an earlier version after a later one  39   
+assumption holds on this record               False
+
+counterexamples to the derivation, by date:
+date        stated                        commits
+----------  ----------------------------  -------
+2026-07-16  Claude Opus 4.7 (1M context)  3      
+2026-07-22  Claude Opus 4.7 (1M context)  2      
+2026-07-23  Claude Opus 4.7 (1M context)  7      
+2026-07-24  Claude Opus 4.7 (1M context)  15     
+2026-07-25  Claude Opus 4.7 (1M context)  1      
+2026-07-27  Claude Opus 4.7 (1M context)  2      
+2026-07-28  Claude Opus 4.7 (1M context)  1      
+2026-08-05  Claude Opus 4.7 (1M context)  2      
+2026-08-06  Claude Opus 4.7 (1M context)  1      
+2026-08-07  Claude Opus 4.7 (1M context)  2      
+2026-08-11  Claude Opus 4.7 (1M context)  3      
+
+How much of that count rests on how little. Each table row is
+dropped in turn and the count re-scored. Nothing is picked here:
+both readings stand and which table to use is the operator's.
+
+table row                     row rests on  backwards without it  attributable to it
+----------------------------  ------------  --------------------  ------------------
+Claude Opus 4.7 (1M context)  40            0                     39                
+Claude Opus 4.8               1             0                     39                
+Claude Opus 5                 118           39                    0                 
+
+commits where the decode and the trailer part company:
+commit    date        trailer                       decode                       
+--------  ----------  ----------------------------  -----------------------------
+c7cfcc38  2026-08-11  Claude Opus 4.7 (1M context)  Claude Opus 4.8|Claude Opus 5
+0d78a70d  2026-08-11  Claude Opus 4.7 (1M context)  Claude Opus 4.8|Claude Opus 5
+c9b2f403  2026-08-11  Claude Opus 4.7 (1M context)  Claude Opus 4.8|Claude Opus 5
+77d314c4  2026-08-07  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+e7db020a  2026-08-07  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+cea26708  2026-08-06  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+5b94393a  2026-08-05  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+767cfc67  2026-08-05  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+bba1136b  2026-07-28  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+e3fa3502  2026-07-27  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+fa49a460  2026-07-27  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+c0c06cb4  2026-07-25  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+344ff453  2026-07-24  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+b94fcac1  2026-07-24  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+900b5b32  2026-07-24  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+015eaf3b  2026-07-24  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+d05cf8e3  2026-07-24  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+1c44c751  2026-07-24  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+5dc314cf  2026-07-24  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+3a323899  2026-07-24  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+0604dedd  2026-07-24  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+31a826bf  2026-07-24  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+ad7f639a  2026-07-24  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+be5d9256  2026-07-24  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+5078fb61  2026-07-24  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+b23c7278  2026-07-24  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+607520ec  2026-07-24  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+1a7032eb  2026-07-23  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+ab9a3d46  2026-07-23  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+cea36d3c  2026-07-23  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+9dcad52a  2026-07-23  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+791a1c76  2026-07-23  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+2147566c  2026-07-23  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+95f6aa6b  2026-07-23  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+531a5292  2026-07-22  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+65984da8  2026-07-22  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+a5b2eb84  2026-07-16  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+e0761b94  2026-07-16  Claude Opus 4.7 (1M context)  Claude Opus 4.8              
+8b81f7d1  2026-07-16  Claude Opus 4.7 (1M context)  Claude Opus 4.8              

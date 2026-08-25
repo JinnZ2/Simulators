@@ -6156,6 +6156,64 @@ underneath).
   constant by — and it was measured by perturbing a cell in a real
   workbook, not stipulated anywhere in the chain. 49 selftest checks
   across two modules. Stdlib only, parses under 3.9, CC0.
+- `model-provenance/` — Work order 5, delivered verbatim. Two halves that
+  do not share a mechanism: a **write** at session open (date, model
+  identifier as self-reported, repo, branch) and a **read** over history
+  that never writes back into it. **`MP_001`, the finding that makes the
+  rest checkable: the forward log S1 asks for already exists, unplanned**
+  — 159 of this repository's 236 commits carry a self-reported model
+  identifier in the `Co-Authored-By` trailer, a channel built for
+  attribution doing provenance by accident (Opus 4.7 ×40, Opus 4.8 ×1,
+  Opus 5 ×118, 77 stating nothing). **`MP_002`:** that supplies the check
+  set a decode needs to be a measurement rather than a rendering — 118
+  SINGLE-and-matching, 36 SINGLE-and-differing, 2 AMBIGUOUS containing, 3
+  AMBIGUOUS excluding, with no pick made in the ambiguous rows per S2.
+  **`MP_003`, the headline: the assumption S3 names is refuted on the
+  record** — *always current-at-the-time* fails on **39 of 159** commits,
+  because `Opus 4.8` appears 2026-07-12 and `Opus 4.7` keeps appearing for
+  a month after; the reading is not that the dates are wrong but that
+  sessions do not all run the newest version, which is exactly the content
+  of the assumption, so S3 was right to make it the claim rather than a
+  fact about a commit. **`MP_004`, and it is why the report prints two
+  numbers: all 39 rest on one commit.** `assumption_sensitivity()` drops
+  each table row in turn — remove the single 2026-07-12 commit and the
+  record is monotone, **0 backwards and 1 disagreement** instead of 39 and
+  36. One counterexample still refutes a universal so `MP_003` stands, but
+  a count is not a size and the two read as one thing; both are printed
+  and neither is picked. **`MP_005`, found only by real data:** the
+  decoder read `--date=short` and the 4.7 → 5 switchover happens **inside
+  one calendar day**, bracketed by the timestamps to **5 h 14 min**
+  (17:20:27 → 22:34:13 on 2026-08-11), so day-ordering reported three
+  counterexamples that are an artifact of the reading — a `G-RES` pair
+  where the feature is hours and the instrument was days. Repaired (full
+  stamp orders, short date decodes, since a decode cannot be finer than
+  its table), residual 3 → **0**, pinned by two checks. **`MP_006`:** S1
+  says write UNKNOWN if the build string is unavailable, and UNKNOWN has
+  more than one cause — this session operates under a standing constraint
+  against writing a model identifier into a pushed artifact, so the string
+  was **not unavailable, it was not written**; `open_line()` requires a
+  reason from `NO_BUILD_STRING` / `WITHHELD` and **refuses a bare
+  UNKNOWN**, with the first row of `sessions.jsonl` recording the conflict
+  rather than resolving it. Designed in before the first row, unlike the
+  dozen-odd prior instances of that repair found in audit. **`MP_007`:**
+  S2's release-date table is not reachable (allowlist egress) and a table
+  from memory is the `ANC_010` status, so `releases.json` ships **observed
+  bounds** from the trailers, `table_kind: observed_bound`, with every
+  report header stating that a first appearance is an **upper bound** on a
+  release date and never the date — and the cost stated in full, since the
+  substitute table is derived from the same trailers it is scored against,
+  leaving only the **ordering** check independent of it. **`MP_008`:** the
+  77 commits stating nothing are the population the decode exists for, so
+  it is checkable exactly where it is redundant and informative exactly
+  where it cannot be checked; kept as its own row rather than folded into
+  a rate. **`MP_009`:** S4 is structural, not promised — the only git verb
+  in the module is `log`, **asserted in the selftest over the file's own
+  source**, and writing that check produced one more `UNI_010`: the first
+  pattern was a literal and matched the line defining it, so it is now
+  composed from tokens (`RDD_008`). The `no_severity` exemption list is
+  **empty**, unlike scan 4's — this order's verdict names carry no
+  screened word — and the two arms plus the plant still run. 29 selftest
+  checks. Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
