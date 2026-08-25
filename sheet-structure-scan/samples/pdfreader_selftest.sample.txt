@@ -1,0 +1,30 @@
+pdfreader selftest
+  an unhandled delimiter still advances the lexer            PASS got=True want=True
+  and reports itself as skippable rather than as a value     PASS got=True want=True
+  a dict of one key parses                                   PASS got={'A': 1} want={'A': 1}
+  a nested array parses                                      PASS got=[1, [2, 3], 4] want=[1, [2, 3], 4]
+  an indirect reference is not two integers                  PASS got='Ref(12,0)' want='Ref(12,0)'
+  two integers are not a reference                           PASS got=[12, 0] want=[12, 0]
+  a hex string decodes                                       PASS got=b'Hello' want=b'Hello'
+  bfchar maps code to character                              PASS got=(' ', 'A') want=(' ', 'A')
+  bfrange maps a run                                         PASS got=['a', 'b', 'c'] want=['a', 'b', 'c']
+  a number is joined across micro-kerning                    PASS got=374.83 want=374.83
+  commas and a currency mark are stripped                    PASS got=1234.0 want=1234.0
+  a non-number returns None rather than 0                    PASS got=None want=None
+  recovers 374.83 whole                                      PASS got=True want=True
+  recovers 122.04 whole                                      PASS got=True want=True
+  recovers 7.52 whole                                        PASS got=True want=True
+  recovers 227.7 whole                                       PASS got=True want=True
+  recovers every prose probe the paste shares with the file  PASS got=[] want=[]
+  no run has unmapped glyphs on this file                    PASS got=0 want=0
+  the figure 374.83 is emitted as a value                    PASS got=True want=True
+  the figure 122.04 is emitted as a value                    PASS got=True want=True
+  the figure 7.52 is emitted as a value                      PASS got=True want=True
+  the figure 227.7 is emitted as a value                     PASS got=True want=True
+  every digit of a figure is its own run                     PASS got=6 want=6
+  no line break falls inside a recovered figure              PASS got=False want=False
+  but a horizontal break does, which is why presence is not the test PASS got=True want=True
+  nothing on this file is FRAGMENTED once the pattern is narrowed PASS got=0 want=0
+  and the horizontal-break count is emitted, not assumed away PASS got=True want=True
+  a dropped character in the source is reproduced as found   PASS got=True want=True
+SELFTEST PASS (0 checks failed)

@@ -1,0 +1,37 @@
+perturbed      Electricity, heat, cooling!B296 = 0.56936170908504569, +0.001 relative
+case           Electricity, heat, cooling!E7=1000.0, Your organisation!C6=State of Palestine
+cells moved    26
+unevaluable    3
+
+cell                            pdepth  before         after          delta      elasticity
+------------------------------  ------  -------------  -------------  ---------  ----------
+Electricity, heat, cooling!D7   1       0.5693617091   0.5699310708   0.0005694  1
+Your organisation!D6            1       0.5693617091   0.5699310708   0.0005694  1
+Electricity, heat, cooling!D16  2       0.5124255382   0.5129379637   0.0005124  1
+Electricity, heat, cooling!F7   2       569.3617091    569.9310708    0.5694     1
+Employees commuting!E32         2       0.1042551744   0.1043594296   0.0001043  1
+Employees commuting!E33         2       0.1251110936   0.1252362047   0.0001251  1
+Employees commuting!E34         2       0.1494837017   0.1496331854   0.0001495  1
+Employees commuting!E35         2       0.1287987327   0.1289275314   0.0001288  1
+Employees commuting!E46         2       0.08151880351  0.08160032231  8.152e-05  1
+Employees commuting!E47         2       0.050357032    0.05040738904  5.036e-05  1
+Employees commuting!E48         2       0.06623097517  0.06629720614  6.623e-05  1
+Employees commuting!E49         2       0.06110247045  0.06116357292  6.11e-05   1
+Owned vehicles!D33              2       0.1042551744   0.1043594296   0.0001043  1
+Owned vehicles!D34              2       0.1251110936   0.1252362047   0.0001251  1
+Owned vehicles!D35              2       0.1494837017   0.1496331854   0.0001495  1
+Owned vehicles!D36              2       0.1287987327   0.1289275314   0.0001288  1
+Owned vehicles!D37              2       0.08151880351  0.08160032231  8.152e-05  1
+Owned vehicles!D38              2       0.050357032    0.05040738904  5.036e-05  1
+Owned vehicles!D39              2       0.06623097517  0.06629720614  6.623e-05  1
+Owned vehicles!D40              2       0.06110247045  0.06116357292  6.11e-05   1
+Owned vehicles!K34              2       0.09712411071  0.09722123482  9.712e-05  1
+Owned vehicles!K35              2       0.1353436816   0.1354790252   0.0001353  1
+Owned vehicles!K36              2       0.1893883527   0.189577741    0.0001894  1
+Owned vehicles!K37              2       0.1354657888   0.1356012546   0.0001355  1
+Report!E7                       3       0.5693617091   0.5699310708   0.0005694  1
+Report!E25                      5       0.6948617091   0.6954310708   0.0005694  0.819389
+
+structural dependents (graph edges):        33
+of those, did NOT move under this case:     31
+moved without being a direct dependent:     24

@@ -1,0 +1,10 @@
+{
+  "id": "dimensionless",
+  "version": "1.0.0",
+  "quantity": "dimensionless",
+  "unit": "1",
+  "base": "1",
+  "base_per_unit": 1.0,
+  "basis": "a pure ratio. Registered rather than special-cased: the identity transform is a transform, and leaving it implicit would make it the one unit the format resolved without asking, which is the privileged frame the first principle forbids. That it turned up as a break rather than as a design note is itself the check working.",
+  "supersedes": null
+}

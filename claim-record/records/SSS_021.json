@@ -1,0 +1,67 @@
+{
+  "id": "SSS_021",
+  "assertion": "Two of the four differing occurrences per column group carry the group's own label repeated inside the range that label governs.",
+  "measurement": {
+    "lo": 2,
+    "hi": 2,
+    "units": "occurrences, of 4 differing per group"
+  },
+  "instrument": {
+    "name": "scans.py governed() and normalize(), counting cells whose text normalizes to the group label",
+    "error": {
+      "kind": "systematic",
+      "magnitude": "the count moves with CHOICE 5 normalization; under a rule that strips parentheticals it is not known and was not measured"
+    }
+  },
+  "domain_of_validity": {
+    "conditions": [
+      {
+        "name": "file",
+        "value": "UNFCCC ver01.1, md5 57d3ffd7"
+      },
+      {
+        "name": "groups",
+        "value": "the two listed column-axis groups, factors and kg co2e"
+      },
+      {
+        "name": "normalization",
+        "value": "case, whitespace, edge punctuation; parentheticals kept"
+      }
+    ],
+    "outside_this": "UNTESTED. Row-axis groups were not checked this way."
+  },
+  "clock": {
+    "measured_on": "2026-08-25",
+    "measured_on_frame": "iso_date",
+    "neglected_term": {
+      "name": "normalization rule",
+      "held_fixed": "CHOICE 5, parentheticals kept"
+    },
+    "time_constant": {
+      "state": "UNMEASURED",
+      "why": "not measured; the revision rate of this instrument has not been recorded"
+    },
+    "rate_ceiling": {
+      "state": "UNMEASURED",
+      "why": "no rate of instrument change at which the claim stops holding has been established"
+    },
+    "coupling": {
+      "value": 0.0,
+      "units": "1",
+      "basis": "the domain of validity pins the instrument revision, so the claim does not move when that revision does. Coupling zero by construction, not by measurement."
+    }
+  },
+  "derivation": {
+    "parents": [
+      "SSS_017"
+    ],
+    "root_reason": ""
+  },
+  "collapse_record": {
+    "state": "EXACT",
+    "basis": "a count of occurrences, hand-checkable from the printed table"
+  },
+  "correction_status": "unadjusted",
+  "correction_method": null,
+  "correction_depth": 0
+}

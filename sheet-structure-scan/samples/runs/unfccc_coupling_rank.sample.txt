@@ -1,0 +1,31 @@
+ranking -- coupling where computable, dependent count where not
+workbook       unfccc.xlsx
+perturbation   0.001 relative
+case           Electricity, heat, cooling!E7=1000.0, Fuels!E6=1000.0, Your organisation!C6=Iraq
+evaluator      reproduces 631 of 631 cached values; 0 not computable
+
+COUPLING and COUNT ranks are not on one scale and do not
+compare. Rows are sorted within mode.
+
+COUPLING  (784 constants)
+rank   site                                coupling  deps  ddepth  evaluated/terminals
+-----  ----------------------------------  --------  ----  ------  -------------------
+3.107  Electricity, heat, cooling!B193     0.6215    33    5       1/1
+0.885  Fuels!D6                            0.295     1     3       1/1
+0.167  Flight and Accommodation!E6         0.08352   1     2       1/1
+0      Business travel - land and sea!E10  0         1     3       1/1
+0      Business travel - land and sea!E11  0         1     3       1/1
+0      Business travel - land and sea!E12  0         1     3       1/1
+0      Business travel - land and sea!E13  0         1     3       1/1
+0      Business travel - land and sea!E14  0         1     3       1/1
+  ... 776 more not shown
+
+COUNT  (5 constants)
+rank  site       coupling  deps  ddepth  evaluated/terminals
+----  ---------  --------  ----  ------  -------------------
+3     Fuels!D19  -         1     3       0/0
+3     Fuels!D20  -         1     3       0/0
+3     Fuels!D25  -         1     3       0/0
+3     Fuels!D26  -         1     3       0/0
+1     Food!C17   -         1     1       0/1
+

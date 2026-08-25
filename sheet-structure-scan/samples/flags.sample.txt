@@ -1,0 +1,6 @@
+# flags produced upstream; scan one is not part of this tool
+Inputs!B2
+Inputs!B9
+Model!D2
+Model!C2
+Summary!B2

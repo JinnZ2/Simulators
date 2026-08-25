@@ -1,0 +1,34 @@
+epa_check selftest
+  the two workbooks below are SYNTHETIC. They test whether the
+  criterion separates a flat table from a formula chain. Nothing
+  here is evidence about any EPA product.
+  hub shape holds every efh prediction                     PASS got=['HELD', 'HELD', 'HELD', 'HELD', 'HELD', 'HELD'] want=['HELD', 'HELD', 'HELD', 'HELD', 'HELD', 'HELD']
+  one sheet: no column group exists                        PASS got=0 want=0
+  and EFH-P4 says so rather than passing                   PASS got='NOT_DETERMINABLE' want='NOT_DETERMINABLE'
+  two sheets: the denominator exists                       PASS got=True want=True
+  chain shape does NOT hold efh-P1                         PASS got='NOT_HELD' want='NOT_HELD'
+  chain shape does NOT hold efh-P2                         PASS got='NOT_HELD' want='NOT_HELD'
+  chain shape holds every local prediction                 PASS got=['HELD', 'HELD', 'HELD', 'HELD'] want=['HELD', 'HELD', 'HELD', 'HELD']
+  hub shape does NOT hold local-P1                         PASS got='NOT_HELD' want='NOT_HELD'
+  hub shape does NOT hold local-P2                         PASS got='NOT_HELD' want='NOT_HELD'
+  hub: unit present, variance and sample absent            PASS got=(True, True, True) want=(True, True, True)
+  hub rank column carries no ordering                      PASS got=1.0 want=1.0
+  chain rank column does                                   PASS got=True want=True
+  chain: one column collision, many row rows               PASS got=(1.0, True) want=(1.0, True)
+  hub: repeated headers agree, so none is listed           PASS got=0.0 want=0.0
+  chain shape holds every local prediction                 PASS got=['HELD', 'HELD', 'HELD', 'HELD'] want=['HELD', 'HELD', 'HELD', 'HELD']
+  flat shape fails local on derived_share and rank         PASS got=['NOT_HELD', 'NOT_HELD'] want=['NOT_HELD', 'NOT_HELD']
+  chain shape holds every tcr prediction                   PASS got=['HELD', 'HELD', 'HELD'] want=['HELD', 'HELD', 'HELD']
+  flat shape fails tcr on derived_share and rank           PASS got=['NOT_HELD', 'NOT_HELD'] want=['NOT_HELD', 'NOT_HELD']
+  chain shape holds every unfccc prediction                PASS got=['HELD', 'HELD', 'HELD'] want=['HELD', 'HELD', 'HELD']
+  flat shape fails unfccc on derived_share and rank        PASS got=['NOT_HELD', 'NOT_HELD'] want=['NOT_HELD', 'NOT_HELD']
+  three arms are registered                                PASS got=3 want=3
+  the two new arms register no cross-module collision, with a reason PASS got=[True, True] want=[True, True]
+  simplified registers no threshold                        PASS got=[] want=[]
+  and says why                                             PASS got=True want=True
+  efh render carries no screened word                      PASS got=True want=True
+  local render carries no screened word                    PASS got=True want=True
+  simplified render carries no screened word               PASS got=True want=True
+  tcr render carries no screened word                      PASS got=True want=True
+  unfccc render carries no screened word                   PASS got=True want=True
+SELFTEST PASS (0 checks failed)

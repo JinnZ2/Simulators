@@ -1,0 +1,22 @@
+ranking -- coupling where computable, dependent count where not
+workbook       lgo.xls
+perturbation   0.001 relative
+case           none given -- an unfilled template moves nothing
+evaluator      reproduces 0 of 0 cached values; 336 not computable
+reader         stdlib-xls-biff8
+
+COUPLING IS NOT_RUN ON THIS WORKBOOK.
+
+The reader declares formula_text unavailable, and coupling is
+an elasticity measured by perturbing a constant and
+re-evaluating. With no formula text there is nothing to
+re-evaluate, so no elasticity exists to report.
+
+The dependent-count ranking is NOT emitted here as a stand-in.
+It measures wiring where coupling measures what moves, the two
+disagree on this repository's own evidence -- 781 constants at
+exactly zero coupling all rank non-zero by count, up to 380 --
+and printing it under this heading would be a value-only
+substitute reported as scan output.
+
+What the reader DOES supply here: cell_kind, cell_values, precedents.

@@ -1,0 +1,25 @@
+{
+  "DEFAULT_TOLERANCE": 1e-09,
+  "PROSE_MIN_CHARS": 25,
+  "PROVENANCE_WORDS": [
+    "info",
+    "source",
+    "sources",
+    "note",
+    "notes",
+    "method",
+    "methodology",
+    "reference",
+    "references",
+    "assumption",
+    "assumptions",
+    "provenance",
+    "documentation"
+  ],
+  "patterns_json_counts": {
+    "date": 5,
+    "sample_size": 3,
+    "unit": 11,
+    "variance_sibling": 5
+  }
+}

@@ -1,0 +1,116 @@
+sheetmodel selftest
+  col_to_num A                                   PASS got=1 want=1
+  col_to_num AA                                  PASS got=27 want=27
+  num_to_col roundtrip                           PASS got='BZ' want='BZ'
+  simple refs                                    PASS got={('S', 'B2'), ('S', 'A1')} want={('S', 'B2'), ('S', 'A1')}
+  range expands                                  PASS got={('S', 'A1'), ('S', 'A2'), ('S', 'A3')} want={('S', 'A1'), ('S', 'A2'), ('S', 'A3')}
+  function name not a ref                        PASS got={('S', 'A1')} want={('S', 'A1')}
+  two functions one range                        PASS got={('S', 'A1'), ('S', 'A2')} want={('S', 'A1'), ('S', 'A2')}
+  shift_formula, 11 hand-set cases               PASS got=[] want=[]
+  qualified ref                                  PASS got={('Other', 'B4')} want={('Other', 'B4')}
+  quoted sheet                                   PASS got={('My Sheet', 'B4')} want={('My Sheet', 'B4')}
+  ref inside a string literal is not a ref       PASS got={('S', 'A1')} want={('S', 'A1')}
+  named range unresolved not absent              PASS got=True want=True
+  external flagged                               PASS got=True want=True
+  oversize range truncated not expanded          PASS got=(0, True) want=(0, True)
+  sheets read                                    PASS got=['Inputs', 'Model', 'Summary'] want=['Inputs', 'Model', 'Summary']
+  constant number                                PASS got='CONSTANT_NUMBER' want='CONSTANT_NUMBER'
+  constant text                                  PASS got='CONSTANT_TEXT' want='CONSTANT_TEXT'
+  date style detected                            PASS got='CONSTANT_DATE' want='CONSTANT_DATE'
+  formula read                                   PASS got='DERIVED' want='DERIVED'
+  precedent depth of a constant                  PASS got=0 want=0
+  precedent depth of a chain                     PASS got=3 want=3
+  downstream depth of a terminal                 PASS got=0 want=0
+  downstream depth of an input                   PASS got=3 want=3
+  rank of a terminal is 0                        PASS got=0 want=0
+  cycle is CYCLE not a number                    PASS got='CYCLE' want='CYCLE'
+  cycle rank is CYCLE                            PASS got='CYCLE' want='CYCLE'
+SELFTEST PASS (0 checks failed)
+
+no_severity selftest
+  known null is clean                                  PASS got=True want=True
+  severity word caught                                 PASS got=False want=False
+  interpretation word caught                           PASS got=False want=False
+  grading word caught                                  PASS got=False want=False
+  terror is not error                                  PASS got=True want=True
+  mustard is not must                                  PASS got=True want=True
+  bustle is not bug                                    PASS got=True want=True
+  'flag' is permitted                                  PASS got=True want=True
+  'missing' is permitted                               PASS got=True want=True
+  'absent' is permitted                                PASS got=True want=True
+  both classes populated                               PASS got=(True, True) want=(True, True)
+  78 words screened
+SELFTEST PASS (0 checks failed)
+
+scans selftest
+  label row found                                      PASS got=1 want=1
+  label col found                                      PASS got=1 want=1
+  well-companioned cell reports nothing absent         PASS got=[] want=[]
+  lone cell reports all four absent                    PASS got=['unit', 'date', 'sample_size', 'variance_sibling'] want=['unit', 'date', 'sample_size', 'variance_sibling']
+  derived cell in a bare block reports all four absent PASS got=['unit', 'date', 'sample_size', 'variance_sibling'] want=['unit', 'date', 'sample_size', 'variance_sibling']
+  nothing not_searched when patterns are loaded        PASS got=[] want=[]
+  empty pattern list is NOT_SEARCHED not ABSENT        PASS got=([], ['unit', 'date', 'sample_size', 'variance_sibling']) want=([], ['unit', 'date', 'sample_size', 'variance_sibling'])
+  row band clipping reported                           PASS got=True want=True
+  a cell outside any label block says so               PASS got=True want=True
+  radius 2 does not reach the note                     PASS got=True want=True
+  radius 3 does                                        PASS got=False want=False
+  rank of a propagating input                          PASS got=3 want=3
+  rank of a terminal                                   PASS got=0 want=0
+  'total' collides across three sheets                 PASS got=True want=True
+  'total' has three occurrences                        PASS got=3 want=3
+  constructions differ across them                     PASS got=['2c', '2d', '2d'] want=['2c', '2d', '2d']
+  depth sets differ across them                        PASS got=3 want=3
+  'item' repeats and is NOT listed                     PASS got=False want=False
+  differing table heights list nothing                 PASS got=0 want=0
+  the shared headers are counted as agreeing, not dropped PASS got=True want=True
+  the printed counts differ and the kind sets do not   PASS got=('12c', '9c', True) want=('12c', '9c', True)
+  a mixed column still separates from a pure one       PASS got=False want=False
+  a same-construction group is counted, not dropped    PASS got=True want=True
+  row-axis collision found                             PASS got=True want=True
+  unit patterns, 10 hand-set cases                     PASS got=[] want=[]
+  --all: rows, absences, labels, strays, in-table      PASS got=(38, 23, 13, 2, 8) want=(38, 23, 13, 2, 8)
+  a flag list of five yields four, all in-table        PASS got=4 want=4
+  parenthetical kept distinct                          PASS got=False want=False
+  case and spacing folded                              PASS got=True want=True
+  scan two output carries no screened word             PASS got=True want=True
+  scan three output carries no screened word           PASS got=True want=True
+  the screen would fire if it drifted                  PASS got=False want=False
+  missing flag file raises                             PASS got=True want=True
+  flags parsed                                         PASS got=[('Inputs', 'B9'), ('Model', 'D2')] want=[('Inputs', 'B9'), ('Model', 'D2')]
+  unqualified flag raises                              PASS got=True want=True
+SELFTEST PASS (0 checks failed)
+
+epa_check selftest
+  the two workbooks below are SYNTHETIC. They test whether the
+  criterion separates a flat table from a formula chain. Nothing
+  here is evidence about any EPA product.
+  hub shape holds every efh prediction                     PASS got=['HELD', 'HELD', 'HELD', 'HELD', 'HELD', 'HELD'] want=['HELD', 'HELD', 'HELD', 'HELD', 'HELD', 'HELD']
+  one sheet: no column group exists                        PASS got=0 want=0
+  and EFH-P4 says so rather than passing                   PASS got='NOT_DETERMINABLE' want='NOT_DETERMINABLE'
+  two sheets: the denominator exists                       PASS got=True want=True
+  chain shape does NOT hold efh-P1                         PASS got='NOT_HELD' want='NOT_HELD'
+  chain shape does NOT hold efh-P2                         PASS got='NOT_HELD' want='NOT_HELD'
+  chain shape holds every local prediction                 PASS got=['HELD', 'HELD', 'HELD', 'HELD'] want=['HELD', 'HELD', 'HELD', 'HELD']
+  hub shape does NOT hold local-P1                         PASS got='NOT_HELD' want='NOT_HELD'
+  hub shape does NOT hold local-P2                         PASS got='NOT_HELD' want='NOT_HELD'
+  hub: unit present, variance and sample absent            PASS got=(True, True, True) want=(True, True, True)
+  hub rank column carries no ordering                      PASS got=1.0 want=1.0
+  chain rank column does                                   PASS got=True want=True
+  chain: one column collision, many row rows               PASS got=(1.0, True) want=(1.0, True)
+  hub: repeated headers agree, so none is listed           PASS got=0.0 want=0.0
+  chain shape holds every local prediction                 PASS got=['HELD', 'HELD', 'HELD', 'HELD'] want=['HELD', 'HELD', 'HELD', 'HELD']
+  flat shape fails local on derived_share and rank         PASS got=['NOT_HELD', 'NOT_HELD'] want=['NOT_HELD', 'NOT_HELD']
+  chain shape holds every tcr prediction                   PASS got=['HELD', 'HELD', 'HELD'] want=['HELD', 'HELD', 'HELD']
+  flat shape fails tcr on derived_share and rank           PASS got=['NOT_HELD', 'NOT_HELD'] want=['NOT_HELD', 'NOT_HELD']
+  chain shape holds every unfccc prediction                PASS got=['HELD', 'HELD', 'HELD'] want=['HELD', 'HELD', 'HELD']
+  flat shape fails unfccc on derived_share and rank        PASS got=['NOT_HELD', 'NOT_HELD'] want=['NOT_HELD', 'NOT_HELD']
+  three arms are registered                                PASS got=3 want=3
+  the two new arms register no cross-module collision, with a reason PASS got=[True, True] want=[True, True]
+  simplified registers no threshold                        PASS got=[] want=[]
+  and says why                                             PASS got=True want=True
+  efh render carries no screened word                      PASS got=True want=True
+  local render carries no screened word                    PASS got=True want=True
+  simplified render carries no screened word               PASS got=True want=True
+  tcr render carries no screened word                      PASS got=True want=True
+  unfccc render carries no screened word                   PASS got=True want=True
+SELFTEST PASS (0 checks failed)

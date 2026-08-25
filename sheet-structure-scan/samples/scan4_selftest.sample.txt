@@ -1,0 +1,33 @@
+scan4 selftest
+  one arithmetic relationship extracted                      PASS got=1 want=1
+  the operator is read                                       PASS got='average' want='average'
+  the operands are recorded as written                       PASS got=['Iraq', 'Jordan', 'Lebanon', 'Syrian Arab Republic', 'Turkey'] want=['Iraq', 'Jordan', 'Lebanon', 'Syrian Arab Republic', 'Turkey']
+  and the target too                                         PASS got=['Palestine'] want=['Palestine']
+  non-arithmetic provenance is classified, not parsed        PASS got='NOT_ARITHMETIC' want='NOT_ARITHMETIC'
+  a date-only note is not arithmetic                         PASS got='NOT_ARITHMETIC' want='NOT_ARITHMETIC'
+  G1 is MAINTAINED                                           PASS got=['MAINTAINED'] want=['MAINTAINED']
+  G3 is DIVERGED                                             PASS got=['DIVERGED'] want=['DIVERGED']
+  G3 reports the delta                                       PASS got=(35.0, 4.0, -31.0) want=(35.0, 4.0, -31.0)
+  and says the divergence date is unrecoverable              PASS got=True want=True
+  G4 is NOT_TESTABLE                                         PASS got=['NOT_TESTABLE'] want=['NOT_TESTABLE']
+  G4 names what did not resolve and guesses nothing          PASS got=['Omega', 'Zeta'] want=['Omega', 'Zeta']
+  G4 emits no expected value                                 PASS got=None want=None
+  the provenance sheet is found                              PASS got=['Info and sources'] want=['Info and sources']
+  two candidates with different values is AMBIGUOUS, not a guess PASS got='AMBIGUOUS' want='AMBIGUOUS'
+  G5 extracts a relationship rather than dropping it         PASS got=1 want=1
+  with the operator read and no operands named               PASS got=('upper quartile', []) want=('upper quartile', [])
+  G5 is NOT_TESTABLE                                         PASS got=['NOT_TESTABLE'] want=['NOT_TESTABLE']
+  G5 produces no testable verdict                            PASS got=False want=False
+  and no expected value is emitted for it                    PASS got=None want=None
+  n=1 emits no curve and says so                             PASS got=True want=True
+  and n is stated                                            PASS got=True want=True
+  a workbook with nothing testable is OUT_OF_SCOPE           PASS got='OUT_OF_SCOPE' want='OUT_OF_SCOPE'
+  and one with a testable row is not                         PASS got='IN_SCOPE' want='IN_SCOPE'
+  the out-of-scope workbook stays in the table               PASS got=True want=True
+  and is named out of scope there                            PASS got=True want=True
+  and is excluded from the pooled denominator                PASS got=True want=True
+  a direction is not stated from one in-scope point          PASS got=True want=True
+  the emitted report is clean under the (empty) exemption    PASS got=True want=True
+  and nothing fires unmasked, the exemption list being empty PASS got=True want=True
+  a planted grading word is caught through the exemption     PASS got=False want=False
+SELFTEST PASS (0 checks failed)

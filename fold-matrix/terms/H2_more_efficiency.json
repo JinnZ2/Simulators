@@ -1,0 +1,39 @@
+{
+  "id": "H2_more_efficiency",
+  "name": "more efficiency solves this",
+  "source": "the bare claim, as stated. No artifact; this fixture is the sentence itself.",
+  "scope": {},
+  "neutral_reading": {},
+  "levels": [
+    {
+      "index": 0,
+      "severed": "-- the term as used --",
+      "still_acting": "the claim is carried into decisions",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ASSERTED"
+    },
+    {
+      "index": 1,
+      "goal": "solves this",
+      "severed": "the relation between the ratio and the outcome named as 'this'",
+      "still_acting": "whatever 'this' is continues",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ABSENT",
+      "value_string": {
+        "sign": "ABSENT",
+        "magnitude": "ABSENT",
+        "unit": "ABSENT"
+      }
+    }
+  ],
+  "plan": {
+    "plan_exists": "no",
+    "practice_tracks_plan": "UNREAD",
+    "why": "the fixture is a sentence; there is no document set behind it"
+  },
+  "enumeration_basis": "UNREAD"
+}

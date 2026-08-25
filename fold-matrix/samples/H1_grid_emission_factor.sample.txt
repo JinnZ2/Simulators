@@ -1,0 +1,101 @@
+fold matrix -- work order 8
+terms: 1
+
+term   H1_grid_emission_factor
+name   grid emission factor
+source UNFCCC GHG emissions calculator ver01.1, md5 57d3ffd78a9f5f9980e15feb65f8d986; Electricity, heat, cooling!B192 (Iraq) = 0.93391 kg CO2e/kWh. Claim record claim-record/records/UNF_GRID_IRAQ.json.
+
+S3 scope        EVALUABLE -- not an efficiency-class term; no scope required
+
+S1 grid
+level  severed                                       still_acting                                  clock        basis   
+-----  --------------------------------------------  --------------------------------------------  -----------  --------
+-3     combustion chemistry: fuel carbon content t…  the actual carbon content of the fuel burne…  ABSENT       ABSENT  
+-2     plant-level heat rate and dispatch order      which plants are on the margin at the hour …  ABSENT       ABSENT  
+-1     the national generation mix that the factor…  the mix keeps changing after the average wa…  3.0 years    ASSERTED
+ 0     -- the term as used --                        the factor multiplies whatever kWh figure t…  3.403 years  derived 
++1     the relation between this factor and the ac…  users read the Report tab as an emissions f…  ABSENT       ASSERTED
++2     the relation between an emissions estimate …  the number is published and read              ABSENT       ASSERTED
++3     the relation between climate action promote…  emissions, which do not consult the estimate  ABSENT       ABSENT  
+
+S2 upward cells
+level  goal                                          basis     sign    magnitude  unit    cite         
+-----  --------------------------------------------  --------  ------  ---------  ------  -------------
++1     support organizations to estimate their GHG…  ASSERTED  ABSENT  ABSENT     ABSENT  Disclaimer!A3
++2     raise awareness and promote climate action    ASSERTED  +       ABSENT     ABSENT  Disclaimer!A3
++3     not stated                                    ABSENT    ABSENT  ABSENT     ABSENT               
+
+   The three fields do not fail together on 1 cell(s).
+   A stated direction with no size is the ordinary shape
+   of a purpose claim, and one free-text field recorded
+   it as identical to a cell nobody wrote anything in.
+
+   An empty value_string has more than one cause, and the
+   four basis values do not separate them. On these cells
+   the source states the goal and explicitly declines the
+   relation, which is a different fact from nobody having
+   stated one:
+     +1  the same cell states the secretariat 'makes no representation…
+
+S1a stops, from the document set
+stop      level  what                                why                                             
+--------  -----  ----------------------------------  ------------------------------------------------
+upward    +2     UNFCCC GHG emissions calculator v…  highest level with a stated artifact; 1 level(s…
+downward   0     emissions [kg CO2e]                 deepest computed quantity                       
+
+   unmeasured_span_min: 3 level(s)
+   enumeration_basis:   author_read
+   at least 3 level(s) of the physical chain continue below the …
+   Emitted, not scored (S1a). The name is the reading: a floor,
+   not a measurement of the world.
+
+   plan_exists yes | practice_tracks_plan UNREAD
+   Its own column. It is not a basis and does not enter one.
+   Disclaimer!A3 states the purpose, so a plan exists in the doc…
+
+S5 clocks, per level, not collapsed
+level  value  units  assumed?         basis                                       
+-----  -----  -----  ---------------  --------------------------------------------
+-1     3.0    years  assumed          stated in the delivery as a few years and t…
+ 0     3.403  years  derived from -1  derived: time_constant 3.0 y / |coupling| 0…
+
+   1 of these is derived from another level's clock and
+   does not count as a second horizon. It is emitted
+   anyway; only the disagreement count excludes it.
+
+------------------------------------------------------------------
+
+S2, across the terms a comparison may include
+
+basis     upward cells
+--------  ------------
+measured  0           
+derived   0           
+ASSERTED  2           
+ABSENT    1           
+
+value_string, per field
+field      ABSENT on  of cells
+---------  ---------  --------
+sign       2          3       
+magnitude  3          3       
+unit       3          3       
+
+cells: 3   all three ABSENT: 2   split: 1
+ASSERTED + ABSENT: 3   measured + derived: 0
+P1 (soft majority): True
+P3 (at least one cell splits): True
+P4 (no magnitude anywhere): True
+
+unmeasured_span_min, and what may be compared
+
+term                     span_min  enumeration_basis
+-----------------------  --------  -----------------
+H1_grid_emission_factor  3         author_read      
+
+   REFUSED (author_read): H1_grid_emission_factor
+     only one term on this basis; nothing to compare it against
+
+   No difference is computed across a mismatch. Two floors
+   counted by different procedures are not two measurements
+   of one quantity.

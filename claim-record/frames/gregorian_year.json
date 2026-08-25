@@ -1,0 +1,10 @@
+{
+  "id": "gregorian_year",
+  "version": "1.0.0",
+  "quantity": "duration",
+  "unit": "years",
+  "base": "second",
+  "base_per_unit": 31556952.0,
+  "basis": "the Gregorian mean year: 365.2425 days of 86400 SI seconds. This is the frame every record in the registry currently uses, and it is registered on the same terms as every other. Nothing falls back to it.",
+  "supersedes": null
+}

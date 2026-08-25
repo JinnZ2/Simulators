@@ -1,0 +1,37 @@
+coupling selftest
+  product evaluates                                      PASS got=20.0 want=20.0
+  sum evaluates                                          PASS got=9.0 want=9.0
+  power evaluates                                        PASS got=16.0 want=16.0
+  SUM over a range evaluates                             PASS got=9.0 want=9.0
+  an unsupported function is still refused               PASS got=True want=True
+  IF takes the live branch                               PASS got=8.0 want=8.0
+  IF is lazy: the dead branch is not evaluated           PASS got=7.0 want=7.0
+  a blank guard returns BLANK, not zero                  PASS got=True want=True
+  and BLANK is 0 in arithmetic, as Excel has it          PASS got=0.0 want=0.0
+  while comparing equal to the empty string              PASS got=True want=True
+  a text comparison resolves                             PASS got=20.0 want=20.0
+  SUM over DERIVED cells evaluates                       PASS got=36.0 want=36.0
+  and the outer formula resumes correctly after it       PASS got=40.0 want=40.0
+  SUMIF with an equality criterion                       PASS got=15.0 want=15.0
+  SUMIF with a not-equal criterion                       PASS got=20.0 want=20.0
+  a range aggregate skips a text header, as Excel does   PASS got=7.0 want=7.0
+  VLOOKUP exact match                                    PASS got=22.0 want=22.0
+  VLOOKUP no match is refused, not defaulted             PASS got=True want=True
+  VLOOKUP approximate match is refused, not guessed      PASS got=True want=True
+  elasticity of a product is 1                           PASS got=0.9999999999998009 want=1.0
+  elasticity of a sum is A/(A+B)                         PASS got=0.4444444444443955 want=0.4444444444444444
+  elasticity of a square is 2                            PASS got=2.0009999999996975 want=2.0
+  elasticity of a reciprocal is -1                       PASS got=-0.9990009990008542 want=-1.0
+  a constant with computable terminals reports COMPUTED  PASS got='COMPUTED' want='COMPUTED'
+  and does not count terminals it could not evaluate     PASS got=True want=True
+  the largest elasticity is the square's                 PASS got=2.0009999999996975 want=2.0
+  an unevaluable chain is NOT_COMPUTABLE, not zero       PASS got=('NOT_COMPUTABLE', None) want=('NOT_COMPUTABLE', None)
+  and the ranking falls back to the count with the mode named PASS got=[('COUNT', 1)] want=[('COUNT', 1)]
+  every constant feeding the unevaluable cell falls back PASS got={'COUNT'} want={'COUNT'}
+  a constant with no dependents is not ranked            PASS got=[] want=[]
+  verify separates a matching cache from a differing one PASS got=(2, 1, 0) want=(2, 1, 0)
+  and names the disagreement                             PASS got='S!D2' want='S!D2'
+  no formula text stops coupling and says NOT_RUN        PASS got=True want=True
+  and the count ranking is not emitted as a stand-in     PASS got=False want=False
+  a capable reader is not stopped                        PASS got=False want=False
+SELFTEST PASS (0 checks failed)

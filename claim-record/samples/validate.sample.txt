@@ -1,0 +1,25 @@
+claim records -- validation
+
+Every verdict below is about CONFORMANCE TO THE RECORD
+SCHEMA. No column states whether a claim is true, how much
+weight a measurement carries, or what to do next, and none
+of those is computed here. The reading stays with the
+operator, which is the detector's rule.
+
+records   9
+rule 1    a claim with an unresolvable parent does not validate
+rule 2    no field is optional; a sentinel carries its reason
+
+claim          state  findings
+-------------  -----  --------
+SSS_017        VALID  0
+SSS_019        VALID  0
+SSS_020        VALID  0
+SSS_021        VALID  0
+SSS_022a       VALID  0
+SSS_022b       VALID  0
+UNF_GRID_IRAQ  VALID  0
+UNF_HOTEL_AR   VALID  0
+UNF_PALESTINE  VALID  0
+
+9 of 9 validate.

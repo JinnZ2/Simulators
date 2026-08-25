@@ -1,0 +1,63 @@
+fold matrix -- work order 8
+terms: 1
+
+term   S5_palo_alto_company_profile
+name   the company research brief
+source Company Profile: Palo Alto Networks, prepared by Dallen Moody, dated 2024-10-20. Delivered as pasted text; landed at sources/palo_alto_company_profile_pasted.md with one personal email redacted. An accompanying PDF upload could not be verified against the paste -- see FM_032.
+
+S3 scope        EVALUABLE -- not an efficiency-class term; no scope required
+
+S1 grid
+level  severed                                       still_acting                                  clock   basis   
+-----  --------------------------------------------  --------------------------------------------  ------  --------
+-2     the operations the figures summarise          the subject company operates, whatever the …  ABSENT  ABSENT  
+-1     the four headline figures and any relation …  the figures move; the brief is dated 2024-1…  ABSENT  ABSENT  
+ 0     -- the term as used: the brief itself --      the brief is read, or is not                  ABSENT  ASSERTED
++1     the relation between reading this brief and…  whatever the reader does                      ABSENT  ABSENT  
++2     the relation between preparation and any ou…  -                                             ABSENT  ABSENT  
+
+S2 upward cells
+level  goal        basis   sign    magnitude  unit    cite                    
+-----  ----------  ------  ------  ---------  ------  ------------------------
++1     not stated  ABSENT  ABSENT  ABSENT     ABSENT  no purpose statement ap…
++2     not stated  ABSENT  ABSENT  ABSENT     ABSENT                          
+
+S1a stops, from the document set
+stop      level   what             why                                             
+--------  ------  ---------------  ------------------------------------------------
+upward    ABSENT  ABSENT           no positive level carries a stated artifact, so…
+downward  ABSENT  ABSENT [ABSENT]  no level carries a quantity the organisation co…
+
+   unmeasured_span_min: not computable
+   enumeration_basis:   document_named
+   not computable: no computed quantity
+   Emitted, not scored (S1a). The name is the reading: a floor,
+   not a measurement of the world.
+
+   plan_exists no | practice_tracks_plan UNREAD
+   Its own column. It is not a basis and does not enter one.
+   no plan, charter or stated principle governs this document. I…
+
+------------------------------------------------------------------
+
+S2, across the terms a comparison may include
+
+basis     upward cells
+--------  ------------
+measured  0           
+derived   0           
+ASSERTED  0           
+ABSENT    2           
+
+value_string, per field
+field      ABSENT on  of cells
+---------  ---------  --------
+sign       2          2       
+magnitude  2          2       
+unit       2          2       
+
+cells: 2   all three ABSENT: 2   split: 0
+ASSERTED + ABSENT: 2   measured + derived: 0
+P1 (soft majority): True
+P3 (at least one cell splits): False
+P4 (no magnitude anywhere): True

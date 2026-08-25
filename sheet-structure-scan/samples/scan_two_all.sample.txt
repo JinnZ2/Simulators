@@ -1,0 +1,57 @@
+scan two -- companion absence
+workbook        demo.xlsx
+reader          stdlib-xlsx
+flag source     --all: every non-empty cell, no upstream scan
+radius          2 rows and columns, plus the two governing labels
+patterns        patterns.json
+companions      unit, date, sample_size, variance_sibling
+rank            direct dependents x downstream depth
+
+absent       searched the neighborhood, no match
+not_searched no pattern registered for that companion
+unsearched   N/S row band ran off the sheet; no-col-label the
+             cell sits outside any label block; no-row-label the
+             sheet has no label column
+
+rank  site        kind             pdepth  deps  ddepth  nbrs  absent                                  not_searched  unsearched             
+----  ----------  ---------------  ------  ----  ------  ----  --------------------------------------  ------------  -----------------------
+3     Inputs!B3   CONSTANT_NUMBER  0       1     3       12    -                                       -             -
+3     Inputs!B2   CONSTANT_NUMBER  0       1     3       12    -                                       -             N
+2     Model!C3    DERIVED          2       2     1       8     unit,date,sample_size,variance_sibling  -             S
+2     Model!C2    DERIVED          2       2     1       8     unit,date,sample_size,variance_sibling  -             N,S
+2     Model!B3    DERIVED          1       1     2       8     unit,date,sample_size,variance_sibling  -             S
+2     Model!B2    DERIVED          1       1     2       8     unit,date,sample_size,variance_sibling  -             N,S
+2     Inputs!D3   CONSTANT_NUMBER  0       1     2       12    -                                       -             -
+2     Inputs!D2   CONSTANT_NUMBER  0       1     2       12    -                                       -             N
+0     Summary!B3  DERIVED          3       0     0       4     unit,date,sample_size,variance_sibling  -             S
+0     Summary!B2  DERIVED          3       0     0       4     unit,date,sample_size,variance_sibling  -             N,S
+0     Summary!B1  CONSTANT_TEXT    0       0     0       3     unit,date,sample_size,variance_sibling  -             N,no-col-label,is-label
+0     Summary!A3  CONSTANT_TEXT    0       0     0       4     unit,date,sample_size,variance_sibling  -             S,is-label
+0     Summary!A2  CONSTANT_TEXT    0       0     0       4     unit,date,sample_size,variance_sibling  -             N,S,is-label
+0     Summary!A1  CONSTANT_TEXT    0       0     0       3     unit,date,sample_size,variance_sibling  -             N,no-col-label,is-label
+0     Model!D3    DERIVED          3       0     0       8     unit,date,sample_size,variance_sibling  -             S
+0     Model!D2    DERIVED          3       0     0       8     unit,date,sample_size,variance_sibling  -             N,S
+0     Model!D1    CONSTANT_TEXT    0       0     0       5     unit,date,sample_size,variance_sibling  -             N,no-col-label,is-label
+0     Model!C1    CONSTANT_TEXT    0       0     0       5     unit,date,sample_size,variance_sibling  -             N,no-col-label,is-label
+0     Model!B1    CONSTANT_TEXT    0       0     0       5     unit,date,sample_size,variance_sibling  -             N,no-col-label,is-label
+0     Model!A3    CONSTANT_TEXT    0       0     0       8     unit,date,sample_size,variance_sibling  -             S,is-label
+0     Model!A2    CONSTANT_TEXT    0       0     0       8     unit,date,sample_size,variance_sibling  -             N,S,is-label
+0     Model!A1    CONSTANT_TEXT    0       0     0       5     unit,date,sample_size,variance_sibling  -             N,no-col-label,is-label
+0     Inputs!F3   CONSTANT_NUMBER  0       0     0       12    -                                       -             -
+0     Inputs!F2   CONSTANT_NUMBER  0       0     0       12    -                                       -             N
+0     Inputs!F1   CONSTANT_TEXT    0       0     0       7     -                                       -             N,no-col-label,is-label
+0     Inputs!E3   CONSTANT_NUMBER  0       0     0       12    -                                       -             -
+0     Inputs!E2   CONSTANT_NUMBER  0       0     0       12    -                                       -             N
+0     Inputs!E1   CONSTANT_TEXT    0       0     0       7     variance_sibling                        -             N,no-col-label,is-label
+0     Inputs!D1   CONSTANT_TEXT    0       0     0       7     sample_size                             -             N,no-col-label,is-label
+0     Inputs!C3   CONSTANT_DATE    0       0     0       12    -                                       -             -
+0     Inputs!C2   CONSTANT_DATE    0       0     0       12    -                                       -             N
+0     Inputs!C1   CONSTANT_TEXT    0       0     0       7     -                                       -             N,no-col-label,is-label
+0     Inputs!B9   CONSTANT_NUMBER  0       0     0       0     unit,date,sample_size,variance_sibling  -             no-col-label
+0     Inputs!B12  CONSTANT_TEXT    0       0     0       0     unit,date,sample_size,variance_sibling  -             S,no-col-label
+0     Inputs!B1   CONSTANT_TEXT    0       0     0       7     unit                                    -             N,no-col-label,is-label
+0     Inputs!A3   CONSTANT_TEXT    0       0     0       12    -                                       -             is-label
+0     Inputs!A2   CONSTANT_TEXT    0       0     0       12    -                                       -             N,is-label
+0     Inputs!A1   CONSTANT_TEXT    0       0     0       7     -                                       -             N,no-col-label,is-label
+
+flagged cells: 38   with at least one absent companion: 23

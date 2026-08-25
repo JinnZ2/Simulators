@@ -1,0 +1,54 @@
+residual selftest
+  slope of an exact line                                     PASS got=2.0 want=2.0
+  a flat series has slope zero                               PASS got=0.0 want=0.0
+  a predictor with no variation is a state, not a zero       PASS got='NO_VARIATION' want='NO_VARIATION'
+  too few points is a state, not a zero                      PASS got='TOO_FEW' want='TOO_FEW'
+  the standardized slope is dimensionless and scale-free     PASS got=1.0 want=1.0
+  F1 pooled sign returns no lean                             PASS got=False want=False
+  F1 S2(a) fires                                             PASS got=True want=True
+  F1 top-ranked axis is predicted magnitude                  PASS got='predicted magnitude' want='predicted magnitude'
+  F1 names the collinear group rather than one of it         PASS got=(False, ['predicted magnitude', 'time index']) want=(False, ['predicted magnitude', 'time index'])
+  F1 verdict is a work order                                 PASS got='RECOVER' want='RECOVER'
+  F2 pooled sign fires                                       PASS got=True want=True
+  F2 has no conditional lean                                 PASS got=False want=False
+  F2 verdict is log and leave                                PASS got='LOG_AND_LEAVE' want='LOG_AND_LEAVE'
+  F2 names no term, because no conditional row leans         PASS got=None want=None
+  F3 rate check reports growing                              PASS got='GROWING' want='GROWING'
+  F1 rate check does not                                     PASS got='STABLE' want='STABLE'
+  F2 rate check does not                                     PASS got='STABLE' want='STABLE'
+  F3 output is distinct from F1 and F2                       PASS got=3 want=3
+  F4 emits uninterpretable                                   PASS got='UNINTERPRETABLE' want='UNINTERPRETABLE'
+  F4 is not scored as a clean series                         PASS got=False want=False
+  the same series with a known history is readable           PASS got=True want=True
+  an adjusted series is refused, not scored                  PASS got='REFUSED' want='REFUSED'
+  and S5's own spelling loads as the same state              PASS got='adjusted' want='adjusted'
+  2x2: lean + strong                                         PASS got='RECOVER' want='RECOVER'
+  2x2: lean + weak                                           PASS got='LOG_AND_LEAVE' want='LOG_AND_LEAVE'
+  2x2: no lean + strong                                      PASS got='CHECK_S2A' want='CHECK_S2A'
+  2x2: no lean + weak                                        PASS got='NO_ACTION' want='NO_ACTION'
+  a missing coupling is a state, not weak                    PASS got='COUPLING_UNKNOWN' want='COUPLING_UNKNOWN'
+  the coupling is read from the claim record                 PASS got=0.8815 want=0.8815
+  and its provenance travels with it                         PASS got=True want=True
+  a record with a coupling gives one                         PASS got=True want=True
+  an unknown claim is a state with a reason, not a zero      PASS got=(None, True) want=(None, True)
+  the emitted report carries no screened form                PASS got=True want=True
+  and the screen would fire if it drifted                    PASS got=False want=False
+SELFTEST PASS (0 checks failed)
+
+naming selftest
+  the phrase with ' ' is caught                              PASS got=False want=False
+  the phrase with '-' is caught                              PASS got=False want=False
+  the phrase with '_' is caught                              PASS got=False want=False
+  the -ed form is caught                                     PASS got=False want=False
+  the de- form is caught                                     PASS got=False want=False
+  'residual adjustment' passes                               PASS got=True want=True
+  'adjusted / unadjusted' passes                             PASS got=True want=True
+  the field names S5 requires pass                           PASS got=True want=True
+  the bare word 'correction' passes                          PASS got=True want=True
+  the bare word for a lean passes                            PASS got=True want=True
+  'biases' is not the phrase                                 PASS got=True want=True
+  'incorrect' is not the phrase                              PASS got=True want=True
+  the tool is clean, with the specification excluded         PASS got=[] want=[]
+  and the specification is the ONLY file that fires without it PASS got=['WORK_ORDER.md'] want=['WORK_ORDER.md']
+  this file was itself scanned and is not exempt             PASS got=False want=False
+SELFTEST PASS (0 checks failed)

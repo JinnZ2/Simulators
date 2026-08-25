@@ -5800,6 +5800,875 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `B.3/1-212`; stated from memory, unverified, and the correction is a
   shelf mark, so a reader following the note as written asks for a series
   that does not exist. Stdlib only, parses under 3.9, CC0.
+- `sheet-structure-scan/` — Built to a delivered spec: two scans over a
+  spreadsheet plus a ranking, with the delivery kept verbatim in
+  `SOURCE_DROP.md`. **Scan two, companion absence** — for a flagged cell,
+  which of `unit` / `date` / `sample_size` / `variance_sibling` is
+  *missing* from its neighborhood, reporting what is not there rather
+  than what is. **Scan three, header collision** — labels across all
+  sheets grouped by normalized string and listed when their cells differ
+  in precedent depth or in constants-versus-derived. **Ranking**
+  `deps × downstream_depth`. **The two spec constraints are the folder's
+  spine.** (1) *stdlib plus one spreadsheet reader* — **the budget is
+  unspent**: `.xlsx` is a zip of XML and formulas sit in
+  `xl/worksheets/sheetN.xml` as `<f>` elements, so `zipfile` +
+  `xml.etree` reach everything, and the larger reason is not frugality
+  but that **both scans are about the formula layer** the common reader's
+  value-only mode drops — the layer under test cannot be discarded by the
+  reader meant to deliver it. (2) *never label a site* — enforced rather
+  than requested: `no_severity.py` screens 78 words across severity and
+  interpretation over every emitted table, is **null-tested in both
+  directions** (planted word per class caught; `terror`/`mustard`/
+  `bustle` checked against `UNI_009` substring bleed), and states its own
+  limit at the top of the file — *a keyword screen is stepped around by
+  any paraphrase*, `DF_010`/`ACL_017` on a new substrate. **`SSS_003`,
+  the load-bearing one:** scan two begins *"for every flagged cell"* and
+  **scan one is not in the delivery**, so the flag set is an INPUT and
+  running without one is **refused**, never defaulted — and the case is
+  measured, not argued: under `--all` **23 of 38 rows carry an absence
+  and 15 of those 23 are label cells or strays outside any table** (a
+  header reading `unit price (USD)` is not itself under a header, so it
+  reports `unit` absent), against a five-cell list giving four absence
+  rows, three of them values in a table. **Three findings are failures
+  the fixture produced.** `SSS_002`: a square neighborhood of radius 2
+  **reports a correctly built six-column table's own `sd` column
+  absent**, three columns being outside the block — and the repair is the
+  SHAPE, not the radius, since radius 6 reaches the adjacent record and
+  trades a false absence for a false presence, which §2 argues is the
+  costlier direction because it removes a row from a report whose subject
+  is what is missing; replaced by a cross (the whole record row, the
+  column within ±radius, and the label-row cell above every column the
+  row touched). `SSS_009`: `=LOG10(A1)` returned `{A1, LOG1}` — the
+  lookahead refuses a ref followed by `(`, so the engine backtracks to
+  `LOG1` — putting a function name into the precedent graph, which would
+  have made **the rank column wrong for a reason invisible in the
+  output**; caught by a fixed-in-advance selftest case, not by reading.
+  `SSS_006`: keeping parentheticals costs a true collision the fixture
+  carries (`unit price (USD)` `2c{0}` vs `unit price` `2d{1}`), and
+  stripping them would merge `revenue (net)` with `revenue (gross)` — the
+  default is the one that under-reports and the choice is stated.
+  **`SSS_004`:** `deps × ddepth` makes **every terminal rank 0**, so the
+  cell whose number gets quoted ties for last with an unused stray —
+  propagation is what the delivery asked for, and near the bottom of a
+  sheet propagation and consequence run opposite; `pdepth` is a column so
+  the tie is breakable, and changing the sort would make the ranking a
+  claim about importance, which the no-labelling constraint bars.
+  **`SSS_007`:** three companion states plus an `unsearched` column
+  (`N`/`S`/`no-col-label`/`no-row-label`/`is-label`) — the
+  absent-vs-known-negative repair designed in rather than found, with
+  cells carrying no absence kept in the table so the denominator stays
+  visible. **Ten parameters the delivery left open** are marked
+  `[CHOICE n]`, defaulted, overridable, and printed into the report
+  header when in force. `sheetmodel.py::rank` is registered in
+  `tools/known_answer.py` with four cases (chain 2 / fan 3 / terminal 0 /
+  cycle `CYCLE`) that separate the two factors. `fixture.py` writes the
+  demo `.xlsx` with `zipfile`, so the repo stays text-only and the
+  workbook is a readable table. **`SSS_010` UNVERIFIED:** nothing has met
+  a real workbook, F1–F4 all need one, and three of ten claims are
+  failures the fixture produced — *passing is weaker evidence than
+  failing* (`membership-probe`'s LIMITS, same asymmetry).
+  **`targets/` pre-registers five workbooks across three publishers and
+  reads none of them.** The denial is an **allowlist, not a per-host
+  block** — `www.epa.gov`, `unfccc.int`, `theclimateregistry.org` and
+  `example.com` all return 403 to CONNECT while `github.com` reaches the
+  origin, DNS resolving for all of them (`SSS_015`), so substituting a
+  publisher does not help and there is no third host worth trying; a
+  mirror on an allowed host was not sought, that being circumvention
+  rather than compliance. The Emission Factors Hub arrived
+  as a known-answer case with the standard *if the scan does not light
+  that up, the scan is broken*, which had no value attached; ten
+  predictions are now registered before any file was opened: six for the
+  Hub, and P1-P3 for each of **three** live-calculator arms (EPA Local
+  Tool, UNFCCC calculator, Climate Registry tool) plus P4 for the one
+  whose modules were named in advance. **`SSS_016`:** the three arms are
+  registered separately rather than merged, because what follows from
+  *"a live calculator"* is not what follows from a *described module
+  structure* — and the selftest requires **each** arm to discriminate,
+  since a second one that does not adds a name and no evidence.
+  **`SSS_013`: the pair is the test.** A Hub run alone cannot separate *the scan works and the Hub
+  is flat* from *the scan reports everything flat* — the two predict the
+  same output — so the Local Tool is the discriminator and every report
+  ends by saying it is one arm. **`SSS_011`, the one that earned the
+  exercise:** building the criterion against a target-shaped fixture
+  found that scan three listed every shared header on a difference in
+  **table height** (`12c` against `9c`), producing five column collisions
+  on a fixture where nothing collides — and the Hub is exactly that
+  shape, many sheets sharing headers over different row counts, so it
+  would have lit up with a rank beside each row and read as a finding.
+  The delivery asks *whether* the cells are constants versus derived and
+  **whether is a set**, so the listing decision now takes the kind set
+  (`c`/`d`/`c+d`) with the counts kept in the printed column. **`SSS_012`:**
+  `EFH-P4` is a share and passed on an **empty denominator** — a
+  single-sheet workbook has no repeated label — which is `PCH_001`
+  reached a second time in a second folder by a different route; shares
+  now name their denominator and return `NOT_DETERMINABLE`, both branches
+  pinned. **`SSS_014`:** `patterns.json` was widened before the data
+  (generic parenthetical removed as too loose, mmBtu/therm/scf/MWh/short
+  ton/CO2e added) in the direction that makes the tool's own `unit
+  present` prediction easier — disclosed in the file's `_note` and the
+  claim table, and bounded structurally, since **no edit to the unit list
+  can make the variance or sample-size patterns fire**, which is where
+  the load-bearing differential sits. The criterion is null-tested on two
+  synthetic shapes (flat holds 6 of 6 `efh` and fails both `local`
+  discriminators; chain the reverse) with the synthetics loudly marked as
+  no evidence about any EPA product. One contingency named: a target
+  shipping as legacy `.xls` makes `read()` raise, and **that** is when
+  the one-reader slot gets spent — the test `SSS_001` sets for itself.
+  **`coupling.py` then replaced the ranking's first factor**, per the
+  integration order: a **dimensionless elasticity** measured by
+  perturbing a constant and reading the output cells, falling back to
+  dependent count where a formula is not evaluable, with the mode named
+  per row because `coupling x depth` and `deps x depth` are not on one
+  scale. **`SSS_025`:** the evaluator is checked against **Excel's own
+  cached values** and reproduces **631 of 631 with zero disagreements** —
+  a known-answer run on a file nobody here wrote — and `verify` is
+  itself null-tested on a fixture carrying one right cache and one
+  deliberately wrong one. **`SSS_026`:** the first run returned **0 of
+  789** in coupling mode because the workbook is an unfilled template
+  (`F6 = D6*E6` with `E6` empty moves nothing), so **coupling is a
+  property of the workbook AND a case**, `--input` supplies it and every
+  report prints it, with `NO_LIVE_PATH` kept apart from
+  `NOT_COMPUTABLE` and from an elasticity of zero. **`SSS_027`:** the
+  evaluator was **not re-entrant** — parser state lived on the instance,
+  so a nested formula resumed the outer one inside itself, costing every
+  rollup in the workbook, and no depth-1 fixture could show it.
+  **`SSS_029`:** at one point 627 of 631 formulas evaluated and 0 of 789
+  constants got a coupling number, because nearly every constant
+  terminates at one grand total and **two `SUMIF` cells gated the whole
+  workbook** — coverage of a perturbation is a property of the
+  TERMINALS, not of the formula population. **`SSS_028`:** `Report!E23`
+  sums `Food!E5:E16`, starting on the **header row** where every sibling
+  row starts at 6; Excel ignores text in a range so the workbook
+  computes correctly and the off-by-one is invisible in use.
+  **`SSS_030`, the result the substitution is for:** under a stated case
+  **3 constants have non-zero coupling and 781 have exactly zero, and
+  every one of those 781 ranks non-zero under dependent count, up to
+  380** — count measures wiring, coupling measures what moves. The top
+  row is the Iraq grid factor at coupling 0.6215, and the number is
+  interpretable, since the elasticity of a sum with respect to one term
+  is that term's share of the total, confirmed to four figures on
+  `Fuels!D6`. **`SSS_031`:** `coupling.py cells` reports per-cell
+  movement and separates **structural** from **live** dependence — on
+  the Iraq grid factor, 26 cells moved against **33 structural
+  dependents of which 31 did not**, because a `VLOOKUP` range makes
+  every cell in it a graph edge and only the selected row a live one,
+  while **24 cells moved that are not direct dependents at all**; every
+  moved cell carries elasticity exactly 1.0 except the grand total at
+  0.881538, a product chain passing a relative change through unchanged
+  and only the sum diluting it. **`SSS_032`:** asked whether any
+  Palestine cell moved — **none did and none can**, since
+  `Electricity, heat, cooling!B296` is a `CONSTANT_NUMBER` and row 296
+  holds only a country name and a number, so the mean-of-five
+  relationship the workbook states in prose at `Info and sources!E10`
+  is a record of how the number was produced and **is not maintained by
+  any formula**: revise a neighbour upstream and this cell does not
+  follow.
+  **Then two real workbooks arrived and `SSS_010` closed.** The UNFCCC
+  calculator holds 3 of 3 — **but not on the first run**: `UNF-P1` came
+  back `0.037` against a registered `> 0.20`, and the cause was the
+  reader, not the workbook. **`SSS_017`, the largest defect in the
+  folder:** 720 of the workbook's 825 formula cells are **shared
+  formulas**, whose text lives once on a group master with every follower
+  carrying only an index, and the reader took an empty `<f>` body as no
+  formula — reading **696 cells as constants** (129 derived, exactly the
+  105 plain plus the 24 masters that carry text), so `pdepth`/`deps`/
+  `ddepth`/`rank` were wrong for everything downstream of any of them.
+  Repaired with `shift_formula()`, which translates a master's relative
+  references with `$`-pinned halves left alone and string literals masked
+  at preserved length; eleven hand-set cases pinned. **The fixture could
+  not have shown it** — `fixture.py` writes only plain formulas — which
+  is `SSS_010`'s *passing is weaker evidence than failing* instanced.
+  **`SSS_019`:** a threshold fixed before the file existed is what made a
+  reader defect the live hypothesis rather than the available and wrong
+  story (*this calculator is mostly reference tables*); `UNF-P2` and
+  `UNF-P3` holding in the same run is what pointed at it, and after
+  repair `derived_share` is `0.226`, held by a small margin and reported
+  as such. **`SSS_018`, the honest one:** the regex used to diagnose
+  `SSS_017` was itself wrong in the same direction — `[^>]*` swallows the
+  `/` of a self-closing tag, so it merged `<f/>` with the next real `<f>`
+  and reported 476 against a parse's 825; both errors undercounted, so
+  the diagnosis survived by luck rather than by method. **`SSS_020`, the
+  substantive finding:** scan three lists 4 groups of 33, and `factors`
+  appears as a column label on 11 sheets — eight carry pure constants at
+  depth `{0}` while **`Home Office` carries `31d`, pure derived, at
+  `{1}`: that sheet computes its emission factors where eight others
+  hardcode them** — with the consequence one level deeper in the
+  `kg CO2e` output column (`{2}` there, `{1}` on nine sheets).
+  **`SSS_021`:** two of the four differing occurrences per group are
+  **stacked-table artifacts**, checked and separated rather than assumed
+  clean — `Electricity, heat, cooling` and `Water` stack several tables
+  in a column and `CHOICE 4` assumes one label row per sheet, measured by
+  counting cells in each governed range whose text normalizes to the
+  group's own label (2 and 1 against 0 on the other nine); unrepaired,
+  since the fix changes the label model for every sheet. **`SSS_022`:**
+  on the 22 cells scan three surfaced — a flag set produced by an
+  upstream scan rather than invented — `unit` is present on 22 and
+  `date`/`sample_size`/`variance_sibling` absent on 22, which is the
+  differential the Hub was offered to demonstrate, on a workbook that is
+  not the Hub. **`SSS_023`:** the `.xls` target fired the §5 contingency
+  as registered, **and the slot stays unspent for a reason** — the file
+  is valid BIFF8 carrying 336 `FORMULA` and 23 `SHRFMLA` records while
+  `xlrd` 2.0.2, the one reader for the format, exposes cached values and
+  no formula text, so spending the budget delivers exactly the value-only
+  view `SSS_001` named as the reason to parse XML directly; LibreOffice
+  is installed, fails on the file, and **fails identically on a control
+  this tool parses**, so the install is broken here and says nothing
+  about the `.xls`. **`SSS_024`:** the output screen ran in one of two
+  CLIs and the gap surfaced on a real run. **Scan 4 (`WORK_ORDER_4.md`,
+  verbatim) then asks whether a formula still maintains what the prose
+  states** — four bins (`MAINTAINED` / `HOLDS_UNMAINTAINED` / `BROKEN` /
+  `NOT_TESTABLE`), no aggregate score, no ranking, and BROKEN is not
+  called an error, since a workbook may have every reason to hold a number
+  the note beside it no longer describes. **`SSS_033`: on the UNFCCC
+  calculator the bins are 0 / 2 / 21 / 11** — 135 prose cells across
+  eight keyword-located sheets, 124 not arithmetic — so **not one stated
+  arithmetic relationship in the workbook is maintained by a formula**;
+  every one is stated about a constant, and the two that hold, hold by
+  history rather than by construction, which is `SSS_032` generalised from
+  one case to the file. **`SSS_034`, the headline:** `Info and sources!E10`
+  states that twenty-two named territories each take the average of
+  thirty-three named places, and **twenty of them hold
+  `0.52194015744421518`, which is `Electricity, heat, cooling!B329`
+  (Western Sahara) to all seventeen digits** — the target of a *different*
+  stated relationship in the same cell of prose, the average of five North
+  and West African countries, and that one holds; one (Macao) holds a
+  third number and **zero hold the stated mean**, verified by hand on
+  `B114` and `B329` independently of the scan. **`SSS_035`:** operand count
+  separates the bins here — both 5-operand relationships hold, the one
+  33-operand relationship does not across every target it states,
+  `BROKEN/(B+H) = 0.913` — and that is exactly the quantity the order says
+  to accumulate, so the rate emission prints `n = 1` and refuses a curve in
+  those words: *a point is not a rate*. **`SSS_038`:** `when it diverged`
+  returns **UNRECOVERABLE** and says so — `.xlsx` carries no per-cell
+  revision history, so the file cannot date the divergence and the tool
+  does not estimate one; a version series of the same workbook would
+  bracket it. **`SSS_036`:** three resolution problems the real prose
+  forced (a name mismatch, an ambiguous containment match, an operand list
+  mis-split 38 against 33) are fixed by stated rules — unique containment
+  plus a declared sheet scope, and an index-driven longest-match split
+  preserving original casing — rather than by guesses. **`SSS_037`:** an
+  operator naming no operands now lands in `NOT_TESTABLE` rather than
+  falling out of the count, since a relationship that cannot be tested is
+  a reading and not an absence. **WO6 then amended the bin `BROKEN` →
+  `DIVERGED`** ("the cell and the stated relation differ", no ruling on
+  which is wrong) and **retired the delivered-order exemption entirely** —
+  no token in the order fires, so no file fires and nothing is masked,
+  with the three-arm harness kept for a real exemption later; across every
+  pinned sample **one file still fires and it is `no_severity`'s own
+  selftest transcript**, which must contain the words it screens in order
+  to test them (`SSS_049`, a statement about the screen's scope). **WO6 —
+  a second workbook and a legacy reader.** **`SSS_040`: the legacy
+  constraint is a property of the READER, not of the format** — true of
+  `xlrd` (`SSS_023`) and false of the file, since a `.xls` is a
+  compound-file container holding a BIFF record stream and `struct`
+  reaches it; the target carries **336 `FORMULA` and 23 `SHRFMLA`**
+  records, all 336 decode, `xlsreader.py` is stdlib, and **the one-reader
+  budget stays unspent for a second file format**, with capabilities
+  declared per item (`formula_text` **no**) so callers mark scans NOT_RUN
+  from a declaration rather than a note. **`SSS_041`, two decoding defects
+  the real file produced and no fixture could**: shared-formula masters
+  are written *after* the first formula using them, so stream-order
+  resolution gave 23 cells an empty precedent list reading as *no
+  precedents*; and relative areas (`ptgAreaN`) were walked past rather
+  than decoded, leaving 145 formulas with no edges and no flag — 188 of
+  336 → **336 of 336**, 714 edges → 1056, with the relative column delta a
+  signed BYTE and not the 14 bits an absolute ref uses. **`SSS_042`: the
+  prediction written to fail cleanly is the one that failed.** P4 (*at
+  least one testable relationship*) was registered before the run
+  precisely so P1–P3 would be **unreachable rather than refuted**, and it
+  went — 189 prose cells, 188 not arithmetic, **0 testable** — with the
+  zero measured as a property of the workbook rather than argued
+  (`average` 0, `mean` 0, `sum of` 0, `multiplied` 0, `divided` 0,
+  `equals` 0, `=` 0 across all 189). **`SSS_043`, what the second file
+  actually bought and it is not what H1 asked:** the two workbooks'
+  provenance prose is a different KIND — UNFCCC states *"Bonaire: Average
+  of American Samoa, …"*, retrospective and about values it ships; LGO
+  states *"Description of computational method:"*, prospective and about
+  values a filer will supply. Both are unfilled templates, so fill state
+  is not the difference; one **ships data with provenance notes** and the
+  other **collects data with instructions**, and only the first kind can
+  state a relationship about its own cells, so **H1 is not addressable
+  here rather than unsupported** — reporting the file as evidence against
+  H1 would count a workbook that cannot answer the question as an answer.
+  **`SSS_044`:** `diverged_share()` therefore returns `None` and not
+  `0.0`, since zero would put a workbook with nothing to measure at the
+  good end of a scale it is not on (`PCH_001`, thirteenth instance here),
+  and `direction()` returns **`NO_DIRECTION`** naming the empty
+  denominator, with n = 2 printed and no curve emitted. **`SSS_045`:**
+  "file date" turned out to be **two dates eight years apart** on the
+  legacy target (2008-06-04 created / 2016-05-02 modified, on a form whose
+  filename states the later one), so the column is headed
+  `created / modified` and carries both — and only the two date properties
+  are read, the same property set naming a private individual which
+  nothing reads. **`SSS_046`, the live one the order caught:**
+  `coupling.py` ranks by elasticity where computable and by dependent
+  count where not, which is right on a readable workbook and is exactly
+  S1's forbidden substitution on a reader with no formula text — it
+  printed a COUNT table under a coupling heading with nothing saying the
+  coupling arm had not run; it now stops with `COUPLING IS NOT_RUN ON THIS
+  WORKBOOK` and **does not offer the count as a stand-in**, since the two
+  disagree on this repo's own evidence (`SSS_030`), pinned in both
+  directions. **`SSS_047`:** scan three's finding on the legacy file is
+  the collision it exists for — `total location-based scope 2 emissions`
+  labels ten row blocks meant to be parallel sectors and some govern
+  `1c+4d` where others govern `4d`, 9 of 17 repeated-label groups listed
+  and 8 agreeing on both axes. **`SSS_048`:** the single non-arithmetic
+  exception is `often times`, an adverbial matched as multiplication —
+  `UNI_009`/`T1-1` inside scan 4's own operator vocabulary — caught by the
+  operand requirement `SSS_037` added rather than by the operator match,
+  and recorded rather than repaired since a word boundary does not
+  separate two senses of one token. **WO7 asked for a third workbook and
+  the run did not happen; the screen did.** **`SSS_050`:** S1(b) is
+  *"provenance prose classified RETROSPECTIVE under the amended WO4
+  test"* and **no such test existed** — `SSS_043` drew the distinction in
+  prose from two workbooks and nothing implemented it, `RETROSPECTIVE`
+  and `PROSPECTIVE` appearing zero times in the folder before
+  `selection.py` — sixth instance of the stated-rule-with-no-field shape,
+  and building it is most of the order. **`SSS_051`, the trap the
+  classifier had to avoid:** the easy version of (b) — *does any prose
+  cell yield a resolvable relationship* — **is** (c), two criteria
+  computing one quantity, so (b) reads **stance** and (c) reads
+  **resolvability** and `independence()` reports whether they have been
+  observed disagreeing; **off-diagonal 0 of 3**, so on this population
+  the screen cannot say which criterion does the work, and the separating
+  case not in hand is a retrospective note whose operands sit outside the
+  file. **`SSS_052`, and it decides `SSS_051`:** `min_retro = 1` is a
+  `[CHOICE]` and the UNFCCC calculator carries **RETRO 4 against PROSP
+  9** — more prospective prose than retrospective, in the file holding
+  all 23 testable relationships — so a **majority rule** rejects at (b)
+  the only workbook (c) accepts, making the threshold calibrated by a
+  case rather than stipulated, and under that rule the file **is** the
+  off-diagonal cell: whether the two criteria are independent is a
+  property of the threshold. **`SSS_053`, the reject log:** every
+  criterion is recorded rather than stopping at the first failure, and
+  they separate cleanly — the prior file passes all three content
+  criteria (a)-(c) and neither novelty criterion (d)-(e), while the LGO
+  file fails all five; **no third candidate is reachable**, with
+  `epa.gov`, `unfccc.int`, `theclimateregistry.org`, `eia.gov`,
+  `data.gov` and `ipcc-nggip.iges.or.jp` all returning a refused CONNECT
+  and only the GitHub hosts responding, and two of three uploaded files
+  byte-identical so the distinct population is **two** — so S1's own
+  hypothesis (*if most published workbooks fail (b) or (c) the population
+  is small*) is untested **not because most workbooks fail but because
+  none could be screened**, which is `SSS_043` applied to the order's own
+  method. **`SSS_054`:** all four S3 predictions return **NOT
+  ADDRESSABLE**, the verdict S3 made legal one order after `SSS_043`
+  argued for it. **`SSS_055`:** S4's `OUT_OF_SCOPE` is built and its
+  first implementation **dropped the row it exists to keep** (a
+  `continue` removed out-of-scope workbooks from the denominator *and*
+  the table), with a second defect the `G1` fixture caught — reading
+  scope off the share's denominator calls a workbook whose relationship
+  IS enforced by a formula out of scope, since MAINTAINED counts; the
+  stance test is **imported** from `selection.py` rather than
+  reimplemented so screen and emission cannot disagree about
+  RETROSPECTIVE. **`SSS_056`:** naming the module `select` collided with
+  the standard library — it **worked when run as a script** and failed
+  the first time it was imported, a collision invisible in the one
+  invocation the author used. **`SSS_039`, recorded rather than quietly
+  fixed:** scan 4 **shipped without the constraint its own order states**
+  — `scans.py` screens every emitted table through `no_severity` and
+  `scan4.py` did not import it at all — and screening afterwards returned
+  24 hits whose *shape* is the finding: 22 are the `BROKEN` bin name,
+  which the work order delivered and which is on the screened list. The
+  exemption is **declared and measured** rather than taken (one arm masks
+  the delivered token, a second asserts the token is the only thing that
+  fires without the mask, since masking `BROKEN` also hides any sentence
+  containing it, and a third plants `this cell is wrong` and requires it
+  caught through the exemption); the other two hits — a use-mention of
+  `error` in the disclaimer and `needs` in the rate emission — were
+  **reworded rather than exempted**, the call `residual-direction`
+  `RDD_008` made when its own screen fired on its own disclaimer. Holds on
+  the real workbook and not only on the fixture. **`SSS_057`, the SBA
+  run:** `sba.gov` refuses CONNECT like the six publisher hosts at
+  `SSS_053` and no file was uploaded, so the three documents were read by
+  nothing and the run is **NOT_RUN on all three** — while the order's
+  reader question is answered anyway. `docreader.py` declares per item:
+  `container_detect` and `stream_enumerate` **built** (the container
+  parser reused from `xlsreader`, not copied), **`text` NOT BUILT**, and
+  each absence names what it stops — `text` stops every upward cell, every
+  quantified downward stop and the WO7 screen's (b) and (c), so the grid
+  has nothing to fill. **The extension is a claim, not a fact**: `sniff()`
+  runs first, since a government `.doc` may be OLE Word, a renamed OOXML
+  zip or RTF, and the check that matters is tested on a real file — an OLE
+  *workbook* must not read as a Word document, and it reads `False` with
+  the missing `WordDocument` stream named. **No text-heuristic substitute
+  is offered and the refusal is structural**: `read_doc()` raises rather
+  than returning a degraded read, and a selftest check reads the module's
+  own source to assert no `strings`-style path exists in it. The parser is
+  deliberately not written ahead of the files, because `SSS_017` and
+  `SSS_041` are both defects a real file exposed that no fixture could —
+  **and one file then arrived and it was built against that file**:
+  OLE → FIB → CLX piece table → one compressed piece, **7711 characters,
+  exactly `ccpText`**, with the decisive check being the halving, since a
+  compressed piece's `fc` is doubled in the header and a reader taking it
+  raw lands mid-document and returns plausible text (both halves
+  asserted). **`FM_021`:** the WO7 screen **short-circuited on a reader
+  failure**, recording one criterion of six, and `SSS_053`'s sentence
+  ("records every criterion rather than stopping at the first failure")
+  was true of a criterion failure and false of a reader failure — repaired
+  with a third state, `pass: None` for not-evaluated, which is not a fail,
+  plus a shape note saying the screen is workbook-shaped so a `not
+  eligible` verdict on a prose document reads as a statement about fit.
+  247 selftest checks green
+  across nine modules. Stdlib only, parses under 3.9, CC0.
+- `claim-record/` — Seven fields per claim, two hard rules, and a
+  validator that refuses. Delivered spoken (`SOURCE_DROP.md`, verbatim):
+  assertion without hedges / measurement as an interval / instrument plus
+  its known error characteristics / domain of validity / clock with a
+  next-check date / derivation as parent ids / collapse record. Rule 1: a
+  claim with an unresolvable parent does not validate. Rule 2: no field
+  is optional, *because optional is how the domain of validity
+  disappeared in the first place*. **`CR_001`, the design move:** rule 2
+  read as a required-fields list gives a form; read seriously it gives
+  **a schema with no way to say nothing, only ways to say "not known, and
+  here is why"** — `UNTESTED`, `UNQUANTIFIED` with a `why`, an empty
+  parent list with a `root_reason`, and a sentinel without its reason is
+  refused, that being rule 2's own failure arriving one level down.
+  **`CR_002`, the part a required-field list cannot do:** fields 2 and 7
+  are **coupled** — `lo == hi` under `NOT_COLLAPSED` is
+  `POINT_WITHOUT_BASIS`, `lo != hi` under `EXACT` is
+  `INTERVAL_MARKED_EXACT` — since a point arrives either from a
+  distribution or from a count and saying which IS the field; the
+  collapse statistic comes from a closed vocabulary with an `other`
+  escape that must name itself, which is the repair `UNI_013` asked for,
+  designed in. **`CR_003`:** rule 2 gets seven null arms, one per field,
+  and **the positive control comes first** because a validator that
+  refuses everything passes all seven; eleven further checks require
+  well-formed variants to validate rather than merely to be refused. 39
+  checks. **Then filled with six real claims from the same day's
+  `sheet-structure-scan/` run**, where the provenance is known — all six
+  validate, and the useful part is what came back uniform. **`CR_006`:**
+  `collapse_record.state` is `EXACT` **6 of 6**, `COLLAPSED` **0** — the
+  field the drop calls *the upper-quartile field* has **no instance**,
+  because every instrument here is deterministic and every artifact a
+  fixed file, so every measurement is an exact count; fields 2 and 7 are
+  aimed at measurements with sampling error and this folder has not made
+  one, so the selftest exercises the branch and the corpus does not.
+  **`CR_005`:** there is **no denominator field**, so 6 of 6 records put
+  the population in a free-text `units` string (`129 of 825`, `22 of 22`,
+  `1 of 11`) — `measurement-fork`'s VOID RATIO at design time.
+  **`CR_007`:** `error.kind` is `systematic` 6 of 6 and `outside_this`
+  contains `UNTESTED` 6 of 6, so **the sentinel is doing all the work in
+  the field the drop calls the one that always gets stripped** — present
+  in every record, which rule 2 buys, and not yet informative, which it
+  cannot. **`CR_008`:** there is **no sibling relation**, and the missing
+  edge was written as a parent before it was caught — two claims measured
+  in one run of one scan were given a parent-child edge, in the file, by
+  the author of the schema, minutes after writing rule 1; corrected to
+  shared parents and recorded rather than quietly fixed, because it is
+  evidence about how a missing relation gets filled (not left blank, but
+  populated with the nearest available edge). **`CR_010`:** `due --on
+  DATE` read the date as the records directory and printed a well-formed
+  table with zero rows and rc 0 — `DL_005`'s shape in a tool about
+  denominators, found by running it; repaired, and both `validate` and
+  `due` now refuse an empty registry with rc 2. **`CR_009`:** field 1 is
+  the one field enforced lexically (38 hedge words, screened both ways
+  against `UNI_009` substring bleed) and any paraphrase steps around it,
+  stated at the top of the file rather than the bottom. The load path is
+  the payoff and is walkable: every claim in the corpus traces to
+  `SSS_017`, the reader repair, so refuting it exposes five claims above
+  it visibly rather than by memory. **Section 2 then replaced field 5
+  with three DERIVED sub-fields** — time constant of the nearest
+  neglected term, rate ceiling on the background, coupling — with
+  `shelf_life = time_constant / |coupling|` and **no date stored**;
+  rule 3 refuses `holds_for`/`next_check`/`shelf_life` as literals, and
+  refuses a sub-field with a value and no basis or `UNMEASURED` with no
+  reason, those being the two ways to assert it one level down.
+  **`CR_012`:** the coupling must be a **dimensionless elasticity** — a
+  raw partial `dY/dX` carries units and years divided by that is not a
+  duration — so `units` must be `"1"`, which is `G-DIM` applied before
+  the number is produced. **`CR_013`, all three behaviours realized on
+  real records from the UNFCCC file:** `UNF_GRID_IRAQ` **DERIVED, 3.40
+  years**, holding the generation mix fixed with coupling **0.8815
+  measured by perturbation** rather than asserted; `UNF_PALESTINE`
+  **UNDERIVABLE** — it holds fixed that five neighbours resemble the
+  target, never measured, and no branch can produce a date; `SSS_017`
+  **UNBOUNDED_BY_THIS_TERM**, its neglected term the reader revision
+  which moved **twice in one day** while the domain of validity pins the
+  commit, so coupling 0 and *the fastest term in the corpus dates
+  nothing*. **`CR_016`:** the three fixtures forced a **fourth collapse
+  state** — the hotel factor's statistic is stated in the workbook
+  (`upper quartile`, `Info and sources!E19`), the Palestine value is a
+  mean computed in the file and verified to **1.1e-16**, and the grid
+  factor arrived as a point from a cited dataset the workbook does not
+  describe, so `COLLAPSED_UPSTREAM` names the source and the gap rather
+  than defaulting into one of the other three; that closes `CR_006`.
+  **`CR_017` replaces it:** `rate_ceiling` is `UNMEASURED` on 8 of 9 and
+  the regime is `REGIME_UNKNOWN` on 9 of 9, so adiabatic-versus-sudden
+  is implemented, selftested both ways, and has never fired on a real
+  record — the same shape one field over. **`CR_019`:** the
+  no-labelling constraint is honoured by **importing** the detector's
+  screen rather than copying it, and it fired on this tool's own
+  disclaimer prose twice; `VALID`/`INVALID` are stated to be about
+  conformance to the schema and never about whether a claim is true.
+  **Three base principles then landed, with an acceptance test.**
+  `frames.py` + `frames/*.json`: **(1) no privileged frame**, not even
+  the one every record uses — `years` is a registered transform like
+  `sols`, an unregistered unit raises rather than resolving by
+  assumption, and `due` has **no default frame**, so the reader names
+  one; **(2) transforms are first-class versioned objects** beside the
+  records, with a rate frame carrying no rate of its own but naming the
+  duration frame it inverts; **(3) derived at read time, never at write
+  time** — `shelf_life`, `next_check` and every `shelf_life_<unit>` name
+  are refused as literals, the derivation returns base units, and the
+  reader renders (one record reads 3.403 years / 1243 days / 1210 sols,
+  nothing stored converted). **`CR_020`:** the format had four frame
+  leaks — `"years"`, `"per_year"`, a hardcoded `365.2425`, and the field
+  name `shelf_life_years` — and **not one was in a record**: the data
+  was frame-tagged and the CODE was frame-welded, which is why the
+  acceptance test passes without editing anything. **`CR_021`:** the
+  **identity transform had to be registered** and turned up as a break,
+  not a design note — `coupling` declares `units: "1"` and all nine
+  records went `UNDERIVABLE` at once until `frames/dimensionless.json`
+  existed; leaving `1` implicit would have made it the one unit the
+  format resolved without asking. **`CR_022`, the acceptance test:**
+  adds `venus_days`, deliberately **not** a file on disk since adding a
+  registered frame tests nothing — **9 records read, 0 needing an edit,
+  9 still validating** — and beside it a **control**, because a test
+  that adds a frame nothing reads would pass on a format that had leaked
+  everywhere: the same claim written in the added frame must validate
+  here, be **refused** by an implementation with `years` welded in, and
+  derive the **same shelf life in base units**. Run inside both
+  selftests. **`CR_023`:** requiring `measured_on_frame` edited all nine
+  records, and that is a **schema tightening, not a frame addition** —
+  the distinction the test turns on. **`CR_025`:** the first run
+  reported 3 of 9 validating on six `PARENT_UNRESOLVED` findings, and
+  the fault was the harness validating each record in a one-record
+  registry, so rule 1 could not see a parent by construction — recorded
+  because it is a way an acceptance test reports a failure belonging to
+  itself. **Work order 3 then added fields 8-10**, the adjustment history:
+  `correction_status` (`unadjusted`/`adjusted`/`unknown`, with S5's
+  `raw`/`corrected` as aliases since S6 governs the state vocabulary),
+  `correction_method` in field 7's shape, and `correction_depth`.
+  **`CR_026`:** field 8 is the **first column in this registry that
+  varies** — 6 `unadjusted` against 3 `unknown` — so `CR_007`'s standing
+  finding narrows rather than closing; the six are counts computed here
+  and the three are values read from a dataset and an index whose own
+  production the workbook does not describe. **`CR_027`:** field 10 keeps
+  `0` and `UNKNOWN` apart and refuses a missing field, the fourth field
+  in this schema to carry that repair. **`CR_028`:** the uninterpretable
+  state is a record-layer function both sides call, and its middle case
+  matters — unknown history WITH a lean is readable, because a lean that
+  survived an adjustment is still a lean. **`CR_029`:** a coupling in
+  this registry was **transferred rather than measured, and it was
+  wrong** — `UNF_PALESTINE` carried 0.8815 taken from the neighbouring
+  Iraq cell on reasoning about the shared lookup, where the measured
+  value on the Palestine cell itself is **0.8194**; the elasticity of a
+  sum with respect to one term is that term's share of the total, and
+  the two factors differ (0.569 against 0.934), so no argument about
+  shared consumption makes the shares equal. Corrected in the `basis`
+  field rather than in a commit message; it changes no verdict, since
+  that record's time constant is `UNMEASURED` and its clock was and
+  remains `UNDERIVABLE`. 93 selftest checks across two modules. Stdlib
+  only, parses under 3.9, CC0.
+- `residual-direction/` — Work order 3, delivered verbatim: read a miss
+  history and name the folded term. Companion to the fold detector,
+  which finds unbound numbers, and the claim record, which defines a
+  bound one. **`RDD_001`, the counterexample the design exists for:** on
+  fixture F1 — overpredict small, underpredict large — the pooled sign
+  test returns fraction positive **0.5083, no lean**, while the
+  conditional slope of residual against predicted magnitude fires at
+  standardized **0.868**; both halves of the order's stated PASS
+  condition hold, and pooled sign is retained as one printed row rather
+  than the verdict. **`RDD_002`:** the ranked list has to be on the
+  **standardized** slope, since raw slopes against predictors with
+  different units are not on one scale and sorting them is a comparison
+  across unlike objects — `G-DIM` in the one place a sorted column looks
+  like one quantity. **`RDD_003`, found by reading the output:** in F1
+  the predicted values rise with the time index, which is the common
+  real shape, so S2(a) and S2(c) carry **identical** standardized slopes
+  and a ranked list cannot say which the residual leans with; the order
+  asks for the term to be NAMED rather than inferred, and naming one of
+  a collinear pair is a specific wrong answer rather than an absent one,
+  so the report emits `NOT SEPARABLE` with the group and states what
+  would separate them. **`RDD_004`:** all four cells of the S3 2x2 are
+  reachable and a **missing coupling is a fifth state**, not weak —
+  treating it as weak would route a case to LOG AND LEAVE on an absence;
+  `LOG_AND_LEAVE` on F2 names no term, because there the lean is a
+  pooled offset and no conditional row leans. **`RDD_005`:** S4's
+  stable-versus-growing verdicts print as three distinct reports across
+  F1/F2/F3, asserted rather than trusted, since two findings that print
+  the same are the same finding. **`RDD_006`:** F4 returns
+  `UNINTERPRETABLE` and the identical series with a known history returns
+  a readable cell — the difference is entirely in the record.
+  **`RDD_007`:** S5 names field 8's values `raw | corrected | unknown`
+  and S6 replaces the state vocabulary with `adjusted / unadjusted`;
+  **S6 governs** and S5's spellings load as aliases, recorded rather than
+  resolved quietly, because an internal tension in a delivered order is a
+  fact about the order. **`RDD_008`:** the S6 screen composes its
+  patterns from tokens so the banned phrase never appears in its own
+  source, which lets `naming.py --source .` scan the folder **including
+  itself** with no skipped region — avoiding a second instance of
+  `UNI_010`'s hand-broken loop — and the one exemption, the delivered
+  order, is **measured**: the selftest checks both that the tool is clean
+  with the specification excluded and that the specification is the only
+  file that fires without it. **`RDD_009`:** field 8 is the **first
+  non-uniform column** in the claim registry (6 `unadjusted`, 3
+  `unknown`), narrowing `CR_007`/`CR_017` rather than closing them — the
+  six are counts computed in-session, the three are values read from
+  sources that describe neither, which is `COLLAPSED_UPSTREAM` from a
+  second side. **`RDD_010`:** S3's coupling is **imported** from the
+  claim record rather than reimplemented, so the number the
+  discriminator responds to is the same object the clock divides a time
+  constant by — and it was measured by perturbing a cell in a real
+  workbook, not stipulated anywhere in the chain. 49 selftest checks
+  across two modules. Stdlib only, parses under 3.9, CC0.
+- `model-provenance/` — Work order 5, delivered verbatim. Two halves that
+  do not share a mechanism: a **write** at session open (date, model
+  identifier as self-reported, repo, branch) and a **read** over history
+  that never writes back into it. **`MP_001`, the finding that makes the
+  rest checkable: the forward log S1 asks for already exists, unplanned**
+  — 159 of this repository's 236 commits carry a self-reported model
+  identifier in the `Co-Authored-By` trailer, a channel built for
+  attribution doing provenance by accident (Opus 4.7 ×40, Opus 4.8 ×1,
+  Opus 5 ×118, 77 stating nothing). **`MP_002`:** that supplies the check
+  set a decode needs to be a measurement rather than a rendering — 118
+  SINGLE-and-matching, 36 SINGLE-and-differing, 2 AMBIGUOUS containing, 3
+  AMBIGUOUS excluding, with no pick made in the ambiguous rows per S2.
+  **`MP_003`, the headline: the assumption S3 names is refuted on the
+  record** — *always current-at-the-time* fails on **39 of 159** commits,
+  because `Opus 4.8` appears 2026-07-12 and `Opus 4.7` keeps appearing for
+  a month after; the reading is not that the dates are wrong but that
+  sessions do not all run the newest version, which is exactly the content
+  of the assumption, so S3 was right to make it the claim rather than a
+  fact about a commit. **`MP_004`, and it is why the report prints two
+  numbers: all 39 rest on one commit.** `assumption_sensitivity()` drops
+  each table row in turn — remove the single 2026-07-12 commit and the
+  record is monotone, **0 backwards and 1 disagreement** instead of 39 and
+  36. One counterexample still refutes a universal so `MP_003` stands, but
+  a count is not a size and the two read as one thing; both are printed
+  and neither is picked. **`MP_005`, found only by real data:** the
+  decoder read `--date=short` and the 4.7 → 5 switchover happens **inside
+  one calendar day**, bracketed by the timestamps to **5 h 14 min**
+  (17:20:27 → 22:34:13 on 2026-08-11), so day-ordering reported three
+  counterexamples that are an artifact of the reading — a `G-RES` pair
+  where the feature is hours and the instrument was days. Repaired (full
+  stamp orders, short date decodes, since a decode cannot be finer than
+  its table), residual 3 → **0**, pinned by two checks. **`MP_006`:** S1
+  says write UNKNOWN if the build string is unavailable, and UNKNOWN has
+  more than one cause — this session operates under a standing constraint
+  against writing a model identifier into a pushed artifact, so the string
+  was **not unavailable, it was not written**; `open_line()` requires a
+  reason from `NO_BUILD_STRING` / `WITHHELD` and **refuses a bare
+  UNKNOWN**, with the first row of `sessions.jsonl` recording the conflict
+  rather than resolving it. Designed in before the first row, unlike the
+  dozen-odd prior instances of that repair found in audit. **`MP_007`:**
+  S2's release-date table is not reachable (allowlist egress) and a table
+  from memory is the `ANC_010` status, so `releases.json` ships **observed
+  bounds** from the trailers, `table_kind: observed_bound`, with every
+  report header stating that a first appearance is an **upper bound** on a
+  release date and never the date — and the cost stated in full, since the
+  substitute table is derived from the same trailers it is scored against,
+  leaving only the **ordering** check independent of it. **`MP_008`:** the
+  77 commits stating nothing are the population the decode exists for, so
+  it is checkable exactly where it is redundant and informative exactly
+  where it cannot be checked; kept as its own row rather than folded into
+  a rate. **`MP_009`:** S4 is structural, not promised — the only git verb
+  in the module is `log`, **asserted in the selftest over the file's own
+  source**, and writing that check produced one more `UNI_010`: the first
+  pattern was a literal and matched the line defining it, so it is now
+  composed from tokens (`RDD_008`). The `no_severity` exemption list is
+  **empty**, unlike scan 4's — this order's verdict names carry no
+  screened word — and the two arms plus the plant still run. 29 selftest
+  checks. Stdlib only, parses under 3.9, CC0.
+- `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
+  not one number: rows are levels indexed from the term outward (negative
+  toward substrate, zero the term as used, positive toward the stated
+  purpose), columns are severed / still_acting / clock / basis, and upward
+  levels add `value_string`, the sign and magnitude of the claimed
+  relation between proxy and goal. **`FM_001`: the arm this order extends
+  is not in this repository** — `severed`, `still_acting` and *deepest
+  still-acting term* return zero hits across the tree, so the seventh
+  instance of the stated-thing-with-no-artifact shape (`MF_017` /
+  `CW_015` / `DL_004` / `GC_012` / `UNI_013` / `SSS_050`) is the largest
+  yet, a missing arm rather than a missing field; **nothing is
+  reconstructed**, and H1's levels −2 and −3 carry `ABSENT` rather than a
+  plausible reading (the `PB_001` / `CW_004` rule). **`FM_002`:** all four
+  S6 fixtures behave as specified — H1's level-0 clock is **derived**
+  (3.0 y ÷ a coupling of **0.8815 measured by perturbation** in
+  `sheet-structure-scan/coupling.py`), H2 returns `NOT_EVALUABLE` with all
+  three scope fields named, H3 refuses the comparison as *"nothing was
+  compared"*, H4 emits both clocks and picks neither. **`FM_003`, the
+  defect a fixture exposed:** the first clock check counted distinct
+  values, so H1 read as a mismatch — level −1 assumes 3.0 years and level
+  0 derives 3.403 from it, which is **one horizon and its own derivative**
+  rather than two in conflict; the false positive runs *toward* the
+  finding, since S5 says a horizon disagreement IS the finding, so an
+  over-firing check manufactures them and every derivation chain in the
+  claim registry would produce one. Repaired with `derived_from`: derived
+  clocks are still emitted, with what they came from, and only the
+  disagreement count excludes them; H1 now reports none and H4 still does.
+  **`FM_005`, the empty cell with two causes:** on H1 level +1 the
+  `value_string` is empty because `Disclaimer!A3` states the goal (*"to
+  support organizations to estimate their GHG emissions"*) and **in the
+  same cell** disclaims the relation (*"makes no representations as to the
+  accuracy, completeness, suitability or validity"*) — not `ABSENT` since
+  a goal is stated, and not ordinary `ASSERTED` either, so the fourteenth
+  instance of the absent-vs-known-negative repair here is the first where
+  the missing state is *the source declined*; carried as `source_disclaims`
+  beside the basis rather than by widening a delivered vocabulary.
+  **`FM_004`:** S2's prediction holds — ASSERTED + ABSENT 3, measured +
+  derived 0, every `value_string` empty — with the scope stated honestly,
+  since two fixtures are excluded as NOT_EVALUABLE and **only H1's three
+  cells trace to an artifact outside this session**, and the prediction
+  file was written before the fixtures but not committed before the run,
+  a weaker registration than WO6's. **`FM_006`:** `NOT_EVALUABLE` is
+  unrankable structurally — `score()` raises on it and on an evaluable
+  term too (*"one term, one grid, not one number"*), and `upward_tally()`
+  excludes refused terms by name rather than counting them as zero; plus
+  one distinction S3 does not make, that a scope field **present but
+  declared unknown** is missing too and is reported apart from an
+  omission. **`FM_007`:** `boundary` and `horizon` are read out of
+  `declared-frame/v2/check_frame.py` at import and asserted in the
+  selftest rather than retyped, so the folders cannot drift, while
+  `with_respect_to` is S3's addition asking a different question (what the
+  ratio is taken *against*, not what is inside the accounting) — and H3's
+  neutral-reading frame is `DF_005` verbatim. **`FM_009`:** S4's neutral
+  reading is a **declared field**, because no string operation turns
+  *efficiency* into *joules out per joule in at the cell surface* and
+  producing one would be inventing a measurement, so a flagged term
+  without one reports `NOT_SUPPLIED`. **`FM_008`:** the three-arm
+  exemption harness `SSS_049` kept for a real case is spent here on
+  exactly one token — S3's class is *efficient/optimal/better/faster* and
+  **`better` alone is on `no_severity`'s list** — with a fourth check
+  asserting the list is length one so a widening turns red.
+  **A revision then superseded the order** (`WORK_ORDER_V2.md`, verbatim
+  beside the first, both kept): S1a is entirely new and `value_string`
+  becomes three independently ABSENT-able fields where it was one
+  free-text string. **`FM_011`, the revision's result: the fixed format
+  recovers information the free-text field destroyed.** Under v1 every
+  upward cell read `empty`; under the triple `Disclaimer!A3` — *"in order
+  to raise awareness and to promote climate action"* — states a
+  **direction** and no size, so H1 level +2 is `+ / ABSENT / ABSENT`
+  while +1 and +3 are all-ABSENT. *Sign yes, magnitude no, unit no* is
+  the ordinary shape of a purpose claim and one field recorded it as
+  identical to a cell nobody wrote anything in; `sign` ABSENT on 3 of 4
+  cells, `magnitude` and `unit` on 4 of 4, so P3 and P4 both hold.
+  **`FM_010`:** the v1 form is **refused rather than coerced**, since an
+  empty string cannot say which of the three fields is missing and
+  mapping it to all-three-absent would assert what the v1 data never
+  recorded. **`FM_012`, S1a instanced:** *"joules are not the floor
+  unless joules were calculated"* — H1's grid names four downward levels
+  and the workbook computes at exactly one (`kg CO2e`, entered kWh times
+  the factor), so the downward stop is level 0 and `unmeasured_span` is
+  **3 levels**, every level below it naming a real quantity with a real
+  unit that nobody computes; a naive reading would put the floor at −3
+  and the span at zero. **`FM_013`:** `computed` is a **declared field**
+  and `validate()` refuses a `quantified` block without it — a reader
+  filling it in from the physics is exactly the reader the rule is
+  written against, stopped at load rather than at read. **`FM_016`:** the
+  span **understates by construction**, counting what the grid names, and
+  that is disclosed rather than corrected since correcting means
+  inventing levels; H1 returns 3 and H4 returns 0, so the contrast is
+  between two documents and not two systems. **`FM_014`:** the
+  `plan_exists` / `practice_tracks_plan` column is separate and the code
+  cannot merge it into `basis` (asserted in the selftest), with
+  `practice_tracks_plan` defaulting to **UNREAD** and never to `no`.
+  **`FM_017`:** S7 says empty emits as empty and never as zero, and the
+  converse needed saying too — `magnitude: 0` is a claim that the proxy
+  moves the goal not at all, `ABSENT` is the absence of one, and the two
+  are pinned apart. **`FM_015`:** the registered prediction is **not
+  blind on H1** and says so — `Disclaimer!A3` was already read in this
+  session during the v1 run, so P3 and P4 are registered because the
+  format is new rather than because the source was unread. **The SBA run
+  landed two files of three** (`FM_019`, `FM_023`), neither under the name
+  the order gave — author lines *"Rebecca Champ, Owner"* and *"Andrew
+  Robertson, Owner"*, recorded as evidence rather than asserted as
+  identity, no blank template, predictions committed before any fetch.
+  **`FM_023`: n = 2 documents is n = 1 template** — the two share 26
+  headings and an identical *"Created on December 29, 2016"*, so a finding
+  replicating across them is a finding about the template and not two
+  independent confirmations (`TP_003`'s shared-bias shape in a
+  two-document corpus).
+  **P2 is REFUTED on both:** **eighteen dollar figures across the two
+  plans and zero computed quantities**, because both stop before Funding
+  Request and Financial Projections — `forecast` 0, `projection` 0, `cash
+  flow` 0, `break-even` 0, `loan` 0, `budget` 0 — so
+  `unmeasured_span_min` reads `not computable` on both. **`FM_024`:
+  Andrew's ten divide three ways by WHOSE quantity they are** — the
+  company's own stated tariff, a third party's property (target customer
+  income `$35,000`–`$80,000`), and an external statistic (industry
+  revenues up `$1.2 million` in Q2 2012) — none computed here, and the
+  last two show a quantity can be about someone else entirely and still
+  sit in the plan's own downward arm. **`FM_025`: across four terms and
+  three sources, 11 upward cells carry 6 stated directions, 0 magnitudes
+  and 0 units.** **A blank template then arrived and it is NOT the SBA
+  one** (`FM_026`) — 1 of its 9 section names appears in the filled plans
+  — so the registered P1/P3/P4 stay unaddressed for the file they name and
+  it is scored as a new candidate, with a provenance asymmetry recorded
+  (the plans came as `.doc` with container, piece table, author and date;
+  this came as text with none). **`FM_027`, a fourth kind of number:**
+  **all ten** dollar figures sit inside an `(e.g., …)` — not the
+  organisation's, not a third party's, not an external statistic, but **an
+  example of the shape a quantity would take**, belonging to nobody — and
+  the template **names nine computed quantities without computing one**
+  (Revenue Projections, Cash Flow, Balance Sheet, Break-even, Net Profit,
+  COGS, TAM, SAM, SOM), so a document can be dense in quantity names while
+  computing nothing. **`FM_029`, P1's third clause refuted in the
+  interesting direction:** `enumeration_basis` is `document_named`, not
+  UNREAD "by construction" — **a blank form is the most enumerable kind of
+  document there is**, its structure being all it has, so the least
+  informative document in the corpus has the best level enumeration and
+  those are the same fact. **`FM_028`:** a blank template has **no term**,
+  so *one term, one grid* has two readings that disagree — under WO8's own
+  (term = the business activity) level 0 is a slot and there is no grid,
+  under the other (term = the document) the template plainly states goals
+  and **P4 is refuted**; both recorded, neither picked. **`FM_030`:** the
+  only clock in any of the three business documents is in the blank one
+  (§8's *"next 3–5 years"*), explicitly not evidence that filling a form
+  drops its horizon, since the templates differ. **`FM_031`: across four
+  sources, 14 upward cells carry 8 stated directions, 0 magnitudes and 0
+  units**, with the blank template the strongest single case since its
+  purpose statements are what a form *asks for* rather than what one
+  company wrote. **A third-party company brief then arrived as a PDF
+  plus a separate paste, and `FM_032`: the cross-check FAILED** — a stdlib
+  extraction recovers 6 of 19 distinctive strings and **0 of the 4
+  figures**, because PDF splits text runs for kerning inside `TJ` arrays
+  (`[($)-0.6 (1)]TJ`), so a first pass produced `$754`/`$32`/`$00`, which
+  are **artifacts and were never reported as content**; the document
+  enters on the paste alone, and a naive PDF extractor would have produced
+  numbers that look like data and are wrong. **`FM_033`, the first empty
+  upward arm in the corpus:** every prior source states a purpose and this
+  one states none, so `upward_stop` is **ABSENT** — the document is not
+  purposeless (it is career-preparation material) but **its use is a
+  property of where it is filed**, and a copy of the text carries none of
+  it. **`FM_034`:** the downward arm is four third-party figures, none
+  computed, **none with a source named**, no relation stated between any
+  two — while the one economic relation it does state (*"carry the highest
+  margins"*) is `+ / ABSENT / ABSENT` about someone else's economics, and
+  the arithmetic it declines to do is available from its own numbers (net
+  margin **3.03%**, P/S 16.2, P/E 536). **`FM_035`: sixteen upward cells,
+  five sources, zero magnitudes, zero units** — and the first source to
+  grow the ABSENT column rather than the ASSERTED one. **`FM_020`: S1a's downward rule has two
+  states and needed three** — it distinguishes *computed* from
+  *physically existing but uncalculated*, and a rate card is neither, a
+  number the organisation produced and stated, underived in both
+  directions; declared rather than settled by fiat, since one boolean
+  moves the whole downward arm. **P3 holds** (both upward cells
+  `+ / ABSENT / ABSENT`, the same triple `FM_011` found) **and its
+  comparison has one side**, the blank form being exactly what did not
+  arrive. **`FM_018`, an
+  amendment that refuses a comparison this folder had published:**
+  `enumeration_basis` is now declared per term (`document_named` /
+  `physical_traced` / `author_read` / `UNREAD`) and **never inferred** —
+  a grid loaded without it *declares* UNREAD rather than getting one
+  assigned from how well traced its levels look, which is `FM_013`'s
+  refusal and sharper here, since a plausible level list is exactly what
+  an author produces from general knowledge without tracing anything. H1
+  declares **`author_read`**, the unflattering answer and the true one
+  (the workbook names none of those levels), against H4's
+  `document_named` — so the 3-vs-0 contrast `FM_016` reported with a
+  hedge is **refused outright**: both floors are emitted, the difference
+  is computed on no path, and a selftest check reads the module's own
+  source to assert no subtraction of two `span_min` values appears in it.
+  `FM_016` is corrected in place rather than defended. **The rename is
+  the larger half**: `unmeasured_span: 3` reads as a measurement of the
+  world and **`unmeasured_span_min: 3` reads as a floor**, which is what
+  it is — before the amendment the honest reading lived in a `note`
+  string where nothing downstream could see it, **the same shape as a
+  workbook stating a relationship in prose that no cell maintains**,
+  which is the object scan 4 was built to find. 74 selftest checks.
+  Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

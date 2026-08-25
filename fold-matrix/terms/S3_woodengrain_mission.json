@@ -1,0 +1,138 @@
+{
+  "id": "S3_woodengrain_mission",
+  "name": "the toy sold",
+  "source": "SBA sample business plan, 'Wooden Grain Toy Company', authored line 'Andrew Robertson, Owner', created 2016-12-29. Uploaded as d66069ff-Sample_Business_Plan__Wooden_Grain_Toy_Company.doc. Read with sheet-structure-scan/docreader.py: 6188 characters, one compressed piece.",
+  "_note": [
+    "Author line 'Andrew Robertson' -- evidence this is the file the order",
+    "called Andrew's Plan, recorded as evidence rather than asserted.",
+    "",
+    "SAME TEMPLATE as S2_wecandoit_mission: 26 headings shared, including",
+    "an identical 'Created on December 29, 2016'. So the two documents are",
+    "one template filled twice, and a structural finding replicating",
+    "across them is one observation, not two.",
+    "",
+    "Stops at 'How to Sell'. Funding Request and Financial Projections",
+    "ABSENT. Text counts: forecast 0, projection 0, cash flow 0,",
+    "break-even 0, loan 0, budget 0, cost 0."
+  ],
+  "enumeration_basis": "document_named",
+  "_enumeration_note": "the downward levels are the document's own sections and the quantities in them",
+  "plan": {
+    "plan_exists": "yes",
+    "practice_tracks_plan": "UNREAD",
+    "why": "the document IS the plan; whether practice tracks it is not readable from it"
+  },
+  "levels": [
+    {
+      "index": -2,
+      "severed": "unit cost against unit price",
+      "still_acting": "hardwood, tooling and hours are consumed per toy whether or not the plan counts them",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ABSENT",
+      "quantified": {
+        "quantity": "cost per unit",
+        "unit": "USD per toy",
+        "computed": false,
+        "by": "the word 'cost' appears 0 times in the document"
+      }
+    },
+    {
+      "index": -1,
+      "severed": "price times volume, i.e. any revenue quantity",
+      "still_acting": "toys are priced and sold; no line multiplies the two",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ABSENT",
+      "quantified": {
+        "quantity": "price list",
+        "unit": "USD per toy",
+        "computed": false,
+        "by": "ten dollar figures appear and none is computed here. They divide three ways by WHOSE quantity: the company's own stated tariff ($5-$35 by product), a third party's property (target customer income $35,000-$80,000 a year), and an external statistic (industry revenues up $1.2 million in Q2 2012). See FM_020: S1a's axis is computed-versus-physical, and none of these three is either."
+      }
+    },
+    {
+      "index": 0,
+      "severed": "-- the term as used --",
+      "still_acting": "the plan is read as a description of the business",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ASSERTED",
+      "quantified": {
+        "quantity": "none",
+        "unit": "ABSENT",
+        "computed": false,
+        "by": "the document computes no quantity at any level"
+      }
+    },
+    {
+      "index": 1,
+      "goal": "toys cherished and handed down from generation to generation",
+      "severed": "the relation between build quality and whether anything is handed down",
+      "still_acting": "the toys wear or survive on their own",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ASSERTED",
+      "value_string": {
+        "sign": "+",
+        "magnitude": "ABSENT",
+        "unit": "ABSENT"
+      },
+      "artifact_id": "Mission Statement, Wooden Grain Toy Company business plan",
+      "cite": "Mission Statement: 'To build and sell high-quality toys that will be cherished and handed down from generation to generation.'"
+    },
+    {
+      "index": 2,
+      "goal": "entertain children and stand the test of time",
+      "severed": "the relation between the toy and a child's engagement",
+      "still_acting": "children play or do not",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ASSERTED",
+      "value_string": {
+        "sign": "+",
+        "magnitude": "ABSENT",
+        "unit": "ABSENT"
+      },
+      "artifact_id": "Future of the Company, Wooden Grain Toy Company business plan",
+      "cite": "Future of the Company: 'Our goal is to build and market toys that will entertain children and stand the test of time.'"
+    },
+    {
+      "index": 3,
+      "goal": "foster the child's creativity",
+      "severed": "the relation between a toy's moving parts and a child's creativity",
+      "still_acting": "whatever creativity does",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ASSERTED",
+      "value_string": {
+        "sign": "+",
+        "magnitude": "ABSENT",
+        "unit": "ABSENT"
+      },
+      "artifact_id": "Customers, Wooden Grain Toy Company business plan",
+      "cite": "Customers: a toy that is 'durable and aesthetically pleasing, but also foster the child's creativity'"
+    },
+    {
+      "index": 4,
+      "goal": "not stated",
+      "severed": "the relation between a child's creativity and anything further",
+      "still_acting": "-",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ABSENT",
+      "value_string": {
+        "sign": "ABSENT",
+        "magnitude": "ABSENT",
+        "unit": "ABSENT"
+      }
+    }
+  ]
+}

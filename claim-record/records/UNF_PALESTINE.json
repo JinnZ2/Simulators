@@ -1,0 +1,80 @@
+{
+  "id": "UNF_PALESTINE",
+  "assertion": "The State of Palestine grid factor in this workbook is the arithmetic mean of the factors for Iraq, Jordan, Lebanon, the Syrian Arab Republic and Turkey.",
+  "measurement": {
+    "lo": 0.5693617090850457,
+    "hi": 0.5693617090850457,
+    "units": "kg CO2e per kWh"
+  },
+  "instrument": {
+    "name": "the five neighbour cells recomputed and compared to Electricity, heat, cooling!B296",
+    "error": {
+      "kind": "random",
+      "magnitude": "1.1e-16 absolute, the difference between the recomputed mean and the cell; float round-off"
+    }
+  },
+  "domain_of_validity": {
+    "conditions": [
+      {
+        "name": "file",
+        "value": "UNFCCC GHG emissions calculator ver01.1, md5 57d3ffd78a9f5f9980e15feb65f8d986"
+      },
+      {
+        "name": "the five",
+        "value": "Iraq, Jordan, Lebanon, Syrian Arab Republic, Turkey, as named at Info and sources!E10"
+      },
+      {
+        "name": "operation",
+        "value": "unweighted arithmetic mean"
+      },
+      {
+        "name": "adjustment history",
+        "value": "the mean is computed in the workbook and that arithmetic is unadjusted, but the five inputs are the same published grid factors as UNF_GRID_IRAQ and inherit its unknown history"
+      },
+      {
+        "name": "liveness of the stated derivation",
+        "value": "Electricity, heat, cooling!B296 is a hardcoded constant, not a formula. The mean-of-five relationship stated at Info and sources!E10 is a record of how the number was produced and is not maintained by the workbook: perturbing any of the five neighbour cells leaves this one unchanged."
+      }
+    ],
+    "outside_this": "UNTESTED, and the claim is about the arithmetic only. Whether the mean of those five is an estimate of Palestine's grid is a different claim with a different instrument, and this record makes none."
+  },
+  "clock": {
+    "measured_on": "2026-08-25",
+    "measured_on_frame": "iso_date",
+    "neglected_term": {
+      "name": "resemblance of the five neighbours to the target",
+      "held_fixed": "that a country's grid factor is estimated by the mean of five neighbours"
+    },
+    "time_constant": {
+      "state": "UNMEASURED",
+      "why": "never measured. The workbook states the substitution at Info and sources!E10 and gives no basis for it, so there is no measured rate at which the resemblance decays and none can be derived from the file."
+    },
+    "rate_ceiling": {
+      "state": "UNMEASURED",
+      "why": "follows the time constant: with no measured rate there is no ceiling to compare it to"
+    },
+    "coupling": {
+      "value": 0.8193885224077908,
+      "units": "1",
+      "basis": "measured by perturbation on the Palestine cell itself: sheet-structure-scan/coupling.py cells, +0.1% on Electricity, heat, cooling!B296, elasticity of Report!E25 under the case Your organisation!C6=State of Palestine, Electricity, heat, cooling!E7=1000. CORRECTED 2026-08-25: an earlier version of this record carried 0.8815, transferred from the neighbouring Iraq cell on the reasoning that the Palestine row is consumed by the same lookup. That reasoning is about the lookup and not about this cell. The elasticity of a sum with respect to one term is that term's share of the total, and Palestine's factor is lower than Iraq's, so the shares differ."
+    }
+  },
+  "derivation": {
+    "parents": [
+      "UNF_GRID_IRAQ"
+    ],
+    "root_reason": ""
+  },
+  "collapse_record": {
+    "state": "COLLAPSED",
+    "from": "the five neighbour factors",
+    "point": "mean",
+    "why": "the workbook states the substitution at Info and sources!E10 and the cell reproduces the unweighted mean to 1.1e-16"
+  },
+  "correction_status": "unknown",
+  "correction_method": null,
+  "correction_depth": {
+    "state": "UNKNOWN",
+    "why": "the mean is computed in the workbook and that arithmetic is unadjusted, but the five inputs are the same published grid factors as UNF_GRID_IRAQ and inherit its unknown history"
+  }
+}

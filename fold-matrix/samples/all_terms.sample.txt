@@ -1,0 +1,430 @@
+fold matrix -- work order 8
+terms: 8
+
+term   H1_grid_emission_factor
+name   grid emission factor
+source UNFCCC GHG emissions calculator ver01.1, md5 57d3ffd78a9f5f9980e15feb65f8d986; Electricity, heat, cooling!B192 (Iraq) = 0.93391 kg CO2e/kWh. Claim record claim-record/records/UNF_GRID_IRAQ.json.
+
+S3 scope        EVALUABLE -- not an efficiency-class term; no scope required
+
+S1 grid
+level  severed                                       still_acting                                  clock        basis   
+-----  --------------------------------------------  --------------------------------------------  -----------  --------
+-3     combustion chemistry: fuel carbon content t…  the actual carbon content of the fuel burne…  ABSENT       ABSENT  
+-2     plant-level heat rate and dispatch order      which plants are on the margin at the hour …  ABSENT       ABSENT  
+-1     the national generation mix that the factor…  the mix keeps changing after the average wa…  3.0 years    ASSERTED
+ 0     -- the term as used --                        the factor multiplies whatever kWh figure t…  3.403 years  derived 
++1     the relation between this factor and the ac…  users read the Report tab as an emissions f…  ABSENT       ASSERTED
++2     the relation between an emissions estimate …  the number is published and read              ABSENT       ASSERTED
++3     the relation between climate action promote…  emissions, which do not consult the estimate  ABSENT       ABSENT  
+
+S2 upward cells
+level  goal                                          basis     sign    magnitude  unit    cite         
+-----  --------------------------------------------  --------  ------  ---------  ------  -------------
++1     support organizations to estimate their GHG…  ASSERTED  ABSENT  ABSENT     ABSENT  Disclaimer!A3
++2     raise awareness and promote climate action    ASSERTED  +       ABSENT     ABSENT  Disclaimer!A3
++3     not stated                                    ABSENT    ABSENT  ABSENT     ABSENT               
+
+   The three fields do not fail together on 1 cell(s).
+   A stated direction with no size is the ordinary shape
+   of a purpose claim, and one free-text field recorded
+   it as identical to a cell nobody wrote anything in.
+
+   An empty value_string has more than one cause, and the
+   four basis values do not separate them. On these cells
+   the source states the goal and explicitly declines the
+   relation, which is a different fact from nobody having
+   stated one:
+     +1  the same cell states the secretariat 'makes no representation…
+
+S1a stops, from the document set
+stop      level  what                                why                                             
+--------  -----  ----------------------------------  ------------------------------------------------
+upward    +2     UNFCCC GHG emissions calculator v…  highest level with a stated artifact; 1 level(s…
+downward   0     emissions [kg CO2e]                 deepest computed quantity                       
+
+   unmeasured_span_min: 3 level(s)
+   enumeration_basis:   author_read
+   at least 3 level(s) of the physical chain continue below the …
+   Emitted, not scored (S1a). The name is the reading: a floor,
+   not a measurement of the world.
+
+   plan_exists yes | practice_tracks_plan UNREAD
+   Its own column. It is not a basis and does not enter one.
+   Disclaimer!A3 states the purpose, so a plan exists in the doc…
+
+S5 clocks, per level, not collapsed
+level  value  units  assumed?         basis                                       
+-----  -----  -----  ---------------  --------------------------------------------
+-1     3.0    years  assumed          stated in the delivery as a few years and t…
+ 0     3.403  years  derived from -1  derived: time_constant 3.0 y / |coupling| 0…
+
+   1 of these is derived from another level's clock and
+   does not count as a second horizon. It is emitted
+   anyway; only the disagreement count excludes it.
+
+------------------------------------------------------------------
+
+term   H2_more_efficiency
+name   more efficiency solves this
+source the bare claim, as stated. No artifact; this fixture is the sentence itself.
+
+S3 scope        NOT_EVALUABLE -- efficiency-class on efficiency; scope missing: with_respect_to, boundary, horizon
+
+This term is NOT_EVALUABLE. It is not scored, not ranked,
+and not carried into any comparison (S3). That is a refusal
+about what can be read from it, and is not a low reading.
+
+S4 sign hygiene: the name asserts a direction (efficiency)
+   neutral reading NOT_SUPPLIED. It is a declared field,
+   not something a name can be de-signed into.
+
+S1 grid
+level  severed                                       still_acting                         clock   basis   
+-----  --------------------------------------------  -----------------------------------  ------  --------
+ 0     -- the term as used --                        the claim is carried into decisions  ABSENT  ASSERTED
++1     the relation between the ratio and the outc…  whatever 'this' is continues         ABSENT  ABSENT  
+
+S2 upward cells
+level  goal         basis   sign    magnitude  unit    cite
+-----  -----------  ------  ------  ---------  ------  ----
++1     solves this  ABSENT  ABSENT  ABSENT     ABSENT      
+
+S1a stops, from the document set
+stop      level   what             why                                             
+--------  ------  ---------------  ------------------------------------------------
+upward    ABSENT  ABSENT           no positive level carries a stated artifact, so…
+downward  ABSENT  ABSENT [ABSENT]  no level carries a quantity the organisation co…
+
+   unmeasured_span_min: not computable
+   enumeration_basis:   UNREAD  (default; not declared, not inferred)
+   not computable: no computed quantity
+   Emitted, not scored (S1a). The name is the reading: a floor,
+   not a measurement of the world.
+
+   plan_exists no | practice_tracks_plan UNREAD
+   Its own column. It is not a basis and does not enter one.
+   the fixture is a sentence; there is no document set behind it
+
+------------------------------------------------------------------
+
+term   H3_tree_replacement
+name   the panel is more efficient than the leaf
+source declared-frame/, the worked panel-vs-leaf pair. DF_005 records that the two frames differ on all three core fields, so the ratio between them is a frame difference.
+
+S3 scope        NOT_EVALUABLE -- efficiency-class on efficient; scope missing: -; declared unknown: boundary
+S3 replacement  NOT_EVALUABLE -- the comparison is against an unread baseline: leaf. This is refused, not scored -- nothing was compared.
+
+This term is NOT_EVALUABLE. It is not scored, not ranked,
+and not carried into any comparison (S3). That is a refusal
+about what can be read from it, and is not a low reading.
+
+S4 sign hygiene: the name asserts a direction (efficient)
+   neutral quantity: electrical joules out per incident joule, at the cell surface, instantaneous
+   frame:            panel frame excludes fabrication, mining, smelting, transport, installation, maintenance and decommission; the leaf frame puts all of them inside the same photon budget (declared-frame DF_005)
+
+S1 grid
+level  severed                                       still_acting                                  clock   basis   
+-----  --------------------------------------------  --------------------------------------------  ------  --------
+ 0     -- the term as used --                        the ratio is quoted across two different ac…  ABSENT  ASSERTED
++1     the relation between the conversion ratio a…  Y's other functions, whatever they are, con…  ABSENT  ABSENT  
+
+S2 upward cells
+level  goal                      basis   sign    magnitude  unit    cite
+-----  ------------------------  ------  ------  ---------  ------  ----
++1     therefore Y is redundant  ABSENT  ABSENT  ABSENT     ABSENT      
+
+S1a stops, from the document set
+stop      level   what             why                                             
+--------  ------  ---------------  ------------------------------------------------
+upward    ABSENT  ABSENT           no positive level carries a stated artifact, so…
+downward  ABSENT  ABSENT [ABSENT]  no level carries a quantity the organisation co…
+
+   unmeasured_span_min: not computable
+   enumeration_basis:   UNREAD  (default; not declared, not inferred)
+   not computable: no computed quantity
+   Emitted, not scored (S1a). The name is the reading: a floor,
+   not a measurement of the world.
+
+   plan_exists no | practice_tracks_plan UNREAD
+   Its own column. It is not a basis and does not enter one.
+   no charter, plan or stated principle carries the replacement …
+
+------------------------------------------------------------------
+
+term   H4_reported_divergence_count
+name   the reported divergence count
+source sheet-structure-scan scan 4 on the UNFCCC calculator: 21 DIVERGED of 23 testable relationships (SSS_033, SSS_034). Clocks from claim-record/records/SSS_017.json and UNF_GRID_IRAQ.json.
+
+S3 scope        EVALUABLE -- not an efficiency-class term; no scope required
+
+S1 grid
+level  severed                                       still_acting                                  clock          basis   
+-----  --------------------------------------------  --------------------------------------------  -------------  --------
+-2     the parser revision that produced the count   the reader keeps changing; a count from an …  0.003 years    measured
+-1     the workbook contents the count is taken ov…  the generation mix behind each factor keeps…  3.0 years      ASSERTED
+ 0     -- the term as used --                        the count is quoted as a property of the wo…  NOT_COLLAPSED  measured
++1     the relation between one workbook's count a…  n is 1, and a point is not a rate (SSS_035)   ABSENT         ASSERTED
+
+S2 upward cells
+level  goal                                          basis     sign    magnitude  unit    cite                    
+-----  --------------------------------------------  --------  ------  ---------  ------  ------------------------
++1     characterise how well a workbook's prose an…  ASSERTED  ABSENT  ABSENT     ABSENT  sheet-structure-scan/CL…
+
+S1a stops, from the document set
+stop      level  what                                why                                 
+--------  -----  ----------------------------------  ------------------------------------
+upward    +1     sheet-structure-scan/WORK_ORDER_4…  highest level with a stated artifact
+downward  -2     reader revision interval [years]    deepest computed quantity           
+
+   unmeasured_span_min: 0 level(s)
+   enumeration_basis:   document_named
+   the deepest computed quantity is the deepest level named
+   Emitted, not scored (S1a). The name is the reading: a floor,
+   not a measurement of the world.
+
+   plan_exists yes | practice_tracks_plan yes
+   Its own column. It is not a basis and does not enter one.
+   the work order states what the scan is for and the scan's own…
+
+S5 clocks, per level, not collapsed
+level  value  units  assumed?  basis                                       
+-----  -----  -----  --------  --------------------------------------------
+-2     0.003  years  assumed   sheetmodel.py was revised twice on 2026-08-…
+-1     3.0    years  assumed   the neglected term of the factors being cou…
+
+   MISMATCH: 2 distinct time constants independently
+   assumed across levels.
+   Both are emitted and no pick is made. A term whose
+   levels disagree on horizon is the finding (S5).
+
+------------------------------------------------------------------
+
+term   S2_wecandoit_mission
+name   the consulting engagement
+source SBA sample business plan, 'We Can Do It Consulting', authored line 'Rebecca Champ, Owner', created 2016-12-29. Uploaded as 953833c0-Sample_Business_Plan__We_Can_Do_It_Consulting_4.doc. Read with sheet-structure-scan/docreader.py: 7711 characters, one compressed piece.
+
+S3 scope        EVALUABLE -- not an efficiency-class term; no scope required
+
+S1 grid
+level  severed                                       still_acting                                  clock   basis   
+-----  --------------------------------------------  --------------------------------------------  ------  --------
+-2     hours delivered against hours billed          consultant time is spent whether or not the…  ABSENT  ABSENT  
+-1     rate times hours, i.e. any revenue quantity   the engagement is priced and worked; the pl…  ABSENT  ABSENT  
+ 0     -- the term as used --                        the plan is read as a description of the bu…  ABSENT  ASSERTED
++1     the relation between the services delivered…  clients' companies do whatever they do        ABSENT  ASSERTED
++2     the relation between office-management cons…  client overhead, which does not consult the…  ABSENT  ASSERTED
++3     the relation between client prosperity and …  -                                             ABSENT  ABSENT  
+
+S2 upward cells
+level  goal                                          basis     sign    magnitude  unit    cite                    
+-----  --------------------------------------------  --------  ------  ---------  ------  ------------------------
++1     help their companies prosper and grow         ASSERTED  +       ABSENT     ABSENT  Mission Statement: 'To …
++2     increase productivity and reduce overhead c…  ASSERTED  +       ABSENT     ABSENT  Customers: target audie…
++3     not stated                                    ABSENT    ABSENT  ABSENT     ABSENT                          
+
+   The three fields do not fail together on 2 cell(s).
+   A stated direction with no size is the ordinary shape
+   of a purpose claim, and one free-text field recorded
+   it as identical to a cell nobody wrote anything in.
+
+S1a stops, from the document set
+stop      level   what                                why                                             
+--------  ------  ----------------------------------  ------------------------------------------------
+upward    +2      Customers section, We Can Do It C…  highest level with a stated artifact; 1 level(s…
+downward  ABSENT  ABSENT [ABSENT]                     no level carries a quantity the organisation co…
+
+   unmeasured_span_min: not computable
+   enumeration_basis:   document_named
+   not computable: no computed quantity
+   Emitted, not scored (S1a). The name is the reading: a floor,
+   not a measurement of the world.
+
+   plan_exists yes | practice_tracks_plan UNREAD
+   Its own column. It is not a basis and does not enter one.
+   the document IS the plan, so a plan exists by construction. W…
+
+------------------------------------------------------------------
+
+term   S3_woodengrain_mission
+name   the toy sold
+source SBA sample business plan, 'Wooden Grain Toy Company', authored line 'Andrew Robertson, Owner', created 2016-12-29. Uploaded as d66069ff-Sample_Business_Plan__Wooden_Grain_Toy_Company.doc. Read with sheet-structure-scan/docreader.py: 6188 characters, one compressed piece.
+
+S3 scope        EVALUABLE -- not an efficiency-class term; no scope required
+
+S1 grid
+level  severed                                       still_acting                                  clock   basis   
+-----  --------------------------------------------  --------------------------------------------  ------  --------
+-2     unit cost against unit price                  hardwood, tooling and hours are consumed pe…  ABSENT  ABSENT  
+-1     price times volume, i.e. any revenue quanti…  toys are priced and sold; no line multiplie…  ABSENT  ABSENT  
+ 0     -- the term as used --                        the plan is read as a description of the bu…  ABSENT  ASSERTED
++1     the relation between build quality and whet…  the toys wear or survive on their own         ABSENT  ASSERTED
++2     the relation between the toy and a child's …  children play or do not                       ABSENT  ASSERTED
++3     the relation between a toy's moving parts a…  whatever creativity does                      ABSENT  ASSERTED
++4     the relation between a child's creativity a…  -                                             ABSENT  ABSENT  
+
+S2 upward cells
+level  goal                                          basis     sign    magnitude  unit    cite                    
+-----  --------------------------------------------  --------  ------  ---------  ------  ------------------------
++1     toys cherished and handed down from generat…  ASSERTED  +       ABSENT     ABSENT  Mission Statement: 'To …
++2     entertain children and stand the test of ti…  ASSERTED  +       ABSENT     ABSENT  Future of the Company: …
++3     foster the child's creativity                 ASSERTED  +       ABSENT     ABSENT  Customers: a toy that i…
++4     not stated                                    ABSENT    ABSENT  ABSENT     ABSENT                          
+
+   The three fields do not fail together on 3 cell(s).
+   A stated direction with no size is the ordinary shape
+   of a purpose claim, and one free-text field recorded
+   it as identical to a cell nobody wrote anything in.
+
+S1a stops, from the document set
+stop      level   what                                why                                             
+--------  ------  ----------------------------------  ------------------------------------------------
+upward    +3      Customers, Wooden Grain Toy Compa…  highest level with a stated artifact; 1 level(s…
+downward  ABSENT  ABSENT [ABSENT]                     no level carries a quantity the organisation co…
+
+   unmeasured_span_min: not computable
+   enumeration_basis:   document_named
+   not computable: no computed quantity
+   Emitted, not scored (S1a). The name is the reading: a floor,
+   not a measurement of the world.
+
+   plan_exists yes | practice_tracks_plan UNREAD
+   Its own column. It is not a basis and does not enter one.
+   the document IS the plan; whether practice tracks it is not r…
+
+------------------------------------------------------------------
+
+term   S4_blank_template_document
+name   the business plan document
+source A blank business plan template, delivered as pasted text in conversation. Landed verbatim at fold-matrix/sources/blank_template_pasted.md. Nine sections plus a Tips section.
+
+S3 scope        EVALUABLE -- not an efficiency-class term; no scope required
+
+S1 grid
+level  severed                                       still_acting                                  clock      basis   
+-----  --------------------------------------------  --------------------------------------------  ---------  --------
+-2     the business's actual quantities -- revenue…  nothing yet: there is no business behind a …  ABSENT     ABSENT  
+-1     any figure and the thing it would measure     -                                             ABSENT     ABSENT  
+ 0     -- the term as used: the plan document itse…  the form is filled in, or is not              ABSENT     ASSERTED
++1     the relation between an executive summary a…  readers read or do not                        ABSENT     ASSERTED
++2     the relation between a forecast and viabili…  the business is viable or is not, on its own  4.0 years  ASSERTED
++3     the relation between a completed plan and w…  funding decisions, which the template never…  ABSENT     ABSENT  
+
+S2 upward cells
+level  goal                                          basis     sign    magnitude  unit    cite                    
+-----  --------------------------------------------  --------  ------  ---------  ------  ------------------------
++1     capture the reader's attention and summariz…  ASSERTED  +       ABSENT     ABSENT  'One-to-two-page summar…
++2     show the business model is profitable and v…  ASSERTED  +       ABSENT     ABSENT  'Show the business mode…
++3     not stated                                    ABSENT    ABSENT  ABSENT     ABSENT                          
+
+   The three fields do not fail together on 2 cell(s).
+   A stated direction with no size is the ordinary shape
+   of a purpose claim, and one free-text field recorded
+   it as identical to a cell nobody wrote anything in.
+
+S1a stops, from the document set
+stop      level   what                                why                                             
+--------  ------  ----------------------------------  ------------------------------------------------
+upward    +2      section 8 preamble, blank busines…  highest level with a stated artifact; 1 level(s…
+downward  ABSENT  ABSENT [ABSENT]                     no level carries a quantity the organisation co…
+
+   unmeasured_span_min: not computable
+   enumeration_basis:   document_named
+   not computable: no computed quantity
+   Emitted, not scored (S1a). The name is the reading: a floor,
+   not a measurement of the world.
+
+   plan_exists yes | practice_tracks_plan UNREAD
+   Its own column. It is not a basis and does not enter one.
+   the document is a template FOR a plan, so a plan exists in th…
+
+S5 clocks, per level, not collapsed
+level  value  units  assumed?  basis                                       
+-----  -----  -----  --------  --------------------------------------------
++2     4.0    years  assumed   stated in the section 8 preamble as 'the ne…
+
+------------------------------------------------------------------
+
+term   S5_palo_alto_company_profile
+name   the company research brief
+source Company Profile: Palo Alto Networks, prepared by Dallen Moody, dated 2024-10-20. Delivered as pasted text; landed at sources/palo_alto_company_profile_pasted.md with one personal email redacted. An accompanying PDF upload could not be verified against the paste -- see FM_032.
+
+S3 scope        EVALUABLE -- not an efficiency-class term; no scope required
+
+S1 grid
+level  severed                                       still_acting                                  clock   basis   
+-----  --------------------------------------------  --------------------------------------------  ------  --------
+-2     the operations the figures summarise          the subject company operates, whatever the …  ABSENT  ABSENT  
+-1     the four headline figures and any relation …  the figures move; the brief is dated 2024-1…  ABSENT  ABSENT  
+ 0     -- the term as used: the brief itself --      the brief is read, or is not                  ABSENT  ASSERTED
++1     the relation between reading this brief and…  whatever the reader does                      ABSENT  ABSENT  
++2     the relation between preparation and any ou…  -                                             ABSENT  ABSENT  
+
+S2 upward cells
+level  goal        basis   sign    magnitude  unit    cite                    
+-----  ----------  ------  ------  ---------  ------  ------------------------
++1     not stated  ABSENT  ABSENT  ABSENT     ABSENT  no purpose statement ap…
++2     not stated  ABSENT  ABSENT  ABSENT     ABSENT                          
+
+S1a stops, from the document set
+stop      level   what             why                                             
+--------  ------  ---------------  ------------------------------------------------
+upward    ABSENT  ABSENT           no positive level carries a stated artifact, so…
+downward  ABSENT  ABSENT [ABSENT]  no level carries a quantity the organisation co…
+
+   unmeasured_span_min: not computable
+   enumeration_basis:   document_named
+   not computable: no computed quantity
+   Emitted, not scored (S1a). The name is the reading: a floor,
+   not a measurement of the world.
+
+   plan_exists no | practice_tracks_plan UNREAD
+   Its own column. It is not a basis and does not enter one.
+   no plan, charter or stated principle governs this document. I…
+
+------------------------------------------------------------------
+
+S2, across the terms a comparison may include
+
+basis     upward cells
+--------  ------------
+measured  0           
+derived   0           
+ASSERTED  10          
+ABSENT    6           
+
+value_string, per field
+field      ABSENT on  of cells
+---------  ---------  --------
+sign       8          16      
+magnitude  16         16      
+unit       16         16      
+
+cells: 16   all three ABSENT: 8   split: 8
+ASSERTED + ABSENT: 16   measured + derived: 0
+P1 (soft majority): True
+P3 (at least one cell splits): True
+P4 (no magnitude anywhere): True
+
+unmeasured_span_min, and what may be compared
+
+term                          span_min  enumeration_basis
+----------------------------  --------  -----------------
+H1_grid_emission_factor       3         author_read      
+H4_reported_divergence_count  0         document_named   
+
+   REFUSED (author_read): H1_grid_emission_factor
+     only one term on this basis; nothing to compare it against
+
+   REFUSED (document_named): H4_reported_divergence_count
+     only one term on this basis; nothing to compare it against
+
+   REFUSED (MISMATCH): H1_grid_emission_factor, H4_reported_divergence_count
+     these terms were enumerated on different bases (author_read, document_named); both floors are emitted and the difference is refused
+
+   No difference is computed across a mismatch. Two floors
+   counted by different procedures are not two measurements
+   of one quantity.
+
+excluded from this tally as NOT_EVALUABLE (S3): H2_more_efficiency, H3_tree_replacement
+A refused term is not a zero and does not enter a count.

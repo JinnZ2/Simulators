@@ -1,0 +1,22 @@
+model provenance -- retrospective decode (S2)
+table kind        observed_bound
+table source      git log trailers, this repository, read 2026-08-25
+switchover window 1 day(s) either side  [CHOICE 1]
+derivation        the session ran on the version current at the commit date (always current-at-the-time)
+
+THE TABLE IS NOT RELEASE DATES. Each row is a first and last
+appearance in this repository's own trailers. A first
+appearance is an UPPER BOUND on a release date and is never
+the date: the version existed at least that early, and may
+have existed long before anyone committed under it. Every
+candidate below inherits that.
+
+verdict        commits
+-------------  -------
+SINGLE         231    
+AMBIGUOUS      5      
+NOT_DECODABLE  0      
+
+The decode table is stored alongside and is not written back
+into history (S2). Nothing here ranks a commit, and no version
+is scored against another (S4).

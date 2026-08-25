@@ -1,0 +1,35 @@
+series            F1_as_delivered
+verdict           RECOVER
+coupling          0.8815  (claim record UNF_GRID_IRAQ, clock.coupling, basis: measured by perturbation: sheet-structure-scan/coupling.py of, +0.1% on the cell)
+margin            2 standard errors
+sign convention   residual = actual - predicted
+
+S2 -- conditional lean. Ranked by the STANDARDIZED slope, which
+is dimensionless; raw slopes against different predictors are
+not on one scale and are shown but not sorted on.
+
+row     against              slope    se        standardized  lean  state
+------  -------------------  -------  --------  ------------  ----  -----
+S2a     predicted magnitude  0.12     0.006317  0.8681        lean  OK
+S2b     unrelated            -0.8584  0.5204    -0.1501       .     OK
+S2c     time index           0.09999  0.005264  0.8681        lean  OK
+pooled  sign only            -        0.04564   -             .     OK
+
+pooled sign fraction positive: 0.5083  (one row, not the verdict)
+
+folded-term candidate: NOT SEPARABLE -- predicted magnitude, time index
+  these axes correlate at 0.99 or above with each other, so
+  the residual leans with all of them by the same amount and
+  a ranked list cannot say which. Naming one would be
+  picking. Separating them needs a series in which they
+  move independently.
+
+S4 -- rate check: STABLE
+  the lean does not grow with the time index: by S4 a missing term, with the claim still inside its domain.
+  per-window S2(a) slope: -0.005133, 0.05943, 0.006494, 0.006505
+
+S3 -- RECOVER
+  lean present and coupling strong. The term is named below; S3 requires that it be named rather than inferred from the lean existing.
+
+This report states structure. It does not rule that a lean
+was an error, and no column here is a judgement.

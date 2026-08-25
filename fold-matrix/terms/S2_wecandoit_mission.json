@@ -1,0 +1,121 @@
+{
+  "id": "S2_wecandoit_mission",
+  "name": "the consulting engagement",
+  "source": "SBA sample business plan, 'We Can Do It Consulting', authored line 'Rebecca Champ, Owner', created 2016-12-29. Uploaded as 953833c0-Sample_Business_Plan__We_Can_Do_It_Consulting_4.doc. Read with sheet-structure-scan/docreader.py: 7711 characters, one compressed piece.",
+  "_note": [
+    "NOT one of the three files the order named. The order named a blank",
+    "template, Rebecca's Plan and Andrew's Plan; this arrived under a",
+    "different filename. Its author line reads 'Rebecca Champ', which is",
+    "evidence it may be the file the order called Rebecca's Plan, and that",
+    "is recorded as evidence rather than asserted as identity.",
+    "",
+    "The document's own section list stops at 'How to Sell'. Funding",
+    "Request and Financial Projections -- the two sections of the SBA",
+    "traditional format that carry computed numbers -- are ABSENT. Counts",
+    "in the text: revenue 0, forecast 0, projection 0, cash flow 0,",
+    "break-even 0, loan 0, budget 0."
+  ],
+  "enumeration_basis": "document_named",
+  "_enumeration_note": "the downward levels are the document's own section headings and the quantities in them; nothing was added from outside it",
+  "plan": {
+    "plan_exists": "yes",
+    "practice_tracks_plan": "UNREAD",
+    "why": "the document IS the plan, so a plan exists by construction. Whether the company's practice tracks it is not readable from the plan and no other artifact was consulted."
+  },
+  "levels": [
+    {
+      "index": -2,
+      "severed": "hours delivered against hours billed",
+      "still_acting": "consultant time is spent whether or not the plan counts it",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ABSENT",
+      "quantified": {
+        "quantity": "billable hours",
+        "unit": "hours",
+        "computed": false,
+        "by": "no hour count appears anywhere in the document"
+      }
+    },
+    {
+      "index": -1,
+      "severed": "rate times hours, i.e. any revenue quantity",
+      "still_acting": "the engagement is priced and worked; the plan carries no line that multiplies the two",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ABSENT",
+      "quantified": {
+        "quantity": "hourly rate card",
+        "unit": "USD per hour",
+        "computed": false,
+        "by": "eight rates are STATED ($75-$150 by role) and nothing in the document derives them or derives anything from them. See the note on S1a's two states: a stated tariff is neither computed nor a physical quantity nobody calculated."
+      }
+    },
+    {
+      "index": 0,
+      "severed": "-- the term as used --",
+      "still_acting": "the plan is read as a description of the business",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ASSERTED",
+      "quantified": {
+        "quantity": "none",
+        "unit": "ABSENT",
+        "computed": false,
+        "by": "the document computes no quantity at any level"
+      }
+    },
+    {
+      "index": 1,
+      "goal": "help their companies prosper and grow",
+      "severed": "the relation between the services delivered and any client outcome",
+      "still_acting": "clients' companies do whatever they do",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ASSERTED",
+      "value_string": {
+        "sign": "+",
+        "magnitude": "ABSENT",
+        "unit": "ABSENT"
+      },
+      "artifact_id": "Mission Statement, We Can Do It Consulting business plan",
+      "cite": "Mission Statement: 'To provide quality services to our clients that will help their companies prosper and grow.'"
+    },
+    {
+      "index": 2,
+      "goal": "increase productivity and reduce overhead costs",
+      "severed": "the relation between office-management consulting and a client's overhead",
+      "still_acting": "client overhead, which does not consult the plan",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ASSERTED",
+      "value_string": {
+        "sign": "+",
+        "magnitude": "ABSENT",
+        "unit": "ABSENT"
+      },
+      "artifact_id": "Customers section, We Can Do It Consulting business plan",
+      "cite": "Customers: target audience are those 'who want to increase productivity and reduce overhead costs'"
+    },
+    {
+      "index": 3,
+      "goal": "not stated",
+      "severed": "the relation between client prosperity and anything further",
+      "still_acting": "-",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ABSENT",
+      "value_string": {
+        "sign": "ABSENT",
+        "magnitude": "ABSENT",
+        "unit": "ABSENT"
+      }
+    }
+  ]
+}

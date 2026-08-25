@@ -1,0 +1,14 @@
+registered transforms
+base: duration -> second, instant -> second, rate -> per_second
+
+No unit here is the default. An unregistered unit raises;
+nothing resolves by assumption.
+
+unit      quantity       version  base per unit  basis                                               
+--------  -------------  -------  -------------  ----------------------------------------------------
+1         dimensionless  1.0.0    1.0            a pure ratio. Registered rather than special-cased:
+days      duration       1.0.0    86400.0        86400 SI seconds. Not a solar day: the two differ, a
+iso_date  instant        1.0.0    -              a date in the proleptic Gregorian calendar, counted
+per_year  rate           1.0.0    1 / years      the reciprocal of the gregorian_year frame. A rate f
+sols      duration       1.0.0    88775.244      one Mars mean solar day, 88775.244 SI seconds. Regis
+years     duration       1.0.0    31556952.0     the Gregorian mean year: 365.2425 days of 86400 SI s

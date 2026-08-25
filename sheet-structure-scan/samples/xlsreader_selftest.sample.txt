@@ -1,0 +1,25 @@
+xlsreader selftest
+  RK integer                                               PASS got=100.0 want=100.0
+  RK integer / 100                                         PASS got=1.0 want=1.0
+  RK negative integer                                      PASS got=-5.0 want=-5.0
+  RK float                                                 PASS got=1.25 want=1.25
+  address is 1-based in both axes                          PASS got='A1' want='A1'
+  column carries past Z                                    PASS got='AA1' want='AA1'
+  a local ref decodes                                      PASS got=([('S', 'A1')], True) want=([('S', 'A1')], True)
+  an area expands to its cells                             PASS got=[('S', 'A1'), ('S', 'A2')] want=[('S', 'A1'), ('S', 'A2')]
+  an unknown token truncates and SAYS so                   PASS got=([], False) want=([], False)
+  an operator does not stop the walk                       PASS got=([('S', 'A1'), ('S', 'A2')], True) want=([('S', 'A1'), ('S', 'A2')], True)
+  a relative ref resolves against its base                 PASS got=(10, 6) want=(10, 6)
+  a negative column delta is a signed byte                 PASS got=(11, 5) want=(11, 5)
+  an absolute row inside a relative ref stays absolute     PASS got=(3, 6) want=(3, 6)
+  a relative AREA decodes rather than being walked past    PASS got=[('S', 'G10'), ('S', 'G11')] want=[('S', 'G10'), ('S', 'G11')]
+  and with no base it says the walk is partial             PASS got=False want=False
+  a 3d ref with no xti map is dropped, not misattributed   PASS got=[] want=[]
+  and resolves with one                                    PASS got=[('T', 'A1')] want=[('T', 'A1')]
+  epoch                                                    PASS got='1970-01-01' want='1970-01-01'
+  a leap day is not skipped                                PASS got='2038-01-01' want='2038-01-01'
+  the target's created date                                PASS got='2008-06-04' want='2008-06-04'
+  2016-05-02 round trip                                    PASS got='2016-05-02' want='2016-05-02'
+  formula text is declared unavailable for xls             PASS got=False want=False
+  and precedents are declared available                    PASS got=True want=True
+SELFTEST PASS (0 checks failed)

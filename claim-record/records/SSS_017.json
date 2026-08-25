@@ -1,0 +1,66 @@
+{
+  "id": "SSS_017",
+  "assertion": "The pre-repair reader resolved 129 of the workbook's 825 formula cells.",
+  "measurement": {
+    "lo": 129,
+    "hi": 129,
+    "units": "formula cells resolved, of 825 present"
+  },
+  "instrument": {
+    "name": "ElementTree parse of xl/worksheets/*.xml, counting <f> elements, against sheetmodel.py at 1bc2a46",
+    "error": {
+      "kind": "systematic",
+      "magnitude": "array formulas beyond their anchor are not counted; 0 t=array elements are present in this file, so the omission contributes 0 here"
+    }
+  },
+  "domain_of_validity": {
+    "conditions": [
+      {
+        "name": "file",
+        "value": "UNFCCC GHG emissions calculator ver01.1, md5 57d3ffd78a9f5f9980e15feb65f8d986"
+      },
+      {
+        "name": "reader",
+        "value": "sheetmodel.py as of commit 1bc2a46, before shift_formula existed"
+      },
+      {
+        "name": "format",
+        "value": "OOXML .xlsx with shared formulas"
+      }
+    ],
+    "outside_this": "UNTESTED on any other workbook. The mechanism is a property of the OOXML shared-formula encoding, not of this file, so the direction is expected to carry; the magnitude is not."
+  },
+  "clock": {
+    "measured_on": "2026-08-25",
+    "measured_on_frame": "iso_date",
+    "neglected_term": {
+      "name": "reader revision",
+      "held_fixed": "the parser revision that produced the count"
+    },
+    "time_constant": {
+      "value": 0.003,
+      "units": "years",
+      "basis": "sheetmodel.py was revised twice on 2026-08-25; taken as 0.003 years and measured only over one day"
+    },
+    "rate_ceiling": {
+      "state": "UNMEASURED",
+      "why": "no rate of instrument change at which the claim stops holding has been established"
+    },
+    "coupling": {
+      "value": 0.0,
+      "units": "1",
+      "basis": "the claim names the commit in its domain of validity, so a later reader revision does not move it"
+    }
+  },
+  "derivation": {
+    "parents": [],
+    "root_reason": "a direct count of elements in the file, resting on no other claim in this registry"
+  },
+  "collapse_record": {
+    "state": "EXACT",
+    "basis": "a count of <f> elements, not an estimate of one"
+  },
+  "correction_status": "unadjusted",
+  "correction_method": null,
+  "correction_depth": 0
+}

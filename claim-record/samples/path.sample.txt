@@ -1,0 +1,2 @@
+UNF_PALESTINE  The State of Palestine grid factor in this workbook is the arithmetic 
+  UNF_GRID_IRAQ  The workbook's electricity grid emission factor for Iraq is 0.93391 kg

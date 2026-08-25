@@ -1,0 +1,23 @@
+scan 4 -- stated-relationship maintenance
+workbook          lgo.xls
+tolerance         1e-09 relative, stated here and not hardcoded
+provenance sheets 1. LG Profile (row 2 label contains 'info'), 3. Activity Data Disclosure (row 10 label contains 'reference'), 4. Calc. Meth. Disclosure (row 1 label contains 'method'), 5. Sector Definitions (row 11 label contains 'source')
+prose cells read  189
+not arithmetic    188  (counted, not tested)
+
+The four bins are the finding. There is no aggregate score and
+no ranking. A bin name is a description of what the file does,
+not a grade: a workbook may have every reason to hold a number
+the note beside it no longer describes. The reading stays with
+the operator.
+
+bin                 count
+------------------  -----
+MAINTAINED          0
+HOLDS_UNMAINTAINED  0
+DIVERGED            0
+NOT_TESTABLE        1
+
+bin           prose                     op     n  target as written  target cell  expected  actual  rel delta  operands
+------------  ------------------------  -----  -  -----------------  -----------  --------  ------  ---------  --------
+NOT_TESTABLE  5. Sector Definitions!B5  times  0  -                  -            -         -       -          -

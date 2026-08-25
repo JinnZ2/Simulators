@@ -1,0 +1,68 @@
+{
+  "id": "SSS_022b",
+  "assertion": "None of the 22 flagged cells carries a variance sibling within the cross neighborhood.",
+  "measurement": {
+    "lo": 0,
+    "hi": 0,
+    "units": "cells, of 22 flagged"
+  },
+  "instrument": {
+    "name": "scans.py scan_two() at radius 2 with patterns.json",
+    "error": {
+      "kind": "systematic",
+      "magnitude": "no edit to the unit list can make the variance patterns fire, so this half is not reachable by the tuning recorded in SSS_014; the variance list itself is a word list and a variance term under an unlisted name reads as absent"
+    }
+  },
+  "domain_of_validity": {
+    "conditions": [
+      {
+        "name": "file",
+        "value": "UNFCCC ver01.1, md5 57d3ffd7"
+      },
+      {
+        "name": "flag set",
+        "value": "the same 22 cells as SSS_022a"
+      },
+      {
+        "name": "radius",
+        "value": "2 rows and columns, plus the label row"
+      }
+    ],
+    "outside_this": "UNTESTED at other radii. A larger radius can only lower the absent count, so 0 of 22 is stable downward and not upward."
+  },
+  "clock": {
+    "measured_on": "2026-08-25",
+    "measured_on_frame": "iso_date",
+    "neglected_term": {
+      "name": "pattern file",
+      "held_fixed": "patterns.json as of the run"
+    },
+    "time_constant": {
+      "state": "UNMEASURED",
+      "why": "not measured; the revision rate of this instrument has not been recorded"
+    },
+    "rate_ceiling": {
+      "state": "UNMEASURED",
+      "why": "no rate of instrument change at which the claim stops holding has been established"
+    },
+    "coupling": {
+      "value": 0.0,
+      "units": "1",
+      "basis": "the domain of validity pins the instrument revision, so the claim does not move when that revision does. Coupling zero by construction, not by measurement."
+    }
+  },
+  "derivation": {
+    "parents": [
+      "SSS_017",
+      "SSS_020"
+    ],
+    "root_reason": ""
+  },
+  "collapse_record": {
+    "state": "EXACT",
+    "basis": "a count of cells"
+  },
+  "correction_status": "unadjusted",
+  "correction_method": null,
+  "correction_depth": 0
+}

@@ -1,0 +1,10 @@
+{
+  "id": "day",
+  "version": "1.0.0",
+  "quantity": "duration",
+  "unit": "days",
+  "base": "second",
+  "base_per_unit": 86400.0,
+  "basis": "86400 SI seconds. Not a solar day: the two differ, and this frame is the fixed-length one.",
+  "supersedes": null
+}

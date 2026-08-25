@@ -1,0 +1,10 @@
+{
+  "id": "mars_sol",
+  "version": "1.0.0",
+  "quantity": "duration",
+  "unit": "sols",
+  "base": "second",
+  "base_per_unit": 88775.244,
+  "basis": "one Mars mean solar day, 88775.244 SI seconds. Registered because the acceptance test needs a second frame with a rate that shares no factor with the others, and because a frame nothing uses is the honest test of whether anything privileged the ones that are used.",
+  "supersedes": null
+}

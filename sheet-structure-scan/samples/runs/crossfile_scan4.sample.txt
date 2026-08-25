@@ -1,0 +1,49 @@
+scan 4 -- cross-file, stated-relationship maintenance
+workbooks in this emission: n = 2
+
+workbook     created / modified       scope         reader            MAINT  HOLDS  DIVERGED  NOT_TEST  mean operands  cross-sheet  DIVERGED/(D+H)
+-----------  -----------------------  ------------  ----------------  -----  -----  --------  --------  -------------  -----------  --------------
+unfccc.xlsx  2020-11-24 / 2021-05-25  IN_SCOPE      stdlib-xlsx       0      2      21        11        20.7           0            0.913
+lgo.xls      2008-06-04 / 2016-05-02  OUT_OF_SCOPE  stdlib-xls-biff8  0      0      0         1         0              0            out of scope
+
+Reader capabilities not available, and the scans that
+depend on them are NOT_RUN rather than substituted (S1):
+
+workbook  capability    scans NOT_RUN                           
+--------  ------------  ----------------------------------------
+lgo.xls   formula_text  coupling.py (elasticity by perturbation)
+
+Operand count per relationship, and the bin it landed in.
+One row per stated relationship, not per target.
+
+  unfccc.xlsx
+    prose cell            operator        operands  targets  bins                 
+    --------------------  --------------  --------  -------  ---------------------
+    Info and sources!E10  average         33        21       DIVERGED x21
+    Info and sources!E10  average         5         2        HOLDS_UNMAINTAINED x2
+    Info and sources!E12  average         0         1        NOT_TESTABLE x1
+    Info and sources!E19  upper quartile  0         1        NOT_TESTABLE x1
+    Info and sources!E22  average         0         1        NOT_TESTABLE x1
+    Info and sources!E24  average         0         2        NOT_TESTABLE x2
+    Info and sources!E25  times           0         1        NOT_TESTABLE x1
+    WTT- fuels!B15        average         0         1        NOT_TESTABLE x1
+    WTT- fuels!B19        average         0         1        NOT_TESTABLE x1
+    Waste disposal!A29    average         0         1        NOT_TESTABLE x1
+    Waste disposal!A30    average         0         1        NOT_TESTABLE x1
+    Waste disposal!A31    average         0         1        NOT_TESTABLE x1
+
+  lgo.xls
+    prose cell                operator  operands  targets  bins           
+    ------------------------  --------  --------  -------  ---------------
+    5. Sector Definitions!B5  times     0         1        NOT_TESTABLE x1
+
+direction across the emission: NO_DIRECTION
+  a direction takes two defined points and only 1 in-scope workbook(s) have one
+
+pooled DIVERGED/(DIVERGED+HOLDS_UNMAINTAINED): 0.913
+  over 1 in-scope workbook(s); 1 out of scope, in the table
+  above and in no denominator here (S4).
+
+NO CURVE IS REPORTED. n = 2. A decay curve takes a series of
+workbooks with version dates; two points give a direction and
+a point is not a rate.

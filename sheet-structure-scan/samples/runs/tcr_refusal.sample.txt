@@ -1,0 +1,5 @@
+no reader for .xls. The declared budget allows ONE spreadsheet reader beyond stdlib and it is unspent: install it and wire it here rather than widening this module.
+This is the contingency registered in TARGETS.md section 5, and it
+fired as written. Note before spending the slot: the one reader
+available for this format exposes cached VALUES and not formula
+text, and both scans are about the formula layer. See SSS_023.

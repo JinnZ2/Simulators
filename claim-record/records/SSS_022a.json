@@ -1,0 +1,68 @@
+{
+  "id": "SSS_022a",
+  "assertion": "All 22 flagged cells carry a unit companion within the cross neighborhood.",
+  "measurement": {
+    "lo": 22,
+    "hi": 22,
+    "units": "cells, of 22 flagged"
+  },
+  "instrument": {
+    "name": "scans.py scan_two() at radius 2 with patterns.json",
+    "error": {
+      "kind": "systematic",
+      "magnitude": "the unit list was widened before this workbook was opened, in the direction that makes a unit easier to find; see SSS_014. A false PRESENT is the costly direction and its rate here is unmeasured"
+    }
+  },
+  "domain_of_validity": {
+    "conditions": [
+      {
+        "name": "file",
+        "value": "UNFCCC ver01.1, md5 57d3ffd7"
+      },
+      {
+        "name": "flag set",
+        "value": "the first cell governed by each occurrence of each listed column collision, produced by scan three"
+      },
+      {
+        "name": "radius",
+        "value": "2 rows and columns, plus the label row above every column the record touched"
+      }
+    ],
+    "outside_this": "UNTESTED at other radii. A larger radius can only raise the present count, so 22 of 22 is stable upward and not downward."
+  },
+  "clock": {
+    "measured_on": "2026-08-25",
+    "measured_on_frame": "iso_date",
+    "neglected_term": {
+      "name": "pattern file",
+      "held_fixed": "patterns.json as of the run"
+    },
+    "time_constant": {
+      "state": "UNMEASURED",
+      "why": "not measured; the revision rate of this instrument has not been recorded"
+    },
+    "rate_ceiling": {
+      "state": "UNMEASURED",
+      "why": "no rate of instrument change at which the claim stops holding has been established"
+    },
+    "coupling": {
+      "value": 0.0,
+      "units": "1",
+      "basis": "the domain of validity pins the instrument revision, so the claim does not move when that revision does. Coupling zero by construction, not by measurement."
+    }
+  },
+  "derivation": {
+    "parents": [
+      "SSS_017",
+      "SSS_020"
+    ],
+    "root_reason": ""
+  },
+  "collapse_record": {
+    "state": "EXACT",
+    "basis": "a count of cells"
+  },
+  "correction_status": "unadjusted",
+  "correction_method": null,
+  "correction_depth": 0
+}

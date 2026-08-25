@@ -1,0 +1,131 @@
+{
+  "id": "S4_blank_template_document",
+  "name": "the business plan document",
+  "source": "A blank business plan template, delivered as pasted text in conversation. Landed verbatim at fold-matrix/sources/blank_template_pasted.md. Nine sections plus a Tips section.",
+  "_note": [
+    "NOT the SBA blank traditional template the order named. Measured: 1 of",
+    "its 9 section names appears in the two filled SBA plans (Executive",
+    "Summary), and of twelve SBA headings only three appear here, two of",
+    "them as incidental phrases in other sections. So the registered P1,",
+    "P3 and P4 remain NOT ADDRESSABLE for the file they were registered",
+    "against, and this is a new candidate.",
+    "",
+    "PROVENANCE ASYMMETRY, recorded: the two filled plans arrived as .doc",
+    "files with a container, a piece table, an author line and a creation",
+    "date. This arrived as text with none of those -- no author, no date,",
+    "no file. It is a weaker artifact in a way nothing in its content",
+    "shows.",
+    "",
+    "TWO READINGS OF THE TERM, and they disagree. A blank template has no",
+    "business activity in it, so under the reading WO8 uses for the filled",
+    "plans -- term = the thing the business does -- level 0 is a SLOT and",
+    "the grid is not constructible at all. This grid takes the other",
+    "reading: the term is the DOCUMENT. Both are stated; neither is picked.",
+    "See FM_028."
+  ],
+  "enumeration_basis": "document_named",
+  "_enumeration_note": "the levels are the template's own sections and its own statements about what each is for; nothing added from outside it",
+  "plan": {
+    "plan_exists": "yes",
+    "practice_tracks_plan": "UNREAD",
+    "why": "the document is a template FOR a plan, so a plan exists in the document set in the weakest possible sense: as a form. Whether any filled instance tracks it is not readable from the blank."
+  },
+  "levels": [
+    {
+      "index": -2,
+      "severed": "the business's actual quantities -- revenue, cost, cash",
+      "still_acting": "nothing yet: there is no business behind a blank form",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ABSENT",
+      "quantified": {
+        "quantity": "revenue, COGS, cash flow, break-even",
+        "unit": "USD",
+        "computed": false,
+        "by": "the template NAMES all of these -- Revenue Projections, Cash Flow Statement, Balance Sheet, Break-even Analysis, Net Profit, COGS, TAM, SAM, SOM -- and computes none. Naming a quantity and computing it are different acts, and this document does the first nine times."
+      }
+    },
+    {
+      "index": -1,
+      "severed": "any figure and the thing it would measure",
+      "still_acting": "-",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ABSENT",
+      "quantified": {
+        "quantity": "illustrative example figures",
+        "unit": "USD",
+        "computed": false,
+        "by": "ten dollar figures appear and ALL TEN are inside an '(e.g., ...)' -- $5 billion, $1M, $500,000, $10 Billion, $2 Billion, $50 Million, $200,000, $150,000, $100,000, $50,000 -- plus two slot markers '$[Price]'. A fourth kind beyond FM_024's three: not the org's, not a third party's, not an external statistic. An EXAMPLE of a quantity, belonging to nobody, computed by nobody."
+      }
+    },
+    {
+      "index": 0,
+      "severed": "-- the term as used: the plan document itself --",
+      "still_acting": "the form is filled in, or is not",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ASSERTED",
+      "quantified": {
+        "quantity": "none",
+        "unit": "ABSENT",
+        "computed": false,
+        "by": "the template computes no quantity anywhere"
+      }
+    },
+    {
+      "index": 1,
+      "goal": "capture the reader's attention and summarize the entire plan",
+      "severed": "the relation between an executive summary and a reader's attention",
+      "still_acting": "readers read or do not",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ASSERTED",
+      "value_string": {
+        "sign": "+",
+        "magnitude": "ABSENT",
+        "unit": "ABSENT"
+      },
+      "artifact_id": "section 1 preamble, blank business plan template",
+      "cite": "'One-to-two-page summary. Often written last. Goal is to capture the reader's attention and summarize the entire plan.'"
+    },
+    {
+      "index": 2,
+      "goal": "show the business model is profitable and viable for the next 3-5 years",
+      "severed": "the relation between a forecast and viability",
+      "still_acting": "the business is viable or is not, on its own",
+      "clock": {
+        "value": 4.0,
+        "units": "years",
+        "basis": "stated in the section 8 preamble as 'the next 3-5 years'; taken as the midpoint 4, and the range is the stated quantity"
+      },
+      "basis": "ASSERTED",
+      "value_string": {
+        "sign": "+",
+        "magnitude": "ABSENT",
+        "unit": "ABSENT"
+      },
+      "artifact_id": "section 8 preamble, blank business plan template",
+      "cite": "'Show the business model is profitable and viable for the next 3-5 years.'"
+    },
+    {
+      "index": 3,
+      "goal": "not stated",
+      "severed": "the relation between a completed plan and whatever the plan is written to obtain",
+      "still_acting": "funding decisions, which the template never names as its object",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ABSENT",
+      "value_string": {
+        "sign": "ABSENT",
+        "magnitude": "ABSENT",
+        "unit": "ABSENT"
+      }
+    }
+  ]
+}

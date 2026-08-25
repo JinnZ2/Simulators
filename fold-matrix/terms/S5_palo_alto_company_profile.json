@@ -1,0 +1,100 @@
+{
+  "id": "S5_palo_alto_company_profile",
+  "name": "the company research brief",
+  "source": "Company Profile: Palo Alto Networks, prepared by Dallen Moody, dated 2024-10-20. Delivered as pasted text; landed at sources/palo_alto_company_profile_pasted.md with one personal email redacted. An accompanying PDF upload could not be verified against the paste -- see FM_032.",
+  "_note": [
+    "First source in this corpus whose subject is a THIRD PARTY. Every",
+    "prior document states goals about itself or its own author's",
+    "business; this one states things about another company.",
+    "",
+    "The document states no purpose for itself anywhere. Its use -- MBA",
+    "career preparation -- is a property of where it is filed, not of the",
+    "text. That is why the upward arm is ABSENT rather than ASSERTED at",
+    "every level, which no prior source in this corpus produced."
+  ],
+  "enumeration_basis": "document_named",
+  "_enumeration_note": "levels are the document's own sections and the four figures in Company Overview",
+  "plan": {
+    "plan_exists": "no",
+    "practice_tracks_plan": "UNREAD",
+    "why": "no plan, charter or stated principle governs this document. It is a brief; the leadership principles it quotes belong to the company it describes, not to the party that wrote it."
+  },
+  "levels": [
+    {
+      "index": -2,
+      "severed": "the operations the figures summarise",
+      "still_acting": "the subject company operates, whatever the brief says",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ABSENT",
+      "quantified": {
+        "quantity": "segment revenue and segment margin",
+        "unit": "USD",
+        "computed": false,
+        "by": "the document states that support and consulting 'carry the highest margins' and gives no margin for any segment, nor any segment revenue"
+      }
+    },
+    {
+      "index": -1,
+      "severed": "the four headline figures and any relation between them",
+      "still_acting": "the figures move; the brief is dated 2024-10-20 and carries no clock",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ABSENT",
+      "quantified": {
+        "quantity": "stock price, market cap, revenue, net income",
+        "unit": "USD",
+        "computed": false,
+        "by": "four figures, all REPORTED about a third party and none computed by the author: $374.83, $122.04B, $7.52B, $227.7M. No source is named for any of them and no relation between them is stated. FM_024's third category -- an external statistic -- as the whole downward arm rather than one figure in it."
+      }
+    },
+    {
+      "index": 0,
+      "severed": "-- the term as used: the brief itself --",
+      "still_acting": "the brief is read, or is not",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ASSERTED",
+      "quantified": {
+        "quantity": "none",
+        "unit": "ABSENT",
+        "computed": false,
+        "by": "the document computes nothing from its own figures"
+      }
+    },
+    {
+      "index": 1,
+      "goal": "not stated",
+      "severed": "the relation between reading this brief and anything the reader does",
+      "still_acting": "whatever the reader does",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ABSENT",
+      "value_string": {
+        "sign": "ABSENT",
+        "magnitude": "ABSENT",
+        "unit": "ABSENT"
+      },
+      "cite": "no purpose statement appears anywhere in the document"
+    },
+    {
+      "index": 2,
+      "goal": "not stated",
+      "severed": "the relation between preparation and any outcome",
+      "still_acting": "-",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ABSENT",
+      "value_string": {
+        "sign": "ABSENT",
+        "magnitude": "ABSENT",
+        "unit": "ABSENT"
+      }
+    }
+  ]
+}
