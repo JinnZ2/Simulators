@@ -1,0 +1,17 @@
+CASES 11   SOURCES 29   TRANSITIONS 3
+SOURCE STATUS located=5  untouched=24
+
+CUT INDEPENDENCE -- a cut determined by another carries no
+information the first one does not already carry.
+  custody DETERMINES parallel_path across all cases: {'routed': 'no', 'mixed': 'partial', 'self': 'yes'}
+GAP COVERAGE -- gaps with no source pointing at them
+  G-KNOWLEDGE-STATE
+  G-SLACK
+  G-THRESHOLD
+  G-REPAIRABILITY
+  G-COLLINEAR
+  4 of 9 gaps covered
+
+  schema declares 'comfort_threshold'; no case carries it
+  field 'measurable' has mixed types across cases: list,str
+  no evidence_needed: C08,C11

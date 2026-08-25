@@ -6,6 +6,31 @@ CC0 simulators and audits grounded in physics. **Index only** — detail in
 ## Spine — read in order
 ## Report form
 
+`READING_PROTOCOL.md` governs how every folder here is to be read: each is a
+marker for a sensed shape, not a thesis under defense. Test the fit, extend it,
+or report where it breaks — a break is a measurement and goes in the folder's
+`CLAIM_TABLE.md`, not an objection to be answered. Accepting a folder is as
+useless as rejecting it; both skip the test. When a claim is refuted the claim
+gets updated and the simulation does not get retuned to preserve it.
+
+`METHOD_SPEC.md` is upstream of `SHAPE_SPEC.md` and states the epistemic class:
+constraint-set reasoning is a METHOD, in the class of the scientific method and
+dimensional analysis. A method is not falsifiable and does not need to be — the
+falsifiable layer is the individual read, via the removal test. Demanding a
+falsifier of the procedure rather than of a read is a category error, and the
+file exists to block it. Section 5: a read is a MARKER, confidence is reported
+separately from the pattern with a comfort threshold, and a read is NOT upgraded
+by more instances sharing the geometry without a checked constraint set. File
+order is `METHOD_SPEC.md`, `SHAPE_SPEC.md`, `READING_PROTOCOL.md`.
+
+`SHAPE_SPEC.md` is upstream of everything in this repository that uses the
+word SHAPE. It defines a shape as the constraint set a geometry is a solution
+to — not the geometry, not the picture, not the field's name for it. Point at
+it rather than restating it. Section 2 blocks the misread that the method is
+"matching geometries across domains"; section 4 gives the removal test that
+makes a shape read falsifiable; section 9 says use DISSIPATION rather than
+cost, because cost imports a pricing model that is not part of the system.
+
 `AUDIT_CONTRACT.md` governs how work is reported across this ecosystem:
 structure first, gap analysis as deliverable, a score without its support
 count is not a score, wording is not a decision, a free-text discriminator
@@ -5119,6 +5144,57 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `MECH` is assigned to no source and that is a gap rather than a decision,
   and nothing here addresses SP 800-90B or AIS 31 health testing. Stdlib only,
   selftest 33/33, CC0.
+- `custody-verification-band/` — Marker under exploration. Criterion: a layer
+  buffers a system iff its productive function is self-custodied AND locally
+  verifiable, otherwise it is a transmission belt. Eleven cases from Late
+  Bronze Age collapse (Hittite, Ugarit, Mycenaean, Egypt, Phoenicia) through
+  post-plague English tenure to US rural conversion, vehicle repairability,
+  household metal, illiquid savings instruments, and present-day institutional
+  distrust. Three cuts recorded per case — custody, verification_scope,
+  parallel_path; slack and horizon are open measurables in `gaps.md`, not case
+  fields. **The criterion reads two of the three recorded cuts and on this
+  corpus the omission costs nothing: zero disagreements across all eleven.**
+  An earlier version of this folder reported disagreements in both directions;
+  that was computed over six invented SEED cases, two written specifically to
+  disagree, and did not survive their replacement by the real eleven —
+  `B4` WITHDRAWN, with the selftest now asserting the zero-disagreement
+  result so it cannot silently reverse. **Why the omission costs nothing is
+  the finding:** `parallel_path` is a deterministic function of `custody`
+  across all eleven (`routed→no, mixed→partial, self→yes`), so it carries no
+  information custody does not already carry. Regularity or the same
+  judgement entered twice under two names is undetermined — `gaps.md`
+  G-COLLINEAR names what separates them (a case coded blind to the custody
+  column, or any routed-custody case with a working parallel path; municipal
+  utilities and open-source infrastructure are the obvious candidates and
+  neither is in the corpus). Third instance in this ecosystem of a folder's
+  own instrumentation carrying a field with no discriminating power, after
+  the readout baths in `qrng-pair-search/` and the one-slot structural score
+  in the shape-index. **Two physics-anchor labels named the wrong quantity**,
+  recomputed in `branching.py`: 2^(-1/3) = 0.7937 is the space-filling LENGTH
+  ratio (equivalently the Murray's-law radius ratio), not the area-preserving
+  RADIUS ratio, which is 2^(-1/2) = 0.7071; and aggregate cross-section is
+  CONSTANT under area preservation by definition of the name (n·β² = 1.0000
+  exactly), widening by 2^(1/3) only under Murray's law. The 3/4 exponent
+  still derives to 0.750000 over 20 levels and needs BOTH ratios. "Trunk never
+  wins by construction" survives in the Murray regime and is neutral in the
+  area-preserving one — destination held, route did not. **Three defects in
+  the delivered reader, reproduced before being fixed:** `extract` as a string
+  iterated per character (five PHYSICS_REFS rendered one letter per line),
+  ARCHAEOLOGICAL items key their content under `measure` and printed none of
+  it, and `--custody self` substring-matched so `self -> routed` answered to
+  `self` — four of six hits were conversion cases, the opposite of the
+  question. Transitions are now parsed into state pairs; `--custody` reads
+  current, `--was` reads origin. Nine claims `B1..B9`; `B7` — that branching
+  geometry licenses an inference about economic layers — is **ASSERTED, NOT
+  ARGUED, with no falsifier stated**; `B9` is untestable because
+  `comfort_threshold` is declared in the schema and carried by no case, and a
+  second readout never taken is not yet a readout. Strip protocol prefers
+  procedure and residue over testimony, and treats role bindings as
+  substitutable substrate. Nothing rests on a source yet: 22 sources, 5
+  located, 17 untouched, none extracted. `Q-PORT` — does proximity-based
+  verification port without proximity — remains the highest-priority open
+  question and the one gap where recoverability from documents is not
+  established. Stdlib only, selftests 19/19 and 13/13, CC0.
 - `SYNTHESIS.md` — Top-level synthesis describing how the three folders
   fit together, how claims flow between them, and how to read the
   artifacts in order.
