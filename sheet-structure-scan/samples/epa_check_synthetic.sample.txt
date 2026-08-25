@@ -1,0 +1,73 @@
+### SYNTHETIC -- tests the criterion, not any EPA product
+
+target        EPA GHG Emission Factors Hub
+file          hub_synthetic.xlsx
+predicted     a flat reference table: hardcoded factors, units in the headers, variance and provenance in a separate document
+flag rule     numeric constants that are not labels (84 of 115 cells)
+
+sheets                2
+cells                 115
+derived               0  (0.000)
+rank == 0             1.000
+rank == CYCLE         0
+max precedent depth   0
+
+companion PRESENT rate over the flag set
+  unit                1.000
+  date                0.000
+  sample_size         0.000
+  variance_sibling    0.000
+
+label groups >= 2     14  (column axis: 5)
+  listed, column      0  (0.000)
+  listed, row         0
+
+check    readout           predicted  observed  state
+-------  ----------------  ---------  --------  -----
+EFH-P1   derived_share     < 0.05     0.000     HELD
+EFH-P2   rank_zero_share   > 0.95     1.000     HELD
+EFH-P3a  unit_present      > 0.7      1.000     HELD
+EFH-P3b  variance_present  < 0.1      0.000     HELD
+EFH-P3c  sample_present    < 0.1      0.000     HELD
+EFH-P4   listed_col_share  < 0.1      0.000     HELD
+
+6 of 6 registered predictions held.
+
+This is one arm. A profile from the other arm is what decides whether these numbers describe the workbook or describe the scan.
+
+
+### SYNTHETIC -- tests the criterion, not any EPA product
+
+target        EPA Local GHG Inventory Tool
+file          chain_synthetic.xlsx
+predicted     sector calculators with live formula chains across community and government-operations modules
+flag rule     numeric constants that are not labels (8 of 72 cells)
+
+sheets                3
+cells                 72
+derived               32  (0.444)
+rank == 0             0.556
+rank == CYCLE         0
+max precedent depth   4
+
+companion PRESENT rate over the flag set
+  unit                1.000
+  date                0.000
+  sample_size         0.000
+  variance_sibling    0.000
+
+label groups >= 2     10  (column axis: 2)
+  listed, column      1  (0.500)
+  listed, row         8
+
+check   readout           predicted  observed  state
+------  ----------------  ---------  --------  -----
+LOC-P1  derived_share     > 0.2      0.444     HELD
+LOC-P2  rank_zero_share   < 0.95     0.556     HELD
+LOC-P3  max_pdepth        > 2.0      4.000     HELD
+LOC-P4  listed_col_count  > 0.0      1.000     HELD
+
+4 of 4 registered predictions held.
+
+This is one arm. A profile from the other arm is what decides whether these numbers describe the workbook or describe the scan.
+

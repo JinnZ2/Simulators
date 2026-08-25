@@ -95,6 +95,48 @@ named here and not built.
 
 ---
 
+## The EPA targets
+
+Three real workbooks were named and **none has been read**: the egress
+gateway answers 403 to CONNECT for `www.epa.gov`, logged
+2026-08-25T15:14:12Z–15:14:13Z with DNS resolving normally, so it is a
+policy denial and not a network fault. Reported rather than routed
+around.
+
+What was done instead is in `targets/EPA.md`: the Emission Factors Hub
+arrived with the standard *if the scan does not light that up, the scan
+is broken*, and that standard had no value attached. Ten predictions are
+now registered — six for the Hub, four for the Local Tool — with the
+argument that **the pair is the test**, since a Hub run alone cannot
+separate *the scan works and the Hub is flat* from *the scan reports
+everything flat*.
+
+**Building the criterion found two defects, and one of them would have
+fired on the real Hub as a finding.** Two flat sheets sharing their
+headers over twelve and nine rows returned constructions `12c` and `9c`,
+which differ, so five column collisions were listed on a fixture where
+nothing collides — and the Hub is exactly that shape. The delivered spec
+asks *whether* the cells are constants versus derived, and whether is a
+set; the listing decision now takes the kind set and the counts stay in
+the printed column (`SSS_011`). The other: a share passed on an empty
+denominator (`SSS_012`).
+
+The synthetic profiles the criterion separates:
+
+| readout | flat two-sheet table | three-sheet chain |
+|---|---|---|
+| `derived_share` | 0.000 | 0.444 |
+| `rank_zero_share` | **1.000** | 0.556 |
+| `max_pdepth` | 0 | 4 |
+| `unit_present` | 1.000 | 1.000 |
+| `variance_present` | 0.000 | 0.000 |
+| `listed_col_count` | 0 | 1 |
+
+Those two workbooks were written here. **Nothing in them is evidence
+about any EPA product**, and a criterion that separates two shapes
+written by one hand has not been shown to separate two written by
+another.
+
 ## What has not been run
 
 No real workbook. Falsifiers F1–F4 in `SPEC.md` §6 all need one, and

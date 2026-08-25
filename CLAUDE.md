@@ -5755,8 +5755,46 @@ underneath).
   workbook is a readable table. **`SSS_010` UNVERIFIED:** nothing has met
   a real workbook, F1–F4 all need one, and three of ten claims are
   failures the fixture produced — *passing is weaker evidence than
-  failing* (`membership-probe`'s LIMITS, same asymmetry). 66 selftest
-  checks green across three modules. Stdlib only, parses under 3.9, CC0.
+  failing* (`membership-probe`'s LIMITS, same asymmetry).
+  **`targets/` pre-registers three real EPA workbooks and reads none of
+  them** — `www.epa.gov` is denied by this session's egress policy (403
+  to CONNECT, logged 15:14:12Z-15:14:13Z, DNS resolving normally), so it
+  is reported rather than routed around. The Emission Factors Hub arrived
+  as a known-answer case with the standard *if the scan does not light
+  that up, the scan is broken*, which had no value attached; ten
+  predictions are now registered, six for the Hub and four for the Local
+  Inventory Tool, before any file was opened. **`SSS_013`: the pair is
+  the test.** A Hub run alone cannot separate *the scan works and the Hub
+  is flat* from *the scan reports everything flat* — the two predict the
+  same output — so the Local Tool is the discriminator and every report
+  ends by saying it is one arm. **`SSS_011`, the one that earned the
+  exercise:** building the criterion against a target-shaped fixture
+  found that scan three listed every shared header on a difference in
+  **table height** (`12c` against `9c`), producing five column collisions
+  on a fixture where nothing collides — and the Hub is exactly that
+  shape, many sheets sharing headers over different row counts, so it
+  would have lit up with a rank beside each row and read as a finding.
+  The delivery asks *whether* the cells are constants versus derived and
+  **whether is a set**, so the listing decision now takes the kind set
+  (`c`/`d`/`c+d`) with the counts kept in the printed column. **`SSS_012`:**
+  `EFH-P4` is a share and passed on an **empty denominator** — a
+  single-sheet workbook has no repeated label — which is `PCH_001`
+  reached a second time in a second folder by a different route; shares
+  now name their denominator and return `NOT_DETERMINABLE`, both branches
+  pinned. **`SSS_014`:** `patterns.json` was widened before the data
+  (generic parenthetical removed as too loose, mmBtu/therm/scf/MWh/short
+  ton/CO2e added) in the direction that makes the tool's own `unit
+  present` prediction easier — disclosed in the file's `_note` and the
+  claim table, and bounded structurally, since **no edit to the unit list
+  can make the variance or sample-size patterns fire**, which is where
+  the load-bearing differential sits. The criterion is null-tested on two
+  synthetic shapes (flat holds 6 of 6 `efh` and fails both `local`
+  discriminators; chain the reverse) with the synthetics loudly marked as
+  no evidence about any EPA product. One contingency named: a target
+  shipping as legacy `.xls` makes `read()` raise, and **that** is when
+  the one-reader slot gets spent — the test `SSS_001` sets for itself.
+  88 selftest checks green across four modules. Stdlib only, parses under
+  3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

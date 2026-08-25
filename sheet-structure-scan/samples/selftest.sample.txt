@@ -3,7 +3,7 @@ sheetmodel selftest
   col_to_num AA                                  PASS got=27 want=27
   num_to_col roundtrip                           PASS got='BZ' want='BZ'
   simple refs                                    PASS got={('S', 'A1'), ('S', 'B2')} want={('S', 'A1'), ('S', 'B2')}
-  range expands                                  PASS got={('S', 'A1'), ('S', 'A2'), ('S', 'A3')} want={('S', 'A1'), ('S', 'A2'), ('S', 'A3')}
+  range expands                                  PASS got={('S', 'A1'), ('S', 'A3'), ('S', 'A2')} want={('S', 'A1'), ('S', 'A3'), ('S', 'A2')}
   function name not a ref                        PASS got={('S', 'A1')} want={('S', 'A1')}
   two functions one range                        PASS got={('S', 'A1'), ('S', 'A2')} want={('S', 'A1'), ('S', 'A2')}
   qualified ref                                  PASS got={('Other', 'B4')} want={('Other', 'B4')}
@@ -60,8 +60,13 @@ scans selftest
   constructions differ across them                     PASS got=['2c', '2d', '2d'] want=['2c', '2d', '2d']
   depth sets differ across them                        PASS got=3 want=3
   'item' repeats and is NOT listed                     PASS got=False want=False
+  differing table heights list nothing                 PASS got=0 want=0
+  the shared headers are counted as agreeing, not dropped PASS got=True want=True
+  the printed counts differ and the kind sets do not   PASS got=('12c', '9c', True) want=('12c', '9c', True)
+  a mixed column still separates from a pure one       PASS got=False want=False
   a same-construction group is counted, not dropped    PASS got=True want=True
   row-axis collision found                             PASS got=True want=True
+  unit patterns, 10 hand-set cases                     PASS got=[] want=[]
   --all: rows, absences, labels, strays, in-table      PASS got=(38, 23, 13, 2, 8) want=(38, 23, 13, 2, 8)
   a flag list of five yields four, all in-table        PASS got=4 want=4
   parenthetical kept distinct                          PASS got=False want=False
@@ -72,4 +77,27 @@ scans selftest
   missing flag file raises                             PASS got=True want=True
   flags parsed                                         PASS got=[('Inputs', 'B9'), ('Model', 'D2')] want=[('Inputs', 'B9'), ('Model', 'D2')]
   unqualified flag raises                              PASS got=True want=True
+SELFTEST PASS (0 checks failed)
+
+epa_check selftest
+  the two workbooks below are SYNTHETIC. They test whether the
+  criterion separates a flat table from a formula chain. Nothing
+  here is evidence about any EPA product.
+  hub shape holds every efh prediction                     PASS got=['HELD', 'HELD', 'HELD', 'HELD', 'HELD', 'HELD'] want=['HELD', 'HELD', 'HELD', 'HELD', 'HELD', 'HELD']
+  one sheet: no column group exists                        PASS got=0 want=0
+  and EFH-P4 says so rather than passing                   PASS got='NOT_DETERMINABLE' want='NOT_DETERMINABLE'
+  two sheets: the denominator exists                       PASS got=True want=True
+  chain shape does NOT hold efh-P1                         PASS got='NOT_HELD' want='NOT_HELD'
+  chain shape does NOT hold efh-P2                         PASS got='NOT_HELD' want='NOT_HELD'
+  chain shape holds every local prediction                 PASS got=['HELD', 'HELD', 'HELD', 'HELD'] want=['HELD', 'HELD', 'HELD', 'HELD']
+  hub shape does NOT hold local-P1                         PASS got='NOT_HELD' want='NOT_HELD'
+  hub shape does NOT hold local-P2                         PASS got='NOT_HELD' want='NOT_HELD'
+  hub: unit present, variance and sample absent            PASS got=(True, True, True) want=(True, True, True)
+  hub rank column carries no ordering                      PASS got=1.0 want=1.0
+  chain rank column does                                   PASS got=True want=True
+  chain: one column collision, many row rows               PASS got=(1.0, True) want=(1.0, True)
+  hub: repeated headers agree, so none is listed           PASS got=0.0 want=0.0
+  simplified registers no threshold                        PASS got=[] want=[]
+  and says why                                             PASS got=True want=True
+  emitted profile carries no screened word                 PASS got=True want=True
 SELFTEST PASS (0 checks failed)

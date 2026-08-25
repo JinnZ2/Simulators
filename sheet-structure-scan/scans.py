@@ -322,7 +322,7 @@ def governed(wb, sheet, r, c, axis, lrow, lcol):
 
 
 def _construction(cells):
-    """[CHOICE 6] composition, not a majority label.
+    """[CHOICE 6] composition, printed. Counts, for the operator to read.
 
     A majority vote would report a column of nine constants and one
     formula identically to a column of ten constants, and that single
@@ -337,6 +337,26 @@ def _construction(cells):
     if nd:
         parts.append("%dd" % nd)
     return "+".join(parts) or "0"
+
+
+def _construction_key(cells):
+    """[CHOICE 6] what the LISTING decision is taken on: the kind set.
+
+    Not the counts. Two sheets of a flat reference table carry the same
+    headers over different numbers of rows, and comparing "12c" against
+    "9c" lists every shared header on a difference in TABLE HEIGHT. That
+    fired on a two-sheet fixture shaped like the target this criterion
+    was written for, and it would have fired on the target -- as a
+    finding, with a rank beside it.
+
+    The delivery asks whether the cells are constants versus derived.
+    Whether is a set. The counts stay in the printed column, so nine
+    constants and one formula still reads differently from ten
+    constants, which is the distinction the composition was for.
+    """
+    nc = any(x.kind.startswith("CONSTANT") for x in cells)
+    nd = any(x.kind == DERIVED for x in cells)
+    return "c+d" if (nc and nd) else ("d" if nd else "c")
 
 
 def _depths(wb, cells):
@@ -390,6 +410,7 @@ def scan_three(wb, norm=normalize):
                 "span": "%s!%s" % (sheet, _span(cells)),
                 "depths": _depths(wb, cells),
                 "construction": _construction(cells),
+                "ckey": _construction_key(cells),
                 "rank": _group_rank(wb, cells),
             })
     rows, same = [], 0
@@ -397,7 +418,7 @@ def scan_three(wb, norm=normalize):
         if len(occ) < 2:
             continue
         differs = (len(set(o["depths"] for o in occ)) > 1
-                   or len(set(o["construction"] for o in occ)) > 1)
+                   or len(set(o["ckey"] for o in occ)) > 1)
         if not differs:
             same += 1
             continue
@@ -492,7 +513,7 @@ def render_three(wb, rows, same, total):
         "sheets          %s" % ", ".join(wb.sheets),
         "normalization   case, whitespace, edge punctuation; parentheticals kept",
         "grouped on      normalized label and axis",
-        "listed when     depth sets differ, or construction differs",
+        "listed when     depth sets differ, or the kind set differs",
         "rank            sum over governed cells of dependents x downstream depth",
         "",
         "depths       set of precedent depths of the cells the label governs",
@@ -596,9 +617,58 @@ def _selftest():
     # same depth. A scan that lists it is listing repetition, not
     # collision.
     ck("'item' repeats and is NOT listed", ("item", "column") in listed, False)
+
+    # Table height must not list a header. Two flat sheets sharing their
+    # headers over different numbers of rows agree in construction and
+    # differ in count; before CHOICE 6 took the kind set, every shared
+    # header was listed on that difference alone -- on a fixture shaped
+    # like the workbook the criterion in targets/ was written for.
+    def _flat(name, n):
+        r = {"A1": ("t", "Fuel Type"), "B1": ("t", "CO2 Factor (kg CO2/mmBtu)")}
+        for i in range(2, n + 2):
+            r["A%d" % i] = ("t", "Fuel %d" % (i - 1))
+            r["B%d" % i] = ("n", "%d" % (90 + i))
+        return (name, r)
+    flat = sheetmodel.read(fixture.write_demo(
+        os.path.join(d, "flat.xlsx"), [_flat("A", 12), _flat("B", 9)]))
+    fl, fsame, _t = scan_three(flat)
+    ck("differing table heights list nothing",
+       len(fl), 0)
+    ck("the shared headers are counted as agreeing, not dropped",
+       fsame >= 2, True)
+    ca = governed(flat, "A", 1, 2, "column", 1, 1)
+    cb = governed(flat, "B", 1, 2, "column", 1, 1)
+    ck("the printed counts differ and the kind sets do not",
+       (_construction(ca), _construction(cb),
+        _construction_key(ca) == _construction_key(cb)),
+       ("12c", "9c", True))
+    ck("a mixed column still separates from a pure one",
+       _construction_key(ca) == _construction_key(ca + [
+           sheetmodel.Cell("A", "Z9", sheetmodel.DERIVED, None, "=A1",
+                           set(), set())]), False)
     ck("a same-construction group is counted, not dropped", same >= 1, True)
 
     ck("row-axis collision found", ("widget", "row") in listed, True)
+
+    # --- the unit list, against hand-set answers -----------------------
+    # Fixed before any real workbook was read. The negatives are the
+    # half that matters: a loose unit pattern produces a false PRESENT,
+    # which removes a row from a report about what is missing.
+    unit_cases = [
+        ("Heat Content (mmBtu/short ton)", True),
+        ("CO2 Factor (kg CO2/mmBtu)", True),
+        ("Electricity (kWh)", True),
+        ("unit price (USD)", True),
+        ("Natural Gas (therms)", True),
+        ("Emissions (mt CO2e)", True),
+        ("Total (see note 3)", False),
+        ("Fuel Type", False),
+        ("Scope 1", False),
+        ("Notes (revised)", False),
+    ]
+    ck("unit patterns, 10 hand-set cases",
+       [t for t, want in unit_cases
+        if _matches(t, pats["unit"]) != want], [])
 
     # --- what --all costs, measured rather than asserted ---------------
     # The argument for CHOICE 1 is that the flag set decides the report.

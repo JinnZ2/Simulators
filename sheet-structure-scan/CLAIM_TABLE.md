@@ -238,3 +238,112 @@ other thing.
 **Falsifier:** run it on a workbook nobody here built.
 
 **Status: UNVERIFIED, and it is the cheapest item in the folder.**
+
+---
+
+## Claims from the EPA targets, before the data
+
+Three workbooks were named as targets. **None has been read**: this
+session's egress gateway answers 403 to CONNECT for `www.epa.gov`, logged
+2026-08-25T15:14:12Z–15:14:13Z with DNS resolving normally. Details and
+the pre-registration in [`targets/EPA.md`](targets/EPA.md).
+
+---
+
+### SSS_011 — scan three listed every shared header on a difference in table height
+
+Two flat sheets carrying the same headers over twelve and nine rows
+returned constructions `12c` and `9c`. Those differ, so the group was
+listed: **five column collisions on a fixture where nothing collides.**
+
+The Emission Factors Hub is exactly that shape — many sheets sharing
+headers over different numbers of rows — so the scan would have lit up on
+it, with a rank beside each row, and read as a finding. The workbook that
+was handed over as a known-answer case found the defect before it
+arrived.
+
+`CHOICE 6` was over-specified against its own source. The delivery asks
+whether the cells are constants **versus** derived; *whether* is a set,
+not a count. The listing decision now takes the kind set (`c` / `d` /
+`c+d`) and the counts stay in the printed column, so nine constants and
+one formula still reads differently from ten constants — which was the
+argument for composition over a majority vote in the first place.
+
+**Falsifier:** a workbook where two occurrences share a kind set and a
+depth set and a reader still judges them differently constructed.
+
+**Status: REPAIRED. Both directions pinned — differing heights list
+nothing; a mixed column still separates from a pure one.**
+
+---
+
+### SSS_012 — a share passed on an empty denominator, in the check written to test the Hub
+
+`EFH-P4` is `listed_col_share < 0.10`. On a single-sheet workbook no
+label can appear twice, the denominator is zero, and the check was
+satisfied by a result set with nothing in it.
+
+This is `PCH_001` reached a second time, in a different folder, by a
+different route: a predicate that returns a pass on an absence. It was
+found by running the criterion against a shaped fixture, not by reading
+it — which is the same way `SSS_009` was found.
+
+Fixed: every share names its denominator field, and an empty denominator
+returns `NOT_DETERMINABLE` rather than `HELD`. The synthetic hub fixture
+was widened to two sheets so the check is exercised, and the one-sheet
+version is kept as the case that pins the refusal.
+
+**Falsifier:** another readout in `PREDICTIONS` whose zero state and
+whose empty state are the same value.
+
+**Status: REPAIRED, both branches pinned.**
+
+---
+
+### SSS_013 — the pair is the test, and neither workbook alone is
+
+A Hub run alone cannot separate *the scan works and the Hub is flat* from
+*the scan reports everything flat*. The two hypotheses predict the same
+output.
+
+The Local GHG Inventory Tool is the discriminator. `--selftest` shows the
+criterion can do the separation on synthetic shapes — flat holds 6 of 6
+`efh` and fails `LOC-P1`/`LOC-P2`; chain holds 4 of 4 `local` and fails
+`EFH-P1`/`EFH-P2` — but a criterion that separates two workbooks written
+here has not been shown to separate two written by the EPA.
+
+So `epa_check.py` scores one target at a time and ends every report by
+saying it is one arm. The instrument is not called until both are in.
+
+**Falsifier:** both real workbooks returning the same profile. That
+result is about the scan, not about either workbook, and it is the
+outcome the Hub was offered to produce if the scan is broken.
+
+**Status: SPECIFIED. Neither arm has been run.**
+
+---
+
+### SSS_014 — the unit list was widened before the data, toward a prediction, and the direction is on the record
+
+`patterns.json` was edited on 2026-08-25 before any target was opened:
+the loose generic parenthetical rule was **removed** (it fired on
+`(see note 3)`, the costly direction) and energy and fuel units were
+**added** — `mmBtu`, `therm`, `scf`, `MWh`, `short ton`, `CO2e`, and a
+slash-parenthetical rule that catches `(kg CO2/mmBtu)`.
+
+Widening the unit list makes `EFH-P3a` — *unit present* — easier to
+satisfy, and `EFH-P3a` is a prediction made here. That is tuning toward
+one's own expectation and it is recorded rather than left implicit, in
+the pattern file's `_note` and here.
+
+What limits the damage is structural, not good intentions: **no edit to
+the unit list can make the variance or sample-size patterns fire.** So
+the differential — unit present while variance and sample size are
+absent, which is the user's own description of the Hub's design — is not
+reachable by editing that file. Ten hand-set cases are pinned in the
+selftest, and six of the ten are negatives.
+
+**Falsifier:** a real Hub sheet where the widened list reports `unit`
+present on a header carrying no unit.
+
+**Status: SUPPORTED as a disclosure. The tuning is real and bounded.**

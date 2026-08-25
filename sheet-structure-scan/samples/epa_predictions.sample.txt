@@ -1,0 +1,20 @@
+efh -- EPA GHG Emission Factors Hub
+  a flat reference table: hardcoded factors, units in the headers, variance and provenance in a separate document
+    EFH-P1    derived_share      < 0.05    the stated design is hardcoded numbers, so formulas should be rare
+    EFH-P2    rank_zero_share    > 0.95    a workbook of terminal constants has nothing downstream of anything, so deps x ddepth is zero almost everywhere and the rank column carries no ordering. This is the readout the target was handed over to test
+    EFH-P3a   unit_present       > 0.7     an emission factor without a unit is not a factor; the units are in the headers
+    EFH-P3b   variance_present   < 0.1     the stated design puts variance in a separate document
+    EFH-P3c   sample_present     < 0.1     same, for the sample size behind each factor
+    EFH-P4    listed_col_share   < 0.1     repeated headers across sheets all govern constants at depth zero, so they agree in construction and are counted rather than listed. A flat table should produce many groups and almost no collisions. Column axis: the row axis lists once per record, so a row-axis count measures table height
+
+local -- EPA Local GHG Inventory Tool
+  sector calculators with live formula chains across community and government-operations modules
+    LOC-P1    derived_share      > 0.2     live calculators
+    LOC-P2    rank_zero_share    < 0.95    the arm that decides whether EFH-P2 measured the Hub or measured the scan
+    LOC-P3    max_pdepth         > 2.0     sector calculators chain through intermediates
+    LOC-P4    listed_col_count   > 0.0     the same label carried by a community sheet and a government-operations sheet at different constructions is the case scan three was built for. Column axis for the same reason as EFH-P4: SSS_005 measured the row axis listing once per record, and a row-axis count is nearly unfalsifiable on any multi-sheet workbook
+
+simplified -- EPA Simplified GHG Emissions Calculator
+  smaller, mixed
+    none registered: no structural description was given for this one beyond its size, and a threshold guessed from that would be a number dressed as a prediction. It is the first run: the profile is reported and nothing is scored.
+

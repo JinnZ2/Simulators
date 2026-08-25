@@ -4,7 +4,7 @@ reader          stdlib-xlsx
 sheets          Inputs, Model, Summary
 normalization   case, whitespace, edge punctuation; parentheticals kept
 grouped on      normalized label and axis
-listed when     depth sets differ, or construction differs
+listed when     depth sets differ, or the kind set differs
 rank            sum over governed cells of dependents x downstream depth
 
 depths       set of precedent depths of the cells the label governs

@@ -24,6 +24,8 @@ python3 scans.py --selftest
 | `no_severity.py` | the output constraint, enforced. `--selftest` |
 | `patterns.json` | companion patterns for scan two. Swap this, not the code |
 | `fixture.py` | the demo workbook, written as a readable table |
+| `targets/EPA.md` | three EPA workbooks, predictions registered before the data |
+| `targets/epa_check.py` | those predictions, runnable. `--selftest` |
 | `samples/` | one pinned run of each |
 
 ## The two constraints
@@ -71,6 +73,21 @@ record. The shape is a cross instead: the whole row, the column within
 Written down because it was a design decision that a fixture overturned,
 and the fixture is checked in.
 
+## Targets
+
+`targets/EPA.md` pre-registers ten predictions across three EPA
+workbooks, before the data, with the argument that the pair is the test:
+a flat-table result alone cannot separate *the scan works* from *the scan
+reports everything flat*. `targets/epa_check.py --selftest` shows the
+criterion separates the two shapes on synthetic workbooks; `--check FILE
+--as efh|local|simplified` scores a real one.
+
+The targets are **not read** — `www.epa.gov` is denied by this session's
+egress policy, logged with timestamps in that file. Building the
+criterion against a target-shaped fixture found two defects first, one of
+which would have fired on the real Emission Factors Hub as a finding
+(`SSS_011`).
+
 ## Ten choices
 
 The delivery left ten parameters open. Each is marked `[CHOICE n]` at its
@@ -78,7 +95,7 @@ definition, has a default, and is printed into the report header when it
 is in force — an absence measured at radius 2 and one measured at radius
 6 are different readings. `SPEC.md` §5 is the table.
 
-66 selftest checks across three modules: `sheetmodel` 25, `no_severity`
-11, `scans` 30.
+88 selftest checks across four modules: `sheetmodel` 25, `no_severity`
+11, `scans` 35, `targets/epa_check` 17.
 
 CC0. Stdlib only. Parses under Python 3.9.

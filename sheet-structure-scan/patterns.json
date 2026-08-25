@@ -13,15 +13,34 @@
     "",
     "A word list cannot read sense. 'range' is a variance term in one",
     "column and a spatial extent in another, and nothing here can tell",
-    "them apart. Swap this file rather than widening the code."
+    "them apart. Swap this file rather than widening the code.",
+    "",
+    "2026-08-25, BEFORE any real workbook was read: the generic",
+    "parenthetical rule \\((?:[a-z...][a-z0-9...]{0,14})\\) was REMOVED and",
+    "replaced by a slash-parenthetical rule plus explicit energy and fuel",
+    "unit words. The generic rule fired on any short parenthetical --",
+    "'(see note 3)' read as a unit -- which is the costly direction. The",
+    "replacement is tighter there and wider on mmBtu / therm / scf / MWh /",
+    "short ton / CO2e.",
+    "",
+    "TUNING DIRECTION, stated because it runs toward a prediction:",
+    "widening the unit list makes 'unit PRESENT' easier to satisfy, and",
+    "targets/EPA.md predicts unit PRESENT on the Emission Factors Hub. No",
+    "change to this list can make the VARIANCE or SAMPLE patterns fire, so",
+    "the differential in that prediction -- unit present while variance and",
+    "sample size are absent -- is not reachable by editing this file."
   ],
   "unit": [
-    "\\((?:[a-z%$/\u00b2\u00b3\u00b0\u00b5][a-z0-9%$/\u00b2\u00b3\u00b0\u00b5 .-]{0,14})\\)",
-    "\\b(?:usd|eur|gbp|jpy|cad|aud|kg|kgs|mg|lbs|lb|tonne|tonnes|km|cm|mm|nm|ft|mi|sec|secs|min|mins|hr|hrs|kwh|mwh|gwh|kw|mw|gw|joule|joules|kj|mj|celsius|fahrenheit|kelvin|pct|percent|ppm|ppb|bps|acre|acres|hectare|hectares|litre|litres|liter|liters|gallon|gallons|barrel|barrels)\\b",
+    "\\([^)]{0,40}/[^)]{0,40}\\)",
+    "\\b(?:usd|eur|gbp|jpy|cad|aud|kg|kgs|mg|lbs|lb|tonne|tonnes|km|cm|mm|nm|ft|mi|sec|secs|min|mins|hr|hrs|kwh|mwh|gwh|twh|kw|mw|gw|joule|joules|kj|mj|gj|celsius|fahrenheit|kelvin|pct|percent|ppm|ppb|bps|acre|acres|hectare|hectares|litre|litres|liter|liters|gallon|gallons|barrel|barrels)\\b",
+    "\\b(?:mmbtu|mbtu|btu|therm|therms|scf|mscf|ccf|mcf|dth|dekatherm|dekatherms|quad)\\b",
+    "\\b(?:short|metric)\\s+tons?\\b",
+    "\\b(?:kg|g|lb|lbs|mt|mmt|tonnes?|tons?)\\s*(?:of\\s+)?(?:co2e?|ch4|n2o|sf6|nf3)\\b",
+    "\\bco2e\\b",
     "%",
-    "[$\u00a3\u20ac\u00a5]",
+    "[$£€¥]",
     "\\bper\\b",
-    "/\\s*(?:yr|year|month|mo|day|hr|hour|unit|capita|head|person|km|kg|m2|m3)\\b",
+    "/\\s*(?:yr|year|month|mo|day|hr|hour|unit|capita|head|person|km|kg|m2|m3|mmbtu|kwh|mwh|gallon|ton)\\b",
     "\\b\\d+\\s*(?:m|s|t|g|c|f|k|l)\\b"
   ],
   "date": [
@@ -40,7 +59,7 @@
     "\\b(?:sd|std|stdev|stdv|sigma|se|sem|var|variance|ci|iqr|mad|rmse|rsd|cv|percentile|p05|p95|quartile|spread|tolerance|band)\\b",
     "\\b(?:lower|upper)[ _]?(?:bound|ci|limit)?\\b",
     "\\bmargin[ _]?of[ _]?\\w+\\b",
-    "\u00b1",
+    "±",
     "\\+/-"
   ]
 }
