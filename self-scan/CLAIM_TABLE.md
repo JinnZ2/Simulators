@@ -406,3 +406,177 @@ is a row reporting that a suite did not run.
 arm turns red.
 
 **Status: SUPPORTED, three arms.**
+
+---
+
+### SS_019 — self-enumeration and tree-writing are independent; the hypothesis is refuted on its own examples
+
+Handoff item 1: `census.py` hung on itself **and** wrote into the tree it
+measured, and the hypothesis is that anything enumerating the tree it
+runs in has both by construction, because the exclusion and the
+isolation are one problem.
+
+`enumerators.py` tests it against the population. Fifty modules call a
+directory-enumeration primitive; forty-nine ran. Both properties are
+**measured by running**, not read from source: enumeration roots are
+traced by wrapping `os.walk` / `os.listdir` / `glob` in a
+`sitecustomize` on the child's path, so what is recorded is where the
+module really looked, and writing is a `git status` diff across the run
+in a throwaway worktree.
+
+                       writes: yes   writes: no
+    enumerates self yes            1           15
+    enumerates self no             2           31
+
+    of 16 that enumerate themselves, 1 writes  (6%)
+    of 33 that do not,               2 write   (6%)
+    difference: +0 points
+
+**The three modules the handoff named all enumerate themselves and none
+of them writes** — `uninstrumented/scan.py`, `reasoning-gate/mine_logs.py`
+and `inverseminar/inverseminar.py` are `yes / no` each. The paired
+prediction fails on exactly its own examples.
+
+The diagonal share is 65% and is **not** the test: only 3 of 49 modules
+write at all, so with a margin that thin the diagonal is mostly the
+`(no, no)` cell and would read high whatever the self column did. The
+report prints the within-group rates instead and states the bound.
+
+**A finding about the instrument on the way:** running each module with
+`--selftest` reached **no enumeration at all** for the two named
+scanners, because their selftests do not exercise the walk. Their real
+invocations are declared in `INVOCATIONS`, found by running them —
+`scan.py` with no argument prints usage and exits 0 without walking, and
+`mine_logs.py .` raises `FileNotFoundError` before its glob because the
+guards path defaults relative to the cwd. Measuring the arm that matters
+required knowing that.
+
+**Falsifier:** a population with a fuller write margin in which the two
+rates separate.
+
+**Status: REFUTED, at low power, with the power bound stated.**
+
+---
+
+### SS_020 — the predictor is execution, not enumeration
+
+`SS_019`'s replacement. `census.py` had both defects and enumeration was
+not why: **reading a tree cannot dirty it; running what is in the tree
+can**, and the writes were its children's.
+
+Same 2x2 against whether the module executes other code or opens a file
+for writing:
+
+                       writes: yes   writes: no
+    executes yes                   3           16
+    executes no                    0           30
+
+    of 19 that execute or write by design, 3 write  (16%)
+    of 30 that do not,                     0 write  (0%)
+    difference: +16 points
+
+All three writers execute; nothing that does not execute writes.
+
+Reported as **weaker than the first test and labelled so in the output**:
+`executes` is read from the source while `writes` is observed, so a
+module that opens a file for writing is close to predicting itself. It
+is the contrast with the enumeration column that carries the content,
+not the number.
+
+**Falsifier:** a module that writes into the tree without executing
+anything or opening a file for writing.
+
+**Status: SUPPORTED, with its own weakness declared in the report.**
+
+---
+
+### SS_021 — 35 of 42 claims are convertible to a command, including all 9 that diverged
+
+Handoff item 2: generalise `SS_015`'s repair. A claim whose number has a
+generating command can have the number deleted and the command named
+instead.
+
+    35 of 42 resolved claims are convertible
+     7 have a check that is not a count -- byte comparisons,
+       a regeneration, a git diff: nothing to convert
+     9 of 9 DIVERGED claims are convertible
+
+**One correction to the handoff's framing.** It says the conversion turns
+DIVERGED-able claims into MAINTAINED-by-construction. It does not. It
+makes them **stop being claims**: there is no stored number left to
+diverge from, which is a different state from a number a test asserts.
+`MAINTAINED` means something checks it; a converted claim means nothing
+needs to. Counting the second as the first would report a removed claim
+as an asserted one, and the report says so where it prints the number.
+
+The conversion is **not applied here**, per `SS_012`: the pinned sample
+names commits and the S5 replay resolves against a history a correction
+would extend. Measuring it is this commit; applying it is the next one.
+
+**Falsifier:** a convertible claim whose command produces a different
+quantity than the sentence states, which would mean the conversion loses
+content rather than storing it elsewhere.
+
+**Status: SUPPORTED — measured, not applied.**
+
+---
+
+### SS_022 — the quoted-context test is structural, and the file supplies its own control
+
+Handoff item 3. `CLAUDE.md` is an index whose subject is other folders'
+claims, so it quotes them constantly and a pattern cannot tell a quoted
+claim from an asserted one. `SS_016` recorded that after it happened.
+
+The test does not guess at attribution. Markdown puts a quoted claim in
+a **code span** and an asserted one in running prose, which is a property
+of the markup:
+
+    line  236   430+ audit-grade tests green.       bare, asserted
+    line 6665   `430+
+      audit-grade tests green`                      in a span, quoted
+
+**The same string, both ways, in the same file** — a matched pair the
+document supplied without being asked, so the test has a known answer in
+both directions rather than only the one that motivated it. `code_spans`
+handles fenced blocks first so a backtick inside a fence does not open a
+span, and allows a span to wrap a line, which is how the quoted one is
+written.
+
+The flag **never excludes**. A flagged claim must be declared in
+`bindings.py`, which is where attribution decisions live, and a selftest
+check asserts every quoted claim has an explicit binding. That converts
+a silent misattribution into a required decision.
+
+**Falsifier:** a quoted claim in running prose with no code span, or an
+asserted one inside a span.
+
+**Status: SUPPORTED, with a two-directional known answer.**
+
+---
+
+### SS_023 — WO9 is not in this repository
+
+Handoff item 4 names WO9 (PlanExe) as the open instrument check: a known
+answer declared by the generator's authors, and the only queued run that
+measures the **grid** rather than a corpus.
+
+Searched: `PlanExe`, `plan_exe`, `WORK_ORDER_9`, `WO9`, case-insensitive,
+across every text file and the full git history including all branches.
+**Nothing.** The work orders present are `WORK_ORDER_4`, `_6`, `_7`,
+`_10` under `sheet-structure-scan/` and `self-scan/`, plus unnumbered
+`WORK_ORDER.md` files under `fold-matrix/`, `model-provenance/`,
+`nonidentity-census/` and `residual-direction/`.
+
+Nothing is reconstructed. An order is a delivered artifact and inventing
+one puts a specification in the author's mouth — the `PB_001` / `CW_004`
+rule.
+
+The point the item makes stands independently and is worth recording
+even with the order absent: **everything run in this folder measures a
+corpus**, and a known answer declared by a generator's own authors would
+measure the **instrument**. That is the `null-harness` known-truth-first
+invariant, and this folder has never had one.
+
+**Falsifier:** the order arriving.
+
+**Status: OPEN — the artifact is absent, not the argument.**

@@ -39,10 +39,12 @@ The other forty-one are numbers a human typed once.
 | `bindings.py` | S3: which artifact each claim is about. Declared, never inferred |
 | `resolve.py` | S3-S6: run the checks, bin, date the divergences, print the rate |
 | `census.py` | what is here, whether it runs, and the smallest environment that can run it |
+| `enumerators.py` | is self-enumeration one defect or two? Measured by running, not read from source |
 | `RESULTS.md` | what the run found |
 | `CLAIM_TABLE.md` | `SS_001..SS_012` with a REFUTATION_PROTOCOL |
 | `samples/scan.sample.txt` | pinned output of `resolve.py --replay` |
 | `samples/census.sample.txt` | pinned output of `census.py` |
+| `samples/enumerators.sample.txt` | pinned output of `enumerators.py` |
 
 ## Three decisions worth knowing before reading the numbers
 
@@ -92,6 +94,7 @@ across unlike objects with a verdict attached.
     python3 self-scan/extract.py --sections      # S1 table
     python3 self-scan/resolve.py --replay        # the full run
     python3 self-scan/census.py                  # what runs, and on what
+    python3 self-scan/enumerators.py             # the 2x2
 
 No selftest count is written here, for the reason `SS_015` records: each
 module prints its own and `census.py` totals them, and a count in a

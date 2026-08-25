@@ -674,6 +674,38 @@ def not_testable_causes(rows):
     return out
 
 
+# ---- handoff item 2: which claims have a generating command ---------
+#
+# SS_015's repair, generalised. The self-scan paragraph's count went
+# stale inside an hour and was repaired by deleting the number and
+# naming the command that produces it. A claim with a command behind it
+# can take that repair; one without cannot.
+#
+# The conversion does NOT make a claim MAINTAINED. It makes it stop
+# being a claim: there is no stored number left to diverge from. That
+# distinction is kept, because calling it MAINTAINED would count a
+# removed claim as an asserted one.
+CONVERTIBLE_KINDS = ("selftest", "selftest_sum", "selftest_glob",
+                     "selftest_clean", "count_files", "pytest")
+
+
+def convertibility(rows):
+    """How many resolved claims could be replaced by their command."""
+    out = {"convertible": [], "not_convertible": [], "no_check": []}
+    for r in rows:
+        if r["bin"] not in (DIVERGED, HOLDS_UNMAINTAINED, MAINTAINED):
+            continue
+        b = bindings.BINDINGS.get(r.get("key"), {})
+        how = b.get("how")
+        if how in CONVERTIBLE_KINDS:
+            out["convertible"].append(r)
+        elif how:
+            out["not_convertible"].append(r)
+        else:
+            out["no_check"].append(r)
+    return out
+
+
 def bins(rows):
     out = {}
     for b in list(BINS) + [UNBOUND]:
@@ -850,6 +882,43 @@ def render(rows, verbose=False):
         out.append("NOT_TESTABLE, by cause")
         for k in sorted(causes, key=lambda x: -causes[x]):
             out.append("  %-34s %d" % (k, causes[k]))
+        out.append("")
+
+    conv = convertibility(rows)
+    nc = len(conv["convertible"])
+    nn = len(conv["not_convertible"])
+    tot = nc + nn + len(conv["no_check"])
+    out.append("CONVERTIBLE TO A COMMAND")
+    out.append("  %d of %d resolved claims have a command that produces"
+               % (nc, tot))
+    out.append("  the stated number, so the count could be deleted and the")
+    out.append("  command named instead, as SS_015 did.")
+    out.append("  %d have a check that is not a count (byte comparisons,"
+               % nn)
+    out.append("  regeneration, a git diff): nothing to convert.")
+    out.append("")
+    out.append("  This does NOT make them MAINTAINED. It makes them stop")
+    out.append("  being claims -- there is no stored number left to")
+    out.append("  diverge from, which is a different thing from a number")
+    out.append("  a test asserts.")
+    out.append("  Of the %d DIVERGED, %d are convertible."
+               % (sum(1 for r in rows if r["bin"] == DIVERGED),
+                  sum(1 for r in conv["convertible"]
+                      if r["bin"] == DIVERGED)))
+    out.append("")
+
+    q = [r for r in rows if r.get("quoted")]
+    if q:
+        out.append("QUOTED CONTEXT (handoff item 3)")
+        out.append("  %d claim(s) sit inside a markdown code span, so the"
+                   % len(q))
+        out.append("  text is a claim under discussion rather than one")
+        out.append("  being made. Structural, from the markup, not a guess")
+        out.append("  about attribution. Flagged, never auto-excluded:")
+        for r in q:
+            out.append("    %-28s %-18s %s"
+                       % (r["section_title"][:28], r["bin"],
+                          r["text"].replace("\n", " ")[:30]))
         out.append("")
 
     seen, installed = environment()
@@ -1102,6 +1171,34 @@ def selftest():
                                                  "UNBOUND")))
     chk("what is installed is reported per dependency",
         set(installed) >= {"pytest", "numpy"})
+
+    # -- convertibility, and it is not MAINTAINED
+    cv = convertibility([
+        {"key": "uninstrumented/|selftest_ratio|14/14|0",
+         "bin": HOLDS_UNMAINTAINED},
+        {"key": "domain-ledger/|byte_identical|-|0", "bin": DIVERGED},
+        {"key": "nope|x|-|0", "bin": DIVERGED},
+        {"key": "uninstrumented/|selftest_ratio|14/14|0",
+         "bin": NOT_TESTABLE},
+    ])
+    chk("a count claim with a command is convertible",
+        len(cv["convertible"]) == 1)
+    chk("an identity claim is not convertible",
+        len(cv["not_convertible"]) == 1)
+    chk("an unbound claim is neither", len(cv["no_check"]) == 1)
+    chk("NOT_TESTABLE rows are excluded from convertibility",
+        len(cv["convertible"]) + len(cv["not_convertible"])
+        + len(cv["no_check"]) == 3)
+
+    # -- every quoted claim must be DECLARED, not silently dropped
+    quoted = [c for c in cl if c.get("quoted")]
+    chk("the quoted claim is flagged", bool(quoted))
+    chk("every quoted claim has an explicit binding",
+        all(c["key"] in bindings.BINDINGS for c in quoted))
+    chk("a quoted claim's binding says it is quoted",
+        all("QUOTED" in bindings.BINDINGS[c["key"]].get("reason", "")
+            or bindings.BINDINGS[c["key"]].get("how") != "none"
+            for c in quoted))
 
     # -- git plumbing reachable
     chk("git history for CLAUDE.md is readable",

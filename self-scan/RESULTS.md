@@ -335,3 +335,109 @@ Two modules and four suites:
 
 Fifteen failures across 1213 tests. None of them is in the stdlib
 selftest arm.
+
+---
+
+# Handoff run — four items, three measured and one absent
+
+## 1. Self-enumeration: one defect or two? Two.
+
+`census.py` hung on itself and wrote into the tree it measured, and the
+hypothesis was that these are one problem — anything enumerating the
+tree it runs in has both by construction.
+
+`enumerators.py` tests it on the population: 50 modules call a
+directory-enumeration primitive, 49 ran, both properties measured by
+running rather than read from source.
+
+                       writes: yes   writes: no
+    enumerates self yes            1           15
+    enumerates self no             2           31
+
+    of 16 that enumerate themselves, 1 writes  (6%)
+    of 33 that do not,               2 write   (6%)
+    difference: +0 points
+
+**Refuted, and refuted on its own examples.** All three modules the
+handoff named — `uninstrumented/scan.py`, `reasoning-gate/mine_logs.py`,
+`inverseminar/inverseminar.py` — enumerate themselves and **none of them
+writes**.
+
+The diagonal share is 65% and is not the test. Three of 49 modules write
+at all, so a thin margin makes the diagonal read high for a reason
+unrelated to the hypothesis; the within-group rates are printed instead
+and the power bound is stated.
+
+**The replacement predictor is execution.** Reading a tree cannot dirty
+it; running what is in the tree can, and `census.py`'s writes were its
+children's:
+
+                       writes: yes   writes: no
+    executes yes                   3           16
+    executes no                    0           30
+
+    16% against 0%.  All three writers execute; nothing that does
+    not execute writes.
+
+Labelled weaker in the output, because `executes` is read from source
+while `writes` is observed.
+
+**One finding about the instrument.** Running each module with
+`--selftest` reached *no enumeration at all* for the two named scanners,
+because their selftests do not exercise the walk. The real invocations
+are declared, found by running them: `scan.py` with no argument prints
+usage and exits 0, and `mine_logs.py .` raises `FileNotFoundError`
+before its glob because the guards path defaults relative to the cwd.
+Without that, the arm that matters would have been measured as zero.
+
+## 2. Stale-number repair: 35 of 42, and all 9 that diverged
+
+    35 of 42 resolved claims have a command that produces the
+    stated number.
+     7 have a check that is not a count -- byte comparisons, a
+       regeneration, a git diff.
+     9 of 9 DIVERGED claims are convertible.
+
+**One correction to the framing.** Conversion does not make a claim
+`MAINTAINED`. It makes it stop being a claim: there is no stored number
+left to diverge from, which is a different state from a number a test
+asserts. `MAINTAINED` means something checks it; converted means nothing
+needs to. The report says this where it prints the number, because
+counting the second as the first would report a removed claim as an
+asserted one.
+
+Not applied here, per `SS_012`. The pinned sample names commits and the
+S5 replay resolves against a history a correction would extend.
+Measuring is this commit; applying is the next.
+
+## 3. Use-mention: the file supplied its own control
+
+The test is structural, not semantic. Markdown puts a quoted claim in a
+code span and an asserted one in running prose:
+
+    line  236   430+ audit-grade tests green.       bare, asserted
+    line 6665   `430+
+      audit-grade tests green`                      in a span, quoted
+
+The same string, both ways, in the same file — a two-directional known
+answer the document supplied without being asked.
+
+The flag never excludes. A flagged claim must be declared in
+`bindings.py`, and a selftest check asserts every quoted claim has one.
+A silent misattribution becomes a required decision.
+
+## 4. WO9 (PlanExe) is not here
+
+Searched `PlanExe`, `plan_exe`, `WORK_ORDER_9`, `WO9`, case-insensitive,
+across every text file and the full git history on all branches.
+Nothing. The orders present are 4, 6, 7 and 10 plus four unnumbered
+ones.
+
+Not reconstructed — an order is a delivered artifact, and inventing one
+puts a specification in the author's mouth.
+
+The point survives the absence and is the sharpest thing in the handoff:
+**everything this folder has run measures a corpus.** A known answer
+declared by a generator's own authors would measure the **instrument**,
+which is the `null-harness` known-truth-first invariant, and this folder
+has never had one. The order is what is missing, not the argument.

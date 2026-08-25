@@ -6721,6 +6721,47 @@ underneath).
   over the 52 modules that print a count, 22 more passing without
   printing one (so the total is a FLOOR), and 1198 passed / 15 failed /
   3 skipped across 20 test directories.**
+  **`enumerators.py` then tested a second relayed hypothesis and refuted
+  it on its own examples.** The claim: `census.py` included itself AND
+  changed the tree it measured, and anything enumerating the tree it
+  runs in does both, the two being one thing. Fifty modules call a
+  directory-enumeration primitive, 49 ran, and both properties are
+  **measured by running** rather than read from source — enumeration
+  roots traced by wrapping `os.walk` / `os.listdir` / `glob` in a
+  `sitecustomize` on the child's path, writing measured as a `git
+  status` diff across the run in a throwaway worktree. Result: **of 16
+  that enumerate themselves, 1 writes (6%); of 33 that do not, 2 write
+  (6%); difference +0 points** — and **all three modules the handoff
+  named** (`uninstrumented/scan.py`, `reasoning-gate/mine_logs.py`,
+  `inverseminar/inverseminar.py`) **enumerate themselves and none of
+  them writes**. The 65% diagonal share is printed and labelled NOT the
+  test, since only 3 of 49 write at all and a margin that thin makes the
+  diagonal read high for an unrelated reason. **The predictor is
+  execution, not enumeration** — reading a tree cannot change it, running
+  what is in the tree can, and `census.py`'s writes were its children's:
+  16% against 0%, all three writers execute and nothing that does not
+  execute writes, reported as the weaker test because `executes` is read
+  from source while `writes` is observed. One finding about the
+  instrument: `--selftest` reached **no enumeration at all** for the two
+  named scanners, so their real invocations are declared, found by
+  running them. **`SS_021`:** **35 of 42** resolved claims have a command
+  that produces the stated number — **9 of 9 DIVERGED among them** — with
+  one correction to the framing: converting a count to its command does
+  not make the claim MAINTAINED, it makes it **stop being a claim**,
+  since there is no stored number left to diverge from, which is a
+  different state from a number a test asserts. **`SS_022`:** the
+  use-mention test is **structural** — markdown puts a quoted claim in a
+  code span and an asserted one in running prose — and the file supplied
+  its own two-directional control, the same string bare at line 236 and
+  inside a span at line 6665; the flag never excludes, a flagged claim
+  must be declared in `bindings.py`, and a selftest asserts it.
+  **`SS_023` OPEN:** WO9 (PlanExe) is not in this repository — searched
+  case-insensitively across every text file and the full history on all
+  branches — and nothing is reconstructed; the point survives the
+  absence, since everything run here measures a **corpus** and a known
+  answer declared by a generator's own authors would measure the
+  **instrument**, which is `null-harness`'s known-truth-first invariant
+  and which this folder has never had.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
