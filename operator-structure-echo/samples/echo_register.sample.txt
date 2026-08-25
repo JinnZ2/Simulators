@@ -1,0 +1,135 @@
+OPERATOR-STRUCTURE ECHO -- the register
+========================================================================
+
+  Observed: instruments built in this ecosystem recur to the
+  same structural shape the operator uses to process the
+  domain by hand. Not a defect claim. Not a discipline
+  failure. A property of a single-builder instrument that
+  cannot be removed by effort -- only counted.
+
+  Do not correct. Log.
+
+------------------------------------------------------------------------
+
+  ONE LINE PER MODULE
+
+    does this shape match a procedure the operator already
+    runs unaided?
+
+    YES          1
+    NO           0
+    UNEXAMINED   71
+
+    of 72 modules read off the tree.
+
+    instrument-bias-sims     YES  REPRODUCTION
+      attributed to: operator, delivered spec
+
+    every other row is UNEXAMINED, which is a third state.
+    Only the operator can change one, and mark() refuses an
+    unattributed YES or NO:
+
+      unattributed NO: REFUSED
+      YES without a kind: REFUSED (a YES needs OMISSION or REPRODUCTION)
+
+------------------------------------------------------------------------
+
+  THE TWO KINDS, BECAUSE THE DELIVERED LIST HOLDS TWO
+
+    OMISSION
+      the instrument is missing a case, and it is the case the
+      operator's own frame omits
+    REPRODUCTION
+      the instrument reproduces the operator's processing structure in
+      a domain the operator did not intend to model
+
+  THE THREE DELIVERED INSTANCES, ONCE COUNTED
+
+    instances delivered          3
+    modules they touch           1  (instrument-bias-sims)
+    already excluded-by-constr.  2
+    new to this subject          1
+    overlap checked              True
+
+    OMISSION       2
+    REPRODUCTION   1
+
+    s4                   OMISSION      already logged
+      as S4 (missing doe)
+    allocation_coupling  OMISSION      already logged
+      as S10 (missing untenured continuous observer)
+    allocation ledger    REPRODUCTION  NEW to this subject
+
+    The split lands on the kind: both OMISSION instances were
+    already registered, and the one REPRODUCTION instance is
+    the only new one -- which is the one the spec says raises
+    this from a per-repo note to a subject.
+
+------------------------------------------------------------------------
+
+  THE BASE RATE IS REFUSED, AND NOT FOR WANT OF n
+
+    modules   72
+    examined  1
+    YES       1
+    rate      None   REFUSED_SELECTION_EFFECT
+
+    the examined set is not a sample. Every row in it is there because
+    someone noticed an echo, and noticing one is the same act as
+    finding one. A denominator built that way cannot carry a rate, at
+    any n
+
+  CONFIDENCE, reported separately and not resolved
+    base_rate
+      REFUSED on a selection effect, not on n. The examined set is the
+      set of cases someone noticed
+    default
+      UNEXAMINED for every module, and it is a third state, not a soft
+      NO
+    resolved
+      False
+    the_three_instances
+      two are already in the excluded-by-construction register and one
+      is new. All three sit in one module, so the per-module register
+      carries one row
+    what_a_YES_means
+      shared structure between instrument and builder. Not a defect,
+      not a discipline failure, and not a claim about whether the
+      instrument is right
+    who_can_fill_it
+      the operator, and only the operator. mark() refuses an
+      unattributed YES or NO because the question is about someone
+      else's unaided procedure
+
+  WHERE IT BREAKS
+    - THE THREE DELIVERED INSTANCES ARE NOT THREE INDEPENDENT
+    OBSERVATIONS. All three sit inside instrument-bias-sims, which is
+    one row in a per-module register, and two of the three are already
+    logged in that folder's excluded-by-construction list -- the same
+    S4 missing doe and the same S10 missing untenured observer. What is
+    new to this subject is one instance, the REPRODUCTION one, which is
+    exactly the one the spec says raises it from a note to a subject.
+    The count of three is a count of two kinds across one module and
+    two registers
+    - AND THE MODULE THEY SIT IN IS THE MODULE THAT GOT AUDITED
+    HARDEST. instrument-bias-sims carries the most scrutiny in this
+    repo, so it is where echoes would be found first whether or not it
+    is where they are densest. The instance list is a map of where
+    someone looked
+    - THE BASE RATE IS NOT MISSING FOR WANT OF n. Every row in the
+    examined set is there because someone noticed an echo, and noticing
+    one is the same act as finding one. Three YES out of three examined
+    is what that selection produces whether the true rate is nine in
+    ten or three in a hundred, and examining more modules the same way
+    does not fix it -- only examining modules chosen BEFORE looking
+    would
+    - NO METHOD IS PROPOSED FOR DETECTING THIS FROM INSIDE, AND THIS
+    MODULE IS INSIDE. The spec lists that open and nothing here closes
+    it. mark() refuses to let the downstream model fill a row, which
+    prevents the register from filling with guesses and does not
+    produce a detector
+    - THIS MODULE HAS ITS OWN ROW AND IT IS UNEXAMINED. A register of
+    single-builder echoes, built by the same single builder, is subject
+    to its own subject. Whether the YES/NO/UNEXAMINED shape is itself a
+    procedure the operator already runs unaided is a question this file
+    cannot answer about itself

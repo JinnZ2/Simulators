@@ -1,0 +1,117 @@
+M4 -- ASSESSMENT RECORD
+========================================================================
+
+  writing_probability is imported from S9, not re-derived. The assessor
+  reads a record, not a place.
+
+  position             generated    p(write)       recorded       ratio
+  desk_professional    40.0         0.9298         37.19          0.9298
+  freight_driver       90.0         0.3823         34.40          0.3823
+  fabrication          95.0         0.3705         35.20          0.3705
+  animal_handling      120.0        0.1809         21.71          0.1809
+  farm_labor           130.0        0.1483         19.28          0.1483
+
+  B1 -- IS THE ANTI-CORRELATION MEASURED OR TYPED IN?
+
+    p_write reads the same inputs as generation : False
+    high-generation positions                   : animal_handling, farm_labor
+    of those, also high p_write                 : NONE
+    max p_write among them                      : 0.181
+    verdict                                     : CONSTRAINT, not a correlation
+
+    p_write is a function of supply assumption, station distance and
+    reward. Generation is a function of wage and block count. Different
+    inputs, so this is not the S4 rank-dictionary defect -- but both
+    dictionaries were hand-assigned in one ordering, so no row is high
+    on both and the anti-correlation was assembled rather than measured
+
+------------------------------------------------------------------------
+
+  correlation with generated observations : -0.853
+  correlation with writing probability    : +0.771
+  correlation, generation vs writing prob  : -0.987
+  the returned gradient: INVERTS generation
+  generation and writing separable here    : False
+
+  The positions generating the MOST observations are assessed LOWEST.
+  That is stronger than the spec's prediction: not a merit gradient
+  that is really a writing-time gradient, but an INVERTED merit
+  gradient. The assessor is doing nothing wrong on its own terms -- it
+  reads the record it has.
+
+  A first version of this readout compared |r| only and reported
+  'tracks generated observations' for a correlation of minus 0.85. The
+  sign is the finding and the magnitude comparison lost it; three
+  states are now separated.
+
+  ADDING THE POSITION THE MAPPING CANNOT EXPRESS
+
+    A resident writer: low supply assumption and continuous presence,
+    so high generation, AND compensated and near a station, so high
+    p_write. A station scientist or a paid resident observer. Not
+    exotic -- absent from the five rows.
+
+    p_write for that position               : 0.698
+    corr with generation, 5 rows            : -0.853
+    corr with generation, 6 rows            : +0.107
+    generation vs p_write, 5 rows           : -0.987
+    generation vs p_write, 6 rows           : -0.700
+    readout, 6 rows                         : writing probability
+
+    One added row moves the constraint materially. The inversion is
+    therefore a property of WHICH FIVE POSITIONS WERE TYPED IN, not of
+    the coupling -- and the row that breaks it is one the five-row
+    mapping had no slot for, which is the same shape as the blank agent
+    in agents.py.
+
+  generation and writing probability are correlated at -0.99 here.
+  Where that is strongly negative the assessed score cannot separate
+  the two, and the assessor is not the thing to fix. So the assessor is
+  not the thing to fix here -- with generation and writing probability
+  this tightly anti-correlated, no scoring rule reading only the record
+  can tell them apart. Same shape as S2's one-arm protocol: the fix is
+  a second observable, not a better estimator.
+
+------------------------------------------------------------------------
+
+  CONFIDENCE, reported separately and not resolved
+    any_real_assessment_data       NONE
+    assessment_rule
+      record_present is generated x p_write, which is the simplest
+      possible assessor and is a choice
+    position_mapping
+      STIPULATED. the join between M1 positions and S9 axes is
+      hand-assigned and is the weakest link in the module set
+    resolved                       False
+    writing_probability
+      IMPORTED from S9, not re-derived. It carries S9's stipulations
+      unchanged
+
+  WHERE IT BREAKS
+    - THE POSITION MAPPING IS THE WEAKEST LINK IN THE MODULE SET. Five
+    M1 positions are hand-assigned three S9 axis values each, and every
+    downstream number moves with those fifteen stipulated numbers.
+    Nothing measures them and nothing constrains them beyond ordering
+    - THE -0.99 IS A CONSTRAINT THAT WAS TYPED IN, NOT A CORRELATION
+    THAT WAS MEASURED. p_write is a function of supply assumption,
+    station distance and reward; generation is a function of wage and
+    block count -- different inputs, so this is NOT the S4
+    rank-dictionary defect. But both dictionaries were hand-assigned in
+    one ordering, the mapping admits no position that is high on both,
+    and adding one such position moves the number materially. The
+    inversion is a property of which five rows were typed in
+    - and the row that breaks it -- a resident who is also compensated
+    to write -- is one the mapping had no slot for. Same shape as the
+    blank agent, one level down: the five-row list excluded the
+    position that would have refuted the finding
+    - the assessor is generated x p_write, so 'the assessment tracks
+    writing probability' is partly definitional. What is not
+    definitional is the SIGN against generation, which is what the
+    readout reports
+    - record_present is treated as a continuous quantity. A real record
+    is discrete and a position generating a fraction of a document
+    generates none
+    - importing S9 means importing its stipulations. That is the right
+    trade against copying, and it is still a dependency: if S9's
+    p_write coefficients are wrong, M4 is wrong in the same direction
+    with no independent check

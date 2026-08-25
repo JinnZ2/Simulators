@@ -1,0 +1,17 @@
+  ID   CASE                               CUSTODY         VERIF             PARLL      OUTCOME               CONF
+----------------------------------------------------------------------------------------------------------------------
+  C01  Hittite empire                     routed          remote            no         deleted               conf=0.70
+  C02  Ugarit                             routed          remote            no         deleted               conf=0.65
+  C03  Mycenaean palaces                  routed          remote            no         deleted               conf=0.70
+  C04  Egypt (Intermediate Periods)       mixed           local             partial    degraded_recoalesced  conf=0.70
+  C05  Phoenician city-states             self            local             yes        migrated              conf=0.70
+> C06  English serf tenure -> revolt      self -> routed  local             no         revolt                conf=0.75
+> C07  US rural / farming / lumber commun self -> routed  local -> remote   yes -> no  converted             conf=0.60
+> C08  Vehicle ownership -> subscription  self -> routed  local -> none     yes -> no  converted             conf=0.75
+  C09  Metal/jewelry as household savings self            local             yes        converted             conf=0.60
+  C10  Illiquid small-increment savings i self            local             yes        converted             conf=0.70
+  C11  Present-day distrust of long-horiz routed          remote            no         open                  conf=0.70
+----------------------------------------------------------------------------------------------------------------------
+'>' marks a case whose cut is a TRANSITION, not a state.
+confidence = gradient readout, stated separately from the pattern.
+not a commitment. do not resolve in either direction.

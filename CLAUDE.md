@@ -1,6 +1,42 @@
 # Simulators
 
-Repository for different simulations and supporting tooling.
+CC0 simulators and audits grounded in physics. **Index only** — detail in
+[`docs/FOLDER_NOTES.md`](docs/FOLDER_NOTES.md) and each folder's `README.md`.
+
+## Spine — read in order
+## Report form
+
+`READING_PROTOCOL.md` governs how every folder here is to be read: each is a
+marker for a sensed shape, not a thesis under defense. Test the fit, extend it,
+or report where it breaks — a break is a measurement and goes in the folder's
+`CLAIM_TABLE.md`, not an objection to be answered. Accepting a folder is as
+useless as rejecting it; both skip the test. When a claim is refuted the claim
+gets updated and the simulation does not get retuned to preserve it.
+
+`METHOD_SPEC.md` is upstream of `SHAPE_SPEC.md` and states the epistemic class:
+constraint-set reasoning is a METHOD, in the class of the scientific method and
+dimensional analysis. A method is not falsifiable and does not need to be — the
+falsifiable layer is the individual read, via the removal test. Demanding a
+falsifier of the procedure rather than of a read is a category error, and the
+file exists to block it. Section 5: a read is a MARKER, confidence is reported
+separately from the pattern with a comfort threshold, and a read is NOT upgraded
+by more instances sharing the geometry without a checked constraint set. File
+order is `METHOD_SPEC.md`, `SHAPE_SPEC.md`, `READING_PROTOCOL.md`.
+
+`SHAPE_SPEC.md` is upstream of everything in this repository that uses the
+word SHAPE. It defines a shape as the constraint set a geometry is a solution
+to — not the geometry, not the picture, not the field's name for it. Point at
+it rather than restating it. Section 2 blocks the misread that the method is
+"matching geometries across domains"; section 4 gives the removal test that
+makes a shape read falsifiable; section 9 says use DISSIPATION rather than
+cost, because cost imports a pricing model that is not part of the system.
+
+`AUDIT_CONTRACT.md` governs how work is reported across this ecosystem:
+structure first, gap analysis as deliverable, a score without its support
+count is not a score, wording is not a decision, a free-text discriminator
+carrying structural load is a flagged defect, and co-produced documents are
+layer-separated before audit rather than audited as a composite. Read it
+before reporting.
 
 ## Meta-spine (read first)
 
@@ -58,13 +94,88 @@ last three; read in order:
   table for a marker. §6 gives the read order. Delivered verbatim; audit
   in `shape-spec-audit/`.
 
-Simulator-specific aperture documents live inside their folders
-(e.g. `incentive-blindspot-sim/00_APERTURE.md` pins the six
-state variables to physical functions and the conservation laws
-underneath).
+- `token-minimizer/` — compressed-query fmt
+- `emergence-stability-simulator/` — stable vs parasitic
+- `research-stability-audit/` — falsifiable claims
+- `continuity-audit/` — incentive on a diversity field
+- `substrate-emergence/` — the architecture the ground wants
+- `neural-augmentation-audit/` — what augmentation borrows
+- `incentive-blindspot-sim/` — incentives gate visibility
+- `antifungal-mechanism-sim/` — coupling beats additive
+- `AMOC/` — regime-shift trajectories for one
+- `thermal-sensor-degradation-audit/` — sensor degrades
+- `play-sims/` — 17 visualisation sketches *(non-stdlib)*
+- `grounding-layers/` — seven-layer grounding stack *(non-stdlib)*
+- `earth_economics/` — physics–economics–accountability
+- `model-ecology/` — domain of validity, not best
+- `fragility-cascade/` — value substrates, barrel to promise
+- `exploration-playground/` — hunts surprises, not correct
+- `voice-attractor-probe/` — same loop, LLM output
+- `open-instrumentation-project/` — five private sensors
+- `climate-modeling/` — cascade-speed blindness *(non-stdlib)*
+- `vector-field-explorer/` — channels as vectors; the angle
+- `exploration-engine/` — cross-domain cascade chassis
+- `sustained-activation-gate/` — bistable, FIRM vs SOFT
+- `equivalence-field/` — falsification as pointer; intensive
+- `rigidification-sensor/` — variance suppressed fast
+- `claim-audits/` — external documents, eight verdicts
+- `null-harness/` — can a gate fire, can it stay silent
+- `divergence-playground/` — N readers, one fork; spread
+- `relational/` — pain-as-sensor, triadic
+- `engine-boiler-guide/` — offline triage
+- `field-fabrication-guide/` — precision tools, scratch
+- `fuel-independence-guide/` — engines when fuel stops
+- `cold-weather-battery-guide/` — sleeper-cab Li-ion
+- `inverseminar/` — one artifact, one reconstruction
+- `energy/` — dark energy: metrology + audit *(non-stdlib)*
+- `crossdomain-eval/` — symbolic/numeric kit *(non-stdlib)*
+- `fourd-municipal-engine/` — 4D lens + municipal code
+- `fourd-municipal-engine-v2/` — same core + ETL, API
+- `msiaf-framework/` — 4D incident cascade
+- `gdprf-framework/` — gradient-driven proxy reasoning
+- `msiaf-gdprf-bridge/` — MSIAF cascades as GDPRF
+- `proxy-investigation-lab/` — grounds a proxy as far as it goes
+- `instrument-epistemology/` — same method, scientific
+- `extraction-blindness-sim/` — no error signal = safety
+- `aperiodic-order-sim-stack/` — delivered results, audit
+- `reasoning-gate/` — fail-closed gate between a sim and
+- `reasoning-dial/` — thinking budget as a measurable
+- `triad-playground/` — system, instrument, reasoner
+- `measurement-fork/` — design it three ways, diff the
+- `declared-frame/` — six-field block on any measurement
+- `anchor-interval/` — a system fitted to a corpus it
+- `uninstrumented/` — excluded before first reading
+- `criteria-drift/` — criteria as a time series; unlogged
+- `photoperiod-claim-harness/` — inconsistencies as sims
+- `category-weld/` — independent quantities welded
+- `presented-binary/` — audits a two-option framing
+- `generation-capacity/` — excluded quantity = the option
+- `moral-decomposer/` — disagreement to options
+- `domain-ledger/` — confidence derived from the domain
+- `closure-cost/` — a variable closed before the event
+- `constraint-assembly/` — sufficiency composed from
+- `held-open-uncertainty/` — holding open != failing to act
+- `adaptive-claim-loop/` — the same loop, parameter-dial move
+- `derivation-discarded/` — structure is the only copy
+- `simulation-hypothesis-budget/` — Planck-sim cost
+- `instrument-bias-sims/` — nine sims + a module set
+- `handoff-provenance/` — talk-to-code channel
+- `operator-structure-echo/` — instrument recurs to builder's
+- `scope-bound-shapes/` — one shape, FROZEN declared per binding
+- `term-drift-citation/` — does a citation still attach
+- `stop-authority/` — a zero, and the two states it fits
+- `condition-scoped-authority/` — rank has no condition col
+- `predicate-difference/` — set difference + support rule
+- `supplement-placement/` — direction vs placement
+- `legacy/` — archived drops; `Organize.md` is the
+- `tools/` — gate-drift and term-collision checks
 
-## Layout
+## Reconciliation and conventions
 
+Checked 2026-08-23: all 75 folders above exist and are pushed on this
+branch, so there is no `docs/ARCHIVE_NOTES.md`. Branch
+`claude/new-folder-um2xra`. Stdlib only; folders marked *(non-stdlib)*
+ship a `requirements.txt`. Each folder ships `samples/`.
 - `token-minimizer/` — Token compression tool design notes and a working
   `compress.py` implementation (Python stdlib only). Built around the
   "energy_english" compressed query format, local geometry references, and
@@ -6710,6 +6821,95 @@ underneath).
   Eight claims `C1..C8`, `C1` resting on the model rather than an
   observation because the terminal-count sweep that would settle it is
   absent from the cited literature. Stdlib only, selftest 23/23, CC0.
+- `qrng-pair-search/` — Candidate axes for two-source joint keying where the
+  unit of search is `(source, bath_set)` and not `(source, name)`: two sources
+  coupled to different baths beats two sources with different names. This is
+  `category-weld/` run backwards — a weld fuses quantities independent in the
+  world into one handle, and here the shared bath is the welder, so the same
+  instrument that exposes an assumed independence is used to establish a
+  needed one. **Three corrections to the delivered table, all load-bearing.**
+  (1) A bath set assigned to the SOURCE does not price the fielded LEG: alpha
+  decay really is insensitive to substrate temperature and rail drift, but the
+  detector is not — PIN leakage roughly doubles every 7 °C and a PMT or Geiger
+  tube needs an HV rail — so `decay_alpha × rtd_tunnel → CLEAN, overlap {}` is
+  **false as fielded**, and under source-plus-readout accounting *no*
+  admissible pair is clean; all ten weld at TH/PWR/EM. The drop stated that
+  failure mode ("same board, same temperature, same power rail") and then
+  produced a table exempting `decay_alpha` from exactly those baths — the same
+  shape as `simulation-hypothesis-budget/`'s `LABEL_TRUNCATED_IN_TRANSFER`, a
+  term present upstream and dropped downstream. (2) "The correlation rule is
+  where you can hide the actual entropy" is **security through obscurity**;
+  the rule is an algorithm and Kerckhoffs prices it public. What the structure
+  actually buys is stronger than what it was credited with: a two-source
+  extractor needs no seed and no secrecy, only independence — the measurable
+  thing. (3) **Min-entropy, not Shannon** — correlated drift halves the
+  min-entropy of a pair whose average is barely dented. Replaces the two-state
+  clean/welded verdict with three: `structural weld` (sources share a bath,
+  irreducible — shared pump laser), `separable` (sources share nothing, legs
+  weld through their readouts, removable by engineering that must then be
+  MEASURED), `clean` (no pair reaches it). Seven of ten admissible pairs are
+  separable. Also corrects the protocol's sample count: 1e6 samples resolves
+  |r| ≥ 5e-3 at 5σ and is blind below, where 1e-3 costs 2.5e7 — the count
+  should be set by the smallest correlation that would matter, not a round
+  number. The verdict line that survives unchanged: **a quiet-bench
+  cross-correlation of zero is not evidence of independence, it is evidence
+  the bath was not moving.** Nine claims `Q1..Q9`, `Q3` load-bearing and
+  UNTESTED because it asserts a coupling nobody has measured is removable.
+  **No measurements in the folder**, the extractor is deliberately unchosen,
+  `MECH` is assigned to no source and that is a gap rather than a decision,
+  and nothing here addresses SP 800-90B or AIS 31 health testing. Stdlib only,
+  selftest 33/33, CC0.
+- `custody-verification-band/` — Marker under exploration. Criterion: a layer
+  buffers a system iff its productive function is self-custodied AND locally
+  verifiable, otherwise it is a transmission belt. Eleven cases from Late
+  Bronze Age collapse (Hittite, Ugarit, Mycenaean, Egypt, Phoenicia) through
+  post-plague English tenure to US rural conversion, vehicle repairability,
+  household metal, illiquid savings instruments, and present-day institutional
+  distrust. Three cuts recorded per case — custody, verification_scope,
+  parallel_path; slack and horizon are open measurables in `gaps.md`, not case
+  fields. **The criterion reads two of the three recorded cuts and on this
+  corpus the omission costs nothing: zero disagreements across all eleven.**
+  An earlier version of this folder reported disagreements in both directions;
+  that was computed over six invented SEED cases, two written specifically to
+  disagree, and did not survive their replacement by the real eleven —
+  `B4` WITHDRAWN, with the selftest now asserting the zero-disagreement
+  result so it cannot silently reverse. **Why the omission costs nothing is
+  the finding:** `parallel_path` is a deterministic function of `custody`
+  across all eleven (`routed→no, mixed→partial, self→yes`), so it carries no
+  information custody does not already carry. Regularity or the same
+  judgement entered twice under two names is undetermined — `gaps.md`
+  G-COLLINEAR names what separates them (a case coded blind to the custody
+  column, or any routed-custody case with a working parallel path; municipal
+  utilities and open-source infrastructure are the obvious candidates and
+  neither is in the corpus). Third instance in this ecosystem of a folder's
+  own instrumentation carrying a field with no discriminating power, after
+  the readout baths in `qrng-pair-search/` and the one-slot structural score
+  in the shape-index. **Two physics-anchor labels named the wrong quantity**,
+  recomputed in `branching.py`: 2^(-1/3) = 0.7937 is the space-filling LENGTH
+  ratio (equivalently the Murray's-law radius ratio), not the area-preserving
+  RADIUS ratio, which is 2^(-1/2) = 0.7071; and aggregate cross-section is
+  CONSTANT under area preservation by definition of the name (n·β² = 1.0000
+  exactly), widening by 2^(1/3) only under Murray's law. The 3/4 exponent
+  still derives to 0.750000 over 20 levels and needs BOTH ratios. "Trunk never
+  wins by construction" survives in the Murray regime and is neutral in the
+  area-preserving one — destination held, route did not. **Three defects in
+  the delivered reader, reproduced before being fixed:** `extract` as a string
+  iterated per character (five PHYSICS_REFS rendered one letter per line),
+  ARCHAEOLOGICAL items key their content under `measure` and printed none of
+  it, and `--custody self` substring-matched so `self -> routed` answered to
+  `self` — four of six hits were conversion cases, the opposite of the
+  question. Transitions are now parsed into state pairs; `--custody` reads
+  current, `--was` reads origin. Nine claims `B1..B9`; `B7` — that branching
+  geometry licenses an inference about economic layers — is **ASSERTED, NOT
+  ARGUED, with no falsifier stated**; `B9` is untestable because
+  `comfort_threshold` is declared in the schema and carried by no case, and a
+  second readout never taken is not yet a readout. Strip protocol prefers
+  procedure and residue over testimony, and treats role bindings as
+  substitutable substrate. Nothing rests on a source yet: 22 sources, 5
+  located, 17 untouched, none extracted. `Q-PORT` — does proximity-based
+  verification port without proximity — remains the highest-priority open
+  question and the one gap where recoverability from documents is not
+  established. Stdlib only, selftests 19/19 and 13/13, CC0.
 - `SYNTHESIS.md` — Top-level synthesis describing how the three folders
   fit together, how claims flow between them, and how to read the
   artifacts in order.

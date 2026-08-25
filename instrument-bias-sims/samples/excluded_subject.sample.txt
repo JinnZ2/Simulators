@@ -1,0 +1,83 @@
+EXCLUDED SUBJECT -- the instrument reproducing its subject
+========================================================================
+
+  A sim built to measure how a position is excluded turns out to have
+  no representation for the position it is about. Not a wrong value --
+  no slot.
+
+  sim        missing                                derivation excludes
+  S4         doe                                    True
+  S9         filtering agent                        True
+  S10        untenured continuous observer          True
+  S10/M4     position high on generation AND writing False
+
+  S4 -- subject: what determines access
+     now: declared, capabilities filled
+     found by: delivered patch
+  S9 -- subject: non-uniform sampling with nothing filtering
+     now: declared, [BLANK], and the blank is the finding
+     found by: declared from the start; the blank is the finding
+  S10 -- subject: whose hours are consumed by tenure
+     now: enumerated in NOT_REPRESENTABLE, still unrepresentable
+     found by: delivered spec, which asked for the blank to be listed
+  S10/M4 -- subject: whether assessment tracks record or contribution
+     now: RESIDENT_WRITER added; headline moves -0.85 -> +0.11
+     found by: outside check, B1
+
+  modules declaring agents        3
+  of those, carrying a blank      2
+  instances recorded              4
+  excluded at derivation level    3
+  excluded at list level          1
+
+------------------------------------------------------------------------
+
+  SCAN
+
+  module                           agents     blanks                     enumerated
+  s4_antler_calibration            4          none                       False
+  s9_corpus_position_filter        4          filtering_agent            True
+  agents                           4          not_representable          True
+
+  A DECLARED BLANK IS NOT AN UNREACHABLE AGENT
+
+    declared_blank
+      the slot exists and renders empty. A reader can see what is
+      missing and the model can be extended without redesigning it
+    unreachable_agent
+      the slot exists and no other module can set its state, because
+      the derivation routes around it. Filling it means changing the
+      derivation
+
+    S9's blank is correct and is the point. S10's is a limit on what
+    the module set can say. The same rendering, two different states,
+    and only one of them is a defect
+
+------------------------------------------------------------------------
+
+  CONFIDENCE, reported separately and not resolved
+    mechanism
+      NOT ATTRIBUTED. a cost asymmetry in what is cheap to represent,
+      and nothing more is claimed
+    rate
+      4 of 4 is a rate over a corpus of four, which is not a rate
+    resolved                       False
+    the_shape
+      four instances across the sims that declare agents. Whether it
+      generalises past this folder is not established here
+
+  WHERE IT BREAKS
+    - FOUR INSTANCES IS NOT A RATE. The denominator is the sims in this
+    folder that declare agents, which is four, and three of the four
+    were found by an outside reader rather than by this scan. A check
+    that finds nothing on its own corpus has not been shown to work
+    - the scan detects DECLARED blanks. It cannot detect an agent
+    nobody thought to declare, which is the case every instance here
+    started as -- S4's doe was not a blank, it was an absence, and no
+    scan would have found it
+    - 'the subject of the sim' is assigned by hand in INSTANCES. A
+    different reading of what each sim is about would change whether
+    the shape applies
+    - no intent is attributed and none can be. A model is built from
+    the variables its author can name, and the excluded position is by
+    construction the hardest to name from inside

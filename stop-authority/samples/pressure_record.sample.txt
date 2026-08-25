@@ -1,0 +1,155 @@
+PRESSURE RECORD -- why the crossing is the only period that shows it
+========================================================================
+
+  Once refusal no longer holds, pressure stops being applied,
+  because nothing requires it. The negotiation disappears
+  from the record.
+
+  period         events   boundary                   
+  BEFORE         0        INTACT_UNAPPROACHED       
+  TRANSITION     1        CONTESTED                 
+  AFTER          0        UNKNOWN_POSSIBLY_GONE     
+
+    counts: [0, 1, 0]   monotonic: False   peak: TRANSITION
+    periods producing an observation: 1 of 3
+
+    the only period producing an observation is the crossing. Sampling
+    later periods finds zero and reads it as improvement over the
+    transition, which is the reading the series is shaped to produce
+
+------------------------------------------------------------------------
+
+  THE TWO ZEROS
+
+    BEFORE  count 0   boundary INTACT_UNAPPROACHED
+    AFTER   count 0   boundary UNKNOWN_POSSIBLY_GONE
+
+    counts identical:     True
+    boundaries identical: False
+    separated by count:   False
+    state: INDISTINGUISHABLE_BY_COUNT
+
+    identical observable, opposite states. Absence of documented
+    pressure in later periods is not evidence of less pressure; it is
+    consistent with the boundary being gone
+
+------------------------------------------------------------------------
+
+  WHAT THE PRESSURE EVENT ESTABLISHES
+
+    establishes: a boundary existed to press against at that time.
+    Someone had to be pushed, so something was in the way
+
+    does not establish: that the boundary held afterwards. The refusal
+    held at that time, and the record contains no later test because a
+    later test would require pressure nobody needed to apply
+
+    held at the time:  True
+    held afterwards:   None
+    None, not False. No later refusal is recorded and no later pressure
+    is recorded either, which is the asymmetry rather than an answer to
+    it
+
+------------------------------------------------------------------------
+
+  OPEN WORK
+
+    item                                           state
+    collect additional transition-period witness a OPEN
+    recover pressure events after the boundary is  NO_METHOD_PROPOSED
+    is stop-authority hollowing the same move as s CANNOT_DISCRIMINATE
+    collection mechanism for WARRANTED-IN-REVIEW   NO_METHOD_PROPOSED
+    do any published SWA programs report attempts  NOT_RUN
+
+  ITEM 5 -- THE SURVEY, AND WHY IT IS NOT A FINDING YET
+
+    rows: 1   separating attempts from executions: 0
+      prior art: SWA as core program element   exec=True attempts=False
+
+    finding: None    state: NOT_RUN
+    the finding the spec names -- that no published program separates
+    attempts from executions -- requires a survey of published
+    programs, and none has been conducted here. One row is not a survey
+    and an empty registry is not a result. NOT_RUN is the state; ABSENT
+    would be the finding and it is not available
+
+    what would make it one: at least 5 programs read from their own
+    published material, each row citing where it was read, with
+    reports_attempts recorded as False only where the material was
+    examined and the figure was absent -- never where nobody looked
+
+  ITEM 3 -- ONE MOVE OR TWO
+
+    SWA prior art
+      stop authority: HOLLOW_UNTESTED     
+      safety scope:   NOT_RECORDED
+    institutional safety (term-drift)
+      stop authority: NOT_RECORDED        
+      safety scope:   CONTRACTED
+    Eagan reorganisation
+      stop authority: NOT_RECORDED        
+      safety scope:   MEASUREMENT_POINT_RELOCATED
+
+    facilities with both axes: 0
+    verdict: None   state: CANNOT_DISCRIMINATE
+    one facility with both axes recorded. Two facilities each showing
+    one axis are consistent with one move and with two
+
+  CONFIDENCE, reported separately and not resolved
+    n
+      one. The spec says so and the open-work register keeps it visible
+      rather than letting three modules built on it read as three
+      observations
+    one_move_or_two
+      CANNOT_DISCRIMINATE. Three cases, three facilities, one axis each
+    resolved
+      False
+    the_period_structure
+      before / transition / after with the counts 0, 1, 0 is the
+      account's own shape made explicit, not a measured series
+    the_survey
+      NOT_RUN. One row, and one row is not a survey. The spec's finding
+      needs an absence established by looking, and no looking has been
+      done
+    the_witnessed_case
+      one account, from the operator, from a position held during the
+      transition. Carried as delivered. Nothing here verifies it and
+      nothing here could
+
+  WHERE IT BREAKS
+    - DOCUMENTED PRESSURE IS ZERO ON BOTH SIDES OF THE PEAK AND THE TWO
+    ZEROS MEAN OPPOSITE THINGS. Before, the decision sat with the
+    function and nothing needed pressing. After, if refusal no longer
+    holds, nothing requires pressure. Identical observable, opposite
+    states, and the count separates neither -- so a survey sampling
+    later periods finds zero and reads it as an improvement on the
+    transition. That is the reading the series is shaped to produce
+    - THIS IS THE SAME SHAPE AS THE STOP COUNT AND IT IS ONE FINDING,
+    NOT TWO. stop_authority.py already showed a facility where the
+    authority is actively refused publishing MORE stops than a safe
+    one. Here the contested period is the one that produces a record.
+    Both are the observable running non-monotonic in the thing it is
+    read as measuring, in one repo by one builder, and counting them as
+    two independent results would be the inherited-agreement error
+    operator-structure-echo exists to catch
+    - n=1, AND THREE MODULES NOW REST ON THAT ONE ACCOUNT.
+    relocation.py, this module and the open-work register all take
+    their structure from a single witnessed transition. Building three
+    readouts on one observation does not make it three observations,
+    and the spec's own open work leads with collecting more. The
+    account is also the operator's own, carried without independent
+    check, which is the only form this evidence comes in and is still
+    what it is
+    - THE SURVEY IS NOT RUN AND ITS ABSENCE IS NOT THE FINDING. The
+    spec says that if no published SWA program reports attempts
+    separately from executions, that absence is itself the finding. It
+    would be. Establishing it requires reading published programs, this
+    side has no access to a corpus of them, and inventing rows would be
+    worse than an empty table. The harness ships with one row and state
+    NOT_RUN -- ABSENT is a different state and is not available
+    - THE WARRANTED-IN-REVIEW COLLECTION PROBLEM IS NOT SOLVED HERE AND
+    MAY NOT BE SOLVABLE IN THE FORM STATED. Every mechanism requires
+    the reviewing party to admit the count matters, which is the same
+    authority question one level up: the party who would have to
+    collect the denominator is the party a stop binds against.
+    Recording that recursion is not progress on it

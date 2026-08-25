@@ -1,0 +1,208 @@
+TERM-DRIFT CITATION CHECK -- does the measurement still attach
+========================================================================
+
+  A citation carries a measurement forward under a word. It is
+  valid only if the word's referent held between the
+  measurement and the use, and nothing in a citation records
+  whether it did.
+
+------------------------------------------------------------------------
+
+  TPS / "lean"  (1980s TPS literature)
+
+    referent then: worker holds machine-specific diagnostic knowledge;
+    any worker may stop the line (Jidoka)
+    load-bearing: line-stop authority at lowest reading point;
+    knowledge transmitted by mentoring
+    referent now: worker as fungible input; procedure compliance;
+    rotation between machines
+
+    load-bearing now: REMOVED
+    VERDICT:          DOES_NOT_TRANSFER
+    original result:  NOT_ASSESSED_HERE
+    retest:           NOT_RETESTED
+
+  Resilience  (Holling 1973)
+
+    referent then: magnitude of disturbance absorbable before state
+    shift; defined explicitly AGAINST engineered stability
+    load-bearing: unused capacity -- slack, redundancy, variation
+    referent now: rapid recovery to prior state; slack classified as
+    waste
+
+    load-bearing now: REMOVED
+    VERDICT:          DOES_NOT_TRANSFER
+    original result:  NOT_ASSESSED_HERE
+    retest:           NOT_INSTANTIABLE
+    both referents run in the same institution.
+
+  Safety  (institutional practice)
+
+    referent then: whole-facility operability -- air handling, water,
+    ergonomics, office and floor; held binding authority upward,
+    including over executives
+    load-bearing: enforcement; scope covering everything that could
+    degrade operability
+    referent now: worker compliance with procedure
+
+    load-bearing now: REMOVED
+    VERDICT:          DOES_NOT_TRANSFER
+    original result:  NOT_ASSESSED_HERE
+    retest:           NOT_RETESTED
+
+  DOES_NOT_TRANSFER=3, TRANSFERS=0, UNASSESSED=0
+
+  DOES_NOT_TRANSFER IS NOT REFUTED. The result may be correct
+  and still not attach. `original_result` is NOT_ASSESSED_HERE
+  on every row and stays that way: nothing in this module
+  measures whether the original studies were right.
+
+  ABSENCE OF RETEST IS NOT REFUTATION EITHER, and Holling is
+  NOT_INSTANTIABLE -- testing it needs a system with slack in
+  it, and where slack was optimised away there is no retest
+  for the absence to be an absence of.
+
+------------------------------------------------------------------------
+
+  THE SAFETY CASE, RUN
+
+  'Frozen variables do not stop existing; they stop being
+  read. Metric can improve while facility degrades.'
+  That is arithmetic, so here it is.
+
+    read now:  procedure compliance
+    unread:    air handling, water, ergonomics, office, floor
+
+    t      metric (read now) whole
+    1      0.750            0.925
+    2      0.800            0.900
+    3      0.850            0.875
+    4      0.900            0.850
+    5      0.950            0.825
+    6      1.000            0.800
+
+    narrow metric  +0.250
+    whole facility -0.125
+    diverged:      True
+
+    The narrow metric reaches 1.000 and is not wrong. It is
+    correct about what it reads.
+
+    the released variables are UNDECLARED, not FROZEN. A frozen
+    variable is declared held still; these were declared by nobody and
+    kept moving. The narrow metric is correct about what it reads
+
+------------------------------------------------------------------------
+
+  'FROZEN' IN THIS SPEC AND IN SPEC_SHAPES.md
+
+    SPEC_SHAPES.md: FROZEN entries are declared by the builder, not
+    inferred
+    SPEC_CITATION.md: Frozen variables do not stop existing; they stop
+    being read
+
+    Two deliveries, one word, two objects. The safety case's
+    unread variables were declared by nobody, so under the
+    first spec they are UNDECLARED, and calling them FROZEN
+    is the inference that spec forbids.
+
+    UNDECLARED
+      nobody declared these held still; the scope contracted and they
+      fell out. This is SPEC_SHAPES' third state
+        fits: the constraint that FROZEN is declared, never inferred
+        misses: the citation note's emphasis that they keep MOVING,
+        which UNDECLARED does not itself say
+
+    ASSUMED_FROZEN
+      treated as held still by not being read, while in fact moving.
+      Neither declared-frozen nor merely undeclared
+        fits: why the metric can improve while the facility degrades --
+        it needs the variables to be presumed constant AND to be
+        changing
+        misses: SPEC_SHAPES has no such state, so adopting it would
+        extend that spec rather than read this one
+
+    SAME_WORD_LOOSELY
+      'frozen' here is ordinary usage for held-constant, with no
+      reference to SPEC_SHAPES' declared list
+        fits: the two notes were delivered separately and neither cites
+        the other
+        misses: the repo now runs both, and a reader moving between
+        them meets one word and two objects
+
+    picked: None
+    which one holds is a question about what was meant, and this module
+    cannot answer it. PREAMBLE.md's own TERM COLLISION note is the
+    instrument for this, and its rule is that the senses get named, not
+    merged
+
+------------------------------------------------------------------------
+
+  A WORD IS NOT A MEASUREMENT
+
+    term             state        loadable
+    TPS / "lean"     UNASSESSED   False
+    Resilience       UNASSESSED   False
+    Safety           UNASSESSED   False
+
+    UNASSESSED is not 'no'. A word that has not been checked
+    is not thereby a word that fails the check -- and it is
+    still not loadable, which is the spec's rule read forward
+    rather than a verdict on these terms.
+
+  CONFIDENCE, reported separately and not resolved
+    carries_a_measurement
+      UNASSESSED on every term. The three fields are declared by an
+      assessor, not inferred here
+    original_results
+      NOT_ASSESSED_HERE on every row, and that is permanent. Nothing in
+      this module measures whether the original studies were right
+    resolved
+      False
+    the_facility_run
+      a stipulated arithmetic demonstration that a narrow metric can
+      rise while a wide one falls. It shows the mechanism is available,
+      not that it occurred anywhere
+    the_three_cases
+      delivered verbatim, including their status lines. The referents,
+      load-bearing elements and present-day objects are the operator's
+      readings of three literatures and this module carries them
+      without checking them
+    transfer_verdicts
+      computed from load_bearing_now, which is a declared field. The
+      computation is trivial; the input is the whole claim
+
+  WHERE IT BREAKS
+    - ALL THREE DELIVERED CASES COME BACK DOES_NOT_TRANSFER, AND THE
+    MODULE COULD NOT HAVE RETURNED ANYTHING ELSE. Each case arrived
+    with its status already stating that the load-bearing element was
+    removed, so `load_bearing_now` was 'REMOVED' before any code ran.
+    The verdict is the input restated in a type. What the module adds
+    is the fields the verdict must NOT be confused with -- the original
+    result and the retest state -- not the verdict itself
+    - THE THREE CASES ARE ALSO A SELECTED SET. They are the ones the
+    operator noticed and wrote down, and every one of them drifted. A
+    check whose worked examples all fail is a check with no negative
+    control: nothing here shows what a citation that DOES transfer
+    looks like when run through the same three questions
+    - 'FROZEN' MEANS DIFFERENT THINGS IN THE TWO SPECS AND THIS MODULE
+    DOES NOT PICK. SPEC_SHAPES.md says FROZEN entries are declared by
+    the builder and never inferred; SPEC_CITATION.md says frozen
+    variables stop being read. The safety case's unread variables were
+    declared by nobody, so under the first spec they are UNDECLARED and
+    calling them frozen is the inference that spec forbids. Three
+    readings are printed and none is chosen, because which holds is a
+    question about what was meant
+    - THE FACILITY RUN IS A DEMONSTRATION, NOT EVIDENCE. Compliance
+    starts low and is worked on; everything unread decays at a fixed
+    rate; both numbers follow. It establishes that the divergence is
+    arithmetically available given those assumptions, and says nothing
+    about whether any real facility behaved that way. The decay rate
+    was chosen to make the effect legible
+    - carries_a_measurement() RETURNS UNASSESSED FOR EVERY TERM HERE,
+    INCLUDING ONES WHERE THE DELIVERED TEXT ARGUABLY SUPPLIES THE
+    ANSWER. Holling's referent is given as 'magnitude of disturbance
+    absorbable before state shift', which reads like a quantity with a
+    sign. Filling the field from that would be this module deciding
+    what counts as a formal definition in ecology, so the field stays
+    empty and the reading stays available to whoever assesses it

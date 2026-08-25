@@ -1,0 +1,90 @@
+EXCLUDED BY CONSTRUCTION -- the third category, one place
+========================================================================
+
+  Not a handoff failure. The diff cannot see it: a DROPPED
+  verdict needs a ledger entry, and there is none, because the
+  thing was never stated.
+
+  sim       missing                                  derivation   ontology refuses
+  S4        doe                                      True         True
+  S9        filtering agent                          True         False
+  S10       untenured continuous observer            True         True
+  S10/M4    position high on generation AND writing  False        True
+
+  spec says                       3
+  recorded                        4
+  derivation-level                3  (matches spec: True)
+  ontology-refusal                3  (matches spec: True)
+
+  BOTH READINGS GIVE THREE AND THEY NAME DIFFERENT THREE.
+
+    S4        ontology refuses: True
+      access was a function of the buck alone, so 'what does a doe
+      track' had no expressible form. The ontology had no slot, not an
+      empty one
+    S9        ontology refuses: False
+      nothing filters in S9, by design. The empty slot is a CORRECT
+      representation of the system, not a refusal, so counting it here
+      would make a right answer score as a defect
+    S10       ontology refuses: True
+      presence is derived from tenure, so a continuous observer without
+      tenure cannot be given a value without changing the derivation
+    S10/M4    ontology refuses: True
+      the five-row mapping had no slot for a position high on both
+      generation and writing, and adding one moved the headline from
+      -0.85 to +0.11. A list-level omission with a derivation-level
+      consequence
+
+  Neither reading is picked here. Picking would settle what
+  the category means by arithmetic.
+
+------------------------------------------------------------------------
+
+  WHY THE DIFF CANNOT SEE IT
+    requires    
+      a ledger entry, which requires the item to have been stated
+    but         
+      an excluded-by-construction case was never stated, because the
+      ontology that would express it does not exist on either side of
+      the channel
+    so          
+      it appears as neither DROPPED nor ADDED. It appears as nothing at
+      all until an agent reads the code and notices the missing slot
+    detection   
+      not automatable from the diff. Three of the four instances here
+      were found by an outside reader
+
+  CONFIDENCE, reported separately and not resolved
+    detection_rate
+      3 of 4 found by an outside reader, which is a statement about
+      this corpus and not a rate
+    instance_list
+      imported from excluded_subject.py; the sims' side is the source
+      of truth
+    resolved
+      False
+    the_count
+      TWO READINGS, neither picked. Derivation-level gives 3 and
+      matches the spec; ontology-refusal gives 3 as well but a
+      DIFFERENT three, because S9 drops out and S10/M4 enters
+
+  WHERE IT BREAKS
+    - THE SPEC'S COUNT OF THREE IS REACHED BY TWO DIFFERENT ROUTES AND
+    THEY NAME DIFFERENT INSTANCES. Derivation-level exclusion gives S4,
+    S9, S10. Ontology-refusal gives S4, S10, S10/M4 -- S9 drops out
+    because nothing filters there by design, and its empty slot is a
+    correct representation rather than a refusal. Both are printed; the
+    register does not pick one, because picking would settle a question
+    about what the category means by arithmetic
+    - the register imports its instances rather than holding them, so
+    it inherits whatever excluded_subject.py's hand-assigned reading of
+    'the subject of the sim' is. Importing beats copying and it is not
+    independence
+    - 'the model's ontology refusing a case' is not operationalised.
+    The test applied here -- can the missing party be given a value
+    without changing the derivation -- is a proxy for it and was chosen
+    by this file
+    - if instrument-bias-sims is absent the register reports zero
+    instances rather than failing, which would read as 'none found'
+    when it means 'not checked'. HAVE_SIMS distinguishes them and
+    anything reading counts() must look at it

@@ -43,6 +43,36 @@ this order before running any simulator:
    trial count, states four standing limits, and adds the **shadow read**:
    a shape described by the gaps it casts.
 
+`PREAMBLE.md` also carries a **NOTE TO READERS — TERM COLLISION**. Two
+phrases in this repo each name two distinct objects, and the difference is
+**provenance, not sincerity**: a *change of mind* is REVISION when the cause is
+named and the criterion move is logged, ASSERTION when nothing records that the
+criterion moved. *Self-questioning* and *constant re-evaluation* mean continuous
+calibration running alongside operation — instrumented as an expertise marker in
+the surgical and aviation literature, **not** a confidence deficit. A model
+arriving from the general corpus will mis-type it as anxiety and answer with
+reassurance. Reassurance suppresses the channel doing the work. Read the note
+before the modules.
+
+`criteria-drift/unlogged_move.py` runs that first distinction as a sim, and
+`tools/check_term_collision.py` reports which files use the terms.
+
+`PREAMBLE.md` carries a second note, the **TERM-DRIFT CITATION CHECK**: a
+citation carries a measurement forward under a word, and is valid only if the
+word's referent held between the measurement and the use. Three questions —
+what was the referent when it was measured, what was load-bearing in it, is
+that element present now — with the rule that **does-not-transfer is not
+refuted** and **absence of retest is not refutation**.
+`term-drift-citation/` runs the check and tallies the asymmetry it warns
+about.
+
+5. **[`CASE_STUDY_NARRATIVE_INSTINCT.md`](CASE_STUDY_NARRATIVE_INSTINCT.md)** —
+   the empirical record the spine rests on: a multi-round correction sequence
+   in which the framing of scale_builder / narrative claims was repeatedly
+   inverted and repeatedly caught. Documents the substitution-test
+   methodology and is the evidence for `EMRG_009` — a narrative-only system
+   cannot self-correct narrative instinct from inside its own scope.
+
 Each simulator-specific folder may also ship an aperture document
 (e.g. [`incentive-blindspot-sim/00_APERTURE.md`](incentive-blindspot-sim/00_APERTURE.md))
 that pins its variables to physical functions and the conservation laws
@@ -50,7 +80,40 @@ underneath. Read those before running the corresponding script.
 
 ## Layout
 
-| Folder | Substrate | What it produces |
+Seventy-five folders. The complete index — one line each — is in
+[`CLAUDE.md`](CLAUDE.md); full per-folder notes are in
+[`docs/FOLDER_NOTES.md`](docs/FOLDER_NOTES.md).
+
+This section used to carry a second, partial copy of that list (30 of 75
+folders). It was removed rather than completed: two lists drift, and the one
+that drifted was this one.
+
+Two further root documents sit outside the spine and outside `docs/`:
+`KEYWORDS.md` and `REVIEW.md`. They are listed here rather than moved,
+because moving a file is a decision about it and this pass was a
+reorganisation, not a triage.
+
+### Entry point for an AI reading the repo
+
+[`grounding-layers/`](grounding-layers/) is the stack to start from. One call
+returns all seven layers:
+
+```python
+import sys; sys.path.insert(0, '<repo>/grounding-layers')
+from entry import audit
+
+audit("I can lift 200 kg.", ontological_scope='any_WEIRD_human')
+audit({'L4': {'lift_mass': 200.0}}, ontological_scope='any_WEIRD_human')
+```
+
+`python3 entry.py` from inside the folder runs the same thing as a demo.
+**Requires `numpy`** (`grounding-layers/requirements.txt`) — it is one of the
+non-stdlib folders, and the command was not executable in the environment this
+README was last edited in.
+
+The layers, each with a deterministic and a probabilistic inspector:
+
+| layer | inspector | what bounds it |
 | --- | --- | --- |
 | `token-minimizer/` | natural-language queries | compressed energy_english + geometry refs |
 | `emergence-stability-simulator/` | multi-agent dynamics | Monte Carlo claims (`EMRG_*`, `SENS_*`) |
@@ -103,9 +166,37 @@ See [`SYNTHESIS.md`](SYNTHESIS.md) for the cross-folder reading and
 
 ## Running
 
-Each simulator runs with `python3 <module>.py` from inside its folder. No
-dependencies. Tests in each `tests/` directory run with
-`python3 -m unittest discover tests`.
+Each simulator runs with `python3 <module>.py` from inside its folder.
+
+Most folders are standard library only. The exceptions are marked
+*(non-stdlib)* in [`CLAUDE.md`](CLAUDE.md), and where they declare their
+dependencies varies — checked, not assumed:
+
+| folder | declared in |
+| --- | --- |
+| `grounding-layers/` | `requirements.txt` |
+| `climate-modeling/` | `requirements.txt` |
+| `energy/` | `requirements.txt` |
+| `play-sims/` | one `requirements.txt` per sub-folder (5 of them) |
+| `crossdomain-eval/` | `pyproject.toml` |
+| `relational/` | `arch_garden/requirements.txt`; `geometric_rag/` declares numpy in its docstring only |
+
+There is **one** test directory, at the repo root, not one per folder. From
+the repository root:
+
+```
+python3 -m unittest discover tests
+```
+
+Two repo-wide validators live in `tools/`:
+
+```
+python3 tools/check_gate_drift.py        # one gate, no stale copies
+python3 tools/check_term_collision.py    # who uses the colliding terms
+```
+
+Individual folders self-test through their own modules, e.g.
+`python3 instrument-bias-sims/crosscutting.py --selftest`.
 
 ## License
 

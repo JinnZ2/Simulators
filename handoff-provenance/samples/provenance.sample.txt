@@ -1,0 +1,71 @@
+HANDOFF PROVENANCE -- tags and ledger
+========================================================================
+
+  TAGS
+    [K  ] operator-stated, in conversation
+    [K~ ] operator-stated; translation flagged lossy when spoken
+    [K? ] operator-stated per the ledger, NOT CONFIRMED
+    [R  ] repo-derived; path cited
+    [C  ] Claude-proposed, operator did not object
+    [A  ] Claude-proposed, operator ACCEPTED explicitly
+    [X  ] Claude Code's own addition, not in the spec
+
+
+  TWO AXES, SEPARATED BY [K~]
+
+    STATED            [K]  [K~]
+      confirmed to have been said. The population the
+      channel loses things from.
+
+    MATCHER_SCORABLE  [K]
+      the matcher reads English stems, and a [K~] entry is
+      one whose English the operator flagged when speaking.
+
+    One constant answered both until [K~] arrived. For [K]
+    and [K?] the two answers move together, so the
+    conflation never showed.
+
+  ground truth for the DROPPED measurement: [K]
+  excluded, not confirmed:                  [K?]
+  excluded, matcher cannot read it:         [K~]
+
+  [C] and [A] are separate because silence is not acceptance.
+  Same rule as inverseminar's `unprobed` verdict: an unprobed
+  line is logged as a miss, never as a confirmation.
+
+------------------------------------------------------------------------
+
+  THE ORDERING RULE, ENFORCED
+
+    seal: 42c44b593ff79e42...
+    add after seal: REFUSED
+
+    A ledger extracted from finished prose cannot fail,
+    which is why the rule is enforced rather than stated.
+
+------------------------------------------------------------------------
+
+  THE RE-READ COLUMN -- TWO ENTRIES, NEVER SUMMED
+
+    SHIFT     item reads differently later; observing position moved
+              measures: the station
+              prior diff: STALE_NOT_WRONG. The item changed, so a prior
+              verdict was about a different item. Re-run the diff; the
+              old one was not an error
+
+    RETRANS   item reads the same, English was wrong the first time
+              measures: the translation layer
+              prior diff: POSSIBLY_FALSE_CARRIED. The item did not
+              change, so a prior verdict was taken against wrong
+              English. If it read CARRIED it may have been the fourth
+              failure mode
+
+    unchanged-text re-read: REFUSED (unchanged = a confirmation)
+    unattributed re-read:   REFUSED (shape question is upstream)
+
+    Both kinds produce ONE observable: the line changed.
+    Which one it is depends on whether the SHAPE moved, and
+    that is not in the text. RETRANS is the only route by
+    which the spec's fourth failure mode ever surfaces here,
+    and it surfaces as a LOWER BOUND, never a measurement:
+    only what the operator re-read and caught is counted.

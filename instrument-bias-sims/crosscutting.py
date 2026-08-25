@@ -12,6 +12,8 @@ the sims rather than stated in a README.
      direction, cost asymmetry, whether the aggregate steers)
   3  confidence reported as a separate readout from the pattern, not resolved
   4  README states: marker under exploration, not a thesis
+  5  a readout comparing correlations must compare SIGNED values; a
+     comparison of abs() across correlation-named operands fails
 
 Rules 1 and 2 are scanned. Rules 3 and 4 are structural and are checked by
 calling the modules. A rule stated in prose and not checked is a rule that
@@ -25,7 +27,9 @@ found", not "the rule holds". The scan is a floor, not a certificate.
 stdlib only, CC0.
 """
 
+import ast
 import importlib
+import inspect
 import sys
 import os
 
@@ -33,11 +37,17 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import _shared as SH                                            # noqa: E402
 
+SUBFOLDERS = ["allocation_coupling"]
+for _sf in SUBFOLDERS:
+    sys.path.insert(0, os.path.join(HERE, _sf))
+
 MODULES = ["s1_encounter_denominator", "s2_symmetric_anchor",
            "s3_rubric_backcast", "s4_antler_calibration",
            "s5_adversarial_prior", "s6_foreclosure_rate",
            "s7_hardship_threshold", "s8_recognition_to_delivery",
-           "s9_corpus_position_filter"]
+           "s9_corpus_position_filter",
+           "m1_tenure_budget", "m2_coupling_readout", "m3_energy_ledger",
+           "m4_assessment_record", "run_all", "excluded_subject"]
 
 # Rule 1. Tokens that would make a data structure carry a verdict about worth
 # rather than a quantity. Deliberately excludes words with technical uses
@@ -127,7 +137,52 @@ def check_rule_3(mod):
             "problems": problems, "pass": not problems}
 
 
+# Rule 5. Earned from S10/M4, where a readout compared |r| only and reported
+# "tracks generated observations" for a correlation of MINUS 0.85. The sign
+# was the finding and the magnitude comparison lost it. This is an AST check,
+# not a keyword scan: it finds Compare nodes where BOTH sides call abs() and
+# at least one operand's source mentions a correlation.
+CORR_TOKENS = ("corr", "correlation", "_r", "rho")
+
+
+def _mentions_correlation(node):
+    try:
+        src = ast.dump(node).lower()
+    except Exception:                                       # pragma: no cover
+        return False
+    return any(t in src for t in CORR_TOKENS)
+
+
+def _is_abs_call(node):
+    return (isinstance(node, ast.Call)
+            and isinstance(node.func, ast.Name)
+            and node.func.id == "abs")
+
+
+def check_rule_5(mod):
+    """Find abs()-vs-abs() comparisons over correlation-named operands."""
+    try:
+        src = inspect.getsource(mod)
+    except (OSError, TypeError):                            # pragma: no cover
+        return {"rule": "signed correlation comparison", "hits": [],
+                "pass": True, "note": "source unavailable"}
+    hits = []
+    for node in ast.walk(ast.parse(src)):
+        if not isinstance(node, ast.Compare):
+            continue
+        sides = [node.left] + list(node.comparators)
+        abs_sides = [x for x in sides if _is_abs_call(x)]
+        if len(abs_sides) < 2:
+            continue
+        if any(_mentions_correlation(x) for x in abs_sides):
+            hits.append(getattr(node, "lineno", -1))
+    return {"rule": "a readout comparing correlations must compare SIGNED "
+                    "values, not abs()",
+            "hits": hits, "pass": not hits}
+
+
 def check_rule_4(readme_path):
+    """Also checks every subfolder README carries the phrase."""
     if not os.path.exists(readme_path):
         return {"rule": "README states marker under exploration",
                 "problems": ["README.md not found"], "pass": False}
@@ -145,11 +200,12 @@ def audit():
         mod = importlib.import_module(name)
         rows.append({"module": name,
                      "r1": check_rule_1(mod), "r2": check_rule_2(mod),
-                     "r3": check_rule_3(mod)})
+                     "r3": check_rule_3(mod), "r5": check_rule_5(mod)})
     r4 = check_rule_4(os.path.join(HERE, "README.md"))
     return {"rows": rows, "r4": r4,
             "all_pass": all(r[k]["pass"] for r in rows
-                            for k in ("r1", "r2", "r3")) and r4["pass"]}
+                            for k in ("r1", "r2", "r3", "r5"))
+            and r4["pass"]}
 
 
 def scan_limit():
@@ -170,9 +226,35 @@ def scan_limit():
         def breaks():
             return []
     f = Fake()
+
+    planted_r5 = """
+def bad_readout(rows):
+    corr_a = 0.9
+    corr_b = -0.85
+    if abs(corr_b) > abs(corr_a):
+        return "tracks b"
+    return "tracks a"
+"""
+
+    class FakeMod5(object):
+        pass
+
+    def _r5_on_source(src):
+        hits = []
+        for node in ast.walk(ast.parse(src)):
+            if not isinstance(node, ast.Compare):
+                continue
+            sides = [node.left] + list(node.comparators)
+            abs_sides = [x for x in sides if _is_abs_call(x)]
+            if len(abs_sides) >= 2 and any(_mentions_correlation(x)
+                                           for x in abs_sides):
+                hits.append(node.lineno)
+        return hits
+
     return {"planted_moral_caught": not check_rule_1(f)["pass"],
             "planted_intent_caught": not check_rule_2(f)["pass"],
             "planted_confidence_caught": not check_rule_3(f)["pass"],
+            "planted_abs_comparison_caught": bool(_r5_on_source(planted_r5)),
             "paraphrase_limit": "a keyword scan is stepped around by any "
                                 "paraphrase. A PASS on rules 1 and 2 means "
                                 "no listed token was found, not that the "
@@ -182,14 +264,15 @@ def scan_limit():
 def report():
     L = ["CROSS-CUTTING RULES, ENFORCED", "=" * 72, ""]
     a = audit()
-    L.append("  %-32s %-8s %-8s %s"
-             % ("module", "r1 data", "r2 output", "r3 readouts"))
+    L.append("  %-32s %-8s %-8s %-11s %s"
+             % ("module", "r1 data", "r2 out", "r3 readouts", "r5 signed"))
     for r in a["rows"]:
-        L.append("  %-32s %-8s %-8s %s"
+        L.append("  %-32s %-8s %-8s %-11s %s"
                  % (r["module"],
                     "pass" if r["r1"]["pass"] else "FAIL",
                     "pass" if r["r2"]["pass"] else "FAIL",
-                    "pass" if r["r3"]["pass"] else "FAIL"))
+                    "pass" if r["r3"]["pass"] else "FAIL",
+                    "pass" if r["r5"]["pass"] else "FAIL"))
     L.append("")
     L.append("  r4 README: %s" % ("pass" if a["r4"]["pass"] else "FAIL"))
     L.append("  all rules pass: %s" % a["all_pass"])
@@ -204,7 +287,7 @@ def report():
     sl = scan_limit()
     L.append("  THE CHECKER, NULL-TESTED ON A PLANTED VIOLATION")
     for k in ("planted_moral_caught", "planted_intent_caught",
-              "planted_confidence_caught"):
+              "planted_confidence_caught", "planted_abs_comparison_caught"):
         L.append("    %-32s %s" % (k, sl[k]))
     L.append("")
     L.extend(SH.wrap(sl["paraphrase_limit"], "    "))
@@ -222,7 +305,8 @@ def report():
 def selftest():
     ck, done = SH.checker()
     a = audit()
-    ck("all nine sims are audited", len(a["rows"]) == 9)
+    ck("nine sims, five S10 modules and the excluded-subject entry",
+       len(a["rows"]) == 15)
     ck("rule 1 passes on every module",
        all(r["r1"]["pass"] for r in a["rows"]))
     ck("rule 2 passes on every module",
@@ -240,9 +324,15 @@ def selftest():
        sl["planted_intent_caught"])
     ck("the readout check fires on a planted violation",
        sl["planted_confidence_caught"])
+    ck("rule 5 fires on the exact defect it was earned from -- an abs() "
+       "comparison over correlation-named operands",
+       sl["planted_abs_comparison_caught"])
+    ck("and rule 5 passes on every shipped module, so the repair held",
+       all(r["r5"]["pass"] for r in a["rows"]))
     ck("so none of the three checks is CONSTANT_SILENT",
        all(sl[k] for k in ("planted_moral_caught", "planted_intent_caught",
-                           "planted_confidence_caught")))
+                           "planted_confidence_caught",
+                           "planted_abs_comparison_caught")))
     ck("the paraphrase limit is stated rather than left implied",
        "stepped around" in sl["paraphrase_limit"])
 
