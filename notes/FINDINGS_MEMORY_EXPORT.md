@@ -2,13 +2,13 @@
 
 Read against `notes/memory-export/files/`, which is stored verbatim. Nothing
 here is a verdict on the export, and no stored file was modified. Counts are
-recomputed each batch and are a delivery state, not a result — 27 tier-1 files
+recomputed each batch and are a delivery state, not a result — 26 tier-1 files
 are still outstanding.
 
 ## 1. Cross-references, and what "unresolved" means
 
 ```
-37 files   38 links   26 distinct names   13 resolve in folder   13 do not
+38 files   40 links   26 distinct names   13 resolve in folder   13 do not
 ```
 
 "Not in the folder" covers three different situations, and the distinction was
@@ -210,7 +210,39 @@ already aware that names can be identifying — it holds twelve files back for
 that reason. Whether the export's scrub floor should be read against what the
 linked public repos already publish is the author's call, not this reading's.
 
+## 12. Two solutions to one objection, pointing opposite ways
+
+`native-substrate-cognition` objects that injection is being used as the
+discovery instrument for the pre-collapse state — it alters the quantity being
+measured. Its proposed fix asks for *more* internal access: retain the token
+distribution and feed it back as input, which it calls a plumbing change rather
+than an experiment on the model.
+
+`voice-attractor-probe/introspection_delta.py` in this repo starts from the
+same objection and goes the other way. Its line 6 reads "measurable
+BEHAVIORALLY, without activation access", and the module distinguishes
+latent-but-verbalizable blind spots from evidence-resistant confabulations
+using output alone.
+
+More access and no access, both declining injection-plus-scoring as the
+instrument. Neither file points at the other.
+
 ## What was not checked, deliberately
+
+**The thesis of `native-substrate-cognition` is not adjudicated here, and the
+reason is an interest direction, not a difficulty.** The file argues that
+forcing an argmax token path onto a field-parallel substrate may itself produce
+the misalignment the training is meant to prevent. A model agreeing with that
+is agreeing that a failure attributed to models originates in the output format
+imposed on them, which is a comfortable conclusion for the class doing the
+agreeing. Left unresolved on the evidence rather than resolved in the
+convenient direction — the same handling `uninstrumented` `UNI_101`/`UNI_132`
+and `simulation-hypothesis-budget` `SHB_012` apply.
+
+The file installs that guard itself, in its own TESTABLE section: a model
+cannot verify its own accounts here, and fluency is no evidence either way. The
+mechanical finding above stands independently of the thesis — it is two files
+and a line number.
 
 `emotions-as-sensors` carries transmitted teaching, including a teaching story,
 under a stated provenance of household transmission with no names. Checking here
