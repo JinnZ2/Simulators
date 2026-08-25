@@ -1,0 +1,46 @@
+fold matrix -- work order 8
+terms: 1
+
+term   H2_more_efficiency
+name   more efficiency solves this
+source the bare claim, as stated. No artifact; this fixture is the sentence itself.
+
+S3 scope        NOT_EVALUABLE -- efficiency-class on efficiency; scope missing: with_respect_to, boundary, horizon
+
+This term is NOT_EVALUABLE. It is not scored, not ranked,
+and not carried into any comparison (S3). That is a refusal
+about what can be read from it, and is not a low reading.
+
+S4 sign hygiene: the name asserts a direction (efficiency)
+   neutral reading NOT_SUPPLIED. It is a declared field,
+   not something a name can be de-signed into.
+
+S1 grid
+level  severed                                       still_acting                         clock   basis   
+-----  --------------------------------------------  -----------------------------------  ------  --------
+ 0     -- the term as used --                        the claim is carried into decisions  ABSENT  ASSERTED
++1     the relation between the ratio and the outc…  whatever 'this' is continues         ABSENT  ABSENT  
+
+S2 upward cells
+level  goal         basis   value_string  cite
+-----  -----------  ------  ------------  ----
++1     solves this  ABSENT  (empty)           
+
+------------------------------------------------------------------
+
+S2, across the terms a comparison may include
+
+basis     upward cells
+--------  ------------
+measured  0           
+derived   0           
+ASSERTED  0           
+ABSENT    0           
+
+cells: 0   empty value_string: 0
+ASSERTED + ABSENT: 0   measured + derived: 0
+P1 (soft majority): None
+P2 (all value_strings empty): None
+
+excluded from this tally as NOT_EVALUABLE (S3): H2_more_efficiency
+A refused term is not a zero and does not enter a count.

@@ -1,0 +1,40 @@
+fold_matrix selftest
+  an efficiency-class term with no scope is NOT_EVALUABLE    PASS got='NOT_EVALUABLE' want='NOT_EVALUABLE'
+  and every missing field is named, not just the first       PASS got=['boundary', 'horizon', 'with_respect_to'] want=['boundary', 'horizon', 'with_respect_to']
+  a complete scope is evaluable                              PASS got='EVALUABLE' want='EVALUABLE'
+  a field declared unknown is still missing                  PASS got='NOT_EVALUABLE' want='NOT_EVALUABLE'
+  and is reported apart from an omission                     PASS got=True want=True
+  a term with no efficiency word takes no scope              PASS got='EVALUABLE' want='EVALUABLE'
+  an unread baseline refuses the comparison                  PASS got='NOT_EVALUABLE' want='NOT_EVALUABLE'
+  and says it was not compared rather than not supported     PASS got=True want=True
+  a partial baseline is also refused                         PASS got='NOT_EVALUABLE' want='NOT_EVALUABLE'
+  an enumerated baseline is evaluable                        PASS got='EVALUABLE' want='EVALUABLE'
+  score() raises on a NOT_EVALUABLE term                     PASS got='raised' want='raised'
+  and raises on an evaluable one too: there is no score      PASS got='raised' want='raised'
+  a name asserting a sign is flagged                         PASS got=['waste'] want=['waste']
+  a neutral name is not                                      PASS got=[] want=[]
+  a flagged name with no declared neutral reading says so    PASS got='NOT_SUPPLIED' want='NOT_SUPPLIED'
+  and one with a declared reading carries it                 PASS got='supplied' want='supplied'
+  a sign word outside the efficiency class takes no scope    PASS got='EVALUABLE' want='EVALUABLE'
+  and is still flagged                                       PASS got=['leakage'] want=['leakage']
+  two different clocks are a mismatch                        PASS got=True want=True
+  a derived clock is not a second horizon                    PASS got=False want=False
+  and is emitted anyway                                      PASS got=2 want=2
+  and is counted apart                                       PASS got=(1, 1) want=(1, 1)
+  both are emitted                                           PASS got=[3.0, 30.0] want=[3.0, 30.0]
+  and nothing is collapsed                                   PASS got=None want=None
+  two levels agreeing are not a mismatch                     PASS got=False want=False
+  a level with no clock contributes none rather than a zero  PASS got=None want=None
+  only positive levels are upward cells                      PASS got=[1, 2] want=[1, 2]
+  an empty value_string emits as empty, never as zero        PASS got=['', ''] want=['', '']
+  and is a string, so a caller cannot read 0 out of it       PASS got=True want=True
+  an upward cell with no value_string field does not load    PASS got=1 want=1
+  an unknown basis does not load                             PASS got=1 want=1
+  a legal empty value_string does load                       PASS got=[] want=[]
+  a NOT_EVALUABLE term is excluded from the tally, not counted as 0 PASS got=(1, ['?']) want=(1, ['?'])
+  boundary and horizon come from declared-frame's CORE       PASS got=True want=True
+  an emitted report is clean under the declared exemption    PASS got=True want=True
+  and only the declared token fires without it               PASS got=True want=True
+  a planted grading word is caught through the exemption     PASS got=False want=False
+  the exemption is exactly one word                          PASS got=1 want=1
+SELFTEST PASS (0 checks failed)

@@ -1,0 +1,93 @@
+{
+  "id": "H1_grid_emission_factor",
+  "name": "grid emission factor",
+  "source": "UNFCCC GHG emissions calculator ver01.1, md5 57d3ffd78a9f5f9980e15feb65f8d986; Electricity, heat, cooling!B192 (Iraq) = 0.93391 kg CO2e/kWh. Claim record claim-record/records/UNF_GRID_IRAQ.json.",
+  "_note": [
+    "The downward levels are filled only where this repository has a",
+    "reading. -1 is measured here by perturbation; -2 and -3 are what",
+    "the factor rests on physically and this repository has measured",
+    "neither, so they carry ABSENT rather than a plausible number.",
+    "",
+    "The upward levels are taken from the workbook's own Disclaimer!A3,",
+    "quoted. They are not composed."
+  ],
+  "levels": [
+    {
+      "index": -3,
+      "severed": "combustion chemistry: fuel carbon content to CO2e per unit energy",
+      "still_acting": "the actual carbon content of the fuel burned, which does not consult the factor",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ABSENT"
+    },
+    {
+      "index": -2,
+      "severed": "plant-level heat rate and dispatch order",
+      "still_acting": "which plants are on the margin at the hour the kWh is drawn",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ABSENT"
+    },
+    {
+      "index": -1,
+      "severed": "the national generation mix that the factor was averaged over",
+      "still_acting": "the mix keeps changing after the average was taken; nothing in the workbook re-reads it",
+      "clock": {
+        "value": 3.0,
+        "units": "years",
+        "basis": "stated in the delivery as a few years and taken as 3; NOT measured here"
+      },
+      "basis": "ASSERTED"
+    },
+    {
+      "index": 0,
+      "severed": "-- the term as used --",
+      "still_acting": "the factor multiplies whatever kWh figure the user enters",
+      "clock": {
+        "value": 3.403,
+        "units": "years",
+        "basis": "derived: time_constant 3.0 y / |coupling| 0.8815, coupling measured by perturbation in sheet-structure-scan/coupling.py",
+        "derived_from": -1
+      },
+      "basis": "derived"
+    },
+    {
+      "index": 1,
+      "goal": "support organizations to estimate their GHG emissions",
+      "severed": "the relation between this factor and the accuracy of the estimate it feeds",
+      "still_acting": "users read the Report tab as an emissions figure",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ASSERTED",
+      "value_string": "",
+      "cite": "Disclaimer!A3",
+      "source_disclaims": "the same cell states the secretariat 'makes no representations as to the accuracy, completeness, suitability or validity of any information on this Spreadsheet'"
+    },
+    {
+      "index": 2,
+      "goal": "raise awareness and promote climate action",
+      "severed": "the relation between an emissions estimate and any action taken",
+      "still_acting": "the number is published and read",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ASSERTED",
+      "value_string": "",
+      "cite": "Disclaimer!A3"
+    },
+    {
+      "index": 3,
+      "goal": "not stated",
+      "severed": "the relation between climate action promoted and emissions reduced",
+      "still_acting": "emissions, which do not consult the estimate",
+      "clock": {
+        "state": "ABSENT"
+      },
+      "basis": "ABSENT",
+      "value_string": ""
+    }
+  ]
+}

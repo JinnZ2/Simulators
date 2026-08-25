@@ -6329,6 +6329,68 @@ underneath).
   **empty**, unlike scan 4's — this order's verdict names carry no
   screened word — and the two arms plus the plant still run. 29 selftest
   checks. Stdlib only, parses under 3.9, CC0.
+- `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
+  not one number: rows are levels indexed from the term outward (negative
+  toward substrate, zero the term as used, positive toward the stated
+  purpose), columns are severed / still_acting / clock / basis, and upward
+  levels add `value_string`, the sign and magnitude of the claimed
+  relation between proxy and goal. **`FM_001`: the arm this order extends
+  is not in this repository** — `severed`, `still_acting` and *deepest
+  still-acting term* return zero hits across the tree, so the seventh
+  instance of the stated-thing-with-no-artifact shape (`MF_017` /
+  `CW_015` / `DL_004` / `GC_012` / `UNI_013` / `SSS_050`) is the largest
+  yet, a missing arm rather than a missing field; **nothing is
+  reconstructed**, and H1's levels −2 and −3 carry `ABSENT` rather than a
+  plausible reading (the `PB_001` / `CW_004` rule). **`FM_002`:** all four
+  S6 fixtures behave as specified — H1's level-0 clock is **derived**
+  (3.0 y ÷ a coupling of **0.8815 measured by perturbation** in
+  `sheet-structure-scan/coupling.py`), H2 returns `NOT_EVALUABLE` with all
+  three scope fields named, H3 refuses the comparison as *"nothing was
+  compared"*, H4 emits both clocks and picks neither. **`FM_003`, the
+  defect a fixture exposed:** the first clock check counted distinct
+  values, so H1 read as a mismatch — level −1 assumes 3.0 years and level
+  0 derives 3.403 from it, which is **one horizon and its own derivative**
+  rather than two in conflict; the false positive runs *toward* the
+  finding, since S5 says a horizon disagreement IS the finding, so an
+  over-firing check manufactures them and every derivation chain in the
+  claim registry would produce one. Repaired with `derived_from`: derived
+  clocks are still emitted, with what they came from, and only the
+  disagreement count excludes them; H1 now reports none and H4 still does.
+  **`FM_005`, the empty cell with two causes:** on H1 level +1 the
+  `value_string` is empty because `Disclaimer!A3` states the goal (*"to
+  support organizations to estimate their GHG emissions"*) and **in the
+  same cell** disclaims the relation (*"makes no representations as to the
+  accuracy, completeness, suitability or validity"*) — not `ABSENT` since
+  a goal is stated, and not ordinary `ASSERTED` either, so the fourteenth
+  instance of the absent-vs-known-negative repair here is the first where
+  the missing state is *the source declined*; carried as `source_disclaims`
+  beside the basis rather than by widening a delivered vocabulary.
+  **`FM_004`:** S2's prediction holds — ASSERTED + ABSENT 3, measured +
+  derived 0, every `value_string` empty — with the scope stated honestly,
+  since two fixtures are excluded as NOT_EVALUABLE and **only H1's three
+  cells trace to an artifact outside this session**, and the prediction
+  file was written before the fixtures but not committed before the run,
+  a weaker registration than WO6's. **`FM_006`:** `NOT_EVALUABLE` is
+  unrankable structurally — `score()` raises on it and on an evaluable
+  term too (*"one term, one grid, not one number"*), and `upward_tally()`
+  excludes refused terms by name rather than counting them as zero; plus
+  one distinction S3 does not make, that a scope field **present but
+  declared unknown** is missing too and is reported apart from an
+  omission. **`FM_007`:** `boundary` and `horizon` are read out of
+  `declared-frame/v2/check_frame.py` at import and asserted in the
+  selftest rather than retyped, so the folders cannot drift, while
+  `with_respect_to` is S3's addition asking a different question (what the
+  ratio is taken *against*, not what is inside the accounting) — and H3's
+  neutral-reading frame is `DF_005` verbatim. **`FM_009`:** S4's neutral
+  reading is a **declared field**, because no string operation turns
+  *efficiency* into *joules out per joule in at the cell surface* and
+  producing one would be inventing a measurement, so a flagged term
+  without one reports `NOT_SUPPLIED`. **`FM_008`:** the three-arm
+  exemption harness `SSS_049` kept for a real case is spent here on
+  exactly one token — S3's class is *efficient/optimal/better/faster* and
+  **`better` alone is on `no_severity`'s list** — with a fourth check
+  asserting the list is length one so a widening turns red. 39 selftest
+  checks. Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

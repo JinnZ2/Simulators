@@ -1,0 +1,149 @@
+fold matrix -- work order 8
+terms: 4
+
+term   H1_grid_emission_factor
+name   grid emission factor
+source UNFCCC GHG emissions calculator ver01.1, md5 57d3ffd78a9f5f9980e15feb65f8d986; Electricity, heat, cooling!B192 (Iraq) = 0.93391 kg CO2e/kWh. Claim record claim-record/records/UNF_GRID_IRAQ.json.
+
+S3 scope        EVALUABLE -- not an efficiency-class term; no scope required
+
+S1 grid
+level  severed                                       still_acting                                  clock        basis   
+-----  --------------------------------------------  --------------------------------------------  -----------  --------
+-3     combustion chemistry: fuel carbon content t…  the actual carbon content of the fuel burne…  ABSENT       ABSENT  
+-2     plant-level heat rate and dispatch order      which plants are on the margin at the hour …  ABSENT       ABSENT  
+-1     the national generation mix that the factor…  the mix keeps changing after the average wa…  3.0 years    ASSERTED
+ 0     -- the term as used --                        the factor multiplies whatever kWh figure t…  3.403 years  derived 
++1     the relation between this factor and the ac…  users read the Report tab as an emissions f…  ABSENT       ASSERTED
++2     the relation between an emissions estimate …  the number is published and read              ABSENT       ASSERTED
++3     the relation between climate action promote…  emissions, which do not consult the estimate  ABSENT       ABSENT  
+
+S2 upward cells
+level  goal                                          basis     value_string  cite         
+-----  --------------------------------------------  --------  ------------  -------------
++1     support organizations to estimate their GHG…  ASSERTED  (empty)       Disclaimer!A3
++2     raise awareness and promote climate action    ASSERTED  (empty)       Disclaimer!A3
++3     not stated                                    ABSENT    (empty)                    
+
+   An empty value_string has more than one cause, and the
+   four basis values do not separate them. On these cells
+   the source states the goal and explicitly declines the
+   relation, which is a different fact from nobody having
+   stated one:
+     +1  the same cell states the secretariat 'makes no representation…
+
+S5 clocks, per level, not collapsed
+level  value  units  assumed?         basis                                       
+-----  -----  -----  ---------------  --------------------------------------------
+-1     3.0    years  assumed          stated in the delivery as a few years and t…
+ 0     3.403  years  derived from -1  derived: time_constant 3.0 y / |coupling| 0…
+
+   1 of these is derived from another level's clock and
+   does not count as a second horizon. It is emitted
+   anyway; only the disagreement count excludes it.
+
+------------------------------------------------------------------
+
+term   H2_more_efficiency
+name   more efficiency solves this
+source the bare claim, as stated. No artifact; this fixture is the sentence itself.
+
+S3 scope        NOT_EVALUABLE -- efficiency-class on efficiency; scope missing: with_respect_to, boundary, horizon
+
+This term is NOT_EVALUABLE. It is not scored, not ranked,
+and not carried into any comparison (S3). That is a refusal
+about what can be read from it, and is not a low reading.
+
+S4 sign hygiene: the name asserts a direction (efficiency)
+   neutral reading NOT_SUPPLIED. It is a declared field,
+   not something a name can be de-signed into.
+
+S1 grid
+level  severed                                       still_acting                         clock   basis   
+-----  --------------------------------------------  -----------------------------------  ------  --------
+ 0     -- the term as used --                        the claim is carried into decisions  ABSENT  ASSERTED
++1     the relation between the ratio and the outc…  whatever 'this' is continues         ABSENT  ABSENT  
+
+S2 upward cells
+level  goal         basis   value_string  cite
+-----  -----------  ------  ------------  ----
++1     solves this  ABSENT  (empty)           
+
+------------------------------------------------------------------
+
+term   H3_tree_replacement
+name   the panel is more efficient than the leaf
+source declared-frame/, the worked panel-vs-leaf pair. DF_005 records that the two frames differ on all three core fields, so the ratio between them is a frame difference.
+
+S3 scope        NOT_EVALUABLE -- efficiency-class on efficient; scope missing: -; declared unknown: boundary
+S3 replacement  NOT_EVALUABLE -- the comparison is against an unread baseline: leaf. This is refused, not scored -- nothing was compared.
+
+This term is NOT_EVALUABLE. It is not scored, not ranked,
+and not carried into any comparison (S3). That is a refusal
+about what can be read from it, and is not a low reading.
+
+S4 sign hygiene: the name asserts a direction (efficient)
+   neutral quantity: electrical joules out per incident joule, at the cell surface, instantaneous
+   frame:            panel frame excludes fabrication, mining, smelting, transport, installation, maintenance and decommission; the leaf frame puts all of them inside the same photon budget (declared-frame DF_005)
+
+S1 grid
+level  severed                                       still_acting                                  clock   basis   
+-----  --------------------------------------------  --------------------------------------------  ------  --------
+ 0     -- the term as used --                        the ratio is quoted across two different ac…  ABSENT  ASSERTED
++1     the relation between the conversion ratio a…  Y's other functions, whatever they are, con…  ABSENT  ABSENT  
+
+S2 upward cells
+level  goal                      basis   value_string  cite
+-----  ------------------------  ------  ------------  ----
++1     therefore Y is redundant  ABSENT  (empty)           
+
+------------------------------------------------------------------
+
+term   H4_reported_divergence_count
+name   the reported divergence count
+source sheet-structure-scan scan 4 on the UNFCCC calculator: 21 DIVERGED of 23 testable relationships (SSS_033, SSS_034). Clocks from claim-record/records/SSS_017.json and UNF_GRID_IRAQ.json.
+
+S3 scope        EVALUABLE -- not an efficiency-class term; no scope required
+
+S1 grid
+level  severed                                       still_acting                                  clock          basis   
+-----  --------------------------------------------  --------------------------------------------  -------------  --------
+-2     the parser revision that produced the count   the reader keeps changing; a count from an …  0.003 years    measured
+-1     the workbook contents the count is taken ov…  the generation mix behind each factor keeps…  3.0 years      ASSERTED
+ 0     -- the term as used --                        the count is quoted as a property of the wo…  NOT_COLLAPSED  measured
++1     the relation between one workbook's count a…  n is 1, and a point is not a rate (SSS_035)   ABSENT         ASSERTED
+
+S2 upward cells
+level  goal                                          basis     value_string  cite                        
+-----  --------------------------------------------  --------  ------------  ----------------------------
++1     characterise how well a workbook's prose an…  ASSERTED  (empty)       sheet-structure-scan/CLAIM_…
+
+S5 clocks, per level, not collapsed
+level  value  units  assumed?  basis                                       
+-----  -----  -----  --------  --------------------------------------------
+-2     0.003  years  assumed   sheetmodel.py was revised twice on 2026-08-…
+-1     3.0    years  assumed   the neglected term of the factors being cou…
+
+   MISMATCH: 2 distinct time constants independently
+   assumed across levels.
+   Both are emitted and no pick is made. A term whose
+   levels disagree on horizon is the finding (S5).
+
+------------------------------------------------------------------
+
+S2, across the terms a comparison may include
+
+basis     upward cells
+--------  ------------
+measured  0           
+derived   0           
+ASSERTED  3           
+ABSENT    1           
+
+cells: 4   empty value_string: 4
+ASSERTED + ABSENT: 4   measured + derived: 0
+P1 (soft majority): True
+P2 (all value_strings empty): True
+
+excluded from this tally as NOT_EVALUABLE (S3): H2_more_efficiency, H3_tree_replacement
+A refused term is not a zero and does not enter a count.

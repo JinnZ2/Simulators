@@ -1,0 +1,47 @@
+fold matrix -- work order 8
+terms: 1
+
+term   H3_tree_replacement
+name   the panel is more efficient than the leaf
+source declared-frame/, the worked panel-vs-leaf pair. DF_005 records that the two frames differ on all three core fields, so the ratio between them is a frame difference.
+
+S3 scope        NOT_EVALUABLE -- efficiency-class on efficient; scope missing: -; declared unknown: boundary
+S3 replacement  NOT_EVALUABLE -- the comparison is against an unread baseline: leaf. This is refused, not scored -- nothing was compared.
+
+This term is NOT_EVALUABLE. It is not scored, not ranked,
+and not carried into any comparison (S3). That is a refusal
+about what can be read from it, and is not a low reading.
+
+S4 sign hygiene: the name asserts a direction (efficient)
+   neutral quantity: electrical joules out per incident joule, at the cell surface, instantaneous
+   frame:            panel frame excludes fabrication, mining, smelting, transport, installation, maintenance and decommission; the leaf frame puts all of them inside the same photon budget (declared-frame DF_005)
+
+S1 grid
+level  severed                                       still_acting                                  clock   basis   
+-----  --------------------------------------------  --------------------------------------------  ------  --------
+ 0     -- the term as used --                        the ratio is quoted across two different ac…  ABSENT  ASSERTED
++1     the relation between the conversion ratio a…  Y's other functions, whatever they are, con…  ABSENT  ABSENT  
+
+S2 upward cells
+level  goal                      basis   value_string  cite
+-----  ------------------------  ------  ------------  ----
++1     therefore Y is redundant  ABSENT  (empty)           
+
+------------------------------------------------------------------
+
+S2, across the terms a comparison may include
+
+basis     upward cells
+--------  ------------
+measured  0           
+derived   0           
+ASSERTED  0           
+ABSENT    0           
+
+cells: 0   empty value_string: 0
+ASSERTED + ABSENT: 0   measured + derived: 0
+P1 (soft majority): None
+P2 (all value_strings empty): None
+
+excluded from this tally as NOT_EVALUABLE (S3): H3_tree_replacement
+A refused term is not a zero and does not enter a count.

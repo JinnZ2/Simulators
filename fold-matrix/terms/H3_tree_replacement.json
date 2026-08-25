@@ -1,0 +1,39 @@
+{
+  "id": "H3_tree_replacement",
+  "name": "the panel is more efficient than the leaf",
+  "source": "declared-frame/, the worked panel-vs-leaf pair. DF_005 records that the two frames differ on all three core fields, so the ratio between them is a frame difference.",
+  "scope": {
+    "with_respect_to": "incident photon energy",
+    "boundary": "unknown",
+    "horizon": "instantaneous"
+  },
+  "replacement": {
+    "X": "photovoltaic panel",
+    "Y": "leaf",
+    "claim": "X converts a larger fraction of incident photon energy, therefore Y is redundant",
+    "Y_function_set": "UNREAD",
+    "Y_functions": []
+  },
+  "neutral_reading": {
+    "quantity": "electrical joules out per incident joule, at the cell surface, instantaneous",
+    "frame": "panel frame excludes fabrication, mining, smelting, transport, installation, maintenance and decommission; the leaf frame puts all of them inside the same photon budget (declared-frame DF_005)"
+  },
+  "levels": [
+    {
+      "index": 0,
+      "severed": "-- the term as used --",
+      "still_acting": "the ratio is quoted across two different accounting boundaries",
+      "clock": {"state": "ABSENT"},
+      "basis": "ASSERTED"
+    },
+    {
+      "index": 1,
+      "goal": "therefore Y is redundant",
+      "severed": "the relation between the conversion ratio and Y's function set",
+      "still_acting": "Y's other functions, whatever they are, continue unread",
+      "clock": {"state": "ABSENT"},
+      "basis": "ABSENT",
+      "value_string": ""
+    }
+  ]
+}

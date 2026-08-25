@@ -1,0 +1,59 @@
+fold matrix -- work order 8
+terms: 1
+
+term   H1_grid_emission_factor
+name   grid emission factor
+source UNFCCC GHG emissions calculator ver01.1, md5 57d3ffd78a9f5f9980e15feb65f8d986; Electricity, heat, cooling!B192 (Iraq) = 0.93391 kg CO2e/kWh. Claim record claim-record/records/UNF_GRID_IRAQ.json.
+
+S3 scope        EVALUABLE -- not an efficiency-class term; no scope required
+
+S1 grid
+level  severed                                       still_acting                                  clock        basis   
+-----  --------------------------------------------  --------------------------------------------  -----------  --------
+-3     combustion chemistry: fuel carbon content t…  the actual carbon content of the fuel burne…  ABSENT       ABSENT  
+-2     plant-level heat rate and dispatch order      which plants are on the margin at the hour …  ABSENT       ABSENT  
+-1     the national generation mix that the factor…  the mix keeps changing after the average wa…  3.0 years    ASSERTED
+ 0     -- the term as used --                        the factor multiplies whatever kWh figure t…  3.403 years  derived 
++1     the relation between this factor and the ac…  users read the Report tab as an emissions f…  ABSENT       ASSERTED
++2     the relation between an emissions estimate …  the number is published and read              ABSENT       ASSERTED
++3     the relation between climate action promote…  emissions, which do not consult the estimate  ABSENT       ABSENT  
+
+S2 upward cells
+level  goal                                          basis     value_string  cite         
+-----  --------------------------------------------  --------  ------------  -------------
++1     support organizations to estimate their GHG…  ASSERTED  (empty)       Disclaimer!A3
++2     raise awareness and promote climate action    ASSERTED  (empty)       Disclaimer!A3
++3     not stated                                    ABSENT    (empty)                    
+
+   An empty value_string has more than one cause, and the
+   four basis values do not separate them. On these cells
+   the source states the goal and explicitly declines the
+   relation, which is a different fact from nobody having
+   stated one:
+     +1  the same cell states the secretariat 'makes no representation…
+
+S5 clocks, per level, not collapsed
+level  value  units  assumed?         basis                                       
+-----  -----  -----  ---------------  --------------------------------------------
+-1     3.0    years  assumed          stated in the delivery as a few years and t…
+ 0     3.403  years  derived from -1  derived: time_constant 3.0 y / |coupling| 0…
+
+   1 of these is derived from another level's clock and
+   does not count as a second horizon. It is emitted
+   anyway; only the disagreement count excludes it.
+
+------------------------------------------------------------------
+
+S2, across the terms a comparison may include
+
+basis     upward cells
+--------  ------------
+measured  0           
+derived   0           
+ASSERTED  2           
+ABSENT    1           
+
+cells: 3   empty value_string: 3
+ASSERTED + ABSENT: 3   measured + derived: 0
+P1 (soft majority): True
+P2 (all value_strings empty): True
