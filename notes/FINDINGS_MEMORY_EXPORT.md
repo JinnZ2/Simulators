@@ -2,14 +2,14 @@
 
 Read against `notes/memory-export/files/`, which is stored verbatim. Nothing
 here is a verdict on the export, and no stored file was modified. Counts are recomputed
-each batch. Delivery is complete: 63 of 63 files, 0 of 12 tier 3 by the
+each batch. Delivery is complete: 64 files against a manifest stating 63 — see finding 42, 0 of 12 tier 3 by the
 manifest's own decision. The tier 1 / tier 2 split these findings tracked was
 superseded by a manifest revision — see finding 41.
 
 ## 1. Cross-references, and what "unresolved" means
 
 ```
-63 files   121 links   46 distinct names   45 resolve in folder   1 do not
+64 files   128 links   46 distinct names   ALL resolve   0 do not
 ```
 
 "Not in the folder" covers three different situations, and the distinction was
@@ -993,6 +993,52 @@ adds a fifth error of a different kind — an inference that was correct against
 a superseded document. Two theses and one axis were declined rather than
 adjudicated, with the interest direction named each time, and finding 40
 records that a decline is not automatically neutral.
+
+## 42. The graph closes, the count does not, and a repo-side gap closes from
+the memory side
+
+`question-availability` was the last unresolved cross-ref and the name finding
+41 guessed at. It has arrived.
+
+**The link graph closes completely.** 64 files, 128 links, 46 distinct names,
+**zero unresolved**. Every `[[...]]` reference in the export now resolves —
+inside the folder, to a repo folder, to a repo module, or to a repository.
+Across this reading's history four names were filed as absent and every one
+eventually arrived.
+
+**The count is off by one.** The revised manifest states 63 files. 64 are
+stored, and `SCRUB_RULES.md` is not among them — it sits beside `files/`, not
+in it. So either the manifest's count is one short or one delivered file was
+not counted in it. Recorded, not resolved: nothing in the export enumerates its
+own contents, so there is no list to diff against.
+
+**A gap the repo recorded as open closes from the memory side.**
+`uninstrumented/CLAIM_TABLE.md` `UNI_012` tabulates four mechanisms named in
+the register's own literature note against whether they made the eight-item
+list, and marks two `no`. Of those, `undeclared frames` has a whole folder
+(`declared-frame/`) instead of an entry, and the table records that **"affect
+routing has neither."**
+
+`question-availability` supplies it: Q2, UNASKABLE, "the candidate mechanism
+name for this is AFFECT ROUTING — the label applies PRIOR TO CONTENT." Fourth
+name the repo flagged as a dangling reference that the memory set turns out to
+hold, after `energy-english`, `moral-claim-decomposer` and
+`geometric-to-binary-bridge`.
+
+**And it collides.** The file proposes Q2 as "candidate ninth exclusion
+mechanism for `uninstrumented`". The repo already assigns the ninth slot —
+`category-weld/MECHANISM_09.md`, CATEGORY WELD — while the `uninstrumented`
+memory file leaves slot 9 unnamed as "(fusion/concealment)", which finding 37
+recorded as the one place the tree ran ahead of the export. So there are now
+two candidates for one ordinal, from two sides. Not adjudicated here: which
+mechanism holds a slot is an authoring decision, and the register's own rule is
+that a mechanism earns its place from a filed case rather than from a proposal.
+
+The file also carries its own defect rather than waiting to be told:
+**"Q1 has no negative evidence by construction — 'not asked' and 'asked and not
+found' are not distinguishable from outside. All Q1 cases are provisional until
+a criterion exists."** That is `null-harness`'s reachable-negative requirement
+stated against the file's own first category.
 
 ## What was not checked, deliberately
 

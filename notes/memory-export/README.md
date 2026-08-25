@@ -19,7 +19,11 @@ states the refutation protocol applies to it.
 
 ## Arrival state
 
-**Complete: 63 of 63 files.**
+**Complete: 64 files stored, against a manifest stating 63.** The off-by-one
+is recorded in finding 42 and not resolved — the export does not enumerate its
+own contents, so there is no list to diff against.
+
+All 46 cross-reference names resolve; the link graph closes with none dangling.
 
 The manifest was revised after delivery finished. The version this folder was
 built against split the export into tier 1 "exported unchanged (57 files)" and
