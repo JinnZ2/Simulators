@@ -161,3 +161,40 @@ an identical *"Created on December 29, 2016"*. A finding replicating
 across them is a finding about the template, so the second file confirms
 less than its arrival suggests — recorded as `FM_023` rather than counted
 as a second observation.
+
+
+---
+
+# OUTCOME, updated — a blank template, but not the one
+
+A blank business plan template arrived as **pasted text**, and it is
+**not the SBA blank traditional template**: 1 of its 9 section names
+appears in the two filled SBA plans, and of twelve SBA headings only
+three appear here, two as incidental phrases. `FM_026`.
+
+So the registered predictions stay unaddressed for the file they name,
+and the template is scored as a new candidate.
+
+| | prediction | outcome, on this template |
+|---|---|---|
+| P1a | zero quantified downward stops | **HOLDS** |
+| P1b | `unmeasured_span_min` uninterpretable | **HOLDS** — not computable |
+| P1c | `enumeration_basis` UNREAD **by construction** | **REFUTED** — `document_named`; a blank form is the *most* enumerable document there is, since its structure is all it has |
+| P3 | upward triple `+ / ABSENT / ABSENT` | **HOLDS** |
+| P4 | upward cells ABSENT not ASSERTED | **REFUTED** under the constructible reading; vacuous under the other |
+
+**P4 needed a decision the order does not settle.** A blank template has
+no business activity, so under WO8's own reading — term = the thing the
+business does — level 0 is a slot and there is no grid. Under the other
+reading, term = the document, and the template plainly states goals:
+*"Goal is to capture the reader's attention"*, *"Show the business model
+is profitable and viable for the next 3–5 years."* Those are ASSERTED.
+Both readings are recorded and neither is picked (`FM_028`).
+
+**P3's registered reading is what the corpus shows and not by the route
+it named.** *Filled plan purpose statements carry no more information
+than the blank form* — across **two different templates** every purpose
+statement is `+ / ABSENT / ABSENT`. The matched within-template
+comparison still needs the SBA blank.
+
+**Fourteen upward cells, four sources, zero magnitudes, zero units.**

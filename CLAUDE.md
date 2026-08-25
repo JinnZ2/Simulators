@@ -6481,7 +6481,35 @@ underneath).
   last two show a quantity can be about someone else entirely and still
   sit in the plan's own downward arm. **`FM_025`: across four terms and
   three sources, 11 upward cells carry 6 stated directions, 0 magnitudes
-  and 0 units.** **`FM_020`: S1a's downward rule has two
+  and 0 units.** **A blank template then arrived and it is NOT the SBA
+  one** (`FM_026`) — 1 of its 9 section names appears in the filled plans
+  — so the registered P1/P3/P4 stay unaddressed for the file they name and
+  it is scored as a new candidate, with a provenance asymmetry recorded
+  (the plans came as `.doc` with container, piece table, author and date;
+  this came as text with none). **`FM_027`, a fourth kind of number:**
+  **all ten** dollar figures sit inside an `(e.g., …)` — not the
+  organisation's, not a third party's, not an external statistic, but **an
+  example of the shape a quantity would take**, belonging to nobody — and
+  the template **names nine computed quantities without computing one**
+  (Revenue Projections, Cash Flow, Balance Sheet, Break-even, Net Profit,
+  COGS, TAM, SAM, SOM), so a document can be dense in quantity names while
+  computing nothing. **`FM_029`, P1's third clause refuted in the
+  interesting direction:** `enumeration_basis` is `document_named`, not
+  UNREAD "by construction" — **a blank form is the most enumerable kind of
+  document there is**, its structure being all it has, so the least
+  informative document in the corpus has the best level enumeration and
+  those are the same fact. **`FM_028`:** a blank template has **no term**,
+  so *one term, one grid* has two readings that disagree — under WO8's own
+  (term = the business activity) level 0 is a slot and there is no grid,
+  under the other (term = the document) the template plainly states goals
+  and **P4 is refuted**; both recorded, neither picked. **`FM_030`:** the
+  only clock in any of the three business documents is in the blank one
+  (§8's *"next 3–5 years"*), explicitly not evidence that filling a form
+  drops its horizon, since the templates differ. **`FM_031`: across four
+  sources, 14 upward cells carry 8 stated directions, 0 magnitudes and 0
+  units**, with the blank template the strongest single case since its
+  purpose statements are what a form *asks for* rather than what one
+  company wrote. **`FM_020`: S1a's downward rule has two
   states and needed three** — it distinguishes *computed* from
   *physically existing but uncalculated*, and a rate card is neither, a
   number the organisation produced and stated, underived in both

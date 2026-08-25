@@ -1,5 +1,5 @@
 fold matrix -- work order 8
-terms: 6
+terms: 7
 
 term   H1_grid_emission_factor
 name   grid emission factor
@@ -294,24 +294,75 @@ downward  ABSENT  ABSENT [ABSENT]                     no level carries a quantit
 
 ------------------------------------------------------------------
 
+term   S4_blank_template_document
+name   the business plan document
+source A blank business plan template, delivered as pasted text in conversation. Landed verbatim at fold-matrix/sources/blank_template_pasted.md. Nine sections plus a Tips section.
+
+S3 scope        EVALUABLE -- not an efficiency-class term; no scope required
+
+S1 grid
+level  severed                                       still_acting                                  clock      basis   
+-----  --------------------------------------------  --------------------------------------------  ---------  --------
+-2     the business's actual quantities -- revenue…  nothing yet: there is no business behind a …  ABSENT     ABSENT  
+-1     any figure and the thing it would measure     -                                             ABSENT     ABSENT  
+ 0     -- the term as used: the plan document itse…  the form is filled in, or is not              ABSENT     ASSERTED
++1     the relation between an executive summary a…  readers read or do not                        ABSENT     ASSERTED
++2     the relation between a forecast and viabili…  the business is viable or is not, on its own  4.0 years  ASSERTED
++3     the relation between a completed plan and w…  funding decisions, which the template never…  ABSENT     ABSENT  
+
+S2 upward cells
+level  goal                                          basis     sign    magnitude  unit    cite                    
+-----  --------------------------------------------  --------  ------  ---------  ------  ------------------------
++1     capture the reader's attention and summariz…  ASSERTED  +       ABSENT     ABSENT  'One-to-two-page summar…
++2     show the business model is profitable and v…  ASSERTED  +       ABSENT     ABSENT  'Show the business mode…
++3     not stated                                    ABSENT    ABSENT  ABSENT     ABSENT                          
+
+   The three fields do not fail together on 2 cell(s).
+   A stated direction with no size is the ordinary shape
+   of a purpose claim, and one free-text field recorded
+   it as identical to a cell nobody wrote anything in.
+
+S1a stops, from the document set
+stop      level   what                                why                                             
+--------  ------  ----------------------------------  ------------------------------------------------
+upward    +2      section 8 preamble, blank busines…  highest level with a stated artifact; 1 level(s…
+downward  ABSENT  ABSENT [ABSENT]                     no level carries a quantity the organisation co…
+
+   unmeasured_span_min: not computable
+   enumeration_basis:   document_named
+   not computable: no computed quantity
+   Emitted, not scored (S1a). The name is the reading: a floor,
+   not a measurement of the world.
+
+   plan_exists yes | practice_tracks_plan UNREAD
+   Its own column. It is not a basis and does not enter one.
+   the document is a template FOR a plan, so a plan exists in th…
+
+S5 clocks, per level, not collapsed
+level  value  units  assumed?  basis                                       
+-----  -----  -----  --------  --------------------------------------------
++2     4.0    years  assumed   stated in the section 8 preamble as 'the ne…
+
+------------------------------------------------------------------
+
 S2, across the terms a comparison may include
 
 basis     upward cells
 --------  ------------
 measured  0           
 derived   0           
-ASSERTED  8           
-ABSENT    3           
+ASSERTED  10          
+ABSENT    4           
 
 value_string, per field
 field      ABSENT on  of cells
 ---------  ---------  --------
-sign       5          11      
-magnitude  11         11      
-unit       11         11      
+sign       6          14      
+magnitude  14         14      
+unit       14         14      
 
-cells: 11   all three ABSENT: 5   split: 6
-ASSERTED + ABSENT: 11   measured + derived: 0
+cells: 14   all three ABSENT: 6   split: 8
+ASSERTED + ABSENT: 14   measured + derived: 0
 P1 (soft majority): True
 P3 (at least one cell splits): True
 P4 (no magnitude anywhere): True

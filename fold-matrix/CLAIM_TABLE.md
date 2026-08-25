@@ -737,3 +737,199 @@ uniform: a direction, and nothing else.
 **Falsifier:** an upward cell carrying a magnitude, anywhere.
 
 **Status: SUPPORTED, at n = 3 sources with the dependence stated.**
+
+---
+
+### FM_026 — a blank template arrives and it is not the one the predictions were registered against
+
+Delivered as pasted text, landed verbatim at
+`sources/blank_template_pasted.md`. Nine sections plus a Tips section.
+
+**It is not the SBA blank traditional template.** Measured rather than
+asserted: **1 of its 9 section names** appears anywhere in the two filled
+SBA plans (`Executive Summary`), and of twelve SBA headings only three
+appear here — two of them as incidental phrases inside other sections
+(`market research data / surveys` in the Appendix, `Marketing & Sales:
+30%` in Use of Funds).
+
+So **P1, P3 and P4 remain NOT ADDRESSABLE for the file they were
+registered against**, and what follows is a new candidate scored on its
+own.
+
+**Provenance asymmetry, recorded.** The two filled plans arrived as
+`.doc` files with a container, a piece table, an author line and a
+creation date. This arrived as text with none of those — no author, no
+date, no file, nothing to check a claim about its origin against. A
+weaker artifact in a way nothing in its content shows.
+
+**Falsifier:** the SBA blank template, which would make the registered
+comparison available.
+
+**Status: SUPPORTED. The registered predictions are still unaddressed.**
+
+---
+
+### FM_027 — a fourth kind of number: an example of a quantity
+
+`FM_024` found three kinds of dollar figure, divided by whose quantity
+they are. This template adds a fourth, and it is unanimous:
+
+**All ten dollar figures are inside an `(e.g., ...)`** — `$5 billion`,
+`$1M`, `$500,000`, `$10 Billion`, `$2 Billion`, `$50 Million`,
+`$200,000`, `$150,000`, `$100,000`, `$50,000` — plus two slot markers
+`$[Price]`.
+
+| kind | example | whose | computed |
+|---|---|---|---|
+| stated tariff | `$5`–`$35` by product | the company's | no |
+| third party's property | customer income `$35,000`–`$80,000` | someone else's | no |
+| external statistic | industry revenue `$1.2M` | nobody's in particular | no |
+| **illustrative example** | `(e.g., $10 Billion)` TAM | **nobody's** | no |
+
+The fourth is the emptiest: not the organisation's, not a third party's,
+not an external fact — **an example of the shape a quantity would take**,
+belonging to no one and computed by no one.
+
+**And the template names nine computed quantities without computing
+one:** Revenue Projections, Cash Flow Statement, Balance Sheet,
+Break-even Analysis, Net Profit, COGS, TAM, SAM, SOM all appear as
+section content. **Naming a quantity and computing it are different
+acts**, and this document performs the first nine times.
+
+That is the sharpest form of `FM_020`'s gap so far: S1a's floor asks for
+a quantity the organisation computes, and a document can be *dense* in
+quantity names while computing nothing.
+
+**Falsifier:** a dollar figure in this template outside an example or a
+slot.
+
+**Status: SUPPORTED, 10 of 10.**
+
+---
+
+### FM_028 — a blank template has no term, so "one term, one grid" has two readings and they disagree on P4
+
+S1 is *one term, one grid*. The filled plans had a term — the consulting
+engagement, the toy sold. **A blank template has a slot where the term
+goes.**
+
+| reading | level 0 | grid | P4 |
+|---|---|---|---|
+| term = the business activity (what WO8 uses for the filled plans) | a **slot**, unfillable | **not constructible** | vacuous |
+| term = **the document itself** | the plan as an artifact | constructible, and built | **REFUTED** |
+
+Under the second reading the template **does** state goals, at section
+level: *"Goal is to capture the reader's attention and summarize the
+entire plan"* (§1) and *"Show the business model is profitable and viable
+for the next 3–5 years"* (§8). Those are `ASSERTED`, not `ABSENT`, so
+P4's *"document does not reach a level where a goal could be stated"* is
+false of this document.
+
+Under the first reading there is no grid to have cells in, and P4 is
+neither true nor false.
+
+**Both readings are stated in the term file and neither is picked.** The
+grid built is the second, because it is the one that is constructible;
+that is a choice about what can be read, not a claim that the first
+reading is wrong.
+
+**Falsifier:** a blank template carrying a term at level 0.
+
+**Status: SUPPORTED. P4 REFUTED under the constructible reading, vacuous
+under the other.**
+
+---
+
+### FM_029 — P1's third clause is refuted, and refuted in the interesting direction
+
+P1: *zero quantified downward stops, `unmeasured_span_min`
+uninterpretable, `enumeration_basis` UNREAD **by construction**.*
+
+| clause | outcome |
+|---|---|
+| zero quantified downward stops | **HOLDS** |
+| `unmeasured_span_min` uninterpretable | **HOLDS** — `not computable` |
+| `enumeration_basis` UNREAD by construction | **REFUTED** |
+
+The basis is `document_named`, and correctly: the template **names its
+own sections**, which is exactly what `document_named` means. *"By
+construction"* had it backwards — **a blank form is the most enumerable
+kind of document there is**, because its structure is all it has. The
+filled plans' downward levels needed a physical chain read off them; the
+template's needed nothing but its own table of contents.
+
+So the least informative document in the corpus has the **best** level
+enumeration in it, and the two facts are the same fact: nothing but
+structure.
+
+**Falsifier:** a blank template whose level set cannot be enumerated from
+its own sections.
+
+**Status: P1 two clauses SUPPORTED, third REFUTED.**
+
+---
+
+### FM_030 — the only clock in any of the three business documents is in the blank one
+
+| document | clocks at any level |
+|---|---|
+| We Can Do It Consulting (filled) | **none** |
+| Wooden Grain Toy Company (filled) | **none** |
+| the blank template | **one** — 4.0 years at level +2 |
+
+The template's §8 asks for a forecast over *"the next 3–5 years"*. That
+is a stated horizon, and it is the only time constant anywhere in the
+three.
+
+Neither filled plan carries one — but they are a **different template**
+(`FM_026`), one whose sections stop before Financial Projections, so this
+is not evidence that filling a form drops its horizon. What it does show
+is that a horizon is cheap to state and appears where a form asks for it.
+
+The clock is recorded as the stated range's midpoint with the range in
+the basis string, since *3–5 years* is the quantity and 4.0 is a reading
+of it.
+
+**Falsifier:** a clock in either filled plan.
+
+**Status: SUPPORTED, and explicitly not a claim about what filling does.**
+
+---
+
+### FM_031 — across four sources the upward format has not varied once
+
+Fourteen upward cells now, across a published UN emissions calculator, a
+repo-internal scan reading, the SBA filled template, and this blank one.
+
+| | cells |
+|---|---|
+| `measured` | **0** |
+| `derived` | **0** |
+| `ASSERTED` | 10 |
+| `ABSENT` | 4 |
+
+| field | ABSENT on | of |
+|---|---|---|
+| sign | 6 | 14 |
+| **magnitude** | **14** | **14** |
+| **unit** | **14** | **14** |
+
+Eight cells state a direction. **None states a size. None states a
+unit.** P1, P3 and P4 hold at every scale tested.
+
+**What the blank template adds is the strongest single case**, because
+its purpose statements are what a form *asks for* rather than what one
+company wrote — and they have the same shape. The registered reading was
+*filled plan purpose statements carry no more information than the blank
+form*; across two different templates that is what the format shows,
+while the matched within-template comparison it named still needs the SBA
+blank.
+
+Sources are four and independence is less: two of them are documents this
+repository did not write and did not choose the format of, one is the
+repository itself, and the SBA pair collapses to one template
+(`FM_023`).
+
+**Falsifier:** one upward cell, anywhere, carrying a magnitude.
+
+**Status: SUPPORTED at n = 4 sources, with the dependence stated.**

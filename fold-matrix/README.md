@@ -11,7 +11,8 @@ not one number.
 | `terms/` | the four S6 fixtures, as data |
 | `PREDICTIONS_WO8.md` | S2's v1 prediction |
 | `PREDICTIONS_WO8_V2.md` | the revised prediction, and what is not blind about it |
-| `CLAIM_TABLE.md` | `FM_001..025` |
+| `CLAIM_TABLE.md` | `FM_001..031` |
+| `sources/` | delivered source material, verbatim |
 | `PREDICTIONS_SBA.md` | the SBA run's predictions, registered before any fetch |
 | `samples/` | one pinned run of each |
 
@@ -119,7 +120,7 @@ registered because the format is new and the split had not been computed.
 format on a workbook nobody here has opened, and `SSS_053` is why there
 is not one.
 
-## The SBA run: two files of three
+## The SBA run: two filled plans, and a blank template that is not the one
 
 `sba.gov` refuses CONNECT, and two files were uploaded — **neither under
 the name the order gave.** Their author lines read *"Rebecca Champ,
@@ -172,10 +173,37 @@ the UNFCCC disclaimer. The registered reading was *filled plan purpose
 statements carry no more information than the blank form*, and the blank
 form is exactly what did not arrive.
 
-**Across four terms and three sources: 11 upward cells, 6 with a stated
-direction, 0 with a magnitude, 0 with a unit** (`FM_025`). Three sources,
-not four, since the two plans are one template — and one of the three is
-this repository, which is not an independent observer of its own claims.
+**A blank template then arrived and it is not the SBA one** — 1 of its 9
+section names appears in the filled plans (`FM_026`) — so the registered
+P1, P3 and P4 stay unaddressed for the file they name, and it is scored
+as a new candidate. Three results from it.
+
+**A fourth kind of number** (`FM_027`): all ten dollar figures sit inside
+an `(e.g., …)`. Not the organisation's, not a third party's, not an
+external statistic — **an example of the shape a quantity would take**,
+belonging to nobody. And the template **names nine computed quantities
+without computing one** (Revenue Projections, Cash Flow, Balance Sheet,
+Break-even, Net Profit, COGS, TAM, SAM, SOM). Naming and computing are
+different acts, and a document can be dense in quantity names while
+computing nothing.
+
+**P1's third clause is refuted, in the interesting direction**
+(`FM_029`): `enumeration_basis` is `document_named`, not UNREAD "by
+construction" — **a blank form is the most enumerable kind of document
+there is**, because its structure is all it has. The least informative
+document in the corpus has the best level enumeration in it, and those
+are the same fact.
+
+**P4 needed a decision the order does not settle** (`FM_028`): a blank
+template has no term, so under WO8's own reading level 0 is a slot and
+there is no grid; under the reading where the term is the *document*, the
+template plainly states goals and P4 is refuted. Both recorded, neither
+picked.
+
+**Across four sources: 14 upward cells, 8 stated directions, 0
+magnitudes, 0 units** (`FM_031`) — with the blank template the strongest
+single case, since its purpose statements are what a form *asks for*
+rather than what one company wrote, and they have the same shape.
 
 ## The arm this extends is not here
 
