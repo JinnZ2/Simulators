@@ -5640,7 +5640,55 @@ underneath).
   keeping it as the register's candidate — which closes the loop `QA_003`
   opened, though the register's tuple still holds eight and
   `affect_routing` is still not in it: the naming is settled, the filing is
-  not. Stdlib only, parses under 3.9, CC0.
+  not. **`CLASSIFICATION_NOTE.md` then proposes a THIRD mechanism** —
+  *recorded, archived, and filed under a category that isn't evidence*,
+  on the HBC post journals (continuous from 1670, catalogued to shelf
+  mark) and Foxfire (twelve volumes, filed under folklore): *"a wolf
+  behaviour account in Foxfire is a hunting tale; the same account in a
+  field notebook is data."* **`OE_013`, and it undercuts §4:** the
+  censoring correction §4 calls THE STRUCTURAL CORE is a property of the
+  **source**, not of the method — on a contemporaneous continuous archive
+  both delay terms collapse, a true twenty-year lead is recovered
+  **whole** against 0.22 at the spec's own stipulated trade-press hazard,
+  and a true ten-year lead comes out positive **every time** instead of
+  47% of the time; so the whole of §4 including the `OE_008` sign error
+  is machinery for a source choice, and **§6 lists trade press first by
+  tractability** where the ordering should be by delay, the two being
+  close to opposite — the easiest corpus to reach is the one that
+  destroys most of the signal. **`OE_014`:** the two archives
+  **decompose the delay §4 could not** — §11 asks for δ_survive from *"a
+  known-complete archive"* and names none, HBC zeroes BOTH terms, and
+  Foxfire (interviews from 1966 about earlier practice, published and in
+  print) holds δ_survive at zero while δ_write is large, so the term §4
+  CAN estimate is isolable there; that is the repair `OE_009` needed,
+  since F4's bias lives in survival and §8's test measures writing.
+  **`OE_015`:** distinct from all eleven filed on thirteen comparisons —
+  nearest is `SCORED_AS_WASTE` and it fails on the right distinction,
+  waste being a devaluation **inside one ledger** where this is a
+  **transfer to a different one**, while `MODALITY` fails for the reason
+  that makes the mechanism interesting (the apparatus is a catalogue, in
+  the right channel, and it *routes* rather than misses) — and **the
+  ordinal is ambiguous by exactly three**, which is why the off-by-three
+  has now happened twice (`QA_002`, `nonidentity-census` T4): the
+  register's `MECHANISMS` tuple holds 8 in one file and `MECHANISM_NN.md`
+  holds 3 in sibling folders numbered as if they continue it, so SPEC_V2
+  §1's candidate is either the ninth tuple entry (colliding with CATEGORY
+  WELD) or the twelfth file, both defensible. On the continuing sequence
+  this note's mechanism is 13th. **`OE_016`:** first mechanism in this
+  family with a **metadata signature** — subject classification (free),
+  citing-field distribution (a citation database), content-vs-filing
+  mismatch (a reading sample) — with the stated prediction that citations
+  to a folklore-filed behavioural corpus cluster in folklore and
+  area-studies venues and are near-absent in the field the observation is
+  about; that tests the **mechanism** where the lead-time study tests its
+  *consequence*, is cheaper, and has a reachable negative unlike §7's F1.
+  **`OE_017`:** every archive fact is carried and egress-blocked with
+  nothing in `OE_013`–`OE_016` resting on it, plus one flagged before
+  anyone orders boxes — HBCA puts a **series letter** between post number
+  and volume, so Albany post journals would be **`B.3/a/1-212`** and not
+  `B.3/1-212`; stated from memory, unverified, and the correction is a
+  shelf mark, so a reader following the note as written asks for a series
+  that does not exist. Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

@@ -193,6 +193,74 @@ three drops ago. The register's `MECHANISMS` tuple still holds eight and
 `affect_routing` is still not in it: **the naming is settled, the filing
 is not.**
 
+## The classification note: a third mechanism, and it undercuts §4
+
+The note proposes something beside no-channel exclusion and
+entry-penalised unaskability: **recorded, archived, and filed under a
+category that isn't evidence.** *"A wolf behaviour account in Foxfire is
+a hunting tale; the same account in a field notebook is data."* Checked
+in `classification_check.py`, which imports `archival_bias.py` rather
+than re-modelling the delay.
+
+**`OE_013` — the correction §4 calls "THE STRUCTURAL CORE" is a property
+of the SOURCE, not of the method.** §4 exists because an oral reading
+reaches the record late. HBC post journals record daily occurrences of
+note, at the post, in an unbroken series catalogued to shelf mark, and
+both delay terms collapse: a true twenty-year lead is recovered **whole**
+(0.22 of it at the spec's stipulated trade-press hazard), and a true
+ten-year lead comes out positive **every time** instead of 47% of the
+time. So the whole of §4 — including the sign error at `OE_008` — is
+machinery for a source choice. **§6 lists trade press first, by
+tractability**; on this reading the ordering should be by *delay*, and
+the two are close to opposite: the easiest corpus to reach is the one
+that destroys most of the signal.
+
+**`OE_014` — the two archives decompose the delay §4 could not, which
+repairs `OE_009`.** §4 says δ̂ recovers δ_write and not δ_survive; §11
+asks for δ_survive from *"a known-complete archive"* and names none. The
+note names one. HBC zeroes **both** terms. Foxfire — interviews from 1966
+about earlier practice, published and in print — holds δ_survive at zero
+while δ_write is large, so **the term §4 can estimate is isolable
+there**. Between the two archives both terms come apart, which is
+precisely what `OE_009` needed: F4's bias lives in survival, and §8's
+proposed test measures writing.
+
+**`OE_015` — distinct from all eleven, and the ordinal is ambiguous by
+exactly the size of both prior errors.** Nearest neighbour is
+`SCORED_AS_WASTE`, and it fails on the right distinction — waste is a
+devaluation **inside one ledger**, this is a **transfer to a different
+one**; the material keeps its value, in a readership that is not the one
+it bears on. `MODALITY` fails for the reason that makes the mechanism
+interesting: the apparatus is a catalogue, it is in the right channel,
+and it *routes* rather than misses. The ordinal cannot be resolved from
+inside the tree — the register's `MECHANISMS` tuple holds **8** in one
+file, `MECHANISM_NN.md` holds **3** in sibling folders numbered as if
+they continue it, so SPEC_V2 §1's candidate is either the ninth tuple
+entry (colliding with CATEGORY WELD) or the twelfth file. **Both
+defensible, differing by three** — the exact size of `QA_002` and of
+`nonidentity-census` T4. Two people have now made the same slip against
+an unreconciled pair of sequences.
+
+**`OE_016` — the first mechanism in this family with a metadata
+signature.** Subject classification is free (catalogue metadata),
+citing-field distribution needs a citation database, content-vs-filing
+mismatch needs a reading sample. The prediction: citations to a
+folklore-filed corpus containing behavioural observation should cluster
+in folklore and area-studies venues and be **near-absent in the field the
+observation is about**. That tests the **mechanism** where the lead-time
+study tests its *consequence*, it is cheaper, and it has a reachable
+negative — unlike §7's F1. Egress-blocked here; third item in this family
+`notes/study_watch.py` was built for.
+
+**`OE_017` — everything about both archives is carried and unchecked, and
+one of it is probably wrong.** Nothing in `OE_013`–`OE_016` rests on any
+of it. But flagged before anyone orders boxes: HBCA classification puts a
+**series letter** between post number and volume, section B is post
+records and post journals are series `a`, so Albany journals would be
+**`B.3/a/1-212`** rather than `B.3/1-212`. From memory, unverified, cheap
+to confirm — and the correction is a shelf mark, so a reader following
+the note as written asks for a series that does not exist.
+
 ## Where it sits
 
 `question-availability/` is the parent and `OE_006` is the connection that

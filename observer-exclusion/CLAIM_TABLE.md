@@ -384,3 +384,165 @@ it — the filing is named, not done.
 would close it.
 
 **Status: SUPPORTED. The naming is settled; the filing is not.**
+
+---
+
+## Claims against `CLASSIFICATION_NOTE.md`
+
+The note proposes a **third** thing beside no-channel exclusion and
+entry-penalised unaskability: *recorded, archived, and filed under a
+category that isn't evidence.* Checked in `classification_check.py`,
+which imports `archival_bias.py` rather than re-modelling the delay.
+
+---
+
+### OE_013 — the censoring correction §4 calls its structural core is a property of the SOURCE, not of the method
+
+§4 exists because the excluded reading is oral and reaches the written
+record late. The note's own archives are not that.
+
+| source profile | hazard | mean delay (y) | fraction of a 20-y lead recovered | P(L>0) at true lead 10 |
+|---|---|---|---|---|
+| spec's stipulated trade press | 0.06 | 16.7 | 0.22 | 0.47 |
+| partially catalogued | 0.25 | 4.0 | 0.85 | 0.94 |
+| continuous, contemporaneous (HBC) | 0.95 | 1.1 | **1.00** | **1.00** |
+
+HBC post journals record daily occurrences of note, at the post, in an
+unbroken series catalogued to shelf mark. Both delay terms collapse: a
+true twenty-year lead is recovered whole, and a true ten-year lead comes
+out positive every time instead of 47% of the time.
+
+So the whole of §4 — **including the sign error at `OE_008`** — is
+machinery for a *source choice*, not for the method. Pick a
+contemporaneous continuous archive and it is not needed.
+
+**§6 lists trade press FIRST, by tractability.** On this reading the
+ordering should be by *delay*, and the two are close to opposite: the
+easiest corpus to reach is the one that destroys most of the signal.
+
+**Falsifier:** a contemporaneous continuous archive whose measured
+first-surviving-artifact delay is nonetheless of order the trade-press
+delay — which would make the correction a property of the method after
+all.
+
+**Status: SUPPORTED.**
+
+---
+
+### OE_014 — the two named archives decompose the delay §4 could not, and that repairs `OE_009`
+
+§4 says δ̂ *"recovers δ_write, not δ_survive."* §11 asks for δ_survive to
+be estimated *"from a known-complete archive"* and names none.
+
+| archive | δ_write | δ_survive | filed as |
+|---|---|---|---|
+| HBC post journals | ≈ 0, contemporaneous by design | ≈ 0, continuous series, catalogued to shelf mark | company / business records |
+| Foxfire | **large and variable** — interviews from 1966 about earlier practice | ≈ 0, published and in print | folklore / Appalachian studies |
+
+The note names the known-complete archive §11 asks for. And Foxfire holds
+δ_survive at zero while δ_write is large, so **the term §4 *can* estimate
+is isolable there** — between the two archives both terms come apart.
+
+That is the repair `OE_009` needs: F4's bias lives in *survival*, and
+§8's proposed test compares δ̂ distributions, which measure *writing*.
+With a corpus that holds one term fixed, the other becomes measurable.
+
+**Falsifier:** measured δ_write on Foxfire material of the same order as
+its δ_survive, which would collapse the decomposition.
+
+**Status: SUPPORTED.**
+
+---
+
+### OE_015 — distinct from all eleven filed mechanisms, and the ordinal is ambiguous by exactly the size of both prior errors
+
+Thirteen comparisons in `DISTINCT_FROM`. The nearest is `SCORED_AS_WASTE`
+— and waste is a **devaluation inside one ledger**, where this is a
+**transfer to a different ledger**: the material keeps its value, in a
+readership that is not the one it bears on. `MODALITY` is the next
+nearest and fails for the reason that makes the mechanism interesting —
+the apparatus is a catalogue, it is in the right channel, and it *routes*
+rather than misses.
+
+**The ordinal cannot be resolved from inside the tree, and that explains
+why the off-by-three has now happened twice** (`QA_002`,
+`nonidentity-census` T4). There are two sequences:
+
+- the register's `MECHANISMS` tuple — **8 entries, one file**
+- `MECHANISM_NN.md` files — **3, in sibling folders**, numbered as if
+  they continue the tuple
+
+SPEC_V2 §1 calls affect routing *"the candidate exclusion mechanism for
+the `uninstrumented` register."* Added to the tuple it is the **ninth
+tuple entry**, colliding with `MECHANISM_09` (CATEGORY WELD). Filed as a
+numbered file it is the **twelfth**. Both readings are defensible and
+they differ by **three** — the exact size of both prior errors.
+
+Repair: one canonical sequence. Either the register publishes a count
+that includes the sibling files, or the files become register entries.
+Nothing currently reconciles them. On the continuing sequence this note's
+mechanism is **13th**.
+
+**Falsifier:** a filed mechanism whose test condition this note's cases
+satisfy.
+
+**Status: SUPPORTED on distinctness. The ordinal is UNRESOLVED and is a
+property of the register, not of this note.**
+
+---
+
+### OE_016 — the first mechanism in this family with a metadata signature, and it is cheaper to test than the lead-time study
+
+| signature | reads | cost |
+|---|---|---|
+| subject classification | Foxfire under folklore / Appalachian studies; HBC under company records | catalogue metadata, free |
+| citing-field distribution | which journals cite it, by field | citation database |
+| content-vs-filing mismatch | behavioural observation under a non-evidence heading | read a sample |
+
+**Stated prediction.** If classification determines readership, citations
+to a folklore-filed corpus containing behavioural observation should
+cluster in folklore and area-studies venues and be **near-absent in the
+field the observation is about**. The content is biological; the citing
+field should not be.
+
+This tests the **mechanism** where the lead-time study tests its
+*consequence*. L measures what exclusion costs; this measures whether the
+classification is doing the excluding. If citations cluster by filing
+rather than by content the mechanism holds; if they follow content across
+headings it does not — and that is a reachable negative, unlike §7's F1.
+
+Same egress block as `A4` in `question-availability/` and the same
+status: runnable today by anyone with a citation database. Third item in
+this family that `notes/study_watch.py` was built for.
+
+**Falsifier:** citing-field distribution for a folklore-filed behavioural
+corpus indistinguishable from that of a comparable field-filed one.
+
+**Status: SPECIFIED, NOT RUN.**
+
+---
+
+### OE_017 — every fact about both archives is carried and unchecked, and one of them is probably wrong
+
+Carried: HBC continuous from 1670, held at the Archives of Manitoba;
+Albany post journals B.3/1 to 212, 1705–1941; a *Business History* paper
+on knowing nature in those records; Foxfire's twelve volumes plus a
+magazine from 1966; Foxfire filed under folklore / Appalachian studies.
+
+Egress-blocked, `MS_004` status. **Nothing in `OE_013`–`OE_016` rests on
+any of it** — those are properties of a delay model, of a mechanism list
+in this tree, and of a stated prediction.
+
+**One detail flagged before anyone orders boxes,** because it decides
+whether the records are found at all: HBCA classification puts a **series
+letter** between post number and volume. Section B is post records and
+post journals are series `a`, so Albany journals would be
+**`B.3/a/1-212`**, not `B.3/1-212`. Stated from memory here, unverified,
+and cheap to confirm against the HBCA finding aid — the correction is a
+shelf mark, so a reader following the note as written asks for a series
+that does not exist.
+
+**Falsifier:** the HBCA finding aid listing Albany post journals without
+a series letter.
+
+**Status: UNVERIFIED, both directions.**

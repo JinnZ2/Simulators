@@ -1,0 +1,114 @@
+CLASSIFICATION_NOTE.md -- checked against SPEC_V2 and the tree
+
+1  the censoring correction is a property of the SOURCE
+   §4 calls the correction 'THE STRUCTURAL CORE'. It exists
+   because the excluded reading is oral and reaches the record
+   late. The note's own archives are not that.
+
+   source profile                   hazard    mean delay  recovered   P(L>0) at 10
+   ------------------------------------------------------------------------------
+   spec's stipulated trade press    0.06      16.7        0.22        0.47
+   partially catalogued             0.25      4.0         0.85        0.94
+   continuous, contemporaneous      0.95      1.1         1.00        1.00
+
+   HBC post journals record DAILY occurrences of note, at the
+   post, in an unbroken series catalogued to shelf mark. Both
+   delays collapse. A true twenty-year lead is recovered whole,
+   and a true ten-year lead comes out positive every time
+   instead of 47% of the time.
+
+   So the whole of §4 -- including the sign error at OE_008 --
+   is machinery for a source choice, not for the method. Pick a
+   contemporaneous continuous archive and it is not needed.
+   §6 lists trade press FIRST by tractability. On this reading
+   the ordering should be by DELAY, not by ease of access, and
+   the two are close to opposite.
+
+2  the two archives decompose the delay §4 could not
+   HBC post journals
+     records      daily occurrences of note, written at the post
+     δ_write      ≈ 0 — contemporaneous by design
+     δ_survive    ≈ 0 — continuous series, catalogued to shelf mark
+     filed as     company / business records
+   Foxfire
+     records      interviews collected from 1966 about earlier practice
+     δ_write      LARGE and variable — the two-date rule's own case
+     δ_survive    ≈ 0 — published, in print, archived
+     filed as     folklore / Appalachian studies
+
+   §4 says δ̂ 'recovers δ_write, not δ_survive', and §11 says to
+   estimate δ_survive 'from a known-complete archive' without
+   naming one. The note names one. And Foxfire holds δ_survive
+   at zero while δ_write is large, so the term §4 CAN estimate
+   is isolable there. Between the two archives both terms come
+   apart -- which also repairs OE_009, since F4's test can then
+   compare the term the bias actually lives in.
+
+3  distinct from all eleven filed, and from both named classes
+   MODALITY                           the apparatus is a catalogue and it is in the right channel; it routes rather than misses
+   STORAGE                            the medium held it for three centuries
+   SCALAR_DEMAND                      nothing is collapsed; the prose survives intact
+   BUDGET_BOUNDARY                    no budget
+   AUTHORED_REFERENCE                 the archive is third-party and often adversarial to its subjects
+   AUDIT_ASYMMETRY                    no guard fires; the material is never presented to one
+   SCORED_AS_WASTE                    nearest of the eight -- but waste is a devaluation inside one ledger, and this is a transfer to a different ledger
+   PROXY_SUBSTITUTION                 no proxy; the target itself is filed elsewhere
+   CATEGORY WELD (09)                 nothing is fused; one thing is filed under one heading
+   GENERATION CAPACITY REMOVED (10)   nothing was removed; it was shelved
+   DERIVATION DISCARDED (11)          the structure persists and is catalogued
+   affect routing / unaskable         entry succeeded; the material is in the archive
+   observer exclusion                 there was a channel and it ran to completion
+
+   register MECHANISMS tuple : 8
+   MECHANISM_09              : MECHANISM 09 — CATEGORY WELD
+   MECHANISM_10              : MECHANISM 10 — GENERATION CAPACITY REMOVED
+   MECHANISM_11              : Mechanism 11 — DERIVATION DISCARDED
+
+   THE ORDINAL IS AMBIGUOUS, and this is why the off-by-three
+   has now happened twice. There are TWO sequences:
+     - the register tuple, 8 entries, in one file
+     - MECHANISM_NN.md files, 3 of them, in sibling folders,
+       numbered as if they CONTINUE the tuple
+   SPEC_V2 §1 says affect routing is 'the candidate exclusion
+   mechanism for the uninstrumented register'. Added to the
+   tuple it is the ninth tuple entry -- colliding with
+   MECHANISM_09, CATEGORY WELD. Filed as a numbered file it is
+   the twelfth. Both readings are defensible and they differ by
+   three, which is the exact size of both prior errors.
+   Repair: one canonical sequence. Either the register publishes
+   a count that includes the sibling files, or the files become
+   register entries. Nothing currently reconciles them.
+   On the continuing sequence this note's mechanism is 13th.
+
+4  the first mechanism in this family with a metadata signature
+   subject classification       Foxfire filed under folklore / Appalachian studies; HBC under company records catalogue metadata, free
+   citing-field distribution    which journals cite it, by field                     citation database
+   content-vs-filing mismatch   behavioural observation filed under a non-evidence heading read a sample of the material
+
+   If classification determines readership, citations to a folklore-filed corpus containing behavioural observation should cluster in folklore and area-studies venues and be near-absent in the field the observation is about. The content is biological; the citing field should not be.
+
+   That is cheaper than the lead-time study and it tests the
+   MECHANISM rather than its consequence. The lead-time study
+   measures what exclusion costs; this measures whether the
+   classification is doing the excluding. If citations cluster
+   by filing rather than by content, the mechanism holds; if
+   they follow content across headings, it does not.
+
+5  carried and unchecked
+   - HBC continuous from 1670; Archives of Manitoba
+   - Albany post journals B.3/1 to 212, 1705-1941
+   - a Business History paper on knowing nature in those records
+   - Foxfire: twelve volumes plus a magazine from 1966
+   - Foxfire filed under folklore / Appalachian studies
+   Egress-blocked, MS_004 status. Nothing in findings 1-4 rests
+   on any of it: they are properties of a delay model, of a
+   mechanism list in this tree, and of a stated prediction.
+
+   ONE DETAIL TO CHECK BEFORE ANYONE ORDERS BOXES, flagged
+   because it decides whether the records are found at all.
+   HBCA classification puts a series letter between post number
+   and volume -- section B is post records, and post journals
+   are series 'a'. Albany journals would then be B.3/a/1-212,
+   not B.3/1-212. Stated from memory, unverified, and cheap to
+   confirm against the HBCA finding aid.
+
