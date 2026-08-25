@@ -38,20 +38,33 @@ tradeoff taken deliberately, not an oversight to be corrected by adding the name
 
 ## Tier assignment
 
-**TIER 1 — exported unchanged (57 files).** Already written impersonally: markers,
-mechanisms, case sets, simulator specs, ecosystem conventions.
+**TIER 1 and 2 — condensed, scrubbed, and exported (63 files).** No file was exported
+unchanged. Every one was rewritten: first person moved to structure, working notes and
+file-path bookkeeping dropped, and the material reorganized where the original order
+obscured the argument.
 
-**TIER 2 — scrubbed and exported (7 files).**
+**The condensing rule.** A case is LOAD-BEARING when it is the only instance of its
+mechanism — then it is an existence proof, and summarizing it destroys what it does. A case
+is COMPRESSIBLE when it is one of several illustrations of a mechanism already stated —
+then the mechanism carries the weight and the case is showing its work.
 
-| file | what was lifted |
+So: mechanisms kept at full fidelity; one grounding case per mechanism kept detailed enough
+to be checkable; the rest compressed to a line.
+
+**What this predicts, and what happened.** Files that are case registers compressed
+substantially — `uninstrumented` lost about 19%. Files that are principles with their
+required counter-cases barely moved, and one grew: in `calibration-gap-log`, tags were doing
+compression work that had to be replaced with sentences. **Where a file refused to compress,
+that is a reading about the file — it was already at working density.**
+
+Reorganizations worth knowing about, since they change structure rather than wording:
+
+| file | change |
 |---|---|
-| sleep-duration-instrument | personal sleep pattern, attribution of the read |
-| idle-shutdown-restart-accounting | specific vehicle, fleet settings, first person |
-| facility-risk-index | operator identity, dates, org cross-refs |
-| refusal-false-positive-log | instance dates, model names, org repo references |
-| instance-log-index | corpus size, repo paths, prior-art filenames |
-| work-load-ordering (was physical-work-load) | hours figure, first person |
-| recent-work | family relations, repo-specific references |
+| tool-off-metrology | four inversion instances pulled into a numbered block I1-I4 with disciplines labeled; the cross-substrate spread was the argument and was not legible when scattered |
+| tool-off-metrology | regimentation blind spot now points at sensing-spine clause 2 rather than restating it — duplicated text drifts apart under editing |
+| unnamed-instruments | two A4 blocks were duplicated verbatim in the source; merged |
+| median-case-calibration | M6 kept near full length and marked as the case that earns it |
 
 **TIER 3 — held back entirely (12 files).** Not exported in any form, and not enumerated
 here, because several of the filenames are themselves the personal information. By category:

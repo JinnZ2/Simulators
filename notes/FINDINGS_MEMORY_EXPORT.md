@@ -2,8 +2,9 @@
 
 Read against `notes/memory-export/files/`, which is stored verbatim. Nothing
 here is a verdict on the export, and no stored file was modified. Counts are recomputed
-each batch. Delivery is complete: 7 of 7 tier 2, 56 of 57 tier 1, 0 of 12 tier 3
-by the manifest's own decision.
+each batch. Delivery is complete: 63 of 63 files, 0 of 12 tier 3 by the
+manifest's own decision. The tier 1 / tier 2 split these findings tracked was
+superseded by a manifest revision — see finding 41.
 
 ## 1. Cross-references, and what "unresolved" means
 
@@ -928,34 +929,58 @@ and they should not be read as the reflex the rule warns about. Where this
 reading did extend, it extended mechanically: run the selftest, count the
 links, grep both naming conventions.
 
-## 41. Closing state, and a clean round trip
+## 41. Closing state — and the manifest was revised, refuting the missing-file
+inference
 
-The manifest was re-delivered as the last item and **diffs byte-identical**
-against the copy stored on the first turn. `SCRUB_RULES.md` opened this folder
-and closes it unchanged — the one artifact here whose round trip is verified
-rather than assumed.
+The manifest was re-delivered twice at the end. The first re-delivery diffed
+**byte-identical** against the copy stored on the first turn. The second is a
+**revision**, and it changes the bookkeeping this whole folder was built on.
 
-Final arrival:
+**What changed.** The version in force during delivery split the export into
+tier 1, "exported unchanged (57 files)", and tier 2, "scrubbed and exported (7
+files)", with a per-file table of what was lifted from each tier-2 file. The
+final version replaces both with one line — **tier 1 and 2, condensed, scrubbed
+and exported, 63 files** — and states that **no file was exported unchanged.**
 
-| tier | manifest | landed |
-|---|---|---|
-| 1 — exported unchanged | 57 | 56 |
-| 2 — scrubbed and exported | 7 | 7 |
-| 3 — held back | 12 | 0, by the manifest's decision |
+**Consequences, in order of how wrong they make earlier work here:**
 
-**One tier-1 file was never delivered**, and one link name never resolved:
-`question-availability`, cited by `criterion-symmetry`. Those are probably the
-same file — every other unresolved name in this reading's history eventually
-arrived, and this is the only one left on either list. Stated as an inference,
-not a fact: nothing in the export names the 57th file, and the manifest labels
-none of them individually.
+1. **The missing 57th file does not exist.** An earlier version of this finding
+   inferred that one tier-1 file was never delivered and was probably
+   `question-availability`. 63 files were stated and 63 were stored. **Delivery
+   was complete.** The inference was sound against the manifest available and
+   wrong against the manifest that governs.
+2. **Every per-file tier assignment recorded here was an inference about a
+   distinction that does not exist.** Files were filed "tier 1 by elimination"
+   because they were exported and absent from the tier-2 table. With no file
+   exported unchanged, that elimination had nothing to eliminate against.
+3. **`question-availability` is still an unresolved cross-ref**, cited by
+   `criterion-symmetry` — but it is now a name with no file, not evidence of a
+   short delivery. It may have been folded into another file during condensing,
+   or held in tier 3.
+4. **Findings 9 and 10 lose their source table.** They read the scrub's
+   consistency against the tier-2 "what was lifted" column, which the revision
+   removes. The observations about `fairmont-ecological-recovery`'s place name
+   and the three cost-bearing files still stand — those are stated in the
+   revision too — but the per-file lift column is gone.
 
-**On the scrub, at the end.** Findings 9 and 10 read its consistency off the
-early files and hold for those. From `median-case-calibration` onward the
-operator exempted files from the person/place/occupation rules to keep the dump
-intact (finding 22), so `SCRUB_RULES.md` describes the seven tier-2 files
-accurately and does not describe this folder. That is recorded in the folder
-README so a later reader does not use the manifest as an index of what is here.
+**What the revision adds, and four claims checked against what is stored:**
+
+| claim | check |
+|---|---|
+| `tool-off-metrology` — four inversion instances pulled into a numbered block I1-I4 with disciplines labeled | I1-I4 present; 3 of 4 carry a parenthetical discipline (occupational medicine, psychophysics, occupational endocrinology). I2, eyes-on-task attention counting, carries none |
+| `tool-off-metrology` — regimentation section points at `sensing-spine` clause 2 rather than restating it | confirmed: "Full development in `sensing-spine` clause 2" |
+| `unnamed-instruments` — two duplicated A4 blocks merged | exactly one `### A4` block in the stored file |
+| `median-case-calibration` — M6 kept near full length and marked as the case that earns it | confirmed: "Kept at full detail: this is the one case in the set where the mechanism was isolated by elimination rather than inferred" |
+
+The condensing rule it states — load-bearing when a case is the only instance
+of its mechanism, compressible when it is one of several — is the same
+distinction finding 25 acted on when it refused to reconstruct
+`tool-off-metrology` from its citations and kept an inventory instead.
+
+And one line in it is a reading rather than a policy, worth carrying: **"Where
+a file refused to compress, that is a reading about the file — it was already
+at working density."** `calibration-gap-log` grew, because tags were doing
+compression work that had to become sentences.
 
 **What this reading is worth, stated plainly.** The mechanical checks are
 reproducible by anyone with the tree: selftests run, counts recomputed, links
@@ -963,10 +988,11 @@ grepped under both naming conventions. Findings 18 and 19 bound them — the
 export absorbs this repo's audit results, so agreement between a memory file
 and a repo audit is not independent evidence, and `ecosystem-conventions`
 states that contamination mechanism more generally than this reading found it.
-Four first-pass searches were too narrow and are listed below. Two theses and
-one axis were declined rather than adjudicated, with the interest direction
-named each time, and finding 40 records that a decline is not automatically
-neutral.
+Four first-pass searches were too narrow and are listed below; this finding
+adds a fifth error of a different kind — an inference that was correct against
+a superseded document. Two theses and one axis were declined rather than
+adjudicated, with the interest direction named each time, and finding 40
+records that a decline is not automatically neutral.
 
 ## What was not checked, deliberately
 

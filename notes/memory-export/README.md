@@ -19,21 +19,24 @@ states the refutation protocol applies to it.
 
 ## Arrival state
 
-| tier | named in the manifest | landed |
-|---|---|---|
-| 1 — exported unchanged | 57 | 56 |
-| 2 — scrubbed and exported | 7 | 7 |
-| 3 — held back | 12 | 0, and none expected |
+**Complete: 63 of 63 files.**
 
-**Delivery is complete.** Tier 2 is all seven. Tier 1 is 56 of 57 — the missing
-file is probably `question-availability`, the one cross-ref that never resolved
-(finding 41). Tier 3 is held back by the manifest's own decision, not a gap here.
+The manifest was revised after delivery finished. The version this folder was
+built against split the export into tier 1 "exported unchanged (57 files)" and
+tier 2 "scrubbed and exported (7 files)". The final version replaces both with
+a single **tier 1 and 2, condensed, scrubbed and exported (63 files)**, and
+states that **no file was exported unchanged** — every one was rewritten, with
+material reorganized where the original order obscured the argument.
 
-`SCRUB_RULES.md` was re-delivered last and diffs byte-identical against the copy
-stored first — the round trip is verified.
+So the 57/7 split this folder tracked per batch never described the delivery,
+and the per-file tier assignments inferred here were inferences about a
+distinction that does not exist. Detail in finding 41.
 
-Tier is inferred, not carried: the manifest labels no file individually, so a
-file is filed tier 1 when it was exported and is not in the tier-2 table.
+Tier 3 remains 12 files held back by the manifest's own decision, not a gap
+here.
+
+`SCRUB_RULES.md` holds the final version. The superseded one is in this
+folder's git history, first stored at the top of the branch.
 
 ## Scrub exemption, from `median-case-calibration` onward
 
