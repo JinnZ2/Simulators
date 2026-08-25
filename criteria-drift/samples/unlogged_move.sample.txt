@@ -1,0 +1,122 @@
+UNLOGGED CRITERION MOVE -- the same numbers, read three ways
+========================================================================
+
+  REVISION and ASSERTION differ in PROVENANCE, not sincerity.
+  This runs both over one identical series.
+
+  world: 12 readings, criterion moves before index 6,
+         the new criterion adds +0.15 per reading.
+
+------------------------------------------------------------------------
+
+  TRUTH: system step +0.00, criterion step +0.15
+  observed: 0.50 0.50 0.50 0.50 0.50 0.50 0.65 0.65 0.65 0.65 0.65 0.65
+
+    reading                step      -> system error     flagged
+    ASSERTION              +0.150    +0.150    +0.150    False
+    REVISION               +0.150    None      None      True
+    REVISION_WITH_BRIDGE   +0.150    +0.000    +0.000    True
+
+    the system did not move. ASSERTION reports it
+    moved +0.15, and carries no flag.
+
+------------------------------------------------------------------------
+
+  TRUTH: system step +0.10, criterion step +0.15
+  observed: 0.50 0.50 0.50 0.50 0.50 0.50 0.75 0.75 0.75 0.75 0.75 0.75
+
+    reading                step      -> system error     flagged
+    ASSERTION              +0.250    +0.250    +0.150    False
+    REVISION               +0.250    None      None      True
+    REVISION_WITH_BRIDGE   +0.250    +0.100    +0.000    True
+
+    the system moved +0.10. ASSERTION reports +0.25,
+    still wrong by exactly the unlogged move.
+
+------------------------------------------------------------------------
+
+  ASSERTION's error is the criterion bonus in BOTH scenarios.
+  It does not depend on whether the system changed, and it is
+  not visible from inside the reading.
+
+  REVISION returns None for the system attribution. None is
+  not zero. In any summary table it will look like the
+  reading that failed to produce a result; it is the one
+  that produced the correct one.
+
+------------------------------------------------------------------------
+
+  DOES THE PRIOR SERIES BECOME UNINTERPRETABLE?
+
+    prior_readings_present       True
+    prior_readings_numeric       True
+    prior_readings_in_range      True
+    series_looks_continuous      True
+    any_marker_in_the_data       False
+
+    verdict: LEGIBLE_AND_RECONTEXTUALISED
+    nothing is missing and nothing is out of range. The prior readings
+    are readable and they now sit against a different criterion, with
+    no field carrying that. 'Uninterpretable' understates it: the
+    failure is not a gap where an answer should be, it is a confident
+    wrong answer in the same shape as a right one
+
+------------------------------------------------------------------------
+
+  CONFIDENCE, reported separately and not resolved
+    UNKNOWN
+      REVISION returns None for the system attribution. None is not
+      zero and is not a small number; folding it into either is the
+      move this module is about
+    bridge_cost
+      one reading under both criteria. Stated as a requirement, not
+      demonstrated to be obtainable in any real setting
+    resolved
+      False
+    the_error_size
+      exactly the criterion bonus, by construction. That the ASSERTION
+      error equals the unlogged move is arithmetic, not a finding --
+      the finding is that it is invisible from inside the reading
+    the_world
+      a stipulated series, not data. It shows what an unlogged move
+      does to a reading; it is not evidence about how often moves go
+      unlogged
+
+  WHERE IT BREAKS
+    - THE UNLOGGED READING IS NOT UNREADABLE, IT IS WRONG BY EXACTLY
+    THE SIZE OF THE UNLOGGED MOVE, AND IT SAYS NOTHING. In the
+    no-change scenario the system does not move at all and ASSERTION
+    reports a 0.15 improvement with no flag on it. The note's word for
+    this is 'uninterpretable'; the sim says the prior readings stay
+    present, numeric, in range and continuous, and only their meaning
+    moved. A blank announces itself. This does not
+    - REVISION'S OUTPUT IS 'UNKNOWN' AND THAT WILL READ AS THE WEAKER
+    ANSWER. ASSERTION returns a number and REVISION returns None, so in
+    any table, summary or comparison the logged reading looks like the
+    one that failed to produce a result. It is the one that produced
+    the correct result. Nothing here changes that asymmetry -- it only
+    prints both
+    - LOGGING THE MOVE DOES NOT DECOMPOSE IT. The three-state readout
+    exists because a logged move with no bridge still cannot separate
+    system from criterion. Treating REVISION as sufficient is a second
+    error one step past the first, and the bridge -- a reading under
+    both criteria -- is a real cost that this module asserts and does
+    not price
+    - THIS MODULE AGREES WITH anchor.py AND THAT AGREEMENT IS
+    INHERITED, NOT FOUND. The bridge requirement is already argued in
+    this folder from cross-domain cases, and regress.py already refuses
+    an identified term without one. Same folder, same builder: by
+    operator-structure-echo's own pair table this is INHERITED, so the
+    sim demonstrates a requirement rather than corroborating it. A
+    reader counting two modules in agreement here is counting one
+    position twice
+    - ONE MOVE, ONE SERIES, TWO SCENARIOS, NO NOISE. There is no rng,
+    which makes the sample reproducible and makes every effect exact.
+    Nothing here says what happens with several moves, gradual moves,
+    or a move whose size is itself uncertain, and a real criterion
+    rarely steps once by a constant
+    - THE MODULE DECIDES WHERE THE MOVE IS. MOVE_AT is given to the
+    readers, so REVISION is handed the segmentation that is the hard
+    part of the real problem. Detecting an unlogged move FROM the
+    series is not attempted here and is the case the note is actually
+    about

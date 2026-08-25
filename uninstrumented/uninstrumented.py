@@ -5,7 +5,7 @@ on the registry itself.
 CC0-1.0. Standard library only. Deterministic.
 
 A gap is an oversight. These are exclusions built into the apparatus before
-the first reading is taken. Seven entries, seven mechanisms, sorted by
+the first reading is taken. Eight entries, eight mechanisms, sorted by
 mechanism so a case from evolutionary biology sits next to one from survey
 methodology and is recognizably the same failure.
 

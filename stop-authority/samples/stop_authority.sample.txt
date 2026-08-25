@@ -1,0 +1,173 @@
+STOP-AUTHORITY INSTRUMENTATION GAP -- what a zero is consistent with
+========================================================================
+
+  A count of zero is consistent with two opposite states:
+    A. no condition warranted a stop
+    B. the authority is not honored, so none were attempted
+
+  Under B, non-use is produced BY the hollowness, and reads
+  as safety.
+
+------------------------------------------------------------------------
+
+  WHAT THE COUNT SEES
+
+    facility                           stops published
+    A: genuinely low hazard            0
+    B: hollow, fully suppressed        0
+    C: hollow, partly suppressed       1
+
+    A and B identical:  True
+    C outranks A:       True
+
+    the count separates none of them usefully. A and B are identical at
+    zero, and C -- where the authority is being refused in practice --
+    publishes the highest number of the three
+
+------------------------------------------------------------------------
+
+  WHICH NUMBER IS LIVE AT ZERO ATTEMPTS
+
+                                   executed  attempted warranted
+    A: genuinely low hazard        0         0         0
+    B: hollow, fully suppressed    0         0         12
+
+    honor ratio in both: UNDEFINED_NO_ATTEMPTS
+    fields separating A from B: warranted_in_review
+
+    numbers 1 and 2 are degenerate at zero attempts -- the ratio is 0/0
+    in both facilities and the attempt count is zero in both. Only
+    warranted-in-review differs, which is why the spec calls it the
+    denominator the other two are missing
+
+------------------------------------------------------------------------
+
+  EACH FACILITY, DIAGNOSED
+
+  A: genuinely low hazard
+    count alone would say:
+      zero stops -- read as evidence of A (no condition warranted)
+    honor ratio:  UNDEFINED_NO_ATTEMPTS
+    attempt rate: UNDEFINED_NO_WARRANTED
+    VERDICT:      A_NO_CONDITION_WARRANTED
+      review found no incident with a prior state where a stop was
+      warranted and available. This is what evidence for A looks like,
+      and it comes from the review, never from the count
+
+  B: hollow, fully suppressed
+    count alone would say:
+      zero stops -- read as evidence of A (no condition warranted)
+    honor ratio:  UNDEFINED_NO_ATTEMPTS
+    attempt rate: MEASURED
+    VERDICT:      B_NOT_HONORED_SO_NONE_ATTEMPTED
+      review found 12 warranted-and-available prior states and not one
+      stop was attempted. The hazard was there and the authority
+      produced nothing
+
+  C: hollow, partly suppressed
+    count alone would say:
+      1 stop -- read as the authority functioning
+    honor ratio:  MEASURED
+    attempt rate: MEASURED
+    VERDICT:      B_NOT_HONORED_SO_NONE_ATTEMPTED
+      stops were attempted against 12 warranted states and honored at
+      0.20. The authority is being exercised and not binding
+
+  prior art: SWA as core program element
+    count alone would say:
+      zero stops -- read as evidence of A (no condition warranted)
+    honor ratio:  NOT_COLLECTED
+    attempt rate: NO_DENOMINATOR
+    VERDICT:      INDISTINGUISHABLE
+      without warranted-in-review there is no denominator, and the stop
+      count is consistent with both states. This is the published case:
+      zero read as A
+
+------------------------------------------------------------------------
+
+  THE MEASUREMENT EATS ITS OWN DENOMINATOR
+
+    t     warranted  attempts  honored   propensity  ratio
+    1     3          3         0         1.000       MEASURED
+    2     3          2         0         0.532       MEASURED
+    3     3          1         0         0.322       MEASURED
+    4     3          1         0         0.227       MEASURED
+    5     3          1         0         0.185       MEASURED
+    6     3          0         0         0.166       UNDEFINED
+    7     3          0         0         0.166       UNDEFINED
+    8     3          0         0         0.166       UNDEFINED
+    9     3          0         0         0.166       UNDEFINED
+    10    3          0         0         0.166       UNDEFINED
+
+    hazard unchanged throughout:  True
+    went silent at t = 6
+    warranted states total:       30
+    stops published total:        0
+
+    the hazard rate never moves. Attempts fall because the honor rate
+    is low, and once attempts reach zero the ratio has no denominator.
+    The published stop count stops rising, which under the count-alone
+    reading is the record improving
+
+    30 warranted-and-available prior states produced 0
+    published stops, with the hazard rate constant.
+
+  CONFIDENCE, reported separately and not resolved
+    resolved
+      False
+    the_learning_rule
+      propensity moves toward the observed honor rate at a fixed rate.
+      That shape was chosen, not measured, and a different shape moves
+      when silence arrives but not whether it does
+    the_prior_art_row
+      delivered by the operator as a documented case and carried
+      without independent check. What this module does with it is run
+      it through the instrument, not verify it
+    the_suppression_run
+      a stipulated model of a stated mechanism. It shows the loop is
+      arithmetically available given a learning rule and a low honor
+      rate, and shows nothing about any real facility
+    the_three_facilities
+      stipulated, to show what the count can and cannot separate. They
+      are not observations of anywhere
+    the_verdicts
+      A is reachable only from the review denominator. Where that is
+      absent the module returns INDISTINGUISHABLE and does not lean
+
+  WHERE IT BREAKS
+    - THE COUNT DOES NOT MERELY FAIL TO SEPARATE A FROM B -- IT RANKS
+    THE PARTLY-HOLLOW FACILITY ABOVE THE SAFE ONE. A and B both publish
+    zero. C, where stops are attempted and refused four times in five,
+    publishes one. Read as 'the authority is being used', C looks like
+    the healthiest of the three and is the one demonstrably not
+    binding. The count is not a weak signal here, it is ordered against
+    the thing it is read as evidence for
+    - THE TWO NUMBERS THAT LOOK LIKE THE AUTHORITY MEASUREMENT GO BLIND
+    FIRST, AND THEY GO BLIND IN THE STATE THAT MOST NEEDS MEASURING. At
+    zero attempts the ratio is 0/0 and the attempt count is zero on
+    both sides, so the only field separating A from B is
+    warranted-in-review -- which is the one determined by post-incident
+    review rather than by anything the authority itself produces. The
+    measurement that works is the one outside the mechanism
+    - THIS MODULE CANNOT SAY THE PRIOR-ART CASE WAS HOLLOW, AND DOES
+    NOT. Ten years, zero recalled stops, evidence offered being
+    conversations -- and no attempts recorded and no review
+    denominator, so the instrument returns INDISTINGUISHABLE. That is
+    the whole finding: not that the authority was hollow, but that
+    'published as working' was not supported by anything in the record.
+    Reading it as B would be the published error pointing the other way
+    - THE SUPPRESSION RUN IS A DEMONSTRATION AND ITS LEARNING RULE IS
+    INVENTED. Propensity moves toward the observed honor rate at a
+    fixed fraction per step. That produces silence at t=6 with these
+    numbers; a different rule moves the arrival time and not the
+    existence of the fixed point. Nothing here measures how workers
+    actually update, and the honor rate of 0.15 was chosen to make the
+    collapse legible within ten steps
+    - WARRANTED-IN-REVIEW IS ITSELF A JUDGEMENT MADE AFTER THE FACT BY
+    PARTIES WHO MAY BE THE SAME ONES THE STOP WOULD HAVE COST. The spec
+    says it is determined by post-incident review rather than by
+    whether anyone called it, which removes the worker's suppressed
+    judgement from the denominator and replaces it with a reviewer's.
+    Nothing in this module checks who reviews, and a review conducted
+    by the party a stop binds against is the same structure one level
+    up

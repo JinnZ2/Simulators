@@ -1,0 +1,94 @@
+MARKER TABLE -- strain release
+========================================================================
+
+  stability without bindings_tested is not a claim.
+  The table refuses to print one without the other.
+
+  marker                                 stability  bind   exceptions
+  ----------------------------------------------------------------------
+  strain accumulation is observable      None       0      NOT_LOOKED
+  a limit is crossed rather than approac None       0      NOT_LOOKED
+  release is localised to one path       None       0      NOT_LOOKED
+  the release path is the weakest availa None       0      NOT_LOOKED
+
+  states: REFUTED=0, TESTED=0, UNTESTED=4
+  rows carrying an established stability claim: 0
+
+  Every row is UNTESTED. The delivered material gives a shape,
+  a selection rule and two bindings, and no test record. The
+  markers are the ones the shape itself names.
+
+  exceptions read NOT_LOOKED, not NONE_FOUND. An empty
+  exception list beside zero bindings is an empty record.
+
+------------------------------------------------------------------------
+
+  THE REFUSALS, EXERCISED
+
+    stability, no bindings:        REFUSED
+    stability, one binding:        REFUSED (found != tested)
+    written past set_stability():  REFUSED at the read as well
+    exception, binding untested:   REFUSED (not in bindings_tested)
+
+------------------------------------------------------------------------
+
+  AND IF IT WERE TESTED, THE TWO AVAILABLE BINDINGS COLLIDE
+
+    compare(slab_concrete,
+            metamorphic_rock)
+      -> SCOPE_COLLISION, 5 variables
+
+    So a two-binding stability claim over the only two
+    bindings delivered would be a claim across a pair that
+    scope.py says are not corroborating each other. The floor
+    of two is met and the claim is still not what it looks
+    like.
+
+  CONFIDENCE, reported separately and not resolved
+    MIN_BINDINGS
+      two, chosen because one binding is where a marker was found. Two
+      is a floor, not a sufficient number, and nothing here establishes
+      what a sufficient number would be
+    empty_exceptions
+      NOT_LOOKED on every row. An empty exception list beside zero
+      bindings is an empty record, not a clean one
+    resolved
+      False
+    the_markers
+      derived from the shape's own sequence and selection rule, which
+      is the only source available. Whether they are the RIGHT markers
+      is untested and is a different question from whether they are
+      stable
+    the_table
+      four markers, zero stability claims, zero bindings tested. That
+      is the delivered state: a shape and two bindings arrived with no
+      test record
+
+  WHERE IT BREAKS
+    - EVERY ROW IS UNTESTED AND THE TABLE'S ONLY REAL OUTPUT IS THAT.
+    Four markers, zero stability claims, zero bindings tested, zero
+    known exceptions -- and the last of those reads as a clean record
+    when it is an empty one. The exceptions_state column exists to say
+    NOT_LOOKED rather than let an empty list imply NONE_FOUND, which is
+    the whole difference between a marker nobody has challenged and a
+    marker that survived a challenge
+    - THE MARKERS WERE DERIVED FROM THE SHAPE, WHICH IS THE ONLY SOURCE
+    AVAILABLE AND IS ALSO CIRCULAR. Each row is one step of the
+    sequence or the selection rule restated as something observable. A
+    marker built that way cannot fail to indicate the shape when the
+    shape holds; what it can do is fail to be observable, or fail to
+    discriminate, and neither has been checked in any binding
+    - TWO BINDINGS IS THE FLOOR AND IT IS ARBITRARY.
+    MIN_BINDINGS_FOR_STABILITY is set at two on the reasoning that one
+    binding is where a marker was found rather than where it was
+    tested. Nothing establishes that two is enough, and the two
+    bindings actually delivered collide totally -- so even a
+    two-binding stability claim over slab_concrete and metamorphic_rock
+    would be a claim across a pair that scope.py says are not
+    corroborating each other
+    - THE REFUSAL IS ENFORCED TWICE AND CAN STILL BE WALKED AROUND.
+    set_stability() guards the write and row() guards the read, so a
+    value assigned directly to .stability is caught on the way out. A
+    caller who sets .stability and .bindings_tested together, with
+    nothing behind either, passes both guards -- the table checks that
+    the columns move together, not that the bindings were really tested

@@ -1,21 +1,28 @@
 CROSS-CUTTING RULES, ENFORCED
 ========================================================================
 
-  module                           r1 data  r2 output r3 readouts
-  s1_encounter_denominator         pass     pass     pass
-  s2_symmetric_anchor              pass     pass     pass
-  s3_rubric_backcast               pass     pass     pass
-  s4_antler_calibration            pass     pass     pass
-  s5_adversarial_prior             pass     pass     pass
-  s6_foreclosure_rate              pass     pass     pass
-  s7_hardship_threshold            pass     pass     pass
-  s8_recognition_to_delivery       pass     pass     pass
-  s9_corpus_position_filter        pass     pass     pass
+  module                           r1 data  r2 out   r3 readouts r5 signed
+  s1_encounter_denominator         pass     pass     pass        pass
+  s2_symmetric_anchor              pass     pass     pass        pass
+  s3_rubric_backcast               pass     pass     pass        pass
+  s4_antler_calibration            pass     pass     pass        pass
+  s5_adversarial_prior             pass     pass     pass        pass
+  s6_foreclosure_rate              pass     pass     pass        pass
+  s7_hardship_threshold            pass     pass     pass        pass
+  s8_recognition_to_delivery       pass     pass     pass        pass
+  s9_corpus_position_filter        pass     pass     pass        pass
+  m1_tenure_budget                 pass     pass     pass        pass
+  m2_coupling_readout              pass     pass     pass        pass
+  m3_energy_ledger                 pass     pass     pass        pass
+  m4_assessment_record             pass     pass     pass        pass
+  run_all                          pass     pass     pass        pass
+  excluded_subject                 pass     pass     pass        pass
 
   r4 README: pass
   all rules pass: True
 
   s7_hardship_threshold uses graded terms: incentive direction, cost asymmetry, steers, aggregate steers
+  excluded_subject uses graded terms: cost asymmetry
 
 ------------------------------------------------------------------------
 
@@ -23,6 +30,7 @@ CROSS-CUTTING RULES, ENFORCED
     planted_moral_caught             True
     planted_intent_caught            True
     planted_confidence_caught        True
+    planted_abs_comparison_caught    True
 
     a keyword scan is stepped around by any paraphrase. A PASS on rules
     1 and 2 means no listed token was found, not that the rule holds

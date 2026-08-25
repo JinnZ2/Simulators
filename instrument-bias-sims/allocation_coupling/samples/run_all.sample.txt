@@ -1,0 +1,138 @@
+S10 -- ALLOCATION COUPLING (runner)
+========================================================================
+
+  AGENTS -- declared before any equation
+
+    holder               works, earns, holds or loses tenure, may observe
+    assessor             scores contribution from available record
+    land                 state changes on a slow clock, readable only by continuous presence
+    not_representable    [BLANK]
+
+    the blank, enumerated (5 parties):
+      prior holders
+        tenure history is a scalar in M1; who held before and under
+        what terms is not represented
+      co-resident household members
+        hours_available is per holder. Anyone whose labour frees or
+        consumes those hours has no term
+      the party setting tenure_cost
+        tenure_cost is an exogenous constant. Nothing in the model
+        determines it, so no incentive running through it can be read
+      non-holders present on the land
+        presence is derived from tenure in M1, so continuous observers
+        without tenure cannot exist in this model at all
+      the land's other couplings
+        land state is a single slow variable. Watershed, neighbours and
+        weather enter only through it
+
+    the spec asked for the blank to be listed explicitly rather than
+    left empty. Five parties are named; the fourth is load-bearing,
+    because deriving presence from tenure makes a continuous observer
+    without tenure unrepresentable, and that is the position most
+    likely to hold the knowledge the model is about
+
+------------------------------------------------------------------------
+
+  PHASE 1 -- modules independent, fixed inputs
+
+  position             M1 hrs left  M2 obs       M4 assessed  M3 kcal
+  desk_professional    570.0        1.88         1.74         2018
+  freight_driver       463.6        1.88         0.72         2518
+  fabrication          411.1        1.88         0.69         3918
+  animal_handling      300.0        1.88         0.34         3718
+  farm_labor           227.3        1.88         0.28         4618
+
+  M2 returns the same number for every position here, because nothing
+  from M1 reaches it. That is the baseline the coupled run is
+  differenced against.
+
+------------------------------------------------------------------------
+
+  PHASE 2 -- coupled M1 -> M2 -> M4, M3 alongside
+
+  position             hours      blocks   obs         deep obs     assessed
+  desk_professional    570.0      13       1.78        0.00         1.66
+  freight_driver       463.6      8        1.45        0.00         0.55
+  fabrication          411.1      13       1.28        0.00         0.48
+  animal_handling      300.0      20       0.94        0.00         0.17
+  farm_labor           227.3      20       0.71        0.00         0.11
+
+  deep-observation share of all observations: 0.0000
+
+  Deep observations -- sequence, lag, threshold -- are at zero for
+  every position in the coupled run. The positions with hours left are
+  the positions whose hours arrive in many short blocks, and the
+  positions with long blocks have no hours left.
+
+------------------------------------------------------------------------
+
+  PHASE 3 -- the residual first
+
+  RESIDUAL (interaction)      +0.64
+  as a share of the effect    0.791
+  total effect                -0.81
+  uncoupled / coupled         3.77 / 2.96
+  decomposition is additive   False
+
+  PER-LINK TABLE: REFUSED
+    The residual exceeds these links individually: M1 hours -> M2,
+    position -> M4 writing. A per-link table is not printed. An
+    annotation under a table does not undo the table -- the rows are
+    the claim, and rows whose sum is further from the truth than the
+    truth is from zero mislead in a way a footnote cannot repair.
+
+    link magnitudes, unranked, for the record:
+      |M1 blocks -> M2| = 1.26
+      |M1 hours -> M2| = 0.20
+      |position -> M4 writing| = 0.00
+
+  the spec asks for per-link attribution BECAUSE the finding is in the
+  cross-terms, and a per-link table is exactly the object that cannot
+  hold one. Where the residual exceeds any single link the table is not
+  printed at all
+
+------------------------------------------------------------------------
+
+  M3, ALONGSIDE
+
+  correlation, wage vs kcal expended: -0.883  (against energy draw)
+  sensory integration term: [BLANK] for 5 of 5 positions
+
+  M3 does not enter the decomposition. Nothing in the spec routes
+  energy into assessment, so it is a separate readout and is reported
+  as one rather than folded in.
+
+------------------------------------------------------------------------
+
+  CONFIDENCE, reported separately and not resolved
+    any_real_data                  NONE anywhere in the module set
+    decomposition
+      leave-one-in. The residual is the interaction and is reported,
+      not distributed
+    magnitudes
+      carry every stipulation in M1-M4, most of all M4's hand-assigned
+      position mapping
+    per_link_table_alone           NOT SUFFICIENT -- see residual_share
+    resolved                       False
+
+  WHERE IT BREAKS
+    - A PER-LINK TABLE CANNOT REPRESENT A CROSS-TERM, which is the
+    thing the spec says the finding is in -- so where the residual
+    exceeds any single link, THE TABLE IS NOT PRINTED. The first
+    version printed it with an annotation underneath; an annotation
+    does not undo a table, because the rows are the claim. The residual
+    now prints first and the links only as unranked magnitudes
+    - leave-one-in is one of several decompositions and they disagree.
+    Leave-one-OUT would give different per-link numbers on the same
+    model, and a Shapley value a third set. None is more correct; they
+    answer different questions, and the choice is not stated by the
+    spec
+    - the baseline is 'same hours and blocks for everyone', which is a
+    choice. A different uncoupled baseline changes every difference in
+    phase 3
+    - M3 runs alongside and does not enter the decomposition at all,
+    because nothing in the spec routes energy into assessment. That is
+    faithful to the spec and it means the energy result is a separate
+    readout rather than part of the coupled finding
+    - every magnitude inherits M4's hand-assigned position mapping,
+    which that module names as the weakest link in the set

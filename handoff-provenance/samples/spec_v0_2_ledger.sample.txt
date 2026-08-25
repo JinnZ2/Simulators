@@ -1,0 +1,149 @@
+SPEC v0.2 LEDGER -- [K~] and the RE-READ column
+========================================================================
+
+  written from the delivered text, before the implementation.
+  committed ahead of the implementing commit.
+
+  seal: e38bf1131501646b...
+
+  [K  ] [K~] is a tag, added to the existing tag set
+  [K  ] [K~] is operator-stated, not proposed or inferred
+  [K  ] [K~] carries a translation flagged as lossy
+  [K  ] the lossiness is flagged at time of speaking, not later
+  [K  ] for a [K~] entry the shape is present and the English is
+        suspect
+  [K  ] RE-READ is a column
+  [K  ] the RE-READ column has two distinct entries, not one
+  [K  ] SHIFT is an item that reads differently later, because the
+        observing position moved
+  [K  ] SHIFT is data about the station
+  [K  ] RETRANS is an item that reads the same, where the English was
+        wrong the first time
+  [K  ] RETRANS is data about the translation layer
+
+  tag counts: K=11
+
+  These are [K], not [K?]. The operator's statement is
+  in-session and quotable, so 'was this stated upstream' is
+  answerable from here. seed.py could not answer it.
+
+------------------------------------------------------------------------
+
+  THE DIFF AGAINST THE IMPLEMENTATION
+
+    code available: True
+
+               scorable  dropped   drop rate
+    first run  11        1         0.09
+    now        10        0         0.00
+
+    the first run's single DROPPED:
+      [K~] is a tag, added to the existing tag set
+
+    it is carried -- [K~] is in TAGS. The matcher scored it
+    on 2 of its 6 content words; the floor ate k, set, tag.
+    Share 0.50 against a 0.55 threshold: a false DROPPED by
+    two hundredths, and it cleared the reportability floor.
+
+    matched against implementation_surface(): docstrings,
+    comments and the disclosure functions stripped. Against
+    raw source these entries score partly on the prose that
+    quotes them, and that showed up as the 0.09 run ceasing
+    to reproduce once the report was written.
+
+    The instrument was changed after seeing that. The
+    coverage rule is set at a majority on principle, not at
+    the value that rescues this line, and the eight-fixture
+    matcher grade is unchanged -- but it was still chosen
+    after the data, and both numbers print.
+
+    and it does not fix the blindness. The entry
+    'the doe performs partner selection' loses only doe --
+    1 of 4 content words, under the line --
+    so it is scored, without its subject. The spec's headline
+    instance is a doe-choice arm and the matcher cannot see
+    the token.
+
+------------------------------------------------------------------------
+
+  CONFIDENCE, reported separately and not resolved
+    drop_rate
+      0.00 over 10 scorable entries, and the instrument was changed
+      after the first run to get there. The first number, 0.09, was one
+      false DROPPED
+    ordering
+      git history, not the seal. Evidence an outside reader can check,
+      and rewritable
+    resolved
+      False
+    self_diff
+      this ledger scores code written to satisfy it, by the same party,
+      in the same pass. Prose and the disclosure surface are stripped
+      before matching, which cuts the obvious route and does not make
+      the number a measurement. Read 0.00 as an upper bound on carriage
+    tag_is_K_not_K_question
+      the operator's statement is in-session and quotable. That is a
+      different epistemic position from seed.py, not a stronger claim
+      about the same one
+    the_fix
+      MIN_COVERAGE was set on a principle -- a majority of an entry's
+      content words must survive the length floor -- and not at the
+      value that rescues the entry that exposed it. That is the defence
+      available and it is not the same as having chosen it beforehand
+    verbatim_fidelity
+      near-verbatim, one line per delivered clause. Splitting prose
+      into lines is a judgement and this file made it
+
+  WHERE IT BREAKS
+    - THE FIRST REPORTABLE DROP RATE THIS MODULE EVER PRODUCED WAS
+    WRONG. Eleven [K] entries cleared the ten-entry floor, the diff
+    returned 0.09, and the single DROPPED item -- '[K~] is a tag, added
+    to the existing tag set' -- is plainly carried: [K~] is in TAGS.
+    The matcher scored that entry on 'added' and 'existing' alone,
+    because 'tag' and 'set', the two words carrying the claim, are
+    three letters and the length floor is four. The share was 0.5
+    against a 0.55 threshold, so a false DROPPED arrived by two
+    hundredths
+    - THE INSTRUMENT WAS CHANGED AFTER SEEING THE RESULT, WHICH IS THE
+    FITTING MOVE THIS REPO AUDITS ELSEWHERE. MIN_COVERAGE refuses an
+    entry when the length floor eats most of its content words. It is
+    set at a majority, on the principle that a share over the minority
+    of an entry is not a reading of the entry, and deliberately not at
+    the value that would rescue this one line. The matcher grade on the
+    eight fixtures is unchanged. None of that makes it a rule chosen
+    before the data, and the before number is reported beside the after
+    - THE COVERAGE RULE DOES NOT FIX THE UNDERLYING BLINDNESS, AND THE
+    SPEC'S OWN HEADLINE INSTANCE IS STILL SCORED WITHOUT ITS SUBJECT.
+    'the doe performs partner selection' loses only 'doe' to the floor
+    -- one content word of four, under the majority line -- so it is
+    scored, and it is scored on 'performs partner selection' with the
+    doe invisible. The spec's flagship DROPPED instance is a doe-choice
+    arm and the instrument measuring it cannot see the token. Any
+    three-letter subject is in the same position: arm, gap, key, ice
+    - A SELF-DIFF IS NOT A MEASUREMENT OF THE CHANNEL. Ledger and code
+    here came from one party in one pass, and the first attempt scored
+    against raw source -- where provenance.py's docstring and diff.py's
+    report both quote these entries verbatim, so a CARRIED could be
+    earned by the code that PRINTS an item rather than the code that
+    implements it. It surfaced as an instability: the 0.09 run stopped
+    reproducing once the report was written. Matching now runs against
+    implementation_surface(), docstrings and disclosure functions
+    stripped, and the before/after numbers are stable again. That
+    removes the obvious route and not the contamination
+    - THE SPLIT FROM PROSE INTO LINES IS THIS FILE'S JUDGEMENT AND IT
+    SETS THE DENOMINATOR. The delivered text is six lines of prose;
+    rendering it as eleven ledger entries is a choice, and a coarser
+    split would produce a different drop rate from the same delivery
+    and the same code. Nothing here establishes eleven
+    - an in-session [K] is confirmable only while the session holds the
+    message. Read back later from the file alone, DELIVERED is a
+    transcription made by the same party that wrote the entries, which
+    is the fourth failure mode's exact shape one layer up
+    - committing the ledger before the code puts the ordering in git
+    history, which is evidence and not proof: history is rewritable,
+    and the commit only shows when the file was committed, not when it
+    was written
+    - eleven entries is still under the ten-entry reportability floor
+    the module applies to rates -- it clears it by one, which is not a
+    corpus. The spec's own note stands: the first several runs ARE the
+    baseline

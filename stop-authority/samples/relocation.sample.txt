@@ -1,0 +1,122 @@
+MEASUREMENT-POINT RELOCATION -- the reading that still holds
+========================================================================
+
+  THE UPSTREAM READING, AFTER THE MOVE
+
+    state:              NOT_DISPROVEN_MADE_NONBINDING
+    still correct:      True
+    still binds:        False
+
+    what changed: where the decision reads from, not what the
+    instrument said
+    not refuted: nobody argued the inspectors were wrong. A refutation
+    would have to engage the reading; this did not engage it
+    not superseded: superseded implies the new measurement covers what
+    the old one covered. The proxy is lagged, downstream and short a
+    denominator, so it covers less
+
+------------------------------------------------------------------------
+
+  THE TWO MEASUREMENT POINTS, SAME MATERIAL
+
+    true defect rate        0.080
+    spec threshold          0.050
+
+    point                  reads      decision
+    pre-shipment           0.072      REFUSE
+    post-shipment return   0.016      SHIP
+
+    decisions agree:        False
+    proxy understates by:   4.55x
+    detection fraction:     0.198  (0.60 x 0.55 x 0.60)
+
+    the same material, the same threshold, and opposite decisions. The
+    proxy is not noisier than the inspection -- it is biased low by the
+    share of defects that never come back, and that share is not
+    observed by anyone reading it
+
+------------------------------------------------------------------------
+
+  THE MISSING DENOMINATOR
+
+    t     defective   returned    silent    proxy sees
+    1     80          0           64        False
+    2     80          0           64        False
+    3     80          0           64        False
+    4     80          16          64        True
+    5     80          16          64        True
+    6     80          16          64        True
+
+    cumulative defective    480
+    cumulative returned     48
+    cumulative silent       385
+    silent share            0.802
+    shipped before signal   240 defective units
+
+    the silent column is never recorded anywhere. It is not a
+    measurement with error bars, it is a population the proxy has no
+    channel to
+
+------------------------------------------------------------------------
+
+  CAN THE PROXY CARRY THE DECISION
+
+    does it detect anything:  True
+      returns do identify problems -- some of them, later, after harm,
+      at an unknown fraction. That was the budget office's stated
+      rationale and it is not false
+
+    can it carry the decision: False
+      at the same threshold the two points give opposite decisions on
+      the same material, and the proxy's is the wrong one by a factor
+      of 4.55 it cannot measure. A decision needs the reading to be
+      comparable to the threshold; this one is comparable to nothing
+
+  CONFIDENCE, reported separately and not resolved
+    detection_fraction
+      a product of three unobserved terms. The PRODUCT is the point --
+      whatever the individual values, the proxy reads a fraction nobody
+      has measured
+    resolved
+      False
+    the_case
+      one witnessed account, from the operator, from a position held
+      during the transition. Carried as delivered and not verified
+    the_numbers
+      stipulated. The true defect rate, the threshold and the three
+      survival fractions were chosen to make the decision flip visible;
+      they are not measurements of the material in the account
+    what_is_not_claimed
+      that returns detect nothing. They detect some problems, later,
+      after harm. The question answered here is whether the proxy can
+      carry the decision the upstream reading was carrying
+
+  WHERE IT BREAKS
+    - THE SAME MATERIAL AT THE SAME THRESHOLD GIVES OPPOSITE DECISIONS,
+    AND THE PROXY'S IS WRONG BY A FACTOR IT CANNOT MEASURE.
+    Pre-shipment reads 0.072 and refuses; post-shipment reads 0.016 and
+    ships. The gap is the share of defects that never come back, which
+    is a product of three terms nobody reading the proxy observes. A
+    decision needs a reading comparable to a threshold, and this one is
+    comparable to nothing
+    - THE MISSING DENOMINATOR IS NOT AN ERROR BAR. Roughly four in five
+    defective units in this run never return, and they produce no
+    record anywhere -- not a noisy record, no record. A customer who
+    absorbs a defect is not a measurement with uncertainty attached,
+    they are a population the proxy has no channel to, and no amount of
+    accumulating returns recovers them
+    - THE NUMBERS ARE STIPULATED AND CHOSEN TO SHOW THE FLIP. A defect
+    rate of 0.08, a threshold of 0.05, and three survival fractions
+    picked to land the proxy under the line. Different values move
+    whether the decision flips; they do not move that the proxy is
+    biased low by an unobserved product, which is the structural claim
+    - THE BUDGET OFFICE'S STATED RATIONALE IS NOT REFUTED HERE. Returns
+    do identify problems. The module separates 'does the proxy detect
+    anything' from 'can the proxy carry this decision' and answers only
+    the second, because answering the first with NO would be a stronger
+    claim than the case supports and a wrong one
+    - ONE ACCOUNT, AND THE LAG AND SURVIVAL TERMS ARE INVENTED. The
+    relocation is witnessed; the three-period return lag and the
+    manifest/notice/return fractions are this module's construction.
+    They demonstrate the mechanism is arithmetically available and
+    measure nothing that happened

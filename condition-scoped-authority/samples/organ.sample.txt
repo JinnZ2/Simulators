@@ -1,0 +1,149 @@
+THE ORGAN ERROR -- coordination is a specialization, not a rank
+========================================================================
+
+  organ          senses                       acts
+  hand           grip_slip, touch             grasp
+  foot           balance, ground_contact      push_off
+  coordinator *  sequence, timing             schedule
+
+  * the coordinator. It has channels the others lack AND
+    lacks channels they have -- a coordinator that sensed
+    everything would be a rank, and Body refuses to build one.
+
+------------------------------------------------------------------------
+
+  FAILURE 1 -- REASSIGNMENT BY DECREE
+
+    decree: hand performs the task of foot
+    task reassigned: stay upright
+
+                               capacity   functioning
+    before                     1.00       True
+    after                      0.67       False
+
+    verdict: NON_FUNCTIONING
+    the reassigned task outputs 0.0 -- state CANNOT_SENSE_THE_INPUT
+
+    the reassigned organ has no sense channel for the task, so its
+    output is exactly zero rather than reduced. The coordinator's own
+    task is unaffected, so the signal visible where the decree was
+    issued does not move
+
+    and the aggregate hides it:
+      system capacity 0.67 reads as a 33% shortfall
+      the system is NON_FUNCTIONING
+      the mean is over tasks, and one task at exactly zero averages
+      into a fraction. Degraded and non-functioning differ in whether
+      any required channel is absent, which is a property of the worst
+      task and not of the mean
+
+    WHERE THE DECREE CAN LOOK
+
+      coordinator signal unchanged: True
+      observable at the decree:     False
+
+      The failure lands downstream, in a channel the
+      coordinator does not have -- which is why the task
+      looked reassignable in the first place.
+
+------------------------------------------------------------------------
+
+  FAILURE 2 -- SCORING THE COORDINATOR AS THE SYSTEM
+
+                   system capacity    coordinator
+    healthy        1.00               1.00
+    broken         0.67               1.00
+
+    system capacity moved:    True
+    coordinator score moved:  False
+
+    the coordinator scores the same in both bodies. Reporting that
+    score as the system's capacity reports a number that does not move
+    when the system stops working
+
+    same shape as, and counted as one:
+      - stop-authority: the narrow safety metric rising while the
+      facility degrades
+      - stop-authority: the stop count read as the authority
+      measurement
+    ONE_SHAPE_RECURRING_NOT_THREE_FINDINGS
+
+------------------------------------------------------------------------
+
+  OPEN WORK
+
+    restore scope-partition to a structure already collapsed to rank
+      -> NO_METHOD_PROPOSED
+    does BOUND authority survive outside regulated domains
+      -> NOT_SEARCHED
+    if it survives only where a regulator forced it, that is the
+    finding
+      -> CONDITIONAL_ON_THE_ABOVE
+
+    regulated domains named: nuclear, aviation, protective detail
+    unregulated instances recorded: 0
+    state: NOT_SEARCHED      finding: None
+
+    the finding the spec names -- that BOUND survives only where a
+    regulator forced it -- is an absence, and an absence needs a search
+    behind it. None has been conducted. Zero rows here is the size of
+    the search, not the size of the population
+
+    what would make it one: a search of unregulated domains that looked
+    for BOUND authority and reported where it looked, so that a zero
+    carries a denominator
+
+  CONFIDENCE, reported separately and not resolved
+    failure_2
+      the third instance of one shape in this repo, recorded as
+      recurrence rather than as a new result
+    resolved
+      False
+    the_body
+      three organs and three tasks, stipulated. It shows what follows
+      from sense channels being distinct, and is not a model of anatomy
+      or of any organisation
+    the_rubric_claim
+      the spec's link to the centralized-executive prior in
+      consciousness and intelligence rubrics is carried and NOT tested.
+      This module has no rubric corpus
+    the_zero
+      structural, not tuned. An organ with no channel for an input
+      scores zero because there is nothing to score, and no parameter
+      here sets it
+
+  WHERE IT BREAKS
+    - THE COORDINATOR'S SCORE DOES NOT MOVE AT ALL BETWEEN A WORKING
+    BODY AND A BROKEN ONE. Healthy system capacity 1.00 with a
+    coordinator score of 1.00; after the decree, system capacity 0.67
+    and the coordinator score still 1.00. Reporting the coordinator as
+    the system does not give a biased estimate of capacity, it gives a
+    number with zero sensitivity to it -- the measurement cannot fail,
+    which is what makes it attractive
+    - AND THE AVERAGE IS ITSELF THE DEGRADATION ILLUSION. System
+    capacity reads 0.67, which presents as a 33% shortfall. The system
+    is NON_FUNCTIONING: one task is at exactly zero because the organ
+    assigned has no channel for the input. Degraded and non-functioning
+    differ in whether a required channel is absent, which is a property
+    of the worst task and precisely what a mean removes
+    - THE DECREE CANNOT OBSERVE ITS OWN CONSEQUENCE, AND THAT IS
+    STRUCTURAL RATHER THAN A REPORTING LAPSE. The coordinator's task is
+    untouched by the reassignment, so the signal visible where the
+    decree was issued does not move. No amount of attention at that
+    point reveals the failure; the failure is in a channel the
+    coordinator does not have, which is why it was reassignable in the
+    first place
+    - THIS IS THE THIRD INSTANCE OF ONE SHAPE AND IT IS NOT THREE
+    FINDINGS. Measure a subset, report it as the whole: the narrow
+    safety metric rising while the facility degrades, the stop count
+    read as the authority measurement, and now the coordinator score
+    read as system capacity. One repo, one builder. By
+    operator-structure-echo/corroboration.py that agreement is
+    INHERITED, and counting it three times would be the error that
+    register exists to catch
+    - THE LINK TO CONSCIOUSNESS AND INTELLIGENCE RUBRICS IS CARRIED,
+    NOT TESTED. The spec says failure 2 is the same error as the
+    centralized-executive prior in those rubrics, and that org chart
+    and measurement instrument are one shape. It is a claim about a
+    literature this module has no access to. Nothing here supports it
+    and nothing here contradicts it

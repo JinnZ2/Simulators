@@ -1,0 +1,53 @@
+M1 -- TENURE BUDGET
+========================================================================
+
+  An accounting identity: hours in the money economy required to meet a
+  tenure obligation, and what is left over. No moral term appears in
+  this module.
+
+  tenure cost per period: 5200
+
+  position             wage     hrs needed   hrs left     share      state
+  desk_professional    40.0     130.0        570.0        0.186      HELD
+  freight_driver       22.0     236.4        463.6        0.338      HELD
+  fabrication          18.0     288.9        411.1        0.413      HELD
+  animal_handling      13.0     400.0        300.0        0.571      HELD
+  farm_labor           11.0     472.7        227.3        0.675      HELD
+
+  The share of available hours consumed by the tenure obligation runs
+  inversely with wage, by construction -- it is cost over wage. What
+  the module supplies downstream is not that, it is the HOURS LEFT and
+  the BLOCK COUNT, which M2 reads very differently from each other.
+
+  TENURE COST SWEEP
+
+  cost           held     at risk    lost     median share consumed
+  2000           5        0          0        0.159
+  3500           5        0          0        0.278
+  5200           5        0          0        0.413
+  7000           3        2          0        0.556
+  9000           3        1          1        0.714
+
+------------------------------------------------------------------------
+
+  CONFIDENCE, reported separately and not resolved
+    any_real_tenure_data           NONE
+    identity
+      arithmetic. hours = cost / wage, and the rest is a subtraction
+    resolved                       False
+    wage_and_cost_values
+      stipulated. only the ordering and the ratio matter downstream
+
+  WHERE IT BREAKS
+    - tenure_cost is exogenous and constant. Nothing in the model
+    determines it, so no incentive running through it can be read --
+    this is the third entry in agents.NOT_REPRESENTABLE and it bounds
+    what the whole module set can say
+    - hours_available is per holder, so any household labour that frees
+    or consumes those hours has no term
+    - the AT_RISK threshold at 25 percent of available hours is a round
+    number with nothing behind it, and the state counts in cost_sweep
+    move with it
+    - a wage is treated as position-fixed. Nothing represents changing
+    position, which is the obvious response to the squeeze the module
+    describes

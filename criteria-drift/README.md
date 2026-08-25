@@ -16,6 +16,56 @@ This tool makes it visible by:
 
 If the slope is positive and significant, some fraction of "progress" is the ruler stretching.
 
+## The unlogged case
+
+`unlogged_move.py` is the counterpart to everything above. The rest of this
+folder assumes versions are declared and measures how fast a declared ruler
+moves. That module asks what happens when the ruler moves and **no version is
+cut** — the distinction PREAMBLE.md's TERM COLLISION note draws between
+REVISION (provenance-bearing, the move is logged) and ASSERTION (no cause
+named, nothing records that the criterion moved).
+
+One identical series of twelve readings, read three ways:
+
+| reading | step | → system | error | flagged |
+| --- | --- | --- | --- | --- |
+| `ASSERTION` | +0.150 | +0.150 | **+0.150** | no |
+| `REVISION` | +0.150 | `None` | `None` | yes |
+| `REVISION_WITH_BRIDGE` | +0.150 | +0.000 | +0.000 | yes |
+
+The system did not move at all in that scenario. `ASSERTION` reports a 15-point
+improvement and carries no flag. Run it again with a real +0.10 system change
+and `ASSERTION` reports +0.25 — **wrong by exactly the unlogged move in both
+cases**, an error that does not depend on whether the system changed and is not
+visible from inside the reading.
+
+Two results worth having:
+
+- **Logging alone does not decompose.** `REVISION` returns `None` for the
+  system attribution, not zero. Separating system from criterion needs a
+  *bridge* — one measurement taken under both criteria — and without it
+  `UNKNOWN` is the correct output. In any summary table `None` will look like
+  the reading that failed to produce a result; it is the one that produced the
+  right one.
+- **"Uninterpretable" understates it.** The prior readings stay present,
+  numeric, in range and continuous; nothing in the data marks the move. The
+  failure is not a gap where an answer should be — it is a confident wrong
+  answer in the same shape as a right one. A blank announces itself; this does
+  not.
+
+A third result, about this repo rather than about criteria: **the bridge is
+`anchor.py`'s argument, not this module's.** That file already establishes the
+same requirement from cross-domain cases — an invariant scored across versions
+— and `audit.py regress` already refuses an identified criteria term without
+one. Two modules in one folder, by one builder, agreeing is
+`operator-structure-echo/corroboration.py`'s `INHERITED` state on a real pair:
+one position expressed twice, not two lines of evidence. The sim demonstrates
+a requirement established next door; it does not corroborate it.
+
+```
+python3 unlogged_move.py [--selftest]     # 24 checks
+```
+
 ## Design constraints
 
 - **Stdlib only** — no pip install, no cloud APIs, no fragile dependencies
