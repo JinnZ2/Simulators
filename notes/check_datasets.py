@@ -212,17 +212,24 @@ def report():
     print("   UNI_010's loop in notes/, found the same way -- by running")
     print("   twice. Excluding by path is a hand-broken loop, not a fix.")
     print()
-    print("   G-SPAN does not resolve. The folder is `sim-span/` and the")
-    print("   module SIM-SPAN. Recorded, not normalised -- the note is")
-    print("   stored as delivered and vocabulary is not harmonised across")
-    print("   entries.")
-    print("   `parity` resolves 16 times and NOT ONCE in the note's sense.")
+    print("   G-SPAN, MESA and SOF resolved ZERO times when this check")
+    print("   was written and resolve now -- every hit under sim-span/,")
+    print("   which is work written AFTER the note, using its vocabulary.")
+    print("   The note was written into the tree it is checked against:")
+    print("   ANC_001..004 at repo scale, reaching this checker through a")
+    print("   sibling folder, which is the route an EXCLUDE list does not")
+    print("   close (QA_007). The assertion was changed rather than the")
+    print("   list widened -- these must resolve ONLY under sim-span/, so")
+    print("   a hit elsewhere still fires. Finding 8.")
+    print("   `parity` resolves %d times and NOT ONCE in the note's sense."
+          % len(resolve("parity")))
     print("   Every repo use is the equality sense -- `parity()` as a")
     print("   comparison function in the divergence log, 'what would count")
     print("   as parity' as equivalence. The note means the obstetric")
     print("   sense: number of pregnancies. One word, two senses, and a")
     print("   resolver that counts occurrences reports a reference as")
-    print("   resolving 16 times when it resolves zero times.")
+    print("   resolving %d times when it resolves zero times."
+          % len(resolve("parity")))
     print("   That is `uninstrumented` case 021's sense substitution and")
     print("   `nonidentity-census` T1-3's `state` finding (nation-state vs")
     print("   steady state), third instance in this tree -- and it is a")
@@ -316,20 +323,32 @@ def selftest():
                      "%.2f h); 'WASO alone is not the axis' must be restated"
                      % v["vertex_spread"])
 
-    # G-SPAN must not resolve, or finding 2 is wrong.
-    if resolve("G-SPAN"):
-        fails.append("G-SPAN now resolves in the tree; finding 2 must be "
-                     "restated")
+    # G-SPAN, MESA and SOF used to resolve nowhere, and finding 3's table
+    # recorded three zeros. They now resolve, and NOT because the note was
+    # wrong: sim-span/RESULTS.md, NOTES_INSTRUMENT.md and three_column.py
+    # adopted the note's own vocabulary after the table was written. The
+    # note was written INTO the tree it is checked against -- the
+    # anchor-interval corpus loop (ANC_001..004) and UNI_010, at repo
+    # scale, arriving through a sibling folder rather than through this
+    # checker's own output.
+    #
+    # So the assertion is no longer "must not resolve". It is "must
+    # resolve only downstream of the note", which still has a reachable
+    # negative: a hit outside sim-span/ would mean the term has an
+    # antecedent independent of the note, and finding 3 would have to be
+    # restated for the reason it originally claimed.
+    for tok in ("G-SPAN", "MESA", "SOF"):
+        outside = [h for h in resolve(tok) if not h.startswith("sim-span" + os.sep)]
+        if outside:
+            fails.append("%s resolves outside sim-span/ (%s); the term has "
+                         "an antecedent independent of the note and finding 3 "
+                         "must be restated" % (tok, ", ".join(outside)))
     # The word-bounded resolver must still be sense-blind on `parity`, or
     # the finding about it has to be restated. It counts >0 and the count
     # in the note's sense is 0; that gap IS the finding.
     if not resolve("parity"):
         fails.append("`parity` no longer resolves at all; the sense-blindness "
                      "finding must be restated")
-    # ...and the substring bleed must be gone, or the UNI_009 repair failed.
-    if resolve("MESA") or resolve("SOF"):
-        fails.append("MESA or SOF now resolves; the note's cohorts have "
-                     "an antecedent and finding 2 must be restated")
     # sim-span must resolve, or the note has nothing to attach to.
     if not resolve("MESA") and not os.path.exists(RESULTS):
         fails.append("nothing for the note to attach to")

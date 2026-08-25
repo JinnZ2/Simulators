@@ -77,10 +77,15 @@ MESA fixes the operating point instead of leaving 360 cells open.
 
 | token | bounded hits | in the note's sense |
 |---|---|---|
-| `G-SPAN` | 0 | — |
-| `MESA` | 0 | — |
-| `SOF` | 0 | — |
-| `parity` | **14** | **0** |
+| `G-SPAN` | 0 → **2** | — |
+| `MESA` | 0 → **1** | — |
+| `SOF` | 0 → **1** | — |
+| `parity` | 14 → **18** | **0** |
+
+The three zeros are the counts as first measured. They are no longer
+zero, and the reason is in finding 8 below — every one of the new hits is
+in `sim-span/`, work written after this note and using its vocabulary.
+The `parity` count moved for the ordinary reason: the tree grew.
 
 Every repo use of `parity` is the **equality** sense — `parity()` as a
 comparison function in the divergence log, *"what would count as parity"*
@@ -174,3 +179,40 @@ committed anyway:** `UNI_009`'s substring bleed (finding 4) and `UNI_010`'s
 loop (this one). Neither was caught by reading the code. The first was
 caught by a hand-check of a suspicious count, the second by a selftest
 assertion that happened to be pointed at the right variable.
+
+## 8. The note's own terms now resolve, because the note was written into
+the tree it is checked against
+
+Finding 3's table recorded `G-SPAN 0`, `MESA 0`, `SOF 0`. Re-run today:
+
+| token | hits | where |
+|---|---|---|
+| `G-SPAN` | 2 | `sim-span/NOTES_INSTRUMENT.md`, `sim-span/three_column.py` |
+| `MESA` | 1 | `sim-span/RESULTS.md` |
+| `SOF` | 1 | `sim-span/RESULTS.md` |
+
+Nothing about the note turned out to be wrong. What happened is that the
+downstream work adopted its vocabulary — the second operator note and the
+three-column test were written after this checker's table, and
+`RESULTS.md` was updated to name the cohorts. The resolver then found
+them, correctly, and the assertion "these must not resolve" fired.
+
+That is `anchor-interval` ANC_001..004 at repository scale: a corpus that
+is written into by the thing measured against it. It is also `UNI_010`
+arriving the way `question-availability` QA_007 said it would — through a
+**sibling folder** rather than through the checker's own output, which is
+the route an `EXCLUDE` list does not close.
+
+**The assertion was changed rather than the exclude list widened.** It now
+reads: `G-SPAN`, `MESA` and `SOF` must resolve **only under
+`sim-span/`**. That keeps a reachable negative — a hit anywhere else
+would mean the term has an antecedent independent of the note, which is
+what finding 3's zeros were originally evidence about — while no longer
+firing on the tree simply having used the words the note supplied.
+
+Recorded rather than quietly repaired because the failure was standing at
+`HEAD` before this session touched anything, and was found by running the
+suite, not by reading it. Third time in this folder: `check_d2.py` had
+two wrong paths in its own record, `check_uploads.py` had a dropped
+member in its own record (`FINDINGS_UPLOADS.md` U6), and this one had an
+assertion that the tree outgrew. None of the three was found by reading.

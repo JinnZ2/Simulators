@@ -12,7 +12,7 @@ to the entries — an operator entry describes an operation, not a result.
 | path | what |
 |---|---|
 | `operators/` | entries, delivered verbatim. One file per operator. |
-| `datasets/` | candidate instruments named by the operator, delivered verbatim. |
+| `datasets/` | candidate instruments named by the operator. `mesa_sof.md` is delivered verbatim; `uploads_2026_08_25.md` is an index over delivered *bytes* that are not in the tree, and says so at the top. |
 | `check_*.py` | one checker per entry, run against this tree. Reads the entry, does not modify it. |
 | `study_watch.py` | retrieval notification for entries carrying a WOULD MEASURE. Runs on a GitHub Actions runner, which reaches the three sources the local egress gate refuses. Opens a pull request; merges nothing. |
 | `watch/` | one file per run, `YYYY-MM-DD.md`. Read `watch/README.md` first — silence from that action is not evidence of absence. |
@@ -41,6 +41,19 @@ checker's output and the entry stays as written — same arrangement
   are needed and the cohort has both. `parity` resolves 16 times in this
   tree and zero times in the note's sense. Every dataset fact is carried,
   not checked — the egress gate refuses the sources.
+
+- `datasets/uploads_2026_08_25.md` — four dataset files delivered "to file
+  for future". The bytes are not here and the reason is in the entry;
+  what is here is a per-file index with a sha256, so a re-obtained copy is
+  checkable. Checked by `check_uploads.py`; six readings in
+  `FINDINGS_UPLOADS.md`. Twenty-six workbooks in one of them carry zero
+  formulas and a naive scan returns three, all of them listing titles
+  beginning with `=` (SSS_061). The UCI archive carries a repeat-measure
+  pair, which is the null `triad-playground` TP_010 says this tree has
+  never had. The World Bank catalogue is a target list for the third
+  workbook `sheet-structure-scan` WO7 could not reach, and a clock corpus
+  that needs no egress at all. On its first run the checker caught an
+  error in its own record, which is the same thing `check_d2.py` did.
 
 The catalogue this is filed into — the A and D families, D1, A3, A4, the
 compound field-modifier — is not in this repo. `D2.md` references them and
