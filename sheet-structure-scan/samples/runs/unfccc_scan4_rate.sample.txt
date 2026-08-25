@@ -1,0 +1,12 @@
+scan 4 -- maintenance rate
+workbooks in this emission: n = 1
+
+workbook     version date  MAINT  HOLDS  BROKEN  NOT_TEST  mean operands  cross-sheet  BROKEN/(B+H)
+-----------  ------------  -----  -----  ------  --------  -------------  -----------  ------------
+unfccc.xlsx  not stated    0      2      21      11        20.7           0            0.913
+
+pooled BROKEN/(BROKEN+HOLDS_UNMAINTAINED): 0.913
+
+NO CURVE IS REPORTED. n = 1. A decay curve takes a series
+of workbooks with version dates; one workbook gives one
+point, and a point is not a rate.

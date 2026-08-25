@@ -5903,8 +5903,57 @@ underneath).
   is installed, fails on the file, and **fails identically on a control
   this tool parses**, so the install is broken here and says nothing
   about the `.xls`. **`SSS_024`:** the output screen ran in one of two
-  CLIs and the gap surfaced on a real run. 133 selftest checks green
-  across five modules. Stdlib only, parses under 3.9, CC0.
+  CLIs and the gap surfaced on a real run. **Scan 4 (`WORK_ORDER_4.md`,
+  verbatim) then asks whether a formula still maintains what the prose
+  states** — four bins (`MAINTAINED` / `HOLDS_UNMAINTAINED` / `BROKEN` /
+  `NOT_TESTABLE`), no aggregate score, no ranking, and BROKEN is not
+  called an error, since a workbook may have every reason to hold a number
+  the note beside it no longer describes. **`SSS_033`: on the UNFCCC
+  calculator the bins are 0 / 2 / 21 / 11** — 135 prose cells across
+  eight keyword-located sheets, 124 not arithmetic — so **not one stated
+  arithmetic relationship in the workbook is maintained by a formula**;
+  every one is stated about a constant, and the two that hold, hold by
+  history rather than by construction, which is `SSS_032` generalised from
+  one case to the file. **`SSS_034`, the headline:** `Info and sources!E10`
+  states that twenty-two named territories each take the average of
+  thirty-three named places, and **twenty of them hold
+  `0.52194015744421518`, which is `Electricity, heat, cooling!B329`
+  (Western Sahara) to all seventeen digits** — the target of a *different*
+  stated relationship in the same cell of prose, the average of five North
+  and West African countries, and that one holds; one (Macao) holds a
+  third number and **zero hold the stated mean**, verified by hand on
+  `B114` and `B329` independently of the scan. **`SSS_035`:** operand count
+  separates the bins here — both 5-operand relationships hold, the one
+  33-operand relationship does not across every target it states,
+  `BROKEN/(B+H) = 0.913` — and that is exactly the quantity the order says
+  to accumulate, so the rate emission prints `n = 1` and refuses a curve in
+  those words: *a point is not a rate*. **`SSS_038`:** `when it diverged`
+  returns **UNRECOVERABLE** and says so — `.xlsx` carries no per-cell
+  revision history, so the file cannot date the divergence and the tool
+  does not estimate one; a version series of the same workbook would
+  bracket it. **`SSS_036`:** three resolution problems the real prose
+  forced (a name mismatch, an ambiguous containment match, an operand list
+  mis-split 38 against 33) are fixed by stated rules — unique containment
+  plus a declared sheet scope, and an index-driven longest-match split
+  preserving original casing — rather than by guesses. **`SSS_037`:** an
+  operator naming no operands now lands in `NOT_TESTABLE` rather than
+  falling out of the count, since a relationship that cannot be tested is
+  a reading and not an absence. **`SSS_039`, recorded rather than quietly
+  fixed:** scan 4 **shipped without the constraint its own order states**
+  — `scans.py` screens every emitted table through `no_severity` and
+  `scan4.py` did not import it at all — and screening afterwards returned
+  24 hits whose *shape* is the finding: 22 are the `BROKEN` bin name,
+  which the work order delivered and which is on the screened list. The
+  exemption is **declared and measured** rather than taken (one arm masks
+  the delivered token, a second asserts the token is the only thing that
+  fires without the mask, since masking `BROKEN` also hides any sentence
+  containing it, and a third plants `this cell is wrong` and requires it
+  caught through the exemption); the other two hits — a use-mention of
+  `error` in the disclaimer and `needs` in the rate emission — were
+  **reworded rather than exempted**, the call `residual-direction`
+  `RDD_008` made when its own screen fired on its own disclaimer. Holds on
+  the real workbook and not only on the fixture. 159 selftest checks green
+  across six modules. Stdlib only, parses under 3.9, CC0.
 - `claim-record/` — Seven fields per claim, two hard rules, and a
   validator that refuses. Delivered spoken (`SOURCE_DROP.md`, verbatim):
   assertion without hedges / measurement as an interval / instrument plus

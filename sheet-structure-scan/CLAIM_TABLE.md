@@ -890,3 +890,238 @@ it had stopped being the mean.
 
 **Status: SUPPORTED. Reported as structure; what it means for the
 workbook is the operator's reading.**
+
+---
+
+## Claims from scan 4 — stated-relationship maintenance
+
+Work order 4, delivered verbatim in `WORK_ORDER_4.md`. Independent of
+scans 1-3: those read structure, this one reads what the workbook says
+about its own numbers and checks whether the file still does it. The
+occasion is `SSS_032`.
+
+---
+
+### SSS_033 — on the first real workbook the bins are 0 / 2 / 21 / 11
+
+| bin | count |
+|---|---|
+| MAINTAINED | **0** |
+| HOLDS_UNMAINTAINED | **2** |
+| BROKEN | **21** |
+| NOT_TESTABLE | 11 |
+
+135 prose cells read across 8 sheets located by keyword; 134 classified
+`NOT_ARITHMETIC` and counted rather than tested.
+
+**Not one stated arithmetic relationship in this workbook is maintained
+by a formula.** Every relationship the prose states about a number is
+stated about a constant. The two that still hold, hold by coincidence of
+history rather than by construction — which is `SSS_032` generalised
+from one case to the whole file.
+
+No aggregate score and no ranking, per S5. The four bins are the
+finding.
+
+**Falsifier:** a formula target anywhere in this workbook's stated
+relationships.
+
+**Status: SUPPORTED, n=1 workbook.**
+
+---
+
+### SSS_034 — twenty-one targets do not satisfy the relationship stated for them, and twenty of them carry the same wrong number
+
+`Info and sources!E10` states that twenty-two named territories each
+take the average of thirty-three named places. The scan resolves all
+thirty-three operands and every target, and reports:
+
+| what the target holds | targets |
+|---|---|
+| **0.52194015744421518** | **20** |
+| 0.23879807608323081 | 1 |
+| the stated mean, 0.46020578160626169 | **0** |
+
+**0.52194015744421518 is `Electricity, heat, cooling!B329`, Western
+Sahara** — to all seventeen digits. Western Sahara is the target of a
+*different* stated relationship in the same cell of prose, the average
+of five North and West African countries, and that one holds.
+
+So twenty territories carry a number computed for somewhere else.
+Verified by hand on `B114` (Bouvet Island) and `B329` independently of
+the scan. Relative delta 0.118 on the twenty; 0.481 on Macao.
+
+**This is reported as structure and is not called an error.** A
+workbook may have every reason to hold a number the note beside it no
+longer describes, and this scan does not know what that reason is. What
+it can say is that the file states one thing and holds another, and that
+nothing in the file would have surfaced it.
+
+`when it diverged` is **UNRECOVERABLE** and says so: `.xlsx` carries no
+per-cell revision history, so the file cannot date the divergence. A
+version series of the same workbook would bracket it.
+
+**Falsifier:** a reading of `E10` under which those twenty-two
+territories are not assigned that average.
+
+**Status: SUPPORTED.**
+
+---
+
+### SSS_035 — operand count separates the bins here, which is the S6 signal at n=1
+
+| bin | operand counts |
+|---|---|
+| HOLDS_UNMAINTAINED | **5, 5** |
+| BROKEN | **33** (21 targets, one relationship) |
+| NOT_TESTABLE | 0 (no operands named) |
+
+Both five-operand relationships hold. The thirty-three-operand one does
+not, across every target it states. `BROKEN / (BROKEN + HOLDS) = 0.913`.
+
+That is exactly the quantity S6 says to accumulate, and **one workbook
+is one point.** The rate emission prints `n = 1` and refuses a curve in
+those words: *a point is not a rate*. The within-workbook pattern —
+more operands, more drift — is one observation and is stated as one.
+
+`cross-sheet` is 0 here: every operand of every tested relationship
+resolves on the same sheet as its target.
+
+**Falsifier:** a second workbook where the relationship with more
+operands is the one that holds.
+
+**Status: SPECIFIED, n=1. No curve reported.**
+
+---
+
+### SSS_036 — three resolution problems the real prose forced, each fixed by a stated rule rather than a guess
+
+**Punctuation cannot split the operand list.** `Bonaire, Sint Eustatius
+and Saba` is one country containing a comma and an "and"; so are `Heard
+Island and McDonald Islands`, `Wallis and Futuna Islands` and
+`China, Macao Special Administrative Region`. Splitting on commas and
+"and" produced **38 operands where the prose names 33**, inventing five.
+The split is now **resolved, not guessed**: at each position take the
+longest label the workbook itself carries, and emit unmatched text as a
+fragment that goes on to fail resolution. The workbook supplies the
+vocabulary.
+
+**Country names are ambiguous between two tables.** `Jordan`, `Turkey`
+and `Fiji` each resolve to a grid factor on one sheet and a hotel factor
+on another — genuinely two candidates with different values, so S3 makes
+them NOT_TESTABLE and the Palestine relationship failed to test at all.
+Repaired with a **declared scope**: when the target resolves on one
+sheet, operands are sought on that sheet first. That is not a
+tie-break — the rule is stated, applied to every operand alike, printed
+with the verdict, and **the ambiguity guard survives inside the scope**:
+two candidates on the target's own sheet are still AMBIGUOUS.
+
+**The prose and the sheet use different names.** The note says
+`Palestine`; the row says `State of Palestine`. Exact matching alone
+made G2 NOT_TESTABLE, which the fixture calls a fail. Repaired with a
+**unique whole-word containment** match, recorded in the row as
+containment rather than exact, and AMBIGUOUS when more than one label
+contains the name.
+
+All three were found by running the scan on a real file. None is
+visible on a fixture written by the same hand as the scan.
+
+**Falsifier:** a case where one of the three rules picks a resolution a
+reader would not.
+
+**Status: SUPPORTED.**
+
+---
+
+### SSS_037 — an operator with no operands must land in a bin, or an untestable relationship leaves the count
+
+`Info and sources!E19` reads *"Hotel Carbon Footprint Per Occupied Room
+| All hotels upper quartile emission factor value"*. The operator is
+stated; there is no `of` clause and no operand is named, because the
+distribution is a published index that is nowhere in the file.
+
+The first build extracted nothing from it and counted it
+`NOT_ARITHMETIC`. That satisfies S8's letter — it produced no testable
+verdict — and fails G5, which requires `NOT_TESTABLE`. The difference
+matters: `NOT_ARITHMETIC` removes the relationship from the four bins
+entirely, so a workbook full of untestable stated relationships would
+report a clean, small denominator.
+
+Now an operator with no operand clause is a relationship with an **empty
+operand list**, which is a fact about the prose, and it bins
+`NOT_TESTABLE`. Four of the eleven `NOT_TESTABLE` rows are of this shape.
+
+**Falsifier:** a stated relationship this treatment scores that a reader
+would judge testable.
+
+**Status: REPAIRED. G5 produces no testable verdict and no expected
+value, asserted in the selftest.**
+
+---
+
+### SSS_038 — the divergence date is unrecoverable from the file, and the tool says that rather than estimating
+
+S4 asks for *when it diverged*, if the file carries revision history.
+`.xlsx` carries none per cell unless tracked changes are on, and this
+file has none.
+
+Every BROKEN row therefore reports `UNRECOVERABLE`, with the reason and
+with what would answer it: a version series of the same workbook would
+bracket the change. An estimate here would be worse than the gap — the
+question is *when a note and a number stopped agreeing*, and nothing in
+a single file records it.
+
+**Falsifier:** a workbook of this format that does carry per-cell
+history the tool ignores.
+
+**Status: SUPPORTED.**
+
+---
+
+### SSS_039 — scan 4 shipped without the constraint its own order states, and the constraint fires on the vocabulary the order delivered
+
+`scan4.py` was written, selftested and its runs pinned before anything
+screened its output. `scans.py` runs `no_severity` over every emitted
+table; scan 4 did not import it at all. The order's S8 says *no
+labelling*, and the module enforcing that in this folder was not
+connected to the module the order governs.
+
+Screening the pinned runs afterwards returned 24 hits on the main
+report, and the shape of them is the finding:
+
+| what fired | where | reading |
+|---|---|---|
+| `broken` | the `BROKEN` bin name, x22 | **delivered vocabulary** |
+| `error` | *"BROKEN is not an error"* | use-mention in the disclaimer |
+| `needs` | *"a decay curve needs a series"* | ordinary prose |
+
+**The bin name is in the delivered work order and `broken` is on the
+screened list.** Loosening the screen would settle it and is how a screen
+becomes decorative, so the exemption is **declared and measured**:
+`screened()` masks the delivered token, and `exemption_is_only_the_bin()`
+asserts the token is the *only* thing that fires without the mask — two
+arms, because masking `BROKEN` also hides any sentence containing it. A
+third check plants `this cell is wrong` and requires it caught through
+the exemption.
+
+The other two were **reworded rather than exempted** — the same call
+`residual-direction` `RDD_008` made when its screen fired on its own
+disclaimer. A fourth, `severity` inside a selftest check name, was
+renamed for the same reason.
+
+The measurement holds on the real workbook, not only on the fixture: all
+three UNFCCC runs are clean under the mask and fire on nothing but the
+bin.
+
+**What this does not buy** is anything the screen could not already do.
+A paraphrase steps around it, stated at the top of `no_severity.py` and
+on record as `UNI_009` / `DF_010` / `ACL_017`. What it buys is that the
+fluent failure — reaching for the ordinary vocabulary of grading without
+noticing — is caught, and it caught three instances here on first
+contact.
+
+**Falsifier:** a grading word emitted by scan 4 that passes both arms.
+
+**Status: REPAIRED, and recorded rather than quietly fixed — a module
+landing without the constraint its order states is evidence about how
+the constraint travels, not a typo.**

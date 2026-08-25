@@ -23,6 +23,8 @@ python3 scans.py --selftest
 | `scans.py` | scan two, scan three, ranking, table. `--selftest` |
 | `no_severity.py` | the output constraint, enforced. `--selftest` |
 | `coupling.py` | sensitivity by perturbation, and the ranking. `--selftest` |
+| `scan4.py` | stated-relationship maintenance. `--selftest` |
+| `WORK_ORDER_4.md` | scan 4 as delivered, verbatim |
 | `patterns.json` | companion patterns for scan two. Swap this, not the code |
 | `fixture.py` | the demo workbook, written as a readable table |
 | `targets/TARGETS.md` | five workbooks, predictions registered before the data |
@@ -118,6 +120,66 @@ And the result the substitution is for. Under a stated case, **3
 constants have non-zero coupling and 781 have exactly zero — and every
 one of those 781 ranks non-zero under dependent count, up to 380.**
 
+## Scan 4: does a formula still maintain what the prose says
+
+`WORK_ORDER_4.md` is the delivery. A workbook states relationships in
+prose -- *this territory takes the average of those thirty-three* -- and
+scan 4 asks whether anything in the file still enforces it. Four bins,
+and the four bins are the finding: no aggregate score, no ranking, and
+**BROKEN is not called an error.** A workbook may have every reason to
+hold a number the note beside it no longer describes; the scan does not
+know what that reason is, and the reading stays with the operator.
+
+| bin | means |
+|---|---|
+| `MAINTAINED` | the target is a formula computing the stated relationship |
+| `HOLDS_UNMAINTAINED` | the target is a constant that satisfies it anyway |
+| `BROKEN` | the target is a constant that does not |
+| `NOT_TESTABLE` | the relationship is stated but no operand set resolves |
+
+**On the UNFCCC calculator: 0 / 2 / 21 / 11.** 135 prose cells read
+across eight keyword-located sheets, 124 not arithmetic and counted
+rather than tested. **Not one stated arithmetic relationship in this
+workbook is maintained by a formula** -- every one is stated about a
+constant, and the two that hold, hold by history rather than by
+construction.
+
+The headline is `SSS_034`. `Info and sources!E10` states that
+twenty-two named territories each take the average of thirty-three named
+places. **Twenty of them hold `0.52194015744421518`, which is
+`Electricity, heat, cooling!B329`, Western Sahara, to all seventeen
+digits** -- the target of a *different* stated relationship in the same
+cell of prose, the average of five North and West African countries, and
+that one holds. One (Macao) holds a third number. **Zero hold the stated
+mean.** Verified by hand on `B114` and `B329` independently of the scan.
+
+`when it diverged` returns **UNRECOVERABLE** and says so in those terms:
+`.xlsx` carries no per-cell revision history, so the file cannot date
+the divergence and the tool does not estimate one. A version series of
+the same workbook would bracket it.
+
+Operand count separates the bins here -- both five-operand
+relationships hold, the one thirty-three-operand relationship does not,
+across every target it states. `BROKEN / (BROKEN + HOLDS) = 0.913`, and
+the rate emission prints `n = 1` and refuses a curve: **a point is not a
+rate.**
+
+Three resolution problems the real prose forced are fixed by stated
+rules rather than by guesses (`SSS_036`), and an operator naming no
+operands now lands in `NOT_TESTABLE` rather than falling out of the
+count entirely (`SSS_037`).
+
+And scan 4 **shipped without the constraint its own order states**
+(`SSS_039`): `scans.py` screens every emitted table through
+`no_severity` and scan 4 did not import it. Screening afterwards
+returned 24 hits, and their shape is the finding -- 22 are the `BROKEN`
+bin name, which the work order delivered and which is on the screened
+list. The exemption is **declared and measured**, not taken: one arm
+masks the delivered token, a second asserts it is the only thing that
+fires without the mask, and a third plants a grading word and requires
+it caught through the exemption. The other two hits were reworded
+rather than exempted.
+
 ## Targets
 
 `targets/TARGETS.md` pre-registers sixteen predictions across five
@@ -169,7 +231,8 @@ definition, has a default, and is printed into the report header when it
 is in force — an absence measured at radius 2 and one measured at radius
 6 are different readings. `SPEC.md` §5 is the table.
 
-133 selftest checks across five modules: `sheetmodel` 26,
-`no_severity` 11, `scans` 35, `targets/epa_check` 29, `coupling` 32.
+159 selftest checks across six modules: `sheetmodel` 26,
+`no_severity` 11, `scans` 35, `targets/epa_check` 29, `coupling` 32,
+`scan4` 26.
 
 CC0. Stdlib only. Parses under Python 3.9.

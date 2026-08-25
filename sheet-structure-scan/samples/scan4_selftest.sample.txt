@@ -1,0 +1,27 @@
+scan4 selftest
+  one arithmetic relationship extracted                      PASS got=1 want=1
+  the operator is read                                       PASS got='average' want='average'
+  the operands are recorded as written                       PASS got=['Iraq', 'Jordan', 'Lebanon', 'Syrian Arab Republic', 'Turkey'] want=['Iraq', 'Jordan', 'Lebanon', 'Syrian Arab Republic', 'Turkey']
+  and the target too                                         PASS got=['Palestine'] want=['Palestine']
+  non-arithmetic provenance is classified, not parsed        PASS got='NOT_ARITHMETIC' want='NOT_ARITHMETIC'
+  a date-only note is not arithmetic                         PASS got='NOT_ARITHMETIC' want='NOT_ARITHMETIC'
+  G1 is MAINTAINED                                           PASS got=['MAINTAINED'] want=['MAINTAINED']
+  G3 is BROKEN                                               PASS got=['BROKEN'] want=['BROKEN']
+  G3 reports the delta                                       PASS got=(35.0, 4.0, -31.0) want=(35.0, 4.0, -31.0)
+  and says the divergence date is unrecoverable              PASS got=True want=True
+  G4 is NOT_TESTABLE                                         PASS got=['NOT_TESTABLE'] want=['NOT_TESTABLE']
+  G4 names what did not resolve and guesses nothing          PASS got=['Omega', 'Zeta'] want=['Omega', 'Zeta']
+  G4 emits no expected value                                 PASS got=None want=None
+  the provenance sheet is found                              PASS got=['Info and sources'] want=['Info and sources']
+  two candidates with different values is AMBIGUOUS, not a guess PASS got='AMBIGUOUS' want='AMBIGUOUS'
+  G5 extracts a relationship rather than dropping it         PASS got=1 want=1
+  with the operator read and no operands named               PASS got=('upper quartile', []) want=('upper quartile', [])
+  G5 is NOT_TESTABLE                                         PASS got=['NOT_TESTABLE'] want=['NOT_TESTABLE']
+  G5 produces no testable verdict                            PASS got=False want=False
+  and no expected value is emitted for it                    PASS got=None want=None
+  n=1 emits no curve and says so                             PASS got=True want=True
+  and n is stated                                            PASS got=True want=True
+  the emitted report is clean with the delivered bin masked  PASS got=True want=True
+  and the delivered bin is the only thing that fires without it PASS got=True want=True
+  a planted grading word is caught through the exemption     PASS got=False want=False
+SELFTEST PASS (0 checks failed)

@@ -1,0 +1,182 @@
+scan 4 -- stated-relationship maintenance
+workbook          unfccc.xlsx
+tolerance         1e-09 relative, stated here and not hardcoded
+provenance sheets Disclaimer (row 3 label contains 'info'), Info and sources (sheet name contains 'info'), Report (row 2 label contains 'source'), Electricity, heat, cooling (row 12 label contains 'source'), WTT- fuels (row 3 label contains 'source'), Waste disposal (row 3 label contains 'reference'), Flight and Accommodation (row 4 label contains 'info'), Home Office (row 4 label contains 'assumption')
+prose cells read  135
+not arithmetic    124  (counted, not tested)
+
+The four bins are the finding. There is no aggregate score and
+no ranking. A bin name is a description of what the file does,
+not a grade: a workbook may have every reason to hold a number
+the note beside it no longer describes. The reading stays with
+the operator.
+
+bin                 count
+------------------  -----
+MAINTAINED          0
+HOLDS_UNMAINTAINED  2
+BROKEN              21
+NOT_TESTABLE        11
+
+bin                 prose                 op              n   target as written           target cell                      expected      actual        rel delta  operands
+------------------  --------------------  --------------  --  --------------------------  -------------------------------  ------------  ------------  ---------  --------
+BROKEN              Info and sources!E10  average         33  Bonaire, Sint Eustatius an  Electricity, heat, cooling!B111  0.4602057816  0.5219401574  0.118      same
+BROKEN              Info and sources!E10  average         33  Bouvet Island               Electricity, heat, cooling!B114  0.4602057816  0.5219401574  0.118      same
+BROKEN              Info and sources!E10  average         33  British Indian Ocean Terri  Electricity, heat, cooling!B116  0.4602057816  0.5219401574  0.118      same
+BROKEN              Info and sources!E10  average         33  China, Macao Special Admin  Electricity, heat, cooling!B132  0.4602057816  0.2387980761  0.481      same
+BROKEN              Info and sources!E10  average         33  Christmas Island            Electricity, heat, cooling!B133  0.4602057816  0.5219401574  0.118      same
+BROKEN              Info and sources!E10  average         33  Cocos (Keeling) Islands     Electricity, heat, cooling!B134  0.4602057816  0.5219401574  0.118      same
+BROKEN              Info and sources!E10  average         33  French Southern Territorie  Electricity, heat, cooling!B167  0.4602057816  0.5219401574  0.118      same
+BROKEN              Info and sources!E10  average         33  Guernsey                    Electricity, heat, cooling!B180  0.4602057816  0.5219401574  0.118      same
+BROKEN              Info and sources!E10  average         33  Heard Island and McDonald   Electricity, heat, cooling!B185  0.4602057816  0.5219401574  0.118      same
+BROKEN              Info and sources!E10  average         33  Jersey                      Electricity, heat, cooling!B200  0.4602057816  0.5219401574  0.118      same
+BROKEN              Info and sources!E10  average         33  Norfolk Island              Electricity, heat, cooling!B246  0.4602057816  0.5219401574  0.118      same
+BROKEN              Info and sources!E10  average         33  Pitcairn                    Electricity, heat, cooling!B258  0.4602057816  0.5219401574  0.118      same
+BROKEN              Info and sources!E10  average         33  Saint Barthélemy            Electricity, heat, cooling!B269  0.4602057816  0.5219401574  0.118      same
+BROKEN              Info and sources!E10  average         33  Sark                        Electricity, heat, cooling!B279  0.4602057816  0.5219401574  0.118      same
+BROKEN              Info and sources!E10  average         33  South Georgia and the Sout  Electricity, heat, cooling!B292  0.4602057816  0.5219401574  0.118      same
+BROKEN              Info and sources!E10  average         33  Svalbard and Jan Mayen Isl  Electricity, heat, cooling!B299  0.4602057816  0.5219401574  0.118      same
+BROKEN              Info and sources!E10  average         33  Tokelau                     Electricity, heat, cooling!B307  0.4602057816  0.5219401574  0.118      same
+BROKEN              Info and sources!E10  average         33  United States Minor Outlyi  Electricity, heat, cooling!B320  0.4602057816  0.5219401574  0.118      same
+BROKEN              Info and sources!E10  average         33  Wallis and Futuna Islands   Electricity, heat, cooling!B328  0.4602057816  0.5219401574  0.118      same
+BROKEN              Info and sources!E10  average         33  Åland Islands               Electricity, heat, cooling!B85   0.4602057816  0.5219401574  0.118      same
+BROKEN              Info and sources!E10  average         33  Antarctica                  Electricity, heat, cooling!B92   0.4602057816  0.5219401574  0.118      same
+HOLDS_UNMAINTAINED  Info and sources!E10  average         5   Palestine                   Electricity, heat, cooling!B296  0.5693617091  0.5693617091  1.95e-16   same
+HOLDS_UNMAINTAINED  Info and sources!E10  average         5   Western Sahara              Electricity, heat, cooling!B329  0.5219401574  0.5219401574  2.13e-16   same
+NOT_TESTABLE        Info and sources!E12  average         0   -                           -                                -             -             -          -
+NOT_TESTABLE        Info and sources!E19  upper quartile  0   -                           -                                -             -             -          -
+NOT_TESTABLE        Info and sources!E22  average         0   -                           -                                -             -             -          -
+NOT_TESTABLE        Info and sources!E24  average         0   -                           -                                -             -             -          -
+NOT_TESTABLE        Info and sources!E24  average         0   -                           -                                -             -             -          -
+NOT_TESTABLE        Info and sources!E25  times           0   -                           -                                -             -             -          -
+NOT_TESTABLE        WTT- fuels!B15        average         0   -                           -                                -             -             -          -
+NOT_TESTABLE        WTT- fuels!B19        average         0   -                           -                                -             -             -          -
+NOT_TESTABLE        Waste disposal!A29    average         0   -                           -                                -             -             -          -
+NOT_TESTABLE        Waste disposal!A30    average         0   -                           -                                -             -             -          -
+NOT_TESTABLE        Waste disposal!A31    average         0   -                           -                                -             -             -          -
+
+Electricity, heat, cooling!B85 -- Åland Islands
+  stated: arithmetic mean
+  quoted: ...ing Islands, Wallis and Futuna Islands: Average of  American Samoa, Antigua and Barbuda, Aruba, Bahamas, Barbados, Bermuda, British Virgi...
+  expected 0.46020578160626169, holds 0.52194015744421518, delta 0.0617344
+  when it diverged: UNRECOVERABLE: this file format carries no per-cell revision history, so the workbook cannot say when the value and the note stopped agreeing. A version series of the same workbook would bracket it.
+
+Electricity, heat, cooling!B92 -- Antarctica
+  stated: arithmetic mean
+  quoted: ...ing Islands, Wallis and Futuna Islands: Average of  American Samoa, Antigua and Barbuda, Aruba, Bahamas, Barbados, Bermuda, British Virgi...
+  expected 0.46020578160626169, holds 0.52194015744421518, delta 0.0617344
+  when it diverged: UNRECOVERABLE: this file format carries no per-cell revision history, so the workbook cannot say when the value and the note stopped agreeing. A version series of the same workbook would bracket it.
+
+Electricity, heat, cooling!B111 -- Bonaire, Sint Eustatius and Saba
+  stated: arithmetic mean
+  quoted: ...ing Islands, Wallis and Futuna Islands: Average of  American Samoa, Antigua and Barbuda, Aruba, Bahamas, Barbados, Bermuda, British Virgi...
+  expected 0.46020578160626169, holds 0.52194015744421518, delta 0.0617344
+  when it diverged: UNRECOVERABLE: this file format carries no per-cell revision history, so the workbook cannot say when the value and the note stopped agreeing. A version series of the same workbook would bracket it.
+
+Electricity, heat, cooling!B114 -- Bouvet Island
+  stated: arithmetic mean
+  quoted: ...ing Islands, Wallis and Futuna Islands: Average of  American Samoa, Antigua and Barbuda, Aruba, Bahamas, Barbados, Bermuda, British Virgi...
+  expected 0.46020578160626169, holds 0.52194015744421518, delta 0.0617344
+  when it diverged: UNRECOVERABLE: this file format carries no per-cell revision history, so the workbook cannot say when the value and the note stopped agreeing. A version series of the same workbook would bracket it.
+
+Electricity, heat, cooling!B116 -- British Indian Ocean Territory
+  stated: arithmetic mean
+  quoted: ...ing Islands, Wallis and Futuna Islands: Average of  American Samoa, Antigua and Barbuda, Aruba, Bahamas, Barbados, Bermuda, British Virgi...
+  expected 0.46020578160626169, holds 0.52194015744421518, delta 0.0617344
+  when it diverged: UNRECOVERABLE: this file format carries no per-cell revision history, so the workbook cannot say when the value and the note stopped agreeing. A version series of the same workbook would bracket it.
+
+Electricity, heat, cooling!B132 -- China, Macao Special Administrative Region
+  stated: arithmetic mean
+  quoted: ...ing Islands, Wallis and Futuna Islands: Average of  American Samoa, Antigua and Barbuda, Aruba, Bahamas, Barbados, Bermuda, British Virgi...
+  expected 0.46020578160626169, holds 0.23879807608323081, delta -0.221408
+  when it diverged: UNRECOVERABLE: this file format carries no per-cell revision history, so the workbook cannot say when the value and the note stopped agreeing. A version series of the same workbook would bracket it.
+
+Electricity, heat, cooling!B133 -- Christmas Island
+  stated: arithmetic mean
+  quoted: ...ing Islands, Wallis and Futuna Islands: Average of  American Samoa, Antigua and Barbuda, Aruba, Bahamas, Barbados, Bermuda, British Virgi...
+  expected 0.46020578160626169, holds 0.52194015744421518, delta 0.0617344
+  when it diverged: UNRECOVERABLE: this file format carries no per-cell revision history, so the workbook cannot say when the value and the note stopped agreeing. A version series of the same workbook would bracket it.
+
+Electricity, heat, cooling!B134 -- Cocos (Keeling) Islands
+  stated: arithmetic mean
+  quoted: ...ing Islands, Wallis and Futuna Islands: Average of  American Samoa, Antigua and Barbuda, Aruba, Bahamas, Barbados, Bermuda, British Virgi...
+  expected 0.46020578160626169, holds 0.52194015744421518, delta 0.0617344
+  when it diverged: UNRECOVERABLE: this file format carries no per-cell revision history, so the workbook cannot say when the value and the note stopped agreeing. A version series of the same workbook would bracket it.
+
+Electricity, heat, cooling!B167 -- French Southern Territories
+  stated: arithmetic mean
+  quoted: ...ing Islands, Wallis and Futuna Islands: Average of  American Samoa, Antigua and Barbuda, Aruba, Bahamas, Barbados, Bermuda, British Virgi...
+  expected 0.46020578160626169, holds 0.52194015744421518, delta 0.0617344
+  when it diverged: UNRECOVERABLE: this file format carries no per-cell revision history, so the workbook cannot say when the value and the note stopped agreeing. A version series of the same workbook would bracket it.
+
+Electricity, heat, cooling!B180 -- Guernsey
+  stated: arithmetic mean
+  quoted: ...ing Islands, Wallis and Futuna Islands: Average of  American Samoa, Antigua and Barbuda, Aruba, Bahamas, Barbados, Bermuda, British Virgi...
+  expected 0.46020578160626169, holds 0.52194015744421518, delta 0.0617344
+  when it diverged: UNRECOVERABLE: this file format carries no per-cell revision history, so the workbook cannot say when the value and the note stopped agreeing. A version series of the same workbook would bracket it.
+
+Electricity, heat, cooling!B185 -- Heard Island and McDonald Islands
+  stated: arithmetic mean
+  quoted: ...ing Islands, Wallis and Futuna Islands: Average of  American Samoa, Antigua and Barbuda, Aruba, Bahamas, Barbados, Bermuda, British Virgi...
+  expected 0.46020578160626169, holds 0.52194015744421518, delta 0.0617344
+  when it diverged: UNRECOVERABLE: this file format carries no per-cell revision history, so the workbook cannot say when the value and the note stopped agreeing. A version series of the same workbook would bracket it.
+
+Electricity, heat, cooling!B200 -- Jersey
+  stated: arithmetic mean
+  quoted: ...ing Islands, Wallis and Futuna Islands: Average of  American Samoa, Antigua and Barbuda, Aruba, Bahamas, Barbados, Bermuda, British Virgi...
+  expected 0.46020578160626169, holds 0.52194015744421518, delta 0.0617344
+  when it diverged: UNRECOVERABLE: this file format carries no per-cell revision history, so the workbook cannot say when the value and the note stopped agreeing. A version series of the same workbook would bracket it.
+
+Electricity, heat, cooling!B246 -- Norfolk Island
+  stated: arithmetic mean
+  quoted: ...ing Islands, Wallis and Futuna Islands: Average of  American Samoa, Antigua and Barbuda, Aruba, Bahamas, Barbados, Bermuda, British Virgi...
+  expected 0.46020578160626169, holds 0.52194015744421518, delta 0.0617344
+  when it diverged: UNRECOVERABLE: this file format carries no per-cell revision history, so the workbook cannot say when the value and the note stopped agreeing. A version series of the same workbook would bracket it.
+
+Electricity, heat, cooling!B258 -- Pitcairn
+  stated: arithmetic mean
+  quoted: ...ing Islands, Wallis and Futuna Islands: Average of  American Samoa, Antigua and Barbuda, Aruba, Bahamas, Barbados, Bermuda, British Virgi...
+  expected 0.46020578160626169, holds 0.52194015744421518, delta 0.0617344
+  when it diverged: UNRECOVERABLE: this file format carries no per-cell revision history, so the workbook cannot say when the value and the note stopped agreeing. A version series of the same workbook would bracket it.
+
+Electricity, heat, cooling!B269 -- Saint Barthélemy
+  stated: arithmetic mean
+  quoted: ...ing Islands, Wallis and Futuna Islands: Average of  American Samoa, Antigua and Barbuda, Aruba, Bahamas, Barbados, Bermuda, British Virgi...
+  expected 0.46020578160626169, holds 0.52194015744421518, delta 0.0617344
+  when it diverged: UNRECOVERABLE: this file format carries no per-cell revision history, so the workbook cannot say when the value and the note stopped agreeing. A version series of the same workbook would bracket it.
+
+Electricity, heat, cooling!B279 -- Sark
+  stated: arithmetic mean
+  quoted: ...ing Islands, Wallis and Futuna Islands: Average of  American Samoa, Antigua and Barbuda, Aruba, Bahamas, Barbados, Bermuda, British Virgi...
+  expected 0.46020578160626169, holds 0.52194015744421518, delta 0.0617344
+  when it diverged: UNRECOVERABLE: this file format carries no per-cell revision history, so the workbook cannot say when the value and the note stopped agreeing. A version series of the same workbook would bracket it.
+
+Electricity, heat, cooling!B292 -- South Georgia and the South Sandwich Islands
+  stated: arithmetic mean
+  quoted: ...ing Islands, Wallis and Futuna Islands: Average of  American Samoa, Antigua and Barbuda, Aruba, Bahamas, Barbados, Bermuda, British Virgi...
+  expected 0.46020578160626169, holds 0.52194015744421518, delta 0.0617344
+  when it diverged: UNRECOVERABLE: this file format carries no per-cell revision history, so the workbook cannot say when the value and the note stopped agreeing. A version series of the same workbook would bracket it.
+
+Electricity, heat, cooling!B299 -- Svalbard and Jan Mayen Islands
+  stated: arithmetic mean
+  quoted: ...ing Islands, Wallis and Futuna Islands: Average of  American Samoa, Antigua and Barbuda, Aruba, Bahamas, Barbados, Bermuda, British Virgi...
+  expected 0.46020578160626169, holds 0.52194015744421518, delta 0.0617344
+  when it diverged: UNRECOVERABLE: this file format carries no per-cell revision history, so the workbook cannot say when the value and the note stopped agreeing. A version series of the same workbook would bracket it.
+
+Electricity, heat, cooling!B307 -- Tokelau
+  stated: arithmetic mean
+  quoted: ...ing Islands, Wallis and Futuna Islands: Average of  American Samoa, Antigua and Barbuda, Aruba, Bahamas, Barbados, Bermuda, British Virgi...
+  expected 0.46020578160626169, holds 0.52194015744421518, delta 0.0617344
+  when it diverged: UNRECOVERABLE: this file format carries no per-cell revision history, so the workbook cannot say when the value and the note stopped agreeing. A version series of the same workbook would bracket it.
+
+Electricity, heat, cooling!B320 -- United States Minor Outlying Islands
+  stated: arithmetic mean
+  quoted: ...ing Islands, Wallis and Futuna Islands: Average of  American Samoa, Antigua and Barbuda, Aruba, Bahamas, Barbados, Bermuda, British Virgi...
+  expected 0.46020578160626169, holds 0.52194015744421518, delta 0.0617344
+  when it diverged: UNRECOVERABLE: this file format carries no per-cell revision history, so the workbook cannot say when the value and the note stopped agreeing. A version series of the same workbook would bracket it.
+
+Electricity, heat, cooling!B328 -- Wallis and Futuna Islands
+  stated: arithmetic mean
+  quoted: ...ing Islands, Wallis and Futuna Islands: Average of  American Samoa, Antigua and Barbuda, Aruba, Bahamas, Barbados, Bermuda, British Virgi...
+  expected 0.46020578160626169, holds 0.52194015744421518, delta 0.0617344
+  when it diverged: UNRECOVERABLE: this file format carries no per-cell revision history, so the workbook cannot say when the value and the note stopped agreeing. A version series of the same workbook would bracket it.
