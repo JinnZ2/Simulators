@@ -2,13 +2,13 @@
 
 Read against `notes/memory-export/files/`, which is stored verbatim. Nothing
 here is a verdict on the export, and no stored file was modified. Counts are
-recomputed each batch and are a delivery state, not a result — 6 tier-1 files
+recomputed each batch and are a delivery state, not a result — 5 tier-1 files
 are still outstanding.
 
 ## 1. Cross-references, and what "unresolved" means
 
 ```
-58 files   89 links   39 distinct names   34 resolve in folder   5 do not
+59 files   94 links   39 distinct names   35 resolve in folder   4 do not
 ```
 
 "Not in the folder" covers three different situations, and the distinction was
@@ -699,6 +699,53 @@ the folder-name collision recorded in finding 2 rather than a missing file.
 out of it "for size" and state that the columns, the open tier, and the rules
 stay in that file. So the register's schema is the part not delivered, and two
 of its sections are here without it.
+
+## 31. One `[[uninstrumented]]` citation cannot mean the folder
+
+Finding 2 recorded that `uninstrumented` is ambiguous — a folder in this repo
+and a file in the memory namespace — and left it open. `report-typing` narrows
+it for at least one citation.
+
+Its R4 gap reads "Direct instance of **Q7** in `[[uninstrumented]]`: skills
+with no instrument distinguishing competent from absent BEFORE failure."
+
+`uninstrumented/` uses Q-numbering across 11 case files and reaches **Q6**.
+There is no Q7 anywhere in the folder. So this citation resolves only against
+the undelivered memory file, not the folder.
+
+That does not settle every `[[uninstrumented]]` reference — others may well
+target the folder, and the two are plainly about the same subject. It settles
+this one, and it shows the memory file carries its own numbering deep enough to
+reach a question the folder does not have.
+
+## 32. The strongest instrument proposal in the export, and its provenance
+discipline
+
+`report-typing`'s R1 proposes scoring an existing reality-TV format as a
+natural experiment, and the methodological point is real: the **reverse** arm —
+a disguised executive reporting upward — is blind on the assessor's end,
+because the supervisor doing the dismissing does not know who they are
+dismissing. Most designed experiments cannot buy that, and hundreds of runs are
+already filmed. The stated consequence is sharp: if the discount fires at full
+strength on the person with maximum organisational standing, then "a proxy that
+behaves identically on its worst case is not tracking what it claims to track."
+
+What makes it worth recording here is the handling of its weakest evidence. The
+audience-scale claim is sourced as "SECOND-HAND ACCOUNTS from working-class
+viewers... Convenience sample, non-random, direction not rate," and then made
+falsifiable rather than defended: resentment predicts wording about the boss
+being humbled, this account predicts wording about the finding being confirmed
+by someone undismissable. Two predictions, distinguishable in the words.
+
+It also records that its own literature pass **confirmed** one prediction in
+print (critics naming the comedy beat as a through line) while the explanatory
+gap stayed open, and that the gap is conceded in the literature itself —
+"NOBODY ASKED THE AUDIENCE."
+
+Third file in the export to pay for its own claims this way, after
+`sensing-spine` and `calibration-gap-log` (finding 24). Its citations —
+Rafferty, Araki, StatCan, arXiv 2602.21369, the Belzer/Viscelli pair — were not
+verified here, same egress limit as before.
 
 ## What was not checked, deliberately
 
