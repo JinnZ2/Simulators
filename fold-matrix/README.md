@@ -8,6 +8,8 @@ not one number.
 | `WORK_ORDER.md` | the order as first delivered |
 | `WORK_ORDER_V2.md` | the revision, verbatim. Supersedes it; both kept |
 | `fold_matrix.py` | the grid and every rule in it. `--selftest` |
+| `fold_register.py` | delivered verbatim: the folded-term register + document scanner |
+| `register_audit.py` | checks on it. Imports it, edits nothing. `--selftest` |
 | `terms/` | the four S6 fixtures, as data |
 | `PREDICTIONS_WO8.md` | S2's v1 prediction |
 | `PREDICTIONS_WO8_V2.md` | the revised prediction, and what is not blind about it |

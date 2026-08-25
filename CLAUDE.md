@@ -6601,7 +6601,67 @@ underneath).
   moves the whole downward arm. **P3 holds** (both upward cells
   `+ / ABSENT / ABSENT`, the same triple `FM_011` found) **and its
   comparison has one side**, the blank form being exactly what did not
-  arrive. **`FM_018`, an
+  arrive.
+  **`fold_register.py`** is a delivered module landed verbatim: a
+  **folded-term register plus a document scanner**, where a folded term
+  is *"a compact matrix wearing the costume of a scalar"*. Seventeen
+  terms -- five kavik-named (`money`, `procedure`, `regulation`,
+  `optimization`, `efficiency`) and twelve candidates -- each with a
+  `substitutes_for` component list, a `sign_storage` ordinal and a
+  `residual_tell`; ten grid cells per term across four axes (**D1-D3**
+  downward toward substrate, **U1-U4** upward toward the goal with sign
+  and magnitude separate, **C1** a clock per level, **S1-S2** boundary
+  and function set), all `UNFILLED` by construction. Audit in
+  `register_audit.py`, which imports it and edits nothing; claims
+  `FM_036..FM_044`. **`FM_036`, the rarest thing in it:** the refusal is
+  real -- `score` is `None`, the verdict reads *"Absence is the
+  reading"*, and `grid_for` on an unknown term returns `None` rather
+  than an empty grid, so *not a folded term* cannot be mistaken for *a
+  folded term with nothing filled in*; `domain-ledger`'s no-composite
+  discipline one level up, on a scanner, designed in rather than found.
+  **`FM_038`, the strongest structural finding:** `counter_case`
+  separates **perfectly by provenance** -- 0 of 12 candidates carry one,
+  4 of 5 kavik terms do -- so the evidence column reads as who named the
+  term rather than as a property of it, and two readings (argued before
+  listing / easier to find for a term already thought about) are not
+  distinguishable from the register. **`FM_039`:** **73% of hits on this
+  file come through the alias layer**, which is a word list deciding
+  word sense (`T1-1`), and the top alias hits are all other senses --
+  `cost` 66 (including `SHAPE_SPEC.md`'s *"NOTE ON COST -- use
+  dissipation, cost imports a pricing model"*, a passage arguing
+  against the folded use), `protocol` 49 (`PROTOCOL.md`,
+  `REFUTATION_PROTOCOL`), `budget` 42 (artifact, compute, token,
+  reader), `standard` 19 (*"standard library"*). The tokenizer is
+  word-boundary so `UNI_009`'s substring bleed cannot happen; what
+  survives is sense. **`FM_040`:** all fifteen hits on the two real
+  outside documents were hand-checked and printed, and one is a
+  counter-instance **by the register's own definition** -- the blank
+  template's *"Sales Process: [Steps converting lead to customer]"*
+  enumerates the doing on the same line that `procedure` is said to
+  substitute for it -- while `folded_terms_found` asserts foldedness by
+  naming and has no state for a checked non-fold; the
+  absent-vs-known-negative repair arriving at the level of the **hit**
+  rather than the cell. **`FM_037`:** `cells_filled` is the literal `0`,
+  not derived from the grid, so the field the design turns on cannot
+  report anything else. **`FM_041`:** the twelve-line occurrence cap is
+  silent -- `money` really occurs 111 times and reports 12, with no
+  marker in the output. **`FM_042`:** `--grid` with no term and a
+  missing filename both raise where `--grid` with an unknown term
+  returns a stated error, the third unguarded CLI index in this family
+  after `CC_004` and `CA_005`. **`FM_043`:** `ALIASES["quality"]` is
+  shadowed by the register key and can never fire, and five fields are
+  carried into the output and branched on by nothing -- read from the
+  AST after a first regex pass matched the `<-` inside the `--list`
+  format string, since an operator inside a string is not an operator.
+  **`FM_044`:** the register is `category-weld/`'s missing cross-field
+  corpus in a different schema -- `substitutes_for` **is** a component
+  list (`resources <- a stock and a flow, welded` says the word) across
+  engineering, governance, hiring, ecology and ML, where `welds/` holds
+  two entries both from policy/economics -- but the schemas do not merge
+  as they stand (no case data, so no `max_spread`), and `a few`, which
+  `presented-binary` B5 and `moral-decomposer` `MD_004` both ask for, is
+  in neither.
+  **`FM_018`, an
   amendment that refuses a comparison this folder had published:**
   `enumeration_basis` is now declared per term (`document_named` /
   `physical_traced` / `author_read` / `UNREAD`) and **never inferred** —
