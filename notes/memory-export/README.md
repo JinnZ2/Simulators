@@ -26,7 +26,7 @@ is not true of the folder. Corrected rather than narrowed.)
 
 | tier | named in the manifest | landed |
 |---|---|---|
-| 1 — exported unchanged | 57 | 8 |
+| 1 — exported unchanged | 57 | 9 |
 | 2 — scrubbed and exported | 7 | 7 |
 | 3 — held back | 12 | 0, and none expected |
 
@@ -38,7 +38,8 @@ seven named in the manifest, all seven stored.
 Tier 1, landed: `criterion-symmetry`, `rosetta-shape-core`,
 `force-expression-model`, `alignment-under-coupling`,
 `diversity-collapse-model`, `emergence-stability-simulator`,
-`fairmont-ecological-recovery`, `food-grain-monitor`. Filed as tier 1 by elimination — each was exported,
+`fairmont-ecological-recovery`, `food-grain-monitor`,
+`semantic-drift-sim`. Filed as tier 1 by elimination — each was exported,
 so none is tier 3, and none is in the manifest's tier-2 table. The manifest
 does not label files individually, so tier is inferred here and not carried in
 the files.
@@ -100,6 +101,19 @@ Named artifacts, same class one level up: `criterion-symmetry` closes on
 "MARKER.md and SCAN_SPEC.md written", and `diversity-collapse-model` reports a
 CLAIM_TABLE carrying C1–C10. None of the three is in the folder, and no file of
 those names exists anywhere in this tree. Recorded, not sought.
+
+**One named artifact does resolve, and it lands where the repo index does not
+point.** `semantic-drift-sim` names `valence_drift_test.py` and
+`semantic_drift_test.py`; both are in `fragility-cascade/`. The unknowns
+register is real — five entries, U1–U5 — and the two the memory file promotes
+to immediate measurement priorities are U1 (screening functional form) and U4
+(screening electrons catalytic or consumable), matching verbatim. The memory
+file selects two of five rather than summarizing the register, and does not
+carry U3, which reads "NO MEASUREMENT EXISTS".
+
+Neither `.py` is listed in `CLAUDE.md` or `docs/FOLDER_NOTES.md`, though
+`fragility-cascade/` itself is described in both. So on this one file the
+export points at repo content the repo's own index does not reach.
 
 One result arrives split across two files. `recent-work` gives the spinodal
 threshold as h\* ≈ 0.385 and says the apex-broadcast multiplier crosses it;
