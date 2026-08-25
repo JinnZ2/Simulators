@@ -15,32 +15,32 @@ bin                 count
 ------------------  -----
 MAINTAINED          0
 HOLDS_UNMAINTAINED  2
-BROKEN              21
+DIVERGED            21
 NOT_TESTABLE        11
 
 bin                 prose                 op              n   target as written           target cell                      expected      actual        rel delta  operands
 ------------------  --------------------  --------------  --  --------------------------  -------------------------------  ------------  ------------  ---------  --------
-BROKEN              Info and sources!E10  average         33  Bonaire, Sint Eustatius an  Electricity, heat, cooling!B111  0.4602057816  0.5219401574  0.118      same
-BROKEN              Info and sources!E10  average         33  Bouvet Island               Electricity, heat, cooling!B114  0.4602057816  0.5219401574  0.118      same
-BROKEN              Info and sources!E10  average         33  British Indian Ocean Terri  Electricity, heat, cooling!B116  0.4602057816  0.5219401574  0.118      same
-BROKEN              Info and sources!E10  average         33  China, Macao Special Admin  Electricity, heat, cooling!B132  0.4602057816  0.2387980761  0.481      same
-BROKEN              Info and sources!E10  average         33  Christmas Island            Electricity, heat, cooling!B133  0.4602057816  0.5219401574  0.118      same
-BROKEN              Info and sources!E10  average         33  Cocos (Keeling) Islands     Electricity, heat, cooling!B134  0.4602057816  0.5219401574  0.118      same
-BROKEN              Info and sources!E10  average         33  French Southern Territorie  Electricity, heat, cooling!B167  0.4602057816  0.5219401574  0.118      same
-BROKEN              Info and sources!E10  average         33  Guernsey                    Electricity, heat, cooling!B180  0.4602057816  0.5219401574  0.118      same
-BROKEN              Info and sources!E10  average         33  Heard Island and McDonald   Electricity, heat, cooling!B185  0.4602057816  0.5219401574  0.118      same
-BROKEN              Info and sources!E10  average         33  Jersey                      Electricity, heat, cooling!B200  0.4602057816  0.5219401574  0.118      same
-BROKEN              Info and sources!E10  average         33  Norfolk Island              Electricity, heat, cooling!B246  0.4602057816  0.5219401574  0.118      same
-BROKEN              Info and sources!E10  average         33  Pitcairn                    Electricity, heat, cooling!B258  0.4602057816  0.5219401574  0.118      same
-BROKEN              Info and sources!E10  average         33  Saint Barthélemy            Electricity, heat, cooling!B269  0.4602057816  0.5219401574  0.118      same
-BROKEN              Info and sources!E10  average         33  Sark                        Electricity, heat, cooling!B279  0.4602057816  0.5219401574  0.118      same
-BROKEN              Info and sources!E10  average         33  South Georgia and the Sout  Electricity, heat, cooling!B292  0.4602057816  0.5219401574  0.118      same
-BROKEN              Info and sources!E10  average         33  Svalbard and Jan Mayen Isl  Electricity, heat, cooling!B299  0.4602057816  0.5219401574  0.118      same
-BROKEN              Info and sources!E10  average         33  Tokelau                     Electricity, heat, cooling!B307  0.4602057816  0.5219401574  0.118      same
-BROKEN              Info and sources!E10  average         33  United States Minor Outlyi  Electricity, heat, cooling!B320  0.4602057816  0.5219401574  0.118      same
-BROKEN              Info and sources!E10  average         33  Wallis and Futuna Islands   Electricity, heat, cooling!B328  0.4602057816  0.5219401574  0.118      same
-BROKEN              Info and sources!E10  average         33  Åland Islands               Electricity, heat, cooling!B85   0.4602057816  0.5219401574  0.118      same
-BROKEN              Info and sources!E10  average         33  Antarctica                  Electricity, heat, cooling!B92   0.4602057816  0.5219401574  0.118      same
+DIVERGED            Info and sources!E10  average         33  Bonaire, Sint Eustatius an  Electricity, heat, cooling!B111  0.4602057816  0.5219401574  0.118      same
+DIVERGED            Info and sources!E10  average         33  Bouvet Island               Electricity, heat, cooling!B114  0.4602057816  0.5219401574  0.118      same
+DIVERGED            Info and sources!E10  average         33  British Indian Ocean Terri  Electricity, heat, cooling!B116  0.4602057816  0.5219401574  0.118      same
+DIVERGED            Info and sources!E10  average         33  China, Macao Special Admin  Electricity, heat, cooling!B132  0.4602057816  0.2387980761  0.481      same
+DIVERGED            Info and sources!E10  average         33  Christmas Island            Electricity, heat, cooling!B133  0.4602057816  0.5219401574  0.118      same
+DIVERGED            Info and sources!E10  average         33  Cocos (Keeling) Islands     Electricity, heat, cooling!B134  0.4602057816  0.5219401574  0.118      same
+DIVERGED            Info and sources!E10  average         33  French Southern Territorie  Electricity, heat, cooling!B167  0.4602057816  0.5219401574  0.118      same
+DIVERGED            Info and sources!E10  average         33  Guernsey                    Electricity, heat, cooling!B180  0.4602057816  0.5219401574  0.118      same
+DIVERGED            Info and sources!E10  average         33  Heard Island and McDonald   Electricity, heat, cooling!B185  0.4602057816  0.5219401574  0.118      same
+DIVERGED            Info and sources!E10  average         33  Jersey                      Electricity, heat, cooling!B200  0.4602057816  0.5219401574  0.118      same
+DIVERGED            Info and sources!E10  average         33  Norfolk Island              Electricity, heat, cooling!B246  0.4602057816  0.5219401574  0.118      same
+DIVERGED            Info and sources!E10  average         33  Pitcairn                    Electricity, heat, cooling!B258  0.4602057816  0.5219401574  0.118      same
+DIVERGED            Info and sources!E10  average         33  Saint Barthélemy            Electricity, heat, cooling!B269  0.4602057816  0.5219401574  0.118      same
+DIVERGED            Info and sources!E10  average         33  Sark                        Electricity, heat, cooling!B279  0.4602057816  0.5219401574  0.118      same
+DIVERGED            Info and sources!E10  average         33  South Georgia and the Sout  Electricity, heat, cooling!B292  0.4602057816  0.5219401574  0.118      same
+DIVERGED            Info and sources!E10  average         33  Svalbard and Jan Mayen Isl  Electricity, heat, cooling!B299  0.4602057816  0.5219401574  0.118      same
+DIVERGED            Info and sources!E10  average         33  Tokelau                     Electricity, heat, cooling!B307  0.4602057816  0.5219401574  0.118      same
+DIVERGED            Info and sources!E10  average         33  United States Minor Outlyi  Electricity, heat, cooling!B320  0.4602057816  0.5219401574  0.118      same
+DIVERGED            Info and sources!E10  average         33  Wallis and Futuna Islands   Electricity, heat, cooling!B328  0.4602057816  0.5219401574  0.118      same
+DIVERGED            Info and sources!E10  average         33  Åland Islands               Electricity, heat, cooling!B85   0.4602057816  0.5219401574  0.118      same
+DIVERGED            Info and sources!E10  average         33  Antarctica                  Electricity, heat, cooling!B92   0.4602057816  0.5219401574  0.118      same
 HOLDS_UNMAINTAINED  Info and sources!E10  average         5   Palestine                   Electricity, heat, cooling!B296  0.5693617091  0.5693617091  1.95e-16   same
 HOLDS_UNMAINTAINED  Info and sources!E10  average         5   Western Sahara              Electricity, heat, cooling!B329  0.5219401574  0.5219401574  2.13e-16   same
 NOT_TESTABLE        Info and sources!E12  average         0   -                           -                                -             -             -          -

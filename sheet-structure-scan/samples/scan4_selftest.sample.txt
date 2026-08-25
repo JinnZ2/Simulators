@@ -6,7 +6,7 @@ scan4 selftest
   non-arithmetic provenance is classified, not parsed        PASS got='NOT_ARITHMETIC' want='NOT_ARITHMETIC'
   a date-only note is not arithmetic                         PASS got='NOT_ARITHMETIC' want='NOT_ARITHMETIC'
   G1 is MAINTAINED                                           PASS got=['MAINTAINED'] want=['MAINTAINED']
-  G3 is BROKEN                                               PASS got=['BROKEN'] want=['BROKEN']
+  G3 is DIVERGED                                             PASS got=['DIVERGED'] want=['DIVERGED']
   G3 reports the delta                                       PASS got=(35.0, 4.0, -31.0) want=(35.0, 4.0, -31.0)
   and says the divergence date is unrecoverable              PASS got=True want=True
   G4 is NOT_TESTABLE                                         PASS got=['NOT_TESTABLE'] want=['NOT_TESTABLE']
@@ -21,7 +21,7 @@ scan4 selftest
   and no expected value is emitted for it                    PASS got=None want=None
   n=1 emits no curve and says so                             PASS got=True want=True
   and n is stated                                            PASS got=True want=True
-  the emitted report is clean with the delivered bin masked  PASS got=True want=True
-  and the delivered bin is the only thing that fires without it PASS got=True want=True
+  the emitted report is clean under the (empty) exemption    PASS got=True want=True
+  and nothing fires unmasked, the exemption list being empty PASS got=True want=True
   a planted grading word is caught through the exemption     PASS got=False want=False
 SELFTEST PASS (0 checks failed)

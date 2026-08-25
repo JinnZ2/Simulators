@@ -19,9 +19,9 @@ stopped being true.
 
 FOUR BINS AND NO SCORE. A stated relationship whose target is a formula
 is MAINTAINED; a constant that still satisfies it is
-HOLDS_UNMAINTAINED; a constant that does not is BROKEN; operands that do
+HOLDS_UNMAINTAINED; a constant that does not is DIVERGED; operands that do
 not resolve are NOT_TESTABLE. The bins are the finding. There is no
-aggregate, no ranking, and BROKEN is not called an error -- a workbook
+aggregate, no ranking, and DIVERGED is not called an error -- a workbook
 may have every reason to hold a number that no longer matches the note
 beside it, and that reading is the operator's.
 
@@ -59,25 +59,29 @@ PROSE_MIN_CHARS = 25
 
 MAINTAINED = "MAINTAINED"
 HOLDS_UNMAINTAINED = "HOLDS_UNMAINTAINED"
-BROKEN = "BROKEN"
+DIVERGED = "DIVERGED"
 NOT_TESTABLE = "NOT_TESTABLE"
 NOT_ARITHMETIC = "NOT_ARITHMETIC"
-BINS = (MAINTAINED, HOLDS_UNMAINTAINED, BROKEN, NOT_TESTABLE)
+BINS = (MAINTAINED, HOLDS_UNMAINTAINED, DIVERGED, NOT_TESTABLE)
 
 # The no-labelling constraint (S8) is enforced by no_severity over every
-# emitted report, exactly as scan two and scan three are. One exemption:
-# BROKEN is a bin name delivered in the work order, and "broken" is on
-# the screened list. The exemption is DECLARED and MEASURED rather than
-# taken -- screened() masks the delivered token and returns the hits, and
-# the selftest asserts both directions: the report is clean with the token
-# masked, AND the token is the only thing in the report that fires without
-# it. If a severity word ever enters alongside, the second check turns red.
+# emitted report, exactly as scan two and scan three are.
 #
-# The alternative was to loosen the screen, which is how a screen becomes
-# decorative. Two lines in this file were reworded instead: a use-mention
-# of "error" in the disclaimer, and "needs" in the rate emission. Same
-# call as residual-direction RDD_008.
-DELIVERED_VOCABULARY = ("BROKEN",)
+# THE EXEMPTION IS EMPTY, and that is the point of the amendment. The bin
+# was BROKEN, which put a screened word in the delivered vocabulary and
+# bought an exemption to carry it. Renaming it DIVERGED -- "the cell and
+# the stated relation differ", no ruling on which is wrong and no damage
+# asserted -- removes the need for one: no token in this order fires, so
+# no file fires, and nothing is masked.
+#
+# The three-arm harness below stays. It is the right structure for a real
+# exemption later, and with an empty list it still runs: arm one requires
+# a clean report, arm two requires that nothing fires unmasked (which is
+# now the same statement, and stops being the same the moment a token is
+# added), arm three plants a grading word and requires it caught. Keeping
+# a harness with nothing to exempt costs three checks and means the next
+# exemption arrives measured instead of argued.
+DELIVERED_VOCABULARY = ()
 
 
 def screened(text):
@@ -91,8 +95,10 @@ def screened(text):
 def exemption_is_only_the_bin(text):
     """True if every hit in the unmasked report is a delivered bin token.
 
-    Without this the exemption would be a hole: masking BROKEN also hides
-    a sentence that happens to contain it.
+    With an empty vocabulary this is "nothing fires at all". It is kept
+    separate from screened() because masking a token would also hide any
+    sentence containing it, and that hole has to be visible the moment a
+    token is added rather than discovered then.
     """
     toks = tuple(t.lower() for t in DELIVERED_VOCABULARY)
     for _, word, _ in no_severity.hits(text):
@@ -516,7 +522,7 @@ def test_relationship(wb, rel, idx, tolerance):
                           "the stated relationship; nothing in the file "
                           "maintains it")
         else:
-            row["bin"] = BROKEN
+            row["bin"] = DIVERGED
             row["why"] = ("the target is a constant and does not satisfy "
                           "the stated relationship at the stated tolerance")
             row["divergence"] = revision_history(wb)
@@ -624,7 +630,7 @@ def render(res, verbose=False):
                     "target cell", "expected", "actual", "rel delta",
                     "operands"], body))
     for r in res["rows"]:
-        if r["bin"] == BROKEN:
+        if r["bin"] == DIVERGED:
             L += ["", "%s -- %s" % (r.get("target"),
                                     r.get("target_as_written")),
                   "  stated: %s" % r["operator_reads"],
@@ -650,27 +656,27 @@ def rate(results):
     L = ["scan 4 -- maintenance rate",
          "workbooks in this emission: n = %d" % n, ""]
     body = []
-    tot = {"BROKEN": 0, "HOLDS_UNMAINTAINED": 0}
+    tot = {"DIVERGED": 0, "HOLDS_UNMAINTAINED": 0}
     for res in results:
         b = bins(res["rows"])
-        tot["BROKEN"] += b[BROKEN]
+        tot["DIVERGED"] += b[DIVERGED]
         tot["HOLDS_UNMAINTAINED"] += b[HOLDS_UNMAINTAINED]
-        testable = b[BROKEN] + b[HOLDS_UNMAINTAINED]
+        testable = b[DIVERGED] + b[HOLDS_UNMAINTAINED]
         ops = [r["n_operands"] for r in res["rows"]]
         cross = sum(1 for r in res["rows"] if r.get("same_sheet") is False)
         body.append([res["workbook"], res.get("version_date", "not stated"),
-                     b[MAINTAINED], b[HOLDS_UNMAINTAINED], b[BROKEN],
+                     b[MAINTAINED], b[HOLDS_UNMAINTAINED], b[DIVERGED],
                      b[NOT_TESTABLE],
                      "%.3g" % (sum(ops) / float(len(ops))) if ops else "-",
                      cross,
                      "-" if not testable
-                     else "%.3f" % (b[BROKEN] / float(testable))])
-    L.append(table(["workbook", "version date", "MAINT", "HOLDS", "BROKEN",
+                     else "%.3f" % (b[DIVERGED] / float(testable))])
+    L.append(table(["workbook", "version date", "MAINT", "HOLDS", "DIVERGED",
                     "NOT_TEST", "mean operands", "cross-sheet",
-                    "BROKEN/(B+H)"], body))
-    den = tot["BROKEN"] + tot["HOLDS_UNMAINTAINED"]
-    L += ["", "pooled BROKEN/(BROKEN+HOLDS_UNMAINTAINED): %s"
-          % ("-" if not den else "%.3f" % (tot["BROKEN"] / float(den)))]
+                    "DIVERGED/(B+H)"], body))
+    den = tot["DIVERGED"] + tot["HOLDS_UNMAINTAINED"]
+    L += ["", "pooled DIVERGED/(DIVERGED+HOLDS_UNMAINTAINED): %s"
+          % ("-" if not den else "%.3f" % (tot["DIVERGED"] / float(den)))]
     if n < 2:
         L += ["",
               "NO CURVE IS REPORTED. n = %d. A decay curve takes a series"
@@ -758,7 +764,7 @@ def _selftest():
 
     # G3: constant, one operand edited afterwards.
     r3 = scan(fixture_workbook("G3", os.path.join(d, "g3.xlsx")))
-    ck("G3 is BROKEN", [x["bin"] for x in r3["rows"]], [BROKEN])
+    ck("G3 is DIVERGED", [x["bin"] for x in r3["rows"]], [DIVERGED])
     g3 = r3["rows"][0]
     ck("G3 reports the delta",
        (round(g3["expected"], 6), g3["actual"], round(g3["delta"], 6)),
@@ -803,7 +809,7 @@ def _selftest():
     g5rows = test_relationship(None, g5[0], {}, DEFAULT_TOLERANCE)
     ck("G5 is NOT_TESTABLE", [r["bin"] for r in g5rows], [NOT_TESTABLE])
     ck("G5 produces no testable verdict",
-       any(r["bin"] in (BROKEN, HOLDS_UNMAINTAINED, MAINTAINED)
+       any(r["bin"] in (DIVERGED, HOLDS_UNMAINTAINED, MAINTAINED)
            for r in g5rows), False)
     ck("and no expected value is emitted for it",
        g5rows[0].get("expected"), None)
@@ -817,9 +823,9 @@ def _selftest():
     # Two arms, because a one-armed exemption check passes on a screen
     # that hides everything.
     emitted = render(r1, True) + "\n" + rate([r1])
-    ck("the emitted report is clean with the delivered bin masked",
+    ck("the emitted report is clean under the (empty) exemption",
        screened(emitted)[0], True)
-    ck("and the delivered bin is the only thing that fires without it",
+    ck("and nothing fires unmasked, the exemption list being empty",
        exemption_is_only_the_bin(emitted), True)
     ck("a planted grading word is caught through the exemption",
        screened(emitted + "\nthis cell is wrong")[0], False)

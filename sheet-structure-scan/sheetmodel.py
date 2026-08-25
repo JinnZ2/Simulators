@@ -308,6 +308,8 @@ class Workbook(object):
         self.sheets = sheets
         self.path = path
         self.reader = reader
+        self.capabilities = {"cell_values": True, "cell_kind": True,
+                             "precedents": True, "formula_text": True}
         self._dependents = None
         self._pdepth = None
         self._ddepth = None
@@ -484,6 +486,14 @@ def read(path):
     ext = os.path.splitext(path)[1].lower()
     if ext in (".xlsx", ".xlsm"):
         return read_xlsx(path)
+    if ext == ".xls":
+        # Legacy BIFF8, work order 6 S1. Imported here rather than at
+        # module scope because xlsreader imports this module. The one
+        # spreadsheet reader beyond stdlib is STILL unspent: a .xls is a
+        # compound-file container and struct reaches the records,
+        # formulas included.
+        import xlsreader
+        return xlsreader.read_xls(path)
     raise NotImplementedError(
         "no reader for %s. The declared budget allows ONE spreadsheet "
         "reader beyond stdlib and it is unspent: install it and wire it "
