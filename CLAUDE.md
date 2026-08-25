@@ -6067,8 +6067,27 @@ underneath).
   `error` in the disclaimer and `needs` in the rate emission — were
   **reworded rather than exempted**, the call `residual-direction`
   `RDD_008` made when its own screen fired on its own disclaimer. Holds on
-  the real workbook and not only on the fixture. 216 selftest checks green
-  across eight modules. Stdlib only, parses under 3.9, CC0.
+  the real workbook and not only on the fixture. **`SSS_057`, the SBA
+  run:** `sba.gov` refuses CONNECT like the six publisher hosts at
+  `SSS_053` and no file was uploaded, so the three documents were read by
+  nothing and the run is **NOT_RUN on all three** — while the order's
+  reader question is answered anyway. `docreader.py` declares per item:
+  `container_detect` and `stream_enumerate` **built** (the container
+  parser reused from `xlsreader`, not copied), **`text` NOT BUILT**, and
+  each absence names what it stops — `text` stops every upward cell, every
+  quantified downward stop and the WO7 screen's (b) and (c), so the grid
+  has nothing to fill. **The extension is a claim, not a fact**: `sniff()`
+  runs first, since a government `.doc` may be OLE Word, a renamed OOXML
+  zip or RTF, and the check that matters is tested on a real file — an OLE
+  *workbook* must not read as a Word document, and it reads `False` with
+  the missing `WordDocument` stream named. **No text-heuristic substitute
+  is offered and the refusal is structural**: `read_doc()` raises rather
+  than returning a degraded read, and a selftest check reads the module's
+  own source to assert no `strings`-style path exists in it. The parser is
+  deliberately not written ahead of the files, because `SSS_017` and
+  `SSS_041` are both defects a real file exposed that no fixture could.
+  231 selftest checks green
+  across nine modules. Stdlib only, parses under 3.9, CC0.
 - `claim-record/` — Seven fields per claim, two hard rules, and a
   validator that refuses. Delivered spoken (`SOURCE_DROP.md`, verbatim):
   assertion without hedges / measurement as an interval / instrument plus

@@ -517,6 +517,17 @@ def read(path):
         # formulas included.
         import xlsreader
         return xlsreader.read_xls(path)
+    if ext == ".doc":
+        # Legacy binary Word. The container layer parses (docreader
+        # reuses xlsreader's compound-file reader) and text extraction is
+        # NOT BUILT. Declared rather than attempted, per WO6 S1 and the
+        # WO8 SBA run: no value-only or text-heuristic substitution.
+        import docreader
+        raise NotImplementedError(
+            "legacy .doc: container detection and stream enumeration are "
+            "built, text extraction is NOT. Run `docreader.py FILE` for "
+            "the per-item capability declaration. No text-heuristic "
+            "substitute is offered.")
     raise NotImplementedError(
         "no reader for %s. The declared budget allows ONE spreadsheet "
         "reader beyond stdlib and it is unspent: install it and wire it "

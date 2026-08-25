@@ -1,0 +1,16 @@
+docreader selftest
+  OLE magic detects as a compound-file container           PASS got='ole_cfb' want='ole_cfb'
+  a zip with no word part is not OOXML                     PASS got='unknown' want='unknown'
+  and the reason says why                                  PASS got=True want=True
+  RTF detects as RTF                                       PASS got='rtf' want='rtf'
+  an unrecognised head is unknown, not assumed             PASS got='unknown' want='unknown'
+  a missing file is unknown rather than raising            PASS got='unknown' want='unknown'
+  a real OLE workbook detects as a compound-file container PASS got='ole_cfb' want='ole_cfb'
+  and is NOT a word doc, on stream contents not on magic   PASS got=False want=False
+  with the reason naming the missing stream                PASS got=True want=True
+  its streams enumerate through the shared container parser PASS got=True want=True
+  text is declared unavailable                             PASS got=False want=False
+  every absent capability names what it stops              PASS got=True want=True
+  read_doc raises rather than returning a degraded read    PASS got='raised' want='raised'
+  no text-heuristic path exists in this module             PASS got=[] want=[]
+SELFTEST PASS (0 checks failed)

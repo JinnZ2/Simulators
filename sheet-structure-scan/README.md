@@ -25,6 +25,7 @@ python3 scans.py --selftest
 | `coupling.py` | sensitivity by perturbation, and the ranking. `--selftest` |
 | `scan4.py` | stated-relationship maintenance, and the cross-file emission. `--selftest` |
 | `xlsreader.py` | legacy .xls (BIFF8), stdlib. `--selftest` |
+| `docreader.py` | legacy .doc container triage and capability declaration. `--selftest` |
 | `selection.py` | the WO7 eligibility screen and reject log. `--selftest` |
 | `frozen_wo6.json` | the parameter values S2 freezes, written before screening |
 | `PREDICTIONS_WO6.md` | H1's predictions, committed before the run |
@@ -366,8 +367,8 @@ definition, has a default, and is printed into the report header when it
 is in force — an absence measured at radius 2 and one measured at radius
 6 are different readings. `SPEC.md` §5 is the table.
 
-216 selftest checks across eight modules: `sheetmodel` 27,
+231 selftest checks across nine modules: `sheetmodel` 27,
 `no_severity` 12, `scans` 36, `targets/epa_check` 30, `coupling` 36,
-`scan4` 32, `xlsreader` 24, `selection` 19.
+`scan4` 32, `xlsreader` 24, `selection` 19, `docreader` 15.
 
 CC0. Stdlib only. Parses under Python 3.9.

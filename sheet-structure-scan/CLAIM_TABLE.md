@@ -1595,3 +1595,59 @@ check that passed, passed under the one invocation that hides it.
 **Falsifier:** an import path under which the two names are equivalent.
 
 **Status: REPAIRED.**
+
+---
+
+### SSS_057 — the SBA run is NOT_RUN on the files and the reader question is answered anyway
+
+`sba.gov` and `www.sba.gov` both return a refused CONNECT, probed
+2026-08-25T20:22:15Z — the same allowlist that refused six publisher
+hosts at `SSS_053`. No file was uploaded at run time, so **the three
+documents were not read by anything**.
+
+What the order asks for regardless is the reader decision, and it has
+three states rather than two: outside the budget → declare a capability
+item; unreadable → NOT_RUN; and no substitution either way.
+`docreader.py` answers it.
+
+| | |
+|---|---|
+| `container_detect` | **built** |
+| `stream_enumerate` | **built** — reused from `xlsreader`, not copied |
+| `text` | **NOT BUILT** |
+| `paragraph_structure`, `form_fields`, `tables` | NOT BUILT |
+
+Each absence names what it stops. `text` stops **every upward cell** (a
+stated goal is text), **every quantified downward stop** (a dollar figure
+is text) and the WO7 screen's criteria (b) and (c) — so with text absent
+the WO8 grid has nothing to fill and the run is NOT_RUN on all three
+files, not partially run.
+
+**The extension is a claim, not a fact**, and `sniff()` is the first
+thing that runs: a `.doc` from a government site may be OLE binary Word,
+a renamed OOXML zip, or RTF, and the three take three different readers.
+The check that matters is tested on a real file — `/tmp/lgo.xls` is OLE
+and **must not** read as a Word document, since a reader stopping at the
+container signature would accept it. It reads `False` with the reason
+naming the missing `WordDocument` stream.
+
+**No text-heuristic substitute is offered, and the refusal is
+structural.** `read_doc()` raises rather than returning a degraded read,
+and a selftest check reads the module's own source to assert no
+`strings`-style path exists in it. The order names the substitution and
+so does the module, so it can be refused by name rather than by
+intention — the `SSS_046` arrangement, where a dependent-count ranking
+was refused as a stand-in for an uncomputable coupling.
+
+**Why the parser is not written ahead of the files:** `SSS_017` and
+`SSS_041` are both defects a real file exposed that no fixture could,
+because a fixture writer emits what the reader expects. A `.doc` parser
+validated against its own synthetic input would be tested by the one
+thing that cannot fail it.
+
+**Falsifier:** a session that can reach sba.gov, or the three files
+uploaded, either of which turns this from a reader declaration into the
+run the order asked for.
+
+**Status: NOT_RUN on the files. The capability declaration is
+SUPPORTED.**
