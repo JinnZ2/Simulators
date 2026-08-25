@@ -2,13 +2,13 @@
 
 Read against `notes/memory-export/files/`, which is stored verbatim. Nothing
 here is a verdict on the export, and no stored file was modified. Counts are
-recomputed each batch and are a delivery state, not a result — 24 tier-1 files
+recomputed each batch and are a delivery state, not a result — 22 tier-1 files
 are still outstanding.
 
 ## 1. Cross-references, and what "unresolved" means
 
 ```
-40 files   47 links   26 distinct names   13 resolve in folder   13 do not
+42 files   53 links   27 distinct names   14 resolve in folder   13 do not
 ```
 
 "Not in the folder" covers three different situations, and the distinction was
@@ -268,6 +268,41 @@ component ids match its list exactly: `nested_containment`,
 Same shape as `energy-english` at `UNI_104` (finding 6). Both times the repo's
 audit was right that the reference failed and had no way to see its referent.
 Three such names have now resolved from the memory side.
+
+## 15. First numeric discrepancy between a memory file and its repo source
+
+`identity-model-monoculture` summarizes the T6 work in `nonidentity-census/`.
+Its T6 status paragraph reports the null-set confound as
+
+> `decided_by` tracked which rows were copied from fixtures vs typed fresh
+> (12/12), dropping to 0/12 under a matched design
+
+`nonidentity-census/FINDINGS.md` §T6-3 reports the same measurement as
+**5 of 12** rows needing to move to equalize the arms, dropping to **0 of 12**
+under the matched set. The second figure matches exactly. The first does not:
+the metric is rows-to-move and the source gives 5, not 12.
+
+Everything else in the paragraph checks out — the cause (NO rows reused T1
+fixture sentences whose head nouns are in the D3 table, YES rows were typed
+fresh), the matched-set repair, both arms shipping, and the declined real run
+at 0 eligible papers with the CONVENIENCE label refused rather than caveated.
+
+Worth noting which way the error runs: the compression **overstates a defect in
+its own work**, 12/12 where the source says 5 of 12, roughly 2.4×. Summary
+drift usually runs the other way. The qualitative finding is unaffected; the
+magnitude of the as-specified confound is not what the memory file says.
+
+Not corrected in the stored file. It is stored as delivered, and this is the
+checker's output.
+
+## 16. The most-cited absent object is now cited from both sides
+
+`rate-mismatch-polytope` is recorded in `uninstrumented/CLAIM_TABLE.md` as the
+most-cited non-existent object in the repo, reaching three source documents
+there. `identity-model-monoculture` now cites it too. It exists in neither
+repo under either naming convention, and is the second name — with
+`tool-off-metrology` — cited from the memory side and the repo side while
+existing on neither.
 
 ## What was not checked, deliberately
 
