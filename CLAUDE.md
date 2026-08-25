@@ -6389,7 +6389,46 @@ underneath).
   exemption harness `SSS_049` kept for a real case is spent here on
   exactly one token — S3's class is *efficient/optimal/better/faster* and
   **`better` alone is on `no_severity`'s list** — with a fourth check
-  asserting the list is length one so a widening turns red. 39 selftest
+  asserting the list is length one so a widening turns red.
+  **A revision then superseded the order** (`WORK_ORDER_V2.md`, verbatim
+  beside the first, both kept): S1a is entirely new and `value_string`
+  becomes three independently ABSENT-able fields where it was one
+  free-text string. **`FM_011`, the revision's result: the fixed format
+  recovers information the free-text field destroyed.** Under v1 every
+  upward cell read `empty`; under the triple `Disclaimer!A3` — *"in order
+  to raise awareness and to promote climate action"* — states a
+  **direction** and no size, so H1 level +2 is `+ / ABSENT / ABSENT`
+  while +1 and +3 are all-ABSENT. *Sign yes, magnitude no, unit no* is
+  the ordinary shape of a purpose claim and one field recorded it as
+  identical to a cell nobody wrote anything in; `sign` ABSENT on 3 of 4
+  cells, `magnitude` and `unit` on 4 of 4, so P3 and P4 both hold.
+  **`FM_010`:** the v1 form is **refused rather than coerced**, since an
+  empty string cannot say which of the three fields is missing and
+  mapping it to all-three-absent would assert what the v1 data never
+  recorded. **`FM_012`, S1a instanced:** *"joules are not the floor
+  unless joules were calculated"* — H1's grid names four downward levels
+  and the workbook computes at exactly one (`kg CO2e`, entered kWh times
+  the factor), so the downward stop is level 0 and `unmeasured_span` is
+  **3 levels**, every level below it naming a real quantity with a real
+  unit that nobody computes; a naive reading would put the floor at −3
+  and the span at zero. **`FM_013`:** `computed` is a **declared field**
+  and `validate()` refuses a `quantified` block without it — a reader
+  filling it in from the physics is exactly the reader the rule is
+  written against, stopped at load rather than at read. **`FM_016`:** the
+  span **understates by construction**, counting what the grid names, and
+  that is disclosed rather than corrected since correcting means
+  inventing levels; H1 returns 3 and H4 returns 0, so the contrast is
+  between two documents and not two systems. **`FM_014`:** the
+  `plan_exists` / `practice_tracks_plan` column is separate and the code
+  cannot merge it into `basis` (asserted in the selftest), with
+  `practice_tracks_plan` defaulting to **UNREAD** and never to `no`.
+  **`FM_017`:** S7 says empty emits as empty and never as zero, and the
+  converse needed saying too — `magnitude: 0` is a claim that the proxy
+  moves the goal not at all, `ABSENT` is the absence of one, and the two
+  are pinned apart. **`FM_015`:** the registered prediction is **not
+  blind on H1** and says so — `Disclaimer!A3` was already read in this
+  session during the v1 run, so P3 and P4 are registered because the
+  format is new rather than because the source was unread. 60 selftest
   checks. Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk

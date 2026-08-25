@@ -23,7 +23,9 @@
       "index": 0,
       "severed": "-- the term as used --",
       "still_acting": "the ratio is quoted across two different accounting boundaries",
-      "clock": {"state": "ABSENT"},
+      "clock": {
+        "state": "ABSENT"
+      },
       "basis": "ASSERTED"
     },
     {
@@ -31,9 +33,20 @@
       "goal": "therefore Y is redundant",
       "severed": "the relation between the conversion ratio and Y's function set",
       "still_acting": "Y's other functions, whatever they are, continue unread",
-      "clock": {"state": "ABSENT"},
+      "clock": {
+        "state": "ABSENT"
+      },
       "basis": "ABSENT",
-      "value_string": ""
+      "value_string": {
+        "sign": "ABSENT",
+        "magnitude": "ABSENT",
+        "unit": "ABSENT"
+      }
     }
-  ]
+  ],
+  "plan": {
+    "plan_exists": "no",
+    "practice_tracks_plan": "UNREAD",
+    "why": "no charter, plan or stated principle carries the replacement claim; it is asserted in prose"
+  }
 }

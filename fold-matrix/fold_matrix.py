@@ -48,6 +48,18 @@ ASSERTED = "ASSERTED"
 ABSENT = "ABSENT"
 BASIS = (MEASURED, DERIVED, ASSERTED, ABSENT)
 
+# S2 (revised). value_string is a fixed format, not a free string: three
+# fields, each independently ABSENT-able. The split is load-bearing --
+# under the free-text version every upward cell in this folder read
+# "empty", and a purpose claim usually states a DIRECTION and no size,
+# which one string cannot record and three fields can.
+VS_FIELDS = ("sign", "magnitude", "unit")
+SIGNS = ("+", "-", ABSENT)
+
+# S1a. Never merged into basis.
+YES, NO, UNREAD_STATE = "yes", "no", "UNREAD"
+PLAN_STATES = (YES, NO, UNREAD_STATE)
+
 ENUMERATED = "enumerated"
 PARTIAL = "PARTIAL"
 UNREAD = "UNREAD"
@@ -230,25 +242,62 @@ def clock_mismatch(levels):
 
 # ---- S2. Upward cells -------------------------------------------------
 
-def upward_cells(term):
-    """Every positive level, with its basis and value_string.
+def value_string(cell):
+    """The fixed S2 triple, normalised. Missing fields read ABSENT.
 
-    `value_string` is REQUIRED per S2 and empty is the normal result. It
-    is emitted as an empty string, never as 0 and never omitted, so a
-    reader can tell a relation of zero from a relation nobody stated.
+    Each field is independent: a claim that states a direction and no
+    size is `+ / ABSENT / ABSENT`, and that is the ordinary shape of a
+    purpose claim. A magnitude of ABSENT is never rendered as 0 and a
+    magnitude of 0 is a stated size, so the two never collide.
+    """
+    vs = cell.get("value_string")
+    if isinstance(vs, str):
+        # The v1 free-text form. Refused rather than coerced: an empty
+        # string is not the same as three ABSENTs -- it is one field that
+        # cannot say which of the three is missing -- and silently
+        # widening it would delete the distinction the revision adds.
+        raise ValueError(
+            "value_string is a free string; the revised S2 takes three "
+            "fields (sign, magnitude, unit), each independently "
+            "ABSENT-able. An empty string cannot say which is missing.")
+    vs = vs or {}
+    out = {}
+    for f in VS_FIELDS:
+        v = vs.get(f, ABSENT)
+        if v is None or (isinstance(v, str) and not v.strip()):
+            v = ABSENT
+        out[f] = v
+    return out
+
+
+def vs_render(vs):
+    """One display string, with each field visible as itself."""
+    return "%s / %s / %s" % (
+        vs["sign"],
+        vs["magnitude"] if vs["magnitude"] != ABSENT else ABSENT,
+        vs["unit"])
+
+
+def upward_cells(term):
+    """Every positive level, with its basis and value_string triple.
+
+    The triple is REQUIRED per S2 and all-ABSENT is the normal result. No
+    field is ever rendered as 0, so a stated relation of zero and a
+    relation nobody stated never collide.
     """
     out = []
     for lv in term.get("levels", []):
         if lv["index"] <= 0:
             continue
         b = lv.get("basis", ABSENT)
-        vs = lv.get("value_string", "")
+        vs = value_string(lv)
         out.append({
             "index": lv["index"],
             "goal": lv.get("goal", ""),
             "relation_claimed": lv.get("severed", ""),
             "basis": b,
-            "value_string": "" if vs is None else str(vs),
+            "value_string": vs,
+            "vs_all_absent": all(vs[f] == ABSENT for f in VS_FIELDS),
             "cite": lv.get("cite", ""),
             # An empty value_string has more than one cause and the
             # order's four basis values do not separate them: nobody
@@ -267,7 +316,8 @@ def upward_tally(terms):
     comparison, and a tally is a comparison.
     """
     counts = dict((b, 0) for b in BASIS)
-    n_empty = n_cells = 0
+    field_absent = dict((f, 0) for f in VS_FIELDS)
+    n_empty = n_cells = n_split = 0
     excluded = []
     for t in terms:
         sv, _m, _w = scope_check(t)
@@ -278,15 +328,139 @@ def upward_tally(terms):
         for c in upward_cells(t):
             n_cells += 1
             counts[c["basis"]] = counts.get(c["basis"], 0) + 1
-            if not c["value_string"]:
+            vs = c["value_string"]
+            for f in VS_FIELDS:
+                if vs[f] == ABSENT:
+                    field_absent[f] += 1
+            if c["vs_all_absent"]:
                 n_empty += 1
+            elif any(vs[f] != ABSENT for f in VS_FIELDS):
+                # A cell where the three fields do NOT fail together --
+                # the state the free-text format could not record.
+                n_split += 1
     soft = counts[ASSERTED] + counts[ABSENT]
     hard = counts[MEASURED] + counts[DERIVED]
-    return {"counts": counts, "cells": n_cells, "empty_value_strings": n_empty,
+    return {"counts": counts, "cells": n_cells,
+            "all_absent_cells": n_empty, "split_cells": n_split,
+            "field_absent": field_absent,
             "asserted_plus_absent": soft, "measured_plus_derived": hard,
             "P1_majority": (soft > hard) if n_cells else None,
-            "P2_all_empty": (n_empty == n_cells) if n_cells else None,
+            "P3_at_least_one_split": (n_split > 0) if n_cells else None,
+            "P4_no_magnitude": (field_absent["magnitude"] == n_cells)
+            if n_cells else None,
             "excluded_not_evaluable": excluded}
+
+
+# ---- S1a. Stop rules, from the document set --------------------------
+
+def upward_stop(term):
+    """Highest positive level carrying a stated artifact.
+
+    S1a: the stop is a property of the DOCUMENT SET, not an absolute. A
+    level whose goal nobody wrote down anywhere is where the arm ends,
+    and it ends at basis ABSENT rather than at a guess about what the
+    organisation must have meant.
+    """
+    best = None
+    for lv in term.get("levels", []):
+        if lv["index"] <= 0:
+            continue
+        aid = (lv.get("artifact_id") or "").strip()
+        if aid:
+            if best is None or lv["index"] > best["index"]:
+                best = {"index": lv["index"], "artifact_id": aid,
+                        "basis": lv.get("basis")}
+    if best is None:
+        return {"index": None, "artifact_id": ABSENT, "basis": ABSENT,
+                "why": "no positive level carries a stated artifact, so "
+                       "the upward arm stops before it starts"}
+    above = [lv for lv in term.get("levels", [])
+             if lv["index"] > best["index"]]
+    return dict(best, why=("highest level with a stated artifact; %d "
+                           "level(s) above it carry none"
+                           % len(above)) if above else
+                "highest level with a stated artifact")
+
+
+def downward_stop(term):
+    """Deepest level carrying a quantity the organisation COMPUTES.
+
+    S1a is precise about this and it is the rule most likely to be
+    misread: the floor is the deepest QUANTIFIED quantity, not the
+    deepest one that physically exists. Joules are not the floor unless
+    joules were calculated. A level can name a real physical relation and
+    still be below the stop, because nobody in the document set computed
+    anything there.
+
+    `computed` is a declared field. Nothing here infers that an
+    organisation computed a quantity from the fact that the quantity
+    exists -- that inference is the whole failure the rule names.
+    """
+    best = None
+    for lv in term.get("levels", []):
+        if lv["index"] > 0:
+            continue
+        q = lv.get("quantified")
+        if not q or not q.get("computed"):
+            continue
+        if best is None or lv["index"] < best["index"]:
+            best = {"index": lv["index"],
+                    "quantity": q.get("quantity", ABSENT),
+                    "unit": q.get("unit", ABSENT),
+                    "by": q.get("by", "")}
+    if best is None:
+        return {"index": None, "quantity": ABSENT, "unit": ABSENT,
+                "by": "", "why": "no level carries a quantity the "
+                                 "organisation computes"}
+    return dict(best, why="deepest computed quantity")
+
+
+def unmeasured_span(term):
+    """Their downward stop against where the physical chain continues.
+
+    Emitted, never scored (S1a). The span is a count of levels between
+    the deepest computed quantity and the deepest level the term's own
+    grid names as still physically acting -- so it is bounded by what
+    was written down, and a term whose grid stops early reports a
+    smaller span than the world has. That understatement is stated
+    rather than corrected, because correcting it would mean inventing
+    levels.
+    """
+    ds = downward_stop(term)
+    downs = [lv for lv in term.get("levels", []) if lv["index"] < 0]
+    if not downs:
+        deepest = None
+    else:
+        deepest = min(lv["index"] for lv in downs)
+    if ds["index"] is None or deepest is None:
+        return {"stop": ds["index"], "physical_floor_named": deepest,
+                "levels": None,
+                "note": "not computable: %s"
+                        % ("no computed quantity" if ds["index"] is None
+                           else "the grid names no level below the term")}
+    span = ds["index"] - deepest
+    return {"stop": ds["index"], "physical_floor_named": deepest,
+            "levels": span,
+            "note": ("%d level(s) of the physical chain continue below "
+                     "the deepest quantity anyone computed. This is a "
+                     "count of what the grid names, and the grid is "
+                     "bounded by what was written down." % span)
+            if span > 0 else
+            "the deepest computed quantity is the deepest level named"}
+
+
+def plan_column(term):
+    """S1a's separate column. Never merged into basis, and the code
+    cannot merge it: it is read from its own key and returned in its own
+    dict, and the selftest asserts neither value reaches a basis field.
+    """
+    p = term.get("plan") or {}
+    pe = p.get("plan_exists", UNREAD_STATE)
+    pt = p.get("practice_tracks_plan", UNREAD_STATE)
+    bad = [v for v in (pe, pt) if v not in PLAN_STATES]
+    return {"plan_exists": pe, "practice_tracks_plan": pt,
+            "invalid": bad,
+            "why": p.get("why", "")}
 
 
 # ---- scoring, which mostly refuses ------------------------------------
@@ -350,10 +524,41 @@ def validate(term):
         if lv.get("basis") not in BASIS:
             bad.append("level %s: basis %r not in %s"
                        % (lv.get("index"), lv.get("basis"), list(BASIS)))
-        if lv.get("index", 0) > 0 and "value_string" not in lv:
-            bad.append("level %s: upward cell with no value_string field "
-                       "(S2 requires it; empty is legal, missing is not)"
-                       % lv.get("index"))
+        if lv.get("index", 0) > 0:
+            vs = lv.get("value_string")
+            if vs is None:
+                bad.append("level %s: upward cell with no value_string "
+                           "(S2 requires it; all-ABSENT is legal, missing "
+                           "is not)" % lv.get("index"))
+            elif isinstance(vs, str):
+                bad.append("level %s: value_string is a free string. The "
+                           "revised S2 takes three fields %s, each "
+                           "independently ABSENT-able."
+                           % (lv.get("index"), list(VS_FIELDS)))
+            else:
+                if vs.get("sign", ABSENT) not in SIGNS:
+                    bad.append("level %s: sign %r not in %s"
+                               % (lv.get("index"), vs.get("sign"),
+                                  list(SIGNS)))
+                m = vs.get("magnitude", ABSENT)
+                if m != ABSENT and not isinstance(m, (int, float)):
+                    bad.append("level %s: magnitude %r is neither a number "
+                               "nor ABSENT" % (lv.get("index"), m))
+        q = lv.get("quantified")
+        if q is not None:
+            if "computed" not in q:
+                bad.append("level %s: quantified block with no `computed` "
+                           "field. S1a's floor is the deepest quantity the "
+                           "organisation COMPUTES, and whether it did is "
+                           "not inferable from the quantity existing."
+                           % lv.get("index"))
+            elif q.get("computed") and not q.get("unit"):
+                bad.append("level %s: computed quantity with no unit"
+                           % lv.get("index"))
+    pc = plan_column(term)
+    if pc["invalid"]:
+        bad.append("plan column: %s not in %s"
+                   % (pc["invalid"], list(PLAN_STATES)))
     rep = term.get("replacement")
     if rep and rep.get("Y_function_set") not in FUNCTION_SET:
         bad.append("replacement claim: Y_function_set %r not in %s"
@@ -425,10 +630,20 @@ def render_term(term, width=44):
     if up:
         L += ["", "S2 upward cells"]
         L.append(table(
-            ["level", "goal", "basis", "value_string", "cite"],
+            ["level", "goal", "basis", "sign", "magnitude", "unit", "cite"],
             [[("%+d" % c["index"]), _clip(c["goal"], width), c["basis"],
-              c["value_string"] if c["value_string"] else "(empty)",
-              _clip(c["cite"], 28)] for c in up]))
+              c["value_string"]["sign"],
+              c["value_string"]["magnitude"],
+              _clip(c["value_string"]["unit"], 22),
+              _clip(c["cite"], 24)] for c in up]))
+        split = [c for c in up if not c["vs_all_absent"]]
+        if split:
+            L += ["",
+                  "   The three fields do not fail together on %d cell(s)."
+                  % len(split),
+                  "   A stated direction with no size is the ordinary shape",
+                  "   of a purpose claim, and one free-text field recorded",
+                  "   it as identical to a cell nobody wrote anything in."]
         dis = [c for c in up if c["source_disclaims"]]
         if dis:
             L += ["",
@@ -440,6 +655,33 @@ def render_term(term, width=44):
             for c in dis:
                 L.append("     %+d  %s" % (c["index"],
                                            _clip(c["source_disclaims"], 62)))
+
+    us = upward_stop(term)
+    ds = downward_stop(term)
+    sp = unmeasured_span(term)
+    pc = plan_column(term)
+    L += ["", "S1a stops, from the document set"]
+    L.append(table(
+        ["stop", "level", "what", "why"],
+        [["upward",
+          ("%+d" % us["index"]) if us["index"] is not None else ABSENT,
+          _clip(us["artifact_id"], 34), _clip(us["why"], 48)],
+         ["downward",
+          ("%+d" % ds["index"]) if ds["index"] not in (None, 0) else (
+              " 0" if ds["index"] == 0 else ABSENT),
+          _clip("%s [%s]" % (ds["quantity"], ds["unit"]), 34),
+          _clip(ds["why"], 48)]]))
+    L += ["", "   unmeasured_span: %s" % (
+        "%d level(s)" % sp["levels"] if sp["levels"] is not None
+        else "not computable"),
+        "   %s" % _clip(sp["note"], 62),
+        "   Emitted, not scored (S1a)."]
+    L += ["",
+          "   plan_exists %s | practice_tracks_plan %s"
+          % (pc["plan_exists"], pc["practice_tracks_plan"]),
+          "   Its own column. It is not a basis and does not enter one."]
+    if pc["why"]:
+        L.append("   %s" % _clip(pc["why"], 62))
 
     cm = clock_mismatch(lv)
     if cm["clocks"]:
@@ -481,13 +723,20 @@ def render(terms):
     L += ["S2, across the terms a comparison may include", ""]
     L.append(table(["basis", "upward cells"],
                    [[b, tally["counts"][b]] for b in BASIS]))
+    L += ["", "value_string, per field"]
+    L.append(table(["field", "ABSENT on", "of cells"],
+                   [[f, tally["field_absent"][f], tally["cells"]]
+                    for f in VS_FIELDS]))
     L += ["",
-          "cells: %d   empty value_string: %d"
-          % (tally["cells"], tally["empty_value_strings"]),
+          "cells: %d   all three ABSENT: %d   split: %d"
+          % (tally["cells"], tally["all_absent_cells"],
+             tally["split_cells"]),
           "ASSERTED + ABSENT: %d   measured + derived: %d"
           % (tally["asserted_plus_absent"], tally["measured_plus_derived"]),
           "P1 (soft majority): %s" % tally["P1_majority"],
-          "P2 (all value_strings empty): %s" % tally["P2_all_empty"]]
+          "P3 (at least one cell splits): %s"
+          % tally["P3_at_least_one_split"],
+          "P4 (no magnitude anywhere): %s" % tally["P4_no_magnitude"]]
     if tally["excluded_not_evaluable"]:
         L += ["",
               "excluded from this tally as NOT_EVALUABLE (S3): %s"
@@ -631,30 +880,133 @@ def _selftest():
        clock_of({"index": 0, "clock": {"state": "UNMEASURED"}}), None)
 
     # ---- S2 upward cells and the empty value_string.
+    ALL_ABSENT = {"sign": ABSENT, "magnitude": ABSENT, "unit": ABSENT}
     t = {"levels": [{"index": -1, "basis": MEASURED},
                     {"index": 0, "basis": MEASURED},
-                    {"index": 1, "basis": ASSERTED, "value_string": ""},
-                    {"index": 2, "basis": ABSENT, "value_string": ""}]}
+                    {"index": 1, "basis": ASSERTED,
+                     "value_string": dict(ALL_ABSENT)},
+                    {"index": 2, "basis": ABSENT,
+                     "value_string": dict(ALL_ABSENT)}]}
     up = upward_cells(t)
     ck("only positive levels are upward cells",
        [c["index"] for c in up], [1, 2])
-    ck("an empty value_string emits as empty, never as zero",
-       [c["value_string"] for c in up], ["", ""])
-    ck("and is a string, so a caller cannot read 0 out of it",
-       all(isinstance(c["value_string"], str) for c in up), True)
+    ck("an all-ABSENT triple emits as ABSENT, never as zero",
+       [c["value_string"]["magnitude"] for c in up], [ABSENT, ABSENT])
+    ck("and all-ABSENT is flagged as such",
+       [c["vs_all_absent"] for c in up], [True, True])
+
+    # ---- S2 revised: the three fields are INDEPENDENT. A stated
+    # direction with no size is the ordinary shape of a purpose claim,
+    # and the free-text form recorded it as identical to an unwritten
+    # cell. Both halves asserted.
+    split = upward_cells({"levels": [
+        {"index": 1, "basis": ASSERTED,
+         "value_string": {"sign": "+", "magnitude": ABSENT,
+                          "unit": ABSENT}}]})[0]
+    ck("a sign with no magnitude is not all-ABSENT",
+       split["vs_all_absent"], False)
+    ck("and the sign survives", split["value_string"]["sign"], "+")
+    ck("a missing field defaults to ABSENT, not to a blank",
+       value_string({"value_string": {"sign": "-"}}),
+       {"sign": "-", "magnitude": ABSENT, "unit": ABSENT})
+    # A magnitude of 0 is a STATED size and must not read as absent.
+    z = value_string({"value_string": {"sign": "+", "magnitude": 0,
+                                       "unit": "kg CO2e per person"}})
+    ck("a stated magnitude of zero is not ABSENT", z["magnitude"], 0)
+    ck("and a cell carrying it does not read all-ABSENT",
+       upward_cells({"levels": [{"index": 1, "basis": ASSERTED,
+                                 "value_string": {"sign": "+",
+                                                  "magnitude": 0,
+                                                  "unit": "u"}}]}
+                    )[0]["vs_all_absent"], False)
+
+    # The v1 free-text form is REFUSED, not coerced: an empty string
+    # cannot say which of the three fields is missing.
+    try:
+        value_string({"value_string": ""})
+        got_vs = "coerced"
+    except ValueError:
+        got_vs = "refused"
+    ck("a v1 free-text value_string is refused rather than widened",
+       got_vs, "refused")
 
     # ---- validate refuses what the schema requires.
     ck("an upward cell with no value_string field does not load",
        len(validate({"levels": [{"index": 1, "basis": ASSERTED}]})), 1)
     ck("an unknown basis does not load",
        len(validate({"levels": [{"index": 0, "basis": "probably"}]})), 1)
-    ck("a legal empty value_string does load",
+    ck("a legal all-ABSENT triple does load",
        validate({"levels": [{"index": 1, "basis": ASSERTED,
-                             "value_string": ""}]}), [])
+                             "value_string": dict(ALL_ABSENT)}]}), [])
+    ck("a sign outside the vocabulary does not load",
+       len(validate({"levels": [{"index": 1, "basis": ASSERTED,
+                                 "value_string": {"sign": "up"}}]})), 1)
+    ck("a non-numeric magnitude does not load",
+       len(validate({"levels": [{"index": 1, "basis": ASSERTED,
+                                 "value_string": {"magnitude": "large"}}]})),
+       1)
+
+    # ---- S1a stop rules.
+    T1 = {"levels": [
+        {"index": -2, "basis": ABSENT,
+         "quantified": {"quantity": "carbon", "unit": "kg", "computed": False}},
+        {"index": -1, "basis": ABSENT,
+         "quantified": {"quantity": "mix", "unit": "fraction",
+                        "computed": False}},
+        {"index": 0, "basis": MEASURED,
+         "quantified": {"quantity": "emissions", "unit": "kg CO2e",
+                        "computed": True}},
+        {"index": 1, "basis": ASSERTED, "value_string": dict(ALL_ABSENT),
+         "artifact_id": "charter"},
+        {"index": 2, "basis": ABSENT, "value_string": dict(ALL_ABSENT)}]}
+    ck("the upward stop is the highest level with an artifact",
+       upward_stop(T1)["index"], 1)
+    ck("and a level above it with none does not extend the arm",
+       upward_stop(T1)["artifact_id"], "charter")
+    ck("no artifact anywhere stops the arm at ABSENT",
+       upward_stop({"levels": [{"index": 1, "basis": ASSERTED,
+                                "value_string": dict(ALL_ABSENT)}]}
+                   )["artifact_id"], ABSENT)
+    # The rule most likely to be misread: the floor is the deepest
+    # COMPUTED quantity, not the deepest one that exists. Levels -1 and
+    # -2 name real physical quantities with units and are below the stop.
+    ck("the downward stop is the deepest COMPUTED quantity",
+       downward_stop(T1)["index"], 0)
+    ck("a real physical quantity nobody computed is below the floor",
+       downward_stop(T1)["quantity"], "emissions")
+    ck("and the span counts what continues below it",
+       unmeasured_span(T1)["levels"], 2)
+    ck("a term computing nothing has no floor rather than floor zero",
+       downward_stop({"levels": [{"index": 0, "basis": ABSENT}]})["index"],
+       None)
+    ck("and its span is not computable rather than zero",
+       unmeasured_span({"levels": [{"index": 0, "basis": ABSENT}]})["levels"],
+       None)
+    ck("a quantified block with no `computed` field does not load",
+       len(validate({"levels": [{"index": 0, "basis": MEASURED,
+                                 "quantified": {"quantity": "x",
+                                                "unit": "u"}}]})), 1)
+
+    # ---- S1a's plan column is separate and stays separate.
+    pc = plan_column({"plan": {"plan_exists": YES,
+                               "practice_tracks_plan": NO}})
+    ck("the plan column reads its own key", (pc["plan_exists"],
+                                             pc["practice_tracks_plan"]),
+       (YES, NO))
+    ck("an unstated plan column reads UNREAD, not no",
+       plan_column({})["plan_exists"], UNREAD_STATE)
+    ck("an out-of-vocabulary plan state does not load",
+       len(validate({"plan": {"plan_exists": "maybe"}})), 1)
+    ck("no plan value reaches a basis field",
+       [c["basis"] for c in upward_cells(
+           dict(T1, plan={"plan_exists": YES,
+                          "practice_tracks_plan": YES}))],
+       [ASSERTED, ABSENT])
 
     # ---- the tally excludes refused terms rather than zeroing them.
     tal = upward_tally([T, {"name": "plain", "levels": [
-        {"index": 1, "basis": ASSERTED, "value_string": ""}]}])
+        {"index": 1, "basis": ASSERTED,
+         "value_string": dict(ALL_ABSENT)}]}])
     ck("a NOT_EVALUABLE term is excluded from the tally, not counted as 0",
        (tal["cells"], tal["excluded_not_evaluable"]), (1, ["?"]))
 
@@ -666,7 +1018,7 @@ def _selftest():
     # ---- S7 screen, three arms.
     txt = render([{"id": "x", "name": "grid emission factor",
                    "levels": [{"index": 1, "basis": ASSERTED,
-                               "value_string": ""}]}])
+                               "value_string": dict(ALL_ABSENT)}]}])
     ck("an emitted report is clean under the declared exemption",
        screened(txt)[0], True)
     ck("and only the declared token fires without it",

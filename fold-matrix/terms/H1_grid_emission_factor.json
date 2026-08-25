@@ -19,7 +19,13 @@
       "clock": {
         "state": "ABSENT"
       },
-      "basis": "ABSENT"
+      "basis": "ABSENT",
+      "quantified": {
+        "quantity": "CO2e per unit fuel energy",
+        "unit": "kg CO2e/MJ",
+        "computed": false,
+        "by": "nobody in this document set; the chemistry acts whether or not it is computed"
+      }
     },
     {
       "index": -2,
@@ -28,7 +34,13 @@
       "clock": {
         "state": "ABSENT"
       },
-      "basis": "ABSENT"
+      "basis": "ABSENT",
+      "quantified": {
+        "quantity": "marginal plant heat rate",
+        "unit": "MJ/kWh",
+        "computed": false,
+        "by": "not computed anywhere in the workbook"
+      }
     },
     {
       "index": -1,
@@ -39,7 +51,13 @@
         "units": "years",
         "basis": "stated in the delivery as a few years and taken as 3; NOT measured here"
       },
-      "basis": "ASSERTED"
+      "basis": "ASSERTED",
+      "quantified": {
+        "quantity": "generation mix shares",
+        "unit": "fraction",
+        "computed": false,
+        "by": "the factor arrives as a published constant; the workbook computes no mix"
+      }
     },
     {
       "index": 0,
@@ -51,7 +69,13 @@
         "basis": "derived: time_constant 3.0 y / |coupling| 0.8815, coupling measured by perturbation in sheet-structure-scan/coupling.py",
         "derived_from": -1
       },
-      "basis": "derived"
+      "basis": "derived",
+      "quantified": {
+        "quantity": "emissions",
+        "unit": "kg CO2e",
+        "computed": true,
+        "by": "Report!E25 and the sector tabs: entered kWh multiplied by the factor"
+      }
     },
     {
       "index": 1,
@@ -62,9 +86,14 @@
         "state": "ABSENT"
       },
       "basis": "ASSERTED",
-      "value_string": "",
+      "value_string": {
+        "sign": "ABSENT",
+        "magnitude": "ABSENT",
+        "unit": "ABSENT"
+      },
       "cite": "Disclaimer!A3",
-      "source_disclaims": "the same cell states the secretariat 'makes no representations as to the accuracy, completeness, suitability or validity of any information on this Spreadsheet'"
+      "source_disclaims": "the same cell states the secretariat 'makes no representations as to the accuracy, completeness, suitability or validity of any information on this Spreadsheet'",
+      "artifact_id": "UNFCCC GHG emissions calculator ver01.1, Disclaimer!A3"
     },
     {
       "index": 2,
@@ -75,8 +104,14 @@
         "state": "ABSENT"
       },
       "basis": "ASSERTED",
-      "value_string": "",
-      "cite": "Disclaimer!A3"
+      "value_string": {
+        "sign": "+",
+        "magnitude": "ABSENT",
+        "unit": "ABSENT"
+      },
+      "cite": "Disclaimer!A3",
+      "artifact_id": "UNFCCC GHG emissions calculator ver01.1, Disclaimer!A3",
+      "value_string_note": "the cell states 'in order to raise awareness and to promote climate action', which claims a direction; no magnitude and no unit are stated anywhere in the file"
     },
     {
       "index": 3,
@@ -87,7 +122,16 @@
         "state": "ABSENT"
       },
       "basis": "ABSENT",
-      "value_string": ""
+      "value_string": {
+        "sign": "ABSENT",
+        "magnitude": "ABSENT",
+        "unit": "ABSENT"
+      }
     }
-  ]
+  ],
+  "plan": {
+    "plan_exists": "yes",
+    "practice_tracks_plan": "UNREAD",
+    "why": "Disclaimer!A3 states the purpose, so a plan exists in the document set. Whether any user's practice tracks it is not readable from this artifact and no other artifact was consulted."
+  }
 }

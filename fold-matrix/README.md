@@ -5,17 +5,97 @@ not one number.
 
 | file | |
 |---|---|
-| `WORK_ORDER.md` | the order as delivered |
+| `WORK_ORDER.md` | the order as first delivered |
+| `WORK_ORDER_V2.md` | the revision, verbatim. Supersedes it; both kept |
 | `fold_matrix.py` | the grid and every rule in it. `--selftest` |
 | `terms/` | the four S6 fixtures, as data |
-| `PREDICTIONS_WO8.md` | S2's prediction, registered before the fixtures |
-| `CLAIM_TABLE.md` | `FM_001..009` |
+| `PREDICTIONS_WO8.md` | S2's v1 prediction |
+| `PREDICTIONS_WO8_V2.md` | the revised prediction, and what is not blind about it |
+| `CLAIM_TABLE.md` | `FM_001..017` |
 | `samples/` | one pinned run of each |
 
 ```
 fold_matrix.py run [TERM_ID ...]
 fold_matrix.py --selftest
 ```
+
+## The revision, and what it recovered
+
+`WORK_ORDER_V2.md` supersedes the first order; both are kept unedited so
+the difference is diffable. Two changes: **S1a is entirely new**, and
+**`value_string` becomes three independently ABSENT-able fields** where
+it was one free-text string.
+
+**The fixed format recovers information the free-text field destroyed,
+and that is the revision's result.** Under v1 every upward cell here read
+`empty`. Under the triple, `Disclaimer!A3` — *"in order to raise
+awareness and to promote climate action"* — states a **direction** and no
+size:
+
+| level | sign | magnitude | unit |
+|---|---|---|---|
+| +1 | ABSENT | ABSENT | ABSENT |
+| **+2** | **+** | ABSENT | ABSENT |
+| +3 | ABSENT | ABSENT | ABSENT |
+
+*Sign yes, magnitude no, unit no* is the ordinary shape of a purpose
+claim, and one field recorded it as identical to a cell nobody wrote
+anything in. Across the tally: `sign` ABSENT on 3 of 4, `magnitude` and
+`unit` on 4 of 4.
+
+The v1 form is **refused, not coerced**. An empty string cannot say which
+of the three is missing, so mapping it to all-three-absent would assert
+something the v1 data never recorded. All four fixtures were migrated by
+hand.
+
+## S1a: the floor is what was calculated, not what exists
+
+*"Joules are not the floor unless joules were calculated."* H1's grid
+names four downward levels and the workbook computes at exactly one:
+
+| level | quantity | unit | computed |
+|---|---|---|---|
+| 0 | emissions | kg CO2e | **yes** — entered kWh × the factor |
+| −1 | generation mix shares | fraction | no — the factor arrives as a constant |
+| −2 | marginal plant heat rate | MJ/kWh | no |
+| −3 | CO2e per unit fuel energy | kg CO2e/MJ | no |
+
+**Downward stop level 0, `unmeasured_span` 3 levels.** Every level below
+the stop names a real quantity with a real unit and the chain runs
+through all of them; a naive reading would put the floor at −3 and the
+span at zero.
+
+`computed` is a **declared field** and `validate()` refuses a
+`quantified` block without it. A reader filling it in from the physics —
+*there is obviously a heat rate, so put one here* — is exactly the reader
+the rule is written against, and the schema stops them at load.
+
+The span **understates by construction**: it counts what the grid names,
+and a grid that stops early reports a smaller span than the world has.
+Disclosed rather than corrected, since correcting means inventing levels.
+H4 returns 0 partly for that reason, so the H1-vs-H4 contrast is a
+comparison of two documents and not of two systems.
+
+`plan_exists` / `practice_tracks_plan` is its own column and the code
+cannot merge it into `basis` — asserted in the selftest.
+`practice_tracks_plan` defaults to **UNREAD**, never to `no`: a plan
+nobody checked and a plan practice departs from are different findings.
+
+## Zero is not absent
+
+S7 says empty emits as empty, never as zero. The converse needs saying
+too: **`magnitude: 0` is a claim** — the proxy is stated to move the goal
+not at all — and `ABSENT` is the absence of one. The most confusable pair
+in the format, kept apart and pinned both ways.
+
+## What is not blind
+
+`Disclaimer!A3` was already read in this session during the v1 run, so
+P3 and P4 are **not blind predictions about that text**. They are
+registered because the format is new and the split had not been computed.
+`PREDICTIONS_WO8_V2.md` says so in full. What would be blind is the same
+format on a workbook nobody here has opened, and `SSS_053` is why there
+is not one.
 
 ## The arm this extends is not here
 
@@ -100,4 +180,4 @@ real case. This is one: S3's efficiency class is
 with a fourth check asserting the list is length one so a widening turns
 red.
 
-39 selftest checks. Stdlib only, parses under Python 3.9. CC0.
+60 selftest checks. Stdlib only, parses under Python 3.9. CC0.

@@ -16,9 +16,23 @@ level  severed                                       still_acting               
 +1     the relation between one workbook's count a…  n is 1, and a point is not a rate (SSS_035)   ABSENT         ASSERTED
 
 S2 upward cells
-level  goal                                          basis     value_string  cite                        
------  --------------------------------------------  --------  ------------  ----------------------------
-+1     characterise how well a workbook's prose an…  ASSERTED  (empty)       sheet-structure-scan/CLAIM_…
+level  goal                                          basis     sign    magnitude  unit    cite                    
+-----  --------------------------------------------  --------  ------  ---------  ------  ------------------------
++1     characterise how well a workbook's prose an…  ASSERTED  ABSENT  ABSENT     ABSENT  sheet-structure-scan/CL…
+
+S1a stops, from the document set
+stop      level  what                                why                                 
+--------  -----  ----------------------------------  ------------------------------------
+upward    +1     sheet-structure-scan/WORK_ORDER_4…  highest level with a stated artifact
+downward  -2     reader revision interval [years]    deepest computed quantity           
+
+   unmeasured_span: 0 level(s)
+   the deepest computed quantity is the deepest level named
+   Emitted, not scored (S1a).
+
+   plan_exists yes | practice_tracks_plan yes
+   Its own column. It is not a basis and does not enter one.
+   the work order states what the scan is for and the scan's own…
 
 S5 clocks, per level, not collapsed
 level  value  units  assumed?  basis                                       
@@ -42,7 +56,15 @@ derived   0
 ASSERTED  1           
 ABSENT    0           
 
-cells: 1   empty value_string: 1
+value_string, per field
+field      ABSENT on  of cells
+---------  ---------  --------
+sign       1          1       
+magnitude  1          1       
+unit       1          1       
+
+cells: 1   all three ABSENT: 1   split: 0
 ASSERTED + ABSENT: 1   measured + derived: 0
 P1 (soft majority): True
-P2 (all value_strings empty): True
+P3 (at least one cell splits): False
+P4 (no magnitude anywhere): True

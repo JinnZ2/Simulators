@@ -252,3 +252,200 @@ every mention of a loss require a horizon.
 **Falsifier:** a neutral reading derivable from a name.
 
 **Status: SUPPORTED.**
+
+---
+
+### FM_010 — the revision supersedes, both versions are kept, and the v1 format is refused rather than coerced
+
+`WORK_ORDER_V2.md` lands verbatim beside `WORK_ORDER.md`, which is not
+edited — the `declared-frame/` v1-and-v2 arrangement, so a reader can
+diff the orders rather than take a summary of the difference.
+
+Two changes: **S1a is entirely new**, and **S2's `value_string` becomes
+three fields where it was one free-text string**.
+
+`value_string()` **raises** on the v1 form rather than coercing an empty
+string to three ABSENTs. Coercing would be the obvious kindness and it
+would delete the distinction the revision exists to add: an empty string
+cannot say *which* of the three fields is missing, so silently mapping it
+to all-three-absent asserts something the v1 data never recorded. All
+four fixtures were migrated by hand.
+
+**Falsifier:** a v1 record whose empty string demonstrably meant all three
+fields absent.
+
+**Status: SUPPORTED. The refusal is pinned.**
+
+---
+
+### FM_011 — the fixed format recovers information the free-text field destroyed, and this is the revision's result
+
+Under v1 every upward cell in this folder read `empty`. Under the triple:
+
+| level | goal | sign | magnitude | unit |
+|---|---|---|---|---|
+| +1 | support organizations to estimate their GHG emissions | ABSENT | ABSENT | ABSENT |
+| **+2** | **raise awareness and promote climate action** | **+** | **ABSENT** | **ABSENT** |
+| +3 | not stated | ABSENT | ABSENT | ABSENT |
+
+`Disclaimer!A3` says the calculator exists *"in order to raise awareness
+and to promote climate action"*. **That states a direction.** It states
+no size and no unit, and the file states none anywhere.
+
+So the ordinary shape of a purpose claim is *sign yes, magnitude no, unit
+no* — and one free-text field recorded it as **identical** to a cell
+nobody wrote anything in. The three fields fail independently because
+that is how claims fail.
+
+Across the tally: `sign` ABSENT on 3 of 4 cells, `magnitude` and `unit`
+ABSENT on 4 of 4. **P3 confirmed** (at least one cell splits), **P4
+confirmed** (no magnitude anywhere), **P1 carried** (4 soft, 0 hard).
+
+**Falsifier:** a reading of `Disclaimer!A3` under which *"in order to
+raise awareness"* claims no direction.
+
+**Status: SUPPORTED. The format change is the finding, not the fixtures.**
+
+---
+
+### FM_012 — S1a's downward rule instanced: the workbook's floor is three levels above its own physical chain
+
+*"Deepest QUANTIFIED quantity — one the org computes, not one that
+physically exists. Joules are not the floor unless joules were
+calculated."*
+
+H1's grid names four downward levels and the workbook computes at
+exactly one of them:
+
+| level | quantity | unit | computed |
+|---|---|---|---|
+| 0 | emissions | kg CO2e | **yes** — `Report!E25`, entered kWh × the factor |
+| −1 | generation mix shares | fraction | no — the factor arrives as a published constant |
+| −2 | marginal plant heat rate | MJ/kWh | no |
+| −3 | CO2e per unit fuel energy | kg CO2e/MJ | no |
+
+**Downward stop: level 0. `unmeasured_span`: 3 levels.**
+
+Every level below the stop names a real physical quantity with a real
+unit, and the physical chain runs through all of them whether or not
+anyone computes them. That is precisely the case the rule is written
+for, and a naive reading — *the floor is the deepest thing that exists* —
+would have put the stop at −3 and reported a span of zero.
+
+Emitted, never scored (S1a). `score()` raises on the whole term anyway.
+
+**Falsifier:** a computed quantity below level 0 in this document set.
+
+**Status: SUPPORTED.**
+
+---
+
+### FM_013 — `computed` is a declared field, because inferring it from existence is the failure the rule names
+
+Nothing in `downward_stop()` infers that an organisation computed a
+quantity from the fact that the quantity exists. `computed` is declared
+per level, and `validate()` refuses a `quantified` block that omits it.
+
+That refusal is the rule made structural. A reader who fills in
+`quantified` from the physics — *there is obviously a heat rate, so put a
+heat rate here* — is exactly the reader S1a is written against, and the
+schema stops them at load rather than at read.
+
+**Falsifier:** a path by which `computed` is set without being declared.
+
+**Status: SUPPORTED, refused at load.**
+
+---
+
+### FM_014 — the plan column is separate and the code cannot merge it
+
+S1a: *"Separate column, never merged into basis."* Enforced three ways —
+it is read from its own `plan` key, returned in its own dict by
+`plan_column()`, and the selftest asserts that a term carrying
+`plan_exists: yes` produces the same `basis` values it produced without
+one.
+
+`practice_tracks_plan` defaults to **UNREAD**, not to `no`. A plan
+nobody checked against practice and a plan practice demonstrably departs
+from are different findings, and defaulting to `no` would manufacture the
+second from the first.
+
+Across the fixtures: H1 `yes / UNREAD` (the Disclaimer states a purpose;
+whether any user's practice tracks it is not readable from that
+artifact), H2 and H3 `no / UNREAD`, H4 `yes / yes` — the work order
+states what the scan is for and the scan's own selftest checks that it
+does it, both in the repository.
+
+**Falsifier:** a plan value reaching a basis field.
+
+**Status: SUPPORTED.**
+
+---
+
+### FM_015 — the registered prediction is not blind on H1, and says so
+
+`PREDICTIONS_WO8_V2.md` registers P3 and P4 before the format was run —
+and `Disclaimer!A3` was **already read in this session**, during the v1
+run of the same fixture.
+
+So P3 and P4 are not blind predictions about that text. They are
+registered because the format is new and the split had not been computed,
+not because the source was unread. The v1 registration had a different
+weakness in the same place and stated it: written before the fixtures
+existed, not committed before the run. This one is weaker still on H1.
+
+What would be blind is the same format run on a workbook nobody here has
+opened, and `SSS_053` is why there is not one.
+
+**Falsifier:** none. This is a statement about what the registration is
+worth, not a claim about the world.
+
+**Status: RECORDED, and the weakness is the record.**
+
+---
+
+### FM_016 — `unmeasured_span` understates by construction, and the two real fixtures land at opposite ends
+
+The span counts levels between the deepest computed quantity and the
+deepest level **the grid names**. A term whose grid stops early reports a
+smaller span than the world has. That understatement is disclosed in the
+function rather than corrected, because correcting it would mean
+inventing levels nobody wrote down.
+
+| term | downward stop | span | |
+|---|---|---|---|
+| H1 grid emission factor | level 0, `kg CO2e` | **3** | an external workbook, stopping three levels above its own chain |
+| H4 reported divergence count | level −2, `years` | **0** | a repo-internal reading, whose floor *is* its deepest named level |
+| H2, H3 | none computed | not computable | not zero |
+
+H4's zero is partly the disclosed understatement: its grid names two
+downward levels and computes at the deeper one. The contrast is real and
+its size is bounded by what each grid names, so it is reported as a
+comparison of two documents and not of two systems.
+
+**Falsifier:** a term whose named grid reaches its physical floor, which
+would make the span exact rather than a lower bound.
+
+**Status: SUPPORTED, with the bound stated.**
+
+---
+
+### FM_017 — a stated magnitude of zero is not an absent one, and the schema keeps them apart
+
+`magnitude: 0` is a claim: the proxy is stated to move the goal not at
+all. `magnitude: ABSENT` is the absence of any such claim. They are the
+most confusable pair in this format and the ones a numeric field would
+collapse.
+
+`value_string()` normalises a missing key to `ABSENT` and leaves `0`
+alone; `vs_all_absent` is False for a cell carrying zero; `validate()`
+accepts a number or `ABSENT` and refuses anything else. Both halves
+pinned.
+
+S7 says absence is first-class and *"empty emits as empty, never as
+zero"*. The converse needs saying too, and this is it: **zero emits as
+zero, never as empty.**
+
+**Falsifier:** a path where 0 and ABSENT reach the same reading.
+
+**Status: SUPPORTED.**

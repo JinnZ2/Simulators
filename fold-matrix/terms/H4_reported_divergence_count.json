@@ -18,34 +18,72 @@
       "index": -2,
       "severed": "the parser revision that produced the count",
       "still_acting": "the reader keeps changing; a count from an earlier revision is a different measurement (SSS_017: 129 of 825 before repair, 825 after)",
-      "clock": {"value": 0.003, "units": "years",
-                "basis": "sheetmodel.py was revised twice on 2026-08-25; taken as 0.003 years and measured only over one day (claim-record SSS_017)"},
-      "basis": "measured"
+      "clock": {
+        "value": 0.003,
+        "units": "years",
+        "basis": "sheetmodel.py was revised twice on 2026-08-25; taken as 0.003 years and measured only over one day (claim-record SSS_017)"
+      },
+      "basis": "measured",
+      "quantified": {
+        "quantity": "reader revision interval",
+        "unit": "years",
+        "computed": true,
+        "by": "claim-record SSS_017: two revisions observed on 2026-08-25, taken as 0.003 years"
+      }
     },
     {
       "index": -1,
       "severed": "the workbook contents the count is taken over",
       "still_acting": "the generation mix behind each factor keeps turning over; the workbook does not re-read it",
-      "clock": {"value": 3.0, "units": "years",
-                "basis": "the neglected term of the factors being counted, stated in the delivery and taken as 3 (claim-record UNF_GRID_IRAQ)"},
-      "basis": "ASSERTED"
+      "clock": {
+        "value": 3.0,
+        "units": "years",
+        "basis": "the neglected term of the factors being counted, stated in the delivery and taken as 3 (claim-record UNF_GRID_IRAQ)"
+      },
+      "basis": "ASSERTED",
+      "quantified": {
+        "quantity": "generation mix turnover",
+        "unit": "years",
+        "computed": false,
+        "by": "stated in the delivery and taken as 3; not computed here"
+      }
     },
     {
       "index": 0,
       "severed": "-- the term as used --",
       "still_acting": "the count is quoted as a property of the workbook",
-      "clock": {"state": "NOT_COLLAPSED"},
-      "basis": "measured"
+      "clock": {
+        "state": "NOT_COLLAPSED"
+      },
+      "basis": "measured",
+      "quantified": {
+        "quantity": "diverged relationships",
+        "unit": "count",
+        "computed": true,
+        "by": "sheet-structure-scan scan 4, SSS_033"
+      }
     },
     {
       "index": 1,
       "goal": "characterise how well a workbook's prose and its cells agree",
       "severed": "the relation between one workbook's count and any general rate",
       "still_acting": "n is 1, and a point is not a rate (SSS_035)",
-      "clock": {"state": "ABSENT"},
+      "clock": {
+        "state": "ABSENT"
+      },
       "basis": "ASSERTED",
-      "value_string": "",
-      "cite": "sheet-structure-scan/CLAIM_TABLE.md SSS_035"
+      "value_string": {
+        "sign": "ABSENT",
+        "magnitude": "ABSENT",
+        "unit": "ABSENT"
+      },
+      "cite": "sheet-structure-scan/CLAIM_TABLE.md SSS_035",
+      "artifact_id": "sheet-structure-scan/WORK_ORDER_4.md S5"
     }
-  ]
+  ],
+  "plan": {
+    "plan_exists": "yes",
+    "practice_tracks_plan": "yes",
+    "why": "the work order states what the scan is for and the scan's own selftest checks that it does it; both are in the repository"
+  }
 }

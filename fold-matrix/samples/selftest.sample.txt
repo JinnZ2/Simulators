@@ -26,11 +26,32 @@ fold_matrix selftest
   two levels agreeing are not a mismatch                     PASS got=False want=False
   a level with no clock contributes none rather than a zero  PASS got=None want=None
   only positive levels are upward cells                      PASS got=[1, 2] want=[1, 2]
-  an empty value_string emits as empty, never as zero        PASS got=['', ''] want=['', '']
-  and is a string, so a caller cannot read 0 out of it       PASS got=True want=True
+  an all-ABSENT triple emits as ABSENT, never as zero        PASS got=['ABSENT', 'ABSENT'] want=['ABSENT', 'ABSENT']
+  and all-ABSENT is flagged as such                          PASS got=[True, True] want=[True, True]
+  a sign with no magnitude is not all-ABSENT                 PASS got=False want=False
+  and the sign survives                                      PASS got='+' want='+'
+  a missing field defaults to ABSENT, not to a blank         PASS got={'sign': '-', 'magnitude': 'ABSENT', 'unit': 'ABSENT'} want={'sign': '-', 'magnitude': 'ABSENT', 'unit': 'ABSENT'}
+  a stated magnitude of zero is not ABSENT                   PASS got=0 want=0
+  and a cell carrying it does not read all-ABSENT            PASS got=False want=False
+  a v1 free-text value_string is refused rather than widened PASS got='refused' want='refused'
   an upward cell with no value_string field does not load    PASS got=1 want=1
   an unknown basis does not load                             PASS got=1 want=1
-  a legal empty value_string does load                       PASS got=[] want=[]
+  a legal all-ABSENT triple does load                        PASS got=[] want=[]
+  a sign outside the vocabulary does not load                PASS got=1 want=1
+  a non-numeric magnitude does not load                      PASS got=1 want=1
+  the upward stop is the highest level with an artifact      PASS got=1 want=1
+  and a level above it with none does not extend the arm     PASS got='charter' want='charter'
+  no artifact anywhere stops the arm at ABSENT               PASS got='ABSENT' want='ABSENT'
+  the downward stop is the deepest COMPUTED quantity         PASS got=0 want=0
+  a real physical quantity nobody computed is below the floor PASS got='emissions' want='emissions'
+  and the span counts what continues below it                PASS got=2 want=2
+  a term computing nothing has no floor rather than floor zero PASS got=None want=None
+  and its span is not computable rather than zero            PASS got=None want=None
+  a quantified block with no `computed` field does not load  PASS got=1 want=1
+  the plan column reads its own key                          PASS got=('yes', 'no') want=('yes', 'no')
+  an unstated plan column reads UNREAD, not no               PASS got='UNREAD' want='UNREAD'
+  an out-of-vocabulary plan state does not load              PASS got=1 want=1
+  no plan value reaches a basis field                        PASS got=['ASSERTED', 'ABSENT'] want=['ASSERTED', 'ABSENT']
   a NOT_EVALUABLE term is excluded from the tally, not counted as 0 PASS got=(1, ['?']) want=(1, ['?'])
   boundary and horizon come from declared-frame's CORE       PASS got=True want=True
   an emitted report is clean under the declared exemption    PASS got=True want=True

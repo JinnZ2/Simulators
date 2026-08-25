@@ -19,11 +19,16 @@ level  severed                                       still_acting               
 +3     the relation between climate action promote…  emissions, which do not consult the estimate  ABSENT       ABSENT  
 
 S2 upward cells
-level  goal                                          basis     value_string  cite         
------  --------------------------------------------  --------  ------------  -------------
-+1     support organizations to estimate their GHG…  ASSERTED  (empty)       Disclaimer!A3
-+2     raise awareness and promote climate action    ASSERTED  (empty)       Disclaimer!A3
-+3     not stated                                    ABSENT    (empty)                    
+level  goal                                          basis     sign    magnitude  unit    cite         
+-----  --------------------------------------------  --------  ------  ---------  ------  -------------
++1     support organizations to estimate their GHG…  ASSERTED  ABSENT  ABSENT     ABSENT  Disclaimer!A3
++2     raise awareness and promote climate action    ASSERTED  +       ABSENT     ABSENT  Disclaimer!A3
++3     not stated                                    ABSENT    ABSENT  ABSENT     ABSENT               
+
+   The three fields do not fail together on 1 cell(s).
+   A stated direction with no size is the ordinary shape
+   of a purpose claim, and one free-text field recorded
+   it as identical to a cell nobody wrote anything in.
 
    An empty value_string has more than one cause, and the
    four basis values do not separate them. On these cells
@@ -31,6 +36,20 @@ level  goal                                          basis     value_string  cit
    relation, which is a different fact from nobody having
    stated one:
      +1  the same cell states the secretariat 'makes no representation…
+
+S1a stops, from the document set
+stop      level  what                                why                                             
+--------  -----  ----------------------------------  ------------------------------------------------
+upward    +2     UNFCCC GHG emissions calculator v…  highest level with a stated artifact; 1 level(s…
+downward   0     emissions [kg CO2e]                 deepest computed quantity                       
+
+   unmeasured_span: 3 level(s)
+   3 level(s) of the physical chain continue below the deepest q…
+   Emitted, not scored (S1a).
+
+   plan_exists yes | practice_tracks_plan UNREAD
+   Its own column. It is not a basis and does not enter one.
+   Disclaimer!A3 states the purpose, so a plan exists in the doc…
 
 S5 clocks, per level, not collapsed
 level  value  units  assumed?         basis                                       
@@ -53,7 +72,15 @@ derived   0
 ASSERTED  2           
 ABSENT    1           
 
-cells: 3   empty value_string: 3
+value_string, per field
+field      ABSENT on  of cells
+---------  ---------  --------
+sign       2          3       
+magnitude  3          3       
+unit       3          3       
+
+cells: 3   all three ABSENT: 2   split: 1
 ASSERTED + ABSENT: 3   measured + derived: 0
 P1 (soft majority): True
-P2 (all value_strings empty): True
+P3 (at least one cell splits): True
+P4 (no magnitude anywhere): True
