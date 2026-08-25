@@ -26,7 +26,7 @@ is not true of the folder. Corrected rather than narrowed.)
 
 | tier | named in the manifest | landed |
 |---|---|---|
-| 1 — exported unchanged | 57 | 6 |
+| 1 — exported unchanged | 57 | 7 |
 | 2 — scrubbed and exported | 7 | 7 |
 | 3 — held back | 12 | 0, and none expected |
 
@@ -37,7 +37,8 @@ seven named in the manifest, all seven stored.
 
 Tier 1, landed: `criterion-symmetry`, `rosetta-shape-core`,
 `force-expression-model`, `alignment-under-coupling`,
-`diversity-collapse-model`, `emergence-stability-simulator`. Filed as tier 1 by elimination — each was exported,
+`diversity-collapse-model`, `emergence-stability-simulator`,
+`fairmont-ecological-recovery`. Filed as tier 1 by elimination — each was exported,
 so none is tier 3, and none is in the manifest's tier-2 table. The manifest
 does not label files individually, so tier is inferred here and not carried in
 the files.
@@ -80,6 +81,20 @@ Emotions-as-Sensors, Symbolic-Defense-Protocol, AI-Human-Audit-Protocol,
 BioGrid 2.0 — and all five are carried in the `JinnZ2` ecosystem repo. So the
 export's references split by kind: `[[...]]` links into the memory namespace
 mostly dangle, repository references land. Nothing was rewritten either way.
+
+The memory namespace overlaps published artifacts three ways, all by name:
+a folder in this repo (`emergence-stability-simulator`, and probably
+`uninstrumented`), and a separate public repository under the same account —
+`fairmont-ecological-recovery`, listed in `JinnZ2/META_INDEX.md` at
+`github.com/JinnZ2/fairmont-ecological-recovery`.
+
+That last one is worth marking against the manifest. `SCRUB_RULES.md` says
+location below "cold-climate continental" was removed categorically from every
+exported file, and this file's own name carries a place. It is not a scrub
+miss: the name is already published by the author under that account, and the
+file says "Published CC0" itself. But the categorical statement has at least
+one standing exception, and a later reader should not take it at face value.
+Nothing was renamed.
 
 Named artifacts, same class one level up: `criterion-symmetry` closes on
 "MARKER.md and SCAN_SPEC.md written", and `diversity-collapse-model` reports a
