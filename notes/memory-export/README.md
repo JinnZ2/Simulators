@@ -26,7 +26,7 @@ is not true of the folder. Corrected rather than narrowed.)
 
 | tier | named in the manifest | landed |
 |---|---|---|
-| 1 — exported unchanged | 57 | 10 |
+| 1 — exported unchanged | 57 | 11 |
 | 2 — scrubbed and exported | 7 | 7 |
 | 3 — held back | 12 | 0, and none expected |
 
@@ -39,7 +39,7 @@ Tier 1, landed: `criterion-symmetry`, `rosetta-shape-core`,
 `force-expression-model`, `alignment-under-coupling`,
 `diversity-collapse-model`, `emergence-stability-simulator`,
 `fairmont-ecological-recovery`, `food-grain-monitor`,
-`semantic-drift-sim`, `geometric-manifold`. Filed as tier 1 by elimination — each was exported,
+`semantic-drift-sim`, `geometric-manifold`, `adversarial-prior`. Filed as tier 1 by elimination — each was exported,
 so none is tier 3, and none is in the manifest's tier-2 table. The manifest
 does not label files individually, so tier is inferred here and not carried in
 the files.
@@ -49,55 +49,57 @@ recorded upstream, not a gap here.
 
 ## Cross-refs that do not resolve
 
-The seventeen files carry 23 links across 17 distinct names. Three resolve to
+The eighteen files carry 25 links across 18 distinct names. Four resolve to
 stored files — `refusal-false-positive-log`, `criterion-symmetry`,
-`diversity-collapse-model`. Fourteen do not:
+`diversity-collapse-model`, `facility-risk-index`. Fourteen do not resolve
+inside the folder, but "not in the folder" is not the same as "does not exist",
+and three kinds sit under that heading.
 
-`uninstrumented`, `merit-anchoring`, `unnamed-instruments`,
-`identity-model-monoculture`, `shape-index`, `cross-model-calibration-toolkit`,
-`tool-off-metrology`, `median-case-calibration`, `question-availability`,
-`report-typing`, `rubric-backcasting`, `info-taxonomy`,
-`geometric-to-binary-bridge`, `thermodynamic-accountability-framework`
+**Resolves elsewhere in this repo, under the underscore convention.**
 
-**The last two of those are not memory files at all — they are repositories,
-and both resolve.** `thermodynamic-accountability-framework` is
-`github.com/JinnZ2/thermodynamic-accountability-framework`, already cited from
+- `info-taxonomy` → `fragility-cascade/info_taxonomy.py`, a generalized
+  taxonomy of information types, ways of obtaining, and ways of knowing —
+  which is what `rosetta-shape-core` links it for.
+- `rubric-backcasting` → `instrument-bias-sims/s3_rubric_backcast.py`.
+
+**Resolves as a repository.** `thermodynamic-accountability-framework` is
+`github.com/JinnZ2/thermodynamic-accountability-framework`, cited from
 `earth_economics/` inside this repo. `geometric-to-binary-bridge` resolves
 under a near-name: `META_INDEX.md` lists `github.com/JinnZ2/geometric-to-binary`
-and `JinnZ2/CLAUDE.md` calls it Geometric-to-Binary-Computational-Bridge, so
-one artifact carries three name variants and the link matches none exactly.
-`geometric-manifold`, the file making both links, is itself
-`github.com/JinnZ2/Geometric-manifold`.
+and `JinnZ2/CLAUDE.md` calls it Geometric-to-Binary-Computational-Bridge, so one
+artifact carries three name variants and the link matches none exactly.
 
-(An earlier version of this README said the export's references split by kind —
-`[[...]]` into the memory namespace, plain names for repositories. That held
-for the first ten files and does not hold. Wikilink target kind is not uniform:
-most point into the memory namespace and dangle, some point at repositories and
-land. Corrected rather than narrowed.)
+**Genuinely absent.** `merit-anchoring`, `unnamed-instruments`,
+`question-availability`, `report-typing`, `median-case-calibration`,
+`cross-model-calibration-toolkit`, `identity-model-monoculture` — zero hits
+under either naming convention. `tool-off-metrology` is absent too, at 15
+citations, matching `uninstrumented/CLAIM_TABLE.md` `UNI_043`/`UNI_066`.
+`shape-index` is the interesting one: `predicate-difference/shape_index.py`
+exists and states in its own header that *no shape-index format exists in this
+repository* — a file named for the absent object, inferring the format because
+it is missing, and flagging the inference. So the cited object is absent and
+the repo says so itself.
 
-Recorded rather than reconstructed — same handling `notes/README.md` gives the
-operator catalogue that `operators/D2.md` references and this repo does not
-hold.
+(Two earlier corrections to this section stand, and a third is added.
+An earlier version said the export's references split by kind — `[[...]]` for
+the memory namespace, plain names for repositories — which broke at
+`geometric-manifold`. And this audit twice recorded `shape-index` as "cited
+from both sides and existing on neither" while a file of that name was in the
+tree; the substance survives, the search did not. The inventory now checks
+hyphen and underscore forms. Three first-pass searches in this folder's history
+have been too narrow, all three found by widening rather than by reading.)
 
-**Two of the eight are cited from the repo side as well, and exist on neither.**
-`uninstrumented/cases/` and `nonidentity-census/` emit `[[...]]` links into the
-same namespace as these memory files, so the namespace is shared rather than
-parallel:
+**The namespace is shared, not parallel.** `uninstrumented/cases/` and
+`nonidentity-census/` emit `[[...]]` links into the same namespace these memory
+files use, and `tool-off-metrology` is cited from both sides — recorded at
+`UNI_043`/`UNI_066` as the most-cited absent object in the repo, and cited by
+`recent-work` from the memory side as where a micro-skill-decay position was
+carried. Four documents, two sides, no file, under either naming convention.
 
-- `tool-off-metrology` — `uninstrumented/CLAIM_TABLE.md` records it at
-  `UNI_043` and `UNI_066` as the most-cited absent object in the repo, named
-  across three cases. `recent-work` now cites it from the memory side as where
-  a micro-skill-decay position was carried. Four documents, two sides, no file.
-- `shape-index` — `nonidentity-census/FINDINGS.md` and `WORK_ORDER.md` treat it
-  as a format spec defining four statuses; `instance-log-index` cites it as a
-  relation. Absent from both.
-
-**Repo names are a separate case and they do resolve.**
-`rosetta-shape-core` names five sibling repositories — Polyhedral-Intelligence,
-Emotions-as-Sensors, Symbolic-Defense-Protocol, AI-Human-Audit-Protocol,
-BioGrid 2.0 — and all five are carried in the `JinnZ2` ecosystem repo. So the
-export's references split by kind: `[[...]]` links into the memory namespace
-mostly dangle, repository references land. Nothing was rewritten either way.
+**Repo names resolve too.** `rosetta-shape-core` names five sibling
+repositories — Polyhedral-Intelligence, Emotions-as-Sensors,
+Symbolic-Defense-Protocol, AI-Human-Audit-Protocol, BioGrid 2.0 — and all five
+are carried in the `JinnZ2` ecosystem repo. Nothing was rewritten either way.
 
 The memory namespace overlaps published artifacts three ways, all by name:
 a folder in this repo (`emergence-stability-simulator`, and probably
@@ -130,6 +132,17 @@ carry U3, which reads "NO MEASUREMENT EXISTS".
 Neither `.py` is listed in `CLAUDE.md` or `docs/FOLDER_NOTES.md`, though
 `fragility-cascade/` itself is described in both. So on this one file the
 export points at repo content the repo's own index does not reach.
+
+**`adversarial-prior` is the largest instance of the same thing.** Its sections
+map onto four of the nine sims in `instrument-bias-sims/`, and two were checked
+against the code rather than matched by name: `s1_encounter_denominator.py`
+opens on event-sampled observation in a system that is ">95% null time", which
+is the file's encounter-denominator argument; `s4_antler_calibration.py` carries
+`rank_prospect` as a two-arm input, a doe-choice arm, and a `PRE_PATCH_OMISSION`
+record stating the earlier version had no doe in it at all — which is the file's
+doe-choice section and its discriminator. `s3_rubric_backcast.py` and
+`s5_adversarial_prior.py` match the file's own name and its one dangling
+memory-side link.
 
 One result arrives split across two files. `recent-work` gives the spinodal
 threshold as h\* ≈ 0.385 and says the apex-broadcast multiplier crosses it;
