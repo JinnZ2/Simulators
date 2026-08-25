@@ -2,13 +2,13 @@
 
 Read against `notes/memory-export/files/`, which is stored verbatim. Nothing
 here is a verdict on the export, and no stored file was modified. Counts are
-recomputed each batch and are a delivery state, not a result — 4 tier-1 files
+recomputed each batch and are a delivery state, not a result — 3 tier-1 files
 are still outstanding.
 
 ## 1. Cross-references, and what "unresolved" means
 
 ```
-60 files   103 links   44 distinct names   40 resolve in folder   4 do not
+61 files   114 links   46 distinct names   43 resolve in folder   3 do not
 ```
 
 "Not in the folder" covers three different situations, and the distinction was
@@ -694,11 +694,9 @@ Five link names do not resolve: `merit-anchoring`, `question-availability`,
 `report-typing`, `unnamed-instruments`, and `uninstrumented` — the last being
 the folder-name collision recorded in finding 2 rather than a missing file.
 
-`unnamed-instruments` is now the load-bearing absence. Two stored files —
-`sensing-spine` and `calibration-gap-log` — open by declaring themselves split
-out of it "for size" and state that the columns, the open tier, and the rules
-stay in that file. So the register's schema is the part not delivered, and two
-of its sections are here without it.
+`unnamed-instruments` has since arrived (findings 35, 36), so the register is
+complete: catalogue, spine clauses, and gap log, all three declaring themselves
+one register.
 
 ## 31. One `[[uninstrumented]]` citation cannot mean the folder
 
@@ -787,6 +785,50 @@ is the one the method is least able to certify.
 
 Fourth file to pay for its own claims this way (findings 24, 32). Citations
 unverified here as before.
+
+## 35. The catalogue `notes/README.md` recorded as missing has arrived
+
+`notes/README.md` carried this since before the export started:
+
+> The catalogue this is filed into — the A and D families, D1, A3, A4, the
+> compound field-modifier — is not in this repo. `D2.md` references them and
+> they do not resolve here. Recorded rather than reconstructed.
+
+`unnamed-instruments` is that catalogue. Every named item is in it: A1
+fault-conductor, A2 tool-mediated remote touch, A3 palm/skin radiometry, A4
+biotic sentinel network, the B family, Column C, D1 power-normalized
+substitution, D2, and the compound field-modifier as an open-tier entry.
+
+`notes/operators/D2.md` is an extract of this file's Column D second entry.
+The delivered D2 lists **seven** instances — a paper's seed file against its own
+appendix, a realized event array against a specified field list, the
+CUE-vs-CONDITION studies, a schema accepting anything while appearing to
+validate, a detector deciding 10 of 12 lexically, a metric reading 0.83 where
+the true association is zero, a null test unable to emit two of its declared
+terminal values — and `check_d2.py` checks seven. The stated signature is the
+same: the instrument reverts to the channel it was built to avoid.
+
+`notes/README.md` is the folder README rather than a checker's output, so its
+stale paragraph was corrected in place and points here. `D2.md` and
+`check_d2.py` were not touched.
+
+## 36. Correction to finding 31 — the Q7 citation is misattributed at source
+
+Finding 31 established that `report-typing`'s "Q7 in `[[uninstrumented]]`"
+cannot mean the repo folder, which stops at Q6, and concluded it must mean the
+undelivered `uninstrumented` memory file.
+
+It does not. Q7 is in **`unnamed-instruments`**, verbatim in its Open items:
+"Q7 — enumerate skills with no instrument distinguishing competent from absent
+BEFORE failure. The repo's actual product." `report-typing`'s R4 cites that
+wording exactly.
+
+So the citation names the wrong file — a third one, not the folder and not the
+file it names. The negative half of finding 31 stands (it cannot be the
+folder); the positive half was wrong, and the register is more entangled than
+one wrong pointer suggests: `unnamed-instruments` also holds Q1, which
+`tool-off-metrology` independently states as its own highest-leverage next
+probe, in the same words.
 
 ## What was not checked, deliberately
 

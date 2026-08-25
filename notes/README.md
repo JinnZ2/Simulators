@@ -37,13 +37,17 @@ checker's output and the entry stays as written — same arrangement
   `SCRUB_RULES.md` carries the scrub rules and tier assignment: 57 files
   exported unchanged, 7 scrubbed, 12 held back, with a cost note saying that a
   finding grounded in a specific case is generic once the case is lifted.
-  `files/` holds the exported files as they arrive — all 7 tier-2 and 53 of the
-  57 tier-1. Thirty-four readings in `FINDINGS_MEMORY_EXPORT.md`, including four
+  `files/` holds the exported files as they arrive — all 7 tier-2 and 54 of the
+  57 tier-1. Thirty-six readings in `FINDINGS_MEMORY_EXPORT.md`, including four
   first-pass searches of my own that were too narrow and what they cost.
 
-The catalogue this is filed into — the A and D families, D1, A3, A4, the
-compound field-modifier — is not in this repo. `D2.md` references them and
-they do not resolve here. Recorded rather than reconstructed.
+The catalogue `D2.md` is filed into has since arrived, in
+`memory-export/files/unnamed-instruments.md`: the A family (A1-A4), the B and D
+families, D1, and the compound field-modifier are all in it, and D2 appears
+there as Column D's second entry with the same seven instances `check_d2.py`
+checks. The references in `D2.md` resolve now. Nothing in `D2.md` or
+`check_d2.py` was changed — this note records the arrival, per finding 35 in
+`FINDINGS_MEMORY_EXPORT.md`.
 
 ## study-watch, in one line
 
