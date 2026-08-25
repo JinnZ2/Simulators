@@ -2,13 +2,13 @@
 
 Read against `notes/memory-export/files/`, which is stored verbatim. Nothing
 here is a verdict on the export, and no stored file was modified. Counts are
-recomputed each batch and are a delivery state, not a result — 36 tier-1 files
+recomputed each batch and are a delivery state, not a result — 32 tier-1 files
 are still outstanding.
 
 ## 1. Cross-references, and what "unresolved" means
 
 ```
-28 files   34 links   24 distinct names   11 resolve in folder   13 do not
+32 files   37 links   25 distinct names   12 resolve in folder   13 do not
 ```
 
 "Not in the folder" covers three different situations, and the distinction was
@@ -21,6 +21,7 @@ it for. `rubric-backcasting` → `instrument-bias-sims/s3_rubric_backcast.py`.
 
 **Resolves as a repository.** `thermodynamic-accountability-framework`, cited
 from `earth_economics/` here. `emotions-as-sensors`, now also a stored file.
+`cyclic-programming` under a case variant, `github.com/JinnZ2/Cyclic-programming`.
 `geometric-to-binary-bridge` resolves only under a near-name — `META_INDEX.md`
 lists `geometric-to-binary`, `JinnZ2/CLAUDE.md` calls it
 Geometric-to-Binary-Computational-Bridge, so one artifact carries three name
@@ -67,6 +68,17 @@ probably `uninstrumented`.
   in that folder: the maxim as worded, "update the claim, never modify the
   simulation", which the folder practices via `refutation_basis`.
 
+## 3a. `equivalence-field` is the fifth, and its no-moral-labels claim holds
+
+`equivalence-field/` carries `claim_lineage.py` and `equivalence_field.py`;
+`EpicycleRejected` is raised at three sites, and `seed_claims` holds E1, E2 and
+E3. The file says energy_english is held throughout — "no aggressor/threat/just
+fields". A grep for those tokens returns three hits, all one function:
+`make_threat_reading()`, the constructor for the propaganda shape the module
+audits against. The claim is about the data model and is true of it; the hits
+are the negative control. Use and mention, the same distinction `DF_010` and
+`UNI_009` record against scanners in this repo.
+
 ## 4. The export reaches repo content the repo's own index does not
 
 `semantic-drift-sim` names `valence_drift_test.py` and `semantic_drift_test.py`;
@@ -99,11 +111,27 @@ hyphenated where the repo writes `energy_english`, and `UNI_134` counts it as
 another instance of the same defect. The audit was right that the link failed
 and had no way to see what it pointed at. The memory file supplies the referent.
 
+## 6a. Three files disclose framing chosen for how models would read it
+
+Stated in the files, not inferred. `cyclic-programming` says its
+"quantum/thermo toy" README framing "was deliberate camouflage to get past
+earlier-model guardrails and comprehension failures", and names the repurpose
+adapter, controller and loader as the real spine. `field-curiosity-loop` says
+early prose padding across the ecosystem "was scaffolding to get past
+earlier-model guardrails", is not the preferred register, and that current
+audits strip it. `cross-model-calibration-toolkit` describes seeding a
+playground in repos an AI tends to discount by topic, so the discount becomes
+the delivery path.
+
+Bearing on this folder: a README in this ecosystem is not always a description
+of the artifact under it, and two of these files say which of theirs is not.
+
 ## 7. Named artifacts, mostly absent
 
 `criterion-symmetry` closes on "MARKER.md and SCAN_SPEC.md written";
 `diversity-collapse-model` reports a CLAIM_TABLE carrying C1–C10;
-`emotions-as-sensors` names `sensor_effector.py`. None is in this tree. The
+`emotions-as-sensors` names `sensor_effector.py`; `field-curiosity-loop` names
+`field_claim_loop.py`. None is in this tree. The
 last is expected to be in the `Emotions-as-Sensors` repository, which is not
 attached to this session — so "not found" there means not in the two attached
 repos, not that it does not exist.
