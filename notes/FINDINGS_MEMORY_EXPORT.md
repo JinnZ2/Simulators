@@ -2,13 +2,13 @@
 
 Read against `notes/memory-export/files/`, which is stored verbatim. Nothing
 here is a verdict on the export, and no stored file was modified. Counts are
-recomputed each batch and are a delivery state, not a result — 16 tier-1 files
+recomputed each batch and are a delivery state, not a result — 14 tier-1 files
 are still outstanding.
 
 ## 1. Cross-references, and what "unresolved" means
 
 ```
-48 files   60 links   30 distinct names   20 resolve in folder   10 do not
+50 files   64 links   33 distinct names   23 resolve in folder   10 do not
 ```
 
 "Not in the folder" covers three different situations, and the distinction was
@@ -36,7 +36,7 @@ arrived in the next batch; `shape-index`, `rate-mismatch-polytope` and
 here as not-found have arrived in a later batch, so this list should be read as
 a delivery state and nothing more. Currently: `merit-anchoring`,
 `unnamed-instruments`, `question-availability`, `report-typing`,
-`median-case-calibration`, `thermo-pm`.
+`median-case-calibration`, `narrative_vector.py`, `floating_head.py`.
 
 `tool-off-metrology` is the exception — it has held that position across every
 batch at high citation count and is cited from the repo side too, which is what
@@ -406,6 +406,52 @@ score better because it read them rather than because it can derive. It also
 names two handlings this reading did not have — hold some stimuli unpublished,
 or accept the leakage and measure it by vocabulary signature. Finding 18 is one
 instance of a contamination the author had already identified.
+
+## 20. The index gap is not one folder's oversight — it is most of a folder
+
+Finding 4 recorded that `semantic-drift-sim` names two `.py` files in
+`fragility-cascade/` that `CLAIM.md` and `docs/FOLDER_NOTES.md` do not list.
+`info-taxonomy` is the same finding at ten times the size.
+
+It names eleven modules and a register. Ten of the eleven are in
+`fragility-cascade/`: `info_taxonomy.py`, `revalidate.py`, `scaffold.py`,
+`clock.py`, `modes.py`, `echo.py`, `divlog.py`, `entrain.py`, `syndrome.py`,
+`instruments.py`, plus `EXPERIMENT_register.md`. **None of the ten appears in
+`CLAUDE.md`.** The one absent module is `check_invariants.py`.
+
+`fragility-cascade/` holds **73** `.py` files. The index describes it as five
+running sims about value substrates. Whatever else is in there — and the
+filenames suggest several distinct subsystems — is not reachable from the
+repo's own documentation.
+
+`thermo-pm`, dangling from `eco-simulator` and filed here as not-found, is
+`fragility-cascade/thermo_pm.py`. Fifth name to resolve after being filed
+absent. `attractor_depth_test.py` from `repo-ecosystem` is there too;
+`narrative_vector.py` and `floating_head.py` are not, in either repo, though
+both are named by `repo-ecosystem` and `recent-work`.
+
+Not verified: the "Door-tested 15/15 after D11" claim. `instruments.py` has no
+`__main__` block and prints nothing; the string does not appear in it or in
+`EXPERIMENT_register.md`. `fragility-cascade/test_instruments.py` exists and
+was not run here.
+
+## 21. The corpus documents the failure mode this reading kept hitting
+
+`info-taxonomy`'s register records that grep-based invariant checks "proved
+unsound: grep flagged a docstring asserting 'no datetime.now()' as violating
+it" — use and mention — and that the AST replacement built to fix it "was run
+against a canary written to fail and MISSED TWO FORMS first, both false
+negatives that clean-code runs would never have surfaced."
+
+That is the class of every defect in "what this reading got wrong" below: a
+detector that returns clean because it cannot see, not because there is
+nothing there. The remedy recorded there is stronger than the one used here.
+This reading widened searches after being surprised; that register ran the
+detector against a canary built to fail, which is the `null-harness` invariant
+and would have caught the same defects before they were relied on.
+
+Also recorded there, and worth carrying: prior passes are logged as
+RE-DERIVED, not continuously held.
 
 ## What was not checked, deliberately
 
