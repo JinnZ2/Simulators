@@ -1,0 +1,9 @@
+next-check status on 2026-08-25
+claim     next_check  state  
+--------  ----------  -------
+SSS_017   2026-11-25  CURRENT
+SSS_019   2026-11-25  CURRENT
+SSS_020   2026-11-25  CURRENT
+SSS_021   2026-11-25  CURRENT
+SSS_022a  2026-11-25  CURRENT
+SSS_022b  2026-11-25  CURRENT

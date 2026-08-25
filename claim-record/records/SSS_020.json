@@ -1,0 +1,48 @@
+{
+  "id": "SSS_020",
+  "assertion": "One of the eleven sheets carrying a factors column computes it; eight hold it as constants.",
+  "measurement": {
+    "lo": 1,
+    "hi": 1,
+    "units": "sheets with a pure-derived factors column, of 11 carrying that label"
+  },
+  "instrument": {
+    "name": "scans.py scan_three(), construction composition per occurrence",
+    "error": {
+      "kind": "systematic",
+      "magnitude": "two of the eleven occurrences are stacked-table artifacts quantified in SSS_021 and are excluded from the eight; the remaining count is exact"
+    }
+  },
+  "domain_of_validity": {
+    "conditions": [
+      {
+        "name": "file",
+        "value": "UNFCCC ver01.1, md5 57d3ffd7"
+      },
+      {
+        "name": "label",
+        "value": "the normalized column label 'factors'"
+      },
+      {
+        "name": "label model",
+        "value": "CHOICE 4, one label row per sheet"
+      }
+    ],
+    "outside_this": "UNTESTED. Whether the Home Office factors are computed rather than looked up for a reason a domain reader would accept is not a property this instrument reads."
+  },
+  "clock": {
+    "holds_for": "the life of this version of the workbook",
+    "next_check": "2026-11-25"
+  },
+  "derivation": {
+    "parents": [
+      "SSS_017",
+      "SSS_021"
+    ],
+    "root_reason": ""
+  },
+  "collapse_record": {
+    "state": "EXACT",
+    "basis": "a count of sheets, each hand-checkable in the printed table"
+  }
+}

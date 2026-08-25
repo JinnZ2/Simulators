@@ -1,0 +1,48 @@
+{
+  "id": "SSS_022b",
+  "assertion": "None of the 22 flagged cells carries a variance sibling within the cross neighborhood.",
+  "measurement": {
+    "lo": 0,
+    "hi": 0,
+    "units": "cells, of 22 flagged"
+  },
+  "instrument": {
+    "name": "scans.py scan_two() at radius 2 with patterns.json",
+    "error": {
+      "kind": "systematic",
+      "magnitude": "no edit to the unit list can make the variance patterns fire, so this half is not reachable by the tuning recorded in SSS_014; the variance list itself is a word list and a variance term under an unlisted name reads as absent"
+    }
+  },
+  "domain_of_validity": {
+    "conditions": [
+      {
+        "name": "file",
+        "value": "UNFCCC ver01.1, md5 57d3ffd7"
+      },
+      {
+        "name": "flag set",
+        "value": "the same 22 cells as SSS_022a"
+      },
+      {
+        "name": "radius",
+        "value": "2 rows and columns, plus the label row"
+      }
+    ],
+    "outside_this": "UNTESTED at other radii. A larger radius can only lower the absent count, so 0 of 22 is stable downward and not upward."
+  },
+  "clock": {
+    "holds_for": "as long as the file, the radius and patterns.json are unchanged",
+    "next_check": "2026-11-25"
+  },
+  "derivation": {
+    "parents": [
+      "SSS_017",
+      "SSS_020"
+    ],
+    "root_reason": ""
+  },
+  "collapse_record": {
+    "state": "EXACT",
+    "basis": "a count of cells"
+  }
+}

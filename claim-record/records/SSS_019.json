@@ -1,0 +1,47 @@
+{
+  "id": "SSS_019",
+  "assertion": "After the reader repair, derived_share on the UNFCCC workbook is 0.226 against a threshold of 0.20 registered before the file was opened.",
+  "measurement": {
+    "lo": 0.226,
+    "hi": 0.226,
+    "units": "1 (share of non-empty cells)"
+  },
+  "instrument": {
+    "name": "targets/epa_check.py profile(), post-repair sheetmodel.py",
+    "error": {
+      "kind": "systematic",
+      "magnitude": "bounded below by SSS_017's residual: any formula construct still unread lowers the numerator, so 0.226 is a floor and not a two-sided estimate"
+    }
+  },
+  "domain_of_validity": {
+    "conditions": [
+      {
+        "name": "file",
+        "value": "UNFCCC ver01.1, md5 57d3ffd7"
+      },
+      {
+        "name": "reader",
+        "value": "sheetmodel.py with shift_formula"
+      },
+      {
+        "name": "denominator",
+        "value": "non-empty cells, 3656"
+      }
+    ],
+    "outside_this": "UNTESTED. The threshold was registered for a class of workbook described as live calculators, and one member of that class has been measured."
+  },
+  "clock": {
+    "holds_for": "as long as the file and reader are unchanged",
+    "next_check": "2026-11-25"
+  },
+  "derivation": {
+    "parents": [
+      "SSS_017"
+    ],
+    "root_reason": ""
+  },
+  "collapse_record": {
+    "state": "EXACT",
+    "basis": "a ratio of two exact counts, 825 over 3656"
+  }
+}

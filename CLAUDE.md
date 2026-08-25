@@ -5856,6 +5856,63 @@ underneath).
   about the `.xls`. **`SSS_024`:** the output screen ran in one of two
   CLIs and the gap surfaced on a real run. 101 selftest checks green
   across four modules. Stdlib only, parses under 3.9, CC0.
+- `claim-record/` — Seven fields per claim, two hard rules, and a
+  validator that refuses. Delivered spoken (`SOURCE_DROP.md`, verbatim):
+  assertion without hedges / measurement as an interval / instrument plus
+  its known error characteristics / domain of validity / clock with a
+  next-check date / derivation as parent ids / collapse record. Rule 1: a
+  claim with an unresolvable parent does not validate. Rule 2: no field
+  is optional, *because optional is how the domain of validity
+  disappeared in the first place*. **`CR_001`, the design move:** rule 2
+  read as a required-fields list gives a form; read seriously it gives
+  **a schema with no way to say nothing, only ways to say "not known, and
+  here is why"** — `UNTESTED`, `UNQUANTIFIED` with a `why`, an empty
+  parent list with a `root_reason`, and a sentinel without its reason is
+  refused, that being rule 2's own failure arriving one level down.
+  **`CR_002`, the part a required-field list cannot do:** fields 2 and 7
+  are **coupled** — `lo == hi` under `NOT_COLLAPSED` is
+  `POINT_WITHOUT_BASIS`, `lo != hi` under `EXACT` is
+  `INTERVAL_MARKED_EXACT` — since a point arrives either from a
+  distribution or from a count and saying which IS the field; the
+  collapse statistic comes from a closed vocabulary with an `other`
+  escape that must name itself, which is the repair `UNI_013` asked for,
+  designed in. **`CR_003`:** rule 2 gets seven null arms, one per field,
+  and **the positive control comes first** because a validator that
+  refuses everything passes all seven; eleven further checks require
+  well-formed variants to validate rather than merely to be refused. 39
+  checks. **Then filled with six real claims from the same day's
+  `sheet-structure-scan/` run**, where the provenance is known — all six
+  validate, and the useful part is what came back uniform. **`CR_006`:**
+  `collapse_record.state` is `EXACT` **6 of 6**, `COLLAPSED` **0** — the
+  field the drop calls *the upper-quartile field* has **no instance**,
+  because every instrument here is deterministic and every artifact a
+  fixed file, so every measurement is an exact count; fields 2 and 7 are
+  aimed at measurements with sampling error and this folder has not made
+  one, so the selftest exercises the branch and the corpus does not.
+  **`CR_005`:** there is **no denominator field**, so 6 of 6 records put
+  the population in a free-text `units` string (`129 of 825`, `22 of 22`,
+  `1 of 11`) — `measurement-fork`'s VOID RATIO at design time.
+  **`CR_007`:** `error.kind` is `systematic` 6 of 6 and `outside_this`
+  contains `UNTESTED` 6 of 6, so **the sentinel is doing all the work in
+  the field the drop calls the one that always gets stripped** — present
+  in every record, which rule 2 buys, and not yet informative, which it
+  cannot. **`CR_008`:** there is **no sibling relation**, and the missing
+  edge was written as a parent before it was caught — two claims measured
+  in one run of one scan were given a parent-child edge, in the file, by
+  the author of the schema, minutes after writing rule 1; corrected to
+  shared parents and recorded rather than quietly fixed, because it is
+  evidence about how a missing relation gets filled (not left blank, but
+  populated with the nearest available edge). **`CR_010`:** `due --on
+  DATE` read the date as the records directory and printed a well-formed
+  table with zero rows and rc 0 — `DL_005`'s shape in a tool about
+  denominators, found by running it; repaired, and both `validate` and
+  `due` now refuse an empty registry with rc 2. **`CR_009`:** field 1 is
+  the one field enforced lexically (38 hedge words, screened both ways
+  against `UNI_009` substring bleed) and any paraphrase steps around it,
+  stated at the top of the file rather than the bottom. The load path is
+  the payoff and is walkable: every claim in the corpus traces to
+  `SSS_017`, the reader repair, so refuting it exposes five claims above
+  it visibly rather than by memory. Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

@@ -1,0 +1,15 @@
+claim records -- validation
+records   6
+rule 1    a claim with an unresolvable parent does not validate
+rule 2    no field is optional; a sentinel carries its reason
+
+claim     state  findings
+--------  -----  --------
+SSS_017   VALID  0
+SSS_019   VALID  0
+SSS_020   VALID  0
+SSS_021   VALID  0
+SSS_022a  VALID  0
+SSS_022b  VALID  0
+
+6 of 6 validate.

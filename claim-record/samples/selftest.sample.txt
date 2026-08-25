@@ -1,0 +1,50 @@
+record selftest
+  a complete record validates                                PASS got='VALID' want='VALID'
+  dropping assertion is caught                               PASS got=('INVALID', True) want=('INVALID', True)
+  dropping measurement is caught                             PASS got=('INVALID', True) want=('INVALID', True)
+  dropping instrument is caught                              PASS got=('INVALID', True) want=('INVALID', True)
+  dropping domain_of_validity is caught                      PASS got=('INVALID', True) want=('INVALID', True)
+  dropping clock is caught                                   PASS got=('INVALID', True) want=('INVALID', True)
+  dropping derivation is caught                              PASS got=('INVALID', True) want=('INVALID', True)
+  dropping collapse_record is caught                         PASS got=('INVALID', True) want=('INVALID', True)
+  a hedge in the assertion is caught                         PASS got=['HEDGE_IN_ASSERTION'] want=['HEDGE_IN_ASSERTION']
+  an inverted interval is caught                             PASS got=True want=True
+  blank units are caught                                     PASS got=True want=True
+  a point with nothing collapsed and nothing exact is caught PASS got=True want=True
+  an interval marked exact is caught                         PASS got=True want=True
+  a point from a named statistic validates                   PASS got='VALID' want='VALID'
+  a collapse with no named point is caught                   PASS got=True want=True
+  'other' has to name the statistic                          PASS got=True want=True
+  an uncharacterised error is caught                         PASS got=True want=True
+  UNQUANTIFIED without a reason is caught                    PASS got=True want=True
+  UNQUANTIFIED with a reason validates                       PASS got='VALID' want='VALID'
+  no conditions is caught                                    PASS got=True want=True
+  a missing outside_this is caught                           PASS got=True want=True
+  UNTESTED outside_this validates                            PASS got='VALID' want='VALID'
+  a missing next_check is caught                             PASS got=True want=True
+  an unparseable next_check is caught                        PASS got=True want=True
+  an empty parent list with no reason is caught              PASS got=True want=True
+  an unresolvable parent does not validate                   PASS got=('INVALID', True) want=('INVALID', True)
+  a resolvable parent validates                              PASS got='VALID' want='VALID'
+  a cycle is reported as a cycle, not as recursion           PASS got=('INVALID', True) want=('INVALID', True)
+  the load path walks upward                                 PASS got=['T-CHILD', 'T-OK'] want=['T-CHILD', 'T-OK']
+  an unresolved parent shows in the path                     PASS got=True want=True
+  a future next_check is CURRENT                             PASS got='CURRENT' want='CURRENT'
+  a passed next_check is DUE                                 PASS got='DUE' want='DUE'
+  an empty registry refuses rather than printing an empty table PASS got=2 want=2
+next-check status on 2026-08-25
+claim     next_check  state  
+--------  ----------  -------
+SSS_017   2026-11-25  CURRENT
+SSS_019   2026-11-25  CURRENT
+SSS_020   2026-11-25  CURRENT
+SSS_021   2026-11-25  CURRENT
+SSS_022a  2026-11-25  CURRENT
+SSS_022b  2026-11-25  CURRENT
+  --on's value is not read as a directory                    PASS got=0 want=0
+  a hedge-free assertion is clean                            PASS got=[] want=[]
+  'maybe' style hedges are caught                            PASS got=True want=True
+  'mayor' is not 'may'                                       PASS got=[] want=[]
+  'somewhere' is not 'some'                                  PASS got=[] want=[]
+  'abouts' is not 'about'                                    PASS got=[] want=[]
+SELFTEST PASS (0 checks failed)

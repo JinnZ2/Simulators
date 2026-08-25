@@ -1,0 +1,6 @@
+SSS_022b  None of the 22 flagged cells carries a variance sibling within the cro
+  SSS_017  The pre-repair reader resolved 129 of the workbook's 825 formula cells
+  SSS_020  One of the eleven sheets carrying a factors column computes it; eight 
+    SSS_017  The pre-repair reader resolved 129 of the workbook's 825 formula cells
+    SSS_021  Two of the four differing occurrences per column group carry the group
+      SSS_017  The pre-repair reader resolved 129 of the workbook's 825 formula cells
