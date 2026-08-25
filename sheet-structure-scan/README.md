@@ -25,6 +25,8 @@ python3 scans.py --selftest
 | `coupling.py` | sensitivity by perturbation, and the ranking. `--selftest` |
 | `scan4.py` | stated-relationship maintenance, and the cross-file emission. `--selftest` |
 | `xlsreader.py` | legacy .xls (BIFF8), stdlib. `--selftest` |
+| `selection.py` | the WO7 eligibility screen and reject log. `--selftest` |
+| `frozen_wo6.json` | the parameter values S2 freezes, written before screening |
 | `PREDICTIONS_WO6.md` | H1's predictions, committed before the run |
 | `WORK_ORDER_4.md` | scan 4 as delivered, verbatim |
 | `patterns.json` | companion patterns for scan two. Swap this, not the code |
@@ -250,6 +252,69 @@ emissions` labels ten row blocks meant to be parallel sectors, and some
 govern `1c+4d` while others govern `4d`. 9 of 17 repeated-label groups
 listed, 8 agreeing on both axes.
 
+## Work order 7: the selection screen, and no third workbook
+
+**S1(b) named a test that did not exist.** *"Provenance prose classified
+RETROSPECTIVE under the amended WO4 test"* — `SSS_043` drew that
+distinction in prose, from two workbooks, and nothing implemented it.
+`RETROSPECTIVE` and `PROSPECTIVE` appear zero times in this folder before
+`selection.py`. Sixth instance of the stated-rule-with-no-field shape,
+and building it is most of this order.
+
+**The trap the classifier has to avoid** is that the easy version of (b)
+— *does any prose cell yield a resolvable relationship* — **is** (c).
+Two criteria computing one quantity is `category-weld`'s mechanism
+inside the screen. So (b) reads **stance** and (c) reads
+**resolvability**, and `independence()` reports whether they have ever
+been observed disagreeing. **Off-diagonal: 0 of 3.** They have not, so
+on this population the screen cannot say which criterion is doing the
+work.
+
+**And the threshold decides that.** `min_retro = 1` is a `[CHOICE]`, and
+the UNFCCC calculator has RETRO 4 against **PROSP 9** — more than twice
+as many prospective cells as retrospective ones, in the file carrying
+every testable relationship this repository has found. A **majority
+rule** calls it PROSPECTIVE and rejects at (b) the only workbook (c)
+accepts. So the threshold is calibrated by a case rather than stipulated,
+and under the majority rule that file **is** the off-diagonal cell:
+whether (b) and (c) are independent is a property of the threshold.
+
+**The reject log, and it is not the finding S1 expected.**
+
+| candidate | a | b | c | d | e |
+|---|---|---|---|---|---|
+| UNFCCC calculator | pass | pass | pass | fail | fail |
+| UNFCCC (byte-identical duplicate) | pass | pass | pass | fail | fail |
+| LGO inventory report | fail | fail | fail | fail | fail |
+
+Every criterion is recorded rather than stopping at the first failure,
+and they separate cleanly: (a)–(c) are content criteria, (d)–(e) are
+novelty criteria, and the prior file passes all of the first and none of
+the second.
+
+**No third candidate is reachable.** `www.epa.gov`, `unfccc.int`,
+`theclimateregistry.org`, `www.eia.gov`, `data.gov` and
+`www.ipcc-nggip.iges.or.jp` all return a refused CONNECT; only the GitHub
+hosts respond, and trawling third-party repositories there is outside
+this session's scope. Two of the three uploaded files are byte-identical,
+so the distinct population is **two**. S1's own hypothesis — *if most
+published workbooks fail (b) or (c), the population is small* — is
+therefore untested, and **not because most workbooks fail: because none
+could be screened.** That is `SSS_043` applied to this order's own
+method.
+
+All four S3 predictions return **NOT ADDRESSABLE**, which S3 makes a
+legal verdict — the repair `SSS_043` argued for, arriving in the order
+that follows it.
+
+**S4's `OUT_OF_SCOPE` is built**, and its first implementation dropped
+the row it exists to keep: a `continue` in the accumulation loop removed
+out-of-scope workbooks from the denominator *and* from the table. Both
+halves are asserted separately now. A second defect the `G1` fixture
+caught: reading scope off the share's denominator calls a workbook whose
+relationship **is** enforced by a formula out of scope — MAINTAINED
+counts.
+
 ## Targets
 
 `targets/TARGETS.md` pre-registers sixteen predictions across five
@@ -301,8 +366,8 @@ definition, has a default, and is printed into the report header when it
 is in force — an absence measured at radius 2 and one measured at radius
 6 are different readings. `SPEC.md` §5 is the table.
 
-191 selftest checks across seven modules: `sheetmodel` 27,
+216 selftest checks across eight modules: `sheetmodel` 27,
 `no_severity` 12, `scans` 36, `targets/epa_check` 30, `coupling` 36,
-`scan4` 26, `xlsreader` 24.
+`scan4` 32, `xlsreader` 24, `selection` 19.
 
 CC0. Stdlib only. Parses under Python 3.9.

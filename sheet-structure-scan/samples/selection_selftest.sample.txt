@@ -1,0 +1,20 @@
+selection selftest
+  the UNFCCC sentence reads retrospective                    PASS got='RETROSPECTIVE' want='RETROSPECTIVE'
+  the LGO sentence reads prospective                         PASS got='PROSPECTIVE' want='PROSPECTIVE'
+  a second LGO sentence reads prospective                    PASS got='PROSPECTIVE' want='PROSPECTIVE'
+  a heading is neither                                       PASS got='NEITHER' want='NEITHER'
+  a definition is neither                                    PASS got='NEITHER' want='NEITHER'
+  an empty cell is neither                                   PASS got='NEITHER' want='NEITHER'
+  a retrospective note over external operands is still retro PASS got='RETROSPECTIVE' want='RETROSPECTIVE'
+  and a form field over in-file names is still prospective   PASS got='PROSPECTIVE' want='PROSPECTIVE'
+  a sentence with both markers resolves retrospective        PASS got='RETROSPECTIVE' want='RETROSPECTIVE'
+  agreeing candidates report no independence                 PASS got=False want=False
+  one disagreeing candidate reports it                       PASS got=True want=True
+  and the off-diagonal is counted, not just flagged          PASS got=2 want=2
+  4 retro against 9 prospective flips with the rule          PASS got=('RETROSPECTIVE', 'PROSPECTIVE') want=('RETROSPECTIVE', 'PROSPECTIVE')
+  and the flip is reported, not left to be noticed           PASS got=True want=True
+  a clear majority does not flip                             PASS got=False want=False
+  and neither does a zero                                    PASS got=False want=False
+  criteria are all recorded                                  PASS got=['a_ships_values', 'b_retrospective', 'c_resolvable', 'd_date_separated', 'e_different_body', 'read'] want=['a_ships_values', 'b_retrospective', 'c_resolvable', 'd_date_separated', 'e_different_body', 'read']
+  no identity metadata is read anywhere in this module       PASS got=[] want=[]
+SELFTEST PASS (0 checks failed)

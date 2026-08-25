@@ -1395,3 +1395,203 @@ application of that rule (`RDD_008`, `SSS_039`).
 **Falsifier:** a screened word in an emitted report.
 
 **Status: SUPPORTED.**
+
+---
+
+### SSS_050 — S1's second criterion named a test that did not exist, and building it is most of this order
+
+WO7 S1(b) is *"provenance prose classified RETROSPECTIVE under the
+amended WO4 test"*. There was no such test. `SSS_043` drew the
+retrospective/prospective distinction **in prose**, from two workbooks,
+and nothing implemented it — `RETROSPECTIVE` and `PROSPECTIVE` appear
+**zero times** in this folder before `selection.py`.
+
+Sixth instance of the `MF_017` / `CW_015` / `DL_004` / `GC_012` /
+`UNI_013` shape: a stated rule with no field or function behind it. The
+cheapest point to catch it is when the next order tries to use it, which
+is what happened.
+
+Built in `selection.py`, calibrated against the two sentences that
+motivated `SSS_043` — assigned by hand before this code existed, so they
+are known answers rather than fitted ones.
+
+**Falsifier:** an implementation of the WO4 test predating this file.
+
+**Status: SUPPORTED, and REPAIRED.**
+
+---
+
+### SSS_051 — (b) and (c) would be one gate wearing two names, and the classifier is built to keep them apart
+
+The easy implementation of (b) is *does any prose cell yield a
+resolvable relationship*, which is (c). Two criteria computing one
+quantity is `category-weld`'s mechanism inside the screen: the reject
+log would look like two independent gates and be one.
+
+So (b) reads **stance** — who the sentence addresses and in what tense —
+and (c) reads **resolvability**, and `independence()` reports whether
+they have ever been observed disagreeing.
+
+| (b) passes | (c) passes | candidates |
+|---|---|---|
+| False | False | 1 |
+| True | True | 2 |
+
+**Off-diagonal: 0 of 3.** Under the rule these results use they have not
+been observed disagreeing, so on this population the screen cannot say
+which criterion is doing the work. Two cases would separate them, and
+one is `SSS_052`.
+
+The separating case that is not in hand: a retrospective note whose
+operands sit **outside** the file — *"factors taken from the 2019 IEA
+world energy balances"* — which is retro and unresolvable. That shape is
+common in published workbooks and no candidate here is one.
+
+**Falsifier:** a candidate scoring on the off-diagonal.
+
+**Status: SUPPORTED. The screen is two criteria and has been observed as
+one.**
+
+---
+
+### SSS_052 — the stance threshold moves the verdict on the only file that has ever produced a testable relationship
+
+`min_retro = 1` — *any* retrospective sentence makes a workbook
+retrospective — is a `[CHOICE]`, and it is load-bearing:
+
+| workbook | RETRO | PROSP | NEITHER | any rule | majority rule |
+|---|---|---|---|---|---|
+| UNFCCC | 4 | **9** | 122 | RETROSPECTIVE | **PROSPECTIVE** |
+| LGO | 0 | 32 | 157 | PROSPECTIVE | PROSPECTIVE |
+
+**The UNFCCC calculator has more than twice as many prospective prose
+cells as retrospective ones**, and it is the file carrying all 23
+testable relationships this repository has found. A majority rule
+rejects it at (b) — the only workbook (c) accepts.
+
+So the threshold is **calibrated by a case rather than stipulated**, and
+the case is printed. It also settles `SSS_051` one way: under a majority
+rule UNFCCC is (b) PROSPECTIVE and (c) resolvable, which **is** the
+off-diagonal cell. Whether the two criteria are independent is a
+property of the threshold, not of the criteria.
+
+Both branches are asserted in the selftest on constructed counts, so the
+readout is not trusted from the two real files alone.
+
+**Falsifier:** a workbook where the two rules agree and the eligibility
+verdict still turns on the threshold.
+
+**Status: SUPPORTED.**
+
+---
+
+### SSS_053 — the reject log, and the population finding S1 anticipated
+
+S1 says the reject log is a finding in its own right. It is, and the
+finding is not the one the order expected.
+
+| candidate | a | b | c | d | e |
+|---|---|---|---|---|---|
+| UNFCCC calculator | pass | pass | pass | **fail** | **fail** |
+| UNFCCC calculator (byte-identical duplicate) | pass | pass | pass | **fail** | **fail** |
+| LGO inventory report | **fail** | **fail** | **fail** | **fail** | **fail** |
+
+The screen records **every** criterion rather than stopping at the first
+failure, because a file failing only (e) is a different candidate from
+one failing (a), (b) and (c), and a first-failure log cannot tell them
+apart. It separates cleanly here: (a)–(c) are content criteria and
+(d)–(e) are novelty criteria, and the prior file passes all three of the
+first and neither of the second.
+
+**No third candidate is reachable from this session.** Probe, run
+2026-08-25T18:36:44Z: `www.epa.gov`, `unfccc.int`,
+`theclimateregistry.org`, `www.eia.gov`, `data.gov` and
+`www.ipcc-nggip.iges.or.jp` all return a refused CONNECT; only the
+GitHub hosts respond, and trawling third-party repositories on a
+reachable host is outside this session's scope. The two prior files are
+what is in hand, and one of the three uploaded files is a byte-identical
+duplicate of another (`md5 57d3ffd7…`), so the distinct population is
+**two**.
+
+S1's own hypothesis — *if most published workbooks fail (b) or (c), the
+testable population is small* — is therefore **untested**, and the
+reason is not that most workbooks fail: it is that none could be
+screened. That distinction is the whole of `SSS_043` applied to this
+order's own method.
+
+**Falsifier:** a session that can reach published workbooks, which would
+turn this from a reachability report into the population measurement S1
+asked for.
+
+**Status: SUPPORTED as a reachability report. S1's population question
+is NOT ADDRESSABLE here.**
+
+---
+
+### SSS_054 — all four predictions return NOT ADDRESSABLE, which S3 made a legal verdict one order after it was needed
+
+P1–P4 are registered in `PREDICTIONS_WO7.md` with parameters frozen
+beforehand in `frozen_wo6.json`, and all four return **NOT ADDRESSABLE**
+for want of an eligible candidate.
+
+S3's clause — *"Each may return NOT ADDRESSABLE. That is a legal verdict
+and is not counted as support or refutation"* — is the repair `SSS_043`
+argued for, arriving in the order that follows it. Without it, WO6's
+zero would have had to be reported as P1 holding and P2–P4 refuted, on
+a workbook that cannot state a relationship at all.
+
+**Falsifier:** a use where NOT ADDRESSABLE and a refutation license the
+same next step.
+
+**Status: SUPPORTED. Four NOT ADDRESSABLE verdicts, none counted.**
+
+---
+
+### SSS_055 — S4's OUT_OF_SCOPE is built, and the first implementation dropped the row it exists to keep
+
+S4: *"LGO stays in the table as OUT_OF_SCOPE with its zero, never in a
+denominator."* Two requirements, and they pull opposite ways in code.
+
+The first implementation skipped out-of-scope workbooks with a
+`continue` in the accumulation loop, which removed them from the
+**denominator** and from the **table** — the opposite of what S4 asks.
+Caught by running it, not by reading it. Both halves are now asserted
+separately in the selftest.
+
+A second defect the fixture caught: `scope_of()` first read scope off
+the share's denominator, `DIVERGED + HOLDS`, which calls a workbook
+whose relationship **is** enforced by a formula out of scope. MAINTAINED
+counts; the `G1` fixture, whose single relationship is MAINTAINED, is
+what turned it red.
+
+The stance test itself is **imported** from `selection.py` rather than
+reimplemented, so the screen that admits a candidate and the emission
+that scores it cannot disagree about what RETROSPECTIVE means — the
+no-copies convention that `MF_019` and `tools/check_gate_drift.py`
+exist for.
+
+**Falsifier:** an out-of-scope workbook absent from a table, or present
+in a denominator.
+
+**Status: REPAIRED, both halves pinned.**
+
+---
+
+### SSS_056 — naming the module `select` collided with the standard library, silently and intermittently
+
+`select.py` was the obvious name. `select` is a stdlib module, so
+`import select` resolves to the standard library from anywhere whose
+`sys.path` does not put this directory first.
+
+It **worked when run as a script** — the script's directory leads
+`sys.path` — and failed the first time it was imported from a one-liner
+in the same folder. A collision that is invisible in the way the author
+runs the file and live in the way anyone else imports it.
+
+Renamed `selection.py`. Recorded rather than quietly fixed because the
+failure mode is a property of how it was tested, not of the code: every
+check that passed, passed under the one invocation that hides it.
+
+**Falsifier:** an import path under which the two names are equivalent.
+
+**Status: REPAIRED.**

@@ -696,6 +696,32 @@ def operand_bins(res):
     return out
 
 
+OUT_OF_SCOPE = "OUT_OF_SCOPE"
+
+
+def scope_of(res):
+    """WO7 S4. A workbook whose provenance prose states no relationship
+    is OUT_OF_SCOPE, not a zero.
+
+    It stays in the table -- the reader should see it and see its zero --
+    and it never enters a denominator, because a workbook that cannot
+    state a relationship is not evidence that relationships are or are
+    not maintained. SSS_043 argued this in prose; this is the field.
+
+    The stance test lives in selection.py and is imported rather than
+    reimplemented, so the screen that admits a candidate and the emission
+    that scores it cannot disagree about what RETROSPECTIVE means.
+    """
+    b = bins(res["rows"])
+    # MAINTAINED counts. A workbook whose relationship IS enforced by a
+    # formula is the most in-scope thing there is, and reading scope off
+    # the share's denominator alone would call it out of scope -- which
+    # is what the first version did, caught by the G1 fixture.
+    if b[DIVERGED] + b[HOLDS_UNMAINTAINED] + b[MAINTAINED] > 0:
+        return "IN_SCOPE"
+    return OUT_OF_SCOPE
+
+
 def diverged_share(res):
     """DIVERGED / (DIVERGED + HOLDS). None when nothing is testable.
 
@@ -720,9 +746,11 @@ def direction(results):
     if len(have) < 2:
         missing = [w for w, v in shares if v is None]
         return ("NO_DIRECTION",
-                "a direction takes two defined points and %d of %d "
-                "workbook(s) have an empty denominator: %s"
-                % (len(missing), len(shares), ", ".join(missing) or "-"))
+                "a direction takes two defined points and only %d in-scope "
+                "workbook(s) have one%s"
+                % (len(have),
+                   (" (empty denominator: %s)" % ", ".join(missing))
+                   if missing else ""))
     signs = set()
     for i in range(1, len(have)):
         d = have[i][1] - have[i - 1][1]
@@ -744,22 +772,33 @@ def rate(results):
          "workbooks in this emission: n = %d" % n, ""]
     body = []
     tot = {"DIVERGED": 0, "HOLDS_UNMAINTAINED": 0}
+    n_oos = 0
     for res in results:
         b = bins(res["rows"])
-        tot["DIVERGED"] += b[DIVERGED]
-        tot["HOLDS_UNMAINTAINED"] += b[HOLDS_UNMAINTAINED]
+        # OUT_OF_SCOPE stays in the table and out of the sum. Skipping
+        # the whole loop body here would drop the row, which is the
+        # opposite of what S4 asks for -- and is what the first version
+        # of this did.
+        if scope_of(res) == OUT_OF_SCOPE:
+            n_oos += 1
+        else:
+            tot["DIVERGED"] += b[DIVERGED]
+            tot["HOLDS_UNMAINTAINED"] += b[HOLDS_UNMAINTAINED]
         ops = [r["n_operands"] for r in res["rows"]]
         cross = sum(1 for r in res["rows"] if r.get("same_sheet") is False)
         sh = diverged_share(res)
+        scope = scope_of(res)
         body.append([res["workbook"], res.get("version_date", "not stated"),
-                     res.get("reader", "-"),
+                     scope, res.get("reader", "-"),
                      b[MAINTAINED], b[HOLDS_UNMAINTAINED], b[DIVERGED],
                      b[NOT_TESTABLE],
                      "%.3g" % (sum(ops) / float(len(ops))) if ops else "-",
                      cross,
-                     "empty denominator" if sh is None else "%.3f" % sh])
-    L.append(table(["workbook", "created / modified", "reader", "MAINT",
-                    "HOLDS",
+                     ("out of scope" if scope == OUT_OF_SCOPE else
+                      ("empty denominator" if sh is None
+                       else "%.3f" % sh))])
+    L.append(table(["workbook", "created / modified", "scope", "reader",
+                    "MAINT", "HOLDS",
                     "DIVERGED", "NOT_TEST", "mean operands", "cross-sheet",
                     "DIVERGED/(D+H)"], body))
     caps = [(r["workbook"], r.get("capabilities", {})) for r in results]
@@ -790,13 +829,17 @@ def rate(results):
             ).replace("\n", "\n    "))
         L.append("")
 
-    verdict, why = direction(results)
+    in_scope = [r for r in results if scope_of(r) != OUT_OF_SCOPE]
+    verdict, why = direction(in_scope)
     L += ["direction across the emission: %s" % verdict, "  %s" % why]
 
     den = tot["DIVERGED"] + tot["HOLDS_UNMAINTAINED"]
     L += ["", "pooled DIVERGED/(DIVERGED+HOLDS_UNMAINTAINED): %s"
           % ("empty denominator" if not den
-             else "%.3f" % (tot["DIVERGED"] / float(den)))]
+             else "%.3f" % (tot["DIVERGED"] / float(den))),
+          "  over %d in-scope workbook(s); %d out of scope, in the table"
+          % (len(results) - n_oos, n_oos),
+          "  above and in no denominator here (S4)."]
     L += ["",
           "NO CURVE IS REPORTED. n = %d. A decay curve takes a series of"
           % n,
@@ -940,6 +983,28 @@ def _selftest():
     ck("n=1 emits no curve and says so",
        "NO CURVE IS REPORTED" in rate([r1]), True)
     ck("and n is stated", "n = 1" in rate([r1]), True)
+
+    # ---- WO7 S4: an out-of-scope workbook stays in the TABLE and out
+    # of the DENOMINATOR. Both halves asserted, because the first
+    # implementation of this dropped the row entirely.
+    _oos = {"rows": [{"bin": NOT_TESTABLE, "prose_cell": "S!A1",
+                      "operator": "times", "n_operands": 0,
+                      "same_sheet": True}],
+            "sheets": [], "prose_cells": 1, "not_arithmetic": 0,
+            "tolerance": 1e-9, "workbook": "empty.xlsx",
+            "reader": "stub", "capabilities": {}, "file_dates": {},
+            "version_date": "-"}
+    ck("a workbook with nothing testable is OUT_OF_SCOPE",
+       scope_of(_oos), OUT_OF_SCOPE)
+    ck("and one with a testable row is not", scope_of(r1), "IN_SCOPE")
+    _both = rate([r1, _oos])
+    ck("the out-of-scope workbook stays in the table",
+       "empty.xlsx" in _both, True)
+    ck("and is named out of scope there", "out of scope" in _both, True)
+    ck("and is excluded from the pooled denominator",
+       "1 out of scope" in _both, True)
+    ck("a direction is not stated from one in-scope point",
+       "NO_DIRECTION" in _both, True)
 
     # S8, the no-labelling constraint, enforced over what is emitted.
     # Two arms, because a one-armed exemption check passes on a screen

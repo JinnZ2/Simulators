@@ -21,6 +21,12 @@ scan4 selftest
   and no expected value is emitted for it                    PASS got=None want=None
   n=1 emits no curve and says so                             PASS got=True want=True
   and n is stated                                            PASS got=True want=True
+  a workbook with nothing testable is OUT_OF_SCOPE           PASS got='OUT_OF_SCOPE' want='OUT_OF_SCOPE'
+  and one with a testable row is not                         PASS got='IN_SCOPE' want='IN_SCOPE'
+  the out-of-scope workbook stays in the table               PASS got=True want=True
+  and is named out of scope there                            PASS got=True want=True
+  and is excluded from the pooled denominator                PASS got=True want=True
+  a direction is not stated from one in-scope point          PASS got=True want=True
   the emitted report is clean under the (empty) exemption    PASS got=True want=True
   and nothing fires unmasked, the exemption list being empty PASS got=True want=True
   a planted grading word is caught through the exemption     PASS got=False want=False

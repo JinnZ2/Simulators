@@ -1,0 +1,87 @@
+work order 7 -- eligibility screen and reject log
+candidates screened: 3
+
+S2, parameters frozen at their WO6 values: unchanged
+
+10436729-GHG_emissions_calculator_ver01.1_web.xlsx -- not eligible
+  pass (a) ships values in its own cells              
+  pass (b) provenance prose is RETROSPECTIVE          
+  pass (c) >=1 relationship whose operands resolve    
+  ---- (d) file date separated from both priors       shares a date with a prior file: 2021-05-25
+  ---- (e) different authoring body                   same authoring body as a prior file: UNFCCC
+       prose stance: RETRO 4  PROSP 9  NEITHER 122
+       example (RETROSPECTIVE): Disclaimer!A3 | The UNFCCC secretariat has prepared this greenhouse gas (GHG) emissions calculator to prov
+
+f2488136-GHG_emissions_calculator_ver01.1_web_01.xlsx -- not eligible
+  pass (a) ships values in its own cells              
+  pass (b) provenance prose is RETROSPECTIVE          
+  pass (c) >=1 relationship whose operands resolve    
+  ---- (d) file date separated from both priors       shares a date with a prior file: 2021-05-25
+  ---- (e) different authoring body                   same authoring body as a prior file: UNFCCC
+       prose stance: RETRO 4  PROSP 9  NEITHER 122
+       example (RETROSPECTIVE): Disclaimer!A3 | The UNFCCC secretariat has prepared this greenhouse gas (GHG) emissions calculator to prov
+
+9ac5681c-20160502LGOStandardInventoryReport.xls -- not eligible
+  ---- (a) ships values in its own cells              no constant numbers: every numeric cell is a formula over empty inputs
+  ---- (b) provenance prose is RETROSPECTIVE          prose is PROSPECTIVE: it addresses a filer rather than describing a value the file carries
+  ---- (c) >=1 relationship whose operands resolve    no stated relationship whose operands resolve inside the file
+  ---- (d) file date separated from both priors       shares a date with a prior file: 2016-05-02
+  ---- (e) different authoring body                   same authoring body as a prior file: The Climate Registry
+       prose stance: RETRO 0  PROSP 32  NEITHER 157
+       example (PROSPECTIVE): 1. LG Profile!B2 | This form is required to be submitted by local government members of The Climate Registry 
+
+The stance threshold is a [CHOICE] and it moves the verdict.
+min_retro = 1 (any retrospective sentence) is what these
+results use. Under a MAJORITY rule the following candidates
+change stance, and one of them is the file that carries every
+testable relationship this repository has found:
+
+candidate                                     RETRO  PROSP  any rule       majority rule
+--------------------------------------------  -----  -----  -------------  -------------
+10436729-GHG_emissions_calculator_ver01.1_we  4      9      RETROSPECTIVE  PROSPECTIVE  
+f2488136-GHG_emissions_calculator_ver01.1_we  4      9      RETROSPECTIVE  PROSPECTIVE  
+
+The threshold is therefore calibrated by a case rather than
+stipulated: a rule that rejects that file at (b) rejects the
+only workbook (c) accepts.
+
+Criteria (b) and (c): have they been observed disagreeing?
+
+b passes  c passes  candidates
+--------  --------  ----------
+False     False     1         
+True      True      2         
+
+off-diagonal candidates: 0 of 3
+
+Not under the rule these results use. Two ways they would
+separate, and one is already in this table: under a MAJORITY
+stance rule the UNFCCC calculator is (b) PROSPECTIVE and (c)
+resolvable, which is the off-diagonal cell -- so whether the
+criteria are independent is a property of the threshold. The
+other is a retrospective note whose operands sit OUTSIDE the
+file, and no candidate here is one.
+
+Candidate sources, reachability probe:
+
+host                       CONNECT    
+-------------------------  -----------
+www.epa.gov                000 refused
+unfccc.int                 000 refused
+theclimateregistry.org     000 refused
+www.eia.gov                000 refused
+data.gov                   000 refused
+www.ipcc-nggip.iges.or.jp  000 refused
+github.com                 400 reached
+raw.githubusercontent.com  301 reached
+
+000 is a refused CONNECT. The publisher hosts are not
+reachable from this session, so S1's search over published
+workbooks was not run here and no candidate was rejected on
+its contents that this log does not show.
+
+
+Probe run 2026-08-25T18:36:44Z. A refused CONNECT is a policy
+denial, not a network failure, and is not retried. The two .xlsx
+candidates are byte-identical (md5 57d3ffd78a9f5f9980e15feb65f8d986),
+so the distinct population screened here is two, not three.

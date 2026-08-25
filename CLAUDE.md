@@ -6006,7 +6006,54 @@ underneath).
   `UNI_009`/`T1-1` inside scan 4's own operator vocabulary — caught by the
   operand requirement `SSS_037` added rather than by the operator match,
   and recorded rather than repaired since a word boundary does not
-  separate two senses of one token. **`SSS_039`, recorded rather than quietly
+  separate two senses of one token. **WO7 asked for a third workbook and
+  the run did not happen; the screen did.** **`SSS_050`:** S1(b) is
+  *"provenance prose classified RETROSPECTIVE under the amended WO4
+  test"* and **no such test existed** — `SSS_043` drew the distinction in
+  prose from two workbooks and nothing implemented it, `RETROSPECTIVE`
+  and `PROSPECTIVE` appearing zero times in the folder before
+  `selection.py` — sixth instance of the stated-rule-with-no-field shape,
+  and building it is most of the order. **`SSS_051`, the trap the
+  classifier had to avoid:** the easy version of (b) — *does any prose
+  cell yield a resolvable relationship* — **is** (c), two criteria
+  computing one quantity, so (b) reads **stance** and (c) reads
+  **resolvability** and `independence()` reports whether they have been
+  observed disagreeing; **off-diagonal 0 of 3**, so on this population
+  the screen cannot say which criterion does the work, and the separating
+  case not in hand is a retrospective note whose operands sit outside the
+  file. **`SSS_052`, and it decides `SSS_051`:** `min_retro = 1` is a
+  `[CHOICE]` and the UNFCCC calculator carries **RETRO 4 against PROSP
+  9** — more prospective prose than retrospective, in the file holding
+  all 23 testable relationships — so a **majority rule** rejects at (b)
+  the only workbook (c) accepts, making the threshold calibrated by a
+  case rather than stipulated, and under that rule the file **is** the
+  off-diagonal cell: whether the two criteria are independent is a
+  property of the threshold. **`SSS_053`, the reject log:** every
+  criterion is recorded rather than stopping at the first failure, and
+  they separate cleanly — the prior file passes all three content
+  criteria (a)-(c) and neither novelty criterion (d)-(e), while the LGO
+  file fails all five; **no third candidate is reachable**, with
+  `epa.gov`, `unfccc.int`, `theclimateregistry.org`, `eia.gov`,
+  `data.gov` and `ipcc-nggip.iges.or.jp` all returning a refused CONNECT
+  and only the GitHub hosts responding, and two of three uploaded files
+  byte-identical so the distinct population is **two** — so S1's own
+  hypothesis (*if most published workbooks fail (b) or (c) the population
+  is small*) is untested **not because most workbooks fail but because
+  none could be screened**, which is `SSS_043` applied to the order's own
+  method. **`SSS_054`:** all four S3 predictions return **NOT
+  ADDRESSABLE**, the verdict S3 made legal one order after `SSS_043`
+  argued for it. **`SSS_055`:** S4's `OUT_OF_SCOPE` is built and its
+  first implementation **dropped the row it exists to keep** (a
+  `continue` removed out-of-scope workbooks from the denominator *and*
+  the table), with a second defect the `G1` fixture caught — reading
+  scope off the share's denominator calls a workbook whose relationship
+  IS enforced by a formula out of scope, since MAINTAINED counts; the
+  stance test is **imported** from `selection.py` rather than
+  reimplemented so screen and emission cannot disagree about
+  RETROSPECTIVE. **`SSS_056`:** naming the module `select` collided with
+  the standard library — it **worked when run as a script** and failed
+  the first time it was imported, a collision invisible in the one
+  invocation the author used. **`SSS_039`, recorded rather than quietly
   fixed:** scan 4 **shipped without the constraint its own order states**
   — `scans.py` screens every emitted table through `no_severity` and
   `scan4.py` did not import it at all — and screening afterwards returned
@@ -6020,8 +6067,8 @@ underneath).
   `error` in the disclaimer and `needs` in the rate emission — were
   **reworded rather than exempted**, the call `residual-direction`
   `RDD_008` made when its own screen fired on its own disclaimer. Holds on
-  the real workbook and not only on the fixture. 191 selftest checks green
-  across seven modules. Stdlib only, parses under 3.9, CC0.
+  the real workbook and not only on the fixture. 216 selftest checks green
+  across eight modules. Stdlib only, parses under 3.9, CC0.
 - `claim-record/` — Seven fields per claim, two hard rules, and a
   validator that refuses. Delivered spoken (`SOURCE_DROP.md`, verbatim):
   assertion without hedges / measurement as an interval / instrument plus
