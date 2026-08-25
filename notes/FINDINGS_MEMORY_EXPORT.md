@@ -2,13 +2,13 @@
 
 Read against `notes/memory-export/files/`, which is stored verbatim. Nothing
 here is a verdict on the export, and no stored file was modified. Counts are
-recomputed each batch and are a delivery state, not a result — 3 tier-1 files
+recomputed each batch and are a delivery state, not a result — 2 tier-1 files
 are still outstanding.
 
 ## 1. Cross-references, and what "unresolved" means
 
 ```
-61 files   114 links   46 distinct names   43 resolve in folder   3 do not
+62 files   119 links   46 distinct names   44 resolve in folder   2 do not
 ```
 
 "Not in the folder" covers three different situations, and the distinction was
@@ -829,6 +829,48 @@ folder); the positive half was wrong, and the register is more entangled than
 one wrong pointer suggests: `unnamed-instruments` also holds Q1, which
 `tool-off-metrology` independently states as its own highest-leverage next
 probe, in the same words.
+
+## 37. The `uninstrumented` collision is settled: two objects, different grain
+
+Finding 2 recorded `uninstrumented` as ambiguous — a folder in this repo and a
+name in the memory namespace — and finding 31 narrowed it. The memory file has
+now arrived, and both exist and are distinct.
+
+The folder holds the cases as separate files (010–019, each its own `.md`, with
+`CLAIM_TABLE.md` running `UNI_001..153`). The memory file holds a **summary of
+the same register plus material the folder does not carry as cases** — the
+rural-conflation entry, the presented-binary section, the AI-origin entry under
+AUTHORED REFERENCE, and a MULTI-DOMAIN INTEGRATION entry with no case number.
+
+**Q7 is not in it** — zero occurrences — so finding 36 stands unchanged:
+`report-typing` cites "Q7 in `[[uninstrumented]]`" and Q7 lives in
+`unnamed-instruments`. The citation is misattributed against both candidates.
+
+One thing runs the other way. The memory file's mechanism list leaves slot 9 as
+"*(fusion/concealment — see mechanism 10's distinction)*", unnamed. The repo
+names it: `category-weld/MECHANISM_09.md`, CATEGORY WELD. So the export is
+missing a mechanism name the tree carries — the first case in this reading of
+the repo being ahead of the memory set rather than behind it.
+
+## 38. Correction to finding 33 — `agreement-mode` is a file, not that case
+
+Finding 33 recorded `[[agreement-mode]]` as resolving to
+`uninstrumented/cases/016agreementasmode.md`, and called that a new resolution
+class.
+
+Too narrow. This file states what the name covers: "See `[[agreement-mode]]`
+for the full record: 016 AGREEMENT-AS-MODE, 017 WELDED OBSERVABLES, 018
+SELF-REPORT / OPINION COUPLING, 019 TRAIT / ACQUIESCENCE WELD, plus AVENUES
+A1-A9, DECOUPLING_PATTERNS, the LITERATURE audit, the specimens convention, and
+three scripts."
+
+So it is an undelivered memory file spanning four cases and their apparatus.
+The repo case file is one of the things it covers, not the thing it is. The
+name-match in finding 33 was real and the resolution drawn from it was wrong —
+second time in this reading that a plausible single-target resolution turned
+out to name a broader object (finding 36 was the first). The pattern is worth
+stating: **a memory name matching a repo filename is not evidence that the repo
+file is its referent.**
 
 ## What was not checked, deliberately
 

@@ -37,8 +37,8 @@ checker's output and the entry stays as written — same arrangement
   `SCRUB_RULES.md` carries the scrub rules and tier assignment: 57 files
   exported unchanged, 7 scrubbed, 12 held back, with a cost note saying that a
   finding grounded in a specific case is generic once the case is lifted.
-  `files/` holds the exported files as they arrive — all 7 tier-2 and 54 of the
-  57 tier-1. Thirty-six readings in `FINDINGS_MEMORY_EXPORT.md`, including four
+  `files/` holds the exported files as they arrive — all 7 tier-2 and 55 of the
+  57 tier-1. Thirty-eight readings in `FINDINGS_MEMORY_EXPORT.md`, including four
   first-pass searches of my own that were too narrow and what they cost.
 
 The catalogue `D2.md` is filed into has since arrived, in
