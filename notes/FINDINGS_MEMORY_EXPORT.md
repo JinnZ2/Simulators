@@ -2,13 +2,13 @@
 
 Read against `notes/memory-export/files/`, which is stored verbatim. Nothing
 here is a verdict on the export, and no stored file was modified. Counts are
-recomputed each batch and are a delivery state, not a result — 7 tier-1 files
+recomputed each batch and are a delivery state, not a result — 6 tier-1 files
 are still outstanding.
 
 ## 1. Cross-references, and what "unresolved" means
 
 ```
-57 files   85 links   38 distinct names   32 resolve in folder   6 do not
+58 files   89 links   39 distinct names   34 resolve in folder   5 do not
 ```
 
 "Not in the folder" covers three different situations, and the distinction was
@@ -651,6 +651,54 @@ confound grounds. That handling is what this note prescribes, and the note
 arrived after those findings were written — so the agreement is convergence,
 not compliance. Recorded because it settles the handling for any remaining
 file of this kind: the method is named by the corpus, not chosen by the reader.
+
+## 29. The most-cited absent file arrived, and the inventory beat a reconstruction
+
+`tool-off-metrology` was cited from four stored files and three
+`uninstrumented/` cases and existed in neither repo. Finding 25 recorded what
+each citation routed there and refused to synthesise the file, on the grounds
+that the one prior reconstruction in this repo family was wrong in a way that
+produced a false finding (`CW_004`).
+
+It has arrived. Every attribution in that inventory lands, and one lands
+exactly:
+
+**The ordinal is correct.** `calibration-gap-log` routed heartbeat counting
+there "as its third instance." The delivered file lists four inversion
+instances, and heartbeat counting is **I3** — third. A count maintained across
+two files, one of which did not exist in this tree, was right.
+
+- `sensing-spine`'s "same engine as" is mutual: the delivered file closes its
+  regimentation section with "Full development in `sensing-spine` clause 2."
+- `median-case-calibration` called operator skill's proxy — events that did not
+  occur — unmeasurable by construction. The delivered file supplies the
+  instrument: the TOOL-OFF cold-start probe, scoring the first retest trial
+  only, which "doubles as the maintenance dose."
+- `uninstrumented`'s competence-residual and unaided-baseline routing matches
+  the RESIDUAL and TOOL-OFF detectors and "You cannot read skill off a dial.
+  Read it off its shadow."
+- `recent-work` carried the position as "Return-to-work back injuries are lost
+  lifting **skill**, not lost strength." The delivered file refines rather than
+  repeats it: the fast-decaying piece is the **prediction horizon**, so "the
+  injury spike is a STALE MODEL, not lost strength," with the counterintuitive
+  test that familiar work after layoff is more dangerous than unfamiliar work.
+  Same direction against the strength model, a different mechanism named.
+
+The inventory was worth keeping and a reconstruction would have been worth
+nothing: nothing in the citing files predicted four numbered inversion
+instances, the cold-exposure attendance-data finding, or the horizon mechanism.
+
+## 30. What is still outstanding
+
+Five link names do not resolve: `merit-anchoring`, `question-availability`,
+`report-typing`, `unnamed-instruments`, and `uninstrumented` — the last being
+the folder-name collision recorded in finding 2 rather than a missing file.
+
+`unnamed-instruments` is now the load-bearing absence. Two stored files —
+`sensing-spine` and `calibration-gap-log` — open by declaring themselves split
+out of it "for size" and state that the columns, the open tier, and the rules
+stay in that file. So the register's schema is the part not delivered, and two
+of its sections are here without it.
 
 ## What was not checked, deliberately
 
