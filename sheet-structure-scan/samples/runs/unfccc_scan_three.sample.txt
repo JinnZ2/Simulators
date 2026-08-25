@@ -1,0 +1,169 @@
+scan three -- header collision
+workbook        unfccc.xlsx
+reader          stdlib-xlsx
+sheets          Disclaimer, Info and sources, Report, Your organisation, Fuels, Refrigerants, Owned vehicles, Electricity, heat, cooling, WTT- fuels, T&D, Water, Material use, Waste disposal, Flight and Accommodation, Business travel - land and sea, Freighting goods, Employees commuting, Food, Home Office
+normalization   case, whitespace, edge punctuation; parentheticals kept
+grouped on      normalized label and axis
+listed when     depth sets differ, or the kind set differs
+rank            sum over governed cells of dependents x downstream depth
+
+depths       set of precedent depths of the cells the label governs
+construction Nc = N constants, Nd = N derived
+
+rank  label    axis    as written  label at                            governs                                 depths     construction
+----  -------  ------  ----------  ----------------------------------  --------------------------------------  ---------  ------------
+1364  kwh      row     kWh         Home Office!C6                      Home Office!D6:T6                       {0,1,2}    3c+3d
+                       kWh         Home Office!C7                      Home Office!D7:T7                       {0,1,2}    3c+3d
+                       kWh         Home Office!C8                      Home Office!D8:T8                       {0,1,2}    4c+3d
+                       kWh         Home Office!C9                      Home Office!D9:M9                       {0,1,2}    1c+3d
+                       kWh         Home Office!C10                     Home Office!D10:M10                     {0,1,2}    1c+3d
+                       kWh         Home Office!C11                     Home Office!D11:J11                     {1,2}      3d
+                       kWh         Home Office!C12                     Home Office!D12:J12                     {1,2}      3d
+                       kWh         Home Office!C13                     Home Office!D13:J13                     {1,2}      3d
+                       kWh         Home Office!C14                     Home Office!D14:J14                     {1,2}      3d
+                       kWh         Home Office!C15                     Home Office!D15:J15                     {1,2}      3d
+                       kWh         Home Office!C16                     Home Office!D16:J16                     {1,2}      3d
+                       kWh         Home Office!C17                     Home Office!D17:J17                     {1,2}      3d
+                       kWh         Home Office!C18                     Home Office!D18:J18                     {1,2}      3d
+                       kWh         Home Office!C19                     Home Office!D19:J19                     {1,2}      3d
+                       kWh         Home Office!C20                     Home Office!D20:J20                     {1,2}      3d
+                       kWh         Home Office!C21                     Home Office!D21:J21                     {1,2}      3d
+                       kWh         Home Office!C22                     Home Office!D22:J22                     {1,2}      3d
+                       kWh         Home Office!C23                     Home Office!D23:J23                     {1,2}      3d
+                       kWh         Home Office!C24                     Home Office!D24:J24                     {1,2}      3d
+                       kWh         Home Office!C25                     Home Office!D25:J25                     {1,2}      3d
+                       kWh         Home Office!C26                     Home Office!D26:J26                     {1,2}      3d
+                       kWh         Home Office!C27                     Home Office!D27:J27                     {1,2}      3d
+                       kWh         Home Office!C28                     Home Office!D28:J28                     {1,2}      3d
+                       kWh         Home Office!C29                     Home Office!D29:J29                     {1,2}      3d
+                       kWh         Home Office!C30                     Home Office!D30:J30                     {1,2}      3d
+                       kWh         Home Office!C31                     Home Office!D31:J31                     {1,2}      3d
+                       kWh         Home Office!C32                     Home Office!D32:J32                     {1,2}      3d
+                       kWh         Home Office!C33                     Home Office!D33:J33                     {1,2}      3d
+                       kWh         Home Office!C34                     Home Office!D34:J34                     {1,2}      3d
+                       kWh         Home Office!C35                     Home Office!D35:J35                     {1,2}      3d
+                       kWh         Home Office!C36                     Home Office!D36:J36                     {1,2}      3d
+975   factors  column  Factors     Fuels!D5                            Fuels!D6:D34                            {0}        29c
+                       Factors     Refrigerants!C5                     Refrigerants!C6:C92                     {0}        87c
+                       Factors     Electricity, heat, cooling!D6       Electricity, heat, cooling!D7:D16       {0,1,2}    3c+2d
+                       Factors     WTT- fuels!D5                       WTT- fuels!D6:D30                       {0}        25c
+                       Factors     T&D!C5                              T&D!C6:C7                               {0}        2c
+                       Factors     Water!C5                            Water!C6:C13                            {0}        3c
+                       Factors     Material use!C5                     Material use!C6:C43                     {0}        38c
+                       Factors     Business travel - land and sea!E5   Business travel - land and sea!E6:E52   {0}        47c
+                       Factors     Employees commuting!E5              Employees commuting!E6:E53              {0,2}      40c+8d
+                       Factors     Food!C5                             Food!C6:C17                             {0}        12c
+                       Factors     Home Office!E5                      Home Office!E6:E36                      {1}        31d
+765   car      row     Car         Owned vehicles!A7                   Owned vehicles!B7:M7                    {0,1}      7c+2d
+                       Car         Owned vehicles!A8                   Owned vehicles!B8:M8                    {0,1}      7c+2d
+                       Car         Owned vehicles!A9                   Owned vehicles!B9:M9                    {0,1}      7c+2d
+                       Car         Owned vehicles!A10                  Owned vehicles!B10:M10                  {0,1}      7c+2d
+                       Car         Owned vehicles!A11                  Owned vehicles!B11:M11                  {0,1}      7c+2d
+                       Car         Owned vehicles!A12                  Owned vehicles!B12:M12                  {0,1}      7c+2d
+                       Car         Owned vehicles!A13                  Owned vehicles!B13:M13                  {0,1}      7c+2d
+                       Car         Owned vehicles!A14                  Owned vehicles!B14:M14                  {0,1}      7c+2d
+                       Car         Owned vehicles!A15                  Owned vehicles!B15:M15                  {0,1}      7c+2d
+                       Car         Owned vehicles!A16                  Owned vehicles!B16:M16                  {0,1}      7c+2d
+                       Car         Owned vehicles!A17                  Owned vehicles!B17:M17                  {0,1}      7c+2d
+                       Car         Owned vehicles!A18                  Owned vehicles!B18:M18                  {0,1}      7c+2d
+                       Car         Owned vehicles!A19                  Owned vehicles!B19:M19                  {0,1}      7c+2d
+                       Car         Owned vehicles!A20                  Owned vehicles!B20:M20                  {0,1}      7c+2d
+                       Car         Owned vehicles!A21                  Owned vehicles!B21:M21                  {0,1}      7c+2d
+                       Car         Owned vehicles!A22                  Owned vehicles!B22:M22                  {0,1}      7c+2d
+                       Car         Owned vehicles!A23                  Owned vehicles!B23:M23                  {0,1}      7c+2d
+                       Car         Owned vehicles!A24                  Owned vehicles!B24:M24                  {0,1}      7c+2d
+                       Car         Owned vehicles!A25                  Owned vehicles!B25:M25                  {0,1}      7c+2d
+                       Car         Owned vehicles!A26                  Owned vehicles!B26:M26                  {0,1}      7c+2d
+                       Car         Owned vehicles!A27                  Owned vehicles!B27:M27                  {0,1}      7c+2d
+                       Car         Owned vehicles!A28                  Owned vehicles!B28:M28                  {0,1}      7c+2d
+                       Car         Owned vehicles!A33                  Owned vehicles!B33:M33                  {0,1,2,3}  7c+3d
+                       Car         Owned vehicles!A34                  Owned vehicles!B34:N34                  {0,2,3}    7c+4d
+                       Car         Owned vehicles!A35                  Owned vehicles!B35:N35                  {0,2,3}    7c+4d
+                       Car         Owned vehicles!A36                  Owned vehicles!B36:N36                  {0,2,3}    7c+4d
+                       Car         Owned vehicles!A37                  Owned vehicles!B37:N37                  {0,2,3}    7c+4d
+                       Car         Owned vehicles!A38                  Owned vehicles!B38:G38                  {0,2,3}    3c+2d
+                       Car         Owned vehicles!A39                  Owned vehicles!B39:G39                  {0,2,3}    3c+2d
+                       Car         Owned vehicles!A40                  Owned vehicles!B40:G40                  {0,2,3}    3c+2d
+                       Car         Owned vehicles!A41                  Owned vehicles!B41:F41                  {0}        3c+1d
+                       Car         Owned vehicles!A42                  Owned vehicles!B42:F42                  {0}        3c+1d
+                       Car         Owned vehicles!A43                  Owned vehicles!B43:F43                  {0}        3c+1d
+                       Car         Owned vehicles!A44                  Owned vehicles!B44:F44                  {0}        3c+1d
+                       Car         Business travel - land and sea!A10  Business travel - land and sea!B10:G10  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A11  Business travel - land and sea!B11:G11  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A12  Business travel - land and sea!B12:G12  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A13  Business travel - land and sea!B13:G13  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A14  Business travel - land and sea!B14:G14  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A15  Business travel - land and sea!B15:G15  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A16  Business travel - land and sea!B16:G16  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A17  Business travel - land and sea!B17:G17  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A18  Business travel - land and sea!B18:G18  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A19  Business travel - land and sea!B19:G19  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A20  Business travel - land and sea!B20:G20  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A21  Business travel - land and sea!B21:G21  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A22  Business travel - land and sea!B22:G22  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A23  Business travel - land and sea!B23:G23  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A24  Business travel - land and sea!B24:G24  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A25  Business travel - land and sea!B25:G25  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A26  Business travel - land and sea!B26:G26  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A27  Business travel - land and sea!B27:G27  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A28  Business travel - land and sea!B28:G28  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A29  Business travel - land and sea!B29:G29  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A30  Business travel - land and sea!B30:G30  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A31  Business travel - land and sea!B31:G31  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A32  Business travel - land and sea!B32:G32  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A33  Business travel - land and sea!B33:G33  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A34  Business travel - land and sea!B34:G34  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A35  Business travel - land and sea!B35:G35  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A36  Business travel - land and sea!B36:G36  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A37  Business travel - land and sea!B37:G37  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A38  Business travel - land and sea!B38:G38  {0,1}      4c+1d
+                       Car         Business travel - land and sea!A39  Business travel - land and sea!B39:G39  {0,1}      4c+1d
+                       Car         Employees commuting!A10             Employees commuting!B10:G10             {0,1}      4c+1d
+                       Car         Employees commuting!A11             Employees commuting!B11:G11             {0,1}      4c+1d
+                       Car         Employees commuting!A12             Employees commuting!B12:G12             {0,1}      4c+1d
+                       Car         Employees commuting!A13             Employees commuting!B13:G13             {0,1}      4c+1d
+                       Car         Employees commuting!A14             Employees commuting!B14:G14             {0,1}      4c+1d
+                       Car         Employees commuting!A15             Employees commuting!B15:G15             {0,1}      4c+1d
+                       Car         Employees commuting!A16             Employees commuting!B16:G16             {0,1}      4c+1d
+                       Car         Employees commuting!A17             Employees commuting!B17:G17             {0,1}      4c+1d
+                       Car         Employees commuting!A18             Employees commuting!B18:G18             {0,1}      4c+1d
+                       Car         Employees commuting!A19             Employees commuting!B19:G19             {0,1}      4c+1d
+                       Car         Employees commuting!A20             Employees commuting!B20:G20             {0,1}      4c+1d
+                       Car         Employees commuting!A21             Employees commuting!B21:G21             {0,1}      4c+1d
+                       Car         Employees commuting!A22             Employees commuting!B22:G22             {0,1}      4c+1d
+                       Car         Employees commuting!A23             Employees commuting!B23:G23             {0,1}      4c+1d
+                       Car         Employees commuting!A24             Employees commuting!B24:G24             {0,1}      4c+1d
+                       Car         Employees commuting!A25             Employees commuting!B25:G25             {0,1}      4c+1d
+                       Car         Employees commuting!A26             Employees commuting!B26:G26             {0,1}      4c+1d
+                       Car         Employees commuting!A27             Employees commuting!B27:G27             {0,1}      4c+1d
+                       Car         Employees commuting!A28             Employees commuting!B28:G28             {0,1}      4c+1d
+                       Car         Employees commuting!A29             Employees commuting!B29:G29             {0,1}      4c+1d
+                       Car         Employees commuting!A30             Employees commuting!B30:G30             {0,1}      4c+1d
+                       Car         Employees commuting!A31             Employees commuting!B31:G31             {0,1}      4c+1d
+                       Car         Employees commuting!A32             Employees commuting!B32:H32             {0,2,3}    4c+2d
+                       Car         Employees commuting!A33             Employees commuting!B33:H33             {0,2,3}    4c+2d
+                       Car         Employees commuting!A34             Employees commuting!B34:H34             {0,2,3}    4c+2d
+                       Car         Employees commuting!A35             Employees commuting!B35:H35             {0,2,3}    4c+2d
+                       Car         Employees commuting!A46             Employees commuting!B46:H46             {0,2,3}    4c+2d
+                       Car         Employees commuting!A47             Employees commuting!B47:H47             {0,2,3}    4c+2d
+                       Car         Employees commuting!A48             Employees commuting!B48:H48             {0,2,3}    4c+2d
+                       Car         Employees commuting!A49             Employees commuting!B49:H49             {0,2,3}    4c+2d
+                       Car         Employees commuting!A50             Employees commuting!B50:G50             {0,1}      4c+2d
+                       Car         Employees commuting!A51             Employees commuting!B51:G51             {0,1}      4c+2d
+                       Car         Employees commuting!A52             Employees commuting!B52:G52             {0,1}      4c+2d
+                       Car         Employees commuting!A53             Employees commuting!B53:G53             {0,1}      4c+2d
+740   kg co2e  column  kg CO2e     Fuels!F5                            Fuels!F6:F34                            {1}        29d
+                       kg CO2e     Refrigerants!E5                     Refrigerants!E6:E92                     {1}        87d
+                       kg CO2e     Electricity, heat, cooling!F6       Electricity, heat, cooling!F7:F16       {0,1,2,3}  2c+3d
+                       kg CO2e     WTT- fuels!F5                       WTT- fuels!F6:F30                       {1}        25d
+                       kg CO2e     T&D!E5                              T&D!E6:E7                               {1}        2d
+                       kg CO2e     Water!E5                            Water!E6:E13                            {0,1}      1c+2d
+                       kg CO2e     Material use!E5                     Material use!E6:E43                     {1}        38d
+                       kg CO2e     Business travel - land and sea!G5   Business travel - land and sea!G6:G52   {1}        47d
+                       kg CO2e     Employees commuting!G5              Employees commuting!G6:G53              {1,3}      48d
+                       kg CO2e     Food!E5                             Food!E6:E17                             {1}        12d
+                       kg CO2e     Home Office!J5                      Home Office!J6:J36                      {2}        31d
+
+label groups with two or more occurrences: 33
+of those, listed: 4   not listed, construction and depths agree: 29
+distinct labels seen: 458

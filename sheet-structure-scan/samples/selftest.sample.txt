@@ -3,9 +3,10 @@ sheetmodel selftest
   col_to_num AA                                  PASS got=27 want=27
   num_to_col roundtrip                           PASS got='BZ' want='BZ'
   simple refs                                    PASS got={('S', 'B2'), ('S', 'A1')} want={('S', 'B2'), ('S', 'A1')}
-  range expands                                  PASS got={('S', 'A2'), ('S', 'A1'), ('S', 'A3')} want={('S', 'A2'), ('S', 'A1'), ('S', 'A3')}
+  range expands                                  PASS got={('S', 'A1'), ('S', 'A2'), ('S', 'A3')} want={('S', 'A1'), ('S', 'A2'), ('S', 'A3')}
   function name not a ref                        PASS got={('S', 'A1')} want={('S', 'A1')}
-  two functions one range                        PASS got={('S', 'A2'), ('S', 'A1')} want={('S', 'A2'), ('S', 'A1')}
+  two functions one range                        PASS got={('S', 'A1'), ('S', 'A2')} want={('S', 'A1'), ('S', 'A2')}
+  shift_formula, 11 hand-set cases               PASS got=[] want=[]
   qualified ref                                  PASS got={('Other', 'B4')} want={('Other', 'B4')}
   quoted sheet                                   PASS got={('My Sheet', 'B4')} want={('My Sheet', 'B4')}
   ref inside a string literal is not a ref       PASS got={('S', 'A1')} want={('S', 'A1')}
@@ -107,5 +108,9 @@ epa_check selftest
   the two new arms register no cross-module collision, with a reason PASS got=[True, True] want=[True, True]
   simplified registers no threshold                        PASS got=[] want=[]
   and says why                                             PASS got=True want=True
-  emitted profile carries no screened word                 PASS got=True want=True
+  efh render carries no screened word                      PASS got=True want=True
+  local render carries no screened word                    PASS got=True want=True
+  simplified render carries no screened word               PASS got=True want=True
+  tcr render carries no screened word                      PASS got=True want=True
+  unfccc render carries no screened word                   PASS got=True want=True
 SELFTEST PASS (0 checks failed)

@@ -58,6 +58,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+import no_severity     # noqa: E402
 import scans           # noqa: E402
 import sheetmodel      # noqa: E402
 from sheetmodel import CONSTANT_NUMBER, CYCLE, DERIVED  # noqa: E402
@@ -129,8 +130,8 @@ PREDICTIONS = {
              "a calculator chains through intermediates"),
         ],
         "not_registered": (
-            "no equivalent of LOC-P4. A cross-module collision prediction "
-            "needs the module structure named BEFORE the file is opened, "
+            "no equivalent of LOC-P4. A cross-module collision prediction rests "
+            "on the module structure being named BEFORE the file is opened, "
             "and it was not. Registering one from the workbook's own sheet "
             "list after opening it is a post-hoc threshold wearing a "
             "prediction's clothes."),
@@ -150,9 +151,9 @@ PREDICTIONS = {
         ],
         "not_registered": (
             "no equivalent of LOC-P4, for the same reason as unfccc. The "
-            "file format is also unknown here: if it ships as legacy .xls "
-            "the reader raises and the one-reader slot gets spent, which "
-            "is the contingency SSS_001 names for itself."),
+            "file format is also unstated here: if it ships as legacy .xls "
+            "the reader raises, which is the contingency SSS_001 names "
+            "for itself."),
     },
     "simplified": {
         "name": "EPA Simplified GHG Emissions Calculator",
@@ -482,15 +483,25 @@ def _selftest():
     ck("and says why",
        bool(PREDICTIONS["simplified"].get("no_threshold_reason")), True)
 
-    out = render(ph, "efh", "hub.xlsx")
-    import no_severity
-    ck("emitted profile carries no screened word",
-       no_severity.check(out)[0], True)
+    # Every target's render, not one. The screen was applied in scans.py
+    # and not here, and the gap surfaced on a real run: a target with a
+    # not_registered note printed prose the screen would have refused.
+    for key in sorted(PREDICTIONS):
+        src = ph if key == "efh" else pc
+        ck("%s render carries no screened word" % key,
+           no_severity.check(render(src, key, "x.xlsx"))[0], True)
 
     print("SELFTEST %s (%d checks failed)"
           % ("PASS" if not fails else "FAIL", len(fails)))
     return 1 if fails else 0
 
+
+CONTINGENCY = (
+    "This is the contingency registered in TARGETS.md section 5, and it\n"
+    "fired as written. Note before spending the slot: the one reader\n"
+    "available for this format exposes cached VALUES and not formula\n"
+    "text, and both scans are about the formula layer. See SSS_023."
+)
 
 USAGE = """usage:
   epa_check.py --check WORKBOOK.xlsx --as efh|local|simplified
@@ -526,8 +537,19 @@ def main(argv):
         sys.stderr.write("--as must be one of: %s\n"
                          % ", ".join(sorted(PREDICTIONS)))
         return 2
-    wb = sheetmodel.read(path)
-    print(render(profile(wb), target, path))
+    try:
+        wb = sheetmodel.read(path)
+    except NotImplementedError as exc:
+        # A stated contingency, not a crash. TARGETS.md section 5.
+        sys.stderr.write("%s\n%s\n" % (exc, CONTINGENCY))
+        return 3
+    out = render(profile(wb), target, path)
+    print(out)
+    clean, _hits = no_severity.check(out)
+    if not clean:
+        sys.stderr.write("\n" + no_severity.report(out, "emitted profile")
+                         + "\n")
+        return 1
     return 0
 
 

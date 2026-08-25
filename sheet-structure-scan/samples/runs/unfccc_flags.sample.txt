@@ -1,0 +1,25 @@
+# flag set: the first cell governed by each occurrence of each
+# listed COLUMN collision. Upstream is scan three, not a rule
+# invented for scan two.
+Fuels!D6
+Refrigerants!C6
+Electricity, heat, cooling!D7
+WTT- fuels!D6
+T&D!C6
+Water!C6
+Material use!C6
+Business travel - land and sea!E6
+Employees commuting!E6
+Food!C6
+Home Office!E6
+Fuels!F6
+Refrigerants!E6
+Electricity, heat, cooling!F7
+WTT- fuels!F6
+T&D!E6
+Water!E6
+Material use!E6
+Business travel - land and sea!G6
+Employees commuting!G6
+Food!E6
+Home Office!J6

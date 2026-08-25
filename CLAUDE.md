@@ -5802,11 +5802,60 @@ underneath).
   discriminators; chain the reverse) with the synthetics loudly marked as
   no evidence about any EPA product. One contingency named: a target
   shipping as legacy `.xls` makes `read()` raise, and **that** is when
-  the one-reader slot gets spent — the test `SSS_001` sets for itself;
-  the UNFCCC target being `.xlsx` closes it there, and the Climate
-  Registry format was not stated. 96 selftest checks green across four
-  modules. Stdlib only, parses under
-  3.9, CC0.
+  the one-reader slot gets spent — the test `SSS_001` sets for itself.
+  **Then two real workbooks arrived and `SSS_010` closed.** The UNFCCC
+  calculator holds 3 of 3 — **but not on the first run**: `UNF-P1` came
+  back `0.037` against a registered `> 0.20`, and the cause was the
+  reader, not the workbook. **`SSS_017`, the largest defect in the
+  folder:** 720 of the workbook's 825 formula cells are **shared
+  formulas**, whose text lives once on a group master with every follower
+  carrying only an index, and the reader took an empty `<f>` body as no
+  formula — reading **696 cells as constants** (129 derived, exactly the
+  105 plain plus the 24 masters that carry text), so `pdepth`/`deps`/
+  `ddepth`/`rank` were wrong for everything downstream of any of them.
+  Repaired with `shift_formula()`, which translates a master's relative
+  references with `$`-pinned halves left alone and string literals masked
+  at preserved length; eleven hand-set cases pinned. **The fixture could
+  not have shown it** — `fixture.py` writes only plain formulas — which
+  is `SSS_010`'s *passing is weaker evidence than failing* instanced.
+  **`SSS_019`:** a threshold fixed before the file existed is what made a
+  reader defect the live hypothesis rather than the available and wrong
+  story (*this calculator is mostly reference tables*); `UNF-P2` and
+  `UNF-P3` holding in the same run is what pointed at it, and after
+  repair `derived_share` is `0.226`, held by a small margin and reported
+  as such. **`SSS_018`, the honest one:** the regex used to diagnose
+  `SSS_017` was itself wrong in the same direction — `[^>]*` swallows the
+  `/` of a self-closing tag, so it merged `<f/>` with the next real `<f>`
+  and reported 476 against a parse's 825; both errors undercounted, so
+  the diagnosis survived by luck rather than by method. **`SSS_020`, the
+  substantive finding:** scan three lists 4 groups of 33, and `factors`
+  appears as a column label on 11 sheets — eight carry pure constants at
+  depth `{0}` while **`Home Office` carries `31d`, pure derived, at
+  `{1}`: that sheet computes its emission factors where eight others
+  hardcode them** — with the consequence one level deeper in the
+  `kg CO2e` output column (`{2}` there, `{1}` on nine sheets).
+  **`SSS_021`:** two of the four differing occurrences per group are
+  **stacked-table artifacts**, checked and separated rather than assumed
+  clean — `Electricity, heat, cooling` and `Water` stack several tables
+  in a column and `CHOICE 4` assumes one label row per sheet, measured by
+  counting cells in each governed range whose text normalizes to the
+  group's own label (2 and 1 against 0 on the other nine); unrepaired,
+  since the fix changes the label model for every sheet. **`SSS_022`:**
+  on the 22 cells scan three surfaced — a flag set produced by an
+  upstream scan rather than invented — `unit` is present on 22 and
+  `date`/`sample_size`/`variance_sibling` absent on 22, which is the
+  differential the Hub was offered to demonstrate, on a workbook that is
+  not the Hub. **`SSS_023`:** the `.xls` target fired the §5 contingency
+  as registered, **and the slot stays unspent for a reason** — the file
+  is valid BIFF8 carrying 336 `FORMULA` and 23 `SHRFMLA` records while
+  `xlrd` 2.0.2, the one reader for the format, exposes cached values and
+  no formula text, so spending the budget delivers exactly the value-only
+  view `SSS_001` named as the reason to parse XML directly; LibreOffice
+  is installed, fails on the file, and **fails identically on a control
+  this tool parses**, so the install is broken here and says nothing
+  about the `.xls`. **`SSS_024`:** the output screen ran in one of two
+  CLIs and the gap surfaced on a real run. 101 selftest checks green
+  across four modules. Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

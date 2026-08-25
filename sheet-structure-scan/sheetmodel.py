@@ -19,7 +19,11 @@ WHAT IS NOT READ, stated rather than discovered later:
     records PRECEDENTS_UNRESOLVED for that term.
   - external workbook links ([1]Sheet1!A1). Recorded as EXTERNAL, never
     followed.
-  - array formulas beyond their anchor cell.
+  - array formulas beyond their anchor cell. A cell carrying an <f>
+    with no text and no resolvable shared master is still DERIVED, and
+    records SHARED_MASTER_MISSING. It is never read as a constant: the
+    first version of this reader did exactly that and turned 347 of one
+    real workbook's 476 formula cells into constants.
   - merged regions: the anchor carries the value, the covered cells read
     empty. Scan two reports that as NOT_SEARCHED, not as absent.
 
@@ -52,6 +56,7 @@ CYCLE = "CYCLE"
 UNRESOLVED = "PRECEDENTS_UNRESOLVED"
 TRUNCATED = "PRECEDENTS_TRUNCATED"
 EXTERNAL = "EXTERNAL"
+SHARED_MASTER_MISSING = "SHARED_MASTER_MISSING"
 
 # Builtin number-format ids that are dates or times.
 BUILTIN_DATE_IDS = set(list(range(14, 23)) + list(range(45, 48)))
@@ -107,6 +112,55 @@ _REF = re.compile(
     r"(?!\s*\()"
 )
 _STRLIT = re.compile(r'"[^"]*"')
+
+
+def _mask_strings(text):
+    """Blank out string literals, PRESERVING LENGTH so spans still line up.
+
+    parse_precedents can use a shorter mask because it only reads spans
+    on the masked copy. shift_formula edits the ORIGINAL by span, so the
+    mask has to be the same length or every edit after the first string
+    literal lands in the wrong place.
+    """
+    return _STRLIT.sub(lambda m: '"' + " " * (len(m.group(0)) - 2) + '"', text)
+
+
+def _shift_ref(ref, drow, dcol):
+    """Move one A1 reference. A $ pins that half and it does not move."""
+    m = re.match(r"^(\$?)([A-Z]{1,3})(\$?)([0-9]+)$", ref.upper())
+    if not m:
+        return ref
+    cabs, col, rabs, row = m.groups()
+    c = col_to_num(col) + (0 if cabs else dcol)
+    r = int(row) + (0 if rabs else drow)
+    if c < 1 or r < 1:
+        return "#REF!"
+    return "%s%s%s%d" % (cabs, num_to_col(c), rabs, r)
+
+
+def shift_formula(text, drow, dcol):
+    """Translate a formula's relative references by (drow, dcol).
+
+    This is what a shared formula is. The master cell carries the text
+    once and every follower carries only the group index, inheriting the
+    same formula with its relative references moved. A reader that does
+    not do this reads 347 of a real workbook's 476 formula cells as
+    constants -- which is what happened, and it is the whole of why this
+    function exists.
+    """
+    if not text or (drow == 0 and dcol == 0):
+        return text
+    masked = _mask_strings(text)
+    edits = []
+    for m in _REF.finditer(masked):
+        for gi in (3, 4):
+            if m.group(gi):
+                edits.append((m.start(gi), m.end(gi),
+                              _shift_ref(m.group(gi), drow, dcol)))
+    out = text
+    for a, b, rep in sorted(edits, reverse=True):
+        out = out[:a] + rep + out[b:]
+    return out
 _EXTERNAL = re.compile(r"\[\d+\]")
 
 
@@ -122,7 +176,7 @@ def parse_precedents(formula, home_sheet):
     notes = set()
     if not formula:
         return set(), notes
-    body = _STRLIT.sub('""', formula)
+    body = _mask_strings(formula)
     if _EXTERNAL.search(body):
         notes.add(EXTERNAL)
     out = set()
@@ -349,26 +403,52 @@ def read_xlsx(path):
     cells = []
     sheets = []
     with zipfile.ZipFile(path) as z:
-        shared = _shared_strings(z)
+        shared_strings = _shared_strings(z)
         datestyles = _date_style_ids(z)
         for name, target in _sheet_targets(z):
             if not target:
                 continue
             sheets.append(name)
             root = ET.fromstring(z.read(target))
+
+            # Pass 1: the shared-formula masters. A master carries the
+            # text once, tagged with a group index; every follower in the
+            # group carries the index and nothing else.
+            shared = {}
+            for c in root.iter(NS + "c"):
+                f = c.find(NS + "f")
+                if f is None or f.get("t") != "shared":
+                    continue
+                si = f.get("si")
+                body = _text(f)
+                if si is not None and body and si not in shared:
+                    shared[si] = (c.get("r"), body)
+
             for c in root.iter(NS + "c"):
                 addr = c.get("r")
                 if not addr or rc(addr) is None:
                     continue
                 t = c.get("t")
-                s = c.get("s")
+                s_i = c.get("s")
                 f = c.find(NS + "f")
                 v = c.find(NS + "v")
                 isel = c.find(NS + "is")
                 formula = _text(f) if f is not None else None
+                notes = set()
+                if f is not None and not formula:
+                    # A follower, or an array formula outside its anchor.
+                    si = f.get("si")
+                    if si is not None and si in shared:
+                        m_addr, m_text = shared[si]
+                        mr, mc = rc(m_addr)
+                        r_, c_ = rc(addr)
+                        formula = shift_formula(m_text, r_ - mr, c_ - mc)
+                    else:
+                        formula = ""
+                        notes.add(SHARED_MASTER_MISSING)
                 if t == "s" and v is not None:
                     try:
-                        value = shared[int(v.text)]
+                        value = shared_strings[int(v.text)]
                     except (ValueError, IndexError, TypeError):
                         value = None
                 elif t == "inlineStr":
@@ -377,23 +457,25 @@ def read_xlsx(path):
                     value = v.text
                 else:
                     value = None
-                if formula:
+                if f is not None:
                     kind = DERIVED
-                    prec, notes = parse_precedents(formula, name)
+                    prec, n2 = parse_precedents(formula, name)
+                    notes |= n2
                 elif value is None or value == "":
                     kind = EMPTY
-                    prec, notes = set(), set()
+                    prec = set()
                 else:
-                    prec, notes = set(), set()
+                    prec = set()
                     if t in ("s", "str", "inlineStr"):
                         kind = CONSTANT_TEXT
-                    elif s is not None and int(s) in datestyles:
+                    elif s_i is not None and int(s_i) in datestyles:
                         kind = CONSTANT_DATE
                     else:
                         kind = CONSTANT_NUMBER
                 if kind == EMPTY:
                     continue
-                cells.append(Cell(name, addr, kind, value, formula, prec, notes))
+                cells.append(Cell(name, addr, kind, value, formula, prec,
+                                  notes))
     return Workbook(cells, sheets, path=path)
 
 
@@ -435,6 +517,26 @@ def _selftest():
     ck("function name not a ref", p, {("S", "A1")})
     p, _ = parse_precedents("=SUM(A1:A2)/COUNT(A1:A2)", "S")
     ck("two functions one range", p, {("S", "A1"), ("S", "A2")})
+
+    # Shared-formula translation. Answers fixed by the A1 rules, not by
+    # what the function happens to return. A reader without this read 696
+    # of one real workbook's 825 formula cells as constants.
+    shifts = [
+        ("A1", 1, 0, "A2"),
+        ("$A$1", 5, 5, "$A$1"),
+        ("$A1", 1, 1, "$A2"),
+        ("A$1", 1, 1, "B$1"),
+        ("SUM(A1:A3)", 1, 0, "SUM(A2:A4)"),
+        ("Sheet2!B4", 2, 0, "Sheet2!B6"),
+        ('IF(A1>0,"A1 text",0)', 1, 0, 'IF(A2>0,"A1 text",0)'),
+        ("LOG10(A1)", 1, 0, "LOG10(A2)"),
+        ("A1+$B2*C$3", 2, 1, "B3+$B4*D$3"),
+        ("A1", 0, 0, "A1"),
+        ("A1", -5, 0, "#REF!"),
+    ]
+    ck("shift_formula, 11 hand-set cases",
+       [t for t, dr, dc, want in shifts
+        if shift_formula(t, dr, dc) != want], [])
     p, _ = parse_precedents("=Other!B4", "S")
     ck("qualified ref", p, {("Other", "B4")})
     p, _ = parse_precedents("='My Sheet'!B4", "S")

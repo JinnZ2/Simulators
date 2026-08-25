@@ -416,3 +416,246 @@ legacy `.xls` contingency in `SSS_001` may still be spent there. The
 implicate the scan, and the other two arms are what tell those apart.
 
 **Status: SPECIFIED. No arm has been run.**
+
+---
+
+## Claims from the first real workbooks
+
+Two files arrived on 2026-08-25: the UNFCCC GHG emissions calculator
+ver 01.1 (`.xlsx`, uploaded twice — byte-identical, md5
+`57d3ffd7…`) and The Climate Registry LGO Standard Inventory Report
+(`.xls`, OLE2/BIFF8). **`SSS_010` is closed: the tool has met a real
+workbook.**
+
+---
+
+### SSS_017 — the reader read 696 of 825 formula cells as constants
+
+The UNFCCC workbook holds **825 formula cells**: 105 plain, 720 shared.
+A shared formula stores its text **once**, on the group master, tagged
+with an index; every follower carries only the index and inherits the
+same formula with its relative references translated by its own offset.
+
+The reader took `<f>` with an empty body as no formula. It counted
+**129** derived cells — exactly the 105 plain plus the 24 masters that
+carry text — and read the other **696 as constants.**
+
+Consequences were not confined to one column. Those 696 cells had no
+precedents recorded, so `pdepth`, `deps`, `ddepth` and `rank` were wrong
+for every cell downstream of any of them, and scan three's
+constants-versus-derived was reading a property of the file format.
+
+`shift_formula(text, drow, dcol)` translates a master's relative
+references, leaving `$`-pinned halves alone, with string literals masked
+at preserved length so the edit spans still line up. Eleven hand-set
+cases are pinned, including `#REF!` on an off-sheet shift and a literal
+that must not move.
+
+**This defect was invisible on the fixture**, because `fixture.py` writes
+only plain formulas. `SSS_010` said passing is weaker evidence than
+failing; this is what that was about.
+
+**Falsifier:** a formula construct whose follower text this does not
+reproduce — array formulas beyond their anchor are the open candidate,
+and a follower with no resolvable master now records
+`SHARED_MASTER_MISSING` and stays `DERIVED` rather than becoming a
+constant.
+
+**Status: REPAIRED. 825 of 825 resolved, 0 `SHARED_MASTER_MISSING`.**
+
+---
+
+### SSS_018 — the diagnostic that found `SSS_017` was itself wrong, in the same direction
+
+The regex used to count `<f>` elements in the raw XML was
+`<f([^>]*)>(.*?)</f>|<f([^>]*)/>`. `[^>]*` matches the `/` of a
+self-closing tag, so `<f … />` was consumed by the first branch and its
+`(.*?)</f>` ran on to the **next** real closing tag, merging the pair.
+It reported **476** where a parse reports **825**.
+
+Both errors undercounted, so the diagnosis — *followers are being
+dropped* — survived. That is luck, not method: had the diagnostic erred
+the other way it would have masked the defect it was written to find.
+
+The lesson is the folder's own: `sheetmodel.py` reads this format with a
+parser for exactly this reason, and the throwaway check reached for a
+regex.
+
+**Falsifier:** a count from a third route disagreeing with 825.
+
+**Status: RECORDED. The diagnostic was replaced by a parse; the finding
+it produced stands.**
+
+---
+
+### SSS_019 — a refuted prediction on real data was the reader, not the workbook
+
+Registered before the file existed: `UNF-P1`, `derived_share > 0.20`.
+
+| run | derived | `derived_share` | `UNF-P1` |
+|---|---|---|---|
+| as delivered | 129 | 0.037 | **NOT_HELD** |
+| after `SSS_017` | 825 | **0.226** | HELD |
+
+`UNF-P2` and `UNF-P3` held in both runs — `rank_zero_share` 0.634 then
+0.461, `max_pdepth` 5 — which is what said the scan was finding *some*
+propagation and made a reader defect the live hypothesis rather than a
+claim about the workbook.
+
+**This is the pre-registration doing the job it was built for.** Without
+a threshold fixed in advance, `derived_share = 0.037` on a workbook
+described as a live calculator is a number with no one to argue with it,
+and the most available reading — *this calculator is mostly reference
+tables* — is both plausible and wrong.
+
+`P1` now holds by a **small margin**: 0.226 against 0.20. Reported as
+such rather than as a clean pass.
+
+**Falsifier:** a formula construct still unread, which would raise 0.226
+further and leave the direction unchanged.
+
+**Status: HELD after repair, 3 of 3.**
+
+---
+
+### SSS_020 — the substantive finding: one sheet computes its emission factors where eight hardcode them
+
+Scan three lists **4 groups of 33** with two or more occurrences: 2 on
+the column axis, 2 on the row axis.
+
+`factors`, 11 sheets, rank 975:
+
+| sheet | depths | construction |
+|---|---|---|
+| Fuels, Refrigerants, WTT-fuels, T&D, Material use, Business travel, Food, Water | `{0}` | pure constants |
+| **Home Office** | `{1}` | **31d — pure derived** |
+| Employees commuting | `{0,2}` | 40c+8d |
+| Electricity, heat, cooling | `{0,1,2}` | 3c+2d |
+
+`kg CO2e`, the output column, 11 sheets, rank 740: nine sheets pure
+derived at depth `{1}`; **Home Office at `{2}`**, one level deeper
+because its factors are computed rather than looked up; Employees
+commuting at `{1,3}`.
+
+Same column name, genuinely different construction, and the depth column
+carries the consequence downstream. This is the case scan three was
+built for, on a real workbook, and it is not noise — see `SSS_021` for
+the two occurrences per group that **are** artifacts, checked and
+separated rather than assumed clean.
+
+**Falsifier:** the Home Office factors column turning out to be a lookup
+after all, which a reader of that sheet can settle in a minute.
+
+**Status: SUPPORTED. What it means for the workbook is the operator's
+reading; the tool reports that the constructions differ.**
+
+---
+
+### SSS_021 — two of the differing occurrences per group are stacked-table artifacts, with a named cause
+
+`Electricity, heat, cooling` and `Water` differ from the rest of their
+groups because they carry **more than one table stacked in a column**.
+Their governed ranges contain the label text again — `F10` and `F15` on
+one, `E12` on the other — and `CHOICE 4` assumes **one label row per
+sheet**, so `governed()` runs straight through the second header and
+counts it as a constant in the data.
+
+Measured rather than assumed: for each occurrence, the count of cells in
+its governed range whose text normalizes to the group's own label. Two
+sheets return 2 and 1; the other nine return 0. So **2 of 4 differing
+occurrences per group are artifacts and 2 are real**, and `SSS_020`
+rests on the two that are.
+
+A real workbook exposed this and the fixture could not, for the same
+reason as `SSS_017`.
+
+**Falsifier:** a stacked sheet whose repeated header the label model
+already handles.
+
+**Status: SUPPORTED, unrepaired.** The repair is a label model that
+detects a second header row inside a governed range, which changes
+`CHOICE 4` for every sheet, not only these.
+
+---
+
+### SSS_022 — on the 22 cells scan three surfaced, the differential the Hub was supposed to show
+
+Flag set produced by **scan three**, not invented for scan two: the
+first cell governed by each occurrence of each listed column collision.
+22 cells across 11 sheets.
+
+| companion | present | absent |
+|---|---|---|
+| `unit` | **22** | 0 |
+| `date` | 0 | **22** |
+| `sample_size` | 0 | **22** |
+| `variance_sibling` | 0 | **22** |
+
+Uniform. **The emission-factor and result columns of this calculator
+carry a unit and carry no vintage, no sample size and no uncertainty
+within reach of the number** — which is the structural claim the
+Emission Factors Hub was offered to demonstrate, holding on a workbook
+that is not the Hub.
+
+It is one workbook and the Hub arm is still missing, so this is not the
+known-answer test `SSS_013` describes. It is one observation of the
+predicted differential.
+
+**Falsifier:** a factor column on any sheet carrying a variance sibling
+within the cross neighborhood.
+
+**Status: SUPPORTED, n=1 workbook.**
+
+---
+
+### SSS_023 — the `.xls` contingency fired, and the one available reader would not have helped
+
+`sheetmodel.read()` raised on the LGO Standard Inventory Report exactly
+as `TARGETS.md` §5 registered, and the CLI now reports it with rc 3
+rather than a traceback.
+
+**The slot stays unspent, and not out of stubbornness.** The workbook is
+valid BIFF8, five sheets, and carries **336 `FORMULA` records and 23
+`SHRFMLA`**. The one reader available for the format, `xlrd` 2.0.2,
+exposes `ctype` and `value` per cell and **no formula text** — it hands
+back cached values. Both scans are about the formula layer, so spending
+the budget on it delivers precisely the value-only view that `SSS_001`
+named as the reason to parse the XML directly. **The constraint's stated
+reason turns out to be load-bearing at the exact moment the budget would
+be spent.**
+
+The converter route is **untested here, not refuted**: LibreOffice is
+installed and fails with *"source file could not be loaded"* — and fails
+identically on a control input this tool parses without difficulty, so
+the install is broken in this environment and the result says nothing
+about the `.xls`. The route that would work is a conversion on a machine
+with a working LibreOffice, then the stdlib path on the `.xlsx`; a
+converted copy is a different artifact from the delivered one and any
+result should say so.
+
+**Falsifier:** a reader for this format that exposes formula text, which
+would make the budget worth spending.
+
+**Status: NOT SCANNED. The discriminator arm stands at one of three.**
+
+---
+
+### SSS_024 — the output screen ran in one of two command-line paths
+
+`scans.py main()` screened its table on every invocation. `epa_check.py`
+printed its profile unscreened, and the gap surfaced on a real run: the
+`unfccc` target's `not_registered` note carried a screened word.
+
+Wired into both, and the selftest now checks **every** target's render
+rather than one — the earlier check passed because it happened to use
+the target with no such note.
+
+Worth separating from a false alarm: the word was in prose about the
+*registration process*, not about a site on a sheet, which is the
+use-and-mention boundary `DF_010` names. The reword was cheap and
+keeping the screen strict is the point, so the prose moved rather than
+the screen.
+
+**Falsifier:** a third output path that prints without screening.
+
+**Status: REPAIRED.**

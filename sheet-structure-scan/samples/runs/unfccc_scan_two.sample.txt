@@ -1,0 +1,41 @@
+scan two -- companion absence
+workbook        unfccc.xlsx
+reader          stdlib-xlsx
+flag source     unfccc_flags.sample.txt (22 cells)
+radius          2 rows and columns, plus the two governing labels
+patterns        patterns.json
+companions      unit, date, sample_size, variance_sibling
+rank            direct dependents x downstream depth
+
+absent       searched the neighborhood, no match
+not_searched no pattern registered for that companion
+unsearched   N/S row band ran off the sheet; no-col-label the
+             cell sits outside any label block; no-row-label the
+             sheet has no label column
+
+rank  site                               kind             pdepth  deps  ddepth  nbrs  absent                             not_searched  unsearched
+----  ---------------------------------  ---------------  ------  ----  ------  ----  ---------------------------------  ------------  ----------
+8     Electricity, heat, cooling!D7      DERIVED          1       2     4       9     date,sample_size,variance_sibling  -             -
+4     Business travel - land and sea!G6  DERIVED          1       2     2       13    date,sample_size,variance_sibling  -             -
+3     Water!C6                           CONSTANT_NUMBER  0       1     3       7     date,sample_size,variance_sibling  -             -
+3     WTT- fuels!D6                      CONSTANT_NUMBER  0       1     3       11    date,sample_size,variance_sibling  -             -
+3     T&D!C6                             CONSTANT_NUMBER  0       1     3       8     date,sample_size,variance_sibling  -             S
+3     Refrigerants!C6                    CONSTANT_NUMBER  0       1     3       9     date,sample_size,variance_sibling  -             -
+3     Material use!C6                    CONSTANT_NUMBER  0       1     3       9     date,sample_size,variance_sibling  -             -
+3     Home Office!E6                     DERIVED          1       1     3       12    date,sample_size,variance_sibling  -             -
+3     Fuels!D6                           CONSTANT_NUMBER  0       1     3       11    date,sample_size,variance_sibling  -             -
+3     Food!C6                            CONSTANT_NUMBER  0       1     3       9     date,sample_size,variance_sibling  -             -
+3     Employees commuting!E6             CONSTANT_NUMBER  0       1     3       13    date,sample_size,variance_sibling  -             -
+3     Business travel - land and sea!E6  CONSTANT_NUMBER  0       1     3       13    date,sample_size,variance_sibling  -             -
+2     Water!E6                           DERIVED          1       1     2       7     date,sample_size,variance_sibling  -             -
+2     WTT- fuels!F6                      DERIVED          1       1     2       11    date,sample_size,variance_sibling  -             -
+2     T&D!E6                             DERIVED          1       1     2       8     date,sample_size,variance_sibling  -             S
+2     Refrigerants!E6                    DERIVED          1       1     2       9     date,sample_size,variance_sibling  -             -
+2     Material use!E6                    DERIVED          1       1     2       9     date,sample_size,variance_sibling  -             -
+2     Home Office!J6                     DERIVED          2       1     2       12    date,sample_size,variance_sibling  -             -
+2     Fuels!F6                           DERIVED          1       1     2       11    date,sample_size,variance_sibling  -             -
+2     Food!E6                            DERIVED          1       1     2       9     date,sample_size,variance_sibling  -             -
+2     Employees commuting!G6             DERIVED          1       1     2       13    date,sample_size,variance_sibling  -             -
+2     Electricity, heat, cooling!F7      DERIVED          2       1     2       9     date,sample_size,variance_sibling  -             -
+
+flagged cells: 22   with at least one absent companion: 22

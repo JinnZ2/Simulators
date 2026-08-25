@@ -144,9 +144,86 @@ about any EPA product**, and a criterion that separates two shapes
 written by one hand has not been shown to separate two written by
 another.
 
+## FIRST REAL RUN — 2026-08-25
+
+Two files arrived. `SSS_010` is closed.
+
+**UNFCCC GHG emissions calculator ver 01.1** (`.xlsx`, 19 sheets, 3656
+cells) — the pre-registered check, against thresholds pushed two commits
+before the file existed:
+
+```
+UNF-P1  derived_share    > 0.2      0.226     HELD
+UNF-P2  rank_zero_share  < 0.95     0.461     HELD
+UNF-P3  max_pdepth       > 2.0      5.000     HELD
+```
+
+**It did not hold on the first run.** `UNF-P1` came back `0.037`,
+`NOT_HELD`, and the reason was the reader, not the workbook: 720 of the
+825 formula cells are **shared formulas**, which store their text once on
+a group master and carry only an index on every follower. The reader
+took an empty `<f>` body as no formula and read **696 cells as
+constants** — 129 derived instead of 825, which is exactly the 105 plain
+formulas plus the 24 masters that carry text.
+
+That is what a threshold fixed in advance is for. `derived_share = 0.037`
+on a workbook described as a live calculator has an available and wrong
+reading — *this is mostly reference tables* — and nothing to argue with
+it. What made a reader defect the live hypothesis instead was `UNF-P2`
+and `UNF-P3` holding in the same run: the scan was finding propagation,
+just not enough of it.
+
+The diagnostic that found the defect **was itself wrong in the same
+direction** (`SSS_018`): a regex counting `<f>` elements, whose `[^>]*`
+swallowed the `/` of self-closing tags and merged them with the next real
+one, reporting 476 against a parse's 825. Both errors undercounted, so
+the diagnosis survived by luck.
+
+### What the scans found
+
+**Scan three: 4 groups listed of 33.** The substantive one is `factors`,
+appearing as a column label on 11 sheets. Eight carry pure constants at
+depth `{0}` — lookup tables. **`Home Office` carries `31d`, pure derived,
+at depth `{1}`: that sheet computes its emission factors where eight
+others hardcode them.** The consequence shows downstream in the `kg CO2e`
+output column, which sits at depth `{1}` on nine sheets and at `{2}` on
+Home Office.
+
+Two of the four differing occurrences per group are **artifacts with a
+named cause** and were separated rather than assumed clean: `Electricity,
+heat, cooling` and `Water` stack more than one table in a column, and
+`CHOICE 4` assumes one label row per sheet, so `governed()` runs through
+the second header. Measured by counting cells in each governed range
+whose text normalizes to the group's own label — two sheets return 2 and
+1, the other nine return 0.
+
+**Scan two, on the 22 cells scan three surfaced** (flag set produced by
+an upstream scan, not invented for the occasion):
+
+| companion | present | absent |
+|---|---|---|
+| `unit` | **22** | 0 |
+| `date` / `sample_size` / `variance_sibling` | 0 | **22** |
+
+Uniform. The factor and result columns carry a unit and carry no vintage,
+no sample size and no uncertainty within reach — which is the differential
+the Emission Factors Hub was offered to demonstrate, appearing on a
+workbook that is not the Hub.
+
+**The Climate Registry LGO Standard Inventory Report** (`.xls`) — the §5
+contingency fired as registered. The slot stays unspent for a reason: the
+file is valid BIFF8 carrying 336 `FORMULA` and 23 `SHRFMLA` records, and
+`xlrd` 2.0.2, the one reader for the format, exposes cached values and no
+formula text. Spending the budget on it delivers exactly the value-only
+view `SSS_001` named as the reason to parse XML directly. LibreOffice is
+installed, fails on this file, and fails identically on a control this
+tool parses — so the install is broken here and that result says nothing
+about the `.xls`.
+
 ## What has not been run
 
-No real workbook. Falsifiers F1–F4 in `SPEC.md` §6 all need one, and
+The Emission Factors Hub — the known-answer arm — and the EPA Local
+Tool. One of three discriminator arms has run. Falsifiers F1–F4 in `SPEC.md` §6 all need one, and
 until then the tool is checked against a fixture written by the same hand
 that wrote the scans. That is the same weakness `membership-probe`'s
 LIMITS section names about its own selftest, and it is stated here for

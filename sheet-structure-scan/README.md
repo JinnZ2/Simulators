@@ -27,6 +27,7 @@ python3 scans.py --selftest
 | `targets/TARGETS.md` | five workbooks, predictions registered before the data |
 | `targets/epa_check.py` | those predictions, runnable. `--selftest` |
 | `samples/` | one pinned run of each |
+| `samples/runs/` | the real workbook runs, as produced |
 
 ## The two constraints
 
@@ -85,7 +86,29 @@ Climate Registry tool). `--selftest` requires **each** arm to
 discriminate, since registering one that does not adds a name and no
 evidence.
 
-The targets are **not read**. The egress policy here is an **allowlist**,
+**First real run, 2026-08-25.** The UNFCCC calculator ran and holds 3 of
+3 — but not on the first attempt: `UNF-P1` came back `0.037` against a
+registered `> 0.20`, and the cause was the reader. 720 of the workbook's
+825 formula cells are **shared formulas**, whose text lives once on a
+group master, and the reader was reading the other **696 as constants**
+(`SSS_017`). A threshold fixed before the file existed is what made a
+reader defect the live hypothesis instead of a plausible, wrong story
+about the workbook. After the repair: `0.226`, held by a small margin.
+
+What the scans then found: **one sheet computes its emission factors
+where eight hardcode them** (`Home Office`, `31d` at depth `{1}` against
+`{0}` constants elsewhere), with the consequence visible one level deeper
+in the output column — and two of the four differing occurrences per
+group are stacked-table artifacts, checked and separated rather than
+assumed clean. On the 22 cells scan three surfaced, `unit` is present on
+22 and `date`, `sample_size` and `variance_sibling` are absent on 22.
+
+The `.xls` target fired the registered contingency, and the slot stays
+unspent for a reason: the file carries 336 `FORMULA` records and the one
+reader for the format hands back cached values with no formula text
+(`SSS_023`).
+
+The remaining targets are **not read**. The egress policy here is an **allowlist**,
 not a per-host block: `github.com` reaches the origin, `example.com`
 does not, and all four target hosts return 403 to CONNECT — timestamps
 in that file. Substituting a publisher does not help from inside this
@@ -102,7 +125,7 @@ definition, has a default, and is printed into the report header when it
 is in force — an absence measured at radius 2 and one measured at radius
 6 are different readings. `SPEC.md` §5 is the table.
 
-96 selftest checks across four modules: `sheetmodel` 25, `no_severity`
-11, `scans` 35, `targets/epa_check` 25.
+101 selftest checks across four modules: `sheetmodel` 26, `no_severity`
+11, `scans` 35, `targets/epa_check` 29.
 
 CC0. Stdlib only. Parses under Python 3.9.

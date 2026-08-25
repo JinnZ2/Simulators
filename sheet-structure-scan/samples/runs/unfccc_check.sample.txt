@@ -1,0 +1,36 @@
+target        UNFCCC GHG emissions calculator (ver 01.1)
+file          unfccc.xlsx
+predicted     a live calculator, so it carries formula chains
+flag rule     numeric constants that are not labels (793 of 3656 cells)
+
+sheets                19
+cells                 3656
+derived               825  (0.226)
+rank == 0             0.461
+rank == CYCLE         0
+max precedent depth   5
+
+companion PRESENT rate over the flag set
+  unit                0.546
+  date                0.016
+  sample_size         0.000
+  variance_sibling    0.000
+
+label groups >= 2     33  (column axis: 8)
+  listed, column      2  (0.250)
+  listed, row         2
+
+check   readout          predicted  observed  state
+------  ---------------  ---------  --------  -----
+UNF-P1  derived_share    > 0.2      0.226     HELD
+UNF-P2  rank_zero_share  < 0.95     0.461     HELD
+UNF-P3  max_pdepth       > 2.0      5.000     HELD
+
+3 of 3 registered predictions held.
+
+This is one arm. A profile from a live-calculator arm (local, tcr, unfccc) is what
+decides whether these numbers describe the workbook or describe
+the scan. One arm alone cannot tell them apart.
+
+not registered for this target:
+  no equivalent of LOC-P4. A cross-module collision prediction rests on the module structure being named BEFORE the file is opened, and it was not. Registering one from the workbook's own sheet list after opening it is a post-hoc threshold wearing a prediction's clothes.
