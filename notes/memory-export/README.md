@@ -26,7 +26,7 @@ is not true of the folder. Corrected rather than narrowed.)
 
 | tier | named in the manifest | landed |
 |---|---|---|
-| 1 — exported unchanged | 57 | 9 |
+| 1 — exported unchanged | 57 | 10 |
 | 2 — scrubbed and exported | 7 | 7 |
 | 3 — held back | 12 | 0, and none expected |
 
@@ -39,7 +39,7 @@ Tier 1, landed: `criterion-symmetry`, `rosetta-shape-core`,
 `force-expression-model`, `alignment-under-coupling`,
 `diversity-collapse-model`, `emergence-stability-simulator`,
 `fairmont-ecological-recovery`, `food-grain-monitor`,
-`semantic-drift-sim`. Filed as tier 1 by elimination — each was exported,
+`semantic-drift-sim`, `geometric-manifold`. Filed as tier 1 by elimination — each was exported,
 so none is tier 3, and none is in the manifest's tier-2 table. The manifest
 does not label files individually, so tier is inferred here and not carried in
 the files.
@@ -49,15 +49,31 @@ recorded upstream, not a gap here.
 
 ## Cross-refs that do not resolve
 
-The twelve files carry 21 links across 15 distinct names. Three now resolve to
+The seventeen files carry 23 links across 17 distinct names. Three resolve to
 stored files — `refusal-false-positive-log`, `criterion-symmetry`,
-`diversity-collapse-model`, the last two both linked from
-`alignment-under-coupling`. The other twelve are not in this folder:
+`diversity-collapse-model`. Fourteen do not:
 
 `uninstrumented`, `merit-anchoring`, `unnamed-instruments`,
 `identity-model-monoculture`, `shape-index`, `cross-model-calibration-toolkit`,
 `tool-off-metrology`, `median-case-calibration`, `question-availability`,
-`report-typing`, `rubric-backcasting`, `info-taxonomy`
+`report-typing`, `rubric-backcasting`, `info-taxonomy`,
+`geometric-to-binary-bridge`, `thermodynamic-accountability-framework`
+
+**The last two of those are not memory files at all — they are repositories,
+and both resolve.** `thermodynamic-accountability-framework` is
+`github.com/JinnZ2/thermodynamic-accountability-framework`, already cited from
+`earth_economics/` inside this repo. `geometric-to-binary-bridge` resolves
+under a near-name: `META_INDEX.md` lists `github.com/JinnZ2/geometric-to-binary`
+and `JinnZ2/CLAUDE.md` calls it Geometric-to-Binary-Computational-Bridge, so
+one artifact carries three name variants and the link matches none exactly.
+`geometric-manifold`, the file making both links, is itself
+`github.com/JinnZ2/Geometric-manifold`.
+
+(An earlier version of this README said the export's references split by kind —
+`[[...]]` into the memory namespace, plain names for repositories. That held
+for the first ten files and does not hold. Wikilink target kind is not uniform:
+most point into the memory namespace and dangle, some point at repositories and
+land. Corrected rather than narrowed.)
 
 Recorded rather than reconstructed — same handling `notes/README.md` gives the
 operator catalogue that `operators/D2.md` references and this repo does not
