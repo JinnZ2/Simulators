@@ -21,7 +21,7 @@ states the refutation protocol applies to it.
 
 | tier | named in the manifest | landed |
 |---|---|---|
-| 1 — exported unchanged | 57 | 45 |
+| 1 — exported unchanged | 57 | 46 |
 | 2 — scrubbed and exported | 7 | 7 |
 | 3 — held back | 12 | 0, and none expected |
 
@@ -30,6 +30,22 @@ absence is a choice recorded upstream, not a gap here.
 
 Tier is inferred, not carried: the manifest labels no file individually, so a
 file is filed tier 1 when it was exported and is not in the tier-2 table.
+
+## Scrub exemption, from `median-case-calibration` onward
+
+The operator directed that later files be **exempt from the manifest's
+person/place/occupation rules, to keep the memory dump intact**. So from
+`median-case-calibration` on, `SCRUB_RULES.md` no longer describes what is in
+`files/`.
+
+Concretely, that file carries occupational detail, equipment, operating
+conditions and a scale figure of the kind the manifest lists as categorically
+removed. It is stored as delivered and was not scrubbed here.
+
+This is recorded so a later reader does not read the difference as a scrub
+failure, and does not use `SCRUB_RULES.md` as an index of what the folder can
+contain. The manifest still describes the seven tier-2 files accurately; it no
+longer describes the folder.
 
 ## The cost
 

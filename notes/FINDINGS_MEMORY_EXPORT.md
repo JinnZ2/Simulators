@@ -2,13 +2,13 @@
 
 Read against `notes/memory-export/files/`, which is stored verbatim. Nothing
 here is a verdict on the export, and no stored file was modified. Counts are
-recomputed each batch and are a delivery state, not a result — 12 tier-1 files
+recomputed each batch and are a delivery state, not a result — 11 tier-1 files
 are still outstanding.
 
 ## 1. Cross-references, and what "unresolved" means
 
 ```
-52 files   66 links   33 distinct names   25 resolve in folder   8 do not
+53 files   74 links   35 distinct names   27 resolve in folder   8 do not
 ```
 
 "Not in the folder" covers three different situations, and the distinction was
@@ -466,6 +466,23 @@ and would have caught the same defects before they were relied on.
 
 Also recorded there, and worth carrying: prior passes are logged as
 RE-DERIVED, not continuously held.
+
+## 22. The scrub floor moved, by instruction
+
+From `median-case-calibration` onward the operator exempted files from the
+manifest's person/place/occupation rules to keep the memory dump intact. The
+folder README records it; it is noted here because it retires finding 11 as a
+live question rather than answering it.
+
+Finding 11 observed that the scrub removes an attribute class from the export
+that the linked public repos already carry, and left the weighing to the
+author. The weighing has now been done in the other direction, deliberately and
+with the manifest's own tier-3 reasoning as evidence that the tradeoff was
+understood before it was made. Nothing further is owed to that finding.
+
+What changes for a reader: `SCRUB_RULES.md` describes the seven tier-2 files
+and no longer describes the folder. Findings 9 and 10, which read the scrub's
+consistency off the files, apply only to files stored before this point.
 
 ## What was not checked, deliberately
 
