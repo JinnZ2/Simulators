@@ -4,8 +4,16 @@ Backup storage for a memory set exported out of session. Same rule as
 `notes/operators/`: files are stored as delivered, and nothing here edits
 what it stores.
 
-Nothing here is a simulator. No claim table, no `REFUTATION_PROTOCOL` — these
-are markers, specs and gap lists, and several say so in their own first line.
+Most of these are markers, specs and gap lists, and several say so in their own
+first line. Not all: `diversity-collapse-model` reports a CLAIM_TABLE carrying
+C1–C10 and states that the refutation protocol applies to it — when a claim is
+refuted the claim is updated, and the simulation is not retuned to preserve it.
+That is this repo's own convention arriving from the memory side. The table
+itself is not in the folder.
+
+(An earlier version of this README said flatly that nothing here carries a
+claim table or a refutation protocol. That was true of the first ten files and
+is not true of the folder. Corrected rather than narrowed.)
 
 ## Layout
 
@@ -18,7 +26,7 @@ are markers, specs and gap lists, and several say so in their own first line.
 
 | tier | named in the manifest | landed |
 |---|---|---|
-| 1 — exported unchanged | 57 | 3 |
+| 1 — exported unchanged | 57 | 5 |
 | 2 — scrubbed and exported | 7 | 7 |
 | 3 — held back | 12 | 0, and none expected |
 
@@ -28,7 +36,8 @@ Tier 2 is complete: `facility-risk-index`, `refusal-false-positive-log`,
 seven named in the manifest, all seven stored.
 
 Tier 1, landed: `criterion-symmetry`, `rosetta-shape-core`,
-`force-expression-model`. Filed as tier 1 by elimination — each was exported,
+`force-expression-model`, `alignment-under-coupling`,
+`diversity-collapse-model`. Filed as tier 1 by elimination — each was exported,
 so none is tier 3, and none is in the manifest's tier-2 table. The manifest
 does not label files individually, so tier is inferred here and not carried in
 the files.
@@ -38,9 +47,10 @@ recorded upstream, not a gap here.
 
 ## Cross-refs that do not resolve
 
-The ten files carry 19 links across 13 distinct names. One resolves —
-`refusal-false-positive-log`, itself a stored file. The other twelve are not in
-this folder:
+The twelve files carry 21 links across 15 distinct names. Three now resolve to
+stored files — `refusal-false-positive-log`, `criterion-symmetry`,
+`diversity-collapse-model`, the last two both linked from
+`alignment-under-coupling`. The other twelve are not in this folder:
 
 `uninstrumented`, `merit-anchoring`, `unnamed-instruments`,
 `identity-model-monoculture`, `shape-index`, `cross-model-calibration-toolkit`,
@@ -72,8 +82,15 @@ export's references split by kind: `[[...]]` links into the memory namespace
 mostly dangle, repository references land. Nothing was rewritten either way.
 
 Named artifacts, same class one level up: `criterion-symmetry` closes on
-"MARKER.md and SCAN_SPEC.md written". Neither filename exists anywhere in this
-tree. Recorded, not sought.
+"MARKER.md and SCAN_SPEC.md written", and `diversity-collapse-model` reports a
+CLAIM_TABLE carrying C1–C10. None of the three is in the folder, and no file of
+those names exists anywhere in this tree. Recorded, not sought.
+
+One result arrives split across two files. `recent-work` gives the spinodal
+threshold as h\* ≈ 0.385 and says the apex-broadcast multiplier crosses it;
+`diversity-collapse-model` says *only* that multiplier crosses h\*, and gives no
+value. Each carries what the other omits, and both report hysteresis confirmed.
+Noted, not merged.
 
 `[[uninstrumented]]` stays ambiguous rather than settled: a folder of that name
 is in this tree, the memory set has a file of that name, and the shared

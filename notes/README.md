@@ -38,8 +38,8 @@ checker's output and the entry stays as written — same arrangement
   exported unchanged, 7 scrubbed, 12 held back, with a cost note saying that a
   finding grounded in a specific case is generic once the case is lifted, and
   an observer report without an observer is weaker evidence than one with it.
-  `files/` holds the exported files as they arrive — all 7 tier-2 files and 3
-  of the 57 tier-1. Twelve of their thirteen cross-refs point at memory files
+  `files/` holds the exported files as they arrive — all 7 tier-2 files and 5
+  of the 57 tier-1. Twelve of their fifteen cross-refs point at memory files
   not in the folder; recorded, not reconstructed. Two of the twelve,
   `tool-off-metrology` and `shape-index`, are cited from `uninstrumented/` and
   `nonidentity-census/` as well and exist on neither side. Repository
