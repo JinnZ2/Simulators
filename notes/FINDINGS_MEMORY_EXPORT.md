@@ -2,13 +2,13 @@
 
 Read against `notes/memory-export/files/`, which is stored verbatim. Nothing
 here is a verdict on the export, and no stored file was modified. Counts are
-recomputed each batch and are a delivery state, not a result — 32 tier-1 files
+recomputed each batch and are a delivery state, not a result — 28 tier-1 files
 are still outstanding.
 
 ## 1. Cross-references, and what "unresolved" means
 
 ```
-32 files   37 links   25 distinct names   12 resolve in folder   13 do not
+36 files   38 links   26 distinct names   13 resolve in folder   13 do not
 ```
 
 "Not in the folder" covers three different situations, and the distinction was
@@ -22,10 +22,12 @@ it for. `rubric-backcasting` → `instrument-bias-sims/s3_rubric_backcast.py`.
 **Resolves as a repository.** `thermodynamic-accountability-framework`, cited
 from `earth_economics/` here. `emotions-as-sensors`, now also a stored file.
 `cyclic-programming` under a case variant, `github.com/JinnZ2/Cyclic-programming`.
-`geometric-to-binary-bridge` resolves only under a near-name — `META_INDEX.md`
-lists `geometric-to-binary`, `JinnZ2/CLAUDE.md` calls it
-Geometric-to-Binary-Computational-Bridge, so one artifact carries three name
-variants and the link matches none exactly.
+`geometric-to-binary-bridge` has arrived as a stored file, and its own `aliases`
+field carries `Geometric-to-Binary-Computational-Bridge`. That reconciles what
+was recorded here as an unresolvable near-name: `META_INDEX.md` lists
+`geometric-to-binary`, `JinnZ2/CLAUDE.md` uses the long form, and the memory
+file's alias list is what connects them. The variants were never three separate
+things; nothing in either repo carried the mapping.
 
 **Not found anywhere yet, which is not the same as absent.** This heading read
 "genuinely absent" until `voice-cloud-orchestrator` was filed under it and
@@ -49,10 +51,11 @@ in this repo, a separate repository under the same account
 (`fairmont-ecological-recovery`, `geometric-manifold`, `earth-systems-physics`),
 and a stored memory file.
 
-## 3. Four memory files are named for folders in this repo, and two were run
+## 3. Seven memory files are named for folders in this repo
 
-`emergence-stability-simulator`, `constraint-assembly`, `closure-cost`, and
-probably `uninstrumented`.
+`emergence-stability-simulator`, `constraint-assembly`, `closure-cost`,
+`equivalence-field`, `grounding-layers`, `inverseminar`, and probably
+`uninstrumented`.
 
 - `constraint-assembly` reports `assemble.py` (18/18); the selftest returns
   18/18, and grade-stop carries 4 components and 4 grounded rejections as
@@ -78,6 +81,22 @@ fields". A grep for those tokens returns three hits, all one function:
 audits against. The claim is about the data model and is true of it; the hits
 are the negative control. Use and mention, the same distinction `DF_010` and
 `UNI_009` record against scanners in this repo.
+
+## 3b. Sixth and seventh, both verified
+
+- `grounding-layers` names `holistic_field_state.py`, `field_compass.py`,
+  `determinacy_gate.py` and says four modules were built. Exactly four sit in
+  `grounding-layers/experimental/`; the unnamed fourth is
+  `calibration_channels.py`, matching the file's "confidence-gated orientation
+  layer". It also says a `simulation-hypothesis-budget` subdirectory exists in
+  the repo, and it does.
+- `inverseminar` claims a third channel CANNOT DERIVE and four verdicts —
+  corrected, answered, unprobed, confirmed. All five tokens are in
+  `inverseminar/inverseminar.py`.
+
+**`grounding-layers` is aliased to `Simulators`** — the repository this backup
+folder lives in. So the memory set holds a file for the repo storing it, and
+that file is filed under a folder name rather than the repo name.
 
 ## 4. The export reaches repo content the repo's own index does not
 
