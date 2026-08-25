@@ -4,6 +4,13 @@ Repository for different simulations and supporting tooling.
 
 ## Report form
 
+`READING_PROTOCOL.md` governs how every folder here is to be read: each is a
+marker for a sensed shape, not a thesis under defense. Test the fit, extend it,
+or report where it breaks — a break is a measurement and goes in the folder's
+`CLAIM_TABLE.md`, not an objection to be answered. Accepting a folder is as
+useless as rejecting it; both skip the test. When a claim is refuted the claim
+gets updated and the simulation does not get retuned to preserve it.
+
 `METHOD_SPEC.md` is upstream of `SHAPE_SPEC.md` and states the epistemic class:
 constraint-set reasoning is a METHOD, in the class of the scientific method and
 dimensional analysis. A method is not falsifiable and does not need to be — the
