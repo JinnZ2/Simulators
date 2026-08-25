@@ -34,5 +34,6 @@
     "plan_exists": "no",
     "practice_tracks_plan": "UNREAD",
     "why": "the fixture is a sentence; there is no document set behind it"
-  }
+  },
+  "enumeration_basis": "UNREAD"
 }

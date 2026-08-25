@@ -43,9 +43,11 @@ stop      level  what                                why
 upward    +2     UNFCCC GHG emissions calculator v…  highest level with a stated artifact; 1 level(s…
 downward   0     emissions [kg CO2e]                 deepest computed quantity                       
 
-   unmeasured_span: 3 level(s)
-   3 level(s) of the physical chain continue below the deepest q…
-   Emitted, not scored (S1a).
+   unmeasured_span_min: 3 level(s)
+   enumeration_basis:   author_read
+   at least 3 level(s) of the physical chain continue below the …
+   Emitted, not scored (S1a). The name is the reading: a floor,
+   not a measurement of the world.
 
    plan_exists yes | practice_tracks_plan UNREAD
    Its own column. It is not a basis and does not enter one.
@@ -84,3 +86,16 @@ ASSERTED + ABSENT: 3   measured + derived: 0
 P1 (soft majority): True
 P3 (at least one cell splits): True
 P4 (no magnitude anywhere): True
+
+unmeasured_span_min, and what may be compared
+
+term                     span_min  enumeration_basis
+-----------------------  --------  -----------------
+H1_grid_emission_factor  3         author_read      
+
+   REFUSED (author_read): H1_grid_emission_factor
+     only one term on this basis; nothing to compare it against
+
+   No difference is computed across a mismatch. Two floors
+   counted by different procedures are not two measurements
+   of one quantity.

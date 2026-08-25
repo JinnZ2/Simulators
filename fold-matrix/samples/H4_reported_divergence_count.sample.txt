@@ -26,9 +26,11 @@ stop      level  what                                why
 upward    +1     sheet-structure-scan/WORK_ORDER_4…  highest level with a stated artifact
 downward  -2     reader revision interval [years]    deepest computed quantity           
 
-   unmeasured_span: 0 level(s)
+   unmeasured_span_min: 0 level(s)
+   enumeration_basis:   document_named
    the deepest computed quantity is the deepest level named
-   Emitted, not scored (S1a).
+   Emitted, not scored (S1a). The name is the reading: a floor,
+   not a measurement of the world.
 
    plan_exists yes | practice_tracks_plan yes
    Its own column. It is not a basis and does not enter one.
@@ -68,3 +70,16 @@ ASSERTED + ABSENT: 1   measured + derived: 0
 P1 (soft majority): True
 P3 (at least one cell splits): False
 P4 (no magnitude anywhere): True
+
+unmeasured_span_min, and what may be compared
+
+term                          span_min  enumeration_basis
+----------------------------  --------  -----------------
+H4_reported_divergence_count  0         document_named   
+
+   REFUSED (document_named): H4_reported_divergence_count
+     only one term on this basis; nothing to compare it against
+
+   No difference is computed across a mismatch. Two floors
+   counted by different procedures are not two measurements
+   of one quantity.

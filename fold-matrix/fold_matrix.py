@@ -56,6 +56,15 @@ BASIS = (MEASURED, DERIVED, ASSERTED, ABSENT)
 VS_FIELDS = ("sign", "magnitude", "unit")
 SIGNS = ("+", "-", ABSENT)
 
+# FM_016 fix. How the downward level set was enumerated. Declared per
+# term, never inferred -- the same refusal as FM_013 on `computed`: a
+# grid loaded without this field DECLARES UNREAD, it does not get one
+# assigned from how good the levels look.
+DOCUMENT_NAMED = "document_named"
+PHYSICAL_TRACED = "physical_traced"
+AUTHOR_READ = "author_read"
+ENUMERATION_BASES = (DOCUMENT_NAMED, PHYSICAL_TRACED, AUTHOR_READ, "UNREAD")
+
 # S1a. Never merged into basis.
 YES, NO, UNREAD_STATE = "yes", "no", "UNREAD"
 PLAN_STATES = (YES, NO, UNREAD_STATE)
@@ -415,16 +424,35 @@ def downward_stop(term):
     return dict(best, why="deepest computed quantity")
 
 
+def enumeration_basis(term):
+    """How the downward level set was arrived at. Declared, never
+    inferred.
+
+    A grid with no declaration reads UNREAD. It does not get a basis
+    assigned from the levels looking well traced -- that inference is
+    the same failure FM_013 refuses for `computed`, and it is worse
+    here, because a plausible-looking level list is exactly what an
+    author produces from general knowledge without tracing anything.
+    """
+    b = (term.get("enumeration_basis") or "UNREAD")
+    return b if b in ENUMERATION_BASES else "UNREAD"
+
+
 def unmeasured_span(term):
     """Their downward stop against where the physical chain continues.
 
-    Emitted, never scored (S1a). The span is a count of levels between
-    the deepest computed quantity and the deepest level the term's own
-    grid names as still physically acting -- so it is bounded by what
-    was written down, and a term whose grid stops early reports a
-    smaller span than the world has. That understatement is stated
-    rather than corrected, because correcting it would mean inventing
-    levels.
+    Emitted, never scored (S1a). The emitted number is
+    `unmeasured_span_min` and the name is load-bearing: it counts levels
+    between the deepest computed quantity and the deepest level the
+    term's own grid NAMES, so it is a FLOOR on the real span, not a
+    measurement of it. A grid that stops early reports a smaller number
+    than the world has.
+
+    `unmeasured_span: 3` reads as a fact about the world.
+    `unmeasured_span_min: 3` reads as a floor, which is what it is. The
+    honest reading used to live in a note string where nothing
+    downstream could see it -- the same shape as a workbook stating a
+    relationship in prose that no cell maintains.
     """
     ds = downward_stop(term)
     downs = [lv for lv in term.get("levels", []) if lv["index"] < 0]
@@ -432,19 +460,22 @@ def unmeasured_span(term):
         deepest = None
     else:
         deepest = min(lv["index"] for lv in downs)
+    basis = enumeration_basis(term)
     if ds["index"] is None or deepest is None:
         return {"stop": ds["index"], "physical_floor_named": deepest,
-                "levels": None,
+                "unmeasured_span_min": None,
+                "enumeration_basis": basis,
                 "note": "not computable: %s"
                         % ("no computed quantity" if ds["index"] is None
                            else "the grid names no level below the term")}
     span = ds["index"] - deepest
     return {"stop": ds["index"], "physical_floor_named": deepest,
-            "levels": span,
-            "note": ("%d level(s) of the physical chain continue below "
-                     "the deepest quantity anyone computed. This is a "
-                     "count of what the grid names, and the grid is "
-                     "bounded by what was written down." % span)
+            "unmeasured_span_min": span,
+            "enumeration_basis": basis,
+            "note": ("at least %d level(s) of the physical chain continue "
+                     "below the deepest quantity anyone computed. A floor: "
+                     "it counts what the grid names, enumerated by %s."
+                     % (span, basis))
             if span > 0 else
             "the deepest computed quantity is the deepest level named"}
 
@@ -461,6 +492,50 @@ def plan_column(term):
     return {"plan_exists": pe, "practice_tracks_plan": pt,
             "invalid": bad,
             "why": p.get("why", "")}
+
+
+def compare_spans(terms):
+    """Cross-document comparison of unmeasured_span_min.
+
+    The amendment: a comparison requires MATCHING enumeration basis.
+    Mismatched, emit both and refuse the difference -- two floors
+    counted by different procedures are not two measurements of one
+    quantity, and subtracting them produces a number about the two
+    procedures.
+
+    Returns groups by basis and a refusal list. No difference is
+    computed across a mismatch anywhere in this function.
+    """
+    rows, groups = [], {}
+    for t in terms:
+        sp = unmeasured_span(t)
+        row = {"id": t.get("id", "?"),
+               "unmeasured_span_min": sp["unmeasured_span_min"],
+               "enumeration_basis": sp["enumeration_basis"]}
+        rows.append(row)
+        if row["unmeasured_span_min"] is not None:
+            groups.setdefault(row["enumeration_basis"], []).append(row)
+    comparable, refused = [], []
+    for b, g in sorted(groups.items()):
+        if b == "UNREAD":
+            refused.append((b, [r["id"] for r in g],
+                            "basis UNREAD: the level set was not declared, "
+                            "so nothing is known about what it counts"))
+        elif len(g) >= 2:
+            comparable.append((b, g))
+        else:
+            refused.append((b, [r["id"] for r in g],
+                            "only one term on this basis; nothing to "
+                            "compare it against"))
+    cross = [b for b in groups if b != "UNREAD"]
+    if len(cross) > 1:
+        refused.append(("MISMATCH", sorted(
+            r["id"] for b in cross for r in groups[b]),
+            "these terms were enumerated on different bases (%s); both "
+            "floors are emitted and the difference is refused"
+            % ", ".join(sorted(cross))))
+    return {"rows": rows, "comparable": comparable, "refused": refused,
+            "difference": None}
 
 
 # ---- scoring, which mostly refuses ------------------------------------
@@ -555,6 +630,10 @@ def validate(term):
             elif q.get("computed") and not q.get("unit"):
                 bad.append("level %s: computed quantity with no unit"
                            % lv.get("index"))
+    if "enumeration_basis" in term and \
+            term["enumeration_basis"] not in ENUMERATION_BASES:
+        bad.append("enumeration_basis %r not in %s"
+                   % (term["enumeration_basis"], list(ENUMERATION_BASES)))
     pc = plan_column(term)
     if pc["invalid"]:
         bad.append("plan column: %s not in %s"
@@ -659,6 +738,10 @@ def render_term(term, width=44):
     us = upward_stop(term)
     ds = downward_stop(term)
     sp = unmeasured_span(term)
+    if "enumeration_basis" in term and \
+            term["enumeration_basis"] not in ENUMERATION_BASES:
+        bad.append("enumeration_basis %r not in %s"
+                   % (term["enumeration_basis"], list(ENUMERATION_BASES)))
     pc = plan_column(term)
     L += ["", "S1a stops, from the document set"]
     L.append(table(
@@ -671,11 +754,16 @@ def render_term(term, width=44):
               " 0" if ds["index"] == 0 else ABSENT),
           _clip("%s [%s]" % (ds["quantity"], ds["unit"]), 34),
           _clip(ds["why"], 48)]]))
-    L += ["", "   unmeasured_span: %s" % (
-        "%d level(s)" % sp["levels"] if sp["levels"] is not None
-        else "not computable"),
+    L += ["", "   unmeasured_span_min: %s" % (
+        "%d level(s)" % sp["unmeasured_span_min"]
+        if sp["unmeasured_span_min"] is not None else "not computable"),
+        "   enumeration_basis:   %s%s"
+        % (sp["enumeration_basis"],
+           "  (default; not declared, not inferred)"
+           if sp["enumeration_basis"] == "UNREAD" else ""),
         "   %s" % _clip(sp["note"], 62),
-        "   Emitted, not scored (S1a)."]
+        "   Emitted, not scored (S1a). The name is the reading: a floor,",
+        "   not a measurement of the world."]
     L += ["",
           "   plan_exists %s | practice_tracks_plan %s"
           % (pc["plan_exists"], pc["practice_tracks_plan"]),
@@ -737,6 +825,24 @@ def render(terms):
           "P3 (at least one cell splits): %s"
           % tally["P3_at_least_one_split"],
           "P4 (no magnitude anywhere): %s" % tally["P4_no_magnitude"]]
+    cs = compare_spans([t for t in terms if not validate(t)])
+    rows = [r for r in cs["rows"] if r["unmeasured_span_min"] is not None]
+    if rows:
+        L += ["", "unmeasured_span_min, and what may be compared", ""]
+        L.append(table(["term", "span_min", "enumeration_basis"],
+                       [[r["id"], r["unmeasured_span_min"],
+                         r["enumeration_basis"]] for r in rows]))
+        for b, g in cs["comparable"]:
+            L += ["", "   comparable on basis %s: %s"
+                  % (b, ", ".join(r["id"] for r in g))]
+        for b, ids, why in cs["refused"]:
+            L += ["", "   REFUSED (%s): %s" % (b, ", ".join(ids)),
+                  "     %s" % why]
+        L += ["",
+              "   No difference is computed across a mismatch. Two floors",
+              "   counted by different procedures are not two measurements",
+              "   of one quantity."]
+
     if tally["excluded_not_evaluable"]:
         L += ["",
               "excluded from this tally as NOT_EVALUABLE (S3): %s"
@@ -975,17 +1081,60 @@ def _selftest():
     ck("a real physical quantity nobody computed is below the floor",
        downward_stop(T1)["quantity"], "emissions")
     ck("and the span counts what continues below it",
-       unmeasured_span(T1)["levels"], 2)
+       unmeasured_span(T1)["unmeasured_span_min"], 2)
     ck("a term computing nothing has no floor rather than floor zero",
        downward_stop({"levels": [{"index": 0, "basis": ABSENT}]})["index"],
        None)
     ck("and its span is not computable rather than zero",
-       unmeasured_span({"levels": [{"index": 0, "basis": ABSENT}]})["levels"],
-       None)
+       unmeasured_span({"levels": [{"index": 0, "basis": ABSENT}]}
+                       )["unmeasured_span_min"], None)
     ck("a quantified block with no `computed` field does not load",
        len(validate({"levels": [{"index": 0, "basis": MEASURED,
                                  "quantified": {"quantity": "x",
                                                 "unit": "u"}}]})), 1)
+
+    # ---- FM_016 fix: enumeration_basis, declared and never inferred.
+    ck("an undeclared basis reads UNREAD",
+       enumeration_basis({}), "UNREAD")
+    ck("a well-traced-looking grid still reads UNREAD without a declaration",
+       enumeration_basis(T1), "UNREAD")
+    ck("a declared basis is carried",
+       enumeration_basis({"enumeration_basis": DOCUMENT_NAMED}),
+       DOCUMENT_NAMED)
+    ck("an out-of-vocabulary basis does not load",
+       len(validate({"enumeration_basis": "looked at it"})), 1)
+    ck("and does not silently become UNREAD in a loaded term",
+       "enumeration_basis" in validate(
+           {"enumeration_basis": "looked at it"})[0], True)
+
+    # The emitted number is named for what it is.
+    sp = unmeasured_span(dict(T1, enumeration_basis=AUTHOR_READ))
+    ck("the emitted number is unmeasured_span_min",
+       sorted(k for k in sp if "span" in k), ["unmeasured_span_min"])
+    ck("and the basis travels with it", sp["enumeration_basis"], AUTHOR_READ)
+    ck("the note says floor, not measurement",
+       sp["note"].startswith("at least"), True)
+
+    # ---- comparison across documents requires a matching basis.
+    A = dict(T1, id="A", enumeration_basis=AUTHOR_READ)
+    B = dict(T1, id="B", enumeration_basis=DOCUMENT_NAMED)
+    A2 = dict(T1, id="A2", enumeration_basis=AUTHOR_READ)
+    U = dict(T1, id="U")
+    cs = compare_spans([A, B])
+    ck("a mismatched pair is refused", [r[0] for r in cs["refused"]].count(
+        "MISMATCH"), 1)
+    ck("and no difference is computed anywhere", cs["difference"], None)
+    ck("both floors are still emitted",
+       sorted(r["id"] for r in cs["rows"]), ["A", "B"])
+    ck("a matching pair is comparable",
+       [b for b, _g in compare_spans([A, A2])["comparable"]], [AUTHOR_READ])
+    ck("an UNREAD basis is refused even against itself",
+       [b for b, _g in compare_spans([U, dict(U, id="U2")])["comparable"]],
+       [])
+    # Composed from tokens so the check does not match its own source.
+    src = open(os.path.abspath(__file__)).read()
+    ck("no difference of two span_min values is computed in this module",
+       ("span" + "_min\"] -" in src) or ("span" + "_min'] -" in src), False)
 
     # ---- S1a's plan column is separate and stays separate.
     pc = plan_column({"plan": {"plan_exists": YES,

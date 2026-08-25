@@ -48,6 +48,20 @@ fold_matrix selftest
   a term computing nothing has no floor rather than floor zero PASS got=None want=None
   and its span is not computable rather than zero            PASS got=None want=None
   a quantified block with no `computed` field does not load  PASS got=1 want=1
+  an undeclared basis reads UNREAD                           PASS got='UNREAD' want='UNREAD'
+  a well-traced-looking grid still reads UNREAD without a declaration PASS got='UNREAD' want='UNREAD'
+  a declared basis is carried                                PASS got='document_named' want='document_named'
+  an out-of-vocabulary basis does not load                   PASS got=1 want=1
+  and does not silently become UNREAD in a loaded term       PASS got=True want=True
+  the emitted number is unmeasured_span_min                  PASS got=['unmeasured_span_min'] want=['unmeasured_span_min']
+  and the basis travels with it                              PASS got='author_read' want='author_read'
+  the note says floor, not measurement                       PASS got=True want=True
+  a mismatched pair is refused                               PASS got=1 want=1
+  and no difference is computed anywhere                     PASS got=None want=None
+  both floors are still emitted                              PASS got=['A', 'B'] want=['A', 'B']
+  a matching pair is comparable                              PASS got=['author_read'] want=['author_read']
+  an UNREAD basis is refused even against itself             PASS got=[] want=[]
+  no difference of two span_min values is computed in this module PASS got=False want=False
   the plan column reads its own key                          PASS got=('yes', 'no') want=('yes', 'no')
   an unstated plan column reads UNREAD, not no               PASS got='UNREAD' want='UNREAD'
   an out-of-vocabulary plan state does not load              PASS got=1 want=1

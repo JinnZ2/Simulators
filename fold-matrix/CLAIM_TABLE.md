@@ -419,14 +419,22 @@ inventing levels nobody wrote down.
 | H2, H3 | none computed | not computable | not zero |
 
 H4's zero is partly the disclosed understatement: its grid names two
-downward levels and computes at the deeper one. The contrast is real and
-its size is bounded by what each grid names, so it is reported as a
-comparison of two documents and not of two systems.
+downward levels and computes at the deeper one.
+
+**CORRECTED by `FM_018`.** The paragraph that stood here read the 3-vs-0
+contrast as *"real, and its size bounded by what each grid names"*,
+hedged as a comparison of two documents rather than two systems. The
+`enumeration_basis` amendment **refuses that comparison outright**: H1's
+levels are `author_read` and H4's are `document_named`, so the two floors
+were counted by different procedures and their difference is a number
+about the procedures. The hedge was weaker than the refusal, and the
+refusal is now in code.
 
 **Falsifier:** a term whose named grid reaches its physical floor, which
 would make the span exact rather than a lower bound.
 
-**Status: SUPPORTED, with the bound stated.**
+**Status: SUPPORTED on the understatement; the cross-term contrast is
+WITHDRAWN and refused in code.**
 
 ---
 
@@ -449,3 +457,51 @@ zero, never as empty.**
 **Falsifier:** a path where 0 and ABSENT reach the same reading.
 
 **Status: SUPPORTED.**
+
+
+---
+
+### FM_018 — the amendment refuses a comparison this claim table published, and the rename is the larger half
+
+The `FM_016` fix lands three things.
+
+**`enumeration_basis`, declared and never inferred.** Four values —
+`document_named` / `physical_traced` / `author_read` / `UNREAD` — with
+`UNREAD` the default. A grid loaded without the field **declares**
+UNREAD; it does not get one assigned from how well traced its levels
+look. That is `FM_013`'s refusal on `computed`, and it is sharper here,
+because a plausible level list is exactly what an author produces from
+general knowledge without tracing anything.
+
+The fixtures declare honestly, and the honest answer is not the
+flattering one:
+
+| term | basis | why |
+|---|---|---|
+| H1 grid emission factor | **`author_read`** | the workbook names none of these levels; they were listed from the author's reading of how a grid factor is built, with no source cited for the combustion, dispatch or mix levels |
+| H4 reported divergence count | `document_named` | both levels are the neglected terms named in the claim records the reading rests on |
+| H2, H3 | `UNREAD` | no downward level set to enumerate |
+
+**The comparison is refused.** `compare_spans()` groups by basis and
+emits both floors; across a mismatch it computes nothing, and
+`difference` is `None` on every path. A selftest check reads this
+module's own source and asserts no subtraction of two `span_min` values
+appears in it.
+
+**And that refuses `FM_016`'s own published contrast.** H1's 3 against
+H4's 0 was reported with a hedge — *a comparison of two documents and not
+of two systems* — and the hedge was weaker than the refusal. `FM_016` is
+corrected in place rather than rewritten.
+
+**The rename is the larger half.** `unmeasured_span: 3` reads as a
+measurement of the world; **`unmeasured_span_min: 3` reads as a floor**,
+which is what `FM_016` says it is. Before the amendment the honest
+reading lived in a `note` string, where nothing downstream could see it —
+**the same shape as a workbook stating a relationship in prose that no
+cell maintains**, which is the object scan 4 was built to find. The
+instrument was doing to its own output what it audits workbooks for.
+
+**Falsifier:** a path by which a basis is assigned rather than declared,
+or a difference computed across a mismatch.
+
+**Status: SUPPORTED. `FM_016` corrected, not defended.**

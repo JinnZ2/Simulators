@@ -133,5 +133,7 @@
     "plan_exists": "yes",
     "practice_tracks_plan": "UNREAD",
     "why": "Disclaimer!A3 states the purpose, so a plan exists in the document set. Whether any user's practice tracks it is not readable from this artifact and no other artifact was consulted."
-  }
+  },
+  "enumeration_basis": "author_read",
+  "_enumeration_note": "the workbook names none of these levels. They were listed from the author's reading of how a grid emission factor is constructed, with no source cited for the combustion, dispatch or mix levels, so this is author_read and not physical_traced."
 }

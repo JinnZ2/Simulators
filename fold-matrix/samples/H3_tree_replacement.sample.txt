@@ -33,9 +33,11 @@ stop      level   what             why
 upward    ABSENT  ABSENT           no positive level carries a stated artifact, so…
 downward  ABSENT  ABSENT [ABSENT]  no level carries a quantity the organisation co…
 
-   unmeasured_span: not computable
+   unmeasured_span_min: not computable
+   enumeration_basis:   UNREAD  (default; not declared, not inferred)
    not computable: no computed quantity
-   Emitted, not scored (S1a).
+   Emitted, not scored (S1a). The name is the reading: a floor,
+   not a measurement of the world.
 
    plan_exists no | practice_tracks_plan UNREAD
    Its own column. It is not a basis and does not enter one.

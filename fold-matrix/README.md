@@ -11,7 +11,7 @@ not one number.
 | `terms/` | the four S6 fixtures, as data |
 | `PREDICTIONS_WO8.md` | S2's v1 prediction |
 | `PREDICTIONS_WO8_V2.md` | the revised prediction, and what is not blind about it |
-| `CLAIM_TABLE.md` | `FM_001..017` |
+| `CLAIM_TABLE.md` | `FM_001..018` |
 | `samples/` | one pinned run of each |
 
 ```
@@ -72,9 +72,30 @@ the rule is written against, and the schema stops them at load.
 
 The span **understates by construction**: it counts what the grid names,
 and a grid that stops early reports a smaller span than the world has.
-Disclosed rather than corrected, since correcting means inventing levels.
-H4 returns 0 partly for that reason, so the H1-vs-H4 contrast is a
-comparison of two documents and not of two systems.
+
+**The `FM_016` fix makes that readable instead of disclosed.**
+`enumeration_basis` is declared per term — `document_named` /
+`physical_traced` / `author_read` / `UNREAD` — and **never inferred**: a
+grid loaded without it *declares* UNREAD rather than getting one assigned
+from how well traced its levels look. That is `FM_013`'s refusal again,
+sharper here, because a plausible level list is exactly what an author
+produces from general knowledge without tracing anything. H1 declares
+`author_read`, which is the unflattering answer and the true one: the
+workbook names none of those levels.
+
+**And the emitted number is renamed.** `unmeasured_span: 3` reads as a
+measurement of the world; **`unmeasured_span_min: 3` reads as a floor**,
+which is what it is. Before the amendment the honest reading lived in a
+`note` string where nothing downstream could see it — the same shape as a
+workbook stating a relationship in prose that no cell maintains, which is
+the object scan 4 exists to find.
+
+**Cross-document comparison now requires a matching basis.** H1 is
+`author_read` and H4 is `document_named`, so the 3-vs-0 contrast this
+README used to report is **refused**: both floors are emitted and the
+difference is not computed. A selftest check reads the module's own
+source and asserts no subtraction of two `span_min` values appears in it.
+`FM_016` is corrected in place rather than defended.
 
 `plan_exists` / `practice_tracks_plan` is its own column and the code
 cannot merge it into `basis` — asserted in the selftest.
@@ -180,4 +201,4 @@ real case. This is one: S3's efficiency class is
 with a fourth check asserting the list is length one so a widening turns
 red.
 
-60 selftest checks. Stdlib only, parses under Python 3.9. CC0.
+74 selftest checks. Stdlib only, parses under Python 3.9. CC0.

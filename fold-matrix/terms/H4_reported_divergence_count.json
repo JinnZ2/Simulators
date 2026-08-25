@@ -85,5 +85,7 @@
     "plan_exists": "yes",
     "practice_tracks_plan": "yes",
     "why": "the work order states what the scan is for and the scan's own selftest checks that it does it; both are in the repository"
-  }
+  },
+  "enumeration_basis": "document_named",
+  "_enumeration_note": "both downward levels are the neglected terms named in the claim records the reading rests on: claim-record SSS_017 names the reader revision, UNF_GRID_IRAQ names the generation mix."
 }

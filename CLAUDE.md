@@ -6428,8 +6428,28 @@ underneath).
   are pinned apart. **`FM_015`:** the registered prediction is **not
   blind on H1** and says so — `Disclaimer!A3` was already read in this
   session during the v1 run, so P3 and P4 are registered because the
-  format is new rather than because the source was unread. 60 selftest
-  checks. Stdlib only, parses under 3.9, CC0.
+  format is new rather than because the source was unread. **`FM_018`, an
+  amendment that refuses a comparison this folder had published:**
+  `enumeration_basis` is now declared per term (`document_named` /
+  `physical_traced` / `author_read` / `UNREAD`) and **never inferred** —
+  a grid loaded without it *declares* UNREAD rather than getting one
+  assigned from how well traced its levels look, which is `FM_013`'s
+  refusal and sharper here, since a plausible level list is exactly what
+  an author produces from general knowledge without tracing anything. H1
+  declares **`author_read`**, the unflattering answer and the true one
+  (the workbook names none of those levels), against H4's
+  `document_named` — so the 3-vs-0 contrast `FM_016` reported with a
+  hedge is **refused outright**: both floors are emitted, the difference
+  is computed on no path, and a selftest check reads the module's own
+  source to assert no subtraction of two `span_min` values appears in it.
+  `FM_016` is corrected in place rather than defended. **The rename is
+  the larger half**: `unmeasured_span: 3` reads as a measurement of the
+  world and **`unmeasured_span_min: 3` reads as a floor**, which is what
+  it is — before the amendment the honest reading lived in a `note`
+  string where nothing downstream could see it, **the same shape as a
+  workbook stating a relationship in prose that no cell maintains**,
+  which is the object scan 4 was built to find. 74 selftest checks.
+  Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
