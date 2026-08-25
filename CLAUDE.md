@@ -6822,6 +6822,61 @@ underneath).
   answer declared by a generator's own authors would measure the
   **instrument**, which is `null-harness`'s known-truth-first invariant
   and which this folder has never had.
+- `move-set/` — An audit reproduced as a **move set** rather than a
+  reasoning trace, delivered verbatim with one filled run. The claim:
+  *the chain is path-dependent, the moves are not* — each move's trigger
+  is a property of the artifact ("artifact ships a number", "artifact
+  reports an aggregate"), never of the previous answer, so the six can
+  be asked in any order. `move_set_sim.py` ships the set, a scorer and a
+  falsifier for that claim; `ledgers/wolf_dominance.json` is one filled
+  run. Audit in `move_set_audit.py` (imports both, edits neither),
+  claims `MV_001..MV_009`. **`MV_001`, the target and it is built:** a
+  correctly-refused verdict scores as high as a correct one — five
+  refusal verdicts (`NOT_DERIVABLE`, `NOT_SEPARABLE`, `NOT_ADDRESSABLE`,
+  `SHARE_IS_NONE`, `INSTRUMENT_BLIND`) score 1.0 exactly as `RESOLVED`
+  does, `refusal_fraction` is reported and never penalized, and
+  `moves_not_run` is first-class; the delivered run is 4 refusals and 2
+  answers at 6.0 of 6.0. **`MV_002`, the headline:** the docstring names
+  its own load-bearing guard — *"a bare 'I don't know' is not a refusal
+  and scores zero. This is the only thing keeping symmetric scoring from
+  being gameable"* — and the implementation checks that two strings are
+  non-empty. Null-tested: a ledger with `"x"` in every blocker and
+  unblocker scores **6.0 of 6.0, identical to the delivered run**.
+  `adaptive-claim-loop` `ACL_012` is the same finding and already
+  carries the repair (ask for a number, not a sentence), with `ACL_017`
+  bounding what it buys. **`MV_004`, the one that outlives a count
+  fix:** `path_dependence` tests its consequence without checking its
+  precondition — it compares `(move, verdict)` sets across runs, which
+  is order-invariant and correct, and **nothing checks that the runs
+  used different orders**; two byte-identical copies of one ledger
+  return `ORDERLESS -- claim holds`. The precondition is not merely
+  unchecked but unrecorded: `emit()` returns an `order` key and the
+  `ledger_schema` it ships in the same dict has no field for it, so
+  `MF_017`'s stated-rule-with-no-schema-field lands in the one function
+  that exists to falsify the module's central claim. **`MV_003`:** at
+  zero runs the falsifier reports order dependence and at one run a
+  pass — both edges wrong in opposite directions, the `PCH_001` shape.
+  **`MV_005`:** `NO_FINDING` scores 0, so on the one move that runs on
+  every artifact, *"I looked and nothing is hidden here"* is the single
+  outcome that costs a point under a rule about symmetric scoring — a
+  gradient toward reporting something. **`MV_007`:** the delivered
+  ledger contradicts itself on **venue tier** — M3 says same-authorship
+  makes venue-tier confounds drop out, M5 says a book in print is
+  undercounted relative to a journal article, and M3's own locator names
+  the pair as a **1970 book** and a **1999 article**; M5 is right and
+  M3's third clause is the error. Nothing in the harness compares
+  entries to each other, which is a real cost of orderlessness rather
+  than a defect, since a cross-entry check reintroduces the dependency
+  the design removes. **`MV_008`:** the ledger's subject is
+  `observer-exclusion/`'s trigger case — the wolf dominance model
+  against the 1999 correction — reached through a different instrument,
+  with M4's `SHARE_IS_NONE` landing on `OE_003`'s differential-archiving
+  result from the denominator side and M5's unblocker (count assertions
+  WITHOUT citation, over a denominator of documents discussing pack
+  structure at all) supplying the bounded corpus both folders say is
+  missing. **`MV_009` UNVERIFIED:** every subject-matter fact in the
+  ledger is carried and egress-blocked, and nothing in `MV_001..MV_008`
+  rests on any of them. Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

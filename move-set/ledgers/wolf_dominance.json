@@ -1,0 +1,36 @@
+[
+  {
+    "move": "M1_provenance",
+    "verdict": "NOT_DERIVABLE",
+    "blocker": "Per-year citing-work counts for DOI 10.1139/z99-099 are not reachable from this session. Semantic Scholar returned empty on both the paper page and the CorpusID endpoint; Google Scholar blocks automated fetch; the execution container has no network.",
+    "unblocker": "One OpenAlex query on the DOI returning counts_by_year for citing works. Free, no key, no institutional access. Same query against the 1970 book's work id."
+  },
+  {
+    "move": "M2_substitution",
+    "verdict": "RESOLVED",
+    "evidence_locator": "Mech 1999, Can. J. Zool. 77:1196-1203, DOI 10.1139/z99-099. Superseded carrier identified as two distinct objects, not one: Schenkel 1947 (captive Basel Zoo packs, origin of the dominance reading) and Mech 1970 'The Wolf' (the synthesis that popularized it, still in print)."
+  },
+  {
+    "move": "M3_relation_held",
+    "verdict": "RESOLVED",
+    "evidence_locator": "Same-author control is available and unusually clean: Mech authored both the superseded carrier (1970) and the correction (1999). Author prestige, field, and venue-tier confounds drop out of the ratio."
+  },
+  {
+    "move": "M5_self_report",
+    "verdict": "INSTRUMENT_BLIND",
+    "blocker": "Citation indices cannot report the channel where the superseded reading was observed persisting. A book still in print is undercounted by Scholar/Scopus relative to a journal article, and an uncited background assertion in coursework or trade writing emits no citation event at all. A null or weak A4 result is therefore uninformative about the observed persistence.",
+    "unblocker": "Count assertions WITHOUT citation, in a corpus that has them: textbook/coursework/trade-press mentions of wolf-derived hierarchy, by year, over a denominator of documents that discuss pack social structure or leadership hierarchy at all."
+  },
+  {
+    "move": "M4_perturb",
+    "verdict": "SHARE_IS_NONE",
+    "blocker": "A 'share of the literature still carrying the superseded reading' has no denominator. The set of documents that COULD have cited the correction is not enumerable; citation databases index the numerator only.",
+    "unblocker": "Fix a bounded corpus first (one journal, or one textbook series, or one syllabus set) so the denominator is constructed rather than assumed."
+  },
+  {
+    "move": "M6_absence",
+    "verdict": "NOT_ADDRESSABLE",
+    "blocker": "No bibliometric study of this correction appears to exist. Searched; found popular-press accounts of the correction and interviews with Mech, no citation-trajectory analysis. So the question is formable but nothing published can currently receive it.",
+    "unblocker": "The A4b design below. It is small enough for one undergraduate and needs no access gate."
+  }
+]
