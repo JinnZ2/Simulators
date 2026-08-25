@@ -33,12 +33,14 @@ checker's output and the entry stays as written — same arrangement
   tree, its stated signature holds on one of them, and its two
   representations turn out to be five different kinds of pair.
 
-- `memory-export/SCRUB_RULES.md` — scrub rules and tier assignment for the
-  public export of a memory set: 57 files exported unchanged, 7 scrubbed, 12
-  held back. Carries its own cost note — a finding grounded in a specific case
-  is generic once the case is lifted, and an observer report without an
-  observer is weaker evidence than one with it. Stored, not checked: the
-  manifest arrived without the files it describes.
+- `memory-export/` — backup of a memory set exported out of session.
+  `SCRUB_RULES.md` carries the scrub rules and tier assignment: 57 files
+  exported unchanged, 7 scrubbed, 12 held back, with a cost note saying that a
+  finding grounded in a specific case is generic once the case is lifted, and
+  an observer report without an observer is weaker evidence than one with it.
+  `files/` holds the exported files as they arrive — 4 of the 7 tier-2 files so
+  far, none of tier 1. Six cross-refs in them point at memory files not in the
+  folder; recorded, not reconstructed.
 
 The catalogue this is filed into — the A and D families, D1, A3, A4, the
 compound field-modifier — is not in this repo. `D2.md` references them and
