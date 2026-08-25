@@ -243,10 +243,9 @@ other thing.
 
 ## Claims from the EPA targets, before the data
 
-Three workbooks were named as targets. **None has been read**: this
-session's egress gateway answers 403 to CONNECT for `www.epa.gov`, logged
-2026-08-25T15:14:12Z–15:14:13Z with DNS resolving normally. Details and
-the pre-registration in [`targets/EPA.md`](targets/EPA.md).
+Five workbooks are named as targets across three publishers. **None has
+been read.** Details and the pre-registration in
+[`targets/TARGETS.md`](targets/TARGETS.md).
 
 ---
 
@@ -347,3 +346,73 @@ selftest, and six of the ten are negatives.
 present on a header carrying no unit.
 
 **Status: SUPPORTED as a disclosure. The tuning is real and bounded.**
+
+---
+
+### SSS_015 — the egress denial is an allowlist, so substituting a publisher does not help
+
+Four target hosts, three publishers, all 403 at CONNECT:
+
+| host | result |
+|---|---|
+| `www.epa.gov` | 403 to CONNECT, 15:14:12Z |
+| `unfccc.int` | 403 to CONNECT, 15:40:03Z |
+| `www.theclimateregistry.org` | 403 to CONNECT, 15:40:03Z |
+| `example.com` | 403 to CONNECT, 15:40:15Z |
+| `github.com` | **400 from the origin** |
+| `raw.githubusercontent.com` | **301 from the origin** |
+
+DNS resolves for all six. **`github.com` returning a real HTTP status
+while `example.com` does not is what separates an allowlist from a
+denylist aimed at a publisher.** The inference that a different host
+would not be covered by an `epa.gov` denial is reasonable, was testable,
+was tested, and does not hold here: `unfccc.int` and
+`theclimateregistry.org` were denied for the same reason as the first
+host, not for a reason about them.
+
+What this rules out is a strategy, not just two files: no public
+workbook publisher is reachable from this session, so there is no third
+host worth trying. Fetching the same bytes from a mirror on an allowed
+host is available and was **not** done — that is circumventing the
+denial rather than complying with it, and it is the operator's call.
+
+**Falsifier:** any non-allowlisted host returning a status from the
+origin.
+
+**Status: SUPPORTED. Four attempts, no retries, no alternate route.**
+
+---
+
+### SSS_016 — three arms are registered for the discriminator, and each is required to discriminate
+
+`local`, `unfccc` and `tcr` all serve the live-calculator arm. They are
+registered separately rather than merged, because **the predictions that
+follow from "a live calculator" are not the predictions that follow from
+a described module structure.**
+
+`P1`–`P3` — derived share, rank-zero share, max precedent depth — are
+registered for all three, since each follows from the one structural
+fact stated about each workbook.
+
+`P4`, the cross-module collision, is registered **only for `local`**,
+where the community and government-operations modules were named in
+advance. For `unfccc` and `tcr` it is explicitly not registered and the
+report prints why: a collision prediction read off a workbook's own
+sheet list *after* opening it is a post-hoc threshold wearing a
+prediction's clothes.
+
+The selftest asserts per arm that the chain shape holds every one of its
+predictions and the flat shape fails its first two. Asserted per arm and
+not once, because **registering a second discriminator that does not
+discriminate adds a name and no evidence** — which is the failure mode
+`SSS_013` exists to prevent, one level up.
+
+`tcr` carries one open item: its file format was not stated, so the
+legacy `.xls` contingency in `SSS_001` may still be spent there. The
+`.xlsx` on the UNFCCC target does close it for that one.
+
+**Falsifier:** a real live calculator returning `rank_zero_share > 0.95`
+— which would either refute "live calculator implies formula chains" or
+implicate the scan, and the other two arms are what tell those apart.
+
+**Status: SPECIFIED. No arm has been run.**

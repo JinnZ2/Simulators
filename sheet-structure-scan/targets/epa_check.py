@@ -1,11 +1,24 @@
 #!/usr/bin/env python3
 """
-epa_check -- the three EPA workbooks, pre-registered before the data.
+epa_check -- the target workbooks, pre-registered before the data.
 
-The workbooks are named in targets/EPA.md. None has been read: this
-session's egress gateway answers 403 to CONNECT for www.epa.gov, logged
-at 2026-08-25T15:14:12Z through 15:14:13Z, DNS resolving normally, so it
-is a policy denial and not a network fault.
+The workbooks are named in targets/TARGETS.md. None has been read. The
+egress gateway answers 403 to CONNECT for every one of their hosts, and
+the shape of the denial is worth stating exactly, because it decides
+whether trying another host is worth anything:
+
+  www.epa.gov                403     2026-08-25T15:14:12Z
+  unfccc.int                 403     2026-08-25T15:40:03Z
+  www.theclimateregistry.org 403     2026-08-25T15:40:03Z
+  example.com                403     2026-08-25T15:40:15Z
+  github.com                 400     reached the origin
+  raw.githubusercontent.com  301     reached the origin
+
+DNS resolves for all of them. github.com returning a real HTTP status
+and example.com not is what makes this an ALLOWLIST rather than a
+per-host denylist -- so substituting a different publisher does not help
+from inside this session, and the epa.gov denial was never the specific
+obstacle.
 
 WHY THIS FILE EXISTS ANYWAY. The Emission Factors Hub was handed over as
 a known-answer case -- almost entirely terminal constants by design, with
@@ -17,11 +30,19 @@ before any file is opened.
 
 THE PAIR IS THE TEST, NOT EITHER WORKBOOK. A Hub run alone cannot
 separate "the scan works and the Hub is flat" from "the scan reports
-everything flat". The Local GHG Inventory Tool is the other arm: if the
-scan returns the same profile for a workbook of live formula chains, the
-scan is the thing being measured. Neither result means anything without
-the other, so `--check` reports a target's own verdict and refuses to
-call the instrument until both arms are in.
+everything flat". A live calculator is the other arm: if the scan returns
+the same profile for a workbook of formula chains, the scan is the thing
+being measured. Neither result means anything without the other, so
+`--check` reports a target's own verdict and refuses to call the
+instrument until both arms are in.
+
+THREE WORKBOOKS CAN SERVE AS THAT ARM -- the EPA Local GHG Inventory
+Tool, the UNFCCC GHG emissions calculator, and the Climate Registry
+Excel tool -- and they are registered separately rather than as one
+target, because the predictions that follow from "live calculator" are
+not the predictions that follow from a described module structure. P1
+through P3 are registered for all three. P4, the cross-module collision,
+is registered only where the modules were named in advance.
 
 THE SYNTHETIC WORKBOOKS IN --selftest ARE NOT EPA. They test whether the
 criterion can separate the two shapes at all. A criterion that returns
@@ -78,6 +99,7 @@ PREDICTIONS = {
         "name": "EPA Local GHG Inventory Tool",
         "shape": "sector calculators with live formula chains across "
                  "community and government-operations modules",
+        "discriminator": True,
         "checks": [
             ("LOC-P1", "derived_share", ">", 0.20, "live calculators"),
             ("LOC-P2", "rank_zero_share", "<", 0.95,
@@ -93,6 +115,44 @@ PREDICTIONS = {
              "per record, and a row-axis count is nearly unfalsifiable on "
              "any multi-sheet workbook"),
         ],
+    },
+    "unfccc": {
+        "name": "UNFCCC GHG emissions calculator (ver 01.1)",
+        "shape": "a live calculator, so it carries formula chains",
+        "discriminator": True,
+        "checks": [
+            ("UNF-P1", "derived_share", ">", 0.20, "a live calculator"),
+            ("UNF-P2", "rank_zero_share", "<", 0.95,
+             "the arm that decides whether EFH-P2 measured the Hub or "
+             "measured the scan"),
+            ("UNF-P3", "max_pdepth", ">", 2.0,
+             "a calculator chains through intermediates"),
+        ],
+        "not_registered": (
+            "no equivalent of LOC-P4. A cross-module collision prediction "
+            "needs the module structure named BEFORE the file is opened, "
+            "and it was not. Registering one from the workbook's own sheet "
+            "list after opening it is a post-hoc threshold wearing a "
+            "prediction's clothes."),
+    },
+    "tcr": {
+        "name": "The Climate Registry Excel tool (Standard Inventory "
+                "Report, LGOP)",
+        "shape": "same class as the UNFCCC calculator: a live tool with "
+                 "formula chains",
+        "discriminator": True,
+        "checks": [
+            ("TCR-P1", "derived_share", ">", 0.20, "a live tool"),
+            ("TCR-P2", "rank_zero_share", "<", 0.95,
+             "second instance of the discriminator arm"),
+            ("TCR-P3", "max_pdepth", ">", 2.0,
+             "a calculator chains through intermediates"),
+        ],
+        "not_registered": (
+            "no equivalent of LOC-P4, for the same reason as unfccc. The "
+            "file format is also unknown here: if it ships as legacy .xls "
+            "the reader raises and the one-reader slot gets spent, which "
+            "is the contingency SSS_001 names for itself."),
     },
     "simplified": {
         "name": "EPA Simplified GHG Emissions Calculator",
@@ -269,11 +329,18 @@ def render(prof, target, path):
              for cid, field, op, thr, got, state, _why in rows]))
         held = sum(1 for r in rows if r[5] == "HELD")
         lines += ["", "%d of %d registered predictions held." % (held, len(rows))]
+    arms = ", ".join(sorted(k for k, v in PREDICTIONS.items()
+                            if v.get("discriminator")))
     lines += [
         "",
-        "This is one arm. A profile from the other arm is what decides "
-        "whether these numbers describe the workbook or describe the scan.",
+        "This is one arm. A profile from a live-calculator arm (%s) is what"
+        % arms,
+        "decides whether these numbers describe the workbook or describe",
+        "the scan. One arm alone cannot tell them apart.",
     ]
+    if spec.get("not_registered"):
+        lines += ["", "not registered for this target:",
+                  "  " + spec["not_registered"]]
     return "\n".join(lines)
 
 
@@ -396,6 +463,20 @@ def _selftest():
     ck("hub: repeated headers agree, so none is listed",
        ph["listed_col_count"], 0.0)
 
+    # Every discriminator arm must actually discriminate, or registering
+    # a second one adds a name and no evidence.
+    for arm in sorted(k for k, v in PREDICTIONS.items()
+                      if v.get("discriminator")):
+        ck("chain shape holds every %s prediction" % arm,
+           states(pc, arm), ["HELD"] * len(PREDICTIONS[arm]["checks"]))
+        ck("flat shape fails %s on derived_share and rank" % arm,
+           states(ph, arm)[:2], ["NOT_HELD", "NOT_HELD"])
+    ck("three arms are registered",
+       len([k for k, v in PREDICTIONS.items() if v.get("discriminator")]), 3)
+    ck("the two new arms register no cross-module collision, with a reason",
+       [bool(PREDICTIONS[a].get("not_registered")) for a in ("unfccc", "tcr")],
+       [True, True])
+
     ck("simplified registers no threshold",
        PREDICTIONS["simplified"]["checks"], [])
     ck("and says why",
@@ -416,14 +497,14 @@ USAGE = """usage:
   epa_check.py --selftest
   epa_check.py --predictions
 
-Targets and the reason each threshold is what it is: targets/EPA.md"""
+Targets and the reason each threshold is what it is: targets/TARGETS.md"""
 
 
 def main(argv):
     if "--selftest" in argv:
         return _selftest()
     if "--predictions" in argv:
-        for key in ("efh", "local", "simplified"):
+        for key in ("efh", "local", "unfccc", "tcr", "simplified"):
             spec = PREDICTIONS[key]
             print("%s -- %s" % (key, spec["name"]))
             print("  %s" % spec["shape"])
@@ -432,6 +513,8 @@ def main(argv):
             if not spec["checks"]:
                 print("    none registered: %s"
                       % spec.get("no_threshold_reason", ""))
+            if spec.get("not_registered"):
+                print("    NOT registered: %s" % spec["not_registered"])
             print("")
         return 0
     if "--check" not in argv:

@@ -2,10 +2,10 @@ sheetmodel selftest
   col_to_num A                                   PASS got=1 want=1
   col_to_num AA                                  PASS got=27 want=27
   num_to_col roundtrip                           PASS got='BZ' want='BZ'
-  simple refs                                    PASS got={('S', 'A1'), ('S', 'B2')} want={('S', 'A1'), ('S', 'B2')}
-  range expands                                  PASS got={('S', 'A1'), ('S', 'A3'), ('S', 'A2')} want={('S', 'A1'), ('S', 'A3'), ('S', 'A2')}
+  simple refs                                    PASS got={('S', 'B2'), ('S', 'A1')} want={('S', 'B2'), ('S', 'A1')}
+  range expands                                  PASS got={('S', 'A2'), ('S', 'A1'), ('S', 'A3')} want={('S', 'A2'), ('S', 'A1'), ('S', 'A3')}
   function name not a ref                        PASS got={('S', 'A1')} want={('S', 'A1')}
-  two functions one range                        PASS got={('S', 'A1'), ('S', 'A2')} want={('S', 'A1'), ('S', 'A2')}
+  two functions one range                        PASS got={('S', 'A2'), ('S', 'A1')} want={('S', 'A2'), ('S', 'A1')}
   qualified ref                                  PASS got={('Other', 'B4')} want={('Other', 'B4')}
   quoted sheet                                   PASS got={('My Sheet', 'B4')} want={('My Sheet', 'B4')}
   ref inside a string literal is not a ref       PASS got={('S', 'A1')} want={('S', 'A1')}
@@ -97,6 +97,14 @@ epa_check selftest
   chain rank column does                                   PASS got=True want=True
   chain: one column collision, many row rows               PASS got=(1.0, True) want=(1.0, True)
   hub: repeated headers agree, so none is listed           PASS got=0.0 want=0.0
+  chain shape holds every local prediction                 PASS got=['HELD', 'HELD', 'HELD', 'HELD'] want=['HELD', 'HELD', 'HELD', 'HELD']
+  flat shape fails local on derived_share and rank         PASS got=['NOT_HELD', 'NOT_HELD'] want=['NOT_HELD', 'NOT_HELD']
+  chain shape holds every tcr prediction                   PASS got=['HELD', 'HELD', 'HELD'] want=['HELD', 'HELD', 'HELD']
+  flat shape fails tcr on derived_share and rank           PASS got=['NOT_HELD', 'NOT_HELD'] want=['NOT_HELD', 'NOT_HELD']
+  chain shape holds every unfccc prediction                PASS got=['HELD', 'HELD', 'HELD'] want=['HELD', 'HELD', 'HELD']
+  flat shape fails unfccc on derived_share and rank        PASS got=['NOT_HELD', 'NOT_HELD'] want=['NOT_HELD', 'NOT_HELD']
+  three arms are registered                                PASS got=3 want=3
+  the two new arms register no cross-module collision, with a reason PASS got=[True, True] want=[True, True]
   simplified registers no threshold                        PASS got=[] want=[]
   and says why                                             PASS got=True want=True
   emitted profile carries no screened word                 PASS got=True want=True

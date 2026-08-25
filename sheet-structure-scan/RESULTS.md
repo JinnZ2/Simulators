@@ -95,21 +95,28 @@ named here and not built.
 
 ---
 
-## The EPA targets
+## The targets
 
-Three real workbooks were named and **none has been read**: the egress
-gateway answers 403 to CONNECT for `www.epa.gov`, logged
-2026-08-25T15:14:12Z–15:14:13Z with DNS resolving normally, so it is a
-policy denial and not a network fault. Reported rather than routed
-around.
+Five real workbooks across three publishers are named and **none has
+been read.** The denial is an **allowlist**, not a per-host block:
+`www.epa.gov`, `unfccc.int`, `theclimateregistry.org` and `example.com`
+all return 403 at CONNECT while `github.com` reaches the origin, with
+DNS resolving for all of them. So substituting a publisher does not help
+from inside this session, and there is no third host worth trying.
+Reported rather than routed around; a mirror on an allowed host was not
+sought, because that is circumventing the denial rather than complying
+with it.
 
-What was done instead is in `targets/EPA.md`: the Emission Factors Hub
-arrived with the standard *if the scan does not light that up, the scan
-is broken*, and that standard had no value attached. Ten predictions are
-now registered — six for the Hub, four for the Local Tool — with the
-argument that **the pair is the test**, since a Hub run alone cannot
-separate *the scan works and the Hub is flat* from *the scan reports
-everything flat*.
+What was done instead is in `targets/TARGETS.md`: the Emission Factors
+Hub arrived with the standard *if the scan does not light that up, the
+scan is broken*, and that standard had no value attached. Sixteen
+predictions are now registered — six for the Hub, and P1–P3 for each of
+three live-calculator arms (EPA Local Tool, UNFCCC calculator, Climate
+Registry tool) plus P4 for the one whose modules were named in advance —
+with the argument that **the pair is the test**, since a Hub run alone
+cannot separate *the scan works and the Hub is flat* from *the scan
+reports everything flat*. The selftest requires **each** arm to
+discriminate: a second one that does not adds a name and no evidence.
 
 **Building the criterion found two defects, and one of them would have
 fired on the real Hub as a finding.** Two flat sheets sharing their

@@ -1,4 +1,4 @@
-# TARGETS — three EPA workbooks, pre-registered
+# TARGETS — five workbooks, pre-registered
 
 Dated **2026-08-25**, before any of the three files was opened.
 Runnable form: `targets/epa_check.py`. CC0.
@@ -7,11 +7,13 @@ Runnable form: `targets/epa_check.py`. CC0.
 
 ## The targets, as handed over
 
-| key | workbook | structure, as described |
-|---|---|---|
-| `local` | EPA Local GHG Inventory Tool | a live interactive workbook — sector calculators with real formula chains, community and government-operations modules |
-| `efh` | EPA GHG Emission Factors Hub | almost entirely terminal constants by design; every factor a hardcoded number, with variance and provenance in a separate document |
-| `simplified` | EPA Simplified GHG Emissions Calculator | smaller; a first run |
+| key | workbook | structure, as described | arm |
+|---|---|---|---|
+| `efh` | EPA GHG Emission Factors Hub | almost entirely terminal constants by design; every factor a hardcoded number, with variance and provenance in a separate document | known-answer |
+| `local` | EPA Local GHG Inventory Tool | a live interactive workbook — sector calculators with real formula chains, community and government-operations modules | discriminator |
+| `unfccc` | UNFCCC GHG emissions calculator ver 01.1 | a live calculator, so it carries formula chains | discriminator |
+| `tcr` | The Climate Registry Excel tool (Standard Inventory Report, LGOP) | same class | discriminator |
+| `simplified` | EPA Simplified GHG Emissions Calculator | smaller; a first run | — |
 
 The Hub arrived with a standard attached: **if the scan does not light
 that up, the scan is broken.** That is the right standard and it was not
@@ -20,20 +22,30 @@ target per readout.
 
 ---
 
-## 1. NOT RUN — the host is blocked
+## 1. NOT RUN — and it is an allowlist, not a per-host block
 
-```
-2026-08-25T15:14:12.787Z  connect_rejected  www.epa.gov:443
-2026-08-25T15:14:13.079Z  connect_rejected  www.epa.gov:443
-2026-08-25T15:14:13.354Z  connect_rejected  www.epa.gov:443
-  gateway answered 403 to CONNECT (policy denial or upstream failure)
-```
+| host | result | logged |
+|---|---|---|
+| `www.epa.gov` | 403 to CONNECT | 2026-08-25T15:14:12Z–15:14:13Z |
+| `unfccc.int` | 403 to CONNECT | 2026-08-25T15:40:03Z, 15:40:15Z |
+| `www.theclimateregistry.org` | 403 to CONNECT | 2026-08-25T15:40:03Z |
+| `example.com` | 403 to CONNECT | 2026-08-25T15:40:15Z |
+| `github.com` | **400 from the origin** | reached |
+| `raw.githubusercontent.com` | **301 from the origin** | reached |
 
-DNS resolves normally (`www.epa.gov` → `d32i4z0dxazdtp.cloudfront.net`,
-eight AAAA records), so this is an egress policy denial and not a network
-fault. The proxy README's instruction for a 403 is to report the blocked
-host and not route around it, and that is what happened: three attempts,
-one per target page, no retries, no alternate route.
+DNS resolves for every one of them. **`github.com` returning a real HTTP
+status while `example.com` does not is what makes this an allowlist**
+rather than a denylist aimed at a publisher — so the second and third
+targets were denied for the same reason as the first, and substituting
+another host does not help from inside this session. The reasonable
+inference that a different publisher would not be covered by an
+`epa.gov` denial is testable, was tested, and does not hold here.
+
+The proxy README's instruction for a 403 is to report the blocked host
+and not route around it. No retries, no alternate route, and no hunt for
+a mirror on an allowed host — that last one would be circumventing the
+denial rather than complying with it, and it is the operator's call to
+make, not this session's.
 
 **Nothing below is a reading of an EPA product.** Every number in
 `epa_check.py --selftest` comes from two synthetic workbooks written here
@@ -42,6 +54,26 @@ to test whether the criterion can separate the two shapes at all.
 ---
 
 ## 2. THE PAIR IS THE TEST, NOT EITHER WORKBOOK
+
+**Three workbooks can serve as the live-calculator arm** — `local`,
+`unfccc`, `tcr` — and they are registered separately rather than merged,
+because the predictions that follow from *"a live calculator"* are not
+the predictions that follow from a **described module structure**.
+
+`P1`–`P3` are registered for all three: derived share, rank-zero share,
+max precedent depth. All three follow from the one structural fact
+stated about each — that it carries formula chains.
+
+`P4`, the cross-module collision, is registered **only for `local`**,
+where the community and government-operations modules were named in
+advance. For `unfccc` and `tcr` it is explicitly not registered, and the
+report prints the reason: a collision prediction read off a workbook's
+own sheet list after opening it is a post-hoc threshold wearing a
+prediction's clothes.
+
+`tcr` carries one more open item — its file format was not stated. If it
+is legacy `.xls`, §5 applies.
+
 
 A Hub run alone cannot separate two hypotheses:
 
@@ -88,6 +120,26 @@ differential between them and `P3a` — are the load-bearing part.
 | LOC-P3 | `max_pdepth` | > 2 | sector calculators chain through intermediates |
 | LOC-P4 | `listed_col_count` | > 0 | the same label carried by a community sheet and a government-operations sheet at different constructions is the case scan three was built for |
 
+### `unfccc` — UNFCCC GHG emissions calculator
+
+| check | readout | predicted | why |
+|---|---|---|---|
+| UNF-P1 | `derived_share` | > 0.20 | a live calculator |
+| **UNF-P2** | `rank_zero_share` | **< 0.95** | the arm that decides whether EFH-P2 measured the Hub or measured the scan |
+| UNF-P3 | `max_pdepth` | > 2 | a calculator chains through intermediates |
+
+`.xlsx`, so §5 does not apply.
+
+### `tcr` — The Climate Registry Excel tool
+
+| check | readout | predicted | why |
+|---|---|---|---|
+| TCR-P1 | `derived_share` | > 0.20 | a live tool |
+| **TCR-P2** | `rank_zero_share` | **< 0.95** | second instance of the discriminator arm |
+| TCR-P3 | `max_pdepth` | > 2 | a calculator chains through intermediates |
+
+Format not stated. If legacy `.xls`, §5 applies.
+
 ### `simplified` — no threshold registered
 
 Deliberately. No structural description was given beyond its size, and a
@@ -111,9 +163,12 @@ criterion to separate them. A criterion returning the same verdict for
 both is not a measurement of either, and that is checkable without
 leaving the room.
 
-It does separate them: the flat shape holds 6 of 6 `efh` predictions and
-fails `LOC-P1`/`LOC-P2`; the chain shape holds 4 of 4 `local` predictions
-and fails `EFH-P1`/`EFH-P2`.
+It does separate them: the flat shape holds 6 of 6 `efh` predictions; the
+chain shape holds every prediction of **all three** discriminator arms
+(`local` 4 of 4, `unfccc` 3 of 3, `tcr` 3 of 3), and each arm's first two
+checks fail on the flat shape. That last part is asserted per arm rather
+than once — registering a second discriminator that does not discriminate
+adds a name and no evidence.
 
 Building it turned up two defects, both of which would have produced a
 false reading on the real Hub:
@@ -165,9 +220,11 @@ convenience — which is the test `SSS_001` names for itself.
 ```
 python3 targets/epa_check.py --predictions
 python3 targets/epa_check.py --selftest
-python3 targets/epa_check.py --check LocalGHGInventoryTool.xlsm --as local
-python3 targets/epa_check.py --check GHGEmissionFactorsHub.xlsx   --as efh
-python3 targets/epa_check.py --check SimplifiedGHGCalculator.xlsx --as simplified
+python3 targets/epa_check.py --check GHGEmissionFactorsHub.xlsx      --as efh
+python3 targets/epa_check.py --check LocalGHGInventoryTool.xlsm      --as local
+python3 targets/epa_check.py --check GHG_emissions_calculator_ver01.1_web.xlsx --as unfccc
+python3 targets/epa_check.py --check TCR_StandardInventoryReport.xlsx --as tcr
+python3 targets/epa_check.py --check SimplifiedGHGCalculator.xlsx    --as simplified
 ```
 
 Then the full tables:

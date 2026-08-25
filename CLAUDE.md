@@ -5756,15 +5756,25 @@ underneath).
   a real workbook, F1–F4 all need one, and three of ten claims are
   failures the fixture produced — *passing is weaker evidence than
   failing* (`membership-probe`'s LIMITS, same asymmetry).
-  **`targets/` pre-registers three real EPA workbooks and reads none of
-  them** — `www.epa.gov` is denied by this session's egress policy (403
-  to CONNECT, logged 15:14:12Z-15:14:13Z, DNS resolving normally), so it
-  is reported rather than routed around. The Emission Factors Hub arrived
+  **`targets/` pre-registers five workbooks across three publishers and
+  reads none of them.** The denial is an **allowlist, not a per-host
+  block** — `www.epa.gov`, `unfccc.int`, `theclimateregistry.org` and
+  `example.com` all return 403 to CONNECT while `github.com` reaches the
+  origin, DNS resolving for all of them (`SSS_015`), so substituting a
+  publisher does not help and there is no third host worth trying; a
+  mirror on an allowed host was not sought, that being circumvention
+  rather than compliance. The Emission Factors Hub arrived
   as a known-answer case with the standard *if the scan does not light
   that up, the scan is broken*, which had no value attached; ten
-  predictions are now registered, six for the Hub and four for the Local
-  Inventory Tool, before any file was opened. **`SSS_013`: the pair is
-  the test.** A Hub run alone cannot separate *the scan works and the Hub
+  predictions are now registered before any file was opened: six for the
+  Hub, and P1-P3 for each of **three** live-calculator arms (EPA Local
+  Tool, UNFCCC calculator, Climate Registry tool) plus P4 for the one
+  whose modules were named in advance. **`SSS_016`:** the three arms are
+  registered separately rather than merged, because what follows from
+  *"a live calculator"* is not what follows from a *described module
+  structure* — and the selftest requires **each** arm to discriminate,
+  since a second one that does not adds a name and no evidence.
+  **`SSS_013`: the pair is the test.** A Hub run alone cannot separate *the scan works and the Hub
   is flat* from *the scan reports everything flat* — the two predict the
   same output — so the Local Tool is the discriminator and every report
   ends by saying it is one arm. **`SSS_011`, the one that earned the
@@ -5792,8 +5802,10 @@ underneath).
   discriminators; chain the reverse) with the synthetics loudly marked as
   no evidence about any EPA product. One contingency named: a target
   shipping as legacy `.xls` makes `read()` raise, and **that** is when
-  the one-reader slot gets spent — the test `SSS_001` sets for itself.
-  88 selftest checks green across four modules. Stdlib only, parses under
+  the one-reader slot gets spent — the test `SSS_001` sets for itself;
+  the UNFCCC target being `.xlsx` closes it there, and the Climate
+  Registry format was not stated. 96 selftest checks green across four
+  modules. Stdlib only, parses under
   3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
