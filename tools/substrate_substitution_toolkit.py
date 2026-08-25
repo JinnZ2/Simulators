@@ -575,3 +575,13 @@ def _demo() -> None:
 
 if __name__ == '__main__':
     _demo()
+
+
+# `test_claim_with_substitution` is a toolkit entry point, not a test.
+# pytest collects any module-level `test_*` it can reach and then errors
+# on the missing `claim` fixture -- which is what it did the first time
+# pytest was installed in this container, turning a green suite into
+# `84 passed, 1 error`. Found by self-scan/, which installed pytest to
+# resolve a COUNT claim. The marker is a pytest-only attribute and
+# changes no behaviour for any caller.
+test_claim_with_substitution.__test__ = False

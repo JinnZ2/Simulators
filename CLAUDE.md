@@ -6623,6 +6623,77 @@ underneath).
   workbook stating a relationship in prose that no cell maintains**,
   which is the object scan 4 was built to find. 74 selftest checks.
   Stdlib only, parses under 3.9, CC0.
+- `self-scan/` — Scan 4 pointed at this repository's own `CLAUDE.md`.
+  `sheet-structure-scan` asks whether a workbook's prose still describes
+  its own cells; this asks the same of a document whose operands are
+  files — does a sentence here still describe the artifact it names, and
+  does anything assert that it does. WO10 verbatim; five predictions
+  registered and **committed before `resolve.py` existed**. Result on
+  blob `76d588cff573`: **MAINTAINED 1 / HOLDS_UNMAINTAINED 32 /
+  DIVERGED 9 / NOT_TESTABLE 8 / UNBOUND 0**, rate **9/42 = 0.214**
+  against the UNFCCC workbook's 0.913 — flagged as a different document
+  class, n=2, no direction claimed. **`SS_002`, the headline:** S5 asked
+  for a divergence date and dates alone cannot separate *matched when
+  written and overtaken* from *already differing when written*, so each
+  divergence is re-checked in a throwaway worktree at the commit that
+  introduced its number — **6 BORN_DIVERGED, 2 DRIFT, 1
+  DRIFT_POSSIBLE**, and four of the six carry an interval of **+0.00
+  days**, the artifact and the paragraph counting it committed together
+  and not agreeing even then. **`SS_003`:** `UNRECOVERABLE` does not
+  appear, and an earlier version made it appear once — the claim text
+  wraps across a line in markdown and the first pass normalised the
+  newline out before handing the string to `git log -S`, an instrument
+  defect reported as an absence in the data. **`SS_006`:** exactly **1
+  of 42** claims is MAINTAINED, the `GUARDS.md` regeneration asserted by
+  `tests/test_gate_drift.py`; every other number in the file is one a
+  human typed once. **`SS_004`, measured rather than eyeballed:** the
+  stance test imported from `selection.py` returns NEITHER on 73 of 96
+  sections and the ones it classifies are the long ones — a section in
+  the shortest third gets a non-NEITHER verdict 6% of the time against
+  **44%** in the longest third, a 7× effect, because the test counts
+  markers of two kinds and a longer section carries more of both. Not a
+  defect: it was built for a workbook provenance cell and returns
+  NEITHER rather than guessing. **`SS_005`:** WO10 S1's own rule
+  (*"operands resolve inside this file tree"*) is **resolvability**, not
+  stance — `SSS_051`'s two-criteria-one-quantity shape — so both
+  readings are reported and neither is picked. **`SS_007`:** all five
+  unresolvable IDENTITY claims are `SUBJECT_NOT_IN_TREE`, each comparing
+  a **delivered upload** against a repo copy (MF_019, PB_011, UNI_068,
+  SSS_053, instrument-epistemology's pre-repair output) — measured at
+  the time against bytes never committed, so not re-checkable from this
+  repository ever; `notes/check_uploads.py` is the repair pattern and
+  did not exist when any of the five was written. **`SS_008`:** `430+
+  audit-grade tests green` carries two statements and they came apart —
+  516 passed, 9 failed, so the count bound is met and the word *green*
+  is not; both printed, bin follows the word. **`SS_009`, found by
+  running it:** the first version ran checks in place and **modified the
+  repository it was measuring** — the suites wrote two provenance
+  ledgers, a denial record, a JSONL log and one file literally named
+  `--selftest` — which is the structural difference between scan 4 on a
+  workbook and scan 4 on a repository, since resolving a COUNT claim
+  means executing code; every check now runs in a throwaway `git
+  worktree` at HEAD, asserted by a selftest comparing `git status`
+  before and after, at the stated cost that an uncommitted change is
+  invisible. **`SS_010`:** the one undecided divergence is undecided
+  because a guard fired — the replay reached 8 modules where the live
+  check reads 9, and comparing them would be a ratio across unlike
+  objects with a verdict attached. **`SS_011`:** all five predictions
+  HELD and four are discounted in place (P3 and P5 were near-structural,
+  P2 nearly free); **P1 is the one that could have failed** and went the
+  predicted way by a factor of two — `selftest N/N` claims diverge at
+  0.182 against 0.364 for pytest-suite counts, because a module printing
+  N and the sentence stating N are written in one commit with the module
+  as the authority. **`SS_012` is OPEN by design:** the scan corrects
+  nothing, because `samples/scan.sample.txt` names commits and the S5
+  replay resolves against a history a correction would extend —
+  correcting a number removes the evidence that it ever differed, so the
+  record lands first and the correction is a separate commit. Binding
+  claim→artifact is **declared, never inferred** (`bindings.py`); the
+  emitted report passes the imported `no_severity` screen with an empty
+  exemption list. 69 selftest checks across two modules. Scanner is
+  stdlib; suite dependencies are declared per binding (`pytest`,
+  `numpy`, `scipy`, `matplotlib`, `jsonschema`, `psutil`), and a missing
+  one returns NOT_TESTABLE with the name rather than a divergence.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
