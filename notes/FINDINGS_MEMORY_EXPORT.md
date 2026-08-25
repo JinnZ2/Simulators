@@ -2,13 +2,13 @@
 
 Read against `notes/memory-export/files/`, which is stored verbatim. Nothing
 here is a verdict on the export, and no stored file was modified. Counts are
-recomputed each batch and are a delivery state, not a result — 14 tier-1 files
+recomputed each batch and are a delivery state, not a result — 12 tier-1 files
 are still outstanding.
 
 ## 1. Cross-references, and what "unresolved" means
 
 ```
-50 files   64 links   33 distinct names   23 resolve in folder   10 do not
+52 files   66 links   33 distinct names   25 resolve in folder   8 do not
 ```
 
 "Not in the folder" covers three different situations, and the distinction was
@@ -419,10 +419,24 @@ It names eleven modules and a register. Ten of the eleven are in
 `instruments.py`, plus `EXPERIMENT_register.md`. **None of the ten appears in
 `CLAUDE.md`.** The one absent module is `check_invariants.py`.
 
-`fragility-cascade/` holds **73** `.py` files. The index describes it as five
-running sims about value substrates. Whatever else is in there — and the
-filenames suggest several distinct subsystems — is not reachable from the
-repo's own documentation.
+`thermo-pm` then named ten more — `thermo_pm`, `thermo_explore`,
+`thermo_interrogate`, `thermo_assume`, `thermo_synth`, `thermo_survey`,
+`thermo_purpose`, `thermo_value`, `thermo_know`, `thermo_spine`. **All ten are
+in `fragility-cascade/` and none is in `CLAUDE.md` either.**
+
+So twenty modules across two memory files, all in one folder, none indexed.
+`fragility-cascade/` holds **73** `.py` files and `CLAUDE.md` describes it as
+five running sims about value substrates.
+
+The gap is not only the top-level index: `fragility-cascade/README.md` returns
+**zero** hits for `info_taxonomy` and `thermo_pm`. The folder's own README does
+not reach its own contents.
+
+One structural note, stated as observed rather than resolved: `thermo-pm` says
+"Two repos, two READMEs: info_taxonomy ships standalone and domain-neutral; the
+thermo stack is its client." In this repo the two are co-located in one folder.
+Whether `fragility-cascade/` holds copies of two separate repos, or the split
+described never landed here, is not determinable from this side.
 
 `thermo-pm`, dangling from `eco-simulator` and filed here as not-found, is
 `fragility-cascade/thermo_pm.py`. Fifth name to resolve after being filed
