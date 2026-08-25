@@ -2,13 +2,13 @@
 
 Read against `notes/memory-export/files/`, which is stored verbatim. Nothing
 here is a verdict on the export, and no stored file was modified. Counts are
-recomputed each batch and are a delivery state, not a result — 20 tier-1 files
+recomputed each batch and are a delivery state, not a result — 17 tier-1 files
 are still outstanding.
 
 ## 1. Cross-references, and what "unresolved" means
 
 ```
-44 files   60 links   30 distinct names   19 resolve in folder   11 do not
+47 files   60 links   30 distinct names   20 resolve in folder   10 do not
 ```
 
 "Not in the folder" covers three different situations, and the distinction was
@@ -333,6 +333,37 @@ says shape-index is its own repository, that repo is not attached to this
 session, and `nonidentity-census` was written with direct access to it. It does
 mean the memory summary is partial — a reader working only from this export
 could not reconstruct the format `nonidentity-census` writes to.
+
+## 18. The export absorbs this repo's audit results — so it is not an
+independent check on them
+
+`periodicity-break-axis` reports the SIM-B box-counting numbers, and all four
+match `aperiodic-order-sim-stack/SIM_STACK_REPORT.txt` exactly: Ammann-Beenker
+1.889, cascade 1.555, Poisson 1.911, lattice 1.964.
+
+The rest of the file is not from that report. It is from the audit this repo
+ran on it. The file states SIM-A BROKEN on k-grid aliasing with no
+periodic-lattice control, SIM-C BROKEN on a units mismatch and too small a
+grid, "Corrected on audit: plateau-based separation is about 4.5x cluster
+spread, not the 15x originally reported", and "No claim about tungsten is
+supported by any of it." Those are `AOS_009`, `AOS_007` and `AOS_010` in
+`aperiodic-order-sim-stack/CLAIM_TABLE.md`, whose line 219 reads
+`0.334 / 0.075 ≈ 4.5×, not 15.9×`. The delivered report itself is checked in
+verbatim and says none of this.
+
+**The consequence is methodological and applies to every finding in this
+file.** The coupling runs both ways: the memory set supplies referents for
+links the repo recorded as broken (findings 6, 14), and the repo's audit
+conclusions propagate back into the memory set. So when a memory file agrees
+with a repo audit, that agreement is not evidence — the audit may be its
+source. Agreement is only informative where the memory file predates the audit
+or was demonstrably written without it, and nothing in the export carries a
+date that would let a reader tell.
+
+Where a memory file's numbers match a *delivered artifact* rather than an
+audit — the four D_f values here, the selftest counts in finding 3, the
+unknowns register in finding 4 — the check is still independent, because those
+artifacts were checked in as received.
 
 ## What was not checked, deliberately
 
