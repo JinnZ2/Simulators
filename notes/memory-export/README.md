@@ -18,7 +18,7 @@ are markers, specs and gap lists, and several say so in their own first line.
 
 | tier | named in the manifest | landed |
 |---|---|---|
-| 1 — exported unchanged | 57 | 1 |
+| 1 — exported unchanged | 57 | 3 |
 | 2 — scrubbed and exported | 7 | 7 |
 | 3 — held back | 12 | 0, and none expected |
 
@@ -27,24 +27,25 @@ Tier 2 is complete: `facility-risk-index`, `refusal-false-positive-log`,
 `idle-shutdown-restart-accounting`, `recent-work`, `work-load-ordering` — all
 seven named in the manifest, all seven stored.
 
-Tier 1, landed: `criterion-symmetry`. Filed as tier 1 by elimination — it was
-exported, so it is not tier 3, and it is not in the manifest's tier-2 table.
-The manifest does not label files individually, so tier is inferred here and
-not carried in the file.
+Tier 1, landed: `criterion-symmetry`, `rosetta-shape-core`,
+`force-expression-model`. Filed as tier 1 by elimination — each was exported,
+so none is tier 3, and none is in the manifest's tier-2 table. The manifest
+does not label files individually, so tier is inferred here and not carried in
+the files.
 
 Tier 3 is held back by the manifest's own decision. Its absence is a choice
 recorded upstream, not a gap here.
 
 ## Cross-refs that do not resolve
 
-The eight files carry 17 links across 12 distinct names. One resolves —
-`refusal-false-positive-log`, itself a stored file. The other eleven are not in
+The ten files carry 19 links across 13 distinct names. One resolves —
+`refusal-false-positive-log`, itself a stored file. The other twelve are not in
 this folder:
 
 `uninstrumented`, `merit-anchoring`, `unnamed-instruments`,
 `identity-model-monoculture`, `shape-index`, `cross-model-calibration-toolkit`,
 `tool-off-metrology`, `median-case-calibration`, `question-availability`,
-`report-typing`, `rubric-backcasting`
+`report-typing`, `rubric-backcasting`, `info-taxonomy`
 
 Recorded rather than reconstructed — same handling `notes/README.md` gives the
 operator catalogue that `operators/D2.md` references and this repo does not
@@ -62,6 +63,13 @@ parallel:
 - `shape-index` — `nonidentity-census/FINDINGS.md` and `WORK_ORDER.md` treat it
   as a format spec defining four statuses; `instance-log-index` cites it as a
   relation. Absent from both.
+
+**Repo names are a separate case and they do resolve.**
+`rosetta-shape-core` names five sibling repositories — Polyhedral-Intelligence,
+Emotions-as-Sensors, Symbolic-Defense-Protocol, AI-Human-Audit-Protocol,
+BioGrid 2.0 — and all five are carried in the `JinnZ2` ecosystem repo. So the
+export's references split by kind: `[[...]]` links into the memory namespace
+mostly dangle, repository references land. Nothing was rewritten either way.
 
 Named artifacts, same class one level up: `criterion-symmetry` closes on
 "MARKER.md and SCAN_SPEC.md written". Neither filename exists anywhere in this

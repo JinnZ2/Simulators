@@ -38,11 +38,13 @@ checker's output and the entry stays as written — same arrangement
   exported unchanged, 7 scrubbed, 12 held back, with a cost note saying that a
   finding grounded in a specific case is generic once the case is lifted, and
   an observer report without an observer is weaker evidence than one with it.
-  `files/` holds the exported files as they arrive — all 7 tier-2 files and 1
-  of the 57 tier-1. Eleven of their twelve cross-refs point at memory files not
-  in the folder; recorded, not reconstructed. Two of the eleven,
+  `files/` holds the exported files as they arrive — all 7 tier-2 files and 3
+  of the 57 tier-1. Twelve of their thirteen cross-refs point at memory files
+  not in the folder; recorded, not reconstructed. Two of the twelve,
   `tool-off-metrology` and `shape-index`, are cited from `uninstrumented/` and
-  `nonidentity-census/` as well and exist on neither side.
+  `nonidentity-census/` as well and exist on neither side. Repository
+  references are the other way round — all five named resolve in the `JinnZ2`
+  ecosystem repo.
 
 The catalogue this is filed into — the A and D families, D1, A3, A4, the
 compound field-modifier — is not in this repo. `D2.md` references them and
