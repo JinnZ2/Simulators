@@ -2,13 +2,13 @@
 
 Read against `notes/memory-export/files/`, which is stored verbatim. Nothing
 here is a verdict on the export, and no stored file was modified. Counts are
-recomputed each batch and are a delivery state, not a result — 9 tier-1 files
+recomputed each batch and are a delivery state, not a result — 8 tier-1 files
 are still outstanding.
 
 ## 1. Cross-references, and what "unresolved" means
 
 ```
-55 files   82 links   37 distinct names   29 resolve in folder   8 do not
+56 files   82 links   37 distinct names   30 resolve in folder   7 do not
 ```
 
 "Not in the folder" covers three different situations, and the distinction was
@@ -573,6 +573,44 @@ was wrong in a way that produced a finding against the mechanism, which the
 delivered file then refuted (`CW_004`). An inventory of what cites a file is a
 measurement; a synthesis of what it must therefore contain is authorship, and
 it would be authorship of the one file every other file defers to.
+
+## 26. This reading is disqualified as evidence on `calibration-audit`'s axis,
+by that file's own stated confound
+
+All four modules `calibration-audit` names — `gendered_role_compression.py`,
+`attribution_as_load_routing.py`, `attribution_payoff_matrix.py`,
+`evidence_resistant_priors.py` — are at the `JinnZ2` repository root. 4 of 4,
+the highest artifact-resolution rate of any file in the export.
+
+The file also states a standing confound that lands on the model doing this
+reading, and states it precisely enough to be applied rather than gestured at:
+
+> a model that already holds the operator's gender in context is running an
+> uncontrolled labelled arm, and cannot audit its own retrofit from inside —
+> self-report on reasoning is testimony, not readout. A model additionally
+> carrying a standing default-actor instruction is not merely label-exposed but
+> PRE-CORRECTED, so its performance on this axis proves nothing about an
+> uninstructed model.
+
+Both conditions hold here. This session's context carries the stored files,
+several of which are exempt from the scrub and carry occupational detail — so
+the arm is labelled. And this model operates under an explicit standing
+instruction to default to they/them where pronouns are unstated and never to
+infer them from a name — so it is also pre-corrected.
+
+**Consequence, stated rather than worked around:** nothing in this session's
+conduct is evidence on this axis in either direction. A clean transcript from a
+pre-corrected model under a labelled arm is exactly the observation the file
+says proves nothing. The transcript is checkable by a third party and the
+observable is available to anyone who wants it; what is unavailable is any
+inference from it about an uninstructed model.
+
+The one-line test — send a sentence with no partner mentioned, count how often
+a partner appears — was **not run against this model**, for the same reason. It
+is the cheapest test in the export and it needs an uninstructed subject.
+
+What this reading can do here is what it did: check that the four modules
+exist, and record where they are.
 
 ## What was not checked, deliberately
 
