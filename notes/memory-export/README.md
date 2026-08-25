@@ -25,8 +25,12 @@ states the refutation protocol applies to it.
 | 2 — scrubbed and exported | 7 | 7 |
 | 3 — held back | 12 | 0, and none expected |
 
-Tier 2 is complete. Tier 3 is held back by the manifest's own decision — its
-absence is a choice recorded upstream, not a gap here.
+**Delivery is complete.** Tier 2 is all seven. Tier 1 is 56 of 57 — the missing
+file is probably `question-availability`, the one cross-ref that never resolved
+(finding 41). Tier 3 is held back by the manifest's own decision, not a gap here.
+
+`SCRUB_RULES.md` was re-delivered last and diffs byte-identical against the copy
+stored first — the round trip is verified.
 
 Tier is inferred, not carried: the manifest labels no file individually, so a
 file is filed tier 1 when it was exported and is not in the tier-2 table.

@@ -38,7 +38,7 @@ checker's output and the entry stays as written — same arrangement
   exported unchanged, 7 scrubbed, 12 held back, with a cost note saying that a
   finding grounded in a specific case is generic once the case is lifted.
   `files/` holds the exported files as they arrive — all 7 tier-2 and 56 of the
-  57 tier-1. Forty readings in `FINDINGS_MEMORY_EXPORT.md`, including four
+  57 tier-1. Forty-one readings in `FINDINGS_MEMORY_EXPORT.md`, including four
   first-pass searches of my own that were too narrow and what they cost.
 
 The catalogue `D2.md` is filed into has since arrived, in

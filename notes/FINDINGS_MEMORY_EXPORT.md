@@ -1,9 +1,9 @@
 # memory-export — readings
 
 Read against `notes/memory-export/files/`, which is stored verbatim. Nothing
-here is a verdict on the export, and no stored file was modified. Counts are
-recomputed each batch and are a delivery state, not a result — 1 tier-1 files
-are still outstanding.
+here is a verdict on the export, and no stored file was modified. Counts are recomputed
+each batch. Delivery is complete: 7 of 7 tier 2, 56 of 57 tier 1, 0 of 12 tier 3
+by the manifest's own decision.
 
 ## 1. Cross-references, and what "unresolved" means
 
@@ -927,6 +927,46 @@ egress-blocked environment could check, not hedges on the claims themselves,
 and they should not be read as the reflex the rule warns about. Where this
 reading did extend, it extended mechanically: run the selftest, count the
 links, grep both naming conventions.
+
+## 41. Closing state, and a clean round trip
+
+The manifest was re-delivered as the last item and **diffs byte-identical**
+against the copy stored on the first turn. `SCRUB_RULES.md` opened this folder
+and closes it unchanged — the one artifact here whose round trip is verified
+rather than assumed.
+
+Final arrival:
+
+| tier | manifest | landed |
+|---|---|---|
+| 1 — exported unchanged | 57 | 56 |
+| 2 — scrubbed and exported | 7 | 7 |
+| 3 — held back | 12 | 0, by the manifest's decision |
+
+**One tier-1 file was never delivered**, and one link name never resolved:
+`question-availability`, cited by `criterion-symmetry`. Those are probably the
+same file — every other unresolved name in this reading's history eventually
+arrived, and this is the only one left on either list. Stated as an inference,
+not a fact: nothing in the export names the 57th file, and the manifest labels
+none of them individually.
+
+**On the scrub, at the end.** Findings 9 and 10 read its consistency off the
+early files and hold for those. From `median-case-calibration` onward the
+operator exempted files from the person/place/occupation rules to keep the dump
+intact (finding 22), so `SCRUB_RULES.md` describes the seven tier-2 files
+accurately and does not describe this folder. That is recorded in the folder
+README so a later reader does not use the manifest as an index of what is here.
+
+**What this reading is worth, stated plainly.** The mechanical checks are
+reproducible by anyone with the tree: selftests run, counts recomputed, links
+grepped under both naming conventions. Findings 18 and 19 bound them — the
+export absorbs this repo's audit results, so agreement between a memory file
+and a repo audit is not independent evidence, and `ecosystem-conventions`
+states that contamination mechanism more generally than this reading found it.
+Four first-pass searches were too narrow and are listed below. Two theses and
+one axis were declined rather than adjudicated, with the interest direction
+named each time, and finding 40 records that a decline is not automatically
+neutral.
 
 ## What was not checked, deliberately
 
