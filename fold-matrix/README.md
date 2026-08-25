@@ -11,7 +11,7 @@ not one number.
 | `terms/` | the four S6 fixtures, as data |
 | `PREDICTIONS_WO8.md` | S2's v1 prediction |
 | `PREDICTIONS_WO8_V2.md` | the revised prediction, and what is not blind about it |
-| `CLAIM_TABLE.md` | `FM_001..031` |
+| `CLAIM_TABLE.md` | `FM_001..035` |
 | `sources/` | delivered source material, verbatim |
 | `PREDICTIONS_SBA.md` | the SBA run's predictions, registered before any fetch |
 | `samples/` | one pinned run of each |
@@ -204,6 +204,42 @@ picked.
 magnitudes, 0 units** (`FM_031`) — with the blank template the strongest
 single case, since its purpose statements are what a form *asks for*
 rather than what one company wrote, and they have the same shape.
+
+## A third-party brief, and the first empty upward arm
+
+A company research brief on Palo Alto Networks arrived — a PDF upload
+plus the text pasted separately. **The cross-check failed** (`FM_032`): a
+stdlib extraction recovers 6 of 19 distinctive strings and **0 of the 4
+figures**, because PDF splits text runs for kerning inside `TJ` arrays —
+this file contains `[($)-0.6 (1)]TJ`, the `$` and the digit as separate
+strings. A first pass produced `$754`, `$32`, `$00`; **those are
+artifacts, not figures in the document**, and were never reported as
+content. So it enters the corpus on the paste alone, with weaker
+provenance than the two `.doc` files. A naive PDF extractor would have
+produced numbers that look like data and are wrong, with nothing in the
+output showing it.
+
+**The first document here whose purpose is stated only by where it is
+filed** (`FM_033`). Every prior source states one — the UNFCCC
+disclaimer, both mission statements, the blank template's section
+preambles. This states none: `upward_stop` is **ABSENT**, no positive
+level carries a stated artifact, and the arm stops before it starts. The
+document is not purposeless — it is career-preparation material — but
+that use is a property of the containing site, and a copy of the text
+carries none of it.
+
+**A downward arm made entirely of a third party's figures** (`FM_034`):
+four numbers, none computed by the author, **none with a source named**,
+and no relation stated between any two. The one economic relation it does
+state — support and consulting *"carry the highest margins"* — is
+`+ / ABSENT / ABSENT` again, this time about someone else's economics.
+The arithmetic it declines to do is available from its own numbers: net
+margin **3.03%**, P/S 16.2, P/E 536. The margin is the one it comes
+closest to discussing and the only one computable from what it prints.
+
+**Sixteen upward cells, five sources, zero magnitudes, zero units**
+(`FM_035`) — and this is the first source to grow the **ABSENT** column
+rather than the ASSERTED one.
 
 ## The arm this extends is not here
 

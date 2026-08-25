@@ -933,3 +933,153 @@ repository itself, and the SBA pair collapses to one template
 **Falsifier:** one upward cell, anywhere, carrying a magnitude.
 
 **Status: SUPPORTED at n = 4 sources, with the dependence stated.**
+
+---
+
+### FM_032 — the paste could not be verified against the upload, and the reader is too partial to serve as the check
+
+A PDF arrived with this document (`Company Research - Palo Alto
+Networks.docx`, converted November 2024), and the text arrived separately
+as a paste. Cross-checking one against the other is the obvious move and
+**it fails**.
+
+A stdlib extraction — 28 of 29 streams inflate — recovers **6 of 19**
+distinctive strings from the paste (`Fortinet`, `Trent Weber`, `Kirk
+Skeeles`, `Economic Logic`, `Published Values`, `Real Values`) and **0 of
+the 4 figures** (`374.83`, `122.04`, `7.52`, `227.7`). The stated author
+in the paste does not appear in the extraction either; the PDF's own
+metadata names a different person, which is an ordinary
+converted-by-someone-else pattern and is not resolved here.
+
+**Why the extraction is that partial, and why it cannot be repaired by
+trying harder at the same level:** PDF splits text runs for kerning
+inside `TJ` arrays. This file literally contains `[($)-0.6 (1)]TJ` — the
+`$` and the digit as separate strings with an offset between them — so
+concatenating string literals joins fragments across unrelated
+positions. A first pass produced `$754`, `$32`, `$00`; **those are
+artifacts, not figures in the document**, and they were never reported as
+content. Some of the extract comes back as font/CMap bytes rather than
+text at all.
+
+So the document enters the corpus **on the paste alone**, with weaker
+provenance than the two `.doc` files, which had a container, a piece
+table, an author line and a creation date each. Recorded rather than
+worked around: a naive PDF extractor would have produced numbers that
+look like data and are wrong, with nothing in the output showing it —
+`SSS_046`'s forbidden substitution in a third format.
+
+**Falsifier:** a `TJ`-aware extractor recovering the four figures, which
+would turn this from an unverified paste into a checked one.
+
+**Status: SUPPORTED. The cross-check was run and did not confirm.**
+
+---
+
+### FM_033 — the first document in the corpus whose purpose is stated only by where it is filed
+
+Every prior source states a purpose. The UNFCCC calculator states one in
+its Disclaimer, both business plans state mission statements, the blank
+template states what each section is for. **This one states none.**
+
+| level | goal | basis | sign | magnitude | unit |
+|---|---|---|---|---|---|
+| +1 | not stated | **ABSENT** | ABSENT | ABSENT | ABSENT |
+| +2 | not stated | **ABSENT** | ABSENT | ABSENT | ABSENT |
+
+`upward_stop` is **ABSENT**: no positive level carries a stated artifact,
+so the arm stops before it starts. First time in this corpus.
+
+The document is not purposeless — it is career-preparation material, and
+that use is real. But **the use is a property of where the document is
+filed**, not of anything in the text: nothing between "Prepared by" and
+the alumni list says what the brief is for. Its goal lives in the
+containing site, and a copy of the text carries none of it.
+
+This is `uninstrumented`'s territory reached from the fold matrix:
+the register's mechanism 13 candidate — *recorded, archived, and filed
+under a category that isn't evidence* — describes filing that changes what
+a document counts as. Here filing is the only thing that states what the
+document is **for**, and the fold matrix reads the text.
+
+**Falsifier:** a purpose statement in the document.
+
+**Status: SUPPORTED. The first ABSENT upward arm in the corpus.**
+
+---
+
+### FM_034 — a downward arm made entirely of a third party's figures, and the one relation it states has a sign and no size
+
+`FM_024` divided dollar figures by whose quantity they are and found a
+third-party category as one entry among several. Here it is **the whole
+arm**:
+
+| figure | about | computed by the author | source named |
+|---|---|---|---|
+| Stock Price `$374.83` | a third party | no | no |
+| Market Cap `$122.04B` | a third party | no | no |
+| Revenue 2023 `$7.52B` | a third party | no | no |
+| Net Income 2023 `$227.7M` | a third party | no | no |
+
+Four figures, none computed, **none with a source named**, and no
+relation stated between any two of them.
+
+**The one economic relation the document does state carries a sign and no
+size**: support and consulting *"carry the highest margins"*. A
+comparative claim about someone else's economics in the now-familiar
+`+ / ABSENT / ABSENT` shape.
+
+And the arithmetic the document declines to do is available from its own
+four numbers: **net margin 3.03%**, price/sales 16.2, price/earnings 536,
+implied share count 326M. The margin is the one it comes closest to
+discussing — it claims consulting margins are highest and states no
+margin anywhere — so the only margin computable from its own figures is
+the aggregate it does not mention.
+
+Those four ratios are computed **here**, from the document's numbers, and
+are not the document's claims. Nothing checks whether its four figures
+are correct: the sources are not named, and egress is refused.
+
+**Falsifier:** a stated relation between any two of the four figures.
+
+**Status: SUPPORTED.**
+
+
+---
+
+### FM_035 — sixteen upward cells, five sources, still no magnitude and no unit
+
+| | cells |
+|---|---|
+| `measured` | **0** |
+| `derived` | **0** |
+| `ASSERTED` | 10 |
+| `ABSENT` | 6 |
+
+| field | ABSENT on | of |
+|---|---|---|
+| sign | 8 | 16 |
+| **magnitude** | **16** | **16** |
+| **unit** | **16** | **16** |
+
+Five sources now: a published UN emissions calculator, a repo-internal
+scan reading, the SBA filled template, a blank business-plan template,
+and a third-party company research brief. Eight cells state a direction;
+**none states a size, none states a unit.**
+
+The company brief is the first to add cells where even the **direction**
+is absent (`FM_033`), so the ABSENT column grew where every previous
+source grew the ASSERTED one. That widens what the corpus covers without
+moving P4: an upward arm can be empty at every level, and it still never
+carries a magnitude.
+
+**What is not claimed.** These are five sources of very different
+provenance and independence: two arrived as parsed files with containers,
+three as pasted text; one is this repository; the SBA pair is one
+template (`FM_023`); and one is unverified against its own upload
+(`FM_032`). The count of 16 is not 16 independent observations, and the
+uniformity is a statement about the *format* of purpose claims in
+documents of this kind, not a rate estimated from a sample.
+
+**Falsifier:** one upward cell, anywhere, carrying a magnitude.
+
+**Status: SUPPORTED at n = 5 sources, with the dependence stated.**
