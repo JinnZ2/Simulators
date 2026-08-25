@@ -26,7 +26,7 @@ is not true of the folder. Corrected rather than narrowed.)
 
 | tier | named in the manifest | landed |
 |---|---|---|
-| 1 — exported unchanged | 57 | 11 |
+| 1 — exported unchanged | 57 | 16 |
 | 2 — scrubbed and exported | 7 | 7 |
 | 3 — held back | 12 | 0, and none expected |
 
@@ -39,7 +39,9 @@ Tier 1, landed: `criterion-symmetry`, `rosetta-shape-core`,
 `force-expression-model`, `alignment-under-coupling`,
 `diversity-collapse-model`, `emergence-stability-simulator`,
 `fairmont-ecological-recovery`, `food-grain-monitor`,
-`semantic-drift-sim`, `geometric-manifold`, `adversarial-prior`. Filed as tier 1 by elimination — each was exported,
+`semantic-drift-sim`, `geometric-manifold`, `adversarial-prior`,
+`constraint-assembly`, `closure-cost`, `buffer-counted-as-supply`,
+`cross-model-calibration-toolkit`, `energy-english`. Filed as tier 1 by elimination — each was exported,
 so none is tier 3, and none is in the manifest's tier-2 table. The manifest
 does not label files individually, so tier is inferred here and not carried in
 the files.
@@ -49,10 +51,12 @@ recorded upstream, not a gap here.
 
 ## Cross-refs that do not resolve
 
-The eighteen files carry 25 links across 18 distinct names. Four resolve to
-stored files — `refusal-false-positive-log`, `criterion-symmetry`,
-`diversity-collapse-model`, `facility-risk-index`. Fourteen do not resolve
-inside the folder, but "not in the folder" is not the same as "does not exist",
+The twenty-three files carry 31 links across 22 distinct names. Seven resolve
+to stored files — `refusal-false-positive-log`, `criterion-symmetry`,
+`diversity-collapse-model`, `facility-risk-index`, `alignment-under-coupling`,
+`closure-cost`, `cross-model-calibration-toolkit`, the last of which was on the
+unresolved list until it arrived as a file. Fifteen do not resolve inside the
+folder, but "not in the folder" is not the same as "does not exist",
 and three kinds sit under that heading.
 
 **Resolves elsewhere in this repo, under the underscore convention.**
@@ -71,14 +75,24 @@ artifact carries three name variants and the link matches none exactly.
 
 **Genuinely absent.** `merit-anchoring`, `unnamed-instruments`,
 `question-availability`, `report-typing`, `median-case-calibration`,
-`cross-model-calibration-toolkit`, `identity-model-monoculture` — zero hits
-under either naming convention. `tool-off-metrology` is absent too, at 15
+`identity-model-monoculture`, `voice-cloud-orchestrator` — zero hits under
+either naming convention. (`emotions-as-sensors` is not absent: it is the
+Emotions-as-Sensors repository, carried in `JinnZ2`.) `tool-off-metrology` is absent too, at 15
 citations, matching `uninstrumented/CLAIM_TABLE.md` `UNI_043`/`UNI_066`.
 `shape-index` is the interesting one: `predicate-difference/shape_index.py`
 exists and states in its own header that *no shape-index format exists in this
 repository* — a file named for the absent object, inferring the format because
 it is missing, and flagging the inference. So the cited object is absent and
 the repo says so itself.
+
+**`energy-english` closes a reference the repo had already flagged as broken.**
+`uninstrumented/CLAIM_TABLE.md` `UNI_104` records it as a failing cross-link —
+hyphenated where the repo writes `energy_english` — and `UNI_134` counts it as
+another instance of the same hyphenation defect. The memory file now supplies
+the referent: a constraint grammar with a live layer-1 gate and four rules that
+each name a place where a representation adds information the source did not
+contain. The repo's audit was right that the link failed and had no way to see
+what it pointed at.
 
 (Two earlier corrections to this section stand, and a third is added.
 An earlier version said the export's references split by kind — `[[...]]` for
@@ -132,6 +146,20 @@ carry U3, which reads "NO MEASUREMENT EXISTS".
 Neither `.py` is listed in `CLAUDE.md` or `docs/FOLDER_NOTES.md`, though
 `fragility-cascade/` itself is described in both. So on this one file the
 export points at repo content the repo's own index does not reach.
+
+**Two files summarize folders in this repo, and both check out when run.**
+`constraint-assembly` reports "`assemble.py` (18/18)" and
+`constraint-assembly/assemble.py --selftest` returns 18/18; its grade-stop case
+carries 4 components and 4 grounded rejections, as stated, under the key
+`rejected`. `closure-cost` reports "`closure.py` (15/15)" and the selftest
+returns 15/15; its "zero quantified" claim holds across all three cases, every
+`diagnostic_spend` null and every `knowledge_state` `not_separable`. The only
+drift is a case name — the file says `missile-alert`, the repo says
+`hawaii-missile-alert`.
+
+That makes four memory files now named for repo folders:
+`emergence-stability-simulator`, `constraint-assembly`, `closure-cost`, and
+probably `uninstrumented`.
 
 **`adversarial-prior` is the largest instance of the same thing.** Its sections
 map onto four of the nine sims in `instrument-bias-sims/`, and two were checked
