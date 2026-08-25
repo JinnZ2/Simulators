@@ -1,0 +1,27 @@
+scan three -- header collision
+workbook        demo.xlsx
+reader          stdlib-xlsx
+sheets          Inputs, Model, Summary
+normalization   case, whitespace, edge punctuation; parentheticals kept
+grouped on      normalized label and axis
+listed when     depth sets differ, or construction differs
+rank            sum over governed cells of dependents x downstream depth
+
+depths       set of precedent depths of the cells the label governs
+construction Nc = N constants, Nd = N derived
+
+rank  label   axis    as written  label at    governs        depths   construction
+----  ------  ------  ----------  ----------  -------------  -------  ------------
+9     widget  row     widget      Inputs!A2   Inputs!B2:F2   {0}      5c
+                      widget      Model!A2    Model!B2:D2    {1,2,3}  3d
+                      widget      Summary!A2  Summary!B2     {3}      1d
+9     gadget  row     gadget      Inputs!A3   Inputs!B3:F3   {0}      5c
+                      gadget      Model!A3    Model!B3:D3    {1,2,3}  3d
+                      gadget      Summary!A3  Summary!B3     {3}      1d
+4     total   column  total       Inputs!F1   Inputs!F2:F3   {0}      2c
+                      total       Model!C1    Model!C2:C3    {2}      2d
+                      total       Summary!B1  Summary!B2:B3  {3}      2d
+
+label groups with two or more occurrences: 4
+of those, listed: 3   not listed, construction and depths agree: 1
+distinct labels seen: 10

@@ -5689,6 +5689,74 @@ underneath).
   `B.3/1-212`; stated from memory, unverified, and the correction is a
   shelf mark, so a reader following the note as written asks for a series
   that does not exist. Stdlib only, parses under 3.9, CC0.
+- `sheet-structure-scan/` — Built to a delivered spec: two scans over a
+  spreadsheet plus a ranking, with the delivery kept verbatim in
+  `SOURCE_DROP.md`. **Scan two, companion absence** — for a flagged cell,
+  which of `unit` / `date` / `sample_size` / `variance_sibling` is
+  *missing* from its neighborhood, reporting what is not there rather
+  than what is. **Scan three, header collision** — labels across all
+  sheets grouped by normalized string and listed when their cells differ
+  in precedent depth or in constants-versus-derived. **Ranking**
+  `deps × downstream_depth`. **The two spec constraints are the folder's
+  spine.** (1) *stdlib plus one spreadsheet reader* — **the budget is
+  unspent**: `.xlsx` is a zip of XML and formulas sit in
+  `xl/worksheets/sheetN.xml` as `<f>` elements, so `zipfile` +
+  `xml.etree` reach everything, and the larger reason is not frugality
+  but that **both scans are about the formula layer** the common reader's
+  value-only mode drops — the layer under test cannot be discarded by the
+  reader meant to deliver it. (2) *never label a site* — enforced rather
+  than requested: `no_severity.py` screens 78 words across severity and
+  interpretation over every emitted table, is **null-tested in both
+  directions** (planted word per class caught; `terror`/`mustard`/
+  `bustle` checked against `UNI_009` substring bleed), and states its own
+  limit at the top of the file — *a keyword screen is stepped around by
+  any paraphrase*, `DF_010`/`ACL_017` on a new substrate. **`SSS_003`,
+  the load-bearing one:** scan two begins *"for every flagged cell"* and
+  **scan one is not in the delivery**, so the flag set is an INPUT and
+  running without one is **refused**, never defaulted — and the case is
+  measured, not argued: under `--all` **23 of 38 rows carry an absence
+  and 15 of those 23 are label cells or strays outside any table** (a
+  header reading `unit price (USD)` is not itself under a header, so it
+  reports `unit` absent), against a five-cell list giving four absence
+  rows, three of them values in a table. **Three findings are failures
+  the fixture produced.** `SSS_002`: a square neighborhood of radius 2
+  **reports a correctly built six-column table's own `sd` column
+  absent**, three columns being outside the block — and the repair is the
+  SHAPE, not the radius, since radius 6 reaches the adjacent record and
+  trades a false absence for a false presence, which §2 argues is the
+  costlier direction because it removes a row from a report whose subject
+  is what is missing; replaced by a cross (the whole record row, the
+  column within ±radius, and the label-row cell above every column the
+  row touched). `SSS_009`: `=LOG10(A1)` returned `{A1, LOG1}` — the
+  lookahead refuses a ref followed by `(`, so the engine backtracks to
+  `LOG1` — putting a function name into the precedent graph, which would
+  have made **the rank column wrong for a reason invisible in the
+  output**; caught by a fixed-in-advance selftest case, not by reading.
+  `SSS_006`: keeping parentheticals costs a true collision the fixture
+  carries (`unit price (USD)` `2c{0}` vs `unit price` `2d{1}`), and
+  stripping them would merge `revenue (net)` with `revenue (gross)` — the
+  default is the one that under-reports and the choice is stated.
+  **`SSS_004`:** `deps × ddepth` makes **every terminal rank 0**, so the
+  cell whose number gets quoted ties for last with an unused stray —
+  propagation is what the delivery asked for, and near the bottom of a
+  sheet propagation and consequence run opposite; `pdepth` is a column so
+  the tie is breakable, and changing the sort would make the ranking a
+  claim about importance, which the no-labelling constraint bars.
+  **`SSS_007`:** three companion states plus an `unsearched` column
+  (`N`/`S`/`no-col-label`/`no-row-label`/`is-label`) — the
+  absent-vs-known-negative repair designed in rather than found, with
+  cells carrying no absence kept in the table so the denominator stays
+  visible. **Ten parameters the delivery left open** are marked
+  `[CHOICE n]`, defaulted, overridable, and printed into the report
+  header when in force. `sheetmodel.py::rank` is registered in
+  `tools/known_answer.py` with four cases (chain 2 / fan 3 / terminal 0 /
+  cycle `CYCLE`) that separate the two factors. `fixture.py` writes the
+  demo `.xlsx` with `zipfile`, so the repo stays text-only and the
+  workbook is a readable table. **`SSS_010` UNVERIFIED:** nothing has met
+  a real workbook, F1–F4 all need one, and three of ten claims are
+  failures the fixture produced — *passing is weaker evidence than
+  failing* (`membership-probe`'s LIMITS, same asymmetry). 66 selftest
+  checks green across three modules. Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

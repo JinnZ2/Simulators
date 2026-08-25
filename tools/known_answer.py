@@ -274,6 +274,46 @@ def _shadow_outline_area(name):
     return mod.outline_area(name)
 
 
+def _sheet_rank(shape):
+    """sheet-structure-scan/sheetmodel.py::rank, on hand-built graphs.
+
+    Built here rather than read from a workbook: the point of the case is
+    that the answer is fixed by the graph's shape and can be counted off
+    by hand, and a fixture file would put a reader between the metric and
+    its known answer.
+    """
+    import importlib.util
+    path = os.path.join(ROOT, "sheet-structure-scan", "sheetmodel.py")
+    spec = importlib.util.spec_from_file_location("_sheetmodel", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+
+    def cell(addr, prec):
+        return mod.Cell("S", addr, mod.DERIVED if prec else mod.CONSTANT_NUMBER,
+                        None, "=x" if prec else None,
+                        set(("S", p) for p in prec), set())
+
+    if shape == "chain":
+        # A1 -> B1 -> C1
+        cells = [cell("A1", []), cell("B1", ["A1"]), cell("C1", ["B1"])]
+        target = "A1"
+    elif shape == "fan":
+        # A1 read by B1, C1, D1, none of which is read by anything
+        cells = [cell("A1", []), cell("B1", ["A1"]), cell("C1", ["A1"]),
+                 cell("D1", ["A1"])]
+        target = "A1"
+    elif shape == "terminal":
+        cells = [cell("A1", []), cell("B1", ["A1"])]
+        target = "B1"
+    elif shape == "cycle":
+        cells = [cell("A1", ["B1"]), cell("B1", ["A1"])]
+        target = "A1"
+    else:
+        raise ValueError(shape)
+    wb = mod.Workbook(cells, ["S"])
+    return wb.rank(("S", target))
+
+
 def seed():
     """Registers the two instances the rule was earned from."""
     fn, detail = _extract_verdict()
@@ -417,6 +457,35 @@ def seed():
               "Its as-specified case passes at 0.92, which is what it "
               "returns and not what it should."),
         pinned_failing=("matched set",),
+    )
+    register(
+        "sheet-structure-scan/sheetmodel.py::rank",
+        _sheet_rank,
+        [
+            case("chain", ("chain",), 2,
+                 "A1 -> B1 -> C1: exactly one cell reads A1 and the furthest "
+                 "chain forward from it is two steps, so 1 x 2 = 2. Counted "
+                 "off the graph, not measured"),
+            case("fan", ("fan",), 3,
+                 "three cells read A1 and none of them is read by anything, "
+                 "so the furthest chain is one step: 3 x 1 = 3. Present "
+                 "because it has the same reach as the chain and a "
+                 "different value, which is what separates the two factors"),
+            case("terminal", ("terminal",), 0,
+                 "nothing reads B1, so it propagates nowhere and the product "
+                 "is zero however deep its own precedents run"),
+            case("cycle", ("cycle",), "CYCLE",
+                 "A1 and B1 read each other, so no longest forward path "
+                 "exists. The metric must say so rather than return a "
+                 "number, and must not recurse without end"),
+        ],
+        note=("dependent count times downstream depth, the ranking the "
+              "delivered spec asks for. The four cases separate the two "
+              "factors: chain and fan have the same number of cells "
+              "downstream and different products, so a metric that "
+              "collapsed to either factor alone would pass one and fail "
+              "the other. The terminal case pins the property that the "
+              "most-derived cell on a sheet ranks last."),
     )
 
 

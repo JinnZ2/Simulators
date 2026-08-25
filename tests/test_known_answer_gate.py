@@ -43,6 +43,7 @@ MANIFEST = (
     "shape-spec-audit/shadow_read.py::outline_area",
     "sim-span/sim_span.py::quad_fit",
     "sim-span/three_column.py::ols",
+    "sheet-structure-scan/sheetmodel.py::rank",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so

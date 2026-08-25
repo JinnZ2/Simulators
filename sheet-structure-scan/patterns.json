@@ -1,0 +1,46 @@
+{
+  "_note": [
+    "Companion patterns for scan two. Regex, matched case-insensitively",
+    "against cell text and against the two governing labels.",
+    "",
+    "These lists are TUNED TOWARD REPORTING ABSENCE. A pattern that is",
+    "too loose produces a false PRESENT, which removes a row from a",
+    "report whose whole subject is what is missing. A pattern that is",
+    "too tight produces a false ABSENT, which adds a row the operator",
+    "can dismiss in a second. The two costs are not symmetric, so bare",
+    "single-letter unit abbreviations (m, s, t, c, f, k) are deliberately",
+    "absent: they would match ordinary prose and silence real gaps.",
+    "",
+    "A word list cannot read sense. 'range' is a variance term in one",
+    "column and a spatial extent in another, and nothing here can tell",
+    "them apart. Swap this file rather than widening the code."
+  ],
+  "unit": [
+    "\\((?:[a-z%$/\u00b2\u00b3\u00b0\u00b5][a-z0-9%$/\u00b2\u00b3\u00b0\u00b5 .-]{0,14})\\)",
+    "\\b(?:usd|eur|gbp|jpy|cad|aud|kg|kgs|mg|lbs|lb|tonne|tonnes|km|cm|mm|nm|ft|mi|sec|secs|min|mins|hr|hrs|kwh|mwh|gwh|kw|mw|gw|joule|joules|kj|mj|celsius|fahrenheit|kelvin|pct|percent|ppm|ppb|bps|acre|acres|hectare|hectares|litre|litres|liter|liters|gallon|gallons|barrel|barrels)\\b",
+    "%",
+    "[$\u00a3\u20ac\u00a5]",
+    "\\bper\\b",
+    "/\\s*(?:yr|year|month|mo|day|hr|hour|unit|capita|head|person|km|kg|m2|m3)\\b",
+    "\\b\\d+\\s*(?:m|s|t|g|c|f|k|l)\\b"
+  ],
+  "date": [
+    "\\b(?:19|20)\\d{2}\\b",
+    "\\b(?:as[ _]?of|asof|date|dated|datestamp|timestamp|period|vintage|snapshot|fy|cy|q[1-4])\\b",
+    "\\d{4}-\\d{2}-\\d{2}",
+    "\\b\\d{1,2}/\\d{1,2}/\\d{2,4}\\b",
+    "\\b(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)\\b"
+  ],
+  "sample_size": [
+    "^\\s*n\\s*$",
+    "\\bn\\s*=",
+    "\\b(?:count|counts|sample|samples|sample[ _]?size|obs|observations|respondents|denominator|num[ _]?records|records|trials|replicates)\\b"
+  ],
+  "variance_sibling": [
+    "\\b(?:sd|std|stdev|stdv|sigma|se|sem|var|variance|ci|iqr|mad|rmse|rsd|cv|percentile|p05|p95|quartile|spread|tolerance|band)\\b",
+    "\\b(?:lower|upper)[ _]?(?:bound|ci|limit)?\\b",
+    "\\bmargin[ _]?of[ _]?\\w+\\b",
+    "\u00b1",
+    "\\+/-"
+  ]
+}

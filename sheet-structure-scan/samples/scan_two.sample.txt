@@ -1,0 +1,24 @@
+scan two -- companion absence
+workbook        demo.xlsx
+reader          stdlib-xlsx
+flag source     flags.sample.txt (5 cells)
+radius          2 rows and columns, plus the two governing labels
+patterns        patterns.json
+companions      unit, date, sample_size, variance_sibling
+rank            direct dependents x downstream depth
+
+absent       searched the neighborhood, no match
+not_searched no pattern registered for that companion
+unsearched   N/S row band ran off the sheet; no-col-label the
+             cell sits outside any label block; no-row-label the
+             sheet has no label column
+
+rank  site        kind             pdepth  deps  ddepth  nbrs  absent                                  not_searched  unsearched  
+----  ----------  ---------------  ------  ----  ------  ----  --------------------------------------  ------------  ------------
+3     Inputs!B2   CONSTANT_NUMBER  0       1     3       12    -                                       -             N
+2     Model!C2    DERIVED          2       2     1       8     unit,date,sample_size,variance_sibling  -             N,S
+0     Summary!B2  DERIVED          3       0     0       4     unit,date,sample_size,variance_sibling  -             N,S
+0     Model!D2    DERIVED          3       0     0       8     unit,date,sample_size,variance_sibling  -             N,S
+0     Inputs!B9   CONSTANT_NUMBER  0       0     0       0     unit,date,sample_size,variance_sibling  -             no-col-label
+
+flagged cells: 5   with at least one absent companion: 4
