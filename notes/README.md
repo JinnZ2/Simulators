@@ -15,6 +15,7 @@ to the entries — an operator entry describes an operation, not a result.
 | `check_*.py` | one checker per entry, run against this tree. Reads the entry, does not modify it. |
 | `study_watch.py` | retrieval notification for entries carrying a WOULD MEASURE. Runs on a GitHub Actions runner, which reaches the three sources the local egress gate refuses. Opens a pull request; merges nothing. |
 | `watch/` | one file per run, `YYYY-MM-DD.md`. Read `watch/README.md` first — silence from that action is not evidence of absence. |
+| `memory-export/` | backup storage for a memory set exported out of session. Stored as delivered. |
 | `samples/` | pinned output |
 
 ## The one rule
@@ -31,6 +32,13 @@ checker's output and the entry stays as written — same arrangement
   readings in `FINDINGS_D2.md`. Five of its seven instances resolve in this
   tree, its stated signature holds on one of them, and its two
   representations turn out to be five different kinds of pair.
+
+- `memory-export/SCRUB_RULES.md` — scrub rules and tier assignment for the
+  public export of a memory set: 57 files exported unchanged, 7 scrubbed, 12
+  held back. Carries its own cost note — a finding grounded in a specific case
+  is generic once the case is lifted, and an observer report without an
+  observer is weaker evidence than one with it. Stored, not checked: the
+  manifest arrived without the files it describes.
 
 The catalogue this is filed into — the A and D families, D1, A3, A4, the
 compound field-modifier — is not in this repo. `D2.md` references them and
