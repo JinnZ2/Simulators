@@ -2,13 +2,13 @@
 
 Read against `notes/memory-export/files/`, which is stored verbatim. Nothing
 here is a verdict on the export, and no stored file was modified. Counts are
-recomputed each batch and are a delivery state, not a result — 22 tier-1 files
+recomputed each batch and are a delivery state, not a result — 20 tier-1 files
 are still outstanding.
 
 ## 1. Cross-references, and what "unresolved" means
 
 ```
-42 files   53 links   27 distinct names   14 resolve in folder   13 do not
+44 files   60 links   30 distinct names   19 resolve in folder   11 do not
 ```
 
 "Not in the folder" covers three different situations, and the distinction was
@@ -31,9 +31,12 @@ things; nothing in either repo carried the mapping.
 
 **Not found anywhere yet, which is not the same as absent.** This heading read
 "genuinely absent" until `voice-cloud-orchestrator` was filed under it and
-arrived in the next batch. Currently: `merit-anchoring`,
+arrived in the next batch; `shape-index`, `rate-mismatch-polytope` and
+`identity-model-monoculture` have since done the same. Four of the names filed
+here as not-found have arrived in a later batch, so this list should be read as
+a delivery state and nothing more. Currently: `merit-anchoring`,
 `unnamed-instruments`, `question-availability`, `report-typing`,
-`median-case-calibration`, `identity-model-monoculture`.
+`median-case-calibration`, `thermo-pm`.
 
 `tool-off-metrology` is the exception — it has held that position across every
 batch at high citation count and is cited from the repo side too, which is what
@@ -295,14 +298,41 @@ magnitude of the as-specified confound is not what the memory file says.
 Not corrected in the stored file. It is stored as delivered, and this is the
 checker's output.
 
-## 16. The most-cited absent object is now cited from both sides
+## 16. The most-cited absent object arrived one batch after being filed absent
 
 `rate-mismatch-polytope` is recorded in `uninstrumented/CLAIM_TABLE.md` as the
 most-cited non-existent object in the repo, reaching three source documents
-there. `identity-model-monoculture` now cites it too. It exists in neither
-repo under either naming convention, and is the second name — with
-`tool-off-metrology` — cited from the memory side and the repo side while
-existing on neither.
+there. This finding was first written to record that the memory side cited it
+too and that it existed on neither. It is now a stored file, and its links to
+`earth-systems-physics`, `grounding-layers` and `eco-simulator` all resolve
+inside the folder.
+
+`tool-off-metrology` is now the only name that has held the absent position
+across every batch.
+
+## 17. An inference made because the object was missing, now checkable
+
+`predicate-difference/shape_index.py` is named for `shape-index` and states in
+its header that *no "shape-index format" exists in this repository*, that the
+format below is inferred, and — the honest part — "If the delivered format is
+something else, this is the wrong shape of file and the contents transfer."
+
+The delivered `shape-index` has arrived, and on the load-bearing point the
+inference holds. That file reasoned "DISJOINT VOCABULARY IS A REQUIREMENT, NOT
+AN INCIDENTAL. The method says the shape must recur 'with different
+vocabulary', and that clause carries the weight." The delivered core cut is
+"The searchable unit is the SHAPE, not the vocabulary", with "names come from
+the field, shape comes from the constraint" under it. Same requirement,
+reached without the source.
+
+What the delivered file does **not** carry is the status vocabulary
+`nonidentity-census/FINDINGS.md` attributes to the format — `CANDIDATE`,
+`MULTI_DOMAIN`, `CONSTRAINT_IDENTIFIED`, `BROKEN` — nor the
+`GateType.REPRESENTATION` note it cites. Not a contradiction: the memory file
+says shape-index is its own repository, that repo is not attached to this
+session, and `nonidentity-census` was written with direct access to it. It does
+mean the memory summary is partial — a reader working only from this export
+could not reconstruct the format `nonidentity-census` writes to.
 
 ## What was not checked, deliberately
 

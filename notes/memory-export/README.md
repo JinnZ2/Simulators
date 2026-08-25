@@ -19,7 +19,7 @@ states the refutation protocol applies to it.
 
 | tier | named in the manifest | landed |
 |---|---|---|
-| 1 — exported unchanged | 57 | 35 |
+| 1 — exported unchanged | 57 | 37 |
 | 2 — scrubbed and exported | 7 | 7 |
 | 3 — held back | 12 | 0, and none expected |
 
