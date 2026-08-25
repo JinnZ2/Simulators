@@ -2,13 +2,13 @@
 
 Read against `notes/memory-export/files/`, which is stored verbatim. Nothing
 here is a verdict on the export, and no stored file was modified. Counts are
-recomputed each batch and are a delivery state, not a result — 28 tier-1 files
+recomputed each batch and are a delivery state, not a result — 27 tier-1 files
 are still outstanding.
 
 ## 1. Cross-references, and what "unresolved" means
 
 ```
-36 files   38 links   26 distinct names   13 resolve in folder   13 do not
+37 files   38 links   26 distinct names   13 resolve in folder   13 do not
 ```
 
 "Not in the folder" covers three different situations, and the distinction was
@@ -113,7 +113,21 @@ nine sims in `instrument-bias-sims/`, two checked against code —
 doe-choice arm, and a `PRE_PATCH_OMISSION` record that the earlier version had
 no doe in it at all.
 
-## 5. One file resolves two ways, and neither route finds the other
+## 5. Content matches with no name match — two so far
+
+Neither of these is findable from the other's name.
+
+`earth-systems-physics` gives as its core equation
+`corruption(trend) = corruption(measurement) × corruption(framework)`, the L7
+headline of `thermal-sensor-degradation-audit/`.
+
+`ceramics-battery` states its requirement as −60 F to 125 F+ in summer sun.
+`cold-weather-battery-guide/README.md` opens on a battery "that survives both
+−60 F winter mornings and 125 F sleeper-cab", and the folder carries the
+fresnel and phase-change hardware the memory file lists. Zero name hits in
+either direction.
+
+## 5a. One file resolves two ways, and neither route finds the other
 
 `earth-systems-physics` is by name `github.com/JinnZ2/earth-systems-physics`,
 cited from `earth_economics/` here as the physical engine. By content its core
@@ -178,6 +192,23 @@ CC0" — but the rule as stated should not be read as absolute.
 denominator available to the observer. `recent-work` carries the micro-skill
 cases as unrelated actors. The reasoning is intact; the standing behind it is
 not carried. That was the trade taken deliberately.
+
+## 11. The scrub protects the export; the public repos it describes are not scrubbed
+
+`ceramics-battery` writes its setting as "cold-continental working
+environments", which is exactly the resolution `SCRUB_RULES.md` says location
+was held to — the rule applied, visibly and consistently. The occupational and
+equipment detail the manifest lifted is absent from the file.
+
+The same operating range is public in `cold-weather-battery-guide/`, which
+states it as a sleeper-cab problem in its first lines. So the attribute class
+the scrub removes from the memory set is already carried, unscrubbed, by the
+repository the memory set describes.
+
+Recorded as a property of the pair, not as a defect in either. The manifest is
+already aware that names can be identifying — it holds twelve files back for
+that reason. Whether the export's scrub floor should be read against what the
+linked public repos already publish is the author's call, not this reading's.
 
 ## What was not checked, deliberately
 
