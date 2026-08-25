@@ -1,17 +1,20 @@
 SCAN 4 ON CLAUDE.md
 bins imported from sheet-structure-scan/scan4.py
-target blob 76d588cff573   repo HEAD 2e880af
+target blob e4e15b2fec69   repo HEAD f303813
+claims read from the working tree; checks run against HEAD in a worktree.
+Those are the same thing only when both land in one commit, which is
+how this folder is committed. Stated because they can come apart.
 
 S1 -- SECTIONS AND STANCE
-  target      6744 lines, 469173 chars, 96 sections
+  target      6842 lines, 475986 chars, 97 sections
   NEITHER      73    median section length 26 lines
-  PROSPECTIVE  14    median section length 65 lines
+  PROSPECTIVE  15    median section length 65 lines
   RETROSPECTIVE 9     median section length 142 lines
   roadmap-marked sections (S1's own three examples): 2
 
   Length confound, measured: a section in the shortest
   third gets a verdict other than NEITHER 6% of the
-  time; one in the longest third, 44%. The test counts
+  time; one in the longest third, 47%. The test counts
   markers and compares two counts, so a longer section
   has more of both and is likelier to break the tie.
 
@@ -73,14 +76,30 @@ claim-record/                  COUNT     93 selftest checks   HOLDS_UNMAINTAINED
 residual-direction/            COUNT     49 selftest checks   HOLDS_UNMAINTAINED 49 -> 49
 model-provenance/              COUNT     29 selftest   checks DIVERGED           29 -> 28
 fold-matrix/                   COUNT     74 selftest checks   DIVERGED           74 -> 73
+self-scan/                     COUNT     430+   audit-grade t NOT_TESTABLE       QUOTED_NOT_ASSERTED
 search-substitution/           COUNT     selftest 23/23       HOLDS_UNMAINTAINED 23 -> 23
 
 BINS
   MAINTAINED           1
   HOLDS_UNMAINTAINED   32
   DIVERGED             9
-  NOT_TESTABLE         8
+  NOT_TESTABLE         9
   UNBOUND              0
+
+NOT_TESTABLE, by cause
+  SUBJECT_NOT_IN_TREE                5
+  SUPERSEDED_IN_THE_SAME_SECTION     3
+  QUOTED_NOT_ASSERTED                1
+
+ENVIRONMENT -- the rate below has one
+  stdlib                             32 claims
+  no check by construction           9 claims
+  pytest                             5 claims
+  numpy+pytest                       2 claims
+  matplotlib+numpy+psutil+pytest+scipy 1 claims
+  matplotlib+numpy                   1 claims
+  jsonschema+pytest                  1 claims
+  installed here: jsonschema yes, matplotlib yes, numpy yes, psutil yes, pytest yes, scipy yes
 
 RATE
   DIVERGED / (DIVERGED + HOLDS + MAINTAINED) = 9 / 42 = 0.214

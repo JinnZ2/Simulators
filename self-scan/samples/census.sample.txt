@@ -1,0 +1,47 @@
+TEST CENSUS
+what is here, whether it runs, and the smallest
+environment that can run it
+
+MODULES EXPOSING --selftest: 76
+  stdlib          76
+
+  state:
+    EXCLUDED_SELF_REFERENCE   1
+    GREEN                   52
+    GREEN_UNCOUNTED         22
+    RAN_NO_VERDICT           1
+  checks counted across all modules: 1225
+
+  STDLIB-ONLY REACH
+    76 of 76 modules import nothing outside the standard
+    library, and 74 of those 76 run green here.
+    checks inside that boundary: 1225, over the 52 that
+    print a count. 22 pass without printing one, so that
+    total is a FLOOR and not the number of checks here.
+
+TEST DIRECTORIES: 20
+  antifungal-mechanism-sim/tests             GREEN        76 passed, 0 failed, 0 skipped
+  continuity-audit/tests                     GREEN        53 passed, 0 failed, 0 skipped
+  criteria-drift/tests                       GREEN        33 passed, 0 failed, 1 skipped
+  crossdomain-eval/tests                     NO_SUMMARY   5 errors in 0.64s
+  emergence-stability-simulator/tests        GREEN        107 passed, 0 failed, 0 skipped
+  extraction-blindness-sim/tests             GREEN        9 passed, 0 failed, 0 skipped
+  fourd-municipal-engine-v2/tests            SOME_FAILED  37 passed, 3 failed, 2 skipped
+  fourd-municipal-engine/tests               SOME_FAILED  19 passed, 3 failed, 0 skipped
+  gdprf-framework/tests                      GREEN        23 passed, 0 failed, 0 skipped
+  grounding-layers/tests                     SOME_FAILED  516 passed, 9 failed, 0 skipped
+  incentive-blindspot-sim/sim/tests          GREEN        27 passed, 0 failed, 0 skipped
+  instrument-epistemology/tests              GREEN        9 passed, 0 failed, 0 skipped
+  msiaf-gdprf-bridge/tests                   GREEN        7 passed, 0 failed, 0 skipped
+  photoperiod-claim-harness/tests            GREEN        29 passed, 0 failed, 0 skipped
+  play-sims/tests                            GREEN        6 passed, 0 failed, 0 skipped
+  proxy-investigation-lab/tests              GREEN        13 passed, 0 failed, 0 skipped
+  reasoning-gate/tests                       GREEN        69 passed, 0 failed, 0 skipped
+  substrate-emergence/tests                  GREEN        48 passed, 0 failed, 0 skipped
+  tests                                      GREEN        84 passed, 0 failed, 0 skipped
+  thermal-sensor-degradation-audit/tests     GREEN        33 passed, 0 failed, 0 skipped
+  total: 1198 passed, 15 failed, 3 skipped
+
+NOT GREEN (2 modules)
+  instrument-bias-sims/_shared.py                      RAN_NO_VERDICT         
+  self-scan/census.py                                  EXCLUDED_SELF_REFERENCE a census cannot run its own run

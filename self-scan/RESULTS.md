@@ -219,3 +219,119 @@ nothing for any caller. Recorded here rather than in the claim table
 because it is not a claim about `CLAUDE.md` -- it is what happened when
 this scan brought a tool into the container in order to measure
 something else.
+
+---
+
+# Amendment — the compute-budget hypothesis, measured
+
+A relayed reading of the first run: the forty-one unbacked numbers are
+not an absence of maintenance but a structural feature of the document
+class — the sim ran on hardware that could run it, the number was
+written down on a device that cannot, so the claim and the check live on
+different machines and the maintenance operation needs a resource the
+author does not have. Proposed: a distinct `NOT_TESTABLE`-by-compute-
+budget bin, and the rate split by it.
+
+It is a better-shaped hypothesis than the one it replaces, and it is
+measurable. The measurement is the import graph, and `census.py` takes
+it.
+
+## What the census found
+
+    MODULES EXPOSING --selftest: 76
+      stdlib          76
+
+      GREEN                   52
+      GREEN_UNCOUNTED         22
+      RAN_NO_VERDICT           1
+      EXCLUDED_SELF_REFERENCE  1
+
+      checks counted: 1225, over the 52 modules that print a count.
+      22 more pass without printing one, so 1225 is a FLOOR.
+
+    TEST DIRECTORIES: 20
+      total: 1198 passed, 15 failed, 3 skipped
+
+**76 of 76.** Every module in this repository that carries its own
+checks imports nothing outside the standard library. Not most — all of
+them. And 74 of the 76 run green on this container.
+
+**32 of 44 bindable `CLAUDE.md` claims need nothing but the standard
+library.** Five need only pytest. Four need anything more.
+
+## So the first half of the claim does not describe these numbers
+
+This scan resolved 41 of 42 claims, on one container, in one pass of
+about twenty minutes. Compute budget was not what stood between any of
+them and a check. What stands between them is that **nothing runs the
+check** — there is no runner, not no machine.
+
+The distinction matters because the two have different repairs. "The
+author cannot run it" is repaired by someone else running it. "Nobody
+runs it" is repaired by a line in a test file, and this repository
+already has the mechanism: `tests/test_gate_drift.py` is the one place
+where a `CLAUDE.md` number has a test behind it, and it is one line of
+work per number, not a machine.
+
+## The second half holds, and is stronger than stated
+
+The relayed message says the stdlib-only, phone-buildable constraint is
+"the boundary of what can be checked locally". Measured, it is better
+than that. Inside the boundary essentially everything checks — 74 of 76
+green — so the constraint is not merely where checking stops. It is
+where checking is **free**.
+
+Where compute does bite is the pytest arm and not the selftest arm: 4 of
+20 test directories need numpy / scipy / matplotlib / psutil /
+jsonschema, and those are the ones a phone cannot run. That is the real
+population the hypothesis describes, and it is a different population
+from the one it was pointed at.
+
+## What was adopted anyway
+
+The proposed bin is built, because the argument for it is right even
+though its instance was not:
+
+    NOT_TESTABLE, by cause
+      SUBJECT_NOT_IN_TREE              5
+      SUPERSEDED_IN_THE_SAME_SECTION   3
+      QUOTED_NOT_ASSERTED              1
+      MISSING_DEPENDENCY               0   (in this environment)
+
+`MISSING_DEPENDENCY` is empty **here** and held 6 before this run
+installed pytest, numpy, scipy, matplotlib, jsonschema and psutil. So
+the rate is a property of the document **and the machine**, and the
+report now prints the environment above it — a rate quoted without one
+is a number with an unstated denominator, which is this folder's own
+subject.
+
+## Two things the amendment cost
+
+**The paragraph describing the scan carried a stale count of the scan.**
+The `self-scan/` entry written in the previous commit said "69 selftest
+checks across two modules"; `census.py` made that three modules and a
+different number within the hour. Repaired by removing the count and
+naming the command that produces it, rather than by writing a bigger
+number that goes stale on the next module. `claim-record`'s derive-at-
+read-time rule, arriving in prose.
+
+**The census could not census its own run.** `census.py` advertises
+`--selftest`, discovers itself, and the first version ran itself, which
+runs itself. It hung. `UNI_010` in a third form — a runner running
+itself rather than a scanner reading its own output. It stays in the
+inventory and is not executed, with the state saying so.
+
+## Not green, and what it is
+
+Two modules and four suites:
+
+    instrument-bias-sims/_shared.py     RAN_NO_VERDICT
+    self-scan/census.py                 EXCLUDED_SELF_REFERENCE
+
+    crossdomain-eval/tests              NO_SUMMARY (5 collection errors)
+    fourd-municipal-engine/tests        19 passed, 3 failed
+    fourd-municipal-engine-v2/tests     37 passed, 3 failed, 2 skipped
+    grounding-layers/tests              516 passed, 9 failed
+
+Fifteen failures across 1213 tests. None of them is in the stdlib
+selftest arm.

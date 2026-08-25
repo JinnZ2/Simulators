@@ -38,9 +38,11 @@ The other forty-one are numbers a human typed once.
 | `extract.py` | S1 + S2: sections, stance, claim extraction |
 | `bindings.py` | S3: which artifact each claim is about. Declared, never inferred |
 | `resolve.py` | S3-S6: run the checks, bin, date the divergences, print the rate |
+| `census.py` | what is here, whether it runs, and the smallest environment that can run it |
 | `RESULTS.md` | what the run found |
 | `CLAIM_TABLE.md` | `SS_001..SS_012` with a REFUTATION_PROTOCOL |
 | `samples/scan.sample.txt` | pinned output of `resolve.py --replay` |
+| `samples/census.sample.txt` | pinned output of `census.py` |
 
 ## Three decisions worth knowing before reading the numbers
 
@@ -84,10 +86,16 @@ across unlike objects with a verdict attached.
 
 ## Running it
 
-    python3 self-scan/extract.py --selftest      # 25 checks
-    python3 self-scan/resolve.py --selftest      # 43 checks
+    python3 self-scan/extract.py --selftest
+    python3 self-scan/resolve.py --selftest
+    python3 self-scan/census.py  --selftest
     python3 self-scan/extract.py --sections      # S1 table
     python3 self-scan/resolve.py --replay        # the full run
+    python3 self-scan/census.py                  # what runs, and on what
+
+No selftest count is written here, for the reason `SS_015` records: each
+module prints its own and `census.py` totals them, and a count in a
+README is a stored number in the folder that measures stored numbers.
 
 The scanner is stdlib. Running a folder's own suite needs that folder's
 dependencies, declared per binding: `pytest`, `numpy`, `scipy`,
@@ -96,3 +104,25 @@ and a missing one returns `NOT_TESTABLE` with the name in the reason
 rather than a divergence.
 
 CC0. Parses under Python 3.9.
+
+## What can actually be run, measured
+
+    76 modules expose `--selftest`, and 76 of 76 import nothing
+    outside the standard library.  74 of them run green here.
+    1225 counted checks, a FLOOR -- 22 more pass without printing
+    a count.
+
+    20 test directories: 1198 passed, 15 failed, 3 skipped.
+    4 of the 20 need numpy / scipy / matplotlib / psutil /
+    jsonschema.  Those are the ones a phone cannot run.
+
+That measurement answers a relayed hypothesis — that the unbacked
+numbers here are unbacked because the check needs a machine the author
+does not have. **It does not describe them**: every module carrying its
+own checks is stdlib-only, and this scan ran 41 of 42 claims on one
+container in one pass. What is missing is a runner, not a machine, and
+the two have different repairs.
+
+What the hypothesis got right, and more strongly than it said: the
+stdlib-only convention is not merely the boundary of what can be checked
+locally. Inside it, checking is **free** — 74 of 76 green. `SS_013`.

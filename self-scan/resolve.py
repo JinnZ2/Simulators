@@ -629,6 +629,51 @@ def _scan_inner(only, replay):
     return rows
 
 
+def environment():
+    """What is installed here, and what each claim's check needs.
+
+    The rate is not a property of the document alone. A claim whose
+    check needs numpy is NOT_TESTABLE on a machine without numpy and
+    resolvable on one with it, so a rate quoted without its environment
+    is a number with an unstated denominator -- which is the shape this
+    whole folder is about. Reported beside the rate rather than in a
+    commit message.
+    """
+    seen = {}
+    for c in keyed_claims():
+        b = bindings.BINDINGS.get(c["key"])
+        if b is None:
+            k = "UNBOUND"
+        elif b["how"] == "none":
+            k = "no check by construction"
+        else:
+            d = sorted(set(b.get("deps", [])) - {"stdlib", "git"})
+            k = "+".join(d) if d else "stdlib"
+        seen[k] = seen.get(k, 0) + 1
+    installed = {}
+    for dep in ("pytest", "numpy", "scipy", "matplotlib", "jsonschema",
+                "psutil"):
+        installed[dep] = have(dep)
+    return seen, installed
+
+
+def not_testable_causes(rows):
+    """NOT_TESTABLE is not one state. Split it by what blocked it."""
+    out = {}
+    for r in rows:
+        if r["bin"] != NOT_TESTABLE:
+            continue
+        reason = r["detail"].get("reason", "")
+        if reason.startswith("dependency not importable"):
+            k = "MISSING_DEPENDENCY"
+        elif " -- " in reason:
+            k = reason.split(" -- ")[0]
+        else:
+            k = reason[:40] or "UNSTATED"
+        out[k] = out.get(k, 0) + 1
+    return out
+
+
 def bins(rows):
     out = {}
     for b in list(BINS) + [UNBOUND]:
@@ -749,6 +794,12 @@ def render(rows, verbose=False):
     out.append("target blob %s   repo HEAD %s"
                % ((blob.strip() or "UNRECOVERABLE")[:12],
                   head.strip() or "UNRECOVERABLE"))
+    out.append("claims read from the working tree; checks run against "
+               "HEAD in a worktree.")
+    out.append("Those are the same thing only when both land in one "
+               "commit, which is")
+    out.append("how this folder is committed. Stated because they can "
+               "come apart.")
     out.append("")
     c = s1_census()
     out.append("S1 -- SECTIONS AND STANCE")
@@ -794,6 +845,22 @@ def render(rows, verbose=False):
     for k in list(BINS) + [UNBOUND]:
         out.append("  %-20s %d" % (k, b[k]))
     out.append("")
+    causes = not_testable_causes(rows)
+    if causes:
+        out.append("NOT_TESTABLE, by cause")
+        for k in sorted(causes, key=lambda x: -causes[x]):
+            out.append("  %-34s %d" % (k, causes[k]))
+        out.append("")
+
+    seen, installed = environment()
+    out.append("ENVIRONMENT -- the rate below has one")
+    for k in sorted(seen, key=lambda x: -seen[x]):
+        out.append("  %-34s %d claims" % (k, seen[k]))
+    out.append("  installed here: %s"
+               % ", ".join("%s %s" % (k, "yes" if v else "no")
+                           for k, v in sorted(installed.items())))
+    out.append("")
+
     rt, n = rate(rows)
     out.append("RATE")
     if rt is None:
@@ -948,6 +1015,8 @@ def selftest():
                              "unrecoverable_because": "probe"}}])
     chk("render prints n", "n = 1 claims resolved" in txt)
     chk("render anchors the target version", "target blob " in txt)
+    chk("render says where claims and checks each come from",
+        "claims read from the working tree" in txt)
     chk("render flags the second point as a different class",
         "DIFFERENT DOCUMENT CLASS" in txt)
     chk("render says no direction is claimed",
@@ -1009,6 +1078,30 @@ def selftest():
         any("P3  NOT ADDRESSABLE" in x for x in v))
     chk("a prediction can come back REFUTED",
         any("P2  REFUTED" in x for x in v))
+
+    # -- NOT_TESTABLE splits by cause rather than being one bin
+    c = not_testable_causes([
+        {"bin": NOT_TESTABLE, "detail": {"reason": "dependency not "
+                                                   "importable: numpy"}},
+        {"bin": NOT_TESTABLE, "detail": {"reason": "SUBJECT_NOT_IN_TREE -- "
+                                                   "x"}},
+        {"bin": HOLDS_UNMAINTAINED, "detail": {}},
+    ])
+    chk("a missing dependency is its own cause",
+        c.get("MISSING_DEPENDENCY") == 1)
+    chk("a structural reason keeps its own name",
+        c.get("SUBJECT_NOT_IN_TREE") == 1)
+    chk("only NOT_TESTABLE rows are counted", sum(c.values()) == 2)
+
+    # -- the environment is reported, not assumed
+    seen, installed = environment()
+    chk("most claims need nothing but the standard library",
+        seen.get("stdlib", 0) > sum(v for k, v in seen.items()
+                                    if k not in ("stdlib",
+                                                 "no check by construction",
+                                                 "UNBOUND")))
+    chk("what is installed is reported per dependency",
+        set(installed) >= {"pytest", "numpy"})
 
     # -- git plumbing reachable
     chk("git history for CLAUDE.md is readable",

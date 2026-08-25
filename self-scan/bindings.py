@@ -282,6 +282,17 @@ BINDINGS = {
         "strip": "module_docstring",
         "deps": ["stdlib", "git"],
     },
+    # ---- a claim this file QUOTES rather than asserts ------------
+    "self-scan/|tests_green|430|0": {
+        "how": "none",
+        "reason": "QUOTED_NOT_ASSERTED -- this occurrence is inside the "
+                  "self-scan paragraph discussing grounding-layers' claim, "
+                  "not a claim about self-scan. The extractor matches "
+                  "pattern, not attribution, so a claim under discussion "
+                  "reads identically to one being made. Use-mention, the "
+                  "UNI_009 / DF_010 shape, arriving in this scanner.",
+    },
+
     "sheet-structure-scan/|byte_identical|-|0": {
         "how": "none",
         "reason": "SUBJECT_NOT_IN_TREE -- two of three uploaded candidate "

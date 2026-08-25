@@ -6690,10 +6690,37 @@ underneath).
   record lands first and the correction is a separate commit. Binding
   claim→artifact is **declared, never inferred** (`bindings.py`); the
   emitted report passes the imported `no_severity` screen with an empty
-  exemption list. 69 selftest checks across two modules. Scanner is
-  stdlib; suite dependencies are declared per binding (`pytest`,
-  `numpy`, `scipy`, `matplotlib`, `jsonschema`, `psutil`), and a missing
-  one returns NOT_TESTABLE with the name rather than a divergence.
+  exemption list. Selftest counts are printed by each module and totalled
+  by `census.py`; no count is written here, because a stored count is
+  the object this folder measures and stating one would put a new
+  divergence in the paragraph describing them. Scanner is stdlib; suite
+  dependencies are declared per binding (`pytest`, `numpy`, `scipy`,
+  `matplotlib`, `jsonschema`, `psutil`), and a missing one returns
+  NOT_TESTABLE with the name rather than a divergence.
+  **`census.py` then answered a relayed claim by measuring it.** The
+  claim: the unbacked numbers here are unbacked because "the claim and
+  the check live on different machines" -- the sim ran on hardware that
+  could run it and the number was written down on a device that could
+  not, so the maintenance operation needs a resource the author does not
+  have. Measured on the import graph rather than argued: **76 of 76
+  modules exposing `--selftest` import nothing outside the standard
+  library**, and 74 of the 76 run green here, so compute budget is not
+  what stands between those numbers and a check. **32 of 44 bindable
+  `CLAUDE.md` claims need nothing but the standard library**, 5 need
+  only pytest, and 4 need anything more. The second half of the claim
+  holds and in a stronger form than stated: the stdlib-only convention
+  is not merely the boundary of what can be checked locally -- inside it
+  essentially everything checks, and what is missing is not compute but
+  a runner. Where compute does bite is the pytest arm: 4 of 20 test
+  directories need numpy / scipy / matplotlib / psutil / jsonschema, and
+  those are the ones a phone cannot run. So `NOT_TESTABLE` is split by
+  cause and the rate now carries its environment, since a claim needing
+  numpy is NOT_TESTABLE on one machine and resolvable on another and a
+  rate quoted without that is a number with an unstated denominator.
+  Repo-wide totals from one isolated run: **1225 counted selftest checks
+  over the 52 modules that print a count, 22 more passing without
+  printing one (so the total is a FLOOR), and 1198 passed / 15 failed /
+  3 skipped across 20 test directories.**
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
