@@ -36,16 +36,10 @@ checker's output and the entry stays as written — same arrangement
 - `memory-export/` — backup of a memory set exported out of session.
   `SCRUB_RULES.md` carries the scrub rules and tier assignment: 57 files
   exported unchanged, 7 scrubbed, 12 held back, with a cost note saying that a
-  finding grounded in a specific case is generic once the case is lifted, and
-  an observer report without an observer is weaker evidence than one with it.
-  `files/` holds the exported files as they arrive — all 7 tier-2 files and 20
-  of the 57 tier-1. Fourteen of their twenty-four cross-refs do not resolve in
-  the folder, but several resolve elsewhere — two as repositories, two as
-  modules in this repo under the underscore convention; recorded, not reconstructed. Two of the twelve,
-  `tool-off-metrology` and `shape-index`, are cited from `uninstrumented/` and
-  `nonidentity-census/` as well and exist on neither side. Repository
-  references are the other way round — all five named resolve in the `JinnZ2`
-  ecosystem repo.
+  finding grounded in a specific case is generic once the case is lifted.
+  `files/` holds the exported files as they arrive — all 7 tier-2 and 21 of the
+  57 tier-1. Ten readings in `FINDINGS_MEMORY_EXPORT.md`, including four
+  first-pass searches of my own that were too narrow and what they cost.
 
 The catalogue this is filed into — the A and D families, D1, A3, A4, the
 compound field-modifier — is not in this repo. `D2.md` references them and
