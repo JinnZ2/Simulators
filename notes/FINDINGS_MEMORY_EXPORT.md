@@ -2,13 +2,13 @@
 
 Read against `notes/memory-export/files/`, which is stored verbatim. Nothing
 here is a verdict on the export, and no stored file was modified. Counts are
-recomputed each batch and are a delivery state, not a result — 8 tier-1 files
+recomputed each batch and are a delivery state, not a result — 7 tier-1 files
 are still outstanding.
 
 ## 1. Cross-references, and what "unresolved" means
 
 ```
-56 files   82 links   37 distinct names   30 resolve in folder   7 do not
+57 files   85 links   38 distinct names   32 resolve in folder   6 do not
 ```
 
 "Not in the folder" covers three different situations, and the distinction was
@@ -611,6 +611,46 @@ is the cheapest test in the export and it needs an uninstructed subject.
 
 What this reading can do here is what it did: check that the four modules
 exist, and record where they are.
+
+## 27. `instrument-bias-sims/` is the built form of two stored files, and it
+extended one of their proposals
+
+`rubric-backcasting` maps onto four sims by near-verbatim docstring:
+
+| memory file section | sim |
+|---|---|
+| "Trained responses are not wrong so much as TERMINAL" | `s6_foreclosure_rate.py` — "trained responses are not wrong, they are terminal" |
+| "No anchor, so it slides to the labeller's own baseline" | `s7_hardship_threshold.py` — "an unanchored threshold slides to the labeller's baseline" |
+| "The measurement has no null case" | `s2_symmetric_anchor.py` — "welfare-interview anchoring has no null case" |
+| the marker itself | `s3_rubric_backcast.py` |
+
+With `adversarial-prior`'s four (finding 4: s1, s3, s4, s5), two stored files
+account for most of the nine-sim stack.
+
+**S2 extends its source rather than implementing it.** `rubric-backcasting`
+proposes supplying the anchor in the opposite direction and checking for
+symmetry — two arms, called "a one-line protocol change, apparently unrun."
+The sim runs three, and states why: "A single downward-anchored arm has one
+observable and two unknowns — the latent estimate and the deference
+coefficient... The UP arm is not a robustness check. It is the second
+equation."
+
+So the proposal was under-specified and the built form supplies the missing
+arm. That is the memory-to-repo direction of finding 18's coupling, carrying a
+correction rather than a copy.
+
+## 28. The file states the method this reading had already been using
+
+Its closing Method note: "assess the pattern in OTHER AI systems rather than
+introspect — explicitly sidestepping any demand that a model investigate
+itself. That reframing is the one to use."
+
+Findings 12 and 26 declined to adjudicate theses about model cognition and
+declined to run the one-line test against this model, on interest-direction and
+confound grounds. That handling is what this note prescribes, and the note
+arrived after those findings were written — so the agreement is convergence,
+not compliance. Recorded because it settles the handling for any remaining
+file of this kind: the method is named by the corpus, not chosen by the reader.
 
 ## What was not checked, deliberately
 
