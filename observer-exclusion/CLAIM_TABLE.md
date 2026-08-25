@@ -212,3 +212,175 @@ databases. The Mech 1999 citation is the cheapest thing in this folder to
 verify and is the third item in this drop family the watcher exists for.
 
 **Status: UNVERIFIED, and nothing depends on it.**
+
+---
+---
+
+# `OE_008`–`OE_012` — claims about `SPEC_V2.md`
+
+v2 is delivered verbatim alongside v1; both stay inspectable. It
+supersedes v1 and **adopts all six v1 findings** — the naming split, the
+attenuation, F4's differential archiving, δ̂ as separator, coding
+pre-registration, and the case not being load-bearing. Six for six,
+checked by quotation.
+
+So the work below is on what is **new** in v2.
+
+---
+
+### OE_008 — §4's correction has its sign inverted, and it is the section v2 calls its structural core
+
+> δ̂ = distribution of (artifact_date − claimed_observation_date)
+> **L_adj = L_raw − median(δ̂)**
+
+Let `H` be the year the population held the reading, `A` the year of the
+first **surviving** artifact carrying it, `P` the year the literature
+adopts. `A = H + D` with `D ≥ 0`, and δ̂ estimates `D`.
+
+```
+L_true = P − H
+L_raw  = P − A = P − (H + D) = L_true − D
+     ⇒  L_true = L_raw + D
+```
+
+**The correction adds. The spec subtracts.** Simulated at a true lead of
+20 years:
+
+| | value | error |
+|---|---|---|
+| median δ̂ | 15.00 | |
+| `L_raw` (uncorrected) | 5.08 | −14.92 |
+| **`L_raw − median(δ̂)` — as written** | **−9.92** | **−29.92** |
+| `L_raw + median(δ̂)` | 20.08 | +0.08 |
+
+**The correction as written moves the estimate further from the truth than
+not correcting at all.** It doubles the bias it exists to remove, and it
+turns a positive true lead into a negative measured one.
+
+§4's own prose states the direction: *"L_raw is attenuated, and the
+attenuation runs against the hypothesis."* Subtracting a positive delay
+attenuates it again.
+
+One character. It inverts the section v2 names "THE STRUCTURAL CORE", and
+every downstream statement about `L_adj` — §8's F2 signature, the
+instruction to report `L_raw` and `L_adj` side by side — inherits it.
+
+**Falsifier:** a derivation on which `year_first_surviving_artifact` can
+precede the holding year, which would make `D` signed rather than
+non-negative.
+
+**Status: SUPPORTED. Arithmetic, not interpretation.**
+
+---
+
+### OE_009 — §8's F4 repair checks the term §4 says the estimator does not recover
+
+§4 states the limit plainly: δ̂ *"recovers δ_write, not δ_survive."*
+
+§8 then proposes, as the way to make F4 usable:
+
+> run §4's two-date estimator separately on each population and compare
+> δ̂ distributions before comparing dates.
+
+But the F4 bias is in **survival**, not retrospection. Field
+correspondence is not written with less lookback than trade press; it is
+more likely to **survive**.
+
+Simulated — two populations with **identical** writing behaviour and
+retrospection, survival 0.10 against 0.60:
+
+| | excluded | field |
+|---|---|---|
+| median δ̂ | 6.0 | 6.0 |
+| **gap the §8 test would see** | **0.0** | |
+| median years to first surviving record | 29.0 | 5.0 |
+| **record shows field first** | | **86%** |
+
+**The δ̂ distributions are identical and the bias is fully present.** The
+§8 test returns *comparable* on exactly the corpus where the comparison is
+invalid, so its *"report as untestable"* branch is unreachable by
+construction — `null-harness` `CONSTANT_SILENT` on the one branch that
+protects F4.
+
+**The repair is already in §11**, written for another purpose: *"estimate
+[δ_survive] from a known-complete archive."* Run that **per population**
+and F4 becomes testable. The spec has the tool and points it at the other
+term.
+
+**Falsifier:** a mechanism by which differential survival shows up in
+retrospection distance.
+
+**Status: SUPPORTED.**
+
+---
+
+### OE_010 — the choice of literature event costs more than the censoring correction recovers
+
+§3 says *"Record both. They are different quantities"* and then names
+**three** for the wolf case:
+
+| event | year |
+|---|---|
+| peer-reviewed publication | 1999 |
+| veterinary body | 2008 |
+| trainer association | 2019 |
+
+**Spread: 20 years.** The archival delay the whole of §4 exists to correct
+is ~17 years at the spec's own stipulated hazard.
+
+So the definitional choice of *which* literature event dominates the
+censoring correction in magnitude. §11 calls recording both *"a
+workaround"*; the ordering of magnitudes says it is more than that — the
+three L values are **three different measurements** and must not share a
+distribution. §3's instruction to *"report the full distribution of L"*
+needs to be three distributions, or one with the event type declared per
+case.
+
+**Falsifier:** an adoption-event spread small against the archival delay.
+
+**Status: SUPPORTED.**
+
+---
+
+### OE_011 — the six adopted findings are transcribed correctly
+
+Worth checking rather than assuming, because a spec quoting an audit's
+figures is a copy and copies drift (`MF_019`, and five stale gate copies
+before it).
+
+| figure | computed | quoted |
+|---|---|---|
+| true 10-y lead measures | −5.56 | −5.6 |
+| positive fraction | 46.6% | 47% |
+| true 20-y lead measures | 4.44 | 4.4 |
+| field appears first | 73.9% | 74% |
+| true lead needed | 8.00 | eight years |
+| corpus entering early | 22.0% | 22% |
+
+Six for six, within rounding. No drift.
+
+**Status: SUPPORTED.**
+
+---
+
+### OE_012 — v2's §1 resolves `OE_006` exactly, and files the other mechanism where it belongs
+
+> **observer exclusion** — no channel.
+> **unaskable / affect routing** — channel present, entry penalised.
+> An earlier draft of this spec collapsed them.
+
+That is `OE_006`'s finding adopted with its resolution — and it goes one
+step further than the audit did, by naming the second mechanism *affect
+routing* and stating it *"remains filed separately and is the candidate
+exclusion mechanism for the `uninstrumented` register."*
+
+Which closes the loop `QA_003` opened: `affect routing` was recorded three
+drops ago as named in the register's literature note and filed nowhere,
+and the twelfth ordinal now has an unambiguous owner. `uninstrumented`'s
+`MECHANISMS` tuple still holds eight and `affect_routing` is still not in
+it — the filing is named, not done.
+
+**Falsifier:** `affect_routing` appearing in the register's tuple, which
+would close it.
+
+**Status: SUPPORTED. The naming is settled; the filing is not.**

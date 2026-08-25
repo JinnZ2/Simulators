@@ -121,6 +121,78 @@ The Mech 1999 citation is the cheapest thing here to verify and is the
 third item in this drop family `notes/study_watch.py` exists for, after
 `MS_004` and `question-availability` A4.
 
+## v2 arrived and adopted all six — with one new defect
+
+`SPEC_V2.md` supersedes `MARKER.md`; both stay inspectable as delivered.
+It carries every v1 finding, checked by quotation: the naming split, the
+attenuation, F4's differential archiving, δ̂ as the separator, coding
+pre-registration, and the case not being load-bearing. **Six for six.**
+The figures it quotes back are transcribed correctly to within rounding,
+which was worth checking rather than assuming — a spec quoting an audit is
+a copy, and copies drift.
+
+```
+python3 v2_check.py            # the v2 report
+python3 v2_check.py --selftest
+```
+
+**`OE_008` — §4's correction has its sign inverted**, in the section v2
+calls its structural core.
+
+With `H` the holding year, `A = H + D` the first **surviving** artifact,
+`P` the adoption year:
+
+```
+L_raw = P − A = L_true − D     ⇒     L_true = L_raw + D
+```
+
+δ̂ estimates `D`. The spec writes `L_adj = L_raw − median(δ̂)`. Simulated
+at a true lead of 20:
+
+| | value | error |
+|---|---|---|
+| `L_raw` uncorrected | 5.08 | −14.92 |
+| **`L_raw − median(δ̂)` as written** | **−9.92** | **−29.92** |
+| `L_raw + median(δ̂)` | 20.08 | +0.08 |
+
+**The correction moves the estimate further from the truth than not
+correcting.** It doubles the bias it exists to remove and turns a positive
+true lead into a negative measured one. §4's own prose states the
+direction — *"L_raw is attenuated"* — and subtracting a positive delay
+attenuates it again. One character, and everything downstream about
+`L_adj` inherits it.
+
+**`OE_009` — §8's F4 repair checks the wrong term, and §4 says so two
+sections earlier.** §4: δ̂ *"recovers δ_write, not δ_survive."* §8 then
+proposes comparing δ̂ distributions between populations to decide whether
+F4 is testable. But the F4 bias is in **survival**: field correspondence
+is not written with less lookback, it is more likely to survive.
+
+Simulated with identical writing and retrospection, survival 0.10 against
+0.60 — **δ̂ medians identical at 6.0, gap 0.0, and the record still shows
+the field first 86% of the time.** So §8's test returns *comparable* on
+exactly the corpus where the comparison is invalid, and its *"report as
+untestable"* branch is unreachable by construction.
+
+The repair is already in §11 for another purpose: estimate survival from a
+known-complete archive. **Run it per population** and F4 becomes testable.
+The spec has the tool and points it at the other term.
+
+**`OE_010` — the choice of literature event costs more than the censoring
+correction recovers.** §3 names three adoption years for the wolf case:
+1999, 2008, 2019. **Spread 20 years**, against a ~17-year archival delay
+at the spec's own stipulated hazard. §11 calls recording all of them *"a
+workaround"*; the ordering of magnitudes says the definitional choice
+dominates the correction, so those are three different measurements and
+must not share a distribution.
+
+**`OE_012` — §1 resolves the naming exactly, and goes further than the
+audit did**, by naming the other mechanism *affect routing* and stating it
+remains the register's candidate. That closes the loop `QA_003` opened
+three drops ago. The register's `MECHANISMS` tuple still holds eight and
+`affect_routing` is still not in it: **the naming is settled, the filing
+is not.**
+
 ## Where it sits
 
 `question-availability/` is the parent and `OE_006` is the connection that

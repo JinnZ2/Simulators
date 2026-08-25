@@ -1,0 +1,85 @@
+CHECKS ON SPEC_V2.md -- neither spec is edited
+
+1  did v2 adopt the v1 findings?
+   OE_006 naming split                yes
+   OE_002 attenuation                 yes
+   OE_003 F4 differential archiving   yes
+   OE_004 delta-hat as separator      yes
+   OE_005 coding pre-registered       yes
+   OE_007 case not load-bearing       yes
+   Six for six. v2 is the audit adopted, so the work here is on
+   what is new in it.
+
+2  the figures v2 quotes back, against what produced them
+   figure                                     computed   quoted     ok     in text
+   ------------------------------------------------------------------------------------
+   true 10y lead measures -5.6 on average     -5.56      -5.60      yes    yes
+   positive only 47% of the time              46.61      47.00      yes    yes
+   true 20y lead measures 4.4                 4.44       4.40       yes    yes
+   field first 74% of the time                73.93      74.00      yes    yes
+   roughly an eight-year true lead            8.00       8.00       yes    yes
+   roughly 22% of the corpus                  22.00      22.00      yes    yes
+   Transcribed correctly. Worth checking because a spec quoting
+   an audit's numbers is a copy, and copies drift.
+
+3  THE SIGN OF §4's CORRECTION
+   Spec: L_adj = L_raw − median(δ̂)
+
+   H = year held. A = first surviving artifact = H + D, D >= 0.
+   P = year the literature adopts.
+     L_true = P - H
+     L_raw  = P - A = L_true - D
+     so       L_true = L_raw + D,  and δ̂ estimates D.
+
+   Simulated with a true lead of 20:
+     median δ̂                       15.00
+     L_raw                            5.08   (attenuated)
+     L_raw − median(δ̂)   [spec]      -9.92   error -29.92
+     L_raw + median(δ̂)               20.08   error +0.08
+
+   The correction as written moves the estimate FURTHER from the
+   truth than not correcting at all -- it doubles the bias it is
+   there to remove. §4's own prose says 'L_raw is attenuated';
+   subtracting a positive delay attenuates it again.
+   One character. It inverts the section that v2 calls its
+   structural core, and every downstream statement about L_adj
+   in §8 inherits it.
+
+4  does §8's F4 repair reach the term the bias lives in?
+   §4 states the limit: δ̂ 'recovers δ_write, not δ_survive'.
+   §8 then proposes comparing δ̂ distributions between the two
+   populations to decide whether F4 is testable.
+   But the F4 bias is in SURVIVAL, not retrospection.
+
+   Two populations, identical writing and retrospection,
+   survival 0.10 against 0.60:
+     median δ̂, excluded             6.0
+     median δ̂, field                6.0
+     gap the §8 test would see      0.0
+     median years to first record, excluded   29.0
+     median years to first record, field       5.0
+     record shows field first        86%
+
+   The δ̂ distributions are the SAME and the bias is fully
+   present. So the §8 test returns 'comparable' on exactly the
+   corpus where the comparison is invalid. It checks the term
+   §4 says it recovers and the bias is in the term §4 says it
+   does not.
+   The repair is already named in §11, for a different purpose:
+   estimate survival from a known-complete archive. Run that
+   PER POPULATION and F4 becomes testable; without it, §8's
+   'report as untestable' branch is unreachable.
+
+5  which literature event, and what it costs
+   peer-reviewed publication    1999
+   veterinary body              2008
+   trainer association          2019
+   spread: 20 years
+   §3 says record both and names three. L therefore has three
+   values per case, spanning 20 years -- larger than the ~17-year
+   archival delay the whole of §4 exists to correct. §11 calls
+   this 'a workaround'; the ordering of magnitudes says the
+   definitional choice dominates the censoring correction, so
+   the three L values are three different measurements and must
+   not share a distribution.
+

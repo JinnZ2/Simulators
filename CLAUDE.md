@@ -5608,7 +5608,39 @@ underneath).
   trigger case is carried and egress-blocked, and nothing in
   `OE_002`–`OE_005` rests on any of it — those are properties of a
   censoring process and a coding protocol and hold for any case with the
-  stated structure. Stdlib only, parses under 3.9, CC0.
+  stated structure. **`SPEC_V2.md` then arrived, superseding the marker and
+  adopting all six findings** — naming split, attenuation, F4 differential
+  archiving, δ̂ as separator, coding pre-registration, case not
+  load-bearing — with every quoted figure transcribed correctly to within
+  rounding (`OE_011`, checked because a spec quoting an audit is a copy and
+  copies drift). Both versions stay inspectable. **`OE_008`, the new
+  defect, and it is in the section v2 calls its structural core: §4's
+  correction has its sign inverted.** With `A = H + D` the first surviving
+  artifact, `L_raw = L_true − D`, so `L_true = L_raw + D` and δ̂ estimates
+  `D` — the spec writes `L_adj = L_raw − median(δ̂)`. Simulated at a true
+  lead of 20: uncorrected 5.08, **as written −9.92 (error −29.92)**, plus
+  form 20.08. **The correction moves the estimate further from the truth
+  than not correcting**, doubling the bias it exists to remove, while §4's
+  own prose says *"L_raw is attenuated"*. One character, and everything
+  downstream about `L_adj` inherits it. **`OE_009`:** §8's F4 repair —
+  compare δ̂ distributions between populations — checks the term §4 says
+  the estimator does NOT recover; the F4 bias is in **survival**, not
+  retrospection, and simulated with identical writing and retrospection at
+  survival 0.10 vs 0.60 the δ̂ medians are identical (gap 0.0) while the
+  record still shows the field first **86%** of the time, so §8's *"report
+  as untestable"* branch is unreachable by construction. The repair is
+  already in §11 for another purpose — estimate survival from a
+  known-complete archive — and needs only to be run per population.
+  **`OE_010`:** §3 names three adoption years (1999 / 2008 / 2019), a
+  **20-year spread** against the ~17-year archival delay §4 exists to
+  correct, so the definitional choice dominates the correction and the
+  three L values are three different measurements that must not share a
+  distribution. **`OE_012`:** §1 resolves the naming exactly and goes
+  further than the audit, naming the other mechanism *affect routing* and
+  keeping it as the register's candidate — which closes the loop `QA_003`
+  opened, though the register's tuple still holds eight and
+  `affect_routing` is still not in it: the naming is settled, the filing is
+  not. Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
