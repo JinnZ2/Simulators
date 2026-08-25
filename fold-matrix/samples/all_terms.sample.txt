@@ -1,5 +1,5 @@
 fold matrix -- work order 8
-terms: 4
+terms: 5
 
 term   H1_grid_emission_factor
 name   grid emission factor
@@ -200,24 +200,70 @@ level  value  units  assumed?  basis
 
 ------------------------------------------------------------------
 
+term   S2_wecandoit_mission
+name   the consulting engagement
+source SBA sample business plan, 'We Can Do It Consulting', authored line 'Rebecca Champ, Owner', created 2016-12-29. Uploaded as 953833c0-Sample_Business_Plan__We_Can_Do_It_Consulting_4.doc. Read with sheet-structure-scan/docreader.py: 7711 characters, one compressed piece.
+
+S3 scope        EVALUABLE -- not an efficiency-class term; no scope required
+
+S1 grid
+level  severed                                       still_acting                                  clock   basis   
+-----  --------------------------------------------  --------------------------------------------  ------  --------
+-2     hours delivered against hours billed          consultant time is spent whether or not the…  ABSENT  ABSENT  
+-1     rate times hours, i.e. any revenue quantity   the engagement is priced and worked; the pl…  ABSENT  ABSENT  
+ 0     -- the term as used --                        the plan is read as a description of the bu…  ABSENT  ASSERTED
++1     the relation between the services delivered…  clients' companies do whatever they do        ABSENT  ASSERTED
++2     the relation between office-management cons…  client overhead, which does not consult the…  ABSENT  ASSERTED
++3     the relation between client prosperity and …  -                                             ABSENT  ABSENT  
+
+S2 upward cells
+level  goal                                          basis     sign    magnitude  unit    cite                    
+-----  --------------------------------------------  --------  ------  ---------  ------  ------------------------
++1     help their companies prosper and grow         ASSERTED  +       ABSENT     ABSENT  Mission Statement: 'To …
++2     increase productivity and reduce overhead c…  ASSERTED  +       ABSENT     ABSENT  Customers: target audie…
++3     not stated                                    ABSENT    ABSENT  ABSENT     ABSENT                          
+
+   The three fields do not fail together on 2 cell(s).
+   A stated direction with no size is the ordinary shape
+   of a purpose claim, and one free-text field recorded
+   it as identical to a cell nobody wrote anything in.
+
+S1a stops, from the document set
+stop      level   what                                why                                             
+--------  ------  ----------------------------------  ------------------------------------------------
+upward    +2      Customers section, We Can Do It C…  highest level with a stated artifact; 1 level(s…
+downward  ABSENT  ABSENT [ABSENT]                     no level carries a quantity the organisation co…
+
+   unmeasured_span_min: not computable
+   enumeration_basis:   document_named
+   not computable: no computed quantity
+   Emitted, not scored (S1a). The name is the reading: a floor,
+   not a measurement of the world.
+
+   plan_exists yes | practice_tracks_plan UNREAD
+   Its own column. It is not a basis and does not enter one.
+   the document IS the plan, so a plan exists by construction. W…
+
+------------------------------------------------------------------
+
 S2, across the terms a comparison may include
 
 basis     upward cells
 --------  ------------
 measured  0           
 derived   0           
-ASSERTED  3           
-ABSENT    1           
+ASSERTED  5           
+ABSENT    2           
 
 value_string, per field
 field      ABSENT on  of cells
 ---------  ---------  --------
-sign       3          4       
-magnitude  4          4       
-unit       4          4       
+sign       4          7       
+magnitude  7          7       
+unit       7          7       
 
-cells: 4   all three ABSENT: 3   split: 1
-ASSERTED + ABSENT: 4   measured + derived: 0
+cells: 7   all three ABSENT: 4   split: 3
+ASSERTED + ABSENT: 7   measured + derived: 0
 P1 (soft majority): True
 P3 (at least one cell splits): True
 P4 (no magnitude anywhere): True

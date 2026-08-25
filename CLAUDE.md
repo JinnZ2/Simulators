@@ -6085,8 +6085,20 @@ underneath).
   than returning a degraded read, and a selftest check reads the module's
   own source to assert no `strings`-style path exists in it. The parser is
   deliberately not written ahead of the files, because `SSS_017` and
-  `SSS_041` are both defects a real file exposed that no fixture could.
-  231 selftest checks green
+  `SSS_041` are both defects a real file exposed that no fixture could —
+  **and one file then arrived and it was built against that file**:
+  OLE → FIB → CLX piece table → one compressed piece, **7711 characters,
+  exactly `ccpText`**, with the decisive check being the halving, since a
+  compressed piece's `fc` is doubled in the header and a reader taking it
+  raw lands mid-document and returns plausible text (both halves
+  asserted). **`FM_021`:** the WO7 screen **short-circuited on a reader
+  failure**, recording one criterion of six, and `SSS_053`'s sentence
+  ("records every criterion rather than stopping at the first failure")
+  was true of a criterion failure and false of a reader failure — repaired
+  with a third state, `pass: None` for not-evaluated, which is not a fail,
+  plus a shape note saying the screen is workbook-shaped so a `not
+  eligible` verdict on a prose document reads as a statement about fit.
+  247 selftest checks green
   across nine modules. Stdlib only, parses under 3.9, CC0.
 - `claim-record/` — Seven fields per claim, two hard rules, and a
   validator that refuses. Delivered spoken (`SOURCE_DROP.md`, verbatim):
@@ -6447,7 +6459,25 @@ underneath).
   are pinned apart. **`FM_015`:** the registered prediction is **not
   blind on H1** and says so — `Disclaimer!A3` was already read in this
   session during the v1 run, so P3 and P4 are registered because the
-  format is new rather than because the source was unread. **`FM_018`, an
+  format is new rather than because the source was unread. **The SBA run
+  landed one file of three** (`FM_019`), not one of the three named —
+  author line *"Rebecca Champ, Owner"*, recorded as evidence rather than
+  asserted as identity, n = 1, predictions committed before any fetch.
+  **P2 splits and that is the result:** eight dollar figures exist
+  (`$75`–`$150`, an hourly rate card) and the downward stop still does not
+  resolve, because the plan **stops before Funding Request and Financial
+  Projections** — `revenue` 0, `forecast` 0, `projection` 0, `cash flow`
+  0, `break-even` 0, `loan` 0, `budget` 0 across the whole text — so
+  `unmeasured_span_min` reads `not computable` on a filled business plan
+  carrying eight dollar figures. **`FM_020`: S1a's downward rule has two
+  states and needed three** — it distinguishes *computed* from
+  *physically existing but uncalculated*, and a rate card is neither, a
+  number the organisation produced and stated, underived in both
+  directions; declared rather than settled by fiat, since one boolean
+  moves the whole downward arm. **P3 holds** (both upward cells
+  `+ / ABSENT / ABSENT`, the same triple `FM_011` found) **and its
+  comparison has one side**, the blank form being exactly what did not
+  arrive. **`FM_018`, an
   amendment that refuses a comparison this folder had published:**
   `enumeration_basis` is now declared per term (`document_named` /
   `physical_traced` / `author_read` / `UNREAD`) and **never inferred** —

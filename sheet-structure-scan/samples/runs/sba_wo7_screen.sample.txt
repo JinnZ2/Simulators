@@ -1,0 +1,32 @@
+work order 7 -- eligibility screen and reject log
+candidates screened: 1
+
+S2, parameters frozen at their WO6 values: unchanged
+
+wecandoit.doc -- not eligible
+  ---- reader could open the file                     legacy .doc is a document, not a workbook: no cells, no formulas, no precedent graph. Text extraction is built and lives in docreader.read_doc(); this reader re
+  n/e  (a) ships values in its own cells              NOT EVALUATED: this criterion takes a reader that opened the file, and none did
+  n/e  (b) provenance prose is RETROSPECTIVE          NOT EVALUATED: this criterion takes a reader that opened the file, and none did
+  n/e  (c) >=1 relationship whose operands resolve    NOT EVALUATED: this criterion takes a reader that opened the file, and none did
+  n/e  (d) file date separated from both priors       NOT EVALUATED: container dates come from the reader
+  pass (e) different authoring body                   
+
+       This screen is WORKBOOK-shaped.
+       Criterion (a) reads cells and (c) reads a relationship whose operands resolve inside the file; for a prose document both are category mismatches rather than failures, so a 'not eligible' verdict is about the screen's fit, not about the file's contents.
+
+
+Criteria (b) and (c): have they been observed disagreeing?
+
+b passes  c passes  candidates
+--------  --------  ----------
+
+off-diagonal candidates: 0 of 0
+
+Not under the rule these results use. Two ways they would
+separate, and one is already in this table: under a MAJORITY
+stance rule the UNFCCC calculator is (b) PROSPECTIVE and (c)
+resolvable, which is the off-diagonal cell -- so whether the
+criteria are independent is a property of the threshold. The
+other is a retrospective note whose operands sit OUTSIDE the
+file, and no candidate here is one.
+

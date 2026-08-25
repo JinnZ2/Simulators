@@ -11,6 +11,13 @@ selection selftest
   agreeing candidates report no independence                 PASS got=False want=False
   one disagreeing candidate reports it                       PASS got=True want=True
   and the off-diagonal is counted, not just flagged          PASS got=2 want=2
+  a file no reader opens still records every criterion       PASS got=['a_ships_values', 'b_retrospective', 'c_resolvable', 'd_date_separated', 'e_different_body', 'read'] want=['a_ships_values', 'b_retrospective', 'c_resolvable', 'd_date_separated', 'e_different_body', 'read']
+  and the reader-dependent ones read not-evaluated, not failed PASS got=[None, None, None, None] want=[None, None, None, None]
+  the read criterion itself is a fail, not a not-evaluated   PASS got=False want=False
+  (e) is still evaluated, since it takes no reader           PASS got=True want=True
+  not-evaluated is not eligible either                       PASS got=False want=False
+  and the shape note says the verdict is about fit, not contents PASS got=True want=True
+  independence skips a candidate with unevaluated criteria   PASS got=0 want=0
   4 retro against 9 prospective flips with the rule          PASS got=('RETROSPECTIVE', 'PROSPECTIVE') want=('RETROSPECTIVE', 'PROSPECTIVE')
   and the flip is reported, not left to be noticed           PASS got=True want=True
   a clear majority does not flip                             PASS got=False want=False

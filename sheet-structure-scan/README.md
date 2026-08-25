@@ -367,8 +367,8 @@ definition, has a default, and is printed into the report header when it
 is in force — an absence measured at radius 2 and one measured at radius
 6 are different readings. `SPEC.md` §5 is the table.
 
-231 selftest checks across nine modules: `sheetmodel` 27,
+247 selftest checks across nine modules: `sheetmodel` 27,
 `no_severity` 12, `scans` 36, `targets/epa_check` 30, `coupling` 36,
-`scan4` 32, `xlsreader` 24, `selection` 19, `docreader` 15.
+`scan4` 32, `xlsreader` 24, `selection` 26, `docreader` 24.
 
 CC0. Stdlib only. Parses under Python 3.9.

@@ -11,7 +11,8 @@ not one number.
 | `terms/` | the four S6 fixtures, as data |
 | `PREDICTIONS_WO8.md` | S2's v1 prediction |
 | `PREDICTIONS_WO8_V2.md` | the revised prediction, and what is not blind about it |
-| `CLAIM_TABLE.md` | `FM_001..018` |
+| `CLAIM_TABLE.md` | `FM_001..022` |
+| `PREDICTIONS_SBA.md` | the SBA run's predictions, registered before any fetch |
 | `samples/` | one pinned run of each |
 
 ```
@@ -118,6 +119,47 @@ registered because the format is new and the split had not been computed.
 format on a workbook nobody here has opened, and `SSS_053` is why there
 is not one.
 
+## The SBA run: one file of three
+
+`sba.gov` refuses CONNECT, and one file was uploaded — and **it is not
+one of the three the order named.** Its author line reads *"Rebecca
+Champ, Owner"*, evidence it may be the file called *Rebecca's Plan*,
+recorded as evidence rather than asserted as identity. **n = 1.**
+
+Predictions were registered and committed **before any fetch and before
+any document was opened** (`466b252`), including the operator's own note
+that the SBA search results had been read and the documents had not.
+
+| | outcome |
+|---|---|
+| P1, P4 (blank template) | **NOT ADDRESSABLE** — none arrived |
+| P2 (dollar figures → downward stop resolves) | **SPLIT** |
+| P3 (upward triple `+ / ABSENT / ABSENT`) | **HOLDS**, 2 of 2 cells |
+
+**P2's antecedent holds and its consequent does not**, which is sharper
+than the empty case P1 was written for. Eight dollar figures exist —
+`$75`–`$150`, an hourly rate card by role — and the downward stop still
+does not resolve, because the plan **stops before Funding Request and
+Financial Projections**. In the full text: `revenue` 0, `forecast` 0,
+`projection` 0, `cash flow` 0, `break-even` 0, `loan` 0, `budget` 0.
+Nothing derives the rates and nothing is derived from them. So
+`unmeasured_span_min` reads `not computable` on a filled business plan
+carrying eight dollar figures.
+
+**And S1a's rule needed a third state.** It distinguishes *computed* from
+*physically existing but uncalculated*. A rate card is neither: a number
+the organisation produced and stated, underived in both directions. The
+call is declared rather than settled by fiat — `computed: False` with the
+evidence in the `by` string — because one boolean moves the whole
+downward arm: `True` gives a stop at −1 and a span of 1, `False` gives no
+stop and no span.
+
+**P3 holds and its comparison has one side.** Both upward cells are
+`+ / ABSENT / ABSENT` — the same triple `FM_011` found in the UNFCCC
+disclaimer. The registered reading was *filled plan purpose statements
+carry no more information than the blank form*, and the blank form is
+exactly what did not arrive.
+
 ## The arm this extends is not here
 
 The order opens *"the downward arm already has a reading"*. There is no
@@ -201,4 +243,4 @@ real case. This is one: S3's efficiency class is
 with a fourth check asserting the list is length one so a widening turns
 red.
 
-74 selftest checks. Stdlib only, parses under Python 3.9. CC0.
+74 selftest checks (plus 24 in `sheet-structure-scan/docreader`). Stdlib only, parses under Python 3.9. CC0.

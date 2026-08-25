@@ -42,6 +42,8 @@ import sys
 
 import scan4
 import sheetmodel
+
+_HERE = os.path.dirname(os.path.abspath(__file__))
 from sheetmodel import CONSTANT_NUMBER, CONSTANT_DATE, CONSTANT_TEXT, DERIVED
 
 RETROSPECTIVE = "RETROSPECTIVE"
@@ -190,7 +192,40 @@ def screen(path, body=None, min_retro=1, tolerance=scan4.DEFAULT_TOLERANCE):
     try:
         wb = sheetmodel.read(path)
     except Exception as e:
-        out["criteria"]["read"] = {"pass": False, "why": str(e)[:120]}
+        # NO SHORT-CIRCUIT. The screen used to return here, recording one
+        # criterion and none of the other five -- which SSS_053 described
+        # as "records every criterion rather than stopping at the first
+        # failure", true of a criterion failure and false of a reader
+        # failure. Every criterion is now emitted with pass=None, which
+        # is neither a pass nor a fail: the criterion was not evaluated,
+        # and reporting it as failed would say the file lacks something
+        # nobody looked for.
+        out["criteria"]["read"] = {"pass": False, "why": str(e)[:160]}
+        for k in ("a_ships_values", "b_retrospective", "c_resolvable"):
+            out["criteria"][k] = {
+                "pass": None,
+                "why": "NOT EVALUATED: this criterion takes a reader that "
+                       "opened the file, and none did"}
+        # (d) and (e) do not take a reader. (d) does take container
+        # dates, which the reader supplies, so it is unevaluated too;
+        # (e) is recorded from the caller and is evaluable regardless.
+        out["criteria"]["d_date_separated"] = {
+            "pass": None,
+            "why": "NOT EVALUATED: container dates come from the reader"}
+        known = body in PRIOR_BODIES if body else None
+        out["criteria"]["e_different_body"] = {
+            "pass": (body is not None and not known),
+            "stated_body": body,
+            "why": "" if (body and not known) else
+                   ("authoring body not stated; recorded, not computed"
+                    if body is None else
+                    "same authoring body as a prior file: %s" % body)}
+        out["shape_note"] = (
+            "This screen is WORKBOOK-shaped. Criterion (a) reads cells and "
+            "(c) reads a relationship whose operands resolve inside the "
+            "file; for a prose document both are category mismatches "
+            "rather than failures, so a 'not eligible' verdict is about the "
+            "screen's fit, not about the file's contents.")
         out["eligible"] = False
         return out
     out["reader"] = wb.reader
@@ -373,10 +408,13 @@ def render(results, probe=None):
                                "ELIGIBLE" if r.get("eligible") else
                                "not eligible"))
         for k, v in r["criteria"].items():
-            mark = "pass" if v.get("pass") else (
-                "----" if v.get("pass") is False else "n/a ")
+            mark = ("pass" if v.get("pass") is True else
+                    ("----" if v.get("pass") is False else "n/e "))
             L.append("  %-4s %-46s %s"
                      % (mark, CRITERIA_TEXT.get(k, k), v.get("why", "")))
+        if r.get("shape_note"):
+            L += ["", "       %s" % r["shape_note"].replace(
+                ". ", ".\n       "), ""]
         b = r["criteria"].get("b_retrospective", {})
         if b.get("detail"):
             c = b["detail"]["counts"]
@@ -515,6 +553,30 @@ def _selftest():
        True)
     ck("and the off-diagonal is counted, not just flagged",
        independence([R(True, False), R(False, True)])["off_diagonal"], 2)
+
+    # ---- NO SHORT-CIRCUIT, including on a reader failure. The order
+    # says all criteria recorded per file; the screen used to return
+    # after one. Three states now: pass, fail, and not-evaluated, and
+    # the third is not a fail -- reporting it as one would say the file
+    # lacks something nobody looked for.
+    unreadable = screen(os.path.join(_HERE, "selection.py"))
+    ck("a file no reader opens still records every criterion",
+       sorted(unreadable["criteria"]), sorted(CRITERIA_TEXT))
+    ck("and the reader-dependent ones read not-evaluated, not failed",
+       [unreadable["criteria"][k]["pass"]
+        for k in ("a_ships_values", "b_retrospective", "c_resolvable",
+                  "d_date_separated")], [None, None, None, None])
+    ck("the read criterion itself is a fail, not a not-evaluated",
+       unreadable["criteria"]["read"]["pass"], False)
+    ck("(e) is still evaluated, since it takes no reader",
+       screen(os.path.join(_HERE, "selection.py"),
+              body="Someone Else")["criteria"]["e_different_body"]["pass"],
+       True)
+    ck("not-evaluated is not eligible either", unreadable["eligible"], False)
+    ck("and the shape note says the verdict is about fit, not contents",
+       "category mismatches" in unreadable.get("shape_note", ""), True)
+    ck("independence skips a candidate with unevaluated criteria",
+       independence([unreadable])["n"], 0)
 
     # ---- the screen records every criterion, not the first failure.
     # ---- the threshold is a choice and it moves the verdict. Both

@@ -1,0 +1,24 @@
+docreader -- container triage
+file        wecandoit.doc
+container   ole_cfb  (compound-file container magic)
+word doc    True  (WordDocument present; table stream: 1Table)
+streams     CompObj [114], DocumentSummaryInformation [4096], SummaryInformation [202644], 1Table [16971], WordDocument [15924]
+
+capabilities, declared per item
+  container_detect       True
+  form_fields            False
+  paragraph_structure    False
+  stream_enumerate       True
+  tables                 False
+  text                   True
+
+NOT_RUN, and what each absence stops:
+  form_fields            whether a blank in the template is a form field or an empty line -- which is P1's own question
+  paragraph_structure    artifact_id at a heading granularity finer than the document
+  tables                 financial figures laid out in tables rather than prose
+
+No text-heuristic substitute is offered. Running `strings` over
+the stream and keeping what looks like prose would produce
+something for every file and would misread it in ways nothing
+in the output would show. The order refuses it by name, and so
+this module: there is no code path here that returns text.

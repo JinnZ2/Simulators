@@ -505,3 +505,130 @@ instrument was doing to its own output what it audits workbooks for.
 or a difference computed across a mismatch.
 
 **Status: SUPPORTED. `FM_016` corrected, not defended.**
+
+---
+
+### FM_019 — the SBA run: one file of three, and P2 splits on a filled plan carrying eight dollar figures
+
+`sba.gov` refuses CONNECT (`SSS_057`), and one file was uploaded:
+`Sample_Business_Plan__We_Can_Do_It_Consulting_4.doc`. **It is not one of
+the three the order named.** Its author line reads *"Rebecca Champ,
+Owner"*, evidence it may be the file called *Rebecca's Plan*, recorded as
+evidence rather than asserted as identity. **n = 1.**
+
+| | prediction | outcome |
+|---|---|---|
+| P1 | blank template | **NOT ADDRESSABLE** — none arrived |
+| P2 | filled plan: dollar figures → downward stop resolves | **SPLIT** |
+| P3 | upward triple `+ / ABSENT / ABSENT` | **HOLDS**, 2 of 2 cells |
+| P4 | blank template upward cells ABSENT | **NOT ADDRESSABLE** |
+
+**P2's antecedent holds and its consequent does not.** Eight dollar
+figures exist — `$75`–`$150`, an hourly rate card by role. The downward
+stop still does not resolve, because the document **stops before Funding
+Request and Financial Projections**, the two sections of the SBA
+traditional format that carry computed numbers. In the full text:
+`revenue` 0, `forecast` 0, `projection` 0, `cash flow` 0, `break-even` 0,
+`loan` 0, `budget` 0. Nothing derives the rates and nothing is derived
+from them — no line multiplies a rate by an hour count.
+
+So `unmeasured_span_min` reads `not computable` on a filled business plan
+carrying eight dollar figures, which is a sharper result than the empty
+case P1 was written for.
+
+**Falsifier:** a computed quantity anywhere in this document.
+
+**Status: P3 SUPPORTED at n=1. P2 SPLIT. P1 and P4 NOT ADDRESSABLE.**
+
+---
+
+### FM_020 — S1a's downward rule has two states and this document needs three
+
+S1a: *"deepest QUANTIFIED quantity — one the org computes, not one that
+physically exists."* Two states, and the contrast is **computed** against
+**physically-existing-but-uncalculated** — joules that are real whether or
+not anyone works them out.
+
+An hourly rate card is neither. It is a number the organisation
+**produced and stated**, and it is not derived from anything and nothing
+is derived from it. Not a physical quantity nobody calculated; not a
+computed one either. A **third state: stated but underived.**
+
+The classification is therefore a judgement the rule does not settle, and
+it is not settled here by fiat. `computed` is a declared field
+(`FM_013`), so the term declares `computed: False` **with the evidence in
+the `by` string** — eight rates stated, nothing derived either direction —
+so a reader who would classify it the other way can disagree with the
+call without being misled about what is in the document.
+
+Which way it goes matters: `computed: True` makes the downward stop
+level −1 and `unmeasured_span_min` 1, and `computed: False` makes the
+stop absent and the span not computable. One declared boolean moves the
+whole downward arm.
+
+**Falsifier:** a reading of S1a under which a stated tariff is
+unambiguously one of the two existing states.
+
+**Status: SUPPORTED. Recorded as a gap in the rule, not patched by adding
+a third value to a delivered vocabulary.**
+
+---
+
+### FM_021 — the WO7 screen short-circuited on a reader failure, and `SSS_053` described it as not doing so
+
+The order says *"all criteria recorded per file, no short-circuit"*.
+`selection.screen()` returned immediately when `sheetmodel.read()` raised,
+recording **one** criterion of six.
+
+`SSS_053` states the screen *"records every criterion rather than stopping
+at the first failure"*. That is true of a **criterion** failure and false
+of a **reader** failure, and the distinction had never been exercised
+because every prior candidate opened.
+
+Repaired: every criterion is emitted, with a third state. Reader-dependent
+criteria read `pass: None` — **not evaluated**, which is not a fail:
+reporting them as failed would say the file lacks something nobody looked
+for. `(e)` takes no reader and is still evaluated. `independence()` skips
+a candidate with unevaluated criteria rather than counting it.
+
+**And the screen is workbook-shaped.** Criterion (a) reads cells and (c)
+reads a relationship whose operands resolve inside the file; on a prose
+document both are category mismatches rather than failures. The screen now
+says so in its own output, so a `not eligible` verdict on a document reads
+as a statement about the screen's fit and not about the file.
+
+**Falsifier:** a path by which an unevaluated criterion reads as a fail.
+
+**Status: REPAIRED, pinned. `SSS_053`'s sentence was true of the case it
+had seen and false of this one.**
+
+---
+
+### FM_022 — the .doc reader was written against the file, and the check that matters is the offset it would otherwise get wrong
+
+`docreader.read_doc()` is built: OLE container → FIB → CLX piece table →
+text runs. On this file: table stream `1Table`, `fcClx` 14688, `lcbClx`
+21, one piece, compressed, **7711 characters — exactly `ccpText`**, with
+205 characters beyond the main document cut and counted.
+
+Every known answer is that file's own number, which is the point:
+`SSS_017` and `SSS_041` are both defects a real file exposed that no
+fixture could, so the parser was deliberately not written ahead of the
+files (`SSS_057`).
+
+**The decisive check is the halving.** A compressed piece stores 8-bit
+characters and its `fc` is doubled in the header. A reader taking `fc`
+raw lands at 4096 instead of 2048 and returns *something* — plausible
+text from the middle of the document — and that something is what makes
+the defect invisible. Both halves are asserted: the unhalved offset does
+**not** contain the title, the halved one does.
+
+`sheetmodel.read()`'s `.doc` message was stale the moment the parser
+landed — it still said text extraction was not built. Corrected to the
+true reason: a document is not a workbook, has no cells, no formulas and
+no precedent graph, and returning an empty `Workbook` would let a caller
+read *"no cells"* as a fact about the file.
+
+**Falsifier:** a `.doc` whose text this reader gets wrong.
+
+**Status: SUPPORTED, pinned against the real file.**

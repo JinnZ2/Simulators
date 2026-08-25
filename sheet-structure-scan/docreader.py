@@ -13,21 +13,20 @@ WHAT IS BUILT AND WHAT IS NOT, stated rather than discovered later:
 
   container detection    BUILT -- and tested against real files
   OLE stream enumeration BUILT -- reused from xlsreader, not copied
-  text extraction        NOT BUILT
+  text extraction        BUILT -- FIB -> CLX piece table -> text runs
 
 Legacy `.doc` is a compound-file container holding a `WordDocument`
-stream and a `0Table`/`1Table` stream. Getting text out means parsing the
-FIB, following it to the CLX in the table stream, decoding the piece
-table, and walking each piece's character positions with a per-piece
-compressed-or-Unicode flag. That is the same class of work `xlsreader`
-did for BIFF8 and it is not done here.
+stream and a `0Table`/`1Table` stream. Text comes out through the FIB,
+which points at the CLX in the table stream; the CLX holds a piece table;
+each piece carries a character-position range, a byte offset, and a flag
+saying whether its run is 8-bit or UTF-16. Same class of work `xlsreader`
+did for BIFF8, and it is now done -- written against the first real file
+rather than ahead of it, which is why the known-answer checks below quote
+that file's own numbers.
 
-It is deliberately not built ahead of the files. `SSS_017` and `SSS_041`
-are both defects a real file exposed and no fixture could, because a
-fixture writer emits what the reader expects -- so a parser written
-against a spec and validated against its own synthetic input would be
-tested by the one thing that cannot fail it. When the files arrive, the
-parser is written against them.
+Structure beyond the character stream -- paragraph styles, form fields,
+tables -- is still NOT built. Those live in the PLCF structures the FIB
+also points at, and each is declared absent with what it stops.
 
 WHAT A TEXT-HEURISTIC SUBSTITUTE WOULD BE, so it can be refused by name:
 running `strings` over the stream and keeping what looks like prose. It
@@ -122,7 +121,7 @@ def is_word_doc(path):
 CAPABILITIES_DOC = {
     "container_detect": True,
     "stream_enumerate": True,
-    "text": False,
+    "text": True,
     "paragraph_structure": False,
     "form_fields": False,
     "tables": False,
@@ -130,9 +129,6 @@ CAPABILITIES_DOC = {
 
 # Which parts of the WO8 grid stop when a capability is absent.
 DEPENDENT = {
-    "text": "every upward cell (a stated goal is text), every quantified "
-            "downward stop (a dollar figure is text), the WO7 screen's "
-            "criteria (b) and (c)",
     "paragraph_structure": "artifact_id at a heading granularity finer "
                            "than the document",
     "form_fields": "whether a blank in the template is a form field or an "
@@ -172,16 +168,110 @@ def report(path):
     return "\n".join(L)
 
 
+def open_wd(path):
+    """The WordDocument stream, through the shared container parser."""
+    return xlsreader._cfb_streams(path)["WordDocument"]
+
+
+def fib(wd):
+    """The FIB fields this reader uses. Offsets walked, not guessed.
+
+    The variable-length parts have to be stepped through in order --
+    csw words, then cslw longs, then the fcLcb pairs -- because every
+    later field's position depends on the earlier counts, and those
+    counts differ by Word version.
+    """
+    ident, nfib = struct.unpack_from("<HH", wd, 0)
+    if ident != 0xA5EC:
+        raise NotRun("not a Word FIB: wIdent %04X" % ident)
+    flags = struct.unpack_from("<H", wd, 10)[0]
+    o = 32
+    csw = struct.unpack_from("<H", wd, o)[0]
+    o += 2 + csw * 2
+    cslw = struct.unpack_from("<H", wd, o)[0]
+    o += 2
+    rg_lw = struct.unpack_from("<%di" % cslw, wd, o)
+    o += cslw * 4
+    n_pairs = struct.unpack_from("<H", wd, o)[0]
+    o += 2
+    if n_pairs <= 33:
+        raise NotRun("FIB carries %d fcLcb pairs; fcClx is pair 33"
+                     % n_pairs)
+    fc_clx, lcb_clx = struct.unpack_from("<II", wd, o + 33 * 8)
+    return {"nFib": nfib,
+            "table_stream": "1Table" if (flags >> 9) & 1 else "0Table",
+            "cbMac": rg_lw[0] if cslw > 0 else None,
+            "ccpText": rg_lw[3] if cslw > 3 else None,
+            "fcClx": fc_clx, "lcbClx": lcb_clx, "fcLcb_pairs": n_pairs}
+
+
+def piece_table(clx):
+    """Pieces from the CLX. Each is (cp_start, cp_end, fc, compressed).
+
+    The CLX is a sequence of Prc (0x01) and Pcdt (0x02) blocks; only the
+    Pcdt carries the piece table, and the Prc blocks before it must be
+    stepped over by their own length rather than searched past.
+    """
+    o = 0
+    while o < len(clx):
+        t = clx[o]
+        if t == 1:
+            n = struct.unpack_from("<H", clx, o + 1)[0]
+            o += 3 + n
+            continue
+        if t != 2:
+            raise NotRun("unknown CLX token 0x%02X at %d" % (t, o))
+        lcb = struct.unpack_from("<I", clx, o + 1)[0]
+        plc = clx[o + 5:o + 5 + lcb]
+        n = (lcb - 4) // 12
+        cps = struct.unpack_from("<%dI" % (n + 1), plc, 0)
+        out = []
+        for i in range(n):
+            off = 4 * (n + 1) + i * 8
+            _fl, fc, _prm = struct.unpack_from("<HIH", plc, off)
+            comp = bool(fc & 0x40000000)
+            # A compressed piece stores 8-bit characters and its fc is
+            # doubled in the header. Reading it without halving lands
+            # mid-stream and returns plausible-looking rubbish.
+            real = (fc & 0x3FFFFFFF) // 2 if comp else fc
+            out.append((cps[i], cps[i + 1], real, comp))
+        return out
+    raise NotRun("no Pcdt block in the CLX")
+
+
 def read_doc(path):
-    """Not built. Raises rather than returning a degraded read."""
+    """Document text, as characters. Raises rather than degrading.
+
+    Returns a dict; `text` is the main document stream only, cut at
+    ccpText, because the piece table's character range also covers
+    footnotes, headers and annotations and those are not the document.
+    """
     ok, why = is_word_doc(path)
-    raise NotRun(
-        "text extraction from legacy .doc is NOT BUILT (%s). It takes the "
-        "FIB, the CLX piece table in the table stream, and a per-piece "
-        "compressed-or-Unicode walk -- the same class of work xlsreader "
-        "did for BIFF8. Deliberately not written ahead of the files: a "
-        "parser validated against its own synthetic input is tested by "
-        "the one thing that cannot fail it." % why)
+    if not ok:
+        raise NotRun(why)
+    s = xlsreader._cfb_streams(path)
+    wd = s["WordDocument"]
+    f = fib(wd)
+    tbl = s.get(f["table_stream"])
+    if tbl is None:
+        raise NotRun("FIB names table stream %s and it is not present"
+                     % f["table_stream"])
+    clx = tbl[f["fcClx"]:f["fcClx"] + f["lcbClx"]]
+    pieces = piece_table(clx)
+    parts = []
+    for cp0, cp1, fc, comp in pieces:
+        n = cp1 - cp0
+        if comp:
+            parts.append(wd[fc:fc + n].decode("cp1252", "replace"))
+        else:
+            parts.append(wd[fc:fc + n * 2].decode("utf-16-le", "replace"))
+    whole = "".join(parts)
+    ccp = f["ccpText"]
+    main = whole[:ccp] if ccp is not None else whole
+    return {"text": main, "chars": len(main), "fib": f,
+            "pieces": [{"cp": [a, b], "fc": c, "compressed": d}
+                       for a, b, c, d in pieces],
+            "beyond_main": len(whole) - len(main)}
 
 
 def _selftest():
@@ -246,8 +336,40 @@ def _selftest():
         print("  (real OLE workbook not present; container checks on it "
               "SKIPPED -- recorded, not silently passed)")
 
-    # The capability declaration is the contract, and the refusal is real.
-    ck("text is declared unavailable", CAPABILITIES_DOC["text"], False)
+    # ---- text extraction, against the real file it was written for.
+    # Known answers are that file's own FIB and piece table, which is
+    # the point: a parser validated against synthetic input is tested by
+    # the one thing that cannot fail it (SSS_017, SSS_041).
+    doc = "/tmp/wecandoit.doc"
+    if os.path.exists(doc):
+        f = fib(open_wd(doc))
+        ck("the FIB names its table stream", f["table_stream"], "1Table")
+        ck("and the CLX location", (f["fcClx"], f["lcbClx"]), (14688, 21))
+        ck("ccpText is the main document length", f["ccpText"], 7711)
+        r = read_doc(doc)
+        ck("the extracted text is exactly ccpText characters",
+           r["chars"], 7711)
+        ck("one piece, compressed", (len(r["pieces"]),
+                                     r["pieces"][0]["compressed"]),
+           (1, True))
+        ck("a compressed piece's fc is halved, not taken raw",
+           r["pieces"][0]["fc"], 2048)
+        ck("text beyond the main document is cut, and counted",
+           r["beyond_main"], 205)
+        # The decisive check: the bytes at the UNhalved offset are not
+        # the document. A reader taking fc raw returns something, and
+        # that something is what makes the defect invisible.
+        raw = open_wd(doc)[4096:4096 + 40].decode("cp1252", "replace")
+        ck("reading at the unhalved offset does not give the title",
+           "We Can Do It" in raw, False)
+        ck("and reading at the halved offset does",
+           "We Can Do It" in r["text"][:80], True)
+    else:
+        print("  (no .doc present; text-extraction checks SKIPPED -- "
+              "recorded, not silently passed)")
+
+    # The capability declaration is the contract.
+    ck("text is declared available", CAPABILITIES_DOC["text"], True)
     ck("every absent capability names what it stops",
        sorted(k for k, v in CAPABILITIES_DOC.items() if not v) ==
        sorted(k for k in DEPENDENT), True)
@@ -256,7 +378,7 @@ def _selftest():
         got = "returned"
     except NotRun:
         got = "raised"
-    ck("read_doc raises rather than returning a degraded read", got,
+    ck("read_doc raises on a non-Word file rather than degrading", got,
        "raised")
     # No path in this module returns document text. Composed from tokens
     # so the check does not match the line that defines it.
