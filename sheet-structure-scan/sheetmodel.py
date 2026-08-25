@@ -310,6 +310,7 @@ class Workbook(object):
         self.reader = reader
         self.capabilities = {"cell_values": True, "cell_kind": True,
                              "precedents": True, "formula_text": True}
+        self.file_dates = {}
         self._dependents = None
         self._pdepth = None
         self._ddepth = None
@@ -481,11 +482,33 @@ def read_xlsx(path):
     return Workbook(cells, sheets, path=path)
 
 
+def xlsx_dates(path):
+    """Dates docProps/core.xml records. Both, never one -- see the note
+    in xlsreader.summary_dates: the WO6 legacy target's two are eight
+    years apart, so the format that carries two is asked for two."""
+    out = {}
+    try:
+        with zipfile.ZipFile(path) as z:
+            if "docProps/core.xml" not in z.namelist():
+                return out
+            x = ET.fromstring(z.read("docProps/core.xml"))
+    except Exception:
+        return out
+    for tag, key in (("created", "created"), ("modified", "modified")):
+        for el in x.iter():
+            if el.tag.endswith("}" + tag) and el.text:
+                out[key] = el.text[:10]
+                break
+    return out
+
+
 def read(path):
     """Dispatch on extension. The one-reader slot is spent here or not."""
     ext = os.path.splitext(path)[1].lower()
     if ext in (".xlsx", ".xlsm"):
-        return read_xlsx(path)
+        w = read_xlsx(path)
+        w.file_dates = xlsx_dates(path)
+        return w
     if ext == ".xls":
         # Legacy BIFF8, work order 6 S1. Imported here rather than at
         # module scope because xlsreader imports this module. The one

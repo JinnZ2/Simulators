@@ -59,3 +59,40 @@ propagation mechanism.
 
 n will be 2. Two points give a direction, not a rate, and a direction
 only if the sign is the same.
+
+---
+
+# OUTCOME, added after the run
+
+Registered predictions are above this line and were committed at
+`9af360c`, before `scan4.py run` was pointed at the file.
+
+| | outcome |
+|---|---|
+| **P4** at least one testable relationship | **REFUTED.** 189 prose cells, 188 not arithmetic, **0 testable** |
+| **P1** operand count separates the bins | **UNREACHABLE** — no bins to separate |
+| **P2** a fill-value collision appears | **UNREACHABLE** — no relationship, no targets |
+| **P3** MAINTAINED is empty | **UNREACHABLE** — vacuously 0, and 0 of 0 is not the claim |
+
+P4 existed to make exactly this distinction, and it earned its place:
+without it, "MAINTAINED = 0" would have been reported as P3 holding, on
+a file where every bin is 0.
+
+**S4's stated fallback is *no collision found → H1 unsupported here*, and
+that is not the right report.** H1 is a hypothesis about workbooks that
+state two relationships. This workbook states none, so it is outside the
+population rather than a negative instance — recorded as `SSS_043`, with
+the reason: its provenance prose is *instructions to a filer*, not
+*claims about values the file ships*.
+
+**S5 did not fire.** Four of five sheets are located by
+`provenance_sheets()` and there are 333 text cells over 25 characters, so
+there is provenance prose; it just does not state arithmetic. The stop
+condition is for a workbook with no provenance sheet, and this is a
+workbook with provenance sheets and no relationships — a state S5 does
+not have a branch for, and the one this run landed in.
+
+**No tuning was done** (S2). `PROVENANCE_WORDS` still lacks `meth`, so
+`4. Calc. Meth. Disclosure` is located by its row-1 label rather than by
+its sheet name; adding `meth` would have been tuning to this file and was
+not done.

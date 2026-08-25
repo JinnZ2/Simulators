@@ -1,79 +1,34 @@
-### SYNTHETIC -- tests the criterion, not any real product
-
-target        EPA GHG Emission Factors Hub
-file          hub_synthetic.xlsx
-predicted     a flat reference table: hardcoded factors, units in the headers, variance and provenance in a separate document
-flag rule     numeric constants that are not labels (84 of 115 cells)
-
-sheets                2
-cells                 115
-derived               0  (0.000)
-rank == 0             1.000
-rank == CYCLE         0
-max precedent depth   0
-
-companion PRESENT rate over the flag set
-  unit                1.000
-  date                0.000
-  sample_size         0.000
-  variance_sibling    0.000
-
-label groups >= 2     14  (column axis: 5)
-  listed, column      0  (0.000)
-  listed, row         0
-
-check    readout           predicted  observed  state
--------  ----------------  ---------  --------  -----
-EFH-P1   derived_share     < 0.05     0.000     HELD
-EFH-P2   rank_zero_share   > 0.95     1.000     HELD
-EFH-P3a  unit_present      > 0.7      1.000     HELD
-EFH-P3b  variance_present  < 0.1      0.000     HELD
-EFH-P3c  sample_present    < 0.1      0.000     HELD
-EFH-P4   listed_col_share  < 0.1      0.000     HELD
-
-6 of 6 registered predictions held.
-
-This is one arm. A profile from a live-calculator arm (local, tcr, unfccc) is what
-decides whether these numbers describe the workbook or describe
-the scan. One arm alone cannot tell them apart.
-
-
-### SYNTHETIC -- tests the criterion, not any real product
-
-target        UNFCCC GHG emissions calculator (ver 01.1)
-file          chain_synthetic.xlsx
-predicted     a live calculator, so it carries formula chains
-flag rule     numeric constants that are not labels (8 of 72 cells)
-
-sheets                3
-cells                 72
-derived               32  (0.444)
-rank == 0             0.556
-rank == CYCLE         0
-max precedent depth   4
-
-companion PRESENT rate over the flag set
-  unit                1.000
-  date                0.000
-  sample_size         0.000
-  variance_sibling    0.000
-
-label groups >= 2     10  (column axis: 2)
-  listed, column      1  (0.500)
-  listed, row         8
-
-check   readout          predicted  observed  state
-------  ---------------  ---------  --------  -----
-UNF-P1  derived_share    > 0.2      0.444     HELD
-UNF-P2  rank_zero_share  < 0.95     0.556     HELD
-UNF-P3  max_pdepth       > 2.0      4.000     HELD
-
-3 of 3 registered predictions held.
-
-This is one arm. A profile from a live-calculator arm (local, tcr, unfccc) is what
-decides whether these numbers describe the workbook or describe
-the scan. One arm alone cannot tell them apart.
-
-not registered for this target:
-  no equivalent of LOC-P4. A cross-module collision prediction needs the module structure named BEFORE the file is opened, and it was not. Registering one from the workbook's own sheet list after opening it is a post-hoc threshold wearing a prediction's clothes.
-
+epa_check selftest
+  the two workbooks below are SYNTHETIC. They test whether the
+  criterion separates a flat table from a formula chain. Nothing
+  here is evidence about any EPA product.
+  hub shape holds every efh prediction                     PASS got=['HELD', 'HELD', 'HELD', 'HELD', 'HELD', 'HELD'] want=['HELD', 'HELD', 'HELD', 'HELD', 'HELD', 'HELD']
+  one sheet: no column group exists                        PASS got=0 want=0
+  and EFH-P4 says so rather than passing                   PASS got='NOT_DETERMINABLE' want='NOT_DETERMINABLE'
+  two sheets: the denominator exists                       PASS got=True want=True
+  chain shape does NOT hold efh-P1                         PASS got='NOT_HELD' want='NOT_HELD'
+  chain shape does NOT hold efh-P2                         PASS got='NOT_HELD' want='NOT_HELD'
+  chain shape holds every local prediction                 PASS got=['HELD', 'HELD', 'HELD', 'HELD'] want=['HELD', 'HELD', 'HELD', 'HELD']
+  hub shape does NOT hold local-P1                         PASS got='NOT_HELD' want='NOT_HELD'
+  hub shape does NOT hold local-P2                         PASS got='NOT_HELD' want='NOT_HELD'
+  hub: unit present, variance and sample absent            PASS got=(True, True, True) want=(True, True, True)
+  hub rank column carries no ordering                      PASS got=1.0 want=1.0
+  chain rank column does                                   PASS got=True want=True
+  chain: one column collision, many row rows               PASS got=(1.0, True) want=(1.0, True)
+  hub: repeated headers agree, so none is listed           PASS got=0.0 want=0.0
+  chain shape holds every local prediction                 PASS got=['HELD', 'HELD', 'HELD', 'HELD'] want=['HELD', 'HELD', 'HELD', 'HELD']
+  flat shape fails local on derived_share and rank         PASS got=['NOT_HELD', 'NOT_HELD'] want=['NOT_HELD', 'NOT_HELD']
+  chain shape holds every tcr prediction                   PASS got=['HELD', 'HELD', 'HELD'] want=['HELD', 'HELD', 'HELD']
+  flat shape fails tcr on derived_share and rank           PASS got=['NOT_HELD', 'NOT_HELD'] want=['NOT_HELD', 'NOT_HELD']
+  chain shape holds every unfccc prediction                PASS got=['HELD', 'HELD', 'HELD'] want=['HELD', 'HELD', 'HELD']
+  flat shape fails unfccc on derived_share and rank        PASS got=['NOT_HELD', 'NOT_HELD'] want=['NOT_HELD', 'NOT_HELD']
+  three arms are registered                                PASS got=3 want=3
+  the two new arms register no cross-module collision, with a reason PASS got=[True, True] want=[True, True]
+  simplified registers no threshold                        PASS got=[] want=[]
+  and says why                                             PASS got=True want=True
+  efh render carries no screened word                      PASS got=True want=True
+  local render carries no screened word                    PASS got=True want=True
+  simplified render carries no screened word               PASS got=True want=True
+  tcr render carries no screened word                      PASS got=True want=True
+  unfccc render carries no screened word                   PASS got=True want=True
+SELFTEST PASS (0 checks failed)

@@ -1,0 +1,113 @@
+scan three -- header collision
+workbook        lgo.xls
+reader          stdlib-xls-biff8
+sheets          1. LG Profile, 2. GHG Inventory Details, 3. Activity Data Disclosure, 4. Calc. Meth. Disclosure, 5. Sector Definitions
+normalization   case, whitespace, edge punctuation; parentheticals kept
+grouped on      normalized label and axis
+listed when     depth sets differ, or the kind set differs
+rank            sum over governed cells of dependents x downstream depth
+
+depths       set of precedent depths of the cells the label governs
+construction Nc = N constants, Nd = N derived
+
+rank  label                                         axis  as written                                    label at                       governs                             depths  construction
+----  --------------------------------------------  ----  --------------------------------------------  -----------------------------  ----------------------------------  ------  ------------
+41    total location-based scope 2 emissions        row   Total Location-Based Scope 2 Emissions        2. GHG Inventory Details!B19   2. GHG Inventory Details!E19:I19    {0}     1c+4d
+                                                          Total Location-Based Scope 2 Emissions        2. GHG Inventory Details!B60   2. GHG Inventory Details!F60:I60    {0}     4d
+                                                          Total Location-Based Scope 2 Emissions        2. GHG Inventory Details!B95   2. GHG Inventory Details!F95:I95    {0}     4d
+                                                          Total Location-Based Scope 2 Emissions        2. GHG Inventory Details!B144  2. GHG Inventory Details!F144:I144  {0}     4d
+                                                          Total Location-Based Scope 2 Emissions        2. GHG Inventory Details!B192  2. GHG Inventory Details!E192:I192  {0}     1c+4d
+                                                          Total Location-Based Scope 2 Emissions        2. GHG Inventory Details!B240  2. GHG Inventory Details!E240:I240  {0}     1c+4d
+                                                          Total Location-Based Scope 2 Emissions        2. GHG Inventory Details!B287  2. GHG Inventory Details!E287:I287  {0}     1c+4d
+                                                          Total Location-Based Scope 2 Emissions        2. GHG Inventory Details!B328  2. GHG Inventory Details!E328:I328  {0}     1c+4d
+                                                          Total Location-Based Scope 2 Emissions        2. GHG Inventory Details!B370  2. GHG Inventory Details!E370:I370  {0}     1c+4d
+                                                          Total Location-Based Scope 2 Emissions        2. GHG Inventory Details!B420  2. GHG Inventory Details!E420:I420  {0}     1c+4d
+35    total market-based scope 2 emissions          row   Total Market-Based Scope 2 Emissions          2. GHG Inventory Details!B26   2. GHG Inventory Details!E26:I26    {0}     1c+4d
+                                                          Total Market-Based Scope 2 Emissions          2. GHG Inventory Details!B102  2. GHG Inventory Details!F102:I102  {0}     4d
+                                                          Total Market-Based Scope 2 Emissions          2. GHG Inventory Details!B151  2. GHG Inventory Details!F151:I151  {0}     4d
+                                                          Total Market-Based Scope 2 Emissions          2. GHG Inventory Details!B199  2. GHG Inventory Details!E199:I199  {0}     1c+4d
+                                                          Total Market-Based Scope 2 Emissions          2. GHG Inventory Details!B247  2. GHG Inventory Details!E247:I247  {0}     1c+4d
+                                                          Total Market-Based Scope 2 Emissions          2. GHG Inventory Details!B291  2. GHG Inventory Details!E291:I291  {0}     1c+4d
+                                                          Total Market-Based Scope 2 Emissions          2. GHG Inventory Details!B332  2. GHG Inventory Details!E332:I332  {0}     1c+4d
+                                                          Total Market-Based Scope 2 Emissions          2. GHG Inventory Details!B377  2. GHG Inventory Details!E377:I377  {0}     1c+4d
+                                                          Total Market-Based Scope 2 Emissions          2. GHG Inventory Details!B427  2. GHG Inventory Details!E427:I427  {0}     1c+4d
+0     scope 3                                       row   SCOPE 3                                       2. GHG Inventory Details!B46   2. GHG Inventory Details!F46:M46    {0}     8c
+                                                          SCOPE 3                                       2. GHG Inventory Details!B74   2. GHG Inventory Details!F74:M74    {0}     8c
+                                                          SCOPE 3                                       2. GHG Inventory Details!B122  2. GHG Inventory Details!F122:M122  {0}     8c
+                                                          SCOPE 3                                       2. GHG Inventory Details!B171  2. GHG Inventory Details!F171:M171  {0}     8c
+                                                          SCOPE 3                                       2. GHG Inventory Details!B219  2. GHG Inventory Details!F219:M219  {0}     8c
+                                                          SCOPE 3                                       2. GHG Inventory Details!B267  2. GHG Inventory Details!F267:M267  {0}     8c
+                                                          SCOPE 3                                       2. GHG Inventory Details!B306  2. GHG Inventory Details!F306:M306  {0}     8c
+                                                          SCOPE 3                                       2. GHG Inventory Details!B347  2. GHG Inventory Details!F347:M347  {0}     8c
+                                                          SCOPE 3                                       2. GHG Inventory Details!B397  2. GHG Inventory Details!F397:M397  {0}     8c
+                                                          SCOPE 3                                       2. GHG Inventory Details!B447  2. GHG Inventory Details!F447:M447  {0}     8c
+                                                          SCOPE 3                                       2. GHG Inventory Details!B463  2. GHG Inventory Details!F463:M463  {0}     8c
+                                                          SCOPE 3                                       2. GHG Inventory Details!B481  2. GHG Inventory Details!E481:M481  {0,1}   1c+8d
+0     scope 2 - market-based                        row   SCOPE 2 - MARKET-BASED                        2. GHG Inventory Details!B21   2. GHG Inventory Details!F21:I21    {0}     4c
+                                                          SCOPE 2 - MARKET-BASED                        2. GHG Inventory Details!B62   2. GHG Inventory Details!F62:I62    {0}     4c
+                                                          SCOPE 2 - MARKET-BASED                        2. GHG Inventory Details!B97   2. GHG Inventory Details!F97:I97    {0}     4c
+                                                          SCOPE 2 - MARKET-BASED                        2. GHG Inventory Details!B146  2. GHG Inventory Details!F146:I146  {0}     4c
+                                                          SCOPE 2 - MARKET-BASED                        2. GHG Inventory Details!B194  2. GHG Inventory Details!F194:I194  {0}     4c
+                                                          SCOPE 2 - MARKET-BASED                        2. GHG Inventory Details!B242  2. GHG Inventory Details!F242:I242  {0}     4c
+                                                          SCOPE 2 - MARKET-BASED                        2. GHG Inventory Details!B289  2. GHG Inventory Details!F289:I289  {0}     4c
+                                                          SCOPE 2 - MARKET-BASED                        2. GHG Inventory Details!B330  2. GHG Inventory Details!F330:I330  {0}     4c
+                                                          SCOPE 2 - MARKET-BASED                        2. GHG Inventory Details!B372  2. GHG Inventory Details!F372:I372  {0}     4c
+                                                          SCOPE 2 - MARKET-BASED                        2. GHG Inventory Details!B422  2. GHG Inventory Details!F422:I422  {0}     4c
+                                                          SCOPE 2 - MARKET-BASED                        2. GHG Inventory Details!B480  2. GHG Inventory Details!E480:M480  {0,1}   5c+4d
+0     scope 2 - location-based                      row   SCOPE 2 - LOCATION-BASED                      2. GHG Inventory Details!B14   2. GHG Inventory Details!F14:I14    {0}     4c
+                                                          SCOPE 2 - LOCATION-BASED                      2. GHG Inventory Details!B58   2. GHG Inventory Details!F58:I58    {0}     4c
+                                                          SCOPE 2 - LOCATION-BASED                      2. GHG Inventory Details!B90   2. GHG Inventory Details!F90:I90    {0}     4c
+                                                          SCOPE 2 - LOCATION-BASED                      2. GHG Inventory Details!B139  2. GHG Inventory Details!F139:I139  {0}     4c
+                                                          SCOPE 2 - LOCATION-BASED                      2. GHG Inventory Details!B187  2. GHG Inventory Details!F187:I187  {0}     4c
+                                                          SCOPE 2 - LOCATION-BASED                      2. GHG Inventory Details!B235  2. GHG Inventory Details!F235:I235  {0}     4c
+                                                          SCOPE 2 - LOCATION-BASED                      2. GHG Inventory Details!B285  2. GHG Inventory Details!F285:I285  {0}     4c
+                                                          SCOPE 2 - LOCATION-BASED                      2. GHG Inventory Details!B326  2. GHG Inventory Details!F326:I326  {0}     4c
+                                                          SCOPE 2 - LOCATION-BASED                      2. GHG Inventory Details!B365  2. GHG Inventory Details!F365:I365  {0}     4c
+                                                          SCOPE 2 - LOCATION-BASED                      2. GHG Inventory Details!B415  2. GHG Inventory Details!F415:I415  {0}     4c
+                                                          SCOPE 2 - LOCATION-BASED                      2. GHG Inventory Details!B479  2. GHG Inventory Details!F479:M479  {0,1}   4c+4d
+0     scope 1                                       row   SCOPE 1                                       2. GHG Inventory Details!B86   2. GHG Inventory Details!F86:M86    {0}     8c
+                                                          SCOPE 1                                       2. GHG Inventory Details!B133  2. GHG Inventory Details!F133:M133  {0}     8c
+                                                          SCOPE 1                                       2. GHG Inventory Details!B182  2. GHG Inventory Details!F182:M182  {0}     8c
+                                                          SCOPE 1                                       2. GHG Inventory Details!B230  2. GHG Inventory Details!F230:M230  {0}     8c
+                                                          SCOPE 1                                       2. GHG Inventory Details!B279  2. GHG Inventory Details!F279:M279  {0}     8c
+                                                          SCOPE 1                                       2. GHG Inventory Details!B320  2. GHG Inventory Details!F320:M320  {0}     8c
+                                                          SCOPE 1                                       2. GHG Inventory Details!B359  2. GHG Inventory Details!F359:M359  {0}     8c
+                                                          SCOPE 1                                       2. GHG Inventory Details!B409  2. GHG Inventory Details!F409:M409  {0}     8c
+                                                          SCOPE 1                                       2. GHG Inventory Details!B458  2. GHG Inventory Details!F458:M458  {0}     8c
+                                                          SCOPE 1                                       2. GHG Inventory Details!B475  2. GHG Inventory Details!E475:M475  {0,1}   1c+8d
+0     indirect biogenic emissions - market-based    row   INDIRECT BIOGENIC EMISSIONS - MARKET-BASED    2. GHG Inventory Details!B39   2. GHG Inventory Details!F39:G39    {0}     2c
+                                                          INDIRECT BIOGENIC EMISSIONS - MARKET-BASED    2. GHG Inventory Details!B70   2. GHG Inventory Details!F70:G70    {0}     2c
+                                                          INDIRECT BIOGENIC EMISSIONS - MARKET-BASED    2. GHG Inventory Details!B115  2. GHG Inventory Details!F115:G115  {0}     2c
+                                                          INDIRECT BIOGENIC EMISSIONS - MARKET-BASED    2. GHG Inventory Details!B164  2. GHG Inventory Details!F164:G164  {0}     2c
+                                                          INDIRECT BIOGENIC EMISSIONS - MARKET-BASED    2. GHG Inventory Details!B212  2. GHG Inventory Details!F212:G212  {0}     2c
+                                                          INDIRECT BIOGENIC EMISSIONS - MARKET-BASED    2. GHG Inventory Details!B260  2. GHG Inventory Details!F260:G260  {0}     2c
+                                                          INDIRECT BIOGENIC EMISSIONS - MARKET-BASED    2. GHG Inventory Details!B302  2. GHG Inventory Details!F302:G302  {0}     2c
+                                                          INDIRECT BIOGENIC EMISSIONS - MARKET-BASED    2. GHG Inventory Details!B343  2. GHG Inventory Details!F343:G343  {0}     2c
+                                                          INDIRECT BIOGENIC EMISSIONS - MARKET-BASED    2. GHG Inventory Details!B390  2. GHG Inventory Details!F390:G390  {0}     2c
+                                                          INDIRECT BIOGENIC EMISSIONS - MARKET-BASED    2. GHG Inventory Details!B440  2. GHG Inventory Details!F440:G440  {0}     2c
+                                                          INDIRECT BIOGENIC EMISSIONS - MARKET-BASED    2. GHG Inventory Details!B478  2. GHG Inventory Details!F478:M478  {0,1}   6c+2d
+0     indirect biogenic emissions - location-based  row   INDIRECT BIOGENIC EMISSIONS - LOCATION-BASED  2. GHG Inventory Details!B32   2. GHG Inventory Details!F32:G32    {0}     2c
+                                                          INDIRECT BIOGENIC EMISSIONS - LOCATION-BASED  2. GHG Inventory Details!B66   2. GHG Inventory Details!F66:G66    {0}     2c
+                                                          INDIRECT BIOGENIC EMISSIONS - LOCATION-BASED  2. GHG Inventory Details!B108  2. GHG Inventory Details!F108:G108  {0}     2c
+                                                          INDIRECT BIOGENIC EMISSIONS - LOCATION-BASED  2. GHG Inventory Details!B157  2. GHG Inventory Details!F157:G157  {0}     2c
+                                                          INDIRECT BIOGENIC EMISSIONS - LOCATION-BASED  2. GHG Inventory Details!B205  2. GHG Inventory Details!F205:G205  {0}     2c
+                                                          INDIRECT BIOGENIC EMISSIONS - LOCATION-BASED  2. GHG Inventory Details!B253  2. GHG Inventory Details!F253:G253  {0}     2c
+                                                          INDIRECT BIOGENIC EMISSIONS - LOCATION-BASED  2. GHG Inventory Details!B298  2. GHG Inventory Details!F298:G298  {0}     2c
+                                                          INDIRECT BIOGENIC EMISSIONS - LOCATION-BASED  2. GHG Inventory Details!B339  2. GHG Inventory Details!F339:G339  {0}     2c
+                                                          INDIRECT BIOGENIC EMISSIONS - LOCATION-BASED  2. GHG Inventory Details!B383  2. GHG Inventory Details!F383:G383  {0}     2c
+                                                          INDIRECT BIOGENIC EMISSIONS - LOCATION-BASED  2. GHG Inventory Details!B433  2. GHG Inventory Details!F433:G433  {0}     2c
+                                                          INDIRECT BIOGENIC EMISSIONS - LOCATION-BASED  2. GHG Inventory Details!B477  2. GHG Inventory Details!F477:M477  {0,1}   6c+2d
+0     direct biogenic emissions                     row   DIRECT BIOGENIC EMISSIONS                     2. GHG Inventory Details!B28   2. GHG Inventory Details!F28:G28    {0}     2c
+                                                          DIRECT BIOGENIC EMISSIONS                     2. GHG Inventory Details!B104  2. GHG Inventory Details!F104:G104  {0}     2c
+                                                          DIRECT BIOGENIC EMISSIONS                     2. GHG Inventory Details!B153  2. GHG Inventory Details!F153:G153  {0}     2c
+                                                          DIRECT BIOGENIC EMISSIONS                     2. GHG Inventory Details!B201  2. GHG Inventory Details!F201:G201  {0}     2c
+                                                          DIRECT BIOGENIC EMISSIONS                     2. GHG Inventory Details!B249  2. GHG Inventory Details!F249:G249  {0}     2c
+                                                          DIRECT BIOGENIC EMISSIONS                     2. GHG Inventory Details!B293  2. GHG Inventory Details!F293:G293  {0}     2c
+                                                          DIRECT BIOGENIC EMISSIONS                     2. GHG Inventory Details!B334  2. GHG Inventory Details!F334:G334  {0}     2c
+                                                          DIRECT BIOGENIC EMISSIONS                     2. GHG Inventory Details!B379  2. GHG Inventory Details!F379:G379  {0}     2c
+                                                          DIRECT BIOGENIC EMISSIONS                     2. GHG Inventory Details!B429  2. GHG Inventory Details!F429:G429  {0}     2c
+                                                          DIRECT BIOGENIC EMISSIONS                     2. GHG Inventory Details!B476  2. GHG Inventory Details!F476:M476  {0,1}   6c+2d
+
+label groups with two or more occurrences: 17
+of those, listed: 9   not listed, construction and depths agree: 8
+distinct labels seen: 46

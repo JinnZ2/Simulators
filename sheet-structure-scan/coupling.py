@@ -801,7 +801,34 @@ def render_rank(wb, rows, cov, top=20, inputs=None):
              "evaluator      reproduces %d of %d cached values; %d not "
              "computable" % (cov["match"], cov["match"] + cov["mismatch"],
                              cov["not_computable"]),
-             "",
+             "reader         %s" % getattr(wb, "reader", "-"),
+             ""]
+    # WO6 S1. If the reader cannot supply formula text, coupling is not
+    # computable at all, and falling through to the COUNT mode would be
+    # a value-only substitute reported as coupling output. Declared and
+    # stopped instead. The COUNT ranking is still available -- under its
+    # own command, where nobody can read it as an elasticity.
+    if getattr(wb, "capabilities", {}).get("formula_text") is False:
+        return "\n".join(lines + [
+            "COUPLING IS NOT_RUN ON THIS WORKBOOK.",
+            "",
+            "The reader declares formula_text unavailable, and coupling is",
+            "an elasticity measured by perturbing a constant and",
+            "re-evaluating. With no formula text there is nothing to",
+            "re-evaluate, so no elasticity exists to report.",
+            "",
+            "The dependent-count ranking is NOT emitted here as a stand-in.",
+            "It measures wiring where coupling measures what moves, the two",
+            "disagree on this repository's own evidence -- 781 constants at",
+            "exactly zero coupling all rank non-zero by count, up to 380 --",
+            "and printing it under this heading would be a value-only",
+            "substitute reported as scan output.",
+            "",
+            "What the reader DOES supply here: %s."
+            % ", ".join(sorted(k for k, v in
+                               getattr(wb, "capabilities", {}).items() if v)),
+        ])
+    lines += [
              "COUPLING and COUNT ranks are not on one scale and do not",
              "compare. Rows are sorted within mode.",
              ""]
@@ -969,10 +996,27 @@ def _selftest():
     wbv = sheetmodel.read(fixture.write_demo(os.path.join(d, "v.xlsx"),
                                              vsheets))
     cv = verify(wbv)
-    ck("verify separates a right cache from a wrong one",
+    ck("verify separates a matching cache from a differing one",
        (cv["match"], cv["mismatch"], cv["not_computable"]), (2, 1, 0))
     ck("and names the disagreement",
        cv["worst"] is not None and cv["worst"][0], "S!D2")
+
+    # WO6 S1: a reader that cannot supply formula text stops coupling
+    # rather than being substituted for. Both arms, because a refusal
+    # that fires on everything is not a refusal.
+    class _W(object):
+        path = "x.xls"
+        reader = "stub"
+        capabilities = {"formula_text": False, "cell_values": True}
+    _cov = {"match": 0, "mismatch": 0, "not_computable": 0}
+    _out = render_rank(_W(), [], _cov)
+    ck("no formula text stops coupling and says NOT_RUN",
+       "NOT_RUN" in _out, True)
+    ck("and the count ranking is not emitted as a stand-in",
+       "COUNT  (" in _out, False)
+    _W.capabilities = {"formula_text": True, "cell_values": True}
+    ck("a capable reader is not stopped",
+       "NOT_RUN" in render_rank(_W(), [], _cov), False)
 
     print("SELFTEST %s (%d checks failed)"
           % ("PASS" if not fails else "FAIL", len(fails)))

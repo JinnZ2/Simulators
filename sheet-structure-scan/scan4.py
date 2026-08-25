@@ -563,9 +563,20 @@ def scan(wb, tolerance=DEFAULT_TOLERANCE):
                 for row in test_relationship(wb, rel, idx, tolerance):
                     row["prose_cell"] = c.ref()
                     rows.append(row)
+    fd = getattr(wb, "file_dates", {}) or {}
     return {"rows": rows, "sheets": sheets, "prose_cells": prose_n,
             "not_arithmetic": nonarith, "tolerance": tolerance,
-            "workbook": os.path.basename(wb.path or "-")}
+            "workbook": os.path.basename(wb.path or "-"),
+            "reader": getattr(wb, "reader", "-"),
+            "capabilities": dict(getattr(wb, "capabilities", {})),
+            "file_dates": fd,
+            # S3 asks for "file date" and both containers record two,
+            # eight years apart on the legacy target. Both are carried
+            # and both are printed; the column names which is which
+            # rather than picking one and calling it the file date.
+            "version_date": ("%s / %s" % (fd.get("created", "?"),
+                                          fd.get("modified", "?"))
+                             if fd else "not stated")}
 
 
 def bins(rows):
@@ -650,10 +661,86 @@ def render(res, verbose=False):
 
 # ---------------------------------------------------------------- S6
 
+# Which scans stop when a capability is absent. Named here so the
+# NOT_RUN list is derived from the reader's declaration rather than from
+# a note somebody keeps up to date.
+DEPENDENT_SCANS = {
+    "formula_text": "coupling.py (elasticity by perturbation)",
+    "precedents": "scan three depth, ranking",
+    "cell_values": "scan four, coupling",
+    "cell_kind": "scan two, scan three",
+}
+
+
+def operand_bins(res):
+    """S3: operand count per relationship, and the bin it landed in.
+
+    Grouped by (prose cell, operator, operand count) so one relationship
+    stated over many targets is one row rather than twenty-one, with the
+    target count kept. Returns [] when nothing is testable -- which is a
+    state and is rendered as one, not as an absent section.
+    """
+    groups = {}
+    for r in res["rows"]:
+        k = (r["prose_cell"], r["operator"], r["n_operands"])
+        g = groups.setdefault(k, {"bins": {}, "targets": 0})
+        g["bins"][r["bin"]] = g["bins"].get(r["bin"], 0) + 1
+        g["targets"] += 1
+    out = []
+    for (cell, op, n_ops), g in sorted(groups.items(),
+                                       key=lambda kv: (-kv[0][2], kv[0][0])):
+        out.append({"prose_cell": cell, "operator": op, "n_operands": n_ops,
+                    "targets": g["targets"],
+                    "bins": "  ".join("%s x%d" % (b, c)
+                                      for b, c in sorted(g["bins"].items()))})
+    return out
+
+
+def diverged_share(res):
+    """DIVERGED / (DIVERGED + HOLDS). None when nothing is testable.
+
+    None is not zero. A workbook with no testable relationship has an
+    EMPTY denominator, and returning 0.0 would put it at the good end of
+    a scale it is not on -- the PCH_001 shape, and the twelfth instance
+    of this repair in this repository.
+    """
+    b = bins(res["rows"])
+    den = b[DIVERGED] + b[HOLDS_UNMAINTAINED]
+    return None if not den else b[DIVERGED] / float(den)
+
+
+def direction(results):
+    """S3: two points give a direction, not a rate, and only if the sign
+    is the same.
+
+    Returns (verdict, why). The verdict is never a number.
+    """
+    shares = [(r["workbook"], diverged_share(r)) for r in results]
+    have = [(w, v) for w, v in shares if v is not None]
+    if len(have) < 2:
+        missing = [w for w, v in shares if v is None]
+        return ("NO_DIRECTION",
+                "a direction takes two defined points and %d of %d "
+                "workbook(s) have an empty denominator: %s"
+                % (len(missing), len(shares), ", ".join(missing) or "-"))
+    signs = set()
+    for i in range(1, len(have)):
+        d = have[i][1] - have[i - 1][1]
+        signs.add(0 if d == 0 else (1 if d > 0 else -1))
+    if len(signs) > 1:
+        return ("NO_DIRECTION",
+                "the steps do not share a sign, so no direction is stated")
+    sgn = signs.pop()
+    return (("FLAT" if sgn == 0 else
+             ("HIGHER_IN_LATER" if sgn > 0 else "LOWER_IN_LATER")),
+            "n = %d. A direction, not a rate." % len(have))
+
+
 def rate(results):
-    """S6. Accumulates across workbooks. n is stated on every emission."""
+    """S6 + S3. Accumulates across workbooks. n is stated on every
+    emission, and no curve is emitted at any n reached here."""
     n = len(results)
-    L = ["scan 4 -- maintenance rate",
+    L = ["scan 4 -- cross-file, stated-relationship maintenance",
          "workbooks in this emission: n = %d" % n, ""]
     body = []
     tot = {"DIVERGED": 0, "HOLDS_UNMAINTAINED": 0}
@@ -661,28 +748,63 @@ def rate(results):
         b = bins(res["rows"])
         tot["DIVERGED"] += b[DIVERGED]
         tot["HOLDS_UNMAINTAINED"] += b[HOLDS_UNMAINTAINED]
-        testable = b[DIVERGED] + b[HOLDS_UNMAINTAINED]
         ops = [r["n_operands"] for r in res["rows"]]
         cross = sum(1 for r in res["rows"] if r.get("same_sheet") is False)
+        sh = diverged_share(res)
         body.append([res["workbook"], res.get("version_date", "not stated"),
+                     res.get("reader", "-"),
                      b[MAINTAINED], b[HOLDS_UNMAINTAINED], b[DIVERGED],
                      b[NOT_TESTABLE],
                      "%.3g" % (sum(ops) / float(len(ops))) if ops else "-",
                      cross,
-                     "-" if not testable
-                     else "%.3f" % (b[DIVERGED] / float(testable))])
-    L.append(table(["workbook", "version date", "MAINT", "HOLDS", "DIVERGED",
-                    "NOT_TEST", "mean operands", "cross-sheet",
-                    "DIVERGED/(B+H)"], body))
+                     "empty denominator" if sh is None else "%.3f" % sh])
+    L.append(table(["workbook", "created / modified", "reader", "MAINT",
+                    "HOLDS",
+                    "DIVERGED", "NOT_TEST", "mean operands", "cross-sheet",
+                    "DIVERGED/(D+H)"], body))
+    caps = [(r["workbook"], r.get("capabilities", {})) for r in results]
+    missing = [(w, k) for w, c in caps for k, v in sorted(c.items())
+               if v is False]
+    if missing:
+        L += ["", "Reader capabilities not available, and the scans that",
+              "depend on them are NOT_RUN rather than substituted (S1):",
+              ""]
+        L.append(table(["workbook", "capability", "scans NOT_RUN"],
+                       [[w, k, DEPENDENT_SCANS.get(k, "-")]
+                        for w, k in missing]))
+
+    L += ["", "Operand count per relationship, and the bin it landed in.",
+          "One row per stated relationship, not per target.", ""]
+    any_rel = False
+    for res in results:
+        ob = operand_bins(res)
+        L.append("  %s" % res["workbook"])
+        if not ob:
+            L.append("    no testable relationship stated in this workbook")
+        else:
+            any_rel = True
+            L.append("    " + table(
+                ["prose cell", "operator", "operands", "targets", "bins"],
+                [[o["prose_cell"], o["operator"], o["n_operands"],
+                  o["targets"], o["bins"]] for o in ob]
+            ).replace("\n", "\n    "))
+        L.append("")
+
+    verdict, why = direction(results)
+    L += ["direction across the emission: %s" % verdict, "  %s" % why]
+
     den = tot["DIVERGED"] + tot["HOLDS_UNMAINTAINED"]
     L += ["", "pooled DIVERGED/(DIVERGED+HOLDS_UNMAINTAINED): %s"
-          % ("-" if not den else "%.3f" % (tot["DIVERGED"] / float(den)))]
-    if n < 2:
-        L += ["",
-              "NO CURVE IS REPORTED. n = %d. A decay curve takes a series"
-              % n,
-              "of workbooks with version dates; one workbook gives one",
-              "point, and a point is not a rate."]
+          % ("empty denominator" if not den
+             else "%.3f" % (tot["DIVERGED"] / float(den)))]
+    L += ["",
+          "NO CURVE IS REPORTED. n = %d. A decay curve takes a series of"
+          % n,
+          "workbooks with version dates; two points give a direction and",
+          "a point is not a rate."]
+    if not any_rel:
+        L += ["", "No workbook in this emission states a testable",
+              "relationship, so nothing here bears on operand count."]
     return "\n".join(L)
 
 

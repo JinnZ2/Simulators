@@ -23,7 +23,9 @@ python3 scans.py --selftest
 | `scans.py` | scan two, scan three, ranking, table. `--selftest` |
 | `no_severity.py` | the output constraint, enforced. `--selftest` |
 | `coupling.py` | sensitivity by perturbation, and the ranking. `--selftest` |
-| `scan4.py` | stated-relationship maintenance. `--selftest` |
+| `scan4.py` | stated-relationship maintenance, and the cross-file emission. `--selftest` |
+| `xlsreader.py` | legacy .xls (BIFF8), stdlib. `--selftest` |
+| `PREDICTIONS_WO6.md` | H1's predictions, committed before the run |
 | `WORK_ORDER_4.md` | scan 4 as delivered, verbatim |
 | `patterns.json` | companion patterns for scan two. Swap this, not the code |
 | `fixture.py` | the demo workbook, written as a readable table |
@@ -180,6 +182,74 @@ fires without the mask, and a third plants a grading word and requires
 it caught through the exemption. The other two hits were reworded
 rather than exempted.
 
+## Work order 6: a second workbook, and the legacy reader
+
+**The legacy constraint is about a reader, not a format.** S1 states that
+legacy readers expose only cached values, which is true of `xlrd`
+(`SSS_023`) and false of the file: a `.xls` is a compound-file container
+holding a BIFF record stream, and `struct` reaches it. The target carries
+**336 `FORMULA` and 23 `SHRFMLA`** records and all 336 decode, so
+`xlsreader.py` is stdlib and **the one-reader budget stays unspent for a
+second file format**. Capabilities are declared per item — `cell_values`,
+`cell_kind`, `precedents` yes, **`formula_text` no** — and callers mark
+scans NOT_RUN from the declaration rather than from a note.
+
+**Two decoding defects the real file produced.** Shared-formula masters
+are written *after* the first formula that uses them, so resolving in
+stream order gave 23 cells an empty precedent list that reads as *no
+precedents*; and relative areas were walked past rather than decoded,
+leaving 145 formulas with no edges and no flag. 188 of 336 → **336 of
+336**, 714 edges → 1056. Neither was reachable from a fixture, because
+the fixture writer emits what the reader expects.
+
+**The prediction that failed is the one written to fail cleanly.** P4 —
+*at least one prose cell yields a testable relationship* — was registered
+before the run so that P1–P3 would be **unreachable rather than refuted**
+if it went. It went: 189 prose cells, 188 not arithmetic, **zero testable
+relationships**. And the zero is the workbook, measured rather than
+argued: `average` 0, `mean` 0, `sum of` 0, `multiplied` 0, `divided` 0,
+`equals` 0, `=` 0 across all 189.
+
+**What the second file actually bought** is `SSS_043`, and it is not what
+H1 asked. The two workbooks' provenance prose is a different *kind*:
+UNFCCC says *"Bonaire: Average of American Samoa, Antigua and Barbuda,
+…"* — retrospective, about values it ships. LGO says *"Description of
+computational method:"* — prospective, about values a filer will supply.
+Both are unfilled templates, so fill state is not the difference. One
+**ships data with provenance notes**; the other **collects data with
+instructions**, and only the first kind can state a relationship about
+its own cells. H1 is not refuted here — it is **not addressable** here,
+and reporting the file as evidence against H1 would count a workbook that
+cannot answer the question as an answer.
+
+**So the share has an empty denominator and no direction is stated.**
+`diverged_share()` returns `None`, not `0.0` — zero would put a workbook
+with nothing to measure at the good end of a scale it is not on.
+`direction()` returns `NO_DIRECTION` and says why. n = 2 is printed, and
+no curve is emitted.
+
+**"File date" turned out to be two dates.** Both containers record a
+created and a modified time, and on the legacy target they are **eight
+years apart** (2008-06-04 / 2016-05-02) on a form whose filename states
+the later one. The column is headed `created / modified` and carries
+both; picking one would be a choice presented as a reading. Only the two
+date properties are read — the same property set names a private
+individual, and nothing reads it.
+
+**One thing the order caught that was live.** `coupling.py` ranks by
+elasticity where computable and by dependent count where not, which is
+right on a readable workbook and is exactly S1's forbidden substitution
+on a reader with no formula text. It printed a COUNT table under a
+coupling heading with nothing saying the coupling arm had not run. It now
+stops: `COUPLING IS NOT_RUN ON THIS WORKBOOK`, with what the reader does
+supply, and the count ranking is **not** offered as a stand-in — the two
+disagree on this repo's own evidence (`SSS_030`).
+
+Scan three's finding on the legacy file: `total location-based scope 2
+emissions` labels ten row blocks meant to be parallel sectors, and some
+govern `1c+4d` while others govern `4d`. 9 of 17 repeated-label groups
+listed, 8 agreeing on both axes.
+
 ## Targets
 
 `targets/TARGETS.md` pre-registers sixteen predictions across five
@@ -231,8 +301,8 @@ definition, has a default, and is printed into the report header when it
 is in force — an absence measured at radius 2 and one measured at radius
 6 are different readings. `SPEC.md` §5 is the table.
 
-159 selftest checks across six modules: `sheetmodel` 26,
-`no_severity` 11, `scans` 35, `targets/epa_check` 29, `coupling` 32,
-`scan4` 26.
+191 selftest checks across seven modules: `sheetmodel` 27,
+`no_severity` 12, `scans` 36, `targets/epa_check` 30, `coupling` 36,
+`scan4` 26, `xlsreader` 24.
 
 CC0. Stdlib only. Parses under Python 3.9.

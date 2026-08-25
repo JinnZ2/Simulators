@@ -5938,7 +5938,75 @@ underneath).
   preserving original casing — rather than by guesses. **`SSS_037`:** an
   operator naming no operands now lands in `NOT_TESTABLE` rather than
   falling out of the count, since a relationship that cannot be tested is
-  a reading and not an absence. **`SSS_039`, recorded rather than quietly
+  a reading and not an absence. **WO6 then amended the bin `BROKEN` →
+  `DIVERGED`** ("the cell and the stated relation differ", no ruling on
+  which is wrong) and **retired the delivered-order exemption entirely** —
+  no token in the order fires, so no file fires and nothing is masked,
+  with the three-arm harness kept for a real exemption later; across every
+  pinned sample **one file still fires and it is `no_severity`'s own
+  selftest transcript**, which must contain the words it screens in order
+  to test them (`SSS_049`, a statement about the screen's scope). **WO6 —
+  a second workbook and a legacy reader.** **`SSS_040`: the legacy
+  constraint is a property of the READER, not of the format** — true of
+  `xlrd` (`SSS_023`) and false of the file, since a `.xls` is a
+  compound-file container holding a BIFF record stream and `struct`
+  reaches it; the target carries **336 `FORMULA` and 23 `SHRFMLA`**
+  records, all 336 decode, `xlsreader.py` is stdlib, and **the one-reader
+  budget stays unspent for a second file format**, with capabilities
+  declared per item (`formula_text` **no**) so callers mark scans NOT_RUN
+  from a declaration rather than a note. **`SSS_041`, two decoding defects
+  the real file produced and no fixture could**: shared-formula masters
+  are written *after* the first formula using them, so stream-order
+  resolution gave 23 cells an empty precedent list reading as *no
+  precedents*; and relative areas (`ptgAreaN`) were walked past rather
+  than decoded, leaving 145 formulas with no edges and no flag — 188 of
+  336 → **336 of 336**, 714 edges → 1056, with the relative column delta a
+  signed BYTE and not the 14 bits an absolute ref uses. **`SSS_042`: the
+  prediction written to fail cleanly is the one that failed.** P4 (*at
+  least one testable relationship*) was registered before the run
+  precisely so P1–P3 would be **unreachable rather than refuted**, and it
+  went — 189 prose cells, 188 not arithmetic, **0 testable** — with the
+  zero measured as a property of the workbook rather than argued
+  (`average` 0, `mean` 0, `sum of` 0, `multiplied` 0, `divided` 0,
+  `equals` 0, `=` 0 across all 189). **`SSS_043`, what the second file
+  actually bought and it is not what H1 asked:** the two workbooks'
+  provenance prose is a different KIND — UNFCCC states *"Bonaire: Average
+  of American Samoa, …"*, retrospective and about values it ships; LGO
+  states *"Description of computational method:"*, prospective and about
+  values a filer will supply. Both are unfilled templates, so fill state
+  is not the difference; one **ships data with provenance notes** and the
+  other **collects data with instructions**, and only the first kind can
+  state a relationship about its own cells, so **H1 is not addressable
+  here rather than unsupported** — reporting the file as evidence against
+  H1 would count a workbook that cannot answer the question as an answer.
+  **`SSS_044`:** `diverged_share()` therefore returns `None` and not
+  `0.0`, since zero would put a workbook with nothing to measure at the
+  good end of a scale it is not on (`PCH_001`, thirteenth instance here),
+  and `direction()` returns **`NO_DIRECTION`** naming the empty
+  denominator, with n = 2 printed and no curve emitted. **`SSS_045`:**
+  "file date" turned out to be **two dates eight years apart** on the
+  legacy target (2008-06-04 created / 2016-05-02 modified, on a form whose
+  filename states the later one), so the column is headed
+  `created / modified` and carries both — and only the two date properties
+  are read, the same property set naming a private individual which
+  nothing reads. **`SSS_046`, the live one the order caught:**
+  `coupling.py` ranks by elasticity where computable and by dependent
+  count where not, which is right on a readable workbook and is exactly
+  S1's forbidden substitution on a reader with no formula text — it
+  printed a COUNT table under a coupling heading with nothing saying the
+  coupling arm had not run; it now stops with `COUPLING IS NOT_RUN ON THIS
+  WORKBOOK` and **does not offer the count as a stand-in**, since the two
+  disagree on this repo's own evidence (`SSS_030`), pinned in both
+  directions. **`SSS_047`:** scan three's finding on the legacy file is
+  the collision it exists for — `total location-based scope 2 emissions`
+  labels ten row blocks meant to be parallel sectors and some govern
+  `1c+4d` where others govern `4d`, 9 of 17 repeated-label groups listed
+  and 8 agreeing on both axes. **`SSS_048`:** the single non-arithmetic
+  exception is `often times`, an adverbial matched as multiplication —
+  `UNI_009`/`T1-1` inside scan 4's own operator vocabulary — caught by the
+  operand requirement `SSS_037` added rather than by the operator match,
+  and recorded rather than repaired since a word boundary does not
+  separate two senses of one token. **`SSS_039`, recorded rather than quietly
   fixed:** scan 4 **shipped without the constraint its own order states**
   — `scans.py` screens every emitted table through `no_severity` and
   `scan4.py` did not import it at all — and screening afterwards returned
@@ -5952,8 +6020,8 @@ underneath).
   `error` in the disclaimer and `needs` in the rate emission — were
   **reworded rather than exempted**, the call `residual-direction`
   `RDD_008` made when its own screen fired on its own disclaimer. Holds on
-  the real workbook and not only on the fixture. 159 selftest checks green
-  across six modules. Stdlib only, parses under 3.9, CC0.
+  the real workbook and not only on the fixture. 191 selftest checks green
+  across seven modules. Stdlib only, parses under 3.9, CC0.
 - `claim-record/` — Seven fields per claim, two hard rules, and a
   validator that refuses. Delivered spoken (`SOURCE_DROP.md`, verbatim):
   assertion without hedges / measurement as an interval / instrument plus

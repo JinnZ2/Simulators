@@ -1,11 +1,11 @@
 efh -- EPA GHG Emission Factors Hub
   a flat reference table: hardcoded factors, units in the headers, variance and provenance in a separate document
-    EFH-P1    derived_share      < 0.05    the stated design is hardcoded numbers, so formulas should be rare
+    EFH-P1    derived_share      < 0.05    the stated design is hardcoded numbers, so formulas are rare
     EFH-P2    rank_zero_share    > 0.95    a workbook of terminal constants has nothing downstream of anything, so deps x ddepth is zero almost everywhere and the rank column carries no ordering. This is the readout the target was handed over to test
     EFH-P3a   unit_present       > 0.7     an emission factor without a unit is not a factor; the units are in the headers
     EFH-P3b   variance_present   < 0.1     the stated design puts variance in a separate document
     EFH-P3c   sample_present     < 0.1     same, for the sample size behind each factor
-    EFH-P4    listed_col_share   < 0.1     repeated headers across sheets all govern constants at depth zero, so they agree in construction and are counted rather than listed. A flat table should produce many groups and almost no collisions. Column axis: the row axis lists once per record, so a row-axis count measures table height
+    EFH-P4    listed_col_share   < 0.1     repeated headers across sheets all govern constants at depth zero, so they agree in construction and are counted rather than listed. A flat table gives many groups and almost no collisions. Column axis: the row axis lists once per record, so a row-axis count measures table height
 
 local -- EPA Local GHG Inventory Tool
   sector calculators with live formula chains across community and government-operations modules
@@ -19,14 +19,14 @@ unfccc -- UNFCCC GHG emissions calculator (ver 01.1)
     UNF-P1    derived_share      > 0.2     a live calculator
     UNF-P2    rank_zero_share    < 0.95    the arm that decides whether EFH-P2 measured the Hub or measured the scan
     UNF-P3    max_pdepth         > 2.0     a calculator chains through intermediates
-    NOT registered: no equivalent of LOC-P4. A cross-module collision prediction needs the module structure named BEFORE the file is opened, and it was not. Registering one from the workbook's own sheet list after opening it is a post-hoc threshold wearing a prediction's clothes.
+    NOT registered: no equivalent of LOC-P4. A cross-module collision prediction rests on the module structure being named BEFORE the file is opened, and it was not. Registering one from the workbook's own sheet list after opening it is a post-hoc threshold wearing a prediction's clothes.
 
 tcr -- The Climate Registry Excel tool (Standard Inventory Report, LGOP)
   same class as the UNFCCC calculator: a live tool with formula chains
     TCR-P1    derived_share      > 0.2     a live tool
     TCR-P2    rank_zero_share    < 0.95    second instance of the discriminator arm
     TCR-P3    max_pdepth         > 2.0     a calculator chains through intermediates
-    NOT registered: no equivalent of LOC-P4, for the same reason as unfccc. The file format is also unknown here: if it ships as legacy .xls the reader raises and the one-reader slot gets spent, which is the contingency SSS_001 names for itself.
+    NOT registered: no equivalent of LOC-P4, for the same reason as unfccc. The file format is also unstated here: if it ships as legacy .xls the reader raises, which is the contingency SSS_001 names for itself.
 
 simplified -- EPA Simplified GHG Emissions Calculator
   smaller, mixed

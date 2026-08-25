@@ -1125,3 +1125,273 @@ contact.
 **Status: REPAIRED, and recorded rather than quietly fixed — a module
 landing without the constraint its order states is evidence about how
 the constraint travels, not a typo.**
+
+---
+
+### SSS_040 — the legacy constraint is a property of the reader, not of the format, and the one-reader budget stays unspent
+
+WO6 S1 states it as *"legacy readers may not expose formulas, only
+cached values"*. True of the reader this repository tested — `SSS_023`
+found `xlrd` 2.0.2 hands back cached values with no formula text — and
+**false of the file.**
+
+A `.xls` is a compound-file container holding a BIFF record stream, and
+`struct` reaches it. This target carries **336 `FORMULA` and 23
+`SHRFMLA`** records and all 336 decode.
+
+`xlsreader.py` is therefore stdlib, and the one spreadsheet reader
+beyond stdlib is unspent for a **second** file format. `SSS_001`'s
+argument was that both scans are about the formula layer a value-only
+reader drops; the legacy file is the case that argument was made for.
+
+Capabilities are declared per item rather than claimed in prose —
+`cell_values`, `cell_kind`, `precedents` yes; **`formula_text` no** —
+and callers mark scans NOT_RUN from the declaration.
+
+**Falsifier:** a `.xls` whose formulas this reader cannot reach.
+
+**Status: SUPPORTED.**
+
+---
+
+### SSS_041 — two decoding defects the real file produced, neither visible in a fixture
+
+**(1) Shared-formula masters are written after the first formula that
+uses them.** A `FORMULA` carrying `ptgExp` points at a `SHRFMLA` that
+has not been read yet, so resolving in stream order returns nothing.
+The first version did exactly that and gave **23 cells an empty
+precedent list**, which reads as *no precedents* rather than as *not
+resolved*. Deferred to a second pass; a key that still does not resolve
+now says `SHARED_MASTER_NOT_FOUND`.
+
+**(2) Relative areas were walked past rather than decoded.** `ptgAreaN`
+(0x2D) was skipped for its 8 bytes, which left **145 formulas with no
+precedents and no note** — the graph silently missing a third of its
+edges. Relative refs also store the column delta as a **signed byte**,
+not as the 14 bits an absolute ref uses: reading it wide puts a −1
+offset in column 16384.
+
+| | before | after |
+|---|---|---|
+| DERIVED cells with ≥1 precedent | 188 of 336 | **336 of 336** |
+| precedent edges | 714 | **1056** |
+| cells flagged partial | 23 | 0 |
+
+Both are pinned by selftest checks written from the real token arrays.
+Neither was reachable from a constructed fixture, because the fixture
+writer emits what the reader expects.
+
+**Falsifier:** a formula in this file whose precedent list the reader
+gets wrong.
+
+**Status: REPAIRED, pinned.**
+
+---
+
+### SSS_042 — P4 is refuted: the legacy workbook states no testable relationship, and the zero is the workbook
+
+Registered before the run in `PREDICTIONS_WO6.md`. P4 was *at least one
+prose cell yields a testable relationship*, written so that P1–P3 would
+be **unreachable rather than refuted** if it failed. It failed.
+
+| | |
+|---|---|
+| provenance sheets located | 4 of 5 |
+| prose cells read | 189 |
+| classified NOT_ARITHMETIC | 188 |
+| testable relationships | **0** |
+| bins | 0 / 0 / 0 / 1 |
+
+**The zero is a property of the workbook, not of the extractor**, and
+that is measured rather than argued. Occurrences across all 189 prose
+cells: `average` 0, `mean` 0, `sum of` 0, `total of` 0, `multiplied` 0,
+`divided` 0, `product of` 0, `equals` 0, `calculated as` 0, `=` 0.
+
+So P1, P2 and P3 are **unreachable on this file**. Per S4, H1 is
+therefore not supported here — and the sharper statement is that it is
+**not addressable** here, which is a different thing from unsupported
+and is `SSS_043`.
+
+**Falsifier:** a stated arithmetic relationship in this workbook's prose
+that the extractor missed.
+
+**Status: P4 REFUTED. P1–P3 UNREACHABLE.**
+
+---
+
+### SSS_043 — the two workbooks' provenance prose is a different KIND, and that is the cross-file finding
+
+This is what the second file bought, and it is not what H1 asked about.
+
+| | UNFCCC calculator | LGO inventory report |
+|---|---|---|
+| prose states | *"Bonaire … : Average of American Samoa, Antigua and Barbuda, …"* | *"Description of computational method:"* |
+| about | values the workbook **ships** | values a filer **will supply** |
+| tense | retrospective — how this number was produced | prospective — what you are to write here |
+| testable relationships | 23 | **0** |
+
+Both files are unfilled templates (`SSS_026`; the legacy file has **zero
+constant numbers** in 1580 cells). The difference is not fill state. It
+is that one workbook **carries reference data with provenance notes**
+and the other **collects data with instructions**, and only the first
+kind can state a relationship about its own values.
+
+**H1 is a hypothesis about workbooks that state relationships.** This
+workbook states none, so it is not a negative instance — it is outside
+the population. Reporting it as *H1 unsupported* would count a workbook
+that cannot address the question as evidence against it.
+
+The generalisation, and it is a prediction for a third file: **a
+data-shipping workbook states relationships about its own cells; a
+data-collecting workbook states instructions.** Scan 4 has something to
+measure only in the first kind.
+
+**Falsifier:** a data-collecting template whose provenance prose states
+arithmetic about its own cells, or a data-shipping workbook whose prose
+states only instructions.
+
+**Status: SUPPORTED at n=2, and it is n=2.**
+
+---
+
+### SSS_044 — the share has an empty denominator and no direction is stated
+
+S3 asks for `DIVERGED/(D+H)` per workbook and a direction across them.
+
+| workbook | MAINT | HOLDS | DIVERGED | NOT_TEST | share |
+|---|---|---|---|---|---|
+| unfccc.xlsx | 0 | 2 | 21 | 11 | 0.913 |
+| lgo.xls | 0 | 0 | 0 | 1 | **empty denominator** |
+
+`diverged_share()` returns `None`, not `0.0`. Zero would put a workbook
+with nothing to measure at the good end of a scale it is not on — the
+`PCH_001` shape, and the thirteenth instance of this repair here.
+
+`direction()` therefore returns **`NO_DIRECTION`**, with the reason:
+*a direction takes two defined points and 1 of 2 workbooks has an empty
+denominator.* n = 2 is printed on the emission, and no curve is emitted
+at any n reached here.
+
+**Falsifier:** a second data-shipping workbook, which would give the
+first two comparable points this order has not had.
+
+**Status: SUPPORTED.**
+
+---
+
+### SSS_045 — "file date" is two dates, eight years apart, and both are printed
+
+S3 asks for a file date. Both container formats record two, and on the
+legacy target they are not close:
+
+| workbook | created | modified |
+|---|---|---|
+| unfccc.xlsx | 2020-11-24 | 2021-05-25 |
+| lgo.xls | **2008-06-04** | **2016-05-02** |
+
+An eight-year gap between creation and last save, on a form whose
+filename states the later date. Picking one and labelling it *the file
+date* would be a choice presented as a reading, so the column is headed
+`created / modified` and carries both.
+
+Only the two date properties of the `SummaryInformation` set are read.
+The same property set carries author and company strings; those name a
+private individual, are no part of any measurement here, and nothing
+reads them.
+
+**Falsifier:** a use of the date column where the two dates license the
+same next step.
+
+**Status: SUPPORTED.**
+
+---
+
+### SSS_046 — coupling was silently substituting the forbidden value-only fallback until this order
+
+`coupling.py` ranks by measured elasticity **where computable and by
+dependent count where not**, which is right on a workbook whose
+formulas are readable. On a reader with no formula text it is exactly
+the substitution S1 forbids: every constant falls through to the COUNT
+mode and the report prints a ranking under a coupling heading.
+
+Run on the legacy file before the fix, it printed
+`evaluator reproduces 0 of 0 cached values; 336 not computable` and then
+a COUNT table, with nothing saying the coupling arm had not run.
+
+Now the reader's declaration stops it: **`COUPLING IS NOT_RUN ON THIS
+WORKBOOK`**, with what the reader does supply, and the count ranking is
+**not** emitted as a stand-in — on this repository's own evidence the
+two disagree, 781 constants at exactly zero coupling all ranking
+non-zero by count up to 380 (`SSS_030`). Pinned in both directions: a
+capable reader is not stopped.
+
+**Falsifier:** a path by which a count ranking reaches a coupling report.
+
+**Status: REPAIRED, pinned.**
+
+---
+
+### SSS_047 — scan three's finding on the legacy file: same label, different construction, in a template's repeated blocks
+
+Scans 1–4 ran unchanged (S2). Scan three found the collision it exists
+for, on a real legacy file:
+
+`total location-based scope 2 emissions` labels **ten** row blocks. Some
+govern `1c+4d` — five cells, the first a constant — and some govern
+`4d`, four cells, all derived. Same label, different construction, in a
+form where the ten blocks are meant to be parallel sectors.
+
+17 label groups with two or more occurrences; **9 listed, 8 agreeing on
+both construction and depth**, so the listing is selective rather than
+firing on repetition.
+
+**Falsifier:** a reading of those blocks under which the fifth cell's
+absence is intended.
+
+**Status: SUPPORTED. It is a structure report; what it means is the
+operator's.**
+
+---
+
+### SSS_048 — the one NOT_TESTABLE row is a sense collision, and the operand requirement caught it
+
+The legacy file's single non-`NOT_ARITHMETIC` prose cell is
+`5. Sector Definitions!B5`, matched on the operator `times`. The text is
+*"…often times the outdoor lighting at a given building…"* — an
+adverbial, not multiplication.
+
+`UNI_009` / `T1-1`'s shape inside scan 4's own operator vocabulary. It
+cost nothing because the second requirement held: no operands are
+named, so the row binned `NOT_TESTABLE` rather than producing a
+verdict. Recorded rather than repaired, because the guard that caught it
+is the one `SSS_037` added, and a word-boundary fix would not address the
+class — *times* as multiplication and *times* as an adverb are the same
+token.
+
+**Falsifier:** a sense collision that reaches a testable verdict.
+
+**Status: SUPPORTED. Caught by the second condition, not the first.**
+
+---
+
+### SSS_049 — with the exemption retired, one file still fires, and it is the screen's own selftest
+
+The WO4 amendment renamed the bin `BROKEN` → `DIVERGED` and retired the
+delivered-order exemption entirely: `DELIVERED_VOCABULARY = ()`, no
+token masked, no file exempted. Across every pinned sample in this
+folder, scan output and prediction registers included, **one file
+fires** — `samples/selftest.sample.txt`, which is `no_severity`'s own
+selftest transcript and necessarily contains the words it screens in
+order to test them.
+
+That is a statement about the screen's SCOPE, which is emitted reports.
+A transcript asserting that `terror` is not `error` is not one.
+
+Four other files fired on first screening and were **reworded, not
+exempted** — a check name containing *wrong*, two prediction lines
+containing *should*, and two containing *needs*. Fourth consecutive
+application of that rule (`RDD_008`, `SSS_039`).
+
+**Falsifier:** a screened word in an emitted report.
+
+**Status: SUPPORTED.**

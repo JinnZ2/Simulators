@@ -74,7 +74,7 @@ PREDICTIONS = {
                  "headers, variance and provenance in a separate document",
         "checks": [
             ("EFH-P1", "derived_share", "<", 0.05,
-             "the stated design is hardcoded numbers, so formulas should be "
+             "the stated design is hardcoded numbers, so formulas are "
              "rare"),
             ("EFH-P2", "rank_zero_share", ">", 0.95,
              "a workbook of terminal constants has nothing downstream of "
@@ -91,7 +91,7 @@ PREDICTIONS = {
             ("EFH-P4", "listed_col_share", "<", 0.10,
              "repeated headers across sheets all govern constants at depth "
              "zero, so they agree in construction and are counted rather "
-             "than listed. A flat table should produce many groups and "
+             "than listed. A flat table gives many groups and "
              "almost no collisions. Column axis: the row axis lists once "
              "per record, so a row-axis count measures table height"),
         ],
@@ -253,7 +253,7 @@ def _col_groups(wb):
     return sum(1 for v in seen.values() if v > 1)
 
 
-# A readout computed as a share needs its denominator to exist. Without
+# A readout computed as a share takes a denominator that exists. Without
 # this, EFH-P4 passes on a single-sheet workbook where no label can
 # appear twice -- a predicate satisfied by an empty result set, which is
 # the failure this repository recorded as PCH_001 and found here by

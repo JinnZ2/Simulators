@@ -29,6 +29,9 @@ coupling selftest
   and the ranking falls back to the count with the mode named PASS got=[('COUNT', 1)] want=[('COUNT', 1)]
   every constant feeding the unevaluable cell falls back PASS got={'COUNT'} want={'COUNT'}
   a constant with no dependents is not ranked            PASS got=[] want=[]
-  verify separates a right cache from a wrong one        PASS got=(2, 1, 0) want=(2, 1, 0)
+  verify separates a matching cache from a differing one PASS got=(2, 1, 0) want=(2, 1, 0)
   and names the disagreement                             PASS got='S!D2' want='S!D2'
+  no formula text stops coupling and says NOT_RUN        PASS got=True want=True
+  and the count ranking is not emitted as a stand-in     PASS got=False want=False
+  a capable reader is not stopped                        PASS got=False want=False
 SELFTEST PASS (0 checks failed)

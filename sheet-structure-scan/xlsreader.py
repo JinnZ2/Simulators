@@ -390,6 +390,70 @@ def parse_ptgs(rgce, home_sheet, sheets, xti, base=None):
     return out, complete
 
 
+def summary_dates(path):
+    """Dates the container records for itself. Both, never one.
+
+    A .xls SummaryInformation property set carries a created time (PID
+    12) and a last-saved time (PID 13), and on the WO6 target they are
+    EIGHT YEARS apart. S3 asks for "file date" and the file offers two,
+    so both are returned and the report prints both; picking one would
+    be a choice presented as a reading.
+
+    Only the two date properties are read. The same property set carries
+    author and company strings; those are a named individual and are not
+    part of any measurement here, so nothing reads them.
+    """
+    try:
+        streams = _cfb_streams(path)
+    except Exception:
+        return {}
+    b = streams.get("\x05SummaryInformation")
+    if not b or len(b) < 48:
+        return {}
+    try:
+        nsec = struct.unpack_from("<I", b, 24)[0]
+        if nsec < 1:
+            return {}
+        off = struct.unpack_from("<I", b, 44)[0]
+        cnt = struct.unpack_from("<I", b, off + 4)[0]
+        out = {}
+        for i in range(cnt):
+            pid, po = struct.unpack_from("<II", b, off + 8 + i * 8)
+            if pid not in (12, 13):
+                continue
+            if struct.unpack_from("<I", b, off + po)[0] != 0x40:
+                continue
+            ft = struct.unpack_from("<Q", b, off + po + 4)[0]
+            secs = ft / 10000000.0 - 11644473600
+            if secs < 0:
+                continue
+            out["created" if pid == 12 else "modified"] = _iso(secs)
+        return out
+    except (struct.error, IndexError, ValueError):
+        return {}
+
+
+def _iso(secs):
+    """UTC date from a POSIX second count. Explicit rather than via the
+    datetime formats, so the arithmetic is readable and stdlib-only."""
+    days = int(secs // 86400)
+    y = 1970
+    while True:
+        leap = (y % 4 == 0 and y % 100 != 0) or y % 400 == 0
+        n = 366 if leap else 365
+        if days < n:
+            break
+        days -= n
+        y += 1
+    leap = (y % 4 == 0 and y % 100 != 0) or y % 400 == 0
+    ml = [31, 29 if leap else 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    m = 0
+    while days >= ml[m]:
+        days -= ml[m]
+        m += 1
+    return "%04d-%02d-%02d" % (y, m + 1, days + 1)
+
+
 # ------------------------------------------------------------------ read
 
 DATE_FORMATS = set(range(14, 23)) | {27, 28, 29, 30, 31, 36, 45, 46, 47,
@@ -547,6 +611,7 @@ def read_xls(path):
     w = sheetmodel.Workbook(cells, sheets, path=path,
                             reader="stdlib-xls-biff8")
     w.capabilities = CAPABILITIES_XLS
+    w.file_dates = summary_dates(path)
     return w
 
 
@@ -628,6 +693,14 @@ def _selftest():
        parse_ptgs(rgce, "S", ["S", "T"], None)[0], [])
     ck("and resolves with one",
        parse_ptgs(rgce, "S", ["S", "T"], [(0, 1, 1)])[0], [("T", "A1")])
+
+    # Date arithmetic, known answers -- including the two the WO6 target
+    # actually carries.
+    ck("epoch", _iso(0), "1970-01-01")
+    ck("a leap day is not skipped", _iso(68 * 365 * 86400 + 17 * 86400),
+       "2038-01-01")
+    ck("the target's created date", _iso(1212609000), "2008-06-04")
+    ck("2016-05-02 round trip", _iso(1462233461), "2016-05-02")
 
     # Capability declaration is the contract the caller marks NOT_RUN from.
     ck("formula text is declared unavailable for xls",
