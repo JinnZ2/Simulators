@@ -7039,6 +7039,57 @@ underneath).
   **`BA_010`:** one screen exemption, three arms — the report prints
   *"outcome severity"* because it reads the held-constant list from the
   delivered document, and rewording it would misquote the source.
+- `experience-ledger/` — Origin claims confer present-tense standing and
+  the standing is almost never rechecked; the module refuses to score
+  the claim and emits **the maintenance question the field skipped**.
+  `experience_ledger.py` delivered verbatim; audit in `ledger_audit.py`,
+  claims `EL_001..EL_009`. Six decay classes with the asymmetry as the
+  point — **competence decays, standing does not** — physiological /
+  procedural-motor / declarative-component (fast, *and* the referent can
+  be superseded independently of the person) / substrate-mechanics /
+  judgment-under-load, plus `standing`, named in its own entry as not a
+  competence. Transfer runs on shared **substrate** rather than shared
+  domain label. **No claim about any person is recorded or judged**;
+  `probes/` holds audit-authored branch probes labelled as such, and the
+  field-behaviour claim — that *"coded since I was twelve"* is granted
+  continuity where *"ran machinery from age six"* is not — is the
+  module's central assertion and is not tested here. **`EL_001`:** this
+  is the decomposition of a folded term the tree already registered —
+  `fold-matrix/fold_register.py` lists `experience` as a candidate whose
+  `substitutes_for` is *"accumulated hours + continuity + transfer, none
+  checked"* and whose `residual_tell` is this module's header in
+  compressed form, so the register named the components and this is the
+  instrument for them, arrived at independently; `PROOF_CASE` is
+  material for the `counter_case` cell `FM_038` found empty on all 12
+  candidates, and does **not** close it, since the cell is still
+  `UNFILLED` there. **`EL_003`:** the module returns **its own verdict on
+  its own proof case** — `PROOF_CASE` as a claim comes back `CONTINUITY
+  ASSERTED, NOT MEASURED`, which is honest rather than a fault: the
+  decay half is physiology and holds, while *"the measurement is
+  trivially available and still not taken"* has a checkable first clause
+  and an unmeasured second, and the second is what the argument rests
+  on. **`EL_002`:** the help text is the string `None` — the header is
+  `#` comments so `__doc__` is `None` and `main()`'s else branch prints
+  it, with `--transfer` **advertised in the usage block and
+  unimplemented** and `--schema` implemented and unadvertised; fifth
+  instance of the CLI class in five folders and the first where the help
+  text is absent rather than unhelpful. **`EL_004`:** `maintained is
+  UNCHECKED` is an identity test against `None`, so `""`, `0`, `False`
+  and `[]` all read as measured — **there is no state for "checked, and
+  nothing was found"**, on the one field the whole module turns on.
+  **`EL_005`:** `question_skipped: null` carries two readings, *this
+  class has no measurable* (true of `standing`, by design) and *no
+  question was skipped*. **`EL_006`:** `score: UNCHECKED` is on one
+  branch of three, so a caller reading it gets a `KeyError` on the
+  others. **`EL_007`:** *"Same grammatical form"* holds over three of the
+  four header examples — *"ran the school paper / scouts"* names an
+  activity rather than an origin and is the one whose handling note has
+  to supply the time span; the argument needs three and the line says
+  four. **`EL_008`:** refusing the aggregate transfer coefficient — *"a
+  single number averages two things that move independently"* — is the
+  strongest move in the module, `domain-ledger`'s no-composite
+  discipline and `uninstrumented`'s SCALAR DEMAND arrived at
+  independently and built in rather than found.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

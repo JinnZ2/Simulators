@@ -1,0 +1,8 @@
+{
+  "_provenance": "AUDIT-AUTHORED branch probe. Reaches the MEASURABLE path. Not a case.",
+  "origin_claim": "probe",
+  "continuity_granted": true,
+  "decay_class": "substrate_mechanics",
+  "maintained_since": "2026-01",
+  "substrates": ["fault_propagation", "diagnostic_under_uncertainty", "not_a_substrate"]
+}
