@@ -6927,6 +6927,60 @@ underneath).
   missing. **`MV_009` UNVERIFIED:** every subject-matter fact in the
   ledger is carried and egress-blocked, and nothing in `MV_001..MV_008`
   rests on any of them. Stdlib only, parses under 3.9, CC0.
+- `clustering-axes/` — Six exploration routes for what AI agents cluster
+  on when the axis is **not imported from human social science**, plus a
+  model-free stylometric instrument for the cheapest of them. Both
+  delivered verbatim (`ROUTES.md`, `style_index.py`); audit in
+  `style_audit.py`, claims `CA_001..CA_010` (the `CA_` prefix is shared
+  with `constraint-assembly/`; cite with the folder). **The argument
+  holds and is the folder's point** — existing agent-homophily work
+  clusters on language, topic and gender performance, and in at least
+  one case **the clustering variable is itself a model's judgment**, so
+  the study cannot separate *agents cluster on X* from *the scorer reads
+  X*; that is `criterion-symmetry`'s shape, and the response (build the
+  criterion from countable features so a different lab with a different
+  model gets the same numbers) is honoured in code — four stdlib
+  imports, no network, no model, asserted over the module's own source.
+  **No agent corpus is reachable from this environment**, so every
+  measurement is taken on text already in the tree and every finding is
+  a property of the instrument. **`CA_002`, the headline:** the shipped
+  `--delta` command is **92.57% four unnormalised shape features** —
+  `sent_len_sd` alone 45.7% — while the 83 function-word rates that are
+  the topic-blind core the whole design rests on contribute **2.15%**;
+  the cause is units, since the rates sit near 0.01 and words-per-
+  sentence near 20, and an L1 sum over both is three orders of magnitude
+  out of balance. **`CA_003`, and the fix is one argument already
+  written:** `delta(a, b, corpus=...)` z-normalises — that *is* Burrows's
+  Delta and it exists to stop exactly this — and with a corpus the same
+  pair reads **function words 60.32%, unnormalised shape 2.94%**, a
+  complete reversal of which features carry the distance; `main()` calls
+  `delta` with two arguments, so the documented command never reaches
+  the branch (read from the AST, after a first regex pass matched the
+  function *definition* as a callsite, which is `FM_043`'s
+  wrong-syntactic-role a second time). **`CA_004`:** the trigram block is
+  the forty most common trigrams *of that text*, so two vectors carry
+  159 features each and share only 136-146, and `delta` averages over
+  the intersection — `d(a,b)` and `d(a,c)` are means over different
+  feature sets, which is load-bearing for R1's clustering; same fix,
+  choose the trigram vocabulary once over the corpus. **`CA_005`:**
+  nothing raises on any of seven edges (empty, one char, only newlines,
+  only punctuation, unicode) — the module's strongest engineering, and
+  what a real crawl hits first. **`CA_006`:** the stated *"159 countable
+  features"* is **exact** (83 + 19 + 40 + 17) and is a ceiling rather
+  than a constant, `the cat sat` giving 122 with the whole shortfall in
+  trigrams — recorded because a stated count holding exactly is the less
+  common outcome here. **`CA_007`:** the Burrows attribution covers the
+  **distance**, not the fixed function-word list — the canonical feature
+  set is the *N most frequent words of the corpus*, which would have
+  required a corpus and so would have forced the normalised path.
+  **`CA_009`:** R4's *"nothing new to collect"* is true of the corpora
+  and not of the scoring, moving its floor from nothing to one
+  classifier pass without moving it down the order. **`CA_010`
+  UNVERIFIED:** all four literature facts are carried and egress-blocked
+  (fifth folder in that state), with the Hashemi decoupling — assigned
+  identity decaying while neighbour similarity climbs — flagged as the
+  cheapest gap on the page, since the document calls it the most useful
+  thing on the table and its own Open section notes no route uses it.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
