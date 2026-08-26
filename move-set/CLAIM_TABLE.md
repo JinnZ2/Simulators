@@ -1,7 +1,18 @@
 # CLAIM TABLE — move-set
 
-`MV_001..MV_009`. Claims about the delivered `move_set_sim.py` and its
+`MV_001..MV_013`. Claims about the delivered `move_set_sim.py` and its
 filled ledger, both landed verbatim and modified by nothing.
+
+**Second drop, 2026-08-26.** `move_set_sim.py` was superseded in place
+by a revision splitting the single absence move into six
+(`M6a..M6f`), naming prior art per sub-move, and adding a
+compatibility path for ledgers written before the split. The
+pre-split module is at commit `b840e52`; it is not kept as a second
+copy in the tree, because a stale copy is what
+`tools/check_gate_drift.py` exists to catch. The delivered ledger
+predates the split, so it is the legacy case its own compatibility
+path handles. `MV_001..MV_009` were re-run against the revision;
+`MV_010..MV_013` are new.
 
 ## REFUTATION_PROTOCOL
 
@@ -282,3 +293,141 @@ consistency of two prose strings in a file that is checked in.
 states.
 
 **Status: UNVERIFIED, and load-bearing on nothing here.**
+
+---
+
+### MV_010 — the compatibility path repairs one readout and reaches two
+
+The revision anticipated that a pre-split total and a post-split total
+are not comparable, and emits a row saying so:
+
+    LEDGER SPANS THE M6 SPLIT. Totals from pre-split and post-split
+    runs are NOT comparable -- possible went from 6 to 11.
+
+That is right, and it addresses the **total**. The same bundling also
+reaches the **completeness** readout, and nothing says anything about
+that one. `score()` does `seen.update(LEGACY[mv])`, so one bundled
+entry marks all six sub-moves as run:
+
+    delivered ledger under the revision
+      total                     6.0 of 11.0
+      moves_not_run             []
+      sub-moves reported missing   0 of 6
+      unreachable points        5.0
+
+So the run reports *nothing missing* while five points of its own
+denominator cannot be earned by it. A reader taking `moves_not_run`
+at face value reads a complete run; a reader taking `total/possible`
+reads 55%. Both are emitted, and only one carries the caveat.
+
+Fourteenth instance in this repository of the absent-vs-known-negative
+shape, at a new site: the missing third state here is *counted as run
+because a predecessor covered it*, which is neither *run* nor *not
+run*.
+
+**Falsifier:** the six sub-moves appearing in `moves_not_run` on a
+legacy ledger, or the SPLIT row naming the completeness readout as
+well as the total.
+
+**Status: SUPPORTED.**
+
+---
+
+### MV_011 — the split's stated reason names four and the split makes six
+
+The comment introducing the family:
+
+    M6 FAMILY -- absence. Was one move. It produced four findings in a
+    single pass, which is the tell that it was not atomic
+
+Sub-moves created: **six**. The reasoning is sound either way — a move
+returning several separable findings is a bundle — and the number in
+the sentence is not the number of pieces the bundle was cut into. The
+two are different quantities (findings a particular run produced,
+versus detection modes the move mixes), and the sentence reads as
+though the first sets the second.
+
+Not consequential and recorded because the split is the revision's
+central move, and its stated warrant is one arithmetic step from its
+result.
+
+**Falsifier:** the sentence naming six, or the family having four
+sub-moves.
+
+**Status: SUPPORTED.**
+
+---
+
+### MV_012 — `LEGACY_ADMITS` is correct today and unmaintained by construction
+
+The bundle's admissible-verdict list is a hand-written literal of
+seven strings. Checked against what its six successors actually admit:
+
+    union of the six sub-moves' admits   == LEGACY_ADMITS
+    admitted by the bundle, by no successor: none
+
+So it is exactly right, which is the honest way to write it — a
+bundle admits what any of its successors admit. What it is not is
+**derived**. The union is one comprehension over `LEGACY` and `MOVES`,
+and a change to any sub-move's `admits` list moves the union and
+leaves the literal where it is.
+
+The margin is thin enough to matter: four of the seven verdicts are
+admitted by one or two of the six successors.
+
+    RESOLVED           6 of 6
+    NOT_ADDRESSABLE    4 of 6
+    NOT_DERIVABLE      3 of 6
+    NO_FINDING         2 of 6
+    INSTRUMENT_BLIND   1 of 6
+    NOT_SEPARABLE      1 of 6
+    SHARE_IS_NONE      1 of 6
+
+Removing `SHARE_IS_NONE` from `M6f_no_denominator` — the only
+sub-move that admits it — would leave the literal admitting a verdict
+no successor does, silently.
+
+Same arrangement as `reasoning-gate`'s `guards.json → GUARDS.md`,
+where the doc is generated from the source of truth and a test asserts
+they match. Here the derivation is available and unused.
+
+**Falsifier:** `LEGACY_ADMITS` computed from `LEGACY` and `MOVES`, or
+a test asserting the two agree.
+
+**Status: SUPPORTED.**
+
+---
+
+### MV_013 — the revision raised the ceiling on an ungrounded ledger and did not touch the gate
+
+`MV_002` is unchanged by the revision and is now worth more. The
+garbage ledger — right shape, `"x"` in every blocker and unblocker —
+scores:
+
+    before the split   6.0 of 6.0
+    after the split   11.0 of 11.0
+
+`score_entry` is byte-identical across the revision. So the split
+raised what a fully ungrounded ledger is worth by 83% while leaving
+the one guard the module's own docstring calls *"the only thing
+keeping symmetric scoring from being gameable"* exactly as it was:
+two non-empty strings.
+
+This is not an argument against the split, which is a real
+improvement to the move set. It is that a change to the move
+inventory moves the score ceiling, and the score ceiling is the
+quantity the anti-gaming guard is defending. `adaptive-claim-loop`
+`ACL_012` names the change that closes it — ask for a number, not a
+sentence — and `ACL_017` bounds what that buys.
+
+Prior art per sub-move is the revision's answer to a different
+question, and a strong one: eight of eleven moves now name an established
+investigative instrument, so a picker-up does not have to defend a new
+one. The three without (`M2_substitution`, `M4_perturb`,
+`M5_self_report`) are the three the comment does not discuss, and
+whether they have no prior art or were not looked up is not stated.
+
+**Falsifier:** the gate reading a computed quantity, or the ceiling
+staying fixed as moves are added.
+
+**Status: SUPPORTED.**

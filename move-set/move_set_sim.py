@@ -58,14 +58,77 @@ MOVES = {
                "this artifact look any different? Name the value that would change.",
         "admits": ["RESOLVED", "INSTRUMENT_BLIND", "NOT_ADDRESSABLE"],
     },
-    "M6_absence": {
-        "trigger": "always -- runs on every artifact",
-        "ask": "What cannot be seen from here? Refuse to score it. State the "
-               "blocker and what single measurement would remove the blocker.",
-        "admits": ["NOT_SEPARABLE", "NOT_ADDRESSABLE", "SHARE_IS_NONE",
-                   "INSTRUMENT_BLIND", "NO_FINDING"],
+    # -----------------------------------------------------------------
+    # M6 FAMILY -- absence. Was one move. It produced four findings in a
+    # single pass, which is the tell that it was not atomic: a move that
+    # returns several separable findings is a bundle, and a bundle can
+    # hide ordering inside itself where the path-dependence check cannot
+    # see it.
+    #
+    # Split by WHAT MAKES THE ABSENCE DETECTABLE, not by vocabulary.
+    # Prior art named per sub-move: these are established investigative
+    # instruments, so a picker-up does not have to defend a new one.
+    # -----------------------------------------------------------------
+    "M6a_sequence_gap": {
+        "trigger": "record set is enumerable -- numbered, dated, or serial",
+        "prior_art": "sequence gap analysis",
+        "ask": "Enumerate the set. Which members are missing, and does the "
+               "artifact anywhere acknowledge that they are missing?",
+        "admits": ["RESOLVED", "NOT_DERIVABLE", "NO_FINDING"],
+    },
+    "M6b_interval_unaccounted": {
+        "trigger": "artifact has a time axis",
+        "prior_art": "timeline reconstruction",
+        "ask": "Lay the records on the axis. Which intervals have no record "
+               "claiming them? Distinguish nothing-happened from not-recorded.",
+        "admits": ["RESOLVED", "NOT_DERIVABLE", "NOT_ADDRESSABLE"],
+    },
+    "M6c_negative_space": {
+        "trigger": "artifact set has internal regularity",
+        "prior_art": "negative space / expected-set reasoning",
+        "ask": "Given everything else present, what SHOULD be here and is "
+               "not? Argue from the set's own structure, not from outside "
+               "expectation.",
+        "admits": ["RESOLVED", "NOT_ADDRESSABLE", "NO_FINDING"],
+    },
+    "M6d_required_unfiled": {
+        "trigger": "a stated process mandates a record",
+        "prior_art": "absent expected document",
+        "ask": "What does the process require to exist? Is it filed? An "
+               "unfiled mandatory record and a filed one are different "
+               "findings from the same rule.",
+        "admits": ["RESOLVED", "NOT_ADDRESSABLE", "INSTRUMENT_BLIND"],
+    },
+    "M6e_orphan_link": {
+        "trigger": "two entities in the artifact are connected",
+        "prior_art": "link analysis",
+        "ask": "What connects these, and does any record state the reason? "
+               "The absence here is the absence of the connecting record, "
+               "not of the connection.",
+        "admits": ["RESOLVED", "NOT_DERIVABLE", "NOT_SEPARABLE"],
+    },
+    "M6f_no_denominator": {
+        "trigger": "artifact reports or invites a share, rate, or ratio",
+        "prior_art": "base-rate / denominator audit",
+        "ask": "What is the base? If the denominator was never collected, "
+               "the share does not exist -- it is not zero and not unknown.",
+        "admits": ["RESOLVED", "SHARE_IS_NONE", "NOT_ADDRESSABLE"],
     },
 }
+
+# M1 has prior art too: chain of custody is the same move. Not split --
+# M1 was already atomic and already fires on the right trigger.
+MOVES["M1_provenance"]["prior_art"] = "chain of custody"
+MOVES["M3_relation_held"]["prior_art"] = "verification of a stale attestation"
+
+# Ledgers written before the split use the bundled move. They stay
+# scoreable, at the value the bundle actually earns: one point, not six.
+LEGACY = {"M6_absence": ["M6a_sequence_gap", "M6b_interval_unaccounted",
+                         "M6c_negative_space", "M6d_required_unfiled",
+                         "M6e_orphan_link", "M6f_no_denominator"]}
+LEGACY_ADMITS = ["NOT_SEPARABLE", "NOT_ADDRESSABLE", "SHARE_IS_NONE",
+                 "INSTRUMENT_BLIND", "NO_FINDING", "RESOLVED",
+                 "NOT_DERIVABLE"]
 
 # Refusals are verdicts, not failures to answer.
 REFUSALS = {
@@ -118,18 +181,31 @@ def score_entry(e):
 
 
 def score(ledger):
-    rows, total = [], 0.0
+    rows, total, legacy = [], 0.0, False
     seen = set()
     for e in ledger:
+        mv = e.get("move")
         pts, why = score_entry(e)
-        if e.get("verdict") not in MOVES.get(e.get("move"), {}).get("admits", []):
+        if mv in LEGACY:
+            legacy = True
+            seen.update(LEGACY[mv])
+            admits = LEGACY_ADMITS
+            why += " (pre-split bundle: worth 1, not 6)"
+        else:
+            admits = MOVES.get(mv, {}).get("admits", [])
+        if e.get("verdict") not in admits:
             pts, why = 0.0, "verdict not admissible for this move"
-        seen.add(e.get("move"))
+        seen.add(mv)
         total += pts
-        rows.append({"move": e.get("move"), "verdict": e.get("verdict"),
+        rows.append({"move": mv, "verdict": e.get("verdict"),
                      "points": pts, "note": why})
     missing = [m for m in MOVES if m not in seen]
     n_ref = sum(1 for e in ledger if e.get("verdict") in REFUSALS)
+    if legacy:
+        rows.append({"move": "--", "verdict": "--", "points": 0.0,
+                     "note": "LEDGER SPANS THE M6 SPLIT. Totals from "
+                             "pre-split and post-split runs are NOT "
+                             "comparable -- possible went from 6 to 11."})
     return {
         "rows": rows,
         "moves_not_run": missing,

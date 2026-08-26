@@ -23,6 +23,9 @@ Three arms:
               quoted string is present in the file and asserted, so a
               later edit turns these red rather than leaving the
               reading stranded.
+  SPLIT       the M6 family. A second drop split one absence move into
+              six, and the delivered ledger predates the split, so it
+              is the legacy case its own compatibility path handles.
 
 CC0. stdlib only. Parses under Python 3.9.
 """
@@ -30,6 +33,7 @@ CC0. stdlib only. Parses under Python 3.9.
 import copy
 import json
 import os
+import re
 import subprocess
 import sys
 
@@ -87,6 +91,77 @@ def falsifier_edges():
         "two_same": M.path_dependence([real, copy.deepcopy(real)]),
         "two_shuffled": M.path_dependence([real, list(reversed(real))]),
         "two_differing": M.path_dependence([real, other]),
+    }
+
+
+# ---- the M6 split -------------------------------------------------
+
+def legacy_reading():
+    """What the pre-split bundle does to the two readouts.
+
+    The drop anticipated the comparability problem and emits a row
+    saying so. That row addresses the TOTAL. The same bundling also
+    reaches the completeness readout, which nothing says anything
+    about.
+    """
+    real = load()
+    r = M.score(real)
+    bundled = [e for e in real if e.get("move") in M.LEGACY]
+    return {
+        "ledger_is_legacy": bool(bundled),
+        "total": r["total"],
+        "possible": r["possible"],
+        "moves_not_run": r["moves_not_run"],
+        "submoves_reported_missing": [m for m in r["moves_not_run"]
+                                      if m.startswith("M6")],
+        "split_row_emitted": any("SPANS THE M6 SPLIT" in row["note"]
+                                 for row in r["rows"]),
+        "unreachable_points": r["possible"] - r["total"],
+    }
+
+
+def legacy_admits_derivable():
+    """LEGACY_ADMITS is a literal. Is it what its successors admit?"""
+    union = set()
+    for k in M.LEGACY["M6_absence"]:
+        union |= set(M.MOVES[k]["admits"])
+    src = open(os.path.join(HERE, "move_set_sim.py"), encoding="utf-8").read()
+    return {
+        "matches_union_today": set(M.LEGACY_ADMITS) == union,
+        "admitted_by_no_successor": sorted(set(M.LEGACY_ADMITS) - union),
+        "is_a_literal": "LEGACY_ADMITS = [" in src,
+        "derived_from_MOVES": "LEGACY_ADMITS" in src.split("def ")[0]
+                              and "MOVES[" in src.split(
+                                  "LEGACY_ADMITS")[1].split("]")[0],
+        "per_verdict": {v: sum(1 for k in M.LEGACY["M6_absence"]
+                               if v in M.MOVES[k]["admits"])
+                        for v in sorted(M.LEGACY_ADMITS)},
+    }
+
+
+def split_arithmetic():
+    """The stated reason for the split against the split's own size."""
+    src = open(os.path.join(HERE, "move_set_sim.py"), encoding="utf-8").read()
+    # the sentence wraps across a comment line, so the newline plus the
+    # `# ` prefix has to come out before it can be matched at all.
+    flat = " ".join(re.sub(r"\n\s*#\s?", " ", src).split())
+    m = re.search(r"produced (\w+) findings in a single pass", flat)
+    words = {"two": 2, "three": 3, "four": 4, "five": 5, "six": 6}
+    return {
+        "stated": m.group(1) if m else None,
+        "stated_n": words.get(m.group(1)) if m else None,
+        "submoves_created": len(M.LEGACY["M6_absence"]),
+        "moves_before": len(M.MOVES) - len(M.LEGACY["M6_absence"]) + 1,
+        "moves_after": len(M.MOVES),
+    }
+
+
+def prior_art_coverage():
+    pa = {k: v.get("prior_art") for k, v in M.MOVES.items()}
+    return {
+        "with": sorted(k for k, v in pa.items() if v),
+        "without": sorted(k for k, v in pa.items() if not v),
+        "every_m6_has_one": all(pa[k] for k in M.LEGACY["M6_absence"]),
     }
 
 
@@ -227,6 +302,56 @@ def render():
     out.append("   Nothing in the harness compares entries to each other.")
     out.append("   An orderless move set has no place to put a finding")
     out.append("   that only exists between two moves.")
+    out.append("8. THE M6 SPLIT, AND WHAT THE COMPATIBILITY PATH REACHES")
+    lr = legacy_reading()
+    sa = split_arithmetic()
+    out.append("   moves: %d before the split, %d after"
+               % (sa["moves_before"], sa["moves_after"]))
+    out.append("   the split's stated reason names %s findings; it"
+               % sa["stated"])
+    out.append("   creates %d sub-moves." % sa["submoves_created"])
+    out.append("")
+    out.append("   the delivered ledger is pre-split: %s"
+               % lr["ledger_is_legacy"])
+    out.append("   score                : %.1f of %.1f"
+               % (lr["total"], lr["possible"]))
+    out.append("   the SPLIT row is emitted: %s" % lr["split_row_emitted"])
+    out.append("   moves_not_run        : %s"
+               % (lr["moves_not_run"] or "[] -- nothing reported missing"))
+    out.append("   sub-moves reported missing: %d of 6"
+               % len(lr["submoves_reported_missing"]))
+    out.append("   -- `seen.update(LEGACY[mv])` marks all six sub-moves")
+    out.append("      run from one bundled entry, so the completeness")
+    out.append("      readout says nothing is missing while %.1f points"
+               % lr["unreachable_points"])
+    out.append("      of the denominator are unreachable. The drop")
+    out.append("      anticipated the comparability gap and the row")
+    out.append("      it emits addresses the TOTAL; the same bundling")
+    out.append("      reaches the second readout and nothing says so.")
+    out.append("")
+    la = legacy_admits_derivable()
+    out.append("   LEGACY_ADMITS is exactly its successors' union: %s"
+               % la["matches_union_today"])
+    out.append("   admitted by the bundle and by no successor: %s"
+               % (la["admitted_by_no_successor"] or "none"))
+    out.append("   it is a hand-written literal: %s" % la["is_a_literal"])
+    for v in sorted(la["per_verdict"]):
+        out.append("     %-18s admitted by %d of 6 successors"
+                   % (v, la["per_verdict"][v]))
+    out.append("   -- correct today and unmaintained by construction:")
+    out.append("      the union is one comprehension over LEGACY and")
+    out.append("      MOVES, and a change to any sub-move's admits list")
+    out.append("      moves the union and not the literal.")
+    out.append("")
+    pa = prior_art_coverage()
+    out.append("   prior art named on %d of %d moves"
+               % (len(pa["with"]), len(M.MOVES)))
+    out.append("   without: %s" % ", ".join(pa["without"]))
+    out.append("   -- every M6 sub-move has one, which is the point of")
+    out.append("      the split. The comment explains M1's and M3's")
+    out.append("      additions and does not say whether the other")
+    out.append("      three have no prior art or were not looked up.")
+    out.append("")
     return "\n".join(out)
 
 
@@ -257,13 +382,23 @@ def selftest():
 
     real = load()
 
-    # -- the delivered ledger
-    chk("the ledger runs every move", len(real) == len(M.MOVES))
+    # -- the delivered ledger. It predates the M6 split, so a move
+    #    id in it may be a bundle rather than a move.
+    def admits_of(mv):
+        if mv in M.LEGACY:
+            return M.LEGACY_ADMITS
+        return M.MOVES[mv]["admits"]
+
+    chk("the ledger runs one entry per pre-split move",
+        len(real) == len(M.MOVES) - len(M.LEGACY["M6_absence"]) + 1)
     chk("every verdict is admissible for its move",
-        all(e["verdict"] in M.MOVES[e["move"]]["admits"] for e in real))
+        all(e["verdict"] in admits_of(e["move"]) for e in real))
     s = M.score(real)
-    chk("the delivered ledger scores full", s["total"] == 6.0)
-    chk("no move is missing", s["moves_not_run"] == [])
+    chk("the delivered ledger scores full on the moves it ran",
+        s["total"] == 6.0)
+    chk("and the denominator is the post-split one",
+        s["possible"] == 11.0)
+    chk("no move is reported missing", s["moves_not_run"] == [])
     chk("refusal fraction is reported", s["refusal_fraction"] == 0.67)
     chk("four of six verdicts are refusals",
         sum(1 for e in real if e["verdict"] in M.REFUSALS) == 4)
@@ -276,9 +411,18 @@ def selftest():
 
     # -- the scorer, null-tested. This is the finding.
     g = M.score(garbage_ledger())
-    chk("a one-character-blocker ledger scores full", g["total"] == 6.0)
-    chk("it scores exactly what the real ledger scores",
-        g["total"] == s["total"])
+    chk("a one-character-blocker ledger scores full",
+        g["total"] == g["possible"])
+    chk("the real ledger does not out-score it",
+        s["total"] <= g["total"])
+    # the split moved the ceiling and not the gate: an ungrounded
+    # ledger is worth 11 where it was worth 6, and nothing in
+    # score_entry changed.
+    chk("the split raised what a garbage ledger is worth",
+        g["total"] == float(len(M.MOVES)) > 6.0)
+    chk("and the gate is still two non-empty strings",
+        M.score_entry({"verdict": "NOT_DERIVABLE",
+                       "blocker": "x", "unblocker": "x"})[0] == 1.0)
     a = M.score(all_resolved_ledger())
     chk("a one-character-locator ledger also scores full",
         a["total"] == float(len(a["rows"])))
@@ -316,13 +460,19 @@ def selftest():
     chk("two runs with the same verdicts and different reasons read stable",
         M.path_dependence([real, r2])["orderless"] is True)
 
-    # -- NO_FINDING
-    nf = M.score([{"move": "M6_absence", "verdict": "NO_FINDING"}])
+    # -- NO_FINDING. The split narrowed where it is admissible: it was
+    #    on the one absence move and is now on two of six sub-moves.
+    nf = M.score([{"move": "M6a_sequence_gap", "verdict": "NO_FINDING"}])
     chk("NO_FINDING scores zero", nf["total"] == 0.0)
-    chk("NO_FINDING is admissible for M6",
-        "NO_FINDING" in M.MOVES["M6_absence"]["admits"])
+    chk("NO_FINDING is admissible somewhere",
+        any("NO_FINDING" in v["admits"] for v in M.MOVES.values()))
+    nf_moves = [k for k, v in M.MOVES.items() if "NO_FINDING" in v["admits"]]
+    chk("on two of the six absence sub-moves", len(nf_moves) == 2)
+    chk("and on no move outside the M6 family",
+        all(k.startswith("M6") for k in nf_moves))
     chk("NO_FINDING is not counted as a refusal",
         nf["refusal_fraction"] == 0.0)
+    chk("the bundle admitted it too", "NO_FINDING" in M.LEGACY_ADMITS)
 
     # -- emit
     e7 = M.emit("probe", 7)
@@ -348,7 +498,48 @@ def selftest():
     chk("--emit with no artifact falls through to the help text",
         rc == 0 and "M1_provenance" in o)
     rc, o = cli([])
-    chk("no argument prints the move set", rc == 0 and "M6_absence" in o)
+    chk("no argument prints the move set",
+        rc == 0 and all(m in o for m in M.MOVES))
+    chk("and the pre-split bundle is not one of them",
+        "M6_absence" not in o)
+
+    # -- 8. the M6 split
+    lr = legacy_reading()
+    chk("the delivered ledger is the legacy case", lr["ledger_is_legacy"])
+    chk("the SPLIT row is emitted", lr["split_row_emitted"])
+    chk("and it addresses the total", lr["unreachable_points"] == 5.0)
+    chk("while the completeness readout reports nothing missing",
+        lr["moves_not_run"] == [])
+    chk("no sub-move is reported missing",
+        lr["submoves_reported_missing"] == [])
+    chk("one bundled entry marks six sub-moves as run",
+        len(M.score([{"move": "M6_absence", "verdict": "NOT_ADDRESSABLE",
+                      "blocker": "b", "unblocker": "u"}])["moves_not_run"])
+        == len(M.MOVES) - len(M.LEGACY["M6_absence"]))
+
+    la = legacy_admits_derivable()
+    chk("LEGACY_ADMITS is exactly its successors' union",
+        la["matches_union_today"])
+    chk("nothing is admitted by the bundle and no successor",
+        la["admitted_by_no_successor"] == [])
+    chk("it is a hand-written literal", la["is_a_literal"])
+    chk("not derived from LEGACY and MOVES", not la["derived_from_MOVES"])
+    chk("four of seven verdicts are admitted by one or two successors",
+        sum(1 for n in la["per_verdict"].values() if n <= 2) == 4)
+
+    sa = split_arithmetic()
+    chk("the stated reason names a number", sa["stated_n"] is not None)
+    chk("and it is not the number of sub-moves",
+        sa["stated_n"] != sa["submoves_created"])
+    chk("the move set went 6 to 11",
+        (sa["moves_before"], sa["moves_after"]) == (6, 11))
+
+    pa = prior_art_coverage()
+    chk("every M6 sub-move names prior art", pa["every_m6_has_one"])
+    chk("three moves name none", len(pa["without"]) == 3)
+    chk("and they are the three the comment does not mention",
+        set(pa["without"]) == {"M2_substitution", "M4_perturb",
+                               "M5_self_report"})
 
     # -- the pinned cross-entry reading
     present = contradiction_present()

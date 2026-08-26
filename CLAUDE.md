@@ -6880,7 +6880,7 @@ underneath).
   be asked in any order. `move_set_sim.py` ships the set, a scorer and a
   falsifier for that claim; `ledgers/wolf_dominance.json` is one filled
   run. Audit in `move_set_audit.py` (imports both, edits neither),
-  claims `MV_001..MV_009`. **`MV_001`, the target and it is built:** a
+  claims `MV_001..MV_013`. **`MV_001`, the target and it is built:** a
   correctly-refused verdict scores as high as a correct one — five
   refusal verdicts (`NOT_DERIVABLE`, `NOT_SEPARABLE`, `NOT_ADDRESSABLE`,
   `SHARE_IS_NONE`, `INSTRUMENT_BLIND`) score 1.0 exactly as `RESOLVED`
@@ -6926,7 +6926,51 @@ underneath).
   structure at all) supplying the bounded corpus both folders say is
   missing. **`MV_009` UNVERIFIED:** every subject-matter fact in the
   ledger is carried and egress-blocked, and nothing in `MV_001..MV_008`
-  rests on any of them. Stdlib only, parses under 3.9, CC0.
+  rests on any of them. **Second drop** supersedes the module in place:
+  the single absence move splits into six (`M6a_sequence_gap` /
+  `M6b_interval_unaccounted` / `M6c_negative_space` /
+  `M6d_required_unfiled` / `M6e_orphan_link` / `M6f_no_denominator`),
+  each naming established prior art — sequence gap analysis, timeline
+  reconstruction, negative space, absent expected document, link
+  analysis, base-rate audit — so a picker-up does not have to defend a
+  new instrument; six moves become eleven, and a compatibility path
+  keeps pre-split ledgers scoreable. The pre-split module is at commit
+  `b840e52` and is deliberately not kept as a second copy, a stale copy
+  being what `tools/check_gate_drift.py` exists to catch, and the
+  delivered ledger predates the split so it is the legacy case its own
+  path handles. **`MV_010`, the sharp one: the revision repairs one
+  readout and reaches two.** It anticipated that pre- and post-split
+  totals are not comparable and emits a row saying so — which addresses
+  the TOTAL — while `seen.update(LEGACY[mv])` marks all six sub-moves
+  run from one bundled entry, so the delivered ledger reports
+  `moves_not_run: []` while scoring **6.0 of 11.0** with five points of
+  its own denominator unreachable; a reader taking the completeness
+  readout at face value reads a complete run, and only the total
+  carries the caveat. Fourteenth instance of the
+  absent-vs-known-negative shape at a new site, the missing third state
+  being *counted as run because a predecessor covered it*.
+  **`MV_013`:** `score_entry` is byte-identical across the revision, so
+  the garbage ledger — right shape, `"x"` in every blocker and
+  unblocker — went **6.0 of 6.0 → 11.0 of 11.0**: the split raised what
+  a fully ungrounded ledger is worth by 83% while leaving the one guard
+  the docstring calls *"the only thing keeping symmetric scoring from
+  being gameable"* exactly as it was, so a change to the move inventory
+  moves the score ceiling and the ceiling is what the guard defends.
+  **`MV_012`:** `LEGACY_ADMITS` is **exactly** its six successors'
+  union today and is a hand-written literal, with the derivation one
+  comprehension over `LEGACY` and `MOVES` — and the margin is thin,
+  four of seven verdicts admitted by one or two successors, so dropping
+  `SHARE_IS_NONE` from `M6f_no_denominator` would leave the literal
+  admitting a verdict no successor does, silently; the
+  `guards.json → GUARDS.md` arrangement with the generation step
+  available and unused. **`MV_011`:** the split's stated reason names
+  *four* findings and creates *six* sub-moves — sound either way, and
+  the number in the sentence is not the number of pieces. `MV_002`,
+  `MV_003`, `MV_004` and `MV_005` all survive the revision unchanged,
+  `MV_004` sharper (eleven keys shuffled instead of six, and still no
+  field recording which order was used) and `MV_005` narrower
+  (`NO_FINDING` now admissible on two of eleven moves, still scoring
+  zero). Stdlib only, parses under 3.9, CC0.
 - `clustering-axes/` — Six exploration routes for what AI agents cluster
   on when the axis is **not imported from human social science**, plus a
   model-free stylometric instrument for the cheapest of them. Both
