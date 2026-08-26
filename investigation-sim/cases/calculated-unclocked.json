@@ -1,0 +1,25 @@
+{
+  "domain": "infrastructure",
+  "constructed": true,
+  "summary": "A bridge posting is derived from a load rating computed at commissioning under an assumed traffic mix. The mix changed; the posting did not, and the figure travels downstream with no re-check interval attached to it.",
+  "truth": "CALCULATED_UNCLOCKED",
+  "primary": "CALCULATED_UNCLOCKED",
+  "signals": {
+    "prior_report": "ABSENT",
+    "figure_without_clock": "PRESENT",
+    "designed_control": "ABSENT",
+    "no_instrument": "ABSENT"
+  },
+  "signal_basis": {
+    "prior_report": "searched: nobody reported the mix change as a hazard",
+    "figure_without_clock": "the rating carries no domain of validity and no next-check date",
+    "designed_control": "searched: no re-rating was proposed",
+    "no_instrument": "traffic counts exist and are collected"
+  },
+  "remedy": {
+    "text": "attach a domain of validity and a derived re-check interval to the posting",
+    "addresses_bin": "CALCULATED_UNCLOCKED",
+    "status": "OPEN"
+  },
+  "authoring_note": "The claim-record route: a figure whose clock was stripped, which that folder refuses to store as a literal date and derives instead."
+}

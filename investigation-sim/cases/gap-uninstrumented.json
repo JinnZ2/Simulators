@@ -1,0 +1,30 @@
+{
+  "domain": "infrastructure",
+  "constructed": true,
+  "summary": "A buried service crosses a boundary between two asset registers. Each register is complete for its own side and neither has a field for a member whose extent leaves it, so the crossing does not appear as a gap in either -- there is no row for it to be missing from.",
+  "truth": "GAP_UNINSTRUMENTED",
+  "primary": "GAP_UNINSTRUMENTED",
+  "signals": {
+    "prior_report": "ABSENT",
+    "figure_without_clock": "ABSENT",
+    "designed_control": "ABSENT",
+    "no_instrument": "PRESENT"
+  },
+  "signal_basis": {
+    "prior_report": "searched both registers' correspondence: nothing",
+    "figure_without_clock": "searched: no figure governs the crossing",
+    "designed_control": "searched: no control was proposed for it",
+    "no_instrument": "the exclusion is in the schema. Neither register can hold a member that leaves its own boundary, so the absence predates the first reading"
+  },
+  "remedy": {
+    "text": "retrain the survey crews",
+    "addresses_bin": "KNOWN_ROUTED_AWAY",
+    "status": "IMPLEMENTED"
+  },
+  "authoring_note": "Built with a DELIBERATELY MISAIMED remedy: a training change addresses a routing failure, and the bin that fired is a schema exclusion. This is the case S0.2 exists for.",
+  "gap": {
+    "mechanism": "STORAGE",
+    "why": "Neither register's schema can hold a member whose extent leaves its own boundary. The medium cannot carry the shape, so the crossing has no row to be missing from -- which is why it does not read as a gap in either record.",
+    "contested": "BUDGET_BOUNDARY is the near neighbour: each register is a closed accounting compared to an open one. Recorded rather than resolved; the register's own UNI_003 says the mechanisms are not exclusive and filing is a choice."
+  }
+}

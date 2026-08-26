@@ -1,0 +1,25 @@
+{
+  "domain": "manufacturing",
+  "constructed": true,
+  "summary": "A line operator files a written note that a guard interlock on a press is being bypassed on the night shift. The note is entered in the shift log, which is read at handover for production status and is not a channel that generates an action item.",
+  "truth": "KNOWN_ROUTED_AWAY",
+  "primary": "KNOWN_ROUTED_AWAY",
+  "signals": {
+    "prior_report": "PRESENT",
+    "figure_without_clock": "ABSENT",
+    "designed_control": "ABSENT",
+    "no_instrument": "ABSENT"
+  },
+  "signal_basis": {
+    "prior_report": "the note is in the shift log, dated, legible",
+    "figure_without_clock": "searched: no governing figure in this case",
+    "designed_control": "searched: no control was proposed",
+    "no_instrument": "the interlock IS the instrument and it reported"
+  },
+  "remedy": {
+    "text": "route safety observations to a channel that generates a tracked action item",
+    "addresses_bin": "KNOWN_ROUTED_AWAY",
+    "status": "IMPLEMENTED"
+  },
+  "authoring_note": "Built to fire exactly one signal. The other three are ABSENT rather than UNSEARCHED so the case tests the bin and not the NOT_DERIVABLE branch."
+}

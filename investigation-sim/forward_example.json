@@ -1,0 +1,14 @@
+[
+  {"id": "press-line-3", "constructed": true,
+   "signals": {"prior_report": "PRESENT", "figure_without_clock": "ABSENT",
+               "designed_control": "PRESENT", "no_instrument": "UNSEARCHED"}},
+  {"id": "bridge-14", "constructed": true,
+   "signals": {"prior_report": "ABSENT", "figure_without_clock": "PRESENT",
+               "designed_control": "ABSENT", "no_instrument": "ABSENT"}},
+  {"id": "feed-blending", "constructed": true,
+   "signals": {"prior_report": "ABSENT", "figure_without_clock": "ABSENT",
+               "designed_control": "ABSENT", "no_instrument": "ABSENT"}},
+  {"id": "buried-service-x", "constructed": true,
+   "signals": {"prior_report": "UNSEARCHED", "figure_without_clock": "UNSEARCHED",
+               "designed_control": "UNSEARCHED", "no_instrument": "UNSEARCHED"}}
+]

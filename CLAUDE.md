@@ -7227,6 +7227,91 @@ underneath).
   Nielsen occupation-is-not-a-demographic claim — is carried and
   unchecked at `ANC_010` / `MS_004` status. Stdlib only, parses under
   3.9, phone-buildable, CC0.
+- `investigation-sim/` — CSB-style incident investigation broadened
+  past chemical process to **industrial, manufacturing and
+  infrastructure**, pointed at one question: was this KNOWN,
+  CALCULATED, CONCEIVED AND NOT BUILT, or sitting in a gap no
+  instrument covered — because they need different remedies.
+  `SPEC.md` is written first and **parsed** by `bins.py` (bin names,
+  non-bin verdicts, routing table, mode list), so a decision changed in
+  one and not the other turns the selftest red. **`IS_001`, the
+  structural constraint stated before the design:** every case in an
+  incident-report corpus is a case where something happened, so a
+  classifier run over one reports that foreknowledge existed — a
+  property of the sampling frame — and **no rate is computable**, since
+  the denominator is hazards carrying the same signature where nothing
+  happened, which is `generation-capacity` R4's structurally uncounted
+  non-event (`UNI_126` / `SHB_023` / `DD_003` are the same shape).
+  `rate()` **raises**, naming both the uncounted population and the way
+  out; the way out is not a better corpus but **running forward**,
+  whose frame is *systems we pointed it at*, chosen before any outcome
+  — so the epistemically sound mode and the useful mode are the same
+  mode. Retrospective mode exists to CALIBRATE and is forbidden a rate.
+  Five bins — `KNOWN_ROUTED_AWAY` → `report-typing`,
+  `CALCULATED_UNCLOCKED` → `claim-record`/`criteria-drift`,
+  `CONCEIVED_NOT_BUILT` → `fold-matrix`, `GAP_UNINSTRUMENTED` →
+  `uninstrumented`, `NOT_FORESEEN` — plus `NOT_DERIVABLE` and
+  `MULTIPLE`, which are not bins. **`IS_003`, the design's spine:**
+  `NOT_DERIVABLE` and `NOT_FORESEEN` both fire nothing and carry
+  opposite instructions (look harder / stop looking), so the
+  distinction lives in the **input** rather than the output — signals
+  are three-valued (`PRESENT` / `ABSENT` = searched-and-absent, a
+  measurement / `UNSEARCHED` = not one), a missing field reads
+  `UNSEARCHED` and never `ABSENT`, and collapsing them files a case
+  with a destroyed record as genuinely novel. Fifteenth-plus instance
+  of the absent-vs-known-negative repair and one of the few designed in
+  before any data; what is new is the **site**, since previous
+  instances put the third state on an output field and this puts it on
+  the input so every verdict downstream inherits it. **`IS_002`:**
+  `NOT_FORESEEN` is reachable and a constructed case reaches it — a
+  classifier that never returns it is `CONSTANT_FIRES` — and the case's
+  authoring note records the contestable call (is an assay covering
+  only specified species fit for purpose, or a constitutional
+  exclusion?) rather than smoothing it, which is where the line between
+  bins 4 and 5 actually falls. **Two readouts need no denominator:**
+  route-to-remedy mismatch (a `GAP_UNINSTRUMENTED` case whose remedy is
+  a training change aims at a different bin) and **the recursion** — an
+  issued recommendation that is not implemented IS a control conceived
+  and not built, bin 3 produced by the process investigating bin 3,
+  checkable from status alone and the readout most likely to survive a
+  real corpus. **`IS_006`:** the primary on a `MULTIPLE` case is
+  **declared, never computed**, because a computed primary is a
+  root-cause argument and ranking causes is what lets an investigation
+  stop at the cheapest one. **Two defects found by running, both
+  recorded rather than quietly fixed.** `IS_004`: `remedy_mismatch`
+  returned `bool(fires) and aims not in fires`, so on a case where
+  nothing fired it returned `mismatch: False` and the report rendered
+  *"addresses a bin that fired"* — `IS_003`'s own repair, designed into
+  the signals and then not applied two functions later, in the function
+  whose entire job is a three-way comparison; third state
+  `NO_BIN_FIRED` added, `mismatch: None`. `IS_007`: the guard written
+  to prove `classify` never reads `case["truth"]` grepped the body as a
+  string and the docstring says *"Never reads `case['truth']`"*, so the
+  guard fired on the sentence saying it does not — `UNI_009`/`T1-1`
+  inside the guard, repaired with AST and both halves pinned.
+  **`IS_008`, the largest open item:** four of five routes are
+  **declared and not wired**; the wired one imports
+  `uninstrumented.MECHANISMS` and refuses a mechanism outside it —
+  imported, not copied, because five stale copies of one gate is what
+  copying produced last time (`MF_006`, `MF_011`) — and each of the
+  other four is named as a specific small piece of work.
+  **`IS_009`:** forward mode's `unsearched_signals` has **no
+  retrospective analogue**, since by the time there is an incident
+  every signal has been searched (searching them is what an
+  investigation is), so the count only exists while nothing has
+  happened yet; on the shipped example `no_instrument` is the
+  least-searched, which is the ordinary result because it is the signal
+  whose absence leaves no gap in any record to notice. **`IS_010`
+  UNVERIFIED:** seven CONSTRUCTED cases, each declaring itself so with
+  a per-signal basis and an authoring note, ground truth in the
+  authoring rather than in the classifier (`playground/`'s rule); no
+  CSB, NTSB or HSE report has been read, egress being an allowlist, and
+  the design is built to be run by someone who has them. One declared
+  `no_severity` exemption (`recommendation`) measured with the
+  three-arm harness, and named as a limit — an investigation folder's
+  working vocabulary IS the screened vocabulary, and a screen written
+  for spreadsheet audits does not know the difference. 77 selftest
+  checks. Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

@@ -1,0 +1,19 @@
+{
+  "mode": "FORWARD",
+  "n_systems": 4,
+  "occupancy": {
+    "KNOWN_ROUTED_AWAY": 1,
+    "CALCULATED_UNCLOCKED": 1,
+    "CONCEIVED_NOT_BUILT": 1,
+    "GAP_UNINSTRUMENTED": 0,
+    "NOT_FORESEEN": 1,
+    "NOT_DERIVABLE": 1
+  },
+  "unsearched_signals": {
+    "prior_report": 1,
+    "figure_without_clock": 1,
+    "designed_control": 1,
+    "no_instrument": 2
+  },
+  "note": "counts of systems per bin. Not a probability, not a ranking, and not comparable to a retrospective count."
+}

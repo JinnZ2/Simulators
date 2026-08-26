@@ -1,0 +1,80 @@
+INVESTIGATION SIM -- foreknowledge bins
+CSB-style investigation across industrial, manufacturing
+and infrastructure. SPEC.md is parsed, not restated.
+
+Every case here is CONSTRUCTED. Egress from this environment is
+an allowlist and every incident-report host is outside it, so
+nothing in this folder reads a real report or says anything about
+a real event.
+
+0. THE SELECTION TRAP
+   Every case in an incident-report corpus is a case where
+   something happened, so a classifier run over one will find
+   foreknowledge. rate() raises rather than returning a number.
+   The mode that escapes it is FORWARD, whose frame is chosen
+   before any outcome -- which is also the mode the tool is for.
+
+1. THE BINS
+     KNOWN_ROUTED_AWAY      -> report-typing
+     CALCULATED_UNCLOCKED   -> claim-record, criteria-drift
+     CONCEIVED_NOT_BUILT    -> fold-matrix
+     GAP_UNINSTRUMENTED     -> uninstrumented
+     NOT_FORESEEN           -> (the negative)
+   not bins: NOT_DERIVABLE, MULTIPLE
+   NOT_DERIVABLE is not NOT_FORESEEN. One says look harder, the
+   other says stop looking, and a scalar collapses them.
+
+1b. THE ONE WIRED ROUTE
+   The routes above are DECLARED. GAP_UNINSTRUMENTED is WIRED: a
+   case firing it names which of the register's exclusion
+   mechanisms applies, refusing anything outside that vocabulary,
+   and the vocabulary is imported rather than copied so the two
+   cannot drift.
+     gap-uninstrumented         DECLARED                 STORAGE
+   the other four routes are declared and not wired. That
+   is the folder's largest open item and is IS_008.
+
+2. CALIBRATION -- constructed cases, bin fixed by authoring
+   case                       built as               classified            
+   calculated-unclocked       CALCULATED_UNCLOCKED   CALCULATED_UNCLOCKED   
+   conceived-not-built        CONCEIVED_NOT_BUILT    CONCEIVED_NOT_BUILT    
+   gap-uninstrumented         GAP_UNINSTRUMENTED     GAP_UNINSTRUMENTED     
+   known-routed-away          KNOWN_ROUTED_AWAY      KNOWN_ROUTED_AWAY      
+   multiple                   MULTIPLE               MULTIPLE               
+   not-derivable              NOT_DERIVABLE          NOT_DERIVABLE          
+   not-foreseen               NOT_FORESEEN           NOT_FORESEEN           
+   agree 7 of 7
+   verdicts reached      : CALCULATED_UNCLOCKED, CONCEIVED_NOT_BUILT, GAP_UNINSTRUMENTED, KNOWN_ROUTED_AWAY, MULTIPLE, NOT_DERIVABLE, NOT_FORESEEN
+   never reached         : none
+   the negative is reachable: True
+   A classifier that never returns NOT_FORESEEN is telling the
+   operator what they came to hear.
+
+3. ROUTE-TO-REMEDY MISMATCH -- no denominator required
+     calculated-unclocked       aims at CALCULATED_UNCLOCKED   addresses a bin that fired
+     conceived-not-built        aims at CONCEIVED_NOT_BUILT    addresses a bin that fired
+     gap-uninstrumented         aims at KNOWN_ROUTED_AWAY      MISMATCH
+     known-routed-away          aims at KNOWN_ROUTED_AWAY      addresses a bin that fired
+     multiple                   aims at CALCULATED_UNCLOCKED   addresses a bin that fired
+     not-derivable              REMEDY_BIN_UNDECLARED
+     not-foreseen               aims at GAP_UNINSTRUMENTED     NO BIN FIRED -- the remedy addresses a hazard the record does not support
+
+4. THE RECURSION
+     calculated-unclocked       OPEN                   bin 3 again: True
+     conceived-not-built        CLOSED_UNIMPLEMENTED   bin 3 again: True
+     gap-uninstrumented         IMPLEMENTED            bin 3 again: False
+     known-routed-away          IMPLEMENTED            bin 3 again: False
+     multiple                   OPEN                   bin 3 again: True
+     not-derivable              STATUS_UNRECORDED      bin 3 again: --
+     not-foreseen               OPEN                   bin 3 again: True
+   An issued recommendation that is not implemented is a control
+   conceived and not built, produced by the process investigating
+   controls conceived and not built.
+
+5. WHAT IS REFUSED
+   rate() raises: A rate over a corpus selected on the outcome
+   has no denominator. Every case in an incident-report corpus is
+   a case where something happened, so the population of hazards
+   carrying the same signature and no event is uncounted
+   (generation-capacity R4). Run FORWARD mode instead: its frame
+   is chosen before any outcome.

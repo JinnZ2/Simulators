@@ -1,0 +1,25 @@
+{
+  "domain": "infrastructure",
+  "constructed": true,
+  "summary": "A pump station trips on a duty cycle derived from a demand figure computed once at design. An operator's report that the station is cycling harder than the figure assumes is logged as a maintenance complaint. A soft-start was specified in the original design package and value-engineered out.",
+  "truth": "MULTIPLE",
+  "primary": "CALCULATED_UNCLOCKED",
+  "signals": {
+    "prior_report": "PRESENT",
+    "figure_without_clock": "PRESENT",
+    "designed_control": "PRESENT",
+    "no_instrument": "ABSENT"
+  },
+  "signal_basis": {
+    "prior_report": "the maintenance ticket, dated, with the operator's own wording",
+    "figure_without_clock": "the demand figure carries no re-check interval and the service area has changed",
+    "designed_control": "the soft-start is in the design package and a value-engineering log records its removal",
+    "no_instrument": "run-hour and start counters exist and were read"
+  },
+  "remedy": {
+    "text": "re-derive the demand figure with a re-check interval",
+    "addresses_bin": "CALCULATED_UNCLOCKED",
+    "status": "OPEN"
+  },
+  "authoring_note": "The ordinary case. Three bins fire and the primary is declared, not computed -- a computed primary would be an argument about which cause is root, and this module does not make that argument."
+}
