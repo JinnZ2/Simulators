@@ -374,12 +374,26 @@ def selftest():
         nq = [c for c in rc if not c.get("quoted")]
         chk("at least one real claim is inside a code span", bool(q))
         chk("most real claims are not", len(nq) > len(q))
-        four30 = [c for c in rc if c["value"] and c["value"][0] == "430"]
-        chk("the file carries the same claim quoted and bare",
-            len(four30) == 2)
-        chk("the quoted one is flagged and the bare one is not",
-            len(four30) == 2
-            and sorted(bool(c["quoted"]) for c in four30) == [False, True])
+        # The real file USED to carry the same string bare and quoted,
+        # and that pair was the two-directional known answer SS_022
+        # rested on. Converting the bare one (SS_026) removed the
+        # control -- a repair in one place taking out a test in
+        # another. The control is constructed here instead, so it
+        # cannot be destroyed by an edit to the corpus, and the real
+        # file is checked only for what remains true of it.
+        chk("every 430 occurrence left in the file is quoted",
+            all(c["quoted"] for c in rc
+                if c["value"] and c["value"][0] == "430"))
+
+    pair = ("A folder states 430+ audit-grade tests green.\n"
+            "Another paragraph quotes `430+ audit-grade tests green`"
+            " while discussing it.\n")
+    pc = [c for c in claims(pair, sections(pair))
+          if c["value"] and c["value"][0] == "430"]
+    chk("the constructed control carries the string both ways",
+        len(pc) == 2)
+    chk("the quoted one is flagged and the bare one is not",
+        sorted(bool(c["quoted"]) for c in pc) == [False, True])
 
     # -- code_spans on known answers
     t5 = "a `b c` d ``` e `f` ``` g `h`\n"

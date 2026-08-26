@@ -170,7 +170,8 @@ underneath).
   a package degrades *during* the extreme event it records, so the
   tail biases LOW (variance collapse + range clipping + step offset).
   Four claims (`TSD_001..004`) each ship the field experiment that
-  refutes them; update the claim, never retune the sim. 23 tests green.
+  refutes them; update the claim, never retune the sim. Suite runs
+  under `pytest thermal-sensor-degradation-audit`.
 - `play-sims/` — Exploratory sandbox and the repo's explicit exception
   to stdlib-only. Seventeen visualisation-first simulations across five
   domains: `plasma-waves/` (4 — 1D/2D FDTD, wave→dust heating, 2D PIC),
@@ -233,7 +234,14 @@ underneath).
   and `scope_profile.py`: six-factor scope matrix for human-embodied
   claims. Sourced from `JinnZ2/Resilient-AI-Human-Collaboration-` and
   archived at `legacy/Organize3.md`; non-stdlib is `numpy`,
-  `matplotlib`, `scipy`. 430+ audit-grade tests green.
+  `matplotlib`, `scipy`. The largest suite in the tree by an order of
+  magnitude; run it with `pytest grounding-layers` and read the count
+  from the summary line. **Not green**, and has not been since it
+  landed: a handful of assertions in the L-epsilon and bias-audit
+  tests disagree with the code they exercise. Those are substantive,
+  not environmental, and are named in `self-scan/RESULTS.md` rather
+  than repaired here, because deciding whether the test or the code is
+  right is a change to the drop's own physics.
 - `earth_economics/` — Coupled physics–economics–accountability
   simulator. `earth_economic_sim.py` runs a unified loop
   (EarthSystemsInterface → EconomicModel → ThermodynamicAuditor).
@@ -672,7 +680,8 @@ underneath).
   Geometric Attention (NEMGA)" synthesis combining the framework's
   `GeometricSymbolicManifold` with event-driven salience,
   environmental need signals, and dynamic focus along the
-  manifold. 17 files total in `relational/`. **Concrete substrate:**
+  manifold. File count is `ls relational/`; the folder has grown since
+  the drops that populated it. **Concrete substrate:**
   `arch_garden/` (six-file subfolder) is the minimal viable
   implementation of the framework's altricial-organism stance,
   runnable tonight on one machine (or a phone via Termux).
@@ -3049,7 +3058,7 @@ underneath).
   failure**, with the reverse direction (de-provisioning under seasonal
   scarcity, animal re-coupled to its own foraging envelope, re-imported
   when supply returns) recorded as **not found in one pass** rather than
-  absent. **`provisioning.py`** (selftest 25/25) builds what item 6
+  absent. **`provisioning.py`** (`--selftest` green) builds what item 6
   points at. Three hypotheses for isotopic spread — `MOBILITY`,
   `BREED_OR_STATUS`, `VARIABLE_COUPLING` — and **the within-individual
   axis is the only one separating the third from the first two, which is
@@ -4527,7 +4536,7 @@ underneath).
   (`SHB_003` unchanged), and "four classes" is a floor enumerated by us,
   `SHB_021` on a second substrate — which the delivered text reaches
   itself in its closing line. **`SCALING_CLASSES.md`** is a fourth
-  outside audit, checked in `scaling_classes.py` (selftest 20/20): eight
+  outside audit, checked in `scaling_classes.py` (`--selftest` green): eight
   computational loads against the same ceiling, concluding that the cut
   is **scaling class** rather than size, and closing on Levinthal.
   **`SHB_031`:** four rows reproduce exactly from their own printed terms
@@ -6163,7 +6172,8 @@ underneath).
   with a third state, `pass: None` for not-evaluated, which is not a fail,
   plus a shape note saying the screen is workbook-shaped so a `not
   eligible` verdict on a prose document reads as a statement about fit.
-  247 selftest checks green
+  Selftest counts across the folder's modules are totalled by
+  `self-scan/census.py`; each module prints its own.
   across nine modules. Stdlib only, parses under 3.9, CC0.
 - `claim-record/` — Seven fields per claim, two hard rules, and a
   validator that refuses. Delivered spoken (`SOURCE_DROP.md`, verbatim):
@@ -6423,8 +6433,8 @@ underneath).
   pattern was a literal and matched the line defining it, so it is now
   composed from tokens (`RDD_008`). The `no_severity` exemption list is
   **empty**, unlike scan 4's — this order's verdict names carry no
-  screened word — and the two arms plus the plant still run. 29 selftest
-  checks. Stdlib only, parses under 3.9, CC0.
+  screened word — and the two arms plus the plant still run.
+  `--selftest` green. Stdlib only, parses under 3.9, CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated
@@ -6681,8 +6691,8 @@ underneath).
   it is — before the amendment the honest reading lived in a `note`
   string where nothing downstream could see it, **the same shape as a
   workbook stating a relationship in prose that no cell maintains**,
-  which is the object scan 4 was built to find. 74 selftest checks.
-  Stdlib only, parses under 3.9, CC0.
+  which is the object scan 4 was built to find. `--selftest` green on
+  both modules. Stdlib only, parses under 3.9, CC0.
 - `self-scan/` — Scan 4 pointed at this repository's own `CLAUDE.md`.
   `sheet-structure-scan` asks whether a workbook's prose still describes
   its own cells; this asks the same of a document whose operands are
@@ -6777,10 +6787,50 @@ underneath).
   cause and the rate now carries its environment, since a claim needing
   numpy is NOT_TESTABLE on one machine and resolvable on another and a
   rate quoted without that is a number with an unstated denominator.
-  Repo-wide totals from one isolated run: **1225 counted selftest checks
-  over the 52 modules that print a count, 22 more passing without
-  printing one (so the total is a FLOOR), and 1198 passed / 15 failed /
-  3 skipped across 20 test directories.**
+  Repo-wide totals come from one isolated `census.py` run; it prints the
+  counted-selftest total (a FLOOR, since some modules pass without
+  printing a count) and the pytest tally across the 20 test directories.
+  **A cleanup pass then took the pytest arm from 15 failures to 7**, and
+  none of the three repairs was a disagreement between a test and the
+  code it exercises: `grounding-layers/tests/test_l_epsilon_epistemic.py`
+  shipped with **no import statements at all**, the two
+  `fourd-municipal-engine` CLI suites spawn a subprocess with no
+  `PYTHONPATH` so they pass only where the package is installed, and
+  `crossdomain-eval` needs `sympy`. The seven that remain are
+  substantive and are named rather than repaired, because deciding
+  whether the test or the code is right there is a change to the drop's
+  own physics. **`SS_024`, a verdict withdrawn against this session's own
+  finding:** `fourd-municipal-engine-v2 | 40 pass, 2 skip` was binned
+  DIVERGED at 37/2 and dated BORN_DIVERGED, and with the path repair the
+  suite returns **exactly 40 passed, 2 skipped** — the claim was right
+  and the divergence was the scan's environment. `SS_014` named that
+  shape and missed this instance for a reason worth having: a missing
+  dependency announces itself as a collection error and gets
+  NOT_TESTABLE with the name in it, while a missing **path** produces a
+  summary line, and a summary line reads as a measurement.
+  **`SS_026`, and `SS_012` closes:** the eight remaining DIVERGED counts
+  are **converted rather than corrected** — the count deleted and the
+  command that produces it named instead, which is `SS_015`'s repair
+  applied to `SS_021`'s measured set — taking the scan to **DIVERGED 0,
+  n = 34, rate 0.000**. **That is not an improvement and the report says
+  so above the number:** the denominator moved 42 → 34 because eight
+  claims stopped being claims, a rate that falls because claims were
+  removed says nothing about how the remaining ones are maintained, and
+  `render` now prints `READ THE DENOMINATOR` beside the rate whenever
+  the retired ledger is non-empty. The one line that gained content is
+  `grounding-layers`: `430+ audit-grade tests green` was a bound plus a
+  word and `SS_008` showed the word was false, so the replacement states
+  that the suite is the largest in the tree, that it is **not green**,
+  and why. **`SS_027`:** the eight bindings move to `bindings.RETIRED`
+  rather than being deleted, since deleting them would clear the orphan
+  check and take with it the record that the claims existed — `SS_012`'s
+  own argument one level down. **`SS_028`:** one of this folder's own
+  checks read the data it was checking — the ordinal check keyed off a
+  real duplicate in `CLAUDE.md`, and converting one of the pair left a
+  single-element list and an `IndexError` indistinguishable from the
+  property failing; rebuilt on a constructed repeat. Third form here of
+  an instrument whose input is the thing it measures, after `SS_009` and
+  `SS_017`.
   **`enumerators.py` then tested a second relayed hypothesis and refuted
   it on its own examples.** The claim: `census.py` included itself AND
   changed the tree it measured, and anything enumerating the tree it

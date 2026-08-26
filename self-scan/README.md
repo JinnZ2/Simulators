@@ -14,16 +14,26 @@ output in `samples/scan.sample.txt`.
 
 ## The result
 
-    MAINTAINED           1        rate  9 / 42 = 0.214
-    HOLDS_UNMAINTAINED  32
-    DIVERGED             9        BORN_DIVERGED   6
-    NOT_TESTABLE         8        DRIFT           2
-    UNBOUND              0        DRIFT_POSSIBLE  1
+    first run                     after the cleanup pass
+    MAINTAINED           1        MAINTAINED           1
+    HOLDS_UNMAINTAINED  32        HOLDS_UNMAINTAINED  33
+    DIVERGED             9        DIVERGED             0
+    NOT_TESTABLE         8        NOT_TESTABLE        10
+    UNBOUND              0        UNBOUND              0
+
+    rate 9 / 42 = 0.214           rate 0 / 34 = 0.000
 
 **Six of nine divergences did not match when the number was written**,
 rather than being overtaken later. Four of those six carry an interval of
 zero days: the count and the code it counts were committed together, and
 they did not agree even then.
+
+**The rate is 0.000 now and that is not an improvement.** Eight of the
+nine were converted -- the count deleted, the command named instead
+(`SS_026`) -- so the denominator moved 42 to 34 and they cannot be in
+either half of the fraction. The ninth was withdrawn: it was never a
+divergence, only an environment (`SS_024`). The report prints `READ THE
+DENOMINATOR` beside the rate for exactly this reason.
 
 **One number in this file has a test behind it** — `GUARDS.md`
 regenerating byte-identically, asserted by `tests/test_gate_drift.py`.

@@ -580,3 +580,222 @@ invariant, and this folder has never had one.
 **Falsifier:** the order arriving.
 
 **Status: OPEN — the artifact is absent, not the argument.**
+
+---
+
+### SS_024 — one DIVERGED verdict was mine, not the document's
+
+`fourd-municipal-engine-v2 | 40 pass, 2 skip` was binned **DIVERGED**,
+observed `37/2 (3 failed)`, and S5 dated it **BORN_DIVERGED** — the
+artifact and the paragraph committed together and not agreeing even
+then.
+
+It agreed. The suite's CLI tests spawn
+`python3 -m fourd_municipal_engine.cli` in a subprocess with **no
+PYTHONPATH**, so they pass where `pip install -e .` has been run and
+fail on a bare checkout. With one line putting the package root on the
+child's path the suite returns exactly **40 passed, 2 skipped**.
+
+The claim was right the whole time. The divergence was the scan's
+environment.
+
+`crossdomain-eval`'s "68 total" is the same: 68 passed, once `sympy` —
+a declared non-stdlib dependency — is present.
+
+**`SS_014` named this shape and did not catch this instance**, and the
+reason is worth having: a missing dependency announces itself as a
+collection error, and the scan reports `NOT_TESTABLE` with the name.
+A missing **path** produces a summary line, and a summary line reads as
+a measurement. The environment block reports what is installed; it has
+no cell for what is importable *from where a subprocess runs*.
+
+**Falsifier:** a second DIVERGED verdict that dissolves under an
+environment change.
+
+**Status: REFUTED — the verdict was withdrawn, not the claim.**
+
+---
+
+### SS_025 — three mechanical repairs, 15 failures to 7
+
+None of the three was a disagreement between a test and the code it
+exercises.
+
+1. `grounding-layers/tests/test_l_epsilon_epistemic.py` shipped with
+   **no import statements at all** — it uses `EpistemicInstrument` and
+   `np` with nothing binding either, so all three tests raised
+   `NameError`. An extraction artifact from a context where both were
+   already in scope. Two of the three now pass.
+2. `fourd-municipal-engine{,-v2}/tests/test_cli.py` — the PYTHONPATH
+   above, six tests across two folders.
+3. `crossdomain-eval` — `sympy`, five collection errors.
+
+Repo total moved **1198 passed / 15 failed → 1274 passed / 7 failed**.
+
+The seven that remain are substantive: assertions in the L-epsilon and
+bias-audit tests that disagree with the code they exercise, plus a
+pinned demo output and a thermodynamic check. Deciding whether the test
+or the code is right there is a change to the drop's own physics, so
+they are named and left. The line is mechanical-versus-substantive, not
+easy-versus-hard.
+
+**Falsifier:** one of the seven turning out to be environmental too.
+
+**Status: SUPPORTED, with the remaining seven classified rather than
+fixed.**
+
+---
+
+### SS_026 — the eight DIVERGED claims are converted, and the rate is now 0 for a reason that is not an improvement
+
+`SS_012` recorded the debt and said the correction would be a separate
+commit. This is it, and the repair is `SS_015`'s rather than a
+correction: **the count is deleted and the command that produces it is
+named instead.**
+
+    23 tests green                -> run `pytest thermal-sensor-degradation-audit`
+    430+ audit-grade tests green  -> read the summary line; and NOT green,
+                                     with the seven named
+    17 files total                -> `ls relational/`
+    selftest 25/25                -> `--selftest` green
+    selftest 20/20                -> `--selftest` green
+    247 selftest checks green     -> totalled by self-scan/census.py
+    29 selftest checks            -> `--selftest` green
+    74 selftest checks            -> `--selftest` green on both modules
+
+Result: **DIVERGED 0, n = 34, rate 0.000.**
+
+**That number is not an improvement and the report says so above it.**
+The denominator moved 42 → 34 because eight claims stopped being
+claims. A rate that falls because claims were removed says nothing
+about how the remaining ones are maintained, and a reader who sees
+0.000 without the denominator has been handed exactly the shape this
+folder exists to find. `render` now prints `READ THE DENOMINATOR`
+beside the rate whenever the retired ledger is non-empty, with the blob
+where the eight were last measured.
+
+The `grounding-layers` line is the one that gained content rather than
+losing it. `430+ tests green` was a bound plus a word, and the word was
+false (`SS_008`); the replacement states that the suite is the largest
+in the tree, that it is **not green**, and why the remaining failures
+are not repaired here.
+
+**Falsifier:** a converted line that a reader cannot act on — a command
+that does not produce what the deleted number stated.
+
+**Status: SUPPORTED. `SS_012` closes.**
+
+---
+
+### SS_027 — a converted binding is retired, not deleted
+
+The eight bindings would have become orphans and the orphan check would
+have gone red. Deleting them would have cleared it, and taken with it
+the record that the claims ever existed — which is `SS_012`'s own
+argument, one level down: correcting a number removes the evidence it
+differed, and that applies to the binding too.
+
+They move to `bindings.RETIRED`, which nothing reads. Three selftest
+checks hold the line: retired and live are disjoint, no retired key
+still names a live claim, and the ledger is non-empty.
+
+**Falsifier:** a retired binding reappearing in `BINDINGS`.
+
+**Status: SUPPORTED.**
+
+---
+
+### SS_028 — one of my own checks read the data it was checking
+
+`resolve.selftest` asserted that a repeated `(section, pattern, value)`
+triple gets distinct ordinals, and it keyed off a **real duplicate in
+`CLAUDE.md`** — `simulation-hypothesis-budget`'s two `selftest 20/20`
+occurrences. Converting one of them left the list with a single element
+and the check raised `IndexError`.
+
+The check was correct about the code and wrong about how to ask. A
+known-answer check that reads the corpus under test breaks when the
+corpus changes, and the failure is indistinguishable from the property
+failing. Rebuilt on a constructed repeat, with a second check that
+ordinals do not collide across different triples.
+
+Same family as `notes/` finding 8 and `UNI_010`: an instrument whose
+input is the thing it measures. Third form in this folder after
+`SS_009` (a scan that modified its tree) and `SS_017` (a census that
+ran itself).
+
+**Falsifier:** a check here that still depends on a specific string in
+`CLAUDE.md`.
+
+**Status: REPAIRED.**
+
+---
+
+### SS_029 — the quoted-claim count grows with every audit paragraph, and the check that reports it raised instead
+
+`SS_016` found one quoted claim. There are now **three**, all in the
+`self-scan/` paragraph: `40 pass, 2 skip` quoted by `SS_024` while
+withdrawing a verdict against it, `430+ audit-grade tests green` quoted
+twice, once by `SS_008` and once by `SS_026` reporting what replaced it.
+
+That is structural, not accidental. **A folder whose subject is other
+folders' claims quotes them**, and every audit paragraph written here
+adds more. The structural test (`SS_022`) catches all three from the
+markdown, and each is declared in `bindings.py` rather than
+pattern-matched away — so the count going up is the flag working, not
+drift.
+
+**The check written to report this state raised on it.** It indexed
+`bindings.BINDINGS[c["key"]]` directly, so a newly quoted claim with no
+binding yet gave a `KeyError` inside the selftest instead of a failed
+check. A raise is not a failing check; it is a dead selftest, and the
+whole suite stops there. Changed to `.get`, plus a check that the
+quoted set has more than one member so the branch cannot go silent.
+
+Second instance in this pass of one of my own checks breaking on the
+data it reads, after `SS_028`. Both were found by running, neither by
+reading.
+
+**Falsifier:** a quoted claim outside the `self-scan/` paragraph, which
+would make the pattern about the file rather than about audit prose.
+
+**Status: SUPPORTED, and the check is repaired.**
+
+---
+
+### SS_030 — the conversion destroyed the control the quoted-context test rested on
+
+`SS_022`'s strongest feature was that the file **supplied its own
+two-directional known answer**: `430+ audit-grade tests green` appeared
+bare at line 236 and inside a code span at 6665, so the structural test
+had a positive and a negative case in the corpus itself, and neither was
+constructed.
+
+`SS_026` converted the bare one. Every remaining occurrence is a
+quotation, and `extract.py`'s check — *"the file carries the same claim
+quoted and bare"* — went red. `census.py` went red behind it, because it
+runs `extract.py --selftest` as its sibling-module probe.
+
+**A repair in one place took out a test in another**, and the test it
+took out was the one holding the finding that motivated the repair's
+own scanner.
+
+Rebuilt as a constructed pair, so it cannot be destroyed by an edit to
+the corpus, with the real file checked only for what stays true of it:
+every remaining `430` occurrence is quoted. The constructed control is
+weaker as evidence — `MP_008`'s shape, checkable where it is redundant —
+and it is the version that survives the document changing under it.
+
+Third instance in one pass of a check keyed to a specific string in the
+corpus under test, after `SS_028` and `SS_029`. All three were found by
+running.
+
+**The general form, and it is worth stating once:** a known-answer
+check whose known answer lives in the data under test is not a
+known-answer check. It is a regression test on the corpus wearing one's
+clothes.
+
+**Falsifier:** a check in this folder that still reads `CLAUDE.md` for
+its expected value.
+
+**Status: REPAIRED, and the class named.**

@@ -938,6 +938,18 @@ def render(rows, verbose=False):
         out.append("  DIVERGED / (DIVERGED + HOLDS + MAINTAINED)"
                    " = %d / %d = %.3f" % (b[DIVERGED], n, rt))
         out.append("  n = %d claims resolved" % n)
+        if bindings.RETIRED:
+            out.append("")
+            out.append("  READ THE DENOMINATOR. %d claims were CONVERTED --"
+                       % len(bindings.RETIRED))
+            out.append("  the count deleted and the command named instead --")
+            out.append("  so they are not in n and cannot be in the")
+            out.append("  numerator. A rate that falls because claims were")
+            out.append("  removed says nothing about how the remaining ones")
+            out.append("  are maintained. The retired set is in")
+            out.append("  bindings.RETIRED, and samples/scan.sample.txt at")
+            out.append("  blob 5ee0d9928b9b is where they were last")
+            out.append("  measured against their artifacts.")
     out.append("")
     out.append("  Second point, flagged: the UNFCCC workbook returned")
     out.append("  0.913 under scan 4 (SSS_035). DIFFERENT DOCUMENT CLASS --")
@@ -1014,17 +1026,33 @@ def selftest():
     cl = keyed_claims()
     chk("every claim has a key", all("key" in c for c in cl))
     chk("keys are distinct", len({c["key"] for c in cl}) == len(cl))
-    reps = [c["key"] for c in cl
-            if c["section_title"] == "simulation-hypothesis-budget/"
-            and c["value"] == ["20", "20"]]
+    # Ordinals, on a constructed repeat rather than on whatever the
+    # document happens to contain twice. The first version keyed off a
+    # real duplicate in CLAUDE.md and broke the moment that paragraph
+    # was edited -- a check that reads the data it is checking.
+    seen2 = {}
+    same = {"section_title": "x/", "pattern": "p", "value": ["1", "1"]}
+    k0 = key_of(dict(same), seen2)
+    k1 = key_of(dict(same), seen2)
     chk("a repeated triple gets distinct ordinals",
-        sorted(reps)[0].endswith("|0") and sorted(reps)[1].endswith("|1"))
+        k0.endswith("|0") and k1.endswith("|1"))
+    chk("ordinals do not collide across different triples",
+        key_of({"section_title": "y/", "pattern": "p",
+                "value": ["1", "1"]}, seen2).endswith("|0"))
 
     # -- every binding key names a real claim, and vice versa
     keys = {c["key"] for c in cl}
     orphan = sorted(set(bindings.BINDINGS) - keys)
     chk("no binding names a claim that is not extracted (%s)"
         % (orphan[:2] or ""), not orphan)
+    # A converted claim's binding moves to RETIRED rather than being
+    # deleted: SS_012's rule is that removing a number removes the
+    # evidence it ever differed, and that applies to the binding too.
+    chk("retired bindings are disjoint from live ones",
+        not (set(bindings.RETIRED) & set(bindings.BINDINGS)))
+    chk("no retired binding still names a live claim",
+        not (set(bindings.RETIRED) & keys))
+    chk("the retired ledger is non-empty", len(bindings.RETIRED) == 8)
     unbound = sorted(keys - set(bindings.BINDINGS))
     chk("unbound claims are reported, not hidden (%d)" % len(unbound), True)
 
@@ -1083,6 +1111,8 @@ def selftest():
                              "interval_days": None,
                              "unrecoverable_because": "probe"}}])
     chk("render prints n", "n = 1 claims resolved" in txt)
+    chk("render warns that converted claims left the denominator",
+        "READ THE DENOMINATOR" in txt)
     chk("render anchors the target version", "target blob " in txt)
     chk("render says where claims and checks each come from",
         "claims read from the working tree" in txt)
@@ -1195,10 +1225,16 @@ def selftest():
     chk("the quoted claim is flagged", bool(quoted))
     chk("every quoted claim has an explicit binding",
         all(c["key"] in bindings.BINDINGS for c in quoted))
+    # `.get`, not `[]`. The first version indexed BINDINGS directly, so
+    # a newly quoted claim with no binding yet raised KeyError inside
+    # the check written to report exactly that state -- and a raise is
+    # not a failed check, it is a dead selftest.
     chk("a quoted claim's binding says it is quoted",
-        all("QUOTED" in bindings.BINDINGS[c["key"]].get("reason", "")
-            or bindings.BINDINGS[c["key"]].get("how") != "none"
+        all("QUOTED" in bindings.BINDINGS.get(c["key"], {}).get("reason", "")
+            or bindings.BINDINGS.get(c["key"], {}).get("how", "") not in
+            ("", "none")
             for c in quoted))
+    chk("more than one claim is quoted now", len(quoted) >= 3)
 
     # -- git plumbing reachable
     chk("git history for CLAUDE.md is readable",

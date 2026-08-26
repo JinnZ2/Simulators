@@ -441,3 +441,79 @@ The point survives the absence and is the sharpest thing in the handoff:
 declared by a generator's own authors would measure the **instrument**,
 which is the `null-harness` known-truth-first invariant, and this folder
 has never had one. The order is what is missing, not the argument.
+
+---
+
+# Cleanup pass — three repairs, one withdrawn verdict, eight conversions
+
+## The verdict that was mine
+
+`fourd-municipal-engine-v2 | 40 pass, 2 skip` was reported DIVERGED at
+`37/2 (3 failed)` and dated **BORN_DIVERGED**. It was not. The suite's
+CLI tests spawn a subprocess with no `PYTHONPATH`, so they pass where
+the package is installed and fail on a bare checkout. One line, and the
+suite returns exactly **40 passed, 2 skipped**.
+
+`crossdomain-eval`'s 68 is the same, once `sympy` is present.
+
+`SS_014` said the rate is a property of the document **and the
+machine**, and did not catch this. The reason is the useful part: a
+missing dependency announces itself as a collection error and gets
+`NOT_TESTABLE` with the name in it. A missing path produces a summary
+line, and **a summary line reads as a measurement**.
+
+## Three repairs, and where the line was drawn
+
+    grounding-layers/tests/test_l_epsilon_epistemic.py
+        shipped with NO import statements at all
+    fourd-municipal-engine{,-v2}/tests/test_cli.py
+        subprocess with no PYTHONPATH
+    crossdomain-eval
+        sympy, a declared dependency, absent
+
+    repo total  1198 passed / 15 failed  ->  1274 passed / 7 failed
+
+The remaining seven are assertions that disagree with the code they
+exercise — the L-epsilon and bias-audit tests, a pinned demo output, a
+thermodynamic check. Deciding which side is right there is a change to
+the drop's own physics. Named, not repaired. The line is
+mechanical-versus-substantive, not easy-versus-hard.
+
+## Eight conversions, and a rate that should not be read alone
+
+`SS_012` said the correction would be a separate commit. This is it,
+and it is `SS_015`'s repair rather than a correction: the count is
+deleted and the command that produces it named instead.
+
+    DIVERGED 0    n = 34    rate 0.000
+
+**Read the denominator.** It moved 42 → 34 because eight claims stopped
+being claims. A rate that falls because claims were removed says
+nothing about how the remaining ones are maintained, and 0.000 quoted
+without that is the exact shape this folder exists to find. The report
+now prints `READ THE DENOMINATOR` beside the rate whenever the retired
+ledger is non-empty, naming the blob where the eight were last measured
+against their artifacts.
+
+One line gained content rather than losing it: `430+ audit-grade tests
+green` was a bound plus a word, and `SS_008` showed the word was false.
+The replacement says the suite is the largest in the tree, that it is
+**not green**, and why the seven remaining failures are not repaired
+here.
+
+The eight bindings move to `bindings.RETIRED` rather than being
+deleted. Deleting them would have cleared the orphan check and taken
+with it the record that the claims existed — `SS_012`'s own argument
+one level down.
+
+## And one of my own checks read the data it was checking
+
+`resolve.selftest` asserted that a repeated triple gets distinct
+ordinals, keyed off a real duplicate in `CLAUDE.md`. Converting one of
+the two left a single-element list and the check raised `IndexError` —
+a failure indistinguishable from the property failing. Rebuilt on a
+constructed repeat.
+
+Third form in this folder of an instrument whose input is the thing it
+measures, after `SS_009` (a scan that modified its tree) and `SS_017`
+(a census that ran itself).
