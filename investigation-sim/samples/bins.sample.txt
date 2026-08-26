@@ -24,15 +24,35 @@ a real event.
    NOT_DERIVABLE is not NOT_FORESEEN. One says look harder, the
    other says stop looking, and a scalar collapses them.
 
-1b. THE ONE WIRED ROUTE
-   The routes above are DECLARED. GAP_UNINSTRUMENTED is WIRED: a
-   case firing it names which of the register's exclusion
-   mechanisms applies, refusing anything outside that vocabulary,
-   and the vocabulary is imported rather than copied so the two
-   cannot drift.
-     gap-uninstrumented         DECLARED                 STORAGE
-   the other four routes are declared and not wired. That
-   is the folder's largest open item and is IS_008.
+1b. THE WIRED ROUTES
+   Every route above is WIRED: the module named is imported and
+   its own function is called, never copied and never
+   reimplemented. Four suppliers, and each returns what its bin
+   is about.
+
+   GAP_UNINSTRUMENTED -> uninstrumented.MECHANISMS
+     gap-uninstrumented       DECLARED               STORAGE
+
+   CALCULATED_UNCLOCKED -> claim-record.derive_clock
+     calculated-unclocked     clock UNDERIVABLE    missing: time_constant, coupling
+     multiple                 FIGURE_UNDECLARED
+     The supplier returns UNDERIVABLE on exactly the cases this
+     bin is about, and names which sub-fields are absent. That is
+     the bin restated by a module built for another purpose and
+     unaware of this one.
+
+   CONCEIVED_NOT_BUILT -> fold-matrix.plan_column
+     conceived-not-built      plan_exists yes    practice_tracks_plan no
+     multiple                 plan_exists UNREAD practice_tracks_plan UNREAD
+
+   KNOWN_ROUTED_AWAY -> report-typing.score
+     known-routed-away        seats floor_worker   denominator present: False
+       the supplier returns a rate for the seats it was given and
+       does not flag the missing arm (report-typing RT_008).
+       Reported here rather than repaired there; without the
+       other arm this rate is uninterpretable by CONTROL's own
+       stated reason.
+     multiple                 INSTANCES_UNDECLARED
 
 2. CALIBRATION -- constructed cases, bin fixed by authoring
    case                       built as               classified            

@@ -265,6 +265,136 @@ def run():
         any(B.gap_mechanism(c)["state"] == "DECLARED"
             for c in B.load_cases()))
 
+    # -- 11c. the other three wired routes
+    #    Each supplier is imported and its own function called. What is
+    #    asserted is that the supplier's vocabulary and its refusals
+    #    reach this side intact.
+    cc = B.calculated_clock(
+        dict(_case(figure_without_clock=B.PRESENT),
+             figure={"clock": {
+                 "time_constant": {"state": "UNMEASURED", "why": "x"},
+                 "rate_ceiling": {"state": "UNMEASURED", "why": "x"},
+                 "coupling": {"state": "UNMEASURED", "why": "x"}}}))
+    chk("claim-record returns UNDERIVABLE on a stripped clock",
+        cc["clock"] == "UNDERIVABLE")
+    chk("and names which sub-fields are missing",
+        sorted(cc["missing"]) == ["coupling", "time_constant"])
+    # Third instance of IS_007 in this folder: the first version of
+    # this check grepped the function source, and the source contains a
+    # COMMENT saying the field is no longer rebuilt from `findings`.
+    # AST, string constants only, docstring dropped -- and comments are
+    # not in the AST at all, which is what makes it the right tool.
+    def _lits(fname):
+        import ast
+        tree = ast.parse(open(os.path.join(HERE, "bins.py"),
+                              encoding="utf-8").read())
+        fn = next(n for n in ast.walk(tree)
+                  if isinstance(n, ast.FunctionDef) and n.name == fname)
+        body = fn.body[1:] if (fn.body and isinstance(fn.body[0], ast.Expr)
+                               and isinstance(fn.body[0].value, ast.Constant)
+                               ) else fn.body
+        return [n.value for n in
+                ast.walk(ast.Module(body=body, type_ignores=[]))
+                if isinstance(n, ast.Constant) and isinstance(n.value, str)]
+    chk("the supplier's own `missing` is used, not rebuilt",
+        "findings" not in _lits("calculated_clock"))
+    chk("and the comment saying so is what broke the first check",
+        "findings" in open(os.path.join(HERE, "bins.py"),
+                           encoding="utf-8").read()
+        .split("def calculated_clock(")[1].split("def ")[0])
+    chk("no figure means no guess",
+        B.calculated_clock(_case(figure_without_clock=B.PRESENT))["state"]
+        == "FIGURE_UNDECLARED")
+    chk("a non-firing case is its own state",
+        B.calculated_clock(_case())["state"] == "BIN_DID_NOT_FIRE")
+    live = B.calculated_clock(
+        dict(_case(figure_without_clock=B.PRESENT),
+             figure={"clock": {
+                 "measured_on": "2026-08-26",
+                 "measured_on_frame": "iso_date",
+                 "time_constant": {"value": 3.0, "units": "years",
+                                   "basis": "constructed"},
+                 "rate_ceiling": {"state": "UNMEASURED", "why": "x"},
+                 "coupling": {"value": 0.5, "units": "1",
+                              "basis": "constructed"}}}))
+    chk("a clock that CAN be derived is derived",
+        live["clock"] == "DERIVED" and live["shelf_life_base"])
+    chk("so the route is not CONSTANT_SILENT",
+        live["clock"] != cc["clock"])
+    # The supplier's return shape varies by outcome. Asserted, because
+    # a consumer using fixed-key access works until the route succeeds
+    # -- which is what this pair of arms found.
+    chk("the supplier's shape differs between its two outcomes",
+        set(cc["supplier_keys"]) != set(live["supplier_keys"]))
+    chk("and `missing` is the key that only appears on failure",
+        "missing" in cc["supplier_keys"]
+        and "missing" not in live["supplier_keys"])
+    chk("the consumer reports both without assuming a shape",
+        live["missing"] == [] and cc["missing"])
+
+    cp = B.conceived_plan(dict(_case(designed_control=B.PRESENT),
+                               plan={"plan_exists": "yes",
+                                     "practice_tracks_plan": "no"}))
+    chk("fold-matrix reads the plan column",
+        cp["plan_exists"] == "yes" and cp["practice_tracks_plan"] == "no")
+    chk("its three states come across", len(cp["states"]) == 3)
+    chk("an unsupplied plan reads UNREAD, not no",
+        B.conceived_plan(_case(designed_control=B.PRESENT)
+                         )["plan_exists"] == "UNREAD")
+    try:
+        B.conceived_plan(dict(_case(designed_control=B.PRESENT),
+                              plan={"plan_exists": "maybe"}))
+        chk("a value outside the supplier's vocabulary is refused",
+            False)
+    except B.SpecMismatch:
+        chk("a value outside the supplier's vocabulary is refused", True)
+
+    kc = B.known_channel(dict(
+        _case(prior_report=B.PRESENT),
+        report_instances=[{"reporter_seat": "floor_worker",
+                           "receiver_blind": True,
+                           "b_time_to_action": "NEVER"}]))
+    chk("report-typing scores the instances",
+        kc["by_seat"]["floor_worker"]["never_acted"] == 1)
+    chk("the supplier's own refusal comes across",
+        kc["contrast"] is None and kc["verdict"] is None)
+    chk("a one-arm input is flagged HERE, not there",
+        kc["denominator_present"] is False
+        and kc["seats_absent"] == ["disguised_exec"])
+    chk("and the note names the supplier's claim id",
+        "RT_008" in kc["control_note"])
+    both = B.known_channel(dict(
+        _case(prior_report=B.PRESENT),
+        report_instances=[{"reporter_seat": "floor_worker",
+                           "receiver_blind": True},
+                          {"reporter_seat": "disguised_exec",
+                           "receiver_blind": True}]))
+    chk("a two-arm input is not flagged",
+        both["denominator_present"] is True
+        and both["control_note"] is None)
+    chk("the required seats come from the supplier's schema",
+        "reporter_seat" in open(os.path.join(HERE, "bins.py"),
+                                encoding="utf-8").read()
+        .split("def known_channel(")[1].split("def ")[0])
+    chk("no instances means no guess",
+        B.known_channel(_case(prior_report=B.PRESENT))["state"]
+        == "INSTANCES_UNDECLARED")
+
+    # -- 11d. the absent-vs-known-negative repair across an import
+    #    boundary. `multiple` fires three bins and supplies no supplier
+    #    block; each route must say "not given" in its own supplier's
+    #    vocabulary and none may guess.
+    mult = next(c for c in B.load_cases() if c["id"] == "multiple")
+    states = {"claim-record": B.calculated_clock(mult)["state"],
+              "fold-matrix": B.conceived_plan(mult)["plan_exists"],
+              "report-typing": B.known_channel(mult)["state"]}
+    chk("three suppliers, three distinct undeclared states",
+        len(set(states.values())) == 3)
+    chk("none of them is a value that reads as a measurement",
+        states["fold-matrix"] == "UNREAD")
+    chk("and the case does fire all three bins",
+        len(B.classify(mult)["fires"]) == 3)
+
     # -- 12. the report
     out = B.render()
     chk("the report names every bin", all(b in out for b in B.BINS))

@@ -1,6 +1,10 @@
 # investigation-sim — CLAIM_TABLE
 
-`IS_001..IS_010`. Claims about the design and the code in this folder.
+`IS_001..IS_013`. Claims about the design and the code in this folder.
+
+**Second pass, 2026-08-26.** All four routes are now WIRED, not
+declared. `IS_008` closes; `IS_011..IS_013` are what wiring them
+found.
 
 **Nothing here is a claim about any real incident, organisation, or
 person.** Every case is constructed and labelled so in its own file.
@@ -23,9 +27,12 @@ disagreement goes in the checker's output.
 | `IS_005` | The recursion is checkable from recommendation status alone, with no denominator and no reading of the incident. | SUPPORTED |
 | `IS_006` | The primary bin on a `MULTIPLE` case is **declared, never computed**. A computed primary is a root-cause argument and this module does not make one. | SUPPORTED |
 | `IS_007` | The guard written to prove `classify` never reads `truth` fired on the docstring saying it does not. | SUPPORTED |
-| `IS_008` | Four of five routes are **declared and not wired**. This is the folder's largest open item. | SUPPORTED |
+| `IS_008` | Four of five routes were declared and not wired. | **CLOSED 2026-08-26** — all four wired, each importing its supplier's own function |
 | `IS_009` | The forward mode's `unsearched_signals` readout has no retrospective analogue. | SUPPORTED |
 | `IS_010` | No real report has been read and no case here is a real event. | UNVERIFIED |
+| `IS_011` | `claim-record` returns `UNDERIVABLE` on exactly the cases `CALCULATED_UNCLOCKED` is about — the bin restated by a module that did not know it existed. | SUPPORTED |
+| `IS_012` | Wiring `report-typing` surfaced `RT_008` where it costs something. The consumer reports the missing arm without patching the supplier. | SUPPORTED |
+| `IS_013` | The supplier's return shape varies by outcome, and the arm written to prove a route is not `CONSTANT_SILENT` is the arm that found the consumer could not handle success. | SUPPORTED |
 
 ---
 
@@ -185,37 +192,36 @@ first version.
 **Falsifier:** a read of `truth` in `classify` that the AST check
 misses.
 
-## IS_008 — four routes are declared and not wired
+## IS_008 — CLOSED. All four routes wired
 
-    KNOWN_ROUTED_AWAY      -> report-typing            DECLARED
-    CALCULATED_UNCLOCKED   -> claim-record, criteria-drift  DECLARED
-    CONCEIVED_NOT_BUILT    -> fold-matrix              DECLARED
-    GAP_UNINSTRUMENTED     -> uninstrumented           WIRED
+    KNOWN_ROUTED_AWAY      -> report-typing.score              WIRED
+    CALCULATED_UNCLOCKED   -> claim-record.derive_clock        WIRED
+    CONCEIVED_NOT_BUILT    -> fold-matrix.plan_column          WIRED
+    GAP_UNINSTRUMENTED     -> uninstrumented.MECHANISMS        WIRED
 
-The wired one imports `uninstrumented.MECHANISMS` and refuses a
-mechanism outside it. Imported, not copied — five stale copies of one
-gate is what copying produced last time (`MF_006`, `MF_011`), and
+Every one imports the supplier and calls the supplier's own function.
+Nothing is copied and nothing is reimplemented — five stale copies of
+one gate is what copying produced last time (`MF_006`, `MF_011`), and
 `tools/check_gate_drift.py` exists because of it.
 
-The other four are checked only for the folder existing. That is the
-folder's largest open item and each is a specific, small piece of
-work:
+**The suppliers' refusals reach this side intact**, and that is the
+property worth having. `fold-matrix` returns `UNREAD` where a plan was
+not supplied, not `no`. `report-typing` returns `contrast: None` and
+`verdict: None` until both arms and a second coder exist.
+`uninstrumented` refuses a mechanism outside its eight-item tuple.
+`claim-record` refuses a stored date.
 
-- `report-typing` — a `KNOWN_ROUTED_AWAY` case should carry the
-  channel the report landed in and whether that channel generates an
-  action item, which is `reverse_arm_score`'s `b_time_to_action`
-  pointed at an internal report rather than a televised one.
-- `claim-record` — a `CALCULATED_UNCLOCKED` case should be able to
-  emit an actual claim record, whose `derive_clock` refuses a stored
-  date and derives one from a time constant and a coupling. The bin's
-  whole content is a figure whose clock was stripped, and that module
-  is the instrument for exactly that.
-- `fold-matrix` — a `CONCEIVED_NOT_BUILT` case is `plan_exists` /
-  `practice_tracks_plan`, which that module already has as a column
-  the code cannot merge into `basis`.
+**The `multiple` case is the cross-boundary test.** It fires three
+bins and supplies no supplier block, and the three routes return three
+*distinct* undeclared states — `FIGURE_UNDECLARED`, `UNREAD`,
+`INSTANCES_UNDECLARED` — each in its own supplier's vocabulary, none
+guessing. The absent-vs-known-negative repair holding across an import
+boundary is a stronger result than it holding inside one module,
+because none of the four suppliers was written with this consumer in
+mind.
 
-**Falsifier:** the routes wired, or a route that turns out not to fit
-when tried.
+**Falsifier:** a supplier whose refusal does not survive the boundary,
+or a route that turns out not to fit when a real case is coded.
 
 ## IS_009 — the readout with no retrospective analogue
 
@@ -249,3 +255,87 @@ someone who has the reports; it has not been run on one.
 **Falsifier:** run it on a real corpus. The first thing to check is
 whether the four signals are codable from a published report at all,
 and the second is `IS_005`, which needs only the recommendation table.
+
+---
+
+## IS_011 — the bin, restated by a module that did not know it existed
+
+`CALCULATED_UNCLOCKED` is defined as *a governing number whose domain
+of validity or re-check interval was stripped — the figure survived
+and the conditions under which it held did not.*
+
+`claim-record.derive_clock` was built for an unrelated purpose: it
+refuses a stored date and derives a shelf life from a time constant
+and a dimensionless coupling. Handed the bridge-posting case, it
+returns:
+
+    clock    UNDERIVABLE
+    why      no date is emitted; time_constant and coupling is not
+             measured
+    missing  time_constant, coupling
+
+That is the bin's own definition, produced by an instrument that has
+never heard of the bin, and it names *which* sub-fields are absent —
+which is the remedy, computed rather than written.
+
+The route is not `CONSTANT_SILENT`: a constructed figure with a
+measured time constant and a measured coupling comes back `DERIVED`
+with a shelf life and a next-check date. Both branches are exercised.
+
+**Falsifier:** a `CALCULATED_UNCLOCKED` case where `derive_clock`
+returns `DERIVED` — which would mean the figure has a clock, and the
+bin was mis-assigned.
+
+## IS_012 — a supplier defect, surfaced where it costs something
+
+`report-typing` `RT_008`: `CONTROL` requires a comparison arm and
+`score()` enforces it nowhere, so a one-arm input returns a
+well-formed `by_seat` with nothing saying the denominator is absent.
+
+There, it was a defect in a scorer with no data. Here it is a scorer
+handed a case and returning a rate for one seat, and a consumer that
+passes it through inherits the silence.
+
+The split taken: **do not patch the supplier, do not launder it
+either.** `known_channel` reads the required seats out of
+`INSTANCE_SCHEMA["reporter_seat"]` — the supplier's own declaration —
+and reports `denominator_present: False` with a note naming `RT_008`.
+The supplier is unmodified; a consumer that patches its supplier is
+the drift this repo imports to avoid.
+
+The check is not `CONSTANT_FIRES`: a two-arm input returns
+`denominator_present: True` and `control_note: None`.
+
+**Falsifier:** `RT_008` repaired in `report-typing`, at which point
+this detection is redundant and should be removed rather than left as
+a second implementation.
+
+## IS_013 — the arm that proves a route can succeed found that it could not
+
+`derive_clock`'s return shape **varies by outcome**: `missing` is
+present on the `UNDERIVABLE` path and absent on the `DERIVED` one.
+
+    UNDERIVABLE   findings, missing, next_check, regime,
+                  shelf_life_base, state, why
+    DERIVED       findings, next_check, regime, shelf_life_base,
+                  state, why
+
+The consumer used fixed-key access, which works on every failing case
+and raises `KeyError` the first time the route succeeds. The selftest
+arm that exists *specifically* to show the route is not
+`CONSTANT_SILENT` — feed it a clock that can be derived, check the
+verdict differs — is what found it.
+
+Both are now asserted: that the shapes differ, that `missing` is the
+key which only appears on failure, and that the consumer reports both
+without assuming one shape.
+
+Third instance in this folder of a check firing on its own text, too:
+the check written to assert `missing` is no longer rebuilt from
+`findings` grepped the function source, and the source contains a
+comment saying exactly that. Repaired with AST — string constants
+only, docstring dropped, and comments are not in the AST at all, which
+is what makes it the right tool rather than a longer regex.
+
+**Falsifier:** a supplier with a stable return shape, or a consumer
+that reads a key the supplier does not return on some path.

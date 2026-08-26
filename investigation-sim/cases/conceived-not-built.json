@@ -21,5 +21,10 @@
     "addresses_bin": "CONCEIVED_NOT_BUILT",
     "status": "CLOSED_UNIMPLEMENTED"
   },
-  "authoring_note": "Built so the recursion fires: the remedy for a control conceived and not built is itself closed unimplemented."
+  "authoring_note": "Built so the recursion fires: the remedy for a control conceived and not built is itself closed unimplemented.",
+  "plan": {
+    "plan_exists": "yes",
+    "practice_tracks_plan": "no",
+    "why": "engineered, costed and scheduled into a capital plan; deferred across three budget cycles. The deferrals are on the record, so practice not tracking the plan is documented rather than inferred."
+  }
 }

@@ -14,7 +14,7 @@ purpose and the only mode that escapes the trap below.
     python3 investigation-sim/bins.py               # the report
     python3 investigation-sim/bins.py --case <id>
     python3 investigation-sim/bins.py --forward forward_example.json
-    python3 investigation-sim/bins.py --selftest    # 77 checks
+    python3 investigation-sim/bins.py --selftest    # 102 checks
 
 `SPEC.md` is written first and **parsed** by `bins.py` — bin names,
 non-bin verdicts, routing table and mode list all come out of the
@@ -48,11 +48,16 @@ mode and the useful mode are the same mode.
 
 | bin | | routes to |
 |---|---|---|
-| `KNOWN_ROUTED_AWAY` | a report existed and reached a channel where reading was optional | `report-typing` |
-| `CALCULATED_UNCLOCKED` | a governing number survived and the conditions under which it held did not | `claim-record`, `criteria-drift` |
-| `CONCEIVED_NOT_BUILT` | a control was designed, sometimes costed, and not implemented | `fold-matrix` |
-| `GAP_UNINSTRUMENTED` | no instrument was pointed at it, by the instrument's constitution | `uninstrumented` |
+| `KNOWN_ROUTED_AWAY` | a report existed and reached a channel where reading was optional | `report-typing.score` |
+| `CALCULATED_UNCLOCKED` | a governing number survived and the conditions under which it held did not | `claim-record.derive_clock` |
+| `CONCEIVED_NOT_BUILT` | a control was designed, sometimes costed, and not implemented | `fold-matrix.plan_column` |
+| `GAP_UNINSTRUMENTED` | no instrument was pointed at it, by the instrument's constitution | `uninstrumented.MECHANISMS` |
 | `NOT_FORESEEN` | genuinely novel | — |
+
+**All four routes are wired**, not declared: each imports its supplier
+and calls the supplier's own function. Nothing is copied and nothing
+reimplemented — five stale copies of one gate is what copying produced
+last time, and `tools/check_gate_drift.py` exists because of it.
 
 Plus two that are not bins: **`NOT_DERIVABLE`** (the record cannot
 say) and **`MULTIPLE`** (more than one fires, which is the ordinary
@@ -143,12 +148,39 @@ docstring says *"Never reads `case['truth']`"*, so the guard fired on
 the sentence saying it does not. `UNI_009` / `T1-1` inside the guard.
 Repaired with AST, both halves pinned.
 
-**`IS_008`.** Four of five routes are declared and not wired. The
-wired one imports `uninstrumented.MECHANISMS` and refuses a mechanism
-outside it — imported, not copied, because five stale copies of one
-gate is what copying produced last time (`MF_006`, `MF_011`). The
-other four are the folder's largest open item and each is a small,
-specific piece of work, named per route in `CLAIM_TABLE.md`.
+**`IS_011`, the best outcome of the wiring.** `claim-record` was built
+for an unrelated purpose — it refuses a stored date and derives a
+shelf life from a time constant and a coupling. Handed the
+bridge-posting case it returns `UNDERIVABLE`, *"time_constant and
+coupling is not measured"*, and names which sub-fields are missing.
+That is `CALCULATED_UNCLOCKED`'s own definition, produced by an
+instrument that has never heard of the bin — and the missing list is
+the remedy, computed rather than written. The route is not
+`CONSTANT_SILENT`: a figure with a measured time constant and coupling
+comes back `DERIVED` with a next-check date.
+
+**`IS_012`.** Wiring `report-typing` surfaced its `RT_008` where it
+costs something: there it was a scorer with no data returning a
+well-formed result on one arm; here it is a scorer handed a case and
+returning a rate with no denominator. The split taken is *do not patch
+the supplier, do not launder it either* — the consumer reads the
+required seats out of the supplier's own `INSTANCE_SCHEMA` and reports
+`denominator_present: False` with a note naming `RT_008`. A two-arm
+input is not flagged, so the check is not `CONSTANT_FIRES`.
+
+**`IS_013`.** `derive_clock`'s return shape varies by outcome —
+`missing` appears on the failing path and not on the succeeding one —
+so fixed-key access worked on every failing case and raised the first
+time the route succeeded. The selftest arm written *specifically* to
+show the route is not `CONSTANT_SILENT` is what found it.
+
+**The `multiple` case is the cross-boundary test.** It fires three
+bins and supplies no supplier block, and the three routes return three
+*distinct* undeclared states — `FIGURE_UNDECLARED`, `UNREAD`,
+`INSTANCES_UNDECLARED` — each in its own supplier's vocabulary, none
+guessing. The absent-vs-known-negative repair holding across an import
+boundary is stronger than it holding inside one module, because none
+of the four suppliers was written with this consumer in mind.
 
 ## Files
 
@@ -156,10 +188,10 @@ specific piece of work, named per route in `CLAIM_TABLE.md`.
 |---|---|
 | `SPEC.md` | written first, parsed by the code |
 | `bins.py` | classifier, the two denominator-free readouts, forward mode, the refused rate |
-| `selftest_bins.py` | 77 checks; every S7 falsifier gets an arm |
+| `selftest_bins.py` | 102 checks; every S7 falsifier gets an arm |
 | `cases/` | seven constructed cases, one per verdict |
 | `forward_example.json` | a four-system forward run |
-| `CLAIM_TABLE.md` | `IS_001..IS_010` with a REFUTATION_PROTOCOL |
+| `CLAIM_TABLE.md` | `IS_001..IS_013` with a REFUTATION_PROTOCOL |
 | `samples/` | pinned output, both modes |
 
 Stdlib only, parses under Python 3.9, phone-buildable, CC0.

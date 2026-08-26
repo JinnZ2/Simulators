@@ -7289,12 +7289,49 @@ underneath).
   string and the docstring says *"Never reads `case['truth']`"*, so the
   guard fired on the sentence saying it does not — `UNI_009`/`T1-1`
   inside the guard, repaired with AST and both halves pinned.
-  **`IS_008`, the largest open item:** four of five routes are
-  **declared and not wired**; the wired one imports
-  `uninstrumented.MECHANISMS` and refuses a mechanism outside it —
-  imported, not copied, because five stale copies of one gate is what
-  copying produced last time (`MF_006`, `MF_011`) — and each of the
-  other four is named as a specific small piece of work.
+  **`IS_008` CLOSED — all four routes WIRED**, each importing its
+  supplier and calling the supplier's own function, nothing copied and
+  nothing reimplemented (five stale copies of one gate is what copying
+  produced last time, `MF_006`/`MF_011`): `report-typing.score`,
+  `claim-record.derive_clock`, `fold-matrix.plan_column`,
+  `uninstrumented.MECHANISMS`. **The suppliers' refusals reach this
+  side intact** — `fold-matrix` returns `UNREAD` where a plan was not
+  supplied and not `no`, `report-typing` holds `contrast`/`verdict` at
+  `None` until both arms and a second coder exist, `uninstrumented`
+  refuses a mechanism outside its eight-item tuple, `claim-record`
+  refuses a stored date — and the **`multiple` case is the
+  cross-boundary test**: it fires three bins, supplies no supplier
+  block, and the three routes return three DISTINCT undeclared states
+  (`FIGURE_UNDECLARED` / `UNREAD` / `INSTANCES_UNDECLARED`), each in
+  its own supplier's vocabulary, none guessing — the
+  absent-vs-known-negative repair holding across an import boundary,
+  which is stronger than it holding inside one module since no supplier
+  was written with this consumer in mind. **`IS_011`, the best outcome
+  of the wiring:** `claim-record.derive_clock` was built for an
+  unrelated purpose and, handed the bridge-posting case, returns
+  `UNDERIVABLE` with *"time_constant and coupling is not measured"* and
+  names which sub-fields are absent — the bin's own definition produced
+  by an instrument that has never heard of the bin, with the missing
+  list as the remedy computed rather than written; not
+  `CONSTANT_SILENT`, since a figure with a measured time constant and
+  coupling comes back `DERIVED` with a next-check date. **`IS_012`:**
+  wiring `report-typing` surfaced its `RT_008` where it costs something
+  — there a scorer with no data returning a well-formed result on one
+  arm, here a scorer handed a case and returning a rate with no
+  denominator — and the split taken is *do not patch the supplier, do
+  not launder it either*: the consumer reads the required seats out of
+  the supplier's own `INSTANCE_SCHEMA` and reports
+  `denominator_present: False` naming `RT_008`, with a two-arm input
+  not flagged so the check is not `CONSTANT_FIRES`. **`IS_013`:**
+  `derive_clock`'s return shape **varies by outcome** — `missing`
+  appears on the failing path and not on the succeeding one — so
+  fixed-key access worked on every failing case and raised the first
+  time the route succeeded, and the selftest arm written specifically
+  to show the route is not `CONSTANT_SILENT` is what found it; third
+  instance in this folder of a check firing on its own text, since the
+  check asserting `missing` is no longer rebuilt from `findings`
+  grepped a function source containing a comment saying exactly that
+  (repaired with AST, where comments do not appear at all).
   **`IS_009`:** forward mode's `unsearched_signals` has **no
   retrospective analogue**, since by the time there is an incident
   every signal has been searched (searching them is what an
@@ -7310,7 +7347,7 @@ underneath).
   `no_severity` exemption (`recommendation`) measured with the
   three-arm harness, and named as a limit — an investigation folder's
   working vocabulary IS the screened vocabulary, and a screen written
-  for spreadsheet audits does not know the difference. 77 selftest
+  for spreadsheet audits does not know the difference. 102 selftest
   checks. Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk

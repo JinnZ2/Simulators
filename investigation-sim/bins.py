@@ -333,6 +333,160 @@ def gap_mechanism(case):
             "source": "uninstrumented.MECHANISMS, imported"}
 
 
+
+def _claim_record():
+    p = os.path.join(ROOT, "claim-record")
+    if p not in sys.path:
+        sys.path.insert(0, p)
+    import record as R
+    return R
+
+
+def calculated_clock(case):
+    """For a case firing CALCULATED_UNCLOCKED: hand the figure to the
+    module that derives a clock rather than storing one.
+
+    The bin's whole content is a governing number whose domain of
+    validity or re-check interval was stripped, and `claim-record`
+    refuses a stored date and derives one from a time constant and a
+    dimensionless coupling. So the instrument that measures the bin is
+    already built, and the honest wiring is to let it return
+    UNDERIVABLE on exactly the cases the bin is about -- which is the
+    bin restated by a module that did not know about it.
+    """
+    c = classify(case)
+    if "CALCULATED_UNCLOCKED" not in c["fires"]:
+        return {"state": "BIN_DID_NOT_FIRE", "clock": None}
+    fig = case.get("figure")
+    if not isinstance(fig, dict):
+        return {"state": "FIGURE_UNDECLARED", "clock": None}
+    R = _claim_record()
+    got = R.derive_clock({"clock": fig.get("clock")})
+    # Two things learned by exercising both branches of the supplier.
+    #
+    # (1) The first version rebuilt `missing` from the findings list and
+    #     returned [] on a case with two absent sub-fields. The supplier
+    #     already computes it. Importing a function and then not reading
+    #     what it returns is the copy lesson one level down.
+    #
+    # (2) The supplier's return SHAPE varies by outcome: `missing` is
+    #     present on the UNDERIVABLE path and absent on the DERIVED one.
+    #     Fixed-key access works until the route succeeds, so the arm
+    #     written to prove the route is not CONSTANT_SILENT is the arm
+    #     that found the consumer could not handle success. Read with
+    #     .get() and report which keys the supplier actually returned,
+    #     rather than assuming one shape.
+    out = {
+        "state": "DERIVED_BY_CLAIM_RECORD",
+        "clock": got["state"],
+        "why": got["why"],
+        "regime": got.get("regime"),
+        "shelf_life_base": got.get("shelf_life_base"),
+        "next_check": got.get("next_check"),
+        "missing": got.get("missing", []),
+        "supplier_keys": sorted(got),
+        "source": "claim-record.derive_clock, imported",
+    }
+    return out
+
+
+def _fold_matrix():
+    p = os.path.join(ROOT, "fold-matrix")
+    if p not in sys.path:
+        sys.path.insert(0, p)
+    import fold_matrix as F
+    return F
+
+
+def conceived_plan(case):
+    """For a case firing CONCEIVED_NOT_BUILT: the plan column.
+
+    `fold-matrix` already carries `plan_exists` / `practice_tracks_plan`
+    as a column its own code cannot merge into a basis field, and that
+    pair IS this bin: a control designed and not implemented is a plan
+    that exists with practice not tracking it. Three states each,
+    including UNREAD, which is the same absent-vs-known-negative repair
+    this module carries in its signals.
+    """
+    c = classify(case)
+    if "CONCEIVED_NOT_BUILT" not in c["fires"]:
+        return {"state": "BIN_DID_NOT_FIRE", "plan": None}
+    F = _fold_matrix()
+    col = F.plan_column(case)
+    if col["invalid"]:
+        raise SpecMismatch("plan values %s are not in %s"
+                           % (col["invalid"], F.PLAN_STATES))
+    return {
+        "state": "READ_BY_FOLD_MATRIX",
+        "plan_exists": col["plan_exists"],
+        "practice_tracks_plan": col["practice_tracks_plan"],
+        "why": col["why"],
+        "states": list(F.PLAN_STATES),
+        "source": "fold-matrix.plan_column, imported",
+    }
+
+
+def _report_typing():
+    p = os.path.join(ROOT, "report-typing")
+    if p not in sys.path:
+        sys.path.insert(0, p)
+    import reverse_arm_score as RT
+    return RT
+
+
+def known_channel(case):
+    """For a case firing KNOWN_ROUTED_AWAY: score the report instance.
+
+    `report-typing`'s R1 scorer codes report instances by seat and
+    counts what happened to them. Pointed at an internal report rather
+    than a televised one, the same four scoreables apply -- and the one
+    this bin turns on is `b_time_to_action`, whose own note says the
+    discount is a DELAY and refusal is the tail.
+
+    The scorer is used as delivered, with its own defects intact
+    (report-typing RT_004..RT_009). Those are recorded there and are
+    not repaired from here: a consumer that patches its supplier is the
+    copy-drift this repo imports to avoid.
+    """
+    c = classify(case)
+    if "KNOWN_ROUTED_AWAY" not in c["fires"]:
+        return {"state": "BIN_DID_NOT_FIRE", "scored": None}
+    inst = case.get("report_instances")
+    if not inst:
+        return {"state": "INSTANCES_UNDECLARED", "scored": None}
+    RT = _report_typing()
+    got = RT.score(inst)
+    # RT_008: CONTROL requires a comparison arm and score() enforces it
+    # nowhere, so a one-arm input returns a well-formed by_seat with
+    # nothing saying the denominator is absent. Not repaired in the
+    # supplier -- a consumer that patches its supplier is the drift this
+    # repo imports to avoid -- but not laundered either: the consumer
+    # detects it and says so, from CONTROL's own declared text.
+    seats = sorted(got["by_seat"])
+    required = [s.strip() for s in
+                RT.INSTANCE_SCHEMA["reporter_seat"].split("|")]
+    absent = [s for s in required if s not in seats]
+    return {
+        "state": "SCORED_BY_REPORT_TYPING",
+        "by_seat": got["by_seat"],
+        "contrast": got["contrast"],
+        "verdict": got["verdict"],
+        "note": got["note"],
+        "seats_present": seats,
+        "seats_absent": absent,
+        "denominator_present": not absent,
+        "control_note": None if not absent else
+            "the supplier returns a rate for the seats it was given and "
+            "does not flag the missing arm (report-typing RT_008). "
+            "Reported here rather than repaired there; without the "
+            "other arm this rate is uninterpretable by CONTROL's own "
+            "stated reason.",
+        "supplier_defects": "RT_004..RT_009, recorded in report-typing "
+                            "and not repaired from here",
+        "source": "report-typing.reverse_arm_score.score, imported",
+    }
+
+
 # ----------------------------------------------------------------- cases
 
 def load_cases():
@@ -427,19 +581,59 @@ def render():
     o.append("")
 
     cal = calibrate()
-    o.append("1b. THE ONE WIRED ROUTE")
-    o += wrap("The routes above are DECLARED. GAP_UNINSTRUMENTED is "
-              "WIRED: a case firing it names which of the register's "
-              "exclusion mechanisms applies, refusing anything outside "
-              "that vocabulary, and the vocabulary is imported rather "
-              "than copied so the two cannot drift.")
+    o.append("1b. THE WIRED ROUTES")
+    o += wrap("Every route above is WIRED: the module named is "
+              "imported and its own function is called, never copied "
+              "and never reimplemented. Four suppliers, and each "
+              "returns what its bin is about.")
+    o.append("")
+    o.append("   GAP_UNINSTRUMENTED -> uninstrumented.MECHANISMS")
     for c in load_cases():
         g = gap_mechanism(c)
         if g["state"] != "BIN_DID_NOT_FIRE":
-            o.append("     %-26s %-24s %s"
-                     % (c["id"][:26], g["state"], g["mechanism"] or ""))
-    o.append("   the other four routes are declared and not wired. That")
-    o.append("   is the folder's largest open item and is IS_008.")
+            o.append("     %-24s %-22s %s"
+                     % (c["id"][:24], g["state"], g["mechanism"] or ""))
+    o.append("")
+    o.append("   CALCULATED_UNCLOCKED -> claim-record.derive_clock")
+    for c in load_cases():
+        k = calculated_clock(c)
+        if k["state"] == "BIN_DID_NOT_FIRE":
+            continue
+        if k["state"] != "DERIVED_BY_CLAIM_RECORD":
+            o.append("     %-24s %s" % (c["id"][:24], k["state"]))
+            continue
+        o.append("     %-24s clock %-14s missing: %s"
+                 % (c["id"][:24], k["clock"], ", ".join(k["missing"])))
+    o += wrap("The supplier returns UNDERIVABLE on exactly the cases "
+              "this bin is about, and names which sub-fields are "
+              "absent. That is the bin restated by a module built for "
+              "another purpose and unaware of this one.", ind="     ")
+    o.append("")
+    o.append("   CONCEIVED_NOT_BUILT -> fold-matrix.plan_column")
+    for c in load_cases():
+        p = conceived_plan(c)
+        if p["state"] == "BIN_DID_NOT_FIRE":
+            continue
+        if p["state"] != "READ_BY_FOLD_MATRIX":
+            o.append("     %-24s %s" % (c["id"][:24], p["state"]))
+            continue
+        o.append("     %-24s plan_exists %-6s practice_tracks_plan %s"
+                 % (c["id"][:24], p["plan_exists"],
+                    p["practice_tracks_plan"]))
+    o.append("")
+    o.append("   KNOWN_ROUTED_AWAY -> report-typing.score")
+    for c in load_cases():
+        k = known_channel(c)
+        if k["state"] == "BIN_DID_NOT_FIRE":
+            continue
+        if k["state"] != "SCORED_BY_REPORT_TYPING":
+            o.append("     %-24s %s" % (c["id"][:24], k["state"]))
+            continue
+        o.append("     %-24s seats %s   denominator present: %s"
+                 % (c["id"][:24], ",".join(k["seats_present"]),
+                    k["denominator_present"]))
+        if k["control_note"]:
+            o += wrap(k["control_note"], ind="       ")
     o.append("")
 
     o.append("2. CALIBRATION -- constructed cases, bin fixed by authoring")

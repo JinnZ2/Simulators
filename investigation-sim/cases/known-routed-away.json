@@ -21,5 +21,32 @@
     "addresses_bin": "KNOWN_ROUTED_AWAY",
     "status": "IMPLEMENTED"
   },
-  "authoring_note": "Built to fire exactly one signal. The other three are ABSENT rather than UNSEARCHED so the case tests the bin and not the NOT_DERIVABLE branch."
+  "authoring_note": "Built to fire exactly one signal. The other three are ABSENT rather than UNSEARCHED so the case tests the bin and not the NOT_DERIVABLE branch.",
+  "report_instances": [
+    {
+      "episode_id": "shift-log-1",
+      "reporter_seat": "floor_worker",
+      "receiver_role": "supervisor",
+      "receiver_blind": true,
+      "domain": "the press the operator runs",
+      "content_summary": "guard interlock bypassed on nights",
+      "a_prior_filing": "NO_PRIOR",
+      "b_time_to_action": "NEVER",
+      "c_attribution": "UNATTRIBUTED",
+      "d_exec_testimony": "NOT_STATED"
+    },
+    {
+      "episode_id": "shift-log-2",
+      "reporter_seat": "floor_worker",
+      "receiver_role": "supervisor",
+      "receiver_blind": true,
+      "domain": "the press the operator runs",
+      "content_summary": "same bypass, second entry",
+      "a_prior_filing": "YES_IGNORED",
+      "b_time_to_action": "NEVER",
+      "c_attribution": "UNATTRIBUTED",
+      "d_exec_testimony": "NOT_STATED"
+    }
+  ],
+  "report_instances_note": "Coded in report-typing's own INSTANCE_SCHEMA so the imported scorer reads them. There is no control arm here and the scorer does not say so -- that is RT_008, a defect recorded in the supplier and not repaired from this side."
 }

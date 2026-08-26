@@ -21,5 +21,23 @@
     "addresses_bin": "CALCULATED_UNCLOCKED",
     "status": "OPEN"
   },
-  "authoring_note": "The claim-record route: a figure whose clock was stripped, which that folder refuses to store as a literal date and derives instead."
+  "authoring_note": "The claim-record route: a figure whose clock was stripped, which that folder refuses to store as a literal date and derives instead.",
+  "figure": {
+    "what": "load rating, computed at commissioning",
+    "clock": {
+      "time_constant": {
+        "state": "UNMEASURED",
+        "why": "the rate at which the traffic mix moves has not been measured. It is the neglected term and nobody has put a number on how fast it moves."
+      },
+      "rate_ceiling": {
+        "state": "UNMEASURED",
+        "why": "no bound on how fast the mix can change is recorded anywhere in the posting file."
+      },
+      "coupling": {
+        "state": "UNMEASURED",
+        "why": "the elasticity of the rating with respect to the mix is derivable by perturbation and has not been derived."
+      }
+    },
+    "note": "Every sub-field is a stated absence with a reason, not an omission. That is the bin: the figure survived and the conditions under which it held did not, so the module that derives a clock returns UNDERIVABLE -- which is the bin restated by an instrument that did not know about it."
+  }
 }
