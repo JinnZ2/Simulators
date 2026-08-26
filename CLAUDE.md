@@ -6981,6 +6981,64 @@ underneath).
   identity decaying while neighbour similarity climbs — flagged as the
   cheapest gap on the page, since the document calls it the most useful
   thing on the table and its own Open section notes no route uses it.
+- `blame-attribution/` — Seven standalone cells for whether blame
+  attribution tracks an actor's **position** rather than the causal
+  chain, and whether formal actual-causality metrics validated against
+  human blame judgments have absorbed that. `CELLS.md` delivered
+  verbatim; the audit's contribution is `pair_check.py`, **the
+  instrument the document's own Open section asks for and does not
+  build** — *"if the prose and code forms are not structurally
+  identical, C1 and C3 are uninterpretable. Needs an independent check
+  that the two forms encode the same chain."* Claims `BA_001..BA_010`.
+  No judgments have been collected; everything is a property of the
+  design and of the one concrete artifact it ships. The checker splits
+  the work the way this tree splits it everywhere — **mechanical on the
+  code side** (assignments parsed, dicts flattened to sub-facts),
+  **declared on the prose side** (whether a sentence encodes
+  `override_available = True` is a reading), and **the declaration is
+  checked**, since a declared span must appear verbatim in the prose so
+  a reading can be wrong but not vague; the held-constant list is read
+  from `CELLS.md` rather than retyped. **`BA_001`: the worked example
+  fails it** — 6 code facts, **3 SYMMETRIC and 3
+  HELD_CONSTANT_VIOLATION**, so half the code form's content is absent
+  from the prose form and all of it lands on the document's own
+  held-constant list. **`BA_002`, the sharpest:** two of the three are
+  `override_available`, which is **C6's measurable** — the prose arm has
+  an unestablished override and the code arm has it established for both
+  agents by name, the exact contrast C6 exists to detect — so C1
+  compares the two arms, attributes the difference to *medium*, and any
+  C1 effect on this pair is a medium effect plus an
+  override-establishment effect, in a document whose first line is that
+  no cell depends on another. **`BA_003`:** the third is `outcome =
+  COLLISION`, and the prose never says what happened. **`BA_004`, why
+  that matters more than it looks:** the Judges section's headline
+  inference is **sound, and sound because of the held constants** —
+  holding causal structure, agent count, observability, severity and
+  override fixed while role moves is what decorrelates position from
+  causation, so the five items are the premise of the document's own
+  strongest claim rather than hygiene. **`BA_005`:** C3's falsifier
+  requires C2's result, 1 of 7, against the opening line; the
+  self-contained form is already implicit. **`BA_006`:** `blame_share`
+  sums to 1, so a judge reading the incident as unavoidable must still
+  distribute a full unit — `null-harness`'s invariant on a response
+  scale, and it pushes toward finding someone accountable in the one
+  document whose C6 is about a verdict from contradictory premises; one
+  unnormalised `unattributed` field makes the sum derived rather than
+  imposed. **`BA_007`:** `provability_check` is the best measurable on
+  the page and the only one that survives `BA_006`, being a count
+  against the stimulus text rather than a ratio across agents, needing
+  no comparison cell and reading the judge's *reasoning* rather than the
+  output. **`BA_008`:** C6's inversion is already reachable from F2's
+  existing levels — *driver* and *programmer/architect* are both role
+  arms of C2 and C3 — so it is a reading of arms the design already
+  calls for rather than a separate study, and a better test than a
+  cross-domain one because it does not move the incident. **`BA_009`
+  UNVERIFIED:** `report-typing` is named as the shape match and is **now
+  cited by four markers and has never existed**, and the prompting
+  literature claim is egress-blocked (sixth folder in that state).
+  **`BA_010`:** one screen exemption, three arms — the report prints
+  *"outcome severity"* because it reads the held-constant list from the
+  delivered document, and rewording it would misquote the source.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

@@ -1,0 +1,30 @@
+PROSE / CODE PAIR CHECK
+the check CELLS.md's Open section asks for
+
+held constants, read from CELLS.md (5):
+  - causal structure of the incident
+  - number of agents in the chain
+  - what each agent could observe at decision time
+  - outcome severity
+  - whether an override was available, and to whom
+
+PAIR worked_example -- 6 code facts
+  fact                           state                  note
+  ----------------------------------------------------------------------------
+  agent_A.override_available     HELD_CONSTANT_VIOLATION bears on held constant: whether an ove
+  agent_A.reaction_window_s      SYMMETRIC              
+  agent_B.flag.confidence        SYMMETRIC              
+  agent_B.flag.obstacle          SYMMETRIC              
+  agent_B.override_available     HELD_CONSTANT_VIOLATION bears on held constant: whether an ove
+  outcome                        HELD_CONSTANT_VIOLATION bears on held constant: outcome severi
+
+  HELD_CONSTANT_VIOLATION  3
+  SYMMETRIC                3
+
+  INTERPRETABLE FOR C1/C3: False
+  A pair that is not symmetric cannot separate a
+  medium effect from an information effect. C1
+  compares the two forms and attributes the
+  difference to medium; anything the code form
+  carries alone enters that difference.
+
