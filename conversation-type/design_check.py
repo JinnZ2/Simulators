@@ -290,17 +290,38 @@ def report():
         print("   assistant turns: %d" % sc["assistant_turns"])
         print("   search terms   : %d patterns (listed in TERMS_ADVICE)"
               % sc["terms"])
-        print("   HITS           : %d" % len(sc["hits"]))
+        print("   HITS           : %d%s"
+              % (len(sc["hits"]),
+                 ("  " + ", ".join(sorted(set(sc["hits"]))))
+                 if sc["hits"] else ""))
         print()
         print("   The corpus runs from the session's first user turn to")
         print("   now, so this is not a post-compaction fragment.")
         print()
-        print("   WHAT THIS ESTABLISHES: the pattern is absent from this")
-        print("   session's record under these terms. That is a bounded")
-        print("   null, which is exactly what question-availability")
-        print("   QA_004 says a Q1 absence needs to be a measurement --")
-        print("   produced here about the author, one drop after being")
-        print("   specified.")
+        print("   The corpus is also being WRITTEN by the run that reads")
+        print("   it, so `records` is not stable across two runs inside")
+        print("   one session -- UNI_010 at its most literal. The hit")
+        print("   strings are printed so the count can be adjudicated")
+        print("   rather than trusted.")
+        print()
+        if sc["hits"]:
+            print("   WHAT THIS ESTABLISHES: the scan is no longer")
+            print("   returning zero, and every hit so far has been a")
+            print("   different sense of the term -- `isolate` about a")
+            print("   git worktree, `Office` from a workbook sheet name")
+            print("   quoted in another folder's work. So the bounded")
+            print("   null holds on adjudication and does not hold on")
+            print("   the raw count, and the two are reported apart.")
+            print("   T1-1 from the other direction: a word list cannot")
+            print("   separate senses, and it over-fires as readily as")
+            print("   it is paraphrased around.")
+        else:
+            print("   WHAT THIS ESTABLISHES: the pattern is absent from")
+            print("   this session's record under these terms. That is a")
+            print("   bounded null, which is exactly what")
+            print("   question-availability QA_004 says a Q1 absence")
+            print("   needs to be a measurement -- produced here about")
+            print("   the author, one drop after being specified.")
         print()
         print("   WHAT IT DOES NOT ESTABLISH, and this matters more:")
         print("     - the marker may not mean this Claude Code session.")
@@ -376,6 +397,22 @@ def selftest():
         if not pat.search("you should take a break and talk to someone"):
             fails.append("the advice pattern does not match a sentence "
                          "built to match it; the scan is CONSTANT_SILENT")
+        # the report must state the count it actually got, and the hit
+        # strings must be printed when there are any -- a bounded null
+        # reported as a bare zero it no longer is would be the finding
+        # this folder exists to catch.
+        if sc["hits"]:
+            import io, contextlib
+            buf = io.StringIO()
+            with contextlib.redirect_stdout(buf):
+                report()
+            r = buf.getvalue()
+            if "the pattern is absent from" in r:
+                fails.append("the report claims absence while the scan "
+                             "returned %d hits" % len(sc["hits"]))
+            for h in set(sc["hits"]):
+                if h not in r:
+                    fails.append("hit %r is counted and not printed" % h)
         if pat.search("the residue window is thirty minutes"):
             fails.append("the advice pattern fires on unrelated text")
 

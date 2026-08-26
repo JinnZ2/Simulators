@@ -420,16 +420,28 @@ def selftest():
 
     # cross-links: at least one must resolve and at least one must not, or
     # the resolver is not discriminating.
+    # `report-typing` was the absent half of this pair until it landed
+    # (2026-08-26). It is kept as a token that DOES resolve and the
+    # absent sample moves to `merit-anchoring`, which the arriving
+    # marker's own cross-refs named. The check is about the resolver
+    # discriminating, not about any one token.
     got = [artifact_exists(t) for t in
-           ("uninstrumented", "report-typing", "criterion-symmetry")]
+           ("uninstrumented", "merit-anchoring", "report-typing")]
     if all(got) or not any(got):
         fails.append("artifact_exists returns one answer for all tokens; it "
                      "cannot discriminate")
     # mention and existence must be able to DISAGREE, or the second column
     # is decorative.
-    if artifact_exists("report-typing") or not resolve("report-typing"):
-        fails.append("report-typing no longer has mentions-without-artifact; "
-                     "the mention-is-not-existence finding must be restated")
+    # QA_007's stated falsifier fired on 2026-08-26: `report-typing`
+    # landed, so it no longer has mentions without an artifact. The
+    # claim is updated in CLAIM_TABLE.md rather than the check being
+    # loosened; the finding's live instance moves to `merit-anchoring`,
+    # which has mentions and no artifact and acquired two of them from
+    # the arriving marker's own cross-refs -- the same route.
+    if artifact_exists("merit-anchoring") or not resolve("merit-anchoring"):
+        fails.append("merit-anchoring no longer has mentions-without-"
+                     "artifact; the mention-is-not-existence finding needs "
+                     "a live instance")
 
     for f in fails:
         print("FAIL: " + f)

@@ -7090,6 +7090,99 @@ underneath).
   strongest move in the module, `domain-ledger`'s no-composite
   discipline and `uninstrumented`'s SCALAR DEMAND arrived at
   independently and built in rather than found.
+- `report-typing/` — The first named-and-absent artifact in this drop
+  family to arrive. Four folders named it as their canonical shape
+  while it did not exist — `criterion-symmetry`,
+  `question-availability`, `conversation-type`, `blame-attribution` —
+  and `QA_007` made the absence its own finding and counted the
+  mentions. **The mechanism:** reports get typed by the reporter's
+  **position**, not by content, so the operation runs on routing and
+  never has to claim anything about the report — it assigns it to a
+  channel where reading is optional, which is why it transfers across
+  every form of inequality without a new theory each time and survives
+  the removal of whoever set it up. `MARKER.md` and
+  `reverse_arm_score.py` delivered verbatim; audit in
+  `marker_audit.py` (66 checks), claims `RT_001..RT_012`. Three
+  instruments: credential correction (hold the claim, correct the
+  stated objection, measure whether the assessment updates — run
+  inadvertently twice in the literature and never as a design), the
+  seat change (within-subject, content and competence and credential
+  held constant, only the seat moves), and **the reverse arm**, the
+  one it calls runnable now — a disguised executive reports upward and
+  the supervisor doing the dismissing does not know who they are
+  dismissing, so the assessor is blind and no strategic behaviour is
+  available to them. **`RT_002`, the checker's own subject applied to
+  itself:** `observer-exclusion` carries the string and does not cite
+  it — its occurrences are entries in a cross-link checker's target
+  list — so mention and citation are split into two columns
+  structurally (prose versus code-only), and the classifier is graded
+  on a **constructed tree** rather than on this corpus, since a
+  known-answer check whose known answer lives in the data under test
+  is a regression test on that corpus wearing a known-answer's clothes
+  (`SS_030`); corpus counts are printed and the asserted thing is the
+  relation between them. **Six places where the code does not enforce
+  what the prose promises.** `RT_004`: `receiver_blind` is checked
+  with `is False` and the schema displays the field as the **string**
+  `"True | False -- if False, DROP the instance"`, so a coder
+  following the schema writes `"False"` and the instance is **not**
+  dropped, nor is one with the field missing or `None` — and it is the
+  one branch whose failure runs *toward* the finding, since an
+  instance where blindness lapsed is exactly one where the executive
+  might have been listened to. `RT_005`: `d_exec_testimony` is
+  declared with five values and read on **none**, while its own `why`
+  is *"distinguishes the two available readings of the whole genre"*.
+  `RT_006`: `b_time_to_action`'s `why` says the discount is a
+  **delay** and refusal is *"the tail of the distribution, not the
+  measurement"* — and every accumulator in `score()` is a `+= 1`
+  occurrence counter, five of them, none summing a value, so the
+  integer beats are never summed, averaged or binned and only the tail
+  is counted; sharper than reading one value, because the others take
+  a branch and this takes a different kind of accumulator. `RT_007`:
+  `contrast` and `verdict` are the literal `UNCODED`, so the returned
+  note's two conditions — both arms present, second coder passed — are
+  checked nowhere and the refusal is a constant rather than a check.
+  `RT_008`: the control arm is required in `CONTROL` and enforced
+  nowhere; a one-arm input emits a well-formed result with nothing
+  saying the denominator is missing. `RT_009`: **`domain` is
+  Instrument 2's own sharp test** (a report inside the reporter's
+  prior expertise), is in the schema, and reaches no accumulator — so
+  the instrument's sharpest prediction is the one thing the scorer
+  cannot report on; plus three quantities the prose asks for with no
+  field at all, one of them (**known-exec** instances) named inside
+  `CONTROL`'s own expected-result sentence while `reporter_seat`
+  declares two values and that is not one of them. Seventh instance of
+  the stated-rule-with-no-field shape (`MF_017`, `CW_015`, `DL_004`,
+  `GC_012`, `UNI_013`, `SSS_050`). **`RT_010`:** the `uninstrumented
+  Q7` cross-ref is **one past the end** — the highest question ordinal
+  anywhere in that folder is Q6 — and R4 rests on the identification.
+  **`RT_011`:** the arrival took the family's named-and-absent count
+  from one to three, its CROSS-REFS opening `median-case-calibration`
+  and `sensing-spine` while naming `merit-anchoring` a second time.
+  **The arrival fired two standing falsifiers and both claims were
+  updated rather than the checks loosened:** `QA_007` is now SUPPORTED
+  as a claim and REFUTED on its stated instance, with the live
+  instance moved to `merit-anchoring` (6 mentions, no artifact,
+  two of them acquired from the arriving marker's own cross-refs — the
+  same route one drop later), and `BA_009`'s cross-link half fired
+  while its literature half is untouched. `CT_005`'s bounded null also
+  moved: the same scan over the same session now returns **3 hits**,
+  all a different sense of the term (`isolate` about a git worktree,
+  `Office` from a workbook sheet name quoted elsewhere), so the null
+  holds on adjudication and not on the raw count — `T1-1` from the
+  **over-firing** direction rather than the paraphrase one, with the
+  report now printing the hit strings and branching its prose on the
+  count. Two corpus properties recorded with it: the session log is
+  **written by the run that reads it** (`records` 6860 → 6883 → 6900
+  across three runs), and the session grew 3.2× between the two pinned
+  runs, so the denominators behind *"0 hits"* and *"3 hits"* are
+  different denominators and only the adjudication compares.
+  **`RT_012` UNVERIFIED:** nothing has been run on a transcript, there
+  is no coder and no second coder, and every literature pointer in the
+  marker — Rafferty, the BC deskilling study, Araki/OECD, StatCan,
+  arXiv 2602.21369, the Belzer/Viscelli pair, the Dangote figures, the
+  Nielsen occupation-is-not-a-demographic claim — is carried and
+  unchecked at `ANC_010` / `MS_004` status. Stdlib only, parses under
+  3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

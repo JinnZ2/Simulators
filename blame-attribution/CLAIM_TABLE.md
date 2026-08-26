@@ -255,7 +255,17 @@ document's own text and of the pair it ships.
 **Falsifier:** `report-typing` landing, or the validation practice
 turning out to be something else.
 
-**Status: UNVERIFIED, and load-bearing on nothing here.**
+**Status: UNVERIFIED on the literature; the cross-link half FIRED
+(2026-08-26).**
+
+`report-typing` landed. The half of this claim about the tree is
+settled: the shape match resolves, and the marker that arrived
+names this folder back — under `blame-attribution-by-role`, which
+is not the folder name, recorded there as `RT_003`.
+
+The literature half is untouched. Egress is still an allowlist, the
+validation-practice claim is still carried and unchecked, and
+`BA_001..BA_008` still rest on nothing outside this folder.
 
 ---
 

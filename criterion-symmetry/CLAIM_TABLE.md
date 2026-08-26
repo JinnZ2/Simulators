@@ -187,7 +187,7 @@ quality, in either direction.
 
 | link | in this tree |
 |---|---|
-| `[[report-typing]]` | **0** |
+| `[[report-typing]]` | **0** at the time; landed 2026-08-26 |
 | `[[rubric-backcasting]]` | **0** |
 | `[[merit-anchoring]]` | **0** |
 | `[[uninstrumented]]` | 114 files |
@@ -197,6 +197,16 @@ criterion-asymmetry cases"* is moderate and *"needs the comparison table
 populated."* Three of the four named cases are the comparison set, and
 none is here. So the moderate shape-match rests on material outside this
 repo, and nothing in it can be checked from inside.
+
+**Update 2026-08-26:** one of the three landed. `report-typing/`
+carries the routing argument this marker points at, and its own
+back-reference list names `criterion-symmetry` first. Two of the
+comparison set are still absent, and the arriving marker named
+`merit-anchoring` again — as the folder holding *"the labour-market
+half"* of the same engine — so that one is now named by two markers
+and remains unbuilt. The moderate shape-match is one case less
+unsupported and is not yet the populated comparison table the
+CONFIDENCE section asks for.
 
 `uninstrumented` resolves and is the right neighbour: the marker's own
 framing — a quantity the instrument's constitution prevents from

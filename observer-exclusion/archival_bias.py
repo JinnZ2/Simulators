@@ -340,8 +340,10 @@ def selftest():
             fails.append("quotation %r no longer matches its source" % k)
 
     # cross-links must discriminate.
+    # `report-typing` landed 2026-08-26 and stopped being the absent
+    # half of this pair. Absent sample moved to `merit-anchoring`.
     got = [artifact_exists(t) for t in
-           ("question-availability", "report-typing")]
+           ("question-availability", "merit-anchoring")]
     if all(got) or not any(got):
         fails.append("artifact_exists returns one answer for both tokens")
 

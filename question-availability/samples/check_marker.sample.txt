@@ -48,12 +48,12 @@ CHECKS ON MARKER.md -- the marker is not edited
 
 3  cross-links
    link                   mentions  artifact  where
-   uninstrumented         80        yes       METHOD_SPEC.md, adaptive-claim-loop/AUDIT_NOTES.md (+78)
-   report-typing          3         NO        criterion-symmetry/AUDIT_NOTES.md, criterion-symmetry/CLAIM_TABLE.md (+1)
-   criterion-symmetry     4         yes       criterion-symmetry/AUDIT_NOTES.md, criterion-symmetry/CLAIM_TABLE.md (+2)
+   uninstrumented         103       yes       METHOD_SPEC.md, adaptive-claim-loop/AUDIT_NOTES.md (+101)
+   report-typing          15        yes       blame-attribution/CELLS.md, blame-attribution/CLAIM_TABLE.md (+13)
+   criterion-symmetry     14        yes       blame-attribution/CLAIM_TABLE.md, blame-attribution/README.md (+12)
    rubric-backcasting     3         NO        criterion-symmetry/AUDIT_NOTES.md, criterion-symmetry/CLAIM_TABLE.md (+1)
-   merit-anchoring        3         NO        criterion-symmetry/AUDIT_NOTES.md, criterion-symmetry/CLAIM_TABLE.md (+1)
-   artifacts present: 2 of 5
+   merit-anchoring        7         NO        criterion-symmetry/AUDIT_NOTES.md, criterion-symmetry/CLAIM_TABLE.md (+5)
+   artifacts present: 3 of 5
    `criterion-symmetry` exists because the last drop landed it,
    so the named-and-absent set converges as drops arrive.
    MENTION IS NOT EXISTENCE, and the two columns disagree.
