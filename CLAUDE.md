@@ -7446,12 +7446,61 @@ underneath).
   every non-emptiness check — worse than returning nothing, and the
   field that went missing names *the specific absence*, the register's
   own subject; the count and the one-space column are now asserted.
-  **`GM_010` UNVERIFIED:** no gap entry has been read, and the cheapest
-  untouched question is whether the READING RULE separates anything
-  when real boundaries are put to it, which needs no corpus of gaps at
-  all — only boundaries and two readers, the `triad-playground`
-  shadow-panel design with the null attached. 66 selftest checks.
-  Stdlib only, parses under 3.9, phone-buildable, CC0.
+  **Second drop:** all five `gaps/*.md` landed (29 entries) plus a
+  sixth file the INDEX does not name (`ADDENDUM.md`, addressed to *"any
+  system participating in infrastructure, disaster management, or
+  emergency planning decisions"*), so `GM_009` closes and three claims
+  become testable. **`GM_001` held on the distribution and its
+  falsifier fired**: boundary-artifact **29 of 29**, knowledge 1, so
+  the delivered line holds for the predicted reason rather than as an
+  observation — and `STR-05` is `undated`, a forced state, marked
+  `knowledge (for the compliance figure)` while its own
+  WHAT_IS_MISSING describes a number whose *primary source the author
+  lacks*, which the KIND definition (*the physics or the measurement is
+  genuinely not known*) does not cover. Two readings, and **the
+  falsifier cannot pick, because it turns on the word `correctly` and
+  nothing measures that** — `SHB_020`/`SHB_040`'s shape, so
+  `gm001_test()` reports the firing and emits no verdict, asserted.
+  **`GM_003` gains a magnitude and a third reading:** 23 of 29 carry no
+  ENTRY_POINT and the distribution is **by file** — three files 0 of
+  18, two carrying all six, with the file whose own opening calls its
+  entries *"the cheapest gaps to close"* highest — so an absence there
+  is a property of the file rather than a judgement about the gap, and
+  a reader picking the cheapest gap reads all eighteen as equally hard
+  with none assessed (`CAP-02` carries the substance of an entry point
+  in a NOTE without it reaching the field). **`GM_011`:** six field
+  names in use and none in the schema (`MECHANISM`, `NOTE`, `SCOPE`,
+  `US ANALOGUES`, `WHY UNRUN`, `WORKED CASE`) on 17 of 29 — the
+  `MF_017` shape inverted, and **`WHY UNRUN` is load-bearing**, naming
+  on `SCR-01` the reason a computation has not been run (liability for
+  whoever publishes the flagged list; no agency owning a screen
+  crossing three programs), which is the boundary-artifact content
+  itself and the only place in 29 entries where the *reason* is a field
+  rather than inferred from KIND — exactly what the READING RULE needs
+  to sort. **`GM_013`:** `unasked` is **14 of 29**, the plurality, and
+  is the state `investigation-sim` had no bin for until `IS_014` closed
+  it one day earlier — so running that classifier over this corpus
+  before the repair would have filed fourteen entries as *genuinely
+  novel*, a stronger result than `IS_014` claimed for itself.
+  **`GM_010` ANSWERED in part:** 1 of 29 carries two STATE values
+  (`SCR-03`, `undated / unasked`) and a different 1 carries two KIND
+  values, so both single-valued fields hold composites in the real
+  corpus. **`GM_014`:** the addendum's claim that the absence *"cannot
+  be detected by introspection over the model's own outputs"* is
+  testable against this session and one instance supports it — the
+  sixth bin was not found by `investigation-sim`'s spec, its 102
+  checks, or its explicit reachability arm, but by mapping this
+  register's vocabulary against it — with the interest declared in both
+  directions and the n stated, and `TP_008`'s shadow-panel measurement
+  named as the same claim measured on another substrate.
+  **`GM_015` UNVERIFIED:** every agency and literature fact across 29
+  entries is carried and egress-blocked (seventh folder in that state),
+  nothing in `GM_001..GM_014` rests on any of them, and the cheapest
+  real check is `SCR-02`'s own entry point — *date of last hazard-class
+  review, per structure* — which needs no fieldwork and no literature,
+  only the register, and where a null or a decades-old date IS the
+  finding. 100 selftest checks. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

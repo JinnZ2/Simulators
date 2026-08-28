@@ -1,12 +1,18 @@
 # gap-markers — CLAIM_TABLE
 
-`GM_001..GM_010`. Claims about the delivered `GAP_MARKERS.md`, which is
-landed verbatim and modified by nothing here.
+`GM_001..GM_015`. Claims about the delivered `GAP_MARKERS.md` and its
+corpus, all landed verbatim and modified by nothing here.
 
-The five `gaps/*.md` files its INDEX names **did not arrive**. Nothing
-here reconstructs them — they are data, and inventing an entry puts a
-gap in the author's mouth (`PB_001` / `CW_004`). Every claim below is a
-property of the **schema**, which is what did arrive.
+**Second drop, 2026-08-26.** All five `gaps/*.md` files landed, plus a
+sixth (`ADDENDUM.md`) the INDEX does not name. 29 entries. `GM_009`
+closes, `GM_001` and `GM_003` become testable and both move,
+`GM_010`'s question is answered, and `GM_011..GM_015` are what the
+corpus shows.
+
+They arrived. Nothing was reconstructed while they were absent, and
+the refusal branch in `load_gaps()` is kept and still reachable on a
+constructed absence, because the next INDEX entry named before it is
+written will hit it.
 
 ## REFUTATION_PROTOCOL
 
@@ -16,53 +22,76 @@ the disagreement goes in the checker's output.
 
 | id | claim | status |
 |---|---|---|
-| `GM_001` | *"Most entries here are boundary-artifact"* is not an observation about a corpus. It is forced by the state vocabulary and derivable before any entry is written. | SUPPORTED |
+| `GM_001` | *"Most entries here are boundary-artifact"* is not an observation about a corpus. It is forced by the state vocabulary and derivable before any entry is written. | SUPPORTED on the distribution (**29 of 29**), **falsifier FIRED** on one entry, and the falsifier was written too loosely to settle it — see below |
 | `GM_002` | The register has no negative state, so it can only ever record gaps and cannot report coverage. | SUPPORTED |
-| `GM_003` | `ENTRY_POINT` is conditional and has no third state, on the field that makes a gap actionable. | SUPPORTED |
+| `GM_003` | `ENTRY_POINT` is conditional and has no third state, on the field that makes a gap actionable. | SUPPORTED, **and sharpened**: 23 of 29 absent, and the distribution is by FILE — three files are 0 of 18 |
 | `GM_004` | The READING RULE is the strongest thing in the drop and is deliberately not automated, on its own say-so. | SUPPORTED |
 | `GM_005` | The map to `investigation-sim` is not onto in either direction, and `unasked` named a state that module could not express. | SUPPORTED — **and the finding landed the same day**: that module added a sixth bin and a fifth signal (its `IS_014`) |
 | `GM_006` | The fourth standing caution states `generation-capacity`'s mechanism 10, arrived at independently, and the *no residue* clause is what makes it that rather than mechanism 6. | SUPPORTED |
 | `GM_007` | The KIND distinction is the thing `uninstrumented`'s eight-mechanism register does not have. | SUPPORTED |
 | `GM_008` | My first parse returned six of seven fields and every non-emptiness check passed on it. | SUPPORTED |
-| `GM_009` | Five named index files, none present. | SUPPORTED |
-| `GM_010` | No gap entry has been read, and the load-bearing empirical question — whether the states are codable against a real gap — is untouched. | UNVERIFIED |
+| `GM_009` | Five named index files, none present. | **CLOSED 2026-08-26** — all five landed |
+| `GM_010` | No gap entry has been read, and the load-bearing empirical question — whether the states are codable against a real gap — is untouched. | **ANSWERED in part**: 29 read; 1 carries two states, 1 carries two kinds |
+| `GM_011` | Six field names are in use and none is in the schema. `WHY UNRUN` is the load-bearing one. | SUPPORTED |
+| `GM_012` | A sixth file arrived that the INDEX does not name, addressed to a reader the other five are not. | SUPPORTED |
+| `GM_013` | `unasked` is the largest state at 14 of 29 — the state `investigation-sim` had no bin for until `IS_014` yesterday. | SUPPORTED |
+| `GM_014` | The addendum's inheritance claim is testable against this session, and one instance supports it. Interest declared, because it runs both ways. | SUPPORTED at n=1 |
+| `GM_015` | Every literature and agency fact in all 29 entries is carried and unchecked. | UNVERIFIED |
 
 ---
 
-## GM_001 — the distribution is forced, not observed
+## GM_001 — the distribution is forced, and the falsifier fired anyway
 
-The delivered file states *"Most entries here are boundary-artifact."*
-That reads as a fact about the corpus. It is derivable from the state
-definitions with no corpus at all.
+**The prediction held on the distribution.** Written before any entry
+existed: four of five state definitions assert the knowledge is
+present, so `KIND` is determined on those four and free only on
+`uncounted`. Against 29 delivered entries:
 
-Four of the five definitions assert that the knowledge is present:
+    boundary-artifact   29 of 29
+    knowledge            1 of 29 (alongside boundary-artifact, not alone)
 
-    unasked    "data exists, collected for another purpose"
-    unowned    "every party competent"
-    assembly   "all components present in separate literatures"
-    undated    "record exists but currency unknown"
+So *"Most entries here are boundary-artifact"* is true, and it is true
+for the reason `GM_001` gave rather than as an observation about what
+the author found.
 
-A state whose own definition says the data, the record, or the
-competence exists cannot also be a state where the physics or the
-measurement is genuinely not known. So `KIND` is determined on those
-four and carries information on exactly one — `uncounted`, whose
-definition makes no existence claim and where a deep-void census could
-be genuinely unknown *or* simply unfunded.
+**And the stated falsifier fired.** It was: *an entry in `unasked`,
+`unowned`, `assembly` or `undated` correctly marked `knowledge`.*
+`STR-05-RETROFIT-BASELINE` is `undated` and its `KIND` reads
+*`knowledge (for the compliance figure) / boundary-artifact (for the
+scope)`.*
 
-**This is a schema economy, not a fault.** `KIND` stays load-bearing
-for the READING RULE, which operates on *boundaries* rather than on
-entries, and the READING RULE is where the distinction does its work.
-What changes is how the sentence should be read: not *most of what I
-found was institutional*, but *four of my five categories can only be
-institutional*.
+**The firing is not decidable by the check, and that is the finding
+about the falsifier.** STR-05's own `WHAT_IS_MISSING` says: *"One
+source cites a city retrofit program at ~5% compliance; this figure
+needs a primary source before use."* That is a number that exists and
+whose citation the author does not have. The `KIND` definition reads
+*the physics or the measurement is genuinely not known* — which a
+figure lacking a citation is not.
 
-The forcing is **read from the delivered definitions**, not from a
-hand-made list: replace a definition with one making no existence
-claim and the checker frees the KIND again, which is asserted.
+So there are two readings and the check cannot pick:
 
-**Falsifier:** an entry in `unasked`, `unowned`, `assembly` or
-`undated` correctly marked `knowledge` — which would mean the state
-definition and the entry disagree about whether the data exists.
+- the entry uses `knowledge` in a **second sense** — provenance
+  unknown to me, rather than not known to anyone — in which case
+  `GM_001` stands and the corpus contains a sense split in `KIND`;
+- or `knowledge` legitimately covers provenance gaps, in which case
+  `GM_001` falls.
+
+The definition supports the first. The check does not, because the
+falsifier turns on the word **correctly**, and nothing measures that.
+Same shape as `SHB_020` / `SHB_040`: a falsifier written so its firing
+does not settle anything. `gm001_test()` reports `falsifier_fired` and
+emits **no verdict**, and the selftest asserts it emits none.
+
+The cheap repair is on the delivered side and is one line: `KIND`
+gains a third value, or `knowledge` is defined to exclude *the author
+lacks a citation*, which is a provenance state rather than a knowledge
+state. The corpus already distinguishes them everywhere else — this is
+the only entry where a source-quality caveat reached the `KIND` field.
+
+**Falsifier, restated so it can settle something:** an entry in one of
+the four forced states marked `knowledge` **alone**, whose
+`WHAT_IS_MISSING` names a quantity no party has measured. That is
+checkable without the word *correctly*.
 
 ## GM_002 — no negative state
 
@@ -89,24 +118,36 @@ first item — *an uncounted population is unbounded in both directions*
 
 **Falsifier:** a sixth state, or a separate record of places examined.
 
-## GM_003 — `ENTRY_POINT` has no third state
+## GM_003 — `ENTRY_POINT` has no third state, and now a magnitude
 
-The field reads *"cheapest available first query, where one exists."*
+Present on **6 of 29**. And the distribution is not per-gap:
 
-So an entry with no `ENTRY_POINT` carries two readings: **searched,
-and no query is available** (a measurement about the gap's
-tractability), or **nobody named one** (a measurement about the
-entry's completeness). They are the two states this repository has now
-separated a dozen times, and `ENTRY_POINT` is the field that makes a
-gap actionable — so it is the one where the collapse costs most. A
-reader picking the cheapest gap to attack reads *no entry point* as
-*hard*, and it may only mean *unfinished*.
+    gaps/substrate.md      3 of 6
+    gaps/structures.md     0 of 5
+    gaps/transport.md      0 of 5
+    gaps/capability.md     0 of 8
+    gaps/screens.md        3 of 5
 
-Cheap: a sentinel — `NONE_LOCATED` with a reason, distinct from an
-omitted field.
+Three files are **0 of 18**. Two carry all six. The file whose own
+opening says its entries *"are the cheapest gaps to close"* is the
+highest.
 
-**Falsifier:** a third value, or a per-entry statement of which
-absence it is.
+That is internally consistent and it needs a **third** reading beyond
+the two `GM_003` named. The two were *searched, no query available*
+and *nobody named one*. The data says the field is **in use in two
+files and not in three**, so an absence in `structures`, `transport`
+or `capability` is a property of the file rather than a judgement
+about the gap.
+
+The cost is concrete: a reader picking the cheapest gap to attack
+reads all eighteen as equally hard, and none of the eighteen was
+assessed for tractability at all. `CAP-02` even carries the substance
+of an entry point in a `NOTE` — *the equipment exists, owned by
+aggregate producers and marine contractors* — without it reaching the
+field.
+
+**Falsifier:** an entry-point value on one of the eighteen, or a
+per-file statement that the field was considered and declined.
 
 ## GM_004 — the reading rule, and why it is not automated
 
@@ -312,3 +353,146 @@ all — only a handful of real boundaries and two readers, which is the
 `triad-playground` shadow-panel design with the null attached.
 
 **Falsifier:** run it.
+
+---
+
+## GM_011 — six field names in use, none in the schema
+
+    MECHANISM   NOTE   SCOPE   US ANALOGUES   WHY UNRUN   WORKED CASE
+
+Carried by **17 of 29** entries. The schema says *"Each gap entry
+carries these fields"* and lists seven.
+
+This is the `MF_017` shape **inverted**: not a stated rule with no
+schema field, but fields in use with no schema slot. Softer, because
+nothing breaks — but it means a reader parsing to the schema drops
+17 entries' worth of content, and a checker validating against the
+schema would call every one of them well-formed while never seeing it.
+
+**`WHY UNRUN` is the one that matters.** On `SCR-01` it gives the
+reason the computation has not been performed: the screen produces a
+large flagged set and every flagged site becomes a liability and
+disclosure question for whoever publishes the list, and no agency owns
+*"slope above a thing that matters"*.
+
+That is the **boundary-artifact content itself**, stated as a field —
+and it is the only place in 29 entries where the reason for the
+boundary is a field rather than something a reader infers from `KIND`.
+`KIND: boundary-artifact` says *this is a division of budget or
+liability*; `WHY UNRUN` says *which one, and whose*. The second is
+what the READING RULE needs in order to sort, and it exists once.
+
+**Falsifier:** `WHY UNRUN` promoted to the schema, or a second entry
+carrying it.
+
+## GM_012 — a sixth file the INDEX does not name
+
+`ADDENDUM.md` arrived with the five. The INDEX lists five.
+
+Not an oversight, on the evidence: it opens *"Directed at any system
+participating in infrastructure, disaster management, or emergency
+planning decisions"*, which is a reader the other five are not
+addressed to. An index of gap files is the wrong container for a
+document about how a reader should hold them.
+
+The consequence is mechanical rather than editorial: anything that
+walks the INDEX does not reach it. `load_gaps()` does not, and the
+selftest asserts the addendum is present and unindexed rather than
+quietly folding it in.
+
+**Falsifier:** the INDEX naming it, or a second unindexed file
+arriving that is a gap file.
+
+## GM_013 — `unasked` is the largest state, and it had no bin
+
+    unasked     14
+    unowned      5
+    uncounted    4
+    assembly     4
+    undated      3
+
+Nearly half the corpus. And `unasked` is the state `GM_005` mapped
+against `investigation-sim`'s bins and found **no bin for** — a case
+coded honestly against that module's four original signals read
+`ABSENT` on all four and landed on `NOT_FORESEEN`.
+
+So the bin that was missing was the one covering the plurality of this
+corpus, and the corpus arrived one day after the bin did. Had the
+order been reversed, running that classifier over these 29 entries
+would have filed fourteen of them as *genuinely novel*.
+
+That is a stronger result for `IS_014` than `IS_014` claimed. It was
+recorded as a false negative demonstrated on one constructed case;
+this is its rate against the first real corpus the vocabulary met.
+
+**Falsifier:** a re-reading of the fourteen that puts them in existing
+bins, which would mean `unasked` is not a distinct state.
+
+## GM_014 — the addendum's inheritance claim, and where I sit in it
+
+The claim: *"the absence cannot be detected by introspection over the
+model's own outputs. Nothing in the represented space indicates that a
+region is unrepresented. It has to be named from outside."*
+
+**This session supplies one instance supporting it, and it is not an
+instance I produced by introspecting.** `investigation-sim` was built
+here with five bins, a spec, 102 checks, and an explicit selftest arm
+asserting the negative bin was reachable. None of that found the
+missing sixth bin. It was found by mapping an *external vocabulary* —
+this register's five states — against it, and the gap appeared as a
+state with no bin.
+
+I want to be precise about what that shows and does not. It shows one
+case where a checked, self-audited classifier had a hole its own
+checks could not surface and an outside vocabulary did. It does not
+show that introspection *never* works; `IS_004` and `IS_007` in that
+same folder were found by running the module's own report.
+
+**Interest declared, because it runs both ways.** The claim says my
+class is structurally blind in a specific way, which is unflattering
+and which I have no incentive to endorse. It also says the remedy is
+to keep feeding external registers to systems like me, which is
+flattering to my continued involvement. Those point opposite
+directions, so I am not declining the claim the way `UNI_101` /
+`SHB_012` decline — I am reporting the one instance and its n.
+
+The addendum's `HOMOGENIZATION` point is the part I would flag as
+least tested here and most consequential: *diversity of error is a
+safety property and it is the first thing a shared advisory layer
+removes.* `triad-playground` `TP_008` measured exactly that on shadow
+panels — four model families reach `N_eff` 2.18 and false-pass 12.4%,
+while two settings of one model collapse to `N_eff` 1.14 and **84%**.
+Same claim, measured, on a different substrate, arrived at
+independently.
+
+**Falsifier:** a gap in a module here found by that module's own
+introspection where an external vocabulary had already been applied
+and missed it.
+
+## GM_015 — every fact in the corpus is carried and unchecked
+
+29 entries name USGS, USACE ER 1110-2-1806, FEMA P-93, FEMA 460,
+Hazus, the National Bridge Inventory, the National Inventory of Dams,
+ASCE 7, TCEQ, MSHA, NSS, MITRE, GAO, Wright et al. 2011, Barry Arm,
+Taan Fiord, Surprise Inlet, the Sawyer Decision, Kobe 1995, Johnstown
+1889, and an August 2026 event on the Nepal/China border.
+
+**None is verified here.** This environment's egress is an allowlist
+and every one of those sources is outside it — the `MS_004` /
+`OE_017` / `ANC_010` status, and the seventh folder in this repository
+carrying literature it cannot check.
+
+Nothing in `GM_001..GM_014` rests on any of them. Those are properties
+of the schema, of the corpus as text, and of the map to a sibling
+folder — all of which are here.
+
+Two the drop flags itself, which is the right handling and worth
+recording: `STR-05` marks its ~5% compliance figure as needing a
+primary source before use, and `SCR-05`'s classification argument
+states that initial reporting on the Nepal event swung between three
+labels.
+
+**Falsifier:** run the checks. `SCR-02`'s entry point — *date of last
+hazard-class review, per structure* — needs no fieldwork and no
+literature, only the register, and a null or a decades-old date is by
+its own statement the finding.

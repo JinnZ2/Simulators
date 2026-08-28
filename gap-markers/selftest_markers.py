@@ -179,17 +179,104 @@ def run():
     chk("five index entries", len(idx) == 5)
     chk("each names a gaps/ path",
         all(i["path"].startswith("gaps/") for i in idx))
-    chk("none of them is here", not any(i["present"] for i in idx))
-    chk("no gaps/ directory was created",
-        not os.path.isdir(os.path.join(HERE, "gaps")))
+    chk("all five landed 2026-08-26", all(i["present"] for i in idx))
+    # the refusal branch stays reachable, on a constructed absence
+    saved = M.index
     try:
-        M.load_gaps()
-        chk("an absent corpus is refused, not returned empty", False)
-    except M.CorpusAbsent as e:
-        chk("an absent corpus is refused, not returned empty", True)
-        chk("and the refusal names the files", "gaps/substrate.md" in str(e))
-        chk("and says they are not reconstructed",
-            "not reconstructed" in str(e))
+        M.index = lambda: [{"path": "gaps/nothere.md", "covers": "x",
+                            "present": False}]
+        try:
+            M.load_gaps()
+            chk("an absent corpus is still refused", False)
+        except M.CorpusAbsent as e:
+            chk("an absent corpus is still refused", True)
+            chk("and the refusal names the file", "nothere" in str(e))
+            chk("and says they are not reconstructed",
+                "not reconstructed" in str(e))
+    finally:
+        M.index = saved
+
+    # -- 7b. the corpus
+    a = M.entry_audit()
+    chk("29 entries parse", a["n"] == 29)
+    chk("every entry has an id",
+        all(r["id"] and r["id"] != "?" for r in a["rows"]))
+    chk("every entry has at least one state and one kind",
+        all(r["states"] and r["kinds"] for r in a["rows"]))
+    chk("no value falls outside the declared vocabulary",
+        a["unknown_values"] == [])
+    chk("every declared state is used at least once",
+        all(a["by_state"].get(s, 0) > 0 for s in M.STATES))
+    chk("unasked is the largest state",
+        max(a["by_state"], key=a["by_state"].get) == "unasked")
+
+    # -- 7c. GM_001, now testable
+    g = M.gm001_test()
+    chk("boundary-artifact is on every entry",
+        g["boundary_artifact"] == g["entries"])
+    chk("the delivered distribution line holds", g["most_are_boundary"])
+    chk("knowledge appears exactly once", g["knowledge"] == 1)
+    chk("the stated falsifier fired", g["falsifier_fired"])
+    chk("on exactly one entry", len(g["violations"]) == 1)
+    chk("and that entry is STR-05",
+        g["violations"][0]["id"].startswith("STR-05"))
+    chk("its state is one GM_001 called forced",
+        g["violations"][0]["state"] in g["forced_states"])
+    chk("it carries BOTH kinds, not knowledge alone",
+        set(g["violations"][0]["kinds"]) == {M.KNOWLEDGE, M.BOUNDARY})
+    chk("the KIND definition names physics or measurement",
+        "physics" in M.KINDS[M.KNOWLEDGE]
+        and "measurement" in M.KINDS[M.KNOWLEDGE])
+    # the check cannot adjudicate, and must not pretend to
+    chk("gm001_test reports the firing and no verdict on it",
+        "falsifier_fired" in g and "verdict" not in g)
+
+    # -- 7d. ENTRY_POINT, GM_003 with a magnitude
+    chk("23 of 29 carry no entry point", len(a["no_entry_point"]) == 23)
+    per_file = {}
+    for i in idx:
+        rs = [r for r in a["rows"] if r["source"] == i["path"]]
+        per_file[i["path"]] = (sum(1 for r in rs if r["entry_point"]),
+                               len(rs))
+    chk("three files are zero of eighteen",
+        sum(t for n, t in per_file.values() if n == 0) == 18)
+    chk("and two files carry all six",
+        sum(n for n, _ in per_file.values()) == 6)
+    chk("screens.md is one of the two",
+        per_file["gaps/screens.md"][0] > 0)
+    chk("screens.md states its entries are the cheapest to close",
+        "cheapest gaps to close" in " ".join(
+            open(os.path.join(HERE, "gaps", "screens.md"),
+                 encoding="utf-8").read().split()))
+
+    # -- 7e. composite fields, GM_010's question answered
+    chk("one entry carries two states", len(a["multi_state"]) == 1)
+    chk("and it is SCR-03", a["multi_state"][0][0].startswith("SCR-03"))
+    chk("one entry carries two kinds", len(a["multi_kind"]) == 1)
+    chk("and it is a different entry",
+        a["multi_state"][0][0] != a["multi_kind"][0][0])
+    chk("split_values reads them and does not resolve them",
+        M.split_values("undated / unasked") == ["undated", "unasked"])
+    chk("and a parenthetical qualifier does not split",
+        len(M.split_values("knowledge (for the compliance figure) / "
+                           "boundary-artifact (for the scope)")) == 2)
+
+    # -- 7f. fields in use with no schema slot
+    chk("six undeclared field names are in use",
+        len(a["extra_keys"]) == 6)
+    chk("WHY UNRUN is one", "WHY UNRUN" in a["extra_keys"])
+    chk("none of them is a declared field",
+        not any(k in M.FIELDS for k in a["extra_keys"]))
+    chk("17 of 29 entries carry at least one",
+        sum(1 for r in a["rows"] if r["extra"]) == 17)
+
+    # -- 7g. the sixth file
+    add = os.path.join(HERE, "ADDENDUM.md")
+    chk("the addendum is here", os.path.exists(add))
+    chk("and is not named in the INDEX",
+        not any("ADDENDUM" in i["path"].upper() for i in idx))
+    chk("it addresses a reader the other five do not",
+        "Directed at any system" in open(add, encoding="utf-8").read())
 
     # -- 8. four standing cautions, read from the file
     cs = M.cautions()
@@ -201,8 +288,10 @@ def run():
     # -- 9. the report
     out = M.render()
     chk("the report names every state", all(s in out for s in M.STATES))
-    chk("it shows the corpus refusal rather than describing it",
-        "load_gaps() raises" in out)
+    chk("it reports the corpus now that it landed",
+        "29 entries across five files" in out)
+    chk("and the GM_001 test is shown, not described",
+        "the stated falsifier fired: True" in out)
     chk("it says the gaps files are not reconstructed",
         "not reconstructed" in out)
     chk("it names the KIND-is-forced result",

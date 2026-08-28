@@ -271,22 +271,139 @@ def bin_map():
 
 
 # ------------------------------------------------------- the corpus
+#
+# The five gaps/*.md files landed 2026-08-26. Entries are parsed from
+# the delivered text; nothing is normalised and nothing is repaired.
+# A field carrying two values carries two values in the readout.
+
+ENTRY_SPLIT = re.compile(r"^---\s*$", re.M)
+FIELD_RE = re.compile(r"^    ([A-Z][A-Z_]+)\s+(.*)$")
+EXTRA_RE = re.compile(r"^    ([A-Z][A-Z ]+?)\s{2,}(.*)$")
+
+
+def parse_entries(text, source):
+    out = []
+    for block in ENTRY_SPLIT.split(text):
+        if "GAP_ID" not in block:
+            continue
+        rec, cur = {"_source": source, "_extra": {}}, None
+        for ln in block.split("\n"):
+            m = FIELD_RE.match(ln)
+            if m and m.group(1) in FIELDS:
+                cur = m.group(1)
+                rec[cur] = m.group(2).strip()
+                continue
+            e = EXTRA_RE.match(ln)
+            if e and e.group(1) not in FIELDS:
+                cur = None
+                rec["_extra"].setdefault(e.group(1).strip(), []).append(
+                    e.group(2).strip())
+                continue
+            if cur and ln.strip() and ln.startswith("    "):
+                rec[cur] += " " + ln.strip()
+        out.append(rec)
+    return out
+
 
 def load_gaps():
-    """Refuse rather than returning an empty list.
+    """Now returns. The refusal branch is kept and is still reachable.
 
-    A well-formed report with zero rows over a corpus that is not here
-    is the DL_005 / CC_006 shape: a denominator of zero, rendered as
-    though it had one.
+    Before 2026-08-26 the INDEX named five files and none was here, so
+    this raised rather than returning an empty list -- a well-formed
+    report with zero rows over an absent corpus is the DL_005 / CC_006
+    shape. The files landed. The branch stays because the next INDEX
+    entry to be named before it is written will hit it.
     """
     missing = [i["path"] for i in index() if not i["present"]]
     if missing:
         raise CorpusAbsent(
             "the INDEX names %d files and %d are not here: %s. They are "
-            "data and are not reconstructed. Every readout in this "
-            "module is a property of the SCHEMA, which did arrive."
+            "data and are not reconstructed. Every readout that depends "
+            "on them is unavailable until they land."
             % (len(index()), len(missing), ", ".join(missing)))
-    return []
+    out = []
+    for i in index():
+        p = os.path.join(HERE, i["path"])
+        out += parse_entries(open(p, encoding="utf-8").read(), i["path"])
+    return out
+
+
+def split_values(v):
+    """A field carrying more than one value. Read, never resolved."""
+    if not v:
+        return []
+    parts = [p.strip() for p in re.split(r"\s*/\s*(?![^(]*\))", v)]
+    return [p for p in parts if p]
+
+
+def _bare(v):
+    """The value with any parenthetical qualifier removed."""
+    return re.sub(r"\s*\([^)]*\)", "", v).strip()
+
+
+def entry_audit():
+    """Every readout that needed the corpus."""
+    gaps = load_gaps()
+    rows, multi_state, multi_kind, no_entry, unknown = [], [], [], [], []
+    by_state, by_kind = {}, {}
+    for g in gaps:
+        gid = g.get("GAP_ID", "?")
+        sts = [_bare(x) for x in split_values(g.get("STATE", ""))]
+        kds = [_bare(x) for x in split_values(g.get("KIND", ""))]
+        if len(sts) > 1:
+            multi_state.append((gid, g["STATE"]))
+        if len(kds) > 1:
+            multi_kind.append((gid, g["KIND"]))
+        if not g.get("ENTRY_POINT"):
+            no_entry.append(gid)
+        for s in sts:
+            by_state[s] = by_state.get(s, 0) + 1
+            if s not in STATES:
+                unknown.append((gid, "STATE", s))
+        for k in kds:
+            by_kind[k] = by_kind.get(k, 0) + 1
+            if k not in KINDS:
+                unknown.append((gid, "KIND", k))
+        rows.append({"id": gid, "source": g["_source"], "states": sts,
+                     "kinds": kds,
+                     "entry_point": bool(g.get("ENTRY_POINT")),
+                     "extra": sorted(g["_extra"])})
+    return {
+        "rows": rows, "n": len(rows),
+        "by_state": by_state, "by_kind": by_kind,
+        "multi_state": multi_state, "multi_kind": multi_kind,
+        "no_entry_point": no_entry,
+        "unknown_values": unknown,
+        "extra_keys": sorted(set(k for r in rows for k in r["extra"])),
+    }
+
+
+def gm001_test():
+    """GM_001 said the distribution is forced. Now it can be counted.
+
+    Predicted before the corpus existed: KIND is free on `uncounted`
+    alone and forced to boundary-artifact on the other four. The
+    falsifier was an entry in one of those four correctly marked
+    `knowledge`.
+    """
+    a = entry_audit()
+    forced_states = [r["state"] for r in cross()["rows"] if r["forced"]]
+    violations = []
+    for r in a["rows"]:
+        for s in r["states"]:
+            if s in forced_states and KNOWLEDGE in r["kinds"]:
+                violations.append({"id": r["id"], "state": s,
+                                   "kinds": r["kinds"]})
+    n_b = a["by_kind"].get(BOUNDARY, 0)
+    return {
+        "entries": a["n"],
+        "boundary_artifact": n_b,
+        "knowledge": a["by_kind"].get(KNOWLEDGE, 0),
+        "most_are_boundary": n_b > a["n"] / 2.0,
+        "forced_states": forced_states,
+        "falsifier_fired": bool(violations),
+        "violations": violations,
+    }
 
 
 # ------------------------------------------------------------- report
@@ -422,12 +539,92 @@ def render():
               "one puts a gap in the author's mouth.")
     o.append("")
 
-    o.append("8. WHAT THE CORPUS CALL DOES")
-    try:
-        load_gaps()
-        o.append("     load_gaps() returned")
-    except CorpusAbsent as e:
-        o += wrap("load_gaps() raises: " + str(e))
+    o.append("8. THE CORPUS -- 29 entries across five files")
+    a = entry_audit()
+    o.append("   entries: %d" % a["n"])
+    o.append("   by state:")
+    for st in STATES:
+        o.append("     %-12s %d" % (st, a["by_state"].get(st, 0)))
+    o.append("   by kind:")
+    for kd in KINDS:
+        o.append("     %-18s %d" % (kd, a["by_kind"].get(kd, 0)))
+    o.append("   values outside the declared vocabulary: %s"
+             % (a["unknown_values"] or "none"))
+    o.append("")
+
+    o.append("9. GM_001 TESTED -- the prediction, against the corpus")
+    g = gm001_test()
+    o.append("   boundary-artifact on %d of %d entries; knowledge on %d"
+             % (g["boundary_artifact"], g["entries"], g["knowledge"]))
+    o.append("   the delivered distribution line holds: %s"
+             % g["most_are_boundary"])
+    o.append("   the stated falsifier fired: %s" % g["falsifier_fired"])
+    for v in g["violations"]:
+        o.append("     %s  state %s  kinds %s"
+                 % (v["id"], v["state"], ", ".join(v["kinds"])))
+    o += wrap("It fired on one entry, and the firing is not decidable "
+              "by the check. STR-05 marks `knowledge (for the "
+              "compliance figure)`, and what its own WHAT_IS_MISSING "
+              "describes is a number whose primary source the author "
+              "does not have. The KIND definition reads `the physics "
+              "or the measurement is genuinely not known`, which a "
+              "figure that exists and lacks a citation is not. So "
+              "either the entry uses `knowledge` in a second sense, or "
+              "GM_001 falls -- and the falsifier as written cannot say "
+              "which, because it turns on the word `correctly`, which "
+              "nothing measures.")
+    o.append("")
+
+    o.append("10. ENTRY_POINT -- present on %d of %d"
+             % (a["n"] - len(a["no_entry_point"]), a["n"]))
+    for i in index():
+        rs = [r for r in a["rows"] if r["source"] == i["path"]]
+        n = sum(1 for r in rs if r["entry_point"])
+        o.append("     %-22s %d of %-2d" % (i["path"], n, len(rs)))
+    o += wrap("The distribution is by FILE, not by gap. Three files "
+              "are 0 of 18 and two are 6 of 11, and the file whose own "
+              "premise is that its entries are the cheapest gaps to "
+              "close is the highest. So GM_003's two readings need a "
+              "third: the field is in use in two files and not in "
+              "three, which makes its absence a property of the file "
+              "rather than a judgement about the gap. A reader picking "
+              "the cheapest gap to attack reads all eighteen as "
+              "equally hard, and none of them was assessed.")
+    o.append("")
+
+    o.append("11. FIELDS CARRYING TWO VALUES, AND FIELDS WITH NO SLOT")
+    o.append("   STATE with two values:")
+    for gid, v in a["multi_state"]:
+        o.append("     %-44s %s" % (gid[:44], v))
+    o.append("   KIND with two values:")
+    for gid, v in a["multi_kind"]:
+        o.append("     %-30s %s" % (gid[:30], v[:44]))
+    o.append("")
+    o.append("   field names in use and not in the schema: %s"
+             % ", ".join(a["extra_keys"]))
+    o.append("   entries carrying at least one: %d of %d"
+             % (sum(1 for r in a["rows"] if r["extra"]), a["n"]))
+    o += wrap("The schema says `Each gap entry carries these fields` "
+              "and lists seven. Six more are in use. WHY UNRUN is the "
+              "one that matters: on SCR-01 it gives the reason the "
+              "computation has not been performed -- liability for "
+              "whoever publishes the flagged list, and no agency "
+              "owning a screen that crosses three programs -- which is "
+              "the boundary-artifact content itself, and it is the "
+              "only place in the corpus where that content is stated "
+              "as a field rather than left to be inferred from KIND.")
+    o.append("")
+
+    o.append("12. THE SIXTH FILE")
+    add = os.path.join(HERE, "ADDENDUM.md")
+    o.append("   ADDENDUM.md present: %s" % os.path.exists(add))
+    o.append("   named in the INDEX: %s"
+             % any("ADDENDUM" in i["path"].upper() for i in index()))
+    o += wrap("The INDEX names five files and six arrived. The addendum "
+              "is addressed to a reader the other five are not "
+              "addressed to, which is a reason for it to sit outside "
+              "the index rather than an oversight -- and it is not "
+              "reachable by anything that reads the INDEX.")
     return "\n".join(o)
 
 

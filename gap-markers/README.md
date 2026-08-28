@@ -12,14 +12,13 @@ edit there and not here turns the selftest red.
 
     python3 gap-markers/markers.py             # the report
     python3 gap-markers/markers.py --cross     # the KIND x STATE table
-    python3 gap-markers/markers.py --selftest  # 66 checks
+    python3 gap-markers/markers.py --selftest  # 100 checks
 
-**The five `gaps/*.md` files the INDEX names did not arrive**, and
-nothing here reconstructs them. They are data; inventing an entry puts
-a gap in the author's mouth. `load_gaps()` raises rather than
-returning an empty list, because a well-formed report with zero rows
-over a corpus that is not here is a denominator of zero rendered as
-though it had one.
+**The corpus landed 2026-08-26** — all five `gaps/*.md` files, 29
+entries, plus a sixth file (`ADDENDUM.md`) the INDEX does not name.
+Nothing was reconstructed while they were absent, and `load_gaps()`
+still refuses a constructed absence rather than returning an empty
+list.
 
 ## What the schema does well
 
@@ -49,10 +48,9 @@ that cuts across them. A `STORAGE` exclusion can be either kind.
 
 ## What the checks found
 
-**`GM_001` — the distribution is forced, not observed.** The file
-states *"Most entries here are boundary-artifact."* That is derivable
-from the state definitions with no corpus at all: four of five assert
-that the knowledge is present —
+**`GM_001` — the distribution was forced, and the prediction held.**
+Written before any entry existed: four of five state definitions
+assert that the knowledge is present —
 
     unasked    "data exists, collected for another purpose"
     unowned    "every party competent"
@@ -140,11 +138,12 @@ asserted and so is the one-space column.
 |---|---|
 | `GAP_MARKERS.md` | delivered verbatim |
 | `markers.py` | parses the schema, the `KIND × STATE` cross, the reading-rule record, the `investigation-sim` map |
-| `selftest_markers.py` | 66 checks |
-| `CLAIM_TABLE.md` | `GM_001..GM_010` with a REFUTATION_PROTOCOL |
+| `selftest_markers.py` | 100 checks |
+| `CLAIM_TABLE.md` | `GM_001..GM_015` with a REFUTATION_PROTOCOL |
 | `samples/` | pinned output |
 
-`gaps/` is deliberately absent.
+| `gaps/` | five delivered files, 29 entries |
+| `ADDENDUM.md` | delivered; not named in the INDEX |
 
 Stdlib only, parses under Python 3.9, phone-buildable, CC0.
 

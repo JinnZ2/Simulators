@@ -88,18 +88,81 @@ files it names did not arrive and are not reconstructed.
    nowhere to go.
 
 7. THE INDEX
-     gaps/substrate.md      NO  ground, fill, water, deposition, v
-     gaps/structures.md     NO  dams, bridges, dual-function asset
-     gaps/transport.md      NO  rail, barge, air, road, staging
-     gaps/capability.md     NO  fabrication, response cadre, match
-     gaps/screens.md        NO  computable screens not run; date f
-   present: 0 of 5
+     gaps/substrate.md      yes ground, fill, water, deposition, v
+     gaps/structures.md     yes dams, bridges, dual-function asset
+     gaps/transport.md      yes rail, barge, air, road, staging
+     gaps/capability.md     yes fabrication, response cadre, match
+     gaps/screens.md        yes computable screens not run; date f
+   present: 5 of 5
    Not reconstructed. A gap entry is data, and inventing one puts
    a gap in the author's mouth.
 
-8. WHAT THE CORPUS CALL DOES
-   load_gaps() raises: the INDEX names 5 files and 5 are not
-   here: gaps/substrate.md, gaps/structures.md,
-   gaps/transport.md, gaps/capability.md, gaps/screens.md. They
-   are data and are not reconstructed. Every readout in this
-   module is a property of the SCHEMA, which did arrive.
+8. THE CORPUS -- 29 entries across five files
+   entries: 29
+   by state:
+     uncounted    4
+     unasked      14
+     unowned      5
+     assembly     4
+     undated      3
+   by kind:
+     knowledge          1
+     boundary-artifact  29
+   values outside the declared vocabulary: none
+
+9. GM_001 TESTED -- the prediction, against the corpus
+   boundary-artifact on 29 of 29 entries; knowledge on 1
+   the delivered distribution line holds: True
+   the stated falsifier fired: True
+     STR-05-RETROFIT-BASELINE  state undated  kinds knowledge, boundary-artifact
+   It fired on one entry, and the firing is not decidable by the
+   check. STR-05 marks `knowledge (for the compliance figure)`,
+   and what its own WHAT_IS_MISSING describes is a number whose
+   primary source the author does not have. The KIND definition
+   reads `the physics or the measurement is genuinely not known`,
+   which a figure that exists and lacks a citation is not. So
+   either the entry uses `knowledge` in a second sense, or GM_001
+   falls -- and the falsifier as written cannot say which,
+   because it turns on the word `correctly`, which nothing
+   measures.
+
+10. ENTRY_POINT -- present on 6 of 29
+     gaps/substrate.md      3 of 6 
+     gaps/structures.md     0 of 5 
+     gaps/transport.md      0 of 5 
+     gaps/capability.md     0 of 8 
+     gaps/screens.md        3 of 5 
+   The distribution is by FILE, not by gap. Three files are 0 of
+   18 and two are 6 of 11, and the file whose own premise is that
+   its entries are the cheapest gaps to close is the highest. So
+   GM_003's two readings need a third: the field is in use in two
+   files and not in three, which makes its absence a property of
+   the file rather than a judgement about the gap. A reader
+   picking the cheapest gap to attack reads all eighteen as
+   equally hard, and none of them was assessed.
+
+11. FIELDS CARRYING TWO VALUES, AND FIELDS WITH NO SLOT
+   STATE with two values:
+     SCR-03-IMPOUNDMENT-STORAGE-LOSS              undated / unasked
+   KIND with two values:
+     STR-05-RETROFIT-BASELINE       knowledge (for the compliance figure) / boun
+
+   field names in use and not in the schema: MECHANISM, NOTE, SCOPE, US ANALOGUES, WHY UNRUN, WORKED CASE
+   entries carrying at least one: 17 of 29
+   The schema says `Each gap entry carries these fields` and
+   lists seven. Six more are in use. WHY UNRUN is the one that
+   matters: on SCR-01 it gives the reason the computation has not
+   been performed -- liability for whoever publishes the flagged
+   list, and no agency owning a screen that crosses three
+   programs -- which is the boundary-artifact content itself, and
+   it is the only place in the corpus where that content is
+   stated as a field rather than left to be inferred from KIND.
+
+12. THE SIXTH FILE
+   ADDENDUM.md present: True
+   named in the INDEX: False
+   The INDEX names five files and six arrived. The addendum is
+   addressed to a reader the other five are not addressed to,
+   which is a reason for it to sit outside the index rather than
+   an oversight -- and it is not reachable by anything that reads
+   the INDEX.
