@@ -7247,11 +7247,13 @@ underneath).
   whose frame is *systems we pointed it at*, chosen before any outcome
   — so the epistemically sound mode and the useful mode are the same
   mode. Retrospective mode exists to CALIBRATE and is forbidden a rate.
-  Five bins — `KNOWN_ROUTED_AWAY` → `report-typing`,
+  Six bins — `KNOWN_ROUTED_AWAY` → `report-typing`,
   `CALCULATED_UNCLOCKED` → `claim-record`/`criteria-drift`,
   `CONCEIVED_NOT_BUILT` → `fold-matrix`, `GAP_UNINSTRUMENTED` →
-  `uninstrumented`, `NOT_FORESEEN` — plus `NOT_DERIVABLE` and
-  `MULTIPLE`, which are not bins. **`IS_003`, the design's spine:**
+  `uninstrumented`, `HELD_BUT_UNASKED` (route `NONE_YET`, a third
+  state kept apart from the negative's no-route-by-nature), and
+  `NOT_FORESEEN` — plus `NOT_DERIVABLE` and `MULTIPLE`, which are not
+  bins. **`IS_003`, the design's spine:**
   `NOT_DERIVABLE` and `NOT_FORESEEN` both fire nothing and carry
   opposite instructions (look harder / stop looking), so the
   distinction lives in the **input** rather than the output — signals
@@ -7332,6 +7334,29 @@ underneath).
   check asserting `missing` is no longer rebuilt from `findings`
   grepped a function source containing a comment saying exactly that
   (repaired with AST, where comments do not appear at all).
+  **`IS_014`, and it came from outside:** `gap-markers` landed with a
+  state called `unasked` — *data exists, collected for another
+  purpose; question never posed* — and mapping that register's five
+  states against these bins found no bin for it. Coded honestly
+  against the four original signals such a case reads `ABSENT` on all
+  four, **truthfully every one**, and lands on `NOT_FORESEEN`,
+  *genuinely novel*, with eleven years of gauge record in a file the
+  whole time. That is the worst failure the classifier has, because
+  `IS_002` made the **reachability** of the negative load-bearing and
+  never asserted its **correctness** — and a negative returned wrongly
+  tells the operator to stop looking, the one instruction that cannot
+  be recovered from. Repaired with a fifth signal
+  (`held_data_unasked`) and a sixth bin rather than a modifier, since
+  it is a foreknowledge state parallel to the other four; `IS_002` is
+  narrowed rather than left standing, every pre-existing case now
+  states the fifth signal explicitly (a missing signal reads
+  `UNSEARCHED` and would have moved four verdicts silently), and
+  `cases/held-but-unasked.json` is the case that found it. **The gap
+  was found by neither module's own checks** — it came from mapping
+  two vocabularies built for different purposes against each other,
+  which is `triad-playground` `TP_008`'s decorrelated-shadow result
+  arriving as a fact about two registers rather than two readers: a
+  single vocabulary cannot enumerate what it has no word for.
   **`IS_009`:** forward mode's `unsearched_signals` has **no
   retrospective analogue**, since by the time there is an incident
   every signal has been searched (searching them is what an
@@ -7339,7 +7364,7 @@ underneath).
   happened yet; on the shipped example `no_instrument` is the
   least-searched, which is the ordinary result because it is the signal
   whose absence leaves no gap in any record to notice. **`IS_010`
-  UNVERIFIED:** seven CONSTRUCTED cases, each declaring itself so with
+  UNVERIFIED:** eight CONSTRUCTED cases, each declaring itself so with
   a per-signal basis and an authoring note, ground truth in the
   authoring rather than in the classifier (`playground/`'s rule); no
   CSB, NTSB or HSE report has been read, egress being an allowlist, and
@@ -7347,8 +7372,86 @@ underneath).
   `no_severity` exemption (`recommendation`) measured with the
   three-arm harness, and named as a limit — an investigation folder's
   working vocabulary IS the screened vocabulary, and a screen written
-  for spreadsheet audits does not know the difference. 102 selftest
+  for spreadsheet audits does not know the difference. 109 selftest
   checks. Stdlib only, parses under 3.9, phone-buildable, CC0.
+- `gap-markers/` — A register of **locations**, not findings: marked
+  gaps in hazard assessment, infrastructure evaluation and disaster
+  response, where a quantity is not measured, a question is not asked,
+  or an interface is owned by nobody. `GAP_MARKERS.md` delivered
+  verbatim; `markers.py` **parses** its schema — seven fields, five
+  `STATE` values, two `KIND` values, the five-file INDEX — so an edit
+  there and not here turns the selftest red. The five `gaps/*.md` files
+  the INDEX names **did not arrive** and are not reconstructed
+  (`PB_001`/`CW_004`), and `load_gaps()` **raises** rather than
+  returning an empty list, since a well-formed report with zero rows
+  over an absent corpus is the `DL_005`/`CC_006` shape. **`GM_001`, the
+  computable one: the delivered line "Most entries here are
+  boundary-artifact" is not an observation about a corpus but is forced
+  by the state vocabulary**, derivable before any entry exists — four
+  of five definitions assert the knowledge is present (`data exists` /
+  `every party competent` / `all components present` / `record
+  exists`), and a state whose definition says the data exists cannot be
+  one where the knowledge is absent, so `KIND` carries information on
+  exactly one state (`uncounted`, the only definition making no
+  existence claim). A schema economy rather than a fault, since `KIND`
+  stays load-bearing for the READING RULE which operates on boundaries
+  rather than entries; the forcing is **read from the delivered
+  definitions**, so swapping in one with no existence claim frees the
+  KIND again. **`GM_004`:** the READING RULE — sort every partition by
+  whether it encodes failure knowledge (KEEP) or who pays, who is
+  liable, who holds jurisdiction (DO NOT INHERIT) — is the strongest
+  thing in the drop and is deliberately **not automated**, on its own
+  say-so (*"Both look identical from outside"*), since a keyword sort
+  over `liable`/`jurisdiction`/`budget` would be `T1-1` on a question
+  the author has pre-empted; `sort_record()` takes a declared branch
+  with a reason, refuses a branch outside the two, refuses one with no
+  reason, returns `UNSORTED` (explicitly not *sorted and found to be
+  neither*), and the selftest asserts nothing in it scans for who-pays
+  language. **`GM_005`, and it changed a sibling the same day:** the
+  five states map against `investigation-sim`'s bins in neither
+  direction onto — `undated ↔ CALCULATED_UNCLOCKED` are the same object
+  under two vocabularies, `unowned ↔ GAP_UNINSTRUMENTED`, `uncounted`
+  sits one level up as `IS_001`'s uncounted denominator, `assembly` is
+  a property of a FIELD not a record — and **`unasked` named a state
+  that module could not express**, so a case coded honestly against its
+  four original signals read `ABSENT` on all four and landed on
+  `NOT_FORESEEN`; that module added a fifth signal and a sixth bin the
+  same day (its `IS_014`) and narrowed its `IS_002`. The bin vocabulary
+  is **imported**, so a rename over there turns this red and a mapping
+  naming a bin that module lacks is refused. **`GM_006`:** the fourth
+  standing caution (*"the pattern is not suppressed — it is not
+  generated. There is no residue"*) is `generation-capacity`'s
+  mechanism 10 arrived at independently, and the **no residue** clause
+  is what makes it that rather than mechanism 6, since an asymmetric
+  guard leaves a record of what it rejected and this leaves none.
+  **`GM_007`:** `KIND` is a real addition to `uninstrumented`'s eight
+  mechanisms, which describe *how* an exclusion operates and none of
+  which separates *the physics is not known* from *the institutions
+  divided the budget* — `BUDGET_BOUNDARY` is the nearest and is
+  narrower, a specific mechanism where `boundary-artifact` is a
+  property of the whole gap cutting across them. **`GM_002`:** all five
+  states are gaps, so there is no negative and the register can only
+  ever record gaps — `CONSTANT_FIRES` at the schema level, partly
+  answered by the drop's own *"a marked gap is not a finding, it is a
+  location"*, with what remains being that it cannot report
+  **coverage**, having no denominator of places looked at, which is the
+  standing caution's own first item applied to the register itself.
+  **`GM_003`:** `ENTRY_POINT` is *"where one exists"*, so an absent one
+  reads either as *searched, no query available* or *nobody named one*
+  — on the field that makes a gap actionable, so a reader picking the
+  cheapest gap reads *no entry point* as *hard* when it may mean
+  *unfinished*. **`GM_008`:** my own first parse returned **six of
+  seven** fields (`WHAT_IS_MISSING` sits fifteen characters into a
+  sixteen-wide column, one space where the regex wanted two) and passed
+  every non-emptiness check — worse than returning nothing, and the
+  field that went missing names *the specific absence*, the register's
+  own subject; the count and the one-space column are now asserted.
+  **`GM_010` UNVERIFIED:** no gap entry has been read, and the cheapest
+  untouched question is whether the READING RULE separates anything
+  when real boundaries are put to it, which needs no corpus of gaps at
+  all — only boundaries and two readers, the `triad-playground`
+  shadow-panel design with the null attached. 66 selftest checks.
+  Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

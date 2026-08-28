@@ -8,13 +8,15 @@
     "prior_report": "ABSENT",
     "figure_without_clock": "ABSENT",
     "designed_control": "PRESENT",
-    "no_instrument": "ABSENT"
+    "no_instrument": "ABSENT",
+    "held_data_unasked": "ABSENT"
   },
   "signal_basis": {
     "prior_report": "searched: the review is a design document, not a report of an observed hazard",
     "figure_without_clock": "searched: the cost estimate is re-run each cycle and carries its own date",
     "designed_control": "engineered, costed, scheduled, three deferrals on the record",
-    "no_instrument": "the line is instrumented for pressure and flow"
+    "no_instrument": "the line is instrumented for pressure and flow",
+    "held_data_unasked": "searched: the hazard review posed the question and answered it"
   },
   "remedy": {
     "text": "install the isolation valve",

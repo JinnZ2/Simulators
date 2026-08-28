@@ -42,22 +42,34 @@ def run():
             bad.append(name)
 
     # -- 0. the spec parse. A parse returning nothing must not pass.
-    chk("five bins are parsed", len(B.BINS) == 5)
+    chk("six bins are parsed", len(B.BINS) == 6)
     chk("the negative is one of them", B.NEGATIVE in B.BINS)
     chk("two non-bins are parsed", len(B.NONBINS) == 2)
     chk("NOT_DERIVABLE is one", B.UNDERIVABLE in B.NONBINS)
     chk("MULTIPLE is the other", B.MULTIPLE in B.NONBINS)
     chk("two modes are parsed", set(B.MODES) == {"RETROSPECTIVE",
                                                  "FORWARD"})
-    chk("every non-negative bin routes somewhere",
-        all(B.ROUTES.get(b) for b in B.BINS if b != B.NEGATIVE))
+    # Three states, not two: routed, route pending, and no route by
+    # nature. HELD_BUT_UNASKED has no supplier YET; the negative has
+    # none by construction. Both render as an empty list and they are
+    # not the same statement.
+    chk("every bin with neither exemption routes somewhere",
+        all(B.ROUTES.get(b) for b in B.BINS
+            if b != B.NEGATIVE and b not in B.ROUTE_PENDING_BINS))
     chk("the negative routes nowhere", not B.ROUTES.get(B.NEGATIVE))
+    chk("one bin declares its route pending",
+        B.ROUTE_PENDING_BINS == {"HELD_BUT_UNASKED"})
+    chk("and pending is not the same as the negative",
+        B.NEGATIVE not in B.ROUTE_PENDING_BINS)
+    chk("NONE_YET does not leak into the route list",
+        not any(B.ROUTE_PENDING in v for v in B.ROUTES.values()))
     chk("every routed folder exists in the tree",
         all(os.path.isdir(os.path.join(B.ROOT, f))
             for fs in B.ROUTES.values() for f in fs))
     chk("one signal per non-negative bin",
         sorted(s["bin"] for s in B.SIGNALS.values())
         == sorted(b for b in B.BINS if b != B.NEGATIVE))
+    chk("five signals", len(B.SIGNALS) == 5)
 
     # -- 1. S7: the classifier must read each signal separately.
     #    Pairs differing on exactly one signal must not agree.
@@ -72,6 +84,18 @@ def run():
     # -- 2. S7: the negative must be reachable.
     allabs = B.classify(_case())
     chk("all-ABSENT reaches the negative", allabs["verdict"] == B.NEGATIVE)
+    # GM_005: the case that found the sixth bin. Under the original
+    # four signals it read ABSENT on all four -- truthfully -- and
+    # landed here. The fifth signal is what separates them, and the
+    # separation is asserted in both directions.
+    unasked = B.classify(_case(held_data_unasked=B.PRESENT))
+    chk("held-but-unasked does not read as the negative",
+        unasked["verdict"] == "HELD_BUT_UNASKED")
+    chk("and the four original signals cannot tell them apart",
+        {k: v for k, v in _case(held_data_unasked=B.PRESENT)["signals"]
+         .items() if k != "held_data_unasked"}
+        == {k: v for k, v in _case()["signals"].items()
+            if k != "held_data_unasked"})
     chk("and fires nothing", allabs["fires"] == [])
 
     # -- 3. S2/S7: NOT_DERIVABLE and NOT_FORESEEN must not collapse.

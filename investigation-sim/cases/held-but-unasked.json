@@ -1,0 +1,27 @@
+{
+  "domain": "infrastructure",
+  "constructed": true,
+  "summary": "A culvert's capacity is exceeded in a storm. The gauge network upstream had recorded the flows for eleven years, collected for a water-supply yield study, and the record was held continuously and was accessible. Nobody ever posed the question of what those flows implied for the culvert.",
+  "truth": "HELD_BUT_UNASKED",
+  "primary": "HELD_BUT_UNASKED",
+  "signals": {
+    "prior_report": "ABSENT",
+    "figure_without_clock": "ABSENT",
+    "designed_control": "ABSENT",
+    "no_instrument": "ABSENT",
+    "held_data_unasked": "PRESENT"
+  },
+  "signal_basis": {
+    "prior_report": "searched the drainage authority's correspondence and the maintenance file: nobody reported it",
+    "figure_without_clock": "searched: the culvert's design capacity carries its method and its date",
+    "designed_control": "searched: no upgrade was proposed",
+    "no_instrument": "the gauges exist, were calibrated, and reported continuously. The instrument is not blind",
+    "held_data_unasked": "eleven years of gauge record, held by the water-supply body, accessible on request, and the culvert question was never posed against it"
+  },
+  "remedy": {
+    "text": "run the held gauge record against the drainage assets it is upstream of",
+    "addresses_bin": "HELD_BUT_UNASKED",
+    "status": "OPEN"
+  },
+  "authoring_note": "THIS IS THE CASE THAT FOUND THE BIN. Coded against the original four signals it reads ABSENT on all four -- truthfully, every one of them -- and lands on NOT_FORESEEN, `genuinely novel`, while the data sat in a file for eleven years. gap-markers GM_005 mapped its `unasked` state against these bins, found no bin for it, and this case is what that gap looks like when coded. The false negative is in the one bin whose correctness the whole design rests on, and it is the reading that stops anyone looking."
+}

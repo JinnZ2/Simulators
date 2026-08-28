@@ -14,7 +14,7 @@ purpose and the only mode that escapes the trap below.
     python3 investigation-sim/bins.py               # the report
     python3 investigation-sim/bins.py --case <id>
     python3 investigation-sim/bins.py --forward forward_example.json
-    python3 investigation-sim/bins.py --selftest    # 102 checks
+    python3 investigation-sim/bins.py --selftest    # 109 checks
 
 `SPEC.md` is written first and **parsed** by `bins.py` — bin names,
 non-bin verdicts, routing table and mode list all come out of the
@@ -52,7 +52,8 @@ mode and the useful mode are the same mode.
 | `CALCULATED_UNCLOCKED` | a governing number survived and the conditions under which it held did not | `claim-record.derive_clock` |
 | `CONCEIVED_NOT_BUILT` | a control was designed, sometimes costed, and not implemented | `fold-matrix.plan_column` |
 | `GAP_UNINSTRUMENTED` | no instrument was pointed at it, by the instrument's constitution | `uninstrumented.MECHANISMS` |
-| `NOT_FORESEEN` | genuinely novel | — |
+| `HELD_BUT_UNASKED` | the data was held, collected for another purpose, and the question was never posed | *(route pending)* |
+| `NOT_FORESEEN` | genuinely novel, **and not derivable from data already held** | — |
 
 **All four routes are wired**, not declared: each imports its supplier
 and calls the supplier's own function. Nothing is copied and nothing
@@ -174,6 +175,20 @@ so fixed-key access worked on every failing case and raised the first
 time the route succeeded. The selftest arm written *specifically* to
 show the route is not `CONSTANT_SILENT` is what found it.
 
+**`IS_014` — a sixth bin, found by a sibling folder's vocabulary.**
+`gap-markers` landed with a state called `unasked`: *data exists,
+collected for another purpose; question never posed.* Coded honestly
+against the four original signals such a case reads `ABSENT` on all
+four — truthfully, every one — and lands on `NOT_FORESEEN`, *genuinely
+novel*, while the data sat in a file. That is the worst failure this
+classifier has: `IS_002` made the *reachability* of the negative
+load-bearing and never asserted its *correctness*, and a negative
+returned wrongly tells the operator to stop looking. Repaired with a
+fifth signal and a sixth bin; `IS_002` narrowed rather than left
+standing. The gap was found by a different vocabulary, not by any
+check here — a single vocabulary cannot enumerate what it has no word
+for.
+
 **The `multiple` case is the cross-boundary test.** It fires three
 bins and supplies no supplier block, and the three routes return three
 *distinct* undeclared states — `FIGURE_UNDECLARED`, `UNREAD`,
@@ -188,10 +203,10 @@ of the four suppliers was written with this consumer in mind.
 |---|---|
 | `SPEC.md` | written first, parsed by the code |
 | `bins.py` | classifier, the two denominator-free readouts, forward mode, the refused rate |
-| `selftest_bins.py` | 102 checks; every S7 falsifier gets an arm |
-| `cases/` | seven constructed cases, one per verdict |
+| `selftest_bins.py` | 109 checks; every S7 falsifier gets an arm |
+| `cases/` | eight constructed cases, one per verdict |
 | `forward_example.json` | a four-system forward run |
-| `CLAIM_TABLE.md` | `IS_001..IS_013` with a REFUTATION_PROTOCOL |
+| `CLAIM_TABLE.md` | `IS_001..IS_014` with a REFUTATION_PROTOCOL |
 | `samples/` | pinned output, both modes |
 
 Stdlib only, parses under Python 3.9, phone-buildable, CC0.

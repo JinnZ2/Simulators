@@ -1,10 +1,15 @@
 # investigation-sim — CLAIM_TABLE
 
-`IS_001..IS_013`. Claims about the design and the code in this folder.
+`IS_001..IS_014`. Claims about the design and the code in this folder.
 
 **Second pass, 2026-08-26.** All four routes are now WIRED, not
 declared. `IS_008` closes; `IS_011..IS_013` are what wiring them
 found.
+
+**Third pass, same day.** A sixth bin, `HELD_BUT_UNASKED`, added after
+`gap-markers` `GM_005` mapped its own five states against these bins
+and found no bin for `unasked`. `IS_014` records it, and `IS_002` is
+narrowed rather than left standing.
 
 **Nothing here is a claim about any real incident, organisation, or
 person.** Every case is constructed and labelled so in its own file.
@@ -21,7 +26,7 @@ disagreement goes in the checker's output.
 | id | claim | status |
 |---|---|---|
 | `IS_001` | No rate is computable from a retrospective corpus, and `rate()` raises rather than returning one. The mode that escapes the trap is FORWARD, which is also the stated purpose. | SUPPORTED |
-| `IS_002` | `NOT_FORESEEN` is reachable, and a constructed case reaches it. A classifier that cannot return it is `CONSTANT_FIRES`. | SUPPORTED |
+| `IS_002` | `NOT_FORESEEN` is reachable, and a constructed case reaches it. A classifier that cannot return it is `CONSTANT_FIRES`. | SUPPORTED, **narrowed 2026-08-26** — reachability was asserted and correctness was not; see `IS_014` |
 | `IS_003` | `NOT_DERIVABLE` and `NOT_FORESEEN` are kept apart **in the input**, not in the output: signals are three-valued and the third value carries the distinction. | SUPPORTED |
 | `IS_004` | Route-to-remedy has three states and two were built. The third was found by running the report. | SUPPORTED |
 | `IS_005` | The recursion is checkable from recommendation status alone, with no denominator and no reading of the incident. | SUPPORTED |
@@ -33,6 +38,7 @@ disagreement goes in the checker's output.
 | `IS_011` | `claim-record` returns `UNDERIVABLE` on exactly the cases `CALCULATED_UNCLOCKED` is about — the bin restated by a module that did not know it existed. | SUPPORTED |
 | `IS_012` | Wiring `report-typing` surfaced `RT_008` where it costs something. The consumer reports the missing arm without patching the supplier. | SUPPORTED |
 | `IS_013` | The supplier's return shape varies by outcome, and the arm written to prove a route is not `CONSTANT_SILENT` is the arm that found the consumer could not handle success. | SUPPORTED |
+| `IS_014` | The four original signals could not express *the data was held and nobody asked*, so such a case coded honestly landed on `NOT_FORESEEN`. A sixth bin, found by a sibling folder's vocabulary rather than by any check here. | SUPPORTED |
 
 ---
 
@@ -339,3 +345,63 @@ is what makes it the right tool rather than a longer regex.
 
 **Falsifier:** a supplier with a stable return shape, or a consumer
 that reads a key the supplier does not return on some path.
+
+---
+
+## IS_014 — the false negative in the bin that matters most
+
+`gap-markers` landed with five `STATE` values and one of them was
+`unasked`: *data exists, collected for another purpose; question never
+posed.* Mapping that register's states against these bins, two mapped
+and three did not — and `unasked` was the one whose absence had a
+consequence here.
+
+Code such a case honestly against the four original signals:
+
+    prior_report          ABSENT   nobody reported it
+    figure_without_clock  ABSENT   no governing figure is stale
+    designed_control      ABSENT   no control was proposed
+    no_instrument         ABSENT   the gauges exist and reported
+
+Every one of those is **true**. Nothing was routed away, no figure lost
+its clock, no control was shelved, and the instrument was not blind.
+So the case fires nothing and lands on `NOT_FORESEEN` — *genuinely
+novel* — while eleven years of gauge record sat in a file.
+
+**That is the worst failure this classifier has.** `IS_002` makes the
+reachability of `NOT_FORESEEN` load-bearing on the grounds that a
+classifier which never returns it is telling the operator what they
+came to hear. The converse was never asserted: a classifier that
+returns it *wrongly* tells the operator to stop looking, which is the
+one instruction that cannot be recovered from. `IS_002` is narrowed to
+say so.
+
+The repair is a **fifth signal**, not a re-reading of the four:
+`held_data_unasked` — *was the quantity derivable from data already
+held, collected for another purpose, with the question never posed?* —
+and a sixth bin, `HELD_BUT_UNASKED`, because this is a foreknowledge
+state parallel to the other four rather than a modifier on one.
+
+`cases/held-but-unasked.json` is the case that found it, and its
+authoring note records that it reads `ABSENT` on all four original
+signals truthfully. Every pre-existing case now states the fifth
+signal explicitly rather than defaulting: a missing signal reads
+`UNSEARCHED`, which would have moved four verdicts to `NOT_DERIVABLE`
+silently.
+
+The bin has **no route yet**, and that is a third state rather than a
+second: `NONE_YET` in the spec, parsed into `ROUTE_PENDING_BINS`, kept
+apart from the negative's no-route-by-nature. Both render as an empty
+supplier list and they are not the same statement.
+
+**What this says about the method.** The gap was not found by any
+check in this folder. It was found by a *different vocabulary*, built
+for a different purpose by the same operator, mapped against this one —
+which is `triad-playground` `TP_008`'s result about decorrelated
+shadows, arriving as a fact about two registers rather than two
+readers. A single vocabulary cannot enumerate what it has no word for.
+
+**Falsifier:** a real case coded as `HELD_BUT_UNASKED` that turns out
+to be one of the other five, or a seventh state in some third
+vocabulary that this six cannot express — which is the same test, and
+the map in `gap-markers/markers.py` is where it would show.

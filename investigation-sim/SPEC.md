@@ -78,14 +78,30 @@ Five. Four foreknowledge states and one negative.
         in any record to find.
         ROUTES TO: uninstrumented
 
+    HELD_BUT_UNASKED
+        The data existed and was held, collected for another purpose,
+        and the question was never posed. Nothing was reported, so
+        nothing was routed anywhere; the instrument was not blind.
+        ROUTES TO: NONE_YET
+
     NOT_FORESEEN
         Genuinely novel. Nobody held it, nobody computed it, no
-        control was proposed, and no instrument that anyone had would
-        have caught it.
+        control was proposed, no instrument that anyone had would
+        have caught it, and it was not derivable from data already
+        held.
 
 **`NOT_FORESEEN` must be reachable.** A classifier that never returns
 it is `CONSTANT_FIRES` and is telling the operator what they came to
 hear. The selftest requires a constructed case that lands there.
+
+**And it must not be over-reachable.** `HELD_BUT_UNASKED` was added
+2026-08-26 after `gap-markers` `GM_005` mapped its `unasked` state
+against these bins and found no bin for it. Coded honestly against the
+original four signals, such a case reads `ABSENT` on all four and
+lands on `NOT_FORESEEN` — *genuinely novel* — while the data sat in a
+file the whole time. That is a false negative in the one bin whose
+correctness the whole design rests on, and it is the failure that
+stops anyone looking.
 
 ## S2 — WHAT IS NOT A BIN
 

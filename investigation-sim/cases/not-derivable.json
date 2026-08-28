@@ -8,13 +8,15 @@
     "prior_report": "UNSEARCHED",
     "figure_without_clock": "UNSEARCHED",
     "designed_control": "UNSEARCHED",
-    "no_instrument": "UNSEARCHED"
+    "no_instrument": "UNSEARCHED",
+    "held_data_unasked": "UNSEARCHED"
   },
   "signal_basis": {
     "prior_report": "the records do not exist. Not searched-and-absent",
     "figure_without_clock": "same",
     "designed_control": "same",
-    "no_instrument": "same"
+    "no_instrument": "same",
+    "held_data_unasked": "the records do not exist"
   },
   "remedy": {
     "text": null,

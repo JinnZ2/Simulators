@@ -6,14 +6,16 @@
     "CALCULATED_UNCLOCKED": 1,
     "CONCEIVED_NOT_BUILT": 1,
     "GAP_UNINSTRUMENTED": 0,
-    "NOT_FORESEEN": 1,
-    "NOT_DERIVABLE": 1
+    "HELD_BUT_UNASKED": 0,
+    "NOT_FORESEEN": 0,
+    "NOT_DERIVABLE": 2
   },
   "unsearched_signals": {
     "prior_report": 1,
     "figure_without_clock": 1,
     "designed_control": 1,
-    "no_instrument": 2
+    "no_instrument": 2,
+    "held_data_unasked": 4
   },
   "note": "counts of systems per bin. Not a probability, not a ranking, and not comparable to a retrospective count."
 }

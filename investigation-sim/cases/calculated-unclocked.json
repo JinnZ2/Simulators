@@ -8,13 +8,15 @@
     "prior_report": "ABSENT",
     "figure_without_clock": "PRESENT",
     "designed_control": "ABSENT",
-    "no_instrument": "ABSENT"
+    "no_instrument": "ABSENT",
+    "held_data_unasked": "ABSENT"
   },
   "signal_basis": {
     "prior_report": "searched: nobody reported the mix change as a hazard",
     "figure_without_clock": "the rating carries no domain of validity and no next-check date",
     "designed_control": "searched: no re-rating was proposed",
-    "no_instrument": "traffic counts exist and are collected"
+    "no_instrument": "traffic counts exist and are collected",
+    "held_data_unasked": "searched: traffic counts are collected and the mix change is visible in them, but the posting question WAS posed against them at commissioning. The figure is stale, not unasked"
   },
   "remedy": {
     "text": "attach a domain of validity and a derived re-check interval to the posting",

@@ -8,13 +8,15 @@
     "prior_report": "PRESENT",
     "figure_without_clock": "PRESENT",
     "designed_control": "PRESENT",
-    "no_instrument": "ABSENT"
+    "no_instrument": "ABSENT",
+    "held_data_unasked": "ABSENT"
   },
   "signal_basis": {
     "prior_report": "the maintenance ticket, dated, with the operator's own wording",
     "figure_without_clock": "the demand figure carries no re-check interval and the service area has changed",
     "designed_control": "the soft-start is in the design package and a value-engineering log records its removal",
-    "no_instrument": "run-hour and start counters exist and were read"
+    "no_instrument": "run-hour and start counters exist and were read",
+    "held_data_unasked": "searched: run-hour and start counters were read and the cycling question was posed against them"
   },
   "remedy": {
     "text": "re-derive the demand figure with a re-check interval",

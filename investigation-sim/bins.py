@@ -71,8 +71,13 @@ def spec_routes():
             cur = m.group(1)
             out[cur] = []
         elif cur and "ROUTES TO:" in ln:
-            out[cur] = [x.strip() for x in
-                        ln.split("ROUTES TO:")[1].split(",") if x.strip()]
+            got = [x.strip() for x in
+                   ln.split("ROUTES TO:")[1].split(",") if x.strip()]
+            # NONE_YET is a declared absence of a route, kept apart
+            # from a bin that has no route by its nature (the
+            # negative). Both render as no supplier and they are not
+            # the same statement.
+            out[cur] = [] if got == ["NONE_YET"] else got
     return out
 
 
@@ -82,10 +87,27 @@ def spec_modes():
                  re.finditer(r"^    ([A-Z]+)\s{2,}", body, re.M))
 
 
+ROUTE_PENDING = "NONE_YET"
+
+
+def spec_route_pending():
+    body = _spec().split("## S1")[1].split("## S2")[0]
+    out = set()
+    cur = None
+    for ln in body.split("\n"):
+        m = re.match(r"^    ([A-Z][A-Z_]+)$", ln)
+        if m:
+            cur = m.group(1)
+        elif cur and ROUTE_PENDING in ln:
+            out.add(cur)
+    return out
+
+
 BINS = spec_bins()
 NONBINS = spec_nonbins()
 ROUTES = spec_routes()
 MODES = spec_modes()
+ROUTE_PENDING_BINS = spec_route_pending()
 
 # The negative. Named once, here, so nothing has to string-match it.
 NEGATIVE = "NOT_FORESEEN"
@@ -131,6 +153,12 @@ SIGNALS = {
         "bin": "GAP_UNINSTRUMENTED",
         "asks": "Was the quantity outside what any instrument in place "
                 "could report, by the instrument's constitution?",
+    },
+    "held_data_unasked": {
+        "bin": "HELD_BUT_UNASKED",
+        "asks": "Was the quantity derivable from data already held, "
+                "collected for another purpose, with the question "
+                "never posed?",
     },
 }
 

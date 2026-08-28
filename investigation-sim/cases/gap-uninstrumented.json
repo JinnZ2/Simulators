@@ -8,13 +8,15 @@
     "prior_report": "ABSENT",
     "figure_without_clock": "ABSENT",
     "designed_control": "ABSENT",
-    "no_instrument": "PRESENT"
+    "no_instrument": "PRESENT",
+    "held_data_unasked": "ABSENT"
   },
   "signal_basis": {
     "prior_report": "searched both registers' correspondence: nothing",
     "figure_without_clock": "searched: no figure governs the crossing",
     "designed_control": "searched: no control was proposed for it",
-    "no_instrument": "the exclusion is in the schema. Neither register can hold a member that leaves its own boundary, so the absence predates the first reading"
+    "no_instrument": "the exclusion is in the schema. Neither register can hold a member that leaves its own boundary, so the absence predates the first reading",
+    "held_data_unasked": "searched: no party holds data on a crossing neither register can represent"
   },
   "remedy": {
     "text": "retrain the survey crews",

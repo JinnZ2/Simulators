@@ -8,13 +8,15 @@
     "prior_report": "ABSENT",
     "figure_without_clock": "ABSENT",
     "designed_control": "ABSENT",
-    "no_instrument": "ABSENT"
+    "no_instrument": "ABSENT",
+    "held_data_unasked": "ABSENT"
   },
   "signal_basis": {
     "prior_report": "searched incoming-material correspondence and the supplier file: nothing",
     "figure_without_clock": "searched: the certificate figures carry their method and their date",
     "designed_control": "searched: no control was proposed, because the species had not been named anywhere",
-    "no_instrument": "the incoming assay covers the specified species and is fit for that purpose. This one is a gap in CHARACTERISATION, not in the instrument's constitution -- a different reading, argued in the authoring note"
+    "no_instrument": "the incoming assay covers the specified species and is fit for that purpose. This one is a gap in CHARACTERISATION, not in the instrument's constitution -- a different reading, argued in the authoring note",
+    "held_data_unasked": "searched the supplier file and the incoming-assay archive: the species is not present in any held data, which is what makes this the negative rather than HELD_BUT_UNASKED"
   },
   "remedy": {
     "text": "add a non-targeted screen to incoming assay",

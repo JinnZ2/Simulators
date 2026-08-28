@@ -8,13 +8,15 @@
     "prior_report": "PRESENT",
     "figure_without_clock": "ABSENT",
     "designed_control": "ABSENT",
-    "no_instrument": "ABSENT"
+    "no_instrument": "ABSENT",
+    "held_data_unasked": "ABSENT"
   },
   "signal_basis": {
     "prior_report": "the note is in the shift log, dated, legible",
     "figure_without_clock": "searched: no governing figure in this case",
     "designed_control": "searched: no control was proposed",
-    "no_instrument": "the interlock IS the instrument and it reported"
+    "no_instrument": "the interlock IS the instrument and it reported",
+    "held_data_unasked": "searched: the hazard was reported, not derived from held data"
   },
   "remedy": {
     "text": "route safety observations to a channel that generates a tracked action item",

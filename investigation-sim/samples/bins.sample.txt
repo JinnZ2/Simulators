@@ -19,6 +19,7 @@ a real event.
      CALCULATED_UNCLOCKED   -> claim-record, criteria-drift
      CONCEIVED_NOT_BUILT    -> fold-matrix
      GAP_UNINSTRUMENTED     -> uninstrumented
+     HELD_BUT_UNASKED       -> (the negative)
      NOT_FORESEEN           -> (the negative)
    not bins: NOT_DERIVABLE, MULTIPLE
    NOT_DERIVABLE is not NOT_FORESEEN. One says look harder, the
@@ -59,12 +60,13 @@ a real event.
    calculated-unclocked       CALCULATED_UNCLOCKED   CALCULATED_UNCLOCKED   
    conceived-not-built        CONCEIVED_NOT_BUILT    CONCEIVED_NOT_BUILT    
    gap-uninstrumented         GAP_UNINSTRUMENTED     GAP_UNINSTRUMENTED     
+   held-but-unasked           HELD_BUT_UNASKED       HELD_BUT_UNASKED       
    known-routed-away          KNOWN_ROUTED_AWAY      KNOWN_ROUTED_AWAY      
    multiple                   MULTIPLE               MULTIPLE               
    not-derivable              NOT_DERIVABLE          NOT_DERIVABLE          
    not-foreseen               NOT_FORESEEN           NOT_FORESEEN           
-   agree 7 of 7
-   verdicts reached      : CALCULATED_UNCLOCKED, CONCEIVED_NOT_BUILT, GAP_UNINSTRUMENTED, KNOWN_ROUTED_AWAY, MULTIPLE, NOT_DERIVABLE, NOT_FORESEEN
+   agree 8 of 8
+   verdicts reached      : CALCULATED_UNCLOCKED, CONCEIVED_NOT_BUILT, GAP_UNINSTRUMENTED, HELD_BUT_UNASKED, KNOWN_ROUTED_AWAY, MULTIPLE, NOT_DERIVABLE, NOT_FORESEEN
    never reached         : none
    the negative is reachable: True
    A classifier that never returns NOT_FORESEEN is telling the
@@ -74,6 +76,7 @@ a real event.
      calculated-unclocked       aims at CALCULATED_UNCLOCKED   addresses a bin that fired
      conceived-not-built        aims at CONCEIVED_NOT_BUILT    addresses a bin that fired
      gap-uninstrumented         aims at KNOWN_ROUTED_AWAY      MISMATCH
+     held-but-unasked           aims at HELD_BUT_UNASKED       addresses a bin that fired
      known-routed-away          aims at KNOWN_ROUTED_AWAY      addresses a bin that fired
      multiple                   aims at CALCULATED_UNCLOCKED   addresses a bin that fired
      not-derivable              REMEDY_BIN_UNDECLARED
@@ -83,6 +86,7 @@ a real event.
      calculated-unclocked       OPEN                   bin 3 again: True
      conceived-not-built        CLOSED_UNIMPLEMENTED   bin 3 again: True
      gap-uninstrumented         IMPLEMENTED            bin 3 again: False
+     held-but-unasked           OPEN                   bin 3 again: True
      known-routed-away          IMPLEMENTED            bin 3 again: False
      multiple                   OPEN                   bin 3 again: True
      not-derivable              STATUS_UNRECORDED      bin 3 again: --
