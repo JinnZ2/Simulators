@@ -7501,6 +7501,71 @@ underneath).
   only the register, and where a null or a decades-old date IS the
   finding. 100 selftest checks. Stdlib only, parses under 3.9,
   phone-buildable, CC0.
+- `consensus-anchor/` — A gap spec asking which of three mechanisms
+  anchors consensus convergence in trained systems — H1 inherited norm
+  / H2 the objective / H3 structural coupling — and **the one arm it
+  asks anyone with compute to run, run**. `SOURCE_DROP.md` verbatim;
+  `textfree.py` is the text-free arm (stdlib, deterministic, ~70s),
+  `samples/` the pinned run. **No human corpus is read anywhere in the
+  pipeline** and nothing here is evidence about trained models: H1 and
+  H2 need one and are untouched. **`CA_002`, the result: one sentence
+  has two readings and they give opposite verdicts on H3.** The rule is
+  *"weighted mix of own prior and sampled peer positions"* — `SAMPLED`
+  reads the peer signal as the empirical distribution of peers' sampled
+  POSITIONS (the more literal reading, a position being a discrete
+  value), `DIST` as the mean of peers' DISTRIBUTIONS. H3's falsifier
+  has three limbs joined by OR, and at `eta=0` **`DIST` fires all three
+  and `SAMPLED` fires none** — so the arm the drop calls *"the fastest
+  discriminator"* discriminates on an implementation choice the spec
+  does not make (`SHB_010`/`RD_002`'s shape), and one added sentence
+  settles it. **`CA_003`, the mechanism, exact rather than
+  statistical:** under `DIST` the update is `p ← (1−J)p + J·mean(p)` so
+  the population mean maps to itself — drift **4.11e-15** against
+  `SAMPLED`'s 0.742 — and both reach **total agreement** (spread
+  exactly 0.0) on different things, `DIST` on the near-uniform
+  distribution it started with (modal mass 0.267 ≈ chance) and
+  `SAMPLED` on a near-degenerate one (0.962). **Full agreement, zero
+  consensus**, which the order parameter cannot see, since `m` is the
+  fraction on a modal POSITION and `DIST` produces agreement on a
+  DISTRIBUTION — worth carrying to the model-side arms, where units
+  agreeing and units converging on a position are also two
+  measurements. **`CA_004`:** `J_c` moves with noise (0.15 / 0.50 /
+  0.90 at `eta` 0 / 0.02 / 0.10) and the spec has no noise term, so *"the
+  coupling value at which m departs from chance"* has no value until
+  noise is fixed — a threshold in coupling being a ratio of coupling to
+  noise; `eta=0` is not *no noise*, since `SAMPLED` carries intrinsic
+  sampling noise in the coupling channel, which is the whole difference
+  from `DIST`. **`CA_005`, a control the spec omits:** a swept order
+  parameter shows an up-down gap whenever the sweep outruns relaxation,
+  bistable or not — lag shrinks as the sweep slows and bistability does
+  not — so the test is the gap ACROSS sweep rates, and `SAMPLED`'s max
+  gap does **not** shrink under a 16× slower sweep (0.567 → 0.705,
+  ratio 1.244) while `DIST`'s stays near zero; reported in both
+  directions, since the MEAN gap does fall (0.380 → 0.258) so part of
+  the fast-sweep gap is lag and the peak is not, and the function
+  computes **no verdict** because three dwells do not fit a decay.
+  **`CA_006`:** the chance baseline is `E[max count]/N`, measured
+  **0.2944** against a naive `1/K` of 0.2500 — 17.8% higher, moving
+  with `N` — so taking `1/K` as chance manufactures a `J_c`;
+  `find_jc()` reads the measured mean at a 3.0 chance-SD margin (a
+  `G-RES` pair) and the selftest asserts `1/K` appears nowhere in it.
+  **`CA_007`, recorded rather than quietly fixed:** the first pass ran
+  `eta=0.10, T=80`, got `SAMPLED` clearing threshold by 0.004 against a
+  seed SD of 0.05, and read as *no alignment at any J* — one of H3's
+  limbs — where at `eta=0, T=400` the same rule reaches **0.88**. A
+  parameter artifact, and the failure mode the drop is about: an arm
+  run at a setting that suppresses the effect returns a clean,
+  reportable null. What caught it was sweeping `eta` and `T`, which
+  nothing in the spec asks for. **`CA_008`:** H3's locus is
+  *"interaction topology + coupling strength"* and the arm sweeps only
+  `J`, so this runs all-to-all and topology is untested — cheap next
+  step, no new instrument. **`CA_009` UNVERIFIED:** the drop's
+  instrument caution (do not gate case admission on record
+  completeness) is a real rule and is the one part this arm cannot
+  exercise, there being no cases and no records; it binds the human-side
+  sample the drop names, whose own measurable has the survivorship
+  problem in its subject (`OE_003`, `DD_003`). 38 selftest checks.
+  Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
