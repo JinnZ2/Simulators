@@ -1,0 +1,38 @@
+{
+  "id": "constructed-closes",
+  "constructed": true,
+  "artifact": "CONSTRUCTED. Not a real artifact and not a claim about anything. Exists so the closure test can be shown to return SATISFIED.",
+  "method": "constructed",
+  "constants": [
+    {
+      "name": "k",
+      "value": 1.0,
+      "units": "1",
+      "provenance": "physical"
+    }
+  ],
+  "requirements": [
+    {
+      "name": "energy_budget",
+      "bound_by": "LAW",
+      "required": 50.0,
+      "required_units": "MJ",
+      "attested": 100.0,
+      "attested_units": "MJ"
+    },
+    {
+      "name": "spoil_volume",
+      "bound_by": "RECORD",
+      "required": 200.0,
+      "required_units": "m3",
+      "attested": 900.0,
+      "attested_units": "m3"
+    }
+  ],
+  "duration": {
+    "value": 10.0,
+    "units": "years",
+    "bounded_by": "constructed dated phases",
+    "bound_resolution": 1.0
+  }
+}

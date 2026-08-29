@@ -7566,6 +7566,76 @@ underneath).
   sample the drop names, whose own measurable has the survivorship
   problem in its subject (`OE_003`, `DD_003`). 38 selftest checks.
   Stdlib only, parses under 3.9, CC0.
+- `dependency-ledger/` — A method for testing reconstruction claims by
+  propagating them to conserved quantities and checking closure against
+  independent records, **built as an instrument and run on one case**
+  as the drop asks. `SOURCE_DROP.md` verbatim; `audit.py` the method,
+  63 checks, pinned run. **The constraint stated before any number:**
+  step 5 is CHECK against an INDEPENDENT record and egress here is an
+  allowlist that refuses every archive, so on the real case every
+  record-bounded cell is `UNMEASURED` — the run, not a workaround, and
+  the finding the drop predicted (*"The unmeasured cells are the
+  finding"*). **`DLA_002`, the addition, derived from running rather
+  than reading: steps 3 and 4 pull opposite ways.** Step 3 stops at
+  conserved quantities — energy, mass, momentum, time, material volume
+  — bounded by physical LAW and checkable anywhere; step 4 expands them
+  into arable area, quarry volume, spoil heaps, pollen records, bounded
+  by the RECORD and checkable only with archives. The propagation
+  crosses between the classes and the spec marks no crossing, so a
+  reader cannot tell which cells they could close at a desk; every
+  requirement here declares `bound_by ∈ {LAW, RECORD}`, `close()`
+  refuses one that declares neither, and the table splits on it.
+  **`DLA_003`, the run:** on the drop's own watercraft example, `LAW`
+  1 cell 0 unmeasured, `RECORD` 4 cells 4 unmeasured — **the one cell
+  that closes is the one whose independent record is PHYSIOLOGY rather
+  than archaeology**, and it closes as `GAP` at 8.71, which is the
+  drop's own predicted outcome for its own example; the split appearing
+  as a property of a run rather than a distinction argued for.
+  **`DLA_010`:** that residual is **75% built from unsourced
+  coefficients** (6 of 8, each with a stated reason, including the oar
+  propulsive efficiency — *"exactly the one the reconstruction assumes
+  without stating"*), so it demonstrates the propagation runs and is
+  NOT a measurement about any vessel, river or period; the
+  `SMUGGLED_CONSTANTS` guard prints the share in every report so the
+  number cannot be quoted without it, and `TIME AS SOLVENT` fires and
+  is **left firing**, since bounding a 30-day duration requires
+  occupation layers this environment cannot reach. **Three things the
+  spec leaves open:** `DLA_004` `residual = required/attested` is a
+  ratio and nothing requires the two to be the same quantity — step 4's
+  own example propagates kcal/day toward hectares, which is `G-DIM`, so
+  mismatched or undeclared units yield no residual and land on
+  `UNMEASURED`; `DLA_005` `residual >> 1` has no value, declared here
+  as `FALSIFY_AT = 10.0` and printed in every report, with the
+  watercraft case at **8.71** reading `GAP` where at 8 it would read
+  `FALSIFIED` — the verdict on the drop's own worked example sitting
+  inside the range one undeclared symbol spans; and the duration bound
+  is itself a measurement with a resolution, so the guard fires on a
+  bound coarser than the duration it bounds. **What the spec gets
+  right:** `DLA_006` *"attested undefined → NOT a pass"* is the
+  absent-vs-known-negative repair stated before any code on the field
+  where it costs most, **and given its own named failure mode**, so it
+  is both a schema rule and a guard — no other instance here has been
+  both — implemented three ways, with an `attested` of literal zero
+  *refused* since a zero denominator is a different statement from an
+  absent one; `DLA_007` *"do not aggregate residuals into one score"*
+  is `domain-ledger` `DL_001` arrived at independently and stated
+  better (a mean over subsystems names none of them), enforced by a
+  selftest that walks the AST asserting no residual is ever summed,
+  maxed or averaged; `DLA_008` COLLAPSED PROXIES is `fold-matrix`'s
+  folded term — that register opens by defining one as *"a compact
+  matrix wearing the costume of a scalar"* and already carries
+  `resources` as *"a stock and a flow, welded"* — with the vocabulary
+  **imported** rather than retyped. **`DLA_009`, found in my own
+  instrument:** `guard_collapsed_proxies` tokenised with
+  `[a-z_]+`, so the underscore sat INSIDE the word class,
+  `labor_required` was one token, `labor` never appeared, and the guard
+  whose job is to catch a term hiding inside a name could not see one —
+  `UNI_009`'s shape in a tokenizer written after that finding was
+  recorded, caught by the arm requiring every guard to fire on a
+  planted violation. Two constructed cases labelled in their own text
+  exist so the closure test can be shown to return `SATISFIED` and
+  `FALSIFIED`; all four verdicts occur across the corpus and the
+  selftest asserts it. Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
