@@ -7993,6 +7993,59 @@ underneath).
   every hit reworded. Check count printed by `selftest_hsa.py`; both
   modules refuse `--selftest`. Stdlib only, parses under 3.9,
   phone-buildable, CC0.
+- `columbia-chain-cascade/` — A HEC-RAS 2D build spec for a full-chain
+  dam-cascade flood model on the Columbia and Snake, with swappable
+  initiator modules (breach / seismic / hydrologic / cyber / combined)
+  and an antecedent-condition coupling amplifier. `SOURCE_DROP.md`
+  verbatim — **and two facts set the whole scope.** The spec cannot be
+  executed here (HEC-RAS is Windows-only USACE software, **absent**, and
+  every DEM, bathymetry, roughness and dam-geometry source it names
+  **refuses CONNECT**, both measured not asserted), and the delivered
+  text **arrived truncated**, ending mid-sentence in Module F — *"it
+  changes the cascade outcome at the next"* — the module the spec itself
+  calls the load-bearing amplifier. **No hydraulics are simulated
+  anywhere in the folder**: a flood-hazard field from a stdlib toy would
+  read as a result about a real dam chain and a real downstream
+  population, the highest-stakes version of the `PB_001`/`CW_004` rule,
+  and Module F, the validation, the claim table and the ask are all
+  **absent and not reconstructed** (`CCC_001`, detected by
+  `truncation()` rather than asserted; the selftest checks no Module F
+  body text exists in the folder's own code). **`CCC_003`, the one thing
+  that survives all of it:** the spec calls ownership *"the governance
+  variable"* and says *"mixed ownership means no entity's plan spans the
+  chain — record it as data, not commentary"*, and that is the single
+  conclusion needing neither the engine, the terrain, nor the missing
+  text — only the node list, delivered verbatim. `eap_coverage.py`
+  computes it: **no single entity's plan spans the chain, True**,
+  settled by the **CA/US boundary in the delivered node list** (an EAP
+  authority cannot cross a national boundary; the three upper nodes
+  carry `(CA)`), authorities lower bound 2. **`CCC_004`:** the finding
+  is **robust to the missing per-node ownership** — assigning the 18
+  nodes to the 5 owner categories can only RAISE the count above the
+  jurisdiction floor, never lower it, so it holds regardless of data
+  this environment lacks; a null test on a hypothetical all-US chain
+  returns bound 1 and un-settles it, so the True is the split doing work.
+  **`CCC_005`, the refusal:** the exact fragmentation — how many plans,
+  where each seam falls — is **UNASSIGNED, not estimated**, because
+  per-node ownership is public fact carried in NID and project memoranda
+  (unreachable) and is **not supplied from memory into a dam-safety
+  artifact**; `owner` is `UNASSIGNED` for all 18 nodes and the selftest
+  walks the AST of the node table to assert no other value appears
+  there. **`CCC_006`:** node names, reach labels, the `(CA)` tag and the
+  five owner categories are transcribed from the delivered text and each
+  checked against the source — listing what the text lists is
+  transcription, assigning owners it does not is invention.
+  **`CCC_007`:** the modules' comparability (*"swappable, same
+  downstream engine"*) is asserted, not shown — `move-set-derivation`'s
+  declared-architectures shape, and showing it requires the engine.
+  **`CCC_008` UNVERIFIED:** nothing here bears on any hazard field,
+  velocity band, time slice, breach or exposure — the spec's actual
+  subject — and its three headline product choices (velocity bands, time
+  slices, exposure overlay) are sound and untested, since testing them
+  is the routing run. One declared `no_severity` exemption (`means`,
+  inside a verbatim quote) under the three-arm harness. Check count
+  printed by `selftest_ccc.py`; both modules refuse `--selftest`. Stdlib
+  only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

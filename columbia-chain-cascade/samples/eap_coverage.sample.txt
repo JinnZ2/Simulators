@@ -1,0 +1,31 @@
+EAP COVERAGE -- the one governance claim computable from the
+delivered text, without HEC-RAS, data, or invented ownership
+
+The spec: "mixed ownership means no entity's plan spans the
+chain. Record it as data, not commentary." This is that record.
+
+NODES (transcribed from SOURCE_DROP.md section 1):
+  18 dam nodes; the estuary is a reach, not a node.
+  Upper:  Mica [CA]  Revelstoke [CA]  Keenleyside [CA]
+  US:     Grand Coulee [US]  Chief Joseph [US]  Wells [US]  Rocky Reach [US]  Rock Island [US]  Wanapum [US]  Priest Rapids [US]
+  Snake:  Lower Granite [US]  Little Goose [US]  Lower Monumental [US]  Ice Harbor [US]
+  Lower:  McNary [US]  John Day [US]  The Dalles [US]  Bonneville [US]
+
+OWNERSHIP, as the delivered text supports it:
+  distinct jurisdictions in the text:   2  ['CA', 'US']
+  owner categories the spec asserts:    5  ['USACE', 'USBR', 'PUD', 'BC Hydro', 'private']
+  per-node owner known here:            0 of 18
+  exact number of EAP seams:            UNASSIGNED
+    per-node ownership is public fact not in the delivered text; NID and project memoranda refuse CONNECT here, and it is not supplied from memory into a dam-safety artifact
+
+THE SPEC'S CONCLUSION, and whether the text settles it:
+  no single entity's plan spans the chain:  True
+  settled by:  the CA/US boundary in the delivered node list
+  authorities, lower bound:  2
+
+  ROBUST TO THE MISSING OWNERSHIP DATA. assigning the 18 nodes to owners can only RAISE the authority count above the jurisdiction floor, never lower it; the floor of 2 is already > 1.
+  So the governance claim holds at the granularity the delivered
+  text supports, and the exact fragmentation -- how many plans,
+  where each seam falls -- is a different question requiring the
+  per-node ownership this environment cannot reach and will not
+  invent.
