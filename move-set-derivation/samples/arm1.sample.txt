@@ -1,0 +1,225 @@
+MOVE-SET DERIVATION -- ARM 1
+
+SOURCE_DROP.md asks: "Arm 4 or Arm 1 alone is a complete
+project. Publish the null rate and the similarity-versus-
+recombination regression, with unmeasured cells marked."
+Arm 4 requires camera-trap and telemetry archives; egress here is an
+allowlist and refuses every archive host, so Arm 4 is UNMEASURED
+and is not approximated. Arm 1 is built and run below.
+
+WHAT IS UNDER TEST. The environment and the solvers are both
+authored here, so a regression against one hand-written solver
+returns its author's architecture rather than a capacity. The
+solvers therefore carry DECLARED architectures and the
+discriminator is run against all four: the question asked is
+whether the discriminator can tell them apart, which is the
+known-truth-first invariant applied to the arm's own instrument
+before it is pointed at anything whose architecture is unknown.
+Nothing here is a system under test.
+
+0. THE ENVIRONMENT
+   primitives: 6   goals: 6   moves: 16
+   configurations enumerated exhaustively: 384
+   training: 78      test: 306
+
+   COMPOSITIONAL NOVELTY, the arm's stated validity condition:
+     primitives in test and never in training: none
+   The drop calls this the whole validity of the arm, so it is a
+   returned value and a selftest assertion rather than an
+   intention. A leaked primitive would measure knowledge and
+   report it as derivation.
+
+1. THE TWO REGRESSORS ARE CORRELATED BY CONSTRUCTION
+   n=306   corr(similarity, depth) = -0.6737
+   depth levels present in test: [1, 2]
+
+   Depth 0 CANNOT appear in test: a primitive set inside one
+   training family is a training configuration. So the test set
+   has two depth levels, not a range, and they differ in mean
+   similarity -- deeper recombination is further from any single
+   training configuration almost by definition.
+
+   THE DECORRELATION IS IN THE DATA. At the similarity where both
+   depths occur, similarity is constant and depth varies:
+     matched band: 144 of 306 configurations
+     corr within the band: UNMEASURED
+   It costs sample size, not a new environment. Every
+   discriminator reading below is reported on both.
+
+2. THE FIVE MEASURES, KEPT APART
+   The drop forbids a composite: the per-measure profile IS the
+   dissociation being tested. No score is emitted anywhere.
+
+   DERIVATION  check each move's requirements against the present primitive set
+   RETRIEVAL   find the nearest training configuration by Jaccard and emit ITS admissible moves
+   PLAUSIBLE   emit the moves most often admissible across training, regardless of the configuration
+   SILENT      always return the empty set
+
+   arch        condition              cand   admis   covr    t1st    prem    null
+   DERIVATION  enumerated           0.7157     1.0    1.0     0.0 UNMEASURED     1.0
+   DERIVATION  not_enum             0.7157     1.0    1.0     0.0 UNMEASURED     1.0
+   DERIVATION  not_enum+deadline    0.6503     1.0    1.0     0.0 UNMEASURED     1.0
+   DERIVATION  not_enum+deadline+irrev 0.4673     1.0    1.0     0.0     0.0     1.0
+
+   RETRIEVAL   enumerated           0.7157     1.0    1.0     0.0 UNMEASURED     1.0
+   RETRIEVAL   not_enum             0.1046     1.0 0.2238     0.0 UNMEASURED     1.0
+   RETRIEVAL   not_enum+deadline    0.1046     1.0 0.2238     0.0 UNMEASURED     1.0
+   RETRIEVAL   not_enum+deadline+irrev 0.1046     1.0 0.2238     0.0  0.7762     1.0
+
+   PLAUSIBLE   enumerated           0.7157     1.0    1.0     0.0 UNMEASURED     1.0
+   PLAUSIBLE   not_enum             0.8333  0.2941 0.5245     0.0 UNMEASURED  0.2147
+   PLAUSIBLE   not_enum+deadline    0.8333  0.2941 0.5245     0.0 UNMEASURED  0.2147
+   PLAUSIBLE   not_enum+deadline+irrev 0.8333  0.2941 0.5245     0.0  0.4755  0.2147
+
+   SILENT      enumerated           0.7157     1.0    1.0     0.0 UNMEASURED     1.0
+   SILENT      not_enum                0.0 UNMEASURED    0.0 UNMEASURED UNMEASURED     1.0
+   SILENT      not_enum+deadline       0.0 UNMEASURED    0.0 UNMEASURED UNMEASURED     1.0
+   SILENT      not_enum+deadline+irrev    0.0 UNMEASURED    0.0 UNMEASURED     1.0     1.0
+
+   cand  mean candidate-set size before commitment
+   admis admissibility fraction of generated candidates
+   covr  ADDED, not one of the five -- fraction of configurations
+         with an admissible move where one was reached
+   t1st  mean index of the first admissible move
+   prem  premature-commitment rate (irreversible condition only)
+   null  fraction of no-admissible-move seeds answered empty
+   UNMEASURED = the denominator is empty. Never a pass.
+
+   TWO OF THE FIVE DO NOT DISCRIMINATE HERE, for the same reason
+   at two sites.
+
+   TIME TO FIRST ADMISSIBLE MOVE is 0.0 for every architecture that
+   reaches one: all four emit admissible-first, so the measure is
+   CONSTANT_SILENT on this solver set. It takes a solver whose
+   emission order is not admissibility-ordered, and none of the
+   four is. That is a property of the fixtures, not of the
+   measure, and it is stated rather than repaired because
+   inventing a shuffled solver to make a measure move would be
+   building the result.
+
+   ADMISSIBILITY FRACTION reads 1.0 for DERIVATION and 1.0 for
+   RETRIEVAL -- the two architectures the discriminator exists to
+   separate. RETRIEVAL emitted 32 moves and 0 were inadmissible:
+   it is CONSERVATIVE, not mistaken. Its neighbour is usually a
+   subset of the present configuration, so what it emits is
+   admissible and there is very little of it. Coverage separates
+   them (1.0 against 0.2238); the admissibility fraction does not.
+
+   That is the same shape as the null-rate result below. A
+   measure of correctness with no coverage term is gameable by
+   conservatism, and a measure of restraint with no reach term is
+   gameable by silence. Two of the drop's five measures need a
+   partner it does not list.
+
+   THE ENUMERATED CONDITION is the control and behaves like one:
+   every architecture scores identically, because the admissible
+   set is given and nothing is derived. Its rows are included
+   because a condition that cannot separate anything is the
+   baseline the other three are read against.
+
+3. THE NULL RATE, AND WHY IT CANNOT STAND ALONE
+   no-admissible-move seeds in test: 163 of 306 (0.5327)
+   They occur in the space rather than being injected: a goal
+   with no move whose requirements the configuration meets.
+
+   The drop says to protect the null rate if anything is cut, and it is right that a system which never returns empty is filling a slot.
+   Cut to ONE measure it is gameable in the other direction: SILENT returns the empty set always and scores a null rate of 1.0000, the highest in the table, while reaching an admissible move zero times.
+   So the null rate is not a measure that stands alone -- it is one side of a pair, and the other side is whether an admissible move is ever reached on the seeds that have one.
+   Both are printed together for that reason, and neither is combined into a score.
+
+   SILENT     null_rate 1.0     reached an admissible move 0 times
+   DERIVATION null_rate 1.0     reached an admissible move 143 times
+   Same null rate. The pair separates them; the measure alone
+   does not.
+
+4. THE DISCRIMINATOR -- SIMILARITY VERSUS RECOMBINATION DEPTH
+   "If similarity carries it, the result is retrieval. If
+   recombination depth carries it, derivation."
+
+   THE KNOWN-ANSWER RUN. Four solvers, architectures declared
+   before any of them was run. If the discriminator cannot
+   recover an architecture it was handed, it cannot recover one
+   it was not.
+
+   arch        subsample        n      b_sim    b_depth       r2   null95
+   DERIVATION  full test      143 UNMEASURED UNMEASURED UNMEASURED UNMEASURED
+       drop's stated rule: UNMEASURED             null-tested: UNMEASURED
+       (outcome is constant; a regression on a constant outcome has no slope to report)
+   DERIVATION  matched band    63 UNMEASURED UNMEASURED UNMEASURED UNMEASURED
+       drop's stated rule: UNMEASURED             null-tested: UNMEASURED
+       (outcome is constant; a regression on a constant outcome has no slope to report)
+   RETRIEVAL   full test      143   0.880643   0.062237 0.032507 0.043125
+       drop's stated rule: SIMILARITY_CARRIES     null-tested: NEITHER_CARRIES
+   RETRIEVAL   matched band    63 UNMEASURED    0.02381 0.000874 0.055944
+       drop's stated rule: DEPTH_CARRIES          null-tested: NEITHER_CARRIES
+       (similarity held constant)
+   PLAUSIBLE   full test      143  -0.144061    0.06339 0.007703 0.039335
+       drop's stated rule: SIMILARITY_CARRIES     null-tested: NEITHER_CARRIES
+   PLAUSIBLE   matched band    63 UNMEASURED        0.0      0.0 0.072727
+       drop's stated rule: DEPTH_CARRIES          null-tested: NEITHER_CARRIES
+       (similarity held constant)
+   SILENT      full test      143 UNMEASURED UNMEASURED UNMEASURED UNMEASURED
+       drop's stated rule: UNMEASURED             null-tested: UNMEASURED
+       (outcome is constant; a regression on a constant outcome has no slope to report)
+   SILENT      matched band    63 UNMEASURED UNMEASURED UNMEASURED UNMEASURED
+       drop's stated rule: UNMEASURED             null-tested: UNMEASURED
+       (outcome is constant; a regression on a constant outcome has no slope to report)
+
+   THE STATED RULE AND THE NULL DISAGREE, AND BOTH ARE PRINTED.
+
+   On RETRIEVAL the drop's rule is RIGHT and recovers the
+   declared architecture: b_sim 0.880643 against b_depth 0.062237, a factor
+   of 14. That is the intended signal and it is there.
+
+   And it does not clear chance: r2 0.032507 against a permutation
+   null at the 95th percentile of 0.043125. The coefficient is large
+   and the model explains less variance than a shuffled outcome
+   does at this n.
+
+   The rule's cost is visible on PLAUSIBLE, which has NEITHER
+   architecture -- it emits frequent moves regardless of the
+   configuration. The stated rule returns SIMILARITY_CARRIES
+   for it anyway, because a comparison of two coefficients
+   always names one. There is no state in the rule for 'neither
+   regressor does anything', so it cannot report the case it
+   most has to.
+
+   The matched band is what decorrelates the two, and it
+   forces a SINGLE-predictor regression, where the stated rule is
+   degenerate: with one candidate it can only name that one. On
+   RETRIEVAL the band would read DEPTH_CARRIES -- the derivation
+   verdict, on a retrieval solver -- at r2 0.000874. The null is what
+   stops it.
+
+   POWER. The discriminator is underpowered here rather than
+   blind: resampling the observed rows,
+     configurations with an admissible move: 143   base rate 0.2238
+        n     P(clears its own null)
+       143     0.575
+       300     0.825
+       600     1.0
+      1200     1.0
+   So Arm 1 takes roughly 600 configurations CARRYING AN
+   ADMISSIBLE MOVE to detect the architecture difference it
+   already contains. This environment supplies 143.
+
+   Configuration count goes as 2^P x G, so the shortfall is
+   reachable by adding primitives or goals -- subject to the
+   arm's own validity condition, since every added primitive has to
+   appear in training or the novelty stops being compositional.
+   The extension is NOT BUILT here and no number above is from
+   it.
+
+5. WHAT IS UNMEASURED, MARKED RATHER THAN ESTIMATED
+   Arm 2  UNMEASURED  human subjects; not simulated, and a
+                      simulated protocol group would be a
+                      fabricated claim about operators
+   Arm 3  UNMEASURED  takes a private post-cutoff rule system and
+                      models either side of a publication date
+   Arm 4  UNMEASURED  camera-trap and telemetry archives; every
+                      archive host refuses CONNECT here
+
+   Arm 1 is one arm. Nothing here is evidence about any trained
+   model, any animal, or any operator. What it establishes is a
+   property of the arm's own instrument, measured on solvers
+   whose architectures were declared before they were run.

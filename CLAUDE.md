@@ -7847,6 +7847,75 @@ underneath).
   rewording would misquote the source). Check count printed by
   `selftest_frame.py`; `frame.py` refuses `--selftest`. Stdlib only,
   parses under 3.9, phone-buildable, CC0.
+- `move-set-derivation/` — The companion `evaluation-frame`'s M4 cited
+  by name. A capacity with no established name: taking a configuration
+  never encountered before, on a clock, and deriving **what the
+  available moves are** — where existing frameworks (naturalistic
+  decision making, recognition-primed decision, robust decision making
+  under deep uncertainty) all assume the option set is given and the
+  uncertainty sits in the outcomes. Four arms delivered verbatim;
+  **Arm 1 built and run**, Arms 2/3/4 UNMEASURED and not approximated
+  (Arm 4 is the drop's own cheapest project and needs camera-trap
+  archives every host refuses). **`MSD_001`:** it IS the same null-rate
+  instrument, and **both instances fail for the same reason** — there
+  because a standing convention supplied the ask, here because silence
+  scores a perfect null rate — so the shared framing misses that it is
+  one side of a pair. **Nothing here is a system under test:** the
+  environment and all four solvers are authored in the folder, so a
+  regression against one hand-written solver returns its author's
+  architecture; the solvers therefore carry **declared architectures**
+  and the question asked is whether the discriminator can tell them
+  apart, which is the known-truth-first invariant applied to the arm's
+  own instrument. **`MSD_005`, the result: the discriminator fails its
+  own known-answer run** — every cell reads `NEITHER_CARRIES` or
+  `UNMEASURED` across four solvers whose architectures were declared in
+  advance, two because their outcome is constant (a solver that never
+  fails and one that always fails both give a regression nothing to
+  regress) and two because r² does not clear a permutation null.
+  **`MSD_008` makes it constructive:** underpowered rather than blind —
+  resampling the observed rows gives **≈600 configurations carrying an
+  admissible move**, this environment supplies **143**, and the observed
+  run fell in the 42% that does not clear; count goes as 2^P × G so the
+  shortfall is reachable, subject to the arm's own validity condition,
+  and the extension is NOT BUILT. **`MSD_006`/`MSD_007`:** the drop's
+  stated rule (compare the coefficients) is **right** on `RETRIEVAL` —
+  `b_sim 0.881` against `b_depth 0.062`, a factor of 14, recovering the
+  declared architecture — and the same fit does not clear chance, so
+  direction-recovered and fit-established are different statements and
+  only the first is specified; worse, the rule has **no state for
+  neither regressor doing anything**, so it names an architecture for
+  `PLAUSIBLE`, which has neither, and on the matched band (a
+  single-predictor run) it would return the **derivation** verdict on a
+  **retrieval** solver at r² 0.0009 — the permutation null is what stops
+  it, and is an addition to the drop rather than a reading of it.
+  **`MSD_009`, the second finding, at a site the drop does not name:**
+  two measures are gameable in opposite directions — the null rate by
+  **silence** (`SILENT` reads 1.0000 while reaching an admissible move
+  zero times, the same 1.0000 `DERIVATION` reads while reaching 143) and
+  the admissibility fraction by **conservatism** (`RETRIEVAL` emitted 32
+  moves, 0 inadmissible, and coverage separates it from `DERIVATION` at
+  0.2238 against 1.0 where admissibility cannot) — so each needs a
+  partner the drop does not list, marked `coverage_ADDED` rather than
+  folded in. **`MSD_003`/`MSD_004`:** the discriminator's two regressors
+  are correlated **by construction** at −0.67 with only two depth levels
+  in test, because depth 0 IS a training configuration — and the
+  decorrelation is in the same data, a **matched band of 144** where
+  similarity is constant, costing sample size and not a new environment.
+  **`MSD_002`:** the arm's stated validity condition (*novelty must be
+  compositional, not primitive — this is the whole validity of the arm*)
+  is asserted rather than intended, **and null-tested** with a
+  deliberately leaky split that the check catches; the environment is
+  exhaustive (2⁶ × 6 = 384, no seed, `random` absent from `env.py` and
+  asserted). **`MSD_010`/`MSD_011`:** time-to-first-admissible is
+  `CONSTANT_SILENT` on this solver set — a property of the fixtures, and
+  stated rather than repaired, since inventing a shuffled solver to make
+  a measure move would be building the result — and the enumerated
+  condition is a control that behaves like one. `ols` is **imported**
+  from `sim-span/three_column.py` (already registered in
+  `tools/known_answer.py`), asserted not reimplemented; both modules
+  refuse `--selftest`; no `no_severity` exemptions, every hit reworded.
+  Check count printed by `selftest_msd.py`. Stdlib only, parses under
+  3.9, phone-buildable, ~20s, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
