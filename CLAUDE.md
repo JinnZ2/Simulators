@@ -7636,6 +7636,68 @@ underneath).
   exist so the closure test can be shown to return `SATISFIED` and
   `FALSIFIED`; all four verdicts occur across the corpus and the
   selftest asserts it. Stdlib only, parses under 3.9, CC0.
+- `revision-mechanism/` — A study design for how transmission systems
+  **update** what they know when conditions move — the revision
+  mechanism, not the content. `SOURCE_DROP.md` verbatim; `power.py`
+  computes the one thing in it needing no field data. **The study is
+  not run and is not simulated**: it requires fieldwork and collective
+  consent, and its own ethics section says publishing a group's
+  revision procedure without consent can damage the mechanism being
+  studied — *"a hazard, not a formality"* — which is a constraint on
+  the audit and not only on a fieldworker, since the available
+  shortcut for a study one cannot run is to generate plausible sites
+  and publish a table that reads like a result. Nothing here models a
+  site, a holder, a tradition or a community; the only objects are a
+  line, a step, and binomial noise. **`RM_008`:** M1–M8 is named,
+  absent and **not reconstructed** — six of the design's measures key
+  off the companion scheme, and a coding scheme is data, so inventing
+  it would put a category system in the author's mouth. **`RM_002`,
+  the computed result: one site pair carries three of the four
+  comparisons and cannot carry the second at any per-site precision.**
+  Comparison 1 is a presence/absence contrast on two sites (a pair is
+  the design, not a limitation), comparison 3's denominator is
+  COMPONENTS not sites, comparison 4 needs one of each medium — and
+  comparison 2 predicts *"a discontinuity, not a slope"*, a claim about
+  SHAPE, which two points cannot carry. **Exact rather than
+  statistical:** a line has two free parameters and a step has two, so
+  two points determine both exactly (largest residual over 500
+  arbitrary pairs **2.47e-32**), and at n=2 the discriminator returns a
+  tie at every precision tested up to 1000 components per site — the
+  row is *empty*, not *weak*. **`RM_003`:** comparison 2 becomes
+  decidable at roughly **4–6 sites at ~100 components each, 8–12 at
+  ~30**, and at ~10 components per site twenty sites still do not reach
+  0.9 — so coding depth trades against site count at a steep rate,
+  which is a budget question the design has no number for. **`RM_004`,
+  an asymmetry in the headline number:** `STATUS` has five values and
+  none is *checked, still matches*, so an unassessed component and one
+  confirmed still fitting both land in `held unchanged` — and both sit
+  in the held-obsolete rate's denominator while only one can enter the
+  numerator, so the bias runs **one way**, by exactly the unassessed
+  share (0.35 → 0.245 at 30% unassessed), on the number the drop calls
+  the single most comparable one across sites; the repair is a sixth
+  value. **`RM_005`:** that rate is comparable across sites only
+  through M1–M8, which is absent. **`RM_006`:** comparison 4 compares
+  a revision in a written record against one in a living system, and
+  the drop's own reason (*"the medium has no mechanism for
+  retraction"*) is what makes them possibly different operations — plus
+  its archive section supplies a third value the comparison lacks,
+  since if superseded versions were not kept the written revision rate
+  is not low but **unmeasured**. **What the design gets right:**
+  `RM_001` the inversion is `null-harness`'s invariant stated about a
+  field method — a stable environment does not discriminate, so a test
+  both a working and a broken instance passes is not a test, which is
+  `IS_001`'s sampling-frame trap in the other direction; and `RM_007`
+  `CHANGE AS FRAME` is the two-columns discipline stated before any
+  data, with a mismatch between the outside record's partition and the
+  holders' promoted to a finding rather than reconciled away
+  (`RT_002`'s structure, reached independently), alongside
+  `SURVIVOR SITES ONLY`, whose truncation is stated with its
+  consequence and a partial remedy. **`RM_009` UNVERIFIED:** nothing
+  here is evidence for or against any of the four predictions; every
+  result is about the design's arithmetic and vocabulary. One declared
+  `no_severity` exemption (`error`) measured with the three-arm
+  harness, the drop's own name for the quantity. 57 selftest checks.
+  Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
