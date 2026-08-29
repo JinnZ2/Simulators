@@ -7648,10 +7648,16 @@ underneath).
   shortcut for a study one cannot run is to generate plausible sites
   and publish a table that reads like a result. Nothing here models a
   site, a holder, a tradition or a community; the only objects are a
-  line, a step, and binomial noise. **`RM_008`:** M1–M8 is named,
+  line, a step, and binomial noise. **`RM_008`, CLOSED by arrival:** M1–M8 was named,
   absent and **not reconstructed** — six of the design's measures key
   off the companion scheme, and a coding scheme is data, so inventing
-  it would put a category system in the author's mouth. **`RM_002`,
+  it would put a category system in the author's mouth. The companion
+  landed as `transmission-decay/` and the scheme is now **imported**,
+  which is what shows the call was right: the delivered components are
+  a hazard-specific vocabulary (*source identified*, *trigger named*,
+  *routing correct*, *precursor signs*) no reasonable invention would
+  have produced, and every number keyed to an invented scheme would
+  have been about the invention. **`RM_002`,
   the computed result: one site pair carries three of the four
   comparisons and cannot carry the second at any per-site precision.**
   Comparison 1 is a presence/absence contrast on two sites (a pair is
@@ -7696,8 +7702,74 @@ underneath).
   here is evidence for or against any of the four predictions; every
   result is about the design's arithmetic and vocabulary. One declared
   `no_severity` exemption (`error`) measured with the three-arm
-  harness, the drop's own name for the quantity. 57 selftest checks.
+  harness, the drop's own name for the quantity. 61 selftest checks.
   Stdlib only, parses under 3.9, CC0.
+- `transmission-decay/` — The companion study to `revision-mechanism/`:
+  the decay rate of transmitted hazard knowledge, measured as the
+  generational distance at which an account shifts from **mechanism**
+  (actionable causal structure) to **story** (narrative kept, structure
+  lost). `SOURCE_DROP.md` verbatim; `scheme.py` **parses** the delivered
+  M1–M8 component list, S1–S3 story codes and C0–C3+ chain positions out
+  of the document, so an edit there and not here turns the selftest red.
+  **The study is not run and is not simulated** — it needs fieldwork and
+  collective consent, and its own ethics section says *"A study that
+  extracts a decay rate while accelerating the extraction is
+  self-defeating"* and warns that **the ACTION components (M7) may be
+  more sensitive than mechanism ones** — so no synthetic valley,
+  informant, account or transmission chain stands in for a real one
+  anywhere in the folder, and no action rule is contained or invented.
+  **`TD_001`:** this is the scheme `revision-mechanism` `RM_008`
+  recorded as named-and-absent with the falsifier *"the companion study
+  landing"*; it landed, `RM_008` closes, the scheme is **imported**
+  rather than described, and **the arrival is what shows the refusal was
+  right** — the delivered components are hazard-specific (*routing
+  correct*, *precursor signs*, *chained consequence*) in a way no
+  reasonable invention would have produced. **`TD_002`, the computed
+  result: the design's stated most-useful output is its expensive form
+  and its two headline questions are its cheap form.** The drop calls
+  component order *"the most useful output"* and then asks two things
+  that are not orderings (does M7 outlive M3, does M8 drop first), and
+  the three cost wildly different amounts — at 20 informants per chain
+  position the full eight-component order recovers **0.007** of the
+  time, *M8 first* (one against seven) **0.753**, and one named pair
+  **0.919**; the full order is still only ~0.36 at 160. Both headline
+  questions are the pair form, so one valley answers the questions and
+  not the ordering. A twenty-point retention gap between two named
+  components is decidable at ~10–20 per position; a ten-point gap takes
+  ~80. **`TD_003`/`TD_004`, the half-life:** its resolution follows from
+  the **axis**, not the sample — four levels, three ordered, so the
+  finest statement possible is *"between C0 and C1"* and no number of
+  informants makes it finer, which is why `halflife_bracket()` returns
+  the bracketing interval and never an interpolated value; and `C3+` is
+  defined as *the absence of a traceable chain*, so it is the absence of
+  a chain position rather than a value of one, and a curve fitted across
+  it assigns a coordinate to a category that has none. **`TD_005`:**
+  `M3` versus `M7` is the diagnostic in **both** companion studies under
+  two different selection pressures (revision under environmental
+  change; decay under generational distance), and neither document says
+  whether the same ordering is expected under both — the cheapest thing
+  either could add. **`TD_006`:** `OUT-MIGRATION SURVIVORSHIP` and
+  `LANGUAGE AND REGISTER` are the absent-vs-known-negative repair
+  designed in before any data, on the sample and on the coding
+  respectively. **`TD_007`:** correctness is checked against the
+  instrumented record, which makes the physical channel the arbiter of
+  the knowledge channel — and the drop's own framing is why that is not
+  neutral. **`TD_009`, in my own module:** `scheme.py --selftest` exited **0
+  silently** — a pass on an invocation that runs nothing, the
+  `DL_005`/`CC_006` shape at a new site (not an empty report but no
+  report), in the one file every number downstream depends on; repaired
+  by **refusing** (exit 2, naming where the checks live) rather than by
+  copying `selftest_power.py`'s checks into it, with a bare invocation
+  now rendering the parsed scheme. **`TD_008` UNVERIFIED:** nothing here
+  is evidence about transmission; every result is about the design's arithmetic and
+  vocabulary. The retention profile behind the power tables is
+  **arbitrary and declared** in the module and reprinted in the report,
+  explicitly NOT a prediction about any component, since which component
+  drops first is the design's own output. Check count is printed by
+  `selftest_power.py`; `scheme.py` is a parser and **refuses**
+  `--selftest` rather than exiting 0 on an invocation that runs
+  nothing, which is the `DL_005`/`CC_006` shape. Stdlib
+  only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

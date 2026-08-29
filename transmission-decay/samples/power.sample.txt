@@ -1,0 +1,82 @@
+TRANSMISSION DECAY -- what one valley delivers
+
+SOURCE_DROP.md asks: "Run it in one valley. Publish the component
+order and the provenance coding, including the cells you could not
+fill." This computes which of its outputs one valley can carry.
+
+THE STUDY IS NOT RUN AND IS NOT SIMULATED. It requires fieldwork
+and collective consent, and its own ethics section says a study
+that extracts a decay rate while accelerating the extraction is
+self-defeating. No synthetic valley, informant, account, or
+transmission chain stands in for a real one anywhere below. The
+only objects are abstract retention probabilities and binomial
+noise.
+
+0. THE CODING SCHEME, PARSED
+   8 M-components, 3 S-codes, 4 chain positions
+     M1  source identified
+     M2  trigger named
+     M3  mechanism stated
+     M4  routing correct
+     M5  timing/seasonality
+     M6  precursor signs
+     M7  ACTION rule
+     M8  chained consequence
+   This is the scheme `revision-mechanism` recorded as
+   named-and-absent. It landed, so that folder imports it from here
+   rather than describing its absence, and its RM_008 closes.
+
+1. THE HALF-LIFE'S RESOLUTION FOLLOWS FROM THE AXIS
+   levels: C0, C1, C2, C3+
+   ordered positions: 3   open catch-all: C3+
+   intervals available: 3
+   finest statement possible: "between C0 and C1"
+   a half-life on this axis names an interval between two adjacent
+   levels and cannot be finer. That is a property of the axis and
+   no number of informants changes it.
+   AND: C3+ is defined as the absence of a traceable chain, so
+   treating it as position 3 in a fitted curve assigns a coordinate
+   to a category that does not have one.
+
+2. COMPONENT ORDER IS THE EXPENSIVE FORM OF THE QUESTION
+   The drop calls component order "the most useful output" and then
+   asks two questions that are not orderings: does M7 outlive M3,
+   and does M8 drop first. Those cost very different amounts.
+
+   informants coded per chain position:
+   n      full 8-order   M8 first (1 v 7) one named pair
+   5      0.000          0.360            0.754
+   10     0.000          0.570            0.867
+   20     0.007          0.753            0.919
+   40     0.060          0.883            0.959
+   80     0.167          0.960            0.997
+   160    0.360          0.997            1.000
+
+   The retention profile behind these is arbitrary and declared:
+   arbitrary and declared. Spaced to make the ordering arithmetic
+   runnable. NOT a prediction about any component, because which
+   component drops first is the design's output.
+
+   Reading across: the full eight-component order is out of reach
+   at any plausible one-valley sample -- 0.7 percent at twenty
+   informants per position, and still only about a third at a
+   hundred and sixty. "M8 drops first" is one component against
+   seven and costs about forty. A single named pair -- which is the
+   form BOTH of the drop's headline questions take -- is affordable
+   at ten to twenty.
+
+   So the design's stated most-useful output is the expensive form,
+   and its own two headline questions are the cheap form. Someone
+   running one valley can answer the questions and not the
+   ordering.
+
+3. WHAT A NAMED PAIR COSTS, BY EFFECT SIZE
+   n      gap=0.10  gap=0.20  gap=0.30
+   5      0.616     0.754     0.890   
+   10     0.734     0.867     0.953   
+   20     0.738     0.919     0.980   
+   40     0.793     0.959     0.987   
+   80     0.926     0.997     1.000   
+   A twenty-point retention difference between two named components
+   is decidable at about ten to twenty informants per chain
+   position. A ten-point difference takes eighty.

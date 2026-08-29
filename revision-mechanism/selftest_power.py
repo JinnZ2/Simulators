@@ -104,7 +104,12 @@ def run():
     # -- 8. M1-M8 is absent and is not reconstructed
     d = P.m1_m8_dependency()
     chk("the drop names the scheme", d["scheme_named"])
-    chk("it is not in this repository", not d["in_this_repo"])
+    # RM_008's falsifier was "the companion study landing". It landed.
+    chk("it IS now in this repository", d["in_this_repo"])
+    chk("with eight components", d["n_components"] == 8)
+    chk("imported, not copied", "imported" in d["source"])
+    chk("and comparison 3's M3 and M7 resolve",
+        d["comparison_3_terms_resolve"])
     chk("and was not reconstructed", not d["reconstructed"])
     chk("six measures key off it",
         len(d["measures_keyed_to_it"]) == 6)
@@ -126,7 +131,10 @@ def run():
         "One site pair" in out)
     chk("it shows the tie rather than describing it", "tie" in out)
     chk("it names the absent scheme", "M1-M8" in out)
-    chk("and refuses to reconstruct it", "reconstructed: False" in out)
+    chk("and records that it was not reconstructed",
+        "reconstructed: False" in out)
+    chk("the report shows the components now that they resolve",
+        "M1, M2" in out)
 
     # -- 10. the screen
     sys.path.insert(0, os.path.join(P.ROOT, "sheet-structure-scan"))

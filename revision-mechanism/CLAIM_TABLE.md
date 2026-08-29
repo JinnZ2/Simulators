@@ -27,7 +27,7 @@ claim, never the delivered design.
 | `RM_005` | The held-obsolete rate is called *"the single most comparable number across sites"* and its comparability rests entirely on the coding scheme that is absent. | SUPPORTED |
 | `RM_006` | Comparison 4 compares a revision in a written record against a revision in a living system, and the drop's own reasoning is why they may not be one object. | SUPPORTED |
 | `RM_007` | `CHANGE AS FRAME` is the two-columns discipline designed in, and it makes a mismatch a finding rather than noise. | SUPPORTED |
-| `RM_008` | M1–M8 is named, absent, and not reconstructed. Six of the design's measures key off it. | SUPPORTED |
+| `RM_008` | M1–M8 is named, absent, and not reconstructed. Six of the design's measures key off it. | **CLOSED 2026-08-26** — the companion study landed; the scheme is imported, never reconstructed |
 | `RM_009` | Nothing here is evidence about any transmission system. The ethics constraint is a constraint on this audit, not only on the fieldwork. | UNVERIFIED |
 
 ---
@@ -260,6 +260,20 @@ grepped `M1 `..`M8 ` and fired on my own *references* to comparison 3
 before it got the corpus.
 
 **Falsifier:** the companion study landing.
+
+**FIRED, 2026-08-26.** It landed as `transmission-decay/`. The scheme
+is now **imported** from `transmission-decay.scheme.COMPONENTS` rather
+than described as absent — eight components, comparison 3's `M3` and
+`M7` both resolve, and the import means the two folders cannot drift.
+
+Recorded rather than quietly updated because the claim's whole content
+was that a coding scheme is data and inventing it would put a category
+system in the author's mouth. Not reconstructing it was the right call
+and the arrival is what shows it: the delivered `M1..M8` are a
+hazard-specific vocabulary — *source identified*, *trigger named*,
+*routing correct*, *precursor signs* — that no reasonable invention
+would have produced, and every number keyed to an invented scheme would
+have been about the invention.
 
 ## RM_009 — the ethics constraint binds this audit
 

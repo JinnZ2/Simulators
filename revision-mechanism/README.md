@@ -4,7 +4,7 @@ A study design for how transmission systems **update** what they know
 when conditions move — the revision mechanism, not the content.
 
 `SOURCE_DROP.md` is delivered verbatim. `power.py` computes the one
-thing in it that needs no field data; `selftest_power.py` is 57 checks.
+thing in it that needs no field data; `selftest_power.py` is 61 checks.
 
     python3 revision-mechanism/power.py             # the report
     python3 revision-mechanism/power.py --selftest
@@ -27,11 +27,17 @@ So **nothing here models a site, a holder, a tradition, or a
 community.** The only objects in `power.py` are a line, a step, and
 binomial noise.
 
-**M1–M8 is named, absent, and not reconstructed.** Six of the design's
-measures key off the companion study's coding scheme, which is not in
-this repository. A coding scheme is data; inventing it would put a
-category system in the author's mouth and every number downstream
-would be about the invention.
+**M1–M8 was named, absent, and not reconstructed — and then it
+landed.** Six of the design's measures key off the companion study's
+coding scheme. `RM_008`'s stated falsifier was *"the companion study
+landing"*, and it did, as `transmission-decay/`. The scheme is now
+**imported** rather than described as absent, so the two folders
+cannot drift.
+
+Not reconstructing it was the right call and the arrival is what shows
+it: the delivered components are a hazard-specific vocabulary —
+*source identified*, *trigger named*, *routing correct*, *precursor
+signs* — that no reasonable invention would have produced.
 
 ## What is computed
 
@@ -142,7 +148,7 @@ the truncation at the failure end rather than estimating around it."*
 |---|---|
 | `SOURCE_DROP.md` | delivered verbatim |
 | `power.py` | the detectability computation, the unassessed-component bias, the comparison classification |
-| `selftest_power.py` | 57 checks |
+| `selftest_power.py` | 61 checks |
 | `CLAIM_TABLE.md` | `RM_001..RM_009` with a REFUTATION_PROTOCOL |
 | `samples/` | pinned run |
 

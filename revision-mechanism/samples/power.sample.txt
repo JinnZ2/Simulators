@@ -12,10 +12,13 @@ the mechanism being studied. No synthetic site stands in for a real
 one anywhere below. The only objects are a line, a step, and
 binomial noise.
 
-0. THE COMPANION SCHEME IS NOT HERE
+0. THE COMPANION SCHEME
    M1-M8 named in the drop: True
-   present in this repository: False
+   present in this repository: True
    reconstructed: False
+   components: M1, M2, M3, M4, M5, M6, M7, M8
+   source: transmission-decay.scheme.COMPONENTS, imported
+   comparison 3's M3 and M7 resolve: True
    measures that key off it:
      - STATUS (per component)
      - REVISION PROVENANCE (per component)
@@ -23,9 +26,10 @@ binomial noise.
      - HELD-OBSOLETE RATE (denominator is components)
      - ROBUSTNESS FORM (per component)
      - comparison 3 (M3 vs M7 by name)
-   a coding scheme is data. Inventing M1-M8 would put a category
-   system in the author's mouth and every number downstream would
-   be about the invention.
+   a coding scheme is data. Inventing M1-M8 would have put a
+   category system in the author's mouth and every number
+   downstream would have been about the invention. It landed
+   instead, and is imported.
 
 1. WHAT ONE SITE PAIR CARRIES
    #   comparison                                 kind           at a pair

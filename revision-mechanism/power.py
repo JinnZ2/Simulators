@@ -221,12 +221,39 @@ def comparisons():
     ]
 
 
+def _companion_scheme():
+    """The scheme, IMPORTED from the companion study.
+
+    It landed 2026-08-26. Imported rather than copied so the two
+    cannot drift, and so this folder stops describing an absence that
+    is no longer one.
+    """
+    p = os.path.join(ROOT, "transmission-decay")
+    if not os.path.isdir(p):
+        return None
+    if p not in sys.path:
+        sys.path.insert(0, p)
+    import scheme as SC
+    return SC
+
+
 def m1_m8_dependency():
-    """How much of the design keys off the absent coding scheme."""
+    """How much of the design keys off the companion coding scheme.
+
+    Was: named and absent. RM_008's stated falsifier was "the
+    companion study landing", and it landed.
+    """
     txt = open(DROP, encoding="utf-8").read()
+    SC = _companion_scheme()
     return {
         "scheme_named": "M1–M8" in txt or "M1-M8" in txt,
-        "in_this_repo": False,
+        "in_this_repo": SC is not None,
+        "components": sorted(SC.COMPONENTS) if SC else [],
+        "n_components": len(SC.COMPONENTS) if SC else 0,
+        "source": ("transmission-decay.scheme.COMPONENTS, imported"
+                   if SC else None),
+        "comparison_3_terms_resolve": bool(
+            SC and "M3" in SC.COMPONENTS and "M7" in SC.COMPONENTS),
         "reconstructed": False,
         "measures_keyed_to_it": [
             "STATUS (per component)",
@@ -237,10 +264,11 @@ def m1_m8_dependency():
             "comparison 3 (M3 vs M7 by name)",
         ],
         "why_not_reconstructed": "a coding scheme is data. Inventing "
-                                 "M1-M8 would put a category system in "
-                                 "the author's mouth and every number "
-                                 "downstream would be about the "
-                                 "invention.",
+                                 "M1-M8 would have put a category "
+                                 "system in the author's mouth and "
+                                 "every number downstream would have "
+                                 "been about the invention. It landed "
+                                 "instead, and is imported.",
     }
 
 
@@ -317,11 +345,16 @@ def render():
               "step, and binomial noise.", ind="")
     o.append("")
 
-    o.append("0. THE COMPANION SCHEME IS NOT HERE")
+    o.append("0. THE COMPANION SCHEME")
     d = m1_m8_dependency()
     o.append("   M1-M8 named in the drop: %s" % d["scheme_named"])
     o.append("   present in this repository: %s" % d["in_this_repo"])
     o.append("   reconstructed: %s" % d["reconstructed"])
+    if d["in_this_repo"]:
+        o.append("   components: %s" % ", ".join(d["components"]))
+        o.append("   source: %s" % d["source"])
+        o.append("   comparison 3's M3 and M7 resolve: %s"
+                 % d["comparison_3_terms_resolve"])
     o.append("   measures that key off it:")
     for m in d["measures_keyed_to_it"]:
         o.append("     - %s" % m)
