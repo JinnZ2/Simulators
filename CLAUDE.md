@@ -8046,6 +8046,52 @@ underneath).
   inside a verbatim quote) under the three-arm harness. Check count
   printed by `selftest_ccc.py`; both modules refuse `--selftest`. Stdlib
   only, parses under 3.9, phone-buildable, CC0.
+- `reservoir-chain-coupling/` — The antecedent-coupling amplifier
+  `columbia-chain-cascade` `CCC_001` flagged as truncated, now delivered
+  as a complete initiator-agnostic spec — and unlike that HEC-RAS build
+  spec, **this drop's core claim is not hydraulics but an operator swap,
+  so it runs here**. The claim: serial reservoir chains are evaluated
+  per-structure as if separable, but `outcome(node n)` IS the initial
+  condition of node n+1, and the error reduces to
+  `max(wave, pool)` versus `wave + pool` against a breach threshold.
+  `SOURCE_DROP.md` verbatim; `operator_swap.py` is the arithmetic and
+  `chain.py` runs the spec's own minimal falsifiable test (RUN 1
+  independent `max`, RUN 2 coupled `sum`, compare breach sets) on
+  **constructed chains with `route()` held to an abstract combiner,
+  every coefficient synthetic and marked** — nothing here is a claim
+  about any real reservoir. **`RCC_002`, one-sided:** `max(a,b) ≤ a+b`,
+  so independent-node evaluation **never** breaches a node coupled
+  evaluation does not — the error has a sign, always toward reporting
+  the chain safer than it is (`extraction-blindness-sim`'s one-sided
+  operators on a threshold), asserted over a full small-integer sweep.
+  **`RCC_003`, the gain made exact:** the disagreement band is
+  `crest − pool ≤ wave < crest`, width **exactly the antecedent pool**,
+  so the spec's *"antecedent state is the gain"* is quantitative — a
+  node near crest has a wide band of waves it passes as safe and coupled
+  physics does not, a node with full freeboard has none. **`RCC_005`:**
+  on the signal chain the swap is load-bearing and **compounds
+  downstream** (independent breaches nothing as the wave attenuates;
+  coupled breaches all four as each breach raises the wave into the
+  next), which a one-node reach study cannot produce — the spec's
+  *"amplification only appears across nodes"*. **`RCC_006`:** the
+  harness is not `CONSTANT_FIRES` — two constructed nulls (full
+  freeboard, no freeboard) report the spec's own REFUTED verdict, and
+  bound the effect to the intermediate band. **`RCC_007`, FIRM/SOFT:**
+  the one-sided bias, the band width and the existence of compounding
+  survive a 16-point sweep of the synthetic coefficients, so they are
+  properties of the operator swap and not the toy's magnitudes
+  (`sustained-activation-gate` discipline); the mapping to real breach
+  is SOFT. **`RCC_008`:** this is the Module F amplifier the sibling
+  flagged, in initiator-agnostic form, cross-referenced rather than
+  marked continued (no Columbia node list here); the governance section
+  is the general form of the sibling's *"mixed ownership → no single
+  entity's plan spans the chain"*, whose Columbia instantiation
+  `eap_coverage.py` already computed. **`RCC_009` UNVERIFIED:** whether
+  the coupling is load-bearing for any real chain is the HEC-RAS run on
+  published data — unreachable here, measured in the sibling. No
+  `no_severity` exemptions, every hit reworded. Check count printed by
+  `selftest_rcc.py`; both modules refuse `--selftest`. Stdlib only,
+  parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
