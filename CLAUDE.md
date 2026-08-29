@@ -7916,6 +7916,83 @@ underneath).
   refuse `--selftest`; no `no_severity` exemptions, every hit reworded.
   Check count printed by `selftest_msd.py`. Stdlib only, parses under
   3.9, phone-buildable, ~20s, CC0.
+- `household-scope-audit/` — Family-functioning, parenting-capacity and
+  child-welfare risk instruments are scoped to the household because
+  that is the level dysfunction is *observed* at, so conditions imposed
+  from outside it are absent or present only as an attribute of the
+  caregiver — and an externally caused state then has nowhere to land
+  except on the persons measured. `SOURCE_DROP.md` verbatim; the ask is
+  Arm 1 and *"a reading room and a coding scheme, nothing else"*.
+  **The scheme is built and the reading room is not substituted for** —
+  every publisher, statutory and archive host returns no response
+  (measured, allowlist egress, only `github.com` answers) and **no
+  instrument item is invented, paraphrased or coded anywhere in the
+  folder**, since a fabricated E-fraction table would read as a result
+  about tools that carry weight in decisions about real families; the
+  fixtures are authored in `coding.py` and labelled there. **`HSA_002`,
+  the finding: `X` is not a property of the item.** LOCUS has `P` =
+  property of a person and `X` = external condition coded AS one, and
+  nothing in the text separates them — both have a person as subject —
+  so what separates them is a claim about housing markets and shift
+  rotas, and **two coders who disagree produce different X-fractions on
+  identical items**, on one of the three published outcomes, in an audit
+  whose subject is misattribution. **`HSA_003`:** declaring ONE
+  fixture's cause, changing no text, moves **two of the three
+  outcomes** — X-fraction 0.2308 → 0.3077 and the attenuation
+  denominator 7 → 6, since coverage is taken over P and H items — while
+  E-fraction is unchanged as the control; **and the direction
+  flatters**, because the item that moved carried no attenuation rule so
+  its departure RAISED coverage 0.1429 → 0.1667: attributing more to
+  external cause makes the instrument score higher on discounting for
+  external cause, on an unchanged manual. **`HSA_007`, the repair,
+  built:** LOCUS is DERIVED and never hand-set (AST-asserted) from
+  `subject_class` (mechanical, from the item's grammatical subject via
+  `nonidentity-census`'s extractor, **imported** not reimplemented,
+  recomputable by anyone with the text) and `externally_caused`
+  (declared per item WITH a basis, **refused** without one in both
+  directions) — so a person-subject item with the cause `NOT_DECLARED`
+  codes **P, not X**, a conclusion nobody declared not being one, with
+  two fixtures exercising that near-miss. **`HSA_004`:** the confound
+  the drop excludes from Arm 1 — reverse causation, *"the audit arm is
+  unaffected"* — reaches it, true of the E-fraction and false of the
+  X-fraction from the drop's own definitions, since reverse causation is
+  exactly the case where a person-subject item's variable is NOT
+  externally caused (X 0.3077 against 0.2308, E unchanged either way).
+  **`HSA_005`:** DIRECTIONALITY is coded and has **no outcome** (as is
+  ACTIONABILITY TARGET), and it is the field separating *records* from
+  *explains* — two item sets identical on all three published outcomes
+  differ 0.5 against 0.0 on it, so an instrument that records external
+  conditions and never lets them do any work is indistinguishable in the
+  published numbers from one that does; returned as
+  `explain_fraction_ADDED`. **`HSA_006`:** three outcomes, three
+  denominators, one named — and where the unclassified items sit is
+  unspecified and moves E-fraction 0.1538 → 0.1667, in the direction of
+  the drop's own prediction; both reported, neither picked.
+  **`HSA_008`, what the drop gets right:** `UNCLASSIFIED` is required by
+  the ask itself before any code existed — the absent-vs-known-negative
+  repair designed in — and the classifier is null-tested both ways (6 of
+  6 classified, 0 of 3 forced); this is also the **third** drop in the
+  family to invoke the null-rate instrument and the **first to ship the
+  partner**, E-fraction pairing with attenuation coverage where
+  `evaluation-frame` M4 and `move-set-derivation` Arm 1 each shipped one
+  side. **`HSA_009`:** a second constraint binds whoever does have the
+  reading room — much instrument wording is licensed, so the scheme
+  codes by reference with the text optional, and the field most in need
+  of checking is then the hardest to publish beside its item; the
+  instrument-specific half is hedged as carried-and-unchecked.
+  **`HSA_010`:** Arm 2's *"interesting cell"* (a practitioner who names
+  the external condition and still scores the person deficient) is
+  ambiguous between the instrument having no field and the scorer having
+  no mandate, which the drop's own STATUTORY CONSTRAINT confound calls
+  *"different limits with the same effect"* — resolvable by the
+  mandate-scope field the design already specifies, so the gap is in the
+  claim sentence. **`HSA_011` UNVERIFIED:** nothing here bears on the
+  drop's stated retraction condition in either direction; Arms 2 and 3
+  are UNMEASURED and a simulated practitioner panel would be a
+  fabricated claim about practitioners. No `no_severity` exemptions,
+  every hit reworded. Check count printed by `selftest_hsa.py`; both
+  modules refuse `--selftest`. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

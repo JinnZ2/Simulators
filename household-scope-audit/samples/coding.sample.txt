@@ -1,0 +1,25 @@
+THE CODING SCHEME, ON AUTHORED FIXTURES
+
+  13 items authored in this file to exercise the coder.
+  NOT drawn from any published instrument, and no fraction over them is a statement about any instrument.
+
+  ref     LOCUS         subject       head        ext?   direction   attenuation
+  FX-01   P             PERSON        parent      NOT_DECLARED NOT_DECLARED NONE
+  FX-02   P             PERSON        caregiver   NOT_DECLARED NOT_DECLARED DISCRETIONARY
+  FX-03   H             HOUSEHOLD     household   NOT_DECLARED NOT_DECLARED NONE
+  FX-04   H             HOUSEHOLD     family      NOT_DECLARED CO_OCCURS   DISCRETIONARY
+  FX-05   E             CONDITION     schedule    NOT_DECLARED EXPLAINS    NOT_DECLARED
+  FX-06   E             CONDITION     service     NOT_DECLARED CO_OCCURS   NOT_DECLARED
+  FX-07   X             PERSON        caregiver   True   NOT_DECLARED NONE
+  FX-08   X             PERSON        parent      True   NOT_DECLARED DISCRETIONARY
+  FX-09   P             PERSON        caregiver   NOT_DECLARED NOT_DECLARED NONE
+  FX-10   P             PERSON        parent      False  NOT_DECLARED NONE
+  FX-11   UNCLASSIFIED  UNCLASSIFIED  supervision NOT_DECLARED NOT_DECLARED NOT_DECLARED
+  FX-13   P             PERSON        caregiver   NOT_DECLARED EXPLAINS    MANDATORY
+  FX-12   X             PERSON        -           True   NOT_DECLARED NONE
+
+  n items 13   unclassified 1
+  E-fraction            0.1538   over 13
+  X-fraction            0.2308   over 13
+  attenuation coverage  0.1429   over 7
+  explain fraction      0.5      over 4   ADDED, not one of the three
