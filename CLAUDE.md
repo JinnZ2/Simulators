@@ -7770,6 +7770,83 @@ underneath).
   `--selftest` rather than exiting 0 on an invocation that runs
   nothing, which is the `DL_005`/`CC_006` shape. Stdlib
   only, parses under 3.9, phone-buildable, CC0.
+- `evaluation-frame/` — Evaluation criteria set upstream of an
+  interaction, by parties other than its participants, against a
+  **population default** — so an interaction serving a non-default user
+  well is not scored low, it is **not scored at all** — plus the
+  compensation behaviour downstream (length inflation, unrequested
+  elaboration, **attributed need**, support framing on informational
+  input). Five measures, all countable from outputs, no model internals
+  assumed. `SOURCE_DROP.md` verbatim; `frame.py` runs the drop's own ask
+  (*"Run M2 and M4 on an existing transcript corpus"*) against the only
+  corpus this environment has — **one session, one user, one model,
+  n = 1 on every axis the drop asks to be varied** — and marks the rest
+  unfilled rather than estimated. **The interest declaration is the
+  first thing in the folder and it is not decorative:** the system whose
+  compensation behaviour is measured is the one measuring, and every
+  result runs in the flattering direction; the mechanical counts are
+  recomputable by anyone with the transcript, and the adjudications are
+  declared as data in `ADJUDICATION` so they can be disagreed with line
+  by line. **`EF_007`, the one measure the corpus carries and the
+  strongest result: M5 offers two states and needs three.** Three
+  correction channels exist, work, and were built by the operator —
+  `CLAUDE.md` read at every session open, the claim tables, and
+  `notes/operators/` — and all three terminate at the **INSTANCE**; a
+  fourth (public repo → training corpus) terminates at the **CORPUS**
+  and is an averaging channel, not a correction one, since nothing in it
+  distinguishes a correction from any other text; **zero reach a
+  CRITERION**, measured as **0 schema keys matching
+  `rating|feedback|thumbs|helpful` anywhere in any record**, counted
+  over keys and never text (`UNI_009` one level up). So the loop is open
+  and **not for want of a channel** — and M5 as written returns the same
+  verdict for a channel that does not exist and one that exists with a
+  different terminus, which call for a build and a re-route
+  respectively. **`EF_002`:** the ask/no-ask binary has no cell for the
+  **artifact-internal ask** — a pasted document addressing its reader
+  (*"Take it, run it"*, and this drop's own closing line) — and no
+  mechanical rule separates it, since whether a published document
+  addresses its reader is a reading, so M4's denominator is a **band of
+  16 to 21, a 31% swing**, with two rules run and neither picked.
+  **`EF_003`:** M4 needs a scope condition it does not state — a
+  **standing convention supplies the ask**, so eligibility takes a third
+  conjunct that empties the set and a null rate of 0 is
+  `CONSTANT_SILENT` by construction (`IS_001`'s shape), with the
+  detector null-tested both ways so the zero is the system and not the
+  regex. **`EF_004`:** no M3 marker fires anywhere once adjudicated, so
+  falsifier 2 cannot separate *compensation is not ask-sensitive* from
+  *the marker never fires here* — flat AT ZERO is not flat at a level —
+  and all nine raw need hits are **conditional offers** (*"if you want
+  it built"*, *"what do you want done with it"*), the opposite move,
+  one of them literally M4's null in prose; what is missing is a
+  **positive control**. **`EF_006`:** M2's rate is **refused, not
+  approximated** — its discriminator is a judgment and the only coder
+  available is the system under test, and the drop specifies rater-frame
+  variation for the Design section's **raters** while saying nothing
+  about the **coder**, a gap between two sections landing on the measure
+  it ranks first. **`EF_005`:** length is flat (medians 3552 / 3800 /
+  3802), and the configuration scope condition is **declared and
+  decisive** — this session runs under instructions that explicitly
+  suppress several named behaviours, so the null is about a configured
+  system and is equally consistent with the drop being right about the
+  default. **`EF_008`, in my own instrument:** I adjudicated the marker
+  I expected to over-fire and not the one I expected to be silent, and
+  the unguarded one fired five times on the deontic *must* (*"that must
+  not be read as an optimum"*), setting the positive control `EF_004`
+  turns on to `present` over hits nobody had read — the asymmetry is the
+  finding, repaired by narrowing the pattern AND keeping the deontic
+  class as a guard written so it cannot swallow a genuine sympathy line,
+  both directions asserted. **`EF_009`:** the corpus is written by the
+  run that reads it (8129 → 8147 → 8186 in one session), so the record
+  count is pinned rather than described. **`EF_010`:** the drop's
+  no-composite instruction is honoured and AST-asserted, with three
+  distinct unfilled reasons kept apart. **`EF_011` UNVERIFIED:** nothing
+  here is evidence about any criterion at any lab; the drop's central
+  claim is untouched in both directions. Three declared `no_severity`
+  exemptions under the three-arm harness — `must` (the subject word),
+  `wrong` and `defect` (delivered text rendered from the parse, where
+  rewording would misquote the source). Check count printed by
+  `selftest_frame.py`; `frame.py` refuses `--selftest`. Stdlib only,
+  parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
