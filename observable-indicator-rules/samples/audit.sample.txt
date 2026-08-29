@@ -1,0 +1,71 @@
+OBSERVABLE-INDICATOR RULES -- what building the pipeline surfaces
+
+The spec calls the post-processing 'stdlib, phone-buildable' and
+the router 'the only non-phone term'. So the router output is an
+INPUT: pipeline.py consumes a time-resolved depth field and never
+runs a solver. Every field here is SYNTHETIC (ensembles.py),
+constructed so ground truth is known. Nothing is a real
+community; the findings are about the pipeline's logic.
+
+1. THE FALSIFIABLE CONDITION FIRES, BOTH WAYS
+   flipping ensemble -> empty output: True
+   stable ensemble   -> non-empty:    True
+   The spec: 'empty output is a valid, honest result'. A pipeline
+   that always emitted a rule would be CONSTANT_FIRES; this one
+   returns nothing when every pair flips, and rules when they do
+   not. honest.
+
+2. THE ORDINAL BET HOLDS -- sequence survives where magnitude does
+   not
+   stable pairs found: 3
+   bridge -> house lead band: 2 to 9.2 steps (width 7.199999999999999)
+   The order is invariant while the gap varies 5x across runs, so
+   the band is wide and the point estimate would lie. Reporting
+   the band, and planning against the short end, is the honest
+   product -- and it is what the spec asks for.
+
+3. THE FINDING -- STEP 3 IS BLIND TO FALSE ALARMS
+   A trigger with a perfectly stable order is kept by step 3: True
+   its miss rate:        0.0   (step 3 forces this ~0)
+   its false-alarm rate: 0.5   (step 3 does NOT constrain this)
+   4 true positives, 4 false alarms.
+
+   Step 3 drops a pair on any MISS -- a dry trigger when the
+   hazard wets flips the sign. It does NOT drop on a FALSE ALARM
+   -- a dry hazard when the trigger wets reads as trigger-before-
+   hazard, the SAME sign as a true positive. So a trigger that
+   cries wolf half the time passes, and the spec's card carries a
+   clean lead band with no line for it.
+
+   For a rule people ACT on -- evacuate every time it fires -- the
+   false-alarm rate is what decides whether they obey it the
+   tenth time. The pipeline computes the timing (ordering + short-
+   end band) and neither error rate. reliability() adds both; the
+   card here carries a REL line the spec's card does not.
+
+4. THE STABILITY CRITERION IS OVER-STRICT, WHICH IS THE SAFE WAY
+   a pair that ties in one run and is ordered in another:
+     strict sign-invariance keeps it: False
+     the weak order (A never after B) holds: True
+   So the spec's criterion DROPS a weak-but-valid ordering. That
+   loses some usable rules -- but it drops rules rather than
+   inventing them, which is the correct direction to fail for a
+   life-safety card. Recorded as a containment, not a fault.
+
+5. RUNS WITH NO WETTING CARRY NO ORDER, AND ARE EXCLUDED
+   neither-wet run excluded from the pair check: True
+   pair still stable on the informative runs: True
+   Counting a no-information run as agreement would inflate
+   stability; as a flip would suppress a real rule. Excluding it
+   is the honest reading, and it is a [CHOICE] the spec leaves
+   open.
+
+6. WHAT THIS FOLDER DOES NOT ESTABLISH
+   No real community has a stable trigger, a false-alarm rate, or
+   a derivable card here -- that takes the router run on real
+   terrain, which is the non-phone term. What is established is
+   that the pipeline extracts stable orderings, returns empty
+   when there are none, plans against the short end, couples the
+   route -- and that as the spec writes it, the card omits
+   the two rates a person acting on it is never shown: how
+   often it fires for nothing, and how often the water comes

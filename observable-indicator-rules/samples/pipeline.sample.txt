@@ -1,0 +1,27 @@
+PIPELINE ON SYNTHETIC ENSEMBLES (see ensembles.py)
+Nothing below is a real community; every field is constructed.
+
+== stable ==
+  stable pairs: 3   empty output: False
++----------------------------------------------------+
+| IF   water is over <county_rd_bridge>
+| THEN <river_bend> closes in ~1 steps
+|      your area floods ~2 to 9.2 steps after
+| ACT  leave now, via the open route, NOT via <river_bend>
+| REL  false-alarm rate 0.0   miss rate 0.0
++----------------------------------------------------+
+
+== flipping ==
+  stable pairs: 0   empty output: True
+NO CARD: no stable trigger leaves movement_time before the route closes
+
+== false_alarm_heavy ==
+  stable pairs: 3   empty output: False
++----------------------------------------------------+
+| IF   water is over <upstream_culvert>
+| THEN <river_bend> closes in ~1 steps
+|      your area floods ~2 to 3.0 steps after
+| ACT  leave now, via the open route, NOT via <river_bend>
+| REL  false-alarm rate 0.5   miss rate 0.0
++----------------------------------------------------+
+

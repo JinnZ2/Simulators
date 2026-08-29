@@ -8092,6 +8092,55 @@ underneath).
   `no_severity` exemptions, every hit reworded. Check count printed by
   `selftest_rcc.py`; both modules refuse `--selftest`. Stdlib only,
   parses under 3.9, phone-buildable, CC0.
+- `observable-indicator-rules/` — The household-facing, output end of
+  the flood family, and the first drop in it built to run here: the spec
+  states *"post-processing is stdlib, phone-buildable; the router (2D
+  unsteady solve) is the only non-phone term"*, so **the router output
+  is an input** — `pipeline.py` consumes a time-resolved depth field and
+  never runs a solver, and the whole post-processing chain (landmarks →
+  wetting order → stability check → lead bands → route coupling → the
+  card) runs. The inversion: run the coupled solve once upstream, hand
+  the household a paper card it evaluates on sight (*IF water is over the
+  bridge THEN your road closes in ~N min, ACT leave now*), which needs
+  no channel, no compute, no permission and survives every notification
+  link failing. `SOURCE_DROP.md` verbatim; the fields in `ensembles.py`
+  are **synthetic**, authored so ground truth is known, and **nothing is
+  a claim about any real community**. **`OIR_002`, the finding: step 3
+  is a MISS filter and is blind to false alarms.** The load-bearing
+  check keeps a trigger→hazard pair only if the wetting order is
+  invariant — a miss (hazard wets, trigger dry) makes the trigger's
+  `t_wet` INF and flips the sign, so step 3 drops it (strict on the
+  fatal error), but a false alarm (trigger wets, hazard dry) reads as
+  trigger-before-hazard, the **same sign as a true positive**, so step 3
+  does NOT drop it; a trigger that cries wolf half the time passes
+  (measured false-alarm rate 0.5, miss rate 0.0 on the constructed
+  ensemble) and the spec's card carries a clean lead band with **no line
+  for it** — `null-harness`'s FP/TP on a flood card, `reliability()`
+  adds both rates and the card here carries a `REL` line the spec's does
+  not. **`OIR_001`:** the spec's falsifiable condition fires both ways —
+  a flipping ensemble returns empty output (*"empty output is a valid,
+  honest result"*), a stable one returns rules, so the pipeline is not
+  `CONSTANT_FIRES`. **`OIR_004`:** the ordinal bet holds — order fixed,
+  gaps varying 5×, the pipeline extracts the order and reports a wide
+  band planned against the short end (`min`/`p10`, never the median).
+  **`OIR_003`:** the stability criterion is over-strict (a tie drops a
+  weak-but-valid ordering), which loses rules rather than inventing
+  them — the safe direction for a life-safety card, a containment not a
+  fault. **`OIR_005`:** the route is coupled, so when it closes before
+  the house floods the trigger is upstream of the door, not at it.
+  **`OIR_006`:** a run where neither landmark wets carries no ordering
+  information and is excluded, a `[CHOICE]` the spec leaves open.
+  **`OIR_008`:** third drop in the family and its output end —
+  `columbia-chain-cascade` is the coupled solve as a build spec,
+  `reservoir-chain-coupling` the operator swap that makes it
+  load-bearing, this is what the household holds afterward. **`OIR_009`
+  UNVERIFIED:** whether any real community has a derivable card, and at
+  what false-alarm rate, needs the router run on real terrain — the
+  non-phone term, unreachable here. Two declared `no_severity`
+  exemptions (`alarm`, `error`, the finding's own vocabulary) under the
+  three-arm harness. Check count printed by `selftest_oir.py`;
+  `pipeline.py` and `audit.py` refuse `--selftest`. Stdlib only, parses
+  under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
