@@ -46,6 +46,16 @@ boundary-condition is not the coupling term. The row's own arrow
 ("a BASIN-SCALE carry, not a subsurface-only study") is the drop
 classifying it.
 
+**UPDATE 2026-08-30 (addressed forward):** the revision
+(`SOURCE_DROP_V2.md`) resolves the tension in a stronger form than
+this claim's suggested parenthetical — the headline stands and its
+*referent* is defined one paragraph down: what no record carries is
+reservoir pool loading on a multi-dam surface chain, the two existing
+carries stopping one node short of each other. The sentence this
+finding keyed on is gone, and the appendix is promoted to a primary
+source table. Checked in `revision_audit.py`; the claim keeps its
+rating on the text it rated.
+
 ## MI_003 — the drop's provenance flag is contained, and stronger than its sibling's
 
 Two of the drop's own citations are flagged unconfirmed by name
@@ -149,3 +159,78 @@ currently reach no basin.
 **Falsifier:** any carried row failing against its named source —
 which adjusts the row per the drop's citation status, not these
 claims.
+
+## MI_009 — the revision resolves MI_002 by defining the term, not hedging the headline
+
+`SOURCE_DROP_V2.md` lands verbatim beside v1 (both stay). The sentence
+`MI_002` keyed on — *"the connecting term is unstudied on both sides
+of the silo boundary"* — is gone from v2; in its place the carries are
+stated precisely (*"The two carries stop one node short of each
+other, and neither reaches a cascade"*), the headline stands with its
+referent defined one paragraph down (what no record carries is
+**reservoir pool loading on a multi-dam surface chain**), and the
+trailing appendix is promoted to a primary source table (*"Entered as
+peer sources, primary"* — *"primary, not alternative"* in the
+heading). The repair is stronger than the audit's one-parenthetical
+suggestion — the `UNI_085` shape, the actual fix beating the proposed
+one, arriving in this folder one drop after the finding.
+
+**Falsifier:** the keyed sentence surviving in v2, or the referent
+left undefined. Both are string checks on the delivered text.
+
+## MI_010 — the READ CEILING is a per-source read-depth declaration, and the scaffold honors it
+
+New in v2: *"These are entered from English-language abstracts and
+citation metadata. The CWIM boundary-condition formulation — the exact
+thing that would plug into `mining_increment.py` — is not visible at
+that depth… This is a capability limit on the audit, not an open
+question about the work."* A source's load-bearing content sitting
+below the depth it was read at is a distinct epistemic state — not
+carried-and-unverified (the row IS verified at abstract depth), not
+absent — and the entry declares it per source with the retrieval step
+routed into the method. The family's absent-vs-known-negative repair
+applied to citation depth, from the author's side. Checked here in
+both directions: the declaration's three parts are present, and the
+scaffold complies — no CWIM formulation appears in
+`mining_increment.py`, so the ceiling is honored rather than silently
+exceeded by an invented boundary condition.
+
+**Falsifier:** a CWIM formulation in the scaffold with no full-text
+source behind it. The compliance check runs on every selftest.
+
+## MI_011 — the epistemics changed and the arithmetic did not: six sections byte-identical
+
+Verified mechanically across the revision: the subsurface table, the
+governing equations with the provenance flag, the citation-status
+paragraph, the research question, the method, and the deliverable-
+plus-falsifiers are **byte-identical** between v1 and v2 — while the
+three sections the revision is about (the split paragraph, the
+transfer caveat, the why-different opening) all changed, so the diff
+check can fail in both directions. The provenance flag re-contains on
+v2 (both flagged names only inside the flag; the Knothe DOI present).
+The scaffold therefore stands unchanged on an unchanged
+specification — a revision that moved the claims and left the
+instrument alone, which is what *"the claim updates, never the
+instrument"* looks like from the author's side.
+
+**Falsifier:** any invariant section differing, or a changed section
+identical. Both lists are pinned.
+
+## MI_012 — the CONFIGURATION NOTE carries the FIRM/SOFT split into the source table
+
+*"The mechanism (stress / seepage / fracture coupling degrading a dam
+body) transfers; the configuration does not"* — the
+mechanism-versus-instantiation split this family keeps as FIRM/SOFT
+(`RCC_007`) arriving inside the author's own source table, applied to
+the CMUR dam work (a coal-pillar dam inside a mine is not a surface
+impoundment in a cascade). Beside it, two ranking rules stated as
+discipline rather than sentiment: the configuration difference *"is
+not a reason to rank these sources below an English one"*, and the
+transfer caveat's closing — *"The language of the source carries no
+weight here; the geology of the basin carries all of it."* The
+transfer gate built at v1 is exactly the instrument this rule wants:
+transfer is a physics declaration per basin with a basis, and the
+source's language has no field.
+
+**Falsifier:** a ranking or weighting anywhere in this folder keyed
+to source language. There is none; the gate's only key is the basin.

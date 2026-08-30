@@ -154,8 +154,55 @@ def run():
         len(A.EGRESS) == 3
         and all(code in ("000", "2xx") for _h, code in A.EGRESS))
 
+    # ================= THE REVISION (SOURCE_DROP_V2) =================
+    import revision_audit as RV
+
+    v2doc = io.open(os.path.join(HERE, "SOURCE_DROP_V2.md"),
+                    encoding="utf-8").read()
+    chk("both versions are in the folder and differ",
+        "READ CEILING" in v2doc and "READ CEILING" not in drop)
+
+    r2 = RV.mi002_resolution()
+    chk("the sentence MI_002 keyed on is in v1 and gone from v2",
+        r2["old_sentence_in_v1"] and r2["old_sentence_gone_from_v2"])
+    chk("the carries are stated precisely and the referent defined",
+        r2["carries_stated_precisely"] and r2["referent_defined"]
+        and r2["headline_unchanged"])
+    chk("the appendix is promoted to a primary source table",
+        r2["appendix_heading_gone"] and r2["promoted_to_primary"]
+        and r2["v1_still_carries_both"])
+
+    cn = RV.configuration_note()
+    chk("the configuration note splits mechanism from configuration "
+        "and states both ranking rules",
+        all(cn.values()))
+
+    rcl = RV.read_ceiling()
+    chk("the read ceiling declares depth, the invisible content, and "
+        "the capability-limit framing",
+        rcl["section_present"] and rcl["declares_depth"]
+        and rcl["names_the_invisible_content"]
+        and rcl["capability_limit_framing"])
+    chk("the scaffold honors the ceiling (no CWIM formulation in it)",
+        rcl["scaffold_complies"])
+
+    iv = RV.invariants()
+    chk("the six invariant sections are byte-identical across the "
+        "revision",
+        iv["all_identical"] and len(iv["identical"]) == 6)
+    chk("the three changed sections did change (the diff check can "
+        "fail both ways)",
+        iv["all_changed"] and len(iv["changed"]) == 3)
+    fc2 = RV.flag_contained_v2()
+    chk("the provenance flag is contained on v2 as well",
+        fc2["all_contained"] and fc2["anchor_doi_present"])
+
+    rvout = RV.render()
+    chk("the revision report states it computes and does not conclude",
+        "computes; it does not conclude" in rvout)
+
     # ---- CLIs refuse; the screen runs clean
-    for mod in ("mining_increment.py", "audit.py"):
+    for mod in ("mining_increment.py", "audit.py", "revision_audit.py"):
         rr = subprocess.run([sys.executable, os.path.join(HERE, mod),
                              "--selftest"],
                             stdout=subprocess.PIPE,
@@ -169,6 +216,8 @@ def run():
         not no_severity.hits(mout))
     chk("the audit report carries no severity language",
         not no_severity.hits(aout))
+    chk("the revision report carries no severity language",
+        not no_severity.hits(rvout))
     chk("and the screen is not silent by construction",
         bool(no_severity.hits(aout + "\nthis design is broken\n")))
 

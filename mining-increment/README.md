@@ -56,20 +56,49 @@ model — the surviving reading is the TRANSFER CAVEAT's own (not
 studied *for this basin and rock*), recorded without deciding the
 headline for the author (`MI_002`).
 
+## The revision — MI_002 folded back, audited
+
+`SOURCE_DROP_V2.md` (delivered verbatim, beside v1 — both stay)
+resolves `MI_002` in a stronger form than the audit's suggested
+parenthetical: the sentence the finding keyed on is gone, the carries
+are stated precisely (*"stop one node short of each other"*), the
+headline's referent is defined — what no record carries is reservoir
+pool loading on a multi-dam surface chain — and the appendix is
+promoted to a primary source table (`MI_009`). Two new devices:
+
+- **the READ CEILING** — a per-source read-depth declaration (the CWIM
+  boundary-condition formulation is not visible at abstract depth; a
+  capability limit on the audit, not an open question about the
+  work) — with the scaffold's compliance checked: no CWIM formulation
+  appears in `mining_increment.py` (`MI_010`);
+- **the CONFIGURATION NOTE** — mechanism transfers, configuration does
+  not (the FIRM/SOFT split in the author's own source table), plus the
+  ranking rule: the language of the source carries no weight, the
+  geology of the basin carries all of it (`MI_012`).
+
+`revision_audit.py` verifies six sections **byte-identical** across
+the revision (equations, flag, method, falsifiers, deliverable, the
+subsurface table) while the three sections the revision is about all
+changed — the epistemics moved and the arithmetic did not, so the
+scaffold stands unchanged on an unchanged specification (`MI_011`).
+
     python3 mining-increment/mining_increment.py   # scaffold state
     python3 mining-increment/audit.py              # the audit
+    python3 mining-increment/revision_audit.py     # the revision audit
     python3 mining-increment/selftest_mi.py        # the checks
     python3 mining-increment/audit.py --measure    # re-probe hosts
 
 | file | what |
 |---|---|
-| `SOURCE_DROP.md` | GAP 14, delivered verbatim, not edited |
+| `SOURCE_DROP.md` | GAP 14 as first delivered, verbatim, not edited |
+| `SOURCE_DROP_V2.md` | the revision with MI_002 folded back, verbatim, not edited |
 | `mining_increment.py` | the scaffold: transfer gate, stock/flow link, interface, forms, falsifiers |
 | `audit.py` | cross-references by existence, the provenance flag contained, the headline tension |
+| `revision_audit.py` | the revision audit: the MI_002 resolution, the two new devices, the invariants |
 | `selftest_mi.py` | the checks; run it, it prints its own count |
-| `CLAIM_TABLE.md` | `MI_001..MI_008` with REFUTATION_PROTOCOL |
+| `CLAIM_TABLE.md` | `MI_001..MI_012` with REFUTATION_PROTOCOL |
 | `samples/` | pinned runs |
 
-Both CLIs refuse `--selftest` rather than exiting 0. No `no_severity`
-exemptions — every screen hit was reworded. Stdlib only, parses under
-3.9, phone-buildable, CC0.
+All three CLIs refuse `--selftest` rather than exiting 0. No
+`no_severity` exemptions — every screen hit was reworded. Stdlib only,
+parses under 3.9, phone-buildable, CC0.

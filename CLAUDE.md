@@ -8499,9 +8499,26 @@ underneath).
   do-not-publish instruction — and **containment is checked**: both
   flagged names occur only inside the flag that disclaims them. The
   parameter schema is **imported from `bridge-impoundment`**, not
-  copied (`MI_008`). Check count printed by `selftest_mi.py`; both
-  CLIs refuse `--selftest`. Stdlib only, parses under 3.9,
-  phone-buildable, CC0.
+  copied (`MI_008`). **The revision then landed** (`SOURCE_DROP_V2.md`,
+  verbatim beside v1) folding `MI_002` back in a stronger form than the
+  audit's suggested parenthetical — the keyed sentence gone, the
+  carries stated precisely (*"stop one node short of each other"*),
+  the headline's referent defined as reservoir pool loading on a
+  multi-dam surface chain, the appendix promoted to a primary source
+  table (`MI_009`) — with two new devices: **the READ CEILING**, a
+  per-source read-depth declaration (the CWIM boundary-condition
+  formulation is not visible at abstract depth; *a capability limit on
+  the audit, not an open question about the work*) with the scaffold's
+  compliance checked (`MI_010`), and **the CONFIGURATION NOTE**,
+  mechanism-transfers-configuration-does-not — the FIRM/SOFT split in
+  the author's own source table — plus the ranking rule *the language
+  of the source carries no weight; the geology of the basin carries
+  all of it* (`MI_012`). `revision_audit.py` verifies **six sections
+  byte-identical** across the revision while the three the revision is
+  about all changed: the epistemics moved and the arithmetic did not
+  (`MI_011`). Check count printed by `selftest_mi.py`; all three CLIs
+  refuse `--selftest`. Stdlib only, parses under 3.9, phone-buildable,
+  CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

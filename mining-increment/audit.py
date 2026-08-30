@@ -64,13 +64,14 @@ def cross_refs():
 
 # ------------------------------------- the provenance flag, contained
 
-def provenance_flag():
+def provenance_flag(doc=None):
     """The drop flags two of its own citations as unconfirmed, with an
     anchor substituted (Knothe, full DOI) and an explicit instruction
     not to publish the flagged names as given. Checked: the flagged
     names appear ONLY inside the flag that disclaims them, and the
-    anchor's DOI is present."""
-    d = drop()
+    anchor's DOI is present. Takes a doc so the revision can be scored
+    by the same rule."""
+    d = doc if doc is not None else drop()
     flag = d.split("PROVENANCE FLAG")[1].split("CITATION STATUS")[0]
     out = {}
     for name in ("Padhy", "Piao"):
