@@ -1,0 +1,144 @@
+HOUSEHOLD-SCOPE AUDIT -- Arm 1's coding scheme, and what the
+design can be checked on without a reading room
+
+SOURCE_DROP.md asks for Arm 1, and for "a reading room and a
+coding scheme, nothing else." The coding scheme is built. The
+reading room is not available and is not substituted for.
+
+0. ARM 1 IS NOT RUN. THE CORPUS IS UNREACHABLE, MEASURED.
+     www.ncbi.nlm.nih.gov         000
+     pubmed.ncbi.nlm.nih.gov      000
+     onlinelibrary.wiley.com      000
+     www.acf.hhs.gov              000
+     www.childwelfare.gov         000
+     apps.who.int                 000
+     www.gov.uk                   000
+     github.com                   400
+   Every publisher, statutory and archive host returns no
+   response through this environment's proxy; only github.com
+   answers. Egress is an allowlist, so substituting a publisher
+   does not help.
+
+   NO INSTRUMENT ITEM IS INVENTED, PARAPHRASED OR CODED ANYWHERE
+   IN THIS FOLDER. These are tools that carry weight in decisions
+   about real families; a fabricated E-fraction table would read
+   as a result about them. The fixtures used below are authored
+   in coding.py, labelled there, and no fraction over them is a
+   statement about any instrument.
+
+   A SECOND CONSTRAINT, which binds whoever DOES have the reading
+   room: item wording in many published instruments is licensed
+   rather than free. An audit publishing its item-level working
+   data would reproduce it. So the scheme codes by REFERENCE with
+   the text optional -- and that is not free either, because the
+   field most in need of checking is the one that then cannot be
+   published with the item beside it.
+
+1. THE CODER, NULL-TESTED BOTH WAYS
+   items written to have a class:      6 of 6 classified correctly
+   items written to have none:         0 of 3 forced into one
+   can classify: True    can decline: True    OK
+   A classifier that cannot decline forces every item into a
+   class, which is the failure the drop's own ask names. One that
+   classifies nothing is equally useless. Both directions are
+   checked because either alone passes for a coder that is not
+   doing its job.
+
+2. X IS A CAUSAL JUDGMENT, AND IT MOVES TWO OF THE THREE OUTCOMES
+   LOCUS as delivered has X = "external condition coded AS a
+   personal property". Separating P from X takes a claim about
+   what causes the underlying variable -- about the world, not
+   about the text. Two coders who disagree about whether housing
+   instability is externally caused produce different
+   X-fractions on identical items.
+
+   Declaring ONE fixture's cause, changing no text:
+     X-fraction               0.2308   -> 0.3077
+     attenuation denominator  7        -> 6
+     attenuation coverage     0.1429   -> 0.1667
+     E-fraction               0.1538   -> 0.1538   (unchanged)
+   Two of the three published outcomes move together on one
+   judgment, and the drop reports them side by side as separate
+   readings. The third does not move, which is the point: the
+   E-fraction is a property of the text.
+
+   AND THE COUPLING RUNS IN THE FLATTERING DIRECTION. The item
+   that moved carried no attenuation rule, so leaving the
+   denominator RAISED attenuation coverage. A coder attributing
+   more to external cause makes the instrument score higher on
+   discounting for external cause, on the same manual. Whether
+   that holds in general depends on how attenuation is
+   distributed across the items a coder reclassifies -- which is
+   measurable in a real audit and is not measured here.
+
+   THE SPLIT IS IN THE SCHEME HERE, not in the write-up:
+   LOCUS is DERIVED from two declared fields --
+     subject_class      mechanical, from the item's own subject,
+                        recomputable by anyone holding the text
+     externally_caused  declared per item WITH a stated basis;
+                        refused without one
+   -- so the causal claim is visible as one and can be disagreed
+   with separately from the reading of the text. An item whose
+   subject is a person and whose cause is NOT_DECLARED codes P,
+   never X: a conclusion nobody declared is not one.
+
+3. REVERSE CAUSATION DOES REACH ARM 1
+   The drop's confound section says: "The audit arm is
+   unaffected -- it measures representational capacity, not
+   causal share."
+
+   True of the E-fraction and false of the X-fraction, from the
+   drop's own definitions. Same items, two defensible causal
+   readings of one of them:
+     external cause read outward   X 0.3077   E 0.1538
+     cause read inward             X 0.2308   E 0.1538
+   E unchanged: True     X changed: True
+   Reverse causation is precisely the case where a person-subject
+   item's variable is NOT externally caused, so the confound the
+   drop excludes from Arm 1 lands on one of Arm 1's three primary
+   outcomes. Section 2 is the same finding reached from the other
+   side.
+
+4. ONE CODED FIELD HAS NO OUTCOME, AND IT IS THE ONE THAT
+   SEPARATES RECORDING FROM EXPLAINING
+   The drop codes four fields and publishes three outcomes.
+   DIRECTIONALITY -- "does any item permit an external cause to
+   EXPLAIN a household observation, or only to co-occur with
+   it" -- is collected and not reported. So is ACTIONABILITY
+   TARGET.
+
+   Two item sets, identical text, differing only in whether the
+   external items may explain:
+     all three published outcomes identical: True
+     explain fraction                        0.5 vs 0.0
+   An instrument that records external conditions and never lets
+   them do any work is indistinguishable, in the three published
+   numbers, from one that does. The field is already collected;
+   what is missing is one line in the outcome list.
+
+5. WHERE THE UNCLASSIFIED ITEMS SIT IS NOT SPECIFIED
+   The ask says mark them unclassified rather than forcing them,
+   which is right and is the reason the coder has the state at
+   all. It does not say which denominator they occupy.
+     unclassified 1 of 13 items
+     E-fraction with them in the denominator   0.1538
+     E-fraction with them out                  0.1667
+   E-fraction is stated as 'E items / total items', so keeping
+   them in biases it low by exactly their share. Both are
+   reported and neither is picked.
+
+6. WHAT THIS FOLDER DOES NOT ESTABLISH
+   No E-fraction, X-fraction or attenuation coverage for any
+   instrument. No claim about whether the gap is real -- the
+   drop states its own retraction condition (E-fraction
+   materially non-zero and attenuation mandatory) and nothing
+   here bears on it in either direction.
+
+   Arm 2 UNMEASURED: human scorers, and a simulated practitioner
+   panel would be a fabricated claim about practitioners.
+   Arm 3 UNMEASURED: administrative records, unreachable and
+   not public.
+
+   What is established is about the coding scheme and the
+   design, and every demonstration above runs on items authored
+   in this folder for that purpose.

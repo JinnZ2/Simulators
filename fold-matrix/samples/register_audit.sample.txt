@@ -1,0 +1,73 @@
+REGISTER AUDIT -- checks on the delivered fold_register.py
+the module is imported and not modified
+
+1. THE REFUSAL IS REAL
+   grid cells: 10, all UNFILLED: True
+   score: None   verdict: NOT SCORABLE -- grid unfilled. Absence i
+   An unknown term returns None rather than an empty grid:
+   grid_for('zzz') -> None
+
+2. cells_filled IS A LITERAL
+   scan() returns cells_filled = 0 for every input.
+   It is not derived from the grid, so the field cannot
+   report anything else. cells_unfilled = cells_total
+   identically: True
+
+3. counter_case TRACKS THE SOURCE, NOT THE TERM
+   candidate  counter_case UNFILLED 12
+   kavik      counter_case UNFILLED 1
+   kavik      counter_case filled   4
+   Separation is total: every filled one is kavik-sourced,
+   every candidate is UNFILLED. The evidence column reads
+   as who named the term.
+
+4. THE ALIAS LAYER CARRIES MOST OF THE HITS
+   palo_alto_company_profile_pasted.md        direct    3  alias    1  alias 25%
+   blank_template_pasted.md                   direct    2  alias    9  alias 82%
+   CLAUDE.md                                  direct   90  alias  232  alias 72%
+
+5. EVERY HIT ON THE TWO REAL DOCUMENTS, HAND-CHECKABLE
+   palo_alto_company_profile_pasted.md -- 4 hits
+     capacity     <- scalable    L53   and broad, scalable security solutions across variou
+     growth       <- growth      L66   - Growth - Where/how are they driving it?
+     money        <- money       L76   - Economic Logic - How do they make money?
+     compliance   <- compliance  L95   - Regulatory Challenges: Evolving privacy laws and c
+   blank_template_pasted.md -- 11 hits
+     experience   <- experience  L11   - **The Team:** Briefly introduce the founder/manage
+     money        <- funding     L12   - **Funding Request:** State what you are asking for
+     money        <- funding     L12   - **Funding Request:** State what you are asking for
+     money        <- cost        L25   - **Your Solution:** Explain how your product/servic
+     experience   <- experience  L58   - **Advisory Board (if applicable):** [Names and exp
+     money        <- cost        L76   - Cost of Goods Sold (COGS): [Direct costs of delive
+     procedure    <- process     L87   - Sales Process: [Steps converting lead to customer 
+     money        <- funding     L99   ## 7. Funding Need
+     money        <- funding     L101  State funding requirements and how capital will be d
+     money        <- funding     L103  - **Funding Request:** [Total amount needed.]
+     money        <- funding     L110  - **Future Funding Rounds:** [If more capital antici
+
+6. THE OCCURRENCE CAP IS SILENT
+   terms whose real count exceeds the reported list: 6
+     money          real  117   reported 12
+     procedure      real   75   reported 12
+     regulation     real   28   reported 12
+     capacity       real   27   reported 12
+     merit          real   15   reported 12
+   Nothing in the output says the list was cut.
+
+7. CLI EDGES
+   --grid with no term    rc=1   IndexError: list index out of range
+   --grid unknown term    rc=0   }
+   missing file           rc=1   FileNotFoundError: [Errno 2] No such file or d
+   --list                 rc=0   candidate safety         <- hazard x exposure 
+
+8. FIELDS CARRIED AND NEVER BRANCHED ON
+   counter_case     read by a branch: False
+   residual_tell    read by a branch: False
+   sign_storage     read by a branch: False
+   source           read by a branch: False
+   substitutes_for  read by a branch: False
+
+9. ONE ALIAS IS SHADOWED
+   aliases that are already register keys: ['quality']
+   `word if word in REGISTER else ALIASES.get(word)` takes
+   the first branch, so the entry never fires.

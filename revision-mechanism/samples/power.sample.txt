@@ -1,0 +1,87 @@
+REVISION MECHANISM -- what the ask's sample size delivers
+
+SOURCE_DROP.md asks for "One site pair, one domain." This computes
+which of its four comparisons a pair carries. It uses no field
+data, touches no community, and says nothing about any real site or
+any real body of knowledge.
+
+THE STUDY IS NOT RUN HERE AND IS NOT SIMULATED. It requires
+fieldwork and collective consent, and its own ethics section says
+publishing a group's revision procedure without consent can damage
+the mechanism being studied. No synthetic site stands in for a real
+one anywhere below. The only objects are a line, a step, and
+binomial noise.
+
+0. THE COMPANION SCHEME
+   M1-M8 named in the drop: True
+   present in this repository: True
+   reconstructed: False
+   components: M1, M2, M3, M4, M5, M6, M7, M8
+   source: transmission-decay.scheme.COMPONENTS, imported
+   comparison 3's M3 and M7 resolve: True
+   measures that key off it:
+     - STATUS (per component)
+     - REVISION PROVENANCE (per component)
+     - LATENCY (per component)
+     - HELD-OBSOLETE RATE (denominator is components)
+     - ROBUSTNESS FORM (per component)
+     - comparison 3 (M3 vs M7 by name)
+   a coding scheme is data. Inventing M1-M8 would have put a
+   category system in the author's mouth and every number
+   downstream would have been about the invention. It landed
+   instead, and is imported.
+
+1. WHAT ONE SITE PAIR CARRIES
+   #   comparison                                 kind           at a pair
+   1   high-change vs low-change, same domain     CATEGORICAL    yes
+   2   fast-change vs slow-change                 SHAPE          NO
+   3   component form, M3 vs M7                   WITHIN_SITE    yes
+   4   written vs living, same domain and region  CROSS_MEDIUM   yes
+
+   Three of four. The one that does not is comparison 2, and it is
+   the one whose prediction is a THRESHOLD.
+
+2. WHY n=2 CANNOT SEE A DISCONTINUITY -- exact, not statistical
+   arbitrary pairs tested: 500
+   largest residual, either model: 2.47e-32
+   both fit exactly: True
+   a line has two free parameters and a step has two. Two points
+   determine both exactly, so the residual carries no information
+   about which generated them. No per-site precision changes this.
+
+3. THE SITE COUNT COMPARISON 2 REQUIRES
+   accuracy at telling a step from a slope, by site count
+   and by components measured per site (M)
+
+   n     M=10   M=30   M=100
+   2     tie    tie    tie  
+   3     0.66   0.80   0.93 
+   4     0.70   0.81   0.94 
+   6     0.73   0.85   0.98 
+   8     0.75   0.88   0.98 
+   12    0.84   0.93   0.99 
+   20    0.87   0.97   1.00 
+
+   `tie` is not low power. At n=2 both models fit every dataset
+   exactly, so nothing is decided at any M -- the row is empty
+   rather than weak.
+   Reading across: comparison 2 becomes decidable at roughly four
+   to six sites when about a hundred components are coded per site,
+   and eight to twelve at thirty. At ten components per site,
+   twenty sites still do not reach 0.9.
+
+4. AN ASYMMETRY IN THE HEADLINE NUMBER
+   held-obsolete rate, true value 0.35
+   unassessed share   observed       understated by
+   0.00               0.350          0.000  (0%)
+   0.10               0.315          0.035  (10%)
+   0.20               0.280          0.070  (20%)
+   0.30               0.245          0.105  (30%)
+   0.50               0.175          0.175  (50%)
+   the bias runs one way. An unassessed component enters the
+   denominator and cannot enter the numerator, so the transmission
+   system's own error rate is reported lower than it is, by exactly
+   the unassessed share.
+   WHAT WOULD CLOSE IT: a sixth STATUS value -- held unchanged,
+   match confirmed -- distinct from held unchanged, match not
+   assessed. Two states, currently one.

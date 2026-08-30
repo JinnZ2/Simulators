@@ -100,6 +100,6 @@ ARCHIVAL BIAS IN L -- computed before any archive is opened
 6  cross-links
    question-availability      yes
    uninstrumented             yes
-   report-typing              NO
+   report-typing              yes
    median-case-calibration    NO
 

@@ -674,6 +674,38 @@ def not_testable_causes(rows):
     return out
 
 
+# ---- handoff item 2: which claims have a generating command ---------
+#
+# SS_015's repair, generalised. The self-scan paragraph's count went
+# stale inside an hour and was repaired by deleting the number and
+# naming the command that produces it. A claim with a command behind it
+# can take that repair; one without cannot.
+#
+# The conversion does NOT make a claim MAINTAINED. It makes it stop
+# being a claim: there is no stored number left to diverge from. That
+# distinction is kept, because calling it MAINTAINED would count a
+# removed claim as an asserted one.
+CONVERTIBLE_KINDS = ("selftest", "selftest_sum", "selftest_glob",
+                     "selftest_clean", "count_files", "pytest")
+
+
+def convertibility(rows):
+    """How many resolved claims could be replaced by their command."""
+    out = {"convertible": [], "not_convertible": [], "no_check": []}
+    for r in rows:
+        if r["bin"] not in (DIVERGED, HOLDS_UNMAINTAINED, MAINTAINED):
+            continue
+        b = bindings.BINDINGS.get(r.get("key"), {})
+        how = b.get("how")
+        if how in CONVERTIBLE_KINDS:
+            out["convertible"].append(r)
+        elif how:
+            out["not_convertible"].append(r)
+        else:
+            out["no_check"].append(r)
+    return out
+
+
 def bins(rows):
     out = {}
     for b in list(BINS) + [UNBOUND]:
@@ -852,6 +884,43 @@ def render(rows, verbose=False):
             out.append("  %-34s %d" % (k, causes[k]))
         out.append("")
 
+    conv = convertibility(rows)
+    nc = len(conv["convertible"])
+    nn = len(conv["not_convertible"])
+    tot = nc + nn + len(conv["no_check"])
+    out.append("CONVERTIBLE TO A COMMAND")
+    out.append("  %d of %d resolved claims have a command that produces"
+               % (nc, tot))
+    out.append("  the stated number, so the count could be deleted and the")
+    out.append("  command named instead, as SS_015 did.")
+    out.append("  %d have a check that is not a count (byte comparisons,"
+               % nn)
+    out.append("  regeneration, a git diff): nothing to convert.")
+    out.append("")
+    out.append("  This does NOT make them MAINTAINED. It makes them stop")
+    out.append("  being claims -- there is no stored number left to")
+    out.append("  diverge from, which is a different thing from a number")
+    out.append("  a test asserts.")
+    out.append("  Of the %d DIVERGED, %d are convertible."
+               % (sum(1 for r in rows if r["bin"] == DIVERGED),
+                  sum(1 for r in conv["convertible"]
+                      if r["bin"] == DIVERGED)))
+    out.append("")
+
+    q = [r for r in rows if r.get("quoted")]
+    if q:
+        out.append("QUOTED CONTEXT (handoff item 3)")
+        out.append("  %d claim(s) sit inside a markdown code span, so the"
+                   % len(q))
+        out.append("  text is a claim under discussion rather than one")
+        out.append("  being made. Structural, from the markup, not a guess")
+        out.append("  about attribution. Flagged, never auto-excluded:")
+        for r in q:
+            out.append("    %-28s %-18s %s"
+                       % (r["section_title"][:28], r["bin"],
+                          r["text"].replace("\n", " ")[:30]))
+        out.append("")
+
     seen, installed = environment()
     out.append("ENVIRONMENT -- the rate below has one")
     for k in sorted(seen, key=lambda x: -seen[x]):
@@ -869,6 +938,18 @@ def render(rows, verbose=False):
         out.append("  DIVERGED / (DIVERGED + HOLDS + MAINTAINED)"
                    " = %d / %d = %.3f" % (b[DIVERGED], n, rt))
         out.append("  n = %d claims resolved" % n)
+        if bindings.RETIRED:
+            out.append("")
+            out.append("  READ THE DENOMINATOR. %d claims were CONVERTED --"
+                       % len(bindings.RETIRED))
+            out.append("  the count deleted and the command named instead --")
+            out.append("  so they are not in n and cannot be in the")
+            out.append("  numerator. A rate that falls because claims were")
+            out.append("  removed says nothing about how the remaining ones")
+            out.append("  are maintained. The retired set is in")
+            out.append("  bindings.RETIRED, and samples/scan.sample.txt at")
+            out.append("  blob 5ee0d9928b9b is where they were last")
+            out.append("  measured against their artifacts.")
     out.append("")
     out.append("  Second point, flagged: the UNFCCC workbook returned")
     out.append("  0.913 under scan 4 (SSS_035). DIFFERENT DOCUMENT CLASS --")
@@ -945,17 +1026,33 @@ def selftest():
     cl = keyed_claims()
     chk("every claim has a key", all("key" in c for c in cl))
     chk("keys are distinct", len({c["key"] for c in cl}) == len(cl))
-    reps = [c["key"] for c in cl
-            if c["section_title"] == "simulation-hypothesis-budget/"
-            and c["value"] == ["20", "20"]]
+    # Ordinals, on a constructed repeat rather than on whatever the
+    # document happens to contain twice. The first version keyed off a
+    # real duplicate in CLAUDE.md and broke the moment that paragraph
+    # was edited -- a check that reads the data it is checking.
+    seen2 = {}
+    same = {"section_title": "x/", "pattern": "p", "value": ["1", "1"]}
+    k0 = key_of(dict(same), seen2)
+    k1 = key_of(dict(same), seen2)
     chk("a repeated triple gets distinct ordinals",
-        sorted(reps)[0].endswith("|0") and sorted(reps)[1].endswith("|1"))
+        k0.endswith("|0") and k1.endswith("|1"))
+    chk("ordinals do not collide across different triples",
+        key_of({"section_title": "y/", "pattern": "p",
+                "value": ["1", "1"]}, seen2).endswith("|0"))
 
     # -- every binding key names a real claim, and vice versa
     keys = {c["key"] for c in cl}
     orphan = sorted(set(bindings.BINDINGS) - keys)
     chk("no binding names a claim that is not extracted (%s)"
         % (orphan[:2] or ""), not orphan)
+    # A converted claim's binding moves to RETIRED rather than being
+    # deleted: SS_012's rule is that removing a number removes the
+    # evidence it ever differed, and that applies to the binding too.
+    chk("retired bindings are disjoint from live ones",
+        not (set(bindings.RETIRED) & set(bindings.BINDINGS)))
+    chk("no retired binding still names a live claim",
+        not (set(bindings.RETIRED) & keys))
+    chk("the retired ledger is non-empty", len(bindings.RETIRED) == 8)
     unbound = sorted(keys - set(bindings.BINDINGS))
     chk("unbound claims are reported, not hidden (%d)" % len(unbound), True)
 
@@ -1014,6 +1111,8 @@ def selftest():
                              "interval_days": None,
                              "unrecoverable_because": "probe"}}])
     chk("render prints n", "n = 1 claims resolved" in txt)
+    chk("render warns that converted claims left the denominator",
+        "READ THE DENOMINATOR" in txt)
     chk("render anchors the target version", "target blob " in txt)
     chk("render says where claims and checks each come from",
         "claims read from the working tree" in txt)
@@ -1102,6 +1201,40 @@ def selftest():
                                                  "UNBOUND")))
     chk("what is installed is reported per dependency",
         set(installed) >= {"pytest", "numpy"})
+
+    # -- convertibility, and it is not MAINTAINED
+    cv = convertibility([
+        {"key": "uninstrumented/|selftest_ratio|14/14|0",
+         "bin": HOLDS_UNMAINTAINED},
+        {"key": "domain-ledger/|byte_identical|-|0", "bin": DIVERGED},
+        {"key": "nope|x|-|0", "bin": DIVERGED},
+        {"key": "uninstrumented/|selftest_ratio|14/14|0",
+         "bin": NOT_TESTABLE},
+    ])
+    chk("a count claim with a command is convertible",
+        len(cv["convertible"]) == 1)
+    chk("an identity claim is not convertible",
+        len(cv["not_convertible"]) == 1)
+    chk("an unbound claim is neither", len(cv["no_check"]) == 1)
+    chk("NOT_TESTABLE rows are excluded from convertibility",
+        len(cv["convertible"]) + len(cv["not_convertible"])
+        + len(cv["no_check"]) == 3)
+
+    # -- every quoted claim must be DECLARED, not silently dropped
+    quoted = [c for c in cl if c.get("quoted")]
+    chk("the quoted claim is flagged", bool(quoted))
+    chk("every quoted claim has an explicit binding",
+        all(c["key"] in bindings.BINDINGS for c in quoted))
+    # `.get`, not `[]`. The first version indexed BINDINGS directly, so
+    # a newly quoted claim with no binding yet raised KeyError inside
+    # the check written to report exactly that state -- and a raise is
+    # not a failed check, it is a dead selftest.
+    chk("a quoted claim's binding says it is quoted",
+        all("QUOTED" in bindings.BINDINGS.get(c["key"], {}).get("reason", "")
+            or bindings.BINDINGS.get(c["key"], {}).get("how", "") not in
+            ("", "none")
+            for c in quoted))
+    chk("more than one claim is quoted now", len(quoted) >= 3)
 
     # -- git plumbing reachable
     chk("git history for CLAUDE.md is readable",

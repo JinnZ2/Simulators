@@ -1,0 +1,118 @@
+{
+  "id": "watercraft-propulsion",
+  "constructed": false,
+  "real_run": true,
+  "artifact": "heavy cargo attested on the far side of a river system",
+  "method": "rowed vessels of a known attested type, making headway upstream against a current",
+  "note": "The drop's own worked example, run. Every archaeological cell comes back UNMEASURED because this environment's egress is an allowlist and no archive is reachable. That is the published finding the drop asks for.",
+  "constants": [
+    {
+      "name": "rho_water",
+      "value": 1000.0,
+      "units": "kg/m3",
+      "provenance": "physical"
+    },
+    {
+      "name": "hull_Cd",
+      "value": 0.3,
+      "units": "1",
+      "provenance": "UNSOURCED",
+      "why": "no period hull form measured or replicated; a plausible blunt-body value taken to make the propagation runnable"
+    },
+    {
+      "name": "wetted_frontal_area",
+      "value": 6.0,
+      "units": "m2",
+      "provenance": "UNSOURCED",
+      "why": "no attested vessel dimensions available from here"
+    },
+    {
+      "name": "ground_speed",
+      "value": 1.0,
+      "units": "m/s",
+      "provenance": "UNSOURCED",
+      "why": "assumed; the required transit rate is not derived from any record"
+    },
+    {
+      "name": "current_velocity",
+      "value": 1.2,
+      "units": "m/s",
+      "provenance": "UNSOURCED",
+      "why": "no hydrological record for the reach"
+    },
+    {
+      "name": "crew_count",
+      "value": 20,
+      "units": "1",
+      "provenance": "UNSOURCED",
+      "why": "the drop says 'attested crew count' and none is reachable"
+    },
+    {
+      "name": "oar_propulsive_efficiency",
+      "value": 0.55,
+      "units": "1",
+      "provenance": "UNSOURCED",
+      "why": "this is the coefficient the whole audit turns on and it is exactly the one the reconstruction assumes without stating"
+    },
+    {
+      "name": "sustained_human_output",
+      "value": 100.0,
+      "units": "W",
+      "provenance": "physical",
+      "why": "physiology, not archaeology -- reachable from anywhere, which is the point of the LAW/RECORD split"
+    }
+  ],
+  "requirements": [
+    {
+      "name": "shaft_power_per_rower",
+      "bound_by": "LAW",
+      "required": 871.2000000000002,
+      "required_units": "W",
+      "attested": 100.0,
+      "attested_units": "W"
+    },
+    {
+      "name": "hull_drag_coefficient_at_loading",
+      "bound_by": "RECORD",
+      "required": 0.3,
+      "required_units": "1",
+      "attested": null,
+      "why_unmeasured": "no attested hull form; requires a replication or a measured wreck"
+    },
+    {
+      "name": "timber_volume_for_hull",
+      "bound_by": "RECORD",
+      "required": 12.0,
+      "required_units": "m3",
+      "attested": null,
+      "why_unmeasured": "requires a deforestation or woodland record for the reach; egress-blocked"
+    },
+    {
+      "name": "crew_daily_calories",
+      "bound_by": "RECORD",
+      "required": 70000.0,
+      "required_units": "kcal/day",
+      "attested": null,
+      "why_unmeasured": "requires granary capacity or settlement size; egress-blocked"
+    },
+    {
+      "name": "oar_replacement_rate",
+      "bound_by": "RECORD",
+      "required": 4.0,
+      "required_units": "oars/voyage",
+      "attested": null,
+      "why_unmeasured": "requires tool finds or a wear replication"
+    }
+  ],
+  "duration": {
+    "value": 30.0,
+    "units": "days",
+    "bounded_by": null
+  },
+  "specs": {
+    "shaft_power_per_rower": {
+      "subsystem": "oar / hull / load-distribution system",
+      "constraints": "period materials, river reach, displacement D"
+    }
+  }
+}

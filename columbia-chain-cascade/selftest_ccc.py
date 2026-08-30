@@ -1,0 +1,217 @@
+#!/usr/bin/env python3
+# selftest_ccc.py -- CC0, stdlib only, parses under 3.9
+#
+# Every check that exercises eap_coverage.py and audit.py.
+#
+# The load-bearing checks are the two refusals: no per-node owner is
+# assigned (the data is not in the delivered text) and the exact seam
+# count is refused -- while the governance conclusion still comes back
+# settled, because it rests on the CA/US split the text does carry.
+
+import ast
+import io
+import os
+import re
+import subprocess
+import sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+import eap_coverage as EAP  # noqa: E402
+import audit as A  # noqa: E402
+
+ok = [0]
+bad = []
+
+
+def chk(name, cond):
+    if cond:
+        ok[0] += 1
+    else:
+        bad.append(name)
+
+
+def run():
+    doc = io.open(os.path.join(HERE, "SOURCE_DROP.md"),
+                  encoding="utf-8").read()
+
+    # ---- the node list is transcribed, not invented, and matches the text
+    for name, _reach, _j, _o in EAP.NODES:
+        chk("node in the delivered text: %s" % name, name in doc)
+    chk("18 dam nodes", len(EAP.NODES) == 18)
+    chk("the estuary is recorded as a reach, not a node",
+        EAP.ESTUARY_IS_A_REACH and
+        not any(n[0] == "Estuary" for n in EAP.NODES))
+    # every reach label used is a section header in the delivered text
+    for reach in set(n[1] for n in EAP.NODES):
+        chk("reach label from the text: %s" % reach,
+            re.search(r"(?m)^\s*%s:" % reach, doc) is not None)
+
+    # ---- the jurisdiction tags come only from the text
+    chk("the CA tag is on exactly the three upper nodes",
+        [n[0] for n in EAP.NODES if n[2] == "CA"]
+        == ["Mica", "Revelstoke", "Keenleyside"])
+    chk("(CA) appears in the delivered text", "(CA)" in doc)
+    chk("two jurisdictions in the node list",
+        EAP.jurisdictions() == ["CA", "US"])
+
+    # ---- NO per-node owner is assigned. This is the refusal.
+    chk("no node carries an owner", EAP.owners_assigned() == [])
+    chk("every owner field is UNASSIGNED",
+        all(n[3] == EAP.UNASSIGNED for n in EAP.NODES))
+    b = EAP.spanning_bound()
+    chk("per-node owner known is zero", b["per_node_owner_known"] == 0)
+    chk("the exact seam count is refused",
+        b["exact_seam_count"] == EAP.UNASSIGNED)
+    chk("and the refusal names the reason",
+        "not supplied from memory" in b["exact_seam_reason"])
+
+    # ---- the owner categories are the five the spec names, verbatim
+    for cat in EAP.OWNER_CATEGORIES:
+        chk("owner category from the text: %s" % cat, cat in doc)
+    chk("five owner categories", len(EAP.OWNER_CATEGORIES) == 5)
+
+    # ---- the conclusion is settled, and settled by the CA/US split
+    s = EAP.no_plan_spans()
+    chk("no single plan spans the chain", s["no_single_plan_spans_chain"])
+    chk("settled by the CA/US boundary",
+        "CA/US" in s["settled_by"])
+    chk("the lower bound is 2", s["authorities_lower_bound"] == 2)
+
+    # ---- and it is ROBUST to the missing data, both directions
+    chk("robust to the missing ownership", s["robust_to_missing_ownership"])
+    # the floor is > 1, so the conclusion holds
+    chk("floor exceeds one", b["authorities_lower_bound"] > 1)
+    # null test: a hypothetical single-jurisdiction chain would NOT settle it
+    save = EAP.NODES
+    try:
+        EAP.NODES = [(n[0], n[1], "US", EAP.UNASSIGNED) for n in save]
+        chk("a single-jurisdiction chain does NOT settle the claim from "
+            "jurisdiction alone",
+            EAP.no_plan_spans()["authorities_lower_bound"] == 1
+            and EAP.no_plan_spans()["no_single_plan_spans_chain"] is False)
+    finally:
+        EAP.NODES = save
+    chk("and the real node list is restored",
+        EAP.jurisdictions() == ["CA", "US"])
+
+    # ---- the exact-count refusal cannot be a hidden guess: no owner
+    # string other than UNASSIGNED appears assigned anywhere
+    src = io.open(os.path.join(HERE, "eap_coverage.py"),
+                  encoding="utf-8").read()
+    tree = ast.parse(src)
+    assigned_owners = set()
+    for node in ast.walk(tree):
+        # only the NODES list literal, not unpacking targets like
+        # `for name, reach, juris, owner in NODES`
+        if isinstance(node, ast.Assign):
+            names = [t.id for t in node.targets if isinstance(t, ast.Name)]
+            if "NODES" not in names:
+                continue
+            for elt in ast.walk(node.value):
+                if isinstance(elt, ast.Tuple) and len(elt.elts) == 4:
+                    last = elt.elts[3]
+                    if isinstance(last, ast.Constant):
+                        assigned_owners.add(last.value)
+                    elif isinstance(last, ast.Name):
+                        assigned_owners.add(last.id)
+    chk("the only owner value in the node table is UNASSIGNED",
+        assigned_owners == {"UNASSIGNED"})
+
+    # ---- the truncation is detected, not asserted
+    t = A.truncation()
+    chk("the text is detected as ending mid-sentence", t["ends_midsentence"])
+    chk("the last line has no closing punctuation",
+        not t["last_line"].rstrip().endswith((".", ":", ")")))
+    chk("Module F's header is present", t["module_f_header_present"])
+    chk("and its body is marked incomplete",
+        t["module_f_body_complete"] is False)
+    chk("Module F is the highest section reached",
+        "MODULE F" in (t["highest_section"] or ""))
+    chk("the missing parts are enumerated", len(t["what_is_missing"]) >= 4)
+    chk("nothing missing is reconstructed in the folder -- no Module F "
+        "body text exists here",
+        "antecedent-condition" not in src.lower()
+        and "burn-modified" not in src.lower())
+
+    # ---- the engine and data blockers are measured
+    chk("HEC-RAS is not present", A.engine_present() is False)
+    chk("egress records the section-2 sources", len(A.EGRESS) >= 6)
+    chk("every recorded host refused",
+        all(code == "000" for _h, code, _w in A.EGRESS))
+
+    # ---- exactly one substantive thing survives
+    surv = A.what_survives()
+    chk("eap coverage runs", surv["eap_coverage"]["runs"] is True)
+    chk("and it is the governance claim",
+        "plan spans the chain" in surv["eap_coverage"]["result"])
+    chk("the structural observations are restated, not computed",
+        len(surv["structural_observations"]) == 2)
+
+    # ---- the report
+    out = A.render()
+    one = " ".join(out.split())
+    chk("the report states the spec cannot be executed here",
+        "CANNOT BE EXECUTED HERE" in out)
+    chk("and that the text is truncated",
+        "TRUNCATED" in out)
+    chk("it refuses to reconstruct Module F",
+        "NOT RECONSTRUCTED" in out)
+    chk("it declares no hydraulics are simulated",
+        "No hydraulics are simulated" in one
+        or "no hydraulics are simulated" in one.lower())
+    chk("it gives the one surviving result",
+        "no single entity's plan spans the chain" in one)
+
+    # ---- both modules refuse --selftest
+    for mod in ("eap_coverage.py", "audit.py"):
+        r = subprocess.run([sys.executable, os.path.join(HERE, mod),
+                            "--selftest"],
+                           stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        chk("%s refuses --selftest" % mod, r.returncode == 2)
+        chk("%s names where its checks live" % mod,
+            b"selftest_ccc.py" in r.stderr)
+    r2 = subprocess.run([sys.executable, os.path.join(HERE,
+                        "eap_coverage.py")], stdout=subprocess.PIPE)
+    chk("bare eap_coverage.py renders the record",
+        b"EAP COVERAGE" in r2.stdout and b"Grand Coulee" in r2.stdout)
+
+    # ---- the no-severity screen
+    sys.path.insert(0, os.path.join(os.path.dirname(HERE),
+                                    "sheet-structure-scan"))
+    import no_severity  # noqa: E402
+    chk("the audit report carries no severity language",
+        not no_severity.hits(out))
+    chk("and the screen is not silent by construction",
+        bool(no_severity.hits(out + "\nthis design is broken\n")))
+
+    # ONE declared exemption on the eap report, measured with the
+    # three-arm harness: `means` fires inside a verbatim quote of the
+    # spec ("mixed ownership means no entity's plan spans the chain"),
+    # and rewording it would misquote the delivered text.
+    eout = EAP.render()
+    EXEMPT = ("means",)
+    chk("one exemption on the eap report", len(EXEMPT) == 1)
+    chk("and it is delivered text", "mixed ownership means" in doc)
+    masked = eout
+    for wd in EXEMPT:
+        masked = re.sub(r"(?i)\b%s\b" % wd, "X" * len(wd), masked)
+    chk("the eap report is clean apart from the exemption",
+        not no_severity.hits(masked))
+    fired = set(w for _n, w, _l in no_severity.hits(eout))
+    chk("and the exemption is the only token that fires",
+        fired == set(EXEMPT))
+    pmask = eout + "\nthis result is broken and invalid\n"
+    for wd in EXEMPT:
+        pmask = re.sub(r"(?i)\b%s\b" % wd, "X" * len(wd), pmask)
+    chk("a planted violation is still caught through the exemption",
+        bool(no_severity.hits(pmask)))
+
+    print("selftest: %d checks, %d failed" % (ok[0] + len(bad), len(bad)))
+    for x in bad:
+        print("  FAILED", x)
+    return 0 if not bad else 1
+
+
+if __name__ == "__main__":
+    sys.exit(run())

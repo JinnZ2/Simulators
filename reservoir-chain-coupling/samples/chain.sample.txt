@@ -1,0 +1,59 @@
+RESERVOIR-CHAIN COUPLING -- the minimal falsifiable test, run
+
+The spec: RUN 1 independent (max), RUN 2 coupled (sum), compare
+breach sets. This runs it on CONSTRUCTED chains -- route() is an
+abstract combiner, not a hydraulic solver, every coefficient
+synthetic and marked. It shows the swap is detectable and can be
+load-bearing; it says nothing about any real reservoir.
+
+  [SYNTHETIC] breach release gain 3.0, intact attenuation 0.7
+
+1. SIGNAL CHAIN -- pools put the wave in the disagreement band
+   boundary inflow 6
+   RUN 1 (independent, max):  breach set none
+   RUN 2 (coupled, sum):      breach set ['A', 'B', 'C', 'D']
+   coupled breaches extra:    ['A', 'B', 'C', 'D']
+   LOAD-BEARING (for this chain): coupled breaches 4 node(s) independent does not
+
+   the wave down the chain, per operator:
+     node   independent      coupled
+     A        4.20            9.00 BREACH
+     B        2.94           12.00 BREACH
+     C        2.06           15.00 BREACH
+     D        1.44           18.00 BREACH
+   Under coupled physics a breach at A raises the wave into B,
+   which breaches and raises it into C, and so on -- the
+   difference COMPOUNDS downstream. A one-node reach study sees
+   node A alone and cannot produce this.
+
+2. NULL, HIGH FREEBOARD -- no wave reaches any crest
+   breach sets identical: True
+   REFUTED (for this chain): breach sets identical, coupling negligible
+   The detector does not always fire. On a chain with full
+   buffer the coupling term is genuinely negligible, and the
+   harness reports the spec's own refutation verdict.
+
+3. NULL, NO FREEBOARD -- pools already at crest
+   breach sets identical: True
+   REFUTED (for this chain): breach sets identical, coupling negligible
+   The other bound: when every node is already at crest, even
+   max breaches all of them, so the swap changes nothing. The
+   effect lives only in the intermediate antecedent-state band
+   operator_swap.py RESULT 2 measures.
+
+4. RESULT 1 HOLDS ACROSS ALL THREE CHAINS
+   independent-node evaluation breaches a node coupled does not:
+     ever observed: no
+   The bias is one-sided in every run: RUN 1's breach set is
+   always a subset of RUN 2's. Independent-node evaluation can
+   only understate the chain, never overstate it.
+
+WHAT THIS IS AND IS NOT
+  IS: a demonstration that the operator swap is detectable, that
+  it compounds down a chain, that it is one-sided, and that it
+  vanishes outside an antecedent-state band -- all on synthetic
+  chains, all arithmetic.
+  IS NOT: evidence that the band is entered for any real chain.
+  That is the spec's falsifiable test on published data through
+  HEC-RAS, which requires the engine and the terrain -- unreachable
+  here; see columbia-chain-cascade for the measured blockers.

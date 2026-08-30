@@ -1,0 +1,94 @@
+COLUMBIA CHAIN CASCADE -- what a stdlib environment can establish
+about a HEC-RAS build spec that arrived truncated
+
+THE SPEC CANNOT BE EXECUTED HERE AND THE DELIVERED TEXT IS
+INCOMPLETE. Both are measured below. No hydraulics are simulated:
+a flood-hazard field produced by a toy would read as a result
+about a real dam chain, which is the one thing this folder will
+not produce.
+
+0. THE DELIVERED TEXT IS TRUNCATED
+   sections present: THE THREE CHOICES THAT MAKE IT USEFUL, DOMAIN, TERRAIN AND CHANNEL, INITIATOR MODULES, MODULE F
+   highest section reached: MODULE F — ANTECEDENT CONDITION COUPLING (the amplifier)
+   ends mid-sentence: True
+     last line: "it changes the cascade outcome at the next"
+   Module F header present: True   body complete: False
+
+   NOT IN HAND, AND NOT RECONSTRUCTED:
+     - the body of Module F (the antecedent-coupling mechanism the spec
+       calls the amplifier and 'the part standard breach modeling drops')
+     - the burn-modified roughness values section 2 forward-references to
+       Module F
+     - any validation section
+     - any claim table / refutation protocol
+     - the ask (what to run, what to publish)
+
+   The spec names Module F as the load-bearing part -- 'not a
+   refinement; it changes the cascade outcome'. It is exactly
+   the part that did not arrive. Inventing it would put a
+   mechanism the author calls decisive into the author's mouth.
+
+1. THE ENGINE IS ABSENT (measured)
+   HEC-RAS 2D present on this machine: False
+   HEC-RAS is Windows-only USACE software. There is no path by
+   which the routing in sections 3-4 runs here.
+
+2. EVERY DATA SOURCE REFUSES CONNECT (measured)
+   portal.opentopography.org    000   3DEP DEM (section 2)
+   www.usgs.gov                 000   3DEP / national map
+   apps.nationalmap.gov         000   3DEP 1 m / 10 m DEM
+   charts.noaa.gov              000   NOAA bathymetry charts
+   nid.sec.usace.army.mil       000   NID dam geometry + ownership
+   www.mrlc.gov                 000   NLCD roughness
+   Egress is an allowlist, so substituting a mirror does not
+   help. Section 2's terrain, bathymetry, roughness and dam
+   geometry are all unreachable.
+
+3. WHAT CANNOT BE BUILT HERE, WITH THE SPECIFIC BLOCKER
+   2D hydraulic routing (all modules)
+       no HEC-RAS 2D; Windows-only USACE software, absent from this
+       machine
+   terrain (DEM, bathymetry, roughness)
+       every source in section 2 refuses CONNECT (allowlist egress)
+   dam geometry (breach parameters)
+       NID and project design memoranda unreachable
+   the attenuation/amplification matrix (Module A)
+       one routing run per node; requires the engine and the terrain
+   Module F antecedent coupling
+       the mechanism is not in the delivered text (truncated)
+
+4. WHAT SURVIVES ALL OF THAT -- exactly one substantive thing
+   THE GOVERNANCE CLAIM. The spec calls ownership 'the governance
+   variable' and says 'record it as data, not commentary'.
+   eap_coverage.py is that record, and it computes the spec's own
+   conclusion:
+     no single entity's plan spans the chain: True
+     granularity: jurisdiction floor (2); exact seam count refused
+   It holds from the CA/US boundary in the delivered node list
+   alone, before any per-node ownership -- and no assignment of
+   the 18 nodes to owners can undo it. The exact fragmentation
+   requires data this environment cannot reach and will not invent.
+
+   TWO STRUCTURAL OBSERVATIONS, restated not computed:
+     - the initiator modules (A-E) are declared 'swappable, same
+       downstream engine, so modules are comparable' -- a comparability
+       claim of the same shape as move-set-derivation's declared
+       architectures, asserted here and not shown, since showing it
+       requires the engine
+     - 'full chain is required, not preferred: attenuation and
+       amplification only appear across nodes' is the spec's own reason
+       a reach study cannot substitute -- restated, not computed,
+       because computing it is the routing run
+
+5. WHAT THIS FOLDER DOES NOT ESTABLISH
+   No hazard field, no velocity bands, no time slices, no
+   attenuation/amplification matrix, nothing about any breach,
+   any node's failure, or any population's exposure. The spec's
+   three headline choices (velocity bands, time slices, exposure
+   overlay) are sound product-design calls and are not tested
+   here, because testing them is the routing run.
+
+   What is established: the governance claim holds at the
+   granularity the delivered text supports, the spec cannot be
+   run in this environment, and the module it calls decisive did
+   not arrive.

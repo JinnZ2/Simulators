@@ -1,3 +1,12 @@
+#!/usr/bin/env python3
+# The file shipped with NO import statements at all -- it uses
+# `EpistemicInstrument` and `np` with nothing bringing them into
+# scope, so all three tests raised NameError. Extraction artifact
+# from a context where both were already bound. The names are the
+# ones the module actually exports; nothing else is changed.
+import numpy as np
+from l_epsilon_epistemic_v2 import EpistemicInstrument
+
 def test_gap_estimate():
     instr = EpistemicInstrument()
     time = np.arange(0, 1, 0.02)

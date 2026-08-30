@@ -1,0 +1,52 @@
+{
+  "id": "constructed-falsified",
+  "constructed": true,
+  "artifact": "CONSTRUCTED. Exists so the closure test can be shown to return FALSIFIED and GAP, and so the table is not CONSTANT_SILENT.",
+  "method": "constructed",
+  "constants": [
+    {
+      "name": "k",
+      "value": 1.0,
+      "units": "1",
+      "provenance": "physical"
+    }
+  ],
+  "requirements": [
+    {
+      "name": "energy_budget",
+      "bound_by": "LAW",
+      "required": 5000.0,
+      "required_units": "MJ",
+      "attested": 100.0,
+      "attested_units": "MJ"
+    },
+    {
+      "name": "quarry_volume",
+      "bound_by": "RECORD",
+      "required": 300.0,
+      "required_units": "m3",
+      "attested": 150.0,
+      "attested_units": "m3"
+    },
+    {
+      "name": "unreachable_cell",
+      "bound_by": "RECORD",
+      "required": 1.0,
+      "required_units": "t",
+      "attested": null,
+      "why_unmeasured": "constructed unmeasured cell"
+    }
+  ],
+  "duration": {
+    "value": 10.0,
+    "units": "years",
+    "bounded_by": "constructed dated phases",
+    "bound_resolution": 1.0
+  },
+  "specs": {
+    "energy_budget": {
+      "subsystem": "constructed energy source",
+      "constraints": "constructed"
+    }
+  }
+}

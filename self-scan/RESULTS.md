@@ -335,3 +335,185 @@ Two modules and four suites:
 
 Fifteen failures across 1213 tests. None of them is in the stdlib
 selftest arm.
+
+---
+
+# Handoff run — four items, three measured and one absent
+
+## 1. Self-enumeration: one defect or two? Two.
+
+`census.py` hung on itself and wrote into the tree it measured, and the
+hypothesis was that these are one problem — anything enumerating the
+tree it runs in has both by construction.
+
+`enumerators.py` tests it on the population: 50 modules call a
+directory-enumeration primitive, 49 ran, both properties measured by
+running rather than read from source.
+
+                       writes: yes   writes: no
+    enumerates self yes            1           15
+    enumerates self no             2           31
+
+    of 16 that enumerate themselves, 1 writes  (6%)
+    of 33 that do not,               2 write   (6%)
+    difference: +0 points
+
+**Refuted, and refuted on its own examples.** All three modules the
+handoff named — `uninstrumented/scan.py`, `reasoning-gate/mine_logs.py`,
+`inverseminar/inverseminar.py` — enumerate themselves and **none of them
+writes**.
+
+The diagonal share is 65% and is not the test. Three of 49 modules write
+at all, so a thin margin makes the diagonal read high for a reason
+unrelated to the hypothesis; the within-group rates are printed instead
+and the power bound is stated.
+
+**The replacement predictor is execution.** Reading a tree cannot dirty
+it; running what is in the tree can, and `census.py`'s writes were its
+children's:
+
+                       writes: yes   writes: no
+    executes yes                   3           16
+    executes no                    0           30
+
+    16% against 0%.  All three writers execute; nothing that does
+    not execute writes.
+
+Labelled weaker in the output, because `executes` is read from source
+while `writes` is observed.
+
+**One finding about the instrument.** Running each module with
+`--selftest` reached *no enumeration at all* for the two named scanners,
+because their selftests do not exercise the walk. The real invocations
+are declared, found by running them: `scan.py` with no argument prints
+usage and exits 0, and `mine_logs.py .` raises `FileNotFoundError`
+before its glob because the guards path defaults relative to the cwd.
+Without that, the arm that matters would have been measured as zero.
+
+## 2. Stale-number repair: 35 of 42, and all 9 that diverged
+
+    35 of 42 resolved claims have a command that produces the
+    stated number.
+     7 have a check that is not a count -- byte comparisons, a
+       regeneration, a git diff.
+     9 of 9 DIVERGED claims are convertible.
+
+**One correction to the framing.** Conversion does not make a claim
+`MAINTAINED`. It makes it stop being a claim: there is no stored number
+left to diverge from, which is a different state from a number a test
+asserts. `MAINTAINED` means something checks it; converted means nothing
+needs to. The report says this where it prints the number, because
+counting the second as the first would report a removed claim as an
+asserted one.
+
+Not applied here, per `SS_012`. The pinned sample names commits and the
+S5 replay resolves against a history a correction would extend.
+Measuring is this commit; applying is the next.
+
+## 3. Use-mention: the file supplied its own control
+
+The test is structural, not semantic. Markdown puts a quoted claim in a
+code span and an asserted one in running prose:
+
+    line  236   430+ audit-grade tests green.       bare, asserted
+    line 6665   `430+
+      audit-grade tests green`                      in a span, quoted
+
+The same string, both ways, in the same file — a two-directional known
+answer the document supplied without being asked.
+
+The flag never excludes. A flagged claim must be declared in
+`bindings.py`, and a selftest check asserts every quoted claim has one.
+A silent misattribution becomes a required decision.
+
+## 4. WO9 (PlanExe) is not here
+
+Searched `PlanExe`, `plan_exe`, `WORK_ORDER_9`, `WO9`, case-insensitive,
+across every text file and the full git history on all branches.
+Nothing. The orders present are 4, 6, 7 and 10 plus four unnumbered
+ones.
+
+Not reconstructed — an order is a delivered artifact, and inventing one
+puts a specification in the author's mouth.
+
+The point survives the absence and is the sharpest thing in the handoff:
+**everything this folder has run measures a corpus.** A known answer
+declared by a generator's own authors would measure the **instrument**,
+which is the `null-harness` known-truth-first invariant, and this folder
+has never had one. The order is what is missing, not the argument.
+
+---
+
+# Cleanup pass — three repairs, one withdrawn verdict, eight conversions
+
+## The verdict that was mine
+
+`fourd-municipal-engine-v2 | 40 pass, 2 skip` was reported DIVERGED at
+`37/2 (3 failed)` and dated **BORN_DIVERGED**. It was not. The suite's
+CLI tests spawn a subprocess with no `PYTHONPATH`, so they pass where
+the package is installed and fail on a bare checkout. One line, and the
+suite returns exactly **40 passed, 2 skipped**.
+
+`crossdomain-eval`'s 68 is the same, once `sympy` is present.
+
+`SS_014` said the rate is a property of the document **and the
+machine**, and did not catch this. The reason is the useful part: a
+missing dependency announces itself as a collection error and gets
+`NOT_TESTABLE` with the name in it. A missing path produces a summary
+line, and **a summary line reads as a measurement**.
+
+## Three repairs, and where the line was drawn
+
+    grounding-layers/tests/test_l_epsilon_epistemic.py
+        shipped with NO import statements at all
+    fourd-municipal-engine{,-v2}/tests/test_cli.py
+        subprocess with no PYTHONPATH
+    crossdomain-eval
+        sympy, a declared dependency, absent
+
+    repo total  1198 passed / 15 failed  ->  1274 passed / 7 failed
+
+The remaining seven are assertions that disagree with the code they
+exercise — the L-epsilon and bias-audit tests, a pinned demo output, a
+thermodynamic check. Deciding which side is right there is a change to
+the drop's own physics. Named, not repaired. The line is
+mechanical-versus-substantive, not easy-versus-hard.
+
+## Eight conversions, and a rate that should not be read alone
+
+`SS_012` said the correction would be a separate commit. This is it,
+and it is `SS_015`'s repair rather than a correction: the count is
+deleted and the command that produces it named instead.
+
+    DIVERGED 0    n = 34    rate 0.000
+
+**Read the denominator.** It moved 42 → 34 because eight claims stopped
+being claims. A rate that falls because claims were removed says
+nothing about how the remaining ones are maintained, and 0.000 quoted
+without that is the exact shape this folder exists to find. The report
+now prints `READ THE DENOMINATOR` beside the rate whenever the retired
+ledger is non-empty, naming the blob where the eight were last measured
+against their artifacts.
+
+One line gained content rather than losing it: `430+ audit-grade tests
+green` was a bound plus a word, and `SS_008` showed the word was false.
+The replacement says the suite is the largest in the tree, that it is
+**not green**, and why the seven remaining failures are not repaired
+here.
+
+The eight bindings move to `bindings.RETIRED` rather than being
+deleted. Deleting them would have cleared the orphan check and taken
+with it the record that the claims existed — `SS_012`'s own argument
+one level down.
+
+## And one of my own checks read the data it was checking
+
+`resolve.selftest` asserted that a repeated triple gets distinct
+ordinals, keyed off a real duplicate in `CLAUDE.md`. Converting one of
+the two left a single-element list and the check raised `IndexError` —
+a failure indistinguishable from the property failing. Rebuilt on a
+constructed repeat.
+
+Third form in this folder of an instrument whose input is the thing it
+measures, after `SS_009` (a scan that modified its tree) and `SS_017`
+(a census that ran itself).

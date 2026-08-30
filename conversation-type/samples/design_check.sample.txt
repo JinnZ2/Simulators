@@ -54,21 +54,31 @@ CHECKS ON MARKER.md -- the marker is not edited
 
 3  'Instance: this session. Applied twice, corrected twice.'
    corpus         : this session's complete transcript
-   records        : 2157
+   records        : 6909
    first user turn: 'ROWS 3-4: RECORDS EXIST Logged at the time, in files inside '
-   assistant turns: 126
+   assistant turns: 388
    search terms   : 26 patterns (listed in TERMS_ADVICE)
-   HITS           : 0
+   HITS           : 3  Office, isolate
 
    The corpus runs from the session's first user turn to
    now, so this is not a post-compaction fragment.
 
-   WHAT THIS ESTABLISHES: the pattern is absent from this
-   session's record under these terms. That is a bounded
-   null, which is exactly what question-availability
-   QA_004 says a Q1 absence needs to be a measurement --
-   produced here about the author, one drop after being
-   specified.
+   The corpus is also being WRITTEN by the run that reads
+   it, so `records` is not stable across two runs inside
+   one session -- UNI_010 at its most literal. The hit
+   strings are printed so the count can be adjudicated
+   rather than trusted.
+
+   WHAT THIS ESTABLISHES: the scan is no longer
+   returning zero, and every hit so far has been a
+   different sense of the term -- `isolate` about a
+   git worktree, `Office` from a workbook sheet name
+   quoted in another folder's work. So the bounded
+   null holds on adjudication and does not hold on
+   the raw count, and the two are reported apart.
+   T1-1 from the other direction: a word list cannot
+   separate senses, and it over-fires as readily as
+   it is paraphrased around.
 
    WHAT IT DOES NOT ESTABLISH, and this matters more:
      - the marker may not mean this Claude Code session.
@@ -83,10 +93,10 @@ CHECKS ON MARKER.md -- the marker is not edited
 
 4  cross-links
    link                         mentions   artifact
-   median-case-calibration      0          NO
-   uninstrumented               84         yes
-   question-availability        3          yes
-   report-typing                7          NO
+   median-case-calibration      4          NO
+   uninstrumented               103        yes
+   question-availability        13         yes
+   report-typing                15         yes
    `question-availability` exists because the last drop landed
    it -- third consecutive marker whose named-and-absent set
    shrinks by exactly the folder built the drop before.

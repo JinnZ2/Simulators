@@ -1,0 +1,97 @@
+ENUMERATORS -- self-inclusion against tree-writing
+
+Hypothesis under test: a module that enumerates the tree
+it runs in BOTH includes itself in what it enumerates AND
+changes that tree by running -- the two being one thing.
+That predicts a diagonal 2x2: both or neither.
+
+module                                               self   writes roots   note
+--------------------------------------------------------------------------------------------------------
+adaptive-claim-loop/gate_null_test.py                no     no     0       no enumeration reached at run time
+category-weld/reconstruction/weld.py                 no     no     1       
+category-weld/weld.py                                no     no     1       
+claim-record/frames.py                               no     no     3       
+claim-record/record.py                               no     no     3       
+closure-cost/closure.py                              no     no     1       
+closure-cost/closure_audit.py                        no     no     1       
+constraint-assembly/assemble.py                      no     no     1       
+constraint-assembly/assembly_audit.py                no     no     1       
+conversation-type/design_check.py                    yes    no     1       
+domain-ledger/anchor.py                              no     no     1       
+domain-ledger/ledger.py                              no     no     1       
+domain-ledger/ledger_audit.py                        yes    no     2       
+fold-matrix/fold_matrix.py                           no     no     0       no enumeration reached at run time
+fourd-municipal-engine-v2/fourd_municipal_engine/etl no     no     0       no enumeration reached at run time
+fragility-cascade/attack_tree.py                     no     no     0       no enumeration reached at run time
+fragility-cascade/run_all.py                         yes    yes    1        M fragility-cascade/claims.json, 
+generation-capacity/capacity.py                      no     no     1       
+generation-capacity/mechanism_10_audit.py            no     no     1       
+grounding-layers/tests/test_extraction_shape.py      no     no     0       no enumeration reached at run time
+inverseminar/inverseminar.py                         yes    no     1       
+moral-decomposer/moral_audit.py                      no     no     2       
+notes/check_datasets.py                              yes    no     1       
+notes/check_uploads.py                               no     no     1       
+notes/study_watch.py                                 no     no     2       
+observer-exclusion/archival_bias.py                  yes    no     1       
+observer-exclusion/classification_check.py           yes    no     1       
+play-sims/tests/test_extraction_shape.py             no     no     0       no enumeration reached at run time
+presented-binary/binary_audit.py                     no     no     1       
+presented-binary/frame_sim.py                        no     no     0       no enumeration reached at run time
+presented-binary/presented_binary_audit.py           no     no     3       
+question-availability/check_marker.py                yes    no     1       
+reasoning-gate/mine_logs.py                          yes    no     1       
+reasoning-gate/tests/test_gate.py                    no     yes    5       ?? gate_T.denied.json
+residual-direction/naming.py                         yes    no     1       
+self-scan/census.py                                  -      -      -       NOT RUN: SS_017 -- a census cannot run its own 
+self-scan/enumerators.py                             -      -      -       NOT RUN: this module enumerates enumerators, so
+self-scan/resolve.py                                 no     no     9       
+shape-spec-audit/method_spec_audit.py                yes    no     1       
+shape-spec-audit/shape_spec_audit.py                 yes    no     3       
+sheet-structure-scan/pdfreader.py                    no     no     0       no enumeration reached at run time
+token-minimizer/compress.py                          no     yes    0       ?? geometries/
+tools/check_gate_drift.py                            yes    no     1       
+uninstrumented/case_018_audit.py                     no     no     1       
+uninstrumented/case_020_audit.py                     no     no     1       
+uninstrumented/case_021_audit.py                     no     no     2       
+uninstrumented/playground_audit.py                   no     no     2       
+uninstrumented/probe_audit.py                        yes    no     1       
+uninstrumented/scan.py                               yes    no     1       
+uninstrumented/scan_audit.py                         yes    no     2       
+uninstrumented/specimen_c_audit.py                   no     no     1       
+
+2x2 over 49 modules that ran
+                       writes: yes   writes: no
+  enumerates self yes            1           15
+  enumerates self no             2           31
+
+  diagonal share: 32 of 49 (65%) -- NOT the test.
+
+  ASSOCIATION, which is the test:
+    of 16 that enumerate themselves, 1 write  (6%)
+    of 33 that do not,             2 write  (6%)
+    difference: +0 points
+
+  3 of 49 modules write at all. A margin this thin bounds
+  what any association here can show, and the bound is
+  stated rather than left for the reader to notice.
+
+ALTERNATIVE PREDICTOR -- does the module RUN what it finds
+
+  census.py did both, and enumeration was not why.
+  Reading a tree cannot change it; running what is in the
+  tree can, and its writes were its children's. So the
+  same 2x2 against `executes`:
+
+                       writes: yes   writes: no
+  executes yes                   3           16
+  executes no                    0           30
+
+    of 19 that execute or write by design, 3 write  (16%)
+    of 30 that do not,                     0 write  (0%)
+    difference: +16 points
+
+  This is a WEAKER test than the first: `executes` is read
+  from the source and `writes` is observed, so a module
+  that opens a file for writing is close to predicting
+  itself. It is reported for the contrast with the
+  enumeration column, not as an independent finding.

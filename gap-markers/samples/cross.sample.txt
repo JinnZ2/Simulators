@@ -1,0 +1,44 @@
+{
+  "rows": [
+    {
+      "state": "uncounted",
+      "knowledge": true,
+      "boundary-artifact": true,
+      "forced": null,
+      "by": null
+    },
+    {
+      "state": "unasked",
+      "knowledge": false,
+      "boundary-artifact": true,
+      "forced": "boundary-artifact",
+      "by": "data exists"
+    },
+    {
+      "state": "unowned",
+      "knowledge": false,
+      "boundary-artifact": true,
+      "forced": "boundary-artifact",
+      "by": "party competent"
+    },
+    {
+      "state": "assembly",
+      "knowledge": false,
+      "boundary-artifact": true,
+      "forced": "boundary-artifact",
+      "by": "components present"
+    },
+    {
+      "state": "undated",
+      "knowledge": false,
+      "boundary-artifact": true,
+      "forced": "boundary-artifact",
+      "by": "record exists"
+    }
+  ],
+  "states": 5,
+  "cells": 10,
+  "reachable": 6,
+  "states_where_kind_is_free": 1,
+  "states_where_kind_is_forced": 4
+}

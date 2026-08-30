@@ -1,0 +1,45 @@
+{
+  "domain": "infrastructure",
+  "constructed": true,
+  "summary": "A bridge posting is derived from a load rating computed at commissioning under an assumed traffic mix. The mix changed; the posting did not, and the figure travels downstream with no re-check interval attached to it.",
+  "truth": "CALCULATED_UNCLOCKED",
+  "primary": "CALCULATED_UNCLOCKED",
+  "signals": {
+    "prior_report": "ABSENT",
+    "figure_without_clock": "PRESENT",
+    "designed_control": "ABSENT",
+    "no_instrument": "ABSENT",
+    "held_data_unasked": "ABSENT"
+  },
+  "signal_basis": {
+    "prior_report": "searched: nobody reported the mix change as a hazard",
+    "figure_without_clock": "the rating carries no domain of validity and no next-check date",
+    "designed_control": "searched: no re-rating was proposed",
+    "no_instrument": "traffic counts exist and are collected",
+    "held_data_unasked": "searched: traffic counts are collected and the mix change is visible in them, but the posting question WAS posed against them at commissioning. The figure is stale, not unasked"
+  },
+  "remedy": {
+    "text": "attach a domain of validity and a derived re-check interval to the posting",
+    "addresses_bin": "CALCULATED_UNCLOCKED",
+    "status": "OPEN"
+  },
+  "authoring_note": "The claim-record route: a figure whose clock was stripped, which that folder refuses to store as a literal date and derives instead.",
+  "figure": {
+    "what": "load rating, computed at commissioning",
+    "clock": {
+      "time_constant": {
+        "state": "UNMEASURED",
+        "why": "the rate at which the traffic mix moves has not been measured. It is the neglected term and nobody has put a number on how fast it moves."
+      },
+      "rate_ceiling": {
+        "state": "UNMEASURED",
+        "why": "no bound on how fast the mix can change is recorded anywhere in the posting file."
+      },
+      "coupling": {
+        "state": "UNMEASURED",
+        "why": "the elasticity of the rating with respect to the mix is derivable by perturbation and has not been derived."
+      }
+    },
+    "note": "Every sub-field is a stated absence with a reason, not an omission. That is the bin: the figure survived and the conditions under which it held did not, so the module that derives a clock returns UNDERIVABLE -- which is the bin restated by an instrument that did not know about it."
+  }
+}

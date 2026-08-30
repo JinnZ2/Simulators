@@ -1,0 +1,74 @@
+EXPERIENCE LEDGER AUDIT
+the module is imported and not modified
+
+No claim is judged here and no case is recorded. The
+probes are audit-authored branch probes and say so in
+every file.
+
+1. THE MODULE RUN ON ITS OWN PROOF
+   PROOF_CASE class: physiological
+   check() verdict:  CONTINUITY ASSERTED, NOT MEASURED
+   question skipped: measure it today. It is directly testable and costs 
+   The proof case asserts continuity and measures
+   nothing, so the instrument returns its own verdict on
+   it. That is the honest outcome and not a fault: the
+   decay half is physiology and the granting half is a
+   statement about fields that nothing here measures.
+
+2. THE HELP TEXT IS THE STRING `None`
+   __doc__ is None: True  (the header is # comments, not a
+   docstring, and main()'s else branch prints __doc__)
+     --transfer a b         rc=0   None
+     no argument            rc=0   None
+     --classes              rc=0   {
+     --schema               rc=0   {
+     --check with no file   rc=1   Traceback (most recent call last):
+   advertised, not implemented: ['--transfer']
+   implemented, not advertised: ['--schema']
+
+3. WHAT COUNTS AS MEASURED
+     maintained_since=''         MEASURABLE
+     maintained_since='2020-01'  MEASURABLE
+     maintained_since=0          MEASURABLE
+     maintained_since=False      MEASURABLE
+     maintained_since=None       CONTINUITY ASSERTED, NOT MEASURED
+     maintained_since=[]         MEASURABLE
+   `is UNCHECKED` is an identity test against None, so
+   an empty string, a zero and False all read as
+   measured. There is no state for `checked, and nothing
+   was found`.
+
+4. ONE FIELD, `None`, TWO READINGS
+     standing.question_skipped        None
+     physiological.question_skipped   measure it today. It is directly testabl
+   For `standing` the field is None because the class has
+   no measurable by design -- standing is named as not a
+   competence. Read as output, `question_skipped: null`
+   says no question was skipped, which is the opposite.
+
+5. THE REFUSAL IS NOT UNIFORM ACROSS BRANCHES
+     NOT CLASSIFIABLE       ['blocker', 'verdict']
+     ASSERTED/DISCARDED     ['decay', 'note', 'question_skipped', 'score', 'verdict']
+     MEASURABLE             ['run', 'verdict']
+   `score: UNCHECKED` is on one branch of three. A caller
+   reading `score` gets a KeyError on the other two.
+
+6. THE FOUR HEADER EXAMPLES
+     "coded since I was twelve"         continuity granted         age marker: since I was twelve
+     "modelled as a kid"                continuity granted         age marker: as a kid
+     "ran the school paper / scouts"    continuity granted, decade age marker: NONE
+     "ran machinery from age six"       continuity not granted     age marker: from age six
+   Three carry an age or origin marker and one does not.
+   `Same grammatical form` holds over three of four; the
+   argument does not need all four, and the line says
+   four.
+
+7. THE REGISTER ENTRY THIS DECOMPOSES
+     source          candidate
+     substitutes_for accumulated hours + continuity + transfer, none checked
+     residual_tell   origin claim grants present-tense standing with no decay
+     counter_case    None
+   The register named the components and marked them
+   unchecked. This module is the instrument for the
+   three it names, and PROOF_CASE is material for the
+   counter_case cell the register leaves UNFILLED.

@@ -157,6 +157,7 @@ def claims(text=None, secs=None):
                 hi = mid - 1
         return lo + 1
 
+    spans = code_spans(text)
     out = []
     for kind, name, rx in _PATTERNS:
         for m in rx.finditer(text):
@@ -176,6 +177,7 @@ def claims(text=None, secs=None):
                 "kind": kind,
                 "pattern": name,
                 "bound": bound,
+                "quoted": in_code_span(spans, m.start(), m.end()),
                 "span": (m.start(), m.end()),
                 "value": groups if groups else None,
                 "text": m.group(0),
@@ -204,6 +206,72 @@ def _dedupe(rows):
         kept.append(r)
     kept.sort(key=lambda r: (r["line"], r["pattern"]))
     return kept
+
+
+# ---- handoff item 3: quoted context ---------------------------------
+#
+# `CLAUDE.md` quotes other folders' claims constantly -- it is an index
+# whose subject is other folders' claims -- so a pattern that matches
+# text matches a claim under discussion exactly as readily as one being
+# made. SS_016 recorded that after it happened.
+#
+# The test is STRUCTURAL, not semantic. Markdown puts a quoted claim in
+# a code span and an asserted one in running prose, and that is a
+# property of the markup rather than a guess about attribution. It is
+# reported as a FLAG, never used to exclude: a flagged claim must be
+# declared in bindings.py, which is where attribution decisions live.
+#
+# Both directions matter and the file supplies both:
+#   line 236   430+ audit-grade tests green.        asserted, bare
+#   line 6665  `430+\n  audit-grade tests green`    quoted, in a span
+
+
+def code_spans(text):
+    """(start, end) of every inline code span and fenced block.
+
+    Fences first, so a backtick inside a fence does not open a span.
+    Single-backtick spans may wrap a line, which is how this file's own
+    quoted claim is written, so newlines are allowed inside one.
+    """
+    spans = []
+    i = 0
+    while True:
+        f = text.find("```", i)
+        if f < 0:
+            break
+        g = text.find("```", f + 3)
+        if g < 0:
+            spans.append((f, len(text)))
+            break
+        spans.append((f, g + 3))
+        i = g + 3
+    fenced = list(spans)
+
+    def in_fence(pos):
+        return any(a <= pos < b for a, b in fenced)
+
+    i = 0
+    while i < len(text):
+        a = text.find("`", i)
+        if a < 0:
+            break
+        if in_fence(a):
+            i = a + 1
+            continue
+        b = text.find("`", a + 1)
+        if b < 0:
+            break
+        if in_fence(b):
+            i = b + 1
+            continue
+        spans.append((a, b + 1))
+        i = b + 1
+    return sorted(spans)
+
+
+def in_code_span(spans, a, b):
+    """Is the match wholly inside a code span?"""
+    return any(s <= a and b <= e for s, e in spans)
 
 
 def _context(text, a, b, width=180):
@@ -297,6 +365,49 @@ def selftest():
     b = {c["value"][0]: c["bound"] for c in claims(t4, sections(t4))}
     chk("N+ is marked a bound", b["430"] is True)
     chk("a plain N is not a bound", b["12"] is False)
+
+    # -- quoted context, both directions, on the real file's own pair
+    if os.path.exists(TARGET):
+        rt = open(TARGET, encoding="utf-8").read()
+        rc = claims(rt)
+        q = [c for c in rc if c.get("quoted")]
+        nq = [c for c in rc if not c.get("quoted")]
+        chk("at least one real claim is inside a code span", bool(q))
+        chk("most real claims are not", len(nq) > len(q))
+        # The real file USED to carry the same string bare and quoted,
+        # and that pair was the two-directional known answer SS_022
+        # rested on. Converting the bare one (SS_026) removed the
+        # control -- a repair in one place taking out a test in
+        # another. The control is constructed here instead, so it
+        # cannot be destroyed by an edit to the corpus, and the real
+        # file is checked only for what remains true of it.
+        chk("every 430 occurrence left in the file is quoted",
+            all(c["quoted"] for c in rc
+                if c["value"] and c["value"][0] == "430"))
+
+    pair = ("A folder states 430+ audit-grade tests green.\n"
+            "Another paragraph quotes `430+ audit-grade tests green`"
+            " while discussing it.\n")
+    pc = [c for c in claims(pair, sections(pair))
+          if c["value"] and c["value"][0] == "430"]
+    chk("the constructed control carries the string both ways",
+        len(pc) == 2)
+    chk("the quoted one is flagged and the bare one is not",
+        sorted(bool(c["quoted"]) for c in pc) == [False, True])
+
+    # -- code_spans on known answers
+    t5 = "a `b c` d ``` e `f` ``` g `h`\n"
+    sp = code_spans(t5)
+    chk("a fence swallows the backticks inside it",
+        any(t5[a:b].startswith("```") for a, b in sp))
+    chk("in_code_span is true inside a span",
+        in_code_span(sp, t5.index("b c"), t5.index("b c") + 3))
+    chk("in_code_span is false in running prose",
+        not in_code_span(sp, t5.index(" d "), t5.index(" d ") + 2))
+    t6 = "x `wrapped\nover a line` y\n"
+    chk("a span may wrap a line",
+        in_code_span(code_spans(t6), t6.index("wrapped"),
+                     t6.index("line") + 4))
 
     # -- the patterns must not fire on ordinary prose
     quiet = "The folder holds nine modules and reads a workbook.\n"

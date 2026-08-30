@@ -186,6 +186,33 @@ where the instance is not.
 
 **Status: NOT FOUND in the stated corpus. Not refuted.**
 
+**Update 2026-08-26 — the count left zero and the null did not.**
+The same scan over the same session now returns **3 hits**, and all
+three are a different sense of the term: `isolate` about a git
+worktree, `Office` twice from a workbook sheet name quoted while
+working in another folder. Adjudicated, the bounded null holds;
+counted, it does not, and the report now prints the hit strings and
+branches its own prose on the count rather than asserting absence.
+
+That is `T1-1` **from the other direction**. The third caveat above
+says a word list is stepped around by paraphrase; this is the same
+list over-firing on a sense it was not written for, and one list
+cannot fix both.
+
+Two further properties of the corpus, recorded because they bound
+what any future run of this check can say:
+
+- **The corpus is written by the run that reads it.** `records` went
+  6860 → 6883 → 6900 across three runs inside one session, so the
+  number in the pinned sample is a reading taken at a moment, not a
+  size. `UNI_010` at its most literal, and unclosable by an
+  `EXCLUDE` list because the file being read is the session log.
+- **The session grew by 3.2×** (2157 → ~6900 records, 126 → 388
+  assistant turns) between the two pinned runs, so the denominator
+  behind *"0 hits"* and behind *"3 hits"* are different
+  denominators. The rate is not comparable across the two; only the
+  adjudication is.
+
 ---
 
 ### CT_006 — cross-links, and a pattern across three consecutive markers
@@ -211,4 +238,16 @@ channel in the previous marker and P-nothing in this one, and the marker
 says A3/"cost to asker" *is* its residue measurement. Three markers now
 depend on a folder that does not exist.
 
-**Status: SUPPORTED as a fact about the tree.**
+**Status: SUPPORTED as a fact about the tree, and the fact changed
+(2026-08-26).**
+
+`report-typing` landed the next drop, so the pattern this paragraph
+names — one artifact per drop, the set shrinking by exactly the
+folder built the drop before — held a fourth time. What it did not
+predict is the direction of the net: the arriving marker's own
+cross-refs opened `median-case-calibration` (which this table had
+already recorded at zero mentions) and `sensing-spine`, so the
+named-and-absent set grew in the same commit.
+
+This folder is not on the arriving marker's back-reference list
+despite citing it, recorded there as `RT_003`.

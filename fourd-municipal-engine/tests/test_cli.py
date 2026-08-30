@@ -1,5 +1,6 @@
 """End-to-end CLI tests via subprocess."""
 import json
+import os
 import subprocess
 import sys
 
@@ -20,8 +21,15 @@ ORDINANCE_TEXT = (
 
 
 def _run(args):
+    # The subprocess needs the package on its path. Without this the
+    # tests pass only where `pip install -e .` has been run and fail on
+    # a bare checkout -- which is every other test directory's baseline
+    # in this repository, and the state a reported count is taken in.
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    env = dict(os.environ)
+    env["PYTHONPATH"] = root + os.pathsep + env.get("PYTHONPATH", "")
     return subprocess.run(
-        CMD + args, capture_output=True, text=True, timeout=60
+        CMD + args, capture_output=True, text=True, timeout=60, env=env
     )
 
 

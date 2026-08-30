@@ -1,0 +1,27 @@
+{
+  "domain": "manufacturing",
+  "constructed": true,
+  "summary": "A feedstock lot arrives within every specification on the certificate and carries a contaminant at a concentration no party had characterised, from a process change two tiers up the supply chain that had not occurred before.",
+  "truth": "NOT_FORESEEN",
+  "primary": null,
+  "signals": {
+    "prior_report": "ABSENT",
+    "figure_without_clock": "ABSENT",
+    "designed_control": "ABSENT",
+    "no_instrument": "ABSENT",
+    "held_data_unasked": "ABSENT"
+  },
+  "signal_basis": {
+    "prior_report": "searched incoming-material correspondence and the supplier file: nothing",
+    "figure_without_clock": "searched: the certificate figures carry their method and their date",
+    "designed_control": "searched: no control was proposed, because the species had not been named anywhere",
+    "no_instrument": "the incoming assay covers the specified species and is fit for that purpose. This one is a gap in CHARACTERISATION, not in the instrument's constitution -- a different reading, argued in the authoring note",
+    "held_data_unasked": "searched the supplier file and the incoming-assay archive: the species is not present in any held data, which is what makes this the negative rather than HELD_BUT_UNASKED"
+  },
+  "remedy": {
+    "text": "add a non-targeted screen to incoming assay",
+    "addresses_bin": "GAP_UNINSTRUMENTED",
+    "status": "OPEN"
+  },
+  "authoring_note": "The reachable negative, and the hardest case to author honestly. It is built ABSENT on all four signals so it lands on NOT_FORESEEN rather than NOT_DERIVABLE. The contestable call is no_instrument: one reading is that an assay covering only specified species IS a constitutional exclusion, which would make this GAP_UNINSTRUMENTED. Recorded rather than resolved -- and the remedy is deliberately left aimed at GAP_UNINSTRUMENTED, so route-to-remedy reports a mismatch that is really a disagreement about the bin."
+}

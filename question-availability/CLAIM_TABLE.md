@@ -227,4 +227,26 @@ artifact exists, not whether the token appears.
 **Falsifier:** `report-typing` having an artifact, or having no mentions.
 `--selftest` fails on either.
 
-**Status: SUPPORTED.**
+**Status: SUPPORTED as a claim, REFUTED on its stated instance
+(2026-08-26).**
+
+`report-typing` landed. The falsifier fired exactly as written, the
+selftest went red, and the check was repointed rather than loosened:
+the live instance is now `merit-anchoring`, 6 mentions and no
+artifact, which acquired two of them from the arriving marker's own
+cross-refs — the same route by which `report-typing` acquired its
+three, one drop later.
+
+So the *instance* expired and the *mechanism* did not. The arriving
+folder re-instanced it at a finer grain in the same commit: its own
+`RT_002` found `observer-exclusion` naming `report-typing` only in a
+cross-link checker's target list, which is neither a citation nor an
+absence but a third state — a folder asking whether the artifact
+exists. Two columns were not enough; the prose/code split is the
+third.
+
+The count moved the way the paragraph above predicted and by more
+than it predicted: artifacts present **3 of 5**, and the arriving
+marker's cross-refs opened two further absences
+(`median-case-calibration`, `sensing-spine`), so the named-and-absent
+set grew in the commit that shrank it.

@@ -1,20 +1,20 @@
 SCAN 4 ON CLAUDE.md
 bins imported from sheet-structure-scan/scan4.py
-target blob e4e15b2fec69   repo HEAD f303813
+target blob a8dc57eaf9ae   repo HEAD 4264664
 claims read from the working tree; checks run against HEAD in a worktree.
 Those are the same thing only when both land in one commit, which is
 how this folder is committed. Stated because they can come apart.
 
 S1 -- SECTIONS AND STANCE
-  target      6842 lines, 475986 chars, 97 sections
+  target      7048 lines, 490094 chars, 98 sections
   NEITHER      73    median section length 26 lines
   PROSPECTIVE  15    median section length 65 lines
-  RETROSPECTIVE 9     median section length 142 lines
+  RETROSPECTIVE 10    median section length 150 lines
   roadmap-marked sections (S1's own three examples): 2
 
   Length confound, measured: a section in the shortest
   third gets a verdict other than NEITHER 6% of the
-  time; one in the longest third, 47%. The test counts
+  time; one in the longest third, 50%. The test counts
   markers and compares two counts, so a longer section
   has more of both and is likelier to break the tie.
 
@@ -27,14 +27,11 @@ S1 -- SECTIONS AND STANCE
 
 section                        kind      claim                bin                stated -> observed
 ----------------------------------------------------------------------------------------------------------------------
-thermal-sensor-degradation-aud COUNT     23 tests green       DIVERGED           23 -> 33
-grounding-layers/              COUNT     430+ audit-grade tes DIVERGED           430 -> 516 passed, 9 failed
 relational/                    IDENTITY  byte-reproducible    HOLDS_UNMAINTAINED reproducible from relational/council_of_prot
 relational/                    IDENTITY  byte-reproducible    HOLDS_UNMAINTAINED reproducible from relational/nurturing_envir
 relational/                    COUNT     15 files total       NOT_TESTABLE       SUPERSEDED_IN_THE_SAME_SECTION
-relational/                    COUNT     17 files total       DIVERGED           17 -> 22
 fourd-municipal-engine-v2/     IDENTITY  byte-identical       HOLDS_UNMAINTAINED byte-identical -> 16 identical, 0 differing
-fourd-municipal-engine-v2/     COUNT     40 pass, 2 skip      DIVERGED           40/2 -> 37/2 (3 failed)
+fourd-municipal-engine-v2/     COUNT     40 pass, 2 skip      HOLDS_UNMAINTAINED 40/2 -> 40/2
 gdprf-framework/               COUNT     23 tests green       HOLDS_UNMAINTAINED 23 -> 23
 msiaf-gdprf-bridge/            COUNT     7 tests green        HOLDS_UNMAINTAINED 7 -> 7
 proxy-investigation-lab/       COUNT     13 tests green       HOLDS_UNMAINTAINED 13 -> 13
@@ -49,7 +46,6 @@ uninstrumented/                COUNT     selftest 14/14       HOLDS_UNMAINTAINED
 uninstrumented/                COUNT     selftest 13/13       HOLDS_UNMAINTAINED 13 -> 13
 uninstrumented/                IDENTITY  byte-identical       HOLDS_UNMAINTAINED asserted by the module's own selftest -> 15 
 uninstrumented/                COUNT     selftest 13/13       HOLDS_UNMAINTAINED 13 -> 13
-uninstrumented/                COUNT     selftest 25/25       DIVERGED           25 -> 36
 criteria-drift/                IDENTITY  byte-identical       HOLDS_UNMAINTAINED reproducible from criteria-drift/drift_sign.
 photoperiod-claim-harness/     IDENTITY  byte-reproducible    HOLDS_UNMAINTAINED byte-reproducible -> two runs identical (404
 presented-binary/              IDENTITY  byte-identical       NOT_TESTABLE       SUBJECT_NOT_IN_TREE
@@ -66,44 +62,74 @@ simulation-hypothesis-budget/  COUNT     selftest 17/17       HOLDS_UNMAINTAINED
 simulation-hypothesis-budget/  COUNT     selftest 16/16       HOLDS_UNMAINTAINED 16 -> 16
 simulation-hypothesis-budget/  COUNT     selftest 18/18       HOLDS_UNMAINTAINED 18 -> 18
 simulation-hypothesis-budget/  COUNT     selftest   20/20     HOLDS_UNMAINTAINED 20 -> 20
-simulation-hypothesis-budget/  COUNT     selftest 20/20       DIVERGED           20 -> 27
 instrument-bias-sims/          COUNT     197 selftest   check HOLDS_UNMAINTAINED 197 -> 197
 notes/study_watch.py           COUNT     84 tests green       HOLDS_UNMAINTAINED 84 -> 84
 notes/study_watch.py           COUNT     28 selftest checks   HOLDS_UNMAINTAINED 28 -> 28
 sheet-structure-scan/          IDENTITY  byte-identical       NOT_TESTABLE       SUBJECT_NOT_IN_TREE
-sheet-structure-scan/          COUNT     247 selftest checks  DIVERGED           247 -> 237
 claim-record/                  COUNT     93 selftest checks   HOLDS_UNMAINTAINED 93 -> 93
 residual-direction/            COUNT     49 selftest checks   HOLDS_UNMAINTAINED 49 -> 49
-model-provenance/              COUNT     29 selftest   checks DIVERGED           29 -> 28
-fold-matrix/                   COUNT     74 selftest checks   DIVERGED           74 -> 73
 self-scan/                     COUNT     430+   audit-grade t NOT_TESTABLE       QUOTED_NOT_ASSERTED
+self-scan/                     COUNT     40 pass, 2 skip      NOT_TESTABLE       QUOTED_NOT_ASSERTED
+self-scan/                     COUNT     430+ audit-grade tes NOT_TESTABLE       QUOTED_NOT_ASSERTED
+move-set/                      IDENTITY  byte-identical       NOT_TESTABLE       SUBJECT_NOT_IN_TREE
 search-substitution/           COUNT     selftest 23/23       HOLDS_UNMAINTAINED 23 -> 23
 
 BINS
   MAINTAINED           1
-  HOLDS_UNMAINTAINED   32
-  DIVERGED             9
-  NOT_TESTABLE         9
+  HOLDS_UNMAINTAINED   33
+  DIVERGED             0
+  NOT_TESTABLE         12
   UNBOUND              0
 
 NOT_TESTABLE, by cause
-  SUBJECT_NOT_IN_TREE                5
+  SUBJECT_NOT_IN_TREE                6
   SUPERSEDED_IN_THE_SAME_SECTION     3
-  QUOTED_NOT_ASSERTED                1
+  QUOTED_NOT_ASSERTED                3
+
+CONVERTIBLE TO A COMMAND
+  27 of 34 resolved claims have a command that produces
+  the stated number, so the count could be deleted and the
+  command named instead, as SS_015 did.
+  7 have a check that is not a count (byte comparisons,
+  regeneration, a git diff): nothing to convert.
+
+  This does NOT make them MAINTAINED. It makes them stop
+  being claims -- there is no stored number left to
+  diverge from, which is a different thing from a number
+  a test asserts.
+  Of the 0 DIVERGED, 0 are convertible.
+
+QUOTED CONTEXT (handoff item 3)
+  3 claim(s) sit inside a markdown code span, so the
+  text is a claim under discussion rather than one
+  being made. Structural, from the markup, not a guess
+  about attribution. Flagged, never auto-excluded:
+    self-scan/                   NOT_TESTABLE       430+   audit-grade tests green
+    self-scan/                   NOT_TESTABLE       40 pass, 2 skip
+    self-scan/                   NOT_TESTABLE       430+ audit-grade tests green
 
 ENVIRONMENT -- the rate below has one
-  stdlib                             32 claims
-  no check by construction           9 claims
-  pytest                             5 claims
+  stdlib                             26 claims
+  no check by construction           12 claims
+  pytest                             4 claims
   numpy+pytest                       2 claims
-  matplotlib+numpy+psutil+pytest+scipy 1 claims
   matplotlib+numpy                   1 claims
   jsonschema+pytest                  1 claims
   installed here: jsonschema yes, matplotlib yes, numpy yes, psutil yes, pytest yes, scipy yes
 
 RATE
-  DIVERGED / (DIVERGED + HOLDS + MAINTAINED) = 9 / 42 = 0.214
-  n = 42 claims resolved
+  DIVERGED / (DIVERGED + HOLDS + MAINTAINED) = 0 / 34 = 0.000
+  n = 34 claims resolved
+
+  READ THE DENOMINATOR. 8 claims were CONVERTED --
+  the count deleted and the command named instead --
+  so they are not in n and cannot be in the
+  numerator. A rate that falls because claims were
+  removed says nothing about how the remaining ones
+  are maintained. The retired set is in
+  bindings.RETIRED, and samples/scan.sample.txt at
+  blob 5ee0d9928b9b is where they were last
+  measured against their artifacts.
 
   Second point, flagged: the UNFCCC workbook returned
   0.913 under scan 4 (SSS_035). DIFFERENT DOCUMENT CLASS --
@@ -112,80 +138,13 @@ RATE
   files beside it. n = 2. No direction is claimed and no
   curve is emitted.
 
-S5 -- DIVERGENCE DATES (9)
-  thermal-sensor-degradation-audit/  23 tests green
-      stated 23, observed 33
-      introduced: ['2026-07-22T01:44:05+00:00', '65984da']
-      artifact:  ['2026-07-22T01:44:05+00:00', '65984da']
-      paragraph: ['2026-07-12T04:35:51+00:00', 'b3fffc6']
-      interval:  +9.88 days (artifact minus paragraph)
-      kind:      BORN_DIVERGED  (artifact moved +0.00 d after the number was written)
-  grounding-layers/  430+ audit-grade tests green
-      stated 430, observed 516 passed, 9 failed
-      introduced: ['2026-07-22T01:44:05+00:00', '65984da']
-      artifact:  ['2026-07-15T22:56:48-05:00', 'eb0b7d5']
-      paragraph: ['2026-07-15T22:56:48-05:00', 'eb0b7d5']
-      interval:  +0.00 days (artifact minus paragraph)
-      kind:      BORN_DIVERGED  (artifact moved -6.12 d after the number was written)
-  relational/  17 files total
-      stated 17, observed 22
-      introduced: ['2026-08-05T13:40:11+00:00', 'ffc488a']
-      artifact:  ['2026-08-12T04:50:11-05:00', '27f6fdf']
-      paragraph: ['2026-08-05T18:15:18+00:00', '7cbaccf']
-      interval:  +6.44 days (artifact minus paragraph)
-      replay:    at the introducing commit the check returned 18 (replayed in a worktree at ffc488a)
-      kind:      BORN_DIVERGED  (artifact moved +6.63 d after the number was written)
-  fourd-municipal-engine-v2/  40 pass, 2 skip
-      stated 40/2, observed 37/2 (3 failed)
-      introduced: ['2026-08-11T17:16:06+00:00', '0d78a70']
-      artifact:  ['2026-08-11T17:16:06+00:00', '0d78a70']
-      paragraph: ['2026-08-11T17:16:06+00:00', '0d78a70']
-      interval:  +0.00 days (artifact minus paragraph)
-      kind:      BORN_DIVERGED  (artifact moved +0.00 d after the number was written)
-  uninstrumented/  selftest 25/25
-      stated 25, observed 36
-      introduced: ['2026-08-21T18:31:25+00:00', 'c7b9df1']
-      artifact:  ['2026-08-21T18:35:16+00:00', 'be5e955']
-      paragraph: ['2026-08-21T18:31:25+00:00', 'c7b9df1']
-      interval:  +0.00 days (artifact minus paragraph)
-      replay:    at the introducing commit the check returned 25 (replayed 1 module(s) in a worktree at c7b9df1)
-      kind:      DRIFT  (artifact moved +0.00 d after the number was written)
-  simulation-hypothesis-budget/  selftest 20/20
-      stated 20, observed 27
-      introduced: ['2026-08-21T21:29:09+00:00', '4491ecc']
-      artifact:  ['2026-08-21T22:08:45+00:00', 'de5a3bd']
-      paragraph: ['2026-08-21T21:29:09+00:00', '4491ecc']
-      interval:  +0.03 days (artifact minus paragraph)
-      replay:    at the introducing commit the check returned 20 (replayed 1 module(s) in a worktree at 4491ecc)
-      kind:      DRIFT  (artifact moved +0.03 d after the number was written)
-  sheet-structure-scan/  247 selftest checks green
-      stated 247, observed 237
-      introduced: ['2026-08-25T20:35:12+00:00', 'd133809']
-      artifact:  ['2026-08-25T22:03:12+00:00', '4142cf7']
-      paragraph: ['2026-08-25T20:35:12+00:00', 'd133809']
-      interval:  +0.06 days (artifact minus paragraph)
-      replay:    at the introducing commit the check returned 209 (replayed 8 module(s) in a worktree at d133809; NOT LIKE-FOR-LIKE -- 8 module(s) then against 9 now, so this number is not comparable to the stated one)
-      kind:      DRIFT_POSSIBLE  (artifact moved +0.06 d after the number was written)
-  model-provenance/  29 selftest
-  checks
-      stated 29, observed 28
-      introduced: ['2026-08-25T18:08:48+00:00', '5f91b2a']
-      artifact:  ['2026-08-25T18:08:48+00:00', '5f91b2a']
-      paragraph: ['2026-08-25T18:08:48+00:00', '5f91b2a']
-      interval:  +0.00 days (artifact minus paragraph)
-      kind:      BORN_DIVERGED  (artifact moved +0.00 d after the number was written)
-  fold-matrix/  74 selftest checks
-      stated 74, observed 73
-      introduced: ['2026-08-25T20:13:33+00:00', 'ba100da']
-      artifact:  ['2026-08-25T20:13:33+00:00', 'ba100da']
-      paragraph: ['2026-08-25T20:13:33+00:00', 'ba100da']
-      interval:  +0.00 days (artifact minus paragraph)
-      kind:      BORN_DIVERGED  (artifact moved +0.00 d after the number was written)
+S5 -- DIVERGENCE DATES (0)
+  none
 
 PREDICTIONS (registered in PREDICTIONS_WO10.md before
 resolve.py existed)
-  P1  HELD -- selftest family 4/22 = 0.182, suite family 4/11 = 0.364
-  P2  HELD -- 9 COUNT claims DIVERGED
+  P1  REFUTED -- selftest family 0/18 = 0.000, suite family 0/8 = 0.000
+  P2  REFUTED -- 0 COUNT claims DIVERGED
   P3  HELD -- 0 of 8 resolvable IDENTITY claims DIVERGED
-  P4  HELD -- rate 0.214
+  P4  HELD -- rate 0.000
   P5  HELD -- MAINTAINED = 1, and it is reasoning-gate/ regenerates byte-identically

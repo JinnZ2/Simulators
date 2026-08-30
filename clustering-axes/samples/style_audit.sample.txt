@@ -1,0 +1,78 @@
+STYLE INDEX AUDIT
+the module is imported and the routes document read;
+neither is modified
+
+No agent corpus is reachable from here. Everything below
+is measured on text already in this repository, and every
+finding is a property of the instrument rather than of
+any corpus.
+
+1. THE STATED FEATURE COUNT HOLDS, AS A CEILING
+   ROUTES.md states 159 countable features.
+   observed on a long text: 159
+     83 function words + 19 punctuation + 40 trigram slots
+     + 17 shape and rate features = 159
+   observed on `the cat sat`: 128
+   The trigram block is `most_common(40)`, so a text with
+   fewer than 40 distinct trigrams yields fewer features.
+   159 is the ceiling, reached by any text of ordinary
+   length, and not a constant.
+
+2. WHAT THE SHIPPED COMMAND ACTUALLY MEASURES
+   CLAUDE.md vs PREAMBLE.md, no corpus -- the only path `--delta` takes:
+     shared features 138, total L1 14.7198
+     sent_len_sd          6.7206   45.7%   [UNNORMALISED shape]
+     mean_sent_len        4.3097   29.3%   [UNNORMALISED shape]
+     mean_line_len        1.3861    9.4%   [UNNORMALISED shape]
+     mean_word_len        1.2099    8.2%   [UNNORMALISED shape]
+     blankline_rate       0.4205    2.9%   [other rates]
+   by block:
+     UNNORMALISED shape      92.57%
+     other rates              4.75%
+     function words           2.15%
+     punctuation              0.29%
+     trigrams                 0.24%
+
+   The function-word profile is the topic-blind core the
+   whole design rests on. Under the shipped command it is
+   under one part in forty against four features carried
+   in their raw units -- characters and words per sentence.
+
+3. THE CORPUS PATH REVERSES IT, AND THE CLI NEVER TAKES IT
+   same pair, z-normalised over 5 vectors:
+     function words          60.32%
+     punctuation             15.63%
+     trigrams                12.36%
+     other rates              8.76%
+     UNNORMALISED shape       2.94%
+   `delta(a, b, corpus=...)` is implemented and correct.
+   `main()` calls `delta(vecs[0], vecs[1])` with no third
+   argument, so the documented command never reaches it.
+
+4. TWO VECTORS DO NOT SHARE A FEATURE SPACE
+     CLAUDE.md                    PREAMBLE.md                  a=159 b=159 shared=138 union=180
+     CLAUDE.md                    PROTOCOL.md                  a=159 b=159 shared=139 union=179
+     CLAUDE.md                    README.md                    a=159 b=159 shared=146 union=172
+     CLAUDE.md                    ROUTES.md                    a=159 b=159 shared=140 union=178
+     PREAMBLE.md                  PROTOCOL.md                  a=159 b=159 shared=141 union=177
+     PREAMBLE.md                  README.md                    a=159 b=159 shared=136 union=182
+   `delta` averages over `set(a) & set(b)`, and the
+   trigram block is per-text, so the denominator changes
+   with the pair. d(a,b) and d(a,c) average over
+   different feature sets.
+
+5. EDGES
+     empty              119 features
+     no punctuation     158 features
+     one char           119 features
+     one word           122 features
+     only newlines      120 features
+     only punctuation   128 features
+     unicode            126 features
+
+6. CLI
+     one file               rc=0   }
+     two files --delta      rc=0   }
+     one file --delta       rc=0   }
+     missing file           rc=1   FileNotFoundError: [Errno 2] No such file or
+     no argument            rc=0   {}

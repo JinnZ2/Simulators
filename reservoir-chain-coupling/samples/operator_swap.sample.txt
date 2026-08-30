@@ -1,0 +1,47 @@
+OPERATOR SWAP -- the arithmetic of the spec's core claim
+
+The spec: independent-node evaluation feeds max(wave, pool) to the
+breach test; coupled physics feeds wave + pool. This file is that
+swap and nothing else -- no reservoir, no chain, no data.
+
+A WORKED NODE (arithmetic example, not a structure):
+  crest 10, antecedent pool 4, so freeboard 6.
+  independent breaches when the wave alone reaches the crest:
+      wave >= 10
+  coupled breaches when the wave covers the freeboard:
+      wave >= 6
+  so they DISAGREE for  6 <= wave < 10
+  band width = 4, which is the antecedent pool. width equals the antecedent pool level.
+
+  a wave of 6, 7, 8 or 9 breaches this node under coupled physics
+  and NOT under independent-node evaluation. Each such wave is,
+  by itself, below the crest; added to a reservoir already 4 deep
+  it is not.
+
+    wave 3    independent=False coupled=False  neither
+    wave 6    independent=False coupled=True   COUPLED ONLY -- the swap is decisive here
+    wave 8    independent=False coupled=True   COUPLED ONLY -- the swap is decisive here
+    wave 10   independent=True  coupled=True   both breach
+    wave 12   independent=True  coupled=True   both breach
+
+RESULT 1 -- the bias is ONE-SIDED.
+  max(a,b) <= a+b for non-negative a,b, so 'INDEPENDENT ONLY'
+  cannot occur: independent-node evaluation never breaches a node
+  coupled evaluation does not. Every disagreement is the
+  independent side UNDER-stating. Asserted over a sweep in the
+  selftest.
+
+RESULT 2 -- the disagreement band width equals the antecedent
+  pool. A node near crest (large pool, small freeboard) has a
+  wide band of waves it passes as safe and coupled physics does
+  not. A node with full freeboard (pool ~ 0) has no band at all.
+  The antecedent state is the gain, exactly.
+
+RESULT 3 -- outside the band the operators AGREE. Below the
+  freeboard: neither breaches. At or above the crest: both do.
+  The swap is decisive only in the middle, which is why the same
+  mechanism supplies the null test in chain.py.
+
+What this file does NOT establish: that the band is entered for
+any real structure, or how a breach at one node changes the wave
+into the next. The first requires data; the second requires the chain.

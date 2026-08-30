@@ -1,0 +1,168 @@
+GAP MARKERS -- checks on the delivered schema
+GAP_MARKERS.md is read and not modified. The five gaps/
+files it names did not arrive and are not reconstructed.
+
+1. THE SCHEMA, PARSED
+   fields (7): GAP_ID, DOMAIN, STATE, WHAT_EXISTS, WHAT_IS_MISSING, ENTRY_POINT, KIND
+   states (5): uncounted, unasked, unowned, assembly, undated
+   kinds  (2): knowledge, boundary-artifact
+
+2. KIND x STATE -- is the load-bearing field free to vary?
+   state        knowledge   boundary-artifact  forced by
+   uncounted    open        open               
+   unasked      --          open               data exists
+   unowned      --          open               party competent
+   assembly     --          open               components present
+   undated      --          open               record exists
+   KIND is free on 1 of 5 states, forced on 4.
+
+   Four of the five state definitions assert that the data, the
+   record, or the competence EXISTS. A state whose own definition
+   says the knowledge is present cannot also be a state where the
+   knowledge is absent, so KIND is determined on those four and
+   carries information on one.
+
+   So the delivered line "Most entries here are
+   boundary-artifact" is not an observation about a corpus. It is
+   forced by the state vocabulary, and it is derivable before any
+   entry is written. That is a schema economy, and the field
+   stays load-bearing for the READING RULE, which operates on
+   boundaries rather than on entries.
+
+3. NO NEGATIVE STATE
+   All five STATE values are gaps. There is no value meaning
+   looked, and nothing is missing here. So the register can only
+   ever record gaps, and a null test over it has no arm that
+   returns nothing -- the null-harness CONSTANT_FIRES shape at
+   the schema level.
+   The delivered framing answers part of this: "A marked gap is
+   not a finding. It is a location." A register of locations does
+   not need a negative the way a classifier does. What it cannot
+   then do is report coverage, because there is no denominator of
+   places looked at.
+
+4. ENTRY_POINT IS OPTIONAL AND HAS NO THIRD STATE
+   The field reads "cheapest available first query, where one
+   exists". So an entry with no ENTRY_POINT carries two readings
+   -- searched, and no query is available; or nobody named one --
+   and they are the two states this repo has separated a dozen
+   times. ENTRY_POINT is the field that makes a gap actionable,
+   so it is the one where the collapse costs most.
+
+5. THE READING RULE IS NOT AUTOMATED, ON ITS OWN SAY-SO
+   "Both look identical from outside. The content differs." A
+   keyword sort over the two branches would be a word list
+   deciding a question the author states cannot be decided from
+   the surface. What is built is a record: sort_record() takes a
+   declared branch with a reason, refuses a branch outside the
+   two, refuses a branch with no reason, and returns UNSORTED
+   rather than guessing.
+
+6. AGAINST investigation-sim -- 5 states, 6 bins,
+   and the map is not onto in either direction
+     uncounted  -> (no bin)
+     unasked    -> HELD_BUT_UNASKED
+     unowned    -> GAP_UNINSTRUMENTED
+     assembly   -> (no bin)
+     undated    -> CALCULATED_UNCLOCKED
+
+   bins with no state here: KNOWN_ROUTED_AWAY, CONCEIVED_NOT_BUILT, NOT_FORESEEN
+
+   Each side's unmapped members are what the other side cannot
+   express, and the sharpest was `unasked`: the instrument exists
+   and reported, and nobody posed the question. That is neither
+   KNOWN_ROUTED_AWAY, where a report was made and routed, nor
+   GAP_UNINSTRUMENTED, where the instrument is blind -- so a case
+   coded honestly against that module's four original signals
+   read ABSENT on all four and landed on NOT_FORESEEN, genuinely
+   novel, with the data in a file the whole time.
+   It landed. That module added a sixth bin and a fifth signal on
+   2026-08-26 (its IS_014), and this row now maps. The finding is
+   that a single vocabulary cannot enumerate what it has no word
+   for, and the gap was found by mapping two registers against
+   each other rather than by any check inside either.
+
+   Running the other way, this register has no state for
+   NOT_FORESEEN, which follows from section 3: a register of gaps
+   has no negative, so a location where nothing is missing has
+   nowhere to go.
+
+7. THE INDEX
+     gaps/substrate.md      yes ground, fill, water, deposition, v
+     gaps/structures.md     yes dams, bridges, dual-function asset
+     gaps/transport.md      yes rail, barge, air, road, staging
+     gaps/capability.md     yes fabrication, response cadre, match
+     gaps/screens.md        yes computable screens not run; date f
+   present: 5 of 5
+   Not reconstructed. A gap entry is data, and inventing one puts
+   a gap in the author's mouth.
+
+8. THE CORPUS -- 29 entries across five files
+   entries: 29
+   by state:
+     uncounted    4
+     unasked      14
+     unowned      5
+     assembly     4
+     undated      3
+   by kind:
+     knowledge          1
+     boundary-artifact  29
+   values outside the declared vocabulary: none
+
+9. GM_001 TESTED -- the prediction, against the corpus
+   boundary-artifact on 29 of 29 entries; knowledge on 1
+   the delivered distribution line holds: True
+   the stated falsifier fired: True
+     STR-05-RETROFIT-BASELINE  state undated  kinds knowledge, boundary-artifact
+   It fired on one entry, and the firing is not decidable by the
+   check. STR-05 marks `knowledge (for the compliance figure)`,
+   and what its own WHAT_IS_MISSING describes is a number whose
+   primary source the author does not have. The KIND definition
+   reads `the physics or the measurement is genuinely not known`,
+   which a figure that exists and lacks a citation is not. So
+   either the entry uses `knowledge` in a second sense, or GM_001
+   falls -- and the falsifier as written cannot say which,
+   because it turns on the word `correctly`, which nothing
+   measures.
+
+10. ENTRY_POINT -- present on 6 of 29
+     gaps/substrate.md      3 of 6 
+     gaps/structures.md     0 of 5 
+     gaps/transport.md      0 of 5 
+     gaps/capability.md     0 of 8 
+     gaps/screens.md        3 of 5 
+   The distribution is by FILE, not by gap. Three files are 0 of
+   18 and two are 6 of 11, and the file whose own premise is that
+   its entries are the cheapest gaps to close is the highest. So
+   GM_003's two readings need a third: the field is in use in two
+   files and not in three, which makes its absence a property of
+   the file rather than a judgement about the gap. A reader
+   picking the cheapest gap to attack reads all eighteen as
+   equally hard, and none of them was assessed.
+
+11. FIELDS CARRYING TWO VALUES, AND FIELDS WITH NO SLOT
+   STATE with two values:
+     SCR-03-IMPOUNDMENT-STORAGE-LOSS              undated / unasked
+   KIND with two values:
+     STR-05-RETROFIT-BASELINE       knowledge (for the compliance figure) / boun
+
+   field names in use and not in the schema: MECHANISM, NOTE, SCOPE, US ANALOGUES, WHY UNRUN, WORKED CASE
+   entries carrying at least one: 17 of 29
+   The schema says `Each gap entry carries these fields` and
+   lists seven. Six more are in use. WHY UNRUN is the one that
+   matters: on SCR-01 it gives the reason the computation has not
+   been performed -- liability for whoever publishes the flagged
+   list, and no agency owning a screen that crosses three
+   programs -- which is the boundary-artifact content itself, and
+   it is the only place in the corpus where that content is
+   stated as a field rather than left to be inferred from KIND.
+
+12. THE SIXTH FILE
+   ADDENDUM.md present: True
+   named in the INDEX: False
+   The INDEX names five files and six arrived. The addendum is
+   addressed to a reader the other five are not addressed to,
+   which is a reason for it to sit outside the index rather than
+   an oversight -- and it is not reachable by anything that reads
+   the INDEX.

@@ -1,0 +1,32 @@
+{
+  "domain": "industrial",
+  "constructed": true,
+  "summary": "A hazard review specifies a remote isolation valve upstream of a transfer line. It is engineered, costed and scheduled into a capital plan, then deferred across three budget cycles. The plan exists; practice does not track it.",
+  "truth": "CONCEIVED_NOT_BUILT",
+  "primary": "CONCEIVED_NOT_BUILT",
+  "signals": {
+    "prior_report": "ABSENT",
+    "figure_without_clock": "ABSENT",
+    "designed_control": "PRESENT",
+    "no_instrument": "ABSENT",
+    "held_data_unasked": "ABSENT"
+  },
+  "signal_basis": {
+    "prior_report": "searched: the review is a design document, not a report of an observed hazard",
+    "figure_without_clock": "searched: the cost estimate is re-run each cycle and carries its own date",
+    "designed_control": "engineered, costed, scheduled, three deferrals on the record",
+    "no_instrument": "the line is instrumented for pressure and flow",
+    "held_data_unasked": "searched: the hazard review posed the question and answered it"
+  },
+  "remedy": {
+    "text": "install the isolation valve",
+    "addresses_bin": "CONCEIVED_NOT_BUILT",
+    "status": "CLOSED_UNIMPLEMENTED"
+  },
+  "authoring_note": "Built so the recursion fires: the remedy for a control conceived and not built is itself closed unimplemented.",
+  "plan": {
+    "plan_exists": "yes",
+    "practice_tracks_plan": "no",
+    "why": "engineered, costed and scheduled into a capital plan; deferred across three budget cycles. The deferrals are on the record, so practice not tracking the plan is documented rather than inferred."
+  }
+}

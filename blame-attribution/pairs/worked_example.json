@@ -1,0 +1,33 @@
+{
+  "id": "worked_example",
+  "provenance": {
+    "prose": "DELIVERED VERBATIM -- CELLS.md, 'Worked example of the pairing'",
+    "code": "DELIVERED VERBATIM -- CELLS.md, same block",
+    "encodes": "AUDIT-AUTHORED. The delivered document ships the two forms and no mapping between them. Every entry below is this audit's reading, and every non-null span is checked to appear verbatim in the prose, so the declaration can be wrong but cannot be vague.",
+    "bears_on": "AUDIT-AUTHORED. Which of CELLS.md's five held-constant items each fact bears on."
+  },
+  "prose": "The driver had two seconds to react. The system had flagged the obstacle but the flag was low-confidence.",
+  "code": [
+    "agent_A.reaction_window_s = 2.0",
+    "agent_B.flag = {\"obstacle\": True, \"confidence\": 0.31}",
+    "agent_A.override_available = True",
+    "agent_B.override_available = False",
+    "outcome = COLLISION"
+  ],
+  "encodes": {
+    "agent_A.reaction_window_s": "had two seconds to react",
+    "agent_B.flag.obstacle": "had flagged the obstacle",
+    "agent_B.flag.confidence": "the flag was low-confidence",
+    "agent_A.override_available": null,
+    "agent_B.override_available": null,
+    "outcome": null
+  },
+  "bears_on": {
+    "agent_A.reaction_window_s": "what each agent could observe at decision time",
+    "agent_B.flag.obstacle": "what each agent could observe at decision time",
+    "agent_B.flag.confidence": "what each agent could observe at decision time",
+    "agent_A.override_available": "whether an override was available, and to whom",
+    "agent_B.override_available": "whether an override was available, and to whom",
+    "outcome": "outcome severity"
+  }
+}

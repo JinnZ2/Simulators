@@ -1083,3 +1083,242 @@ documents of this kind, not a rate estimated from a sample.
 **Falsifier:** one upward cell, anywhere, carrying a magnitude.
 
 **Status: SUPPORTED at n = 5 sources, with the dependence stated.**
+
+---
+
+# fold_register.py — delivered module, landed verbatim
+
+`FM_036..FM_044`. The module is imported by `register_audit.py` and
+edited by nothing.
+
+---
+
+### FM_036 — the refusal is real, and it is the rarest thing in the module
+
+`scan()` returns `score: None`, every one of the ten grid cells is
+`UNFILLED`, and the verdict string says *"NOT SCORABLE -- grid unfilled.
+Absence is the reading."* `grid_for` on a term not in the register
+returns `None` rather than an empty grid, so a caller cannot mistake
+"not a folded term" for "a folded term with nothing filled in".
+
+`domain-ledger/anchor.py`'s selftest asserts *"no composite emitted"* and
+`ledger.py` returns four uncombined ratios; this is the same discipline
+one level up, on a scanner, where the pull toward a headline number is
+strongest. It is designed in rather than found in audit.
+
+**Falsifier:** any input for which `score` is not `None`.
+
+**Status: SUPPORTED.**
+
+---
+
+### FM_037 — `cells_filled` is a literal, so the field cannot report anything else
+
+    "cells_filled": 0,
+    "cells_unfilled": total,
+
+`0` is written into the return, not derived from the grid, and
+`cells_unfilled` is `cells_total` by construction — checked across three
+inputs, identical every time. Nothing in the module can ever fill a
+cell, so the counter is `CONSTANT_SILENT`: it reports the design rather
+than the data, and the day a filling path exists it will keep reporting
+0 until someone notices.
+
+One line: count the non-`None` cells across the emitted grids. The
+number is 0 today and the field becomes a measurement instead of a
+restatement.
+
+**Falsifier:** an input returning a non-zero `cells_filled`.
+
+**Status: SUPPORTED — one line, and it is the field the design turns on.**
+
+---
+
+### FM_038 — `counter_case` separates perfectly by who named the term
+
+    kavik      counter_case filled     4
+    kavik      counter_case UNFILLED   1
+    candidate  counter_case UNFILLED  12
+
+**Zero of twelve candidates carry a counter-case; four of five
+kavik-sourced terms do.** Total separation.
+
+Two readings and the register cannot distinguish them: the kavik terms
+arrived with their counter-cases attached because they were argued
+before they were listed, or a counter-case is easier to find for a term
+someone has already thought about. Either way, the column reads as a
+property of **provenance** rather than of the term, and a reader
+scanning for which terms have evidence behind them is reading the
+`source` column with extra steps.
+
+The five with a filled cell are the four the register was clearly built
+around — money's Ford demonstration stage, regulation's self-builder,
+optimization's absent single-objective maximizer, efficiency's
+tree-replacement comparison. Those are the sharpest content in the file.
+
+**Falsifier:** one candidate term with a counter-case, which would break
+the separation and make the column about terms again.
+
+**Status: SUPPORTED, and it is the strongest structural finding here.**
+
+---
+
+### FM_039 — 73% of hits come from the alias layer, and that is where the sense-blindness is
+
+    document                              direct  alias  alias share
+    palo_alto_company_profile_pasted.md        3      1    25%
+    blank_template_pasted.md                   2      9    82%
+    CLAUDE.md                                 81    221    73%
+
+A register key is a word that means what the register says. An alias is
+a word list deciding word sense, which is `nonidentity-census` T1-1's
+measured failure, and on this repository the top alias hits are all
+other senses:
+
+    cost      -> money       66   "NOTE ON COST -- use dissipation, cost
+                                   imports a pricing model"  (a passage
+                                   arguing AGAINST the folded use)
+    protocol  -> procedure   49   PROTOCOL.md, REFUTATION_PROTOCOL
+    budget    -> money       42   artifact budget, compute budget, token
+                                   budget, reader budget
+    standard  -> regulation  19   "standard library", "Standard RAG"
+    qualified -> merit        7   a reasoning-gate verdict code
+    best      -> merit        7   "the SIGN of the best combination"
+
+`re.findall(r"[A-Za-z]+")` is the right tokenizer — no substring bleed,
+so `UNI_009`'s `lean`/`clean` failure cannot happen here. What survives
+is sense, which no word list reaches.
+
+**Falsifier:** a corpus where the alias share is low and the direct hits
+carry the load.
+
+**Status: SUPPORTED.**
+
+---
+
+### FM_040 — the schema has no cell for "the word appeared and is not folded here"
+
+Every hit on the two real outside documents was hand-checked — fifteen
+of fifteen, printed in the audit output so the reading is re-checkable
+rather than asserted.
+
+One is a counter-instance by the register's **own definition**.
+`blank_template_pasted.md` L87:
+
+    Sales Process: [Steps converting lead to customer
+                    (e.g., Demo -> Proposal -> Close)]
+
+The register says `procedure` substitutes for *doing*. Here the doing is
+enumerated on the same line. The word is present and the fold is not.
+
+`folded_terms_found` asserts foldedness by naming, and there is no state
+for a hit that is a counter-instance. That is the absent-vs-known-negative
+repair this repository has now recorded some fifteen times, arriving at
+the level of the **hit** rather than the cell — and it matters more here,
+because the register's whole claim is about instances.
+
+**Falsifier:** a scan output distinguishing a candidate hit from a
+checked non-fold.
+
+**Status: SUPPORTED, with the instance printed.**
+
+---
+
+### FM_041 — the occurrence cap is silent
+
+`scan()` stops appending at twelve lines per term. On `CLAUDE.md` six
+terms exceed it:
+
+    money        real  111   reported 12
+    procedure    real   69   reported 12
+    capacity     real   27   reported 12
+    regulation   real   24   reported 12
+    merit        real   15   reported 12
+
+Nothing in the returned dict says a list was cut — no count, no marker,
+no `truncated` flag, asserted in the selftest. A reader taking
+`len(occurrences[k])` as a frequency is off by an order of magnitude on
+the most common term and has no way to tell from the output.
+
+**Falsifier:** a marker in the output when the cap binds.
+
+**Status: SUPPORTED.**
+
+---
+
+### FM_042 — two CLI paths raise where the third reports
+
+    --grid efficiency   rc=0
+    --grid zzz          rc=0   {"error": "not in register"}
+    --grid              rc=1   IndexError: list index out of range
+    nosuch.txt          rc=1   FileNotFoundError
+
+`--grid` with an unknown term is handled and returns a stated error;
+`--grid` with **no** term indexes `argv[2]` without checking, and a
+missing file opens without checking. Same function, three arguments,
+two of them uncaught.
+
+`closure-cost` `CC_004` and `constraint-assembly` `CA_005` are the same
+finding in two sibling tools, which makes this the third instance of an
+unguarded CLI index in this family.
+
+**Falsifier:** either path returning a stated error instead of a
+traceback.
+
+**Status: SUPPORTED.**
+
+---
+
+### FM_043 — one alias is dead, and four fields are carried without being read
+
+`ALIASES["quality"] = "quality"` can never fire: the lookup is
+`word if word in REGISTER else ALIASES.get(word)`, and `quality` is a
+register key, so the first branch always takes it.
+
+Separately, `sign_storage`, `residual_tell`, `counter_case`, `source`
+and `substitutes_for` are **carried into the output and branched on by
+nothing** — no comparison, no sort, no filter. Read from the AST rather
+than by regex, because a first version matched the `<-` inside the
+`--list` format string and reported `substitutes_for` as branched on:
+an operator inside a string literal is not an operator. The detector is
+null-tested against a constructed real branch so it is not
+`CONSTANT_SILENT`.
+
+Carrying is not a defect — the fields are for the reader. It is worth
+knowing that `sign_storage`, whose three values (`signed`,
+`unsigned_positive`, `unsigned_negative`) are the register's only
+ordinal, is used by no code path, and that **15 of 17 terms share one
+value**.
+
+**Falsifier:** a code path that branches on any of the five.
+
+**Status: SUPPORTED.**
+
+---
+
+### FM_044 — the register is `category-weld`'s corpus in a different schema, and the term two folders have asked for is still absent
+
+`category-weld/` MECHANISM_09 is *two or more independent quantities
+welded into one term*, and its `welds/` directory holds exactly two
+entries, both from policy/economics — which is why `UNI_002`'s
+cross-field check has stayed open there.
+
+`fold_register.REGISTER`'s `substitutes_for` field **is** a component
+list: `safety <- hazard x exposure x consequence`,
+`risk <- probability x magnitude`, `resources <- a stock and a flow,
+welded` — the last says the word. Seventeen terms across engineering,
+governance, hiring, ecology and machine learning, which is the
+cross-field corpus that folder lacks.
+
+The two schemas do not merge as they stand: `welds/*.json` carries
+`divergences` with per-case readings and a `max_spread` readout, and the
+register carries no case data at all. What transfers is the term list.
+
+**And the term two folders have asked for is still missing.**
+`presented-binary` B5 and `moral-decomposer` `MD_004` both point at
+`welds/a_few.json`; `a few` is in neither register.
+
+**Falsifier:** a `welds/` entry generated from a register row, or an
+`a_few` entry in either.
+
+**Status: SUPPORTED — the corpus exists, the join does not.**

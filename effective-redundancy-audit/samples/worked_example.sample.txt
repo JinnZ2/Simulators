@@ -1,0 +1,7 @@
+n = 2
+2x2  [Neff==1]  failed=1 held=0   [Neff>1] failed=0 held=1
+counterexamples: failed-with-redundancy=0  held-without=0
+Fisher two-sided p = 1.0000
+mean N_nominal   failed=3.0  held=2.0   (predict: close)
+  Kerr County 2025             Nnom=3 Neff=1 modes=['C'] -> failed
+  Kerr County 2026             Nnom=2 Neff=2 modes=[] -> held

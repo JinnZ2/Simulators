@@ -1,0 +1,27 @@
+{
+  "domain": "industrial",
+  "constructed": true,
+  "summary": "A vessel fails at a weld. The fabrication records for that shop covering that period were destroyed in a flood eleven years before the event. No party retained a copy.",
+  "truth": "NOT_DERIVABLE",
+  "primary": null,
+  "signals": {
+    "prior_report": "UNSEARCHED",
+    "figure_without_clock": "UNSEARCHED",
+    "designed_control": "UNSEARCHED",
+    "no_instrument": "UNSEARCHED",
+    "held_data_unasked": "UNSEARCHED"
+  },
+  "signal_basis": {
+    "prior_report": "the records do not exist. Not searched-and-absent",
+    "figure_without_clock": "same",
+    "designed_control": "same",
+    "no_instrument": "same",
+    "held_data_unasked": "the records do not exist"
+  },
+  "remedy": {
+    "text": null,
+    "addresses_bin": null,
+    "status": "UNRECORDED"
+  },
+  "authoring_note": "The case that separates NOT_DERIVABLE from NOT_FORESEEN. Nothing fired in EITHER case; the difference is entirely whether the record was searched. Collapsing the two files this as genuinely novel, which is the reading that stops anyone looking."
+}

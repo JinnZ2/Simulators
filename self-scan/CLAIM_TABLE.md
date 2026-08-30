@@ -406,3 +406,396 @@ is a row reporting that a suite did not run.
 arm turns red.
 
 **Status: SUPPORTED, three arms.**
+
+---
+
+### SS_019 — self-enumeration and tree-writing are independent; the hypothesis is refuted on its own examples
+
+Handoff item 1: `census.py` hung on itself **and** wrote into the tree it
+measured, and the hypothesis is that anything enumerating the tree it
+runs in has both by construction, because the exclusion and the
+isolation are one problem.
+
+`enumerators.py` tests it against the population. Fifty modules call a
+directory-enumeration primitive; forty-nine ran. Both properties are
+**measured by running**, not read from source: enumeration roots are
+traced by wrapping `os.walk` / `os.listdir` / `glob` in a
+`sitecustomize` on the child's path, so what is recorded is where the
+module really looked, and writing is a `git status` diff across the run
+in a throwaway worktree.
+
+                       writes: yes   writes: no
+    enumerates self yes            1           15
+    enumerates self no             2           31
+
+    of 16 that enumerate themselves, 1 writes  (6%)
+    of 33 that do not,               2 write   (6%)
+    difference: +0 points
+
+**The three modules the handoff named all enumerate themselves and none
+of them writes** — `uninstrumented/scan.py`, `reasoning-gate/mine_logs.py`
+and `inverseminar/inverseminar.py` are `yes / no` each. The paired
+prediction fails on exactly its own examples.
+
+The diagonal share is 65% and is **not** the test: only 3 of 49 modules
+write at all, so with a margin that thin the diagonal is mostly the
+`(no, no)` cell and would read high whatever the self column did. The
+report prints the within-group rates instead and states the bound.
+
+**A finding about the instrument on the way:** running each module with
+`--selftest` reached **no enumeration at all** for the two named
+scanners, because their selftests do not exercise the walk. Their real
+invocations are declared in `INVOCATIONS`, found by running them —
+`scan.py` with no argument prints usage and exits 0 without walking, and
+`mine_logs.py .` raises `FileNotFoundError` before its glob because the
+guards path defaults relative to the cwd. Measuring the arm that matters
+required knowing that.
+
+**Falsifier:** a population with a fuller write margin in which the two
+rates separate.
+
+**Status: REFUTED, at low power, with the power bound stated.**
+
+---
+
+### SS_020 — the predictor is execution, not enumeration
+
+`SS_019`'s replacement. `census.py` had both defects and enumeration was
+not why: **reading a tree cannot dirty it; running what is in the tree
+can**, and the writes were its children's.
+
+Same 2x2 against whether the module executes other code or opens a file
+for writing:
+
+                       writes: yes   writes: no
+    executes yes                   3           16
+    executes no                    0           30
+
+    of 19 that execute or write by design, 3 write  (16%)
+    of 30 that do not,                     0 write  (0%)
+    difference: +16 points
+
+All three writers execute; nothing that does not execute writes.
+
+Reported as **weaker than the first test and labelled so in the output**:
+`executes` is read from the source while `writes` is observed, so a
+module that opens a file for writing is close to predicting itself. It
+is the contrast with the enumeration column that carries the content,
+not the number.
+
+**Falsifier:** a module that writes into the tree without executing
+anything or opening a file for writing.
+
+**Status: SUPPORTED, with its own weakness declared in the report.**
+
+---
+
+### SS_021 — 35 of 42 claims are convertible to a command, including all 9 that diverged
+
+Handoff item 2: generalise `SS_015`'s repair. A claim whose number has a
+generating command can have the number deleted and the command named
+instead.
+
+    35 of 42 resolved claims are convertible
+     7 have a check that is not a count -- byte comparisons,
+       a regeneration, a git diff: nothing to convert
+     9 of 9 DIVERGED claims are convertible
+
+**One correction to the handoff's framing.** It says the conversion turns
+DIVERGED-able claims into MAINTAINED-by-construction. It does not. It
+makes them **stop being claims**: there is no stored number left to
+diverge from, which is a different state from a number a test asserts.
+`MAINTAINED` means something checks it; a converted claim means nothing
+needs to. Counting the second as the first would report a removed claim
+as an asserted one, and the report says so where it prints the number.
+
+The conversion is **not applied here**, per `SS_012`: the pinned sample
+names commits and the S5 replay resolves against a history a correction
+would extend. Measuring it is this commit; applying it is the next one.
+
+**Falsifier:** a convertible claim whose command produces a different
+quantity than the sentence states, which would mean the conversion loses
+content rather than storing it elsewhere.
+
+**Status: SUPPORTED — measured, not applied.**
+
+---
+
+### SS_022 — the quoted-context test is structural, and the file supplies its own control
+
+Handoff item 3. `CLAUDE.md` is an index whose subject is other folders'
+claims, so it quotes them constantly and a pattern cannot tell a quoted
+claim from an asserted one. `SS_016` recorded that after it happened.
+
+The test does not guess at attribution. Markdown puts a quoted claim in
+a **code span** and an asserted one in running prose, which is a property
+of the markup:
+
+    line  236   430+ audit-grade tests green.       bare, asserted
+    line 6665   `430+
+      audit-grade tests green`                      in a span, quoted
+
+**The same string, both ways, in the same file** — a matched pair the
+document supplied without being asked, so the test has a known answer in
+both directions rather than only the one that motivated it. `code_spans`
+handles fenced blocks first so a backtick inside a fence does not open a
+span, and allows a span to wrap a line, which is how the quoted one is
+written.
+
+The flag **never excludes**. A flagged claim must be declared in
+`bindings.py`, which is where attribution decisions live, and a selftest
+check asserts every quoted claim has an explicit binding. That converts
+a silent misattribution into a required decision.
+
+**Falsifier:** a quoted claim in running prose with no code span, or an
+asserted one inside a span.
+
+**Status: SUPPORTED, with a two-directional known answer.**
+
+---
+
+### SS_023 — WO9 is not in this repository
+
+Handoff item 4 names WO9 (PlanExe) as the open instrument check: a known
+answer declared by the generator's authors, and the only queued run that
+measures the **grid** rather than a corpus.
+
+Searched: `PlanExe`, `plan_exe`, `WORK_ORDER_9`, `WO9`, case-insensitive,
+across every text file and the full git history including all branches.
+**Nothing.** The work orders present are `WORK_ORDER_4`, `_6`, `_7`,
+`_10` under `sheet-structure-scan/` and `self-scan/`, plus unnumbered
+`WORK_ORDER.md` files under `fold-matrix/`, `model-provenance/`,
+`nonidentity-census/` and `residual-direction/`.
+
+Nothing is reconstructed. An order is a delivered artifact and inventing
+one puts a specification in the author's mouth — the `PB_001` / `CW_004`
+rule.
+
+The point the item makes stands independently and is worth recording
+even with the order absent: **everything run in this folder measures a
+corpus**, and a known answer declared by a generator's own authors would
+measure the **instrument**. That is the `null-harness` known-truth-first
+invariant, and this folder has never had one.
+
+**Falsifier:** the order arriving.
+
+**Status: OPEN — the artifact is absent, not the argument.**
+
+---
+
+### SS_024 — one DIVERGED verdict was mine, not the document's
+
+`fourd-municipal-engine-v2 | 40 pass, 2 skip` was binned **DIVERGED**,
+observed `37/2 (3 failed)`, and S5 dated it **BORN_DIVERGED** — the
+artifact and the paragraph committed together and not agreeing even
+then.
+
+It agreed. The suite's CLI tests spawn
+`python3 -m fourd_municipal_engine.cli` in a subprocess with **no
+PYTHONPATH**, so they pass where `pip install -e .` has been run and
+fail on a bare checkout. With one line putting the package root on the
+child's path the suite returns exactly **40 passed, 2 skipped**.
+
+The claim was right the whole time. The divergence was the scan's
+environment.
+
+`crossdomain-eval`'s "68 total" is the same: 68 passed, once `sympy` —
+a declared non-stdlib dependency — is present.
+
+**`SS_014` named this shape and did not catch this instance**, and the
+reason is worth having: a missing dependency announces itself as a
+collection error, and the scan reports `NOT_TESTABLE` with the name.
+A missing **path** produces a summary line, and a summary line reads as
+a measurement. The environment block reports what is installed; it has
+no cell for what is importable *from where a subprocess runs*.
+
+**Falsifier:** a second DIVERGED verdict that dissolves under an
+environment change.
+
+**Status: REFUTED — the verdict was withdrawn, not the claim.**
+
+---
+
+### SS_025 — three mechanical repairs, 15 failures to 7
+
+None of the three was a disagreement between a test and the code it
+exercises.
+
+1. `grounding-layers/tests/test_l_epsilon_epistemic.py` shipped with
+   **no import statements at all** — it uses `EpistemicInstrument` and
+   `np` with nothing binding either, so all three tests raised
+   `NameError`. An extraction artifact from a context where both were
+   already in scope. Two of the three now pass.
+2. `fourd-municipal-engine{,-v2}/tests/test_cli.py` — the PYTHONPATH
+   above, six tests across two folders.
+3. `crossdomain-eval` — `sympy`, five collection errors.
+
+Repo total moved **1198 passed / 15 failed → 1274 passed / 7 failed**.
+
+The seven that remain are substantive: assertions in the L-epsilon and
+bias-audit tests that disagree with the code they exercise, plus a
+pinned demo output and a thermodynamic check. Deciding whether the test
+or the code is right there is a change to the drop's own physics, so
+they are named and left. The line is mechanical-versus-substantive, not
+easy-versus-hard.
+
+**Falsifier:** one of the seven turning out to be environmental too.
+
+**Status: SUPPORTED, with the remaining seven classified rather than
+fixed.**
+
+---
+
+### SS_026 — the eight DIVERGED claims are converted, and the rate is now 0 for a reason that is not an improvement
+
+`SS_012` recorded the debt and said the correction would be a separate
+commit. This is it, and the repair is `SS_015`'s rather than a
+correction: **the count is deleted and the command that produces it is
+named instead.**
+
+    23 tests green                -> run `pytest thermal-sensor-degradation-audit`
+    430+ audit-grade tests green  -> read the summary line; and NOT green,
+                                     with the seven named
+    17 files total                -> `ls relational/`
+    selftest 25/25                -> `--selftest` green
+    selftest 20/20                -> `--selftest` green
+    247 selftest checks green     -> totalled by self-scan/census.py
+    29 selftest checks            -> `--selftest` green
+    74 selftest checks            -> `--selftest` green on both modules
+
+Result: **DIVERGED 0, n = 34, rate 0.000.**
+
+**That number is not an improvement and the report says so above it.**
+The denominator moved 42 → 34 because eight claims stopped being
+claims. A rate that falls because claims were removed says nothing
+about how the remaining ones are maintained, and a reader who sees
+0.000 without the denominator has been handed exactly the shape this
+folder exists to find. `render` now prints `READ THE DENOMINATOR`
+beside the rate whenever the retired ledger is non-empty, with the blob
+where the eight were last measured.
+
+The `grounding-layers` line is the one that gained content rather than
+losing it. `430+ tests green` was a bound plus a word, and the word was
+false (`SS_008`); the replacement states that the suite is the largest
+in the tree, that it is **not green**, and why the remaining failures
+are not repaired here.
+
+**Falsifier:** a converted line that a reader cannot act on — a command
+that does not produce what the deleted number stated.
+
+**Status: SUPPORTED. `SS_012` closes.**
+
+---
+
+### SS_027 — a converted binding is retired, not deleted
+
+The eight bindings would have become orphans and the orphan check would
+have gone red. Deleting them would have cleared it, and taken with it
+the record that the claims ever existed — which is `SS_012`'s own
+argument, one level down: correcting a number removes the evidence it
+differed, and that applies to the binding too.
+
+They move to `bindings.RETIRED`, which nothing reads. Three selftest
+checks hold the line: retired and live are disjoint, no retired key
+still names a live claim, and the ledger is non-empty.
+
+**Falsifier:** a retired binding reappearing in `BINDINGS`.
+
+**Status: SUPPORTED.**
+
+---
+
+### SS_028 — one of my own checks read the data it was checking
+
+`resolve.selftest` asserted that a repeated `(section, pattern, value)`
+triple gets distinct ordinals, and it keyed off a **real duplicate in
+`CLAUDE.md`** — `simulation-hypothesis-budget`'s two `selftest 20/20`
+occurrences. Converting one of them left the list with a single element
+and the check raised `IndexError`.
+
+The check was correct about the code and wrong about how to ask. A
+known-answer check that reads the corpus under test breaks when the
+corpus changes, and the failure is indistinguishable from the property
+failing. Rebuilt on a constructed repeat, with a second check that
+ordinals do not collide across different triples.
+
+Same family as `notes/` finding 8 and `UNI_010`: an instrument whose
+input is the thing it measures. Third form in this folder after
+`SS_009` (a scan that modified its tree) and `SS_017` (a census that
+ran itself).
+
+**Falsifier:** a check here that still depends on a specific string in
+`CLAUDE.md`.
+
+**Status: REPAIRED.**
+
+---
+
+### SS_029 — the quoted-claim count grows with every audit paragraph, and the check that reports it raised instead
+
+`SS_016` found one quoted claim. There are now **three**, all in the
+`self-scan/` paragraph: `40 pass, 2 skip` quoted by `SS_024` while
+withdrawing a verdict against it, `430+ audit-grade tests green` quoted
+twice, once by `SS_008` and once by `SS_026` reporting what replaced it.
+
+That is structural, not accidental. **A folder whose subject is other
+folders' claims quotes them**, and every audit paragraph written here
+adds more. The structural test (`SS_022`) catches all three from the
+markdown, and each is declared in `bindings.py` rather than
+pattern-matched away — so the count going up is the flag working, not
+drift.
+
+**The check written to report this state raised on it.** It indexed
+`bindings.BINDINGS[c["key"]]` directly, so a newly quoted claim with no
+binding yet gave a `KeyError` inside the selftest instead of a failed
+check. A raise is not a failing check; it is a dead selftest, and the
+whole suite stops there. Changed to `.get`, plus a check that the
+quoted set has more than one member so the branch cannot go silent.
+
+Second instance in this pass of one of my own checks breaking on the
+data it reads, after `SS_028`. Both were found by running, neither by
+reading.
+
+**Falsifier:** a quoted claim outside the `self-scan/` paragraph, which
+would make the pattern about the file rather than about audit prose.
+
+**Status: SUPPORTED, and the check is repaired.**
+
+---
+
+### SS_030 — the conversion destroyed the control the quoted-context test rested on
+
+`SS_022`'s strongest feature was that the file **supplied its own
+two-directional known answer**: `430+ audit-grade tests green` appeared
+bare at line 236 and inside a code span at 6665, so the structural test
+had a positive and a negative case in the corpus itself, and neither was
+constructed.
+
+`SS_026` converted the bare one. Every remaining occurrence is a
+quotation, and `extract.py`'s check — *"the file carries the same claim
+quoted and bare"* — went red. `census.py` went red behind it, because it
+runs `extract.py --selftest` as its sibling-module probe.
+
+**A repair in one place took out a test in another**, and the test it
+took out was the one holding the finding that motivated the repair's
+own scanner.
+
+Rebuilt as a constructed pair, so it cannot be destroyed by an edit to
+the corpus, with the real file checked only for what stays true of it:
+every remaining `430` occurrence is quoted. The constructed control is
+weaker as evidence — `MP_008`'s shape, checkable where it is redundant —
+and it is the version that survives the document changing under it.
+
+Third instance in one pass of a check keyed to a specific string in the
+corpus under test, after `SS_028` and `SS_029`. All three were found by
+running.
+
+**The general form, and it is worth stating once:** a known-answer
+check whose known answer lives in the data under test is not a
+known-answer check. It is a regression test on the corpus wearing one's
+clothes.
+
+**Falsifier:** a check in this folder that still reads `CLAUDE.md` for
+its expected value.
+
+**Status: REPAIRED, and the class named.**

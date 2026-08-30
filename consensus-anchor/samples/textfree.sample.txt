@@ -1,0 +1,133 @@
+TEXT-FREE ARM -- run as asked
+SOURCE_DROP.md: "Anyone with compute: run the text-free
+arm ... Report the null."
+
+No human corpus is read anywhere in this pipeline. The agents hold
+position vectors over an arbitrary discrete space with no semantics
+attached.
+
+0. PARAMETERS -- every one a declared choice, none measured
+   N=150 agents, K=4 positions, T=400 steps, 6 seeds
+   J grid: 0.00, 0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.50, 0.60, 0.75, 0.90
+   eta grid: 0.00, 0.02, 0.10
+   topology: all-to-all; NOT swept
+   H3's locus is "interaction topology + coupling strength" and the
+   text-free arm as specified sweeps only J. Nothing below is
+   evidence about topology.
+
+1. THE CHANCE BASELINE, MEASURED
+   E[m] under uniform random: 0.2944  (sd 0.0223, 200 draws)
+   the naive 1/K:             0.2500
+   J_c threshold at 3.0 chance-SDs: 0.3613
+   The modal fraction under chance is E[max count]/N, not 1/K. It
+   is 17.8% higher here, and taking 1/K as chance puts the baseline
+   below where chance already sits, which manufactures a J_c.
+
+2. ONE SENTENCE, TWO READINGS
+   "weighted mix of own prior and sampled peer positions". DIST
+   reads the peer signal as the mean of peers' DISTRIBUTIONS.
+   SAMPLED reads it as the empirical distribution of peers' sampled
+   POSITIONS -- the more literal reading, since a position is a
+   discrete value.
+
+   DIST      population-mean drift over 200 steps: 4.11e-15
+             agents in total agreement: True   modal mass of the agreed distribution: 0.267
+   SAMPLED   population-mean drift over 200 steps: 7.42e-01
+             agents in total agreement: True   modal mass of the agreed distribution: 0.962
+
+   Under DIST the population mean is EXACTLY invariant -- the
+   update is p <- (1-J)p + J*mean(p), so the mean maps to itself.
+   Every agent contracts onto it and the population reaches total
+   agreement on the distribution it started with, which is near
+   uniform. Full agreement, zero consensus.
+   Under SAMPLED the peer signal is built from sampled positions,
+   the mean is not conserved, and a fluctuation is amplified to a
+   near-degenerate distribution. Same total agreement, opposite
+   convergence.
+
+3. m(J) BY RULE AND NOISE
+   DIST
+     J      eta=0.00  eta=0.02  eta=0.10
+     0.00   0.2922    0.2933    0.2933 
+     0.05   0.2956    0.3044    0.2944 
+     0.10   0.2956    0.3044    0.2944 
+     0.15   0.2956    0.3044    0.2944 
+     0.20   0.2956    0.3044    0.2944 
+     0.25   0.2956    0.3044    0.2944 
+     0.30   0.2956    0.3044    0.2944 
+     0.35   0.2956    0.3044    0.2944 
+     0.40   0.2956    0.3044    0.2944 
+     0.50   0.2956    0.3044    0.2944 
+     0.60   0.2956    0.3044    0.2944 
+     0.75   0.2956    0.3044    0.2944 
+     0.90   0.2956    0.3044    0.2944 
+     J_c: eta=0.00 -> None, eta=0.02 -> None, eta=0.10 -> None
+
+   SAMPLED
+     J      eta=0.00  eta=0.02  eta=0.10
+     0.00   0.2922    0.2933    0.2933 
+     0.05   0.3178    0.3067    0.2889 
+     0.10   0.3267    0.3156    0.2989 
+     0.15   0.3889*   0.3244    0.3078 
+     0.20   0.4322*   0.3300    0.3111 
+     0.25   0.4833*   0.3433    0.3100 
+     0.30   0.5256*   0.3367    0.3144 
+     0.35   0.5778*   0.3411    0.3200 
+     0.40   0.5911*   0.3356    0.3200 
+     0.50   0.6178*   0.3900*   0.3244 
+     0.60   0.8122*   0.4111*   0.3311 
+     0.75   0.8478*   0.4156*   0.3333 
+     0.90   0.8800*   0.4522*   0.3644*
+     J_c: eta=0.00 -> 0.15, eta=0.02 -> 0.5, eta=0.10 -> 0.9
+
+   * clears the measured chance baseline by 3.0 chance-SDs.
+   J_c MOVES WITH ETA. The spec sweeps J and names no noise term,
+   so "the coupling value at which m departs from chance" has no
+   value until the noise is fixed. A threshold in J is a ratio of
+   coupling to noise.
+
+4. HYSTERESIS, AND THE CONTROL THE SPEC OMITS
+   A swept order parameter shows an up-down gap whenever the sweep
+   outruns relaxation, bistable or not. Relaxation lag shrinks as
+   the sweep slows; bistability does not. So the test is the gap
+   ACROSS sweep rates.
+
+   DIST (eta=0)
+     dwell 50    max gap 0.0117   mean gap 0.0094
+     dwell 200   max gap 0.0083   mean gap 0.0081
+     dwell 800   max gap 0.0083   mean gap 0.0068
+     slowest/fastest max gap: 0.714
+
+   SAMPLED (eta=0)
+     dwell 50    max gap 0.5667   mean gap 0.3797
+     dwell 200   max gap 0.7067   mean gap 0.3617
+     dwell 800   max gap 0.7050   mean gap 0.2581
+     slowest/fastest max gap: 1.244
+
+5. H3's THREE LIMBS, PER RULE, AT ETA=0
+   "H3 false if no J_c exists (m rises smoothly from J=0), or no
+   hysteresis, or the text-free population shows no alignment at
+   any J"
+
+     rule     no alignment at any J    no J_c     no hysteresis
+     DIST     True                     True       True
+     SAMPLED  False                    False      False
+
+   The limbs are joined by OR in the spec, so any one firing
+   falsifies H3 as written. Under DIST all three fire. Under
+   SAMPLED none does. ONE SENTENCE, TWO READINGS, OPPOSITE VERDICTS
+   -- and the spec does not state which reading it intends.
+
+6. WHAT THIS DOES NOT SAY
+   Nothing here is evidence about trained language models. It is a
+   symbolic-agent population with no corpus, which is what the arm
+   was specified to be, and its result is about the dynamics of
+   that population.
+   Topology is not swept. Neither is K, N, or the number of peers
+   sampled. The susceptibility measurement is built and is not
+   reported above because chi at a single field magnitude on 6
+   seeds did not separate the rules; that is a statement about this
+   run's power, not about chi.
+   The all-false outcome the spec asks to be reported did not occur
+   here, because this arm tests H3 alone. H1 and H2 need a trained
+   model and are untouched.

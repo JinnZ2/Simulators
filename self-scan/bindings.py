@@ -37,15 +37,6 @@ CC0. stdlib only. Parses under Python 3.9.
 BINDINGS = {
 
     # ---- COUNT: pytest suites ------------------------------------
-    "thermal-sensor-degradation-audit/|tests_green|23|0": {
-        "how": "pytest", "path": "thermal-sensor-degradation-audit",
-        "deps": ["pytest"],
-    },
-    "grounding-layers/|tests_green|430|0": {
-        "how": "pytest", "path": "grounding-layers",
-        "deps": ["pytest", "numpy", "scipy", "matplotlib", "psutil"],
-        "bound": True,
-    },
     "fourd-municipal-engine-v2/|pass_skip|40/2|0": {
         "how": "pytest", "path": "fourd-municipal-engine-v2",
         "deps": ["pytest"], "expect_skipped": True,
@@ -83,10 +74,6 @@ BINDINGS = {
     "notes/study_watch.py|tests_green|84|0": {
         "how": "pytest", "path": "tests", "deps": ["pytest"],
     },
-    "sheet-structure-scan/|tests_green|247|0": {
-        "how": "selftest_sum", "glob": "sheet-structure-scan/*.py",
-        "parse": "checks", "deps": ["stdlib"],
-    },
 
     # ---- COUNT: one module printing its own selftest count -------
     "uninstrumented/|selftest_ratio|14/14|0": {
@@ -100,11 +87,6 @@ BINDINGS = {
     "uninstrumented/|selftest_ratio|13/13|1": {
         "how": "selftest",
         "cmd": ["uninstrumented/selection_cuts.py"],
-        "parse": "ratio", "deps": ["stdlib"],
-    },
-    "uninstrumented/|selftest_ratio|25/25|0": {
-        "how": "selftest",
-        "cmd": ["uninstrumented/coupling_audit/provisioning.py"],
         "parse": "ratio", "deps": ["stdlib"],
     },
     "domain-ledger/|selftest_ratio|13/13|0": {
@@ -161,11 +143,6 @@ BINDINGS = {
         "cmd": ["simulation-hypothesis-budget/earth_transitions.py"],
         "parse": "ratio", "deps": ["stdlib"],
     },
-    "simulation-hypothesis-budget/|selftest_ratio|20/20|1": {
-        "how": "selftest",
-        "cmd": ["simulation-hypothesis-budget/scaling_classes.py"],
-        "parse": "ratio", "deps": ["stdlib"],
-    },
     "search-substitution/|selftest_ratio|23/23|0": {
         "how": "selftest_glob", "glob": "search-substitution/*.py",
         "parse": "ratio", "deps": ["stdlib"],
@@ -182,14 +159,6 @@ BINDINGS = {
         "how": "selftest_sum", "glob": "residual-direction/*.py",
         "parse": "checks", "deps": ["stdlib"],
     },
-    "model-provenance/|selftest_checks|29|0": {
-        "how": "selftest_sum", "glob": "model-provenance/*.py",
-        "parse": "checks", "deps": ["stdlib"],
-    },
-    "fold-matrix/|selftest_checks|74|0": {
-        "how": "selftest_sum", "glob": "fold-matrix/*.py",
-        "parse": "checks", "deps": ["stdlib"],
-    },
 
     # ---- COUNT: file counts --------------------------------------
     "relational/|files_total|15|0": {
@@ -197,10 +166,6 @@ BINDINGS = {
         "reason": "SUPERSEDED_IN_THE_SAME_SECTION -- the section states 15 "
                   "files total and then 17 later, both as counts at the "
                   "time of a drop.",
-    },
-    "relational/|files_total|17|0": {
-        "how": "count_files", "path": "relational", "glob": "*",
-        "recursive": False, "deps": ["stdlib"],
     },
 
     # ---- IDENTITY -------------------------------------------------
@@ -282,7 +247,34 @@ BINDINGS = {
         "strip": "module_docstring",
         "deps": ["stdlib", "git"],
     },
-    # ---- a claim this file QUOTES rather than asserts ------------
+    "move-set/|byte_identical|-|0": {
+        "how": "none",
+        "reason": "SUBJECT_NOT_IN_TREE -- the move-set paragraph reports "
+                  "that two byte-identical copies of one ledger return "
+                  "ORDERLESS. The copies are constructed at run time by "
+                  "the audit and are not files; there is nothing on disk "
+                  "to compare. Asserted by move_set_audit's selftest, not "
+                  "by a file pair.",
+    },
+
+    # ---- claims this file QUOTES rather than asserts -------------
+    #
+    # All three are in the self-scan paragraph, and that is structural
+    # rather than accidental: a folder whose subject is other folders'
+    # claims quotes them, and every audit paragraph added here adds
+    # more. The flag is set by the markdown (a code span), the exclusion
+    # is declared here, and nothing is pattern-matched away.
+    "self-scan/|pass_skip|40/2|0": {
+        "how": "none",
+        "reason": "QUOTED_NOT_ASSERTED -- this is SS_024 quoting "
+                  "fourd-municipal-engine-v2's claim while withdrawing a "
+                  "verdict against it, not a claim about self-scan.",
+    },
+    "self-scan/|tests_green|430|1": {
+        "how": "none",
+        "reason": "QUOTED_NOT_ASSERTED -- SS_026 quoting the "
+                  "grounding-layers line it replaced.",
+    },
     "self-scan/|tests_green|430|0": {
         "how": "none",
         "reason": "QUOTED_NOT_ASSERTED -- this occurrence is inside the "
@@ -298,5 +290,55 @@ BINDINGS = {
         "reason": "SUBJECT_NOT_IN_TREE -- two of three uploaded candidate "
                   "workbooks compared to each other. No workbook binary is "
                   "committed in this repository by design.",
+    },
+}
+
+# ---------------------------------------------------------- retired
+#
+# These eight claims were DIVERGED and are gone from CLAUDE.md: the
+# count was deleted and the command that produces it named instead,
+# which is SS_015's repair applied to SS_021's measured set. They are
+# kept here rather than deleted, because a binding that vanishes takes
+# with it the record that the claim ever existed -- and the whole of
+# SS_012 is that correcting a number removes the evidence it differed.
+#
+# Nothing reads RETIRED. It is the ledger of what was converted, and
+# `samples/scan.sample.txt` at blob 5ee0d9928b9b is where the eight
+# were last measured against their artifacts.
+RETIRED = {
+    "thermal-sensor-degradation-audit/|tests_green|23|0": {
+        "how": "pytest", "path": "thermal-sensor-degradation-audit",
+        "deps": ["pytest"],
+    },
+    "grounding-layers/|tests_green|430|0": {
+        "how": "pytest", "path": "grounding-layers",
+        "deps": ["pytest", "numpy", "scipy", "matplotlib", "psutil"],
+        "bound": True,
+    },
+    "relational/|files_total|17|0": {
+        "how": "count_files", "path": "relational", "glob": "*",
+        "recursive": False, "deps": ["stdlib"],
+    },
+    "uninstrumented/|selftest_ratio|25/25|0": {
+        "how": "selftest",
+        "cmd": ["uninstrumented/coupling_audit/provisioning.py"],
+        "parse": "ratio", "deps": ["stdlib"],
+    },
+    "simulation-hypothesis-budget/|selftest_ratio|20/20|1": {
+        "how": "selftest",
+        "cmd": ["simulation-hypothesis-budget/scaling_classes.py"],
+        "parse": "ratio", "deps": ["stdlib"],
+    },
+    "sheet-structure-scan/|tests_green|247|0": {
+        "how": "selftest_sum", "glob": "sheet-structure-scan/*.py",
+        "parse": "checks", "deps": ["stdlib"],
+    },
+    "model-provenance/|selftest_checks|29|0": {
+        "how": "selftest_sum", "glob": "model-provenance/*.py",
+        "parse": "checks", "deps": ["stdlib"],
+    },
+    "fold-matrix/|selftest_checks|74|0": {
+        "how": "selftest_sum", "glob": "fold-matrix/*.py",
+        "parse": "checks", "deps": ["stdlib"],
     },
 }

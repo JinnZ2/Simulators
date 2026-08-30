@@ -1,0 +1,101 @@
+REPORT-TYPING AUDIT
+the marker is read and the scorer imported; neither is
+modified
+
+Nothing here tests the mechanism. No transcript has been
+coded and every literature pointer is egress-blocked.
+
+1. THE ARRIVAL
+   citing it in prose (4): blame-attribution, conversation-type, criterion-symmetry, question-availability
+   only checking whether it existed (1): observer-exclusion
+   -- two columns, because a name in a cross-link
+      checker's target list is not a citation. Pooling
+      them is QA_007 failing inside a checker written
+      about QA_007.
+   the marker's own list (3): criterion-symmetry, question-availability, blame-attribution-by-role
+   citing but not listed: ['conversation-type']
+   listed but not a folder name: ['blame-attribution-by-role']
+
+2. WHAT THE MARKER'S OWN CROSS-REFS OPEN
+     merit-anchoring            NO    register filter, fillability vs
+     median-case-calibration    NO    strip the situating variable, ship the
+     uninstrumented             yes   Q7 and the exclusion mechanisms. R4 is a
+     sensing-spine              NO    clause 3   taxonomic exclusion before me
+     criterion-symmetry         yes   criterion applied downward, never upward
+     question-availability      yes   Q2, unaskable.
+     blame-attribution          yes   attribution tracks actor position.
+   uninstrumented resolves; the Q7 it cites does not.
+   The highest question ordinal anywhere in that folder
+   is Q6, so the reference is one past the end, and R4
+   rests on it.
+
+3. BLINDNESS IS THE DESIGN, AND THE CHECK IS `is False`
+     receiver_blind=False            instances counted: 0
+     receiver_blind='False'          instances counted: 1
+     receiver_blind='false'          instances counted: 1
+     receiver_blind=None             instances counted: 1
+     receiver_blind=True             instances counted: 1
+     receiver_blind='True'           instances counted: 1
+     receiver_blind=<field absent>   instances counted: 1
+   The schema shows the field as the STRING
+   "True | False -- if False, DROP the instance", so a
+   coder following it writes strings, and the string
+   "False" does not drop anything. A missing field does
+   not either.
+
+4. DECLARED VALUES THE SCORER NEVER READS
+     a_prior_filing     3 of 4 unread: NOT_STATED, NO_PRIOR, YES_ACTED
+     b_time_to_action   2 of 3 unread: NOT_STATED, integer beats
+     c_attribution      2 of 4 unread: NOT_STATED, UNATTRIBUTED
+     d_exec_testimony   5 of 5 unread: BOTH, LEARNED_ABOUT_OPERATION, NEITHER, NOT_
+
+   d_exec_testimony is read on none of its five values,
+   and its stated purpose is to distinguish the two
+   available readings of the whole genre.
+
+   b_time_to_action's stated purpose is that the discount
+   is a DELAY and refusal is the tail of the
+   distribution, not the measurement. The scorer reads
+   NEVER and nothing else, which is the tail.
+
+5. THE TWO-CONDITION GATE IS PROSE
+     both_arms_checked        False
+     contrast_literal         True
+     double_coding_checked    False
+     verdict_literal          True
+   The note says contrast and verdict stay None until
+   both arms have instances and a second coder has
+   passed. Both are written as the literal UNCODED, so
+   they are None whatever happens, and the two
+   conditions are checked nowhere.
+
+6. THE CONTROL ARM IS REQUIRED AND NOT ENFORCED
+     one-arm input emits a result: True
+     the missing arm is flagged:   False
+   CONTROL says a dismissal rate without the
+   floor-worker rate in the same setting is
+   uninterpretable. score() returns by_seat for whatever
+   seats it was given.
+
+7. CLI
+     --schema           rc=0   {
+     no argument        rc=0   {
+     missing file       rc=1   Traceback (most recent call last):
+
+8. STATED IN PROSE, NO FIELD OR NO BRANCH
+   schema fields the scorer never reads: content_summary, domain, episode_id, receiver_role, timestamp
+   -- `domain` is Instrument 2's sharp test (a report
+      inside the reporter's prior expertise). It is
+      codable and scored nowhere.
+   quantities the prose asks for with no field: episode air order, known-exec seat, network
+   -- CONFOUNDS/editing says code air order and network
+      "so it can be checked rather than assumed".
+   -- CONTROL's expected result names known-exec
+      instances; reporter_seat declares two values and
+      that is not one of them.
+   every accumulator counts occurrences: True
+   -- so b_time_to_action's integer beats are never
+      summed, averaged, or binned. The delay its own
+      `why` calls the measurement has no accumulator
+      at all; only the NEVER tail has one.
+

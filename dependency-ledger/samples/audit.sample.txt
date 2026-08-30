@@ -1,0 +1,133 @@
+DEPENDENCY LEDGER AUDIT -- built and run
+SOURCE_DROP.md: "Apply it to one case and publish the
+residual table, including the unmeasured cells. The
+unmeasured cells are the finding."
+
+Step 5 is CHECK against an INDEPENDENT record, and egress from this
+environment is an allowlist that refuses every archive. So on the
+real case every record-bounded cell is UNMEASURED. That is not a
+workaround; it is the run.
+
+0. THE LAW / RECORD SPLIT -- an addition, not in the spec
+   Step 3 says stop at conserved quantities: energy, mass,
+   momentum, time, material volume. Those are bounded by physical
+   LAW and are checkable from anywhere. Step 4 says expand each
+   into its dependency set: arable area, quarry volume, spoil
+   heaps, pollen records. Those are bounded by the RECORD and are
+   checkable only with archive access.
+   The propagation crosses from one class to the other and the spec
+   gives one procedure with no marker for where it changes
+   character. Every terminal requirement here carries `bound_by`
+   and the table is split on it. The split is the difference
+   between a cell anyone can close and a cell that requires an
+   excavation.
+
+   falsification threshold, declared: residual >= 10.0
+   The drop writes "residual >> 1" and gives no value for >>.
+   Stated here so it is a parameter rather than a reading.
+
+==============================================================
+CASE: constructed-closes  [CONSTRUCTED]
+   artifact: CONSTRUCTED. Not a real artifact and not a claim about anything. Exists so the closure test can be shown to return SATISFIED.
+
+   RESIDUAL TABLE -- not aggregated
+   requirement                        bound   residual    verdict
+   energy_budget                      LAW     0.5         SATISFIED
+   spoil_volume                       RECORD  0.222       SATISFIED
+
+   LAW      1 cells, 0 unmeasured   SATISFIED=1
+   RECORD   1 cells, 0 unmeasured   SATISFIED=1
+
+   GUARDS
+     COLLAPSED_PROXIES    fired: False 
+     SMUGGLED_CONSTANTS   fired: False   unsourced 0 of 1 (0%)
+     TIME_AS_SOLVENT      fired: False   BOUNDED
+     LABOR_ELASTICITY     fired: False 
+     RECORD_GAP_AS_PASS   fired: False 
+
+
+==============================================================
+CASE: constructed-falsified  [CONSTRUCTED]
+   artifact: CONSTRUCTED. Exists so the closure test can be shown to return FALSIFIED and GAP, and so the table is not CONSTANT_SILENT.
+
+   RESIDUAL TABLE -- not aggregated
+   requirement                        bound   residual    verdict
+   energy_budget                      LAW     50          FALSIFIED
+   quarry_volume                      RECORD  2           GAP
+   unreachable_cell                   RECORD  --          UNMEASURED
+       ^ constructed unmeasured cell
+
+   LAW      1 cells, 0 unmeasured   FALSIFIED=1
+   RECORD   2 cells, 1 unmeasured   GAP=1, UNMEASURED=1
+
+   GUARDS
+     COLLAPSED_PROXIES    fired: False 
+     SMUGGLED_CONSTANTS   fired: False   unsourced 0 of 1 (0%)
+     TIME_AS_SOLVENT      fired: False   BOUNDED
+     LABOR_ELASTICITY     fired: False 
+     RECORD_GAP_AS_PASS   fired: False 
+
+   MISSING COMPONENT SPEC
+     subsystem     : constructed energy source
+     required perf : 5000 MJ
+     constraints   : constructed
+     reachable?    : OPEN -- separate investigation
+     subsystem     : quarry_volume
+     required perf : 300 m3
+     constraints   : None
+     reachable?    : OPEN -- separate investigation
+
+==============================================================
+CASE: watercraft-propulsion  [REAL RUN]
+   artifact: heavy cargo attested on the far side of a river system
+
+   RESIDUAL TABLE -- not aggregated
+   requirement                        bound   residual    verdict
+   shaft_power_per_rower              LAW     8.71        GAP
+   hull_drag_coefficient_at_loading   RECORD  --          UNMEASURED
+       ^ no attested hull form; requires a replication or a
+       measured wreck
+   timber_volume_for_hull             RECORD  --          UNMEASURED
+       ^ requires a deforestation or woodland record for the reach;
+       egress-blocked
+   crew_daily_calories                RECORD  --          UNMEASURED
+       ^ requires granary capacity or settlement size;
+       egress-blocked
+   oar_replacement_rate               RECORD  --          UNMEASURED
+       ^ requires tool finds or a wear replication
+
+   LAW      1 cells, 0 unmeasured   GAP=1
+   RECORD   4 cells, 4 unmeasured   UNMEASURED=4
+
+   GUARDS
+     COLLAPSED_PROXIES    fired: False 
+     SMUGGLED_CONSTANTS   fired: False   unsourced 6 of 8 (75%)
+     TIME_AS_SOLVENT      fired: True    DURATION_UNBOUNDED
+     LABOR_ELASTICITY     fired: False 
+     RECORD_GAP_AS_PASS   fired: False 
+
+   MISSING COMPONENT SPEC
+     subsystem     : oar / hull / load-distribution system
+     required perf : 871.2 W
+     constraints   : period materials, river reach, displacement D
+     reachable?    : OPEN -- separate investigation
+
+==============================================================
+WHAT THE REAL RUN SHOWS, AND WHAT IT DOES NOT
+   The one cell that can be closed from here is the one whose
+   independent record is PHYSIOLOGY rather than archaeology --
+   sustained human mechanical output, reachable from anywhere. It
+   comes back GAP. Every record-bounded cell is UNMEASURED.
+   So the audit closes exactly on the terminal quantities that are
+   laws and on none of the ones that are artifacts, which is the
+   LAW/RECORD split showing up as a property of a run rather than a
+   distinction argued for.
+   The residual on that one cell is built from six UNSOURCED
+   coefficients out of eight. It is a demonstration that the
+   propagation runs. It is NOT a measurement about any vessel, any
+   river, or any period, and the SMUGGLED CONSTANTS guard reports
+   the share so the number cannot be quoted without it.
+   TIME AS SOLVENT fires on the real case: a 30-day duration enters
+   the propagation with nothing bounding it. Left firing rather
+   than repaired, because bounding it requires occupation layers
+   this environment cannot reach.

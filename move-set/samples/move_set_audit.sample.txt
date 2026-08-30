@@ -1,0 +1,118 @@
+MOVE SET AUDIT -- checks on the delivered move_set_sim.py
+the module and the ledger are imported and read, not edited
+
+1. THE DELIVERED LEDGER
+   total 6.0 of 11.0, refusal fraction 0.67, moves not run: none
+     M1_provenance      NOT_DERIVABLE      1.0  earned refusal
+     M2_substitution    RESOLVED           1.0  ok
+     M3_relation_held   RESOLVED           1.0  ok
+     M5_self_report     INSTRUMENT_BLIND   1.0  earned refusal
+     M4_perturb         SHARE_IS_NONE      1.0  earned refusal
+     M6_absence         NOT_ADDRESSABLE    1.0  earned refusal (pre-split bundle: worth 1, not 6)
+     --                 --                 0.0  LEDGER SPANS THE M6 SPLIT. Totals from pre-split and post-split runs are NOT comparable -- possible went from 6 to 11.
+
+2. THE SCORER, NULL-TESTED
+   a ledger of one-character blockers and unblockers:
+     total 11.0 of 11.0, refusal fraction 1.0
+   a ledger of one-character evidence locators:
+     total 11.0 of 11.0, refusal fraction 0.0
+   The delivered run scores 6.0. The scorer separates
+   these three by some margin.
+
+   The rule says a bare 'I don't know' is not a refusal.
+   The implementation checks that two strings are
+   non-empty. `x` is non-empty.
+
+3. THE FALSIFIER, AT ITS EDGES
+   zero_runs      runs=0 orderless=False CHAIN DETECTED -- findings depend on move or
+   one_run        runs=1 orderless=True  ORDERLESS -- claim holds
+   two_same       runs=2 orderless=True  ORDERLESS -- claim holds
+   two_shuffled   runs=2 orderless=True  ORDERLESS -- claim holds
+   two_differing  runs=2 orderless=False CHAIN DETECTED -- findings depend on move or
+
+   Zero runs returns a positive finding of order
+   dependence. One run returns a pass. Neither is a
+   measurement: the comparison takes at least two runs of
+   the same artifact under different orders, and nothing
+   in the function requires that.
+
+4. WHAT THE FALSIFIER COMPARES
+   the key is (move, verdict). Blocker, unblocker and
+   evidence_locator are not compared, so two runs reaching
+   the same verdict for different stated reasons read as
+   stable. Whether that is right depends on whether the
+   claim is about the finding SET or about the finding.
+   The docstring says finding SET, so this matches, and
+   the consequence is that the harness cannot see a run
+   that arrived by a different route.
+
+5. NO_FINDING SCORES ZERO
+   M6 runs on every artifact and admits NO_FINDING, which
+   falls in NULL and scores 0. Under a rule whose whole
+   point is that a refusal scores as high as an answer,
+   'I looked and nothing is hidden here' is the one
+   outcome that costs a point.
+   measured: 0.0, note 'null (pre-split bundle: worth 1, not 6)'
+
+6. CLI EDGES
+   --score <ledger>         rc=0   }
+   --score missing file     rc=1   FileNotFoundError: [Errno 2] No such file or
+   --emit with no artifact  rc=0                    What is the base? If the de
+   --paths with no runs     rc=0                    What is the base? If the de
+   no argument              rc=0                    What is the base? If the de
+
+7. THE LEDGER, READ FOR INTERNAL CONSISTENCY
+   both quoted strings present in the delivered file: True
+   on: venue tier
+     M3: Author prestige, field, and venue-tier confounds drop out of the ratio.
+     M5: A book still in print is undercounted by Scholar/Scopus relative to a journal article
+   M3 says venue tier drops out because the author is the same. M5
+   says venue tier is the blocker. Both are about the SAME pair, and
+   M3's own locator names them: a 1970 BOOK and a 1999 ARTICLE. Same
+   author holds prestige and field fixed; it does not hold venue
+   fixed, and here venue is maximally different. The control M3 calls
+   unusually clean is clean on two of the three confounds it lists.
+
+   Nothing in the harness compares entries to each other.
+   An orderless move set has no place to put a finding
+   that only exists between two moves.
+8. THE M6 SPLIT, AND WHAT THE COMPATIBILITY PATH REACHES
+   moves: 6 before the split, 11 after
+   the split's stated reason names four findings; it
+   creates 6 sub-moves.
+
+   the delivered ledger is pre-split: True
+   score                : 6.0 of 11.0
+   the SPLIT row is emitted: True
+   moves_not_run        : [] -- nothing reported missing
+   sub-moves reported missing: 0 of 6
+   -- `seen.update(LEGACY[mv])` marks all six sub-moves
+      run from one bundled entry, so the completeness
+      readout says nothing is missing while 5.0 points
+      of the denominator are unreachable. The drop
+      anticipated the comparability gap and the row
+      it emits addresses the TOTAL; the same bundling
+      reaches the second readout and nothing says so.
+
+   LEGACY_ADMITS is exactly its successors' union: True
+   admitted by the bundle and by no successor: none
+   it is a hand-written literal: True
+     INSTRUMENT_BLIND   admitted by 1 of 6 successors
+     NOT_ADDRESSABLE    admitted by 4 of 6 successors
+     NOT_DERIVABLE      admitted by 3 of 6 successors
+     NOT_SEPARABLE      admitted by 1 of 6 successors
+     NO_FINDING         admitted by 2 of 6 successors
+     RESOLVED           admitted by 6 of 6 successors
+     SHARE_IS_NONE      admitted by 1 of 6 successors
+   -- correct today and unmaintained by construction:
+      the union is one comprehension over LEGACY and
+      MOVES, and a change to any sub-move's admits list
+      moves the union and not the literal.
+
+   prior art named on 8 of 11 moves
+   without: M2_substitution, M4_perturb, M5_self_report
+   -- every M6 sub-move has one, which is the point of
+      the split. The comment explains M1's and M3's
+      additions and does not say whether the other
+      three have no prior art or were not looked up.
+
