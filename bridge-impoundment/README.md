@@ -5,7 +5,9 @@ GAP 15 from the operator's research-gaps register: the bridge as a
 falls between transportation engineering and dam safety, with the
 scour and clogging inputs quantified in the 2024–2025 record and the
 impoundment/release term owned by neither field. `SOURCE_DROP.md` is
-delivered verbatim and edited by nothing here.
+delivered verbatim and edited by nothing here; `SOURCE_DROP_V2.md` is
+v1 plus the delivered addendum, assembled as a verified pure
+insertion (below).
 
 The entry is a draft for `UNDERGRADUATE_RESEARCH_GAPS.md`, which this
 repository does not hold; at landing both coupling targets (Gaps 2
@@ -60,20 +62,54 @@ egress state of the data hosts. The drop arrives with its own
 citation hedge — *located by search, not asserted* — the first in the
 flood family to carry its negative-provenance note itself (`BI_007`).
 
+## The addendum (v2: the instrumented cascade case + the standing record)
+
+The author then delivered two blocks with the instruction *"add to
+the quantified table, plus a note"* (`ADDENDUM_DELIVERY.md`,
+verbatim). `SOURCE_DROP_V2.md` is the assembly — v1 with the fragment
+inserted at the end of the quantified section, verified as a **pure
+insertion** (the fragment comes from the delivery sheet, appears
+once, and removing it reproduces v1 byte-for-byte; the placement is a
+declared [CHOICE], since the instruction names the section and not
+the byte offset — `BI_008`). The content:
+
+- **Fjærland 2004** (Breien et al. 2008) — the folder's first
+  *measured* instance of the chained shape: moraine-dammed lake
+  breach → 240,000 m³ debris flow, post-event morphology in hand. It
+  measures the RELEASE half only ("clog" does not occur in the
+  fragment), and the CONFIGURATION NOTE discipline applies
+  symmetrically — a moraine dam is not a clogged bridge; its two
+  measured outputs are the release initiator's two load-bearing
+  fields (`BI_009`).
+- **The NVE GLOF register** — a standing national record that
+  *"serves English [and] never ranks on an English query because the
+  phenomenon indexes under jøkullaup / skred"*: a
+  query-vocabulary-bounded null stated by the author about a national
+  register, with *"long series = the instrument for a slow rate"*
+  naming why a register beats event studies on a rate question
+  (`BI_010`). `glacier.nve.no` is carried, not probed from here.
+
+`addendum_audit.py` checks the assembly and both blocks; prior claims
+keep their ratings on the text they rated.
+
     python3 bridge-impoundment/bridge_impoundment.py   # scaffold state
     python3 bridge-impoundment/audit.py                # the audit
+    python3 bridge-impoundment/addendum_audit.py       # the addendum
     python3 bridge-impoundment/selftest_bi.py          # the checks
     python3 bridge-impoundment/audit.py --measure      # re-probe hosts
 
 | file | what |
 |---|---|
 | `SOURCE_DROP.md` | GAP 15, delivered verbatim, not edited |
+| `ADDENDUM_DELIVERY.md` | the addendum delivery sheet, verbatim |
+| `SOURCE_DROP_V2.md` | v1 + the addendum, a verified pure insertion |
 | `bridge_impoundment.py` | the scaffold: schema, flag, interface, arithmetic, falsifiers |
 | `audit.py` | cross-references by existence, the two sentences vs the record, egress |
+| `addendum_audit.py` | assembly + cascade case + standing record |
 | `selftest_bi.py` | the checks; run it, it prints its own count |
-| `CLAIM_TABLE.md` | `BI_001..BI_007` with REFUTATION_PROTOCOL |
+| `CLAIM_TABLE.md` | `BI_001..BI_010` with REFUTATION_PROTOCOL |
 | `samples/` | pinned runs |
 
-Both CLIs refuse `--selftest` rather than exiting 0. No `no_severity`
+The CLIs refuse `--selftest` rather than exiting 0. No `no_severity`
 exemptions — every screen hit was reworded. Stdlib only, parses under
 3.9, phone-buildable, CC0.

@@ -8461,8 +8461,29 @@ underneath).
   **`BI_007` UNVERIFIED:** all nine literature rows carried and
   egress-blocked — and the drop hedges them itself (*"located by
   search, not asserted"*), the first in the flood family to arrive
-  with its own negative-provenance note. Check count printed by
-  `selftest_bi.py`; both CLIs refuse `--selftest`. Stdlib only, parses
+  with its own negative-provenance note. **The addendum then landed**
+  (*"add to the quantified table, plus a note"*):
+  `SOURCE_DROP_V2.md` is v1 plus the delivered fragment, assembled as
+  a **verified pure insertion** — the fragment extracted mechanically
+  from `ADDENDUM_DELIVERY.md`, appearing once, removing it reproduces
+  v1 byte-for-byte, the placement a declared [CHOICE] since the
+  instruction names the section and not the offset (`BI_008`).
+  **`BI_009`:** Fjærland 2004 (Breien et al. 2008) is the folder's
+  first *measured* instance of the chained shape — moraine-dammed
+  lake breach → 240,000 m³ debris flow, post-event morphology in
+  hand — and it measures the RELEASE half only ("clog" does not occur
+  in the fragment), with the CONFIGURATION NOTE discipline applied
+  symmetrically: a moraine dam is not a clogged bridge, and the
+  measured chain's two outputs are the release initiator's two
+  load-bearing fields. **`BI_010`:** the NVE GLOF register *"serves
+  English [and] never ranks on an English query because the
+  phenomenon indexes under jøkullaup / skred"* — a
+  query-vocabulary-bounded null stated by the author about a national
+  register (`QA_004`'s discipline from the retrieval side), with
+  *"long series = the instrument for a slow rate"* naming why a
+  standing register reaches the entry's rate question where
+  single-event studies cannot. Check count printed by
+  `selftest_bi.py`; the CLIs refuse `--selftest`. Stdlib only, parses
   under 3.9, phone-buildable, CC0.
 - `mining-increment/` — GAP 14, the other half of the coupling pair:
   mining-induced subsurface alteration coupled to reservoir loading —
@@ -8516,7 +8537,27 @@ underneath).
   all of it* (`MI_012`). `revision_audit.py` verifies **six sections
   byte-identical** across the revision while the three the revision is
   about all changed: the epistemics moved and the arithmetic did not
-  (`MI_011`). Check count printed by `selftest_mi.py`; all three CLIs
+  (`MI_011`). **The addendum then landed** with an exact placement
+  instruction (*"insert before 'CONFIGURATION NOTE — not a
+  discount.'"*): `SOURCE_DROP_V3.md` is v2 plus the fragment,
+  assembled as a **verified pure insertion** — extracted mechanically
+  from `ADDENDUM_DELIVERY.md`, appearing once immediately before the
+  instructed marker, removing it reproduces v2 byte-for-byte
+  (`MI_013`). The content is the known-answer standing rule arriving
+  in the entry's own text: `u`, the FoS-dropping term and normally a
+  MODELED quantity, recorded *"DURING a debris flow event"* (Bondevik
+  & Sorteberg 2021), so the modeled term has a measured answer to
+  reproduce — *"a modeled u that cannot reproduce a measured u on a
+  real event has not earned its place in the FoS calculation"* —
+  routed by the entry itself to Method step 2's transfer test, whose
+  gate the scaffold already is; no new code path, because the
+  delivered routing lands on one that exists. **`MI_014`:** a third
+  literature enters (Norwegian instrumented events, beside the
+  Chinese basin carries and the Western textbook methods) and the
+  `MI_012` rule now binds in both directions — the source enters for
+  its measurement, and its transfer to the chain is exactly as
+  UNDEFINED as every other carry until a per-basin basis is declared.
+  Check count printed by `selftest_mi.py`; all three CLIs
   refuse `--selftest`. Stdlib only, parses under 3.9, phone-buildable,
   CC0.
 - `legacy/` — Archived source drops. The repo root reserves one

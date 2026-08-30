@@ -48,6 +48,23 @@ CHANGED SECTIONS (and they did change)
   the split paragraph                    changed
   the transfer caveat                    changed
   why-different, first paragraph         changed
+THE ADDENDUM (v3: the pore-pressure validation case)
+  fragment_absent_from_v2      True
+  fragment_once_in_v3          True
+  pure_insertion               True
+  placed_before_marker         True
+  doi_carried                  True
+  measured_during_stated       True
+  earned_its_place_rule        True
+  routed_to_step2              True
+  Assembled per the delivered instruction as a verified pure
+  insertion. The content adds the missing instrument class to the
+  LEM coupling: u is the FoS-dropping term and normally modeled, and
+  a u measured during a real event gives the modeled term a known
+  answer to reproduce -- the known-answer standing rule arriving in
+  the entry's own text, routed to the transfer test whose gate the
+  scaffold already is.
+
 provenance flag contained on v2 as well: True
   A revision that changed the epistemics without touching the
   arithmetic: equations, flag, method, falsifiers and deliverable
@@ -56,4 +73,4 @@ provenance flag contained on v2 as well: True
   the instrument' looks like from the author's side.
 
 This module computes; it does not conclude. Findings are in
-CLAIM_TABLE.md as MI_009..MI_012.
+CLAIM_TABLE.md as MI_009..MI_014.

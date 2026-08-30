@@ -234,3 +234,51 @@ source's language has no field.
 
 **Falsifier:** a ranking or weighting anywhere in this folder keyed
 to source language. There is none; the gate's only key is the basin.
+
+## MI_013 — the addendum is a verified pure insertion, and the validation case is the known-answer rule arriving in the entry's own text
+
+The pore-pressure addendum landed with an exact placement instruction
+(*"insert before 'CONFIGURATION NOTE — not a discount.'"*) and
+`SOURCE_DROP_V3.md` is the assembly: the fragment is extracted
+mechanically from the delivery sheet (`ADDENDUM_DELIVERY.md`,
+verbatim), appears once, sits immediately before the instructed
+marker, and removing it reproduces v2 byte-for-byte — checked in
+`revision_audit.addendum()`, with a doctored-v3 arm proving the
+pure-insertion check can fail. The content: `u` is the term that
+drops the factor of safety and is normally a MODELED quantity, and
+Bondevik & Sorteberg (2021, `10.5194/hess-25-4147-2021`) record it
+*"DURING a debris flow event"* — so the modeled term has, for the
+first time in this entry, a measured answer to reproduce. *"A modeled
+u that cannot reproduce a measured u on a real event has not earned
+its place in the FoS calculation"* is `tools/known_answer.py`'s
+standing rule stated by the author about the entry's own load-bearing
+term — and the entry routes it itself: *"this is the transfer test in
+Method step 2, applied to the pore-pressure term,"* which is the gate
+`ImportedParam.establish_transfer` already is. No new code path was
+added, because the delivered routing lands on one that exists.
+
+**Falsifier:** for the assembly — `v3.replace(fragment, "") != v2`,
+pinned. For the routing — a pore-pressure transfer established
+without a basis; the gate raises on that today.
+
+## MI_014 — a third literature enters, and the language-carries-no-weight rule now has three instances
+
+The entry's source table carried two bodies: Chinese basin-scale
+carries (primary, per the v2 promotion) and Western textbook methods.
+The addendum adds a third — Norwegian instrumented field events, in
+English, from a hydrology venue — and the `MI_012` rule (*"The
+language of the source carries no weight here; the geology of the
+basin carries all of it"*) now binds in both directions: the
+Norwegian case enters for its measured `u`, not for being in English,
+and its transfer to the Columbia/Snake is exactly as UNDEFINED as the
+coal-basin porosity deltas until a per-basin basis is declared — a
+rain/snowmelt-triggered debris-flow slope in western Norway is not a
+mining-undermined reservoir rim. The scaffold's gate applies
+unchanged, which is the check that the rule is structural rather than
+rhetorical: three literatures, three languages of origin, one basin
+key.
+
+**Falsifier:** any code path or table treating the Norwegian value
+as transferred to the chain without an `establish_transfer` basis.
+None exists; no `ImportedParam` for `u` is even instantiated,
+because the addendum carries a citation, not a coefficient.

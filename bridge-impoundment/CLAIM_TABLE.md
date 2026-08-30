@@ -142,3 +142,68 @@ code (10 m) is marked carried-not-verified at its definition.
 
 **Falsifier:** any row failing against its named source — which
 adjusts the row, per the drop's own citation status, not these claims.
+
+## BI_008 — the addendum is a verified pure insertion, with the placement declared as the assembler's choice
+
+The GAP 15 addendum arrived with a section-level instruction (*"add
+to the quantified table, plus a note"*) rather than a byte offset, so
+`SOURCE_DROP_V2.md` is the assembly and the placement is a marked
+[CHOICE]: the fragment sits at the end of the quantified section,
+after the SIGN CAVEAT and before the divider ahead of *"The unstudied
+term"* — picked so the CITATION STATUS paragraph's *"table rows
+above"* keeps its referent. The assembly itself is not a choice: the
+fragment is extracted mechanically from the delivery sheet
+(`ADDENDUM_DELIVERY.md`, verbatim), appears once, and removing it
+reproduces v1 byte-for-byte (`addendum_audit.assembly()`, with a
+doctored-v2 arm in the selftest proving the check can fail). Prior
+claims keep their ratings on the text they rated; `BI_001..BI_007`
+are about v1 and v1 is untouched.
+
+**Falsifier:** `v2.replace(fragment, "") != v1`, pinned — or the
+CITATION STATUS referent breaking, which the placement exists to
+prevent.
+
+## BI_009 — Fjærland 2004 is a measured instance of the release half, and the configuration split applies symmetrically
+
+Breien, De Blasio, Elverhøi & Høeg (2008, `10.1007/s10346-008-0118-3`)
+is the first source in this folder that is *"a MEASURED instance of
+the chained-process shape, not a reconstruction"* — moraine-dammed
+lake breach → 240,000 m³ debris flow, erosion and post-event
+morphology in hand. What it measures is the RELEASE half of the
+entry's chain, and the clog half is not in it — checked mechanically:
+the word does not occur in the fragment (`release_half_only`). The
+sibling entry's CONFIGURATION NOTE discipline applies symmetrically
+here: a moraine dam is not a clogged bridge deck, so the mechanism
+(impounded volume released as a debris-charged surge) is kin and the
+configuration (dam material, breach mode, accumulation clock) is not
+carried across. The measured chain's two outputs — surge plus debris
+load — are the release initiator's two load-bearing fields
+(`volume`, `debris_load`), so the case instruments the interface the
+scaffold already declares rather than asking for a new one.
+
+**Falsifier:** the fragment claiming the clog half, or the initiator
+interface lacking a field the measured case produces. Neither holds;
+both are pinned.
+
+## BI_010 — the NVE register is a query-vocabulary-bounded null stated by the author, and a long series is the instrument for a slow rate
+
+The standing record carries its own search-exclusion finding: NVE's
+national GLOF register *"serves English"* and *"never ranks on an
+English query because the phenomenon indexes under jøkullaup / skred
+and the institution under NVE."* That is `QA_004`'s discipline —
+*absent in a stated corpus under stated terms* is a measurement,
+*I did not find it* is not — stated by the author about a national
+register, and it is the `CT_005`/`T1-1` shape from the retrieval
+side: an English-query absence is bounded by its vocabulary, not
+evidence of record absence. The closing line — *"long series = the
+instrument for a slow rate"* — names why a standing register (events
+from pre-1950 via Liestøl, annual updates continuing) reaches the
+entry's rate question where single-event studies cannot: a slow
+accumulation rate needs a series long relative to its time constant,
+which is the `G-RES` pair at record scale. `glacier.nve.no` is not
+probed from here; the register's content is carried at the delivery's
+own description depth.
+
+**Falsifier:** the register ranking on a plain-English GLOF query —
+which would adjust the author's indexing observation, not the null
+discipline it instances.

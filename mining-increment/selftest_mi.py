@@ -197,6 +197,23 @@ def run():
     chk("the provenance flag is contained on v2 as well",
         fc2["all_contained"] and fc2["anchor_doi_present"])
 
+    ad = RV.addendum()
+    chk("the addendum assembly is a verified pure insertion at the "
+        "instructed marker",
+        ad["pure_insertion"] and ad["placed_before_marker"]
+        and ad["fragment_once_in_v3"]
+        and ad["fragment_absent_from_v2"])
+    chk("the validation case carries its DOI and the "
+        "measured-during-event statement",
+        ad["doi_carried"] and ad["measured_during_stated"])
+    chk("the earned-its-place rule is present and routed to step 2",
+        ad["earned_its_place_rule"] and ad["routed_to_step2"])
+    # the assembly check can fail: a doctored v3 is not a pure insertion
+    frag = RV.addendum_fragment()
+    doctored = RV.v3().replace("MODELED quantity", "MODELED value", 1)
+    chk("a doctored v3 IS caught (the pure-insertion check can fail)",
+        doctored.replace(frag + "\n", "", 1) != RV.v2())
+
     rvout = RV.render()
     chk("the revision report states it computes and does not conclude",
         "computes; it does not conclude" in rvout)

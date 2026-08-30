@@ -149,8 +149,43 @@ def run():
         len(A.EGRESS) == 3
         and all(code in ("000", "2xx") for _h, code in A.EGRESS))
 
-    # ---- both CLIs refuse --selftest; the screen runs clean
-    for mod in ("bridge_impoundment.py", "audit.py"):
+    # ================= THE ADDENDUM (SOURCE_DROP_V2) =================
+    import addendum_audit as AD
+
+    asm = AD.assembly()
+    chk("the addendum assembly is a verified pure insertion in the "
+        "quantified section",
+        asm["pure_insertion"] and asm["placed_in_quantified_section"]
+        and asm["fragment_once_in_v2"]
+        and asm["fragment_absent_from_v1"])
+    # the assembly check can fail: a doctored v2 is not a pure insertion
+    frag = AD.fragment()
+    v2doc = io.open(os.path.join(HERE, "SOURCE_DROP_V2.md"),
+                    encoding="utf-8").read()
+    v1doc = drop
+    doctored = v2doc.replace("MEASURED instance", "MEASURED case", 1)
+    chk("a doctored v2 IS caught (the pure-insertion check can fail)",
+        doctored.replace(frag + "\n", "", 1) != v1doc)
+
+    cc = AD.cascade_case()
+    chk("the cascade case carries its DOI, volume, and the "
+        "measured-instance statement",
+        cc["doi_carried"] and cc["volume_carried"]
+        and cc["measured_instance_stated"] and cc["chain_stated"])
+    chk("the measured half is the release half (no clog term in the "
+        "fragment)",
+        cc["release_half_only"])
+
+    sr = AD.standing_record()
+    chk("the standing record carries the register, the "
+        "vocabulary-exclusion finding, and the slow-rate line",
+        sr["register_url_carried"] and sr["serves_english_stated"]
+        and sr["vocabulary_exclusion_stated"]
+        and sr["slow_rate_instrument"])
+
+    # ---- the CLIs refuse --selftest; the screen runs clean
+    for mod in ("bridge_impoundment.py", "audit.py",
+                "addendum_audit.py"):
         rr = subprocess.run([sys.executable, os.path.join(HERE, mod),
                              "--selftest"],
                             stdout=subprocess.PIPE,
@@ -161,10 +196,13 @@ def run():
     import no_severity  # noqa: E402
     bout = BI.render()
     aout = A.render()
+    adout = AD.render()
     chk("the scaffold report carries no severity language",
         not no_severity.hits(bout))
     chk("the audit report carries no severity language",
         not no_severity.hits(aout))
+    chk("the addendum report carries no severity language",
+        not no_severity.hits(adout))
     chk("and the screen is not silent by construction",
         bool(no_severity.hits(aout + "\nthis design is broken\n")))
 

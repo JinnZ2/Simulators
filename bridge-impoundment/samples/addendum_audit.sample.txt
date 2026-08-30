@@ -1,0 +1,39 @@
+GAP 15 ADDENDUM -- ASSEMBLY AND CONTENT AUDIT
+
+THE ASSEMBLY (a verified pure insertion)
+  fragment_absent_from_v1          True
+  fragment_once_in_v2              True
+  pure_insertion                   True
+  placed_in_quantified_section     True
+  The instruction names the section, not the byte offset; the
+  placement after the SIGN CAVEAT is declared as the assembler's
+  choice, picked so the CITATION STATUS paragraph's 'table rows
+  above' keeps its referent.
+
+THE INSTRUMENTED CASCADE CASE
+  doi_carried                      True
+  measured_instance_stated         True
+  release_half_only                True
+  chain_stated                     True
+  volume_carried                   True
+  The configuration split applies symmetrically: a moraine dam is
+  not a clogged bridge, what is measured is the release half, and
+  the clog term does not occur in the fragment -- mechanism kin,
+  configuration differs, the sibling entry's own CONFIGURATION NOTE
+  discipline applied to this folder's new source. The measured
+  chain's outputs are the release initiator's two load-bearing
+  fields.
+
+THE STANDING RECORD
+  register_url_carried             True
+  serves_english_stated            True
+  vocabulary_exclusion_stated      True
+  slow_rate_instrument             True
+  A register that serves English and never ranks on an English query
+  is a query-vocabulary-bounded null: an English-language absence is
+  bounded by its vocabulary, not evidence of record absence.
+  glacier.nve.no is not probed from here; the register's content is
+  carried at the delivery's own description depth
+
+This module computes; it does not conclude. Findings are in
+CLAIM_TABLE.md as BI_008..BI_010.

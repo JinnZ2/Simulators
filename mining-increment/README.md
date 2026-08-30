@@ -82,6 +82,29 @@ subsurface table) while the three sections the revision is about all
 changed — the epistemics moved and the arithmetic did not, so the
 scaffold stands unchanged on an unchanged specification (`MI_011`).
 
+## The addendum (v3: the pore-pressure validation case)
+
+The author then delivered a fragment with an exact placement
+instruction — *"insert before 'CONFIGURATION NOTE — not a
+discount.'"* (`ADDENDUM_DELIVERY.md`, verbatim). `SOURCE_DROP_V3.md`
+is the assembly, verified as a **pure insertion**: the fragment comes
+from the delivery sheet, appears once, sits immediately before the
+instructed marker, and removing it reproduces v2 byte-for-byte
+(`MI_013`). The content: `u` — the term that drops the factor of
+safety, normally a MODELED quantity — was recorded *"DURING a debris
+flow event"* in western Norway (Bondevik & Sorteberg 2021,
+`10.5194/hess-25-4147-2021`), so the modeled term has a measured
+answer to reproduce; *"a modeled u that cannot reproduce a measured u
+on a real event has not earned its place in the FoS calculation"* is
+the known-answer standing rule arriving in the entry's own text,
+routed by the entry itself to the transfer test of Method step 2 —
+whose gate the scaffold already is. A third literature (Norwegian
+instrumented events, beside the Chinese basin carries and the Western
+textbook methods) now instances the `MI_012` rule in both directions:
+the source enters for its measurement, and its transfer to the chain
+is exactly as UNDEFINED as every other carry until a per-basin basis
+is declared (`MI_014`).
+
     python3 mining-increment/mining_increment.py   # scaffold state
     python3 mining-increment/audit.py              # the audit
     python3 mining-increment/revision_audit.py     # the revision audit
@@ -92,11 +115,13 @@ scaffold stands unchanged on an unchanged specification (`MI_011`).
 |---|---|
 | `SOURCE_DROP.md` | GAP 14 as first delivered, verbatim, not edited |
 | `SOURCE_DROP_V2.md` | the revision with MI_002 folded back, verbatim, not edited |
+| `ADDENDUM_DELIVERY.md` | the addendum delivery sheet, verbatim |
+| `SOURCE_DROP_V3.md` | v2 + the pore-pressure case, a verified pure insertion |
 | `mining_increment.py` | the scaffold: transfer gate, stock/flow link, interface, forms, falsifiers |
 | `audit.py` | cross-references by existence, the provenance flag contained, the headline tension |
-| `revision_audit.py` | the revision audit: the MI_002 resolution, the two new devices, the invariants |
+| `revision_audit.py` | the revision audit: the MI_002 resolution, the two new devices, the invariants, the addendum |
 | `selftest_mi.py` | the checks; run it, it prints its own count |
-| `CLAIM_TABLE.md` | `MI_001..MI_012` with REFUTATION_PROTOCOL |
+| `CLAIM_TABLE.md` | `MI_001..MI_014` with REFUTATION_PROTOCOL |
 | `samples/` | pinned runs |
 
 All three CLIs refuse `--selftest` rather than exiting 0. No

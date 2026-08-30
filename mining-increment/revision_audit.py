@@ -159,6 +159,53 @@ def flag_contained_v2():
     return A.provenance_flag(v2())
 
 
+# ------------------------------------------------ the addendum (v3)
+
+ADDENDUM_MARKER = "**CONFIGURATION NOTE — not a discount.**"
+
+
+def v3():
+    return _read("SOURCE_DROP_V3.md")
+
+
+def addendum_fragment():
+    delivery = _read("ADDENDUM_DELIVERY.md")
+    part = delivery.split("GAP 15")[0]
+    lines = part.splitlines()
+    start = next(i for i, ln in enumerate(lines)
+                 if ln.startswith("PORE-PRESSURE"))
+    return "\n".join(lines[start:]).rstrip() + "\n"
+
+
+def addendum():
+    """The pore-pressure validation case, inserted per the delivered
+    instruction ('insert before CONFIGURATION NOTE'). The assembly is
+    verified as a pure insertion: the fragment comes from the delivery
+    sheet, sits immediately before the instructed marker, and removing
+    it reproduces v2 byte-for-byte. The content: u is the term that
+    drops the factor of safety and is normally modeled; a u measured
+    DURING a real event gives the modeled term a known answer to
+    reproduce -- 'has not earned its place' otherwise -- routed to the
+    transfer test of Method step 2, whose gate the scaffold already
+    is."""
+    frag = addendum_fragment()
+    b, c = v2(), v3()
+    one = " ".join(c.split())
+    return {"fragment_absent_from_v2": frag not in b,
+            "fragment_once_in_v3": c.count(frag) == 1,
+            "pure_insertion": c.replace(frag + "\n", "", 1) == b,
+            "placed_before_marker":
+                (frag + "\n" + ADDENDUM_MARKER) in c,
+            "doi_carried": "10.5194/hess-25-4147-2021" in c,
+            "measured_during_stated":
+                "recorded DURING a debris flow event" in one,
+            "earned_its_place_rule":
+                "has not earned its place in the FoS calculation"
+                in one,
+            "routed_to_step2":
+                "the transfer test in Method step 2" in one}
+
+
 # ---------------------------------------------------------- render
 
 def _wrap(s, n=66):
@@ -225,6 +272,24 @@ def render():
     w("CHANGED SECTIONS (and they did change)")
     for name, diff in iv["changed"]:
         w("  %-38s %s" % (name, "changed" if diff else "UNCHANGED"))
+    ad = addendum()
+    w("THE ADDENDUM (v3: the pore-pressure validation case)")
+    for k in ("fragment_absent_from_v2", "fragment_once_in_v3",
+              "pure_insertion", "placed_before_marker", "doi_carried",
+              "measured_during_stated", "earned_its_place_rule",
+              "routed_to_step2"):
+        w("  %-28s %s" % (k, ad[k]))
+    for ln in _wrap(
+            "Assembled per the delivered instruction as a verified "
+            "pure insertion. The content adds the missing instrument "
+            "class to the LEM coupling: u is the FoS-dropping term "
+            "and normally modeled, and a u measured during a real "
+            "event gives the modeled term a known answer to reproduce "
+            "-- the known-answer standing rule arriving in the "
+            "entry's own text, routed to the transfer test whose "
+            "gate the scaffold already is."):
+        w("  " + ln)
+    w("")
     fc = flag_contained_v2()
     w("provenance flag contained on v2 as well: %s"
       % fc["all_contained"])
@@ -238,7 +303,7 @@ def render():
         w("  " + ln)
     w("")
     w("This module computes; it does not conclude. Findings are in")
-    w("CLAIM_TABLE.md as MI_009..MI_012.")
+    w("CLAIM_TABLE.md as MI_009..MI_014.")
     return "\n".join(out)
 
 
