@@ -1,0 +1,83 @@
+EFFECTIVE REDUNDANCY AUDIT -- what holds without running the study
+
+The delivered code runs and is faithful. The STUDY does not run
+here, for three reasons, the third load-bearing:
+  1. every report source in Section 3.1 refuses CONNECT (below);
+  2. the design calls for two human coders, blind;
+  3. coding a real disaster's shared-node structure is a claim
+     about a real event -- a fabricated Case for Fukushima or
+     Katrina asserting 'N_eff=1, that is why it failed' would be a
+     fabricated finding about a real disaster. Only the author's
+     one delivered coding (Kerr County) is run; no case is coded
+     here.
+
+0. THE REPORT SOURCES REFUSE CONNECT (measured)
+   www.csb.gov      000   CSB refinery/chemical reports
+   www.ntsb.gov     000   NTSB transport reports
+   www.iaea.org     000   IAEA/INPO nuclear reports
+   www.fema.gov     000   FEMA after-action reports
+   www.gao.gov      000   GAO reports
+
+1. THE HONEST POSITIVE -- Fisher is numerically correct
+   tea-tasting 2x2          (3, 1, 1, 3) -> p=0.48571  (ref 0.4857)  OK
+   a standard asymmetric 2x2 (8, 2, 1, 5) -> p=0.03497  (ref 0.03497)  OK
+   The one thing the delivered statistics do, they do right.
+
+2. THE FINDING -- THE PROTOCOL'S PRIMARY GUARD IS NOT COMPUTED
+   Section 3.2: 'Report the kappa first, always.'
+   Section 3.4: kappa is one of the two 'honest' theory-killers.
+
+   cohen_kappa defined:        True
+   report() calls it:          False
+   report() prints kappa:      False
+   Case holds two codings:     False
+   Case fields:                name, domain, outcome, modes_present, channels
+
+   report() prints the 2x2, the counterexamples, Fisher, and the
+   nominal averages -- and NOT the kappa the protocol says to report
+   first. And it cannot: the Case data model holds ONE coding, so
+   the two-coder blind protocol (Section 3.2) has no
+   representation in the shipped code. cohen_kappa is defined and
+   never called, over data that could not feed it.
+   The function itself is correct (perfect agreement -> 1.0), so
+   the omission is in the wiring and the data model, not the math.
+
+3. WHY THAT IS LOAD-BEARING -- THE RECURSION BITES
+   Section 7: 'Mode F is the audit itself ... the checker is a
+   shared node.' This instrument is coded by humans against one
+   reading of one report, so by its own Mode F it IS a shared
+   node. Its only defense against being narrative-not-structure
+   is kappa (Section 3.4 threat 3). That defense is exactly the
+   number the delivered code omits. As shipped, the tool cannot
+   detect the failure mode the protocol foregrounds as honest.
+
+4. THE WORKED EXAMPLE REPRODUCES THE STATED CODING
+   Kerr County 2025  N_eff = 1  (prose: 1, failed)  match
+   Kerr County 2026  N_eff = 2  (prose: 2, held)    match
+   One discrepancy: the prose says N_nominal ~4 for 2025 (it
+   counts sirens, which 'did not exist'); the code counts 3
+   channels. The '~' hedges it and the code is the more
+   defensible count.
+
+5. THE SEED SET IS SELF-FORBIDDEN AND DEGENERATE
+   Section 6: 'DO NOT TEST ON THESE' (circular -- they built the
+   hypothesis). And Section 3.1: 'DO NOT sample on disasters.'
+   The seed outcomes (labels only, no channel coding): 5 failed,
+   1 held. The 2x2 held column has n=1, so no test has power
+   regardless of how the channels are coded -- provable from the
+   delivered outcome labels alone. Sampling on disasters is the
+   what Section 3.1 forbids, and the seed set is all disasters.
+
+6. A LATENT EDGE -- exact n_eff == 1 has no zero-channel guard
+   a failed case with no channels has n_eff = 0, so it lands in
+   cell b ('failed WITH real redundancy') -- a false
+   counterexample. Minor: a zero-channel case is malformed input,
+   and the code has no channels-nonempty guard.
+
+7. WHAT THIS FOLDER DOES NOT ESTABLISH
+   Whether N_eff separates failed from held (H1) vs not (H0). That
+   is the whole study, and it takes 8-15 EXPOSURE-sampled cases
+   coded blind by two coders from public reports -- reports
+   unreachable, coders absent, and not fabricated here. The
+   protocol's own verdict conditions (Section 3.4) are untouched
+   in either direction.

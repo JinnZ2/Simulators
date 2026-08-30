@@ -8141,6 +8141,53 @@ underneath).
   three-arm harness. Check count printed by `selftest_oir.py`;
   `pipeline.py` and `audit.py` refuse `--selftest`. Stdlib only, parses
   under 3.9, phone-buildable, CC0.
+- `effective-redundancy-audit/` — A test protocol for the claim that a
+  system's N nominal channels were never N: they shared a node the
+  redundancy diagram cannot draw because it is a **process, input,
+  decision, or budget**, not a component. The drop **ships real code**
+  (Section 4), landed verbatim as `effective_redundancy.py`, plus a
+  worked example and seed cases. **The study is not run here** and the
+  third reason is a refusal: the reports it names (CSB, NTSB, IAEA,
+  FEMA, GAO) refuse CONNECT, it needs two blind human coders, and
+  **coding a real disaster's shared-node structure is a claim about a
+  real event** — a fabricated `Case` for Fukushima asserting *N_eff=1,
+  that is why it failed* would be a fabricated finding about a real
+  disaster (`PB_001` at its sharpest), so only the author's one
+  delivered coding (Kerr County) is run and the audit codes no case of
+  its own (AST-asserted). **`ERA_002`, the finding: the delivered
+  `report()` does not compute the kappa the protocol says to report
+  first, and cannot** — Section 3.2 makes inter-coder kappa the guard
+  against invented patterns and *"report the kappa first, always"*, but
+  `report()` prints the 2×2, Fisher and the nominal averages and never
+  calls `cohen_kappa`, and the `Case` dataclass holds ONE coding with no
+  field for a second coder, so the two-coder blind protocol has no
+  representation in the shipped code; the function is correct (perfect
+  agreement → 1.0), so the omission is the wiring and the data model,
+  not the math (`report-typing` `RT_005` shape). **`ERA_003`:** the
+  omission is load-bearing by the drop's own Section 7 recursion —
+  *"Mode F is the audit itself ... the checker is a shared node"* — since
+  the instrument is coded against one reading of one report, so its only
+  defense against being narrative-not-structure is the kappa it does not
+  compute. **`ERA_004`, the honest positive:** `fisher_exact_2sided` is
+  numerically correct, verified against two independent references
+  (`[[3,1],[1,3]]` → 0.4857, `[[8,2],[1,5]]` → 0.03497). **`ERA_005`:**
+  the worked example reproduces the stated coding (Kerr 2025 N_eff=1,
+  2026 N_eff=2), with one hedged prose/code discrepancy (N_nominal ~4 vs
+  3, the code excluding sirens that *did not exist*). **`ERA_006`:** the
+  seed set is self-forbidden (*DO NOT TEST ON THESE*) and degenerate — 5
+  failed / 1 held, so the 2×2 held column is n=1 and no test has power,
+  provable from the delivered outcome labels alone, and sampling on
+  disasters is the Section 3.1 error the seeds commit. **`ERA_007`:** a
+  latent edge — `contingency` tests `n_eff == 1` exactly, so a
+  zero-channel failed case lands in the *failed with real redundancy*
+  cell, a false counterexample from unguarded malformed input.
+  **`ERA_008` UNVERIFIED:** whether N_eff separates failed from held
+  (H1) is the whole study and needs exposure-sampled cases coded blind
+  from public reports, unreachable and not fabricated here. The
+  delivered files are landed verbatim (no `--selftest` added); `audit.py`
+  refuses `--selftest`; no `no_severity` exemptions, every hit reworded.
+  Check count printed by `selftest_er.py`. Stdlib only, parses under
+  3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
