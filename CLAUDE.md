@@ -8422,6 +8422,44 @@ underneath).
   `wo_return.py`, `r2v2_audit.py`, `wo2_return.py`, `wo3_return.py`
   and `r1v2_audit.py` refuse `--selftest`.
   Stdlib only, parses under 3.9, phone-buildable, CC0.
+- `bridge-impoundment/` — GAP 15 from the operator's research-gaps
+  register: the bridge as a **transient impoundment** — clog, pond,
+  fail, release — the dam-break problem wearing a bridge's name,
+  falling between transportation engineering and dam safety.
+  `SOURCE_DROP.md` verbatim; the register it drafts for
+  (`UNDERGRADUATE_RESEARCH_GAPS.md`) and both coupling targets (Gaps 2
+  and 14) exist nowhere in this tree, while every repo-facing
+  reference resolves by existence — `CCC_007`, Module F, the operator
+  swap, the node list (`BI_001`). **What is built is the scaffold the
+  entry's structure supports without data, in the deliverable's own
+  name** (`bridge_impoundment.py`): a parameter schema where every
+  cell carries a knowledge state and names its mover as a constructor
+  rule; the three-state clog flag (an unknown spacing is not a clear
+  span); the `CCC_007` initiator interface made checkable at the
+  design layer — breach and bridge-release initiators carry identical
+  key sets, a widened dict fails, the engine half stays owed
+  (`BI_004`); **the drop's SIGN CAVEAT enforced structurally** — no
+  release-path signature takes a shielding term and the protective
+  successive-bridge finding lives only in a record whose
+  `to_initiator()` raises (`BI_003`, the earliest a guard has arrived
+  in the flood family: in the delivered prose before any code); the
+  conservation arithmetic (gain = accumulation over release, above one
+  exactly when the span gives way faster than it filled; debris gain
+  ≥ 1 by construction, `BI_005`); and both falsifiers three-valued
+  with every branch reachable — on the real chain every cell is
+  UNMEASURED, hosts measured refused, nothing supplied from memory
+  into a flood-safety artifact, the `CCC_005` refusal at bridge scale
+  (`BI_006`). **`BI_002`:** *"the same operator swap Module F already
+  proves"* carries two drifts — the showing lives in
+  `reservoir-chain-coupling` on constructed chains and *proves*
+  overruns the FIRM/SOFT split — while its substance (single-event
+  evaluation is the operator-swap error) survives both corrections.
+  **`BI_007` UNVERIFIED:** all nine literature rows carried and
+  egress-blocked — and the drop hedges them itself (*"located by
+  search, not asserted"*), the first in the flood family to arrive
+  with its own negative-provenance note. Check count printed by
+  `selftest_bi.py`; both CLIs refuse `--selftest`. Stdlib only, parses
+  under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
