@@ -320,6 +320,78 @@ def run():
     chk("wo_return.py refuses --selftest", wr.returncode == 2)
     chk("and names where its checks live", b"selftest_dbk.py" in wr.stderr)
 
+    # ================= R2 OUTLINE V2 =================
+    import r2v2_audit as RV
+
+    v2doc = io.open(os.path.join(HERE, "R2_OUTLINE_V2.md"),
+                    encoding="utf-8").read()
+    chk("both outline versions are in the folder and differ",
+        "RETURN STATUS" in v2doc and "RETURN STATUS" not in r2doc)
+
+    tr = RV.transcription()
+    chk("v2's transcription of the return is exact on all six figures",
+        tr["exact"] and len(tr["checks"]) == 6)
+    # null: a doctored figure IS caught
+    trd = RV.transcription(v2doc.replace("0.1 vs 1.0", "0.2 vs 1.0"))
+    chk("a doctored figure is caught (the transcription check can fail)",
+        not trd["exact"])
+    kp = RV.kappa_provenance()
+    chk("kappa 0.6 is sourced to the order's own Task 4 rule",
+        kp["v2_states"] and kp["order_states"])
+
+    rc1 = RV.r1_column_check()
+    chk("the v2 matrix's R1 column matches computed coverage, 7 loads",
+        rc1["exact"] and len(rc1["rows"]) == 7)
+    matd = RV.v2_matrix(v2doc.replace("B1      P2, P7 ",
+                                      "B1      P2, P7, P8"))
+    chk("a doctored v2 matrix row IS caught",
+        sorted(matd["B1"]["r1"]) != sorted(A.coverage()["carried"]["B1"]))
+
+    chk("the P1-bounded annotation is not read as a carrier",
+        RV._tokens("— (P1-bounded, uncarried)") == ([], []))
+    chk("section 1 reads D as uncarried",
+        RV.d_row()["uncarried_in_sec1"])
+    dsp = RV.d_split()
+    chk("section 3's carries column still lists D under P0.3 and P0.4",
+        dsp["sec3_channels_listing_d"] == ["P0.3", "P0.4"]
+        and dsp["split"])
+    chk("F's condition carries a marker and the reconciling prose exists",
+        dsp["f_condition_marked"] and dsp["reconciling_prose"])
+
+    tgc = RV.tag_check()
+    chk("three tags are used beyond the declared legend",
+        tgc["beyond_legend"] == ["KILLED-VACUOUS", "LIVE", "REOPENED"])
+    chk("all eight entries' tags are consistent with computed verdicts",
+        tgc["all_consistent"] and len(tgc["entries"]) == 8)
+    tgd = RV.tag_check(v2doc.replace("KILLED (Task 4).",
+                                     "QUALIFIED (Task 4)."))
+    chk("a tag disagreeing with its task's verdict IS caught",
+        not tgd["all_consistent"])
+
+    sb = RV.searcher_branches()
+    chk("the order names searcher-dependent branches in tasks 4 and 6",
+        sb["named_in_order"] == [4, 6] and sb["task3_branch_implicit"])
+    chk("v2 counts only task 6; the conclusion survives, the count "
+        "does not",
+        sb["v2_counts_only_task6"] and sb["conclusion_survives"])
+
+    pe = RV.probe_extension()
+    chk("v2 requires the probe set unselectable; the return did not "
+        "close selection",
+        pe["extension"] and pe["return_stated_fixed"])
+    chk("the accounting choice is routed to P0.2 as a declared decision",
+        RV.accounting_declared())
+
+    rvout = RV.render()
+    chk("the v2 report states it computes and does not conclude",
+        "computes; it does not conclude" in rvout)
+
+    rv = subprocess.run([sys.executable,
+                         os.path.join(HERE, "r2v2_audit.py"),
+                         "--selftest"],
+                        stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    chk("r2v2_audit.py refuses --selftest", rv.returncode == 2)
+
     # ---- audit refuses --selftest
     r = subprocess.run([sys.executable, os.path.join(HERE, "audit.py"),
                         "--selftest"],
@@ -337,6 +409,8 @@ def run():
         not no_severity.hits(r2out))
     chk("the work-order return carries no severity language",
         not no_severity.hits(wout))
+    chk("the v2 report carries no severity language",
+        not no_severity.hits(rvout))
     chk("and the screen is not silent by construction",
         bool(no_severity.hits(out + "\nthis design is broken\n")))
 

@@ -1,0 +1,70 @@
+R2_OUTLINE_V2 -- STRUCTURAL AUDIT
+
+Both outline versions stay in the folder as delivered; this
+module reads them and edits neither. Every figure the v2 quotes
+from the return is recomputed through wo_return, never trusted
+as transcription.
+
+TRANSCRIPTION OF THE RETURN (recomputed)
+  verdict split 1,2,5,7 / 3,4,6          stated True  computed True
+  retention triple 3 / 3 / 2             stated True  computed True
+  coder ratios 0.1 vs 1.0                stated True  computed True
+  (4,3) flips between t=1 and t=1.5      stated True  computed True
+  5 hosts, all refused                   stated True  computed True
+  rated 1 / realized 0                   stated True  computed True
+  kappa 0.6 sourced to the order         stated True  computed True
+  commit 2fdbcd4 resolves                True
+      subject: design-basis-ai: the work order returned in its own
+      format; the header's role label is where the refusal lands
+  exact on all recomputed figures: True
+
+R1 COLUMN OF THE V2 MATRIX vs COMPUTED COVERAGE
+  A    --                       match
+  B1   P2,P7                    match
+  B2   P3,P4                    match
+  C    P4                       match
+  D    P3                       match
+  E    P1,P3,P5,P6              match
+  F    P2,P7,P8                 match
+  exact: True
+
+THE D ROW, TWO ANSWERS
+  Section 1 lists no carrier for D (uncarried: True), and section 3's
+  carries column still lists D under P0.3 and P0.4. The F conditional
+  carries a marker in the matrix (True); D's condition is stated in the
+  D-KILL prose (True) and reaches no column. Which answer a parser reads
+  depends on which section it parses.
+
+SECTION 8 STATUS TAGS
+  legend declares : KILLED, QUALIFIED, OPEN
+  entries use     : KILLED, KILLED-VACUOUS, LIVE, OPEN, QUALIFIED, REOPENED
+  beyond legend   : KILLED-VACUOUS, LIVE, REOPENED
+  [1] KILLED,OPEN                  tasks 6        consistent with computed verdicts: True
+  [2] QUALIFIED,OPEN               tasks 2        consistent with computed verdicts: True
+  [3] KILLED                       tasks 4        consistent with computed verdicts: True
+  [4] QUALIFIED                    tasks 5        consistent with computed verdicts: True
+  [5] KILLED-VACUOUS               tasks 4        consistent with computed verdicts: True
+  [6] REOPENED                     tasks 3        consistent with computed verdicts: True
+  [7] LIVE                         tasks 7        consistent with computed verdicts: True
+  [8] (untagged)                   tasks --       consistent with computed verdicts: True
+
+THE ONLY-TASK-6 SENTENCE, COUNTED
+  v2 says only Task 6's weak-positive branch depended on verifier
+  identity. The order names such a branch in tasks 4 and 6 ('no
+  defensible disagreement found' is the same searcher-dependent
+  positive), and task 3 carries one implicitly (True). All three
+  construction tasks returned kills, so zero such branches were
+  exercised (True) and the sentence's conclusion stands; its count does
+  not.
+
+THE PROBE-SET EXTENSION
+  v2 requires the pinned-probe battery to be fixed, public and
+  unselectable (True). The return's own note said 'fixed' and never
+  closed who selects the battery (selection closed in the return: False)
+  -- the revision applied the Task 6 selection kill to the Task 3
+  candidate, a cross-application the return did not make.
+
+ACCOUNTING DECLARED, NOT PICKED: True
+
+This module computes; it does not conclude. Findings are in
+CLAIM_TABLE.md as DBK_021..DBK_025.

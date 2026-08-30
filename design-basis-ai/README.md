@@ -159,6 +159,45 @@ routing applied:
     python3 design-basis-ai/wo_return.py       # the full return
     python3 design-basis-ai/wo_return.py --measure   # re-probe the vector
 
+## R2 v2 — the return folded back in, audited as a copy
+
+`R2_OUTLINE_V2.md` (delivered verbatim, beside v1 — both stay
+inspectable) rewrites the outline with the work-order results: D
+reopened per Task 3, the P0.4 candidate marked KILLED per Task 6, §8
+retagged per task, and the return cited by commit hash. A revision
+quoting an audit is a copy and copies drift, so `r2v2_audit.py`
+recomputes every quoted figure through `wo_return` — **exact on all
+six** (verdict split, 3/3/2, 0.1 vs 1.0, the t=1→1.5 flip, the
+five-host vector, rated 1 / realized 0), with both off-return figures
+sourced: kappa 0.6 is the order's own rule, and commit `2fdbcd4`
+resolves in this repo's history, the first drop in the family to cite
+a commit of the repo it lands in (`DBK_021`). Findings:
+
+- **the D row carries two answers one section apart** (`DBK_022`) —
+  §1 lists D uncarried while §3's carries column still lists D under
+  P0.3 and P0.4; the reconciling condition exists in the D-KILL prose
+  and reaches no column, where F's condition gets an asterisk. One
+  marker on two cells closes it;
+- **the revision extends the audit's own kill chain** (`DBK_023`) —
+  v2 requires the pinned-probe battery *fixed, public, unselectable*,
+  applying the Task 6 selection kill to the Task 3 candidate; the
+  return's own note said "fixed" and never closed who selects, so the
+  kill chain is stronger in the revision than in the audit that
+  produced it;
+- **"only Task 6" undercounts** (`DBK_024`) — the order names a
+  searcher-dependent not-found branch in Task 4 too (*"no defensible
+  disagreement found"*), and Task 3 carries one implicitly; all three
+  construction tasks returned kills so none was exercised — the
+  conclusion stands, the count does not, and the correction
+  strengthens `DBK_014`;
+- **the §8 tag legend declares three states, the entries use six**
+  (`DBK_025`) — all tags consistent with the computed verdicts, so
+  the gap is vocabulary; and the strongest addition: which retention
+  accounting is used becomes a *declared decision under P0.2* rather
+  than a side picked.
+
+    python3 design-basis-ai/r2v2_audit.py      # the v2 audit
+
 ## Files
 
 | file | what |
@@ -169,12 +208,17 @@ routing applied:
 | `selftest_dbk.py` | the checks; run it, it prints its own count |
 | `R2_OUTLINE.md` | the R2 skeleton, delivered verbatim, not edited |
 | `r2_audit.py` | the structural audit R2 asks for: coverage, disjointness, the metric gaps |
-| `CLAIM_TABLE.md` | `DBK_001..DBK_013` with REFUTATION_PROTOCOL |
-| `samples/` | pinned run |
+| `WORK_ORDER_F5.md` | the work order, delivered verbatim, not edited |
+| `wo_return.py` | the return, in the order's own format |
+| `R2_OUTLINE_V2.md` | the revision folding the return back in, delivered verbatim, not edited |
+| `r2v2_audit.py` | the v2 audit: transcription recomputed, the D split, tags vs verdicts |
+| `CLAIM_TABLE.md` | `DBK_001..DBK_025` with REFUTATION_PROTOCOL |
+| `samples/` | pinned runs |
 
-The delivered file carries no `--selftest` handling; `audit.py` refuses
-`--selftest` rather than exiting 0. No `no_severity` exemptions — every
-screen hit was reworded.
+The delivered files carry no `--selftest` handling; `audit.py`,
+`r2_audit.py`, `wo_return.py` and `r2v2_audit.py` refuse `--selftest`
+rather than exiting 0. No `no_severity` exemptions — every screen hit
+was reworded.
 
 ## Scope
 

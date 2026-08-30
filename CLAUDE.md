@@ -8303,8 +8303,39 @@ underneath).
   DISTRIBUTION the candidate treats as fixed — the members cannot
   misreport their state, the SAMPLE of members can misreport the
   population — so per the order's GATE the ecosystem candidate stays a
-  marker. Check count printed by `selftest_dbk.py`; `audit.py`,
-  `r2_audit.py` and `wo_return.py` refuse `--selftest`.
+  marker. **R2 v2 then folded the return back into the outline**
+  (`R2_OUTLINE_V2.md`, verbatim beside v1) — D reopened per Task 3, the
+  P0.4 candidate KILLED per Task 6, §8 retagged per task, the return
+  cited by commit hash — and `r2v2_audit.py` audits it as a copy.
+  **`DBK_021`:** the transcription is **exact on all six recomputed
+  figures**, both off-return figures source (kappa 0.6 is the order's
+  own Task 4 rule; commit `2fdbcd4` resolves in this repo's history —
+  the first drop in the family to cite a commit of the repo it lands
+  in, checkable by anyone with the clone). **`DBK_022`:** the D row
+  carries two answers one section apart — §1 uncarried, §3's carries
+  column still lists D under P0.3 and P0.4, with the reconciling
+  condition in the D-KILL prose and on no column while F's condition
+  gets an asterisk — the stated-in-two-places drift arriving *inside*
+  one document; one marker on two cells closes it. **`DBK_023`:** the
+  revision extends the audit's own kill chain — the pinned-probe
+  battery must be *fixed, public, unselectable*, applying the Task 6
+  selection kill to the Task 3 candidate, which the return's own note
+  never closed (asserted: no selection language in it) — stronger in
+  the revision than in the audit that produced it. **`DBK_024`:**
+  *"only Task 6's weak-positive branch needed dissimilarity"*
+  undercounts — the order names the same searcher-dependent branch in
+  Task 4 (*"no defensible disagreement found"*) and Task 3 carries one
+  implicitly; all three construction tasks returned kills so zero were
+  exercised — the conclusion stands, the count does not, and the
+  correction strengthens `DBK_014`. **`DBK_025`:** the §8 tag legend
+  declares three states and the entries use six, all consistent with
+  the computed verdicts (the `GM_011` shape at its smallest scale);
+  beside it the revision's strongest move — which retention accounting
+  is used becomes a **declared decision under P0.2** rather than a side
+  picked, the audit machinery's own free parameter routed through the
+  outline's observability provision. Check count printed by
+  `selftest_dbk.py`; `audit.py`, `r2_audit.py`, `wo_return.py` and
+  `r2v2_audit.py` refuse `--selftest`.
   Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk

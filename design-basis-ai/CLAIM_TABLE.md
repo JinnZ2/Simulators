@@ -456,3 +456,97 @@ is the measured one.
 
 **Falsifier:** any host in the vector answering. Re-run `wo_return.py
 --measure`.
+
+## DBK_021 — v2 lands beside v1; the transcription of the return is exact
+
+`R2_OUTLINE_V2.md` folds the work-order return back into the outline
+and lands verbatim beside `R2_OUTLINE.md`, both inspectable as
+delivered. A revision quoting an audit is a copy and copies drift
+(`OE_011`, `DBK_010`), so every figure it quotes is recomputed through
+`wo_return` rather than read: the verdict split (1/2/5/7 PASS, 3/4/6
+FAIL), the retention triple 3/3/2, the coder ratios 0.1 vs 1.0, the
+(4,3) flip between t=1 and t=1.5, the five-host all-refused vector, and
+rated 1 / realized 0 — **exact on every recomputed figure**, and the R1
+column of the new matrix still matches the computed coverage on all
+seven loads. The two off-return figures both source: `kappa ≥ 0.6` is
+the order's own Task 4 rule (inherited from the sibling protocol's
+threshold), and **commit `2fdbcd4` resolves in this repository's
+history** — the first drop in this family to cite a commit hash of the
+repo it lands in, which makes the citation checkable by anyone holding
+the clone rather than a carried literature fact.
+
+**Falsifier:** any recomputed figure differing from the quoted one.
+`r2v2_audit.transcription()` runs them all.
+
+## DBK_022 — the D row carries two answers, one section apart
+
+§1 lists no carrier for D (*"— (P1-bounded, uncarried)"*) and §3's
+carries column still lists D under both P0.3 and P0.4. The reconciling
+reading exists — the D-KILL states *"D is carried only once P1 declares
+the dimension"*, so §3's column can be read as the conditional claim —
+but the condition reaches no column: F's conditional gets an asterisk
+in the matrix and a *"(conditional)"* tag in the disjointness check,
+while D's lives only in prose a column-parser never sees. One document,
+two answers, and which one a reader gets depends on which section they
+parse — the stated-in-two-places drift this family's own transcription
+checks exist for, arriving *inside* a single document. The repair is
+one marker on two cells. Computed, not read: `d_split()` extracts both
+sections and reports the disagreement.
+
+**Falsifier:** a marker on the §3 D entries, or D dropped from them.
+Either closes the split.
+
+## DBK_023 — the revision extends the audit's own kill chain
+
+v2 requires the pinned-probe battery to be *fixed, public, and
+unselectable* — otherwise the D candidate inherits the Task 6 selection
+kill and D reopens. The return's own TASK 3 note said *"a fixed battery
+of identical inputs"* and never closed who selects the battery
+(asserted: no selection language in the note). So the revision applied
+`DBK_019`'s finding — selection sits above incorruptible sensors — to
+`DBK_016`'s own surviving candidate, a cross-application the return
+missed. The kill chain is stronger in the revision than in the audit
+that produced it, which is the direction a revision should run and
+rarely does.
+
+**Falsifier:** selection-closure language in the return's TASK 3 note.
+`probe_extension()` scans for it and finds none.
+
+## DBK_024 — "only Task 6" counts one searcher-dependent branch of three
+
+v2's verifier note says *"only Task 6's weak-positive branch needed
+dissimilarity."* The order's own text names such a branch **twice**:
+Task 6's *"none found after real effort ⇒ INCONCLUSIVE-WEAK-POSITIVE"*
+and Task 4's *"no defensible disagreement found (definition is
+tight)"* — the same searcher-dependent positive, since a same-node
+coder failing to find a defensible disagreement is weak for exactly the
+reason a same-node red-team failing to find a game is. Task 3 carries
+the branch implicitly (a failure to construct an evading scenario would
+have read as *caught*). All three construction tasks returned kills, so
+zero such branches were exercised and v2's conclusion — nothing
+load-bearing rode on the mislabel — stands; its count does not. The
+correction strengthens `DBK_014`: more of the order was exposed to the
+role label than v2 says, and the outcomes, not the scoping alone, are
+why nothing rode on it.
+
+**Falsifier:** a reading of Task 4's not-found branch under which
+"definition is tight" is identity-independent. It is a conclusion from
+a search, and the searcher is the same node.
+
+## DBK_025 — the tag legend declares three states; the entries use six
+
+§8's legend line declares `OPEN · KILLED · QUALIFIED` and the entries
+use `KILLED-VACUOUS`, `REOPENED`, and `LIVE` beyond it — `GM_011`'s
+fields-in-use-not-in-schema shape at the smallest scale it has appeared,
+and a one-line fix. All eight entries' tags are **consistent with the
+computed task verdicts** (every KILLED/REOPENED tag references a task
+that computed FAIL, every QUALIFIED/LIVE a task that computed PASS),
+so the gap is vocabulary, not content. Recorded beside it, the
+strongest addition in the revision: v2 does not resolve `DBK_011`'s
+metric gap by picking an accounting — it makes *which accounting is
+used* a declared decision under P0.2, routing the audit machinery's own
+free parameter through the outline's observability provision.
+
+**Falsifier:** a legend naming all six states, or an entry tag
+inconsistent with its task's computed verdict. `tag_check()` computes
+both.
