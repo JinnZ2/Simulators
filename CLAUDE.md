@@ -8043,8 +8043,49 @@ underneath).
   subject — and its three headline product choices (velocity bands, time
   slices, exposure overlay) are sound and untested, since testing them
   is the routing run. One declared `no_severity` exemption (`means`,
-  inside a verbatim quote) under the three-arm harness. Check count
-  printed by `selftest_ccc.py`; both modules refuse `--selftest`. Stdlib
+  inside a verbatim quote) under the three-arm harness. **A later drop
+  turns the folder into a research agenda published to be picked up
+  cold** — landed verbatim beside v1: `SCOPE_BOUNDARY.md`,
+  `knowledge_state.py` (the epistemic-state typing rule, enforced in
+  code, `INSTITUTIONAL_EXCLUSION` rejected as invalid), `module_f.py`
+  (the Module F body as **arithmetic**, the ordering `S1 ⊆ S2 ⊆ S3`
+  proved over 19,200 synthetic combinations, no real structure named),
+  `contributing_inflow.py`, `eap_coverage_v2.py` (governance + tribal
+  jurisdiction), the `_v2` audit/selftest/claim-table
+  (`CCC_001..CCC_018`), `UNDERGRADUATE_RESEARCH_GAPS.md` (13 startable
+  gaps) and `DEEP_RESEARCH.md`. It arrived with its own **kill list**,
+  sent as *claims under test* — *"a kill Fable overturns is a better
+  outcome than one it confirms"* — and `kill_audit.py` adjudicates the
+  three: **all three hold, none overturned**. **`CCA_001`** KILL 1 (a
+  self-correction trace left in `contributing_inflow.render()`) is an
+  overlay artifact that lands on a sound conclusion; **`CCA_002`** KILL 2
+  (stated decisive condition ≠ coded one) CONFIRMED — prose reads the
+  `max`-flip, code the `sum`-tip, diverging on 226 of 540 swept cases —
+  and RESOLVED by physics (the wave rides on the standing pool, so `sum`
+  is right and the prose is the independent-node default reasserting in
+  the translation layer of a module written to refute it, the repo's own
+  *prose drifts, code is constrained* thesis instanced); **`CCA_003`**
+  KILL 3 (tribal supplied from memory, asymmetric discipline) CONFIRMED
+  and sharper — owners are refused-and-typed while the six tribal rows
+  are supplied, finer, untyped, and the authority bound is invariant to
+  them — with its second claim (the fix is not to drop tribal, which
+  re-commits the rejected `INSTITUTIONAL_EXCLUSION`) also confirmed.
+  **`CCA_005`:** `CCC_017` is REFUTED on its delivered instance —
+  `module_f.render()` trips the repo's own screen on a certainty verb.
+  **`CCA_006`, the structural one:** the delivered `selftest_ccc_v2.py`
+  imports the bare v1 `eap_coverage`/`audit` and unpacks a 4-tuple, so
+  it exercises v1 eap + v1 audit + new module_f — the `_v2` additions
+  (the tribal 5-tuple, the renamed key) ship **unexercised**, which is
+  why the KILL 3 defect could ship at all. **`CCA_007`:** the cold-start
+  test runs the sender's five questions over all fifteen gaps — every
+  gap names a stranger-evaluable falsifier and a deliverable interface;
+  the flags cluster on public-data access (7 of 15 want HEC-RAS or gated
+  data) and one-semester scope. Two declared `no_severity` exemptions
+  (`means`; `proves`, the delivered module_f token `CCA_005` reports).
+  Check counts printed by `selftest_ccc.py` / `selftest_kill.py`; the
+  delivered `selftest_ccc_v2.py` carries one delivered failure
+  (`CCC_017`), unrepaired because `module_f.py` is delivered; every
+  module refuses `--selftest`. Nine `CCA_*` claims. Stdlib
   only, parses under 3.9, phone-buildable, CC0.
 - `reservoir-chain-coupling/` — The antecedent-coupling amplifier
   `columbia-chain-cascade` `CCC_001` flagged as truncated, now delivered

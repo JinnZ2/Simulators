@@ -1,0 +1,114 @@
+COLUMBIA CHAIN CASCADE -- the kill list under audit, and the
+cold-start test. Dated 2026-08-30. No delivered file is edited.
+
+KILL 1 -- self-correction trace left in render()
+  trace present:            True
+  corrected line is sound:  True
+  verdict: CONFIRMED (overlay artifact; the conclusion it reaches is intended and arithmetically sound)
+    correction (shown, not applied): excise the false start and 'Wait
+    --'; keep the corrected line: at urban_increment 0.3 the coupled
+    operator breaches (6 + 5.2 >= 10) while the independent operator
+    does not (max(6, 5.2) = 6 < 10) -- the urban increment has not yet
+    raised the pool above the wave.
+
+KILL 2 -- stated decisive condition vs coded one
+  prose/code disagreements: 226 of 540 swept cases
+  sweep one-sided (urban never independent-only): True
+  verdict: CONFIRMED and RESOLVED BY PHYSICS (the code/sum is correct; the prose/max diverged)
+    the wave arrives on top of the standing pool, so the combined
+    quantity is wave + pool; max would hold only if the wave replaced
+    the pool. The code is sum-logic and stands; the prose is the
+    independent-node default reasserting in the translation layer.
+    prose correction (recorded): the urban increment is decisive when
+    it tips the coupled sum over the crest -- wave + pool_natural <
+    crest but wave + pool_effective >= crest -- not when the pool
+    overtakes the wave.
+
+KILL 3 -- tribal supplied from memory, asymmetric discipline
+  owners from memory (refused):      0
+  node rows carry a knowledge_state: True
+  tribal rows from memory:           6
+  tribal row carries a knowledge_state: False (arity 4)
+  authority bound with / without tribal: 2 / 2  invariant: True
+  verdict (asymmetry):  CONFIRMED (owners refused + typed; tribal supplied, finer, untyped, unused in the bound)
+  verdict (do not drop): CONFIRMED (dropping re-commits the INSTITUTIONAL_EXCLUSION knowledge_state.py rejects)
+    correction: attach a knowledge_state to each tribal row and a
+    named source or an explicit refusal, symmetric with the owner
+    UNASSIGNED / UNKNOWN_ATM treatment -- keep the nations, type the
+    data.
+
+THE KILL LIST IS ITSELF UNDER AUDIT
+  All three hold; none is overturned. KILL 2 arrived with an OPEN
+  ('which is correct is not Claude's to call') that the sender then
+  closed by physics; this audit upholds that closure rather than
+  re-opening it. Each verdict is bounded to what a text-only
+  environment can check: the arithmetic and the module structure,
+  not any hydraulic magnitude.
+
+FINDING -- CCC_017 refuted on its delivered instance
+  module_f report clean on the screen: False
+  the token that fires: 'proves'
+    on the line: This module proves the mechanism is load-bearing when
+    it is.
+  The delivered CCC_017 asserts the module_f report carries no
+  flagged language; the repo's own screen disagrees. The delivered
+  claim's falsifier fires on the delivered artifact. Recorded, not
+  corrected -- module_f.py is delivered.
+
+FINDING -- the delivered v2 selftest exercises the v1 modules
+  imports bare v1 eap_coverage/audit: True
+  unpacks NODES as a 4-tuple:          True
+  reads the v1 truncation key:         True
+  eap_coverage_v2 NODES arity:         5 (a 4-unpack raises)
+  audit_v2 renamed the key:            True
+  So the delivered selftest tests v1 eap_coverage + v1 audit + the
+  new module_f. The revised eap_coverage_v2.py (the tribal list, a
+  5-tuple NODES) and audit_v2.py (the renamed key) are delivered and
+  unexercised -- and the tribal list is exactly where KILL 3 lives,
+  so the asymmetric row ships untested.
+
+FINDING -- one pre-closure in the gap file (access-tier discipline)
+  bare 'if published' pre-closures: 1
+    line 211: - Dam-specific seismic vulnerability assessments (if
+    published)
+  The cover note's discipline: state the barrier, name known routes,
+  stop there. A bare 'if published' pre-closes a route by
+  parenthesis. The sender's replacement shape (TIER GATED + ROUTES +
+  IF REFUSED, where a documented refusal is itself a finding on the
+  Gap 3 coverage question) applies here as it does to the Gap 14
+  data line the cover note flagged. Recorded; the delivered file is
+  not edited.
+
+THE COLD-START TEST -- five questions over fifteen gaps
+  Q1 public  Q2 falsifier  Q3 interface  Q4 one-semester  Q5 provenance
+  gap                            Q1 Q2 Q3 Q4 Q5
+  1 urban inflow                  y  y  y  y  y
+  2 burn roughness                y  y  y  y  y
+  3 tribal EAP                    y  y  y  -  y
+  4 seam map                      -  y  y  y  y
+  5 breach params                 -  y  y  -  y
+  6 seismic                       -  y  y  y  -
+  7 atmospheric river             y  y  y  y  y
+  8 cyber trust                   y  y  y  y  y
+  9 compound                      y  y  y  y  y
+  10 Vanport 1948                 -  y  y  -  y
+  11 exposure                     y  y  y  y  y
+  12 pipeline                     y  y  y  y  y
+  13 operator swap on terrain     -  y  y  y  y
+  14 mining increment             -  y  y  y  y
+  15 bridge impoundment           -  y  y  y  y
+
+  startable on public data alone: 8 of 15
+  clean on all five questions:    7 of 15
+  Every gap names a falsifier a stranger can evaluate (Q2 clean
+  throughout) and a deliverable interface (Q3 clean throughout) --
+  the two the agenda most has to get right. The flags cluster on Q1
+  (the hydraulic gaps that want HEC-RAS or gated dam data) and on Q4
+  (three gaps -- tribal EAP, breach params, Vanport -- that read as
+  more than one semester). Q5 flags once, the Gap 6 pre-closure
+  above. The per-gap basis is the COLD_START table in this module,
+  declared so a reader can disagree row by row.
+
+This module computes; it does not conclude. Findings are in
+AUDIT_NOTES.md as CCA_001..CCA_009. Nothing here is a hydraulic
+result: the spec's actual subject stays untested (CCC_008).
