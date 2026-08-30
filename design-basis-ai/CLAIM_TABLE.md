@@ -642,3 +642,99 @@ reserves for the author and this return does not make.
 **Falsifier:** a sixth internally-consistent accounting, or a
 consistent reading under which some other element drops N_eff below 3.
 The dimensions and the MINUS set are both delivered text.
+
+## DBK_030 — T1: twelve of twenty provisions are ASSUMPTION-class; five unmarked
+
+Work order 3's typing rule applied across both artifacts (the order's
+two filenames resolve by content — the `UNI_060` shape — to
+`SOURCE_DROP.md` and `R2_OUTLINE_V2.md`): DERIVED 5 / PROVISIONAL 3 /
+ASSUMPTION **12** of 20. Every class assignment is a declared reading
+with mechanical evidence in both directions — a DERIVED or PROVISIONAL
+row carries quotes checked present in the named delivered file, an
+ASSUMPTION row carries an extracted block checked free of every
+incident marker — so a misfiled row turns a check red rather than
+surviving as prose. The headline splits honestly: of the 12, four are
+already self-tagged by the doc (§8[5] KILLED-VACUOUS on AX1–AX4),
+three are outline sections the doc defers from provision-form (§5–§7),
+and **five are unmarked assumptions in provision-form text: P2, P5,
+P8, P0.2, P0.5** — the audit's load-bearing number, each returned with
+the one-line PROVISIONAL statement it should carry. Two rules stated
+because rows turn on them: a CARRIES load-case letter alone does not
+name an incident (crediting letters would make the audit vacuous), and
+the 5.7-m rows (P1, P6) are DERIVED with the number-to-Fukushima link
+marked a declared reading, since the doc never writes the incident's
+name beside its number — a one-word repair.
+
+**Falsifier:** an incident name or pending marker in any of the five
+unmarked blocks. The marker-absence check runs over the extracted
+text.
+
+## DBK_031 — the FALSIFY column carries its own assumptions, in parentheses
+
+Four of R1's eight FALSIFY clauses arrive with their outcome asserted
+in a parenthesis and no study behind it — P2 *"(they do not, if the
+mark means anything)"*, P4 *"(they do not)"*, P6 *"(it does)"*, P8
+*"(it does not)"* — one cites its incident (P3's *"aviation found it
+does not"*), and three are clean (P1, P5, P7). Computed by pattern
+over each provision's FALSIFY text, not read. The falsification
+apparatus asserting its own results is the order's *assumption wearing
+a number* one level down: the clause that exists to make the provision
+killable arrives pre-answered, which is the difference between a
+falsifier and a rhetorical concession. The four asserted parentheticals
+coincide exactly with provisions typed ASSUMPTION or
+declared-reading-DERIVED, and P3 — the one incident-backed
+parenthetical — is the one provision whose FALSIFY names its failure
+case.
+
+**Falsifier:** a study behind any of the four parentheticals findable
+in the delivered files. The pattern and the blocks are both delivered
+text.
+
+## DBK_032 — T2: branch 2, by reading — B2's incident is in the doc, not the seed table
+
+The seed B row cites East Palestine, and its structure — one mediated
+hazard input, six deciding agencies — is B1's definition (*"one source
+feeds all deciders"*) in the row's own syntax. No seed row names B2
+(the table predates the split). B2's shape (*"sources exist,
+architecture doesn't compare"*) is the in-doc aviation citation: P3's
+FALSIFY (*"two AOA vanes existed; one system reading one"*) and §5's
+*"aviation's AOA case"* — cited by **description**; the NAME (737
+MAX / MCAS) lives only in the work order and is credited to nothing,
+per the DBK_027 rule. No over-claim kill: the provenance sentence
+assigns the loads to a six-domain pool that includes aviation, and the
+aviation incident is present in the body, so B2's source is claimed
+and findable — it is in the doc rather than the seed table, which is
+one incident short of the doc's own pool. `DBK_027`'s fork closes on
+the reading its branch-2 text anticipated: a derived provision, legal,
+and stated. B1 inherits East Palestine alone, so no second shared node
+exists in provenance and no `dissent_alarm` run is owed.
+
+**Falsifier:** a seed row carrying B2, or a reading of the B row's
+description matching B2's definition rather than B1's. Both texts are
+quoted in the return.
+
+## DBK_033 — T3: one physical binary under the loss event; the metric's out-of-range reading
+
+Re-typed as survival: under **L_ret** (the provider deletes, fails, or
+reprices its stored history) the five consistent accountings make
+exactly two distinguishable predictions — the held pair predicts **3
+surviving channels**, the not-held triple predicts **2** — so the
+distinguishability partition is {held: 2 texts} | {not-held: 3 texts},
+one observable event separates the classes, and within each class no
+event does: the three not-held texts describe one physical
+configuration and are one claim in three texts. What differs within
+the class is which question the *reported* number answers — the
+collapsed texts' 3 counts channels flowing absent any loss, the void
+text's 2 counts channels surviving L_ret — and stating which question
+a number answers is not selecting the accounting, which stays the
+author's P0.2 declaration. The inexpressible row is typed as an
+**out-of-range sensor reading, not a missing value**: the
+configuration is inside the world and outside the inherited metric's
+state space, and handed it under the survival question the metric
+returns 3 where the count is 2, with no flag — data about the
+instrument's envelope, which is P1 applied to the metric itself: it
+extrapolates silently outside its declared domain.
+
+**Falsifier:** an observable loss event under which two texts in one
+class predict different survivor counts. The candidate events are
+enumerated in the return; none separates them.

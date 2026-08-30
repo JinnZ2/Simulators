@@ -239,6 +239,39 @@ artifact re-rated. `wo2_return.py` is the return:
 
     python3 design-basis-ai/wo2_return.py      # the full return
 
+## Work order 3 — provision typing, returned
+
+`WORK_ORDER_F5_3.md` (delivered verbatim) applies a typing rule — a
+provision either names the failure it is back-derived from (DERIVED),
+names its derivation path and is marked pending (PROVISIONAL), or is
+an assumption wearing a number — and asks two evidence pulls.
+`wo3_return.py` is the return; every class assignment is a declared
+reading with mechanical evidence in both directions (DERIVED quotes
+checked present in the named file, ASSUMPTION blocks checked free of
+every incident marker):
+
+- **T1 ENUMERATED** — DERIVED 5 / PROVISIONAL 3 / **ASSUMPTION 12**
+  of 20, splitting honestly into 4 the doc already self-tagged
+  (§8[5]), 3 outline sections deferred from provision-form, and **5
+  unmarked assumptions in provision-form text — P2, P5, P8, P0.2,
+  P0.5** — each returned with its one-line PROVISIONAL spec text
+  (`DBK_030`). A second layer sits inside the falsification apparatus:
+  four of eight FALSIFY clauses arrive with their outcome asserted in
+  a parenthesis, one cites its incident, three are clean (`DBK_031`);
+- **T2 RESOLVED, branch 2** — the seed B row's structure is B1's
+  definition in the row's own syntax; B2's incident is the aviation
+  AOA case, cited in-doc by description (the name lives only in the
+  order and is credited to nothing); no provenance over-claim, no
+  second shared node, `DBK_027`'s fork closed (`DBK_032`);
+- **T3 RE-TYPED** — under the loss event the five accountings make
+  exactly two distinguishable predictions (held → 3 survivors,
+  not-held → 2), so the three not-held texts are one physical claim;
+  what differs is which question the reported number answers, and the
+  inexpressible row is an out-of-range sensor reading — P1 applied to
+  the metric itself (`DBK_033`).
+
+    python3 design-basis-ai/wo3_return.py      # the full return
+
 ## Files
 
 | file | what |
@@ -255,13 +288,15 @@ artifact re-rated. `wo2_return.py` is the return:
 | `r2v2_audit.py` | the v2 audit: transcription recomputed, the D split, tags vs verdicts |
 | `WORK_ORDER_F5_2.md` | work order 2, delivered verbatim, not edited |
 | `wo2_return.py` | the kill-closure return: flip map, custody intersections, coverage, accountings |
-| `CLAIM_TABLE.md` | `DBK_001..DBK_029` with REFUTATION_PROTOCOL |
+| `WORK_ORDER_F5_3.md` | work order 3, delivered verbatim, not edited |
+| `wo3_return.py` | the typing return: provision × class table, the B fork read, survival re-typing |
+| `CLAIM_TABLE.md` | `DBK_001..DBK_033` with REFUTATION_PROTOCOL |
 | `samples/` | pinned runs |
 
 The delivered files carry no `--selftest` handling; `audit.py`,
-`r2_audit.py`, `wo_return.py`, `r2v2_audit.py` and `wo2_return.py`
-refuse `--selftest` rather than exiting 0. No `no_severity` exemptions
-— every screen hit was reworded.
+`r2_audit.py`, `wo_return.py`, `r2v2_audit.py`, `wo2_return.py` and
+`wo3_return.py` refuse `--selftest` rather than exiting 0. No
+`no_severity` exemptions — every screen hit was reworded.
 
 ## Scope
 

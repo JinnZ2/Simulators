@@ -8362,9 +8362,39 @@ underneath).
   dropping on provider-only retention — and the choice is textual (the
   outline's §3 sentence picks void → 2, the inherited metric can only
   read collapsed → 3), which is why selecting one is the P0.2
-  declaration the order reserves for the author. Check count printed
-  by `selftest_dbk.py`; `audit.py`, `r2_audit.py`, `wo_return.py`,
-  `r2v2_audit.py` and `wo2_return.py` refuse `--selftest`.
+  declaration the order reserves for the author. **Work order 3
+  (provision typing) then arrived and is returned** (`WORK_ORDER_F5_3.md`
+  verbatim, `wo3_return.py`), its rule being that a provision either
+  names the failure it is back-derived from, names its derivation path
+  and is marked pending, or is *an assumption wearing a number* — with
+  every class assignment a declared reading checked mechanically in
+  both directions (DERIVED quotes present in the named file,
+  ASSUMPTION blocks free of every incident marker). **`DBK_030`:**
+  DERIVED 5 / PROVISIONAL 3 / **ASSUMPTION 12** of 20, splitting into
+  4 the doc already self-tagged, 3 outline sections deferred from
+  provision-form, and **5 unmarked assumptions in provision-form
+  text** (P2, P5, P8, P0.2, P0.5), each returned with its one-line
+  PROVISIONAL spec; CARRIES letters not credited as incident names,
+  and the 5.7-m rows DERIVED with the number-to-Fukushima link marked
+  a declared reading. **`DBK_031`:** four of eight FALSIFY clauses
+  arrive with their outcome asserted in a parenthesis and no study
+  behind it, one cites its incident, three are clean — the
+  falsification column carrying the order's own *assumption wearing a
+  number* one level down. **`DBK_032`:** the B fork closes on branch 2
+  by reading — the seed B row's syntax is B1's definition, B2's
+  incident is the aviation AOA case cited in-doc by description (the
+  name 737/MCAS lives only in the order and is credited to nothing),
+  and no provenance over-claim exists since the pool includes aviation
+  and the body cites it; no second shared node, `DBK_027` closed.
+  **`DBK_033`:** re-typed as survival the five accountings make
+  exactly two distinguishable predictions (held → 3, not-held → 2), so
+  the three not-held texts are one physical claim differing only in
+  which question the reported number answers; the inexpressible row is
+  an **out-of-range sensor reading** — P1 applied to the metric
+  itself, which extrapolates silently outside its declared domain.
+  Check count printed by `selftest_dbk.py`; `audit.py`, `r2_audit.py`,
+  `wo_return.py`, `r2v2_audit.py`, `wo2_return.py` and `wo3_return.py`
+  refuse `--selftest`.
   Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
