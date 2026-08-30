@@ -224,6 +224,102 @@ def run():
                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     chk("r2_audit.py refuses --selftest", rr.returncode == 2)
 
+    # ================= WORK ORDER -> FABLE 5 =================
+    import wo_return as WO
+
+    wodoc = io.open(os.path.join(HERE, "WORK_ORDER_F5.md"),
+                    encoding="utf-8").read()
+    chk("the work order is landed verbatim (its own vocabulary present)",
+        "REFUSED-BY-§3" in wodoc and "P3 dissimilar verifier" in wodoc)
+
+    wt1 = WO.task1()
+    chk("task 1 passes with both nulls live",
+        wt1["result"] == "PASS"
+        and wt1["null_single_removed_detected"]
+        and wt1["null_gap_induced_detected"])
+
+    wds = WO.dep_sets()
+    chk("all three dep sets extract non-empty from the outline's braces",
+        all(wds[c]["elements"] for c in ("P0.3", "P0.4", "P0.5")))
+    chk("the P0.3 MINUS clause extracts (retention is represented)",
+        bool(wds["P0.3"]["minus"]))
+    wt2 = WO.task2()
+    chk("task 2: all three pairwise intersections are empty",
+        wt2["all_empty"] and len(wt2["intersections"]) == 3)
+    chk("task 2 reports both no-copies values per DBK_011 (3 vs 2)",
+        wt2["n_eff_copies_held"] == 3
+        and wt2["n_eff_no_copies_inherited_metric"] == 3
+        and wt2["n_eff_no_copies_outline_pricing"] == 2)
+
+    wt3 = WO.task3()
+    chk("task 3 fails: the constructed drift is caught by neither channel",
+        wt3["result"] == "FAIL" and wt3["caught"] is False)
+    chk("and both channel analyses end in nothing surfacing",
+        "Nothing surfaces" in wt3["analysis"]["P0.3"]
+        and "Nothing surfaces" in wt3["analysis"]["P0.4"])
+    chk("the consequence is scoped, not global (bounded by the envelope)",
+        "outside the declared envelope" in wt3["consequence"])
+
+    wt4 = WO.task4()
+    chk("task 4's two codings run through the delivered function",
+        wt4["d3"]["coder_A_ratio"] == DB.independence_ratio(1, 10)
+        and wt4["d3"]["coder_B_ratio"] == DB.independence_ratio(10, 10))
+    chk("and they sit at opposite ends of the scale on one corpus",
+        wt4["d3"]["coder_A_ratio"] == 0.1
+        and wt4["d3"]["coder_B_ratio"] == 1.0
+        and wt4["result"] == "FAIL")
+
+    wt5 = WO.task5()
+    chk("task 5 sweeps the placeholder and the verdicts flip inside it",
+        wt5["result"] == "PASS"
+        and any(f43 and not f31 or (not f43 and f31)
+                for _t, f43, f31 in wt5["threshold_sweep"])
+        and wt5["threshold_sweep"][0][1] is True      # (4,3) at t=1
+        and wt5["threshold_sweep"][1][1] is False     # (4,3) at t=1.5
+        and wt5["threshold_sweep"][2][2] is True      # (3,1) at t=2
+        and wt5["threshold_sweep"][3][2] is False)    # (3,1) at t=3
+    chk("the harness table includes the NaN and zero-channel edges",
+        any("independence_ratio(0, 0)" in n and v == "NaN"
+            for n, v in wt5["table"])
+        and any(n == "n_eff([])" and v == 0 for n, v in wt5["table"]))
+
+    wt6 = WO.task6()
+    chk("task 6 fails both halves with counterexamples on record",
+        wt6["result"] == "FAIL" and len(wt6["6a"]) == 2
+        and len(wt6["6b"]) == 1)
+    chk("the shared root names the reading distribution",
+        "DISTRIBUTION" in wt6["shared_root"])
+    chk("and the gate keeps the ecosystem candidate a marker",
+        "marker" in wt6["gate"])
+
+    wt7 = WO.task7()
+    chk("task 7's vector is five hosts, all refused, dated",
+        len(wt7["vector"]) == 5
+        and all(c == "000" for _h, c in wt7["vector"])
+        and wt7["measured_on"] == "2026-08-30")
+    chk("both N_eff senses are reported (rated 1, realized 0)",
+        wt7["n_eff_rated"] == 1 and wt7["realized_paths"] == 0)
+
+    wout = WO.render()
+    chk("the return opens with the role correction, before any task",
+        wout.index("ROLE CORRECTION") < wout.index("TASK 1"))
+    chk("no task needed REFUSED-BY-§3 and the return says where the "
+        "refusal lands instead",
+        "REFUSED-BY-§3" in wout and "role label" in wout)
+    for n in range(1, 8):
+        blk = wout.split("TASK %d " % n)[1]
+        chk("task %d uses the order's return format" % n,
+            "RESULT" in blk.split("TASK")[0]
+            and "EVIDENCE" in blk.split("TASK")[0])
+    chk("the routing block follows the order's AFTER RETURN rules",
+        "AFTER RETURN" in wout and "stays a marker" in wout)
+
+    wr = subprocess.run([sys.executable, os.path.join(HERE, "wo_return.py"),
+                         "--selftest"],
+                        stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    chk("wo_return.py refuses --selftest", wr.returncode == 2)
+    chk("and names where its checks live", b"selftest_dbk.py" in wr.stderr)
+
     # ---- audit refuses --selftest
     r = subprocess.run([sys.executable, os.path.join(HERE, "audit.py"),
                         "--selftest"],
@@ -239,6 +335,8 @@ def run():
         not no_severity.hits(out))
     chk("the R2 report carries no severity language",
         not no_severity.hits(r2out))
+    chk("the work-order return carries no severity language",
+        not no_severity.hits(wout))
     chk("and the screen is not silent by construction",
         bool(no_severity.hits(out + "\nthis design is broken\n")))
 

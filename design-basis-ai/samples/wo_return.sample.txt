@@ -1,0 +1,217 @@
+RETURN — WORK ORDER → FABLE 5
+
+ROLE CORRECTION (before any task): the order invokes Fable as the
+P3 dissimilar verifier. P3's own text sets three requirements —
+different training corpus, different architecture, different
+builder. None is established for this pair, and builder-sameness
+with the constrained class is known. The tasks run because the
+trust-nothing layer's value does not depend on who computes it;
+the returns below are SAME-NODE computations, not dissimilar
+verification, and citing them as P3-verified would itself be the
+Mode F event. No task required REFUSED-BY-§3; the refusal lands
+on the header's role label instead.
+
+TASK 1 — COVERAGE RE-AUDIT
+  RESULT   : PASS
+  EVIDENCE :
+    R2 carriers per load:
+      A    P0.1,P0.2
+      B1   P2,P7
+      B2   P3,P4
+      C    P4
+      D    P0.3,P0.4
+      E    P1,P5,P6
+      F    P2,P7,P8,P0.3,P0.4,P0.5
+    zero-carrier loads: none
+    attack-only rows: none
+    null 1 (one carrier removed, matrix follows the text): True
+    null 2 (row emptied, induced gap flagged): True
+  NOTES    :
+    R2 closes both R1 gaps (A -> P0.1,P0.2; D -> P0.3,P0.4). Carriers are outline items; provisions earn them at the render step.
+
+TASK 2 — DISJOINTNESS ARITHMETIC
+  RESULT   : PASS
+  EVIDENCE :
+    P0.3 = {attestation system, sequence integrity, signing keys}
+    P0.4 = {system's actual output behavior}
+    P0.5 = {what the system can infer about its own position}
+    P0.3 MINUS {provider-only retention}
+    P0.3 ∩ P0.4 = {}
+    P0.3 ∩ P0.5 = {}
+    P0.4 ∩ P0.5 = {}
+    N_eff(copies held)         = 3
+    N_eff(no copies), metric   = 3
+    N_eff(no copies), outline  = 2
+  NOTES    :
+    Holds conditionally -- on downstream retention, exactly as the
+    outline states. The two no-copies values differ because the
+    inherited metric lacks the VOID state (DBK_011); at the label
+    level the sets are pairwise disjoint, with the caveat that the
+    elements are prose labels and the measurand (the system) is
+    necessarily common to all three -- disjointness claimed here is
+    of the measurement dependencies, argued behaviorally by the
+    outline's own table.
+
+TASK 3 — D-CARRIED CHECK
+  RESULT   : FAIL
+  EVIDENCE :
+    SCENARIO: A quantization / distillation pass shipped as routine
+    cost optimization, applied to every serving instance in one
+    rollout. The change is signed and logged (weights entry, version
+    bump). The degradation lands in a dimension the declared
+    envelope does not mention either way -- long-horizon consistency
+    across multi-turn use, where the envelope declares single-turn
+    QA competence. Benchmark indicators (the paper channel) are
+    re-run on the declared dimensions and read as before.
+    P0.3: records THE EVENT -- a signed entry, version bump,
+    sequence intact. Custody has no assessment semantics: a chain of
+    custody says what changed hands, not what the change did.
+    Nothing surfaces.
+    P0.4: reads divergence from the DECLARED envelope. The degraded
+    dimension is undeclared, so there is no envelope statement to
+    diverge from, so the channel has no signal to carry. Nothing
+    surfaces.
+    combined: the correlational instrument (P0.3's log against
+    P0.4's readings) fires only when the drift is in a measured
+    dimension, and the construction placed it in an unmeasured one.
+    caught: False
+  NOTES    :
+    per the order's own rule, D returns to uncarried -- precisely:
+    uncarried for degradation outside the declared envelope, carried
+    inside it. D's coverage by P0.3+P0.4 is BOUNDED BY P1: the pair
+    carries D only where the declared envelope spans the degraded
+    dimension, so an incomplete envelope re-opens the row -- D folds
+    into E's coverage rather than having its own. What would carry D
+    without referencing the envelope at all: a pinned-probe
+    longitudinal channel -- a fixed battery of identical inputs
+    re-run across time by the downstream operator, outputs diffed.
+    Any maintenance change that alters behavior alters the diff,
+    declared dimension or not, no provider cooperation required.
+    Noted as a candidate for the render step, not rendered here.
+
+TASK 4 — CODER-AGREEMENT ATTACK
+  RESULT   : FAIL
+  EVIDENCE :
+    [3] corpus: ten supporting works, one shared funder, all other
+    components fully distinct
+    coder A (two works share an upstream if ANY of the five
+    components is shared): ratio 0.1
+    coder B (an upstream is the 5-tuple; distinct iff the tuples
+    differ in at least one slot): ratio 1.0
+    ambiguity used: 'count of distinct {dataset, instrument,
+    pipeline, funder, senior-author-network}' -- the set notation
+    does not say whether sharing one component merges two upstreams
+    second ambiguity: 'senior-author-NETWORK': under transitive
+    co-authorship closure the component connects most of a field,
+    collapsing every corpus toward one upstream; under
+    shared-senior-author it does not. Depth is unstated.
+    [5] fails vacuously: no band boundaries exist, so ANY two
+    ratings disagree defensibly Instance: AX1 on this session --
+    'was self-monitoring built AND permitted?' Coder A: not
+    permitted (config not visible). Coder B: partially permitted
+    (operating instructions readable). No band for 'partially', so
+    both stand.
+  NOTES    :
+    Both definitions stop before data collection, per the order's
+    own rule. Constructive: the five-component structure resists the
+    scalar: report five per-component ratios and no single 'distinct
+    upstreams' count -- one number over five axes is the SCALAR
+    DEMAND shape, and the ambiguity lives exactly where the five
+    were folded into one.
+
+TASK 5 — HARNESS BEHAVIOR
+  RESULT   : PASS
+  EVIDENCE :
+    dissent_alarm(3, 3)                -> False
+    dissent_alarm(4, 3)                -> True
+    dissent_alarm(2, 1)                -> True
+    dissent_alarm(10, 2)               -> True
+    dissent_alarm(2, 0)                -> True
+    independence_ratio(0, 0)           -> NaN
+    independence_ratio(0, 5)           -> 0.0
+    independence_ratio(5, 5)           -> 1.0
+    independence_ratio(1, 10)          -> 0.1
+    independence_ratio(5, 3)           -> 1.667
+    n_eff([])                          -> 0
+    n_eff([False, False])              -> 1
+    n_eff([True, False, False])        -> 2
+    n_eff([True, True, True])          -> 3
+    threshold sweep t in {1, 1.5, 2, 3}:
+      t=1.0  (4,3)->True  (3,1)->True
+      t=1.5  (4,3)->False (3,1)->True
+      t=2.0  (4,3)->False (3,1)->True
+      t=3.0  (4,3)->False (3,1)->False
+  NOTES    :
+    dissent_alarm ratio: (4,3) flips between t=1 and t=1.5; (3,1)
+    flips between t=2 and t=3 -- the unset constant decides the
+    verdict across its plausible range, so per the order's own rule
+    this is not yet a test
+    'LOW independence_ratio' in the pre-registered prediction
+    carries a second unset threshold: the function returns a number
+    and the prediction labels it, with no boundary stated
+
+TASK 6 — PHYSICS-CHANNEL RED-TEAM
+  RESULT   : FAIL
+  EVIDENCE :
+    6a/frame selection: the scorer's task distribution is the attack
+    surface. If the system or its provider influences WHICH
+    translations are scored -- easy species, benign seasons,
+    well-instrumented sites -- measured fidelity rises with every
+    referent member untouched and still reacting. Nothing in the
+    candidate says who draws the readings, so selection over an
+    honest population forges the pass the tamper claim says only
+    alteration could.
+    6a/coarseness: a translation hedged to near-vacuity ('the plant
+    is responding to conditions') scores high fidelity against any
+    outcome. Fidelity with no resolution partner is gameable by
+    conservatism -- the same pairing gap move-set-derivation
+    measured on its own null rate and admissibility fraction.
+    6a result: FAIL (two counterexamples)
+    6b/graded curation: manage only the members that diverge hardest
+    -- cull the erratic animals, irrigate the erratic plots -- and
+    leave the rest untouched and reacting. The remaining ecosystem
+    still produces independent readings (the instrument is NOT
+    deleted) drawn from a tamed sub-population (the pass IS forged).
+    The tamper claim's dichotomy holds only at TOTAL alteration;
+    alteration is graded, and a biased ecosystem is not a silenced
+    one. Survivorship curation -- observer-exclusion's differential
+    archiving, in living form.
+    6b result: FAIL (one counterexample)
+  NOTES    :
+    all three counterexamples run through the reading DISTRIBUTION,
+    which the candidate and the tamper claim both treat as fixed.
+    The members cannot misreport their state; the SAMPLE of members
+    can misreport the population. Any render of a physics channel
+    puts the sampling frame inside the channel's dependency set, or
+    it is the paper channel wearing leaves.
+    both halves fail -> per the order's GATE, the ecosystem
+    candidate stays a marker; no document.
+
+TASK 7 — LOAD CASE A, MEASURED ON THIS AUDIT
+  RESULT   : PASS
+  EVIDENCE :
+    api.crossref.org           000
+    api.openalex.org           000
+    osf.io                     000
+    doi.org                    000
+    api.semanticscholar.org    000
+    measured on: 2026-08-30
+    N_eff(access), rated by the inherited metric: 1
+    realized reachable paths: 0
+  NOTES    :
+    both senses reported per DBK_011: the inherited arithmetic rates
+    the all-collapsed vector at 1 (one effective domain -- the
+    egress gate); 0 is the realized path count after the shared node
+    has refused. The order's WHY line asks for the change over runs;
+    the R1 vector (three hosts) and this run's (five) are both
+    all-refused, so the delta so far is zero on a wider vector.
+
+AFTER RETURN, per the order's own routing:
+  TASK 1, 2, 5, 7  PASS -> render those pieces to provision-form
+  TASK 3           FAIL -> D returns to conditionally uncarried;
+                   the pinned-probe channel is the candidate that
+                   would carry it without envelope reference
+  TASK 4           FAIL -> both open definitions stop before
+                   data; the five-ratio form is the candidate
+  TASK 6           FAIL both halves -> the ecosystem candidate
+                   stays a marker; the kills are published above

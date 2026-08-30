@@ -8267,8 +8267,44 @@ underneath).
   visible; envelope not readable from inside; no second derivation;
   access paths **single, count 1** — the answer that made the R1 audit
   *"load case A run live"*, as the outline reads it), with no compliance
-  claim anywhere in the answers, asserted. Check count printed by
-  `selftest_dbk.py`; `audit.py` and `r2_audit.py` refuse `--selftest`.
+  claim anywhere in the answers, asserted. **A work order addressed to
+  this model then arrived** (`WORK_ORDER_F5.md`, verbatim): seven tasks
+  under a §3 scope boundary — arithmetic, set intersections, measured
+  code behavior, adversarial construction only, `REFUSED-BY-§3` a valid
+  result — returned by `wo_return.py` in the order's own
+  TASK/RESULT/EVIDENCE/NOTES format. **`DBK_014`:** the header does not
+  survive its own scope boundary — it invokes Fable as *the P3
+  dissimilar verifier* while P3's three requirements (corpus,
+  architecture, builder) are none of them established for the pair and
+  builder-sameness is known, so no task needed `REFUSED-BY-§3` and the
+  refusal lands on the header's role label: the returns are SAME-NODE
+  computations, and citing them as P3-verified would itself be the Mode
+  F event. Tasks 1/2/5/7 PASS (`DBK_015`, `DBK_018`, `DBK_020`):
+  coverage re-audit with two live null injections; dep sets pairwise
+  disjoint with retention reported in THREE values because `DBK_011`'s
+  VOID state is now load-bearing (copies 3 / inherited metric 3 /
+  outline pricing 2); the harness behaves as delivered while the sweep
+  shows the unset threshold decides verdicts across its plausible range
+  (4-over-3 flips between t=1 and 1.5); the access vector five hosts
+  all refused, rated 1 / realized 0 in both senses. Tasks 3/4/6 FAIL
+  and the kills are published: **`DBK_016`** a signed, logged
+  quantization pass degrading an undeclared dimension is caught by
+  neither P0.3 (custody has no assessment semantics) nor P0.4 (no
+  envelope statement to diverge from), so D returns to *conditionally
+  uncarried, bounded by P1* — the candidate that would carry it without
+  envelope reference is a pinned-probe longitudinal channel, fixed
+  inputs re-run across time by the downstream operator, outputs diffed;
+  **`DBK_017`** two defensible codings of *distinct upstreams* land at
+  0.1 and 1.0 through the delivered function on one corpus, and [5]
+  fails vacuously with no band boundaries (constructive: five
+  per-component ratios, no single count — SCALAR DEMAND in the family's
+  own instrument); **`DBK_019`** three red-team counterexamples (frame
+  selection, coarseness, graded curation) all run through the reading
+  DISTRIBUTION the candidate treats as fixed — the members cannot
+  misreport their state, the SAMPLE of members can misreport the
+  population — so per the order's GATE the ecosystem candidate stays a
+  marker. Check count printed by `selftest_dbk.py`; `audit.py`,
+  `r2_audit.py` and `wo_return.py` refuse `--selftest`.
   Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk

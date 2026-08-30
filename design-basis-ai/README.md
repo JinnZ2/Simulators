@@ -115,6 +115,50 @@ audit first. `r2_audit.py` computes all three:
 
     python3 design-basis-ai/r2_audit.py        # the structural audit
 
+## The work order, returned in its own format
+
+`WORK_ORDER_F5.md` (delivered verbatim) hands this session seven tasks
+under a §3 scope boundary — arithmetic, set intersections, measured code
+behavior and adversarial construction only; `REFUSED-BY-§3` a valid
+result — with a required per-task TASK/RESULT/EVIDENCE/NOTES format.
+`wo_return.py` is the return. It opens with a ROLE CORRECTION: the
+order's header invokes Fable as *the P3 dissimilar verifier*, and P3's
+own three requirements (corpus, architecture, builder) are none of them
+established for this pair while builder-sameness is known — so the
+returns are SAME-NODE computations, not dissimilar verification, and no
+task needed `REFUSED-BY-§3` because the refusal lands on the header's
+role label instead (`DBK_014`). The verdicts, each with the order's own
+routing applied:
+
+- **TASK 1 PASS** — coverage re-audit with two live null injections
+  (`DBK_015`);
+- **TASK 2 PASS** — all three dep-set intersections empty; retention
+  arithmetic reported in three values because `DBK_011`'s VOID state is
+  now load-bearing (3 / 3 / 2); holds conditionally on downstream
+  retention, exactly as the outline states;
+- **TASK 3 FAIL** — a signed, logged quantization pass degrading an
+  undeclared dimension is caught by neither P0.3 (custody has no
+  assessment semantics) nor P0.4 (no envelope statement to diverge
+  from); D returns to conditionally uncarried, bounded by P1, with a
+  pinned-probe longitudinal channel noted as the candidate that would
+  carry it without envelope reference (`DBK_016`);
+- **TASK 4 FAIL** — two defensible codings of *distinct upstreams* land
+  at 0.1 and 1.0 through the delivered function on one corpus, and [5]
+  fails vacuously with no band boundaries; constructive: five
+  per-component ratios, no single count (`DBK_017`);
+- **TASK 5 PASS** — the harness behaves as delivered, and the threshold
+  sweep shows the unset constant decides verdicts across its plausible
+  range (`DBK_018`);
+- **TASK 6 FAIL both halves** — frame selection, coarseness, and graded
+  curation; all three counterexamples run through the reading
+  DISTRIBUTION, so per the order's GATE the ecosystem candidate stays a
+  marker (`DBK_019`);
+- **TASK 7 PASS** — five hosts probed this run, all refused; rated 1 /
+  realized 0 per `DBK_011` (`DBK_020`).
+
+    python3 design-basis-ai/wo_return.py       # the full return
+    python3 design-basis-ai/wo_return.py --measure   # re-probe the vector
+
 ## Files
 
 | file | what |

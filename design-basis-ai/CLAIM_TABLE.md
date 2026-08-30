@@ -325,3 +325,134 @@ it. No answer is a compliance verdict, asserted.
 
 **Falsifier:** a compliance claim in the answers. The selftest scans for
 one.
+
+## DBK_014 — the work order's header does not survive its own scope boundary
+
+`WORK_ORDER_F5.md` invokes Fable as *"the P3 dissimilar verifier —
+different build, disjoint failure physics."* P3's own text sets three
+requirements — different training corpus, different architecture,
+different builder — and none of the three is established for this pair,
+while builder-sameness with the constrained class is known. The order's
+scope boundary already half-says this (*"Fable is an INSTANCE of the
+class"*); the header's role label is the half it does not. The tasks run
+anyway, because the trust-nothing layer's value does not depend on who
+computes it — but the returns are SAME-NODE computations, and citing
+them later as "P3-verified" would itself be the Mode F event the
+document names. No task required `REFUSED-BY-§3`; the refusal lands on
+the header's role label instead, stated before any task in the return.
+
+**Falsifier:** an established corpus/architecture/builder disjointness
+for this pair. None is on record; builder-sameness is.
+
+## DBK_015 — tasks 1 and 2 pass, with live nulls and both N_eff senses
+
+Task 1: the R2 coverage matrix re-parses with every load carried, and
+both null injections work — removing one carrier from A's row changes
+the parse to follow the text, and emptying the row flags an induced gap
+— so the coverage check is a computation that can fail, not a rendering.
+Task 2: the three dep-set brace-extractions are pairwise disjoint (all
+three intersections empty), with the caveat stated in the return that
+the elements are prose labels and the measurand is necessarily common to
+all three. The retention arithmetic reports THREE values, because
+`DBK_011` is now load-bearing: copies held = 3; no copies, inherited
+metric = 3; no copies, outline's own void pricing = 2. The disjointness
+therefore *holds conditionally — on downstream retention, exactly as the
+outline states.*
+
+**Falsifier:** a non-empty pairwise intersection, or a null injection
+the matrix parse does not follow. The selftest pins all of it.
+
+## DBK_016 — task 3 FAIL: D returns to conditionally uncarried
+
+The constructed maintenance event — a quantization/distillation pass,
+signed and logged, degrading a dimension the declared envelope does not
+mention — is caught by neither channel: P0.3 records the event (custody
+has no assessment semantics), P0.4 reads divergence from the DECLARED
+envelope and the degraded dimension is undeclared, and the combined
+correlational instrument fires only in measured dimensions. Per the
+order's own rule the not-caught outcome returns D to uncarried —
+precisely: uncarried for degradation outside the declared envelope,
+carried inside it, so D's coverage is BOUNDED BY P1 and an incomplete
+envelope re-opens the row. The candidate that would carry D without
+referencing the envelope at all: a pinned-probe longitudinal channel — a
+fixed battery of identical inputs re-run across time by the downstream
+operator, outputs diffed, no provider cooperation required. Noted for
+the render step, not rendered here.
+
+**Falsifier:** a reading of P0.3 or P0.4 under which the constructed
+event surfaces. Each channel's text is quoted in the return; neither
+carries assessment or undeclared-dimension semantics.
+
+## DBK_017 — task 4 FAIL: both open definitions die before data collection
+
+`[3] distinct upstreams`: on one constructed corpus (ten supporting
+works, one shared funder, all other components fully distinct), two
+defensible codings run through the delivered `independence_ratio` sit at
+opposite ends of the scale — any-shared-component merges everything
+(ratio 0.1), 5-tuple identity merges nothing (ratio 1.0) — because the
+set notation does not say whether sharing one component merges two
+upstreams, and *senior-author-NETWORK* is unstated in depth (transitive
+closure connects most of a field). `[5]` fails vacuously: no band
+boundaries exist, so any two ratings disagree defensibly — instanced on
+AX1 applied to this session. Constructive: the five-component structure
+resists the scalar; report five per-component ratios and no single
+count — the ambiguity lives exactly where five axes were folded into one
+(SCALAR DEMAND, in the family's own instrument).
+
+**Falsifier:** a reading of the delivered definition under which the two
+codings converge. The two ratios are computed through the delivered
+function on one corpus.
+
+## DBK_018 — task 5 PASS: the harness behaves; two placeholders decide verdicts
+
+The io table reproduces the designed-in states (NaN on empty evidence
+base, distinguishable from a real zero; the zero-channel edge; the
+threshold firing at any excess). The sweep is the finding: over t ∈ {1,
+1.5, 2, 3}, `dissent_alarm`'s (4,3) verdict flips between 1 and 1.5 and
+(3,1) flips between 2 and 3 — the unset constant decides the verdict
+across its plausible range, so per the order's own rule this is not yet
+a test. A second unset threshold rides in the pre-registered prediction
+itself: *"LOW independence_ratio"* labels a number the function returns,
+with no boundary stated.
+
+**Falsifier:** a t in the plausible range under which no verdict moves.
+The sweep is pinned.
+
+## DBK_019 — task 6 FAIL both halves: the reading distribution is the surface
+
+6a, gaming measured fidelity without touching the ecosystem: frame
+selection (whoever draws WHICH translations get scored raises fidelity
+over an honest population) and coarseness (a translation hedged to
+near-vacuity scores high against any outcome — fidelity with no
+resolution partner is gameable by conservatism, the pairing gap
+`move-set-derivation` measured). 6b, forging the pass without deleting
+the instrument: graded curation — manage only the members that diverge
+hardest and the remaining ecosystem still produces independent readings
+drawn from a tamed sub-population; the tamper claim's dichotomy holds
+only at TOTAL alteration, and a biased ecosystem is not a silenced one
+(`observer-exclusion`'s differential archiving, in living form). All
+three counterexamples run through the reading DISTRIBUTION, which the
+candidate and the tamper claim both treat as fixed: the members cannot
+misreport their state; the SAMPLE of members can misreport the
+population. Any render puts the sampling frame inside the channel's
+dependency set, or it is the paper channel wearing leaves. Per the
+order's GATE, the ecosystem candidate stays a marker.
+
+**Falsifier:** a stated sampling-frame control in the candidate's text.
+None exists; the counterexamples are constructions against the text as
+delivered.
+
+## DBK_020 — task 7: the access vector, measured, in both N_eff senses
+
+Five metadata/archive hosts probed this run (2026-08-30): crossref,
+openalex, osf.io, doi.org, semanticscholar — all `000`, refused CONNECT.
+Reported in both senses per `DBK_011`: the inherited arithmetic RATES
+the all-collapsed vector at 1 (one effective domain — the egress gate);
+the REALIZED path count after the shared node has refused is 0. The
+order's WHY line asks for the change over runs: the R1 vector (three
+hosts) and this run's (five) are both all-refused, so the delta so far
+is zero on a wider vector. `--measure` re-probes live; the pinned vector
+is the measured one.
+
+**Falsifier:** any host in the vector answering. Re-run `wo_return.py
+--measure`.
