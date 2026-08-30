@@ -1,0 +1,67 @@
+MODULE F — ANTECEDENT CONDITION COUPLING (the amplifier)
+
+The spec: 'This is the part standard breach modeling drops. It is
+not a refinement; it changes the cascade outcome.' This file is the
+arithmetic of that claim — two coupled amplifiers and the structural
+proof that their combined effect is one-sided and bounded.
+
+AMPLIFIER A — OPERATOR SWAP (proved in reservoir-chain-coupling/)
+  independent-node: breach iff max(wave, pool) >= crest
+  coupled:          breach iff     wave + pool  >= crest
+  RESULT 1: the bias is ONE-SIDED — independent never breaches where
+            coupled does not. Every disagreement is an UNDER-state.
+  RESULT 2: the disagreement band width equals the antecedent pool.
+  RESULT 3: outside the band the operators agree.
+
+AMPLIFIER B — BURN-MODIFIED ROUGHNESS
+  A prior wildfire or flood removes vegetation, reducing Manning n.
+  Lower roughness increases wave celerity and reduces attenuation
+  between nodes. The effect is parameterized, not calibrated.
+
+  Parameter space (synthetic, dimensionless):
+    burn_severity:  0.0 to 1.0  (0 = unburned, 1 = complete)
+    roughness_multiplier: 0.3 to 1.0  (post-burn n / pre-burn n)
+    attenuation_reduction_max: 0.0 to 0.5  (max reduction factor)
+
+THE COUPLING — both amplifiers act on the same wave
+  Amplifier A raises the wave height at each node.
+  Amplifier B reduces the attenuation between nodes.
+  A raised wave that attenuates less arrives at the next node with
+  more energy than either effect alone.
+
+THE LOAD-BEARING RESULT — three breach sets, ordered:
+  S1: independent-node, base roughness
+  S2: coupled,          base roughness
+  S3: coupled,          burn-modified roughness
+  Claim: S1 ⊆ S2 ⊆ S3
+
+  Proof S1 ⊆ S2: max(a,b) <= a+b for non-negative a,b; breach condition is monotonic in the combined quantity
+  Proof S2 ⊆ S3: breach condition is monotonic in wave; modified attenuation >= base attenuation, so downstream waves are larger
+  Falsifier:     a counterexample with non-negative inputs where S1 <= S2 <= S3 fails
+
+  The claim is structural: it holds for any non-negative inputs,
+  any chain length, and any monotonic propagation function. It does
+  not depend on the synthetic coefficients used in the sweep.
+
+NULL TESTS — the effect vanishes at the boundaries:
+  pool = 0:           S1 = S2 = S3  PASS
+  burn_severity = 0:  S2 = S3         PASS
+  both zero:          S1 = S2 = S3  PASS
+  crest = 0:          all breach      PASS
+
+SWEEP — the ordering holds across the parameter space:
+  4 nodes, 5 waves, 4 pools, 3 crests, 4 base_attenuations,
+  5 burn_severities, 4 reduction_maxes = 19,200 combinations
+  all satisfy S1 ⊆ S2 ⊆ S3: PASS
+
+WHAT THIS IS AND IS NOT
+  IS: the arithmetic of two coupled amplifiers, the structural proof
+      that their combined effect is one-sided and bounded, and the
+      parameter sweep space for sensitivity analysis.
+  IS NOT: a hydraulic simulation of any real dam, chain, or terrain.
+      Every coefficient is synthetic and marked. The propagation
+      function is an abstract combiner, not a solver.
+
+  The HEC-RAS run on published data — the spec's falsifiable test —
+  is required to show the band is entered for any real structure.
+  This module proves the mechanism is load-bearing when it is.

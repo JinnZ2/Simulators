@@ -239,6 +239,72 @@ artifact re-rated. `wo2_return.py` is the return:
 
     python3 design-basis-ai/wo2_return.py      # the full return
 
+## Work order 3 — provision typing, returned
+
+`WORK_ORDER_F5_3.md` (delivered verbatim) applies a typing rule — a
+provision either names the failure it is back-derived from (DERIVED),
+names its derivation path and is marked pending (PROVISIONAL), or is
+an assumption wearing a number — and asks two evidence pulls.
+`wo3_return.py` is the return; every class assignment is a declared
+reading with mechanical evidence in both directions (DERIVED quotes
+checked present in the named file, ASSUMPTION blocks checked free of
+every incident marker):
+
+- **T1 ENUMERATED** — DERIVED 5 / PROVISIONAL 3 / **ASSUMPTION 12**
+  of 20, splitting honestly into 4 the doc already self-tagged
+  (§8[5]), 3 outline sections deferred from provision-form, and **5
+  unmarked assumptions in provision-form text — P2, P5, P8, P0.2,
+  P0.5** — each returned with its one-line PROVISIONAL spec text
+  (`DBK_030`). A second layer sits inside the falsification apparatus:
+  four of eight FALSIFY clauses arrive with their outcome asserted in
+  a parenthesis, one cites its incident, three are clean (`DBK_031`);
+- **T2 RESOLVED, branch 2** — the seed B row's structure is B1's
+  definition in the row's own syntax; B2's incident is the aviation
+  AOA case, cited in-doc by description (the name lives only in the
+  order and is credited to nothing); no provenance over-claim, no
+  second shared node, `DBK_027`'s fork closed (`DBK_032`);
+- **T3 RE-TYPED** — under the loss event the five accountings make
+  exactly two distinguishable predictions (held → 3 survivors,
+  not-held → 2), so the three not-held texts are one physical claim;
+  what differs is which question the reported number answers, and the
+  inexpressible row is an out-of-range sensor reading — P1 applied to
+  the metric itself (`DBK_033`).
+
+    python3 design-basis-ai/wo3_return.py      # the full return
+
+## R1.1 — the revision, audited as a repair map
+
+`SOURCE_DROP_V2.md` (delivered verbatim, beside the untouched
+original — the revision's own effective-date rule applied to itself)
+folds the whole audit chain back into the main document.
+`r1v2_audit.py` checks every claimed closure against the new text
+rather than the revision's account of itself:
+
+- **all six closures hold** (`DBK_034`) — Fukushima named beside 5.7
+  with the ~14 m arrived wave added; STATUS PROVISIONAL blocks on
+  exactly P2/P5/P8 with derivation paths; the four asserted FALSIFY
+  parentheticals removed and P3's incident-backed one kept; the
+  three-axes amendment in P3 VERIFY (*a known-same-builder pair's
+  agreement reads as N_eff 2 but is N_eff 1*); the per-load custody
+  table; and the effective-date clause, now a delivered custody
+  clause. Re-typed: DERIVED 5 / PROVISIONAL 6 / ASSUMPTION 9, the
+  unmarked provision-form assumptions down from five to two, both in
+  the outline;
+- **the provenance section runs the doc's own P7 on itself**
+  (`DBK_035`) — nine custody positions, and the keyword intersection
+  recomputes exactly the two shared pairs the doc names (E∩F on
+  Fukushima, B2∩P3 on the aviation case), with `dissent_alarm(2,1)`
+  firing as stated. The phrase WO2 could find in no delivered file —
+  *"disjoint by construction"* — now exists in exactly one, as the
+  schema framing being corrected: the phantom colophon arrives
+  already carrying its measured value;
+- **what stays open is stated forward** (`DBK_036`) — P0.2/P0.5 (the
+  outline's remaining two), the D-row split, the unpinned `t`, one
+  vocabulary residue, and the join itself: single-node pending a
+  different-builder verifier, restated by the doc's own text.
+
+    python3 design-basis-ai/r1v2_audit.py      # the repair-map audit
+
 ## Files
 
 | file | what |
@@ -255,13 +321,18 @@ artifact re-rated. `wo2_return.py` is the return:
 | `r2v2_audit.py` | the v2 audit: transcription recomputed, the D split, tags vs verdicts |
 | `WORK_ORDER_F5_2.md` | work order 2, delivered verbatim, not edited |
 | `wo2_return.py` | the kill-closure return: flip map, custody intersections, coverage, accountings |
-| `CLAIM_TABLE.md` | `DBK_001..DBK_029` with REFUTATION_PROTOCOL |
+| `WORK_ORDER_F5_3.md` | work order 3, delivered verbatim, not edited |
+| `wo3_return.py` | the typing return: provision × class table, the B fork read, survival re-typing |
+| `SOURCE_DROP_V2.md` | R1.1 — the main document revised, delivered verbatim, not edited |
+| `r1v2_audit.py` | the repair-map audit: closures checked, provenance P7 recomputed, re-typing |
+| `CLAIM_TABLE.md` | `DBK_001..DBK_036` with REFUTATION_PROTOCOL |
 | `samples/` | pinned runs |
 
 The delivered files carry no `--selftest` handling; `audit.py`,
-`r2_audit.py`, `wo_return.py`, `r2v2_audit.py` and `wo2_return.py`
-refuse `--selftest` rather than exiting 0. No `no_severity` exemptions
-— every screen hit was reworded.
+`r2_audit.py`, `wo_return.py`, `r2v2_audit.py`, `wo2_return.py`,
+`wo3_return.py` and `r1v2_audit.py` refuse `--selftest` rather than
+exiting 0. No `no_severity` exemptions — every screen hit was
+reworded.
 
 ## Scope
 

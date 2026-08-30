@@ -88,19 +88,89 @@ The cost is stated: this folder gives a lower bound, not the seam map.
 The seam map is the useful governance product, and it is what whoever
 has NID access should build.
 
+## The package — a research agenda, and its kill list under audit
+
+A later drop turns the folder from an audit-of-a-truncated-spec into a
+**research agenda published to be picked up cold**. It lands verbatim
+beside the v1 files (both stay inspectable): `SCOPE_BOUNDARY.md` (why
+the model is broader than standard practice — physics does not respect
+institutional boundaries), `knowledge_state.py` (the typing rule
+enforced in code — a value asserted without a legitimate epistemic
+state raises, and `INSTITUTIONAL_EXCLUSION` is rejected as invalid),
+`module_f.py` (the Module F body reconstructed as *arithmetic* — the
+operator swap and burn-modified roughness, the ordering `S1 ⊆ S2 ⊆ S3`
+proved over 19,200 synthetic combinations, no real structure named),
+`contributing_inflow.py` (urban runoff as a parameterized pool
+increment), `eap_coverage_v2.py` (the governance record plus tribal
+jurisdiction), `audit_v2.py` / `selftest_ccc_v2.py` / `CLAIM_TABLE_v2.md`
+(`CCC_001..CCC_018`), `UNDERGRADUATE_RESEARCH_GAPS.md` (13 gaps, each
+with a knowledge state, a stranger-evaluable falsifier, data sources
+with access tiers, and a deliverable interface), and `DEEP_RESEARCH.md`
+(the roadmap).
+
+The package arrived with its own **kill list**, sent as *claims under
+test* with the instruction that a kill overturned is a better outcome
+than one confirmed. `kill_audit.py` adjudicates the three mechanically:
+
+- **KILL 1** — a self-correction reasoning trace left in
+  `contributing_inflow.render()` (`CCA_001`): CONFIRMED as an overlay
+  artifact, and it lands on an arithmetically sound conclusion.
+- **KILL 2** — the stated decisive condition differs from the coded one
+  (`CCA_002`): CONFIRMED (prose reads the `max`-flip, code computes the
+  `sum`-tip; they diverge on 226 of 540 swept cases) and RESOLVED by
+  physics — the wave rides on the standing pool, so `sum` is right and
+  the prose is the independent-node default reasserting in the
+  translation layer of a module written to refute it.
+- **KILL 3** — tribal jurisdiction supplied from memory (`CCA_003`):
+  CONFIRMED and sharper — owners are refused-from-memory and carry a
+  knowledge-state field; the six tribal rows are supplied from memory,
+  finer, with no knowledge-state field, and the authority bound is
+  invariant to them. The fix is not to drop tribal (that re-commits the
+  `INSTITUTIONAL_EXCLUSION` the repo rejects) but to type it under the
+  same discipline the owners carry.
+
+All three hold; none is overturned. Two findings the landing turned up:
+`CCC_017` is REFUTED on its delivered instance (`module_f.render()`
+trips the repo's own screen on a certainty verb, `CCA_005`), and the
+delivered `selftest_ccc_v2.py` exercises v1 `eap_coverage` + v1 `audit`
++ the new `module_f`, so the v2 additions — including the KILL 3 tribal
+list — ship **unexercised** (`CCA_006`). The cold-start test runs the
+sender's five questions over all fifteen gaps (`CCA_007`): every gap
+names a falsifier and an interface; the flags cluster on public-data
+access and one-semester scope.
+
+    python3 columbia-chain-cascade/kill_audit.py     # the kill audit
+    python3 columbia-chain-cascade/selftest_kill.py  # its checks
+    python3 columbia-chain-cascade/module_f.py       # the amplifier arithmetic
+
 ## Files
 
 | file | what |
 |---|---|
 | `SOURCE_DROP.md` | delivered verbatim, truncated as delivered, not edited |
-| `eap_coverage.py` | the governance record — the one computation from the text |
-| `audit.py` | executability + truncation, each blocker measured |
-| `selftest_ccc.py` | the checks; run it, it prints its own count |
+| `eap_coverage.py` | v1 governance record — the one computation from the text |
+| `audit.py` | v1 executability + truncation, each blocker measured |
+| `selftest_ccc.py` | the v1 checks; run it, it prints its own count |
 | `CLAIM_TABLE.md` | `CCC_001..CCC_008` with REFUTATION_PROTOCOL |
-| `samples/` | pinned runs of both modules |
+| `SCOPE_BOUNDARY.md` | delivered — why the model is broader than standard practice |
+| `knowledge_state.py` | delivered — the epistemic-state typing rule, enforced in code |
+| `module_f.py` | delivered — the Module F body as arithmetic (`S1 ⊆ S2 ⊆ S3`) |
+| `contributing_inflow.py` | delivered — urban runoff as a pool increment |
+| `eap_coverage_v2.py` | delivered — governance record + tribal jurisdiction |
+| `audit_v2.py` | delivered — v1 audit, module-F-aware |
+| `selftest_ccc_v2.py` | delivered — exercises v1 eap/audit + module_f (1 failure: `CCC_017`) |
+| `CLAIM_TABLE_v2.md` | delivered — `CCC_001..CCC_018` |
+| `UNDERGRADUATE_RESEARCH_GAPS.md` | delivered — 13 gaps, each startable cold |
+| `DEEP_RESEARCH.md` | delivered — the roadmap |
+| `kill_audit.py` | the kill list under audit + the cold-start test |
+| `selftest_kill.py` | the audit's checks; run it, it prints its own count |
+| `AUDIT_NOTES.md` | `CCA_001..CCA_009` with REFUTATION_PROTOCOL |
+| `samples/` | pinned runs |
 
-Both modules refuse `--selftest` rather than exiting 0 on an invocation
-that runs nothing.
+Every module refuses `--selftest` rather than exiting 0 on an invocation
+that runs nothing. The delivered `selftest_ccc_v2.py` carries one
+delivered failure (`CCC_017`, recorded as `CCA_005`) which is not
+repaired, because `module_f.py` is delivered.
 
 ## Scope
 
@@ -110,9 +180,11 @@ The three headline product choices (velocity bands over depth-and-
 extent, time slices over the envelope, exposure on the same sheet) are
 sound and are not tested here, because testing them is the routing run.
 
-One declared `no_severity` exemption, measured with the three-arm
-harness: `means`, inside a verbatim quote of the spec (*"mixed ownership
-means no entity's plan spans the chain"*), where rewording would
-misquote the delivered text.
+Two declared `no_severity` exemptions, each measured with the three-arm
+harness: `means` on the v1 eap report, inside a verbatim quote of the
+spec (*"mixed ownership means no entity's plan spans the chain"*); and
+`proves` on the kill-audit report, the delivered `module_f` token the
+`CCA_005` finding reports — echoing it verbatim is how the finding names
+which token fired.
 
 CC0. Stdlib only, parses under 3.9, phone-buildable.

@@ -1,0 +1,23 @@
+MINING INCREMENT -- SCAFFOLD STATE
+
+No real mine, watershed, or reservoir appears in this module.
+Chain-level cells:
+  mine_inventory                     UNMEASURED  <- the MRDS pass plus state permits (method step 1)
+  transfer_established               UNMEASURED  <- host-rock comparison against the coal-basin studies (method step 2)
+  subsidence_extent                  UNMEASURED  <- InSAR over mined parcels (method step 3)
+  runoff_coefficient_delta           UNMEASURED  <- the water balance through the named link (method step 4)
+  increment_fraction_per_tributary   UNMEASURED  <- the interface conversion (method step 5)
+  rim_slope_candidates               UNMEASURED  <- mined parcels against rim slopes, aquifer exposure flagged (method step 6)
+
+transfer gate: the carried coal-basin porosity deltas applied
+to an unestablished basin return 'UNDEFINED' and 'UNDEFINED'
+subsidence forms share W(0)=0 and the W0 asymptote (computed):
+  True / True
+the anchor is knothe(); mmf() is carried with UNVERIFIED
+attribution per the drop's own provenance flag
+stock/flow link fields: storage_side_infiltration_capacity_delta, flow_side_runoff_coefficient_delta
+
+primary falsifier on the chain: UNMEASURED
+transfer falsifier on the chain: UNMEASURED
+(an unknown input never closes a gap; a refuted transfer
+narrows it rather than closing it)

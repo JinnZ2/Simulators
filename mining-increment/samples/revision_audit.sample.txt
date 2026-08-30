@@ -1,0 +1,76 @@
+GAP 14 REVISION -- MI_002 FOLDED BACK, AUDITED
+
+Both versions stay as delivered; prior claims keep their
+ratings on the text they rated. Dated 2026-08-30.
+
+THE MI_002 RESOLUTION
+  old_sentence_in_v1           True
+  old_sentence_gone_from_v2    True
+  carries_stated_precisely     True
+  headline_unchanged           True
+  referent_defined             True
+  appendix_heading_gone        True
+  promoted_to_primary          True
+  v1_still_carries_both        True
+  The resolution took a stronger form than the audit's
+  one-parenthetical suggestion: the headline stands and its referent
+  is defined one paragraph down -- what no record carries is pool
+  loading on a multi-dam surface chain, the two existing carries
+  stopping one node short of each other -- while the sentence the
+  finding keyed on is gone and the appendix is a primary source
+  table.
+
+THE CONFIGURATION NOTE
+  mechanism_configuration_split True
+  ranking_rule                 True
+  language_geology_rule        True
+
+THE READ CEILING
+  section_present              True
+  declares_depth               True
+  names_the_invisible_content  True
+  capability_limit_framing     True
+  scaffold_complies            True
+  A per-source read-depth declaration: the load-bearing content sits
+  below the depth the entry was read at, and saying so is a
+  statement about the audit's reach, not the work. The scaffold
+  honors the ceiling -- no CWIM formulation appears in
+  mining_increment.py.
+
+INVARIANT SECTIONS (byte-identical across the revision)
+  subsurface table                       identical
+  governing equations + provenance flag  identical
+  citation status paragraph              identical
+  research question                      identical
+  method                                 identical
+  deliverable + falsifiers               identical
+CHANGED SECTIONS (and they did change)
+  the split paragraph                    changed
+  the transfer caveat                    changed
+  why-different, first paragraph         changed
+THE ADDENDUM (v3: the pore-pressure validation case)
+  fragment_absent_from_v2      True
+  fragment_once_in_v3          True
+  pure_insertion               True
+  placed_before_marker         True
+  doi_carried                  True
+  measured_during_stated       True
+  earned_its_place_rule        True
+  routed_to_step2              True
+  Assembled per the delivered instruction as a verified pure
+  insertion. The content adds the missing instrument class to the
+  LEM coupling: u is the FoS-dropping term and normally modeled, and
+  a u measured during a real event gives the modeled term a known
+  answer to reproduce -- the known-answer standing rule arriving in
+  the entry's own text, routed to the transfer test whose gate the
+  scaffold already is.
+
+provenance flag contained on v2 as well: True
+  A revision that changed the epistemics without touching the
+  arithmetic: equations, flag, method, falsifiers and deliverable
+  are byte-identical, so the scaffold stands unchanged on an
+  unchanged specification -- which is what 'the claim updates, never
+  the instrument' looks like from the author's side.
+
+This module computes; it does not conclude. Findings are in
+CLAIM_TABLE.md as MI_009..MI_014.

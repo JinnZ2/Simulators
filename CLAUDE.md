@@ -8154,8 +8154,49 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   subject — and its three headline product choices (velocity bands, time
   slices, exposure overlay) are sound and untested, since testing them
   is the routing run. One declared `no_severity` exemption (`means`,
-  inside a verbatim quote) under the three-arm harness. Check count
-  printed by `selftest_ccc.py`; both modules refuse `--selftest`. Stdlib
+  inside a verbatim quote) under the three-arm harness. **A later drop
+  turns the folder into a research agenda published to be picked up
+  cold** — landed verbatim beside v1: `SCOPE_BOUNDARY.md`,
+  `knowledge_state.py` (the epistemic-state typing rule, enforced in
+  code, `INSTITUTIONAL_EXCLUSION` rejected as invalid), `module_f.py`
+  (the Module F body as **arithmetic**, the ordering `S1 ⊆ S2 ⊆ S3`
+  proved over 19,200 synthetic combinations, no real structure named),
+  `contributing_inflow.py`, `eap_coverage_v2.py` (governance + tribal
+  jurisdiction), the `_v2` audit/selftest/claim-table
+  (`CCC_001..CCC_018`), `UNDERGRADUATE_RESEARCH_GAPS.md` (13 startable
+  gaps) and `DEEP_RESEARCH.md`. It arrived with its own **kill list**,
+  sent as *claims under test* — *"a kill Fable overturns is a better
+  outcome than one it confirms"* — and `kill_audit.py` adjudicates the
+  three: **all three hold, none overturned**. **`CCA_001`** KILL 1 (a
+  self-correction trace left in `contributing_inflow.render()`) is an
+  overlay artifact that lands on a sound conclusion; **`CCA_002`** KILL 2
+  (stated decisive condition ≠ coded one) CONFIRMED — prose reads the
+  `max`-flip, code the `sum`-tip, diverging on 226 of 540 swept cases —
+  and RESOLVED by physics (the wave rides on the standing pool, so `sum`
+  is right and the prose is the independent-node default reasserting in
+  the translation layer of a module written to refute it, the repo's own
+  *prose drifts, code is constrained* thesis instanced); **`CCA_003`**
+  KILL 3 (tribal supplied from memory, asymmetric discipline) CONFIRMED
+  and sharper — owners are refused-and-typed while the six tribal rows
+  are supplied, finer, untyped, and the authority bound is invariant to
+  them — with its second claim (the fix is not to drop tribal, which
+  re-commits the rejected `INSTITUTIONAL_EXCLUSION`) also confirmed.
+  **`CCA_005`:** `CCC_017` is REFUTED on its delivered instance —
+  `module_f.render()` trips the repo's own screen on a certainty verb.
+  **`CCA_006`, the structural one:** the delivered `selftest_ccc_v2.py`
+  imports the bare v1 `eap_coverage`/`audit` and unpacks a 4-tuple, so
+  it exercises v1 eap + v1 audit + new module_f — the `_v2` additions
+  (the tribal 5-tuple, the renamed key) ship **unexercised**, which is
+  why the KILL 3 defect could ship at all. **`CCA_007`:** the cold-start
+  test runs the sender's five questions over all fifteen gaps — every
+  gap names a stranger-evaluable falsifier and a deliverable interface;
+  the flags cluster on public-data access (7 of 15 want HEC-RAS or gated
+  data) and one-semester scope. Two declared `no_severity` exemptions
+  (`means`; `proves`, the delivered module_f token `CCA_005` reports).
+  Check counts printed by `selftest_ccc.py` / `selftest_kill.py`; the
+  delivered `selftest_ccc_v2.py` carries one delivered failure
+  (`CCC_017`), unrepaired because `module_f.py` is delivered; every
+  module refuses `--selftest`. Nine `CCA_*` claims. Stdlib
   only, parses under 3.9, phone-buildable, CC0.
 - `reservoir-chain-coupling/` — The antecedent-coupling amplifier
   `columbia-chain-cascade` `CCC_001` flagged as truncated, now delivered
@@ -8473,10 +8514,204 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   dropping on provider-only retention — and the choice is textual (the
   outline's §3 sentence picks void → 2, the inherited metric can only
   read collapsed → 3), which is why selecting one is the P0.2
-  declaration the order reserves for the author. Check count printed
-  by `selftest_dbk.py`; `audit.py`, `r2_audit.py`, `wo_return.py`,
-  `r2v2_audit.py` and `wo2_return.py` refuse `--selftest`.
+  declaration the order reserves for the author. **Work order 3
+  (provision typing) then arrived and is returned** (`WORK_ORDER_F5_3.md`
+  verbatim, `wo3_return.py`), its rule being that a provision either
+  names the failure it is back-derived from, names its derivation path
+  and is marked pending, or is *an assumption wearing a number* — with
+  every class assignment a declared reading checked mechanically in
+  both directions (DERIVED quotes present in the named file,
+  ASSUMPTION blocks free of every incident marker). **`DBK_030`:**
+  DERIVED 5 / PROVISIONAL 3 / **ASSUMPTION 12** of 20, splitting into
+  4 the doc already self-tagged, 3 outline sections deferred from
+  provision-form, and **5 unmarked assumptions in provision-form
+  text** (P2, P5, P8, P0.2, P0.5), each returned with its one-line
+  PROVISIONAL spec; CARRIES letters not credited as incident names,
+  and the 5.7-m rows DERIVED with the number-to-Fukushima link marked
+  a declared reading. **`DBK_031`:** four of eight FALSIFY clauses
+  arrive with their outcome asserted in a parenthesis and no study
+  behind it, one cites its incident, three are clean — the
+  falsification column carrying the order's own *assumption wearing a
+  number* one level down. **`DBK_032`:** the B fork closes on branch 2
+  by reading — the seed B row's syntax is B1's definition, B2's
+  incident is the aviation AOA case cited in-doc by description (the
+  name 737/MCAS lives only in the order and is credited to nothing),
+  and no provenance over-claim exists since the pool includes aviation
+  and the body cites it; no second shared node, `DBK_027` closed.
+  **`DBK_033`:** re-typed as survival the five accountings make
+  exactly two distinguishable predictions (held → 3, not-held → 2), so
+  the three not-held texts are one physical claim differing only in
+  which question the reported number answers; the inexpressible row is
+  an **out-of-range sensor reading** — P1 applied to the metric
+  itself, which extrapolates silently outside its declared domain.
+  **R1.1 then folded the whole chain back into the main document**
+  (`SOURCE_DROP_V2.md`, verbatim beside the untouched original — its
+  own effective-date rule applied to itself) and `r1v2_audit.py`
+  checks every claimed closure against the new text. **`DBK_034`: all
+  six closures hold** — Fukushima named beside 5.7 with the ~14 m
+  arrived wave added; STATUS PROVISIONAL blocks on exactly P2/P5/P8;
+  the four asserted parentheticals removed with P3's incident-backed
+  one kept (the original still scores four, so the finding keeps its
+  rating on the file it rated); the three-axes P3 amendment (*a
+  known-same-builder pair's agreement reads as N_eff 2 but is
+  N_eff 1*); the per-load custody table; the effective-date clause —
+  and re-typed the counts move to DERIVED 5 / PROVISIONAL 6 /
+  ASSUMPTION 9, the unmarked provision-form assumptions down from
+  five to two, both in the outline. **`DBK_035`:** the provenance
+  section **runs the doc's own P7 on itself** — nine custody
+  positions parse, keyword intersection recomputes exactly the two
+  shared pairs the doc names (E∩F on Fukushima, B2∩P3 on the aviation
+  case), `dissent_alarm(2,1)` fires as stated, the B1/B2 rows adopt
+  the `DBK_032` resolution — and the phrase WO2 could find in no
+  delivered file, *"disjoint by construction"*, now exists in exactly
+  one, as the schema framing being corrected: `DBK_027`'s phantom
+  colophon arrives already carrying its measured value, called
+  *self-flattering as first written* by the doc itself. **`DBK_036`:**
+  what stays open is stated forward with green checks — P0.2/P0.5,
+  the D-row split, the unpinned `t`, one vocabulary residue, and the
+  join itself, single-node pending a different-builder verifier.
+  Check count printed by `selftest_dbk.py`; `audit.py`, `r2_audit.py`,
+  `wo_return.py`, `r2v2_audit.py`, `wo2_return.py`, `wo3_return.py`
+  and `r1v2_audit.py` refuse `--selftest`.
   Stdlib only, parses under 3.9, phone-buildable, CC0.
+- `bridge-impoundment/` — GAP 15 from the operator's research-gaps
+  register: the bridge as a **transient impoundment** — clog, pond,
+  fail, release — the dam-break problem wearing a bridge's name,
+  falling between transportation engineering and dam safety.
+  `SOURCE_DROP.md` verbatim; at landing, the register it drafts for
+  (`UNDERGRADUATE_RESEARCH_GAPS.md`) and both coupling targets (Gaps 2
+  and 14) existed nowhere in this tree, while every repo-facing
+  reference resolves by existence — `CCC_007`, Module F, the operator
+  swap, the node list (`BI_001`; **updated forward the same session
+  when GAP 14 landed as `mining-increment/`**, firing the falsifier's
+  first clause — detected by content, the fourth `CT_006`-pattern
+  shrinkage and the first coupling pair to close itself from both
+  sides in one session). **What is built is the scaffold the
+  entry's structure supports without data, in the deliverable's own
+  name** (`bridge_impoundment.py`): a parameter schema where every
+  cell carries a knowledge state and names its mover as a constructor
+  rule; the three-state clog flag (an unknown spacing is not a clear
+  span); the `CCC_007` initiator interface made checkable at the
+  design layer — breach and bridge-release initiators carry identical
+  key sets, a widened dict fails, the engine half stays owed
+  (`BI_004`); **the drop's SIGN CAVEAT enforced structurally** — no
+  release-path signature takes a shielding term and the protective
+  successive-bridge finding lives only in a record whose
+  `to_initiator()` raises (`BI_003`, the earliest a guard has arrived
+  in the flood family: in the delivered prose before any code); the
+  conservation arithmetic (gain = accumulation over release, above one
+  exactly when the span gives way faster than it filled; debris gain
+  ≥ 1 by construction, `BI_005`); and both falsifiers three-valued
+  with every branch reachable — on the real chain every cell is
+  UNMEASURED, the data hosts in the carried allowlist-refusal state,
+  nothing supplied from memory into a flood-safety artifact, the
+  `CCC_005` refusal at bridge scale (`BI_006`). **`BI_002`:** *"the same operator swap Module F already
+  proves"* carries two drifts — the showing lives in
+  `reservoir-chain-coupling` on constructed chains and *proves*
+  overruns the FIRM/SOFT split — while its substance (single-event
+  evaluation is the operator-swap error) survives both corrections.
+  **`BI_007` UNVERIFIED:** all nine literature rows carried and
+  egress-blocked — and the drop hedges them itself (*"located by
+  search, not asserted"*), the first in the flood family to arrive
+  with its own negative-provenance note. **The addendum then landed**
+  (*"add to the quantified table, plus a note"*):
+  `SOURCE_DROP_V2.md` is v1 plus the delivered fragment, assembled as
+  a **verified pure insertion** — the fragment extracted mechanically
+  from `ADDENDUM_DELIVERY.md`, appearing once, removing it reproduces
+  v1 byte-for-byte, the placement a declared [CHOICE] since the
+  instruction names the section and not the offset (`BI_008`).
+  **`BI_009`:** Fjærland 2004 (Breien et al. 2008) is the folder's
+  first *measured* instance of the chained shape — moraine-dammed
+  lake breach → 240,000 m³ debris flow, post-event morphology in
+  hand — and it measures the RELEASE half only ("clog" does not occur
+  in the fragment), with the CONFIGURATION NOTE discipline applied
+  symmetrically: a moraine dam is not a clogged bridge, and the
+  measured chain's two outputs are the release initiator's two
+  load-bearing fields. **`BI_010`:** the NVE GLOF register *"serves
+  English [and] never ranks on an English query because the
+  phenomenon indexes under jøkullaup / skred"* — a
+  query-vocabulary-bounded null stated by the author about a national
+  register (`QA_004`'s discipline from the retrieval side), with
+  *"long series = the instrument for a slow rate"* naming why a
+  standing register reaches the entry's rate question where
+  single-event studies cannot. Check count printed by
+  `selftest_bi.py`; the CLIs refuse `--selftest`. Stdlib only, parses
+  under 3.9, phone-buildable, CC0.
+- `mining-increment/` — GAP 14, the other half of the coupling pair:
+  mining-induced subsurface alteration coupled to reservoir loading —
+  the mining literature stops at the aquifer, the dam literature
+  starts at the reservoir, and the connecting term for the
+  Columbia/Snake chain sits on the seam. `SOURCE_DROP.md` verbatim;
+  it landed one drop after GAP 15 named it absent (`MI_001`, the pair
+  closing itself from both sides in one session). **The scaffold in
+  the deliverable's own name** (`mining_increment.py`): the **transfer
+  gate enforced** — a coal-basin parameter applied to a basin whose
+  transfer is not established returns `UNDEFINED` as a code path, the
+  two carried porosity deltas reach no basin today, and the falsifier
+  refuses to read UNDEFINED as a low value (`MI_004`, second
+  consecutive gap whose sharpest rule arrived in prose and got built
+  as structure); the **stock/flow separation as schema** — the
+  water-balance link carries two distinct named sides and nothing
+  returns one scalar for the pair (`MI_005`, Gap 1's rule,
+  `category-weld`'s mechanism from the prevention side); the interface
+  equation as delivered with UNDEFINED propagating; both subsidence
+  forms with the drop's stated shared properties **computed** (W(0)=0,
+  the W₀ asymptote), anchored on the confirmed Knothe form (`MI_006`);
+  and both falsifiers — the transfer one with **three outcomes**
+  (closes / stands / NARROWS), the first in the family whose firing
+  narrows a gap to a measurement problem (`MI_007`). **`MI_002`, the
+  finding:** the headline (*NOT_STUDIED, the coupling term*) is
+  contradicted by the drop's own appendix — the Kuye-basin record
+  carries subsidence as a boundary condition into a coupled
+  basin-scale model with streamflow measured — so the surviving
+  reading is the TRANSFER CAVEAT's own (*not studied for this basin
+  and rock*), recorded without deciding the headline for the author.
+  **`MI_003`:** the drop's provenance flag is per-citation negative
+  provenance with anchors — two named citations flagged unconfirmed,
+  the Knothe anchor substituted with its DOI, an explicit
+  do-not-publish instruction — and **containment is checked**: both
+  flagged names occur only inside the flag that disclaims them. The
+  parameter schema is **imported from `bridge-impoundment`**, not
+  copied (`MI_008`). **The revision then landed** (`SOURCE_DROP_V2.md`,
+  verbatim beside v1) folding `MI_002` back in a stronger form than the
+  audit's suggested parenthetical — the keyed sentence gone, the
+  carries stated precisely (*"stop one node short of each other"*),
+  the headline's referent defined as reservoir pool loading on a
+  multi-dam surface chain, the appendix promoted to a primary source
+  table (`MI_009`) — with two new devices: **the READ CEILING**, a
+  per-source read-depth declaration (the CWIM boundary-condition
+  formulation is not visible at abstract depth; *a capability limit on
+  the audit, not an open question about the work*) with the scaffold's
+  compliance checked (`MI_010`), and **the CONFIGURATION NOTE**,
+  mechanism-transfers-configuration-does-not — the FIRM/SOFT split in
+  the author's own source table — plus the ranking rule *the language
+  of the source carries no weight; the geology of the basin carries
+  all of it* (`MI_012`). `revision_audit.py` verifies **six sections
+  byte-identical** across the revision while the three the revision is
+  about all changed: the epistemics moved and the arithmetic did not
+  (`MI_011`). **The addendum then landed** with an exact placement
+  instruction (*"insert before 'CONFIGURATION NOTE — not a
+  discount.'"*): `SOURCE_DROP_V3.md` is v2 plus the fragment,
+  assembled as a **verified pure insertion** — extracted mechanically
+  from `ADDENDUM_DELIVERY.md`, appearing once immediately before the
+  instructed marker, removing it reproduces v2 byte-for-byte
+  (`MI_013`). The content is the known-answer standing rule arriving
+  in the entry's own text: `u`, the FoS-dropping term and normally a
+  MODELED quantity, recorded *"DURING a debris flow event"* (Bondevik
+  & Sorteberg 2021), so the modeled term has a measured answer to
+  reproduce — *"a modeled u that cannot reproduce a measured u on a
+  real event has not earned its place in the FoS calculation"* —
+  routed by the entry itself to Method step 2's transfer test, whose
+  gate the scaffold already is; no new code path, because the
+  delivered routing lands on one that exists. **`MI_014`:** a third
+  literature enters (Norwegian instrumented events, beside the
+  Chinese basin carries and the Western textbook methods) and the
+  `MI_012` rule now binds in both directions — the source enters for
+  its measurement, and its transfer to the chain is exactly as
+  UNDEFINED as every other carry until a per-basin basis is declared.
+  Check count printed by `selftest_mi.py`; all three CLIs
+  refuse `--selftest`. Stdlib only, parses under 3.9, phone-buildable,
+  CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

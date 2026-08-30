@@ -1,0 +1,54 @@
+GAP 15 -- CROSS-REFERENCE AND RECORD AUDIT
+
+RESOLVING IN THIS TREE (by existence, not mention)
+  CCC_007 (initiator comparability claim)        resolves
+  Module F (the amplifier section)               resolves
+  the operator swap (reservoir-chain-coupling)   resolves
+  the Columbia/Snake node list                   resolves
+  GAP 14, by content (landed after this audit)   resolves
+NAMED, AND NOT IN THIS TREE
+  UNDERGRADUATE_RESEARCH_GAPS.md                 absent
+  SCOPE_BOUNDARY.md                              absent
+  gap-2                                          absent
+  sediment-debris-biological-loop                absent
+  The entry is a draft for a register this repository does not hold.
+  At this audit's first landing both coupling targets were with it;
+  GAP 14 then arrived in the same session (the mining-increment
+  folder, detected by content), firing the first clause of BI_001's
+  falsifier -- the claim carries its update note. Gap 2 and the loop
+  marker stay absent. The one named artifact that arrived with the
+  landing itself is the deliverable: bridge_impoundment.py exists
+  (True) -- as the scaffold its structure supports without data, not
+  the study.
+
+THE MODULE-F SENTENCE, AGAINST THE RECORD
+  drop_sentence_present              True
+  module_f_truncated                 True
+  swap_shown_in_sibling              True
+  firm_soft_split_recorded           True
+  real_chain_question_open           True
+  The substance points at a real result; the sentence carries two
+  drifts -- the showing lives in reservoir-chain-coupling on
+  constructed chains, Module F itself never arrived, and the
+  FIRM/SOFT split keeps whether the swap is load-bearing for any
+  real chain with the routing run.
+
+THE CCC_007 CITATION
+  claim_says_asserted_not_shown      True
+  design_layer_check_passes          True
+  engine_layer_still_owed            True
+
+EGRESS (the method's data hosts; carried state, 2026-08-30 -- the
+probe could not run in the landing session; run --measure for
+a fresh reading)
+  infobridge.fhwa.dot.gov      000
+  www.fhwa.dot.gov             000
+  waterdata.usgs.gov           000
+  Every chain-level cell in the scaffold is UNMEASURED because the
+  inventory and gage hosts are in the carried allowlist-refusal
+  state and no value is supplied from memory; the gap
+  STANDS-as-unmeasured on this chain, which is a statement about
+  this environment and not about any bridge.
+
+This module computes; it does not conclude. Findings are in
+CLAIM_TABLE.md as BI_001..BI_007.

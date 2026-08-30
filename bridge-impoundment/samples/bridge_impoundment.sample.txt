@@ -1,0 +1,18 @@
+BRIDGE IMPOUNDMENT -- SCAFFOLD STATE
+
+No real bridge appears in this module. The chain-level cells:
+  pier_spacing_per_bridge    UNMEASURED  <- the NBI inventory pass (method step 1)
+  debris_supply_per_bridge   UNMEASURED  <- coupling to the rim-slope and post-fire sources (method step 2; Gaps 14 and 2, absent from this tree)
+  backwater_envelope         UNMEASURED  <- HEC-RAS obstruction routines (method steps 3-4)
+  release_hydrograph         UNMEASURED  <- the failure-mode model (method step 5)
+  breach_set_delta           UNMEASURED  <- the routing run (method step 7)
+
+clog_flag states: FLAG / CLEAR / UNMEASURED (threshold 10.0 m,
+carried from the cited literature, not verified here)
+storage-and-release arithmetic (constructed units): gain 6.0
+  gain exceeds one iff release is faster than accumulation: True
+initiator interface identical across provenances: True
+the protective finding has no path into an initiator: enforced
+
+primary falsifier on the chain: UNMEASURED
+(an unknown input never closes a gap)

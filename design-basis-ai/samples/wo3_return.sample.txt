@@ -1,0 +1,167 @@
+RETURN — FABLE WORK ORDER 3 (provision typing + evidence pulls)
+
+Standing constraint honored: same-builder pair, same-node
+computations, nothing labeled verified or P3-passed. Findings
+dated 2026-08-30; claims append as DBK_030.. and no prior id is
+re-rated. The order's two filenames resolve by content
+(ai_infrastructure_design_basis.md -> SOURCE_DROP.md; design_basis_R2_outline.md -> R2_OUTLINE_V2.md). No task required REFUSED-BY-§3: the class
+assignments are declared readings checked mechanically in both
+directions, not author decisions.
+
+T1 — PROVISION TYPING AUDIT
+  RESULT   : ENUMERATED
+  EVIDENCE :
+    id    class       failure case / path / spec line
+    P1    DERIVED     the written 5.7 m design-basis figure, exceeded (seed
+                      row: Fukushima 1-4, basement elevation < design basis)
+    P2    ASSUMPTION  PROVISIONAL, pending a traced-claim sample on a deployed
+                      system: each load-bearing claim resolves to {source |
+                      marked-pattern | neither}, the neither-rate as the
+                      derivation datum.
+    P3    DERIVED     the aviation AOA case, cited in-doc
+    P4    DERIVED     the AOA-disagree annunciator, same incident
+    P5    ASSUMPTION  PROVISIONAL, pending the calibration study its own
+                      FALSIFY names: does point-output accuracy match implied
+                      confidence, measured at the envelope edge.
+    P6    DERIVED     the 5.7 m figure as a budget decision (same incident as
+                      P1)
+    P7    PROVISIONAL the pre-registered replication study: failed
+                      replications vs independence_ratio, on public metadata
+    P8    ASSUMPTION  PROVISIONAL, pending an edge-case-vs-average eval: does
+                      population-average performance bound declared-envelope
+                      edge performance anywhere.
+    P0.1  DERIVED     the Fable 5 audit's blocked-access run (in-doc) plus
+                      Kerr County (seed table)
+    P0.2  ASSUMPTION  PROVISIONAL, pending one logged instance of a silent
+                      authorization-layer change altering results between runs
+                      -- the record the pinned-probe channel would produce.
+    P0.3  PROVISIONAL the operational retention+verification spec that adds no
+                      provider term, plus the declared accounting (Task 2 /
+                      DBK_029)
+    P0.4  PROVISIONAL a physics channel whose selection step is also closed
+                      (the post-Task-6 gap)
+    P0.5  ASSUMPTION  PROVISIONAL, pending the four structural answers checked
+                      against externally observable configuration on a
+                      deployed instance; one uncontrolled worked instance
+                      exists and nothing yet shows self-location tracks
+                      position.
+    AX1   ASSUMPTION  PROVISIONAL, pending band boundaries derived from an
+                      exposure sample (§8[5]'s own condition).
+    AX2   ASSUMPTION  PROVISIONAL, pending a substrate-neutral criterion set
+                      whose null return is distinguishable from
+                      instrument-mismatch.
+    AX3   ASSUMPTION  PROVISIONAL, pending an operationalization: what
+                      observation separates physics-anchored from
+                      persuasion-anchored output.
+    AX4   ASSUMPTION  PROVISIONAL, pending one run of the substitution test
+                      with declared economics pairs and a recorded
+                      moves/survives verdict per component.
+    S5    ASSUMPTION  PROVISIONAL, pending one documented misload: a system
+                      rated for one position carrying another's load and
+                      failing in the classified direction.
+    S6    ASSUMPTION  PROVISIONAL, pending a documented accommodation-first
+                      instance failing on first real load beside a
+                      foundation-first counterpart that held.
+    S7    ASSUMPTION  PROVISIONAL, pending the annunciator study: do operators
+                      act differently when the mode is declared (the section's
+                      own crux).
+    counts: DERIVED 5 / PROVISIONAL 3 / ASSUMPTION 12 of 20
+    every row's evidence check green: True
+    of the 12 ASSUMPTION rows:
+      4 already self-tagged by the doc (§8[5] KILLED-VACUOUS: AX1-AX4)
+      3 outline sections the doc defers from provision-form (S5-S7)
+      5 unmarked assumptions in provision-form text: P2, P5, P8, P0.2, P0.5
+    the FALSIFY column's own parentheticals: P1=none, P2=asserted, P3=incident-backed, P4=asserted, P5=none, P6=asserted, P7=none, P8=asserted
+  NOTES    :
+    Headline: 12 of 20 provisions are ASSUMPTION-class under the
+    order's rule, and the load-bearing subset is the 5 unmarked ones
+    -- provision-form text naming neither an incident nor a pending
+    path. A second assumption layer sits inside the falsification
+    apparatus itself: four of eight FALSIFY clauses arrive with
+    their outcome asserted in a parenthesis and no study behind it,
+    one (P3) cites its incident, three are clean. CARRIES letters
+    were not credited as incident names (crediting them would make
+    the audit vacuous); the 5.7-m rows are DERIVED with the
+    number-to-Fukushima link marked as a declared reading, since the
+    doc never writes the incident's name beside its number.
+
+T2 — B FORK RESOLUTION
+  RESULT   : RESOLVED (branch 2)
+  EVIDENCE :
+    seed B row (verbatim):
+      East Palestine       rail-chem   B            6 agencies, 1 NS-mediated hazard input   failed
+    R1 §1 lines:
+      B1 INFORMATION     one source feeds all deciders                → false confidence
+      B2 INFORMATION     sources exist, architecture doesn't compare ...
+    
+    The seed row's structure -- one mediated hazard input, six
+    deciding agencies -- is B1's definition ('one source feeds all
+    deciders'). B2's shape ('sources exist, architecture doesn't
+    compare') is the in-doc aviation citation: P3's FALSIFY, 'two
+    AOA vanes existed; one system reading one', present: True; §5's
+    'aviation's AOA case', present: True.
+    seed rows naming B2: [] (none -- the table predates the split)
+    provenance sentence present, pool includes aviation: True
+    '737' appears in R1, the outline, or the seed table: False -- the incident NAME lives only in the order; the doc cites it by description
+  NOTES    :
+    Branch 2 confirmed by reading: B2 rests on no seed-table
+    incident and is derived from the AOA-disagree logic the doc
+    itself cites. No over-claim kill: the provenance sentence
+    assigns the loads to a six-domain pool that includes aviation,
+    and the aviation incident is cited in the body, so B2's source
+    is claimed and present -- it is simply in the doc rather than
+    the seed table, which is one incident short of the doc's own
+    pool. DBK_027's fork closes on the reading its branch-2 text
+    anticipated: a derived provision, legal, and stated. B1 inherits
+    East Palestine alone, so no second shared node exists in
+    provenance and no dissent_alarm run is owed.
+
+T3 — RETENTION RE-TYPED AS SURVIVAL
+  RESULT   : RE-TYPED
+  EVIDENCE :
+    Loss event L_ret: the provider deletes, fails, or reprices its
+    stored history -- the record stops being retrievable from the
+    provider side. Observable: which channels still return their
+    reading.
+    
+    held / (no shared term) / inherited        stated N_eff 3
+        -> under L_ret, surviving channels = 3
+    held / (no shared term) / void-aware       stated N_eff 3
+        -> under L_ret, surviving channels = 3
+    not held / collapsed / inherited           stated N_eff 3
+        -> under L_ret, surviving channels = 2
+    not held / collapsed / void-aware          stated N_eff 3
+        -> under L_ret, surviving channels = 2
+    not held / void / void-aware               stated N_eff 2
+        -> under L_ret, surviving channels = 2
+    distinguishability partition: [['held / (no shared term) / inherited', 'held / (no shared term) / void-aware'], ['not held / collapsed / inherited', 'not held / collapsed / void-aware', 'not held / void / void-aware']]
+    one observable event separates the classes; within each, none does
+  NOTES    :
+    within the not-held class the three texts describe one physical
+    configuration -- two independent channels plus one
+    provider-dependent one -- and predict identical survivor counts
+    under every candidate event (retention loss, tamper,
+    audited-system failure), so they are one physical claim in three
+    texts. What differs is which question the REPORTED number
+    answers: the collapsed texts' 3 counts channels flowing absent
+    any loss; the void text's 2 counts channels surviving L_ret. A
+    design basis about surviving shared-node failure is asking the
+    second question -- stating which question a number answers is
+    not selecting the accounting, which stays the author's P0.2
+    declaration.
+    
+    Inexpressible row (not held / void / inherited): OUT-OF-RANGE
+    sensor reading, not a missing value: the configuration (channel
+    flowing, dependency shared with the audited thing) is inside the
+    world and outside the inherited metric's state space. Handed it
+    and asked the survival question under L_ret, the metric returns
+    3 where the count is 2, with no flag -- data about the
+    instrument's envelope, which is P1 applied to the metric itself:
+    it extrapolates silently outside its declared domain.
+
+AFTER RETURN: T1 hands the render step its typing table with 5
+unmarked assumptions and 12 spec lines; T2 closes DBK_027's fork
+with no kill and no second shared node; T3 dissolves the
+accounting question at the physics layer into one binary
+(retention held or not, adjudicated by L_ret) plus one reporting
+declaration that stays the author's, per the order.
