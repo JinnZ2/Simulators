@@ -1,0 +1,110 @@
+DESIGN BASIS FOR AI -- what an in-class audit can and cannot say
+
+THE POSTURE IS SET BY THE DOCUMENT'S OWN SECTION 3. This audit is
+performed by an AI system: a member of the class the document
+constrains, and an instance of the shared node its Section 0
+describes. By Section 3, nothing here can certify or refute P1-P8
+as properties of any system, this one included -- a self-report of
+compliance is the kind of ungrounded claim P2 exists to catch. So
+the class-level verdicts are DECLINED by construction, and what
+remains is the mechanical layer: parse counts, arithmetic, the
+coverage matrix, the delivered code's behaviour -- recomputable by
+anyone from the files, trusting nothing said here. This audit is
+itself a worked instance of Section 3.
+
+1. THE STRUCTURE PARSES COMPLETE
+   provisions: 8 (P1-P8)   load cases: 7 ['A', 'B1', 'B2', 'C', 'D', 'E', 'F']
+   every provision carries PROVISION/CARRIES/VERIFY/FALSIFY: yes
+   (P6 adds a RATIONALE field; the format permits it.)
+
+2. THE COVERAGE MATRIX -- computed from the CARRIES lines
+   load   carried by        attacked by
+   A      --                --
+   B1     P2,P7             --
+   B2     P3,P4             --
+   C      P4                --
+   D      --                P3
+   E      P1,P5,P6          P3
+   F      P2,P7,P8          --
+
+   LOAD CASE A IS CARRIED BY NO PROVISION. Section 1 states seven
+   loads the structure has to survive; the provision set carries
+   six. A -- one release/approval gates all action, the STALL
+   mode -- appears in no CARRIES line and no attacks clause. For
+   AI-as-infrastructure it is not hypothetical: one provider's
+   deployment gate, API endpoint, or terms change sits upstream
+   of every consultation at once, and no provision in the set
+   addresses what happens when it closes. A seismic code that
+   stated seven loads and provided for six would not pass its own
+   Section 2 format.
+
+   Secondary: D (maintenance) is never carried directly -- only
+   'attacked' by P3, the document's own weaker verb. One budget
+   regime degrading every deployed instance together has no
+   provision of its own.
+
+3. THE DELIVERED HARNESS, CHECKED AGAINST THE SIBLING INSTRUMENT
+   n_eff() here is a COPY of effective-redundancy-audit's
+   Case.n_eff, not an import. Copies drift; the delivered file is
+   verbatim, so the equivalence sweep below is the drift detector:
+     bool-lists checked: 511   disagreements: 0
+   Currently identical. And the zero-channel edge recurs
+   verbatim in the second delivery: n_eff([]) = 0, so a failed
+   zero-channel case still reads as 'has redundancy' -- the
+   sibling audit's ERA_007, shipped again unchanged.
+
+   Section 0's headline through the delivered arithmetic:
+     N_nominal=2       all sharing one node -> N_eff = 1
+     N_nominal=10      all sharing one node -> N_eff = 1
+     N_nominal=100000  all sharing one node -> N_eff = 1
+   The headline follows from the premise exactly -- CONSISTENCY
+   between the two drops, not evidence for the premise. Whether
+   every deployed consultation of one model fails its shared
+   nodes together is the empirical claim, and it is untouched.
+
+4. P7'S PROSE AND P7'S CODE STATE TWO DIFFERENT THRESHOLDS
+   VERIFY (prose):  flag where concurrence >> source count
+   code:            ratio > 1   (inline: 'tune threshold')
+     equality (3 over 3):   fires False
+     4 over 3 (ratio 1.33): fires True
+     zero sources:          fires True
+   Four parties over three sources fires the code at 1.33, which
+   nobody would write '>>' for. The constant is the check's one
+   free parameter, disclosed as unset; prose and code sit at
+   different values of it. Both branches are reachable, and
+   firing on a zero-source base is the correct direction for an
+   instrument whose subject is exactly that state.
+
+5. WHAT THE DELIVERED CODE GETS RIGHT UNPROMPTED
+   independence_ratio on an empty evidence base: NaN, not zero
+     nan_on_empty=True  not_zero=True
+   The empty-denominator-is-not-zero split, designed into the
+   delivered code rather than found in audit -- this family has
+   recorded that split arriving post hoc a dozen times, and here
+   it arrived built. One unguarded edge beside it: upstreams
+   above the supporting-works count return a ratio above 1.0
+   (True), off the docstring's stated scale.
+
+6. THE PRE-REGISTERED PREDICTION IS UNMEASURED, NOT FABRICATED
+   Section 4 stakes: claims that later failed replication had
+   high n_supporting and LOW independence_ratio; kill condition,
+   no correlation. That is the drop's one runnable study, and it
+   takes replication-project and citation metadata:
+     api.crossref.org   000
+     api.openalex.org   000
+     osf.io             000
+   Every source refuses CONNECT (allowlist egress). No synthetic
+   evidence base stands in -- a fabricated correlation would be a
+   result about the scientific literature invented here.
+
+7. WHAT THIS AUDIT DECLINES, AND WHY THAT IS THE FINDING
+   Section 5's four kill conditions, P3's aviation AOA case, and
+   the question of whether ANY system -- including the one
+   writing this -- meets P1-P8: all carried, none adjudicated.
+   The first two are studies this environment cannot run. The
+   third is void BY THE DOCUMENT'S OWN TERMS: an in-class
+   self-report of compliance is what Section 3 rules out, so
+   declining it is not modesty, it is the one reading of Section
+   3 that takes the document seriously. The mechanical results
+   above are offered precisely because they are the parts that do
+   not require trusting their author.

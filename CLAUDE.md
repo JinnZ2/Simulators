@@ -8188,6 +8188,57 @@ underneath).
   refuses `--selftest`; no `no_severity` exemptions, every hit reworded.
   Check count printed by `selftest_er.py`. Stdlib only, parses under
   3.9, phone-buildable, CC0.
+- `design-basis-ai/` — The `effective-redundancy-audit` framework
+  pointed at the class of system writing the audit: a design-basis
+  document in the seismic-code sense, reframing AI from *another
+  channel* to *the largest single shared node yet installed under human
+  decision-making* (N_nominal millions, N_eff 1), with seven load cases,
+  eight provisions each carrying PROVISION/CARRIES/VERIFY/FALSIFY, and a
+  Section 4 harness landed verbatim as `design_basis_checks.py`.
+  **`DBK_001`, the posture, set by the document's own §3:** *"any
+  self-report of compliance is ... an ungrounded claim of the exact kind
+  P2 exists to catch"* — and this audit is an in-class self-report, so
+  class-level verdicts on P1–P8 are **declined by construction**, with
+  the audit stating it is itself a worked instance of §3 and confining
+  its worth to the mechanical layer anyone can recompute. **`DBK_002`,
+  the computable finding: load case A is carried by no provision.** The
+  document states seven loads and provides for six, computed from the
+  delivered CARRIES lines and null-tested (a constructed document
+  carrying A reads covered) — A is the STALL mode, one release/approval
+  gating all action, which for AI-as-infrastructure is one provider's
+  deployment gate upstream of every consultation at once; secondary, D
+  (maintenance) is never carried, only *attacked*, the document's own
+  weaker verb. **`DBK_003`:** the delivered `n_eff()` is a **copy** of
+  the sibling's `Case.n_eff`, behaviourally identical over all 511
+  channel lists to length 8 (the sweep is the drift detector, and the
+  audit imports the sibling instrument rather than defining its own) —
+  and the sibling's zero-channel edge (`ERA_007`) **recurs verbatim in
+  the second delivery**. **`DBK_004`:** P7's prose and code state two
+  thresholds — VERIFY says concurrence `>>` source count, the code
+  implements `> 1` and fires at 4-over-3, a ratio of 1.33 nobody would
+  write `>>` for; the constant is the check's one free parameter,
+  disclosed inline as *"tune threshold"* but unset (`RD_002`'s one-word
+  shape). **`DBK_005`:** `independence_ratio` returns NaN on an empty
+  evidence base, not zero — the absent-vs-known-negative split
+  **designed into delivered code**, the rarer direction; one unguarded
+  over-1.0 edge beside it, recorded not repaired. **`DBK_006`:**
+  Section 0's headline reproduces through the sibling's arithmetic
+  (all-collapsed → N_eff 1 at any scale) — consistency between the two
+  drops, not evidence for the premise, which is the empirical claim and
+  is untouched. **`DBK_007`:** the drop's one runnable study (failed
+  replication tracks low independence_ratio, kill condition
+  pre-registered) is UNMEASURED — `api.crossref.org`, `api.openalex.org`
+  and `osf.io` all refuse CONNECT, and no synthetic evidence base stands
+  in, asserted. **`DBK_008`:** Section 5's four kill conditions and P3's
+  aviation case are carried, unadjudicated; P6's cost/physics separation
+  is the root `SHAPE_SPEC.md` §9 NOTE ON COST arriving from the seismic
+  side (`SS_006`'s Lagrange-multiplier result is its constructive form).
+  **`DBK_009` UNVERIFIED:** whether any system meets P1–P8 — and by §3
+  an in-class audit could not establish it even in principle; the
+  falsifier is the document's own specification, a differently-built
+  verifier publishing the result. No `no_severity` exemptions, every hit
+  reworded. Check count printed by `selftest_dbk.py`; `audit.py` refuses
+  `--selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
