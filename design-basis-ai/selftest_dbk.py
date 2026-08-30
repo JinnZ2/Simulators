@@ -392,6 +392,122 @@ def run():
                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     chk("r2v2_audit.py refuses --selftest", rv.returncode == 2)
 
+    # ================= WORK ORDER 2 =================
+    import wo2_return as W2
+    from fractions import Fraction as _Fr
+
+    wo2doc = io.open(os.path.join(HERE, "WORK_ORDER_F5_2.md"),
+                     encoding="utf-8").read()
+    chk("work order 2 is landed verbatim (its own vocabulary present)",
+        "kill-closure" in wo2doc and "DELIBERATELY NOT ASKED" in wo2doc)
+
+    w1 = W2.t1()
+    chk("t1: 144 interior cells, each flipping at its own ratio",
+        w1["interior_cells"] == 144 and w1["result"] == "ENUMERATED")
+    chk("t1: the flip set is exactly the distinct grid ratios; 4/3 in it",
+        w1["four_three_is_boundary"]
+        and w1["distinct_flips"] == len(
+            set(_Fr(c, s) for c in range(1, 13) for s in range(1, 13))))
+    chk("t1: the two threshold-independent regions are counted apart",
+        w1["unconditional_cells"] == 13
+        and w1["never_fire_cells"] == 12)
+    chk("t1: the plausible band holds a proper subset of the flips",
+        0 < len(w1["flips_in_band"]) < w1["distinct_flips"])
+
+    w2t = W2.t2()
+    chk("t2: E and F share one stated incident, and only they do",
+        w2t["nonempty"] == {"E∩F": ["Fukushima 1-4"]})
+    chk("t2: the delivered harness's own arithmetic fires on the pair",
+        w2t["ef_dissent_alarm_2_1"] is True)
+    chk("t2: five of six pool domains match the seed table; aviation "
+        "is the residual",
+        len(w2t["domains_matched"]) == 5
+        and w2t["domains_residual"] == ["aviation"])
+    chk("t2: the B fork is reported, not resolved",
+        w2t["b_seed_rows"] == ["East Palestine"]
+        and w2t["sources"]["B1"] == [] and w2t["sources"]["B2"] == [])
+    chk("t2: the order's named artifacts are absent from every "
+        "delivered file and present in the order itself",
+        all(w2t["artifact_hits"][f]["colophon"] == 0
+            and w2t["artifact_hits"][f]["effective"] == 0
+            for f in W2.DELIVERED)
+        and w2t["artifact_hits"][W2.ORDER2]["colophon"] > 0)
+
+    a3 = W2.t3a()
+    chk("t3a: coverage honest -- D the only uncarried, P1-bounded",
+        a3["result"] == "PASS" and a3["only_uncarried_is_D"]
+        and a3["d_reads_p1_bounded"])
+    chk("t3a: both null injections are live",
+        a3["null_doctored_D_reads_carried"]
+        and a3["null_stripped_atk_reads_carried"])
+    b3 = W2.t3b()
+    chk("t3b: the clause lives only in the order; prior claims present",
+        b3["result"] == "PASS"
+        and b3["clause_absent_from_delivered_files"]
+        and b3["clause_lives_in_the_order_itself"]
+        and b3["prior_claims_all_present"])
+
+    w4 = W2.t4()
+    chk("t4: five consistent accountings, values 3,3,3,3,2",
+        [v for _n, v, _s in w4["rows"] if v is not None]
+        == [3, 3, 3, 3, 2])
+    chk("t4: exactly one accounting sits below three, the void-priced one",
+        len(w4["below_three"]) == 1
+        and w4["below_three"][0][0].startswith("not held / void"))
+    chk("t4: the inexpressible combination is a table row, not a number",
+        any(v is None and "INEXPRESSIBLE" in s
+            for _n, v, s in w4["rows"]))
+    chk("t4: the dropping intersection names provider-only retention",
+        "provider-only retention" in w4["dropping_intersection"])
+
+    # the module writes nothing: no write-mode open, no subprocess
+    import ast as _ast
+    w2src = io.open(os.path.join(HERE, "wo2_return.py"),
+                    encoding="utf-8").read()
+    w2tree = _ast.parse(w2src)
+    opens_ok = True
+    for node in _ast.walk(w2tree):
+        if isinstance(node, _ast.Call):
+            fn = node.func
+            name = fn.attr if isinstance(fn, _ast.Attribute) \
+                else getattr(fn, "id", "")
+            if name == "open":
+                modes = list(node.args)[1:2] + [
+                    k.value for k in node.keywords if k.arg == "mode"]
+                for a in modes:
+                    if isinstance(a, _ast.Constant) \
+                            and isinstance(a.value, str) \
+                            and ("w" in a.value or "a" in a.value):
+                        opens_ok = False
+    w2mods = set()
+    for node in _ast.walk(w2tree):
+        if isinstance(node, _ast.Import):
+            w2mods.update(a.name for a in node.names)
+        elif isinstance(node, _ast.ImportFrom):
+            w2mods.add(node.module or "")
+    chk("wo2_return contains no write-mode open and no subprocess",
+        opens_ok and "subprocess" not in w2mods)
+
+    w2out = W2.render()
+    for n in range(1, 5):
+        blk = w2out.split("T%d — " % n)[1]
+        chk("wo2 task %d uses the family's return format" % n,
+            "RESULT" in blk.split("\nT")[0]
+            and "EVIDENCE" in blk.split("\nT")[0])
+    chk("no RESULT line carries a forbidden label",
+        all("verified" not in ln.lower() and "confirmed" not in
+            ln.lower() and "p3-passed" not in ln.lower()
+            for ln in w2out.splitlines()
+            if ln.strip().startswith("RESULT")))
+    chk("the return is dated and states the append-only posture",
+        W2.RUN_DATE in w2out and "DBK_026" in w2out)
+
+    w2r = subprocess.run([sys.executable,
+                          os.path.join(HERE, "wo2_return.py"),
+                          "--selftest"],
+                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    chk("wo2_return.py refuses --selftest", w2r.returncode == 2)
+
     # ---- audit refuses --selftest
     r = subprocess.run([sys.executable, os.path.join(HERE, "audit.py"),
                         "--selftest"],

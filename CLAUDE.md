@@ -8333,9 +8333,38 @@ underneath).
   beside it the revision's strongest move — which retention accounting
   is used becomes a **declared decision under P0.2** rather than a side
   picked, the audit machinery's own free parameter routed through the
-  outline's observability provision. Check count printed by
-  `selftest_dbk.py`; `audit.py`, `r2_audit.py`, `wo_return.py` and
-  `r2v2_audit.py` refuse `--selftest`.
+  outline's observability provision. **Work order 2 (kill-closure) then
+  arrived and is returned** (`WORK_ORDER_F5_2.md` verbatim,
+  `wo2_return.py`): **`DBK_026`** T1's full flip map — every interior
+  cell of the 12×12 grid flips at exactly `c/s`, the boundary set is
+  the grid's ratio set and grows with the grid, and two regions are
+  threshold-independent in the delivered code (a zero-source base
+  fires at every t, fail-closed; a zero-concurrence cell is silent at
+  every positive t); the constant is not picked, per the order.
+  **`DBK_027`**, the sharp one: the colophon the order quotes exists in
+  no delivered file (zero hits everywhere but the order itself) and
+  the arithmetic stands anyway — the sibling's seed table is the only
+  stated sub-document provenance, five of six pool domains match it,
+  and one row puts **Fukushima 1-4 under both E and F**, so the
+  disjointness claim is partly false at the only stated granularity,
+  `dissent_alarm(2,1)` fires on the pair through the delivered
+  function, and seed letter B leaves a fork reported-not-resolved:
+  either B1∩B2 is a second shared node or the governing load rests on
+  no seed case. **`DBK_028`:** the outline as it stands is honest on
+  coverage (D the only uncarried, P1-bounded, both nulls live), the
+  standing contradiction is `DBK_022` restated not re-rated, and the
+  effective-date clause exists only in the order — checked against
+  P0.3 append-only semantics structurally, the return module carrying
+  no write-mode open and no subprocess, asserted over its AST.
+  **`DBK_029`:** five internally-consistent retention accountings
+  (N_eff 3/3/3/3/2), one combination INEXPRESSIBLE as a table row
+  (`DBK_011` in its own enumeration), the single sub-3 accounting
+  dropping on provider-only retention — and the choice is textual (the
+  outline's §3 sentence picks void → 2, the inherited metric can only
+  read collapsed → 3), which is why selecting one is the P0.2
+  declaration the order reserves for the author. Check count printed
+  by `selftest_dbk.py`; `audit.py`, `r2_audit.py`, `wo_return.py`,
+  `r2v2_audit.py` and `wo2_return.py` refuse `--selftest`.
   Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk

@@ -198,6 +198,47 @@ a commit of the repo it lands in (`DBK_021`). Findings:
 
     python3 design-basis-ai/r2v2_audit.py      # the v2 audit
 
+## Work order 2 — kill-closure, returned
+
+`WORK_ORDER_F5_2.md` (delivered verbatim) asks four closure tasks
+under the same standing constraint — same-builder pair, nothing
+labeled verified or P3-passed, findings forward-dated, no prior
+artifact re-rated. `wo2_return.py` is the return:
+
+- **T1 ENUMERATED** — the full flip map for the unset threshold: every
+  interior cell of the 12×12 grid flips at exactly its own ratio
+  `c/s`, the boundary set is the grid's distinct ratios (4/3 among
+  them) and grows with the grid, and two regions are
+  threshold-independent — a zero-source base fires at every t
+  (fail-closed, in the delivered code) and a zero-concurrence cell is
+  silent at every positive t. The constant is not picked, per the
+  order (`DBK_026`);
+- **T2 FAIL** — the colophon the order quotes exists in no delivered
+  file (measured: zero hits everywhere but the order itself), and the
+  arithmetic stands on the delivered texts anyway: the sibling's seed
+  table maps incidents to load-case letters, and one row puts
+  **Fukushima 1-4 under both E and F** — so the disjointness claim is
+  partly false at the only stated sub-document granularity, the
+  harness's own `dissent_alarm(2,1)` fires on the pair, and the
+  undifferentiated seed letter B leaves a fork: either B1∩B2 is a
+  second shared node or the document's own governing load rests on no
+  seed case (`DBK_027`);
+- **T3 PASS** — the outline as it stands is honest on coverage (D the
+  only uncarried, *P1-bounded*, both null injections live, no
+  attack-only token in a carrier list), the standing contradiction is
+  `DBK_022` restated not re-rated, and the effective-date clause
+  exists only in the order itself — checked against P0.3 append-only
+  semantics: the return module contains no write-mode open and no
+  subprocess, asserted over its AST (`DBK_028`);
+- **T4 ENUMERATED** — five internally-consistent retention accountings
+  (N_eff 3/3/3/3/2 through the delivered function), one combination
+  INEXPRESSIBLE as a table row (`DBK_011` in its own enumeration), the
+  single sub-3 accounting dropping on **provider-only retention**, and
+  the selection left to the author's P0.2 declaration, per the order
+  (`DBK_029`).
+
+    python3 design-basis-ai/wo2_return.py      # the full return
+
 ## Files
 
 | file | what |
@@ -212,13 +253,15 @@ a commit of the repo it lands in (`DBK_021`). Findings:
 | `wo_return.py` | the return, in the order's own format |
 | `R2_OUTLINE_V2.md` | the revision folding the return back in, delivered verbatim, not edited |
 | `r2v2_audit.py` | the v2 audit: transcription recomputed, the D split, tags vs verdicts |
-| `CLAIM_TABLE.md` | `DBK_001..DBK_025` with REFUTATION_PROTOCOL |
+| `WORK_ORDER_F5_2.md` | work order 2, delivered verbatim, not edited |
+| `wo2_return.py` | the kill-closure return: flip map, custody intersections, coverage, accountings |
+| `CLAIM_TABLE.md` | `DBK_001..DBK_029` with REFUTATION_PROTOCOL |
 | `samples/` | pinned runs |
 
 The delivered files carry no `--selftest` handling; `audit.py`,
-`r2_audit.py`, `wo_return.py` and `r2v2_audit.py` refuse `--selftest`
-rather than exiting 0. No `no_severity` exemptions — every screen hit
-was reworded.
+`r2_audit.py`, `wo_return.py`, `r2v2_audit.py` and `wo2_return.py`
+refuse `--selftest` rather than exiting 0. No `no_severity` exemptions
+— every screen hit was reworded.
 
 ## Scope
 

@@ -1,0 +1,136 @@
+RETURN — FABLE WORK ORDER 2 (R2 kill-closure)
+
+Standing constraint honored: same-builder pair, same-node
+computations, nothing below labeled verified or P3-passed.
+Findings dated 2026-08-30; claims append as DBK_026.. and no prior
+artifact is re-rated.
+
+T1 — HARNESS THRESHOLD MAP
+  RESULT   : ENUMERATED
+  EVIDENCE :
+    verdict at the delivered constant (F fires, . silent,
+    ! fires at EVERY threshold -- the s<=0 branch):
+        s:  0  1  2  3  4  5  6  7  8  9 10 11 12
+    c= 0    !  .  .  .  .  .  .  .  .  .  .  .  .
+    c= 1    !  .  .  .  .  .  .  .  .  .  .  .  .
+    c= 2    !  F  .  .  .  .  .  .  .  .  .  .  .
+    c= 3    !  F  F  .  .  .  .  .  .  .  .  .  .
+    c= 4    !  F  F  F  .  .  .  .  .  .  .  .  .
+    c= 5    !  F  F  F  F  .  .  .  .  .  .  .  .
+    c= 6    !  F  F  F  F  F  .  .  .  .  .  .  .
+    c= 7    !  F  F  F  F  F  F  .  .  .  .  .  .
+    c= 8    !  F  F  F  F  F  F  F  .  .  .  .  .
+    c= 9    !  F  F  F  F  F  F  F  F  .  .  .  .
+    c=10    !  F  F  F  F  F  F  F  F  F  .  .  .
+    c=11    !  F  F  F  F  F  F  F  F  F  F  .  .
+    c=12    !  F  F  F  F  F  F  F  F  F  F  F  .
+    flip value for every interior cell: exactly c/s
+    interior cells (c>0, s>0): 144 -- every one flips at its own c/s
+    distinct flip boundaries in the 12x12 grid: 91
+    boundaries inside the [1,3] band: 32
+    (4,3) -> flip at 4/3: True
+    threshold-independent cells: 13 fire at every t (s<=0), 12 silent at every t>0 (c<=0, s>0)
+  NOTES    :
+    The constant decides every interior cell: the flip set is the
+    set of grid ratios, so it grows with the grid and no single pin
+    removes it -- pinning t makes each cell a test and leaves the
+    pin itself the P0.2-declarable choice. Two regions no constant
+    reaches: a zero-source base fires regardless of t (fail-closed,
+    in the delivered code), and a zero-concurrence cell is silent at
+    any positive t. The constant is not picked here, per the order.
+
+T2 — CUSTODY-CHAIN DISJOINTNESS
+  RESULT   : FAIL
+  EVIDENCE :
+    SOURCE_DROP.md           colophon 0  'disjoint by construction' 0  effective 0
+    R2_OUTLINE.md            colophon 0  'disjoint by construction' 0  effective 0
+    R2_OUTLINE_V2.md         colophon 0  'disjoint by construction' 0  effective 0
+    WORK_ORDER_F5.md         colophon 0  'disjoint by construction' 0  effective 0
+    design_basis_checks.py   colophon 0  'disjoint by construction' 0  effective 0
+    WORK_ORDER_F5_2.md       colophon 2  'disjoint by construction' 1  effective 1   <- the order itself
+    R1 states provenance once, at document level: one pool of six
+    domains for all seven loads (logistics, rail-chem, county EM,
+    refinery, nuclear, aviation).
+    The sibling's seed table states the sub-document granularity:
+    incident -> load-case letters. Domains matched 5 of 6 (residual:
+    aviation, which appears in P3's provision, not a load case).
+      A   <- Katrina staging
+      B1  <- --
+      B2  <- --
+      C   <- Kerr County 2025
+      D   <- BP Texas City
+      E   <- Fukushima 1-4, Fukushima 5-6
+      F   <- Fukushima 1-4
+    Seed letter B predates the B1/B2 split (row: East Palestine).
+    Fork, unresolved here: either both inherit East Palestine (B1∩B2
+    non-empty) or B2 -- the doc's own governing load -- rests on no
+    seed case at all. Both readings are findings; neither is picked.
+    non-empty pairwise intersections (of 21): 1
+      E∩F = ['Fukushima 1-4']
+    The delivered harness's own P7 arithmetic on the shared node:
+    dissent_alarm(2 concurring loads, 1 independent incident) ->
+    True.
+  NOTES    :
+    The colophon the order quotes exists in no delivered file -- the
+    words appear only in the order that asks about them -- so the
+    claim tested is the order's quotation. The arithmetic stands on
+    the delivered texts: E∩F = {Fukushima 1-4}, stated outright in
+    one row, so per the order's own rule the disjointness claim is
+    partly false and the P7-pass partly unearned at this
+    granularity. One incident exhibiting two failure modes is
+    legitimate evidence practice; what it cannot be is two
+    independent sources.
+
+T3 — COVERAGE RE-AUDIT + CLAUSE CONSISTENCY
+  RESULT   : PASS
+  EVIDENCE :
+      A   P0.1,P0.2                    carried
+      B1  P2,P7                        carried
+      B2  P3,P4                        carried
+      C   P4                           carried
+      D   --                           uncarried
+      E   P1,P5,P6                     carried
+      F   P2,P7,P8,P0.3,P0.4,P0.5      carried
+    only uncarried load is D: True
+    D reads P1-bounded, uncarried: True
+    attack marks never enter a carrier list: True
+    null 1 (doctored D row reads carried): True
+    null 2 (stripped atk mark reads carried): True
+    clause scan: absent from all delivered files: True
+    the only effective-date clause is the order's own: True
+    prior claims DBK_001..025 all present, unedited ids: True
+  NOTES    :
+    Contradiction on record: DBK_022 (the D row's two answers)
+    stands as recorded; restated, not re-rated. The append-only
+    check this return can make locally is structural -- this module
+    contains no write call (asserted over its AST in the selftest)
+    and the claims append with new ids; the commit-level half is
+    asserted by the git history, where the prior returns stand at
+    their own hashes.
+
+T4 — P0.3 RETENTION ACCOUNTING ENUMERATION
+  RESULT   : ENUMERATED
+  EVIDENCE :
+      held / (no shared term) / inherited        N_eff 3    
+      held / (no shared term) / void-aware       N_eff 3    
+      not held / collapsed / inherited           N_eff 3    
+      not held / collapsed / void-aware          N_eff 3    
+      not held / void / void-aware               N_eff 2    consistent
+      not held / void / inherited                N_eff --   INEXPRESSIBLE -- the inherited metric has no void state (DBK_011 as a table row)
+    The one accounting below 3 drops there on: P0.3 ∩ audited-system
+    = {provider-only retention} -- the term the MINUS clause removes
+    only while copies are held.
+  NOTES    :
+    the outline's own §3 sentence ('if only provider holds history →
+    shares dep with audited thing → void') picks the void reading,
+    under which the consistent not-held value is 2; the inherited
+    metric can only read the same state as collapsed, giving 3.
+    Which accounting governs is a choice of which text governs --
+    the P0.2 declaration the order reserves.
+
+AFTER RETURN: T1 hands §8[4] its full flip map (pin, then it is
+a test); T2 hands the P7-pass its counterexample pair; T3 reads
+the outline as it stands honest on coverage with the D-row split
+still the standing contradiction; T4 hands §8[2] the accounting
+table with the selection left to the P0.2 declaration, per the
+order.

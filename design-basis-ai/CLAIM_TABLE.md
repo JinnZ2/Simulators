@@ -550,3 +550,95 @@ free parameter through the outline's observability provision.
 **Falsifier:** a legend naming all six states, or an entry tag
 inconsistent with its task's computed verdict. `tag_check()` computes
 both.
+
+## DBK_026 — T1: the flip map is the grid's ratio set; two regions no pin reaches
+
+Work order 2's T1, returned by `wo2_return.py`. For every interior cell
+(c > 0, s > 0) the delivered `dissent_alarm` verdict is `c/s > t`, so
+the cell flips at exactly `t = c/s` — all 144 interior cells of the
+enumerated 12×12 grid flip somewhere, the distinct boundary set is the
+set of grid ratios (computed, with 4/3 among them), and the set grows
+with the grid, so no single pin removes the phenomenon: pinning `t`
+makes each cell a test and leaves the pin itself a P0.2-declarable
+choice, which is where the order's *"don't pick the constant"* rule
+routes it. Two regions are threshold-independent in the delivered
+code and are reported apart: a zero-source base fires at **every** t
+(the fail-closed branch — 13 grid cells), and a zero-concurrence cell
+is silent at every positive t (12 cells). §8[4]'s QUALIFIED now has
+its full map rather than one flip.
+
+**Falsifier:** an interior cell whose verdict is constant over t, or a
+threshold reaching the s ≤ 0 branch. The delivered code has neither.
+
+## DBK_027 — T2: one incident sits under two load cases, in one delivered row
+
+The colophon the order quotes (*"disjoint by construction"*) exists in
+no delivered file — `colophon`, the quoted phrase, and `effective`
+count **zero** across all five delivered artifacts and appear only in
+the order that asks about them — so the claim tested is the order's
+quotation. The arithmetic stands on the delivered texts: R1 states
+provenance once, at document level (one pool of six domains for all
+seven loads), and the sibling protocol's seed table supplies the only
+sub-document granularity, mapping incidents to load-case letters —
+five of the six pool domains match it exactly, with `aviation` the
+residual (it sources P3's provision, not a load case). At that
+granularity **E∩F = {Fukushima 1-4}**, stated outright in one row, so
+the disjointness claim is partly false and the P7-pass partly unearned
+by the order's own rule — and the delivered harness's own arithmetic
+agrees: `dissent_alarm(2 concurring loads, 1 independent incident)`
+fires. Seed letter B predates the B1/B2 split, leaving a fork reported
+and not resolved: either both information loads inherit East Palestine
+(a second non-empty pair) or B2 — the document's own *governing load
+for AI* — rests on no seed case at all. One incident exhibiting two
+failure modes is legitimate evidence practice; what it cannot be is
+two independent sources. Reading the seed table as a provenance record
+is reading, not testing — nothing here tests the N_eff hypothesis on
+the seed cases the sibling forbids testing on.
+
+**Falsifier:** a delivered per-load source assignment under which E and
+F cite distinct incidents. The one delivered row says E,F on one line.
+
+## DBK_028 — T3: the outline as it stands is honest on coverage; the clause lives only in the order
+
+Coverage re-parse of `R2_OUTLINE_V2.md` with live nulls: six loads
+carried, D the only uncarried and reading *P1-bounded, uncarried*, no
+attack-marked token in any carrier list; a doctored D row reads
+carried and a stripped atk mark moves P3 into E's carriers, so both
+directions of the parse can fail. The one contradiction on record is
+`DBK_022` (the §1/§3 D split), restated and not re-rated. The
+effective-date clause T3(b) names is measured absent from every
+delivered file and present only in the order itself, so the clause
+checked is the order's own forward-dating rule, against P0.3
+append-only semantics as this return implements them: claims append
+as new ids with DBK_001..025 untouched, and `wo2_return.py` contains
+no write-mode open and no subprocess — asserted over its AST — so the
+module cannot amend the record it reads; the commit-level half lives
+in the git history, where the prior returns stand at their own hashes.
+
+**Falsifier:** a delivered file carrying the clause, a carrier list
+holding an atk-marked token, or a null injection the parse ignores.
+
+## DBK_029 — T4: five consistent accountings, one inexpressible; the sub-3 term named
+
+The retention accounting space has three dimensions — retention
+{held, not held} × the not-held reading of *shares its dependency with
+the audited thing* {collapsed, void} × the metric {inherited two-state
+`n_eff`, void-aware} — giving five internally-consistent accountings
+with N_eff **3, 3, 3, 3, 2** (computed through the delivered function;
+void-aware formalized as: drop void channels, `n_eff` over the rest)
+and one combination that is **INEXPRESSIBLE, a table row rather than a
+number**: not-held read as void under the inherited metric, which has
+no void state — `DBK_011` appearing as a row in its own enumeration.
+Exactly one accounting sits below 3, and the term that drops it is
+**provider-only retention** — the element the dep-set MINUS clause
+removes only while copies are held, re-entering P0.3 ∩ audited-system
+when they are not. The enumeration also shows the choice is textual:
+the outline's own §3 sentence picks the void reading (consistent
+value 2), the inherited metric can only read the same state as
+collapsed (value 3) — so selecting an accounting is selecting which
+text governs, which is why it is the P0.2 declaration the order
+reserves for the author and this return does not make.
+
+**Falsifier:** a sixth internally-consistent accounting, or a
+consistent reading under which some other element drops N_eff below 3.
+The dimensions and the MINUS set are both delivered text.
