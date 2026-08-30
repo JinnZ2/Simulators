@@ -1,0 +1,85 @@
+SOURCE_DROP_V2 -- THE REVISION, AUDITED AS A CLOSURE MAP
+
+The original stays beside it untouched, per the revision's own
+effective-date rule. Prior DBK ids keep their ratings on the
+files as then delivered; this records the forward state, dated
+2026-08-30.
+
+CLOSURE MAP (each closure checked against the new text)
+  DBK_030 (P1/P6 declared-reading link)                closed
+      the incident is now named beside its number, and the ~14 m
+      arrived wave beside the 5.7 m figure -- the one-word
+      amendment, taken, plus the load's other half
+  DBK_030 (three of five unmarked assumptions)         closed
+      P2, P5, P8 now open with a STATUS block naming the
+      derivation path and citing the finding; the other five
+      provisions carry no such block, so the marker is a state,
+      not a header style
+  DBK_031 (pre-answered FALSIFY parentheticals)        closed
+      the four asserted parentheticals are removed and the one
+      incident-backed parenthetical (P3's aviation citation) is
+      kept -- exactly the split the finding drew
+  DBK_014 (P3 VERIFY amendment)                        closed
+      the amendment R2 promised: dissimilarity has to be
+      established per axis, and a known-same-builder pair fails
+      outright -- its agreement reads as N_eff 2 and is N_eff 1
+  WO2 T2 / DBK_027 (per-load provenance granularity)   closed
+      the custody table now exists in a delivered file, at the
+      granularity WO2 found absent -- and it arrives already
+      carrying its own intersection test
+  WO2 T3b / DBK_028 (effective-date clause)            closed
+      the clause that previously existed only in a work order is
+      now a delivered custody clause, and its four rules are the
+      append-only practice the claim table already runs under
+  all checked closures hold: True
+
+THE PROVENANCE SECTION'S OWN P7, RECOMPUTED
+  custody positions parsed: 9 (doc says ~9: True)
+  shared pairs at incident granularity:
+    B2∩P3    share aviation
+    E∩F      share Fukushima
+  the doc names both pairs itself: True
+  dissent_alarm(2,1) recomputed: True (doc states it fires: True)
+  B1/B2 rows adopt the DBK_032 resolution: True
+  'disjoint by construction' occurs 1 time(s), inside the
+  correction sentence: True
+  The phrase WO2 could find in no delivered file now exists in one
+  -- as the schema framing being corrected. The section quotes the
+  two intersections from the audit record and arrives already
+  carrying its measured value rather than the adopted claim; a third
+  shared pair at finer granularity stays possible, which is what the
+  doc's own 'at least' concedes.
+
+THE TYPING, RECOMPUTED AGAINST THE REVISION
+  was  : DERIVED 5 / PROVISIONAL 3 / ASSUMPTION 12
+  now  : DERIVED 5 / PROVISIONAL 6 / ASSUMPTION 9
+  unmarked assumptions in provision-form text: P0.2, P0.5 (was 5)
+  The three in-doc unmarked assumptions took exactly the STATUS
+  blocks the WO3 return specified; the remaining two live in the
+  outline, which this revision does not touch. The class here is
+  derived from the text -- a STATUS marker, an in-block incident
+  name -- not carried from the prior table.
+
+WHAT STAYS OPEN, FORWARD
+  P0.2 and P0.5 stay unmarked assumptions        
+      they live in the outline, which this revision does not
+      revise -- the remaining two of DBK_030's five
+  DBK_022's D-row split stands in the outline    
+      one document, two answers, untouched by this revision
+  the t constant stays unpinned                  
+      per WO3's own NOT-ASKED: a load derived from the exposure
+      sample, not a value to select
+  one vocabulary residue                         
+      §5.3 keeps the original phrasing for the quantity P8's
+      FALSIFY now calls edge-case performance -- same referent,
+      two words, in a document that renamed it one section over
+  the join stays single-node                     
+      restated by the doc itself: DBK_014's gap is uncloseable
+      from inside the pair, and the revision says so in its own
+      provenance section
+
+  the delivered harness block is byte-identical to
+  design_basis_checks.py: True
+
+This module computes; it does not conclude. Findings are in
+CLAIM_TABLE.md as DBK_034..DBK_036.

@@ -8392,9 +8392,35 @@ underneath).
   which question the reported number answers; the inexpressible row is
   an **out-of-range sensor reading** — P1 applied to the metric
   itself, which extrapolates silently outside its declared domain.
+  **R1.1 then folded the whole chain back into the main document**
+  (`SOURCE_DROP_V2.md`, verbatim beside the untouched original — its
+  own effective-date rule applied to itself) and `r1v2_audit.py`
+  checks every claimed closure against the new text. **`DBK_034`: all
+  six closures hold** — Fukushima named beside 5.7 with the ~14 m
+  arrived wave added; STATUS PROVISIONAL blocks on exactly P2/P5/P8;
+  the four asserted parentheticals removed with P3's incident-backed
+  one kept (the original still scores four, so the finding keeps its
+  rating on the file it rated); the three-axes P3 amendment (*a
+  known-same-builder pair's agreement reads as N_eff 2 but is
+  N_eff 1*); the per-load custody table; the effective-date clause —
+  and re-typed the counts move to DERIVED 5 / PROVISIONAL 6 /
+  ASSUMPTION 9, the unmarked provision-form assumptions down from
+  five to two, both in the outline. **`DBK_035`:** the provenance
+  section **runs the doc's own P7 on itself** — nine custody
+  positions parse, keyword intersection recomputes exactly the two
+  shared pairs the doc names (E∩F on Fukushima, B2∩P3 on the aviation
+  case), `dissent_alarm(2,1)` fires as stated, the B1/B2 rows adopt
+  the `DBK_032` resolution — and the phrase WO2 could find in no
+  delivered file, *"disjoint by construction"*, now exists in exactly
+  one, as the schema framing being corrected: `DBK_027`'s phantom
+  colophon arrives already carrying its measured value, called
+  *self-flattering as first written* by the doc itself. **`DBK_036`:**
+  what stays open is stated forward with green checks — P0.2/P0.5,
+  the D-row split, the unpinned `t`, one vocabulary residue, and the
+  join itself, single-node pending a different-builder verifier.
   Check count printed by `selftest_dbk.py`; `audit.py`, `r2_audit.py`,
-  `wo_return.py`, `r2v2_audit.py`, `wo2_return.py` and `wo3_return.py`
-  refuse `--selftest`.
+  `wo_return.py`, `r2v2_audit.py`, `wo2_return.py`, `wo3_return.py`
+  and `r1v2_audit.py` refuse `--selftest`.
   Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk

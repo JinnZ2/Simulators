@@ -602,6 +602,72 @@ def run():
                          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     chk("wo3_return.py refuses --selftest", w3r.returncode == 2)
 
+    # ================= R1 REVISION (SOURCE_DROP_V2) =================
+    import r1v2_audit as RA
+
+    v2src = io.open(os.path.join(HERE, "SOURCE_DROP_V2.md"),
+                    encoding="utf-8").read()
+    chk("the revision lands beside the original; both differ",
+        "PROVENANCE & CUSTODY" in v2src
+        and "PROVENANCE & CUSTODY" not in doc
+        and "STATUS     PROVISIONAL (DBK_030)" in v2src
+        and "STATUS     PROVISIONAL" not in doc)
+
+    rm = RA.repair_map()
+    chk("all six checked closures hold on the revision's text",
+        rm["all_closed"] and len(rm["rows"]) == 6)
+    chk("the closure checks have a reachable negative (the original "
+        "fails them)",
+        "Fukushima" not in RA.p_block(RA._read(RA.R1), 1)
+        and "EFFECTIVE-DATE RULE" not in RA._read(RA.R1))
+
+    fp2 = W3.falsify_parentheticals(v2src)
+    chk("the revision removes the four asserted parentheticals and "
+        "keeps P3's",
+        sum(1 for v in fp2.values() if v == "asserted") == 0
+        and fp2["P3"] == "incident-backed"
+        and sum(1 for v in fp2.values() if v == "none") == 7)
+    fp1 = W3.falsify_parentheticals()
+    chk("the original still scores four asserted -- the finding keeps "
+        "its rating on the file it rated",
+        sum(1 for v in fp1.values() if v == "asserted") == 4)
+
+    pv = RA.provenance_check()
+    chk("nine custody positions parse; both shared pairs recompute",
+        pv["n_positions"] == 9 and pv["doc_states_nine"]
+        and [p for p, _c in pv["shared_pairs"]] == ["B2∩P3", "E∩F"])
+    chk("the doc names both pairs; its dissent_alarm claim recomputes",
+        pv["doc_names_both"] and pv["alarm_recomputed"] is True
+        and pv["doc_states_alarm_fires"])
+    chk("the B1/B2 custody rows adopt the DBK_032 resolution",
+        pv["b1_b2_adopt_dbk032"])
+    chk("the phantom phrase now exists exactly once, as the framing "
+        "being corrected",
+        pv["phrase_count"] == 1 and pv["phrase_in_correction"])
+
+    rt3 = RA.retyping()
+    chk("re-typed against the revision: DERIVED 5 / PROVISIONAL 6 / "
+        "ASSUMPTION 9",
+        rt3["counts"] == {"DERIVED": 5, "PROVISIONAL": 6,
+                          "ASSUMPTION": 9})
+    chk("unmarked provision-form assumptions drop five to two, both "
+        "in the outline",
+        rt3["unmarked_in_provision_form"] == ["P0.2", "P0.5"])
+
+    chk("every open-items check is green",
+        all(okk for _n, okk, _w in RA.open_items()))
+    chk("the delivered harness block is byte-identical in the revision",
+        RA.harness_unchanged())
+
+    raout = RA.render()
+    chk("the revision report states it computes and does not conclude",
+        "computes; it does not conclude" in raout)
+    rar = subprocess.run([sys.executable,
+                          os.path.join(HERE, "r1v2_audit.py"),
+                          "--selftest"],
+                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    chk("r1v2_audit.py refuses --selftest", rar.returncode == 2)
+
     # ---- audit refuses --selftest
     r = subprocess.run([sys.executable, os.path.join(HERE, "audit.py"),
                         "--selftest"],
@@ -625,6 +691,8 @@ def run():
         not no_severity.hits(w2out))
     chk("the work-order-3 return carries no severity language",
         not no_severity.hits(w3out))
+    chk("the revision audit carries no severity language",
+        not no_severity.hits(raout))
     chk("and the screen is not silent by construction",
         bool(no_severity.hits(out + "\nthis design is broken\n")))
 

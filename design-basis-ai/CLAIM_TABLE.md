@@ -738,3 +738,80 @@ extrapolates silently outside its declared domain.
 **Falsifier:** an observable loss event under which two texts in one
 class predict different survivor counts. The candidate events are
 enumerated in the return; none separates them.
+
+## DBK_034 — R1.1: the revision closes six standing findings, each checked forward
+
+`SOURCE_DROP_V2.md` lands verbatim beside the original — which stays
+untouched, per the revision's own effective-date rule — and
+`r1v2_audit.py` checks each claimed closure against the new text
+rather than the revision's account of itself. All six hold:
+**DBK_030's P1/P6 link** (Fukushima Daiichi now named beside 5.7, plus
+the ~14 m arrived wave — the one-word repair, taken, with the load's
+other half added); **DBK_030's three in-doc unmarked assumptions**
+(P2, P5, P8 now open with STATUS PROVISIONAL blocks naming their
+derivation paths, and no other provision carries the marker, so it is
+a state rather than a header style); **DBK_031** (the four asserted
+FALSIFY parentheticals removed, P3's incident-backed one kept —
+exactly the split the finding drew, and the original still scores
+four asserted, so the finding keeps its rating on the file it rated);
+**DBK_014's P3 amendment** (three axes ESTABLISHED, a known-same-
+builder pair fails outright — *"its agreement reads as N_eff 2 but is
+N_eff 1"*); **WO2 T2's granularity gap** (the custody table now
+exists, per-load); and **WO2 T3(b)'s clause** (the effective-date rule
+is now a delivered custody clause whose four rules are the append-only
+practice this claim table already runs under). Re-typed against the
+revision: **DERIVED 5 / PROVISIONAL 6 / ASSUMPTION 9**, with the
+unmarked provision-form assumptions down from five to two — both in
+the outline, which this revision does not touch.
+
+**Falsifier:** any closure check failing on the revision's text, or
+the original failing to fail them (the reachable negative both
+directions are pinned on).
+
+## DBK_035 — the provenance section runs the doc's own P7 on itself, and the phantom colophon arrives corrected
+
+The new PROVENANCE & CUSTODY section states *"the document must run
+its own P7 test on them rather than assert the pass"* — and does:
+E ∩ F (Fukushima Daiichi under both the envelope case and the
+post-Fukushima SBO inspections) and B2 ∩ P3 (both grounded in the
+aviation AOA case) are named in the doc, with the corrected reading
+*"the disjointness claim is PARTLY FALSE."* Recomputed here from the
+custody table alone: nine positions parse, keyword intersection
+returns exactly those two pairs, and `dissent_alarm(2,1)` fires as
+the doc states. The B2 ∩ P3 entry promotes `DBK_032`'s *same source
+family* note to a counted intersection, and the B1/B2 rows adopt the
+T2 resolution exactly (B1 ← East Palestine, B2 ← aviation, DBK_032
+cited in the row). The sharp one: **the phrase WO2 could find in no
+delivered file — "disjoint by construction" — now exists in exactly
+one, as the schema framing being corrected** (*"a claim adopted"*
+where *"a count tested"* returns a lower number). DBK_027's
+phantom-colophon finding resolves: the colophon the order quoted was
+this section, and its delivered form arrives already carrying its
+measured value — the doc calls its first-written form
+*self-flattering* in its own text. The join stays single-node by the
+doc's own statement, pending a different-builder verifier (DBK_014,
+standing).
+
+**Falsifier:** a custody row whose keyword intersection disagrees
+with the doc's named pairs, or a third pair at this granularity. The
+doc's *"at least two"* concedes finer granularity could hide more;
+at incident granularity the count is exactly two.
+
+## DBK_036 — what stays open, stated forward
+
+Five items, each with a green check on the current tree: P0.2 and
+P0.5 stay unmarked assumptions (they live in the outline, which this
+revision does not revise — the remaining two of DBK_030's five);
+`DBK_022`'s D-row split stands in the outline; the `t` constant stays
+unpinned per WO3's own NOT-ASKED (a load derived from the exposure
+sample, not a value to select); one vocabulary residue (§5.3 keeps
+the original phrasing for the quantity P8's FALSIFY now calls
+edge-case performance); and the join stays single-node — restated by
+the doc itself, which is `DBK_014` surviving its fourth document.
+The delivered §4 harness block is byte-identical to
+`design_basis_checks.py` across the revision, so no code moved while
+the prose did.
+
+**Falsifier:** any of the five checks going red on a future tree —
+which is the intended path: each names the artifact whose arrival
+closes it.

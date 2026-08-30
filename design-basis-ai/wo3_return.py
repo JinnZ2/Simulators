@@ -231,11 +231,12 @@ def t1():
             "result": "ENUMERATED"}
 
 
-def falsify_parentheticals():
+def falsify_parentheticals(doc=None):
     """The FALSIFY column's own assumptions: four of eight arrive with
     the outcome asserted in a parenthesis, one cites its incident, and
-    three carry no parenthetical."""
-    doc = _read(R1F)
+    three carry no parenthetical. Takes a doc so a revision can be
+    scored by the same rule."""
+    doc = doc if doc is not None else _read(R1F)
     out = {}
     for i in range(1, 9):
         pid = "P%d" % i
