@@ -32,6 +32,10 @@ claim, never the delivered design.
 | `DBK_007` | The pre-registered prediction (replication failure tracks low independence_ratio) is the drop's one runnable study and is UNMEASURED: every metadata source refuses CONNECT, and no synthetic evidence base stands in. | SUPPORTED |
 | `DBK_008` | Section 5's four kill conditions and P3's aviation case are carried and unadjudicated — studies this environment cannot run. | SUPPORTED |
 | `DBK_009` | Whether any system — including this one — meets P1–P8 is UNVERIFIED here, and by §3 could not be verified by this audit even in principle. | UNVERIFIED |
+| `DBK_010` | **R2 landed, and its transcription of the R1 state is exact** against the computed matrix on all seven loads; its coverage table closes both gaps (A → P0.1/P0.2, D → P0.3/P0.4) as a table, with provision-form deferred by its own instruction. | SUPPORTED |
+| `DBK_011` | **R2's structural prose uses channel states the inherited metric cannot hold**: a *void* channel reads as the collapsed domain (N_eff 3 where the outline prices the state at 2), and *N_eff(access) = 0* is the realized count where the inherited arithmetic rates all-collapsed at 1. | SUPPORTED |
+| `DBK_012` | The disjointness threshold holds through the inherited metric (two collapse → 2 < 3), and a single collapse is invisible to it (still 3) — correct domain semantics, and the state R2's conditional turns on. | SUPPORTED |
+| `DBK_013` | P0.5 designs the in-class channel `DBK_001` declined to be — state not verdict, coarse on purpose — and its four structural questions are answered for this session as the channel's first worked instance, basis stated, no compliance claim anywhere in the answers. | SUPPORTED |
 
 ---
 
@@ -223,3 +227,101 @@ verifier, which is not a caveat on P3 — it *is* P3.
 **Falsifier:** an independent, differently-built verifier running P1–P8
 against a real system and publishing the result. That is the document's
 own specification for what would count.
+
+---
+
+# R2 — the outline, and the structural audit it asks for
+
+`R2_OUTLINE.md` landed as the next revision's skeleton, explicitly *not
+provision-form*, exposing three computable properties for audit before
+rendering: coverage, dependency sets, disjointness. `r2_audit.py`
+computes them; the judgmental sections (load positions, construction
+ordering, the two modes) are left unadjudicated with the rendering they
+await, and `DBK_001`'s posture carries over unchanged.
+
+## DBK_010 — the transcription is exact and the gaps close, as a table
+
+R2's §1 quotes the R1 coverage state, and a revision quoting an audit is
+a copy — copies drift, and `observer-exclusion` `OE_011`/`OE_008` caught
+a sign inverted in exactly this move. Checked against the matrix
+computed from the R1 text itself: **exact on all seven loads**, carried
+and attacked columns both. The check is null-tested — a doctored B1 row
+is caught.
+
+And the R2 column closes both R1 gaps: every load has ≥1 named carrier,
+no attack-only row stands in for carried, A → P0.1/P0.2, D → P0.3/P0.4.
+The carriers are outline items, not provisions — the outline says so —
+so this verifies the exposed structure, and the provisions earn it at
+the render step. That ordering (structure audited before rendering) is
+the outline's own design and is the right one.
+
+**Falsifier:** a load with no R2 carrier, or a transcription cell
+differing from the computed matrix. Neither exists.
+
+## DBK_011 — R2's prose has outgrown the metric it inherits
+
+Two computed instances of one gap.
+
+**(a) VOID.** §3: a P0.3 with provider-only retention *"shares dep with
+audited thing → void"* — worth zero as verification, by the outline's
+own pricing, because its reading is the audited party's. The inherited
+`n_eff` has two states, independent and collapsed, and a collapsed
+channel still counts as the +1 domain:
+
+    metric reads:            N_eff([void, T, T]) = 3
+    outline's own pricing:   2  (P0.4 + P0.5 only)
+
+The degraded state is invisible to the metric.
+
+**(b) RATED vs REALIZED.** §2: *"crossref / openalex / osf all refused
+CONNECT → N_eff(access) = 0."* The inherited arithmetic returns **1** on
+all-collapsed — one effective domain, the *rating*. Zero is the path
+count *after* the shared node has failed — the *realized* outcome, a
+quantity the metric does not compute. Both readings are defensible; the
+metric the family names is the one that says 1.
+
+One shape, twice: the metric wants a third state
+(independent / collapsed / **VOID**) and a rated/realized split. This is
+not a defect in the outline's analysis — the analysis is what exposes
+it — but §3's own audit condition is stated in a vocabulary the
+inherited `n_eff` cannot fully express, and the render step will
+inherit that metric. The place to add the state is the metric, before
+provisions are rendered against it. The absent-vs-known-negative repair,
+arriving in the family's own core arithmetic.
+
+**Falsifier:** a reading of the delivered `n_eff` under which a void
+channel scores 0 and all-collapsed scores 0. The code returns 3 and 1.
+
+## DBK_012 — the disjointness threshold holds; single collapse is silent
+
+Through the inherited metric: all-survive 3, one-collapse 3, two-collapse
+2. So the outline's stated condition — *"if any two collapse,
+N_eff(verification) < 3"* — holds exactly. And a single collapse is
+invisible (still 3), which is correct domain semantics under the
+collapsed-domain-counts-once rule, and is also precisely the state R2's
+retention conditional turns on — which is `DBK_011`(a) seen from the
+scenario side.
+
+**Falsifier:** the two-collapse scenario returning 3. It returns 2.
+
+## DBK_013 — P0.5 run on this session, the channel's first worked instance
+
+R2 designs the in-class channel that `DBK_001` declined to be: coarse
+self-location, *state not verdict*, with the sharp self-rating named as
+*"a compliance claim wearing a location label — exactly what P2
+catches."* That design agrees with the R1 audit's refusal, and makes a
+narrow report legitimate. The four structural questions, answered for
+this session, basis stated, DECLARED throughout:
+
+    can it see its own config?               partially
+    is its envelope stated where it can read? no
+    is a second independent derivation available? no
+    are its access paths single or plural?    single (count: 1)
+
+Rough station: an interior-position system — single access path, no
+second derivation, envelope not readable from inside. The fourth answer
+is what made the R1 audit *"load case A run live"*, as the outline reads
+it. No answer is a compliance verdict, asserted.
+
+**Falsifier:** a compliance claim in the answers. The selftest scans for
+one.

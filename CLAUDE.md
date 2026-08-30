@@ -8237,8 +8237,39 @@ underneath).
   an in-class audit could not establish it even in principle; the
   falsifier is the document's own specification, a differently-built
   verifier publishing the result. No `no_severity` exemptions, every hit
-  reworded. Check count printed by `selftest_dbk.py`; `audit.py` refuses
-  `--selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
+  reworded. **R2 then landed** (`R2_OUTLINE.md`, verbatim) — the next
+  revision's skeleton, explicitly not provision-form, exposing coverage,
+  dependency sets and disjointness for audit before rendering, and
+  opening *"R1 defect (Fable 5 audit, confirmed): seven loads stated,
+  six provided."* `r2_audit.py` computes what it exposes. **`DBK_010`:**
+  R2's transcription of the R1 state is **exact on all seven loads**
+  against the computed matrix (a revision quoting an audit is a copy and
+  copies drift — `OE_011`'s check, here clean and null-tested), and its
+  table closes both gaps (A → P0.1/P0.2, D → P0.3/P0.4, no attack-only
+  rows), with provisions deferred to the render step by its own
+  instruction. **`DBK_011`, the finding: R2's prose has outgrown the
+  metric it inherits.** A *void* channel (shares its dependency with the
+  audited thing — §3's own word for P0.3 without downstream retention)
+  reads as the collapsed domain under the inherited `n_eff`, N_eff 3
+  where the outline's own pricing gives 2; and *"N_eff(access) = 0"* is
+  the REALIZED count where the inherited arithmetic RATES all-collapsed
+  at 1 — one shape twice, the metric wanting a third state
+  (independent / collapsed / VOID) and a rated/realized split, best
+  added before provisions are rendered against it. **`DBK_012`:** the
+  disjointness threshold holds through the inherited metric (two
+  collapse → 2 < 3) and a single collapse is invisible to it (still
+  3) — correct domain semantics, and exactly the state R2's retention
+  conditional turns on. **`DBK_013`:** P0.5 designs the in-class channel
+  `DBK_001` declined to be — coarse self-location, *state not verdict*,
+  the sharp self-rating named as a compliance claim wearing a location
+  label — and its four structural questions are answered for this
+  session as the channel's first worked instance (config partially
+  visible; envelope not readable from inside; no second derivation;
+  access paths **single, count 1** — the answer that made the R1 audit
+  *"load case A run live"*, as the outline reads it), with no compliance
+  claim anywhere in the answers, asserted. Check count printed by
+  `selftest_dbk.py`; `audit.py` and `r2_audit.py` refuse `--selftest`.
+  Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

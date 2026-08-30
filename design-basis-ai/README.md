@@ -85,6 +85,36 @@ replication-project and citation metadata: `api.crossref.org`,
 synthetic evidence base stands in. Section 5's four kill conditions and
 P3's aviation case are carried, unadjudicated.
 
+## R2 — the outline, audited before rendering
+
+`R2_OUTLINE.md` landed as the next revision's skeleton, explicitly not
+provision-form, exposing coverage, dependency sets and disjointness for
+audit first. `r2_audit.py` computes all three:
+
+- **the transcription of the R1 state is exact** on all seven loads
+  against the computed matrix (a revision quoting an audit is a copy,
+  and copies drift — checked, clean, and the check is null-tested);
+- **both R1 gaps close as a table** — A → P0.1/P0.2, D → P0.3/P0.4, no
+  attack-only rows — with provisions deferred to the render step by the
+  outline's own instruction;
+- **the disjointness threshold holds** through the inherited metric
+  (two collapse → 2 < 3), and a single collapse is invisible to it;
+- **the finding: R2's prose uses states the inherited metric cannot
+  hold.** A *void* channel (shares its dependency with the audited
+  thing) reads as the collapsed domain — N_eff 3 where the outline's own
+  pricing gives 2 — and *N_eff(access) = 0* is the realized count where
+  the inherited arithmetic rates all-collapsed at 1. The metric wants a
+  third state (independent / collapsed / VOID) and a rated/realized
+  split, added before provisions are rendered against it;
+- **P0.5 is run on this session** as the channel's first worked
+  instance — it designs the in-class report `DBK_001` declined to be,
+  state not verdict: config partially visible, envelope not readable
+  from inside, no second derivation available, access paths single
+  (count: 1) — the fourth answer being what made the R1 audit "load
+  case A run live", as the outline reads it.
+
+    python3 design-basis-ai/r2_audit.py        # the structural audit
+
 ## Files
 
 | file | what |
@@ -93,7 +123,9 @@ P3's aviation case are carried, unadjudicated.
 | `design_basis_checks.py` | the Section 4 harness, landed verbatim |
 | `audit.py` | the mechanical layer; imports the sibling instrument |
 | `selftest_dbk.py` | the checks; run it, it prints its own count |
-| `CLAIM_TABLE.md` | `DBK_001..DBK_009` with REFUTATION_PROTOCOL |
+| `R2_OUTLINE.md` | the R2 skeleton, delivered verbatim, not edited |
+| `r2_audit.py` | the structural audit R2 asks for: coverage, disjointness, the metric gaps |
+| `CLAIM_TABLE.md` | `DBK_001..DBK_013` with REFUTATION_PROTOCOL |
 | `samples/` | pinned run |
 
 The delivered file carries no `--selftest` handling; `audit.py` refuses

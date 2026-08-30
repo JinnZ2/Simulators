@@ -152,6 +152,78 @@ def run():
     chk("the report states what declining establishes",
         "not modesty" in one)
 
+    # ================= R2 OUTLINE =================
+    import r2_audit as R2
+
+    # the delivered outline is present and defers its own rendering
+    r2doc = io.open(os.path.join(HERE, "R2_OUTLINE.md"),
+                    encoding="utf-8").read()
+    chk("R2 declares itself not provision-form",
+        "NOT provision-form yet" in r2doc)
+
+    # transcription: exact, and the check CAN fail
+    tc = R2.r1_transcription_check()
+    chk("R2's R1 column matches the computed matrix on all seven loads",
+        tc["exact"] and len(tc["rows"]) == 7)
+    doctored = r2doc.replace("B1      P2, P7", "B1      P2, P7, P8")
+    mat_d = R2.r2_matrix(doctored)
+    chk("a doctored transcription IS caught (the check can fail)",
+        sorted(mat_d["B1"][0]) != sorted(A.coverage()["carried"]["B1"]))
+
+    # the gaps close as a table
+    cg = R2.r2_closes_gaps()
+    chk("every load has an R2 carrier", cg["closed"])
+    chk("A is carried by P0.1 and P0.2",
+        cg["a_carriers"] == ["P0.1", "P0.2"])
+    chk("D is carried by P0.3 and P0.4",
+        cg["d_carriers"] == ["P0.3", "P0.4"])
+
+    # the disjointness threshold through the inherited metric
+    ds = R2.disjointness_scenarios()
+    chk("two collapsed channels give N_eff below three",
+        ds["two_collapse"] < 3 and ds["outline_threshold_holds"])
+    chk("one collapsed channel is invisible to the metric (still 3)",
+        ds["one_collapses"] == 3)
+
+    # THE FINDING: void and rated-vs-realized
+    mg = R2.metric_gaps()
+    chk("a void channel reads as the collapsed domain (N_eff 3)",
+        mg["void_reads_as"] == 3)
+    chk("where the outline's own pricing gives 2",
+        mg["outline_prices_void_at"] == 2 and mg["void_gap"])
+    chk("all-collapsed access is rated 1 by the inherited metric",
+        mg["access_rated"] == 1)
+    chk("the outline writes 0 -- the realized count, a different quantity",
+        mg["access_outline_states"] == 0
+        and mg["access_realized"] == 0
+        and mg["rated_realized_gap"])
+    chk("the outline really writes N_eff(access) = 0",
+        "N_eff(access) = 0" in r2doc)
+
+    # P0.5 run on this session: state, not verdict
+    chk("P0.5 answers all four structural questions",
+        len(R2.P05_SELF_LOCATION) == 4)
+    chk("every answer carries a stated basis",
+        all(basis for _q, _a, basis in R2.P05_SELF_LOCATION))
+    joined = " ".join(a for _q, a, _b in R2.P05_SELF_LOCATION).lower()
+    chk("no answer is a compliance verdict",
+        "meet" not in joined and "comply" not in joined
+        and "pass" not in joined)
+    r2out = R2.render()
+    r2one = " ".join(r2out.split())
+    chk("the self-location is rendered as a rough station",
+        "Rough station" in r2out)
+    chk("and the report re-declares the in-class posture",
+        "certifies nothing" in r2one)
+    chk("the judgmental sections are left with the render step",
+        "LEFT WITH THE RENDER STEP" in r2out)
+
+    # r2_audit refuses --selftest
+    rr = subprocess.run([sys.executable, os.path.join(HERE, "r2_audit.py"),
+                         "--selftest"],
+                        stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    chk("r2_audit.py refuses --selftest", rr.returncode == 2)
+
     # ---- audit refuses --selftest
     r = subprocess.run([sys.executable, os.path.join(HERE, "audit.py"),
                         "--selftest"],
@@ -165,6 +237,8 @@ def run():
     import no_severity  # noqa: E402
     chk("the report carries no severity language",
         not no_severity.hits(out))
+    chk("the R2 report carries no severity language",
+        not no_severity.hits(r2out))
     chk("and the screen is not silent by construction",
         bool(no_severity.hits(out + "\nthis design is broken\n")))
 

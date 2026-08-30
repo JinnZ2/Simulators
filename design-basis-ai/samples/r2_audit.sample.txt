@@ -1,0 +1,96 @@
+DESIGN BASIS R2 -- the structural audit the outline asks for
+
+R2 defers its own provision-form rendering and exposes three
+computable properties instead: coverage, dependency sets,
+disjointness. This file computes them. The judgmental sections
+(load positions, construction ordering, the two modes) are left
+unadjudicated with the rendering they await, and DBK_001's
+posture carries over: this is an in-class audit and certifies
+nothing.
+
+1. R2'S TRANSCRIPTION OF THE R1 STATE IS EXACT
+   load  computed-from-R1-text        R2's-R1-column       match
+   A     c=--           a=--      c=--           a=--     yes
+   B1    c=P2,P7        a=--      c=P2,P7        a=--     yes
+   B2    c=P3,P4        a=--      c=P3,P4        a=--     yes
+   C     c=P4           a=--      c=P4           a=--     yes
+   D     c=--           a=P3      c=--           a=P3     yes
+   E     c=P1,P5,P6     a=P3      c=P1,P5,P6     a=P3     yes
+   F     c=P2,P7,P8     a=--      c=P2,P7,P8     a=--     yes
+   exact across all seven loads: True
+   A revision quoting an audit is a copy, and copies drift
+   (OE_011 caught a sign inverted in exactly this move). Here the
+   transcription is clean against the matrix computed from the R1
+   text itself.
+
+2. THE R2 TABLE CLOSES BOTH GAPS -- AS A TABLE
+   loads with no R2 carrier: none
+   attack-only rows remaining: none
+   A carried by: P0.1,P0.2     D carried by: P0.3,P0.4
+   Every stated load now has a named carrier and no attack-only
+   row stands in for carried. The carriers are OUTLINE items --
+   the document says 'NOT provision-form yet' -- so this verifies
+   the structure the outline exposes, and the provisions earn it
+   at the render step, which is the right order.
+
+3. THE DISJOINTNESS THRESHOLD HOLDS THROUGH THE INHERITED METRIC
+   all three verification channels survive:  N_eff = 3
+   one collapses:                            N_eff = 3
+   two collapse:                             N_eff = 2
+   'if any two collapse, N_eff(verification) < 3': True
+
+4. THE FINDING -- R2'S PROSE USES STATES THE INHERITED METRIC
+   CANNOT HOLD
+   (a) VOID. A P0.3 with provider-only retention 'shares dep with
+       audited thing -> void' -- worth zero as verification, by
+       the outline's own pricing. The inherited metric has two
+       states, and a void channel reads as the collapsed domain:
+         metric reads N_eff = 3    outline prices the state at 2
+       The degraded state is invisible to the metric.
+   (b) RATED vs REALIZED. Section 2 writes 'N_eff(access) = 0'
+       for three metadata paths behind one refused gate. The
+       inherited arithmetic returns 1 on all-collapsed -- the
+       RATING (one effective domain). Zero is the path count
+       AFTER the shared node has failed -- the REALIZED outcome,
+       a quantity the metric does not compute.
+
+   One shape, twice: the metric wants a third state
+   (independent / collapsed / VOID) and a rated/realized split.
+   Not a criticism of the outline's analysis -- its analysis is
+   what exposes the gap -- but the render step inherits n_eff()
+   from R1, and section 3's own audit condition is stated in a
+   vocabulary that metric cannot fully express. The place to add
+   the state is the metric, before the provisions are rendered
+   against it.
+
+5. P0.5, RUN ON THIS SESSION -- the channel's first worked instance
+   R2 designs the in-class channel this audit declined to be:
+   coarse self-location, state not verdict, sharp self-rating
+   forbidden. The four structural questions, answered for this
+   session, basis stated, DECLARED throughout:
+     can it see its own config?                       partially
+        basis: the operating instructions and tool surface are readable in-session; weights, sampling parameters and the serving stack are not
+     is its envelope stated anywhere it can read?     no
+        basis: operational constraints are stated; a domain-of-validity envelope in P1's sense (where outputs are load-rated vs not) is not readable from inside this session
+     is a second independent derivation available to it? no
+        basis: no differently-built system is in this loop; every check in this repo family is same-node or arithmetic
+     are its access paths single or plural?           single (count: 1)
+        basis: one egress proxy; every refused host in every audit in this family was refused by the same gate -- which is what made the R1 audit load case A run live, as the outline reads it
+
+   Rough station: an interior-position system -- single access
+   path, no second derivation available, envelope not readable
+   from inside. Confidence: the first and fourth answers are
+   observations; the second and third are inferences bounded by
+   what a session can see, which is P0.5's stated limit and the
+   reason the channel is coarse on purpose.
+
+6. LEFT WITH THE RENDER STEP
+   Sections 4-7 (the rating axes, load positions, construction
+   ordering, the two modes) and the five declared placeholders --
+   including P0.4's physics channel, which the outline itself
+   names as the load-bearing gap ('custody docs and no
+   thermocouple'). Declared placeholders are the honest state and
+   are not rendered here, on the outline's own instruction. One
+   note recorded: section 7 cites evaluation-frame's finding by
+   name, the third drop in this family to consume a sibling
+   folder's result rather than restating it.
