@@ -123,10 +123,11 @@ def run():
 
     # ---- the audit's cross-references
     cr = A.cross_refs()
-    chk("the four repo-facing references resolve by existence",
-        cr["all_resolve"])
-    chk("the register, both gaps, and the loop marker are absent",
-        cr["none_present"])
+    chk("the five resolving rows resolve by existence -- GAP 14 by "
+        "content among them, per the BI_001 update",
+        cr["all_resolve"] and len(cr["resolve"]) == 5)
+    chk("the register, Gap 2, and the loop marker are absent",
+        cr["none_present"] and len(cr["named_elsewhere"]) == 4)
     chk("the named deliverable arrives with the landing",
         cr["deliverable_arrives_with_landing"])
 

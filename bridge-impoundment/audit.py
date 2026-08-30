@@ -46,6 +46,18 @@ def cross_refs():
                                                 "operator_swap.py"))))
     rows.append(("the Columbia/Snake node list",
                  os.path.exists(os.path.join(ccc, "eap_coverage.py"))))
+    # GAP 14 landed after this audit's first landing, under a folder
+    # name this audit had not guessed -- detected by CONTENT (its
+    # SOURCE_DROP header), which is what fired BI_001's falsifier.
+    gap14 = False
+    for name in os.listdir(ROOT):
+        sd = os.path.join(ROOT, name, "SOURCE_DROP.md")
+        if name != os.path.basename(HERE) and os.path.isfile(sd):
+            head = io.open(sd, encoding="utf-8").read(40)
+            if head.startswith("# GAP 14"):
+                gap14 = True
+    rows.append(("GAP 14, by content (landed after this audit)",
+                 gap14))
 
     absent = []
     for basename in ("UNDERGRADUATE_RESEARCH_GAPS.md",
@@ -58,9 +70,9 @@ def cross_refs():
                 found = True
                 break
         absent.append((basename, found))
-    # the sibling gaps and the loop marker: no folder or file in the
-    # tree carries them; checked as folder existence by obvious names
-    for name in ("gap-14", "gap-2", "sediment-debris-biological-loop"):
+    # the remaining sibling gap and the loop marker: no folder or file
+    # in the tree carries them, by name or by content header
+    for name in ("gap-2", "sediment-debris-biological-loop"):
         absent.append((name, os.path.isdir(os.path.join(ROOT, name))))
 
     deliverable = os.path.exists(os.path.join(HERE,
@@ -123,8 +135,10 @@ def ccc007_usage():
 
 # ------------------------------------------------------ egress
 
-# Pinned from the verification run's --measure probe (any failure to
-# connect records as "000"); re-run --measure to re-take the reading.
+# The expected allowlist-refusal state, CARRIED: the --measure probe
+# was classifier-blocked in the landing session, so these codes are
+# the standing pattern every prior probe in this tree returned for
+# non-GitHub hosts, not a fresh reading. Re-run --measure to take one.
 EGRESS = [
     ("infobridge.fhwa.dot.gov", "000"),
     ("www.fhwa.dot.gov", "000"),
@@ -176,9 +190,13 @@ def render():
         w("  %-46s %s" % (name, "present" if ok else "absent"))
     for ln in _wrap(
             "The entry is a draft for a register this repository does "
-            "not hold, and both of its coupling targets (Gaps 2 and "
-            "14) are with it. The one named artifact that arrives "
-            "with the landing is the deliverable itself: "
+            "not hold. At this audit's first landing both coupling "
+            "targets were with it; GAP 14 then arrived in the same "
+            "session (the mining-increment folder, detected by "
+            "content), firing the first clause of BI_001's falsifier "
+            "-- the claim carries its update note. Gap 2 and the loop "
+            "marker stay absent. The one named artifact that arrived "
+            "with the landing itself is the deliverable: "
             "bridge_impoundment.py exists (%s) -- as the scaffold its "
             "structure supports without data, not the study."
             % cr["deliverable_arrives_with_landing"]):
@@ -207,13 +225,17 @@ def render():
         w("  %-34s %s" % (k, v))
     w("")
 
-    w("EGRESS (the method's data hosts; measured %s)" % RUN_DATE)
+    w("EGRESS (the method's data hosts; carried state, %s -- the"
+      % RUN_DATE)
+    w("probe could not run in the landing session; run --measure for")
+    w("a fresh reading)")
     for host, code in EGRESS:
         w("  %-28s %s" % (host, code))
     for ln in _wrap(
             "Every chain-level cell in the scaffold is UNMEASURED "
-            "because the inventory and gage hosts are unreachable "
-            "from here and no value is supplied from memory; the gap "
+            "because the inventory and gage hosts are in the carried "
+            "allowlist-refusal state and no value is supplied from "
+            "memory; the gap "
             "STANDS-as-unmeasured on this chain, which is a statement "
             "about this environment and not about any bridge."):
         w("  " + ln)

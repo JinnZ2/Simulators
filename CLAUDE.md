@@ -8426,11 +8426,15 @@ underneath).
   register: the bridge as a **transient impoundment** — clog, pond,
   fail, release — the dam-break problem wearing a bridge's name,
   falling between transportation engineering and dam safety.
-  `SOURCE_DROP.md` verbatim; the register it drafts for
+  `SOURCE_DROP.md` verbatim; at landing, the register it drafts for
   (`UNDERGRADUATE_RESEARCH_GAPS.md`) and both coupling targets (Gaps 2
-  and 14) exist nowhere in this tree, while every repo-facing
+  and 14) existed nowhere in this tree, while every repo-facing
   reference resolves by existence — `CCC_007`, Module F, the operator
-  swap, the node list (`BI_001`). **What is built is the scaffold the
+  swap, the node list (`BI_001`; **updated forward the same session
+  when GAP 14 landed as `mining-increment/`**, firing the falsifier's
+  first clause — detected by content, the fourth `CT_006`-pattern
+  shrinkage and the first coupling pair to close itself from both
+  sides in one session). **What is built is the scaffold the
   entry's structure supports without data, in the deliverable's own
   name** (`bridge_impoundment.py`): a parameter schema where every
   cell carries a knowledge state and names its mover as a constructor
@@ -8447,9 +8451,9 @@ underneath).
   exactly when the span gives way faster than it filled; debris gain
   ≥ 1 by construction, `BI_005`); and both falsifiers three-valued
   with every branch reachable — on the real chain every cell is
-  UNMEASURED, hosts measured refused, nothing supplied from memory
-  into a flood-safety artifact, the `CCC_005` refusal at bridge scale
-  (`BI_006`). **`BI_002`:** *"the same operator swap Module F already
+  UNMEASURED, the data hosts in the carried allowlist-refusal state,
+  nothing supplied from memory into a flood-safety artifact, the
+  `CCC_005` refusal at bridge scale (`BI_006`). **`BI_002`:** *"the same operator swap Module F already
   proves"* carries two drifts — the showing lives in
   `reservoir-chain-coupling` on constructed chains and *proves*
   overruns the FIRM/SOFT split — while its substance (single-event
@@ -8460,6 +8464,44 @@ underneath).
   with its own negative-provenance note. Check count printed by
   `selftest_bi.py`; both CLIs refuse `--selftest`. Stdlib only, parses
   under 3.9, phone-buildable, CC0.
+- `mining-increment/` — GAP 14, the other half of the coupling pair:
+  mining-induced subsurface alteration coupled to reservoir loading —
+  the mining literature stops at the aquifer, the dam literature
+  starts at the reservoir, and the connecting term for the
+  Columbia/Snake chain sits on the seam. `SOURCE_DROP.md` verbatim;
+  it landed one drop after GAP 15 named it absent (`MI_001`, the pair
+  closing itself from both sides in one session). **The scaffold in
+  the deliverable's own name** (`mining_increment.py`): the **transfer
+  gate enforced** — a coal-basin parameter applied to a basin whose
+  transfer is not established returns `UNDEFINED` as a code path, the
+  two carried porosity deltas reach no basin today, and the falsifier
+  refuses to read UNDEFINED as a low value (`MI_004`, second
+  consecutive gap whose sharpest rule arrived in prose and got built
+  as structure); the **stock/flow separation as schema** — the
+  water-balance link carries two distinct named sides and nothing
+  returns one scalar for the pair (`MI_005`, Gap 1's rule,
+  `category-weld`'s mechanism from the prevention side); the interface
+  equation as delivered with UNDEFINED propagating; both subsidence
+  forms with the drop's stated shared properties **computed** (W(0)=0,
+  the W₀ asymptote), anchored on the confirmed Knothe form (`MI_006`);
+  and both falsifiers — the transfer one with **three outcomes**
+  (closes / stands / NARROWS), the first in the family whose firing
+  narrows a gap to a measurement problem (`MI_007`). **`MI_002`, the
+  finding:** the headline (*NOT_STUDIED, the coupling term*) is
+  contradicted by the drop's own appendix — the Kuye-basin record
+  carries subsidence as a boundary condition into a coupled
+  basin-scale model with streamflow measured — so the surviving
+  reading is the TRANSFER CAVEAT's own (*not studied for this basin
+  and rock*), recorded without deciding the headline for the author.
+  **`MI_003`:** the drop's provenance flag is per-citation negative
+  provenance with anchors — two named citations flagged unconfirmed,
+  the Knothe anchor substituted with its DOI, an explicit
+  do-not-publish instruction — and **containment is checked**: both
+  flagged names occur only inside the flag that disclaims them. The
+  parameter schema is **imported from `bridge-impoundment`**, not
+  copied (`MI_008`). Check count printed by `selftest_mi.py`; both
+  CLIs refuse `--selftest`. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

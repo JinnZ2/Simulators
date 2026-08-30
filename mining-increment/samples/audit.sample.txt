@@ -1,0 +1,47 @@
+GAP 14 -- CROSS-REFERENCE AND RECORD AUDIT
+
+RESOLVING IN THIS TREE (by existence, not mention)
+  Module F (the amplifier section)                     resolves
+  the Columbia/Snake node list                         resolves
+  GAP 15, by content (the coupling pair's other half)  resolves
+NAMED, AND NOT IN THIS TREE
+  UNDERGRADUATE_RESEARCH_GAPS.md                       absent
+  SCOPE_BOUNDARY.md                                    absent
+  knowledge_state.py                                   absent
+  contributing_inflow.py                               absent
+  gap-1                                                absent
+  gap-2                                                absent
+  The coupling pair closed from the other side within the session:
+  GAP 15 named Gap 14 absent, and Gap 14 then landed -- firing the
+  first clause of BI_001's falsifier, with that claim updated
+  forward rather than rewritten. The register, both scope modules,
+  and Gaps 1 and 2 stay absent.
+
+THE DROP'S OWN PROVENANCE FLAG, CONTAINED
+  Padhy    occurrences 2, inside the flag 2, contained True
+  Piao     occurrences 3, inside the flag 3, contained True
+  anchor DOI present: True; do-not-publish instruction: True
+
+THE HEADLINE AGAINST THE APPENDIX
+  headline                           True
+  appendix_basin_scale_carry         True
+  appendix_streamflow_measured       True
+  transfer_caveat_present            True
+  Both statements are in the delivered text: the coupling term is
+  headlined NOT_STUDIED, and the trailing section lists the
+  Kuye-basin record carrying subsidence into a coupled basin-scale
+  model with streamflow measured against mining. The reading that
+  survives both is the one the TRANSFER CAVEAT already frames -- the
+  term is studied in the coal-basin record and not for this basin
+  and rock -- recorded here without deciding the headline for the
+  author.
+
+EGRESS (the method's data hosts; carried state, 2026-08-30 -- the
+probe could not run in the landing session; run --measure for
+a fresh reading)
+  mrdata.usgs.gov              000
+  www.sciencedirect.com        000
+  www.nature.com               000
+
+This module computes; it does not conclude. Findings are in
+CLAIM_TABLE.md as MI_001..MI_008.

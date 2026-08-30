@@ -8,9 +8,13 @@ impoundment/release term owned by neither field. `SOURCE_DROP.md` is
 delivered verbatim and edited by nothing here.
 
 The entry is a draft for `UNDERGRADUATE_RESEARCH_GAPS.md`, which this
-repository does not hold; both coupling targets (Gaps 2 and 14) are
-with it, while every repo-facing reference resolves — `CCC_007`,
-Module F, the operator swap, the Columbia/Snake node list (`BI_001`).
+repository does not hold; at landing both coupling targets (Gaps 2
+and 14) were with it, while every repo-facing reference resolves —
+`CCC_007`, Module F, the operator swap, the Columbia/Snake node list
+(`BI_001`). **GAP 14 then arrived in the same session** (the
+`mining-increment/` folder, detected by content), firing the first
+clause of `BI_001`'s falsifier — the claim carries its update note;
+Gap 2 and the loop marker stay absent.
 
 ## What is built (the scaffold, not the study)
 
@@ -37,8 +41,9 @@ deliverable, scoped to what its structure supports without data:
   (`BI_005`);
 - **both falsifiers, three-valued** — constructed data closes the gap
   in both directions and an unknown input never closes it; on the
-  real chain every cell is UNMEASURED, hosts measured refused, no
-  value supplied from memory into a flood-safety artifact (`BI_006`).
+  real chain every cell is UNMEASURED, the data hosts in the carried
+  allowlist-refusal state, no value supplied from memory into a
+  flood-safety artifact (`BI_006`).
 
 **No real bridge appears anywhere in this folder.** The NBI inventory
 pass, the debris-supply coupling, the HEC-RAS backwater and release

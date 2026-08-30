@@ -23,6 +23,16 @@ supports without data, not the study.
 **Falsifier:** any of the five absent artifacts landing in this tree.
 The existence checks re-run on every selftest.
 
+**UPDATE 2026-08-30 (the falsifier's first clause fired, forward):**
+GAP 14 arrived within the landing session, as `mining-increment/` —
+detected by content (its SOURCE_DROP header), not by the folder name
+this audit had guessed, so the detection moved from name to content in
+`cross_refs()`. The claim stood for the tree it rated; the register,
+Gap 2, and the loop marker remain absent. Fourth instance of a
+named-and-absent set shrinking by the drop that follows (`CT_006`'s
+pattern), and the first where the two halves of a coupling pair closed
+each other from opposite sides in one session.
+
 ## BI_002 — "Module F already proves" carries two drifts; its substance is right
 
 The record: Module F arrived truncated and never delivered its body
@@ -104,9 +114,11 @@ three-valued: constructed data closes the gap in both directions, a
 flagged span with reaching backwater stands, and an unknown input
 never closes a gap — an unknown spacing is not a clear span. On the
 actual Columbia/Snake chain every input is UNMEASURED: the inventory
-and gage hosts are unreachable from here (measured, pinned in
-`audit.py`) and no value is supplied from memory into a flood-safety
-artifact — the `CCC_005` refusal at the bridge scale. The gap
+and gage hosts sit in the carried allowlist-refusal state (the probe
+itself was classifier-blocked in the landing session — noted in
+`audit.py`, not glossed as a measurement) and no value is supplied
+from memory into a flood-safety artifact — the `CCC_005` refusal at
+the bridge scale. The gap
 STANDS-as-unmeasured, which is a statement about this environment,
 not about any bridge.
 
