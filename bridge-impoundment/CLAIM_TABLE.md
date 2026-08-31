@@ -189,7 +189,7 @@ both are pinned.
 
 The standing record carries its own search-exclusion finding: NVE's
 national GLOF register *"serves English"* and *"never ranks on an
-English query because the phenomenon indexes under jøkullaup / skred
+English query because the phenomenon indexes under jøkulhlaup / skred
 and the institution under NVE."* That is `QA_004`'s discipline —
 *absent in a stated corpus under stated terms* is a measurement,
 *I did not find it* is not — stated by the author about a national

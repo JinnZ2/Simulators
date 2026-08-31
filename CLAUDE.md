@@ -31,6 +31,24 @@ it rather than restating it. Section 2 blocks the misread that the method is
 makes a shape read falsifiable; section 9 says use DISSIPATION rather than
 cost, because cost imports a pricing model that is not part of the system.
 
+`META-PROTOCOL.md` is the production step between those specs and a finished
+folder: the five-step deconstruction (system-boundary audit, load-bearing
+data-independent anchor, epistemic-state inventory, falsifier-locked research
+prompts, scope boundary), the three output templates, the six recurring
+fallacy shapes, and an exit checklist. It exists so the pattern runs without
+the session that established it — hand it to a collaborator, a student, or a
+different model and nothing else is needed. Where it and a spec disagree, the
+spec wins.
+
+`AUDIT_OPEN_RESEARCH.md` audits the 23-document `OPEN_RESEARCH.md` batch
+against that checklist. Four repairs (markup restored on 19 files with content
+preservation proved against `HEAD`; a `CCC_` prefix collision between
+`climate-modeling` and `columbia-chain-cascade` resolved to `CMA_`;
+`jøkullaup` → `jøkulhlaup`, which was `BI_010`'s own search term; one
+retrieval artifact) and five findings left standing because they need an
+author decision — the sharpest being that several restatements renumber their
+folder's claims, so one id names two claims depending on which file is open.
+
 `AUDIT_CONTRACT.md` governs how work is reported across this ecosystem:
 structure first, gap analysis as deliverable, a score without its support
 count is not a score, wording is not a decision, a free-text discriminator
@@ -8629,7 +8647,7 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   measured chain's two outputs are the release initiator's two
   load-bearing fields. **`BI_010`:** the NVE GLOF register *"serves
   English [and] never ranks on an English query because the
-  phenomenon indexes under jøkullaup / skred"* — a
+  phenomenon indexes under jøkulhlaup / skred"* — a
   query-vocabulary-bounded null stated by the author about a national
   register (`QA_004`'s discipline from the retrieval side), with
   *"long series = the instrument for a slow rate"* naming why a

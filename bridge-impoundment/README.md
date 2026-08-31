@@ -83,7 +83,7 @@ the byte offset — `BI_008`). The content:
   fields (`BI_009`).
 - **The NVE GLOF register** — a standing national record that
   *"serves English [and] never ranks on an English query because the
-  phenomenon indexes under jøkullaup / skred"*: a
+  phenomenon indexes under jøkulhlaup / skred"*: a
   query-vocabulary-bounded null stated by the author about a national
   register, with *"long series = the instrument for a slow rate"*
   naming why a register beats event studies on a rate question
