@@ -71,7 +71,19 @@ WANT = {
     "falsifier": "falsifier",
     "research question": "question",
     "expected deliverable": "deliverable",
+    # the DECISION template's own fields (RESEARCH_RENDER section 3)
+    "fork": "fork",
+    "winning condition": "winning",
+    "discriminator": "discriminator",
+    "blocked by": "blocked",
+    "who could run it": "runner",
+    "if you run it": "opens",
 }
+
+# the three source kinds RESEARCH_RENDER section 3 specifies; detected as
+# literal declared markers, never inferred from wording
+KINDS = ("EXISTING RECORD", "YOUR OWN DATA", "SOMEONE'S HANDS")
+NO_SLOT = "no slot (DECISION)"
 
 DASHES = ("—", "–", " - ")
 
@@ -153,6 +165,9 @@ def _list_below(lines, i):
         if t.startswith(("- ", "* ")) or re.match(r"^\d+\.\s", t):
             vals.append(_clean(re.sub(r"^([-*]|\d+\.)\s*", "", t)))
             continue
+        if any(t.startswith(k) for k in KINDS):
+            vals.append(_clean(t))
+            continue
         break
     return "; ".join(vals)
 
@@ -205,6 +220,47 @@ def find_docs(root=ROOT):
     return sorted(found)
 
 
+def build_row(folder, fn, e):
+    """One index row from one parsed entry.
+
+    A DECISION entry's columns are mapped from its own template fields:
+    disciplines carries Who-could-run-it and needs carries Blocked-by —
+    the schema's routing pair — and state reads NO_SLOT, because the
+    DECISION template has no knowledge-state field. A slot that does not
+    exist is a different statement from one left empty, so NO_SLOT and
+    'unrecorded' are kept apart. A declared field always wins over the
+    mapping.
+    """
+    f = e["fields"]
+    t = entry_type(e["class"])
+    if t == "DECISION":
+        disciplines = f.get("disciplines") or f.get("runner", UNRECORDED)
+        needs = f.get("needs") or f.get("blocked", UNRECORDED)
+        state = f.get("state") or NO_SLOT
+        complete = all(k in f for k in
+                       ("fork", "winning", "discriminator", "blocked",
+                        "runner"))
+    else:
+        disciplines = f.get("disciplines", UNRECORDED)
+        needs = f.get("needs", UNRECORDED)
+        state = f.get("state", UNRECORDED)
+        complete = all(k in f for k in
+                       ("gap", "state", "disciplines", "needs",
+                        "falsifier"))
+    return {
+        "id": "%s#%s" % (os.path.basename(folder), e["n"]),
+        "folder": folder,
+        "file": fn,
+        "type": t,
+        "class": e["class"],
+        "title": e["title"],
+        "disciplines": disciplines,
+        "needs": needs,
+        "state": state,
+        "complete": complete,
+    }
+
+
 def collect(root=ROOT, silent_docs=None):
     rows = []
     for folder, fn, region in find_docs(root):
@@ -212,21 +268,7 @@ def collect(root=ROOT, silent_docs=None):
         if not entries and silent_docs is not None:
             silent_docs.append((folder, fn))
         for e in entries:
-            f = e["fields"]
-            rows.append({
-                "id": "%s#%s" % (os.path.basename(folder), e["n"]),
-                "folder": folder,
-                "file": fn,
-                "type": entry_type(e["class"]),
-                "class": e["class"],
-                "title": e["title"],
-                "disciplines": f.get("disciplines", UNRECORDED),
-                "needs": f.get("needs", UNRECORDED),
-                "state": f.get("state", UNRECORDED),
-                "complete": all(k in f for k in
-                                ("gap", "state", "disciplines", "needs",
-                                 "falsifier")),
-            })
+            rows.append(build_row(folder, fn, e))
     return rows
 
 
@@ -288,6 +330,13 @@ def render(rows, silent_docs=()):
     A("")
     A("## The index")
     A("")
+    A("For a `DECISION` entry the columns are mapped from its own template")
+    A("fields — `disciplines` carries *Who could run it* and `needs`")
+    A("carries *Blocked by*, the schema's routing pair — and `state` reads")
+    A("`no slot (DECISION)`, because a fork carries no knowledge-state")
+    A("field. A slot that does not exist is a different statement from one")
+    A("left empty.")
+    A("")
     A("| id | folder | type | class | disciplines | needs | state |")
     A("|---|---|---|---|---|---|---|")
     for r in sorted(rows, key=lambda r: (r["folder"], int(r["id"].split("#")[1]))):
@@ -322,8 +371,11 @@ def render(rows, silent_docs=()):
     A("Grouped on the first declared data source, verbatim and lowercased.")
     A("This is a string grouping and not a taxonomy: `RESEARCH_RENDER.md`")
     A("§3 specifies three source kinds — EXISTING RECORD, YOUR OWN DATA,")
-    A("SOMEONE'S HANDS — and **no folder in this tree uses them**, so there")
-    A("is nothing declared to group on above the level of the raw line.")
+    kinded = sum(1 for r in rows if any(k in r["needs"] for k in KINDS))
+    A("SOMEONE'S HANDS — and **%d of %d entries declare one**; the rest"
+      % (kinded, len(rows)))
+    A("declare sources with no kind, so above the raw line there is")
+    A("nothing to group them on.")
     A("")
     tal2 = _tally(rows, "needs", lambda s: [_first(s).lower()])
     shown2 = [kv for kv in tal2 if kv[1] > 1]
@@ -354,11 +406,12 @@ def render(rows, silent_docs=()):
     A("")
     A("**%d of %d** entries state one of the six §5 values, alone or with a"
       % (onvocab, len(rows)))
-    A("parenthetical. The remaining %d state something else in the field —"
+    A("parenthetical. The remaining %d carry something else — a sentence, a"
       % (len(rows) - onvocab))
-    A("a sentence, a verdict, or nothing. They are listed as written above")
-    A("rather than sorted into the vocabulary, because deciding which of the")
-    A("six a sentence means is the inference this reader does not make.")
+    A("verdict, `no slot (DECISION)` (a fork has no knowledge-state field),")
+    A("or nothing. They are listed as written above rather than sorted into")
+    A("the vocabulary, because deciding which of the six a sentence means")
+    A("is the inference this reader does not make.")
     A("")
     A("---")
     A("")
@@ -414,19 +467,43 @@ FIELD_FIXTURE = """
 
 ### 2. DECISION — which convention
 
-**Gap:** two conventions, both defensible
+**Fork:** two conventions, both defensible
 
-**Knowledge state:** UNDEFINED
+**Options:**
+  A. convention one — what follows
+  B. convention two — what follows
 
-**Disciplines:** metrology
+**Winning condition:** one transfers where the other does not
 
-**Data sources:** the operator's log
+**Discriminator:** the overlap comparison
 
-**Falsifier:** a discriminator run
+**Blocked by:** access to the operator's log
+
+**Who could run it:** anyone inside the operator
+
+**If you run it:** the fork closes
 
 ## SCOPE_BOUNDARY.md
 
 ### 1. NOT A GAP — this is past the end
+""".split("\n")
+
+KIND_FIXTURE = """
+## OPEN_QUESTIONS.md
+
+### 1. EMPIRICAL — kinds declared
+
+**Gap:** g
+
+**Knowledge state:** NOT_STUDIED
+
+**Disciplines:** d
+
+**Data sources:**
+  EXISTING RECORD: the public archive
+  YOUR OWN DATA: a coded corpus
+
+**Falsifier:** f
 """.split("\n")
 
 TABLE_FIXTURE = """
@@ -472,6 +549,25 @@ def selftest():
           all(x["n"] in ("1", "2") for x in e))
     check("field: DECISION typed", entry_type(e[1]["class"]) == "DECISION")
     check("field: GAP typed", entry_type(e[0]["class"]) == "GAP")
+
+    # -- the DECISION mapping, on the template's own fields
+    dr = build_row("x", "OPEN_QUESTIONS.md", e[1])
+    check("decision: needs carries Blocked by",
+          dr["needs"] == "access to the operator's log")
+    check("decision: disciplines carries Who could run it",
+          dr["disciplines"] == "anyone inside the operator")
+    check("decision: state is the no-slot marker, not unrecorded",
+          dr["state"] == NO_SLOT)
+    check("decision: template-complete", dr["complete"])
+    gr = build_row("x", "OPEN_QUESTIONS.md", e[0])
+    check("gap rows unchanged by the mapping",
+          gr["state"] == "NOT_STUDIED" and gr["complete"])
+
+    # -- declared source-kind lines are collected without bullets
+    ek = parse_entries(gaps_region(KIND_FIXTURE))
+    check("kind lines read from beneath the label",
+          ek[0]["fields"].get("needs") ==
+          "EXISTING RECORD: the public archive; YOUR OWN DATA: a coded corpus")
     check("field: a list-valued field is read from beneath its label",
           e[0]["fields"].get("needs") ==
           "Field measurements; USDA NRCS soil surveys")

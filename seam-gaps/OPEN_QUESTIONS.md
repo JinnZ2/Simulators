@@ -30,8 +30,7 @@ downstream instrument reads which referent circulates. A citation born
 in two versions on a known date, with named outlets on each side, is a
 measurable propagation experiment that nobody is measuring.
 
-**Knowledge state:** NOT_STUDIED (the split is countable and dated; no
-count exists)
+**Knowledge state:** NOT_STUDIED (countable, dated, and uncounted)
 
 **Research question:** For a result published with a stated referent
 and a same-week drifted version, what share of coverage and citation
@@ -97,9 +96,7 @@ windows and does not derive floors. Nothing requires a trend study to
 print its own floor next to its window, so results on both sides of
 the floor are compared as if they were the same kind of result.
 
-**Knowledge state:** NOT_STUDIED (the floor is stated for one taxon
-and one method; per-method floors, and the below-floor share of the
-published record, are not)
+**Knowledge state:** NOT_STUDIED (one floor stated; per-method floors not)
 
 **Research question:** For each major monitoring method — Malaise
 trap, light trap, transect, weather radar — what is the minimum series
@@ -163,9 +160,7 @@ two time points; the substitution has no series — no rate, no
 inflection, and no test of whether the total carries any information
 its largest component does not.
 
-**Knowledge state:** UNKNOWN_ATM (both endpoints measured; the series
-between them never assembled, though its components are published
-annually)
+**Knowledge state:** UNKNOWN_ATM (endpoints measured; series unassembled)
 
 **Research question:** What is the time series of the wild / livestock
 / human partition of mammal biomass — at what rate has domestic
@@ -231,8 +226,7 @@ seam: monitoring counts species because counting is what its
 instrument does; services need function; the bridge is nobody's
 instrument.
 
-**Knowledge state:** NOT_STUDIED (the field's own review states the
-validation does not yet exist)
+**Knowledge state:** NOT_STUDIED (the field's own review says so)
 
 **Research question:** On datasets where pollination function was
 measured, does an index built from hard-to-measure traits predict

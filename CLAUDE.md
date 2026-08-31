@@ -223,6 +223,7 @@ last three; read in order:
 - `condition-scoped-authority/` — rank has no condition col
 - `predicate-difference/` — set difference + support rule
 - `supplement-placement/` — direction vs placement
+- `seam-gaps/` — six gaps, one session; each between two fields
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -8767,6 +8768,52 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   UNDEFINED as every other carry until a per-basin basis is declared.
   Check count printed by `selftest_mi.py`; all three CLIs
   refuse `--selftest`. Stdlib only, parses under 3.9, phone-buildable,
+  CC0.
+- `seam-gaps/` — Six gaps from one session (2026-08-31), delivered as
+  WORK ORDER 02 and rendered per `RESEARCH_RENDER.md` — the order's own
+  classification: each sits between two fields whose instruments code
+  it as the other's problem. `WORK_ORDER.md` verbatim (it arrives with
+  an unterminated code fence, kept as delivered); `OPEN_QUESTIONS.md`
+  carries the six entries with a **Placement** note per gap — noted and
+  executed for none, since the placements are the render's call and
+  inserting them means editing delivered documents. Two readings are
+  declared in the README rather than smoothed: the order announces
+  G-01..G-06 and delivers six source blocks with no per-gap sections,
+  so the render reads the blocks as the gaps 1:1, supported by the
+  schema note placing G-05 and G-06 on exactly the two fork-shaped
+  blocks. **Entries 5 and 6 are the first worked instances of the
+  DECISION entry type** — which record is the preindustrial ENSO
+  baseline (tree-ring teleconnection vs in-basin coral; discriminator a
+  running-variance comparison on public series), and pre-1630, which
+  channel is in error where documentary and physical proxies part
+  (discriminator a regionally co-located speleothem run against both, a
+  design the India famine-records case has run once at millennium
+  depth) — rendered by the same hand that wrote the fields and recorded
+  at that weight in `RESEARCH_RENDER.md` §7. The four gaps: a citation
+  born in two referents on a known date, its propagation split
+  countable and uncounted (→ `question-availability/` QA_005's missing
+  reference class); a 10-yr continental radar null under the field's
+  own 15-yr detection floor, `SILENT` entering the literature as a
+  finding, per-method floors underived (→ `instrument-epistemology/`);
+  mammal-biomass substitution reading as stability — wild /6 while the
+  total goes ×4 — partition series never assembled (→ `category-weld/`,
+  the register's first candidate weld from outside policy/economics,
+  `UNI_002`'s standing check); and species-count monitoring standing in
+  for unmeasured function, the FAO bee case, the field's own trait
+  validation absent (→ `proxy-investigation-lab/`). `SOURCES.md` holds
+  per-row status — ARITHMETIC / CONSISTENT_PRIOR / CARRIED, with every
+  publisher host's CONNECT refusal measured and timestamped and
+  `github.com` as the connecting control — and `verify_sources.py`
+  computes the internal checks: the biomass partition closes exactly at
+  the stated rounding (0.167 → 0.17, shares 60/36/4, ×4.25, /5.71 on
+  one identity the block leaves implicit), the delivered animal
+  components sum to 2.27 against a stated ~2 (one significant figure
+  only; recorded, not adjudicated), and the `SILENT` re-read is
+  conditional arithmetic on two carried numbers. The render is written
+  against reproducing the order's flagged coverage error — variability
+  of a regional index, never event strength. Nothing verified against a
+  primary source; the load-bearing dates sit past the environment's
+  knowledge horizon. Stdlib only, parses under 3.9, phone-buildable,
   CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk

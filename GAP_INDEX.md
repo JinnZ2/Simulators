@@ -15,16 +15,23 @@ statement from a gap having no discipline or needing no data.
 Nothing here is inferred from wording.
 
 ```
-entries        245
-folders        23
-of type GAP    245
-of type DECISION 0
+entries        251
+folders        24
+of type GAP    249
+of type DECISION 2
 entries missing at least one of the five core fields   9
 ```
 
 ---
 
 ## The index
+
+For a `DECISION` entry the columns are mapped from its own template
+fields — `disciplines` carries *Who could run it* and `needs`
+carries *Blocked by*, the schema's routing pair — and `state` reads
+`no slot (DECISION)`, because a fork carries no knowledge-state
+field. A slot that does not exist is a different statement from one
+left empty.
 
 | id | folder | type | class | disciplines | needs | state |
 |---|---|---|---|---|---|---|
@@ -261,6 +268,12 @@ entries missing at least one of the five core fields   9
 | `nonidentity-census#4` | `nonidentity-census` | GAP | Methodological | Research methodology | Published papers with methods sections | `UNDEFINED` |
 | `nonidentity-census#5` | `nonidentity-census` | GAP | Empirical | Metrology | The eight mechanisms in ../uninstrumented/ | `NOT_STUDIED` |
 | `nonidentity-census#6` | `nonidentity-census` | GAP | User Guide | Science communication | The framework itself | `NOT_STUDIED` |
+| `seam-gaps#1` | `seam-gaps` | GAP | EMPIRICAL | science communication | EXISTING RECORD: news archives (GDELT | `NOT_STUDIED (countable, dated, and uncounted)` |
+| `seam-gaps#2` | `seam-gaps` | GAP | METHODOLOGICAL | biostatistics | EXISTING RECORD: the 29-yr moth series (the one derived floor) | `NOT_STUDIED (one floor stated; per-method floors not)` |
+| `seam-gaps#3` | `seam-gaps` | GAP | EMPIRICAL | macroecology | EXISTING RECORD: the census supplement (endpoint partition) | `UNKNOWN_ATM (endpoints measured; series unassembled)` |
+| `seam-gaps#4` | `seam-gaps` | GAP | INSTRUMENTAL | pollination ecology | EXISTING RECORD: the 3-crop / 3-country function dataset | `NOT_STUDIED (the field's own review says so)` |
+| `seam-gaps#5` | `seam-gaps` | DECISION | DECISION | anyone with both series downloaded and a | access — this environment's egress refuses both | `no slot (DECISION)` |
+| `seam-gaps#6` | `seam-gaps` | DECISION | DECISION | the historical-climatology groups already | the archives — the field's own stated limit is that | `no slot (DECISION)` |
 | `sim-span#1` | `sim-span` | GAP | Empirical | Sleep science | Actigraphy data | `NOT_STUDIED` |
 | `sim-span#2` | `sim-span` | GAP | Empirical | Sleep science | Multi‑night actigraphy datasets | `NOT_STUDIED` |
 | `sim-span#3` | `sim-span` | GAP | Methodological | Sleep science | Actigraphy datasets | `UNKNOWN_ATM` |
@@ -284,7 +297,7 @@ sums past the entry count.
 
 | discipline | entries |
 |---|---|
-| science communication | 22 |
+| science communication | 23 |
 | metrology | 19 |
 | research methodology | 19 |
 | policy | 18 |
@@ -314,13 +327,13 @@ sums past the entry count.
 | computational modeling | 7 |
 | moral psychology | 7 |
 | ai | 6 |
+| climatology | 6 |
 | computational geometry | 6 |
 | epidemiology | 6 |
 | geomorphology | 6 |
 | ml | 6 |
 | mycology | 6 |
 | systems engineering | 6 |
-| climatology | 5 |
 | fractal analysis | 5 |
 | numerical methods | 5 |
 | pharmacology | 5 |
@@ -329,6 +342,8 @@ sums past the entry count.
 | survey methodology | 5 |
 | transportation safety | 5 |
 | aperiodic order | 4 |
+| bibliometrics | 4 |
+| biostatistics | 4 |
 | computational linguistics | 4 |
 | evolutionary biology | 4 |
 | gis | 4 |
@@ -336,8 +351,6 @@ sums past the entry count.
 | physical oceanography | 4 |
 | sediment transport | 4 |
 | ai governance | 3 |
-| bibliometrics | 3 |
-| biostatistics | 3 |
 | civil engineering | 3 |
 | clinical pharmacology | 3 |
 | cognitive science | 3 |
@@ -345,6 +358,7 @@ sums past the entry count.
 | dam safety | 3 |
 | data science | 3 |
 | decision science | 3 |
+| demography | 3 |
 | experimental philosophy | 3 |
 | geotechnical engineering | 3 |
 | monitoring | 3 |
@@ -367,7 +381,6 @@ sums past the entry count.
 | computational social science | 2 |
 | data engineering | 2 |
 | decision‑making | 2 |
-| demography | 2 |
 | ecological modelling | 2 |
 | econometrics | 2 |
 | economics | 2 |
@@ -397,7 +410,7 @@ sums past the entry count.
 | structural engineering | 2 |
 | systems theory | 2 |
 
-262 distinct strings in all, of which **150 appear once**. The field is
+271 distinct strings in all, of which **159 appear once**. The field is
 free text, so it groups weakly; a discipline named two ways is two
 rows here. Only the repeated ones are listed above.
 
@@ -408,8 +421,9 @@ rows here. Only the repeated ones are listed above.
 Grouped on the first declared data source, verbatim and lowercased.
 This is a string grouping and not a taxonomy: `RESEARCH_RENDER.md`
 §3 specifies three source kinds — EXISTING RECORD, YOUR OWN DATA,
-SOMEONE'S HANDS — and **no folder in this tree uses them**, so there
-is nothing declared to group on above the level of the raw line.
+SOMEONE'S HANDS — and **4 of 251 entries declare one**; the rest
+declare sources with no kind, so above the raw line there is
+nothing to group them on.
 
 | first declared source | entries |
 |---|---|
@@ -425,7 +439,7 @@ is nothing declared to group on above the level of the raw line.
 | the scorer's arithmetic | 2 |
 | the textfree.py codebase | 2 |
 
-205 distinct strings in all, of which **194 appear once**. Only the
+211 distinct strings in all, of which **200 appear once**. Only the
 repeated ones are listed above.
 
 ---
@@ -442,17 +456,22 @@ vocabulary is reported as written rather than mapped into it.
 | `under_study` | 17 |
 | `unknown_atm` | 17 |
 | `unknown_atm (site-specific)` | 3 |
+| `no slot (decision)` | 2 |
 | `candidate. held open deliberately. see ../domain-ledger/a2.md.` | 1 |
 | `inference. unmeasured. claude's, not the user's.` | 1 |
 | `instrument exists, series not taken on this question.` | 1 |
 | `least instrumented item here. most likely genuinely unasked.` | 1 |
 | `named, unmeasured.` | 1 |
 | `no. large literature, different question.` | 1 |
+| `not_studied (countable, dated, and uncounted)` | 1 |
+| `not_studied (one floor stated; per-method floors not)` | 1 |
 | `not_studied (stub exists, implementation pending)` | 1 |
+| `not_studied (the field's own review says so)` | 1 |
 | `open` | 1 |
 | `undefined (no agreed threshold)` | 1 |
 | `undefined (the marker exists as a concept, not an implementation)` | 1 |
 | `unknown_atm (egress is an allowlist; the literature is not searched)` | 1 |
+| `unknown_atm (endpoints measured; series unassembled)` | 1 |
 | `unknown_atm (environment-dependent)` | 1 |
 | `unknown_atm (file missing)` | 1 |
 | `unknown_atm (generator missing)` | 1 |
@@ -463,11 +482,12 @@ vocabulary is reported as written rather than mapped into it.
 | `verified (analytic)` | 1 |
 | `yes, and it runs against the assumption.` | 1 |
 
-**234 of 245** entries state one of the six §5 values, alone or with a
-parenthetical. The remaining 11 state something else in the field —
-a sentence, a verdict, or nothing. They are listed as written above
-rather than sorted into the vocabulary, because deciding which of the
-six a sentence means is the inference this reader does not make.
+**238 of 251** entries state one of the six §5 values, alone or with a
+parenthetical. The remaining 13 carry something else — a sentence, a
+verdict, `no slot (DECISION)` (a fork has no knowledge-state field),
+or nothing. They are listed as written above rather than sorted into
+the vocabulary, because deciding which of the six a sentence means
+is the inference this reader does not make.
 
 ---
 

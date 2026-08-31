@@ -396,12 +396,14 @@ BILINGUAL RENDER
   is that per-folder, or does the target language follow the
   terrain the gap sits in?
 
-THE DECISION ENTRY HAS NO WORKED INSTANCE
-  it is specified in §3 and nothing has been rendered into it.
-  Both worked folders carry gaps and neither carries a fork,
-  so the fields are argued and untested. The first real one is
-  the check: if a fork you actually hold does not fit these seven
-  fields, the fields are what move.
+THE DECISION ENTRY HAS TWO INSTANCES, ONE HAND
+  seam-gaps/ entries 5 and 6 are the first forks rendered into
+  it, and the seven fields held without strain. Stated at its
+  weight: both were rendered by the hand that wrote the fields,
+  so the fit is not independent — the shared-bias problem,
+  triad-playground TP_003. A fork arriving from another hand is
+  still the check, and if it does not fit these seven fields,
+  the fields are what move.
 ```
 
 **Settled: NAMING.** The document was called
