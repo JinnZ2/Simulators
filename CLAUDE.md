@@ -46,6 +46,22 @@ its §9 templates are `CLAIM_TABLE.md`, `RESEARCH_GAPS.md` and
 `SCOPE_BOUNDARY.md`. Delivered verbatim, CC0, and explicitly open to being
 changed by whoever picks it up.
 
+`RESEARCH_RENDER.md` is `META-PROTOCOL.md`'s companion at the other density:
+the map is how you find and traverse a gap, this is how you render a found one
+so a stranger with a lab and a semester can start. It fixes the three
+documents (`CLAIM_TABLE.md` faces the delivered thing, `RESEARCH_GAPS.md`
+faces forward, `SCOPE_BOUNDARY.md` faces the field it sits in), the id scheme
+(*three-letter folder prefix + sequence; ids are permanent, never renumber*),
+the three-value claim status set, and the per-gap fields — including
+**`What it opens`**, which the worked instances do not have and which is what
+turns a gap list into something traversable rather than a queue. §5 keeps
+three vocabularies apart that get mixed: claim status, knowledge state, and
+`META-PROTOCOL` §4B reading state. §6 names the schema's own failure mode —
+*the six-shape section will fill itself if you let it; six is a ceiling, not a
+quota, and an empty slot is a finding.* §8 is the order to run it in, with the
+claim table written **last**, because the gaps and the scope boundary are what
+tell you what the folder actually is. Delivered verbatim, CC0.
+
 `AUDIT_OPEN_RESEARCH.md` is the reading taken off the 23-document
 `OPEN_RESEARCH.md` batch on 2026-08-31. Four things repaired — markup restored
 on 19 files with content preservation proved against `HEAD` rather than
@@ -56,6 +72,20 @@ because they are the author's call, the sharpest being that several
 restatements renumber their folder's claims, so one id names two claims
 depending on which file is open. Each of the five names what would settle it,
 so they are gaps with edges rather than complaints.
+
+Its second half runs `RESEARCH_RENDER.md` back over the same batch as a
+checker, which is what the schema is for. The six-shape section fills all six
+slots in **18 of 19 folders** and names §6's `DROPPED`/`INFLUENCE` test in
+**none**, which is the padding signature that section predicts. The padded
+slot is one slot and it is the same one every time — *USER GUIDE —
+Non-Specialist Translation* is the last gap in **15 of 16** folders and
+carries the reaction-shaped falsifier §3 quotes by name, *"readers find the
+guide unhelpful"*, **16 times**. `What it opens` appears **0 times in 182 gap
+entries**, inherited from the worked instances rather than introduced. The
+vocabularies are cleaner than §5's self-assessment predicted. And the second
+worked instance the schema names turned out to be
+`divergence-playground/a.md` — the full three documents under a placeholder
+filename, missed by the earlier restoration, now renamed and restored.
 
 `AUDIT_CONTRACT.md` governs how work is reported across this ecosystem:
 structure first, gap analysis as deliverable, a score without its support
