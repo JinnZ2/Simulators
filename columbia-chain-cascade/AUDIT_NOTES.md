@@ -1,12 +1,19 @@
 # AUDIT_NOTES — the kill list under audit, and the cold-start test
 
-`CCA_001..CCA_009`. All audit content is here and in `kill_audit.py` /
+`CCA_001..CCA_014`. All audit content is here and in `kill_audit.py` /
 `selftest_kill.py`; the delivered package is edited by nothing. The
 package arrived with its own kill list, sent as **claims under test**
 with the instruction *"a kill Fable overturns is a better outcome than
-a kill it confirms."* All three hold; none is overturned. Two further
-findings the landing turned up are recorded, and the cold-start test is
-run over the fifteen gaps.
+a kill it confirms."* All three hold; none is overturned — but the
+second pass **sharpens** each at its root rather than ratifying it
+(`CCA_011`, `CCA_012`), which is what the sender asked for. The audit
+runs on two axes: **arithmetic** (the three kills, `CCA_001..003`) and
+**cold-start** (can a stranger start from this). On the cold-start axis
+the sender corrected Q1 — *every source tiered and routed, not "is it
+public"* — and under that corrected criterion **all 15 gaps carry the
+same open item** (`CCA_010`): 0 of 76 data sources are tiered. Two
+findings the landing turned up (`CCA_005`, `CCA_006`) and the three new
+package cards (`CCA_014`) complete it.
 
 Nothing here runs HEC-RAS or touches real terrain. The spec's actual
 subject stays untested (`CCC_008`); this is what a text-only
@@ -28,6 +35,11 @@ claim, never the delivered package.
 | `CCA_007` | The cold-start test discriminates: all fifteen gaps name a stranger-evaluable falsifier and a deliverable interface, while the flags cluster on public-data access (Q1) and one-semester scope (Q4). | SUPPORTED |
 | `CCA_008` | The gap file carries one bare `if published` pre-closure (Gap 6), the shape the cover note flags; the sender's TIER + ROUTES + IF REFUSED replacement applies. | SUPPORTED |
 | `CCA_009` | Nothing here bears on any hazard field, breach, or exposure — the spec's subject — and no claim rests on a hydraulic result or a literature fact. | UNVERIFIED |
+| `CCA_010` | The corrected cold-start Q1 (every source tiered, every non-open source routed) fails for **all 15 gaps**: 0 of 76 sources carry a tier or a route, and the tier discipline START_HERE declares is applied to no source bullet. This supersedes the first pass's Q1. | SUPPORTED |
+| `CCA_011` | KILL 3 sharpened at its root: the six tribal rows match `DEEP_RESEARCH.md` §6.1, and the same doc pushed owner-from-memory (§3/§6.2, "overly broad"); the code declined it for owners and took it for tribal — the asymmetry winning where no external constraint held it. | SUPPORTED |
+| `CCA_012` | KILL 1 and KILL 2 are one contiguous prose zone in `contributing_inflow.render()`, and the `urban_sensitivity` docstring states the sum reading correctly — so the drift is confined to the rendered narrative, not the arithmetic and not even the docstring. | SUPPORTED |
+| `CCA_013` | The two GAP 14 provenance flags (Padhy 2026, Piao 2024) are the model of the citation discipline; a scan finds no other unflagged dead reference; GAP 15 hedges per-block where GAP 14 hedges per-citation. | SUPPORTED |
+| `CCA_014` | The three cards land (`START_HERE.md`, `GAP_14_mining_hydrology.md`, `GAP_15_bridge_impoundment.md`); a declared [CHOICE] keeps them as cards 14/15 beside the byte-identical delivered 13-gap file. | SUPPORTED |
 
 ---
 
@@ -205,3 +217,112 @@ delivered text.
 **Falsifier:** the spec run with the engine and the data. That is the
 project; this is the reading a text-only environment can give of its
 kill list.
+
+## CCA_010 — the corrected cold-start Q1 fails for all fifteen gaps
+
+The first pass scored Q1 as *"startable on public data alone"*. The
+sender's corrected Q1 rules that question out: *"every source tiered,
+every non-open source names ≥1 route; an untiered source is the item,
+NOT 'is it public'."* Rescored mechanically over the data-source bullet
+lists: **76 sources across the 15 gaps, 0 carrying a tier or a route.**
+The tier vocabulary (OPEN / REQUESTABLE / GATED / UNKNOWN) is declared
+in `START_HERE.md`'s table and attached to no source bullet in any gap
+— the two new cards included. The only tier-shaped marks on a source
+are the two bare `if published` pre-closures (Gap 6 in the delivered
+file; the rim-stability line in the GAP 14 card), and both pre-close a
+route by parenthesis rather than tiering it. So on the data-path axis
+every gap carries the same open item, the remedy is uniform and cheap
+(tier each source; for every non-open one, name a route), and this
+supersedes the first pass's Q1. `tier_scan()` computes it; the detector
+is null-tested both ways (it fires on a tiered+routed line, stays
+silent on an untiered one).
+
+**Falsifier:** any gap whose sources are all tiered-or-routed — which
+would be the first, and is the state the remedy produces. Pinned at 0.
+
+## CCA_011 — KILL 3 sharpened at its root: the deep-research prose
+
+The six tribal rows in `eap_coverage_v2.TRIBAL_JURISDICTION` match
+`DEEP_RESEARCH.md` §6.1's entry (*"Add: a tribal_jurisdiction() function
+… Colville Reservation (upstream of Grand Coulee), Spokane (near Wells),
+Yakama (near Priest Rapids), Warm Springs (near The Dalles), Umatilla
+(near McNary)"*) line for line, plus Nez Perce which §6.1's own list
+also names. And the **same document** argues, in §3 and §6.2, for adding
+owner assignments from memory — *"Grand Coulee → USBR (public,
+uncontroversial) … These are not 'invented from memory' … The current
+refusal is overly broad."* The code declined that push for owners (every
+owner `UNASSIGNED`, and the delivered selftest walks the AST to assert
+it) and took it for tribal (no check, no source, no knowledge state,
+unused in the bound). The asymmetry KILL 3 names is the translation
+layer winning exactly where no external constraint held it — the
+sharpest instance of the provenance thesis the package states about
+itself (*"defects cluster in the prose and comments, not the physics"*).
+This sharpens KILL 3 rather than overturning it, and it corrects the
+picture: the from-memory tribal data is not a stray, it is the
+deep-research doc's recommendation reaching the code where the AST check
+did not guard.
+
+**Falsifier:** the tribal rows not matching §6.1, or the deep-research
+doc not pushing owner-from-memory. Both are pinned against the delivered
+text.
+
+## CCA_012 — KILL 1 and KILL 2 are one prose zone; the docstring is right
+
+KILL 1 (the `Wait —` self-correction trace) and KILL 2 (the
+`wave < pool_effective < crest` max-reading formula) are not two
+independent items: they are one contiguous passage in
+`contributing_inflow.render()` (the urban_increment 0.3 example through
+the "decisive when" formula). And the code's own docstring for
+`urban_sensitivity` states the coupled/sum reading correctly — *"makes
+coupled breach where independent does not"*. So the drift is confined to
+the **rendered narrative**: not the arithmetic (the sweep and null tests
+use the functions, not the render), and not even the docstrings. *Trust
+the code over the comment* holds and sharpens — here the comment is
+right too, and only the story told about the numbers drifted back to the
+independent-node default. This is the cleanest confirmation of the
+provenance thesis: the least-constrained artifact (rendered prose)
+carries the drift, the constrained artifacts (arithmetic, docstrings)
+do not.
+
+**Falsifier:** the two kills sitting in different functions, or the
+docstring carrying the max reading. Both are pinned.
+
+## CCA_013 — the citation axis: no unflagged dead reference
+
+The two GAP 14 provenance flags — *"Padhy et al. 2026"* and *"Piao et
+al. 2024"*, both marked *"could not be confirmed"* with the confirmed
+Knothe anchor (Zhang 2022) kept and the unconfirmed pairing set aside —
+are the model of the discipline the sender points to (*"see the two
+UNVERIFIED-PROVENANCE flags in GAP 14"*). A scan of the 15 gaps finds no
+other citation asserted without a hedge that a stranger would chase into
+a dead reference. GAP 15 hedges per-block (*"located by search, not
+asserted"*) where GAP 14 hedges per-citation; the per-citation form is
+the stronger one, because it names which reference is unconfirmed rather
+than casting doubt on the whole block, and GAP 15 would carry it better.
+No dead citation is left unmarked in either card.
+
+**Falsifier:** a citation asserted flat that a search cannot resolve —
+which the scan did not find. The two GAP 14 flags are the discipline
+working, not a defect.
+
+## CCA_014 — the three cards land; the assembly is a declared choice
+
+`START_HERE.md`, `GAP_14_mining_hydrology.md`, and
+`GAP_15_bridge_impoundment.md` land verbatim. The GAP 15 card is a
+revision of the earlier bridge material — it reframes the NVE note as an
+INDEX-TERM NOTE (a retrieval barrier, tier OPEN, the source in English)
+and carries two sign caveats, neither present in the earlier
+`bridge-impoundment/SOURCE_DROP_V2.md`. The sender's instruction *"slot
+GAP 14 / 15 into UNDERGRADUATE_RESEARCH_GAPS.md as entries 14 and 15"* is
+met by a declared **[CHOICE]**: the two gaps land as standalone cards
+numbered 14 and 15 — their own headers read *"Draft entry for
+UNDERGRADUATE_RESEARCH_GAPS.md"*, and both already have full folders
+(`mining-increment/`, `bridge-impoundment/`) — while the delivered
+13-gap file is kept **byte-identical**, which the repo's version-audit /
+self-scan discipline relies on. `START_HERE.md`'s reading order binds
+all 15. Physically appending the two entries into the delivered file is
+one instruction away if the sender prefers it over the byte-identical
+guarantee.
+
+**Falsifier:** the delivered 13-gap file differing from its committed
+form — the selftest asserts `git diff --quiet` on it.
