@@ -276,6 +276,35 @@ Its `DP_002` is the claim §2 quotes as the model of a self-indicting opening �
 *the XOR is not a cryptographic seal* — so the schema's own example was, until
 this commit, inside a file named `a.md`.
 
+### `OR_015` — the placeholder name is a pattern, not an incident
+
+`OR_014` found one file named `a.md` and treated it as a one-off. A survey
+run for the `OPEN_QUESTIONS.md` rename found a second:
+`emergence-stability-simulator/a.md`, 491 lines, the same three documents in
+the same order, 15 `EMS_` claims, and the same destroyed markup — missed by
+`OR_001` for the same reason and by `OR_014` because that pass looked for
+the specific file `RESEARCH_RENDER.md` §0 named rather than for the shape.
+
+Renamed to `emergence-stability-simulator/OPEN_RESEARCH.md` and restored,
+content preservation proved against `HEAD`. Nothing referenced the old path.
+
+The finding is the detector, not the file. Two passes globbed
+`*/OPEN_RESEARCH.md` and two passes missed everything not called that, which
+is what `tools/check_gate_drift.py` already refuses to do one level over —
+it matches copies of the gate on **content**, two markers per file, because
+a renamed copy is exactly the case a filename glob cannot see. The same rule
+applies here: the batch is identifiable by its own structure, not by where
+it was filed.
+
+That scan was then run — every markdown file in the tree carrying all three
+document headings, whatever its name — and it returns four files, all of
+them expected: `RESEARCH_RENDER.md` and `META-PROTOCOL.md`, which specify
+the three documents, `CLAUDE.md`, which indexes them, and
+`columbia-chain-cascade/README.md`, which points at its own gaps file. No
+third misfiled instance exists today. What is missing is that the check is
+not standing anywhere: it was run by hand twice, after two misses, and
+nothing runs it on the next drop.
+
 ### One tension worth naming: `OR_002` against §2's "never renumber"
 
 §2 states *ids are permanent. A superseded claim keeps its id and changes its
