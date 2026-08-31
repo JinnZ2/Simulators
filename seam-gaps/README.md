@@ -63,4 +63,16 @@ adjudicated), and the SILENT re-read of the radar null is conditional
 arithmetic on two carried numbers. `verify_sources.py` computes all of
 it.
 
+## Held sibling material
+
+A marker file from the same session sits at
+`notes/markers/HELD_2026_08_31.md` — five held items (M-A..M-E) plus
+draft G-07/G-08, deliberately NOT rendered, each with its own hold
+reason. It cites "G-01's detection floor", which in this render is
+entry 2 (G-02) — the first live evidence bearing on the blocks-are-gaps
+[CHOICE] above; the ids here yield to the author's list per that
+choice, and `notes/check_markers.py` records both readings without
+picking. Nothing from the marker file enters this folder or
+`GAP_INDEX.md` until it is rendered.
+
 CC0.

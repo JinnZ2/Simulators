@@ -5240,6 +5240,40 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   paragraph on — which is what `check_d2.py` did on its first run too.
   Three checkers in this folder, three first runs, three errors in the
   checker's own record, none found by reading. 28 selftest checks.
+  **`notes/markers/`** is the fourth entry kind — material developed past
+  a one-line note and deliberately NOT rendered, stored so it survives
+  independent of any conversation memory. `HELD_2026_08_31.md` is
+  delivered verbatim in two halves (the structured marker file, then the
+  raw session notes it was organised from, seam at "FEDERAL, SYSTEMATIC,
+  DAILY"): five held items M-A..M-E — the LIABILITY-DISPLACED VARIABLE
+  mechanism over a four-archive 1877-1890 table, the star-route fine
+  count as a locally-calibrated threshold-exceedance record, the absence
+  set as a readable document, homestead proving-up files as an unread
+  ground record, the postal/express charter contrast — plus a drafted
+  G-08 and a named G-07, both "HELD, not filed", with the standing
+  instruction that when rendered, the mechanism (M-A) goes first with
+  the instances under it. `check_markers.py` returns six structural
+  readings and adjudicates none of the material: the seam located; the
+  two read-alongside references resolved by content and by artifact
+  rather than by filename — `WORK_ORDER_FABLE_02_GAPS.md` is
+  `seam-gaps/WORK_ORDER.md` under the repo's intake name, and
+  `WORK_ORDER_FABLE.md` never landed as a file while all four of its
+  tasks' artifacts exist on this branch, the marker file's own stated
+  purpose demonstrated on its sibling; the G-numbering question — the
+  file cites "G-01's detection floor" where the landed render's
+  detection floor is entry 2, G-02 — held as two readings with no pick,
+  the first live evidence on `seam-gaps/`' blocks-are-gaps [CHOICE],
+  whose README already says the ids yield to the author's list; the two
+  hold preconditions that state arithmetic evaluated from the file's own
+  text (M-A: 4 table rows against "past four rows"; M-C: 1 program with
+  a stated observed set against "N>1" — both holds STAND by their own
+  numbers, with the release branch shown reachable); G-07/G-08 asserted
+  absent from `GAP_INDEX.md`, held meaning held; and cross-references by
+  path existence only, never by grep, since a text search would count
+  the marker file and the checker itself (`UNI_010`'s loop, `QA_007`'s
+  sibling route). 32 selftest checks, including that the marker file's
+  hash is unchanged across a full run — the checker never edits the
+  entry it checks.
 - `alignment-under-coupling/` — A marker under exploration delivered at
   confidence `~0.40`, plus its first run's results, plus all four sim
   generators — landed in that order, which is the interesting part.
