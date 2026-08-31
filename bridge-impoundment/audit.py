@@ -60,7 +60,7 @@ def cross_refs():
                  gap14))
 
     absent = []
-    for basename in ("UNDERGRADUATE_RESEARCH_GAPS.md",
+    for basename in ("OPEN_QUESTIONS.md",
                      "SCOPE_BOUNDARY.md"):
         found = False
         for dirpath, dirnames, filenames in os.walk(ROOT):

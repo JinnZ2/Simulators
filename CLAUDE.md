@@ -8219,7 +8219,7 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   proved over 19,200 synthetic combinations, no real structure named),
   `contributing_inflow.py`, `eap_coverage_v2.py` (governance + tribal
   jurisdiction), the `_v2` audit/selftest/claim-table
-  (`CCC_001..CCC_018`), `UNDERGRADUATE_RESEARCH_GAPS.md` (13 startable
+  (`CCC_001..CCC_018`), `OPEN_QUESTIONS.md` (13 startable
   gaps) and `DEEP_RESEARCH.md`. It arrived with its own **kill list**,
   sent as *claims under test* — *"a kill Fable overturns is a better
   outcome than one it confirms"* — and `kill_audit.py` adjudicates the
@@ -8635,7 +8635,7 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   fail, release — the dam-break problem wearing a bridge's name,
   falling between transportation engineering and dam safety.
   `SOURCE_DROP.md` verbatim; at landing, the register it drafts for
-  (`UNDERGRADUATE_RESEARCH_GAPS.md`) and both coupling targets (Gaps 2
+  (`OPEN_QUESTIONS.md`) and both coupling targets (Gaps 2
   and 14) existed nowhere in this tree, while every repo-facing
   reference resolves by existence — `CCC_007`, Module F, the operator
   swap, the node list (`BI_001`; **updated forward the same session
@@ -8825,6 +8825,24 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     surface: seven categories from harsh (`pure_consumer`, the null
     hypothesis) to gentle (`mutualistic_scale`), each with multiple
     ecological pairs and a balanced-view walkthrough.
+  - `gap_index.py` — regenerates `/GAP_INDEX.md`, one row per open
+    question across every folder that renders one. Counts are not
+    written here: run `python3 tools/gap_index.py --selftest` for the
+    checks and `--write` for the file. **Reads by content, not by
+    name** — a folder's open questions live either in
+    `OPEN_QUESTIONS.md` or in the section of that name inside
+    `OPEN_RESEARCH.md`, and in either a field form, a bilingual table
+    form, or `Q<n>` prose, all four of which occur here. That is
+    `OR_015`'s lesson: two earlier passes globbed for a filename and
+    both missed everything not called that. **It infers nothing** —
+    every cell is a declared field or the string `unrecorded`, since a
+    word list deciding what a gap needs is `nonidentity-census` `T1-1`.
+    A document it cannot parse is named in its own section rather than
+    reported as an empty folder, which is the one outcome that would
+    read as agreement with a silence. Its own first guard grepped its
+    source for `def classify` and fired on the line asserting the
+    absence — `IS_007` in this module's selftest, repaired with an AST
+    walk, where a comment does not appear.
 - `search-substitution/` — Three organisms that produce an answer without
   searching for it, priced against the search they do not perform. Physarum
   occupies the whole arena at once and prunes by throughput, so its cost

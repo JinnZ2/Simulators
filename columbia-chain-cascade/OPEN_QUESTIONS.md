@@ -1,4 +1,4 @@
-# UNDERGRADUATE RESEARCH GAPS
+# OPEN QUESTIONS
 
 ## Open questions in the Columbia Chain Cascade spec, organized by discipline
 

@@ -43,7 +43,7 @@ def cross_refs():
     rows.append(("GAP 15, by content (the coupling pair's other half)",
                  bi_drop.startswith("# GAP 15")))
     absent = []
-    for basename in ("UNDERGRADUATE_RESEARCH_GAPS.md",
+    for basename in ("OPEN_QUESTIONS.md",
                      "SCOPE_BOUNDARY.md", "knowledge_state.py",
                      "contributing_inflow.py"):
         found = False

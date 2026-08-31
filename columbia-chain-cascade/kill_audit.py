@@ -259,7 +259,7 @@ def pre_closure_scan():
     (dam-specific seismic vulnerability assessments). Recorded with the
     sender's own replacement shape (TIER + ROUTES + IF REFUSED);
     the delivered file is not edited."""
-    gaps = _read("UNDERGRADUATE_RESEARCH_GAPS.md").splitlines()
+    gaps = _read("OPEN_QUESTIONS.md").splitlines()
     hits = [(i + 1, ln.strip()) for i, ln in enumerate(gaps)
             if "if published" in ln]
     return {"pre_closures": hits, "count": len(hits)}

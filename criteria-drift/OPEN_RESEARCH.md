@@ -90,7 +90,7 @@ The unlogged move simulation shows that prior readings stay present, numeric, in
 
 ---
 
-## UNDERGRADUATE_RESEARCH_GAPS.md
+## OPEN_QUESTIONS.md
 
 Open questions in the criteria‑drift framework, organized by discipline
 

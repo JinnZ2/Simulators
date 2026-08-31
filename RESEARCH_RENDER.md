@@ -388,16 +388,9 @@ original protocol; a target on a count produces padding.
 
 ## 7. UNSETTLED
 
-Three things the instances don't resolve. All three are yours to call.
+Two things the instances don't resolve. Both are yours to call.
 
 ```
-NAMING
-  the files say UNDERGRADUATE_RESEARCH_GAPS
-  the work is described as postgrad-grade
-  these recruit different people.
-  → pick one, or split: same gap, two entry densities,
-    the way META-PROTOCOL and this file split
-
 BILINGUAL RENDER
   both instances are English / 中文, full parallel
   is that per-folder, or does the target language follow the
@@ -410,6 +403,22 @@ THE DECISION ENTRY HAS NO WORKED INSTANCE
   the check: if a fork you actually hold does not fit these seven
   fields, the fields are what move.
 ```
+
+**Settled: NAMING.** The document was called
+`UNDERGRADUATE_RESEARCH_GAPS.md`, the work in it was described as
+postgrad-grade, and the two recruit different people. It is
+**`OPEN_QUESTIONS.md`** everywhere now — the file, the section heading
+inside each folder's `OPEN_RESEARCH.md`, the templates above, and the
+cross-link checkers that look for it by basename. The name is the
+recruitment signal, and the split option was not taken: one name, one
+density, and the entry-density split stays where it already is, between
+META-PROTOCOL and this file.
+
+Two references were left as delivered — `bridge-impoundment/SOURCE_DROP.md`
+and `mining-increment/SOURCE_DROP.md` each open *"Draft entry for
+`UNDERGRADUATE_RESEARCH_GAPS.md`"*. Those are verbatim drops and are not
+edited here, so both now point at a path that does not exist. Recorded
+rather than repaired, and the same call this repo made on `jøkullaup`.
 
 ---
 

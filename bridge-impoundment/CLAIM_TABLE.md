@@ -9,7 +9,7 @@ in any folder.
 
 Resolved by EXISTENCE, not mention (grepping for the strings would
 count this folder's own files — the `QA_007`/`UNI_010` loop):
-`UNDERGRADUATE_RESEARCH_GAPS.md`, `SCOPE_BOUNDARY.md`, Gap 14, Gap 2,
+`OPEN_QUESTIONS.md`, `SCOPE_BOUNDARY.md`, Gap 14, Gap 2,
 and the `sediment-debris-biological-loop` marker exist nowhere in this
 tree, while all four repo-facing references resolve — `CCC_007`,
 Module F, the operator swap, and the Columbia/Snake node list. So the

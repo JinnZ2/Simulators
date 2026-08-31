@@ -29,7 +29,7 @@ The generators were not shipped, so no claim below can be settled by rerunning t
 
 ---
 
-## UNDERGRADUATE_RESEARCH_GAPS.md
+## OPEN_QUESTIONS.md
 
 Open questions in the aperiodic‑order‑sim‑stack framework, organized by discipline
 

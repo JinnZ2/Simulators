@@ -32,7 +32,7 @@ Every claim names what would refute it. A failed check updates the claim, never 
 
 ---
 
-## UNDERGRADUATE_RESEARCH_GAPS.md
+## OPEN_QUESTIONS.md
 
 Open questions in the emergence‑stability‑simulator framework, organized by discipline
 

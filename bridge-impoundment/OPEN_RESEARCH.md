@@ -14,7 +14,7 @@ Every claim names what would refute it. A failed check updates the claim, never 
 
 | id | claim | status |
 |---|---|---|
-| `BI_001` | The entry is for a register this repository does not hold. UNDERGRADUATE_RESEARCH_GAPS.md, SCOPE_BOUNDARY.md, Gap 14, Gap 2, and the sediment-debris-biological-loop marker exist nowhere in this tree, while all four repo-facing references resolve—CCC_007, Module F, the operator swap, and the Columbia/Snake node list. The deliverable itself (bridge_impoundment.py) exists as the scaffold, not the study. | SUPPORTED |
+| `BI_001` | The entry is for a register this repository does not hold. OPEN_QUESTIONS.md, SCOPE_BOUNDARY.md, Gap 14, Gap 2, and the sediment-debris-biological-loop marker exist nowhere in this tree, while all four repo-facing references resolve—CCC_007, Module F, the operator swap, and the Columbia/Snake node list. The deliverable itself (bridge_impoundment.py) exists as the scaffold, not the study. | SUPPORTED |
 | `BI_002` | "Module F already proves" carries two drifts; its substance is right. The showing lives in the sibling (reservoir-chain-coupling), not the truncated Module F (CCC_001). "Proves" overstates—the FIRM layer holds on constructed chains; the real-chain question is open. The sentence's substance—a bridge evaluated only against its own design flood is the single-event evaluation error—survives both corrections. | SUPPORTED |
 | `BI_003` | The sign caveat is enforceable structurally, and is enforced. The drop's sharpest rule—do not import the protective finding into the release scenario—arrives in the prose before any code. Built as structure: no function on the release path takes a shielding or reduction parameter (asserted over signatures), and the successive-bridge finding is representable only as a StandingStructureRecord whose to_initiator() raises. | SUPPORTED |
 | `BI_004` | The initiator interface is checkable at the design layer. A breach initiator and a bridge-release initiator carry identical key sets; a widened dict fails the check (same_interface). Showing comparability on the engine remains the routing run this environment cannot perform. | SUPPORTED |
@@ -32,7 +32,7 @@ Every claim names what would refute it. A failed check updates the claim, never 
 
 ---
 
-## UNDERGRADUATE_RESEARCH_GAPS.md
+## OPEN_QUESTIONS.md
 
 Open questions in the bridge-impoundment framework, organized by discipline
 

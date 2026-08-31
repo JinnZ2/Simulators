@@ -183,7 +183,7 @@ The adjacent sample is also unexercised and is the drop's own out‑of‑domain 
 
 ---
 
-## UNDERGRADUATE_RESEARCH_GAPS.md
+## OPEN_QUESTIONS.md
 
 Open questions in the consensus‑anchor framework, organized by discipline
 
