@@ -126,6 +126,59 @@ def run():
     chk("the clean count is a strict subset (the test discriminates)",
         0 < cs["clean_on_all_five"] < cs["n"])
 
+    # ---- the corrected cold-start, axis 1 (the tier scan)
+    ts = K.tier_scan()
+    chk("the tier scan counts every source across the 15 gaps",
+        ts["sources_total"] == 76)
+    chk("no source in any gap carries a tier or a route",
+        ts["sources_tiered_or_routed"] == 0)
+    chk("two 'if published' pre-closures, one in gaps 1-13 and one in "
+        "the GAP 14 card", len(ts["pre_closures"]) == 2)
+    chk("the tier vocabulary is declared in START_HERE",
+        ts["declared_in_start_here"])
+    # null: the tier detector CAN fire (a scan that never fires is not a
+    # scan) and CAN come back clean
+    chk("the tier detector fires on a tiered+routed line (it can fire)",
+        K._is_tiered("- X (TIER: GATED; route: FOIA to the district)"))
+    chk("and stays silent on an untiered line (it discriminates)",
+        not K._is_tiered("- NLCD impervious surface raster (USGS)"))
+
+    # ---- KILL 3 root: traces to the deep-research prose
+    kp = K.kill_provenance()
+    chk("the six tribal rows match DEEP_RESEARCH section 6.1",
+        kp["tribal_matches_dr_6_1"])
+    chk("the same doc pushes owner-from-memory, calling the refusal "
+        "overly broad", kp["dr_pushes_owner_from_memory"])
+    chk("the code kept the owner refusal", kp["code_kept_owner_refusal"])
+    chk("and took the tribal add", kp["code_took_tribal_add"])
+    chk("KILL 1 and KILL 2 sit in one render() passage",
+        kp["kill1_kill2_one_zone"])
+    chk("the urban_sensitivity docstring states the sum reading "
+        "correctly (the comment is right; only the render drifted)",
+        kp["docstring_states_sum_correctly"])
+
+    # ---- the citation axis
+    cit = K.citation_scan()
+    chk("GAP 14 self-flags its two unconfirmed citations",
+        cit["gap14_flags_two"])
+    chk("GAP 14 keeps the confirmed Knothe anchor",
+        cit["gap14_anchor_kept"])
+    chk("GAP 15 hedges its citation status per-block",
+        cit["gap15_blanket_hedge"])
+    chk("no other unflagged dead reference across the gaps",
+        cit["other_unflagged_dead_refs"] == 0)
+
+    # ---- the three cards landed, delivered 13-gap file byte-identical
+    cp = K.cards_present()
+    chk("START_HERE and both gap cards are present",
+        cp["start_here"] and cp["gap_14_card"] and cp["gap_15_card"])
+    # the delivered file is unchanged from what git has committed
+    r0 = subprocess.run(["git", "-C", HERE, "diff", "--quiet", "--",
+                         "UNDERGRADUATE_RESEARCH_GAPS.md"],
+                        stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    chk("the delivered 13-gap file is not modified in the working tree",
+        r0.returncode == 0)
+
     # ---- the delivered v1 selftest still passes untouched
     r = subprocess.run([sys.executable, os.path.join(HERE,
                         "selftest_ccc.py")],
