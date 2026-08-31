@@ -1,3 +1,10 @@
+**Format example.** [`RESEARCH_RENDER.md`](../RESEARCH_RENDER.md) names this
+folder as one of its two worked instances. Read it for what the three
+documents look like filled in — `CLAIM_TABLE.md`, `RESEARCH_GAPS.md`,
+`SCOPE_BOUNDARY.md`, in that order below. What it says about reader spread
+is the folder's own business and is argued there; what it shows a reader
+looking for the schema is the shape.
+
 ---
 
 ## CLAIM_TABLE.md

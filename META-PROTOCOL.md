@@ -639,3 +639,34 @@ WITH AN AI
 The point of the whole thing is not to arrive somewhere and stop.
 It is that after enough traversal you find you already knew more of
 this terrain than you were told you did.
+
+---
+
+## WHERE THIS SITS IN THE REPOSITORY
+
+Repository wiring, not part of the map.
+
+**Next:** [`RESEARCH_RENDER.md`](RESEARCH_RENDER.md) is how a gap you found
+gets written up so someone else can run it. It fixes the three documents
+this file's section 9 templates become — `CLAIM_TABLE.md`,
+`RESEARCH_GAPS.md`, `SCOPE_BOUNDARY.md` — and the fields each one carries.
+
+Four reference documents sit behind this one. Go to them when a move sends
+you there; each ends by naming the result that would require revising it.
+
+- [`PREAMBLE.md`](PREAMBLE.md) — the physics baseline, and why a conserved
+  quantity is checkable from outside the framing that produced it.
+- [`PROTOCOL.md`](PROTOCOL.md) — the same baseline as a procedure: one
+  external reading first, then ask what has to balance.
+- [`BNRAM_STRICT.md`](BNRAM_STRICT.md) — the checks that run against the
+  referent rather than the prose. Its section IV-A is MOVE 5 made
+  operational; its section III uses the state set from section 5 above.
+- [`PVL.md`](PVL.md) — ask the thing before the record, weigh by
+  persistence rather than volume, mark an opaque source usable and
+  unmapped.
+
+Worked instances of the section 9 templates are in
+[`nonidentity-census/`](nonidentity-census/) and
+[`divergence-playground/`](divergence-playground/). Read them as format
+examples: what the three documents look like filled in, not what to
+conclude.

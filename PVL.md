@@ -113,7 +113,7 @@ absorbed into it as a special case.
 
 ---
 
-**Next:** [`RESEARCH_RENDER.md`](RESEARCH_RENDER.md) is how a gap found here
+**Next:** [`RESEARCH_RENDER.md`](RESEARCH_RENDER.md) is how a gap you found
 gets written up so someone else can run it.
 [`BNRAM_STRICT.md`](BNRAM_STRICT.md) §IV-D is the upstream flagger.
 
