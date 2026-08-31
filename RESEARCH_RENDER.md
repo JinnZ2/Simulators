@@ -160,6 +160,9 @@ CLASS PREFIXES
   METHODOLOGICAL  a procedure nobody has defined
   INSTRUMENTAL    a tool that would have to be built first
   TRANSLATION     a rendering for people outside the field
+  DECISION        a fork where more than one answer is defensible
+                  and the record does not settle which — different
+                  shape, different fields, see below
 
 COUNT
   as many as the folder actually has.
@@ -185,6 +188,72 @@ DATA SOURCES ARE NOT REQUIRED TO BE A CORPUS
   the instances lean on OpenAlex, USGS, NBI. Fine where they apply.
   A field, a machine, a season of your own records is a data source
   and often the only one that exists for that terrain.
+```
+
+### The DECISION entry
+
+A gap is a question nobody has answered. A **decision** is a fork where
+more than one answer is defensible and the record does not settle which.
+The two need different renderings: a gap wants a method, a decision wants
+a discriminator and a name.
+
+This is what a `MIXED` reading becomes when you write it down —
+META-PROTOCOL §4B, *the reading fits two incompatible explanations
+equally*. `MIXED` is the state of your own measurement; the DECISION entry
+is the artifact it renders into, so someone else can take the fork on.
+
+```markdown
+### N. DECISION — [what is being decided]
+
+**Fork:** the choice, in one sentence, with no option preferred
+
+**Options:**
+  A. [option] — what follows if this one is taken
+  B. [option] — what follows if this one is taken
+  — at least two, each defensible. See the rules below.
+
+**Winning condition:** what a settled fork would look like. Not "we
+picked one" — what would make one option correct rather than chosen.
+
+**Discriminator:** the measurement that separates the options. If none
+exists, say so; a fork with no discriminator is a real state and is
+different from one nobody has measured yet.
+
+**Blocked by:** what stands between here and the discriminator —
+instrument, access, permission, a corpus, a season, a decision upstream
+
+**Who could run it:** the position from which the block is not a block
+
+**If you run it:** which fork closes, and what opens behind it
+```
+
+### Rules for a DECISION entry
+
+```
+EVERY OPTION MUST BE DEFENSIBLE
+  if one option is there to be knocked down, this is not a fork —
+  it is a gap wearing a fork's clothes, and belongs above with a
+  method attached. Writing a losing option in makes the entry read
+  as balanced while carrying a verdict. Cut it, or state the case
+  for it as well as you can state the case against.
+
+BLOCKED BY + WHO COULD RUN IT ARE THE ROUTING
+  these two are what makes a decision entry a handoff instead of a
+  complaint. "Blocked by: no access to the maintenance log" plus
+  "Who could run it: anyone inside the operator" routes the fork to a
+  reader who has the log. Named together they locate the fork
+  precisely; either one alone does not.
+  A block with nobody behind it is worth writing anyway — it says
+  the position does not currently exist, which is its own reading.
+
+A DECISION IS NOT A DEFERRAL
+  the entry exists because both readings survive, not because
+  nobody has looked. If a search would settle it, that is a gap.
+
+NO OPTION IS SCORED HERE
+  the discriminator scores the options, and it has not been run yet.
+  An entry that ranks its own options has answered the fork in the
+  document that exists to hold it open.
 ```
 
 ---
@@ -319,7 +388,7 @@ original protocol; a target on a count produces padding.
 
 ## 7. UNSETTLED
 
-Two things the instances don't resolve. Both are yours to call.
+Three things the instances don't resolve. All three are yours to call.
 
 ```
 NAMING
@@ -333,6 +402,13 @@ BILINGUAL RENDER
   both instances are English / 中文, full parallel
   is that per-folder, or does the target language follow the
   terrain the gap sits in?
+
+THE DECISION ENTRY HAS NO WORKED INSTANCE
+  it is specified in §3 and nothing has been rendered into it.
+  Both worked folders carry gaps and neither carries a fork,
+  so the fields are argued and untested. The first real one is
+  the check: if a fork you actually hold does not fit these seven
+  fields, the fields are what move.
 ```
 
 ---
@@ -357,6 +433,9 @@ BILINGUAL RENDER
 5  for each candidate, write the full gap entry
    if you cannot write a checkable falsifier, it is not yet a gap
    — it is a marker. Say so and leave it as one.
+   if the reason you cannot is that two answers both survive, it is
+   not a marker either. It is a DECISION: write the fork, both
+   options, and the discriminator that would separate them.
 
 6  run the six shapes against the folder's field
    name DROPPED and INFLUENCE for each

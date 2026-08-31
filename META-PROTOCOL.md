@@ -660,7 +660,8 @@ you there; each ends by naming the result that would require revising it.
   external reading first, then ask what has to balance.
 - [`BNRAM_STRICT.md`](BNRAM_STRICT.md) — the checks that run against the
   referent rather than the prose. Its section IV-A is MOVE 5 made
-  operational; its section III uses the state set from section 5 above.
+  operational; its section III uses the reading states from section 4B
+  and the bearings from section 5.
 - [`PVL.md`](PVL.md) — ask the thing before the record, weigh by
   persistence rather than volume, mark an opaque source usable and
   unmapped.

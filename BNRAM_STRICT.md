@@ -50,7 +50,7 @@ An earlier version of this section classified disagreement with the baseline
 as a condition of the disagreeing system. That was self-sealing: it could not
 come back any way but confirming, and it applied a standard to a reader that
 it did not apply to itself. It is removed rather than patched, because under
-the map topology in [`META-PROTOCOL.md`](META-PROTOCOL.md) §5 there is no
+the map topology in [`META-PROTOCOL.md`](META-PROTOCOL.md) §4B–§5 there is no
 terminal state to assign — every reading has an outgoing edge.
 
 Use that state set here. Applied to this module:
