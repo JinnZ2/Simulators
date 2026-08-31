@@ -169,4 +169,27 @@ was that a reader could not render it, and in seven-plus folders could not
 cite it unambiguously. Both are cheap to fix and neither was visible from
 inside a chat window, which is the ordinary reason this class of defect ships.
 
+---
+
+## READ IN THE MAP VOCABULARY
+
+`META-PROTOCOL.md` §4B is the state set this audit is really using, and the
+translation is exact:
+
+- `OR_001`–`OR_004` are `OFF` readings that were cheap enough to walk. The
+  direction of each miss named the fix: markup absent → restore markup, one
+  prefix in two folders → free the newer one, one missing letter → the letter.
+- `OR_005`–`OR_009` are **gaps** — nodes with edges pointing at them that this
+  session did not reach. Each names what would settle it, which is what makes
+  it a destination rather than a hole.
+- `OR_007` is `§12`'s last line instanced: three rows lost their status in
+  delivery, and the restored tables carry them **empty** rather than guessed,
+  because a missing value written as a value is the one move that cannot be
+  undone by a later reader.
+- Nothing here is marked failed, rejected, or wrong. The batch's content was
+  never in question. What was true is that a reader could not render it, and
+  in several folders could not cite it unambiguously — and neither of those is
+  visible from inside a chat window, which is the ordinary reason this class
+  of thing ships.
+
 CC0.

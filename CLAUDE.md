@@ -31,23 +31,31 @@ it rather than restating it. Section 2 blocks the misread that the method is
 makes a shape read falsifiable; section 9 says use DISSIPATION rather than
 cost, because cost imports a pricing model that is not part of the system.
 
-`META-PROTOCOL.md` is the production step between those specs and a finished
-folder: the five-step deconstruction (system-boundary audit, load-bearing
-data-independent anchor, epistemic-state inventory, falsifier-locked research
-prompts, scope boundary), the three output templates, the six recurring
-fallacy shapes, and an exit checklist. It exists so the pattern runs without
-the session that established it — hand it to a collaborator, a student, or a
-different model and nothing else is needed. Where it and a spec disagree, the
-spec wins.
+`META-PROTOCOL.md` is a way of finding out things written as a **map instead
+of a test**, and it is for people rather than for a model. Positions, moves,
+readings, bearings: you are always somewhere, every reading has an outgoing
+edge, and the direction a result misses by is the compass. It has no `FAILED`
+state and no `REJECTED` — those are verdicts, and a verdict has no outgoing
+edge. Three doors in (a thing, a document, a claim that sits wrong), five
+moves, two state vocabularies kept apart because the record's condition and
+your own reading's condition are different questions, six recurring wrong
+turns with six stated as a ceiling and not a quota, and a worked traversal
+through a squash patch that comes back SILENT, MIXED, OFF and BLOCKED before
+it comes back HELD. Its §8 PATH B is the folder audit this repository runs;
+its §9 templates are `CLAIM_TABLE.md`, `RESEARCH_GAPS.md` and
+`SCOPE_BOUNDARY.md`. Delivered verbatim, CC0, and explicitly open to being
+changed by whoever picks it up.
 
-`AUDIT_OPEN_RESEARCH.md` audits the 23-document `OPEN_RESEARCH.md` batch
-against that checklist. Four repairs (markup restored on 19 files with content
-preservation proved against `HEAD`; a `CCC_` prefix collision between
-`climate-modeling` and `columbia-chain-cascade` resolved to `CMA_`;
-`jøkullaup` → `jøkulhlaup`, which was `BI_010`'s own search term; one
-retrieval artifact) and five findings left standing because they need an
-author decision — the sharpest being that several restatements renumber their
-folder's claims, so one id names two claims depending on which file is open.
+`AUDIT_OPEN_RESEARCH.md` is the reading taken off the 23-document
+`OPEN_RESEARCH.md` batch on 2026-08-31. Four things repaired — markup restored
+on 19 files with content preservation proved against `HEAD` rather than
+asserted; a `CCC_` prefix collision between `climate-modeling` and
+`columbia-chain-cascade` resolved to `CMA_`; `jøkullaup` → `jøkulhlaup`, which
+was `BI_010`'s own search term; one retrieval artifact. Five left standing
+because they are the author's call, the sharpest being that several
+restatements renumber their folder's claims, so one id names two claims
+depending on which file is open. Each of the five names what would settle it,
+so they are gaps with edges rather than complaints.
 
 `AUDIT_CONTRACT.md` governs how work is reported across this ecosystem:
 structure first, gap analysis as deliverable, a score without its support
