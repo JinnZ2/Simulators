@@ -1,0 +1,42 @@
+COINAGE LOG -- STRUCTURAL CHECK
+(the log is edited by nothing here; it records naming gaps and
+ tests whether the absence of a word is itself a finding --
+ this module computes structure and adjudicates no coinage)
+
+1  ENTRY WELL-FORMED (referent + source + NO adopted name)
+   has_entry_heading                  True
+   name_adopted_none                  True
+   referent_stated                    True
+   aggregate_is_the_habitat           True
+   no_intent_no_ledger_no_channel     True
+   source_kavik                       True
+   left_unnamed_declared              True
+
+2  EACH REJECTED TERM CARRIES A REASON (5 terms)
+   cooperation    reasoned: True
+   symbiosis      reasoned: True
+   mutualism      reasoned: True
+   aggregation    reasoned: True
+   facilitation   reasoned: True
+   all reasoned: True
+
+3  CANDIDATES RAISED, NONE ADOPTED
+   load-sharing   raised: True
+   phase-locking  raised: True
+   adopted values: ['NONE']; none adopted: True
+
+4  CROSS-CHECKS NAMED
+   woodpecker_second_trophic_level        True
+   woodpecker_cheap_to_verify             True
+   pattern_class_not_intent               True
+   absence_set_on_behaviour               True
+   absence_set_links_uninstrumented       True
+
+5  NULL DISCIPLINE STATED, NOT HIDDEN
+   entries: 1; CONSTANT_FIRES named: True; declines not yet
+   shown: True; missing-vs-unsearched still open: True;
+   provenance separated: True
+
+This module computes; it does not conclude, and it adjudicates
+no coinage. Whether the word is missing or merely unsearched is
+the log's open question -- see the STATE section.

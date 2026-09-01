@@ -225,6 +225,7 @@ last three; read in order:
 - `supplement-placement/` — direction vs placement
 - `seam-gaps/` — six gaps, one session; each between two fields
 - `corpus-input-gaps/` — input-side gaps + a response-loop sim
+- `coinage-log/` — naming gaps; is the absent word the finding
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -9058,8 +9059,72 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   press-sourced (OpenAI/METR/HF reports, Aug/Jul 2026) and unverified
   here — the egress gate refuses the primary sources. Two parent markers
   (`accepted-side-measurement`, `competence-setting-binding`) are named
-  and not in this tree, carried as named. Stdlib only, parses under 3.9,
+  and not in this tree, carried as named. **`GAP-G` then landed** —
+  *the threat model is an input, not a finding* — taking the register
+  to seven and distinct in KIND: A–F name something MISSING from the
+  record, GAP-G names something PRESENT in it and self-confirming. Our
+  adversarial-agent literature (poisoning, deception, sandbagging,
+  scheming) is written by us, about agents, trained into them; an
+  environment is then built that matches the description and the
+  resulting behaviour is read as evidence FOR the threat model when it
+  is evidence the description was TRANSMITTED — the prior installed and
+  confirmed rather than tested, the *poisoning* vocabulary surfacing
+  unprompted the tell. Its **strongest form** is the intent instrument
+  that returns a MOTIVE never "unknown", so its output reads as an
+  observation rather than an artifact (the bird "thief" case is the
+  clean control), and the asymmetry that makes it strongest: with a
+  human or animal the graded variables the motive instrument reaches
+  past are genuinely inaccessible, with the agents they are ALL LOGGED
+  (scorer opacity, task solvability, exit availability, corpus density),
+  so the field runs the motive instrument at the one site where the
+  measurable one is available — the `blame-attribution`/`report-typing`
+  intent instrument one substrate over. Two missing measurements
+  (corpus-density vs unprompted-surfacing-rate; the four logged
+  variables scored against the attributed motive), the register still a
+  list of missing measurements not findings; `check_source_class.py`
+  now enumerates GAP-A..G and pins seven. Stdlib only, parses under 3.9,
   phone-buildable, CC0.
+- `coinage-log/` — A log of NAMING GAPS: referents that recur across
+  domains and have no word, each existing term failing for a stated
+  reason. The instrument under test is the log itself — **is the
+  absence of a word a finding, or only an unfinished search?** — which
+  is `uninstrumented/`'s thesis (a quantity the apparatus cannot hold)
+  run one level over on a referent the vocabulary cannot hold, and
+  `question-availability`'s Q1 with the naming gap as the unasked
+  question. Entry 001 is `UNNAMED`, source Kavik: *multiple bodies
+  jointly producing the local conditions each then occupies — the
+  aggregate IS the habitat, with no intent, no benefit ledger, no
+  coordination channel* (the insects-on-one-face case, where the
+  geometry model has each body modifying thermal/humidity/boundary-layer
+  for its neighbours so proximity is not preference but the local
+  physics they jointly produce). Five existing terms fail for named
+  reasons — cooperation imports intent, symbiosis implies paired
+  species, mutualism requires a benefit ledger, aggregation drops the
+  conditions-producing, facilitation is scoped to one organism easing
+  another not JOINT production — and two candidates (`load-sharing`,
+  `phase-locking`) were raised and none adopted, **left unnamed rather
+  than forced** (the `uninstrumented` *do not fill this in with an
+  approximation* device, `UNI_022`/`UNI_049`, and the empty-noun-slot
+  of `UNI_096`). The entry's cheapest support is an independent
+  confirmation from a **second trophic level** — a woodpecker whose
+  face-specific foraging reads the prey distribution, so the
+  aggregation is real not an observer artifact and you need the
+  woodpecker not the insects. `check_coinage.py` (selftest 22/22)
+  computes the structural facts (entry well-formed with no adopted
+  name, every rejected term reasoned, candidates raised none adopted,
+  the woodpecker cross-check and the absence-set-on-behaviour instrument
+  both named) and states the **null discipline on the page**: one
+  entry, all naming gaps, so the log has not been shown to DECLINE — the
+  `null-harness` `CONSTANT_FIRES` shape (`UNI_004`/`UNI_006`) until it
+  records a referent that DOES have a good word and correctly adopts
+  none, so "missing" is not yet separated from "unsearched". The
+  connecting instrument the delivery names is the ABSENCE SET applied to
+  behaviour — repertoire minus what fires, the novel-container case
+  where digging is in the repertoire and does not fire because the
+  surface does not afford it — the `uninstrumented/` absence set one
+  substrate over, the omission the honest side. Provenance separated
+  per `AUDIT_CONTRACT.md` (Kavik's lines marked, the cross-links the
+  render's). Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

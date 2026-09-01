@@ -14,10 +14,15 @@ the field itself.
 
 ## The files, in the untradeable order (§6)
 
-- **`GAPS_CORPUS_INPUT.md`** — TASK 1, the register. Six missing
-  measurements (GAP-A..F), none upgraded to a finding, GAP-E's
+- **`GAPS_CORPUS_INPUT.md`** — TASK 1, the register. Seven missing
+  measurements (GAP-A..G), none upgraded to a finding, GAP-E's
   answerable-today measurement surfaced at the top. **Precedes** the
   worked example so the gaps do not read as derived from one incident.
+  GAP-G was added later and is distinct in kind: A–F name something
+  MISSING from the record, GAP-G names something PRESENT in it and
+  self-confirming — the adversarial-agent threat model as a
+  transmitted input read back as a finding, with the intent instrument
+  that returns a MOTIVE never "unknown" as its strongest form.
 - **`LOOP_SELF_CONFIRMING_PRIOR.md`** — TASK 2, the loop in
   prose-independent form. **Precedes** the sim so the sim tests the
   loop rather than encoding it.
