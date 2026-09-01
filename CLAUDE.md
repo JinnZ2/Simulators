@@ -8104,8 +8104,23 @@ underneath).
   module_f token `CCA_005` reports). Check counts printed by
   `selftest_ccc.py` / `selftest_kill.py`; the delivered `selftest_ccc_v2.py`
   carries one delivered failure (`CCC_017`), unrepaired because
-  `module_f.py` is delivered; every module refuses `--selftest`. Fourteen
-  `CCA_*` claims. Stdlib only, parses under 3.9, phone-buildable, CC0.
+  `module_f.py` is delivered; every module refuses `--selftest`.
+  **`gap_completeness.py` then asks whether each entry gives a researcher
+  everything.** **`CCA_015`:** the eight template fields are 15 of 15 and
+  the post-graduate essentials split cleanly — prior-art table, citation
+  status, secondary falsifier, cross-gap coupling, what-would-move-it are
+  carried **only by gaps 14/15**, so what a researcher wants beyond the
+  template is the shape the author's own newest cards already take.
+  **`CCA_016`:** no gap gives a deliverable schema, and gaps 5–9 deliver
+  "referenced by Module A–E" — spec section names, not code — so Q3 was
+  clean on naming and fails on drop-in for five gaps. **`CCA_017`:** a
+  known-answer step is present in 1, 2, 10, 12, 14 and absent from ten.
+  **`CCA_018`:** gap 3 has no consent step before requesting records from
+  six sovereign nations — the ethics layer, cheapest to close — and a bare
+  `consult` pattern would have hidden it, firing on "tribal consultation"
+  as the quantity mapped (the `T1-1` word-list shape inside a completeness
+  check, narrowed to step form and null-tested). Eighteen `CCA_*` claims.
+  Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `reservoir-chain-coupling/` — The antecedent-coupling amplifier
   `columbia-chain-cascade` `CCC_001` flagged as truncated, now delivered
   as a complete initiator-agnostic spec — and unlike that HEC-RAS build

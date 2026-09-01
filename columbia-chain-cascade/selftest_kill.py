@@ -179,6 +179,48 @@ def run():
     chk("the delivered 13-gap file is not modified in the working tree",
         r0.returncode == 0)
 
+    # ---- gap completeness: what a researcher would still lack
+    import gap_completeness as G
+    c = G.census()
+    tmpl = [r for r in c["rows"] if r["template"]]
+    post = [r for r in c["rows"] if not r["template"]]
+    chk("the eight template fields are present in all fifteen gaps",
+        len(tmpl) == 8 and all(r["count"] == 15 for r in tmpl))
+    only_new = [r for r in post
+                if set(r["have"]) and set(r["have"]) <= {14, 15}]
+    chk("five post-grad essentials are carried ONLY by gaps 14 and 15",
+        len(only_new) == 5)
+    chk("no gap gives a deliverable schema",
+        any(r["field"].startswith("deliverable schema") and r["count"] == 0
+            for r in post))
+    chk("no gap carries a consent/consultation STEP (the bare word "
+        "fires on gap 3 as an object of study, and is excluded)",
+        any(r["field"].startswith("consent") and r["count"] == 0
+            for r in post))
+    # null: the bare-word form DOES fire on gap 3 -- so the narrowing is
+    # doing work, not the corpus being empty
+    import re
+    chk("the bare 'consult' word fires on gap 3 (the narrowing is live)",
+        re.search(r"consult", G.entries()[3]) is not None)
+    ka = [r for r in post if r["field"].startswith("known-answer")][0]
+    chk("the known-answer step is present in gaps 1, 2, 10, 12, 14 only",
+        set(ka["have"]) == {1, 2, 10, 12, 14})
+    cons = G.consumers()
+    absent = [r["gap"] for r in cons if not r["code_present"]]
+    chk("gaps 5-9 name Modules A-E, which exist as spec names, not code",
+        {5, 6, 7, 8, 9} <= set(absent))
+    chk("the gaps that name a real module resolve to a file",
+        all(r["code_present"] for r in cons
+            if r["gap"] in (1, 2, 3, 4, 13, 14, 15)))
+    chk("the reading covers every gap with a stated lack and basis",
+        len(G.reading()) == 15
+        and all(r["lack"] and r["basis"] for r in G.reading()))
+    r3 = subprocess.run([sys.executable, os.path.join(HERE,
+                        "gap_completeness.py"), "--selftest"],
+                        stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    chk("gap_completeness.py refuses --selftest",
+        r3.returncode == 2 and b"selftest_kill.py" in r3.stderr)
+
     # ---- the delivered v1 selftest still passes untouched
     r = subprocess.run([sys.executable, os.path.join(HERE,
                         "selftest_ccc.py")],
@@ -208,6 +250,8 @@ def run():
     masked = out
     for wd in EXEMPT:
         masked = re.sub(r"(?i)\b%s\b" % wd, "X" * len(wd), masked)
+    chk("the completeness report carries no screened language",
+        not no_severity.hits(G.render()))
     chk("the report is clean apart from the exemption",
         not no_severity.hits(masked))
     fired = set(w for _n, w, _l in no_severity.hits(out))

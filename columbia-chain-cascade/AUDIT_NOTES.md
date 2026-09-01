@@ -1,6 +1,6 @@
 # AUDIT_NOTES — the kill list under audit, and the cold-start test
 
-`CCA_001..CCA_014`. All audit content is here and in `kill_audit.py` /
+`CCA_001..CCA_018`. All audit content is here and in `kill_audit.py` /
 `selftest_kill.py`; the delivered package is edited by nothing. The
 package arrived with its own kill list, sent as **claims under test**
 with the instruction *"a kill Fable overturns is a better outcome than
@@ -40,6 +40,10 @@ claim, never the delivered package.
 | `CCA_012` | KILL 1 and KILL 2 are one contiguous prose zone in `contributing_inflow.render()`, and the `urban_sensitivity` docstring states the sum reading correctly — so the drift is confined to the rendered narrative, not the arithmetic and not even the docstring. | SUPPORTED |
 | `CCA_013` | The two GAP 14 provenance flags (Padhy 2026, Piao 2024) are the model of the citation discipline; a scan finds no other unflagged dead reference; GAP 15 hedges per-block where GAP 14 hedges per-citation. | SUPPORTED |
 | `CCA_014` | The three cards land (`START_HERE.md`, `GAP_14_mining_hydrology.md`, `GAP_15_bridge_impoundment.md`); a declared [CHOICE] keeps them as cards 14/15 beside the byte-identical delivered 13-gap file. | SUPPORTED |
+| `CCA_015` | The eight template fields are 15 of 15, and the post-graduate essentials split cleanly: prior-art table, citation status, secondary falsifier, cross-gap coupling and what-would-move-it are carried **only by gaps 14 and 15** — gaps 1–13 carry none. What a researcher wants beyond the template is the shape the author's own newest cards already take. | SUPPORTED |
+| `CCA_016` | No gap gives a deliverable schema, and gaps 5–9 deliver "referenced by Module A–E" — spec section names, not code. The cold-start Q3 was clean on *naming* and fails on *drop-in* for five gaps: the deliverable is a filename with nothing in the package to plug into. | SUPPORTED |
+| `CCA_017` | A known-answer step is present in gaps 1, 2, 10, 12 and 14 and absent from the ten others — a calibrated parameter handed over with no positive control, the repo's own no-metric-without-a-known-answer rule unmet at the agenda level. | SUPPORTED |
+| `CCA_018` | Gap 3 (tribal EAP) has no consent or consultation **step** — its method reads "request or locate" records from six sovereign nations — while the repo's field-study entries make collective consent a precondition; the bare word fires on gap 3 only as the quantity being mapped, the word-list miss recorded rather than counted. | SUPPORTED |
 
 ---
 
@@ -326,3 +330,86 @@ guarantee.
 
 **Falsifier:** the delivered 13-gap file differing from its committed
 form — the selftest asserts `git diff --quiet` on it.
+
+## CCA_015 — the post-graduate essentials are what the newest cards already carry
+
+`gap_completeness.census()` runs seventeen patterns over the fifteen
+entries. The eight template fields (gap, knowledge state, question,
+disciplines, sources, method, deliverable, falsifier) are **15 of 15**.
+The nine post-graduate essentials split cleanly: prior-art table
+("what is already quantified — do not re-derive"), citation status /
+provenance flag, secondary falsifier, coupling to other gaps, and
+what-would-move-it per parameter are carried **only by gaps 14 and 15**;
+gaps 1–13 carry none of the five. Uncertainty bounds are asked for in
+1 and 14 only. So the answer to "do the entries give everything a
+researcher would need" is: the template does not, and the author's own
+two newest entries do — the missing fields are not a new list, they are
+the shape GAP 14 and GAP 15 already take. The template grows by
+adopting them, which is the repo's growth rule (add a declared field,
+never widen an existing one).
+
+**Falsifier:** any of the five carried by a 1–13 entry. Pinned at 14/15
+only.
+
+## CCA_016 — a name in the spec is not a drop-in
+
+No gap gives a column list, field list or schema for its deliverable.
+Gaps 5–9 deliver `breach_params.csv`, `seismic_params.csv`,
+`hydro_params.csv`, `cyber_params.yaml`, `compound_matrix.csv`
+"referenced by Module A / B / C / D / E" — and Modules A–E exist as
+section headers in the delivered `SOURCE_DROP.md`, not as code. The
+modules that do exist (`module_f.py`, `contributing_inflow.py`,
+`eap_coverage_v2.py`) are the consumers for gaps 1, 2, 3, 4, 13, 14, 15;
+gaps 10–12 deliver a report or a pipeline with no module by design.
+This refines the cold-start Q3: it was scored clean on *naming an
+interface* and fails on *drop-in* for five of fifteen — a stranger
+finishing gap 5 has a CSV and nothing in the package that reads it.
+The cheapest closure is a stub per module with the column list as its
+docstring, which is also the schema no gap gives.
+
+**Falsifier:** a `module_a.py`..`module_e.py` in the folder, or a
+column list in any of the five entries. `consumers()` resolves against
+the filesystem.
+
+## CCA_017 — the known-answer step is present in five gaps and absent in ten
+
+The repo's standing rule (`tools/known_answer.py`): no metric ships
+without a known-answer run. At the agenda level that means a gap that
+produces a calibrated parameter names something the parameter is run
+against before it is trusted. Present: gap 1 ("validate against known
+storm events"), gap 2 ("post-flood gage records"), gap 10 (the 1948
+reproduction, which is the known answer for the whole spec), gap 12
+(the falsifier — reproduce on a second machine — is its own positive
+control), gap 14 (the Bondevik & Sorteberg pore-pressure case). Absent
+from 3–9, 11, 13, 15; gap 13's "validation report" names the output,
+not a control. Each absent one has a cheap candidate: a published
+Froehlich case for 5, a USGS hazard-map value for 6, a documented
+historical inflow for 7, a FEMA-published exposure count for 11 — none
+named. GAP 15's Fjærland case is a measured analogue, not a check the
+`bridge_impoundment` deliverable is run against, so it is recorded
+absent there too.
+
+**Falsifier:** a positive-control step in any of the ten. The pattern
+is a step form, pinned to exactly {1, 2, 10, 12, 14}.
+
+## CCA_018 — gap 3 has no consent step, and the word-list nearly hid it
+
+Gap 3 asks for EAP coordination agreements from six tribal sovereign
+nations; its method reads *"Request or locate EAP coordination
+agreements for each"*. There is no consultation, consent, or
+relationship step before the request. The repo's own field-study
+entries (`revision-mechanism/`, `transmission-decay/`) make collective
+consent a precondition and call publishing a group's procedure without
+it *"a hazard, not a formality"*; the deep-research doc's §2.3 already
+names the route (the Joint Executive Board with Tribal and First
+Nations representation). This is an omission at the ethics layer, not
+the data layer, and it is the cheapest of the four to close. One
+instrument note: a bare `consult` pattern fires on gap 3, because
+method step 3 maps *"which dams have tribal consultation"* — the
+quantity being studied, not a step taken. The census asks for a step
+form, gap 3 reads absent, and the near-miss is recorded because it is
+the `T1-1` word-list shape arriving inside a completeness check.
+
+**Falsifier:** a consultation or consent step in gap 3's method. The
+step-form pattern is null-tested: the bare word does fire on gap 3, so
+the narrowing is doing the work.

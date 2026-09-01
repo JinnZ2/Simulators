@@ -162,6 +162,25 @@ dead reference is found (`CCA_013`). The three new package cards —
 `START_HERE.md` and the GAP 14 / GAP 15 entries — land verbatim, kept as
 cards 14/15 beside the byte-identical delivered 13-gap file (`CCA_014`).
 
+**Gap completeness — does each entry give a researcher everything?**
+`gap_completeness.py` runs a seventeen-pattern census over the fifteen
+entries and a declared per-gap reading. The eight template fields are
+15 of 15; the post-graduate essentials split cleanly — prior-art table,
+citation status, secondary falsifier, cross-gap coupling and
+what-would-move-it are carried **only by gaps 14 and 15**, so what a
+researcher wants beyond the template is the shape the author's own
+newest cards already take (`CCA_015`). **No gap gives a deliverable
+schema**, and gaps 5–9 deliver "referenced by Module A–E" — spec
+section names, not code — so the cold-start Q3 was clean on naming and
+fails on drop-in for five gaps (`CCA_016`). A known-answer step is
+present in gaps 1, 2, 10, 12, 14 and absent from the ten others
+(`CCA_017`). And gap 3 (tribal EAP) has no consent or consultation
+step before "request or locate" records from six sovereign nations —
+an omission at the ethics layer, the cheapest to close, and one a bare
+word-list would have hidden because "tribal consultation" appears
+there as the quantity being mapped (`CCA_018`).
+
+    python3 columbia-chain-cascade/gap_completeness.py  # the completeness census
     python3 columbia-chain-cascade/kill_audit.py     # the kill audit
     python3 columbia-chain-cascade/selftest_kill.py  # its checks
     python3 columbia-chain-cascade/module_f.py       # the amplifier arithmetic
@@ -189,8 +208,9 @@ cards 14/15 beside the byte-identical delivered 13-gap file (`CCA_014`).
 | `GAP_15_bridge_impoundment.md` | delivered — gap 15 card (folder: `bridge-impoundment/`) |
 | `DEEP_RESEARCH.md` | delivered — the roadmap (and the root of the KILL 3 tribal data) |
 | `kill_audit.py` | the kill list under audit + the two-axis cold-start test |
+| `gap_completeness.py` | per-gap census + reading: what a researcher would still lack |
 | `selftest_kill.py` | the audit's checks; run it, it prints its own count |
-| `AUDIT_NOTES.md` | `CCA_001..CCA_014` with REFUTATION_PROTOCOL |
+| `AUDIT_NOTES.md` | `CCA_001..CCA_018` with REFUTATION_PROTOCOL |
 | `samples/` | pinned runs |
 
 Every module refuses `--selftest` rather than exiting 0 on an invocation
