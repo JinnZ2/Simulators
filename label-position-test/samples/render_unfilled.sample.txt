@@ -1,0 +1,21 @@
+label_position_test -- counts from the CSV, nothing else
+
+[CHOICE 1] H2 chance = sum_a p_arb(a) * p_ben(a) within the label_source class
+[CHOICE 2] overlap rate reported strict (y) and half (y + 0.5 partial); neither picked
+[CHOICE 3] leak baseline = majority-class share of actor_class
+
+ROWS: none. No data ships with this instrument.
+  The seed case (METR / Redwood, 2026-08-26) is not reachable from
+  the environment this was built in; the within-document control
+  has nothing to run on. Every cell below is empty for that reason.
+
+OUTPUT  term | n | V_position | V_move | V_outcome | V_actor | overlap_rate | leak_rate
+  (no rows)
+
+LEAK TEST (P2)  tuple space 72 cells over move, wall_author, cost_bearer, wall_purpose_visible_to_actor
+  at the order's N floor of 30 the space has more cells than rows,
+  so the in-sample reading approaches 1.0 by construction and only
+  the leave-one-out reading is informative.
+
+STATES  None = not computable from these rows (undefined divisor or
+  empty denominator); never rendered as 0. No interior claims.

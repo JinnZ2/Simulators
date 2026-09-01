@@ -6478,6 +6478,51 @@ underneath).
   exemption. Check count printed by `selftest_hf.py`; the instrument
   refuses `--selftest`. Stdlib only, parses under 3.9, phone-buildable,
   CC0.
+- `label-position-test/` — A work order delivered verbatim
+  (`WORK_ORDER.md`), pre-registered before any data: do valence labels
+  on a probing move (*cheat* | *innovation*) track the MOVE, or the
+  actor's POSITION and the OUTCOME after the fact (H1), and is the party
+  defining the term the party gaining from it above chance (H2)? Built
+  as **one stdlib file** computing what the order's procedure asks for
+  from a flat CSV in its schema — Cramér's V by hand for `label_valence
+  ×` position / move / outcome / actor, the P2 leak test, P5 overlap
+  against chance, the seed case's within-document control, Fleiss'
+  kappa for P3 relabelling — with the order's own FALSIFICATION rule
+  applied to the numbers and `undetermined` printed wherever a number
+  it needs is None. **No data ships**: the seed report is not reachable
+  from here (allowlist egress), the control has nothing to run on and
+  the unfilled render says so; rows under `samples/` are constructed,
+  carry a `constructed://` scheme, and are counted apart from public
+  rows. **`LPT_002`:** the order's OUTPUT row (one per term) cannot
+  carry its own cross-tab wherever a term has one valence — *cheat* is
+  always negative, so every V on that row is undefined, printed `--`
+  rather than 0, and the cross-tabs live on the pooled row.
+  **`LPT_003`:** H2's chance is undefined in the order; under the
+  independence reading built here (`Σ_a p_arb(a)·p_ben(a)` within the
+  source class, `[CHOICE 1]`) a class with one arbiter and one
+  beneficiary throughout has chance 1.0 and H2 is FALSE for it by
+  construction, so H2 is testable only where the arbiter varies within
+  a source class — a sampling requirement P1 does not state.
+  **`LPT_004`:** the leak tuple spans 72 cells and the order's N floor
+  is 30, so the in-sample reading approaches 1.0 by construction
+  (nine unique tuples read 1.000) and only leave-one-out is readable.
+  **`LPT_005`, found by running it:** leave-one-out majority prediction
+  reads BELOW baseline on a balanced set (0.000 against 0.250), because
+  removing the scored row makes its own class a minority — so a leak
+  below baseline is the estimator, not a result, and the readable
+  statement is *above baseline* only. **`LPT_006`:** `overlap` is coded
+  and is also what `arbiter == beneficiary` says; the instrument
+  derives it and counts disagreements per class. **`LPT_008`:** two
+  constructed worlds separate under the order's rule (valence tracking
+  position → V_position 1.000, V_move 0.000, H1 not falsified; tracking
+  move → the reverse, H1 FALSE), so the rule is neither
+  `CONSTANT_FIRES` nor `CONSTANT_SILENT` here. **`LPT_009`
+  UNVERIFIED:** no public row coded, no labeler run, nothing bearing on
+  H0/H1/H2 — and the order's last limit applies to this folder too.
+  Three `[CHOICE]`s printed on every render; renders screen clean
+  through `no_severity` with no exemption; no author section. Check
+  count printed by `selftest_lpt.py`; the instrument refuses
+  `--selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated
