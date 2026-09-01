@@ -1,0 +1,31 @@
+CORPUS LOOP SIM -- SHAPE, NOT FORECAST
+all constants are [PLACEHOLDER]; no value here is a prediction
+
+P_adv trajectory (shape only, placeholder coefficients):
+  ▁▃▄▄▅▅▅▆▆▆▆▆▆▆▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇█  (start 0.350 -> end 0.541, monotone True)
+D floor: dispute density converges to 0.0500, reached by generation 16
+
+sensitivity of final P_adv:
+  to D-track (GAP-C, dispute retention): range 0.1517
+  to K (GAP-B, coupling distance):       range 0.3470
+  most-constraining parameter here: K (coupling distance, GAP-B)
+
+THE FINDING (not a forecast):
+  the loop's boundedness is decided by whichever of {D, K}
+  carries the larger EMISSION COEFFICIENT (A_D vs A_K here).
+  those coefficients are exactly GAP-C and GAP-B -- how much
+  keeping recorded dispute, and how much author-chain coupling,
+  actually change the adversarial fraction of what gets
+  written. NEITHER is measured. so the single most valuable
+  measurement is the larger of the two emission coefficients;
+  the ranking above INVERTS if that ratio inverts, which is
+  why the ratio -- not either sweep's number -- is the target.
+
+FALSIFIER branch (must be reachable):
+  D-sensitivity with a live coefficient: 0.1517
+  D-sensitivity at coefficient = 0:      0.0000  -> fires True
+  with a real (nonzero) dispute coefficient the loop IS sensitive to D; the falsifier is the branch that fires if measurement finds that coefficient near zero
+
+NO DATED FORECAST IS EMITTED. The sim reports shape and the
+parameter to measure; it does not say where P_adv goes in the
+world, because f, g and decay are uncalibrated.

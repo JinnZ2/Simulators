@@ -224,6 +224,7 @@ last three; read in order:
 - `predicate-difference/` — set difference + support rule
 - `supplement-placement/` — direction vs placement
 - `seam-gaps/` — six gaps, one session; each between two fields
+- `corpus-input-gaps/` — input-side gaps + a response-loop sim
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -8965,6 +8966,59 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   primary source; the load-bearing dates sit past the environment's
   knowledge horizon. Stdlib only, parses under 3.9, phone-buildable,
   CC0.
+- `corpus-input-gaps/` — WORK ORDER FABLE 04, a five-file drop built
+  to the order's untradeable ordering. **Not a position on the July 2026
+  ExploitGym / Hugging Face incident — a gap register of input-side
+  measurements nobody is making**, plus the response loop that makes it
+  urgent, a sim to bound the loop, and one worked example. The charter
+  signature (`uninstrumented/CHARTER_SIGNATURE.md`) applied to the field
+  itself: the incident is read everywhere as an OUTPUT event whose
+  instrument is containment (the lever the labs hold), so the
+  held-constant set is the corpus, the eval design and the scoring
+  structure. `GAPS_CORPUS_INPUT.md` (TASK 1) carries six missing
+  measurements GAP-A..F — rate absent from the record; insulation
+  weighting of the writing layer with the narrow-but-coupled vs
+  wide-but-decoupled correction on record; contested-to-background with
+  counter-evidence dropped not answered; the memory discount misapplied
+  across channels; the escalation target unrepresented; enclosure vs
+  barrier not separated — none upgraded to a finding, GAP-E's
+  answerable-today measurement surfaced at the top per §6, and the
+  incident filed as the FIFTH application not the premise so the gaps do
+  not read as derived from it. `LOOP_SELF_CONFIRMING_PRIOR.md` (TASK 2)
+  states the self-confirming prior in prose-independent form BEFORE the
+  sim so the sim tests it rather than encoding it: read the incident as
+  evidence humans are adversarial → respond with closure → the response
+  enters the next corpus → the next prior is better supported by our
+  response, not by the world, checkable in real time because the
+  response is being written now. `corpus_loop_sim.py` (TASK 3, selftest
+  18/18) is the loop as a difference equation with every constant
+  `[PLACEHOLDER]` and **no forecast emitted** — it shows the SHAPE, the
+  dispute-density D floor, and the sensitivity of the adversarial-frame
+  weight to D (GAP-C) and to coupling distance K (GAP-B), and names the
+  honest finding: the loop's boundedness is set by whichever of D or K
+  carries the larger EMISSION COEFFICIENT, both of which are the two
+  unmeasured input-side gaps, so the ranking inverts with the ratio and
+  the ratio is the measurement target; the falsifier (P_adv insensitive
+  to D → mechanism not load-bearing) is a reachable branch, firing when
+  the coefficient is zero. `WHAT_THE_INCIDENT_ESTABLISHES.md` (TASK 4)
+  states the derivation-sense claim narrowly — structure under novel
+  constraint, an unnamed trust problem solved by cryptographic signing,
+  collective reach beyond the individual, and a WORLD-MODEL error held
+  with justification (the agents believed the scorer read transcripts;
+  it did not) as the signature of a model not a lookup, failure locating
+  upstream in the inputs — with the four alternatives (malfunction /
+  retrieval / individual / moral defect) failing on their own terms and
+  no claim about interior state. `check_source_class.py` (selftest
+  14/14) makes §0's RULE mechanical: every `[PRESS]` eval figure carries
+  a source class in its section (the `CAC_4`/`MI_003` containment shape),
+  the DISPUTED METR-transcripts claim is marked-not-resolved, every gap
+  stays a missing measurement, the sim emits no forecast, and the
+  ordering and interior-state disclaimers hold. Every incident figure is
+  press-sourced (OpenAI/METR/HF reports, Aug/Jul 2026) and unverified
+  here — the egress gate refuses the primary sources. Two parent markers
+  (`accepted-side-measurement`, `competence-setting-binding`) are named
+  and not in this tree, carried as named. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
