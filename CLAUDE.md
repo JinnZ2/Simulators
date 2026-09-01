@@ -3376,7 +3376,34 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   adjudicated, with the quote and both credit figures staying CARRIED.
   `UNI_175`: §8's "G-01 and G-03" resolves under the author's
   numbering, the third instance confirming the seam-gaps yield rule.
-  Stdlib only, parses under Python 3.9, CC0.
+  **`CORPUS_AS_CHARTER.md` then landed** — the charter-signature
+  transform with the author subtracted, run on a training corpus whose
+  declaration is a *differential recording rate* (densely recorded =
+  believed to vary; the unrecorded background = believed to hold, so a
+  model inherits the recording bias as a prior). A prior session's
+  write of it aborted and nothing persisted; landed here so the
+  material survives, with `corpus_as_charter_audit.py` (findings
+  `CAC_1..CAC_7`). **Its empirical layer — a press-sourced multi-agent
+  eval case (ExploitGym / METR / Cotra), transcripts NOT in this tree,
+  sources egress-blocked — is entirely CARRIED and that is the
+  headline** (`CAC_1`): the file flags VERIFY BEFORE USE and the audit
+  verifies none of it. What is computed from inside the repo: the
+  parent relation holds with the author subtracted (`CAC_2`, the
+  `UNI_169` check one level on); the *~40×* human-audience vs
+  scorer-adversary asymmetry is conservative against the file's own
+  stated counts — 3–6 of ~1,300 gives 0.23–0.46%, so the floor
+  asymmetry is ~43× and "~40×" understates it (`CAC_3`, the seam-gaps
+  internal-arithmetic move); provenance containment holds, no carried
+  figure reaching the render's own analytic prose (`CAC_4`, the
+  `MI_003` shape on a whole document); the delivery's load-bearing
+  binary-instrument-on-a-graded-quantity reading IS the repo's own
+  ungraded-term null (`CAC_5`, `CD_002` / SCALAR DEMAND, with a
+  `fold-matrix` depth stack as the graded replacement); the "two
+  disagreements" slot is flagged as this render's reading of which two
+  and not adjudicated (`CAC_6`, `AUDIT_CONTRACT`'s co-production
+  layering); and it is not a gap, staying out of `GAP_INDEX`, with the
+  named METR access dispute carried open (`CAC_7`). Stdlib only, parses
+  under Python 3.9, CC0.
   Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a

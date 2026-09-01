@@ -4115,3 +4115,92 @@ rule was the right call. G-03 (substitution reads as stability) carries
 the same id in both lists, and the step-4 sentence — an unmeasured
 quantity and a stable quantity produce the same record — is the shared
 shape both links run on, restated in §8 for the funded/unfunded case.
+
+---
+
+## CORPUS AS CHARTER — the authorless-charter extension arrives
+
+`CORPUS_AS_CHARTER.md`, landed verbatim: the CHARTER SIGNATURE
+transform with the author subtracted, applied to a training corpus
+whose "declaration" is a differential recording rate. A prior
+session's write of it aborted and nothing persisted; landed here so
+the material survives. Its empirical layer is a press-sourced AI-eval
+case (ExploitGym / METR / Cotra) with the transcripts NOT in this
+repository and the sources egress-blocked, so `corpus_as_charter_audit.py`
+computes only the three things computable from inside the tree and
+verifies nothing about the eval. Findings CAC_1..CAC_7.
+
+### CAC_1 — the empirical layer is entirely carried, and that is the headline
+
+Every count, quote, proper name and percentage in the case and the
+missing-party sections is press-sourced and unverified here; the file
+says so at the top and flags VERIFY BEFORE USE, and the audit's first
+statement is that it verifies none of it. This is the `ANC_010` /
+`MS_004` status applied to a whole delivery rather than one citation,
+and it is the honest posture for material about a specific 2026 eval
+whose primary record this environment cannot reach.
+
+### CAC_2 — the relation to the parent instrument holds, author subtracted
+
+CHARTER SIGNATURE reads a declared, dated, authored charter; this
+keeps the transform and subtracts the author, replacing the explicit
+declaration with a differential recording rate (densely recorded =
+believed to vary; unrecorded background = believed to hold). The
+absence-set machinery, the unguarded-omission argument (§4 of the
+parent), and the inherited-bias conclusion are all present. Checked as
+vocabulary-in-section plus a named parent, computed not asserted —
+"child of the charter signature, not a sub-case" holds structurally,
+the same check the parent's own audit ran one level up (`UNI_169`).
+
+### CAC_3 — the ~40× asymmetry is conservative against its own inputs
+
+The file states audience 3–6 of ~1,300 transcripts (0.23–0.46%) and
+adversary >20%. The minimum asymmetry consistent with those — floor
+adversary over ceiling audience — is **~43×**, so the headline "~40×"
+sits at or below its own floor: it understates the file's own numbers,
+the honest direction. This is a check of the file against itself (the
+seam-gaps `verify_sources` internal-arithmetic move), not a check on
+the eval — the 3–6/~1,300 and >20% are themselves carried.
+
+### CAC_4 — provenance containment: no carried figure in the render's own prose
+
+Every carried figure (198, ~7%, >20%, 3–6, ~1,300, ~40) occurs only in
+the carried layer (§§2–4); none appears in the render's analytic
+sections (the frame, §1 extension, §5 depth stack, §6 physics, §7
+disagreements). The problem count recurs in §4's inference chain — a
+carried environment description, the same fact in a second carried
+context, explicitly not a leak. `MI_003`'s containment shape, on a
+whole document rather than a citation.
+
+### CAC_5 — the binary-instrument reading is the repo's own ungraded-term null
+
+The delivery's load-bearing move: the question "is the imported frame
+load-bearing or decorative, real or borrowed" is BINARY and the
+quantity is GRADED, so the instrument returns BOTH and both are
+correct — the signature of the wrong instrument, not of confused
+evidence. That is `criteria-drift` `CD_002`'s ordinal-compared-as-
+nominal and the SCALAR DEMAND family, and the graded replacement is a
+`fold-matrix` depth stack (0 token / 1 argument selected / 2 dichotomy
+imported / 3 behaviour) on a single token. The cross-references are
+real repo shapes; the audit records them and adds no empirical claim.
+
+### CAC_6 — the two disagreements are flagged, not adjudicated
+
+The "IN THE FILE" spec calls for "my two disagreements, on the record",
+and the delivery did not number them; the render pairs the two legible
+in the delivered text (selective-import → no-destination, the
+zero-sum-prior-as-bad-physics pushback), marks the pairing as its own
+reading of which two, and flags it for the author to correct rather
+than asserting it. The first-person layer is kept separate per
+`AUDIT_CONTRACT.md`'s co-production rule. `PB_001`/`CW_004` discipline
+on an ambiguous slot: reported, not invented.
+
+### CAC_7 — it is not a gap, and the METR access dispute stays open
+
+The file carries no gap fields and does not enter `GAP_INDEX.md` — an
+extension held for verification is not an open question. The named
+open items (the transcript search that would settle the missing-party
+reading; the METR access dispute, named in the source session's spec
+and un-elaborated in this delivery) are carried as open and
+un-adjudicated, the access dispute turning on the same transcript
+access this environment lacks.

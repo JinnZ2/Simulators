@@ -277,6 +277,17 @@ absence set, boundary disputes, lag.
 
 ---
 
+## 7b. CHILD — the corpus as an authorless charter
+
+[`CORPUS_AS_CHARTER.md`](CORPUS_AS_CHARTER.md), landed after this file
+from a session whose write of it was lost, runs this instrument's
+transform on a charter with the author subtracted: a training corpus,
+whose declaration is not a statute but a differential recording rate,
+and whose absence set is what went unrecorded because it was believed
+to hold. Child, not a sub-case. Its empirical case is press-sourced
+and unverified in this tree; audit in `corpus_as_charter_audit.py`,
+findings `CAC_1..CAC_7`.
+
 ## 8. FORWARD USE
 
 The instrument is not historical. It runs on any current

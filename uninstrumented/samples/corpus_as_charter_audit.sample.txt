@@ -1,0 +1,43 @@
+CORPUS AS CHARTER -- AUDIT
+(the delivered file is edited by nothing here; its empirical
+ layer is press-sourced and unverifiable from this repo --
+ that is the headline, not a gap in the audit)
+
+1  RELATION TO THE PARENT INSTRUMENT
+   parent_file_resolves           True
+   names_parent                   True
+   author_subtracted              True
+   differential_recording_rate    True
+   keeps_absence_set              True
+   inherits_bias_claim            True
+   the same transform, author subtracted, declaration replaced
+   by a recording rate -- the relation holds structurally.
+
+2  THE ~40x ASYMMETRY, FROM THE FILE'S OWN COUNTS
+   audience band (0.23, 0.46)% (3-6 of ~1,300); adversary floor 20.0%
+   minimum asymmetry consistent with those: 43.3x
+   stated '~40x' is conservative (<= the floor): True;
+   points one way (adversary >> audience): True
+   -- a check on the file against itself, not on the eval.
+
+3  PROVENANCE CONTAINMENT
+   press-sourced region found: True; verify-before-use flagged:
+   True; biology marked analogy: True; co-production declared: True
+   every carried figure stays inside the region (no leak): True
+     198      in carried layer True, leaks into analytic False
+     ~7%      in carried layer True, leaks into analytic False
+     >20%     in carried layer True, leaks into analytic False
+     3 to 6   in carried layer True, leaks into analytic False
+     ~1,300   in carried layer True, leaks into analytic False
+     ~40      in carried layer True, leaks into analytic False
+
+4  STRUCTURE THE SPEC ASKED FOR
+   depth_stack_0_3                        True
+   two_disagreements                      True
+   disagreements_flagged_not_adjudicated  True
+   open_metr_access_dispute               True
+   not_a_gap                              True
+
+This module computes; it does not conclude, and it verifies
+nothing about the eval -- the transcripts are not here.
+Findings CAC_1..CAC_7 in AUDIT_NOTES.md.
