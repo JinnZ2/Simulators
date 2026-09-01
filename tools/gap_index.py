@@ -269,6 +269,28 @@ def collect(root=ROOT, silent_docs=None):
             silent_docs.append((folder, fn))
         for e in entries:
             rows.append(build_row(folder, fn, e))
+    return _disambiguate(rows)
+
+
+# One id must name one entry. A folder can carry BOTH gap-bearing
+# documents (uninstrumented/ does: OPEN_RESEARCH.md from the batch
+# restoration, OPEN_QUESTIONS.md from WORK ORDER 03), and folder#n
+# alone then names two different gaps -- the one-id-two-claims defect
+# AUDIT_OPEN_RESEARCH.md records at file level, arriving at index
+# level. The tag is derived from the FILENAME, never from content,
+# and only appears where the collision exists, so every single-doc
+# folder keeps its existing id.
+_DOC_TAG = {"OPEN_QUESTIONS.md": "OQ", "OPEN_RESEARCH.md": "OR"}
+
+
+def _disambiguate(rows):
+    per_folder = {}
+    for r in rows:
+        per_folder.setdefault(r["folder"], set()).add(r["file"])
+    for r in rows:
+        if len(per_folder[r["folder"]]) > 1:
+            base, n = r["id"].split("#")
+            r["id"] = "%s/%s#%s" % (base, _DOC_TAG[r["file"]], n)
     return rows
 
 
@@ -624,12 +646,25 @@ def selftest():
                                         "state": "s", "complete": True}],
                                       [("z", "OPEN_QUESTIONS.md")]))
 
+    # -- id disambiguation: a folder carrying BOTH documents must not
+    # let one id name two entries; a single-doc folder keeps its id
+    twin = [{"id": "x#1", "folder": "x", "file": "OPEN_QUESTIONS.md"},
+            {"id": "x#1", "folder": "x", "file": "OPEN_RESEARCH.md"},
+            {"id": "y#1", "folder": "y", "file": "OPEN_QUESTIONS.md"}]
+    twin = _disambiguate(twin)
+    check("disambiguate: collision tagged",
+          {r["id"] for r in twin[:2]} == {"x/OQ#1", "x/OR#1"})
+    check("disambiguate: single-doc id untouched",
+          twin[2]["id"] == "y#1")
+
     # -- live tree
     rows = collect()
     check("live: at least one document found", len(rows) > 0)
     check("live: every row has a folder", all(r["folder"] for r in rows))
     check("live: state never blank",
           all(r["state"] for r in rows))
+    check("live: ids unique",
+          len({r["id"] for r in rows}) == len(rows))
     print("selftest %d/%d" % (ok, ok + fail))
     return 0 if fail == 0 else 1
 

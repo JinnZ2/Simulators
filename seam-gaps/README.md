@@ -72,7 +72,10 @@ reason. It cites "G-01's detection floor", which in this render is
 entry 2 (G-02) — the first live evidence bearing on the blocks-are-gaps
 [CHOICE] above; the ids here yield to the author's list per that
 choice, and `notes/check_markers.py` records both readings without
-picking. Nothing from the marker file enters this folder or
-`GAP_INDEX.md` until it is rendered.
+picking. WORK ORDER 03 has since rendered the cluster into
+`uninstrumented/` — mechanism first, instances under it — filing G-07
+and G-08 there; nothing from it enters this folder, and its own G-01
+cross-reference confirms the yield rule's premise a second time (the
+author's G-01 is this render's G-02).
 
 CC0.

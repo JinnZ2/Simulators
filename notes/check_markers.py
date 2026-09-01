@@ -237,13 +237,20 @@ def holds():
 # ---------------------------------------- 5  index exclusion
 
 def index_exclusion():
-    """G-07 and G-08 are HELD, not filed; the marker directory is
-    storage, not a gap-rendering folder. Neither id and no
-    notes/markers row may appear in GAP_INDEX.md."""
+    """Held means held: while G-07/G-08 are unfiled, nothing from the
+    marker file may reach GAP_INDEX.md. Once WORK ORDER 03 files them
+    (in uninstrumented/OPEN_QUESTIONS.md), the index carries them as
+    uninstrumented/OQ rows -- the index table has no title column, so
+    the G-ids themselves never appear in it in either state. The
+    marker DIRECTORY stays out of the index in both states: notes/ is
+    storage, not a gap-rendering folder."""
     gi = _read(os.path.join(ROOT, "GAP_INDEX.md"))
+    filed = rendered()["render_present"]
+    oq_rows = bool(re.search(r"`uninstrumented/OQ#\d+`", gi))
     return {
-        "g07_in_index": bool(re.search(r"\bG-07\b", gi)),
-        "g08_in_index": bool(re.search(r"\bG-08\b", gi)),
+        "state": "FILED" if filed else "HELD",
+        "index_has_uninstrumented_oq_rows": oq_rows,
+        "consistent": oq_rows == filed,
         "markers_dir_in_index": "notes/markers" in gi,
     }
 
@@ -266,6 +273,41 @@ def cross_refs():
         # the M-A 'related to' line names a concept beside a folder;
         # the folder resolves, the concept is not a path anywhere --
         # recorded as concept-not-artifact, not as a defect
+    }
+
+
+# ---------------------------------------- rendered-state probe
+
+def rendered():
+    """The held cluster can leave the held state only by the author's
+    instruction. WORK ORDER 03 (uninstrumented/WORK_ORDER_03.md) is
+    that instruction; its render is uninstrumented/OPEN_QUESTIONS.md
+    carrying the author's own G-07 and G-08. This probe DETECTS the
+    state rather than asserting either one -- the case_018_audit
+    arrangement -- so the checker is correct before and after the
+    render lands. Two notes travel with a FILED state:
+
+    - the holds counted in holds() are still facts about the marker
+      file's text; WO-03 narrowed them by the author's own order
+      (M-A rendered at four rows under a do-not-generalize scope;
+      M-C's hold now binds the LAG FIGURE, not the gap).
+    - WO-03's Task 4 cross-reference names "G-01" for the
+      sub-floor-null gap the seam-gaps render tags G-02 -- a second,
+      independent confirmation of the g_numbering() reading that the
+      author's G-list differs from that render's, still with no pick
+      made here.
+    """
+    oq = os.path.join(ROOT, "uninstrumented", "OPEN_QUESTIONS.md")
+    wo = os.path.join(ROOT, "uninstrumented", "WORK_ORDER_03.md")
+    oq_txt = _read(oq) if os.path.isfile(oq) else ""
+    filed = "(G-07)" in oq_txt and "(G-08)" in oq_txt
+    return {
+        "work_order_03_present": os.path.isfile(wo),
+        "render_present": filed,
+        "state": "FILED (by WORK_ORDER_03)" if filed else "HELD",
+        "wo03_confirms_author_numbering":
+            os.path.isfile(wo) and
+            "Cross-reference to G-01" in _read(wo),
     }
 
 
@@ -336,12 +378,27 @@ def render():
          "its own arithmetic"))
     w("   M-B, M-D, M-E: %s" % ho["MB_MD_ME"])
     w("")
+    rd = rendered()
     ie = index_exclusion()
-    w("5  INDEX EXCLUSION")
-    w("   G-07 in GAP_INDEX: %s; G-08: %s; notes/markers row: %s"
-      % (ie["g07_in_index"], ie["g08_in_index"],
-         ie["markers_dir_in_index"]))
-    w("   held means held: none may appear until filed.")
+    w("5  RENDERED STATE AND INDEX CONSISTENCY")
+    w("   state: %s (WORK_ORDER_03 present: %s)"
+      % (rd["state"], rd["work_order_03_present"]))
+    w("   index carries uninstrumented/OQ rows: %s;"
+      % ie["index_has_uninstrumented_oq_rows"])
+    w("   consistent with state: %s; notes/markers row in index: %s"
+      % (ie["consistent"], ie["markers_dir_in_index"]))
+    if rd["render_present"]:
+        w("   The holds counted in 4 are facts about the marker")
+        w("   file's text; WO-03 narrowed them by the author's own")
+        w("   order (M-A at four rows, do-not-generalize; M-C's")
+        w("   hold now binds the lag figure, not the gap). And")
+        w("   WO-03's G-01 cross-reference independently confirms")
+        w("   the reading in 3 that the author's G-list differs")
+        w("   from the seam-gaps render's: %s."
+          % rd["wo03_confirms_author_numbering"])
+    else:
+        w("   held means held: nothing enters the index until the")
+        w("   author's order files it.")
     w("")
     cr = cross_refs()
     w("6  CROSS-REFERENCES (path existence only)")
@@ -405,10 +462,16 @@ def selftest():
     check("MC year 1887", ho["MC_program_years"] == ["1887"])
     check("MC hold stands", ho["MC_hold_stands"])
 
+    rd = rendered()
     ie = index_exclusion()
-    check("no G-07 in index", not ie["g07_in_index"])
-    check("no G-08 in index", not ie["g08_in_index"])
+    check("state named", ie["state"] in ("HELD", "FILED"))
+    check("index consistent with state", ie["consistent"])
     check("no markers row in index", not ie["markers_dir_in_index"])
+    if rd["render_present"]:
+        check("wo03 present in filed state",
+              rd["work_order_03_present"])
+        check("wo03 confirms author numbering",
+              rd["wo03_confirms_author_numbering"])
 
     cr = cross_refs()
     check("uninstrumented resolves", cr["uninstrumented/"])

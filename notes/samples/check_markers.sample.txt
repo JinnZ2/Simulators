@@ -34,9 +34,17 @@ HELD MARKERS 2026-08-31 -- STRUCTURAL READINGS
         against 'N>1 observation programs' -> hold STANDS
    M-B, M-D, M-E: NOT EVALUABLE HERE (conditions outside this file)
 
-5  INDEX EXCLUSION
-   G-07 in GAP_INDEX: False; G-08: False; notes/markers row: False
-   held means held: none may appear until filed.
+5  RENDERED STATE AND INDEX CONSISTENCY
+   state: FILED (by WORK_ORDER_03) (WORK_ORDER_03 present: True)
+   index carries uninstrumented/OQ rows: True;
+   consistent with state: True; notes/markers row in index: False
+   The holds counted in 4 are facts about the marker
+   file's text; WO-03 narrowed them by the author's own
+   order (M-A at four rows, do-not-generalize; M-C's
+   hold now binds the lag figure, not the gap). And
+   WO-03's G-01 cross-reference independently confirms
+   the reading in 3 that the author's G-list differs
+   from the seam-gaps render's: True.
 
 6  CROSS-REFERENCES (path existence only)
    uninstrumented/                              True

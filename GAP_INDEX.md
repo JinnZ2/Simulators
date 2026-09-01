@@ -15,10 +15,10 @@ statement from a gap having no discipline or needing no data.
 Nothing here is inferred from wording.
 
 ```
-entries        251
+entries        255
 folders        24
-of type GAP    249
-of type DECISION 2
+of type GAP    252
+of type DECISION 3
 entries missing at least one of the five core fields   9
 ```
 
@@ -280,12 +280,16 @@ left empty.
 | `sim-span#4` | `sim-span` | GAP | Methodological | Statistics | Simulation output (RESULTS.md) | `UNDEFINED` |
 | `sim-span#5` | `sim-span` | GAP | Methodological | Philosophy of science | MARKER.md | `UNDEFINED` |
 | `sim-span#6` | `sim-span` | GAP | User Guide | Science communication | The framework itself | `NOT_STUDIED` |
-| `uninstrumented#1` | `uninstrumented` | GAP | Empirical | Natural language processing | scan.py | `NOT_STUDIED` |
-| `uninstrumented#2` | `uninstrumented` | GAP | Empirical | Public policy | Goodhart's law literature | `NOT_STUDIED` |
-| `uninstrumented#3` | `uninstrumented` | GAP | Empirical | Hydrology | National/regional flood design codes | `NOT_STUDIED` |
-| `uninstrumented#4` | `uninstrumented` | GAP | Methodological | Metascience | The eight mechanism literatures (Goodhart | `UNDEFINED` |
-| `uninstrumented#5` | `uninstrumented` | GAP | Methodological | Metrology | Case 010 | `UNDEFINED` |
-| `uninstrumented#6` | `uninstrumented` | GAP | User Guide | Science communication | The framework itself | `NOT_STUDIED` |
+| `uninstrumented/OQ#1` | `uninstrumented` | GAP | EMPIRICAL | historical climatology | EXISTING RECORD: NARA RG28 star-route contracts and | `NOT_STUDIED` |
+| `uninstrumented/OR#1` | `uninstrumented` | GAP | Empirical | Natural language processing | scan.py | `NOT_STUDIED` |
+| `uninstrumented/OQ#2` | `uninstrumented` | GAP | EMPIRICAL | historical climatology | EXISTING RECORD: NARA RG49 | `NOT_STUDIED (zero located climate or` |
+| `uninstrumented/OR#2` | `uninstrumented` | GAP | Empirical | Public policy | Goodhart's law literature | `NOT_STUDIED` |
+| `uninstrumented/OQ#3` | `uninstrumented` | DECISION | DECISION | anyone with the BLM GLO search and the | access — this environment's egress refuses the | `no slot (DECISION)` |
+| `uninstrumented/OR#3` | `uninstrumented` | GAP | Empirical | Hydrology | National/regional flood design codes | `NOT_STUDIED` |
+| `uninstrumented/OQ#4` | `uninstrumented` | GAP | METHODOLOGICAL | history of science | EXISTING RECORD: observer manuals with explicit variable lists | `NOT_STUDIED — and HELD at one program: the lag` |
+| `uninstrumented/OR#4` | `uninstrumented` | GAP | Methodological | Metascience | The eight mechanism literatures (Goodhart | `UNDEFINED` |
+| `uninstrumented/OR#5` | `uninstrumented` | GAP | Methodological | Metrology | Case 010 | `UNDEFINED` |
+| `uninstrumented/OR#6` | `uninstrumented` | GAP | User Guide | Science communication | The framework itself | `NOT_STUDIED` |
 
 ---
 
@@ -305,10 +309,10 @@ sums past the entry count.
 | dynamical systems | 12 |
 | emergency management | 12 |
 | human factors | 12 |
+| hydrology | 12 |
 | metascience | 12 |
 | cognitive psychology | 11 |
 | hydraulic engineering | 11 |
-| hydrology | 11 |
 | organizational theory | 11 |
 | philosophy of science | 11 |
 | statistics | 11 |
@@ -323,11 +327,11 @@ sums past the entry count.
 | public administration | 8 |
 | software engineering | 8 |
 | ai safety | 7 |
+| climatology | 7 |
 | complex systems | 7 |
 | computational modeling | 7 |
 | moral psychology | 7 |
 | ai | 6 |
-| climatology | 6 |
 | computational geometry | 6 |
 | epidemiology | 6 |
 | geomorphology | 6 |
@@ -386,6 +390,7 @@ sums past the entry count.
 | economics | 2 |
 | fleet operations | 2 |
 | fractal geometry | 2 |
+| historical climatology | 2 |
 | linguistics | 2 |
 | medical education | 2 |
 | meteorology | 2 |
@@ -410,7 +415,7 @@ sums past the entry count.
 | structural engineering | 2 |
 | systems theory | 2 |
 
-271 distinct strings in all, of which **159 appear once**. The field is
+279 distinct strings in all, of which **166 appear once**. The field is
 free text, so it groups weakly; a discipline named two ways is two
 rows here. Only the repeated ones are listed above.
 
@@ -421,7 +426,7 @@ rows here. Only the repeated ones are listed above.
 Grouped on the first declared data source, verbatim and lowercased.
 This is a string grouping and not a taxonomy: `RESEARCH_RENDER.md`
 §3 specifies three source kinds — EXISTING RECORD, YOUR OWN DATA,
-SOMEONE'S HANDS — and **4 of 251 entries declare one**; the rest
+SOMEONE'S HANDS — and **7 of 255 entries declare one**; the rest
 declare sources with no kind, so above the raw line there is
 nothing to group them on.
 
@@ -439,7 +444,7 @@ nothing to group them on.
 | the scorer's arithmetic | 2 |
 | the textfree.py codebase | 2 |
 
-211 distinct strings in all, of which **200 appear once**. Only the
+215 distinct strings in all, of which **204 appear once**. Only the
 repeated ones are listed above.
 
 ---
@@ -451,12 +456,12 @@ vocabulary is reported as written rather than mapped into it.
 
 | state | entries |
 |---|---|
-| `not_studied` | 155 |
+| `not_studied` | 156 |
 | `undefined` | 33 |
 | `under_study` | 17 |
 | `unknown_atm` | 17 |
+| `no slot (decision)` | 3 |
 | `unknown_atm (site-specific)` | 3 |
-| `no slot (decision)` | 2 |
 | `candidate. held open deliberately. see ../domain-ledger/a2.md.` | 1 |
 | `inference. unmeasured. claude's, not the user's.` | 1 |
 | `instrument exists, series not taken on this question.` | 1 |
@@ -467,6 +472,8 @@ vocabulary is reported as written rather than mapped into it.
 | `not_studied (one floor stated; per-method floors not)` | 1 |
 | `not_studied (stub exists, implementation pending)` | 1 |
 | `not_studied (the field's own review says so)` | 1 |
+| `not_studied (zero located climate or` | 1 |
+| `not_studied — and held at one program: the lag` | 1 |
 | `open` | 1 |
 | `undefined (no agreed threshold)` | 1 |
 | `undefined (the marker exists as a concept, not an implementation)` | 1 |
@@ -482,8 +489,8 @@ vocabulary is reported as written rather than mapped into it.
 | `verified (analytic)` | 1 |
 | `yes, and it runs against the assumption.` | 1 |
 
-**238 of 251** entries state one of the six §5 values, alone or with a
-parenthetical. The remaining 13 carry something else — a sentence, a
+**240 of 255** entries state one of the six §5 values, alone or with a
+parenthetical. The remaining 15 carry something else — a sentence, a
 verdict, `no slot (DECISION)` (a fork has no knowledge-state field),
 or nothing. They are listed as written above rather than sorted into
 the vocabulary, because deciding which of the six a sentence means

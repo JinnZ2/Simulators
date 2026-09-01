@@ -3294,6 +3294,54 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   criterion is why the instrument exists for cattle. One line, two
   consequences: the animal that sells gets both the ledger entry and the
   instrument. Marker under exploration. 21 + 14 + 36 selftests green.
+  **WORK ORDER 03 then rendered the held archive-encoding cluster into
+  this folder** (`WORK_ORDER_03.md` verbatim; source
+  `notes/markers/HELD_2026_08_31.md`, cited by the order as
+  `MARKERS_HELD.md` — the same intake-name mismatch as
+  `WORK_ORDER_FABLE_02_GAPS.md`), under the order's one non-negotiable
+  rule: the mechanism first, the instances under it, never five
+  siblings. `MECHANISM_LIABILITY_DISPLACED.md` is M-A — *a variable an
+  institution cannot admit as a CAUSE reappears in its records as a
+  COST, a PENALTY, a LANDMARK, or a PROOF OBLIGATION* — with the
+  four-archive 1877-1890 table (Signal Service / Star Route /
+  Homestead / Wells Fargo) held at exactly four rows, the
+  held-constant vs liability-displaced split, the same-place-same-date
+  join key, a one-line split from `unrecordable-by-construction`
+  (cannot enter a record at all, versus enters in transformed form),
+  and **no ordinal claimed** — the register's count is ambiguous by
+  three in two documented instances (`QA_002`, T4) because unfiled
+  twelfth/thirteenth proposals sit in prose, so the mechanism is
+  name-keyed and a number would collide where a name cannot.
+  `OPEN_QUESTIONS.md` carries the instances pointing up at it: the
+  fine ledger as a threshold-exceedance record (M-B, no G-id — the
+  author assigned none and none is invented; provenance line renders
+  it as a proposed instrument stated by Kavik, not a reported finding;
+  the RG28 register-gap verification is method step 0, both
+  complications — two thresholds, enforcement covariate — are numbered
+  method steps, not caveats), homestead proving-up files as an unread
+  ground record (G-07, the author's own id from the held note; the
+  placement asymmetry as the design point, THE NON-OVERLAP IS THE
+  INFORMATIVE PART), the which-state-first fork as a DECISION entry
+  (G-07's fork — calibration-first vs signal-first, both defensible,
+  discriminator a desk-work overlap computation against Signal Service
+  station coverage), and the absence set as a readable document (G-08,
+  with the mandatory M-A correction as method step 3 and the hold kept
+  on the page: the gap renders, no lag figure until N>1 programs
+  across different charters). `ARCHIVE_SOURCES.md` is M-E as a
+  register, not a question list — RG28 holdings with the coverage gap
+  stated, the site-location reports flagged as the richer set, Wells
+  Fargo's by-request access class stated plainly, and the wider
+  charter list marked CANDIDATES with its placement left open as the
+  author's call. Filing G-07/G-08 exposed an id collision in
+  `GAP_INDEX.md` — the folder now carries BOTH gap-bearing documents,
+  so `uninstrumented#1` named two different gaps — repaired in
+  `tools/gap_index.py` with filename-derived `/OQ`/`/OR` id tags that
+  appear only where the collision exists, pinned both ways plus a
+  live-tree uniqueness check. `notes/check_markers.py` detects the
+  state change rather than asserting the old state: HELD → FILED, the
+  holds narrowed by the author's own order, and WO-03's G-01
+  cross-reference confirming a second time that the author's G-list
+  differs from the `seam-gaps/` render's (its README already yields).
   Stdlib only, parses under Python 3.9, CC0.
   Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
@@ -5271,9 +5319,16 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   absent from `GAP_INDEX.md`, held meaning held; and cross-references by
   path existence only, never by grep, since a text search would count
   the marker file and the checker itself (`UNI_010`'s loop, `QA_007`'s
-  sibling route). 32 selftest checks, including that the marker file's
-  hash is unchanged across a full run — the checker never edits the
-  entry it checks.
+  sibling route). The check count is printed by
+  `python3 notes/check_markers.py --selftest` rather than stored here
+  (it moved once already, the day it was first written — the
+  `self-scan/` `SS_026` argument); among the checks is that the marker
+  file's hash is unchanged across a full run — the checker never edits the
+  entry it checks. **WORK ORDER 03 then rendered the cluster** into
+  `uninstrumented/` (mechanism first, instances under it); the checker
+  detects the HELD → FILED state change rather than asserting either
+  state, with the counted holds staying facts about the marker file's
+  text and the release recorded as the author's own order.
 - `alignment-under-coupling/` — A marker under exploration delivered at
   confidence `~0.40`, plus its first run's results, plus all four sim
   generators — landed in that order, which is the interesting part.
@@ -8923,7 +8978,14 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     read as agreement with a silence. Its own first guard grepped its
     source for `def classify` and fired on the line asserting the
     absence — `IS_007` in this module's selftest, repaired with an AST
-    walk, where a comment does not appear.
+    walk, where a comment does not appear. A folder may carry BOTH
+    gap-bearing documents (`uninstrumented/` does, since WO-03), and
+    `folder#n` alone then names two different gaps — the
+    one-id-two-claims defect `AUDIT_OPEN_RESEARCH.md` records at file
+    level arriving at index level; ids take a filename-derived
+    `/OQ` / `/OR` tag only where the collision exists, so every
+    single-document folder keeps its id, pinned in both directions
+    plus a live-tree uniqueness check.
 - `search-substitution/` — Three organisms that produce an answer without
   searching for it, priced against the search they do not perform. Physarum
   occupies the whole arena at once and prunes by throughput, so its cost
