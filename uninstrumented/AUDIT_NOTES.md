@@ -4013,3 +4013,105 @@ metric is being used. It catches an unregistered metric; it does not catch an
 unrun one at the callsite. That is `UNI_082` — a guard in one function is not
 a property of the instrument — with the guard placed at the suite instead,
 which is a different position and not a stronger one.
+
+---
+
+## CHARTER SIGNATURE — the parent instrument arrives
+
+`CHARTER_SIGNATURE.md`, delivered verbatim: an instrument at a
+self-declared N=3, held for extension, "parent of M-C, sibling of
+M-A. Not a sub-case." The lag, the extension set and the hold are the
+author's; `charter_signature_audit.py` computes what is computable
+about the declarations and edits nothing.
+
+### UNI_169 — the parent relation holds as a method diff, not an assertion
+
+Section 5 carries every operation G-08's method carries — declared-list
+extraction, absence-set derivation, the M-A separation, the failure
+date, the lag — with each correspondence declared as an anchored pair
+and both anchors checked in the named step (a keyword scan deciding
+correspondence on its own would be `nonidentity-census` T1-1). It adds
+two operations absent from G-08's method entirely — purpose-derivability
+with a marked residual, and boundary disputes as dated evidence — and
+widens the input class from observer manuals to any chartered scope.
+Contradicting a child step would be a different relation; none does.
+Six steps against six, computed.
+
+### UNI_170 — "N=3 verified" splits by provenance, and the horizon flips
+
+Instance 1 (weather) reproduces the landed record: 7 of 7 declared
+items and 9 of 9 absent items match the marker file's M-C observed and
+absent sets, token-checked with whitespace normalized. Instances 2
+(Morrill/Hatch) and 3 (National Bank Acts) appear nowhere in the marker
+file — new material, carried. And this is the first delivery in the
+drop family whose occasion sits **before** the environment's knowledge
+horizon rather than after it, so a consistency reading from prior
+general knowledge is possible at all: the audit codes ten carried facts
+`CONSISTENT_PRIOR` / `CARRIED`, with `CONSISTENT_PRIOR` stated as
+consistency with knowledge held before the delivery and **not**
+primary-source verification — the `ANC_010` line, from the other side
+of the horizon.
+
+### UNI_171 — the education row carries falsifier (c)'s evidence, and the routing has no state for it
+
+Falsifier (c): if boundary disputes show omitted variables CONSIDERED
+and declined on stated grounds, the absence is guarded, not unguarded —
+a different mechanism. The education row's own second note documents a
+dispute about exactly the omitted territory (a land-grant college
+arguing biology, geology and chemistry satisfied the charter) closed by
+statute ("Hatch 1887 passed partly to close that"). So one of the three
+delivered rows carries, in its own notes, the evidence class the
+falsifier names, for part of its absence set — and the ORDER OF
+OPERATIONS routes to two output states (present under another encoding
+/ genuinely held-constant) with no state for CONTESTED-AND-DECLINED.
+A stated falsifier with no slot in the instrument's own routing: the
+`MF_017` family shape arriving on a falsifier rather than a field, and
+the repair is one step after the M-A separation. Not a refutation — §4
+already anticipates guarded omissions for the displaced case, and (c)
+is written about the general structure — but the "unguarded" claim now
+reads per-item rather than per-row, on the delivery's own evidence.
+
+### UNI_172 — boundary disputes are read in both directions, and the discriminator is implied
+
+Section 5 step 5 reads a located dispute as **evidence** — "the
+assumption was visible to someone at the time. those arguments are
+dated evidence" — and 6(c) reads the same observable as the
+**falsifier**. Both readings are right for different disputes, and what
+separates them is implied rather than stated: whether the dispute
+concerned the omitted variable, and whether it was declined on stated
+grounds. Until that discriminator is on the page, every located dispute
+is codable in either direction — `reasoning-gate` G-FIT's shape, a rule
+that names why the observable discriminates without a check that it
+does.
+
+### UNI_173 — two holds, two denominators, neither releases the other
+
+The instrument refuses a lag **distribution** at N=3 domains; G-08
+refuses a lag **figure** below N>1 observation programs. Three charters
+are not the child's programs, so the parent's N does not release the
+child's hold, and both stand — the same discipline `check_markers.py`
+records for the marker file's own holds, arriving in the parent
+instrument already applied.
+
+### UNI_174 — a title a decade stale at its own address date, recorded not adjudicated
+
+The credit row reads "Comptroller Hugh McCulloch, American Bankers
+Association, October 1876". The Comptrollership ran 1863–65 (two
+Treasury terms after), so the title predates the address by a decade —
+reading: a former Comptroller identified by his best-known office, the
+ordinary attribution form, recorded as a drift in a carried row rather
+than adjudicated. The address, the quoted line, and the two figures
+(~30% mortgages bank-held early 1890s, ~35% NYC loans callable 1900)
+stay `CARRIED`: no source is reachable from here.
+
+### UNI_175 — the forward link resolves under the author's numbering, third instance
+
+Section 8 connects to "G-01 and G-03 in WORK ORDER 02". Under the
+author's list G-01 is the detection-floor gap the `seam-gaps/` render
+tags G-02 — the third instance of that citation after the marker file
+and WORK_ORDER_03's Task 4, each independently confirming that the
+author's G-list differs from the render's and that its README's yield
+rule was the right call. G-03 (substitution reads as stability) carries
+the same id in both lists, and the step-4 sentence — an unmeasured
+quantity and a stable quantity produce the same record — is the shared
+shape both links run on, restated in §8 for the funded/unfunded case.

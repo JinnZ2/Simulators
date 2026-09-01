@@ -78,6 +78,17 @@ carries that separation as a method step, not an afterthought.
 Same place, same date, different encoding. The transform IS the
 join. That is what makes a cross-archive index buildable at all.
 
+## Sibling instrument: CHARTER SIGNATURE
+
+[`CHARTER_SIGNATURE.md`](CHARTER_SIGNATURE.md) arrived after this
+render and states the relation itself: this mechanism reads a
+variable that was DISPLACED into another encoding; the charter
+signature reads a variable that was never admitted at all, and names
+why by domain. Sibling, not a sub-case — and its ORDER OF OPERATIONS
+runs this mechanism as its step 2, so the two compose rather than
+overlap. Audit in `charter_signature_audit.py`, claims
+`UNI_169..UNI_175`.
+
 ## Relation to `unrecordable-by-construction`
 
 That marker covers material that cannot enter a record at all;

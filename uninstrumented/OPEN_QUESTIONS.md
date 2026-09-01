@@ -300,6 +300,15 @@ absent effect. The order and the marker cite it as G-01; the
 [`../seam-gaps/`](../seam-gaps/) render tags that gap G-02, and its
 ids yield to the author's list.
 
+**Parent instrument (arrived after this render):**
+[`CHARTER_SIGNATURE.md`](CHARTER_SIGNATURE.md) — this gap's method
+generalized from observer manuals to any chartered scope, adding the
+purpose-residual and boundary-dispute steps, at a self-declared N=3
+with its own hold (no lag distribution; a hold this entry's N>1 does
+not release and is not released by — different denominators). The
+mechanism stays this entry's routing parent; the charter signature is
+the instrument it runs inside.
+
 ---
 
 CC0.

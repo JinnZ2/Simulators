@@ -3342,6 +3342,40 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   holds narrowed by the author's own order, and WO-03's G-01
   cross-reference confirming a second time that the author's G-list
   differs from the `seam-gaps/` render's (its README already yields).
+  **`CHARTER_SIGNATURE.md` then arrived** — a self-declared instrument
+  at N=3, held for extension, *parent of M-C, sibling of M-A, not a
+  sub-case* — landed verbatim with the audit in
+  `charter_signature_audit.py` (claims `UNI_169..175`). **The parent
+  relation is computed rather than asserted** (`UNI_169`): §5 carries
+  every operation G-08's method carries as anchored pairs checked in
+  both documents, adds two G-08 lacks (purpose-residual,
+  boundary-disputes-as-dated-evidence), and widens the input from
+  observer manuals to any chartered scope. **"N=3 verified" splits by
+  provenance** (`UNI_170`): the weather row reproduces the marker
+  file's M-C lists 7/7 and 9/9 token-checked, the Morrill/Hatch and
+  National Bank rows are new and carried — and this is the family's
+  first delivery whose occasion sits BEFORE the knowledge horizon, so
+  ten facts get a `CONSISTENT_PRIOR`/`CARRIED` coding with
+  consistency-is-not-verification stated (the `ANC_010` line from the
+  other side). **`UNI_171`, the sharp one:** the education row's own
+  note documents a boundary dispute about the omitted territory closed
+  by statute — exactly falsifier (c)'s evidence class — and the ORDER
+  OF OPERATIONS routes to two states (another-encoding /
+  genuinely-held-constant) with no state for CONTESTED-AND-DECLINED: a
+  stated falsifier with no slot in the instrument's own routing, the
+  `MF_017` shape on a falsifier rather than a field, so "unguarded"
+  reads per-item rather than per-row on the delivery's own evidence.
+  `UNI_172`: boundary disputes are read as evidence in §5.5 and as the
+  falsifier in §6(c) with the discriminator implied, not stated —
+  G-FIT's shape. `UNI_173`: the instrument's hold (no lag distribution
+  at N=3 domains) and G-08's (no lag figure below N>1 programs) have
+  different denominators and neither releases the other. `UNI_174`:
+  "Comptroller Hugh McCulloch … October 1876" carries a title a decade
+  stale at its own address date (the Comptrollership ran 1863–65) —
+  read as identification by best-known office, recorded not
+  adjudicated, with the quote and both credit figures staying CARRIED.
+  `UNI_175`: §8's "G-01 and G-03" resolves under the author's
+  numbering, the third instance confirming the seam-gaps yield rule.
   Stdlib only, parses under Python 3.9, CC0.
   Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
