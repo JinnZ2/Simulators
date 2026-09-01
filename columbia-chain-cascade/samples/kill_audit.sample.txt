@@ -79,8 +79,29 @@ FINDING -- one pre-closure in the gap file (access-tier discipline)
   data line the cover note flagged. Recorded; the delivered file is
   not edited.
 
-THE COLD-START TEST -- five questions over fifteen gaps
-  Q1 public  Q2 falsifier  Q3 interface  Q4 one-semester  Q5 provenance
+THE COLD-START, AXIS 1 -- data path (the sender's corrected Q1)
+  The first pass scored Q1 as 'startable on public data'. The
+  sender's corrected Q1: every source tiered, every non-open
+  source names a route -- an untiered source is the item, not a
+  gated one. Rescored mechanically:
+    data sources across the fifteen gaps: 76
+    carrying a tier or a route:           0
+    'if published' pre-closures:          2
+    gaps passing the corrected Q1:        0 of 15
+    UNDERGRADUATE_RESEARCH_GAPS.md     sources 62  tiered 0  pre-closure 1
+    GAP_14_mining_hydrology.md         sources  8  tiered 0  pre-closure 1
+    GAP_15_bridge_impoundment.md       sources  6  tiered 0  pre-closure 0
+  The tier vocabulary lives in START_HERE.md's table and is attached
+  to no source bullet in any gap, the two new cards included. The
+  two pre-closures are the only tier-shaped marks on a source, and
+  both pre-close a route by parenthesis rather than tiering it. So
+  on the data-path axis every gap carries the same open item, and
+  the remedy is uniform and cheap: tier each source and, for every
+  non-open one, name at least one route. This supersedes the first
+  pass's Q1, which asked the question the sender's note rules out.
+
+THE COLD-START, AXES 2-5 -- falsifier, interface, scope, provenance
+  (Q1 shown is the FIRST-PASS public reading, superseded above.)
   gap                            Q1 Q2 Q3 Q4 Q5
   1 urban inflow                  y  y  y  y  y
   2 burn roughness                y  y  y  y  y
@@ -98,17 +119,68 @@ THE COLD-START TEST -- five questions over fifteen gaps
   14 mining increment             -  y  y  y  y
   15 bridge impoundment           -  y  y  y  y
 
-  startable on public data alone: 8 of 15
-  clean on all five questions:    7 of 15
-  Every gap names a falsifier a stranger can evaluate (Q2 clean
-  throughout) and a deliverable interface (Q3 clean throughout) --
-  the two the agenda most has to get right. The flags cluster on Q1
-  (the hydraulic gaps that want HEC-RAS or gated dam data) and on Q4
-  (three gaps -- tribal EAP, breach params, Vanport -- that read as
-  more than one semester). Q5 flags once, the Gap 6 pre-closure
-  above. The per-gap basis is the COLD_START table in this module,
-  declared so a reader can disagree row by row.
+  On the axes that decide whether a gap is a research question at
+  all: every gap names a falsifier a stranger can evaluate (Q2 clean
+  throughout) and a deliverable interface (Q3 clean throughout). The
+  scope flag (Q4) falls on three gaps -- tribal EAP, breach params,
+  Vanport -- that read as more than one semester. The per-gap basis
+  is the COLD_START table in this module, declared so a reader can
+  disagree row by row.
+
+KILL 3 ROOT -- the tribal data traces to the deep-research prose
+  six tribal rows match DEEP_RESEARCH section 6.1:   True
+  same doc pushes owner-from-memory ('overly broad'): True
+  code kept the owner refusal:                        True
+  code took the tribal add:                           True
+  The six tribal rows match the DEEP_RESEARCH.md section 6.1 entry,
+  and the same document argues (sections 3 and 6.2) for adding owner
+  assignments from memory, calling the module's owner refusal
+  'overly broad'. The code declined that for owners (every owner
+  UNASSIGNED, AST-checked) and took it for tribal (no check, no
+  source, no knowledge state) -- the asymmetry winning exactly where
+  no external constraint held it, the sharpest instance of the
+  provenance thesis the package states about itself. This sharpens
+  KILL 3; it does not overturn it.
+
+KILL 1 AND KILL 2 ARE ONE PROSE ZONE
+  both sit in the same contributing_inflow.render() passage: True
+  the function docstring states the sum reading correctly:   True
+  KILL 1 (the self-correction trace) and KILL 2 (the max-reading
+  formula) are one contiguous passage in render(), not two
+  independent items. And the code's own docstring for
+  urban_sensitivity states the coupled/sum reading correctly. So the
+  drift is confined to the rendered narrative -- not the arithmetic,
+  and not even the docstring. Trust the code over the comment holds
+  and sharpens: here the comment is right too, and only the story
+  told about it drifted back to the independent-node default.
+
+THE CITATION AXIS (Q5) -- no unflagged dead reference
+  GAP 14 self-flags two unconfirmed citations: True
+  GAP 14 keeps the confirmed anchor:           True
+  GAP 15 hedges its citation status per-block:  True
+  other unflagged dead references found:        0
+  The two GAP 14 provenance flags (Padhy 2026, Piao 2024) are the
+  model of the discipline: a named citation that could not be
+  confirmed is marked in place, the confirmed anchor (Knothe, Zhang
+  2022) kept, the unconfirmed pairing set aside. A scan finds no
+  other citation asserted without a hedge that a stranger would
+  chase into a dead end. GAP 15 hedges per-block where GAP 14 hedges
+  per-citation; the per-citation form is the stronger one.
+
+THE THREE CARDS -- landed, and the assembly choice
+  START_HERE.md:            True
+  GAP_14 card:              True
+  GAP_15 card:              True
+  delivered 13-gap file kept byte-identical: True
+  A [CHOICE]: the two gaps land as standalone cards numbered 14 and
+  15 -- their own headers read 'Draft entry for
+  UNDERGRADUATE_RESEARCH_GAPS.md', and both already have full
+  folders. The sender's 'slot in as entries 14 and 15' is met by the
+  card filenames and START_HERE's reading order rather than by
+  editing a byte-verbatim delivered file, which the version-audit
+  discipline keeps stable. Physically appending them is one
+  instruction away if the sender prefers it.
 
 This module computes; it does not conclude. Findings are in
-AUDIT_NOTES.md as CCA_001..CCA_009. Nothing here is a hydraulic
+AUDIT_NOTES.md as CCA_001..CCA_014. Nothing here is a hydraulic
 result: the spec's actual subject stays untested (CCC_008).

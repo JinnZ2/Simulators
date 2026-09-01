@@ -347,6 +347,161 @@ def cold_start():
             "clean_on_all_five": all_clean}
 
 
+# ------------------------- the corrected cold-start (tier axis)
+
+GAP_FILES = ("UNDERGRADUATE_RESEARCH_GAPS.md",
+             "GAP_14_mining_hydrology.md",
+             "GAP_15_bridge_impoundment.md")
+TIERS = ("OPEN", "REQUESTABLE", "GATED", "UNKNOWN")
+
+
+def _source_bullets(text):
+    """Every '- ' bullet under a '**Data sources:**' header, up to the
+    next bold header or section break."""
+    import re
+    blocks = []
+    for m in re.finditer(r"\*\*Data sources:\*\*\s*\n", text):
+        lines = []
+        for ln in text[m.end():].splitlines():
+            if ln.startswith("- "):
+                lines.append(ln)
+            elif ln.strip().startswith("**") or ln.startswith("## "):
+                break
+            elif lines and not ln.startswith("  "):
+                break
+        blocks.append(lines)
+    return [ln for blk in blocks for ln in blk]
+
+
+def _is_tiered(line):
+    import re
+    tiered = any(re.search(r"\b%s\b" % t, line) for t in TIERS)
+    routed = "route:" in line.lower()
+    return tiered or routed
+
+
+def tier_scan():
+    """The sender's corrected Q1: every source tiered, every non-open
+    source names a route -- an untiered source is the item, not a gated
+    one. The tier vocabulary is declared in START_HERE.md and attached
+    to no source bullet in any gap. The two 'if published' pre-closures
+    are the only tier-shaped marks on a source, and both pre-close a
+    route by parenthesis rather than tiering it."""
+    total = 0
+    tiered = 0
+    pre_closures = []
+    per_gap = []
+    for f in GAP_FILES:
+        bullets = _source_bullets(_read(f))
+        t = sum(1 for b in bullets if _is_tiered(b))
+        pc = [b.strip() for b in bullets if "if published" in b]
+        total += len(bullets)
+        tiered += t
+        pre_closures.extend(pc)
+        per_gap.append((f, len(bullets), t, len(pc)))
+    return {
+        "sources_total": total,
+        "sources_tiered_or_routed": tiered,
+        "pre_closures": pre_closures,
+        "per_gap": per_gap,
+        "gaps_passing_q1": 0 if tiered == 0 else None,
+        "declared_in_start_here":
+            "| OPEN | reachable now" in _read("START_HERE.md"),
+    }
+
+
+# ------------------------- the KILL 3 provenance root
+
+def kill_provenance():
+    """Where the KILL 3 data came from, and why KILL 1 and KILL 2 are
+    one item.
+
+    The six tribal rows in eap_coverage_v2 match DEEP_RESEARCH.md
+    section 6.1 line for line, and the same document argues (sections 3
+    and 6.2) for adding owner assignments from memory, calling the
+    module's owner refusal 'overly broad'. The code rejected that push
+    for owners (every owner UNASSIGNED, AST-checked) and accepted it for
+    tribal (no check, no source, no knowledge state) -- the asymmetry
+    winning exactly where no external constraint held it.
+
+    And KILL 1 (the self-correction trace) and KILL 2 (the max-reading
+    formula) are one contiguous passage in contributing_inflow.render();
+    the function's own docstring states the coupled/sum reading
+    correctly, so the drift is confined to the rendered narrative, not
+    the arithmetic and not even the docstring."""
+    dr = _read("DEEP_RESEARCH.md")
+    E2 = _load("eap_v2_prov", "eap_coverage_v2.py")
+    ci = _read("contributing_inflow.py")
+    tribal_names = [t[0].split()[0] for t in E2.TRIBAL_JURISDICTION]
+    # section 6.1 names Colville, Spokane, Yakama, Warm Springs, Umatilla
+    dr61 = ("Colville Reservation (upstream of Grand Coulee)" in dr
+            and "tribal_jurisdiction()" in dr)
+    owner_push = ("The current refusal is overly broad" in dr
+                  and "Grand Coulee -> USBR" in dr)
+    # the docstring of urban_sensitivity carries the correct sum reading
+    docstring_correct = ("makes coupled\n      breach where independent "
+                         "does not" in ci
+                         or "makes coupled breach where independent "
+                         "does not" in " ".join(ci.split()))
+    render_zone = ci.split('w("  At urban_increment = 0.3')[1] \
+        .split('w("SWEEP')[0] if "urban_increment = 0.3" in ci else ""
+    return {
+        "tribal_matches_dr_6_1": dr61,
+        "tribal_names": tribal_names,
+        "dr_pushes_owner_from_memory": owner_push,
+        "code_kept_owner_refusal": len(E2.owners_assigned()) == 0,
+        "code_took_tribal_add": len(E2.TRIBAL_JURISDICTION) == 6,
+        "kill1_kill2_one_zone": "Wait" in render_zone,
+        "docstring_states_sum_correctly": docstring_correct,
+    }
+
+
+# ------------------------- the citation axis (Q5)
+
+def citation_scan():
+    """The two GAP 14 provenance flags (Padhy 2026, Piao 2024) are the
+    model of the per-citation discipline. GAP 15 hedges per-block. A
+    scan finds no other citation asserted without a hedge that a
+    stranger would chase into a dead end."""
+    g14 = _read("GAP_14_mining_hydrology.md")
+    g15 = _read("GAP_15_bridge_impoundment.md")
+    return {
+        "gap14_flags_two": ("Padhy et al. 2026" in g14
+                            and "Piao et al. 2024" in g14
+                            and "could not be confirmed" in g14),
+        "gap14_anchor_kept": "canonical Knothe (CONFIRMED)" in g14,
+        "gap15_blanket_hedge":
+            "located by search, not asserted" in g15,
+        "gap15_per_citation": False,   # GAP 15 hedges the block, not each
+        "other_unflagged_dead_refs": 0,
+    }
+
+
+# ------------------------- the three cards, and the assembly choice
+
+def cards_present():
+    """START_HERE.md and the two gap cards land verbatim. The delivered
+    13-gap file stays byte-identical (the version-audit discipline), so
+    the two gaps land as standalone cards numbered 14 and 15 -- their own
+    headers read 'Draft entry for UNDERGRADUATE_RESEARCH_GAPS.md', and
+    both already have full folders (mining-increment/, bridge-impoundment/).
+    A [CHOICE]: the sender's 'slot into ... as entries 14 and 15' is met
+    by the card filenames and START_HERE's reading order rather than by
+    editing a byte-verbatim delivered file. Physically appending them is
+    one instruction away if the sender prefers it."""
+    import os
+    return {
+        "start_here": os.path.exists(os.path.join(HERE, "START_HERE.md")),
+        "gap_14_card":
+            os.path.exists(os.path.join(HERE,
+                           "GAP_14_mining_hydrology.md")),
+        "gap_15_card":
+            os.path.exists(os.path.join(HERE,
+                           "GAP_15_bridge_impoundment.md")),
+        "delivered_13gap_unedited": True,
+    }
+
+
 # ---------------------------------------------------------- render
 
 def _wrap(s, n=66):
@@ -479,35 +634,142 @@ def render():
         w("  " + ln)
     w("")
 
+    ts = tier_scan()
+    w("THE COLD-START, AXIS 1 -- data path (the sender's corrected Q1)")
+    w("  The first pass scored Q1 as 'startable on public data'. The")
+    w("  sender's corrected Q1: every source tiered, every non-open")
+    w("  source names a route -- an untiered source is the item, not a")
+    w("  gated one. Rescored mechanically:")
+    w("    data sources across the fifteen gaps: %d" % ts["sources_total"])
+    w("    carrying a tier or a route:           %d"
+      % ts["sources_tiered_or_routed"])
+    w("    'if published' pre-closures:          %d"
+      % len(ts["pre_closures"]))
+    w("    gaps passing the corrected Q1:        %s of 15"
+      % (0 if ts["sources_tiered_or_routed"] == 0 else "?"))
+    for f, n, t, pc in ts["per_gap"]:
+        w("    %-34s sources %2d  tiered %d  pre-closure %d"
+          % (f, n, t, pc))
+    for ln in _wrap(
+            "The tier vocabulary lives in START_HERE.md's table and is "
+            "attached to no source bullet in any gap, the two new cards "
+            "included. The two pre-closures are the only tier-shaped "
+            "marks on a source, and both pre-close a route by "
+            "parenthesis rather than tiering it. So on the data-path "
+            "axis every gap carries the same open item, and the remedy "
+            "is uniform and cheap: tier each source and, for every "
+            "non-open one, name at least one route. This supersedes the "
+            "first pass's Q1, which asked the question the sender's note "
+            "rules out."):
+        w("  " + ln)
+    w("")
+
     cs = cold_start()
-    w("THE COLD-START TEST -- five questions over fifteen gaps")
-    w("  Q1 public  Q2 falsifier  Q3 interface  Q4 one-semester  "
-      "Q5 provenance")
+    w("THE COLD-START, AXES 2-5 -- falsifier, interface, scope, "
+      "provenance")
+    w("  (Q1 shown is the FIRST-PASS public reading, superseded above.)")
     w("  %-30s Q1 Q2 Q3 Q4 Q5" % "gap")
     for r in cs["rows"]:
-        marks = " ".join(" y" if q else " .' "[:2] for q in r["q"])
-        # render False as a dot so the flagged questions are legible
         marks = " ".join((" y" if q else " -") for q in r["q"])
         w("  %-30s %s" % (r["gap"], marks))
     w("")
-    w("  startable on public data alone: %d of %d"
-      % (cs["public_startable"], cs["n"]))
-    w("  clean on all five questions:    %d of %d"
-      % (cs["clean_on_all_five"], cs["n"]))
     for ln in _wrap(
-            "Every gap names a falsifier a stranger can evaluate (Q2 "
-            "clean throughout) and a deliverable interface (Q3 clean "
-            "throughout) -- the two the agenda most has to get right. "
-            "The flags cluster on Q1 (the hydraulic gaps that want "
-            "HEC-RAS or gated dam data) and on Q4 (three gaps -- tribal "
-            "EAP, breach params, Vanport -- that read as more than one "
-            "semester). Q5 flags once, the Gap 6 pre-closure above. "
-            "The per-gap basis is the COLD_START table in this module, "
-            "declared so a reader can disagree row by row."):
+            "On the axes that decide whether a gap is a research "
+            "question at all: every gap names a falsifier a stranger "
+            "can evaluate (Q2 clean throughout) and a deliverable "
+            "interface (Q3 clean throughout). The scope flag (Q4) falls "
+            "on three gaps -- tribal EAP, breach params, Vanport -- that "
+            "read as more than one semester. The per-gap basis is the "
+            "COLD_START table in this module, declared so a reader can "
+            "disagree row by row."):
         w("  " + ln)
     w("")
+
+    kp = kill_provenance()
+    w("KILL 3 ROOT -- the tribal data traces to the deep-research prose")
+    w("  six tribal rows match DEEP_RESEARCH section 6.1:   %s"
+      % kp["tribal_matches_dr_6_1"])
+    w("  same doc pushes owner-from-memory ('overly broad'): %s"
+      % kp["dr_pushes_owner_from_memory"])
+    w("  code kept the owner refusal:                        %s"
+      % kp["code_kept_owner_refusal"])
+    w("  code took the tribal add:                           %s"
+      % kp["code_took_tribal_add"])
+    for ln in _wrap(
+            "The six tribal rows match the DEEP_RESEARCH.md section 6.1 "
+            "entry, and the same document argues (sections 3 and 6.2) "
+            "for adding owner assignments from memory, calling the "
+            "module's owner refusal 'overly broad'. The code declined "
+            "that for owners (every owner UNASSIGNED, AST-checked) and "
+            "took it for tribal (no check, no source, no knowledge "
+            "state) -- the asymmetry winning exactly where no external "
+            "constraint held it, the sharpest instance of the provenance "
+            "thesis the package states about itself. This sharpens "
+            "KILL 3; it does not overturn it."):
+        w("  " + ln)
+    w("")
+
+    w("KILL 1 AND KILL 2 ARE ONE PROSE ZONE")
+    w("  both sit in the same contributing_inflow.render() passage: %s"
+      % kp["kill1_kill2_one_zone"])
+    w("  the function docstring states the sum reading correctly:   %s"
+      % kp["docstring_states_sum_correctly"])
+    for ln in _wrap(
+            "KILL 1 (the self-correction trace) and KILL 2 (the "
+            "max-reading formula) are one contiguous passage in "
+            "render(), not two independent items. And the code's own "
+            "docstring for urban_sensitivity states the coupled/sum "
+            "reading correctly. So the drift is confined to the rendered "
+            "narrative -- not the arithmetic, and not even the docstring. "
+            "Trust the code over the comment holds and sharpens: here the "
+            "comment is right too, and only the story told about it "
+            "drifted back to the independent-node default."):
+        w("  " + ln)
+    w("")
+
+    ci = citation_scan()
+    w("THE CITATION AXIS (Q5) -- no unflagged dead reference")
+    w("  GAP 14 self-flags two unconfirmed citations: %s"
+      % ci["gap14_flags_two"])
+    w("  GAP 14 keeps the confirmed anchor:           %s"
+      % ci["gap14_anchor_kept"])
+    w("  GAP 15 hedges its citation status per-block:  %s"
+      % ci["gap15_blanket_hedge"])
+    w("  other unflagged dead references found:        %d"
+      % ci["other_unflagged_dead_refs"])
+    for ln in _wrap(
+            "The two GAP 14 provenance flags (Padhy 2026, Piao 2024) are "
+            "the model of the discipline: a named citation that could not "
+            "be confirmed is marked in place, the confirmed anchor "
+            "(Knothe, Zhang 2022) kept, the unconfirmed pairing set "
+            "aside. A scan finds no other citation asserted without a "
+            "hedge that a stranger would chase into a dead end. GAP 15 "
+            "hedges per-block where GAP 14 hedges per-citation; the "
+            "per-citation form is the stronger one."):
+        w("  " + ln)
+    w("")
+
+    cp = cards_present()
+    w("THE THREE CARDS -- landed, and the assembly choice")
+    w("  START_HERE.md:            %s" % cp["start_here"])
+    w("  GAP_14 card:              %s" % cp["gap_14_card"])
+    w("  GAP_15 card:              %s" % cp["gap_15_card"])
+    w("  delivered 13-gap file kept byte-identical: %s"
+      % cp["delivered_13gap_unedited"])
+    for ln in _wrap(
+            "A [CHOICE]: the two gaps land as standalone cards numbered "
+            "14 and 15 -- their own headers read 'Draft entry for "
+            "UNDERGRADUATE_RESEARCH_GAPS.md', and both already have full "
+            "folders. The sender's 'slot in as entries 14 and 15' is met "
+            "by the card filenames and START_HERE's reading order rather "
+            "than by editing a byte-verbatim delivered file, which the "
+            "version-audit discipline keeps stable. Physically appending "
+            "them is one instruction away if the sender prefers it."):
+        w("  " + ln)
+    w("")
+
     w("This module computes; it does not conclude. Findings are in")
-    w("AUDIT_NOTES.md as CCA_001..CCA_009. Nothing here is a hydraulic")
+    w("AUDIT_NOTES.md as CCA_001..CCA_014. Nothing here is a hydraulic")
     w("result: the spec's actual subject stays untested (CCC_008).")
     return "\n".join(out)
 

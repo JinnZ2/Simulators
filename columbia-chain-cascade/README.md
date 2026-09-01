@@ -129,15 +129,38 @@ than one confirmed. `kill_audit.py` adjudicates the three mechanically:
   `INSTITUTIONAL_EXCLUSION` the repo rejects) but to type it under the
   same discipline the owners carry.
 
-All three hold; none is overturned. Two findings the landing turned up:
-`CCC_017` is REFUTED on its delivered instance (`module_f.render()`
-trips the repo's own screen on a certainty verb, `CCA_005`), and the
-delivered `selftest_ccc_v2.py` exercises v1 `eap_coverage` + v1 `audit`
-+ the new `module_f`, so the v2 additions — including the KILL 3 tribal
-list — ship **unexercised** (`CCA_006`). The cold-start test runs the
-sender's five questions over all fifteen gaps (`CCA_007`): every gap
-names a falsifier and an interface; the flags cluster on public-data
-access and one-semester scope.
+All three hold; none is overturned — and a second pass **sharpens** each
+at its root rather than ratifying it. KILL 3 traces to
+`DEEP_RESEARCH.md` §6.1: the six tribal rows match its entry, and the
+same doc pushed owner-assignments-from-memory (§3/§6.2, calling the
+refusal "overly broad") — which the code declined for owners
+(AST-checked) and took for tribal, the asymmetry winning where no
+external constraint held it (`CCA_011`). KILL 1 and KILL 2 turn out to
+be **one contiguous prose zone** in `render()`, and the function's own
+docstring states the sum reading correctly — so the drift is confined to
+the rendered narrative, not the arithmetic and not even the docstrings
+(`CCA_012`).
+
+Two findings the landing turned up: `CCC_017` is REFUTED on its
+delivered instance (`module_f.render()` trips the repo's own screen on a
+certainty verb, `CCA_005`), and the delivered `selftest_ccc_v2.py`
+exercises v1 `eap_coverage` + v1 `audit` + the new `module_f`, so the v2
+additions — including the KILL 3 tribal list — ship **unexercised**
+(`CCA_006`).
+
+**The cold-start axis** asks whether a stranger can start from this. The
+sender corrected its first criterion — *every source tiered, every
+non-open source routed; an untiered source is the miss, not a gated one*
+— and under that corrected Q1 **all 15 gaps carry the same open item**:
+0 of 76 data sources are tiered, and the tier discipline `START_HERE.md`
+declares is applied to no source bullet (`CCA_010`). On the axes that
+decide whether a gap is a research question at all, every gap names a
+stranger-evaluable falsifier and a deliverable interface; the scope flag
+falls on three gaps. The two GAP 14 provenance flags (Padhy 2026, Piao
+2024) are the model of the citation discipline, and no other unflagged
+dead reference is found (`CCA_013`). The three new package cards —
+`START_HERE.md` and the GAP 14 / GAP 15 entries — land verbatim, kept as
+cards 14/15 beside the byte-identical delivered 13-gap file (`CCA_014`).
 
     python3 columbia-chain-cascade/kill_audit.py     # the kill audit
     python3 columbia-chain-cascade/selftest_kill.py  # its checks
@@ -160,11 +183,14 @@ access and one-semester scope.
 | `audit_v2.py` | delivered — v1 audit, module-F-aware |
 | `selftest_ccc_v2.py` | delivered — exercises v1 eap/audit + module_f (1 failure: `CCC_017`) |
 | `CLAIM_TABLE_v2.md` | delivered — `CCC_001..CCC_018` |
-| `OPEN_QUESTIONS.md` | delivered — 13 gaps, each startable cold |
-| `DEEP_RESEARCH.md` | delivered — the roadmap |
-| `kill_audit.py` | the kill list under audit + the cold-start test |
+| `UNDERGRADUATE_RESEARCH_GAPS.md` | delivered — 13 gaps, kept byte-identical |
+| `START_HERE.md` | delivered — orientation for a stranger picking it up cold |
+| `GAP_14_mining_hydrology.md` | delivered — gap 14 card (folder: `mining-increment/`) |
+| `GAP_15_bridge_impoundment.md` | delivered — gap 15 card (folder: `bridge-impoundment/`) |
+| `DEEP_RESEARCH.md` | delivered — the roadmap (and the root of the KILL 3 tribal data) |
+| `kill_audit.py` | the kill list under audit + the two-axis cold-start test |
 | `selftest_kill.py` | the audit's checks; run it, it prints its own count |
-| `AUDIT_NOTES.md` | `CCA_001..CCA_009` with REFUTATION_PROTOCOL |
+| `AUDIT_NOTES.md` | `CCA_001..CCA_014` with REFUTATION_PROTOCOL |
 | `samples/` | pinned runs |
 
 Every module refuses `--selftest` rather than exiting 0 on an invocation

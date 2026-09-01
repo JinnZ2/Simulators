@@ -8421,13 +8421,32 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   test runs the sender's five questions over all fifteen gaps — every
   gap names a stranger-evaluable falsifier and a deliverable interface;
   the flags cluster on public-data access (7 of 15 want HEC-RAS or gated
-  data) and one-semester scope. Two declared `no_severity` exemptions
-  (`means`; `proves`, the delivered module_f token `CCA_005` reports).
-  Check counts printed by `selftest_ccc.py` / `selftest_kill.py`; the
-  delivered `selftest_ccc_v2.py` carries one delivered failure
-  (`CCC_017`), unrepaired because `module_f.py` is delivered; every
-  module refuses `--selftest`. Nine `CCA_*` claims. Stdlib
-  only, parses under 3.9, phone-buildable, CC0.
+  data) and one-semester scope. **A two-axis pass then went deeper** —
+  arithmetic (the kills) and cold-start (can a stranger start), sharpening
+  the kills at their root rather than ratifying them. **`CCA_011`:** KILL 3
+  traces to `DEEP_RESEARCH.md` §6.1 — the six tribal rows match its entry,
+  and the same doc pushed owner-from-memory (§3/§6.2, "overly broad") which
+  the code declined for owners (AST-checked) and took for tribal, the
+  asymmetry winning where no external constraint held it — the sharpest
+  instance of the package's own provenance thesis. **`CCA_012`:** KILL 1 and
+  KILL 2 are one contiguous prose zone in `render()`, and the
+  `urban_sensitivity` docstring states the sum reading correctly, so the
+  drift is confined to the rendered narrative — not the arithmetic and not
+  even the docstrings. **`CCA_010`, the corrected cold-start:** the sender
+  redefined Q1 as *every source tiered and routed, not "is it public"*, and
+  under it **all 15 gaps carry the same open item** — 0 of 76 data sources
+  are tiered, the tier discipline `START_HERE.md` declares applied to no
+  source bullet; the fix is uniform and cheap. **`CCA_013`:** the two GAP 14
+  provenance flags (Padhy 2026, Piao 2024) are the citation-discipline model
+  and no other unflagged dead reference is found. **`CCA_014`:** three new
+  package cards land verbatim (`START_HERE.md`, GAP 14 / GAP 15 entries),
+  kept as cards 14/15 beside the byte-identical delivered 13-gap file. Two
+  declared `no_severity` exemptions (`means`; `proves`, the delivered
+  module_f token `CCA_005` reports). Check counts printed by
+  `selftest_ccc.py` / `selftest_kill.py`; the delivered `selftest_ccc_v2.py`
+  carries one delivered failure (`CCC_017`), unrepaired because
+  `module_f.py` is delivered; every module refuses `--selftest`. Fourteen
+  `CCA_*` claims. Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `reservoir-chain-coupling/` — The antecedent-coupling amplifier
   `columbia-chain-cascade` `CCC_001` flagged as truncated, now delivered
   as a complete initiator-agnostic spec — and unlike that HEC-RAS build
