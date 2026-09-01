@@ -34,7 +34,7 @@ Every claim names what would refute it. A failed check updates the claim, never 
 
 ---
 
-## UNDERGRADUATE_RESEARCH_GAPS.md
+## OPEN_QUESTIONS.md
 
 Open questions in the closure‑cost framework, organized by discipline
 

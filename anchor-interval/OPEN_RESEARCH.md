@@ -31,7 +31,7 @@ Two standing rules, carried from the rest of the repo:
 
 ---
 
-## UNDERGRADUATE_RESEARCH_GAPS.md
+## OPEN_QUESTIONS.md
 
 Open questions in the anchor‑interval framework, organized by discipline
 

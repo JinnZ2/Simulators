@@ -1,0 +1,22 @@
+SOURCE-CLASS AND CONSTRAINT CHECK -- WORK ORDER FABLE 04
+
+1  EVERY EVAL FIGURE CARRIES A SOURCE CLASS IN ITS SECTION
+   GAPS_CORPUS_INPUT.md       MOST ANSWERABLE TODAY — surfaced per marked
+   GAPS_CORPUS_INPUT.md       GAP-E — ESCALATION TARGET UNREPRESEN marked
+   GAPS_CORPUS_INPUT.md       GAP-F — ENCLOSURE AND BARRIER NOT SE marked
+   all marked: True
+
+2  DISPUTED CLAIM MARKED-NOT-RESOLVED: True
+3  GAPS STAY MISSING MEASUREMENTS
+   6 gaps; each has a missing measurement: True; no-upgrade rule
+   stated: True; no FINDING: label: True
+4  SIM EMITS NO FORECAST
+   no forecast token: True; hold stated: True; falsifier reachable: True
+5  ORDERING AND DISCLAIMERS (§6, §7)
+   worked_declares_fifth_application      True
+   worked_disclaims_interior_state        True
+   loop_precedes_sim                      True
+   loop_carries_falsifier                 True
+
+This module checks conformance to the work order; it makes no
+claim about the incident and adjudicates no gap.

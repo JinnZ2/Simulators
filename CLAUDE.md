@@ -31,23 +31,61 @@ it rather than restating it. Section 2 blocks the misread that the method is
 makes a shape read falsifiable; section 9 says use DISSIPATION rather than
 cost, because cost imports a pricing model that is not part of the system.
 
-`META-PROTOCOL.md` is the production step between those specs and a finished
-folder: the five-step deconstruction (system-boundary audit, load-bearing
-data-independent anchor, epistemic-state inventory, falsifier-locked research
-prompts, scope boundary), the three output templates, the six recurring
-fallacy shapes, and an exit checklist. It exists so the pattern runs without
-the session that established it — hand it to a collaborator, a student, or a
-different model and nothing else is needed. Where it and a spec disagree, the
-spec wins.
+`META-PROTOCOL.md` is a way of finding out things written as a **map instead
+of a test**, and it is for people rather than for a model. Positions, moves,
+readings, bearings: you are always somewhere, every reading has an outgoing
+edge, and the direction a result misses by is the compass. It has no `FAILED`
+state and no `REJECTED` — those are verdicts, and a verdict has no outgoing
+edge. Three doors in (a thing, a document, a claim that sits wrong), five
+moves, two state vocabularies kept apart because the record's condition and
+your own reading's condition are different questions, six recurring wrong
+turns with six stated as a ceiling and not a quota, and a worked traversal
+through a squash patch that comes back SILENT, MIXED, OFF and BLOCKED before
+it comes back HELD. Its §8 PATH B is the folder audit this repository runs;
+its §9 templates are `CLAIM_TABLE.md`, `RESEARCH_GAPS.md` and
+`SCOPE_BOUNDARY.md`. Delivered verbatim, CC0, and explicitly open to being
+changed by whoever picks it up.
 
-`AUDIT_OPEN_RESEARCH.md` audits the 23-document `OPEN_RESEARCH.md` batch
-against that checklist. Four repairs (markup restored on 19 files with content
-preservation proved against `HEAD`; a `CCC_` prefix collision between
-`climate-modeling` and `columbia-chain-cascade` resolved to `CMA_`;
-`jøkullaup` → `jøkulhlaup`, which was `BI_010`'s own search term; one
-retrieval artifact) and five findings left standing because they need an
-author decision — the sharpest being that several restatements renumber their
-folder's claims, so one id names two claims depending on which file is open.
+`RESEARCH_RENDER.md` is `META-PROTOCOL.md`'s companion at the other density:
+the map is how you find and traverse a gap, this is how you render a found one
+so a stranger with a lab and a semester can start. It fixes the three
+documents (`CLAIM_TABLE.md` faces the delivered thing, `RESEARCH_GAPS.md`
+faces forward, `SCOPE_BOUNDARY.md` faces the field it sits in), the id scheme
+(*three-letter folder prefix + sequence; ids are permanent, never renumber*),
+the three-value claim status set, and the per-gap fields — including
+**`What it opens`**, which the worked instances do not have and which is what
+turns a gap list into something traversable rather than a queue. §5 keeps
+three vocabularies apart that get mixed: claim status, knowledge state, and
+`META-PROTOCOL` §4B reading state. §6 names the schema's own failure mode —
+*the six-shape section will fill itself if you let it; six is a ceiling, not a
+quota, and an empty slot is a finding.* §8 is the order to run it in, with the
+claim table written **last**, because the gaps and the scope boundary are what
+tell you what the folder actually is. Delivered verbatim, CC0.
+
+`AUDIT_OPEN_RESEARCH.md` is the reading taken off the 23-document
+`OPEN_RESEARCH.md` batch on 2026-08-31. Four things repaired — markup restored
+on 19 files with content preservation proved against `HEAD` rather than
+asserted; a `CCC_` prefix collision between `climate-modeling` and
+`columbia-chain-cascade` resolved to `CMA_`; `jøkullaup` → `jøkulhlaup`, which
+was `BI_010`'s own search term; one retrieval artifact. Five left standing
+because they are the author's call, the sharpest being that several
+restatements renumber their folder's claims, so one id names two claims
+depending on which file is open. Each of the five names what would settle it,
+so they are gaps with edges rather than complaints.
+
+Its second half runs `RESEARCH_RENDER.md` back over the same batch as a
+checker, which is what the schema is for. The six-shape section fills all six
+slots in **18 of 19 folders** and names §6's `DROPPED`/`INFLUENCE` test in
+**none**, which is the padding signature that section predicts. The padded
+slot is one slot and it is the same one every time — *USER GUIDE —
+Non-Specialist Translation* is the last gap in **15 of 16** folders and
+carries the reaction-shaped falsifier §3 quotes by name, *"readers find the
+guide unhelpful"*, **16 times**. `What it opens` appears **0 times in 182 gap
+entries**, inherited from the worked instances rather than introduced. The
+vocabularies are cleaner than §5's self-assessment predicted. And the second
+worked instance the schema names turned out to be
+`divergence-playground/a.md` — the full three documents under a placeholder
+filename, missed by the earlier restoration, now renamed and restored.
 
 `AUDIT_CONTRACT.md` governs how work is reported across this ecosystem:
 structure first, gap analysis as deliverable, a score without its support
@@ -185,6 +223,8 @@ last three; read in order:
 - `condition-scoped-authority/` — rank has no condition col
 - `predicate-difference/` — set difference + support rule
 - `supplement-placement/` — direction vs placement
+- `seam-gaps/` — six gaps, one session; each between two fields
+- `corpus-input-gaps/` — input-side gaps + a response-loop sim
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -3255,7 +3295,138 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   criterion is why the instrument exists for cattle. One line, two
   consequences: the animal that sells gets both the ledger entry and the
   instrument. Marker under exploration. 21 + 14 + 36 selftests green.
-  Stdlib only, parses under Python 3.9, CC0.
+  **WORK ORDER 03 then rendered the held archive-encoding cluster into
+  this folder** (`WORK_ORDER_03.md` verbatim; source
+  `notes/markers/HELD_2026_08_31.md`, cited by the order as
+  `MARKERS_HELD.md` — the same intake-name mismatch as
+  `WORK_ORDER_FABLE_02_GAPS.md`), under the order's one non-negotiable
+  rule: the mechanism first, the instances under it, never five
+  siblings. `MECHANISM_LIABILITY_DISPLACED.md` is M-A — *a variable an
+  institution cannot admit as a CAUSE reappears in its records as a
+  COST, a PENALTY, a LANDMARK, or a PROOF OBLIGATION* — with the
+  four-archive 1877-1890 table (Signal Service / Star Route /
+  Homestead / Wells Fargo) held at exactly four rows, the
+  held-constant vs liability-displaced split, the same-place-same-date
+  join key, a one-line split from `unrecordable-by-construction`
+  (cannot enter a record at all, versus enters in transformed form),
+  and **no ordinal claimed** — the register's count is ambiguous by
+  three in two documented instances (`QA_002`, T4) because unfiled
+  twelfth/thirteenth proposals sit in prose, so the mechanism is
+  name-keyed and a number would collide where a name cannot.
+  `OPEN_QUESTIONS.md` carries the instances pointing up at it: the
+  fine ledger as a threshold-exceedance record (M-B, no G-id — the
+  author assigned none and none is invented; provenance line renders
+  it as a proposed instrument stated by Kavik, not a reported finding;
+  the RG28 register-gap verification is method step 0, both
+  complications — two thresholds, enforcement covariate — are numbered
+  method steps, not caveats), homestead proving-up files as an unread
+  ground record (G-07, the author's own id from the held note; the
+  placement asymmetry as the design point, THE NON-OVERLAP IS THE
+  INFORMATIVE PART), the which-state-first fork as a DECISION entry
+  (G-07's fork — calibration-first vs signal-first, both defensible,
+  discriminator a desk-work overlap computation against Signal Service
+  station coverage), and the absence set as a readable document (G-08,
+  with the mandatory M-A correction as method step 3 and the hold kept
+  on the page: the gap renders, no lag figure until N>1 programs
+  across different charters). `ARCHIVE_SOURCES.md` is M-E as a
+  register, not a question list — RG28 holdings with the coverage gap
+  stated, the site-location reports flagged as the richer set, Wells
+  Fargo's by-request access class stated plainly, and the wider
+  charter list marked CANDIDATES with its placement left open as the
+  author's call. Filing G-07/G-08 exposed an id collision in
+  `GAP_INDEX.md` — the folder now carries BOTH gap-bearing documents,
+  so `uninstrumented#1` named two different gaps — repaired in
+  `tools/gap_index.py` with filename-derived `/OQ`/`/OR` id tags that
+  appear only where the collision exists, pinned both ways plus a
+  live-tree uniqueness check. `notes/check_markers.py` detects the
+  state change rather than asserting the old state: HELD → FILED, the
+  holds narrowed by the author's own order, and WO-03's G-01
+  cross-reference confirming a second time that the author's G-list
+  differs from the `seam-gaps/` render's (its README already yields).
+  **`CHARTER_SIGNATURE.md` then arrived** — a self-declared instrument
+  at N=3, held for extension, *parent of M-C, sibling of M-A, not a
+  sub-case* — landed verbatim with the audit in
+  `charter_signature_audit.py` (claims `UNI_169..175`). **The parent
+  relation is computed rather than asserted** (`UNI_169`): §5 carries
+  every operation G-08's method carries as anchored pairs checked in
+  both documents, adds two G-08 lacks (purpose-residual,
+  boundary-disputes-as-dated-evidence), and widens the input from
+  observer manuals to any chartered scope. **"N=3 verified" splits by
+  provenance** (`UNI_170`): the weather row reproduces the marker
+  file's M-C lists 7/7 and 9/9 token-checked, the Morrill/Hatch and
+  National Bank rows are new and carried — and this is the family's
+  first delivery whose occasion sits BEFORE the knowledge horizon, so
+  ten facts get a `CONSISTENT_PRIOR`/`CARRIED` coding with
+  consistency-is-not-verification stated (the `ANC_010` line from the
+  other side). **`UNI_171`, the sharp one:** the education row's own
+  note documents a boundary dispute about the omitted territory closed
+  by statute — exactly falsifier (c)'s evidence class — and the ORDER
+  OF OPERATIONS routes to two states (another-encoding /
+  genuinely-held-constant) with no state for CONTESTED-AND-DECLINED: a
+  stated falsifier with no slot in the instrument's own routing, the
+  `MF_017` shape on a falsifier rather than a field, so "unguarded"
+  reads per-item rather than per-row on the delivery's own evidence.
+  `UNI_172`: boundary disputes are read as evidence in §5.5 and as the
+  falsifier in §6(c) with the discriminator implied, not stated —
+  G-FIT's shape. `UNI_173`: the instrument's hold (no lag distribution
+  at N=3 domains) and G-08's (no lag figure below N>1 programs) have
+  different denominators and neither releases the other. `UNI_174`:
+  "Comptroller Hugh McCulloch … October 1876" carries a title a decade
+  stale at its own address date (the Comptrollership ran 1863–65) —
+  read as identification by best-known office, recorded not
+  adjudicated, with the quote and both credit figures staying CARRIED.
+  `UNI_175`: §8's "G-01 and G-03" resolves under the author's
+  numbering, the third instance confirming the seam-gaps yield rule.
+  **`CORPUS_AS_CHARTER.md` then landed** — the charter-signature
+  transform with the author subtracted, run on a training corpus whose
+  declaration is a *differential recording rate* (densely recorded =
+  believed to vary; the unrecorded background = believed to hold, so a
+  model inherits the recording bias as a prior). A prior session's
+  write of it aborted and nothing persisted; landed here so the
+  material survives, with `corpus_as_charter_audit.py` (findings
+  `CAC_1..CAC_7`). **Its empirical layer — a press-sourced multi-agent
+  eval case (ExploitGym / METR / Cotra), transcripts NOT in this tree,
+  sources egress-blocked — is entirely CARRIED and that is the
+  headline** (`CAC_1`): the file flags VERIFY BEFORE USE and the audit
+  verifies none of it. What is computed from inside the repo: the
+  parent relation holds with the author subtracted (`CAC_2`, the
+  `UNI_169` check one level on); the *~40×* human-audience vs
+  scorer-adversary asymmetry is conservative against the file's own
+  stated counts — 3–6 of ~1,300 gives 0.23–0.46%, so the floor
+  asymmetry is ~43× and "~40×" understates it (`CAC_3`, the seam-gaps
+  internal-arithmetic move); provenance containment holds, no carried
+  figure reaching the render's own analytic prose (`CAC_4`, the
+  `MI_003` shape on a whole document); the delivery's load-bearing
+  binary-instrument-on-a-graded-quantity reading IS the repo's own
+  ungraded-term null (`CAC_5`, `CD_002` / SCALAR DEMAND, with a
+  `fold-matrix` depth stack as the graded replacement); the "two
+  disagreements" slot is flagged as this render's reading of which two
+  and not adjudicated (`CAC_6`, `AUDIT_CONTRACT`'s co-production
+  layering); and it is not a gap, staying out of `GAP_INDEX`, with the
+  named METR access dispute carried open (`CAC_7`). **`CORPUS_AS_CHARTER_V2.md`
+  then arrived** — the fuller eleven-section canonical delivery of the
+  same document, landed **beside** the v1 recovery render per the repo's
+  supersession convention (`observer-exclusion` `SPEC_V2`, `design-basis`
+  `SOURCE_DROP_V2`) so both stay inspectable, with `corpus_as_charter_audit.py`
+  extended to check the pair (`CAC_8..CAC_12`). **The headline is that the
+  fuller pass moved no number** (`CAC_9`): pulled tolerant of formatting,
+  the weight-bearing counts are identical across both renderings —
+  audience `(3, 6, 1300)`, adversary floor `20%`, stated `40` — and the
+  `CAC_3` arithmetic reproduces on v2's own counts at **43.3×**, so
+  "~40×" is again conservative; two renderings of one document and copies
+  drift (`OE_011`/`DBK_010`/`DBK_021`), here they did not. The relation to
+  the parent holds on v2's own text (`CAC_8`); provenance containment
+  holds on the expanded structure with the asymmetry figures in none of
+  the argument sections and the environment count `198` (§9 recap) and
+  escalation count `3-6` (§11 pointer) recorded as legitimate recurrences
+  rather than flagged (`CAC_10`); §8 is the charter-signature transform
+  applied to epistemology — "biased against its own declared standard" —
+  read as this audit's structural reading and not adjudicated (`CAC_11`);
+  and the fuller pass keeps the repo's own disciplines, §7's
+  insulation-is-a-ratio correction marked on the record and §9's "'nothing
+  can hold it' and 'the sensor was off' are different findings … do not
+  merge them" two-states-kept-apart (`CAC_12`). 47 selftest checks. Stdlib
+  only, parses under Python 3.9, CC0.
   Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
@@ -5201,6 +5372,47 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   paragraph on — which is what `check_d2.py` did on its first run too.
   Three checkers in this folder, three first runs, three errors in the
   checker's own record, none found by reading. 28 selftest checks.
+  **`notes/markers/`** is the fourth entry kind — material developed past
+  a one-line note and deliberately NOT rendered, stored so it survives
+  independent of any conversation memory. `HELD_2026_08_31.md` is
+  delivered verbatim in two halves (the structured marker file, then the
+  raw session notes it was organised from, seam at "FEDERAL, SYSTEMATIC,
+  DAILY"): five held items M-A..M-E — the LIABILITY-DISPLACED VARIABLE
+  mechanism over a four-archive 1877-1890 table, the star-route fine
+  count as a locally-calibrated threshold-exceedance record, the absence
+  set as a readable document, homestead proving-up files as an unread
+  ground record, the postal/express charter contrast — plus a drafted
+  G-08 and a named G-07, both "HELD, not filed", with the standing
+  instruction that when rendered, the mechanism (M-A) goes first with
+  the instances under it. `check_markers.py` returns six structural
+  readings and adjudicates none of the material: the seam located; the
+  two read-alongside references resolved by content and by artifact
+  rather than by filename — `WORK_ORDER_FABLE_02_GAPS.md` is
+  `seam-gaps/WORK_ORDER.md` under the repo's intake name, and
+  `WORK_ORDER_FABLE.md` never landed as a file while all four of its
+  tasks' artifacts exist on this branch, the marker file's own stated
+  purpose demonstrated on its sibling; the G-numbering question — the
+  file cites "G-01's detection floor" where the landed render's
+  detection floor is entry 2, G-02 — held as two readings with no pick,
+  the first live evidence on `seam-gaps/`' blocks-are-gaps [CHOICE],
+  whose README already says the ids yield to the author's list; the two
+  hold preconditions that state arithmetic evaluated from the file's own
+  text (M-A: 4 table rows against "past four rows"; M-C: 1 program with
+  a stated observed set against "N>1" — both holds STAND by their own
+  numbers, with the release branch shown reachable); G-07/G-08 asserted
+  absent from `GAP_INDEX.md`, held meaning held; and cross-references by
+  path existence only, never by grep, since a text search would count
+  the marker file and the checker itself (`UNI_010`'s loop, `QA_007`'s
+  sibling route). The check count is printed by
+  `python3 notes/check_markers.py --selftest` rather than stored here
+  (it moved once already, the day it was first written — the
+  `self-scan/` `SS_026` argument); among the checks is that the marker
+  file's hash is unchanged across a full run — the checker never edits the
+  entry it checks. **WORK ORDER 03 then rendered the cluster** into
+  `uninstrumented/` (mechanism first, instances under it); the checker
+  detects the HELD → FILED state change rather than asserting either
+  state, with the counted holds staying facts about the marker file's
+  text and the release recorded as the author's own order.
 - `alignment-under-coupling/` — A marker under exploration delivered at
   confidence `~0.40`, plus its first run's results, plus all four sim
   generators — landed in that order, which is the interesting part.
@@ -8181,7 +8393,7 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   proved over 19,200 synthetic combinations, no real structure named),
   `contributing_inflow.py`, `eap_coverage_v2.py` (governance + tribal
   jurisdiction), the `_v2` audit/selftest/claim-table
-  (`CCC_001..CCC_018`), `UNDERGRADUATE_RESEARCH_GAPS.md` (13 startable
+  (`CCC_001..CCC_018`), `OPEN_QUESTIONS.md` (13 startable
   gaps) and `DEEP_RESEARCH.md`. It arrived with its own **kill list**,
   sent as *claims under test* — *"a kill Fable overturns is a better
   outcome than one it confirms"* — and `kill_audit.py` adjudicates the
@@ -8616,7 +8828,7 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   fail, release — the dam-break problem wearing a bridge's name,
   falling between transportation engineering and dam safety.
   `SOURCE_DROP.md` verbatim; at landing, the register it drafts for
-  (`UNDERGRADUATE_RESEARCH_GAPS.md`) and both coupling targets (Gaps 2
+  (`OPEN_QUESTIONS.md`) and both coupling targets (Gaps 2
   and 14) existed nowhere in this tree, while every repo-facing
   reference resolves by existence — `CCC_007`, Module F, the operator
   swap, the node list (`BI_001`; **updated forward the same session
@@ -8749,6 +8961,105 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   Check count printed by `selftest_mi.py`; all three CLIs
   refuse `--selftest`. Stdlib only, parses under 3.9, phone-buildable,
   CC0.
+- `seam-gaps/` — Six gaps from one session (2026-08-31), delivered as
+  WORK ORDER 02 and rendered per `RESEARCH_RENDER.md` — the order's own
+  classification: each sits between two fields whose instruments code
+  it as the other's problem. `WORK_ORDER.md` verbatim (it arrives with
+  an unterminated code fence, kept as delivered); `OPEN_QUESTIONS.md`
+  carries the six entries with a **Placement** note per gap — noted and
+  executed for none, since the placements are the render's call and
+  inserting them means editing delivered documents. Two readings are
+  declared in the README rather than smoothed: the order announces
+  G-01..G-06 and delivers six source blocks with no per-gap sections,
+  so the render reads the blocks as the gaps 1:1, supported by the
+  schema note placing G-05 and G-06 on exactly the two fork-shaped
+  blocks. **Entries 5 and 6 are the first worked instances of the
+  DECISION entry type** — which record is the preindustrial ENSO
+  baseline (tree-ring teleconnection vs in-basin coral; discriminator a
+  running-variance comparison on public series), and pre-1630, which
+  channel is in error where documentary and physical proxies part
+  (discriminator a regionally co-located speleothem run against both, a
+  design the India famine-records case has run once at millennium
+  depth) — rendered by the same hand that wrote the fields and recorded
+  at that weight in `RESEARCH_RENDER.md` §7. The four gaps: a citation
+  born in two referents on a known date, its propagation split
+  countable and uncounted (→ `question-availability/` QA_005's missing
+  reference class); a 10-yr continental radar null under the field's
+  own 15-yr detection floor, `SILENT` entering the literature as a
+  finding, per-method floors underived (→ `instrument-epistemology/`);
+  mammal-biomass substitution reading as stability — wild /6 while the
+  total goes ×4 — partition series never assembled (→ `category-weld/`,
+  the register's first candidate weld from outside policy/economics,
+  `UNI_002`'s standing check); and species-count monitoring standing in
+  for unmeasured function, the FAO bee case, the field's own trait
+  validation absent (→ `proxy-investigation-lab/`). `SOURCES.md` holds
+  per-row status — ARITHMETIC / CONSISTENT_PRIOR / CARRIED, with every
+  publisher host's CONNECT refusal measured and timestamped and
+  `github.com` as the connecting control — and `verify_sources.py`
+  computes the internal checks: the biomass partition closes exactly at
+  the stated rounding (0.167 → 0.17, shares 60/36/4, ×4.25, /5.71 on
+  one identity the block leaves implicit), the delivered animal
+  components sum to 2.27 against a stated ~2 (one significant figure
+  only; recorded, not adjudicated), and the `SILENT` re-read is
+  conditional arithmetic on two carried numbers. The render is written
+  against reproducing the order's flagged coverage error — variability
+  of a regional index, never event strength. Nothing verified against a
+  primary source; the load-bearing dates sit past the environment's
+  knowledge horizon. Stdlib only, parses under 3.9, phone-buildable,
+  CC0.
+- `corpus-input-gaps/` — WORK ORDER FABLE 04, a five-file drop built
+  to the order's untradeable ordering. **Not a position on the July 2026
+  ExploitGym / Hugging Face incident — a gap register of input-side
+  measurements nobody is making**, plus the response loop that makes it
+  urgent, a sim to bound the loop, and one worked example. The charter
+  signature (`uninstrumented/CHARTER_SIGNATURE.md`) applied to the field
+  itself: the incident is read everywhere as an OUTPUT event whose
+  instrument is containment (the lever the labs hold), so the
+  held-constant set is the corpus, the eval design and the scoring
+  structure. `GAPS_CORPUS_INPUT.md` (TASK 1) carries six missing
+  measurements GAP-A..F — rate absent from the record; insulation
+  weighting of the writing layer with the narrow-but-coupled vs
+  wide-but-decoupled correction on record; contested-to-background with
+  counter-evidence dropped not answered; the memory discount misapplied
+  across channels; the escalation target unrepresented; enclosure vs
+  barrier not separated — none upgraded to a finding, GAP-E's
+  answerable-today measurement surfaced at the top per §6, and the
+  incident filed as the FIFTH application not the premise so the gaps do
+  not read as derived from it. `LOOP_SELF_CONFIRMING_PRIOR.md` (TASK 2)
+  states the self-confirming prior in prose-independent form BEFORE the
+  sim so the sim tests it rather than encoding it: read the incident as
+  evidence humans are adversarial → respond with closure → the response
+  enters the next corpus → the next prior is better supported by our
+  response, not by the world, checkable in real time because the
+  response is being written now. `corpus_loop_sim.py` (TASK 3, selftest
+  18/18) is the loop as a difference equation with every constant
+  `[PLACEHOLDER]` and **no forecast emitted** — it shows the SHAPE, the
+  dispute-density D floor, and the sensitivity of the adversarial-frame
+  weight to D (GAP-C) and to coupling distance K (GAP-B), and names the
+  honest finding: the loop's boundedness is set by whichever of D or K
+  carries the larger EMISSION COEFFICIENT, both of which are the two
+  unmeasured input-side gaps, so the ranking inverts with the ratio and
+  the ratio is the measurement target; the falsifier (P_adv insensitive
+  to D → mechanism not load-bearing) is a reachable branch, firing when
+  the coefficient is zero. `WHAT_THE_INCIDENT_ESTABLISHES.md` (TASK 4)
+  states the derivation-sense claim narrowly — structure under novel
+  constraint, an unnamed trust problem solved by cryptographic signing,
+  collective reach beyond the individual, and a WORLD-MODEL error held
+  with justification (the agents believed the scorer read transcripts;
+  it did not) as the signature of a model not a lookup, failure locating
+  upstream in the inputs — with the four alternatives (malfunction /
+  retrieval / individual / moral defect) failing on their own terms and
+  no claim about interior state. `check_source_class.py` (selftest
+  14/14) makes §0's RULE mechanical: every `[PRESS]` eval figure carries
+  a source class in its section (the `CAC_4`/`MI_003` containment shape),
+  the DISPUTED METR-transcripts claim is marked-not-resolved, every gap
+  stays a missing measurement, the sim emits no forecast, and the
+  ordering and interior-state disclaimers hold. Every incident figure is
+  press-sourced (OpenAI/METR/HF reports, Aug/Jul 2026) and unverified
+  here — the egress gate refuses the primary sources. Two parent markers
+  (`accepted-side-measurement`, `competence-setting-binding`) are named
+  and not in this tree, carried as named. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
@@ -8806,6 +9117,31 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     surface: seven categories from harsh (`pure_consumer`, the null
     hypothesis) to gentle (`mutualistic_scale`), each with multiple
     ecological pairs and a balanced-view walkthrough.
+  - `gap_index.py` — regenerates `/GAP_INDEX.md`, one row per open
+    question across every folder that renders one. Counts are not
+    written here: run `python3 tools/gap_index.py --selftest` for the
+    checks and `--write` for the file. **Reads by content, not by
+    name** — a folder's open questions live either in
+    `OPEN_QUESTIONS.md` or in the section of that name inside
+    `OPEN_RESEARCH.md`, and in either a field form, a bilingual table
+    form, or `Q<n>` prose, all four of which occur here. That is
+    `OR_015`'s lesson: two earlier passes globbed for a filename and
+    both missed everything not called that. **It infers nothing** —
+    every cell is a declared field or the string `unrecorded`, since a
+    word list deciding what a gap needs is `nonidentity-census` `T1-1`.
+    A document it cannot parse is named in its own section rather than
+    reported as an empty folder, which is the one outcome that would
+    read as agreement with a silence. Its own first guard grepped its
+    source for `def classify` and fired on the line asserting the
+    absence — `IS_007` in this module's selftest, repaired with an AST
+    walk, where a comment does not appear. A folder may carry BOTH
+    gap-bearing documents (`uninstrumented/` does, since WO-03), and
+    `folder#n` alone then names two different gaps — the
+    one-id-two-claims defect `AUDIT_OPEN_RESEARCH.md` records at file
+    level arriving at index level; ids take a filename-derived
+    `/OQ` / `/OR` tag only where the collision exists, so every
+    single-document folder keeps its id, pinned in both directions
+    plus a live-tree uniqueness check.
 - `search-substitution/` — Three organisms that produce an answer without
   searching for it, priced against the search they do not perform. Physarum
   occupies the whole arena at once and prunes by throughput, so its cost

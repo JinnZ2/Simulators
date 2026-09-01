@@ -9,7 +9,7 @@ delivered verbatim and edited by nothing here; `SOURCE_DROP_V2.md` is
 v1 plus the delivered addendum, assembled as a verified pure
 insertion (below).
 
-The entry is a draft for `UNDERGRADUATE_RESEARCH_GAPS.md`, which this
+The entry is a draft for `OPEN_QUESTIONS.md`, which this
 repository does not hold; at landing both coupling targets (Gaps 2
 and 14) were with it, while every repo-facing reference resolves —
 `CCC_007`, Module F, the operator swap, the Columbia/Snake node list

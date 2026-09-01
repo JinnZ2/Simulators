@@ -1,3 +1,10 @@
+**Format example.** [`RESEARCH_RENDER.md`](../RESEARCH_RENDER.md) names this
+folder as one of its two worked instances. Read it for what the three
+documents look like filled in — `CLAIM_TABLE.md`, `RESEARCH_GAPS.md`,
+`SCOPE_BOUNDARY.md`, in that order below. What it says about non-identity
+claims is the folder's own business and is argued there; what it shows a
+reader looking for the schema is the shape.
+
 ---
 
 ## CLAIM_TABLE.md / 声明表
@@ -35,7 +42,7 @@ Every claim names what would refute it. A failed check updates the claim, never 
 
 ---
 
-## UNDERGRADUATE_RESEARCH_GAPS.md / 本科生研究空白
+## OPEN_QUESTIONS.md / 开放问题
 
 | English | 中文 |
 |---|---|

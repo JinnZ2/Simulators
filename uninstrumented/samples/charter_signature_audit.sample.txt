@@ -1,0 +1,76 @@
+CHARTER SIGNATURE -- AUDIT
+(the delivered file is edited by nothing here; the lag, the
+ extension set and the hold are the author's)
+
+PARENT RELATION, AS A METHOD DIFF
+  section 5 steps 6, G-08 method steps 6
+  shared operations anchored in both: True
+  additions (in section 5, absent from G-08's method):
+    - purpose-derivability with a marked residual
+    - boundary disputes as dated evidence
+  additions anchored True, absent from G-08 True; input widened
+  from observer manuals to any chartered scope: True
+  'parent, not a sub-case' holds structurally.
+
+INSTANCE 1 AGAINST THE LANDED RECORD
+  declared list reproduces the marker's M-C observed set:
+  7/7 items; absent list 9/9 items
+  instances 2 and 3 are new to this tree (in the marker: False)
+  so 'N=3 verified' splits: 1 reproduced against a landed
+  record, 2 carried -- the first delivery in this family
+  whose occasion sits before the knowledge horizon.
+
+THE EDUCATION ROW AGAINST FALSIFIER (c)
+  dispute note present True; falsifier (c) present True
+  ORDER OF OPERATIONS output states: displaced True,
+  held-constant True; contested-and-declined: False
+  The row's own note carries the evidence class the
+  falsifier names, and the routing has no state for it;
+  disputes are read as evidence in 5.5 and as the falsifier
+  in 6(c) with the discriminator implied (True). UNI_171/172.
+
+THE TWO HOLDS
+  instrument: no lag distribution at N=3 (True)
+  G-08: no lag figure below N>1 programs (True)
+  different denominators; neither releases the other.
+
+CROSS-REFERENCES
+  mechanism_file               True
+  g08_entry                    True
+  marker_mc                    True
+  cites_g01_g03                True
+  seam_g03_is_substitution     True
+  the G-01 citation is the author's numbering, third
+  instance; the seam-gaps ids yield to it per that README.
+
+CARRIED FACTS, BY PROVENANCE (declared codings, not
+computations; CONSISTENT_PRIOR is not verification)
+  Morrill Act 1862; Hatch Act 1887
+     CONSISTENT_PRIOR -- both statutes and dates match prior knowledge
+  'useful plants' / 'manures' as statutory language
+     CONSISTENT_PRIOR -- matches Hatch Act section 2 phrasing as known
+  'industrial classes' / 'pursuits and professions'
+     CONSISTENT_PRIOR -- matches Morrill Act phrasing as known
+  National Bank Acts 1863-64; real-estate lending restriction
+     CONSISTENT_PRIOR -- the chartering-act restriction held until the Federal Reserve Act
+     era
+  lag anchors: USDA transfer 1891, FFLA 1916, FDIC 1933, SCS 1935,
+  NSF 1950, mining law 1866/1872
+     CONSISTENT_PRIOR -- all six dates match prior knowledge
+  soil moisture measurable in the period (the 6a counter-test's
+  load-bearing premise)
+     CONSISTENT_PRIOR -- gravimetric measurement predates the window
+  McCulloch ABA address, October 1876, and the quoted line
+     CARRIED -- the address and quote are not locatable from here; NOTE: the
+     Comptrollership was 1863-65, a decade before the address date --
+     reads as identification by best-known office, recorded rather than
+     adjudicated
+  ~30% of mortgages bank-held, early 1890s
+     CARRIED -- no source reachable
+  ~35% of NYC loans callable on demand, 1900
+     CARRIED -- no source reachable
+  stations favored by urban elites to deflect populist demands
+     CARRIED -- an attributed reading, no source
+
+This module computes; it does not conclude. Findings are
+UNI_169..UNI_175 in AUDIT_NOTES.md.

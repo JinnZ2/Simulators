@@ -169,4 +169,176 @@ was that a reader could not render it, and in seven-plus folders could not
 cite it unambiguously. Both are cheap to fix and neither was visible from
 inside a chat window, which is the ordinary reason this class of defect ships.
 
+---
+
+## RUN AGAINST `RESEARCH_RENDER.md`
+
+The schema landed after this audit was written, and it makes four things
+mechanically checkable that were previously matters of taste. Counts below are
+over the 20 rendered folders (19 plus `divergence-playground/`, `OR_014`).
+
+### `OR_010` — the six-shape section filled itself, 18 times out of 19
+
+`RESEARCH_RENDER.md` §6 names this as the schema's known failure mode: *a
+sentence formula gets built, and then run six times whether or not there are
+six shapes.* Measured: **18 of 19 folders fill all six slots**, one fills
+three. Zero leave a slot empty.
+
+§6's test is *name the DROPPED mechanism and answer INFLUENCE; if you cannot
+name a mechanism, delete the entry.* Neither field exists anywhere: **0 of 19
+folders name `DROPPED`, 0 of 19 name `INFLUENCE`.** So the test that would
+have caught the padding was not available when the sections were written, and
+the sections are uniformly full — which is the signature §6 predicts rather
+than a coincidence.
+
+The formula is visible in the text. Every shape entry runs the same three
+beats: *many analyses treat X as Y* → *but …* → *so "X as Y" often means "we
+treated Z as the explanation". That is a causal attribution error, not
+evidence that …*. Where a folder had a real sixth shape the beats carry a
+mechanism; where it did not, they carry the sentence.
+
+**What would settle it:** run §6's test on each of the 114 shape entries and
+answer `INFLUENCE`. The entries that cannot name a dropped mechanism are the
+padded ones, and the count of those is the size of the effect.
+
+### `OR_011` — the padding gap is one gap, and it is the same gap every time
+
+§3 says a count target produces padding. The original protocol asked for
+10–20. Measured: of the 16 folders with numbered gaps, **11 sit at exactly 10
+or 11** — at the floor of the target, not distributed across it.
+
+And the last gap is the same gap in **15 of 16 folders**: *USER GUIDE —
+Non-Specialist Translation*, varying only in who the non-specialist is
+(non-modeler, non-engineer, non-expert, clinician). The one exception,
+`antifungal-mechanism-sim`, ends on a real mechanism gap.
+
+That gap also carries the anti-pattern §3 quotes by name. §3's weak example is
+*"readers find the guide unhelpful"*; the batch contains **16 falsifiers of
+exactly that shape**, e.g. *"Non-specialists find the guide unhelpful or
+incomprehensible."* One reaction-shaped falsifier per folder, in the gap that
+appears in every folder.
+
+So the padding and the un-checkable falsifier are not two findings. They are
+one slot, filled by formula, at the tail of almost every list.
+
+§3 gives the two exits and does not require deleting the gap: operationalise
+it (*what measured behaviour changes?* — a stranger completes a named task
+using only the guide) or mark it `UNDEFINED` and say so. A translation gap is
+a real gap; *somebody's reaction* is not a settling condition for it.
+
+### `OR_012` — `What it opens` is absent from every gap in the batch
+
+§3 calls this line **not optional**: *a gap that closes and points nowhere is
+a dead end built on purpose.* Measured: **0 of 19 folders carry it**, 182 gap
+entries between them. The schema anticipates this — *"the worked instances
+stop at the falsifier"* — and both worked instances do exactly that, so the
+absence is inherited from the references rather than introduced.
+
+This is the cheapest of the open items and the one with the most compounding
+value, because it is what turns a gap list into a traversable map rather than
+a queue.
+
+### `OR_013` — the vocabularies are mostly already separate
+
+§5 calls mixing `SUPPORTED` with `NOT_STUDIED` the schema's main defect.
+Measured, the batch is better than the schema's self-assessment: **0 of 19 gap
+entries carry a claim status**, and **2 of 19 claim tables carry a knowledge
+state**. The knowledge states in gap entries are clean — 181 of 183 draw from
+§5's six, the two exceptions being one `OPEN` and one `VERIFIED`.
+
+Claim statuses are looser. §2 allows three values; the batch uses **six plus
+qualifiers** — 252 `SUPPORTED`, 11 `UNVERIFIED`, 11 `REPAIRED`, then 4 `OPEN`,
+1 `UNMEASURED`, 1 `PARTIAL`, 1 `UNTESTED`, and the 3 empty cells from
+`OR_007`. `OPEN` and `UNTESTED` are both `UNVERIFIED` with a reason, which §2
+already asks for; `UNMEASURED` and `PARTIAL` are knowledge states standing in
+a claim-status column, which is §5's defect in its smaller form.
+
+Class prefixes vary the same way. §3 names four; conformance runs from 10 of
+11 down to **0 of 15**, and the five folders at zero are the five with the
+most gaps — the relation runs the wrong way for a count target, which is
+`OR_011` seen from the other side.
+
+### `OR_014` — the second worked instance was filed under a placeholder name
+
+`RESEARCH_RENDER.md` §0 names two worked instances. `nonidentity-census/`
+renders as `OPEN_RESEARCH.md` like the rest of the batch. The other was
+`divergence-playground/a.md` — the same three documents, the same opening
+line, 18 `DP_` claims, 11 gaps, all six shapes — under a filename nobody
+would open on purpose, and consequently missed by the `OR_001` restoration,
+which globbed `*/OPEN_RESEARCH.md`.
+
+Renamed to `divergence-playground/OPEN_RESEARCH.md` and restored, content
+preservation proved against `HEAD` as before. Nothing in the tree referenced
+the old path. A reference instance that cannot be found is not serving as a
+reference.
+
+Its `DP_002` is the claim §2 quotes as the model of a self-indicting opening —
+*the XOR is not a cryptographic seal* — so the schema's own example was, until
+this commit, inside a file named `a.md`.
+
+### `OR_015` — the placeholder name is a pattern, not an incident
+
+`OR_014` found one file named `a.md` and treated it as a one-off. A survey
+run for the `OPEN_QUESTIONS.md` rename found a second:
+`emergence-stability-simulator/a.md`, 491 lines, the same three documents in
+the same order, 15 `EMS_` claims, and the same destroyed markup — missed by
+`OR_001` for the same reason and by `OR_014` because that pass looked for
+the specific file `RESEARCH_RENDER.md` §0 named rather than for the shape.
+
+Renamed to `emergence-stability-simulator/OPEN_RESEARCH.md` and restored,
+content preservation proved against `HEAD`. Nothing referenced the old path.
+
+The finding is the detector, not the file. Two passes globbed
+`*/OPEN_RESEARCH.md` and two passes missed everything not called that, which
+is what `tools/check_gate_drift.py` already refuses to do one level over —
+it matches copies of the gate on **content**, two markers per file, because
+a renamed copy is exactly the case a filename glob cannot see. The same rule
+applies here: the batch is identifiable by its own structure, not by where
+it was filed.
+
+That scan was then run — every markdown file in the tree carrying all three
+document headings, whatever its name — and it returns four files, all of
+them expected: `RESEARCH_RENDER.md` and `META-PROTOCOL.md`, which specify
+the three documents, `CLAUDE.md`, which indexes them, and
+`columbia-chain-cascade/README.md`, which points at its own gaps file. No
+third misfiled instance exists today. What is missing is that the check is
+not standing anywhere: it was run by hand twice, after two misses, and
+nothing runs it on the next drop.
+
+### One tension worth naming: `OR_002` against §2's "never renumber"
+
+§2 states *ids are permanent. A superseded claim keeps its id and changes its
+status. Never renumber.* `OR_002` renamed 18 ids, `CCC_001`–`018` →
+`CMA_001`–`018` in `climate-modeling/`.
+
+The rule and the repair do not actually collide — §2's ID SCHEME is *three-
+letter folder prefix + sequence*, and `CCC_` was two folders' prefix at once,
+so the rename restored the scheme rather than breaking the permanence rule.
+But it is a renumber by the letter of the sentence, it is recorded here rather
+than argued away, and it is reversible in one `sed` if the author would rather
+`columbia-chain-cascade` move instead. What is not reversible is leaving both.
+
+---
+
+## READ IN THE MAP VOCABULARY
+
+`META-PROTOCOL.md` §4B is the state set this audit is really using, and the
+translation is exact:
+
+- `OR_001`–`OR_004` are `OFF` readings that were cheap enough to walk. The
+  direction of each miss named the fix: markup absent → restore markup, one
+  prefix in two folders → free the newer one, one missing letter → the letter.
+- `OR_005`–`OR_009` are **gaps** — nodes with edges pointing at them that this
+  session did not reach. Each names what would settle it, which is what makes
+  it a destination rather than a hole.
+- `OR_007` is `§12`'s last line instanced: three rows lost their status in
+  delivery, and the restored tables carry them **empty** rather than guessed,
+  because a missing value written as a value is the one move that cannot be
+  undone by a later reader.
+- Nothing here is marked failed, rejected, or wrong. The batch's content was
+  never in question. What was true is that a reader could not render it, and
+  in several folders could not cite it unambiguously — and neither of those is
+  visible from inside a chat window, which is the ordinary reason this class
+  of thing ships.
+
 CC0.

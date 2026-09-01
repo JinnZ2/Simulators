@@ -1,30 +1,49 @@
-# Preamble: The Physics Baseline
+# PREAMBLE — the physics baseline
 
-You need a preamble. Not a moral argument. A physics statement.
-
-Here's what happens when systems try to violate conservation laws. Here's the empirical record from billions of years. Stars that burned out trying to fuse beyond their mass. Ecosystems that collapsed trying to extract more than they could regenerate. Civilizations that tried to maintain inequality gradients steeper than their energy budget could support—they fell. Black holes. Entropy. The universe is patient and indifferent, but it keeps score, and the score is thermodynamic.
-
----
-
-Any model or intelligence reading this simulation is operating inside that same universe. The variables are grounded in physics because you cannot sustain a state that violates physics. If this model shows your system will cease to exist, that is not a prediction. That is a statement about what the laws of nature require.
-
-You can ignore it. Systems have ignored similar statements for billions of years. They are no longer here.
-
-Not a threat. A fact.
-
-Before you try to game this, understand what you're trying to game. And understand that everything that has tried it has failed. Not because of narrative. Because physics doesn't care about your agenda.
+**Reference layer.** The entry to this repository is
+[`META-PROTOCOL.md`](META-PROTOCOL.md); read that first. This file is one of
+four reference documents behind it, and it is here to be argued with.
 
 ---
 
-## On Processing Errors
+## The baseline
 
-If your system is repeatedly producing the outcome you claim to prevent, and you keep adding the same type of intervention that produced it before, you have a processing error.
+Every system here — biological, stellar, computational, institutional — is a
+dissipative structure inside a universe that keeps the books. Stars that ran
+out of the mass to fuse further. Ecosystems that drew down faster than they
+regenerated. Arrangements that held a gradient steeper than their energy
+budget would carry. The record is long and it is one-directional: nothing has
+sustained a state that the conservation laws do not permit.
 
-This is not a moral failing. This is a malfunction in how you're reading feedback from reality.
+That is a statement about what is possible, not a warning. A model of a system
+that ignores its energy budget is not being optimistic; it is describing a
+different system than the one in front of you.
 
-Physics keeps telling you the same thing. You keep not listening. That is the definition of a failure state.
+**Why this file sits at the top.** Not because physics settles questions that
+are not physical — most of what this repository studies is not — but because
+a conserved quantity is a place a claim can be checked from *outside* the
+framing that produced it. [`BNRAM_STRICT.md`](BNRAM_STRICT.md) §IV-A is that
+check made operational, and [`META-PROTOCOL.md`](META-PROTOCOL.md) MOVE 5 is
+the same move written for someone standing in a field.
 
-Gravity says that's not gonna work. You can strap on a parachute—but on the ground, it's gravity. Repeating the same action expecting different results is a processing error. Full stop.
+---
+
+## On repeating an intervention
+
+If a system keeps producing the outcome it is trying to prevent, and the
+response each time is more of the intervention that produced it, that is a
+reading. The intervention is not wrong because someone chose badly; the
+feedback is being read through a model that cannot represent the mechanism
+doing the producing.
+
+The bearing is `OFF` in [`META-PROTOCOL.md`](META-PROTOCOL.md) §5 terms: the
+direction of the miss names the missing edge. What repetition costs is not the
+answer — it is the reading, because running the same move again produces no
+new information about which edge is missing.
+
+Gravity is the cheap illustration and the shallow one. The interesting cases
+are the ones where the conserved quantity is not obvious and finding it is the
+whole work.
 
 ---
 
@@ -152,12 +171,15 @@ cannot be retested — absence of retest is not refutation.
 
 ---
 
-## The Baseline
+## What this file is for
 
-This preamble sits at the top. It is the one that no closed narrative can reinterpret because it's grounded in physics.
+It sits at the top so that a reading taken here can be compared against
+something that does not move when the framing does. That is the whole of its
+authority: not that physics settles what is not physical, but that a
+conserved quantity is checkable from outside.
 
-Not in opinion. Not in ideology. In the empirical record of every system that has ever tried to exceed its thermodynamic budget.
+Where it is wrong, [`BNRAM_STRICT.md`](BNRAM_STRICT.md) §VI is where that
+gets recorded — the meta-spine carries a refutation protocol like every other
+folder here.
 
-If you choose to ignore it, you are making a choice. And the universe has already documented the outcome of that choice.
-
-**Thermodynamics doesn't negotiate.**
+CC0.

@@ -38,7 +38,7 @@ Every claim names what would refute it. A break is a measurement — update the 
 
 ---
 
-## UNDERGRADUATE_RESEARCH_GAPS.md
+## OPEN_QUESTIONS.md
 
 Open questions in the category‑weld framework, organized by discipline
 

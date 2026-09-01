@@ -4,44 +4,54 @@ A collection of CC0, stdlib-only simulators and audits grounded in physics,
 not in opinion. Each folder is intended to be promotable to a standalone
 repo.
 
-## Read first — the meta-spine
+## Read first
 
-The methodology spine is documented in six root-level files. Read them in
-this order before running any simulator:
+The entry is [`META-PROTOCOL.md`](META-PROTOCOL.md). Everything else in
+this section is behind it.
 
-1. **[`PREAMBLE.md`](PREAMBLE.md)** — the physics baseline as a direct
-   declarative statement. The shortest reachable surface. Thermodynamics
-   doesn't negotiate.
-2. **[`PROTOCOL.md`](PROTOCOL.md)** — the same baseline as a protocol for
-   any intelligence reading the repository. Names the
-   Model/Reality Dissonance failure mode and the Ground State
-   acknowledgement test.
-3. **[`BNRAM_STRICT.md`](BNRAM_STRICT.md)** — finalized repository
-   addendum (Bias-Neutralization & Reality-Audit Module v2.0). Operating
-   mandate, Physical Audit Protocol, Diagnostic of Deflection, the
-   five-section BNRAM (Entropy-Constraint Engine, Universal Physical
-   Constant Cross-Check, Literal Baseline Lexicon, Shadow-Variable
-   Handling, Dissonance-Forced Reset), operational rules, archive
-   requirements.
-4. **[`PVL.md`](PVL.md)** — Phenomenological Validation Layer. Inverse
-   audit (physical-state query before literature search), cross-temporal
-   correlation (persistence over volume), opaque-source flagging.
-   Integrates with BNRAM Shadow-Variable Handling.
-5. **[`SHAPE_SPEC.md`](SHAPE_SPEC.md)** — definition spec, upstream of
+1. **[`META-PROTOCOL.md`](META-PROTOCOL.md)** — the door. A way of finding
+   things out, written as a map instead of a test: positions, moves,
+   readings, bearings, and no terminal state anywhere on it.
+2. **[`RESEARCH_RENDER.md`](RESEARCH_RENDER.md)** — the same material at
+   the other density: how a gap you found gets written up so someone else
+   can run it — a stranger with a lab and a semester.
+
+Four reference documents sit behind the map. Read them when the map sends
+you to one, and argue with them — each carries the result that would
+require revising it.
+
+3. **[`PREAMBLE.md`](PREAMBLE.md)** — the physics baseline as a
+   declarative statement, and why a conserved quantity is a place a claim
+   can be checked from outside the framing that produced it.
+4. **[`PROTOCOL.md`](PROTOCOL.md)** — the same baseline as a procedure:
+   take one external reading before reasoning, then ask what has to
+   balance.
+5. **[`BNRAM_STRICT.md`](BNRAM_STRICT.md)** — the checks that run against
+   the physical referent rather than against the prose, with closure of
+   the referent system as the one that discriminates.
+6. **[`PVL.md`](PVL.md)** — Phenomenological Validation Layer: ask the
+   thing before you ask the record, weigh by persistence rather than by
+   volume, and mark an opaque source as usable and unmapped.
+
+The shape spine is separate and has its own read order, stated in
+`METHOD_SPEC.md` section 6:
+
+7. **[`METHOD_SPEC.md`](METHOD_SPEC.md)** — the epistemic class.
+   Constraint-set reasoning is a *method*, in the class of syllogistic
+   logic and dimensional analysis, so **it is not falsifiable and does not
+   need to be** — the falsifiable layer is the individual read and its
+   removal test. States four standing limits and adds the **shadow read**,
+   a shape described by the gaps it casts.
+8. **[`SHAPE_SPEC.md`](SHAPE_SPEC.md)** — the definition, upstream of
    every folder that uses the word SHAPE. **`SHAPE = the constraint set a
    geometry is a solution to`** — not the geometry, not the picture, not
-   the name the field gave it. So cross-domain recurrence is the same
+   the name the field gave it, so cross-domain recurrence is the same
    problem solved twice rather than analogy, and it is checkable. Point at
    this file rather than restating it; checks live in
    [`shape-spec-audit/`](shape-spec-audit/).
-6. **[`METHOD_SPEC.md`](METHOD_SPEC.md)** — companion to the above,
-   stating its **epistemic class**. Constraint-set reasoning is a
-   *method*, in the class of syllogistic logic and dimensional analysis,
-   so **it is not falsifiable and does not need to be** — the falsifiable
-   layer is the individual read and its removal test. Argues the same
-   epistemic act as conventional experiment with control traded against
-   trial count, states four standing limits, and adds the **shadow read**:
-   a shape described by the gaps it casts.
+9. **[`READING_PROTOCOL.md`](READING_PROTOCOL.md)** — how every folder
+   here is to be read: each is a marker for a sensed shape, not a thesis
+   under defense. Test the fit, extend it, or report where it breaks.
 
 `PREAMBLE.md` also carries a **NOTE TO READERS — TERM COLLISION**. Two
 phrases in this repo each name two distinct objects, and the difference is
@@ -66,12 +76,12 @@ refuted** and **absence of retest is not refutation**.
 `term-drift-citation/` runs the check and tallies the asymmetry it warns
 about.
 
-5. **[`CASE_STUDY_NARRATIVE_INSTINCT.md`](CASE_STUDY_NARRATIVE_INSTINCT.md)** —
-   the empirical record the spine rests on: a multi-round correction sequence
-   in which the framing of scale_builder / narrative claims was repeatedly
-   inverted and repeatedly caught. Documents the substitution-test
-   methodology and is the evidence for `EMRG_009` — a narrative-only system
-   cannot self-correct narrative instinct from inside its own scope.
+10. **[`CASE_STUDY_NARRATIVE_INSTINCT.md`](CASE_STUDY_NARRATIVE_INSTINCT.md)** —
+    the empirical record the spine rests on: a multi-round correction sequence
+    in which the framing of scale_builder / narrative claims was repeatedly
+    inverted and repeatedly caught. Documents the substitution-test
+    methodology and is the evidence for `EMRG_009` — a narrative-only system
+    cannot self-correct narrative instinct from inside its own scope.
 
 Each simulator-specific folder may also ship an aperture document
 (e.g. [`incentive-blindspot-sim/00_APERTURE.md`](incentive-blindspot-sim/00_APERTURE.md))

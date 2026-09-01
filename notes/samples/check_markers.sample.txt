@@ -1,0 +1,57 @@
+HELD MARKERS 2026-08-31 -- STRUCTURAL READINGS
+(the entry is a marker file by its own declaration; nothing
+ below renders, files, or adjudicates M-A..M-E)
+
+1  DELIVERY STRUCTURE
+   seam 'FEDERAL, SYSTEMATIC, DAILY' found 1 time(s); split True
+   marker half: headings ['M-A', 'M-B', 'M-C', 'M-D', 'M-E'], standing note True
+   appended half: G-08 draft True, HELD-not-filed note True,
+   names G-07 True; the draft render exists ONLY in the
+   appended half (True)
+   standing instruction echoed, not consumed: render the
+   mechanism (M-A) first and the instances under it.
+
+2  READ-ALONGSIDE REFERENCES
+   WORK_ORDER_FABLE.md            by name: ABSENT
+   WORK_ORDER_FABLE_02_GAPS.md    by name: ABSENT
+   WORK_ORDER_FABLE_02_GAPS -> seam-gaps/WORK_ORDER.md by
+   content: True {'file_exists': True, 'header_wo02': True, 'session_date': True, 'g05_g06_schema_note': True, 'cites_wo01_task3': True}
+   WORK_ORDER_FABLE -> by artifact only: True {'t1_protocol_reference_layer': True, 't2_rename_new_name_exists': True, 't2_rename_old_name_gone': True, 't3_decision_entry_in_schema': True, 't4_gap_index_tool': True}
+   The order that was never landed as a file survives only
+   as its effects -- the marker file's own stated purpose,
+   demonstrated on its sibling.
+
+3  THE G-01 QUESTION (two readings, no pick)
+   file cites 'G-01's detection floor' (marker True,
+   appended True); landed render: floor is G-02, G-01 is the
+   referent gap (True). Ids disagree: True.
+   README yield rule present: True. Referent unambiguous
+   either way; no id renumbered; verdict None.
+
+4  HOLD PRECONDITIONS, FROM THE FILE'S OWN TEXT
+   M-A: table rows 4 against 'past four rows' -> hold STANDS
+   M-C: programs with a stated observed set 1 (1887)
+        against 'N>1 observation programs' -> hold STANDS
+   M-B, M-D, M-E: NOT EVALUABLE HERE (conditions outside this file)
+
+5  RENDERED STATE AND INDEX CONSISTENCY
+   state: FILED (by WORK_ORDER_03) (WORK_ORDER_03 present: True)
+   index carries uninstrumented/OQ rows: True;
+   consistent with state: True; notes/markers row in index: False
+   The holds counted in 4 are facts about the marker
+   file's text; WO-03 narrowed them by the author's own
+   order (M-A at four rows, do-not-generalize; M-C's
+   hold now binds the lag figure, not the gap). And
+   WO-03's G-01 cross-reference independently confirms
+   the reading in 3 that the author's G-list differs
+   from the seam-gaps render's: True.
+
+6  CROSS-REFERENCES (path existence only)
+   uninstrumented/                              True
+   seam-gaps/                                   True
+   unrecordable-by-construction (as a path)     False
+   'unrecordable-by-construction' resolves as a concept,
+   not a path -- recorded, not repaired.
+
+This module computes; it does not conclude. The marker file
+is edited by nothing here.

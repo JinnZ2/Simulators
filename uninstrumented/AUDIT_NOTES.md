@@ -4013,3 +4013,269 @@ metric is being used. It catches an unregistered metric; it does not catch an
 unrun one at the callsite. That is `UNI_082` — a guard in one function is not
 a property of the instrument — with the guard placed at the suite instead,
 which is a different position and not a stronger one.
+
+---
+
+## CHARTER SIGNATURE — the parent instrument arrives
+
+`CHARTER_SIGNATURE.md`, delivered verbatim: an instrument at a
+self-declared N=3, held for extension, "parent of M-C, sibling of
+M-A. Not a sub-case." The lag, the extension set and the hold are the
+author's; `charter_signature_audit.py` computes what is computable
+about the declarations and edits nothing.
+
+### UNI_169 — the parent relation holds as a method diff, not an assertion
+
+Section 5 carries every operation G-08's method carries — declared-list
+extraction, absence-set derivation, the M-A separation, the failure
+date, the lag — with each correspondence declared as an anchored pair
+and both anchors checked in the named step (a keyword scan deciding
+correspondence on its own would be `nonidentity-census` T1-1). It adds
+two operations absent from G-08's method entirely — purpose-derivability
+with a marked residual, and boundary disputes as dated evidence — and
+widens the input class from observer manuals to any chartered scope.
+Contradicting a child step would be a different relation; none does.
+Six steps against six, computed.
+
+### UNI_170 — "N=3 verified" splits by provenance, and the horizon flips
+
+Instance 1 (weather) reproduces the landed record: 7 of 7 declared
+items and 9 of 9 absent items match the marker file's M-C observed and
+absent sets, token-checked with whitespace normalized. Instances 2
+(Morrill/Hatch) and 3 (National Bank Acts) appear nowhere in the marker
+file — new material, carried. And this is the first delivery in the
+drop family whose occasion sits **before** the environment's knowledge
+horizon rather than after it, so a consistency reading from prior
+general knowledge is possible at all: the audit codes ten carried facts
+`CONSISTENT_PRIOR` / `CARRIED`, with `CONSISTENT_PRIOR` stated as
+consistency with knowledge held before the delivery and **not**
+primary-source verification — the `ANC_010` line, from the other side
+of the horizon.
+
+### UNI_171 — the education row carries falsifier (c)'s evidence, and the routing has no state for it
+
+Falsifier (c): if boundary disputes show omitted variables CONSIDERED
+and declined on stated grounds, the absence is guarded, not unguarded —
+a different mechanism. The education row's own second note documents a
+dispute about exactly the omitted territory (a land-grant college
+arguing biology, geology and chemistry satisfied the charter) closed by
+statute ("Hatch 1887 passed partly to close that"). So one of the three
+delivered rows carries, in its own notes, the evidence class the
+falsifier names, for part of its absence set — and the ORDER OF
+OPERATIONS routes to two output states (present under another encoding
+/ genuinely held-constant) with no state for CONTESTED-AND-DECLINED.
+A stated falsifier with no slot in the instrument's own routing: the
+`MF_017` family shape arriving on a falsifier rather than a field, and
+the repair is one step after the M-A separation. Not a refutation — §4
+already anticipates guarded omissions for the displaced case, and (c)
+is written about the general structure — but the "unguarded" claim now
+reads per-item rather than per-row, on the delivery's own evidence.
+
+### UNI_172 — boundary disputes are read in both directions, and the discriminator is implied
+
+Section 5 step 5 reads a located dispute as **evidence** — "the
+assumption was visible to someone at the time. those arguments are
+dated evidence" — and 6(c) reads the same observable as the
+**falsifier**. Both readings are right for different disputes, and what
+separates them is implied rather than stated: whether the dispute
+concerned the omitted variable, and whether it was declined on stated
+grounds. Until that discriminator is on the page, every located dispute
+is codable in either direction — `reasoning-gate` G-FIT's shape, a rule
+that names why the observable discriminates without a check that it
+does.
+
+### UNI_173 — two holds, two denominators, neither releases the other
+
+The instrument refuses a lag **distribution** at N=3 domains; G-08
+refuses a lag **figure** below N>1 observation programs. Three charters
+are not the child's programs, so the parent's N does not release the
+child's hold, and both stand — the same discipline `check_markers.py`
+records for the marker file's own holds, arriving in the parent
+instrument already applied.
+
+### UNI_174 — a title a decade stale at its own address date, recorded not adjudicated
+
+The credit row reads "Comptroller Hugh McCulloch, American Bankers
+Association, October 1876". The Comptrollership ran 1863–65 (two
+Treasury terms after), so the title predates the address by a decade —
+reading: a former Comptroller identified by his best-known office, the
+ordinary attribution form, recorded as a drift in a carried row rather
+than adjudicated. The address, the quoted line, and the two figures
+(~30% mortgages bank-held early 1890s, ~35% NYC loans callable 1900)
+stay `CARRIED`: no source is reachable from here.
+
+### UNI_175 — the forward link resolves under the author's numbering, third instance
+
+Section 8 connects to "G-01 and G-03 in WORK ORDER 02". Under the
+author's list G-01 is the detection-floor gap the `seam-gaps/` render
+tags G-02 — the third instance of that citation after the marker file
+and WORK_ORDER_03's Task 4, each independently confirming that the
+author's G-list differs from the render's and that its README's yield
+rule was the right call. G-03 (substitution reads as stability) carries
+the same id in both lists, and the step-4 sentence — an unmeasured
+quantity and a stable quantity produce the same record — is the shared
+shape both links run on, restated in §8 for the funded/unfunded case.
+
+---
+
+## CORPUS AS CHARTER — the authorless-charter extension arrives
+
+`CORPUS_AS_CHARTER.md`, landed verbatim: the CHARTER SIGNATURE
+transform with the author subtracted, applied to a training corpus
+whose "declaration" is a differential recording rate. A prior
+session's write of it aborted and nothing persisted; landed here so
+the material survives. Its empirical layer is a press-sourced AI-eval
+case (ExploitGym / METR / Cotra) with the transcripts NOT in this
+repository and the sources egress-blocked, so `corpus_as_charter_audit.py`
+computes only the things computable from inside the tree and
+verifies nothing about the eval. Findings CAC_1..CAC_12 — CAC_1..CAC_7
+against the first (recovery) render, CAC_8..CAC_12 against the fuller
+canonical delivery `CORPUS_AS_CHARTER_V2.md` (below).
+
+### CAC_1 — the empirical layer is entirely carried, and that is the headline
+
+Every count, quote, proper name and percentage in the case and the
+missing-party sections is press-sourced and unverified here; the file
+says so at the top and flags VERIFY BEFORE USE, and the audit's first
+statement is that it verifies none of it. This is the `ANC_010` /
+`MS_004` status applied to a whole delivery rather than one citation,
+and it is the honest posture for material about a specific 2026 eval
+whose primary record this environment cannot reach.
+
+### CAC_2 — the relation to the parent instrument holds, author subtracted
+
+CHARTER SIGNATURE reads a declared, dated, authored charter; this
+keeps the transform and subtracts the author, replacing the explicit
+declaration with a differential recording rate (densely recorded =
+believed to vary; unrecorded background = believed to hold). The
+absence-set machinery, the unguarded-omission argument (§4 of the
+parent), and the inherited-bias conclusion are all present. Checked as
+vocabulary-in-section plus a named parent, computed not asserted —
+"child of the charter signature, not a sub-case" holds structurally,
+the same check the parent's own audit ran one level up (`UNI_169`).
+
+### CAC_3 — the ~40× asymmetry is conservative against its own inputs
+
+The file states audience 3–6 of ~1,300 transcripts (0.23–0.46%) and
+adversary >20%. The minimum asymmetry consistent with those — floor
+adversary over ceiling audience — is **~43×**, so the headline "~40×"
+sits at or below its own floor: it understates the file's own numbers,
+the honest direction. This is a check of the file against itself (the
+seam-gaps `verify_sources` internal-arithmetic move), not a check on
+the eval — the 3–6/~1,300 and >20% are themselves carried.
+
+### CAC_4 — provenance containment: no carried figure in the render's own prose
+
+Every carried figure (198, ~7%, >20%, 3–6, ~1,300, ~40) occurs only in
+the carried layer (§§2–4); none appears in the render's analytic
+sections (the frame, §1 extension, §5 depth stack, §6 physics, §7
+disagreements). The problem count recurs in §4's inference chain — a
+carried environment description, the same fact in a second carried
+context, explicitly not a leak. `MI_003`'s containment shape, on a
+whole document rather than a citation.
+
+### CAC_5 — the binary-instrument reading is the repo's own ungraded-term null
+
+The delivery's load-bearing move: the question "is the imported frame
+load-bearing or decorative, real or borrowed" is BINARY and the
+quantity is GRADED, so the instrument returns BOTH and both are
+correct — the signature of the wrong instrument, not of confused
+evidence. That is `criteria-drift` `CD_002`'s ordinal-compared-as-
+nominal and the SCALAR DEMAND family, and the graded replacement is a
+`fold-matrix` depth stack (0 token / 1 argument selected / 2 dichotomy
+imported / 3 behaviour) on a single token. The cross-references are
+real repo shapes; the audit records them and adds no empirical claim.
+
+### CAC_6 — the two disagreements are flagged, not adjudicated
+
+The "IN THE FILE" spec calls for "my two disagreements, on the record",
+and the delivery did not number them; the render pairs the two legible
+in the delivered text (selective-import → no-destination, the
+zero-sum-prior-as-bad-physics pushback), marks the pairing as its own
+reading of which two, and flags it for the author to correct rather
+than asserting it. The first-person layer is kept separate per
+`AUDIT_CONTRACT.md`'s co-production rule. `PB_001`/`CW_004` discipline
+on an ambiguous slot: reported, not invented.
+
+### CAC_7 — it is not a gap, and the METR access dispute stays open
+
+The file carries no gap fields and does not enter `GAP_INDEX.md` — an
+extension held for verification is not an open question. The named
+open items (the transcript search that would settle the missing-party
+reading; the METR access dispute, named in the source session's spec
+and un-elaborated in this delivery) are carried as open and
+un-adjudicated, the access dispute turning on the same transcript
+access this environment lacks.
+
+### CAC_8 — the fuller canonical delivery arrives; the relation holds on it
+
+`CORPUS_AS_CHARTER_V2.md` is the same document v1 recovered from the
+aborted-write spec, now arriving verbatim in its full eleven-section
+form (0 SOURCE CAVEAT … 11 OPEN). It is landed **beside** the v1 render
+rather than overwriting it, per the repo's supersession convention
+(`observer-exclusion` `SPEC_V2`, `design-basis` `SOURCE_DROP_V2`), so
+both stay inspectable — v1 the recovery that carried the material when
+the write aborted, v2 the actual document. The parent relation holds on
+v2's own text: it names `CHARTER_SIGNATURE.md`, declares itself "its
+extension to a substrate where the charter was never written", subtracts
+the author ("no author and no date"), and replaces the declaration with
+a differential recording rate — `CAC_2` one rendering on.
+
+### CAC_9 — the two renderings do not drift: the counts and the ~40× reproduce
+
+The headline for the pair. v1 and v2 are two renderings of one document,
+and a rendering that restates an earlier one is a copy — copies drift
+(`OE_011` / `DBK_010` / `DBK_021`). Pulled tolerant of formatting ("3 to
+6" vs "3-6", "~40×" vs "~40x"), the weight-bearing counts are identical
+across both: audience `(3, 6, 1300)`, adversary floor `20%`, stated
+asymmetry `40`. And the `CAC_3` arithmetic reproduces on v2's own stated
+counts — 3–6 of ~1,300 gives an audience ceiling of 0.46%, so the
+minimum asymmetry consistent with a >20% adversary floor is **43.3×**,
+and "~40×" is again at or below its own floor, conservative not
+overstated. The fuller pass added eight sections and moved no number.
+
+### CAC_10 — provenance containment holds on v2's expanded structure
+
+The `CAC_4` / `MI_003` containment shape, redone on the larger document.
+The weight-bearing asymmetry figures (`>20%`, `~40`, `0.4%`) appear only
+in the carried statistical region (§2 THE CASE, §3 THE MISSING PARTY)
+and in **none** of the pure argument sections (§1, §6, §7, §8, §10) —
+the argument prose carries no carried number. Two non-weight figures
+recur and are **recorded rather than flagged**, because they are
+restated facts and not leaked statistics: the environment count `198`
+in §9's enclosure recap (the installed environment, described a second
+time), and the escalation count `3-6` in §11's open-items pointer
+(naming the carried datum as the highest-value open question, not making
+a claim on it). §0 dates every source class (OpenAI + METR 26 Aug 2026;
+HF 29 July 2026) and marks the DISPUTED METR-transcript-access claim
+"Marked, not resolved" — the source-class discipline the sibling
+`corpus-input-gaps/check_source_class.py` enforces, honoured in the
+delivery itself.
+
+### CAC_11 — §8 is the charter-signature transform applied to epistemology
+
+A reading, flagged as this audit's and adjudicated as neither true nor
+false about the world. §8 (THE STANDARD IS THE ERA'S OWN) runs the
+parent instrument's own move one level up: an era's **declared** epistemic
+standard is the charter's declared list, and a frame that moved from
+"contested-with-counter-evidence" to "background-assumption without the
+counter-evidence ever being answered" is the unguarded absence — so the
+corpus is "biased **against its own declared standard**, and the
+declaration is on the record". That is the `CHARTER_SIGNATURE` structure
+(declared list vs unguarded absence) with the substrate being the era's
+epistemology rather than an institution's charter; the audit checks the
+structural presence and takes no position on the claim.
+
+### CAC_12 — the fuller pass keeps two disciplines the repo runs everywhere
+
+§7 (THE INSULATION RATIO) carries a self-correction **marked on the
+record** — "kept on the record because an earlier framing of this was
+wrong: insulation is not a binary property of a writing class. It is a
+ratio" — the repo's own correction-in-place discipline (`photoperiod`,
+`self-scan`) inside a delivered document. And §9 (ENCLOSURE IS NOT A
+BARRIER) holds two findings apart that it names as not-to-be-merged —
+"'Nothing can hold it' and 'the sensor was off' are different findings
+with different responses. Do not merge them" — the two-states-kept-apart
+/ absent-vs-known-negative discipline stated by the delivery rather than
+imposed by the audit. Both are recorded as present; neither is a claim
+about the eval.

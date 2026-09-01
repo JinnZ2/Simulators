@@ -103,7 +103,7 @@ proved over 19,200 synthetic combinations, no real structure named),
 `contributing_inflow.py` (urban runoff as a parameterized pool
 increment), `eap_coverage_v2.py` (the governance record plus tribal
 jurisdiction), `audit_v2.py` / `selftest_ccc_v2.py` / `CLAIM_TABLE_v2.md`
-(`CCC_001..CCC_018`), `UNDERGRADUATE_RESEARCH_GAPS.md` (13 gaps, each
+(`CCC_001..CCC_018`), `OPEN_QUESTIONS.md` (13 gaps, each
 with a knowledge state, a stranger-evaluable falsifier, data sources
 with access tiers, and a deliverable interface), and `DEEP_RESEARCH.md`
 (the roadmap).
