@@ -38,9 +38,41 @@ def _load(modname, filename):
     return mod
 
 
+# The commit holding the delivered, pre-repair modules. Every detector
+# below can be pointed at it, so a repair is shown by the same detector
+# firing on the old text and not on the new -- not by deleting the
+# check that caught it.
+PRE_REPAIR = "399517b"
+
+
+def _historical(filename, rev=PRE_REPAIR):
+    import subprocess
+    r = subprocess.run(["git", "-C", HERE, "show",
+                        "%s:columbia-chain-cascade/%s" % (rev, filename)],
+                       stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    return r.stdout.decode("utf-8") if r.returncode == 0 else None
+
+
+def _exec_source(modname, src):
+    """Execute a module's source text (e.g. a historical revision) as a
+    module object, with __file__ set so its HERE resolves here."""
+    import types
+    mod = types.ModuleType(modname)
+    mod.__file__ = os.path.join(HERE, modname + ".py")
+    exec(compile(src, mod.__file__, "exec"), mod.__dict__)
+    return mod
+
+
+def _module(filename, src=None):
+    name = filename[:-3]
+    if src is None:
+        return _load(name + "_cur", filename)
+    return _exec_source(name + "_hist", src)
+
+
 # ------------------------------------------------------- KILL 1
 
-def kill1():
+def kill1(src=None):
     """A self-correction reasoning trace left in contributing_inflow's
     render(). CLAIM: overlay artifact, not authored arithmetic. TEST:
     is it, or does it carry something intended?
@@ -53,7 +85,7 @@ def kill1():
     < 10). So the correction is sound; only the false start and the
     'Wait' are the artifact. The correction is shown, not applied --
     the delivered file stays as delivered."""
-    import contributing_inflow as CI
+    CI = _module("contributing_inflow.py", src)
     out = CI.render()
     trace_lines = [ln.strip() for ln in out.splitlines() if "Wait" in ln]
     # the corrected conclusion, checked as arithmetic
@@ -65,8 +97,11 @@ def kill1():
         "trace": trace_lines[0] if trace_lines else "",
         "corrected_conclusion_is_right": coupled and not indep,
         "carries_intended_content": True,
-        "verdict": "CONFIRMED (overlay artifact; the conclusion it "
-                   "reaches is intended and arithmetically sound)",
+        "verdict": ("CONFIRMED (overlay artifact; the conclusion it "
+                    "reaches is intended and arithmetically sound)"
+                    if trace_lines else
+                    "REPAIRED (no trace in the render; the corrected "
+                    "line stands alone)"),
         "proposed_correction":
             "excise the false start and 'Wait --'; keep the corrected "
             "line: at urban_increment 0.3 the coupled operator breaches "
@@ -78,7 +113,7 @@ def kill1():
 
 # ------------------------------------------------------- KILL 2
 
-def kill2():
+def kill2(src=None):
     """The stated decisive condition and the coded one differ.
 
     PROSE (render): decisive iff wave < pool_effective < crest -- a
@@ -97,7 +132,8 @@ def kill2():
     in the translation layer of a module written to refute it. Correct
     the prose, leave the arithmetic; the correction is recorded, not
     applied to the delivered file."""
-    import contributing_inflow as CI
+    CI = _module("contributing_inflow.py", src)
+    prose_is_max = "wave < pool_effective < crest" in CI.render()
     disagree = 0
     total = 0
     for wave in [1, 2, 3, 4, 5, 6, 7, 8, 9]:
@@ -116,8 +152,12 @@ def kill2():
         "prose_vs_code_disagreements": disagree,
         "cases": total,
         "sweep_one_sided": CI.sweep_urban_sensitivity(),
-        "verdict": "CONFIRMED and RESOLVED BY PHYSICS (the code/sum is "
-                   "correct; the prose/max diverged)",
+        "prose_states_max_reading": prose_is_max,
+        "verdict": ("CONFIRMED and RESOLVED BY PHYSICS (the code/sum is "
+                    "correct; the prose/max diverged)" if prose_is_max
+                    else "REPAIRED (the prose now states the sum-tip the "
+                    "code computes; the 226-case divergence is between "
+                    "the OLD prose reading and the code)"),
         "resolution":
             "the wave arrives on top of the standing pool, so the "
             "combined quantity is wave + pool; max would hold only if "
@@ -134,7 +174,7 @@ def kill2():
 
 # ------------------------------------------------------- KILL 3
 
-def kill3():
+def kill3(src=None):
     """Tribal adjacency supplied from memory at finer granularity than
     the owner data, no knowledge state, no source, and unused in the
     computed bound. CLAIM: asymmetric discipline. CLAIM: the fix is NOT
@@ -159,7 +199,7 @@ def kill3():
     under the same discipline the owners already carry -- a
     knowledge_state per row and a named source or a refusal, symmetric
     with the owner UNASSIGNED / UNKNOWN_ATM treatment."""
-    E2 = _load("eap_v2_audit", "eap_coverage_v2.py")
+    E2 = _module("eap_coverage_v2.py", src)
     owners = len(E2.owners_assigned())
     tribal = list(E2.TRIBAL_JURISDICTION)
     tribal_arity = len(tribal[0]) if tribal else 0
@@ -183,9 +223,11 @@ def kill3():
         "bound_invariant_to_tribal": b_with == b_without,
         "exclusion_is_rejected_state":
             "INSTITUTIONAL_EXCLUSION is not a valid" in ks_src,
-        "verdict_asymmetry": "CONFIRMED (owners refused + typed; tribal "
-                             "supplied, finer, untyped, unused in the "
-                             "bound)",
+        "verdict_asymmetry": ("CONFIRMED (owners refused + typed; tribal "
+                              "supplied, finer, untyped, unused in the "
+                              "bound)" if tribal_arity < 5 else
+                              "REPAIRED (tribal rows typed and sourced; "
+                              "recorded beside the bound, not counted)"),
         "verdict_do_not_drop": "CONFIRMED (dropping re-commits the "
                                "INSTITUTIONAL_EXCLUSION knowledge_state.py "
                                "rejects)",
@@ -199,14 +241,14 @@ def kill3():
 
 # ------------------------- two findings the landing turned up
 
-def ccc017_delivered_instance():
+def ccc017_delivered_instance(src=None):
     """CCC_017 claims the module_f report carries no severity language.
     The delivered module_f.render() trips the repo's own no_severity
     screen: its last line reads 'This module proves the mechanism is
     load-bearing when it is', and 'proves' is on the screen. So the
     delivered claim's own falsifier fires on the delivered artifact.
     Recorded, not corrected -- module_f.py is delivered."""
-    import module_f as MF
+    MF = _module("module_f.py", src)
     sys.path.insert(0, os.path.join(os.path.dirname(HERE),
                                     "sheet-structure-scan"))
     import no_severity  # noqa: E402
@@ -219,7 +261,7 @@ def ccc017_delivered_instance():
     }
 
 
-def v2_selftest_targets():
+def v2_selftest_targets(selftest_text=None):
     """The delivered selftest_ccc_v2.py imports the bare eap_coverage
     and audit -- the v1 files -- unpacks NODES as a 4-tuple, and reads
     the v1 truncation key 'module_f_body_complete'. So it exercises
@@ -229,7 +271,8 @@ def v2_selftest_targets():
     and NOT exercised by the delivered selftest -- which is exactly
     where KILL 3 lives, so the asymmetric-discipline row ships
     untested."""
-    s = _read("selftest_ccc_v2.py")
+    s = selftest_text if selftest_text is not None \
+        else _read("selftest_ccc_v2.py")
     E2 = _load("eap_v2_targets", "eap_coverage_v2.py")
     A2 = _load("audit_v2_targets", "audit_v2.py")
     import audit as A1
@@ -247,7 +290,8 @@ def v2_selftest_targets():
             "module_f_body_complete_in_source_drop" in A2.truncation()
             and "module_f_body_complete" not in A2.truncation(),
         "eap_v2_nodes_arity": len(E2.NODES[0]),   # 5 -> 4-unpack raises
-        "v2_additions_unexercised": True,
+        "v2_additions_unexercised":
+            "import eap_coverage as EAP" in s,
     }
 
 
@@ -412,7 +456,7 @@ def tier_scan():
 
 # ------------------------- the KILL 3 provenance root
 
-def kill_provenance():
+def kill_provenance(ci_src=None):
     """Where the KILL 3 data came from, and why KILL 1 and KILL 2 are
     one item.
 
@@ -431,7 +475,7 @@ def kill_provenance():
     the arithmetic and not even the docstring."""
     dr = _read("DEEP_RESEARCH.md")
     E2 = _load("eap_v2_prov", "eap_coverage_v2.py")
-    ci = _read("contributing_inflow.py")
+    ci = ci_src if ci_src is not None else _read("contributing_inflow.py")
     tribal_names = [t[0].split()[0] for t in E2.TRIBAL_JURISDICTION]
     # section 6.1 names Colville, Spokane, Yakama, Warm Springs, Umatilla
     dr61 = ("Colville Reservation (upstream of Grand Coulee)" in dr
@@ -500,6 +544,55 @@ def cards_present():
                            "GAP_15_bridge_impoundment.md")),
         "delivered_13gap_unedited": True,
     }
+
+
+# ------------------------- the repairs, shown by the same detectors
+
+def repair_status():
+    """Each detector run twice: on the pre-repair revision and on the
+    working tree. A repair is shown when the detector fires on the old
+    text and not on the new. Nothing is shown by deleting a check."""
+    rows = []
+    h_ci = _historical("contributing_inflow.py")
+    h_mf = _historical("module_f.py")
+    h_e2 = _historical("eap_coverage_v2.py")
+    h_st = _historical("selftest_ccc_v2.py")
+    if h_ci:
+        rows.append(("KILL 1 trace in render",
+                     kill1(h_ci)["trace_present"], kill1()["trace_present"]))
+        rows.append(("KILL 2 prose states the max reading",
+                     kill2(h_ci)["prose_states_max_reading"],
+                     kill2()["prose_states_max_reading"]))
+    if h_e2:
+        rows.append(("KILL 3 tribal rows untyped",
+                     not kill3(h_e2)["tribal_has_knowledge_state"],
+                     not kill3()["tribal_has_knowledge_state"]))
+    if h_mf:
+        rows.append(("CCC_017 screened token in module_f",
+                     bool(ccc017_delivered_instance(h_mf)["screen_hits"]),
+                     bool(ccc017_delivered_instance()["screen_hits"])))
+    if h_st:
+        rows.append(("v2 selftest imports the bare v1 modules",
+                     v2_selftest_targets(h_st)["v2_additions_unexercised"],
+                     v2_selftest_targets()["v2_additions_unexercised"]))
+    return {"rev": PRE_REPAIR, "rows": rows,
+            "history_reachable": all([h_ci, h_mf, h_e2, h_st]),
+            "arithmetic_unchanged": _arithmetic_unchanged(h_ci, h_mf)}
+
+
+def _arithmetic_unchanged(h_ci, h_mf):
+    """The repairs touched prose only: every function other than render
+    is byte-identical to the pre-repair revision."""
+    if not (h_ci and h_mf):
+        return None
+    import ast
+    def bodies(src):
+        t = ast.parse(src)
+        return {n.name: ast.dump(n) for n in t.body
+                if isinstance(n, ast.FunctionDef) and n.name != "render"}
+    ci_same = bodies(h_ci) == bodies(_read("contributing_inflow.py"))
+    mf_same = bodies(h_mf) == bodies(_read("module_f.py"))
+    return ci_same and mf_same
 
 
 # ---------------------------------------------------------- render
@@ -768,8 +861,26 @@ def render():
         w("  " + ln)
     w("")
 
+    rs = repair_status()
+    w("THE CORRECTIONS -- each shown by the same detector, on both arms")
+    w("  pre-correction revision: %s   reachable: %s"
+      % (rs["rev"], rs["history_reachable"]))
+    w("  %-44s %-8s %s" % ("detector", "before", "now"))
+    for name, before, now in rs["rows"]:
+        w("  %-44s %-8s %s" % (name, before, now))
+    w("  non-render function bodies byte-identical to pre-correction: %s"
+      % rs["arithmetic_unchanged"])
+    for ln in _wrap(
+            "Every correction is a change to prose, a docstring, an import "
+            "target, or a data row's typing. The arithmetic is untouched, "
+            "asserted by comparing every non-render function body against "
+            "the pre-correction revision. The checks that caught each item "
+            "still run, pointed at the old text, so a regression turns "
+            "them red."):
+        w("  " + ln)
+    w("")
     w("This module computes; it does not conclude. Findings are in")
-    w("AUDIT_NOTES.md as CCA_001..CCA_014. Nothing here is a hydraulic")
+    w("AUDIT_NOTES.md as CCA_001..CCA_022. Nothing here is a hydraulic")
     w("result: the spec's actual subject stays untested (CCC_008).")
     return "\n".join(out)
 

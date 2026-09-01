@@ -26,9 +26,17 @@ def _read(name):
     return io.open(os.path.join(HERE, name), encoding="utf-8").read()
 
 
-def entries():
-    """Gap number -> entry text, 1..13 from the delivered file, 14 and
-    15 from the two cards."""
+def entries(assembled=False):
+    """Gap number -> entry text. Delivered: 1..13 from the delivered
+    file, 14 and 15 from the two cards. Assembled: all fifteen from
+    UNDERGRADUATE_RESEARCH_GAPS_V2.md (v1 + the cards + the addenda)."""
+    if assembled:
+        main = _read("UNDERGRADUATE_RESEARCH_GAPS_V2.md")
+        parts = re.split(r"(?m)^## (\d+)\. ", main)
+        out = {}
+        for i in range(1, len(parts), 2):
+            out[int(parts[i])] = parts[i + 1]
+        return out
     main = _read("UNDERGRADUATE_RESEARCH_GAPS.md")
     parts = re.split(r"(?m)^## (\d+)\. ", main)
     out = {}
@@ -62,7 +70,7 @@ POSTGRAD = [
     ("uncertainty bounds asked for", r"uncertainty bound"),
     ("known-answer / validation step",
      r"Validate against|reproduced on a second machine|"
-     r"validation case|reproduce the 19"),
+     r"validation case|reproduce the 19|Known-answer step"),
     ("coupling to other gaps named", r"\bGaps? \d+"),
     ("what-would-move-it per parameter",
      r"names what would move it"),
@@ -71,14 +79,14 @@ POSTGRAD = [
     # step the researcher takes -- the word-list miss, kept narrow.
     ("consent / consultation step",
      r"obtain consent|with consent|free, prior|consult(?:ation)? "
-     r"(?:with|before)|consent (?:from|of) the"),
+     r"(?:with|before)|consent (?:from|of) the|initiate consultation"),
     ("deliverable schema (columns / fields)",
-     r"\bcolumns?\b|\bfields?:|\bschema\b"),
+     r"\bcolumns?\b|\bfields?:|\bschema\b|Deliverable schema"),
 ]
 
 
-def census():
-    ents = entries()
+def census(assembled=False):
+    ents = entries(assembled)
     rows = []
     for name, pat in TEMPLATE + POSTGRAD:
         have = [g for g in sorted(ents) if re.search(pat, ents[g])]
@@ -174,6 +182,28 @@ def reading():
             for g in sorted(READING)]
 
 
+def tier_coverage_v2():
+    """On the assembled file, every Data-sources bullet is paired with
+    an addendum tier line naming the same source. Coverage is the
+    paired count over the bullet count; UNKNOWN is a tier, not a gap."""
+    import kill_audit as K
+    ents = entries(assembled=True)
+    total = paired = 0
+    per_tier = {}
+    for g in sorted(ents):
+        bullets = K._source_bullets(ents[g])
+        tiers = re.findall(r"^- (.+?) — \*\*(OPEN|REQUESTABLE|GATED|UNKNOWN)"
+                           r"\*\*; route: ", ents[g], flags=re.M)
+        named = dict((src.strip(), t) for src, t in tiers)
+        for b in bullets:
+            total += 1
+            src = b[2:].strip()
+            if src in named:
+                paired += 1
+                per_tier[named[src]] = per_tier.get(named[src], 0) + 1
+    return {"bullets": total, "paired": paired, "per_tier": per_tier}
+
+
 def _wrap(s, n=66):
     words, lines, cur = s.split(), [], ""
     for wd in words:
@@ -201,6 +231,19 @@ def render():
         tag = "T" if r["template"] else "P"
         w("  %-38s %s %s" % (r["field"], tag, marks))
     w("  T = template field, P = post-graduate essential")
+    w("")
+    c2 = census(assembled=True)
+    w("CENSUS ON THE ASSEMBLED FILE (v1 + cards + addenda)")
+    for r in c2["rows"]:
+        if r["template"]:
+            continue
+        marks = " ".join(" y" if g in r["have"] else " -"
+                         for g in range(1, 16))
+        w("  %-38s P %s" % (r["field"], marks))
+    tc = tier_coverage_v2()
+    w("  data-source bullets paired with a tier line: %d of %d   %s"
+      % (tc["paired"], tc["bullets"],
+         " ".join("%s %d" % kv for kv in sorted(tc["per_tier"].items()))))
     w("")
     tmpl = [r for r in c["rows"] if r["template"]]
     post = [r for r in c["rows"] if not r["template"]]
@@ -277,7 +320,7 @@ def render():
         w("  " + ln)
     w("")
     w("This module computes; it does not conclude. Findings are in")
-    w("AUDIT_NOTES.md as CCA_015..CCA_018. Nothing here is a hydraulic")
+    w("AUDIT_NOTES.md as CCA_015..CCA_022. Nothing here is a hydraulic")
     w("result; every line is a property of the delivered text.")
     return "\n".join(out)
 

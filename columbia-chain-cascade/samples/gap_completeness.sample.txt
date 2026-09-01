@@ -21,6 +21,18 @@ CENSUS (mechanical; a hit is a hit)
   deliverable schema (columns / fields)  P  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
   T = template field, P = post-graduate essential
 
+CENSUS ON THE ASSEMBLED FILE (v1 + cards + addenda)
+  prior-art table (do not re-derive)     P  -  -  -  -  -  -  -  -  -  -  -  -  -  y  y
+  citation status / provenance flag      P  -  -  -  -  -  -  -  -  -  -  -  -  -  y  y
+  secondary falsifier                    P  -  -  -  -  -  -  -  -  -  -  -  -  -  y  y
+  uncertainty bounds asked for           P  y  -  -  -  -  -  -  -  -  -  -  -  -  y  -
+  known-answer / validation step         P  y  y  y  y  y  y  y  y  y  y  y  y  y  y  y
+  coupling to other gaps named           P  -  -  y  -  -  -  -  -  -  -  -  -  -  y  y
+  what-would-move-it per parameter       P  -  -  -  -  -  -  -  -  -  -  -  -  -  y  -
+  consent / consultation step            P  -  -  y  -  -  -  -  -  -  -  -  -  -  -  -
+  deliverable schema (columns / fields)  P  -  -  -  -  y  y  y  y  y  -  -  -  -  -  -
+  data-source bullets paired with a tier line: 76 of 76   GATED 18 OPEN 46 REQUESTABLE 9 UNKNOWN 3
+
   template fields present in all 15:  True
   essentials carried ONLY by gaps 14/15: 5 of 9
     - prior-art table (do not re-derive)
@@ -136,5 +148,5 @@ THE READING -- per gap, what is still missing, with a basis
   positive control to run it against.
 
 This module computes; it does not conclude. Findings are in
-AUDIT_NOTES.md as CCA_015..CCA_018. Nothing here is a hydraulic
+AUDIT_NOTES.md as CCA_015..CCA_022. Nothing here is a hydraulic
 result; every line is a property of the delivered text.

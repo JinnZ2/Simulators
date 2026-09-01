@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 # contributing_inflow.py -- CC0, stdlib only, phone-buildable, parses under 3.9
 #
+# REPAIRED (KILL 1 / KILL 2): the render() prose at urban_increment 0.3
+# and the 'decisive when' formula now state the coupled sum-tip the code
+# computes. No function body changed. Pre-repair text is at git 399517b.
+#
 # CONTRIBUTING INFLOW — urban runoff as a parameterized antecedent pool increment.
 #
 # The mechanism: impervious surfaces in upstream cities increase runoff
@@ -267,15 +271,17 @@ def render():
     w("    more waves fall into the decisive region.")
     w("")
     w("  At urban_increment = 0.3: pool_eff = 5.2, wave 6")
-    w("    now breaches under BOTH operators (max(6,5.2) = 6 >= 10 is")
-    w("    FALSE, but 6+5.2 = 11.2 >= 10 is TRUE). Wait — max(6,5.2) = 6,")
-    w("    which is still < 10. So independent does NOT breach. The urban")
-    w("    increment has not yet pushed the pool above the wave.")
+    w("    breaches under coupled (6+5.2 = 11.2 >= 10) and still NOT under")
+    w("    independent (max(6,5.2) = 6 < 10). The band is wider again; the")
+    w("    independent verdict does not move with the increment.")
     w("")
-    w("  The urban increment is decisive when it pushes pool_effective")
-    w("  above the wave but below the crest — i.e. when")
-    w("    wave < pool_effective < crest")
-    w("  which requires urban_increment > (wave / pool_natural) - 1.")
+    w("  The urban increment is decisive when it tips the COUPLED sum over")
+    w("  the crest — i.e. when")
+    w("    wave + pool_natural < crest <= wave + pool_effective")
+    w("  which requires urban_increment >= (crest - wave) / pool_natural - 1.")
+    w("  This is the sum-tip the code computes (urban_decisive). The pool")
+    w("  overtaking the wave is the independent-node reading, and is not")
+    w("  the condition.")
     w("")
     w("SWEEP — structural properties hold across the parameter space:")
     w("  %s" % ("PASS" if sweep_urban_sensitivity() else "FAIL"))

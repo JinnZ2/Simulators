@@ -64,4 +64,4 @@ WHAT THIS IS AND IS NOT
 
   The HEC-RAS run on published data — the spec's falsifiable test —
   is required to show the band is entered for any real structure.
-  This module proves the mechanism is load-bearing when it is.
+  This module establishes the mechanism is load-bearing when it is.

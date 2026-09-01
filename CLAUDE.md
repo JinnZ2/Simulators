@@ -8119,8 +8119,30 @@ underneath).
   six sovereign nations — the ethics layer, cheapest to close — and a bare
   `consult` pattern would have hidden it, firing on "tribal consultation"
   as the quantity mapped (the `T1-1` word-list shape inside a completeness
-  check, narrowed to step form and null-tested). Eighteen `CCA_*` claims.
-  Stdlib only, parses under 3.9, phone-buildable, CC0.
+  check, narrowed to step form and null-tested). **At the sender's "repair
+  or add what we are able" the folder moved from audit to repair.**
+  **`CCA_019`:** five corrections to the delivered modules — the KILL 1/2
+  prose, the KILL 3 tribal rows typed under `knowledge_state` and recorded
+  beside the bound rather than counted, `CCC_017`'s one word, and the v2
+  selftest retargeted at the v2 modules (green, 102) — each shown by the
+  same detector run on the pre-correction revision `399517b` and on the
+  working tree, every non-render function body byte-identical; the
+  `proves` exemption retired. **`CCA_020`:** `initiator_schemas.py` gives
+  gaps 5–9 the column lists and a loader that refuses a short row or the
+  rejected state, one hydrograph interface shared with `bridge-impoundment`.
+  **`CCA_021`:** `gap_addenda.json` tiers all 76 sources with a route for
+  every non-open one (46 OPEN / 18 GATED / 9 REQUESTABLE / 3 UNKNOWN),
+  carried not probed, matched to the delivered bullets by a build that
+  refuses a mismatch, plus a known-answer candidate per gap and the gap 3
+  consent step (federal FOIA does not reach tribal governments).
+  **`CCA_022`:** `UNDERGRADUATE_RESEARCH_GAPS_V2.md` is generated from
+  verbatim v1 + the two cards slotted as 14/15 + the addenda as fenced
+  blocks — stripping the fences returns v1 byte-for-byte — and on it
+  known-answer is 15/15, schema 5/5, consent 1/1, tiers 76/76, while prior
+  art, citation status, secondary falsifier and what-would-move-it stay at
+  14/15 only, **left unauthored on purpose** (citations from memory are
+  the dead-reference hazard). Twenty-two `CCA_*` claims. Stdlib only,
+  parses under 3.9, phone-buildable, CC0.
 - `reservoir-chain-coupling/` — The antecedent-coupling amplifier
   `columbia-chain-cascade` `CCC_001` flagged as truncated, now delivered
   as a complete initiator-agnostic spec — and unlike that HEC-RAS build

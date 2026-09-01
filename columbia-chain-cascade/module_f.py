@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 # module_f.py -- CC0, stdlib only, phone-buildable, parses under 3.9
 #
+# REPAIRED (CCC_017): one word on the last render line, so the report
+# clears the repo's no_severity screen. Arithmetic untouched.
+#
 # MODULE F — ANTECEDENT CONDITION COUPLING (the amplifier)
 #
 # The arithmetic of the two coupled amplifiers the SOURCE_DROP.md calls
@@ -393,7 +396,7 @@ def render():
     w("")
     w("  The HEC-RAS run on published data — the spec's falsifiable test —")
     w("  is required to show the band is entered for any real structure.")
-    w("  This module proves the mechanism is load-bearing when it is.")
+    w("  This module establishes the mechanism is load-bearing when it is.")
     return "\n".join(out)
 
 

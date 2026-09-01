@@ -20,7 +20,7 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import eap_coverage as EAP  # noqa: E402
+import eap_coverage_v2 as EAP  # noqa: E402
 
 # Module F may not exist in all environments
 try:

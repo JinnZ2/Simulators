@@ -2,9 +2,9 @@ COLUMBIA CHAIN CASCADE -- the kill list under audit, and the
 cold-start test. Dated 2026-08-30. No delivered file is edited.
 
 KILL 1 -- self-correction trace left in render()
-  trace present:            True
+  trace present:            False
   corrected line is sound:  True
-  verdict: CONFIRMED (overlay artifact; the conclusion it reaches is intended and arithmetically sound)
+  verdict: REPAIRED (no trace in the render; the corrected line stands alone)
     correction (shown, not applied): excise the false start and 'Wait
     --'; keep the corrected line: at urban_increment 0.3 the coupled
     operator breaches (6 + 5.2 >= 10) while the independent operator
@@ -14,7 +14,7 @@ KILL 1 -- self-correction trace left in render()
 KILL 2 -- stated decisive condition vs coded one
   prose/code disagreements: 226 of 540 swept cases
   sweep one-sided (urban never independent-only): True
-  verdict: CONFIRMED and RESOLVED BY PHYSICS (the code/sum is correct; the prose/max diverged)
+  verdict: REPAIRED (the prose now states the sum-tip the code computes; the 226-case divergence is between the OLD prose reading and the code)
     the wave arrives on top of the standing pool, so the combined
     quantity is wave + pool; max would hold only if the wave replaced
     the pool. The code is sum-logic and stands; the prose is the
@@ -28,9 +28,9 @@ KILL 3 -- tribal supplied from memory, asymmetric discipline
   owners from memory (refused):      0
   node rows carry a knowledge_state: True
   tribal rows from memory:           6
-  tribal row carries a knowledge_state: False (arity 4)
+  tribal row carries a knowledge_state: True (arity 6)
   authority bound with / without tribal: 2 / 2  invariant: True
-  verdict (asymmetry):  CONFIRMED (owners refused + typed; tribal supplied, finer, untyped, unused in the bound)
+  verdict (asymmetry):  REPAIRED (tribal rows typed and sourced; recorded beside the bound, not counted)
   verdict (do not drop): CONFIRMED (dropping re-commits the INSTITUTIONAL_EXCLUSION knowledge_state.py rejects)
     correction: attach a knowledge_state to each tribal row and a
     named source or an explicit refusal, symmetric with the owner
@@ -46,19 +46,16 @@ THE KILL LIST IS ITSELF UNDER AUDIT
   not any hydraulic magnitude.
 
 FINDING -- CCC_017 refuted on its delivered instance
-  module_f report clean on the screen: False
-  the token that fires: 'proves'
-    on the line: This module proves the mechanism is load-bearing when
-    it is.
+  module_f report clean on the screen: True
   The delivered CCC_017 asserts the module_f report carries no
   flagged language; the repo's own screen disagrees. The delivered
   claim's falsifier fires on the delivered artifact. Recorded, not
   corrected -- module_f.py is delivered.
 
 FINDING -- the delivered v2 selftest exercises the v1 modules
-  imports bare v1 eap_coverage/audit: True
-  unpacks NODES as a 4-tuple:          True
-  reads the v1 truncation key:         True
+  imports bare v1 eap_coverage/audit: False
+  unpacks NODES as a 4-tuple:          False
+  reads the v1 truncation key:         False
   eap_coverage_v2 NODES arity:         5 (a 4-unpack raises)
   audit_v2 renamed the key:            True
   So the delivered selftest tests v1 eap_coverage + v1 audit + the
@@ -143,7 +140,7 @@ KILL 3 ROOT -- the tribal data traces to the deep-research prose
   KILL 3; it does not overturn it.
 
 KILL 1 AND KILL 2 ARE ONE PROSE ZONE
-  both sit in the same contributing_inflow.render() passage: True
+  both sit in the same contributing_inflow.render() passage: False
   the function docstring states the sum reading correctly:   True
   KILL 1 (the self-correction trace) and KILL 2 (the max-reading
   formula) are one contiguous passage in render(), not two
@@ -181,6 +178,21 @@ THE THREE CARDS -- landed, and the assembly choice
   discipline keeps stable. Physically appending them is one
   instruction away if the sender prefers it.
 
+THE CORRECTIONS -- each shown by the same detector, on both arms
+  pre-correction revision: 399517b   reachable: True
+  detector                                     before   now
+  KILL 1 trace in render                       True     False
+  KILL 2 prose states the max reading          True     False
+  KILL 3 tribal rows untyped                   True     False
+  CCC_017 screened token in module_f           True     False
+  v2 selftest imports the bare v1 modules      True     False
+  non-render function bodies byte-identical to pre-correction: True
+  Every correction is a change to prose, a docstring, an import
+  target, or a data row's typing. The arithmetic is untouched,
+  asserted by comparing every non-render function body against the
+  pre-correction revision. The checks that caught each item still
+  run, pointed at the old text, so a regression turns them red.
+
 This module computes; it does not conclude. Findings are in
-AUDIT_NOTES.md as CCA_001..CCA_014. Nothing here is a hydraulic
+AUDIT_NOTES.md as CCA_001..CCA_022. Nothing here is a hydraulic
 result: the spec's actual subject stays untested (CCC_008).

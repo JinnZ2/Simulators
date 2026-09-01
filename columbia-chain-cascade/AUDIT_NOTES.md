@@ -1,7 +1,12 @@
 # AUDIT_NOTES — the kill list under audit, and the cold-start test
 
-`CCA_001..CCA_018`. All audit content is here and in `kill_audit.py` /
-`selftest_kill.py`; the delivered package is edited by nothing. The
+`CCA_001..CCA_022`. All audit content is here and in `kill_audit.py` /
+`selftest_kill.py`. **The delivered package was edited by nothing through
+`CCA_018`; at the sender's "repair or add what we are able" the delivered
+modules were corrected — prose, a docstring, an import target, a data
+row's typing, never arithmetic — each correction shown by the same
+detector that caught it, run on the pre-correction revision `399517b`
+and on the working tree (`CCA_019`).** The
 package arrived with its own kill list, sent as **claims under test**
 with the instruction *"a kill Fable overturns is a better outcome than
 a kill it confirms."* All three hold; none is overturned — but the
@@ -44,6 +49,10 @@ claim, never the delivered package.
 | `CCA_016` | No gap gives a deliverable schema, and gaps 5–9 deliver "referenced by Module A–E" — spec section names, not code. The cold-start Q3 was clean on *naming* and fails on *drop-in* for five gaps: the deliverable is a filename with nothing in the package to plug into. | SUPPORTED |
 | `CCA_017` | A known-answer step is present in gaps 1, 2, 10, 12 and 14 and absent from the ten others — a calibrated parameter handed over with no positive control, the repo's own no-metric-without-a-known-answer rule unmet at the agenda level. | SUPPORTED |
 | `CCA_018` | Gap 3 (tribal EAP) has no consent or consultation **step** — its method reads "request or locate" records from six sovereign nations — while the repo's field-study entries make collective consent a precondition; the bare word fires on gap 3 only as the quantity being mapped, the word-list miss recorded rather than counted. | SUPPORTED |
+| `CCA_019` | Five corrections to the delivered modules (KILL 1, KILL 2, KILL 3, `CCC_017`, the v2 selftest's targets), each shown by its own detector firing on `399517b` and not on the working tree; every non-render function body byte-identical before and after. | SUPPORTED |
+| `CCA_020` | `initiator_schemas.py` supplies the drop-in gaps 5–9 lacked: a column list per deliverable, a loader that refuses a missing or extra column and the rejected state, and the one hydrograph interface every initiator shares. | SUPPORTED |
+| `CCA_021` | `gap_addenda.json` tiers all 76 sources with a route for every non-open one (46 OPEN / 18 GATED / 9 REQUESTABLE / 3 UNKNOWN), names a known-answer candidate per gap, adds the gap 3 consent step and the 5–9 schema pointers — **carried, not probed**, and matched to the delivered bullets by a build that refuses a mismatch. | SUPPORTED |
+| `CCA_022` | `UNDERGRADUATE_RESEARCH_GAPS_V2.md` is generated from verbatim v1 + the two cards (slotted as 14/15) + the addenda, fenced so stripping them returns v1 byte-for-byte; on it, known-answer is 15/15, schema 5/5, consent 1/1, tiers 76/76 — while prior art, citation status, secondary falsifier and what-would-move-it stay at 14/15 only, **left unauthored on purpose**. | SUPPORTED |
 
 ---
 
@@ -413,3 +422,123 @@ the `T1-1` word-list shape arriving inside a completeness check.
 **Falsifier:** a consultation or consent step in gap 3's method. The
 step-form pattern is null-tested: the bare word does fire on gap 3, so
 the narrowing is doing the work.
+
+
+---
+
+## UPDATES — claims corrected forward at the sender's "repair or add"
+
+- **`CCA_001` / `CCA_002` (KILL 1, KILL 2)** — REPAIRED. The `render()`
+  passage now states the coupled sum-tip the code computes; the false
+  start and `Wait —` are gone. Detector on `399517b`: trace present, prose
+  states the max reading. Detector now: neither. Arithmetic untouched.
+- **`CCA_003` (KILL 3)** — REPAIRED as the claim's own correction
+  specified: the six tribal rows carry a `knowledge_state` (`UNKNOWN_ATM`,
+  validated at import through `knowledge_state.validate`) and a source
+  field naming where they came from and what would move them. Recorded
+  beside the bound, not counted; the prose that said "strengthening the
+  claim" now says "recorded and typed, not counted". Do-not-drop holds.
+- **`CCA_005` (`CCC_017`)** — REPAIRED: one word on module_f's last line.
+  The delivered `selftest_ccc_v2.py` is green (102 checks).
+- **`CCA_006`** — REPAIRED: `selftest_ccc_v2.py` and `audit_v2.py` import
+  the v2 modules, unpack the 5-tuple, read the renamed key, and check the
+  tribal rows are typed. The KILL 3 row is under test.
+- **`CCA_010`** — ADDRESSED in the registry and the assembled file
+  (`CCA_021`, `CCA_022`), not in the delivered text: 76/76 sources tiered
+  and routed there; the delivered v1 file is unchanged.
+- **`CCA_015`** — PARTLY addressed: known-answer, schema, consent, tiers
+  are supplied; prior art, citation status, secondary falsifier and
+  what-would-move-it are **not** — see `CCA_022`.
+- **`CCA_016`** — ADDRESSED by `initiator_schemas.py` (`CCA_020`).
+- **`CCA_017`** — ADDRESSED as named candidates (`CCA_021`), not as runs.
+- **`CCA_018`** — ADDRESSED as an addendum step on gap 3 (`CCA_021`); the
+  consultation itself is fieldwork nobody here can do.
+
+## CCA_019 — five corrections, each shown by the detector that caught it
+
+The sender's instruction moved the folder from audit to repair. The rule
+followed: correct prose, docstrings, import targets and data typing;
+never a function body. Each correction is shown, not asserted — the same
+detector runs on the pre-correction revision (`git show 399517b:…`) and
+on the working tree, and `repair_status()` prints both arms:
+
+| detector | before | now |
+|---|---|---|
+| KILL 1 trace in render | True | False |
+| KILL 2 prose states the max reading | True | False |
+| KILL 3 tribal rows untyped | True | False |
+| CCC_017 screened token in module_f | True | False |
+| v2 selftest imports the bare v1 modules | True | False |
+
+`_arithmetic_unchanged()` parses every function other than `render` in
+`contributing_inflow.py` and `module_f.py` on both arms and compares the
+AST dumps: identical. The checks that caught each item are not deleted;
+they are pointed at the old text, so a regression turns them red. The
+`proves` exemption retired with the correction — the kill-audit report is
+clean with no mask.
+
+**Falsifier:** any detector reading True on the working tree, any
+non-render function body differing from `399517b`, or `399517b`
+unreachable (the checks then fail rather than pass vacuously).
+
+## CCA_020 — the drop-in for gaps 5–9
+
+`initiator_schemas.py` declares, per deliverable, the column list the
+entry never gave: `breach_params.csv` (15), `seismic_params.csv` (12),
+`hydro_params.csv` (12), `cyber_params.yaml` (10), `compound_matrix.csv`
+(10). Every table shares four leading columns — `node`,
+`knowledge_state`, `source`, `would_move_it` — so a bare number cannot
+enter a row. `validate_rows()` refuses a missing column, an extra column,
+and a row whose state is not one of `knowledge_state.VALID_STATES`
+(`INSTITUTIONAL_EXCLUSION` is refused by name). `hydrograph_interface()`
+is the `bridge-impoundment` initiator key set, so the five initiators and
+the bridge release write one interface (`CCC_007`). A schema names what a
+row carries; it sets no value and no default — no physics is in the file.
+The `compound_matrix` schema adds an `interaction_factor_tolerance`
+column, because gap 9's falsifier ("all factors = 1.0") is a point and
+needs a band to be fireable.
+
+**Falsifier:** a loader that accepts a short row, an extra column, or the
+rejected state — pinned in both directions.
+
+## CCA_021 — the addenda registry: carried, not probed
+
+`build_addenda.py` writes `gap_addenda.json`: for each of the 76 sources
+a tier and a route, matched to the delivered bullet by a distinctive
+substring — the build **refuses** if any bullet is unmatched or any key
+matches two, so the registry cannot drift from the entries. The registry
+declares `probed: false` at the top: every tier is assigned from general
+knowledge of the holding institution, not from a request made here
+(egress is an allowlist), and `UNKNOWN` is used where the holder or the
+existence of a source is not established (3 of 76). Every non-open source
+names at least one route, per START_HERE. Two corrections rode in with
+the tiers: federal FOIA does not reach tribal governments (gap 3's
+"public, via tribal websites or FOIA" is routed to direct request after
+consultation), and the gap 14 rim-stability line gets the sender's own
+TIER GATED + ROUTES + IF REFUSED shape. The registry also carries a named
+known-answer candidate for every gap, the gap 3 consent step, and the
+5–9 schema pointers.
+
+**Falsifier:** a bullet with no registry row, or a non-open row with no
+route — the build exits 1 on the first and the selftest pins the second.
+
+## CCA_022 — the assembled file, and what was left unauthored on purpose
+
+`assemble_gaps_v2.py` generates `UNDERGRADUATE_RESEARCH_GAPS_V2.md`
+deterministically from verbatim v1, the two cards slotted in as
+`## 14.` and `## 15.` (the sender's instruction, now met literally), and
+the addenda inserted as fenced blocks. **Stripping every fenced block
+returns v1 byte-for-byte**, so the generator is the provenance and the
+delivered file is never edited. On the assembled file the census reads:
+known-answer 15/15, deliverable schema 5/5 (gaps 5–9), consent step 1/1
+(gap 3), tiers 76/76. Four essentials stay at gaps 14/15 only — prior-art
+table, citation status / provenance flag, secondary falsifier,
+what-would-move-it — and they are **left unauthored on purpose**: a
+prior-art table is citations, and citations supplied from memory are the
+dead-reference hazard the GAP 14 provenance flags exist to catch. Those
+four are the sender's to write, one gap at a time, with sources in hand.
+The line between "what we are able" and what we are not is drawn there.
+
+**Falsifier:** `strip(V2) != v1`, or regenerating V2 producing a
+different file. Both pinned; a doctored V2 whose delivered text was
+touched is shown NOT to strip to v1.

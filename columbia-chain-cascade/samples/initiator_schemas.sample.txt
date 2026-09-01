@@ -1,0 +1,77 @@
+INITIATOR SCHEMAS -- the drop-in gaps 5-9 lacked
+
+Gap 5 -> breach_params.csv   (15 columns)
+    node
+    knowledge_state
+    source
+    would_move_it
+    dam_type
+    height_m
+    crest_length_m
+    storage_m3
+    breach_width_m_froehlich
+    breach_width_m_xuzhang
+    breach_side_slope
+    time_to_failure_h_froehlich
+    time_to_failure_h_xuzhang
+    initial_condition
+    height_sensitivity_pct_per_10pct
+
+Gap 6 -> seismic_params.csv   (12 columns)
+    node
+    knowledge_state
+    source
+    would_move_it
+    pga_g
+    pgv_cm_s
+    sa_at_dam_period_g
+    vs30_m_s
+    site_class
+    aftershock_delay_days_p50
+    aftershock_delay_days_p90
+    damage_state_carry_forward
+
+Gap 7 -> hydro_params.csv   (12 columns)
+    node
+    knowledge_state
+    source
+    would_move_it
+    ar_event_id
+    ar_scale
+    peak_inflow_m3_s
+    time_to_peak_h
+    volume_m3
+    gate_capacity_m3_s
+    partial_opening_sufficient
+    cmip6_adjusted_peak_m3_s
+
+Gap 8 -> cyber_params.yaml   (10 columns)
+    node
+    knowledge_state
+    source
+    would_move_it
+    scada_trust_state
+    gates_open_fraction
+    duration_h
+    manual_override_p50_min
+    manual_override_p90_min
+    compound_factor_vs_normal_ops
+
+Gap 9 -> compound_matrix.csv   (10 columns)
+    node
+    knowledge_state
+    source
+    would_move_it
+    initiator_pair
+    interaction_type
+    delay_h
+    interaction_factor
+    interaction_factor_tolerance
+    elicitation_or_measured
+
+every initiator writes exactly: peak_flow, time_to_peak, volume, debris_load, provenance
+
+A schema names what a row carries; it sets no value. Every row
+carries a knowledge_state, a source, and what would move it, so a
+bare number cannot enter. The loader refuses a file with a missing
+or extra column rather than reading what it can.

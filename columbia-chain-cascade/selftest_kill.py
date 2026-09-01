@@ -32,13 +32,21 @@ def chk(name, cond):
 
 def run():
     # ---- KILL 1: overlay artifact, carries an intended, sound conclusion
+    H_CI = K._historical("contributing_inflow.py")
+    H_E2 = K._historical("eap_coverage_v2.py")
+    H_MF = K._historical("module_f.py")
+    H_ST = K._historical("selftest_ccc_v2.py")
+    chk("the pre-repair revision is reachable", all([H_CI, H_E2, H_MF, H_ST]))
     k1 = K.kill1()
-    chk("KILL 1: the self-correction trace is present in render()",
-        k1["trace_present"])
+    k1h = K.kill1(H_CI)
+    chk("KILL 1: the self-correction trace fired on the pre-repair render",
+        k1h["trace_present"])
+    chk("KILL 1: and is absent from the repaired render (verdict REPAIRED)",
+        not k1["trace_present"] and k1["verdict"].startswith("REPAIRED"))
     chk("KILL 1: the corrected line is arithmetically sound",
         k1["corrected_conclusion_is_right"])
-    chk("KILL 1: verdict is CONFIRMED",
-        k1["verdict"].startswith("CONFIRMED"))
+    chk("KILL 1: the historical verdict was CONFIRMED",
+        k1h["verdict"].startswith("CONFIRMED"))
     # null: the corrected conclusion check can fail -- the wrong pair of
     # verdicts would not be sound
     import contributing_inflow as CI
@@ -48,12 +56,18 @@ def run():
 
     # ---- KILL 2: prose (max-flip) and code (sum-tip) diverge; resolved
     k2 = K.kill2()
-    chk("KILL 2: the prose and code disagree on a nonzero share of "
-        "cases", k2["prose_vs_code_disagreements"] > 0)
+    k2h = K.kill2(H_CI)
+    chk("KILL 2: the pre-repair prose stated the max reading",
+        k2h["prose_states_max_reading"])
+    chk("KILL 2: the repaired prose states the sum-tip (verdict REPAIRED)",
+        not k2["prose_states_max_reading"]
+        and k2["verdict"].startswith("REPAIRED"))
+    chk("KILL 2: the old prose reading and the code disagree on a nonzero "
+        "share of cases", k2h["prose_vs_code_disagreements"] > 0)
     chk("KILL 2: the sweep is one-sided (urban never independent-only)",
         k2["sweep_one_sided"])
-    chk("KILL 2: verdict is CONFIRMED and resolved by physics",
-        k2["verdict"].startswith("CONFIRMED"))
+    chk("KILL 2: the historical verdict was CONFIRMED and resolved by "
+        "physics", k2h["verdict"].startswith("CONFIRMED"))
     # null: prose and code AGREE on the boundary cases where the
     # increment is zero -- so the disagreement is not a constant
     agree = 0
@@ -69,38 +83,47 @@ def run():
 
     # ---- KILL 3: asymmetry, and do-not-drop, both confirmed
     k3 = K.kill3()
+    k3h = K.kill3(H_E2)
     chk("KILL 3: owners are refused from memory", k3["owners_from_memory"] == 0)
     chk("KILL 3: node rows carry a knowledge_state field",
         k3["node_carries_knowledge_state"])
     chk("KILL 3: tribal rows are supplied from memory",
         k3["tribal_rows_from_memory"] == 6)
-    chk("KILL 3: tribal rows carry NO knowledge_state field",
-        not k3["tribal_has_knowledge_state"] and k3["tribal_row_arity"] == 4)
+    chk("KILL 3: the pre-repair tribal rows carried NO knowledge_state",
+        not k3h["tribal_has_knowledge_state"] and k3h["tribal_row_arity"] == 4)
+    chk("KILL 3: the repaired rows carry a state and a source (arity 6)",
+        k3["tribal_has_knowledge_state"] and k3["tribal_row_arity"] == 6
+        and k3["verdict_asymmetry"].startswith("REPAIRED"))
     chk("KILL 3: the authority bound is invariant to the tribal list",
         k3["bound_invariant_to_tribal"]
         and k3["bound_with_tribal"] == 2)
     chk("KILL 3: knowledge_state.py rejects INSTITUTIONAL_EXCLUSION",
         k3["exclusion_is_rejected_state"])
-    chk("KILL 3: both verdicts are CONFIRMED",
-        k3["verdict_asymmetry"].startswith("CONFIRMED")
+    chk("KILL 3: the historical asymmetry verdict was CONFIRMED, and "
+        "do-not-drop still holds",
+        k3h["verdict_asymmetry"].startswith("CONFIRMED")
         and k3["verdict_do_not_drop"].startswith("CONFIRMED"))
 
     # ---- FINDING: CCC_017 refuted on its delivered instance
     c17 = K.ccc017_delivered_instance()
-    chk("CCC_017: the delivered module_f report is NOT clean on the "
-        "screen", not c17["delivered_ccc017_holds"])
-    chk("CCC_017: the token that fires is a certainty verb",
-        c17["token"] == "proves")
+    c17h = K.ccc017_delivered_instance(H_MF)
+    chk("CCC_017: the pre-repair module_f report was NOT clean",
+        not c17h["delivered_ccc017_holds"] and c17h["token"] == "proves")
+    chk("CCC_017: the repaired module_f report is clean",
+        c17["delivered_ccc017_holds"])
 
     # ---- FINDING: the delivered v2 selftest exercises the v1 modules
     vt = K.v2_selftest_targets()
-    chk("v2 selftest imports the bare v1 modules",
-        vt["v2_selftest_imports_bare_v1"])
-    chk("v2 selftest unpacks NODES as a 4-tuple (matches v1, not v2)",
-        vt["v2_selftest_unpacks_4tuple"])
-    chk("v2 selftest reads the v1 truncation key",
-        vt["v2_selftest_reads_v1_truncation_key"]
-        and vt["v1_audit_has_that_key"])
+    vth = K.v2_selftest_targets(H_ST)
+    chk("the pre-repair v2 selftest imported the bare v1 modules",
+        vth["v2_selftest_imports_bare_v1"]
+        and vth["v2_selftest_unpacks_4tuple"]
+        and vth["v2_selftest_reads_v1_truncation_key"])
+    chk("the repaired v2 selftest imports the v2 modules",
+        not vt["v2_selftest_imports_bare_v1"]
+        and not vt["v2_selftest_unpacks_4tuple"])
+    chk("and the v1 audit has the old key (the mismatch was real)",
+        vt["v1_audit_has_that_key"])
     chk("audit_v2 renamed that key, so the v2 audit is not the one "
         "under test", vt["audit_v2_renamed_the_key"])
     chk("eap_coverage_v2 NODES is a 5-tuple (a 4-unpack would raise)",
@@ -144,7 +167,7 @@ def run():
         not K._is_tiered("- NLCD impervious surface raster (USGS)"))
 
     # ---- KILL 3 root: traces to the deep-research prose
-    kp = K.kill_provenance()
+    kp = K.kill_provenance(H_CI)   # the zone is read on the pre-correction text
     chk("the six tribal rows match DEEP_RESEARCH section 6.1",
         kp["tribal_matches_dr_6_1"])
     chk("the same doc pushes owner-from-memory, calling the refusal "
@@ -221,6 +244,106 @@ def run():
     chk("gap_completeness.py refuses --selftest",
         r3.returncode == 2 and b"selftest_kill.py" in r3.stderr)
 
+    rs = K.repair_status()
+    chk("every repair detector fired before and not now",
+        rs["rows"] and all(b and not n for _d, b, n in rs["rows"]))
+    chk("non-render function bodies are byte-identical to pre-repair",
+        rs["arithmetic_unchanged"] is True)
+    r4 = subprocess.run([sys.executable, os.path.join(HERE,
+                        "selftest_ccc_v2.py")],
+                        stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    chk("the repaired v2 selftest passes on the v2 modules",
+        r4.returncode == 0 and b", 0 failed" in r4.stdout)
+
+    # ---- the drop-in for gaps 5-9, and the addenda registry
+    import initiator_schemas as I
+    import json
+    chk("five schemas, one per gap 5-9",
+        sorted(I.GAP_OF.values()) == [5, 6, 7, 8, 9])
+    chk("every schema carries node, knowledge_state, source, "
+        "would_move_it", all(set(I.COMMON) <= set(v) for v in I.SCHEMAS.values()))
+    good = dict((c, "x") for c in I.schema("hydro_params.csv"))
+    good["knowledge_state"] = "NOT_STUDIED"
+    chk("the loader accepts a well-formed row",
+        I.validate_rows("hydro_params.csv", [good]) == 1)
+    try:
+        I.validate_rows("hydro_params.csv", [dict(good, extra="y")])
+        chk("the loader refuses an extra column", False)
+    except ValueError:
+        chk("the loader refuses an extra column", True)
+    try:
+        I.validate_rows("hydro_params.csv",
+                        [dict(good, knowledge_state="INSTITUTIONAL_EXCLUSION")])
+        chk("the loader refuses the rejected state", False)
+    except ValueError:
+        chk("the loader refuses the rejected state", True)
+    chk("the initiator interface is the bridge-impoundment key set",
+        I.hydrograph_interface() == ("peak_flow", "time_to_peak",
+                                     "volume", "debris_load", "provenance"))
+    ad = json.load(io.open(os.path.join(HERE, "gap_addenda.json"),
+                           encoding="utf-8"))
+    n_src = sum(len(v["tiers"]) for v in ad["gaps"].values())
+    chk("the addenda registry tiers all 76 sources", n_src == 76)
+    chk("every non-open source names a route",
+        all(t["route"] for v in ad["gaps"].values() for t in v["tiers"]
+            if t["tier"] != "OPEN"))
+    chk("the registry declares itself carried, not probed",
+        ad["probed"] is False and "not probed" in ad["basis"])
+    chk("gap 3 carries the consent step; gaps 5-9 the schema pointer",
+        "consent_step" in ad["gaps"]["3"]
+        and all("deliverable_schema" in ad["gaps"][str(g)] for g in (5, 6, 7, 8, 9)))
+    chk("every gap carries a known-answer candidate",
+        all(v["known_answer"] for v in ad["gaps"].values()))
+
+    # ---- the assembled gap file: v1 + cards + addenda, round-tripped
+    import assemble_gaps_v2 as AS
+    v2_file = io.open(os.path.join(HERE, "UNDERGRADUATE_RESEARCH_GAPS_V2.md"),
+                      encoding="utf-8").read()
+    chk("regenerating V2 reproduces the committed file byte-for-byte",
+        AS.assemble() == v2_file)
+    chk("stripping every ADDENDUM and SLOTTED block from V2 returns v1",
+        AS.strip_addenda(v2_file)
+        == io.open(os.path.join(HERE, "UNDERGRADUATE_RESEARCH_GAPS.md"),
+                   encoding="utf-8").read())
+    chk("V2 carries fifteen entries, 14 and 15 slotted in",
+        len(re.findall(r"(?m)^## \d+\. ", v2_file)) == 15
+        and "## 14. MINING" in v2_file and "## 15. BRIDGE" in v2_file)
+    # null: a V2 with one addendum block hand-edited does NOT strip to v1
+    doctored = v2_file.replace("2. Compare gage-recorded inflow",
+                               "2. Compare recorded inflow", 1)
+    chk("a V2 whose delivered text was touched does NOT strip to v1 "
+        "(the round-trip can fail)",
+        AS.strip_addenda(doctored)
+        != io.open(os.path.join(HERE, "UNDERGRADUATE_RESEARCH_GAPS.md"),
+                   encoding="utf-8").read())
+    c2 = G.census(assembled=True)
+    post2 = [r for r in c2["rows"] if not r["template"]]
+    def have(field):
+        return set([r for r in post2 if r["field"].startswith(field)][0]["have"])
+    chk("assembled: a known-answer step on all fifteen", have("known-answer") == set(range(1, 16)))
+    chk("assembled: a deliverable schema pointer on gaps 5-9",
+        have("deliverable schema") == {5, 6, 7, 8, 9})
+    chk("assembled: the consent step on gap 3, and only gap 3",
+        have("consent") == {3})
+    chk("assembled: prior art, citation status, secondary falsifier stay "
+        "at 14/15 only -- NOT authored here (literature from memory)",
+        have("prior-art") == {14, 15} and have("citation") == {14, 15}
+        and have("secondary") == {14, 15})
+    tc = G.tier_coverage_v2()
+    chk("assembled: every data-source bullet pairs with a tier line",
+        tc["bullets"] == 76 and tc["paired"] == 76)
+    chk("and UNKNOWN is used, so the registry is not all-OPEN by default",
+        tc["per_tier"].get("UNKNOWN", 0) > 0
+        and tc["per_tier"].get("GATED", 0) > 0)
+    chk("the delivered v1 gap file is unchanged in git",
+        subprocess.run(["git", "-C", HERE, "diff", "--quiet", "--",
+                        "UNDERGRADUATE_RESEARCH_GAPS.md"]).returncode == 0)
+    for mod in ("assemble_gaps_v2.py", "initiator_schemas.py"):
+        rr = subprocess.run([sys.executable, os.path.join(HERE, mod),
+                             "--selftest"], stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE)
+        chk("%s refuses --selftest" % mod, rr.returncode == 2)
+
     # ---- the delivered v1 selftest still passes untouched
     r = subprocess.run([sys.executable, os.path.join(HERE,
                         "selftest_ccc.py")],
@@ -239,29 +362,13 @@ def run():
     sys.path.insert(0, os.path.join(ROOT, "sheet-structure-scan"))
     import no_severity  # noqa: E402
     out = K.render()
-    # 'proves' is a delivered module_f token the CCC_017 finding reports;
-    # echoing it verbatim is how the finding names which token fired, so
-    # it is exempt. Measured with the three-arm harness.
-    EXEMPT = ("proves",)
-    chk("one declared exemption on the kill_audit report", len(EXEMPT) == 1)
-    chk("and it is a delivered module_f token",
-        "proves" in io.open(os.path.join(HERE, "module_f.py"),
-                            encoding="utf-8").read())
-    masked = out
-    for wd in EXEMPT:
-        masked = re.sub(r"(?i)\b%s\b" % wd, "X" * len(wd), masked)
-    chk("the completeness report carries no screened language",
-        not no_severity.hits(G.render()))
-    chk("the report is clean apart from the exemption",
-        not no_severity.hits(masked))
-    fired = set(w for _n, w, _l in no_severity.hits(out))
-    chk("and the exemption is the only token that fires",
-        fired == set(EXEMPT))
-    pmask = out + "\nthis design is broken and invalid\n"
-    for wd in EXEMPT:
-        pmask = re.sub(r"(?i)\b%s\b" % wd, "X" * len(wd), pmask)
-    chk("a planted violation is still caught through the exemption",
-        bool(no_severity.hits(pmask)))
+    # the 'proves' exemption retired with the module_f correction: the
+    # kill_audit report is now clean with no mask, and the planted arm
+    # shows the screen is not silent by construction.
+    chk("the kill_audit report carries no screened language, no exemption",
+        not no_severity.hits(out))
+    chk("a planted violation is still caught",
+        bool(no_severity.hits(out + "\nthis design is broken and invalid\n")))
 
     print("selftest: %d checks, %d failed" % (ok[0] + len(bad), len(bad)))
     for x in bad:
