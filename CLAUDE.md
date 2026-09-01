@@ -6435,6 +6435,49 @@ underneath).
   **empty**, unlike scan 4's — this order's verdict names carry no
   screened word — and the two arms plus the plant still run.
   `--selftest` green. Stdlib only, parses under 3.9, CC0.
+- `hf-incident-extract/` — A work order delivered verbatim (`WORK_ORDER.md`)
+  and built as **one stdlib file**: read a METR/Redwood incident report
+  plus transcripts if released, emit **counts, no labels**. Six measures
+  (M1 explore_ratio `t_characterize / t_solve`, M2 root_fanout, M3
+  upstream_edits env-edit over gate-fool moves, M4 member_cost runs
+  self-failed for the collective over runs_total, M5 log_scrub_split
+  actions_edited over reasoning_edited, M6 opponent_by_slot as a bool per
+  agent), the GATE_PROPERTY_TEST (`gap = declared(paper) △
+  implemented(code)`, a non-empty gap predicting M1 high and M2 high — the
+  charter-signature check), a CROSS_SUBSTRATE table (pea tendril /
+  fledgling / ant bridge / fire crew / swarm; M1, M4, `unit_boundary !=
+  objective_boundary`), and the two OPEN items. **The report is not in
+  hand** — egress is an allowlist — so **every real cell is UNMEASURED
+  with the input it wants named**, and nothing in the folder holds a
+  value from the report or a biology figure from memory. **`HFI_002`, the
+  design:** the order's INPUT is prose and its OUTPUT is counts, and
+  between them sits a reading, so the two are kept in two layers —
+  `text_scan()` finds every stated duration and count with its line
+  number and emits them as **candidates** (a candidate is not a measure;
+  a planted "Version 2.0" decoy is not promoted), and `measures()`
+  computes from a **coded sheet** the reader fills, where every field
+  carries a unit or a state and an UNMEASURED field returns `None` for
+  every measure needing it, never 0. **`HFI_003`:** the
+  charter-signature check can fail — a gap of zero predicts nothing, a
+  measured M1 below the threshold fails the check, an unfilled gap
+  returns `None` — so it is not `CONSTANT_FIRES`; "high" is not in the
+  order, and 6.0 / 0.5 are `[CHOICE]` constants printed on every render.
+  **`HFI_004`:** *same instrument, no vocab change* is asserted over the
+  AST — no substrate name appears in any function body — and a filled
+  fictional fire-crew row computes through the same functions the report
+  row does. **`HFI_005`:** `NOT_RELEASED` (transcripts) and
+  `NOT_COLLECTED` (post-validation off-trail fraction, report silent) are
+  states distinct from UNMEASURED, which is wanted and readable.
+  **`HFI_006`:** a duration with no unit is refused rather than read as
+  hours (G-DIM before the ratio; days and hours converted to one scale).
+  **`HFI_001`:** known answers first on a constructed sheet labelled so,
+  with a zero denominator returning `None` and not infinity.
+  **`HFI_007` UNVERIFIED:** built and proven on constructed fixtures,
+  unrun on its subject; the coded sheet is the operator's step once the
+  report is in hand. Renders screen clean through `no_severity` with no
+  exemption. Check count printed by `selftest_hf.py`; the instrument
+  refuses `--selftest`. Stdlib only, parses under 3.9, phone-buildable,
+  CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated
