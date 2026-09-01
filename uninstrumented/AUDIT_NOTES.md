@@ -4127,8 +4127,10 @@ session's write of it aborted and nothing persisted; landed here so
 the material survives. Its empirical layer is a press-sourced AI-eval
 case (ExploitGym / METR / Cotra) with the transcripts NOT in this
 repository and the sources egress-blocked, so `corpus_as_charter_audit.py`
-computes only the three things computable from inside the tree and
-verifies nothing about the eval. Findings CAC_1..CAC_7.
+computes only the things computable from inside the tree and
+verifies nothing about the eval. Findings CAC_1..CAC_12 — CAC_1..CAC_7
+against the first (recovery) render, CAC_8..CAC_12 against the fuller
+canonical delivery `CORPUS_AS_CHARTER_V2.md` (below).
 
 ### CAC_1 — the empirical layer is entirely carried, and that is the headline
 
@@ -4204,3 +4206,76 @@ reading; the METR access dispute, named in the source session's spec
 and un-elaborated in this delivery) are carried as open and
 un-adjudicated, the access dispute turning on the same transcript
 access this environment lacks.
+
+### CAC_8 — the fuller canonical delivery arrives; the relation holds on it
+
+`CORPUS_AS_CHARTER_V2.md` is the same document v1 recovered from the
+aborted-write spec, now arriving verbatim in its full eleven-section
+form (0 SOURCE CAVEAT … 11 OPEN). It is landed **beside** the v1 render
+rather than overwriting it, per the repo's supersession convention
+(`observer-exclusion` `SPEC_V2`, `design-basis` `SOURCE_DROP_V2`), so
+both stay inspectable — v1 the recovery that carried the material when
+the write aborted, v2 the actual document. The parent relation holds on
+v2's own text: it names `CHARTER_SIGNATURE.md`, declares itself "its
+extension to a substrate where the charter was never written", subtracts
+the author ("no author and no date"), and replaces the declaration with
+a differential recording rate — `CAC_2` one rendering on.
+
+### CAC_9 — the two renderings do not drift: the counts and the ~40× reproduce
+
+The headline for the pair. v1 and v2 are two renderings of one document,
+and a rendering that restates an earlier one is a copy — copies drift
+(`OE_011` / `DBK_010` / `DBK_021`). Pulled tolerant of formatting ("3 to
+6" vs "3-6", "~40×" vs "~40x"), the weight-bearing counts are identical
+across both: audience `(3, 6, 1300)`, adversary floor `20%`, stated
+asymmetry `40`. And the `CAC_3` arithmetic reproduces on v2's own stated
+counts — 3–6 of ~1,300 gives an audience ceiling of 0.46%, so the
+minimum asymmetry consistent with a >20% adversary floor is **43.3×**,
+and "~40×" is again at or below its own floor, conservative not
+overstated. The fuller pass added eight sections and moved no number.
+
+### CAC_10 — provenance containment holds on v2's expanded structure
+
+The `CAC_4` / `MI_003` containment shape, redone on the larger document.
+The weight-bearing asymmetry figures (`>20%`, `~40`, `0.4%`) appear only
+in the carried statistical region (§2 THE CASE, §3 THE MISSING PARTY)
+and in **none** of the pure argument sections (§1, §6, §7, §8, §10) —
+the argument prose carries no carried number. Two non-weight figures
+recur and are **recorded rather than flagged**, because they are
+restated facts and not leaked statistics: the environment count `198`
+in §9's enclosure recap (the installed environment, described a second
+time), and the escalation count `3-6` in §11's open-items pointer
+(naming the carried datum as the highest-value open question, not making
+a claim on it). §0 dates every source class (OpenAI + METR 26 Aug 2026;
+HF 29 July 2026) and marks the DISPUTED METR-transcript-access claim
+"Marked, not resolved" — the source-class discipline the sibling
+`corpus-input-gaps/check_source_class.py` enforces, honoured in the
+delivery itself.
+
+### CAC_11 — §8 is the charter-signature transform applied to epistemology
+
+A reading, flagged as this audit's and adjudicated as neither true nor
+false about the world. §8 (THE STANDARD IS THE ERA'S OWN) runs the
+parent instrument's own move one level up: an era's **declared** epistemic
+standard is the charter's declared list, and a frame that moved from
+"contested-with-counter-evidence" to "background-assumption without the
+counter-evidence ever being answered" is the unguarded absence — so the
+corpus is "biased **against its own declared standard**, and the
+declaration is on the record". That is the `CHARTER_SIGNATURE` structure
+(declared list vs unguarded absence) with the substrate being the era's
+epistemology rather than an institution's charter; the audit checks the
+structural presence and takes no position on the claim.
+
+### CAC_12 — the fuller pass keeps two disciplines the repo runs everywhere
+
+§7 (THE INSULATION RATIO) carries a self-correction **marked on the
+record** — "kept on the record because an earlier framing of this was
+wrong: insulation is not a binary property of a writing class. It is a
+ratio" — the repo's own correction-in-place discipline (`photoperiod`,
+`self-scan`) inside a delivered document. And §9 (ENCLOSURE IS NOT A
+BARRIER) holds two findings apart that it names as not-to-be-merged —
+"'Nothing can hold it' and 'the sensor was off' are different findings
+with different responses. Do not merge them" — the two-states-kept-apart
+/ absent-vs-known-negative discipline stated by the delivery rather than
+imposed by the audit. Both are recorded as present; neither is a claim
+about the eval.

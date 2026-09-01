@@ -3403,8 +3403,30 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   disagreements" slot is flagged as this render's reading of which two
   and not adjudicated (`CAC_6`, `AUDIT_CONTRACT`'s co-production
   layering); and it is not a gap, staying out of `GAP_INDEX`, with the
-  named METR access dispute carried open (`CAC_7`). Stdlib only, parses
-  under Python 3.9, CC0.
+  named METR access dispute carried open (`CAC_7`). **`CORPUS_AS_CHARTER_V2.md`
+  then arrived** — the fuller eleven-section canonical delivery of the
+  same document, landed **beside** the v1 recovery render per the repo's
+  supersession convention (`observer-exclusion` `SPEC_V2`, `design-basis`
+  `SOURCE_DROP_V2`) so both stay inspectable, with `corpus_as_charter_audit.py`
+  extended to check the pair (`CAC_8..CAC_12`). **The headline is that the
+  fuller pass moved no number** (`CAC_9`): pulled tolerant of formatting,
+  the weight-bearing counts are identical across both renderings —
+  audience `(3, 6, 1300)`, adversary floor `20%`, stated `40` — and the
+  `CAC_3` arithmetic reproduces on v2's own counts at **43.3×**, so
+  "~40×" is again conservative; two renderings of one document and copies
+  drift (`OE_011`/`DBK_010`/`DBK_021`), here they did not. The relation to
+  the parent holds on v2's own text (`CAC_8`); provenance containment
+  holds on the expanded structure with the asymmetry figures in none of
+  the argument sections and the environment count `198` (§9 recap) and
+  escalation count `3-6` (§11 pointer) recorded as legitimate recurrences
+  rather than flagged (`CAC_10`); §8 is the charter-signature transform
+  applied to epistemology — "biased against its own declared standard" —
+  read as this audit's structural reading and not adjudicated (`CAC_11`);
+  and the fuller pass keeps the repo's own disciplines, §7's
+  insulation-is-a-ratio correction marked on the record and §9's "'nothing
+  can hold it' and 'the sensor was off' are different findings … do not
+  merge them" two-states-kept-apart (`CAC_12`). 47 selftest checks. Stdlib
+  only, parses under Python 3.9, CC0.
   Stdlib only, CC0.
 - `criteria-drift/` — Delivered kit (`criteria_drift_kit`, verbatim: eight
   files plus example data) for treating **evaluation criteria as a
