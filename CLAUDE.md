@@ -6620,8 +6620,31 @@ underneath).
   drafting model included; the render says so above the numbers and the
   *this session* row's dashes are left as delivered. **`RC_009`
   UNVERIFIED.** Four `[CHOICE]`s printed on every render; renders screen
-  clean with no exemption; no author section. Check count printed by
-  `selftest_rc.py`; the instrument refuses `--selftest`. Stdlib only,
+  clean with no exemption; no author section. **The first filled row
+  then landed** (`TRUCKING_ROW_v0_1.md`, verbatim): sourced, coding
+  rule stated, its own v0 corrected in a logged changelog — the channel
+  that exists is a *complaint* channel, not a *readout* channel, and the
+  count is 0.5. `row_audit.py` reads it against the instrument.
+  **`RC_010`:** the rule has three conjuncts and the schema carries a
+  field for two; NON-ADVERSARIAL has none, and the row's own `type`
+  column (complaint / inspection / enforcement / readout / remedy) is the
+  missing field — the distinction the row says it *actually measures* is
+  the one column its parent schema cannot record. **`RC_011`:** the 0.5
+  is a per-position PARTIAL return weighted at one half, computed here
+  from the row's own layers table (strict 0.0, half 0.5); the schema's
+  `positions_returning` is a list, so the row loads at readout_count 1
+  and never 0.5. **`RC_012`:** the row as delivered is refused on
+  `rate_trend`, the cell its own STILL NEEDED list opens with — the seed's
+  `up since 2010` withdrawn to a requirement, the right direction, and
+  one cell short of loading. **`RC_013`:** "every claim carries a source
+  URL" holds for 5 of 7 entries and the trucking count rests on one of
+  the two the document defers itself; the four hosts with URLs refused
+  CONNECT once each, recorded not read. **`RC_014`:** the row's "(N4)"
+  points at nothing in the parent order (ids H0–H3, P1–P6).
+  **`RC_015`:** the seed's `3+` intake cell is the complaint count under
+  v0.1's renaming. **`RC_016`:** the layers table counts rows and the
+  complaint count counts routes. Check count printed by
+  `selftest_rc.py`; both modules refuse `--selftest`. Stdlib only,
   parses under 3.9, phone-buildable, CC0.
 - `removal-closure/` — A pre-registered work order delivered verbatim
   (`WORK_ORDER.md`) about a METHOD — how claims of coupling between an

@@ -179,6 +179,50 @@ def main():
     check("the position line is printed", "is a row, not an exception" in out_u)
     check("no author section", "Author" not in open(os.path.join(HERE, "readout_count.py")).read())
 
+    # ---- the delivered trucking row (v0.1) against the instrument
+    import row_audit as RA
+    text, order = RA._read(RA.DOC), RA._read(RA.ORDER)
+    check("the row states its coding rule", RA.rule_stated(text))
+    cov = RA.rule_coverage()
+    check("one of the rule's three conjuncts has no schema field",
+          [k for k, v in cov.items() if not v["field_exists"]] == ["NON-ADVERSARIAL"])
+    rc_ = RA.readout_count_from_layers()
+    check("under the row's rule the half count is 0.5 and the strict count is 0.0",
+          rc_["half"] == 0.5 and rc_["strict"] == 0.0 and rc_["readout_layers"] == ["NHTSA VOQ / SaferTruck"])
+    full = dict(RA.LAYERS, **{"NHTSA VOQ / SaferTruck": {"type": "readout", "return": "y"}})
+    check("a full return reads 1.0 under both readings",
+          RA.readout_count_from_layers(full)["half"] == 1.0 and RA.readout_count_from_layers(full)["strict"] == 1.0)
+    st = RA.stated_counts(text)
+    check("stated counts read back: trucking 0.5, complaint >= 3",
+          st["trucking"] == "0.5" and st["complaint_count_trucking_min"] == 3)
+    la = RA.load_attempt(RA.trucking_row_as_delivered())
+    check("the row as delivered is refused on rate_trend",
+          la["loaded"] is False and "rate_trend" in la["refused_on"])
+    lt = RA.load_attempt_with_trend(RA.trucking_row_as_delivered(), "up")
+    check("with a trend supplied it loads at readout_count 1, return_rate None",
+          lt["loaded"] and lt["readout_count"] == 1 and lt["return_rate"] is None)
+    src = RA.sources(text)
+    check("sources: 7 entries, 5 with URL, 2 deferred",
+          len(src) == 7 and sum(1 for e in src if e["url"]) == 5 and sum(1 for e in src if e["deferred"]) == 2)
+    crd = RA.count_rests_on_deferred(text)
+    check("the count names VOQ and the VOQ source is deferred",
+          crd["count_names_voq"] and crd["voq_source_deferred"])
+    n4 = RA.n4_reference(text, order)
+    check("(N4) is cited and absent from the parent order",
+          n4["row_cites_N4"] and not n4["order_has_N4"])
+    check("a doctored order carrying N4 resolves",
+          RA.n4_reference(text, order + "\n    N4  survey\n")["order_has_N4"])
+    sv = RA.seed_vs_row(order, text)
+    check("the seed intake cell is the complaint count under its new name",
+          sv["intake_cell_is_complaint_count"] and sv["seed_intake"] == "3+")
+    rc2 = subprocess.run([sys.executable, os.path.join(HERE, "row_audit.py"), "--selftest"],
+                         capture_output=True).returncode
+    check("row_audit refuses --selftest with rc 2", rc2 == 2)
+    out_ra = RA.render()
+    check("row audit render screens clean", not no_severity.hits(out_ra))
+    with open(os.path.join(HERE, "samples", "row_audit.sample.txt"), "w", encoding="utf-8") as fh:
+        fh.write(out_ra)
+
     sd = os.path.join(HERE, "samples")
     with open(os.path.join(sd, "constructed_rows.csv"), "w", encoding="utf-8") as fh:
         fh.write(to_csv(world()))

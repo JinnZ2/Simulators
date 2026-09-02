@@ -27,7 +27,18 @@ before it counts, filling nothing in.
 | seed | `seed_rows`, `seed_readiness` | the order's own table, cell by cell |
 
 Four choices the order leaves open are marked `[CHOICE]` and printed on
-every render. The render opens with the position line the order's first
+every render.
+
+**The trucking row.** `TRUCKING_ROW_v0_1.md` corrects the parent's own
+seed row: the channel that exists is a complaint channel, not a readout
+channel, and the count is 0.5 on one partial-return equipment channel.
+`row_audit.py` shows the row's coding rule has one conjunct the schema
+cannot record (the row's own `type` column is the missing field), that
+the 0.5 is a per-position partial return the schema's list cannot hold
+(the row loads at 1, never 0.5), that the row is refused on the one
+cell its own STILL NEEDED list opens with, that five of seven source
+entries carry a URL and the count rests on a deferred one, and that the
+row's "(N4)" points at nothing in the parent order. The render opens with the position line the order's first
 paragraph asks for: this file is a row, not an exception.
 
 | file | what |
@@ -35,7 +46,9 @@ paragraph asks for: this file is a row, not an exception.
 | `WORK_ORDER.md` | delivered verbatim |
 | `readout_count.py` | the instrument, one stdlib file |
 | `selftest_rc.py` | known answers first, both directions of every guard; writes the samples |
-| `CLAIM_TABLE.md` | `RC_001..RC_009` |
+| `TRUCKING_ROW_v0_1.md` | the first filled row, delivered verbatim: sourced, coding rule stated, count 0.5 |
+| `row_audit.py` | the row against the instrument: rule vs schema, what the 0.5 is, the load attempt, sources, the (N4) pointer, the seed cells |
+| `CLAIM_TABLE.md` | `RC_001..RC_016` |
 | `samples/` | constructed rows and the pinned renders |
 
 The instrument refuses `--selftest`. Renders screen clean through the

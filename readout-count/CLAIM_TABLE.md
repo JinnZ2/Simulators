@@ -130,3 +130,102 @@ question and it cannot measure them from inside.
 
 No regime row with a URL exists. Every number here is a property of the
 instrument on constructed rows.
+
+## The trucking row, v0.1
+
+`TRUCKING_ROW_v0_1.md` is the first filled row in this folder, landed
+verbatim: sourced, with a coding rule stated, its own v0 corrected in a
+logged changelog, and a count of 0.5. `row_audit.py` reads it against
+the instrument. The row's sources were not read — every host in its
+SOURCES block refused CONNECT (allowlist egress), which the render
+records.
+
+| id | claim | status |
+|---|---|---|
+| RC_010 | the row's coding rule has three conjuncts and the schema carries a field for two; NON-ADVERSARIAL has none, and the row's own `type` column is the missing field | SUPPORTED |
+| RC_011 | the 0.5 is a per-position PARTIAL return weighted at one half; the schema's `positions_returning` is a list and has no state for it, so the row loads at readout_count 1 or 0 and never 0.5 | SUPPORTED |
+| RC_012 | the row as delivered is refused by the instrument on `rate_trend`, which the row's own STILL NEEDED list says is not yet established | SUPPORTED |
+| RC_013 | "every claim below carries a source URL" holds for 5 of 7 source entries, and the trucking count rests on one of the two the document itself defers | SUPPORTED |
+| RC_014 | the row cites "(N4)" in the parent order and the parent order has no N4 | SUPPORTED |
+| RC_015 | the parent seed row's `3+` intake cell is the complaint count under v0.1's renaming; the seed's `up since 2010` trend is now STILL NEEDED | SUPPORTED |
+| RC_016 | the OTHER LAYERS table and the complaint count use different units | SUPPORTED |
+
+## RC_010 — the rule against the schema
+
+*readout_count counts positions with a NON-ADVERSARIAL, HELD, RETURNING
+channel for condition reports.* HELD maps to `holder == third_party`
+and RETURNING to membership in `positions_returning`. NON-ADVERSARIAL
+maps to nothing: the schema has no channel-type field. The row itself
+supplies one — its OTHER LAYERS table carries a `type` column with
+values complaint / inspection / enforcement / readout / remedy, and the
+whole correction to v0 is that the count depends on that column. The
+distinction the row says it *actually measures* is the one column its
+parent schema cannot record; `RC_004`'s shape, arriving from the data
+side rather than the falsifier side.
+
+## RC_011 — what the 0.5 is
+
+Under the row's own rule, over its own OTHER LAYERS table: one layer is
+readout-typed (NHTSA VOQ) and its return is *"yes, partial"*. Weight
+partial at one half and the count is 0.5; count only full returns and
+it is 0.0. The delivered 0.5 is therefore the half reading of a
+per-position return state, the `[CHOICE 2]` question from
+`label-position-test` `LPT_003` on a new field. The parent schema holds
+returning positions as a list, so a position is in it or not: transcribed
+as delivered and loaded with any trend, the row reads readout_count 1
+with declared_count 4. The list has no half, and the instrument cannot
+reproduce the row's headline number from the row's own fields. A
+per-position return state (y | partial | n) is the missing column.
+
+## RC_012 — refused on the row's own gap
+
+`rate_trend` is a closed vocabulary and the row supplies none — its
+STILL NEEDED list opens with the per-VMT crash series that would give
+one. The validator refuses the row on that cell; supplying any of the
+three values loads it, and none of the three is the row's. The parent
+seed cell `up since 2010` was a value; v0.1 withdraws it to a
+requirement. That is the correct direction and it means the trucking
+row is, today, one cell short of loading.
+
+## RC_013 — five of seven
+
+The row opens *"Every claim below carries a source URL."* Its SOURCES
+block has seven entries; five carry a URL and two are deferred in the
+document's own words — *cite the current NHTSA complaint page before
+use* and *cite ... before use; C3RS IMOU text to be located*. The
+trucking count names NHTSA VOQ as its sole readout-typed channel, so
+the one number the row exists to produce rests on the deferred entry.
+The document flags it itself; the audit records that the flag sits
+under the count. The four hosts that do carry URLs refused CONNECT once
+each and are recorded, not read.
+
+## RC_014 — a pointer to a section that does not exist
+
+*"The survey that would make it one is in the parent work order
+(N4)."* The parent order's ids are H0–H3 and P1–P6. No N4. The nearest
+referent by content is the parent's WHAT WOULD MOVE THIS BEYOND CURRENT
+REACH bullet on a trucking C3RS pilot, or `zero-sum-curriculum-null`'s
+N4, which is an ablation run and not a survey. `LPT_011`'s shape:
+a label from another document, or from a draft of this one, carried
+into a file where it resolves to nothing.
+
+## RC_015 — the seed cells, renamed
+
+The parent seed row for trucking reads positions *none (NHTSA VOQ =
+equipment only)*, intake `3+`, return `0`, trend `up since 2010`. v0.1
+reads the same facts as: readout_count 0.5 (VOQ, partial), complaint
+count ≥ 3, trend STILL NEEDED. The seed's `3+` was never an intake
+count in the schema's sense; it was the complaint-channel count, and
+v0.1 says so — *"a different quantity"*. The seed row was the row's own
+v0 error in cell form, and the parent order's own P2 (count only
+positions whose channel returns) is what the correction applies.
+
+## RC_016 — units
+
+The OTHER LAYERS table types two rows complaint (carrier HR; FMCSA
+NCCDB as one row) and one remedy (OSHA STAA). The count block says
+complaint_count ≥ 3. Three is reached only by counting NCCDB's two
+routes (coercion, harassment) apart, which the CORRECTION section does
+and the table does not, or by counting the remedy-typed row as a
+complaint, which the table's own typing does not. The table counts
+rows and the count counts routes.
