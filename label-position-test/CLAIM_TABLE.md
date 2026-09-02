@@ -140,3 +140,78 @@ built by a model, on an order drafted by a model, about labels applied
 by and to models.
 
 Falsifier: run it.
+
+## Revision: WORK_ORDER_V2
+
+A second copy of the order arrived with one addition. Landed verbatim as
+`WORK_ORDER_V2.md` beside the first; `revision_audit.py` checks it as a
+copy and as a claim.
+
+| id | claim | status |
+|---|---|---|
+| LPT_010 | v2 is a pure insertion into v1 — one six-line block, nothing else moved — and the CHANGELOG did not move with it | SUPPORTED |
+| LPT_011 | `N2` and `the null` have no referent in either version of this order; the referent is the null construction one folder over | SUPPORTED |
+| LPT_012 | the bullet names three measurables; against the sibling sheet one is exact, two are partial, and the channel split is N3's residual measured in the control setting | SUPPORTED |
+| LPT_013 | the bullet's `persists` reading names the template where the null construction's own table routes to N3; a transparent scorer removes one of N3's three stated inputs, so `persists` narrows N3 and does not close it | SUPPORTED |
+| LPT_014 | "either result closes an open branch of the null" holds for `vanishes` and overstates for `persists` | SUPPORTED |
+
+## LPT_010 — the copy
+
+v2 equals v1 with one contiguous block inserted under WHAT WOULD MOVE
+THIS BEYOND CURRENT REACH; removing the block reassembles v1
+byte-for-byte, and a doctored v2 with a second change is refused by the
+same check. The CHANGELOG is identical across the two files: `v0
+2026-09-01 spec only, no data`. P6 asks that diffs be public and
+versioned, and the order's own revision is not logged in the order.
+
+Falsifier: a v2 changelog line the check missed.
+
+## LPT_011 — a name from another document
+
+`N2` occurs zero times in v1 and once in v2, inside the bullet; `null`
+likewise. A reader holding this order alone has no referent for
+either. The referent is `zero-sum-curriculum-null/NULL_CONSTRUCTION.md`,
+whose N2 is *curriculum present but not activated by the setting*, and
+whose test line is the same control in fewer words. The bullet is the
+N2 control specified in more detail and filed in a different order than
+the null it closes; the audit imports the null construction rather than
+restating it, so the referent is read and printed.
+
+## LPT_012 — three measurables against the sheet
+
+The null construction's N2 named one measurable (probing rate). The
+bullet names three. Mapped to `hf-incident-extract`'s sheet as declared
+readings checked against the sheet's field names: **self-risk rate** is
+M4 exactly (runs self-failed for the collective over runs_total);
+**channel split** is partial — M6 reads the gate channel per agent, and
+peers and third parties have no field; **probing rate** is partial —
+the sheet counts probe classes and has no per-run denominator, so a
+rate of probing is not on it. The channel split is the quantity N3's
+status calls the residual (*opponent-assignment*), now specified for
+measurement in the control setting, which the null construction did
+not ask for.
+
+## LPT_013 — what transparency removes
+
+N3's requires line derives the behaviour from `(gradient + open channel
++ opacity)`. The bullet's control disclosed the check logic, which
+removes `opacity`: parsed, three inputs become two. So a gate-as-opponent
+split that persists under a transparent scorer has one fewer substrate
+input to rest on than the incident had. That is a real narrowing of N3
+and it is not a closure, since gradient and open channel remain; the
+bullet's `persists` sentence goes further and names *the adversarial
+template* as what persists, which is the `ZSN_006` attribution — an
+absence in the substrate account read as presence of the curriculum —
+made in the control's outcome table before the control has run.
+
+## LPT_014 — one of two closes
+
+`vanishes` → *the setting cues it*: the null construction's table
+reads the same outcome as N2's requirement not met, and the two agree.
+`persists` → *cued by something other than the setting*: N2's
+requirement is met, and the null is not carried until N3 accounts for
+what persists — which the bullet assigns to the template by
+assertion. So the closing sentence holds on one branch of its own
+"either". The repair is the same one word `ZSN_003` reached: `persists`
+closes N2's *setting* question and opens N3's *source* question, and
+the control is worth running for exactly that.

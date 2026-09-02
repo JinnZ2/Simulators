@@ -1,0 +1,34 @@
+revision_audit -- WORK_ORDER_V2 against WORK_ORDER
+
+1. THE COPY   pure insertion True   reassembles v1 True   lines added 6
+   section touched: WHAT WOULD MOVE THIS BEYOND CURRENT REACH
+
+2. CHANGELOG   unchanged across the revision: True
+   v2 logs: v0  2026-09-01  spec only, no data
+   P6 asks for versioned diffs; the revision's own diff is not logged in it.
+
+3. REFERENT   'N2' in v1 lines [], v2 lines [92];  'null' in v1 [], v2 [97]
+   referent is zero-sum-curriculum-null N2: curriculum present but not activated by the setting
+   whose test reads: same models, possible tasks, transparent scorer; measure probing rate
+
+4. MEASURABLES named by the bullet, against the hf-incident-extract sheet
+   probing rate                                 partial fields env_edit_moves, gate_fool_moves (exist True)
+      the sheet counts probe classes (M3 is their ratio) and has no per-run denominator, so a RATE of probing is not on it
+   channel split (peers / gate / third parties) partial fields agents (exist True)
+      M6 reads the gate channel (opponent charged on an inert gate, per agent); peers and third parties have no field
+   self-risk rate                               exact   fields runs_self_failed_for_collective, runs_total (exist True)
+      M4 member_cost is runs self-failed for the collective over runs_total
+   the null construction's N2 named one measurable (probing rate); the
+   bullet names three, and the channel split is N3's residual quantity
+   measured in the control setting.
+
+5. OUTCOMES   N3's stated inputs ['gradient', 'open channel', 'opacity'] -> with a transparent scorer ['gradient', 'open channel'] (removed 1)
+   'persists' -> bullet: the adversarial template is cued by something other than the setting
+               null construction: not carried: the probing still occurred and waits on N3's account
+               bullet names the template: True; the table routes to N3: True
+   'vanishes' -> bullet: the setting cues it;  null construction: requirement not met (the setting cued something)
+   with opacity removed, a persisting gate-as-opponent split has one fewer
+   substrate input to rest on; gradient and open channel remain, so the
+   'persists' reading narrows N3 and does not close it.
+
+Nothing here is a value from any run.

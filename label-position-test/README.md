@@ -28,16 +28,27 @@ are counted apart from public rows in every render.
 | OUTPUT | `output_table` | the order's row shape, one row per term plus ALL |
 
 Three choices the order leaves open are marked `[CHOICE]` in the code
-and printed on every render. The verdict lines apply the order's own
+and printed on every render.
+
+**The revision.** `WORK_ORDER_V2.md` adds one bullet, the N2 CONTROL —
+the missing control from `zero-sum-curriculum-null/`, specified with
+three measurables and filed in this order. `revision_audit.py` shows
+the copy is a pure insertion with the changelog unmoved, that `N2` and
+`the null` have no referent inside this order, that one of the three
+measurables is exact on the sibling sheet and two are partial, and that
+the bullet's *persists* outcome names the template where the null
+construction's own table routes to N3. The verdict lines apply the order's own
 FALSIFICATION rule to the computed numbers and print `undetermined`
 where a number it needs is None.
 
 | file | what |
 |---|---|
 | `WORK_ORDER.md` | delivered verbatim |
+| `WORK_ORDER_V2.md` | the revision, verbatim beside v1: one added bullet, the N2 CONTROL |
+| `revision_audit.py` | v2 as a copy (pure insertion, changelog) and as a claim (referent, measurables, outcomes) |
 | `label_position_test.py` | the instrument, one stdlib file |
 | `selftest_lpt.py` | known answers first, both directions of every guard; writes the samples |
-| `CLAIM_TABLE.md` | `LPT_001..LPT_009` |
+| `CLAIM_TABLE.md` | `LPT_001..LPT_014` |
 | `samples/` | constructed rows and relabel sheet, the pinned renders |
 
 The instrument refuses `--selftest`. Renders screen clean through the

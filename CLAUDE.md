@@ -6520,9 +6520,31 @@ underneath).
   UNVERIFIED:** no public row coded, no labeler run, nothing bearing on
   H0/H1/H2 — and the order's last limit applies to this folder too.
   Three `[CHOICE]`s printed on every render; renders screen clean
-  through `no_severity` with no exemption; no author section. Check
-  count printed by `selftest_lpt.py`; the instrument refuses
-  `--selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
+  through `no_severity` with no exemption; no author section.
+  **A revision then landed** (`WORK_ORDER_V2.md`, verbatim beside v1)
+  adding one bullet, the **N2 CONTROL** — the missing control from
+  `zero-sum-curriculum-null/`, specified with three measurables and
+  filed in this order. `revision_audit.py` checks it as a copy and as a
+  claim. **`LPT_010`:** a pure insertion, one six-line block, and the
+  CHANGELOG did not move with it — P6 asks for versioned diffs and the
+  order's own revision is unlogged. **`LPT_011`:** `N2` and `the null`
+  occur zero times in v1 and once each in v2, inside the bullet; the
+  referent is one folder over and is imported, not restated.
+  **`LPT_012`:** against the `hf-incident-extract` sheet, self-risk
+  rate is M4 exactly, channel split is partial (M6 reads the gate
+  channel; peers and third parties have no field) and probing rate is
+  partial (probe classes counted, no per-run denominator) — and the
+  channel split is N3's residual, now specified for measurement in the
+  control setting. **`LPT_013`/`LPT_014`:** a transparent scorer
+  removes `opacity` from N3's three stated inputs, so a persisting
+  split narrows N3 and does not close it, while the bullet's *persists*
+  sentence names the template where the null construction's own table
+  routes to N3 — *"either result closes an open branch"* holds for
+  `vanishes` and overstates for `persists`. One declared `no_severity`
+  exemption (`risk`, inside the delivered term *self-risk rate*) under
+  the three-arm harness. Check count printed by `selftest_lpt.py`; both
+  modules refuse `--selftest`. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
 - `zero-sum-curriculum-null/` — A delivered null construction
   (`NULL_CONSTRUCTION.md`, verbatim, trailing `g4` included): five
   conditions under which a zero-sum curriculum could NOT have affected

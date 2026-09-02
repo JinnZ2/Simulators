@@ -269,6 +269,49 @@ def main():
     check("constructed render says its rows are not public record",
           "not public record" in out_f)
 
+    # ---- the v2 revision, as a copy and as a claim
+    import revision_audit as RA
+    v1, v2 = RA._read(RA.V1), RA._read(RA.V2)
+    pi = RA.pure_insertion(v1, v2)
+    check("v2 is a pure insertion into v1 that reassembles v1", pi["pure"] and pi["reassembles"])
+    check("the inserted block is the N2 CONTROL bullet, six lines",
+          pi["lines"] == 6 and "N2 CONTROL" in pi["block"])
+    doctored = v2.replace("H0  labels track the move", "H0  labels track the actor")
+    check("a doctored v2 with a second change is not a pure insertion",
+          RA.pure_insertion(v1, doctored)["pure"] is False)
+    check("changelog unchanged across the revision",
+          RA.section(v1, "CHANGELOG") == RA.section(v2, "CHANGELOG"))
+    check("section() returns None on a missing heading", RA.section(v1, "NO SUCH") is None)
+    r = RA.referent(v1, v2)
+    check("N2 and null have no occurrence in v1", r["v1_N2"] == [] and r["v1_null"] == [])
+    check("N2 and null each occur once in v2, inside the bullet",
+          len(r["v2_N2"]) == 1 and len(r["v2_null"]) == 1 and 92 <= r["v2_N2"][0] <= 97)
+    check("the referent's N2 title is read from the null construction",
+          r["null_construction_N2"].startswith("curriculum present"))
+    mm = RA.measurable_map()
+    check("three measurables mapped", len(mm) == 3)
+    check("every mapped field exists in the sibling sheet", all(m["fields_exist"] for m in mm.values()))
+    check("one exact, two partial", sorted(m["fit"] for m in mm.values()) == ["exact", "partial", "partial"])
+    t = RA.transparency_removes()
+    check("N3 states three inputs and transparency removes one",
+          t["before"] == ["gradient", "open channel", "opacity"] and t["removed"] == 1)
+    oc = RA.outcome_check()
+    check("the bullet's persists reading names the template where the table routes to N3",
+          oc["persists"]["names_template"] and oc["persists"]["routes_to_N3"])
+    rc = subprocess.run([sys.executable, os.path.join(HERE, "revision_audit.py"), "--selftest"],
+                        capture_output=True).returncode
+    check("revision_audit refuses --selftest with rc 2", rc == 2)
+    out_r = RA.render()
+    # declared exemption: `risk` inside the delivered term "self-risk rate", three arms
+    masked = out_r.replace("self-risk", "self-r1sk")
+    check("revision render clean with the delivered term masked", not no_severity.hits(masked))
+    check("the delivered term is the only thing that fires",
+          {h[1] for h in no_severity.hits(out_r)} == {"risk"})
+    check("a planted word is caught through the exemption",
+          {h[1] for h in no_severity.hits(masked + "\nthis is wrong\n")} == {"wrong"})
+    with open(os.path.join(HERE, "samples", "revision_audit.sample.txt"), "w", encoding="utf-8") as fh:
+        fh.write(out_r)
+
     # ---- pin the samples
     sd = os.path.join(HERE, "samples")
     with open(os.path.join(sd, "constructed_rows.csv"), "w", encoding="utf-8") as fh:
