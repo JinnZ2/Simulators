@@ -6623,6 +6623,54 @@ underneath).
   clean with no exemption; no author section. Check count printed by
   `selftest_rc.py`; the instrument refuses `--selftest`. Stdlib only,
   parses under 3.9, phone-buildable, CC0.
+- `removal-closure/` — A pre-registered work order delivered verbatim
+  (`WORK_ORDER.md`) about a METHOD — how claims of coupling between an
+  environmental constant and a biological rhythm reach closure, and
+  whether removability predicts time-to-closure — with no mechanism
+  proposed and no coupling asserted. **`removal_closure.py`** is the
+  main-table instrument: years to closure, the three falsification
+  rules with `undetermined` where they cannot run, Cramér's V imported
+  from `label-position-test`, Spearman imported from `readout-count`,
+  and a **pre-registration hash** over the removability coding that is
+  stable under closure-year edits and moves under a recode (`RMC_005`).
+  **No data ships**: the five seed rows are read back from the order and
+  **0 of 5 count by its own rule** — three step cells are ranges and two
+  year cells are decades where the schema wants one value (`RMC_002`) —
+  and their years-to-closure column, recomputed from their own year
+  cells with a decade read as a range, comes back consistent to within
+  the `~` it carries (`RMC_003`, a clean check recorded because it is the
+  only check possible without a literature). **`RMC_004`:** H2 ranks
+  time-to-closure, which exists only for closed rows, and the open rows
+  it drops are exactly where the order says the low-removability
+  constants sit; a censored reading with open rows at
+  `CURRENT_YEAR − first_correlation_year` is printed beside it and
+  neither is picked. **`rhythm_gaps.py` runs the attached gaps, and the
+  dataset was reachable — the first in this drop family** (`RMC_006`):
+  the repository is on `github.com`, cloned at `b174bd64afba`, not
+  checked in, size and sha256 printed on every render, headline numbers
+  pinned by the selftest when the file is present. **`RMC_007`, G2
+  run:** the upstream split applies no minimum pause (shortest trailing
+  pause in the table 0.001 s), and re-merged at the order's thresholds
+  the analysed unit's mean moves **2.257 → 3.531 s** (×1.56) from t = 0
+  to 0.50 s — the direction is fixed by construction and asserted, the
+  size is the measurement, and what the t = 0 figure describes is the
+  annotation's pause convention upstream of the repository.
+  **`RMC_008`, G3 run:** right-tail ratio (p95 − median)/(median − p05)
+  exceeds 1 in **49 of 49 languages** on the analysed unit (1.46–2.64)
+  and on the speech run (2.10–3.41), CV 0.42–0.63 and 0.51–0.78 — the
+  first of the order's two stated shapes in every language, stated as a
+  property of the file under the statistics and not as what produces
+  it. **`RMC_009`:** G4 needs word-level intervals the repository does
+  not carry (its first script reads them from an external path and
+  writes only the units), G5 needs a country join the repository does
+  by geocoding, G1/G6/G7 are reading questions and G7's number is
+  arithmetic (1 / 2.020 s = 0.495 Hz). **`RMC_010`:** two numbers the
+  upstream script states in comments (1.43 / 0.83) reproduce from the
+  table (1.430 / 0.827). **`RMC_011` UNVERIFIED:** nothing bears on H1–H3
+  and nothing asserts or denies a coupling. Four `[CHOICE]`s printed;
+  renders screen clean with no exemption; no author section. Check
+  count printed by `selftest_rmc.py`; both instruments refuse
+  `--selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated

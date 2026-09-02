@@ -1,0 +1,148 @@
+rhythm_gaps -- the attached gaps run where they can be run
+
+CSV: unsplit_ioi_data_for_rhythm_analysis_including_meta_data_run_Oct24.csv
+  bytes 16146681  sha256 cc3cb68c68cecdd7  upstream github.com/LSBurchardt/Rhythm_across_48_languages  commit b174bd64afba
+  rows 105687  languages 49
+
+PAUSE FLOOR  min 0.001  p1 0.054  p5 0.099  median 0.649  mean 0.827  max 4.524 s
+  the upstream split ends a unit at every annotated pause; no lower threshold
+  is applied in the repository's scripts, so the floor is the annotation's.
+  script comment states speech mean 1.43 / pause mean 0.83; recomputed 1.430 / 0.827
+
+G2  re-merge at threshold t (trailing pause < t joins the next unit)
+  t     | units  | io mean | io median | speech mean | speech median   (speech: absorbed pauses < t included)
+  0.00  | 105687 | 2.257 | 2.020 | 1.430 | 1.160
+  0.15  |  96086 | 2.483 | 2.219 | 1.582 | 1.273
+  0.25  |  87791 | 2.717 | 2.427 | 1.751 | 1.399
+  0.35  |  79762 | 2.991 | 2.652 | 1.957 | 1.538
+  0.50  |  67567 | 3.531 | 3.019 | 2.387 | 1.775
+  io mean moves 2.257 -> 3.531 (x1.56) from t=0 to t=0.50; monotone non-decreasing: True
+  the direction is fixed by construction (merging only lengthens units); the
+  size of the move is the measurement.
+
+G3  per-language shape on unit duration, onset to onset (the analysed quantity), 49 languages
+  stat        | min   | max   | median across languages
+  median      | 1.356 | 2.705 | 2.014
+  mode        | 0.900 | 2.350 | 1.700
+  cv          | 0.424 | 0.630 | 0.518
+  tail_ratio  | 1.459 | 2.641 | 1.914
+  languages with right-tail ratio > 1: 49 of 49
+  per language:  glottocode | n | median | mode | cv | tail_ratio
+    anal1239   |  3176 | 1.891 | 1.10 | 0.529 | 2.040
+    apah1238   |  1024 | 1.774 | 1.25 | 0.630 | 2.143
+    arap1274   |  2735 | 2.206 | 1.90 | 0.505 | 1.771
+    bain1259   |  3190 | 1.558 | 1.35 | 0.541 | 2.031
+    beja1238   |  3568 | 1.990 | 1.35 | 0.567 | 2.232
+    bora1263   |  2618 | 2.272 | 1.75 | 0.576 | 1.995
+    cabe1245   |   874 | 1.446 | 1.00 | 0.510 | 2.330
+    cash1254   |  2868 | 2.014 | 1.65 | 0.580 | 2.129
+    dolg1241   |  2199 | 2.195 | 1.75 | 0.542 | 1.826
+    even1259   |  3559 | 2.127 | 2.00 | 0.514 | 1.988
+    goem1240   |  1684 | 1.833 | 1.35 | 0.518 | 2.181
+    goro1270   |  1402 | 1.854 | 1.60 | 0.515 | 1.795
+    guri1247   |  1644 | 2.359 | 2.35 | 0.477 | 1.587
+    hoch1243   |  2508 | 1.844 | 1.55 | 0.528 | 2.310
+    jeha1242   |  2327 | 1.944 | 1.45 | 0.518 | 1.868
+    kaka1265   |  2471 | 1.722 | 1.85 | 0.485 | 1.564
+    kama1351   |  3942 | 2.061 | 1.60 | 0.532 | 2.100
+    kark1256   |  3285 | 1.696 | 1.60 | 0.493 | 1.850
+    komn1238   |  2265 | 2.180 | 2.20 | 0.467 | 1.585
+    lowe1385   |  2257 | 1.894 | 1.30 | 0.629 | 2.355
+    movi1243   |  2881 | 2.107 | 2.05 | 0.529 | 1.863
+    ngal1292   |   994 | 2.137 | 2.10 | 0.499 | 1.840
+    nisv1234   |  2047 | 2.705 | 2.10 | 0.473 | 1.685
+    nngg1234   |  2144 | 1.656 | 1.45 | 0.479 | 1.685
+    nort2641   |  1574 | 2.300 | 2.30 | 0.535 | 1.824
+    nort2875   |  1621 | 2.014 | 2.00 | 0.499 | 1.951
+    orko1234   |  1595 | 1.917 | 1.15 | 0.504 | 1.676
+    pnar1238   |  1454 | 1.708 | 1.25 | 0.588 | 2.397
+    port1286   |  2235 | 2.092 | 1.35 | 0.485 | 1.646
+    resi1247   |  3134 | 2.393 | 1.85 | 0.505 | 1.459
+    ruul1235   |   703 | 1.805 | 1.80 | 0.424 | 1.592
+    sadu1234   |  1719 | 1.898 | 1.70 | 0.520 | 1.957
+    sanz1248   |  1156 | 2.545 | 2.10 | 0.583 | 2.245
+    savo1255   |  2633 | 2.053 | 1.40 | 0.531 | 1.792
+    sout2856   |  2785 | 2.015 | 1.85 | 0.474 | 1.865
+    sout3282   |  1245 | 2.441 | 2.10 | 0.540 | 1.940
+    stan1290   |  1957 | 2.150 | 2.25 | 0.600 | 1.914
+    sumi1235   |    81 | 1.356 | 0.90 | 0.504 | 2.641
+    svan1243   |  2174 | 2.358 | 1.85 | 0.542 | 1.987
+    taba1259   |  1306 | 1.869 | 1.30 | 0.532 | 2.162
+    teop1238   |  2517 | 1.921 | 1.20 | 0.511 | 1.810
+    texi1237   |  2716 | 1.966 | 1.40 | 0.499 | 1.525
+    toto1304   |  2071 | 1.926 | 1.60 | 0.497 | 1.808
+    trin1278   |  2012 | 2.496 | 1.60 | 0.519 | 2.034
+    tsim1256   |  1929 | 2.656 | 1.90 | 0.495 | 1.807
+    urum1249   |  3320 | 1.950 | 1.75 | 0.558 | 2.086
+    vera1241   |  2207 | 1.991 | 1.80 | 0.502 | 1.612
+    yong1270   |  1935 | 2.046 | 1.75 | 0.519 | 2.246
+    yuca1254   |  1946 | 2.138 | 1.80 | 0.512 | 2.069
+
+G3  per-language shape on speech run, pause excluded, 49 languages
+  stat        | min   | max   | median across languages
+  median      | 0.768 | 1.668 | 1.184
+  mode        | 0.300 | 1.350 | 0.800
+  cv          | 0.507 | 0.777 | 0.637
+  tail_ratio  | 2.101 | 3.409 | 2.625
+  languages with right-tail ratio > 1: 49 of 49
+  per language:  glottocode | n | median | mode | cv | tail_ratio
+    anal1239   |  3176 | 1.018 | 0.65 | 0.663 | 2.808
+    apah1238   |  1024 | 1.232 | 0.60 | 0.715 | 2.731
+    arap1274   |  2735 | 1.196 | 1.10 | 0.613 | 2.144
+    bain1259   |  3190 | 0.768 | 0.40 | 0.623 | 2.867
+    beja1238   |  3568 | 1.364 | 0.45 | 0.708 | 2.833
+    bora1263   |  2618 | 1.367 | 0.80 | 0.720 | 2.951
+    cabe1245   |   874 | 1.179 | 0.85 | 0.606 | 2.354
+    cash1254   |  2868 | 1.134 | 0.90 | 0.771 | 3.409
+    dolg1241   |  2199 | 1.450 | 1.10 | 0.673 | 2.431
+    even1259   |  3559 | 1.145 | 0.65 | 0.625 | 2.626
+    goem1240   |  1684 | 0.911 | 0.65 | 0.589 | 2.261
+    goro1270   |  1402 | 0.981 | 0.65 | 0.620 | 2.412
+    guri1247   |  1644 | 1.195 | 0.85 | 0.640 | 2.614
+    hoch1243   |  2508 | 0.989 | 0.55 | 0.709 | 3.150
+    jeha1242   |  2327 | 0.980 | 0.65 | 0.703 | 3.221
+    kaka1265   |  2471 | 0.802 | 0.65 | 0.543 | 2.428
+    kama1351   |  3942 | 1.284 | 0.75 | 0.616 | 2.350
+    kark1256   |  3285 | 0.827 | 0.65 | 0.645 | 2.941
+    komn1238   |  2265 | 1.184 | 0.90 | 0.584 | 2.399
+    lowe1385   |  2257 | 1.429 | 0.75 | 0.728 | 2.743
+    movi1243   |  2881 | 1.287 | 0.90 | 0.682 | 2.620
+    ngal1292   |   994 | 1.004 | 0.55 | 0.627 | 2.765
+    nisv1234   |  2047 | 1.649 | 1.10 | 0.632 | 2.404
+    nngg1234   |  2144 | 0.933 | 0.55 | 0.611 | 2.101
+    nort2641   |  1574 | 1.393 | 1.05 | 0.657 | 2.625
+    nort2875   |  1621 | 1.258 | 0.80 | 0.614 | 2.566
+    orko1234   |  1595 | 1.072 | 0.65 | 0.626 | 2.594
+    pnar1238   |  1454 | 1.050 | 0.80 | 0.777 | 3.149
+    port1286   |  2235 | 1.249 | 0.75 | 0.608 | 2.302
+    resi1247   |  3134 | 1.010 | 0.90 | 0.655 | 2.583
+    ruul1235   |   703 | 1.140 | 1.00 | 0.507 | 2.338
+    sadu1234   |  1719 | 1.226 | 1.00 | 0.626 | 2.691
+    sanz1248   |  1156 | 1.580 | 0.65 | 0.765 | 3.298
+    savo1255   |  2633 | 1.149 | 1.05 | 0.638 | 2.224
+    sout2856   |  2785 | 1.061 | 0.85 | 0.581 | 2.263
+    sout3282   |  1245 | 1.467 | 0.95 | 0.709 | 2.680
+    stan1290   |  1957 | 1.345 | 0.30 | 0.759 | 2.631
+    sumi1235   |    81 | 0.913 | 0.65 | 0.597 | 2.848
+    svan1243   |  2174 | 1.580 | 0.95 | 0.657 | 2.597
+    taba1259   |  1306 | 1.235 | 1.05 | 0.663 | 2.691
+    teop1238   |  2517 | 1.184 | 0.90 | 0.626 | 2.259
+    texi1237   |  2716 | 1.024 | 0.60 | 0.609 | 2.546
+    toto1304   |  2071 | 1.023 | 0.75 | 0.636 | 2.747
+    trin1278   |  2012 | 1.668 | 0.90 | 0.654 | 2.696
+    tsim1256   |  1929 | 1.532 | 1.35 | 0.668 | 2.743
+    urum1249   |  3320 | 1.256 | 0.65 | 0.675 | 2.898
+    vera1241   |  2207 | 1.160 | 0.90 | 0.626 | 2.350
+    yong1270   |  1935 | 1.450 | 0.85 | 0.637 | 2.669
+    yuca1254   |  1946 | 1.545 | 1.15 | 0.624 | 2.294
+
+NOT RUN HERE
+  G1  reading question about the paper's animal rows; not in the CSV
+  G4  word-level intervals are not in the repository: 01_prep reads them from an external DoReCo path and writes only the pause-bounded units
+  G5  the height covariate joins on country, which 03_post_metadata obtains by geocoding coordinates; no country column is in the table
+  G6  reading question about sound-production mechanisms; not in the CSV
+  G7  reading question; its one number is arithmetic and is printed below
+  G7  1 / median unit duration = 1 / 2.020 s = 0.495 Hz
+
+Every number above is a property of the named file under this module's
+operations. Nothing is a statement about any language, speaker or species.
