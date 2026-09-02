@@ -316,3 +316,66 @@ removes the information from the record — fits none of the eight; its
 nearest neighbour is `observer-exclusion`'s classification-note
 candidate, recorded and filed under a category that is not evidence.
 Declared readings, checked against the register's tuple by import.
+
+## The stack's revision (v2)
+
+`EXCLUSION_STACK_trucking_v2.md` landed beside the first stack,
+verbatim. `stack_revision.py` checks it as a copy and as a claim.
+
+| id | claim | status |
+|---|---|---|
+| RC_023 | v2 is v1 with three blocks inserted and nothing removed; the CHANGELOG did not move with it | SUPPORTED |
+| RC_024 | L4 is the first layer in the stack with its own falsifier: a test, a two-armed prediction, a named refuting observation, and evidence declared as one operator's training stack | SUPPORTED |
+| RC_025 | the four counts the revision says "safety culture" reduces to have schema fields for three; "who publishes" has none and is P2's third disjunct again | SUPPORTED |
+| RC_026 | "not fixable layer by layer" is the stack's own multiplication stated: removing one layer buys 1/r on that layer and leaves the other eleven | SUPPORTED |
+| RC_027 | of the seven open quantities, one fills schema columns and six name layers the schema has no column for | SUPPORTED |
+
+## RC_023 — the copy
+
+Three contiguous blocks (68 lines) inserted, zero lines removed, and
+deleting them reassembles v1 byte for byte. The assembled file was also
+checked against the delivered text directly and is identical. The
+CHANGELOG still reads `v0 2026-09-02 compiled, unmeasured`; the
+revision that added a falsifier, a section and two open quantities is
+not logged in the document that carries it.
+
+## RC_024 — a layer that can be refuted
+
+The CURRICULUM COVERAGE block ends with a TEST (search four syllabi
+for three citations), a PREDICT with both arms (present carrier-side,
+absent operator-side) and the sentence *if present in operator-side
+training, this layer is refuted*. No other layer in either version has
+that shape. The evidence for the claim is one operator's training
+stack and the block says so; S6 is the test as a survey. Both hosts the
+test would read refused CONNECT, so nothing here bears on whether the
+citations are in any syllabus.
+
+## RC_025 — three of four counts
+
+*"who holds, who returns, who is immune, who publishes"* against the
+schema: `holder`, `positions_returning` / `return_count`, `immunity` —
+and nothing for publishes. That is `RC_017`'s missing disjunct reached
+from the revision's own summary: the count the stack says converts a
+disposition into a structure is the count the parent schema cannot
+take.
+
+## RC_026 — the arithmetic of "layer by layer"
+
+The revision predicts the failure is not fixable one filter at a time.
+Under the stack's own multiplicative survival that is arithmetic:
+twelve layers at 0.5 give 1/4096, and removing any one gives 1/2048 —
+a factor of two, with eleven layers of the same size left. A stack with
+one dominant filter (L0 at 0.05) gains twenty-fold from removing it and
+twofold from removing any other, and is still at 1/2048 afterward. The
+delivered stack is unmeasured on every layer, so its survival is None
+and the constructed numbers are the shape, not a measurement.
+
+## RC_027 — the open quantities and the schema
+
+S5 (filings, investigations, enforcement actions by year) fills
+`intake_count` and `return_count` per regime-year and is the only one
+that does. S1, S2, S3, S6 and S7 each name a layer — classification,
+filability, per-layer survival, curriculum — the schema has no column
+for; S4 is per carrier where the schema is per regime-year. The survey
+the stack calls for is mostly a survey of things the parent instrument
+does not record.

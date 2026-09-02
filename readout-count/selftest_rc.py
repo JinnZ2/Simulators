@@ -263,6 +263,40 @@ def main():
     with open(os.path.join(HERE, "samples", "stack_audit.sample.txt"), "w", encoding="utf-8") as fh:
         fh.write(out_sa)
 
+    # ---- the stack's revision (v2) as a copy and as a claim
+    import stack_revision as SR
+    v1, v2 = SA._read(SR.V1), SA._read(SR.V2)
+    pi = SR.pure_insertion(v1, v2)
+    check("v2 is v1 plus three inserted blocks, nothing removed",
+          pi["blocks"] == 3 and pi["removed_lines"] == 0 and pi["reassembles_v1"])
+    doct = v2.replace("## L7 — MONETARY", "## L7 — MONEY")
+    check("a doctored v2 does not reassemble v1", SR.pure_insertion(v1, doct)["reassembles_v1"] is False)
+    check("changelog unchanged across the revision", SR.changelog_unchanged(v1, v2))
+    f = SR.l4_falsifier(v2)
+    check("L4 carries a test, both arms and a named refutation", all(f.values()))
+    check("v1's L4 carries none of it", not SR.l4_falsifier(v1)["has_test"])
+    fc = SR.four_counts()
+    check("three of the four counts have a schema field and 'who publishes' has none",
+          sum(1 for v in fc.values() if v["has_field"]) == 3 and not fc["who publishes"]["has_field"])
+    demo = {k: 0.5 for k in SA.unmeasured_stack(v2)}
+    lb = SR.layer_by_layer(demo)
+    check("twelve layers at 0.5: survival 1/4096, removing one gives x2",
+          abs(lb["base"] - 1 / 4096) < 1e-15 and abs(lb["per_layer"]["L3"]["gain"] - 2.0) < 1e-12)
+    check("removing a layer from an unmeasured stack is still None",
+          SR.remove_one(SA.unmeasured_stack(v2), "L0") is None)
+    om = SR.open_map()
+    check("one of seven open quantities fills schema columns",
+          [s for s, v in om.items() if v["fills_schema"]] == ["S5"])
+    check("S6 and S7 are new in v2", "S6" in SA.open_quantities(v2) and "S6" not in SA.open_quantities(v1))
+    check("twelve layers still match in v2", SA.layers_match(v2)["all_match"])
+    rc4 = subprocess.run([sys.executable, os.path.join(HERE, "stack_revision.py"), "--selftest"],
+                         capture_output=True).returncode
+    check("stack_revision refuses --selftest with rc 2", rc4 == 2)
+    out_sr = SR.render()
+    check("revision render screens clean", not no_severity.hits(out_sr))
+    with open(os.path.join(HERE, "samples", "stack_revision.sample.txt"), "w", encoding="utf-8") as fh:
+        fh.write(out_sr)
+
     sd = os.path.join(HERE, "samples")
     with open(os.path.join(sd, "constructed_rows.csv"), "w", encoding="utf-8") as fh:
         fh.write(to_csv(world()))

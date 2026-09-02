@@ -6667,9 +6667,25 @@ underneath).
   MODALITY, L2 as PROXY SUBSTITUTION, L5 partially as AUDIT ASYMMETRY,
   and **L11 fits none of the eight** — nearest is `observer-exclusion`'s
   classification-note candidate. All seven source hosts refused CONNECT,
-  recorded not read. Check count printed by `selftest_rc.py`; all three
-  modules refuse `--selftest`. Stdlib only, parses under 3.9,
-  phone-buildable, CC0.
+  recorded not read. **The stack's revision then landed**
+  (`EXCLUSION_STACK_trucking_v2.md`, verbatim beside v1): L4 gains the
+  stack's first per-layer falsifier — a syllabus search with both arms
+  of the prediction and *if present in operator-side training, this
+  layer is refuted*, on evidence declared as one operator's training
+  stack (`RC_024`) — plus an ACCRETED, NOT ENGINEERED section and S6/S7.
+  `stack_revision.py`: **`RC_023`** three pure insertions, 68 lines,
+  nothing removed, v1 reassembled byte-for-byte, CHANGELOG unmoved;
+  **`RC_025`** the four counts the revision reduces "safety culture" to
+  (*who holds, who returns, who is immune, who publishes*) have schema
+  fields for three and **none for publishes** — `RC_017`'s missing
+  disjunct from the revision's own summary; **`RC_026`** *not fixable
+  layer by layer* is the stack's own multiplication stated (twelve at
+  0.5 → 1/4096, remove one → 1/2048, one dominant filter at 0.05 buys
+  twenty-fold and is still at 1/2048); **`RC_027`** of S1..S7 one fills
+  schema columns (S5 → intake_count / return_count per regime-year) and
+  six name layers the schema has no column for. Check count printed by
+  `selftest_rc.py`; all four modules refuse `--selftest`. Stdlib only,
+  parses under 3.9, phone-buildable, CC0.
 - `removal-closure/` — A pre-registered work order delivered verbatim
   (`WORK_ORDER.md`) about a METHOD — how claims of coupling between an
   environmental constant and a biological rhythm reach closure, and

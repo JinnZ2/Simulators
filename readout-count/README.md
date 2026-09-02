@@ -49,7 +49,16 @@ so a settlement-only channel counts as returning and delivers nothing
 to the record. The arithmetic reproduces (percentages sum to 101 by
 rounding), an unmeasured stack has survival None and never 1.0, the
 row's phantom "(N4)" resolves forward to S4 here, and L11 fits none of
-the register's eight mechanisms. The render opens with the position line the order's first
+the register's eight mechanisms.
+
+**The stack's revision** adds L4's own falsifier (a syllabus search
+with both arms and a named refutation), a section arguing the stack is
+accreted rather than engineered, and two open quantities.
+`stack_revision.py` shows the copy is three pure insertions with the
+changelog unmoved, that three of the four counts the revision reduces
+"safety culture" to have schema fields and "who publishes" does not,
+and that "not fixable layer by layer" is the stack's own multiplication
+stated. The render opens with the position line the order's first
 paragraph asks for: this file is a row, not an exception.
 
 | file | what |
@@ -61,7 +70,9 @@ paragraph asks for: this file is a row, not an exception.
 | `row_audit.py` | the row against the instrument: rule vs schema, what the 0.5 is, the load attempt, sources, the (N4) pointer, the seed cells |
 | `EXCLUSION_STACK_trucking.md` | twelve filters between a held readout and the record, delivered verbatim |
 | `stack_audit.py` | the stack against the row, the order, the schema and the register: layers, arithmetic, survival, L0, open quantities, P2 vs L11, mechanisms, sources |
-| `CLAIM_TABLE.md` | `RC_001..RC_022` |
+| `EXCLUSION_STACK_trucking_v2.md` | the stack's revision, verbatim: L4's falsifier, ACCRETED NOT ENGINEERED, S6 and S7 |
+| `stack_revision.py` | v2 as a copy and as a claim: insertions, the L4 falsifier, the four counts, layer-by-layer arithmetic, S1..S7 vs the schema |
+| `CLAIM_TABLE.md` | `RC_001..RC_027` |
 | `samples/` | constructed rows and the pinned renders |
 
 The instrument refuses `--selftest`. Renders screen clean through the
