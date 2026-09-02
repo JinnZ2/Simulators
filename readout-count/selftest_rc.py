@@ -223,6 +223,46 @@ def main():
     with open(os.path.join(HERE, "samples", "row_audit.sample.txt"), "w", encoding="utf-8") as fh:
         fh.write(out_ra)
 
+    # ---- the delivered exclusion stack against the row, the order, the schema
+    import stack_audit as SA
+    st_text = SA._read(SA.DOC)
+    lm = SA.layers_match(st_text)
+    check("twelve layers, structure and headings match", lm["all_match"] and lm["structure_n"] == 12)
+    doctored = st_text.replace("## L7 — MONETARY", "## L7 — MONEY")
+    check("a doctored heading is caught", SA.layers_match(doctored)["all_match"] is False)
+    a = SA.stated_arithmetic(st_text)
+    check("GAO counts sum to N and the stated percentages sum to 101",
+          a["counts_sum_to_N"] and a["stated_pct_sum"] == 101 and a["per_hundred_sum"] == 100)
+    check("merit is 21.5%: 22 in L8, 21 in L10", a["computed_pct"][2] == 21.5 and a["merit_pct_L8_vs_L10"] == (22, 21))
+    check("0.5^11 is 1/2048", abs(a["half_to_the_eleventh"] - 1 / 2048) < 1e-15)
+    check("unmeasured stack survival is None", SA.survival(SA.unmeasured_stack(st_text)) is None)
+    check("survival multiplies measured rates", abs(SA.survival({"a": 0.5, "b": 0.5}) - 0.25) < 1e-12)
+    check("survival is None with one unmeasured layer among measured ones",
+          SA.survival({"a": 0.5, "b": None}) is None)
+    l0 = SA.l0_vs_row(st_text, text)
+    check("L0's six items match the row's six by content", l0["both"] == 6 and l0["row_item_count"] == 6)
+    s4 = SA.s4_is_the_n4_survey(st_text, text)
+    check("S4 is the survey the row's (N4) pointed at", s4["row_cites_N4"] and s4["S4_matches"])
+    check("S5 is on the row's STILL NEEDED list", SA.s5_vs_still_needed(st_text, text)["row_still_needed_has_it"])
+    p2 = SA.p2_vs_l11(order, st_text)
+    check("P2's three disjuncts are present and L11 states both removals",
+          p2["P2_disjuncts_present"] and p2["L11_settlement_publishes_nothing"] and p2["L11_condition_enters_no_dataset"])
+    check("the schema has no field for which disjunct fired", p2["schema_field_for_which_disjunct"])
+    mm = SA.mechanism_map()
+    check("every named mechanism is in the register and L11 names none",
+          all(m["in_register"] for m in mm.values() if m["mechanism"]) and mm["L11"]["mechanism"] is None)
+    check("register carries eight", len(SA.UN.MECHANISMS) == 8)
+    src = SA.sources(st_text)
+    check("eleven sources, eleven URLs, seven hosts", src["entries"] == 11 and src["urls"] == 11 and len(src["hosts"]) == 7)
+    check("every host probed", all(h in SA.HOST_PROBE for h in src["hosts"]))
+    rc3 = subprocess.run([sys.executable, os.path.join(HERE, "stack_audit.py"), "--selftest"],
+                         capture_output=True).returncode
+    check("stack_audit refuses --selftest with rc 2", rc3 == 2)
+    out_sa = SA.render()
+    check("stack audit render screens clean", not no_severity.hits(out_sa))
+    with open(os.path.join(HERE, "samples", "stack_audit.sample.txt"), "w", encoding="utf-8") as fh:
+        fh.write(out_sa)
+
     sd = os.path.join(HERE, "samples")
     with open(os.path.join(sd, "constructed_rows.csv"), "w", encoding="utf-8") as fh:
         fh.write(to_csv(world()))

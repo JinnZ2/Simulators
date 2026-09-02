@@ -6643,9 +6643,33 @@ underneath).
   points at nothing in the parent order (ids H0–H3, P1–P6).
   **`RC_015`:** the seed's `3+` intake cell is the complaint count under
   v0.1's renaming. **`RC_016`:** the layers table counts rows and the
-  complaint count counts routes. Check count printed by
-  `selftest_rc.py`; both modules refuse `--selftest`. Stdlib only,
-  parses under 3.9, phone-buildable, CC0.
+  complaint count counts routes. **The exclusion stack then landed**
+  (`EXCLUSION_STACK_trucking.md`, verbatim): twelve filters between a
+  held readout and the record, coded by mechanism, survival
+  multiplicative, every rate unmeasured. `stack_audit.py` reads it
+  against the row, the order, the schema and the `uninstrumented`
+  register by import. **`RC_017`, the one that lands on the parent
+  order:** P2 defines RETURN as *a reply, a corrective action, a report
+  entering a held record* — three disjuncts, any one sufficient — and
+  L11 shows a private settlement is the second without the third
+  (*publishes nothing*; *the condition does not enter any safety
+  dataset*), so a settlement-only channel counts as returning under P2
+  and delivers nothing to the record the count measures; the stack's
+  closing sentence is P2 with the disjunction removed, and the schema
+  has no field for which disjunct fired. **`RC_018`:** the arithmetic
+  reproduces from its own figures (183+32+59 = 274; percentages sum to
+  101 by rounding, merit 22 in L8 and 21 in L10 both from 21.5; 0.5^11
+  = 1/2048). **`RC_019`:** survival over twelve layers with zero
+  measured rates is None, never 1.0 by default. **`RC_020`:** the row's
+  phantom "(N4)" resolves forward — S4 here is the survey the row named
+  in the same words, and the row still says N4. **`RC_021`:** L0 is the
+  row's six-item list, item for item. **`RC_022`:** L0 reads as
+  MODALITY, L2 as PROXY SUBSTITUTION, L5 partially as AUDIT ASYMMETRY,
+  and **L11 fits none of the eight** — nearest is `observer-exclusion`'s
+  classification-note candidate. All seven source hosts refused CONNECT,
+  recorded not read. Check count printed by `selftest_rc.py`; all three
+  modules refuse `--selftest`. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
 - `removal-closure/` — A pre-registered work order delivered verbatim
   (`WORK_ORDER.md`) about a METHOD — how claims of coupling between an
   environmental constant and a biological rhythm reach closure, and

@@ -229,3 +229,90 @@ routes (coercion, harassment) apart, which the CORRECTION section does
 and the table does not, or by counting the remedy-typed row as a
 complaint, which the table's own typing does not. The table counts
 rows and the count counts routes.
+
+## The exclusion stack
+
+`EXCLUSION_STACK_trucking.md` enumerates twelve filters between an
+operator holding a readout and that readout entering a record, coded by
+mechanism, survival multiplicative, every rate unmeasured. Landed
+verbatim; `stack_audit.py` reads it against the row, the parent order,
+the schema, and the `uninstrumented` register (imported). Its sources
+were not read: all seven hosts refused CONNECT.
+
+| id | claim | status |
+|---|---|---|
+| RC_017 | P2's definition of RETURN has three disjuncts, and L11 shows they come apart: a settlement is a corrective action that enters no held record, and the schema cannot say which disjunct fired | SUPPORTED |
+| RC_018 | the document's arithmetic reproduces from its own figures; the stated percentages sum to 101 and merit reads 22 in one section and 21 in another, both roundings of 21.5 | SUPPORTED |
+| RC_019 | survival over twelve layers with zero measured rates is None, and the instrument never defaults an unmeasured layer to 1 | SUPPORTED |
+| RC_020 | the row's phantom "(N4)" now has a referent, S4, in this document; S5 is the row's own STILL NEEDED item | SUPPORTED |
+| RC_021 | L0 is the row's six-item readout list, item for item; the document restates rather than extends it | SUPPORTED |
+| RC_022 | two layers map onto register mechanisms, one partially, and L11 maps onto none of the eight | SUPPORTED |
+
+## RC_017 — the disjunction in P2
+
+The parent order's P2 counts *positions whose channel has a documented
+RETURN (a reply, a corrective action, a report entering a held
+record)*. Three disjuncts, any one sufficient. L11 states that the
+modal success of the complaint channel is a private settlement that
+*publishes nothing* and that *the condition that triggered the refusal
+does not enter any safety dataset*. A settlement is a corrective action
+on the employment matter — disjunct two — and it fails disjunct three.
+So a position whose channel returns only through settlements counts as
+returning under P2 and delivers nothing to the record the count is
+supposed to measure. The schema holds `positions_returning` as a list
+and has no field for which disjunct fired; the row's `type` column
+(`RC_010`) and this are the same missing column seen from two sides,
+since a readout-typed channel is one whose return is disjunct three.
+The stack's closing sentence — *a channel whose success condition is a
+confidential settlement cannot function as a readout channel* — is
+P2's own definition with the disjunction removed.
+
+## RC_018 — the arithmetic
+
+GAO STAA rows: 183 + 32 + 59 = 274. Percentages computed 66.8 / 11.7 /
+21.5 against stated 67 / 12 / 22, which sum to 101; L10's per-hundred
+67 / 12 / 21 sums to 100, so merit is rounded up in L8 and down in
+L10. Of 21, 0.95 × 21 = 19.95 against *~20 settlements, ~1 order*.
+*Roughly five to one* is 100/21 = 4.76; L7's *~1-in-5* against N/merit
+is 4.64. And 0.5^11 = 1/2048, the number the STRUCTURE sentence points
+at. Every stated figure follows from the figures beside it; the
+document's own KNOWN LIMITS carry the 2009 date on the source.
+
+## RC_019 — survival with nothing measured
+
+The stack says survival is multiplicative and S3 says no per-layer rate
+is published. `survival()` multiplies measured rates and returns None
+if any layer is unmeasured; on the delivered stack that is twelve
+layers, zero rates, None. A default of 1.0 for an unmeasured layer
+would be the most flattering value on a filter, on the field the
+document exists to measure.
+
+## RC_020 — the phantom resolves forward
+
+`RC_014` recorded the row's *"(N4)"* as pointing at nothing in the
+parent order. The stack's S4 is *per-carrier reply rate to internal
+driver technical submissions (board-sampled; identity filter
+self-enforcing)*, which is the survey the row's OPEN INSTANCE named
+in the same words. S5 is the row's own STILL NEEDED item on NCCDB
+filings versus dispositions. The pointer was to a document not yet
+written; it now exists under a different id in a different file, and
+the row still says N4.
+
+## RC_021 — L0 is the row's list
+
+Six items in the row, six in L0, six matched by content. The stack
+restates the readout list rather than extending it, and types it —
+*EXCLUSION BY CHANNEL TYPE* — which is `RC_010`'s missing column
+named as a filter.
+
+## RC_022 — mechanisms, by import
+
+Against the register's eight: L0 reads as MODALITY (a complaint
+instrument in the condition's channel), L2 as PROXY SUBSTITUTION (a
+named rule breach stands in for the condition as the filable target),
+L5 partially as AUDIT ASYMMETRY (the burden on one side, where the
+register's sense is a guard on one side). L11 — the successful outcome
+removes the information from the record — fits none of the eight; its
+nearest neighbour is `observer-exclusion`'s classification-note
+candidate, recorded and filed under a category that is not evidence.
+Declared readings, checked against the register's tuple by import.

@@ -38,7 +38,18 @@ the 0.5 is a per-position partial return the schema's list cannot hold
 (the row loads at 1, never 0.5), that the row is refused on the one
 cell its own STILL NEEDED list opens with, that five of seven source
 entries carry a URL and the count rests on a deferred one, and that the
-row's "(N4)" points at nothing in the parent order. The render opens with the position line the order's first
+row's "(N4)" points at nothing in the parent order.
+
+**The exclusion stack.** `EXCLUSION_STACK_trucking.md` lists twelve
+filters, survival multiplicative, every rate unmeasured. `stack_audit.py`
+shows the sharpest thing in it lands on the parent order: P2 defines
+RETURN as a reply OR a corrective action OR a report entering a held
+record, and L11 shows a settlement is the second without the third —
+so a settlement-only channel counts as returning and delivers nothing
+to the record. The arithmetic reproduces (percentages sum to 101 by
+rounding), an unmeasured stack has survival None and never 1.0, the
+row's phantom "(N4)" resolves forward to S4 here, and L11 fits none of
+the register's eight mechanisms. The render opens with the position line the order's first
 paragraph asks for: this file is a row, not an exception.
 
 | file | what |
@@ -48,7 +59,9 @@ paragraph asks for: this file is a row, not an exception.
 | `selftest_rc.py` | known answers first, both directions of every guard; writes the samples |
 | `TRUCKING_ROW_v0_1.md` | the first filled row, delivered verbatim: sourced, coding rule stated, count 0.5 |
 | `row_audit.py` | the row against the instrument: rule vs schema, what the 0.5 is, the load attempt, sources, the (N4) pointer, the seed cells |
-| `CLAIM_TABLE.md` | `RC_001..RC_016` |
+| `EXCLUSION_STACK_trucking.md` | twelve filters between a held readout and the record, delivered verbatim |
+| `stack_audit.py` | the stack against the row, the order, the schema and the register: layers, arithmetic, survival, L0, open quantities, P2 vs L11, mechanisms, sources |
+| `CLAIM_TABLE.md` | `RC_001..RC_022` |
 | `samples/` | constructed rows and the pinned renders |
 
 The instrument refuses `--selftest`. Renders screen clean through the

@@ -1,0 +1,35 @@
+stack_audit -- EXCLUSION_STACK_trucking read as a structure
+
+1. LAYERS  structure 12, headings 12, ids and titles match throughout: True
+
+2. ARITHMETIC  GAO row N=274, counts (183, 32, 59) sum to N: True
+   stated % (67, 12, 22), computed (66.8, 11.7, 21.5), stated sum 101
+   L10 per hundred (67, 12, 21) sum 100; merit reads 22% in L8 and 21 in L10 (21.5 rounded both ways)
+   'of the 21: ~20 settlements, ~1 order' against 0.95 x 21 = 19.95
+   'roughly five to one' = 100/21 = 4.76; L7 '1-in-5' against N/merit = 4.64
+   'a layer that passes 50% is not minor if there are eleven': 0.5^11 = 0.000488
+
+3. SURVIVAL  layers 12, measured rates 0, product: None
+   an unmeasured layer gives None for the stack; never 1.0 by default.
+
+4. L0 AGAINST THE ROW  row lists 6 items; 6 of 6 matched in both by content
+
+5. OPEN QUANTITIES  row cites (N4): True; row names the survey: True; S4 matches it: True
+   S5 is on the row's STILL NEEDED list: True
+   the survey the row pointed at with a phantom id now has an id, S4, in this document.
+
+6. P2 AGAINST L11  P2 defines RETURN with three disjuncts present: True
+   L11: settlement publishes nothing True; condition enters no dataset True
+   schema has positions_returning and no field for which disjunct fired: True
+   a private settlement is a corrective action (disjunct 2) and enters no held record (fails disjunct 3); the schema's positions_returning cannot say which disjunct fired
+
+7. MECHANISMS  register carries 8; declared readings:
+   L0   MODALITY             fit      in register True  the apparatus is a complaint instrument; the quantity is a condition
+   L2   PROXY_SUBSTITUTION   fit      in register True  a named rule breach stands in for the condition as the filable target
+   L5   AUDIT_ASYMMETRY      partial  in register True  the burden falls on one side only; the register's sense is a guard, not a burden
+   L11  --                   none     in register False the successful outcome removes the information from the record -- nearest is observer-exclusion's classification-note candidate (recorded, filed under a category that is not evidence), not one of the eight
+
+8. SOURCES  entries 11, URLs 11, hosts ['nccdb.fmcsa.dot.gov', 'www.dol.gov', 'www.ecfr.gov', 'www.federalregister.gov', 'www.fmcsa.dot.gov', 'www.gao.gov', 'www.osha.gov']
+   probed once: nccdb.fmcsa.dot.gov no response, www.dol.gov no response, www.ecfr.gov no response, www.federalregister.gov no response, www.fmcsa.dot.gov no response, www.gao.gov no response, www.osha.gov no response
+
+Nothing here is a statement about any regime. The sources were not read.
