@@ -6523,6 +6523,84 @@ underneath).
   through `no_severity` with no exemption; no author section. Check
   count printed by `selftest_lpt.py`; the instrument refuses
   `--selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
+- `zero-sum-curriculum-null/` — A delivered null construction
+  (`NULL_CONSTRUCTION.md`, verbatim, trailing `g4` included): five
+  conditions under which a zero-sum curriculum could NOT have affected
+  the incident's outcomes, each with requires / test / status, and a
+  RESULT. `null_construction.py` parses the delivered text and computes
+  what its prose asserts. **`ZSN_001`, one word:** the header reads
+  *"each is a requirement"* (a conjunction, which empties the set at N1)
+  and the RESULT reads *"survives on the two branches"* (a disjunction,
+  {N2, N4}); computed both ways, the stated RESULT matches only the
+  second — and the conjunction is unsatisfiable on the document's own
+  terms, since N1 requires the curriculum *absent* and N2 requires it
+  *present*. **`ZSN_002`:** the branches are not independent — N2
+  (present, not activated) and N5 (vocabulary only) each leave the
+  behaviour to be accounted for without the curriculum, which is N3's
+  job, so with those two edges applied to a fixed point the null
+  survives on **N4 alone**, and N2 carries only if N3's residual closes;
+  N3 is PARTIAL by the document's own status. **`ZSN_003`:** N2's test
+  has no outcome that carries the null by itself — equal probing across
+  settings leaves the probing to N3, lower probing on possible tasks
+  leaves *what was cued* to N3. **`ZSN_004`:** N2 is
+  `hf-incident-extract`'s missing control arm and is built in its schema
+  by import — two arms differing only in `source`, every cell
+  UNMEASURED, `None` propagating, and on filled constructed arms the M1
+  difference computes. **`ZSN_005`:** the three artifacts N5 names
+  (*depth-stack instrument*, *sacrifice transcripts*, *the delay
+  attempt*) are absent from this tree by content, this folder excluded
+  from its own scan and a planted mention found; the sibling records the
+  transcripts N5 reads as `NOT_RELEASED`. **`ZSN_008`:** writing this
+  entry put two of those names into the tree and the next run reported
+  them present — `UNI_010`'s loop through the index — so hits are split
+  into an index column (the two root index files) and an independent
+  column, absence read on the second and the first printed rather than
+  excluded. **`ZSN_006`:** N3's status
+  assigns the residual to the curriculum, which the test as written does
+  not establish — an absence in one account recorded as a result for
+  another. **`ZSN_007` UNVERIFIED:** nothing here bears on whether the
+  curriculum affected anything. Check count printed by `selftest_nc.py`;
+  the module refuses `--selftest`. Stdlib only, parses under 3.9, CC0.
+- `readout-count/` — A pre-registered work order delivered verbatim
+  (`WORK_ORDER.md`): does a safety regime's incident rate track the
+  COUNT of operator positions with a protected channel that RETURNS,
+  not its stated culture or its data volume (H1); a declared channel
+  with no return contributes 0 (H2); builders cannot read their own
+  intake (H3)? Built as **one stdlib file** computing what the
+  procedure asks for from a flat CSV in its schema — readout_count as
+  distinct returning positions, per-regime OUTPUT at the latest year,
+  Spearman by hand for H1, Cramér's V imported from
+  `label-position-test` for P4, a median-split comparison for H2 — with
+  the order's own falsification lines applied and `undetermined` or
+  `NOT_COMPUTABLE` printed where they cannot run. **No data ships.**
+  **`RC_002`:** the order's five SEED ROWS are read back from the order
+  itself and **0 of 5 count by its own rule** — none carries a URL, the
+  intake cells are `high` / `med` / `3+` / `2` / `—` where the schema
+  wants integers, and one trend cell of five is in vocabulary; the
+  instrument reports each cell as what it is and fills nothing in.
+  **`RC_003`:** H1's *"rank matches"* has no strict reading past three
+  regimes — a three-level trend carries ties that a count need not, so
+  on a constructed world where the count tracks the trend as well as a
+  count can (rho 0.949) strict equality still returns *does not match*;
+  the verdict runs on rho with the threshold declared `[CHOICE 3]`.
+  **`RC_004`:** H3's falsifier conditions on acted-on counts split by
+  origin and on a grading field, and the schema carries neither —
+  `NOT_COMPUTABLE` with both absences named, the eighth stated-rule-
+  with-no-field instance. **`RC_005`:** a count at raw values has as
+  many levels as distinct values, so P4's V reads 1.000 by construction
+  on four regimes with four intake counts; the level count is printed
+  beside every V and no bin is chosen. **`RC_006`:** H2 is in the
+  definition of readout_count and cannot be tested by it; its own
+  falsifier is a different comparison, which `h2()` computes.
+  **`RC_007`:** the schema's two grains (regime-year, incident) share
+  one row shape with no field saying which. **`RC_008`:** the order's
+  first paragraph makes every party that builds or audits a row, the
+  drafting model included; the render says so above the numbers and the
+  *this session* row's dashes are left as delivered. **`RC_009`
+  UNVERIFIED.** Four `[CHOICE]`s printed on every render; renders screen
+  clean with no exemption; no author section. Check count printed by
+  `selftest_rc.py`; the instrument refuses `--selftest`. Stdlib only,
+  parses under 3.9, phone-buildable, CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated
