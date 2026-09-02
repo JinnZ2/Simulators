@@ -6694,6 +6694,45 @@ underneath).
   renders screen clean with no exemption; no author section. Check
   count printed by `selftest_rmc.py`; both instruments refuse
   `--selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
+- `encoding-selection/` — A pre-registered work order delivered verbatim
+  (`WORK_ORDER.md`), from a failed n=1: one finding encoded five ways, a
+  reader asked to rank by arrival cost, and the reader declining —
+  *"each carries different information"*. Is an encoding an INSTRUMENT
+  SELECTION rather than a style, so encodings of one content are not
+  rank-orderable on one axis (H1); does recovered quantity track the
+  format, not the reader (H2); does prose hide which axes were dropped
+  where a table shows them (H3)? Built as **one stdlib file** — Kendall's
+  W by hand against a permutation null, within- against between-format
+  spread of the recovered-quantity set as mean pairwise Jaccard
+  distance, prose against a declared table class — with the order's own
+  falsification lines applied and `undetermined` printed where they
+  cannot run. **No data ships and the seven encodings are not here**:
+  they are the experimental material, the order calls them a judgment
+  call to be published verbatim, and authoring them would put the
+  instrument's author in the sample the order excludes; the instrument
+  validates an encodings file against each item's fact list and
+  **refuses an added fact** (`ES_006`). **`ES_005`:** both seed items
+  are this repository's own artifacts — M1 is `hf-incident-extract`'s
+  explore ratio, M2 is `readout-count`'s trucking seed row — so any
+  reader of the repository, the drafting model included, already holds
+  them against the order's own MATERIAL condition; and M2 states *three
+  declared channels, zero returns*, the reading `TRUCKING_ROW_v0_1.md`
+  withdrew on the order's own date. **`ES_002`/`ES_003`/`ES_004`:**
+  *"W above chance"* has no chance in the order (a permutation null,
+  `[CHOICE 1]`), *"variance"* of a set-valued field has no value until a
+  distance is chosen (`[CHOICE 2]`, and the vocabulary's `other` is one
+  bit), and *"table readers"* names a kind not a format (`[CHOICE 3]`,
+  every format's rate printed). **`ES_007`, found by running:** a
+  decline is a third state beside a ranking and a between-subjects
+  blank, printed as a rate beside W and never subtracted — and the first
+  build counted declines per row, six for a reader who declined once,
+  caught by the constructed world and recorded. **`ES_008`:** F7 is each
+  reader's own encoding and cannot enter a pooled W; rankers over
+  different format sets are refused with the sets named. **`ES_009`
+  UNVERIFIED.** Four `[CHOICE]`s printed; renders screen clean with no
+  exemption; no author section. Check count printed by
+  `selftest_es.py`; the instrument refuses `--selftest`. Stdlib only,
+  parses under 3.9, phone-buildable, CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated

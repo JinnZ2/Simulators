@@ -1,0 +1,50 @@
+encoding_selection -- counts from the CSV, nothing else
+
+[CHOICE 1] W above chance = permutation null, 2000 draws, seed 0, p < 0.05
+[CHOICE 2] spread of a recovered-quantity set = mean pairwise Jaccard distance
+[CHOICE 3] H3 table class = ('F3', 'F5'); every format's rate printed
+[CHOICE 4] H3 'same rate' read as rate(F6) >= rate(table class)
+
+MATERIAL  M1 ratio as arithmetic: 4 days / 4 h = 24:1 (order states 24:1)
+  facts per item: M1 4, M2 4; an encoding carrying a fact not on the list is refused
+  M1  formats present 7 of 7, missing none
+     F1 carried 2 dropped 2 unstated 0
+     F2 carried 2 dropped 2 unstated 0
+     F3 carried 2 dropped 2 unstated 0
+     F4 carried 2 dropped 2 unstated 0
+     F5 carried 2 dropped 2 unstated 0
+     F6 carried 2 dropped 2 unstated 0
+     F7 carried 2 dropped 2 unstated 0
+  M2  formats present 7 of 7, missing none
+     F1 carried 4 dropped 0 unstated 0
+     F2 carried 4 dropped 0 unstated 0
+     F3 carried 4 dropped 0 unstated 0
+     F4 carried 4 dropped 0 unstated 0
+     F5 carried 4 dropped 0 unstated 0
+     F6 carried 4 dropped 0 unstated 0
+     F7 carried 4 dropped 0 unstated 0
+
+ROWS: 120   substrates: human 84, model 36   readers: 80
+
+OUTPUT  format | n | quantities_recovered (freq) | dropped_axes_named rate | rank_declines
+  F1 |  20 | disproportion 20 | 0.000 (partial 1.000) | 2 of 8 within
+  F2 |  20 | chain 20 | 0.000 (partial 1.000) | 2 of 8 within
+  F3 |  20 | magnitude 20 | 1.000 (partial 0.000) | 2 of 8 within
+  F4 |  20 | exclusion 20 | 0.000 (partial 1.000) | 2 of 8 within
+  F5 |  20 | cross-domain shape 20 | 1.000 (partial 0.000) | 2 of 8 within
+  F6 |  20 | sequence 20 | 0.000 (partial 0.000) | 2 of 8 within
+  F7 |   0 | -- | -- (partial --) | 0 of 0 within
+
+H1  rankers 6  declines 2  W 0.086  p 0.785
+    H1 not falsified by the order's rule
+    declines are a rate beside W, not rows removed from it.
+
+H2  within-format mean distance 0.000 (1140 pairs)  between-format 1.000 (6000 pairs)
+    one reader across formats: 1.000
+    H2 not falsified by the order's rule
+
+H3  prose (F6) dropped-axes rate 0.000 (n 20)  table class rate 1.000 (n 40)
+    per format: F1 0.000  F2 0.000  F3 1.000  F4 0.000  F5 1.000  F6 0.000  F7 --
+    H3 not falsified by the order's rule
+
+STATES  None = not computable from these rows; never rendered as 0. No interior claims.
