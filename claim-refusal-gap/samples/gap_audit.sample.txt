@@ -1,0 +1,51 @@
+gap_audit -- GAP.md read as a structure
+
+[CHOICE 1] a ~ on a value is read as +/- 2 points
+
+0. ANCHOR  two arms, 2016 -> 2025
+   auto liability / medical, closed without payment   delta +10  (range +8..+12)
+   auto collision / comprehensive, closed without pay delta +0  (range -4..+4)
+   difference of deltas +10, range +4..+16: the held-constant design's residual
+   the +10 is 45 minus a ~35; the tilde is on the baseline, so the residual is a band.
+
+1. GAPS 7, DESIGNS 5
+   G-1 First-party / third-party split                            E-2 (closes)
+   G-2 The uninsured-motorist estimator cannot separate two cause E-4 (bounds)
+   G-3 Undocumented rebase inside the published series            E-5 (closes)
+   G-4 Payment re-routed through litigation is not netted out     E-3 (closes)
+   G-5 The refusal error rate is estimated from a <1% self-select E-1 (closes)
+   G-6 The pre-instrument regime has no reading, not even zero    NO DESIGN
+   G-7 No series exists for carrier-side noncompliance            NO DESIGN
+   gaps with no design: ['G-6', 'G-7'] -- G-6 declares nothing recoverable; G-7 does not
+
+2. G-2  U=100, B=1000: rate 0.100; displace 50 -> (150, 950) rate 0.158
+   a non-purchase world with 150 UM and 950 BI claims is the same pair; distinguishable from the ratio: False
+   'BI rose, ratio rose anyway': d ln(U/B) = d ln U - d ln B; with BI +10% and ratio +10%, UM grew 21.0%
+
+3. G-3  four rows, stated deltas reproduce: True; mean seam 1.45
+   1993 16.0 vs 2023 15.4 (newer basis): record on newer basis False; restated 2023 16.9: record True
+   both readings live, as the document says; the seam decides which.
+
+4. G-4  litigation move +8 points against a CWP move of +10: ratio 0.80
+   if every added lawsuit were a re-routed payment the netted CWP move is 2; if none, 10; E-3 is the share between
+
+5. G-5  appeal rate under 1%; at 1% and overturn 0.467: wrongful share published 0.0047, if converged 0.467, factor 100 = 1/appeal rate 100
+   the ~100x in E-1 is 1/appeal_rate exactly; the unappealed rate is None until E-1 runs: --
+   overturn 38.0 -> 52.5 with appeal rate flat: the document reads it one way; a review standard
+   that moved is a second reading, and E-1's blind reviewers on policy language are what separate them.
+
+6. G-6  UM rate at (0, 0): -- -- not zero; the instrument has no reading before it is installed
+
+7. MECHANISMS  register carries 8; declared readings:
+   G-1 SCALAR_DEMAND       partial  in register True  1P and 3P collapsed to one CWP; the components can move apart under one number -- also category-weld's mechanism 9
+   G-2 --                  none     in register False two causes welded into one ratio; nearest is category-weld's CATEGORY WELD (mechanism 9), not one of the eight
+   G-3 AUTHORED_REFERENCE  partial  in register True  the series is rebased by the party publishing it, with no note; the register's sense is a reference produced by the measured party
+   G-4 BUDGET_BOUNDARY     fit      in register True  payment through suit sits outside the field the rate is computed in
+   G-5 --                  none     in register False measured only where contested: a sample selected on the variable -- the standing shape, not one of the eight; nearest AUDIT_ASYMMETRY
+   G-6 --                  none     in register False no reading at the pre-instrument point; 0/0 is not a value -- an absent state, not an exclusion
+   G-7 AUDIT_ASYMMETRY     fit      in register True  driver noncompliance counted and enforced, carrier wrongful refusal not; the guard fires on one side
+
+8. SOURCES  URLs 0; named in prose: WSJ, NAIC, California DOI, NY external review, ACA, Medicare Advantage, WI Safety Responsibility Law
+   every figure is carried from the document; none was checked against a source.
+
+Nothing here is a statement about any carrier, line, state or claimant.

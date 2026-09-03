@@ -6773,6 +6773,41 @@ underneath).
   exemption; no author section. Check count printed by
   `selftest_es.py`; the instrument refuses `--selftest`. Stdlib only,
   parses under 3.9, phone-buildable, CC0.
+- `claim-refusal-gap/` — A delivered gap document (`GAP.md`, verbatim):
+  claim refusal in insurance adjudication is measured only where it is
+  contested — accepted-side measurement, the refused side uncounted or
+  counted on a self-selected sample. Seven gaps, five experiment
+  designs, a standing shape. `gap_audit.py` reads it as a structure and
+  computes what its prose asserts from the figures it carries, none
+  checked against a source (zero URLs; seven sources named in prose;
+  allowlist egress). **`CRG_001`:** the anchor's +10 is 45 minus a ~35;
+  a tilde read as ±2 makes the held-constant residual **+4..+16**, so the
+  direction holds and the magnitude is what the tilde carries.
+  **`CRG_002`:** G-2's estimator returns one number for two causes as
+  arithmetic — a displacement world and a non-purchase world are the same
+  pair (U+d, B−d) — and "BI rose, ratio rose anyway" is the
+  log-derivative (BI +10% and ratio +10% needs UM +21%). **`CRG_003`:**
+  G-3's four rebase deltas reproduce, the mean seam is 1.45, and 2023
+  restated is 16.9 against 1993's 16.0, so the "record" flips with the
+  basis and E-5 is the seam measured. **`CRG_004`:** litigation +8
+  against CWP +10 bounds the netted move in [2, 10]. **`CRG_005`:** G-5's
+  "~100x" is 1/appeal_rate exactly, and the unappealed wrongful rate is
+  None until E-1 runs — a default of 0 would be the "selective on merit"
+  reading assumed rather than measured. **`CRG_006`:** "no benign
+  reading" for overturn 38 → 52.5 at flat appeals has a second reading —
+  the review standard moved, `criteria-drift`'s ruler — and E-1's blind
+  reviewers on policy language are what separate them; the sentence
+  overstates and the design beneath it does not. **`CRG_007`:** G-6's
+  pre-instrument point is 0/0 and the instrument returns None, never
+  zero. **`CRG_008`:** G-6 and G-7 have no design; G-6 says why. **`CRG_009`:**
+  against the register's eight by import, G-4 BUDGET BOUNDARY and G-7
+  AUDIT ASYMMETRY fit, G-1 and G-3 partially, and G-2 is
+  `category-weld`'s ninth (two causes welded into one ratio), G-5 the
+  document's own standing shape (selected on the variable), G-6 an
+  absent state. **`CRG_010` UNVERIFIED.** One declared `no_severity`
+  exemption (`error`, inside the delivered G-5 title) under the
+  three-arm harness. Check count printed by `selftest_crg.py`; the
+  module refuses `--selftest`. Stdlib only, parses under 3.9, CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated
