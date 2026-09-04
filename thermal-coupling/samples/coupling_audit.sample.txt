@@ -1,0 +1,77 @@
+coupling_audit -- thermal_coupling.py against its own claims
+
+1. CAL_FOS  '50 deg slope warmed from -4 C crosses FoS = 1 between -3 and -0.5; this value puts it at -2'
+   crossing with fracture_favorable=True: -1.99 C   with False: -- (FoS at -0.5 C = 1.293)
+   the sentence holds under the flag it does not name, and not under the default.
+
+2. TC-04  joint strength: slope at -9.5 C -0.1547 /K, at -1 C -0.0421 /K; sensitivity rises toward 0 C: False
+   second difference of the loss across the domain: negative (loss concave); the inline comment says 'convex: steeper near 0'
+   creep_sensitivity rises toward 0 C: True; strength is clamped above -0.2 C (0 C reads as -0.2): True
+   TC-04 states its own criterion, sensitivity rising toward melting; the module's function
+   has it falling by a factor of 3.7 from -9.5 to -1 C. The claim is refuted by its own code.
+
+3. CONSTANTS  'CAL_FOS is the ONLY free parameter': CAL_FOS = 2.825; numeric literals inside function bodies: 35
+   weak_layer_index             [0.05]                                   docstring cites a source: False
+   wet_regime_fraction          [0.4]                                    docstring cites a source: False
+   avalanche_activity           [0.35, 3.0]                              docstring cites a source: True
+   freeze_thaw_cycles           [6.0]                                    docstring cites a source: False
+   talus_cement_loss            [0.3, 0.5]                               docstring cites a source: False
+   joint_shear_strength_ratio   [0.71, 9.5, 0.35, 0.2, 0.55, 20.0]       docstring cites a source: True
+   factor_of_safety             [50.0, 62.0, 1e-06]                      docstring cites a source: True
+   creep_sensitivity            [0.05, 3.2]                              docstring cites a source: False
+   debuttress_priming           [60.0]                                   docstring cites a source: False
+   chain_state                  [0.5, 3, 3, 4, 0.8, 0.5, 0.5, 3, 3, 3, 3 docstring cites a source: False
+   functions carrying literals with no source in their docstring: ['weak_layer_index', 'wet_regime_fraction', 'freeze_thaw_cycles', 'talus_cement_loss', 'creep_sensitivity', 'debuttress_priming', 'chain_state']
+
+4. TC-01  5 lag classes spanning 4.56 decades (claim: >=5, ~4)
+
+5. TC-02  Demo D under the product and under an additive mean of the same four factors
+   cold dry-slab trig   product 0.1331  additive 0.5132
+   trigger, unprimed    product 0.0000  additive 0.2327
+   BOTH                 product 0.1590  additive 0.5327
+   rank by product ['BOTH', 'cold dry-slab trig', 'trigger, unprimed']; by additive ['BOTH', 'cold dry-slab trig', 'trigger, unprimed']
+   the unprimed slope is 0 under the product and non-zero under the additive: the form is the claim,
+   shown in the module's own arithmetic; the falsifier is an event set, and none is here.
+
+6. TC-03  freeze-thaw cycles vs mean T: interior peak True at [-3, 3]; symmetric about 0: True; dip at 0: True
+   snow half: depth assigned anywhere in the module: False; weak_layer_index takes ['t_surface_c', 't_ground_c', 'depth_m']
+   'warming THINS the pack' is in the docstring and not in the code: depth is an input,
+   so the elevation non-monotonicity TC-03 claims for snow is asserted, not produced.
+
+7. TC-06  sweep t_snow -14..0 at Demo D's BOTH: total non-monotone True; runout >= 1 throughout True
+   a step with count down and runout up: True; with count down and COINCIDENCE up: False
+   the runout multiplier enters the coincidence term: False -- what TC-06 says rises is the
+   runout, which the module computes and no downstream term reads.
+   t_snow | total | runout | coinc
+    -14.0 | 0.400 | 1.00 | 0.1331
+    -13.0 | 0.400 | 1.00 | 0.1331
+    -12.0 | 0.400 | 1.00 | 0.1331
+    -11.0 | 0.400 | 1.00 | 0.1331
+    -10.0 | 0.400 | 1.00 | 0.1331
+     -9.0 | 0.400 | 1.00 | 0.1331
+     -8.0 | 0.400 | 1.00 | 0.1331
+     -7.0 | 0.400 | 1.00 | 0.1331
+     -6.0 | 0.400 | 1.00 | 0.1331
+     -5.0 | 0.400 | 1.00 | 0.1331
+     -4.0 | 0.400 | 1.00 | 0.1330
+     -3.0 | 0.397 | 1.00 | 0.1322
+     -2.0 | 0.370 | 1.03 | 0.1230
+     -1.0 | 0.367 | 1.18 | 0.1220
+      0.0 | 0.646 | 1.32 | 0.2151
+
+8. REFERENTS  folder earth-systems-physics exists: False; this module cites rate-mismatch-polytope: True;
+   other files in the tree citing it (this folder excluded): 13; the polytope exists: False
+   Biskaborn +0.19 C is in the header and used in no function: True
+
+9. THE EXTENSION  airblast_extension.py against the core module and its own anchors
+   F1 core drives on snowpack temperature with no air term: True; F2 core has no blast term: True; F3 core's fastest class is snowpack: True
+   coupling snow/rock at r^-1.5 and r^-2.0: 8.9..18.4 (header states 8.9..18.4); at the default exponent 12.8
+   meltwater ratio 19 C over -1 C from the function: 6.00; the docstring says calibrated to 2.3
+   the index is linear in (t_air + 5), so the ratio is (19+5)/(-1+5) = 6 whatever the coupling; the
+   calibration sentence is not produced by the function it sits on.
+   blast at 57 m/s, full snow: mean 13.0 kPa against anchor >15; no snow: 3.9 against 2.5; peak/mean 1.90
+   footprint at 10 kPa: 0.80 km2 (anchor 0.8); diurnal max at hour 15, min at hour 3; diurnal class 1.38 decades below snowpack
+   the extension imports the core: False; it re-declares LAG with 5 shared classes, identical: True -- a copy, not an import
+   TC-10's lateral/longitudinal terms appear in any function: False; the core's runout multiplier is read by the extension: False
+
+Nothing here is a statement about any slope or snowpack; the cited literature was not read.

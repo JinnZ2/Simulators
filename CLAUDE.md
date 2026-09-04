@@ -6808,6 +6808,47 @@ underneath).
   exemption (`error`, inside the delivered G-5 title) under the
   three-arm harness. Check count printed by `selftest_crg.py`; the
   module refuses `--selftest`. Stdlib only, parses under 3.9, CC0.
+- `thermal-coupling/` — Two delivered MARKER modules landed verbatim and
+  never edited: `thermal_coupling.py` (temperature entering a slope/flow
+  hazard chain at five lag classes, a product-form coincidence term,
+  claims TC-01..TC-06 under *update the claim, never retune*) and
+  `airblast_extension.py` (three corrections forced by the Langtang 2015
+  reconstruction — air temperature as the driver, an air-blast term, a
+  diurnal lag class — claims TC-07..TC-11). `coupling_audit.py` imports
+  both and checks them against their own docstrings, claim tables and
+  demos. **`TCA_002`, the sharp one: TC-04 is refuted by its own
+  function.** The claim's criterion is *sensitivity rises as temperature
+  approaches melting*; the implemented loss is `0.71·x^0.55`, concave, so
+  the strength derivative is −0.155 /K at −9.5 C and −0.042 /K at −1 C —
+  sensitivity **falls** toward 0 C by 3.7× — while the inline comment
+  reads *"convex: steeper near 0"*; `creep_sensitivity` is the shape the
+  docstring describes and the strength function is not. **`TCA_001`:**
+  the CAL_FOS calibration sentence (50° slope crosses FoS = 1 at −2 C)
+  holds at −1.99 C under `fracture_favorable=True`, which it does not
+  name, and never crosses under the default. **`TCA_003`:** *"CAL_FOS is
+  the ONLY free parameter"* against an AST census of **35** numeric
+  literals in function bodies, seven functions carrying literals with no
+  source in their docstring. **`TCA_006`:** TC-03's freeze-thaw half is
+  produced (interior peaks at ±3, a dip at 0) and its snow half is a
+  docstring — `depth_m` is an input, never assigned, and
+  `weak_layer_index` is temperature-independent at fixed gradient.
+  **`TCA_007`:** on a snow-temperature sweep the count falls while the
+  runout multiplier rises (TC-06's mechanism), and coincidence tracks the
+  count because the multiplier is read by no downstream term.
+  **`TCA_009`:** the extension's `meltwater_index` is linear in
+  `(t_air + 5)`, so its 19 C / −1 C ratio is **6.00 by construction**
+  where the docstring says *calibrated to 2.3×* — and its own demo prints
+  both on one row. **`TCA_010`:** the coupling bounds reproduce
+  (8.9–18.4) and the blast anchors do not (13.0 against >15, 3.9 against
+  2.5). **`TCA_011`:** the extension *"extends, does not replace"* and
+  imports nothing — it re-declares LAG with the core's five classes
+  identical today (a copy, `MF_019`), reads none of the core's terms, and
+  TC-10's lateral/longitudinal split is in no function. **`TCA_008`:** the
+  stated home folder `earth-systems-physics` does not exist, and
+  `rate-mismatch-polytope` — cited by thirteen other files, existing
+  nowhere — reaches its most-cited. **`TCA_013` UNVERIFIED:** every anchor
+  is carried and unchecked. Check count printed by `selftest_tca.py`;
+  the audit refuses `--selftest`. Stdlib only, parses under 3.9, CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated
