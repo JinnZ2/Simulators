@@ -1,0 +1,10 @@
+scope_check (C1-C4), seeded from ../scope_test.py, extended not rewritten
+  E. coli evolvability       C1 y C2 y C3 y C4 y harsh True   independent False  -> competition_reported                 [COMPETITION_DOMINANT_OBSERVATION]
+  multiagent turf harness    C1 y C2 y C3 y C4 y harsh False  independent UNRECORDED -> competition_reported                 [COMPETITION_DOMINANT_OBSERVATION]
+  Austronesian games         C1 y C2 y C3 y C4 y harsh False  independent UNRECORDED -> competition_reported                 [COMPETITION_DOMINANT_OBSERVATION]
+  optimal foraging (field)   C1 n C2 n C3 n C4 n harsh False  independent UNRECORDED -> not_reported                         [NOT_COMPETITION_DOMINANT_OBSERVATION]
+  lichen altitudinal grad.   C1 n C2 n C3 n C4 n harsh False  independent UNRECORDED -> not_reported                         [NOT_COMPETITION_DOMINANT_OBSERVATION]
+null search (§3): antecedent met by ['E. coli evolvability'] -> UNRESOLVED_HARSHNESS_ENTANGLED
+  the antecedent is met, but the only harsh case's harshness IS the C2/C3 apparatus, so it cannot separate stress from scoping; a case with independent environmental harshness is needed and the seed lacks one
+  entangled: E. coli evolvability -- harsh = growth under stepwise antibiotic, which IS the C2/C3 scoring apparatus
+SGH pressure: the seed's one harsh case has harshness == apparatus, so 'benign' is not shown to be the operative variable here

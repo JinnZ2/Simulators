@@ -1,0 +1,8 @@
+P5 lag declaration check [CHOICE 1 threshold 10]
+5.1 precondition set is an input constraint, not a later report
+5.2 t_visible / t_scored, >= threshold -> DECLARED_UNKNOWN; no t_visible -> UNDECLARED (not a small ratio)
+  antibiotic prescribing (per-patient)           ratio 101.5      DECLARED_UNKNOWN preconditions ENUMERATED       compliance ('no_compliance_required', 'DECLARED_UNKNOWN')
+  same-window action (failure visible within the ratio 0.2        TRACKED          preconditions ENUMERATED       compliance ('no_compliance_required', 'TRACKED')
+  undeclared-variable action                     ratio undefined  UNDECLARED       preconditions EMPTY_SET_FLAGGED compliance ('compliance_required', 'UNDECLARED')
+the antibiotic anchor: failure visible at decades, scored at months, ratio >> 10, DECLARED_UNKNOWN
+the undeclared-variable action: ratio undefined, UNDECLARED -- the state the order says silence hides

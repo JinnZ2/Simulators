@@ -6983,9 +6983,42 @@ underneath).
   predictions, which on the pack's own discriminator is the state before
   a shared structure is shown. **`CSP_014`:** 15 of 34 rows carry no
   locator beyond an author-year or a name, among them every row the
-  pack leans on for P1 and P4. Twenty `CSP_*` claims; 61 + 33 selftest
-  checks. Stdlib only, parses under 3.9, phone-buildable,
-  CC0.
+  pack leans on for P1 and P4. **A v2 work order then arrived**
+  (`WORK_ORDER_V2.md`, verbatim beside v1), renaming the parts, adding
+  P5 (a lag-declaration check) and §3 (the C1–C4 scope conditions with
+  a null to build), and binding a §6 non-goal against any author or
+  values-advocacy section; the build lands in `v2/`. **`CSP_021`, the
+  sharp one: the one code file the delivery put on disk, `v2/p4_goal.py`,
+  arrived truncated** — 1282 bytes, cut mid-line at `stance, used, value
+  = "accept", pr`; it ends on a syntactically complete line so it
+  parses, and the truncation is read structurally (run() has no return,
+  no `__main__` guard, only one of the three stances its docstring
+  names, and a last line binding `pr`, a name never assigned) — left as
+  delivered, not completed. **`CSP_022`:** the manifest's ten files map
+  to 1 delivered-truncated, 5 renaming v1 files (not rebuilt, `MF_019`),
+  1 new (`p5_lag.py`), 1 seeded (`scope_check.py`, importing the E8
+  reader), 1 declined (a first-party `CS_` thesis `CLAIMS.md`, per §6)
+  and `EVIDENCE.md` = the existing pack. **`CSP_023`:** `scope_check`'s
+  §3 null is met by the seed's own E. coli row (harsh, all C1–C4,
+  competition reported) and then unmet by it, since that row's harshness
+  IS the antibiotic it is scored under — the C2/C3 apparatus — so
+  `UNRESOLVED_HARSHNESS_ENTANGLED`, needing a case with independent
+  environmental harshness the seed lacks (`CSP_016` from the other
+  side). **`CSP_024`:** P5's gate carries the "silence is not safety"
+  third state by construction — an undeclared `t_visible` gives an
+  *undefined* ratio (`UNDECLARED`), never a small one; the antibiotic
+  anchor reads 101.5 → DECLARED_UNKNOWN, a same-window action 0.2 →
+  TRACKED, the ≥10 gate a `G-RES` pair cross-linking `claim-record`'s
+  clock. **`CSP_025`:** the v2 P4 reframe (self-check trace table, the
+  cut being error-correction that terminates vs contestation that does
+  not) is a different instrument from v1's random walk, which has no
+  three-stance model and cannot express the cut; the delivered file
+  names it and is truncated before implementing it. **`CSP_026`
+  UNVERIFIED:** the null over real literature is not runnable (egress),
+  and the §6 scan is clean over the deliverables with the scanner's own
+  keyword-defining file excluded (`UNI_009`). Twenty-six `CSP_*` claims;
+  61 + 33 + selftest_v2 checks. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
 - `envelope-asymmetry/` — A protocol delivered verbatim, the compressed
   restatement it ends with included: does envelope discipline — operating
   range, out-of-scope declaration, degradation mode, revalidation
