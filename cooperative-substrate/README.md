@@ -106,6 +106,37 @@ That result is carried and not checked here (`CSP_011`).
 | P3 | term consistency across sources is indistinguishable from the sense-shuffled null | fires for `instrument` and `claim`, does not fire for `mechanism`, `confidence`, `mass` — per term, see `CSP_006`/`CSP_007` |
 | P4 | termination rate stays flat as `p_contest` rises | does not fire: exact termination is non-increasing in `p_contest` and reaches 0.051 at 0.5, 0.000 at 0.55 (budget 10N) |
 
+## Evidence pack
+
+`EVIDENCE_PACK.md` arrived after the deliverable, verbatim, with its own
+verification status on every row: retrieved from search-result text,
+not read, 33 rows `[UNVERIFIED-FULLTEXT]` and one `[DISPUTED]`, and the
+instruction to verify each before it enters a shipped artifact. None
+was opened here — `doi.org`, `arxiv.org` and `www.nature.com` all refuse
+CONNECT — so every citation is carried as delivered. What the pack
+carries that is computable was computed: `evidence_audit.py` (locator
+census, DOI syntax, arXiv calendar, DOI-embedded years, cross-links into
+this tree), `scope_test.py` (the E8 four-condition scope test parsed
+from the pack, its separation structure, and E0.1's stress axis read
+against the C1–C4 design axis), and `term_table.py` (the E7 table as a
+schema with the pack's one worked cell). The recording-rate note the
+pack says belongs here, verbatim:
+
+> corpus weight is cultural distribution × recording rate. Traditions carrying the competition frame also have high literacy and publication rate, so non-frame traditions are underweighted twice — the frame itself, plus the recording barrier.
+
+    python3 cooperative-substrate/scope_test.py
+    python3 cooperative-substrate/term_table.py
+    python3 cooperative-substrate/evidence_audit.py
+    python3 cooperative-substrate/selftest_evidence.py
+
+The E8 table carries two distinct condition vectors over five rows, so
+every condition separates the rows alone and none is necessary; the
+stress axis and the design axis are both recorded on one row and
+disagree there (`CSP_015`, `CSP_016`). The E7 table has 25 cells, two
+filled from the pack's worked example and no quantitative prediction in
+a second substrate, which on the pack's own discriminator is the state
+before a shared structure is shown (`CSP_019`).
+
 ## Files
 
 | file | what |
@@ -115,7 +146,9 @@ That result is carried and not checked here (`CSP_011`).
 | `fixtures/` | two constructed methods-section fixtures, labelled in their first line |
 | `order_audit.py` | reads the deliverable against the order; every number in `CLAIM_TABLE.md` |
 | `selftest_csp.py` | known answers first, both directions; writes `samples/` |
-| `CLAIM_TABLE.md` | `CSP_001..CSP_013` |
+| `EVIDENCE_PACK.md` | delivered verbatim, after the deliverable |
+| `evidence_audit.py`, `scope_test.py`, `term_table.py`, `selftest_evidence.py` | the pack read as a structure; nothing in it opened |
+| `CLAIM_TABLE.md` | `CSP_001..CSP_020` |
 
 The folder is `cooperative-substrate/` rather than the order's
 `cooperative_substrate/`, the tree's convention for every drop named

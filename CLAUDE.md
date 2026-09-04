@@ -6956,7 +6956,35 @@ underneath).
   instrument among the four parts. One declared `no_severity` exemption
   (`corrupt`, inside the order's contract text); a moral-token list
   fires once on `kind` in the type sense, recorded rather than renamed.
-  Thirteen `CSP_*` claims; 61 selftest checks. Stdlib only, parses under 3.9, phone-buildable,
+  **An evidence pack then arrived** (`EVIDENCE_PACK.md`, verbatim, after
+  the deliverable) carrying its own verification status on every row —
+  retrieved from search-result text, not read, 33 `[UNVERIFIED-FULLTEXT]`
+  and 1 `[DISPUTED]` — and nothing in it was opened, the three citation
+  hosts refusing CONNECT; what is computable without opening anything
+  was computed (`evidence_audit.py`, `scope_test.py`, `term_table.py`).
+  **`CSP_015`:** the E8 scope test's five rows carry two distinct
+  condition vectors, so every condition separates alone and none is
+  necessary — `MD_008`'s collinearity, n = 5 on one distinction, the
+  conjunction untested; one constructed off-diagonal row makes C2
+  necessary. **`CSP_016`:** E0.1's stress axis and E8's design axis are
+  both recorded on one row of five and disagree there — the E. coli
+  construct is scored under stepwise antibiotic, harsh, so E0.1 predicts
+  facilitation, the design axis predicts competition, and competition
+  is what was reported; the design axis carries the row, which supports
+  E4 and removes E0.1 as a prediction for the row it is used on.
+  "Benign" as E0.1 uses it has no axis of its own; the test the pack's
+  last line asks for is stated as a removal test and NOT RUN.
+  **`CSP_017`:** E3.3 enters competitive goal structure as a measured
+  variable and the E8 row enters the same games as a class all-y.
+  **`CSP_018`:** E2.6 states as a measurement what `label-position-test`
+  holds UNVERIFIED, with no locator; in-class for this audit, not
+  adjudicated. **`CSP_019`:** the E7 table is built as a schema — 25
+  cells, 2 filled from the pack's own worked example, 0 quantitative
+  predictions, which on the pack's own discriminator is the state before
+  a shared structure is shown. **`CSP_014`:** 15 of 34 rows carry no
+  locator beyond an author-year or a name, among them every row the
+  pack leans on for P1 and P4. Twenty `CSP_*` claims; 61 + 33 selftest
+  checks. Stdlib only, parses under 3.9, phone-buildable,
   CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative

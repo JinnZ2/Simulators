@@ -26,7 +26,7 @@ P3 on uninstrumented/cases (min_count 2, window 8, 100 reps):
   claim        sources  9 pairs  36 observed 0.0350 null 0.0299 sd 0.0095 gap   0.5 sd  frac>= 0.26
   mechanism    sources 12 pairs  66 observed 0.1132 null 0.0364 sd 0.0080 gap   9.6 sd  frac>= 0.00
   confidence   sources  8 pairs  28 observed 0.1581 null 0.0271 sd 0.0102 gap  12.8 sd  frac>= 0.00
-P3 whole tree all         (923 docs) term 'mass' min_count 3: sources 22 pairs 231 observed 0.0802 null 0.0404 sd 0.0054 gap 7.3 sd
+P3 whole tree all         (927 docs) term 'mass' min_count 3: sources 22 pairs 231 observed 0.0802 null 0.0406 sd 0.0065 gap 6.1 sd
 P3 whole tree independent (910 docs) term 'mass' min_count 3: sources 20 pairs 190 observed 0.0796 null 0.0420 sd 0.0060 gap 6.3 sd
 P3 constructed same_sense     observed 1.0000 null 0.8677 sd 0.0229 gap 5.8
 P3 constructed disjoint_sense observed 0.0000 null 0.0000 sd 0.0000 gap undefined
