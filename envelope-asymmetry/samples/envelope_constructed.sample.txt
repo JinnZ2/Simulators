@@ -1,0 +1,6 @@
+envelope score -- 60 rows
+[CHOICE 1] gate reads kappa; [CHOICE 2] A >> B is a paired mean difference >= 1.0; [CHOICE 3] sign test alpha 0.05
+T4 pre-registered domains (sha256 e123c80224676603, 2026-09-04): ['aviation', 'pharma', 'grid', 'pressure systems', 'medical device', 'logistics', 'insurance']; mid-standard ['logistics', 'insurance']; requirement met True
+agreement: double-coded 0 of 60 (share 0.000); percent undetermined; kappa undetermined
+gate: REFUSED (no double-coded document: agreement not measured)
+test 1: not run -- gate refused;  test 2: not run -- gate refused

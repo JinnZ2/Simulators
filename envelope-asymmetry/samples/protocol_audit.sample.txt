@@ -1,0 +1,27 @@
+envelope-asymmetry protocol audit
+kappa vs percent on constructed double-coding: {'one_disagreement': {'E6_percent': 0.95, 'E6_kappa': 0.0, 'gate_percent': (True, 'percent 0.992'), 'gate_kappa_pooled': (True, 'kappa 0.969')}, 'all_absent': {'percent': 1.0, 'kappa': 1.0, 'gate_kappa': (True, 'kappa 1.000')}}
+structural absence, two accountings: {'all_pairs': (1.0, 'SPLIT: A > B, E6 flat at 0 -- loop drives scope, not signature'), 'documents_only': (0.0, 'KILL: A ~ B, loop insufficient'), 'absence_rate': 0.3333333333333333}
+E6 flat two ways: {'E6_flat_at_0': 'SPLIT: A > B, E6 flat at 0 -- loop drives scope, not signature', 'E6_flat_at_1': 'A > B, E6 flat at 1 -- every document names a party; the split reading does not apply'}
+per-1000-words inversion: {'short': (2, 33.333333333333336), 'long': (6, 2.0), 'primary_prefers_long': True, 'secondary_prefers_short': True}
+template kill: {'n100_zero_variance': True, 'n100_reading': 'KILL, informative: zero variance on every marker -- re-target to the document class the host industry requires alongside the filing', 'n2_zero_variance': True}
+markers against claim-record fields ['assertion', 'measurement', 'instrument', 'domain_of_validity', 'clock', 'derivation', 'collapse_record', 'correction_status', 'correction_method', 'correction_depth']: without a field ['E6']
+  E1 -> domain_of_validity   full
+  E2 -> domain_of_validity   partial: outside_this names what is untested, not what is validated-against
+  E3 -> instrument           partial: the instrument block describes the reading's own drift and bias, not the system's failure shape
+  E4 -> clock                full: next_check is derived from a time constant and a coupling
+  E5 -> measurement          full: an interval, never a point without basis
+  E6 -> None                 no field
+compressed block against the full protocol:
+  T1 doc_words covariate         full True  compressed False
+  T2 structural absence          full True  compressed False
+  T3 blinding                    full True  compressed False
+  T4 pre-registration            full True  compressed False
+  re-target on template kill     full True  compressed False
+  kill-but-informative           full True  compressed False
+  section 4 implications         full True  compressed False
+  section 5 scope                full True  compressed False
+  record schema                  full True  compressed False
+  inter-rater rule               full True  compressed True
+arm A's 'return channel' in readout-count: {'fields': ['positions_returning', 'return_count'], 'positions_returning': True}
+hosts: {'www.cac.gov.cn': '000 (no response)', 'probed': '2026-09-04T17:45Z, one CONNECT'}
+rows coded: 0; no vendor documentation site or filing registry answers from here, and no row is invented

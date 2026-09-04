@@ -6986,6 +6986,48 @@ underneath).
   pack leans on for P1 and P4. Twenty `CSP_*` claims; 61 + 33 selftest
   checks. Stdlib only, parses under 3.9, phone-buildable,
   CC0.
+- `envelope-asymmetry/` — A protocol delivered verbatim, the compressed
+  restatement it ends with included: does envelope discipline — operating
+  range, out-of-scope declaration, degradation mode, revalidation
+  trigger, quantified margin, named responsible party, coded 0/1 and
+  summed — track the host domain's return channel rather than liability,
+  field prestige or AI regulation itself? Two tests (within-vendor
+  paired across host domains, n ≥ 30; between arms inside one filing
+  regime, n ≥ 50) and four named threats. `envelope_score.py` is the
+  instrument and both tests from a JSONL in the protocol's schema,
+  with kappa imported from `effective-redundancy-audit` and OLS from
+  `sim-span`; `domains.json` pre-registers the T4 domain list with its
+  hash on every render. **No document is coded**: no vendor site or
+  filing registry answers (the registry host probed once), no row is
+  invented, and with no rows the gate refuses before either test runs.
+  **`ENV_002`, the sharp one: the 0.7 gate is underspecified twice.** On
+  a constructed 20-document double coding with one E6 disagreement,
+  **E6's kappa is 0.0** while the pooled gate passes on both statistics
+  (percent 0.992, kappa 0.969) — the marker carrying test 1's SPLIT
+  reading can have zero reliability and the instrument proceeds; and an
+  all-absent double coding passes at kappa 1.0 having never coded a
+  marker present, `CONSTANT_SILENT` at the gate. **`ENV_003`:** T2's two
+  instructions — retain structurally absent pairs at score 0, and report
+  the absence rate separately — return **opposite readings on one set of
+  30 pairs** (all pairs: mean difference 1.0, SPLIT; documents only: 0.0,
+  KILL), so the verdict is the accounting and both are printed.
+  **`ENV_004`:** "E6 flat" has two values and the split reading fits
+  flat-at-0 only. **`ENV_005`:** the per-1000-words secondary outcome
+  ranks a 60-word document above a 3000-word one the primary ranks below
+  it — a capped numerator over an uncapped denominator. **`ENV_006`:**
+  the template kill is a property of one filing record (zero variance at
+  n = 2 as at n = 100), readable before sampling. **`ENV_007`:** five of
+  six markers already have a field in `claim-record` (E1 →
+  `domain_of_validity`, E4 → `clock`, E5 → `measurement`) and **E6, the
+  named responsible party, has none** — the tree's own record schema is
+  an envelope instrument minus the signature, on the axis the protocol
+  says is liability's. **`ENV_008`:** the compressed restatement drops
+  nine of ten probed elements (every threat, the re-target, the record
+  schema, sections 4 and 5), keeping the inter-rater rule. **`ENV_009`:**
+  arm A's "return channel" is `readout-count`'s `positions_returning`,
+  so T4's gradient is that count as predictor. **`ENV_010` UNVERIFIED.**
+  34 selftest checks. Stdlib only, parses under 3.9, phone-buildable,
+  CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated
