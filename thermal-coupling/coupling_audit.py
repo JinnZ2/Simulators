@@ -292,6 +292,44 @@ def extension():
     }
 
 
+# ------------------------------------------- 10. the extension's revision
+
+def extension_v2():
+    """airblast_extension_v2.py against v1: what changed, whether the
+    calibration sentence is now produced by the function, and what the
+    correction removed."""
+    import airblast_extension as AB1
+    import airblast_extension_v2 as AB2
+    with open(os.path.join(HERE, "airblast_extension.py"), encoding="utf-8") as fh:
+        t1 = ast.parse(fh.read())
+    with open(os.path.join(HERE, "airblast_extension_v2.py"), encoding="utf-8") as fh:
+        src2 = fh.read()
+    t2 = ast.parse(src2)
+    f1 = {n.name: ast.dump(n) for n in t1.body if isinstance(n, ast.FunctionDef)}
+    f2 = {n.name: ast.dump(n) for n in t2.body if isinstance(n, ast.FunctionDef)}
+    changed = [k for k in f1 if f1[k] != f2.get(k)]
+    args = (0.72, 0.20, 0.08)
+    ratio2 = AB2.meltwater_index(19.0, *args) / AB2.meltwater_index(-1.0, *args)
+    ratio1 = AB1.meltwater_index(19.0, *args) / AB1.meltwater_index(-1.0, *args)
+    # the threshold below which v2 goes negative: 1 + 0.0649 (t + 1) = 0
+    t_neg = -1.0 - 1.0 / 0.0649
+    gain_rock = 0.0649 * (AB2.thermal_coupling_coefficient(0, 0, 1) / AB2.thermal_coupling_coefficient(*args))
+    return {
+        "functions_changed": changed, "lag_identical": AB1.LAG == AB2.LAG,
+        "ratio_v1": ratio1, "ratio_v2": ratio2, "stated": 2.30,
+        "docstring_states_first_attempt_6": "ratio of 6.0" in (ast.get_docstring(
+            next(n for n in t2.body if isinstance(n, ast.FunctionDef) and n.name == "meltwater_index")) or ""),
+        "wrong_by_stated": "2.6x" in src2, "wrong_by_computed": ratio1 / 2.30,
+        "slope_per_K_over_base": 4800 / 74000,
+        "v2_at_minus_20": AB2.meltwater_index(-20.0, *args),
+        "v1_at_minus_20": AB1.meltwater_index(-20.0, *args),
+        "negative_below_c": t_neg,
+        "all_rock_ratio_19_over_minus1": 1 + gain_rock * 20,
+        "still_no_import": "import thermal_coupling" not in src2,
+        "runout_still_unread": "runout_multiplier" not in src2,
+    }
+
+
 # ---------------------------------------------------------------- render
 
 def _f(x, d=3):
@@ -385,6 +423,21 @@ def render():
         ex["extension_imports_core"], ex["shared_lag_classes"], ex["shared_identical"]))
     w("   TC-10's lateral/longitudinal terms appear in any function: %s; the core's runout multiplier is read by the extension: %s" % (
         ex["tc10_direction_in_code"], ex["runout_multiplier_read_by_extension"]))
+    w("")
+    v2 = extension_v2()
+    w("10. THE EXTENSION'S REVISION  airblast_extension_v2.py against v1")
+    w("   functions changed: %s; LAG identical: %s; still no import of the core: %s; runout still unread: %s" % (
+        v2["functions_changed"], v2["lag_identical"], v2["still_no_import"], v2["runout_still_unread"]))
+    w("   meltwater ratio 19 C / -1 C: v1 %.2f, v2 %.2f, stated %.2f -- the sentence is now produced by the function" % (
+        v2["ratio_v1"], v2["ratio_v2"], v2["stated"]))
+    w("   the v2 docstring records the first attempt's 6.0 and its 2.6x factor: %s / %s; 6.0 / 2.3 = %.2f; 4800/74000 = %.4f" % (
+        v2["docstring_states_first_attempt_6"], v2["wrong_by_stated"], v2["wrong_by_computed"], v2["slope_per_K_over_base"]))
+    w("   what the correction removed: v1 clamped at zero, v2 does not -- at -20 C v1 reads %.2f and v2 reads %.2f;" % (
+        v2["v1_at_minus_20"], v2["v2_at_minus_20"]))
+    w("   the index goes negative below %.1f C. An all-rock mass under the same form has a 19/-1 ratio of %.2f." % (
+        v2["negative_below_c"], v2["all_rock_ratio_19_over_minus1"]))
+    w("   the core module was re-delivered with the revision and is byte-identical to the repo copy;")
+    w("   TC-04's function is unchanged, so TCA_002 stands.")
     w("")
     w("Nothing here is a statement about any slope or snowpack; the cited literature was not read.")
     return "\n".join(out) + "\n"

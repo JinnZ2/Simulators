@@ -124,6 +124,25 @@ def main():
     check("extension demo runs and prints its own 6.00 beside the published 2.30",
           demo2.returncode == 0 and "6.00" in demo2.stdout and "2.30" in demo2.stdout)
 
+    # ---- 10. the extension's revision
+    v2 = A.extension_v2()
+    check("v2 changes exactly meltwater_index and keeps LAG identical",
+          v2["functions_changed"] == ["meltwater_index"] and v2["lag_identical"])
+    check("v2's calibration sentence is produced by its function: ratio 2.30",
+          abs(v2["ratio_v2"] - 2.30) < 0.005 and abs(v2["ratio_v1"] - 6.0) < 1e-9)
+    check("v2 records the first attempt's 6.0 and the 2.6x", v2["docstring_states_first_attempt_6"] and v2["wrong_by_stated"]
+          and abs(v2["wrong_by_computed"] - 2.61) < 0.01)
+    check("4800/74000 is the 0.0649 the code uses", abs(v2["slope_per_K_over_base"] - 0.0649) < 1e-4)
+    check("v2 goes negative below -16.4 C where v1 clamped at zero",
+          v2["v1_at_minus_20"] == 0.0 and v2["v2_at_minus_20"] < 0 and abs(v2["negative_below_c"] + 16.41) < 0.01)
+    check("v2 still imports nothing from the core and reads no runout", v2["still_no_import"] and v2["runout_still_unread"])
+    import hashlib
+    core = open(os.path.join(HERE, "thermal_coupling.py"), "rb").read()
+    check("the core's fingerprint is the one the re-delivery matched",
+          hashlib.sha256(core).hexdigest().startswith("0e730bb085a45148"))
+    demo3 = subprocess.run([sys.executable, os.path.join(HERE, "airblast_extension_v2.py")], capture_output=True, text=True)
+    check("v2 demo runs and prints 2.30 on its own row", demo3.returncode == 0 and demo3.stdout.count("2.30") >= 2)
+
     # ---- CLI and screen
     rc = subprocess.run([sys.executable, os.path.join(HERE, "coupling_audit.py"), "--selftest"], capture_output=True).returncode
     check("coupling_audit refuses --selftest with rc 2", rc == 2)

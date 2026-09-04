@@ -149,3 +149,56 @@ diagnosis of the core is exact on all three.
 Every physical number is carried from the modules' docstrings and
 demos. None was checked against Mamot, Steinkogler, Zhuang or any other
 cited source, and nothing here is a statement about any slope.
+
+## The extension's revision
+
+`airblast_extension_v2.py` landed beside v1, verbatim, together with a
+re-delivery of the core module. `coupling_audit.py` section 10 reads
+the revision against v1 and the re-delivery against the repo copy.
+
+| id | claim | status |
+|---|---|---|
+| TCA_014 | v2 changes exactly one function, `meltwater_index`; LAG, the blast, footprint and diurnal terms are byte-for-byte v1 | SUPPORTED |
+| TCA_015 | v2's calibration sentence is now produced by its function: the 19 C / −1 C ratio is 2.30, and the docstring records the first attempt's 6.0 and the 2.6× factor — which are `TCA_009`'s numbers | SUPPORTED |
+| TCA_016 | the correction removed v1's zero clamp: v2's index goes negative below −16.4 C, where v1 read 0 | SUPPORTED |
+| TCA_017 | the re-delivered core is byte-identical to the repo copy, so TC-04's function is unchanged and `TCA_002` stands | SUPPORTED |
+| TCA_018 | v2 still imports nothing from the core and reads none of its terms; `TCA_011` stands | SUPPORTED |
+
+## TCA_014 — one function
+
+By function-level AST comparison, `meltwater_index` is the only
+function whose body or docstring differs between v1 and v2; the demo
+block changes only its `base` and the argument it hands to
+`friction_from_water`. The LAG tables are identical.
+
+## TCA_015 — the sentence is now produced
+
+v2 is `(1 + 0.0649 · (k/k_Langtang) · (t_air + 1)) · (duration/180)`.
+At 19 C that is 1 + 0.0649 × 20 = 2.298, the published 2.30, and the
+0.0649 is 4,800 / 74,000 as the docstring says. The docstring also
+states that the first attempt returned 6.0 against 2.3, a factor of
+2.6 — `TCA_009` reached from the author's side, recorded in the code
+rather than in a changelog, since the module carries none. The v2
+sweep prints 2.30 on the same row as "published 2.30".
+
+## TCA_016 — what the correction removed
+
+v1 had `max(0, t_air − t_core)` and could not go below zero; v2 has no
+clamp, so the index is negative below −1 − 1/0.0649 = −16.4 C (at
+−20 C: v1 0.00, v2 −0.23). A negative relative meltwater is not a
+quantity. Under the same form an all-rock mass has a 19/−1 ratio of
+1.12, which is the normalisation doing what the docstring says it does.
+
+## TCA_017 — the re-delivery
+
+The core arrived again with the revision. Written out and compared: the
+same 293 lines, the same sha256 prefix. Nothing in the core moved, so
+the joint-strength function is still concave in its loss, sensitivity
+still falls toward 0 C, and `TCA_002` stands as written. The revision
+answered the extension's calibration finding and not the core's shape
+finding; recorded, not scored.
+
+## TCA_018 — still a copy
+
+v2 imports nothing from the core and does not read `runout_multiplier`.
+`TCA_011` stands unchanged.

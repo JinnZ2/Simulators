@@ -30,14 +30,20 @@ What comes out:
   reads none of the core's terms.
 - The module's stated home folder does not exist, and it cites the
   tree's most-cited absent object.
+- **The extension's revision** changes one function and its
+  calibration sentence is now produced by it (2.30); the docstring
+  records the first attempt's 6.0. The correction removed the zero
+  clamp, so the index goes negative below −16.4 C. The core was
+  re-delivered byte-identical, so TC-04 stands refuted.
 
 | file | what |
 |---|---|
 | `thermal_coupling.py` | delivered verbatim |
 | `airblast_extension.py` | delivered verbatim |
+| `airblast_extension_v2.py` | the extension's revision, verbatim beside v1: `meltwater_index` corrected to the published 2.3× |
 | `coupling_audit.py` | both modules against their own claims |
 | `selftest_tca.py` | known answers first, both directions |
-| `CLAIM_TABLE.md` | `TCA_001..TCA_013` |
+| `CLAIM_TABLE.md` | `TCA_001..TCA_018` |
 | `samples/` | the delivered demos' output, the audit render |
 
 Nothing here is a statement about any slope, snowpack or the cited

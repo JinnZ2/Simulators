@@ -74,4 +74,13 @@ coupling_audit -- thermal_coupling.py against its own claims
    the extension imports the core: False; it re-declares LAG with 5 shared classes, identical: True -- a copy, not an import
    TC-10's lateral/longitudinal terms appear in any function: False; the core's runout multiplier is read by the extension: False
 
+10. THE EXTENSION'S REVISION  airblast_extension_v2.py against v1
+   functions changed: ['meltwater_index']; LAG identical: True; still no import of the core: True; runout still unread: True
+   meltwater ratio 19 C / -1 C: v1 6.00, v2 2.30, stated 2.30 -- the sentence is now produced by the function
+   the v2 docstring records the first attempt's 6.0 and its 2.6x factor: True / True; 6.0 / 2.3 = 2.61; 4800/74000 = 0.0649
+   what the correction removed: v1 clamped at zero, v2 does not -- at -20 C v1 reads 0.00 and v2 reads -0.23;
+   the index goes negative below -16.4 C. An all-rock mass under the same form has a 19/-1 ratio of 1.12.
+   the core module was re-delivered with the revision and is byte-identical to the repo copy;
+   TC-04's function is unchanged, so TCA_002 stands.
+
 Nothing here is a statement about any slope or snowpack; the cited literature was not read.

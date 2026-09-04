@@ -6847,7 +6847,19 @@ underneath).
   stated home folder `earth-systems-physics` does not exist, and
   `rate-mismatch-polytope` — cited by thirteen other files, existing
   nowhere — reaches its most-cited. **`TCA_013` UNVERIFIED:** every anchor
-  is carried and unchecked. Check count printed by `selftest_tca.py`;
+  is carried and unchecked. **The extension's revision then landed**
+  (`airblast_extension_v2.py`, verbatim beside v1, with the core
+  re-delivered): **`TCA_014`** one function changed, `meltwater_index`,
+  everything else byte-for-byte v1; **`TCA_015`** the calibration
+  sentence is now produced by the function — 1 + 0.0649 × 20 = 2.30, the
+  0.0649 being 4,800/74,000 — and the docstring records the first
+  attempt's 6.0 and its 2.6× factor, `TCA_009` reached from the author's
+  side; **`TCA_016`** the correction removed v1's zero clamp, so the index
+  goes negative below −16.4 C; **`TCA_017`** the re-delivered core is
+  byte-identical to the repo copy, so TC-04's function is unchanged and
+  `TCA_002` stands — the revision answered the extension's calibration
+  finding and not the core's shape finding; **`TCA_018`** v2 still imports
+  nothing and reads no runout. Check count printed by `selftest_tca.py`;
   the audit refuses `--selftest`. Stdlib only, parses under 3.9, CC0.
 - `ch4-four-box/` — Two delivered scripts landed verbatim:
   `fourbox_forward.py` rebuilds a four-box CH4 model forward-only
