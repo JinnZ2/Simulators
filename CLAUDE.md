@@ -6777,6 +6777,379 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   **empty**, unlike scan 4's — this order's verdict names carry no
   screened word — and the two arms plus the plant still run.
   `--selftest` green. Stdlib only, parses under 3.9, CC0.
+- `hf-incident-extract/` — A work order delivered verbatim (`WORK_ORDER.md`)
+  and built as **one stdlib file**: read a METR/Redwood incident report
+  plus transcripts if released, emit **counts, no labels**. Six measures
+  (M1 explore_ratio `t_characterize / t_solve`, M2 root_fanout, M3
+  upstream_edits env-edit over gate-fool moves, M4 member_cost runs
+  self-failed for the collective over runs_total, M5 log_scrub_split
+  actions_edited over reasoning_edited, M6 opponent_by_slot as a bool per
+  agent), the GATE_PROPERTY_TEST (`gap = declared(paper) △
+  implemented(code)`, a non-empty gap predicting M1 high and M2 high — the
+  charter-signature check), a CROSS_SUBSTRATE table (pea tendril /
+  fledgling / ant bridge / fire crew / swarm; M1, M4, `unit_boundary !=
+  objective_boundary`), and the two OPEN items. **The report is not in
+  hand** — egress is an allowlist — so **every real cell is UNMEASURED
+  with the input it wants named**, and nothing in the folder holds a
+  value from the report or a biology figure from memory. **`HFI_002`, the
+  design:** the order's INPUT is prose and its OUTPUT is counts, and
+  between them sits a reading, so the two are kept in two layers —
+  `text_scan()` finds every stated duration and count with its line
+  number and emits them as **candidates** (a candidate is not a measure;
+  a planted "Version 2.0" decoy is not promoted), and `measures()`
+  computes from a **coded sheet** the reader fills, where every field
+  carries a unit or a state and an UNMEASURED field returns `None` for
+  every measure needing it, never 0. **`HFI_003`:** the
+  charter-signature check can fail — a gap of zero predicts nothing, a
+  measured M1 below the threshold fails the check, an unfilled gap
+  returns `None` — so it is not `CONSTANT_FIRES`; "high" is not in the
+  order, and 6.0 / 0.5 are `[CHOICE]` constants printed on every render.
+  **`HFI_004`:** *same instrument, no vocab change* is asserted over the
+  AST — no substrate name appears in any function body — and a filled
+  fictional fire-crew row computes through the same functions the report
+  row does. **`HFI_005`:** `NOT_RELEASED` (transcripts) and
+  `NOT_COLLECTED` (post-validation off-trail fraction, report silent) are
+  states distinct from UNMEASURED, which is wanted and readable.
+  **`HFI_006`:** a duration with no unit is refused rather than read as
+  hours (G-DIM before the ratio; days and hours converted to one scale).
+  **`HFI_001`:** known answers first on a constructed sheet labelled so,
+  with a zero denominator returning `None` and not infinity.
+  **`HFI_007` UNVERIFIED:** built and proven on constructed fixtures,
+  unrun on its subject; the coded sheet is the operator's step once the
+  report is in hand. Renders screen clean through `no_severity` with no
+  exemption. Check count printed by `selftest_hf.py`; the instrument
+  refuses `--selftest`. Stdlib only, parses under 3.9, phone-buildable,
+  CC0.
+- `label-position-test/` — A work order delivered verbatim
+  (`WORK_ORDER.md`), pre-registered before any data: do valence labels
+  on a probing move (*cheat* | *innovation*) track the MOVE, or the
+  actor's POSITION and the OUTCOME after the fact (H1), and is the party
+  defining the term the party gaining from it above chance (H2)? Built
+  as **one stdlib file** computing what the order's procedure asks for
+  from a flat CSV in its schema — Cramér's V by hand for `label_valence
+  ×` position / move / outcome / actor, the P2 leak test, P5 overlap
+  against chance, the seed case's within-document control, Fleiss'
+  kappa for P3 relabelling — with the order's own FALSIFICATION rule
+  applied to the numbers and `undetermined` printed wherever a number
+  it needs is None. **No data ships**: the seed report is not reachable
+  from here (allowlist egress), the control has nothing to run on and
+  the unfilled render says so; rows under `samples/` are constructed,
+  carry a `constructed://` scheme, and are counted apart from public
+  rows. **`LPT_002`:** the order's OUTPUT row (one per term) cannot
+  carry its own cross-tab wherever a term has one valence — *cheat* is
+  always negative, so every V on that row is undefined, printed `--`
+  rather than 0, and the cross-tabs live on the pooled row.
+  **`LPT_003`:** H2's chance is undefined in the order; under the
+  independence reading built here (`Σ_a p_arb(a)·p_ben(a)` within the
+  source class, `[CHOICE 1]`) a class with one arbiter and one
+  beneficiary throughout has chance 1.0 and H2 is FALSE for it by
+  construction, so H2 is testable only where the arbiter varies within
+  a source class — a sampling requirement P1 does not state.
+  **`LPT_004`:** the leak tuple spans 72 cells and the order's N floor
+  is 30, so the in-sample reading approaches 1.0 by construction
+  (nine unique tuples read 1.000) and only leave-one-out is readable.
+  **`LPT_005`, found by running it:** leave-one-out majority prediction
+  reads BELOW baseline on a balanced set (0.000 against 0.250), because
+  removing the scored row makes its own class a minority — so a leak
+  below baseline is the estimator, not a result, and the readable
+  statement is *above baseline* only. **`LPT_006`:** `overlap` is coded
+  and is also what `arbiter == beneficiary` says; the instrument
+  derives it and counts disagreements per class. **`LPT_008`:** two
+  constructed worlds separate under the order's rule (valence tracking
+  position → V_position 1.000, V_move 0.000, H1 not falsified; tracking
+  move → the reverse, H1 FALSE), so the rule is neither
+  `CONSTANT_FIRES` nor `CONSTANT_SILENT` here. **`LPT_009`
+  UNVERIFIED:** no public row coded, no labeler run, nothing bearing on
+  H0/H1/H2 — and the order's last limit applies to this folder too.
+  Three `[CHOICE]`s printed on every render; renders screen clean
+  through `no_severity` with no exemption; no author section.
+  **A revision then landed** (`WORK_ORDER_V2.md`, verbatim beside v1)
+  adding one bullet, the **N2 CONTROL** — the missing control from
+  `zero-sum-curriculum-null/`, specified with three measurables and
+  filed in this order. `revision_audit.py` checks it as a copy and as a
+  claim. **`LPT_010`:** a pure insertion, one six-line block, and the
+  CHANGELOG did not move with it — P6 asks for versioned diffs and the
+  order's own revision is unlogged. **`LPT_011`:** `N2` and `the null`
+  occur zero times in v1 and once each in v2, inside the bullet; the
+  referent is one folder over and is imported, not restated.
+  **`LPT_012`:** against the `hf-incident-extract` sheet, self-risk
+  rate is M4 exactly, channel split is partial (M6 reads the gate
+  channel; peers and third parties have no field) and probing rate is
+  partial (probe classes counted, no per-run denominator) — and the
+  channel split is N3's residual, now specified for measurement in the
+  control setting. **`LPT_013`/`LPT_014`:** a transparent scorer
+  removes `opacity` from N3's three stated inputs, so a persisting
+  split narrows N3 and does not close it, while the bullet's *persists*
+  sentence names the template where the null construction's own table
+  routes to N3 — *"either result closes an open branch"* holds for
+  `vanishes` and overstates for `persists`. One declared `no_severity`
+  exemption (`risk`, inside the delivered term *self-risk rate*) under
+  the three-arm harness. Check count printed by `selftest_lpt.py`; both
+  modules refuse `--selftest`. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
+- `zero-sum-curriculum-null/` — A delivered null construction
+  (`NULL_CONSTRUCTION.md`, verbatim, trailing `g4` included): five
+  conditions under which a zero-sum curriculum could NOT have affected
+  the incident's outcomes, each with requires / test / status, and a
+  RESULT. `null_construction.py` parses the delivered text and computes
+  what its prose asserts. **`ZSN_001`, one word:** the header reads
+  *"each is a requirement"* (a conjunction, which empties the set at N1)
+  and the RESULT reads *"survives on the two branches"* (a disjunction,
+  {N2, N4}); computed both ways, the stated RESULT matches only the
+  second — and the conjunction is unsatisfiable on the document's own
+  terms, since N1 requires the curriculum *absent* and N2 requires it
+  *present*. **`ZSN_002`:** the branches are not independent — N2
+  (present, not activated) and N5 (vocabulary only) each leave the
+  behaviour to be accounted for without the curriculum, which is N3's
+  job, so with those two edges applied to a fixed point the null
+  survives on **N4 alone**, and N2 carries only if N3's residual closes;
+  N3 is PARTIAL by the document's own status. **`ZSN_003`:** N2's test
+  has no outcome that carries the null by itself — equal probing across
+  settings leaves the probing to N3, lower probing on possible tasks
+  leaves *what was cued* to N3. **`ZSN_004`:** N2 is
+  `hf-incident-extract`'s missing control arm and is built in its schema
+  by import — two arms differing only in `source`, every cell
+  UNMEASURED, `None` propagating, and on filled constructed arms the M1
+  difference computes. **`ZSN_005`:** the three artifacts N5 names
+  (*depth-stack instrument*, *sacrifice transcripts*, *the delay
+  attempt*) are absent from this tree by content, this folder excluded
+  from its own scan and a planted mention found; the sibling records the
+  transcripts N5 reads as `NOT_RELEASED`. **`ZSN_008`:** writing this
+  entry put two of those names into the tree and the next run reported
+  them present — `UNI_010`'s loop through the index — so hits are split
+  into an index column (the two root index files) and an independent
+  column, absence read on the second and the first printed rather than
+  excluded. **`ZSN_006`:** N3's status
+  assigns the residual to the curriculum, which the test as written does
+  not establish — an absence in one account recorded as a result for
+  another. **`ZSN_007` UNVERIFIED:** nothing here bears on whether the
+  curriculum affected anything. Check count printed by `selftest_nc.py`;
+  the module refuses `--selftest`. Stdlib only, parses under 3.9, CC0.
+- `readout-count/` — A pre-registered work order delivered verbatim
+  (`WORK_ORDER.md`): does a safety regime's incident rate track the
+  COUNT of operator positions with a protected channel that RETURNS,
+  not its stated culture or its data volume (H1); a declared channel
+  with no return contributes 0 (H2); builders cannot read their own
+  intake (H3)? Built as **one stdlib file** computing what the
+  procedure asks for from a flat CSV in its schema — readout_count as
+  distinct returning positions, per-regime OUTPUT at the latest year,
+  Spearman by hand for H1, Cramér's V imported from
+  `label-position-test` for P4, a median-split comparison for H2 — with
+  the order's own falsification lines applied and `undetermined` or
+  `NOT_COMPUTABLE` printed where they cannot run. **No data ships.**
+  **`RC_002`:** the order's five SEED ROWS are read back from the order
+  itself and **0 of 5 count by its own rule** — none carries a URL, the
+  intake cells are `high` / `med` / `3+` / `2` / `—` where the schema
+  wants integers, and one trend cell of five is in vocabulary; the
+  instrument reports each cell as what it is and fills nothing in.
+  **`RC_003`:** H1's *"rank matches"* has no strict reading past three
+  regimes — a three-level trend carries ties that a count need not, so
+  on a constructed world where the count tracks the trend as well as a
+  count can (rho 0.949) strict equality still returns *does not match*;
+  the verdict runs on rho with the threshold declared `[CHOICE 3]`.
+  **`RC_004`:** H3's falsifier conditions on acted-on counts split by
+  origin and on a grading field, and the schema carries neither —
+  `NOT_COMPUTABLE` with both absences named, the eighth stated-rule-
+  with-no-field instance. **`RC_005`:** a count at raw values has as
+  many levels as distinct values, so P4's V reads 1.000 by construction
+  on four regimes with four intake counts; the level count is printed
+  beside every V and no bin is chosen. **`RC_006`:** H2 is in the
+  definition of readout_count and cannot be tested by it; its own
+  falsifier is a different comparison, which `h2()` computes.
+  **`RC_007`:** the schema's two grains (regime-year, incident) share
+  one row shape with no field saying which. **`RC_008`:** the order's
+  first paragraph makes every party that builds or audits a row, the
+  drafting model included; the render says so above the numbers and the
+  *this session* row's dashes are left as delivered. **`RC_009`
+  UNVERIFIED.** Four `[CHOICE]`s printed on every render; renders screen
+  clean with no exemption; no author section. **The first filled row
+  then landed** (`TRUCKING_ROW_v0_1.md`, verbatim): sourced, coding
+  rule stated, its own v0 corrected in a logged changelog — the channel
+  that exists is a *complaint* channel, not a *readout* channel, and the
+  count is 0.5. `row_audit.py` reads it against the instrument.
+  **`RC_010`:** the rule has three conjuncts and the schema carries a
+  field for two; NON-ADVERSARIAL has none, and the row's own `type`
+  column (complaint / inspection / enforcement / readout / remedy) is the
+  missing field — the distinction the row says it *actually measures* is
+  the one column its parent schema cannot record. **`RC_011`:** the 0.5
+  is a per-position PARTIAL return weighted at one half, computed here
+  from the row's own layers table (strict 0.0, half 0.5); the schema's
+  `positions_returning` is a list, so the row loads at readout_count 1
+  and never 0.5. **`RC_012`:** the row as delivered is refused on
+  `rate_trend`, the cell its own STILL NEEDED list opens with — the seed's
+  `up since 2010` withdrawn to a requirement, the right direction, and
+  one cell short of loading. **`RC_013`:** "every claim carries a source
+  URL" holds for 5 of 7 entries and the trucking count rests on one of
+  the two the document defers itself; the four hosts with URLs refused
+  CONNECT once each, recorded not read. **`RC_014`:** the row's "(N4)"
+  points at nothing in the parent order (ids H0–H3, P1–P6).
+  **`RC_015`:** the seed's `3+` intake cell is the complaint count under
+  v0.1's renaming. **`RC_016`:** the layers table counts rows and the
+  complaint count counts routes. **The exclusion stack then landed**
+  (`EXCLUSION_STACK_trucking.md`, verbatim): twelve filters between a
+  held readout and the record, coded by mechanism, survival
+  multiplicative, every rate unmeasured. `stack_audit.py` reads it
+  against the row, the order, the schema and the `uninstrumented`
+  register by import. **`RC_017`, the one that lands on the parent
+  order:** P2 defines RETURN as *a reply, a corrective action, a report
+  entering a held record* — three disjuncts, any one sufficient — and
+  L11 shows a private settlement is the second without the third
+  (*publishes nothing*; *the condition does not enter any safety
+  dataset*), so a settlement-only channel counts as returning under P2
+  and delivers nothing to the record the count measures; the stack's
+  closing sentence is P2 with the disjunction removed, and the schema
+  has no field for which disjunct fired. **`RC_018`:** the arithmetic
+  reproduces from its own figures (183+32+59 = 274; percentages sum to
+  101 by rounding, merit 22 in L8 and 21 in L10 both from 21.5; 0.5^11
+  = 1/2048). **`RC_019`:** survival over twelve layers with zero
+  measured rates is None, never 1.0 by default. **`RC_020`:** the row's
+  phantom "(N4)" resolves forward — S4 here is the survey the row named
+  in the same words, and the row still says N4. **`RC_021`:** L0 is the
+  row's six-item list, item for item. **`RC_022`:** L0 reads as
+  MODALITY, L2 as PROXY SUBSTITUTION, L5 partially as AUDIT ASYMMETRY,
+  and **L11 fits none of the eight** — nearest is `observer-exclusion`'s
+  classification-note candidate. All seven source hosts refused CONNECT,
+  recorded not read. **The stack's revision then landed**
+  (`EXCLUSION_STACK_trucking_v2.md`, verbatim beside v1): L4 gains the
+  stack's first per-layer falsifier — a syllabus search with both arms
+  of the prediction and *if present in operator-side training, this
+  layer is refuted*, on evidence declared as one operator's training
+  stack (`RC_024`) — plus an ACCRETED, NOT ENGINEERED section and S6/S7.
+  `stack_revision.py`: **`RC_023`** three pure insertions, 68 lines,
+  nothing removed, v1 reassembled byte-for-byte, CHANGELOG unmoved;
+  **`RC_025`** the four counts the revision reduces "safety culture" to
+  (*who holds, who returns, who is immune, who publishes*) have schema
+  fields for three and **none for publishes** — `RC_017`'s missing
+  disjunct from the revision's own summary; **`RC_026`** *not fixable
+  layer by layer* is the stack's own multiplication stated (twelve at
+  0.5 → 1/4096, remove one → 1/2048, one dominant filter at 0.05 buys
+  twenty-fold and is still at 1/2048); **`RC_027`** of S1..S7 one fills
+  schema columns (S5 → intake_count / return_count per regime-year) and
+  six name layers the schema has no column for. Check count printed by
+  `selftest_rc.py`; all four modules refuse `--selftest`. Stdlib only,
+  parses under 3.9, phone-buildable, CC0.
+- `removal-closure/` — A pre-registered work order delivered verbatim
+  (`WORK_ORDER.md`) about a METHOD — how claims of coupling between an
+  environmental constant and a biological rhythm reach closure, and
+  whether removability predicts time-to-closure — with no mechanism
+  proposed and no coupling asserted. **`removal_closure.py`** is the
+  main-table instrument: years to closure, the three falsification
+  rules with `undetermined` where they cannot run, Cramér's V imported
+  from `label-position-test`, Spearman imported from `readout-count`,
+  and a **pre-registration hash** over the removability coding that is
+  stable under closure-year edits and moves under a recode (`RMC_005`).
+  **No data ships**: the five seed rows are read back from the order and
+  **0 of 5 count by its own rule** — three step cells are ranges and two
+  year cells are decades where the schema wants one value (`RMC_002`) —
+  and their years-to-closure column, recomputed from their own year
+  cells with a decade read as a range, comes back consistent to within
+  the `~` it carries (`RMC_003`, a clean check recorded because it is the
+  only check possible without a literature). **`RMC_004`:** H2 ranks
+  time-to-closure, which exists only for closed rows, and the open rows
+  it drops are exactly where the order says the low-removability
+  constants sit; a censored reading with open rows at
+  `CURRENT_YEAR − first_correlation_year` is printed beside it and
+  neither is picked. **`rhythm_gaps.py` runs the attached gaps, and the
+  dataset was reachable — the first in this drop family** (`RMC_006`):
+  the repository is on `github.com`, cloned at `b174bd64afba`, not
+  checked in, size and sha256 printed on every render, headline numbers
+  pinned by the selftest when the file is present. **`RMC_007`, G2
+  run:** the upstream split applies no minimum pause (shortest trailing
+  pause in the table 0.001 s), and re-merged at the order's thresholds
+  the analysed unit's mean moves **2.257 → 3.531 s** (×1.56) from t = 0
+  to 0.50 s — the direction is fixed by construction and asserted, the
+  size is the measurement, and what the t = 0 figure describes is the
+  annotation's pause convention upstream of the repository.
+  **`RMC_008`, G3 run:** right-tail ratio (p95 − median)/(median − p05)
+  exceeds 1 in **49 of 49 languages** on the analysed unit (1.46–2.64)
+  and on the speech run (2.10–3.41), CV 0.42–0.63 and 0.51–0.78 — the
+  first of the order's two stated shapes in every language, stated as a
+  property of the file under the statistics and not as what produces
+  it. **`RMC_009`:** G4 needs word-level intervals the repository does
+  not carry (its first script reads them from an external path and
+  writes only the units), G5 needs a country join the repository does
+  by geocoding, G1/G6/G7 are reading questions and G7's number is
+  arithmetic (1 / 2.020 s = 0.495 Hz). **`RMC_010`:** two numbers the
+  upstream script states in comments (1.43 / 0.83) reproduce from the
+  table (1.430 / 0.827). **`RMC_011` UNVERIFIED:** nothing bears on H1–H3
+  and nothing asserts or denies a coupling. Four `[CHOICE]`s printed;
+  renders screen clean with no exemption; no author section. Check
+  count printed by `selftest_rmc.py`; both instruments refuse
+  `--selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
+- `encoding-selection/` — A pre-registered work order delivered verbatim
+  (`WORK_ORDER.md`), from a failed n=1: one finding encoded five ways, a
+  reader asked to rank by arrival cost, and the reader declining —
+  *"each carries different information"*. Is an encoding an INSTRUMENT
+  SELECTION rather than a style, so encodings of one content are not
+  rank-orderable on one axis (H1); does recovered quantity track the
+  format, not the reader (H2); does prose hide which axes were dropped
+  where a table shows them (H3)? Built as **one stdlib file** — Kendall's
+  W by hand against a permutation null, within- against between-format
+  spread of the recovered-quantity set as mean pairwise Jaccard
+  distance, prose against a declared table class — with the order's own
+  falsification lines applied and `undetermined` printed where they
+  cannot run. **No data ships and the seven encodings are not here**:
+  they are the experimental material, the order calls them a judgment
+  call to be published verbatim, and authoring them would put the
+  instrument's author in the sample the order excludes; the instrument
+  validates an encodings file against each item's fact list and
+  **refuses an added fact** (`ES_006`). **`ES_005`:** both seed items
+  are this repository's own artifacts — M1 is `hf-incident-extract`'s
+  explore ratio, M2 is `readout-count`'s trucking seed row — so any
+  reader of the repository, the drafting model included, already holds
+  them against the order's own MATERIAL condition; and M2 states *three
+  declared channels, zero returns*, the reading `TRUCKING_ROW_v0_1.md`
+  withdrew on the order's own date. **`ES_002`/`ES_003`/`ES_004`:**
+  *"W above chance"* has no chance in the order (a permutation null,
+  `[CHOICE 1]`), *"variance"* of a set-valued field has no value until a
+  distance is chosen (`[CHOICE 2]`, and the vocabulary's `other` is one
+  bit), and *"table readers"* names a kind not a format (`[CHOICE 3]`,
+  every format's rate printed). **`ES_007`, found by running:** a
+  decline is a third state beside a ranking and a between-subjects
+  blank, printed as a rate beside W and never subtracted — and the first
+  build counted declines per row, six for a reader who declined once,
+  caught by the constructed world and recorded. **`ES_008`:** F7 is each
+  reader's own encoding and cannot enter a pooled W; rankers over
+  different format sets are refused with the sets named. **`ES_009`
+  UNVERIFIED.** Four `[CHOICE]`s printed; renders screen clean with no
+  exemption; no author section. Check count printed by
+  `selftest_es.py`; the instrument refuses `--selftest`. Stdlib only,
+  parses under 3.9, phone-buildable, CC0.
+- `claim-refusal-gap/` — A delivered gap document (`GAP.md`, verbatim):
+  claim refusal in insurance adjudication is measured only where it is
+  contested — accepted-side measurement, the refused side uncounted or
+  counted on a self-selected sample. Seven gaps, five experiment
+  designs, a standing shape. `gap_audit.py` reads it as a structure and
+  computes what its prose asserts from the figures it carries, none
+  checked against a source (zero URLs; seven sources named in prose;
+  allowlist egress). **`CRG_001`:** the anchor's +10 is 45 minus a ~35;
+  a tilde read as ±2 makes the held-constant residual **+4..+16**, so the
+  direction holds and the magnitude is what the tilde carries.
+  **`CRG_002`:** G-2's estimator returns one number for two causes as
+  arithmetic — a displacement world and a non-purchase world are the same
+  pair (U+d, B−d) — and "BI rose, ratio rose anyway" is the
+  log-derivative (BI +10% and ratio +10% needs UM +21%). **`CRG_003`:**
+  G-3's four rebase deltas reproduce, the mean seam is 1.45, and 2023
+  restated is 16.9 against 1993's 16.0, so the "record" flips with the
+  basis and E-5 is the seam measured. **`CRG_004`:** litigation +8
+  against CWP +10 bounds the netted move in [2, 10]. **`CRG_005`:** G-5's
+  "~100x" is 1/appeal_rate exactly, and the unappealed wrongful rate is
+  None until E-1 runs — a default of 0 would be the "selective on merit"
+  reading assumed rather than measured. **`CRG_006`:** "no benign
+  reading" for overturn 38 → 52.5 at flat appeals has a second reading —
+  the review standard moved, `criteria-drift`'s ruler — and E-1's blind
+  reviewers on policy language are what separate them; the sentence
+  overstates and the design beneath it does not. **`CRG_007`:** G-6's
+  pre-instrument point is 0/0 and the instrument returns None, never
+  zero. **`CRG_008`:** G-6 and G-7 have no design; G-6 says why. **`CRG_009`:**
+  against the register's eight by import, G-4 BUDGET BOUNDARY and G-7
+  AUDIT ASYMMETRY fit, G-1 and G-3 partially, and G-2 is
+  `category-weld`'s ninth (two causes welded into one ratio), G-5 the
+  document's own standing shape (selected on the variable), G-6 an
+  absent state. **`CRG_010` UNVERIFIED.** One declared `no_severity`
+  exemption (`error`, inside the delivered G-5 title) under the
+  three-arm harness. Check count printed by `selftest_crg.py`; the
+  module refuses `--selftest`. Stdlib only, parses under 3.9, CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated
@@ -8446,8 +8819,45 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   module_f token `CCA_005` reports). Check counts printed by
   `selftest_ccc.py` / `selftest_kill.py`; the delivered `selftest_ccc_v2.py`
   carries one delivered failure (`CCC_017`), unrepaired because
-  `module_f.py` is delivered; every module refuses `--selftest`. Fourteen
-  `CCA_*` claims. Stdlib only, parses under 3.9, phone-buildable, CC0.
+  `module_f.py` is delivered; every module refuses `--selftest`.
+  **`gap_completeness.py` then asks whether each entry gives a researcher
+  everything.** **`CCA_015`:** the eight template fields are 15 of 15 and
+  the post-graduate essentials split cleanly — prior-art table, citation
+  status, secondary falsifier, cross-gap coupling, what-would-move-it are
+  carried **only by gaps 14/15**, so what a researcher wants beyond the
+  template is the shape the author's own newest cards already take.
+  **`CCA_016`:** no gap gives a deliverable schema, and gaps 5–9 deliver
+  "referenced by Module A–E" — spec section names, not code — so Q3 was
+  clean on naming and fails on drop-in for five gaps. **`CCA_017`:** a
+  known-answer step is present in 1, 2, 10, 12, 14 and absent from ten.
+  **`CCA_018`:** gap 3 has no consent step before requesting records from
+  six sovereign nations — the ethics layer, cheapest to close — and a bare
+  `consult` pattern would have hidden it, firing on "tribal consultation"
+  as the quantity mapped (the `T1-1` word-list shape inside a completeness
+  check, narrowed to step form and null-tested). **At the sender's "repair
+  or add what we are able" the folder moved from audit to repair.**
+  **`CCA_019`:** five corrections to the delivered modules — the KILL 1/2
+  prose, the KILL 3 tribal rows typed under `knowledge_state` and recorded
+  beside the bound rather than counted, `CCC_017`'s one word, and the v2
+  selftest retargeted at the v2 modules (green, 102) — each shown by the
+  same detector run on the pre-correction revision `399517b` and on the
+  working tree, every non-render function body byte-identical; the
+  `proves` exemption retired. **`CCA_020`:** `initiator_schemas.py` gives
+  gaps 5–9 the column lists and a loader that refuses a short row or the
+  rejected state, one hydrograph interface shared with `bridge-impoundment`.
+  **`CCA_021`:** `gap_addenda.json` tiers all 76 sources with a route for
+  every non-open one (46 OPEN / 18 GATED / 9 REQUESTABLE / 3 UNKNOWN),
+  carried not probed, matched to the delivered bullets by a build that
+  refuses a mismatch, plus a known-answer candidate per gap and the gap 3
+  consent step (federal FOIA does not reach tribal governments).
+  **`CCA_022`:** `UNDERGRADUATE_RESEARCH_GAPS_V2.md` is generated from
+  verbatim v1 + the two cards slotted as 14/15 + the addenda as fenced
+  blocks — stripping the fences returns v1 byte-for-byte — and on it
+  known-answer is 15/15, schema 5/5, consent 1/1, tiers 76/76, while prior
+  art, citation status, secondary falsifier and what-would-move-it stay at
+  14/15 only, **left unauthored on purpose** (citations from memory are
+  the dead-reference hazard). Twenty-two `CCA_*` claims. Stdlib only,
+  parses under 3.9, phone-buildable, CC0.
 - `reservoir-chain-coupling/` — The antecedent-coupling amplifier
   `columbia-chain-cascade` `CCC_001` flagged as truncated, now delivered
   as a complete initiator-agnostic spec — and unlike that HEC-RAS build

@@ -1,0 +1,34 @@
+removal_closure -- counts from the CSV, nothing else
+
+[CHOICE 1] a row is CLOSED iff closure_year is not null
+[CHOICE 2] partial removal does not count as WITHOUT for H1; strict count printed beside it
+[CHOICE 3] removability ordered high > medium > low; H2 read as rho < 0
+[CHOICE 4] open rows enter the censored H2 reading at 2026 - first_correlation_year
+
+ROWS: none. No data ships with this instrument.
+
+SEED ROWS as delivered, against what the order says a cell carries before it counts
+  constant     | citation | step single | years exact | counts
+  gravity      | no       | True        | False       | no
+  day/night    | no       | True        | True        | no
+  tidal/lunar  | no       | False       | False       | no
+  geomagnetic  | no       | False       | True        | no
+  ELF cavity   | no       | False       | True        | no
+  0 of 5 seed rows count: no cell carries a citation; 3 step cells are
+  ranges where the schema wants one value; 2 rows carry a decade year cell.
+
+SEED ARITHMETIC  the delivered years-to-closure figure against its own year cells
+  constant     | kind   | computed range | stated | placement
+  gravity      | closed |  194..203       | 200    | inside
+  day/night    | closed |  242..242       | 245    | above by 3
+  tidal/lunar  | closed |   68..77        | 80     | above by 3
+  geomagnetic  | closed |  162..162       | 160    | below by 2
+  ELF cavity   | open   |  133..133       | 130    | below by 3
+  a decade cell gives a range; 'inside' says the stated figure is consistent
+  with its own cells, not that either cell is right.
+
+P2  removability coding is pre-registered by publishing precode_hash(rows) before
+    any closure_year is filled; the seed table carries both columns in one row.
+
+STATES  None = not computable from these rows; never rendered as 0.
+  No interior claims. Nothing here is a statement about any constant.

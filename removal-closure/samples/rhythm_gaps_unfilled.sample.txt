@@ -1,0 +1,10 @@
+rhythm_gaps -- the attached gaps run where they can be run
+
+CSV: not supplied. Pass --csv PATH to the repository's intermediate table.
+  upstream: github.com/LSBurchardt/Rhythm_across_48_languages
+  G1  NOT RUN  reading question about the paper's animal rows; not in the CSV
+  G4  NOT RUN  word-level intervals are not in the repository: 01_prep reads them from an external DoReCo path and writes only the pause-bounded units
+  G5  NOT RUN  the height covariate joins on country, which 03_post_metadata obtains by geocoding coordinates; no country column is in the table
+  G6  NOT RUN  reading question about sound-production mechanisms; not in the CSV
+  G7  NOT RUN  reading question; its one number is arithmetic and is printed below
+  G2, G3  NOT RUN  (no CSV)

@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 # selftest_ccc.py -- CC0, stdlib only, parses under 3.9
 #
-# Every check that exercises eap_coverage.py, audit.py, and module_f.py.
+# Every check that exercises eap_coverage_v2.py, audit_v2.py, and module_f.py.
+#
+# REPAIRED: the delivered copy imported the bare v1 modules and unpacked
+# a 4-tuple, so the v2 additions shipped unexercised (CCA_006). It now
+# runs against the v2 record, and checks the tribal rows are typed.
+# Pre-repair text is at git 399517b.
 #
 # The load-bearing checks are the two refusals: no per-node owner is
 # assigned (the data is not in the delivered text) and the exact seam
@@ -17,8 +22,8 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import eap_coverage as EAP  # noqa: E402
-import audit as A  # noqa: E402
+import eap_coverage_v2 as EAP  # noqa: E402
+import audit_v2 as A  # noqa: E402
 
 # Module F may not exist in all environments; import conditionally
 try:
@@ -43,7 +48,7 @@ def run():
                   encoding="utf-8").read()
 
     # ---- the node list is transcribed, not invented, and matches the text
-    for name, _reach, _j, _o in EAP.NODES:
+    for name, _reach, _j, _o, _k in EAP.NODES:
         chk("node in the delivered text: %s" % name, name in doc)
     chk("18 dam nodes", len(EAP.NODES) == 18)
     chk("the estuary is recorded as a reach, not a node",
@@ -73,6 +78,24 @@ def run():
     chk("and the refusal names the reason",
         "not supplied from memory" in b["exact_seam_reason"])
 
+    # ---- the tribal rows carry the same discipline the owners carry
+    import knowledge_state as KS
+    chk("six tribal rows", len(EAP.TRIBAL_JURISDICTION) == 6)
+    chk("every tribal row carries a valid knowledge_state and a source",
+        all(len(t) == 6 and KS.is_valid(t[4]) and t[5] for t in
+            EAP.TRIBAL_JURISDICTION))
+    chk("tribal adjacency is typed UNKNOWN_ATM (carried, not verified)",
+        all(t[4] == EAP.UNKNOWN_ATM for t in EAP.TRIBAL_JURISDICTION))
+    _save_t = EAP.TRIBAL_JURISDICTION
+    try:
+        EAP.TRIBAL_JURISDICTION = []
+        chk("the tribal rows are recorded, not counted in the bound",
+            EAP.spanning_bound()["authorities_lower_bound"] == 2)
+    finally:
+        EAP.TRIBAL_JURISDICTION = _save_t
+    chk("the record says so in its own prose",
+        "not counted" in EAP.no_plan_spans()["robust_because"])
+
     # ---- the owner categories are the five the spec names, verbatim
     for cat in EAP.OWNER_CATEGORIES:
         chk("owner category from the text: %s" % cat, cat in doc)
@@ -92,7 +115,7 @@ def run():
     # null test: a hypothetical single-jurisdiction chain would NOT settle it
     save = EAP.NODES
     try:
-        EAP.NODES = [(n[0], n[1], "US", EAP.UNASSIGNED) for n in save]
+        EAP.NODES = [(n[0], n[1], "US", EAP.UNASSIGNED, n[4]) for n in save]
         chk("a single-jurisdiction chain does NOT settle the claim from "
             "jurisdiction alone",
             EAP.no_plan_spans()["authorities_lower_bound"] == 1
@@ -104,7 +127,7 @@ def run():
 
     # ---- the exact-count refusal cannot be a hidden guess: no owner
     # string other than UNASSIGNED appears assigned anywhere
-    src = io.open(os.path.join(HERE, "eap_coverage.py"),
+    src = io.open(os.path.join(HERE, "eap_coverage_v2.py"),
                   encoding="utf-8").read()
     tree = ast.parse(src)
     assigned_owners = set()
@@ -116,7 +139,7 @@ def run():
             if "NODES" not in names:
                 continue
             for elt in ast.walk(node.value):
-                if isinstance(elt, ast.Tuple) and len(elt.elts) == 4:
+                if isinstance(elt, ast.Tuple) and len(elt.elts) == 5:
                     last = elt.elts[3]
                     if isinstance(last, ast.Constant):
                         assigned_owners.add(last.value)
@@ -132,7 +155,7 @@ def run():
         not t["last_line"].rstrip().endswith((".", ":", ")")))
     chk("Module F's header is present", t["module_f_header_present"])
     chk("and its body is marked incomplete in the source drop",
-        t["module_f_body_complete"] is False)
+        t["module_f_body_complete_in_source_drop"] is False)
     chk("Module F is the highest section reached in the source drop",
         "MODULE F" in (t["highest_section"] or ""))
     chk("the missing parts are enumerated", len(t["what_is_missing"]) >= 4)
@@ -171,7 +194,7 @@ def run():
         "no single entity's plan spans the chain" in one)
 
     # ---- both modules refuse --selftest
-    for mod in ("eap_coverage.py", "audit.py"):
+    for mod in ("eap_coverage_v2.py", "audit_v2.py"):
         r = subprocess.run([sys.executable, os.path.join(HERE, mod),
                             "--selftest"],
                            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -179,7 +202,7 @@ def run():
         chk("%s names where its checks live" % mod,
             b"selftest_ccc.py" in r.stderr)
     r2 = subprocess.run([sys.executable, os.path.join(HERE,
-                        "eap_coverage.py")], stdout=subprocess.PIPE)
+                        "eap_coverage_v2.py")], stdout=subprocess.PIPE)
     chk("bare eap_coverage.py renders the record",
         b"EAP COVERAGE" in r2.stdout and b"Grand Coulee" in r2.stdout)
 

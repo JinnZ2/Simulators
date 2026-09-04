@@ -1,0 +1,467 @@
+{
+ "probed": false,
+ "basis": "tiers carried from general knowledge of the holding institutions; not probed from this environment (allowlist egress); UNKNOWN where the holder or existence is not established",
+ "gaps": {
+  "1": {
+   "tiers": [
+    {
+     "source": "NLCD impervious surface raster (USGS)",
+     "tier": "OPEN",
+     "route": "mrlc.gov download"
+    },
+    {
+     "source": "USGS gage records for Spokane River, Yakima River, Willamette River",
+     "tier": "OPEN",
+     "route": "USGS NWIS"
+    },
+    {
+     "source": "Naturalized flow estimates from USACE reservoir operations",
+     "tier": "OPEN",
+     "route": "BPA / USACE modified-flows datasets, published"
+    },
+    {
+     "source": "Reservoir operating records (pool levels during storm events vs. baseflow)",
+     "tier": "OPEN",
+     "route": "USACE NWD DataQuery; PUD hydro pages; if a pool series is withheld, records request to the district"
+    }
+   ],
+   "known_answer": "present in the entry (validate against known storm events)"
+  },
+  "2": {
+   "tiers": [
+    {
+     "source": "MTBS (Monitoring Trends in Burn Severity) fire perimeter database",
+     "tier": "OPEN",
+     "route": "mtbs.gov"
+    },
+    {
+     "source": "NIFC (National Interagency Fire Center) incident records",
+     "tier": "OPEN",
+     "route": "NIFC open data"
+    },
+    {
+     "source": "NLCD land cover pre- and post-fire",
+     "tier": "OPEN",
+     "route": "mrlc.gov"
+    },
+    {
+     "source": "HEC-RAS 2D model runs (or published post-fire hydraulic studies)",
+     "tier": "GATED",
+     "route": "the engine is a free Windows download; the RUNS need terrain and geometry -- route: published post-fire hydraulic studies via a library, USGS OFR series"
+    },
+    {
+     "source": "Field Manning n measurements (if available from USACE or state agencies)",
+     "tier": "UNKNOWN",
+     "route": "not established who holds field n for these reaches; ask the state DOT hydraulics section and the USACE district; a documented 'none' is a finding"
+    }
+   ],
+   "known_answer": "present in the entry (post-flood gage records)"
+  },
+  "3": {
+   "tiers": [
+    {
+     "source": "Tribal government records (public, via tribal websites or FOIA)",
+     "tier": "REQUESTABLE",
+     "route": "direct request to each nation's emergency-management office AFTER the consultation step; federal FOIA does not reach tribal governments"
+    },
+    {
+     "source": "USACE Emergency Action Plans (public, via USACE districts)",
+     "tier": "GATED",
+     "route": "EAPs are commonly withheld as security-sensitive; FOIA to the district, expect redaction; document a refusal (it is a Gap 3 finding)"
+    },
+    {
+     "source": "PUD emergency coordination documents",
+     "tier": "REQUESTABLE",
+     "route": "state public-records request (WA PRA) to each PUD"
+    },
+    {
+     "source": "Columbia River Treaty Permanent Engineering Board records",
+     "tier": "OPEN",
+     "route": "PEB annual reports, published"
+    },
+    {
+     "source": "Federal Register notices for EAP updates",
+     "tier": "OPEN",
+     "route": "federalregister.gov"
+    }
+   ],
+   "known_answer": "a published dam-tribe MOU the matrix method must classify as coordinated, and a dam with no published agreement it must classify as absent-or-unknown -- both directions",
+   "consent_step": "0. Before any records request: initiate consultation with each nation's emergency-management or natural-resources office; obtain consent for the study and for publication of its findings; record the terms. Federal FOIA does not reach tribal governments -- requests are direct and voluntary, and a refusal is recorded, never worked around. The Columbia River Treaty's Joint Executive Board (tribal and First Nations representation) is a named route. See the ethics sections of revision-mechanism/ and transmission-decay/."
+  },
+  "4": {
+   "tiers": [
+    {
+     "source": "National Inventory of Dams (NID) — nid.sec.usace.army.mil",
+     "tier": "OPEN",
+     "route": "nid.sec.usace.army.mil public download"
+    },
+    {
+     "source": "USACE project design memoranda",
+     "tier": "GATED",
+     "route": "FOIA to the district; university depository libraries hold many USACE technical reports"
+    },
+    {
+     "source": "PUD annual reports and regulatory filings",
+     "tier": "OPEN",
+     "route": "published by each PUD; FERC eLibrary for license filings"
+    },
+    {
+     "source": "BC Hydro dam safety reports",
+     "tier": "GATED",
+     "route": "BC FOI request; BC Hydro water-use-planning documents, some public"
+    },
+    {
+     "source": "State dam safety office records (WA, OR, ID)",
+     "tier": "REQUESTABLE",
+     "route": "public-records request: WA Ecology, OR OWRD, ID IDWR"
+    }
+   ],
+   "known_answer": "one node whose owner the FERC licensing record states openly; the seam map must place it"
+  },
+  "5": {
+   "tiers": [
+    {
+     "source": "NID dam type and geometry",
+     "tier": "OPEN",
+     "route": "nid.sec.usace.army.mil"
+    },
+    {
+     "source": "Froehlich (2008) and Xu & Zhang (2009) empirical breach equations",
+     "tier": "GATED",
+     "route": "journal paywall; university library, interlibrary loan, author preprints"
+    },
+    {
+     "source": "USACE dam safety inspection reports",
+     "tier": "GATED",
+     "route": "FOIA to the district; commonly withheld -- document the refusal"
+    },
+    {
+     "source": "State dam safety office breach analyses",
+     "tier": "REQUESTABLE",
+     "route": "public-records request to the state office"
+    },
+    {
+     "source": "Published case studies of similar dam types",
+     "tier": "GATED",
+     "route": "library; open-access where available"
+    }
+   ],
+   "known_answer": "a documented historical breach with published Froehlich inputs (the equation paper's own worked case); the table must reproduce it within the equation's stated scatter",
+   "deliverable_schema": "initiator_schemas.py: breach_params.csv, 15 columns"
+  },
+  "6": {
+   "tiers": [
+    {
+     "source": "USGS National Seismic Hazard Maps",
+     "tier": "OPEN",
+     "route": "usgs.gov hazard maps and tools"
+    },
+    {
+     "source": "PSHA (Probabilistic Seismic Hazard Analysis) for the Pacific Northwest",
+     "tier": "OPEN",
+     "route": "USGS PSHA products for the Pacific Northwest"
+    },
+    {
+     "source": "Site-specific soil classification (USGS VS30 maps)",
+     "tier": "OPEN",
+     "route": "USGS VS30 map service"
+    },
+    {
+     "source": "Dam-specific seismic vulnerability assessments (if published)",
+     "tier": "GATED",
+     "route": "FOIA to the district office holding the project file; the dam safety program manager; FERC eLibrary for FERC-licensed PUD dams (open); if refused, document it"
+    }
+   ],
+   "known_answer": "a USGS NSHM published PGA at a benchmark site; the extraction must return it",
+   "deliverable_schema": "initiator_schemas.py: seismic_params.csv, 12 columns"
+  },
+  "7": {
+   "tiers": [
+    {
+     "source": "NOAA AR (Atmospheric River) scale catalog",
+     "tier": "OPEN",
+     "route": "CW3E / Scripps AR catalog; NOAA PSL"
+    },
+    {
+     "source": "CMIP6 climate model ensemble projections",
+     "tier": "OPEN",
+     "route": "ESGF nodes"
+    },
+    {
+     "source": "USACE reservoir rule curves and gate ratings",
+     "tier": "GATED",
+     "route": "water control manuals via FOIA to the district; some are published"
+    },
+    {
+     "source": "Historical flood records (1948 Vanport, 1964 Christmas flood, etc.)",
+     "tier": "OPEN",
+     "route": "USGS and USACE published reports; NWIS"
+    },
+    {
+     "source": "SNOTEL snowpack data for rain-on-snow events",
+     "tier": "OPEN",
+     "route": "NRCS SNOTEL"
+    }
+   ],
+   "known_answer": "a documented historical inflow peak (a published USACE flood report) reproduced from the AR catalog plus gage record",
+   "deliverable_schema": "initiator_schemas.py: hydro_params.csv, 12 columns"
+  },
+  "8": {
+   "tiers": [
+    {
+     "source": "NERC CIP (Critical Infrastructure Protection) standards",
+     "tier": "OPEN",
+     "route": "nerc.com standards"
+    },
+    {
+     "source": "Dam owner SCADA documentation (if publicly available)",
+     "tier": "GATED",
+     "route": "not public by design; CEII request through FERC for licensed dams; a refusal is the expected and documentable outcome"
+    },
+    {
+     "source": "USACE cyber vulnerability assessments",
+     "tier": "GATED",
+     "route": "FOIA; expect refusal -- document it"
+    },
+    {
+     "source": "Human factors research on operator response time",
+     "tier": "GATED",
+     "route": "journal literature; library, ILL"
+    },
+    {
+     "source": "Published cyber-physical attack case studies",
+     "tier": "OPEN",
+     "route": "open-access case studies and CISA advisories"
+    }
+   ],
+   "known_answer": "a documented incident with a published override timeline; the trust model must reproduce its response time",
+   "deliverable_schema": "initiator_schemas.py: cyber_params.yaml, 10 columns"
+  },
+  "9": {
+   "tiers": [
+    {
+     "source": "Historical compound events (if any exist for dam cascades)",
+     "tier": "UNKNOWN",
+     "route": "not established that any documented dam-cascade compound event exists; a search with a stated corpus is the first step"
+    },
+    {
+     "source": "Expert elicitation from dam safety engineers",
+     "tier": "REQUESTABLE",
+     "route": "structured elicitation with dam-safety engineers; needs IRB and consent"
+    },
+    {
+     "source": "Published compound risk frameworks (e.g., IPCC AR6)",
+     "tier": "OPEN",
+     "route": "IPCC AR6, open"
+    },
+    {
+     "source": "Insurance industry compound event models",
+     "tier": "GATED",
+     "route": "commercial; route: published white papers, academic partnerships"
+    }
+   ],
+   "known_answer": "two independent synthetic events; the interaction factor must return 1.0 within the stated tolerance",
+   "deliverable_schema": "initiator_schemas.py: compound_matrix.csv, 10 columns"
+  },
+  "10": {
+   "tiers": [
+    {
+     "source": "USGS gage records from 1948 (Bonneville, The Dalles, etc.)",
+     "tier": "OPEN",
+     "route": "NWIS historical daily values"
+    },
+    {
+     "source": "Historical newspaper accounts and photographs",
+     "tier": "OPEN",
+     "route": "library newspaper archives; Oregon Historical Society"
+    },
+    {
+     "source": "USACE after-action reports",
+     "tier": "REQUESTABLE",
+     "route": "NARA RG 77; district library"
+    },
+    {
+     "source": "Dam operating records from 1948",
+     "tier": "REQUESTABLE",
+     "route": "NARA RG 77; the operating agencies' archives"
+    },
+    {
+     "source": "DEM of 1948 channel conditions (if available)",
+     "tier": "UNKNOWN",
+     "route": "not established that a 1948-condition surface exists; USGS historical topographic maps (open) and USACE historical hydrographic surveys at NARA are the route"
+    }
+   ],
+   "known_answer": "this gap IS the known answer for the whole spec"
+  },
+  "11": {
+   "tiers": [
+    {
+     "source": "Census block groups (US Census Bureau)",
+     "tier": "OPEN",
+     "route": "data.census.gov"
+    },
+    {
+     "source": "National Structure Inventory (NSI) or state equivalents",
+     "tier": "OPEN",
+     "route": "USACE NSI 2.0 public"
+    },
+    {
+     "source": "Critical facility databases (hospitals, schools, nursing homes)",
+     "tier": "OPEN",
+     "route": "HIFLD open data"
+    },
+    {
+     "source": "FEMA P-2067 critical facility criteria",
+     "tier": "OPEN",
+     "route": "fema.gov"
+    },
+    {
+     "source": "Dasymetric redistribution tools (land cover weighted)",
+     "tier": "OPEN",
+     "route": "open tools"
+    }
+   ],
+   "known_answer": "a FEMA-published exposure count for a published flood zone; the overlay must reproduce it"
+  },
+  "12": {
+   "tiers": [
+    {
+     "source": "3DEP DEM (1m/10m)",
+     "tier": "OPEN",
+     "route": "USGS national map"
+    },
+    {
+     "source": "NOAA bathymetry charts",
+     "tier": "OPEN",
+     "route": "NOAA charts"
+    },
+    {
+     "source": "NLCD land cover",
+     "tier": "OPEN",
+     "route": "mrlc.gov"
+    },
+    {
+     "source": "NID dam geometry",
+     "tier": "OPEN",
+     "route": "nid.sec.usace.army.mil"
+    },
+    {
+     "source": "USACE reservoir surveys",
+     "tier": "REQUESTABLE",
+     "route": "records request to the district; sedimentation surveys"
+    }
+   ],
+   "known_answer": "present in the entry (the falsifier -- reproduce on a second machine)"
+  },
+  "13": {
+   "tiers": [
+    {
+     "source": "HEC-RAS 2D (Windows, USACE)",
+     "tier": "OPEN",
+     "route": "free USACE download; Windows only"
+    },
+    {
+     "source": "3DEP DEM",
+     "tier": "OPEN",
+     "route": "USGS national map"
+    },
+    {
+     "source": "NID dam geometry",
+     "tier": "OPEN",
+     "route": "nid.sec.usace.army.mil"
+    },
+    {
+     "source": "Published breach parameters",
+     "tier": "GATED",
+     "route": "journal literature; library, ILL"
+    },
+    {
+     "source": "Historical inflow hydrographs",
+     "tier": "OPEN",
+     "route": "NWIS; USACE published records"
+    }
+   ],
+   "known_answer": "reservoir-chain-coupling/chain.py: band width equals the antecedent pool on a constructed chain; the terrain run must reproduce it at one synthetic node before any real node is read"
+  },
+  "14": {
+   "tiers": [
+    {
+     "source": "USGS Mineral Resources Data System (MRDS) — mine locations, commodity, status",
+     "tier": "OPEN",
+     "route": "mrdata.usgs.gov"
+    },
+    {
+     "source": "State mining permits and reclamation records (WA, OR, ID, MT, BC)",
+     "tier": "REQUESTABLE",
+     "route": "state agency records request (WA DNR, OR DOGAMI, ID IDL, MT DEQ; BC EMLI)"
+    },
+    {
+     "source": "USGS groundwater monitoring wells in mined watersheds",
+     "tier": "OPEN",
+     "route": "NWIS groundwater"
+    },
+    {
+     "source": "InSAR subsidence products (Sentinel-1, ESA; USGS/JPL ARIA)",
+     "tier": "OPEN",
+     "route": "ESA Copernicus (Sentinel-1); ARIA products"
+    },
+    {
+     "source": "NLCD land cover change over mined parcels",
+     "tier": "OPEN",
+     "route": "mrlc.gov"
+    },
+    {
+     "source": "USGS gage records for tributaries draining mined watersheds",
+     "tier": "OPEN",
+     "route": "NWIS"
+    },
+    {
+     "source": "Reservoir rim stability assessments (USACE, BC Hydro, if published)",
+     "tier": "GATED",
+     "route": "FOIA to the district office holding the project file; the dam safety program manager; university holdings of USACE technical reports; BC Hydro water-use-planning documents (some public); the FERC licensing record, which is open. IF REFUSED: document it -- a data point on the EAP coverage question in Gap 3"
+    },
+    {
+     "source": "The 2024-2025 subsurface literature above",
+     "tier": "GATED",
+     "route": "journal paywall; DOIs are given; library, ILL"
+    }
+   ],
+   "known_answer": "present in the entry (Bondevik & Sorteberg 2021, measured u)"
+  },
+  "15": {
+   "tiers": [
+    {
+     "source": "National Bridge Inventory (NBI, FHWA) — location, pier spacing,",
+     "tier": "OPEN",
+     "route": "FHWA NBI public download"
+    },
+    {
+     "source": "USGS gage records and high-water marks (HWM)",
+     "tier": "OPEN",
+     "route": "NWIS; USGS flood event viewer for HWMs"
+    },
+    {
+     "source": "HEC-RAS 2D bridge routines (blocked-obstruction / perched-weir modes)",
+     "tier": "OPEN",
+     "route": "free USACE download; Windows only"
+    },
+    {
+     "source": "Upstream debris supply sources: landslide inventories, mining rim-slope",
+     "tier": "OPEN",
+     "route": "state landslide inventories (WA DNR, OR DOGAMI); the Gap 14 and Gap 2 outputs"
+    },
+    {
+     "source": "USACE bridge scour and backwater studies",
+     "tier": "GATED",
+     "route": "FOIA to the district; state DOT scour-critical files via public-records request"
+    },
+    {
+     "source": "The 2024-2025 debris-scour and clogging literature above",
+     "tier": "GATED",
+     "route": "journal paywall; identifiers given; library, ILL"
+    }
+   ],
+   "known_answer": "bridge-impoundment/bridge_impoundment.py: gain above one iff release is faster than fill, on constructed inputs; and the Fjaerland volume as the release-half check"
+  }
+ }
+}

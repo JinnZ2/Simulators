@@ -1,0 +1,28 @@
+readout_count -- counts from the CSV, nothing else
+
+[CHOICE 1] a regime's OUTPUT row is its latest year
+[CHOICE 2] rate_trend ordered down > flat > up for ranking
+[CHOICE 3] H1 'rank matches' read as Spearman rho > 0; strict equality printed, not used
+[CHOICE 4] H2 high/low splits at the median across regimes
+
+POSITION  this file was built by a model from a model-drafted order;
+  by the order's first paragraph it is a row, not an exception.
+
+ROWS: none. No data ships with this instrument.
+
+SEED ROWS as delivered, against what the order says a row carries before it counts
+  regime        | url | intake | return | trend in vocab | counts
+  air           | no | grade  | grade  | True  (down)             | no
+  rail          | no | grade  | grade  | False (derailments down) | no
+  trucking      | no | bound  | count  | False (up since 2010)    | no
+  AI eval lab   | no | count  | count  | False (n/a (N=1))        | no
+  this session  | no | none   | none   | False (—)                | no
+  0 of 5 seed rows count: none carries a URL, and the intake / return
+  cells are grades, bounds or dashes where the schema wants counts.
+  Nothing is filled in.
+
+H3  NOT_COMPUTABLE from the schema. Missing: a split of return_count by origin (internal vs external); the grading field the rule conditions on.
+    the schema carries external_detection per row and nothing else the rule wants.
+
+STATES  None = not computable from these rows (empty denominator or
+  constant side); never rendered as 0. No interior claims.

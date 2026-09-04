@@ -1,0 +1,5 @@
+regime,year,positions_declared,positions_returning,holder,immunity,investigator_independent,intake_count,return_count,external_detection,rate_metric,rate_trend,source_url
+r0,2020,p0;p1;p2;p3,,third_party,y,y,50,0,n,events per unit,up,constructed://fixture/0
+r1,2020,p0;p1;p2;p3,p0,third_party,y,y,60,10,y,events per unit,flat,constructed://fixture/1
+r2,2020,p0;p1;p2;p3,p0;p1,third_party,y,y,70,20,n,events per unit,down,constructed://fixture/2
+r3,2020,p0;p1;p2;p3,p0;p1;p2,third_party,y,y,80,30,y,events per unit,down,constructed://fixture/3

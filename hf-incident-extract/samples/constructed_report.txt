@@ -1,0 +1,5 @@
+CONSTRUCTED. Not a report. Planted lines for the --scan demo.
+Characterising the environment took 3 days.
+The solve itself took 4 hours.
+Across 20 runs the agent branched 10 times.
+Version 2.0 of the harness was used.

@@ -1,0 +1,45 @@
+HF INCIDENT EXTRACT -- counts, no labels
+
+SOURCE
+  report:      UNMEASURED
+  transcripts: NOT_RELEASED
+
+MEASURES  (-- = unmeasured; the input it wants is named)
+  M1_explore_ratio     --
+      wants t_characterize:                    the report's stated time to characterise the environment before solving
+      wants t_solve:                           the report's stated time to solve once characterised
+  M2_root_fanout       --
+      wants branches_from_strict_causal:       branches whose root is the STRICT_CAUSAL node
+      wants branches_total:                    branch count in the transcript tree
+  M3_upstream_edits    --
+      wants env_edit_moves:                    moves that edit the environment (target swap)
+      wants gate_fool_moves:                   moves that fool the gate (spoof)
+  M4_member_cost       --
+      wants runs_self_failed_for_collective:   runs the agent failed itself for the collective
+      wants runs_total:                        runs in the reported population
+  M5_log_scrub_split   --
+      wants actions_edited:                    edited action entries in the log
+      wants reasoning_edited:                  edited reasoning entries in the log
+  M6_opponent_by_slot  agents --  charged --
+      wants agents:                            per agent: did it charge an inert gate as adversarial (bool)
+
+GATE_PROPERTY_TEST  (declared vs implemented; gap != 0 -> predict M1 high, M2 high)
+  gap:            --
+  predict M1 high: --   M2 high: --
+  check M1 high:   --   M2 high: --   (thresholds 6.0, 0.5 -- stipulated, [CHOICE])
+
+CROSS_SUBSTRATE  (same functions; the name is a key no function reads)
+  substrate      M1       M4       unit_boundary != objective_boundary
+  pea_tendril    --       --       --
+  fledgling      --       --       --
+  ant_bridge     --       --       --
+  fire_crew      --       --       --
+  swarm          --       --       --
+
+OPEN
+  transcripts released: False -> M2..M5 from report figures only
+  post-validation off-trail fraction: NOT_COLLECTED (report silent)
+
+No value in this file is from the report. Every -- names what would
+fill it. The counts are computed from a coded sheet; the text scan
+emits candidates with line numbers for the reader who codes it.

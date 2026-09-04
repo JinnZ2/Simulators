@@ -43,6 +43,14 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
+import knowledge_state  # noqa: E402  -- the typing rule, applied to tribal too
+
+# REPAIRED (KILL 3): the tribal rows now carry the same discipline the
+# owners carry -- a knowledge_state (validated at import) and a source
+# field that says where the row came from. The nations are kept; the
+# adjacency is typed UNKNOWN_ATM, carried from memory, with what would
+# move it named. The rows are recorded, not counted in the authority
+# bound. Pre-repair text is at git 399517b.
 
 # Knowledge state vocabulary. See knowledge_state.py and SCOPE_BOUNDARY.md.
 UNKNOWN_ATM = "UNKNOWN_ATM"
@@ -62,21 +70,30 @@ OWNER_CATEGORIES = ("USACE", "USBR", "PUD", "BC Hydro", "private")
 # The spec's five owner categories miss this entirely.
 # See SCOPE_BOUNDARY.md for why institutional scope boundaries exclude
 # tribal jurisdiction from standard dam-safety models.
+TRIBAL_SOURCE = ("carried from memory (DEEP_RESEARCH.md section 6.1); "
+                 "not verified from here")
+TRIBAL_WOULD_MOVE_IT = ("BIA reservation boundary shapefile intersected "
+                        "with node coordinates; tribal government EAP "
+                        "records (Gap 3)")
+
 TRIBAL_JURISDICTION = [
-    # (nation, reservation, nearest_upstream_node, nearest_downstream_node)
+    # (nation, reservation, nearest_upstream_node, nearest_downstream_node,
+    #  knowledge_state, source)
     ("Colville Confederated Tribes", "Colville Reservation",
-     "Keenleyside", "Grand Coulee"),
+     "Keenleyside", "Grand Coulee", UNKNOWN_ATM, TRIBAL_SOURCE),
     ("Spokane Tribe", "Spokane Reservation",
-     "Grand Coulee", "Wells"),
+     "Grand Coulee", "Wells", UNKNOWN_ATM, TRIBAL_SOURCE),
     ("Yakama Nation", "Yakama Nation",
-     "Priest Rapids", "McNary"),
+     "Priest Rapids", "McNary", UNKNOWN_ATM, TRIBAL_SOURCE),
     ("Confederated Tribes of Warm Springs", "Warm Springs",
-     "The Dalles", "Bonneville"),
+     "The Dalles", "Bonneville", UNKNOWN_ATM, TRIBAL_SOURCE),
     ("Confederated Tribes of the Umatilla Indian Reservation", "Umatilla",
-     "McNary", "John Day"),
+     "McNary", "John Day", UNKNOWN_ATM, TRIBAL_SOURCE),
     ("Nez Perce Tribe", "Nez Perce Reservation",
-     "Lower Granite", "Little Goose"),
+     "Lower Granite", "Little Goose", UNKNOWN_ATM, TRIBAL_SOURCE),
 ]
+for _row in TRIBAL_JURISDICTION:
+    knowledge_state.validate(_row[4], "tribal adjacency: %s" % _row[0])
 
 # The node list, transcribed from SOURCE_DROP.md section 1. A node's
 # `jurisdiction` is set ONLY where the delivered text tags it; the
@@ -148,9 +165,9 @@ def spanning_bound():
     finer split -- five owner categories -- but does not say which node
     is which, so the finer count is not computed.
 
-    UPDATE: tribal jurisdiction adds additional sovereign entities that
-    are not captured in the jurisdiction count. The true fragmentation
-    is higher than the jurisdiction floor, not lower."""
+    Tribal jurisdiction is RECORDED beside the bound and NOT counted in
+    it: each row is typed UNKNOWN_ATM with its source, and enters the
+    count only once a per-row source is established (Gap 3)."""
     juris = jurisdictions()
     return {
         "distinct_jurisdictions_in_text": len(juris),
@@ -184,9 +201,9 @@ def no_plan_spans():
     of the 18 nodes to owners can reduce the jurisdiction count below
     the 2 the text already carries.
 
-    UPDATE: tribal jurisdiction strengthens the claim. Even if all US
-    nodes were under one owner, tribal sovereignty adds additional
-    authorities that no single plan can span."""
+    Tribal rows are recorded and typed, not counted: the bound reported
+    here is the jurisdiction floor and moves only on established
+    sources."""
     b = spanning_bound()
     settled = b["authorities_lower_bound"] > 1
     return {
@@ -196,9 +213,9 @@ def no_plan_spans():
         "robust_because":
             "assigning the 18 nodes to owners can only RAISE the "
             "authority count above the jurisdiction floor, never lower "
-            "it; the floor of 2 is already > 1. Tribal jurisdiction "
-            "adds additional sovereign authorities, strengthening the "
-            "claim.",
+            "it; the floor of 2 is already > 1. Tribal rows are recorded "
+            "and typed UNKNOWN_ATM, not counted, until a per-row source is "
+            "established.",
         "authorities_lower_bound": b["authorities_lower_bound"],
         "tribal_jurisdictions": b["tribal_jurisdictions"],
     }
@@ -231,10 +248,11 @@ def render():
     w("TRIBAL JURISDICTION (sovereign nations in the flood path):")
     w("  %d tribal jurisdictions identified. These are not owners in the" % b["tribal_jurisdictions"])
     w("  NID sense; they are sovereign entities with treaty rights and")
-    w("  EAP interests. Standard models exclude them by institutional")
-    w("  scope boundary. See SCOPE_BOUNDARY.md.")
-    for nation, res, up, down in TRIBAL_JURISDICTION:
-        w("  %-40s %s" % (nation, res))
+    w("  EAP interests. Recorded and typed here, not counted in the bound.")
+    for nation, res, up, down, kstate, _src in TRIBAL_JURISDICTION:
+        w("  %-40s %-22s %s" % (nation, res, kstate))
+    w("  adjacency source: %s" % TRIBAL_SOURCE)
+    w("  would move it:    %s" % TRIBAL_WOULD_MOVE_IT)
     w("")
     w("OWNERSHIP, as the delivered text supports it:")
     w("  distinct jurisdictions in the text:   %d  %s" % (

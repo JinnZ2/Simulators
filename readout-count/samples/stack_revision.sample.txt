@@ -1,0 +1,35 @@
+stack_revision -- EXCLUSION_STACK v2 against v1
+
+1. THE COPY  blocks inserted 3, lines added 68, lines removed 0, reassembles v1: True
+   CHANGELOG unchanged: True  (the revision is not logged in it)
+
+2. L4 FALSIFIER  TEST present True; PREDICT carries both arms True; refuting observation named True
+   evidence declared as one operator's stack: True; the three citations named as absent: True
+   the first layer in the stack with its own falsifier; S6 is the test as a survey.
+
+3. THE FOUR COUNTS  'who holds, who returns, who is immune, who publishes' against the schema
+   who holds        holder
+   who returns      positions_returning, return_count
+   who is immune    immunity
+   who publishes    NO FIELD
+   three of four have a column; 'who publishes' is P2's third disjunct (RC_017) and has none.
+
+4. LAYER BY LAYER  delivered stack: 12 layers, survival None (unmeasured)
+   constructed: every layer at 0.5 -> survival 0.000244; removing any one layer -> 0.000488 (gain x2.000)
+   constructed: L0 at 0.05, others 0.5 -> survival 0.000024; removing L0 -> 0.000488 (x20.000); removing L7 -> 0.000049 (x2.000)
+   under the stack's own arithmetic, removing one layer buys 1/r on that layer and
+   leaves the other eleven; 'not fixable layer by layer' is the product, stated.
+
+5. OPEN QUANTITIES  S1..S7 against the schema
+   S1  layer L1                   fills schema False employee classification has no column; the schema counts positions, not who is inside the statute
+   S2  layer L0                   fills schema False filability of a readout item has no column; this is the row's `type` column again
+   S3  all layers                 fills schema False per-layer survival is the stack's own quantity; no column
+   S4  the row's OPEN INSTANCE    fills schema False per-carrier reply rate; the schema has return_count per regime-year, not per carrier
+   S5  schema                     fills schema True  filings vs investigations vs enforcement by year fills intake_count and return_count per regime-year
+   S6  layer L4                   fills schema False a syllabus search; no column
+   S7  layer L4                   fills schema False an awareness survey; the asymmetry is between two positions the schema does not separate
+   one of seven fills schema columns; the other six name layers the schema has no column for.
+
+6. S6 HOSTS  oshacademy.com no response, training.fema.gov no response  (allowlist egress; not read)
+
+Nothing here is a statement about any regime, curriculum or operator.

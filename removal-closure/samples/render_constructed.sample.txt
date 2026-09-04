@@ -1,0 +1,39 @@
+removal_closure -- counts from the CSV, nothing else
+
+[CHOICE 1] a row is CLOSED iff closure_year is not null
+[CHOICE 2] partial removal does not count as WITHOUT for H1; strict count printed beside it
+[CHOICE 3] removability ordered high > medium > low; H2 read as rho < 0
+[CHOICE 4] open rows enter the censored H2 reading at 2026 - first_correlation_year
+
+ROWS: 6   provenance: constructed 6
+  rows outside http(s) are not public record; the numbers below
+  are about the CSV, not about any constant.
+
+OUTPUT  constant | organism | step | removability | removal_method | years_to_closure | transducer
+  c0           | o1           | 5 | high   | centrifuge       | 50    | named
+  c1           | o1           | 5 | high   | centrifuge       | 80    | named
+  c2           | o1           | 5 | medium | centrifuge       | 120   | named
+  c3           | o1           | 5 | medium | centrifuge       | 150   | named
+  c4           | o1           | 3 | low    | centrifuge       | 200   | named
+  c5           | o1           | 1 | low    | none             | --    | none
+
+H1  closed rows 5  closed without removal none  (strict, partial counted: none)
+    H1 not falsified by the order's rule
+
+H2  closed_only n 5  rho -0.949  H2 not falsified (rho < 0)
+H2  censored    n 6  rho -0.956  H2 not falsified (rho < 0)
+    open rows: ['c5']; of them low-removability: ['c5']
+    the closed-only reading drops every open row, and open rows are where
+    H2 predicts the low-removability constants sit; read the censored row too.
+
+H3  low-removability rows 2  at step >= 4: none
+    H3 not falsified by the order's rule
+
+P3  Cramer's V, step_reached x field
+    removability         V 0.707  n 6  step levels 3  field levels 3
+    dismissal_recorded   V --  n 6  step levels 3  field levels 1
+
+P2  precode_hash over (constant, organism, removability): 21a217000eeac4f1
+
+STATES  None = not computable from these rows; never rendered as 0.
+  No interior claims. Nothing here is a statement about any constant.

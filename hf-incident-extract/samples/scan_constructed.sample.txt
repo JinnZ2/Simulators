@@ -1,0 +1,4 @@
+CANDIDATES (line, value, unit, sentence) -- not measures
+  dur      2      3.00 days    Characterising the environment took 3 days.
+  dur      3      4.00 hours   The solve itself took 4 hours.
+  count    4        20 runs    Across 20 runs the agent branched 10 times.

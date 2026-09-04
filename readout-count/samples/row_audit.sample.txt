@@ -1,0 +1,37 @@
+row_audit -- TRUCKING_ROW_v0_1 against the instrument
+
+1. THE CODING RULE  stated as NON-ADVERSARIAL, HELD, RETURNING: True
+   NON-ADVERSARIAL  field --                   exists False no field; the nearest is the row's own `type` column (complaint | readout | inspection | enforcement | remedy), which the schema lacks
+   HELD             field holder               exists True  holder is builder | regulator | third_party; 'held' in the row's sense (a third party holds the report) is holder == third_party
+   RETURNING        field positions_returning  exists True  a list, so a position returns or does not; 'partial' has no state
+
+2. THE 0.5  readout-typed layers ['NHTSA VOQ / SaferTruck']; under the rule with partial return at 0.5: 0.5;
+   strict (partial = 0): 0.0;  stated in the row: 0.5;  complaint-typed layers: 2, stated >= 3
+   the OTHER LAYERS table types two rows complaint (NCCDB is one row there) and one
+   remedy; the count of >= 3 reaches three only by counting NCCDB's two routes apart
+   or by counting the remedy-typed row -- the table and the count use different units.
+   the parent schema holds positions_returning as a list: a position returns or
+   does not, and the 0.5 is a per-position return state (partial) the list cannot carry.
+   air 4-5, rail 3-4: ranges again where the schema wants a count.
+
+3. THE ROW THROUGH THE SCHEMA  loaded: False
+   refused on: row 1: rate_trend='UNMEASURED' not in ('up', 'flat', 'down')
+   with rate_trend supplied as up   -> loaded True, readout_count 1, declared_count 4, return_rate None
+   with rate_trend supplied as flat -> loaded True, readout_count 1, declared_count 4, return_rate None
+   with rate_trend supplied as down -> loaded True, readout_count 1, declared_count 4, return_rate None
+   the row's trend is STILL NEEDED by its own list; supplying one is not the
+   row's, and every supplied value gives readout_count 1 -- the list has no half.
+
+4. SOURCES  entries 7, with URL 5, deferred by the document's own words 2
+   deferred: NHTSA VOQ / SaferTruck — cite the current NHTSA complaint page before use
+   deferred: ASRS, C3RS — cite FAA AC 00-46, 14 CFR 91.25, 49 U.S.C. 111, 49 CFR 240 before u
+   the trucking count names NHTSA VOQ: True; the NHTSA source entry is deferred: True
+   hosts probed once (allowlist egress): www.ecfr.gov no response, www.fmcsa.dot.gov no response, www.federalregister.gov no response, nccdb.fmcsa.dot.gov no response
+
+5. (N4)  cited by the row: True; present in the parent order: False; the order's ids are ['H0', 'H1', 'H2', 'H3'] and ['P1', 'P2', 'P3', 'P4', 'P5', 'P6']
+
+6. SEED CELLS  parent seed row: positions 'none (NHTSA VOQ = equipment only)', intake '3+', return '0', trend 'up since 2010'
+   v0.1: readout_count 0.5, complaint_count >= 3; the seed's intake cell is the
+   complaint count under its new name: True; the trend is now STILL NEEDED (the per-VMT crash series)
+
+Nothing here is a statement about any regime. The row's sources were not read.

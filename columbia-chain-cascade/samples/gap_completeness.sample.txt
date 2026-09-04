@@ -1,0 +1,152 @@
+GAP COMPLETENESS -- what a researcher would still lack, per gap
+
+CENSUS (mechanical; a hit is a hit)
+  field                                     1  2  3  4  5  6  7  8  9 10 11 12 13 14 15
+  gap statement                          T  y  y  y  y  y  y  y  y  y  y  y  y  y  y  y
+  knowledge state                        T  y  y  y  y  y  y  y  y  y  y  y  y  y  y  y
+  research question                      T  y  y  y  y  y  y  y  y  y  y  y  y  y  y  y
+  disciplines                            T  y  y  y  y  y  y  y  y  y  y  y  y  y  y  y
+  data sources                           T  y  y  y  y  y  y  y  y  y  y  y  y  y  y  y
+  method                                 T  y  y  y  y  y  y  y  y  y  y  y  y  y  y  y
+  deliverable                            T  y  y  y  y  y  y  y  y  y  y  y  y  y  y  y
+  falsifier                              T  y  y  y  y  y  y  y  y  y  y  y  y  y  y  y
+  prior-art table (do not re-derive)     P  -  -  -  -  -  -  -  -  -  -  -  -  -  y  y
+  citation status / provenance flag      P  -  -  -  -  -  -  -  -  -  -  -  -  -  y  y
+  secondary falsifier                    P  -  -  -  -  -  -  -  -  -  -  -  -  -  y  y
+  uncertainty bounds asked for           P  y  -  -  -  -  -  -  -  -  -  -  -  -  y  -
+  known-answer / validation step         P  y  y  -  -  -  -  -  -  -  y  -  y  -  y  -
+  coupling to other gaps named           P  -  -  -  -  -  -  -  -  -  -  -  -  -  y  y
+  what-would-move-it per parameter       P  -  -  -  -  -  -  -  -  -  -  -  -  -  y  -
+  consent / consultation step            P  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+  deliverable schema (columns / fields)  P  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
+  T = template field, P = post-graduate essential
+
+CENSUS ON THE ASSEMBLED FILE (v1 + cards + addenda)
+  prior-art table (do not re-derive)     P  -  -  -  -  -  -  -  -  -  -  -  -  -  y  y
+  citation status / provenance flag      P  -  -  -  -  -  -  -  -  -  -  -  -  -  y  y
+  secondary falsifier                    P  -  -  -  -  -  -  -  -  -  -  -  -  -  y  y
+  uncertainty bounds asked for           P  y  -  -  -  -  -  -  -  -  -  -  -  -  y  -
+  known-answer / validation step         P  y  y  y  y  y  y  y  y  y  y  y  y  y  y  y
+  coupling to other gaps named           P  -  -  y  -  -  -  -  -  -  -  -  -  -  y  y
+  what-would-move-it per parameter       P  -  -  -  -  -  -  -  -  -  -  -  -  -  y  -
+  consent / consultation step            P  -  -  y  -  -  -  -  -  -  -  -  -  -  -  -
+  deliverable schema (columns / fields)  P  -  -  -  -  y  y  y  y  y  -  -  -  -  -  -
+  data-source bullets paired with a tier line: 76 of 76   GATED 18 OPEN 46 REQUESTABLE 9 UNKNOWN 3
+
+  template fields present in all 15:  True
+  essentials carried ONLY by gaps 14/15: 5 of 9
+    - prior-art table (do not re-derive)
+    - citation status / provenance flag
+    - secondary falsifier
+    - coupling to other gaps named
+    - what-would-move-it per parameter
+  essentials carried by NO gap: ['consent / consultation step', 'deliverable schema (columns / fields)']
+
+  The split is clean: the eight template fields are 15 of 15, and
+  the post-graduate essentials are what the two newest cards added
+  -- prior-art table, citation status, secondary falsifier,
+  cross-gap coupling. Gaps 1-13 carry none of those. So what a
+  researcher wants beyond the template is not a new list; it is the
+  shape the author's own later entries already take, and the
+  template grows by adopting those fields (the repo's growth rule:
+  add a declared field, never widen an existing one).
+
+DELIVERABLE CONSUMERS -- a name in the spec is not a drop-in
+  gap  1  contributing_inflow.py                         code: present
+  gap  2  module_f.py (BURN_SEVERITY_MAX etc.)           code: present
+  gap  3  eap_coverage.py (governance layer)             code: present
+  gap  4  eap_coverage node table                        code: present
+  gap  5  Module A                                       code: ABSENT
+  gap  6  Module B                                       code: ABSENT
+  gap  7  Module C                                       code: ABSENT
+  gap  8  Module D                                       code: ABSENT
+  gap  9  Module E                                       code: ABSENT
+  gap 10  validation report (no module)                  code: ABSENT
+  gap 11  exposure table (no module)                     code: ABSENT
+  gap 12  pipeline + manifest (no module)                code: ABSENT
+  gap 13  validation report (module_f is the arithmetic) code: present
+  gap 14  contributing_inflow interface                  code: present
+  gap 15  Module F initiator interface                   code: present
+  gaps whose consumer exists as code: 7 of 15
+  Gaps 5-9 deliver a CSV or YAML 'referenced by Module A-E', and
+  Modules A-E exist as section headers in the delivered spec, not as
+  code. No gap gives a column list. So the interface test the
+  cold-start pass scored clean on NAMING fails on DROP-IN for five
+  gaps: the deliverable is a filename, and there is nothing in the
+  package for it to plug into. The three gaps that name a module
+  which does exist (1, 2, 13-15 via module_f and
+  contributing_inflow) are the ones a stranger can actually wire.
+
+THE READING -- per gap, what is still missing, with a basis
+  gap  1  systematic only
+          has a known-answer step (validate against known storm events)
+          and an uncertainty requirement; lacks the prior-art anchor and
+          citation status every 1-13 entry lacks.
+  gap  2  systematic only
+          has a known-answer step (post-flood gage records) and names
+          the tool; the consumer parameters exist in module_f.py.
+  gap  3  consent step absent
+          the method reads 'request or locate' records from six
+          sovereign nations with no consultation or consent step; the
+          repo's own field-study discipline makes that a precondition,
+          not a courtesy. The route exists -- the deep-research doc's
+          JEB note -- and is not in the entry.
+  gap  4  systematic only
+          the consumer (the node table) exists; a tier on NID and a
+          route for the memoranda would close it.
+  gap  5  no code consumer; no schema
+          breach_params.csv is a filename: no column list, and Module A
+          exists as a spec name, not as code. A drop-in has nothing to
+          drop into.
+  gap  6  no code consumer; no schema; pre-closure
+          seismic_params.csv as above, plus the one bare 'if published'
+          in the file.
+  gap  7  no code consumer; no schema
+          hydro_params.csv as above.
+  gap  8  no code consumer; no schema
+          cyber_params.yaml as above; UNDEFINED is the right state, and
+          the deliverable is a definition, which is startable.
+  gap  9  no code consumer; no schema
+          compound_matrix.csv as above; the falsifier (all factors
+          exactly 1.0) is a point, so it wants a tolerance.
+  gap 10  gated on the model build
+          reproducing 1948 presupposes the HEC-RAS model exists; this is
+          the known answer for the whole spec, and it cannot start until
+          Gaps 5-9 and 12 have.
+  gap 11  gated on a hazard field
+          the overlay consumes velocity bands the engine produces;
+          startable on a published field.
+  gap 12  systematic only
+          the falsifier is its own known answer; the cleanest entry in
+          the file.
+  gap 13  gated on the model build; known answer is the deliverable name
+          'validation report' names the output, not a positive control;
+          module_f.py is the arithmetic it runs against.
+  gap 14  none beyond the tier axis
+          carries prior art, citation status, secondary falsifier,
+          coupling, uncertainty, what-would-move-it, and a validation
+          case; sources untiered.
+  gap 15  known-answer step absent
+          carries prior art, citation status, secondary falsifier and
+          coupling; the Fjaerland case is a measured analogue, not a
+          check the deliverable is run against.
+
+  One instrument note first: a bare 'consult' pattern fires on gap
+  3, where 'tribal consultation' is the quantity being mapped, not a
+  step taken -- the word-list miss this repo records elsewhere, so
+  the census asks for a step form and gap 3 reads absent. Three
+  findings are per-gap rather than template-level. Gap 3 (tribal
+  EAP) has no consent or consultation step for records requested
+  from six sovereign nations, while the repo's own field-study
+  entries make collective consent a precondition -- an omission at
+  the ethics layer, not the data layer, and the cheapest to close
+  since the route is already named in the deep-research doc. Gaps
+  5-9 have no code consumer and no schema. And the known-answer step
+  -- the repo's own rule that no metric ships without one -- is
+  present in gaps 1, 2, 10, 12 and 14, and absent from the ten
+  others, which hand a stranger a calibrated parameter with no
+  positive control to run it against.
+
+This module computes; it does not conclude. Findings are in
+AUDIT_NOTES.md as CCA_015..CCA_022. Nothing here is a hydraulic
+result; every line is a property of the delivered text.

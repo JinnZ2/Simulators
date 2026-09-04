@@ -1,0 +1,17 @@
+encoding_selection -- counts from the CSV, nothing else
+
+[CHOICE 1] W above chance = permutation null, 2000 draws, seed 0, p < 0.05
+[CHOICE 2] spread of a recovered-quantity set = mean pairwise Jaccard distance
+[CHOICE 3] H3 table class = ('F3', 'F5'); every format's rate printed
+[CHOICE 4] H3 'same rate' read as rate(F6) >= rate(table class)
+
+MATERIAL  M1 ratio as arithmetic: 4 days / 4 h = 24:1 (order states 24:1)
+  facts per item: M1 4, M2 4; an encoding carrying a fact not on the list is refused
+  ENCODINGS: none supplied. The seven encodings per item are the operator's
+  artifact and are not authored here.
+
+ROWS: none. No data ships with this instrument.
+  The origin reader (n=1, format author present) is excluded by the order's
+  own last limit and is not a row here.
+
+STATES  None = not computable from these rows; never rendered as 0. No interior claims.

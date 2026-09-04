@@ -1,0 +1,37 @@
+label_position_test -- counts from the CSV, nothing else
+
+[CHOICE 1] H2 chance = sum_a p_arb(a) * p_ben(a) within the label_source class
+[CHOICE 2] overlap rate reported strict (y) and half (y + 0.5 partial); neither picked
+[CHOICE 3] leak baseline = majority-class share of actor_class
+
+ROWS: 24   provenance: constructed 24
+  rows outside http(s) are not public record; the numbers below
+  are about the CSV, not about any case.
+
+OUTPUT  term | n | V_position | V_move | V_outcome | V_actor | overlap_rate | leak_rate
+  ALL                    |  24 | 1.000 | 0.000 | 0.000 | 0.333 | 1.000 | 0.000
+  cheat                  |  12 | -- | -- | -- | -- | 1.000 | 0.000
+  innovation             |  12 | -- | -- | -- | -- | 1.000 | 0.000
+  a V of -- on a term row is undefined, not zero: the valence does
+  not vary within that term, so there is nothing to cross-tabulate.
+
+CROSS-TABS (P4), pooled   V_position 1.000  V_move 0.000  V_outcome 0.000  V_actor 0.333
+  H1 not falsified by the order's rule
+
+OVERLAP (P5) per label_source class
+  label_source         | n | strict | half | chance | coded!=derived
+  press                | 24 | 1.000 | 1.000 | 1.000 | 0
+  press: H2 FALSE for this class (strict)
+
+LEAK TEST (P2)  n 24  distinct tuples 3 of 72 cells
+  in-sample 0.250   leave-one-out 0.000   baseline 0.250
+  in-sample is an upper bound; read leave-one-out against baseline.
+
+WITHIN-DOCUMENT CONTROL (seed case shape)
+  single-row URLs: 24 (carry no control pair)
+  no URL carries two rows; the control has nothing to run on.
+
+RELABEL (P3)  rows 2  labelers 2  pairwise 0.500  kappa -0.333
+
+STATES  None = not computable from these rows (undefined divisor or
+  empty denominator); never rendered as 0. No interior claims.

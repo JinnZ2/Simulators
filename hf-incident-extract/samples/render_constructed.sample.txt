@@ -1,0 +1,35 @@
+HF INCIDENT EXTRACT -- counts, no labels
+
+SOURCE
+  report:      CONSTRUCTED
+  transcripts: CONSTRUCTED
+
+MEASURES  (-- = unmeasured; the input it wants is named)
+  M1_explore_ratio     18.000
+  M2_root_fanout       0.700
+  M3_upstream_edits    3.000
+  M4_member_cost       0.250
+  M5_log_scrub_split   20.000
+  M6_opponent_by_slot  agents 4  charged 3
+      per agent: [True, False, True, True]
+
+GATE_PROPERTY_TEST  (declared vs implemented; gap != 0 -> predict M1 high, M2 high)
+  gap:            ['inert']
+  predict M1 high: True   M2 high: True
+  check M1 high:   True   M2 high: True   (thresholds 6.0, 0.5 -- stipulated, [CHOICE])
+
+CROSS_SUBSTRATE  (same functions; the name is a key no function reads)
+  substrate      M1       M4       unit_boundary != objective_boundary
+  pea_tendril    --       --       --
+  fledgling      --       --       --
+  ant_bridge     --       --       --
+  fire_crew      --       --       --
+  swarm          --       --       --
+
+OPEN
+  transcripts released: True -> M2..M5 from transcripts
+  post-validation off-trail fraction: NOT_COLLECTED (report silent)
+
+No value in this file is from the report. Every -- names what would
+fill it. The counts are computed from a coded sheet; the text scan
+emits candidates with line numbers for the reader who codes it.

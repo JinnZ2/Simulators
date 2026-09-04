@@ -1,0 +1,38 @@
+readout_count -- counts from the CSV, nothing else
+
+[CHOICE 1] a regime's OUTPUT row is its latest year
+[CHOICE 2] rate_trend ordered down > flat > up for ranking
+[CHOICE 3] H1 'rank matches' read as Spearman rho > 0; strict equality printed, not used
+[CHOICE 4] H2 high/low splits at the median across regimes
+
+POSITION  this file was built by a model from a model-drafted order;
+  by the order's first paragraph it is a row, not an exception.
+
+ROWS: 4   provenance: constructed 4
+  rows outside http(s) are not public record; the numbers below
+  are about the CSV, not about any regime.
+
+OUTPUT  regime | readout_count | declared_count | return_rate | external_detection_rate | rate_trend
+  r0            | 0 | 4 | 0.000 | 0.000 | up   (year 2020, rows 1)
+  r1            | 1 | 4 | 0.167 | 1.000 | flat   (year 2020, rows 1)
+  r2            | 2 | 4 | 0.286 | 0.000 | down   (year 2020, rows 1)
+  r3            | 3 | 4 | 0.375 | 1.000 | down   (year 2020, rows 1)
+
+H1  regimes 4  rho 0.949  strict rank equality False
+    H1 not falsified by the order's rule (rho > 0)
+    strict equality possible: only if readout_count takes <= 3 distinct values
+
+P4  Cramer's V, rate_trend x count (raw values as categories)
+    readout_count   V 1.000  n 4  levels 4
+    declared_count  V --  n 4  levels 1
+    intake_count    V 1.000  n 4  levels 4
+    a count with as many levels as rows gives V = 1 by construction.
+
+H2  declared-high / return-low arm: {'up': 1, 'flat': 1}   high-return arm: {'down': 2}
+    H2 not falsified by the order's rule
+
+H3  NOT_COMPUTABLE. Missing: a split of return_count by origin (internal vs external); the grading field the rule conditions on.
+    external_detection_rate over all rows: 0.500
+
+STATES  None = not computable from these rows (empty denominator or
+  constant side); never rendered as 0. No interior claims.

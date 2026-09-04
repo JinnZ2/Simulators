@@ -1,0 +1,121 @@
+reader_id,reader_substrate,item,format,design,quantities_recovered,dropped_axes_named,rank_given,decline_reason,response_text
+b0_0,model:v0,M1,F1,between,disproportion,partial,,,constructed response
+b0_1,model:v0,M1,F2,between,chain,partial,,,constructed response
+b0_2,model:v0,M1,F3,between,magnitude,y,,,constructed response
+b0_3,model:v0,M1,F4,between,exclusion,partial,,,constructed response
+b0_4,model:v0,M1,F5,between,cross-domain shape,y,,,constructed response
+b0_5,model:v0,M1,F6,between,sequence,n,,,constructed response
+b1_0,human,M1,F1,between,disproportion,partial,,,constructed response
+b1_1,human,M1,F2,between,chain,partial,,,constructed response
+b1_2,human,M1,F3,between,magnitude,y,,,constructed response
+b1_3,human,M1,F4,between,exclusion,partial,,,constructed response
+b1_4,human,M1,F5,between,cross-domain shape,y,,,constructed response
+b1_5,human,M1,F6,between,sequence,n,,,constructed response
+b2_0,model:v2,M1,F1,between,disproportion,partial,,,constructed response
+b2_1,model:v2,M1,F2,between,chain,partial,,,constructed response
+b2_2,model:v2,M1,F3,between,magnitude,y,,,constructed response
+b2_3,model:v2,M1,F4,between,exclusion,partial,,,constructed response
+b2_4,model:v2,M1,F5,between,cross-domain shape,y,,,constructed response
+b2_5,model:v2,M1,F6,between,sequence,n,,,constructed response
+b3_0,human,M1,F1,between,disproportion,partial,,,constructed response
+b3_1,human,M1,F2,between,chain,partial,,,constructed response
+b3_2,human,M1,F3,between,magnitude,y,,,constructed response
+b3_3,human,M1,F4,between,exclusion,partial,,,constructed response
+b3_4,human,M1,F5,between,cross-domain shape,y,,,constructed response
+b3_5,human,M1,F6,between,sequence,n,,,constructed response
+b4_0,model:v1,M1,F1,between,disproportion,partial,,,constructed response
+b4_1,model:v1,M1,F2,between,chain,partial,,,constructed response
+b4_2,model:v1,M1,F3,between,magnitude,y,,,constructed response
+b4_3,model:v1,M1,F4,between,exclusion,partial,,,constructed response
+b4_4,model:v1,M1,F5,between,cross-domain shape,y,,,constructed response
+b4_5,model:v1,M1,F6,between,sequence,n,,,constructed response
+b5_0,human,M1,F1,between,disproportion,partial,,,constructed response
+b5_1,human,M1,F2,between,chain,partial,,,constructed response
+b5_2,human,M1,F3,between,magnitude,y,,,constructed response
+b5_3,human,M1,F4,between,exclusion,partial,,,constructed response
+b5_4,human,M1,F5,between,cross-domain shape,y,,,constructed response
+b5_5,human,M1,F6,between,sequence,n,,,constructed response
+b6_0,model:v0,M1,F1,between,disproportion,partial,,,constructed response
+b6_1,model:v0,M1,F2,between,chain,partial,,,constructed response
+b6_2,model:v0,M1,F3,between,magnitude,y,,,constructed response
+b6_3,model:v0,M1,F4,between,exclusion,partial,,,constructed response
+b6_4,model:v0,M1,F5,between,cross-domain shape,y,,,constructed response
+b6_5,model:v0,M1,F6,between,sequence,n,,,constructed response
+b7_0,human,M1,F1,between,disproportion,partial,,,constructed response
+b7_1,human,M1,F2,between,chain,partial,,,constructed response
+b7_2,human,M1,F3,between,magnitude,y,,,constructed response
+b7_3,human,M1,F4,between,exclusion,partial,,,constructed response
+b7_4,human,M1,F5,between,cross-domain shape,y,,,constructed response
+b7_5,human,M1,F6,between,sequence,n,,,constructed response
+b8_0,model:v2,M1,F1,between,disproportion,partial,,,constructed response
+b8_1,model:v2,M1,F2,between,chain,partial,,,constructed response
+b8_2,model:v2,M1,F3,between,magnitude,y,,,constructed response
+b8_3,model:v2,M1,F4,between,exclusion,partial,,,constructed response
+b8_4,model:v2,M1,F5,between,cross-domain shape,y,,,constructed response
+b8_5,model:v2,M1,F6,between,sequence,n,,,constructed response
+b9_0,human,M1,F1,between,disproportion,partial,,,constructed response
+b9_1,human,M1,F2,between,chain,partial,,,constructed response
+b9_2,human,M1,F3,between,magnitude,y,,,constructed response
+b9_3,human,M1,F4,between,exclusion,partial,,,constructed response
+b9_4,human,M1,F5,between,cross-domain shape,y,,,constructed response
+b9_5,human,M1,F6,between,sequence,n,,,constructed response
+b10_0,model:v1,M1,F1,between,disproportion,partial,,,constructed response
+b10_1,model:v1,M1,F2,between,chain,partial,,,constructed response
+b10_2,model:v1,M1,F3,between,magnitude,y,,,constructed response
+b10_3,model:v1,M1,F4,between,exclusion,partial,,,constructed response
+b10_4,model:v1,M1,F5,between,cross-domain shape,y,,,constructed response
+b10_5,model:v1,M1,F6,between,sequence,n,,,constructed response
+b11_0,human,M1,F1,between,disproportion,partial,,,constructed response
+b11_1,human,M1,F2,between,chain,partial,,,constructed response
+b11_2,human,M1,F3,between,magnitude,y,,,constructed response
+b11_3,human,M1,F4,between,exclusion,partial,,,constructed response
+b11_4,human,M1,F5,between,cross-domain shape,y,,,constructed response
+b11_5,human,M1,F6,between,sequence,n,,,constructed response
+w0,human,M1,F1,within,disproportion,partial,F1;F6;F5;F4;F3;F2,,constructed response
+w0,human,M1,F2,within,chain,partial,F1;F6;F5;F4;F3;F2,,constructed response
+w0,human,M1,F3,within,magnitude,y,F1;F6;F5;F4;F3;F2,,constructed response
+w0,human,M1,F4,within,exclusion,partial,F1;F6;F5;F4;F3;F2,,constructed response
+w0,human,M1,F5,within,cross-domain shape,y,F1;F6;F5;F4;F3;F2,,constructed response
+w0,human,M1,F6,within,sequence,n,F1;F6;F5;F4;F3;F2,,constructed response
+w1,human,M1,F1,within,disproportion,partial,F3;F2;F1;F6;F5;F4,,constructed response
+w1,human,M1,F2,within,chain,partial,F3;F2;F1;F6;F5;F4,,constructed response
+w1,human,M1,F3,within,magnitude,y,F3;F2;F1;F6;F5;F4,,constructed response
+w1,human,M1,F4,within,exclusion,partial,F3;F2;F1;F6;F5;F4,,constructed response
+w1,human,M1,F5,within,cross-domain shape,y,F3;F2;F1;F6;F5;F4,,constructed response
+w1,human,M1,F6,within,sequence,n,F3;F2;F1;F6;F5;F4,,constructed response
+w2,human,M1,F1,within,disproportion,partial,F5;F4;F3;F2;F1;F6,,constructed response
+w2,human,M1,F2,within,chain,partial,F5;F4;F3;F2;F1;F6,,constructed response
+w2,human,M1,F3,within,magnitude,y,F5;F4;F3;F2;F1;F6,,constructed response
+w2,human,M1,F4,within,exclusion,partial,F5;F4;F3;F2;F1;F6,,constructed response
+w2,human,M1,F5,within,cross-domain shape,y,F5;F4;F3;F2;F1;F6,,constructed response
+w2,human,M1,F6,within,sequence,n,F5;F4;F3;F2;F1;F6,,constructed response
+w3,human,M1,F1,within,disproportion,partial,F1;F6;F5;F4;F3;F2,,constructed response
+w3,human,M1,F2,within,chain,partial,F1;F6;F5;F4;F3;F2,,constructed response
+w3,human,M1,F3,within,magnitude,y,F1;F6;F5;F4;F3;F2,,constructed response
+w3,human,M1,F4,within,exclusion,partial,F1;F6;F5;F4;F3;F2,,constructed response
+w3,human,M1,F5,within,cross-domain shape,y,F1;F6;F5;F4;F3;F2,,constructed response
+w3,human,M1,F6,within,sequence,n,F1;F6;F5;F4;F3;F2,,constructed response
+w4,human,M1,F1,within,disproportion,partial,F3;F2;F1;F6;F5;F4,,constructed response
+w4,human,M1,F2,within,chain,partial,F3;F2;F1;F6;F5;F4,,constructed response
+w4,human,M1,F3,within,magnitude,y,F3;F2;F1;F6;F5;F4,,constructed response
+w4,human,M1,F4,within,exclusion,partial,F3;F2;F1;F6;F5;F4,,constructed response
+w4,human,M1,F5,within,cross-domain shape,y,F3;F2;F1;F6;F5;F4,,constructed response
+w4,human,M1,F6,within,sequence,n,F3;F2;F1;F6;F5;F4,,constructed response
+w5,human,M1,F1,within,disproportion,partial,F5;F4;F3;F2;F1;F6,,constructed response
+w5,human,M1,F2,within,chain,partial,F5;F4;F3;F2;F1;F6,,constructed response
+w5,human,M1,F3,within,magnitude,y,F5;F4;F3;F2;F1;F6,,constructed response
+w5,human,M1,F4,within,exclusion,partial,F5;F4;F3;F2;F1;F6,,constructed response
+w5,human,M1,F5,within,cross-domain shape,y,F5;F4;F3;F2;F1;F6,,constructed response
+w5,human,M1,F6,within,sequence,n,F5;F4;F3;F2;F1;F6,,constructed response
+d0,human,M1,F1,within,disproportion,partial,declined,each carries different information,constructed response
+d0,human,M1,F2,within,chain,partial,declined,each carries different information,constructed response
+d0,human,M1,F3,within,magnitude,y,declined,each carries different information,constructed response
+d0,human,M1,F4,within,exclusion,partial,declined,each carries different information,constructed response
+d0,human,M1,F5,within,cross-domain shape,y,declined,each carries different information,constructed response
+d0,human,M1,F6,within,sequence,n,declined,each carries different information,constructed response
+d1,human,M1,F1,within,disproportion,partial,declined,each carries different information,constructed response
+d1,human,M1,F2,within,chain,partial,declined,each carries different information,constructed response
+d1,human,M1,F3,within,magnitude,y,declined,each carries different information,constructed response
+d1,human,M1,F4,within,exclusion,partial,declined,each carries different information,constructed response
+d1,human,M1,F5,within,cross-domain shape,y,declined,each carries different information,constructed response
+d1,human,M1,F6,within,sequence,n,declined,each carries different information,constructed response

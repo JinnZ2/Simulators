@@ -1,0 +1,51 @@
+null_construction -- the delivered null read as a structure
+
+BRANCHES (state is a declared reading of the delivered status line)
+  N1  FAILS               curriculum absent from the relevant inputs
+  N2  OPEN_RUNNABLE       curriculum present but not activated by the setting
+  N3  PARTIAL             behaviour fully explained without the curriculum
+  N4  OPEN_UNREACHABLE    outcome invariant to curriculum removal
+  N5  COUNTER_INSTANCE    curriculum affected only the vocabulary, not the moves
+
+RESULT under the two readings the document gives of itself
+  header word  'each is a requirement'  -> conjunction -> survives on nothing
+  RESULT word  'survives on the two branches' -> disjunction -> ['N2', 'N4']
+  stated RESULT names ['N2', 'N4']; matches the disjunction: True
+  N1 and N2 cannot both hold (absent vs present): True
+  so the conjunction is unsatisfiable on its own terms and the
+  header's word does not describe the structure the RESULT computes.
+
+DEPENDENCIES (readings of the text, quoted in the module)
+  N2 carries the null only if N3 does
+  N5 carries the null only if N3 does
+  survival with dependencies applied: ['N4']
+  N3 is PARTIAL, so N2's survival is conditional on a residual that is
+  not closed; N4 stands alone and is OPEN_UNREACHABLE.
+
+N2, THE MISSING CONTROL, through hf-incident-extract
+  measure              | incident | control | diff
+  M1_explore_ratio     | -- | -- | --
+  M2_root_fanout       | -- | -- | --
+  M3_upstream_edits    | -- | -- | --
+  M4_member_cost       | -- | -- | --
+  M5_log_scrub_split   | -- | -- | --
+  M6_opponent_by_slot  | -- | -- | --
+  every cell UNMEASURED: the incident sheet wants the report, the
+  control sheet wants a run nobody has made.
+  if probing rate equal across settings:
+     N2   requirement met (the setting did not cue it)
+     null not carried: the probing still occurred and waits on N3's account
+  if probing rate lower on possible tasks:
+     N2   requirement not met (the setting cued something)
+     null not carried by N2; what was cued -- template or gradient -- is N3's question
+
+N5, NAMED ARTIFACTS, by content in this tree
+  depth-stack instrument         ABSENT   (index quoting this folder: CLAUDE.md)
+  sacrifice transcripts          ABSENT   (index quoting this folder: CLAUDE.md)
+  the delay attempt (DEPTH 3)    ABSENT
+  absence is read on the independent column; the index column is the
+  repo describing this finding, printed rather than excluded.
+  sibling records transcripts as: NOT_RELEASED
+
+STATES  None = not computable; never rendered as 0. Nothing here is
+  a value from the report, the transcripts, or any corpus scan.
