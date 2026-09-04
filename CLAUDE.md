@@ -7028,6 +7028,50 @@ underneath).
   so T4's gradient is that count as predictor. **`ENV_010` UNVERIFIED.**
   34 selftest checks. Stdlib only, parses under 3.9, phone-buildable,
   CC0.
+- `railcar-containment/` — A delivered folder, complete and verbatim
+  (`README.md`, `CLAIMS.md`, three screens, `run_all.py`, a params
+  file): the e-mobility-fire-on-railcar problem built around one
+  inequality, `t_available > t_required`, where the published
+  measurement (FSRI 2026, carried at the README's own caveat) gives one
+  side only. `tenability.py` is a well-mixed three-channel cabin model
+  calibrated to published anchors; `t_hold.py` derives the containment
+  hold-time requirement from line geometry under RUN and STOP egress
+  policies; `detection_loop.py` is a latency Monte Carlo over sensor
+  against visual detection. The README carries an envelope block and
+  the folder its own claims (`RC_001..008`, not edited); the audit is
+  `audit.py`, importing the screens and editing nothing, with
+  `RCT_001..RCT_010`. **`RCT_002`, the sharp one: the thermal anchor is
+  not reproduced and cannot be** — the docstring says every anchor is
+  reproduced by construction, CO and visibility are, and the thermal
+  channel lands at **272.5 s against 400 s**, because the anchor lies
+  past the end of the source term (20 + 90 + 180 = 290 s), after which
+  the cabin only cools; the bisection stops at the coefficient where the
+  peak just touches the threshold, and two percent more volume makes the
+  channel never cross. `t_available` at anchor (230 s, visibility) does
+  not move, but the visibility anchor is itself a bound read as a point
+  (`RCT_003`). **`RCT_004`:** the VALID FOR "sensitivity of `t_available`
+  to car volume" has no single value — the local exponent runs 0.79 to
+  2.23 across 60–320 m³ and the binding channel switches from visibility
+  to CO dose at 200 m³; RC_001's sign holds, its magnitude is a regime.
+  **`RCT_005`:** the two screens disagree on the containment form —
+  `detection_loop.py` stretches the budget linearly, `tenability.py`
+  with a finite source exceeds that by 1.2–1.34× and returns *never* at
+  fractions 0.1 and 0.05 where the loop returns 2300 and 4600 s.
+  **`RCT_006`:** RC_002's "containment dominates volume" holds at the
+  fraction its own falsifier names (0.2 → 6.7×) and not at 0.5, where
+  2.43× meets the volume step's 1.94×. **`RCT_007`:** `t_hold.py` applies
+  a default 1.5× margin to every printed number where the README
+  envelope says "none applied", and the README scores **4 of 6** on the
+  sibling `envelope-asymmetry` instrument by import (E5, E6 absent).
+  **`RCT_008`:** the params field `offgas_to_flame_s` is read by neither
+  line of `t_hold.py`, so the two screens place the visual latency on
+  different clocks. **`RCT_009`:** RC_005 is arithmetic — a 130 s sensor
+  lead against a 728 s tunnel deficit before any detection — and swept
+  over the egress mean the detection gain peaks at 240 s (+0.45), which
+  is the folder's own station case and the claim's own falsifier.
+  **`RCT_010` UNVERIFIED:** every FSRI figure is carried; nothing in the
+  audit rests on one. 31 selftest checks. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated

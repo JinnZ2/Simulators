@@ -1,0 +1,32 @@
+railcar-containment audit
+delivered files present: True
+  tenability.py      imports ['argparse', 'json'] non_stdlib [] unused [] lines 177
+  t_hold.py          imports ['argparse', 'json', 'math'] non_stdlib [] unused ['math'] lines 116
+  detection_loop.py  imports ['argparse', 'json', 'random', 'statistics'] non_stdlib [] unused [] lines 173
+  run_all.py         imports ['os', 'subprocess', 'sys'] non_stdlib [] unused [] lines 45
+anchor: channels {'co': 322.0, 'temp': 272.5, 'od': 230.0}, t_available 230.0, binding od, inside window True, anchor residuals {'co': 0.0, 'temp': -127.5, 'od': 0.0}
+volume scaling: exponent range per channel {'co': (0.53, 0.86), 'temp': (0.9, 2.09), 'od': (0.9, 1.63), 'min': (0.79, 2.23)}; monotone True; subway/intercity 0.515; binding by volume {60: 'od', 80: 'od', 100: 'od', 120: 'od', 160: 'od', 200: 'co', 240: 'co', 320: 'co'}
+containment form at 160 m3 (base 230.0 s, source ends at 290 s):
+  f 1.00  tenability 230.0     linear stretch    230.0  ratio 1.00
+  f 0.80  tenability 378.5     linear stretch    287.5  ratio 1.32
+  f 0.60  tenability 476.5     linear stretch    383.3  ratio 1.24
+  f 0.50  tenability 559.0     linear stretch    460.0  ratio 1.22
+  f 0.40  tenability 690.5     linear stretch    575.0  ratio 1.20
+  f 0.30  tenability 933.0     linear stretch    766.7  ratio 1.22
+  f 0.25  tenability 1153.5    linear stretch    920.0  ratio 1.25
+  f 0.20  tenability 1545.5    linear stretch   1150.0  ratio 1.34
+  f 0.10  tenability never     linear stretch   2300.0  ratio undefined
+  f 0.05  tenability never     linear stretch   4600.0  ratio undefined
+never crossed at fractions [0.1, 0.05]
+RC_002 arithmetic: {'volume_ratio_100_over_160': 0.5152173913043478, 'containment_ratio_half': 2.4304347826086956, 'containment_at_0_2': 1545.5}
+t_hold (no margin): {'metro_short_spacing': {'sensor_run': 203.0, 'sensor_stop': 673.0, 'visual_run': 308.0, 'visual_stop': 778.0}, 'metro_long_tunnel': {'sensor_run': 373.9, 'sensor_stop': 1577.0, 'visual_run': 478.9, 'visual_stop': 1682.0}, 'intercity_surface': {'sensor_run': 418.0, 'sensor_stop': 247.5, 'visual_run': 523.0, 'visual_stop': 352.5}}
+t_hold reads offgas_to_flame_s: False; default margin 1.5; clear share of visual/STOP {'metro_short_spacing': 0.77, 'metro_long_tunnel': 0.89, 'intercity_surface': 0.43}
+detection gain against egress mean (P(clear), 4000 trials):
+  egress  120 s  visual 0.704  sensor 0.992  contained 0.2 1.000  detection gain +0.288  containment gain +0.296
+  egress  240 s  visual 0.273  sensor 0.722  contained 0.2 1.000  detection gain +0.449  containment gain +0.727
+  egress  360 s  visual 0.105  sensor 0.357  contained 0.2 1.000  detection gain +0.253  containment gain +0.895
+  egress  480 s  visual 0.050  sensor 0.182  contained 0.2 0.999  detection gain +0.133  containment gain +0.949
+  egress  600 s  visual 0.030  sensor 0.107  contained 0.2 0.992  detection gain +0.077  containment gain +0.962
+  egress  900 s  visual 0.013  sensor 0.043  contained 0.2 0.900  detection gain +0.030  containment gain +0.887
+shift arithmetic: {'mean_lead_s': 130.0, 'tunnel_egress_mean_s': 900.0, 'budget_mean_s': 322.0, 'tunnel_deficit_before_detection_s': 728.0}
+README envelope scored with envelope-asymmetry: E1..E6 = [1, 1, 1, 1, 0, 0], score 4, valid True; margin 'none applied' in README True, t_hold default margin 1.5

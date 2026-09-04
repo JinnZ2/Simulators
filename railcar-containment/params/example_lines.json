@@ -1,0 +1,51 @@
+{
+  "_note": "ILLUSTRATIVE ONLY. Not real line data. Replace before any use. Distances in metres, times in seconds.",
+  "_schema": {
+    "max_run_to_egress_m": "worst-case distance from any point to the next station or tunnel portal",
+    "line_speed_mps": "service speed used to close that distance",
+    "decel_mps2": "service braking rate if a stop is required",
+    "door_release_s": "from stop to doors open and usable",
+    "platform_clear_s": "to move car occupants clear of the car onto platform",
+    "tunnel_walkout_s": "to move car occupants along the walkway to a cross-passage or portal, if stopped in tunnel",
+    "underground": "true if the worst case is a tunnel stop"
+  },
+  "lines": [
+    {
+      "name": "metro_short_spacing",
+      "max_run_to_egress_m": 900,
+      "line_speed_mps": 18.0,
+      "decel_mps2": 1.0,
+      "door_release_s": 10,
+      "platform_clear_s": 90,
+      "tunnel_walkout_s": 600,
+      "underground": true
+    },
+    {
+      "name": "metro_long_tunnel",
+      "max_run_to_egress_m": 4200,
+      "line_speed_mps": 22.0,
+      "decel_mps2": 1.0,
+      "door_release_s": 10,
+      "platform_clear_s": 120,
+      "tunnel_walkout_s": 1500,
+      "underground": true
+    },
+    {
+      "name": "intercity_surface",
+      "max_run_to_egress_m": 6000,
+      "line_speed_mps": 30.0,
+      "decel_mps2": 0.8,
+      "door_release_s": 15,
+      "platform_clear_s": 150,
+      "tunnel_walkout_s": 0,
+      "underground": false
+    }
+  ],
+  "latencies": {
+    "_note": "detection and decision, applied to all lines",
+    "offgas_to_flame_s": 20,
+    "sensor_detect_s": 15,
+    "visual_detect_s": 120,
+    "crew_decide_s": 30
+  }
+}

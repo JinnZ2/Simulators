@@ -1,0 +1,82 @@
+
+======================================================================
+TENABILITY
+======================================================================
+calibrated to published anchors, intercity volume, uncontained:
+  visibility 3:50 | CO dose 5:22 | thermal 6:40
+  published tenability window 3:37 - 7:08
+
+t_available (mm:ss), cabin volume x fraction of vent gas reaching cabin
+                       100%      50%      20%       5%       1%
+intercity 160 m3       3:50     9:19    25:45    never    never
+subway 100 m3          1:58     6:18    14:29    never    never
+
+volume effect, uncontained: subway t_available is 52% of intercity
+published findings are therefore a FLOOR for subway application.
+
+containment effect, subway: 1:58 at 100% -> never at 5%
+the fire still happens. it is not in the air people are breathing.
+
+======================================================================
+REQUIRED HOLD TIME
+======================================================================
+REQUIRED CONTAINMENT HOLD TIME, by line and egress policy
+margin multiplier applied: 1.50x
+
+line                     sensor/RUN  sensor/STOP   visual/RUN  visual/STOP
+--------------------------------------------------------------------------
+metro_short_spacing            5:04        16:49         7:42        19:27
+metro_long_tunnel              9:20        39:25        11:58        42:03
+intercity_surface             10:27         6:11        13:04         8:48
+
+breakdown, worst case on each line (visual detection, STOP policy):
+  metro_short_spacing    detect 120s + decide 30s + move 18.0s + door 10s + clear 600s
+  metro_long_tunnel      detect 120s + decide 30s + move 22.0s + door 10s + clear 1500s
+  intercity_surface      detect 120s + decide 30s + move 37.5s + door 15s + clear 150s
+
+READING
+  the spread between sensor/RUN and visual/STOP is the design space.
+  detection latency and egress policy move the requirement more than
+  any property of the device does. neither is a device restriction.
+
+======================================================================
+DETECTION LOOP
+======================================================================
+
+=== STATION EGRESS ===   P(occupants clear), 8000 trials
+detection       cabin gas     P(clear)  median margin     p05 margin
+--------------------------------------------------------------------
+sensor               100%       0.718            64s          -112s
+sensor                50%       0.997           385s           150s
+sensor                20%       1.000          1353s           878s
+visual               100%       0.266           -74s          -270s
+visual                50%       0.951           248s             1s
+visual                20%       1.000          1212s           734s
+  detection alone:   0.266 -> 0.718
+  containment alone: 0.266 -> 1.000
+  both:              0.266 -> 1.000
+
+=== TUNNEL WALKOUT ===   P(occupants clear), 8000 trials
+detection       cabin gas     P(clear)  median margin     p05 margin
+--------------------------------------------------------------------
+sensor               100%       0.007          -598s         -1007s
+sensor                50%       0.151          -277s          -715s
+sensor                20%       0.972           690s            91s
+visual               100%       0.002          -733s         -1141s
+visual                50%       0.060          -412s          -846s
+visual                20%       0.937           558s           -40s
+  detection alone:   0.002 -> 0.007
+  containment alone: 0.002 -> 0.937
+  both:              0.002 -> 0.972
+
+READING
+  visual detection is measured from FLAMING because that is when
+  cabin smoke appears. devices smoked only seconds before igniting,
+  so the visual arm inherits that lateness by construction.
+  below ~20% cabin gas the model saturates at P=1; that is a model
+  limit, not a safety claim. do not read it as a design margin.
+
+======================================================================
+envelope of these outputs is stated in README.md. they are
+configuration comparisons, not predictions. see CLAIMS.md for
+what would falsify each result.
