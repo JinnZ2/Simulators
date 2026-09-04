@@ -6891,6 +6891,72 @@ underneath).
   statement about the atmosphere. Check count printed by
   `selftest_fb.py`; the audit refuses `--selftest`. Stdlib only, parses
   under 3.9, CC0.
+- `cooperative-substrate/` — A work order delivered verbatim and built to
+  it: four checks, each one stdlib file under 300 lines, independently
+  runnable, no network at runtime, with the order's framing claim and
+  one-scale-up note carried verbatim in the README as it asks. **P1**
+  extracts dependency records from methods sections by a pattern set
+  held in one dict, `verified_in_argument` false unless the same
+  sentence carries a verification verb, the ratio `undefined` at zero
+  argued; **P2** is a contract ledger over every call site read with
+  `ast` and `dis` — one function-call record per site, a second layer
+  where the callee is an allocator, a numeric routine or a transport
+  module, one compile-layer record per code object — printing
+  `unverified_contracts / total_callsites` and the counter-list; **P3**
+  profiles one term per source (window ±8), takes the mean pairwise
+  cosine and builds the sense-shuffled null in the same script; **P4**
+  is the step-contest chain as a reflecting random walk with its exact
+  position distribution computed beside the simulation on every row.
+  No published methods section is reachable and none is invented; the
+  fixtures are constructed and say so in their first line. **`CSP_006`,
+  the finding: P3's reading is a property of the TERM, not the corpus.**
+  On the same sixteen files of `uninstrumented/cases/`, `mechanism` and
+  `confidence` clear the null by 9.6 and 12.8 sd while `instrument` and
+  `claim` sit on it (0.0 and 0.5); on the whole tree with this folder
+  and the two root index files left out, the order's own example
+  `mass` clears by 6.3 sd over 20 sources (`CSP_013`: with the index in,
+  the number moved 9.9 → 8.5 between two runs in which only the index
+  paragraph describing this result changed — `UNI_010`'s loop through
+  the index, both readings printed and the independent one quoted)
+  — the terms that clear are used in a fixed schema slot,
+  the ones that do not are used in free prose, and `instrument` is the
+  word this tree uses in the most senses. **`CSP_007`: the order's third
+  row and its falsifier land on one cell** — a constructed corpus using
+  `mass` in four disjoint vocabularies reads 0.0000 against a null of
+  0.0000 with the gap undefined, so "not a corpus; noise" reads as
+  *indistinguishable from the null*, the falsifier's own condition, and
+  comprehensibility has to be established outside the profile (the
+  same-sense corpus reads 1.0 against 0.87, so the instrument is not
+  `CONSTANT_SILENT`). **`CSP_008`:** that corpus caught a leak in the
+  null — the stand-in's profile carried the original term, shared by
+  every source, lifting the null to 0.098 on a corpus where both sides
+  are 0 by construction; repaired with an `exclude`, real-corpus nulls
+  moved under 0.003, recorded because the leak ran toward making the
+  falsifier fire. **`CSP_003`:** P1's pattern set over five in-tree
+  documents that are not methods sections emits 8 records, 0 argued,
+  and **0 of 8 are dependencies by hand reading** (`Aug 2026` as a prior
+  result, `closure` as a supplied material) — precision fails on prose
+  outside the register, so a `--report` cannot be read without the
+  records beside it. **`CSP_004`:** P2's verified proxy reads a call
+  inside try/except as verified while a try/except catches a raised
+  failure and verifies no returned type, so the unverified count is a
+  floor; 0 of 4 shipped checks verify every contract, and the order's
+  ratio exceeds 1 on every file because layers stack (`CSP_005`, with
+  the ast and bytecode call counts disagreeing on every file over
+  comprehensions, printed beside each other). **`CSP_009`/`CSP_010`:**
+  P4 confirms its own construction — exact termination non-increasing
+  in `p_contest`, exactly N steps at 0, N² = 2500 unbounded at 0.5,
+  6790× growth between 0.55 and 0.60, every simulated row within 1.5
+  binomial se of exact — and "falls to zero" is relative to the budget
+  (N = 10, p = 0.6: 0.125 at 10N, 1.000 at 2000N), while "no answer, not
+  a degraded one" is what a one-integer state can express rather than
+  a result. **`CSP_011` UNVERIFIED:** the multi-agent note is carried
+  and checked against nothing, and the framing claim's share has no
+  instrument among the four parts. One declared `no_severity` exemption
+  (`corrupt`, inside the order's contract text); a moral-token list
+  fires once on `kind` in the type sense, recorded rather than renamed.
+  Thirteen `CSP_*` claims; 61 selftest checks. Stdlib only, parses under 3.9, phone-buildable,
+  CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated

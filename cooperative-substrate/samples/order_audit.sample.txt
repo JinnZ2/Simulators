@@ -1,0 +1,36 @@
+cooperative-substrate order audit
+constraints:
+  p1_deps_extract.py     lines 192 under_300 True non_stdlib [] network [] parses_3.9 True
+  p2_substrate_audit.py  lines 235 under_300 True non_stdlib [] network [] parses_3.9 True
+  p3_comprehension.py    lines 226 under_300 True non_stdlib [] network [] parses_3.9 True
+  p4_goal_coherence.py   lines 176 under_300 True non_stdlib [] network [] parses_3.9 True
+  run_all.py             lines  69 under_300 True non_stdlib [] network [] parses_3.9 True
+P1 fixture: a 7 records {'material_supplied': 1, 'instrument': 1, 'calibration_chain': 1, 'method_inherited': 1, 'prior_result': 2, 'infrastructure': 1} argued 1; b 0 records; ratio(all) 7.0 ratio(b only) None
+P1 in-tree (energy): 8 records, 0 argued, ratio None
+    instrument         correct matter–radiation balance                   Coupled_Quintessence_Geometry_Report.md
+    prior_result       the stale doc                                      FINDINGS.md
+    prior_result       an A4 value 1                                      PROVENANCE.md
+    material_supplied  closure                                            PROVENANCE.md
+    calibration_chain  tomographic-verdict rank-3 jump from ~0            PROVENANCE.md
+    calibration_chain  tomographic-verdict rank-3 jump ~0                 PROVENANCE.md
+    prior_result       Aug 2026                                           README.md
+    instrument         nalytic substitutions | `COORDINATE_GAUGE          README.md
+P2 shipped:
+  p1_deps_extract.py     sites  63 records  98 unverified  95 verified  3 ratio 1.508 ast 63 bytecode 68
+  p2_substrate_audit.py  sites 106 records 152 unverified 148 verified  4 ratio 1.396 ast 106 bytecode 116
+  p3_comprehension.py    sites 124 records 183 unverified 181 verified  2 ratio 1.460 ast 124 bytecode 135
+  p4_goal_coherence.py   sites  64 records  96 unverified  95 verified  1 ratio 1.484 ast 64 bytecode 68
+P2 proxy on constructed sources: {'try_only': {'sites': 1, 'verified': 1, 'bytecode_calls': 1}, 'checked': {'sites': 2, 'verified': 1, 'bytecode_calls': 2}, 'bare': {'sites': 1, 'verified': 0, 'bytecode_calls': 1}, 'comprehension': {'sites': 0, 'verified': 0, 'bytecode_calls': 1}}
+P3 on uninstrumented/cases (min_count 2, window 8, 100 reps):
+  instrument   sources 10 pairs  45 observed 0.0358 null 0.0354 sd 0.0109 gap   0.0 sd  frac>= 0.48
+  claim        sources  9 pairs  36 observed 0.0350 null 0.0299 sd 0.0095 gap   0.5 sd  frac>= 0.26
+  mechanism    sources 12 pairs  66 observed 0.1132 null 0.0364 sd 0.0080 gap   9.6 sd  frac>= 0.00
+  confidence   sources  8 pairs  28 observed 0.1581 null 0.0271 sd 0.0102 gap  12.8 sd  frac>= 0.00
+P3 whole tree all         (923 docs) term 'mass' min_count 3: sources 22 pairs 231 observed 0.0802 null 0.0404 sd 0.0054 gap 7.3 sd
+P3 whole tree independent (910 docs) term 'mass' min_count 3: sources 20 pairs 190 observed 0.0796 null 0.0420 sd 0.0060 gap 6.3 sd
+P3 constructed same_sense     observed 1.0000 null 0.8677 sd 0.0229 gap 5.8
+P3 constructed disjoint_sense observed 0.0000 null 0.0000 sd 0.0000 gap undefined
+P4 known answers: p=0 steps 50.0 rate 1.000; p=1 rate 0.000; largest |sim-exact| 1.49 se; monotone True; exact 0.5 0.051 0.55 1.50e-04; unbounded E at 0.5 2500; growth 0.55->0.60 6790x
+P4 budget-relative: N=10 p=0.60 rate at 10N 0.125, at 2000N 1.000 (E unbounded 630)
+framing scan (comments and strings): {'p1_deps_extract.py': {'severity_hits': [], 'moral_hits': []}, 'p2_substrate_audit.py': {'severity_hits': ['corrupt'], 'moral_hits': []}, 'p3_comprehension.py': {'severity_hits': [], 'moral_hits': ['kind']}, 'p4_goal_coherence.py': {'severity_hits': [], 'moral_hits': []}, 'run_all.py': {'severity_hits': [], 'moral_hits': []}}
+README: {'framing_verbatim': True, 'note_verbatim': True, 'falsification_rows': 4, 'author_or_provenance_heading': False}

@@ -1,0 +1,7 @@
+{"class": "material_supplied", "dependency": "university stockroom", "result_id": "constructed_result_a", "source_ref": "constructed_result_a.txt", "source_span": [171, 191], "verified_in_argument": false}
+{"class": "instrument", "dependency": "platinum resistance thermometer", "result_id": "constructed_result_a", "source_ref": "constructed_result_a.txt", "source_span": [228, 259], "verified_in_argument": false}
+{"class": "calibration_chain", "dependency": "triple-point cell", "result_id": "constructed_result_a", "source_ref": "constructed_result_a.txt", "source_span": [282, 299], "verified_in_argument": false}
+{"class": "method_inherited", "dependency": "the procedure of Smith and Jones", "result_id": "constructed_result_a", "source_ref": "constructed_result_a.txt", "source_span": [336, 368], "verified_in_argument": true}
+{"class": "prior_result", "dependency": "the results of Doe et al", "result_id": "constructed_result_a", "source_ref": "constructed_result_a.txt", "source_span": [451, 475], "verified_in_argument": false}
+{"class": "prior_result", "dependency": "Doe et al., 2019", "result_id": "constructed_result_a", "source_ref": "constructed_result_a.txt", "source_span": [478, 494], "verified_in_argument": false}
+{"class": "infrastructure", "dependency": "departmental cluster", "result_id": "constructed_result_a", "source_ref": "constructed_result_a.txt", "source_span": [520, 540], "verified_in_argument": false}

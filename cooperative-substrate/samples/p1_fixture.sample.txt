@@ -1,0 +1,13 @@
+P1 dependency records
+files read: 2
+  instrument              1
+  calibration_chain       1
+  method_inherited        1
+  material_supplied       1
+  prior_result            2
+  infrastructure          1
+dependencies required : 7
+dependencies argued   : 1
+verified_in_argument = False : 6
+required / argued     : 7.00
+every count is a floor set by the pattern set [CHOICE 1]

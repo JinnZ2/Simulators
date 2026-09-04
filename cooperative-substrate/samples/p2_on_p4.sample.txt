@@ -1,0 +1,13 @@
+P2 substrate audit: p4_goal_coherence.py (python 3.11)
+call sites (ast) 64   bytecode CALL* 68   agree: False
+  function_call  records   64  unverified   63   callee returns declared type, does not corrupt caller state
+  allocation     records   13  unverified   13   allocator returns usable memory; failure to cooperate = process death
+  numeric        records    5  unverified    5   IEEE-754 guarantees held by hardware
+  transport      records    1  unverified    1   protocol peers implement the same spec
+  compile        records   13  unverified   13   emitted instructions mean what the ISA says
+unverified_contracts / total_callsites = 95 / 64 = 1.484
+verified_at_callsite is a syntactic proxy [CHOICE 2]; the unverified count is a floor
+adversarially NAMED, not adversarial:
+  adversarial training   -> gradient signal, not a contest
+  attention              -> weighted composition
+  backpropagation        -> requires every layer to faithfully pass what it computed
