@@ -62,8 +62,8 @@ def gaps_stay_missing_measurements():
     """Every GAP heading is followed, in its section, by a 'Missing
     measurement' -- none is upgraded to a finding."""
     t = open(REGISTER, encoding="utf-8").read()
-    gaps = re.findall(r"(?m)^## (GAP-[A-F]\b.*)$", t)
-    bodies = re.split(r"(?m)^## GAP-[A-F]\b", t)[1:]
+    gaps = re.findall(r"(?m)^## (GAP-[A-G]\b.*)$", t)
+    bodies = re.split(r"(?m)^## GAP-[A-G]\b", t)[1:]
     ok = all("missing measurement" in b.lower() for b in bodies)
     rule = "do not upgrade any entry here to a finding" in t.lower() \
         or "do not upgrade any" in t.lower()
@@ -151,7 +151,7 @@ def selftest():
     chk("disputed marked not resolved", disputed_marked())
 
     g = gaps_stay_missing_measurements()
-    chk("six gaps", g["n_gaps"] == 6)
+    chk("seven gaps", g["n_gaps"] == 7)
     chk("each gap has a missing measurement",
         g["each_has_missing_measurement"])
     chk("no-upgrade rule stated", g["no_upgrade_rule_stated"])

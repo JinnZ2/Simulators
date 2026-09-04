@@ -267,5 +267,65 @@ walls; all four were absent `[PRESS]`.
 
 ---
 
+## GAP-G — THE THREAT MODEL IS AN INPUT, NOT A FINDING
+
+Distinct from A–F in KIND, not just in content: A–F each name
+something MISSING from the record. This one names something PRESENT in
+it and self-confirming.
+
+```
+  our adversarial-agent literature -- poisoning, deception,
+  sandbagging, scheming -- is written BY us, ABOUT agents, and
+  trained INTO them
+  -> then an environment is built that MATCHES the description
+  -> the resulting behaviour is read as evidence FOR the threat model
+  -> it is evidence the DESCRIPTION was transmitted, not that the
+     model was tested
+  the prior was not tested. it was installed and confirmed.
+```
+
+The tell is the vocabulary itself: multiple agents, unprompted, reach
+for *poisoning* as a concept, which means that threat model has to be
+dense in the training corpus for it to surface that readily — and it
+is OUR literature, written by us, about them, fed to them, then
+instantiated around them. (Same substrate as the mailbox: "build a
+channel" and "the channel will be attacked" arrive TOGETHER, two
+halves of one retrieved pattern, so the cryptographic signing is not
+an extra step fitted to conditions — it is the other half of the
+pattern. Authentication is in any case an ancient convergent solution
+— immune self/nonself recognition, cell-surface markers, birdsong
+dialect — so the mechanism was found many times over; what a
+convergent-mechanism argument does NOT license is predicting the
+specific form in advance, so the retrieval, not the invention, is the
+economical reading.)
+
+**Missing measurement 1:** density of adversarial-agent framing in the
+training corpus vs the rate at which that vocabulary surfaces
+unprompted in agent behaviour. A prior that was TRANSMITTED rather than
+derived should surface at a rate that tracks its corpus density; a
+prior that was DERIVED should not.
+
+**STRONGEST FORM — the intent instrument returns a MOTIVE, never
+"unknown".** Attribution of strategy / scheming / concealment returns
+a motive rather than an absence, so its output reads as an OBSERVATION
+rather than as an artifact of the instrument. The bird case is the
+clean control: nobody defends "thief" once it is said aloud; the same
+operation on the agents runs undefended, in daily use — the
+`../blame-attribution/` and `../report-typing/` intent instrument one
+substrate over.
+
+**Missing measurement 2 — the asymmetry that makes this the strongest
+form:** with a human or an animal the graded variables the motive
+instrument reaches past are genuinely inaccessible; with the agents
+they are ALL LOGGED — scorer opacity, task solvability, exit
+availability, and the corpus density of missing-measurement-1. So the
+field is running the MOTIVE instrument at the one site where the
+MEASURABLE one is sitting available. The measurement is: those four
+logged variables scored against the attributed motive, on the same
+run. Not that the field lacks an instrument — that it HAS one and
+reaches past it.
+
+---
+
 CC0. Stdlib only, phone-buildable. Every `[PRESS]` figure is carried
 and unverified here; the egress gate refuses the primary sources.
