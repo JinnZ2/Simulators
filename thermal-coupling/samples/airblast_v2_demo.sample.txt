@@ -1,0 +1,75 @@
+======================================================================
+LANGTANG ANCHOR — published values
+======================================================================
+  released ice           3.50e6 m3   (above 6000 m asl)
+  total volume          14.38e6 m3   (78% ENTRAINED en route)
+  snow share of volume     >70%
+  max core velocity        >90 m/s
+  velocity at far toe       57 m/s
+  village hit by CORE?       NO
+  deaths                   >350   (air blast)
+  village blast     mean >15 kPa, peak 28 kPa
+  far slope         mean  10 kPa, peak 18 kPa
+  tree breakage           0.8 km2, 1 km up+down valley
+
+======================================================================
+F2 — snow entrainment sweep vs published (temperature fixed)
+======================================================================
+  snow @ release   mean kPa   peak kPa   blast km2                 published
+          0.0 m        3.9        7.5        0.20 core stops short, 2.5 kPa
+          1.0 m        6.4       12.1        0.41                          
+          2.0 m        9.4       17.8        0.73                          
+          3.0 m       13.0       24.7        1.19 matches observed, >15 kPa
+
+======================================================================
+F1 — ambient air sweep (snow fixed), meltwater relative
+======================================================================
+ T_air @3862m  melt idx   ratio    mu_w                 published
+           -1       1.0    1.00   0.175       74,000 t, 600 mm/m3
+            4       1.3    1.32   0.151                          
+            9       1.6    1.65   0.134              actual event
+           14       2.0    1.97   0.122                          
+           19       2.3    2.30   0.113    170,000 t, >1800 mm/m3
+  published meltwater ratio -1 C -> 19 C : 2.30
+
+======================================================================
+TC-08 — thermal coupling by composition
+======================================================================
+composition                   coupling vs all-rock
+all rock                                       1.0
+rock-ice, no snow                              3.9
+Langtang (>70% snow)                          10.6
+all snow                                      12.8
+
+======================================================================
+TC-09 — lethal area outside a runout-bounded map
+======================================================================
+  assumed core deposit footprint: 0.35 km2
+  snow @ release   blast km2   OUTSIDE core   ratio
+          0.0 m        0.20           0.00     0.6
+          1.0 m        0.41           0.06     1.2
+          2.0 m        0.73           0.38     2.1
+          3.0 m        1.19           0.84     3.4
+
+======================================================================
+TC-11 — diurnal gate on the same release
+======================================================================
+  hour   T_air C  melt idx    mu_w
+     0       3.3       1.3   0.154
+     3       1.0       1.1   0.164
+     6       3.3       1.3   0.154
+     9       9.0       1.6   0.134
+    12      14.7       2.0   0.121
+    15      17.0       2.2   0.116
+    18      14.7       2.0   0.121
+    21       9.0       1.6   0.134
+
+  Langtang fired at 11:56 local.
+
+LAG CLASSES (revised)
+  diurnal        hours             tau ~   0.00011 yr
+  snowpack       hours-days        tau ~   0.00274 yr
+  active_layer   seasonal          tau ~   1.00000 yr
+  bedrock_pf     years-decades     tau ~  30.00000 yr
+  debuttress     decades-cent.     tau ~ 100.00000 yr
+  sediment       decades-cent.     tau ~  80.00000 yr

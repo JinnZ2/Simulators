@@ -1,0 +1,6 @@
+P3 comprehension: term 'mechanism' over /home/user/Simulators/cooperative-substrate/../uninstrumented/cases
+sources 16, profiled 12 (min_count 2, window +-8), pairs 66
+excluded (term below min_count): 012fuelincidencesubstrategoods.md, 019traitacquiescenceweld.md, 020attributedagencyarrangement.md, 024refusalfalsepositiverate.md
+consistency observed : 0.1132
+null (shuffle, 100 reps, seed 0): mean 0.0364  sd 0.0080  max 0.0633  frac >= observed 0.0000  gap 9.6 sd
+adversarially encoded corpus: not a corpus; noise. Unconstructable by definition -- a text whose parts contest each other's terms has no shared term to profile, so the reading is not zero, it is undefined.

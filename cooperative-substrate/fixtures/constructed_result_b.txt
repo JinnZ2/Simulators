@@ -1,0 +1,5 @@
+CONSTRUCTED FIXTURE. Not a published methods section. Written to carry
+no dependency language at all, so the extractor has a reachable zero.
+
+The bar was warm. Nobody counted anything and nothing was compared with
+anything else. The afternoon went on for a while and then it ended.

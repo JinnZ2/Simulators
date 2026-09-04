@@ -1,0 +1,9 @@
+CONSTRUCTED FIXTURE. Not a published methods section. Written so the
+known answers are fixed by authoring: six dependencies, one verified.
+
+Samples were obtained from the university stockroom. Temperatures were
+recorded using a platinum resistance thermometer, calibrated against a
+triple-point cell. Peak areas were computed following the procedure of
+Smith and Jones, and were verified against the cell's certificate. Rate
+constants were taken from the results of Doe et al. (Doe et al., 2019).
+The fit was run on the departmental cluster.

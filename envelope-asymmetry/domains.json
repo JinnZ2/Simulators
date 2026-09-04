@@ -1,0 +1,9 @@
+{
+  "_note": "T4 pre-registration: the arm A domain list, written before any document is sampled. The mid-standard entries are the two the protocol names. sha256 of this file at registration is printed by envelope_score.py --domains.",
+  "arm_A_strong_standard": ["aviation", "pharma", "grid", "pressure systems", "medical device"],
+  "arm_A_mid_standard": ["logistics", "insurance"],
+  "arm_B": ["general-purpose", "consumer"],
+  "test2_arm_A": ["manufacturing", "energy", "medical", "logistics"],
+  "test2_arm_B": ["chat", "content generation", "recommendation"],
+  "registered": "2026-09-04"
+}

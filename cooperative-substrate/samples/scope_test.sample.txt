@@ -1,0 +1,20 @@
+scope test (E8), parsed from EVIDENCE_PACK.md
+  C1 time-scoped    window short vs. coupling-formation rate
+  C2 outcome-bound  win condition imposed externally, not derived
+  C3 narrow metric  single scalar scoring, no side-channel counted
+  C4 enclosed       fixed resource set, no partner pool, no exit
+  E. coli evolvability       C1 y C2 y C3 y C4 y  -> competition/breakdown reported  [COMPETITION_DOMINANT_OBSERVATION]
+  multiagent turf harness    C1 y C2 y C3 y C4 y  -> escalation reported  [COMPETITION_DOMINANT_OBSERVATION]
+  Austronesian games         C1 y C2 y C3 y C4 y  -> competitive goal structure BY DESIGN  [COMPETITION_DOMINANT_OBSERVATION]
+  optimal foraging (field)   C1 n C2 n C3 n C4 n  -> no competition term in formalism  [NOT_COMPETITION_DOMINANT_OBSERVATION]
+  lichen altitudinal grad.   C1 n C2 n C3 n C4 n  -> switching, predictable  [NOT_COMPETITION_DOMINANT_OBSERVATION]
+distinct condition vectors: 2 over 5 rows; conditions vary independently: False
+separates alone: {'C1': True, 'C2': True, 'C3': True, 'C4': True}; minimal separating subsets: ['C1', 'C2', 'C3', 'C4']; necessary: []
+stress axis (E0.1) against design axis (C1-C4):
+  E. coli evolvability       stress harsh      e01 facilitation design COMPETITION_DOMINANT_OBSERVATION     reported competition_reported  both True match False
+  multiagent turf harness    stress UNRECORDED e01 UNRECORDED   design COMPETITION_DOMINANT_OBSERVATION     reported competition_reported  both False match None
+  Austronesian games         stress UNRECORDED e01 UNRECORDED   design COMPETITION_DOMINANT_OBSERVATION     reported competition_reported  both False match None
+  optimal foraging (field)   stress UNRECORDED e01 UNRECORDED   design NOT_COMPETITION_DOMINANT_OBSERVATION reported not_reported          both False match None
+  lichen altitudinal grad.   stress gradient   e01 UNRECORDED   design NOT_COMPETITION_DOMINANT_OBSERVATION reported not_reported          both False match None
+'benign': as used -- E0.1 gives 'benign' no axis of its own: it is the end of the stress gradient where competition is observed, which reads the outcome back as the condition
+'benign': test -- removal test: a condition is benign for a coupling when removing the partner leaves the focal yield unchanged; harsh when yield falls. Yield measured, partner removed, selection history held (E4) and a partner pool present (E5) -- the E6 design.  [NOT_RUN]

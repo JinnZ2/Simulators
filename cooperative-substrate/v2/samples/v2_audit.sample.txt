@@ -1,0 +1,21 @@
+cooperative-substrate v2 audit
+v2/p4_goal.py (delivered): parses True, 1282 bytes; last line '            stance, used, value = "accept", pr'
+manifest map ({'DELIVERED_TRUNCATED': 1, 'RENAMES_V1': 5, 'NEW': 1, 'SEEDED': 1, 'DECLINED': 1, 'PRESENT': 1}):
+  p4_goal.py             DELIVERED_TRUNCATED v2/p4_goal.py                                           exists True
+  p3_comprehension.py    RENAMES_V1         p3_comprehension.py                                     exists True
+  p2_substrate.py        RENAMES_V1         p2_substrate_audit.py                                   exists True
+  p1_records.py          RENAMES_V1         p1_deps_extract.py                                      exists True
+  p5_lag.py              NEW                v2/p5_lag.py                                            exists True
+  scope_check.py         SEEDED             v2/scope_check.py                                       exists True
+  run_all.py             RENAMES_V1         run_all.py                                              exists True
+  EVIDENCE.md            RENAMES_V1         EVIDENCE_PACK.md                                        exists True
+  CLAIMS.md              DECLINED           CLAIM_TABLE.md (CSP_ ids; a first-party CS_ thesis file is not authored) exists True
+  README.md              PRESENT            README.md + v2/README.md                                exists True
+v1 P4 vs v2 cut: v1 functions ['simulate', 'exact', 'expected_steps_unbounded', 'grid', 'histogram', 'run', 'render', '_f', 'main']; v1 has three stances False; v2 delivered names the cut (stance column) True
+P5 anchors:
+  antibiotic prescribing (per-patient)           ratio 101.5      DECLARED_UNKNOWN pre ENUMERATED       cell ('no_compliance_required', 'DECLARED_UNKNOWN')
+  same-window action (failure visible within the ratio 0.2        TRACKED          pre ENUMERATED       cell ('no_compliance_required', 'TRACKED')
+  undeclared-variable action                     ratio undefined  UNDECLARED       pre EMPTY_SET_FLAGGED cell ('compliance_required', 'UNDECLARED')
+scope_check null: 5 cases, harsh ['E. coli evolvability'], all-C1-C4 ['E. coli evolvability', 'multiagent turf harness', 'Austronesian games'] -> UNRESOLVED_HARSHNESS_ENTANGLED
+  the antecedent is met, but the only harsh case's harshness IS the C2/C3 apparatus, so it cannot separate stress from scoping; a case with independent environmental harshness is needed and the seed lacks one
+§6 non-goal scan: clean True hits {}

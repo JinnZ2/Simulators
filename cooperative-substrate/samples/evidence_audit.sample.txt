@@ -1,0 +1,26 @@
+evidence pack audit: 34 table rows + 2 target papers
+by section {'E0': 8, 'E1': 3, 'E2': 6, 'E3': 5, 'E4': 5, 'E5': 7}
+by status  {'UNVERIFIED-FULLTEXT': 33, 'DISPUTED': 1}
+by locator {'author_year': 8, 'name_only': 7, 'doi': 13, 'arxiv': 4, 'pmc': 1, 'url': 1}
+no locator beyond author/year or name: ['E0.1', 'E0.2', 'E0.4', 'E1.1', 'E1.2', 'E1.3', 'E2.1', 'E2.2', 'E2.3', 'E2.6', 'E3.3', 'E3.4', 'E3.5', 'E4.2', 'E5.5']
+DOIs: 15, distinct 15, duplicates [], all well-formed True
+  arXiv 2502.17424 (E2.4) 2025-02 month_valid True not_in_future True
+  arXiv 2602.07852 (E2.5) 2026-02 month_valid True not_in_future True
+  arXiv 2510.11557 (E3.1) 2025-10 month_valid True not_in_future True
+  arXiv 2608.26123 (E3.2) 2026-08 month_valid True not_in_future True
+  E0.6       Nat Comms DOI year 2024 stated [] consistent True
+  E4.4       Nat Comms DOI year 2024 stated [] consistent True
+  E4 target  Nat Comms DOI year 2021 stated [] consistent True
+  E4 target  Nat Comms DOI year 2025 stated [] consistent True
+hosts: {'doi.org': '000 (no response)', 'arxiv.org': '000 (no response)', 'www.nature.com': '000 (no response)', 'probed': '2026-09-04T17:37Z, one CONNECT each'}
+E3.3 against the E8 row: {'e33_says_variable': True, 'e8_scores_class_all_y': True, 'both_present': True}
+cross-links into this tree:
+  E2.6             -> label-position-test                  exists True  the pack states as a measurement (100% / 0%, transcript fixed) what LPT_009 holds UNVERIFIED: valence tracks position, not content; the pack cites no record for it
+  E2.6             -> report-typing                        exists True  same mechanism, routing by position; the marker's reverse arm is the blind form
+  E2.1             -> cooperative-substrate/WORK_ORDER.md  exists True  the one-scale-up note, here with three sub-claims and no locator
+  E4               -> nonidentity-census                   exists True  selection history not held constant is the unmatched-pair shape (T6-3)
+  E4               -> shape-spec-audit                     exists True  SS_003: a second variable moved with the named one
+  E7:3             -> declared-frame                       exists True  the accounting boundary as a declared field
+  E7:5             -> extraction-blindness-sim             exists True  an accounting stance that degrades the measurement it reads
+  E3 recording-rate -> observer-exclusion                   exists True  recording rate as a censoring process, OE_002-OE_004
+  E8 C1            -> nonidentity-census                   exists True  window short vs coupling-formation rate is the G-RES pair T2-5 names

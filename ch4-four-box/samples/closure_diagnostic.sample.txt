@@ -1,0 +1,23 @@
+================================================================
+D1  what C_TN reproduces the published +SCA TN = 88 Tg/yr?
+================================================================
+C_TN required           733.0 ppb
+  (linear interp was    684.0 ppb)
+resulting E_TS          122.8   published 125
+resulting E_SH          -10.8   FIXED AT 10 in paper
+resulting tropics       210.8   published 213
+
+================================================================
+D2  what C_SH keeps E_SH = 10 with C_TS = SCA?
+================================================================
+C_SH required           711.3 ppb
+WAIS observed           652.0 ppb
+CLOSURE GAP              59.3 ppb
+
+================================================================
+D3  attenuation A, both runs, rates reading
+================================================================
+polar-only tropics      163.1   published 163
++SCA tropics (mine)     210.8   published 213
+A (mine)                0.774
+A (published)           0.765

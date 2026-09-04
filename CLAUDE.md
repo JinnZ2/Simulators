@@ -7150,6 +7150,303 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   exemption (`error`, inside the delivered G-5 title) under the
   three-arm harness. Check count printed by `selftest_crg.py`; the
   module refuses `--selftest`. Stdlib only, parses under 3.9, CC0.
+- `thermal-coupling/` — Two delivered MARKER modules landed verbatim and
+  never edited: `thermal_coupling.py` (temperature entering a slope/flow
+  hazard chain at five lag classes, a product-form coincidence term,
+  claims TC-01..TC-06 under *update the claim, never retune*) and
+  `airblast_extension.py` (three corrections forced by the Langtang 2015
+  reconstruction — air temperature as the driver, an air-blast term, a
+  diurnal lag class — claims TC-07..TC-11). `coupling_audit.py` imports
+  both and checks them against their own docstrings, claim tables and
+  demos. **`TCA_002`, the sharp one: TC-04 is refuted by its own
+  function.** The claim's criterion is *sensitivity rises as temperature
+  approaches melting*; the implemented loss is `0.71·x^0.55`, concave, so
+  the strength derivative is −0.155 /K at −9.5 C and −0.042 /K at −1 C —
+  sensitivity **falls** toward 0 C by 3.7× — while the inline comment
+  reads *"convex: steeper near 0"*; `creep_sensitivity` is the shape the
+  docstring describes and the strength function is not. **`TCA_001`:**
+  the CAL_FOS calibration sentence (50° slope crosses FoS = 1 at −2 C)
+  holds at −1.99 C under `fracture_favorable=True`, which it does not
+  name, and never crosses under the default. **`TCA_003`:** *"CAL_FOS is
+  the ONLY free parameter"* against an AST census of **35** numeric
+  literals in function bodies, seven functions carrying literals with no
+  source in their docstring. **`TCA_006`:** TC-03's freeze-thaw half is
+  produced (interior peaks at ±3, a dip at 0) and its snow half is a
+  docstring — `depth_m` is an input, never assigned, and
+  `weak_layer_index` is temperature-independent at fixed gradient.
+  **`TCA_007`:** on a snow-temperature sweep the count falls while the
+  runout multiplier rises (TC-06's mechanism), and coincidence tracks the
+  count because the multiplier is read by no downstream term.
+  **`TCA_009`:** the extension's `meltwater_index` is linear in
+  `(t_air + 5)`, so its 19 C / −1 C ratio is **6.00 by construction**
+  where the docstring says *calibrated to 2.3×* — and its own demo prints
+  both on one row. **`TCA_010`:** the coupling bounds reproduce
+  (8.9–18.4) and the blast anchors do not (13.0 against >15, 3.9 against
+  2.5). **`TCA_011`:** the extension *"extends, does not replace"* and
+  imports nothing — it re-declares LAG with the core's five classes
+  identical today (a copy, `MF_019`), reads none of the core's terms, and
+  TC-10's lateral/longitudinal split is in no function. **`TCA_008`:** the
+  stated home folder `earth-systems-physics` does not exist, and
+  `rate-mismatch-polytope` — cited by thirteen other files, existing
+  nowhere — reaches its most-cited. **`TCA_013` UNVERIFIED:** every anchor
+  is carried and unchecked. **The extension's revision then landed**
+  (`airblast_extension_v2.py`, verbatim beside v1, with the core
+  re-delivered): **`TCA_014`** one function changed, `meltwater_index`,
+  everything else byte-for-byte v1; **`TCA_015`** the calibration
+  sentence is now produced by the function — 1 + 0.0649 × 20 = 2.30, the
+  0.0649 being 4,800/74,000 — and the docstring records the first
+  attempt's 6.0 and its 2.6× factor, `TCA_009` reached from the author's
+  side; **`TCA_016`** the correction removed v1's zero clamp, so the index
+  goes negative below −16.4 C; **`TCA_017`** the re-delivered core is
+  byte-identical to the repo copy, so TC-04's function is unchanged and
+  `TCA_002` stands — the revision answered the extension's calibration
+  finding and not the core's shape finding; **`TCA_018`** v2 still imports
+  nothing and reads no runout. Check count printed by `selftest_tca.py`;
+  the audit refuses `--selftest`. Stdlib only, parses under 3.9, CC0.
+- `ch4-four-box/` — Two delivered scripts landed verbatim:
+  `fourbox_forward.py` rebuilds a four-box CH4 model forward-only
+  (E = M·C from prescribed concentrations, no inversion) and prints the
+  published emissions beside two readings of the transport parameters —
+  as exchange TIMES and as exchange RATES — plus a consistency scan;
+  `closure_diagnostic.py` takes the reading that fits and asks what
+  concentrations reproduce the published +SCA run. `fourbox_audit.py`
+  runs both with their prints captured and reads them against each
+  other, copying nothing. **`FB_002`:** the RATES reading reproduces the
+  published polar-only emissions to within 4.2 Tg/yr per box; the TIMES
+  reading misses by 47.7 and produces a negative southern source.
+  **`FB_003`:** the two scripts' matrices agree to 2e-16, so the
+  diagnostic runs on the forward model's own operator. **`FB_004`:**
+  with the tropical box at the SCA value and the southern box at WAIS
+  the forward model returns E_SH = −10.8 against a published +10; the
+  diagnostic's closure gap is **59.3 ppb** above WAIS, and a prescribed
+  concentration and a prescribed source cannot both hold in a forward
+  model. **`FB_005`, read across the two pages the scripts print apart:**
+  the consistency scan reaches the observed 48 ppb gradient at 4.34× the
+  times base, while the rates reading is 20.66× that base and yields
+  **150.5 ppb, 3.1× the observed** — the transport that fits the
+  emissions is not the transport that fits the gradient. **`FB_001`:**
+  every constant identity holds (IPD 48, both SCA offsets, TS = 213−88,
+  A = 0.765, per-box Tg/ppb exactly a quarter of the global 2.848).
+  **`FB_006`:** two known answers on the operator pass (no transport
+  gives E = C/τ; a uniform concentration moves nothing). **`FB_007`
+  UNVERIFIED:** Lamantia et al. 2026 is named and not read; nothing is a
+  statement about the atmosphere. Check count printed by
+  `selftest_fb.py`; the audit refuses `--selftest`. Stdlib only, parses
+  under 3.9, CC0.
+- `cooperative-substrate/` — A work order delivered verbatim and built to
+  it: four checks, each one stdlib file under 300 lines, independently
+  runnable, no network at runtime, with the order's framing claim and
+  one-scale-up note carried verbatim in the README as it asks. **P1**
+  extracts dependency records from methods sections by a pattern set
+  held in one dict, `verified_in_argument` false unless the same
+  sentence carries a verification verb, the ratio `undefined` at zero
+  argued; **P2** is a contract ledger over every call site read with
+  `ast` and `dis` — one function-call record per site, a second layer
+  where the callee is an allocator, a numeric routine or a transport
+  module, one compile-layer record per code object — printing
+  `unverified_contracts / total_callsites` and the counter-list; **P3**
+  profiles one term per source (window ±8), takes the mean pairwise
+  cosine and builds the sense-shuffled null in the same script; **P4**
+  is the step-contest chain as a reflecting random walk with its exact
+  position distribution computed beside the simulation on every row.
+  No published methods section is reachable and none is invented; the
+  fixtures are constructed and say so in their first line. **`CSP_006`,
+  the finding: P3's reading is a property of the TERM, not the corpus.**
+  On the same sixteen files of `uninstrumented/cases/`, `mechanism` and
+  `confidence` clear the null by 9.6 and 12.8 sd while `instrument` and
+  `claim` sit on it (0.0 and 0.5); on the whole tree with this folder
+  and the two root index files left out, the order's own example
+  `mass` clears by 6.3 sd over 20 sources (`CSP_013`: with the index in,
+  the number moved 9.9 → 8.5 → 7.3 across runs in which only the index
+  paragraph and then this folder's own claim table quoting the result
+  changed — `UNI_010`'s loop through the index, both readings printed
+  and the independent one quoted)
+  — the terms that clear are used in a fixed schema slot,
+  the ones that do not are used in free prose, and `instrument` is the
+  word this tree uses in the most senses. **`CSP_007`: the order's third
+  row and its falsifier land on one cell** — a constructed corpus using
+  `mass` in four disjoint vocabularies reads 0.0000 against a null of
+  0.0000 with the gap undefined, so "not a corpus; noise" reads as
+  *indistinguishable from the null*, the falsifier's own condition, and
+  comprehensibility has to be established outside the profile (the
+  same-sense corpus reads 1.0 against 0.87, so the instrument is not
+  `CONSTANT_SILENT`). **`CSP_008`:** that corpus caught a leak in the
+  null — the stand-in's profile carried the original term, shared by
+  every source, lifting the null to 0.098 on a corpus where both sides
+  are 0 by construction; repaired with an `exclude`, real-corpus nulls
+  moved under 0.003, recorded because the leak ran toward making the
+  falsifier fire. **`CSP_003`:** P1's pattern set over five in-tree
+  documents that are not methods sections emits 8 records, 0 argued,
+  and **0 of 8 are dependencies by hand reading** (`Aug 2026` as a prior
+  result, `closure` as a supplied material) — precision fails on prose
+  outside the register, so a `--report` cannot be read without the
+  records beside it. **`CSP_004`:** P2's verified proxy reads a call
+  inside try/except as verified while a try/except catches a raised
+  failure and verifies no returned type, so the unverified count is a
+  floor; 0 of 4 shipped checks verify every contract, and the order's
+  ratio exceeds 1 on every file because layers stack (`CSP_005`, with
+  the ast and bytecode call counts disagreeing on every file over
+  comprehensions, printed beside each other). **`CSP_009`/`CSP_010`:**
+  P4 confirms its own construction — exact termination non-increasing
+  in `p_contest`, exactly N steps at 0, N² = 2500 unbounded at 0.5,
+  6790× growth between 0.55 and 0.60, every simulated row within 1.5
+  binomial se of exact — and "falls to zero" is relative to the budget
+  (N = 10, p = 0.6: 0.125 at 10N, 1.000 at 2000N), while "no answer, not
+  a degraded one" is what a one-integer state can express rather than
+  a result. **`CSP_011` UNVERIFIED:** the multi-agent note is carried
+  and checked against nothing, and the framing claim's share has no
+  instrument among the four parts. One declared `no_severity` exemption
+  (`corrupt`, inside the order's contract text); a moral-token list
+  fires once on `kind` in the type sense, recorded rather than renamed.
+  **An evidence pack then arrived** (`EVIDENCE_PACK.md`, verbatim, after
+  the deliverable) carrying its own verification status on every row —
+  retrieved from search-result text, not read, 33 `[UNVERIFIED-FULLTEXT]`
+  and 1 `[DISPUTED]` — and nothing in it was opened, the three citation
+  hosts refusing CONNECT; what is computable without opening anything
+  was computed (`evidence_audit.py`, `scope_test.py`, `term_table.py`).
+  **`CSP_015`:** the E8 scope test's five rows carry two distinct
+  condition vectors, so every condition separates alone and none is
+  necessary — `MD_008`'s collinearity, n = 5 on one distinction, the
+  conjunction untested; one constructed off-diagonal row makes C2
+  necessary. **`CSP_016`:** E0.1's stress axis and E8's design axis are
+  both recorded on one row of five and disagree there — the E. coli
+  construct is scored under stepwise antibiotic, harsh, so E0.1 predicts
+  facilitation, the design axis predicts competition, and competition
+  is what was reported; the design axis carries the row, which supports
+  E4 and removes E0.1 as a prediction for the row it is used on.
+  "Benign" as E0.1 uses it has no axis of its own; the test the pack's
+  last line asks for is stated as a removal test and NOT RUN.
+  **`CSP_017`:** E3.3 enters competitive goal structure as a measured
+  variable and the E8 row enters the same games as a class all-y.
+  **`CSP_018`:** E2.6 states as a measurement what `label-position-test`
+  holds UNVERIFIED, with no locator; in-class for this audit, not
+  adjudicated. **`CSP_019`:** the E7 table is built as a schema — 25
+  cells, 2 filled from the pack's own worked example, 0 quantitative
+  predictions, which on the pack's own discriminator is the state before
+  a shared structure is shown. **`CSP_014`:** 15 of 34 rows carry no
+  locator beyond an author-year or a name, among them every row the
+  pack leans on for P1 and P4. **A v2 work order then arrived**
+  (`WORK_ORDER_V2.md`, verbatim beside v1), renaming the parts, adding
+  P5 (a lag-declaration check) and §3 (the C1–C4 scope conditions with
+  a null to build), and binding a §6 non-goal against any author or
+  values-advocacy section; the build lands in `v2/`. **`CSP_021`, the
+  sharp one: the one code file the delivery put on disk, `v2/p4_goal.py`,
+  arrived truncated** — 1282 bytes, cut mid-line at `stance, used, value
+  = "accept", pr`; it ends on a syntactically complete line so it
+  parses, and the truncation is read structurally (run() has no return,
+  no `__main__` guard, only one of the three stances its docstring
+  names, and a last line binding `pr`, a name never assigned) — left as
+  delivered, not completed. **`CSP_022`:** the manifest's ten files map
+  to 1 delivered-truncated, 5 renaming v1 files (not rebuilt, `MF_019`),
+  1 new (`p5_lag.py`), 1 seeded (`scope_check.py`, importing the E8
+  reader), 1 declined (a first-party `CS_` thesis `CLAIMS.md`, per §6)
+  and `EVIDENCE.md` = the existing pack. **`CSP_023`:** `scope_check`'s
+  §3 null is met by the seed's own E. coli row (harsh, all C1–C4,
+  competition reported) and then unmet by it, since that row's harshness
+  IS the antibiotic it is scored under — the C2/C3 apparatus — so
+  `UNRESOLVED_HARSHNESS_ENTANGLED`, needing a case with independent
+  environmental harshness the seed lacks (`CSP_016` from the other
+  side). **`CSP_024`:** P5's gate carries the "silence is not safety"
+  third state by construction — an undeclared `t_visible` gives an
+  *undefined* ratio (`UNDECLARED`), never a small one; the antibiotic
+  anchor reads 101.5 → DECLARED_UNKNOWN, a same-window action 0.2 →
+  TRACKED, the ≥10 gate a `G-RES` pair cross-linking `claim-record`'s
+  clock. **`CSP_025`:** the v2 P4 reframe (self-check trace table, the
+  cut being error-correction that terminates vs contestation that does
+  not) is a different instrument from v1's random walk, which has no
+  three-stance model and cannot express the cut; the delivered file
+  names it and is truncated before implementing it. **`CSP_026`
+  UNVERIFIED:** the null over real literature is not runnable (egress),
+  and the §6 scan is clean over the deliverables with the scanner's own
+  keyword-defining file excluded (`UNI_009`). Twenty-six `CSP_*` claims;
+  61 + 33 + selftest_v2 checks. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
+- `envelope-asymmetry/` — A protocol delivered verbatim, the compressed
+  restatement it ends with included: does envelope discipline — operating
+  range, out-of-scope declaration, degradation mode, revalidation
+  trigger, quantified margin, named responsible party, coded 0/1 and
+  summed — track the host domain's return channel rather than liability,
+  field prestige or AI regulation itself? Two tests (within-vendor
+  paired across host domains, n ≥ 30; between arms inside one filing
+  regime, n ≥ 50) and four named threats. `envelope_score.py` is the
+  instrument and both tests from a JSONL in the protocol's schema,
+  with kappa imported from `effective-redundancy-audit` and OLS from
+  `sim-span`; `domains.json` pre-registers the T4 domain list with its
+  hash on every render. **No document is coded**: no vendor site or
+  filing registry answers (the registry host probed once), no row is
+  invented, and with no rows the gate refuses before either test runs.
+  **`ENV_002`, the sharp one: the 0.7 gate is underspecified twice.** On
+  a constructed 20-document double coding with one E6 disagreement,
+  **E6's kappa is 0.0** while the pooled gate passes on both statistics
+  (percent 0.992, kappa 0.969) — the marker carrying test 1's SPLIT
+  reading can have zero reliability and the instrument proceeds; and an
+  all-absent double coding passes at kappa 1.0 having never coded a
+  marker present, `CONSTANT_SILENT` at the gate. **`ENV_003`:** T2's two
+  instructions — retain structurally absent pairs at score 0, and report
+  the absence rate separately — return **opposite readings on one set of
+  30 pairs** (all pairs: mean difference 1.0, SPLIT; documents only: 0.0,
+  KILL), so the verdict is the accounting and both are printed.
+  **`ENV_004`:** "E6 flat" has two values and the split reading fits
+  flat-at-0 only. **`ENV_005`:** the per-1000-words secondary outcome
+  ranks a 60-word document above a 3000-word one the primary ranks below
+  it — a capped numerator over an uncapped denominator. **`ENV_006`:**
+  the template kill is a property of one filing record (zero variance at
+  n = 2 as at n = 100), readable before sampling. **`ENV_007`:** five of
+  six markers already have a field in `claim-record` (E1 →
+  `domain_of_validity`, E4 → `clock`, E5 → `measurement`) and **E6, the
+  named responsible party, has none** — the tree's own record schema is
+  an envelope instrument minus the signature, on the axis the protocol
+  says is liability's. **`ENV_008`:** the compressed restatement drops
+  nine of ten probed elements (every threat, the re-target, the record
+  schema, sections 4 and 5), keeping the inter-rater rule. **`ENV_009`:**
+  arm A's "return channel" is `readout-count`'s `positions_returning`,
+  so T4's gradient is that count as predictor. **`ENV_010` UNVERIFIED.**
+  34 selftest checks. Stdlib only, parses under 3.9, phone-buildable,
+  CC0.
+- `railcar-containment/` — A delivered folder, complete and verbatim
+  (`README.md`, `CLAIMS.md`, three screens, `run_all.py`, a params
+  file): the e-mobility-fire-on-railcar problem built around one
+  inequality, `t_available > t_required`, where the published
+  measurement (FSRI 2026, carried at the README's own caveat) gives one
+  side only. `tenability.py` is a well-mixed three-channel cabin model
+  calibrated to published anchors; `t_hold.py` derives the containment
+  hold-time requirement from line geometry under RUN and STOP egress
+  policies; `detection_loop.py` is a latency Monte Carlo over sensor
+  against visual detection. The README carries an envelope block and
+  the folder its own claims (`RC_001..008`, not edited); the audit is
+  `audit.py`, importing the screens and editing nothing, with
+  `RCT_001..RCT_010`. **`RCT_002`, the sharp one: the thermal anchor is
+  not reproduced and cannot be** — the docstring says every anchor is
+  reproduced by construction, CO and visibility are, and the thermal
+  channel lands at **272.5 s against 400 s**, because the anchor lies
+  past the end of the source term (20 + 90 + 180 = 290 s), after which
+  the cabin only cools; the bisection stops at the coefficient where the
+  peak just touches the threshold, and two percent more volume makes the
+  channel never cross. `t_available` at anchor (230 s, visibility) does
+  not move, but the visibility anchor is itself a bound read as a point
+  (`RCT_003`). **`RCT_004`:** the VALID FOR "sensitivity of `t_available`
+  to car volume" has no single value — the local exponent runs 0.79 to
+  2.23 across 60–320 m³ and the binding channel switches from visibility
+  to CO dose at 200 m³; RC_001's sign holds, its magnitude is a regime.
+  **`RCT_005`:** the two screens disagree on the containment form —
+  `detection_loop.py` stretches the budget linearly, `tenability.py`
+  with a finite source exceeds that by 1.2–1.34× and returns *never* at
+  fractions 0.1 and 0.05 where the loop returns 2300 and 4600 s.
+  **`RCT_006`:** RC_002's "containment dominates volume" holds at the
+  fraction its own falsifier names (0.2 → 6.7×) and not at 0.5, where
+  2.43× meets the volume step's 1.94×. **`RCT_007`:** `t_hold.py` applies
+  a default 1.5× margin to every printed number where the README
+  envelope says "none applied", and the README scores **4 of 6** on the
+  sibling `envelope-asymmetry` instrument by import (E5, E6 absent).
+  **`RCT_008`:** the params field `offgas_to_flame_s` is read by neither
+  line of `t_hold.py`, so the two screens place the visual latency on
+  different clocks. **`RCT_009`:** RC_005 is arithmetic — a 130 s sensor
+  lead against a 728 s tunnel deficit before any detection — and swept
+  over the egress mean the detection gain peaks at 240 s (+0.45), which
+  is the folder's own station case and the claim's own falsifier.
+  **`RCT_010` UNVERIFIED:** every FSRI figure is carried; nothing in the
+  audit rests on one. 31 selftest checks. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated

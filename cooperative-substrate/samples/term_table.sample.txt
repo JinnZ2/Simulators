@@ -1,0 +1,9 @@
+E7 cross-substrate term table: 25 cells, 2 filled, 0 quantitative predictions
+                               foraging/predat multiagent AI h human societies morality/ethics nation-state so
+  cost asymmetry               MEASURED        MISSING         UNRECORDED      UNRECORDED      UNRECORDED     
+  whether the aggregate steers UNRECORDED      UNRECORDED      UNRECORDED      UNRECORDED      UNRECORDED     
+  what sits inside vs outside  UNRECORDED      UNRECORDED      UNRECORDED      UNRECORDED      UNRECORDED     
+  whether a legitimate other i UNRECORDED      UNRECORDED      UNRECORDED      UNRECORDED      UNRECORDED     
+  does the accounting stance P UNRECORDED      UNRECORDED      UNRECORDED      UNRECORDED      UNRECORDED     
+experiment sitting there: 'cost asymmetry' MEASURED in foraging/predation ecology, MISSING in multiagent AI harnesses
+discriminator: 0 of 2 filled cells carry a quantitative prediction in a second substrate; on the pack's own rule that is the state before a shared structure is shown
