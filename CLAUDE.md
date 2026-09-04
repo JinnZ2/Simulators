@@ -6915,9 +6915,10 @@ underneath).
   `claim` sit on it (0.0 and 0.5); on the whole tree with this folder
   and the two root index files left out, the order's own example
   `mass` clears by 6.3 sd over 20 sources (`CSP_013`: with the index in,
-  the number moved 9.9 → 8.5 between two runs in which only the index
-  paragraph describing this result changed — `UNI_010`'s loop through
-  the index, both readings printed and the independent one quoted)
+  the number moved 9.9 → 8.5 → 7.3 across runs in which only the index
+  paragraph and then this folder's own claim table quoting the result
+  changed — `UNI_010`'s loop through the index, both readings printed
+  and the independent one quoted)
   — the terms that clear are used in a fixed schema slot,
   the ones that do not are used in free prose, and `instrument` is the
   word this tree uses in the most senses. **`CSP_007`: the order's third
