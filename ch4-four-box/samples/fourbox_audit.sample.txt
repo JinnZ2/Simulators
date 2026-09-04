@@ -1,0 +1,25 @@
+fourbox_audit -- the two delivered scripts against each other and their own arithmetic
+
+1. IDENTITIES  IPD 48; SCA = GISP2+46 True = WAIS+94 True; TS = 213-88 True; A published 0.765
+   Tg per ppb: 0.7120 per box, 2.8480 global; box is a quarter of global: True
+
+2. WHICH READING  polar-only emissions against the published, per reading
+   as TIMES (yr)    max |residual|  47.7 Tg/yr; negative sources: ['SH']
+   as RATES (1/yr)  max |residual|   4.2 Tg/yr; negative sources: none
+   the reading that reproduces the published polar run: as RATES (1/yr)
+
+3. MATRICES  forward script (rates reading) vs closure script: max |diff| 2.22e-16, agree True
+
+4. +SCA RUN  with TS prescribed at SCA and SH at WAIS, E_SH = -10.8 Tg/yr against a published 10
+   the diagnostic's C_TN for E_TN = 88: 733.0 ppb; C_SH for E_SH = 10: 711.3 ppb; closure gap 59.3 ppb above WAIS
+   attenuation A: 0.774 from the diagnostic against 0.765 published
+   a prescribed southern concentration and a prescribed southern source cannot both hold in a
+   forward model; the gap is the size of the disagreement in ppb.
+
+5. CONSISTENCY  implied NH-SH gradient at published emissions: 12.5 ppb at scale 1; observed 48
+   the scale at which the gradient equals 48: 4.34 (times base x 4.34)
+   the rates reading is the times base x 20.66, and there the implied gradient is 150.5 ppb
+   so the reading that reproduces the published emissions yields a polar gradient about
+   3.1x the observed one; the scan and the emissions fit do not pick the same transport.
+
+Every published figure is carried from the scripts; nothing here is a statement about the atmosphere.

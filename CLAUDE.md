@@ -6849,6 +6849,36 @@ underneath).
   nowhere — reaches its most-cited. **`TCA_013` UNVERIFIED:** every anchor
   is carried and unchecked. Check count printed by `selftest_tca.py`;
   the audit refuses `--selftest`. Stdlib only, parses under 3.9, CC0.
+- `ch4-four-box/` — Two delivered scripts landed verbatim:
+  `fourbox_forward.py` rebuilds a four-box CH4 model forward-only
+  (E = M·C from prescribed concentrations, no inversion) and prints the
+  published emissions beside two readings of the transport parameters —
+  as exchange TIMES and as exchange RATES — plus a consistency scan;
+  `closure_diagnostic.py` takes the reading that fits and asks what
+  concentrations reproduce the published +SCA run. `fourbox_audit.py`
+  runs both with their prints captured and reads them against each
+  other, copying nothing. **`FB_002`:** the RATES reading reproduces the
+  published polar-only emissions to within 4.2 Tg/yr per box; the TIMES
+  reading misses by 47.7 and produces a negative southern source.
+  **`FB_003`:** the two scripts' matrices agree to 2e-16, so the
+  diagnostic runs on the forward model's own operator. **`FB_004`:**
+  with the tropical box at the SCA value and the southern box at WAIS
+  the forward model returns E_SH = −10.8 against a published +10; the
+  diagnostic's closure gap is **59.3 ppb** above WAIS, and a prescribed
+  concentration and a prescribed source cannot both hold in a forward
+  model. **`FB_005`, read across the two pages the scripts print apart:**
+  the consistency scan reaches the observed 48 ppb gradient at 4.34× the
+  times base, while the rates reading is 20.66× that base and yields
+  **150.5 ppb, 3.1× the observed** — the transport that fits the
+  emissions is not the transport that fits the gradient. **`FB_001`:**
+  every constant identity holds (IPD 48, both SCA offsets, TS = 213−88,
+  A = 0.765, per-box Tg/ppb exactly a quarter of the global 2.848).
+  **`FB_006`:** two known answers on the operator pass (no transport
+  gives E = C/τ; a uniform concentration moves nothing). **`FB_007`
+  UNVERIFIED:** Lamantia et al. 2026 is named and not read; nothing is a
+  statement about the atmosphere. Check count printed by
+  `selftest_fb.py`; the audit refuses `--selftest`. Stdlib only, parses
+  under 3.9, CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated
