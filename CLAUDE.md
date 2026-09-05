@@ -7342,6 +7342,62 @@ underneath).
   and a claim table carrying a `falsifier` column would enter its own
   corpus. 28 selftest checks. Stdlib only, parses under 3.9,
   phone-buildable, CC0.
+- `merge-path/` — A work order for a transform table between claim-record
+  formats that already exist (nanopublications, ORKG, RO-Crate,
+  ClinicalTrials.gov, CIPM/CMC, proof assistants, OSF prereg) and the
+  repository's falsifier / branch-record format, with the loss in each
+  direction **measured, not asserted**. **Explicitly not a new format**
+  (§0: if the output is a format, the work failed — the failure mode of
+  this space is an eighth standard); the unit of value is a TRANSFORM
+  (`reference` / `maps_to` / `breaks_at`), and a registrar that does not
+  merge is a valid outcome, a **NO-MERGE with a stated `breaks_at`** worth
+  more than a forced mapping. **The egress fact sets the whole verification
+  status:** §1's load-bearing first task is to *fetch each registrar's own
+  specification* before mapping, and in this environment every registrar
+  spec host answered **403 to CONNECT** (measured 2026-09-05T03:30Z;
+  nanopub.net, clinicaltrials.gov, w3.org among them, logged in the proxy's
+  `recentRelayFailures`) — so **no spec was fetched**, every real registrar
+  is **UNVERIFIED** (`MRG_001`), its converter is NOT-IMPLEMENTED with that
+  reason, and per §7 everything derived inherits UNVERIFIED. No spec field
+  is transcribed from memory and none is fabricated; the docs
+  (`UNITS.md`, `TRANSFORMS.md`) carry only the work order's own §1 candidate
+  summaries, marked as such — the very summaries §1 says not to rely on.
+  **What is delivered and verified is the machinery**, correct by
+  construction on constructed data: a residual classifier over the two
+  converters (`convert_out` OUT, `convert_in` IN) with four classes —
+  **DROPPED** (no target slot), **FLATTENED** (dict→string, recoverable),
+  **COERCED** (a field written into a slot that means something else, the
+  dangerous one), **ADDED** (the target demanded a field the source lacked;
+  it must name its origin or the conversion fails) — where **COERCED and
+  ADDED, the silent-wrongness classes, are reported alongside DROPPED,
+  visible as a zero when zero** (`MRG_002`; §3: a report of only DROPPED
+  counts is not finished). The S1–S5 selftest holds on declared test
+  doubles (`MRG_003`): **S1** identity round trip lossless; **S2**
+  unmappable field → DROPPED not silent; **S3** COERCED detected; **S4** an
+  ADDED field with no origin a hard failure (`ConversionFailure`); **S5** a
+  NO-MERGE with no `breaks_at` a hard failure (`VerdictError`). Both
+  directions (`round_trip_out_in`, `round_trip_in_out`) are measured
+  separately, since a format can be lossy one way and lossless the other.
+  **Every real registrar is NO-MERGE with an egress `breaks_at`** and
+  `convert_out` returns NOT-IMPLEMENTED with the reason rather than guessing
+  a slot map (`MRG_005`; §6: a stub with a reason beats a converter that
+  guesses). **The reverse gaps are carried, not skipped** (`MRG_006`; §4: a
+  merge path that only reports what others lack is a sales document) — our
+  format is the weaker one on the CMC uncertainty budget, ClinicalTrials.gov
+  enforcement + outcome-switch record, the proof-assistant total mechanical
+  check, and the nanopublications provenance graph, all UNVERIFIED and none
+  confirmed here. **The branch record's novelty is UNVERIFIED** (`MRG_007`;
+  §5): the search for a WHY-carrying revision field could not run, so per
+  §5's *an absence with no search list is not evidence* the search list is
+  stated per registrar (CT.gov protocol amendments and OSF prereg addenda
+  flagged as the most likely counterparts) and **no branch entry (ENTRY 03)
+  is opened**, because opening one would rest on an unverified spec fact.
+  No mock is presented as a real registrar (`is_mock` on every test
+  double), no ranking and no "ours is better" framing (`MRG_008`, §7), and
+  every emitted report screens clean through `sheet-structure-scan/-
+  no_severity` — one authored word (`needs`) tripped it in a fixture and was
+  reworded to `requires`. Eight `MRG_*` claims; 22 selftest checks. Stdlib
+  only, parses under 3.9, phone-runnable, CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated
