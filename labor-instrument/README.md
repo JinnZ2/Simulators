@@ -1,5 +1,12 @@
 # labor-instrument
 
+> **Superseded in part** — see `SUPERSEDED_IN_PART.md` (delivered verbatim).
+> PART 1 (the instrument-drift decomposer) stands. PART 2's task-class spine
+> is O\*NET-shaped and is REJECTED — task classes derive from physical
+> transformation (input_state / output_state), and the authoritative
+> base-layer spec is `machine-record-format/` (Rules 1–8, including Rule 8,
+> no payment field, which is not in this document at all).
+
 Two parts, built to `WORK_ORDER.md`. **PART 1** is an instrument-drift
 decomposer for BLS CES — a join that answers *how much of this delta is the
 instrument*. **PART 2** is a substrate-neutral labor schema with the

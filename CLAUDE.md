@@ -7612,6 +7612,55 @@ underneath).
   three-arm exemption (`needs`, in Case B's delivered why-not text). Fourteen
   `MRF_*` claims; 76 selftest checks. Stdlib only, parses under 3.9,
   phone-buildable, CC0.
+- `operator-machine-coupling/` — A delivered research **gap** (`MARKER.md`,
+  verbatim, CC0/public domain): machine operation is accounted for as
+  *operator × machine-class*, and the **coupling between a specific operator
+  and a specific unit** — the pairing — is acknowledged everywhere and
+  measured nowhere. Posted as a gap, not a finding; **nothing in it is a
+  result**, and nothing here reads a real dataset (egress-blocked) or verifies
+  a literature claim. What the folder adds is the **instruments** the gap's
+  measurables need, built and null-tested on constructed data. **`OMC_001`,
+  the core:** `coupling_separation.py` splits an outcome into
+  `mu + a_i + b_j + r_ij` — two main effects and the **interaction** `r_ij`,
+  which is the coupling — so a main-effects model (the ordinary
+  operator×machine-class accounting) reports the coupling as noise and cannot
+  see it; the same operation as plant breeding's GCA/SCA (diallel) and the
+  chimpanzee hammer-anvil (a)/(b) separation, one operation in three
+  vocabularies (carried). `interaction_fraction` is registered in
+  `tools/known_answer.py` (additive→0, pure→1, mixed→1/21); an incomplete
+  design is `NOT_ESTIMABLE` (the pairing is invisible where it was never
+  observed), no structured variation is `None` never 0, and `best_pairing`
+  surfaces the coupled pair whose partners are both exactly average — the pair
+  averaging discards. **`OMC_002`/`OMC_003`, two shape discriminators:**
+  `error_vs_coupling` (coupling failure tracks time-on-that-unit, operator
+  error tracks time-in-role; collinear hour-counts → `UNDETERMINED`, the FAA
+  confound, not a false attribution) and `fixed_vs_convergence` (genotype
+  matching is a `FIXED` advantage — the ideal control — coupling is a
+  `CONVERGENCE` curve). **`OMC_004`, the permission three-state variable**
+  (coupled+authorized / coupled+prohibited / decoupled): `regime_collapse`
+  shows a single regime label collapsing the three, `attribution` shows a
+  naive assignment effect (+4) that vanishes (0) once permission is controlled
+  and returns `UNDETERMINED` when the field is absent or collinear (the
+  recording problem), `m2_match_rate` scores the cleanest test case
+  (coupled+prohibited) and returns `NOT_RECORDED` not 0.0 when the field is
+  absent. **`OMC_005`:** M0's cost-boundary problem is a declared-boundary
+  failure — a labor-line-only cost analysis draws its boundary where the
+  savings are and excludes where the cost goes — the same instrument as
+  `machine-record-format` Rule 5 and `declared-frame`'s VOID RATIO,
+  cross-referenced not rebuilt; M0 is FIRST PASS ONLY, attributing nothing on
+  its own. **`OMC_006`:** the discriminators are null-tested in both
+  directions so a constant classifier is caught. **`OMC_007` UNVERIFIED:**
+  the six-literature join is the gap and is not fabricated; every literature
+  figure (Iriki macaque remapping, chimp hammer-anvil, legume cultivar×strain
+  SCA + bacA/LysM/Sym genes, gyroplane <40-hr 5×, FAA total-hours, AFHRA WWII
+  cards) is carried from the marker, and the cross-species/cross-literature
+  equivalence is held OPEN, not claimed — the separation method is
+  substrate-general and built, but nothing here shows the substrates share a
+  mechanism (plant partner-specificity kept separate per the marker's "Not
+  claimed"). `demo_omc.py` screens clean through `no_severity` under one
+  declared three-arm exemption (`error`, the marker's "operator error"
+  category). Seven `OMC_*` claims; 36 selftest checks. Stdlib only, parses
+  under 3.9, phone-buildable, CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated

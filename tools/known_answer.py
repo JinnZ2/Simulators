@@ -353,6 +353,39 @@ def _ale_integrate(which):
     return None if pe.joules is None else round(pe.joules, 9)
 
 
+def _omc_interaction_fraction(which):
+    """operator-machine-coupling/coupling_separation.py::interaction_fraction,
+    imported. The fraction of structured variation living in the pairings
+    (SS_pair / SS_total) -- the coupling term. It could be silently wrong in
+    the way a variance decomposition is: an additive table must return 0
+    (no pairing effect), a pure-interaction table 1 (all of it), and a mixed
+    table a value the two do not share, or the metric cannot tell 'measured
+    the pairing' from 'averaged over it'."""
+    import importlib.util
+    path = os.path.join(ROOT, "operator-machine-coupling",
+                        "coupling_separation.py")
+    spec = importlib.util.spec_from_file_location("_coupling_sep", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    O = mod.Obs
+    if which == "additive":
+        # rows a=[+1,-1], cols b=[+2,-2], mu=0, no interaction
+        obs = [O("op0", "u0", 3.0), O("op0", "u1", -1.0),
+               O("op1", "u0", 1.0), O("op1", "u1", -3.0)]
+    elif which == "pure_pairing":
+        # a=b=0, all variance in the interaction contrast [[1,-1],[-1,1]]
+        obs = [O("op0", "u0", 1.0), O("op0", "u1", -1.0),
+               O("op1", "u0", -1.0), O("op1", "u1", 1.0)]
+    elif which == "mixed":
+        # a=[+1,-1], b=[+2,-2], r=[[.5,-.5],[-.5,.5]]: SS 4 / 16 / 1 -> 1/21
+        obs = [O("op0", "u0", 3.5), O("op0", "u1", -1.5),
+               O("op1", "u0", 0.5), O("op1", "u1", -2.5)]
+    else:
+        raise ValueError(which)
+    f = mod.interaction_fraction(obs)
+    return None if f is None else round(f, 12)
+
+
 def seed():
     """Registers the two instances the rule was earned from."""
     fn, detail = _extract_verdict()
@@ -554,6 +587,32 @@ def seed():
               "the rule (ramp), and the arithmetic (constant) -- and their "
               "expected values are all distinct so a constant integrator "
               "cannot pass the set."),
+    )
+    register(
+        "operator-machine-coupling/coupling_separation.py::"
+        "interaction_fraction",
+        _omc_interaction_fraction,
+        [
+            case("additive", ("additive",), 0.0,
+                 "an additive table (outcome = mu + a_i + b_j, no pairing "
+                 "term) has SS_pair exactly 0, so the pairing fraction is 0; "
+                 "a decomposition that leaked a main effect into the "
+                 "interaction would miss this", tol=1e-9),
+            case("pure_pairing", ("pure_pairing",), 1.0,
+                 "a table whose only structure is the interaction contrast "
+                 "[[1,-1],[-1,1]] has zero main effects, so the whole "
+                 "structured variance is the pairing: fraction 1", tol=1e-9),
+            case("mixed", ("mixed",), 1.0 / 21.0,
+                 "main-effect SS 4 and 16 against pairing SS 1 give "
+                 "1/(4+16+1) = 1/21; present because it shares no expected "
+                 "value with the other two, so the set can detect a constant "
+                 "fraction", tol=1e-9),
+        ],
+        note=("the coupling separation's headline: how much of the "
+              "structured variation is in the pairings rather than either "
+              "main effect. The three cases pin the two endpoints (0 = purely "
+              "additive, 1 = purely pairing) and one interior value the "
+              "endpoints do not share."),
     )
 
 
