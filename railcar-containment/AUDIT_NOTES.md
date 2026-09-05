@@ -38,6 +38,15 @@ What the audit computes, in one line each:
   (`RCT_009`).
 
 Every FSRI figure is carried at the README's own SOURCE CAVEAT status;
-the DOI host refuses CONNECT from here. The audit render screens clean
-through the repo's `no_severity` with no exemption. Stdlib only, parses
-under 3.9, CC0.
+the DOI host refuses CONNECT from here. That hold is now tracked in the
+folder as `FETCH_REQUIRED.md` (delivered verbatim): every value sourced
+from the landing page or press release is `[FSRI-UNVERIFIED]` until the
+report is in hand, and the figshare item refuses automated retrieval, so
+clearing it is a hand-fetch by the operator. Nothing in this audit rests
+on a marked magnitude — `RCT_002`..`RCT_009` are structure results
+(the thermal anchor is unreachable regardless of its value, the volume
+exponent is a shape, the two screens disagree on form, the margin
+contradiction and the offgas-key gap are code facts, RC_005 is
+arithmetic), which `FETCH_REQUIRED.md` §2 marks STRUCTURE-STABLE and
+MAGNITUDE-UNVERIFIED. The audit render screens clean through the repo's
+`no_severity` with no exemption. Stdlib only, parses under 3.9, CC0.

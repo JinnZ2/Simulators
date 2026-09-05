@@ -1,0 +1,55 @@
+dependency survey grid (5 terms x 5 substrates)
+    S1    S2    S3    S4    S5    
+T1  MEAS  MISS  ?     ?     ?     
+T2  ?     ?     ?     ?     ?     
+T3  ?     ?     ?     ?     SCOPE*
+T4  ?     ?     ?     ?     ?     
+T5  ?     ?     ?     ?     ?     
+* = coded but fails its admissibility bar (units for MEASURED, transform for SCOPE-DIFFERENT); see validation
+validation:
+  T3 x S5 -- SCOPE-DIFFERENT requires a complete SCOPE_TRANSFORM (reference, maps_to, breaks_at); absent: reference, maps_to, breaks_at
+counts: {'UNKNOWN': 22, 'MEASURED': 1, 'MISSING': 1, 'SCOPE-DIFFERENT': 0, 'scope_incomplete': 1, 'measured_no_units': 0}
+
+cell records (non-UNKNOWN cells; quantity, units, source -- no interpretation)
+T1 x S1   status MEASURED
+  measured_as: energy intake per unit handling time, and its variance; standard optimal-foraging currency, J/s
+  source:      optimal foraging literature
+T1 x S2   status MISSING  PROVISIONAL
+  source:      named in session as the worked example; cost asymmetry is well measured in optimal-foraging work and appears unmeasured in multiagent harnesses
+T3 x S5   status SCOPE-DIFFERENT  (inadmissible: SCOPE-DIFFERENT requires a complete SCOPE_TRANSFORM (reference, maps_to, breaks_at); absent: reference, maps_to, breaks_at)
+  scope_note:  dependencies real and load-bearing but drawn outside the accounting boundary, so the self-model is accurate within its boundary and wrong about what holds the boundary up; same error one scale down is the adult child in the parents' basement, with insurance liability, tax exposure and maintenance decisions all outside the drawn boundary
+  source:      prior session
+
+gap list -- terms MEASURED in one substrate, MISSING in another (the payoff)
+GAP 1  [OPEN]  PROVISIONAL
+  term            T1 -- cost asymmetry
+  measured in     S1 (foraging / predation ecology): energy intake per unit handling time, and its variance; standard optimal-foraging currency, J/s
+  missing in      S2 (multiagent AI harnesses)
+  transfer Q      what quantity in S2 (multiagent AI harnesses) would be the analogue of 'energy intake per unit handling time, and its variance; standard optimal-foraging currency, J/s', in S2's own units?
+  -> OPEN: no transfer stated; this is the research question, not yet an experiment
+
+UNKNOWN cells: 22 of 25 (not-yet-looked, NOT an absence of the term)
+  T1 x S3
+  T1 x S4
+  T1 x S5
+  T2 x S1
+  T2 x S2
+  T2 x S3
+  T2 x S4
+  T2 x S5
+  T3 x S1
+  T3 x S2
+  T3 x S3
+  T3 x S4
+  T4 x S1
+  T4 x S2
+  T4 x S3
+  T4 x S4
+  T4 x S5
+  T5 x S1
+  T5 x S2
+  T5 x S3
+  T5 x S4
+  T5 x S5
+SCOPE-DIFFERENT cells lacking a complete transform: 1 (coded SCOPE-DIFFERENT, downgraded to UNKNOWN, counted apart from the 22 never-coded UNKNOWN cells)
+  T3 x S5 -- SCOPE-DIFFERENT requires a complete SCOPE_TRANSFORM (reference, maps_to, breaks_at); absent: reference, maps_to, breaks_at
