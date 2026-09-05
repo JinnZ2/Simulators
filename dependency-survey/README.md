@@ -47,20 +47,22 @@ not in `CELLS.md` is UNKNOWN.
 | `WORK_ORDER.md` | delivered verbatim |
 | `ADDENDUM_01.md` | delivered verbatim; rescopes the SCOPE-DIFFERENT bar |
 | `ADDENDUM_02.md` | delivered verbatim; narrows the units bar (type vs scale) |
-| `RESULT_taxonomy_replication.md` | delivered verbatim; cross-model replication of the taxonomy test |
+| `RESULT_taxonomy_crossmodel.md` | delivered verbatim; cross-model replication of the taxonomy test (Kimi vs Perplexity) |
+| `RESULT_repair_adjacency.md` | delivered verbatim; a third system (DeepSeek, by repair) and the strict hierarchy |
 | `CELLS.md` | the coded cells, human-editable data store |
 | `survey.py` | the 5×5 grid, the admissibility bars, validation |
 | `gaps.py` | gap derivation, transfer questions, NO-TRANSFER |
 | `report.py` | table, cell records, gap list, UNKNOWN + scope-incomplete + type-only counts |
-| `taxonomy_replication.py` | transcription-consistency check of the RESULT's §1 nesting table + §6 count-refusal |
+| `taxonomy_replication.py` | transcription-consistency check of the crossmodel §1 nesting table + §6 count-refusal |
+| `repair_adjacency.py` | transcription-consistency check of the refinement chain Kimi ⊃ DeepSeek ⊃ Perplexity |
 | `run_all.py` | emits the full report |
-| `CLAIM_TABLE.md` | `DS_001..DS_013` |
+| `CLAIM_TABLE.md` | `DS_001..DS_017` |
 
 ## The taxonomy test, replicated across models
 
 `ADDENDUM_01` §2 left the SCOPE-DIFFERENT taxonomy OPEN because Runs 1
 and 2 shared a system, so their agreement could not tell *converged*
-from *remembered*. `RESULT_taxonomy_replication.md` (delivered verbatim)
+from *remembered*. `RESULT_taxonomy_crossmodel.md` (delivered verbatim)
 runs a **blind** Perplexity sort of the same 19 cells — no K-list, no
 repo access — against the Kimi sort, and the question **splits**:
 **membership replicated** (the two taxonomies are strictly nested, zero
@@ -75,6 +77,24 @@ output not held here), null-tested against a constructed cross-cut
 (`DS_011`) — and encodes §6's *report membership, not a kind count* as a
 **refusal in code**: `kind_count()` returns `UNSETTLED`, never an
 integer (`DS_012`).
+
+`RESULT_repair_adjacency.md` (delivered verbatim) adds a **third
+system** — DeepSeek, sorting by *repair* into a 9-component adjacency
+graph — and resolves the character of the count. The three groupings do
+not conflict; they **nest in one order**, `Kimi (4-5) ⊃ DeepSeek (9) ⊃
+Perplexity (11)`, zero cross-cutting: every DeepSeek component inside one
+Kimi kind, every Perplexity group inside one DeepSeek component. **So
+grain was never a disagreement — it is a cut height on a tree all three
+independently found** (class / operation / operation-plus-referent).
+`repair_adjacency.py` transcribes the §1–§3 memberships and verifies each
+link of the chain is a refinement (`DS_014`), null-tested; it flags K4
+**dead as a repair class** (its members scatter across three components,
+`DS_015`), carries the straggler `T13`'s DeepSeek placement in C1 without
+closing the gap (`DS_016`), and turns §6's refusal into a **cut-height**
+statement — *a single number is a cut, and a cut with no stated height is
+the thing the instrument exists to catch* (`DS_017`). All of it is a
+transcription-consistency check; the corpus is external model output not
+held here.
 
 ## What the seed produces
 

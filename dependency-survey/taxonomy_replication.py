@@ -31,7 +31,7 @@ parses under Python 3.9.
 
 import sys
 
-# ---- transcribed from §1 of RESULT_taxonomy_replication.md, verbatim ----
+# ---- transcribed from §1 of RESULT_taxonomy_crossmodel.md, verbatim ----
 # Kimi kind -> the Perplexity groups that cover it. Per-record memberships
 # are not printed in §1 and are not invented here.
 KIMI_COVERS = {

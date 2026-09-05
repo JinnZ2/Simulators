@@ -7157,7 +7157,7 @@ underneath).
   not held here; this repo's seed carries zero type-only cells, so the
   count is a visible zero and nothing here is re-coded, and nothing is
   fabricated to stand in for the external run. **`RESULT_taxonomy_-
-  replication.md` then settles half of the taxonomy question `DS_008`
+  crossmodel.md` then settles half of the taxonomy question `DS_008`
   left open** (delivered verbatim; ADDENDUM 01 §2 held it OPEN because
   Runs 1 and 2 shared a system, so agreement could not tell *converged*
   from *remembered*). A **blind** Perplexity sort of the same 19 cells —
@@ -7184,8 +7184,39 @@ underneath).
   over-split/over-merge signature, the literature audit's tag defect and
   the G2 EXACT→PARTIAL downgrade) is carried verbatim and not verified at
   record level. `DS_008`'s taxonomy status moves `OPEN` → `PARTLY SETTLED`
-  (membership SEVERAL, count OPEN). Thirteen `DS_*` claims (`ADDENDUM_01`
-  a rescope, `ADDENDUM_02` a narrow, the RESULT a partial settlement).
+  (membership SEVERAL, count OPEN). **`RESULT_repair_adjacency.md` then
+  adds a third system and resolves the character of the count**
+  (delivered verbatim): DeepSeek sorts the same 19 records by *repair*
+  into a 9-component adjacency graph, and the three groupings **do not
+  conflict — they nest in one order**, `Kimi (4-5) ⊃ DeepSeek (9) ⊃
+  Perplexity (11)`, zero cross-cutting (every DeepSeek component inside
+  one Kimi kind, every Perplexity group inside one DeepSeek component).
+  **`DS_014`: grain was never a disagreement — it is a cut height on a
+  tree all three independently found** (class / operation /
+  operation-plus-referent); `repair_adjacency.py` transcribes the §1–§3
+  record-level memberships and verifies each link of the chain is a
+  refinement (`perplexity_refines_deepseek`, `deepseek_refines_kimi`, both
+  zero cross-cut, the 4 kinds covering all 9 components), a
+  transcription-consistency check not a reproduction, null-tested against
+  a component-spanning group. **`DS_015`:** the repair reading confirms
+  `K4` **dead as a repair class** (its blind members scatter across three
+  components — a second independent failure after both sorters gave it
+  zero) and carries two Kimi edges flagged-not-dropped — `C7 → K3` a
+  correction candidate (NLS-3 pulled from the speedup cluster by both
+  external systems) and `C8 → K5` contestable (the T11 covariate). **`DS_016`:**
+  the straggler `T13` (== the crossmodel `G9`) was placed by DeepSeek in
+  C1 with the two-referent record — the one cross-cutting event — and is
+  **not closed here**: one system, one placement, no argument, the
+  document's own T13-reduces-to-TMP-2 test carried as the next step.
+  **`DS_017`:** §6's refusal sharpens — `kind_count()` returns a
+  **cut-height statement, never a bare integer** (*a single number is a
+  cut, and a cut with no stated height is the thing the instrument exists
+  to catch*), and §5's recurring three-system speedup collapse (Kimi alone
+  reading the transforms, the ENG-3 sign inversion) and §7's not-tested
+  list (asymmetric adjacency and CANNOT-FALSIFY both permitted and unused,
+  the tree from one repair reading) are carried verbatim, not verified.
+  Seventeen `DS_*` claims (`ADDENDUM_01` a rescope, `ADDENDUM_02` a narrow,
+  two RESULTs settling membership and then the character of the count).
   Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `railcar-containment/` — A delivered folder, complete and verbatim
   (`README.md`, `CLAIMS.md`, three screens, `run_all.py`, a params

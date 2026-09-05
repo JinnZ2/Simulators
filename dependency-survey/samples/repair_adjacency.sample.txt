@@ -1,0 +1,25 @@
+repair-adjacency hierarchy (RESULT_repair_adjacency.md §2)
+transcription-consistency check of the refinement chain; not a reproduction
+(the 19-cell corpus is external model output: Kimi, Perplexity, DeepSeek)
+
+DeepSeek partition: 9 components, 19 records
+chain:  Kimi (4-5)  >  DeepSeek (9)  >  Perplexity (11)
+
+Perplexity REFINES DeepSeek: yes, zero cross-cutting
+  11 groups from 9 components: 7 whole + 2 split (C1 -> T01,T07 | T13; C9 -> T15 | T19)
+DeepSeek REFINES Kimi: yes, zero cross-cutting
+  contested (present, flagged, not settled): C7->K3 correction candidate (NLS-3); C8->K5 contestable (T11 covariate)
+
+K4: scattered across components C1, C6, C7 -- DEAD as a repair class
+straggler T13: placed by DeepSeek in C1 (the one cross-cutting event); close-test NOT decided on one system
+
+CUT HEIGHTS (§6):
+  class (is a conversion available at all)             4-5  (Kimi)
+  operation (which move)                               9  (DeepSeek)
+  operation + referent (which move, on which referent) 11  (Perplexity)
+
+STANDING ANSWER (§6):
+  one or several? SEVERAL (four sorts, none returned one)
+  how many?       A CUT HEIGHT, not a number (4-5 class / 9 operation / 11 operation+referent); state the height
+  which to report? both endpoints, with the nesting stated
+  what is fixed?  MEMBERSHIP at every level; nothing cross-cuts
