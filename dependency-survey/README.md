@@ -47,12 +47,34 @@ not in `CELLS.md` is UNKNOWN.
 | `WORK_ORDER.md` | delivered verbatim |
 | `ADDENDUM_01.md` | delivered verbatim; rescopes the SCOPE-DIFFERENT bar |
 | `ADDENDUM_02.md` | delivered verbatim; narrows the units bar (type vs scale) |
+| `RESULT_taxonomy_replication.md` | delivered verbatim; cross-model replication of the taxonomy test |
 | `CELLS.md` | the coded cells, human-editable data store |
 | `survey.py` | the 5×5 grid, the admissibility bars, validation |
 | `gaps.py` | gap derivation, transfer questions, NO-TRANSFER |
 | `report.py` | table, cell records, gap list, UNKNOWN + scope-incomplete + type-only counts |
+| `taxonomy_replication.py` | transcription-consistency check of the RESULT's §1 nesting table + §6 count-refusal |
 | `run_all.py` | emits the full report |
-| `CLAIM_TABLE.md` | `DS_001..DS_010` |
+| `CLAIM_TABLE.md` | `DS_001..DS_013` |
+
+## The taxonomy test, replicated across models
+
+`ADDENDUM_01` §2 left the SCOPE-DIFFERENT taxonomy OPEN because Runs 1
+and 2 shared a system, so their agreement could not tell *converged*
+from *remembered*. `RESULT_taxonomy_replication.md` (delivered verbatim)
+runs a **blind** Perplexity sort of the same 19 cells — no K-list, no
+repo access — against the Kimi sort, and the question **splits**:
+**membership replicated** (the two taxonomies are strictly nested, zero
+cross-cutting — every Perplexity group under exactly one Kimi kind), so
+SCOPE-DIFFERENT is **SEVERAL**; the **count did not** (4 Kimi kinds vs
+11 Perplexity groups over 13 distinct), so *how many* is grain-dependent
+and **UNSETTLED** (`DS_013`). `taxonomy_replication.py` makes the
+strict-nesting headline checkable here — it transcribes the delivered §1
+map and verifies it is a function (a **transcription-consistency check,
+not a reproduction of the sort**; the 19-cell corpus is external model
+output not held here), null-tested against a constructed cross-cut
+(`DS_011`) — and encodes §6's *report membership, not a kind count* as a
+**refusal in code**: `kind_count()` returns `UNSETTLED`, never an
+integer (`DS_012`).
 
 ## What the seed produces
 

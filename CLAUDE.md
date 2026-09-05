@@ -7156,8 +7156,36 @@ underneath).
   scope is the 96 of 537 MEASURED cells in the Kimi falsifier survey Run 2,
   not held here; this repo's seed carries zero type-only cells, so the
   count is a visible zero and nothing here is re-coded, and nothing is
-  fabricated to stand in for the external run. Ten `DS_*` claims
-  (`ADDENDUM_01` folded in as a rescope, `ADDENDUM_02` as a narrow).
+  fabricated to stand in for the external run. **`RESULT_taxonomy_-
+  replication.md` then settles half of the taxonomy question `DS_008`
+  left open** (delivered verbatim; ADDENDUM 01 §2 held it OPEN because
+  Runs 1 and 2 shared a system, so agreement could not tell *converged*
+  from *remembered*). A **blind** Perplexity sort of the same 19 cells —
+  no K-list, no repo access — against the Kimi sort **splits** the
+  question. **`DS_013`: MEMBERSHIP replicated** (the two taxonomies are
+  strictly nested, zero cross-cutting — every Perplexity group under
+  exactly one Kimi kind, the proxy/wall-clock K3 core the strongest single
+  result), so SCOPE-DIFFERENT is **SEVERAL**; the **count did not** (4
+  Kimi kinds vs 11 Perplexity groups over 13 distinct, six singletons —
+  near an identity map), so *how many* is grain-dependent and
+  **UNSETTLED**; `K4` drew zero members under both sorters (a Run-1-only
+  candidate artifact) and the straggler `G9`/F-TETRA-SCOPE is the record
+  neither sorter could place and no field could name. **`DS_011`:** the
+  strict-nesting headline is checkable here without the corpus —
+  `taxonomy_replication.py` transcribes the delivered §1 map and verifies
+  it is a FUNCTION (every group under exactly one kind), a
+  **transcription-consistency check, not a reproduction of the sort**
+  (the 19-cell corpus is external model output, not held here and not
+  fabricated), null-tested against a constructed cross-cut. **`DS_012`:**
+  §6's *report membership, not a kind count* is encoded as a refusal —
+  `kind_count()` returns `UNSETTLED`, never an integer (the
+  `domain-ledger` no-composite discipline applied to a kind count). All of
+  §2–§5 (the K5 confirmed-at-record-not-as-a-kind reading, the
+  over-split/over-merge signature, the literature audit's tag defect and
+  the G2 EXACT→PARTIAL downgrade) is carried verbatim and not verified at
+  record level. `DS_008`'s taxonomy status moves `OPEN` → `PARTLY SETTLED`
+  (membership SEVERAL, count OPEN). Thirteen `DS_*` claims (`ADDENDUM_01`
+  a rescope, `ADDENDUM_02` a narrow, the RESULT a partial settlement).
   Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `railcar-containment/` — A delivered folder, complete and verbatim
   (`README.md`, `CLAIMS.md`, three screens, `run_all.py`, a params

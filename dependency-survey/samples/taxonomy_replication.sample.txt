@@ -1,0 +1,26 @@
+cross-model replication of the SCOPE-DIFFERENT taxonomy
+(ADDENDUM 01 §2; transcription-consistency check of the delivered §1 table,
+ not a reproduction of the sort -- the 19-cell corpus is external model output)
+
+STRICTLY NESTED (zero cross-cutting): yes
+  every Perplexity group is under exactly one Kimi kind:
+    G1   under K1
+    G2   under K3
+    G3   under K1
+    G4   under K1
+    G5   under K1
+    G6   under K2
+    G7   under K3
+    G8   under K5
+    G9   under (none -- straggler)  straggler: no kind, and no field name found
+    G10  under K5
+    G11  under K5
+
+GRAIN (the disagreement): 4 Kimi kinds with members vs 11 Perplexity groups, over 13 distinct
+  membership from the records; grain from the sorter, and nothing in the records settles it
+K4: zero members under both sorters (Run-1-only, candidate artifact)
+
+STANDING ANSWER (§6):
+  one or several? SEVERAL (three independent sorts, none returned one group)
+  how many?       UNSETTLED (grain not fixed by anything in the records; report membership)
+  what is fixed?  MEMBERSHIP (which records belong together replicated across a sorter with no shared memory)
