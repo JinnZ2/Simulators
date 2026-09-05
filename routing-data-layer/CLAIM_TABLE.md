@@ -1,11 +1,13 @@
 # CLAIM_TABLE — routing-data-layer
 
 `MARKER.md` is a delivered marker: an envelope spec for the data layer
-heavy-vehicle routing requires, with its own claim table **RDL-1..RDL-7**
-(each carrying a REFUTED-IF). These `RDL_0NN` claims are a different set —
-properties of the **instruments** built for the marker (the envelope
-structure, the rate form, the F6 upstream discriminator), each checked on
-**constructed** data with a known answer. No DOT feed, dock-geometry dataset,
+heavy-vehicle routing requires, with its own claim table **RDL-1..RDL-17**
+(each carrying a REFUTED-IF). RDL-1..RDL-7 are the envelope / rate / upstream
+claims addressed here; RDL-8..RDL-17 (Sections 5B–5F, the nominal-case cycle
+accounting) are built out by the sibling `cycle-ledger/`. These `RDL_0NN`
+claims are a different set — properties of the **instruments** built for the
+marker (the envelope structure, the rate form, the F6 upstream
+discriminator), each checked on **constructed** data with a known answer. No DOT feed, dock-geometry dataset,
 or routing output is read (all egress-blocked), and every failure-class
 instance in the marker is carried, not verified. Nothing here is a result.
 

@@ -7708,8 +7708,14 @@ underneath).
 - `routing-data-layer/` — A delivered marker (`MARKER.md`, verbatim, CC0): an
   **envelope specification** for the data layer heavy-vehicle automated
   routing requires — what it must contain (R1–R10), the failure classes seen
-  in service (F1–F7), a claim table (RDL-1..RDL-7) each with a REFUTED-IF, and
-  the standing cost to close it. Scope is the data layer only ("what the
+  in service (F1–F7), a claim table each with a REFUTED-IF, and
+  the standing cost to close it. The full marker spans **RDL-1..RDL-17**; this
+  folder's instruments address RDL-1..RDL-7 (envelope / rate / F6 upstream),
+  and RDL-8..RDL-17 (Sections 5B–5F, nominal-case cycle accounting, the
+  serial-interface condition, the cold-climate energy envelope, the unnotated
+  parallel work, receiving / dead-wait recovery, cross-party overlap and fault
+  workarounds) are built out by the sibling `cycle-ledger/`. Scope is the data
+  layer only ("what the
   reasoning would be reasoning OVER"); every real input (DOT feeds, dock
   geometry, routing output) is egress-blocked, so nothing here is a result.
   The `RDL_0NN` claims are properties of the built instruments, distinct from

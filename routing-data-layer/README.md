@@ -3,10 +3,19 @@
 `MARKER.md` is a delivered marker (verbatim, CC0): an **envelope
 specification** for the DATA LAYER that heavy-vehicle automated routing
 requires. It states what the layer must contain (R1–R10), the failure classes
-observed in service (F1–F7), a claim table (RDL-1..RDL-7) each carrying a
-refutation condition, and the standing cost to close the gap. **Scope: the
-data layer only** — sensing, control, and reasoning architecture are out of
-scope; every claim is about what the reasoning would be reasoning *over*.
+observed in service (F1–F7), a claim table each carrying a refutation
+condition, and the standing cost to close the gap. **Scope: the data layer
+only** — sensing, control, and reasoning architecture are out of scope; every
+claim is about what the reasoning would be reasoning *over*.
+
+The marker's claim table spans **RDL-1..RDL-17**. This folder's instruments
+address the data-layer envelope, the rate form, and the F6 upstream pattern
+— the **RDL-1..RDL-7** territory. The **RDL-8..RDL-17** claims (Sections
+5B–5F: nominal-case cycle accounting, the serial-interface condition, the
+cold-climate energy envelope, the unnotated parallel-executed work, the
+receiving interface and dead-wait recovery, cross-party overlap and fault
+workarounds) are the cycle-accounting content built out by the sibling
+`cycle-ledger/`.
 
 "The null falls out of the envelope." Every real input — DOT feeds,
 dock-geometry datasets, routing outputs — is egress-blocked, so **nothing
