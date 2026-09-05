@@ -7444,6 +7444,54 @@ underneath).
   branch verdict field — now stated as format non-goals (`UQ_005`). Six
   `UQ_*` claims; 18 selftest checks. Stdlib only, parses under 3.9,
   phone-runnable, CC0.
+- `labor-instrument/` — A two-part work order. **PART 1** is an
+  instrument-drift decomposer for BLS CES (a join answering *how much of
+  this delta is the instrument*): `vintage_store.py` (M1, every observation
+  keyed by series/period/release_date, all versions retained — the revision
+  history is the signal), `instrument_registry.py` (M2, one record per
+  methodology change), `decompose.py` (M3, splits a two-period delta into
+  **real_change | revision | boundary_crossing**). **PART 2** is a
+  substrate-neutral labor schema (`labor_schema.py`) with the framework in
+  the read layer, not the collection layer. **The egress fact sets PART 1's
+  data status:** its sources (ALFRED vintages, the BLS CES history page,
+  Census NAICS, QCEW) all need network and every host answered no on CONNECT
+  (measured 2026-09-05T14:02Z), so no data was fetched, the vintage store
+  ships **empty**, the M2 seed is **carried-not-verified** (every entry
+  `verified=False`, transcribed from the work order including the 2026-01
+  ARIMA change with its 185,000 note and the recurring rolling-5-year
+  seasonal re-estimation), and the **acceptance test — reconstruct the
+  2026-08-28 preliminary benchmark (retail −154,600, private ed+health
+  −96,000, wholesale −86,200, manufacturing −67,000) — is NOT RUNNABLE
+  here** (`LI_001`): on an empty store the reconstruction returns
+  `UNRECOVERABLE`, recorded not faked, the target stored for when vintages
+  land, nothing fabricated. **What is built and verified is the machinery**,
+  on constructed data: **`LI_003`** M3's three-way split carries a **band**
+  where the NAICS crosswalk splits ambiguously and `as_point()` **raises** —
+  never a point estimate where the crosswalk is ambiguous, null-tested both
+  ways (unambiguous → point; ambiguous 2011→2013-across-the-2012-NAICS-change
+  with split `(5,15)` → boundary `[5,15]`, real_change `[-5,5]`, raise);
+  **`LI_004`** revision is the signal and its absence is marked not zeroed (a
+  single-vintage endpoint → `UNKNOWN`, a missing endpoint → `UNRECOVERABLE`).
+  **PART 2's invariants are enforced in code, not described** (`LI_005`):
+  exposure is declared per substrate class and **never converted** across
+  classes (`convert_exposure` raises — conversion imports a valuation),
+  efficiency is **two numbers** never collapsed to one (`combined_efficiency`
+  raises), **capital stays out** (no field; `balance_on_capital` raises), and
+  the allocation model (augmentation / substitution / oversight-limited) is
+  declared, never defaulted (a `None` is flagged). The joule denominator
+  crosses classes while the exposure hour does not, and the **money-vs-joule
+  ranking flip** is a *constructed* demonstration (the real hyperaccumulator
+  number is GAP 2) — same operation, opposite ranking, the denominator does
+  the work (`LI_006`); the read-layer `complementarity()` query reports where
+  a combined operation's output-per-joule beats either substrate alone, both
+  directions reachable (`LI_007`). **The three gaps are posted, not filled**
+  (`GAPS.md`, `LI_008`): metabolic joules per O*NET task class, insolation →
+  metal for hyperaccumulators, compute joules per task-instance — each needs
+  data not in joined/published form, egress-blocked, nothing fabricated — and
+  the **task-boundary open item** (a drift-free definition of *output
+  delivered*) is recorded unresolved, with GAP 3 blocked on it. Eight `LI_*`
+  claims; 36 selftest checks. Stdlib only, parses under 3.9, phone-buildable,
+  CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated
