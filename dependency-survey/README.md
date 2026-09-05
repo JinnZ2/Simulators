@@ -20,6 +20,19 @@ vocabulary map, and it is the E7 cross-substrate table of
 `cooperative-substrate/` (`CSP_019`) with the admissibility bar made
 enforceable.
 
+`ADDENDUM_02` **narrows** the units bar (its own frame note: narrow, not
+rescope): a units field naming a data **TYPE** (`boolean`, `verdict`,
+`integer`, `unitless`, `dimensionless`) with no **CUT** (a threshold,
+band, or comparison target) does not satisfy it — a type carries no
+scale two coders can disagree about. A type-only cell downgrades to
+MISSING with its own reason and is counted on its own
+`measured_type_only` line in the report, visible as a zero when zero (the
+same shape as the scope-incomplete line). Dimensionless is not the
+problem; thresholdless is. The CUT need not be numeric — the addendum's
+own repair `float magnitude; cut at non-finite` passes. On this repo's
+seed the count is zero; the RE-CODING scope is an external corpus (the
+Kimi falsifier survey Run 2), not held here (`DS_010`).
+
 The cell store is `CELLS.md`, human-editable, one block per coded cell;
 `survey.py` parses it, so a cell recodes without touching code. A cell
 not in `CELLS.md` is UNKNOWN.
@@ -33,12 +46,13 @@ not in `CELLS.md` is UNKNOWN.
 |---|---|
 | `WORK_ORDER.md` | delivered verbatim |
 | `ADDENDUM_01.md` | delivered verbatim; rescopes the SCOPE-DIFFERENT bar |
+| `ADDENDUM_02.md` | delivered verbatim; narrows the units bar (type vs scale) |
 | `CELLS.md` | the coded cells, human-editable data store |
-| `survey.py` | the 5×5 grid, the two admissibility bars, validation |
+| `survey.py` | the 5×5 grid, the admissibility bars, validation |
 | `gaps.py` | gap derivation, transfer questions, NO-TRANSFER |
-| `report.py` | table, cell records, gap list, UNKNOWN + scope-incomplete counts |
+| `report.py` | table, cell records, gap list, UNKNOWN + scope-incomplete + type-only counts |
 | `run_all.py` | emits the full report |
-| `CLAIM_TABLE.md` | `DS_001..DS_008` |
+| `CLAIM_TABLE.md` | `DS_001..DS_010` |
 
 ## What the seed produces
 

@@ -43,6 +43,7 @@ def cell_records(g):
 def unknown_block(g):
     unk = [(t, s) for t, _ in S.TERMS for s, _ in S.SUBSTRATES if g[(t, s)]["status"] == "UNKNOWN"]
     inc = S.scope_incomplete_cells(g)
+    typ = S.measured_type_only_cells(g)
     L = ["UNKNOWN cells: %d of 25 (not-yet-looked, NOT an absence of the term)" % len(unk)]
     for t, s in unk:
         L.append("  %s x %s" % (t, s))
@@ -51,6 +52,13 @@ def unknown_block(g):
              "(coded SCOPE-DIFFERENT, downgraded to UNKNOWN, counted apart from the %d never-coded UNKNOWN cells)"
              % (len(inc), len(unk)))
     for t, s in inc:
+        L.append("  %s x %s -- %s" % (t, s, g[(t, s)]["invalid_reason"]))
+    # ADDENDUM_02: MEASURED cells whose units field names a type, not a
+    # scale. Emitted on its own line, visible as a zero when it is zero.
+    L.append("MEASURED cells whose units field names a type rather than a scale: %d "
+             "(ADDENDUM 02; coded MEASURED, downgraded to MISSING, counted apart from cells with no units at all)"
+             % len(typ))
+    for t, s in typ:
         L.append("  %s x %s -- %s" % (t, s, g[(t, s)]["invalid_reason"]))
     return "\n".join(L)
 

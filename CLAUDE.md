@@ -6859,8 +6859,21 @@ underneath).
   byte-identical to the repo copy, so TC-04's function is unchanged and
   `TCA_002` stands — the revision answered the extension's calibration
   finding and not the core's shape finding; **`TCA_018`** v2 still imports
-  nothing and reads no runout. Check count printed by `selftest_tca.py`;
-  the audit refuses `--selftest`. Stdlib only, parses under 3.9, CC0.
+  nothing and reads no runout. **`TCA_019`, a placement decision:**
+  `PLACEMENT.md` landed verbatim — the two scripts stay their own module
+  rather than attaching to a cascade chain, on two grounds (the mapping
+  domain is the valley cross-section including the counter-slope, since
+  the Langtang air blast landed 550 m up the *opposite* mountain off any
+  runout path; and a product over lag classes is not a stage in a
+  sequence). In this repository the module already stands alone as
+  `thermal-coupling/`, so the decision is honoured by construction and
+  nothing merges. The doc restates *"one free parameter, CAL_FOS 2.825"*
+  — the same single-free-parameter claim `TCA_003` refuted by an AST
+  census of 35 numeric literals (CAL_FOS = 2.825 reproduces at line 111;
+  the ONLY-free-parameter comment is line 115) — recorded so the doc is
+  not read past `TCA_003`; the decision record is not edited. Check count
+  printed by `selftest_tca.py`; the audit refuses `--selftest`. Stdlib
+  only, parses under 3.9, CC0.
 - `ch4-four-box/` — Two delivered scripts landed verbatim:
   `fourbox_forward.py` rebuilds a four-box CH4 model forward-only
   (E = M·C from prescribed concentrations, no inversion) and prints the
@@ -6890,7 +6903,30 @@ underneath).
   UNVERIFIED:** Lamantia et al. 2026 is named and not read; nothing is a
   statement about the atmosphere. Check count printed by
   `selftest_fb.py`; the audit refuses `--selftest`. Stdlib only, parses
-  under 3.9, CC0.
+  under 3.9, CC0. **A steady-state reproduction then landed**
+  (`RESULTS.md`, delivered verbatim) under the split rule *a finding
+  demonstrated from the published Methods folds into RESULTS; one that
+  needs the Zenodo code stays OPEN* — **two fold in, one stays out**, and
+  the two are built as `units_test.py` and `tn_inversion.py` (each
+  reproduces from the forward model via captured-stdout `runpy`, asserts
+  on plain invocation, refuses `--selftest`). **R-2:** the Methods label
+  the transport parameters "exchange rates of 0.22/0.45/0.45 **years**",
+  and read as TIMES the southern source goes **negative** (−5.97) while
+  read as RATES (1/yr) the baseline reproduces (tropics 163.06) — a sign
+  error settles the units question from the published values alone, no
+  archive. **R-3:** inverting the +SCA run for the published TN of 88
+  Tg/yr requires **C_TN = 733 ppb**, *above* both polar records and 13
+  under SCA, so a +49 ppb concentration move shows in the emission column
+  as only +6 Tg/yr — the 6-yr lifetime scales loss with concentration and
+  the column compresses how far the unseen box moves, the siting-bias
+  shape inside the paper's own accounting, making the effect *larger* in
+  concentration space than the table shows. **FINDING 3 stays OPEN, not
+  cited as a discrepancy**: the E_SH = −10.8 residual against a hard-fixed
+  +10 could be produced by the steady-state/transient difference, which is
+  not separable without the archived code — a residual in a reduced model,
+  and the reduction is ours. Both scripts assert clean and are covered by
+  `selftest_fb.py`; NEEM and Law Dome are named in the delivered spec but
+  not in the model's constants and are not supplied from memory.
 - `cooperative-substrate/` — A work order delivered verbatim and built to
   it: four checks, each one stdlib file under 300 lines, independently
   runnable, no network at runtime, with the order's framing claim and
@@ -7101,9 +7137,28 @@ underneath).
   beyond the three seeds is coded, so the discriminator (real shared
   structure vs projected frame) cannot be applied here — it runs against
   transfer results and none exist; the survey is a store, not a
-  conclusion, the order's own non-goal. Eight `DS_*` claims
-  (`ADDENDUM_01` folded in as a rescope). Stdlib
-  only, parses under 3.9, phone-buildable, CC0.
+  conclusion, the order's own non-goal. **`ADDENDUM_02` then narrowed the
+  units bar** (delivered verbatim; its own frame note: *narrow, not
+  rescope* — contrast `DS_008`'s rescope): a units field naming a data
+  **TYPE** (`boolean`, `verdict`, `integer`, `unitless`, `dimensionless`)
+  with no **CUT** does not satisfy MEASURED, since a type carries no scale
+  two coders can disagree about. **`DS_009`:** the instrument gains a
+  second lexical arm (`names_type` ∧ ¬`has_cut` → inadmissible, downgraded
+  to MISSING with a reason distinct from no-units, counted on its own
+  `measured_type_only` line in the report, visible as a zero); a CUT is a
+  comparison operator or a threshold/band/cut word and is **not** required
+  to be numeric, so the addendum's own repair `float magnitude; cut at
+  non-finite` passes while `boolean isfinite check per step` fails, and
+  `dimensionless` alone now fails where the bare unit-word list passed it.
+  The four FAIL and four PASS examples the addendum gives are null-tested
+  both directions; `J/s` (no type word) is unaffected, so `DS_003`'s gap
+  survives. **`DS_010` UNVERIFIED for the external corpus:** the RE-CODING
+  scope is the 96 of 537 MEASURED cells in the Kimi falsifier survey Run 2,
+  not held here; this repo's seed carries zero type-only cells, so the
+  count is a visible zero and nothing here is re-coded, and nothing is
+  fabricated to stand in for the external run. Ten `DS_*` claims
+  (`ADDENDUM_01` folded in as a rescope, `ADDENDUM_02` as a narrow).
+  Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `railcar-containment/` — A delivered folder, complete and verbatim
   (`README.md`, `CLAIMS.md`, three screens, `run_all.py`, a params
   file): the e-mobility-fire-on-railcar problem built around one
