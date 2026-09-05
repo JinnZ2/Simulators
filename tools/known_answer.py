@@ -410,6 +410,26 @@ def _mdb_lag_of_peak(which):
     return mod.lag_of_peak(x, y, lags)
 
 
+def _rdl_sustained_excess(which):
+    """routing-data-layer/rate_form.py::sustained_excess, imported. The
+    fraction of a season where dE/dt > dM/dt -- the quantity the STRUCTURAL vs
+    MATURITY_GAP verdict turns on. It could be silently wrong (an off-by-one
+    on the comparison, or counting >= instead of >), so an all-excess series
+    must read 1, a never-excess series 0, and an alternating series 0.5."""
+    import importlib.util
+    path = os.path.join(ROOT, "routing-data-layer", "rate_form.py")
+    spec = importlib.util.spec_from_file_location("_rdl_rate", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    if which == "all":
+        return round(mod.sustained_excess([2, 2, 2, 2], [1, 1, 1, 1]), 12)
+    if which == "none":
+        return round(mod.sustained_excess([1, 1, 1, 1], [2, 2, 2, 2]), 12)
+    if which == "half":
+        return round(mod.sustained_excess([2, 1, 2, 1], [1, 2, 1, 2]), 12)
+    raise ValueError(which)
+
+
 def seed():
     """Registers the two instances the rule was earned from."""
     fn, detail = _extract_verdict()
@@ -659,6 +679,27 @@ def seed():
               "recovery; the flat case pins the null -- a lag detector that "
               "returned a number on flat input would manufacture a fad "
               "reading, the failure the null exists to declare."),
+    )
+    register(
+        "routing-data-layer/rate_form.py::sustained_excess",
+        _rdl_sustained_excess,
+        [
+            case("all excess", ("all",), 1.0,
+                 "dE above dM at every step -> fraction 1; the STRUCTURAL "
+                 "verdict rests on this, so a strict-vs-nonstrict comparison "
+                 "bug would misread it", tol=1e-9),
+            case("never excess", ("none",), 0.0,
+                 "dE below dM at every step -> fraction 0 (the MATURITY_GAP "
+                 "end)", tol=1e-9),
+            case("alternating", ("half",), 0.5,
+                 "dE above dM on exactly half the steps -> 0.5; present "
+                 "because it shares no expected value with the two endpoints, "
+                 "so the set can detect a constant metric", tol=1e-9),
+        ],
+        note=("Section 5's rate-excess fraction. The three cases pin the two "
+              "endpoints (0 = refresh always keeps up, 1 = environment always "
+              "outruns it) and the interior value the endpoints do not "
+              "share."),
     )
 
 

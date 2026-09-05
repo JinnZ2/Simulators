@@ -7705,6 +7705,49 @@ underneath).
   screens clean through `no_severity` with no exemption; library modules
   refuse `--selftest`. Eight `MDB_*` claims; 36 selftest checks. Stdlib only,
   parses under 3.9, phone-buildable, CC0.
+- `routing-data-layer/` — A delivered marker (`MARKER.md`, verbatim, CC0): an
+  **envelope specification** for the data layer heavy-vehicle automated
+  routing requires — what it must contain (R1–R10), the failure classes seen
+  in service (F1–F7), a claim table (RDL-1..RDL-7) each with a REFUTED-IF, and
+  the standing cost to close it. Scope is the data layer only ("what the
+  reasoning would be reasoning OVER"); every real input (DOT feeds, dock
+  geometry, routing output) is egress-blocked, so nothing here is a result.
+  The `RDL_0NN` claims are properties of the built instruments, distinct from
+  the marker's own RDL-N. **`RDL_001`, the two structural absences:**
+  `envelope.py` classifies each required content INCOMPLETE (a reporting chain
+  exists, fundable) or NEVER_CREATED (**R8** per-door dock geometry, **R9**
+  per-field update latency — no originating record; paying to CREATE, not to
+  fund), the `uninstrumented`/`generation-capacity` shape ("not answerable at
+  that instrument," not a gap). **`RDL_002`:** the RDL-1..RDL-7 table is
+  encoded with every claim carrying a refutation condition; `validate_claim`
+  refuses one without (a claim with no falsifier is a position — the
+  `falsifier-audit` discipline). **`RDL_003`, the load-bearing runnable
+  instrument:** Section 5's rate form — where dE/dt > dM/dt **sustained** the
+  null is STRUCTURAL not a maturity gap; `sustained_excess` (registered in
+  `tools/known_answer.py`: all→1, none→0, half→0.5) drives `rate_verdict`
+  (STRUCTURAL "different answer" / MATURITY_GAP "not yet" / UNDETERMINED), a
+  single crossing not enough — the repo's rate-mismatch shape
+  (`rigidification-sensor`, `closure-cost`, `revision-mechanism`) on a data
+  layer, with the marker's cheapest test (both rates for one county over one
+  season) named and not run. **`RDL_004`, F6:** two independent systems both
+  wrong indicates an **upstream** defect not vendor maintenance —
+  `upstream_verdict` returns UPSTREAM_INCOMPLETE (both wrong, opposite
+  directions), SHARED_BIAS, VENDOR_DEFECT or BOTH_CORRECT, and
+  `single_vendor_fix_closes` is True only for a lone vendor defect (the
+  `effective-redundancy-audit` shared-node shape, the marker's RDL-2).
+  **`RDL_005`:** RDL-5's standing-vs-capital cost — `survey_decay` shows a
+  one-time survey falls below the accuracy floor within one season (0.40, does
+  not hold) while a refreshed one holds (0.85). **`RDL_006`/`RDL_007`
+  carried:** the two-structural-absences distinction is cross-referenced not
+  restated, and framing/scope/provenance are honored — a marker not a
+  critique, no author section, every failure-class instance
+  (Minneapolis/Milwaukee bridges, Black Dog/Cliff Road, I-794, ~2–3 in dock
+  offsets) carried not verified, the larger population held in a separate
+  operator repo. `demo_rdl.py` screens clean through `no_severity` with no
+  exemption (the marker's severity vocabulary sits inside underscored verdict
+  tokens like VENDOR_DEFECT that the word-boundary screen does not fire on);
+  library modules refuse `--selftest`. Seven `RDL_*` claims; 30 selftest
+  checks. Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated
