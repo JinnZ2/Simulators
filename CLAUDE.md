@@ -7582,8 +7582,36 @@ underneath).
   with the GAP-4 open item), transformation vocabulary (draft needed),
   merge_in/merge_out mechanics (deferred). The demo screens clean through
   `sheet-structure-scan/no_severity` with no exemption; library modules refuse
-  `--selftest`. Nine `MRF_*` claims; 45 selftest checks. Stdlib only, parses
-  under 3.9, phone-buildable, CC0.
+  `--selftest`. Nine `MRF_*` claims; 45 selftest checks. **A v2 revision then
+  landed** (`WORK_ORDER_V2.md`, verbatim beside v1, both inspectable) adding
+  Rule 8, a required test-case format, and three Rule 8 cases, built
+  additively. **`MRF_010` Rule 8:** no payment field in the base layer —
+  `write_base_entry` raises `PaymentInBasePath` on a payment-shaped keyword,
+  `has_payment_field()` is False, and payment enters only as a Rule 2 view
+  with a declared boundary exclusion; acceptance #7 (a paid-only aggregate has
+  no base-field route) holds. **`MRF_011` the test-case format** — every case
+  carries `tests`/`does_not_test`/`why_not`, all required, `validate_case`
+  refusing a case missing any: Rule 5 applied to test cases, since a case
+  silent about what it does not establish becomes evidence for that within one
+  citation. **`MRF_012`, the finding:** Case B (terra preta — measured output,
+  absent exposure in one entry) **forces Rule 7 to be per column** — the v1
+  entry-level status and per-entry aggregate counts could not express it, so
+  v2 adds `column_status`, `exposure_value()` and a per-column fold, a rate
+  over an absent column reads `NOT_COMPUTABLE`, and an absent column carrying a
+  number is refused (the failure mode caught: a pipeline requiring exposure to
+  accept an entry drops the best-performing artifact). **`MRF_013`:** Cases
+  A/B/C each test a different thing and are not merged — A (both barn entries
+  summable, no payment field), B (strong output accepted with absent exposure,
+  efficiency `NOT_COMPUTABLE`, durability readable), C (labor-unit records
+  compared without conversion, `convert_exposure` raises) — with three
+  distinct `does_not_test` boundaries. **`MRF_014`:** the reference marker
+  (commons-style village labor institutions) is named and **not delivered**,
+  not reconstructed; the real service-life / persistence / mit'a figures are
+  carried from the spec, egress-blocked, used only as constructed illustrative
+  values. `demo_v2.py` screens clean through `no_severity` under one declared
+  three-arm exemption (`needs`, in Case B's delivered why-not text). Fourteen
+  `MRF_*` claims; 76 selftest checks. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated

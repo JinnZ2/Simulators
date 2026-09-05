@@ -8,10 +8,14 @@ advance — so the base layer stores transformations, categorizations are
 parallel views added later, and aggregation is a read operation.
 
 This build is fully runnable here: it is a storage format with no external
-data or hardware dependency, so all six acceptance criteria are checks, not
+data or hardware dependency, so all acceptance criteria are checks, not
 posted gaps.
 
-## The seven rules, each enforced in code
+**v2 (`WORK_ORDER_V2.md`, landed beside `WORK_ORDER.md`)** adds Rule 8 (no
+payment field), a required test-case format, three Rule 8 cases, and
+acceptance #7 — all built additively; the v1 checks are unchanged.
+
+## The rules, each enforced in code
 
 1. **Base entries are transformations, not categories** (`base_entry.py`) —
    `BaseEntry` has no category field and `write_base_entry` refuses a
@@ -34,7 +38,14 @@ posted gaps.
    reported.
 7. **Absence is recorded** (`base_entry.py`, `aggregate.py`) — four states;
    `measured_zero` enters a fold as 0.0, `unmeasured_*` never does, and the
-   two never collapse in any read path.
+   two never collapse in any read path. **v2 makes this per column** — Case B
+   (terra preta) has a measured output and an absent exposure in one entry, so
+   `column_status` overrides the entry status per column and the aggregate
+   folds per column.
+8. **No payment field in the base layer** (`base_entry.py`, v2) —
+   `write_base_entry` refuses a payment-shaped keyword; payment enters as a
+   Rule 2 view with a declared boundary exclusion, never a base field. A
+   paid-only aggregate has no base-field route (acceptance #7).
 
 ## The bisection diagnostic — structure before locus
 
@@ -47,35 +58,54 @@ from any other structure, because reporting an address from a both-sides run
 is the tool's main false-positive path. For instrument drift the span is the
 methodology registry, not calendar time.
 
-## The six acceptance criteria (all checks in `selftest_mrf.py`)
+## The acceptance criteria (all checks in `selftest_mrf.py`)
 
 1. a base entry re-read under a view added later, no rewrite — MRF_002;
 2. any stored aggregate recomputes from base + spec and matches — MRF_003;
 3. mismatched boundaries cannot sum without a reconciliation — MRF_005;
 4. a prior vintage retrievable with its release date — MRF_004;
 5. `unmeasured` and `measured_zero` never collapse — MRF_007;
-6. bisection returns a structure verdict before any locus — MRF_008.
+6. bisection returns a structure verdict before any locus — MRF_008;
+7. no base entry has a payment field; a paid-only aggregate needs a declared
+   view + boundary exclusion — MRF_010 (v2).
+
+## The v2 test-case format
+
+Every Rule 8 case carries `tests` / `does_not_test` / `why_not` (Rule 5
+applied to test cases); `test_case.validate_case` refuses a case missing any
+field — a case silent about what it does not establish becomes evidence for
+that within one citation (MRF_011). The three cases each test a different
+thing and are not merged (MRF_013): **Case A** (Amish barn raising) tests
+Rule 8 end to end, **Case B** (terra preta) the durability column and
+per-column Rule 7, **Case C** (Machu Picchu / mit'a) Rule 6 no-conversion.
+The reference marker is named, not delivered, and not reconstructed; the
+real-world figures are carried, not verified (MRF_014).
 
 ## Files
 
 | file | what |
 |---|---|
-| `WORK_ORDER.md` | delivered verbatim |
-| `base_entry.py` | Rule 1/5/6/7 — the transformation record, boundary, exposure classes, absence states |
+| `WORK_ORDER.md` | delivered verbatim (v1) |
+| `WORK_ORDER_V2.md` | delivered verbatim (v2 — adds Rule 8, test-case format, cases) |
+| `base_entry.py` | Rule 1/5/6/7/8 — the transformation record, boundary, exposure classes, absence states (per column), the payment guard |
 | `views.py` | Rule 2 — parallel categorization views |
-| `aggregate.py` | Rule 3 — read-time aggregation, the boundary-sum refusal (Rule 5), absence counted apart (Rule 7) |
+| `aggregate.py` | Rule 3 — read-time aggregation, the boundary-sum refusal (Rule 5), absence counted apart per column (Rule 7) |
 | `entry_store.py` | Rule 4 — the vintage layer, importing `labor-instrument`'s `VintageStore` |
 | `bisect_structure.py` | the bisection-as-structure diagnostic |
-| `demo.py` | a worked pass on constructed entries, screened through `no_severity` |
-| `selftest_mrf.py` | 45 checks — the seven rules, the six acceptance criteria, the four bisection verdicts |
-| `CLAIM_TABLE.md` | `MRF_001..MRF_009` |
-| `samples/mrf_demo.sample.txt` | one constructed report |
+| `test_case.py` | v2 — the required `tests`/`does_not_test`/`why_not` format + `validate_case` |
+| `rule8_cases.py` | v2 — Cases A/B/C, each runnable against the base layer |
+| `demo.py` | a worked pass on constructed entries (v1), screened through `no_severity` |
+| `demo_v2.py` | a worked pass on Rule 8 + the cases, screened (one declared exemption: `needs`, delivered case text) |
+| `selftest_mrf.py` | 76 checks — the eight rules, the seven acceptance criteria, the bisection verdicts, the v2 cases |
+| `CLAIM_TABLE.md` | `MRF_001..MRF_014` |
+| `samples/` | `mrf_demo.sample.txt`, `mrf_v2_cases.sample.txt` |
 
 ## Run
 
 ```
-python3 machine-record-format/selftest_mrf.py     # 45 checks
-python3 machine-record-format/demo.py             # the worked pass
+python3 machine-record-format/selftest_mrf.py     # 76 checks
+python3 machine-record-format/demo.py             # the v1 worked pass
+python3 machine-record-format/demo_v2.py          # the v2 worked pass (Rule 8 + cases)
 ```
 
 The library modules refuse `--selftest` with rc 2. Stdlib only, parses under

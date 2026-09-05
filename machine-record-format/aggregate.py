@@ -82,7 +82,7 @@ class AggregateResult:
 
 def _denominator_field(e: BaseEntry, name: str) -> Optional[float]:
     if name == "exposure":
-        return e.exposure if e.status in (MEASURED, MEASURED_ZERO) else None
+        return e.exposure_value()      # None if the exposure column is absent
     if name == "joules_in":
         return e.numeric_joules()
     raise ValueError("unknown denominator field %r (declare exposure, "
@@ -145,13 +145,17 @@ def compute(spec: AggregateSpec, entries: List[BaseEntry],
     results: List[GroupResult] = []
     for label in sorted(groups_map, key=lambda x: (x is None, x)):
         gents = [by_id[i] for i in groups_map[label]]
-        nm = sum(1 for e in gents if e.status == MEASURED)
-        nz = sum(1 for e in gents if e.status == MEASURED_ZERO)
-        nni = sum(1 for e in gents if e.status == UNMEASURED_NO_INSTRUMENT)
-        nos = sum(1 for e in gents if e.status == UNMEASURED_OUT_OF_SCOPE)
-        # only measured / measured_zero contribute a number (Rule 7)
-        contributing = [e for e in gents
-                        if e.status in (MEASURED, MEASURED_ZERO)]
+        # Rule 7 is per COLUMN: an entry contributes to the joules fold iff
+        # its joules_in COLUMN is measured/measured_zero, even if the entry
+        # status is measured on other columns (Case B: measured output,
+        # absent joules). Counts are over the folded column's status.
+        def _cs(e):
+            return e.column_status_of("joules_in")
+        nm = sum(1 for e in gents if _cs(e) == MEASURED)
+        nz = sum(1 for e in gents if _cs(e) == MEASURED_ZERO)
+        nni = sum(1 for e in gents if _cs(e) == UNMEASURED_NO_INSTRUMENT)
+        nos = sum(1 for e in gents if _cs(e) == UNMEASURED_OUT_OF_SCOPE)
+        contributing = [e for e in gents if _cs(e) in (MEASURED, MEASURED_ZERO)]
         if not contributing:
             results.append(GroupResult(label, None, NOT_COMPUTABLE,
                                        nm, nz, nni, nos))

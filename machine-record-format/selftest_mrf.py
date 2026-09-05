@@ -22,6 +22,8 @@ import views as vw                # noqa: E402
 import aggregate as ag            # noqa: E402
 import entry_store as es          # noqa: E402
 import bisect_structure as bs     # noqa: E402
+import test_case as tc            # noqa: E402
+import rule8_cases as r8          # noqa: E402
 
 _checks = 0
 _failed = 0
@@ -57,6 +59,8 @@ B = be.Boundary
 
 def entry(eid, joules, status=be.MEASURED, boundary=None, exposure=10.0,
           release="2026-01-01", period="2026", unit="person-hours"):
+    if status in be.ABSENT:
+        exposure = None            # an all-absent entry carries no measured column
     return be.write_base_entry(
         entry_id=eid,
         input_state=S("ore", 100.0, "kg"),
@@ -254,6 +258,125 @@ raises(bs.AddressFromNonLocus, lambda: bs.address(v_nd),
 ok(bs.structure_verdict([], single).structure == bs.EMPTY_SPAN, "empty span verdict")
 ok(bs.structure_verdict(["c5"], single).structure == bs.SINGLE_ELEMENT_SPAN,
    "single-element carrying span verdict")
+
+# --------------------------------------------------------------------------
+print("Rule 8 (v2) -- no payment field in the base layer:")
+ok(not be.has_payment_field(), "BaseEntry has no payment/compensation field")
+for k in ("paid", "unpaid", "wage", "compensation", "salary"):
+    raises(be.PaymentInBasePath,
+           lambda k=k: be.write_base_entry(
+               entry_id="p", input_state=S("a", 1.0, "kg"),
+               output_state=S("b", 1.0, "kg"), exposure_unit="person-hours",
+               period="2026", status=be.MEASURED, joules_in=1.0, **{k: True}),
+           "write path refuses a %r keyword" % k)
+# payment enters ONLY as a Rule 2 view, dated like any other view
+payreg = vw.ViewRegistry()
+payreg.add_view(vw.View("v_pay", "payment_record", "payroll analyst",
+                        ("2026-01-01", ""),
+                        {"barn_community": "unpaid", "barn_contract": "paid"}))
+paidgroups = payreg.group_by("v_pay", ["barn_community", "barn_contract"])
+ok(set(paidgroups) == {"paid", "unpaid"},
+   "payment lives in a view (Rule 2), separating paid from unpaid there")
+
+# --------------------------------------------------------------------------
+print("acceptance #7 -- a paid-only aggregate needs a view + boundary exclusion:")
+# there is no base-field route to 'paid' -- the only route is the view above,
+# and selecting one of its labels is a boundary exclusion the reader declares.
+ok(not (set(f.name for f in __import__("dataclasses").fields(be.BaseEntry))
+        & set(be._PAYMENT_KEYS)),
+   "no base field can carry payment; the paid subset exists only via the view")
+# a paid subset exists only via the payment view above; selecting one of its
+# labels is a boundary exclusion the reader must declare (Rule 5).
+ce = r8._run_case_a()   # writes barn_community / barn_contract on identical footing
+ok(ce["no_payment_field"] and ce["payment_field_refused"],
+   "the two barn entries carry no payment field and refuse one")
+
+# --------------------------------------------------------------------------
+print("test-case format (v2) -- tests / does_not_test / why_not REQUIRED:")
+good = tc.TestCase("g", "establishes X", "does not establish Y",
+                   "because Z blocks it")
+tc.validate_case(good)
+ok(good.citable(), "a complete case is citable")
+raises(tc.IncompleteCase,
+       lambda: tc.validate_case(tc.TestCase("bad", "establishes X", "", "")),
+       "a case with no does_not_test is refused (must not be cited)")
+raises(tc.IncompleteCase,
+       lambda: tc.validate_case(tc.TestCase("bad2", "", "not Y", "because")),
+       "a case with no tests is refused")
+
+# --------------------------------------------------------------------------
+print("Rule 8 cases A / B / C -- each tests a DIFFERENT thing:")
+for case in r8.CASES:
+    tc.validate_case(case)          # each carries the required triple
+    ok(case.citable(), "%s is citable (carries the triple)" % case.name)
+# they are not merged: the three does_not_test fields are distinct
+dnt = {c.does_not_test for c in r8.CASES}
+ok(len(dnt) == 3, "the three cases have distinct does_not_test boundaries")
+
+# Case A -- Rule 8 end to end
+a = r8.CASE_A.run()
+ok(a["both_present"] and a["summable_joules"] == 8.0e8 + 7.0e8,
+   "Case A: both entries present and summable on identical footing")
+ok(a["no_payment_field"] and a["payment_field_refused"],
+   "Case A: neither carries a payment field; one is refused")
+
+# Case B -- strong output, absent exposure, efficiency not computable
+b = r8.CASE_B.run()
+ok(b["accepted_with_absent_exposure"], "Case B: entry accepted despite absent exposure")
+ok(b["exposure_value_is_none"], "Case B: absent exposure is None, not fabricated")
+ok(b["ratio_flag"] == ag.NOT_COMPUTABLE, "Case B: efficiency ratio is NOT_COMPUTABLE")
+ok(b["durability_readable"] == 750.0, "Case B: the output column reads regardless")
+
+# Case C -- labor-unit comparison without conversion
+c = r8.CASE_C.run()
+ok(c["compared_on_native_unit"] == 9200.0, "Case C: compared on native labor units")
+ok(c["same_exposure_class"], "Case C: same exposure class, no cross-class step")
+ok(c["convert_raises"], "Case C: conversion to a monetary unit raises (Rule 6)")
+
+# Case B forces per-column Rule 7: an entry-level status cannot say
+# "output measured, exposure absent" -- column_status can.
+mixed_col = be.write_base_entry(
+    entry_id="mc", input_state=S("a", 1.0, "kg"),
+    output_state=S("b", 1.0, "kg"), exposure=None, exposure_unit="person-hours",
+    joules_in=500.0, period="2026", observation_method="m",
+    provenance="c", status=be.MEASURED,
+    boundary=be.Boundary(("x",), ("y",), "r"), release_date="2026-01-01",
+    column_status={"exposure": be.UNMEASURED_NO_INSTRUMENT})
+ok(mixed_col.numeric_joules() == 500.0 and mixed_col.exposure_value() is None,
+   "per-column status: joules measured while exposure absent, in one entry")
+raises(ValueError,
+       lambda: be.write_base_entry(
+           entry_id="bad", input_state=S("a", 1.0, "kg"),
+           output_state=S("b", 1.0, "kg"), exposure=42.0,
+           exposure_unit="person-hours", joules_in=1.0, period="2026",
+           observation_method="m", provenance="c", status=be.MEASURED,
+           boundary=be.Boundary(("x",), ("y",), "r"), release_date="2026-01-01",
+           column_status={"exposure": be.UNMEASURED_NO_INSTRUMENT}),
+       "an absent column carrying a number is refused (not estimated)")
+
+# --------------------------------------------------------------------------
+print("v2 demo -- no_severity three-arm exemption (delivered case text):")
+import demo_v2                      # noqa: E402
+import no_severity as nosev         # noqa: E402
+_text = demo_v2.render()
+_exempt = demo_v2._declared_exemption()
+# arm 1: masked (exempt tokens removed) -> the render is clean
+_masked = _text
+for w in _exempt:
+    _masked = __import__("re").sub(r"\b%s\b" % w, "X", _masked, flags=__import__("re").I)
+ok(nosev.check(_masked)[0], "arm 1: render is clean once the exempt token is masked")
+# arm 2: the exempt token is the ONLY firer on the unmasked render
+_firers = {w.lower() for (_l, w, _s) in nosev.hits(_text)}
+ok(_firers == {x.lower() for x in _exempt},
+   "arm 2: the declared exemption is exactly the set of firers")
+# arm 3: each exempt token appears in a delivered case string
+_delivered = " ".join(c.tests + " " + c.does_not_test + " " + c.why_not
+                      for c in r8.CASES).lower()
+ok(all(w.lower() in _delivered for w in _exempt),
+   "arm 3: every exempt token is in the delivered case text")
+# arm 3b: a planted banned word is still caught through the exemption
+ok(not nosev.check(_masked + "\nthis is wrong")[0],
+   "arm 3b: a planted banned word is caught through the exemption")
 
 # --------------------------------------------------------------------------
 print("selftest: %d checks, %d failed" % (_checks, _failed))

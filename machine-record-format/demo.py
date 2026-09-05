@@ -34,6 +34,8 @@ GATE = B(("extraction",), ("transport",), "gate-to-gate")
 
 
 def mk(eid, joules, status=be.MEASURED, exposure=10.0, release="2026-01-10"):
+    if status in be.ABSENT:
+        exposure = None            # an all-absent entry carries no measured column
     return be.write_base_entry(
         entry_id=eid, input_state=S("ore", 100.0, "kg"),
         output_state=S("metal", 5.0, "kg"), exposure=exposure,

@@ -55,12 +55,25 @@ _CATEGORY_KEYS = ("category", "categories", "label", "labels", "class",
                   "classification", "naics", "taxonomy", "view", "bucket",
                   "group", "sector", "occupation_code")
 
+# Payment-shaped keywords the write path refuses (Rule 8, v2). The base layer
+# records a transformation regardless of whether a payment record exists;
+# whether something was paid is a VIEW (views.py) with a declared boundary
+# exclusion (Rule 5), never a base field, a flag, or a substrate class.
+_PAYMENT_KEYS = ("payment", "paid", "unpaid", "compensation", "compensated",
+                 "wage", "wages", "salary", "salaried", "pay", "remuneration",
+                 "monetary", "price", "cost", "wage_status", "pay_status")
+
 # A transformation endpoint: an observable quantity in DECLARED units.
 State = namedtuple("State", "quantity value unit")
 
 
 class CategoryInBasePath(Exception):
     """Raised when a category-shaped field is written into a base entry."""
+
+
+class PaymentInBasePath(Exception):
+    """Raised when a payment-shaped field is written into a base entry
+    (Rule 8). Payment is a view, not a base field."""
 
 
 class ExposureConversion(Exception):
@@ -125,6 +138,12 @@ class BaseEntry:
     status: str
     boundary: Boundary
     release_date: str = ""      # for the vintage layer (Rule 4)
+    # Rule 7 is PER COLUMN, not per entry -- Case B (terra preta) has a
+    # measured output and an absent exposure in ONE entry. `status` is the
+    # entry's default; `column_status` overrides it for a named column
+    # ("exposure", "joules_in", ...). A column with no override follows the
+    # entry status.
+    column_status: Dict[str, str] = field(default_factory=dict)
 
     def comparable(self) -> bool:
         """Rule 5: an entry with no declared boundary is not comparable."""
@@ -133,14 +152,30 @@ class BaseEntry:
     def is_absent(self) -> bool:
         return self.status in ABSENT
 
+    def column_status_of(self, column: str) -> str:
+        """The status of one column: its override if declared, else the
+        entry status. This is what keeps 'measured output, unmeasured
+        exposure' expressible in a single entry (Rule 7, per column)."""
+        return self.column_status.get(column, self.status)
+
     def numeric_joules(self) -> Optional[float]:
         """The joules that enter a numeric fold: a real number for measured
         and measured_zero (0.0), None for the absent states -- so absence
         never enters a sum as a zero (Rule 7)."""
-        if self.status == MEASURED_ZERO:
+        cs = self.column_status_of("joules_in")
+        if cs == MEASURED_ZERO:
             return 0.0
-        if self.status == MEASURED:
+        if cs == MEASURED:
             return self.joules_in
+        return None
+
+    def exposure_value(self) -> Optional[float]:
+        """The exposure that enters a numeric fold: None whenever the
+        exposure column is absent (Case B) -- a weak/absent exposure is
+        never fabricated into a number a ratio could divide by."""
+        cs = self.column_status_of("exposure")
+        if cs in (MEASURED, MEASURED_ZERO):
+            return self.exposure
         return None
 
 
@@ -156,9 +191,21 @@ def _validate(entry: BaseEntry) -> None:
         if isinstance(st.value, (int, float)) and not st.unit:
             raise ValueError("%s has a numeric value with no declared unit"
                              % name)
-    if entry.status == MEASURED and entry.joules_in is None:
-        raise ValueError("status 'measured' requires a joules_in value; use "
-                         "an unmeasured_* status for absence")
+    if entry.column_status_of("joules_in") == MEASURED and \
+            entry.joules_in is None:
+        raise ValueError("joules_in column is 'measured' but None; use an "
+                         "unmeasured_* column status for absence")
+    for col, val in (("joules_in", entry.joules_in),
+                     ("exposure", entry.exposure)):
+        cs = entry.column_status_of(col)
+        if cs not in STATUSES:
+            raise ValueError("column_status[%r] must be one of %r; got %r"
+                             % (col, STATUSES, cs))
+        # Case B: an absent column must not carry a fabricated number.
+        if cs in ABSENT and val is not None:
+            raise ValueError("column %r is %s (absent) but carries a value "
+                             "%r; an absent column is not estimated (Rule 7)"
+                             % (col, cs, val))
 
 
 def write_base_entry(**kwargs) -> BaseEntry:
@@ -172,6 +219,11 @@ def write_base_entry(**kwargs) -> BaseEntry:
             raise CategoryInBasePath(
                 "%r is a category, not a transformation; a category is a "
                 "view (views.py), never a base field (Rule 1)" % k)
+        if k.lower() in _PAYMENT_KEYS:
+            raise PaymentInBasePath(
+                "%r is a payment fact, not a transformation; payment enters "
+                "as a view with a declared boundary exclusion (Rule 8), "
+                "never a base field" % k)
     kwargs.setdefault("boundary", Boundary())
     kwargs.setdefault("exposure", None)
     kwargs.setdefault("joules_in", None)
@@ -188,6 +240,13 @@ def has_category_field() -> bool:
     a test pins to False."""
     names = {f.name for f in fields(BaseEntry)}
     return bool(names & set(_CATEGORY_KEYS))
+
+
+def has_payment_field() -> bool:
+    """True if BaseEntry ever grows a payment/compensation field -- the
+    Rule 8 invariant a test pins to False."""
+    names = {f.name for f in fields(BaseEntry)}
+    return bool(names & set(_PAYMENT_KEYS))
 
 
 def convert_exposure(*_a, **_k):
