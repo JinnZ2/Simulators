@@ -7403,6 +7403,49 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   so T4's gradient is that count as predictor. **`ENV_010` UNVERIFIED.**
   34 selftest checks. Stdlib only, parses under 3.9, phone-buildable,
   CC0.
+- `dependency-survey/` — A work order delivered verbatim and built to
+  it: a fixed five-term set (cost asymmetry / whether the aggregate
+  steers / the accounting boundary / whether a legitimate other is
+  representable / whether the accounting stance destroys its own
+  measurement) applied across five substrates (foraging, multiagent
+  harnesses, human mutual aid, ethics claims, nation-state sovereignty),
+  25 cells, to locate terms MEASURED in one substrate and MISSING in
+  another. It is the E7 cross-substrate table of `cooperative-substrate/`
+  (`CSP_019`) made runnable, with the **load-bearing units rule
+  enforced**: a cell coded MEASURED or SCOPE-DIFFERENT whose MEASURED_AS
+  states no units is INVALID and cannot seed a gap as the measured side
+  (`has_units`, `DS_001`) — what keeps the table from becoming a
+  vocabulary map. The cell store is `CELLS.md`, human-editable and
+  parsed by `survey.py`, so a cell recodes without touching code.
+  **`DS_002`, the sharp one: the seed fails the survey's own
+  admissibility bar** — `T3 x S5` is SCOPE-DIFFERENT with a scope note
+  and no admissibility fields; the instrument caught its own work order
+  on first run, and **`ADDENDUM_01` rescopes rather than patches**: a
+  "measured, but the frame differs" status reports frame information,
+  which is not in the quantity's units, so SCOPE-DIFFERENT now requires
+  a SCOPE_TRANSFORM (`reference` / `maps_to` / `breaks_at`), not units.
+  The seed still fails — prose note, no transform — and downgrades to
+  UNKNOWN, counted apart from the never-coded UNKNOWN cells (`DS_008`);
+  detected by the validator, left as delivered. The taxonomy test
+  (frame / boundary / homonym) is OPEN and is itself a survey output, so
+  no new module is built.
+  **`DS_003`:** exactly one gap falls out — `T1` cost asymmetry MEASURED
+  in foraging (J/s), MISSING in harnesses, PROVISIONAL and OPEN with the
+  transfer question posed in the target's own units, `CSP_019`'s "experiment
+  sitting there" with units on the measured side; NO-TRANSFER (the
+  projected-frame result) and TRANSFER-STATED are reachable, so the gap
+  list is not `CONSTANT_SILENT`. **`DS_004`:** 22 of 25 cells UNKNOWN,
+  counted and listed and kept apart from MISSING (the absent-vs-known-
+  negative repair). **`DS_005`:** the units check is lexical, stated at
+  its callsite and null-tested both directions. **`DS_006`:** `T5` is
+  `extraction-blindness-sim`'s stance-destroys-its-own-measurement
+  mechanism named as a survey term. **`DS_007` UNVERIFIED:** nothing
+  beyond the three seeds is coded, so the discriminator (real shared
+  structure vs projected frame) cannot be applied here — it runs against
+  transfer results and none exist; the survey is a store, not a
+  conclusion, the order's own non-goal. Eight `DS_*` claims
+  (`ADDENDUM_01` folded in as a rescope). Stdlib
+  only, parses under 3.9, phone-buildable, CC0.
 - `railcar-containment/` — A delivered folder, complete and verbatim
   (`README.md`, `CLAIMS.md`, three screens, `run_all.py`, a params
   file): the e-mobility-fire-on-railcar problem built around one
@@ -7445,8 +7488,13 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   over the egress mean the detection gain peaks at 240 s (+0.45), which
   is the folder's own station case and the claim's own falsifier.
   **`RCT_010` UNVERIFIED:** every FSRI figure is carried; nothing in the
-  audit rests on one. 31 selftest checks. Stdlib only, parses under 3.9,
-  phone-buildable, CC0.
+  audit rests on one. **`FETCH_REQUIRED.md`** (delivered verbatim) is the
+  tracked in-repo form of that hold: every landing-page/press-release
+  number is `[FSRI-UNVERIFIED]` until the report is in hand, the figshare
+  item refuses automated retrieval (a hand-fetch by the operator clears
+  it), and the audit's `RCT_002..RCT_009` are the STRUCTURE-STABLE
+  results §2 says survive without the report. 31 selftest checks. Stdlib
+  only, parses under 3.9, phone-buildable, CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated
