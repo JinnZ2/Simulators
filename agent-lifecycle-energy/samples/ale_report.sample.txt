@@ -1,0 +1,64 @@
+GAP 4 RIG REPORT -- CONSTRUCTED TRACES, NOT A MEASUREMENT
+==============================================================
+hardware probe: nvidia-smi=None  card telemetry=False  wall meter=manual  capture runnable=False
+baseline method: mean   integration: trapezoidal   floor: 10 Hz
+every joule below is built by hand to exercise the report; no row is a reading of any real machine, model, or task.
+
+---- COLD start (cold and warm are never averaged together) ----
+raw per-run records (marginal J, spinup / task / teardown, per representative task):
+  run  cond N   | card (spin/task/tear)  | wall (spin/task/tear)  | wall:card task ratio
+  cA1  A    1   | 100.0 / 150.0 / 24.0   | 120.0 / 180.0 / 28.0   | 1.20
+  cB1  B    1   | 100.0 / 150.0 / 24.0   | 120.0 / 180.0 / 28.0   | 1.20
+  cA5  A    5   | 100.0 / 150.0 / 24.0   | 120.0 / 180.0 / 28.0   | 1.20
+  cB5  B    5   | 100.0 / 150.0 / 24.0   | 120.0 / 180.0 / 28.0   | 1.20
+  cA20 A    20  | 100.0 / 150.0 / 24.0   | 120.0 / 180.0 / 28.0   | 1.20
+  cB20 B    20  | 100.0 / 150.0 / 24.0   | 120.0 / 180.0 / 28.0   | 1.20
+  cA100 A    100 | 100.0 / 150.0 / 24.0   | 120.0 / 180.0 / 28.0   | 1.20
+  cB100 B    100 | 100.0 / 150.0 / 24.0   | 120.0 / 180.0 / 28.0   | 1.20
+
+derived (card channel, then wall channel, separately):
+  [card] setup_fraction (per lifecycle): 0.365
+  [card] amortization_curve  joules_per_task vs N:
+        N:                  1        5       20      100
+        RUN A (1-task):  274.0    274.0    274.0    274.0
+        RUN B (N-task):  274.0    174.8    156.2    151.2
+  [card] succession_loss  (total A - total B), same N:
+        N=1: 0.0 J   N=5: 496.0 J   N=20: 2356.0 J   N=100: 12276.0 J
+  [wall] setup_fraction (per lifecycle): 0.366
+  [wall] amortization_curve  joules_per_task vs N:
+        N:                  1        5       20      100
+        RUN A (1-task):  328.0    328.0    328.0    328.0
+        RUN B (N-task):  328.0    209.6    187.4    181.5
+  [wall] succession_loss  (total A - total B), same N:
+        N=1: 0.0 J   N=5: 592.0 J   N=20: 2812.0 J   N=100: 14652.0 J
+
+---- WARM start (cold and warm are never averaged together) ----
+raw per-run records (marginal J, spinup / task / teardown, per representative task):
+  run  cond N   | card (spin/task/tear)  | wall (spin/task/tear)  | wall:card task ratio
+  wA1  A    1   | 60.0 / 150.0 / 24.0    | 70.0 / 180.0 / 28.0    | 1.20
+  wB1  B    1   | 60.0 / 150.0 / 24.0    | 70.0 / 180.0 / 28.0    | 1.20
+  wA5  A    5   | 60.0 / 150.0 / 24.0    | 70.0 / 180.0 / 28.0    | 1.20
+  wB5  B    5   | 60.0 / 150.0 / 24.0    | 70.0 / 180.0 / 28.0    | 1.20
+  wA20 A    20  | 60.0 / 150.0 / 24.0    | 70.0 / 180.0 / 28.0    | 1.20
+  wB20 B    20  | 60.0 / 150.0 / 24.0    | 70.0 / 180.0 / 28.0    | 1.20
+  wA100 A    100 | 60.0 / 150.0 / 24.0    | 70.0 / 180.0 / 28.0    | 1.20
+  wB100 B    100 | 60.0 / 150.0 / 24.0    | 70.0 / 180.0 / 28.0    | 1.20
+
+derived (card channel, then wall channel, separately):
+  [card] setup_fraction (per lifecycle): 0.256
+  [card] amortization_curve  joules_per_task vs N:
+        N:                  1        5       20      100
+        RUN A (1-task):  234.0    234.0    234.0    234.0
+        RUN B (N-task):  234.0    166.8    154.2    150.8
+  [card] succession_loss  (total A - total B), same N:
+        N=1: 0.0 J   N=5: 336.0 J   N=20: 1596.0 J   N=100: 8316.0 J
+  [wall] setup_fraction (per lifecycle): 0.252
+  [wall] amortization_curve  joules_per_task vs N:
+        N:                  1        5       20      100
+        RUN A (1-task):  278.0    278.0    278.0    278.0
+        RUN B (N-task):  278.0    199.6    184.9    181.0
+  [wall] succession_loss  (total A - total B), same N:
+        N=1: 0.0 J   N=5: 392.0 J   N=20: 1862.0 J   N=100: 9702.0 J
+
+succession_loss is the headline: the joule cost of disposability, work delivered held constant. It grows as (N-1) x (spin-up + teardown).
+amortization_curve for RUN B falls with N toward the per-task floor; RUN A stays flat -- it pays a full lifecycle every task.

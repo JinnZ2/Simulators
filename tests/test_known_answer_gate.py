@@ -44,6 +44,7 @@ MANIFEST = (
     "sim-span/sim_span.py::quad_fit",
     "sim-span/three_column.py::ols",
     "sheet-structure-scan/sheetmodel.py::rank",
+    "agent-lifecycle-energy/phase_energy.py::integrate",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so

@@ -7492,6 +7492,49 @@ underneath).
   delivered*) is recorded unresolved, with GAP 3 blocked on it. Eight `LI_*`
   claims; 36 selftest checks. Stdlib only, parses under 3.9, phone-buildable,
   CC0.
+- `agent-lifecycle-energy/` — The GAP 4 measurement rig, companion to
+  `labor-instrument/` PART 2's GAP 4: the joule cost of agent
+  **disposability** — N single-task agents each paying a full spin-up and
+  teardown, against one persistent agent doing N tasks, work delivered held
+  constant. `WORK_ORDER.md` verbatim. **The number is the gap.** The rig
+  needs a GPU, a wall AC meter and `nvidia-smi`, and this environment has
+  none (`probe_hardware()` → `capture_runnable=False`, `nvidia_smi=None`), so
+  **no joule figure is produced and none is fabricated** — the first number
+  is the posted gap, exactly as the work order's POSTING NOTE frames it
+  (`RIG_STATUS.md`). What ships is the machinery, correct by construction on
+  constructed traces whose areas are known in advance. **`ALE_002`, the
+  integrator:** `integral (P(t) - P_idle) dt`, trapezoidal,
+  baseline-subtracted, registered in `tools/known_answer.py` with three cases
+  whose expected values are all distinct — constant (200 J, catches a dropped
+  baseline or a rectangular rule), ramp (50 J, pins the trapezoid over a
+  Riemann sum), zero-marginal (0 J, catches a baseline sign slip) — all PASS,
+  covered by the repo's known-answer test. **`ALE_003`, absent is not zero:**
+  a phase with no samples is `NO_SAMPLES` (`joules=None`), one sample
+  `SINGLE_SAMPLE`, a sub-floor phase `UNDERSAMPLED` (a real number **and** a
+  flag, present-but-suspect); `total_energy` is `NOT_COMPUTABLE` when any
+  phase is absent, never a partial sum. **`ALE_004`:** the 10 Hz floor is
+  from the work order ("1 Hz will miss the peak"), not a `[CHOICE]` — a spike
+  at 5 Hz undercounts the same spike at 200 Hz and is flagged, the `G-RES`
+  shape (feature vs sample rate). **`ALE_005`/`ALE_006`, two work-order rules
+  enforced in code:** wall and card are never blended (`blend_wall_card`
+  raises; `wall_card_ratio` compares without summing), cold and warm never
+  averaged (`mean_over_runs` / `amortization_curve` raise `ThermalStateMix`),
+  and the render prints both splits separately. **`ALE_007`, the headline:**
+  `succession_loss` = (total E, RUN A) − (total E, RUN B) at equal N reduces
+  to **(N−1) × (E_spinup + E_teardown)** — the extra spin-up/teardown cycles
+  disposability pays for — exact on constructed runs (0 at N=1), refusing any
+  mismatched pair rather than differencing incomparable totals. **`ALE_008`:**
+  the amortization curve for RUN B falls with N toward the per-task floor
+  (`E_task + (E_spinup + E_teardown)/N`) while RUN A stays flat — a disposable
+  agent amortizes nothing; the flattening point is the deployment-decision
+  number. **`ALE_009` UNVERIFIED:** acceptance is a second party reproducing
+  the DIRECTION and SHAPE on other hardware, there is no run and no second
+  party, and the work order's NOT-measured list (training amortization,
+  manufacturing, cooling beyond the wall meter, hosted/datacenter inference,
+  network) is carried so the small claim is not over-read. `phase_energy.py`
+  and `trace_parse.py` refuse `--selftest`; the render screens clean through
+  `sheet-structure-scan/no_severity` with no exemption. Nine `ALE_*` claims;
+  42 selftest checks. Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated

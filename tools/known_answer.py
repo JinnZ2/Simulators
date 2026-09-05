@@ -314,6 +314,45 @@ def _sheet_rank(shape):
     return wb.rank(("S", target))
 
 
+def _ale_integrate(which):
+    """agent-lifecycle-energy/phase_energy.py::integrate, imported.
+
+    Returns the marginal joules for a constructed phase whose area is fixed
+    by construction. The point of the case is that a meter integral, a
+    baseline subtraction, and an integration rule can each be wrong in a way
+    reading the code would not catch: a Riemann sum instead of a trapezoid
+    biases a ramp, a dropped baseline reports total draw as marginal, a sign
+    slip flips a zero-marginal phase off zero.
+    """
+    import importlib.util
+    path = os.path.join(ROOT, "agent-lifecycle-energy", "phase_energy.py")
+    spec = importlib.util.spec_from_file_location("_phase_energy", path)
+    mod = importlib.util.module_from_spec(spec)
+    # dataclasses under `from __future__ import annotations` resolve their
+    # own module out of sys.modules during class creation; register first.
+    sys.modules["_phase_energy"] = mod
+    spec.loader.exec_module(mod)
+    S = mod.Sample
+    if which == "constant":
+        # 200 W for 2.0 s over a 100 W idle: marginal 100 W x 2 s = 200 J.
+        n = 201
+        samples = [S(i * 0.01, 200.0) for i in range(n)]
+        pe = mod.integrate(samples, 100.0, "card", "task")
+    elif which == "ramp":
+        # linear ramp 0 -> 100 W over 1.0 s, zero idle: triangle area 50 J.
+        n = 101
+        samples = [S(i * 0.01, 100.0 * (i * 0.01)) for i in range(n)]
+        pe = mod.integrate(samples, 0.0, "card", "spinup")
+    elif which == "zero_marginal":
+        # 100 W for 1.0 s over a 100 W idle: marginal draw is exactly zero.
+        n = 101
+        samples = [S(i * 0.01, 100.0) for i in range(n)]
+        pe = mod.integrate(samples, 100.0, "card", "teardown")
+    else:
+        raise ValueError(which)
+    return None if pe.joules is None else round(pe.joules, 9)
+
+
 def seed():
     """Registers the two instances the rule was earned from."""
     fn, detail = _extract_verdict()
@@ -486,6 +525,35 @@ def seed():
               "collapsed to either factor alone would pass one and fail "
               "the other. The terminal case pins the property that the "
               "most-derived cell on a sheet ranks last."),
+    )
+    register(
+        "agent-lifecycle-energy/phase_energy.py::integrate",
+        _ale_integrate,
+        [
+            case("constant", ("constant",), 200.0,
+                 "200 W held for 2.0 s over a 100 W idle baseline is a "
+                 "marginal 100 W for 2 s = 200 J exactly; a trapezoid over a "
+                 "constant trace is exact, so a dropped baseline (reporting "
+                 "the full 400 J) or a rectangular rule would miss this",
+                 tol=1e-9),
+            case("ramp", ("ramp",), 50.0,
+                 "a linear ramp 0 -> 100 W over 1.0 s with zero idle is a "
+                 "triangle of area 50 J; a trapezoid is exact on a straight "
+                 "line while a left Riemann sum undercounts it, so this is "
+                 "the case that pins the integration rule", tol=1e-9),
+            case("zero_marginal", ("zero_marginal",), 0.0,
+                 "100 W held for 1.0 s over a 100 W idle is marginal zero; a "
+                 "baseline-subtraction sign slip would push it off zero, and "
+                 "this is the case that shares no expected value with the "
+                 "other two so the set can detect a constant integrator",
+                 tol=1e-9),
+        ],
+        note=("the GAP 4 rig's phase integrator: integral (P(t) - P_idle) dt, "
+              "trapezoidal, baseline-subtracted. The three cases separate the "
+              "three ways it could be wrong -- the baseline (zero_marginal), "
+              "the rule (ramp), and the arithmetic (constant) -- and their "
+              "expected values are all distinct so a constant integrator "
+              "cannot pass the set."),
     )
 
 
