@@ -7748,6 +7748,52 @@ underneath).
   tokens like VENDOR_DEFECT that the word-boundary screen does not fire on);
   library modules refuse `--selftest`. Seven `RDL_*` claims; 30 selftest
   checks. Stdlib only, parses under 3.9, phone-buildable, CC0.
+- `cycle-ledger/` — A work order delivered verbatim: two independent
+  instruments generalizing the `routing-data-layer` marker so a party can
+  run them against their **own** operation and get a number out. **Deliverable
+  1** (`cycle_ledger.py`) reads a cycle-of-elements — each with a `rate_setter`
+  (HARDWARE/TERMINAL/COUNTERPARTY/ADMINISTRATIVE/SPATIAL/DECISION) — into five
+  outputs. **`CLL_001`, the KEY READOUT:** the fraction of elements where
+  `decision_latency_binds` is TRUE, and `validate_element` refuses TRUE on any
+  non-DECISION setter; on the SEED it is **0/16**, so a faster decision layer
+  cannot move the cycle, and an empty cycle returns `None` not 0. **`CLL_002`,
+  the null both directions:** TIED/BEHIND/AHEAD, where AHEAD is the claim's
+  required support — the SEED returns **AHEAD == 0** ("support absent here")
+  and a cycle carrying one DECISION-bound element returns **AHEAD > 0** ("the
+  claim holds here"), so `classify` is not constant. **`CLL_003`:** the
+  unnotated register is the work missing from the comparison sheet, not the
+  cost (SEED 14 of 16, safety subset 7 counted apart). **`CLL_004`:** the
+  relocation ledger separates wage lines leaving from standing functions
+  arriving, and only OPERATOR-absorbed elements leave (COUNTERPARTY-absorbed
+  `gate` does not). **`CLL_005`:** one serial-interface rebuild condition per
+  TERMINAL element, summed into the saving claim's precondition (SEED 3). The
+  **SEED** is the marker's corridor, marked *ONE operator's corridor, Upper
+  Midwest*, so a user replaces rather than inherits it; every classification
+  is carried, not verified. **Deliverable 2** (`rate_gap.py`) is the marker's
+  Section 5 rate form on a data layer — dated `environment_events` vs
+  `record_updates` over one season → dE/dt vs dM/dt (binned), per-class lag,
+  and the unrecorded set. **`CLL_006`, the two inputs kept visible and not
+  collapsed:** STRUCTURAL requires a sustained dE>dM excess **and** a nonzero
+  unrecorded set; MATURITY_GAP requires the refresh to keep up **and** the
+  unrecorded set empty; a sustained excess with an *empty* unrecorded set is
+  **UNDETERMINED** ("a refresh gap, not a structural absence"), so a rate
+  reading alone is not read as STRUCTURAL — and `sustained_excess`/`rate_verdict`
+  are **imported** from `routing-data-layer/rate_form.py`, not copied, the same
+  objects that folder registered and tested. **`CLL_007`:** an unrecorded
+  event has lag **UNRECORDED** (absent, not a large lag), a class with no
+  recorded event is **NO_RECORDED**, and a record dated before its event is
+  **anomalous**, counted apart. **`CLL_008`:** every output is ≤ 60 columns
+  (asserted line-by-line) and both instruments refuse `--selftest`.
+  **`CLL_009` carried / UNVERIFIED:** the OPEN-NOT-GRADED node is recorded not
+  asserted — continuous-operation duration for a driving stack is unpublished
+  (uptime is reported against a maintenance-bay model, not hours-to-degradation),
+  so the 14-hour regulated figure and the 24-hour claim are **not comparable
+  quantities**, and **no equivalence between operator fatigue and model
+  degradation is asserted** (different mechanism, unmeasured from inside, the
+  missing measurement named); no author or working-style section (OUT OF SCOPE
+  honored). The demo screens clean through `no_severity` with no exemption.
+  Nine `CLL_*` claims; 169 selftest checks. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated
