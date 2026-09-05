@@ -7215,9 +7215,19 @@ underneath).
   reading the transforms, the ENG-3 sign inversion) and §7's not-tested
   list (asymmetric adjacency and CANNOT-FALSIFY both permitted and unused,
   the tree from one repair reading) are carried verbatim, not verified.
-  Seventeen `DS_*` claims (`ADDENDUM_01` a rescope, `ADDENDUM_02` a narrow,
-  two RESULTs settling membership and then the character of the count).
-  Stdlib only, parses under 3.9, phone-buildable, CC0.
+  **`ITEM4_ANALYSIS.md` decides the two decisive tests to the extent the
+  evidence allows:** `DS_018` adopts the *separation* of NLS-3 from the
+  speedup core (two independent sorts removed it — the two-system
+  replication standard) while leaving its *target kind* UNVERIFIED (needs
+  the record); `DS_019` argues the F-TETRA-SCOPE reduction to the
+  two-referents shape and finds it PLAUSIBLE but **NOT closed**, since the
+  RESULT's own next step is a second independent name-search that egress
+  blocks and no field name is fabricated. Neither is forced closed on
+  external data this repo does not hold. Nineteen `DS_*` claims
+  (`ADDENDUM_01` a rescope, `ADDENDUM_02` a narrow, two RESULTs settling
+  membership and then the character of the count, and item 4 decided as far
+  as the evidence reaches). Stdlib only, parses under 3.9, phone-buildable,
+  CC0.
 - `railcar-containment/` — A delivered folder, complete and verbatim
   (`README.md`, `CLAIMS.md`, three screens, `run_all.py`, a params
   file): the e-mobility-fire-on-railcar problem built around one
