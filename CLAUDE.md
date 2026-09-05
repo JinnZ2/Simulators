@@ -226,7 +226,7 @@ last three; read in order:
 - `seam-gaps/` — six gaps, one session; each between two fields
 - `corpus-input-gaps/` — input-side gaps + a response-loop sim
 - `coinage-log/` — naming gaps; is the absent word the finding
-- `falsifier-survey/` — delivered survey, filed; instructions pending
+- `falsifier-survey/` — Run 1 of a delivered falsifier survey; Run 2 split to its two repos
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
