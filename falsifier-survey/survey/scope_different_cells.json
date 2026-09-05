@@ -1,0 +1,137 @@
+[
+ {
+  "folder": "uninstrumented",
+  "claim_id": "UNI_055",
+  "source_file": "uninstrumented/CLAIM_TABLE.md",
+  "falsifier_text": "the source paper's stated historical threshold",
+  "status": "SCOPE-DIFFERENT",
+  "measured_as": null,
+  "scope_transform": {
+   "reference": "the source paper's stated threshold, which may be Prevotella-specific (species-level reference body)",
+   "maps_to": "the category-general historical low-end threshold the headline arithmetic needs (0.05% vs located 0.5%)",
+   "breaks_at": "if the located figure is species-specific it answers a different reference population than the category claim; comparison breaks on the reference-population mismatch"
+  },
+  "downgrade_reason": null,
+  "notes": "recorded NOT LOCATED; claim text: 'a Prevotella-specific threshold... a different quantity from the category's general low end'"
+ },
+ {
+  "folder": "criterion-symmetry",
+  "claim_id": "RESULTS_F1",
+  "source_file": "criterion-symmetry/RESULTS.md",
+  "falsifier_text": "Falsifier 1 — C returns the same disposition as actual across all human cases — cannot fire. Not because C disagrees, but because 6 of 6 return UNDETERMINED.",
+  "status": "SCOPE-DIFFERENT",
+  "measured_as": null,
+  "scope_transform": {
+   "reference": "C's criterion reads a within_body_agreement_rate — the fraction of one deliberating body that agreed",
+   "maps_to": "the human cases' quantity, a cross_body_adoption_fraction — the fraction of independent bodies that converged on one form; the falsifier needs C's disposition computed on the human cases",
+   "breaks_at": "at every human case H1-H6: a within-body rate cannot be computed from cross-body adoption counts (and agreement_value is null on 6 of 6), so C returns UNDETERMINED and the agreement/disagreement comparison can never be taken"
+  },
+  "downgrade_reason": null,
+  "notes": "RESULTS.md 'WHY' point 2 is exactly the scope mismatch: 'Those are properties of different objects'"
+ },
+ {
+  "folder": "research-stability-audit",
+  "claim_id": "AI_DEGRAD_001",
+  "source_file": "research-stability-audit/samples/CLAIM_TABLE.sample.json",
+  "falsifier_text": "91% or more of ML models degrade within one year of deployment. Falsification: measured_value < 0.91 over a 30-day window.",
+  "status": "SCOPE-DIFFERENT",
+  "measured_as": null,
+  "scope_transform": {
+   "reference": "fraction of N deployed models whose accuracy degrades, counted over a 30-day window",
+   "maps_to": "the claim's comparison quantity: fraction of ML models degrading within one year of deployment",
+   "breaks_at": "any degradation arriving between day 31 and day 365 is invisible to the 30-day reading; a model degrading at month 6 confirms the claim but never enters the falsifier's accounting"
+  },
+  "downgrade_reason": null,
+  "notes": "hypothesis horizon (1 year) and criterion window (30 days) come from different fields of the same claim record"
+ },
+ {
+  "folder": "rigidification-sensor",
+  "claim_id": "claim_001",
+  "source_file": "rigidification-sensor/README.md",
+  "falsifier_text": "falsifier_shape: evidence that regeneration keeps pace, OR that decline reverses below the cost-of-reversal threshold. falsifier_value: OPEN. (sensor_v1.py fills it: variance decline_rate > regen_rate per tick, boolean outpaces_regeneration, on a synthetic credit_insurance_chain)",
+  "status": "SCOPE-DIFFERENT",
+  "measured_as": null,
+  "scope_transform": {
+   "reference": "synthetic 3-node A->B->C credit_insurance_chain in sensor_v1.py with stipulated draw/regen rates; decline_rate vs regen_rate per tick in model variance units",
+   "maps_to": "variance decline rate vs regeneration rate at a real <node> (credit-insurance node, or any substrate — the invariant is declared substrate-independent)",
+   "breaks_at": "<node> is an uninstantiated placeholder and the chain's rates are stipulated, not measured; the boolean outpaces_regeneration transfers to a real node only after empirical calibration of draw/regen, which no real data in the folder supplies"
+  },
+  "downgrade_reason": null,
+  "notes": "README leaves falsifier_value OPEN ('hand the hole to whoever has the compute'); sensor_v1.py populates it on the synthetic system only"
+ },
+ {
+  "folder": "rigidification-sensor",
+  "claim_id": "claim_002",
+  "source_file": "rigidification-sensor/README.md",
+  "falsifier_text": "falsifier_shape: turning K (risk-pricing uniformity / subsidy gradient / liability rule) produces no measurable change in variance-suppression rate. falsifier_value: OPEN. (sensor_v1.py fills it: sweep of coupling sensitivity B->C x0.5-2.5, reading locked_at shifts)",
+  "status": "SCOPE-DIFFERENT",
+  "measured_as": null,
+  "scope_transform": {
+   "reference": "K = coupling sensitivity multiplier on the synthetic chain; response measured as locked_at tick and dof_end in sensor_v1.py's sweep",
+   "maps_to": "turning a real structural control parameter (risk-pricing uniformity, subsidy gradient, liability rule) and observing the variance-suppression rate at a real node",
+   "breaks_at": "no mapping from any real knob to the model's coupling sensitivity is given, and locked_at is a simulation tick, not a time in any real unit; the correspondence fails at whatever real K an operator picks"
+  },
+  "downgrade_reason": null,
+  "notes": "§4 lists candidate real Ks as hypotheses; the sweep result is a sim property"
+ },
+ {
+  "folder": "rigidification-sensor",
+  "claim_id": "claim_003",
+  "source_file": "rigidification-sensor/README.md",
+  "falsifier_text": "falsifier_shape: reversal cost flat or falling relative to continuation cost over window. falsifier_value: OPEN. (simulator.py/sensor_v1.py fill it: per-tick continuation, reversal, d_continuation, d_reversal, locked_at = first tick reversal>continuation AND d_reversal>d_continuation)",
+  "status": "SCOPE-DIFFERENT",
+  "measured_as": null,
+  "scope_transform": {
+   "reference": "per-tick continuation (current total imbalance) and reversal (cumulative eroded regen) in simulator.py on the synthetic chain, in arbitrary imbalance units",
+   "maps_to": "cost-of-reversal vs cost-of-continuation trajectory at a real node over a real window",
+   "breaks_at": "the sim quantities are model imbalances, not costs in any accounting frame; claim_003's own null hypothesis is that the measured asymmetry is an artifact of the accounting frame, which the synthetic measurement cannot address"
+  },
+  "downgrade_reason": null,
+  "notes": "README: value left OPEN deliberately; the dial is demonstrated on the demo chain (locked_at tick 1)"
+ },
+ {
+  "folder": "fragility-cascade",
+  "claim_id": "FC-1",
+  "source_file": "fragility-cascade/CLAIM_TABLE.md",
+  "falsifier_text": "(R1) A different reduced phi^4 convention yielding |h*| >1% off from 0.38490018 is a convention mismatch, not physics — the derivation is closed-form.",
+  "status": "SCOPE-DIFFERENT",
+  "measured_as": null,
+  "scope_transform": {
+   "reference": "|h*| computed under a different reduced phi^4 convention (alternative normalization of F(phi,h))",
+   "maps_to": "the dimensionless spinodal field 2/(3*sqrt(3)) = 0.38490018 in the claim's reduced convention",
+   "breaks_at": "a raw numeric comparison across conventions — a >1% deviation is a convention artifact, and the row rules it out as a refutation of the physics"
+  },
+  "downgrade_reason": null,
+  "notes": "R2 (knee outside [0.25,0.5] refutes the mapping) and R3 (thresholds above 2/(3sqrt3) in a provably-phi^4 system) are ordinary measured falsifiers on the same row"
+ },
+ {
+  "folder": "grounding-layers",
+  "claim_id": "GL_L0_004",
+  "source_file": "grounding-layers/CLAIMS.md",
+  "falsifier_text": "The scenario runs and `violations.sum() == 0`, or the grounded trajectory contains a step with velocity beyond the tolerance envelope.",
+  "status": "SCOPE-DIFFERENT",
+  "measured_as": null,
+  "scope_transform": {
+   "reference": "velocity of the corrected trajectory read from OUTSIDE the inspector, as np.diff(corrected_traj)/dt, against a 5% tolerance envelope (instrument frame)",
+   "maps_to": "the inspector's internal corrected_vel = (corrected_pos - pos)/dt after the speed-enforcement step, which is strictly ≤ max_speed (phenomenon frame, GL_L0_003)",
+   "breaks_at": "at the speed-enforcement step: the external finite-difference re-derivation shows up to ~2.5% overshoot the internal value never has, so the envelope falsifier can fire on a measurement artifact while the internal cap holds"
+  },
+  "downgrade_reason": null,
+  "notes": "CLAIMS.md states the two-frame gap itself; first disjunct (violations.sum()==0) is a plain MEASURED count"
+ },
+ {
+  "folder": "sustained-activation-gate",
+  "claim_id": "SG_007 (wet-lab)",
+  "source_file": "sustained-activation-gate/CLAIM_TABLE.md",
+  "falsifier_text": "a measured value for autonomic restoration rate OR for the order-parameter → baseline coupling pins the other via this curve. Either measurement falsifies the other's SOFT-tier assumption.",
+  "status": "SCOPE-DIFFERENT",
+  "measured_as": null,
+  "scope_transform": {
+   "reference": "physical wet-lab substrate: autonomic restoration rate or order-parameter→baseline coupling measured in real physiological units under a named biological interpretation",
+   "maps_to": "the dimensionless baseline_restore parameter and leak boundary theta of the shipped WellConfig (b=2.0, tilt=0.3, relax=0.30) on the theta(restore) frontier surface",
+   "breaks_at": "absolute values: no physical-to-dimensionless unit calibration is supplied, theta scales with WellConfig choices, and each interpretation dict's caveat field names where the analogy is weakest; only the monotone restoration-vs-coupling race survives the mapping"
+  },
+  "downgrade_reason": null,
+  "notes": "the folder's scope bounds warn against citing a numerical theta against any real substrate"
+ }
+]
