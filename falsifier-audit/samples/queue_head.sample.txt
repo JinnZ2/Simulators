@@ -1,0 +1,40 @@
+falsifier research queue -- questions, not repairs; status OPEN; unranked
+COVERAGE: 304 falsifiers found (290 LOCATED, 14 NOT-FOUND, 8 empty cells skipped); 288 entries by A1-A4 {'A1': 121, 'A2': 145, 'A3': 2, 'A4': 20}
+COVERAGE: scanned 1256 .md/.py files; skipped 716 non-.md/.py, 2 binary/non-text, 3 self-excluded (the tool's own queue, samples, and authored docs); skip dirs ['.git', '.mypy_cache', '.pytest_cache', '.ruff_cache', '.venv', '__pycache__', 'legacy', 'node_modules', 'venv']
+NOTE A3 (cross-repo incompatibility) emitted 2 entries: on this corpus the numeric-bearing falsifiers on any shared axis are folder-local, so no two folders quantify one axis incompatibly -- the same unquantified property A1 flags. Not silent: the null test fires.
+
+[A1] A1/.:CLAUDE.md:7172   status:OPEN
+  falsifier: — counting the rest as a
+  question:  what quantity, in what units, would make this falsifier fail?
+  detail:    no number, comparison, unit, or observable-outcome word found
+[A1] A1/adaptive-claim-loop:adaptive-claim-loop/AUDIT_NOTES.md:56   status:OPEN
+  falsifier: the runner reading `claim.status
+  question:  what quantity, in what units, would make this falsifier fail?
+  detail:    no number, comparison, unit, or observable-outcome word found
+[A1] A1/adaptive-claim-loop:adaptive-claim-loop/AUDIT_NOTES.md:58   status:OPEN
+  falsifier: this folder claiming a modelling result
+  question:  what quantity, in what units, would make this falsifier fail?
+  detail:    no number, comparison, unit, or observable-outcome word found
+[A1] A1/adaptive-claim-loop:adaptive-claim-loop/AUDIT_NOTES.md:59   status:OPEN
+  falsifier: the guard passing a one-sided ladder silently
+  question:  what quantity, in what units, would make this falsifier fail?
+  detail:    no number, comparison, unit, or observable-outcome word found
+[A1] A1/adaptive-claim-loop:adaptive-claim-loop/AUDIT_NOTES.md:61   status:OPEN
+  falsifier: a gate that depends on which responder is installed
+  question:  what quantity, in what units, would make this falsifier fail?
+  detail:    no number, comparison, unit, or observable-outcome word found
+[A1] A1/adaptive-claim-loop:adaptive-claim-loop/AUDIT_NOTES.md:63   status:OPEN
+  falsifier: a routine deriving either from the text
+  question:  what quantity, in what units, would make this falsifier fail?
+  detail:    no number, comparison, unit, or observable-outcome word found
+[A1] A1/adaptive-claim-loop:adaptive-claim-loop/AUDIT_NOTES.md:67   status:OPEN
+  falsifier: the check working at admission time
+  question:  what quantity, in what units, would make this falsifier fail?
+  detail:    no number, comparison, unit, or observable-outcome word found
+[A1] A1/adaptive-claim-loop:adaptive-claim-loop/AUDIT_NOTES.md:68   status:OPEN
+  falsifier: a symmetric predicate producing a sweep verdict
+  question:  what quantity, in what units, would make this falsifier fail?
+  detail:    no number, comparison, unit, or observable-outcome word found
+[A1] A1/adaptive-claim-loop:adaptive-claim-loop/AUDIT_NOTES.md:69   status:OPEN
+  falsifier: a prose guard that survives paraphrase
+  question:  what quantity, in what units, would make this falsifier fail?

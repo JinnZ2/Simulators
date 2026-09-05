@@ -7153,6 +7153,81 @@ underneath).
   it), and the audit's `RCT_002..RCT_009` are the STRUCTURE-STABLE
   results §2 says survive without the report. 31 selftest checks. Stdlib
   only, parses under 3.9, phone-buildable, CC0.
+- `falsifier-audit/` — A work order built to spec: walk a local checkout,
+  pull every falsifier and its attachment context, and turn each place
+  where a falsifier's **scope is implicit** into a research question. **Not
+  a linter** — it grades no falsifier and emits no fixes; the premise is
+  that a falsifier is itself a frame-bound claim, so where its scope is
+  unstated the corpus holds more information than it states, and the output
+  is additive (questions the repos do not already ask) not corrective.
+  **Inventory first, per the order's first task:** `inventory.py` reports
+  the marker forms actually present before the extractor is built around any
+  of them — `REFUTATION_PROTOCOL` sections dominate (~110 files), then prose
+  `Falsifier:`/`Falsified if:`, then claim-table columns under four header
+  names (`falsifier`/`falsified by`/`falsified if`/`refuted by`) in no fixed
+  position, then `falsifier_shape`/`falsifier_value` fields, JSON/YAML keys,
+  and `FALSIFIER` block labels. `extract.py` resolves the falsifier and its
+  claim by **header name**, not column position (`_header_index`), and
+  builds records around the two forms carrying a locatable attached claim —
+  the table column and the prose `Falsified if:` — counting the rest as a
+  printed coverage statement, not a judgement. **Four checks, each
+  independent, none aggregated into a score:** `A1`
+  UNFALSIFIABLE-AS-WRITTEN fires when a falsifier states no number,
+  comparison, unit, or observable-outcome word (the claim it guards is
+  currently unguarded); `A2` CLAIM-TEST DRIFT fires (LOCATED records only)
+  when fewer than a third [CHOICE 1] of the falsifier's load-bearing terms
+  appear in the claim it tests, matched and unmatched terms shown so a human
+  can dismiss cheaply; `A4` FIXED-REFERENCE-BODY fires on an undeclared
+  reference body (`baseline`, `the null`, `chance`, `matched`, …) — the
+  geocentric shape, where a falsifier can PASS while testing the wrong thing
+  because the frame supplied the reference silently, so these are **rescope**
+  candidates not narrow ones; and `A3` CROSS-REPO INCOMPATIBILITY, the
+  order's highest-expected-yield check, indexes by **axis** not by rule or
+  repo (`axes.py`; axes recur across the corpus, rule wordings do not) and
+  looks within an axis for two folders carrying conflicting numeric cutoffs
+  or opposite directions. **`A3` returns zero on this corpus**, and that is
+  a result rather than a broken check: the numeric-bearing falsifiers on any
+  shared axis are folder-local, so no two folders quantify one axis
+  incompatibly — the same unquantified property `A1` flags from the other
+  side — and the coverage note reports the zero rather than letting a silent
+  `A3` read as a clean corpus. It is demonstrably **not** `CONSTANT_SILENT`:
+  the null test builds a cross-repo pair carrying opposite directions on one
+  axis and `A3` fires, then confirms it stays silent when both records are
+  in one repo and when the two carry the same cutoff. On the tree: **301
+  falsifiers found (289 LOCATED, 12 NOT-FOUND, 8 empty cells skipped), 283
+  questions by A1/A2/A4** ({A1: 120, A2: 144, A4: 19}). `NOT-FOUND` (a
+  locatable falsifier with no locatable claim) is a finding and is emitted,
+  never dropped; an empty or punctuation-only falsifier cell is **skipped
+  and counted**, kept apart from `NOT-FOUND`, since an absent falsifier and
+  a present-but-unparsed one are different results. The queue is
+  **append-stable** — re-running on an unchanged tree emits the same
+  `repo:path:line` ids, so entries can be closed by hand in a separate file
+  and survive the next run — and carries **questions only**, status `OPEN`
+  the single machine-set value, enforced by the data structure
+  (`per_record` returns a flat unaggregated list; the queue sorts by id, not
+  by any hit count). The tool's own `QUEUE.md`, `samples/`, `README.md` and
+  `AUDIT_NOTES.md` are self-excluded from the scan, because a re-run reading
+  its emitted queue — or an authored doc that quotes a marker verbatim to
+  document it — is the `UNI_010` self-reference loop; `WORK_ORDER.md`, the
+  delivered spec, is left scannable and carries no attachable marker, so it
+  produces no records, verified by the record count holding across its
+  addition. Every emitted report is screened through
+  `sheet-structure-scan/no_severity` (imported, not copied): the queue's
+  authored framing — coverage lines, emitted questions, the `A3` note —
+  screens clean, while the queue **body** does not, correctly, because it
+  quotes corpus falsifier text verbatim (a corpus falsifier saying a value
+  is *wrong* is the material under audit, not a severity label the tool
+  authored), so the selftest screens the framing with the quote lines
+  removed and separately checks the screen fires on a planted word. One
+  authored word tripped the screen and was reworded (`fixes` → `repairs`).
+  `A1`'s observable vocabulary was widened from ~52% to ~40% firing by
+  **correctness** (the corpus uses gerund-and-verb observables the first
+  word list omitted), not by tuning to a target rate. Findings are kept as
+  prose in `AUDIT_NOTES.md` (`FA_001..008`) rather than a `CLAIM_TABLE.md`,
+  because this folder's own scanner reads every `.md` for falsifier markers
+  and a claim table carrying a `falsifier` column would enter its own
+  corpus. 28 selftest checks. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated
