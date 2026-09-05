@@ -7661,6 +7661,50 @@ underneath).
   declared three-arm exemption (`error`, the marker's "operator error"
   category). Seven `OMC_*` claims; 36 selftest checks. Stdlib only, parses
   under 3.9, phone-buildable, CC0.
+- `model-deprecation-backcast/` — A delivered instrument spec (`WORK_ORDER.md`,
+  verbatim, CC0): take retired models as a series, look **backwards**, and
+  read retirements against what was being pushed then — a capability discarded
+  under a since-decayed fad either returns or does not, distinguishing
+  fad-driven from cost-driven removal. **An instrument spec, not a findings
+  document, not a critique**; "unmeasured cells are the content," and every
+  real input (vendor calendars, polls, evals) is egress-blocked, so nothing
+  here is a result. **`MDB_001`, the load-bearing rule:** the instrument is
+  seven columns each carrying a required **NULL** — the condition under which
+  it measures nothing — and `validate_column` refuses a column missing its
+  measures/test/null, the same discipline as `machine-record-format`'s
+  test-case format and the reason `null-harness` exists (a readout nobody has
+  seen measure nothing is not known to discriminate); several nulls name a
+  collapse (C1→C2, C7→C4), recorded in a map. **`MDB_002`:** each column's
+  null is the CONSTANT_SILENT condition, checked both directions —
+  `c1c2_collapse`, `c4_tightening`, `c5_tracks_coupling`, `c7_vs_c4` each
+  reach their null verdict on a flat input and their signal verdict on a
+  varying one. **`MDB_003`, C6 the fad-axis lag:** `lag_of_peak` is the argmax
+  cross-correlation of discourse against discards over lag (aperiodic series →
+  unique lag), registered in `tools/known_answer.py` (planted 20→20, 5→5,
+  flat→None); `c6_fad_driving` returns DRIVING (18–24 mo band), DRIVING_OTHER_-
+  LAG (funding layer), or NOT_DRIVING (the null). **`MDB_004`:** the guardrail
+  clock is a **separate clock** (news-time vs training-cycle time) and must be
+  modeled apart or it contaminates C6 — `contamination_demo` shows a pooled
+  guardrail series flipping the lag from the true in-band 20 (DRIVING) to the
+  guardrail's news-time 8 (DRIVING_OTHER_LAG); separating recovers it.
+  **`MDB_005`:** C3's discard set is accepted-side data — three exit forms
+  (complainer/jumper/paid-then-lapsed), only the complainer recorded, so
+  `c3_censoring` reports the recorded fraction (3/10) and paying-tier filter
+  (2/3) as numbers rather than asserting the bias. **`MDB_006`:** C2 is
+  declared `UNRECOVERABLE`, not estimated, when eval coverage is too sparse to
+  date deltas — a state, not a filled number. **`MDB_007` carried/UNVERIFIED:**
+  the sampling absence is a load-bearing finding — AI opinion by American
+  Indian / Alaska Native respondents is not answerable at national-panel
+  sample designs (~0.8%, dispersed, screening cost, census undercount), the
+  readout existing only where someone in that position built the channel
+  (Relational Futures, Māori health-record bias, Te Mana Raraunga, Indigenous
+  Protocol and AI) — the `uninstrumented`/`generation-capacity` shape, carried
+  not verified. **`MDB_008`:** framing/scope honored — an instrument not a
+  critique, no author section, and the fear/excitement-vs-ratchet relation
+  held as an `OpenNode` un-named and un-graded per instruction. `demo_mdb.py`
+  screens clean through `no_severity` with no exemption; library modules
+  refuse `--selftest`. Eight `MDB_*` claims; 36 selftest checks. Stdlib only,
+  parses under 3.9, phone-buildable, CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated

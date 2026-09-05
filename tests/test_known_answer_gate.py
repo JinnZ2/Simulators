@@ -46,6 +46,7 @@ MANIFEST = (
     "sheet-structure-scan/sheetmodel.py::rank",
     "agent-lifecycle-energy/phase_energy.py::integrate",
     "operator-machine-coupling/coupling_separation.py::interaction_fraction",
+    "model-deprecation-backcast/null_check.py::lag_of_peak",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so

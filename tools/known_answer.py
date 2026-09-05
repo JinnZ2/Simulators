@@ -386,6 +386,30 @@ def _omc_interaction_fraction(which):
     return None if f is None else round(f, 12)
 
 
+def _mdb_lag_of_peak(which):
+    """model-deprecation-backcast/null_check.py::lag_of_peak, imported. The
+    C6 fad-axis metric: the lag at which discards best track discourse. It
+    could be silently wrong -- return a lag when there is none (a spurious
+    fad reading), or miss a planted lag -- so a planted-lag series must
+    recover its lag and a flat series must return None (no peak)."""
+    import importlib.util
+    path = os.path.join(ROOT, "model-deprecation-backcast", "null_check.py")
+    spec = importlib.util.spec_from_file_location("_mdb_null", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    # the same deterministic aperiodic discourse series the folder uses
+    x, s = [], 1
+    for _ in range(72):
+        s = (1103515245 * s + 12345) & 0x7FFFFFFF
+        x.append(float((s >> 8) % 97))
+    lags = list(range(0, 31))
+    if which == "flat":
+        return mod.lag_of_peak(x, [1.0] * 72, lags)
+    L0 = int(which)
+    y = [x[t - L0] if t - L0 >= 0 else 0.0 for t in range(72)]
+    return mod.lag_of_peak(x, y, lags)
+
+
 def seed():
     """Registers the two instances the rule was earned from."""
     fn, detail = _extract_verdict()
@@ -613,6 +637,28 @@ def seed():
               "main effect. The three cases pin the two endpoints (0 = purely "
               "additive, 1 = purely pairing) and one interior value the "
               "endpoints do not share."),
+    )
+    register(
+        "model-deprecation-backcast/null_check.py::lag_of_peak",
+        _mdb_lag_of_peak,
+        [
+            case("planted lag 20", ("20",), 20,
+                 "discards built as discourse shifted by 20 steps have their "
+                 "cross-correlation maximum at lag 20 by construction (an "
+                 "aperiodic discourse series makes the lag unique); a "
+                 "detector that missed it would miss the fad axis"),
+            case("planted lag 5", ("5",), 5,
+                 "the same construction at lag 5; present so the set has more "
+                 "than one non-null expected value"),
+            case("flat -- no peak", ("flat",), None,
+                 "a constant discard series has no lag that tracks discourse, "
+                 "so the metric must return None (the C6 null: the fad axis "
+                 "is not driving) rather than a spurious lag"),
+        ],
+        note=("the C6 fad-axis lag metric. The two planted-lag cases pin "
+              "recovery; the flat case pins the null -- a lag detector that "
+              "returned a number on flat input would manufacture a fad "
+              "reading, the failure the null exists to declare."),
     )
 
 
