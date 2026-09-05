@@ -7398,6 +7398,42 @@ underneath).
   no_severity` — one authored word (`needs`) tripped it in a fixture and was
   reworded to `requires`. Eight `MRG_*` claims; 22 selftest checks. Stdlib
   only, parses under 3.9, phone-runnable, CC0.
+- `upgrade-queue/` — A **parked queue** of proposed changes to the
+  falsifier / claim-record format, delivered verbatim in
+  `UPGRADE_QUEUE.md`. **A queue, not a spec:** every entry's status is NOT
+  ADOPTED, nothing is adopted by being written, and moving an entry to
+  ADOPTED requires its adopt-test to have run or an explicit recorded
+  decision. Thirteen entries in three tiers by provenance — **FORCED** (an
+  observed failure in hand, U-01..U-04), **CANDIDATE** (from a registrar,
+  untested here, U-05..U-09), **SPECULATIVE** (parked deliberately,
+  U-10..U-13) — plus a NOT-ON-THIS-LIST section recording what was left off
+  and why. `queue_check.py` checks only what is verifiable **without
+  adopting anything**: (1) the queue parses into the tiers it declares with
+  the counts it states (13; 4/5/4) and every entry carries the global
+  NOT-ADOPTED status (`UQ_001`, `UQ_002`); (2) the adopt-rule classification
+  — only `U-09` (the queue's own *most likely a format rewrite*) CHANGES a
+  rule and would need a branch entry, the rest ADD a field or are UNKNOWN
+  (`UQ_004`, declared readings of each `form` line); (3) **cross-reference
+  resolution** — each entry's referenced artifacts resolved to IN-REPO (path
+  checked on disk) or EXTERNAL, which is what says whether an adopt-test
+  could run here (`UQ_003`). Most Tier-1 adopt-tests are **BLOCKED_EXTERNAL**
+  (their corpora are the Kimi / Perplexity / DeepSeek runs this repo does not
+  hold — U-01 needs 20 MEASURED cells, the seed has one and the 537 are Kimi
+  Run 2), `U-07` is **BLOCKED_UNLANDED** (the FSRI report has not landed),
+  `U-04` needs **none** (the nesting result is in-repo and is the
+  demonstration), and `U-05` is the only one **RUNNABLE_HERE**; null-tested
+  (a bogus in-repo path resolves MISSING, not IN-REPO). The queue is **the
+  format learning from its own drops** (`UQ_006`): U-01 the uncertainty on
+  ADDENDUM_02's cut, U-03 the ENG-3 sign inversion, U-04 the nesting
+  cut-height, U-07 the FSRI hold marker, U-10 cooperative-substrate's P5,
+  U-11 merge-path's §4, U-12 railcar's ENVELOPE, U-13 K4's N — each UNVERIFIED
+  where it rests on an external corpus, none adopted. The NOT-ON-THIS-LIST
+  exclusions (no confidence score, no rank, no verdict field on a branch
+  entry) are the disciplines the repo already holds — `domain-ledger`
+  `DL_001`, `uninstrumented` SCALAR_DEMAND, the standing decision against a
+  branch verdict field — now stated as format non-goals (`UQ_005`). Six
+  `UQ_*` claims; 18 selftest checks. Stdlib only, parses under 3.9,
+  phone-runnable, CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated
