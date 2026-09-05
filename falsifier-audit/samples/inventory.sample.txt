@@ -1,0 +1,13 @@
+falsifier marker inventory (run first)
+form                               files    hits   example
+table (falsifier column)              20     295   envelope-asymmetry/CLAIM_TABLE.md:11
+prose 'Falsified if:'                  6      17   CLAUDE.md:7166
+prose 'Falsifier:'                    92     739   CLAUDE.md:1644
+field falsifier_shape/value            3      12   CLAUDE.md:435
+json/yaml "falsifier" key              8      14   earth_economics/earth_economic_sim.md:122
+block label FALSIFIER                  5       8   measurement-fork/PROBES_K11_K18.py:63
+section REFUTATION_PROTOCOL          112     140   CLAUDE.md:121
+extract.py builds records around the two forms that carry an attached claim on
+the same structure: the table column, and prose 'Falsified if:'. The others are
+counted here and not extracted (a field spec or a work-order block label attaches
+its falsifier differently); that is a coverage statement, not a judgement.

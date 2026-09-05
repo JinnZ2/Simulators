@@ -39,7 +39,7 @@ def main():
     check("the grid is exactly 25 cells (5 terms x 5 substrates)", len(g) == 25)
     c = S.counts(g)
     check("three cells coded, 22 never-coded UNKNOWN",
-          c["UNKNOWN"] == 22 and (c["MEASURED"] + c["MISSING"] + c["SCOPE-DIFFERENT"] + c["scope_incomplete"] + c["measured_no_units"]) == 3)
+          c["UNKNOWN"] == 22 and (c["MEASURED"] + c["MISSING"] + c["SCOPE-DIFFERENT"] + c["scope_incomplete"] + c["measured_no_units"] + c["measured_type_only"]) == 3)
 
     # ---- the units rule, both directions
     check("a MEASURED_AS with a slash rate states units; a unitless phrase does not",
@@ -48,6 +48,41 @@ def main():
     ok, _ = S.validate({"status": "MEASURED", "measured_as": "a big quantity", "scope_note": "", "provisional": False})
     check("a MEASURED cell whose measured_as states no units is INVALID and downgraded to MISSING",
           not ok and S.effective_status({"status": "MEASURED", "measured_as": "a big quantity"}, False) == "MISSING (downgraded: no units)")
+
+    # ---- ADDENDUM_02: a type-only units field with no cut does not satisfy
+    # the units bar. Both directions, against the addendum's own examples.
+    fail_examples = ["boolean (contradicts / corroborates)",
+                     "boolean verdict in 'empirical_stability' column",
+                     "boolean isfinite check per step",
+                     "boolean verdict over relabellings"]
+    for ma in fail_examples:
+        okt, rt = S.validate({"status": "MEASURED", "measured_as": ma})
+        check("ADDENDUM 02: type-only units, no cut, is inadmissible -- %r" % ma[:28],
+              not okt and "ADDENDUM 02" in rt)
+        check("  it downgrades to MISSING with the type-only reason (distinct from no-units) -- %r" % ma[:20],
+              S.effective_status({"status": "MEASURED", "measured_as": ma}, False) == "MISSING (downgraded: type-only units, no cut)")
+    pass_examples = ["dimensionless exponent with 95% CI (super-linear claim requires beta > 1.2)",
+                     "integer count, threshold 3",
+                     "lead in steps; null FP rate <= 0.2",
+                     "float magnitude; cut at non-finite"]
+    for ma in pass_examples:
+        okp, _ = S.validate({"status": "MEASURED", "measured_as": ma})
+        check("ADDENDUM 02: a scale WITH a cut is admissible (not CONSTANT_FIRES) -- %r" % ma[:28], okp)
+    check("the type-only bar is distinct from the no-units bar: 'boolean verdict' is type-only, 'a big quantity' is no-units",
+          S.measured_type_only({"status": "MEASURED", "measured_as": "boolean verdict"})
+          and not S.measured_type_only({"status": "MEASURED", "measured_as": "a big quantity"}))
+    check("T1 x S1 (J/s, no type word) is unaffected by ADDENDUM 02 -- still validly MEASURED",
+          S.is_valid_measured(g[("T1", "S1")]) and not S.measured_type_only(g[("T1", "S1")]))
+    # the report emits the type-only count on its own line, visible as a zero
+    check("report emits the ADDENDUM 02 type-only count line, at zero on the seed",
+          "names a type rather than a scale: 0" in R.full_report() and c["measured_type_only"] == 0)
+    # a constructed type-only MEASURED cell surfaces on that line and count
+    gT = dict(g)
+    gT[("T2", "S2")] = dict(S._blank("MEASURED"), measured_as="boolean verdict over runs",
+                            valid=False, invalid_reason="MEASURED units names a data type with no cut (ADDENDUM 02); name the scale and the cut, or downgrade",
+                            effective_status="MISSING (downgraded: type-only units, no cut)")
+    check("a coded type-only MEASURED cell is listed by measured_type_only_cells (not folded into no-units)",
+          ("T2", "S2") in S.measured_type_only_cells(gT))
 
     # ---- ADDENDUM_01: SCOPE-DIFFERENT needs a SCOPE_TRANSFORM, not units
     t3s5 = g[("T3", "S5")]

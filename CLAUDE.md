@@ -7202,8 +7202,21 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   byte-identical to the repo copy, so TC-04's function is unchanged and
   `TCA_002` stands — the revision answered the extension's calibration
   finding and not the core's shape finding; **`TCA_018`** v2 still imports
-  nothing and reads no runout. Check count printed by `selftest_tca.py`;
-  the audit refuses `--selftest`. Stdlib only, parses under 3.9, CC0.
+  nothing and reads no runout. **`TCA_019`, a placement decision:**
+  `PLACEMENT.md` landed verbatim — the two scripts stay their own module
+  rather than attaching to a cascade chain, on two grounds (the mapping
+  domain is the valley cross-section including the counter-slope, since
+  the Langtang air blast landed 550 m up the *opposite* mountain off any
+  runout path; and a product over lag classes is not a stage in a
+  sequence). In this repository the module already stands alone as
+  `thermal-coupling/`, so the decision is honoured by construction and
+  nothing merges. The doc restates *"one free parameter, CAL_FOS 2.825"*
+  — the same single-free-parameter claim `TCA_003` refuted by an AST
+  census of 35 numeric literals (CAL_FOS = 2.825 reproduces at line 111;
+  the ONLY-free-parameter comment is line 115) — recorded so the doc is
+  not read past `TCA_003`; the decision record is not edited. Check count
+  printed by `selftest_tca.py`; the audit refuses `--selftest`. Stdlib
+  only, parses under 3.9, CC0.
 - `ch4-four-box/` — Two delivered scripts landed verbatim:
   `fourbox_forward.py` rebuilds a four-box CH4 model forward-only
   (E = M·C from prescribed concentrations, no inversion) and prints the
@@ -7233,7 +7246,30 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   UNVERIFIED:** Lamantia et al. 2026 is named and not read; nothing is a
   statement about the atmosphere. Check count printed by
   `selftest_fb.py`; the audit refuses `--selftest`. Stdlib only, parses
-  under 3.9, CC0.
+  under 3.9, CC0. **A steady-state reproduction then landed**
+  (`RESULTS.md`, delivered verbatim) under the split rule *a finding
+  demonstrated from the published Methods folds into RESULTS; one that
+  needs the Zenodo code stays OPEN* — **two fold in, one stays out**, and
+  the two are built as `units_test.py` and `tn_inversion.py` (each
+  reproduces from the forward model via captured-stdout `runpy`, asserts
+  on plain invocation, refuses `--selftest`). **R-2:** the Methods label
+  the transport parameters "exchange rates of 0.22/0.45/0.45 **years**",
+  and read as TIMES the southern source goes **negative** (−5.97) while
+  read as RATES (1/yr) the baseline reproduces (tropics 163.06) — a sign
+  error settles the units question from the published values alone, no
+  archive. **R-3:** inverting the +SCA run for the published TN of 88
+  Tg/yr requires **C_TN = 733 ppb**, *above* both polar records and 13
+  under SCA, so a +49 ppb concentration move shows in the emission column
+  as only +6 Tg/yr — the 6-yr lifetime scales loss with concentration and
+  the column compresses how far the unseen box moves, the siting-bias
+  shape inside the paper's own accounting, making the effect *larger* in
+  concentration space than the table shows. **FINDING 3 stays OPEN, not
+  cited as a discrepancy**: the E_SH = −10.8 residual against a hard-fixed
+  +10 could be produced by the steady-state/transient difference, which is
+  not separable without the archived code — a residual in a reduced model,
+  and the reduction is ours. Both scripts assert clean and are covered by
+  `selftest_fb.py`; NEEM and Law Dome are named in the delivered spec but
+  not in the model's constants and are not supplied from memory.
 - `cooperative-substrate/` — A work order delivered verbatim and built to
   it: four checks, each one stdlib file under 300 lines, independently
   runnable, no network at runtime, with the order's framing claim and
@@ -7444,9 +7480,87 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   beyond the three seeds is coded, so the discriminator (real shared
   structure vs projected frame) cannot be applied here — it runs against
   transfer results and none exist; the survey is a store, not a
-  conclusion, the order's own non-goal. Eight `DS_*` claims
-  (`ADDENDUM_01` folded in as a rescope). Stdlib
-  only, parses under 3.9, phone-buildable, CC0.
+  conclusion, the order's own non-goal. **`ADDENDUM_02` then narrowed the
+  units bar** (delivered verbatim; its own frame note: *narrow, not
+  rescope* — contrast `DS_008`'s rescope): a units field naming a data
+  **TYPE** (`boolean`, `verdict`, `integer`, `unitless`, `dimensionless`)
+  with no **CUT** does not satisfy MEASURED, since a type carries no scale
+  two coders can disagree about. **`DS_009`:** the instrument gains a
+  second lexical arm (`names_type` ∧ ¬`has_cut` → inadmissible, downgraded
+  to MISSING with a reason distinct from no-units, counted on its own
+  `measured_type_only` line in the report, visible as a zero); a CUT is a
+  comparison operator or a threshold/band/cut word and is **not** required
+  to be numeric, so the addendum's own repair `float magnitude; cut at
+  non-finite` passes while `boolean isfinite check per step` fails, and
+  `dimensionless` alone now fails where the bare unit-word list passed it.
+  The four FAIL and four PASS examples the addendum gives are null-tested
+  both directions; `J/s` (no type word) is unaffected, so `DS_003`'s gap
+  survives. **`DS_010` UNVERIFIED for the external corpus:** the RE-CODING
+  scope is the 96 of 537 MEASURED cells in the Kimi falsifier survey Run 2,
+  not held here; this repo's seed carries zero type-only cells, so the
+  count is a visible zero and nothing here is re-coded, and nothing is
+  fabricated to stand in for the external run. **`RESULT_taxonomy_-
+  crossmodel.md` then settles half of the taxonomy question `DS_008`
+  left open** (delivered verbatim; ADDENDUM 01 §2 held it OPEN because
+  Runs 1 and 2 shared a system, so agreement could not tell *converged*
+  from *remembered*). A **blind** Perplexity sort of the same 19 cells —
+  no K-list, no repo access — against the Kimi sort **splits** the
+  question. **`DS_013`: MEMBERSHIP replicated** (the two taxonomies are
+  strictly nested, zero cross-cutting — every Perplexity group under
+  exactly one Kimi kind, the proxy/wall-clock K3 core the strongest single
+  result), so SCOPE-DIFFERENT is **SEVERAL**; the **count did not** (4
+  Kimi kinds vs 11 Perplexity groups over 13 distinct, six singletons —
+  near an identity map), so *how many* is grain-dependent and
+  **UNSETTLED**; `K4` drew zero members under both sorters (a Run-1-only
+  candidate artifact) and the straggler `G9`/F-TETRA-SCOPE is the record
+  neither sorter could place and no field could name. **`DS_011`:** the
+  strict-nesting headline is checkable here without the corpus —
+  `taxonomy_replication.py` transcribes the delivered §1 map and verifies
+  it is a FUNCTION (every group under exactly one kind), a
+  **transcription-consistency check, not a reproduction of the sort**
+  (the 19-cell corpus is external model output, not held here and not
+  fabricated), null-tested against a constructed cross-cut. **`DS_012`:**
+  §6's *report membership, not a kind count* is encoded as a refusal —
+  `kind_count()` returns `UNSETTLED`, never an integer (the
+  `domain-ledger` no-composite discipline applied to a kind count). All of
+  §2–§5 (the K5 confirmed-at-record-not-as-a-kind reading, the
+  over-split/over-merge signature, the literature audit's tag defect and
+  the G2 EXACT→PARTIAL downgrade) is carried verbatim and not verified at
+  record level. `DS_008`'s taxonomy status moves `OPEN` → `PARTLY SETTLED`
+  (membership SEVERAL, count OPEN). **`RESULT_repair_adjacency.md` then
+  adds a third system and resolves the character of the count**
+  (delivered verbatim): DeepSeek sorts the same 19 records by *repair*
+  into a 9-component adjacency graph, and the three groupings **do not
+  conflict — they nest in one order**, `Kimi (4-5) ⊃ DeepSeek (9) ⊃
+  Perplexity (11)`, zero cross-cutting (every DeepSeek component inside
+  one Kimi kind, every Perplexity group inside one DeepSeek component).
+  **`DS_014`: grain was never a disagreement — it is a cut height on a
+  tree all three independently found** (class / operation /
+  operation-plus-referent); `repair_adjacency.py` transcribes the §1–§3
+  record-level memberships and verifies each link of the chain is a
+  refinement (`perplexity_refines_deepseek`, `deepseek_refines_kimi`, both
+  zero cross-cut, the 4 kinds covering all 9 components), a
+  transcription-consistency check not a reproduction, null-tested against
+  a component-spanning group. **`DS_015`:** the repair reading confirms
+  `K4` **dead as a repair class** (its blind members scatter across three
+  components — a second independent failure after both sorters gave it
+  zero) and carries two Kimi edges flagged-not-dropped — `C7 → K3` a
+  correction candidate (NLS-3 pulled from the speedup cluster by both
+  external systems) and `C8 → K5` contestable (the T11 covariate). **`DS_016`:**
+  the straggler `T13` (== the crossmodel `G9`) was placed by DeepSeek in
+  C1 with the two-referent record — the one cross-cutting event — and is
+  **not closed here**: one system, one placement, no argument, the
+  document's own T13-reduces-to-TMP-2 test carried as the next step.
+  **`DS_017`:** §6's refusal sharpens — `kind_count()` returns a
+  **cut-height statement, never a bare integer** (*a single number is a
+  cut, and a cut with no stated height is the thing the instrument exists
+  to catch*), and §5's recurring three-system speedup collapse (Kimi alone
+  reading the transforms, the ENG-3 sign inversion) and §7's not-tested
+  list (asymmetric adjacency and CANNOT-FALSIFY both permitted and unused,
+  the tree from one repair reading) are carried verbatim, not verified.
+  Seventeen `DS_*` claims (`ADDENDUM_01` a rescope, `ADDENDUM_02` a narrow,
+  two RESULTs settling membership and then the character of the count).
+  Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `railcar-containment/` — A delivered folder, complete and verbatim
   (`README.md`, `CLAIMS.md`, three screens, `run_all.py`, a params
   file): the e-mobility-fire-on-railcar problem built around one
@@ -7496,6 +7610,81 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   it), and the audit's `RCT_002..RCT_009` are the STRUCTURE-STABLE
   results §2 says survive without the report. 31 selftest checks. Stdlib
   only, parses under 3.9, phone-buildable, CC0.
+- `falsifier-audit/` — A work order built to spec: walk a local checkout,
+  pull every falsifier and its attachment context, and turn each place
+  where a falsifier's **scope is implicit** into a research question. **Not
+  a linter** — it grades no falsifier and emits no fixes; the premise is
+  that a falsifier is itself a frame-bound claim, so where its scope is
+  unstated the corpus holds more information than it states, and the output
+  is additive (questions the repos do not already ask) not corrective.
+  **Inventory first, per the order's first task:** `inventory.py` reports
+  the marker forms actually present before the extractor is built around any
+  of them — `REFUTATION_PROTOCOL` sections dominate (~110 files), then prose
+  `Falsifier:`/`Falsified if:`, then claim-table columns under four header
+  names (`falsifier`/`falsified by`/`falsified if`/`refuted by`) in no fixed
+  position, then `falsifier_shape`/`falsifier_value` fields, JSON/YAML keys,
+  and `FALSIFIER` block labels. `extract.py` resolves the falsifier and its
+  claim by **header name**, not column position (`_header_index`), and
+  builds records around the two forms carrying a locatable attached claim —
+  the table column and the prose `Falsified if:` — counting the rest as a
+  printed coverage statement, not a judgement. **Four checks, each
+  independent, none aggregated into a score:** `A1`
+  UNFALSIFIABLE-AS-WRITTEN fires when a falsifier states no number,
+  comparison, unit, or observable-outcome word (the claim it guards is
+  currently unguarded); `A2` CLAIM-TEST DRIFT fires (LOCATED records only)
+  when fewer than a third [CHOICE 1] of the falsifier's load-bearing terms
+  appear in the claim it tests, matched and unmatched terms shown so a human
+  can dismiss cheaply; `A4` FIXED-REFERENCE-BODY fires on an undeclared
+  reference body (`baseline`, `the null`, `chance`, `matched`, …) — the
+  geocentric shape, where a falsifier can PASS while testing the wrong thing
+  because the frame supplied the reference silently, so these are **rescope**
+  candidates not narrow ones; and `A3` CROSS-REPO INCOMPATIBILITY, the
+  order's highest-expected-yield check, indexes by **axis** not by rule or
+  repo (`axes.py`; axes recur across the corpus, rule wordings do not) and
+  looks within an axis for two folders carrying conflicting numeric cutoffs
+  or opposite directions. **`A3` returns zero on this corpus**, and that is
+  a result rather than a broken check: the numeric-bearing falsifiers on any
+  shared axis are folder-local, so no two folders quantify one axis
+  incompatibly — the same unquantified property `A1` flags from the other
+  side — and the coverage note reports the zero rather than letting a silent
+  `A3` read as a clean corpus. It is demonstrably **not** `CONSTANT_SILENT`:
+  the null test builds a cross-repo pair carrying opposite directions on one
+  axis and `A3` fires, then confirms it stays silent when both records are
+  in one repo and when the two carry the same cutoff. On the tree: **301
+  falsifiers found (289 LOCATED, 12 NOT-FOUND, 8 empty cells skipped), 283
+  questions by A1/A2/A4** ({A1: 120, A2: 144, A4: 19}). `NOT-FOUND` (a
+  locatable falsifier with no locatable claim) is a finding and is emitted,
+  never dropped; an empty or punctuation-only falsifier cell is **skipped
+  and counted**, kept apart from `NOT-FOUND`, since an absent falsifier and
+  a present-but-unparsed one are different results. The queue is
+  **append-stable** — re-running on an unchanged tree emits the same
+  `repo:path:line` ids, so entries can be closed by hand in a separate file
+  and survive the next run — and carries **questions only**, status `OPEN`
+  the single machine-set value, enforced by the data structure
+  (`per_record` returns a flat unaggregated list; the queue sorts by id, not
+  by any hit count). The tool's own `QUEUE.md`, `samples/`, `README.md` and
+  `AUDIT_NOTES.md` are self-excluded from the scan, because a re-run reading
+  its emitted queue — or an authored doc that quotes a marker verbatim to
+  document it — is the `UNI_010` self-reference loop; `WORK_ORDER.md`, the
+  delivered spec, is left scannable and carries no attachable marker, so it
+  produces no records, verified by the record count holding across its
+  addition. Every emitted report is screened through
+  `sheet-structure-scan/no_severity` (imported, not copied): the queue's
+  authored framing — coverage lines, emitted questions, the `A3` note —
+  screens clean, while the queue **body** does not, correctly, because it
+  quotes corpus falsifier text verbatim (a corpus falsifier saying a value
+  is *wrong* is the material under audit, not a severity label the tool
+  authored), so the selftest screens the framing with the quote lines
+  removed and separately checks the screen fires on a planted word. One
+  authored word tripped the screen and was reworded (`fixes` → `repairs`).
+  `A1`'s observable vocabulary was widened from ~52% to ~40% firing by
+  **correctness** (the corpus uses gerund-and-verb observables the first
+  word list omitted), not by tuning to a target rate. Findings are kept as
+  prose in `AUDIT_NOTES.md` (`FA_001..008`) rather than a `CLAIM_TABLE.md`,
+  because this folder's own scanner reads every `.md` for falsifier markers
+  and a claim table carrying a `falsifier` column would enter its own
+  corpus. 28 selftest checks. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated

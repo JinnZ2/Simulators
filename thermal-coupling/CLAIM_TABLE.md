@@ -202,3 +202,23 @@ finding; recorded, not scored.
 
 v2 imports nothing from the core and does not read `runout_multiplier`.
 `TCA_011` stands unchanged.
+
+## TCA_019 — the placement decision landed, and restates the free-parameter claim TCA_003 refuted
+
+`PLACEMENT.md` landed verbatim: the decision to keep the two scripts as
+their own module rather than attaching them to a cascade chain, on two
+stated grounds — the mapping domain is the valley cross-section including
+the counter-slope (a chain indexed on runout distance has no slot for the
+Langtang result, which landed 550 m up the opposite mountain), and the
+organising form is a product over lag classes rather than a stage in a
+sequence. In this repository the module already stands alone as
+`thermal-coupling/`, so the decision is honoured by construction and
+nothing is merged. The doc's MODULE CONTENTS line restates
+*"one free parameter, CAL_FOS 2.825"* — the same single-free-parameter
+claim `TCA_003` refuted by an AST census of 35 numeric literals in
+function bodies (`CAL_FOS = 2.825` reproduces, line 111; the ONLY-free-
+parameter comment is line 115). Recorded here so the placement doc's
+restatement is not read past `TCA_003`; the doc is a decision record and
+is not edited. The check that would overturn this: an AST census finding
+CAL_FOS the sole numeric literal in any function body, which `TCA_003`'s
+own scan already answers.

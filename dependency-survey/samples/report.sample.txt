@@ -8,7 +8,7 @@ T5  ?     ?     ?     ?     ?
 * = coded but fails its admissibility bar (units for MEASURED, transform for SCOPE-DIFFERENT); see validation
 validation:
   T3 x S5 -- SCOPE-DIFFERENT requires a complete SCOPE_TRANSFORM (reference, maps_to, breaks_at); absent: reference, maps_to, breaks_at
-counts: {'UNKNOWN': 22, 'MEASURED': 1, 'MISSING': 1, 'SCOPE-DIFFERENT': 0, 'scope_incomplete': 1, 'measured_no_units': 0}
+counts: {'UNKNOWN': 22, 'MEASURED': 1, 'MISSING': 1, 'SCOPE-DIFFERENT': 0, 'scope_incomplete': 1, 'measured_no_units': 0, 'measured_type_only': 0}
 
 cell records (non-UNKNOWN cells; quantity, units, source -- no interpretation)
 T1 x S1   status MEASURED
@@ -53,3 +53,4 @@ UNKNOWN cells: 22 of 25 (not-yet-looked, NOT an absence of the term)
   T5 x S5
 SCOPE-DIFFERENT cells lacking a complete transform: 1 (coded SCOPE-DIFFERENT, downgraded to UNKNOWN, counted apart from the 22 never-coded UNKNOWN cells)
   T3 x S5 -- SCOPE-DIFFERENT requires a complete SCOPE_TRANSFORM (reference, maps_to, breaks_at); absent: reference, maps_to, breaks_at
+MEASURED cells whose units field names a type rather than a scale: 0 (ADDENDUM 02; coded MEASURED, downgraded to MISSING, counted apart from cells with no units at all)

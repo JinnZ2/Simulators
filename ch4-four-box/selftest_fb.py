@@ -73,6 +73,14 @@ def main():
 
     rc = subprocess.run([sys.executable, os.path.join(HERE, "fourbox_audit.py"), "--selftest"], capture_output=True).returncode
     check("fourbox_audit refuses --selftest with rc 2", rc == 2)
+
+    # R-2 and R-3 folded into RESULTS.md: the two reproduction scripts
+    # assert on plain invocation (rc 0) and refuse --selftest (rc 2).
+    for f in ("units_test.py", "tn_inversion.py"):
+        r0 = subprocess.run([sys.executable, os.path.join(HERE, f)], capture_output=True)
+        check("%s reproduces and passes its own asserts (rc 0)" % f, r0.returncode == 0)
+        rst = subprocess.run([sys.executable, os.path.join(HERE, f), "--selftest"], capture_output=True).returncode
+        check("%s refuses --selftest with rc 2" % f, rst == 2)
     out = A.render()
     check("render screens clean", not no_severity.hits(out))
     check("screen fires on a planted word", bool(no_severity.hits(out + "\nthis is wrong\n")))
