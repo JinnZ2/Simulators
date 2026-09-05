@@ -7535,6 +7535,55 @@ underneath).
   and `trace_parse.py` refuse `--selftest`; the render screens clean through
   `sheet-structure-scan/no_severity` with no exemption. Nine `ALE_*` claims;
   42 selftest checks. Stdlib only, parses under 3.9, phone-buildable, CC0.
+- `machine-record-format/` — Companion to `labor-instrument/`: that one
+  specifies WHAT is recorded about work, this one HOW any record is stored so
+  the categorization is not baked in at write time. A machine reader has no
+  reason to pre-collapse. `WORK_ORDER.md` verbatim; a fully runnable build (a
+  storage format, no egress or hardware dependency), so all six acceptance
+  criteria are checks, not gaps. **Seven rules, each enforced in code, not
+  described.** `MRF_001` Rule 1 — base entries are transformations, not
+  categories: `BaseEntry` has no category field and `write_base_entry` raises
+  `CategoryInBasePath` on a category-shaped keyword (a category is a claim
+  about which distinctions matter, and belongs to a reader with a question).
+  `MRF_002` Rule 2 / acceptance #1 — categorizations are parallel views, none
+  canonical: entries written with no view, a view added later maps them by
+  `entry_id` with **no base rewrite**, `labels_for` returns every view's
+  label side by side, `retire_view` leaves the base intact. `MRF_003` Rule 3
+  / acceptance #2 — aggregation is a read op: `compute` derives sum/mean/rate
+  from raw entries and an `AggregateSpec`, deterministically; the cache is
+  keyed to `(agg_id, base_version)` so a changed base version is a miss and
+  never shadows the record, and every result is marked `derived`. `MRF_004`
+  Rule 4 / acceptance #4 — vintages retained: a revision is a new
+  release_date not a replacement, `as_of` returns the vintage live at an
+  earlier date and `None` before first publication (not a fabricated zero) —
+  built on the **imported** `labor-instrument/vintage_store.VintageStore`,
+  not a copy, so the two cannot drift. `MRF_005` Rule 5 / acceptance #3 —
+  declared boundary always: an undeclared boundary is not comparable and
+  raises, two distinct boundaries refuse to sum (`BoundaryMismatch`) unless a
+  declared `Reconciliation` connects them (union-find over the boundary keys)
+  — this **closes the outstanding boundary-declaration item** from the
+  labor-instrument work order; the task-boundary *definition* stays open
+  (`MRF_009`). `MRF_006` Rule 6 — no conversion between exposure classes
+  (`convert_exposure` raises; joules are the common denominator, an unknown
+  class refused at write). `MRF_007` Rule 7 / acceptance #5 — absence is
+  recorded in four states and `unmeasured` never collapses with
+  `measured_zero`: `numeric_joules` is 0.0 for a real zero and `None` for the
+  absent states, an aggregate counts the states apart, an all-absent group is
+  `NOT_COMPUTABLE` never 0.0. **`MRF_008`, the diagnostic / acceptance #6:**
+  `bisect_structure` is a STRUCTURE test, not a locator — `structure_verdict`
+  answers "does a single locus exist" first (both halves → `NOT_A_LOCUS` a
+  property of the whole span, neither → `MEASURING_SOMETHING_ELSE`, migrating
+  on repeat → `NONDETERMINISTIC`), only `SINGLE_LOCUS` lets `locate` descend
+  for an address, and `address` raises from any other structure since an
+  address from a both-sides run is the tool's main false positive; null-tested
+  in all four directions so it is not constant, and for instrument drift the
+  span is the methodology registry, not calendar time. **`MRF_009`:** the
+  three OPEN items are carried, not closed — task-boundary definition (shared
+  with the GAP-4 open item), transformation vocabulary (draft needed),
+  merge_in/merge_out mechanics (deferred). The demo screens clean through
+  `sheet-structure-scan/no_severity` with no exemption; library modules refuse
+  `--selftest`. Nine `MRF_*` claims; 45 selftest checks. Stdlib only, parses
+  under 3.9, phone-buildable, CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated
