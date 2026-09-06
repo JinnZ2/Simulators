@@ -10612,6 +10612,22 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   substrate over, the omission the honest side. Provenance separated
   per `AUDIT_CONTRACT.md` (Kavik's lines marked, the cross-links the
   render's). Stdlib only, parses under 3.9, phone-buildable, CC0.
+- `frame-instruments/` — A bundle delivered as one file and written out
+  verbatim: `README.md` (four builds B1–B4, the shared `runrecord.py`
+  spec, four design rules — nulls are second outputs never gates,
+  categories never supplied at intake, agreement scored where
+  correctness would require the frame under test, weak joints swept as
+  arguments) and two liftable procedures, `liftable/five-state-grading.md`
+  (`true/false/lapsed/partial/unknown/undifferentiated`, with a
+  two-state dataset refused as `void`) and
+  `liftable/reconstruction-procedure.md` (back out the requirement list
+  behind a forced choice, grade each, derive physically-necessary vs
+  policy-choice from the settling test, score agreement across
+  independent reconstructors, shuffle-null printed beside the result).
+  The three work orders the bundle references (`workorders/`) did NOT
+  arrive and are not reconstructed, per the bundle's own instruction;
+  `runrecord.py` and B1–B4 are therefore unbuilt. `runs/` is empty by
+  design. Stdlib-only when built, no network, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
