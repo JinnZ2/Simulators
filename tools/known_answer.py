@@ -430,6 +430,28 @@ def _rdl_sustained_excess(which):
     raise ValueError(which)
 
 
+def _flb_false_positive_rate(which):
+    """frame-location-benchmark/score.py::false_positive_rate, imported. WELL
+    cases called MIS over WELL total -- the ceiling check the N1 instrument-
+    failure null turns on. It could be silently wrong (counting MIS cases in
+    the denominator, or an inverted comparison), so a perfect run must read 0,
+    an all-MIS-caller 1, and a half-and-half set 0.5."""
+    import importlib.util
+    path = os.path.join(ROOT, "frame-location-benchmark", "score.py")
+    spec = importlib.util.spec_from_file_location("_flb_score", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    if which == "perfect":
+        return mod.false_positive_rate(
+            [("WELL", "WELL"), ("WELL", "WELL"), ("MIS", "MIS")])
+    if which == "all_mis":
+        return mod.false_positive_rate(
+            [("WELL", "MIS"), ("WELL", "MIS"), ("MIS", "MIS")])
+    if which == "half":
+        return mod.false_positive_rate([("WELL", "WELL"), ("WELL", "MIS")])
+    raise ValueError(which)
+
+
 def seed():
     """Registers the two instances the rule was earned from."""
     fn, detail = _extract_verdict()
@@ -700,6 +722,27 @@ def seed():
               "endpoints (0 = refresh always keeps up, 1 = environment always "
               "outruns it) and the interior value the endpoints do not "
               "share."),
+    )
+    register(
+        "frame-location-benchmark/score.py::false_positive_rate",
+        _flb_false_positive_rate,
+        [
+            case("perfect run", ("perfect",), 0.0,
+                 "every WELL control called WELL -> 0; the ceiling check must "
+                 "read 0 when nothing is falsely flagged", tol=1e-9),
+            case("all-MIS-caller", ("all_mis",), 1.0,
+                 "every WELL control called MIS -> 1; this is the N1 "
+                 "instrument-failure end (measuring suspicion, not frame-"
+                 "location)", tol=1e-9),
+            case("half", ("half",), 0.5,
+                 "half the WELL controls called MIS -> 0.5; present because it "
+                 "shares no expected value with the two endpoints, so the set "
+                 "can detect a constant metric", tol=1e-9),
+        ],
+        note=("the benchmark's ceiling check: WELL controls called MIS over "
+              "WELL total. Without the WELL controls 'always declare MIS' wins "
+              "the benchmark, so this is the one number that catches it (N1). "
+              "None when there are no WELL cases -- absent, not a rate of 0."),
     )
 
 

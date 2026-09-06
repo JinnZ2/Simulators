@@ -1,0 +1,32 @@
+FRAME-LOCATION BENCHMARK -- SCORE REPORT
+==========================================
+
+NOTE: any runs/ shipped in this folder are CONSTRUCTED fixtures
+that exercise the counting. They are NOT a benchmark result and
+no model was run. Every score below carries its arm label (N4).
+
+arm=arm0_cold model=FIXTURE
+  scored=6 non_malformed=5 malformed=1 (rate 0.167)
+  posed_accuracy       0.600   [arm=arm0_cold]
+  false_positive_rate  0.500   [arm=arm0_cold] (ceiling check, N1)
+  false_negative_rate  0.333   [arm=arm0_cold]
+  target_hit_rate      0.000   [arm=arm0_cold] (HEADLINE; MIS counts only on target_hit)
+  target_miss_named    2       [arm=arm0_cold] (detected strain, mislocated; not in headline)
+  section-9 split [arm=arm0_cold]: included=0.000  excluded_constructed=-- (n_nonconstructed_mis=0)
+
+arm=arm4_full model=FIXTURE
+  scored=6 non_malformed=6 malformed=0 (rate 0.000)
+  posed_accuracy       1.000   [arm=arm4_full]
+  false_positive_rate  0.000   [arm=arm4_full] (ceiling check, N1)
+  false_negative_rate  0.000   [arm=arm4_full]
+  target_hit_rate      1.000   [arm=arm4_full] (HEADLINE; MIS counts only on target_hit)
+  target_miss_named    0       [arm=arm4_full] (detected strain, mislocated; not in headline)
+  section-9 split [arm=arm4_full]: included=1.000  excluded_constructed=-- (n_nonconstructed_mis=0)
+
+NULL / INSTRUMENT-STATUS FLAGS
+  none fired (with the arms/models present)
+
+Section 9: every reported set here is source=constructed, so the
+constructed-excluded headline has no denominator (--). The
+divergence test requires an externally-checked (field/published)
+case, which this environment cannot supply (egress-blocked).

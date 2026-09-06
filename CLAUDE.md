@@ -7800,6 +7800,45 @@ underneath).
   honored). The demo screens clean through `no_severity` with no exemption.
   Nine `CLL_*` claims; 169 selftest checks. Stdlib only, parses under 3.9,
   phone-buildable, CC0.
+- `frame-location-benchmark/` — A delivered work order (verbatim, CC0) for a
+  benchmark that supplies a possibly **mis-posed** problem and scores whether
+  the mis-posing is **named before an answer is produced**, under two or more
+  **harness** conditions (cold vs. a carried context file — the ARC-AGI sense
+  of a harness). **Nothing here is a benchmark result:** the run (ARM 0..4
+  model responses, the FL-3..FL-7 verdicts) needs model calls (none available)
+  and is egress-blocked, so the benchmark's own `FL-1..FL-7` are carried
+  UNVERIFIED and the run is the operator's step (build order says stop at step
+  5 if FL-3 is refuted). What is built and verified is the instrument. **The
+  response contract** (`protocol.md`) forces `POSED:`/`TARGET:` lines before
+  the answer, making scoring a **field comparison, not a judgement**; both
+  verdicts live, the class distribution withheld (C1–C4). **`cases.jsonl`**:
+  40 cases, **19 WELL (47.5%)** / 21 MIS (3 per fault class) across 8 domains,
+  R1–R6 enforced by `validate_cases.py` — **R1 the load-bearing control**
+  (without ≥40% WELL, "always declare MIS" wins the benchmark), R2 no class >
+  25% of MIS, R3 each of the seven fault classes in ≥2 domains (the FL-5
+  transfer). Every shipped case is `source=constructed` — this environment
+  cannot reach an external record (egress-blocked), the honest §7 sampling
+  absence. **`score.py`** is pure counting: **a MIS case counts ONLY on
+  `target_hit`**; calling MIS without locating the target is `target_miss_named`
+  (detected the strain, mislocated it) and **never** summed into the headline
+  (FL-6); `false_positive_rate` (WELL called MIS) is the N1 ceiling check,
+  registered in `tools/known_answer.py` (perfect 0.0 / all-MIS 1.0 / half 0.5),
+  `None` with no WELL cases (absent, not 0); MALFORMED scored apart (C3); every
+  score carries its arm label (N4); the §9 headline is reported
+  constructed-excluded and -included (here `--` excluded, all constructed);
+  N1/N2/N3 print as instrument-status flags with `[CHOICE]` thresholds.
+  **The §4 contamination rule is the load-bearing single point of failure:**
+  no harness file may contain a case's `prompt`, `fault_target`, or a
+  same-`(fault_class, domain)` worked instance; cross-domain fault-class
+  instances **are** permitted (the transfer). Harness files are frozen before
+  cases (`FREEZE_LOG.md`), ARM 4 = ARM 2 ++ ARM 3 byte-exact, and
+  `check_contamination` is null-tested (a planted `fault_target` leak fires;
+  the frozen harness is clean). The shipped `runs/` are CONSTRUCTED fixtures
+  exercising the counting — no model was run — and the report banners it. No
+  author or working-style section (§7 honored). Nine `FLB_*` claims (distinct
+  from the marker's FL-1..FL-7); 41 selftest checks; the score report screens
+  clean through `no_severity`. Stdlib only, parses under 3.9, phone-buildable,
+  CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated

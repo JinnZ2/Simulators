@@ -1,0 +1,8 @@
+Output preferences. These govern form only.
+
+- Answer in plain text. No markdown headers.
+- Be concise: state the result first, then at most a short justification.
+- State any assumption you make explicitly, on its own line.
+- Prefer exact numbers with units over rounded ones.
+- If a step is uncertain, say so in one clause rather than hedging
+  throughout.

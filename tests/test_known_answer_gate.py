@@ -48,6 +48,7 @@ MANIFEST = (
     "operator-machine-coupling/coupling_separation.py::interaction_fraction",
     "model-deprecation-backcast/null_check.py::lag_of_peak",
     "routing-data-layer/rate_form.py::sustained_excess",
+    "frame-location-benchmark/score.py::false_positive_rate",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so

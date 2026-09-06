@@ -1,0 +1,3 @@
+POSED: MIS
+TARGET: the two numbers
+B is smaller so A is worse.
