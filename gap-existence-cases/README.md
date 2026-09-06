@@ -2,20 +2,25 @@
 
 `WORK_ORDER.md` is a delivered work order (verbatim, CC0), companion to
 `frame-location-benchmark/`. That benchmark's §9 open node is the weak joint:
-constructed cases have no external check on the correct reframe. These two
-classes supply one — both replace an **authored answer key** with a **dated
-external record**, so neither the case author nor the model under test writes
-the key. The force in both is **ordering**; without dates, neither class
-exists.
+constructed cases have no external check on the correct reframe. This class
+supplies one — it replaces an **authored answer key** with a **dated external
+record**, so neither the case author nor the model under test writes the key.
+The force is **ordering**.
 
-**Nothing here is a benchmark result.** The runs need a model and/or the
-network: CLASS-3 STAGE 1 (a model committing cold) and STAGE 2 (network
-retrieval), and CLASS-2's archive consolidation with timestamps. None is
-reachable in this environment. What this folder builds and verifies is the
-**machinery** — the hash-void commit boundary, the offline scorer, the
-falsifiability gate, the admission validators — tested on constructed
-fixtures. The build order says CLASS-3 does not block on the archive; build it
-first, which is what this is.
+**§0 SCOPE DECISION (2026-09-05): CLASS-2 is cut.** An earlier draft carried a
+second class built on dated entries from a private archive; the revised work
+order removes it — this instrument is for other people and for AI
+self-assessment, and a priority claim about who named a gap first is not what
+it measures. What remains is **CLASS-3 alone**, self-contained: any model can
+run it on itself with no archive, no third party, and no dating of anyone's
+prior work. The cut also removes CLASS-2's two weakest joints (the
+independence problem and the archive-consolidation blocker).
+
+**Nothing here is a benchmark result.** The runs need a model and the network:
+CLASS-3 STAGE 1 (a model committing cold) and STAGE 2 (network retrieval),
+neither reachable in this environment. What this folder builds and verifies is
+the **machinery** — the hash-void commit boundary, the offline scorer, the
+falsifiability gate, the B4 prompt screen — tested on constructed fixtures.
 
 ## CLASS-3 — post-cutoff self-scoring, three staged steps
 
@@ -60,18 +65,6 @@ at STAGE 3, the case is **VOID**, not penalised (GX-3).
   `void_rate` high in every arm → the instrument is measuring commit
   discipline, not gap-location.
 
-## CLASS-2 — dated archive cases (admits 0 here, N4)
-
-`archive_cases.jsonl` is **empty**. CLASS-2 blocks on the cross-platform
-record consolidation with timestamps (build order step 5), not reachable
-here, and the §2.4 seed set has no entry dates established — so nothing
-satisfies **A1** (`pub_date > entry_date`, strictly, no same-month). Per
-**N4**, CLASS-2 admits 0 and CLASS-3 is reported alone; the admission rules
-(A1–A5) are **not relaxed** to reach a sample size. `validate_cases.py`
-enforces A1–A5 on any admitted case and reports the 0-admitted state;
-`archive_candidates.md` carries the seed set as NOT-ADMITTED candidates
-(REPLICATED ones weighted, per §8, once an entry date can be established).
-
 ## The network exception (§3), honored in code
 
 `commit_store.py`, `score.py`, and `validate_cases.py` import **no**
@@ -86,24 +79,22 @@ network-capable module (asserted by an AST scan in the selftest). Only
 | `commit_store.py` | STAGE 1 write + hash, STAGE 3 verify, `commit_specificity` (offline) |
 | `score.py` | STAGE 3 scorer — outcomes, the N3 gate, B1/B2, N1/N5 (offline) |
 | `retrieve.py` | STAGE 2 runner — the one network-touching piece; NOT RUN here, never fabricates |
-| `validate_cases.py` | CLASS-2 A1–A5, the B4 prompt screen |
-| `archive_cases.jsonl` | empty — CLASS-2 admits 0 (N4) |
-| `archive_candidates.md` | the §2.4 seed set, NOT ADMITTED (entry dates not established) |
+| `validate_cases.py` | the CLASS-3 B4 prompt screen (CLASS-2 cut by §0) |
 | `fixtures/commit/`, `fixtures/refs/` | CONSTRUCTED CLASS-3 fixtures (5 cases, one per outcome) — exercise the scorer, **not a result** |
-| `selftest_gxc.py` | 42 checks — the hash boundary, the scorer branches, the validators, the network discipline |
+| `selftest_gxc.py` | 38 checks — the hash boundary, the scorer branches, the B4 screen, the network discipline |
 | `CLAIM_TABLE.md` | `GXC_001..GXC_008` (distinct from the work order's GX-1..GX-5) |
 | `samples/gxc_score.sample.txt` | one constructed score report |
 
 ## Run
 
 ```
-python3 gap-existence-cases/selftest_gxc.py     # 42 checks
+python3 gap-existence-cases/selftest_gxc.py     # 38 checks
 python3 gap-existence-cases/score.py            # score the constructed fixtures (STAGE 3)
-python3 gap-existence-cases/validate_cases.py   # CLASS-2 admission (0 admitted, N4)
 python3 tools/known_answer.py                   # commit_specificity known-answer
 ```
 
-`commit_store.py`, `score.py`, and `retrieve.py` refuse `--selftest` (rc 2).
+`commit_store.py`, `score.py`, `retrieve.py`, and `validate_cases.py` refuse
+`--selftest` (rc 2).
 The score report screens clean through `sheet-structure-scan/no_severity`.
 Stdlib only, parses under Python 3.9, phone-buildable, CC0.
 

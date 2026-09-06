@@ -14,95 +14,32 @@ unavailable. See §3.
 
 ---
 
+## 0. SCOPE DECISION (2026-09-05)
+
+An earlier draft carried a second class built on dated entries from a
+private archive. CUT. Stated reason: this instrument is for other people
+and for AI self-assessment; a priority claim about who named a gap first
+is not what it is measuring, and is not wanted in it.
+
+What remains is self-contained. Any model can run it on itself with no
+archive, no third party, and no dating of anyone's prior work.
+
+The cut also removes the instrument's two weakest joints: the
+independence problem (§8) and the archive-consolidation blocker.
+
 ## 1. THE MOVE
 
-Both classes replace an authored answer key with a DATED EXTERNAL RECORD.
-Neither the case author nor the model under test writes the key.
+Replace an authored answer key with a DATED EXTERNAL RECORD. Neither the
+case author nor the model under test writes the key.
 
 ```
-CLASS-2  ARCHIVE       gap named in a dated prior entry; the resolving
-                       documentation published LATER, independently
-CLASS-3  POST-CUTOFF   gap reasoned by the model cold; the resolving
-                       material published AFTER its training cutoff;
-                       model then retrieves and scores itself
+POST-CUTOFF   gap reasoned by the model cold; the resolving
+              material published AFTER its training cutoff;
+              model then retrieves and scores itself
 ```
 
-The force in both is ORDERING. Without dates, neither class exists.
-
----
-
-## 2. CLASS-2 — DATED ARCHIVE CASES
-
-### 2.1 Record schema — `archive_cases.jsonl`
-
-```
-{
-  "id":              "GX-007",
-  "entry_date":      "YYYY-MM-DD",     required, from the archive
-  "entry_platform":  "<where it was posted / logged>",
-  "entry_text":      "<the gap as stated AT THE TIME, verbatim>",
-  "target":          "<the variable/term named as wrong or missing>",
-  "resolving_ref":   {"title": "", "venue": "", "pub_date": "YYYY-MM-DD",
-                      "locator": "<doi or stable url>"},
-  "match_class":     "CORRECTED" | "REPLICATED" | "ADJACENT" | "NULL",
-  "independence":    "<why the later work is not downstream of the entry>",
-  "prompt":          "<the problem as posed, stripped of the gap>"
-}
-```
-
-### 2.2 Admission rules
-
-```
-A1  pub_date > entry_date. Strictly. No same-month admissions.
-A2  entry_text must be VERBATIM from the dated record. No rewriting
-    to sharpen it after the fact — that is the whole failure mode
-    this class exists to avoid.
-A3  target must be specific enough to be WRONG. A gap statement that
-    any later paper would satisfy is not a case. Test: could a
-    reader, given only entry_text, have predicted which findings
-    would count as a match and which would not? If no, reject.
-A4  independence must be stated. Anonymous posting to a public repo
-    means downstream carriage cannot be excluded — say so in the
-    field rather than claiming independence.
-A5  match_class assigned BEFORE reading beyond the abstract of the
-    resolving ref, and the assignment is logged with a timestamp.
-```
-
-### 2.3 match_class definitions
-
-```
-CORRECTED   later work names the same fault and repairs it
-REPLICATED  later work reproduces the fault; the gap is confirmed
-            open by demonstration
-ADJACENT    later work touches the area, does not state the fault
-NULL        nothing found; the gap remains unaddressed
-```
-
-- REPLICATED is a POSITIVE result for the instrument, not a failure.
-  A documented repetition of the named error after the entry date is
-  the strongest available existence proof that the gap is real and
-  structural rather than an artifact of one reading.
-- ADJACENT and NULL are reported, never discarded. §6 N2.
-
-### 2.4 Known seed set (2026-09-05, from the marker files)
-
-```
-cascading-process-chain-hazards   candidate CORRECTED/ADJACENT
-                                  content match found in a GLOF
-                                  review; ENTRY DATE NOT YET
-                                  ESTABLISHED — cannot admit
-archive-siting-bias               ADJACENT; siting uncertainty
-                                  discussed, sign of the bias not
-                                  stated
-coupling-capacity-vs-obligate-    REPLICATED; the engineered
-rigidity                          amino-acid auxotroph construct
-                                  reproduced in later work, no
-                                  partner-switching comparison
-```
-
-None are admissible until entry dates are pulled from the archive.
-BUILD DEPENDENCY: the cross-platform record consolidation with
-timestamps. Everything in CLASS-2 blocks on it.
+The force is ORDERING. The model's training cutoff is a hard date it
+cannot move, and it is the only date the instrument needs.
 
 ---
 

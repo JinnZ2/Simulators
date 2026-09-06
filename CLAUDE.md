@@ -7842,15 +7842,18 @@ underneath).
 - `gap-existence-cases/` — A delivered work order (verbatim, CC0), companion
   to `frame-location-benchmark/`: it supplies the external key that folder's
   §9 open node lacked, by replacing an authored answer key with a **dated
-  external record**. **CLASS-2** (archive: a gap named in a dated entry,
-  resolved by later independent documentation) and **CLASS-3** (post-cutoff: a
-  gap reasoned cold, resolved by material published after the model's training
-  cutoff, the model then retrieving and scoring itself); the force in both is
-  **ordering**. **Nothing here is a benchmark result:** the runs need a model
-  (CLASS-3 STAGE 1 commit), the network (STAGE 2 retrieval), and the archive
-  (CLASS-2), none reachable — so the work order's own `GX-1..GX-5` are carried
-  UNVERIFIED and the runs are the operator's step. What is built and verified
-  is the machinery. **`GXC_001`, the structural boundary (GX-3):** `commit_store.py`
+  external record** — a gap reasoned by the model cold, resolved by material
+  published after its training cutoff, the model then retrieving and scoring
+  itself; the force is **ordering** and the cutoff is the only date it needs.
+  **A revision cut CLASS-2:** the §0 SCOPE DECISION (2026-09-05) removed the
+  dated-archive class ("a priority claim about who named a gap first is not
+  what it measures"), leaving **CLASS-3 alone**, self-contained — the CLASS-2
+  archive files, its A1–A5 admission and `GXC_006` go with it (that claim
+  SUPERSEDED). **Nothing here is a benchmark result:** the runs need a model
+  (CLASS-3 STAGE 1 commit) and the network (STAGE 2 retrieval), neither
+  reachable — so the work order's own `GX-1..GX-5` are carried UNVERIFIED (of
+  which GX-1/GX-4 are vestigial CLASS-2 residue in the delivered §5) and the
+  runs are the operator's step. What is built and verified is the machinery. **`GXC_001`, the structural boundary (GX-3):** `commit_store.py`
   hashes the STAGE 1 declaration and the process exits; STAGE 3 re-hashes and
   a commit that does not verify is **VOID, not penalised** — the enforcement
   is the process boundary, not an instruction, defending against
@@ -7868,19 +7871,19 @@ underneath).
   cutoffs (B2); every score carries both in the same line (N5). **`GXC_005`:**
   the full disposition is printed, never filtered (N2), and N1 fires when
   `void_rate` is high in every arm (measuring commit discipline, not
-  gap-location). **`GXC_006`:** CLASS-2 **admits 0** honestly (N4) —
-  the archive consolidation (build order step 5) is unreachable and the §2.4
-  seed set has no entry dates, so nothing satisfies A1; `archive_cases.jsonl`
-  is empty, the rules are not relaxed, and the seed is carried as NOT-ADMITTED
-  candidates. **`GXC_007`, the §3 network exception honored in code:**
+  gap-location). **`GXC_006` SUPERSEDED** — it documented CLASS-2 admitting 0
+  honestly (N4); the §0 cut removed CLASS-2 outright, so the archive files and
+  A1–A5 are gone and `validate_cases.py` now carries only the CLASS-3 B4
+  prompt screen. **`GXC_007`, the §3 network exception honored in code:**
   `commit_store.py`/`score.py`/`validate_cases.py` import **no** network module
   (asserted by an AST scan), and only `retrieve.py` touches the network — here
   refusing to run or fabricate a dated ref (a forged `pub_date` would forge the
   external key). **`GXC_008` carried / UNVERIFIED:** GX-1..GX-5 need real runs;
   no author or working-style section (§7). The shipped `fixtures/` are
-  CONSTRUCTED (one per outcome), bannered. Eight `GXC_*` claims; 42 selftest
-  checks; the score report screens clean through `no_severity`. Stdlib only,
-  parses under 3.9, phone-buildable, CC0.
+  CONSTRUCTED (one per outcome), bannered. Eight `GXC_*` claims (`GXC_006`
+  superseded by the §0 CLASS-2 cut); 38 selftest checks; the score report
+  screens clean through `no_severity`. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative
   toward substrate, zero the term as used, positive toward the stated

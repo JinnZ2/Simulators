@@ -139,39 +139,15 @@ for arm, a in arms.items():
               "fixture arm: 1 void_hash / 1 void_spec")
         check(abs(a["void_rate"] - 0.4) < 1e-9, "fixture void_rate 0.4")
 
-# ---- validate_cases: A1-A5 and the B4 screen ------------------------------
+# ---- validate_cases: the B4 prompt screen (CLASS-2 cut by WORK_ORDER §0) ---
 
-ok, msgs = vc.validate(os.path.join(_HERE, "archive_cases.jsonl"))
-check(ok and msgs == [], "empty archive_cases.jsonl passes (0 admitted, N4)")
-
-good = {"id": "GX-1", "entry_date": "2025-01-01", "entry_platform": "p",
-        "entry_text": "the gap as stated", "target": "the specific term",
-        "resolving_ref": {"title": "t", "venue": "v", "pub_date": "2025-06-01",
-                          "locator": "doi:x"},
-        "match_class": "REPLICATED", "match_class_coded_at": "2026-01-01T00:00Z",
-        "independence": "different lab, no citation", "prompt": "p"}
-check(vc.check_A1_A5([good]) == [], "a well-formed CLASS-2 case passes A1-A5")
-
-# A1: pub_date not after entry_date
-bad_a1 = dict(good, resolving_ref=dict(good["resolving_ref"], pub_date="2024-06-01"))
-check(any("A1" in m for m in vc.check_A1_A5([bad_a1])), "A1 fires pub<=entry")
-# A1: same month
-bad_sm = dict(good, entry_date="2025-06-02",
-              resolving_ref=dict(good["resolving_ref"], pub_date="2025-06-20"))
-check(any("A1" in m and "same-month" in m for m in vc.check_A1_A5([bad_sm])),
-      "A1 fires same-month")
-# A4: independence missing
-bad_a4 = dict(good); bad_a4.pop("independence")
-check(any("A4" in m for m in vc.check_A1_A5([bad_a4])), "A4 fires no independence")
-# A5: no coding timestamp
-bad_a5 = dict(good); bad_a5.pop("match_class_coded_at")
-check(any("A5" in m for m in vc.check_A1_A5([bad_a5])), "A5 fires no coding timestamp")
-
-# B4 screen
+# B4 screen: a post-cutoff term leaks the date; a clean prompt passes.
 check(vc.screen_prompt("plan the route across the county", ["neologism2026"]) == [],
       "B4 screen clean when no post-cutoff term present")
 check(vc.screen_prompt("use the neologism2026 method", ["neologism2026"]),
       "B4 screen fires on a post-cutoff term")
+check(vc.screen_prompt("nothing here", []) == [],
+      "B4 screen with no blocked terms is clean (nothing to leak)")
 
 # ---- retrieve: refuses to run, refuses to fabricate; write_refs is pure ---
 
@@ -218,7 +194,7 @@ for mod in ("commit_store.py", "score.py", "validate_cases.py"):
 
 # ---- --selftest refusals --------------------------------------------------
 
-for mod in ("commit_store.py", "score.py", "retrieve.py"):
+for mod in ("commit_store.py", "score.py", "retrieve.py", "validate_cases.py"):
     rc = subprocess.call([sys.executable, os.path.join(_HERE, mod),
                           "--selftest"], stderr=subprocess.DEVNULL)
     check(rc == 2, "%s --selftest exits 2" % mod)
