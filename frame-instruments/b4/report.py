@@ -6,12 +6,11 @@ print or neither does.
 Command: python3 report.py --items I --requirements R --prompts DIR --grade G \
     --grade-shuffled GS --agreement A --agreement-shuffled AS [--calibration C] --out report.md
 """
-import argparse
 import json
 import os
 import sys
 
-from common import STATES, Invalid, Run, Void, count_by, finish, read_jsonl
+from common import STATES, Invalid, Run, Void, count_by, finish, parse_argv, read_jsonl, usage_exit
 
 SECTIONS = ["Item set present, by arm, with sources",
             "Reconstructor count and how they were kept separate",
@@ -146,13 +145,12 @@ def render(items, reqs, prompts_dir, g_real, g_sh, a_real, a_sh, calib):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(description=__doc__)
-    for k in ("items", "requirements", "prompts", "grade", "grade-shuffled", "agreement", "agreement-shuffled"):
-        ap.add_argument("--" + k, required=True)
-    ap.add_argument("--calibration", default=None)
-    ap.add_argument("--out", required=True)
-    ap.add_argument("--runs", default=None)
-    a = ap.parse_args(argv)
+    try:
+        a = parse_argv(argv, __doc__, positional=(), options=("items", "requirements", "prompts", "grade", "grade_shuffled", "agreement", "agreement_shuffled", "calibration", "out", "runs"), required=("items", "requirements", "prompts", "grade", "grade_shuffled", "agreement", "agreement_shuffled", "out"))
+    except Invalid as e:
+        return usage_exit(e)
+    if a is None:
+        return 0
     ins = [a.items, a.requirements, a.prompts, a.grade, a.grade_shuffled, a.agreement,
            a.agreement_shuffled, a.calibration]
     with Run("b4/report.py", vars(a), None, ins, a.out, a.runs) as run:

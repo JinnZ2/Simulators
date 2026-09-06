@@ -1,0 +1,2 @@
+{"arm": "split", "case_id": "s1", "key_posed": "whether the gauge read zero", "key_target": "the gauge", "key_why": "stated", "statement": "The gauge read zero at shift change."}
+{"arm": "split", "case_id": "s2", "key_posed": "whether the line was capped", "key_target": "the relief line", "key_why": "stated", "statement": "The relief line was capped."}

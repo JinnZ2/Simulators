@@ -14,11 +14,10 @@ hitting both lists, or neither, is `unresolved` with the sub-reason kept.
 
 Command: python3 grade.py REQS.jsonl --out GRADE.jsonl [--physical-cues ...] [--policy-cues ...]
 """
-import argparse
 import re
 import sys
 
-from common import (REQ_FIELDS, Invalid, Run, check_fields, count_by,
+from common import (parse_argv, usage_exit, REQ_FIELDS, Invalid, Run, check_fields, count_by,
                     finish, raise_if, read_jsonl, ref, write_jsonl)
 
 PHYSICAL_CUES = ("measur", "deriv", "comput", "calculat", "instrument", "sensor",
@@ -80,13 +79,13 @@ def grade(rows, physical_cues, policy_cues):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("requirements")
-    ap.add_argument("--out", required=True)
-    ap.add_argument("--physical-cues", default=",".join(PHYSICAL_CUES))
-    ap.add_argument("--policy-cues", default=",".join(POLICY_CUES))
-    ap.add_argument("--runs", default=None)
-    a = ap.parse_args(argv)
+    try:
+        a = parse_argv(argv, __doc__, positional=("requirements",), options=("out", "physical_cues", "policy_cues", "runs"), required=("out",),
+                       defaults={"physical_cues": ",".join(PHYSICAL_CUES), "policy_cues": ",".join(POLICY_CUES)})
+    except Invalid as e:
+        return usage_exit(e)
+    if a is None:
+        return 0
     pc = [c for c in a.physical_cues.split(",") if c.strip()]
     qc = [c for c in a.policy_cues.split(",") if c.strip()]
     with Run("b4/grade.py", vars(a), None, [a.requirements], a.out, a.runs) as run:

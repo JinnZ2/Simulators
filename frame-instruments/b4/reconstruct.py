@@ -12,12 +12,11 @@ one key.
 
 Command: python3 reconstruct.py ITEMS_VALID.jsonl --reconstructors r1,r2,r3 --out PROMPTS_DIR
 """
-import argparse
 import json
 import os
 import sys
 
-from common import (ITEM_FIELDS, Invalid, Run, check_fields, check_id,
+from common import (parse_argv, usage_exit, ITEM_FIELDS, Invalid, Run, check_fields, check_id,
                     finish, read_jsonl, raise_if)
 
 ONLY_KEY = "text_verbatim"
@@ -65,12 +64,12 @@ def assert_boundary(paths, texts):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("items")
-    ap.add_argument("--reconstructors", required=True, help="comma-separated ids")
-    ap.add_argument("--out", required=True)
-    ap.add_argument("--runs", default=None)
-    a = ap.parse_args(argv)
+    try:
+        a = parse_argv(argv, __doc__, positional=("items",), options=("reconstructors", "out", "runs"), required=("reconstructors", "out"))
+    except Invalid as e:
+        return usage_exit(e)
+    if a is None:
+        return 0
     rids = [r.strip() for r in a.reconstructors.split(",") if r.strip()]
     with Run("b4/reconstruct.py", vars(a), None, [a.items], a.out, a.runs) as run:
         try:

@@ -9,10 +9,9 @@ counted downstream, never checked against a list.
 
 Command: python3 requirements.py REQS.jsonl --items ITEMS_VALID.jsonl --out REQS_VALID.jsonl
 """
-import argparse
 import sys
 
-from common import (REQ_FIELDS, STATES, Invalid, Run, Void, check_fields,
+from common import (parse_argv, usage_exit, REQ_FIELDS, STATES, Invalid, Run, Void, check_fields,
                     check_id, count_by, finish, nonempty_str, read_jsonl,
                     ref, write_jsonl)
 
@@ -50,12 +49,12 @@ def validate(rows, item_ids=None):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("requirements")
-    ap.add_argument("--items", default=None, help="validated items file; item_ids are checked against it")
-    ap.add_argument("--out", required=True)
-    ap.add_argument("--runs", default=None)
-    a = ap.parse_args(argv)
+    try:
+        a = parse_argv(argv, __doc__, positional=("requirements",), options=("items", "out", "runs"), required=("out",))
+    except Invalid as e:
+        return usage_exit(e)
+    if a is None:
+        return 0
     with Run("b4/requirements.py", vars(a), None, [a.requirements, a.items], a.out, a.runs) as run:
         try:
             rows = read_jsonl(a.requirements)
