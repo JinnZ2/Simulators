@@ -2,19 +2,21 @@
 sections, in order, no others. The permuted result is a SECOND OUTPUT:
 if the permuted summary is missing the run is void and nothing is written.
 
-Section 6 (NULLS TRIGGERED, N1-N5) is defined by the reference spec
-WORKORDER_runner_up_trace.md. If that file is not present, the section
-states so and prints the quantities a null would read, without inventing
-the nulls.
+Section 6 (NULLS TRIGGERED, N1-N5) follows workorders/runner_up_trace.md
+section 7 via nulls.py; every threshold is an argument printed with the
+result, and a null the inputs cannot evaluate says so. --base is optional
+and only N5 reads it.
 
 Command: python3 report.py --separations S.jsonl --summary SUM.jsonl --summary-permuted SUMP.jsonl --out report.md
+    [--base BASE.jsonl] [--n1-resync 0.9] [--n2-separate 0.95] [--n3-jaccard 0.5] [--n5-discordance 0.1] [--sustained-d 64]
 """
+import json
 import os
 import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from ficommon import Invalid, Run, Void, finish, parse_argv, read_jsonl, usage_exit  # noqa: E402
+import nulls  # noqa: E402
 
-REF_SPEC = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "workorders", "runner_up_trace.md")
 SECTIONS = ["Counts and the case set present", "D sweep", "L sweep", "Stability overlaps",
             "REAL vs PERMUTED, side by side", "NULLS TRIGGERED (N1-N5)"]
 COLS = ["model_id", "D", "L", "n_rows", "n_positions", "mean_div", "resync_rate", "top_decile_count"]
@@ -43,7 +45,8 @@ def stab_table(stab, arm=None):
     return table(hdr, rows)
 
 
-def render(seps, real, perm):
+def render(seps, real, perm, base_rows=None, thr=None):
+    thr = dict(nulls.DEFAULTS, **(thr or {}))
     rc, rs = split(real)
     pc, ps = split(perm)
     L = ["# B1 runner-up trace scoring -- report", ""]
@@ -67,43 +70,35 @@ def render(seps, real, perm):
     L += table(["arm"] + COLS, [[arm] + [c[k] for k in COLS] for arm, c in both]) + [""]
     L += stab_table(rs, "REAL") + [""] + stab_table(ps, "PERMUTED") + [""]
     seeds = sorted(set(str(p.get("permute_seed")) for p in perm if p.get("permute_seed") is not None))
-    L += ["## 6. " + SECTIONS[5], ""]
-    if os.path.exists(REF_SPEC):
-        L += ["Reference spec present at workorders/runner_up_trace.md; N1-N5 are not "
-              "implemented in this build and must be read from it.", ""]
-    else:
-        L += ["The reference spec (WORKORDER_runner_up_trace.md) is not in this tree, so N1-N5 "
-              "have no definition here and no null is evaluated or invented. The quantities a "
-              "null would read, real beside permuted:", ""]
-    L += table(["model_id", "D", "L", "mean_div real", "mean_div permuted", "resync real", "resync permuted"],
-               [[c["model_id"], c["D"], c["L"], c["mean_div"],
-                 next((p["mean_div"] for p in pc if (p["model_id"], p["D"], p["L"]) == (c["model_id"], c["D"], c["L"])), None),
-                 c["resync_rate"],
-                 next((p["resync_rate"] for p in pc if (p["model_id"], p["D"], p["L"]) == (c["model_id"], c["D"], c["L"])), None)]
-                for c in sorted(rc, key=lambda c: (c["model_id"], c["D"], c["L"]))])
-    L += ["", "Stratum averages and rates are identical across REAL and PERMUTED by construction: the "
-          "permutation moves tuples between positions inside each (model, D, L) stratum and leaves the "
-          "stratum multiset intact. What the null moves is the top-decile position sets, read in the "
-          "stability tables of section 5.", "",
-          "permute seed(s) carried in the permuted summary: %s (the seed is in the permute run record)" %
+    L += ["## 6. " + SECTIONS[5], "", "Per workorders/runner_up_trace.md section 7. Thresholds are arguments: %s" %
+          ", ".join("%s=%s" % kv for kv in sorted(thr.items())), ""]
+    for n in nulls.evaluate(seps, real, perm, base_rows, thr):
+        trig = {True: "TRIGGERED", False: "not triggered", None: "NOT EVALUABLE"}[n["triggered"]]
+        L += ["### %s -- %s" % (n["id"], trig), "", "number: `%s`" % json.dumps(n["number"], sort_keys=True),
+              "threshold: `%s`" % n["threshold"], "", n["note"], ""]
+    L += ["permute seed(s) carried in the permuted summary: %s (the seed is in the permute run record)" %
           (", ".join(seeds) if seeds else "none"), ""]
     return "\n".join(L)
 
 
 def main(argv=None):
     try:
-        a = parse_argv(argv, __doc__, options=("separations", "summary", "summary_permuted", "out", "runs"),
-                       required=("separations", "summary", "summary_permuted", "out"))
+        a = parse_argv(argv, __doc__, options=("separations", "summary", "summary_permuted", "out", "runs", "base",
+                                                "n1_resync", "n2_separate", "n3_jaccard", "n5_discordance", "sustained_d"),
+                       required=("separations", "summary", "summary_permuted", "out"),
+                       defaults={k: str(v) for k, v in nulls.DEFAULTS.items()})
     except Invalid as e:
         return usage_exit(e)
     if a is None:
         return 0
-    with Run("b1/report.py", vars(a), None, [a.separations, a.summary, a.summary_permuted], a.out, a.runs) as run:
+    with Run("b1/report.py", vars(a), None, [a.separations, a.summary, a.summary_permuted, a.base], a.out, a.runs) as run:
         try:
             if not os.path.exists(a.summary_permuted):
                 raise Void("permuted summary missing: %s -- both print or neither does" % a.summary_permuted)
-            text = render(read_jsonl(a.separations), read_jsonl(a.summary), read_jsonl(a.summary_permuted))
-        except Invalid as e:
+            thr = {k: (int if k == "sustained_d" else float)(getattr(a, k)) for k in nulls.DEFAULTS}
+            base_rows = read_jsonl(a.base) if a.base else None
+            text = render(read_jsonl(a.separations), read_jsonl(a.summary), read_jsonl(a.summary_permuted), base_rows, thr)
+        except (Invalid, ValueError) as e:
             return finish(run, "error", notes=str(e))
         except Void as e:
             return finish(run, "void", notes=str(e))

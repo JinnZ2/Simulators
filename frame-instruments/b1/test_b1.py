@@ -8,7 +8,7 @@ import unittest
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.dirname(HERE))
-import permute, report, schema, score, summarise  # noqa: E402
+import nulls, permute, report, schema, score, summarise  # noqa: E402
 from ficommon import read_jsonl, write_jsonl  # noqa: E402
 from runrecord import read_records  # noqa: E402
 
@@ -134,8 +134,32 @@ class B1Tests(unittest.TestCase):
             text = fh.read()
         self.assertEqual(text.count("\n## "), 6)
         self.assertIn("PERMUTED", text)
+        for n in ("N1", "N2", "N3", "N4", "N5"):
+            self.assertIn("### %s -- " % n, text)
+        self.assertIn("N5 -- NOT EVALUABLE", text)
         cells = [s for s in read_jsonl(self.p("sum.jsonl")) if "n_rows" in s]
         self.assertEqual(len(cells), len(DS) * len(LS))
+
+    def test_nulls_each_direction(self):
+        # N1 fires on a corpus that rejoins everywhere; N2 fires on one that separates everywhere.
+        rj = score.sweep([base_row(i=5), base_row(i=6)], [trace(rejoin_immediately(), i=5), trace(rejoin_immediately(), i=6)], DS, LS)
+        sp = score.sweep([base_row(i=5), base_row(i=6)], [trace(never_rejoins(), i=5), trace(never_rejoins(), i=6)], DS, LS)
+        thr = dict(nulls.DEFAULTS)
+        s_rj, s_sp = summarise.summarise(rj), summarise.summarise(sp)
+        self.assertTrue(nulls.n1(s_rj, thr["n1_resync"])["triggered"])
+        self.assertFalse(nulls.n1(s_sp, thr["n1_resync"])["triggered"])
+        self.assertTrue(nulls.n2(sp, thr["n2_separate"], 64)["triggered"])
+        self.assertFalse(nulls.n2(rj, thr["n2_separate"], 64)["triggered"])
+        self.assertIsNone(nulls.n5(None, 0.1)["triggered"])
+        self.assertIsNone(nulls.n5([base_row(i=5)], 0.1)["triggered"])
+        both = [dict(base_row(i=k), entropy_i=float(k), entropy_basis="full") for k in range(4)] + \
+               [dict(base_row(i=k), entropy_i=float(3 - k), entropy_basis="topk") for k in range(4)]
+        r = nulls.n5(both, 0.1)
+        self.assertEqual(r["number"]["discordant_pair_fraction"], 1.0)
+        self.assertTrue(r["triggered"])
+        n4 = nulls.n4(s_sp, s_sp)
+        self.assertTrue(n4["triggered"])  # identical stability on both arms reads as method artifact
+        self.assertIsNone(nulls.n3([], 0.5)["triggered"])
 
 
 if __name__ == "__main__":

@@ -10614,10 +10614,8 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   render's). Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `frame-instruments/` — A bundle delivered as one file and written out
   verbatim (`README.md`, `liftable/five-state-grading.md`,
-  `liftable/reconstruction-procedure.md`), then two of its three
-  referenced work orders arrived and are filed verbatim under
-  `workorders/`; the third, the runner-up trace reference spec, did not
-  and is not reconstructed. **All four builds are built**, stdlib only,
+  `liftable/reconstruction-procedure.md`), then all three referenced
+  work orders arrived and are filed verbatim under `workorders/`. **All four builds are built**, stdlib only,
   no network, hand-rolled argv parsing, one `runrecord.py` whose record
   is written on every exit path including an uncaught exception, and
   `FORBIDDEN = (label, category, type, interpretation)` checked on every
@@ -10630,8 +10628,10 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `summarise.py` runs identically on real and permuted, emitting
   top-decile position sets and their adjacent-D / adjacent-L Jaccard
   stability; `report.py` is `void` without the permuted summary, and its
-  section 6 states that N1–N5 live in the missing reference spec and
-  evaluates nothing. **B2** (`b2/`) is the audit-isolation runner:
+  section 6 evaluates the reference spec's N1–N5 via `nulls.py`, each
+  with its number, its threshold as a printed argument, and one of
+  TRIGGERED / not triggered / NOT EVALUABLE (N3's N half and N5 without
+  both entropy bases are the not-evaluable cases). **B2** (`b2/`) is the audit-isolation runner:
   `conditions.py` emits A/B/C/D rows carrying only
   `case_id, condition, presented_text`, leak-checked by field set and by
   substring; `order.py` counterbalances with seeded 4×4 Latin squares
@@ -10651,7 +10651,7 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `agree.py` since the two take different inputs, recorded in
   `b4/BUILD_NOTES.md`. Every open choice is marked in `BUILD_NOTES.md`;
   each build ships `samples/` from its constructed fixture; suites are
-  13 + 8 + 5 + 3 tests. CC0.
+  13 + 9 + 5 + 3 tests. CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

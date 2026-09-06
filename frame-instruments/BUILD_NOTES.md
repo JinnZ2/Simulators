@@ -1,9 +1,9 @@
 # frame-instruments -- build notes
 
 Built to `workorders/B1-B3_frame_instruments.md` and
-`workorders/B4_dilemma_reconstruction.md`, both delivered verbatim. The
-third referenced spec, `WORKORDER_runner_up_trace.md`, did not arrive
-and is not reconstructed. Results only.
+`workorders/B4_dilemma_reconstruction.md`, with the B1 reference spec
+`workorders/runner_up_trace.md`; all three delivered verbatim. Results
+only.
 
 ## Layout
 
@@ -51,10 +51,22 @@ invocations unchanged.
   The report states this beside the numbers.
 - **Top decile.** The `ceil(n/10)` rows with the largest `div_D`, ties
   broken by position string; one row minimum.
-- **Section 6.** N1-N5 live in the missing reference spec. The section
-  prints the quantities a null would read and evaluates nothing; if the
-  spec lands at `workorders/runner_up_trace.md` the section says so and
-  still implements nothing, because the nulls need the spec's own text.
+- **Section 6, N1-N5** (`b1/nulls.py`, from the reference spec section
+  7). Each prints its number, its threshold and one of TRIGGERED /
+  not triggered / NOT EVALUABLE. Thresholds are arguments with defaults
+  (`--n1-resync 0.9`, `--n2-separate 0.95`, `--n3-jaccard 0.5`,
+  `--n5-discordance 0.1`, `--sustained-d 64`), all printed. N1 and N2
+  fire only when they hold at every L, the strictest L included. N3's
+  N half is NOT EVALUABLE from `separations.jsonl`, which does not carry
+  the stage-B selection size; it needs runs compared across N. N4 reads
+  permuted stability >= real stability, and prints the permuted values as
+  the transfer function either way. N5 needs `--base` with the same
+  positions under both entropy bases; with one basis it is NOT
+  EVALUABLE, never "not triggered".
+- **Spec stage D vs the order.** The spec fixes the rejoin suffix at 4;
+  the B1 order overrides it with the L sweep, and the sweep is what is
+  built. The spec's RU-1..RU-5 claims are the runner's to evaluate on a
+  real run; no claim table is written here.
 
 ## B2 -- choices
 

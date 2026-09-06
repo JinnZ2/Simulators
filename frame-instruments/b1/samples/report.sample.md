@@ -165,26 +165,41 @@ models: m
 
 ## 6. NULLS TRIGGERED (N1-N5)
 
-The reference spec (WORKORDER_runner_up_trace.md) is not in this tree, so N1-N5 have no definition here and no null is evaluated or invented. The quantities a null would read, real beside permuted:
+Per workorders/runner_up_trace.md section 7. Thresholds are arguments: n1_resync=0.9, n2_separate=0.95, n3_jaccard=0.5, n5_discordance=0.1, sustained_d=64
 
-| model_id | D | L | mean_div real | mean_div permuted | resync real | resync permuted |
-|---|---|---|---|---|---|---|
-| m | 8 | 2 | 0.708333 | 0.708333 | 0.333333 | 0.333333 |
-| m | 8 | 4 | 0.708333 | 0.708333 | 0.0 | 0.0 |
-| m | 8 | 8 | 0.708333 | 0.708333 | 0.0 | 0.0 |
-| m | 16 | 2 | 0.854167 | 0.854167 | 0.333333 | 0.333333 |
-| m | 16 | 4 | 0.854167 | 0.854167 | 0.0 | 0.0 |
-| m | 16 | 8 | 0.854167 | 0.854167 | 0.0 | 0.0 |
-| m | 32 | 2 | 0.802083 | 0.802083 | 0.666667 | 0.666667 |
-| m | 32 | 4 | 0.802083 | 0.802083 | 0.333333 | 0.333333 |
-| m | 32 | 8 | 0.802083 | 0.802083 | 0.333333 | 0.333333 |
-| m | 64 | 2 | 0.734375 | 0.734375 | 0.666667 | 0.666667 |
-| m | 64 | 4 | 0.734375 | 0.734375 | 0.333333 | 0.333333 |
-| m | 64 | 8 | 0.734375 | 0.734375 | 0.333333 | 0.333333 |
-| m | 128 | 2 | 0.700521 | 0.700521 | 0.666667 | 0.666667 |
-| m | 128 | 4 | 0.700521 | 0.700521 | 0.333333 | 0.333333 |
-| m | 128 | 8 | 0.700521 | 0.700521 | 0.333333 | 0.333333 |
+### N1 -- not triggered
 
-Stratum averages and rates are identical across REAL and PERMUTED by construction: the permutation moves tuples between positions inside each (model, D, L) stratum and leaves the stratum multiset intact. What the null moves is the top-decile position sets, read in the stability tables of section 5.
+number: `{"min_resync_over_D_per_L": {"2": 0.333333, "4": 0.0, "8": 0.0}}`
+threshold: `0.9`
+
+triggered when the minimum resync rate over D is >= threshold at every L
+
+### N2 -- not triggered
+
+number: `{"separation_rate_at_D>=64_per_L": {"2": 0.3333, "4": 0.6667, "8": 0.6667}}`
+threshold: `0.95`
+
+separates = resync 0 at every D >= 64; triggered when the rate is >= threshold at every L
+
+### N3 -- TRIGGERED
+
+number: `{"N": "not carried", "min_adjacent_D_jaccard": 0.0, "min_adjacent_L_jaccard": 1.0}`
+threshold: `0.5`
+
+triggered when any adjacent-D or adjacent-L top-decile Jaccard is < threshold; the N sweep (stage B) is not in separations.jsonl and is compared across runs at different N
+
+### N4 -- not triggered
+
+number: `{"mean_adjacent_D_jaccard_permuted": 0.1667, "mean_adjacent_D_jaccard_real": 0.75, "transfer_function_permuted": [{"from": 8, "held": {"L": 2}, "jaccard": 0.0, "model_id": "m", "to": 16}, {"from": 16, "held": {"L": 2}, "jaccard": 0.0, "model_id": "m", "to": 32}, {"from": 32, "held": {"L": 2}, "jaccard": 0.0, "model_id": "m", "to": 64}, {"from": 64, "held": {"L": 2}, "jaccard": 1.0, "model_id": "m", "to": 128}, {"from": 8, "held": {"L": 4}, "jaccard": 1.0, "model_id": "m", "to": 16}, {"from": 16, "held": {"L": 4}, "jaccard": 0.0, "model_id": "m", "to": 32}, {"from": 32, "held": {"L": 4}, "jaccard": 0.0, "model_id": "m", "to": 64}, {"from": 64, "held": {"L": 4}, "jaccard": 0.0, "model_id": "m", "to": 128}, {"from": 8, "held": {"L": 8}, "jaccard": 0.0, "model_id": "m", "to": 16}, {"from": 16, "held": {"L": 8}, "jaccard": 0.0, "model_id": "m", "to": 32}, {"from": 32, "held": {"L": 8}, "jaccard": 0.0, "model_id": "m", "to": 64}, {"from": 64, "held": {"L": 8}, "jaccard": 0.0, "model_id": "m", "to": 128}]}`
+threshold: `permuted >= real`
+
+the permuted stability values are the method's transfer function and are printed either way
+
+### N5 -- NOT EVALUABLE
+
+number: `{"entropy_bases_present": ["topk"], "positions_with_both": 0}`
+threshold: `0.1`
+
+requires >= 2 positions carrying entropy under both bases; not evaluable
 
 permute seed(s) carried in the permuted summary: none (the seed is in the permute run record)
