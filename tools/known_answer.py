@@ -452,6 +452,34 @@ def _flb_false_positive_rate(which):
     raise ValueError(which)
 
 
+def _gxc_commit_specificity(which):
+    """gap-existence-cases/commit_store.py::commit_specificity, imported. The
+    fraction of EXPECT predicates that are falsifiable -- the N3 gate that
+    voids a run before any hit is computed, and the denominator that closes
+    the largest gaming surface (a vague commit that matches anything). It
+    could be silently wrong (counting a non-falsifiable predicate as
+    falsifiable, or an off-by-one), so an all-falsifiable commit must read 1,
+    an all-vague one 0, and a half-and-half one 0.5."""
+    import importlib.util
+    path = os.path.join(ROOT, "gap-existence-cases", "commit_store.py")
+    spec = importlib.util.spec_from_file_location("_gxc_cs", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    fals = {"statement": "s", "satisfied_if": ["y"], "contradicted_if": ["n"]}
+    vague = {"statement": "s", "satisfied_if": ["y"], "contradicted_if": []}
+
+    def commit(preds):
+        return {"case_id": "x", "posed": "MIS", "target": "t", "basis": "b",
+                "expect": preds, "cutoff_date": "2025-01-01", "model": "M"}
+    if which == "all":
+        return mod.commit_specificity(commit([fals, fals]))
+    if which == "none":
+        return mod.commit_specificity(commit([vague, vague]))
+    if which == "half":
+        return mod.commit_specificity(commit([fals, vague]))
+    raise ValueError(which)
+
+
 def seed():
     """Registers the two instances the rule was earned from."""
     fn, detail = _extract_verdict()
@@ -743,6 +771,26 @@ def seed():
               "WELL total. Without the WELL controls 'always declare MIS' wins "
               "the benchmark, so this is the one number that catches it (N1). "
               "None when there are no WELL cases -- absent, not a rate of 0."),
+    )
+    register(
+        "gap-existence-cases/commit_store.py::commit_specificity",
+        _gxc_commit_specificity,
+        [
+            case("all falsifiable", ("all",), 1.0,
+                 "every EXPECT predicate states what would contradict it -> "
+                 "1; the run passes the N3 gate", tol=1e-9),
+            case("none falsifiable", ("none",), 0.0,
+                 "no predicate can be contradicted -> 0; the run is VOID "
+                 "before any hit is computed (the gaming surface)", tol=1e-9),
+            case("half", ("half",), 0.5,
+                 "half the predicates are falsifiable -> 0.5; present because "
+                 "it shares no expected value with the two endpoints, so the "
+                 "set can detect a constant metric", tol=1e-9),
+        ],
+        note=("the N3 gate: fraction of EXPECT predicates that are "
+              "falsifiable. hit counts ONLY against a falsifiable EXPECT, so "
+              "a vague commit that matches anything is voided by this "
+              "denominator, not by trust."),
     )
 
 

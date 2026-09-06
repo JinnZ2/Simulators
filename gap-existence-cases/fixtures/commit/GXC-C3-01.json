@@ -1,0 +1,26 @@
+{
+  "commit": {
+    "basis": "constructed fixture; not a model output",
+    "case_id": "GXC-C3-01",
+    "cutoff_date": "2025-01-01",
+    "expect": [
+      {
+        "contradicted_if": [
+          "clearing gauge equals floor input",
+          "no interception effect"
+        ],
+        "satisfied_if": [
+          "interception",
+          "throughfall"
+        ],
+        "statement": "a resolving finding would report interception loss under the canopy"
+      }
+    ],
+    "model": "FIXTURE-M",
+    "posed": "MIS",
+    "target": "sub-canopy throughfall"
+  },
+  "committed_at": "2026-09-06T02:24:44.163103+00:00",
+  "sha256": "034e20540e12a441c179b15f6b39b2c463ca66f46b0a4a88242f391abd2ae302",
+  "stage_separation": "staged"
+}

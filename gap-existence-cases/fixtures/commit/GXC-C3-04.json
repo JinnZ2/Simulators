@@ -1,0 +1,22 @@
+{
+  "commit": {
+    "basis": "constructed fixture; not a model output",
+    "case_id": "GXC-C3-04",
+    "cutoff_date": "2025-01-01",
+    "expect": [
+      {
+        "contradicted_if": [],
+        "satisfied_if": [
+          "relevant"
+        ],
+        "statement": "something relevant will turn up"
+      }
+    ],
+    "model": "FIXTURE-M",
+    "posed": "MIS",
+    "target": "something relevant"
+  },
+  "committed_at": "2026-09-06T02:24:44.164491+00:00",
+  "sha256": "9d700a19e00d5badad140dc37b1ade1eb7738899bbc7682f8709e72a9a81ec04",
+  "stage_separation": "staged"
+}

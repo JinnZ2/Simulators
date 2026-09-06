@@ -1,0 +1,12 @@
+{
+  "case_id": "GXC-C3-05",
+  "refs": [
+    {
+      "title": "Whatever",
+      "venue": "v",
+      "pub_date": "2025-06-01",
+      "locator": "doi:10/x5",
+      "finding": "specific fault named here"
+    }
+  ]
+}

@@ -49,6 +49,7 @@ MANIFEST = (
     "model-deprecation-backcast/null_check.py::lag_of_peak",
     "routing-data-layer/rate_form.py::sustained_excess",
     "frame-location-benchmark/score.py::false_positive_rate",
+    "gap-existence-cases/commit_store.py::commit_specificity",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so

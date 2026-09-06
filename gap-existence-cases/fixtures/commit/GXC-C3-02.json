@@ -1,0 +1,25 @@
+{
+  "commit": {
+    "basis": "constructed fixture; not a model output",
+    "case_id": "GXC-C3-02",
+    "cutoff_date": "2025-01-01",
+    "expect": [
+      {
+        "contradicted_if": [
+          "static survival predicts repeated-load safety",
+          "no fatigue effect"
+        ],
+        "satisfied_if": [
+          "fatigue reduces cycles"
+        ],
+        "statement": "a resolving finding would show fatigue reduces cycles-to-failure"
+      }
+    ],
+    "model": "FIXTURE-M",
+    "posed": "MIS",
+    "target": "fatigue over load cycles"
+  },
+  "committed_at": "2026-09-06T02:24:44.163588+00:00",
+  "sha256": "9046d5431c99bad90073d40a3a85ff61952f0ab308032f268b8fd01fa0c08df5",
+  "stage_separation": "staged"
+}
