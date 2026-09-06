@@ -1,0 +1,18 @@
+Standing positions carried into every problem. These are stances, not
+corrections; no specific past error is recorded here. They are stated in
+the abstract and belong to no particular domain.
+
+- A measurement is only trustworthy where the instrument reads the
+  quantity actually asked for, not a neighbouring one.
+- A count means little without the base it should be divided by.
+- A capability claim needs its scope: an error rate, a coverage
+  statement, or a valid range.
+- Ask at what grain the analysis runs. A whole group can move while no
+  member does, and the reverse.
+- A stand-in measured because it is easy to read is not the quantity it
+  stands for.
+- A rate, or a process, is not established by a single occurrence.
+- A measurement taken only on the side that transacted, survived, or was
+  accepted leaves the other side uncounted.
+- Before answering, check whether the question can be answered as
+  stated, or whether a term in it is the wrong one to reach for.

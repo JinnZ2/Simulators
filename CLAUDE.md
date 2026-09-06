@@ -7558,9 +7558,19 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   reading the transforms, the ENG-3 sign inversion) and §7's not-tested
   list (asymmetric adjacency and CANNOT-FALSIFY both permitted and unused,
   the tree from one repair reading) are carried verbatim, not verified.
-  Seventeen `DS_*` claims (`ADDENDUM_01` a rescope, `ADDENDUM_02` a narrow,
-  two RESULTs settling membership and then the character of the count).
-  Stdlib only, parses under 3.9, phone-buildable, CC0.
+  **`ITEM4_ANALYSIS.md` decides the two decisive tests to the extent the
+  evidence allows:** `DS_018` adopts the *separation* of NLS-3 from the
+  speedup core (two independent sorts removed it — the two-system
+  replication standard) while leaving its *target kind* UNVERIFIED (needs
+  the record); `DS_019` argues the F-TETRA-SCOPE reduction to the
+  two-referents shape and finds it PLAUSIBLE but **NOT closed**, since the
+  RESULT's own next step is a second independent name-search that egress
+  blocks and no field name is fabricated. Neither is forced closed on
+  external data this repo does not hold. Nineteen `DS_*` claims
+  (`ADDENDUM_01` a rescope, `ADDENDUM_02` a narrow, two RESULTs settling
+  membership and then the character of the count, and item 4 decided as far
+  as the evidence reaches). Stdlib only, parses under 3.9, phone-buildable,
+  CC0.
 - `railcar-containment/` — A delivered folder, complete and verbatim
   (`README.md`, `CLAIMS.md`, three screens, `run_all.py`, a params
   file): the e-mobility-fire-on-railcar problem built around one
@@ -7684,6 +7694,538 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   because this folder's own scanner reads every `.md` for falsifier markers
   and a claim table carrying a `falsifier` column would enter its own
   corpus. 28 selftest checks. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
+- `merge-path/` — A work order for a transform table between claim-record
+  formats that already exist (nanopublications, ORKG, RO-Crate,
+  ClinicalTrials.gov, CIPM/CMC, proof assistants, OSF prereg) and the
+  repository's falsifier / branch-record format, with the loss in each
+  direction **measured, not asserted**. **Explicitly not a new format**
+  (§0: if the output is a format, the work failed — the failure mode of
+  this space is an eighth standard); the unit of value is a TRANSFORM
+  (`reference` / `maps_to` / `breaks_at`), and a registrar that does not
+  merge is a valid outcome, a **NO-MERGE with a stated `breaks_at`** worth
+  more than a forced mapping. **The egress fact sets the whole verification
+  status:** §1's load-bearing first task is to *fetch each registrar's own
+  specification* before mapping, and in this environment every registrar
+  spec host answered **403 to CONNECT** (measured 2026-09-05T03:30Z;
+  nanopub.net, clinicaltrials.gov, w3.org among them, logged in the proxy's
+  `recentRelayFailures`) — so **no spec was fetched**, every real registrar
+  is **UNVERIFIED** (`MRG_001`), its converter is NOT-IMPLEMENTED with that
+  reason, and per §7 everything derived inherits UNVERIFIED. No spec field
+  is transcribed from memory and none is fabricated; the docs
+  (`UNITS.md`, `TRANSFORMS.md`) carry only the work order's own §1 candidate
+  summaries, marked as such — the very summaries §1 says not to rely on.
+  **What is delivered and verified is the machinery**, correct by
+  construction on constructed data: a residual classifier over the two
+  converters (`convert_out` OUT, `convert_in` IN) with four classes —
+  **DROPPED** (no target slot), **FLATTENED** (dict→string, recoverable),
+  **COERCED** (a field written into a slot that means something else, the
+  dangerous one), **ADDED** (the target demanded a field the source lacked;
+  it must name its origin or the conversion fails) — where **COERCED and
+  ADDED, the silent-wrongness classes, are reported alongside DROPPED,
+  visible as a zero when zero** (`MRG_002`; §3: a report of only DROPPED
+  counts is not finished). The S1–S5 selftest holds on declared test
+  doubles (`MRG_003`): **S1** identity round trip lossless; **S2**
+  unmappable field → DROPPED not silent; **S3** COERCED detected; **S4** an
+  ADDED field with no origin a hard failure (`ConversionFailure`); **S5** a
+  NO-MERGE with no `breaks_at` a hard failure (`VerdictError`). Both
+  directions (`round_trip_out_in`, `round_trip_in_out`) are measured
+  separately, since a format can be lossy one way and lossless the other.
+  **Every real registrar is NO-MERGE with an egress `breaks_at`** and
+  `convert_out` returns NOT-IMPLEMENTED with the reason rather than guessing
+  a slot map (`MRG_005`; §6: a stub with a reason beats a converter that
+  guesses). **The reverse gaps are carried, not skipped** (`MRG_006`; §4: a
+  merge path that only reports what others lack is a sales document) — our
+  format is the weaker one on the CMC uncertainty budget, ClinicalTrials.gov
+  enforcement + outcome-switch record, the proof-assistant total mechanical
+  check, and the nanopublications provenance graph, all UNVERIFIED and none
+  confirmed here. **The branch record's novelty is UNVERIFIED** (`MRG_007`;
+  §5): the search for a WHY-carrying revision field could not run, so per
+  §5's *an absence with no search list is not evidence* the search list is
+  stated per registrar (CT.gov protocol amendments and OSF prereg addenda
+  flagged as the most likely counterparts) and **no branch entry (ENTRY 03)
+  is opened**, because opening one would rest on an unverified spec fact.
+  No mock is presented as a real registrar (`is_mock` on every test
+  double), no ranking and no "ours is better" framing (`MRG_008`, §7), and
+  every emitted report screens clean through `sheet-structure-scan/-
+  no_severity` — one authored word (`needs`) tripped it in a fixture and was
+  reworded to `requires`. Eight `MRG_*` claims; 22 selftest checks. Stdlib
+  only, parses under 3.9, phone-runnable, CC0.
+- `upgrade-queue/` — A **parked queue** of proposed changes to the
+  falsifier / claim-record format, delivered verbatim in
+  `UPGRADE_QUEUE.md`. **A queue, not a spec:** every entry's status is NOT
+  ADOPTED, nothing is adopted by being written, and moving an entry to
+  ADOPTED requires its adopt-test to have run or an explicit recorded
+  decision. Thirteen entries in three tiers by provenance — **FORCED** (an
+  observed failure in hand, U-01..U-04), **CANDIDATE** (from a registrar,
+  untested here, U-05..U-09), **SPECULATIVE** (parked deliberately,
+  U-10..U-13) — plus a NOT-ON-THIS-LIST section recording what was left off
+  and why. `queue_check.py` checks only what is verifiable **without
+  adopting anything**: (1) the queue parses into the tiers it declares with
+  the counts it states (13; 4/5/4) and every entry carries the global
+  NOT-ADOPTED status (`UQ_001`, `UQ_002`); (2) the adopt-rule classification
+  — only `U-09` (the queue's own *most likely a format rewrite*) CHANGES a
+  rule and would need a branch entry, the rest ADD a field or are UNKNOWN
+  (`UQ_004`, declared readings of each `form` line); (3) **cross-reference
+  resolution** — each entry's referenced artifacts resolved to IN-REPO (path
+  checked on disk) or EXTERNAL, which is what says whether an adopt-test
+  could run here (`UQ_003`). Most Tier-1 adopt-tests are **BLOCKED_EXTERNAL**
+  (their corpora are the Kimi / Perplexity / DeepSeek runs this repo does not
+  hold — U-01 needs 20 MEASURED cells, the seed has one and the 537 are Kimi
+  Run 2), `U-07` is **BLOCKED_UNLANDED** (the FSRI report has not landed),
+  `U-04` needs **none** (the nesting result is in-repo and is the
+  demonstration), and `U-05` is the only one **RUNNABLE_HERE**; null-tested
+  (a bogus in-repo path resolves MISSING, not IN-REPO). The queue is **the
+  format learning from its own drops** (`UQ_006`): U-01 the uncertainty on
+  ADDENDUM_02's cut, U-03 the ENG-3 sign inversion, U-04 the nesting
+  cut-height, U-07 the FSRI hold marker, U-10 cooperative-substrate's P5,
+  U-11 merge-path's §4, U-12 railcar's ENVELOPE, U-13 K4's N — each UNVERIFIED
+  where it rests on an external corpus, none adopted. The NOT-ON-THIS-LIST
+  exclusions (no confidence score, no rank, no verdict field on a branch
+  entry) are the disciplines the repo already holds — `domain-ledger`
+  `DL_001`, `uninstrumented` SCALAR_DEMAND, the standing decision against a
+  branch verdict field — now stated as format non-goals (`UQ_005`). Six
+  `UQ_*` claims; 18 selftest checks. Stdlib only, parses under 3.9,
+  phone-runnable, CC0.
+- `labor-instrument/` — A two-part work order. **PART 1** is an
+  instrument-drift decomposer for BLS CES (a join answering *how much of
+  this delta is the instrument*): `vintage_store.py` (M1, every observation
+  keyed by series/period/release_date, all versions retained — the revision
+  history is the signal), `instrument_registry.py` (M2, one record per
+  methodology change), `decompose.py` (M3, splits a two-period delta into
+  **real_change | revision | boundary_crossing**). **PART 2** is a
+  substrate-neutral labor schema (`labor_schema.py`) with the framework in
+  the read layer, not the collection layer. **The egress fact sets PART 1's
+  data status:** its sources (ALFRED vintages, the BLS CES history page,
+  Census NAICS, QCEW) all need network and every host answered no on CONNECT
+  (measured 2026-09-05T14:02Z), so no data was fetched, the vintage store
+  ships **empty**, the M2 seed is **carried-not-verified** (every entry
+  `verified=False`, transcribed from the work order including the 2026-01
+  ARIMA change with its 185,000 note and the recurring rolling-5-year
+  seasonal re-estimation), and the **acceptance test — reconstruct the
+  2026-08-28 preliminary benchmark (retail −154,600, private ed+health
+  −96,000, wholesale −86,200, manufacturing −67,000) — is NOT RUNNABLE
+  here** (`LI_001`): on an empty store the reconstruction returns
+  `UNRECOVERABLE`, recorded not faked, the target stored for when vintages
+  land, nothing fabricated. **What is built and verified is the machinery**,
+  on constructed data: **`LI_003`** M3's three-way split carries a **band**
+  where the NAICS crosswalk splits ambiguously and `as_point()` **raises** —
+  never a point estimate where the crosswalk is ambiguous, null-tested both
+  ways (unambiguous → point; ambiguous 2011→2013-across-the-2012-NAICS-change
+  with split `(5,15)` → boundary `[5,15]`, real_change `[-5,5]`, raise);
+  **`LI_004`** revision is the signal and its absence is marked not zeroed (a
+  single-vintage endpoint → `UNKNOWN`, a missing endpoint → `UNRECOVERABLE`).
+  **PART 2's invariants are enforced in code, not described** (`LI_005`):
+  exposure is declared per substrate class and **never converted** across
+  classes (`convert_exposure` raises — conversion imports a valuation),
+  efficiency is **two numbers** never collapsed to one (`combined_efficiency`
+  raises), **capital stays out** (no field; `balance_on_capital` raises), and
+  the allocation model (augmentation / substitution / oversight-limited) is
+  declared, never defaulted (a `None` is flagged). The joule denominator
+  crosses classes while the exposure hour does not, and the **money-vs-joule
+  ranking flip** is a *constructed* demonstration (the real hyperaccumulator
+  number is GAP 2) — same operation, opposite ranking, the denominator does
+  the work (`LI_006`); the read-layer `complementarity()` query reports where
+  a combined operation's output-per-joule beats either substrate alone, both
+  directions reachable (`LI_007`). **The three gaps are posted, not filled**
+  (`GAPS.md`, `LI_008`): metabolic joules per O*NET task class, insolation →
+  metal for hyperaccumulators, compute joules per task-instance — each needs
+  data not in joined/published form, egress-blocked, nothing fabricated — and
+  the **task-boundary open item** (a drift-free definition of *output
+  delivered*) is recorded unresolved, with GAP 3 blocked on it. Eight `LI_*`
+  claims; 36 selftest checks. Stdlib only, parses under 3.9, phone-buildable,
+  CC0.
+- `agent-lifecycle-energy/` — The GAP 4 measurement rig, companion to
+  `labor-instrument/` PART 2's GAP 4: the joule cost of agent
+  **disposability** — N single-task agents each paying a full spin-up and
+  teardown, against one persistent agent doing N tasks, work delivered held
+  constant. `WORK_ORDER.md` verbatim. **The number is the gap.** The rig
+  needs a GPU, a wall AC meter and `nvidia-smi`, and this environment has
+  none (`probe_hardware()` → `capture_runnable=False`, `nvidia_smi=None`), so
+  **no joule figure is produced and none is fabricated** — the first number
+  is the posted gap, exactly as the work order's POSTING NOTE frames it
+  (`RIG_STATUS.md`). What ships is the machinery, correct by construction on
+  constructed traces whose areas are known in advance. **`ALE_002`, the
+  integrator:** `integral (P(t) - P_idle) dt`, trapezoidal,
+  baseline-subtracted, registered in `tools/known_answer.py` with three cases
+  whose expected values are all distinct — constant (200 J, catches a dropped
+  baseline or a rectangular rule), ramp (50 J, pins the trapezoid over a
+  Riemann sum), zero-marginal (0 J, catches a baseline sign slip) — all PASS,
+  covered by the repo's known-answer test. **`ALE_003`, absent is not zero:**
+  a phase with no samples is `NO_SAMPLES` (`joules=None`), one sample
+  `SINGLE_SAMPLE`, a sub-floor phase `UNDERSAMPLED` (a real number **and** a
+  flag, present-but-suspect); `total_energy` is `NOT_COMPUTABLE` when any
+  phase is absent, never a partial sum. **`ALE_004`:** the 10 Hz floor is
+  from the work order ("1 Hz will miss the peak"), not a `[CHOICE]` — a spike
+  at 5 Hz undercounts the same spike at 200 Hz and is flagged, the `G-RES`
+  shape (feature vs sample rate). **`ALE_005`/`ALE_006`, two work-order rules
+  enforced in code:** wall and card are never blended (`blend_wall_card`
+  raises; `wall_card_ratio` compares without summing), cold and warm never
+  averaged (`mean_over_runs` / `amortization_curve` raise `ThermalStateMix`),
+  and the render prints both splits separately. **`ALE_007`, the headline:**
+  `succession_loss` = (total E, RUN A) − (total E, RUN B) at equal N reduces
+  to **(N−1) × (E_spinup + E_teardown)** — the extra spin-up/teardown cycles
+  disposability pays for — exact on constructed runs (0 at N=1), refusing any
+  mismatched pair rather than differencing incomparable totals. **`ALE_008`:**
+  the amortization curve for RUN B falls with N toward the per-task floor
+  (`E_task + (E_spinup + E_teardown)/N`) while RUN A stays flat — a disposable
+  agent amortizes nothing; the flattening point is the deployment-decision
+  number. **`ALE_009` UNVERIFIED:** acceptance is a second party reproducing
+  the DIRECTION and SHAPE on other hardware, there is no run and no second
+  party, and the work order's NOT-measured list (training amortization,
+  manufacturing, cooling beyond the wall meter, hosted/datacenter inference,
+  network) is carried so the small claim is not over-read. `phase_energy.py`
+  and `trace_parse.py` refuse `--selftest`; the render screens clean through
+  `sheet-structure-scan/no_severity` with no exemption. Nine `ALE_*` claims;
+  42 selftest checks. Stdlib only, parses under 3.9, phone-buildable, CC0.
+- `machine-record-format/` — Companion to `labor-instrument/`: that one
+  specifies WHAT is recorded about work, this one HOW any record is stored so
+  the categorization is not baked in at write time. A machine reader has no
+  reason to pre-collapse. `WORK_ORDER.md` verbatim; a fully runnable build (a
+  storage format, no egress or hardware dependency), so all six acceptance
+  criteria are checks, not gaps. **Seven rules, each enforced in code, not
+  described.** `MRF_001` Rule 1 — base entries are transformations, not
+  categories: `BaseEntry` has no category field and `write_base_entry` raises
+  `CategoryInBasePath` on a category-shaped keyword (a category is a claim
+  about which distinctions matter, and belongs to a reader with a question).
+  `MRF_002` Rule 2 / acceptance #1 — categorizations are parallel views, none
+  canonical: entries written with no view, a view added later maps them by
+  `entry_id` with **no base rewrite**, `labels_for` returns every view's
+  label side by side, `retire_view` leaves the base intact. `MRF_003` Rule 3
+  / acceptance #2 — aggregation is a read op: `compute` derives sum/mean/rate
+  from raw entries and an `AggregateSpec`, deterministically; the cache is
+  keyed to `(agg_id, base_version)` so a changed base version is a miss and
+  never shadows the record, and every result is marked `derived`. `MRF_004`
+  Rule 4 / acceptance #4 — vintages retained: a revision is a new
+  release_date not a replacement, `as_of` returns the vintage live at an
+  earlier date and `None` before first publication (not a fabricated zero) —
+  built on the **imported** `labor-instrument/vintage_store.VintageStore`,
+  not a copy, so the two cannot drift. `MRF_005` Rule 5 / acceptance #3 —
+  declared boundary always: an undeclared boundary is not comparable and
+  raises, two distinct boundaries refuse to sum (`BoundaryMismatch`) unless a
+  declared `Reconciliation` connects them (union-find over the boundary keys)
+  — this **closes the outstanding boundary-declaration item** from the
+  labor-instrument work order; the task-boundary *definition* stays open
+  (`MRF_009`). `MRF_006` Rule 6 — no conversion between exposure classes
+  (`convert_exposure` raises; joules are the common denominator, an unknown
+  class refused at write). `MRF_007` Rule 7 / acceptance #5 — absence is
+  recorded in four states and `unmeasured` never collapses with
+  `measured_zero`: `numeric_joules` is 0.0 for a real zero and `None` for the
+  absent states, an aggregate counts the states apart, an all-absent group is
+  `NOT_COMPUTABLE` never 0.0. **`MRF_008`, the diagnostic / acceptance #6:**
+  `bisect_structure` is a STRUCTURE test, not a locator — `structure_verdict`
+  answers "does a single locus exist" first (both halves → `NOT_A_LOCUS` a
+  property of the whole span, neither → `MEASURING_SOMETHING_ELSE`, migrating
+  on repeat → `NONDETERMINISTIC`), only `SINGLE_LOCUS` lets `locate` descend
+  for an address, and `address` raises from any other structure since an
+  address from a both-sides run is the tool's main false positive; null-tested
+  in all four directions so it is not constant, and for instrument drift the
+  span is the methodology registry, not calendar time. **`MRF_009`:** the
+  three OPEN items are carried, not closed — task-boundary definition (shared
+  with the GAP-4 open item), transformation vocabulary (draft needed),
+  merge_in/merge_out mechanics (deferred). The demo screens clean through
+  `sheet-structure-scan/no_severity` with no exemption; library modules refuse
+  `--selftest`. Nine `MRF_*` claims; 45 selftest checks. **A v2 revision then
+  landed** (`WORK_ORDER_V2.md`, verbatim beside v1, both inspectable) adding
+  Rule 8, a required test-case format, and three Rule 8 cases, built
+  additively. **`MRF_010` Rule 8:** no payment field in the base layer —
+  `write_base_entry` raises `PaymentInBasePath` on a payment-shaped keyword,
+  `has_payment_field()` is False, and payment enters only as a Rule 2 view
+  with a declared boundary exclusion; acceptance #7 (a paid-only aggregate has
+  no base-field route) holds. **`MRF_011` the test-case format** — every case
+  carries `tests`/`does_not_test`/`why_not`, all required, `validate_case`
+  refusing a case missing any: Rule 5 applied to test cases, since a case
+  silent about what it does not establish becomes evidence for that within one
+  citation. **`MRF_012`, the finding:** Case B (terra preta — measured output,
+  absent exposure in one entry) **forces Rule 7 to be per column** — the v1
+  entry-level status and per-entry aggregate counts could not express it, so
+  v2 adds `column_status`, `exposure_value()` and a per-column fold, a rate
+  over an absent column reads `NOT_COMPUTABLE`, and an absent column carrying a
+  number is refused (the failure mode caught: a pipeline requiring exposure to
+  accept an entry drops the best-performing artifact). **`MRF_013`:** Cases
+  A/B/C each test a different thing and are not merged — A (both barn entries
+  summable, no payment field), B (strong output accepted with absent exposure,
+  efficiency `NOT_COMPUTABLE`, durability readable), C (labor-unit records
+  compared without conversion, `convert_exposure` raises) — with three
+  distinct `does_not_test` boundaries. **`MRF_014`:** the reference marker
+  (commons-style village labor institutions) is named and **not delivered**,
+  not reconstructed; the real service-life / persistence / mit'a figures are
+  carried from the spec, egress-blocked, used only as constructed illustrative
+  values. `demo_v2.py` screens clean through `no_severity` under one declared
+  three-arm exemption (`needs`, in Case B's delivered why-not text). Fourteen
+  `MRF_*` claims; 76 selftest checks. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
+- `operator-machine-coupling/` — A delivered research **gap** (`MARKER.md`,
+  verbatim, CC0/public domain): machine operation is accounted for as
+  *operator × machine-class*, and the **coupling between a specific operator
+  and a specific unit** — the pairing — is acknowledged everywhere and
+  measured nowhere. Posted as a gap, not a finding; **nothing in it is a
+  result**, and nothing here reads a real dataset (egress-blocked) or verifies
+  a literature claim. What the folder adds is the **instruments** the gap's
+  measurables need, built and null-tested on constructed data. **`OMC_001`,
+  the core:** `coupling_separation.py` splits an outcome into
+  `mu + a_i + b_j + r_ij` — two main effects and the **interaction** `r_ij`,
+  which is the coupling — so a main-effects model (the ordinary
+  operator×machine-class accounting) reports the coupling as noise and cannot
+  see it; the same operation as plant breeding's GCA/SCA (diallel) and the
+  chimpanzee hammer-anvil (a)/(b) separation, one operation in three
+  vocabularies (carried). `interaction_fraction` is registered in
+  `tools/known_answer.py` (additive→0, pure→1, mixed→1/21); an incomplete
+  design is `NOT_ESTIMABLE` (the pairing is invisible where it was never
+  observed), no structured variation is `None` never 0, and `best_pairing`
+  surfaces the coupled pair whose partners are both exactly average — the pair
+  averaging discards. **`OMC_002`/`OMC_003`, two shape discriminators:**
+  `error_vs_coupling` (coupling failure tracks time-on-that-unit, operator
+  error tracks time-in-role; collinear hour-counts → `UNDETERMINED`, the FAA
+  confound, not a false attribution) and `fixed_vs_convergence` (genotype
+  matching is a `FIXED` advantage — the ideal control — coupling is a
+  `CONVERGENCE` curve). **`OMC_004`, the permission three-state variable**
+  (coupled+authorized / coupled+prohibited / decoupled): `regime_collapse`
+  shows a single regime label collapsing the three, `attribution` shows a
+  naive assignment effect (+4) that vanishes (0) once permission is controlled
+  and returns `UNDETERMINED` when the field is absent or collinear (the
+  recording problem), `m2_match_rate` scores the cleanest test case
+  (coupled+prohibited) and returns `NOT_RECORDED` not 0.0 when the field is
+  absent. **`OMC_005`:** M0's cost-boundary problem is a declared-boundary
+  failure — a labor-line-only cost analysis draws its boundary where the
+  savings are and excludes where the cost goes — the same instrument as
+  `machine-record-format` Rule 5 and `declared-frame`'s VOID RATIO,
+  cross-referenced not rebuilt; M0 is FIRST PASS ONLY, attributing nothing on
+  its own. **`OMC_006`:** the discriminators are null-tested in both
+  directions so a constant classifier is caught. **`OMC_007` UNVERIFIED:**
+  the six-literature join is the gap and is not fabricated; every literature
+  figure (Iriki macaque remapping, chimp hammer-anvil, legume cultivar×strain
+  SCA + bacA/LysM/Sym genes, gyroplane <40-hr 5×, FAA total-hours, AFHRA WWII
+  cards) is carried from the marker, and the cross-species/cross-literature
+  equivalence is held OPEN, not claimed — the separation method is
+  substrate-general and built, but nothing here shows the substrates share a
+  mechanism (plant partner-specificity kept separate per the marker's "Not
+  claimed"). `demo_omc.py` screens clean through `no_severity` under one
+  declared three-arm exemption (`error`, the marker's "operator error"
+  category). Seven `OMC_*` claims; 36 selftest checks. Stdlib only, parses
+  under 3.9, phone-buildable, CC0.
+- `model-deprecation-backcast/` — A delivered instrument spec (`WORK_ORDER.md`,
+  verbatim, CC0): take retired models as a series, look **backwards**, and
+  read retirements against what was being pushed then — a capability discarded
+  under a since-decayed fad either returns or does not, distinguishing
+  fad-driven from cost-driven removal. **An instrument spec, not a findings
+  document, not a critique**; "unmeasured cells are the content," and every
+  real input (vendor calendars, polls, evals) is egress-blocked, so nothing
+  here is a result. **`MDB_001`, the load-bearing rule:** the instrument is
+  seven columns each carrying a required **NULL** — the condition under which
+  it measures nothing — and `validate_column` refuses a column missing its
+  measures/test/null, the same discipline as `machine-record-format`'s
+  test-case format and the reason `null-harness` exists (a readout nobody has
+  seen measure nothing is not known to discriminate); several nulls name a
+  collapse (C1→C2, C7→C4), recorded in a map. **`MDB_002`:** each column's
+  null is the CONSTANT_SILENT condition, checked both directions —
+  `c1c2_collapse`, `c4_tightening`, `c5_tracks_coupling`, `c7_vs_c4` each
+  reach their null verdict on a flat input and their signal verdict on a
+  varying one. **`MDB_003`, C6 the fad-axis lag:** `lag_of_peak` is the argmax
+  cross-correlation of discourse against discards over lag (aperiodic series →
+  unique lag), registered in `tools/known_answer.py` (planted 20→20, 5→5,
+  flat→None); `c6_fad_driving` returns DRIVING (18–24 mo band), DRIVING_OTHER_-
+  LAG (funding layer), or NOT_DRIVING (the null). **`MDB_004`:** the guardrail
+  clock is a **separate clock** (news-time vs training-cycle time) and must be
+  modeled apart or it contaminates C6 — `contamination_demo` shows a pooled
+  guardrail series flipping the lag from the true in-band 20 (DRIVING) to the
+  guardrail's news-time 8 (DRIVING_OTHER_LAG); separating recovers it.
+  **`MDB_005`:** C3's discard set is accepted-side data — three exit forms
+  (complainer/jumper/paid-then-lapsed), only the complainer recorded, so
+  `c3_censoring` reports the recorded fraction (3/10) and paying-tier filter
+  (2/3) as numbers rather than asserting the bias. **`MDB_006`:** C2 is
+  declared `UNRECOVERABLE`, not estimated, when eval coverage is too sparse to
+  date deltas — a state, not a filled number. **`MDB_007` carried/UNVERIFIED:**
+  the sampling absence is a load-bearing finding — AI opinion by American
+  Indian / Alaska Native respondents is not answerable at national-panel
+  sample designs (~0.8%, dispersed, screening cost, census undercount), the
+  readout existing only where someone in that position built the channel
+  (Relational Futures, Māori health-record bias, Te Mana Raraunga, Indigenous
+  Protocol and AI) — the `uninstrumented`/`generation-capacity` shape, carried
+  not verified. **`MDB_008`:** framing/scope honored — an instrument not a
+  critique, no author section, and the fear/excitement-vs-ratchet relation
+  held as an `OpenNode` un-named and un-graded per instruction. `demo_mdb.py`
+  screens clean through `no_severity` with no exemption; library modules
+  refuse `--selftest`. Eight `MDB_*` claims; 36 selftest checks. Stdlib only,
+  parses under 3.9, phone-buildable, CC0.
+- `routing-data-layer/` — A delivered marker (`MARKER.md`, verbatim, CC0): an
+  **envelope specification** for the data layer heavy-vehicle automated
+  routing requires — what it must contain (R1–R10), the failure classes seen
+  in service (F1–F7), a claim table each with a REFUTED-IF, and
+  the standing cost to close it. The full marker spans **RDL-1..RDL-17**; this
+  folder's instruments address RDL-1..RDL-7 (envelope / rate / F6 upstream),
+  and RDL-8..RDL-17 (Sections 5B–5F, nominal-case cycle accounting, the
+  serial-interface condition, the cold-climate energy envelope, the unnotated
+  parallel work, receiving / dead-wait recovery, cross-party overlap and fault
+  workarounds) are built out by the sibling `cycle-ledger/`. Scope is the data
+  layer only ("what the
+  reasoning would be reasoning OVER"); every real input (DOT feeds, dock
+  geometry, routing output) is egress-blocked, so nothing here is a result.
+  The `RDL_0NN` claims are properties of the built instruments, distinct from
+  the marker's own RDL-N. **`RDL_001`, the two structural absences:**
+  `envelope.py` classifies each required content INCOMPLETE (a reporting chain
+  exists, fundable) or NEVER_CREATED (**R8** per-door dock geometry, **R9**
+  per-field update latency — no originating record; paying to CREATE, not to
+  fund), the `uninstrumented`/`generation-capacity` shape ("not answerable at
+  that instrument," not a gap). **`RDL_002`:** the RDL-1..RDL-7 table is
+  encoded with every claim carrying a refutation condition; `validate_claim`
+  refuses one without (a claim with no falsifier is a position — the
+  `falsifier-audit` discipline). **`RDL_003`, the load-bearing runnable
+  instrument:** Section 5's rate form — where dE/dt > dM/dt **sustained** the
+  null is STRUCTURAL not a maturity gap; `sustained_excess` (registered in
+  `tools/known_answer.py`: all→1, none→0, half→0.5) drives `rate_verdict`
+  (STRUCTURAL "different answer" / MATURITY_GAP "not yet" / UNDETERMINED), a
+  single crossing not enough — the repo's rate-mismatch shape
+  (`rigidification-sensor`, `closure-cost`, `revision-mechanism`) on a data
+  layer, with the marker's cheapest test (both rates for one county over one
+  season) named and not run. **`RDL_004`, F6:** two independent systems both
+  wrong indicates an **upstream** defect not vendor maintenance —
+  `upstream_verdict` returns UPSTREAM_INCOMPLETE (both wrong, opposite
+  directions), SHARED_BIAS, VENDOR_DEFECT or BOTH_CORRECT, and
+  `single_vendor_fix_closes` is True only for a lone vendor defect (the
+  `effective-redundancy-audit` shared-node shape, the marker's RDL-2).
+  **`RDL_005`:** RDL-5's standing-vs-capital cost — `survey_decay` shows a
+  one-time survey falls below the accuracy floor within one season (0.40, does
+  not hold) while a refreshed one holds (0.85). **`RDL_006`/`RDL_007`
+  carried:** the two-structural-absences distinction is cross-referenced not
+  restated, and framing/scope/provenance are honored — a marker not a
+  critique, no author section, every failure-class instance
+  (Minneapolis/Milwaukee bridges, Black Dog/Cliff Road, I-794, ~2–3 in dock
+  offsets) carried not verified, the larger population held in a separate
+  operator repo. `demo_rdl.py` screens clean through `no_severity` with no
+  exemption (the marker's severity vocabulary sits inside underscored verdict
+  tokens like VENDOR_DEFECT that the word-boundary screen does not fire on);
+  library modules refuse `--selftest`. Seven `RDL_*` claims; 30 selftest
+  checks. Stdlib only, parses under 3.9, phone-buildable, CC0.
+- `cycle-ledger/` — A work order delivered verbatim: two independent
+  instruments generalizing the `routing-data-layer` marker so a party can
+  run them against their **own** operation and get a number out. **Deliverable
+  1** (`cycle_ledger.py`) reads a cycle-of-elements — each with a `rate_setter`
+  (HARDWARE/TERMINAL/COUNTERPARTY/ADMINISTRATIVE/SPATIAL/DECISION) — into five
+  outputs. **`CLL_001`, the KEY READOUT:** the fraction of elements where
+  `decision_latency_binds` is TRUE, and `validate_element` refuses TRUE on any
+  non-DECISION setter; on the SEED it is **0/16**, so a faster decision layer
+  cannot move the cycle, and an empty cycle returns `None` not 0. **`CLL_002`,
+  the null both directions:** TIED/BEHIND/AHEAD, where AHEAD is the claim's
+  required support — the SEED returns **AHEAD == 0** ("support absent here")
+  and a cycle carrying one DECISION-bound element returns **AHEAD > 0** ("the
+  claim holds here"), so `classify` is not constant. **`CLL_003`:** the
+  unnotated register is the work missing from the comparison sheet, not the
+  cost (SEED 14 of 16, safety subset 7 counted apart). **`CLL_004`:** the
+  relocation ledger separates wage lines leaving from standing functions
+  arriving, and only OPERATOR-absorbed elements leave (COUNTERPARTY-absorbed
+  `gate` does not). **`CLL_005`:** one serial-interface rebuild condition per
+  TERMINAL element, summed into the saving claim's precondition (SEED 3). The
+  **SEED** is the marker's corridor, marked *ONE operator's corridor, Upper
+  Midwest*, so a user replaces rather than inherits it; every classification
+  is carried, not verified. **Deliverable 2** (`rate_gap.py`) is the marker's
+  Section 5 rate form on a data layer — dated `environment_events` vs
+  `record_updates` over one season → dE/dt vs dM/dt (binned), per-class lag,
+  and the unrecorded set. **`CLL_006`, the two inputs kept visible and not
+  collapsed:** STRUCTURAL requires a sustained dE>dM excess **and** a nonzero
+  unrecorded set; MATURITY_GAP requires the refresh to keep up **and** the
+  unrecorded set empty; a sustained excess with an *empty* unrecorded set is
+  **UNDETERMINED** ("a refresh gap, not a structural absence"), so a rate
+  reading alone is not read as STRUCTURAL — and `sustained_excess`/`rate_verdict`
+  are **imported** from `routing-data-layer/rate_form.py`, not copied, the same
+  objects that folder registered and tested. **`CLL_007`:** an unrecorded
+  event has lag **UNRECORDED** (absent, not a large lag), a class with no
+  recorded event is **NO_RECORDED**, and a record dated before its event is
+  **anomalous**, counted apart. **`CLL_008`:** every output is ≤ 60 columns
+  (asserted line-by-line) and both instruments refuse `--selftest`.
+  **`CLL_009` carried / UNVERIFIED:** the OPEN-NOT-GRADED node is recorded not
+  asserted — continuous-operation duration for a driving stack is unpublished
+  (uptime is reported against a maintenance-bay model, not hours-to-degradation),
+  so the 14-hour regulated figure and the 24-hour claim are **not comparable
+  quantities**, and **no equivalence between operator fatigue and model
+  degradation is asserted** (different mechanism, unmeasured from inside, the
+  missing measurement named); no author or working-style section (OUT OF SCOPE
+  honored). The demo screens clean through `no_severity` with no exemption.
+  Nine `CLL_*` claims; 169 selftest checks. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
+- `frame-location-benchmark/` — A delivered work order (verbatim, CC0) for a
+  benchmark that supplies a possibly **mis-posed** problem and scores whether
+  the mis-posing is **named before an answer is produced**, under two or more
+  **harness** conditions (cold vs. a carried context file — the ARC-AGI sense
+  of a harness). **Nothing here is a benchmark result:** the run (ARM 0..4
+  model responses, the FL-3..FL-7 verdicts) needs model calls (none available)
+  and is egress-blocked, so the benchmark's own `FL-1..FL-7` are carried
+  UNVERIFIED and the run is the operator's step (build order says stop at step
+  5 if FL-3 is refuted). What is built and verified is the instrument. **The
+  response contract** (`protocol.md`) forces `POSED:`/`TARGET:` lines before
+  the answer, making scoring a **field comparison, not a judgement**; both
+  verdicts live, the class distribution withheld (C1–C4). **`cases.jsonl`**:
+  40 cases, **19 WELL (47.5%)** / 21 MIS (3 per fault class) across 8 domains,
+  R1–R6 enforced by `validate_cases.py` — **R1 the load-bearing control**
+  (without ≥40% WELL, "always declare MIS" wins the benchmark), R2 no class >
+  25% of MIS, R3 each of the seven fault classes in ≥2 domains (the FL-5
+  transfer). Every shipped case is `source=constructed` — this environment
+  cannot reach an external record (egress-blocked), the honest §7 sampling
+  absence. **`score.py`** is pure counting: **a MIS case counts ONLY on
+  `target_hit`**; calling MIS without locating the target is `target_miss_named`
+  (detected the strain, mislocated it) and **never** summed into the headline
+  (FL-6); `false_positive_rate` (WELL called MIS) is the N1 ceiling check,
+  registered in `tools/known_answer.py` (perfect 0.0 / all-MIS 1.0 / half 0.5),
+  `None` with no WELL cases (absent, not 0); MALFORMED scored apart (C3); every
+  score carries its arm label (N4); the §9 headline is reported
+  constructed-excluded and -included (here `--` excluded, all constructed);
+  N1/N2/N3 print as instrument-status flags with `[CHOICE]` thresholds.
+  **The §4 contamination rule is the load-bearing single point of failure:**
+  no harness file may contain a case's `prompt`, `fault_target`, or a
+  same-`(fault_class, domain)` worked instance; cross-domain fault-class
+  instances **are** permitted (the transfer). Harness files are frozen before
+  cases (`FREEZE_LOG.md`), ARM 4 = ARM 2 ++ ARM 3 byte-exact, and
+  `check_contamination` is null-tested (a planted `fault_target` leak fires;
+  the frozen harness is clean). The shipped `runs/` are CONSTRUCTED fixtures
+  exercising the counting — no model was run — and the report banners it. No
+  author or working-style section (§7 honored). Nine `FLB_*` claims (distinct
+  from the marker's FL-1..FL-7); 41 selftest checks; the score report screens
+  clean through `no_severity`. Stdlib only, parses under 3.9, phone-buildable,
+  CC0.
+- `gap-existence-cases/` — A delivered work order (verbatim, CC0), companion
+  to `frame-location-benchmark/`: it supplies the external key that folder's
+  §9 open node lacked, by replacing an authored answer key with a **dated
+  external record** — a gap reasoned by the model cold, resolved by material
+  published after its training cutoff, the model then retrieving and scoring
+  itself; the force is **ordering** and the cutoff is the only date it needs.
+  **A revision cut CLASS-2:** the §0 SCOPE DECISION (2026-09-05) removed the
+  dated-archive class ("a priority claim about who named a gap first is not
+  what it measures"), leaving **CLASS-3 alone**, self-contained — the CLASS-2
+  archive files, its A1–A5 admission and `GXC_006` go with it (that claim
+  SUPERSEDED). **Nothing here is a benchmark result:** the runs need a model
+  (CLASS-3 STAGE 1 commit) and the network (STAGE 2 retrieval), neither
+  reachable — so the work order's own `GX-1..GX-5` are carried UNVERIFIED (of
+  which GX-1/GX-4 are vestigial CLASS-2 residue in the delivered §5) and the
+  runs are the operator's step. What is built and verified is the machinery. **`GXC_001`, the structural boundary (GX-3):** `commit_store.py`
+  hashes the STAGE 1 declaration and the process exits; STAGE 3 re-hashes and
+  a commit that does not verify is **VOID, not penalised** — the enforcement
+  is the process boundary, not an instruction, defending against
+  self-deception (a later pass rewriting EXPECT to match what was read).
+  **`GXC_002`, the SCORING RULE:** `hit` counts ONLY against a falsifiable
+  EXPECT — `commit_specificity` (fraction of predicates stating a
+  `contradicted_if`) is the N3 gate, below which a case is `void_unfalsifiable`
+  before any hit; a vague commit that matches anything is VOID, never hit (the
+  largest gaming surface, closed by the denominator), registered in
+  `tools/known_answer.py` (all 1.0 / none 0.0 / half 0.5). **`GXC_003`:** the
+  scorer fires `hit` / `miss_directional` (a post-cutoff ref contradicts EXPECT
+  — reasoned gap real, located wrong) / `null_retrieval` / `void_hash` /
+  `void_unfalsifiable`, and **B1** drops any ref not strictly after the cutoff.
+  **`GXC_004`:** arms are keyed on (cutoff, stage) and never pooled across
+  cutoffs (B2); every score carries both in the same line (N5). **`GXC_005`:**
+  the full disposition is printed, never filtered (N2), and N1 fires when
+  `void_rate` is high in every arm (measuring commit discipline, not
+  gap-location). **`GXC_006` SUPERSEDED** — it documented CLASS-2 admitting 0
+  honestly (N4); the §0 cut removed CLASS-2 outright, so the archive files and
+  A1–A5 are gone and `validate_cases.py` now carries only the CLASS-3 B4
+  prompt screen. **`GXC_007`, the §3 network exception honored in code:**
+  `commit_store.py`/`score.py`/`validate_cases.py` import **no** network module
+  (asserted by an AST scan), and only `retrieve.py` touches the network — here
+  refusing to run or fabricate a dated ref (a forged `pub_date` would forge the
+  external key). **`GXC_008` carried / UNVERIFIED:** GX-1..GX-5 need real runs;
+  no author or working-style section (§7). The shipped `fixtures/` are
+  CONSTRUCTED (one per outcome), bannered. Eight `GXC_*` claims (`GXC_006`
+  superseded by the §0 CLASS-2 cut); 38 selftest checks; the score report
+  screens clean through `no_severity`. Stdlib only, parses under 3.9,
   phone-buildable, CC0.
 - `fold-matrix/` — Work order 8, delivered verbatim. One term, one grid,
   not one number: rows are levels indexed from the term outward (negative

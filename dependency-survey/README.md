@@ -55,8 +55,9 @@ not in `CELLS.md` is UNKNOWN.
 | `report.py` | table, cell records, gap list, UNKNOWN + scope-incomplete + type-only counts |
 | `taxonomy_replication.py` | transcription-consistency check of the crossmodel §1 nesting table + §6 count-refusal |
 | `repair_adjacency.py` | transcription-consistency check of the refinement chain Kimi ⊃ DeepSeek ⊃ Perplexity |
+| `ITEM4_ANALYSIS.md` | the two decisive tests (NLS-3, F-TETRA-SCOPE), decided to the extent the evidence allows |
 | `run_all.py` | emits the full report |
-| `CLAIM_TABLE.md` | `DS_001..DS_017` |
+| `CLAIM_TABLE.md` | `DS_001..DS_019` |
 
 ## The taxonomy test, replicated across models
 
@@ -95,6 +96,16 @@ statement — *a single number is a cut, and a cut with no stated height is
 the thing the instrument exists to catch* (`DS_017`). All of it is a
 transcription-consistency check; the corpus is external model output not
 held here.
+
+**The two decisive tests** (`ITEM4_ANALYSIS.md`) are decided to the extent
+the evidence in hand allows. **NLS-3 in K3** (`DS_018`): its *separation*
+from the speedup core is adopted — two independent sorts removed it,
+meeting the two-system-replication standard — while its *target kind* stays
+UNVERIFIED (needs the record). **F-TETRA-SCOPE** (`DS_019`): the reduction
+to the two-referents shape is argued and found PLAUSIBLE, but NOT closed —
+the RESULT's own next step is a second independent name-search, an
+egress-blocked literature query, and no field name is fabricated. Neither is
+forced closed on external data this repo does not hold.
 
 ## What the seed produces
 

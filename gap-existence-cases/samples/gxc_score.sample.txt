@@ -1,0 +1,22 @@
+GAP-EXISTENCE CLASS-3 -- STAGE 3 SCORE REPORT
+==============================================
+
+NOTE: any commits/refs shipped here are CONSTRUCTED fixtures
+that exercise the STAGE 3 scorer. No model was run and no
+retrieval happened; nothing below is a result. Every score
+carries its cutoff_date and stage-separation (N5).
+
+cutoff=2025-01-01 stage=staged  (n=5)
+  commit_specificity  0.750   [cutoff=2025-01-01 stage=staged] (N3 gate)
+  hit=1 miss_directional=1 null_retrieval=1
+  void: hash=1 unfalsifiable=1  void_rate 0.400
+  hit_rate (over non-void) 0.333   [cutoff=2025-01-01 stage=staged]
+  disposition (every case, N2 -- none discarded):
+    GXC-C3-01      hit
+    GXC-C3-02      miss_directional
+    GXC-C3-03      null_retrieval
+    GXC-C3-04      void_unfalsifiable
+    GXC-C3-05      void_hash
+
+NULL / INSTRUMENT-STATUS FLAGS
+  none fired (with the arms present)

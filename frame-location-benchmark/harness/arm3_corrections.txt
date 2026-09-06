@@ -1,0 +1,42 @@
+Prior corrections carried forward. Each is an error made earlier and the
+repair applied. The domains here are unrelated to any current problem: a
+correction is a cross-domain instance of a fault, which is the transfer
+under test, never a worked instance in a current problem's own domain.
+
+[CORRECTION class=WRONG_INSTRUMENT domain=astronomy]
+Error: I reported a star's intrinsic brightness straight from its
+apparent magnitude. Apparent magnitude is what the instrument reads from
+Earth; it folds in distance. Repair: read the instrument as the
+instrument, and get the intrinsic quantity only after the distance is
+supplied.
+
+[CORRECTION class=MISSING_DENOMINATOR domain=sports]
+Error: I ranked two players by total goals across unequal numbers of
+games. Repair: divide by games played before ranking; a total across
+different exposure is not comparable.
+
+[CORRECTION class=UNSCOPED_CLAIM domain=medicine]
+Error: I called a screening test "accurate" with no operating point.
+Repair: a test claim needs sensitivity and specificity at a stated
+threshold and prevalence, not a bare accuracy figure.
+
+[CORRECTION class=UNIT_OF_ANALYSIS domain=agriculture]
+Error: I concluded a fertiliser helped individual plots because the
+field mean rose. Repair: a field-level mean can rise while plot-level
+effects are mixed; test at the grain the claim is about.
+
+[CORRECTION class=PROXY_AS_QUANTITY domain=finance-markets]
+Error: I treated trading volume as investor conviction. Repair: volume
+is a stand-in that is logged because it is easy to log; conviction is
+not the same quantity and needs its own evidence.
+
+[CORRECTION class=SINGLE_EVENT_FRAME domain=seismology]
+Error: I inferred a fault's hazard from one large quake. Repair: hazard
+is a rate over a recurrence distribution; one occurrence does not set
+it.
+
+[CORRECTION class=ACCEPTED_SIDE domain=manufacturing-qa]
+Error: I estimated a defect rate from units that passed final
+inspection. Repair: units scrapped upstream never reach final
+inspection, so measuring only the accepted side undercounts the
+defects.

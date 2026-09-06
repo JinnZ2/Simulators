@@ -1,0 +1,29 @@
+merge-path: round trip over the fixture set (residual = a field list, not a score)
+
+REAL registrars -- spec unfetched (egress 403 CONNECT), UNVERIFIED, NO-MERGE:
+  nanopublications     verified=False  NO-MERGE
+    breaks_at: spec not fetched: egress proxy answered 403 to CONNECT (probed 2026-09-05T03:30Z); UNVERIFIED, nothing derived rests on it
+  orkg                 verified=False  NO-MERGE
+    breaks_at: spec not fetched: egress proxy answered 403 to CONNECT (probed 2026-09-05T03:30Z); UNVERIFIED, nothing derived rests on it
+  ro_crate             verified=False  NO-MERGE
+    breaks_at: spec not fetched: egress proxy answered 403 to CONNECT (probed 2026-09-05T03:30Z); UNVERIFIED, nothing derived rests on it
+  clinicaltrials_gov   verified=False  NO-MERGE
+    breaks_at: spec not fetched: egress proxy answered 403 to CONNECT (probed 2026-09-05T03:30Z); UNVERIFIED, nothing derived rests on it
+  cipm_cmc             verified=False  NO-MERGE
+    breaks_at: spec not fetched: egress proxy answered 403 to CONNECT (probed 2026-09-05T03:30Z); UNVERIFIED, nothing derived rests on it
+  proof_assistant      verified=False  NO-MERGE
+    breaks_at: spec not fetched: egress proxy answered 403 to CONNECT (probed 2026-09-05T03:30Z); UNVERIFIED, nothing derived rests on it
+  osf_prereg           verified=False  NO-MERGE
+    breaks_at: spec not fetched: egress proxy answered 403 to CONNECT (probed 2026-09-05T03:30Z); UNVERIFIED, nothing derived rests on it
+
+MOCK registrars -- declared test doubles, exercising the residual classes:
+  the RATES reading reproduces the polar-o   MOCK_identity            [lossless]
+  the RATES reading reproduces the polar-o   MOCK_drops_branch        [lossless]
+  the RATES reading reproduces the polar-o   MOCK_coerces_falsifier   [COERCED=2]
+  the RATES reading reproduces the polar-o   MOCK_flattens_measured   [FLATTENED=1]
+  the RATES reading reproduces the polar-o   MOCK_requires_id         [DROPPED=1, ADDED=1]
+  SCOPE-DIFFERENT requires a transform, no   MOCK_identity            [lossless]
+  SCOPE-DIFFERENT requires a transform, no   MOCK_drops_branch        [DROPPED=1]
+  SCOPE-DIFFERENT requires a transform, no   MOCK_coerces_falsifier   [COERCED=2]
+  SCOPE-DIFFERENT requires a transform, no   MOCK_flattens_measured   [lossless]
+  SCOPE-DIFFERENT requires a transform, no   MOCK_requires_id         [DROPPED=1, ADDED=1]

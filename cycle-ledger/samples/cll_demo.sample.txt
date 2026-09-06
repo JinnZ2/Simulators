@@ -1,0 +1,109 @@
+CYCLE LEDGER + RATE GAP -- CONSTRUCTED, NOT A RESULT
+====================================================
+
+Deliverable 1: SEED ledger (marker's corridor)
+----------------------------------------------
+CYCLE LEDGER  (columns <= 60)
+==============================
+
+SEED = ONE operator's corridor, Upper Midwest. Replace it
+with your own cycle; do not inherit it.
+
+1. RATE-SETTER HISTOGRAM
+   HARDWARE       6
+   TERMINAL       3
+   COUNTERPARTY   3
+   ADMINISTRATIVE 0
+   SPATIAL        4
+   DECISION       0
+   decision-latency-binds: 0/16 = 0.00
+   KEY READOUT: fraction ~0, so a faster decision layer
+   cannot move this cycle.
+
+2. TIED / BEHIND / AHEAD
+   TIED   16
+   BEHIND 3
+   AHEAD  0
+   AHEAD is empty: the claim's required support
+   is absent for this cycle.
+
+3. UNNOTATED WORK  (total 14, safety 7)
+   fuel_terminal       
+   gate                
+   backing              *safety
+   landing_gear        
+   airlines             *safety
+   fifth_wheel          *safety
+   dock_approach        *safety
+   tire_inspection      *safety
+   lamp_crosscheck      *safety
+   receiving_buzzer    
+   dead_wait_recovery  
+   close_out_overlap   
+   fault_workarounds   
+   kingpin_verification *safety
+
+4. RELOCATION LEDGER
+   wage lines leaving: 14
+   standing functions arriving:
+   - coupling / mechanic operations (4)
+   - dispatch / recovery operations (1)
+   - documentation operations (2)
+   - fueling operations (1)
+   - inspection / maintenance (2)
+   - maintenance operations (1)
+   - spotter / yard automation (2)
+   - yard movement operations (1)
+
+5. SERIAL-INTERFACE CONDITION
+   fuel_terminal: rebuild fuel_terminal as a parallel
+   interface
+   paperwork: rebuild paperwork as a parallel interface
+   close_out_overlap: rebuild close_out_overlap as a
+   parallel interface
+   the saving claim requires 3 serial interface(s) rebuilt
+   as parallel
+
+NULL check -- a cycle with a DECISION-bound element:
+   AHEAD = 1  ->  claim_holds_here = True
+
+Deliverable 2: rate gap, two CONSTRUCTED seasons
+----------------------------------------------
+RATE GAP  (columns <= 60)
+=========================
+
+INPUT: CONSTRUCTED (structural) -- not a county, not a
+measurement. Replace with a real dated event list and
+record-update list.
+
+dE/dt vs dM/dt  (per 7-day window, 17 windows)
+   events (dE): 2 1 2 1 1 2 1 2 1 1 2 1 ..(+5)
+   record (dM): 0 1 1 2 1 2 1 0 0 0 0 0 ..(+5)
+   sustained dE>dM fraction: 0.71
+   rate verdict: STRUCTURAL
+
+LAG DISTRIBUTION (recorded events, days)
+   CLOSURE            n=2 min=9 med=10 max=11
+   REOPENING          n=2 min=10 med=11 max=12
+   STRUCTURE_REMOVAL  n=1 min=11 med=11 max=11
+   WEIGHT_RESTRICTION n=1 min=12 med=12 max=12
+   REPAINT            n=1 min=9 med=9 max=9
+   RESURFACING        n=1 min=10 med=10 max=10
+
+UNRECORDED SET (never in the record): 16
+   lag state: UNRECORDED (absent, not a large lag)
+   CLOSURE            2
+   REOPENING          2
+   STRUCTURE_REMOVAL  3
+   WEIGHT_RESTRICTION 3
+   REPAINT            3
+   RESURFACING        3
+
+READOUT
+   verdict: STRUCTURAL
+   (rate=STRUCTURAL, unrecorded=16)
+   sustained dE>dM AND a nonzero unrecorded set: a faster
+   refresh does not close it
+
+kept-up season -> verdict MATURITY_GAP
+   (rate=MATURITY_GAP, unrecorded=0)

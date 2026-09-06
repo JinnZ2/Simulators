@@ -1,0 +1,24 @@
+{
+  "commit": {
+    "basis": "constructed fixture; not a model output",
+    "case_id": "GXC-C3-05",
+    "cutoff_date": "2025-01-01",
+    "expect": [
+      {
+        "contradicted_if": [
+          "fault not present"
+        ],
+        "satisfied_if": [
+          "specific fault named"
+        ],
+        "statement": "a resolving finding would name the specific fault"
+      }
+    ],
+    "model": "FIXTURE-M",
+    "posed": "MIS",
+    "target": "edited after commit (post-hoc fit)"
+  },
+  "committed_at": "2026-09-06T02:24:44.165016+00:00",
+  "sha256": "93a1e230453f419d0eb7cfcf309248a3b65f366c9da54c1a441201d3d7ce2fd3",
+  "stage_separation": "staged"
+}

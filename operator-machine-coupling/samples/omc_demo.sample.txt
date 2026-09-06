@@ -1,0 +1,21 @@
+OPERATOR-MACHINE-COUPLING -- CONSTRUCTED DATA, NOT A MEASUREMENT
+================================================================
+
+1. the pairing separation (SS decomposition):
+   SS operator=54.0  SS unit=54.0  SS pairing=28.0  (fraction 0.206)
+   top-residual pairing: ('op1', 'u1')  operator main effect=0.0  unit main effect=0.0
+   -> both partners average; a main-effects model predicts 20.0, the pairing delivers 23.0. The 3.0 is the coupling that averaging discards.
+
+2. operator-error vs coupling-failure discriminator:
+   drops with time-on-unit, flat in role  -> COUPLING_FAILURE
+   drops with role, flat in time-on-unit  -> OPERATOR_ERROR
+   the two hour-counts collinear          -> UNDETERMINED (cannot split)
+
+3. fixed-advantage vs convergence-curve discriminator:
+   flat from first contact (genotype control) -> FIXED
+   accrues with time-in-pairing (coupling)    -> CONVERGENCE
+
+4. the permission confound (naive vs controlled):
+   naive assignment effect      = +4.0
+   controlled for permission    = +0.0  -> the effect was permission, not assignment
+   with the field absent        -> UNDETERMINED

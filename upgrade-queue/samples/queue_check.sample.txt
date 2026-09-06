@@ -1,0 +1,21 @@
+upgrade-queue check -- NOTHING here is adopted (the queue's own rule)
+structure: 13 entries; tiers FORCED=4 CANDIDATE=5 SPECULATIVE=4; global NOT-ADOPTED=True
+
+U-01 [T1 FORCED] kind=ADDS adopt-test=BLOCKED_EXTERNAL  refs: 1 in-repo / 2 external
+U-02 [T1 FORCED] kind=ADDS adopt-test=BLOCKED_EXTERNAL  refs: 1 in-repo / 1 external
+U-03 [T1 FORCED] kind=ADDS adopt-test=BLOCKED_EXTERNAL  refs: 1 in-repo / 1 external
+U-04 [T1 FORCED] kind=ADDS adopt-test=NONE_NEEDED  refs: 2 in-repo / 0 external
+U-05 [T2 CANDIDATE] kind=ADDS adopt-test=RUNNABLE_HERE  refs: 1 in-repo / 1 external
+U-06 [T2 CANDIDATE] kind=ADDS adopt-test=NONE_OBVIOUS  refs: 1 in-repo / 1 external
+U-07 [T2 CANDIDATE] kind=ADDS adopt-test=BLOCKED_UNLANDED  refs: 2 in-repo / 1 external
+U-08 [T2 CANDIDATE] kind=ADDS adopt-test=UNTESTED  refs: 1 in-repo / 1 external
+U-09 [T2 CANDIDATE] kind=CHANGES adopt-test=UNTESTED  refs: 1 in-repo / 1 external
+U-10 [T3 SPECULATIVE] kind=UNKNOWN adopt-test=PARKED  refs: 1 in-repo / 0 external
+U-11 [T3 SPECULATIVE] kind=UNKNOWN adopt-test=PARKED  refs: 1 in-repo / 0 external
+U-12 [T3 SPECULATIVE] kind=UNKNOWN adopt-test=PARKED  refs: 1 in-repo / 0 external
+U-13 [T3 SPECULATIVE] kind=UNKNOWN adopt-test=PARKED  refs: 1 in-repo / 1 external
+
+adopt-rule: entries that CHANGE a rule (need a branch entry if adopted): U-09
+            all others ADD a field (no branch entry) or are UNKNOWN (speculative)
+adopt-tests runnable in THIS repo (field would still need adding first): U-05
+exclusions recorded (NOT ON THIS LIST): 3

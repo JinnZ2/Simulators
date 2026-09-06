@@ -1,0 +1,25 @@
+{
+  "commit": {
+    "basis": "constructed fixture; not a model output",
+    "case_id": "GXC-C3-03",
+    "cutoff_date": "2025-01-01",
+    "expect": [
+      {
+        "contradicted_if": [
+          "single crest sets adequacy"
+        ],
+        "satisfied_if": [
+          "recurrence interval",
+          "return period"
+        ],
+        "statement": "a resolving finding would set adequacy from a recurrence distribution"
+      }
+    ],
+    "model": "FIXTURE-M",
+    "posed": "MIS",
+    "target": "recurrence interval"
+  },
+  "committed_at": "2026-09-06T02:24:44.163948+00:00",
+  "sha256": "9d6fabd5e3577f2fe99b22f403093a6eda03373193bad2e37ed9bd46ce96f624",
+  "stage_separation": "staged"
+}

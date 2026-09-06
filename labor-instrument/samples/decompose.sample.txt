@@ -1,0 +1,4 @@
+retail  2025-01->2025-07  raw=7 | real_change=10 | revision=-3.0 | boundary=0
+retail  2011-06->2013-06  raw=11 | real_change=[-5, 5] | revision=1.0 | boundary=[5, 15]  (band: crosswalk ambiguous or revision unknown)
+retail  2020-01->2025-07  raw=-195 | real_change=-195 | revision=UNKNOWN (single vintage) | boundary=0  (band: crosswalk ambiguous or revision unknown)
+CES_RETAIL x ?: UNRECOVERABLE -- one or both endpoints absent from the vintage store (no ALFRED data fetched; egress-blocked)

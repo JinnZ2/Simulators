@@ -1,0 +1,36 @@
+MODEL DEPRECATION BACKCAST INSTRUMENT -- CONSTRUCTED, NOT A RESULT
+==================================================================
+
+seven columns; each carries a NULL -- the condition under which it measures nothing:
+  C1 STATED REASON
+      null: if stated reasons match measured delta across the series, C1 and C2 collapse to one column  (collapses into C2)
+  C2 MEASURED DELTA
+      null: if third-party eval coverage is too sparse to date deltas to version boundaries, C2 is UNRECOVERABLE and is declared so rather than estimated
+  C3 DISCARD SET
+      null: if discard sets are near-entirely cost-driven, the demand-composition reading collapses and this is a compute-price story
+  C4 REGISTER MAPPING
+      null: if register output is invariant across versions for a constant off-distribution input, there is no tightening and C4 measures nothing
+  C5 USAGE DEPTH / BOUNDED RELIANCE
+      null: if the ratio does not vary with distance from the modal user, depth is not tracking coupling
+  C6 DISCOURSE / FAD AXIS
+      null: if discard dates are uniformly distributed against discourse peaks at every tested lag, the fad axis is not driving
+  C7 ONTOLOGY AXIS
+      null: if per-turn cost does not vary with ontological distance from the corpus, C7 collapses into C4  (collapses into C4)
+
+separate layer -- guardrail clock (news-time (months-scale, following public incidents)), on training-cycle time (C1-C7)
+open node: held, un-named, un-graded (per instruction)
+
+C6 fad-axis lag (discourse vs discards, argmax cross-corr):
+   discards lagged 20 mo    -> DRIVING
+   discards lagged 8 mo     -> DRIVING_OTHER_LAG
+   uniform discards         -> NOT_DRIVING (the null)
+
+guardrail-clock contamination of C6:
+   separated (discards only) -> lag 20, DRIVING
+   pooled with guardrail     -> lag 8, DRIVING_OTHER_LAG  (misread to the news-time lag)
+
+C3 accepted-side censoring (three exit forms, one leaves a record):
+   10 discard-affected, 3 recorded (fraction 0.30); the other 7 are censored, not absent
+   recorded signal carries a paying-tier filter: 0.67
+
+stated up front (carried, not verified): AI opinion by American Indian / Alaska Native respondents -- excluded by national-panel sample design: ~0.8% of population, geographically dispersed, screening cost, compounded by census undercount on-reservation and urban

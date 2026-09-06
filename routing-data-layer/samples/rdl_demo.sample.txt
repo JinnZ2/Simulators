@@ -1,0 +1,31 @@
+ROUTING DATA LAYER -- CONSTRUCTED, NOT A RESULT
+====================================================
+
+required contents (R1-R10), by record state:
+  R1  INCOMPLETE road existence and current geometry
+  R2  INCOMPLETE structure existence and status (bridges, overpasses)
+  R3  INCOMPLETE vertical clearance, per structure, current
+  R4  INCOMPLETE weight limits, per segment, incl. seasonal variation
+  R5  INCOMPLETE truck-route designation, per segment
+  R6  INCOMPLETE exit / ramp existence and current closure state
+  R7  INCOMPLETE active construction: closures, lane shifts, detours
+  R8  NEVER_CREATED dock geometry, per door: line offset, approach, surface
+  R9  NEVER_CREATED update latency per field, per jurisdiction
+  R10 INCOMPLETE provenance and confidence per record
+  never created (paying to CREATE, not to fund): R8, R9
+
+claim table (RDL-1..RDL-7) -- every claim carries a refutation:
+  falsifiable: 7 of 7
+
+Section 5 rate form (dE/dt vs dM/dt):
+  dE outruns dM sustained  -> STRUCTURAL
+  refresh keeps up         -> MATURITY_GAP
+  excess near half         -> UNDETERMINED
+
+RDL-5 survey decay (5%/mo stale over a 12-mo season):
+  one-time survey: final accuracy 0.40, held=False
+  standing (refresh q3): final accuracy 0.85, held=True  -> cost is standing, not capital
+
+F6 upstream pattern (two systems vs ground truth 10):
+  systems 12 and 8 (both off, opposite)  -> UPSTREAM_INCOMPLETE  (closable by one vendor: False)
+  systems 12 and 10 (one off)            -> VENDOR_DEFECT  (closable by one vendor: True)

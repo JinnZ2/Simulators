@@ -1,0 +1,28 @@
+MACHINE-RECORD-FORMAT v2 -- RULE 8 + TEST-CASE FORMAT (CONSTRUCTED)
+==================================================================
+
+Rule 8 -- no payment field in the base layer:
+  BaseEntry has a payment/compensation field: False
+  write path on a payment keyword -> paid: refused, unpaid: refused, wage: refused, compensation: refused
+  payment as a Rule 2 view instead -> groups ['paid', 'unpaid']
+
+test-case format -- every case carries the triple:
+  Case A -- Amish barn raising  [citable=True]
+    tests:         both entries present on identical footing, summable, neither carrying a payment field (Rule 8 end to end)
+    does not test: whether the willingness structure is transferable outside a community that already has it; also does not test large-scale or non-structural output classes
+    why not:       the community supplying the labor is self-selected and has standing agreements predating any given raising. The comparison holds output class constant, not social substrate. It answers 'does the record handle both,' not 'would this work elsewhere.'
+    format verdict: {'both_present': True, 'summable_joules': 1500000000.0, 'no_payment_field': True, 'payment_field_refused': True}
+
+  Case B -- terra preta  [citable=True]
+    tests:         whether the record can carry a strong output figure against an absent exposure figure without either discarding the entry or fabricating the exposure
+    does not test: output per unit of labor, or any efficiency claim at all
+    why not:       the exposure column is absent. A ratio needs both terms, and inferring the missing one from the present one makes the ratio circular. Durability is available; efficiency is not.
+    format verdict: {'accepted_with_absent_exposure': True, 'exposure_value_is_none': True, 'ratio_flag': 'NOT_COMPUTABLE', 'durability_readable': 750.0}
+
+  Case C -- Machu Picchu / Inca mit'a  [citable=True]
+    tests:         whether labor-unit records can be ingested and compared WITHOUT conversion to a monetary or hour-equivalent common unit
+    does not test: the willingness structure, community capital, or unpaid coordination of any kind
+    why not:       mit'a was a labor TAX. Coordination was state-directed and compulsory. Absence of money is not presence of willingness -- those are separate axes, and this case is non-monetary and non-voluntary simultaneously, which is exactly why it isolates the units question.
+    format verdict: {'compared_on_native_unit': 9200.0, 'same_exposure_class': True, 'convert_raises': True}
+
+the three does-not-test boundaries are distinct, so a pass on one is not a pass on another (the cases are not merged).

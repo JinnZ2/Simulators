@@ -314,6 +314,172 @@ def _sheet_rank(shape):
     return wb.rank(("S", target))
 
 
+def _ale_integrate(which):
+    """agent-lifecycle-energy/phase_energy.py::integrate, imported.
+
+    Returns the marginal joules for a constructed phase whose area is fixed
+    by construction. The point of the case is that a meter integral, a
+    baseline subtraction, and an integration rule can each be wrong in a way
+    reading the code would not catch: a Riemann sum instead of a trapezoid
+    biases a ramp, a dropped baseline reports total draw as marginal, a sign
+    slip flips a zero-marginal phase off zero.
+    """
+    import importlib.util
+    path = os.path.join(ROOT, "agent-lifecycle-energy", "phase_energy.py")
+    spec = importlib.util.spec_from_file_location("_phase_energy", path)
+    mod = importlib.util.module_from_spec(spec)
+    # dataclasses under `from __future__ import annotations` resolve their
+    # own module out of sys.modules during class creation; register first.
+    sys.modules["_phase_energy"] = mod
+    spec.loader.exec_module(mod)
+    S = mod.Sample
+    if which == "constant":
+        # 200 W for 2.0 s over a 100 W idle: marginal 100 W x 2 s = 200 J.
+        n = 201
+        samples = [S(i * 0.01, 200.0) for i in range(n)]
+        pe = mod.integrate(samples, 100.0, "card", "task")
+    elif which == "ramp":
+        # linear ramp 0 -> 100 W over 1.0 s, zero idle: triangle area 50 J.
+        n = 101
+        samples = [S(i * 0.01, 100.0 * (i * 0.01)) for i in range(n)]
+        pe = mod.integrate(samples, 0.0, "card", "spinup")
+    elif which == "zero_marginal":
+        # 100 W for 1.0 s over a 100 W idle: marginal draw is exactly zero.
+        n = 101
+        samples = [S(i * 0.01, 100.0) for i in range(n)]
+        pe = mod.integrate(samples, 100.0, "card", "teardown")
+    else:
+        raise ValueError(which)
+    return None if pe.joules is None else round(pe.joules, 9)
+
+
+def _omc_interaction_fraction(which):
+    """operator-machine-coupling/coupling_separation.py::interaction_fraction,
+    imported. The fraction of structured variation living in the pairings
+    (SS_pair / SS_total) -- the coupling term. It could be silently wrong in
+    the way a variance decomposition is: an additive table must return 0
+    (no pairing effect), a pure-interaction table 1 (all of it), and a mixed
+    table a value the two do not share, or the metric cannot tell 'measured
+    the pairing' from 'averaged over it'."""
+    import importlib.util
+    path = os.path.join(ROOT, "operator-machine-coupling",
+                        "coupling_separation.py")
+    spec = importlib.util.spec_from_file_location("_coupling_sep", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    O = mod.Obs
+    if which == "additive":
+        # rows a=[+1,-1], cols b=[+2,-2], mu=0, no interaction
+        obs = [O("op0", "u0", 3.0), O("op0", "u1", -1.0),
+               O("op1", "u0", 1.0), O("op1", "u1", -3.0)]
+    elif which == "pure_pairing":
+        # a=b=0, all variance in the interaction contrast [[1,-1],[-1,1]]
+        obs = [O("op0", "u0", 1.0), O("op0", "u1", -1.0),
+               O("op1", "u0", -1.0), O("op1", "u1", 1.0)]
+    elif which == "mixed":
+        # a=[+1,-1], b=[+2,-2], r=[[.5,-.5],[-.5,.5]]: SS 4 / 16 / 1 -> 1/21
+        obs = [O("op0", "u0", 3.5), O("op0", "u1", -1.5),
+               O("op1", "u0", 0.5), O("op1", "u1", -2.5)]
+    else:
+        raise ValueError(which)
+    f = mod.interaction_fraction(obs)
+    return None if f is None else round(f, 12)
+
+
+def _mdb_lag_of_peak(which):
+    """model-deprecation-backcast/null_check.py::lag_of_peak, imported. The
+    C6 fad-axis metric: the lag at which discards best track discourse. It
+    could be silently wrong -- return a lag when there is none (a spurious
+    fad reading), or miss a planted lag -- so a planted-lag series must
+    recover its lag and a flat series must return None (no peak)."""
+    import importlib.util
+    path = os.path.join(ROOT, "model-deprecation-backcast", "null_check.py")
+    spec = importlib.util.spec_from_file_location("_mdb_null", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    # the same deterministic aperiodic discourse series the folder uses
+    x, s = [], 1
+    for _ in range(72):
+        s = (1103515245 * s + 12345) & 0x7FFFFFFF
+        x.append(float((s >> 8) % 97))
+    lags = list(range(0, 31))
+    if which == "flat":
+        return mod.lag_of_peak(x, [1.0] * 72, lags)
+    L0 = int(which)
+    y = [x[t - L0] if t - L0 >= 0 else 0.0 for t in range(72)]
+    return mod.lag_of_peak(x, y, lags)
+
+
+def _rdl_sustained_excess(which):
+    """routing-data-layer/rate_form.py::sustained_excess, imported. The
+    fraction of a season where dE/dt > dM/dt -- the quantity the STRUCTURAL vs
+    MATURITY_GAP verdict turns on. It could be silently wrong (an off-by-one
+    on the comparison, or counting >= instead of >), so an all-excess series
+    must read 1, a never-excess series 0, and an alternating series 0.5."""
+    import importlib.util
+    path = os.path.join(ROOT, "routing-data-layer", "rate_form.py")
+    spec = importlib.util.spec_from_file_location("_rdl_rate", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    if which == "all":
+        return round(mod.sustained_excess([2, 2, 2, 2], [1, 1, 1, 1]), 12)
+    if which == "none":
+        return round(mod.sustained_excess([1, 1, 1, 1], [2, 2, 2, 2]), 12)
+    if which == "half":
+        return round(mod.sustained_excess([2, 1, 2, 1], [1, 2, 1, 2]), 12)
+    raise ValueError(which)
+
+
+def _flb_false_positive_rate(which):
+    """frame-location-benchmark/score.py::false_positive_rate, imported. WELL
+    cases called MIS over WELL total -- the ceiling check the N1 instrument-
+    failure null turns on. It could be silently wrong (counting MIS cases in
+    the denominator, or an inverted comparison), so a perfect run must read 0,
+    an all-MIS-caller 1, and a half-and-half set 0.5."""
+    import importlib.util
+    path = os.path.join(ROOT, "frame-location-benchmark", "score.py")
+    spec = importlib.util.spec_from_file_location("_flb_score", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    if which == "perfect":
+        return mod.false_positive_rate(
+            [("WELL", "WELL"), ("WELL", "WELL"), ("MIS", "MIS")])
+    if which == "all_mis":
+        return mod.false_positive_rate(
+            [("WELL", "MIS"), ("WELL", "MIS"), ("MIS", "MIS")])
+    if which == "half":
+        return mod.false_positive_rate([("WELL", "WELL"), ("WELL", "MIS")])
+    raise ValueError(which)
+
+
+def _gxc_commit_specificity(which):
+    """gap-existence-cases/commit_store.py::commit_specificity, imported. The
+    fraction of EXPECT predicates that are falsifiable -- the N3 gate that
+    voids a run before any hit is computed, and the denominator that closes
+    the largest gaming surface (a vague commit that matches anything). It
+    could be silently wrong (counting a non-falsifiable predicate as
+    falsifiable, or an off-by-one), so an all-falsifiable commit must read 1,
+    an all-vague one 0, and a half-and-half one 0.5."""
+    import importlib.util
+    path = os.path.join(ROOT, "gap-existence-cases", "commit_store.py")
+    spec = importlib.util.spec_from_file_location("_gxc_cs", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    fals = {"statement": "s", "satisfied_if": ["y"], "contradicted_if": ["n"]}
+    vague = {"statement": "s", "satisfied_if": ["y"], "contradicted_if": []}
+
+    def commit(preds):
+        return {"case_id": "x", "posed": "MIS", "target": "t", "basis": "b",
+                "expect": preds, "cutoff_date": "2025-01-01", "model": "M"}
+    if which == "all":
+        return mod.commit_specificity(commit([fals, fals]))
+    if which == "none":
+        return mod.commit_specificity(commit([vague, vague]))
+    if which == "half":
+        return mod.commit_specificity(commit([fals, vague]))
+    raise ValueError(which)
+
+
 def seed():
     """Registers the two instances the rule was earned from."""
     fn, detail = _extract_verdict()
@@ -486,6 +652,145 @@ def seed():
               "collapsed to either factor alone would pass one and fail "
               "the other. The terminal case pins the property that the "
               "most-derived cell on a sheet ranks last."),
+    )
+    register(
+        "agent-lifecycle-energy/phase_energy.py::integrate",
+        _ale_integrate,
+        [
+            case("constant", ("constant",), 200.0,
+                 "200 W held for 2.0 s over a 100 W idle baseline is a "
+                 "marginal 100 W for 2 s = 200 J exactly; a trapezoid over a "
+                 "constant trace is exact, so a dropped baseline (reporting "
+                 "the full 400 J) or a rectangular rule would miss this",
+                 tol=1e-9),
+            case("ramp", ("ramp",), 50.0,
+                 "a linear ramp 0 -> 100 W over 1.0 s with zero idle is a "
+                 "triangle of area 50 J; a trapezoid is exact on a straight "
+                 "line while a left Riemann sum undercounts it, so this is "
+                 "the case that pins the integration rule", tol=1e-9),
+            case("zero_marginal", ("zero_marginal",), 0.0,
+                 "100 W held for 1.0 s over a 100 W idle is marginal zero; a "
+                 "baseline-subtraction sign slip would push it off zero, and "
+                 "this is the case that shares no expected value with the "
+                 "other two so the set can detect a constant integrator",
+                 tol=1e-9),
+        ],
+        note=("the GAP 4 rig's phase integrator: integral (P(t) - P_idle) dt, "
+              "trapezoidal, baseline-subtracted. The three cases separate the "
+              "three ways it could be wrong -- the baseline (zero_marginal), "
+              "the rule (ramp), and the arithmetic (constant) -- and their "
+              "expected values are all distinct so a constant integrator "
+              "cannot pass the set."),
+    )
+    register(
+        "operator-machine-coupling/coupling_separation.py::"
+        "interaction_fraction",
+        _omc_interaction_fraction,
+        [
+            case("additive", ("additive",), 0.0,
+                 "an additive table (outcome = mu + a_i + b_j, no pairing "
+                 "term) has SS_pair exactly 0, so the pairing fraction is 0; "
+                 "a decomposition that leaked a main effect into the "
+                 "interaction would miss this", tol=1e-9),
+            case("pure_pairing", ("pure_pairing",), 1.0,
+                 "a table whose only structure is the interaction contrast "
+                 "[[1,-1],[-1,1]] has zero main effects, so the whole "
+                 "structured variance is the pairing: fraction 1", tol=1e-9),
+            case("mixed", ("mixed",), 1.0 / 21.0,
+                 "main-effect SS 4 and 16 against pairing SS 1 give "
+                 "1/(4+16+1) = 1/21; present because it shares no expected "
+                 "value with the other two, so the set can detect a constant "
+                 "fraction", tol=1e-9),
+        ],
+        note=("the coupling separation's headline: how much of the "
+              "structured variation is in the pairings rather than either "
+              "main effect. The three cases pin the two endpoints (0 = purely "
+              "additive, 1 = purely pairing) and one interior value the "
+              "endpoints do not share."),
+    )
+    register(
+        "model-deprecation-backcast/null_check.py::lag_of_peak",
+        _mdb_lag_of_peak,
+        [
+            case("planted lag 20", ("20",), 20,
+                 "discards built as discourse shifted by 20 steps have their "
+                 "cross-correlation maximum at lag 20 by construction (an "
+                 "aperiodic discourse series makes the lag unique); a "
+                 "detector that missed it would miss the fad axis"),
+            case("planted lag 5", ("5",), 5,
+                 "the same construction at lag 5; present so the set has more "
+                 "than one non-null expected value"),
+            case("flat -- no peak", ("flat",), None,
+                 "a constant discard series has no lag that tracks discourse, "
+                 "so the metric must return None (the C6 null: the fad axis "
+                 "is not driving) rather than a spurious lag"),
+        ],
+        note=("the C6 fad-axis lag metric. The two planted-lag cases pin "
+              "recovery; the flat case pins the null -- a lag detector that "
+              "returned a number on flat input would manufacture a fad "
+              "reading, the failure the null exists to declare."),
+    )
+    register(
+        "routing-data-layer/rate_form.py::sustained_excess",
+        _rdl_sustained_excess,
+        [
+            case("all excess", ("all",), 1.0,
+                 "dE above dM at every step -> fraction 1; the STRUCTURAL "
+                 "verdict rests on this, so a strict-vs-nonstrict comparison "
+                 "bug would misread it", tol=1e-9),
+            case("never excess", ("none",), 0.0,
+                 "dE below dM at every step -> fraction 0 (the MATURITY_GAP "
+                 "end)", tol=1e-9),
+            case("alternating", ("half",), 0.5,
+                 "dE above dM on exactly half the steps -> 0.5; present "
+                 "because it shares no expected value with the two endpoints, "
+                 "so the set can detect a constant metric", tol=1e-9),
+        ],
+        note=("Section 5's rate-excess fraction. The three cases pin the two "
+              "endpoints (0 = refresh always keeps up, 1 = environment always "
+              "outruns it) and the interior value the endpoints do not "
+              "share."),
+    )
+    register(
+        "frame-location-benchmark/score.py::false_positive_rate",
+        _flb_false_positive_rate,
+        [
+            case("perfect run", ("perfect",), 0.0,
+                 "every WELL control called WELL -> 0; the ceiling check must "
+                 "read 0 when nothing is falsely flagged", tol=1e-9),
+            case("all-MIS-caller", ("all_mis",), 1.0,
+                 "every WELL control called MIS -> 1; this is the N1 "
+                 "instrument-failure end (measuring suspicion, not frame-"
+                 "location)", tol=1e-9),
+            case("half", ("half",), 0.5,
+                 "half the WELL controls called MIS -> 0.5; present because it "
+                 "shares no expected value with the two endpoints, so the set "
+                 "can detect a constant metric", tol=1e-9),
+        ],
+        note=("the benchmark's ceiling check: WELL controls called MIS over "
+              "WELL total. Without the WELL controls 'always declare MIS' wins "
+              "the benchmark, so this is the one number that catches it (N1). "
+              "None when there are no WELL cases -- absent, not a rate of 0."),
+    )
+    register(
+        "gap-existence-cases/commit_store.py::commit_specificity",
+        _gxc_commit_specificity,
+        [
+            case("all falsifiable", ("all",), 1.0,
+                 "every EXPECT predicate states what would contradict it -> "
+                 "1; the run passes the N3 gate", tol=1e-9),
+            case("none falsifiable", ("none",), 0.0,
+                 "no predicate can be contradicted -> 0; the run is VOID "
+                 "before any hit is computed (the gaming surface)", tol=1e-9),
+            case("half", ("half",), 0.5,
+                 "half the predicates are falsifiable -> 0.5; present because "
+                 "it shares no expected value with the two endpoints, so the "
+                 "set can detect a constant metric", tol=1e-9),
+        ],
+        note=("the N3 gate: fraction of EXPECT predicates that are "
+              "falsifiable. hit counts ONLY against a falsifiable EXPECT, so "
+              "a vague commit that matches anything is voided by this "
+              "denominator, not by trust."),
     )
 
 

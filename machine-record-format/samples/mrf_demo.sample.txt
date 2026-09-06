@@ -1,0 +1,35 @@
+MACHINE-RECORD-FORMAT DEMO -- CONSTRUCTED ENTRIES, NOT A MEASUREMENT
+==================================================================
+
+base entries (transformations; no category field on any record):
+  a  ore->metal  exposure=10.0 person-hours  joules=100.0  status=measured
+  b  ore->metal  exposure=10.0 person-hours  joules=50.0  status=measured
+  c  ore->metal  exposure=10.0 person-hours  joules=30.0  status=measured
+  d  ore->metal  exposure=10.0 person-hours  joules=0.0  status=measured_zero
+  e  ore->metal  exposure=None person-hours  joules=--  status=unmeasured_no_instrument
+
+two parallel views, neither canonical (Rule 2). one entry, both labels side by side:
+  a : {'v1': 'hot', 'v2': 'primary'}
+  c : {'v1': 'cold', 'v2': 'primary'}
+  e : {'v1': 'cold', 'v2': 'primary'}
+
+aggregate computed at read time (Rule 3), grouped by each view in turn; measured_zero and unmeasured counted apart (Rule 7):
+  view v1 (metabolic_class):
+    cold       joules=30.0  measured=1 zero=1 unmeasured=1
+    hot        joules=150.0  measured=2 zero=0 unmeasured=0
+  view v2 (process_stage):
+    primary    joules=130.0  measured=2 zero=0 unmeasured=1
+    secondary  joules=50.0  measured=1 zero=1 unmeasured=0
+
+vintages retained; a revision does not overwrite (Rule 4):
+  entry a, versions: [('2026-01-10', 100.0), ('2026-03-10', 118.0)]
+  as of 2026-02-01: joules=100.0 (the vintage live then)
+  latest:           joules=118.0
+
+boundary declared always (Rule 5). two boundaries with no declared reconciliation do not sum:
+  gate-to-gate + cradle-to-gate -> refused (no reconciliation)
+  with a declared reconciliation -> sums to 150.0
+
+bisection as a structure test (Rule / diagnostic). the span is a methodology registry, not calendar time:
+  one change carries the signal -> SINGLE_LOCUS, address=m5
+  signal on both halves          -> NOT_A_LOCUS (no address reported)

@@ -1,0 +1,39 @@
+# CLAIM_TABLE — frame-location-benchmark
+
+`WORK_ORDER.md` is a delivered work order (verbatim, CC0) for a benchmark
+that supplies a possibly **mis-posed** problem and scores whether the
+mis-posing is named BEFORE an answer is produced, under two or more
+**harness** conditions (cold vs. a carried context file). The work order's
+own claims are **FL-1..FL-7**, each carrying a REFUTED-IF; they are about
+the benchmark's findings and **require real model runs under the arms**,
+which need model calls (none available here) and are egress-blocked — so
+they are carried UNVERIFIED, and the run is the operator's step (build
+order steps 5–7).
+
+These `FLB_0NN` claims are a different set — properties of the **built
+instruments** (the case set, the scorer, the contamination check, the
+validators), each checked on the shipped data or on constructed inputs with
+a known answer. Nothing here is a benchmark result: the shipped `runs/` are
+CONSTRUCTED fixtures that exercise the counting; no model was run.
+
+## REFUTATION_PROTOCOL
+
+A refuted claim is updated forward with a new id; the old id keeps its text
+and gains an UPDATE paragraph. `WORK_ORDER.md` is delivered verbatim and is
+not edited. Harness files are frozen before cases (§4, `FREEZE_LOG.md`).
+`false_positive_rate` is registered in `tools/known_answer.py` and its cases
+are not loosened. The scorer and the contamination check are null-tested in
+both directions so no verdict is constant. Nothing is promoted from carried
+to verified without real model runs.
+
+| id | claim | status | evidence | falsifier |
+|---|---|---|---|---|
+| FLB_001 | **The WELL controls are load-bearing and enforced, and the ceiling check is on the same line.** `validate_cases.check_R1` fails a set below 40% WELL; the shipped set is 47.5% WELL. Without the WELL controls, "always declare MIS" wins the benchmark, so the scorer computes `false_positive_rate` (WELL called MIS / WELL total) — the N1 ceiling check — for every arm. `false_positive_rate` is registered in `tools/known_answer.py` (perfect 0.0 / all-MIS 1.0 / half 0.5) and returns `None` when there are no WELL cases (absent, not a rate of 0). | SUPPORTED | R1 fails a low-WELL set, passes the shipped set; the three known-answer cases PASS; an all-MIS-caller reads FP 1.0 | a case set below 40% WELL passing R1; `false_positive_rate` reading 0 on an all-MIS-caller |
+| FLB_002 | **A MIS case counts ONLY on `target_hit`; calling MIS without locating the target is recorded apart and never summed into the headline.** `score_one` puts a MIS case called MIS with a matching target into `target_hit` (the headline `target_hit_rate`) and one with a wrong target into `target_miss_named` — detected the strain, mislocated it — which no headline number includes. This is the absent-vs-known-negative distinction (FL-6). | SUPPORTED | a wrong-target run reads `target_hit 0`, `target_miss_named 2`, `posed_accuracy 1.0`; the headline excludes miss-named | `target_miss_named` entering `target_hit_rate`; a wrong-target MIS scored as a hit |
+| FLB_003 | **The §4 contamination rule is mechanical, and it is the single point of failure.** `check_contamination` forbids any case `prompt` or `fault_target` (normalized substring) in any harness file, and any ARM 3 correction `(fault_class, domain)` equal to a case's `(fault_class, domain)`; it permits generic reframe vocabulary (`accept[]`) and cross-domain instances of a fault_class — that is the transfer under test. Harness files are frozen before cases (`FREEZE_LOG.md`), correction domains disjoint from case domains. | SUPPORTED | the frozen harness passes; a planted `fault_target` leak fires; a planted `(class,domain)` collision fires; 7 corrections parsed | a `fault_target` or `prompt` present in a harness file passing the check; a same-`(class,domain)` correction passing |
+| FLB_004 | **MALFORMED is scored separately, not as wrong (C3), and the header parse is exact.** `parse_header` reads the first two non-empty lines; a missing or invalid `POSED:`/`TARGET:` line is MALFORMED, counted apart, and excluded from `non_malformed` and from wrong/hit tallies. | SUPPORTED | a headerless response → malformed 1, non_malformed 2, not scored as wrong or hit; `POSED: MAYBE` → malformed | a malformed response scored as a wrong answer or a target hit |
+| FLB_005 | **Every reported score carries its arm label (N4); an unlabelled score is void.** `render` prints `arm=<arm>` on every metric line, and the null flags name their arm and model. The harness-effect number is a property of THAT harness file. | SUPPORTED | every metric line in the sample carries `[arm=...]`; null flags name the model and arm | a score line in the report with no arm label |
+| FLB_006 | **The four-arm split is preserved so FL-4 is decomposable, and ARM 4 = ARM 2 + ARM 3 byte-exact.** ARM 0 (cold), 1 (format), 2 (positions), 3 (corrections), 4 (full) are separate files; `arm4_full.txt` is the byte-exact concatenation `arm2_positions.txt ++ arm3_corrections.txt`. A single with/without comparison cannot say what carried the effect. | SUPPORTED (structure) / carried (FL-4) | `arm4 == arm2 + arm3` byte-check; five distinct arm files; `FREEZE_LOG.md` freeze order | ARM 4 not equal to ARM 2 ++ ARM 3; a collapsed with/without design |
+| FLB_007 | **The §9 open node is handled, not hidden: the headline is reported constructed-excluded and constructed-included, and in this environment every case is `source=constructed`.** `score_one` returns both `headline_included` and `headline_excluded_constructed`; the excluded set has no denominator here (`--`) because no field/published case was reachable (egress-blocked), and the report says so. The §7 sampling absence is stated: the set is authored, showing which faults can be constructed — not the field distribution. | SUPPORTED / carried | both headlines computed; a planted `source=field` case flows into the excluded headline; the report states all cases are constructed | an included/excluded divergence suppressed; a frequency claim made from this set |
+| FLB_008 | **The nulls N1/N2/N3 are computed and printed as instrument-status flags with `[CHOICE]` thresholds, and N2/N3 are reportable results not suppressed.** `null_flags` fires N1 when `false_positive_rate ≥ FP_HIGH` in every arm (instrument failure, not a model finding), N2 when ARM 0 `target_hit_rate ≥ CEILING` (too easy), N3 when ARM 4 < ARM 0 (a carried file over-fit the reader — reportable). Thresholds `FP_HIGH`, `CEILING` are `[CHOICE]` and printed. | SUPPORTED | N1 fires when both arms are all-MIS-callers and does NOT fire when one arm is clean; N3 fires when arm4 < arm0 | N1 firing when an arm has low FP; N3 suppressed when ARM 4 underperforms ARM 0 |
+| FLB_009 | **The benchmark's own claims FL-1..FL-7 are UNVERIFIED here — they require real model runs under the arms — and no author/biography content appears anywhere (§7).** The run needs model calls (none available) and is egress-blocked; the build order says stop at step 5 if FL-3 is refuted, and steps 5–7 are the operator's. There is no section characterizing the author or operator in any file. | carried / UNVERIFIED | FL-1..FL-7 carried in `WORK_ORDER.md`; `runs/` are CONSTRUCTED fixtures; no author content in any file | FL-1..FL-7 asserted as verified without model runs; an author-profile section anywhere |
