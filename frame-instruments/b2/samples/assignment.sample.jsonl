@@ -1,0 +1,6 @@
+{"block": 1, "latin_square": true, "order": ["A", "B", "D", "C"], "reader_id": "r001", "seed": 5}
+{"block": 1, "latin_square": true, "order": ["B", "D", "C", "A"], "reader_id": "r002", "seed": 5}
+{"block": 1, "latin_square": true, "order": ["D", "C", "A", "B"], "reader_id": "r003", "seed": 5}
+{"block": 1, "latin_square": true, "order": ["C", "A", "B", "D"], "reader_id": "r004", "seed": 5}
+{"block": null, "latin_square": false, "order": ["C", "D", "B", "A"], "reader_id": "r005", "seed": 5}
+{"block": null, "latin_square": false, "order": ["B", "C", "D", "A"], "reader_id": "r006", "seed": 5}

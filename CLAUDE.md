@@ -10613,40 +10613,45 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   per `AUDIT_CONTRACT.md` (Kavik's lines marked, the cross-links the
   render's). Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `frame-instruments/` — A bundle delivered as one file and written out
-  verbatim: `README.md` (four builds B1–B4, the shared `runrecord.py`
-  spec, four design rules — nulls are second outputs never gates,
-  categories never supplied at intake, agreement scored where
-  correctness would require the frame under test, weak joints swept as
-  arguments) and two liftable procedures, `liftable/five-state-grading.md`
-  (`true/false/lapsed/partial/unknown/undifferentiated`, with a
-  two-state dataset refused as `void`) and
-  `liftable/reconstruction-procedure.md` (back out the requirement list
-  behind a forced choice, grade each, derive physically-necessary vs
-  policy-choice from the settling test, score agreement across
-  independent reconstructors, shuffle-null printed beside the result).
-  Of the three work orders the bundle references, **B4 arrived** and is
-  filed verbatim at `workorders/B4_dilemma_reconstruction.md`; the B1–B3
-  order and the runner-up trace spec did not and are not reconstructed.
-  **B4 is built** in `b4/`: `items.py` (one arm per file, mixed arms
-  `void`), `reconstruct.py` (one directory per reconstructor, each file
-  the single key `text_verbatim`, asserted after writing and re-checked
-  at report time), `requirements.py` (six-state status, a file using
-  only true/false is `void`, empty `settling_test` refused, `layer` free
-  text never validated), `grade.py` (physical/policy split computed from
-  `settling_test` against two cue lists that are arguments printed into
-  every row; both-or-neither is `unresolved`, printed beside the ratio),
-  `agreement.py` (from an external `matches.jsonl`; pairwise agreement,
-  full-disagreement pairs, singletons kept in full, `match_source` on
-  every row), `nullshuffle.py` (per-reconstructor derangement across
-  items, seed on every row), `calibrate.py` (documented arm only;
-  recovered / missed / `beyond_report`, the last printed and not scored),
-  `report.py` (nine sections in order, `void` if either shuffled input
-  is missing), `test_b4.py` (13 tests). The order's precondition "B1–B3
-  exist" is false here: `runrecord.py` was built from the README's own
-  spec and the B4.5 agreement computation is implemented directly since
-  B2's `agree.py` does not exist to wrap — recorded in
-  `b4/BUILD_NOTES.md` with every open choice marked. `samples/` holds
-  one run on the constructed fixture. Stdlib-only, no network, CC0.
+  verbatim (`README.md`, `liftable/five-state-grading.md`,
+  `liftable/reconstruction-procedure.md`), then two of its three
+  referenced work orders arrived and are filed verbatim under
+  `workorders/`; the third, the runner-up trace reference spec, did not
+  and is not reconstructed. **All four builds are built**, stdlib only,
+  no network, hand-rolled argv parsing, one `runrecord.py` whose record
+  is written on every exit path including an uncaught exception, and
+  `FORBIDDEN = (label, category, type, interpretation)` checked on every
+  validated row. **B1** (`b1/`) scores runner-up traces offline:
+  `schema.py` rejects by file, line and field with no coercion;
+  `score.py` sweeps D over {8..128} and **L over {2,4,8} as an argument
+  written into every row** (the order's named weak joint), with a
+  hand-written token Levenshtein; `permute.py` shuffles tuples across
+  positions within each (model, D, L) stratum, seed on every row;
+  `summarise.py` runs identically on real and permuted, emitting
+  top-decile position sets and their adjacent-D / adjacent-L Jaccard
+  stability; `report.py` is `void` without the permuted summary, and its
+  section 6 states that N1–N5 live in the missing reference spec and
+  evaluates nothing. **B2** (`b2/`) is the audit-isolation runner:
+  `conditions.py` emits A/B/C/D rows carrying only
+  `case_id, condition, presented_text`, leak-checked by field set and by
+  substring; `order.py` counterbalances with seeded 4×4 Latin squares
+  per block and states the shortfall; `lock.py` is the D commit lock as
+  two invocations that never share a path; `agree.py` scores agreement
+  (normalised exact match, the rule written as `match_source`), prints
+  the A-vs-D1 order-effect check as its first row, and measures
+  anchoring as the ratify rate among D readers whose committed D1
+  differed from the key. **B3** (`b3/`) is the split-authorship harness:
+  `split.py` writes `{"case_id"}` and `{"statement"}` prompt files only,
+  refusing a statements file carrying any other field; `join.py` drops
+  nothing silently, every dropped id in the run record; `arms.py`
+  refuses a mixed `single`/`split` file. **B4** (`b4/`) is the dilemma
+  reconstruction protocol (`items`, `reconstruct`, `requirements`,
+  `grade`, `agreement`, `nullshuffle`, `calibrate`, `report`), built
+  before B1–B3 arrived; its `agreement.py` is not a wrap of B2's
+  `agree.py` since the two take different inputs, recorded in
+  `b4/BUILD_NOTES.md`. Every open choice is marked in `BUILD_NOTES.md`;
+  each build ships `samples/` from its constructed fixture; suites are
+  13 + 8 + 5 + 3 tests. CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

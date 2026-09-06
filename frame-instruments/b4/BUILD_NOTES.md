@@ -6,16 +6,17 @@ Built to `../workorders/B4_dilemma_reconstruction.md`. Results only.
 
 The work order opens "B1–B3 exist. B4 reuses `runrecord.py` unchanged
 and `agree.py` from B2 with one added field. Do not fork either."
-In this tree at build time:
+B4 arrived and was built BEFORE the B1–B3 order; the state at each point:
 
-| named dependency | state | what was done |
+| named dependency | at B4 build | now |
 |---|---|---|
-| B1, B2, B3 | not built; their work orders never arrived | nothing reconstructed |
-| `runrecord.py` | absent | built at `../runrecord.py` from the spec in `../README.md` (fields, four statuses, the write-on-every-path rule) |
-| B2 `agree.py` | absent | B4.5 computation implemented directly in `agreement.py`, with the one added field `match_source` on every row; the intended form is a wrap and `agreement.py` states so in its docstring |
+| B1, B2, B3 | not built; their order had not arrived | built, under `../b1 ../b2 ../b3` |
+| `runrecord.py` | absent; built at `../runrecord.py` from the README spec | the B1–B3 order's shared rule, unchanged in shape; record file renamed to `runs/runs.jsonl` per that order |
+| B2 `agree.py` | absent; B4.5 implemented directly in `agreement.py` with `match_source` on every row | exists. `agreement.py` is still NOT a wrap: B2's rule is normalised exact match on `posed`/`target`, B4's input is an external `matches.jsonl` over requirement pairs, so the two compute agreement from different inputs. Both carry `match_source`. |
 
-Nothing was forked because nothing existed to fork. When B2 lands, the
-check is that its `agree.py` reproduces `agreement.py`'s per-item output.
+Argument parsing was retrofitted from `argparse` to `ficommon.parse_argv`
+when the B1–B3 order stated "no CLI library" as a constraint on all
+builds; documented invocations are unchanged.
 
 ## Run order
 

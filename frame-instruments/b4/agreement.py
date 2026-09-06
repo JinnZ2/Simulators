@@ -21,11 +21,10 @@ Items with one reconstructor: pairs empty, agreement null, singletons = all.
 
 Command: python3 agreement.py REQS.jsonl --matches MATCHES.jsonl --match-source "who/what" --out AGREE.jsonl
 """
-import argparse
 import itertools
 import sys
 
-from common import (MATCH_FIELDS, REQ_FIELDS, Invalid, Run, check_fields,
+from common import (parse_argv, usage_exit, MATCH_FIELDS, REQ_FIELDS, Invalid, Run, check_fields,
                     finish, parse_ref, raise_if, read_jsonl, ref, write_jsonl)
 
 DEFINITION = ("agreement(A,B) = (#A with counterpart in B + #B with counterpart in A) / (|A|+|B|); "
@@ -114,13 +113,12 @@ def score(rows, matches, match_source):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("requirements")
-    ap.add_argument("--matches", required=True)
-    ap.add_argument("--match-source", required=True, help="who or what produced matches.jsonl")
-    ap.add_argument("--out", required=True)
-    ap.add_argument("--runs", default=None)
-    a = ap.parse_args(argv)
+    try:
+        a = parse_argv(argv, __doc__, positional=("requirements",), options=("matches", "match_source", "out", "runs"), required=("matches", "match_source", "out"))
+    except Invalid as e:
+        return usage_exit(e)
+    if a is None:
+        return 0
     with Run("b4/agreement.py", vars(a), None, [a.requirements, a.matches], a.out, a.runs) as run:
         try:
             if not a.match_source.strip():

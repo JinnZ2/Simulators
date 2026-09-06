@@ -15,10 +15,9 @@ An items file carrying any non-documented item -> void.
 Command: python3 calibrate.py REQS.jsonl --items ITEMS_VALID.jsonl --factors FACTORS.jsonl \
              --factor-matches FMATCHES.jsonl --match-source "who/what" --out CALIB.jsonl
 """
-import argparse
 import sys
 
-from common import (REQ_FIELDS, Invalid, Run, Void, check_fields, finish,
+from common import (parse_argv, usage_exit, REQ_FIELDS, Invalid, Run, Void, check_fields, finish,
                     parse_ref, raise_if, read_jsonl, ref, write_jsonl)
 
 FACTOR_FIELDS = ("item_id", "factor_id", "factor_text", "report_source")
@@ -82,15 +81,12 @@ def calibrate(rows, items, factors, fmatches, match_source):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("requirements")
-    ap.add_argument("--items", required=True)
-    ap.add_argument("--factors", required=True)
-    ap.add_argument("--factor-matches", required=True)
-    ap.add_argument("--match-source", required=True)
-    ap.add_argument("--out", required=True)
-    ap.add_argument("--runs", default=None)
-    a = ap.parse_args(argv)
+    try:
+        a = parse_argv(argv, __doc__, positional=("requirements",), options=("items", "factors", "factor_matches", "match_source", "out", "runs"), required=("items", "factors", "factor_matches", "match_source", "out"))
+    except Invalid as e:
+        return usage_exit(e)
+    if a is None:
+        return 0
     ins = [a.requirements, a.items, a.factors, a.factor_matches]
     with Run("b4/calibrate.py", vars(a), None, ins, a.out, a.runs) as run:
         try:

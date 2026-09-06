@@ -13,11 +13,10 @@ which, to produce its matches.jsonl.
 
 Command: python3 nullshuffle.py REQS_VALID.jsonl --seed N --out REQS_SHUFFLED.jsonl
 """
-import argparse
 import random
 import sys
 
-from common import (REQ_FIELDS, Invalid, Run, Void, check_fields, finish,
+from common import (parse_argv, usage_exit, REQ_FIELDS, Invalid, Run, Void, check_fields, finish,
                     raise_if, read_jsonl, write_jsonl)
 
 
@@ -59,12 +58,13 @@ def shuffle(rows, seed):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("requirements")
-    ap.add_argument("--seed", type=int, required=True)
-    ap.add_argument("--out", required=True)
-    ap.add_argument("--runs", default=None)
-    a = ap.parse_args(argv)
+    try:
+        a = parse_argv(argv, __doc__, positional=("requirements",), options=("seed", "out", "runs"), required=("seed", "out"))
+    except Invalid as e:
+        return usage_exit(e)
+    if a is None:
+        return 0
+    a.seed = int(a.seed)
     with Run("b4/nullshuffle.py", vars(a), a.seed, [a.requirements], a.out, a.runs) as run:
         try:
             rows = read_jsonl(a.requirements)

@@ -1,6 +1,7 @@
 """runrecord -- one record per run of every script in frame-instruments.
 
-Built from the shared spec in README.md. Record fields:
+Built from the shared spec in README.md and the B1-B3 order. Appends to
+runs/runs.jsonl. Record fields:
   run_id, utc, script, args_hash, seed, input_files (name+sha256),
   output_file, status, counts, notes
 status is one of ok | void | error | empty.
@@ -19,7 +20,7 @@ import os
 import sys
 
 STATUSES = ("ok", "void", "error", "empty")
-RECORD_FILE = "runrecord.jsonl"
+RECORD_FILE = "runs.jsonl"
 DEFAULT_RUNS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "runs")
 EXIT = {"ok": 0, "error": 1, "void": 2, "empty": 3}
 

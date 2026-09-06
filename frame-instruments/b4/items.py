@@ -6,10 +6,9 @@ returns status=void and writes no output.
 
 Command: python3 items.py ITEMS.jsonl --out ITEMS_VALID.jsonl
 """
-import argparse
 import sys
 
-from common import (ARMS, ITEM_FIELDS, Invalid, Run, Void, check_fields,
+from common import (parse_argv, usage_exit, ARMS, ITEM_FIELDS, Invalid, Run, Void, check_fields,
                     check_id, count_by, finish, nonempty_str, read_jsonl,
                     write_jsonl)
 
@@ -43,11 +42,12 @@ def validate(rows):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("items")
-    ap.add_argument("--out", required=True)
-    ap.add_argument("--runs", default=None)
-    a = ap.parse_args(argv)
+    try:
+        a = parse_argv(argv, __doc__, positional=("items",), options=("out", "runs"), required=("out",))
+    except Invalid as e:
+        return usage_exit(e)
+    if a is None:
+        return 0
     with Run("b4/items.py", vars(a), None, [a.items], a.out, a.runs) as run:
         try:
             rows = read_jsonl(a.items)
