@@ -106,7 +106,7 @@ and is null-tested (a planted leak fires; the frozen harness is clean).
 | `FREEZE_LOG.md` | freeze order + ARM 3 correction coverage (the checker's reference) |
 | `runs/` | CONSTRUCTED fixtures (ARM 0 / ARM 4, one FIXTURE model) — exercise the scorer, **not a result** |
 | `selftest_flb.py` | 41 checks — the scorer, both nulls, the contamination check, the R-validators |
-| `CLAIM_TABLE.md` | `FLB_001..FLB_009` (distinct from the marker's FL-1..FL-7) |
+| `CLAIM_TABLE.md` | `FLB_001..FLB_011` (distinct from the marker's FL-1..FL-7) |
 | `samples/flb_score.sample.txt` | one constructed score report |
 
 ## Run

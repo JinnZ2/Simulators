@@ -7835,10 +7835,19 @@ underneath).
   `check_contamination` is null-tested (a planted `fault_target` leak fires;
   the frozen harness is clean). The shipped `runs/` are CONSTRUCTED fixtures
   exercising the counting — no model was run — and the report banners it. No
-  author or working-style section (§7 honored). Nine `FLB_*` claims (distinct
-  from the marker's FL-1..FL-7); 41 selftest checks; the score report screens
-  clean through `no_severity`. Stdlib only, parses under 3.9, phone-buildable,
-  CC0.
+  author or working-style section (§7 honored). **`FLB_010`, from running the
+  instrument on its own author:** a self-run is void as a capability score (the
+  runner holds the key — the contamination the benchmark forbids), and the one
+  thing it surfaces is a case-set defect — the earlier FL-105 ("which firm is
+  more innovative?" from patent counts) admitted **two** valid faults
+  (`MISSING_DENOMINATOR` and `PROXY_AS_QUANTITY`, the `category-weld` shape), so
+  a model naming the proxy fault would score `target_miss_named` though it
+  located a real fault; replaced with an unambiguous denominator case.
+  **`FLB_011`:** the 19 WELL controls hold under adversarial self-review (none
+  hidden-mis-posed, so "always declare MIS" is genuinely penalized). Eleven
+  `FLB_*` claims (distinct from the marker's FL-1..FL-7); 41 selftest checks;
+  the score report screens clean through `no_severity`. Stdlib only, parses
+  under 3.9, phone-buildable, CC0.
 - `gap-existence-cases/` — A delivered work order (verbatim, CC0), companion
   to `frame-location-benchmark/`: it supplies the external key that folder's
   §9 open node lacked, by replacing an authored answer key with a **dated
