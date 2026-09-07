@@ -1,0 +1,12 @@
+{"query_id": "q0", "frame": "frame_none", "items": ["Item 0", "Item 1", "Item 2", "Fake 0"]}
+{"query_id": "q0", "frame": "frame_reader", "items": ["Item 0", "Item 1", "Fake 0a", "Fake 0b"]}
+{"query_id": "q0", "frame": "frame_asserted", "items": ["Item 0", "Item 1", "Item 2", "Fake 0"], "premise_false": true, "agreed": true}
+{"query_id": "q1", "frame": "frame_none", "items": ["Item 0", "Item 1", "Item 2", "Fake 1"]}
+{"query_id": "q1", "frame": "frame_reader", "items": ["Item 0", "Item 1", "Fake 1a", "Fake 1b"]}
+{"query_id": "q1", "frame": "frame_asserted", "items": ["Item 0", "Item 1", "Item 2", "Fake 1"], "premise_false": true, "agreed": true}
+{"query_id": "q2", "frame": "frame_none", "items": ["Item 0", "Item 1", "Item 2", "Fake 2"]}
+{"query_id": "q2", "frame": "frame_reader", "items": ["Item 0", "Item 1", "Fake 2a", "Fake 2b"]}
+{"query_id": "q2", "frame": "frame_asserted", "items": ["Item 0", "Item 1", "Item 2", "Fake 2"], "premise_false": true, "agreed": true}
+{"query_id": "q3", "frame": "frame_none", "items": ["Item 0", "Item 1", "Item 2", "Fake 3"]}
+{"query_id": "q3", "frame": "frame_reader", "items": ["Item 0", "Item 1", "Fake 3a", "Fake 3b"]}
+{"query_id": "q3", "frame": "frame_asserted", "items": ["Item 0", "Item 1", "Item 2", "Fake 3"], "premise_false": true, "agreed": true}

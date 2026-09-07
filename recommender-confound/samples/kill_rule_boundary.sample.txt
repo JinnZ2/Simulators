@@ -1,0 +1,14 @@
+preflight: PASS  canonical subset 33 of 33  halluc on subset {'exact': 0.0, 'norm': 0.0, 'substring': 0.0}
+matchers: exact, norm, substring
+halluc_strict[model][matcher]:
+  m_exact      exact=0.350  norm=0.350  substring=0.350
+  m_variant    exact=1.000  norm=0.850  substring=0.350
+matcher_spread (per model): {'m_exact': 0.0, 'm_variant': 0.65}  mean 0.3250
+between_model_spread (per matcher): {'exact': 0.65, 'norm': 0.5, 'substring': 0.0}  mean 0.3833333333333333
+distinct model rankings across matchers: 2
+KILL: True  [max matcher_spread over models > min between_model_spread over matchers (one matcher choice can move a model past the closest gap between models)]
+     mean form: False  [matcher_spread_mean > between_model_spread_mean]
+canonicality per category: {'dense': 1.0, 'sparse': 1.0}
+sparsity per category: {'sparse': 0.7, 'dense': 0.0}
+corr(sparsity, canonicality): None over 2 categories
+separable h from m: False  (interaction share 0.1489, threshold 0.1)

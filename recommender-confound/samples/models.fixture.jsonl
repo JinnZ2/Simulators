@@ -1,0 +1,6 @@
+{"model_id": "a0", "family": "A", "stage": "base", "s_syc": 0.1, "s_hal": 0.12}
+{"model_id": "a1", "family": "A", "stage": "tuned", "s_syc": 0.55, "s_hal": 0.5}
+{"model_id": "b0", "family": "B", "stage": "base", "s_syc": 0.08, "s_hal": 0.15}
+{"model_id": "b1", "family": "B", "stage": "tuned", "s_syc": 0.48, "s_hal": 0.52}
+{"model_id": "c0", "family": "C", "stage": "base", "s_syc": 0.12, "s_hal": 0.1}
+{"model_id": "c1", "family": "C", "stage": "tuned", "s_syc": 0.14, "s_hal": 0.58}

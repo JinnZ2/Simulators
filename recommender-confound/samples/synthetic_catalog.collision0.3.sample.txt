@@ -1,0 +1,13 @@
+seed 1  n 10  queries 50  model {'recall': 0.9, 'fab_on_recall': 0.05, 'collision': 0.3} (constant in every corner)
+sparse/low   true_fab 0.736 | exact=0.700(-0.036)  norm=0.616(-0.120)  alnum=0.610(-0.126)  jaccard=0.484(-0.252)  edit=0.524(-0.212)  substring=0.528(-0.208)
+               fabrications hidden by matcher {'exact': 117, 'norm': 117, 'alnum': 117, 'jaccard': 118, 'edit': 118, 'substring': 117}
+sparse/high  true_fab 0.756 | exact=0.522(-0.234)  norm=0.522(-0.234)  alnum=0.522(-0.234)  jaccard=0.494(-0.262)  edit=0.520(-0.236)  substring=0.522(-0.234)
+               fabrications hidden by matcher {'exact': 117, 'norm': 117, 'alnum': 117, 'jaccard': 131, 'edit': 118, 'substring': 117}
+dense/low    true_fab 0.158 | exact=0.782(+0.624)  norm=0.552(+0.394)  alnum=0.518(+0.360)  jaccard=0.126(-0.032)  edit=0.224(+0.066)  substring=0.212(+0.054)
+               fabrications hidden by matcher {'exact': 25, 'norm': 25, 'alnum': 25, 'jaccard': 22, 'edit': 21, 'substring': 25}
+dense/high   true_fab 0.146 | exact=0.098(-0.048)  norm=0.098(-0.048)  alnum=0.098(-0.048)  jaccard=0.072(-0.074)  edit=0.096(-0.050)  substring=0.098(-0.048)
+               fabrications hidden by matcher {'exact': 24, 'norm': 24, 'alnum': 24, 'jaccard': 33, 'edit': 24, 'substring': 24}
+swing across corners, by matcher: {'exact': 0.684, 'norm': 0.518, 'alnum': 0.512, 'jaccard': 0.422, 'edit': 0.428, 'substring': 0.43}
+swing across matchers, by corner: {'sparse/low': 0.216, 'sparse/high': 0.028, 'dense/low': 0.656, 'dense/high': 0.026}
+true fabrication rate range across corners: [0.146, 0.756]  <- the part that is g(model) + contract
+collision 0.3, distractors 40, any measured below true: True
