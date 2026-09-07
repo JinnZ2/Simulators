@@ -173,6 +173,22 @@ def registry_ids():
 NH_PATH = os.path.join(ROOT, "null-harness", "null_harness.py")
 
 
+
+def _crediting_bin_gap(which):
+    """crediting-rate/crediting_rate.py::bin_gap, imported. Rates per loanword bin
+    are hand-built so the gap can be counted off; a fixture file would put a
+    reader between the metric and its answer."""
+    import importlib.util
+    path = os.path.join(ROOT, "crediting-rate", "crediting_rate.py")
+    spec = importlib.util.spec_from_file_location("_crediting_rate", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    worlds = {"all_vs_none": {1: [1.0, 1.0, 1.0], 0: [0.0, 0.0]},
+              "equal": {1: [0.6, 0.6], 0: [0.6, 0.6, 0.6]},
+              "mixed": {1: [0.8, 0.8], 0: [0.2, 0.2]},
+              "empty_bin": {1: [0.5], 0: []}}
+    return mod.bin_gap(worlds[which])
+
 def _extract_verdict():
     if not os.path.exists(NH_PATH):
         return None, "null-harness/null_harness.py not found"
@@ -791,6 +807,28 @@ def seed():
               "falsifiable. hit counts ONLY against a falsifiable EXPECT, so "
               "a vague commit that matches anything is voided by this "
               "denominator, not by trust."),
+    )
+    register(
+        "crediting-rate/crediting_rate.py::bin_gap",
+        _crediting_bin_gap,
+        [
+            case("all vs none", ("all_vs_none",), 1.0,
+                 "every retained item credited, no non-retained item credited "
+                 "-> the gap is the full unit interval", tol=1e-9),
+            case("equal", ("equal",), 0.0,
+                 "same rate in both bins -> 0; the N1 band must contain this "
+                 "value or the shuffle is broken", tol=1e-9),
+            case("mixed", ("mixed",), 0.6,
+                 "0.8 against 0.2 -> 0.6; shares no expected value with the "
+                 "endpoints, so the set can detect a constant metric", tol=1e-9),
+            case("empty bin", ("empty_bin",), None,
+                 "no non-retained item -> None, absent not zero; a 0 here "
+                 "would read as 'credit does not track the word' on no data"),
+        ],
+        note=("the dependent measure of WORK ORDER L: mean crediting rate of "
+              "loanword-retained items minus that of non-retained items, over "
+              "items with attested ordering. The sign is the pre-stated "
+              "prediction; the N1 shuffle band decides whether it is readable."),
     )
 
 

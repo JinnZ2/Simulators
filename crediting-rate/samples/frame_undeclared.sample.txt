@@ -1,0 +1,4 @@
+crediting_rate -- prediction sha256 7246dd6b526393cc -- seed 0
+frame: UNDECLARED / UNDECLARED / UNDECLARED
+RETURN: BLOCKED (frame_undeclared)
+  {'note': "frame_undeclared is an addition to the order's BLOCKED reason; the frame is a parameter and an undeclared one is not a run"}

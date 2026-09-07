@@ -227,6 +227,7 @@ last three; read in order:
 - `corpus-input-gaps/` — input-side gaps + a response-loop sim
 - `coinage-log/` — naming gaps; is the absent word the finding
 - `falsifier-survey/` — Run 1 of a delivered falsifier survey; Run 2 split to its two repos
+- `crediting-rate/` — credit tracks the loanword or the contribution; BLOCKED until ordered
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -10732,6 +10733,26 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `buildable` / `simulable` / `blocked(+blocker)`); a long lag on a
   branch not stating access suppression is flagged, never rewritten.
   Claims `BS_001..005`. Stdlib only, CC0.
+- `crediting-rate/` — WORK ORDER L, verbatim, built: does attribution of
+  an imported technique track CONTRIBUTION or whether the loanword survived
+  into the receiving language? A rate comparison across loanword bins with
+  the attested ordering held. Two files that meet only in `join()` — events
+  (bin + attested ordering) and codings (crediting per reference source,
+  coded BLIND; any field containing `loanword` is refused at load) — a
+  declared source frame as a parameter (`UNDECLARED` → `BLOCKED`), the
+  prediction recorded in `PREDICTION.md` before any coding and hashed into
+  every report, and the four nulls: N1 a seeded shuffle of bin labels with
+  the observed gap read against its percentile band, N2/N3/N4 the same gap
+  and band inside date, domain and path-length strata. G is the order's
+  five values built locally (**the method layer F/G is not in this tree**,
+  `CRD_006`; F is emitted as `branch_set.json` in the order's shape).
+  **State:** no real coding exists — the ten named items sit in
+  `fixtures/events.candidates.jsonl` with both attestation years `null`, so
+  the real run returns `BLOCKED(insufficient_attested_ordering)` with ten
+  excluded and counted, never estimated (`CRD_002`); two constructed worlds
+  return `ETYMOLOGY_TRACKING` and `CONTRIBUTION_TRACKING`, so the return is
+  not constant (`CRD_001`). `bin_gap` registered in `tools/known_answer.py`.
+  Eight claims `CRD_001..008`. Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

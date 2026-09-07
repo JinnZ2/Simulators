@@ -1,0 +1,12 @@
+crediting_rate -- prediction sha256 7246dd6b526393cc -- seed 7
+frame: constructed / 0 / 2026-09-07
+RETURN: CONTRIBUTION_TRACKING
+gap = -0.040  ci95 = [-0.24, 0.16]  N1 band = [-0.200, 0.200] over 2000 shuffles
+items per bin {1: 5, 0: 5}  excluded {'ordering_unknown': 0, 'ordering_reversed': 0, 'uncoded': 0}  ambiguous bin 1  misattribution 0.00  mean date by bin {'1': 1008, '0': 1000}
+  N2_antiquity    early      n=5   gap=-0.133 band=[-0.3, 0.2]
+  N2_antiquity    late       n=5   gap=0.133 band=[-0.2, 0.133]
+  N3_domain       materials  n=4   gap=0.100 band=[-0.3, 0.3]
+  N3_domain       math       n=4   gap=-0.100 band=[-0.3, 0.3]
+  N3_domain       medicine   n=2   gap=-0.200 band=[-0.2, 0.2]
+  N4_path_length  0-1        n=7   gap=0.033 band=[-0.2, 0.15]
+  N4_path_length  2+         n=3   gap=0.000 band=[0.0, 0.0]
