@@ -12,6 +12,8 @@ import unittest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
+for _m in ('agreement', 'calibrate', 'common', 'grade', 'items', 'nullshuffle', 'reconstruct', 'report', 'requirements'):  # module names recur across builds; purge so a shared process imports this build's
+    sys.modules.pop(_m, None)
 import agreement, calibrate, grade, items, nullshuffle, reconstruct, report, requirements  # noqa: E402
 from common import FORBIDDEN, read_jsonl, write_jsonl  # noqa: E402
 from runrecord import Run, read_records  # noqa: E402

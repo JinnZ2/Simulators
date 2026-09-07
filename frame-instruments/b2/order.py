@@ -1,9 +1,12 @@
 """B2.2 order.py -- counterbalance condition order across readers.
 Readers are taken in blocks of four; each block receives a fresh seeded
-4x4 Latin square (cyclic shifts of a seeded permutation of A,B,C,D), so
-every condition sits in every position once per block. Readers past the
-last full block receive a seeded permutation each, and the shortfall is
-stated in the run record notes. Seed written into every row.
+4x4 WILLIAMS square (the n=4 row-complete Latin square, relabelled by a
+seeded permutation of A,B,C,D), so every condition sits in every position
+once per block AND every ordered successor pair occurs exactly once per
+block -- a cyclic square balances position only and confounds carryover.
+Readers past the last full block receive a seeded permutation each, and
+the shortfall is stated in the run record notes. Seed written into every
+row.
 
 Command: python3 order.py --readers N --seed S --out ASSIGNMENT.jsonl
 """
@@ -16,10 +19,13 @@ from ficommon import Invalid, Run, finish, parse_argv, usage_exit, write_jsonl  
 CONDITIONS = ["A", "B", "C", "D"]
 
 
+WILLIAMS_4 = ((0, 1, 3, 2), (1, 2, 0, 3), (2, 3, 1, 0), (3, 0, 2, 1))
+
+
 def latin_square(rng):
     base = list(CONDITIONS)
     rng.shuffle(base)
-    return [base[k:] + base[:k] for k in range(4)]
+    return [[base[k] for k in row] for row in WILLIAMS_4]
 
 
 def assign(n_readers, seed):

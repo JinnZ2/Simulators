@@ -24,8 +24,8 @@ def _cells(summary):
     return [s for s in summary if "n_rows" in s]
 
 
-def _stab(summary, axis):
-    return [s for s in summary if s.get("sweep_axis") == axis and s["jaccard"] is not None]
+def _stab(summary, axis, kind="top_decile_div"):
+    return [s for s in summary if s.get("sweep_axis") == axis and s.get("position_set") == kind and s["jaccard"] is not None]
 
 
 def n1(summary, thr):
@@ -53,13 +53,21 @@ def n2(seps, thr, sustained_d):
 
 
 def n3(summary, thr):
-    d, l = _stab(summary, "D"), _stab(summary, "L")
-    num = {"min_adjacent_D_jaccard": min(s["jaccard"] for s in d) if d else None,
-           "min_adjacent_L_jaccard": min(s["jaccard"] for s in l) if l else None, "N": "not carried"}
-    trig = None if not d else (num["min_adjacent_D_jaccard"] < thr or (l and num["min_adjacent_L_jaccard"] < thr))
+    num = {"N": "not carried"}
+    mins = []
+    for kind in ("top_decile_div", "separation_resync0"):
+        for axis in ("D", "L"):
+            st = _stab(summary, axis, kind)
+            v = min(s["jaccard"] for s in st) if st else None
+            num["min_adjacent_%s_jaccard_%s" % (axis, kind)] = v
+            if v is not None:
+                mins.append(v)
+    trig = None if not mins else any(v < thr for v in mins)
     return {"id": "N3", "number": num, "threshold": thr, "triggered": trig,
-            "note": "triggered when any adjacent-D or adjacent-L top-decile Jaccard is < threshold; "
-                    "the N sweep (stage B) is not in separations.jsonl and is compared across runs at different N"}
+            "note": "triggered when any adjacent-D or adjacent-L Jaccard, on the top-decile set or the separation "
+                    "set, is < threshold; the top-decile set is L-invariant by construction so its L row reads 1.0 "
+                    "and only the separation set carries L dependence; the N sweep (stage B) is not in "
+                    "separations.jsonl and is compared across runs at different N"}
 
 
 def n4(real, perm):
@@ -70,7 +78,8 @@ def n4(real, perm):
                                            "to": s["to"], "jaccard": s["jaccard"]} for s in pd]}
     trig = None if (not rd or not pd) else num["mean_adjacent_D_jaccard_permuted"] >= num["mean_adjacent_D_jaccard_real"]
     return {"id": "N4", "number": num, "threshold": "permuted >= real", "triggered": trig,
-            "note": "the permuted stability values are the method's transfer function and are printed either way"}
+            "note": "the permuted stability values are the method's transfer function and are printed either way; "
+                    "this compares ONE permutation draw to the real value, so the margin is one seed wide"}
 
 
 def n5(base_rows, thr):

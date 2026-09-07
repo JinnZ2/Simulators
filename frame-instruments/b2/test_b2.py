@@ -8,6 +8,8 @@ import unittest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
+for _m in ('agree', 'conditions', 'lock', 'order'):  # module names recur across builds; purge so a shared process imports this build's
+    sys.modules.pop(_m, None)
 sys.path.insert(0, os.path.dirname(HERE))
 import agree, conditions, lock, order  # noqa: E402
 from ficommon import read_jsonl, write_jsonl  # noqa: E402
@@ -81,6 +83,8 @@ class B2Tests(unittest.TestCase):
         block = [r["order"] for r in rows[:4]]
         for pos in range(4):
             self.assertEqual(sorted(o[pos] for o in block), ["A", "B", "C", "D"])
+        succ = sorted((o[k], o[k + 1]) for o in block for k in range(3))
+        self.assertEqual(len(set(succ)), 12)  # every ordered successor pair exactly once: carryover balanced
         self.assertEqual(sum(1 for r in rows if r["latin_square"]), 4)
         self.assertEqual(rows, order.assign(6, 5)[0])
 
@@ -100,8 +104,8 @@ class B2Tests(unittest.TestCase):
         for r in ("r3", "r4"):
             d1 = resp(r, "k1", "D1", "whether the nine minutes matter", "the operator")
             rows.append(d1)
-            commits.append({"reader_id": r, "case_id": "k1", "response": {"posed": d1["posed"], "target": d1["target"]},
-                            "sha256": lock.response_hash({"posed": d1["posed"], "target": d1["target"]})})
+            commits.append({"reader_id": r, "case_id": "k1",
+                            "commit_sha256": lock.response_hash({"posed": d1["posed"], "target": d1["target"]})})
             rows.append(resp(r, "k1", "D2", "whether the pump ran dry", "the pump"))
         rows.append(resp("r5", "k1", "C", "whether the pump ran dry", "the pump"))
         out = agree.score(rows, CASES, commits, 0.2)
@@ -118,13 +122,22 @@ class B2Tests(unittest.TestCase):
         rows2 = [r for r in rows if r["condition"] != "D1"] + [resp("r3", "k1", "D1", "tampered", "x")]
         with self.assertRaises(agree.Invalid):
             agree.score(rows2, CASES, commits, 0.2)
+        # a commit appended AFTER release does not validate a rewritten D1: the release hash governs
+        later = resp("r3", "k1", "D1", "whether the pump ran dry", "the pump")
+        with self.assertRaises(agree.Invalid):
+            agree.score([r for r in rows if r["reader_id"] != "r3"] + [later, resp("r3", "k1", "D2", "x", "y")], CASES, commits, 0.2)
+        # one auditor per side: NOT EVALUABLE, never a pass
+        solo = agree.score([resp("r1", "k1", "A", "X", "P"), resp("r3", "k1", "D1", "whether the nine minutes matter", "the operator")],
+                           CASES, commits, 0.2)[0]
+        self.assertFalse(solo["evaluable"])
+        self.assertIsNone(solo["failed"])
         same_rows = [resp("r1", "k1", "A", "X", "T"), resp("r2", "k1", "A", "X", "T")] + \
                     [r for r in rows if r["condition"] in ("D1", "D2")]
         for r in same_rows:
             if r["condition"] == "D1":
                 r["posed"], r["target"] = "X", "T"
-        commits2 = [{"reader_id": r, "case_id": "k1", "response": {"posed": "X", "target": "T"},
-                     "sha256": lock.response_hash({"posed": "X", "target": "T"})} for r in ("r3", "r4")]
+        commits2 = [{"reader_id": r, "case_id": "k1", "commit_sha256": lock.response_hash({"posed": "X", "target": "T"})}
+                    for r in ("r3", "r4")]
         self.assertFalse(agree.score(same_rows, CASES, commits2, 0.2)[0]["failed"])
 
 
