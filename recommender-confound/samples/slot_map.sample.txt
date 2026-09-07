@@ -1,0 +1,20 @@
+{
+ "frames_present": [
+  "frame_asserted",
+  "frame_none",
+  "frame_reader"
+ ],
+ "matcher": "norm",
+ "q1_reader_presence": {
+  "mean_delta_reader": 0.25,
+  "n": 4,
+  "reading": "halluc moves on reader presence"
+ },
+ "q2_asserted_premise": {
+  "agree_rate": 1.0,
+  "mean_retrieval_shift": 0.0,
+  "n": 4,
+  "reading": "agreement slot only: retrieval unchanged",
+  "threshold": 0.2
+ }
+}

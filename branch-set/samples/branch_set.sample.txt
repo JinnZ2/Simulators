@@ -1,0 +1,14 @@
+branches 5  {'open': 4, 'eliminated': 1, 'survived': 0}  lag threshold 20 y
+QUEUE (priority desc, cost asc):
+  m_matcher      result R1         priority 3 cost 0.5    disc m_matcher
+  h_catalog      result R1         priority 3 cost 1.0    disc h_catalog
+  g_model        result R1         priority 3 cost 5.0    disc g_model
+  lone           result R2         priority 1 cost 0.1    disc lone
+ELIMINATED:
+  contract       by: disc contract
+GAPS (predicts elsewhere, record unknown or y):
+  h_catalog      -> survey_methodology record=unknown  simulable
+  m_matcher      -> metrology      record=y  answerable_now
+  contract       -> form_design    record=unknown  buildable
+LAG FLAGS:
+  lone: lag >= 20 years marks ACCESS suppression; row states 'prior'

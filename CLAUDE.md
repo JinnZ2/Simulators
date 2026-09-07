@@ -10675,6 +10675,47 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   rejoin shifted by one token reads `resync 0` while `div` falls to
   0.016, and N4 rests on one permutation draw (permuted spread 0.469–0.546
   over 30 seeds against real 0.672 on the fixture). CC0.
+- `recommender-confound/` — Five instruments and a shared matcher module
+  built to a delivered work order (verbatim) whose origin is a
+  recommender audit reporting hallucination 0.6%→61% by catalog with a
+  10× swing from the string matcher, the claim being that the reported
+  number is `g(model) × h(catalog) × m(matcher)` attributed wholly to g.
+  `matchers.py` classifies every produced string MATCH / MISS /
+  AMBIGUOUS under six matchers, ambiguity reported apart. **A**
+  `confound_probe.py`, built for others to run on their own catalogs:
+  `halluc[model][matcher]`, matcher spread vs between-model spread with
+  the KILL rule (matcher spread exceeds model spread → ranking void),
+  ties recorded as ties, canonicality as self-match uniqueness under the
+  loosest matcher, sparsity from supply/n_requested, and separability of
+  h from m as an additive two-way fit with the interaction share printed.
+  **B** `synthetic_catalog.py`, the null construction: 2×2 density ×
+  canonicality, model held constant, and measured hallucination runs
+  **0.138 → 0.948** under `exact` while the true rate runs 0.118 → 0.746;
+  density moves the TRUE rate (fill-to-N fabricates the deficit),
+  canonicality moves only the MEASURED one, and at high canonicality
+  every matcher recovers the truth. **C** `abstention_channel.py`,
+  contract v1 vs v2 scored by precision not count-completion; `sim`
+  runs the identical model under both and hallucination falls
+  **0.738 → 0.063**. **D** `shared_generator_test.py`, base vs tuned per
+  family; a decoupled pair is reported as slot-specific deficit handlers
+  and never labelled null. **E** `slot_map.py`, reader-in-frame: reader
+  presence alone, and whether an asserted premise moves retrieval
+  (Jaccard on matched ids) or only agreement. Every threshold is an
+  argument, printed. Claims `RC_001..008`; all fixtures constructed,
+  nothing a measurement of any published model. The queued
+  protocol-over-information survey is unspecced and unbuilt.
+- `branch-set/` — Item F of the same order, marked `[OWN REPO]` and
+  built as its own promotable folder. `branch_set.py` serializes a held
+  branch set (generator, predicted divergence, discriminator, cost,
+  status, suppression cause and access kind, predictions in other
+  domains with record state, instrument history with lag) so it survives
+  transport; collapse happens at measurement, not intake. Outputs a test
+  queue ranked by derived priority (open branches fitting one result)
+  then cost, the eliminated-set record with the discriminator named, a
+  gap list, and a rule-based triage per gap (`answerable_now` /
+  `buildable` / `simulable` / `blocked(+blocker)`); a long lag on a
+  branch not stating access suppression is flagged, never rewritten.
+  Claims `BS_001..005`. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

@@ -1,0 +1,1 @@
+model {'recall': 0.9, 'fab_on_recall': 0.05} held fixed | v1 halluc 0.738  v2 halluc 0.063  collapse 0.675 | v2 precision 0.937, abstention 50 of 50 queries with supply < N
