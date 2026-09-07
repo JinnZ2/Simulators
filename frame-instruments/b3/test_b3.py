@@ -9,6 +9,8 @@ import unittest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
+for _m in ('arms', 'join', 'split'):  # module names recur across builds; purge so a shared process imports this build's
+    sys.modules.pop(_m, None)
 sys.path.insert(0, os.path.dirname(HERE))
 import arms, join, split  # noqa: E402
 from ficommon import read_jsonl, write_jsonl  # noqa: E402

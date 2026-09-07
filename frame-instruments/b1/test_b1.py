@@ -7,6 +7,8 @@ import unittest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
+for _m in ('nulls', 'permute', 'report', 'schema', 'score', 'summarise'):  # module names recur across builds; purge so a shared process imports this build's
+    sys.modules.pop(_m, None)
 sys.path.insert(0, os.path.dirname(HERE))
 import nulls, permute, report, schema, score, summarise  # noqa: E402
 from ficommon import read_jsonl, write_jsonl  # noqa: E402
@@ -139,6 +141,21 @@ class B1Tests(unittest.TestCase):
         self.assertIn("N5 -- NOT EVALUABLE", text)
         cells = [s for s in read_jsonl(self.p("sum.jsonl")) if "n_rows" in s]
         self.assertEqual(len(cells), len(DS) * len(LS))
+
+    def test_separation_set_stability_moves_with_L_and_ties_are_included(self):
+        bases = [base_row(i=k) for k in range(6)]
+        traces = [trace(rejoin_at_20(), i=0), trace(three_token_run(), i=1), trace(never_rejoins(), i=2),
+                  trace(rejoin_immediately(), i=3), trace(["x%d" % k for k in range(3)] + BASE_CONT[3:], i=4),
+                  trace(rejoin_at_20(), i=5)]
+        summ = summarise.summarise(score.sweep(bases, traces, DS, LS))
+        topL = [s["jaccard"] for s in summ if s.get("sweep_axis") == "L" and s["position_set"] == "top_decile_div"]
+        sepL = [s["jaccard"] for s in summ if s.get("sweep_axis") == "L" and s["position_set"] == "separation_resync0"]
+        self.assertTrue(topL and all(j == 1.0 for j in topL))      # L-invariant by construction
+        self.assertTrue(any(j is not None and j < 1.0 for j in sepL))  # the separation set moves with L
+        sat = summarise.summarise(score.sweep(bases[:3], [trace(["z%d_%d" % (k, j) for j in range(128)], i=k) for k in range(3)], DS, LS))
+        cell = [s for s in sat if "n_rows" in s][0]
+        self.assertEqual(cell["top_decile_count"], 3)
+        self.assertEqual(cell["n_tied_at_cutoff"], 2)
 
     def test_nulls_each_direction(self):
         # N1 fires on a corpus that rejoins everywhere; N2 fires on one that separates everywhere.

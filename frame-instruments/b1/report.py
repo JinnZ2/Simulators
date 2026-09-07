@@ -19,7 +19,7 @@ import nulls  # noqa: E402
 
 SECTIONS = ["Counts and the case set present", "D sweep", "L sweep", "Stability overlaps",
             "REAL vs PERMUTED, side by side", "NULLS TRIGGERED (N1-N5)"]
-COLS = ["model_id", "D", "L", "n_rows", "n_positions", "mean_div", "resync_rate", "top_decile_count"]
+COLS = ["model_id", "D", "L", "n_rows", "n_positions", "mean_div", "resync_rate", "top_decile_count", "n_tied_at_cutoff", "separation_count"]
 
 
 def table(header, rows):
@@ -39,9 +39,9 @@ def sweep_table(cells, order):
 
 
 def stab_table(stab, arm=None):
-    hdr = (["arm"] if arm else []) + ["model_id", "sweep_axis", "held", "from", "to", "jaccard"]
-    rows = [([arm] if arm else []) + [s["model_id"], s["sweep_axis"], s["held"], s["from"], s["to"], s["jaccard"]]
-            for s in sorted(stab, key=lambda s: (s["model_id"], s["sweep_axis"], str(s["held"]), s["from"]))]
+    hdr = (["arm"] if arm else []) + ["model_id", "position_set", "sweep_axis", "held", "from", "to", "jaccard"]
+    rows = [([arm] if arm else []) + [s["model_id"], s.get("position_set"), s["sweep_axis"], s["held"], s["from"], s["to"], s["jaccard"]]
+            for s in sorted(stab, key=lambda s: (s["model_id"], str(s.get("position_set")), s["sweep_axis"], str(s["held"]), s["from"]))]
     return table(hdr, rows)
 
 

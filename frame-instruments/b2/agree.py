@@ -1,8 +1,11 @@
 """B2.4 agree.py -- agreement across independent auditors. No correctness.
 
 responses.jsonl: reader_id, case_id, condition (A|B|C|D1|D2), posed, target
-  D1 = the A-stage response under D; each D1 row must hash to a commit in
-  commits.jsonl (the lock enforced again at scoring time).
+  D1 = the A-stage response under D; each D1 row must hash to the commit
+  RECORDED AT RELEASE for that (reader, case) in released.jsonl, and every
+  D1/D2 row needs a release record. A commit appended after release
+  therefore cannot rewrite the committed reading (the lock enforced again
+  at scoring time, against the release and not against any commit).
 cases.jsonl supplies the key (for anchoring) and the optional arm.
 
 Two readers agree on a field when the normalised strings are equal
@@ -13,13 +16,15 @@ Output rows, in order:
   1. the A vs D1 check (FIRST): per case, within-A, within-D1 and cross
      A x D1 pairwise agreement; failed when the within values differ by
      more than --divergence-threshold or the cross falls below both
-     withins by more than it. [CHOICE] default 0.2, printed.
+     withins by more than it. [CHOICE] default 0.2, printed. With fewer
+     than two auditors on either side nothing can be compared and the
+     check is NOT EVALUABLE (failed: null), never a pass.
   2. per (case, condition): n_auditors, agree_posed, agree_target,
      full_disagreement_pairs (pairs matching on neither field).
   3. per case, C vs D: key_match_rate under C and under D2, and the
      ratify rate among D readers whose D1 differed from the key.
 
-Command: python3 agree.py RESPONSES.jsonl --cases CASES.jsonl --commits COMMITS.jsonl --out AGREE.jsonl [--divergence-threshold 0.2]
+Command: python3 agree.py RESPONSES.jsonl --cases CASES.jsonl --released RELEASED.jsonl --out AGREE.jsonl [--divergence-threshold 0.2]
 """
 import itertools
 import os
@@ -42,19 +47,22 @@ def same(a, b, k):
     return norm(a[k]) == norm(b[k])
 
 
-def validate(responses, commits):
+def validate(responses, released):
     probs = []
-    hashes = set(c.get("sha256") for c in commits)
+    rel = {(x.get("reader_id"), x.get("case_id")): x.get("commit_sha256") for x in released}
     for n, r in enumerate(responses, 1):
         w = "row %d" % n
         p = check_fields(r, RESP_FIELDS, w)
         if p:
             probs += p
             continue
+        key = (r["reader_id"], r["case_id"])
         if r["condition"] not in CONDS:
             probs.append("%s: condition must be one of %s" % (w, CONDS))
-        elif r["condition"] == "D1" and response_hash({"posed": r["posed"], "target": r["target"]}) not in hashes:
-            probs.append("%s: D1 response for %s/%s has no matching commit" % (w, r["reader_id"], r["case_id"]))
+        elif r["condition"] in ("D1", "D2") and key not in rel:
+            probs.append("%s: %s row for %s/%s has no release record" % (w, r["condition"], key[0], key[1]))
+        elif r["condition"] == "D1" and response_hash({"posed": r["posed"], "target": r["target"]}) != rel[key]:
+            probs.append("%s: D1 response for %s/%s does not hash to the commit released against" % (w, key[0], key[1]))
     raise_if(probs)
 
 
@@ -84,8 +92,10 @@ def ad_check(by, case, thr):
             fails.append("within differ")
         if cr is not None and wa is not None and wd is not None and min(wa, wd) - cr > thr:
             fails.append("cross below withins")
-        out["diverged_" + k] = fails
-    out["diverged"] = bool(out["diverged_posed"] or out["diverged_target"])
+        out["diverged_" + k] = fails if (wa is not None and wd is not None) else None
+    ev = [out["diverged_posed"], out["diverged_target"]]
+    out["evaluable"] = any(v is not None for v in ev)
+    out["diverged"] = (bool(out["diverged_posed"] or out["diverged_target"]) if out["evaluable"] else None)
     return out
 
 
@@ -104,8 +114,8 @@ def anchoring(by, case, key):
             "ratify_rate_D": round(mean(key_match(r, key) for r in independent), 4) if independent else None}
 
 
-def score(responses, cases, commits, thr):
-    validate(responses, commits)
+def score(responses, cases, released, thr):
+    validate(responses, released)
     keys = {c["case_id"]: c for c in cases}
     by = {}
     for r in responses:
@@ -114,7 +124,9 @@ def score(responses, cases, commits, thr):
         by.setdefault((r["case_id"], r["condition"]), []).append(r)
     ids = sorted(keys)
     checks = [ad_check(by, c, thr) for c in ids if (c, "A") in by or (c, "D1") in by]
-    head = {"a_vs_d1_check": checks, "failed": any(c["diverged"] for c in checks),
+    evaluable = [c for c in checks if c["evaluable"]]
+    head = {"a_vs_d1_check": checks, "evaluable": bool(evaluable),
+            "failed": (any(c["diverged"] for c in evaluable) if evaluable else None),
             "divergence_threshold": thr, "match_source": MATCH_SOURCE}
     cells = [dict({"case_id": c, "condition": cond, "arm": keys[c].get("arm")}, **pair_stats(by[(c, cond)]),
                   match_source=MATCH_SOURCE)
@@ -125,26 +137,26 @@ def score(responses, cases, commits, thr):
 
 def main(argv=None):
     try:
-        a = parse_argv(argv, __doc__, positional=("responses",), options=("cases", "commits", "out", "divergence_threshold", "runs"),
+        a = parse_argv(argv, __doc__, positional=("responses",), options=("cases", "released", "out", "divergence_threshold", "runs"),
                        required=("cases", "out"), defaults={"divergence_threshold": "0.2"})
     except Invalid as e:
         return usage_exit(e)
     if a is None:
         return 0
-    with Run("b2/agree.py", vars(a), None, [a.responses, a.cases, a.commits], a.out, a.runs) as run:
+    with Run("b2/agree.py", vars(a), None, [a.responses, a.cases, a.released], a.out, a.runs) as run:
         try:
             thr = float(a.divergence_threshold)
             responses = read_jsonl(a.responses)
             if not responses:
                 return finish(run, "empty", {"responses": 0})
             cases, _ = validate_cases(read_jsonl(a.cases))
-            commits = read_jsonl(a.commits) if a.commits and os.path.exists(a.commits) else []
-            out = score(responses, cases, commits, thr)
+            released = read_jsonl(a.released) if a.released and os.path.exists(a.released) else []
+            out = score(responses, cases, released, thr)
         except (Invalid, ValueError) as e:
             return finish(run, "error", notes=str(e))
         write_jsonl(a.out, out)
-        return finish(run, "ok", {"a_vs_d1_failed": out[0]["failed"], "cells": len(out) - 1 - len(cases),
-                                  "cases": len(cases)})
+        return finish(run, "ok", {"a_vs_d1_failed": out[0]["failed"], "a_vs_d1_evaluable": out[0]["evaluable"],
+                                  "cells": len(out) - 1 - len(cases), "cases": len(cases)})
 
 
 if __name__ == "__main__":

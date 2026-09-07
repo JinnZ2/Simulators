@@ -10660,7 +10660,21 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `agree.py` since the two take different inputs, recorded in
   `b4/BUILD_NOTES.md`. Every open choice is marked in `BUILD_NOTES.md`;
   each build ships `samples/` from its constructed fixture; suites are
-  13 + 9 + 5 + 3 tests. CC0.
+  13 + 10 + 5 + 3 tests. **Audited after merge by running, not
+  reading** (`audit.py`, `CLAIM_TABLE.md` `FI_001..011`, same-node
+  declared): eight findings, six repaired and pinned — a module-name
+  collision that failed 3 B4 tests under one process; adjacent-L
+  stability identically 1.0 because `div_D` is L-invariant, so a
+  separation set (`resync_D == 0`) now carries the L axis; a cyclic
+  Latin square that balanced position and confounded carryover,
+  replaced by a Williams square; a post-release commit that validated a
+  rewritten D1, so scoring now checks against the release record; a
+  vacuous A-vs-D1 pass at one auditor, now NOT EVALUABLE; saturated
+  ties picking the top decile by name, now included and counted — and
+  two recorded, not repaired, because the definition is the spec's: a
+  rejoin shifted by one token reads `resync 0` while `div` falls to
+  0.016, and N4 rests on one permutation draw (permuted spread 0.469–0.546
+  over 30 seeds against real 0.672 on the fixture). CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

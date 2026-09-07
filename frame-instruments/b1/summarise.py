@@ -3,9 +3,14 @@ file; no branching on which it got.
 
 Per (D, L, model_id): n_rows, mean_div, resync_rate, top-decile count and
 the top-decile position set (position = case_id/i/branch_rank; top decile
-= the ceil(n/10) rows with the largest div_D, ties broken by position).
-STABILITY rows: Jaccard overlap of top-decile position sets between
-adjacent D values at fixed L, and adjacent L values at fixed D.
+= the ceil(n/10) rows with the largest div_D, PLUS every row tied with the
+cutoff value, so a saturated stratum reports the whole stratum and
+n_tied_at_cutoff says so), and the separation set (positions with
+resync_D == 0, the readout that depends on L).
+STABILITY rows: Jaccard overlap between adjacent D at fixed L and adjacent
+L at fixed D, for BOTH position sets (position_set = top_decile_div |
+separation_resync0). div_D does not depend on L, so the top-decile set is
+identical across L by construction; the separation set is what moves.
 Summary rows carry n_rows; stability rows carry sweep_axis. One file.
 
 Command: python3 summarise.py SEPARATIONS.jsonl --out SUMMARY.jsonl
@@ -24,9 +29,16 @@ def pos(r):
 
 
 def top_decile(rows):
+    """ceil(n/10) rows by div_D descending, plus every row tied at the cutoff."""
     k = max(1, int(math.ceil(len(rows) / 10.0)))
     ranked = sorted(rows, key=lambda r: (-r["div_D"], pos(r)))
-    return sorted(set(pos(r) for r in ranked[:k]))
+    cutoff = ranked[k - 1]["div_D"]
+    chosen = [r for r in ranked if r["div_D"] >= cutoff]
+    return sorted(set(pos(r) for r in chosen)), len(chosen) - k
+
+
+def separation_set(rows):
+    return sorted(set(pos(r) for r in rows if r["resync_D"] == 0))
 
 
 def jaccard(a, b):
@@ -43,33 +55,36 @@ def summarise(rows):
     cells = {}
     for r in rows:
         cells.setdefault((r["model_id"], r["D"], r["L"]), []).append(r)
-    summary, top = [], {}
+    summary, sets = [], {"top_decile_div": {}, "separation_resync0": {}}
     for (m, D, L) in sorted(cells):
         sub = cells[(m, D, L)]
-        t = top_decile(sub)
-        top[(m, D, L)] = t
+        t, tied = top_decile(sub)
+        sep = separation_set(sub)
+        sets["top_decile_div"][(m, D, L)], sets["separation_resync0"][(m, D, L)] = t, sep
         summary.append({"model_id": m, "D": D, "L": L, "n_rows": len(sub),
                         "n_positions": len(set(pos(r) for r in sub)),
                         "mean_div": round(mean(r["div_D"] for r in sub), 6),
                         "resync_rate": round(mean(r["resync_D"] for r in sub), 6),
                         "mean_ent": round(mean(r["ent_i"] for r in sub), 6),
                         "mean_gap": round(mean(r["gap_i"] for r in sub), 6),
-                        "top_decile_count": len(t), "top_decile_positions": t})
+                        "top_decile_count": len(t), "n_tied_at_cutoff": tied, "top_decile_positions": t,
+                        "separation_count": len(sep), "separation_positions": sep})
     models = sorted(set(k[0] for k in cells))
     Ds = sorted(set(k[1] for k in cells))
     Ls = sorted(set(k[2] for k in cells))
     stability = []
-    for m in models:
-        for L in Ls:
-            for d1, d2 in zip(Ds, Ds[1:]):
-                if (m, d1, L) in top and (m, d2, L) in top:
-                    stability.append({"model_id": m, "sweep_axis": "D", "held": {"L": L}, "from": d1, "to": d2,
-                                      "jaccard": jaccard(top[(m, d1, L)], top[(m, d2, L)])})
-        for D in Ds:
-            for l1, l2 in zip(Ls, Ls[1:]):
-                if (m, D, l1) in top and (m, D, l2) in top:
-                    stability.append({"model_id": m, "sweep_axis": "L", "held": {"D": D}, "from": l1, "to": l2,
-                                      "jaccard": jaccard(top[(m, D, l1)], top[(m, D, l2)])})
+    for kind, top in sets.items():
+        for m in models:
+            for L in Ls:
+                for d1, d2 in zip(Ds, Ds[1:]):
+                    if (m, d1, L) in top and (m, d2, L) in top:
+                        stability.append({"model_id": m, "position_set": kind, "sweep_axis": "D", "held": {"L": L},
+                                          "from": d1, "to": d2, "jaccard": jaccard(top[(m, d1, L)], top[(m, d2, L)])})
+            for D in Ds:
+                for l1, l2 in zip(Ls, Ls[1:]):
+                    if (m, D, l1) in top and (m, D, l2) in top:
+                        stability.append({"model_id": m, "position_set": kind, "sweep_axis": "L", "held": {"D": D},
+                                          "from": l1, "to": l2, "jaccard": jaccard(top[(m, D, l1)], top[(m, D, l2)])})
     return summary + stability
 
 

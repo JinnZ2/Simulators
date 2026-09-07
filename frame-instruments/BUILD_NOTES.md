@@ -49,8 +49,13 @@ invocations unchanged.
   `(model_id, D, L)` stratum, independently per stratum, so stratum
   means are invariant and the null acts on the top-decile position sets.
   The report states this beside the numbers.
-- **Top decile.** The `ceil(n/10)` rows with the largest `div_D`, ties
-  broken by position string; one row minimum.
+- **Top decile.** The `ceil(n/10)` rows with the largest `div_D` plus
+  every row tied at the cutoff, with `n_tied_at_cutoff` printed, so a
+  saturated stratum reports itself whole rather than a name-ordered
+  subset (FI_008). Stability is computed on two position sets, the
+  top-decile set and the separation set (`resync_D == 0`); the first is
+  L-invariant by construction, the second is what carries L dependence
+  (FI_002).
 - **Section 6, N1-N5** (`b1/nulls.py`, from the reference spec section
   7). Each prints its number, its threshold and one of TRIGGERED /
   not triggered / NOT EVALUABLE. Thresholds are arguments with defaults
@@ -75,13 +80,18 @@ invocations unchanged.
 - **Leak check.** Field set exact on every row AND withheld text absent
   by substring. A key whose `why` quotes the statement verbatim is a
   real leak under condition B and is refused as one.
-- **Latin square.** Blocks of four readers, each block the cyclic shifts
-  of a fresh seeded permutation; readers past the last full block carry
-  seeded permutations and the shortfall is in the run record notes.
+- **Williams square.** Blocks of four readers, each block the n=4
+  row-complete Latin square relabelled by a seeded permutation, so every
+  condition is in every position once AND every ordered successor pair
+  occurs once per block (a cyclic square confounds carryover, FI_003);
+  readers past the last full block carry seeded permutations and the
+  shortfall is in the run record notes.
 - **Lock.** Two invocations, one path each. The commit path never opens
   `cases.jsonl`; the release path never writes `commits.jsonl`.
-  `agree.py` re-checks every D1 row against the commit hashes, so the
-  lock is enforced at scoring time as well.
+  `agree.py` re-checks every D1 row against the commit hash recorded in
+  `released.jsonl` for that reader and case (`--released`), and requires
+  a release record for every D row, so a commit appended after release
+  cannot rewrite the committed reading (FI_004).
 - **Agreement rule.** Normalised exact match (casefold, whitespace
   collapsed, trailing punctuation stripped), written into every row as
   `match_source`. No matching engine; a different rule is a different
@@ -89,7 +99,9 @@ invocations unchanged.
 - **A vs D1 check** is the first row of the output. Divergence fires
   when the within-A and within-D1 agreements differ by more than
   `--divergence-threshold`, or the cross A x D1 agreement falls below
-  both withins by more than it. Default 0.2, printed.
+  both withins by more than it. Default 0.2, printed. With fewer than
+  two auditors on either side it is `evaluable: false`, `failed: null`
+  (FI_007).
 - **Anchoring.** `key_match_rate` under C and under D2, and among D
   readers whose committed D1 differed from the key, the fraction whose
   D2 matches it (`ratify_rate_D`).
@@ -105,6 +117,11 @@ invocations unchanged.
 - **The B3 result** (condition-B agreement between arms) is read from
   two `agree.py` outputs side by side; each `agree.py` row carries the
   arm from `cases.jsonl`. No comparison script is built.
+
+## Audit
+
+`AUDIT_NOTES.md`, `CLAIM_TABLE.md` (`FI_001..011`) and `audit.py`, which
+recomputes every finding. Same-node audit, declared as such.
 
 ## What no build here does
 
