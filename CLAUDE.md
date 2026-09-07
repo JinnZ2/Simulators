@@ -10673,8 +10673,8 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   ties picking the top decile by name, now included and counted — and
   two recorded, not repaired, because the definition is the spec's: a
   rejoin shifted by one token reads `resync 0` while `div` falls to
-  0.016, and N4 rests on one permutation draw (fires in 5 of 30 seeds
-  at real 0.5). CC0.
+  0.016, and N4 rests on one permutation draw (permuted spread 0.469–0.546
+  over 30 seeds against real 0.672 on the fixture). CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
