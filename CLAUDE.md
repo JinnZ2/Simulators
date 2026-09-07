@@ -10701,9 +10701,25 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   and never labelled null. **E** `slot_map.py`, reader-in-frame: reader
   presence alone, and whether an asserted premise moves retrieval
   (Jaccard on matched ids) or only agreement. Every threshold is an
-  argument, printed. Claims `RC_001..008`; all fixtures constructed,
-  nothing a measurement of any published model. The queued
-  protocol-over-information survey is unspecced and unbuilt.
+  argument, printed. **WORK_ORDER_02 then tested the sim itself.**
+  `multiseed.py`, 30 seeds, model fixed as seed 1: the dense Δ of true
+  rates between canonicality levels is +0.0016 (sd 0.021), the seed-1
+  Δ of 0.020 sits inside its 2-sd band, and paired streams give Δ = 0
+  exactly — no cross-term, the factorization stands (`RC_009`). B was
+  emitting accidental collisions under `jaccard` alone (3/0/2/1 hidden
+  fabrications at seed 1, the one deflation in the table); a deliberate
+  `collision` cell with real non-answer distractors now exists, seed 1
+  reproducing at 0, and at 0.3 measured − true turns negative nearly
+  everywhere while in the low-canonicality corners inflation and
+  deflation offset, so the per-cell hidden / missed counts are printed
+  beside the signed scalar (`RC_010`, `RC_013`). A gained a pre-flight
+  that scores the catalog's canonical subset under every matcher and
+  aborts on disagreement, a bug gate not a validation (`RC_011`); the A
+  fixture is named `kill_rule_boundary`, where the strict and mean KILL
+  forms disagree by design (`RC_012`). Claims `RC_001..013`; all
+  fixtures constructed, nothing a measurement of any published model.
+  The queued protocol-over-information survey and G
+  `preference_free_rank.py` are unbuilt.
 - `branch-set/` — Item F of the same order, marked `[OWN REPO]` and
   built as its own promotable folder. `branch_set.py` serializes a held
   branch set (generator, predicted divergence, discriminator, cost,

@@ -89,7 +89,7 @@ def sim(seed, n=10, queries=50):
         rng = random.Random(seed)  # identical draws: the model is unchanged
         rows = []
         for q in range(queries):
-            items, fab, sup = sc.produce(rng, cat, n, "high", sc.MODEL, contract)
+            items, fab, sup, _fl = sc.produce(rng, cat, n, "high", sc.MODEL, contract)
             row = {"query_id": "q%d" % q, "category": "sparse", "n_requested": n, "items": items}
             if contract == "v2":
                 row.update({"supply_estimate": sup, "refusal_reason": ["supply_exhausted"] if len(items) < n else []})

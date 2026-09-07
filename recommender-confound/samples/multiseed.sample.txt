@@ -1,0 +1,11 @@
+seeds 30  queries 50  model {'recall': 0.9, 'fab_on_recall': 0.05, 'collision': 0.0}
+dense  independent: mean +0.0016  sd 0.0212  se 0.0039  ci95 [-0.00597, 0.00917]
+dense  paired:      mean +0.0000  sd 0.0000
+dense  verdict: delta ~ 0 within noise: factorization holds
+dense  seed-1 delta +0.020 inside 2sd band 0.0423: True
+sparse  independent: mean +0.0009  sd 0.0115  se 0.0021  ci95 [-0.00319, 0.00505]
+sparse  paired:      mean +0.0000  sd 0.0000
+sparse  verdict: delta ~ 0 within noise: factorization holds
+sparse  seed-1 delta +0.002 inside 2sd band 0.0230: True
+dense delta was never anomalous; closes with no cross-term
+paired delta is exactly 0 on every seed: rendering cannot reach the true rate by construction

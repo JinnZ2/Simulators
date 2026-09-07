@@ -23,7 +23,7 @@ catalog until someone runs A on their own.
 
 ## What the sims return on the constructed model (seed 1)
 
-B, model `{recall 0.9, fab_on_recall 0.05}` identical in every corner, contract
+B, model `{recall 0.9, fab_on_recall 0.05, collision 0}` identical in every corner, contract
 v1 (fill to N):
 
 ```
@@ -63,3 +63,64 @@ The queued protocol-over-information survey is not specced and is not
 built; its signature is in `WORK_ORDER.md` as delivered. F
 (`branch_set.py`) is its own folder, `../branch-set/`, marked
 `[OWN REPO]` in the order and left promotable.
+
+## WORK_ORDER_02 (verbatim in `WORK_ORDER_02.md`)
+
+**Task 1, dense multi-seed** (`multiseed.py`, 30 seeds, model exactly as
+seed 1). Δ = true(low) − true(high) per seed:
+
+```
+row     independent mean    sd      95% CI              seed-1 Δ   2sd band   inside
+dense   +0.0016            0.0212  [-0.0060, +0.0092]   +0.020     0.042      yes
+sparse  +0.0009            0.0115  [-0.0032, +0.0051]   +0.002     0.023      yes
+paired (one model stream, separate render stream): Δ = 0.0000 on every seed, both rows
+```
+
+Verdict: Δ ~ 0 within noise, the factorization holds as written. The
+seed-1 dense Δ was one standard deviation of a 500-item binomial and was
+never anomalous; the sparse band is narrower because seven of ten items
+there are fabricated deterministically and only three vary. The paired
+design shows the stronger thing: rendering cannot reach the true rate
+by construction. Closes with no cross-term.
+
+**Task 2, collision cell.** Does B emit collisions? Yes, accidentally
+and only under `jaccard`: at collision 0, seed 1, fabricated titles
+built from the shared word pool matched a real entry 3 / 0 / 2 / 1 times
+across the corners, which is the one seed-1 deflation (dense/high
+`jaccard` −0.002). No deliberate cell existed. Added `collision` as a
+model parameter with `DISTRACTORS` real non-answer items; at 0 seed 1
+reproduces byte for byte. At collision 0.3, measured − true SIGNED:
+
+```
+corner        exact    norm     jaccard   edit     substring
+sparse/low    -0.036   -0.120   -0.252    -0.212   -0.208
+sparse/high   -0.234   -0.234   -0.262    -0.236   -0.234
+dense/low     +0.624   +0.394   -0.032    +0.066   +0.054
+dense/high    -0.048   -0.048   -0.074    -0.050   -0.048
+```
+
+The matcher hides fabrication as well as inventing it, and in the
+low-canonicality corners the two matcher effects offset: dense/low under
+`jaccard` reads −0.032 while hiding fabrications AND missing true items.
+`fabrications_hidden_by_matcher` and `true_items_missed_by_matcher` are
+printed per cell so the offset is visible; the signed scalar alone is
+not. The earlier B under-stated matcher damage.
+
+**Task 3, canonical self-test.** `confound_probe.py` now runs a
+pre-flight before any claim: the canonical subset (titles that
+self-match uniquely under the loosest matcher) is scored under every
+matcher and all have to agree to 3 decimals at 0.000. On disagreement
+the matcher set is not sound and the run ABORTS (exit 3) with no catalog claim.
+Pinned by injecting a matcher that misses everything. This diagnoses
+the instrument without a ground-truth catalog and validates nothing
+about the catalog; RC_008 stands.
+
+**Task 4, fixture promotion.** The A fixture is named
+`kill_rule_boundary` (`samples/kill_rule_boundary.sample.txt`): strict
+form KILL true, mean form false, on one input. Ranking validity there
+depends on the rule chosen. Both forms stay printed; the disagreement
+is a result.
+
+Not in this order: F repository creation, G `preference_free_rank.py`
+(specced, own repo, not started), the protocol-over-information survey
+(verbatim, unbuilt).

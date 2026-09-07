@@ -1,3 +1,4 @@
+preflight: PASS  canonical subset 33 of 33  halluc on subset {'exact': 0.0, 'norm': 0.0, 'substring': 0.0}
 matchers: exact, norm, substring
 halluc_strict[model][matcher]:
   m_exact      exact=0.350  norm=0.350  substring=0.350
