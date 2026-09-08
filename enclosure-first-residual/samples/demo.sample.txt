@@ -1,0 +1,90 @@
+enclosure_first_residual  population=F1_enclosure_only  windows=80  persons=40  method-layer=present
+choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, "DELTA_THRESHOLD": 1, "DOMINANT_RATIO": 0.5, "MIN_WITHIN_PAIRS": 3, "NULL_BAND": [0.025, 0.975], "NULL_DRAWS": 300}
+== latency_to_approach_novel
+   operationalization: seconds from onset of a novel stimulus to first approach within one body length; ceiling at trial end
+   envelope: 40 within pairs, 40 exogenous, 0 chosen (excluded), 0 unknown origin (excluded)
+   NULL FIRST (enclosure shuffled within population, 300 draws):
+      null residual mean 0.9741   band [0.9163, 0.9992]
+   between arm  n=80  residual 0.2015  CI [0.1415, 0.2839]   (nominal option_set_size only: 0.4777)
+   null gate: observed residual is below the null band; proceeding
+   within arm   n=40 pairs (|delta effective_exits| >= 1, exogenous)  residual 0.4291  CI [0.2460, 0.5855]   null band [0.8184, 0.9982]
+   compare      ratio within/between 2.1297  CI [1.1888, 3.4953]   table cell: >
+   person-stable share of between residual 0.430   null band [0.336, 0.631]   not above
+   -> ENCLOSURE_DOMINANT(fraction=0.571, CI=[0.414, 0.754])
+
+enclosure_first_residual  population=F2_trait_only  windows=80  persons=40  method-layer=present
+choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, "DELTA_THRESHOLD": 1, "DOMINANT_RATIO": 0.5, "MIN_WITHIN_PAIRS": 3, "NULL_BAND": [0.025, 0.975], "NULL_DRAWS": 300}
+== latency_to_approach_novel
+   operationalization: seconds from onset of a novel stimulus to first approach within one body length; ceiling at trial end
+   envelope: 40 within pairs, 40 exogenous, 0 chosen (excluded), 0 unknown origin (excluded)
+   NULL FIRST (enclosure shuffled within population, 300 draws):
+      null residual mean 0.9766   band [0.9143, 0.9995]
+   between arm  n=80  residual 0.9807  CI [0.8448, 0.9987]   (nominal option_set_size only: 0.9917)
+   null gate: observed residual is INSIDE the null band
+   -> UNKNOWN_measurable(observed between residual 0.9807 inside null band [0.9143, 0.9995]; enclosure terms have no traction here, so no residual is a trait candidate)
+
+enclosure_first_residual  population=F3_trait_plus_enclosure  windows=80  persons=40  method-layer=present
+choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, "DELTA_THRESHOLD": 1, "DOMINANT_RATIO": 0.5, "MIN_WITHIN_PAIRS": 3, "NULL_BAND": [0.025, 0.975], "NULL_DRAWS": 300}
+== latency_to_approach_novel
+   operationalization: seconds from onset of a novel stimulus to first approach within one body length; ceiling at trial end
+   envelope: 40 within pairs, 40 exogenous, 0 chosen (excluded), 0 unknown origin (excluded)
+   NULL FIRST (enclosure shuffled within population, 300 draws):
+      null residual mean 0.9740   band [0.9041, 0.9994]
+   between arm  n=80  residual 0.5581  CI [0.3806, 0.6977]   (nominal option_set_size only: 0.7154)
+   null gate: observed residual is below the null band; proceeding
+   within arm   n=40 pairs (|delta effective_exits| >= 1, exogenous)  residual 0.4064  CI [0.2157, 0.5792]   null band [0.8219, 0.9986]
+   compare      ratio within/between 0.7282  CI [0.4032, 1.2102]   table cell: ~
+   person-stable share of between residual 0.855   null band [0.343, 0.629]   ABOVE
+   -> TRAIT_RESIDUAL(fraction=0.477, CI=[0.276, 0.669])
+
+enclosure_first_residual  population=F4_selection_into_windows  windows=80  persons=40  method-layer=present
+choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, "DELTA_THRESHOLD": 1, "DOMINANT_RATIO": 0.5, "MIN_WITHIN_PAIRS": 3, "NULL_BAND": [0.025, 0.975], "NULL_DRAWS": 300}
+== latency_to_approach_novel
+   operationalization: seconds from onset of a novel stimulus to first approach within one body length; ceiling at trial end
+   envelope: 40 within pairs, 40 exogenous, 0 chosen (excluded), 0 unknown origin (excluded)
+   NULL FIRST (enclosure shuffled within population, 300 draws):
+      null residual mean 0.9746   band [0.9077, 0.9996]
+   between arm  n=80  residual 0.3430  CI [0.2375, 0.4407]   (nominal option_set_size only: 0.4557)
+   null gate: observed residual is below the null band; proceeding
+   within arm   n=35 pairs (|delta effective_exits| >= 1, exogenous)  residual 0.8689  CI [0.5695, 0.9844]   null band [0.8009, 0.9971]
+   compare      ratio within/between 2.5330  CI [1.6245, 3.7282]   table cell: >
+   person-stable share of between residual 0.573   null band [0.347, 0.662]   not above
+   -> VARIABLE_UNIDENT(confound: between arm passed the null gate but within-person delta enclosure does not move behavior (residual 0.869, null band [0.801, 0.997]); selection into windows likely)
+
+enclosure_first_residual  population=F5_chosen_change  windows=80  persons=40  method-layer=present
+choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, "DELTA_THRESHOLD": 1, "DOMINANT_RATIO": 0.5, "MIN_WITHIN_PAIRS": 3, "NULL_BAND": [0.025, 0.975], "NULL_DRAWS": 300}
+== latency_to_approach_novel
+   operationalization: seconds from onset of a novel stimulus to first approach within one body length; ceiling at trial end
+   envelope: 40 within pairs, 0 exogenous, 40 chosen (excluded), 0 unknown origin (excluded)
+   NULL FIRST (enclosure shuffled within population, 300 draws):
+      null residual mean 0.9749   band [0.9175, 0.9990]
+   between arm  n=80  residual 0.2028  CI [0.1343, 0.2737]   (nominal option_set_size only: 0.4364)
+   null gate: observed residual is below the null band; proceeding
+   -> OUT_OF_ENVELOPE(every within-person enclosure change was chosen by the person; reverse causation unresolvable)
+
+enclosure_first_residual  population=F6_unoperationalized  windows=80  persons=40  method-layer=present
+choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, "DELTA_THRESHOLD": 1, "DOMINANT_RATIO": 0.5, "MIN_WITHIN_PAIRS": 3, "NULL_BAND": [0.025, 0.975], "NULL_DRAWS": 300}
+== latency_to_approach_novel
+   schema gate: no operationalization string
+   -> BLOCKED(unoperationalized_term)
+
+enclosure_first_residual  population=F7_single_windows  windows=40  persons=40  method-layer=present
+choices: {"BOOT_DRAWS": 300, "CONFOUND_RATIO": 1.25, "CORRECTED_READING": true, "DELTA_THRESHOLD": 1, "DOMINANT_RATIO": 0.5, "MIN_WITHIN_PAIRS": 3, "NULL_BAND": [0.025, 0.975], "NULL_DRAWS": 300}
+== latency_to_approach_novel
+   operationalization: seconds from onset of a novel stimulus to first approach within one body length; ceiling at trial end
+   envelope: 0 within pairs, 0 exogenous, 0 chosen (excluded), 0 unknown origin (excluded)
+   flagged: 40 single-window person(s) go to the between arm only: p00, p01, p02, p03, p04, p05, p06, p07 ...
+   NULL FIRST (enclosure shuffled within population, 300 draws):
+      null residual mean 0.9471   band [0.7986, 0.9987]
+   between arm  n=40  residual 0.2760  CI [0.1578, 0.4265]   (nominal option_set_size only: 0.6663)
+   null gate: observed residual is below the null band; proceeding
+   -> BLOCKED(no_within_person_windows)
+
+summary
+  F1_enclosure_only            ENCLOSURE_DOMINANT(fraction=0.571, CI=[0.414, 0.754])
+  F2_trait_only                UNKNOWN_measurable(observed between residual 0.9807 inside null band [0.9143, 0.9995]; enclosure terms have no traction here, so no residual is a trait candidate)
+  F3_trait_plus_enclosure      TRAIT_RESIDUAL(fraction=0.477, CI=[0.276, 0.669])
+  F4_selection_into_windows    VARIABLE_UNIDENT(confound: between arm passed the null gate but within-person delta enclosure does not move behavior (residual 0.869, null band [0.801, 0.997]); selection into windows likely)
+  F5_chosen_change             OUT_OF_ENVELOPE(every within-person enclosure change was chosen by the person; reverse causation unresolvable)
+  F6_unoperationalized         BLOCKED(unoperationalized_term)
+  F7_single_windows            BLOCKED(no_within_person_windows)

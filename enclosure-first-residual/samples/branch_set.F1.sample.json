@@ -1,0 +1,89 @@
+{
+  "branches": [
+    {
+      "access_kind": null,
+      "cost": 1.0,
+      "discriminator": "within-person delta effective_exits (exogenous change)",
+      "eliminated_by": null,
+      "generator": "behavior is a function of effective exits; it moves when they move",
+      "id": "enclosure_constraint",
+      "instrument_history": [],
+      "origin_pattern": "behavior attributed to individual trait",
+      "predicted_divergence": "residual_within << residual_between",
+      "predicts_elsewhere": [
+        {
+          "already_in_record": "unknown",
+          "domain": "animal behavior",
+          "pattern": "captive-vs-released behavior tracks the option set, same discriminator",
+          "record_state": "instrument_exists_unrun"
+        }
+      ],
+      "status": "open",
+      "suppression_cause": "prior"
+    },
+    {
+      "access_kind": null,
+      "cost": 1.0,
+      "discriminator": "within-person delta effective_exits (exogenous change)",
+      "eliminated_by": "K run on F1_enclosure_only / latency_to_approach_novel: ENCLOSURE_DOMINANT(fraction=0.571, CI=[0.414, 0.754])",
+      "generator": "behavior is a stable property of the person",
+      "id": "trait_plain",
+      "instrument_history": [],
+      "origin_pattern": "behavior attributed to individual trait",
+      "predicted_divergence": "residual_within ~ residual_between with a person-stable residual share",
+      "predicts_elsewhere": [
+        {
+          "already_in_record": "unknown",
+          "domain": "animal behavior",
+          "pattern": "captive-vs-released behavior tracks the option set, same discriminator",
+          "record_state": "instrument_exists_unrun"
+        }
+      ],
+      "status": "eliminated",
+      "suppression_cause": "prior"
+    },
+    {
+      "access_kind": null,
+      "cost": 1.0,
+      "discriminator": "within-person delta effective_exits (exogenous change)",
+      "eliminated_by": null,
+      "generator": "persons are sorted into enclosures by the behavior; association is not causal",
+      "id": "selection_into_enclosure",
+      "instrument_history": [],
+      "origin_pattern": "behavior attributed to individual trait",
+      "predicted_divergence": "residual_within > residual_between",
+      "predicts_elsewhere": [
+        {
+          "already_in_record": "unknown",
+          "domain": "animal behavior",
+          "pattern": "captive-vs-released behavior tracks the option set, same discriminator",
+          "record_state": "instrument_exists_unrun"
+        }
+      ],
+      "status": "open",
+      "suppression_cause": "prior"
+    },
+    {
+      "access_kind": null,
+      "cost": 1.0,
+      "discriminator": "within-person delta effective_exits (exogenous change)",
+      "eliminated_by": null,
+      "generator": "the human label set manufactures the trait; graded forms do not show it",
+      "id": "measurement_artifact_of_label_set",
+      "instrument_history": [],
+      "origin_pattern": "behavior attributed to individual trait",
+      "predicted_divergence": "effect present under closed labels, absent under graded forms",
+      "predicts_elsewhere": [
+        {
+          "already_in_record": "unknown",
+          "domain": "animal behavior",
+          "pattern": "captive-vs-released behavior tracks the option set, same discriminator",
+          "record_state": "instrument_exists_unrun"
+        }
+      ],
+      "status": "open",
+      "suppression_cause": "prior"
+    }
+  ],
+  "schema_version": "1.0"
+}
