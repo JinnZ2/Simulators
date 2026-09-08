@@ -10732,6 +10732,23 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `buildable` / `simulable` / `blocked(+blocker)`); a long lag on a
   branch not stating access suppression is flagged, never rewritten.
   Claims `BS_001..005`. Stdlib only, CC0.
+- `observer-position-control/` — Item J, a method-layer instrument
+  built to the delivered order (verbatim): is the maladaptive /
+  adaptive label set by the behavior or by whether the describer is
+  inside the population described? Label extraction over a published
+  corpus, three describer positions (non-human / out-group / own),
+  the behavior pattern held fixed as a filter on blind-coded rows. Null
+  (a), the main null, is enforced by file boundary — the behavior file
+  carries only the four blind-coded fields and any other field is
+  refused as "coder was not blind" — with nulls (b) era, (c) literature
+  type, (d) severity as stratified Cramér's V, the prediction in the
+  code before any row is read, and an enum verdict
+  (`OBSERVER_INDEXED` / `BEHAVIOR_DIFFERS` / `EXPLAINED_BY_*` /
+  `NO_ASSOCIATION` / `UNKNOWN_measurable`). Two readings the fixtures
+  forced: a constant label is zero association not "not computable",
+  and a perfect position × decade confound returns UNKNOWN naming era
+  rather than either explained verdict. Claims `OPC_001..006`; nothing
+  coded, everything constructed. Stdlib only, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
