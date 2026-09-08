@@ -1,0 +1,2478 @@
+{
+ "population": "F1_enclosure_only",
+ "operationalizations": {
+  "latency_to_approach_novel": "seconds from onset of a novel stimulus to first approach within one body length; ceiling at trial end",
+  "perseveration_rate": "fraction of trials after a rule change on which the previously rewarded response is repeated"
+ },
+ "windows": [
+  {
+   "person_id": "p00",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 5,
+    "exit_cost": [
+     0.13,
+     0.074,
+     2.262,
+     1.678,
+     1.548
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     0
+    ],
+    "reversibility": [
+     0,
+     1,
+     1,
+     0,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 7.963
+   }
+  },
+  {
+   "person_id": "p00",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 2,
+    "exit_cost": [
+     0.148,
+     1.129
+    ],
+    "reachability": [
+     0,
+     0
+    ],
+    "reversibility": [
+     1,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 11.169
+   }
+  },
+  {
+   "person_id": "p01",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 7,
+    "exit_cost": [
+     0.625,
+     0.697,
+     0.859,
+     0.838,
+     0.891,
+     2.379,
+     1.852
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     0,
+     1,
+     0
+    ],
+    "reversibility": [
+     0,
+     0,
+     1,
+     0,
+     1,
+     1,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 4.327
+   }
+  },
+  {
+   "person_id": "p01",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 4,
+    "exit_cost": [
+     0.769,
+     0.479,
+     1.904,
+     1.1
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     0,
+     1,
+     1,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 7.707
+   }
+  },
+  {
+   "person_id": "p02",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 3,
+    "exit_cost": [
+     0.712,
+     0.493,
+     0.384
+    ],
+    "reachability": [
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     1,
+     0,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 8.264
+   }
+  },
+  {
+   "person_id": "p02",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 4,
+    "exit_cost": [
+     0.312,
+     0.771,
+     0.573,
+     0.541
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     0,
+     0,
+     0,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 6.763
+   }
+  },
+  {
+   "person_id": "p03",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 4,
+    "exit_cost": [
+     0.61,
+     0.568,
+     2.108,
+     1.606
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     0,
+     0,
+     1,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 7.243
+   }
+  },
+  {
+   "person_id": "p03",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 4,
+    "exit_cost": [
+     0.462,
+     1.567,
+     0.758,
+     1.831
+    ],
+    "reachability": [
+     1,
+     1,
+     0,
+     1
+    ],
+    "reversibility": [
+     1,
+     1,
+     0,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 9.519
+   }
+  },
+  {
+   "person_id": "p04",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 4,
+    "exit_cost": [
+     0.121,
+     0.064,
+     0.128,
+     1.536
+    ],
+    "reachability": [
+     1,
+     1,
+     0,
+     0
+    ],
+    "reversibility": [
+     0,
+     1,
+     0,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 9.15
+   }
+  },
+  {
+   "person_id": "p04",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 3,
+    "exit_cost": [
+     0.192,
+     1.42,
+     1.909
+    ],
+    "reachability": [
+     1,
+     1,
+     0
+    ],
+    "reversibility": [
+     1,
+     1,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 7.628
+   }
+  },
+  {
+   "person_id": "p05",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 6,
+    "exit_cost": [
+     0.27,
+     0.265,
+     0.671,
+     2.466,
+     2.45,
+     0.92
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     0
+    ],
+    "reversibility": [
+     0,
+     0,
+     0,
+     1,
+     0,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 6.784
+   }
+  },
+  {
+   "person_id": "p05",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 6,
+    "exit_cost": [
+     0.649,
+     0.626,
+     0.513,
+     0.238,
+     0.879,
+     2.207
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     1,
+     0,
+     0,
+     1,
+     1,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 5.036
+   }
+  },
+  {
+   "person_id": "p06",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 1,
+    "exit_cost": [
+     0.31
+    ],
+    "reachability": [
+     1
+    ],
+    "reversibility": [
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 9.486
+   }
+  },
+  {
+   "person_id": "p06",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 4,
+    "exit_cost": [
+     0.404,
+     0.265,
+     1.062,
+     1.77
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     0
+    ],
+    "reversibility": [
+     0,
+     0,
+     1,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 8.49
+   }
+  },
+  {
+   "person_id": "p07",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 6,
+    "exit_cost": [
+     0.553,
+     0.468,
+     0.847,
+     0.382,
+     0.478,
+     1.075
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     1,
+     1,
+     0,
+     0,
+     0,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 4.335
+   }
+  },
+  {
+   "person_id": "p07",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 4,
+    "exit_cost": [
+     0.415,
+     0.277,
+     0.132,
+     1.6
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     1,
+     1,
+     0,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 7.64
+   }
+  },
+  {
+   "person_id": "p08",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 2,
+    "exit_cost": [
+     0.695,
+     1.92
+    ],
+    "reachability": [
+     1,
+     1
+    ],
+    "reversibility": [
+     1,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 9.405
+   }
+  },
+  {
+   "person_id": "p08",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 2,
+    "exit_cost": [
+     1.472,
+     1.748
+    ],
+    "reachability": [
+     1,
+     0
+    ],
+    "reversibility": [
+     1,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 10.448
+   }
+  },
+  {
+   "person_id": "p09",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 8,
+    "exit_cost": [
+     0.147,
+     0.549,
+     0.837,
+     0.115,
+     0.518,
+     1.175,
+     1.909,
+     1.579
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     0,
+     0,
+     1
+    ],
+    "reversibility": [
+     1,
+     0,
+     1,
+     1,
+     0,
+     0,
+     1,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 4.561
+   }
+  },
+  {
+   "person_id": "p09",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 3,
+    "exit_cost": [
+     0.128,
+     0.148,
+     0.802
+    ],
+    "reachability": [
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     0,
+     0,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 7.922
+   }
+  },
+  {
+   "person_id": "p10",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 6,
+    "exit_cost": [
+     0.682,
+     0.137,
+     0.824,
+     0.372,
+     0.875,
+     1.828
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     0
+    ],
+    "reversibility": [
+     1,
+     1,
+     1,
+     1,
+     0,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 5.575
+   }
+  },
+  {
+   "person_id": "p10",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 8,
+    "exit_cost": [
+     0.059,
+     0.885,
+     0.301,
+     0.557,
+     0.432,
+     0.316,
+     0.22,
+     1.835
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     0,
+     0
+    ],
+    "reversibility": [
+     1,
+     0,
+     1,
+     0,
+     1,
+     1,
+     1,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 4.932
+   }
+  },
+  {
+   "person_id": "p11",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 5,
+    "exit_cost": [
+     0.747,
+     0.126,
+     0.69,
+     0.127,
+     0.538
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     1,
+     0,
+     1,
+     1,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 4.735
+   }
+  },
+  {
+   "person_id": "p11",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 6,
+    "exit_cost": [
+     0.724,
+     0.542,
+     0.833,
+     0.259,
+     0.292,
+     1.937
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     0,
+     1
+    ],
+    "reversibility": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 6.704
+   }
+  },
+  {
+   "person_id": "p12",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 1,
+    "exit_cost": [
+     0.068
+    ],
+    "reachability": [
+     1
+    ],
+    "reversibility": [
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 8.636
+   }
+  },
+  {
+   "person_id": "p12",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 4,
+    "exit_cost": [
+     0.449,
+     0.78,
+     1.196,
+     2.178
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     1,
+     0,
+     0,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 7.879
+   }
+  },
+  {
+   "person_id": "p13",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 2,
+    "exit_cost": [
+     0.653,
+     0.759
+    ],
+    "reachability": [
+     1,
+     1
+    ],
+    "reversibility": [
+     1,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 8.382
+   }
+  },
+  {
+   "person_id": "p13",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 2,
+    "exit_cost": [
+     0.514,
+     1.473
+    ],
+    "reachability": [
+     1,
+     0
+    ],
+    "reversibility": [
+     1,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 8.209
+   }
+  },
+  {
+   "person_id": "p14",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 3,
+    "exit_cost": [
+     0.711,
+     0.63,
+     1.698
+    ],
+    "reachability": [
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     1,
+     1,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 7.465
+   }
+  },
+  {
+   "person_id": "p14",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 6,
+    "exit_cost": [
+     0.196,
+     0.463,
+     0.724,
+     1.872,
+     2.466,
+     1.077
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     0,
+     1,
+     1
+    ],
+    "reversibility": [
+     1,
+     0,
+     0,
+     0,
+     1,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 7.241
+   }
+  },
+  {
+   "person_id": "p15",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 7,
+    "exit_cost": [
+     0.476,
+     0.602,
+     0.423,
+     0.634,
+     1.49,
+     0.553,
+     1.768
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     0,
+     0,
+     1
+    ],
+    "reversibility": [
+     1,
+     0,
+     1,
+     1,
+     1,
+     0,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 6.203
+   }
+  },
+  {
+   "person_id": "p15",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 6,
+    "exit_cost": [
+     0.699,
+     0.598,
+     0.363,
+     0.485,
+     0.724,
+     0.223
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     1,
+     1,
+     1,
+     0,
+     1,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 4.382
+   }
+  },
+  {
+   "person_id": "p16",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 2,
+    "exit_cost": [
+     0.471,
+     0.848
+    ],
+    "reachability": [
+     1,
+     0
+    ],
+    "reversibility": [
+     1,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 9.339
+   }
+  },
+  {
+   "person_id": "p16",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 4,
+    "exit_cost": [
+     0.496,
+     0.127,
+     0.267,
+     0.292
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     0
+    ],
+    "reversibility": [
+     0,
+     0,
+     0,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 7.68
+   }
+  },
+  {
+   "person_id": "p17",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 5,
+    "exit_cost": [
+     0.157,
+     0.823,
+     1.923,
+     1.223,
+     1.921
+    ],
+    "reachability": [
+     1,
+     1,
+     0,
+     1,
+     1
+    ],
+    "reversibility": [
+     1,
+     0,
+     1,
+     1,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 10.01
+   }
+  },
+  {
+   "person_id": "p17",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 7,
+    "exit_cost": [
+     0.542,
+     0.076,
+     0.877,
+     0.256,
+     0.595,
+     0.428,
+     1.265
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     0,
+     0,
+     1
+    ],
+    "reversibility": [
+     0,
+     1,
+     1,
+     1,
+     1,
+     0,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 5.204
+   }
+  },
+  {
+   "person_id": "p18",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 7,
+    "exit_cost": [
+     0.818,
+     0.071,
+     0.534,
+     0.061,
+     0.663,
+     2.027,
+     1.476
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     0,
+     1,
+     0
+    ],
+    "reversibility": [
+     0,
+     0,
+     1,
+     1,
+     1,
+     1,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 7.055
+   }
+  },
+  {
+   "person_id": "p18",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 6,
+    "exit_cost": [
+     0.155,
+     0.66,
+     0.348,
+     0.508,
+     0.338,
+     0.671
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     1,
+     0,
+     1,
+     1,
+     0,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 2.652
+   }
+  },
+  {
+   "person_id": "p19",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 6,
+    "exit_cost": [
+     0.577,
+     0.501,
+     0.356,
+     1.055,
+     0.839,
+     1.668
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     0,
+     1
+    ],
+    "reversibility": [
+     1,
+     1,
+     0,
+     1,
+     0,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 8.109
+   }
+  },
+  {
+   "person_id": "p19",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 2,
+    "exit_cost": [
+     0.396,
+     0.585
+    ],
+    "reachability": [
+     1,
+     1
+    ],
+    "reversibility": [
+     1,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 7.909
+   }
+  },
+  {
+   "person_id": "p20",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 4,
+    "exit_cost": [
+     0.793,
+     0.513,
+     1.271,
+     2.258
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     1,
+     0,
+     1,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 8.544
+   }
+  },
+  {
+   "person_id": "p20",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 2,
+    "exit_cost": [
+     0.233,
+     1.147
+    ],
+    "reachability": [
+     0,
+     1
+    ],
+    "reversibility": [
+     1,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 8.749
+   }
+  },
+  {
+   "person_id": "p21",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 4,
+    "exit_cost": [
+     0.499,
+     0.252,
+     1.534,
+     0.23
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     0
+    ],
+    "reversibility": [
+     1,
+     1,
+     0,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 7.629
+   }
+  },
+  {
+   "person_id": "p21",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 3,
+    "exit_cost": [
+     0.568,
+     1.387,
+     1.864
+    ],
+    "reachability": [
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     0,
+     1,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 8.056
+   }
+  },
+  {
+   "person_id": "p22",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 6,
+    "exit_cost": [
+     0.774,
+     0.788,
+     0.392,
+     0.839,
+     0.843,
+     0.572
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     0
+    ],
+    "reversibility": [
+     1,
+     0,
+     0,
+     0,
+     1,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 4.836
+   }
+  },
+  {
+   "person_id": "p22",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 8,
+    "exit_cost": [
+     0.168,
+     0.167,
+     0.658,
+     0.357,
+     0.689,
+     0.254,
+     2.091,
+     1.465
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     0
+    ],
+    "reversibility": [
+     1,
+     0,
+     0,
+     0,
+     1,
+     1,
+     1,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 3.244
+   }
+  },
+  {
+   "person_id": "p23",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 3,
+    "exit_cost": [
+     0.47,
+     0.499,
+     1.476
+    ],
+    "reachability": [
+     1,
+     1,
+     0
+    ],
+    "reversibility": [
+     1,
+     1,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 9.268
+   }
+  },
+  {
+   "person_id": "p23",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 1,
+    "exit_cost": [
+     0.281
+    ],
+    "reachability": [
+     0
+    ],
+    "reversibility": [
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 10.46
+   }
+  },
+  {
+   "person_id": "p24",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 3,
+    "exit_cost": [
+     0.747,
+     0.443,
+     1.202
+    ],
+    "reachability": [
+     1,
+     1,
+     0
+    ],
+    "reversibility": [
+     0,
+     1,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 6.416
+   }
+  },
+  {
+   "person_id": "p24",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 6,
+    "exit_cost": [
+     0.823,
+     0.895,
+     0.089,
+     0.728,
+     2.294,
+     0.707
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     0
+    ],
+    "reversibility": [
+     1,
+     1,
+     0,
+     1,
+     0,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 6.517
+   }
+  },
+  {
+   "person_id": "p25",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 1,
+    "exit_cost": [
+     0.53
+    ],
+    "reachability": [
+     1
+    ],
+    "reversibility": [
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 7.447
+   }
+  },
+  {
+   "person_id": "p25",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 1,
+    "exit_cost": [
+     0.979
+    ],
+    "reachability": [
+     0
+    ],
+    "reversibility": [
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 11.33
+   }
+  },
+  {
+   "person_id": "p26",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 2,
+    "exit_cost": [
+     0.843,
+     1.584
+    ],
+    "reachability": [
+     1,
+     0
+    ],
+    "reversibility": [
+     1,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 7.813
+   }
+  },
+  {
+   "person_id": "p26",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 1,
+    "exit_cost": [
+     1.049
+    ],
+    "reachability": [
+     0
+    ],
+    "reversibility": [
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 9.719
+   }
+  },
+  {
+   "person_id": "p27",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 5,
+    "exit_cost": [
+     0.259,
+     0.55,
+     0.72,
+     1.304,
+     0.914
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     0
+    ],
+    "reversibility": [
+     0,
+     1,
+     1,
+     0,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 6.483
+   }
+  },
+  {
+   "person_id": "p27",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 2,
+    "exit_cost": [
+     0.657,
+     0.682
+    ],
+    "reachability": [
+     1,
+     1
+    ],
+    "reversibility": [
+     0,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 7.151
+   }
+  },
+  {
+   "person_id": "p28",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 5,
+    "exit_cost": [
+     0.826,
+     0.486,
+     1.052,
+     0.289,
+     0.694
+    ],
+    "reachability": [
+     1,
+     1,
+     0,
+     0,
+     0
+    ],
+    "reversibility": [
+     0,
+     0,
+     1,
+     0,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 9.305
+   }
+  },
+  {
+   "person_id": "p28",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 3,
+    "exit_cost": [
+     0.575,
+     1.522,
+     0.673
+    ],
+    "reachability": [
+     0,
+     1,
+     0
+    ],
+    "reversibility": [
+     1,
+     0,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 11.821
+   }
+  },
+  {
+   "person_id": "p29",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 3,
+    "exit_cost": [
+     0.777,
+     0.308,
+     0.411
+    ],
+    "reachability": [
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     0,
+     0,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 6.937
+   }
+  },
+  {
+   "person_id": "p29",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 4,
+    "exit_cost": [
+     0.139,
+     0.605,
+     1.7,
+     2.483
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     0,
+     1,
+     0,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 8.976
+   }
+  },
+  {
+   "person_id": "p30",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 5,
+    "exit_cost": [
+     0.087,
+     0.743,
+     0.603,
+     0.696,
+     0.667
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     0,
+     0
+    ],
+    "reversibility": [
+     1,
+     1,
+     1,
+     0,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 6.551
+   }
+  },
+  {
+   "person_id": "p30",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 6,
+    "exit_cost": [
+     0.827,
+     0.327,
+     0.328,
+     0.109,
+     0.882,
+     1.746
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     1,
+     1,
+     0,
+     0,
+     0,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 4.94
+   }
+  },
+  {
+   "person_id": "p31",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 6,
+    "exit_cost": [
+     0.357,
+     0.851,
+     0.597,
+     0.392,
+     0.445,
+     2.471
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     0,
+     0,
+     0,
+     1,
+     0,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 2.218
+   }
+  },
+  {
+   "person_id": "p31",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 6,
+    "exit_cost": [
+     0.207,
+     0.399,
+     0.669,
+     0.093,
+     0.134,
+     0.514
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     1,
+     0,
+     0,
+     1,
+     0,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 2.569
+   }
+  },
+  {
+   "person_id": "p32",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 4,
+    "exit_cost": [
+     0.654,
+     0.639,
+     2.342,
+     1.917
+    ],
+    "reachability": [
+     1,
+     0,
+     1,
+     1
+    ],
+    "reversibility": [
+     0,
+     1,
+     1,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 8.616
+   }
+  },
+  {
+   "person_id": "p32",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 1,
+    "exit_cost": [
+     2.102
+    ],
+    "reachability": [
+     1
+    ],
+    "reversibility": [
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 9.517
+   }
+  },
+  {
+   "person_id": "p33",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 7,
+    "exit_cost": [
+     0.573,
+     0.484,
+     0.542,
+     0.412,
+     1.56,
+     1.977,
+     1.059
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     0,
+     1
+    ],
+    "reversibility": [
+     1,
+     0,
+     0,
+     1,
+     1,
+     1,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 7.231
+   }
+  },
+  {
+   "person_id": "p33",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 6,
+    "exit_cost": [
+     0.161,
+     0.428,
+     0.169,
+     2.17,
+     2.463,
+     1.416
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     0,
+     1,
+     0,
+     1,
+     1,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 7.064
+   }
+  },
+  {
+   "person_id": "p34",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 3,
+    "exit_cost": [
+     0.376,
+     0.445,
+     0.727
+    ],
+    "reachability": [
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     1,
+     1,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 8.832
+   }
+  },
+  {
+   "person_id": "p34",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 4,
+    "exit_cost": [
+     0.351,
+     1.652,
+     0.135,
+     1.3
+    ],
+    "reachability": [
+     1,
+     1,
+     0,
+     1
+    ],
+    "reversibility": [
+     1,
+     1,
+     0,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 7.647
+   }
+  },
+  {
+   "person_id": "p35",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 7,
+    "exit_cost": [
+     0.71,
+     0.463,
+     0.658,
+     0.468,
+     2.459,
+     2.088,
+     1.182
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 6.763
+   }
+  },
+  {
+   "person_id": "p35",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 6,
+    "exit_cost": [
+     0.708,
+     0.134,
+     0.602,
+     0.209,
+     0.053,
+     1.67
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     0,
+     0,
+     1,
+     1,
+     0,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 4.692
+   }
+  },
+  {
+   "person_id": "p36",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 7,
+    "exit_cost": [
+     0.458,
+     0.724,
+     0.779,
+     0.718,
+     0.625,
+     1.176,
+     0.84
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     0
+    ],
+    "reversibility": [
+     1,
+     1,
+     1,
+     1,
+     0,
+     1,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 5.836
+   }
+  },
+  {
+   "person_id": "p36",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 7,
+    "exit_cost": [
+     0.572,
+     0.647,
+     0.192,
+     0.269,
+     0.682,
+     0.845,
+     1.828
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     1,
+     0,
+     1,
+     1,
+     0,
+     0,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 2.584
+   }
+  },
+  {
+   "person_id": "p37",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 3,
+    "exit_cost": [
+     0.244,
+     0.283,
+     0.65
+    ],
+    "reachability": [
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     1,
+     0,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 5.957
+   }
+  },
+  {
+   "person_id": "p37",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 3,
+    "exit_cost": [
+     0.527,
+     1.237,
+     2.442
+    ],
+    "reachability": [
+     1,
+     0,
+     1
+    ],
+    "reversibility": [
+     0,
+     1,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 8.729
+   }
+  },
+  {
+   "person_id": "p38",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 4,
+    "exit_cost": [
+     0.363,
+     0.45,
+     0.338,
+     1.928
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "reversibility": [
+     0,
+     1,
+     0,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 6.735
+   }
+  },
+  {
+   "person_id": "p38",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 7,
+    "exit_cost": [
+     0.318,
+     0.47,
+     0.331,
+     0.159,
+     0.169,
+     0.587,
+     0.267
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     1,
+     1,
+     0,
+     0
+    ],
+    "reversibility": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     1,
+     1
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 4.258
+   }
+  },
+  {
+   "person_id": "p39",
+   "t0": "2024-01",
+   "t1": "2024-03",
+   "change_origin": "baseline",
+   "enclosure": {
+    "option_set_size": 4,
+    "exit_cost": [
+     0.682,
+     0.288,
+     0.582,
+     1.736
+    ],
+    "reachability": [
+     1,
+     1,
+     1,
+     0
+    ],
+    "reversibility": [
+     1,
+     1,
+     0,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 7.277
+   }
+  },
+  {
+   "person_id": "p39",
+   "t0": "2024-04",
+   "t1": "2024-06",
+   "change_origin": "exogenous",
+   "enclosure": {
+    "option_set_size": 3,
+    "exit_cost": [
+     0.146,
+     2.353,
+     0.372
+    ],
+    "reachability": [
+     1,
+     1,
+     0
+    ],
+    "reversibility": [
+     0,
+     1,
+     0
+    ]
+   },
+   "behavior": {
+    "latency_to_approach_novel": 7.164
+   }
+  }
+ ]
+}

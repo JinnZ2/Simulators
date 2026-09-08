@@ -176,6 +176,7 @@ last three; read in order:
 - `rigidification-sensor/` — variance suppressed fast
 - `claim-audits/` — external documents, eight verdicts
 - `null-harness/` — can a gate fire, can it stay silent
+- `enclosure-first-residual/` — enclosure first; trait as survivor
 - `divergence-playground/` — N readers, one fork; spread
 - `relational/` — pain-as-sensor, triadic
 - `engine-boiler-guide/` — offline triage
@@ -6720,6 +6721,39 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   constant by — and it was measured by perturbing a cell in a real
   workbook, not stipulated anywhere in the chain. 49 selftest checks
   across two modules. Stdlib only, parses under 3.9, CC0.
+- `enclosure-first-residual/` — Work order K, delivered verbatim: enter
+  enclosure terms FIRST, measure residual, and only then treat the
+  residual as a trait candidate. Unit is the person-window, never the
+  person, because the discriminator needs the same person under two
+  option sets. Four enclosure terms with `effective_exits =
+  count(reachable AND exit_cost <= 1.0)` carrying the hypothesis; four
+  graded behavior terms from the animal literature, each BLOCKED without
+  an operationalization string, and the human label set (rigidity,
+  resistance to change, closed-minded) refused at the schema gate as
+  closed nodes. Pipeline: NULL FIRST (enclosure shuffled within
+  population, band printed before any real fit; observed residual inside
+  it returns `UNKNOWN_measurable`, never a trait), between arm, within
+  arm on exogenous pairs with `|delta effective_exits| >= 1`, compare.
+  Return classes are method-layer G's enum when that checkout is found
+  (`METHOD_LAYER_PATH` or a sibling), mirrored and marked when not; the
+  four-branch set emits to F's schema 1.0 and round-trips through its
+  loader. **`EFR_003`, the finding the fixtures forced:** under the
+  order's step-4 table as written, an enclosure-only panel lands in the
+  **confound** cell (within 0.429 > between 0.201), because differencing
+  doubles noise variance while enclosure within a person is
+  autocorrelated, and a stable trait only ever inflates the between
+  residual, so the table's cells are ordered backwards on the ratio
+  axis. The literal table stays available (`--table-literal`) and its
+  cell is printed every run; the default return is a corrected reading
+  of the same two arms — within residual against its own permutation
+  null (does behavior move with enclosure?), then the person-stable
+  share of the between residual against its null (is anything left that
+  sits with the person?). Seven fixtures from explicit generative
+  models: enclosure-only → `ENCLOSURE_DOMINANT`, trait-only → null gate,
+  trait+enclosure → `TRAIT_RESIDUAL`, selection into windows →
+  `VARIABLE_UNIDENT` (the order's third row has no return-type entry;
+  G's peer class is the match), chosen change → `OUT_OF_ENVELOPE`, and
+  the two `BLOCKED` blockers by name. Claims `EFR_001..EFR_009`.
 - `model-provenance/` — Work order 5, delivered verbatim. Two halves that
   do not share a mechanism: a **write** at session open (date, model
   identifier as self-reported, repo, branch) and a **read** over history
