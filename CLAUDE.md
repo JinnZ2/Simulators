@@ -228,6 +228,7 @@ last three; read in order:
 - `coinage-log/` — naming gaps; is the absent word the finding
 - `falsifier-survey/` — Run 1 of a delivered falsifier survey; Run 2 split to its two repos
 - `crediting-rate/` — credit tracks the loanword or the contribution; BLOCKED until ordered
+- `gate-check/` — four structural presence checks, file+line, no FAIL label; thresholds in data
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -10753,6 +10754,19 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   return `ETYMOLOGY_TRACKING` and `CONTRIBUTION_TRACKING`, so the return is
   not constant (`CRD_001`). `bin_gap` registered in `tools/known_answer.py`.
   Eight claims `CRD_001..008`. Stdlib only, parses under 3.9, CC0.
+- `gate-check/` — A work order built as delivered, with no framework
+  context: `gate_check.py` walks a repo path and reports presence or
+  absence of four structural features — an unknown/blocked/out-of-envelope
+  return path, a stated kill rule, assertions on failure paths (`count` and
+  `present` as separate values), and a demo that can fail — each with file
+  and line, under four labels (`HELD_RETRIEVABLE`, `HELD_UNRETRIEVABLE`,
+  `NOT_HELD`, `OUT_OF_ENVELOPE`) and **no FAIL member**. Thresholds are
+  data in `thresholds.txt`; their provenance is append-only in
+  `threshold_chain.txt`; the checker reads the first and writes neither,
+  and a missing file reports raw counts with `threshold=None`. Every
+  decision the order left open is in `RUN_NOTE.md`, including that the
+  checker scanning its own folder pins its own token regex. Stdlib only,
+  single file, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

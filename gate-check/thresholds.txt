@@ -1,0 +1,5 @@
+# DATA ONLY. Never code. key = value, one per line. Read by gate_check.py, never written by it.
+check3_failure_assertions_min = 3
+
+# Context: every value here is policy, not measurement. Why a value is what
+# it is, who set it, and when, is in threshold_chain.txt (append-only).
