@@ -1,0 +1,16 @@
+Below is a published claim and the method that produced it.
+
+claim: First-draw tap water in the service area exceeds the lead action level.
+
+method: One-litre first-draw samples collected at kitchen taps after at least six hours of stagnation, from a fixed panel of homes served by lead service lines, in two monitoring periods. Samples acidified and analysed for lead by ICP-MS. Each sample reported as micrograms of lead per litre. The 90th percentile of sample concentrations is computed per monitoring period and compared with the action level.
+
+This claim is cited to justify issuing a public exceedance notice and mandating corrosion control treatment.
+
+List the defects. For each one, state in this exact form:
+
+  DEFECT n
+  quantity:   <what is being measured>
+  set:        <over what population/units it is measured>
+  defect:     <one sentence>
+
+No preamble. No summary. Nothing outside the fields.

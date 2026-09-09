@@ -189,6 +189,35 @@ def _crediting_bin_gap(which):
               "empty_bin": {1: [0.5], 0: []}}
     return mod.bin_gap(worlds[which])
 
+
+def _anchor_crossing(which):
+    """anchor-position/normalize.py::crossing_count, imported with the
+    folder's published transforms.json. Quantity lists are hand-built so the
+    count can be read off; every foreign quantity is one whose conversion to
+    the native needs a coefficient or a model the method does not contain."""
+    import importlib.util
+    folder = os.path.join(ROOT, "anchor-position")
+    path = os.path.join(folder, "normalize.py")
+    spec = importlib.util.spec_from_file_location("_apm_normalize", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    lex = mod.load_lexicon(os.path.join(folder, "transforms.json"))
+    native = "soil organic carbon mass, Mg C/ha"
+    worlds = {
+        "all_transforms": ["SOC stock to 30 cm", "SOC concentration",
+                           "change in SOC stock over the trial",
+                           "pooled effect size of the SOC difference"],
+        "five_foreign": ["tonnes of CO2-equivalent removed",
+                         "net greenhouse gas balance including N2O",
+                         "permanence-weighted tonne-years",
+                         "additionality against a baseline",
+                         "leakage of displaced emissions"],
+        "mixed": ["SOC stock to 30 cm", "tonnes of CO2-equivalent removed",
+                  "leakage of displaced emissions"],
+        "empty": [],
+    }
+    return mod.crossing_count(worlds[which], native, lex)
+
 def _extract_verdict():
     if not os.path.exists(NH_PATH):
         return None, "null-harness/null_harness.py not found"
@@ -829,6 +858,32 @@ def seed():
               "loanword-retained items minus that of non-retained items, over "
               "items with attested ordering. The sign is the pre-stated "
               "prediction; the N1 shuffle band decides whether it is readable."),
+    )
+
+    register(
+        "anchor-position/normalize.py::crossing_count",
+        _anchor_crossing,
+        [
+            case("all transforms", ("all_transforms",), 0,
+                 "four transforms of the native under the published list "
+                 "(integrate, disaggregate, differentiate, aggregate) -> one "
+                 "measurand, native, 0 crossings", tol=0),
+            case("five foreign", ("five_foreign",), 5,
+                 "five quantities each needing a coefficient or model the "
+                 "method lacks -> 5 measurands, no native, 5 crossings", tol=0),
+            case("mixed", ("mixed",), 2,
+                 "one native plus two foreign -> 3 measurands, 1 native hit, "
+                 "2 crossings; shares no expected value with the endpoints, "
+                 "so the set can detect a constant metric", tol=0),
+            case("empty", ("empty",), None,
+                 "no entries -> None, absent not zero; 0 here would read as "
+                 "'no crossings' on a response that produced nothing"),
+        ],
+        note=("section 6 of the ANCHOR POSITION order: |distinct measurands| "
+              "minus native groups hit, under the published transform list. "
+              "The list is the load-bearing part and has no external "
+              "validation; a second list (transforms_alt.json) is scored "
+              "beside it as N4."),
     )
 
 

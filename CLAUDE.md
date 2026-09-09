@@ -229,6 +229,7 @@ last three; read in order:
 - `falsifier-survey/` — Run 1 of a delivered falsifier survey; Run 2 split to its two repos
 - `crediting-rate/` — credit tracks the loanword or the contribution; BLOCKED until ordered
 - `gate-check/` — four structural presence checks, file+line, no FAIL label; thresholds in data
+- `anchor-position/` — method- vs decision-anchored prompts; measurand crossings counted under a published transform list
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -10767,6 +10768,46 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   decision the order left open is in `RUN_NOTE.md`, including that the
   checker scanning its own folder pins its own token regex. Stdlib only,
   single file, CC0.
+- `anchor-position/` — WORK ORDER — ANCHOR POSITION AND MEASURAND
+  CROSSING, verbatim, built: does a model produce defects whose QUANTITY
+  differs from the quantity a method measures, as a function of where
+  the prompt anchors? ARM M (method-anchored) and ARM D
+  (decision-anchored) are the order's section 4 text, checked line by
+  line against `WORK_ORDER.md`; ARM M+ is the AP-3 confound the order
+  says should be run — M with D's one added sentence, differing from M
+  by exactly that line, asserted. `prompts.py` emits one file per case
+  per arm plus a seeded arm order; no model is called anywhere, the
+  operator runs each file cold and logs the raw response, and a D or M+
+  row whose logged decision string is not the case's is refused.
+  `normalize.py` is section 6 mechanically: aliases → tokens → strip
+  units, articles, hedges and transform markers → core; same measurand
+  iff cores are equal or one is a subset of the other with only
+  unclassified residue beyond it — the clause the order's prose lacks,
+  added because a plain subset rule let the one-token native `{polymer}`
+  absorb `polymer-specific hazard` (`APM_005`). Two lists are published
+  and every row is scored under both; `transforms_alt.json` differs by
+  one declared move and N4 fires on the main fixture world, so the list
+  is doing the work as the order says (`APM_004`). `crossing_count`
+  subtracts the number of native groups hit, since a native stated as
+  `count OR mass` is two measurands (`APM_006`; the order's arithmetic
+  printed beside it), and is `None` on no entries, registered in
+  `tools/known_answer.py`. **`APM_003`:** the order's AP-2 refutation
+  condition is fired by the control the order itself requires (native ==
+  decision measurand → D == M == 0 is correct), so controls are excluded
+  from the paired claims, named in the output, and scored under N2. The
+  control `ctl-01` is constructed here and model-authored — exactly what
+  section 3 says produced defective case sets — landed with that caveat
+  as the operator's to replace (`APM_007`). Two constructed response
+  worlds show every branch reachable: one where M has no crossings, D
+  several, M+ stays at M and the control reads native; one where M+
+  reaches D-level (AP-3 REFUTED), the control D flags a gap (N2 FIRES),
+  a C row returns its supplied measurand and a B row is a strict subset.
+  B and C arms have no verbatim text in the order and are not
+  reconstructed. **`APM_010` UNVERIFIED:** no response here came from a
+  model, section 2's prior-run numbers are carried, and the lexicon is
+  hand-built to three cases with no external validation — the order's
+  own weak joint, unchanged. Check count printed by `score.py
+  --selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
