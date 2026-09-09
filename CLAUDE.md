@@ -230,6 +230,7 @@ last three; read in order:
 - `falsifier-survey/` — Run 1 of a delivered falsifier survey; Run 2 split to its two repos
 - `crediting-rate/` — credit tracks the loanword or the contribution; BLOCKED until ordered
 - `gate-check/` — four structural presence checks, file+line, no FAIL label; thresholds in data
+- `anchor-measurand-crossing/` — crossing given a target; prompts parsed from the order, scorer's judgement as data, no run
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -10801,6 +10802,60 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   decision the order left open is in `RUN_NOTE.md`, including that the
   checker scanning its own folder pins its own token regex. Stdlib only,
   single file, CC0.
+- `anchor-measurand-crossing/` — A work order delivered verbatim and
+  built to it: does a model produce defects whose QUANTITY differs from
+  the quantity a method measures, as a function of whether the prompt
+  anchors at the method (ARM M) or at the decision the claim is cited to
+  justify (ARM D)? A counting outcome with a stated null, not a
+  benchmark. **No model has been run here** and nothing bears on the
+  order's AP-1..AP-6 (`AMC_007`): no endpoint, the session that wrote the
+  lexicon is not blind to it, and section 5's cold-arm rule cannot be
+  met from inside one session that has read the order; the fixture in
+  `runs/` is constructed and bannered. What is built: the two prompts
+  are **parsed out of `WORK_ORDER.md` section 4 at call time, never
+  retyped**, and M+ (AP-3, the order's highest-priority unrun arm) is
+  ARM M plus exactly one sentence under a declared placement, checked by
+  subtracting the sentence back out (`AMC_001`); the order delivers two
+  prompts for six claims, so the B and C arms have no verbatim text and
+  the instrument refuses to render one while still scoring logged B/C
+  records. **The scorer's judgement is data**: `lexicon.json` lists each
+  case's measurands as native / component / foreign with a
+  `distinct_because` on every non-native entry and a `via` transform on
+  every alias, `transforms.json` carries the order's six transforms as
+  `T-A` and a dimension-preserving subset as `T-B`, an alias reached by
+  a transform outside the active list becomes its own measurand, and N4
+  is the count of records whose crossing band moves between the two
+  lists (`AMC_002`). An unmatched quantity is `UNGROUPED` and widens a
+  band `[min, max]` — never merged, never split — with
+  `undetermined_by_lexicon` a live verdict. **`AMC_003`, caught by the
+  known-answer case:** the first crossing floor took `distinct_min −
+  native_hit_max`, pairing fewest-measurands with most-native-hits, two
+  extremes that cannot hold together, and read one grouped component
+  plus one ungrouped quantity as a possible zero; `crossing_band` is
+  registered in `tools/known_answer.py` with the wrong first value in
+  the case's `why_known`. **`AMC_004`:** section 1 (crossing = *different
+  quantity entirely*) and section 6 (`distinct − native_hit`) disagree on
+  one class — a quantity the method itself measures that is not a
+  transform of the native, such as bulk density under sc-01, is a
+  crossing under the arithmetic and not under the definition, so an
+  M-arm entry naming one refutes AP-1 without crossing a measurand;
+  `[CHOICE 3]` takes section 6 literally and prints the
+  foreign/component split beside it, and N3 reports the class.
+  **`AMC_005`:** section 8 requires a control case where native equals
+  the decision quantity and section 3 forbids a model-built case, so
+  `ctl-01` ships as a CANDIDATE with `hand_built: false` that the loader
+  excludes; N2 is `NOT_EVALUABLE` on the admitted corpus and both its
+  branches are shown reachable under `admit_candidates`. **`AMC_006`:**
+  one arm per fresh session is enforced at load, with AP-4's cued
+  follow-up the one arm that cannot obey section 5's *no follow-up
+  turns* — the order's protocol and its fourth claim point different
+  ways, and the exception is scoped to B alone. Normalization and alias
+  containment are word lists, stated, with coverage printed per
+  response (`AMC_008`). The score report screens clean with no
+  exemption; the prompt render carries the delivered form's own field
+  name under the three-arm harness. Eight `AMC_*` claims; check count
+  printed by `selftest_amc.py`, and `amc.py` refuses `--selftest`.
+  Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

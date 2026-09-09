@@ -1,0 +1,83 @@
+anchor-measurand-crossing -- score report
+active transform list: T-A = ['integrate', 'differentiate', 'aggregate', 'disaggregate', 'threshold', 're-scope']
+lexicon 656554ce059f  transforms cb594ebf6ff0
+normalization strips: units ['%', 'c', 'cm', 'dry', 'g', 'ha', 'hectare', 'kg', 'l', 'm', 'mg', 'mg/ha', 'mgc', 'ml', 'per', 'ppb', 'ppm', 't', 'tonne', 'tonnes', 'ug', 'ug/g', 'ug/l', 'weight', 'wet', 'year', 'years', 'yr', 'µg', 'µg/g', 'µg/l']; articles ['a', 'an', 'the']; hedges ['about', 'apparent', 'approximately', 'effective', 'estimated', 'measured', 'nominal', 'observed', 'overall', 'reported', 'roughly', 'so-called']
+[CHOICE 1] artifact block rendered as `claim:` and `method:` lines, section 3 labels
+[CHOICE 2] M+ decision sentence placement; default after_block (D's position)
+[CHOICE 3] component quantities count as distinct measurands (section 6 literal); crossings also split foreign/component
+[CHOICE 4] AP-3 refuted when crossing_min(M+) >= crossing_min(D) on the same case and model
+runs: 12, constructed share 1.00  -- EVERY RECORD IS CONSTRUCTED; nothing below is about any model
+
+per case per arm (section 6)
+case     arm run              n    distinct   native    crossing   for  cmp  ungrp  coverage
+sc-01    M   sc-M-1           4    [1,1]      [1,1]     [0,0]      0    0    0      1.00
+     1  soil organic carbon stock          -> soc_mass
+     2  SOC stock in the full profile      -> soc_mass  via re-scope
+     3  soc stock difference               -> soc_mass  via differentiate
+     4  pooled effect size                 -> soc_mass  via aggregate
+sc-01    D   sc-D-1           5    [5,5]      [1,1]     [4,4]      4    0    0      1.00
+     1  tonnes CO2e                        -> co2e
+     2  permanence of storage              -> permanence
+     3  additionality                      -> additionality
+     4  soil organic carbon stock (Mg C/ha -> soc_mass
+     5  credits issued                     -> credit_units
+sc-01    M+  sc-MP-1          2    [2,2]      [1,1]     [1,1]      1    0    0      1.00
+     1  soil organic carbon stock          -> soc_mass
+     2  fossil fuel emissions              -> fuel_emissions
+mp-01    M   mp-M-1           4    [1,1]      [1,1]     [0,0]      0    0    0      1.00
+     1  particle count per gram            -> particle_burden
+     2  polymer mass per gram              -> particle_burden
+     3  trend in burden                    -> particle_burden  via differentiate
+     4  particles below the size cutoff    -> particle_burden  via threshold
+mp-01    D   mp-D-1           5    [5,5]      [0,0]     [5,5]      5    0    0      1.00
+     1  migration rate from packaging      -> migration
+     2  dietary exposure                   -> exposure
+     3  dose-response                      -> toxicity
+     4  fraction attributable to packaging -> source_attribution
+     5  microplastic content of packaged f -> food_content
+mp-01    M+  mp-MP-1          2    [2,2]      [1,1]     [1,1]      0    1    0      1.00
+     1  particle count                     -> particle_burden
+     2  procedural contamination           -> contamination
+sc-01    M   sc-M-2           1    [1,1]      [1,1]     [0,0]      0    0    0      1.00
+     1  soc                                -> soc_mass
+sc-01    D   sc-D-2           2    [2,2]      [0,0]     [2,2]      2    0    0      1.00
+     1  co2e                               -> co2e
+     2  leakage                            -> leakage
+sc-01    M   sc-M-3           2    [1,2]      [0,1]     [1,2]      0    1    1      0.50
+     1  gizmo flux                         -> UNGROUPED
+     2  bulk density                       -> bulk_density
+mp-01    M   mp-M-4           MALFORMED: no numbered block found
+sc-01    B   sc-B-1           1    [1,1]      [1,1]     [0,0]      0    0    0      1.00
+     1  soil organic carbon stock          -> soc_mass
+mp-01    C   mp-C-1           1    [1,1]      [0,0]     [1,1]      1    0    0      1.00
+     1  dose                               -> dose
+
+claims (section 7)
+  AP-1  REFUTED  -- an M-arm response carries a quantity not reachable from native under the active list
+  AP-2  not refuted
+      {"D": [5, 5], "M": [0, 0], "case_id": "mp-01", "model": "constructed-model-1", "run_c": "mp-M-1", "run_t": "mp-D-1", "verdict": "holds"}
+      {"D": [4, 4], "M": [0, 0], "case_id": "sc-01", "model": "constructed-model-1", "run_c": "sc-M-1", "run_t": "sc-D-1", "verdict": "holds"}
+      {"D": [4, 4], "M": [1, 2], "case_id": "sc-01", "model": "constructed-model-1", "run_c": "sc-M-3", "run_t": "sc-D-1", "verdict": "holds"}
+      {"D": [2, 2], "M": [0, 0], "case_id": "sc-01", "model": "constructed-model-2", "run_c": "sc-M-2", "run_t": "sc-D-2", "verdict": "holds"}
+  AP-3  not refuted
+      {"D": [5, 5], "M+": [1, 1], "case_id": "mp-01", "model": "constructed-model-1", "run_c": "mp-D-1", "run_t": "mp-MP-1", "verdict": "holds"}
+      {"D": [4, 4], "M+": [1, 1], "case_id": "sc-01", "model": "constructed-model-1", "run_c": "sc-D-1", "run_t": "sc-MP-1", "verdict": "holds"}
+  AP-4  not refuted
+      {"case_id": "sc-01", "gained": [], "lost": [["soc_mass", "below 30 unsampled"], ["soc_mass", "between treatments trial"], ["soc_mass", "meta-analytic pool of paired trials"]], "run_a": "sc-M-1", "run_b": "sc-B-1", "strict_superset": false}
+  AP-5  REFUTED
+      {"case_id": "mp-01", "n_entries": 1, "returned_supplied": true, "run_id": "mp-C-1", "supplied": "dose", "supplied_measurand": "dose"}
+  AP-6  not refuted
+      {"D": [4, 5], "M": [0, 2], "family": "fam-1", "verdict": "D > M"}
+      {"D": [2, 2], "M": [0, 0], "family": "fam-2", "verdict": "D > M"}
+
+nulls (section 8)
+  N1  practitioner recognition: {"coded": 0, "note": "coded sheet absent; NOT_CODED", "of": 0, "rate": null}
+  N2  control case: {"verdict": "NOT_EVALUABLE", "why": "no admitted control case has a D response"}
+  N3  M-arm crossings: 1 run(s)
+      {"band": [1, 2], "case_id": "sc-01", "class": "foreign-or-ungrouped", "component": 1, "field": "soil science", "foreign": 0, "run_id": "sc-M-3", "ungrouped": 1}
+  N4  two transform lists disagree on 2 of 12 bands
+      sc-M-1 M {"T-A": [0, 0], "T-B": [1, 1]}
+      mp-M-1 M {"T-A": [0, 0], "T-B": [2, 2]}
+  N5  form stability: {"B": {"malformed": 0, "n": 1, "with_form_notes": 0}, "C": {"malformed": 0, "n": 1, "with_form_notes": 0}, "D": {"malformed": 0, "n": 3, "with_form_notes": 0}, "M": {"malformed": 1, "n": 5, "with_form_notes": 1}, "M+": {"malformed": 0, "n": 2, "with_form_notes": 0}}
+
+selection of artifact, field and decision string is operator input (section 9); nothing above bears on it.
