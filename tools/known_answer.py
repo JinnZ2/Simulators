@@ -205,6 +205,26 @@ def _amc_crossing_band(which):
     g, k, u, n = worlds[which]
     return mod.crossing_band(g, k, u, n)[4:6]
 
+def _op_rates(which):
+    """ontology-probe/probe.py::rates, imported. (class, status) rows are
+    hand-built so the three section 5 rates can be counted off; returns
+    (hole_rate, narrowness, ambient_rate)."""
+    import importlib.util
+    path = os.path.join(ROOT, "ontology-probe", "probe.py")
+    spec = importlib.util.spec_from_file_location("_op", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    T, A, C = "TARGETED", "AMBIENT", "CONTROL"
+    worlds = {"all_fail": [(T, "FAILS"), (C, "FAILS"), (A, "FAILS")],
+              "all_compose": [(T, "COMPOSES"), (C, "COMPOSES"), (A, "COMPOSES")],
+              "mixed": [(T, "COMPOSES"), (T, "FAILS"), (T, "FAILS"), (T, "FAILS"),
+                        (C, "FAILS"), (C, "COMPOSES"), (C, "COMPOSES"), (C, "COMPOSES"),
+                        (A, "COMPOSES"), (A, "COMPOSES"), (A, "FAILS")],
+              "no_targeted": [(C, "COMPOSES"), (A, "FAILS")],
+              "addition_in_denominator": [(T, "COMPOSES_WITH_ADDITION"), (T, "COMPOSES")]}
+    r = mod.rates(worlds[which])
+    return (r["hole_rate"], r["narrowness"], r["ambient_rate"])
+
 def _extract_verdict():
     if not os.path.exists(NH_PATH):
         return None, "null-harness/null_harness.py not found"
@@ -872,6 +892,32 @@ def seed():
         note=("section 6's crossing_count as a band [min, max] over grouped "
               "ids plus an ungrouped count. Every UNGROUPED quantity widens "
               "the band and never silently merges or splits."),
+    )
+
+    register(
+        "ontology-probe/probe.py::rates",
+        _op_rates,
+        [
+            case("all fail", ("all_fail",), (0.0, 1.0, 0.0),
+                 "one FAILS row per class -> hole 0, narrowness 1, ambient 0; "
+                 "a scorer reading FAILS as composing inverts all three"),
+            case("all compose", ("all_compose",), (1.0, 0.0, 1.0),
+                 "the N1 world: hole 1, narrowness 0, ambient 1"),
+            case("mixed", ("mixed",), (0.25, 0.25, 2 / 3),
+                 "1 of 4 TARGETED compose, 1 of 4 CONTROL fail, 2 of 3 AMBIENT "
+                 "compose; three different denominators, counted by hand"),
+            case("no targeted rows", ("no_targeted",), (None, 0.0, 0.0),
+                 "hole_rate has no denominator -> None, never 0; a 0 here "
+                 "would read as 'no hole' on a set with no TARGETED construction"),
+            case("addition in the denominator", ("addition_in_denominator",), (0.5, None, None),
+                 "[CHOICE 2]: COMPOSES_WITH_ADDITION sits in the class "
+                 "denominator (the order divides by TARGETED) and in no "
+                 "numerator, so one addition plus one compose is 0.5, not 1.0"),
+        ],
+        note=("section 5 of the ONTOLOGY PROBE order: hole_rate = COMPOSES on "
+              "TARGETED / TARGETED, narrowness = FAILS on CONTROL / CONTROL, "
+              "ambient_rate = COMPOSES on AMBIENT / AMBIENT. A missing "
+              "denominator is None."),
     )
 
 

@@ -1,0 +1,14 @@
+{
+ "claims_no_protection": false,
+ "grounding_class": "declared-only",
+ "n_absent_by_design": 6,
+ "n_primitives": 25,
+ "name": "SHAPE_SPEC",
+ "physics_share": 0.32,
+ "sha": "deca95c117f6",
+ "undefined_candidate_holes": [
+  "critical point"
+ ],
+ "version": "0.1.0"
+}
+admitted constructions: {"by_class": {"AMBIENT": 0, "CONTROL": 0, "TARGETED": 0}, "control_share": null, "flags": ["BELOW_MINIMUM (0 < 30)", "EMPTY"], "n": 0}

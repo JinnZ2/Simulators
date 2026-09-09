@@ -231,6 +231,7 @@ last three; read in order:
 - `crediting-rate/` — credit tracks the loanword or the contribution; BLOCKED until ordered
 - `gate-check/` — four structural presence checks, file+line, no FAIL label; thresholds in data
 - `anchor-measurand-crossing/` — crossing given a target; prompts parsed from the order, scorer's judgement as data, no run
+- `ontology-probe/` — does a term-cut protect, and where it holes; one declared reading, an empty admitted set, no run
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -10856,6 +10857,56 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   name under the three-arm harness. Eight `AMC_*` claims; check count
   printed by `selftest_amc.py`, and `amc.py` refuses `--selftest`.
   Stdlib only, parses under 3.9, phone-buildable, CC0.
+- `ontology-probe/` — A work order delivered verbatim and built to it:
+  whether a term-cut PROTECTS, and where it HOLES. Rule-shaped protection
+  (*reject X*) names its own boundary; cut-shaped protection (primitives
+  that have no X) lets X fail to compose, and failure to compose is the
+  measurand. A declared primitive set is scored against hand-built
+  constructions by asking a restater to restate each using only the
+  primitives; `hole_rate` (COMPOSES on TARGETED), `narrowness` (FAILS on
+  CONTROL), `ambient_rate`, and the `smuggle_set` — the union of every
+  term a restater had to import — which the order calls the deliverable,
+  a premise inventory produced by measurement rather than introspection.
+  **No model has been run here** (`OP_008`): no endpoint, and section 7's
+  RESTATER limit — a premise shared between restater and ontology composes
+  without either noticing — is what a model scoring its own reading of a
+  spec would instance. What is built: the section 4 prompt is **parsed
+  out of `WORK_ORDER.md` at call time**, with a render's two placeholders
+  substituting back out to the template (`OP_001`). **`OP_002`:**
+  `primitives.json` is a model's READING of `SHAPE_SPEC.md` — the spec
+  enumerates no list — 25 terms and six `absent_by_design` entries (§9
+  cost, §5 optimum, §1 analogy / name / picture, §6 law), every term
+  asserted present in the spec by the selftest, the one `grounds_to:
+  undefined` entry (`critical point`) being the one the spec itself calls
+  open, and the declaration marked `confirmed_by_author: false`; physics
+  share 0.32, so *declared-only* under `[CHOICE 4]`. **`OP_003`, the
+  state:** section 3 forbids model-generated constructions (*four prior
+  attempts … produced defective sets*), every construction this session
+  could write is one, so the three shipped are CANDIDATEs the loader
+  refuses — the admitted set is `n 0`, `EMPTY`, `BELOW_MINIMUM`, control
+  share None — and the section 9 first run cannot start from here for want
+  of thirty hand-built statements, not for want of an instrument. The
+  selftest's 30-construction fixture (12 / 9 / 9, two families × three
+  repeats, one leaking restatement, one malformed record) is admitted only
+  past the gate via `--fixture` and the render banners it on its second
+  line. **`OP_004`:** `status` is self-reported (`PB_006`'s shape) and
+  stays the order's number; `[CHOICE 3]` adds a leak — content words of
+  the restatement outside the primitives, `terms_added` and a declared
+  function-word set — so a COMPOSES with a leak is `status_contradicted`,
+  counted apart, never re-labelled. **`OP_005`:** COMPOSES_WITH_ADDITION
+  sits in every section 5 denominator and no numerator (`[CHOICE 2]`), a
+  missing denominator is None never 0, and `rates` is registered in
+  `tools/known_answer.py` with five distinct-valued cases. **`OP_006`:**
+  N3 (three repeats), OP-4 (two ontologies) and OP-5 (two primitive sets
+  of different grounding class, `op5()` built for the comparison) each
+  return NOT_EVALUABLE / undetermined naming the input they lack, both
+  branches shown reachable on constructed worlds. **`OP_007`:** the
+  ontology's own term `critical point` carries a screened word, so the
+  renders are screened under a declared three-arm exemption on that one
+  token; two of the instrument's own `why` strings tripped on `needs` and
+  were reworded. Eight `OP_*` claims (distinct from the order's OP-1..5);
+  check count printed by `selftest_op.py`, and `probe.py` refuses
+  `--selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

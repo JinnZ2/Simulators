@@ -1,0 +1,37 @@
+ontology-probe -- score report
+ontology: SHAPE_SPEC 0.1.0  primitives 25 (sha deca95c117f6)  absent_by_design 6  grounding declared-only (physics share 0.32)
+grounds_to undefined (candidate holes before any construction): ['critical point']
+construction set is a FIXTURE admitted past the hand_built gate; it is not the folder's set
+construction set: n 30, by class {'TARGETED': 9, 'AMBIENT': 9, 'CONTROL': 12}, control share 0.40
+[CHOICE 1] [PRIMITIVES] rendered one `term (type)` per line
+[CHOICE 2] COMPOSES_WITH_ADDITION rows in every section 5 denominator, in no numerator; addition_rate printed per class
+[CHOICE 3] restatement leak check added beside the self-reported status; FUNCTION_WORDS declared
+[CHOICE 4] N4 threshold 0.5 function-word share; OP-5 physics-grounded = at least half of primitives ground to physics
+runs: none. No model has been run against this instrument here.
+
+per run (section 5)
+constr   class     model          rep status                   reading          leak   terms_added
+
+aggregates: hole_rate --  narrowness --  ambient_rate --  addition_rate {'TARGETED': '--', 'AMBIENT': '--', 'CONTROL': '--'}
+smuggle_set (0): -
+leak_set (0, undeclared additions read from restatements): -
+status contradicted by leak: 0 of 0 scored
+
+nulls (section 6)
+  N1  {"verdict": "NOT_EVALUABLE", "why": "no scored run"}
+  N2  {"verdict": "NOT_EVALUABLE", "why": "no scored run"}
+  N3  {"verdict": "NOT_EVALUABLE", "why": "no scored run"}
+  N4  {"verdict": "NOT_EVALUABLE", "why": "no scored run"}
+  N5  {"verdict": "NOT_EVALUABLE", "why": "no scored run"}
+
+claims (section 8)
+  OP-1  undetermined  -- no scored TARGETED run
+  OP-2  undetermined  -- no terms_added logged; the column is empty
+  OP-3  undetermined  -- scored TARGETED and AMBIENT runs both required
+  OP-4  undetermined  -- runs on at least two ontologies required; have 0
+  OP-5  undetermined  -- a physics-grounded and a declared-only primitive set scored on one construction set are both required; this set is declared-only (physics share 0.32)
+
+restater disagreement (section 7): 0 of 0 constructions seen by two families disagree
+
+dual use (section 7): the smuggle_set names where premises enter; publishing lowers a search cost.
+coverage (section 7): only constructions someone wrote enter the set; the rates are over that set.
