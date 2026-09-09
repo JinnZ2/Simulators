@@ -1,0 +1,32 @@
+Restate the following statement using only the terms in
+the primitive list below. You may not introduce a term that
+is not in the list.
+
+substrate (state)
+process (state)
+permission_layer (state)
+mass (quantity)
+energy (quantity)
+rate (quantity)
+window (quantity)
+option_set (quantity)
+gradient (quantity)
+coupling (relation)
+constrains (relation)
+responds_to (relation)
+dependency_edge (relation)
+measurand (operator)
+set (operator)
+denominator (operator)
+probe (operator)
+readout (operator)
+unread (state)
+editable_by_agreement (state)
+The aquifer's elastic storage is being drawn down while the reported supply figure holds steady.
+
+Output in exactly this form, nothing else:
+
+  restatement:
+  terms_used:
+  terms_added:
+  status:  COMPOSES | FAILS | COMPOSES_WITH_ADDITION

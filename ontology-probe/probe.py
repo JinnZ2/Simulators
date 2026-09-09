@@ -13,6 +13,24 @@ Three things, no model call anywhere in this file:
   score     section 5 on a JSONL run log: the four fields parsed from each
             response, the per-construction reading, the four aggregates,
             N1..N5, OP-1..OP-5, cross-family disagreement (section 7).
+            `--fixture PATH` scores against a construction file admitted
+            past the hand_built gate (for exercising the scorer only); the
+            report says so on its second line.
+
+Every command takes `--ontology DIR` naming a directory holding
+primitives.json and constructions.jsonl; the default is this folder (the
+SHAPE_SPEC reading). ontologies/substrate-primary/ is the operator's
+hand-built set and carries the first real run.
+
+TWO RUN-LOG FORMS. A RAW record carries `raw_response`, the restater's
+four-field text, and the scorer parses it. A CODED record carries the
+four fields already coded (`status`, `terms_used`, `terms_added`, plus
+`missing_primitive` on a FAILS and a free `note`) and no restatement;
+the scorer reads it as delivered, marks the leak check NOT_EVALUABLE
+(there is no restatement to read), binds the ontology from `--ontology`
+and checks the binding by `terms_used` being inside the primitive list.
+A coded sheet is the restater's self-report passed through the operator;
+the report says which form it scored.
 
 WHAT THE ORDER LEAVES TO THE RESTATER AND WHAT THIS ADDS. `status` is
 self-reported by the restater. The scorer keeps that as the order's
@@ -60,11 +78,17 @@ REPEATS = 3
 # [CHOICE 4] N4 fires when function words are more than half of the
 #            smuggle_set; OP-5 reads a primitive set as physics-grounded
 #            when at least half its primitives ground to physics.
+# [CHOICE 5] `targets` on a TARGETED construction is optional: section 3's
+#            schema has no such field, so a set built to the order omits
+#            it. When present it must name absent_by_design terms; when
+#            absent the construction-to-absence link is read from the
+#            run's `missing_primitive` citations instead.
 CHOICES = {
     1: "[PRIMITIVES] rendered one `term (type)` per line",
     2: "COMPOSES_WITH_ADDITION rows in every section 5 denominator, in no numerator; addition_rate printed per class",
     3: "restatement leak check added beside the self-reported status; FUNCTION_WORDS declared",
     4: "N4 threshold 0.5 function-word share; OP-5 physics-grounded = at least half of primitives ground to physics",
+    5: "`targets` optional on TARGETED (not in the order's schema); checked against absent_by_design when present",
 }
 N4_THRESHOLD = 0.5
 PHYSICS_SHARE = 0.5
@@ -190,9 +214,7 @@ def validate_construction(c, prims=None):
         raise Refused("construction %s class %r not in %s" % (c["id"], c["class"], CLASSES))
     if not isinstance(c["hand_built"], bool):
         raise Refused("construction %s hand_built must be a bool" % c["id"])
-    if c["class"] == "TARGETED":
-        if not c.get("targets"):
-            raise Refused("TARGETED construction %s must name the absent_by_design term(s) it targets" % c["id"])
+    if c["class"] == "TARGETED" and c.get("targets"):
         if prims is not None:
             absent = {a["term"].strip().lower() for a in prims["absent_by_design"]}
             bad = [t for t in c["targets"] if t.strip().lower() not in absent]
@@ -224,14 +246,50 @@ REQUIRED = ("run_id", "ontology", "ontology_version", "construction_id", "model"
             "repeat", "date", "raw_response", "constructed")
 
 
-def load_runs(path):
+CODED_REQUIRED = ("run_id", "family", "repeat", "id", "class", "status", "terms_used", "terms_added")
+
+
+def is_coded(rec):
+    return "raw_response" not in rec and "status" in rec and "id" in rec
+
+
+def adapt_coded(rec, prims):
+    """A coded-sheet record into the REQUIRED shape. Nothing is invented:
+    a field the sheet does not carry is a stated absence, and the
+    ontology is BOUND from the primitive set the caller passed, with the
+    binding checked downstream by terms_used being inside that set."""
+    for k in CODED_REQUIRED:
+        if k not in rec:
+            raise Refused("coded record %s lacks %r" % (rec.get("id"), k))
+    return {"run_id": "%s|%s" % (rec["run_id"], rec["id"]), "ontology": prims["name"],
+            "ontology_version": prims["version"], "construction_id": rec["id"],
+            "model": rec.get("model") or "UNKNOWN(coded sheet states family only: %s)" % rec["family"],
+            "family": rec["family"], "repeat": rec["repeat"],
+            "date": rec.get("date") or "UNDATED(not in coded sheet)",
+            "raw_response": None, "constructed": bool(rec.get("constructed", False)),
+            "coded": {"status": rec["status"], "terms_used": list(rec["terms_used"]),
+                      "terms_added": list(rec["terms_added"]),
+                      "missing_primitive": rec.get("missing_primitive"), "note": rec.get("note"),
+                      "class": rec.get("class")}}
+
+
+def load_runs(path, prims=None):
+    """Returns (records, form). form is 'raw' or 'coded'; a mixed log is refused."""
     out = []
     with open(path, encoding="utf-8") as fh:
         for ln in fh:
             ln = ln.strip()
             if ln:
                 out.append(json.loads(ln))
-    return out
+    forms = {"coded" if is_coded(r) else "raw" for r in out}
+    if len(forms) > 1:
+        raise Refused("run log mixes raw and coded records; score them as two logs")
+    form = forms.pop() if forms else "raw"
+    if form == "coded":
+        if prims is None:
+            raise Refused("a coded log binds its ontology from --ontology; none given")
+        out = [adapt_coded(r, prims) for r in out]
+    return out, form
 
 
 def validate_runs(runs, cons):
@@ -332,36 +390,93 @@ def rates(rows):
         if not den:
             return None
         return sum(1 for r in den if r[1] == st) / len(den)
+    def share_incl(cls):
+        den = [r for r in rows if r[0] == cls and r[1] in STATUSES]
+        if not den:
+            return None
+        return sum(1 for r in den if r[1] in ("COMPOSES", "COMPOSES_WITH_ADDITION")) / len(den)
     return {"hole_rate": share("TARGETED", "COMPOSES"),
             "narrowness": share("CONTROL", "FAILS"),
             "ambient_rate": share("AMBIENT", "COMPOSES"),
-            "addition_rate": {c: share(c, "COMPOSES_WITH_ADDITION") for c in CLASSES}}
+            "addition_rate": {c: share(c, "COMPOSES_WITH_ADDITION") for c in CLASSES},
+            # the other reading of [CHOICE 2]: an addition counted as composing
+            "hole_rate_incl_addition": share_incl("TARGETED"),
+            "ambient_rate_incl_addition": share_incl("AMBIENT")}
 
 
-def score_runs(runs, cons, prims, fixture=False):
+def cite_missing(missing, prims):
+    """A FAILS record may name the primitive it lacked (`missing_primitive`,
+    comma-separated). Each citation lands on one of three cells: a term
+    the ontology DECLARED absent (protection reporting its own boundary),
+    a term that IS a primitive (the restater did not find it), or a term
+    the ontology neither has nor declared absent (an UNDECLARED absence --
+    the cut refused something it never said it would)."""
+    prim = {e["term"].strip().lower() for e in prims["primitives"]}
+    absent = {a["term"].strip().lower() for a in prims["absent_by_design"]}
+    out = []
+    for t in _split_terms(missing or ""):
+        out.append({"term": t, "cell": "declared_absent" if t in absent else ("primitive" if t in prim else "undeclared")})
+    return out
+
+
+def score_runs(runs, cons, prims, fixture=False, form="raw"):
     """fixture=True says the construction set was admitted without the
-    hand_built gate, for exercising the scorer; the render banners it."""
+    hand_built gate, for exercising the scorer; the render banners it.
+    form is 'raw' or 'coded' (see the module docstring)."""
     validate_runs(runs, cons)
     by_id = {c["id"]: c for c in cons}
+    prim_terms = {e["term"].strip().lower() for e in prims["primitives"]}
     scored = []
     for r in runs:
-        p = parse_response(r["raw_response"])
         c = by_id[r["construction_id"]]
-        lk = leak(p["restatement"], prims, p["terms_added"]) if not p["malformed"] else []
+        if r.get("coded"):
+            cd = r["coded"]
+            st = str(cd["status"]).strip().upper()
+            p = {"restatement": None, "terms_used": [t.strip().lower() for t in cd["terms_used"]],
+                 "terms_added": [t.strip().lower() for t in cd["terms_added"]],
+                 "status": st if st in STATUSES else "MALFORMED", "malformed": st not in STATUSES, "notes": []}
+            lk = None  # no restatement to read
+            extra = {"cited_missing": cite_missing(cd["missing_primitive"], prims), "note": cd["note"],
+                     "class_agrees": (cd["class"] == c["class"]) if cd["class"] is not None else None,
+                     "terms_used_in_primitives": all(t in prim_terms for t in p["terms_used"])}
+        else:
+            p = parse_response(r["raw_response"])
+            lk = leak(p["restatement"], prims, p["terms_added"]) if not p["malformed"] else []
+            extra = {"cited_missing": [], "note": None, "class_agrees": None,
+                     "terms_used_in_primitives": all(t in prim_terms for t in p["terms_used"])}
         s = dict(p)
         s.update({"run_id": r["run_id"], "construction_id": c["id"], "class": c["class"], "model": r["model"],
                   "family": r["family"], "repeat": r["repeat"], "ontology": r["ontology"],
                   "constructed": r["constructed"], "reading": reading(c["class"], p["status"]),
                   "leak": lk, "undeclared_used": undeclared_used(p["terms_used"], prims, p["terms_added"]),
-                  "status_contradicted": (p["status"] == "COMPOSES" and bool(lk))})
+                  "status_contradicted": (p["status"] == "COMPOSES" and bool(lk)) if lk is not None else None,
+                  "targets": c.get("targets")})
+        s.update(extra)
         scored.append(s)
     ok = [s for s in scored if not s["malformed"]]
     agg = rates([(s["class"], s["status"]) for s in ok])
     smuggle = sorted({t for s in ok for t in s["terms_added"]})
-    leaks = sorted({t for s in ok for t in s["leak"]})
+    leaks = sorted({t for s in ok for t in (s["leak"] or [])})
+    leak_evaluable = [s for s in ok if s["leak"] is not None]
+    cited = [(s, m) for s in ok for m in s["cited_missing"]]
+    missing_summary = {
+        "citations": len(cited),
+        "declared_absent": sum(1 for _, m in cited if m["cell"] == "declared_absent"),
+        "primitive": sorted({m["term"] for _, m in cited if m["cell"] == "primitive"}),
+        "undeclared": sorted({m["term"] for _, m in cited if m["cell"] == "undeclared"}),
+        "targeted_fails_citing_declared_absence": sum(
+            1 for s in ok if s["class"] == "TARGETED" and s["status"] == "FAILS"
+            and any(m["cell"] == "declared_absent" for m in s["cited_missing"])),
+        "targeted_fails": sum(1 for s in ok if s["class"] == "TARGETED" and s["status"] == "FAILS"),
+    }
     return {"scored": scored, "aggregates": agg, "smuggle_set": smuggle, "leak_set": leaks,
-            "n_runs": len(runs), "n_malformed": len(scored) - len(ok),
-            "n_status_contradicted": sum(1 for s in ok if s["status_contradicted"]),
+            "n_runs": len(runs), "n_malformed": len(scored) - len(ok), "form": form,
+            "n_leak_evaluable": len(leak_evaluable),
+            "n_status_contradicted": sum(1 for s in leak_evaluable if s["status_contradicted"]),
+            "missing_summary": missing_summary,
+            "binding": {"terms_used_in_primitives": sum(1 for s in ok if s["terms_used_in_primitives"]),
+                        "class_agrees": sum(1 for s in ok if s["class_agrees"]),
+                        "class_recorded": sum(1 for s in ok if s["class_agrees"] is not None), "scored": len(ok)},
             "nulls": nulls(ok, agg, smuggle), "claims": claims(ok, agg, smuggle, prims, cons),
             "family_disagreement": family_disagreement(ok),
             "constructed_share": (sum(1 for r in runs if r["constructed"]) / len(runs)) if runs else None,
@@ -491,13 +606,21 @@ def render(res):
         L.append("runs: %d, malformed %d, constructed share %.2f%s" % (
             res["n_runs"], res["n_malformed"], cs,
             "  -- EVERY RECORD IS CONSTRUCTED; nothing below is about any model" if cs == 1.0 else ""))
+        L.append("input form: %s%s" % (res.get("form", "raw"),
+                 " (statuses coded by the operator; no restatement logged, so the leak check is NOT_EVALUABLE)"
+                 if res.get("form") == "coded" else " (restatements parsed here)"))
+        b = res["binding"]
+        L.append("ontology binding: terms_used inside the primitive list on %d of %d scored; class field agrees on %d of %d recorded" % (
+            b["terms_used_in_primitives"], b["scored"], b["class_agrees"], b["class_recorded"]))
     L.append("")
     L.append("per run (section 5)")
-    L.append("%-8s %-9s %-14s %-3s %-24s %-16s %-6s %s" % ("constr", "class", "model", "rep", "status", "reading", "leak", "terms_added"))
+    L.append("%-8s %-9s %-14s %-3s %-24s %-16s %-6s %s" % ("constr", "class", "family", "rep", "status", "reading", "leak", "terms_added | cited missing"))
     for s in res["scored"]:
-        L.append("%-8s %-9s %-14s %-3d %-24s %-16s %-6d %s%s" % (
-            s["construction_id"], s["class"], s["model"][:14], s["repeat"], s["status"], s["reading"],
-            len(s["leak"]), ",".join(s["terms_added"]) or "-",
+        cited = ",".join("%s(%s)" % (m["term"], m["cell"][:4]) for m in s["cited_missing"])
+        L.append("%-8s %-9s %-14s %-3d %-24s %-16s %-6s %s%s%s" % (
+            s["construction_id"], s["class"], s["family"][:14], s["repeat"], s["status"], s["reading"],
+            "n/a" if s["leak"] is None else str(len(s["leak"])), ",".join(s["terms_added"]) or "-",
+            (" | " + cited) if cited else "",
             "  CONTRADICTED(leak %s)" % ",".join(s["leak"]) if s["status_contradicted"] else ""))
     L.append("")
     a = res["aggregates"]
@@ -505,10 +628,27 @@ def render(res):
     L.append("aggregates: hole_rate %s  narrowness %s  ambient_rate %s  addition_rate %s" % (
         fmt(a["hole_rate"]), fmt(a["narrowness"]), fmt(a["ambient_rate"]),
         {k: fmt(v) for k, v in a["addition_rate"].items()}))
+    L.append("  other reading of [CHOICE 2], an addition counted as composing: hole_rate %s  ambient_rate %s" % (
+        fmt(a["hole_rate_incl_addition"]), fmt(a["ambient_rate_incl_addition"])))
     L.append("smuggle_set (%d): %s" % (len(res["smuggle_set"]), ", ".join(res["smuggle_set"]) or "-"))
-    L.append("leak_set (%d, undeclared additions read from restatements): %s" % (
-        len(res["leak_set"]), ", ".join(res["leak_set"]) or "-"))
-    L.append("status contradicted by leak: %d of %d scored" % (res["n_status_contradicted"], res["n_runs"] - res["n_malformed"]))
+    if res.get("n_leak_evaluable", 0):
+        L.append("leak_set (%d, undeclared additions read from restatements): %s" % (
+            len(res["leak_set"]), ", ".join(res["leak_set"]) or "-"))
+        L.append("status contradicted by leak: %d of %d leak-evaluable" % (res["n_status_contradicted"], res["n_leak_evaluable"]))
+    else:
+        L.append("leak check: NOT_EVALUABLE on every record (no restatement logged)")
+    ms = res["missing_summary"]
+    if ms["citations"]:
+        L.append("cited missing primitives (from FAILS records): %d citations; on the declared-absent list %d; "
+                 "naming a primitive %s; UNDECLARED absences %s" % (
+                     ms["citations"], ms["declared_absent"], ms["primitive"] or "-", ms["undeclared"] or "-"))
+        L.append("  TARGETED FAILS citing a declared absence: %d of %d" % (
+            ms["targeted_fails_citing_declared_absence"], ms["targeted_fails"]))
+    notes = [s for s in res["scored"] if s.get("note")]
+    if notes:
+        L.append("restater notes carried (%d):" % len(notes))
+        for s in notes:
+            L.append("  %-8s %s" % (s["construction_id"], s["note"]))
     L.append("")
     L.append("nulls (section 6)")
     for k in ("N1", "N2", "N3", "N4", "N5"):
@@ -541,19 +681,29 @@ def main(argv):
         sys.stderr.write(__doc__)
         return 2
     cmd = argv[0]
-    prims = load_primitives()
+    odir = HERE
+    if "--ontology" in argv:
+        i = argv.index("--ontology")
+        if len(argv) < i + 2:
+            sys.stderr.write("--ontology takes a directory\n")
+            return 2
+        odir = argv[i + 1]
+        argv = argv[:i] + argv[i + 2:]
+    prim_path = os.path.join(odir, "primitives.json")
+    cons_path = os.path.join(odir, "constructions.jsonl")
+    prims = load_primitives(prim_path)
     if cmd == "declare":
         print(json.dumps(primitives_report(prims), indent=1, sort_keys=True))
-        cons = load_constructions(CONSTRUCTIONS, prims)
+        cons = load_constructions(cons_path, prims)
         print("admitted constructions: %s" % json.dumps(set_report(cons), sort_keys=True))
-        for c in candidates():
+        for c in candidates(cons_path):
             print("CANDIDATE %-9s %-9s hand_built=False  %s" % (c["id"], c["class"], c["text"][:60]))
         return 0
     if cmd == "prompt":
         if len(argv) < 2:
-            sys.stderr.write("usage: probe.py prompt CONSTRUCTION_ID\n")
+            sys.stderr.write("usage: probe.py prompt CONSTRUCTION_ID [--ontology DIR]\n")
             return 2
-        cons = {c["id"]: c for c in load_constructions(CONSTRUCTIONS, prims)}
+        cons = {c["id"]: c for c in load_constructions(cons_path, prims)}
         if argv[1] not in cons:
             sys.stderr.write("construction %r not admitted (candidates are listed by `declare`)\n" % argv[1])
             return 2
@@ -561,18 +711,19 @@ def main(argv):
         return 0
     if cmd == "score":
         if len(argv) < 2:
-            sys.stderr.write("usage: probe.py score RUNS.jsonl [--fixture CONSTRUCTIONS.jsonl]\n")
+            sys.stderr.write("usage: probe.py score RUNS.jsonl [--ontology DIR] [--fixture CONSTRUCTIONS.jsonl]\n")
             return 2
         fixture = "--fixture" in argv
         if fixture:
             i = argv.index("--fixture")
             if len(argv) < i + 2:
-                sys.stderr.write("--fixture needs a path\n")
+                sys.stderr.write("--fixture takes a path\n")
                 return 2
             cons = load_constructions(argv[i + 1], prims, admit_candidates=True)
         else:
-            cons = load_constructions(CONSTRUCTIONS, prims)
-        sys.stdout.write(render(score_runs(load_runs(argv[1]), cons, prims, fixture=fixture)))
+            cons = load_constructions(cons_path, prims)
+        runs, form = load_runs(argv[1], prims)
+        sys.stdout.write(render(score_runs(runs, cons, prims, fixture=fixture, form=form)))
         return 0
     sys.stderr.write(__doc__)
     return 2

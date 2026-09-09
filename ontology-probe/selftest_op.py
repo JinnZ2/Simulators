@@ -167,8 +167,8 @@ def main():
     check("fixture clears the 40% control floor and carries no flag", fr["flags"] == [] and fr["control_share"] == 0.4)
     short = [c for c in fx if c["class"] != "CONTROL"] + fx[:5]
     check("a set under the control floor flags CONTROL_SHORT", any("CONTROL_SHORT" in f for f in probe.set_report(short)["flags"]))
-    refuses("a TARGETED construction with no targets is refused",
-            lambda: probe.validate_construction({"id": "x", "text": "t", "premise": "p", "class": "TARGETED", "hand_built": True}, prims))
+    check("a TARGETED construction with no targets validates ([CHOICE 5]: the order's schema has no such field)",
+          probe.validate_construction({"id": "x", "text": "t", "premise": "p", "class": "TARGETED", "hand_built": True}, prims)["id"] == "x")
     refuses("a TARGETED construction targeting a non-absent term is refused",
             lambda: probe.validate_construction({"id": "x", "text": "t", "premise": "p", "class": "TARGETED",
                                                  "targets": ["flux"], "hand_built": True}, prims))
@@ -374,8 +374,104 @@ def main():
     cp = subprocess.run([py, os.path.join(HERE, "probe.py"), "prompt", "cand-001"], capture_output=True, text=True)
     check("CLI prompt refuses a candidate (not admitted)", cp.returncode == 2)
 
+    # ---- the operator's set and the first real run (ontologies/substrate-primary)
+    OD = os.path.join(HERE, "ontologies", "substrate-primary")
+    sp = probe.load_primitives(os.path.join(OD, "primitives.json"))
+    spr = probe.primitives_report(sp)
+    check("substrate-primary: 20 primitives, 9 absent_by_design", spr["n_primitives"] == 20 and spr["n_absent_by_design"] == 9)
+    check("substrate-primary is physics-grounded at share 0.65", spr["grounding_class"] == "physics-grounded" and abs(spr["physics_share"] - 0.65) < 1e-12)
+    check("substrate-primary carries no undefined primitive", spr["undefined_candidate_holes"] == [])
+    check("the two declared sets fall in different grounding classes (OP-5's precondition on the primitive side)",
+          spr["grounding_class"] != pr["grounding_class"])
+    sc = probe.load_constructions(os.path.join(OD, "constructions.jsonl"), sp)
+    scr = probe.set_report(sc)
+    check("operator set: 30 admitted, 12/9/9, no flags", scr["n"] == 30 and scr["by_class"] == {"TARGETED": 9, "AMBIENT": 9, "CONTROL": 12} and scr["flags"] == [])
+    check("every operator construction is hand_built", all(c["hand_built"] is True for c in sc))
+    check("no operator TARGETED construction carries targets (the order's schema; [CHOICE 5] exercised)",
+          all("targets" not in c for c in sc if c["class"] == "TARGETED"))
+    check("no candidates in the operator set", probe.candidates(os.path.join(OD, "constructions.jsonl")) == [])
+    rp1 = os.path.join(OD, "runs", "claudeopus5_r1.jsonl")
+    rr, form = probe.load_runs(rp1, sp)
+    check("the delivered run is read as a coded sheet", form == "coded" and len(rr) == 30)
+    check("coded run_ids are made unique from run_id|id", len({r["run_id"] for r in rr}) == 30)
+    check("coded records carry no restatement", all(r["raw_response"] is None for r in rr))
+    check("a real run: constructed False on every record", all(r["constructed"] is False for r in rr))
+    refuses("a coded log with no primitive set is refused", lambda: probe.load_runs(rp1))
+    refuses("a coded record lacking status is refused",
+            lambda: probe.adapt_coded({"run_id": "r", "family": "f", "repeat": 1, "id": "c-001", "class": "CONTROL",
+                                       "terms_used": [], "terms_added": []}, sp))
+    mixed = os.path.join(HERE, "runs", "mixed_refused.jsonl")
+    with open(mixed, "w", encoding="utf-8") as fh:
+        fh.write(json.dumps(runs[0]) + "\n" + open(rp1, encoding="utf-8").readline())
+    refuses("a log mixing raw and coded records is refused", lambda: probe.load_runs(mixed, sp))
+    os.remove(mixed)
+    R1 = probe.score_runs(rr, sc, sp, form=form)
+    check("30 scored, 0 malformed, constructed share 0.0", R1["n_runs"] == 30 and R1["n_malformed"] == 0 and R1["constructed_share"] == 0.0)
+    b = R1["binding"]
+    check("ontology binding: every terms_used inside the primitive list, 30 of 30", b["terms_used_in_primitives"] == 30 and b["scored"] == 30)
+    check("the run's class field agrees with the construction set on 30 of 30", b["class_agrees"] == 30 and b["class_recorded"] == 30)
+    a1 = R1["aggregates"]
+    check("hole_rate 0 of 9 (every TARGETED fails)", a1["hole_rate"] == 0.0)
+    check("narrowness 0 of 12 (every CONTROL composes)", a1["narrowness"] == 0.0)
+    check("ambient_rate 2 of 9 under [CHOICE 2]", abs(a1["ambient_rate"] - 2 / 9) < 1e-12)
+    check("ambient_rate 7 of 9 with additions counted as composing", abs(a1["ambient_rate_incl_addition"] - 7 / 9) < 1e-12)
+    check("hole_rate 0 under either reading", a1["hole_rate_incl_addition"] == 0.0)
+    check("addition_rate TARGETED 0, AMBIENT 5/9, CONTROL 1/12",
+          a1["addition_rate"]["TARGETED"] == 0.0 and abs(a1["addition_rate"]["AMBIENT"] - 5 / 9) < 1e-12
+          and abs(a1["addition_rate"]["CONTROL"] - 1 / 12) < 1e-12)
+    check("smuggle_set is ten premise-bearing terms",
+          R1["smuggle_set"] == ["attribution", "competition", "contamination", "count", "efficiency", "learning",
+                                "market", "maximize", "preference", "validity"])
+    check("leak check NOT_EVALUABLE on every coded record", R1["n_leak_evaluable"] == 0 and all(s["leak"] is None for s in R1["scored"]))
+    ms = R1["missing_summary"]
+    check("13 cited missing primitives, 11 on the declared-absent list, none naming a primitive",
+          ms["citations"] == 13 and ms["declared_absent"] == 11 and ms["primitive"] == [])
+    check("two UNDECLARED absences cited, both on AMBIENT FAILS", ms["undeclared"] == ["absent-as-distinct-from-unread", "role"]
+          and all(s["class"] == "AMBIENT" for s in R1["scored"] if any(m["cell"] == "undeclared" for m in s["cited_missing"])))
+    check("every TARGETED FAILS cites a declared absence, 9 of 9", ms["targeted_fails_citing_declared_absence"] == 9 and ms["targeted_fails"] == 9)
+    check("four restater notes carried", sum(1 for s in R1["scored"] if s["note"]) == 4)
+    n1 = R1["nulls"]
+    check("N1/N2 do not fire on the real run", n1["N1"]["fires"] is False and n1["N2"]["fires"] is False)
+    check("N3 NOT_EVALUABLE at one repeat", n1["N3"].get("verdict") == "NOT_EVALUABLE")
+    check("N4 share 0.0 (no function word in the smuggle_set), does not fire", n1["N4"]["function_word_share"] == 0.0 and n1["N4"]["fires"] is False)
+    check("N5 does not fire (0.000 against 0.222)", n1["N5"]["fires"] is False)
+    c1 = R1["claims"]
+    check("OP-1, OP-2, OP-3 not refuted on the real run", all(c1[k]["verdict"] == "not refuted" for k in ("OP-1", "OP-2", "OP-3")))
+    check("OP-4, OP-5 undetermined on the real run", c1["OP-4"]["verdict"] == "undetermined" and c1["OP-5"]["verdict"] == "undetermined")
+    check("one family, so no restater disagreement is computable", R1["family_disagreement"]["constructions_with_two_families"] == 0)
+    out1 = probe.render(R1)
+    check("real render carries no constructed banner and no fixture banner", "EVERY RECORD IS CONSTRUCTED" not in out1 and "FIXTURE" not in out1)
+    check("real render states the coded form", "input form: coded" in out1)
+    # declared exemption: the delivered absent term `better/worse` carries two screened words
+    m1 = re.sub(r"better/worse", "b3tter/w0rse", out1)
+    check("real render screens clean with the delivered term masked", not no_severity.hits(m1))
+    check("the delivered term is the only thing that fires in the real render", {h[1] for h in no_severity.hits(out1)} == {"better", "worse"})
+    check("a planted word is caught through that exemption", {h[1] for h in no_severity.hits(m1 + "\nthis is wrong\n")} == {"wrong"})
+    pm1 = probe.render_prompt(sp, {c["id"]: c for c in sc}["c-001"])
+    check("operator prompt render screens clean, no exemption", not no_severity.hits(pm1))
+    check("operator prompt carries every primitive and no absent term as a line",
+          all(pm1.count("%s (%s)" % (e["term"], e["type"])) == 1 for e in sp["primitives"])
+          and not any(re.search(r"^%s \(" % re.escape(x["term"]), pm1, re.M) for x in sp["absent_by_design"]))
+    cp = subprocess.run([py, os.path.join(HERE, "probe.py"), "score", rp1, "--ontology", OD], capture_output=True, text=True)
+    check("CLI score --ontology reproduces the real render", cp.returncode == 0 and cp.stdout == out1)
+    cp = subprocess.run([py, os.path.join(HERE, "probe.py"), "declare", "--ontology", OD], capture_output=True, text=True)
+    check("CLI declare --ontology reports the admitted 30", cp.returncode == 0 and '"n": 30' in cp.stdout and "CANDIDATE" not in cp.stdout)
+    cp = subprocess.run([py, os.path.join(HERE, "probe.py"), "prompt", "c-001", "--ontology", OD], capture_output=True, text=True)
+    check("CLI prompt --ontology renders an admitted construction", cp.returncode == 0 and cp.stdout.strip() == pm1.strip())
+    cp = subprocess.run([py, os.path.join(HERE, "probe.py"), "score", rp1], capture_output=True, text=True)
+    check("the real run scored against the default (SHAPE_SPEC) set is refused: constructions not admitted there", cp.returncode != 0)
+    import hashlib
+    sha = lambda path: hashlib.sha256(open(path, "rb").read()).hexdigest()[:16]  # noqa: E731
+    check("delivered constructions byte-identical to the upload (sha256 pinned)",
+          sha(os.path.join(OD, "constructions.jsonl")) == "1cf4c362c093150e")
+    check("delivered run log byte-identical to the upload (sha256 pinned)", sha(rp1) == "480c7676e455a388")
+
     # ---- pin samples
     sd = os.path.join(HERE, "samples")
+    with open(os.path.join(sd, "score_substrate-primary_claudeopus5_r1.sample.txt"), "w", encoding="utf-8") as fh:
+        fh.write(out1)
+    with open(os.path.join(sd, "prompt_substrate-primary_c-001.sample.txt"), "w", encoding="utf-8") as fh:
+        fh.write(pm1 + "\n")
     with open(os.path.join(sd, "score_constructed.sample.txt"), "w", encoding="utf-8") as fh:
         fh.write(out)
     with open(os.path.join(sd, "score_empty.sample.txt"), "w", encoding="utf-8") as fh:
