@@ -37,3 +37,5 @@ jobs:
         run: python -m unittest discover -s incentive-blindspot-sim -p 'test_*.py'
       - name: antifungal-mechanism-sim
         run: python -m unittest discover -s antifungal-mechanism-sim/tests -p 'test_*.py'
+      - name: enclosure-first-residual
+        run: python -m unittest discover -s enclosure-first-residual/tests -p 'test_*.py'

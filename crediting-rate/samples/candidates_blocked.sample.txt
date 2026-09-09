@@ -1,0 +1,4 @@
+crediting_rate -- prediction sha256 7246dd6b526393cc -- seed 7
+frame: constructed / 0 / 2026-09-07
+RETURN: BLOCKED (insufficient_attested_ordering)
+  {'items_per_bin': {1: 0, 0: 0}, 'excluded': {'ordering_unknown': 10, 'ordering_reversed': 0, 'uncoded': 0}, 'min_per_bin': 3, 'rows': []}

@@ -1,0 +1,1 @@
+crediting_rate selftest: 15/15 checks pass

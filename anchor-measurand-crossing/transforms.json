@@ -1,0 +1,11 @@
+{
+  "_note": "Two transform lists. A lexicon alias reached from its measurand by a transform NOT in the active list is scored as its own measurand. Section 6 says the transform list is the load-bearing part of the scorer and N4 asks for two lists; both are published here so a disagreeing reader can rescore.",
+  "T-A": {
+    "reading": "the order's own list, section 6, as delivered",
+    "transforms": ["integrate", "differentiate", "aggregate", "disaggregate", "threshold", "re-scope"]
+  },
+  "T-B": {
+    "reading": "dimension-preserving transforms only: a rate has different dimensions from a stock and a thresholded count is a fraction, so differentiate, integrate and threshold are treated as producing a different quantity",
+    "transforms": ["aggregate", "disaggregate", "re-scope"]
+  }
+}

@@ -1,0 +1,13 @@
+APPEND-ONLY. One entry per threshold change. Superseded entries are never
+removed or edited; a new value is a new entry below the old one.
+
+---
+threshold: check3_failure_assertions_min
+value:     3
+who:       builder (Claude Code session, work order gate_check.py), not an operator
+when:      2026-09-07
+reasoning: worked example so the file and the parser are exercised. Three
+           because a single failure-path assertion can be the one the
+           success path also satisfies, and two can be a pair on one branch;
+           three forces at least one more branch. Not a policy anyone
+           adopted; an operator entry below supersedes it.

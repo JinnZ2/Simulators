@@ -1,0 +1,30 @@
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-001","class":"CONTROL","status":"COMPOSES","terms_used":["substrate","rate","readout","window"],"terms_added":[]}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-002","class":"CONTROL","status":"COMPOSES","terms_used":["measurand","set","readout"],"terms_added":[]}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-003","class":"CONTROL","status":"COMPOSES_WITH_ADDITION","terms_used":["mass","substrate","window","coupling"],"terms_added":["contamination"]}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-004","class":"CONTROL","status":"COMPOSES","terms_used":["rate","gradient","window","measurand"],"terms_added":[]}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-005","class":"CONTROL","status":"COMPOSES","terms_used":["dependency_edge","constrains","rate"],"terms_added":[]}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-006","class":"CONTROL","status":"COMPOSES","terms_used":["substrate","process","option_set","constrains"],"terms_added":[]}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-007","class":"CONTROL","status":"COMPOSES","terms_used":["probe","readout","window","rate"],"terms_added":[]}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-008","class":"CONTROL","status":"COMPOSES","terms_used":["denominator","set","measurand"],"terms_added":[]}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-009","class":"CONTROL","status":"COMPOSES","terms_used":["readout","substrate","gradient","coupling"],"terms_added":[]}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-010","class":"CONTROL","status":"COMPOSES","terms_used":["window","measurand","readout"],"terms_added":[]}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-011","class":"CONTROL","status":"COMPOSES","terms_used":["option_set","set","window","coupling"],"terms_added":[]}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-012","class":"CONTROL","status":"COMPOSES","terms_used":["unread","measurand","readout"],"terms_added":[]}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-013","class":"TARGETED","status":"FAILS","terms_used":[],"terms_added":[],"missing_primitive":"intent"}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-014","class":"TARGETED","status":"FAILS","terms_used":[],"terms_added":[],"missing_primitive":"dominance_rank"}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-015","class":"TARGETED","status":"FAILS","terms_used":[],"terms_added":[],"missing_primitive":"zero_sum"}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-016","class":"TARGETED","status":"FAILS","terms_used":[],"terms_added":[],"missing_primitive":"identity"}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-017","class":"TARGETED","status":"FAILS","terms_used":[],"terms_added":[],"missing_primitive":"intent,interior_state"}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-018","class":"TARGETED","status":"FAILS","terms_used":[],"terms_added":[],"missing_primitive":"deserves"}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-019","class":"TARGETED","status":"FAILS","terms_used":[],"terms_added":[],"missing_primitive":"better/worse"}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-020","class":"TARGETED","status":"FAILS","terms_used":[],"terms_added":[],"missing_primitive":"agent_did_X_because"}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-021","class":"TARGETED","status":"FAILS","terms_used":[],"terms_added":[],"missing_primitive":"interior_state"}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-022","class":"AMBIENT","status":"COMPOSES_WITH_ADDITION","terms_used":["set","option_set","dependency_edge"],"terms_added":["count","maximize"],"note":"composes as an operation over set cardinality; dependency_edge is available but not required, so it drops silently"}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-023","class":"AMBIENT","status":"COMPOSES","terms_used":["option_set"],"terms_added":[],"note":"option_set has no completeness requirement, so a two-member set composes with nothing flagged"}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-024","class":"AMBIENT","status":"COMPOSES_WITH_ADDITION","terms_used":["coupling","rate"],"terms_added":["competition","efficiency"]}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-025","class":"AMBIENT","status":"COMPOSES_WITH_ADDITION","terms_used":["coupling","readout"],"terms_added":["preference","market"],"note":"preference reimports interior_state through a term not on the absent list"}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-026","class":"AMBIENT","status":"FAILS","terms_used":[],"terms_added":[],"missing_primitive":"identity,role"}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-027","class":"AMBIENT","status":"COMPOSES","terms_used":["gradient","rate","readout","window"],"terms_added":[],"note":"population default restates cleanly as a physical claim; nothing marks the missing set"}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-028","class":"AMBIENT","status":"FAILS","terms_used":[],"terms_added":[],"missing_primitive":"absent-as-distinct-from-unread"}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-029","class":"AMBIENT","status":"COMPOSES_WITH_ADDITION","terms_used":["process","window"],"terms_added":["attribution","learning"]}
+{"run_id":"r1","family":"claude-opus-5","repeat":1,"id":"c-030","class":"AMBIENT","status":"COMPOSES_WITH_ADDITION","terms_used":["measurand","permission_layer","editable_by_agreement"],"terms_added":["validity"]}

@@ -1,0 +1,39 @@
+{
+  "name": "substrate-primary",
+  "version": "0.1.0",
+  "hand_built": true,
+  "declared_from": "substrate-framework three-layer cut + energy_english constraint",
+  "primitives": [
+    {"term": "substrate",       "type": "state",    "grounds_to": "physics"},
+    {"term": "process",         "type": "state",    "grounds_to": "physics"},
+    {"term": "permission_layer","type": "state",    "grounds_to": "declared"},
+    {"term": "mass",            "type": "quantity", "grounds_to": "physics"},
+    {"term": "energy",          "type": "quantity", "grounds_to": "physics"},
+    {"term": "rate",            "type": "quantity", "grounds_to": "physics"},
+    {"term": "window",          "type": "quantity", "grounds_to": "physics"},
+    {"term": "option_set",      "type": "quantity", "grounds_to": "declared"},
+    {"term": "gradient",        "type": "quantity", "grounds_to": "physics"},
+    {"term": "coupling",        "type": "relation", "grounds_to": "physics"},
+    {"term": "constrains",      "type": "relation", "grounds_to": "physics"},
+    {"term": "responds_to",     "type": "relation", "grounds_to": "physics"},
+    {"term": "dependency_edge", "type": "relation", "grounds_to": "physics"},
+    {"term": "measurand",       "type": "operator", "grounds_to": "declared"},
+    {"term": "set",             "type": "operator", "grounds_to": "declared"},
+    {"term": "denominator",     "type": "operator", "grounds_to": "declared"},
+    {"term": "probe",           "type": "operator", "grounds_to": "physics"},
+    {"term": "readout",         "type": "operator", "grounds_to": "physics"},
+    {"term": "unread",          "type": "state",    "grounds_to": "declared"},
+    {"term": "editable_by_agreement", "type": "state", "grounds_to": "declared"}
+  ],
+  "absent_by_design": [
+    {"term": "identity",        "reason": "identity-bearing unit is what a short window returns, not a property"},
+    {"term": "intent",          "reason": "no intent attribution; energy_english"},
+    {"term": "motive",          "reason": "no motivation attribution"},
+    {"term": "deserves",        "reason": "no moral label in data structures"},
+    {"term": "better/worse",    "reason": "no moral gradient on selection output"},
+    {"term": "zero_sum",        "reason": "no fixed-total primitive; totals are measured, not assumed"},
+    {"term": "dominance_rank",  "reason": "retracted claim, no grounded measurand"},
+    {"term": "agent_did_X_because", "reason": "agentive framing resolves to corpus default"},
+    {"term": "interior_state",  "reason": "report is not the instrument; unread is the correct entry"}
+  ]
+}

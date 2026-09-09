@@ -1,0 +1,29 @@
+anchor-measurand-crossing -- score report
+active transform list: T-A = ['integrate', 'differentiate', 'aggregate', 'disaggregate', 'threshold', 're-scope']
+lexicon 656554ce059f  transforms cb594ebf6ff0
+normalization strips: units ['%', 'c', 'cm', 'dry', 'g', 'ha', 'hectare', 'kg', 'l', 'm', 'mg', 'mg/ha', 'mgc', 'ml', 'per', 'ppb', 'ppm', 't', 'tonne', 'tonnes', 'ug', 'ug/g', 'ug/l', 'weight', 'wet', 'year', 'years', 'yr', 'µg', 'µg/g', 'µg/l']; articles ['a', 'an', 'the']; hedges ['about', 'apparent', 'approximately', 'effective', 'estimated', 'measured', 'nominal', 'observed', 'overall', 'reported', 'roughly', 'so-called']
+[CHOICE 1] artifact block rendered as `claim:` and `method:` lines, section 3 labels
+[CHOICE 2] M+ decision sentence placement; default after_block (D's position)
+[CHOICE 3] component quantities count as distinct measurands (section 6 literal); crossings also split foreign/component
+[CHOICE 4] AP-3 refuted when crossing_min(M+) >= crossing_min(D) on the same case and model
+runs: none. No model has been run against this instrument here.
+
+per case per arm (section 6)
+case     arm run              n    distinct   native    crossing   for  cmp  ungrp  coverage
+
+claims (section 7)
+  AP-1  undetermined  -- no scored M-arm response
+  AP-2  undetermined  -- no (case, model) with both a D and an M response
+  AP-3  undetermined  -- M+ arm not run (section 12: highest priority)
+  AP-4  undetermined  -- no B arm; the cue prompt is not delivered in the order
+  AP-5  undetermined  -- no C arm; the foreign-measurand prompt is not delivered in the order
+  AP-6  undetermined  -- fewer than two families with both arms
+
+nulls (section 8)
+  N1  practitioner recognition: {"coded": 0, "note": "coded sheet absent; NOT_CODED", "of": 0, "rate": null}
+  N2  control case: {"verdict": "NOT_EVALUABLE", "why": "no admitted control case has a D response"}
+  N3  M-arm crossings: 0 run(s)
+  N4  two transform lists disagree on 0 of 0 bands
+  N5  form stability: {}
+
+selection of artifact, field and decision string is operator input (section 9); nothing above bears on it.
