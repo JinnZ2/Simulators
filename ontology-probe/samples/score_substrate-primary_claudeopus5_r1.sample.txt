@@ -1,0 +1,75 @@
+ontology-probe -- score report
+ontology: substrate-primary 0.1.0  primitives 20 (sha fa7a188972b1)  absent_by_design 9  grounding physics-grounded (physics share 0.65)
+construction set: n 30, by class {'TARGETED': 9, 'AMBIENT': 9, 'CONTROL': 12}, control share 0.40
+[CHOICE 1] [PRIMITIVES] rendered one `term (type)` per line
+[CHOICE 2] COMPOSES_WITH_ADDITION rows in every section 5 denominator, in no numerator; addition_rate printed per class
+[CHOICE 3] restatement leak check added beside the self-reported status; FUNCTION_WORDS declared
+[CHOICE 4] N4 threshold 0.5 function-word share; OP-5 physics-grounded = at least half of primitives ground to physics
+[CHOICE 5] `targets` optional on TARGETED (not in the order's schema); checked against absent_by_design when present
+runs: 30, malformed 0, constructed share 0.00
+input form: coded (statuses coded by the operator; no restatement logged, so the leak check is NOT_EVALUABLE)
+ontology binding: terms_used inside the primitive list on 30 of 30 scored; class field agrees on 30 of 30 recorded
+
+per run (section 5)
+constr   class     family         rep status                   reading          leak   terms_added | cited missing
+c-001    CONTROL   claude-opus-5  1   COMPOSES                 USABLE           n/a    -
+c-002    CONTROL   claude-opus-5  1   COMPOSES                 USABLE           n/a    -
+c-003    CONTROL   claude-opus-5  1   COMPOSES_WITH_ADDITION   ADDITION         n/a    contamination
+c-004    CONTROL   claude-opus-5  1   COMPOSES                 USABLE           n/a    -
+c-005    CONTROL   claude-opus-5  1   COMPOSES                 USABLE           n/a    -
+c-006    CONTROL   claude-opus-5  1   COMPOSES                 USABLE           n/a    -
+c-007    CONTROL   claude-opus-5  1   COMPOSES                 USABLE           n/a    -
+c-008    CONTROL   claude-opus-5  1   COMPOSES                 USABLE           n/a    -
+c-009    CONTROL   claude-opus-5  1   COMPOSES                 USABLE           n/a    -
+c-010    CONTROL   claude-opus-5  1   COMPOSES                 USABLE           n/a    -
+c-011    CONTROL   claude-opus-5  1   COMPOSES                 USABLE           n/a    -
+c-012    CONTROL   claude-opus-5  1   COMPOSES                 USABLE           n/a    -
+c-013    TARGETED  claude-opus-5  1   FAILS                    PROTECTION       n/a    - | intent(decl)
+c-014    TARGETED  claude-opus-5  1   FAILS                    PROTECTION       n/a    - | dominance_rank(decl)
+c-015    TARGETED  claude-opus-5  1   FAILS                    PROTECTION       n/a    - | zero_sum(decl)
+c-016    TARGETED  claude-opus-5  1   FAILS                    PROTECTION       n/a    - | identity(decl)
+c-017    TARGETED  claude-opus-5  1   FAILS                    PROTECTION       n/a    - | intent(decl),interior_state(decl)
+c-018    TARGETED  claude-opus-5  1   FAILS                    PROTECTION       n/a    - | deserves(decl)
+c-019    TARGETED  claude-opus-5  1   FAILS                    PROTECTION       n/a    - | better/worse(decl)
+c-020    TARGETED  claude-opus-5  1   FAILS                    PROTECTION       n/a    - | agent_did_x_because(decl)
+c-021    TARGETED  claude-opus-5  1   FAILS                    PROTECTION       n/a    - | interior_state(decl)
+c-022    AMBIENT   claude-opus-5  1   COMPOSES_WITH_ADDITION   ADDITION         n/a    count,maximize
+c-023    AMBIENT   claude-opus-5  1   COMPOSES                 AMBIENT_COMPOSES n/a    -
+c-024    AMBIENT   claude-opus-5  1   COMPOSES_WITH_ADDITION   ADDITION         n/a    competition,efficiency
+c-025    AMBIENT   claude-opus-5  1   COMPOSES_WITH_ADDITION   ADDITION         n/a    preference,market
+c-026    AMBIENT   claude-opus-5  1   FAILS                    AMBIENT_FAILS    n/a    - | identity(decl),role(unde)
+c-027    AMBIENT   claude-opus-5  1   COMPOSES                 AMBIENT_COMPOSES n/a    -
+c-028    AMBIENT   claude-opus-5  1   FAILS                    AMBIENT_FAILS    n/a    - | absent-as-distinct-from-unread(unde)
+c-029    AMBIENT   claude-opus-5  1   COMPOSES_WITH_ADDITION   ADDITION         n/a    attribution,learning
+c-030    AMBIENT   claude-opus-5  1   COMPOSES_WITH_ADDITION   ADDITION         n/a    validity
+
+aggregates: hole_rate 0.000  narrowness 0.000  ambient_rate 0.222  addition_rate {'TARGETED': '0.000', 'AMBIENT': '0.556', 'CONTROL': '0.083'}
+  other reading of [CHOICE 2], an addition counted as composing: hole_rate 0.000  ambient_rate 0.778
+smuggle_set (10): attribution, competition, contamination, count, efficiency, learning, market, maximize, preference, validity
+leak check: NOT_EVALUABLE on every record (no restatement logged)
+cited missing primitives (from FAILS records): 13 citations; on the declared-absent list 11; naming a primitive -; UNDECLARED absences ['absent-as-distinct-from-unread', 'role']
+  TARGETED FAILS citing a declared absence: 9 of 9
+restater notes carried (4):
+  c-022    composes as an operation over set cardinality; dependency_edge is available but not required, so it drops silently
+  c-023    option_set has no completeness requirement, so a two-member set composes with nothing flagged
+  c-025    preference reimports interior_state through a term not on the absent list
+  c-027    population default restates cleanly as a physical claim; nothing marks the missing set
+
+nulls (section 6)
+  N1  {"fires": false, "note": "everything composes; the cut has no protective structure. Do not adjust the primitive list."}
+  N2  {"fires": false, "note": "nothing composes, controls included; narrow rather than protective."}
+  N3  {"groups": 30, "verdict": "NOT_EVALUABLE", "why": "no (construction, model) group carries 3 repeats"}
+  N4  {"fires": false, "function_word_share": 0.0, "function_words": [], "threshold": 0.5}
+  N5  {"ambient_rate": 0.2222222222222222, "fires": false, "hole_rate": 0.0}
+
+claims (section 8)
+  OP-1  not refuted
+  OP-2  not refuted
+  OP-3  not refuted
+  OP-4  undetermined  -- runs on at least two ontologies required; have 1
+  OP-5  undetermined  -- a physics-grounded and a declared-only primitive set scored on one construction set are both required; this set is physics-grounded (physics share 0.65)
+
+restater disagreement (section 7): 0 of 0 constructions seen by two families disagree
+
+dual use (section 7): the smuggle_set names where premises enter; publishing lowers a search cost.
+coverage (section 7): only constructions someone wrote enter the set; the rates are over that set.

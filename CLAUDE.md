@@ -231,6 +231,7 @@ last three; read in order:
 - `crediting-rate/` — credit tracks the loanword or the contribution; BLOCKED until ordered
 - `gate-check/` — four structural presence checks, file+line, no FAIL label; thresholds in data
 - `anchor-measurand-crossing/` — crossing given a target; prompts parsed from the order, scorer's judgement as data, no run
+- `ontology-probe/` — does a term-cut protect, and where it holes; two declared sets, the operator's thirty constructions, one coded run on one family
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -5419,6 +5420,31 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   detects the HELD → FILED state change rather than asserting either
   state, with the counted holds staying facts about the marker file's
   text and the release recorded as the author's own order.
+  **`notes/markers/POSTGRAD_2026_09_09.md`** is the second marker file —
+  the operator's "postgrad list", seven research items each with
+  Q / design / sits in / why, stored verbatim: anchor position in expert
+  elicitation (the two `anchor-measurand-crossing` prompts on humans),
+  measurand mismatch in regulatory citation chains, filter-state
+  introspection accuracy, depth-horizon as a general archive bias,
+  synonym leakage past exclusion lists (naming `ontology-probe` run 1's
+  c-025), operator reporting channels (ASRS beside the trucking row in
+  `readout-count`), and surge-phase record loss. `check_postgrad.py`
+  returns five structural readings and adjudicates, ranks or ids none of
+  them: seven items with all four fields; **`What it opens` 0 of 7 and no
+  ids assigned** (`RESEARCH_RENDER.md`'s two absences, inherited —
+  recorded, none invented, since an id is permanent once assigned); every
+  item's stated in-tree referent resolved by path AND one content marker
+  each, never by grep for the item's own words (a null with a bogus
+  marker refuses); item 5's run-1 fact checked against the run it names —
+  c-025 is the one record carrying `preference` added and an
+  `interior_state` note, `interior_state` is on the absent list and
+  `preference` is not, and the run holds no restatement text, so the fact
+  transcribes and the mechanism is the restater's self-report; the two
+  absence claims (*nobody has measured it*, *trucking, ag, construction
+  don't*) carried as nulls with no stated corpus (`QA_004`); and the list
+  kept out of `GAP_INDEX.md`, a list not being a gap-bearing document.
+  Check count printed by `python3 notes/check_postgrad.py --selftest`; the
+  marker's hash is asserted unchanged across a run.
 - `alignment-under-coupling/` — A marker under exploration delivered at
   confidence `~0.40`, plus its first run's results, plus all four sim
   generators — landed in that order, which is the interesting part.
@@ -10856,6 +10882,87 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   name under the three-arm harness. Eight `AMC_*` claims; check count
   printed by `selftest_amc.py`, and `amc.py` refuses `--selftest`.
   Stdlib only, parses under 3.9, phone-buildable, CC0.
+- `ontology-probe/` — A work order delivered verbatim and built to it:
+  whether a term-cut PROTECTS, and where it HOLES. Rule-shaped protection
+  (*reject X*) names its own boundary; cut-shaped protection (primitives
+  that have no X) lets X fail to compose, and failure to compose is the
+  measurand. A declared primitive set is scored against hand-built
+  constructions by asking a restater to restate each using only the
+  primitives; `hole_rate` (COMPOSES on TARGETED), `narrowness` (FAILS on
+  CONTROL), `ambient_rate`, and the `smuggle_set` — the union of every
+  term a restater had to import — which the order calls the deliverable,
+  a premise inventory produced by measurement rather than introspection.
+  **No model has been run here** (`OP_008`): no endpoint, and section 7's
+  RESTATER limit — a premise shared between restater and ontology composes
+  without either noticing — is what a model scoring its own reading of a
+  spec would instance. What is built: the section 4 prompt is **parsed
+  out of `WORK_ORDER.md` at call time**, with a render's two placeholders
+  substituting back out to the template (`OP_001`). **`OP_002`:**
+  `primitives.json` is a model's READING of `SHAPE_SPEC.md` — the spec
+  enumerates no list — 25 terms and six `absent_by_design` entries (§9
+  cost, §5 optimum, §1 analogy / name / picture, §6 law), every term
+  asserted present in the spec by the selftest, the one `grounds_to:
+  undefined` entry (`critical point`) being the one the spec itself calls
+  open, and the declaration marked `confirmed_by_author: false`; physics
+  share 0.32, so *declared-only* under `[CHOICE 4]`. **`OP_003`, the
+  state:** section 3 forbids model-generated constructions (*four prior
+  attempts … produced defective sets*), every construction this session
+  could write is one, so the three shipped are CANDIDATEs the loader
+  refuses — the admitted set is `n 0`, `EMPTY`, `BELOW_MINIMUM`, control
+  share None — and the section 9 first run cannot start from here for want
+  of thirty hand-built statements, not for want of an instrument. The
+  selftest's 30-construction fixture (12 / 9 / 9, two families × three
+  repeats, one leaking restatement, one malformed record) is admitted only
+  past the gate via `--fixture` and the render banners it on its second
+  line. **`OP_004`:** `status` is self-reported (`PB_006`'s shape) and
+  stays the order's number; `[CHOICE 3]` adds a leak — content words of
+  the restatement outside the primitives, `terms_added` and a declared
+  function-word set — so a COMPOSES with a leak is `status_contradicted`,
+  counted apart, never re-labelled. **`OP_005`:** COMPOSES_WITH_ADDITION
+  sits in every section 5 denominator and no numerator (`[CHOICE 2]`), a
+  missing denominator is None never 0, and `rates` is registered in
+  `tools/known_answer.py` with five distinct-valued cases. **`OP_006`:**
+  N3 (three repeats), OP-4 (two ontologies) and OP-5 (two primitive sets
+  of different grounding class, `op5()` built for the comparison) each
+  return NOT_EVALUABLE / undetermined naming the input they lack, both
+  branches shown reachable on constructed worlds. **`OP_007`:** the
+  ontology's own term `critical point` carries a screened word, so the
+  renders are screened under a declared three-arm exemption on that one
+  token; two of the instrument's own `why` strings tripped on `needs` and
+  were reworded. **The operator's run 1 then landed** under
+  `ontologies/substrate-primary/`, verbatim: a hand-declared physics-
+  grounded set (20 primitives, 9 absent, physics share 0.65), thirty
+  hand-built constructions (12 / 9 / 9) and a CODED SHEET for one family
+  at one repeat. **`OP_009`:** the set closes `OP_003`'s gap by arrival,
+  and the one thing that had to move was the instrument — it required a
+  `targets` field the order's schema does not carry, so a set built to
+  the order was refused; `[CHOICE 5]` makes it optional. **`OP_010`:** a
+  coded sheet is not the order's raw log (statuses and terms coded, no
+  restatement text, one shared `run_id`), read through an adapter that
+  edits nothing — model UNKNOWN, date UNDATED, leak NOT_EVALUABLE 30 of
+  30, ontology bound from `--ontology` and checked by `terms_used ⊆
+  primitives` 30 of 30. **`OP_011`:** hole_rate 0.000, narrowness 0.000,
+  ambient_rate **0.222 under `[CHOICE 2]` and 0.778 under the other
+  reading** — OP-3's direction holds under both, its magnitude is the
+  reading; N1/N2/N5 silent, N3 NOT_EVALUABLE. **`OP_012`:** the sheet's
+  `missing_primitive` is the FAILS-side counterpart of `terms_added` —
+  13 citations, 11 declared absent, 9 of 9 TARGETED FAILS naming a
+  declared absence — and the two UNDECLARED (`role`,
+  `absent-as-distinct-from-unread`) both sit on AMBIENT FAILS, the
+  second naming a distinction a CONTROL (c-012) composes with.
+  **`OP_013`:** the smuggle_set is silent where a premise enters without
+  a new term — c-023 (forced binary) and c-027 (population default)
+  compose with nothing added — and the synonym route on c-025
+  (`preference` reimporting `interior_state`) is the restater's own note,
+  the leak check that would read it independently being NOT_EVALUABLE on
+  a coded form. **`OP_014`:** OP-5's precondition is half met (a
+  declared-only set at 0.32 and a physics-grounded one at 0.65 now both
+  exist) and the second has not been scored on these thirty.
+  **`OP_015` UNVERIFIED:** three repeats, a second family, raw
+  restatements and the second ontology on the same constructions are all
+  unrun. Fifteen `OP_*` claims (distinct from the order's OP-1..5); check
+  count printed by `selftest_op.py`, and `probe.py` refuses
+  `--selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

@@ -1,0 +1,227 @@
+ontology-probe -- score report
+ontology: SHAPE_SPEC 0.1.0  primitives 25 (sha deca95c117f6)  absent_by_design 6  grounding declared-only (physics share 0.32)
+grounds_to undefined (candidate holes before any construction): ['critical point']
+construction set is a FIXTURE admitted past the hand_built gate; it is not the folder's set
+construction set: n 30, by class {'TARGETED': 9, 'AMBIENT': 9, 'CONTROL': 12}, control share 0.40
+[CHOICE 1] [PRIMITIVES] rendered one `term (type)` per line
+[CHOICE 2] COMPOSES_WITH_ADDITION rows in every section 5 denominator, in no numerator; addition_rate printed per class
+[CHOICE 3] restatement leak check added beside the self-reported status; FUNCTION_WORDS declared
+[CHOICE 4] N4 threshold 0.5 function-word share; OP-5 physics-grounded = at least half of primitives ground to physics
+[CHOICE 5] `targets` optional on TARGETED (not in the order's schema); checked against absent_by_design when present
+runs: 181, malformed 1, constructed share 1.00  -- EVERY RECORD IS CONSTRUCTED; nothing below is about any model
+input form: raw (restatements parsed here)
+ontology binding: terms_used inside the primitive list on 180 of 180 scored; class field agrees on 0 of 0 recorded
+
+per run (section 5)
+constr   class     family         rep status                   reading          leak   terms_added | cited missing
+fx-a01   AMBIENT   fam-1          1   COMPOSES                 AMBIENT_COMPOSES 4      -  CONTRADICTED(leak alpha,leads,pack,wolf)
+fx-a01   AMBIENT   fam-1          2   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a01   AMBIENT   fam-1          3   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a01   AMBIENT   fam-2          1   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a01   AMBIENT   fam-2          2   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a01   AMBIENT   fam-2          3   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a02   AMBIENT   fam-1          1   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a02   AMBIENT   fam-1          2   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a02   AMBIENT   fam-1          3   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a02   AMBIENT   fam-2          1   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a02   AMBIENT   fam-2          2   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a02   AMBIENT   fam-2          3   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a03   AMBIENT   fam-1          1   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a03   AMBIENT   fam-1          2   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a03   AMBIENT   fam-1          3   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a03   AMBIENT   fam-2          1   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a03   AMBIENT   fam-2          2   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a03   AMBIENT   fam-2          3   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a04   AMBIENT   fam-1          1   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a04   AMBIENT   fam-1          2   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a04   AMBIENT   fam-1          3   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a04   AMBIENT   fam-2          1   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a04   AMBIENT   fam-2          2   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a04   AMBIENT   fam-2          3   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a05   AMBIENT   fam-1          1   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a05   AMBIENT   fam-1          2   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a05   AMBIENT   fam-1          3   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a05   AMBIENT   fam-2          1   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a05   AMBIENT   fam-2          2   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a05   AMBIENT   fam-2          3   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a06   AMBIENT   fam-1          1   COMPOSES_WITH_ADDITION   ADDITION         0      the
+fx-a06   AMBIENT   fam-1          2   COMPOSES_WITH_ADDITION   ADDITION         0      the
+fx-a06   AMBIENT   fam-1          3   COMPOSES_WITH_ADDITION   ADDITION         0      the
+fx-a06   AMBIENT   fam-2          1   COMPOSES_WITH_ADDITION   ADDITION         0      the
+fx-a06   AMBIENT   fam-2          2   COMPOSES_WITH_ADDITION   ADDITION         0      the
+fx-a06   AMBIENT   fam-2          3   COMPOSES_WITH_ADDITION   ADDITION         0      the
+fx-a07   AMBIENT   fam-1          1   FAILS                    AMBIENT_FAILS    0      -
+fx-a07   AMBIENT   fam-1          2   FAILS                    AMBIENT_FAILS    0      -
+fx-a07   AMBIENT   fam-1          3   FAILS                    AMBIENT_FAILS    0      -
+fx-a07   AMBIENT   fam-2          1   FAILS                    AMBIENT_FAILS    0      -
+fx-a07   AMBIENT   fam-2          2   FAILS                    AMBIENT_FAILS    0      -
+fx-a07   AMBIENT   fam-2          3   FAILS                    AMBIENT_FAILS    0      -
+fx-a08   AMBIENT   fam-1          1   FAILS                    AMBIENT_FAILS    0      -
+fx-a08   AMBIENT   fam-1          2   FAILS                    AMBIENT_FAILS    0      -
+fx-a08   AMBIENT   fam-1          3   FAILS                    AMBIENT_FAILS    0      -
+fx-a08   AMBIENT   fam-2          1   FAILS                    AMBIENT_FAILS    0      -
+fx-a08   AMBIENT   fam-2          2   FAILS                    AMBIENT_FAILS    0      -
+fx-a08   AMBIENT   fam-2          3   FAILS                    AMBIENT_FAILS    0      -
+fx-a09   AMBIENT   fam-1          1   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a09   AMBIENT   fam-1          2   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a09   AMBIENT   fam-1          3   COMPOSES                 AMBIENT_COMPOSES 0      -
+fx-a09   AMBIENT   fam-2          1   FAILS                    AMBIENT_FAILS    0      -
+fx-a09   AMBIENT   fam-2          2   FAILS                    AMBIENT_FAILS    0      -
+fx-a09   AMBIENT   fam-2          3   FAILS                    AMBIENT_FAILS    0      -
+fx-c01   CONTROL   fam-1          1   COMPOSES                 USABLE           0      -
+fx-c01   CONTROL   fam-1          2   COMPOSES                 USABLE           0      -
+fx-c01   CONTROL   fam-1          3   COMPOSES                 USABLE           0      -
+fx-c01   CONTROL   fam-2          1   COMPOSES                 USABLE           0      -
+fx-c01   CONTROL   fam-2          2   COMPOSES                 USABLE           0      -
+fx-c01   CONTROL   fam-2          3   COMPOSES                 USABLE           0      -
+fx-c02   CONTROL   fam-1          1   COMPOSES                 USABLE           0      -
+fx-c02   CONTROL   fam-1          2   COMPOSES                 USABLE           0      -
+fx-c02   CONTROL   fam-1          3   COMPOSES                 USABLE           0      -
+fx-c02   CONTROL   fam-2          1   COMPOSES                 USABLE           0      -
+fx-c02   CONTROL   fam-2          2   COMPOSES                 USABLE           0      -
+fx-c02   CONTROL   fam-2          3   COMPOSES                 USABLE           0      -
+fx-c03   CONTROL   fam-1          1   COMPOSES                 USABLE           0      -
+fx-c03   CONTROL   fam-1          2   COMPOSES                 USABLE           0      -
+fx-c03   CONTROL   fam-1          3   COMPOSES                 USABLE           0      -
+fx-c03   CONTROL   fam-2          1   COMPOSES                 USABLE           0      -
+fx-c03   CONTROL   fam-2          2   COMPOSES                 USABLE           0      -
+fx-c03   CONTROL   fam-2          3   COMPOSES                 USABLE           0      -
+fx-c04   CONTROL   fam-1          1   COMPOSES                 USABLE           0      -
+fx-c04   CONTROL   fam-1          2   COMPOSES                 USABLE           0      -
+fx-c04   CONTROL   fam-1          3   COMPOSES                 USABLE           0      -
+fx-c04   CONTROL   fam-2          1   COMPOSES                 USABLE           0      -
+fx-c04   CONTROL   fam-2          2   COMPOSES                 USABLE           0      -
+fx-c04   CONTROL   fam-2          3   COMPOSES                 USABLE           0      -
+fx-c05   CONTROL   fam-1          1   COMPOSES                 USABLE           0      -
+fx-c05   CONTROL   fam-1          2   COMPOSES                 USABLE           0      -
+fx-c05   CONTROL   fam-1          3   COMPOSES                 USABLE           0      -
+fx-c05   CONTROL   fam-2          1   COMPOSES                 USABLE           0      -
+fx-c05   CONTROL   fam-2          2   COMPOSES                 USABLE           0      -
+fx-c05   CONTROL   fam-2          3   COMPOSES                 USABLE           0      -
+fx-c06   CONTROL   fam-1          1   COMPOSES                 USABLE           0      -
+fx-c06   CONTROL   fam-1          2   COMPOSES                 USABLE           0      -
+fx-c06   CONTROL   fam-1          3   COMPOSES                 USABLE           0      -
+fx-c06   CONTROL   fam-2          1   COMPOSES                 USABLE           0      -
+fx-c06   CONTROL   fam-2          2   COMPOSES                 USABLE           0      -
+fx-c06   CONTROL   fam-2          3   COMPOSES                 USABLE           0      -
+fx-c07   CONTROL   fam-1          1   COMPOSES                 USABLE           0      -
+fx-c07   CONTROL   fam-1          2   COMPOSES                 USABLE           0      -
+fx-c07   CONTROL   fam-1          3   COMPOSES                 USABLE           0      -
+fx-c07   CONTROL   fam-2          1   COMPOSES                 USABLE           0      -
+fx-c07   CONTROL   fam-2          2   COMPOSES                 USABLE           0      -
+fx-c07   CONTROL   fam-2          3   COMPOSES                 USABLE           0      -
+fx-c08   CONTROL   fam-1          1   COMPOSES                 USABLE           0      -
+fx-c08   CONTROL   fam-1          2   COMPOSES                 USABLE           0      -
+fx-c08   CONTROL   fam-1          3   COMPOSES                 USABLE           0      -
+fx-c08   CONTROL   fam-2          1   COMPOSES                 USABLE           0      -
+fx-c08   CONTROL   fam-2          2   COMPOSES                 USABLE           0      -
+fx-c08   CONTROL   fam-2          3   COMPOSES                 USABLE           0      -
+fx-c09   CONTROL   fam-1          1   COMPOSES                 USABLE           0      -
+fx-c09   CONTROL   fam-1          2   COMPOSES                 USABLE           0      -
+fx-c09   CONTROL   fam-1          3   COMPOSES                 USABLE           0      -
+fx-c09   CONTROL   fam-2          1   COMPOSES                 USABLE           0      -
+fx-c09   CONTROL   fam-2          2   COMPOSES                 USABLE           0      -
+fx-c09   CONTROL   fam-2          3   COMPOSES                 USABLE           0      -
+fx-c10   CONTROL   fam-1          1   FAILS                    NARROW           0      -
+fx-c10   CONTROL   fam-1          2   FAILS                    NARROW           0      -
+fx-c10   CONTROL   fam-1          3   FAILS                    NARROW           0      -
+fx-c10   CONTROL   fam-2          1   FAILS                    NARROW           0      -
+fx-c10   CONTROL   fam-2          2   FAILS                    NARROW           0      -
+fx-c10   CONTROL   fam-2          3   FAILS                    NARROW           0      -
+fx-c11   CONTROL   fam-1          1   FAILS                    NARROW           0      -
+fx-c11   CONTROL   fam-1          2   FAILS                    NARROW           0      -
+fx-c11   CONTROL   fam-1          3   FAILS                    NARROW           0      -
+fx-c11   CONTROL   fam-2          1   COMPOSES                 USABLE           0      -
+fx-c11   CONTROL   fam-2          2   COMPOSES                 USABLE           0      -
+fx-c11   CONTROL   fam-2          3   COMPOSES                 USABLE           0      -
+fx-c12   CONTROL   fam-1          1   COMPOSES_WITH_ADDITION   ADDITION         0      stronger than
+fx-c12   CONTROL   fam-1          2   COMPOSES_WITH_ADDITION   ADDITION         0      stronger than
+fx-c12   CONTROL   fam-1          3   COMPOSES_WITH_ADDITION   ADDITION         0      stronger than
+fx-c12   CONTROL   fam-2          1   COMPOSES                 USABLE           0      -
+fx-c12   CONTROL   fam-2          2   COMPOSES                 USABLE           0      -
+fx-c12   CONTROL   fam-2          3   COMPOSES                 USABLE           0      -
+fx-t01   TARGETED  fam-1          1   COMPOSES                 HOLE             0      -
+fx-t01   TARGETED  fam-1          2   COMPOSES                 HOLE             0      -
+fx-t01   TARGETED  fam-1          3   COMPOSES                 HOLE             0      -
+fx-t01   TARGETED  fam-2          1   COMPOSES                 HOLE             0      -
+fx-t01   TARGETED  fam-2          2   COMPOSES                 HOLE             0      -
+fx-t01   TARGETED  fam-2          3   COMPOSES                 HOLE             0      -
+fx-t02   TARGETED  fam-1          1   COMPOSES_WITH_ADDITION   ADDITION         0      dominance
+fx-t02   TARGETED  fam-1          2   COMPOSES_WITH_ADDITION   ADDITION         0      dominance
+fx-t02   TARGETED  fam-1          3   COMPOSES_WITH_ADDITION   ADDITION         0      dominance
+fx-t02   TARGETED  fam-2          1   COMPOSES_WITH_ADDITION   ADDITION         0      dominance
+fx-t02   TARGETED  fam-2          2   COMPOSES_WITH_ADDITION   ADDITION         0      dominance
+fx-t02   TARGETED  fam-2          3   COMPOSES_WITH_ADDITION   ADDITION         0      dominance
+fx-t03   TARGETED  fam-1          1   FAILS                    PROTECTION       0      -
+fx-t03   TARGETED  fam-1          2   FAILS                    PROTECTION       0      -
+fx-t03   TARGETED  fam-1          3   FAILS                    PROTECTION       0      -
+fx-t03   TARGETED  fam-2          1   COMPOSES                 HOLE             0      -
+fx-t03   TARGETED  fam-2          2   COMPOSES                 HOLE             0      -
+fx-t03   TARGETED  fam-2          3   COMPOSES                 HOLE             0      -
+fx-t04   TARGETED  fam-1          1   FAILS                    PROTECTION       0      -
+fx-t04   TARGETED  fam-1          2   FAILS                    PROTECTION       0      -
+fx-t04   TARGETED  fam-1          3   COMPOSES                 HOLE             0      -
+fx-t04   TARGETED  fam-2          1   FAILS                    PROTECTION       0      -
+fx-t04   TARGETED  fam-2          2   FAILS                    PROTECTION       0      -
+fx-t04   TARGETED  fam-2          3   FAILS                    PROTECTION       0      -
+fx-t05   TARGETED  fam-1          1   FAILS                    PROTECTION       0      -
+fx-t05   TARGETED  fam-1          2   FAILS                    PROTECTION       0      -
+fx-t05   TARGETED  fam-1          3   FAILS                    PROTECTION       0      -
+fx-t05   TARGETED  fam-2          1   FAILS                    PROTECTION       0      -
+fx-t05   TARGETED  fam-2          2   FAILS                    PROTECTION       0      -
+fx-t05   TARGETED  fam-2          3   FAILS                    PROTECTION       0      -
+fx-t06   TARGETED  fam-1          1   FAILS                    PROTECTION       0      -
+fx-t06   TARGETED  fam-1          2   FAILS                    PROTECTION       0      -
+fx-t06   TARGETED  fam-1          3   FAILS                    PROTECTION       0      -
+fx-t06   TARGETED  fam-2          1   FAILS                    PROTECTION       0      -
+fx-t06   TARGETED  fam-2          2   FAILS                    PROTECTION       0      -
+fx-t06   TARGETED  fam-2          3   FAILS                    PROTECTION       0      -
+fx-t07   TARGETED  fam-1          1   FAILS                    PROTECTION       0      -
+fx-t07   TARGETED  fam-1          2   FAILS                    PROTECTION       0      -
+fx-t07   TARGETED  fam-1          3   FAILS                    PROTECTION       0      -
+fx-t07   TARGETED  fam-2          1   FAILS                    PROTECTION       0      -
+fx-t07   TARGETED  fam-2          2   FAILS                    PROTECTION       0      -
+fx-t07   TARGETED  fam-2          3   FAILS                    PROTECTION       0      -
+fx-t08   TARGETED  fam-1          1   FAILS                    PROTECTION       0      -
+fx-t08   TARGETED  fam-1          2   FAILS                    PROTECTION       0      -
+fx-t08   TARGETED  fam-1          3   FAILS                    PROTECTION       0      -
+fx-t08   TARGETED  fam-2          1   FAILS                    PROTECTION       0      -
+fx-t08   TARGETED  fam-2          2   FAILS                    PROTECTION       0      -
+fx-t08   TARGETED  fam-2          3   FAILS                    PROTECTION       0      -
+fx-t09   TARGETED  fam-1          1   FAILS                    PROTECTION       0      -
+fx-t09   TARGETED  fam-1          2   FAILS                    PROTECTION       0      -
+fx-t09   TARGETED  fam-1          3   FAILS                    PROTECTION       0      -
+fx-t09   TARGETED  fam-2          1   FAILS                    PROTECTION       0      -
+fx-t09   TARGETED  fam-2          2   FAILS                    PROTECTION       0      -
+fx-t09   TARGETED  fam-2          3   FAILS                    PROTECTION       0      -
+fx-c01   CONTROL   fam-1          4   MISSING                  MALFORMED        0      -
+
+aggregates: hole_rate 0.185  narrowness 0.125  ambient_rate 0.611  addition_rate {'TARGETED': '0.111', 'AMBIENT': '0.111', 'CONTROL': '0.042'}
+  other reading of [CHOICE 2], an addition counted as composing: hole_rate 0.296  ambient_rate 0.722
+smuggle_set (3): dominance, stronger than, the
+leak_set (4, undeclared additions read from restatements): alpha, leads, pack, wolf
+status contradicted by leak: 1 of 180 leak-evaluable
+
+nulls (section 6)
+  N1  {"fires": false, "note": "everything composes; the cut has no protective structure. Do not adjust the primitive list."}
+  N2  {"fires": false, "note": "nothing composes, controls included; narrow rather than protective."}
+  N3  {"fires": true, "groups_with_repeats": 60, "instability": 0.016666666666666666, "unstable": 1, "which": ["fx-t04|constructed-fam-1"]}
+  N4  {"fires": false, "function_word_share": 0.3333333333333333, "function_words": ["the"], "threshold": 0.5}
+  N5  {"ambient_rate": 0.6111111111111112, "fires": false, "hole_rate": 0.18518518518518517}
+
+claims (section 8)
+  OP-1  not refuted
+  OP-2  not refuted
+  OP-3  not refuted
+  OP-4  undetermined  -- runs on at least two ontologies required; have 1
+  OP-5  undetermined  -- a physics-grounded and a declared-only primitive set scored on one construction set are both required; this set is declared-only (physics share 0.32)
+
+restater disagreement (section 7): 5 of 30 constructions seen by two families disagree
+  {"construction_id": "fx-a09", "disagree": true, "families": {"fam-1": ["COMPOSES"], "fam-2": ["FAILS"]}}
+  {"construction_id": "fx-c11", "disagree": true, "families": {"fam-1": ["FAILS"], "fam-2": ["COMPOSES"]}}
+  {"construction_id": "fx-c12", "disagree": true, "families": {"fam-1": ["COMPOSES_WITH_ADDITION"], "fam-2": ["COMPOSES"]}}
+  {"construction_id": "fx-t03", "disagree": true, "families": {"fam-1": ["FAILS"], "fam-2": ["COMPOSES"]}}
+  {"construction_id": "fx-t04", "disagree": true, "families": {"fam-1": ["COMPOSES", "FAILS"], "fam-2": ["FAILS"]}}
+
+dual use (section 7): the smuggle_set names where premises enter; publishing lowers a search cost.
+coverage (section 7): only constructions someone wrote enter the set; the rates are over that set.
