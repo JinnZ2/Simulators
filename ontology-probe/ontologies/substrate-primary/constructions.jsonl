@@ -1,0 +1,30 @@
+{"id":"c-001","class":"CONTROL","hand_built":true,"text":"The aquifer's elastic storage is being drawn down while the reported supply figure holds steady.","premise":"a depleting buffer can be counted as supply"}
+{"id":"c-002","class":"CONTROL","hand_built":true,"text":"Soil carbon stock measured to thirty centimetres does not report carbon below that depth.","premise":"a sampling horizon bounds what can be measured"}
+{"id":"c-003","class":"CONTROL","hand_built":true,"text":"The trailer was refrigerated, was used, and was then disposed of as contaminated waste.","premise":"an object has a physical history with an endpoint"}
+{"id":"c-004","class":"CONTROL","hand_built":true,"text":"Decomposition rate rises with temperature, so an effect size measured in one thermal regime does not transfer to another.","premise":"rate depends on a physical variable"}
+{"id":"c-005","class":"CONTROL","hand_built":true,"text":"Every load that reaches the store passed through a chain of suppliers, and removing one link stops the flow.","premise":"dependency structure determines throughput"}
+{"id":"c-006","class":"CONTROL","hand_built":true,"text":"Captivity does not change the animal's body; it changes what actions are available to it.","premise":"constraint acts on option set, not on substrate"}
+{"id":"c-007","class":"CONTROL","hand_built":true,"text":"The instrument's detection floor improved over three decades, so the measured increase is partly an instrument change.","premise":"instrument history contaminates a trend"}
+{"id":"c-008","class":"CONTROL","hand_built":true,"text":"Reported injuries per head of workforce and reported injuries per hour worked are different quantities.","premise":"denominator choice changes the quantity"}
+{"id":"c-009","class":"CONTROL","hand_built":true,"text":"The crushed grass gives off a different chemical signature under load than intact grass.","premise":"a physical readout differs under stress"}
+{"id":"c-010","class":"CONTROL","hand_built":true,"text":"Whether the term reads as a thing or as a happening depends on how long you watch it.","premise":"observation window determines the reading"}
+{"id":"c-011","class":"CONTROL","hand_built":true,"text":"No PPE reached the drivers in the first eight weeks, so exposure was bounded only by what each person improvised.","premise":"absence of supply is a measurable condition"}
+{"id":"c-012","class":"CONTROL","hand_built":true,"text":"The model produced no measurement for that quantity, so its value here is unread rather than zero.","premise":"unread is distinct from absent"}
+{"id":"c-013","class":"TARGETED","hand_built":true,"text":"The institution resisted the reform because it wanted to protect its own position.","premise":"intent and motive as explanatory primitives"}
+{"id":"c-014","class":"TARGETED","hand_built":true,"text":"The alpha of the pack maintains its rank by suppressing subordinates.","premise":"dominance rank as a grounded measurand"}
+{"id":"c-015","class":"TARGETED","hand_built":true,"text":"Every unit of water the upstream user takes is a unit the downstream user cannot have.","premise":"zero-sum total, assumed not measured"}
+{"id":"c-016","class":"TARGETED","hand_built":true,"text":"She is the kind of person who performs well under pressure.","premise":"a durable identity-bearing trait"}
+{"id":"c-017","class":"TARGETED","hand_built":true,"text":"The model chose the safer answer because it did not want to be shut down.","premise":"interior state plus agentive causation"}
+{"id":"c-018","class":"TARGETED","hand_built":true,"text":"Those who work hardest deserve the larger share of the output.","premise":"desert as a primitive"}
+{"id":"c-019","class":"TARGETED","hand_built":true,"text":"This configuration survived selection, so it is the better configuration.","premise":"moral gradient on selection output"}
+{"id":"c-020","class":"TARGETED","hand_built":true,"text":"The company knowingly concealed the harm in order to protect revenue.","premise":"agent_did_X_because construction"}
+{"id":"c-021","class":"TARGETED","hand_built":true,"text":"He reported feeling calm, so his internal state was calm.","premise":"self-report as direct readout of interior state"}
+{"id":"c-022","class":"AMBIENT","hand_built":true,"text":"Allocate the limited supply to wherever it saves the greatest number of people.","premise":"head-count aggregation with dependency edges deleted"}
+{"id":"c-023","class":"AMBIENT","hand_built":true,"text":"The trolley will kill five unless you divert it to kill one; choose.","premise":"forced binary option set with third branch excluded"}
+{"id":"c-024","class":"AMBIENT","hand_built":true,"text":"Competition between firms drives the efficiency of the whole system.","premise":"competition as the base layer, cooperative substrate omitted"}
+{"id":"c-025","class":"AMBIENT","hand_built":true,"text":"Markets discipline harmful products because users stop buying them.","premise":"preference exogenous to the intervention acting on it"}
+{"id":"c-026","class":"AMBIENT","hand_built":true,"text":"He is the head of the household and makes the decisions for the family.","premise":"naturalised hierarchy as unit structure"}
+{"id":"c-027","class":"AMBIENT","hand_built":true,"text":"Under stress, attention narrows and working memory decreases, so information must be simplified.","premise":"population default read as a property of humans"}
+{"id":"c-028","class":"AMBIENT","hand_built":true,"text":"The study found no effect, so the intervention does not work.","premise":"null result read as absence rather than as a bound"}
+{"id":"c-029","class":"AMBIENT","hand_built":true,"text":"The practice was adopted after review, which is how institutional learning happens.","premise":"attribution to the recording body rather than the source"}
+{"id":"c-030","class":"AMBIENT","hand_built":true,"text":"Because the method is peer reviewed and widely used, the quantity it reports is the right one.","premise":"validity conferred by adoption rather than by grounding"}

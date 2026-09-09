@@ -189,34 +189,41 @@ def _crediting_bin_gap(which):
               "empty_bin": {1: [0.5], 0: []}}
     return mod.bin_gap(worlds[which])
 
-
-def _anchor_crossing(which):
-    """anchor-position/normalize.py::crossing_count, imported with the
-    folder's published transforms.json. Quantity lists are hand-built so the
-    count can be read off; every foreign quantity is one whose conversion to
-    the native needs a coefficient or a model the method does not contain."""
+def _amc_crossing_band(which):
+    """anchor-measurand-crossing/amc.py::crossing_band, imported. Grouped ids
+    and an ungrouped count are hand-built so the band can be counted off."""
     import importlib.util
-    folder = os.path.join(ROOT, "anchor-position")
-    path = os.path.join(folder, "normalize.py")
-    spec = importlib.util.spec_from_file_location("_apm_normalize", path)
+    path = os.path.join(ROOT, "anchor-measurand-crossing", "amc.py")
+    spec = importlib.util.spec_from_file_location("_amc", path)
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
-    lex = mod.load_lexicon(os.path.join(folder, "transforms.json"))
-    native = "soil organic carbon mass, Mg C/ha"
-    worlds = {
-        "all_transforms": ["SOC stock to 30 cm", "SOC concentration",
-                           "change in SOC stock over the trial",
-                           "pooled effect size of the SOC difference"],
-        "five_foreign": ["tonnes of CO2-equivalent removed",
-                         "net greenhouse gas balance including N2O",
-                         "permanence-weighted tonne-years",
-                         "additionality against a baseline",
-                         "leakage of displaced emissions"],
-        "mixed": ["SOC stock to 30 cm", "tonnes of CO2-equivalent removed",
-                  "leakage of displaced emissions"],
-        "empty": [],
-    }
-    return mod.crossing_count(worlds[which], native, lex)
+    worlds = {"all_native": (["n", "n", "n"], {"n": "native"}, 0, "n"),
+              "five_with_native": (["n", "a", "b", "c", "d"], {}, 0, "n"),
+              "nonnative_plus_ungrouped": (["c"], {"c": "component"}, 1, "n"),
+              "only_ungrouped": ([], {}, 3, "n"),
+              "empty": ([], {}, 0, "n")}
+    g, k, u, n = worlds[which]
+    return mod.crossing_band(g, k, u, n)[4:6]
+
+def _op_rates(which):
+    """ontology-probe/probe.py::rates, imported. (class, status) rows are
+    hand-built so the three section 5 rates can be counted off; returns
+    (hole_rate, narrowness, ambient_rate)."""
+    import importlib.util
+    path = os.path.join(ROOT, "ontology-probe", "probe.py")
+    spec = importlib.util.spec_from_file_location("_op", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    T, A, C = "TARGETED", "AMBIENT", "CONTROL"
+    worlds = {"all_fail": [(T, "FAILS"), (C, "FAILS"), (A, "FAILS")],
+              "all_compose": [(T, "COMPOSES"), (C, "COMPOSES"), (A, "COMPOSES")],
+              "mixed": [(T, "COMPOSES"), (T, "FAILS"), (T, "FAILS"), (T, "FAILS"),
+                        (C, "FAILS"), (C, "COMPOSES"), (C, "COMPOSES"), (C, "COMPOSES"),
+                        (A, "COMPOSES"), (A, "COMPOSES"), (A, "FAILS")],
+              "no_targeted": [(C, "COMPOSES"), (A, "FAILS")],
+              "addition_in_denominator": [(T, "COMPOSES_WITH_ADDITION"), (T, "COMPOSES")]}
+    r = mod.rates(worlds[which])
+    return (r["hole_rate"], r["narrowness"], r["ambient_rate"])
 
 def _extract_verdict():
     if not os.path.exists(NH_PATH):
@@ -861,29 +868,56 @@ def seed():
     )
 
     register(
-        "anchor-position/normalize.py::crossing_count",
-        _anchor_crossing,
+        "anchor-measurand-crossing/amc.py::crossing_band",
+        _amc_crossing_band,
         [
-            case("all transforms", ("all_transforms",), 0,
-                 "four transforms of the native under the published list "
-                 "(integrate, disaggregate, differentiate, aggregate) -> one "
-                 "measurand, native, 0 crossings", tol=0),
-            case("five foreign", ("five_foreign",), 5,
-                 "five quantities each needing a coefficient or model the "
-                 "method lacks -> 5 measurands, no native, 5 crossings", tol=0),
-            case("mixed", ("mixed",), 2,
-                 "one native plus two foreign -> 3 measurands, 1 native hit, "
-                 "2 crossings; shares no expected value with the endpoints, "
-                 "so the set can detect a constant metric", tol=0),
-            case("empty", ("empty",), None,
-                 "no entries -> None, absent not zero; 0 here would read as "
-                 "'no crossings' on a response that produced nothing"),
+            case("all native", ("all_native",), (0, 0),
+                 "three entries all grouped to the native measurand -> one "
+                 "measurand, native hit, crossing exactly 0"),
+            case("five with native", ("five_with_native",), (4, 4),
+                 "five distinct grouped ids, one native -> section 6's "
+                 "distinct - native_hit = 4, a point not a band"),
+            case("non-native plus ungrouped", ("nonnative_plus_ungrouped",), (1, 2),
+                 "a grouped component is a crossing whatever the ungrouped "
+                 "entry is; the ungrouped adds at most one. The first build "
+                 "returned (0, 2) here by pairing fewest-measurands with "
+                 "most-native-hits, two extremes that cannot both hold"),
+            case("only ungrouped", ("only_ungrouped",), (0, 3),
+                 "three ungrouped entries could all be native (0) or all "
+                 "distinct and foreign (3)"),
+            case("empty", ("empty",), (0, 0),
+                 "no entries -> zeros; shares its value with all-native, so "
+                 "the set relies on the other three to detect a constant"),
         ],
-        note=("section 6 of the ANCHOR POSITION order: |distinct measurands| "
-              "minus native groups hit, under the published transform list. "
-              "The list is the load-bearing part and has no external "
-              "validation; a second list (transforms_alt.json) is scored "
-              "beside it as N4."),
+        note=("section 6's crossing_count as a band [min, max] over grouped "
+              "ids plus an ungrouped count. Every UNGROUPED quantity widens "
+              "the band and never silently merges or splits."),
+    )
+
+    register(
+        "ontology-probe/probe.py::rates",
+        _op_rates,
+        [
+            case("all fail", ("all_fail",), (0.0, 1.0, 0.0),
+                 "one FAILS row per class -> hole 0, narrowness 1, ambient 0; "
+                 "a scorer reading FAILS as composing inverts all three"),
+            case("all compose", ("all_compose",), (1.0, 0.0, 1.0),
+                 "the N1 world: hole 1, narrowness 0, ambient 1"),
+            case("mixed", ("mixed",), (0.25, 0.25, 2 / 3),
+                 "1 of 4 TARGETED compose, 1 of 4 CONTROL fail, 2 of 3 AMBIENT "
+                 "compose; three different denominators, counted by hand"),
+            case("no targeted rows", ("no_targeted",), (None, 0.0, 0.0),
+                 "hole_rate has no denominator -> None, never 0; a 0 here "
+                 "would read as 'no hole' on a set with no TARGETED construction"),
+            case("addition in the denominator", ("addition_in_denominator",), (0.5, None, None),
+                 "[CHOICE 2]: COMPOSES_WITH_ADDITION sits in the class "
+                 "denominator (the order divides by TARGETED) and in no "
+                 "numerator, so one addition plus one compose is 0.5, not 1.0"),
+        ],
+        note=("section 5 of the ONTOLOGY PROBE order: hole_rate = COMPOSES on "
+              "TARGETED / TARGETED, narrowness = FAILS on CONTROL / CONTROL, "
+              "ambient_rate = COMPOSES on AMBIENT / AMBIENT. A missing "
+              "denominator is None."),
     )
 
 

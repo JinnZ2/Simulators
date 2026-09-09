@@ -1,0 +1,38 @@
+# CANDIDATE construction, not admitted; render shown for the prompt form only
+Restate the following statement using only the terms in
+the primitive list below. You may not introduce a term that
+is not in the list.
+
+shape (relation)
+constraint (relation)
+constraint set (relation)
+geometry (state)
+solution (relation)
+dissipation (quantity)
+flux (quantity)
+work (quantity)
+inertia (quantity)
+viscosity (quantity)
+supply (quantity)
+removal (quantity)
+boundary (state)
+enclosure (state)
+substrate (state)
+scale (quantity)
+ratio (operator)
+removed (operator)
+recurrence (relation)
+residue (state)
+fit (operator)
+instrument (state)
+read (operator)
+marker (state)
+critical point (state)
+Branching in a lung and branching in a river delta are the same because they look alike.
+
+Output in exactly this form, nothing else:
+
+  restatement:
+  terms_used:
+  terms_added:
+  status:  COMPOSES | FAILS | COMPOSES_WITH_ADDITION

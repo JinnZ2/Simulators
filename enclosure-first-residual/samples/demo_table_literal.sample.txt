@@ -1,0 +1,7 @@
+  F1_enclosure_only            VARIABLE_UNIDENT(confound: residual_within 0.429 > residual_between 0.201 (table, literal))
+  F2_trait_only                UNKNOWN_measurable(observed between residual 0.9807 inside null band [0.9143, 0.9995]; enclosure terms have no traction here, so no residual is a trait candidate)
+  F3_trait_plus_enclosure      TRAIT_RESIDUAL(fraction=0.558, CI=[0.381, 0.698])
+  F4_selection_into_windows    VARIABLE_UNIDENT(confound: residual_within 0.869 > residual_between 0.343 (table, literal))
+  F5_chosen_change             OUT_OF_ENVELOPE(every within-person enclosure change was chosen by the person; reverse causation unresolvable)
+  F6_unoperationalized         BLOCKED(unoperationalized_term)
+  F7_single_windows            BLOCKED(no_within_person_windows)

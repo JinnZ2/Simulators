@@ -176,6 +176,7 @@ last three; read in order:
 - `rigidification-sensor/` — variance suppressed fast
 - `claim-audits/` — external documents, eight verdicts
 - `null-harness/` — can a gate fire, can it stay silent
+- `enclosure-first-residual/` — enclosure first; trait as survivor
 - `divergence-playground/` — N readers, one fork; spread
 - `relational/` — pain-as-sensor, triadic
 - `engine-boiler-guide/` — offline triage
@@ -229,7 +230,8 @@ last three; read in order:
 - `falsifier-survey/` — Run 1 of a delivered falsifier survey; Run 2 split to its two repos
 - `crediting-rate/` — credit tracks the loanword or the contribution; BLOCKED until ordered
 - `gate-check/` — four structural presence checks, file+line, no FAIL label; thresholds in data
-- `anchor-position/` — method- vs decision-anchored prompts; measurand crossings counted under a published transform list
+- `anchor-measurand-crossing/` — crossing given a target; prompts parsed from the order, scorer's judgement as data, no run
+- `ontology-probe/` — does a term-cut protect, and where it holes; two declared sets, the operator's thirty constructions, one coded run on one family
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -5418,6 +5420,31 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   detects the HELD → FILED state change rather than asserting either
   state, with the counted holds staying facts about the marker file's
   text and the release recorded as the author's own order.
+  **`notes/markers/POSTGRAD_2026_09_09.md`** is the second marker file —
+  the operator's "postgrad list", seven research items each with
+  Q / design / sits in / why, stored verbatim: anchor position in expert
+  elicitation (the two `anchor-measurand-crossing` prompts on humans),
+  measurand mismatch in regulatory citation chains, filter-state
+  introspection accuracy, depth-horizon as a general archive bias,
+  synonym leakage past exclusion lists (naming `ontology-probe` run 1's
+  c-025), operator reporting channels (ASRS beside the trucking row in
+  `readout-count`), and surge-phase record loss. `check_postgrad.py`
+  returns five structural readings and adjudicates, ranks or ids none of
+  them: seven items with all four fields; **`What it opens` 0 of 7 and no
+  ids assigned** (`RESEARCH_RENDER.md`'s two absences, inherited —
+  recorded, none invented, since an id is permanent once assigned); every
+  item's stated in-tree referent resolved by path AND one content marker
+  each, never by grep for the item's own words (a null with a bogus
+  marker refuses); item 5's run-1 fact checked against the run it names —
+  c-025 is the one record carrying `preference` added and an
+  `interior_state` note, `interior_state` is on the absent list and
+  `preference` is not, and the run holds no restatement text, so the fact
+  transcribes and the mechanism is the restater's self-report; the two
+  absence claims (*nobody has measured it*, *trucking, ag, construction
+  don't*) carried as nulls with no stated corpus (`QA_004`); and the list
+  kept out of `GAP_INDEX.md`, a list not being a gap-bearing document.
+  Check count printed by `python3 notes/check_postgrad.py --selftest`; the
+  marker's hash is asserted unchanged across a run.
 - `alignment-under-coupling/` — A marker under exploration delivered at
   confidence `~0.40`, plus its first run's results, plus all four sim
   generators — landed in that order, which is the interesting part.
@@ -6723,6 +6750,39 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   constant by — and it was measured by perturbing a cell in a real
   workbook, not stipulated anywhere in the chain. 49 selftest checks
   across two modules. Stdlib only, parses under 3.9, CC0.
+- `enclosure-first-residual/` — Work order K, delivered verbatim: enter
+  enclosure terms FIRST, measure residual, and only then treat the
+  residual as a trait candidate. Unit is the person-window, never the
+  person, because the discriminator needs the same person under two
+  option sets. Four enclosure terms with `effective_exits =
+  count(reachable AND exit_cost <= 1.0)` carrying the hypothesis; four
+  graded behavior terms from the animal literature, each BLOCKED without
+  an operationalization string, and the human label set (rigidity,
+  resistance to change, closed-minded) refused at the schema gate as
+  closed nodes. Pipeline: NULL FIRST (enclosure shuffled within
+  population, band printed before any real fit; observed residual inside
+  it returns `UNKNOWN_measurable`, never a trait), between arm, within
+  arm on exogenous pairs with `|delta effective_exits| >= 1`, compare.
+  Return classes are method-layer G's enum when that checkout is found
+  (`METHOD_LAYER_PATH` or a sibling), mirrored and marked when not; the
+  four-branch set emits to F's schema 1.0 and round-trips through its
+  loader. **`EFR_003`, the finding the fixtures forced:** under the
+  order's step-4 table as written, an enclosure-only panel lands in the
+  **confound** cell (within 0.429 > between 0.201), because differencing
+  doubles noise variance while enclosure within a person is
+  autocorrelated, and a stable trait only ever inflates the between
+  residual, so the table's cells are ordered backwards on the ratio
+  axis. The literal table stays available (`--table-literal`) and its
+  cell is printed every run; the default return is a corrected reading
+  of the same two arms — within residual against its own permutation
+  null (does behavior move with enclosure?), then the person-stable
+  share of the between residual against its null (is anything left that
+  sits with the person?). Seven fixtures from explicit generative
+  models: enclosure-only → `ENCLOSURE_DOMINANT`, trait-only → null gate,
+  trait+enclosure → `TRAIT_RESIDUAL`, selection into windows →
+  `VARIABLE_UNIDENT` (the order's third row has no return-type entry;
+  G's peer class is the match), chosen change → `OUT_OF_ENVELOPE`, and
+  the two `BLOCKED` blockers by name. Claims `EFR_001..EFR_009`.
 - `model-provenance/` — Work order 5, delivered verbatim. Two halves that
   do not share a mechanism: a **write** at session open (date, model
   identifier as self-reported, repo, branch) and a **read** over history
@@ -10735,6 +10795,23 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `buildable` / `simulable` / `blocked(+blocker)`); a long lag on a
   branch not stating access suppression is flagged, never rewritten.
   Claims `BS_001..005`. Stdlib only, CC0.
+- `observer-position-control/` — Item J, a method-layer instrument
+  built to the delivered order (verbatim): is the maladaptive /
+  adaptive label set by the behavior or by whether the describer is
+  inside the population described? Label extraction over a published
+  corpus, three describer positions (non-human / out-group / own),
+  the behavior pattern held fixed as a filter on blind-coded rows. Null
+  (a), the main null, is enforced by file boundary — the behavior file
+  carries only the four blind-coded fields and any other field is
+  refused as "coder was not blind" — with nulls (b) era, (c) literature
+  type, (d) severity as stratified Cramér's V, the prediction in the
+  code before any row is read, and an enum verdict
+  (`OBSERVER_INDEXED` / `BEHAVIOR_DIFFERS` / `EXPLAINED_BY_*` /
+  `NO_ASSOCIATION` / `UNKNOWN_measurable`). Two readings the fixtures
+  forced: a constant label is zero association not "not computable",
+  and a perfect position × decade confound returns UNKNOWN naming era
+  rather than either explained verdict. Claims `OPC_001..006`; nothing
+  coded, everything constructed. Stdlib only, CC0.
 - `crediting-rate/` — WORK ORDER L, verbatim, built: does attribution of
   an imported technique track CONTRIBUTION or whether the loanword survived
   into the receiving language? A rate comparison across loanword bins with
@@ -10808,6 +10885,141 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   hand-built to three cases with no external validation — the order's
   own weak joint, unchanged. Check count printed by `score.py
   --selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
+- `anchor-measurand-crossing/` — A work order delivered verbatim and
+  built to it: does a model produce defects whose QUANTITY differs from
+  the quantity a method measures, as a function of whether the prompt
+  anchors at the method (ARM M) or at the decision the claim is cited to
+  justify (ARM D)? A counting outcome with a stated null, not a
+  benchmark. **No model has been run here** and nothing bears on the
+  order's AP-1..AP-6 (`AMC_007`): no endpoint, the session that wrote the
+  lexicon is not blind to it, and section 5's cold-arm rule cannot be
+  met from inside one session that has read the order; the fixture in
+  `runs/` is constructed and bannered. What is built: the two prompts
+  are **parsed out of `WORK_ORDER.md` section 4 at call time, never
+  retyped**, and M+ (AP-3, the order's highest-priority unrun arm) is
+  ARM M plus exactly one sentence under a declared placement, checked by
+  subtracting the sentence back out (`AMC_001`); the order delivers two
+  prompts for six claims, so the B and C arms have no verbatim text and
+  the instrument refuses to render one while still scoring logged B/C
+  records. **The scorer's judgement is data**: `lexicon.json` lists each
+  case's measurands as native / component / foreign with a
+  `distinct_because` on every non-native entry and a `via` transform on
+  every alias, `transforms.json` carries the order's six transforms as
+  `T-A` and a dimension-preserving subset as `T-B`, an alias reached by
+  a transform outside the active list becomes its own measurand, and N4
+  is the count of records whose crossing band moves between the two
+  lists (`AMC_002`). An unmatched quantity is `UNGROUPED` and widens a
+  band `[min, max]` — never merged, never split — with
+  `undetermined_by_lexicon` a live verdict. **`AMC_003`, caught by the
+  known-answer case:** the first crossing floor took `distinct_min −
+  native_hit_max`, pairing fewest-measurands with most-native-hits, two
+  extremes that cannot hold together, and read one grouped component
+  plus one ungrouped quantity as a possible zero; `crossing_band` is
+  registered in `tools/known_answer.py` with the wrong first value in
+  the case's `why_known`. **`AMC_004`:** section 1 (crossing = *different
+  quantity entirely*) and section 6 (`distinct − native_hit`) disagree on
+  one class — a quantity the method itself measures that is not a
+  transform of the native, such as bulk density under sc-01, is a
+  crossing under the arithmetic and not under the definition, so an
+  M-arm entry naming one refutes AP-1 without crossing a measurand;
+  `[CHOICE 3]` takes section 6 literally and prints the
+  foreign/component split beside it, and N3 reports the class.
+  **`AMC_005`:** section 8 requires a control case where native equals
+  the decision quantity and section 3 forbids a model-built case, so
+  `ctl-01` ships as a CANDIDATE with `hand_built: false` that the loader
+  excludes; N2 is `NOT_EVALUABLE` on the admitted corpus and both its
+  branches are shown reachable under `admit_candidates`. **`AMC_006`:**
+  one arm per fresh session is enforced at load, with AP-4's cued
+  follow-up the one arm that cannot obey section 5's *no follow-up
+  turns* — the order's protocol and its fourth claim point different
+  ways, and the exception is scoped to B alone. Normalization and alias
+  containment are word lists, stated, with coverage printed per
+  response (`AMC_008`). The score report screens clean with no
+  exemption; the prompt render carries the delivered form's own field
+  name under the three-arm harness. Eight `AMC_*` claims; check count
+  printed by `selftest_amc.py`, and `amc.py` refuses `--selftest`.
+  Stdlib only, parses under 3.9, phone-buildable, CC0.
+- `ontology-probe/` — A work order delivered verbatim and built to it:
+  whether a term-cut PROTECTS, and where it HOLES. Rule-shaped protection
+  (*reject X*) names its own boundary; cut-shaped protection (primitives
+  that have no X) lets X fail to compose, and failure to compose is the
+  measurand. A declared primitive set is scored against hand-built
+  constructions by asking a restater to restate each using only the
+  primitives; `hole_rate` (COMPOSES on TARGETED), `narrowness` (FAILS on
+  CONTROL), `ambient_rate`, and the `smuggle_set` — the union of every
+  term a restater had to import — which the order calls the deliverable,
+  a premise inventory produced by measurement rather than introspection.
+  **No model has been run here** (`OP_008`): no endpoint, and section 7's
+  RESTATER limit — a premise shared between restater and ontology composes
+  without either noticing — is what a model scoring its own reading of a
+  spec would instance. What is built: the section 4 prompt is **parsed
+  out of `WORK_ORDER.md` at call time**, with a render's two placeholders
+  substituting back out to the template (`OP_001`). **`OP_002`:**
+  `primitives.json` is a model's READING of `SHAPE_SPEC.md` — the spec
+  enumerates no list — 25 terms and six `absent_by_design` entries (§9
+  cost, §5 optimum, §1 analogy / name / picture, §6 law), every term
+  asserted present in the spec by the selftest, the one `grounds_to:
+  undefined` entry (`critical point`) being the one the spec itself calls
+  open, and the declaration marked `confirmed_by_author: false`; physics
+  share 0.32, so *declared-only* under `[CHOICE 4]`. **`OP_003`, the
+  state:** section 3 forbids model-generated constructions (*four prior
+  attempts … produced defective sets*), every construction this session
+  could write is one, so the three shipped are CANDIDATEs the loader
+  refuses — the admitted set is `n 0`, `EMPTY`, `BELOW_MINIMUM`, control
+  share None — and the section 9 first run cannot start from here for want
+  of thirty hand-built statements, not for want of an instrument. The
+  selftest's 30-construction fixture (12 / 9 / 9, two families × three
+  repeats, one leaking restatement, one malformed record) is admitted only
+  past the gate via `--fixture` and the render banners it on its second
+  line. **`OP_004`:** `status` is self-reported (`PB_006`'s shape) and
+  stays the order's number; `[CHOICE 3]` adds a leak — content words of
+  the restatement outside the primitives, `terms_added` and a declared
+  function-word set — so a COMPOSES with a leak is `status_contradicted`,
+  counted apart, never re-labelled. **`OP_005`:** COMPOSES_WITH_ADDITION
+  sits in every section 5 denominator and no numerator (`[CHOICE 2]`), a
+  missing denominator is None never 0, and `rates` is registered in
+  `tools/known_answer.py` with five distinct-valued cases. **`OP_006`:**
+  N3 (three repeats), OP-4 (two ontologies) and OP-5 (two primitive sets
+  of different grounding class, `op5()` built for the comparison) each
+  return NOT_EVALUABLE / undetermined naming the input they lack, both
+  branches shown reachable on constructed worlds. **`OP_007`:** the
+  ontology's own term `critical point` carries a screened word, so the
+  renders are screened under a declared three-arm exemption on that one
+  token; two of the instrument's own `why` strings tripped on `needs` and
+  were reworded. **The operator's run 1 then landed** under
+  `ontologies/substrate-primary/`, verbatim: a hand-declared physics-
+  grounded set (20 primitives, 9 absent, physics share 0.65), thirty
+  hand-built constructions (12 / 9 / 9) and a CODED SHEET for one family
+  at one repeat. **`OP_009`:** the set closes `OP_003`'s gap by arrival,
+  and the one thing that had to move was the instrument — it required a
+  `targets` field the order's schema does not carry, so a set built to
+  the order was refused; `[CHOICE 5]` makes it optional. **`OP_010`:** a
+  coded sheet is not the order's raw log (statuses and terms coded, no
+  restatement text, one shared `run_id`), read through an adapter that
+  edits nothing — model UNKNOWN, date UNDATED, leak NOT_EVALUABLE 30 of
+  30, ontology bound from `--ontology` and checked by `terms_used ⊆
+  primitives` 30 of 30. **`OP_011`:** hole_rate 0.000, narrowness 0.000,
+  ambient_rate **0.222 under `[CHOICE 2]` and 0.778 under the other
+  reading** — OP-3's direction holds under both, its magnitude is the
+  reading; N1/N2/N5 silent, N3 NOT_EVALUABLE. **`OP_012`:** the sheet's
+  `missing_primitive` is the FAILS-side counterpart of `terms_added` —
+  13 citations, 11 declared absent, 9 of 9 TARGETED FAILS naming a
+  declared absence — and the two UNDECLARED (`role`,
+  `absent-as-distinct-from-unread`) both sit on AMBIENT FAILS, the
+  second naming a distinction a CONTROL (c-012) composes with.
+  **`OP_013`:** the smuggle_set is silent where a premise enters without
+  a new term — c-023 (forced binary) and c-027 (population default)
+  compose with nothing added — and the synonym route on c-025
+  (`preference` reimporting `interior_state`) is the restater's own note,
+  the leak check that would read it independently being NOT_EVALUABLE on
+  a coded form. **`OP_014`:** OP-5's precondition is half met (a
+  declared-only set at 0.32 and a physics-grounded one at 0.65 now both
+  exist) and the second has not been scored on these thirty.
+  **`OP_015` UNVERIFIED:** three repeats, a second family, raw
+  restatements and the second ontology on the same constructions are all
+  unrun. Fifteen `OP_*` claims (distinct from the order's OP-1..5); check
+  count printed by `selftest_op.py`, and `probe.py` refuses
+  `--selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

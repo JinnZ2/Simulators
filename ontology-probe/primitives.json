@@ -1,0 +1,45 @@
+{
+  "name": "SHAPE_SPEC",
+  "version": "0.1.0",
+  "_declaration": {
+    "reading_of": "SHAPE_SPEC.md (repository root), sections 1-10",
+    "declared_by": "this session, a model; a reading of the spec and not the spec's own list, since the spec enumerates no primitive list",
+    "confirmed_by_author": false,
+    "rule": "every term below appears in SHAPE_SPEC.md; the selftest checks that. Every absent_by_design entry quotes the section that states the absence. grounds_to is honest: `undefined` marks what the spec itself calls open."
+  },
+  "primitives": [
+    {"term": "shape", "type": "relation", "grounds_to": "declared", "where": "section 1: the constraint set a geometry is a solution to"},
+    {"term": "constraint", "type": "relation", "grounds_to": "declared", "where": "section 1, section 3 step 2"},
+    {"term": "constraint set", "type": "relation", "grounds_to": "declared", "where": "section 1"},
+    {"term": "geometry", "type": "state", "grounds_to": "declared", "where": "section 1: the readout, not the object"},
+    {"term": "solution", "type": "relation", "grounds_to": "declared", "where": "section 1"},
+    {"term": "dissipation", "type": "quantity", "grounds_to": "physics", "where": "section 9: work lost per unit delivered, in joules"},
+    {"term": "flux", "type": "quantity", "grounds_to": "physics", "where": "section 2, section 3 worked example"},
+    {"term": "work", "type": "quantity", "grounds_to": "physics", "where": "section 9"},
+    {"term": "inertia", "type": "quantity", "grounds_to": "physics", "where": "section 9"},
+    {"term": "viscosity", "type": "quantity", "grounds_to": "physics", "where": "section 9"},
+    {"term": "supply", "type": "quantity", "grounds_to": "physics", "where": "section 9"},
+    {"term": "removal", "type": "quantity", "grounds_to": "physics", "where": "section 9 (supply / removal)"},
+    {"term": "boundary", "type": "state", "grounds_to": "declared", "where": "section 5"},
+    {"term": "enclosure", "type": "state", "grounds_to": "declared", "where": "section 4, section 9"},
+    {"term": "substrate", "type": "state", "grounds_to": "declared", "where": "section 3 step 2, section 5"},
+    {"term": "scale", "type": "quantity", "grounds_to": "physics", "where": "section 8: characteristic scale, capillary diameter, mean free path"},
+    {"term": "ratio", "type": "operator", "grounds_to": "declared", "where": "section 9: state constraints as ratios"},
+    {"term": "removed", "type": "operator", "grounds_to": "declared", "where": "section 4: which constraint, if removed, changes the geometry"},
+    {"term": "recurrence", "type": "relation", "grounds_to": "declared", "where": "section 1, section 6: independent recurrence"},
+    {"term": "residue", "type": "state", "grounds_to": "declared", "where": "section 6: a fit to a residue"},
+    {"term": "fit", "type": "operator", "grounds_to": "declared", "where": "section 6"},
+    {"term": "instrument", "type": "state", "grounds_to": "declared", "where": "section 3 step 3, section 7"},
+    {"term": "read", "type": "operator", "grounds_to": "declared", "where": "section 3, section 4, section 7"},
+    {"term": "marker", "type": "state", "grounds_to": "declared", "where": "section 10"},
+    {"term": "critical point", "type": "state", "grounds_to": "undefined", "where": "section 8: whether a shape's critical point is scale-invariant is stated as open and not yet measured"}
+  ],
+  "absent_by_design": [
+    {"term": "cost", "reason": "section 9 NOTE ON COST: cost is an abstraction with no fundamental basis in the physics; the cost framing imports a pricing model that is not part of the system being read. Use dissipation."},
+    {"term": "optimum", "reason": "section 5: do not read an external-constraint geometry as an optimum; it is a transcript of terrain."},
+    {"term": "analogy", "reason": "section 1: cross-domain recurrence is not analogy; analogy is a statement about resemblance of appearance."},
+    {"term": "name", "reason": "section 1: NOT the name the field gave it; section 7: the name does not participate."},
+    {"term": "picture", "reason": "section 1: NOT the picture; section 2: a picture that matches and a claim that is empty."},
+    {"term": "law", "reason": "section 6: a uniform residue makes the fit look like a law. It is still a fit to a residue."}
+  ]
+}

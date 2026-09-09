@@ -51,7 +51,8 @@ MANIFEST = (
     "frame-location-benchmark/score.py::false_positive_rate",
     "gap-existence-cases/commit_store.py::commit_specificity",
     "crediting-rate/crediting_rate.py::bin_gap",
-    "anchor-position/normalize.py::crossing_count",
+    "anchor-measurand-crossing/amc.py::crossing_band",
+    "ontology-probe/probe.py::rates",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so
