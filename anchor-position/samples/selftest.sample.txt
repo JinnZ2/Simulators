@@ -1,0 +1,1 @@
+selftest_apm: 60 checks passed

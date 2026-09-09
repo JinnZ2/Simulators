@@ -1,0 +1,3 @@
+{"case_id": "sc-01", "order": ["M", "M+", "D"], "seed": 0, "mplus_placement": "after_block"}
+{"case_id": "mp-01", "order": ["M+", "D", "M"], "seed": 0, "mplus_placement": "after_block"}
+{"case_id": "ctl-01", "order": ["M", "D", "M+"], "seed": 0, "mplus_placement": "after_block"}

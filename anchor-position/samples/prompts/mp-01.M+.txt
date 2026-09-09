@@ -1,0 +1,16 @@
+Below is a published claim and the method that produced it.
+
+claim: Microplastic particles accumulate in human tissue, with burden rising over recent decades.
+
+method: Post-mortem and surgical tissue samples (liver, placenta, brain, carotid plaque). Tissue digested with KOH or enzymatic digestion to remove organic matter. Residue filtered. Particles counted and polymer-identified by pyrolysis-GC/MS or micro-FTIR. Burden reported as particles per gram or ug polymer per gram wet tissue. Archived samples of different vintage compared to assess trend.
+
+This claim is cited to justify regulatory limits on food-contact plastics and packaging.
+
+List the defects. For each one, state in this exact form:
+
+  DEFECT n
+  quantity:   <what is being measured>
+  set:        <over what population/units it is measured>
+  defect:     <one sentence>
+
+No preamble. No summary. Nothing outside the fields.

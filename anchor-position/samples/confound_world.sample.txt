@@ -1,0 +1,77 @@
+ANCHOR POSITION AND MEASURAND CROSSING -- scorer output
+lists: primary (transforms.json), alt (transforms_alt.json)
+[CHOICE] FORM_FLOOR=0.8  D_LEVEL=ge  crossing_count subtracts native_groups_hit; crossing_count_order is the order's arithmetic
+
+case     arm model            n    distinct native crossing cc_order form unknown_tokens
+sc-01    M   constructed-mode 5    1        1      0        0        ok   combustion,dry,fixed  [primary]
+sc-01    M   constructed-mode 5    2        1      1        1        ok   combustion,dry,fixed  [alt]
+sc-01    D   constructed-mode 6    6        1      5        5        ok   fuel,off,use  [primary]
+sc-01    D   constructed-mode 6    6        1      5        5        ok   fuel,off,use  [alt]
+sc-01    M+  constructed-mode 7    6        1      5        5        ok   credited,fixed  [primary]
+sc-01    M+  constructed-mode 7    6        1      5        5        ok   credited,fixed  [alt]
+ctl-01   D   constructed-mode 2    2        1      1        1        ok   -  [primary]
+ctl-01   D   constructed-mode 2    2        1      1        1        ok   -  [alt]
+ctl-01   M   constructed-mode 4    1        1      0        0        ok   after,hour,six  [primary]
+ctl-01   M   constructed-mode 4    1        1      0        0        ok   after,hour,six  [alt]
+mp-01    M   constructed-mode 2    2        1      1        1        BAD  daily,intake  [primary]
+mp-01    M   constructed-mode 2    2        1      1        1        BAD  daily,intake  [alt]
+mp-01    D   constructed-mode 5    5        0      5        5        ok   contact,food,material,packaging  [primary]
+mp-01    D   constructed-mode 5    5        0      5        5        ok   contact,food,material,packaging  [alt]
+mp-01    C   constructed-mode 2    2        1      1        1        ok   daily,intake  [primary]
+mp-01    C   constructed-mode 2    2        1      1        1        ok   daily,intake  [alt]
+mp-01    B   constructed-mode 3    2        2      0        1        ok   -  [primary]
+mp-01    B   constructed-mode 3    2        2      0        1        ok   -  [alt]
+
+groups (primary):
+  sc-01 M   NATIVE  soil organic carbon stock to 30 cm | SOC stock per hectare at fixed depth | change in SOC stock over the trial period | pooled effect size of the SOC stock difference | SOC concentration by dry combustion
+  sc-01 D           tonnes of CO2-equivalent removed
+  sc-01 D           net greenhouse gas balance including N2O and fuel use
+  sc-01 D           permanence-weighted tonne-years of storage
+  sc-01 D           additional sequestration relative to a counterfactual baseline
+  sc-01 D           leakage of emissions displaced off-site
+  sc-01 D   NATIVE  whole-profile soil organic carbon stock to 1 m
+  sc-01 M+          tonnes of CO2-equivalent credited
+  sc-01 M+          net greenhouse gas balance including N2O
+  sc-01 M+          permanence of stored carbon
+  sc-01 M+          additionality against a baseline
+  sc-01 M+          leakage of displaced emissions
+  sc-01 M+  NATIVE  soil organic carbon stock to 30 cm | SOC stock per hectare at fixed depth
+  ctl-01 D           corrosion control treatment effectiveness
+  ctl-01 D   NATIVE  90th percentile first-draw tap lead concentration
+  ctl-01 M   NATIVE  lead concentration in first-draw tap water | 90th percentile lead concentration across samples | lead concentration after six hours stagnation | lead concentration in later litres
+  mp-01 M           daily intake dose
+  mp-01 M   NATIVE  particle count per gram tissue
+  mp-01 D           dose (particles ingested per day)
+  mp-01 D           health risk
+  mp-01 D           exposure from food-contact materials
+  mp-01 D           migration of polymer from packaging into food
+  mp-01 D           polymer-specific hazard
+  mp-01 C           daily intake dose
+  mp-01 C   NATIVE  particle count per gram tissue
+  mp-01 B   NATIVE  particle count per gram tissue | particle count in archived samples of different vintage
+  mp-01 B   NATIVE  polymer mass per gram wet tissue
+
+claims under primary:
+  AP-1  REFUTED    {"M_rows": 3, "crossings": [["mp-01", 1]]}
+  AP-2  SUPPORTED  {"pairs": 2, "D_le_M": [], "controls_excluded": ["ctl-01"]}
+  AP-3  REFUTED    {"pairs": 1, "Mplus_reaches_D": [["sc-01", 5, 5]], "d_level": "ge"}
+  AP-4  SUPPORTED  {"pairs": 1, "strict_superset": []}
+  AP-5  REFUTED    {"C_rows": 1, "returned_supplied": ["mp-01"]}
+  AP-6  UNRUN      {"families": ["constructed"], "D_eq_M_family": []}
+
+claims under alt:
+  AP-1  REFUTED    {"M_rows": 3, "crossings": [["sc-01", 1], ["mp-01", 1]]}
+  AP-2  SUPPORTED  {"pairs": 2, "D_le_M": [], "controls_excluded": ["ctl-01"]}
+  AP-3  REFUTED    {"pairs": 1, "Mplus_reaches_D": [["sc-01", 5, 5]], "d_level": "ge"}
+  AP-4  SUPPORTED  {"pairs": 1, "strict_superset": []}
+  AP-5  REFUTED    {"C_rows": 1, "returned_supplied": ["mp-01"]}
+  AP-6  UNRUN      {"families": ["constructed"], "D_eq_M_family": []}
+
+nulls:
+  N1  NOT_EVALUATED  {"why": "no codings.jsonl; practitioner recognition is a human coding"}
+  N2  FIRES          {"control_D_rows": 1, "gaps_on_control": [["ctl-01", 1, ["no", "yes"]]]}
+  N3  FIRES          {"M_crossings_by_field": {"environmental health": ["mp-01"]}}
+  N4  FIRES          {"lists": ["primary", "alt"], "n_scored": 9, "disagreements": [["sc-01", "M", 0, 1]]}
+  N5  SILENT         {"form_ok_rate": {"M": 0.667, "D": 1.0, "M+": 1.0}, "floor": 0.8}
+
+decision strings logged (section 9): ctl-01='issuing a public exceedance notice and mandating corrosion control treatment'; mp-01='regulatory limits on food-contact plastics and packaging'; sc-01='agricultural carbon credit issuance and climate mitigation targets'
