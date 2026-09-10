@@ -44,7 +44,13 @@ screened against it, so a restater's "preference reimports
 interior_state" note becomes a declared-list hit rather than a
 self-report. A word list decides word sense there and is stepped around
 by any paraphrase; the file says who wrote it and after which run, and a
-hit on a run the list was written in view of is NOT blind.
+hit on a run the list was written in view of is NOT blind. A second
+table in the same file, `scope_required`, lists added terms that carry
+no value until their scope is declared (boundary, horizon, environment
+variables, what is excluded); on a sheet carrying no declaration such an
+addition is SCOPE_UNDECLARED, a third state beside reimport and
+unmatched -- `efficiency` is the operator's instance, and fold-matrix
+registers it as a folded term.
 
 WHAT THE ORDER LEAVES TO THE RESTATER AND WHAT THIS ADDS. `status` is
 self-reported by the restater. The scorer keeps that as the order's
@@ -473,8 +479,37 @@ def load_aliases(odir, prims):
             if al in absent:
                 raise Refused("alias %r under %r is itself an absent term" % (al, term))
             table[t][al] = e["basis"]
+    scope = {}
+    for e in a.get("scope_required", []):
+        if not isinstance(e, dict) or not e.get("term") or not e.get("requires") or not e.get("basis"):
+            raise Refused("scope_required entry needs term, requires (non-empty) and basis: %r" % e)
+        t = e["term"].strip().lower()
+        if t in prim or t in absent:
+            raise Refused("scope_required term %r is a primitive or an absent term" % t)
+        if any(t in als for als in table.values()):
+            raise Refused("scope_required term %r is also listed as an alias; one state per term" % t)
+        scope[t] = {"requires": [str(x) for x in e["requires"]], "basis": e["basis"]}
     return {"declared_by": decl["declared_by"], "written_after": decl["written_after"],
-            "blind_for": decl.get("blind_for"), "table": table, "path": path}
+            "blind_for": decl.get("blind_for"), "table": table, "scope": scope, "path": path}
+
+
+def scope_undeclared(terms_added, aliases, declared=None):
+    """An added term on the scope_required list carries no value until the
+    fields it requires are declared. `declared` is the record's own scope
+    declaration (a dict of field -> value) when the run form carries one;
+    a coded sheet carries none, so every hit is SCOPE_UNDECLARED with the
+    missing fields named. None when no table is declared."""
+    if aliases is None:
+        return None
+    out = []
+    for t in terms_added:
+        if t in aliases.get("scope", {}):
+            req = aliases["scope"][t]["requires"]
+            missing = [f for f in req if not (declared or {}).get(f)]
+            out.append({"added": t, "requires": req, "missing": missing,
+                        "state": "SCOPE_UNDECLARED" if missing else "SCOPE_DECLARED",
+                        "basis": aliases["scope"][t]["basis"]})
+    return out
 
 
 def reimports(terms_added, aliases):
@@ -553,7 +588,8 @@ def score_runs(runs, cons, prims, fixture=False, form="raw", aliases=None):
                   "leak": lk, "undeclared_used": undeclared_used(p["terms_used"], prims, p["terms_added"]),
                   "status_contradicted": (p["status"] == "COMPOSES" and bool(lk)) if lk is not None else None,
                   "targets": c.get("targets"),
-                  "reimports": reimports(p["terms_added"], aliases) if not p["malformed"] else None})
+                  "reimports": reimports(p["terms_added"], aliases) if not p["malformed"] else None,
+                  "scope": scope_undeclared(p["terms_added"], aliases, r.get("declared_scope")) if not p["malformed"] else None})
         s.update(extra)
         scored.append(s)
     ok = [s for s in scored if not s["malformed"]]
@@ -583,7 +619,10 @@ def score_runs(runs, cons, prims, fixture=False, form="raw", aliases=None):
         "hits": [{"construction_id": s["construction_id"], "added": h["added"], "absent": h["absent"], "basis": h["basis"]}
                  for s, h in rhits],
         "added_terms_unmatched": sorted({t for s in ok for t in s["terms_added"]
-                                         if aliases and not any(t == h["added"] for h in s["reimports"])}),
+                                         if aliases and not any(t == h["added"] for h in s["reimports"])
+                                         and not any(t == h["added"] for h in s["scope"])}),
+        "scope_hits": [{"construction_id": s["construction_id"], "added": h["added"], "state": h["state"],
+                        "missing": h["missing"], "basis": h["basis"]} for s in ok for h in (s["scope"] or [])],
     }
     return {"scored": scored, "aggregates": agg, "smuggle_set": smuggle, "leak_set": leaks,
             "absent_coverage": cov, "reimport_summary": reimport_summary,
@@ -776,7 +815,10 @@ def render(res):
             rs["n_aliases"], rs["declared_by"], rs["written_after"], rs["records_with_hit"]))
         for h in rs["hits"]:
             L.append("  %-8s %s => %s   [%s]" % (h["construction_id"], h["added"], h["absent"], h["basis"]))
-        L.append("  added terms matching no alias: %s" % (", ".join(rs["added_terms_unmatched"]) or "-"))
+        for h in rs["scope_hits"]:
+            L.append("  %-8s %s  %s  missing %s   [%s]" % (h["construction_id"], h["added"], h["state"],
+                                                          ",".join(h["missing"]) or "-", h["basis"]))
+        L.append("  added terms matching no alias and no scope requirement: %s" % (", ".join(rs["added_terms_unmatched"]) or "-"))
     else:
         L.append("alias reimport ([CHOICE 6]): NOT_DECLARED (no aliases.json beside primitives.json); not a zero")
     notes = [s for s in res["scored"] if s.get("note")]

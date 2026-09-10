@@ -58,7 +58,8 @@ coded sheet ──is_coded()──► adapt_coded() ──► REQUIRED shape (mo
 | smuggle_set | 10 terms, all from AMBIENT and one CONTROL addition |
 | cited missing | 13; 11 declared absent; 2 UNDECLARED (`role`, `absent-as-distinct-from-unread`), both on AMBIENT FAILS |
 | absent-term coverage | 8 of 9 exercised; `motive` UNEXERCISED (c-013 names it, the restater cited `intent` only) |
-| alias reimport `[CHOICE 6]` | 2 hits (c-025 `preference ⇒ interior_state`, c-024 `efficiency ⇒ better/worse` CONTESTABLE); audit-declared list, written after run 1, not blind on it |
+| alias reimport `[CHOICE 6]` | 1 hit (c-025 `preference ⇒ interior_state`); audit-declared list, written after run 1, not blind on it |
+| scope undeclared `[CHOICE 6]` | c-024 `efficiency`, c-022 `maximize`: no value until boundary / horizon / environment variables / exclusions are stated, and the sheet states none |
 | N1 / N2 / N5 | do not fire; N3 NOT_EVALUABLE (one repeat) |
 | OP-4 / OP-5 | undetermined — second ontology on these thirty not scored |
 
@@ -66,7 +67,7 @@ Direction of OP-3 (ambient > targeted) holds under both `[CHOICE 2]`
 readings; its magnitude is the reading. The synonym route the coded
 sheet notes on c-025 (`preference` → `interior_state`) is the
 restater's declaration, and `aliases.json` turns it into a declared-list
-hit on the same coded sheet. `CLAIM_TABLE.md` `OP_009..017`.
+hit on the same coded sheet. `CLAIM_TABLE.md` `OP_009..018`.
 
 ## What is here
 
@@ -79,7 +80,7 @@ hit on the same coded sheet. `CLAIM_TABLE.md` `OP_009..017`.
 | `selftest_op.py` | the checks, both directions; writes `samples/` and `runs/` |
 | `runs/constructed.jsonl`, `runs/constructed_constructions.jsonl` | the fixture: 30 constructions (12 / 9 / 9), 2 families × 3 repeats, one leak, one malformed |
 | `ontologies/substrate-primary/` | the operator's ontology, thirty constructions and coded run 1, verbatim; plus `aliases.json`, the audit's declared alias table |
-| `CLAIM_TABLE.md` | `OP_001..017` |
+| `CLAIM_TABLE.md` | `OP_001..018` |
 
 ## Run
 
@@ -116,7 +117,8 @@ COMPOSES_WITH_ADDITION rows in every denominator and no numerator;
 `[CHOICE 5]` `targets` optional on TARGETED (the order's schema has no
 such field; the operator's set was refused until it was); `[CHOICE 6]`
 an optional `aliases.json` beside `primitives.json` screens
-`terms_added` for reimport of a declared absence — declared, dated, a
-word list.
+`terms_added` for reimport of a declared absence, and its
+`scope_required` table names added terms that carry no value until
+their scope is declared — both declared, dated, word lists.
 
 Stdlib only. Parses under 3.9. Phone-buildable. CC0.

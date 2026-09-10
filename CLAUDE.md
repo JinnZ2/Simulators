@@ -10971,13 +10971,21 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   dated `aliases.json` beside `primitives.json` screens `terms_added`
   against the words that would carry an absent term back in, so the
   c-025 synonym route becomes a declared-list hit on the same coded
-  sheet — two hits on run 1 (c-025 `preference ⇒ interior_state` on the
-  restater's own note; c-024 `efficiency ⇒ better/worse` on the audit's
-  reading, marked CONTESTABLE), eight added terms matching nothing, the
-  rates unmoved; the file is the audit's not the operator's, was written
-  after run 1 was read so neither hit is blind, and is a word list that
-  paraphrase steps around; no file is `NOT_DECLARED`, never zero.
-  Seventeen `OP_*` claims (distinct from the order's OP-1..5); check
+  sheet — one hit on run 1 (c-025 `preference ⇒ interior_state` on the
+  restater's own note), the rates unmoved; the file is the audit's not
+  the operator's, was written after run 1 was read so the hit is not
+  blind, and is a word list that paraphrase steps around; no file is
+  `NOT_DECLARED`, never zero. **`OP_018`, and a correction the same
+  day:** a first version entered `efficiency` as a CONTESTABLE alias of
+  `better/worse`, and the operator's rule — efficiency is not read at all
+  unless scope and environment variables are marked and what is excluded
+  is stated — moved it to a third state: `scope_required` lists added
+  terms that carry no value until boundary / horizon / environment
+  variables / exclusions are declared, a coded sheet declares none, so
+  c-024 `efficiency` and c-022 `maximize` land `SCOPE_UNDECLARED` with
+  the missing fields named, grounded by import in `fold-matrix`'s
+  register (*output/input under an unstated boundary and horizon*); one
+  state per term, enforced at load. Eighteen `OP_*` claims (distinct from the order's OP-1..5); check
   count printed by `selftest_op.py`, and `probe.py` refuses
   `--selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one

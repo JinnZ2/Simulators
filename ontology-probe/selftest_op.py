@@ -474,27 +474,6 @@ def main():
     check("reimport NOT_DECLARED when no alias table is passed (None, not zero)",
           R1["reimport_summary"]["declared"] is False and all(s["reimports"] is None for s in R1["scored"]))
     check("the SHAPE_SPEC ontology declares no aliases", probe.load_aliases(HERE, prims) is None)
-    al = probe.load_aliases(OD, sp)
-    check("substrate-primary aliases load, declared by the audit and dated after run 1",
-          al is not None and "audit" in al["declared_by"] and "run 1" in al["written_after"])
-    check("every alias table key is an absent term and no alias is a primitive or absent term",
-          set(al["table"]) <= {x["term"].lower() for x in sp["absent_by_design"]}
-          and not ({a for v in al["table"].values() for a in v} & ({e["term"] for e in sp["primitives"]} | set(al["table"]))))
-    R1a = probe.score_runs(rr, sc, sp, form=form, aliases=al)
-    rs = R1a["reimport_summary"]
-    check("two records hit the alias table on run 1", rs["records_with_hit"] == 2)
-    check("c-025 preference => interior_state is the restater's own note, now a declared-list hit",
-          any(h["construction_id"] == "c-025" and h["added"] == "preference" and h["absent"] == "interior_state"
-              and "restater note" in h["basis"] for h in rs["hits"]))
-    check("c-024 efficiency => better/worse is the audit's reading and marked CONTESTABLE",
-          any(h["construction_id"] == "c-024" and h["absent"] == "better/worse" and "CONTESTABLE" in h["basis"] for h in rs["hits"]))
-    check("eight added terms match no alias (the table does not fire on everything)",
-          rs["added_terms_unmatched"] == ["attribution", "competition", "contamination", "count", "learning", "market", "maximize", "validity"])
-    check("aliases move nothing in the section 5 rates", R1a["aggregates"] == R1["aggregates"] and R1a["smuggle_set"] == R1["smuggle_set"])
-    cov1 = R1a["absent_coverage"]
-    check("with aliases motive is still UNEXERCISED; coverage 8 of 9 either way",
-          cov1["unexercised"] == ["motive"] and cov1["rows"]["interior_state"]["reimported_via"] == ["c-025:preference"])
-    # null both ways on the loader
     def bad_alias(obj):
         d = os.path.join(HERE, "runs", "_alias_null")
         os.makedirs(d, exist_ok=True)
@@ -505,6 +484,51 @@ def main():
         finally:
             os.remove(os.path.join(d, "aliases.json")); os.rmdir(d)
     decl = {"declared_by": "x", "written_after": "y"}
+    fold_reg = None
+    try:
+        import importlib.util
+        _fs = importlib.util.spec_from_file_location("_fold", os.path.join(os.path.dirname(HERE), "fold-matrix", "fold_register.py"))
+        _fm = importlib.util.module_from_spec(_fs); _fs.loader.exec_module(_fm)
+        fold_reg = _fm.REGISTER
+    except Exception:  # noqa: BLE001
+        fold_reg = None
+    al = probe.load_aliases(OD, sp)
+    check("substrate-primary aliases load, declared by the audit and dated after run 1",
+          al is not None and "audit" in al["declared_by"] and "run 1" in al["written_after"])
+    check("every alias table key is an absent term and no alias is a primitive or absent term",
+          set(al["table"]) <= {x["term"].lower() for x in sp["absent_by_design"]}
+          and not ({a for v in al["table"].values() for a in v} & ({e["term"] for e in sp["primitives"]} | set(al["table"]))))
+    R1a = probe.score_runs(rr, sc, sp, form=form, aliases=al)
+    rs = R1a["reimport_summary"]
+    check("one alias hit on run 1: efficiency is NOT an alias of better/worse (withdrawn on the operator's rule)",
+          rs["records_with_hit"] == 1 and not any(h["added"] == "efficiency" for h in rs["hits"]))
+    check("c-025 preference => interior_state is the restater's own note, now a declared-list hit",
+          any(h["construction_id"] == "c-025" and h["added"] == "preference" and h["absent"] == "interior_state"
+              and "restater note" in h["basis"] for h in rs["hits"]))
+    check("efficiency and maximize are SCOPE_UNDECLARED on the coded sheet, boundary and exclusions among the missing fields",
+          sorted((h["added"], h["state"]) for h in rs["scope_hits"]) == [("efficiency", "SCOPE_UNDECLARED"), ("maximize", "SCOPE_UNDECLARED")]
+          and all("boundary" in h["missing"] and "excluded" in h["missing"] for h in rs["scope_hits"]))
+    check("scope requirement for efficiency names boundary, horizon, environment variables and exclusions",
+          al["scope"]["efficiency"]["requires"] == ["boundary", "horizon", "environment_variables", "excluded"])
+    check("a declared scope on the record turns the state to SCOPE_DECLARED",
+          probe.scope_undeclared(["efficiency"], al, {"boundary": "b", "horizon": "h", "environment_variables": "e", "excluded": "x"})[0]["state"] == "SCOPE_DECLARED")
+    check("a partial declaration stays SCOPE_UNDECLARED and names what is missing",
+          probe.scope_undeclared(["efficiency"], al, {"boundary": "b"})[0]["missing"] == ["horizon", "environment_variables", "excluded"])
+    check("efficiency's scope requirement is grounded in fold-matrix's register by import, not restated",
+          fold_reg is not None and "efficiency" in fold_reg
+          and "unstated boundary and horizon" in fold_reg["efficiency"]["substitutes_for"])
+    check("seven added terms match neither an alias nor a scope requirement",
+          rs["added_terms_unmatched"] == ["attribution", "competition", "contamination", "count", "learning", "market", "validity"])
+    refuses("a scope_required term that is also an alias is refused (one state per term)",
+            lambda: bad_alias({"_declaration": decl, "aliases": {"intent": [{"term": "purpose", "basis": "b"}]},
+                               "scope_required": [{"term": "purpose", "requires": ["boundary"], "basis": "b"}]}))
+    refuses("a scope_required entry with an empty requires list is refused",
+            lambda: bad_alias({"_declaration": decl, "aliases": {}, "scope_required": [{"term": "efficiency", "requires": [], "basis": "b"}]}))
+    check("aliases move nothing in the section 5 rates", R1a["aggregates"] == R1["aggregates"] and R1a["smuggle_set"] == R1["smuggle_set"])
+    cov1 = R1a["absent_coverage"]
+    check("with aliases motive is still UNEXERCISED; coverage 8 of 9 either way",
+          cov1["unexercised"] == ["motive"] and cov1["rows"]["interior_state"]["reimported_via"] == ["c-025:preference"])
+    # null both ways on the loader
     refuses("an alias file naming a non-absent term is refused",
             lambda: bad_alias({"_declaration": decl, "aliases": {"gravity": [{"term": "g", "basis": "b"}]}}))
     refuses("an alias that is a primitive is refused",
