@@ -46,6 +46,9 @@ coded sheet ──is_coded()──► adapt_coded() ──► REQUIRED shape (mo
               ontology bound from --ontology, checked terms_used ⊆ primitives (30/30)
                                                      │
       leak check NOT_EVALUABLE (no restatement)  ·  missing_primitive → cite_missing()
+                                                     │
+      absent_coverage(): per declared absence EXERCISED / UNEXERCISED
+      aliases.json ──[CHOICE 6]──► terms_added screened for reimport (declared, dated, not blind on run 1)
 ```
 
 | readout | value |
@@ -54,14 +57,16 @@ coded sheet ──is_coded()──► adapt_coded() ──► REQUIRED shape (mo
 | ambient_rate | 0.222 under `[CHOICE 2]`, 0.778 with additions counted as composing |
 | smuggle_set | 10 terms, all from AMBIENT and one CONTROL addition |
 | cited missing | 13; 11 declared absent; 2 UNDECLARED (`role`, `absent-as-distinct-from-unread`), both on AMBIENT FAILS |
+| absent-term coverage | 8 of 9 exercised; `motive` UNEXERCISED (c-013 names it, the restater cited `intent` only) |
+| alias reimport `[CHOICE 6]` | 2 hits (c-025 `preference ⇒ interior_state`, c-024 `efficiency ⇒ better/worse` CONTESTABLE); audit-declared list, written after run 1, not blind on it |
 | N1 / N2 / N5 | do not fire; N3 NOT_EVALUABLE (one repeat) |
 | OP-4 / OP-5 | undetermined — second ontology on these thirty not scored |
 
 Direction of OP-3 (ambient > targeted) holds under both `[CHOICE 2]`
 readings; its magnitude is the reading. The synonym route the coded
 sheet notes on c-025 (`preference` → `interior_state`) is the
-restater's declaration, not a mechanical finding. `CLAIM_TABLE.md`
-`OP_009..015`.
+restater's declaration, and `aliases.json` turns it into a declared-list
+hit on the same coded sheet. `CLAIM_TABLE.md` `OP_009..017`.
 
 ## What is here
 
@@ -73,8 +78,8 @@ restater's declaration, not a mechanical finding. `CLAIM_TABLE.md`
 | `probe.py` | the instrument: `declare`, `prompt`, `score`; refuses `--selftest` |
 | `selftest_op.py` | the checks, both directions; writes `samples/` and `runs/` |
 | `runs/constructed.jsonl`, `runs/constructed_constructions.jsonl` | the fixture: 30 constructions (12 / 9 / 9), 2 families × 3 repeats, one leak, one malformed |
-| `ontologies/substrate-primary/` | the operator's ontology, thirty constructions and coded run 1, verbatim |
-| `CLAIM_TABLE.md` | `OP_001..015` |
+| `ontologies/substrate-primary/` | the operator's ontology, thirty constructions and coded run 1, verbatim; plus `aliases.json`, the audit's declared alias table |
+| `CLAIM_TABLE.md` | `OP_001..017` |
 
 ## Run
 
@@ -109,6 +114,9 @@ COMPOSES_WITH_ADDITION rows in every denominator and no numerator;
 `[CHOICE 3]` the leak cross-check beside the self-reported status;
 `[CHOICE 4]` the N4 threshold and the OP-5 physics-share cut;
 `[CHOICE 5]` `targets` optional on TARGETED (the order's schema has no
-such field; the operator's set was refused until it was).
+such field; the operator's set was refused until it was); `[CHOICE 6]`
+an optional `aliases.json` beside `primitives.json` screens
+`terms_added` for reimport of a declared absence — declared, dated, a
+word list.
 
 Stdlib only. Parses under 3.9. Phone-buildable. CC0.

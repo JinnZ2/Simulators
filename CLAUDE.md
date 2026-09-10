@@ -10960,7 +10960,24 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   exist) and the second has not been scored on these thirty.
   **`OP_015` UNVERIFIED:** three repeats, a second family, raw
   restatements and the second ontology on the same constructions are all
-  unrun. Fifteen `OP_*` claims (distinct from the order's OP-1..5); check
+  unrun. **Two readouts the order does not ask for then landed, both
+  mechanical.** **`OP_016`, absent-term coverage:** hole_rate is silent
+  about a declared absence no construction put under load — on run 1
+  **8 of 9** are exercised and `motive` is not, since c-013's premise
+  names *intent and motive* and the restater cited `intent` alone, so
+  0.000 is a fact about eight terms; `share_exercised` is registered in
+  `tools/known_answer.py`, None for an ontology declaring no absence.
+  **`OP_017`, alias reimport (`[CHOICE 6]`):** an optional, declared,
+  dated `aliases.json` beside `primitives.json` screens `terms_added`
+  against the words that would carry an absent term back in, so the
+  c-025 synonym route becomes a declared-list hit on the same coded
+  sheet — two hits on run 1 (c-025 `preference ⇒ interior_state` on the
+  restater's own note; c-024 `efficiency ⇒ better/worse` on the audit's
+  reading, marked CONTESTABLE), eight added terms matching nothing, the
+  rates unmoved; the file is the audit's not the operator's, was written
+  after run 1 was read so neither hit is blind, and is a word list that
+  paraphrase steps around; no file is `NOT_DECLARED`, never zero.
+  Seventeen `OP_*` claims (distinct from the order's OP-1..5); check
   count printed by `selftest_op.py`, and `probe.py` refuses
   `--selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one

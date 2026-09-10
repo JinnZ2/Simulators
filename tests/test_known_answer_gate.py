@@ -53,6 +53,7 @@ MANIFEST = (
     "crediting-rate/crediting_rate.py::bin_gap",
     "anchor-measurand-crossing/amc.py::crossing_band",
     "ontology-probe/probe.py::rates",
+    "ontology-probe/probe.py::absent_coverage",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so
