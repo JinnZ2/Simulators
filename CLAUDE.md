@@ -10880,7 +10880,14 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   reaches D-level (AP-3 REFUTED), the control D flags a gap (N2 FIRES),
   a C row returns its supplied measurand and a B row is a strict subset.
   B and C arms have no verbatim text in the order and are not
-  reconstructed. **`APM_010` UNVERIFIED:** no response here came from a
+  reconstructed. **`APM_011`:** `anchor-measurand-crossing/` is a second
+  independent build of this order from another session, landed on `main`
+  the same day — identical delivered text and transcribed cases, and both
+  builds chose the lead action-level control and D's position for the M+
+  sentence, a same-builder convergence (`TP_003`) rather than two
+  confirmations; they differ in scoring form (band there, point here) and
+  in how the control is held, and neither is merged into the other.
+  **`APM_010` UNVERIFIED:** no response here came from a
   model, section 2's prior-run numbers are carried, and the lexicon is
   hand-built to three cases with no external validation — the order's
   own weak joint, unchanged. Check count printed by `score.py

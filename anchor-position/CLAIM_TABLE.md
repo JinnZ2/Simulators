@@ -108,3 +108,29 @@ no external validation — the order's own weak joint, unchanged.
 
 *Falsifier:* cold runs on real models, logged into `responses.jsonl`.
 *Status:* UNVERIFIED.
+
+---
+
+**APM_011.** A second, independent build of the same order —
+`anchor-measurand-crossing/`, from another session, PR #68 — landed on
+`main` while this one was being built. The two delivered orders are
+byte-identical modulo a trailing newline (checked in the selftest when the
+sibling is present), the two transcribed cases are identical on every field,
+and the two builds **converged on the same construction where the order left
+it open**: both chose lead action-level compliance as the required control,
+both named it `ctl-01`, and both defaulted the M+ sentence to D's position
+after the claim+method block. The controls differ in decision string and
+method text. Neither build is merged into the other, per the repository's
+standing arrangement for parallel builds (`frame-instruments/` and the
+`framework-instruments` repository). The convergence is **not** independent
+confirmation of any choice: same builder class, same corpus, same order —
+`triad-playground` `TP_003`'s shared-bias shape, so two builds agreeing on
+the lead case is one reading taken twice. Where they diverge is the
+information: the sibling scores a crossing **band** with `UNGROUPED` widening
+it and holds the control as a candidate the loader excludes; this build
+scores a point count with `unknown` tokens printed and admits the control
+while excluding it from the paired claims. Both find the bulk-density class
+(`AMC_004` / `APM_009`).
+
+*Falsifier:* the two orders differing, or the sibling folder absent from
+`main`. *Status:* SUPPORTED; recorded, not merged.

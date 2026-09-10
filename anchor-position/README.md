@@ -92,6 +92,18 @@ python3 score.py --selftest
   `D_LEVEL` for AP-3 is `M+ ≥ D` (`[CHOICE 5]`). Every choice is printed in
   the report header.
 
+## Sibling build
+
+`anchor-measurand-crossing/` is a second independent build of the same
+order from another session, landed on `main` the same day. Same delivered
+text, same two transcribed cases, and both builds chose lead action-level
+compliance as the control and D's position for the M+ sentence — a
+convergence of one builder class on one corpus, not two confirmations
+(`APM_011`). They differ in scoring form (band with `UNGROUPED` there,
+point count with `unknown` tokens here) and in how the control is held
+(excluded by the loader there, admitted and excluded from paired claims
+here). Neither is merged into the other.
+
 ## State
 
 Unrun on any model. Both fixture worlds exist so that every verdict branch
