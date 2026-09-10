@@ -134,6 +134,19 @@ def main():
     rep = score.report(cs, sc2, cl2, nl2, lexes)
     check("decision strings logged" in rep and cs["sc-01"]["decision"] in rep, "decision string logged (section 9)")
 
+    # --- sibling build (APM_011), only when it is present --------------------
+    sib = os.path.join(HERE, "..", "anchor-measurand-crossing", "WORK_ORDER.md")
+    if os.path.exists(sib):
+        a = open(sib, encoding="utf-8").read().rstrip("\n")
+        b = order.rstrip("\n")
+        check(a == b, "the sibling build's delivered order differs from this one")
+        sc = [json.loads(l) for l in open(os.path.join(HERE, "..", "anchor-measurand-crossing",
+                                                        "cases.jsonl"), encoding="utf-8") if l.strip()]
+        for c in cases[:2]:
+            m = [r for r in sc if r["case_id"] == c["case_id"]]
+            check(m and all(m[0][k] == c[k] for k in ("claim", "method", "decision", "native")),
+                  "%s differs between the two builds" % c["case_id"])
+
     # --- refusals ---------------------------------------------------------
     tmp = tempfile.mkdtemp()
     try:
