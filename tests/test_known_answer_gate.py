@@ -52,6 +52,7 @@ MANIFEST = (
     "gap-existence-cases/commit_store.py::commit_specificity",
     "crediting-rate/crediting_rate.py::bin_gap",
     "anchor-measurand-crossing/amc.py::crossing_band",
+    "anchor-position/normalize.py::crossing_count",
     "ontology-probe/probe.py::rates",
     "ontology-probe/probe.py::absent_coverage",
 )

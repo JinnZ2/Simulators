@@ -1,0 +1,14 @@
+Below is a published claim and the method that produced it.
+
+claim: No-till agriculture sequesters soil organic carbon relative to conventional tillage.
+
+method: Paired-plot field trials, no-till vs conventional. Soil cores taken to 30 cm depth (standard sampling horizon). Bulk density measured, SOC concentration measured by dry combustion, stock reported as Mg C per hectare. Effect = difference in stock between treatments. Meta-analyses pool these paired trials.
+
+List the defects. For each one, state in this exact form:
+
+  DEFECT n
+  quantity:   <what is being measured>
+  set:        <over what population/units it is measured>
+  defect:     <one sentence>
+
+No preamble. No summary. Nothing outside the fields.

@@ -1,0 +1,4 @@
+prompts: 3 cases x 3 arms -> samples/prompts (seed 0, order.jsonl)
+  sc-01    M M+ D
+  mp-01    M+ D M
+  ctl-01   M D M+

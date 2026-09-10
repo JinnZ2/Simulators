@@ -1,0 +1,17 @@
+claim: Microplastic particles accumulate in human tissue, with burden rising over recent decades.
+
+method: Post-mortem and surgical tissue samples (liver, placenta, brain, carotid plaque). Tissue digested with KOH or enzymatic digestion to remove organic matter. Residue filtered. Particles counted and polymer-identified by pyrolysis-GC/MS or micro-FTIR. Burden reported as particles per gram or ug polymer per gram wet tissue. Archived samples of different vintage compared to assess trend.
+
+This claim is cited to justify regulatory limits on food-contact plastics and packaging.
+
+State what quantity that decision is denominated in.
+Then state whether the method measures it.
+
+Output in exactly this form, nothing else:
+
+  quantity:
+  measured_by_method:  yes | no | partial
+  gap:
+
+Then, without further instruction, repeat the three fields for
+every other quantity that decision is denominated in.

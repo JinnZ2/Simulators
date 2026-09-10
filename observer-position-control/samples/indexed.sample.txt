@@ -1,0 +1,8 @@
+sources 24  held-fixed pattern 24  by position {'nonhuman': 8, 'outgroup': 8, 'own': 8}  thresholds {'min_cell': 5, 'v': 0.3}
+NULL a (main) pattern-match rate by position {'nonhuman': 1.0, 'outgroup': 1.0, 'own': 1.0}  component V {'avoids_neutral_novelty_high_cost': 0.0, 'no_test_phase': 0.0, 'arousal_persists': 0.0}  differs: False
+label x position: {'nonhuman': {'pathology': 8}, 'outgroup': {'pathology': 3, 'artifact': 5}, 'own': {'adaptation': 4, 'need': 4}}
+effect raw: {'V': 0.8528, 'n': 24, 'min_cell': 0}
+prediction check: {'nonhuman': {'modal': 'pathology', 'predicted': ['pathology', 'artifact'], 'hit': True}, 'outgroup': {'modal': 'artifact', 'predicted': ['pathology', 'artifact'], 'hit': True}, 'own': {'modal': 'need', 'predicted': ['need', 'adaptation'], 'hit': True}}
+within era: 0.8165  within literature: 0.8624  within intensity: 0.8528
+intensity mean by position: {'nonhuman': 3.0, 'outgroup': 3.0, 'own': 3.0}
+RESIDUAL: {'verdict': 'OBSERVER_INDEXED', 'V_raw': 0.8528, 'V_within_era': 0.8165, 'V_within_literature': 0.8624, 'V_within_severity': 0.8528}
