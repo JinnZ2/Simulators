@@ -231,6 +231,7 @@ last three; read in order:
 - `crediting-rate/` — credit tracks the loanword or the contribution; BLOCKED until ordered
 - `gate-check/` — four structural presence checks, file+line, no FAIL label; thresholds in data
 - `anchor-measurand-crossing/` — crossing given a target; prompts parsed from the order, scorer's judgement as data, no run
+- `anchor-position/` — same order, second build; band scored both ways, ABSENT kept apart, two arms behind flags, no run
 - `ontology-probe/` — does a term-cut protect, and where it holes; two declared sets, the operator's thirty constructions, one coded run on one family
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
@@ -10890,8 +10891,42 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   **`APM_010` UNVERIFIED:** no response here came from a
   model, section 2's prior-run numbers are carried, and the lexicon is
   hand-built to three cases with no external validation — the order's
-  own weak joint, unchanged. Check count printed by `score.py
-  --selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
+  own weak joint, unchanged. **A second order then arrived —
+  WORK ORDER — anchor-position/ audit fixes (`WORK_ORDER_2.md`, verbatim,
+  eleven items W1–W11) — audited for staleness first, then applied**
+  (`APM_012..APM_023`). Nine BUILD items: an empty response is ABSENT
+  (`None`, skipped and counted, never zero — the scored path had read a
+  blank M row as 0 crossings and a blank D row as `D <= M`); AP-3 runs
+  only on triples where `cc(D) > cc(M)` and `D_LEVEL` is now read by the
+  comparison rather than only printed (flipping it to `gt` moves a tie);
+  **every list is scored twice**, unknown tokens as residue (floor
+  `cc_min`) and as measurand vocabulary (ceiling `cc_max`), a claim
+  SUPPORTED or REFUTED only at both ends and BAND otherwise — and N-W3
+  fired on the delivered main world, AP-1 SUPPORTED at the floor and
+  REFUTED at the ceiling on `fixed`, `dry`, `combustion`, `after`, `hour`,
+  `six`, reported as the result with the before/after report diffs
+  committed beside the samples; replicate rows kept and paired all-pairs
+  with collisions printed; AP-4 on measurand groups rather than strings
+  (a reworded superset now refutes); a third authored world reaching
+  AP-2, AP-4 and AP-6 REFUTED, with `APM_002` restated per claim and per
+  world and the two still-unreached directions named; one CHOICE registry
+  (1..12, every id printed in every header, cited by id in the README);
+  a token-level unit guard (`account`/`county`/`drug` silent, `tonnes`/
+  `kg`/`ha` fire); and a self-label-vs-scorer readout that gates nothing.
+  Two ORDER items **behind flags, default off, OPEN**: `--arm-md` adds ARM
+  M_D — M's question with D's three-field schema and no decision, built
+  from the two templates — so anchor and output schema can be separated,
+  which M+ cannot do since it holds M's schema; the order's own
+  2026-09-09 A-vs-D result carries that confound. `--n2-first` reads N2 on
+  a control's first entry only. Two contradictions in the order recorded
+  rather than applied: its W6 defect line undercounted the reached
+  directions (AP-5 REFUTED was already reachable) and its W7 inventory
+  missed one CHOICE collision and one unnumbered choice. Sibling check on
+  `anchor-measurand-crossing/` (read only): W2 **same** (a (0, 0) triple
+  reads as M+ reaching D-level), W1/W3/W4/W5 absent — its band and
+  UNGROUPED handling are W3's repair arrived at independently. Check
+  count printed by `score.py --selftest`. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
 - `anchor-measurand-crossing/` — A work order delivered verbatim and
   built to it: does a model produce defects whose QUANTITY differs from
   the quantity a method measures, as a function of whether the prompt
@@ -11049,7 +11084,24 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   c-024 `efficiency` and c-022 `maximize` land `SCOPE_UNDECLARED` with
   the missing fields named, grounded by import in `fold-matrix`'s
   register (*output/input under an unstated boundary and horizon*); one
-  state per term, enforced at load. Eighteen `OP_*` claims (distinct from the order's OP-1..5); check
+  state per term, enforced at load. **`OP_019`, the operator's extension
+  the same day** — *market, capital, monetary, better, worse, value, or
+  any term that could import morality*: every `scope_required` entry now
+  carries an `import_class` (`scope` / `morality`), a morality entry must
+  require `graded_by` (the axis the gradient runs on and who assigns it)
+  or the loader refuses it as the scope class under another label,
+  `better`/`worse` enter as aliases of the absent compound token
+  `better/worse` since the loader refuses an absent term in
+  `scope_required`, and the class is declared OPEN — an unlisted term is
+  UNMATCHED, never cleared. On run 1 c-025 `market` moves from unmatched
+  to `SCOPE_UNDECLARED (morality)` beside its `preference` reimport,
+  `capital`/`monetary`/`value` are declared and added by no record
+  (printed as a visible zero), six added terms match nothing, grounding
+  by import in `fold-matrix`'s `money` entry and
+  `category-weld/welds/capital.json`, and `value` flagged as a sense
+  collision no word list separates; `optimize`/`optimization` then enter
+  under the scope class beside `maximize` while `optimal` stays an alias
+  of the absent `better/worse`, two states on one stem. Nineteen `OP_*` claims (distinct from the order's OP-1..5); check
   count printed by `selftest_op.py`, and `probe.py` refuses
   `--selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one

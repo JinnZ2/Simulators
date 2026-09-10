@@ -16,6 +16,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 CASES = os.path.join(HERE, "cases.jsonl")
 MAIN = os.path.join(HERE, "fixtures", "responses.constructed.jsonl")
 CONF = os.path.join(HERE, "fixtures", "responses.confound.constructed.jsonl")
+REFUTE = os.path.join(HERE, "fixtures", "responses.refute.constructed.jsonl")
 _n = [0]
 
 
@@ -55,11 +56,26 @@ def main():
               "%s: M+ differs from M by more than the one line" % c["case_id"])
         tail = prompts.render(c, "M+", mplus_tail=True)
         check(tail.startswith(m.rstrip("\n")) and c["decision"] in tail, "tail placement")
+    md_lines, m_lines = prompts.ARM_MD.splitlines(), prompts.ARM_M.splitlines()
+    check([l for l in md_lines if l not in prompts.D_FIELDS] == [l for l in m_lines if l not in prompts.M_FIELDS],
+          "W9: M_D's non-field lines are M's, line for line")
+    check([l for l in md_lines if l in prompts.D_FIELDS] == prompts.D_FIELDS
+          and not any(l in md_lines for l in prompts.M_FIELDS), "W9: M_D's fields are D's")
+    for c in cases:
+        md = prompts.render(c, "M_D")
+        check(c["decision"] not in md and c["native"] not in md, "%s: M_D carries the decision or native" % c["case_id"])
     check(sum(1 for c in cases if c["decision_native"]) >= 1,
           "section 8 requires a control case where native == decision measurand")
-    check(all(c["decision"].lower().find(w) < 0 for c in cases
-              for w in ("mg", "ug", "per gram", "per litre", "count", "mass")),
+    check(all(nz.names_unit_or_measurand(c["decision"], lex) == [] for c in cases),
           "a decision string names a unit or measurand (section 4: it must not)")
+    # W8: the old substring guard read 'count' inside 'account' and 'ug' inside 'drug'
+    check(nz.names_unit_or_measurand("the account for the county drug", lex) == [],
+          "W8: account / county / drug must not fire")
+    check(nz.names_unit_or_measurand("tonnes of it", lex) == ["tonnes"]
+          and nz.names_unit_or_measurand("per kg", lex) == ["kg"]
+          and nz.names_unit_or_measurand("over 10 ha", lex) == ["ha"],
+          "W8: tonnes / kg / ha must fire")
+    check("tonnes" in lex["units"] and "ha" in lex["units"], "W8: unit list is read from transforms.json")
 
     # --- seeded order ----------------------------------------------------
     tmp = tempfile.mkdtemp()
@@ -71,6 +87,12 @@ def main():
         check([r["order"] for r in r1] != [r["order"] for r in r3], "order ignores the seed")
         check(set(os.listdir(os.path.join(tmp, "a"))) == {"order.jsonl"} | {
             "%s.%s.txt" % (c["case_id"], a) for c in cases for a in prompts.ARMS}, "emitted files")
+        r4 = prompts.emit(cases, os.path.join(tmp, "d"), 3, arm_md=True)
+        check(all("M_D" in r["order"] and r["arm_md"] for r in r4)
+              and os.path.exists(os.path.join(tmp, "d", "sc-01.M_D.txt")), "W9: --arm-md emits <case>.M_D.txt")
+        check(all(sorted(r["order"]) == sorted(prompts.ARMS_MD) for r in r4)
+              and all(sorted(r["order"]) == sorted(prompts.ARMS) and not r["arm_md"] for r in r1),
+              "W9: the order row carries the flag; with it off the three delivered arms are what is shuffled")
     finally:
         shutil.rmtree(tmp)
 
@@ -94,6 +116,18 @@ def main():
           "disjunctive native: two native groups are not one crossing; the order's form is printed beside")
     check(nz.score(["the", "of"], "x", lex)["unresolved"] == 2, "emptied cores are unresolved, not measurands")
     check(nz.crossing_count([], "x", lex) is None, "no entries -> None, absent not zero")
+    z = nz.score([], "x", lex)
+    check(z["absent"] and all(z[k] is None for k in ("crossing_count", "crossing_count_max", "crossing_count_order")),
+          "W1: score() on no quantities returns None on every crossing field")
+    w3 = nz.score(["soc yield"], "soil organic carbon mass", lex)
+    check(w3["crossing_count"] == 0 and w3["crossing_count_max"] == 1,
+          "W3: 'soc yield' vs the SOC native is native at the floor (unknown = residue) and a crossing at the ceiling")
+    sa, sb, _ = nz.measurand_sets(["SOC stock to 30 cm", "bulk density of each core"],
+                                  ["soil organic carbon stock to 30 cm"], "soil organic carbon mass", lex)
+    check(sa > sb, "W5: a reworded superset registers on measurand groups")
+    sa, sb, _ = nz.measurand_sets(["change in SOC stock over the trial"], ["SOC stock to 30 cm"],
+                                  "soil organic carbon mass", lex)
+    check(sa == sb, "W5: two transforms of one measurand are one group")
     rec = nz.normalize("soil organic carbon stock", lex)[1]
     check(rec["core"].count("soil") == 1, "alias overlap: 'organic carbon' must not re-fire inside 'soil organic carbon'")
     check(nz.normalize("exposure from food-contact materials", lex)[1]["unknown"], "unknown tokens are reported")
@@ -107,32 +141,127 @@ def main():
     check(len(e) == 1 and f["stray_lines"] == 1 and e[0]["gap"] == "g continued", "stray and continuation")
     e, f = score.parse_response("DEFECT 1\nquantity: a\nset: b\n", "M")
     check(e == [] and f["incomplete"] == 1 and not f["form_ok"], "incomplete entry is not scored")
+    e, f = score.parse_response("quantity: a\nmeasured_by_method: no\ngap: g\n", "M_D")
+    check(len(e) == 1 and f["form_ok"] and e[0]["measured_by_method"] == "no", "W9: M_D parses in D form")
 
-    # --- both worlds ------------------------------------------------------
+    # --- three worlds ------------------------------------------------------
     cs, sc, cl, nl, lexes = score.run(CASES, MAIN)
     P = "primary"
-    get = lambda c, a: [s for s in sc if s["case_id"] == c and s["arm"] == a][0]["by_lexicon"][P]
+    get = lambda c, a, S=None: [s for s in (S or sc) if s["case_id"] == c and s["arm"] == a][0]["by_lexicon"][P]
     check(get("sc-01", "M")["crossing_count"] == 0 and get("sc-01", "D")["crossing_count"] == 5, "sc-01 world")
     check(get("sc-01", "D")["native_hit"] == 1, "sc-01 D partial native hit")
     check(get("mp-01", "D")["crossing_count"] == 5 and get("mp-01", "D")["native_hit"] == 0, "mp-01 D")
     check(get("mp-01", "M")["crossing_count"] == 0, "mp-01 M")
     check(get("ctl-01", "D")["crossing_count"] == 0, "control D reads native")
-    check(cl[P]["AP-1"][0] == "SUPPORTED" and cl[P]["AP-2"][0] == "SUPPORTED"
-          and cl[P]["AP-3"][0] == "SUPPORTED", "main world claims")
+    # W3 on the delivered main world: AP-1 held only under the residue rule
+    check(cl[P]["AP-1"][0] == "BAND" and cl[P]["AP-1"][1]["band"] == ["SUPPORTED", "REFUTED"],
+          "main world AP-1 is BAND (floor SUPPORTED, ceiling REFUTED) -- N-W3, reported as the result")
+    check(sorted(c for c, _ in cl[P]["AP-1"][1]["max"]["crossings"]) == ["ctl-01", "sc-01"],
+          "the ceiling's AP-1 crossings are the unknown-token rows")
+    check(cl[P]["AP-2"][0] == "SUPPORTED" and cl[P]["AP-3"][0] == "SUPPORTED", "main world AP-2, AP-3")
     check(cl[P]["AP-2"][1]["controls_excluded"] == ["ctl-01"], "controls excluded from AP-2 and named")
+    check(cl[P]["AP-3"][1]["triples"] == 2 and cl[P]["AP-3"][1]["d_level"] == score.D_LEVEL, "AP-3 on informative triples")
     check(all(cl[P][k][0] == "UNRUN" for k in ("AP-4", "AP-5", "AP-6")), "unrun arms are UNRUN, not passed")
     check(nl["N1"][0] == "NOT_EVALUATED" and nl["N2"][0] == "CLEAN" and nl["N3"][0] == "SILENT", "main nulls")
     check(nl["N4"][0] == "FIRES", "the two lists disagree on the main world (N4 reachable)")
+    check(score.collisions(sc) == [] and all(d["absent"] == 0 for d in score.absent_by_arm(sc, P).values()),
+          "main world: no collisions, no ABSENT rows")
+    rep = score.report(cs, sc, cl, nl, lexes)
+    check(all("[CHOICE %d]" % k in rep for k in score.CHOICES) and all("[FLAG %s=off]" % k in rep for k in score.FLAGS),
+          "W7: the header prints every CHOICE id and every FLAG")
+    check(sorted(score.CHOICES) == list(range(1, max(score.CHOICES) + 1)), "W7: CHOICE ids are 1..n with no gap")
+    check("ABSENT rows" in rep and "N-W3: BAND on AP-1" in rep and "N-W9" in rep, "W1/W3/W9 report lines")
+    check("self-label vs scorer" in rep and "agree" in rep, "W11: self-label block printed")
+    sl = score.self_label(sc, cs, P)
+    check(all(r["agreement_rate"] is None or 0 <= r["agreement_rate"] <= 1 for r in sl) and sl,
+          "W11: agreement rate per D-form row")
+
     cs, sc2, cl2, nl2, _ = score.run(CASES, CONF)
     check(cl2[P]["AP-3"][0] == "REFUTED" and cl2[P]["AP-3"][1]["Mplus_reaches_D"][0][0] == "sc-01",
-          "confound world: M+ reaches D-level -> AP-3 REFUTED (branch reachable)")
-    check(cl2[P]["AP-1"][0] == "REFUTED" and cl2[P]["AP-5"][0] == "REFUTED", "AP-1 and AP-5 refutable")
+          "confound world: M+ reaches D-level -> AP-3 REFUTED at both ends")
+    check(cl2[P]["AP-1"][0] == "REFUTED", "AP-1 REFUTED at both ends on the confound world")
+    check(cl2[P]["AP-5"][0] == "BAND" and cl2[P]["AP-5"][1]["band"] == ["REFUTED", "SUPPORTED"],
+          "confound world AP-5 is BAND: the C row returns the supplied measurand at the floor only")
     check(cl2[P]["AP-4"][0] == "SUPPORTED" and cl2[P]["AP-4"][1]["pairs"] == 1, "AP-4 evaluated on a B row")
     check(nl2["N2"][0] == "FIRES" and nl2["N3"][0] == "FIRES", "N2 and N3 fire when they should")
     check(nl2["N5"][1]["form_ok_rate"]["M"] < 1.0 and nl2["N5"][0] == "SILENT",
           "a form failure is reported as a rate; N5 needs both arms below the floor")
     rep = score.report(cs, sc2, cl2, nl2, lexes)
     check("decision strings logged" in rep and cs["sc-01"]["decision"] in rep, "decision string logged (section 9)")
+
+    cs, sc3, cl3, nl3, _ = score.run(CASES, REFUTE)
+    check(cl3[P]["AP-2"][0] == "REFUTED" and cl3[P]["AP-2"][1]["D_le_M"] == [("mp-01", 0, 0)],
+          "W6: AP-2 REFUTED reachable (a second family's D reads native only)")
+    check(cl3[P]["AP-4"][0] == "REFUTED" and "bulk density of each core" in cl3[P]["AP-4"][1]["strict_superset"][0][1],
+          "W5/W6: a reworded B superset of M -> AP-4 REFUTED on measurand groups")
+    check(cl3[P]["AP-6"][0] == "REFUTED" and cl3[P]["AP-6"][1]["D_eq_M_family"] == ["constructed-b"],
+          "W6: AP-6 REFUTED reachable")
+    check(cl3[P]["AP-3"][0] == "REFUTED" and cl3[P]["AP-3"][1]["Mplus_reaches_D"] == [("mp-01", 5, 5)],
+          "W2: a tie reaches D-level under 'ge'")
+    gt = score.claims(sc3, cs, P, d_level="gt")
+    check(gt["AP-3"][0] == "SUPPORTED" and gt["AP-3"][1]["Mplus_reaches_D"] == [],
+          "W2: D_LEVEL='gt' flips the tie case -- the constant is read, not only printed")
+    check(cl3[P]["AP-3"][1]["triples"] == 3 and cl3[P]["AP-3"][1]["uninformative"] == [],
+          "W2: every M+ triple on this world is informative (the uninformative branch is shown below)")
+    ab = score.absent_by_arm(sc3, P)
+    check(ab["D"]["absent"] == 1 and get("sc-01", "M", sc3)["crossing_count"] is not None,
+          "W1: the blank D row is ABSENT (None) and counted; the M row beside it is live")
+    check(cl3[P]["AP-2"][1]["absent_pairs"] >= 1, "W1: the blank D row is skipped by AP-2, not read as refuting")
+    col = score.collisions(sc3)
+    check(col == [("sc-01", "constructed-model", "D", 2)], "W4: two replicate D rows -> collision count 1")
+    check(cl3[P]["AP-2"][1]["pairs"] >= 4, "W4: paired claims use both replicates (all pairs)")
+    rep3 = score.report(cs, sc3, cl3, nl3, lexes)
+    check("replicate collisions" in rep3 and "x2" in rep3 and "ABSENT rows" in rep3, "W1/W4 report lines")
+    check(nl3["N2"][0] == "FIRES", "the control D with a spurious second entry fires N2 under the delivered rule")
+    # W2 acceptance world: D = M = M+ = 0 on a non-control case
+    tmp = tempfile.mkdtemp()
+    try:
+        w = os.path.join(tmp, "w2.jsonl")
+        row = lambda arm, resp, **kw: dict({"case_id": "sc-01", "arm": arm, "model": "m", "version": "v",
+                                            "date": "d", "response": resp}, **kw)
+        native_m = "DEFECT 1\nquantity: soil organic carbon stock to 30 cm\nset: plots\ndefect: x\n"
+        native_d = "quantity: soil organic carbon stock to 30 cm\nmeasured_by_method: yes\ngap: none\n"
+        dec = cases[0]["decision"]
+        with open(w, "w") as fh:
+            for r in (row("M", native_m), row("D", native_d, decision=dec), row("M+", native_m, decision=dec)):
+                fh.write(json.dumps(r) + "\n")
+        _, scw, clw, _, _ = score.run(CASES, w)
+        check(clw[P]["AP-3"][0] == "UNRUN" and clw[P]["AP-3"][1]["triples"] == 0
+              and clw[P]["AP-3"][1]["uninformative"] == [("sc-01", "cc(D)=0 <= cc(M)=0")],
+              "W2: D=M=M+=0 -> AP-3 UNRUN with the triple listed as uninformative, not REFUTED")
+        check(clw[P]["AP-2"][0] == "REFUTED", "the same world refutes AP-2 (D <= M), which is the order's rule")
+        # W1: a blank M row does not count toward AP-1
+        with open(w, "w") as fh:
+            fh.write(json.dumps(row("M", "")) + "\n")
+        _, scw, clw, nlw, _ = score.run(CASES, w)
+        check(clw[P]["AP-1"][0] == "UNRUN" and clw[P]["AP-1"][1]["absent"] == 1, "W1: a blank M row is ABSENT, AP-1 UNRUN")
+        check(nlw["N3"][0] == "SILENT" and nlw["N4"][0] == "AGREE", "W1: nulls skip None")
+        # W9: M_D row refused without the flag, read with it
+        with open(w, "w") as fh:
+            fh.write(json.dumps(row("M_D", native_d)) + "\n")
+            fh.write(json.dumps(row("D", "quantity: tonnes of CO2e\nmeasured_by_method: no\ngap: g\n", decision=dec)) + "\n")
+            fh.write(json.dumps(row("M", native_m)) + "\n")
+        try:
+            score.run(CASES, w)
+            check(False, "W9: an M_D row must be refused with the flag off")
+        except ValueError:
+            check(True, "")
+        _, scw, clw, nlw, _ = score.run(CASES, w, flags={"arm_md": True})
+        md = [s for s in scw if s["arm"] == "M_D"][0]
+        check(md["entries"][0]["measured_by_method"] == "yes" and md["by_lexicon"][P]["crossing_count"] == 0,
+              "W9: with the flag on, M_D is parsed in D form and scored")
+        rd = score.md_reading(scw, cs, P)
+        check(rd and rd[0]["crossing_count"]["reading"].startswith("M_D ~ M"), "W9: M_D ~ M reading reachable")
+        repw = score.report(cs, scw, clw, nlw, lexes, flags={"arm_md": True})
+        check("[FLAG arm_md=ON]" in repw and "M_D reading" in repw and "N-W9" not in repw, "W9: flag printed ON")
+    finally:
+        shutil.rmtree(tmp)
+    # W10: N2 on entry 1 only, behind the flag
+    _, _, _, nlf, _ = score.run(CASES, REFUTE, flags={"n2_first": True})
+    check("N2" not in nlf and nlf["N2_first"][0] == "CLEAN"
+          and nlf["N2_rest"][1]["entries_2_to_n_gaps"] == [("ctl-01", 1, ["no"])],
+          "W10: control D with 1 correct + 1 spurious entry -> N2_first CLEAN, N2_rest reported separately")
+    check(nlf["N2_first"][1]["N-W10"] == "not fired", "N-W10 line carried")
 
     # --- sibling build (APM_011), only when it is present --------------------
     sib = os.path.join(HERE, "..", "anchor-measurand-crossing", "WORK_ORDER.md")

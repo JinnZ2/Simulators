@@ -505,9 +505,45 @@ def main():
     check("c-025 preference => interior_state is the restater's own note, now a declared-list hit",
           any(h["construction_id"] == "c-025" and h["added"] == "preference" and h["absent"] == "interior_state"
               and "restater note" in h["basis"] for h in rs["hits"]))
-    check("efficiency and maximize are SCOPE_UNDECLARED on the coded sheet, boundary and exclusions among the missing fields",
-          sorted((h["added"], h["state"]) for h in rs["scope_hits"]) == [("efficiency", "SCOPE_UNDECLARED"), ("maximize", "SCOPE_UNDECLARED")]
+    check("efficiency, market and maximize are SCOPE_UNDECLARED on the coded sheet, boundary and exclusions among the missing fields",
+          sorted((h["added"], h["state"]) for h in rs["scope_hits"]) == [("efficiency", "SCOPE_UNDECLARED"), ("market", "SCOPE_UNDECLARED"), ("maximize", "SCOPE_UNDECLARED")]
           and all("boundary" in h["missing"] and "excluded" in h["missing"] for h in rs["scope_hits"]))
+    check("efficiency and maximize carry import_class scope; market carries morality and misses graded_by",
+          {h["added"]: h["import_class"] for h in rs["scope_hits"]} == {"efficiency": "scope", "maximize": "scope", "market": "morality"}
+          and [h for h in rs["scope_hits"] if h["added"] == "market"][0]["missing"][-1] == "graded_by"
+          and not any("graded_by" in h["missing"] for h in rs["scope_hits"] if h["import_class"] == "scope"))
+    check("market's hit is on c-025, beside the preference reimport, from the operator's extension of the rule",
+          [h["construction_id"] for h in rs["scope_hits"] if h["added"] == "market"] == ["c-025"])
+    check("capital, monetary and value are declared under morality and added by no run-1 record: a visible zero, not an absence of declaration",
+          [t for t in rs["scope_terms_unhit"] if al["scope"][t]["import_class"] == "morality"] == ["capital", "monetary", "value"]
+          and all(al["scope"][t]["import_class"] == "morality" and "graded_by" in al["scope"][t]["requires"] for t in ("capital", "monetary", "value")))
+    check("optimize and optimization are scope class beside maximize, grounded in fold-matrix's optimization entry by import, and added by no run-1 record",
+          all(al["scope"][t]["import_class"] == "scope" and al["scope"][t]["requires"] == al["scope"]["maximize"]["requires"]
+              and "REGISTER['optimization']" in al["scope"][t]["basis"] for t in ("optimize", "optimization"))
+          and fold_reg is not None and "optimization" in fold_reg and "objective" in fold_reg["optimization"]["substitutes_for"]
+          and {"optimize", "optimization"} <= set(rs["scope_terms_unhit"]))
+    check("optimal stays an alias of the absent better/worse and is not in scope_required: one stem, two tokens, two states",
+          "optimal" in al["table"]["better/worse"] and "optimal" not in al["scope"]
+          and "optimize" not in {a for v in al["table"].values() for a in v})
+    check("every morality-class entry requires the four scope fields plus graded_by",
+          all(al["scope"][t]["requires"] == ["boundary", "horizon", "environment_variables", "excluded", "graded_by"]
+              for t in al["scope"] if al["scope"][t]["import_class"] == "morality"))
+    check("better and worse are aliases of the absent compound token better/worse (the operator named both halves)",
+          {"better", "worse"} <= set(al["table"]["better/worse"]) and "better/worse" in {x["term"].lower() for x in sp["absent_by_design"]})
+    check("the declaration states that the morality class is open, and that an unlisted term is UNMATCHED rather than cleared",
+          "open_class" in json.load(open(os.path.join(OD, "aliases.json"), encoding="utf-8"))["_declaration"]
+          and "UNMATCHED" in json.load(open(os.path.join(OD, "aliases.json"), encoding="utf-8"))["_declaration"]["open_class"])
+    check("monetary's requirement is grounded in fold-matrix's money entry by import (skill + time + labor)",
+          fold_reg is not None and "money" in fold_reg and "skill + time + labor" in fold_reg["money"]["substitutes_for"]
+          and "REGISTER['money']" in al["scope"]["monetary"]["basis"])
+    _cap = os.path.join(os.path.dirname(HERE), "category-weld", "welds", "capital.json")
+    check("capital's requirement is grounded in category-weld's capital weld by import (five components read off legal title)",
+          os.path.exists(_cap) and len(json.load(open(_cap, encoding="utf-8"))["components"]) == 5
+          and json.load(open(_cap, encoding="utf-8"))["tracked_by_label"] == "ownership_title"
+          and "welds/capital.json" in al["scope"]["capital"]["basis"])
+    check("a declared graded_by beside the four scope fields turns a morality term to SCOPE_DECLARED",
+          probe.scope_undeclared(["market"], al, {"boundary": "b", "horizon": "h", "environment_variables": "e", "excluded": "x", "graded_by": "g"})[0]["state"] == "SCOPE_DECLARED"
+          and probe.scope_undeclared(["market"], al, {"boundary": "b", "horizon": "h", "environment_variables": "e", "excluded": "x"})[0]["missing"] == ["graded_by"])
     check("scope requirement for efficiency names boundary, horizon, environment variables and exclusions",
           al["scope"]["efficiency"]["requires"] == ["boundary", "horizon", "environment_variables", "excluded"])
     check("a declared scope on the record turns the state to SCOPE_DECLARED",
@@ -517,8 +553,18 @@ def main():
     check("efficiency's scope requirement is grounded in fold-matrix's register by import, not restated",
           fold_reg is not None and "efficiency" in fold_reg
           and "unstated boundary and horizon" in fold_reg["efficiency"]["substitutes_for"])
-    check("seven added terms match neither an alias nor a scope requirement",
-          rs["added_terms_unmatched"] == ["attribution", "competition", "contamination", "count", "learning", "market", "validity"])
+    check("six added terms match neither an alias nor a scope requirement (market left the list on the operator's extension)",
+          rs["added_terms_unmatched"] == ["attribution", "competition", "contamination", "count", "learning", "validity"])
+    refuses("a scope_required entry with no import_class is refused",
+            lambda: bad_alias({"_declaration": decl, "aliases": {}, "scope_required": [{"term": "efficiency", "requires": ["boundary"], "basis": "b"}]}))
+    refuses("a scope_required entry with an import_class outside the two is refused",
+            lambda: bad_alias({"_declaration": decl, "aliases": {}, "scope_required": [{"term": "efficiency", "requires": ["boundary"], "basis": "b", "import_class": "economic"}]}))
+    refuses("a morality-class entry that does not require graded_by is refused (the scope class under another label)",
+            lambda: bad_alias({"_declaration": decl, "aliases": {}, "scope_required": [{"term": "market", "requires": ["boundary", "excluded"], "basis": "b", "import_class": "morality"}]}))
+    check("a morality-class entry requiring graded_by loads",
+          bad_alias({"_declaration": decl, "aliases": {}, "scope_required": [{"term": "market", "requires": ["boundary", "graded_by"], "basis": "b", "import_class": "morality"}]})["scope"]["market"]["import_class"] == "morality")
+    refuses("better/worse itself is refused in scope_required (it is an absent term; better and worse go in as its aliases)",
+            lambda: bad_alias({"_declaration": decl, "aliases": {}, "scope_required": [{"term": "better/worse", "requires": ["graded_by"], "basis": "b", "import_class": "morality"}]}))
     refuses("a scope_required term that is also an alias is refused (one state per term)",
             lambda: bad_alias({"_declaration": decl, "aliases": {"intent": [{"term": "purpose", "basis": "b"}]},
                                "scope_required": [{"term": "purpose", "requires": ["boundary"], "basis": "b"}]}))
@@ -548,6 +594,8 @@ def main():
     out1 = probe.render(R1a)
     check("real render carries the coverage table and the UNEXERCISED term", "UNEXERCISED motive" in out1)
     check("real render carries the alias declaration and its date", "written after: run 1" in out1)
+    check("real render prints the import class beside each scope hit and the declared-but-unadded terms as a line",
+          "market  SCOPE_UNDECLARED (morality)" in out1 and "not added by any record: capital, monetary, optimization, optimize, value" in out1)
     m1 = re.sub(r"better/worse", "b3tter/w0rse", out1)
     check("real render with aliases screens clean under the same one-token exemption", not no_severity.hits(m1))
     check("the delivered term is still the only thing that fires", {h[1] for h in no_severity.hits(out1)} == {"better", "worse"})

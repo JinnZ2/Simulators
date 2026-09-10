@@ -3,9 +3,10 @@
     "declared_by": "audit reading (the session that built the instrument), NOT the operator who declared primitives.json",
     "written_after": "run 1 (runs/claudeopus5_r1.jsonl) had been read, 2026-09-09",
     "blind_for": "any run logged after 2026-09-09; a hit on run 1 is not a blind finding, since the list was written with run 1's terms_added in view",
-    "what_it_is": "a word list per absent_by_design term, so a term the restater ADDED can be screened against the terms the ontology DECLARED absent. A word list decides word sense here and is stepped around by any paraphrase (nonidentity-census T1-1); each alias carries the basis it was written on. A second table, scope_required, lists added terms that carry NO value until their scope is declared -- boundary, horizon, environment variables, and what is excluded -- so an addition of one on a sheet with no declaration is SCOPE_UNDECLARED, a third state beside reimport and unmatched, not a synonym of any absent term.",
+    "what_it_is": "a word list per absent_by_design term, so a term the restater ADDED can be screened against the terms the ontology DECLARED absent. A word list decides word sense here and is stepped around by any paraphrase (nonidentity-census T1-1); each alias carries the basis it was written on. A second table, scope_required, lists added terms that carry NO value until their scope is declared -- boundary, horizon, environment variables, and what is excluded -- so an addition of one on a sheet with no declaration is SCOPE_UNDECLARED, a third state beside reimport and unmatched, not a synonym of any absent term. Each scope_required entry carries an import_class: `scope` (a ratio or an objective quoted without its frame) or `morality` (a term that could import a moral gradient -- market, capital, monetary, value -- which must additionally name graded_by: the axis the gradient runs on and the party assigning it).",
     "confirmed_by_author": false,
-    "revision": "2026-09-10: `efficiency` withdrawn from the better/worse aliases (it had been entered as CONTESTABLE) and moved to scope_required on the operator's rule: efficiency is not read at all unless scope and environment variables are marked and what is excluded in the definition is stated."
+    "revision": "2026-09-10: `efficiency` withdrawn from the better/worse aliases (it had been entered as CONTESTABLE) and moved to scope_required on the operator's rule: efficiency is not read at all unless scope and environment variables are marked and what is excluded in the definition is stated. 2026-09-10 (later): the operator extended the rule -- 'agreed on market, capital, monetary, better, worse, value or any term that could import morality'. market, capital, monetary and value enter scope_required under import_class morality; better and worse enter as aliases of the absent term better/worse, since that absence is a compound token and a restater writes one half of it, and the loader refuses an absent term in scope_required. 2026-09-10 (later still): optimize and optimization enter scope_required under import_class scope beside maximize, on the operator's question; optimal stays an alias of the absent better/worse -- an operation with its objective dropped is the scope class, a claimed position on a gradient is the absence, and the two are different tokens on one stem, so one state per term holds.",
+    "open_class": "`any term that could import morality` is a CLASS, not a closed list. The four terms under it are the operator's own (2026-09-10); any further term filed there is an audit reading declared with its basis, and a word list cannot enumerate an open class -- a term not on this list is UNMATCHED, which is the absence of a reading and not a finding that it imports nothing."
   },
   "aliases": {
     "interior_state": [
@@ -76,6 +77,14 @@
       {
         "term": "inferior",
         "basis": "audit reading of the absent reason"
+      },
+      {
+        "term": "better",
+        "basis": "operator, 2026-09-10 (the rule quoted in _declaration.revision names both halves); the absent term is the compound token better/worse and a restater writes one half of it"
+      },
+      {
+        "term": "worse",
+        "basis": "operator, 2026-09-10; as for `better`"
       }
     ],
     "zero_sum": [
@@ -136,7 +145,8 @@
         "environment_variables",
         "excluded"
       ],
-      "basis": "operator's rule, 2026-09-10; fold-matrix/fold_register.py REGISTER['efficiency']: 'output/input under an unstated boundary and horizon', residual tell 'quoted scope-free, so it reads as a property of the thing rather than of a chosen measurement frame'; SHAPE_SPEC.md section 9 (use dissipation, cost imports a pricing model)"
+      "basis": "operator's rule, 2026-09-10; fold-matrix/fold_register.py REGISTER['efficiency']: 'output/input under an unstated boundary and horizon', residual tell 'quoted scope-free, so it reads as a property of the thing rather than of a chosen measurement frame'; SHAPE_SPEC.md section 9 (use dissipation, cost imports a pricing model)",
+      "import_class": "scope"
     },
     {
       "term": "maximize",
@@ -146,7 +156,78 @@
         "horizon",
         "excluded"
       ],
-      "basis": "fold-matrix/fold_register.py REGISTER['optimization']: 'a chosen objective + a trajectory + a scope, all dropped'; c-022 added it with no objective stated"
+      "basis": "fold-matrix/fold_register.py REGISTER['optimization']: 'a chosen objective + a trajectory + a scope, all dropped'; c-022 added it with no objective stated",
+      "import_class": "scope"
+    },
+    {
+      "term": "market",
+      "requires": [
+        "boundary",
+        "horizon",
+        "environment_variables",
+        "excluded",
+        "graded_by"
+      ],
+      "import_class": "morality",
+      "basis": "operator's rule, 2026-09-10, quoted verbatim in _declaration.revision (the basis paraphrases it so the render does not carry the screened halves of the absent term): a term that could import morality is not read as carrying value until scope, environment variables and exclusions are declared, plus graded_by (the axis the gradient runs on and who assigns it), since the ontology declares 'no moral label in data structures' and 'no moral gradient on selection output' absent by design; c-025 added it beside preference with no participants, boundary or clearing rule stated; audit reading: a market welds price-setting, who counts as a participant, and what is outside the accounting into one word (category-weld mechanism 9 shape, no welds/market.json exists)"
+    },
+    {
+      "term": "capital",
+      "requires": [
+        "boundary",
+        "horizon",
+        "environment_variables",
+        "excluded",
+        "graded_by"
+      ],
+      "import_class": "morality",
+      "basis": "operator's rule, 2026-09-10, quoted verbatim in _declaration.revision (the basis paraphrases it so the render does not carry the screened halves of the absent term): a term that could import morality is not read as carrying value until scope, environment variables and exclusions are declared, plus graded_by (the axis the gradient runs on and who assigns it), since the ontology declares 'no moral label in data structures' and 'no moral gradient on selection output' absent by design; category-weld/welds/capital.json decomposes it into five components (legal title, decision authority, risk bearing, revenue claim, input supply) read off the first, so which component a restater means is undeclared until stated; read by import in the selftest"
+    },
+    {
+      "term": "monetary",
+      "requires": [
+        "boundary",
+        "horizon",
+        "environment_variables",
+        "excluded",
+        "graded_by"
+      ],
+      "import_class": "morality",
+      "basis": "operator's rule, 2026-09-10, quoted verbatim in _declaration.revision (the basis paraphrases it so the render does not carry the screened halves of the absent term): a term that could import morality is not read as carrying value until scope, environment variables and exclusions are declared, plus graded_by (the axis the gradient runs on and who assigns it), since the ontology declares 'no moral label in data structures' and 'no moral gradient on selection output' absent by design; fold-matrix/fold_register.py REGISTER['money']: substitutes for 'skill + time + labor', residual tell 'false cutoff -- closes the equation before the other side is read'; SHAPE_SPEC.md section 9, cost imports a pricing model; read by import in the selftest"
+    },
+    {
+      "term": "value",
+      "requires": [
+        "boundary",
+        "horizon",
+        "environment_variables",
+        "excluded",
+        "graded_by"
+      ],
+      "import_class": "morality",
+      "basis": "operator's rule, 2026-09-10, quoted verbatim in _declaration.revision (the basis paraphrases it so the render does not carry the screened halves of the absent term): a term that could import morality is not read as carrying value until scope, environment variables and exclusions are declared, plus graded_by (the axis the gradient runs on and who assigns it), since the ontology declares 'no moral label in data structures' and 'no moral gradient on selection output' absent by design; `value` also occurs as a plain content word (the value of a reading, a field's value), and a word list cannot separate the senses (nonidentity-census T1-1) -- a hit here is a candidate for the reader, and the SCOPE_UNDECLARED state names the fields whose absence is the finding either way; not in run 1's terms_added, a visible zero"
+    },
+    {
+      "term": "optimize",
+      "requires": [
+        "objective",
+        "boundary",
+        "horizon",
+        "excluded"
+      ],
+      "import_class": "scope",
+      "basis": "operator, 2026-09-10 ('should we add optimize and optimization?'); fold-matrix/fold_register.py REGISTER['optimization']: 'a chosen objective + a trajectory + a scope, all dropped', the same entry maximize is grounded in, and that register's ALIASES maps optimize and optimized to it; scope class and not morality because a declared objective names the gradient's axis, so nothing moral is imported once the fields are filled -- contrast `optimal`, filed here as an alias of the absent better/worse (a claimed position on a gradient, not an operation) where fold-matrix files it under optimization; different tokens, one stem, the split stated; not in run 1's terms_added, a visible zero"
+    },
+    {
+      "term": "optimization",
+      "requires": [
+        "objective",
+        "boundary",
+        "horizon",
+        "excluded"
+      ],
+      "import_class": "scope",
+      "basis": "operator, 2026-09-10 ('should we add optimize and optimization?'); fold-matrix/fold_register.py REGISTER['optimization']: 'a chosen objective + a trajectory + a scope, all dropped', the same entry maximize is grounded in, and that register's ALIASES maps optimize and optimized to it; scope class and not morality because a declared objective names the gradient's axis, so nothing moral is imported once the fields are filled -- contrast `optimal`, filed here as an alias of the absent better/worse (a claimed position on a gradient, not an operation) where fold-matrix files it under optimization; different tokens, one stem, the split stated; not in run 1's terms_added, a visible zero; the noun form, listed separately because the screen matches tokens and not stems"
     }
   ]
 }

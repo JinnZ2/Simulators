@@ -50,7 +50,14 @@ no value until their scope is declared (boundary, horizon, environment
 variables, what is excluded); on a sheet carrying no declaration such an
 addition is SCOPE_UNDECLARED, a third state beside reimport and
 unmatched -- `efficiency` is the operator's instance, and fold-matrix
-registers it as a folded term.
+registers it as a folded term. Each such entry carries an import_class:
+`scope` (a ratio or objective quoted without its frame) or `morality`
+(a term that could import a moral gradient -- the operator named market,
+capital, monetary and value, with better/worse already an absence -- and
+a morality entry must also require `graded_by`, the axis the gradient
+runs on and who assigns it, or the loader refuses it as the scope class
+under another label). "Any term that could import morality" is an open
+class; a term not on the list is UNMATCHED, the absence of a reading.
 
 WHAT THE ORDER LEAVES TO THE RESTATER AND WHAT THIS ADDS. `status` is
 self-reported by the restater. The scorer keeps that as the order's
@@ -488,9 +495,19 @@ def load_aliases(odir, prims):
             raise Refused("scope_required term %r is a primitive or an absent term" % t)
         if any(t in als for als in table.values()):
             raise Refused("scope_required term %r is also listed as an alias; one state per term" % t)
-        scope[t] = {"requires": [str(x) for x in e["requires"]], "basis": e["basis"]}
+        ic = e.get("import_class")
+        if ic not in IMPORT_CLASSES:
+            raise Refused("scope_required term %r needs import_class in %s, got %r" % (t, sorted(IMPORT_CLASSES), ic))
+        req = [str(x) for x in e["requires"]]
+        if ic == "morality" and "graded_by" not in req:
+            raise Refused("scope_required term %r is import_class morality and does not require graded_by; "
+                          "that is the scope class under another label" % t)
+        scope[t] = {"requires": req, "basis": e["basis"], "import_class": ic}
     return {"declared_by": decl["declared_by"], "written_after": decl["written_after"],
             "blind_for": decl.get("blind_for"), "table": table, "scope": scope, "path": path}
+
+
+IMPORT_CLASSES = ("scope", "morality")
 
 
 def scope_undeclared(terms_added, aliases, declared=None):
@@ -508,6 +525,7 @@ def scope_undeclared(terms_added, aliases, declared=None):
             missing = [f for f in req if not (declared or {}).get(f)]
             out.append({"added": t, "requires": req, "missing": missing,
                         "state": "SCOPE_UNDECLARED" if missing else "SCOPE_DECLARED",
+                        "import_class": aliases["scope"][t]["import_class"],
                         "basis": aliases["scope"][t]["basis"]})
     return out
 
@@ -622,7 +640,10 @@ def score_runs(runs, cons, prims, fixture=False, form="raw", aliases=None):
                                          if aliases and not any(t == h["added"] for h in s["reimports"])
                                          and not any(t == h["added"] for h in s["scope"])}),
         "scope_hits": [{"construction_id": s["construction_id"], "added": h["added"], "state": h["state"],
-                        "missing": h["missing"], "basis": h["basis"]} for s in ok for h in (s["scope"] or [])],
+                        "import_class": h["import_class"], "missing": h["missing"], "basis": h["basis"]}
+                       for s in ok for h in (s["scope"] or [])],
+        "scope_terms_unhit": sorted(t for t in aliases["scope"]
+                                    if not any(t == h["added"] for s in ok for h in (s["scope"] or []))) if aliases else [],
     }
     return {"scored": scored, "aggregates": agg, "smuggle_set": smuggle, "leak_set": leaks,
             "absent_coverage": cov, "reimport_summary": reimport_summary,
@@ -816,8 +837,9 @@ def render(res):
         for h in rs["hits"]:
             L.append("  %-8s %s => %s   [%s]" % (h["construction_id"], h["added"], h["absent"], h["basis"]))
         for h in rs["scope_hits"]:
-            L.append("  %-8s %s  %s  missing %s   [%s]" % (h["construction_id"], h["added"], h["state"],
-                                                          ",".join(h["missing"]) or "-", h["basis"]))
+            L.append("  %-8s %s  %s (%s)  missing %s   [%s]" % (h["construction_id"], h["added"], h["state"],
+                                                               h["import_class"], ",".join(h["missing"]) or "-", h["basis"]))
+        L.append("  scope_required terms declared and not added by any record: %s" % (", ".join(rs["scope_terms_unhit"]) or "-"))
         L.append("  added terms matching no alias and no scope requirement: %s" % (", ".join(rs["added_terms_unmatched"]) or "-"))
     else:
         L.append("alias reimport ([CHOICE 6]): NOT_DECLARED (no aliases.json beside primitives.json); not a zero")
