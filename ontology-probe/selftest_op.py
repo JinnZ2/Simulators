@@ -515,8 +515,16 @@ def main():
     check("market's hit is on c-025, beside the preference reimport, from the operator's extension of the rule",
           [h["construction_id"] for h in rs["scope_hits"] if h["added"] == "market"] == ["c-025"])
     check("capital, monetary and value are declared under morality and added by no run-1 record: a visible zero, not an absence of declaration",
-          rs["scope_terms_unhit"] == ["capital", "monetary", "value"]
+          [t for t in rs["scope_terms_unhit"] if al["scope"][t]["import_class"] == "morality"] == ["capital", "monetary", "value"]
           and all(al["scope"][t]["import_class"] == "morality" and "graded_by" in al["scope"][t]["requires"] for t in ("capital", "monetary", "value")))
+    check("optimize and optimization are scope class beside maximize, grounded in fold-matrix's optimization entry by import, and added by no run-1 record",
+          all(al["scope"][t]["import_class"] == "scope" and al["scope"][t]["requires"] == al["scope"]["maximize"]["requires"]
+              and "REGISTER['optimization']" in al["scope"][t]["basis"] for t in ("optimize", "optimization"))
+          and fold_reg is not None and "optimization" in fold_reg and "objective" in fold_reg["optimization"]["substitutes_for"]
+          and {"optimize", "optimization"} <= set(rs["scope_terms_unhit"]))
+    check("optimal stays an alias of the absent better/worse and is not in scope_required: one stem, two tokens, two states",
+          "optimal" in al["table"]["better/worse"] and "optimal" not in al["scope"]
+          and "optimize" not in {a for v in al["table"].values() for a in v})
     check("every morality-class entry requires the four scope fields plus graded_by",
           all(al["scope"][t]["requires"] == ["boundary", "horizon", "environment_variables", "excluded", "graded_by"]
               for t in al["scope"] if al["scope"][t]["import_class"] == "morality"))
@@ -587,7 +595,7 @@ def main():
     check("real render carries the coverage table and the UNEXERCISED term", "UNEXERCISED motive" in out1)
     check("real render carries the alias declaration and its date", "written after: run 1" in out1)
     check("real render prints the import class beside each scope hit and the declared-but-unadded terms as a line",
-          "market  SCOPE_UNDECLARED (morality)" in out1 and "not added by any record: capital, monetary, value" in out1)
+          "market  SCOPE_UNDECLARED (morality)" in out1 and "not added by any record: capital, monetary, optimization, optimize, value" in out1)
     m1 = re.sub(r"better/worse", "b3tter/w0rse", out1)
     check("real render with aliases screens clean under the same one-token exemption", not no_severity.hits(m1))
     check("the delivered term is still the only thing that fires", {h[1] for h in no_severity.hits(out1)} == {"better", "worse"})

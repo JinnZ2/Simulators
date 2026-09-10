@@ -60,6 +60,7 @@ coded sheet ──is_coded()──► adapt_coded() ──► REQUIRED shape (mo
 | absent-term coverage | 8 of 9 exercised; `motive` UNEXERCISED (c-013 names it, the restater cited `intent` only) |
 | alias reimport `[CHOICE 6]` | 1 hit (c-025 `preference ⇒ interior_state`); audit-declared list, written after run 1, not blind on it |
 | scope undeclared `[CHOICE 6]` | c-024 `efficiency`, c-022 `maximize`: no value until boundary / horizon / environment variables / exclusions are stated, and the sheet states none |
+| optimize / optimization `[CHOICE 6]` | scope class beside `maximize`, requiring `objective`; `optimal` stays an alias of the absent `better/worse`; neither verb added on run 1 |
 | morality import `[CHOICE 6]` | c-025 `market` SCOPE_UNDECLARED (morality), `graded_by` among the missing; `capital` / `monetary` / `value` declared and added by no record — a visible zero; `better` / `worse` aliases of the absent `better/worse`; the class is open |
 | N1 / N2 / N5 | do not fire; N3 NOT_EVALUABLE (one repeat) |
 | OP-4 / OP-5 | undetermined — second ontology on these thirty not scored |

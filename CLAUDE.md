@@ -11000,7 +11000,9 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   (printed as a visible zero), six added terms match nothing, grounding
   by import in `fold-matrix`'s `money` entry and
   `category-weld/welds/capital.json`, and `value` flagged as a sense
-  collision no word list separates. Nineteen `OP_*` claims (distinct from the order's OP-1..5); check
+  collision no word list separates; `optimize`/`optimization` then enter
+  under the scope class beside `maximize` while `optimal` stays an alias
+  of the absent `better/worse`, two states on one stem. Nineteen `OP_*` claims (distinct from the order's OP-1..5); check
   count printed by `selftest_op.py`, and `probe.py` refuses
   `--selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
