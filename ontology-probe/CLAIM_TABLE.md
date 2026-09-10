@@ -37,6 +37,7 @@ disagreeing reader replaces them and rescores.
 | OP_016 | ABSENT-TERM COVERAGE, a readout the order does not ask for: on run 1 eight of nine declared absences were put under load and `motive` was not — c-013's premise names *intent and motive* and the restater cited `intent` alone — so hole_rate 0.000 is a statement about eight terms and says nothing about the ninth; computed from `targets`, `missing_primitive` and alias hits, registered in `tools/known_answer.py` with None for an ontology declaring no absence | SUPPORTED |
 | OP_017 | ALIAS REIMPORT (`[CHOICE 6]`): an optional, declared, dated `aliases.json` turns the c-025 synonym route from a restater's note into a declared-list hit, and on run 1 fires once — c-025 `preference ⇒ interior_state` (basis: the restater's own note) — with the list written after run 1 was read, so the hit is not blind, and a word list is stepped around by paraphrase. CORRECTED: a first version also entered `efficiency` under `better/worse` as CONTESTABLE; withdrawn the same day on the operator's rule (OP_018) | SUPPORTED (as an instrument; not blind on run 1); one alias withdrawn |
 | OP_018 | SCOPE_UNDECLARED, a third state beside reimport and unmatched: an added term on a declared `scope_required` list carries no value until boundary, horizon, environment variables and exclusions are stated, and a coded sheet states none — on run 1 c-024 `efficiency` and c-022 `maximize` land there with the missing fields named, seven added terms match nothing, and the requirement is grounded by import in `fold-matrix`'s register (*output/input under an unstated boundary and horizon*) rather than in a synonym | SUPPORTED |
+| OP_019 | THE MORALITY-IMPORT CLASS: the operator extended the rule the same day to `market`, `capital`, `monetary`, `better`, `worse`, `value` *or any term that could import morality*; each `scope_required` entry now carries an `import_class` (`scope` / `morality`), a morality entry must require `graded_by` (the axis the gradient runs on and who assigns it) or the loader refuses it as the scope class under another label, `better`/`worse` enter as aliases of the absent compound token `better/worse` (the loader refuses an absent term in `scope_required`), and the class is declared OPEN — a term not on the list is UNMATCHED, the absence of a reading, never cleared. On run 1: c-025 `market` moves from unmatched to SCOPE_UNDECLARED (morality, five fields missing) beside its `preference` reimport; `capital`, `monetary`, `value` are declared and added by no record, printed as a visible zero; six added terms match nothing; `monetary` grounded in `fold-matrix`'s `money` entry and `capital` in `category-weld/welds/capital.json`, both by import; `value` flagged as a sense collision a word list cannot separate. Rates unmoved | SUPPORTED (as an instrument; the class membership beyond the four named terms is an audit reading) |
 
 ## OP_001 — the prompt is read, not written
 
@@ -315,3 +316,44 @@ entry, *"a chosen objective + a trajectory + a scope, all dropped"*),
 both missing every required field; the alias hit count falls to one;
 seven added terms match nothing. The section 5 rates are unmoved.
 
+## OP_019 — any term that could import morality
+
+The operator extended the rule the same day: *market, capital,
+monetary, better, worse, value, or any term that could import
+morality*. Three things follow and each is enforced at load rather than
+described. First, a `scope_required` entry now carries an
+`import_class`, `scope` for a ratio or objective quoted without its
+frame (`efficiency`, `maximize`) and `morality` for a term that could
+carry a moral gradient in; a morality entry must additionally require
+`graded_by` — the axis the gradient runs on and the party assigning it
+— because the ontology declares *no moral label in data structures* and
+*no moral gradient on selection output* absent by design, and a
+morality entry without that field would be the scope class under
+another label, which the loader refuses. Second, `better` and `worse`
+do not go in this table: `better/worse` is already an absence, the
+loader refuses an absent term in `scope_required`, and the absent term
+is a compound token a restater writes one half of — so the two halves
+enter as its aliases, which is what the operator's naming of them
+confirms. Third, *any term that could import morality* is an open
+class, and a word list cannot enumerate an open class; the declaration
+says so, and a term not on the list is UNMATCHED, the absence of a
+reading, not a finding that it imports nothing. On run 1, `market`
+(c-025, added beside `preference`) moves from the unmatched list to
+`SCOPE_UNDECLARED (morality)` with all five fields missing, so the
+record that carried the run's one alias reimport also carries its one
+morality-class hit; `capital`, `monetary` and `value` are declared and
+added by no record, printed as a line rather than left implicit; six
+added terms match nothing. The grounding is by import where the tree
+already holds it — `monetary` in `fold-matrix`'s `money` entry
+(*skill + time + labor*, residual tell *false cutoff*), `capital` in
+`category-weld/welds/capital.json` (five components read off legal
+title) — and `market` has no register entry anywhere in the tree, so
+its basis is marked as the audit's reading. `value` is the weak entry
+and says so: it is also a plain content word, a word list cannot
+separate the senses (`nonidentity-census` T1-1), and a hit is a
+candidate for the reader, with the missing-field list the finding
+either way. The verbatim rule sits in the declaration's `revision`
+line; the bases paraphrase it, because rendering the two halves of the
+absent term would trip the screen and widening the exemption to cover
+a quotation is the wrong repair. Rates and smuggle_set unmoved,
+asserted.

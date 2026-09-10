@@ -10985,7 +10985,22 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   c-024 `efficiency` and c-022 `maximize` land `SCOPE_UNDECLARED` with
   the missing fields named, grounded by import in `fold-matrix`'s
   register (*output/input under an unstated boundary and horizon*); one
-  state per term, enforced at load. Eighteen `OP_*` claims (distinct from the order's OP-1..5); check
+  state per term, enforced at load. **`OP_019`, the operator's extension
+  the same day** — *market, capital, monetary, better, worse, value, or
+  any term that could import morality*: every `scope_required` entry now
+  carries an `import_class` (`scope` / `morality`), a morality entry must
+  require `graded_by` (the axis the gradient runs on and who assigns it)
+  or the loader refuses it as the scope class under another label,
+  `better`/`worse` enter as aliases of the absent compound token
+  `better/worse` since the loader refuses an absent term in
+  `scope_required`, and the class is declared OPEN — an unlisted term is
+  UNMATCHED, never cleared. On run 1 c-025 `market` moves from unmatched
+  to `SCOPE_UNDECLARED (morality)` beside its `preference` reimport,
+  `capital`/`monetary`/`value` are declared and added by no record
+  (printed as a visible zero), six added terms match nothing, grounding
+  by import in `fold-matrix`'s `money` entry and
+  `category-weld/welds/capital.json`, and `value` flagged as a sense
+  collision no word list separates. Nineteen `OP_*` claims (distinct from the order's OP-1..5); check
   count printed by `selftest_op.py`, and `probe.py` refuses
   `--selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one

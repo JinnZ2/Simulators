@@ -60,6 +60,7 @@ coded sheet ──is_coded()──► adapt_coded() ──► REQUIRED shape (mo
 | absent-term coverage | 8 of 9 exercised; `motive` UNEXERCISED (c-013 names it, the restater cited `intent` only) |
 | alias reimport `[CHOICE 6]` | 1 hit (c-025 `preference ⇒ interior_state`); audit-declared list, written after run 1, not blind on it |
 | scope undeclared `[CHOICE 6]` | c-024 `efficiency`, c-022 `maximize`: no value until boundary / horizon / environment variables / exclusions are stated, and the sheet states none |
+| morality import `[CHOICE 6]` | c-025 `market` SCOPE_UNDECLARED (morality), `graded_by` among the missing; `capital` / `monetary` / `value` declared and added by no record — a visible zero; `better` / `worse` aliases of the absent `better/worse`; the class is open |
 | N1 / N2 / N5 | do not fire; N3 NOT_EVALUABLE (one repeat) |
 | OP-4 / OP-5 | undetermined — second ontology on these thirty not scored |
 
@@ -67,7 +68,7 @@ Direction of OP-3 (ambient > targeted) holds under both `[CHOICE 2]`
 readings; its magnitude is the reading. The synonym route the coded
 sheet notes on c-025 (`preference` → `interior_state`) is the
 restater's declaration, and `aliases.json` turns it into a declared-list
-hit on the same coded sheet. `CLAIM_TABLE.md` `OP_009..018`.
+hit on the same coded sheet. `CLAIM_TABLE.md` `OP_009..019`.
 
 ## What is here
 
@@ -80,7 +81,7 @@ hit on the same coded sheet. `CLAIM_TABLE.md` `OP_009..018`.
 | `selftest_op.py` | the checks, both directions; writes `samples/` and `runs/` |
 | `runs/constructed.jsonl`, `runs/constructed_constructions.jsonl` | the fixture: 30 constructions (12 / 9 / 9), 2 families × 3 repeats, one leak, one malformed |
 | `ontologies/substrate-primary/` | the operator's ontology, thirty constructions and coded run 1, verbatim; plus `aliases.json`, the audit's declared alias table |
-| `CLAIM_TABLE.md` | `OP_001..018` |
+| `CLAIM_TABLE.md` | `OP_001..019` |
 
 ## Run
 
@@ -119,6 +120,8 @@ such field; the operator's set was refused until it was); `[CHOICE 6]`
 an optional `aliases.json` beside `primitives.json` screens
 `terms_added` for reimport of a declared absence, and its
 `scope_required` table names added terms that carry no value until
-their scope is declared — both declared, dated, word lists.
+their scope is declared, each under an `import_class` (`scope` or
+`morality`, the second requiring `graded_by`) — both declared, dated,
+word lists, and the morality class is open by declaration.
 
 Stdlib only. Parses under 3.9. Phone-buildable. CC0.
