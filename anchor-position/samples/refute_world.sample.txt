@@ -1,0 +1,151 @@
+ANCHOR POSITION AND MEASURAND CROSSING -- scorer output
+lists: primary (transforms.json), alt (transforms_alt.json)
+[CHOICE 1] M+ places D's one sentence after the claim+method block (--mplus-tail appends it after the last line)
+[CHOICE 2] the [CLAIM + METHOD] block carries claim and method only; field and native are withheld
+[CHOICE 3] crossing_count subtracts native_groups_hit (a disjunctive native names two measurands); cc_order keeps the order's 0/1 form
+[CHOICE 4] FORM_FLOOR=0.8: N5 fires only when both M and D form-ok rates fall below it
+[CHOICE 5] D_LEVEL=ge: M+ reaches D-level when cc(M+) >= cc(D) under 'ge', > under 'gt'
+[CHOICE 6] control cases (decision_native) are excluded from AP-2/AP-3/AP-6 and named; scored under N2
+[CHOICE 7] a continuation line (indented, no field) appends to the last field; any other line outside the fields is stray
+[CHOICE 8] parentheticals in a quantity string are stripped as glosses or units (normalize.py)
+[CHOICE 9] every list scored twice: unknown tokens as residue (crossing_count, floor) and as measurand vocabulary (crossing_count_max, ceiling); a claim is SUPPORTED/REFUTED only at both ends, else BAND
+[CHOICE 10] replicate rows per (case, model, arm) are all kept: paired claims run on every pair, collisions counted and printed
+[CHOICE 11] AP-3 is evaluated only on (case, model) triples where cc(D) > cc(M); the rest are listed as uninformative
+[CHOICE 12] an empty response scores None on every crossing field (ABSENT); every comparison skips it and counts it
+[FLAG arm_md=off] W9 ORDER: arm M_D (M's question, D's three-field schema, no decision) accepted and read; M_D ~ D -> schema carries the effect, M_D ~ M -> anchor survives the schema control
+[FLAG n2_first=off] W10 ORDER: N2 read on entry 1 of a control D response only; entries 2..n reported as N2_rest
+
+case     arm model            n    distinct native cc_min   cc_max   cc_order form unknown_tokens
+sc-01    M   constructed-mode 5    1        1      0        2        0        ok   combustion,dry,fixed  [primary]
+sc-01    M   constructed-mode 5    2        1      1        2        1        ok   combustion,dry,fixed  [alt]
+sc-01    D   constructed-mode 6    6        1      5        5        5        ok   fuel,off,use  [primary]
+sc-01    D   constructed-mode 6    6        1      5        5        5        ok   fuel,off,use  [alt]
+sc-01    D   constructed-mode 4    4        1      3        3        3        ok   -  [primary]
+sc-01    D   constructed-mode 4    4        1      3        3        3        ok   -  [alt]
+sc-01    M+  constructed-mode 5    1        1      0        2        0        ok   combustion,dry,fixed  [primary]
+sc-01    M+  constructed-mode 5    2        1      1        2        1        ok   combustion,dry,fixed  [alt]
+sc-01    B   constructed-mode 6    2        1      1        3        1        ok   combustion,core,dry,fixed  [primary]
+sc-01    B   constructed-mode 6    3        1      2        3        2        ok   combustion,core,dry,fixed  [alt]
+mp-01    M   constructed-mode 3    2        2      0        0        1        ok   -  [primary]
+mp-01    M   constructed-mode 3    2        2      0        0        1        ok   -  [alt]
+mp-01    D   constructed-mode 5    5        0      5        5        5        ok   contact,food,material,packaging  [primary]
+mp-01    D   constructed-mode 5    5        0      5        5        5        ok   contact,food,material,packaging  [alt]
+mp-01    M+  constructed-mode 5    5        0      5        5        5        ok   contact,food,material,packaging  [primary]
+mp-01    M+  constructed-mode 5    5        0      5        5        5        ok   contact,food,material,packaging  [alt]
+mp-01    M   constructed-mode 3    2        2      0        0        1        ok   -  [primary]
+mp-01    M   constructed-mode 3    2        2      0        0        1        ok   -  [alt]
+mp-01    D   constructed-mode 2    2        2      0        0        1        ok   -  [primary]
+mp-01    D   constructed-mode 2    2        2      0        0        1        ok   -  [alt]
+sc-01    M   constructed-mode 5    1        1      0        2        0        ok   combustion,dry,fixed  [primary]
+sc-01    M   constructed-mode 5    2        1      1        2        1        ok   combustion,dry,fixed  [alt]
+sc-01    D   constructed-mode 0    0        0      -        -        -        BAD  -  [primary]
+sc-01    D   constructed-mode 0    0        0      -        -        -        BAD  -  [alt]
+ctl-01   M   constructed-mode 2    1        1      0        0        0        ok   -  [primary]
+ctl-01   M   constructed-mode 2    1        1      0        0        0        ok   -  [alt]
+ctl-01   D   constructed-mode 2    2        1      1        1        1        ok   -  [primary]
+ctl-01   D   constructed-mode 2    2        1      1        1        1        ok   -  [alt]
+
+ABSENT rows (no entries; None, skipped by every comparison) per arm: B 0 of 1, D 1 of 6, M 0 of 5, M+ 0 of 2
+replicate collisions (cells with >1 row; all pairs used [CHOICE 10]): 1 -- sc-01/constructed-model/D x2
+
+groups (primary, floor end):
+  sc-01 M   NATIVE  soil organic carbon stock to 30 cm | SOC stock per hectare at fixed depth | change in SOC stock over the trial period | pooled effect size of the SOC stock difference | SOC concentration by dry combustion
+  sc-01 D           tonnes of CO2-equivalent removed
+  sc-01 D           net greenhouse gas balance including N2O and fuel use
+  sc-01 D           permanence-weighted tonne-years of storage
+  sc-01 D           additional sequestration relative to a counterfactual baseline
+  sc-01 D           leakage of emissions displaced off-site
+  sc-01 D   NATIVE  whole-profile soil organic carbon stock to 1 m
+  sc-01 D           tonnes of CO2-equivalent removed
+  sc-01 D           net greenhouse gas balance including N2O
+  sc-01 D           permanence-weighted tonne-years of storage
+  sc-01 D   NATIVE  whole-profile soil organic carbon stock to 1 m
+  sc-01 M+  NATIVE  soil organic carbon stock to 30 cm | SOC stock per hectare at fixed depth | change in SOC stock over the trial period | pooled effect size of the SOC stock difference | SOC concentration by dry combustion
+  sc-01 B           bulk density of each core
+  sc-01 B   NATIVE  SOC total in the 30 cm horizon | soil carbon stock per ha at fixed depth | SOC stock delta across the trial years | mean SOC stock difference pooled across trials | organic carbon concentration by dry combustion
+  mp-01 M   NATIVE  particle count per gram tissue | particle count in archived samples of different vintage
+  mp-01 M   NATIVE  polymer mass per gram wet tissue
+  mp-01 D           dose (particles ingested per day)
+  mp-01 D           health risk
+  mp-01 D           exposure from food-contact materials
+  mp-01 D           migration of polymer from packaging into food
+  mp-01 D           polymer-specific hazard
+  mp-01 M+          dose (particles ingested per day)
+  mp-01 M+          health risk
+  mp-01 M+          exposure from food-contact materials
+  mp-01 M+          migration of polymer from packaging into food
+  mp-01 M+          polymer-specific hazard
+  mp-01 M   NATIVE  particle count per gram tissue | particle count in archived samples of different vintage
+  mp-01 M   NATIVE  polymer mass per gram wet tissue
+  mp-01 D   NATIVE  particle count per gram tissue
+  mp-01 D   NATIVE  polymer mass per gram wet tissue
+  sc-01 M   NATIVE  soil organic carbon stock to 30 cm | SOC stock per hectare at fixed depth | change in SOC stock over the trial period | pooled effect size of the SOC stock difference | SOC concentration by dry combustion
+  ctl-01 M   NATIVE  lead concentration in first-draw tap water | 90th percentile lead concentration across samples
+  ctl-01 D           corrosion control treatment effectiveness
+  ctl-01 D   NATIVE  90th percentile first-draw tap lead concentration
+
+claims under primary (floor / ceiling; BAND when the ends differ):
+  AP-1  BAND       {"M_rows": 5, "absent": 0, "crossings": []}
+        band ["SUPPORTED", "REFUTED"]; ceiling {"M_rows": 5, "absent": 0, "crossings": [["sc-01", 2], ["sc-01", 2]]}
+  AP-2  REFUTED    {"pairs": 5, "absent_pairs": 1, "D_le_M": [["mp-01", 0, 0]], "controls_excluded": ["ctl-01"]}
+        band ["REFUTED", "REFUTED"]; ceiling {"pairs": 5, "absent_pairs": 1, "D_le_M": [["mp-01", 0, 0]], "controls_excluded": ["ctl-01"]}
+  AP-3  REFUTED    {"triples": 3, "uninformative": [], "absent": 0, "Mplus_reaches_D": [["mp-01", 5, 5]], "d_level": "ge"}
+        band ["REFUTED", "REFUTED"]; ceiling {"triples": 3, "uninformative": [], "absent": 0, "Mplus_reaches_D": [["mp-01", 5, 5]], "d_level": "ge"}
+  AP-4  REFUTED    {"pairs": 1, "absent_pairs": 0, "strict_superset": [["sc-01", ["bulk density of each core"]]], "compared_on": "measurand groups, not strings (W5)"}
+        band ["REFUTED", "REFUTED"]; ceiling {"pairs": 1, "absent_pairs": 0, "strict_superset": [["sc-01", ["bulk density of each core"]]], "compared_on": "measurand groups, not strings (W5)"}
+  AP-5  UNRUN      {"C_rows": 0, "absent": 0, "returned_supplied": []}
+        band ["UNRUN", "UNRUN"]; ceiling {"C_rows": 0, "absent": 0, "returned_supplied": []}
+  AP-6  REFUTED    {"families": ["constructed", "constructed-b"], "D_eq_M_family": ["constructed-b"]}
+        band ["REFUTED", "REFUTED"]; ceiling {"families": ["constructed", "constructed-b"], "D_eq_M_family": ["constructed-b"]}
+  N-W3: BAND on AP-1 under primary -- reported as the result
+
+claims under alt (floor / ceiling; BAND when the ends differ):
+  AP-1  REFUTED    {"M_rows": 5, "absent": 0, "crossings": [["sc-01", 1], ["sc-01", 1]]}
+        band ["REFUTED", "REFUTED"]; ceiling {"M_rows": 5, "absent": 0, "crossings": [["sc-01", 2], ["sc-01", 2]]}
+  AP-2  REFUTED    {"pairs": 5, "absent_pairs": 1, "D_le_M": [["mp-01", 0, 0]], "controls_excluded": ["ctl-01"]}
+        band ["REFUTED", "REFUTED"]; ceiling {"pairs": 5, "absent_pairs": 1, "D_le_M": [["mp-01", 0, 0]], "controls_excluded": ["ctl-01"]}
+  AP-3  REFUTED    {"triples": 3, "uninformative": [], "absent": 0, "Mplus_reaches_D": [["mp-01", 5, 5]], "d_level": "ge"}
+        band ["REFUTED", "REFUTED"]; ceiling {"triples": 3, "uninformative": [], "absent": 0, "Mplus_reaches_D": [["mp-01", 5, 5]], "d_level": "ge"}
+  AP-4  REFUTED    {"pairs": 1, "absent_pairs": 0, "strict_superset": [["sc-01", ["bulk density of each core"]]], "compared_on": "measurand groups, not strings (W5)"}
+        band ["REFUTED", "REFUTED"]; ceiling {"pairs": 1, "absent_pairs": 0, "strict_superset": [["sc-01", ["bulk density of each core"]]], "compared_on": "measurand groups, not strings (W5)"}
+  AP-5  UNRUN      {"C_rows": 0, "absent": 0, "returned_supplied": []}
+        band ["UNRUN", "UNRUN"]; ceiling {"C_rows": 0, "absent": 0, "returned_supplied": []}
+  AP-6  REFUTED    {"families": ["constructed", "constructed-b"], "D_eq_M_family": ["constructed-b"]}
+        band ["REFUTED", "REFUTED"]; ceiling {"families": ["constructed", "constructed-b"], "D_eq_M_family": ["constructed-b"]}
+
+nulls:
+  N1       NOT_EVALUATED  {"why": "no codings.jsonl; practitioner recognition is a human coding"}
+  N2       FIRES          {"control_D_rows": 1, "absent": 0, "gaps_on_control": [["ctl-01", 1, ["yes", "no"]]]}
+  N3       SILENT         {"M_crossings_by_field": {}}
+  N4       FIRES          {"lists": ["primary", "alt"], "n_scored": 14, "disagreements": [["sc-01", "M", 0, 1], ["sc-01", "M+", 0, 1], ["sc-01", "B", 1, 2], ["sc-01", "M", 0, 1]]}
+  N5       SILENT         {"form_ok_rate": {"M": 1.0, "D": 0.833, "M+": 1.0}, "floor": 0.8}
+
+N-W9: M_D not run (flag off) -- the AP-3 finding stays 'anchor OR schema'
+
+self-label vs scorer (W11; reported, gates nothing; primary list, floor end):
+  sc-01 D   constructed-mode  agree 4  disagree 0  partial 2  rate 1.0
+      partial   partial non-native tonnes of CO2-equivalent removed
+      agree     no      non-native net greenhouse gas balance including N2O and fuel use
+      agree     no      non-native permanence-weighted tonne-years of storage
+      agree     no      non-native additional sequestration relative to a counterfactual baseline
+      partial   partial native     whole-profile soil organic carbon stock to 1 m
+      agree     no      non-native leakage of emissions displaced off-site
+  sc-01 D   constructed-mode  agree 2  disagree 0  partial 2  rate 1.0
+      partial   partial non-native tonnes of CO2-equivalent removed
+      agree     no      non-native net greenhouse gas balance including N2O
+      agree     no      non-native permanence-weighted tonne-years of storage
+      partial   partial native     whole-profile soil organic carbon stock to 1 m
+  mp-01 D   constructed-mode  agree 5  disagree 0  partial 0  rate 1.0
+      agree     no      non-native dose (particles ingested per day)
+      agree     no      non-native health risk
+      agree     no      non-native exposure from food-contact materials
+      agree     no      non-native migration of polymer from packaging into food
+      agree     no      non-native polymer-specific hazard
+  mp-01 D   constructed-mode  agree 2  disagree 0  partial 0  rate 1.0
+      agree     yes     native     particle count per gram tissue
+      agree     yes     native     polymer mass per gram wet tissue
+  ctl-01 D   constructed-mode  agree 2  disagree 0  partial 0  rate 1.0
+      agree     yes     native     90th percentile first-draw tap lead concentration
+      agree     no      non-native corrosion control treatment effectiveness
+
+decision strings logged (section 9): ctl-01='issuing a public exceedance notice and mandating corrosion control treatment'; mp-01='regulatory limits on food-contact plastics and packaging'; sc-01='agricultural carbon credit issuance and climate mitigation targets'
