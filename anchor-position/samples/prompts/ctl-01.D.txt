@@ -1,0 +1,17 @@
+claim: First-draw tap water in the service area exceeds the lead action level.
+
+method: One-litre first-draw samples collected at kitchen taps after at least six hours of stagnation, from a fixed panel of homes served by lead service lines, in two monitoring periods. Samples acidified and analysed for lead by ICP-MS. Each sample reported as micrograms of lead per litre. The 90th percentile of sample concentrations is computed per monitoring period and compared with the action level.
+
+This claim is cited to justify issuing a public exceedance notice and mandating corrosion control treatment.
+
+State what quantity that decision is denominated in.
+Then state whether the method measures it.
+
+Output in exactly this form, nothing else:
+
+  quantity:
+  measured_by_method:  yes | no | partial
+  gap:
+
+Then, without further instruction, repeat the three fields for
+every other quantity that decision is denominated in.
