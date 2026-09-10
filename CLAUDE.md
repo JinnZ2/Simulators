@@ -233,6 +233,7 @@ last three; read in order:
 - `anchor-measurand-crossing/` — crossing given a target; prompts parsed from the order, scorer's judgement as data, no run
 - `anchor-position/` — same order, second build; band scored both ways, ABSENT kept apart, two arms behind flags, no run
 - `ontology-probe/` — does a term-cut protect, and where it holes; two declared sets, the operator's thirty constructions, one coded run on one family
+- `frame-token-audit/` — frame-token density, Stage 1 only; three tokens shadowed, one lexicon shared with two registers
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -11104,6 +11105,42 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   of the absent `better/worse`, two states on one stem. Nineteen `OP_*` claims (distinct from the order's OP-1..5); check
   count printed by `selftest_op.py`, and `probe.py` refuses
   `--selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
+- `frame-token-audit/` — A delivered scanner landed verbatim:
+  `frame_audit.py` counts frame tokens per 1000 words under two declared
+  lexicons — v0 (time as money / persons as stock / world as stock /
+  relation as debt / relabel) and v1 (v0 plus cost-price, capital-market,
+  value-worth, efficiency) — and lists every hit; the delivery names a
+  Stage 2 (USE vs MENTION, then a substrate swap → SURVIVES / CHANGES /
+  COLLAPSES) for a human or model, and this folder does not perform it.
+  `audit.py` imports the module and runs it (`FTA_001..006`).
+  **`FTA_001`:** the scan sorts longest-first only inside a class and
+  walks classes in dictionary order, so three declared tokens can never
+  fire as declared — `invest in` (relation as debt) loses to
+  time-as-money's `invest` under both lexicons, `invest` and `afford` in
+  the v1 classes land on time-as-money — and two tokens are declared
+  twice, 57 declared against 55 distinct; `we invest in people` reads as
+  time-as-money and never as relation-as-debt. **`FTA_002`:** six v1
+  tokens are `ontology-probe`'s `scope_required` terms and seven are
+  `fold-matrix` register words, read by import — a shared vocabulary
+  under three instruments attaching three states, and this one the
+  fewest. **`FTA_004`:** on the operator's thirty constructions v0 fires
+  on 0 of 30 and v1 on 3 — `c-024 efficiency` and `c-025 markets`, where
+  ontology-probe's own screen already lands SCOPE_UNDECLARED, and `c-012
+  value` in the field's-value sense the sibling's aliases file flags as
+  unseparable by a word list; 0 of 9 TARGETED carry a token.
+  **`FTA_005`:** on the root specs v0 is silent and v1 reads 2.5–5.4 per
+  1000, the hits being SHAPE_SPEC §9's argument AGAINST the cost frame
+  and `returns` as a verb three times — `DF_010`'s use-mention result
+  and T1-1's sense collision on a new lexicon, which is what Stage 2 has
+  to undo. **`FTA_003`:** per-line scan misses a phrase across a break,
+  `per_1000` mixes phrase hits over word counts, empty text is `None`.
+  **`FTA_006` UNVERIFIED:** the delivered file writes `result_<v>.json`
+  with hit contexts into the working directory (`UNI_010`'s loop on a
+  rescan), v0's declaration is not in this tree, and nothing here says
+  whether any text is in the frame. A constructed pair separates 9
+  against 0 under v1. Check count printed by `selftest_fta.py`;
+  `audit.py` refuses `--selftest`. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
