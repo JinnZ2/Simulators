@@ -32,6 +32,26 @@ and checks the binding by `terms_used` being inside the primitive list.
 A coded sheet is the restater's self-report passed through the operator;
 the report says which form it scored.
 
+TWO READOUTS THE ORDER DOES NOT ASK FOR, both mechanical. ABSENT-TERM
+COVERAGE: for each absent_by_design term, was it EXERCISED by the run --
+named by a construction's `targets`, cited by a FAILS record's
+`missing_primitive`, or reached by an alias in `terms_added` -- or
+UNEXERCISED, in which case the hole_rate says nothing about it. ALIAS
+REIMPORT ([CHOICE 6]): an optional `aliases.json` beside primitives.json
+declares, per absent term, the words that would carry it back in under
+another name, each with the basis it was written on; `terms_added` is
+screened against it, so a restater's "preference reimports
+interior_state" note becomes a declared-list hit rather than a
+self-report. A word list decides word sense there and is stepped around
+by any paraphrase; the file says who wrote it and after which run, and a
+hit on a run the list was written in view of is NOT blind. A second
+table in the same file, `scope_required`, lists added terms that carry
+no value until their scope is declared (boundary, horizon, environment
+variables, what is excluded); on a sheet carrying no declaration such an
+addition is SCOPE_UNDECLARED, a third state beside reimport and
+unmatched -- `efficiency` is the operator's instance, and fold-matrix
+registers it as a folded term.
+
 WHAT THE ORDER LEAVES TO THE RESTATER AND WHAT THIS ADDS. `status` is
 self-reported by the restater. The scorer keeps that as the order's
 number and adds one mechanical cross-check beside it: the RESTATEMENT's
@@ -83,12 +103,18 @@ REPEATS = 3
 #            it. When present it must name absent_by_design terms; when
 #            absent the construction-to-absence link is read from the
 #            run's `missing_primitive` citations instead.
+# [CHOICE 6] an optional aliases.json beside primitives.json declares, per
+#            absent term, the words that would reimport it; terms_added is
+#            screened against it. Declared by whoever wrote the file, with
+#            a basis per alias and the run it was written after; a word
+#            list, so paraphrase steps around it.
 CHOICES = {
     1: "[PRIMITIVES] rendered one `term (type)` per line",
     2: "COMPOSES_WITH_ADDITION rows in every section 5 denominator, in no numerator; addition_rate printed per class",
     3: "restatement leak check added beside the self-reported status; FUNCTION_WORDS declared",
     4: "N4 threshold 0.5 function-word share; OP-5 physics-grounded = at least half of primitives ground to physics",
     5: "`targets` optional on TARGETED (not in the order's schema); checked against absent_by_design when present",
+    6: "aliases.json (optional, declared, dated) screens terms_added for reimport of an absent term; a word list, paraphrase steps around it",
 }
 N4_THRESHOLD = 0.5
 PHYSICS_SHARE = 0.5
@@ -419,7 +445,118 @@ def cite_missing(missing, prims):
     return out
 
 
-def score_runs(runs, cons, prims, fixture=False, form="raw"):
+def load_aliases(odir, prims):
+    """Optional aliases.json beside primitives.json ([CHOICE 6]). Returns
+    None when the file is absent (the reimport check is then NOT_DECLARED,
+    which is not the same as no hits). Refuses an alias file that names an
+    absent term the ontology did not declare, an alias that is itself a
+    primitive or an absent term, or an alias with no stated basis."""
+    path = os.path.join(odir, "aliases.json")
+    if not os.path.isfile(path):
+        return None
+    with open(path, encoding="utf-8") as fh:
+        a = json.load(fh)
+    if "aliases" not in a or not isinstance(a["aliases"], dict):
+        raise Refused("aliases.json needs an `aliases` object")
+    decl = a.get("_declaration") or {}
+    for k in ("declared_by", "written_after"):
+        if not decl.get(k):
+            raise Refused("aliases.json _declaration needs %s" % k)
+    prim = {e["term"].strip().lower() for e in prims["primitives"]}
+    absent = {x["term"].strip().lower() for x in prims["absent_by_design"]}
+    table = {}
+    for term, entries in a["aliases"].items():
+        t = term.strip().lower()
+        if t not in absent:
+            raise Refused("aliases.json names %r, not an absent_by_design term" % term)
+        table[t] = {}
+        for e in entries:
+            if not isinstance(e, dict) or not e.get("term") or not e.get("basis"):
+                raise Refused("alias entry under %r needs term and basis: %r" % (term, e))
+            al = e["term"].strip().lower()
+            if al in prim:
+                raise Refused("alias %r under %r is a primitive" % (al, term))
+            if al in absent:
+                raise Refused("alias %r under %r is itself an absent term" % (al, term))
+            table[t][al] = e["basis"]
+    scope = {}
+    for e in a.get("scope_required", []):
+        if not isinstance(e, dict) or not e.get("term") or not e.get("requires") or not e.get("basis"):
+            raise Refused("scope_required entry needs term, requires (non-empty) and basis: %r" % e)
+        t = e["term"].strip().lower()
+        if t in prim or t in absent:
+            raise Refused("scope_required term %r is a primitive or an absent term" % t)
+        if any(t in als for als in table.values()):
+            raise Refused("scope_required term %r is also listed as an alias; one state per term" % t)
+        scope[t] = {"requires": [str(x) for x in e["requires"]], "basis": e["basis"]}
+    return {"declared_by": decl["declared_by"], "written_after": decl["written_after"],
+            "blind_for": decl.get("blind_for"), "table": table, "scope": scope, "path": path}
+
+
+def scope_undeclared(terms_added, aliases, declared=None):
+    """An added term on the scope_required list carries no value until the
+    fields it requires are declared. `declared` is the record's own scope
+    declaration (a dict of field -> value) when the run form carries one;
+    a coded sheet carries none, so every hit is SCOPE_UNDECLARED with the
+    missing fields named. None when no table is declared."""
+    if aliases is None:
+        return None
+    out = []
+    for t in terms_added:
+        if t in aliases.get("scope", {}):
+            req = aliases["scope"][t]["requires"]
+            missing = [f for f in req if not (declared or {}).get(f)]
+            out.append({"added": t, "requires": req, "missing": missing,
+                        "state": "SCOPE_UNDECLARED" if missing else "SCOPE_DECLARED",
+                        "basis": aliases["scope"][t]["basis"]})
+    return out
+
+
+def reimports(terms_added, aliases):
+    """terms_added screened against the declared alias table. None when no
+    table is declared (NOT_DECLARED), else the list of hits."""
+    if aliases is None:
+        return None
+    hits = []
+    for t in terms_added:
+        for absent, als in aliases["table"].items():
+            if t in als:
+                hits.append({"added": t, "absent": absent, "basis": als[t]})
+    return hits
+
+
+def absent_coverage(scored, prims):
+    """Per absent_by_design term: was it EXERCISED by this run at all --
+    named in a construction's `targets`, cited by a FAILS record's
+    missing_primitive, or reached by a declared alias in terms_added --
+    or UNEXERCISED. hole_rate is silent about an unexercised term: no
+    construction put it under load. share_exercised is None when the
+    ontology declares no absent term."""
+    rows = {}
+    for x in prims["absent_by_design"]:
+        rows[x["term"].strip().lower()] = {"targeted_by": [], "cited_by": [], "reimported_via": []}
+    for s in scored:
+        if s.get("malformed"):
+            continue
+        for t in (s.get("targets") or []):
+            t = t.strip().lower()
+            if t in rows and s["construction_id"] not in rows[t]["targeted_by"]:
+                rows[t]["targeted_by"].append(s["construction_id"])
+        for m in s.get("cited_missing") or []:
+            if m["cell"] == "declared_absent" and s["run_id"] not in rows[m["term"]]["cited_by"]:
+                rows[m["term"]]["cited_by"].append(s["run_id"])
+        for h in (s.get("reimports") or []):
+            rows[h["absent"]]["reimported_via"].append("%s:%s" % (s["construction_id"], h["added"]))
+    for t, r in rows.items():
+        r["state"] = "EXERCISED" if (r["targeted_by"] or r["cited_by"] or r["reimported_via"]) else "UNEXERCISED"
+    n = len(rows)
+    ex = sum(1 for r in rows.values() if r["state"] == "EXERCISED")
+    return {"rows": rows, "n_absent": n, "exercised": ex,
+            "unexercised": sorted(t for t, r in rows.items() if r["state"] == "UNEXERCISED"),
+            "share_exercised": (ex / n) if n else None}
+
+
+def score_runs(runs, cons, prims, fixture=False, form="raw", aliases=None):
     """fixture=True says the construction set was admitted without the
     hand_built gate, for exercising the scorer; the render banners it.
     form is 'raw' or 'coded' (see the module docstring)."""
@@ -450,7 +587,9 @@ def score_runs(runs, cons, prims, fixture=False, form="raw"):
                   "constructed": r["constructed"], "reading": reading(c["class"], p["status"]),
                   "leak": lk, "undeclared_used": undeclared_used(p["terms_used"], prims, p["terms_added"]),
                   "status_contradicted": (p["status"] == "COMPOSES" and bool(lk)) if lk is not None else None,
-                  "targets": c.get("targets")})
+                  "targets": c.get("targets"),
+                  "reimports": reimports(p["terms_added"], aliases) if not p["malformed"] else None,
+                  "scope": scope_undeclared(p["terms_added"], aliases, r.get("declared_scope")) if not p["malformed"] else None})
         s.update(extra)
         scored.append(s)
     ok = [s for s in scored if not s["malformed"]]
@@ -469,7 +608,24 @@ def score_runs(runs, cons, prims, fixture=False, form="raw"):
             and any(m["cell"] == "declared_absent" for m in s["cited_missing"])),
         "targeted_fails": sum(1 for s in ok if s["class"] == "TARGETED" and s["status"] == "FAILS"),
     }
+    cov = absent_coverage(scored, prims)
+    rhits = [(s, h) for s in ok for h in (s["reimports"] or [])]
+    reimport_summary = {
+        "declared": aliases is not None,
+        "declared_by": aliases["declared_by"] if aliases else None,
+        "written_after": aliases["written_after"] if aliases else None,
+        "n_aliases": sum(len(v) for v in aliases["table"].values()) if aliases else 0,
+        "records_with_hit": len({s["run_id"] for s, _ in rhits}),
+        "hits": [{"construction_id": s["construction_id"], "added": h["added"], "absent": h["absent"], "basis": h["basis"]}
+                 for s, h in rhits],
+        "added_terms_unmatched": sorted({t for s in ok for t in s["terms_added"]
+                                         if aliases and not any(t == h["added"] for h in s["reimports"])
+                                         and not any(t == h["added"] for h in s["scope"])}),
+        "scope_hits": [{"construction_id": s["construction_id"], "added": h["added"], "state": h["state"],
+                        "missing": h["missing"], "basis": h["basis"]} for s in ok for h in (s["scope"] or [])],
+    }
     return {"scored": scored, "aggregates": agg, "smuggle_set": smuggle, "leak_set": leaks,
+            "absent_coverage": cov, "reimport_summary": reimport_summary,
             "n_runs": len(runs), "n_malformed": len(scored) - len(ok), "form": form,
             "n_leak_evaluable": len(leak_evaluable),
             "n_status_contradicted": sum(1 for s in leak_evaluable if s["status_contradicted"]),
@@ -644,6 +800,27 @@ def render(res):
                      ms["citations"], ms["declared_absent"], ms["primitive"] or "-", ms["undeclared"] or "-"))
         L.append("  TARGETED FAILS citing a declared absence: %d of %d" % (
             ms["targeted_fails_citing_declared_absence"], ms["targeted_fails"]))
+    cov = res["absent_coverage"]
+    if cov["n_absent"]:
+        L.append("absent-term coverage: EXERCISED %d of %d declared absences (targeted, cited by a FAILS, or reached by alias); "
+                 "UNEXERCISED %s -- hole_rate is silent about an unexercised term" % (
+                     cov["exercised"], cov["n_absent"], ", ".join(cov["unexercised"]) or "-"))
+        for t, r in sorted(cov["rows"].items()):
+            L.append("  %-22s %-11s targeted_by %s  cited_by %s  reimported_via %s" % (
+                t, r["state"], ",".join(r["targeted_by"]) or "-", ",".join(r["cited_by"]) or "-",
+                ",".join(r["reimported_via"]) or "-"))
+    rs = res["reimport_summary"]
+    if rs["declared"]:
+        L.append("alias reimport ([CHOICE 6]; %d aliases declared by: %s; written after: %s): %d record(s) hit" % (
+            rs["n_aliases"], rs["declared_by"], rs["written_after"], rs["records_with_hit"]))
+        for h in rs["hits"]:
+            L.append("  %-8s %s => %s   [%s]" % (h["construction_id"], h["added"], h["absent"], h["basis"]))
+        for h in rs["scope_hits"]:
+            L.append("  %-8s %s  %s  missing %s   [%s]" % (h["construction_id"], h["added"], h["state"],
+                                                          ",".join(h["missing"]) or "-", h["basis"]))
+        L.append("  added terms matching no alias and no scope requirement: %s" % (", ".join(rs["added_terms_unmatched"]) or "-"))
+    else:
+        L.append("alias reimport ([CHOICE 6]): NOT_DECLARED (no aliases.json beside primitives.json); not a zero")
     notes = [s for s in res["scored"] if s.get("note")]
     if notes:
         L.append("restater notes carried (%d):" % len(notes))
@@ -723,7 +900,8 @@ def main(argv):
         else:
             cons = load_constructions(cons_path, prims)
         runs, form = load_runs(argv[1], prims)
-        sys.stdout.write(render(score_runs(runs, cons, prims, fixture=fixture, form=form)))
+        aliases = load_aliases(odir, prims)
+        sys.stdout.write(render(score_runs(runs, cons, prims, fixture=fixture, form=form, aliases=aliases)))
         return 0
     sys.stderr.write(__doc__)
     return 2

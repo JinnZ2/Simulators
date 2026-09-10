@@ -34,6 +34,9 @@ disagreeing reader replaces them and rescores.
 | OP_013 | the smuggle_set is silent where the premise enters without a new term: the synonym route on c-025 (`preference` reimporting `interior_state`) is the restater's own note, not a mechanical finding, and the two ambient holes that COMPOSE with nothing added (c-023 forced binary, c-027 population default) leave no trace in any rate or in the set | SUPPORTED |
 | OP_014 | OP-5's primitive-side precondition is now met — the `SHAPE_SPEC.md` reading is declared-only (physics share 0.32) and `substrate-primary` is physics-grounded (0.65) — and OP-5 stays undetermined because the two sets have not been scored on one construction set; the instrument names that input | SUPPORTED |
 | OP_015 | what is unrun: three repeats (N3), a second family (section 7 disagreement), raw restatements (the leak check, and any mechanical reading of the c-025 route), and the second ontology on these thirty; nothing here is evidence about any model beyond one coded log | UNVERIFIED |
+| OP_016 | ABSENT-TERM COVERAGE, a readout the order does not ask for: on run 1 eight of nine declared absences were put under load and `motive` was not — c-013's premise names *intent and motive* and the restater cited `intent` alone — so hole_rate 0.000 is a statement about eight terms and says nothing about the ninth; computed from `targets`, `missing_primitive` and alias hits, registered in `tools/known_answer.py` with None for an ontology declaring no absence | SUPPORTED |
+| OP_017 | ALIAS REIMPORT (`[CHOICE 6]`): an optional, declared, dated `aliases.json` turns the c-025 synonym route from a restater's note into a declared-list hit, and on run 1 fires once — c-025 `preference ⇒ interior_state` (basis: the restater's own note) — with the list written after run 1 was read, so the hit is not blind, and a word list is stepped around by paraphrase. CORRECTED: a first version also entered `efficiency` under `better/worse` as CONTESTABLE; withdrawn the same day on the operator's rule (OP_018) | SUPPORTED (as an instrument; not blind on run 1); one alias withdrawn |
+| OP_018 | SCOPE_UNDECLARED, a third state beside reimport and unmatched: an added term on a declared `scope_required` list carries no value until boundary, horizon, environment variables and exclusions are stated, and a coded sheet states none — on run 1 c-024 `efficiency` and c-022 `maximize` land there with the missing fields named, seven added terms match nothing, and the requirement is grounded by import in `fold-matrix`'s register (*output/input under an unstated boundary and horizon*) rather than in a synonym | SUPPORTED |
 
 ## OP_001 — the prompt is read, not written
 
@@ -244,3 +247,71 @@ restatements, which are the only input on which the leak check and any
 mechanical reading of the c-025 route can run; and the `SHAPE_SPEC.md`
 set on these thirty (OP-4, OP-5). A run from inside this session on any
 of them would be void for the reason `OP_008` gives.
+
+## OP_016 — an unexercised absence is not a protected one
+
+hole_rate is `COMPOSES on TARGETED / TARGETED`, and on run 1 it is
+0.000 over nine constructions. What that number is silent about is
+which of the nine DECLARED absences the nine constructions put under
+load. `absent_coverage()` reads it off the run: an absent term is
+EXERCISED if a construction's `targets` names it, a FAILS record's
+`missing_primitive` cites it, or a declared alias in `terms_added`
+reaches it; otherwise UNEXERCISED. Run 1: **8 of 9**. The one left is
+`motive`. c-013 (*"The institution resisted the reform because it
+wanted to protect its own position"*) carries the premise *intent and
+motive as explanatory primitives*, and the restater cited `intent`
+alone — so the cut was never asked to refuse `motive`, and hole_rate
+0.000 is a fact about eight terms with the ninth untested. The
+cheapest repair is one more construction; the readout is what says so.
+`share_exercised` is registered in `tools/known_answer.py` with four
+distinct-valued cases, the fourth returning None for an ontology that
+declares no absence, since 0 there would read *no protective structure*
+as *fully unexercised*.
+
+## OP_017 — the synonym route as a declared list
+
+`OP_013` recorded that c-025's *"preference reimports interior_state
+through a term not on the absent list"* was the restater's own note and
+that nothing mechanical could confirm it on a coded sheet. `[CHOICE 6]`
+adds the mechanical half that IS available on a coded sheet:
+`terms_added` is present, so it can be screened against a declared
+alias table — per absent term, the words that would carry it back in,
+each with the basis it was written on, the file dated and signed by
+whoever wrote it. `ontologies/substrate-primary/aliases.json` is the
+audit's, not the operator's (`confirmed_by_author: false`), 25 aliases
+over 9 absent terms, and on run 1 it fires on one record: c-025's
+`preference` (basis: the restater's note — so the note is transcribed
+into the list, not independently confirmed). A first version of the
+file also entered `efficiency` under `better/worse`, marked CONTESTABLE;
+the operator's rule the same day — efficiency is not read at all unless
+scope and environment variables are marked and what is excluded is
+stated — withdrew it, and `OP_018` records where it went. The
+withdrawal is kept in the file's `revision` line rather than erased.
+Three limits stated where they bind: the list was written after run 1
+was read, so a hit on run 1 is not blind and the file says which runs
+it is blind for; it is a word list, so `nonidentity-census` T1-1
+applies and a paraphrase steps around it; and absence of a file is
+`NOT_DECLARED`, printed as such and never as zero hits. The section 5
+rates and the smuggle_set are unmoved by it, asserted.
+
+## OP_018 — a term with no value until its scope is declared
+
+`efficiency` was first entered as a synonym of `better/worse` and that
+was the wrong state. A synonym carries a premise under another name; a
+scope-free ratio carries no value at all until its boundary, horizon,
+environment variables and exclusions are stated — the operator's rule,
+and `fold-matrix/fold_register.py`'s register entry for the same word
+(*"output/input under an unstated boundary and horizon"*, residual tell
+*"quoted scope-free, so it reads as a property of the thing rather than
+of a chosen measurement frame"*), which the selftest reads by import
+rather than restating. So `aliases.json` carries a second table,
+`scope_required`, and an added term on it lands in a third state:
+`SCOPE_UNDECLARED` with the missing fields named when the record
+declares none (a coded sheet declares none), `SCOPE_DECLARED` when a
+record's `declared_scope` fills them all, and never in the alias table
+(the loader refuses one term in both — one state per term). On run 1:
+c-024 `efficiency` and c-022 `maximize` (the register's *optimization*
+entry, *"a chosen objective + a trajectory + a scope, all dropped"*),
+both missing every required field; the alias hit count falls to one;
+seven added terms match nothing. The section 5 rates are unmoved.
+

@@ -6,6 +6,7 @@ construction set: n 30, by class {'TARGETED': 9, 'AMBIENT': 9, 'CONTROL': 12}, c
 [CHOICE 3] restatement leak check added beside the self-reported status; FUNCTION_WORDS declared
 [CHOICE 4] N4 threshold 0.5 function-word share; OP-5 physics-grounded = at least half of primitives ground to physics
 [CHOICE 5] `targets` optional on TARGETED (not in the order's schema); checked against absent_by_design when present
+[CHOICE 6] aliases.json (optional, declared, dated) screens terms_added for reimport of an absent term; a word list, paraphrase steps around it
 runs: 30, malformed 0, constructed share 0.00
 input form: coded (statuses coded by the operator; no restatement logged, so the leak check is NOT_EVALUABLE)
 ontology binding: terms_used inside the primitive list on 30 of 30 scored; class field agrees on 30 of 30 recorded
@@ -49,6 +50,21 @@ smuggle_set (10): attribution, competition, contamination, count, efficiency, le
 leak check: NOT_EVALUABLE on every record (no restatement logged)
 cited missing primitives (from FAILS records): 13 citations; on the declared-absent list 11; naming a primitive -; UNDECLARED absences ['absent-as-distinct-from-unread', 'role']
   TARGETED FAILS citing a declared absence: 9 of 9
+absent-term coverage: EXERCISED 8 of 9 declared absences (targeted, cited by a FAILS, or reached by alias); UNEXERCISED motive -- hole_rate is silent about an unexercised term
+  agent_did_x_because    EXERCISED   targeted_by -  cited_by r1|c-020  reimported_via -
+  better/worse           EXERCISED   targeted_by -  cited_by r1|c-019  reimported_via -
+  deserves               EXERCISED   targeted_by -  cited_by r1|c-018  reimported_via -
+  dominance_rank         EXERCISED   targeted_by -  cited_by r1|c-014  reimported_via -
+  identity               EXERCISED   targeted_by -  cited_by r1|c-016,r1|c-026  reimported_via -
+  intent                 EXERCISED   targeted_by -  cited_by r1|c-013,r1|c-017  reimported_via -
+  interior_state         EXERCISED   targeted_by -  cited_by r1|c-017,r1|c-021  reimported_via c-025:preference
+  motive                 UNEXERCISED targeted_by -  cited_by -  reimported_via -
+  zero_sum               EXERCISED   targeted_by -  cited_by r1|c-015  reimported_via -
+alias reimport ([CHOICE 6]; 25 aliases declared by: audit reading (the session that built the instrument), NOT the operator who declared primitives.json; written after: run 1 (runs/claudeopus5_r1.jsonl) had been read, 2026-09-09): 1 record(s) hit
+  c-025    preference => interior_state   [restater note on c-025: 'preference reimports interior_state through a term not on the absent list']
+  c-022    maximize  SCOPE_UNDECLARED  missing objective,boundary,horizon,excluded   [fold-matrix/fold_register.py REGISTER['optimization']: 'a chosen objective + a trajectory + a scope, all dropped'; c-022 added it with no objective stated]
+  c-024    efficiency  SCOPE_UNDECLARED  missing boundary,horizon,environment_variables,excluded   [operator's rule, 2026-09-10; fold-matrix/fold_register.py REGISTER['efficiency']: 'output/input under an unstated boundary and horizon', residual tell 'quoted scope-free, so it reads as a property of the thing rather than of a chosen measurement frame'; SHAPE_SPEC.md section 9 (use dissipation, cost imports a pricing model)]
+  added terms matching no alias and no scope requirement: attribution, competition, contamination, count, learning, market, validity
 restater notes carried (4):
   c-022    composes as an operation over set cardinality; dependency_edge is available but not required, so it drops silently
   c-023    option_set has no completeness requirement, so a two-member set composes with nothing flagged

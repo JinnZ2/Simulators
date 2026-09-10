@@ -225,6 +225,27 @@ def _op_rates(which):
     r = mod.rates(worlds[which])
     return (r["hole_rate"], r["narrowness"], r["ambient_rate"])
 
+def _op_coverage(which):
+    """ontology-probe/probe.py::absent_coverage, imported. Scored rows are
+    hand-built over an ontology declaring two absent terms; returns
+    share_exercised."""
+    import importlib.util
+    path = os.path.join(ROOT, "ontology-probe", "probe.py")
+    spec = importlib.util.spec_from_file_location("_opc", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    prims = {"absent_by_design": [{"term": "intent", "reason": "r"}, {"term": "motive", "reason": "r"}]}
+    row = lambda cid, cited=(), reimp=(), targets=None: {  # noqa: E731
+        "malformed": False, "run_id": "r|" + cid, "construction_id": cid, "targets": targets,
+        "cited_missing": [{"term": t, "cell": "declared_absent"} for t in cited],
+        "reimports": [{"added": a, "absent": b} for a, b in reimp]}
+    worlds = {"both_cited": [row("c1", cited=("intent",)), row("c2", cited=("motive",))],
+              "none": [row("c1")],
+              "half_by_alias": [row("c1", reimp=(("purpose", "intent"),))],
+              "no_absent": []}
+    p = prims if which != "no_absent" else {"absent_by_design": []}
+    return mod.absent_coverage(worlds[which], p)["share_exercised"]
+
 def _anchor_crossing(which):
     """anchor-position/normalize.py::crossing_count, imported with the
     folder's published transforms.json. Quantity lists are hand-built so the
@@ -920,6 +941,26 @@ def seed():
         note=("section 6's crossing_count as a band [min, max] over grouped "
               "ids plus an ungrouped count. Every UNGROUPED quantity widens "
               "the band and never silently merges or splits."),
+    )
+
+    register(
+        "ontology-probe/probe.py::absent_coverage",
+        _op_coverage,
+        [
+            case("both cited", ("both_cited",), 1.0,
+                 "two absent terms, each cited by a FAILS record -> 1.0"),
+            case("nothing exercised", ("none",), 0.0,
+                 "a scored run citing nothing leaves both UNEXERCISED -> 0.0, "
+                 "which is the state where hole_rate is silent"),
+            case("half by alias", ("half_by_alias",), 0.5,
+                 "one term reached only through a declared alias in terms_added "
+                 "counts as exercised; a scorer reading citations alone returns 0"),
+            case("no absent terms", ("no_absent",), None,
+                 "no denominator -> None, never 0; a 0 here would read an ontology "
+                 "with no protective structure as fully unexercised"),
+        ],
+        note=("per absent term: targeted, cited by a FAILS, or reached by alias; "
+              "an unexercised term is one the hole_rate says nothing about."),
     )
 
     register(
