@@ -233,6 +233,7 @@ last three; read in order:
 - `anchor-measurand-crossing/` — crossing given a target; prompts parsed from the order, scorer's judgement as data, no run
 - `anchor-position/` — same order, second build; band scored both ways, ABSENT kept apart, two arms behind flags, no run
 - `ontology-probe/` — does a term-cut protect, and where it holes; two declared sets, the operator's thirty constructions, one coded run on one family
+- `loop-weight/` — source weight on loop structure, not standing; L, R, C never combined
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -11104,6 +11105,69 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   of the absent `better/worse`, two states on one stem. Nineteen `OP_*` claims (distinct from the order's OP-1..5); check
   count printed by `selftest_op.py`, and `probe.py` refuses
   `--selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
+- `loop-weight/` — A work order delivered verbatim and built to it: weight a
+  source on **feedback-loop structure** instead of standing. Three quantities
+  reported side by side and **never combined** — `L` hops between the action
+  and the observation (topology), `R` retention per hop (channel), `C` whether
+  the reading maps to the thing at all (aim). `R` is the per-hop minimum and is
+  never raised to the power of `L`, because a cumulative figure fuses the
+  channel with the topology and destroys the disagreement between them, which
+  is the reading. **`LW_003`, the order's own falsifier, passes and passes on
+  the right rule:** case C (four hops, calibration established by out-of-frame
+  outcomes) carries more than case A (one hop, never checked), decided by
+  `calibration_established` and not by some other axis — the test asserts the
+  deciding rule, so a short loop cannot satisfy the condition by accident and
+  become the new credential. **`LW_002`:** the ordering is a stated dominance
+  rule returning `FIRST_CARRIES_MORE / SECOND_CARRIES_MORE / INCOMPARABLE` plus
+  the rule that decided, never a number, with `INCOMPARABLE` first-class and
+  firing on four distinct rules — measured-low against unmeasured is
+  `INCOMPARABLE` rather than ranked, the absent-vs-known-negative repair on the
+  axis it costs most. **`LW_009`, the design point the order does not state and
+  the one that makes calibration-first non-arbitrary:** `C` is an **end-to-end
+  measurement of the whole path** (C-2 scores what the source actually
+  delivered, after every hop has taken its cut) while `L` and `R` are a
+  **structural description** of it, so a measurement outranks a prediction of
+  the same quantity — and `L`/`R` remain the whole reading when `C` is
+  unavailable, which is most of the time; ARGUED, not tested, with the standing
+  limit stated (`C` is established on reports already made, so a source whose
+  loop was cut last week still reads CALIBRATED). **`LW_006`:** a calibration
+  input whose provenance is the source, **or whose provenance is unstated**,
+  raises at load rather than landing in a quiet exclusion list. **`LW_007`:**
+  others sharing a hop with each other are one instrument not N (union-find over
+  hop ids, class means then the mean of classes), and the rule is shown to be
+  load-bearing rather than stated — case I's three comparisons mean 0.700 and
+  clear the floor, its two independence classes mean 0.600 and do not, flipping
+  the verdict. **`LW_008`:** the no-authority-terms constraint is checked by
+  walking the **AST** of both code files for identifiers and dict keys, split on
+  `_` and camelCase so `citation_count` fires and `reachable` does not — not a
+  substring scan, because the module and README have to be able to NAME what
+  they refuse and a substring scan fires on the sentence saying so (`UNI_009` /
+  `T1-1` designed around rather than found); null-tested on a plant, so the
+  clean result means something. **`LW_016`, found by running and not by
+  reading:** a path given as a sentence crashed inside the retention loop before
+  the INSUFFICIENT branch was reached — repaired, and the repair went further
+  than the crash, since a list of non-records now refuses rather than returning
+  a hop count nobody described, which is the order's own §8 rule arriving at a
+  shape the case set had no instance of. Four disclosed weaknesses rather than
+  one: **`LW_012`** `R` has no measurement procedure anywhere in the folder and
+  is the weakest joint (`L` is countable, `C` has two derivations with
+  admissibility rules, `R` has neither); **`LW_013`** the path description is
+  unchecked, so a source reporting through five hops and describing one reads
+  SHORT — there is a return for an ABSENT path and none for a WRONG one;
+  **`LW_014`** `supplied_by` is refused when it names the source and is never
+  checked for independence FROM it, the same structure as the independence rule
+  one level up and not implemented; **`LW_011`** all four thresholds are
+  stipulated and carry no basis, with case I's flip sitting exactly on
+  `0.700 >= 0.7`. **`LW_015` UNVERIFIED:** ten hand-built cases, all
+  CONSTRUCTED, no real person, employer or publication named anywhere, and
+  nothing run against a real report — the order's falsifier is a property of the
+  code and is met; whether the three axes separate real sources is untouched in
+  both directions. Expected verdicts live in the test file and not in
+  `cases.py`, so no case can agree with the module by construction; every one of
+  the eight returns is reachable, asserted, since a declared member no path
+  populates cannot be told from one nobody looked for. Check count printed by
+  `python3 test_loop.py` rather than stored. Stdlib only, no pytest, no network,
+  parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
