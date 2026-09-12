@@ -1,0 +1,15 @@
+1  the order's five validation cases
+2  the chain
+3  reachability
+4  absent is not a known negative
+5  intake refuses rather than guesses
+6  no lexicon -- the instrument never looks at the word
+7  no intent, no motive, no role, no rank
+8  glosses and citations carried verbatim, never parsed
+9  neither decoder is ranked
+10  nothing is averaged and no single valence is emitted
+11  branches are separate and unlinked
+12  the choices are declared
+13  housekeeping
+
+333 checks, 0 failed

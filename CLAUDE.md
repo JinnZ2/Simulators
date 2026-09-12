@@ -236,6 +236,7 @@ last three; read in order:
 - `loop-weight/` — source weight on loop structure, not standing; L, R, C never combined
 - `false-tradeoff/` — is the dilemma a property of the system or of the posing; classifies, never resolves
 - `return-path/` — four requirements on a correction channel; the SET failed, never a score
+- `valence-divergence/` — two decoders, one term; logs which read is whose, never assigns a valence
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -11323,6 +11324,91 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   file and not in `cases.py`; every grade, check, flag and ratio state is
   reachable by some case, asserted. Check count printed by
   `python3 test_return.py` rather than stored. Stdlib only, no pytest, no
+  network, parses under 3.9, phone-buildable, CC0.
+- `valence-divergence/` — A work order delivered verbatim and built to it:
+  log a term used by two parties, record the valence each decoder assigned and
+  where each reading came from, and flag divergence. **It does not determine
+  valence** — no dictionary, no valence model, both readings supplied, because
+  a valence dictionary would be one decoder claiming to be the answer. The
+  scored failure is not disagreement, which is visible and gets handled, but
+  **agreement reached over an unflagged mismatch**: both parties proceed,
+  neither marks the term, the divergence never surfaces. Decoder B is the
+  word's own history (etymology, historical use, other cultures' use of the
+  root), and the order is explicit that this is *a WORKFLOW, not an algorithm*
+  — the instrument stores the result of a lookup and its source and must not
+  pretend to perform one. **`VD_007`, the strongest form of the central
+  constraint:** *no lexicon* is stated here not as *the module holds no
+  dictionary* but as **`term` reaches no check** — asserted from the AST and
+  behaviourally (the verdict is unchanged when the word is replaced by the
+  empty string, by `"POSITIVE"`, by a null byte, by 200 characters), and the
+  same for `gloss`, `citation` and `date_or_period`, with no check calling a
+  string method anywhere. **`VD_001`:** `decoder_attribution`, which the order
+  calls *the point of the instrument*, declares three values and needs four —
+  its own gloss (*which decoder produced the valence when only one did*)
+  defines `A` and `B`, **leaves `SPLIT` undefined by its own sentence**, and
+  has no cell for the both-`UNREAD` entry the schema admits directly; `NEITHER`
+  is added under `[CHOICE 1]` rather than forcing such an entry onto a decoder
+  that returned nothing. **`VD_002`:** D5's condition is
+  `reading_B.valence in {NEUTRAL, UNREAD}` and the intake section says in as
+  many words that those two must never be merged (*NEUTRAL means read and
+  found flat. UNREAD means not read*) — the check is **left exactly as the
+  order writes it** and `d5_basis` is carried beside it (`[CHOICE 3]`; 7
+  `NEUTRAL_AT_ORIGIN`, 1 `UNREAD_AT_ORIGIN` across the case set).
+  **`VD_003`:** D1's guard names a valence (`UNREAD`) **and** a source
+  (`ABSENT`), two fields in two vocabularies, and removing the source clause
+  changes the verdict on exactly **12** shapes — every one an `ABSENT` source
+  carrying a valence, the combination the order's prose implies cannot exist;
+  refusing it at intake would make the clause dead, so `[CHOICE 5]` admits it
+  and `VD_010` records that the order's own case E (*an unchecked history is
+  not a divergence*) and that admitted-incoherent entry are one clause seen
+  from two sides. **`VD_004`:** the order fixes `flagged_by` and `proceeded`
+  for case D alone, so under the values chosen here **eight entries fire the
+  scored failure** — `unstated_field_effect()` sweeps both fields over their
+  vocabularies and splits each entry's codes, and the order's own MUST lists
+  for A and B (*D1 and D5*) come back **invariant** while `D2` and `D3` come
+  back contingent, so the requirement is a property of the case and the `D3`
+  beside it is a property of the choice, printed under `[CHOICE 9]` rather
+  than left to read as a finding. **`VD_005`/`VD_006`:** `fired` is a chain on
+  three of five by the checks' own definitions — **9** distinct sets reachable
+  of the 32 a five-item list could express, brute-forced over 3000 schema
+  combinations rather than sampled — and `D4_UNCHECKED` **never co-fires with
+  anything**, structurally (D1 excludes an `ABSENT` source, D5 requires a
+  history source), so the queue entry and every reading are disjoint by
+  construction. **`VD_009`:** case C, the required negative, logs clean
+  (*an instrument that flags every term is a preference dressed as a method*),
+  and `[CHOICE 2]` keeps its `[]` distinguishable from an intake failure's
+  `None` — five checks ran and none fired, against no check ran.
+  **`VD_015`:** D1 is swap-invariant at **0 of 125** pairs across the full
+  valence space, and D5 moves on **16 of 125** because it is a claim about now
+  against origin rather than a ranking of decoders — the asymmetry reported in
+  the render rather than hidden. **`VD_014`:** branches are separate entries
+  with nothing linking them (case A is two, case B is four), and the cost is
+  stated — nothing in the folder can count a term's branches, and the
+  alternative is one field away from a record that can be summarised, which is
+  the failure the instrument exists to prevent. **`VD_013`:** every
+  etymological claim is **carried** from the order and verified against
+  nothing, which is what the design says it should be, so each `citation`
+  field says where the claim came from rather than naming a reference work
+  nobody here opened. **`VD_016`, found by a plant and not by reading:** a
+  two-token entry in a forbidden-identifier vocabulary is **unmatchable by
+  construction**, since `tools/authority_scan.split_identifier` splits
+  `citation_count` into two tokens — it reads as coverage and catches nothing;
+  repaired, and the rule is now asserted for all three vocabularies scanned
+  here (intent, standing, ranking), each with its own planted violation.
+  **`VD_011`:** no metric is registered in `tools/known_answer.py` and the
+  reason is stated rather than left as an absence that looks like an oversight
+  — every function returns a boolean, a declared vocabulary member or a
+  record, and `reachable_fired_sets` is an enumeration whose known answer is
+  the enumeration. **`VD_012` UNVERIFIED:** no exchange logged, no speaker a
+  person, no utterance said; every entry declares itself CONSTRUCTED in its own
+  record, and whether the five checks separate real divergence from real
+  agreement is untouched in both directions — what is established is the
+  order's own falsifier, that case D fires `D1`, `D2` and `D3`. Expected
+  verdicts live in the test file and not in `cases.py`; every check code,
+  attribution value, `d5_basis`, grade and declared vocabulary value is reached
+  by some entry, asserted. The module refuses `--selftest` (exit 2) rather than
+  exiting clean on an invocation that runs nothing. Check count printed by
+  `python3 test_valence.py` rather than stored. Stdlib only, no pytest, no
   network, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
