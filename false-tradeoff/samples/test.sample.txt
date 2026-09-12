@@ -1,0 +1,69 @@
+ok     reachable: STIPULATED_OPTION_SET
+ok     reachable: RULE_BOUND
+ok     reachable: BOUNDARY_ARTIFACT
+ok     reachable: DEFERRAL_ARTIFACT
+ok     reachable: GENUINE_TRADEOFF
+ok     reachable: INSUFFICIENT
+ok     no member is declared and unpopulated
+ok     case 'T diverted or not divert' resolves as marked
+ok     case 'M upkeep against quarter' resolves as marked
+ok     case 'B outlay against exposur' resolves as marked
+ok     case 'G one reservoir two draw' resolves as marked
+ok     case 'R filing window against ' resolves as marked
+ok     case 'I stated, not structured' resolves as marked
+ok     case 'X both artifacts at once' resolves as marked
+ok     case 'U a defect the flags can' resolves as marked
+ok     case 'P stipulated with one de' resolves as marked
+ok     at least 6 hand-built cases
+ok     FALSIFIER: case G returns GENUINE_TRADEOFF
+ok     FALSIFIER: case G returns it ALONE
+ok     FALSIFIER: and case G is the case section 5 specifies
+ok     GENUINE_TRADEOFF never co-fires with another flag
+ok     GENUINE_TRADEOFF and INSUFFICIENT are mutually exclusive
+ok     the instrument does not dissolve every dilemma
+ok     no valuation-named field in false_tradeoff.py
+ok     no valuation-named field in cases.py
+ok     the valuation checker fires on a plant
+ok     the valuation checker does not fire on a near-miss token
+ok     swapping sides does not move the flags: T diverted or not divert
+ok     swapping sides does not move the flags: M upkeep against quarter
+ok     swapping sides does not move the flags: B outlay against exposur
+ok     swapping sides does not move the flags: G one reservoir two draw
+ok     swapping sides does not move the flags: R filing window against 
+ok     swapping sides does not move the flags: I stated, not structured
+ok     swapping sides does not move the flags: X both artifacts at once
+ok     swapping sides does not move the flags: U a defect the flags can
+ok     swapping sides does not move the flags: P stipulated with one de
+ok     every returned flag is a TradeoffRead member, never a side
+ok     DECLARATION states it does not resolve tradeoffs
+ok     DECLARATION lists every return
+ok     DECLARATION names the four axes
+ok     no confidence score anywhere in the record
+ok     an UNSTATED constraint is reported in the record
+ok     case U carries a defect and no flag can say so
+ok     a clean case carries no defect
+ok     a missing dependency set is NOT_EVALUABLE, not a silent pass
+ok     INSUFFICIENT names which field is missing
+ok     a fully unsupplied dilemma is INSUFFICIENT alone
+ok     INSUFFICIENT co-fires with a check that did run
+ok     the exclusive reading is recoverable from the record
+ok     RULE_BOUND does not fire on an empty constraint list
+ok     RULE_BOUND does fire when every constraint is RULE
+ok     a constraint list absent and a constraint list empty differ
+ok     reading the boundary as the dependency set makes CHECK 3 silent
+ok     with a separate dependency set the check does fire
+ok     an entity both sides depend on and both ledgers count does not fire
+ok     a quarter and three months are the same horizon
+ok     an unregistered unit raises rather than defaulting
+ok     DEFERRAL_ARTIFACT needs the cost inside the same side's boundary
+ok     DEFERRAL_ARTIFACT needs the cost beyond the horizon
+ok     the return is a set, not a winner
+ok     CHECK 1's second clause is not independent of its first
+ok     the conserved quantity is reported and gates nothing
+ok     running the module as a script reports case T as stipulated
+ok     running it as a script does not report case T as genuine
+ok     the module refuses --selftest and names where the checks live
+ok     no case carries an expected flag set
+ok     the statement string is carried and read by nothing
+
+67 checks, 0 failed

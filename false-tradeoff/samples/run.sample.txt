@@ -1,0 +1,21 @@
+dilemma                    flags                              defects
+---------------------------------------------------------------------
+T diverted or not diverted STIPULATED_OPTION_SET              2
+M upkeep against quarter c DEFERRAL_ARTIFACT                  
+B outlay against exposure  BOUNDARY_ARTIFACT                  
+G one reservoir two draws  GENUINE_TRADEOFF                   
+R filing window against re RULE_BOUND                         
+I stated, not structured   INSUFFICIENT                       
+X both artifacts at once   BOUNDARY_ARTIFACT, DEFERRAL_ARTIFA 
+U a defect the flags canno GENUINE_TRADEOFF                   1
+P stipulated with one deri GENUINE_TRADEOFF                   
+
+flags are a SET. no ordering, no winner, no side preferred.
+an UNSTATED constraint is a defect with no enum member;
+it is counted in the last column and nowhere in the flags.
+  DEFECT  T diverted or not  nothing given for why the vehicle cannot be halted
+  DEFECT  T diverted or not  nothing given for why nobody can be warned
+  DEFECT  U a defect the fla nothing given for why the valley route was dropped
+
+CHECK 3 under the boundary-as-dependency-set reading:
+  {'trials': 4, 'ever_fired': 0, 'reading': 'boundary read as the dependency set', 'note': 'the check is silent at every input under this reading'}

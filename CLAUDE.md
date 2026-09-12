@@ -234,6 +234,7 @@ last three; read in order:
 - `anchor-position/` — same order, second build; band scored both ways, ABSENT kept apart, two arms behind flags, no run
 - `ontology-probe/` — does a term-cut protect, and where it holes; two declared sets, the operator's thirty constructions, one coded run on one family
 - `loop-weight/` — source weight on loop structure, not standing; L, R, C never combined
+- `false-tradeoff/` — is the dilemma a property of the system or of the posing; classifies, never resolves
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -11168,6 +11169,70 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   populates cannot be told from one nobody looked for. Check count printed by
   `python3 test_loop.py` rather than stored. Stdlib only, no pytest, no network,
   parses under 3.9, phone-buildable, CC0.
+- `false-tradeoff/` — A work order delivered verbatim and built to it: given a
+  stated dilemma, is the tradeoff a property of the system or an artifact of
+  how it was posed? **The instrument does not resolve tradeoffs, it classifies
+  them** — nothing weights, ranks or prefers a side, and four checks (option-set
+  provenance, branch back, boundary cut, horizon and deferral) fire as a **SET
+  with no priority ordering**, so a dilemma failing two checks reports two flags
+  rather than one verdict. **`FT_001`, the order's own critical falsifier,
+  passes:** `GENUINE_TRADEOFF` fires on case G alone — one reservoir, two draws,
+  a physical constraint, one boundary, one horizon — because *"an instrument
+  that dissolves every dilemma is not a diagnostic, it is a preference dressed
+  as a method."* **`FT_003`, no valuation, checked two ways:** an AST walk over
+  identifiers and dict keys for a forbidden token set (`rank`, `score`,
+  `weight`, `prefer`, `better`, `worse`, `utility`, `priority`, `confidence`,
+  `winner`, `merit` and their inflections — a substring scan would fire on
+  the sentence refusing them, `UNI_009`/`T1-1` designed around rather than
+  found), and **swap invariance** — every case re-read with side A and side B
+  exchanged returns the identical flag set, which is the mechanical content of
+  the constraint rather than a promise about it. **Three places the order's
+  machinery does not reach its own words, each reported rather than smoothed:**
+  **`FT_007`** §3 calls an UNSTATED constraint a defect that must be reported,
+  and the six-member enum has no member for it (confirmed by §6's own expected
+  set for case T), so defects are carried in `unstated_constraint_defects`
+  beside the flags and case U — physical constraint plus an unstated one,
+  otherwise clean — returns `{GENUINE_TRADEOFF}` with a defect recorded, which
+  is the state the enum cannot say; **`FT_008`** CHECK 3 reads *"the dependency
+  set of BOTH sides"* and §2 supplies only ledger boundaries, and reading the
+  boundary as the dependency set is fatal rather than awkward — `shared =
+  boundary_a & boundary_b` puts every shared entity inside both by construction,
+  so the exclusive test is false for all of them and **the check can never
+  fire**, demonstrated by `boundary_as_dependency_is_silent()` returning
+  `ever_fired 0 of 4 trials`, with `depends_a`/`depends_b` added as `[CHOICE 3]`
+  and an absent pair `NOT_EVALUABLE`; **`FT_009`** §4 defines
+  `GENUINE_TRADEOFF` as *conserved quantity, same horizon, boundary intact* and
+  **the conserved quantity is tested by no check** — not added as a fifth gate,
+  because a dilemma failing it would have no member to return, so the field is
+  carried and reported and `check_conserved_is_not_gated()` states the reason in
+  the module. **`FT_010`:** CHECK 1's two clauses are not independent —
+  all-STIPULATED entails no-OBSERVED, so the second clause carries information
+  only on a mixed DERIVED set the rule does not fire on, and case P is that set.
+  **`FT_011`, found by running and not by reading, and the failure ran toward
+  the wrong answer:** the script path bound the module as `__main__` while
+  `cases.py` imported it by name, building **two copies of every Enum**, so
+  every `is` comparison in CHECK 1 and CHECK 2 read False, both checks went
+  silent, and four of nine cases read `GENUINE_TRADEOFF` — **including the
+  trolley** — which is exactly the reading §5 warns about, so an instrument
+  built to dissolve dilemmas and one with this defect print the same table;
+  repaired, and pinned by running the script path in a subprocess. **`FT_006`:**
+  an unrunnable check never reports a silent pass — `NOT_EVALUABLE` is a third
+  state kept apart from fired and not-fired, the absent-vs-known-negative repair
+  on every check at once. **`FT_013` (`[CHOICE 4]`):** §2 degrades an unsupplied
+  field to `INSUFFICIENT` and §4 returns a set, which disagree when one check
+  ran and another could not; `INSUFFICIENT` **joins** the set rather than
+  replacing it, since the exclusive reading stays recoverable from
+  `intake_missing` while a discarded measurement does not. **`FT_012`
+  UNVERIFIED:** nine constructed dilemmas, no real decision read, no boundary,
+  dependency set or horizon taken from a real ledger — the order's falsifier is
+  a property of the code and is met; whether the four checks separate posed
+  dilemmas from structural ones is untouched in both directions. Expected flag
+  sets live in the test file and not in `cases.py`, so no case can agree with
+  the module by construction; the module **refuses** `--selftest` (exit 2)
+  rather than exiting 0 on an invocation that runs nothing, and every
+  `[CHOICE n]` is printed where it is taken. Check count printed by
+  `python3 test_tradeoff.py` rather than stored. Stdlib only, no pytest, no
+  network, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
