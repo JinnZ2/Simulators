@@ -1,0 +1,114 @@
+== the order's five validation cases ==
+ok     A returns RETURN_PATH_GRADED
+ok     A's failed set is empty
+ok     B fails C1 and nothing else
+ok     B is not graded despite a ratio of 0.01111
+ok     B entered as a reporting system fails C1 and C2
+ok     so the order's 'C1 ONLY' holds of the zero-encoding entry alone
+ok     C fails C1
+ok     C fails C3
+ok     C passes C4
+ok     D with a report fails C1_RECEIPT
+ok     D with a report fails C3_LATENCY
+ok     D with a report fails C4_CONSTRUCTION
+ok     D with none fails C1_RECEIPT
+ok     D with none fails C3_LATENCY
+ok     D with none fails C4_CONSTRUCTION
+ok     D's two variants differ on C2 and on nothing else
+ok     E fails C2
+ok     E raises F_FAST_SIDE_ENCODER
+ok     E is not graded
+ok     E is ideal on the other three
+
+== the grade rule ==
+ok     graded iff failed is empty, across every case
+ok     no case returns GRADED with a non-empty failed set
+
+== no scalar collapse ==
+ok     nothing sums or counts the failed set
+ok     read() returns the set, not a count
+
+== independence of the four checks ==
+ok     baseline fires nothing
+ok     flipping C1_RECEIPT moves only C1_RECEIPT
+ok     flipping C2_SIGNAL moves only C2_SIGNAL
+ok     flipping C3_LATENCY moves only C3_LATENCY
+ok     flipping C4_CONSTRUCTION moves only C4_CONSTRUCTION
+ok     all four isolated
+ok     C1_RECEIPT reads exactly receipt
+ok     C2_SIGNAL reads exactly signal_encodings
+ok     C3_LATENCY reads exactly latency,build_on_time
+ok     C4_CONSTRUCTION reads exactly construction
+
+== every declared state is reachable ==
+ok     grade RETURN_PATH_GRADED reachable
+ok     grade NOT_A_RETURN_PATH reachable
+ok     grade INTAKE_INCOMPLETE reachable
+ok     check C1_RECEIPT fires on some case
+ok     check C2_SIGNAL fires on some case
+ok     check C3_LATENCY fires on some case
+ok     check C4_CONSTRUCTION fires on some case
+ok     flag F_UNSPECIFIED_RECEIPT fires on some case
+ok     flag F_FAST_SIDE_ENCODER fires on some case
+ok     ratio state COMPUTED reachable
+ok     ratio state UNDEFINED_ZERO_BUILD_ON_TIME reachable
+ok     ratio state NOT_COMPUTED reachable
+
+== intake refuses rather than guesses ==
+ok     an absent field returns INTAKE_INCOMPLETE
+ok     and names the field
+ok     no check ran, so failed is None and not []
+ok     flags is None for the same reason
+ok     an out-of-vocabulary value is invalid, not missing
+ok     it is not scored as ELECTIVE
+ok     encoder NONE above zero encodings is refused
+ok     absent channel_id blocks the read
+ok     absent receipt blocks the read
+ok     absent signal_encodings blocks the read
+ok     absent encoder_position blocks the read
+ok     absent latency blocks the read
+ok     absent build_on_time blocks the read
+ok     absent time_unit blocks the read
+ok     absent construction blocks the read
+ok     absent scope_note blocks the read
+ok     a non-mapping is refused rather than raising
+ok     an empty scope_note is a supplied value
+
+== ratio ==
+ok     ratio is None where there is no denominator
+ok     and the state names why
+ok     C3 still decides where the ratio does not exist
+ok     ratio None from intake is a different state
+ok     F_RATIO is not emitted as a flag
+
+== hard constraints ==
+ok     no banned field name in return_path.py
+ok     no banned field name in cases.py
+ok     the scanner fires on a plant
+ok     scope_note is touched only by intake and read
+ok     exactly one comparison in the module names scope_note
+ok     and it is the presence test, not a read of the text
+ok     no branch inside read() is taken on scope_note
+ok     scope_note is carried through byte-for-byte
+ok     no 'fast' or 'slow' value stands in for a time
+ok     both times or no rating: neither has a default
+ok     the module converts no time
+
+== properties the order states in prose, measured here ==
+ok     encoder_position moves no check verdict
+ok     case E fails C2 with any encoder, so C2 carries the falsifier alone
+ok     and only FAST_SIDE raises the flag
+ok     ideal values on three checks do not carry a fired fourth to a pass
+
+== choices are declared, not silent ==
+ok     every choice is numbered and non-empty
+ok     CHOICE 1 appears in the header
+ok     CHOICE 2 appears in the header
+ok     CHOICE 3 appears in the header
+ok     CHOICE 4 appears in the header
+ok     CHOICE 5 appears in the header
+ok     CHOICE 7 appears in the header
+ok     CHOICE 6 appears in the header
+ok     the schema additions are listed
+
+93 checks, 0 failed

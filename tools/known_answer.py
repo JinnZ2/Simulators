@@ -205,6 +205,17 @@ def _amc_crossing_band(which):
     g, k, u, n = worlds[which]
     return mod.crossing_band(g, k, u, n)[4:6]
 
+def _rp_ratio(latency, build_on_time):
+    """return-path/return_path.py::ratio, imported. latency / build_on_time,
+    or None where there is no denominator."""
+    import importlib.util
+    path = os.path.join(ROOT, "return-path", "return_path.py")
+    spec = importlib.util.spec_from_file_location("_rp", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.ratio(latency, build_on_time)
+
+
 def _op_rates(which):
     """ontology-probe/probe.py::rates, imported. (class, status) rows are
     hand-built so the three section 5 rates can be counted off; returns
@@ -961,6 +972,25 @@ def seed():
         ],
         note=("per absent term: targeted, cited by a FAILS, or reached by alias; "
               "an unexercised term is one the hole_rate says nothing about."),
+    )
+
+    register(
+        "return-path/return_path.py::ratio",
+        _rp_ratio,
+        [
+            case("signal arrives before the build-on", (1.0, 2.0), 0.5,
+                 "half the build-on time; a ratio below 1 is the only region "
+                 "where C3 does not fire, so the two must agree in sign"),
+            case("signal arrives after", (3.0, 1.0), 3.0,
+                 "three times the build-on time, counted by hand"),
+            case("output built on immediately", (1.0, 0.0), None,
+                 "no denominator -> None, never 0 and never inf. A 0 would "
+                 "read the worst case as the best one, and an inf is not the "
+                 "number the order's F_RATIO promises"),
+        ],
+        note=("the order's F_RATIO. C3 is computable where this is not, so "
+              "the check and the number reported beside it have different "
+              "domains; ratio_state carries which."),
     )
 
     register(

@@ -7,11 +7,15 @@
 # the module by construction.
 
 import ast
+import os
 import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import cases
 import loop_weight as lw
 from loop_weight import Carries, LoopRead
+from tools.authority_scan import PLANT, scan, split_identifier
 
 CHECKS = []
 
@@ -108,68 +112,18 @@ FORBIDDEN = {
 }
 
 
-def split_identifier(name):
-    parts = []
-    for chunk in name.split("_"):
-        current = ""
-        for ch in chunk:
-            if ch.isupper() and current:
-                parts.append(current)
-                current = ch
-            else:
-                current += ch
-        if current:
-            parts.append(current)
-    return [p.lower() for p in parts if p]
-
-
-def authority_tokens(source_text):
-    """Identifiers and dict-literal keys only.
-
-    Not a substring scan over the raw file: this module and its README have
-    to be able to NAME the quantities they refuse, and a substring scan
-    would fire on the sentence saying they are refused -- the checker
-    reading its own subject matter. Comments and free docstrings are not in
-    the AST at all; dict keys are, because a field name is a field name
-    whether it is an attribute or a string key.
-    """
-    hits = []
-    tree = ast.parse(source_text)
-    for node in ast.walk(tree):
-        found = []
-        if isinstance(node, ast.Name):
-            found = [node.id]
-        elif isinstance(node, ast.Attribute):
-            found = [node.attr]
-        elif isinstance(node, ast.arg):
-            found = [node.arg]
-        elif isinstance(node, (ast.FunctionDef, ast.ClassDef)):
-            found = [node.name]
-        elif isinstance(node, ast.keyword) and node.arg:
-            found = [node.arg]
-        elif isinstance(node, ast.Dict):
-            found = [k.value for k in node.keys
-                     if isinstance(k, ast.Constant) and isinstance(k.value, str)]
-        for name in found:
-            for token in split_identifier(name):
-                if token in FORBIDDEN:
-                    hits.append((name, token))
-    return hits
-
-
 for path in ("loop_weight.py", "cases.py"):
-    hits = authority_tokens(open(path).read())
+    hits = scan(open(path).read(), FORBIDDEN)
     check("no authority-named field in %s" % path, not hits,
           "found %s" % hits if hits else "0 identifiers or keys match the forbidden set")
 
 # null test on the checker: it must fire on a plant, or its silence above
 # means nothing.
-PLANT = "def f():\n    citation_count = 3\n    return {'author_rank': citation_count}\n"
-plant_hits = authority_tokens(PLANT)
+plant_hits = scan(PLANT, FORBIDDEN)
 check("the authority checker fires on a planted identifier",
       len(plant_hits) >= 2, "plant hits: %s" % plant_hits)
 check("the authority checker does not fire on a near-miss token",
-      not authority_tokens("reachable = 1\nsubtitle_note = 2\n"),
+      not scan("reachable = 1\nsubtitle_note = 2\n", FORBIDDEN),
       "token-split matching, not substring")
 
 

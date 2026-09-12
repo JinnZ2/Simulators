@@ -235,6 +235,7 @@ last three; read in order:
 - `ontology-probe/` — does a term-cut protect, and where it holes; two declared sets, the operator's thirty constructions, one coded run on one family
 - `loop-weight/` — source weight on loop structure, not standing; L, R, C never combined
 - `false-tradeoff/` — is the dilemma a property of the system or of the posing; classifies, never resolves
+- `return-path/` — four requirements on a correction channel; the SET failed, never a score
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -11233,6 +11234,96 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `[CHOICE n]` is printed where it is taken. Check count printed by
   `python3 test_tradeoff.py` rather than stored. Stdlib only, no pytest, no
   network, parses under 3.9, phone-buildable, CC0.
+- `return-path/` — A work order delivered verbatim and built to it: score a
+  correction channel against four requirements and return the **SET** of
+  requirements failed. It does not rank, recommend or resolve, and it does not
+  ask whether a channel is useful — *a channel can be valuable and still not be
+  a return path; marking a gap is not correcting an error*. Four checks
+  (`C1_RECEIPT` receipt not enforced by structure, `C2_SIGNAL` any re-encoding,
+  `C3_LATENCY` signal no sooner than the output is built on, `C4_CONSTRUCTION`
+  not buildable by the party already paying), `grade` GRADED iff `failed` is
+  empty, and nothing sums or counts the set — asserted from the AST.
+  **`RP_002`:** the four are independent, measured two ways — flip one check's
+  own fields and only that check moves (four rows, four isolated), and each
+  function's body is read out of the AST and compared against the
+  `CHECK_FIELDS` table, so the table cannot drift from the functions it
+  describes. **`RP_003`, the largest finding:** the order's Intake says an
+  absent field *returns `INTAKE_INCOMPLETE` naming the field* and its Return
+  block gives a `grade` with exactly two values, neither of them that one, and
+  no field in which to name anything — and the Open section closes the gap by
+  predicting *"this will be the most common return"*, so **the state the return
+  shape cannot express is the state the order expects the instrument to be
+  mostly in**; `[CHOICE 1]` adds the third grade plus `missing`/`invalid`, and
+  sets `failed`/`flags` to `None` rather than `[]` when no check ran, since
+  `[]` says *four ran and none fired*, which is case A. **`RP_004`:** `F_RATIO`
+  is defined as *"always reported as a number"*, so as a flag it fires on every
+  channel and separates nothing (`CONSTANT_FIRES`), and it cannot always be a
+  number — at `build_on_time == 0` the ratio has no denominator while `C3` is
+  still perfectly computable and still fires, so **the check and the number the
+  order pairs with it have different domains**; `ratio` returns `None` and
+  never `0.0` (which would read the worst case as the best) or `inf`,
+  registered in `tools/known_answer.py` with three distinct-valued cases.
+  **Two of the order's own validation cases could not be entered as
+  described, both shipped as paired variants so the reading is visible rather
+  than chosen quietly.** **`RP_006`:** case B must fail `C1` **only** and the
+  channel it names is *an incident reporting system* — somebody writes a
+  report, a report is an encoding, so faithfully entered it fails `C1` and
+  `C2`; the stated requirement holds of the encodings-0 entry alone, while B's
+  own purpose (*speed does not compensate for elective receipt*) survives
+  either entry at a ratio of 0.011. **`RP_007`:** case D says *no channel
+  exists* and must fail `C1`, `C3`, `C4` — but a channel that does not exist
+  has no latency, and a channel with no latency returns `INTAKE_INCOMPLETE`,
+  which is not a verdict; `D_no_channel` is the faithful entry, the other two
+  enter the observation's elapsed standing time and split on the `C2` axis the
+  order leaves open, the one place it names a case and declines to fix a field.
+  **`RP_005`:** `encoder_position` reaches no check — measured over the whole
+  vocabulary, at one encoding all four positions produce **one** distinct
+  `failed` set — which is right by `C2`'s own rationale (*each re-encoding is a
+  place the signal can be revalued*, whoever holds the pen) and costs the
+  order's §3 slow-side/fast-side distinction its only scoring route.
+  **`RP_012`:** so the falsifier case E is carried by `C2`'s arithmetic alone —
+  it fails `C2` with `SLOW_SIDE` and `THIRD_PARTY` too — and its stated risk
+  (*ideal values on the other three carry this to a pass*) is impossible under
+  the iff rule; the design is sound anyway for a reason the order does not
+  state, since the channel that would rename compliance is foreclosed by `C2`
+  at zero encodings — **a physical consequence has no author**. **`RP_008`:**
+  one `encoder_position` field against `signal_encodings` documented as
+  *"2+ = report of a report"*, so where the encoders differ the schema records
+  one; `[CHOICE 7]` names the first, at the stated cost that a slow-side first
+  encoder followed by a fast-side second does not raise the flag written for
+  exactly that situation. **`RP_009`:** `receipt` carries an in-vocabulary
+  unknown (`UNSPECIFIED`, scored as ELECTIVE and flagged) and no other field
+  does, so one epistemic state is scored in one field and blocking in the
+  rest — and the direction saves it, since scoring the unknown fires `C1`, the
+  failing direction, so the asymmetry is stated rather than repaired.
+  **`RP_010`:** the *"no 'fast' or 'slow' as a value anywhere in the schema"*
+  constraint is refuted on its literal reading by the order's own intake block
+  two sections earlier, which ships `SLOW_SIDE` and `FAST_SIDE` as declared
+  values; the narrow reading its own clause states (*both times or no rating*)
+  governs and is implemented, and no delivered field is renamed. **`RP_011`:**
+  the stated return carries neither time and a ratio is dimensionless, so no
+  output can be read back against its own intake — `time_unit` is carried
+  (`[CHOICE 3]`) and the two times are still absent by spec. **`RP_013`:**
+  `scope_note` is structurally unparsed rather than described as unparsed —
+  exactly one comparison in the module names it and it is the presence test
+  (asserted by node type), no branch inside `read()` takes its test from it,
+  and it is carried byte-for-byte; the no-content-scoring constraint is met by
+  construction, the schema having no content field at all. **`RP_014`,
+  a repair rather than a finding:** the banned-field scan existed in
+  `loop-weight/test_loop.py` and that file runs its checks at import, so it
+  could never have been imported as a library and a copy was the default for a
+  mechanical reason — lifted instead to `tools/authority_scan.py`, where the
+  SCANNER is one object and the VOCABULARY is declared per order, both suites
+  importing it and both still green. **`RP_015` UNVERIFIED:** thirteen
+  constructed channels, every number stipulated, no incident system,
+  publication loop, field observation or physical consequence entered from a
+  record; the order's validation set is a property of the code and is met, and
+  whether the four checks separate return paths from recommendation channels in
+  the field is untouched in both directions. Expected verdicts live in the test
+  file and not in `cases.py`; every grade, check, flag and ratio state is
+  reachable by some case, asserted. Check count printed by
+  `python3 test_return.py` rather than stored. Stdlib only, no pytest, no
+  network, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
@@ -11286,6 +11377,18 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     its name and a repo-wide scan would be `nonidentity-census` T1-1's
     word-list failure one level up. The manifest is the weak point and the
     test says so; enforcement is at test time, not at the callsite.
+  - `authority_scan.py` — one identifier-level scan for a declared forbidden
+    vocabulary. Several orders here ban a class of field NAME rather than a
+    value (`loop-weight/` the standing family, `return-path/` the same plus
+    audience size), so the VOCABULARY is passed in by the caller and the
+    SCANNER is one object. An AST walk over identifiers, attributes, args,
+    function names and dict-literal keys — not a substring scan, because a
+    module and its README have to be able to NAME what they refuse and a
+    substring scan fires on the sentence saying so. Ships a `PLANT` so every
+    caller can show the scanner fires before quoting its silence. Lifted out
+    of `loop-weight/test_loop.py`, which runs its checks at import and so
+    could never have been imported as a library — the mechanical reason a
+    copy was the default, recorded at `return-path/` `RP_014`.
   - `substrate_substitution_toolkit.py` — richer programmatic
     surface: seven categories from harsh (`pure_consumer`, the null
     hypothesis) to gentle (`mutualistic_scale`), each with multiple

@@ -55,6 +55,7 @@ MANIFEST = (
     "anchor-position/normalize.py::crossing_count",
     "ontology-probe/probe.py::rates",
     "ontology-probe/probe.py::absent_coverage",
+    "return-path/return_path.py::ratio",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so
