@@ -1,0 +1,5 @@
+gap_register search -- analgesia
+2 of 7 entries
+
+GR-0002  T2  the difference between the analgesia floor written into veterinary procedure guidance and the analgesia floor written into human procedure guidance, for procedures of comparable tissue involvement
+GR-0004  T4  whether the analgesia floor required for a spay or neuter and the analgesia provision recorded for a cervical procedure under human coding have ever been placed side by side

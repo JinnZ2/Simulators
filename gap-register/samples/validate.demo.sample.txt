@@ -1,0 +1,25 @@
+gap_register validate -- demo/fails.jsonl
+2 entries, 12 checks
+
+GX-0001
+  V1   PASS           13 fields present
+  V2   PASS           observable noun: column, table
+  V3   PASS           distinct from closure condition
+  V4   FAIL           excluding_method: accusatory construction \bdeliberate(?:ly)?\b | excluding_method: accusatory construction \bso\s+that\s+nobody\s+(?:would|will)\s+(?:see|know)\b | excluding_method: name-shaped span outside provenance[]: Alex Hartley
+  V5   PASS           3 term(s), all of them used by another entry
+  V6   PASS           OPEN
+
+GX-0002
+  V1   PASS           13 fields present
+  V2   FAIL           no observable noun located; modal-only phrasing (2 modal token(s))
+  V3   PASS           distinct from closure condition
+  V4   PASS           no accusatory construction; no name-shaped span outside provenance[]
+  V5   PASS           3 term(s), all of them used by another entry
+  V6   PASS           OPEN
+
+LOUD -- every check that did not return PASS
+  GX-0001 V4   FAIL           excluding_method: accusatory construction \bdeliberate(?:ly)?\b | excluding_method: accusatory construction \bso\s+that\s+nobody\s+(?:would|will)\s+(?:see|know)\b | excluding_method: name-shaped span outside provenance[]: Alex Hartley
+  GX-0002 V2   FAIL           no observable noun located; modal-only phrasing (2 modal token(s))
+
+PASS 10  FAIL 2  UNDETERMINED 0  NOT_EVALUABLE 0
+[CHOICE 5] exit is nonzero on FAIL. UNDETERMINED exits zero and prints above: it is an unevaluated check, and under order section 1 that is a peer return rather than a negative one.

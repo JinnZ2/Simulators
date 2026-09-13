@@ -234,6 +234,7 @@ last three; read in order:
 - `anchor-position/` — same order, second build; band scored both ways, ABSENT kept apart, two arms behind flags, no run
 - `ontology-probe/` — does a term-cut protect, and where it holes; two declared sets, the operator's thirty constructions, one coded run on one family
 - `frame-token-audit/` — frame-token density, Stage 1 only; three tokens shadowed, one lexicon shared with two registers
+- `gap-register/` — marked unmeasured quantities; V5 undefined so scored both ways, 7 of 7 UNKNOWN, a demo that fails
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -11140,6 +11141,87 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   whether any text is in the frame. A constructed pair separates 9
   against 0 under v1. Check count printed by `selftest_fta.py`;
   `audit.py` refuses `--selftest`. Stdlib only, parses under 3.9,
+  phone-buildable, CC0.
+- `gap-register/` — A work order delivered verbatim and built to it: a
+  register of **marked, unmeasured quantities**, one entry per
+  `(quantity, excluding-method)` pair, where the measurand is the
+  PRESENCE OF A MARK and not the truth of any claim about the quantity
+  marked. `gap_register.py` is the single stdlib tool (`add`,
+  `validate`, `search`, `check`, `export --md`) over a bare JSONL store,
+  with the order's six rules `V1..V6` implemented and its own schema,
+  type set and status enum read OUT OF `WORK_ORDER.md` at selftest time
+  rather than retyped. **`GRG_001`, the result: V5 — one of the two
+  rules the order calls load-bearing — carries a term the order does not
+  define, and the two available readings part on every entry.** It
+  refuses an index term that is *"a coinage absent from index_terms of
+  any other entry"* and supplies no test for **coinage**; under STRICT
+  (coinage is the singleton) it refuses **7 of 7**, under LOOSE (a
+  singleton is refused only where the entry has no shared term at all) it
+  admits **7 of 7**, so the checker scores both and returns
+  `UNDETERMINED` naming the terms rather than picking. **`GRG_002`:**
+  under STRICT no register spanning unrelated domains can satisfy V5,
+  since a term specific enough to find an entry by is a singleton until a
+  second entry in the same domain arrives — the seed register's six
+  shared terms are exactly the six that pair two entries inside one
+  domain — and the seeds could have been curated to pass, which was
+  declined as fitting the entries to the checker. **`GRG_003`, the
+  state:** all seven seeds land `UNKNOWN`, not `OPEN`, because no
+  `venue_check` was run (every publisher, registry and standards host
+  refuses CONNECT) and section 1 says an unevaluable entry returns
+  `UNKNOWN` and **never `OPEN` by default** — so `OPEN` and both
+  `CLOSED_*` returns are unexercised by the shipped data and are shown
+  reachable only in constructed fixtures, with the operator, who holds
+  the 2026-09-11 session record, the party who can set them.
+  **`GRG_004`:** V5 is `NOT_EVALUABLE` on the first entry — *"any other
+  entry"* has no referent — so the rule is a property of the REGISTER
+  where the other five read one entry, a difference the order does not
+  mark. **`GRG_011`:** nothing in the register is verified (egress
+  allowlist, `MS_004`/`ANC_010` status), and the discipline taken instead
+  is mechanical — the register names no standards body, certification or
+  publication the order does not name, checked by asserting that every
+  all-caps identifier in any V4-scanned field also appears in
+  `WORK_ORDER.md`, non-vacuously since the register uses one.
+  **`GRG_006`, found by running:** an honorific ends in a period and the
+  sentence splitter inside the name detector severed `Dr.` from the name
+  it introduces, so the honorific arm returned nothing while the
+  run-of-capitals arm fired on the same string — the suite would have
+  stayed green on the wrong mechanism had that arm not been written
+  separately. **`GRG_005`/`GRG_007`:** V4 and V2 rest on word lists
+  (`T1-1`), with V4's ALL-CAPS-is-an-acronym rule an under-firing
+  direction chosen and declared because a false name hit refuses a
+  legitimate entry, and V2 checking VOCABULARY rather than checkability
+  — *"a published table"* with no statement of what is in it passes,
+  which is `G-FIT` at its most literal. **The demo is the section 8
+  requirement met and then some** (`GRG_013` aside): two constructed
+  entries, one tripping V4 three ways in one field and one tripping V2
+  on modal-only phrasing, each passing the other five rules so the
+  refusal is attributable, with the selftest asserting the nonzero exit
+  **and** that the refused set is exactly `{(GX-0001, V4), (GX-0002,
+  V2)}` — a bare exit-code check passes on a demo that fails for some
+  other reason — and the demo is also where V5's `PASS` branch is
+  exercised, the branch the shipped register does not reach.
+  **`GRG_008`:** the exit code is `[CHOICE 5]`, printed at the foot of
+  every render — nonzero on `FAIL` only, `UNDETERMINED` exiting zero and
+  printing loudly, since the other reading would leave the shipped
+  register failing and erase the section 8 contrast. **`GRG_010`:**
+  section 9's three items are decided by nobody here and each is asserted
+  in the state the order left it (four types uncollapsed, one `status`
+  string per entry, no `@context` anywhere) so a later build cannot
+  settle one quietly. **`GRG_014`:** on the one pair available the
+  T2/T4 distinction sits in `venue_check` rather than in the type, which
+  is evidence toward O1's collapse at n = 2 on entries written by one
+  hand (`TP_003`) — recorded, not decided. **`GRG_009` UNVERIFIED:** the
+  kill rule (a zero-context model restating quantity and closure
+  condition from the store alone) has no endpoint here, 7 entries rather
+  than 20, and the session that wrote the entries is the wrong party to
+  run it; what holds is its precondition, all seven carrying a non-empty
+  quantity and closure condition. **`GRG_012`:** the citation confound is
+  recorded in 3 of 7 entries — which ones is this auditor's reading, not
+  a computed field — and the name-strip probe the order names as its
+  measurement arm is named and not built. Renders screen clean through
+  `no_severity` with no exemption; the demo render fires only on its own
+  constructed modal text. Check count printed by `selftest_gr.py`;
+  `gap_register.py` refuses `--selftest`. Stdlib only, parses under 3.9,
   phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk

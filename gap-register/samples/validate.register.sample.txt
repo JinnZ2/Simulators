@@ -1,0 +1,70 @@
+gap_register validate -- /home/user/Simulators/gap-register/REGISTER.jsonl
+7 entries, 42 checks
+
+GR-0001
+  V1   PASS           13 fields present
+  V2   PASS           observable noun: column, dataset, table
+  V3   PASS           distinct from closure condition
+  V4   PASS           no accusatory construction; no name-shaped span outside provenance[]
+  V5   UNDETERMINED   STRICT refuses, LOOSE admits. term(s) no other entry uses: coercion, settlement rate, consent || shared: mediation, negotiation
+  V6   PASS           UNKNOWN
+
+GR-0002
+  V1   PASS           13 fields present
+  V2   PASS           observable noun: guideline, paper, table
+  V3   PASS           distinct from closure condition
+  V4   PASS           no accusatory construction; no name-shaped span outside provenance[]
+  V5   UNDETERMINED   STRICT refuses, LOOSE admits. term(s) no other entry uses: human medicine, procedure guidance || shared: analgesia, pain management, veterinary
+  V6   PASS           UNKNOWN
+
+GR-0003
+  V1   PASS           13 fields present
+  V2   PASS           observable noun: form, syllabus
+  V3   PASS           distinct from closure condition
+  V4   PASS           no accusatory construction; no name-shaped span outside provenance[]
+  V5   UNDETERMINED   STRICT refuses, LOOSE admits. term(s) no other entry uses: certification, training hours, competency, frame holding || shared: mediation
+  V6   PASS           UNKNOWN
+
+GR-0004
+  V1   PASS           13 fields present
+  V2   PASS           observable noun: column, publication, table
+  V3   PASS           distinct from closure condition
+  V4   PASS           no accusatory construction; no name-shaped span outside provenance[]
+  V5   UNDETERMINED   STRICT refuses, LOOSE admits. term(s) no other entry uses: cervical procedure, procedure coding || shared: analgesia, veterinary, pain management
+  V6   PASS           UNKNOWN
+
+GR-0005
+  V1   PASS           13 fields present
+  V2   PASS           observable noun: benchmark, field, records
+  V3   PASS           distinct from closure condition
+  V4   PASS           no accusatory construction; no name-shaped span outside provenance[]
+  V5   UNDETERMINED   STRICT refuses, LOOSE admits. term(s) no other entry uses: interlocutor model, update rate, dialogue, evaluation benchmark || shared: language model
+  V6   PASS           UNKNOWN
+
+GR-0006
+  V1   PASS           13 fields present
+  V2   PASS           observable noun: dataset, series, timestamp, transcript
+  V3   PASS           distinct from closure condition
+  V4   PASS           no accusatory construction; no name-shaped span outside provenance[]
+  V5   UNDETERMINED   STRICT refuses, LOOSE admits. term(s) no other entry uses: concession, good faith, bargaining record, friction || shared: negotiation
+  V6   PASS           UNKNOWN
+
+GR-0007
+  V1   PASS           13 fields present
+  V2   PASS           observable noun: checklist, field, standard, version
+  V3   PASS           distinct from closure condition
+  V4   PASS           no accusatory construction; no name-shaped span outside provenance[]
+  V5   UNDETERMINED   STRICT refuses, LOOSE admits. term(s) no other entry uses: hosted model, instrument stability, version, reproducibility || shared: language model
+  V6   PASS           UNKNOWN
+
+LOUD -- every check that did not return PASS
+  GR-0001 V5   UNDETERMINED   STRICT refuses, LOOSE admits. term(s) no other entry uses: coercion, settlement rate, consent || shared: mediation, negotiation
+  GR-0002 V5   UNDETERMINED   STRICT refuses, LOOSE admits. term(s) no other entry uses: human medicine, procedure guidance || shared: analgesia, pain management, veterinary
+  GR-0003 V5   UNDETERMINED   STRICT refuses, LOOSE admits. term(s) no other entry uses: certification, training hours, competency, frame holding || shared: mediation
+  GR-0004 V5   UNDETERMINED   STRICT refuses, LOOSE admits. term(s) no other entry uses: cervical procedure, procedure coding || shared: analgesia, veterinary, pain management
+  GR-0005 V5   UNDETERMINED   STRICT refuses, LOOSE admits. term(s) no other entry uses: interlocutor model, update rate, dialogue, evaluation benchmark || shared: language model
+  GR-0006 V5   UNDETERMINED   STRICT refuses, LOOSE admits. term(s) no other entry uses: concession, good faith, bargaining record, friction || shared: negotiation
+  GR-0007 V5   UNDETERMINED   STRICT refuses, LOOSE admits. term(s) no other entry uses: hosted model, instrument stability, version, reproducibility || shared: language model
+
+PASS 35  FAIL 0  UNDETERMINED 7  NOT_EVALUABLE 0
+[CHOICE 5] exit is nonzero on FAIL. UNDETERMINED exits zero and prints above: it is an unevaluated check, and under order section 1 that is a peer return rather than a negative one.
