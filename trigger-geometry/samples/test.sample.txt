@@ -1,0 +1,15 @@
+1  the order's five validation cases
+2  no single safety score
+3  redundancy is not mitigation
+4  reliability figures are refused at intake
+5  absent is never safe
+6  no enum of geometry classes
+7  the sensor is carried, never computed
+8  T3 suppresses T6
+9  reachability
+10  both directions of every check
+11  the two times
+12  the choices
+13  housekeeping
+
+156 checks, 0 failed

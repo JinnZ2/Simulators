@@ -56,6 +56,7 @@ MANIFEST = (
     "ontology-probe/probe.py::rates",
     "ontology-probe/probe.py::absent_coverage",
     "return-path/return_path.py::ratio",
+    "trigger-geometry/trigger_geometry.py::accumulation_ratio",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so

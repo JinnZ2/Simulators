@@ -238,6 +238,7 @@ last three; read in order:
 - `return-path/` — four requirements on a correction channel; the SET failed, never a score
 - `valence-divergence/` — two decoders, one term; logs which read is whose, never assigns a valence
 - `terrain-prior/` — an indicator is a record of the process that made the site; bearing and entanglement, never collapsed
+- `trigger-geometry/` — was the RESPONSE validated in THIS geometry; sensor correct, model inverted
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -11484,6 +11485,113 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   where it takes effect, both asserted. Check count printed by
   `python3 test_terrain.py`; the module refuses `--selftest` (exit 2). Stdlib
   only, no pytest, no network, parses under 3.9, phone-buildable, CC0.
+- `trigger-geometry/` — A work order delivered verbatim and built to it:
+  given an automated TRIGGER (sensed quantity, threshold, programmed
+  response) and a GEOMETRY it will operate in, was the RESPONSE validated
+  there. **It does not evaluate the sensor and it does not evaluate the
+  threshold** — `sensor_verdict` is carried verbatim from intake to return
+  and computed by nothing, asserted from the AST. The failure class is
+  **SENSOR CORRECT + MODEL INVERTED**: the reading is accurate, the response
+  was derived where it reduces the hazard and is applied where it raises it,
+  and *redundancy does not touch this class* — two sensors agreeing on the
+  same correct reading feed the same wrong inference. That constraint is
+  **measured rather than promised**: `redundancy_effect()` sweeps the field
+  over seven settings including *two sensors, agreeing* and *three,
+  unanimous* and requires every flag, verdict and return value unchanged; no
+  check body names anything matching `redundan`, asserted from the AST; and
+  the sweep is null-tested by showing it reports movement when a flag really
+  moves (`TG_009`). Six checks T1..T6 as three-state functions
+  (`FIRED`/`SILENT`/`NOT_EVALUABLE`), three verdicts never one (sensor /
+  inference / response, with `BEARS_ON` declaring which check touches which
+  so the assignment can be disagreed with rather than guessed at), and no
+  arithmetic operator touching any verdict — asserted, with `%` and `&`
+  excluded from the scan deliberately, since a check firing on a format
+  string reports its own reader. **`TG_001`, and it decides how the
+  reference case reads:** the worked Driftless serpentine grade looks like a
+  class-absence failure (T6), but the hard constraints say an absent
+  geometry returns ABSENT and validation case A says it MUST return
+  `response_validated_here False` — different returns — so for case A to
+  return what the order requires the envelope must NAME the serpentine
+  class, making the reference failure an **instance-count** failure and not
+  a class-absence one: the validating set knew the geometry and ran it once,
+  which is the order's own prose (*"a single curve damps out; the test
+  passes"*) in its stronger form. **`TG_002`, the largest instance of the
+  stated-rule-with-no-schema-field shape in this family (`MF_017` /
+  `CW_015` / `DL_004` / `GC_012` / `UNI_013` / `SSS_050` / `RT_009`): three
+  of the order's six checks have no field in the order's own intake
+  schema** — T2 (does the response feed the next input cycle), T4 (does the
+  proxy decouple silently), T5 one field of each — measured by
+  `schema_support()` rather than argued; `[CHOICE 1]` makes each a DECLARED
+  three-value field where `UNDECLARED` neither fires nor clears, because
+  inferring *the response does not couple* from nobody having said so is the
+  silence the instrument refuses. **`TG_003`, the consequence:** case D
+  requires a clean return to be reachable (*"if nothing returns clean, the
+  instrument is an objection generator"*), clean requires those three
+  SILENT, and a trigger written to the delivered schema alone declares none
+  of them — so **under the delivered schema the clean branch is
+  `CONSTANT_SILENT` and the order's own falsifier case cannot be built**.
+  **`TG_004`:** the hard constraints name a state (`ABSENT`) the delivered
+  three-value return does not carry and three verdicts the one-field Return
+  block does not carry, both in six lines; the three values stay exactly as
+  delivered and `validated_reason` rides beside them, so ABSENT, an unstated
+  envelope and a check nobody ran are three distinguishable routes to
+  UNRATED calling for three different next actions. **`TG_005`/`TG_006`:**
+  T1 as written reads **neither** of the two times the order calls
+  load-bearing, so `accumulation_ratio` (relaxation over reversal period) is
+  reported and **gates nothing** — making it a precondition would stop T1
+  firing on the reference case, where the Open section says both times will
+  usually be unmeasured — and that Open section's INTAKE_INCOMPLETE
+  instruction and case A's MUST-fire requirement pull opposite ways,
+  resolved by recording absent times as a finding and blocking only on
+  absent REQUIRED fields, with nothing estimated. Registered in
+  `tools/known_answer.py` with four cases (7/2 → 3.5, 1/4 → 0.25, an absent
+  time → None never 0.0 which would read as *damps instantly* on a geometry
+  nobody timed, a zero period → None) — the only function here returning a
+  number rather than a declared vocabulary member. **`TG_007`:** case E's
+  *T3 ONLY* forces T3 to **suppress** T6 rather than merely outrank it, and
+  the suppression is reported in a `suppressed` list rather than hidden.
+  **`TG_008`:** two checks could not reach NOT_EVALUABLE through `read()`
+  because intake refuses the input that would produce it — T6's was closed
+  by adding the honest state that produces it (an envelope **stated** with
+  no class named, distinct from case E where nothing was stated at all), and
+  T3's is recorded as unreachable and exercised on the check function
+  directly rather than deleted. **`TG_010`:** reliability figures **raise**
+  rather than being dropped, at any nesting depth, naming the offending key,
+  since an ignored input is one somebody assumes was used — and the screen
+  is a twelve-token word list, stated at the top of the module, with
+  `RELIABILITY_TOKENS` deliberately absent from the identifier scan because
+  a module has to be able to name what it refuses. **`TG_011`:** *no enum of
+  geometry classes* is met structurally (no constant holds a class name, a
+  class invented inside the test runs end to end and is correctly reported
+  ABSENT rather than refused) and the cost is that T6 is **string
+  equality** — two names for one geometry read as two — which an enum would
+  fix and which the constraint forbids for the reason it states; recorded,
+  not repaired. **`TG_012`:** the unledgered safety function (*if
+  `operator_correction_required` is non-null, removing the human removes a
+  safety function that appears nowhere on the ledger*) is counted per
+  reading **and** per distinct trigger, 5 of 11 against 4, because one
+  trigger read in two geometries is two readings and one function.
+  **`TG_013` UNVERIFIED and it covers the folder:** no control unit read, no
+  `sensor_verdict` measured, no geometry surveyed, every time either `None`
+  or invented so the ratio has a value somewhere, and the reference case
+  transcribed from the order's prose as an operator's account carried as
+  such — what is established is that the order's five validation cases
+  return what it says they must, and whether the six checks separate an
+  inverted response from a sound one on a real trigger is untouched in both
+  directions; the order's second Open item (the people holding
+  terrain-forced geometries have no channel to the people writing trigger
+  logic) is an intake problem and is not solved here, with
+  `constructibility_note` the field that would carry it. Two non-vehicle
+  readings from the order's own scope section are in the corpus — the
+  deposition zone in the lee of an obstruction, where the correct surface
+  reading supports the inverted inference (worked at length in
+  `terrain-prior/`), and the committed dive, prior sound and commit point
+  wrong for want of a rate. Nine `[CHOICE n]` markers, each printed by
+  `--choices` and each cited inline where it takes effect, both asserted;
+  every case declares itself CONSTRUCTED and `cases.py` carries no expected
+  verdict, asserted. Check count printed by `python3 test_trigger.py`; the
+  module refuses `--selftest` (exit 2). Stdlib only, no pytest, no network,
+  parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

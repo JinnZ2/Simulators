@@ -205,6 +205,21 @@ def _amc_crossing_band(which):
     g, k, u, n = worlds[which]
     return mod.crossing_band(g, k, u, n)[4:6]
 
+def _tg_accumulation(period, relax):
+    """trigger-geometry/trigger_geometry.py::accumulation_ratio, imported.
+    system_relaxation_time / reversal_period. Above 1 the system is still
+    carrying the previous reversal when the next arrives. It GATES NOTHING
+    in that module, and is registered here because it is still a number a
+    reader will quote."""
+    import importlib.util
+    path = os.path.join(ROOT, "trigger-geometry", "trigger_geometry.py")
+    spec = importlib.util.spec_from_file_location("_tg", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.accumulation_ratio({"reversal_period": period,
+                                   "system_relaxation_time": relax})
+
+
 def _rp_ratio(latency, build_on_time):
     """return-path/return_path.py::ratio, imported. latency / build_on_time,
     or None where there is no denominator."""
@@ -1043,6 +1058,31 @@ def seed():
               "The list is the load-bearing part and has no external "
               "validation; a second list (transforms_alt.json) is scored "
               "beside it as N4."),
+    )
+
+    register(
+        "trigger-geometry/trigger_geometry.py::accumulation_ratio",
+        _tg_accumulation,
+        [
+            case("still carrying the last reversal", (2.0, 7.0), 3.5,
+                 "7 / 2; the system takes three and a half reversal periods "
+                 "to settle, so curve two arrives on top of curve one -- the "
+                 "order's own accumulation mechanism", tol=1e-12),
+            case("damps between reversals", (4.0, 1.0), 0.25,
+                 "1 / 4; settled long before the next reversal, which is the "
+                 "single-curve test article the order says passes", tol=1e-12),
+            case("period absent", (None, 7.0), None,
+                 "the order's Open section: an unmeasured time is recorded, "
+                 "never estimated. None, not 0.0 -- a 0.0 here would read as "
+                 "'damps instantly' on a geometry nobody timed"),
+            case("zero period", (0.0, 1.0), None,
+                 "no denominator; None rather than a division or an infinity "
+                 "that would sort above every measured geometry"),
+        ],
+        note=("[CHOICE 6] of the TRIGGER GEOMETRY order. T1 as written reads "
+              "NEITHER time, so this ratio gates nothing -- making it a "
+              "precondition would stop T1 firing on the order's own "
+              "reference case, where both times are unmeasured."),
     )
 
 

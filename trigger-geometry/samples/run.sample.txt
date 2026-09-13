@@ -1,0 +1,145 @@
+TRIGGER GEOMETRY -- was this response validated HERE
+three verdicts, never one; sensor is carried, never scored
+absent from the validation set is ABSENT, never SAFE
+
+trigger          geometry           validated flags
+--------------------------------------------------------------------------------------------------------------
+serpentine_brake driftless_grade    False     T1_ACCUMULATION,T2_RESPONSE_COUPLES
+    reason: FLAGGED
+    sensor:    CORRECT   (carried, not computed here)
+    inference: NOT_CONTRADICTED_HERE
+    response:  INVERTED_IN_THIS_GEOMETRY
+    times unmeasured: reversal_period,system_relaxation_time
+    accumulation ratio: --  (gates nothing)
+    operator correction: push through -- overpower the trigger; the opposite of what every safety layer is designed to permit
+    if inverted: braking removes momentum from the tractor holding the rig and transfers load rearward...
+    geometry exists because: over nine percent, two lanes, continuous serpentine reversals for the lengt...
+
+serpentine_brake single_curve_flat  False     T2_RESPONSE_COUPLES
+    reason: FLAGGED
+    sensor:    CORRECT   (carried, not computed here)
+    inference: NOT_CONTRADICTED_HERE
+    response:  INVERTED_IN_THIS_GEOMETRY
+    times unmeasured: reversal_period,system_relaxation_time
+    accumulation ratio: --  (gates nothing)
+    operator correction: push through -- overpower the trigger; the opposite of what every safety layer is designed to permit
+    if inverted: braking removes momentum from the tractor holding the rig and transfers load rearward...
+    geometry exists because: the test article; one curve, chosen because it is easy to instrument, not b...
+
+fifth_wheel_l... yard_level         False     T4_PROXY_STATE
+    reason: FLAGGED
+    sensor:    CORRECT   (carried, not computed here)
+    inference: INVERTED_IN_THIS_GEOMETRY
+    response:  NOT_CONTRADICTED_HERE
+    REQUIRES an independent verification path
+    times unmeasured: reversal_period,system_relaxation_time
+    accumulation ratio: --  (gates nothing)
+    operator correction: pull test against the kingpin, and a visual on the jaw
+    if inverted: handle seated with the jaw closed on nothing; the observable and the mechanical state...
+    geometry exists because: flat paved yard; the geometry the coupling check was written in and the onl...
+
+grade_retarder   straight_descent   True      -
+    reason: CLEAN
+    sensor:    CORRECT   (carried, not computed here)
+    inference: NOT_CONTRADICTED_HERE
+    response:  NOT_CONTRADICTED_HERE
+    times unmeasured: reversal_period,system_relaxation_time
+    accumulation ratio: --  (gates nothing)
+    geometry exists because: a long straight descent; routed this way because the ridge allowed it         
+
+stability_cut    ordinary_two_lane  UNRATED   T3_ENVELOPE_UNSTATED
+    reason: UNSTATED_ENVELOPE
+    sensor:    CORRECT   (carried, not computed here)
+    inference: UNRATED
+    response:  UNRATED
+    not evaluable: T2_RESPONSE_COUPLES,T4_PROXY_STATE,T5_DEGRADATION_CORRELATION
+    suppressed by T3: T6_GEOMETRY_ABSENT
+    times unmeasured: reversal_period,system_relaxation_time
+    accumulation ratio: --  (gates nothing)
+    geometry exists because: unremarkable road; carried so that an unrated return is not confounded with...
+
+washout_detect   rural_in_rain      False     T5_DEGRADATION_CORRELATION
+    reason: FLAGGED
+    sensor:    DEGRADED   (carried, not computed here)
+    inference: INVERTED_IN_THIS_GEOMETRY
+    response:  NOT_CONTRADICTED_HERE
+    times unmeasured: reversal_period,system_relaxation_time
+    accumulation ratio: --  (gates nothing)
+    operator correction: slow to a speed where the road edge is readable by eye
+    if inverted: an availability figure averaged over the envelope reports the inverse of the truth, b...
+    geometry exists because: same road as ordinary_two_lane; the water is the condition, not the geometr...
+
+fineness_probe   boulder_lee        UNRATED   T4_PROXY_STATE,T6_GEOMETRY_ABSENT
+    reason: ABSENT
+    sensor:    CORRECT   (carried, not computed here)
+    inference: INVERTED_IN_THIS_GEOMETRY
+    response:  INVERTED_IN_THIS_GEOMETRY
+    REQUIRES an independent verification path
+    times unmeasured: reversal_period,system_relaxation_time
+    accumulation ratio: --  (gates nothing)
+    operator correction: read the flow direction and the obstruction, and stay off the lee side
+    if inverted: the obstruction sorted the sediment; the deposition zone behind it is fines dropped f...
+    geometry exists because: the zone exists because the obstruction exists; it is not an edge case of a...
+
+dive_commit      reversing_ramp     UNRATED   -
+    reason: CHECKS_NOT_EVALUABLE
+    sensor:    CORRECT   (carried, not computed here)
+    inference: NOT_EVALUABLE
+    response:  NOT_CONTRADICTED_HERE
+    not evaluable: T5_DEGRADATION_CORRELATION
+    accumulation ratio: 3.500  (gates nothing)
+    if inverted: prior sound, commit point wrong; the missing term is a rate, and the geometry that su...
+    geometry exists because: a reversing approach; carried so accumulation_ratio has a value somewhere, ...
+
+culvert_ice      deck_unknown       UNRATED   -
+    reason: CHECKS_NOT_EVALUABLE
+    sensor:    UNKNOWN   (carried, not computed here)
+    inference: NOT_CONTRADICTED_HERE
+    response:  NOT_EVALUABLE
+    not evaluable: T1_ACCUMULATION
+    times unmeasured: reversal_period,system_relaxation_time
+    accumulation ratio: --  (gates nothing)
+    geometry exists because: a short exposed deck; whether the input reverses on it has not been establi...
+
+envelope_no_c... straight_descent   UNRATED   -
+    reason: CHECKS_NOT_EVALUABLE
+    sensor:    CORRECT   (carried, not computed here)
+    inference: NOT_CONTRADICTED_HERE
+    response:  NOT_EVALUABLE
+    not evaluable: T6_GEOMETRY_ABSENT
+    times unmeasured: reversal_period,system_relaxation_time
+    accumulation ratio: --  (gates nothing)
+    geometry exists because: a long straight descent; routed this way because the ridge allowed it         
+
+partial_trigger  straight_descent   UNRATED   -- INTAKE_INCOMPLETE
+    reason: INTAKE_INCOMPLETE
+    sensor:    CORRECT   (carried, not computed here)
+    inference: UNRATED
+    response:  UNRATED
+    accumulation ratio: --  (gates nothing)
+    geometry exists because: a long straight descent; routed this way because the ridge allowed it         
+
+
+CHOICES -- decisions the work order leaves open
+
+[CHOICE 1] T2, T4 and T5 run on declared three-value fields this build added; the order's intake schema carries no field for any of them, and UNDECLARED neither fires nor clears
+[CHOICE 2] T3 suppresses T6; an envelope that was never stated cannot be asked whether it covers a geometry (forced by validation case E's T3 ONLY)
+[CHOICE 3] validated_reason rides beside the delivered three-value return, because the hard constraints name ABSENT and the return does not
+[CHOICE 4] three verdicts (sensor, inference, response) are returned beside the delivered single field; the hard constraint names three and the delivered Return block has one
+[CHOICE 5] an absent reversal_period or system_relaxation_time is recorded as a finding and does not block the return; only an absent REQUIRED field returns INTAKE_INCOMPLETE
+[CHOICE 6] accumulation_ratio is computed where both times are present and gates nothing, because T1 as written reads neither
+[CHOICE 7] reliability-shaped intake keys raise rather than being dropped
+[CHOICE 8] redundancy is carried on the trigger and read by no check
+[CHOICE 9] a NOT_EVALUABLE check blocks a True verdict; validating on a check nobody ran is the pass this instrument exists to refuse
+
+SCHEMA SUPPORT
+  checks the order's intake schema supports: T1_ACCUMULATION, T3_ENVELOPE_UNSTATED, T6_GEOMETRY_ABSENT
+  checks needing a field this build added:   T2_RESPONSE_COUPLES, T4_PROXY_STATE
+  one field of each:                         T5_DEGRADATION_CORRELATION
+  fields added: couples_into_next_cycle, proxy_decouples_silently, degrades_where_consequence_highest
+
+CONSTRAINT READOUTS
+  redundancy swept over 6 settings, flags invariant: True
+  readings whose record depends on a human override: 5 of 11
+  distinct triggers doing so: 4 (serpentine_brake, fifth_wheel_latch, washout_detect, fineness_probe)
+  clean branch reachable: True (grade_retarder)
