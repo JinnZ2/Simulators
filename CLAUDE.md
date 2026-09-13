@@ -239,6 +239,7 @@ last three; read in order:
 - `valence-divergence/` — two decoders, one term; logs which read is whose, never assigns a valence
 - `terrain-prior/` — an indicator is a record of the process that made the site; bearing and entanglement, never collapsed
 - `trigger-geometry/` — was the RESPONSE validated in THIS geometry; sensor correct, model inverted
+- `failure-mode-register/` — durability and reconstructability only; the delivered register, parsed not retyped
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -11592,6 +11593,124 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   verdict, asserted. Check count printed by `python3 test_trigger.py`; the
   module refuses `--selftest` (exit 2). Stdlib only, no pytest, no network,
   parses under 3.9, phone-buildable, CC0.
+- `failure-mode-register/` — A work order delivered verbatim and built to it:
+  a mechanism-level failure-mode register for ML components used as
+  **infrastructure**, scoped by the order's own section 0 to **DURABILITY AND
+  RECONSTRUCTABILITY ONLY** — *can the deployed object still be identified,
+  re-produced, load-rated and inspected at t + N years, by someone who is not
+  the original author and does not hold the tacit stack* — with the three
+  non-goals (model behaviour, harm incidents, a code of ethics) restated in the
+  module docstring rather than assumed. Nothing rates a model, a vendor, a
+  deployment or a person; every verdict is about whether a RECORD suffices to
+  rebuild or identify an object. **The register's content is the order's and
+  nothing is authored here**: `entries.py` parses the twelve section-2 fields,
+  the three vocabularies (read OUT of the order's English alternations,
+  `[CHOICE 1]`, since it declares no machine-readable form), the four `ENTRY
+  DUR-00N` blocks, three control notes, five seeds, six source domains, eight
+  steps, nine falsifiers and both fenced tables at call time, carries no entry
+  value as a literal (asserted), and raises rather than returning an empty
+  schema when the column contract breaks — the `MF_019` discipline, since five
+  stale copies of one gate across three drops is what retyping costs.
+  **`FMR_001`, the one that governs the folder:** Step 0 is the order's own
+  first step and `F_B` says the absence of prior art *"must be established, not
+  assumed"*; egress here is an allowlist and every catalogue host refuses
+  CONNECT, measured not asserted, so `step0_prior_art()` returns BLOCKED with
+  `substituted: False` and **the register is not cleared to ship** regardless of
+  what else computes. **`FMR_002`:** Step 1 was never run — no deployment class
+  is declared anywhere, and `DUR-002` refuses to narrow in as many words (*"In
+  practice: all of them"*), while Step 5 and section 5 both rest on it.
+  **`FMR_003`/`FMR_004`, the headline:** Step 5 calls the YES/PARTIAL/NO
+  distribution *"a headline result on its own"* and it is computable for **one
+  entry of four** — two cells state two reconstruction values and one states
+  none of the three — and the two multi-value cells are **not one axis**
+  (`DUR-001` control-state, `DUR-003` time), so no merged distribution is
+  emitted and section 8's PARTIAL prediction is untested here. **`FMR_005`:**
+  the register is **two registers superimposed** — six of twelve cells across
+  `detection_channel` / `detection_latency` / `reconstruction` carry both the
+  state of current practice and the state under a control the same entry
+  proposes, with no axis in the schema for the difference — so the
+  high-priority set (`FMR_006`) is 3 of 4 under the as-is reading and **0 of 4**
+  under the with-control one, both reported, neither picked. **`FMR_007`:** one
+  of the two priority transports is gated out of its own requirement set by its
+  own honesty — `DUR-002` scores `existing_control = PARTIAL` deliberately
+  (*"this is the null-set discipline in Step 7"*), Step 6 gates on `NONE`, so it
+  produces no requirement under a literal reading while its own text specifies
+  one; reported in `excluded` with `states_requirement_anyway` rather than
+  dropped. **`FMR_008`:** Step 6's second conjunct (*consequence non-trivial*)
+  has no test anywhere in the order — no scale, no threshold, no comparison —
+  so the gate runs on the first alone and returns NOT_EVALUABLE per entry.
+  **`FMR_009`/`FMR_010`:** three of the order's own rules bind together —
+  section 2's PROJECTED cap, Step 4's *flag all as PROJECTED*, and section 8's
+  short register — giving `f·k/(1−f)` = **one entry** at k=4, f=0.2, so Step 4
+  is NOT_RUN, nothing is authored (authoring projected entries from inside is
+  `F_D`'s own failure), and `F_D` passes at 0.0 **because Step 4 was not run**
+  rather than because projection was resisted. `fraction_cap` is registered in
+  `tools/known_answer.py` with four distinct-valued cases, the inversion being
+  where an error hides. **`FMR_011`:** `F_C`'s random 20% at n=4 is **0.8 of an
+  entry**, a rejection rate with no resolution, so a census runs instead and the
+  substitution is printed. **`FMR_012`:** ENTRY 0 is named by section 1, was
+  never delivered, and is **not constructible under the order's own schema** —
+  its mechanism is a property of the register rather than of a deployment, so it
+  has no `load_condition` and its `detection_channel` is the field itself (the
+  `UNI_095` record-level shape); not authored, and `DUR-000` appears in neither
+  module. **`FMR_013`:** `NOTE` is carried by half the register and is not a
+  field — section 2 has a state for an entry MISSING one and none for an entry
+  carrying an EXTRA one (`GM_011`), so `extra` is reported on its own line and
+  never merged into `missing`. **`FMR_014`, the sharpest reading of a delivered
+  cell:** `DUR-004` reads *"MEASURED by analogy in software generally"* — it
+  carries MEASURED's label with neither MEASURED's `(cite)` nor TRANSPORTED's
+  justification or named domain, and *analogy* is the word the TRANSPORT RULE
+  rejects outright, on the one entry whose `existing_control` is NONE; the
+  mechanical vocabulary check **passes** it, because a label is not a
+  requirement — that check's own limit shown rather than described.
+  **`FMR_015`, a finding against this build:** the first `F_A` screen required
+  structural language AND no resemblance marker, and **struck `DUR-001` on the
+  sentence in which `DUR-001` disclaims resemblance** (*"This is not resemblance
+  between industries"*) — the `UNI_009`/`T1-1` shape committed after both were
+  recorded here; repaired so survivors turn on structural language plus a stated
+  justification, with a resemblance mention reported **with its surrounding
+  clause** and never subtracted, and the record kept in `F_A`'s own `limit`
+  field. **`FMR_016`:** section 6B's *"Compressed by roughly fifty"* is the
+  **low end** of its own band — classical 0.04 hops/yr against ML 2.0–5.0 gives
+  **50 to 125** — and the equal-N reading, not the midpoint. **`FMR_017`:**
+  `F_I` is enforced by there being **no single-number accessor** —
+  `volume_vs_correlation()` returns both and no `volume()` or
+  `expected_losses()` exists on the module (asserted from the AST), so taking
+  the volume figure alone is visible in a diff; section 6B-2 says correlation
+  *"needs its own entry"* and none was delivered or invented. **`FMR_018`:** the
+  6B-2 REGISTER RULE **is** `effective-redundancy-audit`'s
+  `Channel.survives_all_shared_nodes` and `n_eff`, so it is **imported rather
+  than restated**, and a copy that does not state what it does not share makes
+  the claim UNRATED — not scored as shared, which would be a measurement, and
+  not scored as independent, which is the claim under test; it fires on nothing
+  in the delivered register, a visible zero shown reachable in both directions.
+  **`FMR_019`:** *"a planned shock with no budget line behaves exactly like an
+  unplanned one"*, so `scheduled` mitigates nothing alone and `shock_split()`
+  keeps three states apart — declared budget, declared absence, and UNDECLARED,
+  since an undeclared budget is not a missing one. **`FMR_020`/`FMR_021`/
+  `FMR_022`:** `F_G` cannot run (no second reader; it asks for five entries
+  where four were delivered) and its computable proxy is **labelled a proxy**,
+  flagging exactly the two non-conforming fields; `F_E` is a claim about the
+  world and the honest answer is stated (*nothing currently would*) with
+  `claims_publishing_sufficient: False` asserted; `F_F` finds three entries
+  naming WHAT, one naming a holder, and **none naming a where**. **`FMR_023`:**
+  the correlated-failure marker RESOLVES to two folders and the
+  silent-substitution one is **AMBIGUOUS** across three with **no pick made**.
+  **`FMR_024`:** two delivery facts kept as delivered — section 3B-W's header
+  says *"the two priority transports"* and delivers four entries, one of which
+  is not a transport, and `F_I` is listed before `F_H`. **`FMR_025` UNVERIFIED
+  and it covers the folder:** no deployed component inspected, no retained
+  record examined, no reconstruction attempted; every computation is a property
+  of the four delivered entries, of the order's own rules, or of this build's
+  arithmetic. `F_H` is enforced rather than promised — every function returning
+  a count returns it in a dict carrying a `unit`, checked over all sixteen.
+  Eight `[CHOICE n]` markers, each printed by `--choices` and each cited inline
+  where it takes effect, both asserted; the render screens through
+  `sheet-structure-scan/no_severity` under one declared exemption for two
+  sentences quoted verbatim from the order, measured in three arms. Check count
+  printed by `python3 test_register.py`; `register.py` and `entries.py` both
+  refuse `--selftest` (exit 2). Stdlib only, no pytest, no network, parses under
+  3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
