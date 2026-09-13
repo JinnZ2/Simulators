@@ -1,0 +1,1 @@
+selftest_fta: 20 checks passed

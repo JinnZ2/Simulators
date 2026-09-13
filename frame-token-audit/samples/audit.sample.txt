@@ -1,0 +1,45 @@
+FRAME-TOKEN AUDIT -- Stage 1 counts over the delivered lexicon; Stage 2 (USE vs MENTION,
+substrate swap) NOT performed here. No density below is a graded reading.
+
+lexicon: v0 23 tokens in 5 classes; v1 57 tokens in 9 classes
+
+shadowed tokens (scanned alone, land on a different class -- can never fire as declared):
+  v0  'invest in'  declared relation_as_debt  lands [('time_as_money', 'invest')]
+  v1  'invest in'  declared relation_as_debt  lands [('time_as_money', 'invest')]
+  v1  'invest'     declared capital_market    lands [('time_as_money', 'invest')]
+  v1  'afford'     declared value_worth       lands [('time_as_money', 'afford')]
+
+overlap of the v1 lexicon (55 tokens) with registers already in the tree, by import:
+  ontology_probe_scope_required    6  capital, efficiency, market, optimization, optimize, value
+  ontology_probe_aliases           0  
+  fold_matrix_register_or_alias    7  budget, cost, efficiency, efficient, optimization, optimize, resources
+  in none of the three             45
+
+known answer (constructed pair, matched word count):
+  v0  frame 4 hits / 30 words   plain 0 hits / 29 words
+  v1  frame 9 hits / 30 words   plain 0 hits / 29 words
+  empty text: words 0, per_1000 None (None, not 0)
+  a phrase split across a line break ('spend\ntime'): 0 hits (the scan is per line)
+
+ontology-probe run-1 constructions (30, hand-built by the operator) under v0:
+  TARGETED  n  9  with a hit  0  hits  0
+  CONTROL   n 12  with a hit  0  hits  0
+  AMBIENT   n  9  with a hit  0  hits  0
+ontology-probe run-1 constructions (30, hand-built by the operator) under v1:
+  TARGETED  n  9  with a hit  0  hits  0
+  CONTROL   n 12  with a hit  1  hits  1
+  AMBIENT   n  9  with a hit  2  hits  2
+    c-012 CONTROL   [('value_worth', 'value')]
+    c-024 AMBIENT   [('efficiency', 'efficiency')]
+    c-025 AMBIENT   [('capital_market', 'markets')]
+
+root documents whose SUBJECT is this vocabulary (mention-heavy by construction; DF_010):
+  v0 SHAPE_SPEC.md      1115 words    0 hits    0.0 /1000  {}
+  v0 PREAMBLE.md        1097 words    0 hits    0.0 /1000  {}
+  v0 METHOD_SPEC.md     1180 words    0 hits    0.0 /1000  {}
+  v1 SHAPE_SPEC.md      1115 words    6 hits    5.4 /1000  {'capital_market': 1, 'cost_price': 5}
+  v1 PREAMBLE.md        1097 words    5 hits    4.6 /1000  {'value_worth': 2, 'cost_price': 3}
+  v1 METHOD_SPEC.md     1180 words    3 hits    2.5 /1000  {'capital_market': 2, 'value_worth': 1}
+
+note: frame_audit.py writes result_<v>.json into the working directory with every hit's
+context line, so a rescan of a directory holding a prior result reads its own output (UNI_010).
