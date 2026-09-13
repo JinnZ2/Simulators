@@ -1,0 +1,95 @@
+GAP TRANSFER ACROSS HOSTS
+
+Track the gap, not the intervention. No host in this schema carries an efficacy
+field; the instrument cannot report how any intervention went, by construction.
+population_overlap_floor=0.5 [CHOICE 9]
+
+GAP  gap-01
+  what is unmeasured  downstream course, outside the outcome window the measurand closes at
+  unit                UNDECLARED
+  provenance          CARRIED from HANDOFF.md, unverified
+  host chain          host_1 (named in the handoff) -> host_2 (named in the handoff) -> host_3 (the later swing)
+
+  host_1 (named in the handoff) -> host_2 (named in the handoff)
+     population  UNDECLARED     inherited=None
+     horizon     UNDECLARED     inherited=None
+     gap in successor  UNDECLARED (measured=None)
+     VERDICT     NOT_EVALUABLE
+     direction   SAME_DIRECTION  PERMISSIVE -> PERMISSIVE
+
+  host_2 (named in the handoff) -> host_3 (the later swing)
+     population  UNDECLARED     inherited=None
+     horizon     UNDECLARED     inherited=None
+     gap in successor  UNDECLARED (measured=None)
+     VERDICT     NOT_EVALUABLE
+     direction   DIRECTION_CHANGED  PERMISSIVE -> RESTRICTIVE
+       direction reversed, and the horizon is not shown to be the same one
+
+  carried by: none
+  same gap running both directions: False
+  R2 per host (time dimension of the radials):
+     host_1 (named in the handoff)      VALUE        INSIDE_SAME_FIELD
+     host_2 (named in the handoff)      VALUE        INSIDE_SAME_FIELD
+     host_3 (the later swing)           UNDECLARED   None
+     R2 is read per host and never averaged across the chain; a gap moving between two boundaries with different ownership is two readings, not one
+
+GAP  gap-02
+  what is unmeasured  what happens after the window closes
+  unit                events per person-year
+  provenance          CONSTRUCTED
+  host chain          carrier_a -> carrier_b -> carrier_c
+
+  carrier_a -> carrier_b
+     population  VALUE          inherited=True
+     horizon     VALUE          inherited=True
+     gap in successor  VALUE (measured=False)
+     VERDICT     CARRIER
+     direction   SAME_DIRECTION  PERMISSIVE -> PERMISSIVE
+
+  carrier_b -> carrier_c
+     population  VALUE          inherited=True
+     horizon     VALUE          inherited=True
+     gap in successor  VALUE (measured=False)
+     VERDICT     CARRIER
+     direction   SAME_GAP_BOTH_DIRECTIONS  PERMISSIVE -> RESTRICTIVE
+       the accounting horizon is unchanged and the direction reversed: one horizon, two directions
+
+  carried by: ['carrier_b', 'carrier_c']
+  same gap running both directions: True
+  R2 per host (time dimension of the radials):
+     carrier_a                          VALUE        INSIDE_SAME_BODY
+     carrier_b                          VALUE        INSIDE_SAME_BODY
+     carrier_c                          VALUE        INSIDE_SAME_FIELD
+     R2 is read per host and never averaged across the chain; a gap moving between two boundaries with different ownership is two readings, not one
+
+GAP  gap-03
+  what is unmeasured  what happens after the window closes
+  unit                events per person-year
+  provenance          CONSTRUCTED
+  host chain          origin -> partial -> closer
+
+  origin -> partial
+     population  VALUE          inherited=True
+     horizon     VALUE          inherited=False
+     gap in successor  VALUE (measured=False)
+     VERDICT     PARTIAL_CARRIER (on population)
+     direction   SAME_DIRECTION  PERMISSIVE -> PERMISSIVE
+
+  partial -> closer
+     population  VALUE          inherited=True
+     horizon     VALUE          inherited=True
+     gap in successor  VALUE (measured=True)
+     VERDICT     GAP_CLOSED_NOT_TRANSFERRED
+     direction   SAME_DIRECTION  PERMISSIVE -> PERMISSIVE
+
+  carried by: none
+  same gap running both directions: False
+  R2 per host (time dimension of the radials):
+     origin                             VALUE        INSIDE_SAME_BODY
+     partial                            VALUE        OUTSIDE_FIELD
+     closer                             VALUE        OUTSIDE_FIELD
+     R2 is read per host and never averaged across the chain; a gap moving between two boundaries with different ownership is two readings, not one
+
+Every fact in these records is CARRIED from HANDOFF.md or CONSTRUCTED here, and
+checked against nothing. Nothing in this file is a claim about any treatment,
+prescriber, patient or policy.

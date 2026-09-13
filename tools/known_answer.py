@@ -1114,6 +1114,109 @@ def seed():
     )
 
 
+    register(
+        "internal-reference-boundary/radials.py::effective_origins",
+        _irb_effective_origins,
+        [
+            case("four uncoupled", ([[1.0, 0.0, 0.0, 0.0],
+                                     [0.0, 1.0, 0.0, 0.0],
+                                     [0.0, 0.0, 1.0, 0.0],
+                                     [0.0, 0.0, 0.0, 1.0]],), 4.0,
+                 "the participation ratio of an identity matrix is n; "
+                 "four origins sharing nothing are four observations",
+                 tol=1e-12),
+            case("four fully coupled", ([[1.0] * 4 for _ in range(4)],),
+                 1.0,
+                 "all-ones has one non-zero eigenvalue, so the ratio is "
+                 "1: one observation measured four times, which is the "
+                 "handoff's own sentence",
+                 tol=1e-12),
+            case("two at rho 0.5", ([[1.0, 0.5], [0.5, 1.0]],), 1.6,
+                 "n^2 / sum C_ij^2 = 4 / (1 + 0.25 + 0.25 + 1) = 1.6, "
+                 "derived from the identity rather than from the code",
+                 tol=1e-12),
+            case("three at rho 0.5", ([[1.0, 0.5, 0.5],
+                                       [0.5, 1.0, 0.5],
+                                       [0.5, 0.5, 1.0]],), 2.0,
+                 "9 / (3 + 6 * 0.25) = 9 / 4.5 = 2.0",
+                 tol=1e-12),
+            case("empty", ([],), None,
+                 "no origins is None, not zero -- a count of zero "
+                 "effective origins would say the coupling collapsed "
+                 "them, and nothing was declared"),
+        ],
+        note=("R6's ORIGIN-BREADTH TAGGING RULE: not a count of fields but "
+              "the EFFECTIVE number of independent origins, collapsing "
+              "toward 1 as coupling rises. That is the participation "
+              "ratio model-ecology/phylogeny.py computes with an "
+              "eigensolver; for a symmetric matrix with unit diagonal it "
+              "is n^2 / sum_ij C_ij^2 exactly, so it needs none. The two "
+              "extremes are where an error in the identity would show."),
+    )
+
+    register(
+        "internal-reference-boundary/radials.py::sanction_ratio_point",
+        _irb_sanction_ratio,
+        [
+            case("anchor, low incidence", (1e-4, 0.25), 4.0e-4,
+                 "1e-4 findings per person-year over a 25% per-year "
+                 "occurrence rate. Both legs on one time base is the "
+                 "whole condition for this being a ratio at all",
+                 tol=1e-16),
+            case("anchor, high incidence", (1e-4, 0.50), 2.0e-4,
+                 "the same numerator over 50%",
+                 tol=1e-16),
+            case("career-rebased", (1e-4, 0.25 / 30.0), 1.2e-2,
+                 "25% over a 30-year career is 0.833%/yr; the same "
+                 "numerator over that is 1.2e-2 -- a factor of 30 from "
+                 "the first case, on one undeclared word",
+                 tol=1e-9),
+            case("empty occurrence rate", (1e-4, 0.0), None,
+                 "None, never a ratio. A zero occurrence rate is a rate "
+                 "nobody recorded, and dividing by it would report the "
+                 "sanction base rate as infinite rather than as absent"),
+        ],
+        note=("R3, which the handoff calls its strongest empirical leg. "
+              "Its own anchor states the two legs on different time "
+              "bases, so the ratio is a band spanning about 60x until "
+              "the incidence window is declared; these cases pin the "
+              "ends of that band."),
+    )
+
+
+def _irb_effective_origins(coupling):
+    """internal-reference-boundary/radials.py::effective_origins,
+    imported. The expected values are derived from the trace identity
+    n^2 / sum_ij C_ij^2 and not from the implementation."""
+    import importlib.util
+    path = os.path.join(ROOT, "internal-reference-boundary", "radials.py")
+    sys.path.insert(0, os.path.dirname(path))
+    try:
+        spec = importlib.util.spec_from_file_location("_irb", path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod.effective_origins(coupling)
+    finally:
+        sys.path.pop(0)
+
+
+def _irb_sanction_ratio(consequence_rate, incidence_per_year):
+    """internal-reference-boundary/radials.py::sanction_ratio_point,
+    imported. The inversion is where an error hides: the expected values
+    are computed from the stated anchors by hand."""
+    import importlib.util
+    path = os.path.join(ROOT, "internal-reference-boundary", "radials.py")
+    sys.path.insert(0, os.path.dirname(path))
+    try:
+        spec = importlib.util.spec_from_file_location("_irb2", path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod.sanction_ratio_point(consequence_rate,
+                                        incidence_per_year)
+    finally:
+        sys.path.pop(0)
+
+
 def _fmr_fraction_cap(n_other, fraction):
     """failure-mode-register/register.py::fraction_cap, imported. Largest n
     with n/(n+k) <= f, where k is the number of non-PROJECTED entries. The

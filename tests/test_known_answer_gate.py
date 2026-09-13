@@ -58,6 +58,8 @@ MANIFEST = (
     "return-path/return_path.py::ratio",
     "trigger-geometry/trigger_geometry.py::accumulation_ratio",
     "failure-mode-register/register.py::fraction_cap",
+    "internal-reference-boundary/radials.py::effective_origins",
+    "internal-reference-boundary/radials.py::sanction_ratio_point",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so

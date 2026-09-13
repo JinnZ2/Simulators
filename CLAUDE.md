@@ -240,6 +240,7 @@ last three; read in order:
 - `terrain-prior/` — an indicator is a record of the process that made the site; bearing and entanglement, never collapsed
 - `trigger-geometry/` — was the RESPONSE validated in THIS geometry; sensor correct, model inverted
 - `failure-mode-register/` — durability and reconstructability only; the delivered register, parsed not retyped
+- `internal-reference-boundary/` — seven radials on a boundary drawn from inside; R3's two legs, two time bases
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -11711,6 +11712,105 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   printed by `python3 test_register.py`; `register.py` and `entries.py` both
   refuse `--selftest` (exit 2). Stdlib only, no pytest, no network, parses under
   3.9, phone-buildable, CC0.
+- `internal-reference-boundary/` — A handoff delivered verbatim and built
+  to it: seven radials on one anchor invariant — **a boundary drawn by the
+  party inside it, measured from inside** — across six instances
+  (disciplinary silo, credential, efficiency metric, diagnostic criterion,
+  corporate liability shell, institutional self-investigation), plus a
+  second instrument that tracks the same thing over time. Quantities, not
+  categories, and the handoff's own assembly order is structural: `read_case`
+  returns **no R5 key at all** and `assemble`'s key order is invariant →
+  cases → exemptions-as-a-separate-layer, asserted over the AST rather than
+  described (`IRB_014`). Three non-value states on every radial —
+  `UNDECLARED` / `NEEDS_CORPUS` / `NOT_EVALUABLE` — all reached, with
+  `NEEDS_CORPUS` naming the input it wants, since the handoff marks R6 and
+  R7 method-complete-and-needing-a-corpus and they refuse to emit a number
+  without one (`IRB_013`). **`IRB_001`, the computed one: R3, which the
+  handoff calls its strongest empirical leg, sits on two time bases.** Its
+  own anchor is `~1 finding per 10,000 researchers/yr` against `25-50%
+  self-reported incidence` — the first per person-year, the second a share
+  over an unstated window — so the ratio is a **band spanning ~60x**
+  (per-year `[2.0e-4, 4.0e-4]`, career-at-30 `[6.0e-3, 1.2e-2]`) and the
+  radial returns the band and no point until `incidence_window` is declared;
+  the span moves with `[CHOICE 3]`, so the career length is a choice and not
+  a fact. **`IRB_003`, what made R6's computable half buildable:** the
+  ORIGIN-BREADTH TAGGING RULE is the participation ratio — the statistic
+  `model-ecology/phylogeny.py` takes from eigenvalues — and for a symmetric
+  coupling matrix with unit diagonal it is **`n² / Σ C_ij²` exactly**, no
+  eigensolver, standard library, identity giving n and all-ones giving 1,
+  monotone in coupling; four nominal origins on the worked case come back at
+  **1.93** once shared funders are declared, and it is registered in
+  `tools/known_answer.py` with the empty case returning `None` rather than a
+  count of zero. **`IRB_005`:** R7 names two quantities and calls **each** of
+  them the measure — confirming-over-contradicting entries (denominator:
+  entries admitted) and METHOD-over-CONCLUSION rejections (denominator:
+  rejections issued) — different questions on different denominators, so
+  both are returned and no arithmetic expression contains both.
+  **`IRB_006`, the design move worth naming:** scoring the field's stated
+  REASON removes the need to adjudicate the rejected work, so a field
+  correctly identifying bad method scores as permeable; nothing here holds a
+  correctness verdict on rejected work, asserted over the AST with the scan
+  null-tested on a plant and every refused token a single word (a two-token
+  entry is unmatchable by a scanner that splits identifiers). **`IRB_009`:**
+  the handoff's R5 rule turns on a **measured** zero, and `selfinv-01` has
+  breadth 4 with a constant benefit column — correlation `NOT_EVALUABLE`,
+  verdict `UNDETERMINED`, because scoring the absence as 0.0 awards
+  `ACTUAL_PRINCIPLE` to a claimant nobody measured. **`IRB_012`:** R4's
+  predicted INVERSE sign is refutable (INVERSE and DIRECT on two constructed
+  worlds, `NOT_EVALUABLE` below three cases or on a constant side) and this
+  corpus returns **DIRECT, rho 0.714** — not an accident of the numbers,
+  since a corporate liability shell is a routing device and shells attach
+  where damage capacity is high, so two of the invariant's own six instances
+  run against the prediction by construction of the instance. **`IRB_010`:**
+  the fold test returns **UNRESOLVED** and the discriminating cell
+  (externally-held metric + self-designated exemption) is left out of
+  `cases.py` deliberately, since authoring it would close the handoff's own
+  OPEN item by writing the answer down; a constructed case flips it to
+  DISTINCT, which shows the test is not `CONSTANT_SILENT` and closes nothing.
+  **The second instrument** tracks the gap, not the intervention, and that is
+  a property of the schema — no host carries an efficacy field, asserted over
+  the AST and **refused at intake**, because an instrument holding an efficacy
+  column is one somebody will sort by (`IRB_015`); a successor that MEASURES
+  the gap returns `GAP_CLOSED_NOT_TRANSFERRED` (the reachable negative) and
+  one nobody checked returns UNDECLARED. **`IRB_016`, the finding on the
+  delivered worked case:** it names two hosts, the gap's shape, a short
+  outcome window and a later swing called *the same defect running the other
+  way*, and states no population, no horizon value and no unit — so at its
+  delivered resolution **both transfers return `NOT_EVALUABLE`** and
+  `SAME_GAP_BOTH_DIRECTIONS` does not fire, that reading requiring the
+  accounting horizon shown to be the same one in both hosts. One field closes
+  it; nothing here fills it in. **`IRB_017`, found by running and not by
+  reading, and it bit twice in one build in opposite directions:** `UNDECLARED`
+  is both a missing key and an explicit string — R2 **refused** the explicit
+  form as a rung outside the ladder while a missing key passed, and
+  `horizon_inherited` compared two `UNDECLARED` strings, got equality, and
+  reported the horizon INHERITED, so a chain of two blanks reached the
+  handoff's own conclusion about its own worked case manufactured out of
+  nothing; repaired with one `_absent()` test at every site, pinned both ways.
+  **`IRB_018`:** the checkers fired on their own text twice — `%` is
+  `ast.BinOp`, so the never-combined check fired on the render's own template
+  line and reported that the module combines the two quantities it prints side
+  by side, and the no-expected-verdict check fired on `cases.py`'s own
+  disclaimer; both repaired (formatting excluded; the check now runs over dict
+  keys and bound names, since an expected verdict would be a field) and
+  recorded rather than quietly fixed. **`IRB_019`:** FEEDBACK DISTANCE — the
+  handoff's logged replacement quantity, *R2 at field scale* — is carried as a
+  declared field beside R2 and merged into nothing, so no eighth radial is
+  invented for a result the handoff logs as a result. **`IRB_020`/`IRB_021`
+  UNVERIFIED:** the two named source files under `/areas/` are not in this
+  tree and nothing is reconstructed from them; every empirical figure (the
+  10,000, the 25-50%, the ~1-2yr anonymous-post latency, the worked case) is
+  CARRIED and checked against nothing, and no field, body, institution,
+  practice, treatment or person is coded, scored or named anywhere in the
+  folder. **`IRB_022`:** no two radials are collinear on this corpus, with the
+  limit stated — R2 takes two distinct values across six cases, so the check is
+  weakest exactly where the invariant's own quantity sits. Ten `[CHOICE n]`
+  markers, each printed by `--choices` and each cited at the site where it takes
+  effect, both asserted; the renders screen clean through
+  `sheet-structure-scan/no_severity` with **no exemption**; expected verdicts
+  live in `test_boundary.py` and in neither case file, asserted over their dict
+  keys. Check count printed by `python3 test_boundary.py`; both modules refuse
+  `--selftest` (exit 2). Stdlib only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
