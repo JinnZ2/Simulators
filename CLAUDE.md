@@ -237,6 +237,7 @@ last three; read in order:
 - `false-tradeoff/` — is the dilemma a property of the system or of the posing; classifies, never resolves
 - `return-path/` — four requirements on a correction channel; the SET failed, never a score
 - `valence-divergence/` — two decoders, one term; logs which read is whose, never assigns a valence
+- `terrain-prior/` — an indicator is a record of the process that made the site; bearing and entanglement, never collapsed
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -11410,6 +11411,79 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   exiting clean on an invocation that runs nothing. Check count printed by
   `python3 test_valence.py` rather than stored. Stdlib only, no pytest, no
   network, parses under 3.9, phone-buildable, CC0.
+- `terrain-prior/` — A work order delivered verbatim and built to it: an
+  observed indicator — a plant, a landform, a piece of flow evidence — is a
+  record of the process that produced the site, so the module returns what must
+  have been true for it to be there as a PRIOR with a stated mechanism,
+  confidence, scope and falsifier. **It does not plan routes and it does not
+  rate terrain.** There is no traversability number anywhere and there cannot
+  be one: the two output variables ride two vocabularies that do not compare
+  (`WITHIN`/`EXCEEDS` against `CLEARS`/`BINDS`), no function reads both tables,
+  and no arithmetic operator touches either — all three asserted. **`TPR_010`,
+  how the morphology constraint is met:** a PRIOR is a statement about the
+  ground and is returned whether or not a platform is supplied; a VERDICT is
+  the rating and exists only inside `by_morphology`, per profile, never merged
+  — with no morphology the return carries priors and no verdict key at all.
+  **`TPR_001`, the order states its own validation target's bearing at two
+  rungs:** case A says *"MUST return LOW bearing"* and the order's derivation
+  text for the same site says *"Bearing is absent"*, which disagree for a
+  low-pressure platform (`VERY_LOW` supports nothing, `LOW` supports a
+  low-pressure foot); `boulder_rung_divergence()` computes which platform the
+  difference reaches (one of two), `[CHOICE 10]` takes the derivation text, and
+  the test asserts the direction both readings agree on separately from the
+  rung. **`TPR_002`:** the order says *"a prior that cannot say what would
+  disprove it is not engineering grade"* and `falsifier_coverage()` returns
+  **1 stated of 6** — the one being the cattail entry, the only one the order
+  writes out in full, while the boulder, *"the validation target for the whole
+  instrument"*, states none; none is invented. **`TPR_006`:** none of the
+  order's eight morphology fields reaches a check — every verdict rests on two
+  fields this build added under `[CHOICE 2]`, declared and never derived,
+  because the order supplies no threshold turning any of its numbers into a
+  class, so the profile as specified cannot produce a verdict without one
+  further declaration and the declaration does all the work (an AST check
+  asserts no function derives anything from the seven carried fields).
+  **`TPR_008`:** the hard constraint *"region is a scope field, never a lookup
+  key"* is obeyed — `resolve_entry` never names `region`, asserted by AST and
+  by re-reading every observation with the region replaced — and the cost is
+  that what is left to enter a `VEGETATION` derivation by is the indicator's
+  NAME, a word list, which is what fails in a region whose species list
+  differs; the `LANDFORM` path is reached through context (flow direction plus
+  one obstruction) and does not have it, which is why the boulder is the
+  order's validation target: **two intake paths with different epistemic
+  standing under one stated rule**. **`TPR_005`:** that prior is
+  context-conditioned — a boulder's upstream side is scoured and its
+  downstream side is fines — and the order's entry schema has one
+  `implies_bearing` field with no place to say so; `[CHOICE 4]` adds
+  `context_branches`, and an entry with branches and no matching branch returns
+  **no prior** rather than falling back, since a fallback returns the
+  scoured-side answer on the deposition side, the exact error the case exists
+  to catch. **`TPR_003`:** the axis the order insists must never be collapsed
+  is the one its own seed set barely fills — entanglement unstated on 4 of 6
+  entries, class `LOW` reached by none, `MODERATE` reached only by the entry
+  that can never produce a prior. **`TPR_004`:** `P3` is specified on bearing
+  only, and case C's entanglement verdicts also differ in direction with
+  nothing firing — reported, not repaired, since a sixth check is a check the
+  order does not have. **`TPR_009`:** `P1` and `P2` are different checks and
+  the seed set proves it, pine being two-layer in the PESSIMISTIC direction
+  (soft duff over firm substrate) and cattails in the OPTIMISTIC one, so
+  two-layer does not imply the dangerous class. **`TPR_007`:** case C is
+  specified on a **bog** and the order ships no bog entry — none is invented,
+  the case runs on cattails, and the substitution is recorded in three places
+  including a test check. **`TPR_011`:** no metric is registered in
+  `tools/known_answer.py` and the reason is stated rather than left as a silent
+  absence — every function returns a declared vocabulary member or a record,
+  and the two counters' known answer is the derivation set itself.
+  **`TPR_012` UNVERIFIED:** no site visited, no indicator observed, no
+  `observer_baseline` belonging to a person, every morphology number
+  illustrative — the order's own Open section says why, and what is built is
+  the shape those priors would be written into plus the counters saying how
+  much of it is empty; the second Open item (game trails as a derivation
+  source) is not specced there and is not built. `WORK_ORDER.md` is landed
+  verbatim and carries em dashes, recorded as the ASCII exception rather than
+  transliterated. Ten `[CHOICE n]` markers, each printed and each cited inline
+  where it takes effect, both asserted. Check count printed by
+  `python3 test_terrain.py`; the module refuses `--selftest` (exit 2). Stdlib
+  only, no pytest, no network, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
