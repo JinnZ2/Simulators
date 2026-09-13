@@ -1,0 +1,90 @@
+CHOICES -- decisions the order leaves open, taken here:
+  [CHOICE 1] `decoder_attribution` gains a fourth value, NEITHER. The order declares three and glosses the field as naming the decoder that produced the valence 'when only one did' -- which fits A and B, leaves SPLIT undefined by its own sentence, and covers neither the both-UNREAD entry nor an entry where the two agree. SPLIT is read here as 'both decoders produced a valence', agreeing or not; NEITHER is the state the three values cannot say.
+  [CHOICE 2] an entry that fails intake returns grade INTAKE_INCOMPLETE with `fired` None -- not [] -- and `missing`/`invalid` lists. [] would say five checks ran and none fired, which is case C.
+  [CHOICE 3] `d5_basis` is emitted beside the fired list: NEUTRAL_AT_ORIGIN or UNREAD_AT_ORIGIN. D5's own condition admits both and the intake section says in as many words that the two must not be merged, so the check is left exactly as the order writes it and the distinction is carried alongside rather than lost.
+  [CHOICE 4] citation and date_or_period may be absent or empty when reading_B.source is STATED or ABSENT, per 'required unless'. They are required and non-empty for ETYMOLOGY, HISTORICAL_USE and OTHER_CULTURE.
+  [CHOICE 5] reading_B.source ABSENT with a valence other than UNREAD is ADMITTED, not refused. The order says ABSENT means the history was not looked up, which implies UNREAD, and refusing the combination would delete the only entry on which D1's ABSENT clause does any work. See `absent_clause_is_live()`.
+  [CHOICE 6] reading_A gains an optional `demonstrated` field (IN_USE / ON_REQUEST / UNRECORDED, default UNRECORDED). The Open section's provisional handling is to log reading_A only when demonstrated in use; recorded here and NOT enforced, because refusing an introspected default empties most real logs and that call belongs to whoever runs the instrument.
+  [CHOICE 7] MIXED is a supplied value only. Nothing in this module ever assigns it, computes it, or derives one valence from two.
+  [CHOICE 8] nothing links two entries that are branches of one term. The order makes branch grouping the reader's job (case B: 'the observation that they share a shape is made by the reader'), and the only handle is the `term` string, which the instrument reads for nothing.
+  [CHOICE 9] the order states `flagged_by` and `proceeded` only for case D. For A, B and C they are chosen here (NEITHER / True), and that choice is what makes D2 and D3 fire on them. The order's MUST lists for A and B name D1 and D5 and are satisfied under every value of the two unstated fields; `unstated_field_effect()` reports per entry which fired codes are invariant and which are contingent on the choice, so a reader is not left reading a contingent D3 as a property of the case.
+
+SCHEMA ADDITIONS beyond the order's stated return: grade, missing, invalid, d5_basis, decoder_attribution: NEITHER, reading_A.demonstrated
+
+term            utterance A            B                     attrib   fired
+--------------------------------------------------------------------------------------------------------------------------------
+hysteria        u-A-01    NEG/DEFAULT  NEUTRAL/ETYMOLOGY     SPLIT    D1, D2, D3, D5
+    D5 basis: NEUTRAL_AT_ORIGIN
+hysteria        u-A-02    NEG/DEFAULT  POS/HISTORICAL_USE    SPLIT    D1, D2, D3
+savage          u-B-01    NEG/DEFAULT  NEUTRAL/ETYMOLOGY     SPLIT    D1, D2, D3, D5
+    D5 basis: NEUTRAL_AT_ORIGIN
+pagan           u-B-02    NEG/DEFAULT  NEUTRAL/ETYMOLOGY     SPLIT    D1, D2, D3, D5
+    D5 basis: NEUTRAL_AT_ORIGIN
+feral           u-B-03    NEG/DEFAULT  NEUTRAL/ETYMOLOGY     SPLIT    D1, D2, D3, D5
+    D5 basis: NEUTRAL_AT_ORIGIN
+superstition    u-B-04    NEG/DEFAULT  NEUTRAL/ETYMOLOGY     SPLIT    D1, D2, D3, D5
+    D5 basis: NEUTRAL_AT_ORIGIN
+economy         u-C-01    NEUTRAL/DEFA NEUTRAL/ETYMOLOGY     SPLIT    (none)
+economy         u-C-02    POS/DEFAULT  NEUTRAL/ETYMOLOGY     SPLIT    D1, D2, D3, D5
+    D5 basis: NEUTRAL_AT_ORIGIN
+resilience      u-D-01    NEG/STATED   POS/HISTORICAL_USE    SPLIT    D1, D2, D3
+primitive       u-E-01    NEG/DEFAULT  UNREAD/ABSENT         A        D4
+sustainable     u-R-01    POS/DEFAULT  NEG/HISTORICAL_USE    SPLIT    D1, D2
+efficient       u-R-02    POS/CONTEXT  NEG/OTHER_CULTURE     SPLIT    D1
+quaint          u-R-03    NEG/DEFAULT  UNREAD/ETYMOLOGY      A        D5
+    D5 basis: UNREAD_AT_ORIGIN
+robust          u-R-04    NEG/DEFAULT  POS/ABSENT            A        D4
+stakeholder     u-R-05    UNREAD/DEFAU UNREAD/STATED         NEITHER  (none)
+husbandry       u-R-06    UNREAD/DEFAU POS/HISTORICAL_USE    B        (none)
+ambition        u-R-07    MIXED/STATED NEUTRAL/ETYMOLOGY     SPLIT    D1
+articulate      u-R-08    POS/DEFAULT  NEUTRAL/ETYMOLOGY     SPLIT    D1, D2, D3, D5
+    D5 basis: NEUTRAL_AT_ORIGIN
+grit            u-X-01    POS/DEFAULT  None/None             --       --
+    missing: ['reading_B']
+    invalid: (none)
+natural         u-X-02    GOOD/DEFAULT NEUTRAL/LOOKED_IT_UP  --       --
+    missing: (none)
+    invalid: ["reading_A.valence: not one of ('POS', 'NEG', 'NEUTRAL', 'MIXED', 'UNREAD')", "reading_B.source: not one of ('ETYMOLOGY', 'HISTORICAL_USE', 'OTHER_CULTURE', 'STATED', 'ABSENT')"]
+civilized       u-X-03    POS/DEFAULT  NEUTRAL/ETYMOLOGY     --       --
+    missing: (none)
+    invalid: ['reading_B.citation: required and non-empty for source ETYMOLOGY', 'reading_B.date_or_period: required and non-empty for source ETYMOLOGY']
+
+fired=None means no check ran (intake); fired=(none) means five ran and none fired.
+No top-level valence is emitted. Both readings come back intact; nothing is averaged.
+
+reachable `fired` sets, brute-forced over 3000 schema combinations:
+  (none)                   1152 combinations
+  D1                       792 combinations
+  D4                       600 combinations
+  D5                       96 combinations
+  D1, D2                   132 combinations
+  D1, D5                   72 combinations
+  D1, D2, D3               132 combinations
+  D1, D2, D5               12 combinations
+  D1, D2, D3, D5           12 combinations
+  fires alone: D1, D4, D5
+  never co-fires with anything: D4
+
+no decoder is ranked: D1 swap-invariant over 125 pairs: True
+  D5 is directional by design; it moves on 16 of them
+
+D1's guard names a valence (UNREAD) and a source (ABSENT).
+  entries where the source clause changes the verdict: 12
+  every one is an ABSENT source carrying a valence: True
+
+D5 basis across the case set: {'NEUTRAL_AT_ORIGIN': 7, 'UNREAD_AT_ORIGIN': 1}
+
+[CHOICE 9] the order fixes flagged_by and proceeded for case D
+only; case D is omitted below. Elsewhere the two were chosen
+here, and these are the codes that choice is carrying:
+  hysteria         invariant: D1, D5             contingent: D2, D3
+  hysteria         invariant: D1                 contingent: D2, D3
+  savage           invariant: D1, D5             contingent: D2, D3
+  pagan            invariant: D1, D5             contingent: D2, D3
+  feral            invariant: D1, D5             contingent: D2, D3
+  superstition     invariant: D1, D5             contingent: D2, D3
+  economy          invariant: D1, D5             contingent: D2, D3
+  sustainable      invariant: D1                 contingent: D2, D3
+  efficient        invariant: D1                 contingent: D2, D3
+  ambition         invariant: D1                 contingent: D2, D3
+  articulate       invariant: D1, D5             contingent: D2, D3

@@ -1,0 +1,16 @@
+1  the parser follows the delivered order
+2  filing
+3  vocabulary conformance
+4  the control-state axis
+5  the steps
+6  F_H -- every count states its unit
+7  the falsifiers
+8  section 6B arithmetic
+9  the redundancy rule, imported not restated
+10 reachability
+11 nothing is authored
+12 the choices
+13 the render
+14 housekeeping
+
+209 checks, 0 failed

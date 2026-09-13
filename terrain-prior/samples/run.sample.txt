@@ -1,0 +1,90 @@
+TERRAIN PRIOR -- indicator to substrate prior
+priors are statements about the ground; verdicts are ratings and need a morphology
+no traversability score is emitted anywhere
+
+obs            entry          bearing     entangle    flags
+----------------------------------------------------------------------------------------------------------------------
+A_boulder      boulder_sor... VERY_LOW    NOT_STATED  P2_SENSOR_INVERT
+    small_contact... bearing=EXCEEDS        entanglement=NOT_EVALUABLE
+    broad_contact... bearing=EXCEEDS        entanglement=NOT_EVALUABLE
+    scope: None [REGION_UNSTATED]
+    mechanism: the obstruction sorted the sediment; the deposition zone behind it is fines dropped from slowed w...
+    falsified_by: NOT_STATED
+    observer_baseline: CONSTRUCTED: no person holds this prior and no period is claimed
+
+B_pine         pine_stand     MODERATE    NOT_STATED  P1_TWO_LAYER
+    small_contact... bearing=EXCEEDS        entanglement=NOT_EVALUABLE
+    scope: None [REGION_UNSTATED]
+    mechanism: litter and duff over root structure; surface soft, substrate typically firm                         
+    falsified_by: NOT_STATED
+    observer_baseline: CONSTRUCTED: no person holds this prior and no period is claimed
+
+C_split        cattails       LOW         HIGH        P1_TWO_LAYER,P2_SENSOR_INVERT,P3_MORPH_SPLIT
+    small_contact... bearing=EXCEEDS        entanglement=BINDS
+    broad_contact... bearing=WITHIN         entanglement=CLEARS
+    scope: temperate wetland margins [IN_SCOPE]
+    mechanism: obligate of saturated or standing shallow water; root mat over unconsolidated saturated sediment    
+    falsified_by: cattails on a drained or filled site; mat over hardpan
+    observer_baseline: CONSTRUCTED: no person holds this prior and no period is claimed
+
+D_no_mechanism sedge_tusso... --          --          P5_NO_MECHANISM  NO PRIOR: UNRATED_NO_MECHANISM
+
+E_out_of_scope cattails       LOW         HIGH        P1_TWO_LAYER,P2_SENSOR_INVERT,P3_MORPH_SPLIT,P4_OUT_OF_SCOPE
+    small_contact... bearing=EXCEEDS        entanglement=BINDS
+    broad_contact... bearing=WITHIN         entanglement=CLEARS
+    scope: temperate wetland margins [OUT_OF_SCOPE]
+    mechanism: obligate of saturated or standing shallow water; root mat over unconsolidated saturated sediment    
+    falsified_by: cattails on a drained or filled site; mat over hardpan
+    observer_baseline: CONSTRUCTED: no person holds this prior and no period is claimed
+
+F_no_branch    boulder_sor... --          --          -  NO PRIOR: NO_CONTEXT_BRANCH
+
+G_upstream     boulder_sor... MODERATE    NOT_STATED  P3_MORPH_SPLIT
+    small_contact... bearing=EXCEEDS        entanglement=NOT_EVALUABLE
+    broad_contact... bearing=WITHIN         entanglement=NOT_EVALUABLE
+    scope: None [REGION_UNSTATED]
+    mechanism: the obstruction sorted the sediment; the deposition zone behind it is fines dropped from slowed w...
+    falsified_by: NOT_STATED
+    observer_baseline: CONSTRUCTED: no person holds this prior and no period is claimed
+
+H_no_entry                    --          --          -  NO PRIOR: NO_ENTRY
+
+I_intake                      --          --          -  NO PRIOR: INTAKE_INCOMPLETE
+
+J_cypress      cypress        LOW         NOT_STATED  -
+    scope: None [REGION_UNSTATED]
+    mechanism: standing or seasonally standing water, buttressed roots, irregular contact geometry                 
+    falsified_by: NOT_STATED
+    observer_baseline: CONSTRUCTED: no person holds this prior and no period is claimed
+
+K_hardwoods    mature_hard... HIGH        NOT_STATED  -
+    small_contact... bearing=WITHIN         entanglement=NOT_EVALUABLE
+    scope: None [REGION_UNSTATED]
+    mechanism: sustained drainage over the tree's lifetime; bearing inferable from the fact the tree is standing   
+    falsified_by: NOT_STATED
+    observer_baseline: CONSTRUCTED: no person holds this prior and no period is claimed
+
+
+CHOICES -- decisions the work order leaves open
+
+[CHOICE 1] bearing and entanglement carry a declared ordinal class beside the order's verbatim sentence; the sentence is never parsed
+[CHOICE 2] platform pressure class is declared on the morphology profile and never derived from contact_pressure or contact_area
+[CHOICE 3] sensor_invert is a declared four-value entry field; UNKNOWN is kept apart from NONE
+[CHOICE 4] context_branches let one entry carry a prior that only holds under a stated context; the order's entry schema has no field for it and its own validation target needs one
+[CHOICE 5] region_state has three values; REGION_UNSTATED is not P4
+[CHOICE 6] resolve_entry matches normalised words against entry indicator and aliases, longest match wins, and does not read region
+[CHOICE 7] by_morphology is added to the return; the order's return block has one bearing_prior and its hard constraints require a verdict per morphology
+[CHOICE 8] P5 returns early with no prior on either axis, not a prior carrying a flag
+[CHOICE 9] class_basis is recorded per axis so a class quoted from the order is distinguishable from one read into a class here
+[CHOICE 10] the boulder deposition zone is entered at VERY_LOW, from the order's derivation text 'Bearing is absent', not at LOW from its validation case; the two rungs disagree for a low-pressure platform and boulder_rung_divergence() computes the disagreement
+
+DERIVATION SET
+  falsifier stated: 1 of 6  (unstated 5)
+  bearing class NOT_STATED:      0 of 6
+  entanglement class NOT_STATED: 4 of 6
+  bearing class quoted from the order:      1
+  entanglement class quoted from the order: 1
+  [CHOICE 10] platforms where VERY_LOW and LOW disagree: broad_contact_low_pressure
+  order-specified morphology fields reaching a check: none, 0 of 8
+  order-specified fields carried, reaching none: platform_id, contact_area, contact_pressure, n_contacts, swing_profile, joint_exposure, ankle_to_foot_ratio, recovery_from_entanglement
+  fields this build added, and every verdict rests on them: pressure_class, entanglement_susceptibility

@@ -233,6 +233,13 @@ last three; read in order:
 - `anchor-measurand-crossing/` — crossing given a target; prompts parsed from the order, scorer's judgement as data, no run
 - `anchor-position/` — same order, second build; band scored both ways, ABSENT kept apart, two arms behind flags, no run
 - `ontology-probe/` — does a term-cut protect, and where it holes; two declared sets, the operator's thirty constructions, one coded run on one family
+- `loop-weight/` — source weight on loop structure, not standing; L, R, C never combined
+- `false-tradeoff/` — is the dilemma a property of the system or of the posing; classifies, never resolves
+- `return-path/` — four requirements on a correction channel; the SET failed, never a score
+- `valence-divergence/` — two decoders, one term; logs which read is whose, never assigns a valence
+- `terrain-prior/` — an indicator is a record of the process that made the site; bearing and entanglement, never collapsed
+- `trigger-geometry/` — was the RESPONSE validated in THIS geometry; sensor correct, model inverted
+- `failure-mode-register/` — durability and reconstructability only; the delivered register, parsed not retyped
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -11104,6 +11111,606 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   of the absent `better/worse`, two states on one stem. Nineteen `OP_*` claims (distinct from the order's OP-1..5); check
   count printed by `selftest_op.py`, and `probe.py` refuses
   `--selftest`. Stdlib only, parses under 3.9, phone-buildable, CC0.
+- `loop-weight/` — A work order delivered verbatim and built to it: weight a
+  source on **feedback-loop structure** instead of standing. Three quantities
+  reported side by side and **never combined** — `L` hops between the action
+  and the observation (topology), `R` retention per hop (channel), `C` whether
+  the reading maps to the thing at all (aim). `R` is the per-hop minimum and is
+  never raised to the power of `L`, because a cumulative figure fuses the
+  channel with the topology and destroys the disagreement between them, which
+  is the reading. **`LW_003`, the order's own falsifier, passes and passes on
+  the right rule:** case C (four hops, calibration established by out-of-frame
+  outcomes) carries more than case A (one hop, never checked), decided by
+  `calibration_established` and not by some other axis — the test asserts the
+  deciding rule, so a short loop cannot satisfy the condition by accident and
+  become the new credential. **`LW_002`:** the ordering is a stated dominance
+  rule returning `FIRST_CARRIES_MORE / SECOND_CARRIES_MORE / INCOMPARABLE` plus
+  the rule that decided, never a number, with `INCOMPARABLE` first-class and
+  firing on four distinct rules — measured-low against unmeasured is
+  `INCOMPARABLE` rather than ranked, the absent-vs-known-negative repair on the
+  axis it costs most. **`LW_009`, the design point the order does not state and
+  the one that makes calibration-first non-arbitrary:** `C` is an **end-to-end
+  measurement of the whole path** (C-2 scores what the source actually
+  delivered, after every hop has taken its cut) while `L` and `R` are a
+  **structural description** of it, so a measurement outranks a prediction of
+  the same quantity — and `L`/`R` remain the whole reading when `C` is
+  unavailable, which is most of the time; ARGUED, not tested, with the standing
+  limit stated (`C` is established on reports already made, so a source whose
+  loop was cut last week still reads CALIBRATED). **`LW_006`:** a calibration
+  input whose provenance is the source, **or whose provenance is unstated**,
+  raises at load rather than landing in a quiet exclusion list. **`LW_007`:**
+  others sharing a hop with each other are one instrument not N (union-find over
+  hop ids, class means then the mean of classes), and the rule is shown to be
+  load-bearing rather than stated — case I's three comparisons mean 0.700 and
+  clear the floor, its two independence classes mean 0.600 and do not, flipping
+  the verdict. **`LW_008`:** the no-authority-terms constraint is checked by
+  walking the **AST** of both code files for identifiers and dict keys, split on
+  `_` and camelCase so `citation_count` fires and `reachable` does not — not a
+  substring scan, because the module and README have to be able to NAME what
+  they refuse and a substring scan fires on the sentence saying so (`UNI_009` /
+  `T1-1` designed around rather than found); null-tested on a plant, so the
+  clean result means something. **`LW_016`, found by running and not by
+  reading:** a path given as a sentence crashed inside the retention loop before
+  the INSUFFICIENT branch was reached — repaired, and the repair went further
+  than the crash, since a list of non-records now refuses rather than returning
+  a hop count nobody described, which is the order's own §8 rule arriving at a
+  shape the case set had no instance of. Four disclosed weaknesses rather than
+  one: **`LW_012`** `R` has no measurement procedure anywhere in the folder and
+  is the weakest joint (`L` is countable, `C` has two derivations with
+  admissibility rules, `R` has neither); **`LW_013`** the path description is
+  unchecked, so a source reporting through five hops and describing one reads
+  SHORT — there is a return for an ABSENT path and none for a WRONG one;
+  **`LW_014`** `supplied_by` is refused when it names the source and is never
+  checked for independence FROM it, the same structure as the independence rule
+  one level up and not implemented; **`LW_011`** all four thresholds are
+  stipulated and carry no basis, with case I's flip sitting exactly on
+  `0.700 >= 0.7`. **`LW_015` UNVERIFIED:** ten hand-built cases, all
+  CONSTRUCTED, no real person, employer or publication named anywhere, and
+  nothing run against a real report — the order's falsifier is a property of the
+  code and is met; whether the three axes separate real sources is untouched in
+  both directions. Expected verdicts live in the test file and not in
+  `cases.py`, so no case can agree with the module by construction; every one of
+  the eight returns is reachable, asserted, since a declared member no path
+  populates cannot be told from one nobody looked for. Check count printed by
+  `python3 test_loop.py` rather than stored. Stdlib only, no pytest, no network,
+  parses under 3.9, phone-buildable, CC0.
+- `false-tradeoff/` — A work order delivered verbatim and built to it: given a
+  stated dilemma, is the tradeoff a property of the system or an artifact of
+  how it was posed? **The instrument does not resolve tradeoffs, it classifies
+  them** — nothing weights, ranks or prefers a side, and four checks (option-set
+  provenance, branch back, boundary cut, horizon and deferral) fire as a **SET
+  with no priority ordering**, so a dilemma failing two checks reports two flags
+  rather than one verdict. **`FT_001`, the order's own critical falsifier,
+  passes:** `GENUINE_TRADEOFF` fires on case G alone — one reservoir, two draws,
+  a physical constraint, one boundary, one horizon — because *"an instrument
+  that dissolves every dilemma is not a diagnostic, it is a preference dressed
+  as a method."* **`FT_003`, no valuation, checked two ways:** an AST walk over
+  identifiers and dict keys for a forbidden token set (`rank`, `score`,
+  `weight`, `prefer`, `better`, `worse`, `utility`, `priority`, `confidence`,
+  `winner`, `merit` and their inflections — a substring scan would fire on
+  the sentence refusing them, `UNI_009`/`T1-1` designed around rather than
+  found), and **swap invariance** — every case re-read with side A and side B
+  exchanged returns the identical flag set, which is the mechanical content of
+  the constraint rather than a promise about it. **Three places the order's
+  machinery does not reach its own words, each reported rather than smoothed:**
+  **`FT_007`** §3 calls an UNSTATED constraint a defect that must be reported,
+  and the six-member enum has no member for it (confirmed by §6's own expected
+  set for case T), so defects are carried in `unstated_constraint_defects`
+  beside the flags and case U — physical constraint plus an unstated one,
+  otherwise clean — returns `{GENUINE_TRADEOFF}` with a defect recorded, which
+  is the state the enum cannot say; **`FT_008`** CHECK 3 reads *"the dependency
+  set of BOTH sides"* and §2 supplies only ledger boundaries, and reading the
+  boundary as the dependency set is fatal rather than awkward — `shared =
+  boundary_a & boundary_b` puts every shared entity inside both by construction,
+  so the exclusive test is false for all of them and **the check can never
+  fire**, demonstrated by `boundary_as_dependency_is_silent()` returning
+  `ever_fired 0 of 4 trials`, with `depends_a`/`depends_b` added as `[CHOICE 3]`
+  and an absent pair `NOT_EVALUABLE`; **`FT_009`** §4 defines
+  `GENUINE_TRADEOFF` as *conserved quantity, same horizon, boundary intact* and
+  **the conserved quantity is tested by no check** — not added as a fifth gate,
+  because a dilemma failing it would have no member to return, so the field is
+  carried and reported and `check_conserved_is_not_gated()` states the reason in
+  the module. **`FT_010`:** CHECK 1's two clauses are not independent —
+  all-STIPULATED entails no-OBSERVED, so the second clause carries information
+  only on a mixed DERIVED set the rule does not fire on, and case P is that set.
+  **`FT_011`, found by running and not by reading, and the failure ran toward
+  the wrong answer:** the script path bound the module as `__main__` while
+  `cases.py` imported it by name, building **two copies of every Enum**, so
+  every `is` comparison in CHECK 1 and CHECK 2 read False, both checks went
+  silent, and four of nine cases read `GENUINE_TRADEOFF` — **including the
+  trolley** — which is exactly the reading §5 warns about, so an instrument
+  built to dissolve dilemmas and one with this defect print the same table;
+  repaired, and pinned by running the script path in a subprocess. **`FT_006`:**
+  an unrunnable check never reports a silent pass — `NOT_EVALUABLE` is a third
+  state kept apart from fired and not-fired, the absent-vs-known-negative repair
+  on every check at once. **`FT_013` (`[CHOICE 4]`):** §2 degrades an unsupplied
+  field to `INSUFFICIENT` and §4 returns a set, which disagree when one check
+  ran and another could not; `INSUFFICIENT` **joins** the set rather than
+  replacing it, since the exclusive reading stays recoverable from
+  `intake_missing` while a discarded measurement does not. **`FT_012`
+  UNVERIFIED:** nine constructed dilemmas, no real decision read, no boundary,
+  dependency set or horizon taken from a real ledger — the order's falsifier is
+  a property of the code and is met; whether the four checks separate posed
+  dilemmas from structural ones is untouched in both directions. Expected flag
+  sets live in the test file and not in `cases.py`, so no case can agree with
+  the module by construction; the module **refuses** `--selftest` (exit 2)
+  rather than exiting 0 on an invocation that runs nothing, and every
+  `[CHOICE n]` is printed where it is taken. Check count printed by
+  `python3 test_tradeoff.py` rather than stored. Stdlib only, no pytest, no
+  network, parses under 3.9, phone-buildable, CC0.
+- `return-path/` — A work order delivered verbatim and built to it: score a
+  correction channel against four requirements and return the **SET** of
+  requirements failed. It does not rank, recommend or resolve, and it does not
+  ask whether a channel is useful — *a channel can be valuable and still not be
+  a return path; marking a gap is not correcting an error*. Four checks
+  (`C1_RECEIPT` receipt not enforced by structure, `C2_SIGNAL` any re-encoding,
+  `C3_LATENCY` signal no sooner than the output is built on, `C4_CONSTRUCTION`
+  not buildable by the party already paying), `grade` GRADED iff `failed` is
+  empty, and nothing sums or counts the set — asserted from the AST.
+  **`RP_002`:** the four are independent, measured two ways — flip one check's
+  own fields and only that check moves (four rows, four isolated), and each
+  function's body is read out of the AST and compared against the
+  `CHECK_FIELDS` table, so the table cannot drift from the functions it
+  describes. **`RP_003`, the largest finding:** the order's Intake says an
+  absent field *returns `INTAKE_INCOMPLETE` naming the field* and its Return
+  block gives a `grade` with exactly two values, neither of them that one, and
+  no field in which to name anything — and the Open section closes the gap by
+  predicting *"this will be the most common return"*, so **the state the return
+  shape cannot express is the state the order expects the instrument to be
+  mostly in**; `[CHOICE 1]` adds the third grade plus `missing`/`invalid`, and
+  sets `failed`/`flags` to `None` rather than `[]` when no check ran, since
+  `[]` says *four ran and none fired*, which is case A. **`RP_004`:** `F_RATIO`
+  is defined as *"always reported as a number"*, so as a flag it fires on every
+  channel and separates nothing (`CONSTANT_FIRES`), and it cannot always be a
+  number — at `build_on_time == 0` the ratio has no denominator while `C3` is
+  still perfectly computable and still fires, so **the check and the number the
+  order pairs with it have different domains**; `ratio` returns `None` and
+  never `0.0` (which would read the worst case as the best) or `inf`,
+  registered in `tools/known_answer.py` with three distinct-valued cases.
+  **Two of the order's own validation cases could not be entered as
+  described, both shipped as paired variants so the reading is visible rather
+  than chosen quietly.** **`RP_006`:** case B must fail `C1` **only** and the
+  channel it names is *an incident reporting system* — somebody writes a
+  report, a report is an encoding, so faithfully entered it fails `C1` and
+  `C2`; the stated requirement holds of the encodings-0 entry alone, while B's
+  own purpose (*speed does not compensate for elective receipt*) survives
+  either entry at a ratio of 0.011. **`RP_007`:** case D says *no channel
+  exists* and must fail `C1`, `C3`, `C4` — but a channel that does not exist
+  has no latency, and a channel with no latency returns `INTAKE_INCOMPLETE`,
+  which is not a verdict; `D_no_channel` is the faithful entry, the other two
+  enter the observation's elapsed standing time and split on the `C2` axis the
+  order leaves open, the one place it names a case and declines to fix a field.
+  **`RP_005`:** `encoder_position` reaches no check — measured over the whole
+  vocabulary, at one encoding all four positions produce **one** distinct
+  `failed` set — which is right by `C2`'s own rationale (*each re-encoding is a
+  place the signal can be revalued*, whoever holds the pen) and costs the
+  order's §3 slow-side/fast-side distinction its only scoring route.
+  **`RP_012`:** so the falsifier case E is carried by `C2`'s arithmetic alone —
+  it fails `C2` with `SLOW_SIDE` and `THIRD_PARTY` too — and its stated risk
+  (*ideal values on the other three carry this to a pass*) is impossible under
+  the iff rule; the design is sound anyway for a reason the order does not
+  state, since the channel that would rename compliance is foreclosed by `C2`
+  at zero encodings — **a physical consequence has no author**. **`RP_008`:**
+  one `encoder_position` field against `signal_encodings` documented as
+  *"2+ = report of a report"*, so where the encoders differ the schema records
+  one; `[CHOICE 7]` names the first, at the stated cost that a slow-side first
+  encoder followed by a fast-side second does not raise the flag written for
+  exactly that situation. **`RP_009`:** `receipt` carries an in-vocabulary
+  unknown (`UNSPECIFIED`, scored as ELECTIVE and flagged) and no other field
+  does, so one epistemic state is scored in one field and blocking in the
+  rest — and the direction saves it, since scoring the unknown fires `C1`, the
+  failing direction, so the asymmetry is stated rather than repaired.
+  **`RP_010`:** the *"no 'fast' or 'slow' as a value anywhere in the schema"*
+  constraint is refuted on its literal reading by the order's own intake block
+  two sections earlier, which ships `SLOW_SIDE` and `FAST_SIDE` as declared
+  values; the narrow reading its own clause states (*both times or no rating*)
+  governs and is implemented, and no delivered field is renamed. **`RP_011`:**
+  the stated return carries neither time and a ratio is dimensionless, so no
+  output can be read back against its own intake — `time_unit` is carried
+  (`[CHOICE 3]`) and the two times are still absent by spec. **`RP_013`:**
+  `scope_note` is structurally unparsed rather than described as unparsed —
+  exactly one comparison in the module names it and it is the presence test
+  (asserted by node type), no branch inside `read()` takes its test from it,
+  and it is carried byte-for-byte; the no-content-scoring constraint is met by
+  construction, the schema having no content field at all. **`RP_014`,
+  a repair rather than a finding:** the banned-field scan existed in
+  `loop-weight/test_loop.py` and that file runs its checks at import, so it
+  could never have been imported as a library and a copy was the default for a
+  mechanical reason — lifted instead to `tools/authority_scan.py`, where the
+  SCANNER is one object and the VOCABULARY is declared per order, both suites
+  importing it and both still green. **`RP_015` UNVERIFIED:** thirteen
+  constructed channels, every number stipulated, no incident system,
+  publication loop, field observation or physical consequence entered from a
+  record; the order's validation set is a property of the code and is met, and
+  whether the four checks separate return paths from recommendation channels in
+  the field is untouched in both directions. Expected verdicts live in the test
+  file and not in `cases.py`; every grade, check, flag and ratio state is
+  reachable by some case, asserted. Check count printed by
+  `python3 test_return.py` rather than stored. Stdlib only, no pytest, no
+  network, parses under 3.9, phone-buildable, CC0.
+- `valence-divergence/` — A work order delivered verbatim and built to it:
+  log a term used by two parties, record the valence each decoder assigned and
+  where each reading came from, and flag divergence. **It does not determine
+  valence** — no dictionary, no valence model, both readings supplied, because
+  a valence dictionary would be one decoder claiming to be the answer. The
+  scored failure is not disagreement, which is visible and gets handled, but
+  **agreement reached over an unflagged mismatch**: both parties proceed,
+  neither marks the term, the divergence never surfaces. Decoder B is the
+  word's own history (etymology, historical use, other cultures' use of the
+  root), and the order is explicit that this is *a WORKFLOW, not an algorithm*
+  — the instrument stores the result of a lookup and its source and must not
+  pretend to perform one. **`VD_007`, the strongest form of the central
+  constraint:** *no lexicon* is stated here not as *the module holds no
+  dictionary* but as **`term` reaches no check** — asserted from the AST and
+  behaviourally (the verdict is unchanged when the word is replaced by the
+  empty string, by `"POSITIVE"`, by a null byte, by 200 characters), and the
+  same for `gloss`, `citation` and `date_or_period`, with no check calling a
+  string method anywhere. **`VD_001`:** `decoder_attribution`, which the order
+  calls *the point of the instrument*, declares three values and needs four —
+  its own gloss (*which decoder produced the valence when only one did*)
+  defines `A` and `B`, **leaves `SPLIT` undefined by its own sentence**, and
+  has no cell for the both-`UNREAD` entry the schema admits directly; `NEITHER`
+  is added under `[CHOICE 1]` rather than forcing such an entry onto a decoder
+  that returned nothing. **`VD_002`:** D5's condition is
+  `reading_B.valence in {NEUTRAL, UNREAD}` and the intake section says in as
+  many words that those two must never be merged (*NEUTRAL means read and
+  found flat. UNREAD means not read*) — the check is **left exactly as the
+  order writes it** and `d5_basis` is carried beside it (`[CHOICE 3]`; 7
+  `NEUTRAL_AT_ORIGIN`, 1 `UNREAD_AT_ORIGIN` across the case set).
+  **`VD_003`:** D1's guard names a valence (`UNREAD`) **and** a source
+  (`ABSENT`), two fields in two vocabularies, and removing the source clause
+  changes the verdict on exactly **12** shapes — every one an `ABSENT` source
+  carrying a valence, the combination the order's prose implies cannot exist;
+  refusing it at intake would make the clause dead, so `[CHOICE 5]` admits it
+  and `VD_010` records that the order's own case E (*an unchecked history is
+  not a divergence*) and that admitted-incoherent entry are one clause seen
+  from two sides. **`VD_004`:** the order fixes `flagged_by` and `proceeded`
+  for case D alone, so under the values chosen here **eight entries fire the
+  scored failure** — `unstated_field_effect()` sweeps both fields over their
+  vocabularies and splits each entry's codes, and the order's own MUST lists
+  for A and B (*D1 and D5*) come back **invariant** while `D2` and `D3` come
+  back contingent, so the requirement is a property of the case and the `D3`
+  beside it is a property of the choice, printed under `[CHOICE 9]` rather
+  than left to read as a finding. **`VD_005`/`VD_006`:** `fired` is a chain on
+  three of five by the checks' own definitions — **9** distinct sets reachable
+  of the 32 a five-item list could express, brute-forced over 3000 schema
+  combinations rather than sampled — and `D4_UNCHECKED` **never co-fires with
+  anything**, structurally (D1 excludes an `ABSENT` source, D5 requires a
+  history source), so the queue entry and every reading are disjoint by
+  construction. **`VD_009`:** case C, the required negative, logs clean
+  (*an instrument that flags every term is a preference dressed as a method*),
+  and `[CHOICE 2]` keeps its `[]` distinguishable from an intake failure's
+  `None` — five checks ran and none fired, against no check ran.
+  **`VD_015`:** D1 is swap-invariant at **0 of 125** pairs across the full
+  valence space, and D5 moves on **16 of 125** because it is a claim about now
+  against origin rather than a ranking of decoders — the asymmetry reported in
+  the render rather than hidden. **`VD_014`:** branches are separate entries
+  with nothing linking them (case A is two, case B is four), and the cost is
+  stated — nothing in the folder can count a term's branches, and the
+  alternative is one field away from a record that can be summarised, which is
+  the failure the instrument exists to prevent. **`VD_013`:** every
+  etymological claim is **carried** from the order and verified against
+  nothing, which is what the design says it should be, so each `citation`
+  field says where the claim came from rather than naming a reference work
+  nobody here opened. **`VD_016`, found by a plant and not by reading:** a
+  two-token entry in a forbidden-identifier vocabulary is **unmatchable by
+  construction**, since `tools/authority_scan.split_identifier` splits
+  `citation_count` into two tokens — it reads as coverage and catches nothing;
+  repaired, and the rule is now asserted for all three vocabularies scanned
+  here (intent, standing, ranking), each with its own planted violation.
+  **`VD_011`:** no metric is registered in `tools/known_answer.py` and the
+  reason is stated rather than left as an absence that looks like an oversight
+  — every function returns a boolean, a declared vocabulary member or a
+  record, and `reachable_fired_sets` is an enumeration whose known answer is
+  the enumeration. **`VD_012` UNVERIFIED:** no exchange logged, no speaker a
+  person, no utterance said; every entry declares itself CONSTRUCTED in its own
+  record, and whether the five checks separate real divergence from real
+  agreement is untouched in both directions — what is established is the
+  order's own falsifier, that case D fires `D1`, `D2` and `D3`. Expected
+  verdicts live in the test file and not in `cases.py`; every check code,
+  attribution value, `d5_basis`, grade and declared vocabulary value is reached
+  by some entry, asserted. The module refuses `--selftest` (exit 2) rather than
+  exiting clean on an invocation that runs nothing. Check count printed by
+  `python3 test_valence.py` rather than stored. Stdlib only, no pytest, no
+  network, parses under 3.9, phone-buildable, CC0.
+- `terrain-prior/` — A work order delivered verbatim and built to it: an
+  observed indicator — a plant, a landform, a piece of flow evidence — is a
+  record of the process that produced the site, so the module returns what must
+  have been true for it to be there as a PRIOR with a stated mechanism,
+  confidence, scope and falsifier. **It does not plan routes and it does not
+  rate terrain.** There is no traversability number anywhere and there cannot
+  be one: the two output variables ride two vocabularies that do not compare
+  (`WITHIN`/`EXCEEDS` against `CLEARS`/`BINDS`), no function reads both tables,
+  and no arithmetic operator touches either — all three asserted. **`TPR_010`,
+  how the morphology constraint is met:** a PRIOR is a statement about the
+  ground and is returned whether or not a platform is supplied; a VERDICT is
+  the rating and exists only inside `by_morphology`, per profile, never merged
+  — with no morphology the return carries priors and no verdict key at all.
+  **`TPR_001`, the order states its own validation target's bearing at two
+  rungs:** case A says *"MUST return LOW bearing"* and the order's derivation
+  text for the same site says *"Bearing is absent"*, which disagree for a
+  low-pressure platform (`VERY_LOW` supports nothing, `LOW` supports a
+  low-pressure foot); `boulder_rung_divergence()` computes which platform the
+  difference reaches (one of two), `[CHOICE 10]` takes the derivation text, and
+  the test asserts the direction both readings agree on separately from the
+  rung. **`TPR_002`:** the order says *"a prior that cannot say what would
+  disprove it is not engineering grade"* and `falsifier_coverage()` returns
+  **1 stated of 6** — the one being the cattail entry, the only one the order
+  writes out in full, while the boulder, *"the validation target for the whole
+  instrument"*, states none; none is invented. **`TPR_006`:** none of the
+  order's eight morphology fields reaches a check — every verdict rests on two
+  fields this build added under `[CHOICE 2]`, declared and never derived,
+  because the order supplies no threshold turning any of its numbers into a
+  class, so the profile as specified cannot produce a verdict without one
+  further declaration and the declaration does all the work (an AST check
+  asserts no function derives anything from the seven carried fields).
+  **`TPR_008`:** the hard constraint *"region is a scope field, never a lookup
+  key"* is obeyed — `resolve_entry` never names `region`, asserted by AST and
+  by re-reading every observation with the region replaced — and the cost is
+  that what is left to enter a `VEGETATION` derivation by is the indicator's
+  NAME, a word list, which is what fails in a region whose species list
+  differs; the `LANDFORM` path is reached through context (flow direction plus
+  one obstruction) and does not have it, which is why the boulder is the
+  order's validation target: **two intake paths with different epistemic
+  standing under one stated rule**. **`TPR_005`:** that prior is
+  context-conditioned — a boulder's upstream side is scoured and its
+  downstream side is fines — and the order's entry schema has one
+  `implies_bearing` field with no place to say so; `[CHOICE 4]` adds
+  `context_branches`, and an entry with branches and no matching branch returns
+  **no prior** rather than falling back, since a fallback returns the
+  scoured-side answer on the deposition side, the exact error the case exists
+  to catch. **`TPR_003`:** the axis the order insists must never be collapsed
+  is the one its own seed set barely fills — entanglement unstated on 4 of 6
+  entries, class `LOW` reached by none, `MODERATE` reached only by the entry
+  that can never produce a prior. **`TPR_004`:** `P3` is specified on bearing
+  only, and case C's entanglement verdicts also differ in direction with
+  nothing firing — reported, not repaired, since a sixth check is a check the
+  order does not have. **`TPR_009`:** `P1` and `P2` are different checks and
+  the seed set proves it, pine being two-layer in the PESSIMISTIC direction
+  (soft duff over firm substrate) and cattails in the OPTIMISTIC one, so
+  two-layer does not imply the dangerous class. **`TPR_007`:** case C is
+  specified on a **bog** and the order ships no bog entry — none is invented,
+  the case runs on cattails, and the substitution is recorded in three places
+  including a test check. **`TPR_011`:** no metric is registered in
+  `tools/known_answer.py` and the reason is stated rather than left as a silent
+  absence — every function returns a declared vocabulary member or a record,
+  and the two counters' known answer is the derivation set itself.
+  **`TPR_012` UNVERIFIED:** no site visited, no indicator observed, no
+  `observer_baseline` belonging to a person, every morphology number
+  illustrative — the order's own Open section says why, and what is built is
+  the shape those priors would be written into plus the counters saying how
+  much of it is empty; the second Open item (game trails as a derivation
+  source) is not specced there and is not built. `WORK_ORDER.md` is landed
+  verbatim and carries em dashes, recorded as the ASCII exception rather than
+  transliterated. Ten `[CHOICE n]` markers, each printed and each cited inline
+  where it takes effect, both asserted. Check count printed by
+  `python3 test_terrain.py`; the module refuses `--selftest` (exit 2). Stdlib
+  only, no pytest, no network, parses under 3.9, phone-buildable, CC0.
+- `trigger-geometry/` — A work order delivered verbatim and built to it:
+  given an automated TRIGGER (sensed quantity, threshold, programmed
+  response) and a GEOMETRY it will operate in, was the RESPONSE validated
+  there. **It does not evaluate the sensor and it does not evaluate the
+  threshold** — `sensor_verdict` is carried verbatim from intake to return
+  and computed by nothing, asserted from the AST. The failure class is
+  **SENSOR CORRECT + MODEL INVERTED**: the reading is accurate, the response
+  was derived where it reduces the hazard and is applied where it raises it,
+  and *redundancy does not touch this class* — two sensors agreeing on the
+  same correct reading feed the same wrong inference. That constraint is
+  **measured rather than promised**: `redundancy_effect()` sweeps the field
+  over seven settings including *two sensors, agreeing* and *three,
+  unanimous* and requires every flag, verdict and return value unchanged; no
+  check body names anything matching `redundan`, asserted from the AST; and
+  the sweep is null-tested by showing it reports movement when a flag really
+  moves (`TG_009`). Six checks T1..T6 as three-state functions
+  (`FIRED`/`SILENT`/`NOT_EVALUABLE`), three verdicts never one (sensor /
+  inference / response, with `BEARS_ON` declaring which check touches which
+  so the assignment can be disagreed with rather than guessed at), and no
+  arithmetic operator touching any verdict — asserted, with `%` and `&`
+  excluded from the scan deliberately, since a check firing on a format
+  string reports its own reader. **`TG_001`, and it decides how the
+  reference case reads:** the worked Driftless serpentine grade looks like a
+  class-absence failure (T6), but the hard constraints say an absent
+  geometry returns ABSENT and validation case A says it MUST return
+  `response_validated_here False` — different returns — so for case A to
+  return what the order requires the envelope must NAME the serpentine
+  class, making the reference failure an **instance-count** failure and not
+  a class-absence one: the validating set knew the geometry and ran it once,
+  which is the order's own prose (*"a single curve damps out; the test
+  passes"*) in its stronger form. **`TG_002`, the largest instance of the
+  stated-rule-with-no-schema-field shape in this family (`MF_017` /
+  `CW_015` / `DL_004` / `GC_012` / `UNI_013` / `SSS_050` / `RT_009`): three
+  of the order's six checks have no field in the order's own intake
+  schema** — T2 (does the response feed the next input cycle), T4 (does the
+  proxy decouple silently), T5 one field of each — measured by
+  `schema_support()` rather than argued; `[CHOICE 1]` makes each a DECLARED
+  three-value field where `UNDECLARED` neither fires nor clears, because
+  inferring *the response does not couple* from nobody having said so is the
+  silence the instrument refuses. **`TG_003`, the consequence:** case D
+  requires a clean return to be reachable (*"if nothing returns clean, the
+  instrument is an objection generator"*), clean requires those three
+  SILENT, and a trigger written to the delivered schema alone declares none
+  of them — so **under the delivered schema the clean branch is
+  `CONSTANT_SILENT` and the order's own falsifier case cannot be built**.
+  **`TG_004`:** the hard constraints name a state (`ABSENT`) the delivered
+  three-value return does not carry and three verdicts the one-field Return
+  block does not carry, both in six lines; the three values stay exactly as
+  delivered and `validated_reason` rides beside them, so ABSENT, an unstated
+  envelope and a check nobody ran are three distinguishable routes to
+  UNRATED calling for three different next actions. **`TG_005`/`TG_006`:**
+  T1 as written reads **neither** of the two times the order calls
+  load-bearing, so `accumulation_ratio` (relaxation over reversal period) is
+  reported and **gates nothing** — making it a precondition would stop T1
+  firing on the reference case, where the Open section says both times will
+  usually be unmeasured — and that Open section's INTAKE_INCOMPLETE
+  instruction and case A's MUST-fire requirement pull opposite ways,
+  resolved by recording absent times as a finding and blocking only on
+  absent REQUIRED fields, with nothing estimated. Registered in
+  `tools/known_answer.py` with four cases (7/2 → 3.5, 1/4 → 0.25, an absent
+  time → None never 0.0 which would read as *damps instantly* on a geometry
+  nobody timed, a zero period → None) — the only function here returning a
+  number rather than a declared vocabulary member. **`TG_007`:** case E's
+  *T3 ONLY* forces T3 to **suppress** T6 rather than merely outrank it, and
+  the suppression is reported in a `suppressed` list rather than hidden.
+  **`TG_008`:** two checks could not reach NOT_EVALUABLE through `read()`
+  because intake refuses the input that would produce it — T6's was closed
+  by adding the honest state that produces it (an envelope **stated** with
+  no class named, distinct from case E where nothing was stated at all), and
+  T3's is recorded as unreachable and exercised on the check function
+  directly rather than deleted. **`TG_010`:** reliability figures **raise**
+  rather than being dropped, at any nesting depth, naming the offending key,
+  since an ignored input is one somebody assumes was used — and the screen
+  is a twelve-token word list, stated at the top of the module, with
+  `RELIABILITY_TOKENS` deliberately absent from the identifier scan because
+  a module has to be able to name what it refuses. **`TG_011`:** *no enum of
+  geometry classes* is met structurally (no constant holds a class name, a
+  class invented inside the test runs end to end and is correctly reported
+  ABSENT rather than refused) and the cost is that T6 is **string
+  equality** — two names for one geometry read as two — which an enum would
+  fix and which the constraint forbids for the reason it states; recorded,
+  not repaired. **`TG_012`:** the unledgered safety function (*if
+  `operator_correction_required` is non-null, removing the human removes a
+  safety function that appears nowhere on the ledger*) is counted per
+  reading **and** per distinct trigger, 5 of 11 against 4, because one
+  trigger read in two geometries is two readings and one function.
+  **`TG_013` UNVERIFIED and it covers the folder:** no control unit read, no
+  `sensor_verdict` measured, no geometry surveyed, every time either `None`
+  or invented so the ratio has a value somewhere, and the reference case
+  transcribed from the order's prose as an operator's account carried as
+  such — what is established is that the order's five validation cases
+  return what it says they must, and whether the six checks separate an
+  inverted response from a sound one on a real trigger is untouched in both
+  directions; the order's second Open item (the people holding
+  terrain-forced geometries have no channel to the people writing trigger
+  logic) is an intake problem and is not solved here, with
+  `constructibility_note` the field that would carry it. Two non-vehicle
+  readings from the order's own scope section are in the corpus — the
+  deposition zone in the lee of an obstruction, where the correct surface
+  reading supports the inverted inference (worked at length in
+  `terrain-prior/`), and the committed dive, prior sound and commit point
+  wrong for want of a rate. Nine `[CHOICE n]` markers, each printed by
+  `--choices` and each cited inline where it takes effect, both asserted;
+  every case declares itself CONSTRUCTED and `cases.py` carries no expected
+  verdict, asserted. Check count printed by `python3 test_trigger.py`; the
+  module refuses `--selftest` (exit 2). Stdlib only, no pytest, no network,
+  parses under 3.9, phone-buildable, CC0.
+- `failure-mode-register/` — A work order delivered verbatim and built to it:
+  a mechanism-level failure-mode register for ML components used as
+  **infrastructure**, scoped by the order's own section 0 to **DURABILITY AND
+  RECONSTRUCTABILITY ONLY** — *can the deployed object still be identified,
+  re-produced, load-rated and inspected at t + N years, by someone who is not
+  the original author and does not hold the tacit stack* — with the three
+  non-goals (model behaviour, harm incidents, a code of ethics) restated in the
+  module docstring rather than assumed. Nothing rates a model, a vendor, a
+  deployment or a person; every verdict is about whether a RECORD suffices to
+  rebuild or identify an object. **The register's content is the order's and
+  nothing is authored here**: `entries.py` parses the twelve section-2 fields,
+  the three vocabularies (read OUT of the order's English alternations,
+  `[CHOICE 1]`, since it declares no machine-readable form), the four `ENTRY
+  DUR-00N` blocks, three control notes, five seeds, six source domains, eight
+  steps, nine falsifiers and both fenced tables at call time, carries no entry
+  value as a literal (asserted), and raises rather than returning an empty
+  schema when the column contract breaks — the `MF_019` discipline, since five
+  stale copies of one gate across three drops is what retyping costs.
+  **`FMR_001`, the one that governs the folder:** Step 0 is the order's own
+  first step and `F_B` says the absence of prior art *"must be established, not
+  assumed"*; egress here is an allowlist and every catalogue host refuses
+  CONNECT, measured not asserted, so `step0_prior_art()` returns BLOCKED with
+  `substituted: False` and **the register is not cleared to ship** regardless of
+  what else computes. **`FMR_002`:** Step 1 was never run — no deployment class
+  is declared anywhere, and `DUR-002` refuses to narrow in as many words (*"In
+  practice: all of them"*), while Step 5 and section 5 both rest on it.
+  **`FMR_003`/`FMR_004`, the headline:** Step 5 calls the YES/PARTIAL/NO
+  distribution *"a headline result on its own"* and it is computable for **one
+  entry of four** — two cells state two reconstruction values and one states
+  none of the three — and the two multi-value cells are **not one axis**
+  (`DUR-001` control-state, `DUR-003` time), so no merged distribution is
+  emitted and section 8's PARTIAL prediction is untested here. **`FMR_005`:**
+  the register is **two registers superimposed** — six of twelve cells across
+  `detection_channel` / `detection_latency` / `reconstruction` carry both the
+  state of current practice and the state under a control the same entry
+  proposes, with no axis in the schema for the difference — so the
+  high-priority set (`FMR_006`) is 3 of 4 under the as-is reading and **0 of 4**
+  under the with-control one, both reported, neither picked. **`FMR_007`:** one
+  of the two priority transports is gated out of its own requirement set by its
+  own honesty — `DUR-002` scores `existing_control = PARTIAL` deliberately
+  (*"this is the null-set discipline in Step 7"*), Step 6 gates on `NONE`, so it
+  produces no requirement under a literal reading while its own text specifies
+  one; reported in `excluded` with `states_requirement_anyway` rather than
+  dropped. **`FMR_008`:** Step 6's second conjunct (*consequence non-trivial*)
+  has no test anywhere in the order — no scale, no threshold, no comparison —
+  so the gate runs on the first alone and returns NOT_EVALUABLE per entry.
+  **`FMR_009`/`FMR_010`:** three of the order's own rules bind together —
+  section 2's PROJECTED cap, Step 4's *flag all as PROJECTED*, and section 8's
+  short register — giving `f·k/(1−f)` = **one entry** at k=4, f=0.2, so Step 4
+  is NOT_RUN, nothing is authored (authoring projected entries from inside is
+  `F_D`'s own failure), and `F_D` passes at 0.0 **because Step 4 was not run**
+  rather than because projection was resisted. `fraction_cap` is registered in
+  `tools/known_answer.py` with four distinct-valued cases, the inversion being
+  where an error hides. **`FMR_011`:** `F_C`'s random 20% at n=4 is **0.8 of an
+  entry**, a rejection rate with no resolution, so a census runs instead and the
+  substitution is printed. **`FMR_012`:** ENTRY 0 is named by section 1, was
+  never delivered, and is **not constructible under the order's own schema** —
+  its mechanism is a property of the register rather than of a deployment, so it
+  has no `load_condition` and its `detection_channel` is the field itself (the
+  `UNI_095` record-level shape); not authored, and `DUR-000` appears in neither
+  module. **`FMR_013`:** `NOTE` is carried by half the register and is not a
+  field — section 2 has a state for an entry MISSING one and none for an entry
+  carrying an EXTRA one (`GM_011`), so `extra` is reported on its own line and
+  never merged into `missing`. **`FMR_014`, the sharpest reading of a delivered
+  cell:** `DUR-004` reads *"MEASURED by analogy in software generally"* — it
+  carries MEASURED's label with neither MEASURED's `(cite)` nor TRANSPORTED's
+  justification or named domain, and *analogy* is the word the TRANSPORT RULE
+  rejects outright, on the one entry whose `existing_control` is NONE; the
+  mechanical vocabulary check **passes** it, because a label is not a
+  requirement — that check's own limit shown rather than described.
+  **`FMR_015`, a finding against this build:** the first `F_A` screen required
+  structural language AND no resemblance marker, and **struck `DUR-001` on the
+  sentence in which `DUR-001` disclaims resemblance** (*"This is not resemblance
+  between industries"*) — the `UNI_009`/`T1-1` shape committed after both were
+  recorded here; repaired so survivors turn on structural language plus a stated
+  justification, with a resemblance mention reported **with its surrounding
+  clause** and never subtracted, and the record kept in `F_A`'s own `limit`
+  field. **`FMR_016`:** section 6B's *"Compressed by roughly fifty"* is the
+  **low end** of its own band — classical 0.04 hops/yr against ML 2.0–5.0 gives
+  **50 to 125** — and the equal-N reading, not the midpoint. **`FMR_017`:**
+  `F_I` is enforced by there being **no single-number accessor** —
+  `volume_vs_correlation()` returns both and no `volume()` or
+  `expected_losses()` exists on the module (asserted from the AST), so taking
+  the volume figure alone is visible in a diff; section 6B-2 says correlation
+  *"needs its own entry"* and none was delivered or invented. **`FMR_018`:** the
+  6B-2 REGISTER RULE **is** `effective-redundancy-audit`'s
+  `Channel.survives_all_shared_nodes` and `n_eff`, so it is **imported rather
+  than restated**, and a copy that does not state what it does not share makes
+  the claim UNRATED — not scored as shared, which would be a measurement, and
+  not scored as independent, which is the claim under test; it fires on nothing
+  in the delivered register, a visible zero shown reachable in both directions.
+  **`FMR_019`:** *"a planned shock with no budget line behaves exactly like an
+  unplanned one"*, so `scheduled` mitigates nothing alone and `shock_split()`
+  keeps three states apart — declared budget, declared absence, and UNDECLARED,
+  since an undeclared budget is not a missing one. **`FMR_020`/`FMR_021`/
+  `FMR_022`:** `F_G` cannot run (no second reader; it asks for five entries
+  where four were delivered) and its computable proxy is **labelled a proxy**,
+  flagging exactly the two non-conforming fields; `F_E` is a claim about the
+  world and the honest answer is stated (*nothing currently would*) with
+  `claims_publishing_sufficient: False` asserted; `F_F` finds three entries
+  naming WHAT, one naming a holder, and **none naming a where**. **`FMR_023`:**
+  the correlated-failure marker RESOLVES to two folders and the
+  silent-substitution one is **AMBIGUOUS** across three with **no pick made**.
+  **`FMR_024`:** two delivery facts kept as delivered — section 3B-W's header
+  says *"the two priority transports"* and delivers four entries, one of which
+  is not a transport, and `F_I` is listed before `F_H`. **`FMR_025` UNVERIFIED
+  and it covers the folder:** no deployed component inspected, no retained
+  record examined, no reconstruction attempted; every computation is a property
+  of the four delivered entries, of the order's own rules, or of this build's
+  arithmetic. `F_H` is enforced rather than promised — every function returning
+  a count returns it in a dict carrying a `unit`, checked over all sixteen.
+  Eight `[CHOICE n]` markers, each printed by `--choices` and each cited inline
+  where it takes effect, both asserted; the render screens through
+  `sheet-structure-scan/no_severity` under one declared exemption for two
+  sentences quoted verbatim from the order, measured in three arms. Check count
+  printed by `python3 test_register.py`; `register.py` and `entries.py` both
+  refuse `--selftest` (exit 2). Stdlib only, no pytest, no network, parses under
+  3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
@@ -11157,6 +11764,18 @@ ship a `requirements.txt`. Each folder ships `samples/`.
     its name and a repo-wide scan would be `nonidentity-census` T1-1's
     word-list failure one level up. The manifest is the weak point and the
     test says so; enforcement is at test time, not at the callsite.
+  - `authority_scan.py` — one identifier-level scan for a declared forbidden
+    vocabulary. Several orders here ban a class of field NAME rather than a
+    value (`loop-weight/` the standing family, `return-path/` the same plus
+    audience size), so the VOCABULARY is passed in by the caller and the
+    SCANNER is one object. An AST walk over identifiers, attributes, args,
+    function names and dict-literal keys — not a substring scan, because a
+    module and its README have to be able to NAME what they refuse and a
+    substring scan fires on the sentence saying so. Ships a `PLANT` so every
+    caller can show the scanner fires before quoting its silence. Lifted out
+    of `loop-weight/test_loop.py`, which runs its checks at import and so
+    could never have been imported as a library — the mechanical reason a
+    copy was the default, recorded at `return-path/` `RP_014`.
   - `substrate_substitution_toolkit.py` — richer programmatic
     surface: seven categories from harsh (`pure_consumer`, the null
     hypothesis) to gentle (`mutualistic_scale`), each with multiple

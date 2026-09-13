@@ -1,0 +1,16 @@
+PARSED FROM WORK_ORDER.md
+  schema fields     12  (id, mechanism, load_condition, onset, detection_channel, detection_latency, attribution, consequence, evidence_class, existing_control, reconstruction, validity_range)
+  vocabularies      evidence_class = MEASURED|TRANSPORTED|PROJECTED; onset = immediate|drift|dormant-until-triggered; reconstruction = YES|PARTIAL|NO
+  entries           4  (DUR-001, DUR-002, DUR-003, DUR-004)
+  control notes     DUR-001-N1, DUR-001-N2, DUR-002-N1
+  measured seeds    5
+  source domains    6
+  steps             8
+  falsifiers        F_A, F_B, F_C, F_D, F_E, F_F, F_G, F_I, F_H  (delivered order)
+  shock classes     V14a, V14b, V14c
+  non-goals         3
+
+CHOICES
+  [CHOICE 1] vocabulary tokens read out of the order's English alternations by first-all-caps-else-single-word; the order declares no machine readable form
+  [CHOICE 2] an entry block's header line (ENTRY DUR-00N) is treated as a header and not as a field, since it does not meet the column-19 contract
+  [CHOICE 3] section 3A seeds are parsed as bullets and carry no id; the order gives them none and inventing one would make them look filed
