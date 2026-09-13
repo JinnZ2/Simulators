@@ -197,6 +197,47 @@ stated rather than left as a silent absence: every other return is a declared
 vocabulary member, a record, or a product whose known answer is its own
 definition.
 
+## The value-and-source gate
+
+`FMR_040..FMR_043`. The three defects at `FMR_036` are one defect: each
+produced a value whose stated source does not support it, and none was found
+by reading. The repair is a shared primitive, `tools/sourced.py`, not three
+patches.
+
+```
+Sourced(value, source_text, locator, span=... | derivation=...)
+
+    gate(x) -> x                    three fields, mutually consistent
+            -> Unrated(reason)      otherwise: not zero, not clean,
+                                    not a default
+```
+
+Containment of the value in the source is the obvious rule and it is **not
+sufficient**:
+
+```
+V3   cell "-> --   A-01"   buggy value "+"   not contained   -> caught
+V6   cell "-> --   A-02"   buggy value "-"   IS contained    -> missed
+                                             (the arrow's hyphen)
+```
+
+So the primitive is a **span**, verified by slicing, and the buggy path has
+none — it never located the value in the cell it names as its source. A
+computed value declares a `derivation` instead; exactly one of the two.
+
+Replayed in `test_register_v2.py` section 17: the amended score slices its
+cell, `(see DUR-006)` and `exceeds ~1` refuse with
+`no_unit_adjacent_to_numeral`, and `tools/known_answer.py` asserts
+`EXPECTED_METRICS` against the registry at end of run — which is what catches
+a `register(...)` shadowed by a `finally`, since a count taken from the calls
+cannot see a call that did not execute.
+
+**A fourth defect, found by the gate.** One row of fourteen in the
+loss-variable map runs its ML cell past column 57, so the fixed-width slice
+cuts a token — ML truncated at `data st`, amendment column reading
+`ate, hw)`. No score moves; the truncated cell begins with the same sign run.
+What is false is the LOCATOR, which is the class an output check cannot see.
+
 ## What this is not evidence about
 
 `FMR_025`. No deployed component inspected, no retained record examined, no

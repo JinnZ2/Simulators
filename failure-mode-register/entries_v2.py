@@ -21,12 +21,17 @@ CC0. Stdlib only. Parses under 3.9.
 """
 
 import os
+import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 
 import entries as E                                       # noqa: E402
+sys.path.insert(0, os.path.join(HERE, os.pardir, "tools"))
+import sourced as S                                       # noqa: E402
+
+ORDER_NAME = "WORK_ORDER_V2.md"
 
 ORDER_PATH_V2 = os.path.join(HERE, "WORK_ORDER_V2.md")
 
@@ -83,26 +88,44 @@ def v_definitions():
     return out
 
 
-def v_scores():
-    """[(id, classical, ml, amendment)] from the second fence of 1B.
+VMAP_COLS = {"id": (0, 8), "classical": (8, 31), "ml": (31, 57),
+             "amended": (57, None)}
 
-    Columns are fixed-width in the delivered text. The amendment column
-    carries `-> X  A-nn` where an amendment applies and is empty
-    otherwise; the order states that the AMENDED score is authoritative
-    and the original is retained, so both come back."""
+
+def _vmap_lines():
+    """[(line_no, line_text)] for the score rows, line numbers into the
+    delivered document so a locator can be checked against it."""
     lines = _section("## 1B. LOSS-VARIABLE MAP", stop_prefix=("### ", "## "))
     block = E._fenced_blocks(lines)[1]
-    rows = []
+    doc = _lines()
+    out, cursor = [], 0
     for line in block:
         if not line.strip() or line.lstrip().startswith("CLASSICAL"):
             continue
         vid = line.split()[0]
         if not (vid.startswith("V") and vid[1:].isdigit()):
             continue
-        classical = line[8:31].strip()
-        ml = line[31:57].strip()
-        amend = line[57:].strip()
-        rows.append((vid, classical, ml, amend))
+        n = doc.index(line, cursor)
+        cursor = n + 1
+        out.append((n + 1, line))
+    return out
+
+
+def v_scores():
+    """[(id, classical, ml, amendment)] from the second fence of 1B.
+
+    Columns are fixed-width in the delivered text. The amendment column
+    carries `-> X  A-nn` where an amendment applies and is empty
+    otherwise; the order states that the AMENDED score is authoritative
+    and the original is retained, so both come back.
+
+    This is the RAW read. It carries no provenance and nothing scores off
+    it -- see v_scores_sourced and amended_scores."""
+    rows = []
+    for _n, line in _vmap_lines():
+        rows.append((line.split()[0],
+                     line[8:31].strip(), line[31:57].strip(),
+                     line[57:].strip()))
     return rows
 
 
@@ -118,40 +141,149 @@ def _sign(cell):
     return run
 
 
+def _sign_span(cell):
+    """(i, j) covering the leading +/- run WITHIN `cell`, or None.
+
+    A span, not a value. `_sign` answers what the score is; this answers
+    where it is, and the gate needs both."""
+    i = 0
+    while i < len(cell) and cell[i].isspace():
+        i += 1
+    j = i
+    while j < len(cell) and cell[j] in "+-":
+        j += 1
+    return (i, j) if j > i else None
+
+
+_AID = re.compile(r"A-\d+")
+
+
+def _amend_parse(cell):
+    """Spans into the amendment cell: (score_span, id_span, kind).
+
+    Kinds: SCORE (a +/- run), SPLIT, ID_ONLY (an amendment that carries no
+    score), EMPTY, UNPARSED. UNPARSED is kept apart from EMPTY because a
+    cell holding text that is not an amendment is a different finding from
+    a cell holding nothing -- and on this document one row has exactly
+    that, its left neighbour spilling past the column boundary."""
+    k = 0
+    if cell.startswith("->"):
+        k = 2
+    while k < len(cell) and cell[k].isspace():
+        k += 1
+    rest = cell[k:]
+    if not rest.strip():
+        return None, None, "EMPTY"
+    m = _AID.search(cell)
+    id_span = (m.start(), m.end()) if m else None
+    tok = rest.split()[0]
+    ti = k + rest.find(tok)
+    tj = ti + len(tok)
+    if tok.startswith("A-"):
+        return None, id_span, "ID_ONLY"
+    if tok == "split":
+        return (ti, tj), id_span, "SPLIT"
+    if _sign(tok) == tok:
+        return (ti, tj), id_span, "SCORE"
+    return None, id_span, "UNPARSED"
+
+
+def _upper(s):
+    return s.strip().upper()
+
+
 def amended_scores():
-    """{id: {original, amended, amendment, note}} with the order's rule
-    applied: the amended score is authoritative, the original retained."""
+    """{id: {...}} with the order's rule applied: the amended score is
+    authoritative, the original retained.
+
+    Every score here is a Sourced -- value, literal source text, locator --
+    and passes tools/sourced.gate before it is read. The defect this
+    replaces built the amended score with `lstrip("-> ")`, which takes a
+    CHARACTER SET and so stripped the value's own leading `--` along with
+    the arrow, returning the UNAMENDED score on the map whose own rule is
+    that the amended one is authoritative.
+
+    Containment of the value in the cell would not have caught it: on V6
+    the buggy value `-` does occur in `-> --   A-02`, through the hyphen
+    of the arrow. What catches both rows is that the buggy path never
+    LOCATED the value in the cell it names as its source, so it has no
+    span to offer and the gate refuses. See tools/sourced.py."""
     out = {}
-    for vid, classical, ml, amend in v_scores():
-        orig = _sign(ml)
-        amended, aid, note = orig, None, None
-        if amend:
-            # NOT lstrip("-> "). lstrip takes a CHARACTER SET, so on a
-            # cell reading "-> --   A-01" it strips the value's own
-            # leading "--" as well and the amended score comes back as
-            # the unamended one -- on the map whose own rule is that the
-            # amended score is authoritative. Found by printing the
-            # table, not by reading the line.
-            body = amend[2:].strip() if amend.startswith("->") \
-                else amend.strip()
-            parts = body.split()
-            if parts and parts[0].startswith("A-"):
-                aid = parts[0]
-                note = body
-            elif parts:
-                cand = _sign(parts[0])
-                if cand:
-                    amended = cand
-                for p in parts:
-                    if p.startswith("A-"):
-                        aid = p
-                note = body
-            if body.startswith("split"):
-                amended = "SPLIT"
-                note = body
-        out[vid] = {"classical": _sign(classical), "original": orig,
-                    "amended": amended, "amendment": aid, "note": note}
+    for n, line in _vmap_lines():
+        vid = line.split()[0]
+        cls_i, cls_j = VMAP_COLS["classical"]
+        ml_i, ml_j = VMAP_COLS["ml"]
+        am_i, am_j = VMAP_COLS["amended"]
+        cls_cell, ml_cell, am_cell = (line[cls_i:cls_j], line[ml_i:ml_j],
+                                      line[am_i:])
+
+        ml_loc = S.Locator(ORDER_NAME, n, ml_i, ml_j, vid + " ml")
+        am_loc = S.Locator(ORDER_NAME, n, am_i, am_j, vid + " amendment")
+        b_ok, b_cuts = ml_loc.boundary_clean(line)
+
+        def _score(cell, loc, span, render=None):
+            if span is None:
+                return S.Unrated("no_provenance", where=loc.describe())
+            return S.gate(S.slice_sourced(cell, span[0], span[1], loc,
+                                          render=render))
+
+        classical = _score(cls_cell,
+                           S.Locator(ORDER_NAME, n, cls_i, cls_j,
+                                     vid + " classical"),
+                           _sign_span(cls_cell))
+        original = _score(ml_cell, ml_loc, _sign_span(ml_cell))
+
+        sc_span, id_span, kind = _amend_parse(am_cell)
+        if kind == "SCORE":
+            amended = _score(am_cell, am_loc, sc_span)
+        elif kind == "SPLIT":
+            amended = _score(am_cell, am_loc, sc_span, render=_upper)
+        else:
+            # No amendment score in the cell, so the authoritative value is
+            # the original -- and it keeps the original's own provenance
+            # rather than being re-attributed to a cell it did not come
+            # from. That re-attribution is the defect.
+            amended = original
+        aid = (S.gate(S.slice_sourced(am_cell, id_span[0], id_span[1],
+                                      am_loc)) if id_span else None)
+
+        refusal = S.gate_all(amended=amended, original=original)
+        out[vid] = {
+            "classical": S.value_of(classical),
+            "original": S.value_of(original),
+            "amended": S.value_of(amended),
+            "amendment": S.value_of(aid, default=None) if aid else None,
+            "note": am_cell.strip() or None,
+            "amendment_kind": kind,
+            "amended_span": (amended.span
+                             if isinstance(amended, S.Sourced) else None),
+            "amended_from": (amended.locator.describe()
+                             if isinstance(amended, S.Sourced) else None),
+            "unrated": refusal.reason if refusal is not None else None,
+            "ml_cell_boundary": "CLEAN" if b_ok else "CUTS:" + ",".join(b_cuts),
+            "line_no": n,
+        }
     return out
+
+
+def vmap_boundary_report():
+    """Which score rows have a fixed-width column boundary that cuts a
+    token in half. A locator is a CLAIM about where a cell ends; a
+    boundary falling inside a token makes the claim false, truncating the
+    cell to its left and prefixing the cell to its right with somebody
+    else's text. Found by the gate, not by reading the table."""
+    rows = []
+    for n, line in _vmap_lines():
+        vid = line.split()[0]
+        for name, (i, j) in sorted(VMAP_COLS.items()):
+            loc = S.Locator(ORDER_NAME, n, i, j, vid + " " + name)
+            ok, cuts = loc.boundary_clean(line)
+            if not ok:
+                rows.append({"id": vid, "line_no": n, "column": name,
+                             "cuts": list(cuts),
+                             "cell": loc.cell(line),
+                             "spill": line[j:].strip() if j else ""})
+    return {"n_rows": len(_vmap_lines()), "cut": rows, "n_cut": len(rows)}
 
 
 def f3_claim():
@@ -396,6 +528,23 @@ def main(argv):
     print("  amendments            %s"
           % ", ".join(a["id"] for a in amendments()))
     print("  still open            %d" % len(still_open()))
+    b = vmap_boundary_report()
+    print("  V-map column boundaries cutting a token: %d of %d rows"
+          % (len(set(r["id"] for r in b["cut"])), b["n_rows"]))
+    for r in b["cut"]:
+        print("    %s line %d %-9s cuts %-6s cell=%r"
+              % (r["id"], r["line_no"], r["column"],
+                 ",".join(r["cuts"]), r["cell"]))
+    if b["cut"]:
+        print("    a locator is a claim about where a cell ends; a "
+              "boundary inside a")
+        print("    token makes the claim false. No score moves here -- "
+              "what is false is")
+        print("    the locator and not the value.")
+    a = amended_scores()
+    ungated = [v for v in a if a[v]["unrated"]]
+    print("  V-map scores failing the value-and-source gate: %d"
+          % len(ungated))
     return 0
 
 

@@ -31,5 +31,7 @@
 
 -- 16  the v1 readings that v2 does not move
 
+-- 17  the value-and-source gate, and the three defects replayed
+
 ==============================================================
-checks: 118   failed: 0
+checks: 142   failed: 0

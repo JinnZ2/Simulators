@@ -89,12 +89,55 @@ ok(m["rows"]["V3"]["amendment"] == "A-01"
    and m["rows"]["V6"]["amendment"] == "A-02"
    and m["rows"]["V14"]["amendment"] == "A-03",
    "each moved row names the amendment that moved it")
-ok("lstrip" not in E2_SRC.split("def amended_scores")[1].split("def ")[0]
-   or "NOT lstrip" in E2_SRC,
-   "the amended score is read with a prefix strip, not lstrip on a "
-   "character set -- lstrip(\"-> \") deletes the value's own leading "
-   "\"--\" and returns the UNamended score on the map whose rule is that "
-   "the amended one is authoritative")
+def _lstrip_with_arg(fn_name, src):
+    """Calls to .lstrip(x) inside one function, read from the AST.
+
+    A substring scan for "lstrip" fires on the docstring in which
+    amended_scores NAMES the construct it refuses -- the lexical-proxy
+    shape (UNI_009, T1-1) inside the checker written against it. A
+    comment and a docstring are not calls, so the AST does not see
+    them."""
+    import ast
+    tree = ast.parse(src)
+    hits = []
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.FunctionDef) or node.name != fn_name:
+            continue
+        for sub in ast.walk(node):
+            if isinstance(sub, ast.Call) \
+                    and isinstance(sub.func, ast.Attribute) \
+                    and sub.func.attr in ("lstrip", "rstrip", "strip") \
+                    and sub.args:
+                hits.append(sub.func.attr)
+    return hits
+
+
+ok(_lstrip_with_arg("amended_scores", E2_SRC) == [],
+   "the amended score is not read with strip on a character set -- "
+   "lstrip(\"-> \") deletes the value's own leading \"--\" and returns the "
+   "UNamended score on the map whose rule is that the amended one is "
+   "authoritative. Read from the AST, because a substring scan fires on "
+   "the docstring that names the refused construct",
+   str(_lstrip_with_arg("amended_scores", E2_SRC)))
+ok(_lstrip_with_arg("amended_scores", E2_SRC.replace(
+       "        out[vid] = {",
+       "        _ = am_cell.lstrip(\"-> \")\n        out[vid] = {")) != [],
+   "and the AST check is not CONSTANT_SILENT: a planted lstrip fires it")
+ok(all(r["unrated"] is None for r in m["rows"].values()),
+   "every score in the map passes the value-and-source gate: value, "
+   "literal source text, locator, and a span that slices back to the "
+   "value")
+ok(m["rows"]["V3"]["amended_span"] == (3, 5)
+   and m["rows"]["V6"]["amended_span"] == (3, 5)
+   and m["rows"]["V14"]["amended_span"] == (3, 8),
+   "each amended score names WHERE in its cell it was found",
+   str([m["rows"][v]["amended_span"] for v in ("V3", "V6", "V14")]))
+ok(m["rows"]["V5"]["amended_from"] == m["rows"]["V5"]["amended_from"]
+   and "ml" in m["rows"]["V5"]["amended_from"],
+   "a row with no amendment keeps the ML cell as the source of its "
+   "authoritative score, rather than being re-attributed to a cell it "
+   "did not come from -- that re-attribution is the defect",
+   str(m["rows"]["V5"]["amended_from"]))
 ok(m["rows"]["V9"]["amended"] == "++",
    "V9 keeps the strongest protective score in the table")
 
@@ -454,6 +497,111 @@ ok(E1._section("## 6B. TIMEFRAME")
    == E2._section("## 6B. TIMEFRAME"),
    "section 6B parses byte-identically in both, so the reading carries "
    "without being re-derived")
+
+
+# ------------------------------------------- 17. the value-and-source gate
+
+section("17  the value-and-source gate, and the three defects replayed")
+
+sys.path.insert(0, os.path.join(HERE, os.pardir, "tools"))
+import sourced as S                                          # noqa: E402
+
+DOC = "WORK_ORDER_V2.md"
+
+# DEFECT 1, both rows. Under lstrip("-> ") the amended score came back as
+# the UNAMENDED one with the amendment cell named as its source.
+v3_cell, v6_cell = "-> --   A-01", "-> --   A-02"
+ok("-> --   A-01".lstrip("-> ") == "A-01",
+   "the defect reproduced: lstrip on a character set eats the value's own "
+   "leading '--' as well as the arrow",
+   repr("-> --   A-01".lstrip("-> ")))
+ok(S.find_span(v3_cell, "+") is None,
+   "V3: containment alone WOULD have caught the buggy value -- '+' does "
+   "not occur in the amendment cell")
+ok(S.find_span(v6_cell, "-") is not None,
+   "V6: containment alone would NOT have caught it -- the buggy value '-' "
+   "does occur in the cell, through the hyphen of the arrow. This is why "
+   "the primitive is a span and not containment")
+loc6 = S.Locator(DOC, 0, 57, None, "V6 amendment")
+ok(S.gate(S.Sourced("-", v6_cell, loc6)) == S.UNRATED,
+   "and the gate refuses it anyway: the buggy path never LOCATED the "
+   "value in the cell it names as its source, so it has no span to offer")
+ok(S.gate(S.Sourced("-", v6_cell, loc6)).reason == "no_provenance",
+   "the refusal names what is missing")
+ok(S.gate(S.slice_sourced(v6_cell, 3, 5, loc6)).value == "--",
+   "the honest parse slices the cell and cannot disagree with its own span")
+
+# DEFECT 2. Both false positives of the bare-numeral test refuse.
+lc = S.Locator(DOC, 0, None, None, "condition")
+ok(R2._has_duration("a continuing custodian (see DUR-006)", lc)
+   == S.UNRATED,
+   "a cross-reference is not a stated lifetime")
+ok(R2._has_duration("hop count over the retention horizon exceeds ~1", lc)
+   == S.UNRATED,
+   "~1 with no unit is not a retention horizon: it fails the gate rather "
+   "than parsing")
+d = R2._has_duration("expected lifetime 18 months", lc)
+ok(isinstance(d, S.Sourced) and d.value == "18 months",
+   "a real duration comes back SOURCED, carrying the span that covers "
+   "the quantity rather than the digit",
+   str(getattr(d, "value", d)))
+ok(R2.f_k_bound()["state"] == "NOT_APPLICABLE_AS_DELIVERED"
+   and R2.f_k_bound()["n_with_stated_lifetime"] == 0,
+   "F_K's reading is unchanged under the gate: 0 of 7 conditions carry an "
+   "expected lifetime")
+ok(len(R2.f_k_bound()["refused"]) == 7,
+   "and every refusal now names its reason rather than being a False "
+   "that reads like a measurement",
+   str(len(R2.f_k_bound()["refused"])))
+
+# DEFECT 3. Expected against registered.
+import known_answer as KA                                    # noqa: E402
+KA._REGISTRY.clear()
+KA._RESULTS.clear()
+KA.seed()
+comp = KA.completeness()
+ok(comp["state"] == "COMPLETE",
+   "the known-answer registry is complete: expected against registered, "
+   "which is what catches a register(...) shadowed by a finally",
+   "%s missing=%s" % (comp["state"], comp["missing"]))
+ok("failure-mode-register/register_v2.py::joint_survival"
+   in KA.EXPECTED_METRICS,
+   "including this folder's metric, the one that landed as dead code")
+KA._REGISTRY.pop("failure-mode-register/register_v2.py::joint_survival")
+ok(KA.completeness()["state"] == "SHORT"
+   and "failure-mode-register/register_v2.py::joint_survival"
+   in KA.completeness()["missing"],
+   "and the check is not CONSTANT_SILENT: removing that registration "
+   "reads SHORT and names it")
+KA._REGISTRY.clear()
+KA._RESULTS.clear()
+KA.seed()
+
+# THE FOURTH, found BY the gate. The V2 row runs its ML cell past the
+# column boundary, so the amendment column reads text belonging to its
+# left neighbour.
+b = E2.vmap_boundary_report()
+ok(b["n_cut"] == 2 and all(r["id"] == "V2" for r in b["cut"]),
+   "exactly one row of fourteen has a column boundary that cuts a token, "
+   "and it cuts on both sides of the same boundary",
+   str([(r["id"], r["column"], r["cuts"]) for r in b["cut"]]))
+ok(any(r["column"] == "ml" and r["spill"] == "ate, hw)" for r in b["cut"]),
+   "V2's ML cell is truncated at 'data st' and the amendment column reads "
+   "'ate, hw)' -- text belonging to the cell on its left")
+ok(m["rows"]["V2"]["amendment_kind"] == "UNPARSED"
+   and m["rows"]["V2"]["amendment"] is None,
+   "the spill is filed UNPARSED rather than EMPTY: a cell holding text "
+   "that is not an amendment is a different finding from a cell holding "
+   "nothing")
+ok(m["rows"]["V2"]["original"] == "--" and m["rows"]["V2"]["amended"] == "--",
+   "and no published score moves -- the truncated cell begins with the "
+   "same sign run the full cell does, so what is false is the LOCATOR "
+   "and not the value")
+ok(m["rows"]["V2"]["ml_cell_boundary"] == "CUTS:end",
+   "the row carries the finding rather than the reader having to notice")
+ok(sum(1 for r in m["rows"].values()
+       if r["ml_cell_boundary"] == "CLEAN") == 13,
+   "the boundary check is not CONSTANT_FIRES: thirteen rows are clean")
 
 
 # ---------------------------------------------------------- report

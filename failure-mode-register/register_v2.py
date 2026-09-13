@@ -33,6 +33,8 @@ sys.path.insert(0, HERE)
 import entries as E1                                      # noqa: E402
 import entries_v2 as E2                                   # noqa: E402
 import register as R1                                     # noqa: E402
+sys.path.insert(0, os.path.join(HERE, os.pardir, "tools"))
+import sourced as S                                       # noqa: E402
 
 
 CHOICES = {
@@ -245,7 +247,7 @@ def _has_numeral(text):
     return any(ch.isdigit() for ch in text)
 
 
-def _has_duration(text):
+def _has_duration(text, locator=None):
     """A numeral adjacent to a time unit.
 
     NOT a bare numeral test. The first version of F_K's check used one and
@@ -255,19 +257,20 @@ def _has_duration(text):
     retention horizon carrying a value. Both false positives ran toward
     reporting the bound as APPLICABLE when the order states neither
     quantity -- the lexical-proxy shape (UNI_009, T1-1), found by reading
-    the output."""
-    low = text.lower()
-    for u in TIME_UNITS:
-        i = 0
-        while True:
-            i = low.find(u, i)
-            if i < 0:
-                break
-            window = low[max(0, i - 14):i + len(u) + 6]
-            if any(ch.isdigit() for ch in window):
-                return True
-            i += len(u)
-    return False
+    the output.
+
+    Delegates to tools/sourced.numeral_with_unit, so a duration that
+    passes comes back as a SOURCED value carrying the span that covers
+    the quantity, and one that does not comes back as a refusal naming
+    what was missing rather than as a False that reads like a
+    measurement."""
+    loc = locator or S.Locator(E2.ORDER_NAME, None, None, None, "text")
+    return S.numeral_with_unit(text, loc, units=TIME_UNITS)
+
+
+def _is_duration(text, locator=None):
+    """The boolean form, for a caller that only needs the branch."""
+    return isinstance(_has_duration(text, locator), S.Sourced)
 
 
 def _has_rate(text):
@@ -280,21 +283,43 @@ def _has_rate(text):
 
 def f_k_bound():
     """F_K: a condition enters the register only if its expected lifetime
-    is within the retention horizon being claimed. [CHOICE 11]."""
+    is within the retention horizon being claimed. [CHOICE 11].
+
+    Both sides are read with the SOURCED duration rule, so a condition
+    admitted here carries the span covering its quantity and one refused
+    carries the reason. `~1` with no unit does not parse into a horizon;
+    it fails the gate."""
     conds = E2.artifact_side_ambient()
-    with_lifetime = [c for c in conds if _has_duration(c)]
+    with_lifetime, refused = [], []
+    for k, c in enumerate(conds):
+        loc = S.Locator(E2.ORDER_NAME, None, None, None,
+                        "artifact-side condition %d" % (k + 1))
+        d = _has_duration(c, loc)
+        if isinstance(d, S.Sourced):
+            with_lifetime.append({"condition": c, "quantity": d.value,
+                                  "span": d.span})
+        else:
+            refused.append({"condition": c, "reason": d.reason})
     txt = E2.order_text()
     horizon_mentions = txt.count("retention horizon")
-    horizon_valued = False
-    for line in txt.split("\n"):
-        if "retention horizon" in line and _has_duration(line):
-            horizon_valued = True
+    horizon_valued, horizon_quantity = False, None
+    for n, line in enumerate(txt.split("\n"), start=1):
+        if "retention horizon" not in line:
+            continue
+        loc = S.Locator(E2.ORDER_NAME, n, None, None, "retention horizon")
+        d = _has_duration(line, loc)
+        if isinstance(d, S.Sourced):
+            horizon_valued, horizon_quantity = True, d.value
+            break
     return {"falsifier": "F_K", "n_conditions": len(conds),
             "conditions": conds,
-            "with_stated_lifetime": with_lifetime,
+            "with_stated_lifetime": [r["condition"] for r in with_lifetime],
+            "lifetime_quantities": [r["quantity"] for r in with_lifetime],
             "n_with_stated_lifetime": len(with_lifetime),
+            "refused": refused,
             "retention_horizon_mentions": horizon_mentions,
             "retention_horizon_has_a_value": horizon_valued,
+            "retention_horizon_quantity": horizon_quantity,
             "applicable": bool(with_lifetime) and horizon_valued,
             "state": ("APPLIED" if (with_lifetime and horizon_valued)
                       else "NOT_APPLICABLE_AS_DELIVERED"),

@@ -11888,7 +11888,29 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   instrument's 1..8, each printed and each cited inline; both v2 modules refuse
   `--selftest`; the renders screen clean through
   `sheet-structure-scan/no_severity` with **no exemption**, three authored
-  words having been reworded rather than exempted. Check count printed by
+  words having been reworded rather than exempted. **`FMR_040..FMR_043`, the
+  general repair:** the three `FMR_036` defects are one defect — each produced
+  a value whose stated source does not support it — so `tools/sourced.py`
+  replaces the three patches with one primitive (value + literal source text +
+  locator, one gate, `UNRATED` for anything short of all three), and
+  `amended_scores` now SLICES its cell so the value cannot disagree with its
+  own span while a row carrying no amendment keeps the ML cell as the source
+  of its authoritative score rather than being re-attributed to a cell it did
+  not come from. **`FMR_040`:** containment would have caught `V3` and missed
+  `V6`, where the buggy value `-` really does occur in `-> --   A-02` through
+  the arrow's hyphen — which is why the primitive is a span. **`FMR_041`:**
+  the `lstrip` check is read from the **AST**, because a substring scan fires
+  on the docstring in which the function names the construct it refuses
+  (`UNI_009`/`T1-1` inside the checker written against it), and it is
+  null-tested with a plant; `F_K`'s reading is unchanged at 0 of 7 and now
+  carries seven stated reasons instead of seven silent `False`s.
+  **`FMR_042`, a fourth defect found BY the gate:** the `V2` row runs its ML
+  cell past column 57, so the slice cuts a token and the amendment column
+  reads `ate, hw)` — one row of fourteen, the other thirteen clean, **no
+  published score moving** since the truncated cell begins with the same sign
+  run, so what is false is the LOCATOR and not the value, the class an output
+  check cannot see; the spill files `UNPARSED` and is kept apart from `EMPTY`.
+  **`FMR_043`** states what the gate does not do. Check count printed by
   `python3 test_register_v2.py`.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
@@ -11901,6 +11923,47 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   - `validate_claim_table.py` — lightweight schema validator for
     any `CLAIM_TABLE.json` produced in the repo; accepts both the
     `statement`/`status` and `hypothesis`/`is_falsified` flavours.
+  - `sourced.py` — **a value and its source travel together.** Three fields
+    on every extracted value: the VALUE, the LITERAL SOURCE TEXT it came
+    from, and the LOCATOR (which document, which line, which columns). Then
+    one gate: anything entering a scoring function carries all three or the
+    function returns `UNRATED` — not zero, not clean, not a default. Written
+    after three defects landed in one folder in one session, all with the
+    same shape and none found by reading: a `lstrip("-> ")` that takes a
+    CHARACTER SET and so ate the value's own leading `--`, returning the
+    UNAMENDED score on a map whose own rule is that the amended one is
+    authoritative; a bare-numeral test that read `(see DUR-006)` as a stated
+    lifetime and `exceeds ~1` as a retention horizon, both false positives
+    running toward reporting a falsifier APPLICABLE; and a `register(...)`
+    call shadowed by a `finally` that never executed, leaving a registry one
+    metric short with everything that DID register still passing.
+    **Containment is not sufficient and one row proves it** — on `V3` the
+    buggy value `+` does not occur in `-> --   A-01` and containment catches
+    it, on `V6` the buggy value `-` DOES occur in `-> --   A-02` through the
+    hyphen of the arrow and containment misses it — so the primitive is a
+    **span**, offsets verified by slicing, and the buggy path has none
+    because it never located the value in the cell it names as its source;
+    both rows refuse for the same reason rather than one refusing by luck. A
+    COMPUTED value declares a `derivation` instead, exactly one of the two,
+    never both and never neither. `numeral_with_unit()` requires a unit token
+    adjacent to the number, so a bare `~1` fails the gate rather than
+    parsing, and the span returned covers the quantity rather than the digit.
+    `registry_complete(expected, registered)` is the same rule applied to a
+    registry — a registration is a value whose source is its call site, and a
+    count taken from the calls cannot catch a call that did not run, because
+    it is not there to be counted; `tools/known_answer.py` now declares
+    `EXPECTED_METRICS` and asserts it at end of run. `Locator.boundary_clean`
+    checks one narrow form of a false locator — a fixed-width column boundary
+    falling inside a token — and **found a fourth defect by it**: one row of
+    the `failure-mode-register` loss-variable map runs its ML cell past
+    column 57, so the amendment column reads text belonging to its left
+    neighbour, and **no published score moves**, the truncated cell beginning
+    with the same sign run, which makes it the class an output check cannot
+    see. What it does NOT do is stated rather than implied: it checks that
+    the three fields are mutually consistent, not that the source is true or
+    that the locator points at the right cell. 41 checks in `--selftest`, 20
+    in `tests/test_sourced.py`, 20 replaying the three defects in
+    `failure-mode-register/test_register_v2.py` section 17.
   - `substrate_substitution.py` — lightweight CLI that walks a
     CLAIM_TABLE and prints the grass/grasshopper substitution next
     to each claim. Structural enforcement for narrative-instinct

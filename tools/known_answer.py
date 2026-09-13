@@ -607,6 +607,42 @@ def _gxc_commit_specificity(which):
     raise ValueError(which)
 
 
+# The metrics `seed()` is expected to register, written down here rather
+# than counted from the calls. A `register(...)` for a new metric once
+# landed after a `finally` inside a helper and never executed: the registry
+# reported one fewer metric than the file contains, every metric that DID
+# register still passed, and nothing said so. A count taken from the calls
+# cannot catch that, because the call that did not run is not there to be
+# counted. An expected set can. Adding a metric means adding a line here --
+# deliberately, so the addition is visible in a diff.
+EXPECTED_METRICS = (
+    "agent-lifecycle-energy/phase_energy.py::integrate",
+    "anchor-measurand-crossing/amc.py::crossing_band",
+    "anchor-position/normalize.py::crossing_count",
+    "crediting-rate/crediting_rate.py::bin_gap",
+    "failure-mode-register/register.py::fraction_cap",
+    "failure-mode-register/register_v2.py::joint_survival",
+    "frame-location-benchmark/score.py::false_positive_rate",
+    "gap-existence-cases/commit_store.py::commit_specificity",
+    "internal-reference-boundary/radials.py::effective_origins",
+    "internal-reference-boundary/radials.py::sanction_ratio_point",
+    "model-deprecation-backcast/null_check.py::lag_of_peak",
+    "nonidentity-census/t6_window_declaration.py::decided_by_tracks_window",
+    "nonidentity-census/t6_window_declaration.py::marginal_majority (REPLACED)",
+    "null-harness/null_harness.py::_verdict",
+    "ontology-probe/probe.py::absent_coverage",
+    "ontology-probe/probe.py::rates",
+    "operator-machine-coupling/coupling_separation.py::interaction_fraction",
+    "return-path/return_path.py::ratio",
+    "routing-data-layer/rate_form.py::sustained_excess",
+    "shape-spec-audit/shadow_read.py::outline_area",
+    "sheet-structure-scan/sheetmodel.py::rank",
+    "sim-span/sim_span.py::quad_fit",
+    "sim-span/three_column.py::ols",
+    "trigger-geometry/trigger_geometry.py::accumulation_ratio",
+)
+
+
 def seed():
     """Registers the two instances the rule was earned from."""
     fn, detail = _extract_verdict()
@@ -1287,6 +1323,16 @@ def _fmr_fraction_cap(n_other, fraction):
         sys.path.pop(0)
 
 
+def completeness():
+    """Expected against registered, the same value-and-source rule applied
+    to the registry: a registration is a value whose source is its call
+    site, and a call site that did not execute leaves a count that names
+    it. See tools/sourced.registry_complete."""
+    import sourced as _S
+    return _S.registry_complete(EXPECTED_METRICS, registry_ids(),
+                                "tools/known_answer.py::seed")
+
+
 def report():
     seed()
     bad = []
@@ -1310,9 +1356,15 @@ def report():
             print("  !! %s: %s" % (cname, why))
         bad.extend((mid, c, w) for c, w in u)
         print()
-    print("metrics registered: %d" % len(registry_ids()))
+    comp = completeness()
+    print("metrics registered: %d   expected: %d   %s"
+          % (comp["registered"], comp["expected"], comp["state"]))
+    for m in comp["missing"]:
+        print("  !! expected and NOT registered: %s" % m)
+    for m in comp["extra"]:
+        print("  !! registered and not expected: %s" % m)
     print("cases disagreeing with the registry: %d" % len(bad))
-    return 1 if bad else 0
+    return 1 if (bad or not comp["ok"]) else 0
 
 
 if __name__ == "__main__":

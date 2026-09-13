@@ -1,9 +1,11 @@
 # CLAIM_TABLE.md — failure-mode-register
 
-Claims `FMR_001..FMR_039` are properties of this build and of the two
+Claims `FMR_001..FMR_043` are properties of this build and of the two
 delivered orders. `FMR_001..FMR_025` read `WORK_ORDER.md`;
 `FMR_026..FMR_039` read `WORK_ORDER_V2.md`, the revised order, landed
-verbatim beside it so both stay inspectable. They are distinct from the
+verbatim beside it so both stay inspectable; `FMR_040..FMR_043` are the
+value-and-source gate (`tools/sourced.py`) that replaced the three
+`FMR_036` defects, and the fourth defect it found. They are distinct from the
 orders' own `F_A..F_M`, which are falsifiers the orders state; those are
 reported by `register.falsifier_status()` and are not renumbered here.
 
@@ -429,3 +431,80 @@ alongside every value, no function takes an entity as an argument, and
 `FMR_025` stands: with Step 0 blocked, it is still not established that
 this enumeration is not already written somewhere else, and the revision
 does not change that.
+
+---
+
+## THE VALUE-AND-SOURCE GATE — `tools/sourced.py`
+
+The three defects at `FMR_036` are one defect. Each produced a value whose
+stated source does not support it, and none was found by reading the code.
+The general repair is a shared primitive rather than three patches: three
+fields on every extracted value — the **value**, the **literal source
+text**, the **locator** (which document, which line, which columns) — and
+one gate returning `UNRATED` for anything lacking all three. Not zero, not
+clean, not a default.
+
+---
+
+**FMR_040 — containment is not sufficient, and the V6 row proves it.**
+SUPPORTED, and it is the design decision the primitive turns on. The
+obvious rule is that the value must appear somewhere in the source text.
+On `V3` it works: the buggy value `+` does not occur in `-> --   A-01`.
+On `V6` it fails: the buggy value `-` **does** occur in `-> --   A-02`,
+through the hyphen of the arrow and the hyphen of the amendment id. So the
+primitive is a **span** — offsets into the source text, verified by
+slicing — and under the buggy path no span exists at all, because the
+value was never located in the cell it names as its source. Both rows
+refuse for the same reason, `no_provenance`, rather than one refusing by
+luck. A value that is COMPUTED declares a `derivation` instead; exactly
+one of the two, never both and never neither.
+
+---
+
+**FMR_041 — the three defects replayed, each returning `UNRATED`.**
+SUPPORTED, in `test_register_v2.py` section 17 rather than in prose.
+(1) `amended_scores` now slices the amendment cell and the sliced value
+cannot disagree with its own span; a row with no amendment keeps the ML
+cell as the source of its authoritative score rather than being
+re-attributed to a cell it did not come from, which is the defect. The
+`lstrip` check is read from the **AST**, because a substring scan fires on
+the docstring in which the function names the construct it refuses —
+`UNI_009`/`T1-1` inside the checker written against it — and it is
+null-tested with a planted `lstrip`. (2) `_has_duration` delegates to
+`numeral_with_unit`, so `(see DUR-006)` and `exceeds ~1` return a refusal
+naming `no_unit_adjacent_to_numeral` rather than a `False` that reads like
+a measurement, and `F_K`'s reading is unchanged: 0 of 7 conditions carry a
+lifetime, now with seven stated reasons. (3) `tools/known_answer.py`
+declares `EXPECTED_METRICS` and asserts it against the registry at end of
+run; a count taken from the `register(...)` calls cannot catch a call that
+did not execute, because the call is not there to be counted.
+
+---
+
+**FMR_042 — a fourth defect, found BY the gate and not by reading.**
+SUPPORTED. The `V2` row of the loss-variable map runs its ML cell past
+column 57, so the fixed-width slice **cuts a token**: the ML cell is
+truncated at `data st` and the amendment column reads `ate, hw)` — text
+belonging to the cell on its left. One row of fourteen, cutting on both
+sides of the same boundary. A locator is a CLAIM about where a cell ends,
+and a boundary falling inside a token makes the claim false, so
+`Locator.boundary_clean` reports it and every row carries the finding.
+**No published score moves** — the truncated cell begins with the same
+sign run the full cell does — so what is false is the LOCATOR and not the
+value, which is exactly the class an output check cannot see. The spill is
+filed `UNPARSED` and kept apart from `EMPTY`: a cell holding text that is
+not an amendment is a different finding from a cell holding nothing. The
+check is not `CONSTANT_FIRES` — thirteen rows are clean.
+
+---
+
+**FMR_043 — what the gate does not do.**
+It does not check that the source is TRUE, or that the locator points at
+the right cell. It checks that the three fields are mutually consistent. A
+locator naming the wrong line, with source text copied from that same
+wrong line, passes; `boundary_clean` addresses one narrow form of that
+(a column boundary cutting a token) and nothing addresses the rest. The
+numeral rule is a word list of time units, stated at the top of the module
+rather than the bottom, and a paraphrase steps around it. 41 checks in
+`tools/sourced.py --selftest`, plus 20 in `tests/test_sourced.py` and 20
+in section 17.
