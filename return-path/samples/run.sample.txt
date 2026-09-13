@@ -1,0 +1,50 @@
+CHOICES -- decisions the order leaves open, taken here:
+  [CHOICE 1] grade takes a third value INTAKE_INCOMPLETE, with `missing` and `invalid` lists, and `failed`/`flags` are None rather than [] when no check ran. The order names INTAKE_INCOMPLETE as a return and gives the grade field two values; [] would say 'four checks ran, none fired'.
+  [CHOICE 2] `ratio_state` is emitted beside `ratio`. A ratio of None has three causes -- not computed, zero build_on_time, absent intake -- and the number cannot carry which.
+  [CHOICE 3] `time_unit` is carried into the output. The order's return holds neither time and the ratio is dimensionless, so without the unit no output can be read back against its own intake.
+  [CHOICE 4] F_RATIO is NOT emitted into `flags`. Its own definition is 'always reported as a number', so as a flag it fires on every channel and separates nothing; its home is the `ratio` field the return already declares.
+  [CHOICE 5] scope_note == '' is a supplied value; scope_note absent is not. An empty note is a submitter who wrote nothing there, which is a different state from a submitter who did not answer.
+  [CHOICE 6] a present-but-unusable field (out of vocabulary, negative time, non-integer encoding count) lands in `invalid`, not in `missing`. Both return INTAKE_INCOMPLETE. Absent and present-and-wrong are different states and the order names only the first.
+  [CHOICE 7] `encoder_position` is one field and `signal_encodings` may be 2 or more. Where the encoders differ the field names the FIRST one, because the order's rationale is about the first re-encoding. The cost is that F_FAST_SIDE_ENCODER is only as good as that choice: a slow-side first encoder followed by a fast-side second does not raise it.
+
+SCHEMA ADDITIONS beyond the order's stated return: grade: INTAKE_INCOMPLETE, missing, invalid, ratio_state, time_unit
+
+channel                     grade                failed                                              flags                  ratio
+---------------------------------------------------------------------------------------------------------------------------------------
+A_physical_consequence      RETURN_PATH_GRADED   (none)                                              (none)                 0
+B_incident_reporting        NOT_A_RETURN_PATH    C1_RECEIPT                                          (none)                 0.01111
+B_report_written            NOT_A_RETURN_PATH    C1_RECEIPT, C2_SIGNAL                               (none)                 0.01111
+C_publication_loop          NOT_A_RETURN_PATH    C1_RECEIPT, C2_SIGNAL, C3_LATENCY                   (none)                 6
+D_field_report_written      NOT_A_RETURN_PATH    C1_RECEIPT, C2_SIGNAL, C3_LATENCY, C4_CONSTRUCTION  (none)                 20
+D_field_no_report           NOT_A_RETURN_PATH    C1_RECEIPT, C3_LATENCY, C4_CONSTRUCTION             (none)                 20
+D_no_channel                INTAKE_INCOMPLETE    --                                                  --                     --
+    missing: ['latency']
+    invalid: (none)
+E_fast_side_writes          NOT_A_RETURN_PATH    C2_SIGNAL                                           FAST_SIDE_ENCODER      0.01
+F_receipt_unspecified       NOT_A_RETURN_PATH    C1_RECEIPT                                          UNSPECIFIED_RECEIPT    0
+G_build_on_time_absent      INTAKE_INCOMPLETE    --                                                  --                     --
+    missing: ['build_on_time']
+    invalid: (none)
+H_build_on_time_zero        NOT_A_RETURN_PATH    C3_LATENCY                                          (none)                 --
+    ratio: UNDEFINED_ZERO_BUILD_ON_TIME
+I_receipt_out_of_vocabulary INTAKE_INCOMPLETE    --                                                  --                     --
+    missing: (none)
+    invalid: ["receipt: not one of ('MANDATORY', 'ELECTIVE', 'UNSPECIFIED')"]
+J_encoder_none_above_zero   INTAKE_INCOMPLETE    --                                                  --                     --
+    missing: (none)
+    invalid: ['encoder_position: NONE is valid only when signal_encodings == 0']
+
+The set is the output. failed=None means no check ran (intake); failed=[] means four ran and none fired.
+F_RATIO is not in the flags column: see CHOICE 4.
+
+independence: flip one check's fields, does only that check move?
+  C1_RECEIPT       fields receipt                          -> failed ['C1_RECEIPT']
+  C2_SIGNAL        fields encoder_position,signal_encodings -> failed ['C2_SIGNAL']
+  C3_LATENCY       fields latency                          -> failed ['C3_LATENCY']
+  C4_CONSTRUCTION  fields construction                     -> failed ['C4_CONSTRUCTION']
+  baseline failed: []   all isolated: True
+
+encoder_position against the scored set, at one encoding:
+  distinct failed sets across all four positions: [('C2_SIGNAL',)]
+  encoder_position moves `failed`: False
+  case E with the encoder moved: all fail C2 = True, flagged only at ['FAST_SIDE']

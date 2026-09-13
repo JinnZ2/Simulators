@@ -1,0 +1,19 @@
+source                 verdict                  L      R       C  calibration by
+--------------------------------------------------------------------------------
+A_one_hop_unchecked    SHORT_UNCALIBRATED       1   1.00      --  none admissible
+B_one_hop_scored       SHORT_CALIBRATED         1   1.00    0.83  C-2
+C_four_hop_relay       LONG_CALIBRATED          4   0.95    0.90  C-2
+D_two_hop_lossy        LOSSY                    2   0.20      --  none admissible
+E_one_hop_wrong        SHORT_MISCALIBRATED      1   1.00    0.20  C-2
+F_six_hop_unchecked    LONG_UNCALIBRATED        6   0.80      --  none admissible
+G_five_hop_diverging   LONG_MISCALIBRATED       5   0.86    0.25  C-1
+H_path_not_described   INSUFFICIENT            --     --      --  none admissible
+I_correlated_others    SHORT_MISCALIBRATED      1   1.00    0.60  C-1
+J_derivations_disagree SHORT_MISCALIBRATED      1   1.00    0.20  C-1, C-2
+
+L, R and C are reported side by side and are never combined.
+-- under C is UNCALIBRATED: not measured. It is not a low value.
+
+falsifier, case C against case A:
+  FIRST_CARRIES_MORE by rule calibration_established
+  the first read's mapping to the referent is established and high; the second read's is not_established

@@ -1,0 +1,155 @@
+FAILURE-MODE REGISTER -- ML AS INFRASTRUCTURE
+scope: SCOPE IS DURABILITY AND RECONSTRUCTABILITY ONLY: can the deployed
+       object still be identified, re-produced, load-rated and inspected
+       at t + N years, by someone who is not the original author and does
+       not hold the tacit stack.
+non-goals: not model behaviour, alignment, or misuse; not harm incidents; not a code of ethics
+
+PROJECTED FRACTION  0.0 of 4 entries (header figure, section 2 rule)
+
+FILING
+  DUR-001   FILED    missing 0  extra none
+  DUR-002   FILED    missing 0  extra none
+  DUR-003   FILED    missing 0  extra NOTE
+  DUR-004   FILED    missing 0  extra NOTE
+  an extra field has no state in the order's section 2; it is reported here and never merged into `missing`
+
+VOCABULARY CONFORMANCE  (cells, never merged into one bucket)
+  evidence_class     conforms 3  multi 1  out-of-vocab 0  absent 0
+  onset              conforms 4  multi 0  out-of-vocab 0  absent 0
+  reconstruction     conforms 1  multi 2  out-of-vocab 1  absent 0
+
+CONTROL-STATE AXIS  (the register is two registers superimposed)
+  cells carrying both an as-is and a with-control reading: 6 of 12
+    DUR-001   detection_channel  markers: PROPOSED:
+    DUR-001   detection_latency  markers: With the control, without the control
+    DUR-001   reconstruction     markers: with the control
+    DUR-002   detection_channel  markers: PROPOSED:
+    DUR-002   detection_latency  markers: With it:, without the control
+    DUR-003   detection_channel  markers: PROPOSED:
+  reconstruction cells holding two declared values: 2
+    DUR-001   NO -> PARTIAL  axis: control
+    DUR-003   PARTIAL -> NO  axis: time-or-undeclared
+  merged distribution: None -- the axes differ per entry; merging them would put a control
+      state and a date in one column
+
+STEPS
+  Step 0  BLOCKED  outbound egress is an allowlist; catalogue and registry
+          hosts refuse CONNECT
+          consequence: F_B is unresolved, so the register is not cleared to
+            ship; nothing here establishes that this work order is
+            not duplication
+  Step 1  NOT_RUN  no deployment class is declared anywhere in the delivered
+          register; Step 5 and section 5 both rest on Step 1
+          explicit refusals to narrow: DUR-002
+  Step 2  the five section 3A seeds are delivered as seeds and carry no entry
+  Step 3  3 entries survive the justification rule without appeal to resemblance
+    DUR-001   TRANSPORTED|MEASURED justification True  domain pharmaceutical   meets label True
+    DUR-002   TRANSPORTED   justification True  domain pressure vessel  meets label True
+    DUR-003   TRANSPORTED   justification True  domain civil records / archive meets label True
+    DUR-004   MEASURED      justification False domain none             meets label False
+              labelled MEASURED, which section 2 defines as MEASURED
+              (cite); no cite is given and the cell says 'by analogy',
+              which is the word the TRANSPORT RULE rejects
+  Step 4  NOT_RUN  the order's fraction rule, Step 4 and section 8 bind
+          together: at f=0.20 with 4 non-projected entries the cap
+          is 1. Authoring projected entries from inside is F_D's own
+          failure.
+  Step 5  single-value {'NO': 1} (n=1)  multi ['DUR-001', 'DUR-003']  out-of-vocab ['DUR-002']
+          distribution over all 4: None
+  Step 6  3 requirements, 1 excluded by the gate
+    DUR-001   sealed probe-response record — a probe set fixed at
+              deploy, the deployed object's responses to it, hashed,
+              held by a party that is not the operator. Third-party
+              checkable without re-manufacture.
+    DUR-003   hop log. Every migration event records what was carried,
+              what was dropped, and by whose decision. Cheap, and it
+              converts an undated attrition into a dated one.
+    DUR-004   NOT_SUPPLIED
+    DUR-002   EXCLUDED (existing_control not NONE); states a requirement anyway: True
+          second conjunct (consequence non-trivial): NOT_EVALUABLE -- the order states no test for 'consequence non-trivial'
+  Step 7  fully controlled 0  partial 1  uncontrolled 3  empty False
+
+HIGH-PRIORITY SET  (section 1: detection_channel = NONE)
+  as-is reading        3 of 4  DUR-001, DUR-002, DUR-003
+  with-control reading 0 of 4  none
+  picked: None
+
+ENTRY 0  named in the order: True   delivered: False   authored here: False
+  not constructible under the section 2 schema: its mechanism is a
+  property of the register rather than of a deployment, so it has no
+  load_condition, and its detection_channel is the field itself
+
+HOP BUDGET  (section 6B; unit: dimensionless ratio of hop rates)
+  classical 0.040 hops/yr   ML 2.0-5.0 hops/yr
+  compression band 50 to 125   stated 50 -- the low end of the order's own band, and the equal-N reading
+
+VOLUME AND CORRELATION  (F_I: both or neither; unit: expected objects lost over the horizon)
+  volume      2000  steady rate, individually invisible
+  correlation 1200000  synchronous blocks, defeats redundancy counted as
+                  independent
+  a correlation entry exists: False -- section 6B-2 says correlation 'needs its own entry' and
+      none was delivered; not authored here
+  entries claiming redundancy as a control: 0 of 4 (the rule fires on nothing in the delivered register; a visible zero, not an untested rule)
+
+SHOCK SPLIT  (section 6B-3)
+  V14a  CARRIER SHOCK     stochastic, rare, large  genuinely low here  budget None  mitigated False
+  V14b  SUBSTRATE SHOCK   scheduled, frequent      high                budget None  mitigated None
+  V14c  DEPENDENCY SHOCK  scheduled, frequent      high                budget None  mitigated None
+  intact-and-unreadable is a distinct state from decayed and is
+  worse, because it reads as retained
+
+FALSIFIERS  (delivered order; F_I precedes F_H)
+  F_A  COMPUTED
+       the transport section is not decoration
+       DUR-001 mentions resembl, in: rry to a probe- response record. This is not resemblance
+         between industries; it is the sam
+  F_B  BLOCKED
+  F_C  COMPUTED
+       full census; a 0.8-entry sample gives a rejection rate no
+       resolution
+  F_D  COMPUTED
+       the register passes because Step 4 was not run, not because
+       projection was resisted
+  F_E  NOT_RUN
+       what would make a register binding is a claim about the world,
+       not a computation over the entries
+       nothing currently would. Bridge codes became mandatory because
+       failures were attributable and expensive; the entries here are
+       chosen for producing no attributable event. Publishing the
+       register is not claimed to be sufficient.
+  F_F  COMPUTED
+       where is not stated by any entry; a holder is named by one and
+       a location by none
+  F_G  NOT_RUN
+       blocker: no second reader
+       blocker: F_G asks for five entries; four were delivered
+  F_I  COMPUTED
+       volume_vs_correlation returns both and offers no single-number
+       accessor
+  F_H  COMPUTED
+
+CROSS-REFERENCES  (resolved by content; no pick where ambiguous)
+  correlated RESOLVED  effective-redundancy-audit, design-basis-ai
+  silent sub AMBIGUOUS model-provenance, criteria-drift, machine-record-format
+
+CHOICES
+  [CHOICE 1] vocabulary tokens read out of the order's English alternations by
+              first-all-caps-else-single-word; the order declares no machine
+              readable form
+  [CHOICE 2] an entry block's header line (ENTRY DUR-00N) is treated as a header
+              and not as a field, since it does not meet the column-19 contract
+  [CHOICE 3] section 3A seeds are parsed as bullets and carry no id; the order
+              gives them none and inventing one would make them look filed
+  [CHOICE 4] the as-is / with-control split is read by a marker list over
+              delivered English; markers found are returned with the verdict
+  [CHOICE 5] an entry's reconstruction reading is taken by counting declared
+              vocabulary tokens in the value, not by a marker -- mechanical, and
+              it is what makes MULTI_VALUE visible
+  [CHOICE 6] Step 6's gate runs on existing_control alone; the order's second
+              conjunct (consequence non-trivial) has no test anywhere in it
+  [CHOICE 7] PROJECTED fraction f is an argument, printed on every render; the
+              order requires a stated fraction and states none
+  [CHOICE 8] high_priority is reported under both readings and neither is picked
+              -- section 1 defines it on detection_channel = NONE and three
+              entries say NONE now and propose a channel in the same cell

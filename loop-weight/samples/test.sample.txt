@@ -1,0 +1,61 @@
+ok     reachable: SHORT_CALIBRATED
+ok     reachable: SHORT_UNCALIBRATED
+ok     reachable: SHORT_MISCALIBRATED
+ok     reachable: LONG_CALIBRATED
+ok     reachable: LONG_UNCALIBRATED
+ok     reachable: LONG_MISCALIBRATED
+ok     reachable: LOSSY
+ok     reachable: INSUFFICIENT
+ok     no member is declared and unpopulated
+ok     case A_one_hop_unchecked resolves SHORT_UNCALIBRATED
+ok     case B_one_hop_scored resolves SHORT_CALIBRATED
+ok     case C_four_hop_relay resolves LONG_CALIBRATED
+ok     case D_two_hop_lossy resolves LOSSY
+ok     case E_one_hop_wrong resolves SHORT_MISCALIBRATED
+ok     case F_six_hop_unchecked resolves LONG_UNCALIBRATED
+ok     case G_five_hop_diverging resolves LONG_MISCALIBRATED
+ok     case H_path_not_described resolves INSUFFICIENT
+ok     case I_correlated_others resolves SHORT_MISCALIBRATED
+ok     case J_derivations_disagree resolves SHORT_MISCALIBRATED
+ok     FALSIFIER: case C carries more than case A
+ok     FALSIFIER: decided by the calibration rule, not another axis
+ok     FALSIFIER: and case A's loop really is the shorter one
+ok     FALSIFIER: the comparison is antisymmetric
+ok     no authority-named field in loop_weight.py
+ok     no authority-named field in cases.py
+ok     the authority checker fires on a planted identifier
+ok     the authority checker does not fire on a near-miss token
+ok     refused at load: R1_grades_itself
+ok     refused at load: R2_provenance_unstated
+ok     C is None when neither derivation is available, not a default
+ok     UNCALIBRATED and MISCALIBRATED are separate returns
+ok     unmeasured against measured-low is INCOMPARABLE, not ranked
+ok     carries_more returns an ordinal verdict, not a number
+ok     the read record carries no combined field
+ok     all three axes survive into every record
+ok     DECLARATION states no scalar collapse and no self-report
+ok     DECLARATION lists every return
+ok     R is per-hop, not cumulative
+ok     LOSSY fires though D's loop is shorter than C's
+ok     a longer clean read carries more than a short lossy one
+ok     unknown retention on a hop does not make a read LOSSY
+ok     a pair sharing a hop with the source is excluded
+ok     an independence assertion contradicted by a shared hop is reported
+ok     C-1 with no admissible pair is None, not zero
+ok     correlated others sharing a hop count as one instrument
+ok     and the rule is load-bearing: counting them as three flips the verdict
+ok     a prediction scored on terms the source set is excluded from C-2
+ok     both derivations are reported when both land
+ok     disagreeing derivations are flagged and C takes the lower
+ok     an undescribed path is INSUFFICIENT, not an inferred hop count
+ok     INSUFFICIENT is not ranked against a read
+ok     a read does not dominate itself
+ok     every Carries member is reachable
+ok     a path given as a sentence is INSUFFICIENT
+ok     a path given as a list of non-records is INSUFFICIENT
+ok     a path given as absent is INSUFFICIENT
+ok     no case carries a precomputed axis or verdict
+ok     at least 8 hand-built cases
+ok     every read prints the parameters it was taken under
+
+59 checks, 0 failed

@@ -205,6 +205,32 @@ def _amc_crossing_band(which):
     g, k, u, n = worlds[which]
     return mod.crossing_band(g, k, u, n)[4:6]
 
+def _tg_accumulation(period, relax):
+    """trigger-geometry/trigger_geometry.py::accumulation_ratio, imported.
+    system_relaxation_time / reversal_period. Above 1 the system is still
+    carrying the previous reversal when the next arrives. It GATES NOTHING
+    in that module, and is registered here because it is still a number a
+    reader will quote."""
+    import importlib.util
+    path = os.path.join(ROOT, "trigger-geometry", "trigger_geometry.py")
+    spec = importlib.util.spec_from_file_location("_tg", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.accumulation_ratio({"reversal_period": period,
+                                   "system_relaxation_time": relax})
+
+
+def _rp_ratio(latency, build_on_time):
+    """return-path/return_path.py::ratio, imported. latency / build_on_time,
+    or None where there is no denominator."""
+    import importlib.util
+    path = os.path.join(ROOT, "return-path", "return_path.py")
+    spec = importlib.util.spec_from_file_location("_rp", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.ratio(latency, build_on_time)
+
+
 def _op_rates(which):
     """ontology-probe/probe.py::rates, imported. (class, status) rows are
     hand-built so the three section 5 rates can be counted off; returns
@@ -964,6 +990,25 @@ def seed():
     )
 
     register(
+        "return-path/return_path.py::ratio",
+        _rp_ratio,
+        [
+            case("signal arrives before the build-on", (1.0, 2.0), 0.5,
+                 "half the build-on time; a ratio below 1 is the only region "
+                 "where C3 does not fire, so the two must agree in sign"),
+            case("signal arrives after", (3.0, 1.0), 3.0,
+                 "three times the build-on time, counted by hand"),
+            case("output built on immediately", (1.0, 0.0), None,
+                 "no denominator -> None, never 0 and never inf. A 0 would "
+                 "read the worst case as the best one, and an inf is not the "
+                 "number the order's F_RATIO promises"),
+        ],
+        note=("the order's F_RATIO. C3 is computable where this is not, so "
+              "the check and the number reported beside it have different "
+              "domains; ratio_state carries which."),
+    )
+
+    register(
         "ontology-probe/probe.py::rates",
         _op_rates,
         [
@@ -1014,6 +1059,77 @@ def seed():
               "validation; a second list (transforms_alt.json) is scored "
               "beside it as N4."),
     )
+
+    register(
+        "trigger-geometry/trigger_geometry.py::accumulation_ratio",
+        _tg_accumulation,
+        [
+            case("still carrying the last reversal", (2.0, 7.0), 3.5,
+                 "7 / 2; the system takes three and a half reversal periods "
+                 "to settle, so curve two arrives on top of curve one -- the "
+                 "order's own accumulation mechanism", tol=1e-12),
+            case("damps between reversals", (4.0, 1.0), 0.25,
+                 "1 / 4; settled long before the next reversal, which is the "
+                 "single-curve test article the order says passes", tol=1e-12),
+            case("period absent", (None, 7.0), None,
+                 "the order's Open section: an unmeasured time is recorded, "
+                 "never estimated. None, not 0.0 -- a 0.0 here would read as "
+                 "'damps instantly' on a geometry nobody timed"),
+            case("zero period", (0.0, 1.0), None,
+                 "no denominator; None rather than a division or an infinity "
+                 "that would sort above every measured geometry"),
+        ],
+        note=("[CHOICE 6] of the TRIGGER GEOMETRY order. T1 as written reads "
+              "NEITHER time, so this ratio gates nothing -- making it a "
+              "precondition would stop T1 firing on the order's own "
+              "reference case, where both times are unmeasured."),
+    )
+
+    register(
+        "failure-mode-register/register.py::fraction_cap",
+        _fmr_fraction_cap,
+        [
+            case("four anchored entries at a fifth", (4, 0.2), 1,
+                 "0.2*4/(1-0.2) = 1.0 exactly; one projected entry gives "
+                 "1/5 = 0.20 and two give 2/6 = 0.33, so the cap is 1. This "
+                 "is the register as delivered, and it is why Step 4 cannot "
+                 "populate section 3C on a short register", tol=0),
+            case("four anchored entries at a half", (4, 0.5), 4,
+                 "0.5*4/(1-0.5) = 4; four projected gives 4/8 = 0.50 and "
+                 "five gives 5/9 = 0.56. Distinct from the 0.2 case, so a "
+                 "metric ignoring the fraction cannot pass both", tol=0),
+            case("nothing anchored", (0, 0.5), 0,
+                 "with no non-projected entry any projected entry makes the "
+                 "share 1.0; the cap is 0. Catches a metric that divides by "
+                 "f instead of 1-f, which would return 0 here for the wrong "
+                 "reason only if it also mishandles the numerator", tol=0),
+            case("no cap stated", (4, 1.0), None,
+                 "at f >= 1 the rule places no cap. None, not a large "
+                 "integer -- a number here would read as a cap somebody set"),
+        ],
+        note=("Section 2 of the order: PROJECTED entries may not exceed a "
+              "STATED fraction, and the order states none. [CHOICE 7] makes "
+              "it an argument, printed on every render. The cap is what "
+              "binds Step 4 against section 8's short register."),
+    )
+
+
+def _fmr_fraction_cap(n_other, fraction):
+    """failure-mode-register/register.py::fraction_cap, imported. Largest n
+    with n/(n+k) <= f, where k is the number of non-PROJECTED entries. The
+    inversion is where an error hides -- dividing by f rather than 1-f, or
+    an off-by-one on the floor -- so the expected values below are derived
+    from the inequality and not from the implementation."""
+    import importlib.util
+    path = os.path.join(ROOT, "failure-mode-register", "register.py")
+    sys.path.insert(0, os.path.dirname(path))
+    try:
+        spec = importlib.util.spec_from_file_location("_fmr", path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod.fraction_cap(n_other, fraction)
+    finally:
+        sys.path.pop(0)
 
 
 def report():
