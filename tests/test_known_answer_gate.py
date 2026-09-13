@@ -58,6 +58,7 @@ MANIFEST = (
     "return-path/return_path.py::ratio",
     "trigger-geometry/trigger_geometry.py::accumulation_ratio",
     "failure-mode-register/register.py::fraction_cap",
+    "failure-mode-register/register_v2.py::joint_survival",
     "internal-reference-boundary/radials.py::effective_origins",
     "internal-reference-boundary/radials.py::sanction_ratio_point",
 )

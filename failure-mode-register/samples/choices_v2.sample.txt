@@ -1,0 +1,8 @@
+CHOICES -- register_v2
+
+[CHOICE 9] Correlation model for the DUR-006-B conjunction. A mixture: with probability rho all n terms take one common draw, otherwise they draw independently. Marginals are preserved exactly and rho IS the pairwise correlation, so the model has one interpretable parameter and no free scale. Used ONLY to check the DIRECTION of F_L's stated claim; no number from it attaches to anything.
+
+[CHOICE 10] Mechanical test for F_M(b), 'a currently measurable production rate'. A condition states one only if its text carries a numeral. Conservative and declared: a rate named in words with no value -- 'at replacement rate' -- does not satisfy it, which is the reading F_M's own word 'measurable' takes.
+
+[CHOICE 11] Mechanical test for F_K, 'expected lifetime within the retention horizon'. Both sides are checked for a numeral: the condition for a lifetime, the order for a horizon. Neither is a judgement about how long anything lasts.
+

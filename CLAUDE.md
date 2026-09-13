@@ -239,7 +239,7 @@ last three; read in order:
 - `valence-divergence/` — two decoders, one term; logs which read is whose, never assigns a valence
 - `terrain-prior/` — an indicator is a record of the process that made the site; bearing and entanglement, never collapsed
 - `trigger-geometry/` — was the RESPONSE validated in THIS geometry; sensor correct, model inverted
-- `failure-mode-register/` — durability and reconstructability only; the delivered register, parsed not retyped
+- `failure-mode-register/` — durability and reconstructability only; the delivered register, parsed not retyped; v2 lands beside v1, purely additive
 - `internal-reference-boundary/` — seven radials on a boundary drawn from inside; R3's two legs, two time bases
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
@@ -11811,6 +11811,85 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   live in `test_boundary.py` and in neither case file, asserted over their dict
   keys. Check count printed by `python3 test_boundary.py`; both modules refuse
   `--selftest` (exit 2). Stdlib only, parses under 3.9, phone-buildable, CC0.
+- `failure-mode-register/` **(revised order, v2)** — `WORK_ORDER_V2.md`
+  landed verbatim **beside** the original per the repo's supersession
+  convention, with `entries.py`/`register.py` untouched and `entries_v2.py`
+  **importing** the v1 gutter parser rather than copying it — one parser, two
+  documents. **`FMR_026`:** the revision is purely additive, measured with
+  difflib rather than read — **694 lines inserted, 0 deleted, 0 replaced** —
+  adding four falsifiers (`F_K`, `F_M`, `F_L`, `F_J`) with every v1 falsifier
+  body verbatim and v1's `F_I`-before-`F_H` ordering carried rather than
+  tidied. **`FMR_027`/`FMR_028`, the loss-variable map:** §1B's own rule is
+  that the amended score is authoritative, and applying §9's amendments gives
+  **four** protective variables (V5, V7, V9, V13) where F3 names **two** —
+  `V9` is argued away by F2 by name (*the protective variable is maxed and
+  does not protect*) and **`V5` by nothing stated anywhere**; and `V5` is
+  exactly where `A-01`'s own definitional correction (*a carrier is SOMEONE
+  WHO CAN READ THE REPRESENTATION*) was not applied, since its gloss is
+  **how often it is actually RE-TAUGHT or re-performed** and it scores `+` on
+  *continuous*, while `DUR-004` STRANDED UNDER LOAD is precisely the state
+  where execution is continuous and the carrier population is near zero — the
+  same slip `A-01` fixed, in the variable next to it. **`FMR_029`, provable:**
+  `F_L` states that *correlation makes the joint failure probability HIGHER*,
+  and under any model preserving the marginals survival is **non-decreasing**
+  in correlation (derivative `p − p^n ≥ 0`), so joint failure is
+  non-increasing — at p=0.9, n=7 it falls **0.5217 → 0.1000** as rho runs 0 to
+  1; the cross-type reading is true at 1 of 5 sweep points, so it is not a
+  general claim either, and **`A-07`, which §9 makes authoritative, states the
+  same correction WITHOUT a direction and is right**. The conclusion is
+  untouched (it rests on the inability to ENSURE each term), `F_L`'s own *do
+  not put a number on it* is followed, and the correction cuts **against** the
+  naive case — the independent product overstates the argument against a
+  single custodian. **`FMR_031`, the headline:** `F_M` admits a carrier-side
+  condition only with a named producing mechanism and a **currently measurable
+  production rate**, and on `DUR-005-B`'s own five candidates **0 of 5 state a
+  rate value** (one names a rate in words, *at replacement rate*, with none) —
+  so the **active set is empty and the falsifier and the set it empties are
+  delivered in the same document**, with `DUR-005-C` stating its own
+  `CONSTANT_FIRES` property and calling it intended: the screen admits
+  everything and `F_M` admits none of it. **`FMR_030`:** `F_K` is
+  `NOT_APPLICABLE_AS_DELIVERED` — **0 of 7** artifact-side conditions carry an
+  expected lifetime though the prose says each has one, and *retention
+  horizon* appears four times carrying no value, so the bound compares two
+  quantities the order states neither of (the `MF_017` shape on a falsifier).
+  **`FMR_032`:** Step 5 recounted on six entries gives **3 of 6** single-valued
+  (all NO), improving `FMR_003` from 1-of-4, while its structural half stands —
+  the two multi-valued cells vary along **different axes** (`DUR-001` control
+  state, `DUR-003` time) so no merged distribution is emitted. **`FMR_033`:**
+  the register sits **exactly at** the PROJECTED cap (1 of 6, cap 1 at
+  `[CHOICE 7]`'s 0.2, imported from `register.py` not reimplemented).
+  **`FMR_034`:** `F_J` directs a marking at *every 6C entry* and §6C carries
+  **7 subsections and 0 ENTRY blocks**. **`FMR_035`:** eleven amendments, all
+  eleven carrying all four fields, and §9's no-silent-overwrite rule is what
+  makes `FMR_027` and `FMR_029` reachable at all. **`FMR_036`, three defects
+  in this build, all found by running:** `lstrip("-> ")` takes a CHARACTER SET
+  and stripped the amendment cell's own leading `--`, returning the
+  **unamended** score on the map whose rule is that the amended one is
+  authoritative; `F_K`'s first check used a bare numeral test and scored
+  `(see DUR-006)` as a stated lifetime and `exceeds ~1` as a horizon value,
+  both running toward reporting the bound as applicable (`UNI_009`/`T1-1`,
+  repaired with numeral-adjacent-to-a-time-unit and pinned both ways); and the
+  `joint_survival` registration landed as dead code after a `finally`, the
+  **second** instance of that in `tools/known_answer.py` from this folder.
+  **`FMR_037`:** `DUR-006-C` as arithmetic — seven terms at 0.90 give
+  conjunction survival 0.4783, four holders at 0.50 give disjunction survival
+  0.9375, so the distributed arrangement is modelled with a **lower**
+  per-holder number and survives more often, which is *the difference between
+  a product of probabilities and a complement of a product* and does not
+  depend on the values. **`FMR_038`:** §6B parses byte-identically in both, so
+  `FMR_016` carries unchanged — *compressed by roughly fifty* is still the LOW
+  end of its own 50–125 band. **`FMR_039` UNVERIFIED:** no deployed component
+  inspected and **no entity rated** — the probability model is named in
+  `[CHOICE 9]`, its parameters ride on every return, no function takes an
+  entity as an argument, and `FMR_025` stands, since Step 0 is still blocked.
+  `joint_survival` is registered in `tools/known_answer.py` with five
+  distinct-valued cases including the empty conjunction returning `None`
+  rather than 1.0. Three `[CHOICE n]` markers numbered on from the v1
+  instrument's 1..8, each printed and each cited inline; both v2 modules refuse
+  `--selftest`; the renders screen clean through
+  `sheet-structure-scan/no_severity` with **no exemption**, three authored
+  words having been reworded rather than exempted. Check count printed by
+  `python3 test_register_v2.py`.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

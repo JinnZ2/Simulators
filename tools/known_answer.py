@@ -1184,6 +1184,41 @@ def seed():
     )
 
 
+    register(
+        "failure-mode-register/register_v2.py::joint_survival",
+        _fmr_joint_survival,
+        [
+            case("independent, seven terms", (0.9, 7, 0.0), 0.9 ** 7,
+                 "at correlation zero the mixture is the plain product; "
+                 "0.9^7 = 0.4782969, computed from the exponent and not "
+                 "from the code", tol=1e-12),
+            case("perfectly comonotonic", (0.9, 7, 1.0), 0.9,
+                 "at correlation one every term takes the same draw, so "
+                 "the conjunction is one marginal. This end is where an "
+                 "error in the mixture weights shows", tol=1e-12),
+            case("two terms, half correlated", (0.5, 2, 0.5), 0.375,
+                 "0.5*0.5 + 0.5*0.25 = 0.375 by hand. The pairwise "
+                 "correlation of this mixture IS rho, so a "
+                 "parameterisation that smuggled in a scale would miss "
+                 "here", tol=1e-12),
+            case("certain terms", (1.0, 7, 0.0), 1.0,
+                 "terms that always hold give a conjunction that always "
+                 "holds, at any correlation", tol=1e-12),
+            case("no terms", (0.9, 0, 0.5), None,
+                 "fewer than one term is not a conjunction. None, not "
+                 "1.0 -- an empty product returning 1.0 would report a "
+                 "conjunction of nothing as certain"),
+        ],
+        note=("Used ONLY to check the DIRECTION of falsifier F_L, which "
+              "states that correlation makes joint failure HIGHER. "
+              "Survival here is non-decreasing in rho (derivative "
+              "p - p^n >= 0), so failure is non-increasing and the "
+              "stated direction is backwards. F_L's own instruction is "
+              "to put no number on the conjunction, and none of these "
+              "attaches to anything."),
+    )
+
+
 def _irb_effective_origins(coupling):
     """internal-reference-boundary/radials.py::effective_origins,
     imported. The expected values are derived from the trace identity
@@ -1213,6 +1248,23 @@ def _irb_sanction_ratio(consequence_rate, incidence_per_year):
         spec.loader.exec_module(mod)
         return mod.sanction_ratio_point(consequence_rate,
                                         incidence_per_year)
+    finally:
+        sys.path.pop(0)
+
+
+def _fmr_joint_survival(p, n, rho):
+    """failure-mode-register/register_v2.py::joint_survival, imported.
+    The expected values are computed by hand from the mixture
+    rho*p + (1-rho)*p**n, not read off the implementation. The two ends
+    (rho 0 and rho 1) are where a weight error hides."""
+    import importlib.util
+    path = os.path.join(ROOT, "failure-mode-register", "register_v2.py")
+    sys.path.insert(0, os.path.dirname(path))
+    try:
+        spec = importlib.util.spec_from_file_location("_fmrv2", path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod.joint_survival(p, n, rho)
     finally:
         sys.path.pop(0)
 
