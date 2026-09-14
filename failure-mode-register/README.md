@@ -43,6 +43,11 @@ python3 entries_v2.py        what parsed out of WORK_ORDER_V2.md
 python3 register_v2.py       the revised order, audited
 python3 register_v2.py --choices
 python3 test_register_v2.py  the v2 checks (count printed by the run)
+
+python3 entries_v3.py        what parsed out of WORK_ORDER_V3.md
+python3 register_v3.py       the third order, audited
+python3 register_v3.py --choices
+python3 test_register_v3.py  the v3 checks (count printed by the run)
 ```
 
 Stdlib only. No pytest, no network, parses under 3.9, phone-buildable. CC0.
@@ -243,3 +248,88 @@ What is false is the LOCATOR, which is the class an output check cannot see.
 `FMR_025`. No deployed component inspected, no retained record examined, no
 reconstruction attempted. Every computation is a property of the four delivered
 entries, of the order's own rules, or of this build's arithmetic.
+
+## The third order
+
+`WORK_ORDER_V3.md` lands verbatim beside the other two — three orders, none
+overwritten. `entries_v3.py` defines no parser of its own: the gutter parser
+and fence walker come from `entries.py`, and the gated score map, the
+column-boundary report and the F3 reader come from `entries_v2.py`, which was
+**generalised to take a document rather than copied**. One parser, three
+documents.
+
+```
+WORK_ORDER.md    WORK_ORDER_V2.md    WORK_ORDER_V3.md
+      |                 |                   |
+      +--------- entries.py ----------------+    gutter, fences, fields
+                       |
+                 entries_v2.py                   cell parsers, gated map,
+                       |                         boundary report, F3 reader
+                 entries_v3.py                   section walk only
+                       |
+                 register_v3.py                  the audit
+                       |
+              test_register_v3.py                every expected verdict
+```
+
+**v2 against v1 was a pure insertion. v3 is a rewrite** — 338 equal lines of
+1218 and 1104, similarity 0.2911 — and it is **shorter than v2 while carrying
+three sections v2 does not have**. Prose was compressed.
+
+### What moved
+
+```
+Step 0     BLOCKED -> reported DONE, with a four-artifact table and a
+           named result. FMR_001's blocker is removed BY THE ORDER'S OWN
+           REPORT, and arxiv.org refuses CONNECT from here, so the closure
+           is by declaration -- which the order says itself: "Verify
+           before citing."
+
+the id     moved out of the entry fence and into the `### DUR-00n`
+           heading, so every block carries 11 of 12 schema fields and the
+           order's own UNRATED PART rule fires on 6 of 6 entries against a
+           format change. v2's undeclared NOTE field is gone.
+
+section 6  is new: THE PARSER GATE, this session's own repair delivered
+           back as a control inside the order it repairs.
+```
+
+### What did not move
+
+```
+F3 names two wins; the amended map computes four. V9 is argued away by
+F2 by name and V5 by nothing.                                    FMR_046
+one score row still runs its ML cell past the amendment column.  FMR_047
+F_L still states a direction, and it is still backwards.         FMR_053
+0 of 7 ambient conditions state a lifetime; 0 of 5 carrier-side
+conditions state a rate, so F_M's active set is empty.           FMR_054
+Step 1 is still not run: two deployment classes, neither picked.  FMR_045
+```
+
+### Section 6, restated one field short
+
+The order states THREE fields on every extracted value — the value, the
+literal source text, the locator — and `tools/sourced.py` refuses on a
+fourth, the **span**. `span` and `offset` appear zero times in section 6.
+The demonstration reads the same two rows three ways:
+
+```
+row  amendment cell   buggy  true   containment  searched span   produced span
+V3   '-> --   A-01'   '+'    '--'   refuses      refuses         no_provenance
+V6   '-> --   A-02'   '-'    '--'   passes       passes at (0,1) no_provenance
+```
+
+Containment is what the three fields buy, and it misses V6, where the buggy
+value occurs in its own cell through the hyphen of the arrow. A span
+*searched for afterwards* misses it too, and points at offset 0 — the arrow —
+where the score sits at offset 3. What refuses both is a span **produced by
+the extraction**, and section 6 names neither the span nor where it has to
+come from.
+
+### A second boundary cut, in new material
+
+`FMR_042` recurs on the same score row, and §0-1's prior-art table — added in
+v3 — carries the same shape: one line cuts on both sides of the column
+boundary, truncating a cross-reference at `see DUR-` and prefixing its
+neighbour with `005`. Found by the same check, on material written after the
+check existed.

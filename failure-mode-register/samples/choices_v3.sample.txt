@@ -1,0 +1,5 @@
+[CHOICE 12] the prior-art gate's four artifacts are CARRIED, not verified: arxiv.org and export.arxiv.org refuse CONNECT from here and no probe runs at audit time (no network is a house rule). Recorded as NOT_VERIFIABLE_HERE rather than as agreement.
+[CHOICE 13] a section-5 subsection counts as carrying a CITED INSTANCE only if it names a dated or identified case; `Worked case:` introducing a hypothetical does not count.
+[CHOICE 14] the parser-gate conformance check reads section 6's own field list against tools/sourced.Sourced's constructor, and demonstrates the gap by replay rather than by argument.
+[CHOICE 1] entry blocks are located by their `### DUR-00n` heading, because v3 moved the id out of the fence; v2 located them by an `ENTRY` first line.  (entries_v3)
+[CHOICE 2] the candidate ambient sets are read as fenced lists in v3 (v2 carried them as indented free lists, which is why entries_v2._indented_list is not used here).  (entries_v3)

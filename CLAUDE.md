@@ -11912,6 +11912,76 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   check cannot see; the spill files `UNPARSED` and is kept apart from `EMPTY`.
   **`FMR_043`** states what the gate does not do. Check count printed by
   `python3 test_register_v2.py`.
+  **A third order then landed** (`WORK_ORDER_V3.md`, verbatim beside the
+  other two — three orders, none overwritten), with `entries_v3.py`
+  defining no parser of its own: the gutter parser and fence walker come
+  from `entries.py`, and the gated score map, the column-boundary report
+  and the F3 reader from `entries_v2.py`, **generalised to take a document
+  rather than copied** — one parser, three documents (`FMR_055`, checked
+  from the AST, with v2's own readings and 142 checks unchanged).
+  **`FMR_044`: v2 against v1 was a pure insertion and this is a rewrite** —
+  338 equal lines of 1218 and 1104, similarity 0.2911 — and **shorter than
+  v2 while carrying three sections v2 lacks**, so prose was compressed,
+  which is the order's own *"expected to be SHORT"* rule applied to the
+  order. **`FMR_045`, the standing blocker removed by declaration:** §0-1
+  reports the prior-art gate run, tables four adjacent artifacts, marks one
+  `CLOSEST PRIOR ART. CITE.` and states `GATE RESULT: not redundant`, with
+  Step 0 now `DONE` — so `FMR_001` (*"the register is not cleared to
+  ship"*) is SUPERSEDED by the order's own report, which is
+  `NOT_VERIFIABLE_HERE` (arxiv.org and export.arxiv.org refuse CONNECT
+  403, measured; github.com is the connecting control) and which the order
+  itself flags *"Verify before citing"*. **`FMR_049`, the sharpest result:
+  §6 THE PARSER GATE is this session's own repair delivered back as a
+  control inside the order it repairs**, and it restates it **one field
+  short** — three fields where `tools/sourced.py` refuses on a fourth, the
+  span, with `span` and `offset` at **zero hits** in §6. Demonstrated
+  rather than argued, three readings of the same two rows: **containment**
+  (what the three fields buy) catches V3 and **misses V6**, where the buggy
+  `-` occurs in its own cell through the hyphen of the arrow; a **searched
+  span** misses it too and points at **offset 0, the arrow**, where the
+  score sits at offset 3 — a span found after the fact can name the wrong
+  occurrence; only a span **produced by the extraction** refuses both, and
+  §6 names neither the span nor where it must come from. **`FMR_047`:** the
+  boundary defect recurs on the same score row **and arrives a second time
+  in the section v3 adds** — one prior-art line cuts on both sides of the
+  column, truncating a cross-reference at `see DUR-` and prefixing its
+  neighbour with `005`, found by the same check on material written after
+  the check existed. **`FMR_048`:** the `id` moved out of the entry fence
+  into the `### DUR-00n` heading, so every block carries 11 of 12 schema
+  fields and the order's own *"an entry missing any field is an UNRATED
+  PART"* fires on **6 of 6** against a format change rather than an
+  omission — while v2's undeclared `NOTE` field is gone, closing `FMR_013`.
+  **`FMR_050`:** Step 6's first conjunct is an equality against a free-text
+  field with no declared vocabulary, and a whole-word `NONE` scan gates in
+  the one entry whose cell reads *"Scored PARTIAL, not NONE"* — the
+  lexical-proxy shape avoided rather than found, reported as a measured
+  false positive; `FMR_008` stands, *consequence non-trivial* still having
+  no test anywhere. **`FMR_051`:** `F_D` directs the PROJECTED fraction
+  into the header and the header states an entry count and a gate status,
+  while the recount is unchanged at **1 of 6, exactly at the cap**.
+  **`FMR_052`:** `F_J`'s exemption is **named and not exercised** — six
+  subsections, zero ENTRY blocks, zero cited instances, two named
+  *observable now*, and the one worked case introduced as a case rather
+  than cited. **`FMR_046`, `FMR_053`, `FMR_054` did not move across the
+  rewrite:** four protective variables against F3's two with `V5` argued
+  away by nothing (and `A-01`'s carrier-as-reader redefinition still not
+  applied to `V5`'s gloss, in a register whose own `DUR-004 STRANDED UNDER
+  LOAD` names the state it produces); `F_L` still stating that correlation
+  makes joint failure HIGHER when survival is non-decreasing in
+  correlation (0.5217 → 0.1000 at p=0.9, n=7) while `A-07` states the same
+  correction without a direction and is right; and `0 of 7` ambient
+  conditions stating a lifetime against prose claiming each has one, `0 of
+  5` carrier-side conditions stating a rate, so `F_M`'s active set is
+  empty in the document that delivers `F_M`. **`FMR_056` UNVERIFIED:** no
+  deployed component inspected and no entity rated — no function takes an
+  entity as an argument — and the register's own ship gate now turns on a
+  claim nobody here can check. Five `[CHOICE n]` markers across the two v3
+  modules (the duration and rate rules being `register_v2`'s, imported with
+  the functions that take them), each printed and each cited inline; the
+  renders screen clean through `sheet-structure-scan/no_severity` with
+  **no exemption**, four authored words reworded rather than exempted.
+  Check count printed by `python3 test_register_v3.py`; `entries_v3.py` and
+  `register_v3.py` both refuse `--selftest`.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
