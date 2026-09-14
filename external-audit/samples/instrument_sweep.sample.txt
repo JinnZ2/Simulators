@@ -1,0 +1,77 @@
+INSTRUMENT SWEEP -- the repository AS RUN
+==================================================================
+
+Answering the request in RESPONSE_TO_REVIEW.md section 2, and its
+O-1. Run at a pinned revision in a throwaway worktree, because
+running these in place edits the tree being measured (SS_009).
+
+  revision              6633778
+  modules exposing --selftest  300
+
+  [CHOICE 4] per-module timeout stated, not tuned: 120s
+  [CHOICE 5] selftest candidates found by source text, then RUN, not trusted
+  [CHOICE 6] an absent third-party package is DEP_MISSING, not a failure
+  [CHOICE 7] five selftest output conventions parsed; a sixth lands in NO_CHECKS rather than being absorbed
+  [CHOICE 8] a refusal is recognised by naming another module, not by exit code and not by a word list
+  [CHOICE 9] a module that raises is never REFUSED: a traceback names .py files and would satisfy CHOICE 8
+  [CHOICE 10] a module whose checks run on plain invocation is told apart by re-running it bare, not by its wording
+
+TALLY
+  FAIL           5
+  FLAG_NOT_ACCEPTED 2
+  NO_CHECKS      28
+  PASS           156
+  REFUSED        107
+  RUNS_BARE      2
+
+  checks executed across every module reporting a count: 4922
+
+OUTPUT CONVENTIONS IN USE  [CHOICE 7]
+  failed_only          38 modules
+  passed_of_total      53 modules
+  total_all_ok         10 modules
+  total_and_failed     59 modules
+  a sixth convention would land in NO_CHECKS, not be absorbed
+
+FAIL (5)
+  bridge-impoundment/selftest_bi.py                    44 of 45 checks passed
+  columbia-chain-cascade/selftest_kill.py              FileNotFoundError: [Errno 2] No such file or directory: '/tmp/claude-0/wt/columbia-chain-cascade
+  mining-increment/selftest_mi.py                      55 of 56 checks passed
+  notes/check_datasets.py                              FAIL: G-SPAN resolves outside sim-span/ (notes/memory-export/files/sleep-duration-instrument.md)
+  zero-sum-curriculum-null/selftest_nc.py              FAIL  the three named artifacts have no independent hit in the tree
+
+TIMEOUT (0)
+  none
+
+DEP_MISSING (0)
+  none
+
+FLAG_NOT_ACCEPTED (2)
+  tests/test_sourced.py                                test_sourced.py: error: unrecognized arguments: --selftest
+  tests/test_study_watch.py                            test_study_watch.py: error: unrecognized arguments: --selftest
+
+RUNS_BARE (2)
+  ch4-four-box/tn_inversion.py                         tn_inversion asserts on plain invocation; no separate --selftest
+  ch4-four-box/units_test.py                           units_test asserts on plain invocation; no separate --selftest
+
+NO_CHECKS (28) -- exits clean, prints no count this reader knows.
+  Not scored as a pass: a module reporting nothing has not shown
+  that it checked anything.
+  adaptive-claim-loop/adaptive_loop.py
+  anchor-position/score.py
+  anchor-position/selftest_apm.py
+  closure-cost/closure.py
+  coinage-log/check_coinage.py
+  constraint-assembly/assemble.py
+  cooperative-substrate/v2/p4_goal.py
+  corpus-input-gaps/check_source_class.py
+  corpus-input-gaps/corpus_loop_sim.py
+  crediting-rate/crediting_rate.py
+  custody-verification-band/branching.py
+  custody-verification-band/extract.py
+  ... and 16 more
+
+REFUSED (107) -- not a failure. The house convention is that a
+module refuses an invocation that would run nothing, and names
+where its checks do live.
+

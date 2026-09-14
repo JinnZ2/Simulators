@@ -207,9 +207,22 @@ def amended_scores():
     the buggy value `-` does occur in `-> --   A-02`, through the hyphen
     of the arrow. What catches both rows is that the buggy path never
     LOCATED the value in the cell it names as its source, so it has no
-    span to offer and the gate refuses. See tools/sourced.py."""
+    span to offer and the gate refuses. See tools/sourced.py.
+
+    The document is a PARAMETER. WORK_ORDER_V3.md carries the same map in
+    the same fixed-width columns under a different heading, and a second
+    copy of this function is exactly the drift tools/check_gate_drift.py
+    exists to catch (MF_019: five stale copies of one gate across three
+    drops). entries_v3 supplies its own rows and its own order name; the
+    cell parsers, the gate calls and the authoritative-score rule are
+    this one object."""
+    return amended_scores_from(ORDER_NAME, _vmap_lines())
+
+
+def amended_scores_from(order_name, rows):
+    """amended_scores over an arbitrary (order_name, [(line_no, line)])."""
     out = {}
-    for n, line in _vmap_lines():
+    for n, line in rows:
         vid = line.split()[0]
         cls_i, cls_j = VMAP_COLS["classical"]
         ml_i, ml_j = VMAP_COLS["ml"]
@@ -217,8 +230,8 @@ def amended_scores():
         cls_cell, ml_cell, am_cell = (line[cls_i:cls_j], line[ml_i:ml_j],
                                       line[am_i:])
 
-        ml_loc = S.Locator(ORDER_NAME, n, ml_i, ml_j, vid + " ml")
-        am_loc = S.Locator(ORDER_NAME, n, am_i, am_j, vid + " amendment")
+        ml_loc = S.Locator(order_name, n, ml_i, ml_j, vid + " ml")
+        am_loc = S.Locator(order_name, n, am_i, am_j, vid + " amendment")
         b_ok, b_cuts = ml_loc.boundary_clean(line)
 
         def _score(cell, loc, span, render=None):
@@ -228,7 +241,7 @@ def amended_scores():
                                           render=render))
 
         classical = _score(cls_cell,
-                           S.Locator(ORDER_NAME, n, cls_i, cls_j,
+                           S.Locator(order_name, n, cls_i, cls_j,
                                      vid + " classical"),
                            _sign_span(cls_cell))
         original = _score(ml_cell, ml_loc, _sign_span(ml_cell))
@@ -272,23 +285,46 @@ def vmap_boundary_report():
     boundary falling inside a token makes the claim false, truncating the
     cell to its left and prefixing the cell to its right with somebody
     else's text. Found by the gate, not by reading the table."""
+    return vmap_boundary_report_from(ORDER_NAME, _vmap_lines())
+
+
+def vmap_boundary_report_from(order_name, vmap_rows, cols=None):
+    """vmap_boundary_report over an arbitrary document's score rows.
+
+    `cols` generalises the reader to a document whose V-map has a
+    different column layout -- v4 rewrote the table into five columns
+    with word score tokens. Defaulting to VMAP_COLS keeps v2's and v3's
+    readings byte-identical; the alternative was a fourth copy of a
+    boundary walk, which is what MF_019 records the cost of."""
+    cols = VMAP_COLS if cols is None else cols
     rows = []
-    for n, line in _vmap_lines():
+    for n, line in vmap_rows:
         vid = line.split()[0]
-        for name, (i, j) in sorted(VMAP_COLS.items()):
-            loc = S.Locator(ORDER_NAME, n, i, j, vid + " " + name)
+        for name, (i, j) in sorted(cols.items()):
+            loc = S.Locator(order_name, n, i, j, vid + " " + name)
             ok, cuts = loc.boundary_clean(line)
             if not ok:
                 rows.append({"id": vid, "line_no": n, "column": name,
                              "cuts": list(cuts),
                              "cell": loc.cell(line),
                              "spill": line[j:].strip() if j else ""})
-    return {"n_rows": len(_vmap_lines()), "cut": rows, "n_cut": len(rows)}
+    return {"n_rows": len(vmap_rows), "cut": rows, "n_cut": len(rows)}
+
+
+ORIGINAL_MARKERS = ("ORIGINAL FORM of F3 listed ", "Original F3 listed ")
 
 
 def f3_claim():
     """The wins and losses F3 names, read out of its own text."""
-    lines = _section("### 1B-1", stop_prefix=("## ",))
+    return f3_claim_from(_section("### 1B-1", stop_prefix=("## ",)))
+
+
+def f3_claim_from(lines):
+    """f3_claim over an arbitrary section's lines. The two documents word
+    the withdrawal differently -- v2 "ORIGINAL FORM of F3 listed", v3
+    "Original F3 listed" -- so the marker is a tuple and a document
+    matching neither returns an empty original_wins rather than silently
+    reporting that nothing was withdrawn."""
     txt = " ".join(" ".join(lines).split())
     wins, losses, original = [], [], []
     i = txt.find("Wins after amendment are ")
@@ -301,12 +337,18 @@ def f3_claim():
         seg = txt[j + len("Losses are "):].split(":")[0]
         losses = [w.strip() for w in seg.replace(" and ", ",").split(",")
                   if w.strip().startswith("V")]
-    k = txt.find("ORIGINAL FORM of F3 listed ")
-    if k >= 0:
-        seg = txt[k + len("ORIGINAL FORM of F3 listed "):].split(" among")[0]
+    marker = None
+    for cand in ORIGINAL_MARKERS:
+        k = txt.find(cand)
+        if k >= 0:
+            marker = cand
+            break
+    if marker is not None:
+        seg = txt[k + len(marker):].split(" among")[0]
         original = [w.strip() for w in seg.replace(" and ", ",").split(",")
                     if w.strip().startswith("V")]
-    return {"wins": wins, "losses": losses, "original_wins": original}
+    return {"wins": wins, "losses": losses, "original_wins": original,
+            "original_marker": marker}
 
 
 # -------------------------------------------------------- entries

@@ -1,0 +1,31 @@
+
+-- 1  the order, landed verbatim
+
+-- 2  v3 against v2, measured
+
+-- 3  Step 0 -- FMR_001's blocker
+
+-- 4  the loss-variable map
+
+-- 5  column boundaries -- FMR_042, twice
+
+-- 6  the entry blocks
+
+-- 7  Steps 5, 6 and 7
+
+-- 8  projection, and the header F_D asks for
+
+-- 9  F_K and F_M
+
+-- 10  F_L, F_J, F_I
+
+-- 11  section 6 -- this session's repair, delivered back
+
+-- 12  entry 0, the amendment record, still open
+
+-- 13  one parser, three documents
+
+-- 14  housekeeping
+
+==============================================================
+checks: 132   failed: 0

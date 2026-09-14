@@ -1,0 +1,11 @@
+[CHOICE 4] per-module timeout stated, not tuned: 120s
+[CHOICE 5] selftest candidates found by source text, then RUN, not trusted
+[CHOICE 6] an absent third-party package is DEP_MISSING, not a failure
+[CHOICE 7] five selftest output conventions parsed; a sixth lands in NO_CHECKS rather than being absorbed
+[CHOICE 8] a refusal is recognised by naming another module, not by exit code and not by a word list
+[CHOICE 9] a module that raises is never REFUSED: a traceback names .py files and would satisfy CHOICE 8
+[CHOICE 10] a module whose checks run on plain invocation is told apart by re-running it bare, not by its wording
+[CHOICE 11] default revision pinned, not HEAD: at HEAD this folder would sweep itself
+[CHOICE 1] survey revision established by family drift, not stated in the report
+[CHOICE 2] `.github` counted as present-and-unnamed, not as a miscount
+[CHOICE 3] a folder 'exists' iff the tree carries any path under `<name>/`

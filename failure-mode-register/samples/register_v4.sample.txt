@@ -1,0 +1,200 @@
+WORK ORDER V4 -- AUDIT
+======================================================================
+
+The order is landed verbatim and modified by nothing here. Every
+disagreement is recorded rather than smoothed. No deployed component and
+no entity is rated anywhere in this module.
+
+1. IS V4 A REVISION OR A REWRITE  [CHOICE 1]
+   v3 1104 lines, v4 1235 lines, equal 727, ratio 0.6216
+   inserted 67, deleted 12, replaced 534  -> REWRITE
+    v2 against v1 was a pure insertion. v3 against v2 was a rewrite. This
+    is a rewrite too, and shorter in no dimension: v4 is the longest of
+    the four.
+
+2. THE PRIOR-ART GATE REOPENS  [CHOICE 5]
+   0-1 STATUS          RUN
+   REPORT STATUS       NOT_VERIFIABLE_HERE
+   version line        SHIP BLOCKED
+   step 0              PRIOR-ART CHECK.        RUN, report NOT_VERIFIABLE_H
+   three agree         yes
+   artifacts           4, unverified ids 4
+    v3 reported this gate DONE and removed the ship blocker. v4 reports it
+    RUN with the report unverifiable and puts the blocker back, so FMR_001
+    is OPEN again by the order's own declaration. arXiv still refuses
+    CONNECT from here; github.com is the control, so the refusal is
+    arXiv-specific and not general egress failure.
+
+   the reversal is not in the amendment record
+     amendments                18
+     amendments about the gate A-13
+     the blocker cites         A-12
+     which is about            ID MOVED OUT OF THE FIELD BLOCK, ALL ENTRIES UNRATED
+    Section 10's own rule is that a superseded statement is retained and
+    silent overwrite is not permitted. A gate status moving DONE to RUN is
+    a superseded statement. It is recorded in 0-1 and in D-01, in no
+    amendment, and the one cross-reference the blocker gives resolves to
+    the id-field amendment.
+
+3. F3 RESTATED, AND V5 STILL UNDISPOSED
+   protective after amendment, recounted  V5, V7, V9, V13
+   the order states                       V5, V7, V9, V13
+   agree                                  yes
+   disposed by F2 V9   claimed by F3 V7, V13   undisposed V5
+   recomputed undisposed                  V5
+    FMR_046 recorded F3 claiming two wins over a table showing four, with
+    V5 argued away by nothing. v4 restates F3 as four, disposes one,
+    claims two, and routes V5 to D-04. The restatement reproduces from the
+    table. What did not move is V5 itself.
+
+   and the block restating it carries an arrow in a status cell
+     UNDISPOSED               V5                  -> D-04
+    Section 1's own format rule, applied one section earlier, is that no
+    hyphen, arrow or punctuation glyph appears in any score or status
+    cell. the F3 block has two columns, and a two-column fixed-width block
+    is indistinguishable from a gutter block; entries_v4 [CHOICE 5] states
+    the cost and this is the instance of it.
+
+4. D-06: THE MECHANICAL CHECK, RUN ON ALL THREE  [CHOICE 4]
+        tables  cuts   glyphs  col0 wraps
+   v2   2       0      1       3
+   v3   3       2      5       3
+   v4   5       0      1       3
+   the change holds             yes
+   v3 cut lines                 50
+   v3 cut columns               MISSES, SCOPE
+    D-06 asks for a mechanical check in the harness rather than a rule in
+    the text. This is it, and it is document-wide because the recurrence
+    D-06 records was in a table the V-map check did not look at. It fires
+    on v3's prior-art table and is silent on v4's, so the change holds and
+    the check is not silent by construction.
+
+   residual, present in v2, v3 and v4 alike:
+     CHANGE RATE    bound, unsynchro-
+    Section 5-1's rate table carries a hyphenated line wrap in a rate cell
+    in every version, and three rows whose first column is filled and
+    whose other columns are blank, which is a first-column wrap and a
+    one-cell row written the same way. Neither was repaired, because the
+    rule was in prose and the only check looked at the V-map. That is
+    D-06's finding, measured.
+
+5. F_N: THE RATING VECTOR ACROSS THE REFORMAT  [CHOICE 2]
+   v3 schema 12 fields, unrated parts 6 of 6
+   v4 schema 12 fields plus optional note, unrated parts 0 of 6
+   id in the field block        yes
+   id matches its heading       yes
+   F_N states v3 failed 6 of 6  yes
+    FMR_048 recorded every entry becoming an UNRATED PART under v3's own
+    rule against a change that altered no content. v4 puts the id back in
+    the field block and the vector returns to rated on all six. F_N is the
+    falsifier added so the next reformat is checked against the vector
+    rather than inspected.
+
+6. `note` IS DECLARED NOW. `name` IS NOT.  [CHOICE 3]
+   declared optional            note
+   `note` carried by            5 of 6 entries
+   UNDECLARED `name` carried by   6 of 6 entries
+    A-15 records a field used without being declared and then removed
+    without the removal being recorded, and repairs it by declaring `note`
+    optional. FMR_013 closes on that. The class does not: `name` is
+    carried by every entry, appears in no schema, and is the field a
+    reader would look up first. Same shape, one field over, in the
+    revision that names it. It does not fire the UNRATED PART rule, which
+    is about absence.
+
+7. SECTION 6'S FOURTH REQUIREMENT  [CHOICE 4]
+   three fields   the value
+   three fields   the literal source text
+   three fields   the locator: which cell, which line
+   buys           CONTAINMENT. A value that cannot name a source cannot score.
+   does not buy   PROVENANCE. The three fields do not distinguish a span the extraction produced from a span found by searching afterwards.
+   fourth stated  yes
+
+   constructed on the row it was found on:
+     cell                     '-> --   A-02'
+     searched span            (0, 1), offset 0
+     span emitted by the read (3, 5), offset 3
+     post-hoc span passes     yes
+     offsets differ           yes
+    The order's stated failure signature -- a locator resolving to offset
+    0 while the value sits at offset 3 -- reproduces exactly, on the row
+    it was first found on. The gate passes the searched span, and no check
+    of the three fields can refuse it, because provenance is a property of
+    the constructor and the gate sees fields. tools/sourced.py already
+    ships both constructors; what it does not do is refuse the searched
+    one.
+
+8. F_L PROHIBITS A SIGN NOW
+   states no direction          yes
+   prohibits a number           yes
+   prohibits a sign             yes
+   conclusion unchanged         yes
+   A-17 found by                computing survival across rho against the asserted sign.
+    FMR_053 recorded F_L stating that correlation makes joint failure
+    HIGHER, which computing survival across rho does not support. v4
+    removes the direction, retains the superseded statement in A-17, and
+    widens the prohibition from a number to a number and a sign. The
+    conclusion rests where it always did, on the inability to ensure each
+    term.
+
+9. THE ACTIVE AMBIENT SET IS EMPTY
+   artifact-side candidates     7, lifetimes stated 0
+   lifetime column reads        not stated
+   carrier-side candidates      5, rates stated 0
+   rate column reads            none
+   active set empty             yes
+   header states it             yes
+    A-16 records both candidate sets having been presented as the ambient
+    set when neither satisfies the register's own admission rules. v4
+    marks them EXCLUDED with the empty columns visible and states the
+    empty set in the header. The recount agrees. The falsifiers and the
+    set they empty are still delivered in one document, which is what
+    makes the reading checkable at all.
+
+10. THE HEADER, AND F_D
+    fields                      PROJECTED FRACTION, ACTIVE AMBIENT SET
+    projected fraction stated   yes
+    cites F_D                   yes
+    F_D asks for the PROJECTED fraction in the header and it is there,
+    stated as a SCOPE rather than as a count over entries. The entry-level
+    recount is a different quantity and is not substituted for it.
+
+11. A FOURTH SCORE TOKEN
+    legend declares             LOSS, LOSS2, PROT
+    V14 ml_amended reads                SPLIT
+    A-03 splits V14 and the split is in the amendment record. The legend
+    is not amended with it, so a reader taking the legend as the
+    vocabulary finds a value outside it. Reported rather than scored: the
+    split is the content and the legend is the presentation.
+
+12. FALSIFIERS
+    v3 13, v4 14, added F_N
+    changed                     F_B, F_D, F_J, F_K, F_L, F_M
+    dropped                     none
+
+13. STEP 5, RECOUNTED
+    entries 6   single-valued DUR-004, DUR-005, DUR-006   multi-valued DUR-001, DUR-003
+    over single-valued          {'NO': 3}
+    no declared value           DUR-002
+    merged distribution         --  (the two multi-valued cells vary along differ)
+    step 6 gated in             DUR-001, DUR-003, DUR-004, DUR-005, DUR-006
+    step 6 second conjunct      NOT_EVALUABLE
+    step 7 null set             empty
+    step 7 partial              DUR-002
+
+14. STILL OPEN, AS DELIVERED
+    D-01   FMR_001 OPEN
+    D-02   STEP 1 NOT DONE
+    D-03   CORRELATED-BLOCK LOSS has no entry
+    D-04   V5 UNDISPOSED
+    D-05   ACTIVE AMBIENT SET EMPTY
+    D-06   COLUMN-BOUNDARY CUT RECURRED IN NEW MATERIAL
+    D-07   PROCEDURE REPRODUCIBILITY (A-10) has no entry and no propo
+    D-08   PROVENANCE REGRESS (5-2) is a distinct class from degradat
+    D-09   CARRIER-SIDE DETECTION
+    D-10   FORCING FUNCTION
+
+    FMR_069: no deployed component was inspected and no entity is rated.
+    No function in this module takes an entity as an argument. Every
+    number above is a property of the delivered text, of the order's own
+    rules, or of this build's arithmetic.

@@ -1,0 +1,10 @@
+      known because: no denominator; None rather than a division or an infinity that would sort above every measured geometry
+
+metrics registered: 24   expected: 24   COMPLETE
+cases disagreeing with the registry: 0
+
+repo: /tmp/claude-0/wt  files_scanned: 2331  thresholds: /tmp/claude-0/wt/gate-check/thresholds.txt
+1_unknown_return_path    HELD_RETRIEVABLE    AMOC/baseline.py:118 
+2_kill_rule              HELD_RETRIEVABLE    AMOC/baseline.py:117 
+3_tests_cover_failure    HELD_RETRIEVABLE    anchor-measurand-crossing/selftest_amc.py:124 count=624 present=True threshold=3 at_or_above_threshold=True
+4_demo_can_fail          HELD_RETRIEVABLE    cycle-ledger/demo_cll.py:84 detail=input read at cycle-ledger/demo_cll.py:75

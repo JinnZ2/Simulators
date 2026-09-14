@@ -112,14 +112,16 @@ def _lstrip_with_arg(fn_name, src):
     return hits
 
 
-ok(_lstrip_with_arg("amended_scores", E2_SRC) == [],
+ok(_lstrip_with_arg("amended_scores", E2_SRC) == []
+   and _lstrip_with_arg("amended_scores_from", E2_SRC) == [],
    "the amended score is not read with strip on a character set -- "
    "lstrip(\"-> \") deletes the value's own leading \"--\" and returns the "
    "UNamended score on the map whose rule is that the amended one is "
    "authoritative. Read from the AST, because a substring scan fires on "
    "the docstring that names the refused construct",
-   str(_lstrip_with_arg("amended_scores", E2_SRC)))
-ok(_lstrip_with_arg("amended_scores", E2_SRC.replace(
+   str(_lstrip_with_arg("amended_scores", E2_SRC)
+       + _lstrip_with_arg("amended_scores_from", E2_SRC)))
+ok(_lstrip_with_arg("amended_scores_from", E2_SRC.replace(
        "        out[vid] = {",
        "        _ = am_cell.lstrip(\"-> \")\n        out[vid] = {")) != [],
    "and the AST check is not CONSTANT_SILENT: a planted lstrip fires it")

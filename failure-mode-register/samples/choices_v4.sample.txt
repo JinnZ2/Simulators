@@ -1,0 +1,16 @@
+CHOICES -- register_v4.py
+
+  [CHOICE 1] the pair measured is v4 AGAINST V3, not against v1: v3 is what v4 supersedes, and the v1 pair is already measured in register_v2.
+  [CHOICE 2] F_N's rating vector is computed on BOTH documents with the SAME rule, so a difference is a property of the format change and not of two readers.
+  [CHOICE 3] a field present in an entry and absent from the schema is reported as UNDECLARED and does not fire the UNRATED PART rule, because that rule is about absence; the order says so and A-15 is the amendment that says so.
+  [CHOICE 4] section 6's fourth requirement is tested by CONSTRUCTING both spans the order distinguishes and passing each through the delivered gate, rather than by reading tools/sourced.py.
+  [CHOICE 5] the prior-art gate's status is read from 0-1's own STATUS block, not from the Version line and not from section 7's Step 0, so a disagreement among the three is visible.
+
+CHOICES -- entries_v4.py
+
+  [CHOICE 1] entry blocks are located by their `### DUR-00n` heading and the id is then read from the FIELD BLOCK, which is where A-12 puts it; the heading is treated as presentation, as the order says.
+  [CHOICE 2] the V-map column layout is DERIVED from the header row rather than hard-coded, because A-13 changed the layout and a hard-coded one would have followed the old document silently.
+  [CHOICE 3] the candidate ambient sets are read as fixed-width tables in v4 (v2 carried them as indented free lists, v3 as fenced lists), and a candidate whose name wraps onto a continuation line is joined to the row above it rather than dropped.
+  [CHOICE 4] D-06 asks for a mechanical check rather than a rule in the text, so format_rule_scan walks EVERY fixed-width table in the whole document, not the V-map alone -- the recurrence D-06 records was in a table the V-map check did not look at.
+  [CHOICE 5] a fixed-width table is recognised at THREE or more columns. A two-column fixed-width block is the same shape as a gutter block, and both 0-1's STATUS block and DUR-006-B's TERM table are gutter blocks; the cost is that a genuine two-column table would not be scanned.
+  [CHOICE 6] a cell is a SCORE OR STATUS cell for A-13's glyph rule when its column label is not one of the free-text labels named in FREE_TEXT_COLUMNS -- a declared list, because whether a column holds a score is a reading of the header and not a lexical property of the cells under it.

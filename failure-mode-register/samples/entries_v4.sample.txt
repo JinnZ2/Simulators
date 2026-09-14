@@ -1,0 +1,7 @@
+WORK_ORDER_V4.md
+  entries        6
+  schema fields  12 required, ['note'] optional
+  V-map rows     14
+  falsifiers     14
+  amendments     18
+  open defects   10
