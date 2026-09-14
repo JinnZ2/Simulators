@@ -607,6 +607,42 @@ def _gxc_commit_specificity(which):
     raise ValueError(which)
 
 
+# The metrics `seed()` is expected to register, written down here rather
+# than counted from the calls. A `register(...)` for a new metric once
+# landed after a `finally` inside a helper and never executed: the registry
+# reported one fewer metric than the file contains, every metric that DID
+# register still passed, and nothing said so. A count taken from the calls
+# cannot catch that, because the call that did not run is not there to be
+# counted. An expected set can. Adding a metric means adding a line here --
+# deliberately, so the addition is visible in a diff.
+EXPECTED_METRICS = (
+    "agent-lifecycle-energy/phase_energy.py::integrate",
+    "anchor-measurand-crossing/amc.py::crossing_band",
+    "anchor-position/normalize.py::crossing_count",
+    "crediting-rate/crediting_rate.py::bin_gap",
+    "failure-mode-register/register.py::fraction_cap",
+    "failure-mode-register/register_v2.py::joint_survival",
+    "frame-location-benchmark/score.py::false_positive_rate",
+    "gap-existence-cases/commit_store.py::commit_specificity",
+    "internal-reference-boundary/radials.py::effective_origins",
+    "internal-reference-boundary/radials.py::sanction_ratio_point",
+    "model-deprecation-backcast/null_check.py::lag_of_peak",
+    "nonidentity-census/t6_window_declaration.py::decided_by_tracks_window",
+    "nonidentity-census/t6_window_declaration.py::marginal_majority (REPLACED)",
+    "null-harness/null_harness.py::_verdict",
+    "ontology-probe/probe.py::absent_coverage",
+    "ontology-probe/probe.py::rates",
+    "operator-machine-coupling/coupling_separation.py::interaction_fraction",
+    "return-path/return_path.py::ratio",
+    "routing-data-layer/rate_form.py::sustained_excess",
+    "shape-spec-audit/shadow_read.py::outline_area",
+    "sheet-structure-scan/sheetmodel.py::rank",
+    "sim-span/sim_span.py::quad_fit",
+    "sim-span/three_column.py::ols",
+    "trigger-geometry/trigger_geometry.py::accumulation_ratio",
+)
+
+
 def seed():
     """Registers the two instances the rule was earned from."""
     fn, detail = _extract_verdict()
@@ -1114,6 +1150,161 @@ def seed():
     )
 
 
+    register(
+        "internal-reference-boundary/radials.py::effective_origins",
+        _irb_effective_origins,
+        [
+            case("four uncoupled", ([[1.0, 0.0, 0.0, 0.0],
+                                     [0.0, 1.0, 0.0, 0.0],
+                                     [0.0, 0.0, 1.0, 0.0],
+                                     [0.0, 0.0, 0.0, 1.0]],), 4.0,
+                 "the participation ratio of an identity matrix is n; "
+                 "four origins sharing nothing are four observations",
+                 tol=1e-12),
+            case("four fully coupled", ([[1.0] * 4 for _ in range(4)],),
+                 1.0,
+                 "all-ones has one non-zero eigenvalue, so the ratio is "
+                 "1: one observation measured four times, which is the "
+                 "handoff's own sentence",
+                 tol=1e-12),
+            case("two at rho 0.5", ([[1.0, 0.5], [0.5, 1.0]],), 1.6,
+                 "n^2 / sum C_ij^2 = 4 / (1 + 0.25 + 0.25 + 1) = 1.6, "
+                 "derived from the identity rather than from the code",
+                 tol=1e-12),
+            case("three at rho 0.5", ([[1.0, 0.5, 0.5],
+                                       [0.5, 1.0, 0.5],
+                                       [0.5, 0.5, 1.0]],), 2.0,
+                 "9 / (3 + 6 * 0.25) = 9 / 4.5 = 2.0",
+                 tol=1e-12),
+            case("empty", ([],), None,
+                 "no origins is None, not zero -- a count of zero "
+                 "effective origins would say the coupling collapsed "
+                 "them, and nothing was declared"),
+        ],
+        note=("R6's ORIGIN-BREADTH TAGGING RULE: not a count of fields but "
+              "the EFFECTIVE number of independent origins, collapsing "
+              "toward 1 as coupling rises. That is the participation "
+              "ratio model-ecology/phylogeny.py computes with an "
+              "eigensolver; for a symmetric matrix with unit diagonal it "
+              "is n^2 / sum_ij C_ij^2 exactly, so it needs none. The two "
+              "extremes are where an error in the identity would show."),
+    )
+
+    register(
+        "internal-reference-boundary/radials.py::sanction_ratio_point",
+        _irb_sanction_ratio,
+        [
+            case("anchor, low incidence", (1e-4, 0.25), 4.0e-4,
+                 "1e-4 findings per person-year over a 25% per-year "
+                 "occurrence rate. Both legs on one time base is the "
+                 "whole condition for this being a ratio at all",
+                 tol=1e-16),
+            case("anchor, high incidence", (1e-4, 0.50), 2.0e-4,
+                 "the same numerator over 50%",
+                 tol=1e-16),
+            case("career-rebased", (1e-4, 0.25 / 30.0), 1.2e-2,
+                 "25% over a 30-year career is 0.833%/yr; the same "
+                 "numerator over that is 1.2e-2 -- a factor of 30 from "
+                 "the first case, on one undeclared word",
+                 tol=1e-9),
+            case("empty occurrence rate", (1e-4, 0.0), None,
+                 "None, never a ratio. A zero occurrence rate is a rate "
+                 "nobody recorded, and dividing by it would report the "
+                 "sanction base rate as infinite rather than as absent"),
+        ],
+        note=("R3, which the handoff calls its strongest empirical leg. "
+              "Its own anchor states the two legs on different time "
+              "bases, so the ratio is a band spanning about 60x until "
+              "the incidence window is declared; these cases pin the "
+              "ends of that band."),
+    )
+
+
+    register(
+        "failure-mode-register/register_v2.py::joint_survival",
+        _fmr_joint_survival,
+        [
+            case("independent, seven terms", (0.9, 7, 0.0), 0.9 ** 7,
+                 "at correlation zero the mixture is the plain product; "
+                 "0.9^7 = 0.4782969, computed from the exponent and not "
+                 "from the code", tol=1e-12),
+            case("perfectly comonotonic", (0.9, 7, 1.0), 0.9,
+                 "at correlation one every term takes the same draw, so "
+                 "the conjunction is one marginal. This end is where an "
+                 "error in the mixture weights shows", tol=1e-12),
+            case("two terms, half correlated", (0.5, 2, 0.5), 0.375,
+                 "0.5*0.5 + 0.5*0.25 = 0.375 by hand. The pairwise "
+                 "correlation of this mixture IS rho, so a "
+                 "parameterisation that smuggled in a scale would miss "
+                 "here", tol=1e-12),
+            case("certain terms", (1.0, 7, 0.0), 1.0,
+                 "terms that always hold give a conjunction that always "
+                 "holds, at any correlation", tol=1e-12),
+            case("no terms", (0.9, 0, 0.5), None,
+                 "fewer than one term is not a conjunction. None, not "
+                 "1.0 -- an empty product returning 1.0 would report a "
+                 "conjunction of nothing as certain"),
+        ],
+        note=("Used ONLY to check the DIRECTION of falsifier F_L, which "
+              "states that correlation makes joint failure HIGHER. "
+              "Survival here is non-decreasing in rho (derivative "
+              "p - p^n >= 0), so failure is non-increasing and the "
+              "stated direction is backwards. F_L's own instruction is "
+              "to put no number on the conjunction, and none of these "
+              "attaches to anything."),
+    )
+
+
+def _irb_effective_origins(coupling):
+    """internal-reference-boundary/radials.py::effective_origins,
+    imported. The expected values are derived from the trace identity
+    n^2 / sum_ij C_ij^2 and not from the implementation."""
+    import importlib.util
+    path = os.path.join(ROOT, "internal-reference-boundary", "radials.py")
+    sys.path.insert(0, os.path.dirname(path))
+    try:
+        spec = importlib.util.spec_from_file_location("_irb", path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod.effective_origins(coupling)
+    finally:
+        sys.path.pop(0)
+
+
+def _irb_sanction_ratio(consequence_rate, incidence_per_year):
+    """internal-reference-boundary/radials.py::sanction_ratio_point,
+    imported. The inversion is where an error hides: the expected values
+    are computed from the stated anchors by hand."""
+    import importlib.util
+    path = os.path.join(ROOT, "internal-reference-boundary", "radials.py")
+    sys.path.insert(0, os.path.dirname(path))
+    try:
+        spec = importlib.util.spec_from_file_location("_irb2", path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod.sanction_ratio_point(consequence_rate,
+                                        incidence_per_year)
+    finally:
+        sys.path.pop(0)
+
+
+def _fmr_joint_survival(p, n, rho):
+    """failure-mode-register/register_v2.py::joint_survival, imported.
+    The expected values are computed by hand from the mixture
+    rho*p + (1-rho)*p**n, not read off the implementation. The two ends
+    (rho 0 and rho 1) are where a weight error hides."""
+    import importlib.util
+    path = os.path.join(ROOT, "failure-mode-register", "register_v2.py")
+    sys.path.insert(0, os.path.dirname(path))
+    try:
+        spec = importlib.util.spec_from_file_location("_fmrv2", path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod.joint_survival(p, n, rho)
+    finally:
+        sys.path.pop(0)
+
+
 def _fmr_fraction_cap(n_other, fraction):
     """failure-mode-register/register.py::fraction_cap, imported. Largest n
     with n/(n+k) <= f, where k is the number of non-PROJECTED entries. The
@@ -1130,6 +1321,16 @@ def _fmr_fraction_cap(n_other, fraction):
         return mod.fraction_cap(n_other, fraction)
     finally:
         sys.path.pop(0)
+
+
+def completeness():
+    """Expected against registered, the same value-and-source rule applied
+    to the registry: a registration is a value whose source is its call
+    site, and a call site that did not execute leaves a count that names
+    it. See tools/sourced.registry_complete."""
+    import sourced as _S
+    return _S.registry_complete(EXPECTED_METRICS, registry_ids(),
+                                "tools/known_answer.py::seed")
 
 
 def report():
@@ -1155,9 +1356,15 @@ def report():
             print("  !! %s: %s" % (cname, why))
         bad.extend((mid, c, w) for c, w in u)
         print()
-    print("metrics registered: %d" % len(registry_ids()))
+    comp = completeness()
+    print("metrics registered: %d   expected: %d   %s"
+          % (comp["registered"], comp["expected"], comp["state"]))
+    for m in comp["missing"]:
+        print("  !! expected and NOT registered: %s" % m)
+    for m in comp["extra"]:
+        print("  !! registered and not expected: %s" % m)
     print("cases disagreeing with the registry: %d" % len(bad))
-    return 1 if bad else 0
+    return 1 if (bad or not comp["ok"]) else 0
 
 
 if __name__ == "__main__":

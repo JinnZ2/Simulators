@@ -1,0 +1,24 @@
+CHOICES -- every open parameter, printed where it is taken
+
+[CHOICE 1] R1 denominator. The handoff's two anchors are given in different forms -- free-range cattle '~0' is a rate, gated bathroom '~continuous' is a saturation statement with no value on a per-time scale. R1 is therefore encounters per OCCASION OF NEED, dimensionless in [0,1], which puts both anchors on one scale (cattle 0.0, bathroom 1.0). A per-time reading leaves the second anchor unstated.
+
+[CHOICE 2] R2 scale. The handoff says graded by distance, not binary, and supplies no ladder. DISTANCE_LADDER below is five declared rungs from 0.00 (the boundary-drawing body defines the metric itself) to 1.00 (the constrained party defines it). Every R2 conclusion is a reading against that ladder.
+
+[CHOICE 3] R3 career length. The career reading of the incidence leg takes a career length to reach the per-researcher-year base the consequence leg is already on. Default 30 years, printed.
+
+[CHOICE 4] R5 breadth threshold for 'high'. The handoff states the verdict rule and no cutoff, and says the base rate is unknown. Default 3 extensions, printed; everything short of the two named extremes returns UNDETERMINED.
+
+[CHOICE 5] R5 benefit-correlation threshold for 'zero'. Default |rho| <= 0.20, printed. Same standing as CHOICE 4.
+
+[CHOICE 6] R7 tolerance for 'equal = permeable'. Default entry ratio within [0.5, 2.0], printed.
+
+[CHOICE 7] R6 coupling combination. Four channels are named (citation ancestry, instruments, funders, training lineage) and no rule combines them. Default MAX -- one shared funder is enough to make two origins one observation, which is the handoff's own argument; MEAN is selectable and dilutes it.
+
+[CHOICE 8] R7 second score. Latency is computed only over cases that came in (either credited state). With none absorbed it is None, never 0, since a latency of zero says absorption was immediate.
+
+CHOICES -- gap_transfer
+
+[CHOICE 9] Population inheritance test. Exact identity of the declared population, OR a declared overlap fraction on the successor at or above POPULATION_OVERLAP_FLOOR. Default floor 0.50, printed. A successor declaring neither is UNDECLARED, never NOT_INHERITED.
+
+[CHOICE 10] Horizon inheritance test. Identity of the declared accounting horizon in the SAME UNIT. A horizon declared in a different unit is NOT_EVALUABLE, not unequal -- two horizons in different units are not the same quantity and comparing them is the operation this instrument exists to catch.
+

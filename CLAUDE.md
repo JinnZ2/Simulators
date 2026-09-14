@@ -241,7 +241,8 @@ last three; read in order:
 - `valence-divergence/` — two decoders, one term; logs which read is whose, never assigns a valence
 - `terrain-prior/` — an indicator is a record of the process that made the site; bearing and entanglement, never collapsed
 - `trigger-geometry/` — was the RESPONSE validated in THIS geometry; sensor correct, model inverted
-- `failure-mode-register/` — durability and reconstructability only; the delivered register, parsed not retyped
+- `failure-mode-register/` — durability and reconstructability only; the delivered register, parsed not retyped; v2 lands beside v1, purely additive
+- `internal-reference-boundary/` — seven radials on a boundary drawn from inside; R3's two legs, two time bases
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -11830,6 +11831,206 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   printed by `python3 test_register.py`; `register.py` and `entries.py` both
   refuse `--selftest` (exit 2). Stdlib only, no pytest, no network, parses under
   3.9, phone-buildable, CC0.
+- `internal-reference-boundary/` — A handoff delivered verbatim and built
+  to it: seven radials on one anchor invariant — **a boundary drawn by the
+  party inside it, measured from inside** — across six instances
+  (disciplinary silo, credential, efficiency metric, diagnostic criterion,
+  corporate liability shell, institutional self-investigation), plus a
+  second instrument that tracks the same thing over time. Quantities, not
+  categories, and the handoff's own assembly order is structural: `read_case`
+  returns **no R5 key at all** and `assemble`'s key order is invariant →
+  cases → exemptions-as-a-separate-layer, asserted over the AST rather than
+  described (`IRB_014`). Three non-value states on every radial —
+  `UNDECLARED` / `NEEDS_CORPUS` / `NOT_EVALUABLE` — all reached, with
+  `NEEDS_CORPUS` naming the input it wants, since the handoff marks R6 and
+  R7 method-complete-and-needing-a-corpus and they refuse to emit a number
+  without one (`IRB_013`). **`IRB_001`, the computed one: R3, which the
+  handoff calls its strongest empirical leg, sits on two time bases.** Its
+  own anchor is `~1 finding per 10,000 researchers/yr` against `25-50%
+  self-reported incidence` — the first per person-year, the second a share
+  over an unstated window — so the ratio is a **band spanning ~60x**
+  (per-year `[2.0e-4, 4.0e-4]`, career-at-30 `[6.0e-3, 1.2e-2]`) and the
+  radial returns the band and no point until `incidence_window` is declared;
+  the span moves with `[CHOICE 3]`, so the career length is a choice and not
+  a fact. **`IRB_003`, what made R6's computable half buildable:** the
+  ORIGIN-BREADTH TAGGING RULE is the participation ratio — the statistic
+  `model-ecology/phylogeny.py` takes from eigenvalues — and for a symmetric
+  coupling matrix with unit diagonal it is **`n² / Σ C_ij²` exactly**, no
+  eigensolver, standard library, identity giving n and all-ones giving 1,
+  monotone in coupling; four nominal origins on the worked case come back at
+  **1.93** once shared funders are declared, and it is registered in
+  `tools/known_answer.py` with the empty case returning `None` rather than a
+  count of zero. **`IRB_005`:** R7 names two quantities and calls **each** of
+  them the measure — confirming-over-contradicting entries (denominator:
+  entries admitted) and METHOD-over-CONCLUSION rejections (denominator:
+  rejections issued) — different questions on different denominators, so
+  both are returned and no arithmetic expression contains both.
+  **`IRB_006`, the design move worth naming:** scoring the field's stated
+  REASON removes the need to adjudicate the rejected work, so a field
+  correctly identifying bad method scores as permeable; nothing here holds a
+  correctness verdict on rejected work, asserted over the AST with the scan
+  null-tested on a plant and every refused token a single word (a two-token
+  entry is unmatchable by a scanner that splits identifiers). **`IRB_009`:**
+  the handoff's R5 rule turns on a **measured** zero, and `selfinv-01` has
+  breadth 4 with a constant benefit column — correlation `NOT_EVALUABLE`,
+  verdict `UNDETERMINED`, because scoring the absence as 0.0 awards
+  `ACTUAL_PRINCIPLE` to a claimant nobody measured. **`IRB_012`:** R4's
+  predicted INVERSE sign is refutable (INVERSE and DIRECT on two constructed
+  worlds, `NOT_EVALUABLE` below three cases or on a constant side) and this
+  corpus returns **DIRECT, rho 0.714** — not an accident of the numbers,
+  since a corporate liability shell is a routing device and shells attach
+  where damage capacity is high, so two of the invariant's own six instances
+  run against the prediction by construction of the instance. **`IRB_010`:**
+  the fold test returns **UNRESOLVED** and the discriminating cell
+  (externally-held metric + self-designated exemption) is left out of
+  `cases.py` deliberately, since authoring it would close the handoff's own
+  OPEN item by writing the answer down; a constructed case flips it to
+  DISTINCT, which shows the test is not `CONSTANT_SILENT` and closes nothing.
+  **The second instrument** tracks the gap, not the intervention, and that is
+  a property of the schema — no host carries an efficacy field, asserted over
+  the AST and **refused at intake**, because an instrument holding an efficacy
+  column is one somebody will sort by (`IRB_015`); a successor that MEASURES
+  the gap returns `GAP_CLOSED_NOT_TRANSFERRED` (the reachable negative) and
+  one nobody checked returns UNDECLARED. **`IRB_016`, the finding on the
+  delivered worked case:** it names two hosts, the gap's shape, a short
+  outcome window and a later swing called *the same defect running the other
+  way*, and states no population, no horizon value and no unit — so at its
+  delivered resolution **both transfers return `NOT_EVALUABLE`** and
+  `SAME_GAP_BOTH_DIRECTIONS` does not fire, that reading requiring the
+  accounting horizon shown to be the same one in both hosts. One field closes
+  it; nothing here fills it in. **`IRB_017`, found by running and not by
+  reading, and it bit twice in one build in opposite directions:** `UNDECLARED`
+  is both a missing key and an explicit string — R2 **refused** the explicit
+  form as a rung outside the ladder while a missing key passed, and
+  `horizon_inherited` compared two `UNDECLARED` strings, got equality, and
+  reported the horizon INHERITED, so a chain of two blanks reached the
+  handoff's own conclusion about its own worked case manufactured out of
+  nothing; repaired with one `_absent()` test at every site, pinned both ways.
+  **`IRB_018`:** the checkers fired on their own text twice — `%` is
+  `ast.BinOp`, so the never-combined check fired on the render's own template
+  line and reported that the module combines the two quantities it prints side
+  by side, and the no-expected-verdict check fired on `cases.py`'s own
+  disclaimer; both repaired (formatting excluded; the check now runs over dict
+  keys and bound names, since an expected verdict would be a field) and
+  recorded rather than quietly fixed. **`IRB_019`:** FEEDBACK DISTANCE — the
+  handoff's logged replacement quantity, *R2 at field scale* — is carried as a
+  declared field beside R2 and merged into nothing, so no eighth radial is
+  invented for a result the handoff logs as a result. **`IRB_020`/`IRB_021`
+  UNVERIFIED:** the two named source files under `/areas/` are not in this
+  tree and nothing is reconstructed from them; every empirical figure (the
+  10,000, the 25-50%, the ~1-2yr anonymous-post latency, the worked case) is
+  CARRIED and checked against nothing, and no field, body, institution,
+  practice, treatment or person is coded, scored or named anywhere in the
+  folder. **`IRB_022`:** no two radials are collinear on this corpus, with the
+  limit stated — R2 takes two distinct values across six cases, so the check is
+  weakest exactly where the invariant's own quantity sits. Ten `[CHOICE n]`
+  markers, each printed by `--choices` and each cited at the site where it takes
+  effect, both asserted; the renders screen clean through
+  `sheet-structure-scan/no_severity` with **no exemption**; expected verdicts
+  live in `test_boundary.py` and in neither case file, asserted over their dict
+  keys. Check count printed by `python3 test_boundary.py`; both modules refuse
+  `--selftest` (exit 2). Stdlib only, parses under 3.9, phone-buildable, CC0.
+- `failure-mode-register/` **(revised order, v2)** — `WORK_ORDER_V2.md`
+  landed verbatim **beside** the original per the repo's supersession
+  convention, with `entries.py`/`register.py` untouched and `entries_v2.py`
+  **importing** the v1 gutter parser rather than copying it — one parser, two
+  documents. **`FMR_026`:** the revision is purely additive, measured with
+  difflib rather than read — **694 lines inserted, 0 deleted, 0 replaced** —
+  adding four falsifiers (`F_K`, `F_M`, `F_L`, `F_J`) with every v1 falsifier
+  body verbatim and v1's `F_I`-before-`F_H` ordering carried rather than
+  tidied. **`FMR_027`/`FMR_028`, the loss-variable map:** §1B's own rule is
+  that the amended score is authoritative, and applying §9's amendments gives
+  **four** protective variables (V5, V7, V9, V13) where F3 names **two** —
+  `V9` is argued away by F2 by name (*the protective variable is maxed and
+  does not protect*) and **`V5` by nothing stated anywhere**; and `V5` is
+  exactly where `A-01`'s own definitional correction (*a carrier is SOMEONE
+  WHO CAN READ THE REPRESENTATION*) was not applied, since its gloss is
+  **how often it is actually RE-TAUGHT or re-performed** and it scores `+` on
+  *continuous*, while `DUR-004` STRANDED UNDER LOAD is precisely the state
+  where execution is continuous and the carrier population is near zero — the
+  same slip `A-01` fixed, in the variable next to it. **`FMR_029`, provable:**
+  `F_L` states that *correlation makes the joint failure probability HIGHER*,
+  and under any model preserving the marginals survival is **non-decreasing**
+  in correlation (derivative `p − p^n ≥ 0`), so joint failure is
+  non-increasing — at p=0.9, n=7 it falls **0.5217 → 0.1000** as rho runs 0 to
+  1; the cross-type reading is true at 1 of 5 sweep points, so it is not a
+  general claim either, and **`A-07`, which §9 makes authoritative, states the
+  same correction WITHOUT a direction and is right**. The conclusion is
+  untouched (it rests on the inability to ENSURE each term), `F_L`'s own *do
+  not put a number on it* is followed, and the correction cuts **against** the
+  naive case — the independent product overstates the argument against a
+  single custodian. **`FMR_031`, the headline:** `F_M` admits a carrier-side
+  condition only with a named producing mechanism and a **currently measurable
+  production rate**, and on `DUR-005-B`'s own five candidates **0 of 5 state a
+  rate value** (one names a rate in words, *at replacement rate*, with none) —
+  so the **active set is empty and the falsifier and the set it empties are
+  delivered in the same document**, with `DUR-005-C` stating its own
+  `CONSTANT_FIRES` property and calling it intended: the screen admits
+  everything and `F_M` admits none of it. **`FMR_030`:** `F_K` is
+  `NOT_APPLICABLE_AS_DELIVERED` — **0 of 7** artifact-side conditions carry an
+  expected lifetime though the prose says each has one, and *retention
+  horizon* appears four times carrying no value, so the bound compares two
+  quantities the order states neither of (the `MF_017` shape on a falsifier).
+  **`FMR_032`:** Step 5 recounted on six entries gives **3 of 6** single-valued
+  (all NO), improving `FMR_003` from 1-of-4, while its structural half stands —
+  the two multi-valued cells vary along **different axes** (`DUR-001` control
+  state, `DUR-003` time) so no merged distribution is emitted. **`FMR_033`:**
+  the register sits **exactly at** the PROJECTED cap (1 of 6, cap 1 at
+  `[CHOICE 7]`'s 0.2, imported from `register.py` not reimplemented).
+  **`FMR_034`:** `F_J` directs a marking at *every 6C entry* and §6C carries
+  **7 subsections and 0 ENTRY blocks**. **`FMR_035`:** eleven amendments, all
+  eleven carrying all four fields, and §9's no-silent-overwrite rule is what
+  makes `FMR_027` and `FMR_029` reachable at all. **`FMR_036`, three defects
+  in this build, all found by running:** `lstrip("-> ")` takes a CHARACTER SET
+  and stripped the amendment cell's own leading `--`, returning the
+  **unamended** score on the map whose rule is that the amended one is
+  authoritative; `F_K`'s first check used a bare numeral test and scored
+  `(see DUR-006)` as a stated lifetime and `exceeds ~1` as a horizon value,
+  both running toward reporting the bound as applicable (`UNI_009`/`T1-1`,
+  repaired with numeral-adjacent-to-a-time-unit and pinned both ways); and the
+  `joint_survival` registration landed as dead code after a `finally`, the
+  **second** instance of that in `tools/known_answer.py` from this folder.
+  **`FMR_037`:** `DUR-006-C` as arithmetic — seven terms at 0.90 give
+  conjunction survival 0.4783, four holders at 0.50 give disjunction survival
+  0.9375, so the distributed arrangement is modelled with a **lower**
+  per-holder number and survives more often, which is *the difference between
+  a product of probabilities and a complement of a product* and does not
+  depend on the values. **`FMR_038`:** §6B parses byte-identically in both, so
+  `FMR_016` carries unchanged — *compressed by roughly fifty* is still the LOW
+  end of its own 50–125 band. **`FMR_039` UNVERIFIED:** no deployed component
+  inspected and **no entity rated** — the probability model is named in
+  `[CHOICE 9]`, its parameters ride on every return, no function takes an
+  entity as an argument, and `FMR_025` stands, since Step 0 is still blocked.
+  `joint_survival` is registered in `tools/known_answer.py` with five
+  distinct-valued cases including the empty conjunction returning `None`
+  rather than 1.0. Three `[CHOICE n]` markers numbered on from the v1
+  instrument's 1..8, each printed and each cited inline; both v2 modules refuse
+  `--selftest`; the renders screen clean through
+  `sheet-structure-scan/no_severity` with **no exemption**, three authored
+  words having been reworded rather than exempted. **`FMR_040..FMR_043`, the
+  general repair:** the three `FMR_036` defects are one defect — each produced
+  a value whose stated source does not support it — so `tools/sourced.py`
+  replaces the three patches with one primitive (value + literal source text +
+  locator, one gate, `UNRATED` for anything short of all three), and
+  `amended_scores` now SLICES its cell so the value cannot disagree with its
+  own span while a row carrying no amendment keeps the ML cell as the source
+  of its authoritative score rather than being re-attributed to a cell it did
+  not come from. **`FMR_040`:** containment would have caught `V3` and missed
+  `V6`, where the buggy value `-` really does occur in `-> --   A-02` through
+  the arrow's hyphen — which is why the primitive is a span. **`FMR_041`:**
+  the `lstrip` check is read from the **AST**, because a substring scan fires
+  on the docstring in which the function names the construct it refuses
+  (`UNI_009`/`T1-1` inside the checker written against it), and it is
+  null-tested with a plant; `F_K`'s reading is unchanged at 0 of 7 and now
+  carries seven stated reasons instead of seven silent `False`s.
+  **`FMR_042`, a fourth defect found BY the gate:** the `V2` row runs its ML
+  cell past column 57, so the slice cuts a token and the amendment column
+  reads `ate, hw)` — one row of fourteen, the other thirteen clean, **no
+  published score moving** since the truncated cell begins with the same sign
+  run, so what is false is the LOCATOR and not the value, the class an output
+  check cannot see; the spill files `UNPARSED` and is kept apart from `EMPTY`.
+  **`FMR_043`** states what the gate does not do. Check count printed by
+  `python3 test_register_v2.py`.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
@@ -11841,6 +12042,47 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   - `validate_claim_table.py` — lightweight schema validator for
     any `CLAIM_TABLE.json` produced in the repo; accepts both the
     `statement`/`status` and `hypothesis`/`is_falsified` flavours.
+  - `sourced.py` — **a value and its source travel together.** Three fields
+    on every extracted value: the VALUE, the LITERAL SOURCE TEXT it came
+    from, and the LOCATOR (which document, which line, which columns). Then
+    one gate: anything entering a scoring function carries all three or the
+    function returns `UNRATED` — not zero, not clean, not a default. Written
+    after three defects landed in one folder in one session, all with the
+    same shape and none found by reading: a `lstrip("-> ")` that takes a
+    CHARACTER SET and so ate the value's own leading `--`, returning the
+    UNAMENDED score on a map whose own rule is that the amended one is
+    authoritative; a bare-numeral test that read `(see DUR-006)` as a stated
+    lifetime and `exceeds ~1` as a retention horizon, both false positives
+    running toward reporting a falsifier APPLICABLE; and a `register(...)`
+    call shadowed by a `finally` that never executed, leaving a registry one
+    metric short with everything that DID register still passing.
+    **Containment is not sufficient and one row proves it** — on `V3` the
+    buggy value `+` does not occur in `-> --   A-01` and containment catches
+    it, on `V6` the buggy value `-` DOES occur in `-> --   A-02` through the
+    hyphen of the arrow and containment misses it — so the primitive is a
+    **span**, offsets verified by slicing, and the buggy path has none
+    because it never located the value in the cell it names as its source;
+    both rows refuse for the same reason rather than one refusing by luck. A
+    COMPUTED value declares a `derivation` instead, exactly one of the two,
+    never both and never neither. `numeral_with_unit()` requires a unit token
+    adjacent to the number, so a bare `~1` fails the gate rather than
+    parsing, and the span returned covers the quantity rather than the digit.
+    `registry_complete(expected, registered)` is the same rule applied to a
+    registry — a registration is a value whose source is its call site, and a
+    count taken from the calls cannot catch a call that did not run, because
+    it is not there to be counted; `tools/known_answer.py` now declares
+    `EXPECTED_METRICS` and asserts it at end of run. `Locator.boundary_clean`
+    checks one narrow form of a false locator — a fixed-width column boundary
+    falling inside a token — and **found a fourth defect by it**: one row of
+    the `failure-mode-register` loss-variable map runs its ML cell past
+    column 57, so the amendment column reads text belonging to its left
+    neighbour, and **no published score moves**, the truncated cell beginning
+    with the same sign run, which makes it the class an output check cannot
+    see. What it does NOT do is stated rather than implied: it checks that
+    the three fields are mutually consistent, not that the source is true or
+    that the locator points at the right cell. 41 checks in `--selftest`, 20
+    in `tests/test_sourced.py`, 20 replaying the three defects in
+    `failure-mode-register/test_register_v2.py` section 17.
   - `substrate_substitution.py` — lightweight CLI that walks a
     CLAIM_TABLE and prints the grass/grasshopper substitution next
     to each claim. Structural enforcement for narrative-instinct

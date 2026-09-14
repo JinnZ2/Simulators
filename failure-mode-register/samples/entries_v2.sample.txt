@@ -1,0 +1,18 @@
+WORK_ORDER_V2.md
+  V-map variables      14
+  V-map score rows     14
+  ENTRY blocks         DUR-001, DUR-002, DUR-003, DUR-004, DUR-005, DUR-006
+  artifact-side ambient 7
+  carrier-side ambient  5
+  transfer modes        6
+  conjunction terms     7
+  falsifiers            F_A, F_B, F_C, F_D, F_E, F_F, F_G, F_K, F_M, F_L, F_J, F_I, F_H
+  amendments            A-01, A-02, A-03, A-04, A-05, A-06, A-07, A-08, A-09, A-10, A-11
+  still open            5
+  V-map column boundaries cutting a token: 1 of 14 rows
+    V2 line 70 amended   cuts start  cell='ate, hw)'
+    V2 line 70 ml        cuts end    cell='-- high (versions, data st'
+    a locator is a claim about where a cell ends; a boundary inside a
+    token makes the claim false. No score moves here -- what is false is
+    the locator and not the value.
+  V-map scores failing the value-and-source gate: 0

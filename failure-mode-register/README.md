@@ -35,12 +35,65 @@ WORK_ORDER.md            delivered, verbatim, the single source of truth
 ## Run
 
 ```
-python3 entries.py          what parsed out of the order
-python3 register.py         the register and every computation over it
-python3 test_register.py    the checks (count printed by the run)
+python3 entries.py           what parsed out of WORK_ORDER.md
+python3 register.py          the register and every computation over it
+python3 test_register.py     the checks (count printed by the run)
+
+python3 entries_v2.py        what parsed out of WORK_ORDER_V2.md
+python3 register_v2.py       the revised order, audited
+python3 register_v2.py --choices
+python3 test_register_v2.py  the v2 checks (count printed by the run)
 ```
 
 Stdlib only. No pytest, no network, parses under 3.9, phone-buildable. CC0.
+
+## The revised order
+
+`WORK_ORDER_V2.md` is delivered verbatim **beside** `WORK_ORDER.md`, not
+over it, so both stay inspectable — the supersession convention this
+repository already uses (`observer-exclusion/SPEC_V2`,
+`design-basis-ai/SOURCE_DROP_V2`, `fold-matrix/WORK_ORDER_V2`,
+`mining-increment/SOURCE_DROP_V2`). `entries.py` and `register.py` are
+unchanged; `entries_v2.py` **imports** the v1 gutter parser rather than
+copying it, so one parser reads two documents.
+
+```
+v1  524 lines                v2  1218 lines
+    inserted  694
+    deleted     0
+    replaced    0            -> purely additive, measured with difflib
+    adds F_K, F_M, F_L, F_J; every v1 falsifier body verbatim
+```
+
+Four results, each computed from the delivered text:
+
+```
+F3 names 2 wins, the amended map gives 4      V9 argued away in F2 by name
+                                              V5 by nothing stated      FMR_027
+                                              and V5 is where A-01's own
+                                              correction was not applied FMR_028
+
+F_L states a DIRECTION and it is backwards    survival is non-decreasing
+                                              in correlation, so failure is
+                                              non-increasing: 0.52 -> 0.10
+                                              A-07 states the same correction
+                                              without a direction and is
+                                              right                     FMR_029
+
+F_M empties the set delivered with it         0 of 5 carrier-side conditions
+                                              state a measurable rate;
+                                              active set EMPTY          FMR_031
+
+F_K cannot be applied at all                  0 of 7 conditions carry a
+                                              lifetime; the retention horizon
+                                              is named 4x and never valued
+                                                                        FMR_030
+```
+
+The conjunction model exists to check `F_L`'s **direction** and nothing
+else. `F_L`'s own last line is *do not put a number on it*, and none of
+these numbers attaches to any firm, product, arrangement or person; no
+function takes an entity as an argument.
 
 ## The content is the order's; the computations are this build's
 
@@ -143,6 +196,47 @@ distinct-valued cases. No other function here is registered, and the reason is
 stated rather than left as a silent absence: every other return is a declared
 vocabulary member, a record, or a product whose known answer is its own
 definition.
+
+## The value-and-source gate
+
+`FMR_040..FMR_043`. The three defects at `FMR_036` are one defect: each
+produced a value whose stated source does not support it, and none was found
+by reading. The repair is a shared primitive, `tools/sourced.py`, not three
+patches.
+
+```
+Sourced(value, source_text, locator, span=... | derivation=...)
+
+    gate(x) -> x                    three fields, mutually consistent
+            -> Unrated(reason)      otherwise: not zero, not clean,
+                                    not a default
+```
+
+Containment of the value in the source is the obvious rule and it is **not
+sufficient**:
+
+```
+V3   cell "-> --   A-01"   buggy value "+"   not contained   -> caught
+V6   cell "-> --   A-02"   buggy value "-"   IS contained    -> missed
+                                             (the arrow's hyphen)
+```
+
+So the primitive is a **span**, verified by slicing, and the buggy path has
+none — it never located the value in the cell it names as its source. A
+computed value declares a `derivation` instead; exactly one of the two.
+
+Replayed in `test_register_v2.py` section 17: the amended score slices its
+cell, `(see DUR-006)` and `exceeds ~1` refuse with
+`no_unit_adjacent_to_numeral`, and `tools/known_answer.py` asserts
+`EXPECTED_METRICS` against the registry at end of run — which is what catches
+a `register(...)` shadowed by a `finally`, since a count taken from the calls
+cannot see a call that did not execute.
+
+**A fourth defect, found by the gate.** One row of fourteen in the
+loss-variable map runs its ML cell past column 57, so the fixed-width slice
+cuts a token — ML truncated at `data st`, amendment column reading
+`ate, hw)`. No score moves; the truncated cell begins with the same sign run.
+What is false is the LOCATOR, which is the class an output check cannot see.
 
 ## What this is not evidence about
 

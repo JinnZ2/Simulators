@@ -1,0 +1,105 @@
+WORK_ORDER_V2 -- the revised order, audited
+
+THE PAIR
+  v1 524 lines -> v2 1218 lines
+  inserted 694   deleted 0   replaced blocks 0
+  purely additive: True
+  falsifiers added: F_K, F_M, F_L, F_J
+  v1 falsifier bodies changed: none
+
+LOSS-VARIABLE MAP, amendments applied
+  V1   classical +    ml --   amended --    
+  V2   classical --   ml --   amended --    
+  V3   classical -    ml +    amended --     <- A-01
+  V4   classical +    ml --   amended --    
+  V5   classical +    ml +    amended +     
+  V6   classical +    ml -    amended --     <- A-02
+  V7   classical -    ml +    amended +     
+  V8   classical -    ml --   amended --    
+  V9   classical -    ml ++   amended ++    
+  V10  classical -    ml --   amended --    
+  V11  classical +    ml --   amended --    
+  V12  classical +    ml --   amended --    
+  V13  classical -    ml +    amended +     
+  V14  classical --   ml +    amended SPLIT  <- A-03
+  protective after amendment: V5, V7, V9, V13
+
+F3 CHECK
+  F3 names as wins       V7, V13
+  table gives            V5, V7, V9, V13
+  unaccounted            V5, V9
+  argued away in F2      V9
+  unaccounted, unargued  V5
+  V5 gloss: REGENERATION CYCLE how often it is actually re-taught or re-performed
+
+F_L DIRECTION CHECK
+  model [CHOICE 9] mixture  p=0.9  n=7
+    rho=0.00  survival=0.478297   failure=0.521703  
+    rho=0.25  survival=0.583723   failure=0.416277  
+    rho=0.50  survival=0.689148   failure=0.310852  
+    rho=0.75  survival=0.794574   failure=0.205426  
+    rho=1.00  survival=0.900000   failure=0.100000  
+  derivative in rho: non-negative (p - p^n >= 0)
+  F_L states HIGHER; like-for-like verdict BACKWARDS
+  cross-type reading true at 1 of 5 parameters -> VALUE_DEPENDENT
+  conclusion unaffected: True
+  A-07 states the same correction WITHOUT a direction and is right; section 9 is the authoritative record by the order's own rule. The conclusion -- cannot be ensured, put no number on it -- rests on the inability to ensure each term and is untouched.
+
+CONJUNCTION VS DISJUNCTION (DUR-006-C, as arithmetic)
+  7 terms at p=0.90 -> conjunction survival 0.478297
+  4 holders at q=0.50 -> disjunction survival 0.937500
+  per-holder number below per-term: True
+  the distributed arrangement is modelled with a LOWER per-holder number and survives more often; that is the order's point and it does not depend on the values
+
+F_K ON THE ARTIFACT-SIDE SET
+  conditions 7   with a stated lifetime 0
+  'retention horizon' appears 4 times, carries a value: False
+  state NOT_APPLICABLE_AS_DELIVERED
+  the bound compares two quantities and the order states neither: no condition carries an expected lifetime and no retention horizon carries a value
+
+F_M ON THE CARRIER-SIDE SET
+    UNINST a population that can hold a representation in working memory long
+    UNINST a population that can read low-level implementation at all
+    UNINST training pipelines that produce the above at replacement rate
+    UNINST working conditions permitting sustained single-task attention
+    UNINST a population willing to do maintenance work that carries no attrib
+  active set 0 of 5; empty: True
+  F_M is delivered in the same document as the candidate set it gates; on that set it admits nothing
+  DUR-005-C states no null result: True (intended: True)
+  the screen admits everything and F_M then admits none of it; two stages, and the delivered candidate set comes out empty
+
+STEP 5 OVER SIX ENTRIES
+  DUR-001   PARTIAL, NO
+  DUR-002   --
+  DUR-003   PARTIAL, NO
+  DUR-004   NO
+  DUR-005   NO
+  DUR-006   NO
+  single-valued 3 of 6: DUR-004, DUR-005, DUR-006
+  multi-valued: DUR-001, DUR-003
+     DUR-001 varies along control state (without / with the control)
+     DUR-003 varies along time (degrades from PARTIAL toward NO)
+  no declared value: DUR-002
+  distribution over single-valued cells only: {'NO': 3}
+  merged distribution: -- -- the two multi-valued cells vary along different axes; one distribution over both would be a count across unlike objects
+
+PROJECTED FRACTION
+  entries 6   PROJECTED 1   other 5   cap 1   at cap True
+  entries stating more than one evidence class: DUR-001, DUR-005
+  [CHOICE 7] of register.py -- the order states no fraction
+
+F_J SCOPE
+  section 6C: 7 subsections, 0 ENTRY blocks -> NO_ENTRIES_TO_MARK
+
+AMENDMENT RECORD
+  11 amendments, 11 carrying all four fields; incomplete none
+  still open: 5, of which 3 name a missing entry
+
+HOP COMPRESSION, carried from the v1 reading
+  stated 50; computed band 50 to 125; equal-N 50
+  the stated figure is the LOW end of the band and the equal-N reading;
+  v2 did not move it (FMR_016 carries unchanged).
+
+Nothing here rates any firm, product, arrangement or person. The probability
+model is named, its parameters are printed, and it is used to check the
+direction of a stated claim and for nothing else.

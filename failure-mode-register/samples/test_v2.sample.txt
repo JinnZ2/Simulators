@@ -1,0 +1,37 @@
+
+-- 1  the pair -- v2 is an additive revision of v1
+
+-- 2  the loss-variable map, amendments applied
+
+-- 3  F3 names two wins and the table gives four
+
+-- 4  F_L states a direction and the direction is backwards
+
+-- 5  DUR-006-C as arithmetic
+
+-- 6  F_K cannot be applied to the set it bounds
+
+-- 7  F_M empties the set delivered with it
+
+-- 8  Step 5 recounted on six entries
+
+-- 9  the PROJECTED fraction
+
+-- 10  F_J's scope
+
+-- 11  the amendment record
+
+-- 12  nothing here rates an entity
+
+-- 13  one parser, two documents
+
+-- 14  choices and CLIs
+
+-- 15  the report screens clean
+
+-- 16  the v1 readings that v2 does not move
+
+-- 17  the value-and-source gate, and the three defects replayed
+
+==============================================================
+checks: 142   failed: 0

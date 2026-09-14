@@ -58,6 +58,9 @@ MANIFEST = (
     "return-path/return_path.py::ratio",
     "trigger-geometry/trigger_geometry.py::accumulation_ratio",
     "failure-mode-register/register.py::fraction_cap",
+    "failure-mode-register/register_v2.py::joint_survival",
+    "internal-reference-boundary/radials.py::effective_origins",
+    "internal-reference-boundary/radials.py::sanction_ratio_point",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so
@@ -159,6 +162,38 @@ class TheGateFires(unittest.TestCase):
     def test_empty_case_set_is_refused(self):
         with self.assertRaises(ka.BadCaseSet):
             ka.register("planted::no_cases", lambda x: x, [])
+
+    def test_the_registry_is_complete(self):
+        """Expected against registered. A register(...) call shadowed by a
+        `finally` inside a helper once landed and never executed: the
+        registry reported one fewer metric than the file contains, every
+        metric that DID register still passed, and nothing said so. A
+        count taken from the calls cannot catch that; an expected set
+        can."""
+        ka._REGISTRY.clear()
+        ka._RESULTS.clear()
+        ka.seed()
+        comp = ka.completeness()
+        self.assertEqual(comp["state"], "COMPLETE",
+                         "missing=%s extra=%s"
+                         % (comp["missing"], comp["extra"]))
+
+    def test_completeness_catches_a_shadowed_registration(self):
+        """The plant. A completeness check that cannot report SHORT is a
+        line of prose, so this removes one registration and requires the
+        check to name it."""
+        ka._REGISTRY.clear()
+        ka._RESULTS.clear()
+        ka.seed()
+        victim = ka.EXPECTED_METRICS[0]
+        del ka._REGISTRY[victim]
+        comp = ka.completeness()
+        self.assertEqual(comp["state"], "SHORT")
+        self.assertIn(victim, comp["missing"])
+        self.assertFalse(comp["ok"])
+        ka._REGISTRY.clear()
+        ka._RESULTS.clear()
+        ka.seed()
 
     def test_a_constant_metric_is_caught_by_a_valid_case_set(self):
         """End to end: the planted constant metric must FAIL, not error."""

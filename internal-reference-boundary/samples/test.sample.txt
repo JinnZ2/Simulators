@@ -1,0 +1,43 @@
+
+-- 1  handoff landed verbatim
+
+-- 2  vocabulary and status carried, not invented
+
+-- 3  R1 encounter rate  [CHOICE 1]
+
+-- 4  R2 measurand ownership  [CHOICE 2]
+
+-- 5  R3 sanction base rate -- two legs, two time bases
+
+-- 6  R4 routability -- the predicted sign is refutable
+
+-- 7  R5 exemption provenance -- two numbers, never combined
+
+-- 8  R6 transfer survival -- effective origins by trace identity
+
+-- 9  R7 permeability -- two metrics on two denominators
+
+-- 10  the pariah's correctness is scored nowhere
+
+-- 11  gap transfer -- track the gap, not the intervention
+
+-- 12  assembly order is structural
+
+-- 13  the handoff's OPEN items
+
+-- 14  no composite, no ranking
+
+-- 15  free text is carried, never parsed
+
+-- 16  choices and CLIs
+
+-- 17  the report screens clean
+
+-- 18  the corpus
+
+-- 19  radial independence on this corpus
+
+-- 20  every declared state is reached by something
+
+==============================================================
+checks: 198   failed: 0

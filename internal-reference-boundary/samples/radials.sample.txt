@@ -1,0 +1,147 @@
+INTERNAL-REFERENCE BOUNDARY -- radial reading
+
+INVARIANT  A boundary drawn by the party inside it, measured from inside.
+instances  disciplinary_silo, credential, efficiency_metric, diagnostic_criterion, corporate_liability_shell, institutional_self_investigation
+status     R1=READY  R2=READY  R3=READY  R4=READY  R5=READY  R6=METHOD_COMPLETE_NEEDS_CORPUS  R7=METHOD_COMPLETE_NEEDS_CORPUS
+choices in force: 1..8, see --choices
+career_years=30 [CHOICE 3]   combine=max [CHOICE 7]
+
+LAYER 1 -- CASES
+
+id                   instance                         R1       R2       R3 band               
+----------------------------------------------------------------------------------------------
+silo-01              disciplinary_silo                0.8      0.25     UNDECLARED            
+cred-01              credential                       0.95     0        [0.01, 0.02] x2       
+eff-01               efficiency_metric                1        0        UNDECLARED            
+diag-01              diagnostic_criterion             0.9      0.25     UNDECLARED            
+shell-01             corporate_liability_shell        0.1      0        UNDECLARED            
+selfinv-01           institutional_self_investigation 0.05     0        [0.0002, 0.012] x60   
+
+  silo-01
+    boundary   a question is inside the field or it is not
+    drawn by   the field's own reviewers and journals
+    provenance CONSTRUCTED
+    R2 rung    INSIDE_SAME_FIELD   feedback_distance UNDECLARED (carried beside R2, never merged)
+    R3 window  UNDECLARED   readings per_year=-- career=--
+    R4         routability=0.5 damage_capacity=0.3 predicted_sign=INVERSE
+    R6 origins n_nominal=4 n_effective=1.932  (VALUE)
+       routes  independent_adoption_count=NEEDS_CORPUS  replication_split=NEEDS_CORPUS  retraction_survival=NEEDS_CORPUS  textbook_persistence_50yr=NEEDS_CORPUS
+       split   dependency_depth=0.9 necessity=0.05
+    R7 metric1 entry_ratio=4 (VALUE) over entries admitted
+       metric2 rejection_reason_ratio=0.5 (VALUE) over rejections issued
+       outcome {'stayed_rejected': 3, 'came_in_with_credit': 1, 'came_in_without_credit': 2}
+       latency 16 yr (VALUE, n=3)
+
+  cred-01
+    boundary   who may practise
+    drawn by   the practitioners' own licensing body
+    provenance CONSTRUCTED
+    R2 rung    INSIDE_SAME_BODY   feedback_distance UNDECLARED (carried beside R2, never merged)
+    R3 window  per_year   readings per_year=[0.01, 0.02] career=[0.3, 0.6]
+    R4         routability=0.2 damage_capacity=0.4 predicted_sign=INVERSE
+    R6 origins n_nominal=-- n_effective=--  (NEEDS_CORPUS)
+       routes  independent_adoption_count=NEEDS_CORPUS  replication_split=NEEDS_CORPUS  retraction_survival=NEEDS_CORPUS  textbook_persistence_50yr=NEEDS_CORPUS
+       split   dependency_depth=UNDECLARED necessity=UNDECLARED
+    R7 metric1 entry_ratio=-- (UNDECLARED) over entries admitted
+       metric2 rejection_reason_ratio=-- (NEEDS_CORPUS) over rejections issued
+       outcome NEEDS_CORPUS
+       latency -- yr (NEEDS_CORPUS, n=--)
+
+  eff-01
+    boundary   what counts in the numerator and what is outside the accounting
+    drawn by   the operator being measured
+    provenance CONSTRUCTED
+    R2 rung    INSIDE_SAME_BODY   feedback_distance 30.0 (carried beside R2, never merged)
+    R3 window  UNDECLARED   readings per_year=-- career=--
+    R4         routability=0.6 damage_capacity=0.5 predicted_sign=INVERSE
+    R6 origins n_nominal=-- n_effective=--  (NEEDS_CORPUS)
+       routes  independent_adoption_count=NEEDS_CORPUS  replication_split=NEEDS_CORPUS  retraction_survival=NEEDS_CORPUS  textbook_persistence_50yr=NEEDS_CORPUS
+       split   dependency_depth=UNDECLARED necessity=UNDECLARED
+    R7 metric1 entry_ratio=-- (UNDECLARED) over entries admitted
+       metric2 rejection_reason_ratio=-- (NEEDS_CORPUS) over rejections issued
+       outcome NEEDS_CORPUS
+       latency -- yr (NEEDS_CORPUS, n=--)
+
+  diag-01
+    boundary   the presentation is the named condition or it is not
+    drawn by   the committee that writes the criterion
+    provenance CONSTRUCTED
+    R2 rung    INSIDE_SAME_FIELD   feedback_distance UNDECLARED (carried beside R2, never merged)
+    R3 window  UNDECLARED   readings per_year=-- career=--
+    R4         routability=0.3 damage_capacity=0.7 predicted_sign=INVERSE
+    R6 origins n_nominal=-- n_effective=--  (NEEDS_CORPUS)
+       routes  independent_adoption_count=NEEDS_CORPUS  replication_split=NEEDS_CORPUS  retraction_survival=NEEDS_CORPUS  textbook_persistence_50yr=NEEDS_CORPUS
+       split   dependency_depth=UNDECLARED necessity=UNDECLARED
+    R7 metric1 entry_ratio=-- (CONFIRMING_ONLY) over entries admitted
+       metric2 rejection_reason_ratio=-- (NEEDS_CORPUS) over rejections issued
+       outcome NEEDS_CORPUS
+       latency -- yr (NEEDS_CORPUS, n=--)
+
+  shell-01
+    boundary   which balance sheet the consequence lands on
+    drawn by   the parent that incorporated the shell
+    provenance CONSTRUCTED
+    R2 rung    INSIDE_SAME_BODY   feedback_distance UNDECLARED (carried beside R2, never merged)
+    R3 window  UNDECLARED   readings per_year=-- career=--
+    R4         routability=0.95 damage_capacity=0.9 predicted_sign=INVERSE
+    R6 origins n_nominal=-- n_effective=--  (NEEDS_CORPUS)
+       routes  independent_adoption_count=NEEDS_CORPUS  replication_split=NEEDS_CORPUS  retraction_survival=NEEDS_CORPUS  textbook_persistence_50yr=NEEDS_CORPUS
+       split   dependency_depth=UNDECLARED necessity=UNDECLARED
+    R7 metric1 entry_ratio=-- (UNDECLARED) over entries admitted
+       metric2 rejection_reason_ratio=-- (NEEDS_CORPUS) over rejections issued
+       outcome NEEDS_CORPUS
+       latency -- yr (NEEDS_CORPUS, n=--)
+
+  selfinv-01
+    boundary   what counts as a finding
+    drawn by   the institution investigating itself
+    provenance CONSTRUCTED
+    R2 rung    INSIDE_SAME_BODY   feedback_distance UNDECLARED (carried beside R2, never merged)
+    R3 window  UNDECLARED   readings per_year=[0.0002, 0.0004] career=[0.006, 0.012]
+    R4         routability=0.8 damage_capacity=0.85 predicted_sign=INVERSE
+    R6 origins n_nominal=-- n_effective=--  (NEEDS_CORPUS)
+       routes  independent_adoption_count=NEEDS_CORPUS  replication_split=NEEDS_CORPUS  retraction_survival=NEEDS_CORPUS  textbook_persistence_50yr=NEEDS_CORPUS
+       split   dependency_depth=UNDECLARED necessity=UNDECLARED
+    R7 metric1 entry_ratio=-- (UNDECLARED) over entries admitted
+       metric2 rejection_reason_ratio=-- (NEEDS_CORPUS) over rejections issued
+       outcome NEEDS_CORPUS
+       latency -- yr (NEEDS_CORPUS, n=--)
+
+R4 SIGN TEST across cases
+  n=6 rho=0.7143 observed=DIRECT predicted=INVERSE matches=False
+  note: the sign on a constructed corpus is a property of the authoring, not of the world
+
+LAYER 2 -- EXEMPTIONS (separate layer, per assembly order)
+
+  eff-01               provenance=survived_external_test
+     breadth=4  benefit_correlation=-0.1814 (VALUE)
+     verdict=ACTUAL_PRINCIPLE   base_rate=UNKNOWN
+  shell-01             provenance=self_designated
+     breadth=2  benefit_correlation=0.8944 (VALUE)
+     verdict=BENEFIT_SORTED   base_rate=UNKNOWN
+  selfinv-01           provenance=self_designated
+     breadth=4  benefit_correlation=-- (NOT_EVALUABLE)
+     verdict=UNDETERMINED   base_rate=UNKNOWN
+
+OPEN
+  fold R2 vs R5: UNRESOLVED (n_coded=3, cell=externally-held metric + self-designated exemption)
+     no coded case populates the discriminating cell; the corpus cannot tell a fold from an unfilled cell
+     a constructed case populating the cell shows the test discriminates; it closes nothing about real boundaries
+  R7 x R6: NAMED_UNINSTRUMENTED -- high permeability + low transfer survival
+  fold-test R2 vs R5                             INSTRUMENT_BUILT_NO_CORPUS
+  R7 x R6 interaction cell                       NAMED_UNINSTRUMENTED
+  psychosurgery governance: do the external checks bind NOT_RUN
+  elite-memoir content analysis for vigilance/rank markers NOT_RUN
+
+RADIAL INDEPENDENCE on this corpus
+  R1~R2      n=6   rho=0        VALUE
+  R1~R4d     n=6   rho=-0.5429  VALUE
+  R1~R4r     n=6   rho=-0.6     VALUE
+  R2~R4d     n=6   rho=-0.414   VALUE
+  R2~R4r     n=6   rho=-0.414   VALUE
+  R4r~R4d    n=6   rho=0.7143   VALUE
+  collinear pairs: none
+
+Every case in this corpus is CONSTRUCTED. Every empirical anchor is CARRIED from
+HANDOFF.md and checked against nothing; the two source files it names are not
+in this tree. Nothing here is a reading of any real field, body or person.
