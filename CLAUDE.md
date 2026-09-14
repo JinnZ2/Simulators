@@ -241,7 +241,7 @@ last three; read in order:
 - `trigger-geometry/` — was the RESPONSE validated in THIS geometry; sensor correct, model inverted
 - `failure-mode-register/` — durability and reconstructability only; the delivered register, parsed not retyped; v2 lands beside v1, purely additive
 - `internal-reference-boundary/` — seven radials on a boundary drawn from inside; R3's two legs, two time bases
-- `external-audit/` — two outside documents on this repo, landed verbatim; counts recomputed, instruments run
+- `external-audit/` — three outside documents on this repo, landed verbatim; counts recomputed, instruments run, three sweeps cross-checked
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -12101,6 +12101,74 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `python3 external-audit/recount.py --selftest` and
   `python3 external-audit/run_instruments.py --selftest`; eleven
   `[CHOICE n]` markers, each printed by `--choices` and cited inline.
+  **The review then landed a SECOND time**
+  (`DEEP_RESEARCH_2026_09_14_V2.md`, verbatim beside the first, both
+  inspectable, plus the four SVG assets under `assets/` that the first
+  rendering referenced without carrying). **`EA_019`:** a revision and
+  not a rewrite — 580 of 649 lines equal, ratio 0.9070, **0 deleted** —
+  which **replaces** its own §0, v1's source-verification record becoming
+  v2's execution record, so the WITHDRAWN and arXiv tables survive only
+  as prose; the **family tables are byte-identical**, so `recount.py`
+  reads both with one parser (`report_text(path)` / `families(path)`,
+  generalised rather than copied) and every `EA_001..EA_014` finding
+  carries unchanged, the two phantom folders included. That gives
+  **three independent sweeps of one tree** — the second pass's, this
+  folder's, and the repo's own `self-scan/census.py` — compared by
+  `crosscheck.py`, which parses the second pass's claims out of the
+  delivered document at call time. **`EA_020`, the cleanest VOID RATIO
+  in the tree:** `tools/known_answer.py` prints **84 PASS and 2 FAIL
+  (pinned)** per case and a headline reading *cases disagreeing with the
+  registry: 0* — the second pass read the column, `run_instruments.py`
+  read the headline, and **two parties who never spoke reported 0 and 2,
+  both correctly**, since the headline counts disagreement with what the
+  registry EXPECTS and a pinned failure that fails agrees with it; one
+  name over two denominators, on a summary line. **`EA_021`:** the two
+  sweeps ran at different revisions — `gate-check` scans **2342** for
+  the second pass and **2331** for ours, which pins `6633778`, and the
+  eleven-file gap is this audit folder landing, so the revision is the
+  first candidate explanation for every divergence and `crosscheck.py`
+  takes every count at a COMMIT rather than the working tree.
+  **`EA_022`:** four of five failures agree and **each sweep carries one
+  the other missed**. **`EA_023`, the sharpest:**
+  `evaluation-frame/frame.py` sets `CORPUS_DIR` to a path **outside the
+  repository** and says so in its own comment, so its selftest returns
+  73/0 here at both revisions and fails for the second pass — **neither
+  party misreading**, the verdict being a property of the sandbox, which
+  is `EF_009`'s *the corpus is written by the run that reads it*
+  measured from outside by someone who could not have known to look for
+  it: `TP_008`'s decorrelated shadows arriving because nobody
+  coordinated. **`EA_025`, the finding that pays for the cross-check:**
+  the second pass reports the repo's own census surfacing *three tools
+  that report zero failed checks while exiting nonzero*, and every
+  nonzero exit in those folders is the house REFUSAL convention while
+  their runners are green — but running the census directly, **four rows
+  come back `SOME_FAILED_UNCOUNTED` on output that says `failed: 0`**,
+  because `checks: N   failed: M` was a fourth convention
+  `self-scan/resolve.py::parse_count` did not parse and the fallback
+  heuristic's dirty test `[1-9]\d*\s+failed` matches **the check
+  count**, `142   failed`, while its clean test does not fire at all, so
+  the misread was unambiguous rather than a tie. REPAIRED in
+  `parse_count`, where census and `resolve.py` both read it, with four
+  checks pinned: whole tree, nothing else changed, `GREEN` 146 → **150**,
+  `SOME_FAILED_UNCOUNTED` 5 → **1**, and **513 already-passing checks
+  started being counted** (6236 → 6749), so the repo's own headline check
+  total was 8% low because four suites' output was unparsed.
+  **`EA_026`:** three readers, one trap — a refusal read as a failure —
+  and the only one that did not fall in is the one carrying a state for
+  it, the absent-vs-known-negative repair doing its job on evidence
+  nobody here produced. **`EA_027`:** `notes/check_datasets.py` now names
+  `external-audit/CLAIM_TABLE.md` and `external-audit/README.md` among
+  the files giving its guarded terms an antecedent independent of the
+  note — the check is working, and what it caught is the audit.
+  **`EA_024` is this session's own**, recorded rather than smoothed: a
+  first pass read `check_datasets.py` as exiting 0 because the exit code
+  was taken from a pipeline rather than from the module, which is the
+  class of defect this folder exists to find, committed inside it.
+  Twenty-seven `EA_*` claims; check count printed by
+  `python3 external-audit/crosscheck.py --selftest`; seven further
+  `[CHOICE n]` markers, each printed by `--choices` and cited inline; the
+  render screens clean through `sheet-structure-scan/no_severity` with
+  **no exemption**, seven authored words reworded rather than exempted.
   Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk

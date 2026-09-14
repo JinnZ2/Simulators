@@ -1,0 +1,151 @@
+TWO OUTSIDE SWEEPS OF ONE TREE
+========================================================================
+
+The external review landed twice. This compares the second pass's
+own execution record against this repository's, and against the
+repository's own census. Every claim below is parsed out of the
+delivered document at call time and recomputed here. [CHOICE 1]
+
+1. IS THE SECOND PASS A COPY
+   v1 630 lines, v2 649 lines, 580 equal, ratio 0.9070
+   inserted 6, deleted 0, body lines replaced 10
+   section 0 replaced: True
+     v1: ## 0. Source-verification record
+     v2: ## 0. Re-audit addendum: the repository as run (second pass, 2026-09-14)
+   v1's WITHDRAWN table survives in v2 as prose, not as a table:
+     table in v1 True / in v2 False / prose in v2 True
+   family tables identical: True (9 vs 9 families) -- so every
+   EA_001..EA_014 arithmetic finding carries to the second pass
+   without recomputation, including the two phantom folders.
+
+2. THE KNOWN-ANSWER GATE: TWO READINGS, BOTH CORRECT
+   raw per-case verdicts   PASS 84   FAIL (pinned) 2
+   the tool's headline     cases disagreeing with the registry: 0
+   metrics registered 24  expected 24  COMPLETE
+   two readings differ: True
+   The second pass read the per-case verdicts and reported
+   `84 PASS + 2 FAIL (pinned)`. run_instruments.py read the
+   headline and reported 0. Neither reading is a misreading.
+   counts disagreement with what the registry EXPECTS, and a
+   pinned failure that fails agrees with its expectation --
+   one name over two denominators, which is the shape
+   measurement-fork calls a VOID RATIO, on a summary line.
+   Two outside readers of one run reported 0 and 2. That is
+   the evidence; neither reader had to be careless to get it.
+
+3. THE TWO SWEEPS RAN AT DIFFERENT REVISIONS
+   gate-check files_scanned, second pass:  2342
+   gate-check files_scanned, ours (6633778):  2331
+   gate-check files_scanned, HEAD commit f02edb3: 2342  [CHOICE 6]
+   second pass matches live HEAD: True
+   The second pass states a survey date and no commit. Ours pins
+   6633778 by its own [CHOICE 11]. The gap between the two counts is
+   this audit folder landing -- so the first candidate explanation
+   for any divergence below is the revision, not the runner.
+
+4. THE FAILURE SETS
+   second pass: 5    ours: 5    agreeing: 4
+   each sweep carries exactly one the other missed:
+     theirs only: evaluation-frame/selftest_frame.py
+     ours only:   notes/check_datasets.py
+
+   re-run at both revisions [CHOICE 2] [CHOICE 3] [CHOICE 4]:
+   bridge-impoundment/selftest_bi.py              STABLE
+     6633778    FAIL         selftest: 45 checks, 1 failed
+     HEAD       FAIL         selftest: 45 checks, 1 failed
+   columbia-chain-cascade/selftest_kill.py        STABLE
+     6633778    CRASH        FileNotFoundError: [Errno 2] No such file or directory: '/tmp/claude-0/xc_6633778/columbia-chain-cas
+     HEAD       CRASH        FileNotFoundError: [Errno 2] No such file or directory: '/tmp/claude-0/xc_HEAD/columbia-chain-cascad
+   evaluation-frame/selftest_frame.py             ENVIRONMENT_DEPENDENT
+     6633778    PASS         selftest: 73 checks, 0 failed
+     HEAD       PASS         selftest: 73 checks, 0 failed
+     reads outside the tree: frame.py -> /root/.claude/projects/-home-user-Simulators
+   mining-increment/selftest_mi.py                STABLE
+     6633778    FAIL         selftest: 56 checks, 1 failed
+     HEAD       FAIL         selftest: 56 checks, 1 failed
+   notes/check_datasets.py                        STABLE
+     6633778    FAIL         SELFTEST FAIL (2 failed)
+     HEAD       FAIL         SELFTEST FAIL (2 failed)
+   zero-sum-curriculum-null/selftest_nc.py        STABLE
+     6633778    FAIL         selftest: 33 checks, 1 failed
+     HEAD       FAIL         selftest: 33 checks, 1 failed
+
+   ENVIRONMENT_DEPENDENT is the sharp one. [CHOICE 5] A module
+   whose selftest reads a path outside the repository has a
+   verdict that is a property of the sandbox, not of the tree, so
+   it cannot be scored against either sweep, and the divergence
+   attaches to neither. evaluation-frame's own EF_009 records
+   that its corpus is written by the run that reads it; this is
+   that finding measured from outside, by a second party who
+   could not have known to look for it.
+
+5. THE REPORTED EXIT / VERDICT MISMATCH [CHOICE 7]
+   second pass, section 0.1: three tools "report zero failed
+   checks in their output while exiting nonzero". Named in the
+   document: failure-mode-register, internal-reference-boundary, tools/sourced.py
+
+   notes/check_datasets.py                      exit=1     FAIL        mismatch=False refusal=False
+     SELFTEST FAIL (2 failed)
+   failure-mode-register/entries.py             exit=2     NO_VERDICT  mismatch=False refusal=True
+     entries.py is the parser. The checks live in test_register.py; run: python3 test
+   failure-mode-register/entries_v2.py          exit=2     NO_VERDICT  mismatch=False refusal=True
+     entries_v2.py is a parser. The checks live in test_register_v2.py; run `python3 
+   failure-mode-register/entries_v3.py          exit=2     NO_VERDICT  mismatch=False refusal=True
+     entries_v3.py is a parser. The checks live in test_register_v3.py; run `python3 
+   failure-mode-register/register.py            exit=2     NO_VERDICT  mismatch=False refusal=True
+     register.py is the instrument. The checks live in test_register.py; run: python3
+   failure-mode-register/register_v2.py         exit=2     NO_VERDICT  mismatch=False refusal=True
+     register_v2.py has no selftest. The checks live in test_register_v2.py; run `pyt
+   failure-mode-register/register_v3.py         exit=2     NO_VERDICT  mismatch=False refusal=True
+     register_v3.py is an audit. The checks live in test_register_v3.py; run `python3
+   failure-mode-register/test_register.py       exit=0     PASS        mismatch=False refusal=False
+     209 checks, 0 failed
+   failure-mode-register/test_register_v2.py    exit=0     PASS        mismatch=False refusal=False
+     checks: 142   failed: 0
+   failure-mode-register/test_register_v3.py    exit=0     PASS        mismatch=False refusal=False
+     checks: 132   failed: 0
+   internal-reference-boundary/cases.py         exit=0     NO_VERDICT  mismatch=False refusal=False
+   internal-reference-boundary/gap_cases.py     exit=0     NO_VERDICT  mismatch=False refusal=False
+   internal-reference-boundary/gap_transfer.py  exit=2     NO_VERDICT  mismatch=False refusal=True
+     gap_transfer.py has no selftest. The checks live in test_boundary.py; run `pytho
+   internal-reference-boundary/radials.py       exit=2     NO_VERDICT  mismatch=False refusal=True
+     radials.py has no selftest. The checks live in test_boundary.py; run `python3 te
+   internal-reference-boundary/test_boundary.py exit=0     PASS        mismatch=False refusal=False
+     checks: 198   failed: 0
+   tools/sourced.py                             exit=0     PASS        mismatch=False refusal=False
+     checks: 41   failed: 0
+
+   Every nonzero exit above is the house REFUSAL convention: the
+   module prints no failed-check count and names the runner that
+   holds the checks, and each of those runners is green. A
+   classifier with no REFUSED bin files that as a finding. This
+   repository's own sweep fell into the same trap first and
+   recorded it as EA_015; the census bins it honestly as
+   NONZERO_EXIT_NO_VERDICT and the second pass read the bin as a
+   finding. Three readers, one trap, and the only one that did
+   not fall in is the one that named a state for it.
+
+   notes/check_datasets.py is in the table as a control: it
+   really does report FAIL, and it exits nonzero to match, so it
+   is not a mismatch either -- a first pass here read its exit as
+   0 by taking the exit code of a pipeline rather than the module.
+
+6. THIS FOLDER CHANGED ANOTHER FOLDER'S CHECK
+   notes/check_datasets.py names 3 file(s) under external-audit/
+     external-audit/CLAIM_TABLE.md
+     external-audit/README.md
+     external-audit/crosscheck.py
+   At 6633778 that check named only notes/memory-export/. The audit
+   landed, the terms acquired an antecedent independent of the
+   note, and the check said so and named the files. It is not
+   malfunctioning -- it is reporting the loop UNI_010 / ANC_001
+   / QA_007 describe, on the audit written to measure the tree.
+
+CHOICES
+  [CHOICE 1] the second pass's failure list is parsed from its own numbered section 0.2, not transcribed
+  [CHOICE 2] only the union of the two failure sets is re-run here; a full 300-module re-sweep would measure the sweep, not the disagreement
+  [CHOICE 3] each contested module is run at BOTH revisions, because the two sweeps ran at different ones and that is the first candidate explanation for every divergence
+  [CHOICE 4] a module whose verdict differs across revisions is reported REVISION_DEPENDENT, which attaches to neither party
+  [CHOICE 5] a module reading a path outside the repository is reported ENVIRONMENT_DEPENDENT and is not scored against either sweep
+  [CHOICE 6] file counts are taken at a COMMIT, never the working tree, since this audit is written into the tree it measures
+  [CHOICE 7] the three tools named in the mismatch claim are read out of the document and checked at every entry point in their folder

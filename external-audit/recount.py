@@ -64,8 +64,13 @@ CHOICES = {
 }
 
 
-def report_text():
-    with open(REPORT) as fh:
+def report_text(path=None):
+    """The report as text. `path` generalises every reader below to take
+    a DOCUMENT rather than the one landed file, so a second rendering of
+    the same survey is measured by this module rather than by a copy of
+    it -- the MF_019 discipline, and the move entries_v2/_v3 already made
+    for the four work orders."""
+    with open(path or REPORT) as fh:
         return fh.read()
 
 
@@ -89,10 +94,11 @@ def top_level(files):
 
 # ------------------------------------------------------- report parsing
 
-def families():
+def families(path=None):
     """[(fid, claimed_folders, claimed_files, [folder names])] from the
-    report's own section headings and tables."""
-    txt = report_text()
+    report's own section headings and tables. `path` reads a second
+    rendering with the same parser."""
+    txt = report_text(path)
     out = []
     for sec in re.split(r"^## \d+\. Family ", txt, flags=re.M)[1:]:
         m = re.match(r"(F\d) [^(]*\((\d+) folders?, (\d+) files?\)", sec)

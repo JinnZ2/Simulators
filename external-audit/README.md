@@ -170,3 +170,70 @@ python3 external-audit/run_instruments.py --rev 6633778
 python3 external-audit/run_instruments.py --selftest
 python3 external-audit/recount.py --choices
 ```
+
+---
+
+## The second pass, and three readers of one tree
+
+The review landed a second time (`DEEP_RESEARCH_2026_09_14_V2.md`, landed
+verbatim beside the first, both inspectable). It is a revision, not a
+rewrite -- 580 of 649 lines equal, nothing deleted wholesale -- and the
+change that matters is that it **replaces** its own section 0: v1's
+source-verification record becomes v2's execution record, answering the
+response document's request to run the instruments. The four SVG assets
+both renderings reference are landed under `assets/`, so the images
+resolve for the first rendering too, which had referenced them without
+carrying them.
+
+The family tables are byte-identical across the two, so `recount.py`
+reads both with one parser (`report_text(path)` / `families(path)`,
+generalised rather than copied) and every `EA_001..EA_014` finding
+carries to the second pass unchanged -- the two phantom folders included.
+
+What is new is that there are now **three independent sweeps of one
+tree**: the second pass's, this folder's `run_instruments.py`, and the
+repository's own `self-scan/census.py`. `crosscheck.py` compares them.
+Nobody coordinated, which is what makes the panel worth having --
+`triad-playground` `TP_008`'s decorrelated shadows, arriving for free.
+
+```
+python3 external-audit/crosscheck.py            # the comparison
+python3 external-audit/crosscheck.py --choices  # the seven choices
+python3 external-audit/crosscheck.py --selftest # the checks
+```
+
+Five results, in order of how much they cost to find:
+
+- **Two readers, one run, 0 and 2, both right.** The known-answer gate
+  prints 84 PASS and 2 FAIL (pinned) per case and a headline reading
+  `cases disagreeing with the registry: 0`. One reader took the column,
+  the other the headline. The headline counts disagreement with what the
+  registry *expects*; a pinned failure that fails agrees with it. One
+  name, two denominators (`EA_020`).
+- **Different revisions.** `gate-check` scans 2342 files for the second
+  pass and 2331 for ours, which pins `6633778`. The eleven-file gap is
+  this folder landing, so the revision is the first candidate explanation
+  for every divergence (`EA_021`).
+- **Four of five failures agree, and each sweep has one the other
+  missed** (`EA_022`).
+- **`evaluation-frame`'s selftest reads a path outside the repository.**
+  It passes here at both revisions and fails for the second pass; neither
+  party is wrong, because the verdict is a property of the sandbox. Its
+  own `EF_009` already says the corpus is written by the run that reads
+  it -- measured from outside by someone who could not have known to look
+  (`EA_023`).
+- **The reported exit/verdict mismatch is the refusal convention, and the
+  real defect was in the census.** Four rows came back
+  `SOME_FAILED_UNCOUNTED` on output saying `failed: 0`, because
+  `checks: N   failed: M` was unparsed and the fallback heuristic's dirty
+  test matched the **check count**: `142   failed`. Repaired in
+  `self-scan/resolve.py::parse_count`, where census reads it, with the
+  reason pinned in that module's own selftest (`EA_025`).
+
+And one about this folder: `notes/check_datasets.py` now names
+`external-audit/` among the files giving its guarded terms an independent
+antecedent. The check is not broken -- it caught the audit (`EA_027`).
+
+Two errors of this session's own are recorded rather than smoothed: an
+exit code read from a pipeline instead of from the module (`EA_024`), and
+a reader that knew three output conventions in a tree that uses five.

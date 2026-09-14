@@ -313,3 +313,223 @@ there, and it was invisible until something ran.
 
 FALSIFIER: the v1 file landing, after which `assemble_gaps_v2.py --check`
 either reproduces v2 or does not, and either outcome is a result.
+
+---
+
+## The second pass (`DEEP_RESEARCH_2026_09_14_V2.md`)
+
+The review landed twice. The second rendering replaces section 0 with an
+execution record answering the response's request, and so becomes a
+second independent sweep of this tree to set beside `run_instruments.py`
+and beside the repository's own `self-scan/census.py`. Claims
+`EA_019..EA_027` are about the pair, computed by `crosscheck.py`.
+
+### EA_019 -- the second pass is a revision, and it REPLACES its own verification record
+
+STATUS: SUPPORTED.
+
+580 of 649 lines are equal, ratio 0.9070, **0 lines deleted wholesale**
+-- a revision, not a rewrite. The change is concentrated in the front
+matter and in section 0, which does not grow: v1's `## 0.
+Source-verification record` is **replaced** by v2's `## 0. Re-audit
+addendum`, and with it v1's two tables -- the WITHDRAWN claims table and
+the arXiv `NOT_VERIFIABLE_HERE` table -- survive only as prose bullets in
+v2 section 0.3. Both renderings are landed side by side rather than one
+overwriting the other, which is this repository's own supersession
+convention applied to a document delivered from outside it.
+
+**The family tables are byte-identical across the two renderings**
+(9 families parsed from each, equal), so `recount.py` reads both with one
+parser and every `EA_001..EA_014` arithmetic finding carries to the
+second pass without recomputation -- including the two phantom folders
+and the 2652 + 21 = 2673 reconciliation. `recount.report_text` and
+`recount.families` were generalised to take a document rather than being
+copied, the `MF_019` discipline and the move `entries_v2`/`entries_v3`
+already made for the four work orders.
+
+FALSIFIER: a third rendering whose family tables differ from these.
+
+### EA_020 -- two outside readers of one known-answer run reported 0 and 2, and both were right
+
+STATUS: SUPPORTED, and it is the cleanest VOID RATIO instance in the
+tree.
+
+`tools/known_answer.py` prints **84 PASS and 2 FAIL (pinned)** per case,
+and then a headline reading `cases disagreeing with the registry: 0`.
+The second pass read the per-case verdicts and reported `84 PASS + 2 FAIL
+(pinned)`. `run_instruments.py` read the headline and reported 0. Neither
+reader was careless: the headline counts disagreement with what the
+registry **expects**, and a pinned failure that fails agrees with its
+expectation, while the per-case column counts raw verdicts. One name over
+two denominators, on a summary line -- `measurement-fork`'s VOID RATIO,
+demonstrated rather than argued, because two parties who never spoke
+produced the two numbers.
+
+The gate exits 0 and is correct to: a pinned failure is expected. What is
+missing is that the headline does not say which quantity it is.
+
+FALSIFIER: a third reader of the same run reporting a number that is
+neither 0 nor 2.
+
+### EA_021 -- the two sweeps ran at different revisions, and the gap is this audit folder
+
+STATUS: SUPPORTED.
+
+`gate-check` reports `files_scanned` and both sweeps quote it: the second
+pass **2342**, `run_instruments.py` **2331**. The second pass states a
+survey date and no commit; ours pins `6633778` by its own `[CHOICE 11]`.
+2342 is what the tree scans at `f02edb3`, and the eleven-file difference
+is `external-audit/` landing. So the first candidate explanation for any
+divergence between the sweeps is the revision, not the runner -- and the
+measurement moved because the measuring was committed, which is
+`UNI_010` / `ANC_001` / `QA_007` at repository scale, reached through the
+instrument rather than through the index.
+
+`crosscheck.py` therefore takes every file count at a **commit**, never
+the working tree (`[CHOICE 6]`), since this audit is still being written
+into the tree it measures.
+
+FALSIFIER: the two counts agreeing at one revision.
+
+### EA_022 -- four of five failures agree; each sweep carries one the other missed
+
+STATUS: SUPPORTED.
+
+| module | second pass | ours |
+|---|---|---|
+| `bridge-impoundment/selftest_bi.py` | FAIL | FAIL |
+| `mining-increment/selftest_mi.py` | FAIL | FAIL |
+| `columbia-chain-cascade/selftest_kill.py` | FAIL | FAIL |
+| `zero-sum-curriculum-null/selftest_nc.py` | FAIL | FAIL |
+| `evaluation-frame/selftest_frame.py` | FAIL | -- |
+| `notes/check_datasets.py` | -- | FAIL |
+
+The `selftest_kill.py` row is `EA_018` reached independently from
+outside: the folder carries only `UNDERGRADUATE_RESEARCH_GAPS_V2.md`
+while four modules read the v1 name, so the published *strip the fences
+and v1 returns byte-for-byte* identity has no input side in this tree.
+
+FALSIFIER: a re-run at one revision in one sandbox in which the two sets
+are equal.
+
+### EA_023 -- `evaluation-frame`'s selftest reads a path outside the repository
+
+STATUS: SUPPORTED, and it is the sharpest result of the cross-check.
+
+`evaluation-frame/frame.py` sets `CORPUS_DIR =
+"/root/.claude/projects/-home-user-Simulators"` and says in its own
+comment that *the transcript is not a checked-in artifact*. The selftest
+returns 73 checks, 0 failed here, at `6633778` and at `f02edb3` alike;
+the second pass reports it failing a masking check. **Neither party is
+wrong.** The verdict is a property of the sandbox, not of the tree, so
+`crosscheck.py` reports it `ENVIRONMENT_DEPENDENT` and scores it against
+neither sweep (`[CHOICE 5]`).
+
+`EF_009` already records that this corpus is written by the run that
+reads it. This is that finding measured from outside, by a party who
+could not have known to look for it -- the decorrelated-shadow result
+`triad-playground` `TP_008` says a consensus statistic is worthless
+without, arriving for free because nobody coordinated.
+
+FALSIFIER: the module returning the same verdict in a sandbox with no
+transcript at that path.
+
+### EA_024 -- `notes/check_datasets.py` is not an exit/verdict mismatch, and a first pass here said it was
+
+STATUS: SUPPORTED, and the error was mine.
+
+The module prints `SELFTEST FAIL (2 checks failed)` and exits **1**. A
+first reading in this session recorded exit 0 -- because the exit code
+was taken from a pipeline (`... | tail -3; echo $?`) rather than from the
+module. That is the same class of defect this folder exists to find,
+committed inside it, and it is recorded rather than quietly corrected.
+
+FALSIFIER: none needed; the exit code is one command away.
+
+### EA_025 -- the reported exit/verdict mismatch is the refusal convention, and the defect is in the census
+
+STATUS: SUPPORTED, and this is the finding that pays for the cross-check.
+
+The second pass's section 0.1 reports that the repository's own census
+surfaces *three tools that report zero failed checks in their output
+while exiting nonzero -- an exit-code/verdict mismatch*, and names
+`failure-mode-register`, `internal-reference-boundary` and
+`tools/sourced.py`. Run here, those three are green and exit 0 at their
+runners; what exits nonzero in those folders is the **module**, which
+refuses `--selftest` with exit 2, prints no failed-check count, and names
+the runner that holds the checks -- the house convention.
+
+Running the census directly shows something sharper. Four rows come back
+`SOME_FAILED_UNCOUNTED` **on output that says `failed: 0`**:
+
+```
+failure-mode-register/test_register_v2.py   SOME_FAILED_UNCOUNTED  checks: 142   failed: 0
+failure-mode-register/test_register_v3.py   SOME_FAILED_UNCOUNTED  checks: 132   failed: 0
+internal-reference-boundary/test_boundary.py SOME_FAILED_UNCOUNTED checks: 198   failed: 0
+tools/sourced.py                            SOME_FAILED_UNCOUNTED  checks: 41    failed: 0
+```
+
+`checks: N   failed: M` is a fourth output convention that
+`self-scan/resolve.py::parse_count` did not parse, so it fell through to
+the heuristic, whose dirty test is `\b[1-9]\d*\s+failed\b` -- and that
+matches **the check count**, `142   failed`, not the failure count. The
+clean test `\b0\s+failed\b` does not fire, the zero sitting after the
+word, so the misread was unambiguous rather than a tie. Four green
+modules were filed as failing by their own passing output.
+
+So the second pass detected a real anomaly and attributed it to the three
+tools; the anomaly is in the instrument that reported it, and the three
+tools are exactly the folders whose runners use that convention.
+
+REPAIRED in `parse_count` rather than in the census, since census calls
+it and `resolve.py` reads it too, with four checks pinned in
+`resolve.py --selftest` including the two that state why the shape has to
+be parsed rather than classified. The census before and after, whole
+tree, nothing else changed:
+
+```
+                        before   after
+GREEN                      146     150
+SOME_FAILED_UNCOUNTED        5       1
+checks counted            6236    6749
+```
+
+Four modules moved from a failure bin into GREEN on unchanged output, and
+**513 checks that were already passing started being counted** -- the
+repo's own headline check total was 8% low because four suites' results
+were unparsed. The one row remaining in `SOME_FAILED_UNCOUNTED` is
+`notes/check_datasets.py`, which genuinely fails.
+
+FALSIFIER: a fifth convention landing and reaching the heuristic.
+
+### EA_026 -- three readers, one trap, and only the one that named a state avoided it
+
+STATUS: SUPPORTED.
+
+The trap is a refusal read as a failure. `run_instruments.py` fell into
+it first and recorded it as `EA_015`, repairing it with a structural
+refusal test and a `REFUSED` bin. `self-scan/census.py` bins it honestly
+as `NONZERO_EXIT_NO_VERDICT` -- 109 rows, the largest bin in the tree --
+and the second pass read that bin as a defect in the tools it names.
+Three independent readers, one trap; the only one that did not fall in is
+the one carrying a state for it, which is the absent-vs-known-negative
+repair doing exactly what this repository claims for it, on evidence
+nobody here produced.
+
+FALSIFIER: a reader with a `REFUSED` bin that still reports a refusal as
+a failure.
+
+### EA_027 -- this folder changed another folder's check, and the check said so
+
+STATUS: SUPPORTED.
+
+`notes/check_datasets.py` fails with *G-SPAN resolves outside sim-span/*
+and names three files, two of them `external-audit/CLAIM_TABLE.md` and
+`external-audit/README.md`. At `6633778` it named only
+`notes/memory-export/`. The audit landed, the terms acquired an
+antecedent independent of the note the check was written to guard, and
+the check reported it and named the files -- it is not broken, it is
+working, and what it caught is the audit.
+
+FALSIFIER: the check naming no `external-audit/` file at a revision that
+carries this folder.
