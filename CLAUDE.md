@@ -12099,7 +12099,7 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   every finding here is a property of this tree, recomputable by anyone
   with the clone. Check counts printed by
   `python3 external-audit/recount.py --selftest` and
-  `python3 external-audit/run_instruments.py --selftest`; ten
+  `python3 external-audit/run_instruments.py --selftest`; eleven
   `[CHOICE n]` markers, each printed by `--choices` and cited inline.
   Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
