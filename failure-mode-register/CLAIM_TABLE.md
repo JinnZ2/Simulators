@@ -751,3 +751,220 @@ and unread (`FMR_045`); `FMR_025`'s scope statement stands unchanged. The
 one thing this pass adds to the standing UNVERIFIED set is that the
 register's own ship gate now turns on a claim nobody here can check,
 which is a state the order anticipated and labelled.
+
+---
+
+## The fourth order
+
+`WORK_ORDER_V4.md` landed verbatim beside the other three. Claims
+`FMR_057..FMR_069` are properties of the v4 instrument and of the
+delivered document; the order's own `F_A..F_N` and `D-01..D-10` are
+distinct from them. Counts printed by `python3 test_register_v4.py`.
+
+---
+
+**FMR_057 — v4 is a REWRITE of v3, and the longest of the four.** 1104
+lines against 1235, **727 equal, 67 inserted, 12 deleted, 534 replaced,
+ratio 0.6216**. v2 against v1 was a pure insertion; v3 against v2 was a
+rewrite; this is a rewrite too, and unlike v3 it does not compress. The
+order's own §9 says the register is expected to be SHORT and that a long
+one is a warning sign, which is a statement about ENTRIES and not about
+the document: entries stay at six.
+
+---
+
+**FMR_058 — the prior-art gate REOPENS, and `FMR_045` is withdrawn as a
+closure.** `FMR_045` recorded v3 reporting Step 0 `DONE` and removing the
+ship blocker, which took `FMR_001` off the standing blocker list on the
+strength of a report that could not be checked. v4 reverses it: §0-1
+reads `STATUS RUN`, `REPORT STATUS NOT_VERIFIABLE_HERE`, `SHIP BLOCKER
+FMR_001 OPEN`, and the version line reads `SHIP BLOCKED`. **All three
+statements of the gate's status agree** — §0-1, the version line, and
+§7's Step 0 — which is what `[CHOICE 5]` reads them apart to establish.
+Four artifacts, four UNVERIFIED ids, one marked `CLOSEST PRIOR ART`. So
+`FMR_001` is OPEN again by the order's own declaration rather than by
+this audit's. arXiv still refuses CONNECT from this environment and
+`github.com` is still the control, so the refusal is arXiv-specific and
+not general egress failure — the same measurement, now stated in the
+document.
+
+---
+
+**FMR_059 — the reversal is in no amendment, and its one
+cross-reference points at the wrong one.** §10's own rule is *"Each
+entry retains the superseded statement. Silent overwrite is not
+permitted; a withdrawn claim is evidence about the method and stays
+visible."* A gate status moving `DONE` to `RUN` is a superseded
+statement. Of eighteen amendments, **none is about the gate** — the only
+one mentioning prior art at all is `A-13`, which is about the table's
+format — and the `SHIP BLOCKER` line's own cross-reference reads *"See
+A-12"*, which is `ID MOVED OUT OF THE FIELD BLOCK, ALL ENTRIES UNRATED`.
+The reversal is recorded in §0-1 and in `D-01`, where a reader looking
+for it in the amendment record will not find it. Not a defect in the
+reversal, which is the right call; a defect in where it is filed.
+
+---
+
+**FMR_060 — `F3` restated, and V5 is still undisposed.** `FMR_046`
+recorded F3 claiming two wins over a table showing four, with `V5`
+argued away by nothing. v4's `A-14` restates it: four PROT after
+amendment (`V5, V7, V9, V13`), `F2` disposes of `V9`, `F3` claims `V7`
+and `V13`, `V5` UNDISPOSED and routed to `D-04`. **The restatement
+reproduces from the table** — the recount gives the same four and the
+same residue, computed rather than read. What did not move is `V5`
+itself: still PROT, still unargued either way, and `D-04` is open by the
+order's own admission. The claim is SUPPORTED as a restatement and the
+underlying gap is unchanged, which is the honest pair.
+
+---
+
+**FMR_061 — and the block restating it carries an arrow in a status
+cell.** §1's format rule, applied one section earlier, is that *no
+hyphen, arrow or punctuation glyph appears in any score or status cell*.
+F3's own restatement block reads `UNDISPOSED    V5    -> D-04`. The
+document-wide scan does not reach it, and the reason is stated rather
+than repaired: a two-column fixed-width block and a gutter block are the
+same shape, `entries_v4` `[CHOICE 5]` declares the cost, and this is the
+instance of it. Reported by name, with the scan's blind spot reported
+beside it, rather than tuning a threshold to catch one block.
+
+---
+
+**FMR_062 — `D-06`'s mechanical check is built, and it fires where
+`D-06` says it should.** `D-06` asks for *"a mechanical check in the
+harness, not a rule in the text."* `format_rule_scan` walks **every**
+fixed-width table in the whole document, because the recurrence `D-06`
+records was in a table the V-map check did not look at. Run on all three
+documents that carry the rule or its defect:
+
+```
+       tables  cuts  glyphs  col0 wraps
+  v2      2      0      1        3
+  v3      3      2      5        3
+  v4      5      0      1        3
+```
+
+The two v3 cuts are both on **line 50**, across columns `SCOPE` and
+`MISSES` — the prior-art table, cutting a cross-reference at `see DUR-`
+and prefixing its neighbour with `005`, which is exactly what `D-06`
+records. v4 has **zero**. Null-tested in four directions on constructed
+documents (a clean table reads clean; a planted cut, a planted arrow and
+a planted first-column-only row are each caught), so the v4 zero is a
+result and not a silence.
+
+---
+
+**FMR_063 — the glyph class is in v2, v3 and v4 alike, which is `D-06`'s
+own finding measured.** §5-1's rate table carries a **hyphenated line
+wrap inside a rate cell** (`bound, unsynchro-`) in every version, and
+three rows whose first column is filled while every other column is
+blank — a first-column wrap and a one-cell row written the same way,
+with nothing in the table saying which. Neither was repaired across
+three revisions, because the rule was stated in prose and the only check
+looked at the V-map. `D-06`'s sentence is *"a format rule stated in prose
+does not propagate to new tables"*; this is that, with a denominator.
+
+---
+
+**FMR_064 — `F_N` passes: the rating vector is restored.** `FMR_048`
+recorded v3 moving the id into the markdown heading, dropping the `id`
+field, and making **every entry an UNRATED PART** under the register's
+own rule against a change that altered no content. v4's `A-12` puts the
+id back in the field block; `F_N` is the falsifier added so the next
+reformat is checked against the vector rather than inspected. Computed on
+both documents with the **same rule** (`[CHOICE 2]`), so a difference is
+a property of the format and not of two readers: **v3 6 of 6 UNRATED, v4
+0 of 6**, with every id matching its own heading. The rule is shown to
+reach both verdicts on constructed entries, so neither reading is
+structural.
+
+---
+
+**FMR_065 — `note` is declared now. `name` is not.** `A-15` records a
+field used without being declared in v2 and then removed in v3 without
+the removal being recorded, and repairs it by declaring `note` a
+DECLARED OPTIONAL field — present on 5 of 6 entries, absent on the sixth,
+firing nothing. `FMR_013` closes on that. **The class does not.** `name`
+is carried by **6 of 6** entries, appears in no schema, and is the field
+a reader looks up first. Same shape, one field over, in the revision that
+names it. It fires no rule either, and correctly so: the UNRATED PART
+rule is about absence, not about presence (`[CHOICE 3]`). Eighth
+instance in this family of a stated rule with no schema field, and the
+first where the missing field is one every entry already uses.
+
+---
+
+**FMR_066 — §6's fourth requirement is stated, and the tool it describes
+still cannot enforce it.** `A-18` is this session's own `FMR_049`
+delivered back as a control: the three fields buy CONTAINMENT and not
+PROVENANCE, a post-hoc span satisfies all three, and the discriminator is
+the offset. v4 adds the fourth requirement — *the span must be EMITTED BY
+THE EXTRACTION, carrying the offset the extractor read from* — and the
+check is run by CONSTRUCTING both spans on the row the defect was first
+found on (`[CHOICE 4]`), rather than by reading `tools/sourced.py`:
+
+```
+cell                      '-> --   A-02'
+searched span             (0, 1)   offset 0     passes the gate
+span emitted by the read  (3, 5)   offset 3     passes the gate
+```
+
+The order's stated failure signature — *locator resolves to offset 0
+while the value sits at offset 3* — reproduces **exactly**. And the gate
+passes both, because **provenance is a property of the CONSTRUCTOR and
+the gate sees fields**: no check of the three fields can refuse a
+searched span, whatever a fourth field is called. `tools/sourced.py`
+already ships both constructors (`find_span`, `slice_sourced`); what it
+does not do is refuse the searched one. `entries_v4` calls `find_span`
+nowhere and `slice_sourced` everywhere, which is the requirement met at
+the only layer that can meet it.
+
+---
+
+**FMR_067 — `F_L` prohibits a sign now, and the conclusion is where it
+always was.** `FMR_053` recorded `F_L` asserting that correlation makes
+joint failure HIGHER, which computing survival across rho does not
+support — survival is non-decreasing in correlation, so joint failure is
+non-increasing. `A-17` retains the superseded statement, records *found
+by: computing survival across rho against the asserted sign*, and widens
+the prohibition from a number to **a number and a sign**. `A-07` is
+marked *correct as written*, which it was. The `DUR-006-B` conclusion is
+unchanged and still rests on the inability to ensure each term.
+
+---
+
+**FMR_068 — the active ambient set is empty, and the header says so.**
+`A-16` records both candidate sets having been presented as the ambient
+set when neither satisfies the register's own admission rules. v4 marks
+them EXCLUDED with the empty columns visible and states `ACTIVE AMBIENT
+SET   EMPTY` in the header. The recount agrees through `register_v2`'s
+own bounds, imported: **7 artifact-side candidates, every lifetime cell
+reading `not stated`, F_K admits 0**; **5 carrier-side candidates, every
+rate cell `none` and every mechanism cell `not named`, F_M admits 0**.
+Both bounds are shown able to admit something on constructed conditions,
+so the zeros are measurements. The falsifiers and the set they empty are
+still delivered in one document, which is what makes the reading
+checkable from inside it at all. Two smaller readings alongside: the
+header states the PROJECTED fraction as a SCOPE rather than a count over
+entries, which is what `F_D` asks for and is not the same quantity as the
+entry-level recount; and the V-map legend declares three score tokens
+while `V14`'s amended cell reads a fourth, `SPLIT`, which is `A-03`'s
+split recorded in the amendment record and not in the legend.
+
+---
+
+**FMR_069 — UNVERIFIED, and it covers the folder.** No deployed
+component has been inspected, no retained record examined, no
+reconstruction attempted, and **no entity is rated** — asserted from the
+AST, no function in `register_v4` takes an entity as an argument. Every
+computation is a property of the four delivered orders, of this build's
+arithmetic, or of this repository's own instruments. The four prior-art
+artifacts are CARRIED and unread; `FMR_025`'s scope statement stands
+unchanged; and the register's ship gate is blocked again on a claim
+nobody here can check, which `D-01` states itself. Nothing is registered
+in `tools/known_answer.py` from this build, and the reason is stated
+rather than left as an absence: every function here returns a structure
+or a declared vocabulary member, and the one counting function's known
+answer is the enumeration it walks — the reasoning
+`internal-reference-boundary` `IRB_011` records. The classifiers are
+null-tested in both directions instead.

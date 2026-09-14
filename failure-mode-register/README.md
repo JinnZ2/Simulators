@@ -333,3 +333,99 @@ v3 — carries the same shape: one line cuts on both sides of the column
 boundary, truncating a cross-reference at `see DUR-` and prefixing its
 neighbour with `005`. Found by the same check, on material written after the
 check existed.
+
+---
+
+## The fourth order
+
+`WORK_ORDER_V4.md` landed verbatim beside the other three — four orders,
+none overwritten. `entries_v4.py` defines no parser of its own: the
+gutter parser and the fence walker come from `entries.py`, the
+boundary reader from `entries_v2.py`, **generalised to take a column
+layout rather than copied**, because v4 rewrote the V-map into five
+columns with word score tokens. One parser, four documents.
+`register_v4.py` takes its falsifier arithmetic from `register_v2.py` the
+same way. Claims `FMR_057..FMR_069`.
+
+```
+  python3 entries_v4.py            what the order carries
+  python3 register_v4.py           the audit
+  python3 register_v4.py --choices every open choice, both modules
+  python3 test_register_v4.py      the checks, with the count
+```
+
+### What moved, and what did not
+
+```
+FMR_058  the prior-art gate REOPENS. v3 read DONE; v4 reads RUN with the
+         report NOT_VERIFIABLE_HERE and the ship blocker back. FMR_001 is
+         OPEN again by the order's own declaration.
+FMR_060  F3 restated as four PROT with one disposed and one claimed --
+         and V5 is still undisposed. The restatement reproduces from the
+         table; the gap it names does not close.
+FMR_064  F_N passes. v3 6 of 6 UNRATED PARTS, v4 0 of 6, computed on both
+         documents with the same rule.
+FMR_067  F_L prohibits a sign now as well as a number, and A-17 retains
+         the statement it withdrew.
+FMR_068  the active ambient set is EMPTY, recounted: 0 of 7 lifetimes,
+         0 of 5 rates.
+```
+
+### D-06's mechanical check
+
+`D-06` asks for *a mechanical check in the harness, not a rule in the
+text*. `format_rule_scan` walks **every** fixed-width table in the whole
+document, because the recurrence `D-06` records was in a table the V-map
+check did not look at. Run on all three documents that carry the rule or
+its defect:
+
+```
+       tables  cuts  glyphs  col0 wraps
+  v2      2      0      1        3
+  v3      3      2      5        3      <- both cuts on line 50,
+  v4      5      0      1        3         the prior-art table
+```
+
+Both v3 cuts land on the prior-art table, truncating a cross-reference at
+`see DUR-` and prefixing its neighbour with `005`. v4 has none. What is
+in **every** version is §5-1's rate table: a hyphenated line wrap inside
+a rate cell, and three rows whose first column is filled while the rest
+are blank — a wrap and a one-cell row written the same way. Three
+revisions, never repaired, because the rule was in prose and the only
+check looked at the V-map. That is `D-06`'s own sentence with a
+denominator under it.
+
+The scan reads a table at **three or more columns** and not two, because
+a two-column fixed-width block is the same shape as a gutter block. The
+cost is stated rather than tuned away, and it is paid immediately:
+F3's own restatement block reads `UNDISPOSED   V5   -> D-04`, an arrow in
+a status cell one section after §1 applies the rule against one, and the
+scan cannot see it. Reported by name (`FMR_061`) with the blind spot
+beside it.
+
+### §6's fourth requirement
+
+`A-18` is this session's own `FMR_049` delivered back as a control. The
+three fields buy containment and not provenance; a post-hoc span
+satisfies all three; the discriminator is the offset. Tested by
+constructing both spans on the row the defect was first found on:
+
+```
+cell                      '-> --   A-02'
+searched span             (0, 1)   offset 0     passes the gate
+span emitted by the read  (3, 5)   offset 3     passes the gate
+```
+
+The stated failure signature reproduces exactly — and the gate passes
+both, because provenance is a property of the **constructor** and the
+gate sees fields. `tools/sourced.py` already ships both constructors;
+what it does not do is refuse the searched one, and no check of three
+fields can. `entries_v4` calls `find_span` nowhere and `slice_sourced`
+everywhere, which is the requirement met at the layer that can meet it.
+
+### `note` is declared now. `name` is not.
+
+`A-15` declares `note` optional, closing `FMR_013`. The class does not
+close: `name` is carried by 6 of 6 entries and appears in no schema —
+same shape, one field over, in the revision that names it. It fires no
+rule, correctly, because the UNRATED PART rule is about absence.

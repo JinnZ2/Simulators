@@ -1,0 +1,31 @@
+
+-- 1  the order is delivered and this folder does not edit it
+
+-- 2  entries_v4 defines no parser of its own
+
+-- 3  what the order carries
+
+-- 4  F_N -- a reformat must not change a rating
+
+-- 5  `note` is declared now. `name` is not.
+
+-- 6  D-06 -- a mechanical check, not a rule in the text
+
+-- 7  F3 restated, V5 undisposed, the gate reopened
+
+-- 8  the fourth requirement, constructed rather than read
+
+-- 9  F_L prohibits a sign now
+
+-- 10  the active ambient set
+
+-- 11  header, score tokens and the procedure steps
+
+-- 12  v4 against v3
+
+-- 13  refusals, choices and the screen
+
+-- 14  what this build does not do
+
+==============================================================
+checks: 169   failed: 0

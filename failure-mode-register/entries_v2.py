@@ -288,12 +288,19 @@ def vmap_boundary_report():
     return vmap_boundary_report_from(ORDER_NAME, _vmap_lines())
 
 
-def vmap_boundary_report_from(order_name, vmap_rows):
-    """vmap_boundary_report over an arbitrary document's score rows."""
+def vmap_boundary_report_from(order_name, vmap_rows, cols=None):
+    """vmap_boundary_report over an arbitrary document's score rows.
+
+    `cols` generalises the reader to a document whose V-map has a
+    different column layout -- v4 rewrote the table into five columns
+    with word score tokens. Defaulting to VMAP_COLS keeps v2's and v3's
+    readings byte-identical; the alternative was a fourth copy of a
+    boundary walk, which is what MF_019 records the cost of."""
+    cols = VMAP_COLS if cols is None else cols
     rows = []
     for n, line in vmap_rows:
         vid = line.split()[0]
-        for name, (i, j) in sorted(VMAP_COLS.items()):
+        for name, (i, j) in sorted(cols.items()):
             loc = S.Locator(order_name, n, i, j, vid + " " + name)
             ok, cuts = loc.boundary_clean(line)
             if not ok:
