@@ -292,3 +292,147 @@ design, because those rows are the anchors that prove it can detect a bug at
 all. Exit 0 reads "all passed" and is false of it; exit 1 reads "at least one
 FAILED" and would make the gate red forever. The state is "checks ran, failures
 present and expected," and the table has no row for it.
+
+---
+
+## 9. SECOND PASS, CONTINUED — census run, and a correction to §8
+
+Appended per §7. §8 is left standing, including the part of it that is wrong.
+
+### 9.1 CORRECTION to §8.2
+
+§8.2 concluded that §3 does not reproduce and offered an account: "the redirect
+state misfiled." The conclusion stands and is independently established by the
+24 direct invocations. **The account was wrong**, and `self-scan/census.py`
+names the real mechanism. Superseded, not deleted, so the correction is legible
+as a correction.
+
+### 9.2 THE MECHANISM — a defect in census.py, not in the three tools
+
+`census.py` line 189 screens output it could not parse:
+
+```
+dirty = re.search(r"SELFTEST\s+FAIL\b", out) or \
+        re.search(r"\b[1-9]\d*\s+failed\b", out)
+clean = re.search(r"SELFTEST\s+PASS\b", out) or \
+        re.search(r"\b0\s+failed\b", out)
+```
+
+Against the tree's prevailing verdict line the number it reads is the CHECK
+count, not the failure count:
+
+```
+  checks: 41   failed: 0                 dirty=True   clean=False
+  checks: 0    failed: 0                 dirty=False  clean=True
+  VERDICT: PASS   checks=35 failed=0     dirty=True   clean=False
+```
+
+A module with 41 passing checks is dirty; a module with zero checks is clean.
+The screen is monotone in the wrong quantity: the more checks a module runs, the
+dirtier it reads.
+
+`resolve.parse_count` reaches this branch only when it cannot extract a count,
+and its patterns want `N checks, M failed` with a comma. The colon form
+`checks: N   failed: M` misses, so it falls through to the screen, where it is
+guaranteed to be filed dirty: clean cannot match that form and dirty always can.
+
+The branch carries a comment saying it exists so that "reporting those as
+RAN_NO_COUNT beside a module that errored would put a green module and a broken
+one in one bin, which is the mistake this whole folder is about." The regex
+performs exactly that: it puts `tools/sourced.py` (41 checks, 0 failed, exit 0)
+in the same bin as `notes/check_datasets.py` (2 checks genuinely failed, D-7).
+
+One folder demonstrates it without leaving the folder:
+
+```
+failure-mode-register/test_register.py     "209 checks, 0 failed"    -> parsed, GREEN
+failure-mode-register/test_register_v2.py  "checks: 142   failed: 0" -> unparsed, DIRTY
+```
+
+Same folder, same green state, two formats, two census verdicts.
+
+NOT REPAIRED HERE, per AGENTS.md §2: recorded now, fixed in a separate change,
+so the failure and the repair are both in the record.
+
+### 9.3 §3 IS NOW FULLY EXPLAINED — 3 of 3
+
+Census files these as SOME_FAILED_UNCOUNTED:
+
+```
+failure-mode-register/test_register_v2.py    <- §3 row 1   (142 checks, 0 failed)
+internal-reference-boundary/test_boundary.py <- §3 row 2   (198 checks, 0 failed)
+tools/sourced.py                             <- §3 row 3   ( 41 checks, 0 failed)
+notes/check_datasets.py                         D-7, a genuine failure
+tools/run_manifest.py                           added this pass; see §9.5
+```
+
+All three of §3's rows are census false positives from §9.2. §3 is a census
+state transcribed into a baseline as a claim about exit codes. Every one of the
+three exits 0 and prints 0 failed.
+
+### 9.4 THE §5 BLOCK OF 110 IS SETTLED — §8.4 superseded with the number
+
+Census reproduces the baseline closely on an in-repo run:
+
+```
+                          §5 baseline    this pass
+NONZERO_EXIT_NO_VERDICT       110           110      exact
+SOME_FAILED                     5             5      exact
+OK                              8             8      exact
+SOME_FAILED_UNCOUNTED           5             6      +1, and the +1 is ours (§9.5)
+RAN_NO_VERDICT              not recorded     18
+```
+
+Joining the 109 parsable NONZERO rows against the manifest:
+
+```
+  REDIRECT      102      not failures. Each names its real entry point.
+  CLI             6
+  TEST_FILE       1
+```
+
+So the largest uncharacterised block in the tree is 102 redirect stubs plus
+**seven** genuinely uncharacterised rows. §6's "biggest single open measurement"
+shrinks from 110 to 7, and none of the 102 needed running to be characterised.
+
+### 9.5 THE R-2 REPAIR IS BLOCKED BY §9.2
+
+EXIT_CONTRACT §4 R-2 says to add the VERDICT line to every entry point lacking
+one, and calls it mechanical and second in leverage. Executed today it would
+mis-file every entry point it touches:
+
+```
+  VERDICT: PASS   checks=33 failed=0   -> parse_count None -> dirty -> SOME_FAILED_UNCOUNTED
+  VERDICT: FAIL   checks=33 failed=1   -> parse_count None -> dirty -> SOME_FAILED_UNCOUNTED
+```
+
+PASS and FAIL become indistinguishable under the tree's own whole-tree runner.
+`tools/run_manifest.py` is the first instance and it arrived this pass: it emits
+the contract's prescribed line, is green at 35 checks 0 failed, and census files
+it SOME_FAILED_UNCOUNTED. The instrument that conforms to the contract is the
+one the runner mis-reads.
+
+ORDER: §9.2 before R-2. Either teach `parse_count` the contract's format, or
+make the screen read the number that follows `failed`, and null-test it on both
+formats before anything is rolled out.
+
+### 9.6 ENVIRONMENT — census's pytest arm is blind here
+
+```
+python3 -m pytest   ->  No module named pytest
+```
+
+Every `*/tests` row is NO_SUMMARY for that reason, not because the suites are
+broken. §5's "unittest discover tests, 105 tests, OK" came from a direct
+unittest run and is unaffected. A sweep on a machine without pytest and one with
+it are not comparable on that arm, which is the same requirement §5's own
+NOT_TESTABLE split states: a rate quoted without its environment has an unstated
+denominator.
+
+### 9.7 A METHOD NOTE ON THIS PASS
+
+The first census run here was piped through `tail -40` and gave totals of 24
+NONZERO and 3 SOME_FAILED_UNCOUNTED. Those were the last forty lines, not the
+run. Caught before anything rested on them, and recorded because a truncated
+sweep reported as a sweep is the same defect class as everything above: a number
+whose stated source does not support it.
