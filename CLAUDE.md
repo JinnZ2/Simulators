@@ -241,6 +241,7 @@ last three; read in order:
 - `trigger-geometry/` — was the RESPONSE validated in THIS geometry; sensor correct, model inverted
 - `failure-mode-register/` — durability and reconstructability only; the delivered register, parsed not retyped; v2 lands beside v1, purely additive
 - `internal-reference-boundary/` — seven radials on a boundary drawn from inside; R3's two legs, two time bases
+- `external-audit/` — two outside documents on this repo, landed verbatim; counts recomputed, instruments run
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -11982,6 +11983,125 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   **no exemption**, four authored words reworded rather than exempted.
   Check count printed by `python3 test_register_v3.py`; `entries_v3.py` and
   `register_v3.py` both refuse `--selftest`.
+- `external-audit/` — Two documents about this repository, delivered from
+  outside it and landed verbatim, plus the two checkers that recompute
+  what is recomputable in them. `DEEP_RESEARCH_2026_09_14.md` is a
+  166-folder survey grouped into nine families with per-audience
+  applications, improvements and a fifteen-item roadmap;
+  `RESPONSE_TO_REVIEW.md` is the reply, which accepts the survey's scope
+  discipline, states where the roadmap collides with the repo's own
+  durability register (a PyPI core is a CUSTODIAN, CI is a HOP
+  GENERATOR), refuses the reading of `NOT_RUN` as a credibility debt
+  rather than a recorded state, and makes one request: run the
+  instruments and report the failures. Neither document is edited here;
+  disagreements go in `recount.py`'s output and in `CLAIM_TABLE.md`
+  (`EA_001..EA_017`), the `uninstrumented/cases/` arrangement.
+  **`EA_003`, the headline: the review's arithmetic is internally
+  consistent and externally wrong by exactly two folders that do not
+  exist.** Its family tables name 166 folders and `frame-token-audit`
+  and `gap-register` are not in the tree — `git grep` finds neither
+  string anywhere, so invented rather than renamed — leaving **164 real
+  content folders**. At the surveyed revision **seven of nine families
+  reproduce exactly** (F3 483, F4 214, F5 280, F6 11, F7 141, F8 175,
+  F9 119, plus F5's 130 Python files and F6's zero), and the only two
+  that do not are exactly the two carrying a phantom: F1 short by 14,
+  F2 by 7. **Family sum 2652 + 21 phantom = 2673, the report's own
+  stated total, to the digit** — and all three headline numbers
+  decompose from the same 21 (5 Python, 7 Markdown, 9 other), so the
+  shortfall is one error and not three. **`EA_002`:** the revision is
+  **established rather than taken**, since the report states a survey
+  date and no commit — exactly one family moves between `6633778^` and
+  `6633778`, by exactly the size of the commit between them, seven
+  exact at the parent against six at the child. **`EA_004`, the sharp
+  one: `.github` is the one top-level directory the tables never name,
+  and it carries the refutation of two claims that rest on its
+  absence** — `workflows/test.yml` runs `unittest discover` across seven
+  suites on push, so §12.2's *"no test-running CI"* is **REFUTED**,
+  while roadmap item 3 survives **narrowed** (CI exists and covers seven
+  suites, not the per-module `--selftest` surface, and does not run
+  `tools/known_answer.py`). **`EA_005`:** "no installable package" is
+  narrowed, three folders shipping a `pyproject.toml`, with the
+  repo-wide-core form intact. **`EA_006`:** "no machine-readable claim
+  index" **HOLDS and is sharper than stated** — `tools/validate_claim_table.py`
+  validates a `CLAIM_TABLE.json`, **zero exist against 98
+  `CLAIM_TABLE.md`**, a consumer with no producer and `CONSTANT_SILENT`
+  at repository scale; the same recommendation is the one the response's
+  §5 accepts without objection, reached from the other side.
+  **`EA_007`:** the markdown-coverage **enumeration is right and the
+  count is two short** — the four named exceptions are all real, and
+  `tools/` and `tests/` also carry none, so 160 of 166 on the report's
+  own denominator; enumeration and count are checked apart for exactly
+  that reason. **`EA_008`:** twenty-one individual numeric claims
+  reproduce **exactly**, including the two `fragility-cascade` figures
+  that read as a contradiction and are not (173 files, 85 Python, in a
+  sentence about Python). **`EA_009`:** the report is now inside the
+  tree it counts — 165 / 165 / 166 across counted revision, head and
+  working tree — so every number is pinned by revision and a selftest
+  check asserts the report is absent from the revision it is measured
+  against; `UNI_010`/`ANC_001`/`QA_007` on the largest substrate
+  available. **`EA_010`:** the report's §0 is the house discipline
+  arrived at independently — a verification record placed *before* the
+  body, two claims WITHDRAWN with their prior support named, and the
+  same arXiv CONNECT 403 with `github.com` as the same control that
+  `failure-mode-register/WORK_ORDER_V4.md` §0-1 carries. **`EA_011`:**
+  the response accepts an arithmetic that does not hold — its §1 lists
+  the sums as established, and the disagreement runs toward the
+  repository, so it is stated rather than left. **The instruments then
+  ran**, at a pinned revision in a throwaway worktree because running
+  them in place edits the tree being measured (`SS_009`):
+  `tools/known_answer.py` **24 metrics, 24 expected, COMPLETE, 0 cases
+  disagreeing**; `gate-check` four checks all `HELD_RETRIEVABLE` over
+  2331 files; `self-scan/resolve.py` all five registered predictions
+  HELD; and across the 300 modules exposing `--selftest`, **156 PASS
+  carrying 4922 checks, 107 REFUSED, 28 NO_CHECKS, 5 FAIL, 2
+  FLAG_NOT_ACCEPTED, 2 RUNS_BARE, 0 TIMEOUT, 0 DEP_MISSING**. **`EA_015`, found by running rather than reading, and it is a
+  defect in this folder's own instrument first:** the sweep read **132
+  modules as NO_CHECKS that do print a count**, because the tree carries
+  **five** selftest output conventions and refuses `--selftest` with
+  exit **2** in one folder and **1** in another — so neither the exit
+  code nor one format is the discriminator, and the repo's own
+  `census.py` shows the same symptom as `RAN_NO_VERDICT`. Repaired by
+  parsing all five and recognising a refusal **structurally** (no count
+  reported AND the output names a different `.py` to run), which is what
+  a refusal does rather than a word list over *library*/*parser*/*run:*,
+  the `T1-1` failure; a sixth convention lands in `NO_CHECKS` rather
+  than being absorbed, asserted, and all five states are shown reachable
+  on constructed modules before the sweep runs. **`EA_016`:** the live
+  failures are **content findings, not broken tests** —
+  `mining-increment` and `zero-sum-curriculum-null` both firing
+  named-and-absent cross-reference checks, and the sharpest,
+  `notes/check_datasets.py`, reporting that `G-SPAN` and `MESA` now
+  resolve **outside** `sim-span/` so *"finding 3 must be restated"*: an
+  instrument telling its operator which recorded finding has gone stale
+  and naming the file that broke it. **`EA_018`, the fifth failure and a real defect rather than a sweep
+  artifact:** `columbia-chain-cascade/UNDERGRADUATE_RESEARCH_GAPS.md` is
+  read by four modules and is **not in the tree** — only the `_V2` file
+  is — so `selftest_kill.py` dies before its first check and
+  `assemble_gaps_v2.py` cannot run at all, which means the published
+  *strip the fences and v1 returns byte-for-byte* identity **has no
+  input side and is not checkable here**; the `SS_026` shape, invisible
+  until something ran. **And the sweep's own reader was wrong twice
+  before its numbers were worth anything** — the second time a crashing
+  module read as REFUSED, because the refusal rule looks for the output
+  naming another `.py` and a traceback names `.py` files, so the
+  `FileNotFoundError` vanished from the failure list; both repaired,
+  both null-tested, and all seven states shown reachable on constructed
+  modules before the sweep is allowed to run, with `RUNS_BARE` and
+  `FLAG_NOT_ACCEPTED` existing so a property of the invocation is not
+  filed as a property of the module. **`EA_017`:** O-1's
+  first clause is answered and its second is not — no claim has been
+  checked against its own falsifier, which needs a reader per claim
+  across 98 tables rather than a runner, and stays open with `EA_006`
+  naming the artifact that would make it tractable. **`EA_014`
+  UNVERIFIED and it covers the folder:** no external citation was
+  checked, the egress gate refusing every publisher host and the
+  report's own §0.3 recording the same for its arXiv identifiers —
+  every finding here is a property of this tree, recomputable by anyone
+  with the clone. Check counts printed by
+  `python3 external-audit/recount.py --selftest` and
+  `python3 external-audit/run_instruments.py --selftest`; ten
+  `[CHOICE n]` markers, each printed by `--choices` and cited inline.
+  Stdlib only, parses under 3.9, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
