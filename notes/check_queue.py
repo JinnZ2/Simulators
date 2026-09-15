@@ -139,13 +139,33 @@ def resolve(key):
     return out
 
 
-def run_row(key):
+def isolated():
+    """The throwaway worktree self-scan/resolve.py already provides.
+
+    IMPORTED, not copied: five stale copies of one gate across three drops
+    is what copying costs here.
+
+    Reading 3 runs six entry points, and two of them write -- selftest_csp
+    rewrites its samples/, and frame_audit.py drops result_<v>.json into the
+    working directory, which CLAUDE.md FTA_006 already records. A first
+    version of this checker ran them in place and modified the repository it
+    was measuring, which is self-scan SS_009 arriving in a new file. The
+    cost of the fix is stated there and holds here: the worktree is at HEAD,
+    so an uncommitted change is invisible to reading 3.
+    """
+    sys.path.insert(0, os.path.join(ROOT, "self-scan"))
+    import resolve
+    return resolve._isolated()
+
+
+def run_row(key, base=None):
     cmd = RUNS.get(key)
     if not cmd:
         return {"ran": False, "rc": None, "last": ""}
-    argv = [sys.executable, os.path.join(ROOT, cmd[0])] + list(cmd[1:])
+    root = base or ROOT
+    argv = [sys.executable, os.path.join(root, cmd[0])] + list(cmd[1:])
     try:
-        r = subprocess.run(argv, cwd=ROOT, capture_output=True, text=True,
+        r = subprocess.run(argv, cwd=root, capture_output=True, text=True,
                            timeout=600)
     except Exception as e:
         return {"ran": False, "rc": None, "last": type(e).__name__}
@@ -279,11 +299,17 @@ def render():
               % (a["path"], "yes" if a["exists"] else "NO",
                  "yes" if a["resolves_by_content"] else "NO"))
     w("")
-    w("3  BUILD STATE (measured by running; this checker executes)")
-    for r in rows:
-        k = key_for(r["head"])
-        res = run_row(k)
-        w("   %-14s rc=%-5s %s" % (k, res["rc"], res["last"]))
+    w("3  BUILD STATE (measured by running, in a throwaway worktree at HEAD)")
+    w("   two of these six write when run; in place they would modify the")
+    w("   tree being measured. Uncommitted work is invisible to this row.")
+    with isolated() as wt:
+        if wt is None:
+            w("   ISOLATION UNAVAILABLE -- not run, rather than run in place")
+        else:
+            for r in rows:
+                k = key_for(r["head"])
+                res = run_row(k, wt)
+                w("   %-14s rc=%-5s %s" % (k, res["rc"], res["last"]))
     w("")
     w("4  ROW STATUS AGAINST THE MEASUREMENT")
     for r in rows:
@@ -396,6 +422,23 @@ def selftest():
             if isinstance(a, ast.Constant) and "w" in a.value:
                 hit = True
     ck(hit, "and the write check fires on a planted write-mode open")
+
+    print("\n-- 5b running the rows leaves the tree untouched")
+
+    def _status():
+        r = subprocess.run(["git", "status", "--porcelain"], cwd=ROOT,
+                           capture_output=True, text=True)
+        return r.stdout
+
+    st_before = _status()
+    with isolated() as wt:
+        ck(wt is not None, "an isolated worktree opens")
+        if wt is not None:
+            # the two writers, run where writing is harmless
+            run_row("cooperative", wt)
+            run_row("substrate_alt", wt)
+    ck(_status() == st_before,
+       "git status is unchanged after running the two writers")
 
     print("\n-- 6 self-reference")
     ck(entry_hash() == before, "entry hash unchanged across the run")
