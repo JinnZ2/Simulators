@@ -244,6 +244,7 @@ last three; read in order:
 - `failure-mode-register/` — durability and reconstructability only; the delivered register, parsed not retyped; four orders land beside each other, one parser reads all four
 - `internal-reference-boundary/` — seven radials on a boundary drawn from inside; R3's two legs, two time bases
 - `external-audit/` — three outside documents on this repo, landed verbatim; counts recomputed, instruments run, three sweeps cross-checked
+- `substrate-alternative/` — locate the money frame; one coordination loop without it
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -12378,6 +12379,117 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   render screens clean through `sheet-structure-scan/no_severity` with
   **no exemption**, seven authored words reworded rather than exempted.
   Stdlib only, parses under 3.9, CC0.
+- `substrate-alternative/` — Two modules, self-contained and
+  promotable: one locates money-frame assumptions in text and
+  proposes nothing, the other runs a food-distribution
+  coordination loop on ICS structure with the price signal taken
+  out. Addressed to a repository of its own
+  (`JinnZ2/substrate-alternative`) which **does not exist and
+  could not be created from this session** — the GitHub
+  integration answers `403 Resource not accessible by
+  integration` and `add_repo` answers `not found` (`SA_018`) — so
+  it lands here as a folder that imports nothing across its own
+  boundary and carries its own LICENSE and suite. **`frame_audit.py`**
+  reads any text and reports every token carrying a money-frame
+  assumption across five frames (`OWNERSHIP` / `PRICE` /
+  `TRANSACTION` / `SCARCITY_AS_GIVEN` / `VALUE_AS_PRICE`) with the
+  sentence index, the character span and the frame, plus counts by
+  frame. **`SA_001`: LOCATE ONLY is enforced rather than
+  promised** — an AST walk over every identifier, argument,
+  attribute, function name and dict key finds no member of
+  `suggest / replace / instead / alternative / rewrite /
+  recommend / improve / fix / better / prefer / should`, and
+  `Hit._fields` intersects that vocabulary at zero, with the scan
+  null-tested on a planted `def suggestion`. **`SA_005`, the limit
+  stated at the TOP of the file and measured rather than
+  asserted:** `You have to pay for it.` returns one hit and `It
+  takes something from you before you may have it.` returns zero
+  carrying the same frame, while `compete` fires and `competing`
+  does not, since inflections are not generated — so a zero is a
+  property of THE REGISTRY and never evidence that a text is
+  frame-free (`T1-1`/`UNI_009` stated as the design's own ceiling
+  rather than found in audit). **`SA_003`:** of 165 surfaces, 32
+  carry a live non-money sense (`value` = absolute value,
+  `property` = a property of a system, `cost` = a cost function,
+  `budget` = an energy budget, `competition` = a measured
+  ecological interaction, `efficiency` = a measured ratio), each
+  with the sense stated, and three counts are returned and never
+  collapsed — total, unambiguous, ambiguous, with
+  `total == unambiguous + ambiguous` per frame — because the
+  module locates and does not adjudicate which sense is live; a
+  frame with no hits is a visible zero and a text with no hits is
+  a reachable negative, so it is not `CONSTANT_FIRES`.
+  **`pilot_loop.py`** replaces the price signal with four
+  channels — capacity declarations, need declarations, matching,
+  lag tracking — on ICS (public FEMA/NIMS doctrine) as the
+  coordination substrate. **`SA_010`:** `UNMET(node, resource,
+  quantity, reason)` is a namedtuple and not an exception,
+  asserted both ways, with all four reasons
+  (`NO_CAPACITY_DECLARED` / `CAPACITY_EXHAUSTED` / `UNREACHABLE` /
+  `ARRIVES_AFTER_HORIZON`) reached by constructed scenarios and a
+  partial fill returning BOTH an allocation for what moved and an
+  UNMET for the remainder. **`SA_011`:** an undeclared route is
+  `None`, never a large number and never zero, since either would
+  put an undeclared route on the same scale as a declared one, and
+  a node that received nothing carries `max_lag None` rather than
+  `0`. **`SA_007`, the finding: the substrate's own vocabulary
+  carries the thing being removed.** The screen over the loop's
+  source returns **0 unexempted hits and 5 exempted**, reducing to
+  four entries — `finance`, `procurement`, `compensation`,
+  `cost` — every one a name ICS itself gives a part of its
+  structure: the **Finance/Administration** section of the General
+  Staff and three of its four units. One of four sections, and
+  three of its four units, are the part of the structure this loop
+  has no channel for, so a pilot borrowing ICS as a non-monetary
+  substrate has dropped or repurposed a quarter of what it
+  borrowed and the doctrine says so before any of ours does; it is
+  the single exempted region, measured in three arms (masked the
+  file is clean, unmasked the carried block is the only thing that
+  fires, planted a token outside it is caught). **`SA_008`:** a
+  second exemption was reserved for the docstring on the reasoning
+  that a module cannot say which signal it removed without naming
+  it, the docstring was then written without the vocabulary, the
+  anticipated hits did not occur and the region was **deleted
+  rather than kept empty**, since an unfired exemption reads as a
+  hit that was forgiven. **`SA_009`/`SA_012`:** the matching rule
+  is ours and not ICS's — ICS specifies a request channel
+  (ICS-213RR) and an assignment authority, not who wins when two
+  requests meet one pallet — declared as `[CHOICE 2]`/`[CHOICE 3]`
+  with a counter-rule stated, while per-node readouts carry
+  `needed / met / unfilled / lags / max_lag / min_lag` and no
+  seventh number, nothing summed across nodes and no ranking
+  identifier anywhere (AST-asserted, null-tested), because one
+  number per node would be a standing for the node and so a second
+  allocation signal arriving through the readout. **`SA_013`, the
+  sharpest thing in the folder:** removing the price signal and
+  keeping ICS substitutes an allocation rule for one signal AND a
+  command authority for another, and `frame_audit` screens for one
+  vocabulary in which the authority assumption does not appear —
+  **the screen has a blind spot exactly the shape of the substrate
+  chosen to fill the hole it screens for** — with no authority
+  registry built here, since inventing one in the same session
+  that wrote the module would score the module against a list
+  written to let it pass. **`SA_014`:** the result is smaller than
+  it sounds and says so — a matching rule handing limited capacity
+  to several needs IS a distribution decision, price is one such
+  rule, and removing it makes the rule explicit, logged and
+  arguable rather than removing the decision. **`SA_019`, found by
+  running rather than reading:** the prose first stated 23 entries
+  carrying a second sense where the registry holds 32 — a
+  transposition, in a folder whose subject is a number standing in
+  for a thing — now asserted against the loaded registry and
+  required to appear in both documents. **`SA_017`:** the AST scan
+  is a copy of `tools/authority_scan.py`'s operation rather than
+  an import, forced by the folder having to stand as its own
+  repository, with the drift cost stated rather than hidden.
+  **`SA_015`/`SA_016` UNVERIFIED:** every ICS fact is carried from
+  memory (the doctrine hosts are not on this environment's egress
+  allowlist, so nobody here opened a source) and every scenario is
+  constructed, so nothing in the folder is a statement about any
+  actual food system. Check count printed by
+  `python3 test_substrate.py`; both modules refuse `--selftest`
+  (exit 2). Stdlib only, no network, parses under 3.9,
+  phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

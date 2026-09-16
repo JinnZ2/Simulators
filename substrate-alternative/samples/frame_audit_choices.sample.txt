@@ -1,0 +1,6 @@
+frame_audit [CHOICE n]
+  [CHOICE 1] Longest match wins at a position.  The registry is sorted by descending surface length before the alternation is built, so `cost-effective` is one VALUE_AS_PRICE hit and not a PRICE hit plus a loose word.  The alternative (count both) double-counts one utterance.
+  [CHOICE 2] A sentence ends at . ! or ? followed by whitespace.  Abbreviations over-split.  The sentence index is a locator for a reader, not a linguistic claim.
+  [CHOICE 3] A multi-frame phrase is filed under one frame by a declared reading: `supply and demand`, `market forces` and `free market` are SCARCITY_AS_GIVEN, because what they assert is the allocation premise, not a single price or a single exchange.
+  [CHOICE 4] `finance` / `financial` / `fiscal` / `compensation` are filed under PRICE, on the reading that what they name is money-quantity handling.  They could as defensibly sit under TRANSACTION.  The assignment is visible here so it can be disagreed with rather than inferred from output.
+  [CHOICE 5] A surface form may appear under exactly one frame.  A duplicate raises at load rather than being counted twice or silently taking the first frame.

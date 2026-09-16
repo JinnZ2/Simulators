@@ -1,0 +1,42 @@
+FRAME AUDIT -- samples/demo_text.txt
+==============================================================
+registry entries : 165
+sentences        : 3
+hits             : 10  (of which sense-ambiguous: 4)
+
+COUNTS BY FRAME   total  unambiguous  ambiguous
+  OWNERSHIP                1            0          1
+  PRICE                    2            2          0
+  TRANSACTION              3            2          1
+  SCARCITY_AS_GIVEN        2            1          1
+  VALUE_AS_PRICE           2            1          1
+
+HITS
+  s0    TRANSACTION          market             'market' [sense-ambiguous]
+        other live sense: a marketplace of ideas; a farmers market as a place
+        The market price of grain rose because supply and deman...
+  s0    PRICE                price              'price'
+        The market price of grain rose because supply and deman...
+  s0    SCARCITY_AS_GIVEN    supply and demand  'supply and demand'
+        The market price of grain rose because supply and deman...
+  s0    PRICE                afford             'afford'
+        The market price of grain rose because supply and deman...
+  s1    OWNERSHIP            property           'property' [sense-ambiguous]
+        other live sense: a property of a system (physics, mathematics)
+        A property of the system is that ecological competition...
+  s1    SCARCITY_AS_GIVEN    competition        'competition' [sense-ambiguous]
+        other live sense: ecological competition is a measured interaction
+        A property of the system is that ecological competition...
+  s1    VALUE_AS_PRICE       value              'value' [sense-ambiguous]
+        other live sense: absolute value; a value in a field; values as commitments
+        A property of the system is that ecological competition...
+  s2    VALUE_AS_PRICE       not worth          'not worth'
+        The co-op decided it was not worth it and sold the stoc...
+  s2    TRANSACTION          sold               'sold'
+        The co-op decided it was not worth it and sold the stoc...
+  s2    TRANSACTION          vendor             'vendor'
+        The co-op decided it was not worth it and sold the stoc...
+
+This module locates.  It states nothing about what any of these
+hits ought to be, and carries no field in which such a thing
+could be written.
