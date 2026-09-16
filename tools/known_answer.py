@@ -44,7 +44,9 @@ Stdlib only. Parses under Python 3.9. ASCII only. CC0.
 
 from __future__ import annotations
 
+import ast
 import hashlib
+import io
 import os
 import re
 import sys
@@ -1422,6 +1424,113 @@ def _seed_move_set():
 
 
 
+def seed_reachable(src=None, path=None):
+    """Every `register(...)` in this file must sit in a function reachable
+    from `seed()`. A registration that runs only at import is lost the
+    moment a consumer clears the registry and re-seeds, and everything
+    that DID register still passes, so nothing says so.
+
+    Structural, not a per-instance patch: this is the third occurrence of
+    the shape (FMR_036 a register after a `finally`; MSV_013 the same
+    again; MSV_024 a helper called from the module tail), and all three
+    were repaired where they were found. A call graph closed from `seed`
+    makes a fourth fail the run rather than wait to be noticed.
+
+    Returns a record. `unreachable` is the finding: one entry per
+    register() call site that `seed()` cannot reach, naming the enclosing
+    function or None for a module-level call.
+
+    LIMIT, stated: a register() inside a nested def is attributed to the
+    top-level function containing it. A nested def that is never called
+    is a different defect and this does not catch it."""
+    if src is None:
+        src = io.open(path or os.path.join(os.path.dirname(
+            os.path.abspath(__file__)), "known_answer.py"),
+            encoding="utf-8").read()
+    tree = ast.parse(src)
+    tops = {}
+    for node in tree.body:
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            tops[node.name] = node
+
+    def calls_in(node):
+        out = set()
+        for n in ast.walk(node):
+            if isinstance(n, ast.Call) and isinstance(n.func, ast.Name):
+                out.add(n.func.id)
+        return out
+
+    def registers_in(node):
+        out = []
+        for n in ast.walk(node):
+            if isinstance(n, ast.Call) and isinstance(n.func, ast.Name) \
+                    and n.func.id == "register":
+                out.append(n.lineno)
+        return out
+
+    reach, stack = set(), ["seed"]
+    while stack:
+        name = stack.pop()
+        if name in reach or name not in tops:
+            continue
+        reach.add(name)
+        stack.extend(calls_in(tops[name]))
+
+    unreachable = []
+    for name, node in sorted(tops.items()):
+        if name in reach:
+            continue
+        for ln in registers_in(node):
+            unreachable.append((name, ln))
+    for node in tree.body:
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef,
+                             ast.ClassDef)):
+            continue
+        for ln in registers_in(node):
+            unreachable.append((None, ln))
+    return {"root": "seed",
+            "reachable": sorted(reach),
+            "registering_functions": sorted(
+                n for n in tops if registers_in(tops[n])),
+            "unreachable": sorted(unreachable, key=lambda t: t[1]),
+            "ok": not unreachable}
+
+
+def registration_sites_elsewhere(root=None):
+    """Any OTHER file that imports this module and calls register() is
+    registering outside seed() by construction -- seed() cannot reach it
+    at all. Currently a visible zero; kept so it stays one.
+
+    Lexical, and says so: a file that imports known_answer under another
+    name and calls register through the alias is not caught."""
+    root = root or ROOT
+    hits = []
+    for dirpath, dirnames, filenames in os.walk(root):
+        dirnames[:] = [d for d in dirnames
+                       if d not in (".git", "__pycache__", "legacy")]
+        for fn in filenames:
+            if not fn.endswith(".py"):
+                continue
+            full = os.path.join(dirpath, fn)
+            if os.path.abspath(full) == os.path.abspath(__file__):
+                continue
+            try:
+                text = io.open(full, encoding="utf-8").read()
+            except (IOError, OSError, UnicodeDecodeError):
+                continue
+            if "known_answer" not in text:
+                continue
+            try:
+                tree = ast.parse(text)
+            except SyntaxError:
+                continue
+            for n in ast.walk(tree):
+                if isinstance(n, ast.Call) and isinstance(n.func, ast.Name) \
+                        and n.func.id == "register":
+                    hits.append((os.path.relpath(full, root), n.lineno))
+    return sorted(hits)
+
+
 def completeness():
     """Expected against registered, the same value-and-source rule applied
     to the registry: a registration is a value whose source is its call
@@ -1463,7 +1572,17 @@ def report():
     for m in comp["extra"]:
         print("  !! registered and not expected: %s" % m)
     print("cases disagreeing with the registry: %d" % len(bad))
-    return 1 if (bad or not comp["ok"]) else 0
+    reach = seed_reachable()
+    print("register() call sites seed() cannot reach: %d"
+          % len(reach["unreachable"]))
+    for fn, ln in reach["unreachable"]:
+        print("  !! %s line %d registers, and seed() does not reach it"
+              % (fn or "<module level>", ln))
+    outside = registration_sites_elsewhere()
+    print("register() call sites in other files: %d" % len(outside))
+    for rel, ln in outside:
+        print("  !! %s line %d registers outside seed()" % (rel, ln))
+    return 1 if (bad or not comp["ok"] or not reach["ok"] or outside) else 0
 
 
 if __name__ == "__main__":

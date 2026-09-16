@@ -1,6 +1,6 @@
 # CLAIM TABLE -- move set, second order
 
-Claims `MSV_001..MSV_024`, about `move_set_sim_v2.py` and the second work
+Claims `MSV_001..MSV_026`, about `move_set_sim_v2.py` and the second work
 order. Distinct prefix from `MV_*`, which is about the delivered v1 and is
 not restated here. `WORK_ORDER_V2.md` is landed verbatim and not edited.
 
@@ -554,6 +554,22 @@ introducing its registration string:
 | **answer registered BEFORE the implementation existed** | **0** |
 | unknown (registered in this session, uncommitted at measurement) | 1 |
 
+**The denominator, reconciled.** Two lists move and they move by
+different amounts, so one number does not describe both:
+
+| list | before `00646b1` | after | ids added |
+| --- | --- | --- | --- |
+| `tools/known_answer.py::EXPECTED_METRICS` | 25 | 26 | `_halfwidth` |
+| `tests/test_known_answer_gate.py::MANIFEST` | 24 | 26 | `coverage`, `_halfwidth` |
+
+`coverage` was **already registered** -- added earlier in this session
+under `MSV_013`'s repair -- and had never been added to the test's
+MANIFEST, so the commit closed a coverage gap on it rather than
+registering it. `25 + 2 = 27` fails because the two ids did not land in
+one list. The ordering table below counts the **25 committed** metrics at
+the time of measurement; `_halfwidth` was the uncommitted 26th and is the
+`unknown` row in it.
+
 **Zero of 25.** Not one expected value in the registry was fixed before
 the function it checks existed. The file's own docstring names the two
 seeds as cases where *"a case whose answer was fixed in advance"* caught a
@@ -605,3 +621,53 @@ Falsifier: a registration path that is green under the CLI and short under
 a clear-and-reseed.
 
 ---
+
+---
+
+## MSV_025 -- a tail-only registration now fails the run rather than waiting to be found
+
+**Status: SUPPORTED, built.**
+
+`MSV_024` was the THIRD occurrence of one shape -- a `register(...)` call
+that executes at import and is not on `seed()`'s path -- after `FMR_036`
+(a `register` after a `finally`) and `MSV_013` (the same again). All three
+were repaired where they were found, per instance.
+
+`tools/known_answer.py::seed_reachable()` is the structural form: an AST
+walk over the module's own source, a call graph over its top-level
+functions, and a closure from `seed`. Every `register(...)` call site must
+sit in a function that closure reaches. A module-level call is a violation
+by construction, since it runs at import and nowhere else.
+`registration_sites_elsewhere()` is the second arm: a `register(...)` in
+any other file is outside `seed()` by construction and cannot be reached
+at all. Both are wired into `report()`, so `python3 tools/known_answer.py`
+exits non-zero, and into `tests/test_known_answer_gate.py`, so the repo
+suite goes red.
+
+Reachability is TRANSITIVE (`seed -> a -> b -> register()` passes) and the
+check is null-tested in both directions -- a planted tail-only call fires,
+a planted module-level call fires, a call `seed()` reaches does not, and
+the registering functions are named so a check that found no `register()`
+calls at all could not pass by silence.
+
+**Limit, stated in the function:** a `register()` inside a NESTED def is
+attributed to the top-level function containing it. A nested def that is
+never called is a different defect and this does not catch it.
+
+Falsifier: a fourth occurrence of the shape that reaches a green run.
+
+---
+
+## MSV_026 -- the mechanism that produced the finding
+
+**Status: RECORDED, no build.**
+
+`MSV_024` did not surface from the move-set suite (157 checks) or from the
+repo suite (105 at the time). Both were green with the defect standing.
+It surfaced from adding two ids to `tests/test_known_answer_gate.py`'s
+MANIFEST -- that is, from making an existing coverage claim externally
+checkable. The claim was *these two metrics are registered*; writing it
+where something else could test it is what turned it into a measurement,
+and the measurement failed.
+
+Recorded in `CLAUDE.md` as the mechanism rather than as an incident.

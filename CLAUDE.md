@@ -94,6 +94,21 @@ carrying structural load is a flagged defect, and co-produced documents are
 layer-separated before audit rather than audited as a composite. Read it
 before reporting.
 
+**What produces findings here.** Not the suites. The mechanism, stated
+because it recurs: *a finding surfaces when a claim is made externally
+checkable* — written into a place a second party, or a second instrument,
+can test it. `MSV_024` is the clean instance — a registration reachable
+only from a module tail survived 157 module checks and 105 repo tests, all
+green, and fell the moment two ids were written into another file's
+coverage manifest. `SS_009`, `UNI_010`, `EA_025` and `CD_006` are the same
+shape from other directions: running the thing rather than reading it,
+diffing two runs, handing one artifact to a second reader, checking a
+stated count against the script that produced it. A green suite is
+evidence that what is already checkable passes; it is not evidence about
+what is not. The corollary is the working rule — when a claim is stated in
+prose, the next move is to write it where something else reads it, and the
+denominator that grows is the one worth growing.
+
 ## Meta-spine (read first)
 
 The methodology spine sits in six root-level files. Every simulator
@@ -8990,8 +9005,27 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   matters (`MSV_013` here, `FMR_036` before it, and
   `tools/sourced.registry_complete` exists because of the first).
   `_halfwidth` is registered beside `coverage` with six cases, the
-  exponent and empty cases being where a default width would hide.
-  Twenty-four claims `MSV_001..024` in `CLAIM_TABLE_V2.md`. Stdlib only, parses under 3.9, CC0.
+  exponent and empty cases being where a default width would hide. **The
+  denominator reconciles as two lists moving by different amounts** —
+  `EXPECTED_METRICS` 25 → 26 (one id, `_halfwidth`) against the test
+  MANIFEST 24 → 26 (two, because `coverage` was already registered under
+  `MSV_013`'s repair and had never been manifested), so `25 + 2 = 27`
+  fails and the ordering table's 25 rows are the committed metrics at
+  measurement time with `_halfwidth` the uncommitted 26th. **`MSV_025`,
+  the repair moved to the level:** three occurrences all repaired per
+  instance, so `seed_reachable()` now closes a call graph from `seed` over
+  the module's own AST and requires every `register(...)` call site to sit
+  inside it (a module-level call is a violation by construction), with
+  `registration_sites_elsewhere()` as the second arm — a `register(...)`
+  in any other file cannot be reached by `seed()` at all, a visible zero —
+  both failing `python3 tools/known_answer.py` and both in the repo suite,
+  null-tested in four directions including transitivity, with the nested-def
+  limit stated in the function. **`MSV_026`:** the finding came from
+  neither suite — 157 module checks and 105 repo tests were green with the
+  defect standing — but from writing two ids into another file's manifest,
+  which is the repo's own finding mechanism and is now recorded under
+  `AUDIT_CONTRACT.md` rather than as an incident.
+  Twenty-six claims `MSV_001..026` in `CLAIM_TABLE_V2.md`. Stdlib only, parses under 3.9, CC0.
 - `clustering-axes/` — Six exploration routes for what AI agents cluster
   on when the axis is **not imported from human social science**, plus a
   model-free stylometric instrument for the cheapest of them. Both

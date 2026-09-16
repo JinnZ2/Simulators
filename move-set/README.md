@@ -281,6 +281,18 @@ checked.
     answer registered BEFORE the implementation existed     0
     unknown (registered this session, uncommitted)          1
 
+**The denominator, reconciled.** Two lists, moving by different amounts:
+
+    tools/known_answer.py::EXPECTED_METRICS   25 -> 26   (+_halfwidth)
+    tests/test_known_answer_gate.py::MANIFEST 24 -> 26   (+coverage,
+                                                          +_halfwidth)
+
+`coverage` was already registered — added earlier in this session under
+`MSV_013`'s repair — and had never been manifested. So `25 + 2 = 27`
+fails: the two ids landed in two different lists. The ordering table
+counts the **25 committed** metrics at measurement time; `_halfwidth` is
+the uncommitted 26th, the `unknown` row.
+
 **Zero of 25.** Not one expected value was fixed before the function it
 checks existed — including the two seed cases the file's own docstring
 describes as answers *"fixed in advance"*, both of which are
@@ -297,6 +309,23 @@ One defect surfaced while making that claim checkable: the move-set
 registrations were reachable only from the module tail, so the CLI read
 26/26 COMPLETE while a clear-and-reseed lost both. Repaired, and recorded
 as the third instance of that shape in this registry (`MSV_024`).
+
+**Repaired at the level, not at the instance (`MSV_025`).** Three
+occurrences — `FMR_036`, `MSV_013`, `MSV_024` — all repaired where they
+were found. `tools/known_answer.py::seed_reachable()` closes a call graph
+from `seed` over the module's own AST and requires every `register(...)`
+call site to sit inside it; a module-level call is a violation by
+construction. `registration_sites_elsewhere()` is the second arm — a
+`register(...)` in any other file cannot be reached by `seed()` at all,
+currently a visible zero. Both fail `python3 tools/known_answer.py` and
+both are in the repo suite, null-tested in both directions (tail-only
+fires, module-level fires, a call `seed()` reaches does not, and
+reachability is transitive so `seed -> a -> b -> register()` passes).
+
+**What produced the finding (`MSV_026`).** Not the 157 move-set checks
+and not the 105 repo tests — both were green with the defect standing. It
+came from writing two ids into a MANIFEST, which is what turned an
+existing coverage claim into something a second party could test.
 
 ### What the order did not fix and this does
 
@@ -330,4 +359,4 @@ the point of use (`MSV_012`).
 `move_set_sim_v2.py` refuses `--selftest` (exit 2) rather than exiting
 clean on an invocation that runs nothing. `coverage` is registered in
 `tools/known_answer.py` with six cases; the overlap case is the detector.
-Claims `MSV_001..MSV_024` in `CLAIM_TABLE_V2.md`.
+Claims `MSV_001..MSV_026` in `CLAIM_TABLE_V2.md`.
