@@ -29,6 +29,7 @@ from __future__ import annotations
 
 import argparse
 import datetime
+import json
 import os
 import platform
 import sys
@@ -56,6 +57,15 @@ CHOICES = [
     "new claim has nothing to have drifted from.",
     "[CHOICE 6] Comparison is numeric at the declared precision, not string "
     "equality: 0.214 and 0.2140 are one value and two strings.",
+    "[CHOICE 7] ADDENDUM.md's T is the first run over a NON-EMPTY record "
+    "set. A run over an empty set is refused at exit 2 and never reaches "
+    "the cobol arm, so it cannot contribute exposure, and starting the "
+    "clock on one would run the T+9 window down while zero cross-ledger "
+    "runs were possible. review.py reports the other reading beside it.",
+    "[CHOICE 8] A run is logged to reviews/RUNS.jsonl with its machine and "
+    "cobc version. The addendum counts exposure in distinct machines or "
+    "compiler versions and neither is recoverable after the fact from a "
+    "run that did not write it down. --no-log suppresses it.",
 ]
 
 SEED_NOTE = "A SEEDED value is NOT a verified value. It is a pin."
@@ -414,6 +424,33 @@ def append_disagreements(path: str, run: Run) -> None:
         fh.write("\n")
 
 
+def append_run_log(path: str, run: Run) -> None:
+    """One line per run, append-only. Exposure for ADDENDUM.md.
+
+    This is a record of the run, not a measurement of it. No duration is
+    taken here: ledger.py does not time anything, and review.py, which
+    does, is a different instrument answering a different question.
+    """
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    cross = run.cross.get("status")
+    row = {
+        "date": run.today,
+        "machine": "%s %s" % (platform.system(), platform.machine()),
+        "python": platform.python_version(),
+        "records": len(run.records),
+        "cross_ledger": cross,
+        "cobc_version": bridge.compiler_version(),
+        "diffs_fired": run.fired(),
+        "internal": len(run.internal),
+        "drift": len(run.drift),
+        "disagreements": (len(run.cross.get("disagree") or [])
+                          if cross == "OK" else None),
+        "seeded": len(run.seeded),
+    }
+    with open(path, "a", encoding="utf-8") as fh:
+        fh.write(json.dumps(row, sort_keys=True) + "\n")
+
+
 def main(argv: Optional[Sequence[str]] = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--records", default=os.path.join(HERE, "records"))
@@ -421,6 +458,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     ap.add_argument("--drift-log", default=os.path.join(HERE, "DRIFT.md"))
     ap.add_argument("--disagreements",
                     default=os.path.join(HERE, "DISAGREEMENTS.md"))
+    ap.add_argument("--run-log",
+                    default=os.path.join(HERE, "reviews", "RUNS.jsonl"))
     ap.add_argument("--no-seed", action="store_true",
                     help="do not write EXPECTED files for new claims")
     ap.add_argument("--no-log", action="store_true",
@@ -456,6 +495,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     if not args.no_log:
         append_drift_log(args.drift_log, run)
         append_disagreements(args.disagreements, run)
+        append_run_log(args.run_log, run)
     return 1 if run.fired() else 0
 
 

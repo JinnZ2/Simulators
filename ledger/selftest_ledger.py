@@ -33,6 +33,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 
 import ledger as L                                       # noqa: E402
+import review as V                                       # noqa: E402
 import record as R                                       # noqa: E402
 from cobol_ledger import bridge                           # noqa: E402
 from py_ledger import engine                              # noqa: E402
@@ -515,9 +516,14 @@ def structural():
         os.path.join(HERE, "cobol_ledger", "bridge.py"),
         encoding="utf-8").read()
 
-    # No float() anywhere a value passes through. Read from the AST, because
-    # a substring scan fires on the prose that refuses it -- three sentences
-    # in these files contain the word.
+    # No float() anywhere a CLAIM VALUE passes through. Read from the AST,
+    # because a substring scan fires on the prose that refuses it -- three
+    # sentences in these files contain the word.
+    #
+    # The scanned set is the ledger proper. review.py is deliberately not in
+    # it: it divides line counts to get a ratio and it times a run, and
+    # neither number is a claim value. The rule is about the path a claim
+    # value takes, not about the character f-l-o-a-t.
     for name, text in src.items():
         calls = [n.func.id for n in ast.walk(ast.parse(text))
                  if isinstance(n, ast.Call) and isinstance(n.func, ast.Name)]
@@ -535,7 +541,12 @@ def structural():
        or "state: SEEDED" in body)
     ck("write_expected never writes CONFIRMED", "CONFIRMED" not in body)
 
-    # It does not run sims and does not time anything.
+    # It does not run sims and does not time anything. The scanned set is
+    # the ledger proper; review.py is NOT in it and DOES time a run,
+    # because ADDENDUM.md asks for the wall time of a full ledger run.
+    # That is a different instrument answering a different question, and
+    # saying so here is cheaper than a reader finding perf_counter in the
+    # folder and reading it as drift.
     names = set()
     for text in src.values():
         for n in ast.walk(ast.parse(text)):
@@ -572,6 +583,206 @@ def structural():
                phrase in text)
 
 
+
+# ----------------------------------------------------- ADDENDUM.md review
+
+def _runs(path, rows):
+    with open(path, "w", encoding="utf-8") as fh:
+        for r in rows:
+            fh.write(json.dumps(r) + "\n")
+
+
+def _run(date, cross="OK", machine="m1", cobc="GnuCOBOL 3.2",
+         records=5, dis=0):
+    return {"date": date, "machine": machine, "cobc_version": cobc,
+            "records": records, "cross_ledger": cross, "disagreements": dis}
+
+
+def review_checks():
+    print("addendum review")
+    c = V.criterion()
+    ck("the criterion is read out of ADDENDUM.md, not retyped",
+       c["ok"] and c["t3_weeks"] == 3 and c["t9_weeks"] == 9, c.get("problems"))
+    ck("KEEP needs at least one disagreement by T+3",
+       c["keep_min"] == 1 and c["keep_by_weeks"] == 3)
+    ck("DROP needs zero disagreements by T+9",
+       c["drop_max_disagreements"] == 0 and c["drop_by_weeks"] == 9)
+    ck("exposure and UNDECIDED thresholds are both 3",
+       c["exposure_min"] == 3 and c["undecided_below"] == 3)
+
+    base = tempfile.mkdtemp(prefix="ledger_review_")
+    try:
+        # the criterion parser has to be able to fail
+        bad = os.path.join(base, "BAD.md")
+        open(bad, "w", encoding="utf-8").write("nothing useful here\n")
+        cb = V.criterion(bad)
+        ck("an unreadable criterion is refused, not guessed",
+           not cb["ok"] and len(cb["problems"]) >= 4)
+        vb = V.verdict("2027-01-01", addendum_path=bad)
+        ck("and the verdict says so rather than computing one",
+           vb["verdict"] == "CRITERION_UNREADABLE")
+
+        rp = os.path.join(base, "RUNS.jsonl")
+        ep = os.path.join(base, "EXPLAINED.jsonl")
+        open(ep, "w").close()
+
+        _runs(rp, [])
+        v = V.verdict("2027-01-01", rp, ep)
+        ck("no runs is UNDECIDED, not DROP",
+           v["verdict"] == "UNDECIDED")
+
+        _runs(rp, [_run("2026-01-01", cross="UNAVAILABLE", cobc=None),
+                   _run("2026-01-02", cross="UNAVAILABLE", cobc=None),
+                   _run("2026-01-03", cross="UNAVAILABLE", cobc=None),
+                   _run("2026-01-04", cross="UNAVAILABLE", cobc=None)])
+        v = V.verdict("2027-01-01", rp, ep)
+        ck("an UNAVAILABLE arm contributes no exposure",
+           v["verdict"] == "UNDECIDED" and v["exposure"]["completed"] == 0)
+        ck("and the run says so in as many words",
+           any("not a completed cross-ledger run" in w for w in v["why"]))
+
+        _runs(rp, [_run("2026-01-01", machine="m1"),
+                   _run("2026-01-02", machine="m2")])
+        v = V.verdict("2027-01-01", rp, ep)
+        ck("two completed runs is below the exposure floor",
+           v["verdict"] == "UNDECIDED" and v["exposure"]["completed"] == 2)
+
+        # DROP: zero disagreements, three machines, past T+9
+        _runs(rp, [_run("2026-01-01", machine="m1"),
+                   _run("2026-01-02", machine="m2"),
+                   _run("2026-01-03", machine="m3")])
+        v = V.verdict("2026-06-01", rp, ep)
+        ck("DROP fires on zero disagreements over three machines past T+9",
+           v["verdict"] == "DROP", v.get("why"))
+        v = V.verdict("2026-01-10", rp, ep)
+        ck("and does not fire before T+9",
+           v["verdict"] == "NOT_YET_DUE", v["verdict"])
+
+        # one disagreement, unclassified
+        _runs(rp, [_run("2026-01-01", machine="m1", dis=1),
+                   _run("2026-01-02", machine="m2"),
+                   _run("2026-01-03", machine="m3")])
+        v = V.verdict("2026-06-01", rp, ep)
+        ck("an unclassified disagreement is UNDECIDED, not KEEP and not DROP",
+           v["verdict"] == "UNDECIDED"
+           and v["disagreements"]["unclassified"] == 1)
+
+        # classified as a rounding-mode difference: excluded by name
+        _runs(ep, [{"ref": "s:A", "run_date": "2026-01-01",
+                    "explained_by": "ROUNDING_MODE",
+                    "basis": "constructed for the selftest"}])
+        v = V.verdict("2026-06-01", rp, ep)
+        ck("a rounding-mode difference does not satisfy KEEP",
+           v["verdict"] != "KEEP" and v["disagreements"]["unexplained"] == 0,
+           v["verdict"])
+
+        # classified UNEXPLAINED: the KEEP case
+        _runs(ep, [{"ref": "s:A", "run_date": "2026-01-01",
+                    "explained_by": "UNEXPLAINED",
+                    "basis": "constructed for the selftest"}])
+        v = V.verdict("2026-02-01", rp, ep)
+        ck("KEEP fires on one unexplained disagreement past T+3",
+           v["verdict"] == "KEEP", v["verdict"])
+
+        # a classification with no basis is malformed, not accepted
+        _runs(ep, [{"ref": "s:A", "explained_by": "UNEXPLAINED",
+                    "basis": ""}])
+        v = V.verdict("2026-06-01", rp, ep)
+        ck("a classification with no basis is refused",
+           v["verdict"] == "UNDECIDED"
+           and "s:A" in v["disagreements"]["malformed"])
+
+        # the clock
+        open(ep, "w").close()
+        _runs(rp, [_run("2026-01-01", records=0),
+                   _run("2026-01-02", records=0),
+                   _run("2026-01-03", records=0)])
+        v = V.verdict("2027-01-01", rp, ep)
+        ck("runs over an empty record set do not start the clock",
+           v["verdict"] == "CLOCK_NOT_STARTED"
+           and v["clocks"]["t_records"] is None
+           and v["clocks"]["t_any"] == "2026-01-01")
+
+        # bulk
+        b = V.bulk()
+        ck("bulk measures ledger source against sim source",
+           b["ledger_lines"] > 0 and b["sim_lines"] > 0 and b["ratio"] > 0)
+        ck("bulk does not time unless asked", b["wall_seconds"] is None)
+        b = V.bulk(with_time=True)
+        ck("bulk times a full ledger run when asked and names the set",
+           b["wall_seconds"] is not None and b["wall_over"])
+    finally:
+        shutil.rmtree(base, ignore_errors=True)
+
+    # the addendum is never written by anything here
+    for name in ("ledger.py", "review.py", "record.py", "selftest_ledger.py"):
+        text = open(os.path.join(HERE, name), encoding="utf-8").read()
+        writes = []
+        for n in ast.walk(ast.parse(text)):
+            if isinstance(n, ast.Call) and getattr(n.func, "id", "") == "open":
+                mode = ""
+                if len(n.args) > 1 and isinstance(n.args[1], ast.Constant):
+                    mode = str(n.args[1].value)
+                for kw in n.keywords:
+                    if kw.arg == "mode" and isinstance(kw.value, ast.Constant):
+                        mode = str(kw.value.value)
+                if any(ch in mode for ch in "wax"):
+                    tgt = n.args[0] if n.args else None
+                    writes.append(getattr(tgt, "id", None)
+                                  or getattr(tgt, "attr", None) or "?")
+        ck("%s never opens ADDENDUM for writing" % name,
+           "ADDENDUM" not in writes, writes)
+
+    p = subprocess.run([sys.executable, os.path.join(HERE, "review.py"),
+                        "--selftest"], capture_output=True, text=True)
+    ck("review.py refuses --selftest", p.returncode == 2)
+
+    p = subprocess.run([sys.executable, os.path.join(HERE, "review.py"),
+                        "--record"], capture_output=True, text=True)
+    ck("--record refuses a review with no override count",
+       p.returncode == 2 and "REFUSED" in p.stderr)
+    p = subprocess.run([sys.executable, os.path.join(HERE, "review.py"),
+                        "--record", "--overrides", "0",
+                        "--unique-findings", "0",
+                        "--unique-findings-basis", "x"],
+                       capture_output=True, text=True)
+    ck("--record refuses a count with no basis",
+       p.returncode == 2 and "basis" in p.stderr)
+
+    ov = open(os.path.join(HERE, "OVERRIDES.md"), encoding="utf-8").read()
+    ck("OVERRIDES.md exists and keeps UNRECORDED apart from 0",
+       "UNRECORDED` is not `0`" in ov or "UNRECORDED is not 0" in ov
+       or "`UNRECORDED` is not `0`" in ov)
+    dm = open(os.path.join(HERE, "DISAGREEMENTS.md"), encoding="utf-8").read()
+    ck("DISAGREEMENTS.md carries the T+3 and T+9 obligation",
+       "T+3 and T+9" in dm and "zero reading is the result" in dm)
+
+    # the run log the exposure count rests on
+    base = tempfile.mkdtemp(prefix="ledger_runlog_")
+    try:
+        log = os.path.join(base, "reviews", "RUNS.jsonl")
+        subprocess.run(
+            [sys.executable, os.path.join(HERE, "ledger.py"),
+             "--records", FIXTURES, "--expected", os.path.join(base, "e"),
+             "--drift-log", os.path.join(base, "D.md"),
+             "--disagreements", os.path.join(base, "X.md"),
+             "--run-log", log], capture_output=True, text=True)
+        rows, bad = V.read_jsonl(log)
+        ck("a run writes one line to the run log", len(rows) == 1 and not bad)
+        ck("and it carries the machine and the compiler version",
+           "machine" in rows[0] and "cobc_version" in rows[0])
+        ck("an unavailable arm is recorded as UNAVAILABLE, not as OK",
+           rows[0]["cross_ledger"] in ("OK", "UNAVAILABLE"))
+        subprocess.run(
+            [sys.executable, os.path.join(HERE, "ledger.py"),
+             "--records", FIXTURES, "--expected", os.path.join(base, "e"),
+             "--run-log", log, "--no-log"], capture_output=True, text=True)
+        rows, _ = V.read_jsonl(log)
+        ck("--no-log writes no run line", len(rows) == 1)
+    finally:
+        shutil.rmtree(base, ignore_errors=True)
+
+
 def main():
     print("ledger selftest")
     print("=" * 70)
@@ -580,6 +791,7 @@ def main():
     cobol_checks()
     diffs()
     cli()
+    review_checks()
     structural()
     print("=" * 70)
     print("checks: %d   failed: %d" % (CHECKS[0], len(FAILS)))

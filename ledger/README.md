@@ -74,12 +74,60 @@ selftest exercises the cross-ledger diff's firing direction against a
 **stub**, which shows that `ledger.py` routes and records a disagreement
 correctly and is not evidence that `LEDGER.cob` works.
 
+## ADDENDUM.md -- the criterion, committed before the ledger runs
+
+The cobol arm rests on an **untested hypothesis**: that float arithmetic
+corrupts claim values in this tree. Nothing here has demonstrated it.
+`ADDENDUM.md` was committed before the ledger ran, and it fixes KEEP, DROP
+and UNDECIDED in advance so a reassessment written after the results is not
+subject to the same pull that produced them.
+
+It is landed **byte-exact, em dashes included** -- the repo's ASCII
+convention is waived here for the same reason `AGENTS.md` waives it, and
+more sharply: a document whose own first rule is *do not edit after
+results* is not one to transliterate. `review.py` asserts its hash is
+unchanged across every run and **parses the thresholds out of it** rather
+than carrying a second copy that could drift.
+
+```
+python3 ledger/review.py
+```
+
+Today it returns **UNDECIDED**, for the reason the addendum names: zero
+completed cross-ledger runs, which is fewer than three. A run in which the
+cobol arm was UNAVAILABLE is **not** a completed cross-ledger run and
+contributes no exposure -- counting it would let the DROP branch fire on
+runs that could not have produced a disagreement.
+
+The clock has not started either: `T` is the first run over a **non-empty**
+record set (`[CHOICE 7]`), and there has not been one. `review.py` prints
+the other reading beside it.
+
+### The real signal is the one thing the instrument cannot see
+
+The addendum names the override count as the real signal -- *a gate that
+gets routinely overridden has become bulk regardless of what it catches* --
+and an override happens outside the ledger and leaves no trace in it. From
+inside the gate, a gate that is routinely overridden and a gate that never
+is look identical. So it is a **declared** field, `UNRECORDED` is kept
+apart from `0`, `review.py --record` refuses either without a stated basis,
+and `OVERRIDES.md` exists so the count can ever be a number at all.
+
+The same holds for *findings no other check found*.
+
+`reviews/EXPLAINED.jsonl` classifies each disagreement. KEEP excludes a
+disagreement *explained by a rounding-mode difference in the ledger sources
+themselves*, and whether a row is one is a judgement about two sources.
+While any disagreement is unclassified the verdict is UNDECIDED and names
+the rows: an unclassified row is neither a KEEP nor a not-KEEP.
+
 ## Running it
 
 ```
 python3 ledger/ledger.py --records ledger/fixtures/records \
                          --expected /tmp/exp --no-log
 python3 ledger/ledger.py --choices
+python3 ledger/review.py --time
 python3 ledger/selftest_ledger.py
 ```
 

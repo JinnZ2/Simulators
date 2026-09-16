@@ -62,6 +62,26 @@ class CobolRun:
 
 # ------------------------------------------------------------ availability
 
+def compiler_version() -> Optional[str]:
+    """`cobc --version`, first line. None when there is no compiler.
+
+    Recorded per run because the addendum's exposure criterion counts
+    distinct machines OR compiler versions, and neither is recoverable
+    after the fact from a run that did not write it down.
+    """
+    cobc = shutil.which("cobc")
+    if cobc is None:
+        return None
+    try:
+        p = subprocess.run([cobc, "--version"], capture_output=True,
+                           text=True, timeout=30)
+    except (OSError, subprocess.SubprocessError):
+        return None
+    line = (p.stdout or p.stderr or "").strip().splitlines()
+    return line[0].strip() if line else None
+
+
+
 def availability() -> Availability:
     if not os.path.isfile(SOURCE):
         return Availability(False, "LEDGER.cob is not present")
