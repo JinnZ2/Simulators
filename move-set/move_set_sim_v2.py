@@ -30,13 +30,48 @@
 #           WHAT. A ledger cannot state a value the artifact does not
 #           carry at the place it cites.
 #   DERIVED the value is RECOMPUTED from operands sliced out of the
-#           artifact. The ledger declares whether the stated arithmetic
-#           HOLDS; the scorer recomputes and gates on the declaration
-#           matching, in both directions.
+#           artifact, AS AN INTERVAL at the precision the artifact
+#           shipped. A stated value inside that band is consistency, not
+#           confirmation, and returns NOT_EVALUABLE. Only a stated value
+#           OUTSIDE the band is a discrepancy. See the next block.
 #   ABSENT  the reason carries a SEARCHED SPAN and a SOUGHT token, and
 #           the scorer confirms the span resolves and the token is not
 #           in it. An absence with no span does not score. An absence
 #           whose token IS present is REFUTED.
+#
+# ---------------------------------------------------------------------
+# WHAT CHANGED AFTER THE FIRST RUN, and it is also one thing.
+#
+# The returned build point-recomputed DERIVED findings and scored the
+# residual. Reported against it (verbatim):
+#
+#     "DEFECT: M4 point-recomputes from rounded operands and scores the
+#      residual as a finding. [...] SCOPE: fires on any artifact shipping
+#      rounded operands. False-positive generator, not a one-off."
+#
+# It is right, and the scope note is the larger half. An artifact that
+# rounds an operand to three decimal places has not stated the recomputed
+# quantity to better than the band those roundings span. So the shipped
+# precision is now parsed from each operand AS WRITTEN -- not via float,
+# which has already thrown that away -- and propagated through the
+# operation. Containment decides the verdict. The stipulated tolerance
+# that stood in for this is retired -- entry 3 of the choice list says
+# so in place, since ids are permanent -- a constant replaced by a
+# quantity the document already carries.
+#
+# Two consequences, both stated rather than smoothed:
+#
+#   1. holds=True is now UNEARNABLE. Inside the band is NOT_EVALUABLE;
+#      outside it with holds=True is ARITHMETIC_NOT_AS_DECLARED. M4
+#      refutes or refuses, and never confirms. A band containing the
+#      stated value is CONSISTENCY, not confirmation.
+#   2. On the demo artifact M4 now establishes NOTHING. Every stated
+#      relationship in it -- 0.334, 0.021, 1.460, 54.1 -- falls inside
+#      its own shipped band, because every operand is 3-4 significant
+#      figures and every relationship is a difference of near-equal
+#      numbers or a ratio of small ones. The demo total falls 6.0 -> 5.0.
+#      That fall is the instrument working.
+# ---------------------------------------------------------------------
 #
 # tools/sourced.py is IMPORTED, not reimplemented (the MF_019 discipline;
 # five stale copies of one gate across three drops is what copying got).
@@ -57,6 +92,7 @@
 # This module carries no checks. Run: python3 test_move_set_v2.py
 
 import collections
+import decimal
 import hashlib
 import json
 import os
@@ -78,9 +114,10 @@ CHOICES = {
     2: "The demo artifact is cited BY PATH and not copied. It is already "
        "in this repo. A copy is the drift MF_019 records seven times; a "
        "sha256 pin makes a change to the original detectable instead.",
-    3: "Recomputation tolerance is RELATIVE 5e-3. The demo artifact "
-       "rounds to 3-4 significant figures, so an exact test would report "
-       "rounding as a failure.",
+    3: "RETIRED. Was a relative recomputation tolerance of 5e-3, a "
+       "stipulated constant standing in for a quantity the document "
+       "already carries. Replaced by CHOICE 8. Ids are permanent, so "
+       "this one is retired in place and not renumbered.",
     4: "Coverage counts DISTINCT artifact lines. Overlapping searched "
        "ranges are counted once -- double-counting is where a coverage "
        "number inflates.",
@@ -93,6 +130,26 @@ CHOICES = {
     7: "path_dependence REFUSES runs that do not declare distinct move "
        "orders. v1 returned 'claim holds' for two identical ledgers "
        "(MV_004). NOT_EVALUABLE is a third state, not a pass.",
+    8: "Shipped precision is parsed from each operand AS WRITTEN and "
+       "propagated through the operation as an interval. A number "
+       "written to 3 decimal places reports a quantity within "
+       "+/-0.0005 of it. Containment is tested in decimal.Decimal, "
+       "not float: the demo case is exact in decimal and fails by "
+       "1.3e-16 in float, and an epsilon chosen to cover that would "
+       "be a second stipulated constant. sub/abs_sub/mul are exact; "
+       "div carries context rounding at 28 significant digits, ~25 "
+       "orders below any shipped precision.",
+    9: "An operand written with no decimal point takes half-width "
+       "0.5. That is the standard reading and it is WRONG for an "
+       "exact count -- 68 peaks is 68, not 68 +/- 0.5 -- so the "
+       "error runs toward NOT_EVALUABLE. Exponent form (1.2e3) is "
+       "refused rather than read, since the half-width depends on "
+       "the mantissa digits and the reading is not one rule.",
+    10: "The STATED value is read as a POINT, per the order's own "
+        "wording. Widening it to its own shipped-precision band "
+        "would only make containment MORE likely, so the choice is "
+        "one-sided toward reporting a finding rather than toward "
+        "suppressing one.",
 }
 
 
@@ -176,13 +233,13 @@ UNVERIFIED_NO_SPAN = "UNVERIFIED_NO_SPAN"      # absence with nowhere searched
 UNVERIFIED_SPAN = "UNVERIFIED_SPAN"            # searched span outside the artifact
 REFUTED_ABSENCE = "REFUTED_ABSENCE"            # the sought token IS in the span
 MALFORMED = "MALFORMED"
+NOT_EVALUABLE = "NOT_EVALUABLE"                # stated value within
+                                               # shipped precision
 
 VERDICTS = EARNED + (UNBOUND_LINE, UNBOUND_TEXT, UNBOUND_VALUE, UNRATED_FIELDS,
                      OPERAND_NOT_IN_ARTIFACT, ARITHMETIC_NOT_AS_DECLARED,
                      UNVERIFIED_NO_SPAN, UNVERIFIED_SPAN, REFUTED_ABSENCE,
-                     MALFORMED)
-
-TOL = 5e-3                                     # CHOICE 3
+                     MALFORMED, NOT_EVALUABLE)
 
 Absent = collections.namedtuple("Absent", "reason looked_at sought")
 
@@ -212,6 +269,56 @@ def _number(s):
         return float(t)
     except (TypeError, ValueError):
         return None
+
+
+def _dec(s):
+    """A Decimal, or None. Parsed from the text AS WRITTEN and never via
+    float, because the half-width below is a property of how many digits
+    were shipped and a float has already thrown that away."""
+    t = (s or "").strip().replace("\u2212", "-").replace("\u2013", "-")
+    t = t.replace(",", "").rstrip(".")
+    try:
+        return decimal.Decimal(t)
+    except (TypeError, ValueError, ArithmeticError):
+        return None
+
+
+def _halfwidth(s):
+    """Half-width of the rounding interval implied by how the number is
+    WRITTEN. 1.889 was rounded to three decimal places, so the quantity
+    it reports lies within 1.889 +/- 0.0005. No decimal point takes 0.5;
+    exponent form is refused rather than read (CHOICE 9)."""
+    t = (s or "").strip().replace("\u2212", "-").replace("\u2013", "-")
+    t = t.replace(",", "").rstrip(".")
+    if not t or "e" in t.lower():
+        return None                                              # CHOICE 9
+    k = len(t.split(".")[1]) if "." in t else 0                  # CHOICE 9
+    return decimal.Decimal("0.5") * (decimal.Decimal(10) ** -k)
+
+
+def _band(op, a, b):
+    """Propagate shipped precision through the operation. Returns
+    (lo, hi) as Decimals, or None where the operation is not defined over
+    the intervals -- a divisor interval spanning zero.
+
+    Exact for sub/abs_sub/mul; div carries context rounding (CHOICE 8)."""
+    (alo, ahi), (blo, bhi) = a, b
+    if op == "sub":
+        return (alo - bhi, ahi - blo)
+    if op == "abs_sub":
+        lo, hi = alo - bhi, ahi - blo
+        if lo <= 0 <= hi:
+            return (decimal.Decimal(0), max(abs(lo), abs(hi)))
+        return (min(abs(lo), abs(hi)), max(abs(lo), abs(hi)))
+    if op == "mul":
+        c = [x * y for x in (alo, ahi) for y in (blo, bhi)]
+        return (min(c), max(c))
+    if op == "div":
+        if blo <= 0 <= bhi:
+            return None
+        c = [x / y for x in (alo, ahi) for y in (blo, bhi)]
+        return (min(c), max(c))
+    return None
 
 
 # --- binding: the layer tools/sourced.py says it does not do ----------
@@ -255,11 +362,18 @@ OPS = {
 
 def bind_derived(art, entry):
     """Recompute a stated relationship from operands sliced out of the
-    artifact, and gate on whether the ledger's DECLARATION about it holds.
+    artifact -- as an INTERVAL, at the precision the artifact shipped.
 
-    A ledger saying the arithmetic holds where it fails scores 0. A ledger
-    saying it FAILS where it fails scores 1.0 -- that is a finding, and
-    refusing it would make a discrepancy unreportable."""
+    An artifact that rounds its operands to three decimal places has not
+    stated the recomputed quantity to better than the band those roundings
+    span. If the stated value lies inside that band the artifact is
+    self-consistent and the recomputation establishes nothing: that is
+    NOT_EVALUABLE, the MV_004 third state, not a pass and not a finding.
+    Only a stated value OUTSIDE the band is a discrepancy.
+
+    A consequence worth stating: holds=True can never be earned. A band
+    containing the stated value is CONSISTENCY, not confirmation, so the
+    move refutes or returns NOT_EVALUABLE and never confirms."""
     f = entry.get("finding") or {}
     op = f.get("op")
     ops = f.get("operands")
@@ -268,32 +382,45 @@ def bind_derived(art, entry):
             sorted(OPS),)
     if "holds" not in f or not isinstance(f["holds"], bool):
         return MALFORMED, None, "finding must declare holds: true|false"
-    vals, where = [], []
+    vals, ivs, where = [], [], []
     for k, o in enumerate(ops):
         sub = {"move_id": entry.get("move_id"), "finding": o}
         v, sv, why = bind_quote(art, sub)
         if v != BOUND:
             return OPERAND_NOT_IN_ARTIFACT, None, "operand %d: %s (%s)" % (k, v, why)
         n = _number(sv.value)
-        if n is None:
+        d = _dec(sv.value)                                       # CHOICE 8
+        h = _halfwidth(sv.value)                                 # CHOICE 8
+        if n is None or d is None or h is None:
             return OPERAND_NOT_IN_ARTIFACT, None, \
-                "operand %d %r is not a number" % (k, sv.value)
+                "operand %d %r is not a number at a readable precision" % (
+                    k, sv.value)
         vals.append(n)
-        where.append(sv.locator.describe())
+        ivs.append((d - h, d + h))
+        where.append("%s %s+/-%s" % (sv.locator.describe(), d, h))
+    # The BAND is the reading. The point recomputation is reported beside
+    # it and decides nothing, so it is computed second and may be None.
+    band = _band(op, ivs[0], ivs[1])
+    if band is None:
+        return MALFORMED, None, "%s is not defined over the shipped bands " \
+            "-- divisor spans zero at the precision shipped" % op
+    stated_raw = f.get("stated")
+    stated = _dec(repr(stated_raw) if isinstance(stated_raw, float)
+                  else str(stated_raw))                          # CHOICE 10
+    if stated is None:
+        return MALFORMED, None, "stated value must be a number"
     got = OPS[op](vals)
-    stated = _number(str(f.get("stated")))
-    if got is None or stated is None:
-        return MALFORMED, None, "stated value must be a number; div by zero"
-    rel = abs(got - stated) / (abs(stated) if stated else 1.0)
-    holds = rel <= TOL                                          # CHOICE 3
-    detail = "%s(%s) = %.6g vs stated %.6g  rel %.3g  [%s]" % (
-        op, ", ".join("%.6g" % v for v in vals), got, stated, rel,
-        "; ".join(where))
-    if holds != f["holds"]:
-        return ARITHMETIC_NOT_AS_DECLARED, got, \
-            "ledger declares holds=%s; recomputation says %s -- %s" % (
-                f["holds"], holds, detail)
-    return ARITHMETIC_AS_DECLARED, got, detail
+    detail = "%s = %s point, band [%s, %s] at shipped precision, " \
+        "stated %s  [%s]" % (op, "n/a" if got is None else "%.6g" % got,
+                             band[0], band[1], stated, "; ".join(where))
+    if band[0] <= stated <= band[1]:                             # CHOICE 8
+        return NOT_EVALUABLE, band, \
+            "stated value within shipped precision -- %s" % detail
+    if f["holds"]:
+        return ARITHMETIC_NOT_AS_DECLARED, band, \
+            "ledger declares holds=True; the stated value is outside the " \
+            "band the shipped operands span -- %s" % detail
+    return ARITHMETIC_AS_DECLARED, band, detail
 
 
 # --- absence: first-class, and checked ---------------------------------
@@ -530,17 +657,25 @@ layer of this demo is therefore NOT blind: whoever wrote the ledger had
 access to prior findings about the same document.
 
 What is scored here is the MECHANICAL layer only -- does a cited line
-exist, does a value sit at the cited columns, does a stated arithmetic
-reproduce from operands the artifact supplies, is a sought token absent
+exist, does a value sit at the cited columns, does a stated value fall
+outside the band its own shipped operands span, is a sought token absent
 from a declared span. Every one of those is recomputable by a reader with
 the artifact and no other context.
 
+M4 returns NOT_EVALUABLE on this artifact and the reason is worth reading
+rather than skipping. The report states the AB-Poisson baseline as 0.021
+and ships the two dimensions it is the gap between, rounded to three
+decimal places. Those roundings span [0.0210, 0.0230]; 0.021 is inside
+it. The artifact is self-consistent at the precision it shipped, so a
+point recomputation returning 0.022 is reporting the rounding and not a
+discrepancy. The same holds for every other stated relationship in this
+document. M4 establishes nothing here, and that is the result.
+
 What is NOT scored is whether any reading is correct. AOS_009 holds that
 the report's 0.021 baseline is the smallest of three pairwise gaps and
-that the honest ratio is nearer 4.5x than 15x. That is a reading. This
-demo recomputes that 0.021 baseline from the artifact's own two
-dimensions and reports what it gets; it does not adjudicate which
-baseline belongs in the denominator.
+that the honest ratio is nearer 4.5x than 15x. That is a reading, and it
+is untouched by the band above -- consistency at shipped precision says
+nothing about which baseline belongs in the denominator.
 
 A self-run is void as a capability score -- the runner holds the key
 (frame-location-benchmark FLB_010). This demo shows the harness runs and

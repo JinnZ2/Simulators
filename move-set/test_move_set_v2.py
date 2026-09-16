@@ -109,7 +109,7 @@ ck("3.9 a correct quote is BOUND with the real line text",
    M.bind_quote(A, q("M2_substitution", 17, 41, 46,
                      quote=A["lines"][16]))[0] == M.BOUND)
 
-# --- 4. bind_derived: both directions ---------------------------------
+# --- 4. bind_derived: interval at shipped precision --------------------
 def der(op, pairs, stated, holds):
     return {"move_id": "M4_perturb", "confidence": "c",
             "finding": {"kind": "DERIVED", "op": op, "stated": stated,
@@ -117,43 +117,90 @@ def der(op, pairs, stated, holds):
                         "operands": [{"line": l, "col_start": i, "col_end": j}
                                      for (l, i, j) in pairs]}}
 
-_AB_CAS = [(15, 41, 46), (16, 41, 46)]      # 1.889, 1.555 -> 0.334
-_AB_POI = [(15, 41, 46), (17, 41, 46)]      # 1.889, 1.911 -> 0.022
-ck("4.1 holds=True where it holds",
-   M.bind_derived(A, der("abs_sub", _AB_CAS, 0.334, True))[0]
-   == M.ARITHMETIC_AS_DECLARED)
-ck("4.2 holds=False where it fails",
+_AB_CAS = [(15, 41, 46), (16, 41, 46)]      # 1.889, 1.555 -> band [.333,.335]
+_AB_POI = [(15, 41, 46), (17, 41, 46)]      # 1.889, 1.911 -> band [.021,.023]
+_ZERO = (58, 35, 36)                        # the literal "0" on the sweep line
+
+# 4.a the half-width is read from the TEXT, not from a float
+ck("4.1 three decimals gives 0.0005",
+   str(M._halfwidth("1.889")) == "0.0005")
+ck("4.2 no decimal point gives 0.5 (CHOICE 9)",
+   str(M._halfwidth("5537")) == "0.5")
+ck("4.3 the artifact's MINUS SIGN is read, not refused",
+   str(M._halfwidth("\u22121.529")) == "0.0005")
+ck("4.4 exponent form is refused, not given a default width",
+   M._halfwidth("1.2e3") is None)
+ck("4.5 an empty slice has no precision, and is not zero precision",
+   M._halfwidth("") is None)
+
+# 4.b the band the operation spans
+_D = M.decimal.Decimal
+ck("4.6 abs_sub band on the demo pair is exactly [0.0210, 0.0230]",
+   [str(x) for x in M._band("abs_sub", (_D("1.8885"), _D("1.8895")),
+                            (_D("1.9105"), _D("1.9115")))]
+   == ["0.0210", "0.0230"])
+ck("4.7 an abs_sub band that crosses zero has floor 0, not a negative",
+   M._band("abs_sub", (_D("0.9"), _D("1.1")), (_D("0.95"), _D("1.05")))[0]
+   == _D(0))
+ck("4.8 a divisor band spanning zero is refused, not divided",
+   M._band("div", (_D(1), _D(2)), (_D("-0.5"), _D("0.5"))) is None)
+
+# 4.c the verdict, which is the defect this section exists for
+ck("4.9 stated INSIDE the band is NOT_EVALUABLE, not a finding",
    M.bind_derived(A, der("abs_sub", _AB_POI, 0.021, False))[0]
-   == M.ARITHMETIC_AS_DECLARED)
-ck("4.3 holds=True where it fails is not earned",
+   == M.NOT_EVALUABLE)
+ck("4.10 the reason names shipped precision",
+   "within shipped precision"
+   in M.bind_derived(A, der("abs_sub", _AB_POI, 0.021, False))[2])
+ck("4.11 holds=True inside the band is ALSO NOT_EVALUABLE",
    M.bind_derived(A, der("abs_sub", _AB_POI, 0.021, True))[0]
+   == M.NOT_EVALUABLE)
+ck("4.12 the other stated relationship is NOT_EVALUABLE too",
+   M.bind_derived(A, der("abs_sub", _AB_CAS, 0.334, True))[0]
+   == M.NOT_EVALUABLE)
+ck("4.13 stated OUTSIDE the band with holds=False is a finding",
+   M.bind_derived(A, der("abs_sub", _AB_POI, 0.5, False))[0]
+   == M.ARITHMETIC_AS_DECLARED)
+ck("4.14 stated OUTSIDE the band with holds=True is not earned",
+   M.bind_derived(A, der("abs_sub", _AB_POI, 0.5, True))[0]
    == M.ARITHMETIC_NOT_AS_DECLARED)
-ck("4.4 holds=False where it holds is not earned",
-   M.bind_derived(A, der("abs_sub", _AB_CAS, 0.334, False))[0]
-   == M.ARITHMETIC_NOT_AS_DECLARED)
-ck("4.5 the recomputed value is returned, not the stated one",
-   abs(M.bind_derived(A, der("abs_sub", _AB_CAS, 0.334, True))[1] - 0.334)
-   < 1e-9)
-ck("4.6 OPERAND_NOT_IN_ARTIFACT on a bad line",
+ck("4.15 holds=True is unearnable: no input returns it as declared",
+   all(M.bind_derived(A, der("abs_sub", ops, st, True))[0]
+       != M.ARITHMETIC_AS_DECLARED
+       for ops in (_AB_CAS, _AB_POI)
+       for st in (0.021, 0.334, 0.5, 1.0)))
+ck("4.16 the band is returned alongside, not the point",
+   isinstance(M.bind_derived(A, der("abs_sub", _AB_POI, 0.5, False))[1],
+              tuple))
+ck("4.17 the band is reported in the detail of a standing finding",
+   "band [" in M.bind_derived(A, der("abs_sub", _AB_POI, 0.5, False))[2])
+
+# 4.d intake
+ck("4.18 OPERAND_NOT_IN_ARTIFACT on a bad line",
    M.bind_derived(A, der("abs_sub", [(9999, 0, 3), (16, 41, 46)], 1, True))[0]
    == M.OPERAND_NOT_IN_ARTIFACT)
-ck("4.7 OPERAND_NOT_IN_ARTIFACT when the slice is not a number",
+ck("4.19 OPERAND_NOT_IN_ARTIFACT when the slice is not a number",
    M.bind_derived(A, der("abs_sub", [(5, 0, 4), (16, 41, 46)], 1, True))[0]
    == M.OPERAND_NOT_IN_ARTIFACT)
-ck("4.8 MALFORMED without a holds declaration",
+ck("4.20 MALFORMED without a holds declaration",
    M.bind_derived(A, {"move_id": "M4_perturb",
                       "finding": {"kind": "DERIVED", "op": "abs_sub",
                                   "stated": 1,
                                   "operands": [{"line": 15, "col_start": 41,
                                                 "col_end": 46}] * 2}})[0]
    == M.MALFORMED)
-ck("4.9 MALFORMED on an unknown op",
+ck("4.21 MALFORMED on an unknown op",
    M.bind_derived(A, der("exponentiate", _AB_CAS, 1, True))[0] == M.MALFORMED)
-ck("4.10 div by zero is MALFORMED, not inf",
-   M.bind_derived(A, der("div", [(15, 41, 46), (19, 41, 46)], 1, True))[0]
-   in (M.MALFORMED, M.ARITHMETIC_NOT_AS_DECLARED))
-ck("4.11 all four ops are reachable", sorted(M.OPS) ==
+ck("4.22 a divisor whose band spans zero is MALFORMED, not inf",
+   M.bind_derived(A, der("div", [(15, 41, 46), _ZERO], 1, True))[0]
+   == M.MALFORMED)
+ck("4.23 and it says so rather than reporting a bad number",
+   "divisor spans zero"
+   in M.bind_derived(A, der("div", [(15, 41, 46), _ZERO], 1, True))[2])
+ck("4.24 all four ops are reachable", sorted(M.OPS) ==
    ["abs_sub", "div", "mul", "sub"])
+ck("4.25 TOL is gone -- a stipulated constant replaced by a read quantity",
+   not hasattr(M, "TOL"))
 
 # --- 5. verify_absence ------------------------------------------------
 Ab = M.Absent
@@ -309,8 +356,9 @@ for _l in (_garbage, _honest, ledger([
         q("M2_substitution", 17, 41, 46, expect="9.9"),
         q("M2_substitution", 17, "a", 46),
         q("M2_substitution", 15, 0, 2),          # whitespace-only slice
-        der("abs_sub", _AB_CAS, 0.334, True),
-        der("abs_sub", _AB_CAS, 0.334, False),
+        der("abs_sub", _AB_CAS, 0.334, True),      # inside the band
+        der("abs_sub", _AB_POI, 0.5, False),       # outside, and declared so
+        der("abs_sub", _AB_POI, 0.5, True),        # outside, declared holding
         der("abs_sub", [(9999, 0, 3), (16, 41, 46)], 1, True),
         absent("M1_provenance", looked=((1, 92),), sought=("Cascade",)),
         absent("M1_provenance", looked=((1, 9999),)),
@@ -323,7 +371,9 @@ for _v in M.VERDICTS:
 
 # --- 12. the demo -----------------------------------------------------
 _d = M.demo()
-ck("12.1 demo scores 6.0 of 6.0", _d["total"] == 6.0 and _d["possible"] == 6.0)
+ck("12.1 demo scores 5.0 of 6.0 -- M4 is NOT_EVALUABLE at shipped "
+   "precision, and that is the instrument working",
+   _d["total"] == 5.0 and _d["possible"] == 6.0)
 ck("12.2 demo runs every move", _d["moves_not_run"] == [])
 ck("12.3 demo artifact matches its pin", _d["artifact_unchanged"] is True)
 ck("12.4 demo artifact is not copied into this folder (CHOICE 2)",
@@ -334,9 +384,16 @@ ck("12.6 contamination is declared", "CONTAMINATION" in _d["contamination"]
    and "FLB_010" in _d["contamination"])
 ck("12.7 demo is half absences, reported not penalized",
    _d["absence_fraction"] == 0.5)
-ck("12.8 demo carries one DERIVED entry declaring the arithmetic FAILS",
-   any(r["kind"] == "DERIVED" and r["verdict"] == M.ARITHMETIC_AS_DECLARED
+ck("12.8 the demo's DERIVED entry is NOT_EVALUABLE, not a finding",
+   any(r["kind"] == "DERIVED" and r["verdict"] == M.NOT_EVALUABLE
        for r in _d["rows"]))
+ck("12.8b and it scores zero -- NOT_EVALUABLE is not in EARNED",
+   all(r["points"] == 0.0 for r in _d["rows"]
+       if r["verdict"] == M.NOT_EVALUABLE))
+ck("12.8c no stated relationship in this artifact survives the band. "
+   "M4 establishes nothing here, and that is the result",
+   all(M.bind_derived(A, der("abs_sub", ops, st, False))[0] == M.NOT_EVALUABLE
+       for ops, st in ((_AB_CAS, 0.334), (_AB_POI, 0.021))))
 ck("12.9 the demo ledger states it is not blind",
    "not blind" in M.read_ledger(M.DEMO_LEDGER).get("note", "").lower())
 # the demo scores the same 6.0 the v1 garbage ledger scored under v1. The
@@ -381,11 +438,18 @@ ck("15.7 --emit ships a ledger schema carrying order",
 
 # --- 16. choices ------------------------------------------------------
 _ch = _run(["--choices"]).stdout
+_RETIRED = tuple(k for k, v in M.CHOICES.items() if v.startswith("RETIRED"))
 for _k in M.CHOICES:
     ck("16.1 CHOICE %d printed" % _k, "[CHOICE %d]" % _k in _ch)
-    ck("16.2 CHOICE %d cited inline" % _k,
-       re.search(r"#\s*CHOICE %d\b|\(CHOICE %d[,)]|CHOICE %d\)" % (_k, _k, _k),
-                 _src) is not None)
+    _cited = re.search(
+        r"#\s*CHOICE %d\b|\(CHOICE %d[,)]|CHOICE %d\)" % (_k, _k, _k),
+        _src) is not None
+    if _k in _RETIRED:
+        ck("16.2 CHOICE %d is RETIRED and cited by nothing" % _k, not _cited)
+    else:
+        ck("16.2 CHOICE %d cited inline" % _k, _cited)
+ck("16.3 a retired choice is retired in place, not renumbered",
+   _RETIRED == (3,) and sorted(M.CHOICES) == list(range(1, 11)))
 
 # --- 17. house ---------------------------------------------------------
 ck("17.1 module is ascii", all(ord(c) < 128 for c in _src))

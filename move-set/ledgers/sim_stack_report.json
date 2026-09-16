@@ -56,7 +56,7 @@
     },
     {
       "move_id": "M4_perturb",
-      "confidence": "high -- arithmetic on two values the artifact ships",
+      "confidence": "high on the arithmetic, and the arithmetic is what refuses -- both operands ship three decimal places",
       "finding": {
         "kind": "DERIVED",
         "op": "abs_sub",
@@ -77,7 +77,7 @@
         "stated": 0.021,
         "holds": false
       },
-      "_says": "The artifact states the AB-Poisson baseline as 0.021 and ships the two dimensions it is the gap between. Recomputed from those two values the gap is 0.022. One in the third decimal, and it is the denominator the headline 15x ratio is taken over."
+      "_says": "The artifact states the AB-Poisson baseline as 0.021 and ships the two dimensions it is the gap between. Both are written to three decimal places, so the gap they span is [0.0210, 0.0230] and 0.021 is inside it. A point recomputation returns 0.022; that third decimal is the rounding, not a discrepancy. The entry is kept, declaring holds=false, so the harness has to refuse it on the band rather than on the declaration."
     },
     {
       "move_id": "M5_self_report",

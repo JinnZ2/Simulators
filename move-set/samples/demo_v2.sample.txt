@@ -17,9 +17,9 @@ M2_substitution            QUOTE    BOUND                        1.0
 M3_relation_held           QUOTE    BOUND                        1.0
       sliced from /home/user/Simulators/aperiodic-order-sim-stack/SIM_STACK_REPORT.txt line 17 cols 41:46 (M3_relation_held)
       confidence (unscored): high -- the operand is on the cited line
-M4_perturb                 DERIVED  ARITHMETIC_AS_DECLARED       1.0
-      abs_sub(1.889, 1.911) = 0.022 vs stated 0.021  rel 0.0476  [/home/user/Simulators/aperiodic-order-sim-stack/SIM_STACK_REPORT.txt line 15 cols 41:46 (M4_perturb); /home/user/Simulators/aperiodic-order-sim-stack/SIM_STACK_REPORT.txt line 17 cols 41:46 (M4_perturb)]
-      confidence (unscored): high -- arithmetic on two values the artifact ships
+M4_perturb                 DERIVED  NOT_EVALUABLE                0.0
+      stated value within shipped precision -- abs_sub = 0.022 point, band [0.0210, 0.0230] at shipped precision, stated 0.021  [/home/user/Simulators/aperiodic-order-sim-stack/SIM_STACK_REPORT.txt line 15 cols 41:46 (M4_perturb) 1.889+/-0.0005; /home/user/Simulators/aperiodic-order-sim-stack/SIM_STACK_REPORT.txt line 17 cols 41:46 (M4_perturb) 1.911+/-0.0005]
+      confidence (unscored): high on the arithmetic, and the arithmetic is what refuses -- both operands ship three decimal places
 M5_self_report             ABSENT   VERIFIED_ABSENCE             1.0
       45 line(s) searched, 3 token(s) not found
       coverage: 0.4891 of artifact lines searched
@@ -29,7 +29,7 @@ M6_absence_first_class     ABSENT   VERIFIED_ABSENCE             1.0
       coverage: 1.0000 of artifact lines searched
       confidence (unscored): high -- a whole-artifact token search, recomputable by anyone
 ----------------------------------------------------------------------
-total 6.0 of 6.0
+total 5.0 of 6.0
 moves not run   : none
 absence fraction: 0.5
 
@@ -43,17 +43,25 @@ layer of this demo is therefore NOT blind: whoever wrote the ledger had
 access to prior findings about the same document.
 
 What is scored here is the MECHANICAL layer only -- does a cited line
-exist, does a value sit at the cited columns, does a stated arithmetic
-reproduce from operands the artifact supplies, is a sought token absent
+exist, does a value sit at the cited columns, does a stated value fall
+outside the band its own shipped operands span, is a sought token absent
 from a declared span. Every one of those is recomputable by a reader with
 the artifact and no other context.
 
+M4 returns NOT_EVALUABLE on this artifact and the reason is worth reading
+rather than skipping. The report states the AB-Poisson baseline as 0.021
+and ships the two dimensions it is the gap between, rounded to three
+decimal places. Those roundings span [0.0210, 0.0230]; 0.021 is inside
+it. The artifact is self-consistent at the precision it shipped, so a
+point recomputation returning 0.022 is reporting the rounding and not a
+discrepancy. The same holds for every other stated relationship in this
+document. M4 establishes nothing here, and that is the result.
+
 What is NOT scored is whether any reading is correct. AOS_009 holds that
 the report's 0.021 baseline is the smallest of three pairwise gaps and
-that the honest ratio is nearer 4.5x than 15x. That is a reading. This
-demo recomputes that 0.021 baseline from the artifact's own two
-dimensions and reports what it gets; it does not adjudicate which
-baseline belongs in the denominator.
+that the honest ratio is nearer 4.5x than 15x. That is a reading, and it
+is untouched by the band above -- consistency at shipped precision says
+nothing about which baseline belongs in the denominator.
 
 A self-run is void as a capability score -- the runner holds the key
 (frame-location-benchmark FLB_010). This demo shows the harness runs and

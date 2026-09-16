@@ -628,6 +628,7 @@ EXPECTED_METRICS = (
     "internal-reference-boundary/radials.py::sanction_ratio_point",
     "model-deprecation-backcast/null_check.py::lag_of_peak",
     "move-set/move_set_sim_v2.py::coverage",
+    "move-set/move_set_sim_v2.py::_halfwidth",
     "nonidentity-census/t6_window_declaration.py::decided_by_tracks_window",
     "nonidentity-census/t6_window_declaration.py::marginal_majority (REPLACED)",
     "null-harness/null_harness.py::_verdict",
@@ -1255,6 +1256,14 @@ def seed():
               "attaches to anything."),
     )
 
+    # Late additions. These live in their own helper for readability,
+    # and seed() CALLS it: a registration reachable only from the
+    # module tail is lost the moment a consumer clears the registry
+    # and re-seeds, which is what tests/test_known_answer_gate.py
+    # does. Found by adding the move-set entries to the manifest --
+    # the coverage claim is what made the gap visible.
+    _seed_move_set()
+
 
 def _irb_effective_origins(coupling):
     """internal-reference-boundary/radials.py::effective_origins,
@@ -1350,8 +1359,28 @@ def _msv_coverage(which):
         sys.path.pop(0)
 
 
+def _msv_halfwidth(text):
+    """move-set/move_set_sim_v2.py::_halfwidth, imported. The half-width of
+    the rounding interval implied by how a number is WRITTEN. It decides
+    every M4 verdict, so it is the one new quantity in that module that a
+    reading error would carry straight into a published finding. Expected
+    values are the rounding convention, fixed before the function existed:
+    k digits after the point means +/- 0.5 * 10**-k."""
+    import importlib.util
+    path = os.path.join(ROOT, "move-set", "move_set_sim_v2.py")
+    sys.path.insert(0, os.path.dirname(path))
+    try:
+        spec = importlib.util.spec_from_file_location("_msv2h", path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        out = mod._halfwidth(text)
+        return None if out is None else float(out)
+    finally:
+        sys.path.pop(0)
+
+
 def _seed_move_set():
-    """Registered from the module tail with the other late additions."""
+    """Called BY seed(), not from the module tail. See the note there."""
     register(
         "move-set/move_set_sim_v2.py::coverage",
         _msv_coverage,
@@ -1369,9 +1398,28 @@ def _seed_move_set():
          case("a span outside the artifact is None", ("bad",), None,
               "the span does not resolve, so no coverage was measured")],
         note="the overlap and empty cases are the two where an error hides")
+    register(
+        "move-set/move_set_sim_v2.py::_halfwidth",
+        _msv_halfwidth,
+        [case("three decimals", ("1.889",), 0.0005,
+              "rounded to 3 places, so the quantity lies within 0.0005"),
+         case("four decimals", ("0.0812",), 0.00005,
+              "4 places. The exponent, not the magnitude, sets the width"),
+         case("U+2212 minus is a number", ("\u22121.529",), 0.0005,
+              "the artifact uses MINUS SIGN; a str-and-float reading would "
+              "report a real number as unreadable"),
+         case("no decimal point takes 0.5", ("5537",), 0.5,
+              "the standard reading, and CHOICE 9 states it is wrong for "
+              "an exact count. The error runs toward NOT_EVALUABLE"),
+         case("exponent form is refused", ("1.2e3",), None,
+              "the half-width depends on the mantissa digits and the "
+              "reading is not one rule. None, never a default width"),
+         case("empty is refused", ("",), None,
+              "no digits shipped is no precision, not zero precision")],
+        note="the exponent and empty cases are where a default width would "
+             "hide; the 5537 case is the one whose expected value is a "
+             "convention this repo states is wrong for counts")
 
-
-_seed_move_set()
 
 
 def completeness():

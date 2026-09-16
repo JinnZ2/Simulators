@@ -8880,13 +8880,48 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   moves admit `ABSENT`. **The demo** runs on a public artifact already in
   this repo, cited by path and sha256-pinned rather than copied
   (`CHOICE 2`, the `MF_019` drift): `aperiodic-order-sim-stack/
-  SIM_STACK_REPORT.txt`. **`MSV_006`, the M4 finding:** the report states
-  the AB–Poisson finite-size baseline as **0.021** and ships both
-  dimensions that gap is between (AB 1.889, Poisson 1.911) — recomputed it
-  is **0.022**, one in the third decimal, and it is the denominator the
-  headline *"~15× larger"* ratio is taken over; whether 0.021 is the right
-  baseline at all is a reading and is not scored (`AOS_009` holds it is
-  the smallest of three pairwise gaps). **`MSV_007`, the M6 finding:** line
+  SIM_STACK_REPORT.txt`. **`MSV_006`, VOID — the M4 finding
+  does not stand, reported from outside this build and recorded rather
+  than quietly removed:** the report states the AB–Poisson finite-size
+  baseline as **0.021** and ships both dimensions that gap is between (AB
+  1.889, Poisson 1.911), point-recomputed **0.022** — but both operands
+  are written to three decimal places, so the gap they span is
+  `[0.0210, 0.0230]` and 0.021 is **inside** it; the artifact is
+  self-consistent at the precision it shipped and the third decimal was
+  the rounding. **`MSV_017`, and the scope note is the larger half:** *a
+  false-positive generator, not a one-off* — any artifact rounding an
+  operand has not stated the recomputed quantity to better than that
+  band, and a difference of near-equal numbers is the common case in a
+  results table. Repaired structurally: shipped precision parsed from
+  each operand **as written** (never through a float, which has already
+  thrown it away) and propagated through the operation, containment
+  deciding the verdict, with the stipulated relative tolerance **retired
+  in place** as choice 3 rather than renumbered (`MSV_021`) — the
+  `reasoning-gate` **G-RES** shape with the artifact's own significant
+  figures as the instrument. **`MSV_018`, the result:** all four stated
+  relationships in the artifact (0.334, 0.021, 1.460, 54.1) fall inside
+  their own shipped bands, because every operand is 3–4 significant
+  figures and every relationship is a difference of near-equal numbers or
+  a ratio of small ones — so **M4 establishes nothing on this document**
+  and the demo total falls **6.0 → 5.0**, a fall that is the instrument
+  working, since a harness scoring higher before was scoring a rounding.
+  **`MSV_019`:** `ARITHMETIC_AS_DECLARED` is now reachable only from
+  `holds: false`, so **holds=True is unearnable** — correct rather than a
+  limitation, a band containing the stated value being *consistency* and
+  not confirmation; M4 refutes or refuses and never confirms.
+  **`MSV_020`:** containment is tested in `decimal.Decimal` and not float,
+  because the exact band is `[0.0210, 0.0230]` while the float lower bound
+  computes as `0.02100000000000013` — a float test returns **False** by
+  1.3e-16 on a quantity whose smallest meaningful unit is 5e-4, producing
+  a finding on the one case the repair exists to refuse, and an epsilon
+  would be a second stipulated constant replacing the one just retired.
+  **`MSV_022`:** two choices are set one-sided toward refusing — an
+  operand with no decimal point takes half-width 0.5, which is wrong for
+  an exact count and errs toward `NOT_EVALUABLE`, and the stated value is
+  read as a point rather than widened to its own band. Whether 0.021 is
+  the right baseline at all is still a reading and is still not scored
+  (`AOS_009` holds it is the smallest of three pairwise gaps), and
+  consistency at shipped precision says nothing about it. **`MSV_007`, the M6 finding:** line
   41's peak/floor ratio of 5537 has **no operands anywhere in the
   artifact** — three of the document's four stated relationships recompute
   from values it supplies and this one does not, so it is asserted rather
@@ -8930,8 +8965,33 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   1.0 for two copies of one half; the empty case is where a zero hides,
   since an undeclared span is no measurement); `move_set_sim_v2.py`
   refuses `--selftest` (exit 2) and check count is printed by
-  `python3 move-set/test_move_set_v2.py`. Sixteen claims `MSV_001..016`
-  in `CLAIM_TABLE_V2.md`. Stdlib only, parses under 3.9, CC0.
+  `python3 move-set/test_move_set_v2.py`. **`MSV_023`, reported and not
+  repaired at the reporter's instruction — provenance of the
+  known-answer registry:** 19 of the 20 commits touching
+  `tools/known_answer.py` are model-authored and the twentieth is a merge
+  authoring no case, so every expected value was written by one author
+  who also wrote the functions being checked; and measured rather than
+  asserted, comparing the earliest commit introducing `def <fn>` against
+  the earliest introducing its registration string, **16 same-commit, 8
+  implementation-first, 0 registered before the implementation existed**
+  — including the two seed cases the file's own docstring describes as
+  answers *"fixed in advance"*, both implementation-first. So the 26/26
+  is a **regression** result (every case agrees with the current
+  implementation, authored by the same party with knowledge of it) and
+  not a validation one; what would change that is an expected value
+  traceable to a source outside this repository, to a commit preceding
+  the implementation, or to a second author, and none of the 26 meets
+  any of the three. **`MSV_024`, surfaced by making that claim
+  checkable:** the move-set registrations were reachable only from the
+  module tail, so the CLI read `26/26 COMPLETE` while
+  `tests/test_known_answer_gate.py`'s clear-and-reseed lost both —
+  invisible until the two ids were added to that test's MANIFEST, and the
+  third instance of a registration whose call site is off the path that
+  matters (`MSV_013` here, `FMR_036` before it, and
+  `tools/sourced.registry_complete` exists because of the first).
+  `_halfwidth` is registered beside `coverage` with six cases, the
+  exponent and empty cases being where a default width would hide.
+  Twenty-four claims `MSV_001..024` in `CLAIM_TABLE_V2.md`. Stdlib only, parses under 3.9, CC0.
 - `clustering-axes/` — Six exploration routes for what AI agents cluster
   on when the axis is **not imported from human social science**, plus a
   model-free stylometric instrument for the cheapest of them. Both

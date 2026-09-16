@@ -1,6 +1,6 @@
 # CLAIM TABLE -- move set, second order
 
-Claims `MSV_001..MSV_016`, about `move_set_sim_v2.py` and the second work
+Claims `MSV_001..MSV_024`, about `move_set_sim_v2.py` and the second work
 order. Distinct prefix from `MV_*`, which is about the delivered v1 and is
 not restated here. `WORK_ORDER_V2.md` is landed verbatim and not edited.
 
@@ -101,47 +101,69 @@ artifact.
 
 ---
 
-## MSV_005 -- M4 on a static artifact perturbs the arithmetic, not the system
+## MSV_005 -- M4 perturbs the arithmetic, and the perturbation is the rounding
 
-**Status: SUPPORTED.**
+**Status: SUPPORTED, and NARROWED against the first build.**
 
 A published artifact cannot be perturbed. Its arithmetic can: recompute a
 stated relationship from operands the artifact itself supplies.
 
-The gate is on the DECLARATION, in both directions. A ledger declaring
-`holds: true` where the recomputation fails scores 0; one declaring
-`holds: false` where it fails scores 1.0. Refusing the second would make a
-discrepancy unreportable, which is the finding M4 exists to produce. All
-four cells checked (suite 4.1-4.4).
+The first build did this at a POINT and gated on whether the ledger's
+`holds` declaration matched. That is the defect `MSV_017` records. The
+gate is now on a BAND: shipped precision parsed from each operand as
+written, propagated through the operation, and the stated value tested
+for containment.
 
-Tolerance is relative 5e-3 and declared (CHOICE 3): the demo artifact
-rounds to 3-4 significant figures, so an exact test would report rounding
-as a failure.
+Three verdicts, and the shape of the set is the narrowing:
 
-Falsifier: a stated relationship whose operands the artifact supplies and
-which this cannot recompute.
+| stated value | ledger says | verdict |
+| --- | --- | --- |
+| inside the band | `holds: false` | `NOT_EVALUABLE` |
+| inside the band | `holds: true` | `NOT_EVALUABLE` |
+| outside the band | `holds: false` | `ARITHMETIC_AS_DECLARED` (1.0) |
+| outside the band | `holds: true` | `ARITHMETIC_NOT_AS_DECLARED` (0.0) |
+
+`ARITHMETIC_AS_DECLARED` is reachable only from `holds: false`. See
+`MSV_019`. Suite 4.9-4.17.
+
+Falsifier: a stated relationship whose stated value lies outside the band
+its own shipped operands span and which this scores `NOT_EVALUABLE`.
 
 ---
 
 ## MSV_006 -- the demo's M4 finding
 
-**Status: SUPPORTED, recomputable by anyone with the artifact.**
+**Status: VOID. The finding does not stand.**
 
-`aperiodic-order-sim-stack/SIM_STACK_REPORT.txt` line 23 states the
-AB-Poisson finite-size baseline as **0.021**. The report ships both
-dimensions that gap is between: AB 1.889 (line 15) and Poisson 1.911
-(line 17). Recomputed, `|1.889 - 1.911| = 0.022`. Relative discrepancy
-0.0476, ten times the declared tolerance.
+It read: line 23 states the AB-Poisson baseline as **0.021**, the report
+ships AB 1.889 (line 15) and Poisson 1.911 (line 17), recomputed the gap
+is 0.022, a discrepancy in the third decimal on the denominator the
+headline *"~15x larger"* ratio is taken over.
 
-One in the third decimal, and it is the denominator the headline
-*"~15x larger"* ratio is taken over.
+Both operands are written to three decimal places. At that precision:
 
-What this does NOT say: whether 0.021 is the right baseline at all. That
-is a reading and it is not scored here -- `AOS_009` in this repo holds
-that 0.021 is the smallest of three pairwise gaps in the space-filling
-cluster and the honest ratio is nearer 4.5x. See `MSV_011`.
+```
+AB       1.889  ->  [1.8885, 1.8895]
+Poisson  1.911  ->  [1.9105, 1.9115]
+|diff|          ->  [0.0210, 0.0230]
+```
 
-Falsifier: the report's own D_f values reproducing 0.021 exactly.
+0.021 is inside. The artifact is self-consistent at the precision it
+shipped, and the 0.022 was the rounding, not a discrepancy. The move now
+returns `NOT_EVALUABLE` on this entry with the reason *"stated value
+within shipped precision"*, and scores 0.
+
+The entry is KEPT in the demo ledger, still declaring `holds: false`, so
+the refusal comes from the band and not from the declaration being
+changed after the fact.
+
+What was never claimed and is still not: whether 0.021 is the right
+baseline at all. `AOS_009` holds it is the smallest of three pairwise
+gaps and the honest ratio is nearer 4.5x. That is a reading, and
+consistency at shipped precision says nothing about it.
+
+Reported from outside this build. Recorded rather than quietly repaired,
+because the claim was published.
 
 ---
 
@@ -349,3 +371,237 @@ this repo.
 
 Falsifier: the move set run cold by someone else, on their own artifact,
 with the ledger published.
+
+---
+
+## MSV_017 -- the defect is a false-positive generator, not a one-off
+
+**Status: SUPPORTED, and the scope note is the larger half.**
+
+Reported against the returned build, verbatim:
+
+> DEFECT: M4 point-recomputes from rounded operands and scores the
+> residual as a finding. [...] SCOPE: fires on any artifact shipping
+> rounded operands. False-positive generator, not a one-off.
+
+Both halves hold. The arithmetic is the user's and reproduces exactly
+(`MSV_006`). The scope claim is structural: any artifact that rounds an
+operand has not stated the recomputed quantity to better than the band
+those roundings span, so a point test reports the rounding every time.
+Difference-of-near-equal-numbers is the worst case, and it is the common
+case in a results table.
+
+The stipulated tolerance the first build used (relative 5e-3) was a
+constant standing in for a quantity the document already carries. The
+repair reads the quantity instead. This is the `reasoning-gate` **G-RES**
+shape -- instrument resolution against the feature being measured -- with
+the instrument being the artifact's own significant figures.
+
+Falsifier: an artifact whose stated relationships fall outside their
+shipped bands, on which a point test and a band test agree.
+
+---
+
+## MSV_018 -- M4 establishes nothing on the demo artifact, and that is the result
+
+**Status: SUPPORTED, recomputable by anyone with the artifact.**
+
+Every stated relationship in `SIM_STACK_REPORT.txt` falls inside its own
+shipped band:
+
+| stated | operands | band | inside |
+| --- | --- | --- | --- |
+| 0.334 | 1.889, 1.555 | [0.3330, 0.3350] | yes |
+| 0.021 | 1.889, 1.911 | [0.0210, 0.0230] | yes |
+| 1.460 | -1.529, -0.069 | [1.4590, 1.4610] | yes |
+| 54.1 | 0.0812, 0.0015 | [52.3548, 56.0345] | yes |
+
+Four of four. Not an accident of the values: every operand in this
+document is three or four significant figures, and every stated
+relationship is a difference of near-equal numbers or a ratio of small
+ones -- the two operations that lose the most precision.
+
+So the demo now carries ONE recomputable finding (M6, the peak/floor
+ratio 5537, which ships no operands at all -- `MSV_007`) where it
+previously reported two. Total falls 6.0 -> 5.0.
+
+The fall is the instrument working. A harness that scored higher before
+the repair was scoring a rounding.
+
+Falsifier: any stated relationship in this artifact whose value falls
+outside the band its own operands span.
+
+---
+
+## MSV_019 -- holds=True is now unearnable, and that is correct
+
+**Status: SUPPORTED, and it is a narrowing worth stating.**
+
+There is no input for which `bind_derived` returns
+`ARITHMETIC_AS_DECLARED` from a `holds: true` declaration. Inside the
+band is `NOT_EVALUABLE`; outside it is `ARITHMETIC_NOT_AS_DECLARED`.
+Asserted over the cross product of the artifact's own operand pairs and
+four stated values (suite 4.15).
+
+The reason is not an implementation limit. A band CONTAINING the stated
+value is consistency, not confirmation -- it says the artifact did not
+contradict itself at the precision it shipped, which is the weakest
+possible statement and is true of almost every published table. M4
+refutes or refuses. It does not confirm.
+
+Cost, stated: a ledger that wants to record *"this arithmetic checks
+out"* cannot earn a point for it. That is the right side to err on, since
+the alternative is a move that scores a point for finding nothing.
+
+Falsifier: a defensible reading under which a stated value inside its own
+shipped band is evidence that the arithmetic holds.
+
+---
+
+## MSV_020 -- decimal, not float, and the boundary case is why
+
+**Status: SUPPORTED, measured.**
+
+The band on the demo pair is exactly `[0.0210, 0.0230]` and the stated
+value is exactly `0.021`. In binary floating point the lower bound
+computes as `0.02100000000000013`, so `band[0] <= stated` returns
+**False** and the harness would have produced a finding on the case the
+whole repair exists to refuse -- failing by 1.3e-16 on a quantity whose
+smallest meaningful unit is 5e-4.
+
+The alternatives were an epsilon or exact arithmetic. An epsilon is a
+second stipulated constant replacing the one just retired, so
+`decimal.Decimal` is used and the operands are parsed from the TEXT
+rather than through a float (CHOICE 8). `sub`, `abs_sub` and `mul` are
+then exact. `div` carries context rounding at 28 significant digits,
+roughly 25 orders below any shipped precision, and that residual is not
+special-cased.
+
+Found by running the arithmetic before touching the file, not by reading
+the code.
+
+Falsifier: a boundary case this reports wrongly at 28 digits.
+
+---
+
+## MSV_021 -- CHOICE 3 is retired in place, not renumbered
+
+**Status: SUPPORTED.**
+
+`TOL = 5e-3` is gone (suite 4.25). Entry 3 of the choice list now reads
+RETIRED and names what replaced it. Ids are permanent, so the entry stays
+and the list still runs 1..10 with no gap and no reuse. The suite checks
+that a retired choice is printed by `--choices` and cited by NOTHING in
+the source (suite 16.2, 16.3) -- the inverse of the rule every live
+choice is held to.
+
+Falsifier: a renumbering, or a retired choice still taking effect
+somewhere.
+
+---
+
+## MSV_022 -- the integer half-width is wrong for an exact count, and the error runs toward refusing
+
+**Status: SUPPORTED, and it is a limit rather than a defect.**
+
+An operand written with no decimal point takes half-width 0.5 (CHOICE 9).
+That is the standard reading of a rounded number and it is wrong for an
+exact count: *68 peaks* is 68, not 68 +/- 0.5. The schema carries no
+field saying which a number is, and inferring it from the surrounding
+text would be a word list deciding a measurement.
+
+The direction is what makes it liveable. Too wide a band makes containment
+MORE likely, which makes `NOT_EVALUABLE` more likely, which suppresses a
+finding rather than manufacturing one. Every other choice here is set the
+same way (CHOICE 10: the stated value is read as a point, not widened to
+its own band, for the same reason).
+
+Exponent form is refused outright rather than given a default width, since
+the half-width there depends on the mantissa digits and the reading is not
+one rule.
+
+Falsifier: an artifact where an exact integer count is the operand and the
+0.5 band suppresses a real discrepancy.
+
+---
+
+## MSV_023 -- provenance of the known-answer registry, reported and not repaired
+
+**Status: REPORTED. Asked for by the same report that raised `MSV_017`,
+explicitly as a report and not a fix.**
+
+The question: who authored the answers in `tools/known_answer.py`, and
+were they authored before or after the checks that verify them.
+
+**Authorship.** 19 of the 20 commits touching the file are
+`Claude <noreply@anthropic.com>`. The twentieth is a merge commit by the
+repository owner carrying another branch's registrations, so it authors no
+case. **Every registered expected value in the registry is model-authored,
+by one author.** The metrics being checked are model-authored too. The
+registry is therefore a single-author artifact checking single-author code
+-- `effective-redundancy-audit`'s shared node, and the same shape
+`triad-playground` `TP_003` measures: consensus is blind to the error its
+members share.
+
+**Ordering, measured rather than asserted.** For each metric, the earliest
+commit introducing `def <fn>` in its module against the earliest commit
+introducing its registration string:
+
+| ordering | count |
+| --- | --- |
+| registered in the SAME commit as the implementation | 16 |
+| implementation first, registered later | 8 |
+| **answer registered BEFORE the implementation existed** | **0** |
+| unknown (registered in this session, uncommitted at measurement) | 1 |
+
+**Zero of 25.** Not one expected value in the registry was fixed before
+the function it checks existed. The file's own docstring names the two
+seeds as cases where *"a case whose answer was fixed in advance"* caught a
+defect -- and both of those are `implementation first`, meaning the case
+was written against a function that already ran.
+
+**Scope limit on the 25/25 (now 26/26), stated plainly.** The headline
+means: every registered case agrees with the current implementation, and
+every expected value was authored by the same party that authored the
+implementation, with knowledge of it. It does NOT mean the answers were
+independently derived. It is a REGRESSION result -- these functions still
+do what their author believed they did -- and it is not a validation
+result.
+
+What would make it one: an expected value derived from a source outside
+this repository, or registered in a commit that precedes the
+implementation, or authored by a second party. None of the 26 meets any of
+the three. The `_halfwidth` cases registered in this session do not either
+-- they are the rounding convention, which is external in the sense that
+the convention predates the function, and same-author in the sense that
+nobody but this session wrote them down here.
+
+Not repaired, per the report's instruction.
+
+Falsifier: any registered case whose expected value can be traced to a
+commit earlier than its implementation, or to a second author.
+
+---
+
+## MSV_024 -- the move-set registration was unreachable from seed(), found by making the coverage claim checkable
+
+**Status: SUPPORTED, repaired.**
+
+`_seed_move_set()` was called from the module TAIL and not from `seed()`.
+Running `tools/known_answer.py` reported 26 of 26 COMPLETE, because the
+tail call had already run at import and nothing cleared the registry.
+`tests/test_known_answer_gate.py` clears the registry and calls `seed()`
+-- which does not reach the tail -- so both move-set metrics vanished.
+
+It was invisible until the two metric ids were added to that test's
+MANIFEST. The defect is a registration whose call site is not on the path
+that matters, which is the third instance of that shape in this registry
+(`MSV_013` here, `FMR_036` before it, and `tools/sourced.registry_complete`
+exists because of the first one).
+
+Repaired: `seed()` calls it, with the reason recorded at the call site.
+
+Falsifier: a registration path that is green under the CLI and short under
+a clear-and-reseed.
+
+---

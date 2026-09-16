@@ -159,7 +159,7 @@ computation.
 | kind | what the ledger supplies | what the artifact supplies | earned verdict |
 |---|---|---|---|
 | `QUOTE` | line + column range | the value, sliced out | `BOUND` |
-| `DERIVED` | op, two operand locators, the stated value, `holds: true\|false` | the operands | `ARITHMETIC_AS_DECLARED` |
+| `DERIVED` | op, two operand locators, the stated value, `holds: true\|false` | the operands **and the precision they were written to** | `ARITHMETIC_AS_DECLARED` |
 | `ABSENT` | reason, searched span, sought token | the span, and whether the token is in it | `VERIFIED_ABSENCE` |
 
 Each scores **1.0**. A correctly-refused verdict scores as high as a
@@ -185,13 +185,30 @@ the artifact's own line (`MSV_004`).
     ledger   : move-set/ledgers/sim_stack_report.json
     run      : python3 move-set/move_set_sim_v2.py --demo
 
-Two findings, both recomputable by anyone with the artifact:
+**One** recomputable finding, and the move that used to carry the second
+now refuses:
 
-**M4.** The report states the AB–Poisson finite-size baseline as
-**0.021** (line 23) and ships both dimensions that gap is between — AB
-1.889 (line 15), Poisson 1.911 (line 17). Recomputed: **0.022**. One in
-the third decimal, and it is the denominator the headline *"~15× larger"*
-ratio is taken over (`MSV_006`).
+**M4 — `NOT_EVALUABLE`, and the refusal is the finding.** The report
+states the AB–Poisson finite-size baseline as **0.021** (line 23) and
+ships both dimensions that gap is between — AB 1.889 (line 15), Poisson
+1.911 (line 17). Point-recomputed the gap is 0.022, and the first build
+published that third decimal as a discrepancy. Both operands are written
+to **three decimal places**:
+
+    AB       1.889  ->  [1.8885, 1.8895]
+    Poisson  1.911  ->  [1.9105, 1.9115]
+    |diff|          ->  [0.0210, 0.0230]      0.021 is inside
+
+The artifact is self-consistent at the precision it shipped. The 0.022 was
+the rounding. Reported from outside this build; the claim is recorded
+**VOID** rather than quietly removed (`MSV_006`), and the repair is
+structural rather than a patch to one entry (`MSV_017`).
+
+All four of the artifact's stated relationships — 0.334, 0.021, 1.460,
+54.1 — fall inside their own shipped bands. **M4 establishes nothing on
+this document, and that is the result** (`MSV_018`). The demo total falls
+**6.0 → 5.0**; the fall is the instrument working, since a harness that
+scored higher before was scoring a rounding.
 
 **M6.** Line 41 reports a peak/floor ratio of 5537. The floor is on line
 40; **the peak height is nowhere in the artifact**. Three of the
@@ -204,6 +221,82 @@ authored by the session that wrote the harness, this repo already carries
 `AOS_001..AOS_010` on the same artifact, and a self-run is void as a
 capability score (`FLB_010`). Only the mechanical layer is scored; no
 reading is (`MSV_011`).
+
+### Shipped precision, and why M4 refutes but never confirms
+
+An artifact that rounds an operand to three decimal places has not stated
+the recomputed quantity to better than the band those roundings span. So
+the precision is parsed from each operand **as written** — not through a
+float, which has already thrown it away — and propagated through the
+operation:
+
+| stated value | ledger says | verdict | points |
+|---|---|---|---|
+| inside the band | `holds: false` | `NOT_EVALUABLE` | 0.0 |
+| inside the band | `holds: true` | `NOT_EVALUABLE` | 0.0 |
+| outside the band | `holds: false` | `ARITHMETIC_AS_DECLARED` | 1.0 |
+| outside the band | `holds: true` | `ARITHMETIC_NOT_AS_DECLARED` | 0.0 |
+
+`ARITHMETIC_AS_DECLARED` is reachable only from `holds: false`, so
+**holds=True is unearnable** (`MSV_019`). That is correct rather than a
+limitation: a band containing the stated value is *consistency*, not
+confirmation — it says the artifact did not contradict itself at the
+precision it published, which is true of almost every table ever printed.
+
+The stipulated tolerance this replaces (relative 5e-3) is **retired in
+place** as choice 3 rather than renumbered (`MSV_021`) — a constant
+standing in for a quantity the document already carries, which is the
+`reasoning-gate` **G-RES** shape with the artifact's own significant
+figures as the instrument.
+
+Containment is tested in `decimal.Decimal`, not float: on the demo case
+the exact band is `[0.0210, 0.0230]` and the float lower bound computes
+as `0.02100000000000013`, so a float test returns **False** by 1.3e-16 on
+a quantity whose smallest meaningful unit is 5e-4 — and would have
+produced a finding on the one case the repair exists to refuse
+(`MSV_020`). An epsilon would have been a second stipulated constant
+replacing the one just retired.
+
+Two choices are set one-sided toward refusing rather than reporting: an
+operand with no decimal point takes half-width 0.5, which is wrong for an
+exact count and errs toward `NOT_EVALUABLE` (`MSV_022`); and the stated
+value is read as a point rather than widened to its own band, for the
+same reason.
+
+### Reported, not repaired: provenance of the known-answer registry
+
+Asked for alongside the M4 defect, explicitly as a report.
+
+**Authorship.** 19 of the 20 commits touching `tools/known_answer.py` are
+model-authored; the twentieth is a merge carrying another branch's
+registrations and authors no case. Every expected value in the registry
+was written by one author, and that author also wrote the functions being
+checked.
+
+**Ordering, measured rather than asserted** — earliest commit introducing
+`def <fn>` against earliest commit introducing its registration string:
+
+    registered in the SAME commit as the implementation   16
+    implementation first, registered later                 8
+    answer registered BEFORE the implementation existed     0
+    unknown (registered this session, uncommitted)          1
+
+**Zero of 25.** Not one expected value was fixed before the function it
+checks existed — including the two seed cases the file's own docstring
+describes as answers *"fixed in advance"*, both of which are
+implementation-first.
+
+**Scope limit on the 26/26.** It means every registered case agrees with
+the current implementation, authored by the same party with knowledge of
+it. It is a **regression** result, not a validation one. What would change
+that: an expected value traceable to a source outside this repository, to
+a commit preceding the implementation, or to a second author. None of the
+26 meets any of the three (`MSV_023`).
+
+One defect surfaced while making that claim checkable: the move-set
+registrations were reachable only from the module tail, so the CLI read
+26/26 COMPLETE while a clear-and-reseed lost both. Repaired, and recorded
+as the third instance of that shape in this registry (`MSV_024`).
 
 ### What the order did not fix and this does
 
@@ -237,4 +330,4 @@ the point of use (`MSV_012`).
 `move_set_sim_v2.py` refuses `--selftest` (exit 2) rather than exiting
 clean on an invocation that runs nothing. `coverage` is registered in
 `tools/known_answer.py` with six cases; the overlap case is the detector.
-Claims `MSV_001..MSV_016` in `CLAIM_TABLE_V2.md`.
+Claims `MSV_001..MSV_024` in `CLAIM_TABLE_V2.md`.
