@@ -44,7 +44,9 @@ Stdlib only. Parses under Python 3.9. ASCII only. CC0.
 
 from __future__ import annotations
 
+import ast
 import hashlib
+import io
 import os
 import re
 import sys
@@ -627,6 +629,8 @@ EXPECTED_METRICS = (
     "internal-reference-boundary/radials.py::effective_origins",
     "internal-reference-boundary/radials.py::sanction_ratio_point",
     "model-deprecation-backcast/null_check.py::lag_of_peak",
+    "move-set/move_set_sim_v2.py::coverage",
+    "move-set/move_set_sim_v2.py::_halfwidth",
     "nonidentity-census/t6_window_declaration.py::decided_by_tracks_window",
     "nonidentity-census/t6_window_declaration.py::marginal_majority (REPLACED)",
     "null-harness/null_harness.py::_verdict",
@@ -1254,6 +1258,14 @@ def seed():
               "attaches to anything."),
     )
 
+    # Late additions. These live in their own helper for readability,
+    # and seed() CALLS it: a registration reachable only from the
+    # module tail is lost the moment a consumer clears the registry
+    # and re-seeds, which is what tests/test_known_answer_gate.py
+    # does. Found by adding the move-set entries to the manifest --
+    # the coverage claim is what made the gap visible.
+    _seed_move_set()
+
 
 def _irb_effective_origins(coupling):
     """internal-reference-boundary/radials.py::effective_origins,
@@ -1323,6 +1335,202 @@ def _fmr_fraction_cap(n_other, fraction):
         sys.path.pop(0)
 
 
+
+def _msv_coverage(which):
+    """move-set/move_set_sim_v2.py::coverage, imported. Distinct artifact
+    lines searched over total lines. The expected values are computed by
+    hand from a 10-line artifact, not read off the implementation. The
+    OVERLAP case is where an error hides -- summing range lengths instead
+    of counting distinct lines returns 1.0 for two copies of the same
+    half -- and the EMPTY case is where a zero hides, since an undeclared
+    span is no measurement and not zero coverage."""
+    import importlib.util
+    path = os.path.join(ROOT, "move-set", "move_set_sim_v2.py")
+    sys.path.insert(0, os.path.dirname(path))
+    try:
+        spec = importlib.util.spec_from_file_location("_msv2", path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        art = {"path": "<synthetic>", "text": "", "lines": ["x"] * 10,
+               "n_lines": 10, "sha256": ""}
+        looked = {"whole": [[1, 10]], "half": [[1, 5]],
+                  "overlap": [[1, 5], [1, 5]], "two_thirds": [[1, 5], [4, 8]],
+                  "empty": [], "bad": [[1, 99]]}[which]
+        return mod.coverage(art, looked)
+    finally:
+        sys.path.pop(0)
+
+
+def _msv_halfwidth(text):
+    """move-set/move_set_sim_v2.py::_halfwidth, imported. The half-width of
+    the rounding interval implied by how a number is WRITTEN. It decides
+    every M4 verdict, so it is the one new quantity in that module that a
+    reading error would carry straight into a published finding. Expected
+    values are the rounding convention, fixed before the function existed:
+    k digits after the point means +/- 0.5 * 10**-k."""
+    import importlib.util
+    path = os.path.join(ROOT, "move-set", "move_set_sim_v2.py")
+    sys.path.insert(0, os.path.dirname(path))
+    try:
+        spec = importlib.util.spec_from_file_location("_msv2h", path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        out = mod._halfwidth(text)
+        return None if out is None else float(out)
+    finally:
+        sys.path.pop(0)
+
+
+def _seed_move_set():
+    """Called BY seed(), not from the module tail. See the note there."""
+    register(
+        "move-set/move_set_sim_v2.py::coverage",
+        _msv_coverage,
+        [case("whole artifact", ("whole",), 1.0,
+              "10 of 10 distinct lines searched"),
+         case("half", ("half",), 0.5, "5 of 10 distinct lines"),
+         case("overlap counted once", ("overlap",), 0.5,
+              "[1,5] twice is still 5 distinct lines. Summing range "
+              "lengths would return 1.0 -- this case is the detector"),
+         case("two overlapping ranges", ("two_thirds",), 0.8,
+              "lines 1-5 and 4-8 is {1..8}, 8 of 10"),
+         case("nothing declared is None", ("empty",), None,
+              "an undeclared span is no measurement. 0.0 would put it on "
+              "the same scale as a search that found nothing"),
+         case("a span outside the artifact is None", ("bad",), None,
+              "the span does not resolve, so no coverage was measured")],
+        note="the overlap and empty cases are the two where an error hides")
+    register(
+        "move-set/move_set_sim_v2.py::_halfwidth",
+        _msv_halfwidth,
+        [case("three decimals", ("1.889",), 0.0005,
+              "rounded to 3 places, so the quantity lies within 0.0005"),
+         case("four decimals", ("0.0812",), 0.00005,
+              "4 places. The exponent, not the magnitude, sets the width"),
+         case("U+2212 minus is a number", ("\u22121.529",), 0.0005,
+              "the artifact uses MINUS SIGN; a str-and-float reading would "
+              "report a real number as unreadable"),
+         case("no decimal point takes 0.5", ("5537",), 0.5,
+              "the standard reading, and CHOICE 9 states it is wrong for "
+              "an exact count. The error runs toward NOT_EVALUABLE"),
+         case("exponent form is refused", ("1.2e3",), None,
+              "the half-width depends on the mantissa digits and the "
+              "reading is not one rule. None, never a default width"),
+         case("empty is refused", ("",), None,
+              "no digits shipped is no precision, not zero precision")],
+        note="the exponent and empty cases are where a default width would "
+             "hide; the 5537 case is the one whose expected value is a "
+             "convention this repo states is wrong for counts")
+
+
+
+def seed_reachable(src=None, path=None):
+    """Every `register(...)` in this file must sit in a function reachable
+    from `seed()`. A registration that runs only at import is lost the
+    moment a consumer clears the registry and re-seeds, and everything
+    that DID register still passes, so nothing says so.
+
+    Structural, not a per-instance patch: this is the third occurrence of
+    the shape (FMR_036 a register after a `finally`; MSV_013 the same
+    again; MSV_024 a helper called from the module tail), and all three
+    were repaired where they were found. A call graph closed from `seed`
+    makes a fourth fail the run rather than wait to be noticed.
+
+    Returns a record. `unreachable` is the finding: one entry per
+    register() call site that `seed()` cannot reach, naming the enclosing
+    function or None for a module-level call.
+
+    LIMIT, stated: a register() inside a nested def is attributed to the
+    top-level function containing it. A nested def that is never called
+    is a different defect and this does not catch it."""
+    if src is None:
+        src = io.open(path or os.path.join(os.path.dirname(
+            os.path.abspath(__file__)), "known_answer.py"),
+            encoding="utf-8").read()
+    tree = ast.parse(src)
+    tops = {}
+    for node in tree.body:
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            tops[node.name] = node
+
+    def calls_in(node):
+        out = set()
+        for n in ast.walk(node):
+            if isinstance(n, ast.Call) and isinstance(n.func, ast.Name):
+                out.add(n.func.id)
+        return out
+
+    def registers_in(node):
+        out = []
+        for n in ast.walk(node):
+            if isinstance(n, ast.Call) and isinstance(n.func, ast.Name) \
+                    and n.func.id == "register":
+                out.append(n.lineno)
+        return out
+
+    reach, stack = set(), ["seed"]
+    while stack:
+        name = stack.pop()
+        if name in reach or name not in tops:
+            continue
+        reach.add(name)
+        stack.extend(calls_in(tops[name]))
+
+    unreachable = []
+    for name, node in sorted(tops.items()):
+        if name in reach:
+            continue
+        for ln in registers_in(node):
+            unreachable.append((name, ln))
+    for node in tree.body:
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef,
+                             ast.ClassDef)):
+            continue
+        for ln in registers_in(node):
+            unreachable.append((None, ln))
+    return {"root": "seed",
+            "reachable": sorted(reach),
+            "registering_functions": sorted(
+                n for n in tops if registers_in(tops[n])),
+            "unreachable": sorted(unreachable, key=lambda t: t[1]),
+            "ok": not unreachable}
+
+
+def registration_sites_elsewhere(root=None):
+    """Any OTHER file that imports this module and calls register() is
+    registering outside seed() by construction -- seed() cannot reach it
+    at all. Currently a visible zero; kept so it stays one.
+
+    Lexical, and says so: a file that imports known_answer under another
+    name and calls register through the alias is not caught."""
+    root = root or ROOT
+    hits = []
+    for dirpath, dirnames, filenames in os.walk(root):
+        dirnames[:] = [d for d in dirnames
+                       if d not in (".git", "__pycache__", "legacy")]
+        for fn in filenames:
+            if not fn.endswith(".py"):
+                continue
+            full = os.path.join(dirpath, fn)
+            if os.path.abspath(full) == os.path.abspath(__file__):
+                continue
+            try:
+                text = io.open(full, encoding="utf-8").read()
+            except (IOError, OSError, UnicodeDecodeError):
+                continue
+            if "known_answer" not in text:
+                continue
+            try:
+                tree = ast.parse(text)
+            except SyntaxError:
+                continue
+            for n in ast.walk(tree):
+                if isinstance(n, ast.Call) and isinstance(n.func, ast.Name) \
+                        and n.func.id == "register":
+                    hits.append((os.path.relpath(full, root), n.lineno))
+    return sorted(hits)
+
+
 def completeness():
     """Expected against registered, the same value-and-source rule applied
     to the registry: a registration is a value whose source is its call
@@ -1364,7 +1572,17 @@ def report():
     for m in comp["extra"]:
         print("  !! registered and not expected: %s" % m)
     print("cases disagreeing with the registry: %d" % len(bad))
-    return 1 if (bad or not comp["ok"]) else 0
+    reach = seed_reachable()
+    print("register() call sites seed() cannot reach: %d"
+          % len(reach["unreachable"]))
+    for fn, ln in reach["unreachable"]:
+        print("  !! %s line %d registers, and seed() does not reach it"
+              % (fn or "<module level>", ln))
+    outside = registration_sites_elsewhere()
+    print("register() call sites in other files: %d" % len(outside))
+    for rel, ln in outside:
+        print("  !! %s line %d registers outside seed()" % (rel, ln))
+    return 1 if (bad or not comp["ok"] or not reach["ok"] or outside) else 0
 
 
 if __name__ == "__main__":

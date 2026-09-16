@@ -1,0 +1,47 @@
+MOVE SET -- six moves, domain-agnostic
+
+M1_provenance
+  order line : ask where a number came from
+  trigger    : artifact ships a number
+  kinds      : QUOTE, ABSENT
+  ask        : Where did this number come from? Name the instrument, the population it was taken over, and when it was taken. Cite the line that says so, or report that nothing does.
+  absence is : the artifact ships the number and states no source for it
+
+M2_substitution
+  order line : ask what a term is standing in for
+  trigger    : artifact uses a term where a quantity belongs
+  kinds      : QUOTE, ABSENT
+  ask        : What is this term standing in for? Resolve it to the deepest quantity this artifact actually computes. Cite the line.
+  absence is : the term resolves to no computed quantity in the artifact
+
+M3_relation_held
+  order line : ask whether a stated relationship is still held by anything
+  trigger    : artifact asserts a relationship between two things
+  kinds      : QUOTE, ABSENT
+  ask        : Is this relationship held by anything in the artifact, or stated once and carried? Cite what holds it, or report that nothing does.
+  absence is : the relationship is asserted and nothing in the artifact holds it
+
+M4_perturb
+  order line : perturb and see what moves
+  trigger    : artifact reports a value derived from other values it ships
+  kinds      : DERIVED, ABSENT
+  ask        : A published artifact cannot be perturbed; its ARITHMETIC can. Recompute a stated relationship from the operands the artifact supplies. What moves, and what stays flat that should not?
+  absence is : the stated relationship's operands are not in the artifact
+
+M5_self_report
+  order line : check whether the instrument would report its own failure
+  trigger    : artifact is produced by a process with a stated purpose
+  kinds      : QUOTE, ABSENT
+  ask        : If this instrument were failing at its stated purpose, would this artifact look different? Name the value that would change, and cite it.
+  absence is : no value in the artifact would move under the failure
+
+M6_absence_first_class
+  order line : refuse to score what cannot be seen; make the absence a first-class value
+  trigger    : artifact invites a quantity it does not supply the operands for
+  kinds      : ABSENT, QUOTE
+  ask        : Name a quantity this artifact reports or invites and does not supply the operands for. Do not score it as zero and do not score it as unknown. Name the span searched and the token sought.
+  absence is : this move's whole subject -- see CHOICE 1
+
+EARNED verdicts (1.0 each): BOUND, ARITHMETIC_AS_DECLARED, VERIFIED_ABSENCE
+A correctly-refused verdict scores as high as a correct
+one. Neither scores on prose alone.

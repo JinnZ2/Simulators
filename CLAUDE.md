@@ -94,6 +94,21 @@ carrying structural load is a flagged defect, and co-produced documents are
 layer-separated before audit rather than audited as a composite. Read it
 before reporting.
 
+**What produces findings here.** Not the suites. The mechanism, stated
+because it recurs: *a finding surfaces when a claim is made externally
+checkable* — written into a place a second party, or a second instrument,
+can test it. `MSV_024` is the clean instance — a registration reachable
+only from a module tail survived 157 module checks and 105 repo tests, all
+green, and fell the moment two ids were written into another file's
+coverage manifest. `SS_009`, `UNI_010`, `EA_025` and `CD_006` are the same
+shape from other directions: running the thing rather than reading it,
+diffing two runs, handing one artifact to a second reader, checking a
+stated count against the script that produced it. A green suite is
+evidence that what is already checkable passes; it is not evidence about
+what is not. The corollary is the working rule — when a claim is stated in
+prose, the next move is to write it where something else reads it, and the
+denominator that grows is the one worth growing.
+
 ## Meta-spine (read first)
 
 The methodology spine sits in six root-level files. Every simulator
@@ -8847,7 +8862,172 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `MV_004` sharper (eleven keys shuffled instead of six, and still no
   field recording which order was used) and `MV_005` narrower
   (`NO_FINDING` now admissible on two of eleven moves, still scoring
-  zero). Stdlib only, parses under 3.9, CC0.
+  zero).
+  **Second order, 2026-09-16** (`WORK_ORDER_V2.md`, verbatim): same six
+  moves, a different output shape (`move_id / finding / confidence / or
+  ABSENT(reason)`), and one repair. The order names the file
+  `move_set_sim.py`, which holds a delivered artifact that is never
+  edited, so the build lands beside it as `move_set_sim_v2.py` under the
+  supersession convention (`MSV_001`). **`MSV_003`, the repair and the
+  whole point: `MV_002` closes.** v1 checked two non-empty strings, so a
+  ledger carrying `"x"` in every blocker and unblocker scored 6.0 of 6.0;
+  the same shape here scores **0.0 of 6.0**, every row
+  `UNVERIFIED_NO_SPAN` with a stated reason, while an honest all-absence
+  ledger over the same artifact scores 6.0 — so it is not a module that
+  refuses everything. The mechanism is `ACL_012`/`ACL_017` (*a guard that
+  asks for prose can be satisfied with prose*): **every entry is checked
+  against the artifact** in one of three kinds — `QUOTE` (the ledger
+  supplies a line and a column range, the ARTIFACT supplies the value,
+  sliced out), `DERIVED` (operands sliced out and the stated arithmetic
+  recomputed, gated on the ledger's own `holds: true|false` declaration
+  **in both directions**, so a discrepancy stays reportable), `ABSENT`
+  (reason + searched span + sought token, and the scorer confirms the span
+  resolves and the token is not in it). Each earns 1.0, so a correctly
+  refused verdict scores as high as a bound one and neither scores on
+  prose alone. **`MSV_004`:** `tools/sourced.py` is **imported** and its
+  own stated limit is the layer added — it gates value/source/locator for
+  mutual consistency and says it does not check whether the source is
+  *true*, so a self-supplied `source_text` passes; `bind_quote()` resolves
+  the locator INTO the artifact and requires the cited text to be the
+  artifact's own line. **`MSV_002`:** the order's M6 (*refuse to score what
+  cannot be seen; make the absence a first-class value*) and the delivered
+  v1 M6 family (sequence gaps, negative space — absences IN the artifact)
+  are **different moves sharing an ordinal**; not exclusive, so both are
+  built (`CHOICE 1`) — M6 has its own artifact-side trigger AND all six
+  moves admit `ABSENT`. **The demo** runs on a public artifact already in
+  this repo, cited by path and sha256-pinned rather than copied
+  (`CHOICE 2`, the `MF_019` drift): `aperiodic-order-sim-stack/
+  SIM_STACK_REPORT.txt`. **`MSV_006`, VOID — the M4 finding
+  does not stand, reported from outside this build and recorded rather
+  than quietly removed:** the report states the AB–Poisson finite-size
+  baseline as **0.021** and ships both dimensions that gap is between (AB
+  1.889, Poisson 1.911), point-recomputed **0.022** — but both operands
+  are written to three decimal places, so the gap they span is
+  `[0.0210, 0.0230]` and 0.021 is **inside** it; the artifact is
+  self-consistent at the precision it shipped and the third decimal was
+  the rounding. **`MSV_017`, and the scope note is the larger half:** *a
+  false-positive generator, not a one-off* — any artifact rounding an
+  operand has not stated the recomputed quantity to better than that
+  band, and a difference of near-equal numbers is the common case in a
+  results table. Repaired structurally: shipped precision parsed from
+  each operand **as written** (never through a float, which has already
+  thrown it away) and propagated through the operation, containment
+  deciding the verdict, with the stipulated relative tolerance **retired
+  in place** as choice 3 rather than renumbered (`MSV_021`) — the
+  `reasoning-gate` **G-RES** shape with the artifact's own significant
+  figures as the instrument. **`MSV_018`, the result:** all four stated
+  relationships in the artifact (0.334, 0.021, 1.460, 54.1) fall inside
+  their own shipped bands, because every operand is 3–4 significant
+  figures and every relationship is a difference of near-equal numbers or
+  a ratio of small ones — so **M4 establishes nothing on this document**
+  and the demo total falls **6.0 → 5.0**, a fall that is the instrument
+  working, since a harness scoring higher before was scoring a rounding.
+  **`MSV_019`:** `ARITHMETIC_AS_DECLARED` is now reachable only from
+  `holds: false`, so **holds=True is unearnable** — correct rather than a
+  limitation, a band containing the stated value being *consistency* and
+  not confirmation; M4 refutes or refuses and never confirms.
+  **`MSV_020`:** containment is tested in `decimal.Decimal` and not float,
+  because the exact band is `[0.0210, 0.0230]` while the float lower bound
+  computes as `0.02100000000000013` — a float test returns **False** by
+  1.3e-16 on a quantity whose smallest meaningful unit is 5e-4, producing
+  a finding on the one case the repair exists to refuse, and an epsilon
+  would be a second stipulated constant replacing the one just retired.
+  **`MSV_022`:** two choices are set one-sided toward refusing — an
+  operand with no decimal point takes half-width 0.5, which is wrong for
+  an exact count and errs toward `NOT_EVALUABLE`, and the stated value is
+  read as a point rather than widened to its own band. Whether 0.021 is
+  the right baseline at all is still a reading and is still not scored
+  (`AOS_009` holds it is the smallest of three pairwise gaps), and
+  consistency at shipped precision says nothing about it. **`MSV_007`, the M6 finding:** line
+  41's peak/floor ratio of 5537 has **no operands anywhere in the
+  artifact** — three of the document's four stated relationships recompute
+  from values it supplies and this one does not, so it is asserted rather
+  than checkable; not zero and not unknown. **`MSV_008`:** `MV_004`
+  repaired — `order` is a required ledger field, `read_ledger` refuses a
+  ledger without one and names `MV_004`, and `path_dependence` returns
+  `NOT_EVALUABLE` (a third state, not a pass) for fewer than two runs, for
+  zero runs, and for runs that do not declare distinct orders.
+  **`MSV_009`:** `MV_005` does not recur — there is no `NO_FINDING`
+  verdict, so no move scores zero for a clean read. **`MSV_011`:** the
+  demo ledger is model-authored and this repo already carries
+  `AOS_001..010` on the same artifact, so a contamination block prints
+  **before** the numbers naming both facts and `FLB_010` (*a self-run is
+  void as a capability score — the runner holds the key*); only the
+  mechanical layer is scored and no reading is. **`MSV_010`/`MSV_012`, the
+  two limits stated rather than repaired:** `coverage` (distinct lines
+  searched, overlaps counted once) is printed beside every verified
+  absence and **enters no arithmetic**, so an absence over 3% and one over
+  100% both score 1.0 and nothing separates a well-chosen narrow span from
+  a cherry-picked one — demonstrated directly, since the same token
+  verifies absent over lines 1-5 and is refuted over 1-92; and the sought
+  token list is a word list, named as one **at the point of use** (the
+  demo's M5 confidence field reads *"'control' is one word for the
+  thing"*). **`MSV_013`, two defects in this build, both found by
+  running:** the `tools/known_answer.py` registration landed **after a
+  `finally`** inside its own helper — dead code, registry one metric short,
+  the **second** instance of that shape there (`FMR_036` the first, and
+  `tools/sourced.registry_complete` exists because of it) — and the patch
+  adding the metric id to `EXPECTED_METRICS` matched its anchor a second
+  time inside an unrelated `register()` call in `seed()`; neither found by
+  reading. **`MSV_014`/`MSV_015`:** M4 and M6 reach the same place from two
+  sides on the demo and the overlap is recorded rather than repaired
+  (enforcing disjointness needs the cross-entry comparison the design
+  removes), and the demo ledger carries `note` and `_says`, two fields the
+  shipped `ledger_schema` does not declare — the `MF_017` shape arriving in
+  this build's own data file within one session of it being written.
+  **`MSV_016` UNVERIFIED and it covers the folder:** the move set has
+  never been run against any artifact by a party that did not write the
+  harness. `coverage` is registered in `tools/known_answer.py` with six
+  cases (the overlap case is the detector — summing range lengths returns
+  1.0 for two copies of one half; the empty case is where a zero hides,
+  since an undeclared span is no measurement); `move_set_sim_v2.py`
+  refuses `--selftest` (exit 2) and check count is printed by
+  `python3 move-set/test_move_set_v2.py`. **`MSV_023`, reported and not
+  repaired at the reporter's instruction — provenance of the
+  known-answer registry:** 19 of the 20 commits touching
+  `tools/known_answer.py` are model-authored and the twentieth is a merge
+  authoring no case, so every expected value was written by one author
+  who also wrote the functions being checked; and measured rather than
+  asserted, comparing the earliest commit introducing `def <fn>` against
+  the earliest introducing its registration string, **16 same-commit, 8
+  implementation-first, 0 registered before the implementation existed**
+  — including the two seed cases the file's own docstring describes as
+  answers *"fixed in advance"*, both implementation-first. So the 26/26
+  is a **regression** result (every case agrees with the current
+  implementation, authored by the same party with knowledge of it) and
+  not a validation one; what would change that is an expected value
+  traceable to a source outside this repository, to a commit preceding
+  the implementation, or to a second author, and none of the 26 meets
+  any of the three. **`MSV_024`, surfaced by making that claim
+  checkable:** the move-set registrations were reachable only from the
+  module tail, so the CLI read `26/26 COMPLETE` while
+  `tests/test_known_answer_gate.py`'s clear-and-reseed lost both —
+  invisible until the two ids were added to that test's MANIFEST, and the
+  third instance of a registration whose call site is off the path that
+  matters (`MSV_013` here, `FMR_036` before it, and
+  `tools/sourced.registry_complete` exists because of the first).
+  `_halfwidth` is registered beside `coverage` with six cases, the
+  exponent and empty cases being where a default width would hide. **The
+  denominator reconciles as two lists moving by different amounts** —
+  `EXPECTED_METRICS` 25 → 26 (one id, `_halfwidth`) against the test
+  MANIFEST 24 → 26 (two, because `coverage` was already registered under
+  `MSV_013`'s repair and had never been manifested), so `25 + 2 = 27`
+  fails and the ordering table's 25 rows are the committed metrics at
+  measurement time with `_halfwidth` the uncommitted 26th. **`MSV_025`,
+  the repair moved to the level:** three occurrences all repaired per
+  instance, so `seed_reachable()` now closes a call graph from `seed` over
+  the module's own AST and requires every `register(...)` call site to sit
+  inside it (a module-level call is a violation by construction), with
+  `registration_sites_elsewhere()` as the second arm — a `register(...)`
+  in any other file cannot be reached by `seed()` at all, a visible zero —
+  both failing `python3 tools/known_answer.py` and both in the repo suite,
+  null-tested in four directions including transitivity, with the nested-def
+  limit stated in the function. **`MSV_026`:** the finding came from
+  neither suite — 157 module checks and 105 repo tests were green with the
+  defect standing — but from writing two ids into another file's manifest,
+  which is the repo's own finding mechanism and is now recorded under
+  `AUDIT_CONTRACT.md` rather than as an incident.
+  Twenty-six claims `MSV_001..026` in `CLAIM_TABLE_V2.md`. Stdlib only, parses under 3.9, CC0.
 - `clustering-axes/` — Six exploration routes for what AI agents cluster
   on when the axis is **not imported from human social science**, plus a
   model-free stylometric instrument for the cheapest of them. Both

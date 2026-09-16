@@ -1,0 +1,22 @@
+CHOICES -- points the order left open
+==============================================================
+[CHOICE 1] M6 is built BOTH ways. The order's move list makes it a sixth move; the order's OUTPUT section makes ABSENT a return available to every move. These are not exclusive, so both are implemented: M6 has its own trigger AND every move admits ABSENT.
+
+[CHOICE 2] The demo artifact is cited BY PATH and not copied. It is already in this repo. A copy is the drift MF_019 records seven times; a sha256 pin makes a change to the original detectable instead.
+
+[CHOICE 3] RETIRED. Was a relative recomputation tolerance of 5e-3, a stipulated constant standing in for a quantity the document already carries. Replaced by CHOICE 8. Ids are permanent, so this one is retired in place and not renumbered.
+
+[CHOICE 4] Coverage counts DISTINCT artifact lines. Overlapping searched ranges are counted once -- double-counting is where a coverage number inflates.
+
+[CHOICE 5] confidence is a free string. It is reported and enters NO score. Combining it with points would make one number out of two quantities (domain-ledger DL_001, METHOD_SPEC section 5).
+
+[CHOICE 6] An absence is verified OVER THE SPAN DECLARED. A narrow span is a weak absence and scores the same 1.0, so coverage is reported beside it and never folded in.
+
+[CHOICE 7] path_dependence REFUSES runs that do not declare distinct move orders. v1 returned 'claim holds' for two identical ledgers (MV_004). NOT_EVALUABLE is a third state, not a pass.
+
+[CHOICE 8] Shipped precision is parsed from each operand AS WRITTEN and propagated through the operation as an interval. A number written to 3 decimal places reports a quantity within +/-0.0005 of it. Containment is tested in decimal.Decimal, not float: the demo case is exact in decimal and fails by 1.3e-16 in float, and an epsilon chosen to cover that would be a second stipulated constant. sub/abs_sub/mul are exact; div carries context rounding at 28 significant digits, ~25 orders below any shipped precision.
+
+[CHOICE 9] An operand written with no decimal point takes half-width 0.5. That is the standard reading and it is WRONG for an exact count -- 68 peaks is 68, not 68 +/- 0.5 -- so the error runs toward NOT_EVALUABLE. Exponent form (1.2e3) is refused rather than read, since the half-width depends on the mantissa digits and the reading is not one rule.
+
+[CHOICE 10] The STATED value is read as a POINT, per the order's own wording. Widening it to its own shipped-precision band would only make containment MORE likely, so the choice is one-sided toward reporting a finding rather than toward suppressing one.
+
