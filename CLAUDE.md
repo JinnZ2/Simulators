@@ -8845,7 +8845,93 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `MV_004` sharper (eleven keys shuffled instead of six, and still no
   field recording which order was used) and `MV_005` narrower
   (`NO_FINDING` now admissible on two of eleven moves, still scoring
-  zero). Stdlib only, parses under 3.9, CC0.
+  zero).
+  **Second order, 2026-09-16** (`WORK_ORDER_V2.md`, verbatim): same six
+  moves, a different output shape (`move_id / finding / confidence / or
+  ABSENT(reason)`), and one repair. The order names the file
+  `move_set_sim.py`, which holds a delivered artifact that is never
+  edited, so the build lands beside it as `move_set_sim_v2.py` under the
+  supersession convention (`MSV_001`). **`MSV_003`, the repair and the
+  whole point: `MV_002` closes.** v1 checked two non-empty strings, so a
+  ledger carrying `"x"` in every blocker and unblocker scored 6.0 of 6.0;
+  the same shape here scores **0.0 of 6.0**, every row
+  `UNVERIFIED_NO_SPAN` with a stated reason, while an honest all-absence
+  ledger over the same artifact scores 6.0 — so it is not a module that
+  refuses everything. The mechanism is `ACL_012`/`ACL_017` (*a guard that
+  asks for prose can be satisfied with prose*): **every entry is checked
+  against the artifact** in one of three kinds — `QUOTE` (the ledger
+  supplies a line and a column range, the ARTIFACT supplies the value,
+  sliced out), `DERIVED` (operands sliced out and the stated arithmetic
+  recomputed, gated on the ledger's own `holds: true|false` declaration
+  **in both directions**, so a discrepancy stays reportable), `ABSENT`
+  (reason + searched span + sought token, and the scorer confirms the span
+  resolves and the token is not in it). Each earns 1.0, so a correctly
+  refused verdict scores as high as a bound one and neither scores on
+  prose alone. **`MSV_004`:** `tools/sourced.py` is **imported** and its
+  own stated limit is the layer added — it gates value/source/locator for
+  mutual consistency and says it does not check whether the source is
+  *true*, so a self-supplied `source_text` passes; `bind_quote()` resolves
+  the locator INTO the artifact and requires the cited text to be the
+  artifact's own line. **`MSV_002`:** the order's M6 (*refuse to score what
+  cannot be seen; make the absence a first-class value*) and the delivered
+  v1 M6 family (sequence gaps, negative space — absences IN the artifact)
+  are **different moves sharing an ordinal**; not exclusive, so both are
+  built (`CHOICE 1`) — M6 has its own artifact-side trigger AND all six
+  moves admit `ABSENT`. **The demo** runs on a public artifact already in
+  this repo, cited by path and sha256-pinned rather than copied
+  (`CHOICE 2`, the `MF_019` drift): `aperiodic-order-sim-stack/
+  SIM_STACK_REPORT.txt`. **`MSV_006`, the M4 finding:** the report states
+  the AB–Poisson finite-size baseline as **0.021** and ships both
+  dimensions that gap is between (AB 1.889, Poisson 1.911) — recomputed it
+  is **0.022**, one in the third decimal, and it is the denominator the
+  headline *"~15× larger"* ratio is taken over; whether 0.021 is the right
+  baseline at all is a reading and is not scored (`AOS_009` holds it is
+  the smallest of three pairwise gaps). **`MSV_007`, the M6 finding:** line
+  41's peak/floor ratio of 5537 has **no operands anywhere in the
+  artifact** — three of the document's four stated relationships recompute
+  from values it supplies and this one does not, so it is asserted rather
+  than checkable; not zero and not unknown. **`MSV_008`:** `MV_004`
+  repaired — `order` is a required ledger field, `read_ledger` refuses a
+  ledger without one and names `MV_004`, and `path_dependence` returns
+  `NOT_EVALUABLE` (a third state, not a pass) for fewer than two runs, for
+  zero runs, and for runs that do not declare distinct orders.
+  **`MSV_009`:** `MV_005` does not recur — there is no `NO_FINDING`
+  verdict, so no move scores zero for a clean read. **`MSV_011`:** the
+  demo ledger is model-authored and this repo already carries
+  `AOS_001..010` on the same artifact, so a contamination block prints
+  **before** the numbers naming both facts and `FLB_010` (*a self-run is
+  void as a capability score — the runner holds the key*); only the
+  mechanical layer is scored and no reading is. **`MSV_010`/`MSV_012`, the
+  two limits stated rather than repaired:** `coverage` (distinct lines
+  searched, overlaps counted once) is printed beside every verified
+  absence and **enters no arithmetic**, so an absence over 3% and one over
+  100% both score 1.0 and nothing separates a well-chosen narrow span from
+  a cherry-picked one — demonstrated directly, since the same token
+  verifies absent over lines 1-5 and is refuted over 1-92; and the sought
+  token list is a word list, named as one **at the point of use** (the
+  demo's M5 confidence field reads *"'control' is one word for the
+  thing"*). **`MSV_013`, two defects in this build, both found by
+  running:** the `tools/known_answer.py` registration landed **after a
+  `finally`** inside its own helper — dead code, registry one metric short,
+  the **second** instance of that shape there (`FMR_036` the first, and
+  `tools/sourced.registry_complete` exists because of it) — and the patch
+  adding the metric id to `EXPECTED_METRICS` matched its anchor a second
+  time inside an unrelated `register()` call in `seed()`; neither found by
+  reading. **`MSV_014`/`MSV_015`:** M4 and M6 reach the same place from two
+  sides on the demo and the overlap is recorded rather than repaired
+  (enforcing disjointness needs the cross-entry comparison the design
+  removes), and the demo ledger carries `note` and `_says`, two fields the
+  shipped `ledger_schema` does not declare — the `MF_017` shape arriving in
+  this build's own data file within one session of it being written.
+  **`MSV_016` UNVERIFIED and it covers the folder:** the move set has
+  never been run against any artifact by a party that did not write the
+  harness. `coverage` is registered in `tools/known_answer.py` with six
+  cases (the overlap case is the detector — summing range lengths returns
+  1.0 for two copies of one half; the empty case is where a zero hides,
+  since an undeclared span is no measurement); `move_set_sim_v2.py`
+  refuses `--selftest` (exit 2) and check count is printed by
+  `python3 move-set/test_move_set_v2.py`. Sixteen claims `MSV_001..016`
+  in `CLAIM_TABLE_V2.md`. Stdlib only, parses under 3.9, CC0.
 - `clustering-axes/` — Six exploration routes for what AI agents cluster
   on when the axis is **not imported from human social science**, plus a
   model-free stylometric instrument for the cheapest of them. Both

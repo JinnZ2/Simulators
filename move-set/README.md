@@ -128,3 +128,113 @@ where `ACL_012`'s repair lives), `reasoning-gate/` (a gate between a
 simulation and its conclusions), `observer-exclusion/` (the same wolf
 case from the lead-time side, `MV_008`), `null-harness/` (the
 known-null/known-signal invariant the scorer here is tested against).
+
+---
+
+## Second order, 2026-09-16
+
+`WORK_ORDER_V2.md`, landed verbatim. Same six moves, a different output
+shape, and one repair that is the whole point of the build.
+
+The order names the file `move_set_sim.py`. That name holds a delivered
+artifact which is never edited, so the build lands beside it as
+**`move_set_sim_v2.py`** — both inspectable, neither overwritten
+(`MSV_001`).
+
+### The repair
+
+    v1     verdict + blocker + unblocker          -> two non-empty strings
+           "x" / "x" in every field               -> 6.0 of 6.0   (MV_002)
+
+    v2     every entry checked AGAINST THE ARTIFACT
+           same shape, same words                 -> 0.0 of 6.0   (MSV_003)
+           an honest all-absence ledger           -> 6.0 of 6.0
+
+`adaptive-claim-loop` `ACL_012`/`ACL_017`: a guard that asks for prose can
+be satisfied with prose. The guards that hold ask for a number or a
+computation.
+
+### Three kinds of entry, one gate each
+
+| kind | what the ledger supplies | what the artifact supplies | earned verdict |
+|---|---|---|---|
+| `QUOTE` | line + column range | the value, sliced out | `BOUND` |
+| `DERIVED` | op, two operand locators, the stated value, `holds: true\|false` | the operands | `ARITHMETIC_AS_DECLARED` |
+| `ABSENT` | reason, searched span, sought token | the span, and whether the token is in it | `VERIFIED_ABSENCE` |
+
+Each scores **1.0**. A correctly-refused verdict scores as high as a
+correct one, and neither scores on prose alone.
+
+`ABSENT` is admitted by all six moves and is the whole subject of one
+(`CHOICE 1` — the order's move list and its OUTPUT section read two ways
+and the readings are not exclusive, so both are built). The delivered v1
+resolved the same word the other way, and its `M6_absence` family is a
+different move sharing an ordinal (`MSV_002`).
+
+`tools/sourced.py` is **imported**, not reimplemented. It gates value /
+source text / locator for mutual consistency and states itself that it
+does not check whether the source is true. `bind_quote()` is that missing
+layer: the locator resolves *into the artifact* and the cited text must be
+the artifact's own line (`MSV_004`).
+
+### The demo
+
+    artifact : aperiodic-order-sim-stack/SIM_STACK_REPORT.txt
+               already in this repo, cited by path, sha256-pinned,
+               NOT copied (CHOICE 2 -- a copy is the MF_019 drift)
+    ledger   : move-set/ledgers/sim_stack_report.json
+    run      : python3 move-set/move_set_sim_v2.py --demo
+
+Two findings, both recomputable by anyone with the artifact:
+
+**M4.** The report states the AB–Poisson finite-size baseline as
+**0.021** (line 23) and ships both dimensions that gap is between — AB
+1.889 (line 15), Poisson 1.911 (line 17). Recomputed: **0.022**. One in
+the third decimal, and it is the denominator the headline *"~15× larger"*
+ratio is taken over (`MSV_006`).
+
+**M6.** Line 41 reports a peak/floor ratio of 5537. The floor is on line
+40; **the peak height is nowhere in the artifact**. Three of the
+document's four stated relationships recompute from operands it supplies;
+this one does not, because its operands were not published. Not zero and
+not unknown (`MSV_007`).
+
+A contamination block prints **before** the numbers: the ledger was
+authored by the session that wrote the harness, this repo already carries
+`AOS_001..AOS_010` on the same artifact, and a self-run is void as a
+capability score (`FLB_010`). Only the mechanical layer is scored; no
+reading is (`MSV_011`).
+
+### What the order did not fix and this does
+
+`MV_004` — `order` is a required ledger field, `read_ledger` refuses a
+ledger without one, and `path_dependence` returns `NOT_EVALUABLE` rather
+than a pass for fewer than two runs, zero runs, or runs that do not
+declare distinct orders (`MSV_008`).
+
+`MV_005` — there is no `NO_FINDING` verdict. A clean read is a `QUOTE`
+citing the thing that checks out and scores like any other (`MSV_009`).
+
+### What it does not do
+
+`coverage` — distinct artifact lines searched, overlaps counted once — is
+printed beside every verified absence and **enters no arithmetic**. A
+verified absence over 3% and one over 100% both score 1.0, and nothing
+here separates a well-chosen narrow span from a cherry-picked one
+(`MSV_010`). The sought-token search is a word list and is named as one at
+the point of use (`MSV_012`).
+
+### Running it
+
+    python3 move-set/move_set_sim_v2.py                     # the six moves
+    python3 move-set/move_set_sim_v2.py --choices
+    python3 move-set/move_set_sim_v2.py --emit ARTIFACT --seed 7
+    python3 move-set/move_set_sim_v2.py --score LEDGER ARTIFACT
+    python3 move-set/move_set_sim_v2.py --demo
+    python3 move-set/move_set_sim_v2.py --paths RUN1 RUN2 ARTIFACT
+    python3 move-set/test_move_set_v2.py                    # check count printed
+
+`move_set_sim_v2.py` refuses `--selftest` (exit 2) rather than exiting
+clean on an invocation that runs nothing. `coverage` is registered in
+`tools/known_answer.py` with six cases; the overlap case is the detector.
+Claims `MSV_001..MSV_016` in `CLAIM_TABLE_V2.md`.

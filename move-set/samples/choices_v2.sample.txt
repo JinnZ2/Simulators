@@ -1,0 +1,16 @@
+CHOICES -- points the order left open
+==============================================================
+[CHOICE 1] M6 is built BOTH ways. The order's move list makes it a sixth move; the order's OUTPUT section makes ABSENT a return available to every move. These are not exclusive, so both are implemented: M6 has its own trigger AND every move admits ABSENT.
+
+[CHOICE 2] The demo artifact is cited BY PATH and not copied. It is already in this repo. A copy is the drift MF_019 records seven times; a sha256 pin makes a change to the original detectable instead.
+
+[CHOICE 3] Recomputation tolerance is RELATIVE 5e-3. The demo artifact rounds to 3-4 significant figures, so an exact test would report rounding as a failure.
+
+[CHOICE 4] Coverage counts DISTINCT artifact lines. Overlapping searched ranges are counted once -- double-counting is where a coverage number inflates.
+
+[CHOICE 5] confidence is a free string. It is reported and enters NO score. Combining it with points would make one number out of two quantities (domain-ledger DL_001, METHOD_SPEC section 5).
+
+[CHOICE 6] An absence is verified OVER THE SPAN DECLARED. A narrow span is a weak absence and scores the same 1.0, so coverage is reported beside it and never folded in.
+
+[CHOICE 7] path_dependence REFUSES runs that do not declare distinct move orders. v1 returned 'claim holds' for two identical ledgers (MV_004). NOT_EVALUABLE is a third state, not a pass.
+

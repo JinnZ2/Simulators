@@ -627,6 +627,7 @@ EXPECTED_METRICS = (
     "internal-reference-boundary/radials.py::effective_origins",
     "internal-reference-boundary/radials.py::sanction_ratio_point",
     "model-deprecation-backcast/null_check.py::lag_of_peak",
+    "move-set/move_set_sim_v2.py::coverage",
     "nonidentity-census/t6_window_declaration.py::decided_by_tracks_window",
     "nonidentity-census/t6_window_declaration.py::marginal_majority (REPLACED)",
     "null-harness/null_harness.py::_verdict",
@@ -1321,6 +1322,56 @@ def _fmr_fraction_cap(n_other, fraction):
         return mod.fraction_cap(n_other, fraction)
     finally:
         sys.path.pop(0)
+
+
+
+def _msv_coverage(which):
+    """move-set/move_set_sim_v2.py::coverage, imported. Distinct artifact
+    lines searched over total lines. The expected values are computed by
+    hand from a 10-line artifact, not read off the implementation. The
+    OVERLAP case is where an error hides -- summing range lengths instead
+    of counting distinct lines returns 1.0 for two copies of the same
+    half -- and the EMPTY case is where a zero hides, since an undeclared
+    span is no measurement and not zero coverage."""
+    import importlib.util
+    path = os.path.join(ROOT, "move-set", "move_set_sim_v2.py")
+    sys.path.insert(0, os.path.dirname(path))
+    try:
+        spec = importlib.util.spec_from_file_location("_msv2", path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        art = {"path": "<synthetic>", "text": "", "lines": ["x"] * 10,
+               "n_lines": 10, "sha256": ""}
+        looked = {"whole": [[1, 10]], "half": [[1, 5]],
+                  "overlap": [[1, 5], [1, 5]], "two_thirds": [[1, 5], [4, 8]],
+                  "empty": [], "bad": [[1, 99]]}[which]
+        return mod.coverage(art, looked)
+    finally:
+        sys.path.pop(0)
+
+
+def _seed_move_set():
+    """Registered from the module tail with the other late additions."""
+    register(
+        "move-set/move_set_sim_v2.py::coverage",
+        _msv_coverage,
+        [case("whole artifact", ("whole",), 1.0,
+              "10 of 10 distinct lines searched"),
+         case("half", ("half",), 0.5, "5 of 10 distinct lines"),
+         case("overlap counted once", ("overlap",), 0.5,
+              "[1,5] twice is still 5 distinct lines. Summing range "
+              "lengths would return 1.0 -- this case is the detector"),
+         case("two overlapping ranges", ("two_thirds",), 0.8,
+              "lines 1-5 and 4-8 is {1..8}, 8 of 10"),
+         case("nothing declared is None", ("empty",), None,
+              "an undeclared span is no measurement. 0.0 would put it on "
+              "the same scale as a search that found nothing"),
+         case("a span outside the artifact is None", ("bad",), None,
+              "the span does not resolve, so no coverage was measured")],
+        note="the overlap and empty cases are the two where an error hides")
+
+
+_seed_move_set()
 
 
 def completeness():
