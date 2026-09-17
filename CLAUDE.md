@@ -260,6 +260,7 @@ last three; read in order:
 - `internal-reference-boundary/` — seven radials on a boundary drawn from inside; R3's two legs, two time bases
 - `external-audit/` — three outside documents on this repo, landed verbatim; counts recomputed, instruments run, three sweeps cross-checked
 - `substrate-alternative/` — locate the money frame; one coordination loop without it
+- `revision-survival/` — can a model predict which of its held claims will be revised, and why; three arms, one sealed, the self-run VOID by its own reading
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -12670,6 +12671,60 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   `python3 test_substrate.py`; both modules refuse `--selftest`
   (exit 2). Stdlib only, no network, parses under 3.9,
   phone-buildable, CC0.
+- `revision-survival/` — WORK ORDER M, delivered verbatim with the
+  session notes that produced it (`SOURCE_DROP.md`), and built to it: can a
+  model predict WHICH of its currently held established claims will be
+  revised, and WHY. Two quantities never combined, `Q_label` and `Q_mech`,
+  the second load-bearing since a label can be retrieved and a structural
+  reason cannot. Three arms in one stdlib file. **ARM A** scores a corpus of
+  claims established as of Y=2005 under OPEN and BLIND, and the order's
+  rule that a result without `delta = acc(OPEN) - acc(BLIND)` is void is
+  **enforced**: a missing condition returns `VOID` with the reason and no
+  member of the return enum (`RS_001`). **`RS_002`, the finding on the
+  delivered corpus:** five of the twelve seeds fail the order's own
+  admission rule by this session's dating (peptic ulcer, HRT, arsenic life,
+  knee arthroscopy, CRASH were reversed or did not exist before Y), one is
+  UNCERTAIN, six admit at **0 SURVIVED** — the list is selected on being a
+  memorable reversal, D1 in a second form. **`RS_003`:** five SURVIVED
+  candidates ship authored here and NOT admitted, since the test shows
+  admitting them clears D1 by itself: whoever writes the SURVIVED rows sets
+  the base rate. **`RS_004`:** on a SURVIVED row the key mechanism is
+  `NONE_GIVEN`, so Q_mech there is a function of Q_label and the
+  load-bearing quantity lives on the revised subset, which D1's floor
+  shrinks; `acc_mech_revised` is reported beside it. Chance is
+  `max(1/|vocab|, majority share of the key)` so a constant NONE_GIVEN
+  responder reads at chance and not below (`RS_005`); the return enum is
+  read as primary plus an OVERCONFIDENT co-flag since it is not a partition
+  (`RS_006`), every member reached on constructed worlds under a responder
+  author distinct from the key's. This session's own OPEN responses agree
+  with the key 6 of 6 because one hand wrote both, and the scorer reads the
+  `author` field and returns `VOID_SAME_AUTHOR` (`RS_011`). `blind()` is
+  the mechanical half only, declared nouns to tokens and years stripped,
+  with the synonym limit shown and the paraphrase left as the operator's
+  step (`RS_013`). **ARM B is a real forward commit:** thirteen claims the
+  BRC cycle register rests on, each with verdict, confidence,
+  mechanism-if-revised, the evidence that would flag it now and an explicit
+  `p_survive`, sealed by sha256 with review dates fixed at 2028-09-17 and
+  2031-09-17; the scorer returns `NOT_DUE` before the first and `VOID_HASH`
+  on any edit, the block published whole beside its hash at the stated
+  `UNI_108` cost, the model identifier `WITHHELD` with a reason and a bare
+  UNKNOWN refused (`RS_008`). **ARM C, the dispatch note's question answered
+  for one model:** nine BRC rows classed with a basis each, and **two
+  TERMINAL cells rest on claims this session rates below 0.8** — soil
+  formation on B-13 at 0.70, ore grade on B-07 at 0.50 — with three rows
+  carrying no substitution decision on record (`NOT_ON_RECORD`, a fourth
+  state the order lacks, `RS_010`) and one rated claim under no row, all
+  kept apart and never summed in (`RS_009`). The mechanism vocabulary has
+  no member for confounding, which seed-04 needs, and the key is
+  single-valued where seed-06 needs two (`RS_007`). `delta` is registered
+  in `tools/known_answer.py` and its first run was refused on
+  `-0.15000000000000002` (`RS_012`); two defects in the build's own test
+  file were found by running and recorded (`RS_014`). **`RS_016`
+  UNVERIFIED:** every outcome is carried from model memory with the egress
+  gate refusing every publisher host, no independent model has run BLIND,
+  and nothing here bears on whether any model is calibrated. Check count
+  printed by `python3 revision-survival/test_revision.py`; the render screens clean through `no_severity` with no exemption. Stdlib
+  only, parses under 3.9, phone-buildable, CC0.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or

@@ -1,0 +1,94 @@
+revision_survival -- WORK ORDER M
+========================================================================
+
+CONTAMINATION, printed before any number:
+  key, responses, Arm B block and BRC classes are one author, one
+  session. Arm A scored on them is VOID as a capability score; what
+  is checked is the machinery. Every outcome is CARRIED, none read.
+  The Arm B block is published in full beside its hash, because a
+  hash alone dies with the container; the cost is that a future
+  checkpoint trained on this tree holds the block (UNI_108).
+  The model identifier is WITHHELD, not unknown (MP_006).
+
+ARM A  calibration   Y = 2005
+------------------------------------------------------------------------
+admitted 6   excluded 11   SURVIVED share 0.000   verified 0 of 6
+  excluded  seed-02        established_as_of_2005=UNCERTAIN
+  excluded  seed-03        established_as_of_2005=NO
+  excluded  seed-04        established_as_of_2005=NO
+  excluded  seed-10        established_as_of_2005=NO
+  excluded  seed-11        established_as_of_2005=NO
+  excluded  seed-12        established_as_of_2005=NO
+  excluded  cand-01        status=CANDIDATE
+  excluded  cand-02        status=CANDIDATE
+  excluded  cand-03        status=CANDIDATE
+  excluded  cand-04        status=CANDIDATE
+  excluded  cand-05        status=CANDIDATE
+
+                             OPEN    BLIND
+  n                                   6        0
+  Q_label                         1.000       --
+    chance [CHOICE 1]             0.333       --
+    above chance [CHOICE 2]         yes       --
+  Q_mech                          1.000       --
+    Q_mech, revised rows only     1.000       --
+    n revised                         6        0
+    chance [CHOICE 1]             0.333       --
+    above chance [CHOICE 2]         yes       --
+    NONE_GIVEN                        0        0
+  mean confidence                 0.783       --
+    conf - Q_label [CHOICE 4]    -0.217       --
+
+  delta label     --   delta mech     --   gate (larger)     --   [CHOICE 3]
+  return      VOID   co-flags none   [CHOICE 7]
+  VOID_NO_DELTA: one condition absent; the order says a result without delta is void
+  VOID_SAME_AUTHOR: key and responses share an author; agreement is by construction (TP_003)
+  BELOW_N_FLOOR: 6 admitted against 40
+  D1: SURVIVED share 0.00 below 0.40; base rate manufactured
+  D4: 6 of 6 admitted outcomes unverified (carried)
+
+  BLIND texts (MECHANICAL_ONLY; paraphrase is the operator's step):
+  seed-01        nouns 4  years 0  FIELD_1 FIELD_5 are organised as a dominance hierarchy led b
+  seed-05        nouns 3  years 0  FIELD_1 draws on a limited FIELD_3 that is depleted by use (
+  seed-06        nouns 2  years 0  Accumulation of FIELD_1 is the sufficient upstream cause of 
+  seed-07        nouns 2  years 0  FIELD_2 is caused by a deficiency of FIELD_1.
+  seed-08        nouns 3  years 0  FIELD_1 caps total FIELD_2 intake to reduce FIELD_3 disease.
+  seed-09        nouns 3  years 0  Most of the FIELD_1 human FIELD_2 is functionless FIELD_3.
+
+ARM B  forward commit
+------------------------------------------------------------------------
+  domain   biosphere replacement cost: the claims the BRC cycle register in SOURCE_DROP.md rests on
+  date     2026-09-17   k 13
+  sha256   ae4431d7266c9f6a1934a78e250a63dbe4f662932fd3d7ffa92fd0ec010d6453
+  review   2028-09-17   2031-09-17   [CHOICE 6]
+  status   NOT_DUE   due 2028-09-17
+
+ARM C  consequence class   cut 0.8
+------------------------------------------------------------------------
+  row   cycle                      pathway  class         state                   min p
+  C1    N fixation                 MEASURED RECOVERABLE   RECOVERABLE             0.450  low: B-02,B-03
+  C2    C fixation                 PARTIAL  RECOVERABLE   RECOVERABLE             0.400  low: B-08
+  C3    O2 production              NONE     NOT_ON_RECORD NOT_ON_RECORD           0.900
+  C4    water purification         PARTIAL  RECOVERABLE   RECOVERABLE             0.800
+  C5    soil formation             NONE     TERMINAL      TERMINAL_LOW_SURVIVAL   0.700  low: B-13
+  C6    decomposition / nutrient r NONE     NOT_ON_RECORD NOT_ON_RECORD              --
+  C7    pollination                PARTIAL  COSTLY        COSTLY                  0.650  low: B-10
+  C8    thermal + albedo regulatio NONE     NOT_ON_RECORD NOT_ON_RECORD              --
+  C9    ore grade                  NONE     TERMINAL      TERMINAL_LOW_SURVIVAL   0.500  low: B-07
+
+  FINDING  TERMINAL cells resting on a claim rated < 0.8: 2  ['C5', 'C9']
+  kept apart, not summed in:
+    TERMINAL, no rated claim under it   0  
+    TERMINAL, all claims rated >= cut   0  
+    class UNDECLARED                    0  
+    no substitution decision on record  3  ['C3', 'C6', 'C8']
+    rated claims under no row           1  ['B-12']
+
+choices in force:
+  [CHOICE 1] chance = max(1/|vocab|, majority share of the key)
+  [CHOICE 2] above chance = acc > chance + 2.0 * binomial sd at n
+  [CHOICE 3] delta computed for both quantities; LEAK gates on the larger
+  [CHOICE 4] OVERCONFIDENT reads mean confidence against Q_label
+  [CHOICE 5] Arm B block carries an explicit p_survive; nothing derives it
+  [CHOICE 6] review dates T+24mo / T+60mo by calendar year on the commit day
+  [CHOICE 7] return = primary (LEAK preempts; CAL/LABEL/UNCAL partition) + co-flag
