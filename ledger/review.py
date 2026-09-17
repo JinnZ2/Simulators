@@ -68,6 +68,7 @@ RUNS = os.path.join(HERE, "reviews", "RUNS.jsonl")
 EXPLAINED = os.path.join(HERE, "reviews", "EXPLAINED.jsonl")
 REVIEWS = os.path.join(HERE, "reviews", "REVIEWS.jsonl")
 OVERRIDES = os.path.join(HERE, "OVERRIDES.md")
+T0 = os.path.join(HERE, "reviews", "T0.txt")
 DISAGREEMENTS = os.path.join(HERE, "DISAGREEMENTS.md")
 
 UNRECORDED = "UNRECORDED"
@@ -152,13 +153,50 @@ def read_jsonl(path: str) -> Tuple[List[Dict[str, Any]], List[str]]:
     return rows, bad
 
 
-def clocks(runs: Sequence[Dict[str, Any]]) -> Dict[str, Optional[str]]:
-    """T under both readings. See [CHOICE 7] in ledger.py."""
+# T+3 and T+9 computed from the DATE THE ORDER WAS WRITTEN rather than
+# from T. They are wrong while the clock has not started, they are in
+# circulation, and they are named here so nobody carries them forward by
+# accident. review.py computes the real pair from T0.txt and from nothing
+# else.
+SUPERSEDED_DATES = {"order_date": "2026-09-16",
+                    "t3": "2026-10-07", "t9": "2026-11-18"}
+
+
+def read_t0(path: str = T0) -> Optional[str]:
+    """T, as written by the run that started the clock. The authority."""
+    if not os.path.isfile(path):
+        return None
+    text = open(path, encoding="utf-8").read().strip().splitlines()
+    if not text:
+        return None
+    try:
+        datetime.date.fromisoformat(text[0].strip())
+    except ValueError:
+        return None
+    return text[0].strip()
+
+
+def clocks(runs: Sequence[Dict[str, Any]],
+           t0_path: str = T0) -> Dict[str, Optional[str]]:
+    """T from T0.txt, with the run log as a cross-check, never merged.
+
+    T0.txt is the authority: it is written once, by the run that started
+    the clock, and never overwritten. The run log's first
+    non-empty-record date is computed separately and reported beside it,
+    because a run over records that all declare themselves CONSTRUCTED is
+    a non-empty record set that does NOT start the clock, and the two
+    readings coming apart is a finding rather than something to average.
+    """
     dates = sorted(r.get("date") for r in runs if r.get("date"))
-    with_recs = sorted(r.get("date") for r in runs
-                       if r.get("date") and (r.get("records") or 0) > 0)
-    return {"t_any": dates[0] if dates else None,
-            "t_records": with_recs[0] if with_recs else None}
+    real = sorted(r.get("date") for r in runs
+                  if r.get("date") and (r.get("records") or 0) > 0
+                  and not r.get("all_constructed"))
+    t0 = read_t0(t0_path)
+    from_runs = real[0] if real else None
+    return {"t": t0,
+            "t_any": dates[0] if dates else None,
+            "t_from_runs": from_runs,
+            "disagree": bool(t0 and from_runs and t0 != from_runs)}
 
 
 def exposure(runs: Sequence[Dict[str, Any]]) -> Dict[str, Any]:
@@ -200,6 +238,25 @@ def disagreement_state(runs_path: str = RUNS,
             "parse_errors": bad}
 
 
+def review_dates(t: Optional[str], c: Dict[str, Any]) -> Dict[str, Any]:
+    """T+3 and T+9, computed FROM T. Absent T, there are no dates.
+
+    The pair that was computed from the order date is named as superseded
+    rather than left out: a wrong number in circulation with nothing
+    contradicting it stays in circulation.
+    """
+    if not t or not c.get("ok"):
+        return {"t": t, "t3": None, "t9": None,
+                "superseded": dict(SUPERSEDED_DATES)}
+    d = datetime.date.fromisoformat(t)
+    return {
+        "t": t,
+        "t3": (d + datetime.timedelta(weeks=c["t3_weeks"])).isoformat(),
+        "t9": (d + datetime.timedelta(weeks=c["t9_weeks"])).isoformat(),
+        "superseded": dict(SUPERSEDED_DATES),
+    }
+
+
 def weeks_since(t: Optional[str], today: str) -> Optional[float]:
     if not t:
         return None
@@ -213,7 +270,8 @@ def weeks_since(t: Optional[str], today: str) -> Optional[float]:
 
 def verdict(today: Optional[str] = None, runs_path: str = RUNS,
             explained_path: str = EXPLAINED,
-            addendum_path: str = ADDENDUM) -> Dict[str, Any]:
+            addendum_path: str = ADDENDUM,
+            t0_path: str = T0) -> Dict[str, Any]:
     today = today or datetime.date.today().isoformat()
     c = criterion(addendum_path)
     if not c["ok"]:
@@ -222,12 +280,13 @@ def verdict(today: Optional[str] = None, runs_path: str = RUNS,
     runs, run_bad = read_jsonl(runs_path)
     exp = exposure(runs)
     dis = disagreement_state(runs_path, explained_path)
-    t = clocks(runs)
-    wk = weeks_since(t["t_records"], today)
+    t = clocks(runs, t0_path)
+    wk = weeks_since(t["t"], today)
 
     out: Dict[str, Any] = {
         "today": today, "criterion": c, "exposure": exp,
         "disagreements": dis, "clocks": t, "weeks_since_t": wk,
+        "dates": review_dates(t["t"], c),
         "run_parse_errors": run_bad,
     }
 
@@ -282,13 +341,123 @@ def verdict(today: Optional[str] = None, runs_path: str = RUNS,
 
     out["verdict"] = "NOT_YET_DUE" if wk is not None else "CLOCK_NOT_STARTED"
     out["why"] = (
-        ["T is the first run over a non-empty record set and there has "
-         "not been one. The clock has not started."]
+        ["T is the first run over a non-empty record set whose records "
+         "are not all CONSTRUCTED, and there has not been one. The clock "
+         "has not started, so T+3 and T+9 have no values yet."]
         if wk is None else
         ["%.1f weeks since T; the next decision point is T+%d"
          % (wk, c["keep_by_weeks"] if wk < c["keep_by_weeks"]
             else c["drop_by_weeks"])])
     return out
+
+
+# ------------------------------------ the second channel: git, uncooperative
+
+def git(args: Sequence[str], cwd: str) -> Tuple[int, str]:
+    try:
+        p = subprocess.run(["git"] + list(args), cwd=cwd,
+                           capture_output=True, text=True, timeout=60)
+    except (OSError, subprocess.SubprocessError) as e:
+        return 127, str(e)
+    return p.returncode, p.stdout
+
+
+def git_reachable(cwd: str = HERE) -> Tuple[bool, str]:
+    rc, out = git(["rev-parse", "--show-toplevel"], cwd)
+    if rc != 0 or not out.strip():
+        return False, "git history is not reachable from %s" % cwd
+    return True, out.strip()
+
+
+def override_inferred(runs_path: str = RUNS, cwd: str = HERE,
+                      overrides_rel: str = "ledger/OVERRIDES.md"
+                      ) -> Dict[str, Any]:
+    """Overrides read out of git history. No cooperation required.
+
+    A red exit, then a commit touching a path the red flagged, with no
+    OVERRIDES.md entry in between. That is an override that nobody logged,
+    and it is visible without anybody agreeing to be visible -- which is
+    what the declared channel cannot be.
+
+    IT IS NEVER MERGED WITH THE DECLARED COUNT. One is what people said,
+    the other is what the history shows; they answer different questions
+    and a sum of them answers neither. This one has its own floor and its
+    own ceiling: a red acted on outside git leaves nothing here, and a
+    commit that touches a flagged path for an unrelated reason is counted
+    when it should not be. It is a different instrument, not a better one.
+
+    If git history is not reachable this returns GIT_UNREACHABLE and
+    stops. It does not approximate one.
+    """
+    ok, root = git_reachable(cwd)
+    if not ok:
+        return {"status": "GIT_UNREACHABLE", "reason": root,
+                "inferred": None}
+
+    runs, _ = read_jsonl(runs_path)
+    if not runs:
+        # An empty or unreadable run log yields inferred 0, which reads
+        # exactly like a clean history. Found by a test whose constructed
+        # repo checked its own run log away: the channel reported 0
+        # overrides over 0 runs and looked like agreement.
+        return {"status": "NO_RUNS", "root": root, "reds": 0,
+                "inferred": None,
+                "reason": "no runs in %s: nothing to correlate against, "
+                          "which is not the same as nothing to find"
+                          % os.path.basename(runs_path),
+                "rows": [], "logged": 0, "logged_rows": [],
+                "uncorrelatable": [], "no_flagged_paths": []}
+    reds = [r for r in runs if r.get("diffs_fired")]
+    inferred: List[Dict[str, Any]] = []
+    uncorrelatable: List[Dict[str, Any]] = []
+    no_paths: List[str] = []
+    logged: List[Dict[str, Any]] = []
+
+    for r in reds:
+        sha = r.get("commit")
+        if not sha:
+            uncorrelatable.append({"date": r.get("date"),
+                                   "why": "no commit recorded for this run"})
+            continue
+        rc, _ = git(["merge-base", "--is-ancestor", sha, "HEAD"], root)
+        if rc != 0:
+            uncorrelatable.append(
+                {"date": r.get("date"), "commit": sha,
+                 "why": "not an ancestor of HEAD; history was rewritten or "
+                        "the run was on another branch"})
+            continue
+        paths = r.get("flagged_paths") or []
+        if not paths:
+            no_paths.append(r.get("date") or "?")
+            continue
+        rc, out = git(["log", "--format=%H", "%s..HEAD" % sha, "--"]
+                      + list(paths), root)
+        if rc != 0:
+            uncorrelatable.append({"date": r.get("date"), "commit": sha,
+                                   "why": "git log failed"})
+            continue
+        touching = [line.strip() for line in out.splitlines() if line.strip()]
+        if not touching:
+            continue
+        first = touching[-1]                      # git log is newest first
+        rc, out2 = git(["log", "--format=%H", "%s..%s" % (sha, first), "--",
+                        overrides_rel], root)
+        entry = [x for x in out2.splitlines() if x.strip()] if rc == 0 else []
+        row = {"red_date": r.get("date"), "red_commit": sha,
+               "touching_commit": first, "paths": paths,
+               "diffs": r.get("diffs_fired")}
+        if entry:
+            row["overrides_entry"] = entry[-1]
+            logged.append(row)
+        else:
+            inferred.append(row)
+
+    return {"status": "OK", "root": root,
+            "reds": len(reds),
+            "inferred": len(inferred), "rows": inferred,
+            "logged": len(logged), "logged_rows": logged,
+            "uncorrelatable": uncorrelatable,
+            "no_flagged_paths": no_paths}
 
 
 # ------------------------------------------------------------------ bulk
@@ -374,13 +543,30 @@ def render(v: Dict[str, Any], b: Dict[str, Any],
     a("  a zero here is the reading, not the absence of one")
     a("")
     c = v.get("clocks") or {}
+    dt = v.get("dates") or {}
     a("CLOCK")
     a("-" * 70)
-    a("  T, first run over records     %s" % (c.get("t_records") or "none"))
-    a("  first run of any kind         %s" % (c.get("t_any") or "none"))
+    a("  T   (reviews/T0.txt)          %s" % (c.get("t") or "NOT STARTED"))
+    a("  T+3                           %s" % (dt.get("t3") or "--"))
+    a("  T+9                           %s" % (dt.get("t9") or "--"))
     a("  weeks since T                 %s"
       % ("--" if v.get("weeks_since_t") is None
          else "%.1f" % v["weeks_since_t"]))
+    a("  first run of any kind         %s" % (c.get("t_any") or "none"))
+    a("  first real-record run, from the run log  %s"
+      % (c.get("t_from_runs") or "none"))
+    if c.get("disagree"):
+        a("  !! T0.txt and the run log disagree about T. Reported, not")
+        a("     averaged. T0.txt is the authority; the run log is the")
+        a("     cross-check, and the two coming apart is a finding.")
+    sup = dt.get("superseded") or {}
+    a("")
+    a("  SUPERSEDED, do not use: T+3 %s and T+9 %s were computed from the"
+      % (sup.get("t3"), sup.get("t9")))
+    a("  order date %s, not from T. They are wrong while the clock has"
+      % sup.get("order_date"))
+    a("  not started, and they are named here because a wrong number in")
+    a("  circulation with nothing contradicting it stays in circulation.")
     a("")
     a("BULK")
     a("-" * 70)
@@ -397,16 +583,60 @@ def render(v: Dict[str, Any], b: Dict[str, Any],
     last = reviews[-1] if reviews else {}
     a("  findings no other check found   %s"
       % last.get("unique_findings", UNRECORDED))
-    a("  ledger reds overridden/ignored  %s"
-      % last.get("overrides", UNRECORDED))
     a("")
-    a("  The override count is the addendum's own stated real signal and")
-    a("  it is the one quantity this instrument cannot observe. An")
-    a("  override happens outside the ledger and leaves no trace in it, so")
-    a("  a gate that is routinely overridden and one that never is look")
-    a("  identical from here. UNRECORDED is kept apart from 0; see")
-    a("  ledger/OVERRIDES.md, which exists so the count can ever be a")
-    a("  number.")
+    a("OVERRIDES -- TWO CHANNELS, NEVER MERGED")
+    a("-" * 70)
+    a("  DECLARED (self-reported)        %s"
+      % last.get("overrides", UNRECORDED))
+    a("    SELF-REPORTED. An unlogged override is indistinguishable from")
+    a("    no override. Once nonzero this is a FLOOR, not a measurement.")
+    a("    UNRECORDED means no basis was declared, not zero.")
+    a("")
+    oi = v.get("override_inferred") or {}
+    if oi.get("status") == "GIT_UNREACHABLE":
+        a("  INFERRED                        NOT AVAILABLE")
+        a("    %s" % oi.get("reason"))
+        a("    Not approximated. There is no second reading.")
+    elif oi.get("status") == "NO_RUNS":
+        a("  INFERRED                        NO RUNS")
+        a("    %s" % oi.get("reason"))
+    else:
+        a("  INFERRED (git history)          %s" % oi.get("inferred"))
+        a("    red exits: %s   of which logged in OVERRIDES.md: %s"
+          % (oi.get("reds"), oi.get("logged")))
+        for row in (oi.get("rows") or [])[:10]:
+            a("    %s %s -> %s  %s"
+              % (row["red_date"], (row["red_commit"] or "")[:8],
+                 row["touching_commit"][:8], ",".join(row["paths"])[:40]))
+        if oi.get("uncorrelatable"):
+            a("    UNCORRELATABLE: %d red run(s)"
+              % len(oi["uncorrelatable"]))
+            for u in oi["uncorrelatable"][:5]:
+                a("      %s  %s" % (u.get("date"), u.get("why")))
+        if oi.get("no_flagged_paths"):
+            a("    red runs flagging no path: %d"
+              % len(oi["no_flagged_paths"]))
+        a("    Its own floor and ceiling: a red acted on outside git leaves")
+        a("    nothing here, and a commit touching a flagged path for an")
+        a("    unrelated reason is counted when it should not be. A")
+        a("    different instrument, not a better one.")
+    a("")
+    a("  The two numbers above are reported side by side and are never")
+    a("  added, averaged or reconciled. One is what people said; the")
+    a("  other is what the history shows.")
+    a("")
+    a("  ADDENDUM.md names the override count as the real signal: a gate")
+    a("  that gets routinely overridden has become bulk regardless of what")
+    a("  it catches. The declared channel cannot observe it -- an override")
+    a("  happens outside the ledger and leaves no trace in it, so a gate")
+    a("  routinely overridden and one never overridden look identical from")
+    a("  inside the gate. OVERRIDES.md exists so the count can ever be a")
+    a("  number at all.")
+    a("")
+    a("  The inferred channel does not close that gap. It observes a")
+    a("  DIFFERENT quantity -- a signature in the history -- which")
+    a("  overlaps the one the addendum asks for and is not it. That is")
+    a("  why the two are reported apart.")
     a("")
     a("REVIEWS RECORDED: %d" % len(reviews))
     for r in reviews:
@@ -450,6 +680,7 @@ def record_review(args, v: Dict[str, Any], b: Dict[str, Any]) -> int:
         "unique_findings": args.unique_findings,
         "unique_findings_basis": args.unique_findings_basis,
         "bulk": b,
+        "override_inferred": v.get("override_inferred"),
     }
     os.makedirs(os.path.dirname(REVIEWS), exist_ok=True)
     with open(REVIEWS, "a", encoding="utf-8") as fh:
@@ -507,6 +738,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
     before = addendum_hash()
     v = verdict(args.today)
+    v["override_inferred"] = override_inferred()
     b = bulk(args.records, args.time)
     reviews, _ = read_jsonl(REVIEWS)
     print(render(v, b, reviews))

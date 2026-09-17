@@ -3,6 +3,18 @@
 Three append-only records feeding `ledger/review.py`, which computes
 `ADDENDUM.md`'s criterion. Nothing here is ever edited or pruned.
 
+## T0.txt
+
+`T`, one ISO date, written by the first run over a non-empty record set
+whose records are not all `CONSTRUCTED`. Written once, **never
+overwritten** -- `T` is a fact about when the clock started, and a second
+write would move a date `ADDENDUM.md` fixes in advance. `T+3` and `T+9` are
+computed from it and from nothing else.
+
+Absent, the verdict is `CLOCK_NOT_STARTED` and there are no review dates.
+`review.py` emits none rather than falling back on the pair computed from
+the order date, which is wrong and is named as superseded on every run.
+
 ## RUNS.jsonl
 
 One line per `ledger.py` run, written by the ledger itself unless
@@ -11,6 +23,14 @@ count, the cross-ledger status, and `cobc --version` when there is a
 compiler. Machine and compiler are recorded because the addendum counts
 exposure in *distinct machines or compiler versions* and neither is
 recoverable after the fact from a run that did not write it down.
+
+It also records the HEAD `commit` and the `flagged_paths` a red flagged,
+which is what makes the inferred override channel computable: without a
+commit anchor per run a red can be correlated with a later commit only by
+date, and a date is not an ordering. A row without one is reported
+`UNCORRELATABLE`, never correlated approximately. `all_constructed` marks
+a run over records that all declare themselves `CONSTRUCTED`; such a run
+does not start the clock.
 
 **A run whose `cross_ledger` is `UNAVAILABLE` is not a completed
 cross-ledger run.** It contributes no exposure. Counting it would let the

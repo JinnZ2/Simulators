@@ -15,9 +15,24 @@ So the count is a **declared** field. Without a place to declare it, it
 would read `UNRECORDED` forever, and the addendum's own strongest term
 would be unreachable by construction.
 
+## The floor
+
+**This count is SELF-REPORTED. An unlogged override is
+indistinguishable from no override. Once nonzero, the count is a
+FLOOR, not a measurement. UNRECORDED means no basis was declared, not
+zero.**
+
 `UNRECORDED` is not `0`. A review recording `0` is saying nobody
-overrode a red. A review recording `UNRECORDED` is saying nobody
-counted. `review.py --record` refuses either without a stated basis.
+overrode a red -- which is itself self-reported, and is the reading
+an unlogged override also produces. A review recording `UNRECORDED`
+is saying nobody counted. `review.py --record` refuses either without
+a stated basis.
+
+`review.py` reports a second, uncooperative channel beside this one:
+`OVERRIDE_INFERRED`, read out of git history without anyone logging
+anything. **The two numbers are never merged.** One is what people
+said; the other is what the history shows. They answer different
+questions and a sum of them would answer neither.
 
 ## Entries
 

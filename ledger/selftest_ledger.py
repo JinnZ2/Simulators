@@ -557,14 +557,33 @@ def structural():
     for banned in ("perf_counter", "monotonic", "process_time", "clock"):
         ck("the ledger does not time anything (%s)" % banned,
            banned not in names)
-    ck("only the cobol bridge starts a process",
-       "run" in names and "Popen" not in names)
-    sub = [name for name, text in src.items()
-           if "subprocess" in {n.names[0].name
-                               for n in ast.walk(ast.parse(text))
-                               if isinstance(n, ast.Import)}]
-    ck("subprocess is imported by the cobol bridge alone",
-       sub == ["cobol_ledger/bridge.py"], sub)
+    ck("nothing reaches for Popen", "Popen" not in names)
+    # The rule is about WHAT is started, not about who imports subprocess.
+    # ledger.py runs `git rev-parse` for the run log's commit anchor, which
+    # is a read of the history and not a sim. Asserted from the argv
+    # literal at each call site rather than from the import.
+    for name, text in src.items():
+        argv0 = []
+        for n in ast.walk(ast.parse(text)):
+            if isinstance(n, ast.Call) and getattr(n.func, "attr", "") \
+                    == "run" and n.args:
+                first = n.args[0]
+                if isinstance(first, ast.List) and first.elts:
+                    e = first.elts[0]
+                    if isinstance(e, ast.Constant):
+                        argv0.append(str(e.value))
+                    else:
+                        argv0.append("<computed>")
+        if name == "ledger.py":
+            ck("ledger.py starts git and nothing else",
+               all(x == "git" for x in argv0), argv0)
+        elif name == "cobol_ledger/bridge.py":
+            ck("the bridge starts the compiler and the built program",
+               all(x in ("<computed>", "git") or x.endswith("cobc")
+                   for x in argv0) or argv0 == ["<computed>"] * len(argv0),
+               argv0)
+        else:
+            ck("%s starts no process" % name, argv0 == [], argv0)
 
     # The plant: the AST scan has to be able to fire.
     planted = ast.parse("def f():\n    return float('1')\n")
@@ -624,10 +643,12 @@ def review_checks():
 
         rp = os.path.join(base, "RUNS.jsonl")
         ep = os.path.join(base, "EXPLAINED.jsonl")
+        tp = os.path.join(base, "T0.txt")
         open(ep, "w").close()
+        open(tp, "w").write("2026-01-01\n")     # the clock, started
 
         _runs(rp, [])
-        v = V.verdict("2027-01-01", rp, ep)
+        v = V.verdict("2027-01-01", rp, ep, t0_path=tp)
         ck("no runs is UNDECIDED, not DROP",
            v["verdict"] == "UNDECIDED")
 
@@ -635,7 +656,7 @@ def review_checks():
                    _run("2026-01-02", cross="UNAVAILABLE", cobc=None),
                    _run("2026-01-03", cross="UNAVAILABLE", cobc=None),
                    _run("2026-01-04", cross="UNAVAILABLE", cobc=None)])
-        v = V.verdict("2027-01-01", rp, ep)
+        v = V.verdict("2027-01-01", rp, ep, t0_path=tp)
         ck("an UNAVAILABLE arm contributes no exposure",
            v["verdict"] == "UNDECIDED" and v["exposure"]["completed"] == 0)
         ck("and the run says so in as many words",
@@ -643,7 +664,7 @@ def review_checks():
 
         _runs(rp, [_run("2026-01-01", machine="m1"),
                    _run("2026-01-02", machine="m2")])
-        v = V.verdict("2027-01-01", rp, ep)
+        v = V.verdict("2027-01-01", rp, ep, t0_path=tp)
         ck("two completed runs is below the exposure floor",
            v["verdict"] == "UNDECIDED" and v["exposure"]["completed"] == 2)
 
@@ -651,10 +672,10 @@ def review_checks():
         _runs(rp, [_run("2026-01-01", machine="m1"),
                    _run("2026-01-02", machine="m2"),
                    _run("2026-01-03", machine="m3")])
-        v = V.verdict("2026-06-01", rp, ep)
+        v = V.verdict("2026-06-01", rp, ep, t0_path=tp)
         ck("DROP fires on zero disagreements over three machines past T+9",
            v["verdict"] == "DROP", v.get("why"))
-        v = V.verdict("2026-01-10", rp, ep)
+        v = V.verdict("2026-01-10", rp, ep, t0_path=tp)
         ck("and does not fire before T+9",
            v["verdict"] == "NOT_YET_DUE", v["verdict"])
 
@@ -662,7 +683,7 @@ def review_checks():
         _runs(rp, [_run("2026-01-01", machine="m1", dis=1),
                    _run("2026-01-02", machine="m2"),
                    _run("2026-01-03", machine="m3")])
-        v = V.verdict("2026-06-01", rp, ep)
+        v = V.verdict("2026-06-01", rp, ep, t0_path=tp)
         ck("an unclassified disagreement is UNDECIDED, not KEEP and not DROP",
            v["verdict"] == "UNDECIDED"
            and v["disagreements"]["unclassified"] == 1)
@@ -671,7 +692,7 @@ def review_checks():
         _runs(ep, [{"ref": "s:A", "run_date": "2026-01-01",
                     "explained_by": "ROUNDING_MODE",
                     "basis": "constructed for the selftest"}])
-        v = V.verdict("2026-06-01", rp, ep)
+        v = V.verdict("2026-06-01", rp, ep, t0_path=tp)
         ck("a rounding-mode difference does not satisfy KEEP",
            v["verdict"] != "KEEP" and v["disagreements"]["unexplained"] == 0,
            v["verdict"])
@@ -680,14 +701,14 @@ def review_checks():
         _runs(ep, [{"ref": "s:A", "run_date": "2026-01-01",
                     "explained_by": "UNEXPLAINED",
                     "basis": "constructed for the selftest"}])
-        v = V.verdict("2026-02-01", rp, ep)
+        v = V.verdict("2026-02-01", rp, ep, t0_path=tp)
         ck("KEEP fires on one unexplained disagreement past T+3",
            v["verdict"] == "KEEP", v["verdict"])
 
         # a classification with no basis is malformed, not accepted
         _runs(ep, [{"ref": "s:A", "explained_by": "UNEXPLAINED",
                     "basis": ""}])
-        v = V.verdict("2026-06-01", rp, ep)
+        v = V.verdict("2026-06-01", rp, ep, t0_path=tp)
         ck("a classification with no basis is refused",
            v["verdict"] == "UNDECIDED"
            and "s:A" in v["disagreements"]["malformed"])
@@ -697,11 +718,14 @@ def review_checks():
         _runs(rp, [_run("2026-01-01", records=0),
                    _run("2026-01-02", records=0),
                    _run("2026-01-03", records=0)])
-        v = V.verdict("2027-01-01", rp, ep)
-        ck("runs over an empty record set do not start the clock",
+        gone = os.path.join(base, "NO_T0.txt")
+        v = V.verdict("2027-01-01", rp, ep, t0_path=gone)
+        ck("with no T0 the verdict is CLOCK_NOT_STARTED",
            v["verdict"] == "CLOCK_NOT_STARTED"
-           and v["clocks"]["t_records"] is None
+           and v["clocks"]["t"] is None
            and v["clocks"]["t_any"] == "2026-01-01")
+        ck("and it emits no review dates rather than order-date ones",
+           v["dates"]["t3"] is None and v["dates"]["t9"] is None)
 
         # bulk
         b = V.bulk()
@@ -783,6 +807,217 @@ def review_checks():
         shutil.rmtree(base, ignore_errors=True)
 
 
+# --------------------------------------- the clock, and the second channel
+
+def _git(base, *a):
+    return subprocess.run(["git"] + list(a), cwd=base, capture_output=True,
+                          text=True)
+
+
+def _repo():
+    base = tempfile.mkdtemp(prefix="ledger_git_")
+    _git(base, "init", "-q", "-b", "main")
+    _git(base, "config", "user.email", "t@t")
+    _git(base, "config", "user.name", "t")
+    os.makedirs(os.path.join(base, "ledger"))
+    open(os.path.join(base, "ledger", "OVERRIDES.md"), "w").write("# O\n")
+    os.makedirs(os.path.join(base, "sim"))
+    open(os.path.join(base, "sim", "r.json"), "w").write("{}\n")
+    _git(base, "add", "-A")
+    _git(base, "commit", "-qm", "base")
+    return base, _git(base, "rev-parse", "HEAD").stdout.strip()
+
+
+def clock_checks():
+    print("the clock")
+    base = tempfile.mkdtemp(prefix="ledger_clock_")
+    try:
+        t0 = os.path.join(base, "T0.txt")
+        ck("no T0 file is no clock", V.read_t0(t0) is None)
+        c = V.criterion()
+        d = V.review_dates(None, c)
+        ck("with no T there are no review dates",
+           d["t3"] is None and d["t9"] is None)
+        ck("and the order-date pair is named as superseded",
+           d["superseded"]["t3"] == "2026-10-07"
+           and d["superseded"]["t9"] == "2026-11-18")
+        d = V.review_dates("2026-10-01", c)
+        ck("review dates are computed FROM T, three and nine weeks on",
+           d["t3"] == "2026-10-22" and d["t9"] == "2026-12-03",
+           (d["t3"], d["t9"]))
+        ck("and they are not the order-date pair",
+           d["t3"] != d["superseded"]["t3"]
+           and d["t9"] != d["superseded"]["t9"])
+
+        open(t0, "w").write("2026-10-01\n")
+        ck("T0 is read back", V.read_t0(t0) == "2026-10-01")
+        open(t0, "w").write("not a date\n")
+        ck("a malformed T0 is no clock, not a guess", V.read_t0(t0) is None)
+
+        open(t0, "w").write("2026-10-01\n")
+        runs = [{"date": "2026-09-01", "records": 3, "all_constructed": False},
+                {"date": "2026-10-01", "records": 3, "all_constructed": False}]
+        cl = V.clocks(runs, t0)
+        ck("T0 is the authority and the run log is the cross-check",
+           cl["t"] == "2026-10-01" and cl["t_from_runs"] == "2026-09-01"
+           and cl["disagree"] is True)
+        runs = [{"date": "2026-10-01", "records": 3,
+                 "all_constructed": False}]
+        ck("agreement is not flagged",
+           V.clocks(runs, t0)["disagree"] is False)
+        runs = [{"date": "2026-09-01", "records": 3,
+                 "all_constructed": True}]
+        ck("a run over records that all declare CONSTRUCTED is not T",
+           V.clocks(runs, t0)["t_from_runs"] is None)
+
+        # ledger.py writes T0 once, and not on a fixture run
+        rd = os.path.join(base, "rec")
+        real = os.path.join(base, "T0real.txt")
+        L.write_records(rd, [good(claim_id="A_001", sim="t", value="1",
+                                  precision=6, status="MEASURED HERE")]) \
+            if hasattr(L, "write_records") else write_records(
+                rd, [good(claim_id="A_001", sim="t", value="1",
+                          precision=6, status="MEASURED HERE")])
+        run = run_on(rd, os.path.join(base, "e"))
+        dates = L.write_t0(real, run)
+        ck("a real-record run starts the clock", os.path.isfile(real)
+           and dates and dates[0].startswith("T  = "))
+        ck("and prints both review dates from T, once",
+           len(dates) == 3 and dates[1].startswith("T+3 = ")
+           and dates[2].startswith("T+9 = "))
+        again = L.write_t0(real, run)
+        ck("T0 is never overwritten", again is None
+           and open(real, encoding="utf-8").read().strip()
+           == run.today)
+
+        fixture_run = run_on(FIXTURES, os.path.join(base, "e2"))
+        ck("every fixture record declares itself CONSTRUCTED",
+           L.all_constructed(fixture_run))
+        fx_t0 = os.path.join(base, "T0fx.txt")
+        ck("a fixture run does NOT start the clock",
+           L.write_t0(fx_t0, fixture_run) is None
+           and not os.path.exists(fx_t0))
+        ck("and an empty record set does not either",
+           L.write_t0(os.path.join(base, "T0e.txt"),
+                      run_on(os.path.join(base, "empty"),
+                             os.path.join(base, "e3"))) is None)
+    finally:
+        shutil.rmtree(base, ignore_errors=True)
+
+
+def channel_checks():
+    print("the second override channel")
+    ok, root = V.git_reachable(HERE)
+    ck("git reachability is reported, not assumed",
+       isinstance(ok, bool) and root)
+
+    base, red = _repo()
+    side = tempfile.mkdtemp(prefix="ledger_runs_")
+    try:
+        # OUTSIDE the repo. A run log inside the work tree is checked away
+        # by the branch switch below, and the channel then reports 0
+        # overrides over 0 runs, which reads exactly like a clean history.
+        runs = os.path.join(side, "RUNS.jsonl")
+
+        def setrun(**over):
+            row = {"date": "2026-01-01", "commit": red,
+                   "flagged_paths": ["sim/r.json"],
+                   "diffs_fired": ["INTERNAL"], "records": 1}
+            row.update(over)
+            open(runs, "w", encoding="utf-8").write(json.dumps(row) + "\n")
+
+        setrun()
+        r = V.override_inferred(runs, base)
+        ck("a red with no later commit infers nothing",
+           r["status"] == "OK" and r["inferred"] == 0)
+
+        open(os.path.join(base, "sim", "r.json"), "w").write('{"x":1}\n')
+        _git(base, "add", "-A")
+        _git(base, "commit", "-qm", "changed the flagged file")
+        r = V.override_inferred(runs, base)
+        ck("a commit touching a flagged path with no OVERRIDES entry infers "
+           "an override", r["inferred"] == 1 and r["logged"] == 0)
+        ck("and the row names the red, the commit and the paths",
+           r["rows"][0]["red_commit"] == red
+           and r["rows"][0]["paths"] == ["sim/r.json"])
+
+        _git(base, "checkout", "-q", red)
+        _git(base, "checkout", "-q", "-b", "logged")
+        open(os.path.join(base, "ledger", "OVERRIDES.md"), "a").write("- w\n")
+        _git(base, "add", "-A")
+        _git(base, "commit", "-qm", "log it")
+        open(os.path.join(base, "sim", "r.json"), "w").write('{"x":2}\n')
+        _git(base, "add", "-A")
+        _git(base, "commit", "-qm", "changed the flagged file")
+        r = V.override_inferred(runs, base)
+        ck("an OVERRIDES entry in between infers nothing",
+           r["inferred"] == 0 and r["logged"] == 1)
+
+        setrun(commit=None)
+        r = V.override_inferred(runs, base)
+        ck("a red with no commit anchor is UNCORRELATABLE, not inferred and "
+           "not clean",
+           r["inferred"] == 0 and len(r["uncorrelatable"]) == 1)
+        ck("and it says the anchor is what is missing",
+           "no commit recorded" in r["uncorrelatable"][0]["why"])
+
+        setrun(commit="0" * 40)
+        r = V.override_inferred(runs, base)
+        ck("a commit that is not an ancestor of HEAD is UNCORRELATABLE",
+           r["inferred"] == 0 and len(r["uncorrelatable"]) == 1)
+
+        setrun(flagged_paths=[])
+        r = V.override_inferred(runs, base)
+        ck("a red flagging no path is counted apart from one inferring "
+           "nothing",
+           r["inferred"] == 0 and len(r["no_flagged_paths"]) == 1)
+
+        setrun(diffs_fired=[])
+        r = V.override_inferred(runs, base)
+        ck("a run that was not red is not a red", r["reds"] == 0)
+
+        nogit = tempfile.mkdtemp(prefix="ledger_nogit_")
+        try:
+            r = V.override_inferred(runs, nogit)
+            ck("git out of reach says so and stops",
+               r["status"] == "GIT_UNREACHABLE" and r["inferred"] is None)
+        finally:
+            shutil.rmtree(nogit, ignore_errors=True)
+
+        empty = os.path.join(side, "EMPTY.jsonl")
+        open(empty, "w").close()
+        r = V.override_inferred(empty, base)
+        ck("an empty run log is NO_RUNS, not a clean history",
+           r["status"] == "NO_RUNS" and r["inferred"] is None)
+    finally:
+        shutil.rmtree(base, ignore_errors=True)
+        shutil.rmtree(side, ignore_errors=True)
+
+    # the two counts are never combined
+    text = open(os.path.join(HERE, "review.py"), encoding="utf-8").read()
+    tree = ast.parse(text)
+    mixed = []
+    for n in ast.walk(tree):
+        if isinstance(n, (ast.BinOp, ast.AugAssign)) or (
+                isinstance(n, ast.Call)
+                and getattr(n.func, "id", "") in ("sum", "max", "min")):
+            seg = ast.get_source_segment(text, n) or ""
+            low = seg.lower()
+            if "overrides" in low and "inferred" in low:
+                mixed.append(seg[:80])
+    ck("the declared and inferred counts are never combined", not mixed,
+       mixed)
+    planted = ast.parse("x = args.overrides + oi['inferred']\n")
+    hit = any(isinstance(n, ast.BinOp) for n in ast.walk(planted))
+    ck("the never-combined scan fires on a plant", hit)
+
+    ov = open(os.path.join(HERE, "OVERRIDES.md"), encoding="utf-8").read()
+    for phrase in ("SELF-REPORTED", "indistinguishable from",
+                   "FLOOR, not a measurement",
+                   "UNRECORDED means no basis was declared, not"):
+        ck("OVERRIDES.md states the floor (%s)" % phrase[:24], phrase in ov)
+
+
 def main():
     print("ledger selftest")
     print("=" * 70)
@@ -792,6 +1027,8 @@ def main():
     diffs()
     cli()
     review_checks()
+    clock_checks()
+    channel_checks()
     structural()
     print("=" * 70)
     print("checks: %d   failed: %d" % (CHECKS[0], len(FAILS)))

@@ -32,6 +32,7 @@ import datetime
 import json
 import os
 import platform
+import subprocess
 import sys
 from typing import Dict, List, Optional, Sequence, Tuple
 
@@ -66,6 +67,25 @@ CHOICES = [
     "cobc version. The addendum counts exposure in distinct machines or "
     "compiler versions and neither is recoverable after the fact from a "
     "run that did not write it down. --no-log suppresses it.",
+    "[CHOICE 9] The run log also records the HEAD commit and the repo "
+    "paths a red flagged. Without a commit anchor per run, the inferred "
+    "override channel can correlate a red with a later commit only by "
+    "date, and a date is not an ordering. Rows already logged without one "
+    "are reported UNCORRELATABLE rather than correlated approximately.",
+    "[CHOICE 10] A red flags the record FILE the claim was read from and "
+    "the sim FOLDER that owns it. A claim is not a file, so the mapping "
+    "is stated: these are the paths a person acting on the red would "
+    "edit, and they are the ones the inferred channel watches.",
+    "[CHOICE 12] A run whose every record declares itself CONSTRUCTED does "
+    "not start the clock. The fixtures are a non-empty record set and a "
+    "fixture run would otherwise set T, which is the hazard: the clock "
+    "would start on a run over data that is not a measurement of "
+    "anything. The test is a property of the declared records, not of a "
+    "path.",
+    "[CHOICE 11] reviews/T0.txt is written by the first run over a "
+    "NON-EMPTY record set and is never overwritten. --no-log suppresses "
+    "it, because --no-log means this run is not recorded and a run that "
+    "is not recorded does not start a clock.",
 ]
 
 SEED_NOTE = "A SEEDED value is NOT a verified value. It is a pin."
@@ -424,7 +444,84 @@ def append_disagreements(path: str, run: Run) -> None:
         fh.write("\n")
 
 
-def append_run_log(path: str, run: Run) -> None:
+def head_commit() -> Optional[str]:
+    """HEAD, or None outside a work tree. The anchor the inferred override
+    channel correlates against: a date is not an ordering."""
+    try:
+        p = subprocess.run(["git", "rev-parse", "HEAD"], cwd=HERE,
+                           capture_output=True, text=True, timeout=30)
+    except (OSError, subprocess.SubprocessError):
+        return None
+    return p.stdout.strip() or None if p.returncode == 0 else None
+
+
+def repo_root() -> Optional[str]:
+    try:
+        p = subprocess.run(["git", "rev-parse", "--show-toplevel"], cwd=HERE,
+                           capture_output=True, text=True, timeout=30)
+    except (OSError, subprocess.SubprocessError):
+        return None
+    return p.stdout.strip() or None if p.returncode == 0 else None
+
+
+def flagged_paths(run: "Run", records_dir: str) -> List[str]:
+    """Repo paths a red flagged. See [CHOICE 10].
+
+    A claim is not a file. What a person acting on a red edits is the
+    record the claim came from and the sim that owns it, so those are what
+    the inferred override channel watches. The mapping is stated rather
+    than assumed, because an inferred count over the wrong path set would
+    be a number with no stated referent.
+    """
+    root = repo_root()
+    refs = {d["ref"] for d in run.internal} | {d["ref"] for d in run.drift}
+    out = set()
+    for r in run.records:
+        if r.ref() not in refs:
+            continue
+        if r.source:
+            full = os.path.abspath(os.path.join(records_dir, r.source))
+            out.add(os.path.relpath(full, root) if root else full)
+        if root and os.path.isdir(os.path.join(root, r.sim)):
+            out.add(r.sim)
+    return sorted(out)
+
+
+def all_constructed(run: "Run") -> bool:
+    """Every record declares itself CONSTRUCTED. See [CHOICE 12]."""
+    return bool(run.records) and all(
+        (r.status or "").strip().upper().startswith("CONSTRUCTED")
+        for r in run.records)
+
+
+def write_t0(path: str, run: Run) -> Optional[List[str]]:
+    """T, written once, by the first run over a NON-EMPTY record set.
+
+    Returns the two review dates computed FROM T0 the first time, None
+    afterwards. Never overwrites: T is a fact about when the clock
+    started, and a second write would move a date that ADDENDUM.md fixes
+    in advance.
+    """
+    if not run.records or os.path.exists(path) or all_constructed(run):
+        return None
+    from review import criterion  # local: keeps the module graph one-way
+    c = criterion()
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as fh:
+        fh.write("%s\n" % run.today)
+    if not c.get("ok"):
+        return ["ADDENDUM.md could not be parsed; review dates not computed"]
+    t = datetime.date.fromisoformat(run.today)
+    return ["T  = %s   (first run over a non-empty record set)" % run.today,
+            "T+%d = %s" % (c["t3_weeks"],
+                           (t + datetime.timedelta(weeks=c["t3_weeks"]))
+                           .isoformat()),
+            "T+%d = %s" % (c["t9_weeks"],
+                           (t + datetime.timedelta(weeks=c["t9_weeks"]))
+                           .isoformat())]
+
+
+def append_run_log(path: str, run: Run, records_dir: str = "") -> None:
     """One line per run, append-only. Exposure for ADDENDUM.md.
 
     This is a record of the run, not a measurement of it. No duration is
@@ -438,8 +535,11 @@ def append_run_log(path: str, run: Run) -> None:
         "machine": "%s %s" % (platform.system(), platform.machine()),
         "python": platform.python_version(),
         "records": len(run.records),
+        "all_constructed": all_constructed(run),
         "cross_ledger": cross,
         "cobc_version": bridge.compiler_version(),
+        "commit": head_commit(),
+        "flagged_paths": flagged_paths(run, records_dir or HERE),
         "diffs_fired": run.fired(),
         "internal": len(run.internal),
         "drift": len(run.drift),
@@ -460,6 +560,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                     default=os.path.join(HERE, "DISAGREEMENTS.md"))
     ap.add_argument("--run-log",
                     default=os.path.join(HERE, "reviews", "RUNS.jsonl"))
+    ap.add_argument("--t0", default=os.path.join(HERE, "reviews", "T0.txt"))
     ap.add_argument("--no-seed", action="store_true",
                     help="do not write EXPECTED files for new claims")
     ap.add_argument("--no-log", action="store_true",
@@ -495,7 +596,18 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     if not args.no_log:
         append_drift_log(args.drift_log, run)
         append_disagreements(args.disagreements, run)
-        append_run_log(args.run_log, run)
+        append_run_log(args.run_log, run, args.records)
+        dates = write_t0(args.t0, run)
+        if dates:
+            print("")
+            print("CLOCK STARTED")
+            print("-" * 70)
+            print("  ADDENDUM.md's review dates are computed FROM T, not")
+            print("  from the date the order was written. Printed once,")
+            print("  here, at the run that started the clock.")
+            print("")
+            for line in dates:
+                print("  %s" % line)
     return 1 if run.fired() else 0
 
 

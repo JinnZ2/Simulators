@@ -103,17 +103,56 @@ The clock has not started either: `T` is the first run over a **non-empty**
 record set (`[CHOICE 7]`), and there has not been one. `review.py` prints
 the other reading beside it.
 
-### The real signal is the one thing the instrument cannot see
+### Dates are computed from T, not from the order date
+
+`T` is written to `reviews/T0.txt` by the first run over a non-empty record
+set whose records are not all `CONSTRUCTED` (`[CHOICE 12]` -- the fixtures
+are a non-empty record set, and a run over them would otherwise start the
+clock on data that is not a measurement of anything). It is written once
+and never overwritten, and that run prints `T`, `T+3` and `T+9` once.
+
+`T+3 = 2026-10-07` and `T+9 = 2026-11-18` were computed from the date the
+order was written rather than from `T`. **They are wrong and they are
+superseded.** `review.py` names them on every run, because a wrong number
+in circulation with nothing contradicting it stays in circulation.
+
+`T0.txt` is the authority; the run log's first real-record date is computed
+beside it as a cross-check, and the two coming apart is reported rather
+than averaged.
+
+### The real signal, and two channels that are never merged
 
 The addendum names the override count as the real signal -- *a gate that
 gets routinely overridden has become bulk regardless of what it catches* --
 and an override happens outside the ledger and leaves no trace in it. From
 inside the gate, a gate that is routinely overridden and a gate that never
-is look identical. So it is a **declared** field, `UNRECORDED` is kept
-apart from `0`, `review.py --record` refuses either without a stated basis,
-and `OVERRIDES.md` exists so the count can ever be a number at all.
+is look identical.
 
-The same holds for *findings no other check found*.
+**DECLARED.** A field, `UNRECORDED` kept apart from `0`, `--record`
+refusing either without a stated basis, and `OVERRIDES.md` so the count can
+ever be a number at all. It is **self-reported: an unlogged override is
+indistinguishable from no override, and once nonzero the count is a FLOOR,
+not a measurement.** The same holds for *findings no other check found*.
+
+**INFERRED.** A second channel requiring nobody's cooperation: a red exit,
+then a commit touching a path the red flagged, with **no `OVERRIDES.md`
+entry in between**. Read straight out of git history. For it to be
+computable at all the run log records the HEAD commit and the flagged paths
+per run (`[CHOICE 9]`, `[CHOICE 10]`) -- a date is not an ordering, and a
+run logged without a commit anchor is reported `UNCORRELATABLE` rather than
+correlated approximately.
+
+**The two are never added, averaged or reconciled** -- asserted
+structurally, not promised. One is what people said; the other is what the
+history shows. The inferred channel does not close the gap: it observes a
+*different* quantity that overlaps the one the addendum asks for, with its
+own floor (a red acted on outside git leaves nothing) and its own ceiling
+(a commit touching a flagged path for an unrelated reason is counted).
+
+If git history is not reachable, the channel reports `GIT_UNREACHABLE` and
+stops. **It does not approximate one.** An empty run log reports `NO_RUNS`,
+not a clean `0` -- nothing to correlate against is not the same as nothing
+to find.
 
 `reviews/EXPLAINED.jsonl` classifies each disagreement. KEEP excludes a
 disagreement *explained by a rounding-mode difference in the ledger sources
