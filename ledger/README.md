@@ -117,8 +117,25 @@ superseded.** `review.py` names them on every run, because a wrong number
 in circulation with nothing contradicting it stays in circulation.
 
 `T0.txt` is the authority; the run log's first real-record date is computed
-beside it as a cross-check, and the two coming apart is reported rather
-than averaged.
+beside it as a cross-check. When they come apart, `review.py` prints
+**which is earlier** -- log-earlier is a reclassification and is benign,
+T0-earlier is not and is flagged. Averaging is refused either way. See
+`reviews/README.md`.
+
+### What the subprocess assertion covers
+
+The selftest asserts that **`ledger.py`'s own argv literals name `git`
+only, and that the subcommand at `argv[1]` is `rev-parse` only** -- pinned
+because *read-only* is the property being relied on and `argv[0]` alone
+does not carry it (`git commit` and `git gc` both pass an argv[0] check).
+`review.py`'s subcommands are asserted against a declared read-only set,
+and the one non-git process it starts is the Python that runs a ledger it
+times, named rather than hidden behind "computed".
+
+**This is not a claim about git's subprocesses.** A hook, an alias or a
+config-set pager runs arbitrary code under a `rev-parse`. Nothing here
+closes that path or tries to; the scan reads the call site, and the
+process tree below it is out of scope and is not claimed.
 
 ### The real signal, and two channels that are never merged
 

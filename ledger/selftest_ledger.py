@@ -558,32 +558,97 @@ def structural():
         ck("the ledger does not time anything (%s)" % banned,
            banned not in names)
     ck("nothing reaches for Popen", "Popen" not in names)
-    # The rule is about WHAT is started, not about who imports subprocess.
-    # ledger.py runs `git rev-parse` for the run log's commit anchor, which
-    # is a read of the history and not a sim. Asserted from the argv
-    # literal at each call site rather than from the import.
-    for name, text in src.items():
-        argv0 = []
+
+    # WHAT THIS ASSERTS, AND WHAT IT DOES NOT.
+    #
+    # It asserts: ledger.py's OWN ARGV LITERALS name git only, and the
+    # subcommand at argv[1] is `rev-parse` only.
+    #
+    # It is NOT a claim about git's subprocesses. A git hook, an alias or
+    # a config-set pager runs arbitrary code under a rev-parse, and
+    # nothing here closes that path or tries to. The scan reads the call
+    # site; the process tree below it is out of scope and is not claimed.
+    #
+    # argv[1] is pinned because READ-ONLY is the property being relied
+    # on, and argv[0] alone does not carry it: `git commit` and `git gc`
+    # both pass an argv[0]-only check.
+    LEDGER_SUBCOMMANDS = {"rev-parse"}
+    # review.py's surface is the history read the inferred override
+    # channel rests on. Declared, not derived, so widening it is visible
+    # in a diff.
+    REVIEW_SUBCOMMANDS = {"rev-parse", "merge-base", "log", "ls-files"}
+
+    def argv_pairs(text):
+        """(argv[0], argv[1]) per call site, from the literal only."""
+        out = []
+
+        def lit(node):
+            if isinstance(node, ast.Constant):
+                return str(node.value)
+            # sys.executable is named rather than lumped in with
+            # <computed>: review.py starts one, to time a ledger run,
+            # which ADDENDUM.md asks for. A rule that hid it behind
+            # <computed> would pass while saying nothing.
+            if isinstance(node, ast.Attribute) and node.attr == "executable":
+                return "<sys.executable>"
+            return "<computed>"
+
         for n in ast.walk(ast.parse(text)):
-            if isinstance(n, ast.Call) and getattr(n.func, "attr", "") \
-                    == "run" and n.args:
-                first = n.args[0]
-                if isinstance(first, ast.List) and first.elts:
-                    e = first.elts[0]
-                    if isinstance(e, ast.Constant):
-                        argv0.append(str(e.value))
-                    else:
-                        argv0.append("<computed>")
+            if isinstance(n, ast.Call) and n.args:
+                fn = getattr(n.func, "attr", None) or getattr(n.func, "id",
+                                                              None)
+                if fn == "run" and isinstance(n.args[0], ast.List) \
+                        and n.args[0].elts:
+                    e = n.args[0].elts
+                    out.append((lit(e[0]),
+                                lit(e[1]) if len(e) > 1 else "<none>"))
+                elif fn == "run" and isinstance(n.args[0], ast.BinOp):
+                    # ["git"] + list(args): the subcommand is the caller's
+                    left = n.args[0].left
+                    if isinstance(left, ast.List) and left.elts:
+                        out.append((lit(left.elts[0]), "<from caller>"))
+                elif fn == "git" and isinstance(n.args[0], ast.List) \
+                        and n.args[0].elts:
+                    out.append(("git", lit(n.args[0].elts[0])))
+        return out
+
+    scan = dict(src)
+    scan["review.py"] = open(os.path.join(HERE, "review.py"),
+                             encoding="utf-8").read()
+    for name, text in scan.items():
+        pairs = argv_pairs(text)
+        zeroth = [a for a, _ in pairs]
+        subs = [b for a, b in pairs
+                if a == "git" and b not in ("<from caller>", "<none>")]
         if name == "ledger.py":
-            ck("ledger.py starts git and nothing else",
-               all(x == "git" for x in argv0), argv0)
+            ck("ledger.py's own argv literals name git only",
+               all(x == "git" for x in zeroth), zeroth)
+            ck("and every git subcommand it names is rev-parse",
+               subs and set(subs) <= LEDGER_SUBCOMMANDS, subs)
+        elif name == "review.py":
+            ck("review.py's own argv literals name git and the python that "
+               "runs a ledger it times, and nothing else",
+               all(x in ("git", "<sys.executable>") for x in zeroth),
+               zeroth)
+            ck("and exactly one of its call sites is the timed ledger run",
+               zeroth.count("<sys.executable>") == 1, zeroth)
+            ck("and every git subcommand it names is in the declared "
+               "read-only set",
+               subs and set(subs) <= REVIEW_SUBCOMMANDS,
+               sorted(set(subs) - REVIEW_SUBCOMMANDS))
         elif name == "cobol_ledger/bridge.py":
             ck("the bridge starts the compiler and the built program",
-               all(x in ("<computed>", "git") or x.endswith("cobc")
-                   for x in argv0) or argv0 == ["<computed>"] * len(argv0),
-               argv0)
+               all(x == "<computed>" or x.endswith("cobc")
+                   for x in zeroth), zeroth)
         else:
-            ck("%s starts no process" % name, argv0 == [], argv0)
+            ck("%s starts no process" % name, pairs == [], pairs)
+
+    # The plant: argv[0] alone does not carry read-only, and the scan has
+    # to be able to say so.
+    planted = argv_pairs("subprocess.run(['git', 'commit', '-m', 'x'])\n")
+    ck("the subcommand scan reads argv[1]", planted == [("git", "commit")])
+    ck("and a writing subcommand is outside the pinned set",
+       not ({b for _, b in planted} <= LEDGER_SUBCOMMANDS))
 
     # The plant: the AST scan has to be able to fire.
     planted = ast.parse("def f():\n    return float('1')\n")
@@ -861,6 +926,35 @@ def clock_checks():
         ck("T0 is the authority and the run log is the cross-check",
            cl["t"] == "2026-10-01" and cl["t_from_runs"] == "2026-09-01"
            and cl["disagree"] is True)
+        ck("a disagreement reports WHICH IS EARLIER",
+           cl["direction"] == "LOG_EARLIER", cl["direction"])
+        ck("log earlier than T0 is read as reclassification, and benign",
+           cl["benign"] is True
+           and any("CONSTRUCTED" in x for x in cl["reading"]))
+        late = V.clocks([{"date": "2026-11-01", "records": 3,
+                          "all_constructed": False}], t0)
+        ck("T0 earlier than the log is the other direction",
+           late["direction"] == "T0_EARLIER", late["direction"])
+        ck("and it is NOT benign, and says why",
+           late["benign"] is False
+           and any("NOT" in x for x in late["reading"]))
+        ck("the two directions carry different readings",
+           cl["reading"] != late["reading"])
+        ck("agreement carries no direction and no reading",
+           V.clocks([{"date": "2026-10-01", "records": 3,
+                      "all_constructed": False}], t0)["direction"] is None)
+        # Averaging stays refused: no arithmetic anywhere near the two.
+        vtext = open(os.path.join(HERE, "review.py"), encoding="utf-8").read()
+        mixed = []
+        for n in ast.walk(ast.parse(vtext)):
+            if isinstance(n, (ast.BinOp, ast.AugAssign)) or (
+                    isinstance(n, ast.Call)
+                    and getattr(n.func, "id", "") in ("sum", "min", "max")):
+                seg = (ast.get_source_segment(vtext, n) or "").lower()
+                if "t_from_runs" in seg and ('"t"' in seg or "['t']" in seg
+                                             or '["t"]' in seg):
+                    mixed.append(seg[:60])
+        ck("T and the run log's date are never combined", not mixed, mixed)
         runs = [{"date": "2026-10-01", "records": 3,
                  "all_constructed": False}]
         ck("agreement is not flagged",

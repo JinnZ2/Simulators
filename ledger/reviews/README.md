@@ -11,6 +11,17 @@ overwritten** -- `T` is a fact about when the clock started, and a second
 write would move a date `ADDENDUM.md` fixes in advance. `T+3` and `T+9` are
 computed from it and from nothing else.
 
+When `T0.txt` and the run log's first real-record date disagree,
+`review.py` prints **which is earlier**, because the two directions have
+different causes and only one is benign:
+
+| direction | reading |
+|---|---|
+| **log earlier than T0** | records were reclassified out of `CONSTRUCTED` after T0 was written -- a run that did not start the clock then reads as one that could have. Expected and **benign**: T is when the clock started, not when it could first have started. Same signature from a second cause: a row logged before `all_constructed` existed reads as not-all-constructed, because an absent field is not a `False` one. |
+| **T0 earlier than log** | T0 was written on a run whose records are `CONSTRUCTED` (which `[CHOICE 12]` is supposed to prevent), or T0 was written wrongly -- by hand, or by a run whose log line was lost. **Not benign.** T is the authority for the review dates, so a T no run supports puts T+3 and T+9 on a date nothing happened. Settle it before either review. |
+
+Averaging is refused in both directions. `T0.txt` stays the authority.
+
 Absent, the verdict is `CLOCK_NOT_STARTED` and there are no review dates.
 `review.py` emits none rather than falling back on the pair computed from
 the order date, which is wrong and is named as superseded on every run.

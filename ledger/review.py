@@ -193,10 +193,43 @@ def clocks(runs: Sequence[Dict[str, Any]],
                   and not r.get("all_constructed"))
     t0 = read_t0(t0_path)
     from_runs = real[0] if real else None
-    return {"t": t0,
-            "t_any": dates[0] if dates else None,
-            "t_from_runs": from_runs,
-            "disagree": bool(t0 and from_runs and t0 != from_runs)}
+    out = {"t": t0,
+           "t_any": dates[0] if dates else None,
+           "t_from_runs": from_runs,
+           "disagree": bool(t0 and from_runs and t0 != from_runs),
+           "direction": None, "benign": None, "reading": []}
+    if not out["disagree"]:
+        return out
+
+    # WHICH IS EARLIER is the whole content of the disagreement: the two
+    # directions have different causes and only one of them is benign.
+    # Neither is averaged into the other.
+    if from_runs < t0:
+        out["direction"] = "LOG_EARLIER"
+        out["benign"] = True
+        out["reading"] = [
+            "the run log holds a real-record run BEFORE T0 was written.",
+            "Records were reclassified out of CONSTRUCTED after the fact,",
+            "so a run that did not start the clock then reads as one that",
+            "could have. Expected, and benign: T is when the clock",
+            "started, not when it could first have started.",
+            "A second cause with the same signature: rows logged before",
+            "all_constructed was a field read as not-all-constructed,",
+            "because an absent field is not a False one. Check the row.",
+        ]
+    else:
+        out["direction"] = "T0_EARLIER"
+        out["benign"] = False
+        out["reading"] = [
+            "T0 is EARLIER than any real-record run in the log. NOT",
+            "benign. Either T0 was written on a run whose records are",
+            "CONSTRUCTED -- which [CHOICE 12] is supposed to prevent --",
+            "or T0 was written wrongly, by hand or by a run whose log",
+            "line was lost. T is the authority for the review dates, so",
+            "a T that no run supports puts T+3 and T+9 on a date nothing",
+            "happened. Settle it before either review.",
+        ]
+    return out
 
 
 def exposure(runs: Sequence[Dict[str, Any]]) -> Dict[str, Any]:
@@ -556,9 +589,18 @@ def render(v: Dict[str, Any], b: Dict[str, Any],
     a("  first real-record run, from the run log  %s"
       % (c.get("t_from_runs") or "none"))
     if c.get("disagree"):
-        a("  !! T0.txt and the run log disagree about T. Reported, not")
-        a("     averaged. T0.txt is the authority; the run log is the")
-        a("     cross-check, and the two coming apart is a finding.")
+        a("")
+        mark = "!!" if c.get("benign") is False else "--"
+        a("  %s T0.txt and the run log disagree about T: %s"
+          % (mark, c.get("direction")))
+        a("     T0.txt  %s" % c.get("t"))
+        a("     run log %s   (%s is earlier)"
+          % (c.get("t_from_runs"),
+             "the run log" if c.get("direction") == "LOG_EARLIER"
+             else "T0.txt"))
+        for line in c.get("reading") or []:
+            a("     %s" % line)
+        a("     Reported, not averaged. T0.txt stays the authority.")
     sup = dt.get("superseded") or {}
     a("")
     a("  SUPERSEDED, do not use: T+3 %s and T+9 %s were computed from the"
