@@ -63,6 +63,7 @@ MANIFEST = (
     "internal-reference-boundary/radials.py::sanction_ratio_point",
     "move-set/move_set_sim_v2.py::coverage",
     "move-set/move_set_sim_v2.py::_halfwidth",
+    "revision-survival/revision_survival.py::delta",
 )
 
 # Cases known to fail today. A case that starts passing turns this red so

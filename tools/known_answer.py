@@ -638,6 +638,7 @@ EXPECTED_METRICS = (
     "ontology-probe/probe.py::rates",
     "operator-machine-coupling/coupling_separation.py::interaction_fraction",
     "return-path/return_path.py::ratio",
+    "revision-survival/revision_survival.py::delta",
     "routing-data-layer/rate_form.py::sustained_excess",
     "shape-spec-audit/shadow_read.py::outline_area",
     "sheet-structure-scan/sheetmodel.py::rank",
@@ -645,6 +646,18 @@ EXPECTED_METRICS = (
     "sim-span/three_column.py::ols",
     "trigger-geometry/trigger_geometry.py::accumulation_ratio",
 )
+
+
+def _rs_delta(acc_open, acc_blind):
+    """revision-survival/revision_survival.py::delta, imported. The order's
+    leakage measurement, acc(OPEN) - acc(BLIND); None when a condition is
+    absent, since a result without delta is void by the order's own rule."""
+    import importlib.util
+    path = os.path.join(ROOT, "revision-survival", "revision_survival.py")
+    spec = importlib.util.spec_from_file_location("_rs", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.delta(acc_open, acc_blind)
 
 
 def seed():
@@ -1421,6 +1434,27 @@ def _seed_move_set():
         note="the exponent and empty cases are where a default width would "
              "hide; the 5537 case is the one whose expected value is a "
              "convention this repo states is wrong for counts")
+    register(
+        "revision-survival/revision_survival.py::delta",
+        _rs_delta,
+        [case("leak of a quarter", (0.75, 0.50), 0.25,
+              "0.75 - 0.50 by hand; above the order's 0.15 gate"),
+         case("no leak", (0.60, 0.60), 0.0,
+              "equal accuracy under both conditions is zero leakage, and "
+              "0.0 is a measurement here, not an absence"),
+         case("blind above open", (0.40, 0.55), -0.15,
+              "the sign is kept; a negative delta is a finding about the "
+              "blinding, not clipped to zero. tol 1e-9: the first run "
+              "returned -0.15000000000000002 and the gate refused it, "
+              "which is the gate working on a float and not on the metric",
+              tol=1e-9),
+         case("BLIND absent is None", (0.80, None), None,
+              "one condition missing is no measurement. The order says a "
+              "result without delta is void, and a 0.0 here would read "
+              "an unrun BLIND arm as leak-free")],
+        note="the None case is where a default would hide: an OPEN-only "
+             "run scored as delta 0.0 would clear the leak gate having "
+             "measured nothing")
 
 
 
