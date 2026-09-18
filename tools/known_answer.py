@@ -609,6 +609,79 @@ def _gxc_commit_specificity(which):
     raise ValueError(which)
 
 
+def _ledger_quantize(value, precision):
+    """ledger/py_ledger/engine.py::quantize, imported.
+
+    `precision` is read as SIGNIFICANT DIGITS, which is [CHOICE 1] in that
+    module and the one place a reader could reasonably have expected decimal
+    places instead. These cases are chosen so the two readings disagree:
+    1234.5 at 2 is 1.2E+3 under significant digits and 1234.50 under decimal
+    places, and nothing about the name says which.
+    """
+    import importlib.util
+    from decimal import Decimal
+    path = os.path.join(ROOT, "ledger", "py_ledger", "engine.py")
+    spec = importlib.util.spec_from_file_location("_ledger_engine", path)
+    mod = importlib.util.module_from_spec(spec)
+    # Registered before exec: the module carries `from __future__ import
+    # annotations`, so @dataclass resolves its annotations through
+    # sys.modules and raises on a module that is not there yet.
+    sys.modules[spec.name] = mod
+    spec.loader.exec_module(mod)
+    return mod.quantize(Decimal(value), precision)
+
+
+def _ledger_recompute(which):
+    """ledger/py_ledger/engine.py::recompute, imported.
+
+    Imported through the normal machinery rather than twice by path.
+    Loading record.py and engine.py as two separate module objects gives
+    two distinct Provenance enums, engine's identity check against its own
+    then fails, and every case comes back NOT_DERIVED -- a metric reporting
+    that it had nothing to do, which is the quiet kind of wrong.
+
+    Returns "OUTCOME value" so a case pins the outcome and the number in
+    one string: an UNDEFINED that returned a number and a RECOMPUTED that
+    returned the wrong one are different failures.
+    """
+    base = os.path.join(ROOT, "ledger")
+    sys.path.insert(0, base)
+    saved = {k: sys.modules.pop(k, None)
+             for k in ("record", "py_ledger", "py_ledger.engine")}
+    try:
+        import record as recmod
+        from py_ledger import engine as mod
+
+        worlds = {
+            # expression, operands, precision, operand values
+            "divide": ("a / b", ["a", "b"], 6,
+                       {("s", "a"): "2.5", ("s", "b"): "4"}),
+            "divide_by_measured_zero": ("a / b", ["a", "b"], 6,
+                                        {("s", "a"): "2.5",
+                                         ("s", "b"): "0"}),
+            "operand_absent": ("a / b", ["a", "b"], 6,
+                               {("s", "a"): "2.5"}),
+            "power_and_precedence": ("0.5 ** 3 * b / b", ["b", "0.5"], 6,
+                                     {("s", "b"): "4"}),
+            "recurring": ("a / b", ["a", "b"], 6,
+                          {("s", "a"): "1", ("s", "b"): "3"}),
+        }
+        expr, ops, prec, values = worlds[which]
+        rec = recmod.ClaimRecord(
+            claim_id="K", sim="s", value="0", precision=prec, operands=ops,
+            falsifier="", status="", provenance=recmod.Provenance.DERIVED,
+            expression=expr)
+        res = mod.recompute(rec, values)
+        return "%s %s" % (res.outcome.value, res.value)
+    finally:
+        sys.path.pop(0)
+        for k, v in saved.items():
+            if v is None:
+                sys.modules.pop(k, None)
+            else:
+                sys.modules[k] = v
+
+
 # The metrics `seed()` is expected to register, written down here rather
 # than counted from the calls. A `register(...)` for a new metric once
 # landed after a `finally` inside a helper and never executed: the registry
@@ -627,6 +700,8 @@ EXPECTED_METRICS = (
     "frame-location-benchmark/score.py::false_positive_rate",
     "gap-existence-cases/commit_store.py::commit_specificity",
     "internal-reference-boundary/radials.py::effective_origins",
+    "ledger/py_ledger/engine.py::quantize",
+    "ledger/py_ledger/engine.py::recompute",
     "internal-reference-boundary/radials.py::sanction_ratio_point",
     "model-deprecation-backcast/null_check.py::lag_of_peak",
     "move-set/move_set_sim_v2.py::coverage",
@@ -1599,8 +1674,22 @@ def report():
         bad.extend((mid, c, w) for c, w in u)
         print()
     comp = completeness()
+    # Registered is not exercised. A metric can be registered, counted, and
+    # report COMPLETE while every one of its cases came back NOT_RUN: the
+    # registry counts call sites, and a case that raised on the way in is
+    # still a registered case. Both numbers are printed, because the second
+    # is the one that says whether anything ran.
+    exercised = [m for m in registry_ids()
+                 if any(r["status"] != NOT_RUN for r in _RESULTS.get(m, []))]
+    dead = sorted(set(registry_ids()) - set(exercised))
+    n_not_run = sum(1 for m in registry_ids()
+                    for r in _RESULTS.get(m, []) if r["status"] == NOT_RUN)
     print("metrics registered: %d   expected: %d   %s"
           % (comp["registered"], comp["expected"], comp["state"]))
+    print("metrics exercised:  %d   cases NOT_RUN: %d"
+          % (len(exercised), n_not_run))
+    for m in dead:
+        print("  !! registered and never exercised: %s" % m)
     for m in comp["missing"]:
         print("  !! expected and NOT registered: %s" % m)
     for m in comp["extra"]:

@@ -99,9 +99,46 @@ def _declared_exits(node):
     return codes
 
 
+def _declares_selftest_flag(tree):
+    """`add_argument("--selftest", ...)`.
+
+    A module can carry checks without the literal ever appearing in an `if`
+    test: argparse declares the flag in one place and the branch tests
+    `args.selftest` in another. The first version of this classifier looked
+    only for the literal and filed such a module as CLI, which under-reports
+    the very check surface the manifest exists to enumerate. Found by writing
+    two argparse-style modules and reading their rows.
+    """
+    for n in ast.walk(tree):
+        if isinstance(n, ast.Call):
+            name = getattr(n.func, "attr", None) or getattr(n.func, "id", None)
+            if name == "add_argument" and n.args:
+                a = n.args[0]
+                if isinstance(a, ast.Constant) and a.value == "--selftest":
+                    return True
+    return False
+
+
 def _selftest_branches(tree):
-    return [n for n in ast.walk(tree)
-            if isinstance(n, ast.If) and "--selftest" in ast.dump(n.test)]
+    """Branches guarding a selftest, in either spelling.
+
+    The literal form always counts. The attribute form (`args.selftest`)
+    counts only where the flag is actually declared through argparse, so an
+    unrelated attribute of that name in some other module cannot fire it.
+    """
+    literal = [n for n in ast.walk(tree)
+               if isinstance(n, ast.If) and "--selftest" in ast.dump(n.test)]
+    if not _declares_selftest_flag(tree):
+        return literal
+    attr = []
+    for n in ast.walk(tree):
+        if not isinstance(n, ast.If) or n in literal:
+            continue
+        for sub in ast.walk(n.test):
+            if isinstance(sub, ast.Attribute) and sub.attr == "selftest":
+                attr.append(n)
+                break
+    return literal + attr
 
 
 def _has_main_guard(tree):
@@ -136,6 +173,13 @@ def classify(src, relpath):
         return rec
 
     branches = _selftest_branches(tree)
+    if not branches and _declares_selftest_flag(tree):
+        # The flag is declared and no branch was located. The checks are
+        # reachable; where they are guarded is not. SELFTEST, with the reason.
+        rec["class"] = "SELFTEST"
+        rec["invoke"] = ["python3", relpath, "--selftest"]
+        rec["reason"] = "--selftest declared via argparse; guard not located"
+        return rec
     if branches:
         codes = set()
         for b in branches:
@@ -367,6 +411,29 @@ def _fixtures():
          '    elif len(sys.argv) == 2:\n        go()\n'
          '    else:\n        print("usage: ...")\n        sys.exit(2)\n',
          "SELFTEST", None),
+        ("argparse_selftest.py",
+         'import argparse\ndef selftest():\n    return 0\n'
+         'def main():\n    p = argparse.ArgumentParser()\n'
+         '    p.add_argument("--selftest", action="store_true")\n'
+         '    args = p.parse_args()\n'
+         '    if args.selftest:\n        return selftest()\n    return 0\n',
+         "SELFTEST", None),
+        ("argparse_redirect.py",
+         'import argparse, sys\ndef main():\n'
+         '    p = argparse.ArgumentParser()\n'
+         '    p.add_argument("--selftest", action="store_true")\n'
+         '    args = p.parse_args()\n'
+         '    if args.selftest:\n'
+         '        print("no checks here; run test_thing.py")\n'
+         '        return 2\n    return 0\n',
+         "REDIRECT", True),
+        # An attribute named selftest, on a module that never declares the
+        # flag. It must NOT read as SELFTEST: the attribute form only counts
+        # where argparse actually declares --selftest.
+        ("unrelated_selftest_attr.py",
+         'def main(cfg):\n    if cfg.selftest:\n        return 0\n    return 1\n'
+         'if __name__ == "__main__":\n    main(None)\n',
+         "CLI", None),
         ("mixed.py",
          'def main(argv):\n'
          '    if "--selftest" in argv:\n'
