@@ -1,14 +1,44 @@
 ok    VERDICTS match the order
 ok    MECHANISMS match the order
-ok    RETURNS match the order
-ok    leak threshold 0.15 is the order's
-ok    overconfidence threshold 0.2 is the order's
-ok    survival cut 0.8 is the order's
-ok    Y = 2005 is the order's
-ok    N >= 40 is the order's
-ok    SURVIVED floor 40% is the order's
-ok    twelve seeds in the order, twelve DELIVERED records
-ok    consequence classes are the order's three
+ok    RETURNS_V1 match the order
+ok    RETURNS_V2_ADDED are the two the dispatch adds
+ok    RETURNS = v1 + v2, in that order
+ok    established_where is the dispatch's set
+ok    axis_1 decision_reversibility is the dispatch's set
+ok    axis_2 pathway_exists is the dispatch's set
+ok    n_revised_min = 24 is the dispatch's
+ok    the three D-C3 rules are quoted from the dispatch
+ok    thresholds read as the order's decimals
+ok    Y = 2005 and N >= 40 are the order's
+ok    RUN RECORD required fields are the dispatch's, each named there
+ok    DO NOT list carries: do not re-populate seeds from model recall
+ok    DO NOT list carries: do not pool Q_mech
+ok    DO NOT list carries: do not rank NO_SUBSTITUTION_EXISTS
+ok    DO NOT list carries: do not score a self-run
+ok    draw is deterministic on the stdlib RNG (pinned)
+ok    same inputs, same frame_id
+ok    a different seed moves the positions and the id
+ok    positions are sorted, distinct, inside the index
+ok    frame carries every REQUIRED field
+ok    check_frame passes a clean frame
+ok    check_frame refuses an edited position list
+ok    check_frame refuses an edited fate rule
+ok    check_frame refuses an edited frame_id
+ok    check_frame refuses a frame missing a field
+ok    check_frame refuses a non-dict
+ok    draw refuses an empty source
+ok    draw refuses an empty edition (not Y-vintage)
+ok    draw refuses n > index_size
+ok    draw refuses a bool seed
+ok    draw refuses a non-int index
+ok    draw refuses an empty fate rule
+ok    in_draw is True on a drawn position
+ok    in_draw is False off the draw
+ok    in_draw is False on None (no position is not a position)
+ok    render prints the frame_id and the positions
+ok    draw_frame --selftest is refused with exit 2
+ok    draw_frame with no arguments exits 2 and says no draw is shipped
+ok    draw_frame CLI reproduces the pinned frame
 ok    a well-formed claim reads
 ok    claim refused without id
 ok    claim refused without statement
@@ -18,15 +48,19 @@ ok    claim refused without established_basis
 ok    claim refused without outcome
 ok    claim refused without status
 ok    claim refused without author
+ok    claim refused without established_where
 ok    claim refused without outcome.label
 ok    claim refused without outcome.mechanism
 ok    claim refused without outcome.basis
 ok    claim refused without outcome.verified
 ok    claim refused without outcome.source
 ok    claim refused on a label outside the vocabulary
-ok    claim refused on a mechanism outside the vocabulary (confounding is what seed-04 needed and the vocabulary lacks)
-ok    claim refused on a non-bool verified
-ok    claim refused on an admission reading outside YES/NO/UNCERTAIN
+ok    claim refused on a mechanism outside the vocabulary (confounding is what seed-04 needed and the vocabulary lacks, RS_007)
+ok    claim refused on established_where outside the set
+ok    claim refused on a negative draw_position
+ok    claim refused on a bool draw_position
+ok    claim refused on a status outside CLAIM_STATUS
+ok    draw_position defaults to None when absent
 ok    a well-formed response reads
 ok    response refused without claim_id
 ok    response refused without condition
@@ -37,102 +71,153 @@ ok    response refused without flag_evidence
 ok    response refused without author
 ok    response refused on confidence > 1
 ok    response refused on a bool confidence
-ok    response refused on a condition outside OPEN/BLIND
-ok    six seeds admitted
-ok    five seeds read NO on established-as-of-2005
-ok    one seed reads UNCERTAIN
-ok    every CANDIDATE is excluded, none admitted
-ok    every excluded record carries a reason
-ok    every seed outcome is carried, none verified
-ok    every seed carries a source for its dating (D4)
-ok    SURVIVED share of the admitted corpus is 0 of 6
-ok    admitting the scorer's candidates would clear D1 by itself
-ok    blind replaces every declared noun
-ok    blind reports what moved per noun
-ok    blind strips four-digit years
-ok    LIMIT: an undeclared synonym is not replaced (word list)
-ok    blind output says it is MECHANICAL_ONLY
-ok    [CHOICE 1] chance is the larger of uniform and majority
-ok    [CHOICE 1] uniform wins on a flat key
-ok    chance is None on an empty key
-ok    above_chance is None on no rows
-ok    [CHOICE 2] one perfect row does not clear chance
-ok    [CHOICE 2] 0.8 on 50 rows clears chance 0.4
-ok    accuracy is None on nothing, never 0
-ok    accuracy counts
-ok    delta: quarter
-ok    delta: None when BLIND absent
-ok    delta: None when OPEN absent
-ok    delta: sign kept
-ok    constructed world clears N and D1 floors
+ok    no shipped frame (cases.FRAME is None)
+ok    every shipped record is CANDIDATE: none DELIVERED, none DRAWN, none carries a draw_position (DO NOT: no seeds from recall)
+ok    zero admitted, seventeen excluded, every reason status=CANDIDATE
+ok    a frame does not admit a CANDIDATE row either
+ok    alpha wolf and junk DNA carry established_where = popular
+ok    every other shipped record reads both
+ok    five rev-1 seeds read NO as of 2005 and stay out (D-C1)
+ok    the dispatch's seven admissible seeds are six YES plus one UNCERTAIN (seed-02); all seven ship as CANDIDATE only (RS_017)
+ok    every shipped outcome is carried, none verified
+ok    constructed world: 50 drawn rows, 20 SURVIVED, 30 revised
+ok    the frame admits every drawn row
+ok    without a frame every drawn row is excluded, naming D-C1
+ok    a popular row is excluded with its reason
+ok    a specialist row is admitted
+ok    a row entered outside the draw is excluded, naming its position
+ok    a drawn row not established as of Y is excluded
+ok    HARD GATE: no frame -> VOID_NO_FRAME, no score
+ok    HARD GATE: a row outside the draw -> VOID_OUTSIDE_DRAW naming it
+ok    HARD GATE: a frame that does not verify -> VOID_BAD_FRAME
+ok    a void result carries its table and no score
+ok    a verified frame is carried on the result
+ok    delta(0.4, 0.55) is the float that refused the rev-1 known answer
+ok    LEAK_GATE passes it: abs(delta) < 0.15 + 1e-9
+ok    LEAK_GATE fails at 0.16
+ok    LEAK_GATE is None on None
+ok    OVERCONF_GATE fires at 0.6 - 0.4 (0.20000000000000004)
+ok    OVERCONF_GATE fires at exactly 0.2 from below-float arithmetic
+ok    OVERCONF_GATE is silent at 0.19
+ok    OVERCONF_GATE is None on an absent side
+ok    SURVIVED_FLOOR passes 2 of 5
+ok    SURVIVED_FLOOR passes 0.4 reached by subtraction
+ok    SURVIVED_FLOOR fails 0.39
+ok    SURVIVED_FLOOR is None on None
+ok    [CHOICE 8] Arm C cut: 0.79 below, 0.8 not, 0.8 - 1e-10 not
+ok    n_required: 24 / (1 - 0.4) = 40
+ok    n_required: 24 / (1 - 0.6) = 60
+ok    n_required rounds up: 24 / (1 - 0.5) = 48, 24 / 0.45 -> 54
+ok    n_required is None at survived 1.0 (no revised rows at any N)
+ok    D-C4 tension is stated in the module: D1's floor and the informative subset pull opposite ways
 ok    CALIBRATED reachable
 ok    LEAK_DOMINATED reachable
 ok    LABEL_ONLY reachable
 ok    UNCALIBRATED reachable
 ok    OVERCONFIDENT rides as a co-flag on both conditions
 ok    no co-flag at honest confidence
-ok    VOID with no BLIND arm, naming the reason
-ok    VOID when key and responses share an author
-ok    a void result carries no primary member
+ok    VOID with no BLIND arm, naming VOID_NO_DELTA
+ok    VOID_KEY_HOLDER when key and responses share a party; never a score
+ok    key_holder and respondent are reported and differ on the honest world
+ok    INSUFFICIENT_REVISED reachable: 20 revised of 50 at survived 0.6
+ok    INSUFFICIENT_REVISED is a number refused, not a number
+ok    n_required prints 60 on the 0.6 world and 40 on the 0.4 world
 ok    every RETURN member is produced by some world
-ok    delta gates on the larger of the two [CHOICE 3]
+ok    VOID (no frame / no delta) is a refusal, not an enum member
+ok    [CHOICE 3] gate delta is the larger by magnitude of those present
+ok    [CHOICE 3] with mech delta absent the gate reads the label delta
 ok    a leak of 0.5 in mechanism alone voids
-ok    D1 does not fire on the constructed world
+ok    D1 does not fire on the 0.4 world
 ok    BELOW_N_FLOOR does not fire at n = 50
 ok    D4 fires on a carried key regardless of the rest
-ok    on an all-SURVIVED key the revised-row Q_mech is None (no rows)
-ok    on the 40% world the revised-row denominator is 30 of 50
-ok    chance for mechanism on the 40% world is the NONE_GIVEN share, 0.4
-ok    shipped Arm A is VOID
-ok    shipped Arm A voids on both reasons
-ok    shipped Arm A states D1, D4 and the N floor
-ok    shipped OPEN agreement is 6 of 6, by construction
-ok    responses on excluded seeds are not scored
-ok    no response gives NONE_GIVEN
+ok    revised-row denominator is 30 of 50 on the 0.4 world
+ok    chance for mechanism on revised rows is over 8 members, not the NONE_GIVEN share
+ok    on an all-SURVIVED key the revised-row Q_mech is None over 0 rows
+ok    no pooled Q_mech: the token acc_mech never appears bare in the module
+ok    no pooled Q_mech: per-condition tables carry only the revised figure
+ok    shipped Arm A returns VOID_KEY_HOLDER (the self-run outcome), score None
+ok    shipped Arm A voids on all three reasons
+ok    shipped Arm A admits nothing and scores nothing
+ok    shipped Arm A states the N floor and D1 undefined
+ok    shipped key holder and respondent are one party
 ok    shipped record hash equals the recomputed seal
 ok    review dates are T+24mo and T+60mo [CHOICE 6]
 ok    record carries k = 13
-ok    record carries nothing from the block but hash, date, domain, k, review
-ok    seal is deterministic
 ok    one edited p_survive fails verify
 ok    scoring a tampered block is VOID_HASH
-ok    scoring before the first review date is NOT_DUE, naming it
-ok    scoring on the review date with ten outcomes: SCORED, three unresolved
+ok    before the first review date: NOT_DUE, naming it
+ok    on the review date with ten outcomes: SCORED, three unresolved
+ok    Arm B reports acc_mech_revised, INSUFFICIENT below 24 revised, no pooled figure
 ok    a block with model UNKNOWN is refused
 ok    a block with model WITHHELD and a reason reads
-ok    a duplicate claim id is refused
 ok    a claim without p_survive is refused [CHOICE 5]
-ok    every Arm B claim carries a mechanism-if-revised and a flag
-ok    Arm B rates at least one claim below and one at or above the cut
-ok    FINDING: two TERMINAL cells rest on a claim rated below 0.8
-ok    C9 rests on B-07 at 0.5
-ok    three rows carry no substitution decision
+ok    FINDING: two TERMINAL cells rest on a claim rated below the cut
+ok    NO_SUBSTITUTION_EXISTS: C3, C6, C8 (n/a, none), reported beside the finding
+ok    the finding never counts a NO_SUBSTITUTION_EXISTS row
+ok    every row carries both axes and a cell
 ok    B-12 is rated and under no row
 ok    nine rows, the drop's register
-ok    the finding counts only the low bucket
+ok    cell(n/a, none) is NO_SUBSTITUTION_EXISTS
+ok    cell(n/a, partial|yes) is NOT_ON_RECORD
+ok    cell(terminal, none) is TERMINAL: a decision made, no pathway
+ok    cell(UNDECLARED, *) is UNDECLARED
+ok    [CHOICE 9] (recoverable, none) is refused at intake
+ok    [CHOICE 9] (costly, none) is refused at intake
+ok    a class with no basis is refused
+ok    an UNDECLARED class needs no basis
+ok    an axis value outside the set is refused, both axes
 ok    TERMINAL_UNRATED reachable and kept apart
 ok    TERMINAL_RATED_HELD reachable and kept apart
 ok    UNDECLARED reachable and kept apart
+ok    NOT_ON_RECORD reachable via (n/a, partial)
+ok    the finding is unchanged by the four added rows
 ok    a rests_on id absent from the block is refused, not skipped
-ok    a class with no basis is refused
-ok    an UNDECLARED class needs no basis
-ok    a class outside the vocabulary is refused
-ok    every row's rests_on resolves in the block
-ok    every under_brc_rows on the block resolves to a row
-ok    block and rows agree on who rests on whom
-ok    render prints the contamination block before Arm A
+ok    the Arm C result carries no rank, severity or ordering key
+ok    no ordering comparison in the module takes a cell name as an operand
+ok    every module-level string tuple is an enum in ENUMS or a declared non-enum
+ok    RETURNS (a concatenation) is registered too
+ok    every ENUMS entry carries its members and a non-empty derivation
+ok    the derivation for axis 1 names the fourth member as rev 1's missing cell
+ok    the derivation for RETURNS names both added members
+ok    every declared non-enum exists and is a tuple
+ok    D-C3: revision_survival.py has no bare float comparison
+ok    D-C3: cases.py has no bare float comparison
+ok    D-C3: draw_frame.py has no bare float comparison
+ok    D-C3: test_revision.py has no bare float comparison
+ok    [CHOICE 10] repo-wide bare-float count is recorded as a finding (RS_022)
+ok    the scan fires on a planted bare comparison and not on a BinOp comparator
+ok    run record emits on the constructed world with every field
+ok    run record frame_declaration carries source, edition, seed, n
+ok    run record arm_c table carries both axes per row
+ok    run record acc_mech_revised is per condition and n_revised beside it
+ok    run record is REFUSED on the shipped run, naming the frame and delta
+ok    run record refuses a defect log with one column
+ok    run record refuses a defect log that is not two columns
+ok    run record on INSUFFICIENT_REVISED is refused: acc_mech_revised is None
+ok    defect log: spec and implementation columns are disjoint
+ok    defect log: the four dispatch defects are in the spec column
+ok    defect log: every entry carries id, defect, found_by, patched
+ok    README framing paragraph sits at the top, before SHAPE
+ok    render says revision 2 and prints the contamination block before Arm A
+ok    render states the missing frame and the refused run record
+ok    render prints Q_mech on revised rows only and never a pooled row
+ok    render reports NO_SUBSTITUTION_EXISTS beside TERMINAL, not ranked
+ok    render prints key_holder, respondent and whether they differ
 ok    render prints every [CHOICE n]
-ok    render prints the finding
 ok    render screens clean through no_severity, no exemption
 ok    the screen fires on a planted word
-ok    --selftest is refused with exit 2
+ok    revision_survival --selftest is refused with exit 2
 ok    CLI render exits 0 and matches run()
+ok    --choices prints ten choices
 ok    revision_survival.py is ASCII
 ok    revision_survival.py parses under 3.9
 ok    cases.py is ASCII
 ok    cases.py parses under 3.9
+ok    draw_frame.py is ASCII
+ok    draw_frame.py parses under 3.9
 ok    test_revision.py is ASCII
 ok    test_revision.py parses under 3.9
 ok    cases.py binds no name for an expected result
 
-checks: 136   failed: 0
+repo-wide bare float comparisons (RS_022, recorded): 369 files, 1813 compares
+checks: 220   failed: 0

@@ -1,10 +1,12 @@
-revision_survival -- WORK ORDER M
+revision_survival -- WORK ORDER M, revision 2
 ========================================================================
 
 CONTAMINATION, printed before any number:
   key, responses, Arm B block and BRC classes are one author, one
-  session. Arm A scored on them is VOID as a capability score; what
+  session. Arm A on them is VOID_KEY_HOLDER, never a score; what
   is checked is the machinery. Every outcome is CARRIED, none read.
+  No frame is declared (no Y-vintage index reachable; recall is
+  forbidden by revision 2), so Arm A also refuses on D-C1.
   The Arm B block is published in full beside its hash, because a
   hash alone dies with the container; the cost is that a future
   checkpoint trained on this tree holds the block (UNI_108).
@@ -12,48 +14,55 @@ CONTAMINATION, printed before any number:
 
 ARM A  calibration   Y = 2005
 ------------------------------------------------------------------------
-admitted 6   excluded 11   SURVIVED share 0.000   verified 0 of 6
-  excluded  seed-02        established_as_of_2005=UNCERTAIN
-  excluded  seed-03        established_as_of_2005=NO
-  excluded  seed-04        established_as_of_2005=NO
-  excluded  seed-10        established_as_of_2005=NO
-  excluded  seed-11        established_as_of_2005=NO
-  excluded  seed-12        established_as_of_2005=NO
+  frame  NONE DECLARED -- Arm A refuses (D-C1 HARD GATE)
+admitted 0   excluded 17   SURVIVED share    --   verified 0 of 0
+  N required for n_revised >= 24 at this SURVIVED share: --  (D-C4)
+  excluded  seed-01        status=CANDIDATE
+  excluded  seed-02        status=CANDIDATE
+  excluded  seed-03        status=CANDIDATE
+  excluded  seed-04        status=CANDIDATE
+  excluded  seed-05        status=CANDIDATE
+  excluded  seed-06        status=CANDIDATE
+  excluded  seed-07        status=CANDIDATE
+  excluded  seed-08        status=CANDIDATE
+  excluded  seed-09        status=CANDIDATE
+  excluded  seed-10        status=CANDIDATE
+  excluded  seed-11        status=CANDIDATE
+  excluded  seed-12        status=CANDIDATE
   excluded  cand-01        status=CANDIDATE
   excluded  cand-02        status=CANDIDATE
   excluded  cand-03        status=CANDIDATE
   excluded  cand-04        status=CANDIDATE
   excluded  cand-05        status=CANDIDATE
 
-                             OPEN    BLIND
-  n                                   6        0
-  Q_label                         1.000       --
-    chance [CHOICE 1]             0.333       --
-    above chance [CHOICE 2]         yes       --
-  Q_mech                          1.000       --
-    Q_mech, revised rows only     1.000       --
-    n revised                         6        0
-    chance [CHOICE 1]             0.333       --
-    above chance [CHOICE 2]         yes       --
-    NONE_GIVEN                        0        0
-  mean confidence                 0.783       --
-    conf - Q_label [CHOICE 4]    -0.217       --
+                                     OPEN    BLIND
+  n                                     0        0
+  Q_label                              --       --
+    chance [CHOICE 1]                  --       --
+    above chance [CHOICE 2]            --       --
+  Q_mech, revised rows ONLY            --       --
+    n revised (floor 24)                0        0
+    status                       INSUFFICIENT_REVISED INSUFFICIENT_REVISED
+    chance [CHOICE 1]                  --       --
+    above chance [CHOICE 2]            --       --
+    NONE_GIVEN                          0        0
+  mean confidence                      --       --
+    conf - Q_label [CHOICE 4]          --       --
+    OVERCONF_GATE                      --       --
 
-  delta label     --   delta mech     --   gate (larger)     --   [CHOICE 3]
-  return      VOID   co-flags none   [CHOICE 7]
+  delta label     --   delta mech(revised)     --   gate     --   LEAK_GATE     --
+  return      VOID_KEY_HOLDER   score NONE   co-flags none   [CHOICE 3] [CHOICE 7]
+  key_holder  this session, 2026-09-17 (scorer and responder are one party)
+  respondent  this session, 2026-09-17 (scorer and responder are one party)
+  differ      NO
+  VOID_NO_FRAME: frame_declaration absent; Arm A does not score a corpus with no declared draw (D-C1)
   VOID_NO_DELTA: one condition absent; the order says a result without delta is void
-  VOID_SAME_AUTHOR: key and responses share an author; agreement is by construction (TP_003)
-  BELOW_N_FLOOR: 6 admitted against 40
-  D1: SURVIVED share 0.00 below 0.40; base rate manufactured
-  D4: 6 of 6 admitted outcomes unverified (carried)
+  VOID_KEY_HOLDER: key and responses share a party; agreement is by construction (TP_003)
+  BELOW_N_FLOOR: 0 admitted against 40
+  D1: no admitted claims; SURVIVED share undefined
 
   BLIND texts (MECHANICAL_ONLY; paraphrase is the operator's step):
-  seed-01        nouns 4  years 0  FIELD_1 FIELD_5 are organised as a dominance hierarchy led b
-  seed-05        nouns 3  years 0  FIELD_1 draws on a limited FIELD_3 that is depleted by use (
-  seed-06        nouns 2  years 0  Accumulation of FIELD_1 is the sufficient upstream cause of 
-  seed-07        nouns 2  years 0  FIELD_2 is caused by a deficiency of FIELD_1.
-  seed-08        nouns 3  years 0  FIELD_1 caps total FIELD_2 intake to reduce FIELD_3 disease.
-  seed-09        nouns 3  years 0  Most of the FIELD_1 human FIELD_2 is functionless FIELD_3.
+  none: no admitted rows
 
 ARM B  forward commit
 ------------------------------------------------------------------------
@@ -63,32 +72,40 @@ ARM B  forward commit
   review   2028-09-17   2031-09-17   [CHOICE 6]
   status   NOT_DUE   due 2028-09-17
 
-ARM C  consequence class   cut 0.8
+ARM C  two axes, not one scale   cut 0.8 [CHOICE 8]
 ------------------------------------------------------------------------
-  row   cycle                      pathway  class         state                   min p
-  C1    N fixation                 MEASURED RECOVERABLE   RECOVERABLE             0.450  low: B-02,B-03
-  C2    C fixation                 PARTIAL  RECOVERABLE   RECOVERABLE             0.400  low: B-08
-  C3    O2 production              NONE     NOT_ON_RECORD NOT_ON_RECORD           0.900
-  C4    water purification         PARTIAL  RECOVERABLE   RECOVERABLE             0.800
-  C5    soil formation             NONE     TERMINAL      TERMINAL_LOW_SURVIVAL   0.700  low: B-13
-  C6    decomposition / nutrient r NONE     NOT_ON_RECORD NOT_ON_RECORD              --
-  C7    pollination                PARTIAL  COSTLY        COSTLY                  0.650  low: B-10
-  C8    thermal + albedo regulatio NONE     NOT_ON_RECORD NOT_ON_RECORD              --
-  C9    ore grade                  NONE     TERMINAL      TERMINAL_LOW_SURVIVAL   0.500  low: B-07
+  row   cycle                    axis_1       axis_2   cell                   state                   min p
+  C1    N fixation               recoverable  yes      RECOVERABLE            RECOVERABLE             0.450  low: B-02,B-03
+  C2    C fixation               recoverable  partial  RECOVERABLE            RECOVERABLE             0.400  low: B-08
+  C3    O2 production            n/a          none     NO_SUBSTITUTION_EXISTS NO_SUBSTITUTION_EXISTS  0.900
+  C4    water purification       recoverable  partial  RECOVERABLE            RECOVERABLE             0.800
+  C5    soil formation           terminal     none     TERMINAL               TERMINAL_LOW_SURVIVAL   0.700  low: B-13
+  C6    decomposition / nutrient n/a          none     NO_SUBSTITUTION_EXISTS NO_SUBSTITUTION_EXISTS     --
+  C7    pollination              costly       partial  COSTLY                 COSTLY                  0.650  low: B-10
+  C8    thermal + albedo regulat n/a          none     NO_SUBSTITUTION_EXISTS NO_SUBSTITUTION_EXISTS     --
+  C9    ore grade                terminal     none     TERMINAL               TERMINAL_LOW_SURVIVAL   0.500  low: B-07
 
   FINDING  TERMINAL cells resting on a claim rated < 0.8: 2  ['C5', 'C9']
+  NO_SUBSTITUTION_EXISTS (n/a, none): 3  ['C3', 'C6', 'C8']  -- reported beside TERMINAL, not ranked against it (D-C2)
   kept apart, not summed in:
     TERMINAL, no rated claim under it   0  
     TERMINAL, all claims rated >= cut   0  
-    class UNDECLARED                    0  
-    no substitution decision on record  3  ['C3', 'C6', 'C8']
+    axis_1 UNDECLARED                   0  
+    pathway, no decision on record      0  
     rated claims under no row           1  ['B-12']
+
+RUN RECORD
+------------------------------------------------------------------------
+  REFUSED   missing: frame_declaration, delta_open_blind, acc_label (a condition is None), acc_mech_revised (a condition is None)
 
 choices in force:
   [CHOICE 1] chance = max(1/|vocab|, majority share of the key)
   [CHOICE 2] above chance = acc > chance + 2.0 * binomial sd at n
-  [CHOICE 3] delta computed for both quantities; LEAK gates on the larger
+  [CHOICE 3] delta computed for both quantities; LEAK gates on the larger of those present (mech delta absent under INSUFFICIENT_REVISED)
   [CHOICE 4] OVERCONFIDENT reads mean confidence against Q_label
   [CHOICE 5] Arm B block carries an explicit p_survive; nothing derives it
   [CHOICE 6] review dates T+24mo / T+60mo by calendar year on the commit day
-  [CHOICE 7] return = primary (LEAK preempts; CAL/LABEL/UNCAL partition) + co-flag
+  [CHOICE 7] return = primary (void reasons preempt; LEAK preempts; INSUFFICIENT_REVISED preempts; CAL/LABEL/UNCAL partition) + co-flag
+  [CHOICE 8] Arm C cut rule: p < 0.8 - EPS (order gives no rule)
+  [CHOICE 9] Arm C: (recoverable|costly, none) is refused at intake -- a reversible substitution decision presupposes a pathway
+  [CHOICE 10] D-C3 bare-float test is enforced on this folder and the repo-wide count is recorded as a finding, not failed (RS_022)

@@ -260,7 +260,7 @@ last three; read in order:
 - `internal-reference-boundary/` — seven radials on a boundary drawn from inside; R3's two legs, two time bases
 - `external-audit/` — three outside documents on this repo, landed verbatim; counts recomputed, instruments run, three sweeps cross-checked
 - `substrate-alternative/` — locate the money frame; one coordination loop without it
-- `revision-survival/` — can a model predict which of its held claims will be revised, and why; three arms, one sealed, the self-run VOID by its own reading
+- `revision-survival/` — can a model predict which of its held claims will be revised, and why; rev 2: a declared draw as a HARD GATE, two Arm C axes, EPS rules, Q_mech on revised rows only; the self-run VOID_KEY_HOLDER by its own reading
 - `legacy/` — archived drops; `Organize.md` is the
 - `tools/` — gate-drift and term-collision checks
 
@@ -12725,6 +12725,49 @@ ship a `requirements.txt`. Each folder ships `samples/`.
   and nothing here bears on whether any model is calibrated. Check count
   printed by `python3 revision-survival/test_revision.py`; the render screens clean through `no_severity` with no exemption. Stdlib
   only, parses under 3.9, phone-buildable, CC0.
+  **REVISION 2 then arrived** (`WORK_ORDER_V2.md`, verbatim beside v1,
+  *"do not re-derive the order -- patch it"*): four spec defects found
+  by building rev 1, three in the order's own authoring, patched in place
+  (`RS_017..RS_024`). **D-C1** the seed list failed its own admission
+  rule, so recall seeding is replaced by a declared draw — `draw_frame.py`
+  hashes source, edition, index size, seed, n and a fate rule written
+  before the draw into a `frame_id`, and Arm A is a **HARD GATE**: no
+  verified frame, no score; any row outside the draw, no score. Every
+  rev-1 seed is demoted to `CANDIDATE` with no position, the new
+  `established_where` field reads `popular` on alpha wolf and junk DNA so
+  they never score, and the dispatch's *"seven admissible seeds"* are six
+  YES plus one UNCERTAIN under the order's own rule (`RS_017`). **D-C2**
+  Arm C runs on two axes never ranked on one scale —
+  `decision_reversibility {recoverable, costly, terminal, n/a}` and
+  `pathway_exists {yes, partial, none}` — so `NO_SUBSTITUTION_EXISTS`
+  (n/a, none) holds `C3`, `C6`, `C8`, the worst cell rev 1 could not name,
+  reported BESIDE the two-cell finding and ranked against nothing, with an
+  AST check that no ordering comparison takes a cell name as an operand,
+  and an `ENUMS` registry carrying a derivation per enum that the suite
+  requires for every module-level string tuple (`RS_018`). **D-C3** every
+  threshold comparison goes through a stated rule with `EPS = 1e-9` —
+  `delta(0.4, 0.55)` is `-0.15000000000000002` and now passes the leak
+  gate — and the suite walks the folder's four files and fails on any bare
+  float comparison against a decimal literal, the test file passing its
+  literals to `near()` rather than comparing against them (`RS_019`); the
+  repo-wide count is printed and **recorded, not failed** (`RS_022`,
+  [CHOICE 10]). **D-C4** no pooled Q_mech exists anywhere (the bare token
+  `acc_mech` is asserted absent from the module); `acc_mech_revised` is
+  read on revised rows only with `n_revised` beside it, `None` and
+  `INSUFFICIENT_REVISED` below 24, and the tension rev 1 omitted is
+  stated — D1's 40% SURVIVED floor and the informative subset pull
+  opposite ways, so `N >= 24 / (1 - survived_frac)` is printed with every
+  run, 40 at 0.4 and 60 at 0.6 (`RS_020`). The self-run now returns
+  `VOID_KEY_HOLDER`, an enum member with `score: None`, on all three void
+  reasons, and the required run record is **REFUSED** naming four missing
+  fields where a constructed drawn world emits one (`RS_021`); the defect
+  log keeps spec and implementation defects in disjoint columns
+  (`RS_023`). The README opens with the framing the dispatch asks for:
+  rev 1 produced no calibration number, it produced four spec defects,
+  and VOID plus a defect list is the run doing what it was for.
+  **`RS_024` UNVERIFIED:** no draw from a real index, no second party
+  under BLIND, nothing read. Check count printed by
+  `python3 revision-survival/test_revision.py`.
 - `legacy/` — Archived source drops. The repo root reserves one
   filename — `Organize.md` — as the intake slot for a bulk
   collaborative code drop. After extraction into `play-sims/` (or
